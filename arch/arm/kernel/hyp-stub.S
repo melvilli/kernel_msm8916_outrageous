@@ -56,8 +56,13 @@ ENTRY(__boot_cpu_mode)
 	ldr	\reg3, [\reg2]
 	ldr	\reg1, [\reg2, \reg3]
 	cmp	\mode, \reg1		@ matches primary CPU boot mode?
+<<<<<<< HEAD
 	orrne	r7, r7, #BOOT_CPU_MODE_MISMATCH
 	strne	r7, [r5, r6]		@ record what happened and give up
+=======
+	orrne	\reg1, \reg1, #BOOT_CPU_MODE_MISMATCH
+	strne	\reg1, [\reg2, \reg3]	@ record what happened and give up
+>>>>>>> v3.18
 	.endm
 
 #else	/* ZIMAGE */
@@ -99,7 +104,11 @@ ENTRY(__hyp_stub_install_secondary)
 	 * immediately.
 	 */
 	compare_cpu_mode_with_primary	r4, r5, r6, r7
+<<<<<<< HEAD
 	movne	pc, lr
+=======
+	retne	lr
+>>>>>>> v3.18
 
 	/*
 	 * Once we have given up on one CPU, we do not try to install the
@@ -111,7 +120,11 @@ ENTRY(__hyp_stub_install_secondary)
 	 */
 
 	cmp	r4, #HYP_MODE
+<<<<<<< HEAD
 	movne	pc, lr			@ give up if the CPU is not in HYP mode
+=======
+	retne	lr			@ give up if the CPU is not in HYP mode
+>>>>>>> v3.18
 
 /*
  * Configure HSCTLR to set correct exception endianness/instruction set
@@ -134,9 +147,13 @@ ENTRY(__hyp_stub_install_secondary)
 	mcr	p15, 4, r7, c1, c1, 3	@ HSTR
 
 THUMB(	orr	r7, #(1 << 30)	)	@ HSCTLR.TE
+<<<<<<< HEAD
 #ifdef CONFIG_CPU_BIG_ENDIAN
 	orr	r7, #(1 << 9)		@ HSCTLR.EE
 #endif
+=======
+ARM_BE8(orr	r7, r7, #(1 << 25))     @ HSCTLR.EE
+>>>>>>> v3.18
 	mcr	p15, 4, r7, c1, c0, 0	@ HSCTLR
 
 	mrc	p15, 4, r7, c1, c1, 1	@ HDCR
@@ -155,6 +172,14 @@ THUMB(	orr	r7, #(1 << 30)	)	@ HSCTLR.TE
 	mcr	p15, 4, r7, c14, c1, 0	@ CNTHCTL
 	mov	r7, #0
 	mcrr	p15, 4, r7, r7, c14	@ CNTVOFF
+<<<<<<< HEAD
+=======
+
+	@ Disable virtual timer in case it was counting
+	mrc	p15, 0, r7, c14, c3, 1	@ CNTV_CTL
+	bic	r7, #1			@ Clear ENABLE
+	mcr	p15, 0, r7, c14, c3, 1	@ CNTV_CTL
+>>>>>>> v3.18
 1:
 #endif
 
@@ -196,7 +221,11 @@ ENDPROC(__hyp_get_vectors)
 	@ fall through
 ENTRY(__hyp_set_vectors)
 	__HVC(0)
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 ENDPROC(__hyp_set_vectors)
 
 #ifndef ZIMAGE

@@ -110,11 +110,14 @@ int pud_huge(pud_t pud)
 	return 0;
 }
 
+<<<<<<< HEAD
 int pmd_huge_support(void)
 {
 	return 1;
 }
 
+=======
+>>>>>>> v3.18
 struct page *follow_huge_pmd(struct mm_struct *mm, unsigned long address,
 			     pmd_t *pmd, int write)
 {
@@ -178,7 +181,11 @@ new_search:
 				mm->context.part_huge = 0;
 			return addr;
 		}
+<<<<<<< HEAD
 		if (vma && (vma->vm_flags & MAP_HUGETLB)) {
+=======
+		if (vma->vm_flags & MAP_HUGETLB) {
+>>>>>>> v3.18
 			/* space after a huge vma in 2nd level page table? */
 			if (vma->vm_end & HUGEPT_MASK) {
 				after_huge = 1;

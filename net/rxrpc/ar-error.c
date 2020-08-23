@@ -37,7 +37,11 @@ void rxrpc_UDP_error_report(struct sock *sk)
 
 	_enter("%p{%d}", sk, local->debug_id);
 
+<<<<<<< HEAD
 	skb = skb_dequeue(&sk->sk_error_queue);
+=======
+	skb = sock_dequeue_err_skb(sk);
+>>>>>>> v3.18
 	if (!skb) {
 		_leave("UDP socket errqueue empty");
 		return;
@@ -83,6 +87,10 @@ void rxrpc_UDP_error_report(struct sock *sk)
 
 		if (mtu == 0) {
 			/* they didn't give us a size, estimate one */
+<<<<<<< HEAD
+=======
+			mtu = peer->if_mtu;
+>>>>>>> v3.18
 			if (mtu > 1500) {
 				mtu >>= 1;
 				if (mtu < 1500)
@@ -110,6 +118,7 @@ void rxrpc_UDP_error_report(struct sock *sk)
 	skb_queue_tail(&trans->error_queue, skb);
 	rxrpc_queue_work(&trans->error_handler);
 
+<<<<<<< HEAD
 	/* reset and regenerate socket error */
 	spin_lock_bh(&sk->sk_error_queue.lock);
 	sk->sk_err = 0;
@@ -122,6 +131,8 @@ void rxrpc_UDP_error_report(struct sock *sk)
 		spin_unlock_bh(&sk->sk_error_queue.lock);
 	}
 
+=======
+>>>>>>> v3.18
 	_leave("");
 }
 

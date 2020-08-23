@@ -844,7 +844,11 @@ static void if_usb_prog_firmware(struct lbs_private *priv, int ret,
 	cardp->fw = fw;
 	if (check_fwfile_format(cardp->fw->data, cardp->fw->size)) {
 		ret = -EINVAL;
+<<<<<<< HEAD
 		goto release_fw;
+=======
+		goto done;
+>>>>>>> v3.18
 	}
 
 	/* Cancel any pending usb business */
@@ -861,7 +865,11 @@ restart:
 	if (if_usb_submit_rx_urb_fwload(cardp) < 0) {
 		lbs_deb_usbd(&cardp->udev->dev, "URB submission is failed\n");
 		ret = -EIO;
+<<<<<<< HEAD
 		goto release_fw;
+=======
+		goto done;
+>>>>>>> v3.18
 	}
 
 	cardp->bootcmdresp = 0;
@@ -883,14 +891,22 @@ restart:
 		usb_kill_urb(cardp->tx_urb);
 		if (if_usb_submit_rx_urb(cardp) < 0)
 			ret = -EIO;
+<<<<<<< HEAD
 		goto release_fw;
+=======
+		goto done;
+>>>>>>> v3.18
 	} else if (cardp->bootcmdresp <= 0) {
 		if (--reset_count >= 0) {
 			if_usb_reset_device(cardp);
 			goto restart;
 		}
 		ret = -EIO;
+<<<<<<< HEAD
 		goto release_fw;
+=======
+		goto done;
+>>>>>>> v3.18
 	}
 
 	i = 0;
@@ -921,14 +937,22 @@ restart:
 
 		pr_info("FW download failure, time = %d ms\n", i * 100);
 		ret = -EIO;
+<<<<<<< HEAD
 		goto release_fw;
+=======
+		goto done;
+>>>>>>> v3.18
 	}
 
 	cardp->priv->fw_ready = 1;
 	if_usb_submit_rx_urb(cardp);
 
 	if (lbs_start_card(priv))
+<<<<<<< HEAD
 		goto release_fw;
+=======
+		goto done;
+>>>>>>> v3.18
 
 	if_usb_setup_firmware(priv);
 
@@ -939,11 +963,16 @@ restart:
 	if (lbs_host_sleep_cfg(priv, priv->wol_criteria, NULL))
 		priv->ehs_remove_supported = false;
 
+<<<<<<< HEAD
  release_fw:
 	release_firmware(cardp->fw);
 	cardp->fw = NULL;
 
  done:
+=======
+ done:
+	cardp->fw = NULL;
+>>>>>>> v3.18
 	lbs_deb_leave(LBS_DEB_USB);
 }
 

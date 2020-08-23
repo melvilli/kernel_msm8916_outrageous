@@ -11,6 +11,7 @@
  * Enqueue the control packet for Application.
  * @return None
  */
+<<<<<<< HEAD
 static VOID handle_rx_control_packet(struct bcm_mini_adapter *Adapter, struct sk_buff *skb)
 {
 	struct bcm_tarang_data *pTarang = NULL;
@@ -18,11 +19,25 @@ static VOID handle_rx_control_packet(struct bcm_mini_adapter *Adapter, struct sk
 	struct sk_buff *newPacket = NULL;
 	CHAR cntrl_msg_mask_bit = 0;
 	BOOLEAN drop_pkt_flag = TRUE;
+=======
+static VOID handle_rx_control_packet(struct bcm_mini_adapter *Adapter,
+				     struct sk_buff *skb)
+{
+	struct bcm_tarang_data *pTarang = NULL;
+	bool HighPriorityMessage = false;
+	struct sk_buff *newPacket = NULL;
+	CHAR cntrl_msg_mask_bit = 0;
+	bool drop_pkt_flag = TRUE;
+>>>>>>> v3.18
 	USHORT usStatus = *(PUSHORT)(skb->data);
 
 	if (netif_msg_pktdata(Adapter))
 		print_hex_dump(KERN_DEBUG, PFX "rx control: ", DUMP_PREFIX_NONE,
+<<<<<<< HEAD
 				16, 1, skb->data, skb->len, 0);
+=======
+			       16, 1, skb->data, skb->len, 0);
+>>>>>>> v3.18
 
 	switch (usStatus) {
 	case CM_RESPONSES:               /* 0xA0 */
@@ -91,13 +106,21 @@ static VOID handle_rx_control_packet(struct bcm_mini_adapter *Adapter, struct sk
 		 *	cntrl_msg_mask_bit);
 		 */
 		if (pTarang->RxCntrlMsgBitMask & (1 << cntrl_msg_mask_bit))
+<<<<<<< HEAD
 			drop_pkt_flag = FALSE;
+=======
+			drop_pkt_flag = false;
+>>>>>>> v3.18
 
 		if ((drop_pkt_flag == TRUE) ||
 				(pTarang->AppCtrlQueueLen > MAX_APP_QUEUE_LEN)
 				|| ((pTarang->AppCtrlQueueLen >
 					MAX_APP_QUEUE_LEN / 2) &&
+<<<<<<< HEAD
 				    (HighPriorityMessage == FALSE))) {
+=======
+				    (HighPriorityMessage == false))) {
+>>>>>>> v3.18
 			/*
 			 * Assumption:-
 			 * 1. every tarang manages it own dropped pkt
@@ -106,6 +129,7 @@ static VOID handle_rx_control_packet(struct bcm_mini_adapter *Adapter, struct sk
 			 *    the sum of all types of dropped pkt by that
 			 *    tarang only.
 			 */
+<<<<<<< HEAD
 			switch (*(PUSHORT)skb->data) {
 			case CM_RESPONSES:
 				pTarang->stDroppedAppCntrlMsgs.cm_responses++;
@@ -130,6 +154,34 @@ static VOID handle_rx_control_packet(struct bcm_mini_adapter *Adapter, struct sk
 				break;
 			default:
 				pTarang->stDroppedAppCntrlMsgs.low_priority_message++;
+=======
+			struct bcm_mibs_dropped_cntrl_msg *msg =
+				&pTarang->stDroppedAppCntrlMsgs;
+			switch (*(PUSHORT)skb->data) {
+			case CM_RESPONSES:
+				msg->cm_responses++;
+				break;
+			case CM_CONTROL_NEWDSX_MULTICLASSIFIER_RESP:
+				msg->cm_control_newdsx_multiclassifier_resp++;
+				break;
+			case LINK_CONTROL_RESP:
+				msg->link_control_resp++;
+				break;
+			case STATUS_RSP:
+				msg->status_rsp++;
+				break;
+			case STATS_POINTER_RESP:
+				msg->stats_pointer_resp++;
+				break;
+			case IDLE_MODE_STATUS:
+				msg->idle_mode_status++;
+				break;
+			case AUTH_SS_HOST_MSG:
+				msg->auth_ss_host_msg++;
+				break;
+			default:
+				msg->low_priority_message++;
+>>>>>>> v3.18
 				break;
 			}
 
@@ -154,7 +206,13 @@ static VOID handle_rx_control_packet(struct bcm_mini_adapter *Adapter, struct sk
  * @ingroup ctrl_pkt_functions
  * Thread to handle control pkt reception
  */
+<<<<<<< HEAD
 int control_packet_handler(struct bcm_mini_adapter *Adapter /* pointer to adapter object*/)
+=======
+
+/* pointer to adapter object*/
+int control_packet_handler(struct bcm_mini_adapter *Adapter)
+>>>>>>> v3.18
 {
 	struct sk_buff *ctrl_packet = NULL;
 	unsigned long flags = 0;
@@ -175,8 +233,13 @@ int control_packet_handler(struct bcm_mini_adapter *Adapter /* pointer to adapte
 			return 0;
 		}
 		if (TRUE == Adapter->bWakeUpDevice) {
+<<<<<<< HEAD
 			Adapter->bWakeUpDevice = FALSE;
 			if ((FALSE == Adapter->bTriedToWakeUpFromlowPowerMode)
+=======
+			Adapter->bWakeUpDevice = false;
+			if ((false == Adapter->bTriedToWakeUpFromlowPowerMode)
+>>>>>>> v3.18
 					&& ((TRUE == Adapter->IdleMode) ||
 					    (TRUE == Adapter->bShutStatus))) {
 				BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS,
@@ -216,6 +279,10 @@ INT flushAllAppQ(void)
 	struct bcm_mini_adapter *Adapter = GET_BCM_ADAPTER(gblpnetdev);
 	struct bcm_tarang_data *pTarang = NULL;
 	struct sk_buff *PacketToDrop = NULL;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	for (pTarang = Adapter->pTarangs; pTarang; pTarang = pTarang->next) {
 		while (pTarang->RxAppControlHead != NULL) {
 			PacketToDrop = pTarang->RxAppControlHead;

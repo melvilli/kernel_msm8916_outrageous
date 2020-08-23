@@ -34,7 +34,10 @@
 #include <linux/module.h>
 #include <linux/moduleparam.h>
 #include <linux/kernel.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/ptrace.h>
 #include <linux/slab.h>
 #include <linux/string.h>

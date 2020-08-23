@@ -11,6 +11,11 @@
 #ifndef _ASM_M68K_PARPORT_H
 #define _ASM_M68K_PARPORT_H 1
 
+<<<<<<< HEAD
+=======
+#undef insl
+#undef outsl
+>>>>>>> v3.18
 #define insl(port,buf,len)   isa_insb(port,buf,(len)<<2)
 #define outsl(port,buf,len)  isa_outsb(port,buf,(len)<<2)
 

@@ -14,6 +14,7 @@
  * more details.
  */
 
+<<<<<<< HEAD
 #include <linux/kernel.h>
 #include <linux/types.h>
 #include <acpi/acpi_bus.h>
@@ -21,6 +22,16 @@
 #include <asm/xen/hypercall.h>
 #include <xen/interface/version.h>
 #include <xen/xen-ops.h>
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+#include <linux/kernel.h>
+#include <linux/types.h>
+#include <linux/acpi.h>
+#include <xen/interface/version.h>
+#include <xen/xen-ops.h>
+#include <asm/xen/hypercall.h>
+>>>>>>> v3.18
 
 #define ACPI_PROCESSOR_AGGREGATOR_CLASS	"acpi_pad"
 #define ACPI_PROCESSOR_AGGREGATOR_DEVICE_NAME "Processor Aggregator"
@@ -76,6 +87,7 @@ static int acpi_pad_pur(acpi_handle handle)
 	return num;
 }
 
+<<<<<<< HEAD
 /* Notify firmware how many CPUs are idle */
 static void acpi_pad_ost(acpi_handle handle, int stat,
 	uint32_t idle_nums)
@@ -97,6 +109,16 @@ static void acpi_pad_ost(acpi_handle handle, int stat,
 static void acpi_pad_handle_notify(acpi_handle handle)
 {
 	int idle_nums;
+=======
+static void acpi_pad_handle_notify(acpi_handle handle)
+{
+	int idle_nums;
+	struct acpi_buffer param = {
+		.length = 4,
+		.pointer = (void *)&idle_nums,
+	};
+
+>>>>>>> v3.18
 
 	mutex_lock(&xen_cpu_lock);
 	idle_nums = acpi_pad_pur(handle);
@@ -108,7 +130,12 @@ static void acpi_pad_handle_notify(acpi_handle handle)
 	idle_nums = xen_acpi_pad_idle_cpus(idle_nums)
 		    ?: xen_acpi_pad_idle_cpus_num();
 	if (idle_nums >= 0)
+<<<<<<< HEAD
 		acpi_pad_ost(handle, 0, idle_nums);
+=======
+		acpi_evaluate_ost(handle, ACPI_PROCESSOR_AGGREGATOR_NOTIFY,
+				  0, &param);
+>>>>>>> v3.18
 	mutex_unlock(&xen_cpu_lock);
 }
 

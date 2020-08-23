@@ -28,8 +28,11 @@
 #include <linux/proc_fs.h>
 #include <linux/security.h>
 #include <linux/list.h>
+<<<<<<< HEAD
 #include <linux/jhash.h>
 #include <linux/random.h>
+=======
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <net/sock.h>
 #include <net/netfilter/nf_log.h>
@@ -38,7 +41,11 @@
 
 #include <linux/atomic.h>
 
+<<<<<<< HEAD
 #ifdef CONFIG_BRIDGE_NETFILTER
+=======
+#if IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
+>>>>>>> v3.18
 #include "../bridge/br_private.h"
 #endif
 
@@ -76,7 +83,10 @@ struct nfulnl_instance {
 };
 
 #define INSTANCE_BUCKETS	16
+<<<<<<< HEAD
 static unsigned int hash_init;
+=======
+>>>>>>> v3.18
 
 static int nfnl_log_net_id __read_mostly;
 
@@ -322,7 +332,12 @@ nfulnl_set_flags(struct nfulnl_instance *inst, u_int16_t flags)
 }
 
 static struct sk_buff *
+<<<<<<< HEAD
 nfulnl_alloc_skb(u32 peer_portid, unsigned int inst_size, unsigned int pkt_size)
+=======
+nfulnl_alloc_skb(struct net *net, u32 peer_portid, unsigned int inst_size,
+		 unsigned int pkt_size)
+>>>>>>> v3.18
 {
 	struct sk_buff *skb;
 	unsigned int n;
@@ -331,13 +346,21 @@ nfulnl_alloc_skb(u32 peer_portid, unsigned int inst_size, unsigned int pkt_size)
 	 * message.  WARNING: has to be <= 128k due to slab restrictions */
 
 	n = max(inst_size, pkt_size);
+<<<<<<< HEAD
 	skb = nfnetlink_alloc_skb(&init_net, n, peer_portid, GFP_ATOMIC);
+=======
+	skb = nfnetlink_alloc_skb(net, n, peer_portid, GFP_ATOMIC);
+>>>>>>> v3.18
 	if (!skb) {
 		if (n > pkt_size) {
 			/* try to allocate only as much as we need for current
 			 * packet */
 
+<<<<<<< HEAD
 			skb = nfnetlink_alloc_skb(&init_net, pkt_size,
+=======
+			skb = nfnetlink_alloc_skb(net, pkt_size,
+>>>>>>> v3.18
 						  peer_portid, GFP_ATOMIC);
 			if (!skb)
 				pr_err("nfnetlink_log: can't even alloc %u bytes\n",
@@ -421,6 +444,10 @@ __build_packet_message(struct nfnl_log_net *log,
 	nfmsg->version = NFNETLINK_V0;
 	nfmsg->res_id = htons(inst->group_num);
 
+<<<<<<< HEAD
+=======
+	memset(&pmsg, 0, sizeof(pmsg));
+>>>>>>> v3.18
 	pmsg.hw_protocol	= skb->protocol;
 	pmsg.hook		= hooknum;
 
@@ -432,7 +459,11 @@ __build_packet_message(struct nfnl_log_net *log,
 		goto nla_put_failure;
 
 	if (indev) {
+<<<<<<< HEAD
 #ifndef CONFIG_BRIDGE_NETFILTER
+=======
+#if !IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
+>>>>>>> v3.18
 		if (nla_put_be32(inst->skb, NFULA_IFINDEX_INDEV,
 				 htonl(indev->ifindex)))
 			goto nla_put_failure;
@@ -463,7 +494,11 @@ __build_packet_message(struct nfnl_log_net *log,
 	}
 
 	if (outdev) {
+<<<<<<< HEAD
 #ifndef CONFIG_BRIDGE_NETFILTER
+=======
+#if !IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
+>>>>>>> v3.18
 		if (nla_put_be32(inst->skb, NFULA_IFINDEX_OUTDEV,
 				 htonl(outdev->ifindex)))
 			goto nla_put_failure;
@@ -500,7 +535,14 @@ __build_packet_message(struct nfnl_log_net *log,
 	if (indev && skb->dev &&
 	    skb->mac_header != skb->network_header) {
 		struct nfulnl_msg_packet_hw phw;
+<<<<<<< HEAD
 		int len = dev_parse_header(skb, phw.hw_addr);
+=======
+		int len;
+
+		memset(&phw, 0, sizeof(phw));
+		len = dev_parse_header(skb, phw.hw_addr);
+>>>>>>> v3.18
 		if (len > 0) {
 			phw.hw_addrlen = htons(len);
 			if (nla_put(inst->skb, NFULA_HWADDR, sizeof(phw), &phw))
@@ -640,7 +682,11 @@ nfulnl_log_packet(struct net *net,
 		+ nla_total_size(sizeof(struct nfulnl_msg_packet_hdr))
 		+ nla_total_size(sizeof(u_int32_t))	/* ifindex */
 		+ nla_total_size(sizeof(u_int32_t))	/* ifindex */
+<<<<<<< HEAD
 #ifdef CONFIG_BRIDGE_NETFILTER
+=======
+#if IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
+>>>>>>> v3.18
 		+ nla_total_size(sizeof(u_int32_t))	/* ifindex */
 		+ nla_total_size(sizeof(u_int32_t))	/* ifindex */
 #endif
@@ -699,8 +745,13 @@ nfulnl_log_packet(struct net *net,
 	}
 
 	if (!inst->skb) {
+<<<<<<< HEAD
 		inst->skb = nfulnl_alloc_skb(inst->peer_portid, inst->nlbufsiz,
 					     size);
+=======
+		inst->skb = nfulnl_alloc_skb(net, inst->peer_portid,
+					     inst->nlbufsiz, size);
+>>>>>>> v3.18
 		if (!inst->skb)
 			goto alloc_failure;
 	}
@@ -772,6 +823,10 @@ nfulnl_recv_unsupp(struct sock *ctnl, struct sk_buff *skb,
 
 static struct nf_logger nfulnl_logger __read_mostly = {
 	.name	= "nfnetlink_log",
+<<<<<<< HEAD
+=======
+	.type	= NF_LOG_TYPE_ULOG,
+>>>>>>> v3.18
 	.logfn	= &nfulnl_log_packet,
 	.me	= THIS_MODULE,
 };
@@ -1049,6 +1104,10 @@ static void __net_exit nfnl_log_net_exit(struct net *net)
 #ifdef CONFIG_PROC_FS
 	remove_proc_entry("nfnetlink_log", net->nf.proc_netfilter);
 #endif
+<<<<<<< HEAD
+=======
+	nf_log_unset(net, &nfulnl_logger);
+>>>>>>> v3.18
 }
 
 static struct pernet_operations nfnl_log_net_ops = {
@@ -1062,11 +1121,14 @@ static int __init nfnetlink_log_init(void)
 {
 	int status = -ENOMEM;
 
+<<<<<<< HEAD
 	/* it's not really all that important to have a random value, so
 	 * we can do this from the init function, even if there hasn't
 	 * been that much entropy yet */
 	get_random_bytes(&hash_init, sizeof(hash_init));
 
+=======
+>>>>>>> v3.18
 	netlink_register_notifier(&nfulnl_rtnl_notifier);
 	status = nfnetlink_subsys_register(&nfulnl_subsys);
 	if (status < 0) {
@@ -1108,6 +1170,12 @@ MODULE_DESCRIPTION("netfilter userspace logging");
 MODULE_AUTHOR("Harald Welte <laforge@netfilter.org>");
 MODULE_LICENSE("GPL");
 MODULE_ALIAS_NFNL_SUBSYS(NFNL_SUBSYS_ULOG);
+<<<<<<< HEAD
+=======
+MODULE_ALIAS_NF_LOGGER(AF_INET, 1);
+MODULE_ALIAS_NF_LOGGER(AF_INET6, 1);
+MODULE_ALIAS_NF_LOGGER(AF_BRIDGE, 1);
+>>>>>>> v3.18
 
 module_init(nfnetlink_log_init);
 module_exit(nfnetlink_log_fini);

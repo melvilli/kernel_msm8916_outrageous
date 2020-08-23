@@ -68,10 +68,15 @@ bfa_cb_image_get_chunk(enum bfi_asic_gen asic_gen, u32 off)
 	switch (asic_gen) {
 	case BFI_ASIC_GEN_CT:
 		return (bfi_image_ct_cna + off);
+<<<<<<< HEAD
 		break;
 	case BFI_ASIC_GEN_CT2:
 		return (bfi_image_ct2_cna + off);
 		break;
+=======
+	case BFI_ASIC_GEN_CT2:
+		return (bfi_image_ct2_cna + off);
+>>>>>>> v3.18
 	default:
 		return NULL;
 	}
@@ -83,10 +88,15 @@ bfa_cb_image_get_size(enum bfi_asic_gen asic_gen)
 	switch (asic_gen) {
 	case BFI_ASIC_GEN_CT:
 		return bfi_image_ct_cna_size;
+<<<<<<< HEAD
 		break;
 	case BFI_ASIC_GEN_CT2:
 		return bfi_image_ct2_cna_size;
 		break;
+=======
+	case BFI_ASIC_GEN_CT2:
+		return bfi_image_ct2_cna_size;
+>>>>>>> v3.18
 	default:
 		return 0;
 	}

@@ -197,7 +197,11 @@ static int tce_build_cell(struct iommu_table *tbl, long index, long npages,
 
 	io_pte = (unsigned long *)tbl->it_base + (index - tbl->it_offset);
 
+<<<<<<< HEAD
 	for (i = 0; i < npages; i++, uaddr += IOMMU_PAGE_SIZE)
+=======
+	for (i = 0; i < npages; i++, uaddr += tbl->it_page_shift)
+>>>>>>> v3.18
 		io_pte[i] = base_pte | (__pa(uaddr) & CBE_IOPTE_RPN_Mask);
 
 	mb();
@@ -430,7 +434,11 @@ static void cell_iommu_setup_hardware(struct cbe_iommu *iommu,
 {
 	cell_iommu_setup_stab(iommu, base, size, 0, 0);
 	iommu->ptab = cell_iommu_alloc_ptab(iommu, base, size, 0, 0,
+<<<<<<< HEAD
 					    IOMMU_PAGE_SHIFT);
+=======
+					    IOMMU_PAGE_SHIFT_4K);
+>>>>>>> v3.18
 	cell_iommu_enable_hardware(iommu);
 }
 
@@ -487,8 +495,15 @@ cell_iommu_setup_window(struct cbe_iommu *iommu, struct device_node *np,
 	window->table.it_blocksize = 16;
 	window->table.it_base = (unsigned long)iommu->ptab;
 	window->table.it_index = iommu->nid;
+<<<<<<< HEAD
 	window->table.it_offset = (offset >> IOMMU_PAGE_SHIFT) + pte_offset;
 	window->table.it_size = size >> IOMMU_PAGE_SHIFT;
+=======
+	window->table.it_page_shift = IOMMU_PAGE_SHIFT_4K;
+	window->table.it_offset =
+		(offset >> window->table.it_page_shift) + pte_offset;
+	window->table.it_size = size >> window->table.it_page_shift;
+>>>>>>> v3.18
 
 	iommu_init_table(&window->table, iommu->nid);
 
@@ -697,7 +712,11 @@ static int __init cell_iommu_get_window(struct device_node *np,
 					 unsigned long *base,
 					 unsigned long *size)
 {
+<<<<<<< HEAD
 	const void *dma_window;
+=======
+	const __be32 *dma_window;
+>>>>>>> v3.18
 	unsigned long index;
 
 	/* Use ibm,dma-window if available, else, hard code ! */
@@ -773,7 +792,11 @@ static void __init cell_iommu_init_one(struct device_node *np,
 
 	/* Setup the iommu_table */
 	cell_iommu_setup_window(iommu, np, base, size,
+<<<<<<< HEAD
 				offset >> IOMMU_PAGE_SHIFT);
+=======
+				offset >> IOMMU_PAGE_SHIFT_4K);
+>>>>>>> v3.18
 }
 
 static void __init cell_disable_iommus(void)
@@ -1122,7 +1145,11 @@ static int __init cell_iommu_fixed_mapping_init(void)
 
 		cell_iommu_setup_stab(iommu, dbase, dsize, fbase, fsize);
 		iommu->ptab = cell_iommu_alloc_ptab(iommu, dbase, dsize, 0, 0,
+<<<<<<< HEAD
 						    IOMMU_PAGE_SHIFT);
+=======
+						    IOMMU_PAGE_SHIFT_4K);
+>>>>>>> v3.18
 		cell_iommu_setup_fixed_ptab(iommu, np, dbase, dsize,
 					     fbase, fsize);
 		cell_iommu_enable_hardware(iommu);

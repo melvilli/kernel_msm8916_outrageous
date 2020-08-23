@@ -22,7 +22,10 @@
  */
 
 #include <linux/oprofile.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/smp.h>
 #include <linux/percpu.h>
 #include <asm/processor.h>

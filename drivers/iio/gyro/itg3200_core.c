@@ -90,6 +90,10 @@ static int itg3200_read_raw(struct iio_dev *indio_dev,
 {
 	int ret = 0;
 	u8 reg;
+<<<<<<< HEAD
+=======
+	u8 regval;
+>>>>>>> v3.18
 
 	switch (info) {
 	case IIO_CHAN_INFO_RAW:
@@ -107,6 +111,7 @@ static int itg3200_read_raw(struct iio_dev *indio_dev,
 		/* Only the temperature channel has an offset */
 		*val = 23000;
 		return IIO_VAL_INT;
+<<<<<<< HEAD
 	default:
 		return -EINVAL;
 	}
@@ -168,6 +173,62 @@ err_ret:
 	mutex_unlock(&indio_dev->mlock);
 
 	return ret ? ret : len;
+=======
+	case IIO_CHAN_INFO_SAMP_FREQ:
+		ret = itg3200_read_reg_8(indio_dev, ITG3200_REG_DLPF, &regval);
+		if (ret)
+			return ret;
+
+		*val = (regval & ITG3200_DLPF_CFG_MASK) ? 1000 : 8000;
+
+		ret = itg3200_read_reg_8(indio_dev,
+					 ITG3200_REG_SAMPLE_RATE_DIV,
+					 &regval);
+		if (ret)
+			return ret;
+
+		*val /= regval + 1;
+		return IIO_VAL_INT;
+
+	default:
+		return -EINVAL;
+	}
+}
+
+static int itg3200_write_raw(struct iio_dev *indio_dev,
+			     struct iio_chan_spec const *chan,
+			     int val,
+			     int val2,
+			     long mask)
+{
+	int ret;
+	u8 t;
+
+	switch (mask) {
+	case IIO_CHAN_INFO_SAMP_FREQ:
+		if (val == 0 || val2 != 0)
+			return -EINVAL;
+
+		mutex_lock(&indio_dev->mlock);
+
+		ret = itg3200_read_reg_8(indio_dev, ITG3200_REG_DLPF, &t);
+		if (ret) {
+			mutex_unlock(&indio_dev->mlock);
+			return ret;
+		}
+		t = ((t & ITG3200_DLPF_CFG_MASK) ? 1000u : 8000u) / val - 1;
+
+		ret = itg3200_write_reg_8(indio_dev,
+					  ITG3200_REG_SAMPLE_RATE_DIV,
+					  t);
+
+		mutex_unlock(&indio_dev->mlock);
+	return ret;
+
+	default:
+		return -EINVAL;
+	}
+>>>>>>> v3.18
 }
 
 /*
@@ -257,6 +318,10 @@ err_ret:
 	.channel2 = IIO_MOD_ ## _mod, \
 	.info_mask_separate = BIT(IIO_CHAN_INFO_RAW), \
 	.info_mask_shared_by_type = BIT(IIO_CHAN_INFO_SCALE), \
+<<<<<<< HEAD
+=======
+	.info_mask_shared_by_all = BIT(IIO_CHAN_INFO_SAMP_FREQ), \
+>>>>>>> v3.18
 	.address = ITG3200_REG_GYRO_ ## _mod ## OUT_H, \
 	.scan_index = ITG3200_SCAN_GYRO_ ## _mod, \
 	.scan_type = ITG3200_ST, \
@@ -269,6 +334,10 @@ static const struct iio_chan_spec itg3200_channels[] = {
 		.info_mask_separate = BIT(IIO_CHAN_INFO_RAW),
 		.info_mask_shared_by_type = BIT(IIO_CHAN_INFO_OFFSET) |
 		BIT(IIO_CHAN_INFO_SCALE),
+<<<<<<< HEAD
+=======
+		.info_mask_shared_by_all = BIT(IIO_CHAN_INFO_SAMP_FREQ),
+>>>>>>> v3.18
 		.address = ITG3200_REG_TEMP_OUT_H,
 		.scan_index = ITG3200_SCAN_TEMP,
 		.scan_type = ITG3200_ST,
@@ -279,6 +348,7 @@ static const struct iio_chan_spec itg3200_channels[] = {
 	IIO_CHAN_SOFT_TIMESTAMP(ITG3200_SCAN_ELEMENTS),
 };
 
+<<<<<<< HEAD
 /* IIO device attributes */
 static IIO_DEV_ATTR_SAMP_FREQ(S_IWUSR | S_IRUGO, itg3200_read_frequency,
 		itg3200_write_frequency);
@@ -295,6 +365,11 @@ static const struct attribute_group itg3200_attribute_group = {
 static const struct iio_info itg3200_info = {
 	.attrs = &itg3200_attribute_group,
 	.read_raw = &itg3200_read_raw,
+=======
+static const struct iio_info itg3200_info = {
+	.read_raw = &itg3200_read_raw,
+	.write_raw = &itg3200_write_raw,
+>>>>>>> v3.18
 	.driver_module = THIS_MODULE,
 };
 
@@ -309,11 +384,17 @@ static int itg3200_probe(struct i2c_client *client,
 
 	dev_dbg(&client->dev, "probe I2C dev with IRQ %i", client->irq);
 
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*st));
 	if (indio_dev == NULL) {
 		ret =  -ENOMEM;
 		goto error_ret;
 	}
+=======
+	indio_dev = devm_iio_device_alloc(&client->dev, sizeof(*st));
+	if (!indio_dev)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	st = iio_priv(indio_dev);
 
@@ -330,7 +411,11 @@ static int itg3200_probe(struct i2c_client *client,
 
 	ret = itg3200_buffer_configure(indio_dev);
 	if (ret)
+<<<<<<< HEAD
 		goto error_free_dev;
+=======
+		return ret;
+>>>>>>> v3.18
 
 	if (client->irq) {
 		ret = itg3200_probe_trigger(indio_dev);
@@ -353,9 +438,12 @@ error_remove_trigger:
 		itg3200_remove_trigger(indio_dev);
 error_unconfigure_buffer:
 	itg3200_buffer_unconfigure(indio_dev);
+<<<<<<< HEAD
 error_free_dev:
 	iio_device_free(indio_dev);
 error_ret:
+=======
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -370,8 +458,11 @@ static int itg3200_remove(struct i2c_client *client)
 
 	itg3200_buffer_unconfigure(indio_dev);
 
+<<<<<<< HEAD
 	iio_device_free(indio_dev);
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

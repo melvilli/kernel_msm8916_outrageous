@@ -122,7 +122,10 @@ struct tlv320dac33_priv {
 	unsigned int uthr;
 
 	enum dac33_state state;
+<<<<<<< HEAD
 	enum snd_soc_control_type control_type;
+=======
+>>>>>>> v3.18
 	void *control_data;
 };
 
@@ -443,7 +446,11 @@ static int dac33_playback_event(struct snd_soc_dapm_widget *w,
 static int dac33_get_fifo_mode(struct snd_kcontrol *kcontrol,
 			 struct snd_ctl_elem_value *ucontrol)
 {
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 	struct tlv320dac33_priv *dac33 = snd_soc_codec_get_drvdata(codec);
 
 	ucontrol->value.integer.value[0] = dac33->fifo_mode;
@@ -454,14 +461,22 @@ static int dac33_get_fifo_mode(struct snd_kcontrol *kcontrol,
 static int dac33_set_fifo_mode(struct snd_kcontrol *kcontrol,
 			 struct snd_ctl_elem_value *ucontrol)
 {
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 	struct tlv320dac33_priv *dac33 = snd_soc_codec_get_drvdata(codec);
 	int ret = 0;
 
 	if (dac33->fifo_mode == ucontrol->value.integer.value[0])
 		return 0;
 	/* Do not allow changes while stream is running*/
+<<<<<<< HEAD
 	if (codec->active)
+=======
+	if (snd_soc_codec_is_active(codec))
+>>>>>>> v3.18
 		return -EPERM;
 
 	if (ucontrol->value.integer.value[0] < 0 ||
@@ -478,9 +493,13 @@ static const char *dac33_fifo_mode_texts[] = {
 	"Bypass", "Mode 1", "Mode 7"
 };
 
+<<<<<<< HEAD
 static const struct soc_enum dac33_fifo_mode_enum =
 	SOC_ENUM_SINGLE_EXT(ARRAY_SIZE(dac33_fifo_mode_texts),
 			    dac33_fifo_mode_texts);
+=======
+static SOC_ENUM_SINGLE_EXT_DECL(dac33_fifo_mode_enum, dac33_fifo_mode_texts);
+>>>>>>> v3.18
 
 /* L/R Line Output Gain */
 static const char *lr_lineout_gain_texts[] = {
@@ -488,6 +507,7 @@ static const char *lr_lineout_gain_texts[] = {
 	"Line 0dB DAC 12dB", "Line 6dB DAC 18dB",
 };
 
+<<<<<<< HEAD
 static const struct soc_enum l_lineout_gain_enum =
 	SOC_ENUM_SINGLE(DAC33_LDAC_PWR_CTRL, 0,
 			ARRAY_SIZE(lr_lineout_gain_texts),
@@ -497,6 +517,15 @@ static const struct soc_enum r_lineout_gain_enum =
 	SOC_ENUM_SINGLE(DAC33_RDAC_PWR_CTRL, 0,
 			ARRAY_SIZE(lr_lineout_gain_texts),
 			lr_lineout_gain_texts);
+=======
+static SOC_ENUM_SINGLE_DECL(l_lineout_gain_enum,
+			    DAC33_LDAC_PWR_CTRL, 0,
+			    lr_lineout_gain_texts);
+
+static SOC_ENUM_SINGLE_DECL(r_lineout_gain_enum,
+			    DAC33_RDAC_PWR_CTRL, 0,
+			    lr_lineout_gain_texts);
+>>>>>>> v3.18
 
 /*
  * DACL/R digital volume control:
@@ -534,18 +563,30 @@ static const struct snd_kcontrol_new dac33_dapm_abypassr_control =
 /* LOP L/R invert selection */
 static const char *dac33_lr_lom_texts[] = {"DAC", "LOP"};
 
+<<<<<<< HEAD
 static const struct soc_enum dac33_left_lom_enum =
 	SOC_ENUM_SINGLE(DAC33_OUT_AMP_CTRL, 3,
 			ARRAY_SIZE(dac33_lr_lom_texts),
 			dac33_lr_lom_texts);
+=======
+static SOC_ENUM_SINGLE_DECL(dac33_left_lom_enum,
+			    DAC33_OUT_AMP_CTRL, 3,
+			    dac33_lr_lom_texts);
+>>>>>>> v3.18
 
 static const struct snd_kcontrol_new dac33_dapm_left_lom_control =
 SOC_DAPM_ENUM("Route", dac33_left_lom_enum);
 
+<<<<<<< HEAD
 static const struct soc_enum dac33_right_lom_enum =
 	SOC_ENUM_SINGLE(DAC33_OUT_AMP_CTRL, 2,
 			ARRAY_SIZE(dac33_lr_lom_texts),
 			dac33_lr_lom_texts);
+=======
+static SOC_ENUM_SINGLE_DECL(dac33_right_lom_enum,
+			    DAC33_OUT_AMP_CTRL, 2,
+			    dac33_lr_lom_texts);
+>>>>>>> v3.18
 
 static const struct snd_kcontrol_new dac33_dapm_right_lom_control =
 SOC_DAPM_ENUM("Route", dac33_right_lom_enum);
@@ -839,18 +880,32 @@ static int dac33_hw_params(struct snd_pcm_substream *substream,
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		dac33->fifo_size = DAC33_FIFO_SIZE_16BIT;
 		dac33->burst_rate = CALC_BURST_RATE(dac33->burst_bclkdiv, 32);
 		break;
 	case SNDRV_PCM_FORMAT_S32_LE:
+=======
+	switch (params_width(params)) {
+	case 16:
+		dac33->fifo_size = DAC33_FIFO_SIZE_16BIT;
+		dac33->burst_rate = CALC_BURST_RATE(dac33->burst_bclkdiv, 32);
+		break;
+	case 32:
+>>>>>>> v3.18
 		dac33->fifo_size = DAC33_FIFO_SIZE_24BIT;
 		dac33->burst_rate = CALC_BURST_RATE(dac33->burst_bclkdiv, 64);
 		break;
 	default:
+<<<<<<< HEAD
 		dev_err(codec->dev, "unsupported format %d\n",
 			params_format(params));
+=======
+		dev_err(codec->dev, "unsupported width %d\n",
+			params_width(params));
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
@@ -1411,7 +1466,11 @@ static int dac33_soc_probe(struct snd_soc_codec *codec)
 	if (dac33->irq >= 0) {
 		ret = request_irq(dac33->irq, dac33_interrupt_handler,
 				  IRQF_TRIGGER_RISING,
+<<<<<<< HEAD
 				  codec->name, codec);
+=======
+				  codec->component.name, codec);
+>>>>>>> v3.18
 		if (ret < 0) {
 			dev_err(codec->dev, "Could not request IRQ%d (%d)\n",
 						dac33->irq, ret);
@@ -1547,7 +1606,11 @@ static int dac33_i2c_probe(struct i2c_client *client,
 	for (i = 0; i < ARRAY_SIZE(dac33->supplies); i++)
 		dac33->supplies[i].supply = dac33_supply_names[i];
 
+<<<<<<< HEAD
 	ret = regulator_bulk_get(&client->dev, ARRAY_SIZE(dac33->supplies),
+=======
+	ret = devm_regulator_bulk_get(&client->dev, ARRAY_SIZE(dac33->supplies),
+>>>>>>> v3.18
 				 dac33->supplies);
 
 	if (ret != 0) {
@@ -1558,11 +1621,17 @@ static int dac33_i2c_probe(struct i2c_client *client,
 	ret = snd_soc_register_codec(&client->dev,
 			&soc_codec_dev_tlv320dac33, &dac33_dai, 1);
 	if (ret < 0)
+<<<<<<< HEAD
 		goto err_register;
 
 	return ret;
 err_register:
 	regulator_bulk_free(ARRAY_SIZE(dac33->supplies), dac33->supplies);
+=======
+		goto err_get;
+
+	return ret;
+>>>>>>> v3.18
 err_get:
 	if (dac33->power_gpio >= 0)
 		gpio_free(dac33->power_gpio);
@@ -1580,8 +1649,11 @@ static int dac33_i2c_remove(struct i2c_client *client)
 	if (dac33->power_gpio >= 0)
 		gpio_free(dac33->power_gpio);
 
+<<<<<<< HEAD
 	regulator_bulk_free(ARRAY_SIZE(dac33->supplies), dac33->supplies);
 
+=======
+>>>>>>> v3.18
 	snd_soc_unregister_codec(&client->dev);
 	return 0;
 }

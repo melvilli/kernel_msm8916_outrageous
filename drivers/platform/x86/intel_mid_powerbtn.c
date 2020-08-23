@@ -66,10 +66,15 @@ static int mfld_pb_probe(struct platform_device *pdev)
 		return -EINVAL;
 
 	input = input_allocate_device();
+<<<<<<< HEAD
 	if (!input) {
 		dev_err(&pdev->dev, "Input device allocation error\n");
 		return -ENOMEM;
 	}
+=======
+	if (!input)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	input->name = pdev->name;
 	input->phys = "power-button/input0";
@@ -78,8 +83,13 @@ static int mfld_pb_probe(struct platform_device *pdev)
 
 	input_set_capability(input, EV_KEY, KEY_POWER);
 
+<<<<<<< HEAD
 	error = request_threaded_irq(irq, NULL, mfld_pb_isr, IRQF_NO_SUSPEND |
 			IRQF_ONESHOT, DRIVER_NAME, input);
+=======
+	error = request_threaded_irq(irq, NULL, mfld_pb_isr, IRQF_NO_SUSPEND,
+			DRIVER_NAME, input);
+>>>>>>> v3.18
 	if (error) {
 		dev_err(&pdev->dev, "Unable to request irq %d for mfld power"
 				"button\n", irq);
@@ -128,7 +138,10 @@ static int mfld_pb_remove(struct platform_device *pdev)
 
 	free_irq(irq, input);
 	input_unregister_device(input);
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 
 	return 0;
 }

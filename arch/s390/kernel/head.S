@@ -398,7 +398,11 @@ ENTRY(startup_kdump)
 	xc	__LC_STFL_FAC_LIST(8),__LC_STFL_FAC_LIST
 #ifndef CONFIG_MARCH_G5
 	# check capabilities against MARCH_{G5,Z900,Z990,Z9_109,Z10}
+<<<<<<< HEAD
 	.insn	s,0xb2b10000,__LC_STFL_FAC_LIST	# store facility list
+=======
+	.insn	s,0xb2b10000,0		# store facilities @ __LC_STFL_FAC_LIST
+>>>>>>> v3.18
 	tm	__LC_STFL_FAC_LIST,0x01	# stfle available ?
 	jz	0f
 	la	%r0,1
@@ -437,6 +441,7 @@ ENTRY(startup_kdump)
 
 #if defined(CONFIG_64BIT)
 #if defined(CONFIG_MARCH_ZEC12)
+<<<<<<< HEAD
 	.long 3, 0xc100efe3, 0xf46ce000, 0x00400000
 #elif defined(CONFIG_MARCH_Z196)
 	.long 2, 0xc100efe3, 0xf46c0000
@@ -444,6 +449,15 @@ ENTRY(startup_kdump)
 	.long 2, 0xc100efe3, 0xf0680000
 #elif defined(CONFIG_MARCH_Z9_109)
 	.long 1, 0xc100efc3
+=======
+	.long 3, 0xc100eff2, 0xf46ce800, 0x00400000
+#elif defined(CONFIG_MARCH_Z196)
+	.long 2, 0xc100eff2, 0xf46c0000
+#elif defined(CONFIG_MARCH_Z10)
+	.long 2, 0xc100eff2, 0xf0680000
+#elif defined(CONFIG_MARCH_Z9_109)
+	.long 1, 0xc100efc2
+>>>>>>> v3.18
 #elif defined(CONFIG_MARCH_Z990)
 	.long 1, 0xc0002000
 #elif defined(CONFIG_MARCH_Z900)

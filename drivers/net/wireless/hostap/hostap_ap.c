@@ -24,6 +24,10 @@
 #include <linux/slab.h>
 #include <linux/export.h>
 #include <linux/moduleparam.h>
+<<<<<<< HEAD
+=======
+#include <linux/etherdevice.h>
+>>>>>>> v3.18
 
 #include "hostap_wlan.h"
 #include "hostap.h"
@@ -106,13 +110,21 @@ static void ap_sta_hash_del(struct ap_data *ap, struct sta_info *sta)
 
 	s = ap->sta_hash[STA_HASH(sta->addr)];
 	if (s == NULL) return;
+<<<<<<< HEAD
 	if (memcmp(s->addr, sta->addr, ETH_ALEN) == 0) {
+=======
+	if (ether_addr_equal(s->addr, sta->addr)) {
+>>>>>>> v3.18
 		ap->sta_hash[STA_HASH(sta->addr)] = s->hnext;
 		return;
 	}
 
+<<<<<<< HEAD
 	while (s->hnext != NULL && memcmp(s->hnext->addr, sta->addr, ETH_ALEN)
 	       != 0)
+=======
+	while (s->hnext != NULL && !ether_addr_equal(s->hnext->addr, sta->addr))
+>>>>>>> v3.18
 		s = s->hnext;
 	if (s->hnext != NULL)
 		s->hnext = s->hnext->hnext;
@@ -147,7 +159,11 @@ static void ap_free_sta(struct ap_data *ap, struct sta_info *sta)
 
 	if (!sta->ap && sta->u.sta.challenge)
 		kfree(sta->u.sta.challenge);
+<<<<<<< HEAD
 	del_timer(&sta->timer);
+=======
+	del_timer_sync(&sta->timer);
+>>>>>>> v3.18
 #endif /* PRISM2_NO_KERNEL_IEEE80211_MGMT */
 
 	kfree(sta);
@@ -435,7 +451,11 @@ int ap_control_del_mac(struct mac_restrictions *mac_restrictions, u8 *mac)
 	     ptr != &mac_restrictions->mac_list; ptr = ptr->next) {
 		entry = list_entry(ptr, struct mac_entry, list);
 
+<<<<<<< HEAD
 		if (memcmp(entry->addr, mac, ETH_ALEN) == 0) {
+=======
+		if (ether_addr_equal(entry->addr, mac)) {
+>>>>>>> v3.18
 			list_del(ptr);
 			kfree(entry);
 			mac_restrictions->entries--;
@@ -459,7 +479,11 @@ static int ap_control_mac_deny(struct mac_restrictions *mac_restrictions,
 
 	spin_lock_bh(&mac_restrictions->lock);
 	list_for_each_entry(entry, &mac_restrictions->mac_list, list) {
+<<<<<<< HEAD
 		if (memcmp(entry->addr, mac, ETH_ALEN) == 0) {
+=======
+		if (ether_addr_equal(entry->addr, mac)) {
+>>>>>>> v3.18
 			found = 1;
 			break;
 		}
@@ -957,7 +981,11 @@ static struct sta_info* ap_get_sta(struct ap_data *ap, u8 *sta)
 	struct sta_info *s;
 
 	s = ap->sta_hash[STA_HASH(sta)];
+<<<<<<< HEAD
 	while (s != NULL && memcmp(s->addr, sta, ETH_ALEN) != 0)
+=======
+	while (s != NULL && !ether_addr_equal(s->addr, sta))
+>>>>>>> v3.18
 		s = s->hnext;
 	return s;
 }
@@ -1391,7 +1419,11 @@ static void handle_authen(local_info_t *local, struct sk_buff *skb,
 	status_code = __le16_to_cpu(*pos);
 	pos++;
 
+<<<<<<< HEAD
 	if (memcmp(dev->dev_addr, hdr->addr2, ETH_ALEN) == 0 ||
+=======
+	if (ether_addr_equal(dev->dev_addr, hdr->addr2) ||
+>>>>>>> v3.18
 	    ap_control_mac_deny(&ap->mac_restrictions, hdr->addr2)) {
 		txt = "authentication denied";
 		resp = WLAN_STATUS_UNSPECIFIED_FAILURE;
@@ -1935,7 +1967,11 @@ static void handle_pspoll(local_info_t *local,
 	PDEBUG(DEBUG_PS2, "handle_pspoll: BSSID=%pM, TA=%pM PWRMGT=%d\n",
 	       hdr->addr1, hdr->addr2, !!ieee80211_has_pm(hdr->frame_control));
 
+<<<<<<< HEAD
 	if (memcmp(hdr->addr1, dev->dev_addr, ETH_ALEN)) {
+=======
+	if (!ether_addr_equal(hdr->addr1, dev->dev_addr)) {
+>>>>>>> v3.18
 		PDEBUG(DEBUG_AP,
 		       "handle_pspoll - addr1(BSSID)=%pM not own MAC\n",
 		       hdr->addr1);
@@ -2230,7 +2266,11 @@ static void handle_ap_item(local_info_t *local, struct sk_buff *skb,
 			goto done;
 		}
 
+<<<<<<< HEAD
 		if (memcmp(hdr->addr1, dev->dev_addr, ETH_ALEN)) {
+=======
+		if (!ether_addr_equal(hdr->addr1, dev->dev_addr)) {
+>>>>>>> v3.18
 			PDEBUG(DEBUG_AP, "handle_ap_item - addr1(BSSID)=%pM"
 			       " not own MAC\n", hdr->addr1);
 			goto done;
@@ -2267,13 +2307,21 @@ static void handle_ap_item(local_info_t *local, struct sk_buff *skb,
 		goto done;
 	}
 
+<<<<<<< HEAD
 	if (memcmp(hdr->addr1, dev->dev_addr, ETH_ALEN)) {
+=======
+	if (!ether_addr_equal(hdr->addr1, dev->dev_addr)) {
+>>>>>>> v3.18
 		PDEBUG(DEBUG_AP, "handle_ap_item - addr1(DA)=%pM"
 		       " not own MAC\n", hdr->addr1);
 		goto done;
 	}
 
+<<<<<<< HEAD
 	if (memcmp(hdr->addr3, dev->dev_addr, ETH_ALEN)) {
+=======
+	if (!ether_addr_equal(hdr->addr3, dev->dev_addr)) {
+>>>>>>> v3.18
 		PDEBUG(DEBUG_AP, "handle_ap_item - addr3(BSSID)=%pM"
 		       " not own MAC\n", hdr->addr3);
 		goto done;
@@ -3035,7 +3083,11 @@ ap_rx_ret hostap_handle_sta_rx(local_info_t *local, struct net_device *dev,
 		if (!wds) {
 			/* FromDS frame - not for us; probably
 			 * broadcast/multicast in another BSS - drop */
+<<<<<<< HEAD
 			if (memcmp(hdr->addr1, dev->dev_addr, ETH_ALEN) == 0) {
+=======
+			if (ether_addr_equal(hdr->addr1, dev->dev_addr)) {
+>>>>>>> v3.18
 				printk(KERN_DEBUG "Odd.. FromDS packet "
 				       "received with own BSSID\n");
 				hostap_dump_rx_80211(dev->name, skb, rx_stats);
@@ -3044,7 +3096,11 @@ ap_rx_ret hostap_handle_sta_rx(local_info_t *local, struct net_device *dev,
 			goto out;
 		}
 	} else if (stype == IEEE80211_STYPE_NULLFUNC && sta == NULL &&
+<<<<<<< HEAD
 		   memcmp(hdr->addr1, dev->dev_addr, ETH_ALEN) == 0) {
+=======
+		   ether_addr_equal(hdr->addr1, dev->dev_addr)) {
+>>>>>>> v3.18
 
 		if (local->hostapd) {
 			prism2_rx_80211(local->apdev, skb, rx_stats,
@@ -3073,7 +3129,11 @@ ap_rx_ret hostap_handle_sta_rx(local_info_t *local, struct net_device *dev,
 		/* If BSSID (Addr3) is foreign, this frame is a normal
 		 * broadcast frame from an IBSS network. Drop it silently.
 		 * If BSSID is own, report the dropping of this frame. */
+<<<<<<< HEAD
 		if (memcmp(hdr->addr3, dev->dev_addr, ETH_ALEN) == 0) {
+=======
+		if (ether_addr_equal(hdr->addr3, dev->dev_addr)) {
+>>>>>>> v3.18
 			printk(KERN_DEBUG "%s: dropped received packet from %pM"
 			       " with no ToDS flag "
 			       "(type=0x%02x, subtype=0x%02x)\n", dev->name,

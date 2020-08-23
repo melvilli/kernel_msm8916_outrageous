@@ -183,7 +183,12 @@ static size_t callchain__fprintf_graph(FILE *fp, struct rb_root *root,
 			 * the symbol. No need to print it otherwise it appears as
 			 * displayed twice.
 			 */
+<<<<<<< HEAD
 			if (!i++ && sort__first_dimension == SORT_SYM)
+=======
+			if (!i++ && field_order == NULL &&
+			    sort_order && !prefixcmp(sort_order, "sym"))
+>>>>>>> v3.18
 				continue;
 			if (!printed) {
 				ret += callchain__fprintf_left_margin(fp, left_margin);
@@ -213,13 +218,18 @@ static size_t callchain__fprintf_graph(FILE *fp, struct rb_root *root,
 	return ret;
 }
 
+<<<<<<< HEAD
 static size_t __callchain__fprintf_flat(FILE *fp,
 					struct callchain_node *self,
+=======
+static size_t __callchain__fprintf_flat(FILE *fp, struct callchain_node *node,
+>>>>>>> v3.18
 					u64 total_samples)
 {
 	struct callchain_list *chain;
 	size_t ret = 0;
 
+<<<<<<< HEAD
 	if (!self)
 		return 0;
 
@@ -227,6 +237,15 @@ static size_t __callchain__fprintf_flat(FILE *fp,
 
 
 	list_for_each_entry(chain, &self->val, list) {
+=======
+	if (!node)
+		return 0;
+
+	ret += __callchain__fprintf_flat(fp, node->parent, total_samples);
+
+
+	list_for_each_entry(chain, &node->val, list) {
+>>>>>>> v3.18
 		if (chain->ip >= PERF_CONTEXT_MAX)
 			continue;
 		if (chain->ms.sym)
@@ -239,15 +258,25 @@ static size_t __callchain__fprintf_flat(FILE *fp,
 	return ret;
 }
 
+<<<<<<< HEAD
 static size_t callchain__fprintf_flat(FILE *fp, struct rb_root *self,
+=======
+static size_t callchain__fprintf_flat(FILE *fp, struct rb_root *tree,
+>>>>>>> v3.18
 				      u64 total_samples)
 {
 	size_t ret = 0;
 	u32 entries_printed = 0;
+<<<<<<< HEAD
 	struct rb_node *rb_node;
 	struct callchain_node *chain;
 
 	rb_node = rb_first(self);
+=======
+	struct callchain_node *chain;
+	struct rb_node *rb_node = rb_first(tree);
+
+>>>>>>> v3.18
 	while (rb_node) {
 		double percent;
 
@@ -272,7 +301,13 @@ static size_t hist_entry_callchain__fprintf(struct hist_entry *he,
 {
 	switch (callchain_param.mode) {
 	case CHAIN_GRAPH_REL:
+<<<<<<< HEAD
 		return callchain__fprintf_graph(fp, &he->sorted_chain, he->stat.period,
+=======
+		return callchain__fprintf_graph(fp, &he->sorted_chain,
+						symbol_conf.cumulate_callchain ?
+						he->stat_acc->period : he->stat.period,
+>>>>>>> v3.18
 						left_margin);
 		break;
 	case CHAIN_GRAPH_ABS:
@@ -298,6 +333,7 @@ static size_t hist_entry__callchain_fprintf(struct hist_entry *he,
 	int left_margin = 0;
 	u64 total_period = hists->stats.total_period;
 
+<<<<<<< HEAD
 	if (sort__first_dimension == SORT_COMM) {
 		struct sort_entry *se = list_first_entry(&hist_entry__sort_list,
 							 typeof(*se), list);
@@ -312,11 +348,71 @@ static int hist_entry__fprintf(struct hist_entry *he, size_t size,
 			       struct hists *hists, FILE *fp)
 {
 	char bf[512];
+=======
+	if (field_order == NULL && (sort_order == NULL ||
+				    !prefixcmp(sort_order, "comm"))) {
+		struct perf_hpp_fmt *fmt;
+
+		perf_hpp__for_each_format(fmt) {
+			if (!perf_hpp__is_sort_entry(fmt))
+				continue;
+
+			/* must be 'comm' sort entry */
+			left_margin = fmt->width(fmt, NULL, hists_to_evsel(hists));
+			left_margin -= thread__comm_len(he->thread);
+			break;
+		}
+	}
+	return hist_entry_callchain__fprintf(he, total_period, left_margin, fp);
+}
+
+static int hist_entry__snprintf(struct hist_entry *he, struct perf_hpp *hpp)
+{
+	const char *sep = symbol_conf.field_sep;
+	struct perf_hpp_fmt *fmt;
+	char *start = hpp->buf;
+	int ret;
+	bool first = true;
+
+	if (symbol_conf.exclude_other && !he->parent)
+		return 0;
+
+	perf_hpp__for_each_format(fmt) {
+		if (perf_hpp__should_skip(fmt))
+			continue;
+
+		/*
+		 * If there's no field_sep, we still need
+		 * to display initial '  '.
+		 */
+		if (!sep || !first) {
+			ret = scnprintf(hpp->buf, hpp->size, "%s", sep ?: "  ");
+			advance_hpp(hpp, ret);
+		} else
+			first = false;
+
+		if (perf_hpp__use_color() && fmt->color)
+			ret = fmt->color(fmt, hpp, he);
+		else
+			ret = fmt->entry(fmt, hpp, he);
+
+		advance_hpp(hpp, ret);
+	}
+
+	return hpp->buf - start;
+}
+
+static int hist_entry__fprintf(struct hist_entry *he, size_t size,
+			       struct hists *hists,
+			       char *bf, size_t bfsz, FILE *fp)
+{
+>>>>>>> v3.18
 	int ret;
 	struct perf_hpp hpp = {
 		.buf		= bf,
 		.size		= size,
 	};
+<<<<<<< HEAD
 	bool color = !symbol_conf.field_sep;
 
 	if (size == 0 || size > sizeof(bf))
@@ -324,6 +420,13 @@ static int hist_entry__fprintf(struct hist_entry *he, size_t size,
 
 	ret = hist_entry__period_snprintf(&hpp, he, color);
 	hist_entry__sort_snprintf(he, bf + ret, size - ret, hists);
+=======
+
+	if (size == 0 || size > bfsz)
+		size = hpp.size = bfsz;
+
+	hist_entry__snprintf(he, &hpp);
+>>>>>>> v3.18
 
 	ret = fprintf(fp, "%s\n", bf);
 
@@ -334,37 +437,69 @@ static int hist_entry__fprintf(struct hist_entry *he, size_t size,
 }
 
 size_t hists__fprintf(struct hists *hists, bool show_header, int max_rows,
+<<<<<<< HEAD
 		      int max_cols, FILE *fp)
 {
 	struct perf_hpp_fmt *fmt;
 	struct sort_entry *se;
+=======
+		      int max_cols, float min_pcnt, FILE *fp)
+{
+	struct perf_hpp_fmt *fmt;
+>>>>>>> v3.18
 	struct rb_node *nd;
 	size_t ret = 0;
 	unsigned int width;
 	const char *sep = symbol_conf.field_sep;
+<<<<<<< HEAD
 	const char *col_width = symbol_conf.col_width_list_str;
+=======
+>>>>>>> v3.18
 	int nr_rows = 0;
 	char bf[96];
 	struct perf_hpp dummy_hpp = {
 		.buf	= bf,
 		.size	= sizeof(bf),
+<<<<<<< HEAD
 		.ptr	= hists_to_evsel(hists),
 	};
 	bool first = true;
 
 	init_rem_hits();
 
+=======
+	};
+	bool first = true;
+	size_t linesz;
+	char *line = NULL;
+
+	init_rem_hits();
+
+	perf_hpp__for_each_format(fmt)
+		perf_hpp__reset_width(fmt, hists);
+
+	if (symbol_conf.col_width_list_str)
+		perf_hpp__set_user_width(symbol_conf.col_width_list_str);
+
+>>>>>>> v3.18
 	if (!show_header)
 		goto print_entries;
 
 	fprintf(fp, "# ");
 
 	perf_hpp__for_each_format(fmt) {
+<<<<<<< HEAD
+=======
+		if (perf_hpp__should_skip(fmt))
+			continue;
+
+>>>>>>> v3.18
 		if (!first)
 			fprintf(fp, "%s", sep ?: "  ");
 		else
 			first = false;
 
+<<<<<<< HEAD
 		fmt->header(&dummy_hpp);
 		fprintf(fp, "%s", bf);
 	}
@@ -391,6 +526,12 @@ size_t hists__fprintf(struct hists *hists, bool show_header, int max_rows,
 		fprintf(fp, "  %*s", width, se->se_header);
 	}
 
+=======
+		fmt->header(fmt, &dummy_hpp, hists_to_evsel(hists));
+		fprintf(fp, "%s", bf);
+	}
+
+>>>>>>> v3.18
 	fprintf(fp, "\n");
 	if (max_rows && ++nr_rows >= max_rows)
 		goto out;
@@ -405,11 +546,18 @@ size_t hists__fprintf(struct hists *hists, bool show_header, int max_rows,
 	perf_hpp__for_each_format(fmt) {
 		unsigned int i;
 
+<<<<<<< HEAD
+=======
+		if (perf_hpp__should_skip(fmt))
+			continue;
+
+>>>>>>> v3.18
 		if (!first)
 			fprintf(fp, "%s", sep ?: "  ");
 		else
 			first = false;
 
+<<<<<<< HEAD
 		width = fmt->width(&dummy_hpp);
 		for (i = 0; i < width; i++)
 			fprintf(fp, ".");
@@ -425,6 +573,9 @@ size_t hists__fprintf(struct hists *hists, bool show_header, int max_rows,
 		width = hists__col_len(hists, se->se_width_idx);
 		if (width == 0)
 			width = strlen(se->se_header);
+=======
+		width = fmt->width(fmt, &dummy_hpp, hists_to_evsel(hists));
+>>>>>>> v3.18
 		for (i = 0; i < width; i++)
 			fprintf(fp, ".");
 	}
@@ -438,12 +589,27 @@ size_t hists__fprintf(struct hists *hists, bool show_header, int max_rows,
 		goto out;
 
 print_entries:
+<<<<<<< HEAD
 	for (nd = rb_first(&hists->entries); nd; nd = rb_next(nd)) {
 		struct hist_entry *h = rb_entry(nd, struct hist_entry, rb_node);
+=======
+	linesz = hists__sort_list_width(hists) + 3 + 1;
+	linesz += perf_hpp__color_overhead();
+	line = malloc(linesz);
+	if (line == NULL) {
+		ret = -1;
+		goto out;
+	}
+
+	for (nd = rb_first(&hists->entries); nd; nd = rb_next(nd)) {
+		struct hist_entry *h = rb_entry(nd, struct hist_entry, rb_node);
+		float percent;
+>>>>>>> v3.18
 
 		if (h->filtered)
 			continue;
 
+<<<<<<< HEAD
 		ret += hist_entry__fprintf(h, max_cols, hists, fp);
 
 		if (max_rows && ++nr_rows >= max_rows)
@@ -457,6 +623,27 @@ print_entries:
 	}
 out:
 	free(rem_sq_bracket);
+=======
+		percent = hist_entry__get_percent_limit(h);
+		if (percent < min_pcnt)
+			continue;
+
+		ret += hist_entry__fprintf(h, max_cols, hists, line, linesz, fp);
+
+		if (max_rows && ++nr_rows >= max_rows)
+			break;
+
+		if (h->ms.map == NULL && verbose > 1) {
+			__map_groups__fprintf_maps(h->thread->mg,
+						   MAP__FUNCTION, fp);
+			fprintf(fp, "%.10s end\n", graph_dotted_line);
+		}
+	}
+
+	free(line);
+out:
+	zfree(&rem_sq_bracket);
+>>>>>>> v3.18
 
 	return ret;
 }

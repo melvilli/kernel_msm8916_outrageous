@@ -112,7 +112,11 @@ static struct snd_seq_queue *queue_new(int owner, int locked)
 
 	q = kzalloc(sizeof(*q), GFP_KERNEL);
 	if (q == NULL) {
+<<<<<<< HEAD
 		snd_printd("malloc failed for snd_seq_queue_new()\n");
+=======
+		pr_debug("ALSA: seq: malloc failed for snd_seq_queue_new()\n");
+>>>>>>> v3.18
 		return NULL;
 	}
 
@@ -144,10 +148,15 @@ static struct snd_seq_queue *queue_new(int owner, int locked)
 static void queue_delete(struct snd_seq_queue *q)
 {
 	/* stop and release the timer */
+<<<<<<< HEAD
 	mutex_lock(&q->timer_mutex);
 	snd_seq_timer_stop(q->timer);
 	snd_seq_timer_close(q);
 	mutex_unlock(&q->timer_mutex);
+=======
+	snd_seq_timer_stop(q->timer);
+	snd_seq_timer_close(q);
+>>>>>>> v3.18
 	/* wait until access free */
 	snd_use_lock_sync(&q->use_lock);
 	/* release resources... */
@@ -183,8 +192,11 @@ void __exit snd_seq_queues_delete(void)
 	}
 }
 
+<<<<<<< HEAD
 static void queue_use(struct snd_seq_queue *queue, int client, int use);
 
+=======
+>>>>>>> v3.18
 /* allocate a new queue -
  * return queue index value or negative value for error
  */
@@ -196,11 +208,18 @@ int snd_seq_queue_alloc(int client, int locked, unsigned int info_flags)
 	if (q == NULL)
 		return -ENOMEM;
 	q->info_flags = info_flags;
+<<<<<<< HEAD
 	queue_use(q, client, 1);
+=======
+>>>>>>> v3.18
 	if (queue_list_add(q) < 0) {
 		queue_delete(q);
 		return -ENOMEM;
 	}
+<<<<<<< HEAD
+=======
+	snd_seq_queue_use(q->queue, client, 1); /* use this queue */
+>>>>>>> v3.18
 	return q->queue;
 }
 
@@ -506,9 +525,25 @@ int snd_seq_queue_timer_set_tempo(int queueid, int client,
 	return result;
 }
 
+<<<<<<< HEAD
 /* use or unuse this queue */
 static void queue_use(struct snd_seq_queue *queue, int client, int use)
 {
+=======
+
+/* use or unuse this queue -
+ * if it is the first client, starts the timer.
+ * if it is not longer used by any clients, stop the timer.
+ */
+int snd_seq_queue_use(int queueid, int client, int use)
+{
+	struct snd_seq_queue *queue;
+
+	queue = queueptr(queueid);
+	if (queue == NULL)
+		return -EINVAL;
+	mutex_lock(&queue->timer_mutex);
+>>>>>>> v3.18
 	if (use) {
 		if (!test_and_set_bit(client, queue->clients_bitmap))
 			queue->clients++;
@@ -523,6 +558,7 @@ static void queue_use(struct snd_seq_queue *queue, int client, int use)
 	} else {
 		snd_seq_timer_close(queue);
 	}
+<<<<<<< HEAD
 }
 
 /* use or unuse this queue -
@@ -538,6 +574,8 @@ int snd_seq_queue_use(int queueid, int client, int use)
 		return -EINVAL;
 	mutex_lock(&queue->timer_mutex);
 	queue_use(queue, client, use);
+=======
+>>>>>>> v3.18
 	mutex_unlock(&queue->timer_mutex);
 	queuefree(queue);
 	return 0;

@@ -1,8 +1,13 @@
 config F2FS_FS
+<<<<<<< HEAD
 	tristate "F2FS filesystem support"
 	depends on BLOCK
 	select CRYPTO
 	select CRYPTO_CRC32
+=======
+	tristate "F2FS filesystem support (EXPERIMENTAL)"
+	depends on BLOCK
+>>>>>>> v3.18
 	help
 	  F2FS is based on Log-structured File System (LFS), which supports
 	  versatile "flash-friendly" features. The design has been focused on
@@ -47,7 +52,11 @@ config F2FS_FS_POSIX_ACL
 	default y
 	help
 	  Posix Access Control Lists (ACLs) support permissions for users and
+<<<<<<< HEAD
 	  groups beyond the owner/group/world scheme.
+=======
+	  gourps beyond the owner/group/world scheme.
+>>>>>>> v3.18
 
 	  To learn more about Access Control Lists, visit the POSIX ACLs for
 	  Linux website <http://acl.bestbits.at/>.
@@ -73,6 +82,7 @@ config F2FS_CHECK_FS
 	  Enables BUG_ONs which check the filesystem consistency in runtime.
 
 	  If you want to improve the performance, say N.
+<<<<<<< HEAD
 
 config F2FS_FS_ENCRYPTION
 	bool "F2FS Encryption"
@@ -102,3 +112,5 @@ config F2FS_FAULT_INJECTION
 	  Test F2FS to inject faults such as ENOMEM, ENOSPC, and so on.
 
 	  If unsure, say N.
+=======
+>>>>>>> v3.18

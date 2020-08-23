@@ -10,6 +10,10 @@
 #include "../util/util.h"
 #include "../util/parse-options.h"
 #include "../util/header.h"
+<<<<<<< HEAD
+=======
+#include "../util/cloexec.h"
+>>>>>>> v3.18
 #include "bench.h"
 #include "mem-memcpy-arch.h"
 
@@ -58,7 +62,11 @@ struct routine routines[] = {
 	{ "default",
 	  "Default memcpy() provided by glibc",
 	  memcpy },
+<<<<<<< HEAD
 #ifdef ARCH_X86_64
+=======
+#ifdef HAVE_ARCH_X86_64_SUPPORT
+>>>>>>> v3.18
 
 #define MEMCPY_FN(fn, name, desc) { name, desc, fn },
 #include "mem-memcpy-x86-64-asm-def.h"
@@ -83,7 +91,12 @@ static struct perf_event_attr cycle_attr = {
 
 static void init_cycle(void)
 {
+<<<<<<< HEAD
 	cycle_fd = sys_perf_event_open(&cycle_attr, getpid(), -1, -1, 0);
+=======
+	cycle_fd = sys_perf_event_open(&cycle_attr, getpid(), -1, -1,
+				       perf_event_open_cloexec_flag());
+>>>>>>> v3.18
 
 	if (cycle_fd < 0 && errno == ENOSYS)
 		die("No CONFIG_PERF_EVENTS=y kernel support configured?\n");
@@ -111,12 +124,23 @@ static double timeval2double(struct timeval *ts)
 static void alloc_mem(void **dst, void **src, size_t length)
 {
 	*dst = zalloc(length);
+<<<<<<< HEAD
 	if (!dst)
 		die("memory allocation failed - maybe length is too large?\n");
 
 	*src = zalloc(length);
 	if (!src)
 		die("memory allocation failed - maybe length is too large?\n");
+=======
+	if (!*dst)
+		die("memory allocation failed - maybe length is too large?\n");
+
+	*src = zalloc(length);
+	if (!*src)
+		die("memory allocation failed - maybe length is too large?\n");
+	/* Make sure to always replace the zero pages even if MMAP_THRESH is crossed */
+	memset(*src, 0, length);
+>>>>>>> v3.18
 }
 
 static u64 do_memcpy_cycle(memcpy_t fn, size_t len, bool prefault)
@@ -187,6 +211,14 @@ int bench_mem_memcpy(int argc, const char **argv,
 	argc = parse_options(argc, argv, options,
 			     bench_mem_memcpy_usage, 0);
 
+<<<<<<< HEAD
+=======
+	if (no_prefault && only_prefault) {
+		fprintf(stderr, "Invalid options: -o and -n are mutually exclusive\n");
+		return 1;
+	}
+
+>>>>>>> v3.18
 	if (use_cycle)
 		init_cycle();
 

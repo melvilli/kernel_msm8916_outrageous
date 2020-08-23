@@ -1,5 +1,9 @@
 /**
+<<<<<<< HEAD
  * Copyright (C) 2005 - 2013 Emulex
+=======
+ * Copyright (C) 2005 - 2014 Emulex
+>>>>>>> v3.18
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or
@@ -83,9 +87,26 @@ static inline void queue_tail_inc(struct be_queue_info *q)
 
 /*ISCSI */
 
+<<<<<<< HEAD
 struct be_eq_obj {
 	bool todo_mcc_cq;
 	bool todo_cq;
+=======
+struct be_aic_obj {		/* Adaptive interrupt coalescing (AIC) info */
+	bool enable;
+	u32 min_eqd;		/* in usecs */
+	u32 max_eqd;		/* in usecs */
+	u32 prev_eqd;		/* in usecs */
+	u32 et_eqd;		/* configured val when aic is off */
+	ulong jiffs;
+	u64 eq_prev;		/* Used to calculate eqe */
+};
+
+struct be_eq_obj {
+	bool todo_mcc_cq;
+	bool todo_cq;
+	u32 cq_count;
+>>>>>>> v3.18
 	struct be_queue_info q;
 	struct beiscsi_hba *phba;
 	struct be_queue_info *cq;
@@ -98,6 +119,17 @@ struct be_mcc_obj {
 	struct be_queue_info cq;
 };
 
+<<<<<<< HEAD
+=======
+struct beiscsi_mcc_tag_state {
+#define MCC_TAG_STATE_COMPLETED 0x00
+#define MCC_TAG_STATE_RUNNING   0x01
+#define MCC_TAG_STATE_TIMEOUT   0x02
+	uint8_t tag_state;
+	struct be_dma_mem tag_mem_state;
+};
+
+>>>>>>> v3.18
 struct be_ctrl_info {
 	u8 __iomem *csr;
 	u8 __iomem *db;		/* Door Bell */
@@ -122,13 +154,23 @@ struct be_ctrl_info {
 	unsigned short mcc_alloc_index;
 	unsigned short mcc_free_index;
 	unsigned int mcc_tag_available;
+<<<<<<< HEAD
+=======
+
+	struct beiscsi_mcc_tag_state ptag_state[MAX_MCC_CMD + 1];
+>>>>>>> v3.18
 };
 
 #include "be_cmds.h"
 
 #define PAGE_SHIFT_4K 12
 #define PAGE_SIZE_4K (1 << PAGE_SHIFT_4K)
+<<<<<<< HEAD
 #define mcc_timeout		120000 /* 5s timeout */
+=======
+#define mcc_timeout		120000 /* 12s timeout */
+#define BEISCSI_LOGOUT_SYNC_DELAY	250
+>>>>>>> v3.18
 
 /* Returns number of pages spanned by the data starting at the given addr */
 #define PAGES_4K_SPANNED(_address, size)				\

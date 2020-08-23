@@ -33,6 +33,12 @@
  */
 
 /dts-v1/;
+<<<<<<< HEAD
+=======
+
+/include/ "e500v2_power_isa.dtsi"
+
+>>>>>>> v3.18
 / {
 	compatible = "fsl,BSC9131";
 	#address-cells = <2>;

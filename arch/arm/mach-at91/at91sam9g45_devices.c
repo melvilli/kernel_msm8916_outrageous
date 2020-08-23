@@ -25,19 +25,30 @@
 #include <linux/fb.h>
 #include <video/atmel_lcdc.h>
 
+<<<<<<< HEAD
 #include <mach/at91_adc.h>
+=======
+>>>>>>> v3.18
 #include <mach/at91sam9g45.h>
 #include <mach/at91sam9g45_matrix.h>
 #include <mach/at91_matrix.h>
 #include <mach/at91sam9_smc.h>
 #include <linux/platform_data/dma-atmel.h>
 #include <mach/atmel-mci.h>
+<<<<<<< HEAD
+=======
+#include <mach/hardware.h>
+>>>>>>> v3.18
 
 #include <media/atmel-isi.h>
 
 #include "board.h"
 #include "generic.h"
 #include "clock.h"
+<<<<<<< HEAD
+=======
+#include "gpio.h"
+>>>>>>> v3.18
 
 
 /* --------------------------------------------------------------------
@@ -965,7 +976,11 @@ void __init at91_add_device_isi(struct isi_platform_data *data,
 
 #if defined(CONFIG_FB_ATMEL) || defined(CONFIG_FB_ATMEL_MODULE)
 static u64 lcdc_dmamask = DMA_BIT_MASK(32);
+<<<<<<< HEAD
 static struct atmel_lcdfb_info lcdc_data;
+=======
+static struct atmel_lcdfb_pdata lcdc_data;
+>>>>>>> v3.18
 
 static struct resource lcdc_resources[] = {
 	[0] = {
@@ -991,7 +1006,11 @@ static struct platform_device at91_lcdc_device = {
 	.num_resources	= ARRAY_SIZE(lcdc_resources),
 };
 
+<<<<<<< HEAD
 void __init at91_add_device_lcdc(struct atmel_lcdfb_info *data)
+=======
+void __init at91_add_device_lcdc(struct atmel_lcdfb_pdata *data)
+>>>>>>> v3.18
 {
 	if (!data)
 		return;
@@ -1037,7 +1056,11 @@ void __init at91_add_device_lcdc(struct atmel_lcdfb_info *data)
 	platform_device_register(&at91_lcdc_device);
 }
 #else
+<<<<<<< HEAD
 void __init at91_add_device_lcdc(struct atmel_lcdfb_info *data) {}
+=======
+void __init at91_add_device_lcdc(struct atmel_lcdfb_pdata *data) {}
+>>>>>>> v3.18
 #endif
 
 
@@ -1132,6 +1155,7 @@ static void __init at91_add_device_rtc(void) {}
 
 
 /* --------------------------------------------------------------------
+<<<<<<< HEAD
  *  Touchscreen
  * -------------------------------------------------------------------- */
 
@@ -1184,6 +1208,9 @@ void __init at91_add_device_tsadcc(struct at91_tsadcc_data *data) {}
 
 /* --------------------------------------------------------------------
  *  ADC
+=======
+ *  ADC and touchscreen
+>>>>>>> v3.18
  * -------------------------------------------------------------------- */
 
 #if IS_ENABLED(CONFIG_AT91_ADC)
@@ -1203,7 +1230,11 @@ static struct resource adc_resources[] = {
 };
 
 static struct platform_device at91_adc_device = {
+<<<<<<< HEAD
 	.name		= "at91_adc",
+=======
+	.name		= "at91sam9g45-adc",
+>>>>>>> v3.18
 	.id		= -1,
 	.dev		= {
 				.platform_data	= &adc_data,
@@ -1235,6 +1266,7 @@ static struct at91_adc_trigger at91_adc_triggers[] = {
 	},
 };
 
+<<<<<<< HEAD
 static struct at91_adc_reg_desc at91_adc_register_g45 = {
 	.channel_base = AT91_ADC_CHR(0),
 	.drdy_mask = AT91_ADC_DRDY,
@@ -1242,6 +1274,8 @@ static struct at91_adc_reg_desc at91_adc_register_g45 = {
 	.trigger_register = 0x08,
 };
 
+=======
+>>>>>>> v3.18
 void __init at91_add_device_adc(struct at91_adc_data *data)
 {
 	if (!data)
@@ -1267,9 +1301,13 @@ void __init at91_add_device_adc(struct at91_adc_data *data)
 	if (data->use_external_triggers)
 		at91_set_A_periph(AT91_PIN_PD28, 0);
 
+<<<<<<< HEAD
 	data->num_channels = 8;
 	data->startup_time = 40;
 	data->registers = &at91_adc_register_g45;
+=======
+	data->startup_time = 40;
+>>>>>>> v3.18
 	data->trigger_number = 4;
 	data->trigger_list = at91_adc_triggers;
 
@@ -1393,9 +1431,13 @@ static void __init at91_add_device_watchdog(void) {}
  *  PWM
  * --------------------------------------------------------------------*/
 
+<<<<<<< HEAD
 #if defined(CONFIG_ATMEL_PWM) || defined(CONFIG_ATMEL_PWM_MODULE)
 static u32 pwm_mask;
 
+=======
+#if IS_ENABLED(CONFIG_PWM_ATMEL)
+>>>>>>> v3.18
 static struct resource pwm_resources[] = {
 	[0] = {
 		.start	= AT91SAM9G45_BASE_PWMC,
@@ -1410,11 +1452,16 @@ static struct resource pwm_resources[] = {
 };
 
 static struct platform_device at91sam9g45_pwm0_device = {
+<<<<<<< HEAD
 	.name	= "atmel_pwm",
 	.id	= -1,
 	.dev	= {
 		.platform_data		= &pwm_mask,
 	},
+=======
+	.name	= "at91sam9rl-pwm",
+	.id	= -1,
+>>>>>>> v3.18
 	.resource	= pwm_resources,
 	.num_resources	= ARRAY_SIZE(pwm_resources),
 };
@@ -1433,8 +1480,11 @@ void __init at91_add_device_pwm(u32 mask)
 	if (mask & (1 << AT91_PWM3))
 		at91_set_B_periph(AT91_PIN_PD0, 1);	/* enable PWM3 */
 
+<<<<<<< HEAD
 	pwm_mask = mask;
 
+=======
+>>>>>>> v3.18
 	platform_device_register(&at91sam9g45_pwm0_device);
 }
 #else

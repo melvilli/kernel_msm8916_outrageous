@@ -14,7 +14,10 @@
 #define pr_fmt(fmt) "SPEAr300: " fmt
 
 #include <linux/amba/pl08x.h>
+<<<<<<< HEAD
 #include <linux/irqchip.h>
+=======
+>>>>>>> v3.18
 #include <linux/of_platform.h>
 #include <asm/mach/arch.h>
 #include "generic.h"
@@ -212,7 +215,10 @@ static void __init spear300_map_io(void)
 
 DT_MACHINE_START(SPEAR300_DT, "ST SPEAr300 SoC with Flattened Device Tree")
 	.map_io		=	spear300_map_io,
+<<<<<<< HEAD
 	.init_irq	=	irqchip_init,
+=======
+>>>>>>> v3.18
 	.init_time	=	spear3xx_timer_init,
 	.init_machine	=	spear300_dt_init,
 	.restart	=	spear_restart,

@@ -12,8 +12,13 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+ * along with this program; if not, you can access it online at
+ * http://www.gnu.org/licenses/gpl-2.0.html.
+>>>>>>> v3.18
  *
  * Copyright IBM Corporation, 2008
  *
@@ -35,16 +40,23 @@
 #include <linux/time.h>
 #include <linux/cpu.h>
 #include <linux/prefetch.h>
+<<<<<<< HEAD
 
 #ifdef CONFIG_RCU_TRACE
 #include <trace/events/rcu.h>
 #endif /* #else #ifdef CONFIG_RCU_TRACE */
+=======
+#include <linux/ftrace_event.h>
+>>>>>>> v3.18
 
 #include "rcu.h"
 
 /* Forward declarations for tiny_plugin.h. */
 struct rcu_ctrlblk;
+<<<<<<< HEAD
 static void invoke_rcu_callbacks(void);
+=======
+>>>>>>> v3.18
 static void __rcu_process_callbacks(struct rcu_ctrlblk *rcp);
 static void rcu_process_callbacks(struct softirq_action *unused);
 static void __call_rcu(struct rcu_head *head,
@@ -55,27 +67,48 @@ static long long rcu_dynticks_nesting = DYNTICK_TASK_EXIT_IDLE;
 
 #include "tiny_plugin.h"
 
+<<<<<<< HEAD
 /* Common code for rcu_idle_enter() and rcu_irq_exit(), see kernel/rcutree.c. */
 static void rcu_idle_enter_common(long long newval)
 {
 	if (newval) {
 		RCU_TRACE(trace_rcu_dyntick("--=",
+=======
+/* Common code for rcu_idle_enter() and rcu_irq_exit(), see kernel/rcu/tree.c. */
+static void rcu_idle_enter_common(long long newval)
+{
+	if (newval) {
+		RCU_TRACE(trace_rcu_dyntick(TPS("--="),
+>>>>>>> v3.18
 					    rcu_dynticks_nesting, newval));
 		rcu_dynticks_nesting = newval;
 		return;
 	}
+<<<<<<< HEAD
 	RCU_TRACE(trace_rcu_dyntick("Start", rcu_dynticks_nesting, newval));
 	if (!is_idle_task(current)) {
 		struct task_struct *idle __maybe_unused = idle_task(smp_processor_id());
 
 		RCU_TRACE(trace_rcu_dyntick("Error on entry: not idle task",
+=======
+	RCU_TRACE(trace_rcu_dyntick(TPS("Start"),
+				    rcu_dynticks_nesting, newval));
+	if (IS_ENABLED(CONFIG_RCU_TRACE) && !is_idle_task(current)) {
+		struct task_struct *idle __maybe_unused = idle_task(smp_processor_id());
+
+		RCU_TRACE(trace_rcu_dyntick(TPS("Entry error: not idle task"),
+>>>>>>> v3.18
 					    rcu_dynticks_nesting, newval));
 		ftrace_dump(DUMP_ALL);
 		WARN_ONCE(1, "Current pid: %d comm: %s / Idle pid: %d comm: %s",
 			  current->pid, current->comm,
 			  idle->pid, idle->comm); /* must be idle task! */
 	}
+<<<<<<< HEAD
 	rcu_sched_qs(0); /* implies rcu_bh_qsctr_inc(0) */
+=======
+	rcu_sched_qs(); /* implies rcu_bh_inc() */
+>>>>>>> v3.18
 	barrier();
 	rcu_dynticks_nesting = newval;
 }
@@ -117,6 +150,7 @@ void rcu_irq_exit(void)
 }
 EXPORT_SYMBOL_GPL(rcu_irq_exit);
 
+<<<<<<< HEAD
 /* Common code for rcu_idle_exit() and rcu_irq_enter(), see kernel/rcutree.c. */
 static void rcu_idle_exit_common(long long oldval)
 {
@@ -130,6 +164,21 @@ static void rcu_idle_exit_common(long long oldval)
 		struct task_struct *idle __maybe_unused = idle_task(smp_processor_id());
 
 		RCU_TRACE(trace_rcu_dyntick("Error on exit: not idle task",
+=======
+/* Common code for rcu_idle_exit() and rcu_irq_enter(), see kernel/rcu/tree.c. */
+static void rcu_idle_exit_common(long long oldval)
+{
+	if (oldval) {
+		RCU_TRACE(trace_rcu_dyntick(TPS("++="),
+					    oldval, rcu_dynticks_nesting));
+		return;
+	}
+	RCU_TRACE(trace_rcu_dyntick(TPS("End"), oldval, rcu_dynticks_nesting));
+	if (IS_ENABLED(CONFIG_RCU_TRACE) && !is_idle_task(current)) {
+		struct task_struct *idle __maybe_unused = idle_task(smp_processor_id());
+
+		RCU_TRACE(trace_rcu_dyntick(TPS("Exit error: not idle task"),
+>>>>>>> v3.18
 			  oldval, rcu_dynticks_nesting));
 		ftrace_dump(DUMP_ALL);
 		WARN_ONCE(1, "Current pid: %d comm: %s / Idle pid: %d comm: %s",
@@ -175,11 +224,16 @@ void rcu_irq_enter(void)
 }
 EXPORT_SYMBOL_GPL(rcu_irq_enter);
 
+<<<<<<< HEAD
 #ifdef CONFIG_DEBUG_LOCK_ALLOC
+=======
+#if defined(CONFIG_DEBUG_LOCK_ALLOC) || defined(CONFIG_RCU_TRACE)
+>>>>>>> v3.18
 
 /*
  * Test whether RCU thinks that the current CPU is idle.
  */
+<<<<<<< HEAD
 int rcu_is_cpu_idle(void)
 {
 	return !rcu_dynticks_nesting;
@@ -187,6 +241,15 @@ int rcu_is_cpu_idle(void)
 EXPORT_SYMBOL(rcu_is_cpu_idle);
 
 #endif /* #ifdef CONFIG_DEBUG_LOCK_ALLOC */
+=======
+bool notrace __rcu_is_watching(void)
+{
+	return rcu_dynticks_nesting;
+}
+EXPORT_SYMBOL(__rcu_is_watching);
+
+#endif /* defined(CONFIG_DEBUG_LOCK_ALLOC) || defined(CONFIG_RCU_TRACE) */
+>>>>>>> v3.18
 
 /*
  * Test whether the current CPU was interrupted from idle.  Nested
@@ -205,7 +268,11 @@ static int rcu_is_cpu_rrupt_from_idle(void)
  */
 static int rcu_qsctr_help(struct rcu_ctrlblk *rcp)
 {
+<<<<<<< HEAD
 	reset_cpu_stall_ticks(rcp);
+=======
+	RCU_TRACE(reset_cpu_stall_ticks(rcp));
+>>>>>>> v3.18
 	if (rcp->rcucblist != NULL &&
 	    rcp->donetail != rcp->curtail) {
 		rcp->donetail = rcp->curtail;
@@ -220,27 +287,43 @@ static int rcu_qsctr_help(struct rcu_ctrlblk *rcp)
  * are at it, given that any rcu quiescent state is also an rcu_bh
  * quiescent state.  Use "+" instead of "||" to defeat short circuiting.
  */
+<<<<<<< HEAD
 void rcu_sched_qs(int cpu)
+=======
+void rcu_sched_qs(void)
+>>>>>>> v3.18
 {
 	unsigned long flags;
 
 	local_irq_save(flags);
 	if (rcu_qsctr_help(&rcu_sched_ctrlblk) +
 	    rcu_qsctr_help(&rcu_bh_ctrlblk))
+<<<<<<< HEAD
 		invoke_rcu_callbacks();
+=======
+		raise_softirq(RCU_SOFTIRQ);
+>>>>>>> v3.18
 	local_irq_restore(flags);
 }
 
 /*
  * Record an rcu_bh quiescent state.
  */
+<<<<<<< HEAD
 void rcu_bh_qs(int cpu)
+=======
+void rcu_bh_qs(void)
+>>>>>>> v3.18
 {
 	unsigned long flags;
 
 	local_irq_save(flags);
 	if (rcu_qsctr_help(&rcu_bh_ctrlblk))
+<<<<<<< HEAD
 		invoke_rcu_callbacks();
+=======
+		raise_softirq(RCU_SOFTIRQ);
+>>>>>>> v3.18
 	local_irq_restore(flags);
 }
 
@@ -252,12 +335,22 @@ void rcu_bh_qs(int cpu)
  */
 void rcu_check_callbacks(int cpu, int user)
 {
+<<<<<<< HEAD
 	check_cpu_stalls();
 	if (user || rcu_is_cpu_rrupt_from_idle())
 		rcu_sched_qs(cpu);
 	else if (!in_softirq())
 		rcu_bh_qs(cpu);
 	rcu_preempt_check_callbacks();
+=======
+	RCU_TRACE(check_cpu_stalls());
+	if (user || rcu_is_cpu_rrupt_from_idle())
+		rcu_sched_qs();
+	else if (!in_softirq())
+		rcu_bh_qs();
+	if (user)
+		rcu_note_voluntary_context_switch(current);
+>>>>>>> v3.18
 }
 
 /*
@@ -266,7 +359,11 @@ void rcu_check_callbacks(int cpu, int user)
  */
 static void __rcu_process_callbacks(struct rcu_ctrlblk *rcp)
 {
+<<<<<<< HEAD
 	char *rn = NULL;
+=======
+	const char *rn = NULL;
+>>>>>>> v3.18
 	struct rcu_head *next, *list;
 	unsigned long flags;
 	RCU_TRACE(int cb_count = 0);
@@ -275,10 +372,17 @@ static void __rcu_process_callbacks(struct rcu_ctrlblk *rcp)
 	if (&rcp->rcucblist == rcp->donetail) {
 		RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, 0, -1));
 		RCU_TRACE(trace_rcu_batch_end(rcp->name, 0,
+<<<<<<< HEAD
 					      ACCESS_ONCE(rcp->rcucblist),
 					      need_resched(),
 					      is_idle_task(current),
 					      rcu_is_callbacks_kthread()));
+=======
+					      !!ACCESS_ONCE(rcp->rcucblist),
+					      need_resched(),
+					      is_idle_task(current),
+					      false));
+>>>>>>> v3.18
 		return;
 	}
 
@@ -290,7 +394,10 @@ static void __rcu_process_callbacks(struct rcu_ctrlblk *rcp)
 	*rcp->donetail = NULL;
 	if (rcp->curtail == rcp->donetail)
 		rcp->curtail = &rcp->rcucblist;
+<<<<<<< HEAD
 	rcu_preempt_remove_callbacks(rcp);
+=======
+>>>>>>> v3.18
 	rcp->donetail = &rcp->rcucblist;
 	local_irq_restore(flags);
 
@@ -307,16 +414,26 @@ static void __rcu_process_callbacks(struct rcu_ctrlblk *rcp)
 		RCU_TRACE(cb_count++);
 	}
 	RCU_TRACE(rcu_trace_sub_qlen(rcp, cb_count));
+<<<<<<< HEAD
 	RCU_TRACE(trace_rcu_batch_end(rcp->name, cb_count, 0, need_resched(),
 				      is_idle_task(current),
 				      rcu_is_callbacks_kthread()));
+=======
+	RCU_TRACE(trace_rcu_batch_end(rcp->name,
+				      cb_count, 0, need_resched(),
+				      is_idle_task(current),
+				      false));
+>>>>>>> v3.18
 }
 
 static void rcu_process_callbacks(struct softirq_action *unused)
 {
 	__rcu_process_callbacks(&rcu_sched_ctrlblk);
 	__rcu_process_callbacks(&rcu_bh_ctrlblk);
+<<<<<<< HEAD
 	rcu_preempt_process_callbacks();
+=======
+>>>>>>> v3.18
 }
 
 /*
@@ -382,3 +499,11 @@ void call_rcu_bh(struct rcu_head *head, void (*func)(struct rcu_head *rcu))
 	__call_rcu(head, func, &rcu_bh_ctrlblk);
 }
 EXPORT_SYMBOL_GPL(call_rcu_bh);
+<<<<<<< HEAD
+=======
+
+void rcu_init(void)
+{
+	open_softirq(RCU_SOFTIRQ, rcu_process_callbacks);
+}
+>>>>>>> v3.18

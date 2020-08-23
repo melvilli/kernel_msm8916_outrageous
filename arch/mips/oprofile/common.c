@@ -12,6 +12,10 @@
 #include <linux/oprofile.h>
 #include <linux/smp.h>
 #include <asm/cpu-info.h>
+<<<<<<< HEAD
+=======
+#include <asm/cpu-type.h>
+>>>>>>> v3.18
 
 #include "op_impl.h"
 
@@ -33,7 +37,11 @@ static int op_mips_setup(void)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int op_mips_create_files(struct super_block *sb, struct dentry *root)
+=======
+static int op_mips_create_files(struct dentry *root)
+>>>>>>> v3.18
 {
 	int i;
 
@@ -42,6 +50,7 @@ static int op_mips_create_files(struct super_block *sb, struct dentry *root)
 		char buf[4];
 
 		snprintf(buf, sizeof buf, "%d", i);
+<<<<<<< HEAD
 		dir = oprofilefs_mkdir(sb, root, buf);
 
 		oprofilefs_create_ulong(sb, dir, "enabled", &ctr[i].enabled);
@@ -52,6 +61,18 @@ static int op_mips_create_files(struct super_block *sb, struct dentry *root)
 		oprofilefs_create_ulong(sb, dir, "exl", &ctr[i].exl);
 		/* Dummy.  */
 		oprofilefs_create_ulong(sb, dir, "unit_mask", &ctr[i].unit_mask);
+=======
+		dir = oprofilefs_mkdir(root, buf);
+
+		oprofilefs_create_ulong(dir, "enabled", &ctr[i].enabled);
+		oprofilefs_create_ulong(dir, "event", &ctr[i].event);
+		oprofilefs_create_ulong(dir, "count", &ctr[i].count);
+		oprofilefs_create_ulong(dir, "kernel", &ctr[i].kernel);
+		oprofilefs_create_ulong(dir, "user", &ctr[i].user);
+		oprofilefs_create_ulong(dir, "exl", &ctr[i].exl);
+		/* Dummy.  */
+		oprofilefs_create_ulong(dir, "unit_mask", &ctr[i].unit_mask);
+>>>>>>> v3.18
 	}
 
 	return 0;
@@ -85,6 +106,14 @@ int __init oprofile_arch_init(struct oprofile_operations *ops)
 	case CPU_34K:
 	case CPU_1004K:
 	case CPU_74K:
+<<<<<<< HEAD
+=======
+	case CPU_1074K:
+	case CPU_INTERAPTIV:
+	case CPU_PROAPTIV:
+	case CPU_P5600:
+	case CPU_M5150:
+>>>>>>> v3.18
 	case CPU_LOONGSON1:
 	case CPU_SB1:
 	case CPU_SB1A:

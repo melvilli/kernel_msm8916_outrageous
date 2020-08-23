@@ -69,14 +69,27 @@ struct thread_info {
 #define init_stack		(init_thread_union.stack)
 
 /*
+<<<<<<< HEAD
+=======
+ * how to get the current stack pointer from C
+ */
+register unsigned long current_stack_pointer asm ("sp");
+
+/*
+>>>>>>> v3.18
  * how to get the thread information struct from C
  */
 static inline struct thread_info *current_thread_info(void) __attribute_const__;
 
 static inline struct thread_info *current_thread_info(void)
 {
+<<<<<<< HEAD
 	register unsigned long sp asm ("sp");
 	return (struct thread_info *)(sp & ~(THREAD_SIZE - 1));
+=======
+	return (struct thread_info *)
+		(current_stack_pointer & ~(THREAD_SIZE - 1));
+>>>>>>> v3.18
 }
 
 #define thread_saved_pc(tsk)	\
@@ -89,12 +102,15 @@ static inline struct thread_info *current_thread_info(void)
 #endif
 
 /*
+<<<<<<< HEAD
  * We use bit 30 of the preempt_count to indicate that kernel
  * preemption is occurring.  See <asm/hardirq.h>.
  */
 #define PREEMPT_ACTIVE	0x40000000
 
 /*
+=======
+>>>>>>> v3.18
  * thread information flags:
  *  TIF_SYSCALL_TRACE	- syscall trace active
  *  TIF_SYSCALL_TRACEPOINT - syscall tracepoint for ftrace
@@ -108,6 +124,11 @@ static inline struct thread_info *current_thread_info(void)
 #define TIF_SIGPENDING		0
 #define TIF_NEED_RESCHED	1
 #define TIF_NOTIFY_RESUME	2	/* callback before returning to user */
+<<<<<<< HEAD
+=======
+#define TIF_FOREIGN_FPSTATE	3	/* CPU's FP state is not current's */
+#define TIF_NOHZ		7
+>>>>>>> v3.18
 #define TIF_SYSCALL_TRACE	8
 #define TIF_SYSCALL_AUDIT	9
 #define TIF_SYSCALL_TRACEPOINT	10
@@ -118,11 +139,19 @@ static inline struct thread_info *current_thread_info(void)
 #define TIF_SINGLESTEP		21
 #define TIF_32BIT		22	/* 32bit process */
 #define TIF_SWITCH_MM		23	/* deferred switch_mm */
+<<<<<<< HEAD
 #define TIF_MM_RELEASED		24
+=======
+>>>>>>> v3.18
 
 #define _TIF_SIGPENDING		(1 << TIF_SIGPENDING)
 #define _TIF_NEED_RESCHED	(1 << TIF_NEED_RESCHED)
 #define _TIF_NOTIFY_RESUME	(1 << TIF_NOTIFY_RESUME)
+<<<<<<< HEAD
+=======
+#define _TIF_FOREIGN_FPSTATE	(1 << TIF_FOREIGN_FPSTATE)
+#define _TIF_NOHZ		(1 << TIF_NOHZ)
+>>>>>>> v3.18
 #define _TIF_SYSCALL_TRACE	(1 << TIF_SYSCALL_TRACE)
 #define _TIF_SYSCALL_AUDIT	(1 << TIF_SYSCALL_AUDIT)
 #define _TIF_SYSCALL_TRACEPOINT	(1 << TIF_SYSCALL_TRACEPOINT)
@@ -130,10 +159,18 @@ static inline struct thread_info *current_thread_info(void)
 #define _TIF_32BIT		(1 << TIF_32BIT)
 
 #define _TIF_WORK_MASK		(_TIF_NEED_RESCHED | _TIF_SIGPENDING | \
+<<<<<<< HEAD
 				 _TIF_NOTIFY_RESUME)
 
 #define _TIF_SYSCALL_WORK	(_TIF_SYSCALL_TRACE | _TIF_SYSCALL_AUDIT | \
 				 _TIF_SYSCALL_TRACEPOINT | _TIF_SECCOMP)
+=======
+				 _TIF_NOTIFY_RESUME | _TIF_FOREIGN_FPSTATE)
+
+#define _TIF_SYSCALL_WORK	(_TIF_SYSCALL_TRACE | _TIF_SYSCALL_AUDIT | \
+				 _TIF_SYSCALL_TRACEPOINT | _TIF_SECCOMP | \
+				 _TIF_NOHZ)
+>>>>>>> v3.18
 
 #endif /* __KERNEL__ */
 #endif /* __ASM_THREAD_INFO_H */

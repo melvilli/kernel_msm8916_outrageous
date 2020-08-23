@@ -83,7 +83,11 @@ static int rds_release(struct socket *sock)
 
 	/*
 	 * the binding lookup hash uses rcu, we need to
+<<<<<<< HEAD
 	 * make sure we sychronize_rcu before we free our
+=======
+	 * make sure we synchronize_rcu before we free our
+>>>>>>> v3.18
 	 * entry
 	 */
 	rds_remove_bound(rs);

@@ -14,6 +14,11 @@ struct page;
 void *srmmu_get_nocache(int size, int align);
 void srmmu_free_nocache(void *addr, int size);
 
+<<<<<<< HEAD
+=======
+extern struct resource sparc_iomap;
+
+>>>>>>> v3.18
 #define check_pgt_cache()	do { } while (0)
 
 pgd_t *get_pgd_fast(void);

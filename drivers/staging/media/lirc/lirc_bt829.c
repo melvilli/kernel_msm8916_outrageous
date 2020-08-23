@@ -63,14 +63,23 @@ static bool debug;
 	} while (0)
 
 static int atir_minor;
+<<<<<<< HEAD
 static unsigned long pci_addr_phys;
 static unsigned char *pci_addr_lin;
+=======
+static phys_addr_t pci_addr_phys;
+static unsigned char __iomem *pci_addr_lin;
+>>>>>>> v3.18
 
 static struct lirc_driver atir_driver;
 
 static struct pci_dev *do_pci_probe(void)
 {
 	struct pci_dev *my_dev;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	my_dev = pci_get_device(PCI_VENDOR_ID_ATI,
 				PCI_DEVICE_ID_ATI_264VT, NULL);
 	if (my_dev) {
@@ -78,11 +87,19 @@ static struct pci_dev *do_pci_probe(void)
 		pci_addr_phys = 0;
 		if (my_dev->resource[0].flags & IORESOURCE_MEM) {
 			pci_addr_phys = my_dev->resource[0].start;
+<<<<<<< HEAD
 			pr_info("memory at 0x%08X\n",
 			       (unsigned int)pci_addr_phys);
 		}
 		if (pci_addr_phys == 0) {
 			pr_err("no memory resource ?\n");
+=======
+			pr_info("memory at %pa\n", &pci_addr_phys);
+		}
+		if (pci_addr_phys == 0) {
+			pr_err("no memory resource ?\n");
+			pci_dev_put(my_dev);
+>>>>>>> v3.18
 			return NULL;
 		}
 	} else {
@@ -96,6 +113,10 @@ static int atir_add_to_buf(void *data, struct lirc_buffer *buf)
 {
 	unsigned char key;
 	int status;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	status = poll_main();
 	key = (status >> 8) & 0xFF;
 	if (status & 0xFF) {
@@ -120,19 +141,38 @@ static void atir_set_use_dec(void *data)
 int init_module(void)
 {
 	struct pci_dev *pdev;
+<<<<<<< HEAD
+=======
+	int rc;
+>>>>>>> v3.18
 
 	pdev = do_pci_probe();
 	if (pdev == NULL)
 		return -ENODEV;
 
+<<<<<<< HEAD
 	if (!atir_init_start())
 		return -ENODEV;
+=======
+	rc = pci_enable_device(pdev);
+	if (rc)
+		goto err_put_dev;
+
+	if (!atir_init_start()) {
+		rc = -ENODEV;
+		goto err_disable;
+	}
+>>>>>>> v3.18
 
 	strcpy(atir_driver.name, "ATIR");
 	atir_driver.minor       = -1;
 	atir_driver.code_length = 8;
 	atir_driver.sample_rate = 10;
+<<<<<<< HEAD
 	atir_driver.data        = 0;
+=======
+	atir_driver.data        = NULL;
+>>>>>>> v3.18
 	atir_driver.add_to_buf  = atir_add_to_buf;
 	atir_driver.set_use_inc = atir_set_use_inc;
 	atir_driver.set_use_dec = atir_set_use_dec;
@@ -142,24 +182,53 @@ int init_module(void)
 	atir_minor = lirc_register_driver(&atir_driver);
 	if (atir_minor < 0) {
 		pr_err("failed to register driver!\n");
+<<<<<<< HEAD
 		return atir_minor;
+=======
+		rc = atir_minor;
+		goto err_unmap;
+>>>>>>> v3.18
 	}
 	dprintk("driver is registered on minor %d\n", atir_minor);
 
 	return 0;
+<<<<<<< HEAD
+=======
+
+err_unmap:
+	iounmap(pci_addr_lin);
+err_disable:
+	pci_disable_device(pdev);
+err_put_dev:
+	pci_dev_put(pdev);
+	return rc;
+>>>>>>> v3.18
 }
 
 
 void cleanup_module(void)
 {
+<<<<<<< HEAD
 	lirc_unregister_driver(atir_minor);
+=======
+	struct pci_dev *pdev = to_pci_dev(atir_driver.dev);
+
+	lirc_unregister_driver(atir_minor);
+	iounmap(pci_addr_lin);
+	pci_disable_device(pdev);
+	pci_dev_put(pdev);
+>>>>>>> v3.18
 }
 
 
 static int atir_init_start(void)
 {
 	pci_addr_lin = ioremap(pci_addr_phys + DATA_PCI_OFF, 0x400);
+<<<<<<< HEAD
 	if (pci_addr_lin == 0) {
+=======
+	if (!pci_addr_lin) {
+>>>>>>> v3.18
 		pr_info("pci mem must be mapped\n");
 		return 0;
 	}
@@ -208,6 +277,10 @@ static void do_i2c_start(void)
 static void do_i2c_stop(void)
 {
 	unsigned char bits;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	bits =  do_get_bits() & 0xFD;
 	do_set_bits(bits);
 	cycle_delay(1);
@@ -312,6 +385,10 @@ static unsigned char seems_rd_byte(void)
 static void do_set_bits(unsigned char new_bits)
 {
 	int reg_val;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	reg_val = read_index(0x34);
 	if (new_bits & 2) {
 		reg_val &= 0xFFFFFFDF;
@@ -361,17 +438,29 @@ static unsigned char do_get_bits(void)
 
 static unsigned int read_index(unsigned char index)
 {
+<<<<<<< HEAD
 	unsigned char *addr;
 	unsigned int value;
 	/*  addr = pci_addr_lin + DATA_PCI_OFF + ((index & 0xFF) << 2); */
 	addr = pci_addr_lin + ((index & 0xFF) << 2);
 	value = readl(addr);
 	return value;
+=======
+	unsigned char __iomem *addr;
+	/*  addr = pci_addr_lin + DATA_PCI_OFF + ((index & 0xFF) << 2); */
+	addr = pci_addr_lin + ((index & 0xFF) << 2);
+	return readl(addr);
+>>>>>>> v3.18
 }
 
 static void write_index(unsigned char index, unsigned int reg_val)
 {
+<<<<<<< HEAD
 	unsigned char *addr;
+=======
+	unsigned char __iomem *addr;
+
+>>>>>>> v3.18
 	addr = pci_addr_lin + ((index & 0xFF) << 2);
 	writel(reg_val, addr);
 }

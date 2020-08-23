@@ -14,12 +14,20 @@ obj-y				:= sead3-lcd.o sead3-display.o sead3-init.o \
 				   sead3-setup.o sead3-time.o
 
 obj-y				+= sead3-i2c-dev.o sead3-i2c.o \
+<<<<<<< HEAD
 				   sead3-pic32-i2c-drv.o sead3-pic32-bus.o \
+=======
+>>>>>>> v3.18
 				   leds-sead3.o sead3-leds.o
 
 obj-$(CONFIG_EARLY_PRINTK)	+= sead3-console.o
 obj-$(CONFIG_USB_EHCI_HCD)	+= sead3-ehci.o
+<<<<<<< HEAD
 obj-$(CONFIG_OF)		+= sead3.dtb.o
 
 $(obj)/%.dtb: $(obj)/%.dts
 	$(call if_changed,dtc)
+=======
+
+CFLAGS_sead3-setup.o = -I$(src)/../../../scripts/dtc/libfdt
+>>>>>>> v3.18

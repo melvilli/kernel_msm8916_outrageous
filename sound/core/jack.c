@@ -25,13 +25,18 @@
 #include <sound/jack.h>
 #include <sound/core.h>
 
+<<<<<<< HEAD
 static int jack_switch_types[] = {
+=======
+static int jack_switch_types[SND_JACK_SWITCH_TYPES] = {
+>>>>>>> v3.18
 	SW_HEADPHONE_INSERT,
 	SW_MICROPHONE_INSERT,
 	SW_LINEOUT_INSERT,
 	SW_JACK_PHYSICAL_INSERT,
 	SW_VIDEOOUT_INSERT,
 	SW_LINEIN_INSERT,
+<<<<<<< HEAD
 	SW_HPHL_OVERCURRENT,
 	SW_HPHR_OVERCURRENT,
 	SW_UNSUPPORT_INSERT,
@@ -44,6 +49,16 @@ static int snd_jack_dev_free(struct snd_device *device)
 
 	if (jack->private_free)
 		jack->private_free(jack);
+=======
+};
+
+static int snd_jack_dev_disconnect(struct snd_device *device)
+{
+	struct snd_jack *jack = device->device_data;
+
+	if (!jack->input_dev)
+		return 0;
+>>>>>>> v3.18
 
 	/* If the input device is registered with the input subsystem
 	 * then we need to use a different deallocator. */
@@ -51,6 +66,21 @@ static int snd_jack_dev_free(struct snd_device *device)
 		input_unregister_device(jack->input_dev);
 	else
 		input_free_device(jack->input_dev);
+<<<<<<< HEAD
+=======
+	jack->input_dev = NULL;
+	return 0;
+}
+
+static int snd_jack_dev_free(struct snd_device *device)
+{
+	struct snd_jack *jack = device->device_data;
+
+	if (jack->private_free)
+		jack->private_free(jack);
+
+	snd_jack_dev_disconnect(device);
+>>>>>>> v3.18
 
 	kfree(jack->id);
 	kfree(jack);
@@ -114,6 +144,10 @@ int snd_jack_new(struct snd_card *card, const char *id, int type,
 	static struct snd_device_ops ops = {
 		.dev_free = snd_jack_dev_free,
 		.dev_register = snd_jack_dev_register,
+<<<<<<< HEAD
+=======
+		.dev_disconnect = snd_jack_dev_disconnect,
+>>>>>>> v3.18
 	};
 
 	jack = kzalloc(sizeof(struct snd_jack), GFP_KERNEL);
@@ -132,7 +166,11 @@ int snd_jack_new(struct snd_card *card, const char *id, int type,
 
 	jack->type = type;
 
+<<<<<<< HEAD
 	for (i = 0; i < ARRAY_SIZE(jack_switch_types); i++)
+=======
+	for (i = 0; i < SND_JACK_SWITCH_TYPES; i++)
+>>>>>>> v3.18
 		if (type & (1 << i))
 			input_set_capability(jack->input_dev, EV_SW,
 					     jack_switch_types[i]);

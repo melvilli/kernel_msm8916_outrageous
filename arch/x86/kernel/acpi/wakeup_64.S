@@ -73,7 +73,11 @@ ENTRY(do_suspend_lowlevel)
 	addq	$8, %rsp
 	movl	$3, %edi
 	xorl	%eax, %eax
+<<<<<<< HEAD
 	call	acpi_enter_sleep_state
+=======
+	call	x86_acpi_enter_sleep_state
+>>>>>>> v3.18
 	/* in case something went wrong, restore the machine status and go on */
 	jmp	resume_point
 

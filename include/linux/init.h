@@ -26,8 +26,13 @@
  * extern int initialize_foobar_device(int, int, int) __init;
  *
  * For initialized data:
+<<<<<<< HEAD
  * You should insert __initdata between the variable name and equal
  * sign followed by value, e.g.:
+=======
+ * You should insert __initdata or __initconst between the variable name
+ * and equal sign followed by value, e.g.:
+>>>>>>> v3.18
  *
  * static int init_variable __initdata = 0;
  * static const char linux_logo[] __initconst = { 0x32, 0x36, ... };
@@ -35,8 +40,11 @@
  * Don't forget to initialize data not at file scope, i.e. within a function,
  * as gcc otherwise puts the data into the bss section and not into the init
  * section.
+<<<<<<< HEAD
  * 
  * Also note, that this data cannot be "const".
+=======
+>>>>>>> v3.18
  */
 
 /* These are for everybody (although not all archs will actually
@@ -93,6 +101,7 @@
 
 #define __exit          __section(.exit.text) __exitused __cold notrace
 
+<<<<<<< HEAD
 /* Used for HOTPLUG_CPU */
 #define __cpuinit        __section(.cpuinit.text) __cold notrace
 #define __cpuinitdata    __section(.cpuinit.data)
@@ -100,6 +109,15 @@
 #define __cpuexit        __section(.cpuexit.text) __exitused __cold notrace
 #define __cpuexitdata    __section(.cpuexit.data)
 #define __cpuexitconst   __constsection(.cpuexit.rodata)
+=======
+/* temporary, until all users are removed */
+#define __cpuinit
+#define __cpuinitdata
+#define __cpuinitconst
+#define __cpuexit
+#define __cpuexitdata
+#define __cpuexitconst
+>>>>>>> v3.18
 
 /* Used for MEMORY_HOTPLUG */
 #define __meminit        __section(.meminit.text) __cold notrace
@@ -118,9 +136,14 @@
 #define __INITRODATA	.section	".init.rodata","a",%progbits
 #define __FINITDATA	.previous
 
+<<<<<<< HEAD
 #define __CPUINIT        .section	".cpuinit.text", "ax"
 #define __CPUINITDATA    .section	".cpuinit.data", "aw"
 #define __CPUINITRODATA  .section	".cpuinit.rodata", "a"
+=======
+/* temporary, until all users are removed */
+#define __CPUINIT
+>>>>>>> v3.18
 
 #define __MEMINIT        .section	".meminit.text", "ax"
 #define __MEMINITDATA    .section	".meminit.data", "aw"
@@ -154,6 +177,10 @@ extern unsigned int reset_devices;
 void setup_arch(char **);
 void prepare_namespace(void);
 void __init load_default_modules(void);
+<<<<<<< HEAD
+=======
+int __init init_rootfs(void);
+>>>>>>> v3.18
 
 extern void (*late_time_init)(void);
 
@@ -165,6 +192,26 @@ extern bool initcall_debug;
 
 #ifndef __ASSEMBLY__
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_LTO
+/* Work around a LTO gcc problem: when there is no reference to a variable
+ * in a module it will be moved to the end of the program. This causes
+ * reordering of initcalls which the kernel does not like.
+ * Add a dummy reference function to avoid this. The function is
+ * deleted by the linker.
+ */
+#define LTO_REFERENCE_INITCALL(x) \
+	; /* yes this is needed */			\
+	static __used __exit void *reference_##x(void)	\
+	{						\
+		return &x;				\
+	}
+#else
+#define LTO_REFERENCE_INITCALL(x)
+#endif
+
+>>>>>>> v3.18
 /* initcalls are now grouped by functionality into separate 
  * subsections. Ordering inside the subsections is determined
  * by link order. 
@@ -177,7 +224,12 @@ extern bool initcall_debug;
 
 #define __define_initcall(fn, id) \
 	static initcall_t __initcall_##fn##id __used \
+<<<<<<< HEAD
 	__attribute__((__section__(".initcall" #id ".init"))) = fn
+=======
+	__attribute__((__section__(".initcall" #id ".init"))) = fn; \
+	LTO_REFERENCE_INITCALL(__initcall_##fn##id)
+>>>>>>> v3.18
 
 /*
  * Early initcalls run before initializing SMP.
@@ -281,6 +333,7 @@ void __init parse_early_options(char *cmdline);
 
 #else /* MODULE */
 
+<<<<<<< HEAD
 /* Don't use these in loadable modules, but some people do... */
 #define early_initcall(fn)		module_init(fn)
 #define core_initcall(fn)		module_init(fn)
@@ -291,6 +344,32 @@ void __init parse_early_options(char *cmdline);
 #define device_initcall(fn)		module_init(fn)
 #define late_initcall(fn)		module_init(fn)
 
+=======
+/*
+ * In most cases loadable modules do not need custom
+ * initcall levels. There are still some valid cases where
+ * a driver may be needed early if built in, and does not
+ * matter when built as a loadable module. Like bus
+ * snooping debug drivers.
+ */
+#define early_initcall(fn)		module_init(fn)
+#define core_initcall(fn)		module_init(fn)
+#define core_initcall_sync(fn)		module_init(fn)
+#define postcore_initcall(fn)		module_init(fn)
+#define postcore_initcall_sync(fn)	module_init(fn)
+#define arch_initcall(fn)		module_init(fn)
+#define subsys_initcall(fn)		module_init(fn)
+#define subsys_initcall_sync(fn)	module_init(fn)
+#define fs_initcall(fn)			module_init(fn)
+#define fs_initcall_sync(fn)		module_init(fn)
+#define rootfs_initcall(fn)		module_init(fn)
+#define device_initcall(fn)		module_init(fn)
+#define device_initcall_sync(fn)	module_init(fn)
+#define late_initcall(fn)		module_init(fn)
+#define late_initcall_sync(fn)		module_init(fn)
+
+#define console_initcall(fn)		module_init(fn)
+>>>>>>> v3.18
 #define security_initcall(fn)		module_init(fn)
 
 /* Each module must use one module_init(). */

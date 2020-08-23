@@ -869,6 +869,7 @@ static void i5100_init_csrows(struct mem_ctl_info *mci)
 			       chan, rank, 0);
 
 		dimm->nr_pages = npages;
+<<<<<<< HEAD
 		if (npages) {
 			dimm->grain = 32;
 			dimm->dtype = (priv->mtr[chan][rank].width == 4) ?
@@ -879,6 +880,15 @@ static void i5100_init_csrows(struct mem_ctl_info *mci)
 				"DIMM%u",
 				i5100_rank_to_slot(mci, chan, rank));
 		}
+=======
+		dimm->grain = 32;
+		dimm->dtype = (priv->mtr[chan][rank].width == 4) ?
+				DEV_X4 : DEV_X8;
+		dimm->mtype = MEM_RDDR2;
+		dimm->edac_mode = EDAC_SECDED;
+		snprintf(dimm->label, sizeof(dimm->label), "DIMM%u",
+			 i5100_rank_to_slot(mci, chan, rank));
+>>>>>>> v3.18
 
 		edac_dbg(2, "dimm channel %d, rank %d, size %ld\n",
 			 chan, rank, (long)PAGES_TO_MiB(npages));
@@ -1213,7 +1223,11 @@ static void i5100_remove_one(struct pci_dev *pdev)
 	edac_mc_free(mci);
 }
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(i5100_pci_tbl) = {
+=======
+static const struct pci_device_id i5100_pci_tbl[] = {
+>>>>>>> v3.18
 	/* Device 16, Function 0, Channel 0 Memory Map, Error Flag/Mask, ... */
 	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_5100_16) },
 	{ 0, }

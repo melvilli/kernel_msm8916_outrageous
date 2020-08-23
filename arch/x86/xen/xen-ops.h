@@ -31,9 +31,18 @@ void xen_setup_kernel_pagetable(pgd_t *pgd, unsigned long max_pfn);
 void xen_reserve_top(void);
 extern unsigned long xen_max_p2m_pfn;
 
+<<<<<<< HEAD
 void xen_set_pat(u64);
 
 char * __init xen_memory_setup(void);
+=======
+void xen_mm_pin_all(void);
+void xen_mm_unpin_all(void);
+void xen_set_pat(u64);
+
+char * __init xen_memory_setup(void);
+char * xen_auto_xlated_memory_setup(void);
+>>>>>>> v3.18
 void __init xen_arch_setup(void);
 void xen_enable_sysenter(void);
 void xen_enable_syscall(void);
@@ -73,7 +82,11 @@ static inline void xen_hvm_smp_init(void) {}
 
 #ifdef CONFIG_PARAVIRT_SPINLOCKS
 void __init xen_init_spinlocks(void);
+<<<<<<< HEAD
 void __cpuinit xen_init_lock_cpu(int cpu);
+=======
+void xen_init_lock_cpu(int cpu);
+>>>>>>> v3.18
 void xen_uninit_lock_cpu(int cpu);
 #else
 static inline void xen_init_spinlocks(void)
@@ -102,12 +115,29 @@ static inline void __init xen_init_apic(void)
 }
 #endif
 
+<<<<<<< HEAD
 /* Declare an asm function, along with symbols needed to make it
    inlineable */
 #define DECL_ASM(ret, name, ...)		\
 	ret name(__VA_ARGS__);			\
 	extern char name##_end[];		\
 	extern char name##_reloc[]		\
+=======
+#ifdef CONFIG_XEN_EFI
+extern void xen_efi_init(void);
+#else
+static inline void __init xen_efi_init(void)
+{
+}
+#endif
+
+/* Declare an asm function, along with symbols needed to make it
+   inlineable */
+#define DECL_ASM(ret, name, ...)		\
+	__visible ret name(__VA_ARGS__);	\
+	extern char name##_end[] __visible;	\
+	extern char name##_reloc[] __visible
+>>>>>>> v3.18
 
 DECL_ASM(void, xen_irq_enable_direct, void);
 DECL_ASM(void, xen_irq_disable_direct, void);
@@ -115,6 +145,7 @@ DECL_ASM(unsigned long, xen_save_fl_direct, void);
 DECL_ASM(void, xen_restore_fl_direct, unsigned long);
 
 /* These are not functions, and cannot be called normally */
+<<<<<<< HEAD
 void xen_iret(void);
 void xen_sysexit(void);
 void xen_sysret32(void);
@@ -123,4 +154,15 @@ void xen_adjust_exception_frame(void);
 
 extern int xen_panic_handler_init(void);
 
+=======
+__visible void xen_iret(void);
+__visible void xen_sysexit(void);
+__visible void xen_sysret32(void);
+__visible void xen_sysret64(void);
+__visible void xen_adjust_exception_frame(void);
+
+extern int xen_panic_handler_init(void);
+
+void xen_pvh_secondary_vcpu_init(int cpu);
+>>>>>>> v3.18
 #endif /* XEN_OPS_H */

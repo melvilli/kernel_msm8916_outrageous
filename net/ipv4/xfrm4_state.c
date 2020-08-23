@@ -16,7 +16,11 @@
 
 static int xfrm4_init_flags(struct xfrm_state *x)
 {
+<<<<<<< HEAD
 	if (ipv4_config.no_pmtu_disc)
+=======
+	if (xs_net(x)->ipv4.sysctl_ip_no_pmtu_disc)
+>>>>>>> v3.18
 		x->props.flags |= XFRM_STATE_NOPMTUDISC;
 	return 0;
 }
@@ -83,6 +87,10 @@ static struct xfrm_state_afinfo xfrm4_state_afinfo = {
 	.extract_input		= xfrm4_extract_input,
 	.extract_output		= xfrm4_extract_output,
 	.transport_finish	= xfrm4_transport_finish,
+<<<<<<< HEAD
+=======
+	.local_error		= xfrm4_local_error,
+>>>>>>> v3.18
 };
 
 void __init xfrm4_state_init(void)

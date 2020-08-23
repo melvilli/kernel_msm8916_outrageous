@@ -23,7 +23,11 @@
 struct pt_regs {
 #ifdef CONFIG_32BIT
 	/* Pad bytes for argument save space on the stack. */
+<<<<<<< HEAD
 	unsigned long pad0[6];
+=======
+	unsigned long pad0[8];
+>>>>>>> v3.18
 #endif
 
 	/* Saved main processor registers. */
@@ -39,9 +43,12 @@ struct pt_regs {
 	unsigned long cp0_badvaddr;
 	unsigned long cp0_cause;
 	unsigned long cp0_epc;
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	unsigned long cp0_tcstatus;
 #endif /* CONFIG_MIPS_MT_SMTC */
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_CPU_CAVIUM_OCTEON
 	unsigned long long mpl[3];	  /* MTM{0,1,2} */
 	unsigned long long mtp[3];	  /* MTP{0,1,2} */
@@ -50,8 +57,15 @@ struct pt_regs {
 
 struct task_struct;
 
+<<<<<<< HEAD
 extern int ptrace_getregs(struct task_struct *child, __s64 __user *data);
 extern int ptrace_setregs(struct task_struct *child, __s64 __user *data);
+=======
+extern int ptrace_getregs(struct task_struct *child,
+	struct user_pt_regs __user *data);
+extern int ptrace_setregs(struct task_struct *child,
+	struct user_pt_regs __user *data);
+>>>>>>> v3.18
 
 extern int ptrace_getfpregs(struct task_struct *child, __u32 __user *data);
 extern int ptrace_setfpregs(struct task_struct *child, __u32 __user *data);
@@ -73,7 +87,11 @@ static inline int is_syscall_success(struct pt_regs *regs)
 
 static inline long regs_return_value(struct pt_regs *regs)
 {
+<<<<<<< HEAD
 	if (is_syscall_success(regs) || !user_mode(regs))
+=======
+	if (is_syscall_success(regs))
+>>>>>>> v3.18
 		return regs->regs[2];
 	else
 		return -regs->regs[2];
@@ -81,9 +99,14 @@ static inline long regs_return_value(struct pt_regs *regs)
 
 #define instruction_pointer(regs) ((regs)->cp0_epc)
 #define profile_pc(regs) instruction_pointer(regs)
+<<<<<<< HEAD
 #define user_stack_pointer(r) ((r)->regs[29])
 
 extern asmlinkage void syscall_trace_enter(struct pt_regs *regs);
+=======
+
+extern asmlinkage long syscall_trace_enter(struct pt_regs *regs, long syscall);
+>>>>>>> v3.18
 extern asmlinkage void syscall_trace_leave(struct pt_regs *regs);
 
 extern void die(const char *, struct pt_regs *) __noreturn;
@@ -100,4 +123,20 @@ static inline void die_if_kernel(const char *str, struct pt_regs *regs)
 	(struct pt_regs *)((sp | (THREAD_SIZE - 1)) + 1 - 32) - 1;	\
 })
 
+<<<<<<< HEAD
+=======
+/* Helpers for working with the user stack pointer */
+
+static inline unsigned long user_stack_pointer(struct pt_regs *regs)
+{
+	return regs->regs[29];
+}
+
+static inline void user_stack_pointer_set(struct pt_regs *regs,
+	unsigned long val)
+{
+	regs->regs[29] = val;
+}
+
+>>>>>>> v3.18
 #endif /* _ASM_PTRACE_H */

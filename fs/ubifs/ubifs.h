@@ -42,6 +42,7 @@
 #define UBIFS_VERSION 1
 
 /* Normal UBIFS messages */
+<<<<<<< HEAD
 #define ubifs_msg(fmt, ubi_num, ...)				\
 		pr_notice("UBIFS-%d: " fmt "\n",		\
 		ubi_num, ##__VA_ARGS__)
@@ -56,6 +57,26 @@
 
 /* Used when device number is unknown or irrelevant */
 #define UBIFS_UNKNOWN_DEV_NUM -1
+=======
+#define ubifs_msg(fmt, ...) pr_notice("UBIFS: " fmt "\n", ##__VA_ARGS__)
+/* UBIFS error messages */
+#define ubifs_err(fmt, ...)                                         \
+	pr_err("UBIFS error (pid %d): %s: " fmt "\n", current->pid, \
+	       __func__, ##__VA_ARGS__)
+/* UBIFS warning messages */
+#define ubifs_warn(fmt, ...)                                        \
+	pr_warn("UBIFS warning (pid %d): %s: " fmt "\n",            \
+		current->pid, __func__, ##__VA_ARGS__)
+/*
+ * A variant of 'ubifs_err()' which takes the UBIFS file-sytem description
+ * object as an argument.
+ */
+#define ubifs_errc(c, fmt, ...)                                     \
+	do {                                                        \
+		if (!(c)->probing)                                  \
+			ubifs_err(fmt, ##__VA_ARGS__);              \
+	} while (0)
+>>>>>>> v3.18
 
 /* UBIFS file system VFS magic number */
 #define UBIFS_SUPER_MAGIC 0x24051905
@@ -310,7 +331,10 @@ struct ubifs_scan_node {
  * @nodes_cnt: number of nodes scanned
  * @nodes: list of struct ubifs_scan_node
  * @endpt: end point (and therefore the start of empty space)
+<<<<<<< HEAD
  * @ecc: read returned -EBADMSG
+=======
+>>>>>>> v3.18
  * @buf: buffer containing entire LEB scanned
  */
 struct ubifs_scan_leb {
@@ -318,7 +342,10 @@ struct ubifs_scan_leb {
 	int nodes_cnt;
 	struct list_head nodes;
 	int endpt;
+<<<<<<< HEAD
 	int ecc;
+=======
+>>>>>>> v3.18
 	void *buf;
 };
 
@@ -1213,6 +1240,10 @@ struct ubifs_debug_info;
  * @need_recovery: %1 if the file-system needs recovery
  * @replaying: %1 during journal replay
  * @mounting: %1 while mounting
+<<<<<<< HEAD
+=======
+ * @probing: %1 while attempting to mount if MS_SILENT mount flag is set
+>>>>>>> v3.18
  * @remounting_rw: %1 while re-mounting from R/O mode to R/W mode
  * @replay_list: temporary list used during journal replay
  * @replay_buds: list of buds to replay
@@ -1444,6 +1475,10 @@ struct ubifs_info {
 	unsigned int replaying:1;
 	unsigned int mounting:1;
 	unsigned int remounting_rw:1;
+<<<<<<< HEAD
+=======
+	unsigned int probing:1;
+>>>>>>> v3.18
 	struct list_head replay_list;
 	struct list_head replay_buds;
 	unsigned long long cs_sqnum;
@@ -1627,7 +1662,14 @@ int ubifs_tnc_start_commit(struct ubifs_info *c, struct ubifs_zbranch *zroot);
 int ubifs_tnc_end_commit(struct ubifs_info *c);
 
 /* shrinker.c */
+<<<<<<< HEAD
 int ubifs_shrinker(struct shrinker *shrink, struct shrink_control *sc);
+=======
+unsigned long ubifs_shrink_scan(struct shrinker *shrink,
+				struct shrink_control *sc);
+unsigned long ubifs_shrink_count(struct shrinker *shrink,
+				 struct shrink_control *sc);
+>>>>>>> v3.18
 
 /* commit.c */
 int ubifs_bg_thread(void *info);
@@ -1776,10 +1818,17 @@ long ubifs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg);
 /* compressor.c */
 int __init ubifs_compressors_init(void);
 void ubifs_compressors_exit(void);
+<<<<<<< HEAD
 void ubifs_compress(struct ubifs_info *c, const void *in_buf, int in_len,
 		    void *out_buf, int *out_len, int *compr_type);
 int ubifs_decompress(struct ubifs_info *c, const void *buf, int len, void *out,
 		     int *out_len, int compr_type);
+=======
+void ubifs_compress(const void *in_buf, int in_len, void *out_buf, int *out_len,
+		    int *compr_type);
+int ubifs_decompress(const void *buf, int len, void *out, int *out_len,
+		     int compr_type);
+>>>>>>> v3.18
 
 #include "debug.h"
 #include "misc.h"

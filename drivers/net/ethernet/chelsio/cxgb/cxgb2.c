@@ -11,8 +11,12 @@
  * published by the Free Software Foundation.                                *
  *                                                                           *
  * You should have received a copy of the GNU General Public License along   *
+<<<<<<< HEAD
  * with this program; if not, write to the Free Software Foundation, Inc.,   *
  * 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.                 *
+=======
+ * with this program; if not, see <http://www.gnu.org/licenses/>.            *
+>>>>>>> v3.18
  *                                                                           *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR IMPLIED    *
  * WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF      *
@@ -38,7 +42,10 @@
 
 #include "common.h"
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/pci.h>
 #include <linux/netdevice.h>
 #include <linux/etherdevice.h>
@@ -582,8 +589,13 @@ static int get_settings(struct net_device *dev, struct ethtool_cmd *cmd)
 		ethtool_cmd_speed_set(cmd, p->link_config.speed);
 		cmd->duplex = p->link_config.duplex;
 	} else {
+<<<<<<< HEAD
 		ethtool_cmd_speed_set(cmd, -1);
 		cmd->duplex = -1;
+=======
+		ethtool_cmd_speed_set(cmd, SPEED_UNKNOWN);
+		cmd->duplex = DUPLEX_UNKNOWN;
+>>>>>>> v3.18
 	}
 
 	cmd->port = (cmd->supported & SUPPORTED_TP) ? PORT_TP : PORT_FIBRE;
@@ -1102,7 +1114,11 @@ static int init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 
 		netif_napi_add(netdev, &adapter->napi, t1_poll, 64);
 
+<<<<<<< HEAD
 		SET_ETHTOOL_OPS(netdev, &t1_ethtool_ops);
+=======
+		netdev->ethtool_ops = &t1_ethtool_ops;
+>>>>>>> v3.18
 	}
 
 	if (t1_init_sw_modules(adapter, bi) < 0) {
@@ -1168,7 +1184,10 @@ out_free_dev:
 	pci_release_regions(pdev);
 out_disable_pdev:
 	pci_disable_device(pdev);
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	return err;
 }
 
@@ -1347,17 +1366,25 @@ static void remove_one(struct pci_dev *pdev)
 
 	pci_release_regions(pdev);
 	pci_disable_device(pdev);
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
 	t1_sw_reset(pdev);
 }
 
 static struct pci_driver driver = {
+=======
+	t1_sw_reset(pdev);
+}
+
+static struct pci_driver cxgb_pci_driver = {
+>>>>>>> v3.18
 	.name     = DRV_NAME,
 	.id_table = t1_pci_tbl,
 	.probe    = init_one,
 	.remove   = remove_one,
 };
 
+<<<<<<< HEAD
 static int __init t1_init_module(void)
 {
 	return pci_register_driver(&driver);
@@ -1370,3 +1397,6 @@ static void __exit t1_cleanup_module(void)
 
 module_init(t1_init_module);
 module_exit(t1_cleanup_module);
+=======
+module_pci_driver(cxgb_pci_driver);
+>>>>>>> v3.18

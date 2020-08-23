@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 /* linux/arch/arm/plat-samsung/include/plat/s3c64xx-spi.h
  *
+=======
+/*
+>>>>>>> v3.18
  * Copyright (C) 2009 Samsung Electronics Ltd.
  *	Jaswinder Singh <jassi.brar@samsung.com>
  *
@@ -8,8 +12,13 @@
  * published by the Free Software Foundation.
  */
 
+<<<<<<< HEAD
 #ifndef __S3C64XX_PLAT_SPI_H
 #define __S3C64XX_PLAT_SPI_H
+=======
+#ifndef __SPI_S3C64XX_H
+#define __SPI_S3C64XX_H
+>>>>>>> v3.18
 
 #include <linux/dmaengine.h>
 
@@ -68,4 +77,8 @@ extern int s3c64xx_spi2_cfg_gpio(void);
 extern struct s3c64xx_spi_info s3c64xx_spi0_pdata;
 extern struct s3c64xx_spi_info s3c64xx_spi1_pdata;
 extern struct s3c64xx_spi_info s3c64xx_spi2_pdata;
+<<<<<<< HEAD
 #endif /* __S3C64XX_PLAT_SPI_H */
+=======
+#endif /*__SPI_S3C64XX_H */
+>>>>>>> v3.18

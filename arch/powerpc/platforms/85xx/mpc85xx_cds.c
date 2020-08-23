@@ -385,6 +385,10 @@ define_machine(mpc85xx_cds) {
 #ifdef CONFIG_PCI
 	.restart	= mpc85xx_cds_restart,
 	.pcibios_fixup_bus	= mpc85xx_cds_fixup_bus,
+<<<<<<< HEAD
+=======
+	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
+>>>>>>> v3.18
 #else
 	.restart	= fsl_rstcr_restart,
 #endif

@@ -627,14 +627,24 @@ static void snd_opl3sa2_free(struct snd_card *card)
 	release_and_free_resource(chip->res_port);
 }
 
+<<<<<<< HEAD
 static int snd_opl3sa2_card_new(int dev, struct snd_card **cardp)
+=======
+static int snd_opl3sa2_card_new(struct device *pdev, int dev,
+				struct snd_card **cardp)
+>>>>>>> v3.18
 {
 	struct snd_card *card;
 	struct snd_opl3sa2 *chip;
 	int err;
 
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE,
 			      sizeof(struct snd_opl3sa2), &card);
+=======
+	err = snd_card_new(pdev, index[dev], id[dev], THIS_MODULE,
+			   sizeof(struct snd_opl3sa2), &card);
+>>>>>>> v3.18
 	if (err < 0)
 		return err;
 	strcpy(card->driver, "OPL3SA2");
@@ -737,14 +747,21 @@ static int snd_opl3sa2_pnp_detect(struct pnp_dev *pdev,
 	if (dev >= SNDRV_CARDS)
 		return -ENODEV;
 
+<<<<<<< HEAD
 	err = snd_opl3sa2_card_new(dev, &card);
+=======
+	err = snd_opl3sa2_card_new(&pdev->dev, dev, &card);
+>>>>>>> v3.18
 	if (err < 0)
 		return err;
 	if ((err = snd_opl3sa2_pnp(dev, card->private_data, pdev)) < 0) {
 		snd_card_free(card);
 		return err;
 	}
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pdev->dev);
+=======
+>>>>>>> v3.18
 	if ((err = snd_opl3sa2_probe(card, dev)) < 0) {
 		snd_card_free(card);
 		return err;
@@ -757,7 +774,10 @@ static int snd_opl3sa2_pnp_detect(struct pnp_dev *pdev,
 static void snd_opl3sa2_pnp_remove(struct pnp_dev *pdev)
 {
 	snd_card_free(pnp_get_drvdata(pdev));
+<<<<<<< HEAD
 	pnp_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_PM
@@ -803,14 +823,21 @@ static int snd_opl3sa2_pnp_cdetect(struct pnp_card_link *pcard,
 	if (dev >= SNDRV_CARDS)
 		return -ENODEV;
 
+<<<<<<< HEAD
 	err = snd_opl3sa2_card_new(dev, &card);
+=======
+	err = snd_opl3sa2_card_new(&pdev->dev, dev, &card);
+>>>>>>> v3.18
 	if (err < 0)
 		return err;
 	if ((err = snd_opl3sa2_pnp(dev, card->private_data, pdev)) < 0) {
 		snd_card_free(card);
 		return err;
 	}
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pdev->dev);
+=======
+>>>>>>> v3.18
 	if ((err = snd_opl3sa2_probe(card, dev)) < 0) {
 		snd_card_free(card);
 		return err;
@@ -884,10 +911,16 @@ static int snd_opl3sa2_isa_probe(struct device *pdev,
 	struct snd_card *card;
 	int err;
 
+<<<<<<< HEAD
 	err = snd_opl3sa2_card_new(dev, &card);
 	if (err < 0)
 		return err;
 	snd_card_set_dev(card, pdev);
+=======
+	err = snd_opl3sa2_card_new(pdev, dev, &card);
+	if (err < 0)
+		return err;
+>>>>>>> v3.18
 	if ((err = snd_opl3sa2_probe(card, dev)) < 0) {
 		snd_card_free(card);
 		return err;
@@ -900,7 +933,10 @@ static int snd_opl3sa2_isa_remove(struct device *devptr,
 				  unsigned int dev)
 {
 	snd_card_free(dev_get_drvdata(devptr));
+<<<<<<< HEAD
 	dev_set_drvdata(devptr, NULL);
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

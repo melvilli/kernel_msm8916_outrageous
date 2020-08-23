@@ -14,8 +14,12 @@
 #define FILTER_VALID_HOOKS ((1 << NF_BR_LOCAL_IN) | (1 << NF_BR_FORWARD) | \
    (1 << NF_BR_LOCAL_OUT))
 
+<<<<<<< HEAD
 static struct ebt_entries initial_chains[] =
 {
+=======
+static struct ebt_entries initial_chains[] = {
+>>>>>>> v3.18
 	{
 		.name	= "INPUT",
 		.policy	= EBT_ACCEPT,
@@ -30,8 +34,12 @@ static struct ebt_entries initial_chains[] =
 	},
 };
 
+<<<<<<< HEAD
 static struct ebt_replace_kernel initial_table =
 {
+=======
+static struct ebt_replace_kernel initial_table = {
+>>>>>>> v3.18
 	.name		= "filter",
 	.valid_hooks	= FILTER_VALID_HOOKS,
 	.entries_size	= 3 * sizeof(struct ebt_entries),
@@ -50,8 +58,12 @@ static int check(const struct ebt_table_info *info, unsigned int valid_hooks)
 	return 0;
 }
 
+<<<<<<< HEAD
 static const struct ebt_table frame_filter =
 {
+=======
+static const struct ebt_table frame_filter = {
+>>>>>>> v3.18
 	.name		= "filter",
 	.table		= &initial_table,
 	.valid_hooks	= FILTER_VALID_HOOKS,
@@ -60,6 +72,7 @@ static const struct ebt_table frame_filter =
 };
 
 static unsigned int
+<<<<<<< HEAD
 ebt_in_hook(unsigned int hook, struct sk_buff *skb, const struct net_device *in,
    const struct net_device *out, int (*okfn)(struct sk_buff *))
 {
@@ -71,6 +84,23 @@ ebt_out_hook(unsigned int hook, struct sk_buff *skb, const struct net_device *in
    const struct net_device *out, int (*okfn)(struct sk_buff *))
 {
 	return ebt_do_table(hook, skb, in, out, dev_net(out)->xt.frame_filter);
+=======
+ebt_in_hook(const struct nf_hook_ops *ops, struct sk_buff *skb,
+	    const struct net_device *in, const struct net_device *out,
+	    int (*okfn)(struct sk_buff *))
+{
+	return ebt_do_table(ops->hooknum, skb, in, out,
+			    dev_net(in)->xt.frame_filter);
+}
+
+static unsigned int
+ebt_out_hook(const struct nf_hook_ops *ops, struct sk_buff *skb,
+	     const struct net_device *in, const struct net_device *out,
+	     int (*okfn)(struct sk_buff *))
+{
+	return ebt_do_table(ops->hooknum, skb, in, out,
+			    dev_net(out)->xt.frame_filter);
+>>>>>>> v3.18
 }
 
 static struct nf_hook_ops ebt_ops_filter[] __read_mostly = {
@@ -100,7 +130,11 @@ static struct nf_hook_ops ebt_ops_filter[] __read_mostly = {
 static int __net_init frame_filter_net_init(struct net *net)
 {
 	net->xt.frame_filter = ebt_register_table(net, &frame_filter);
+<<<<<<< HEAD
 	return PTR_RET(net->xt.frame_filter);
+=======
+	return PTR_ERR_OR_ZERO(net->xt.frame_filter);
+>>>>>>> v3.18
 }
 
 static void __net_exit frame_filter_net_exit(struct net *net)

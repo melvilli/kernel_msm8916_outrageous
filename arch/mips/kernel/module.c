@@ -23,6 +23,10 @@
 #include <linux/moduleloader.h>
 #include <linux/elf.h>
 #include <linux/mm.h>
+<<<<<<< HEAD
+=======
+#include <linux/numa.h>
+>>>>>>> v3.18
 #include <linux/vmalloc.h>
 #include <linux/slab.h>
 #include <linux/fs.h>
@@ -46,7 +50,11 @@ static DEFINE_SPINLOCK(dbe_lock);
 void *module_alloc(unsigned long size)
 {
 	return __vmalloc_node_range(size, 1, MODULE_START, MODULE_END,
+<<<<<<< HEAD
 				GFP_KERNEL, PAGE_KERNEL, -1,
+=======
+				GFP_KERNEL, PAGE_KERNEL, NUMA_NO_NODE,
+>>>>>>> v3.18
 				__builtin_return_address(0));
 }
 #endif

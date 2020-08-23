@@ -77,6 +77,7 @@ struct intel_dvo_dev_ops {
 			  struct drm_display_mode *mode);
 
 	/*
+<<<<<<< HEAD
 	 * Callback to adjust the mode to be set in the CRTC.
 	 *
 	 * This allows an output to adjust the clock or even the entire set of
@@ -88,6 +89,8 @@ struct intel_dvo_dev_ops {
 			   struct drm_display_mode *adjusted_mode);
 
 	/*
+=======
+>>>>>>> v3.18
 	 * Callback for preparing mode changes on an output
 	 */
 	void (*prepare)(struct intel_dvo_device *dvo);

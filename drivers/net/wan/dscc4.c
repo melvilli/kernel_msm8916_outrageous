@@ -699,8 +699,11 @@ static void dscc4_free1(struct pci_dev *pdev)
 	for (i = 0; i < dev_per_card; i++)
 		unregister_hdlc_device(dscc4_to_dev(root + i));
 
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 	for (i = 0; i < dev_per_card; i++)
 		free_netdev(root[i].dev);
 	kfree(root);
@@ -2041,7 +2044,11 @@ static int __init dscc4_setup(char *str)
 __setup("dscc4.setup=", dscc4_setup);
 #endif
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(dscc4_pci_tbl) = {
+=======
+static const struct pci_device_id dscc4_pci_tbl[] = {
+>>>>>>> v3.18
 	{ PCI_VENDOR_ID_SIEMENS, PCI_DEVICE_ID_SIEMENS_DSCC4,
 	        PCI_ANY_ID, PCI_ANY_ID, },
 	{ 0,}

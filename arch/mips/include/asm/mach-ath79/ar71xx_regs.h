@@ -16,7 +16,10 @@
 #define __ASM_MACH_AR71XX_REGS_H
 
 #include <linux/types.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/io.h>
 #include <linux/bitops.h>
 

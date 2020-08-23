@@ -119,7 +119,11 @@
 	  </row>
 	  <row>
 	    <entry>&v4l2-rect;</entry>
+<<<<<<< HEAD
 	    <entry><structfield>rect</structfield></entry>
+=======
+	    <entry><structfield>r</structfield></entry>
+>>>>>>> v3.18
 	    <entry>Selection rectangle, in pixels.</entry>
 	  </row>
 	  <row>

@@ -11,7 +11,11 @@ obj-$(CONFIG_LCS) += lcs.o
 obj-$(CONFIG_CLAW) += claw.o
 qeth-y += qeth_core_sys.o qeth_core_main.o qeth_core_mpc.o
 obj-$(CONFIG_QETH) += qeth.o
+<<<<<<< HEAD
 qeth_l2-y += qeth_l2_main.o
+=======
+qeth_l2-y += qeth_l2_main.o qeth_l2_sys.o
+>>>>>>> v3.18
 obj-$(CONFIG_QETH_L2) += qeth_l2.o
 qeth_l3-y += qeth_l3_main.o qeth_l3_sys.o
 obj-$(CONFIG_QETH_L3) += qeth_l3.o

@@ -27,6 +27,11 @@
  * the filesystem.
  */
 
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 #include <linux/fs.h>
 #include <linux/vfs.h>
 #include <linux/slab.h>
@@ -98,7 +103,10 @@ static int squashfs_fill_super(struct super_block *sb, void *data, int silent)
 	msblk->devblksize = sb_min_blocksize(sb, SQUASHFS_DEVBLK_SIZE);
 	msblk->devblksize_log2 = ffz(~msblk->devblksize);
 
+<<<<<<< HEAD
 	mutex_init(&msblk->read_data_mutex);
+=======
+>>>>>>> v3.18
 	mutex_init(&msblk->meta_index_mutex);
 
 	/*
@@ -206,13 +214,22 @@ static int squashfs_fill_super(struct super_block *sb, void *data, int silent)
 		goto failed_mount;
 
 	/* Allocate read_page block */
+<<<<<<< HEAD
 	msblk->read_page = squashfs_cache_init("data", 1, msblk->block_size);
+=======
+	msblk->read_page = squashfs_cache_init("data",
+		squashfs_max_decompressors(), msblk->block_size);
+>>>>>>> v3.18
 	if (msblk->read_page == NULL) {
 		ERROR("Failed to allocate read_page block\n");
 		goto failed_mount;
 	}
 
+<<<<<<< HEAD
 	msblk->stream = squashfs_decompressor_init(sb, flags);
+=======
+	msblk->stream = squashfs_decompressor_setup(sb, flags);
+>>>>>>> v3.18
 	if (IS_ERR(msblk->stream)) {
 		err = PTR_ERR(msblk->stream);
 		msblk->stream = NULL;
@@ -336,7 +353,11 @@ failed_mount:
 	squashfs_cache_delete(msblk->block_cache);
 	squashfs_cache_delete(msblk->fragment_cache);
 	squashfs_cache_delete(msblk->read_page);
+<<<<<<< HEAD
 	squashfs_decompressor_free(msblk, msblk->stream);
+=======
+	squashfs_decompressor_destroy(msblk);
+>>>>>>> v3.18
 	kfree(msblk->inode_lookup_table);
 	kfree(msblk->fragment_index);
 	kfree(msblk->id_table);
@@ -371,6 +392,10 @@ static int squashfs_statfs(struct dentry *dentry, struct kstatfs *buf)
 
 static int squashfs_remount(struct super_block *sb, int *flags, char *data)
 {
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+>>>>>>> v3.18
 	*flags |= MS_RDONLY;
 	return 0;
 }
@@ -383,7 +408,11 @@ static void squashfs_put_super(struct super_block *sb)
 		squashfs_cache_delete(sbi->block_cache);
 		squashfs_cache_delete(sbi->fragment_cache);
 		squashfs_cache_delete(sbi->read_page);
+<<<<<<< HEAD
 		squashfs_decompressor_free(sbi, sbi->stream);
+=======
+		squashfs_decompressor_destroy(sbi);
+>>>>>>> v3.18
 		kfree(sbi->id_table);
 		kfree(sbi->fragment_index);
 		kfree(sbi->meta_index);
@@ -447,8 +476,12 @@ static int __init init_squashfs_fs(void)
 		return err;
 	}
 
+<<<<<<< HEAD
 	printk(KERN_INFO "squashfs: version 4.0 (2009/01/31) "
 		"Phillip Lougher\n");
+=======
+	pr_info("version 4.0 (2009/01/31) Phillip Lougher\n");
+>>>>>>> v3.18
 
 	return 0;
 }

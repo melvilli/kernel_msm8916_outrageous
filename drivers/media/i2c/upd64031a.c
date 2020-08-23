@@ -27,7 +27,10 @@
 #include <linux/videodev2.h>
 #include <linux/slab.h>
 #include <media/v4l2-device.h>
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 #include <media/upd64031a.h>
 
 /* --------------------- read registers functions define -------------------- */
@@ -147,6 +150,7 @@ static int upd64031a_s_routing(struct v4l2_subdev *sd,
 	return upd64031a_s_frequency(sd, NULL);
 }
 
+<<<<<<< HEAD
 static int upd64031a_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ident *chip)
 {
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
@@ -154,6 +158,8 @@ static int upd64031a_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_i
 	return v4l2_chip_ident_i2c_client(client, chip, V4L2_IDENT_UPD64031A, 0);
 }
 
+=======
+>>>>>>> v3.18
 static int upd64031a_log_status(struct v4l2_subdev *sd)
 {
 	v4l2_info(sd, "Status: SA00=0x%02x SA01=0x%02x\n",
@@ -164,12 +170,15 @@ static int upd64031a_log_status(struct v4l2_subdev *sd)
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 static int upd64031a_g_register(struct v4l2_subdev *sd, struct v4l2_dbg_register *reg)
 {
+<<<<<<< HEAD
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 
 	if (!v4l2_chip_match_i2c_client(client, &reg->match))
 		return -EINVAL;
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
+=======
+>>>>>>> v3.18
 	reg->val = upd64031a_read(sd, reg->reg & 0xff);
 	reg->size = 1;
 	return 0;
@@ -177,12 +186,15 @@ static int upd64031a_g_register(struct v4l2_subdev *sd, struct v4l2_dbg_register
 
 static int upd64031a_s_register(struct v4l2_subdev *sd, const struct v4l2_dbg_register *reg)
 {
+<<<<<<< HEAD
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 
 	if (!v4l2_chip_match_i2c_client(client, &reg->match))
 		return -EINVAL;
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
+=======
+>>>>>>> v3.18
 	upd64031a_write(sd, reg->reg & 0xff, reg->val & 0xff);
 	return 0;
 }
@@ -192,7 +204,10 @@ static int upd64031a_s_register(struct v4l2_subdev *sd, const struct v4l2_dbg_re
 
 static const struct v4l2_subdev_core_ops upd64031a_core_ops = {
 	.log_status = upd64031a_log_status,
+<<<<<<< HEAD
 	.g_chip_ident = upd64031a_g_chip_ident,
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 	.g_register = upd64031a_g_register,
 	.s_register = upd64031a_s_register,
@@ -230,7 +245,11 @@ static int upd64031a_probe(struct i2c_client *client,
 	v4l_info(client, "chip found @ 0x%x (%s)\n",
 			client->addr << 1, client->adapter->name);
 
+<<<<<<< HEAD
 	state = kzalloc(sizeof(struct upd64031a_state), GFP_KERNEL);
+=======
+	state = devm_kzalloc(&client->dev, sizeof(*state), GFP_KERNEL);
+>>>>>>> v3.18
 	if (state == NULL)
 		return -ENOMEM;
 	sd = &state->sd;
@@ -249,7 +268,10 @@ static int upd64031a_remove(struct i2c_client *client)
 	struct v4l2_subdev *sd = i2c_get_clientdata(client);
 
 	v4l2_device_unregister_subdev(sd);
+<<<<<<< HEAD
 	kfree(to_state(sd));
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

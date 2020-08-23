@@ -34,6 +34,10 @@
 #include <asm/mach-types.h>
 #include <asm/page.h>
 #include <mach/time.h>
+<<<<<<< HEAD
+=======
+#include "gpio-iop32x.h"
+>>>>>>> v3.18
 
 /*
  * GLAN Tank timer tick configuration.
@@ -187,6 +191,10 @@ static void glantank_power_off(void)
 
 static void __init glantank_init_machine(void)
 {
+<<<<<<< HEAD
+=======
+	register_iop32x_gpio();
+>>>>>>> v3.18
 	platform_device_register(&iop3xx_i2c0_device);
 	platform_device_register(&iop3xx_i2c1_device);
 	platform_device_register(&glantank_flash_device);

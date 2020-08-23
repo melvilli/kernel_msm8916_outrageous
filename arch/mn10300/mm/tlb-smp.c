@@ -78,9 +78,15 @@ void smp_flush_tlb(void *unused)
 	else
 		local_flush_tlb_page(flush_mm, flush_va);
 
+<<<<<<< HEAD
 	smp_mb__before_clear_bit();
 	cpumask_clear_cpu(cpu_id, &flush_cpumask);
 	smp_mb__after_clear_bit();
+=======
+	smp_mb__before_atomic();
+	cpumask_clear_cpu(cpu_id, &flush_cpumask);
+	smp_mb__after_atomic();
+>>>>>>> v3.18
 out:
 	put_cpu();
 }

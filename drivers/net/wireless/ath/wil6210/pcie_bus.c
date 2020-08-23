@@ -76,6 +76,7 @@ static int wil_if_pcie_enable(struct wil6210_priv *wil)
 	switch (use_msi) {
 	case 3:
 	case 1:
+<<<<<<< HEAD
 	case 0:
 		break;
 	default:
@@ -100,6 +101,30 @@ static int wil_if_pcie_enable(struct wil6210_priv *wil)
 		wil_dbg_misc(wil, "MSI interrupts disabled, use INTx\n");
 	}
 
+=======
+		wil_dbg_misc(wil, "Setup %d MSI interrupts\n", use_msi);
+		break;
+	case 0:
+		wil_dbg_misc(wil, "MSI interrupts disabled, use INTx\n");
+		break;
+	default:
+		wil_err(wil, "Invalid use_msi=%d, default to 1\n", use_msi);
+		use_msi = 1;
+	}
+
+	if (use_msi == 3 && pci_enable_msi_range(pdev, 3, 3) < 0) {
+		wil_err(wil, "3 MSI mode failed, try 1 MSI\n");
+		use_msi = 1;
+	}
+
+	if (use_msi == 1 && pci_enable_msi(pdev)) {
+		wil_err(wil, "pci_enable_msi failed, use INTx\n");
+		use_msi = 0;
+	}
+
+	wil->n_msi = use_msi;
+
+>>>>>>> v3.18
 	if ((wil->n_msi == 0) && msi_only) {
 		wil_err(wil, "Interrupt pin not routed, unable to use INTx\n");
 		rc = -ENODEV;

@@ -15,7 +15,10 @@
 #include <linux/string.h>
 #include <linux/kernel.h>
 #include <linux/ctype.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/errno.h>
 #include <asm/fixmap.h>
 #include <asm/mpspec.h>
@@ -90,6 +93,7 @@ static const struct cpumask *noop_target_cpus(void)
 	return cpumask_of(0);
 }
 
+<<<<<<< HEAD
 static unsigned long noop_check_apicid_used(physid_mask_t *map, int apicid)
 {
 	return physid_isset(apicid, *map);
@@ -100,6 +104,8 @@ static unsigned long noop_check_apicid_present(int bit)
 	return physid_isset(bit, phys_cpu_present_map);
 }
 
+=======
+>>>>>>> v3.18
 static void noop_vector_allocation_domain(int cpu, struct cpumask *retmask,
 					  const struct cpumask *mask)
 {
@@ -134,19 +140,27 @@ struct apic apic_noop = {
 	.target_cpus			= noop_target_cpus,
 	.disable_esr			= 0,
 	.dest_logical			= APIC_DEST_LOGICAL,
+<<<<<<< HEAD
 	.check_apicid_used		= noop_check_apicid_used,
 	.check_apicid_present		= noop_check_apicid_present,
+=======
+	.check_apicid_used		= default_check_apicid_used,
+>>>>>>> v3.18
 
 	.vector_allocation_domain	= noop_vector_allocation_domain,
 	.init_apic_ldr			= noop_init_apic_ldr,
 
 	.ioapic_phys_id_map		= default_ioapic_phys_id_map,
 	.setup_apic_routing		= NULL,
+<<<<<<< HEAD
 	.multi_timer_check		= NULL,
+=======
+>>>>>>> v3.18
 
 	.cpu_present_to_apicid		= default_cpu_present_to_apicid,
 	.apicid_to_cpu_present		= physid_set_mask_of_physid,
 
+<<<<<<< HEAD
 	.setup_portio_remap		= NULL,
 	.check_phys_apicid_present	= default_check_phys_apicid_present,
 	.enable_apic_mode		= NULL,
@@ -155,6 +169,12 @@ struct apic apic_noop = {
 
 	.mps_oem_check			= NULL,
 
+=======
+	.check_phys_apicid_present	= default_check_phys_apicid_present,
+
+	.phys_pkg_id			= noop_phys_pkg_id,
+
+>>>>>>> v3.18
 	.get_apic_id			= noop_get_apic_id,
 	.set_apic_id			= NULL,
 	.apic_id_mask			= 0x0F << 24,
@@ -169,6 +189,7 @@ struct apic apic_noop = {
 
 	.wakeup_secondary_cpu		= noop_wakeup_secondary_cpu,
 
+<<<<<<< HEAD
 	/* should be safe */
 	.trampoline_phys_low		= DEFAULT_TRAMPOLINE_PHYS_LOW,
 	.trampoline_phys_high		= DEFAULT_TRAMPOLINE_PHYS_HIGH,
@@ -176,6 +197,9 @@ struct apic apic_noop = {
 	.wait_for_init_deassert		= NULL,
 
 	.smp_callin_clear_local_apic	= NULL,
+=======
+	.wait_for_init_deassert		= false,
+>>>>>>> v3.18
 	.inquire_remote_apic		= NULL,
 
 	.read				= noop_apic_read,

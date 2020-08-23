@@ -30,6 +30,7 @@
 #include <linux/if_arp.h>
 
 #define MIRRED_TAB_MASK     7
+<<<<<<< HEAD
 static struct tcf_common *tcf_mirred_ht[MIRRED_TAB_MASK + 1];
 static u32 mirred_idx_gen;
 static DEFINE_RWLOCK(mirred_lock);
@@ -56,6 +57,16 @@ static int tcf_mirred_release(struct tcf_mirred *m, int bind)
 		}
 	}
 	return 0;
+=======
+static LIST_HEAD(mirred_list);
+
+static void tcf_mirred_release(struct tc_action *a, int bind)
+{
+	struct tcf_mirred *m = to_mirred(a);
+	list_del(&m->tcfm_list);
+	if (m->tcfm_dev)
+		dev_put(m->tcfm_dev);
+>>>>>>> v3.18
 }
 
 static const struct nla_policy mirred_policy[TCA_MIRRED_MAX + 1] = {
@@ -69,7 +80,10 @@ static int tcf_mirred_init(struct net *net, struct nlattr *nla,
 	struct nlattr *tb[TCA_MIRRED_MAX + 1];
 	struct tc_mirred *parm;
 	struct tcf_mirred *m;
+<<<<<<< HEAD
 	struct tcf_common *pc;
+=======
+>>>>>>> v3.18
 	struct net_device *dev;
 	int ret, ok_push = 0;
 
@@ -109,6 +123,7 @@ static int tcf_mirred_init(struct net *net, struct nlattr *nla,
 		dev = NULL;
 	}
 
+<<<<<<< HEAD
 	pc = tcf_hash_check(parm->index, a, bind, &mirred_hash_info);
 	if (!pc) {
 		if (dev == NULL)
@@ -125,6 +140,22 @@ static int tcf_mirred_init(struct net *net, struct nlattr *nla,
 		}
 	}
 	m = to_mirred(pc);
+=======
+	if (!tcf_hash_check(parm->index, a, bind)) {
+		if (dev == NULL)
+			return -EINVAL;
+		ret = tcf_hash_create(parm->index, est, a, sizeof(*m), bind);
+		if (ret)
+			return ret;
+		ret = ACT_P_CREATED;
+	} else {
+		if (!ovr) {
+			tcf_hash_release(a, bind);
+			return -EEXIST;
+		}
+	}
+	m = to_mirred(a);
+>>>>>>> v3.18
 
 	spin_lock_bh(&m->tcf_lock);
 	m->tcf_action = parm->action;
@@ -140,12 +171,17 @@ static int tcf_mirred_init(struct net *net, struct nlattr *nla,
 	spin_unlock_bh(&m->tcf_lock);
 	if (ret == ACT_P_CREATED) {
 		list_add(&m->tcfm_list, &mirred_list);
+<<<<<<< HEAD
 		tcf_hash_insert(pc, &mirred_hash_info);
+=======
+		tcf_hash_insert(a);
+>>>>>>> v3.18
 	}
 
 	return ret;
 }
 
+<<<<<<< HEAD
 static int tcf_mirred_cleanup(struct tc_action *a, int bind)
 {
 	struct tcf_mirred *m = a->priv;
@@ -155,6 +191,8 @@ static int tcf_mirred_cleanup(struct tc_action *a, int bind)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 static int tcf_mirred(struct sk_buff *skb, const struct tc_action *a,
 		      struct tcf_result *res)
 {
@@ -243,15 +281,27 @@ nla_put_failure:
 static int mirred_device_event(struct notifier_block *unused,
 			       unsigned long event, void *ptr)
 {
+<<<<<<< HEAD
 	struct net_device *dev = ptr;
+=======
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 	struct tcf_mirred *m;
 
 	if (event == NETDEV_UNREGISTER)
 		list_for_each_entry(m, &mirred_list, tcfm_list) {
+<<<<<<< HEAD
+=======
+			spin_lock_bh(&m->tcf_lock);
+>>>>>>> v3.18
 			if (m->tcfm_dev == dev) {
 				dev_put(dev);
 				m->tcfm_dev = NULL;
 			}
+<<<<<<< HEAD
+=======
+			spin_unlock_bh(&m->tcf_lock);
+>>>>>>> v3.18
 		}
 
 	return NOTIFY_DONE;
@@ -261,6 +311,7 @@ static struct notifier_block mirred_device_notifier = {
 	.notifier_call = mirred_device_event,
 };
 
+<<<<<<< HEAD
 
 static struct tc_action_ops act_mirred_ops = {
 	.kind		=	"mirred",
@@ -274,6 +325,16 @@ static struct tc_action_ops act_mirred_ops = {
 	.lookup		=	tcf_hash_search,
 	.init		=	tcf_mirred_init,
 	.walk		=	tcf_generic_walker
+=======
+static struct tc_action_ops act_mirred_ops = {
+	.kind		=	"mirred",
+	.type		=	TCA_ACT_MIRRED,
+	.owner		=	THIS_MODULE,
+	.act		=	tcf_mirred,
+	.dump		=	tcf_mirred_dump,
+	.cleanup	=	tcf_mirred_release,
+	.init		=	tcf_mirred_init,
+>>>>>>> v3.18
 };
 
 MODULE_AUTHOR("Jamal Hadi Salim(2002)");
@@ -287,13 +348,22 @@ static int __init mirred_init_module(void)
 		return err;
 
 	pr_info("Mirror/redirect action on\n");
+<<<<<<< HEAD
 	return tcf_register_action(&act_mirred_ops);
+=======
+	return tcf_register_action(&act_mirred_ops, MIRRED_TAB_MASK);
+>>>>>>> v3.18
 }
 
 static void __exit mirred_cleanup_module(void)
 {
+<<<<<<< HEAD
 	unregister_netdevice_notifier(&mirred_device_notifier);
 	tcf_unregister_action(&act_mirred_ops);
+=======
+	tcf_unregister_action(&act_mirred_ops);
+	unregister_netdevice_notifier(&mirred_device_notifier);
+>>>>>>> v3.18
 }
 
 module_init(mirred_init_module);

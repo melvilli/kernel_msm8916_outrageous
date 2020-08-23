@@ -401,6 +401,14 @@ int kvmppc_rm_h_eoi(struct kvm_vcpu *vcpu, unsigned long xirr)
 		icp->rm_action |= XICS_RM_REJECT;
 		icp->rm_reject = irq;
 	}
+<<<<<<< HEAD
+=======
+
+	if (!hlist_empty(&vcpu->kvm->irq_ack_notifier_list)) {
+		icp->rm_action |= XICS_RM_NOTIFY_EOI;
+		icp->rm_eoied_irq = irq;
+	}
+>>>>>>> v3.18
  bail:
 	return check_too_hard(xics, icp);
 }

@@ -5,7 +5,11 @@
  *
  * GPL LICENSE SUMMARY
  *
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of version 2 of the GNU General Public License as
@@ -30,7 +34,11 @@
  *
  * BSD LICENSE
  *
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -170,12 +178,20 @@ struct iwl_mac_data_ap {
  * @beacon_tsf: beacon transmit time in TSF
  * @bi: beacon interval in TU
  * @bi_reciprocal: 2^32 / bi
+<<<<<<< HEAD
+=======
+ * @beacon_template: beacon template ID
+>>>>>>> v3.18
  */
 struct iwl_mac_data_ibss {
 	__le32 beacon_time;
 	__le64 beacon_tsf;
 	__le32 bi;
 	__le32 bi_reciprocal;
+<<<<<<< HEAD
+=======
+	__le32 beacon_template;
+>>>>>>> v3.18
 } __packed; /* IBSS_MAC_DATA_API_S_VER_1 */
 
 /**
@@ -372,4 +388,16 @@ static inline u32 iwl_mvm_reciprocal(u32 v)
 	return 0xFFFFFFFF / v;
 }
 
+<<<<<<< HEAD
+=======
+#define IWL_NONQOS_SEQ_GET	0x1
+#define IWL_NONQOS_SEQ_SET	0x2
+struct iwl_nonqos_seq_query_cmd {
+	__le32 get_set_flag;
+	__le32 mac_id_n_color;
+	__le16 value;
+	__le16 reserved;
+} __packed; /* NON_QOS_TX_COUNTER_GET_SET_API_S_VER_1 */
+
+>>>>>>> v3.18
 #endif /* __fw_api_mac_h__ */

@@ -8,11 +8,35 @@
 #include "cpumap.h"
 #include "thread_map.h"
 
+<<<<<<< HEAD
+=======
+/*
+ * Support debug printing even though util/debug.c is not linked.  That means
+ * implementing 'verbose' and 'eprintf'.
+ */
+int verbose;
+
+int eprintf(int level, int var, const char *fmt, ...)
+{
+	va_list args;
+	int ret = 0;
+
+	if (var >= level) {
+		va_start(args, fmt);
+		ret = vfprintf(stderr, fmt, args);
+		va_end(args);
+	}
+
+	return ret;
+}
+
+>>>>>>> v3.18
 /* Define PyVarObject_HEAD_INIT for python 2.5 */
 #ifndef PyVarObject_HEAD_INIT
 # define PyVarObject_HEAD_INIT(type, size) PyObject_HEAD_INIT(type) size,
 #endif
 
+<<<<<<< HEAD
 struct throttle_event {
 	struct perf_event_header header;
 	u64			 time;
@@ -20,6 +44,8 @@ struct throttle_event {
 	u64			 stream_id;
 };
 
+=======
+>>>>>>> v3.18
 PyMODINIT_FUNC initperf(void);
 
 #define member_def(type, member, ptype, help) \
@@ -723,7 +749,11 @@ static PyObject *pyrf_evlist__poll(struct pyrf_evlist *pevlist,
 	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "|i", kwlist, &timeout))
 		return NULL;
 
+<<<<<<< HEAD
 	n = poll(evlist->pollfd, evlist->nr_fds, timeout);
+=======
+	n = perf_evlist__poll(evlist, timeout);
+>>>>>>> v3.18
 	if (n < 0) {
 		PyErr_SetFromErrno(PyExc_OSError);
 		return NULL;
@@ -740,9 +770,15 @@ static PyObject *pyrf_evlist__get_pollfd(struct pyrf_evlist *pevlist,
         PyObject *list = PyList_New(0);
 	int i;
 
+<<<<<<< HEAD
 	for (i = 0; i < evlist->nr_fds; ++i) {
 		PyObject *file;
 		FILE *fp = fdopen(evlist->pollfd[i].fd, "r");
+=======
+	for (i = 0; i < evlist->pollfd.nr; ++i) {
+		PyObject *file;
+		FILE *fp = fdopen(evlist->pollfd.entries[i].fd, "r");
+>>>>>>> v3.18
 
 		if (fp == NULL)
 			goto free_list;
@@ -802,6 +838,11 @@ static PyObject *pyrf_evlist__read_on_cpu(struct pyrf_evlist *pevlist,
 		PyObject *pyevent = pyrf_event__new(event);
 		struct pyrf_event *pevent = (struct pyrf_event *)pyevent;
 
+<<<<<<< HEAD
+=======
+		perf_evlist__mmap_consume(evlist, cpu);
+
+>>>>>>> v3.18
 		if (pyevent == NULL)
 			return PyErr_NoMemory();
 
@@ -893,9 +934,16 @@ static PyObject *pyrf_evlist__item(PyObject *obj, Py_ssize_t i)
 	if (i >= pevlist->evlist.nr_entries)
 		return NULL;
 
+<<<<<<< HEAD
 	list_for_each_entry(pos, &pevlist->evlist.entries, node)
 		if (i-- == 0)
 			break;
+=======
+	evlist__for_each(&pevlist->evlist, pos) {
+		if (i-- == 0)
+			break;
+	}
+>>>>>>> v3.18
 
 	return Py_BuildValue("O", container_of(pos, struct pyrf_evsel, evsel));
 }
@@ -967,6 +1015,10 @@ static struct {
 	{ "COUNT_SW_PAGE_FAULTS_MAJ",  PERF_COUNT_SW_PAGE_FAULTS_MAJ },
 	{ "COUNT_SW_ALIGNMENT_FAULTS", PERF_COUNT_SW_ALIGNMENT_FAULTS },
 	{ "COUNT_SW_EMULATION_FAULTS", PERF_COUNT_SW_EMULATION_FAULTS },
+<<<<<<< HEAD
+=======
+	{ "COUNT_SW_DUMMY",            PERF_COUNT_SW_DUMMY },
+>>>>>>> v3.18
 
 	{ "SAMPLE_IP",	      PERF_SAMPLE_IP },
 	{ "SAMPLE_TID",	      PERF_SAMPLE_TID },
@@ -1015,6 +1067,10 @@ PyMODINIT_FUNC initperf(void)
 	    pyrf_cpu_map__setup_types() < 0)
 		return;
 
+<<<<<<< HEAD
+=======
+	/* The page_size is placed in util object. */
+>>>>>>> v3.18
 	page_size = sysconf(_SC_PAGE_SIZE);
 
 	Py_INCREF(&pyrf_evlist__type);

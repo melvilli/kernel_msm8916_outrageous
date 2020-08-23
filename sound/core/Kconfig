@@ -6,6 +6,12 @@ config SND_PCM
 	tristate
 	select SND_TIMER
 
+<<<<<<< HEAD
+=======
+config SND_DMAENGINE_PCM
+	tristate
+
+>>>>>>> v3.18
 config SND_HWDEP
 	tristate
 
@@ -149,7 +155,10 @@ config SND_SEQ_RTCTIMER_DEFAULT
 
 config SND_DYNAMIC_MINORS
 	bool "Dynamic device file minor numbers"
+<<<<<<< HEAD
 	default y if SND_OMAP_SOC_ABE_DSP
+=======
+>>>>>>> v3.18
 	help
 	  If you say Y here, the minor numbers of ALSA device files in
 	  /dev/snd/ are allocated dynamically.  This allows you to have
@@ -158,6 +167,18 @@ config SND_DYNAMIC_MINORS
 
 	  If you are unsure about this, say N here.
 
+<<<<<<< HEAD
+=======
+config SND_MAX_CARDS
+	int "Max number of sound cards"
+	range 4 256
+	default 32
+	depends on SND_DYNAMIC_MINORS
+	help
+	  Specify the max number of sound cards that can be assigned
+	  on a single machine.
+
+>>>>>>> v3.18
 config SND_SUPPORT_OLD_API
 	bool "Support old ALSA API"
 	default y

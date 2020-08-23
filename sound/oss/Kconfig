@@ -13,6 +13,7 @@ config SOUND_BCM_CS4297A
 	  note that CONFIG_KGDB should not be enabled at the same
 	  time, since it also attempts to use this UART port.
 
+<<<<<<< HEAD
 config SOUND_VWSND
 	tristate "SGI Visual Workstation Sound"
 	depends on X86_VISWS
@@ -22,6 +23,8 @@ config SOUND_VWSND
 	  <file:Documentation/sound/oss/vwsnd> for more info on this driver's
 	  capabilities.
 
+=======
+>>>>>>> v3.18
 config SOUND_MSNDCLAS
 	tristate "Support for Turtle Beach MultiSound Classic, Tahiti, Monterey"
 	depends on (m || !STANDALONE) && ISA

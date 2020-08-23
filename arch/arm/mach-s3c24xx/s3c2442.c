@@ -37,12 +37,19 @@
 #include <linux/io.h>
 
 #include <mach/hardware.h>
+<<<<<<< HEAD
+=======
+#include <mach/gpio-samsung.h>
+>>>>>>> v3.18
 #include <linux/atomic.h>
 #include <asm/irq.h>
 
 #include <mach/regs-clock.h>
 
+<<<<<<< HEAD
 #include <plat/clock.h>
+=======
+>>>>>>> v3.18
 #include <plat/cpu.h>
 #include <plat/pm.h>
 
@@ -52,6 +59,7 @@
 
 #include "common.h"
 
+<<<<<<< HEAD
 /* S3C2442 extended clock support */
 
 static unsigned long s3c2442_camif_upll_round(struct clk *clk,
@@ -163,6 +171,8 @@ static __init int s3c2442_clk_init(void)
 arch_initcall(s3c2442_clk_init);
 
 
+=======
+>>>>>>> v3.18
 static struct device s3c2442_dev = {
 	.bus		= &s3c2442_subsys,
 };

@@ -95,7 +95,11 @@ static const char * const ipg_brand_name[] = {
 	"D-Link NIC IP1000A"
 };
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(ipg_pci_tbl) = {
+=======
+static const struct pci_device_id ipg_pci_tbl[] = {
+>>>>>>> v3.18
 	{ PCI_VDEVICE(SUNDANCE,	0x1023), 0 },
 	{ PCI_VDEVICE(SUNDANCE,	0x2021), 1 },
 	{ PCI_VDEVICE(DLINK,	0x9021), 2 },
@@ -1004,7 +1008,11 @@ static struct net_device_stats *ipg_nic_get_stats(struct net_device *dev)
 	/* Check to see if the NIC has been initialized via nic_open,
 	 * before trying to read statistic registers.
 	 */
+<<<<<<< HEAD
 	if (!test_bit(__LINK_STATE_START, &dev->state))
+=======
+	if (!netif_running(dev))
+>>>>>>> v3.18
 		return &sp->stats;
 
 	sp->stats.rx_packets += ipg_r32(IPG_FRAMESRCVDOK);
@@ -2183,7 +2191,10 @@ static void ipg_remove(struct pci_dev *pdev)
 
 	free_netdev(dev);
 	pci_disable_device(pdev);
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 }
 
 static const struct net_device_ops ipg_netdev_ops = {
@@ -2246,7 +2257,11 @@ static int ipg_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 	 */
 	dev->netdev_ops = &ipg_netdev_ops;
 	SET_NETDEV_DEV(dev, &pdev->dev);
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(dev, &ipg_ethtool_ops);
+=======
+	dev->ethtool_ops = &ipg_ethtool_ops;
+>>>>>>> v3.18
 
 	rc = pci_request_regions(pdev, DRV_NAME);
 	if (rc)
@@ -2298,6 +2313,7 @@ static struct pci_driver ipg_pci_driver = {
 	.remove		= ipg_remove,
 };
 
+<<<<<<< HEAD
 static int __init ipg_init_module(void)
 {
 	return pci_register_driver(&ipg_pci_driver);
@@ -2310,3 +2326,6 @@ static void __exit ipg_exit_module(void)
 
 module_init(ipg_init_module);
 module_exit(ipg_exit_module);
+=======
+module_pci_driver(ipg_pci_driver);
+>>>>>>> v3.18

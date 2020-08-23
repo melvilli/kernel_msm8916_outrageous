@@ -28,12 +28,15 @@
 #include "qxl_drv.h"
 #include "qxl_object.h"
 
+<<<<<<< HEAD
 int qxl_gem_object_init(struct drm_gem_object *obj)
 {
 	/* we do nothings here */
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 void qxl_gem_object_free(struct drm_gem_object *gobj)
 {
 	struct qxl_bo *qobj = gem_to_qxl_bo(gobj);
@@ -55,7 +58,11 @@ int qxl_gem_object_create(struct qxl_device *qdev, int size,
 	/* At least align on page size */
 	if (alignment < PAGE_SIZE)
 		alignment = PAGE_SIZE;
+<<<<<<< HEAD
 	r = qxl_bo_create(qdev, size, kernel, initial_domain, surf, &qbo);
+=======
+	r = qxl_bo_create(qdev, size, kernel, false, initial_domain, surf, &qbo);
+>>>>>>> v3.18
 	if (r) {
 		if (r != -ERESTARTSYS)
 			DRM_ERROR(
@@ -101,6 +108,7 @@ int qxl_gem_object_create_with_handle(struct qxl_device *qdev,
 	return 0;
 }
 
+<<<<<<< HEAD
 int qxl_gem_object_pin(struct drm_gem_object *obj, uint32_t pin_domain,
 			  uint64_t *gpu_addr)
 {
@@ -127,6 +135,8 @@ void qxl_gem_object_unpin(struct drm_gem_object *obj)
 	}
 }
 
+=======
+>>>>>>> v3.18
 int qxl_gem_object_open(struct drm_gem_object *obj, struct drm_file *file_priv)
 {
 	return 0;

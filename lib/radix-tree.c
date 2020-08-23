@@ -27,11 +27,16 @@
 #include <linux/radix-tree.h>
 #include <linux/percpu.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
+=======
+#include <linux/kmemleak.h>
+>>>>>>> v3.18
 #include <linux/notifier.h>
 #include <linux/cpu.h>
 #include <linux/string.h>
 #include <linux/bitops.h>
 #include <linux/rcupdate.h>
+<<<<<<< HEAD
 
 
 #ifdef __KERNEL__
@@ -61,6 +66,11 @@ struct radix_tree_node {
 #define RADIX_TREE_MAX_PATH (DIV_ROUND_UP(RADIX_TREE_INDEX_BITS, \
 					  RADIX_TREE_MAP_SHIFT))
 
+=======
+#include <linux/hardirq.h>		/* in_interrupt() */
+
+
+>>>>>>> v3.18
 /*
  * The height_to_maxindex array needs to be one deeper than the maximum
  * path as height 0 holds only 1 entry.
@@ -207,7 +217,16 @@ radix_tree_node_alloc(struct radix_tree_root *root)
 	struct radix_tree_node *ret = NULL;
 	gfp_t gfp_mask = root_gfp_mask(root);
 
+<<<<<<< HEAD
 	if (!(gfp_mask & __GFP_WAIT)) {
+=======
+	/*
+	 * Preload code isn't irq safe and it doesn't make sence to use
+	 * preloading in the interrupt anyway as all the allocations have to
+	 * be atomic. So just do normal allocation when in interrupt.
+	 */
+	if (!(gfp_mask & __GFP_WAIT) && !in_interrupt()) {
+>>>>>>> v3.18
 		struct radix_tree_preload *rtp;
 
 		/*
@@ -215,12 +234,24 @@ radix_tree_node_alloc(struct radix_tree_root *root)
 		 * succeed in getting a node here (and never reach
 		 * kmem_cache_alloc)
 		 */
+<<<<<<< HEAD
 		rtp = &__get_cpu_var(radix_tree_preloads);
+=======
+		rtp = this_cpu_ptr(&radix_tree_preloads);
+>>>>>>> v3.18
 		if (rtp->nr) {
 			ret = rtp->nodes[rtp->nr - 1];
 			rtp->nodes[rtp->nr - 1] = NULL;
 			rtp->nr--;
 		}
+<<<<<<< HEAD
+=======
+		/*
+		 * Update the allocation stack trace as this is more useful
+		 * for debugging.
+		 */
+		kmemleak_update_trace(ret);
+>>>>>>> v3.18
 	}
 	if (ret == NULL)
 		ret = kmem_cache_alloc(radix_tree_node_cachep, gfp_mask);
@@ -264,21 +295,33 @@ radix_tree_node_free(struct radix_tree_node *node)
  * To make use of this facility, the radix tree must be initialised without
  * __GFP_WAIT being passed to INIT_RADIX_TREE().
  */
+<<<<<<< HEAD
 int radix_tree_preload(gfp_t gfp_mask)
+=======
+static int __radix_tree_preload(gfp_t gfp_mask)
+>>>>>>> v3.18
 {
 	struct radix_tree_preload *rtp;
 	struct radix_tree_node *node;
 	int ret = -ENOMEM;
 
 	preempt_disable();
+<<<<<<< HEAD
 	rtp = &__get_cpu_var(radix_tree_preloads);
+=======
+	rtp = this_cpu_ptr(&radix_tree_preloads);
+>>>>>>> v3.18
 	while (rtp->nr < ARRAY_SIZE(rtp->nodes)) {
 		preempt_enable();
 		node = kmem_cache_alloc(radix_tree_node_cachep, gfp_mask);
 		if (node == NULL)
 			goto out;
 		preempt_disable();
+<<<<<<< HEAD
 		rtp = &__get_cpu_var(radix_tree_preloads);
+=======
+		rtp = this_cpu_ptr(&radix_tree_preloads);
+>>>>>>> v3.18
 		if (rtp->nr < ARRAY_SIZE(rtp->nodes))
 			rtp->nodes[rtp->nr++] = node;
 		else
@@ -288,9 +331,46 @@ int radix_tree_preload(gfp_t gfp_mask)
 out:
 	return ret;
 }
+<<<<<<< HEAD
 EXPORT_SYMBOL(radix_tree_preload);
 
 /*
+=======
+
+/*
+ * Load up this CPU's radix_tree_node buffer with sufficient objects to
+ * ensure that the addition of a single element in the tree cannot fail.  On
+ * success, return zero, with preemption disabled.  On error, return -ENOMEM
+ * with preemption not disabled.
+ *
+ * To make use of this facility, the radix tree must be initialised without
+ * __GFP_WAIT being passed to INIT_RADIX_TREE().
+ */
+int radix_tree_preload(gfp_t gfp_mask)
+{
+	/* Warn on non-sensical use... */
+	WARN_ON_ONCE(!(gfp_mask & __GFP_WAIT));
+	return __radix_tree_preload(gfp_mask);
+}
+EXPORT_SYMBOL(radix_tree_preload);
+
+/*
+ * The same as above function, except we don't guarantee preloading happens.
+ * We do it, if we decide it helps. On success, return zero with preemption
+ * disabled. On error, return -ENOMEM with preemption not disabled.
+ */
+int radix_tree_maybe_preload(gfp_t gfp_mask)
+{
+	if (gfp_mask & __GFP_WAIT)
+		return __radix_tree_preload(gfp_mask);
+	/* Preloading doesn't help anything with this gfp mask, skip it */
+	preempt_disable();
+	return 0;
+}
+EXPORT_SYMBOL(radix_tree_maybe_preload);
+
+/*
+>>>>>>> v3.18
  *	Return the maximum key which can be store into a
  *	radix tree with height HEIGHT.
  */
@@ -332,7 +412,12 @@ static int radix_tree_extend(struct radix_tree_root *root, unsigned long index)
 
 		/* Increase the height.  */
 		newheight = root->height+1;
+<<<<<<< HEAD
 		node->height = newheight;
+=======
+		BUG_ON(newheight & ~RADIX_TREE_HEIGHT_MASK);
+		node->path = newheight;
+>>>>>>> v3.18
 		node->count = 1;
 		node->parent = NULL;
 		slot = root->rnode;
@@ -350,6 +435,7 @@ out:
 }
 
 /**
+<<<<<<< HEAD
  *	radix_tree_insert    -    insert into a radix tree
  *	@root:		radix tree root
  *	@index:		index key
@@ -367,6 +453,30 @@ int radix_tree_insert(struct radix_tree_root *root,
 
 	BUG_ON(radix_tree_is_indirect_ptr(item));
 
+=======
+ *	__radix_tree_create	-	create a slot in a radix tree
+ *	@root:		radix tree root
+ *	@index:		index key
+ *	@nodep:		returns node
+ *	@slotp:		returns slot
+ *
+ *	Create, if necessary, and return the node and slot for an item
+ *	at position @index in the radix tree @root.
+ *
+ *	Until there is more than one item in the tree, no nodes are
+ *	allocated and @root->rnode is used as a direct slot instead of
+ *	pointing to a node, in which case *@nodep will be NULL.
+ *
+ *	Returns -ENOMEM, or 0 for success.
+ */
+int __radix_tree_create(struct radix_tree_root *root, unsigned long index,
+			struct radix_tree_node **nodep, void ***slotp)
+{
+	struct radix_tree_node *node = NULL, *slot;
+	unsigned int height, shift, offset;
+	int error;
+
+>>>>>>> v3.18
 	/* Make sure the tree is high enough.  */
 	if (index > radix_tree_maxindex(root->height)) {
 		error = radix_tree_extend(root, index);
@@ -385,11 +495,19 @@ int radix_tree_insert(struct radix_tree_root *root,
 			/* Have to add a child node.  */
 			if (!(slot = radix_tree_node_alloc(root)))
 				return -ENOMEM;
+<<<<<<< HEAD
 			slot->height = height;
+=======
+			slot->path = height;
+>>>>>>> v3.18
 			slot->parent = node;
 			if (node) {
 				rcu_assign_pointer(node->slots[offset], slot);
 				node->count++;
+<<<<<<< HEAD
+=======
+				slot->path |= offset << RADIX_TREE_HEIGHT_SHIFT;
+>>>>>>> v3.18
 			} else
 				rcu_assign_pointer(root->rnode, ptr_to_indirect(slot));
 		}
@@ -402,6 +520,7 @@ int radix_tree_insert(struct radix_tree_root *root,
 		height--;
 	}
 
+<<<<<<< HEAD
 	if (slot != NULL)
 		return -EEXIST;
 
@@ -412,6 +531,44 @@ int radix_tree_insert(struct radix_tree_root *root,
 		BUG_ON(tag_get(node, 1, offset));
 	} else {
 		rcu_assign_pointer(root->rnode, item);
+=======
+	if (nodep)
+		*nodep = node;
+	if (slotp)
+		*slotp = node ? node->slots + offset : (void **)&root->rnode;
+	return 0;
+}
+
+/**
+ *	radix_tree_insert    -    insert into a radix tree
+ *	@root:		radix tree root
+ *	@index:		index key
+ *	@item:		item to insert
+ *
+ *	Insert an item into the radix tree at position @index.
+ */
+int radix_tree_insert(struct radix_tree_root *root,
+			unsigned long index, void *item)
+{
+	struct radix_tree_node *node;
+	void **slot;
+	int error;
+
+	BUG_ON(radix_tree_is_indirect_ptr(item));
+
+	error = __radix_tree_create(root, index, &node, &slot);
+	if (error)
+		return error;
+	if (*slot != NULL)
+		return -EEXIST;
+	rcu_assign_pointer(*slot, item);
+
+	if (node) {
+		node->count++;
+		BUG_ON(tag_get(node, 0, index & RADIX_TREE_MAP_MASK));
+		BUG_ON(tag_get(node, 1, index & RADIX_TREE_MAP_MASK));
+	} else {
+>>>>>>> v3.18
 		BUG_ON(root_tag_get(root, 0));
 		BUG_ON(root_tag_get(root, 1));
 	}
@@ -420,6 +577,7 @@ int radix_tree_insert(struct radix_tree_root *root,
 }
 EXPORT_SYMBOL(radix_tree_insert);
 
+<<<<<<< HEAD
 /*
  * is_slot == 1 : search for the slot.
  * is_slot == 0 : search for the node.
@@ -429,6 +587,28 @@ static void *radix_tree_lookup_element(struct radix_tree_root *root,
 {
 	unsigned int height, shift;
 	struct radix_tree_node *node, **slot;
+=======
+/**
+ *	__radix_tree_lookup	-	lookup an item in a radix tree
+ *	@root:		radix tree root
+ *	@index:		index key
+ *	@nodep:		returns node
+ *	@slotp:		returns slot
+ *
+ *	Lookup and return the item at position @index in the radix
+ *	tree @root.
+ *
+ *	Until there is more than one item in the tree, no nodes are
+ *	allocated and @root->rnode is used as a direct slot instead of
+ *	pointing to a node, in which case *@nodep will be NULL.
+ */
+void *__radix_tree_lookup(struct radix_tree_root *root, unsigned long index,
+			  struct radix_tree_node **nodep, void ***slotp)
+{
+	struct radix_tree_node *node, *parent;
+	unsigned int height, shift;
+	void **slot;
+>>>>>>> v3.18
 
 	node = rcu_dereference_raw(root->rnode);
 	if (node == NULL)
@@ -437,19 +617,37 @@ static void *radix_tree_lookup_element(struct radix_tree_root *root,
 	if (!radix_tree_is_indirect_ptr(node)) {
 		if (index > 0)
 			return NULL;
+<<<<<<< HEAD
 		return is_slot ? (void *)&root->rnode : node;
 	}
 	node = indirect_to_ptr(node);
 
 	height = node->height;
+=======
+
+		if (nodep)
+			*nodep = NULL;
+		if (slotp)
+			*slotp = (void **)&root->rnode;
+		return node;
+	}
+	node = indirect_to_ptr(node);
+
+	height = node->path & RADIX_TREE_HEIGHT_MASK;
+>>>>>>> v3.18
 	if (index > radix_tree_maxindex(height))
 		return NULL;
 
 	shift = (height-1) * RADIX_TREE_MAP_SHIFT;
 
 	do {
+<<<<<<< HEAD
 		slot = (struct radix_tree_node **)
 			(node->slots + ((index>>shift) & RADIX_TREE_MAP_MASK));
+=======
+		parent = node;
+		slot = node->slots + ((index >> shift) & RADIX_TREE_MAP_MASK);
+>>>>>>> v3.18
 		node = rcu_dereference_raw(*slot);
 		if (node == NULL)
 			return NULL;
@@ -458,7 +656,15 @@ static void *radix_tree_lookup_element(struct radix_tree_root *root,
 		height--;
 	} while (height > 0);
 
+<<<<<<< HEAD
 	return is_slot ? (void *)slot : indirect_to_ptr(node);
+=======
+	if (nodep)
+		*nodep = parent;
+	if (slotp)
+		*slotp = slot;
+	return node;
+>>>>>>> v3.18
 }
 
 /**
@@ -476,7 +682,15 @@ static void *radix_tree_lookup_element(struct radix_tree_root *root,
  */
 void **radix_tree_lookup_slot(struct radix_tree_root *root, unsigned long index)
 {
+<<<<<<< HEAD
 	return (void **)radix_tree_lookup_element(root, index, 1);
+=======
+	void **slot;
+
+	if (!__radix_tree_lookup(root, index, NULL, &slot))
+		return NULL;
+	return slot;
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(radix_tree_lookup_slot);
 
@@ -494,7 +708,11 @@ EXPORT_SYMBOL(radix_tree_lookup_slot);
  */
 void *radix_tree_lookup(struct radix_tree_root *root, unsigned long index)
 {
+<<<<<<< HEAD
 	return radix_tree_lookup_element(root, index, 0);
+=======
+	return __radix_tree_lookup(root, index, NULL, NULL);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(radix_tree_lookup);
 
@@ -639,7 +857,11 @@ int radix_tree_tag_get(struct radix_tree_root *root,
 		return (index == 0);
 	node = indirect_to_ptr(node);
 
+<<<<<<< HEAD
 	height = node->height;
+=======
+	height = node->path & RADIX_TREE_HEIGHT_MASK;
+>>>>>>> v3.18
 	if (index > radix_tree_maxindex(height))
 		return 0;
 
@@ -676,7 +898,11 @@ void **radix_tree_next_chunk(struct radix_tree_root *root,
 {
 	unsigned shift, tag = flags & RADIX_TREE_ITER_TAG_MASK;
 	struct radix_tree_node *rnode, *node;
+<<<<<<< HEAD
 	unsigned long index, offset;
+=======
+	unsigned long index, offset, height;
+>>>>>>> v3.18
 
 	if ((flags & RADIX_TREE_ITER_TAGGED) && !root_tag_get(root, tag))
 		return NULL;
@@ -707,7 +933,12 @@ void **radix_tree_next_chunk(struct radix_tree_root *root,
 		return NULL;
 
 restart:
+<<<<<<< HEAD
 	shift = (rnode->height - 1) * RADIX_TREE_MAP_SHIFT;
+=======
+	height = rnode->path & RADIX_TREE_HEIGHT_MASK;
+	shift = (height - 1) * RADIX_TREE_MAP_SHIFT;
+>>>>>>> v3.18
 	offset = index >> shift;
 
 	/* Index outside of the tree */
@@ -909,6 +1140,7 @@ next:
 }
 EXPORT_SYMBOL(radix_tree_range_tag_if_tagged);
 
+<<<<<<< HEAD
 
 /**
  *	radix_tree_next_hole    -    find the next hole (not-present entry)
@@ -984,6 +1216,8 @@ unsigned long radix_tree_prev_hole(struct radix_tree_root *root,
 }
 EXPORT_SYMBOL(radix_tree_prev_hole);
 
+=======
+>>>>>>> v3.18
 /**
  *	radix_tree_gang_lookup - perform multiple lookup on a radix tree
  *	@root:		radix tree root
@@ -1015,6 +1249,7 @@ radix_tree_gang_lookup(struct radix_tree_root *root, void **results,
 		return 0;
 
 	radix_tree_for_each_slot(slot, root, &iter, first_index) {
+<<<<<<< HEAD
 		results[ret] = rcu_dereference_raw(*slot);
 		if (!results[ret])
 			continue;
@@ -1022,6 +1257,11 @@ radix_tree_gang_lookup(struct radix_tree_root *root, void **results,
 			slot = radix_tree_iter_retry(&iter);
 			continue;
 		}
+=======
+		results[ret] = indirect_to_ptr(rcu_dereference_raw(*slot));
+		if (!results[ret])
+			continue;
+>>>>>>> v3.18
 		if (++ret == max_items)
 			break;
 	}
@@ -1098,6 +1338,7 @@ radix_tree_gang_lookup_tag(struct radix_tree_root *root, void **results,
 		return 0;
 
 	radix_tree_for_each_tagged(slot, root, &iter, first_index, tag) {
+<<<<<<< HEAD
 		results[ret] = rcu_dereference_raw(*slot);
 		if (!results[ret])
 			continue;
@@ -1105,6 +1346,11 @@ radix_tree_gang_lookup_tag(struct radix_tree_root *root, void **results,
 			slot = radix_tree_iter_retry(&iter);
 			continue;
 		}
+=======
+		results[ret] = indirect_to_ptr(rcu_dereference_raw(*slot));
+		if (!results[ret])
+			continue;
+>>>>>>> v3.18
 		if (++ret == max_items)
 			break;
 	}
@@ -1160,7 +1406,11 @@ static unsigned long __locate(struct radix_tree_node *slot, void *item,
 	unsigned int shift, height;
 	unsigned long i;
 
+<<<<<<< HEAD
 	height = slot->height;
+=======
+	height = slot->path & RADIX_TREE_HEIGHT_MASK;
+>>>>>>> v3.18
 	shift = (height-1) * RADIX_TREE_MAP_SHIFT;
 
 	for ( ; height > 1; height--) {
@@ -1223,9 +1473,18 @@ unsigned long radix_tree_locate_item(struct radix_tree_root *root, void *item)
 		}
 
 		node = indirect_to_ptr(node);
+<<<<<<< HEAD
 		max_index = radix_tree_maxindex(node->height);
 		if (cur_index > max_index)
 			break;
+=======
+		max_index = radix_tree_maxindex(node->path &
+						RADIX_TREE_HEIGHT_MASK);
+		if (cur_index > max_index) {
+			rcu_read_unlock();
+			break;
+		}
+>>>>>>> v3.18
 
 		cur_index = __locate(node, item, cur_index, &found_index);
 		rcu_read_unlock();
@@ -1306,6 +1565,7 @@ static inline void radix_tree_shrink(struct radix_tree_root *root)
 }
 
 /**
+<<<<<<< HEAD
  *	radix_tree_delete    -    delete an item from a radix tree
  *	@root:		radix tree root
  *	@index:		index key
@@ -1348,6 +1608,91 @@ void *radix_tree_delete(struct radix_tree_root *root, unsigned long index)
 
 	if (slot == NULL)
 		goto out;
+=======
+ *	__radix_tree_delete_node    -    try to free node after clearing a slot
+ *	@root:		radix tree root
+ *	@node:		node containing @index
+ *
+ *	After clearing the slot at @index in @node from radix tree
+ *	rooted at @root, call this function to attempt freeing the
+ *	node and shrinking the tree.
+ *
+ *	Returns %true if @node was freed, %false otherwise.
+ */
+bool __radix_tree_delete_node(struct radix_tree_root *root,
+			      struct radix_tree_node *node)
+{
+	bool deleted = false;
+
+	do {
+		struct radix_tree_node *parent;
+
+		if (node->count) {
+			if (node == indirect_to_ptr(root->rnode)) {
+				radix_tree_shrink(root);
+				if (root->height == 0)
+					deleted = true;
+			}
+			return deleted;
+		}
+
+		parent = node->parent;
+		if (parent) {
+			unsigned int offset;
+
+			offset = node->path >> RADIX_TREE_HEIGHT_SHIFT;
+			parent->slots[offset] = NULL;
+			parent->count--;
+		} else {
+			root_tag_clear_all(root);
+			root->height = 0;
+			root->rnode = NULL;
+		}
+
+		radix_tree_node_free(node);
+		deleted = true;
+
+		node = parent;
+	} while (node);
+
+	return deleted;
+}
+
+/**
+ *	radix_tree_delete_item    -    delete an item from a radix tree
+ *	@root:		radix tree root
+ *	@index:		index key
+ *	@item:		expected item
+ *
+ *	Remove @item at @index from the radix tree rooted at @root.
+ *
+ *	Returns the address of the deleted item, or NULL if it was not present
+ *	or the entry at the given @index was not @item.
+ */
+void *radix_tree_delete_item(struct radix_tree_root *root,
+			     unsigned long index, void *item)
+{
+	struct radix_tree_node *node;
+	unsigned int offset;
+	void **slot;
+	void *entry;
+	int tag;
+
+	entry = __radix_tree_lookup(root, index, &node, &slot);
+	if (!entry)
+		return NULL;
+
+	if (item && entry != item)
+		return NULL;
+
+	if (!node) {
+		root_tag_clear_all(root);
+		root->rnode = NULL;
+		return entry;
+	}
+
+	offset = index & RADIX_TREE_MAP_MASK;
+>>>>>>> v3.18
 
 	/*
 	 * Clear all tags associated with the item to be deleted.
@@ -1358,6 +1703,7 @@ void *radix_tree_delete(struct radix_tree_root *root, unsigned long index)
 			radix_tree_tag_clear(root, index, tag);
 	}
 
+<<<<<<< HEAD
 	to_free = NULL;
 	/* Now free the nodes we do not need anymore */
 	while (node) {
@@ -1392,6 +1738,29 @@ void *radix_tree_delete(struct radix_tree_root *root, unsigned long index)
 
 out:
 	return slot;
+=======
+	node->slots[offset] = NULL;
+	node->count--;
+
+	__radix_tree_delete_node(root, node);
+
+	return entry;
+}
+EXPORT_SYMBOL(radix_tree_delete_item);
+
+/**
+ *	radix_tree_delete    -    delete an item from a radix tree
+ *	@root:		radix tree root
+ *	@index:		index key
+ *
+ *	Remove the item at @index from the radix tree rooted at @root.
+ *
+ *	Returns the address of the deleted item, or NULL if it was not present.
+ */
+void *radix_tree_delete(struct radix_tree_root *root, unsigned long index)
+{
+	return radix_tree_delete_item(root, index, NULL);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(radix_tree_delete);
 
@@ -1407,9 +1776,18 @@ int radix_tree_tagged(struct radix_tree_root *root, unsigned int tag)
 EXPORT_SYMBOL(radix_tree_tagged);
 
 static void
+<<<<<<< HEAD
 radix_tree_node_ctor(void *node)
 {
 	memset(node, 0, sizeof(struct radix_tree_node));
+=======
+radix_tree_node_ctor(void *arg)
+{
+	struct radix_tree_node *node = arg;
+
+	memset(node, 0, sizeof(*node));
+	INIT_LIST_HEAD(&node->private_list);
+>>>>>>> v3.18
 }
 
 static __init unsigned long __maxindex(unsigned int height)

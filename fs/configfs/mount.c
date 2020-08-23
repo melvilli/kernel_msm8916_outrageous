@@ -85,7 +85,11 @@ static int configfs_fill_super(struct super_block *sb, void *data, int silent)
 		/* directory inodes start off with i_nlink == 2 (for "." entry) */
 		inc_nlink(inode);
 	} else {
+<<<<<<< HEAD
 		pr_debug("configfs: could not get root inode\n");
+=======
+		pr_debug("could not get root inode\n");
+>>>>>>> v3.18
 		return -ENOMEM;
 	}
 
@@ -155,7 +159,11 @@ static int __init configfs_init(void)
 
 	return 0;
 out4:
+<<<<<<< HEAD
 	printk(KERN_ERR "configfs: Unable to register filesystem!\n");
+=======
+	pr_err("Unable to register filesystem!\n");
+>>>>>>> v3.18
 	configfs_inode_exit();
 out3:
 	kobject_put(config_kobj);

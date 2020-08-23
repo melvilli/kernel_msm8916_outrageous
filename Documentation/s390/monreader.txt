@@ -10,7 +10,11 @@ Author: Gerald Schaefer (geraldsc@de.ibm.com)
 Description
 ===========
 This item delivers a new Linux API in the form of a misc char device that is
+<<<<<<< HEAD
 useable from user space and allows read access to the z/VM Monitor Records
+=======
+usable from user space and allows read access to the z/VM Monitor Records
+>>>>>>> v3.18
 collected by the *MONITOR System Service of z/VM.
 
 

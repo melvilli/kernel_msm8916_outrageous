@@ -315,10 +315,13 @@ ENTRY(ret_from_kernel_thread)
 ENDPROC(ret_from_kernel_thread)
 
 /*
+<<<<<<< HEAD
  * Interrupt exit functions should be protected against kprobes
  */
 	.pushsection .kprobes.text, "ax"
 /*
+=======
+>>>>>>> v3.18
  * Return to user mode is not as complex as all this looks,
  * but we want the default path for a system call return to
  * go as quickly as possible which is why some of this is
@@ -362,12 +365,18 @@ END(ret_from_exception)
 #ifdef CONFIG_PREEMPT
 ENTRY(resume_kernel)
 	DISABLE_INTERRUPTS(CLBR_ANY)
+<<<<<<< HEAD
 	cmpl $0,TI_preempt_count(%ebp)	# non-zero preempt_count ?
 	jnz restore_all
 need_resched:
 	movl TI_flags(%ebp), %ecx	# need_resched set ?
 	testb $_TIF_NEED_RESCHED, %cl
 	jz restore_all
+=======
+need_resched:
+	cmpl $0,PER_CPU_VAR(__preempt_count)
+	jnz restore_all
+>>>>>>> v3.18
 	testl $X86_EFLAGS_IF,PT_EFLAGS(%esp)	# interrupts off (exception path) ?
 	jz restore_all
 	call preempt_schedule_irq
@@ -375,10 +384,13 @@ need_resched:
 END(resume_kernel)
 #endif
 	CFI_ENDPROC
+<<<<<<< HEAD
 /*
  * End of kprobes section
  */
 	.popsection
+=======
+>>>>>>> v3.18
 
 /* SYSENTER_RETURN points to after the "sysenter" instruction in
    the vsyscall page.  See vsyscall-sysentry.S, which defines the symbol.  */
@@ -458,6 +470,7 @@ sysenter_exit:
 sysenter_audit:
 	testl $(_TIF_WORK_SYSCALL_ENTRY & ~_TIF_SYSCALL_AUDIT),TI_flags(%ebp)
 	jnz syscall_trace_entry
+<<<<<<< HEAD
 	addl $4,%esp
 	CFI_ADJUST_CFA_OFFSET -4
 	/* %esi already in 8(%esp)	   6th arg: 4th syscall arg */
@@ -468,6 +481,16 @@ sysenter_audit:
 	movl $AUDIT_ARCH_I386,%eax	/* 1st arg: audit arch */
 	call __audit_syscall_entry
 	pushl_cfi %ebx
+=======
+	/* movl PT_EAX(%esp), %eax	already set, syscall number: 1st arg to audit */
+	movl PT_EBX(%esp), %edx		/* ebx/a0: 2nd arg to audit */
+	/* movl PT_ECX(%esp), %ecx	already set, a1: 3nd arg to audit */
+	pushl_cfi PT_ESI(%esp)		/* a3: 5th arg */
+	pushl_cfi PT_EDX+4(%esp)	/* a2: 4th arg */
+	call __audit_syscall_entry
+	popl_cfi %ecx /* get that remapped edx off the stack */
+	popl_cfi %ecx /* get that remapped esi off the stack */
+>>>>>>> v3.18
 	movl PT_EAX(%esp),%eax		/* reload syscall number */
 	jmp sysenter_do_call
 
@@ -499,10 +522,13 @@ sysexit_audit:
 	PTGS_TO_GS_EX
 ENDPROC(ia32_sysenter_target)
 
+<<<<<<< HEAD
 /*
  * syscall stub including irq exit should be protected against kprobes
  */
 	.pushsection .kprobes.text, "ax"
+=======
+>>>>>>> v3.18
 	# system call handler stub
 ENTRY(system_call)
 	RING0_INT_FRAME			# can't unwind into user space anyway
@@ -698,12 +724,17 @@ END(syscall_badsys)
 sysenter_badsys:
 	movl $-ENOSYS,%eax
 	jmp sysenter_after_call
+<<<<<<< HEAD
 END(syscall_badsys)
 	CFI_ENDPROC
 /*
  * End of kprobes section
  */
 	.popsection
+=======
+END(sysenter_badsys)
+	CFI_ENDPROC
+>>>>>>> v3.18
 
 .macro FIXUP_ESPFIX_STACK
 /*
@@ -794,10 +825,13 @@ common_interrupt:
 ENDPROC(common_interrupt)
 	CFI_ENDPROC
 
+<<<<<<< HEAD
 /*
  *  Irq entries should be protected against kprobes
  */
 	.pushsection .kprobes.text, "ax"
+=======
+>>>>>>> v3.18
 #define BUILD_INTERRUPT3(name, nr, fn)	\
 ENTRY(name)				\
 	RING0_INT_FRAME;		\
@@ -811,7 +845,21 @@ ENTRY(name)				\
 	CFI_ENDPROC;			\
 ENDPROC(name)
 
+<<<<<<< HEAD
 #define BUILD_INTERRUPT(name, nr)	BUILD_INTERRUPT3(name, nr, smp_##name)
+=======
+
+#ifdef CONFIG_TRACING
+#define TRACE_BUILD_INTERRUPT(name, nr)		\
+	BUILD_INTERRUPT3(trace_##name, nr, smp_trace_##name)
+#else
+#define TRACE_BUILD_INTERRUPT(name, nr)
+#endif
+
+#define BUILD_INTERRUPT(name, nr) \
+	BUILD_INTERRUPT3(name, nr, smp_##name); \
+	TRACE_BUILD_INTERRUPT(name, nr)
+>>>>>>> v3.18
 
 /* The include is where all of the SMP etc. interrupts come from */
 #include <asm/entry_arch.h>
@@ -964,10 +1012,13 @@ ENTRY(spurious_interrupt_bug)
 	jmp error_code
 	CFI_ENDPROC
 END(spurious_interrupt_bug)
+<<<<<<< HEAD
 /*
  * End of kprobes section
  */
 	.popsection
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_XEN
 /* Xen doesn't set %esp to be precisely what the normal sysenter
@@ -1076,9 +1127,12 @@ ENTRY(mcount)
 END(mcount)
 
 ENTRY(ftrace_caller)
+<<<<<<< HEAD
 	cmpl $0, function_trace_stop
 	jne  ftrace_stub
 
+=======
+>>>>>>> v3.18
 	pushl %eax
 	pushl %ecx
 	pushl %edx
@@ -1103,15 +1157,23 @@ ftrace_graph_call:
 	jmp ftrace_stub
 #endif
 
+<<<<<<< HEAD
 /* This is weak to keep gas from relaxing the jumps */
 WEAK(ftrace_stub)
+=======
+.globl ftrace_stub
+ftrace_stub:
+>>>>>>> v3.18
 	ret
 END(ftrace_caller)
 
 ENTRY(ftrace_regs_caller)
 	pushf	/* push flags before compare (in cs location) */
+<<<<<<< HEAD
 	cmpl $0, function_trace_stop
 	jne ftrace_restore_flags
+=======
+>>>>>>> v3.18
 
 	/*
 	 * i386 does not save SS and ESP when coming from kernel.
@@ -1170,14 +1232,22 @@ GLOBAL(ftrace_regs_call)
 	popf			/* Pop flags at end (no addl to corrupt flags) */
 	jmp ftrace_ret
 
+<<<<<<< HEAD
 ftrace_restore_flags:
+=======
+>>>>>>> v3.18
 	popf
 	jmp  ftrace_stub
 #else /* ! CONFIG_DYNAMIC_FTRACE */
 
 ENTRY(mcount)
+<<<<<<< HEAD
 	cmpl $0, function_trace_stop
 	jne  ftrace_stub
+=======
+	cmpl $__PAGE_OFFSET, %esp
+	jb ftrace_stub		/* Paging not enabled yet? */
+>>>>>>> v3.18
 
 	cmpl $ftrace_stub, ftrace_trace_function
 	jnz trace
@@ -1239,10 +1309,22 @@ return_to_handler:
 	jmp *%ecx
 #endif
 
+<<<<<<< HEAD
 /*
  * Some functions should be protected against kprobes
  */
 	.pushsection .kprobes.text, "ax"
+=======
+#ifdef CONFIG_TRACING
+ENTRY(trace_page_fault)
+	RING0_EC_FRAME
+	ASM_CLAC
+	pushl_cfi $trace_do_page_fault
+	jmp error_code
+	CFI_ENDPROC
+END(trace_page_fault)
+#endif
+>>>>>>> v3.18
 
 ENTRY(page_fault)
 	RING0_EC_FRAME
@@ -1447,7 +1529,10 @@ ENTRY(async_page_fault)
 END(async_page_fault)
 #endif
 
+<<<<<<< HEAD
 /*
  * End of kprobes section
  */
 	.popsection
+=======
+>>>>>>> v3.18

@@ -51,7 +51,10 @@ MODULE_PARM_DESC(beta, "upper bound of packets in network");
 module_param(gamma, int, 0644);
 MODULE_PARM_DESC(gamma, "limit on increase (scale by 2)");
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 /* There are several situations when we must "re-start" Vegas:
  *
  *  o when a connection is established
@@ -133,7 +136,10 @@ EXPORT_SYMBOL_GPL(tcp_vegas_pkts_acked);
 
 void tcp_vegas_state(struct sock *sk, u8 ca_state)
 {
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 	if (ca_state == TCP_CA_Open)
 		vegas_enable(sk);
 	else
@@ -163,13 +169,21 @@ static inline u32 tcp_vegas_ssthresh(struct tcp_sock *tp)
 	return  min(tp->snd_ssthresh, tp->snd_cwnd-1);
 }
 
+<<<<<<< HEAD
 static void tcp_vegas_cong_avoid(struct sock *sk, u32 ack, u32 in_flight)
+=======
+static void tcp_vegas_cong_avoid(struct sock *sk, u32 ack, u32 acked)
+>>>>>>> v3.18
 {
 	struct tcp_sock *tp = tcp_sk(sk);
 	struct vegas *vegas = inet_csk_ca(sk);
 
 	if (!vegas->doing_vegas_now) {
+<<<<<<< HEAD
 		tcp_reno_cong_avoid(sk, ack, in_flight);
+=======
+		tcp_reno_cong_avoid(sk, ack, acked);
+>>>>>>> v3.18
 		return;
 	}
 
@@ -194,7 +208,11 @@ static void tcp_vegas_cong_avoid(struct sock *sk, u32 ack, u32 in_flight)
 			/* We don't have enough RTT samples to do the Vegas
 			 * calculation, so we'll behave like Reno.
 			 */
+<<<<<<< HEAD
 			tcp_reno_cong_avoid(sk, ack, in_flight);
+=======
+			tcp_reno_cong_avoid(sk, ack, acked);
+>>>>>>> v3.18
 		} else {
 			u32 rtt, diff;
 			u64 target_cwnd;
@@ -244,7 +262,11 @@ static void tcp_vegas_cong_avoid(struct sock *sk, u32 ack, u32 in_flight)
 
 			} else if (tp->snd_cwnd <= tp->snd_ssthresh) {
 				/* Slow start.  */
+<<<<<<< HEAD
 				tcp_slow_start(tp);
+=======
+				tcp_slow_start(tp, acked);
+>>>>>>> v3.18
 			} else {
 				/* Congestion avoidance. */
 
@@ -284,8 +306,12 @@ static void tcp_vegas_cong_avoid(struct sock *sk, u32 ack, u32 in_flight)
 	}
 	/* Use normal slow start */
 	else if (tp->snd_cwnd <= tp->snd_ssthresh)
+<<<<<<< HEAD
 		tcp_slow_start(tp);
 
+=======
+		tcp_slow_start(tp, acked);
+>>>>>>> v3.18
 }
 
 /* Extract info for Tcp socket info provided via netlink. */
@@ -306,11 +332,17 @@ void tcp_vegas_get_info(struct sock *sk, u32 ext, struct sk_buff *skb)
 EXPORT_SYMBOL_GPL(tcp_vegas_get_info);
 
 static struct tcp_congestion_ops tcp_vegas __read_mostly = {
+<<<<<<< HEAD
 	.flags		= TCP_CONG_RTT_STAMP,
 	.init		= tcp_vegas_init,
 	.ssthresh	= tcp_reno_ssthresh,
 	.cong_avoid	= tcp_vegas_cong_avoid,
 	.min_cwnd	= tcp_reno_min_cwnd,
+=======
+	.init		= tcp_vegas_init,
+	.ssthresh	= tcp_reno_ssthresh,
+	.cong_avoid	= tcp_vegas_cong_avoid,
+>>>>>>> v3.18
 	.pkts_acked	= tcp_vegas_pkts_acked,
 	.set_state	= tcp_vegas_state,
 	.cwnd_event	= tcp_vegas_cwnd_event,

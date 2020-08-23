@@ -29,7 +29,10 @@
 #define _OS_INTFS_C_
 
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/kthread.h>
 #include <linux/firmware.h>
 #include "osdep_service.h"
@@ -141,7 +144,11 @@ static uint loadparam(struct _adapter *padapter, struct  net_device *pnetdev)
 	registry_par->ssid.SsidLength = 3;
 	registry_par->channel = (u8)channel;
 	registry_par->wireless_mode = (u8)wireless_mode;
+<<<<<<< HEAD
 	registry_par->vrtl_carrier_sense = (u8)vrtl_carrier_sense ;
+=======
+	registry_par->vrtl_carrier_sense = (u8)vrtl_carrier_sense;
+>>>>>>> v3.18
 	registry_par->vcs_type = (u8)vcs_type;
 	registry_par->frag_thresh = (u16)frag_thresh;
 	registry_par->preamble = (u8)preamble;
@@ -238,9 +245,15 @@ struct net_device *r8712_init_netdev(void)
 
 static u32 start_drv_threads(struct _adapter *padapter)
 {
+<<<<<<< HEAD
 	padapter->cmdThread = kthread_run(r8712_cmd_thread, padapter,
 			      padapter->pnetdev->name);
 	if (IS_ERR(padapter->cmdThread) < 0)
+=======
+	padapter->cmdThread = kthread_run(r8712_cmd_thread, padapter, "%s",
+			      padapter->pnetdev->name);
+	if (IS_ERR(padapter->cmdThread))
+>>>>>>> v3.18
 		return _FAIL;
 	return _SUCCESS;
 }
@@ -346,8 +359,12 @@ u8 r8712_free_drv_sw(struct _adapter *padapter)
 	r8712_free_mlme_priv(&padapter->mlmepriv);
 	r8712_free_io_queue(padapter);
 	_free_xmit_priv(&padapter->xmitpriv);
+<<<<<<< HEAD
 	if (padapter->fw_found)
 		_r8712_free_sta_priv(&padapter->stapriv);
+=======
+	_r8712_free_sta_priv(&padapter->stapriv);
+>>>>>>> v3.18
 	_r8712_free_recv_priv(&padapter->recvpriv);
 	mp871xdeinit(padapter);
 	if (pnetdev)

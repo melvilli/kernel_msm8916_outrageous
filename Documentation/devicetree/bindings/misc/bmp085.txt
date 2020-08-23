@@ -8,6 +8,11 @@ Optional properties:
 - temp-measurement-period: temperature measurement period (milliseconds)
 - default-oversampling: default oversampling value to be used at startup,
   value range is 0-3 with rising sensitivity.
+<<<<<<< HEAD
+=======
+- interrupt-parent: should be the phandle for the interrupt controller
+- interrupts: interrupt mapping for IRQ
+>>>>>>> v3.18
 
 Example:
 
@@ -17,4 +22,9 @@ pressure@77 {
 	chip-id = <10>;
 	temp-measurement-period = <100>;
 	default-oversampling = <2>;
+<<<<<<< HEAD
+=======
+	interrupt-parent = <&gpio0>;
+	interrupts = <25 IRQ_TYPE_EDGE_RISING>;
+>>>>>>> v3.18
 };

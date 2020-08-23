@@ -35,6 +35,12 @@
 
 #include <linux/seq_file.h>
 #include <drm/drmP.h>
+<<<<<<< HEAD
+=======
+#include <drm/drm_gem.h>
+
+#include "drm_legacy.h"
+>>>>>>> v3.18
 
 /**
  * Called when "/proc/dri/.../name" is read.
@@ -47,6 +53,7 @@ int drm_name_info(struct seq_file *m, void *data)
 	struct drm_minor *minor = node->minor;
 	struct drm_device *dev = minor->dev;
 	struct drm_master *master = minor->master;
+<<<<<<< HEAD
 	const char *bus_name;
 	if (!master)
 		return 0;
@@ -59,6 +66,18 @@ int drm_name_info(struct seq_file *m, void *data)
 	} else {
 		seq_printf(m, "%s %s\n",
 			   bus_name, dev_name(dev->dev));
+=======
+	if (!master)
+		return 0;
+
+	if (master->unique) {
+		seq_printf(m, "%s %s %s\n",
+			   dev->driver->name,
+			   dev_name(dev->dev), master->unique);
+	} else {
+		seq_printf(m, "%s %s\n",
+			   dev->driver->name, dev_name(dev->dev));
+>>>>>>> v3.18
 	}
 	return 0;
 }
@@ -134,7 +153,11 @@ int drm_bufs_info(struct seq_file *m, void *data)
 				   i,
 				   dma->bufs[i].buf_size,
 				   dma->bufs[i].buf_count,
+<<<<<<< HEAD
 				   atomic_read(&dma->bufs[i].freelist.count),
+=======
+				   0,
+>>>>>>> v3.18
 				   dma->bufs[i].seg_count,
 				   seg_pages,
 				   seg_pages * PAGE_SIZE / 1024);
@@ -163,6 +186,7 @@ int drm_vblank_info(struct seq_file *m, void *data)
 	mutex_lock(&dev->struct_mutex);
 	for (crtc = 0; crtc < dev->num_crtcs; crtc++) {
 		seq_printf(m, "CRTC %d enable:     %d\n",
+<<<<<<< HEAD
 			   crtc, atomic_read(&dev->vblank_refcount[crtc]));
 		seq_printf(m, "CRTC %d counter:    %d\n",
 			   crtc, drm_vblank_count(dev, crtc));
@@ -170,6 +194,15 @@ int drm_vblank_info(struct seq_file *m, void *data)
 			   crtc, dev->last_vblank_wait[crtc]);
 		seq_printf(m, "CRTC %d in modeset: %d\n",
 			   crtc, dev->vblank_inmodeset[crtc]);
+=======
+			   crtc, atomic_read(&dev->vblank[crtc].refcount));
+		seq_printf(m, "CRTC %d counter:    %d\n",
+			   crtc, drm_vblank_count(dev, crtc));
+		seq_printf(m, "CRTC %d last wait:  %d\n",
+			   crtc, dev->vblank[crtc].last_wait);
+		seq_printf(m, "CRTC %d in modeset: %d\n",
+			   crtc, dev->vblank[crtc].inmodeset);
+>>>>>>> v3.18
 	}
 	mutex_unlock(&dev->struct_mutex);
 	return 0;
@@ -185,6 +218,7 @@ int drm_clients_info(struct seq_file *m, void *data)
 	struct drm_device *dev = node->minor->dev;
 	struct drm_file *priv;
 
+<<<<<<< HEAD
 	mutex_lock(&dev->struct_mutex);
 	seq_printf(m, "a dev	pid    uid	magic	  ioctls\n\n");
 	list_for_each_entry(priv, &dev->filelist, lhead) {
@@ -194,6 +228,34 @@ int drm_clients_info(struct seq_file *m, void *data)
 			   pid_vnr(priv->pid),
 			   from_kuid_munged(seq_user_ns(m), priv->uid),
 			   priv->magic, priv->ioctl_count);
+=======
+	seq_printf(m,
+		   "%20s %5s %3s master a %5s %10s\n",
+		   "command",
+		   "pid",
+		   "dev",
+		   "uid",
+		   "magic");
+
+	/* dev->filelist is sorted youngest first, but we want to present
+	 * oldest first (i.e. kernel, servers, clients), so walk backwardss.
+	 */
+	mutex_lock(&dev->struct_mutex);
+	list_for_each_entry_reverse(priv, &dev->filelist, lhead) {
+		struct task_struct *task;
+
+		rcu_read_lock(); /* locks pid_task()->comm */
+		task = pid_task(priv->pid, PIDTYPE_PID);
+		seq_printf(m, "%20s %5d %3d   %c    %c %5d %10u\n",
+			   task ? task->comm : "<unknown>",
+			   pid_vnr(priv->pid),
+			   priv->minor->index,
+			   priv->is_master ? 'y' : 'n',
+			   priv->authenticated ? 'y' : 'n',
+			   from_kuid_munged(seq_user_ns(m), priv->uid),
+			   priv->magic);
+		rcu_read_unlock();
+>>>>>>> v3.18
 	}
 	mutex_unlock(&dev->struct_mutex);
 	return 0;
@@ -207,7 +269,11 @@ static int drm_gem_one_name_info(int id, void *ptr, void *data)
 
 	seq_printf(m, "%6d %8zd %7d %8d\n",
 		   obj->name, obj->size,
+<<<<<<< HEAD
 		   atomic_read(&obj->handle_count),
+=======
+		   obj->handle_count,
+>>>>>>> v3.18
 		   atomic_read(&obj->refcount.refcount));
 	return 0;
 }
@@ -218,6 +284,7 @@ int drm_gem_name_info(struct seq_file *m, void *data)
 	struct drm_device *dev = node->minor->dev;
 
 	seq_printf(m, "  name     size handles refcount\n");
+<<<<<<< HEAD
 	idr_for_each(&dev->object_name_idr, drm_gem_one_name_info, m);
 	return 0;
 }
@@ -276,3 +343,12 @@ int drm_vma_info(struct seq_file *m, void *data)
 
 #endif
 
+=======
+
+	mutex_lock(&dev->object_name_lock);
+	idr_for_each(&dev->object_name_idr, drm_gem_one_name_info, m);
+	mutex_unlock(&dev->object_name_lock);
+
+	return 0;
+}
+>>>>>>> v3.18

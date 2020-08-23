@@ -18,6 +18,11 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) "pstore: " fmt
+
+>>>>>>> v3.18
 #include <linux/atomic.h>
 #include <linux/types.h>
 #include <linux/errno.h>
@@ -26,6 +31,10 @@
 #include <linux/console.h>
 #include <linux/module.h>
 #include <linux/pstore.h>
+<<<<<<< HEAD
+=======
+#include <linux/zlib.h>
+>>>>>>> v3.18
 #include <linux/string.h>
 #include <linux/timer.h>
 #include <linux/slab.h>
@@ -65,6 +74,18 @@ struct pstore_info *psinfo;
 
 static char *backend;
 
+<<<<<<< HEAD
+=======
+/* Compression parameters */
+#define COMPR_LEVEL 6
+#define WINDOW_BITS 12
+#define MEM_LEVEL 4
+static struct z_stream_s stream;
+
+static char *big_oops_buf;
+static size_t big_oops_buf_sz;
+
+>>>>>>> v3.18
 /* How much of the console log to snapshot */
 static unsigned long kmsg_bytes = 10240;
 
@@ -117,6 +138,143 @@ bool pstore_cannot_block_path(enum kmsg_dump_reason reason)
 }
 EXPORT_SYMBOL_GPL(pstore_cannot_block_path);
 
+<<<<<<< HEAD
+=======
+/* Derived from logfs_compress() */
+static int pstore_compress(const void *in, void *out, size_t inlen,
+							size_t outlen)
+{
+	int err, ret;
+
+	ret = -EIO;
+	err = zlib_deflateInit2(&stream, COMPR_LEVEL, Z_DEFLATED, WINDOW_BITS,
+						MEM_LEVEL, Z_DEFAULT_STRATEGY);
+	if (err != Z_OK)
+		goto error;
+
+	stream.next_in = in;
+	stream.avail_in = inlen;
+	stream.total_in = 0;
+	stream.next_out = out;
+	stream.avail_out = outlen;
+	stream.total_out = 0;
+
+	err = zlib_deflate(&stream, Z_FINISH);
+	if (err != Z_STREAM_END)
+		goto error;
+
+	err = zlib_deflateEnd(&stream);
+	if (err != Z_OK)
+		goto error;
+
+	if (stream.total_out >= stream.total_in)
+		goto error;
+
+	ret = stream.total_out;
+error:
+	return ret;
+}
+
+/* Derived from logfs_uncompress */
+static int pstore_decompress(void *in, void *out, size_t inlen, size_t outlen)
+{
+	int err, ret;
+
+	ret = -EIO;
+	err = zlib_inflateInit2(&stream, WINDOW_BITS);
+	if (err != Z_OK)
+		goto error;
+
+	stream.next_in = in;
+	stream.avail_in = inlen;
+	stream.total_in = 0;
+	stream.next_out = out;
+	stream.avail_out = outlen;
+	stream.total_out = 0;
+
+	err = zlib_inflate(&stream, Z_FINISH);
+	if (err != Z_STREAM_END)
+		goto error;
+
+	err = zlib_inflateEnd(&stream);
+	if (err != Z_OK)
+		goto error;
+
+	ret = stream.total_out;
+error:
+	return ret;
+}
+
+static void allocate_buf_for_compression(void)
+{
+	size_t size;
+	size_t cmpr;
+
+	switch (psinfo->bufsize) {
+	/* buffer range for efivars */
+	case 1000 ... 2000:
+		cmpr = 56;
+		break;
+	case 2001 ... 3000:
+		cmpr = 54;
+		break;
+	case 3001 ... 3999:
+		cmpr = 52;
+		break;
+	/* buffer range for nvram, erst */
+	case 4000 ... 10000:
+		cmpr = 45;
+		break;
+	default:
+		cmpr = 60;
+		break;
+	}
+
+	big_oops_buf_sz = (psinfo->bufsize * 100) / cmpr;
+	big_oops_buf = kmalloc(big_oops_buf_sz, GFP_KERNEL);
+	if (big_oops_buf) {
+		size = max(zlib_deflate_workspacesize(WINDOW_BITS, MEM_LEVEL),
+			zlib_inflate_workspacesize());
+		stream.workspace = kmalloc(size, GFP_KERNEL);
+		if (!stream.workspace) {
+			pr_err("No memory for compression workspace; skipping compression\n");
+			kfree(big_oops_buf);
+			big_oops_buf = NULL;
+		}
+	} else {
+		pr_err("No memory for uncompressed data; skipping compression\n");
+		stream.workspace = NULL;
+	}
+
+}
+
+/*
+ * Called when compression fails, since the printk buffer
+ * would be fetched for compression calling it again when
+ * compression fails would have moved the iterator of
+ * printk buffer which results in fetching old contents.
+ * Copy the recent messages from big_oops_buf to psinfo->buf
+ */
+static size_t copy_kmsg_to_buffer(int hsize, size_t len)
+{
+	size_t total_len;
+	size_t diff;
+
+	total_len = hsize + len;
+
+	if (total_len > psinfo->bufsize) {
+		diff = total_len - psinfo->bufsize + hsize;
+		memcpy(psinfo->buf, big_oops_buf, hsize);
+		memcpy(psinfo->buf + hsize, big_oops_buf + diff,
+					psinfo->bufsize - hsize);
+		total_len = psinfo->bufsize;
+	} else
+		memcpy(psinfo->buf, big_oops_buf, total_len);
+
+	return total_len;
+}
+
+>>>>>>> v3.18
 /*
  * callback from kmsg_dump. (s2,l2) has the most recently
  * written bytes, older bytes are in (s1,l1). Save as much
@@ -148,6 +306,7 @@ static void pstore_dump(struct kmsg_dumper *dumper,
 		char *dst;
 		unsigned long size;
 		int hsize;
+<<<<<<< HEAD
 		size_t len;
 
 		dst = psinfo->buf;
@@ -164,6 +323,54 @@ static void pstore_dump(struct kmsg_dumper *dumper,
 			pstore_new_entry = 1;
 
 		total += hsize + len;
+=======
+		int zipped_len = -1;
+		size_t len;
+		bool compressed;
+		size_t total_len;
+
+		if (big_oops_buf) {
+			dst = big_oops_buf;
+			hsize = sprintf(dst, "%s#%d Part%d\n", why,
+							oopscount, part);
+			size = big_oops_buf_sz - hsize;
+
+			if (!kmsg_dump_get_buffer(dumper, true, dst + hsize,
+								size, &len))
+				break;
+
+			zipped_len = pstore_compress(dst, psinfo->buf,
+						hsize + len, psinfo->bufsize);
+
+			if (zipped_len > 0) {
+				compressed = true;
+				total_len = zipped_len;
+			} else {
+				compressed = false;
+				total_len = copy_kmsg_to_buffer(hsize, len);
+			}
+		} else {
+			dst = psinfo->buf;
+			hsize = sprintf(dst, "%s#%d Part%d\n", why, oopscount,
+									part);
+			size = psinfo->bufsize - hsize;
+			dst += hsize;
+
+			if (!kmsg_dump_get_buffer(dumper, true, dst,
+								size, &len))
+				break;
+
+			compressed = false;
+			total_len = hsize + len;
+		}
+
+		ret = psinfo->write(PSTORE_TYPE_DMESG, reason, &id, part,
+				    oopscount, compressed, total_len, psinfo);
+		if (ret == 0 && reason == KMSG_DUMP_OOPS && pstore_is_mounted())
+			pstore_new_entry = 1;
+
+		total += total_len;
+>>>>>>> v3.18
 		part++;
 	}
 	if (pstore_cannot_block_path(reason)) {
@@ -196,7 +403,11 @@ static void pstore_console_write(struct console *con, const char *s, unsigned c)
 			spin_lock_irqsave(&psinfo->buf_lock, flags);
 		}
 		memcpy(psinfo->buf, s, c);
+<<<<<<< HEAD
 		psinfo->write(PSTORE_TYPE_CONSOLE, 0, &id, 0, 0, c, psinfo);
+=======
+		psinfo->write(PSTORE_TYPE_CONSOLE, 0, &id, 0, 0, 0, c, psinfo);
+>>>>>>> v3.18
 		spin_unlock_irqrestore(&psinfo->buf_lock, flags);
 		s += c;
 		c = e - s;
@@ -221,9 +432,17 @@ static void pstore_register_console(void) {}
 static int pstore_write_compat(enum pstore_type_id type,
 			       enum kmsg_dump_reason reason,
 			       u64 *id, unsigned int part, int count,
+<<<<<<< HEAD
 			       size_t size, struct pstore_info *psi)
 {
 	return psi->write_buf(type, reason, id, part, psinfo->buf, size, psi);
+=======
+			       bool compressed, size_t size,
+			       struct pstore_info *psi)
+{
+	return psi->write_buf(type, reason, id, part, psinfo->buf, compressed,
+			     size, psi);
+>>>>>>> v3.18
 }
 
 /*
@@ -239,17 +458,26 @@ int pstore_register(struct pstore_info *psi)
 {
 	struct module *owner = psi->owner;
 
+<<<<<<< HEAD
+=======
+	if (backend && strcmp(backend, psi->name))
+		return -EPERM;
+
+>>>>>>> v3.18
 	spin_lock(&pstore_lock);
 	if (psinfo) {
 		spin_unlock(&pstore_lock);
 		return -EBUSY;
 	}
 
+<<<<<<< HEAD
 	if (backend && strcmp(backend, psi->name)) {
 		spin_unlock(&pstore_lock);
 		return -EINVAL;
 	}
 
+=======
+>>>>>>> v3.18
 	if (!psi->write)
 		psi->write = pstore_write_compat;
 	psinfo = psi;
@@ -261,13 +489,26 @@ int pstore_register(struct pstore_info *psi)
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
+=======
+	allocate_buf_for_compression();
+
+>>>>>>> v3.18
 	if (pstore_is_mounted())
 		pstore_get_records(0);
 
 	kmsg_dump_register(&pstore_dumper);
+<<<<<<< HEAD
 	pstore_register_console();
 	pstore_register_ftrace();
 	pstore_register_pmsg();
+=======
+
+	if ((psi->flags & PSTORE_FLAGS_FRAGILE) == 0) {
+		pstore_register_console();
+		pstore_register_ftrace();
+	}
+>>>>>>> v3.18
 
 	if (pstore_update_ms >= 0) {
 		pstore_timer.expires = jiffies +
@@ -275,6 +516,11 @@ int pstore_register(struct pstore_info *psi)
 		add_timer(&pstore_timer);
 	}
 
+<<<<<<< HEAD
+=======
+	pr_info("Registered %s as persistent store backend\n", psi->name);
+
+>>>>>>> v3.18
 	return 0;
 }
 EXPORT_SYMBOL_GPL(pstore_register);
@@ -295,6 +541,11 @@ void pstore_get_records(int quiet)
 	enum pstore_type_id	type;
 	struct timespec		time;
 	int			failed = 0, rc;
+<<<<<<< HEAD
+=======
+	bool			compressed;
+	int			unzipped_len = -1;
+>>>>>>> v3.18
 
 	if (!psi)
 		return;
@@ -303,11 +554,41 @@ void pstore_get_records(int quiet)
 	if (psi->open && psi->open(psi))
 		goto out;
 
+<<<<<<< HEAD
 	while ((size = psi->read(&id, &type, &count, &time, &buf, psi)) > 0) {
 		rc = pstore_mkfile(type, psi->name, id, count, buf,
 				  (size_t)size, time, psi);
 		kfree(buf);
 		buf = NULL;
+=======
+	while ((size = psi->read(&id, &type, &count, &time, &buf, &compressed,
+				psi)) > 0) {
+		if (compressed && (type == PSTORE_TYPE_DMESG)) {
+			if (big_oops_buf)
+				unzipped_len = pstore_decompress(buf,
+							big_oops_buf, size,
+							big_oops_buf_sz);
+
+			if (unzipped_len > 0) {
+				kfree(buf);
+				buf = big_oops_buf;
+				size = unzipped_len;
+				compressed = false;
+			} else {
+				pr_err("decompression failed;returned %d\n",
+				       unzipped_len);
+				compressed = true;
+			}
+		}
+		rc = pstore_mkfile(type, psi->name, id, count, buf,
+				  compressed, (size_t)size, time, psi);
+		if (unzipped_len < 0) {
+			/* Free buffer other than big oops */
+			kfree(buf);
+			buf = NULL;
+		} else
+			unzipped_len = -1;
+>>>>>>> v3.18
 		if (rc && (rc != -EEXIST || !quiet))
 			failed++;
 	}
@@ -317,8 +598,13 @@ out:
 	mutex_unlock(&psi->read_mutex);
 
 	if (failed)
+<<<<<<< HEAD
 		printk(KERN_WARNING "pstore: failed to load %d record(s) from '%s'\n",
 		       failed, psi->name);
+=======
+		pr_warn("failed to load %d record(s) from '%s'\n",
+			failed, psi->name);
+>>>>>>> v3.18
 }
 
 static void pstore_dowork(struct work_struct *work)

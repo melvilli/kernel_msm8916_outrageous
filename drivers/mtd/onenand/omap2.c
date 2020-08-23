@@ -25,7 +25,10 @@
 
 #include <linux/device.h>
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/mtd/mtd.h>
 #include <linux/mtd/onenand.h>
 #include <linux/mtd/partitions.h>
@@ -159,7 +162,11 @@ static int omap2_onenand_wait(struct mtd_info *mtd, int state)
 				syscfg = read_reg(c, ONENAND_REG_SYS_CFG1);
 		}
 
+<<<<<<< HEAD
 		INIT_COMPLETION(c->irq_done);
+=======
+		reinit_completion(&c->irq_done);
+>>>>>>> v3.18
 		if (c->gpio_irq) {
 			result = gpio_get_value(c->gpio_irq);
 			if (result == -1) {
@@ -349,7 +356,11 @@ static int omap3_onenand_read_bufferram(struct mtd_info *mtd, int area,
 	omap_set_dma_dest_params(c->dma_channel, 0, OMAP_DMA_AMODE_POST_INC,
 				 dma_dst, 0, 0);
 
+<<<<<<< HEAD
 	INIT_COMPLETION(c->dma_done);
+=======
+	reinit_completion(&c->dma_done);
+>>>>>>> v3.18
 	omap_start_dma(c->dma_channel);
 
 	timeout = jiffies + msecs_to_jiffies(20);
@@ -420,7 +431,11 @@ static int omap3_onenand_write_bufferram(struct mtd_info *mtd, int area,
 	omap_set_dma_dest_params(c->dma_channel, 0, OMAP_DMA_AMODE_POST_INC,
 				 dma_dst, 0, 0);
 
+<<<<<<< HEAD
 	INIT_COMPLETION(c->dma_done);
+=======
+	reinit_completion(&c->dma_done);
+>>>>>>> v3.18
 	omap_start_dma(c->dma_channel);
 
 	timeout = jiffies + msecs_to_jiffies(20);
@@ -499,7 +514,11 @@ static int omap2_onenand_read_bufferram(struct mtd_info *mtd, int area,
 	omap_set_dma_dest_params(c->dma_channel, 0, OMAP_DMA_AMODE_POST_INC,
 				 dma_dst, 0, 0);
 
+<<<<<<< HEAD
 	INIT_COMPLETION(c->dma_done);
+=======
+	reinit_completion(&c->dma_done);
+>>>>>>> v3.18
 	omap_start_dma(c->dma_channel);
 	wait_for_completion(&c->dma_done);
 
@@ -544,7 +563,11 @@ static int omap2_onenand_write_bufferram(struct mtd_info *mtd, int area,
 	omap_set_dma_dest_params(c->dma_channel, 0, OMAP_DMA_AMODE_POST_INC,
 				 dma_dst, 0, 0);
 
+<<<<<<< HEAD
 	INIT_COMPLETION(c->dma_done);
+=======
+	reinit_completion(&c->dma_done);
+>>>>>>> v3.18
 	omap_start_dma(c->dma_channel);
 	wait_for_completion(&c->dma_done);
 
@@ -573,6 +596,7 @@ static int omap2_onenand_write_bufferram(struct mtd_info *mtd, int area,
 
 static struct platform_driver omap2_onenand_driver;
 
+<<<<<<< HEAD
 static int __adjust_timing(struct device *dev, void *data)
 {
 	int ret = 0;
@@ -595,6 +619,8 @@ int omap2_onenand_rephase(void)
 				      NULL, __adjust_timing);
 }
 
+=======
+>>>>>>> v3.18
 static void omap2_onenand_shutdown(struct platform_device *pdev)
 {
 	struct omap2_onenand *c = dev_get_drvdata(&pdev->dev);
@@ -639,7 +665,11 @@ static int omap2_onenand_probe(struct platform_device *pdev)
 	struct resource *res;
 	struct mtd_part_parser_data ppdata = {};
 
+<<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	if (pdata == NULL) {
 		dev_err(&pdev->dev, "platform data missing\n");
 		return -ENODEV;
@@ -810,7 +840,10 @@ static int omap2_onenand_remove(struct platform_device *pdev)
 	if (c->dma_channel != -1)
 		omap_free_dma(c->dma_channel);
 	omap2_onenand_shutdown(pdev);
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	if (c->gpio_irq) {
 		free_irq(gpio_to_irq(c->gpio_irq), c);
 		gpio_free(c->gpio_irq);

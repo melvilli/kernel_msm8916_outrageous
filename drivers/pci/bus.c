@@ -13,7 +13,10 @@
 #include <linux/errno.h>
 #include <linux/ioport.h>
 #include <linux/proc_fs.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/slab.h>
 
 #include "pci.h"
@@ -98,6 +101,7 @@ void pci_bus_remove_resources(struct pci_bus *bus)
 	}
 }
 
+<<<<<<< HEAD
 /**
  * pci_bus_alloc_resource - allocate a resource from a parent bus
  * @bus: PCI bus
@@ -117,10 +121,48 @@ int
 pci_bus_alloc_resource(struct pci_bus *bus, struct resource *res,
 		resource_size_t size, resource_size_t align,
 		resource_size_t min, unsigned int type_mask,
+=======
+static struct pci_bus_region pci_32_bit = {0, 0xffffffffULL};
+#ifdef CONFIG_ARCH_DMA_ADDR_T_64BIT
+static struct pci_bus_region pci_64_bit = {0,
+				(dma_addr_t) 0xffffffffffffffffULL};
+static struct pci_bus_region pci_high = {(dma_addr_t) 0x100000000ULL,
+				(dma_addr_t) 0xffffffffffffffffULL};
+#endif
+
+/*
+ * @res contains CPU addresses.  Clip it so the corresponding bus addresses
+ * on @bus are entirely within @region.  This is used to control the bus
+ * addresses of resources we allocate, e.g., we may need a resource that
+ * can be mapped by a 32-bit BAR.
+ */
+static void pci_clip_resource_to_region(struct pci_bus *bus,
+					struct resource *res,
+					struct pci_bus_region *region)
+{
+	struct pci_bus_region r;
+
+	pcibios_resource_to_bus(bus, &r, res);
+	if (r.start < region->start)
+		r.start = region->start;
+	if (r.end > region->end)
+		r.end = region->end;
+
+	if (r.end < r.start)
+		res->end = res->start - 1;
+	else
+		pcibios_bus_to_resource(bus, res, &r);
+}
+
+static int pci_bus_alloc_from_region(struct pci_bus *bus, struct resource *res,
+		resource_size_t size, resource_size_t align,
+		resource_size_t min, unsigned long type_mask,
+>>>>>>> v3.18
 		resource_size_t (*alignf)(void *,
 					  const struct resource *,
 					  resource_size_t,
 					  resource_size_t),
+<<<<<<< HEAD
 		void *alignf_data)
 {
 	int i, ret = -ENOMEM;
@@ -132,6 +174,16 @@ pci_bus_alloc_resource(struct pci_bus *bus, struct resource *res,
 	/* don't allocate too high if the pref mem doesn't support 64bit*/
 	if (!(res->flags & IORESOURCE_MEM_64))
 		max = PCIBIOS_MAX_MEM_32;
+=======
+		void *alignf_data,
+		struct pci_bus_region *region)
+{
+	int i, ret;
+	struct resource *r, avail;
+	resource_size_t max;
+
+	type_mask |= IORESOURCE_TYPE_BITS;
+>>>>>>> v3.18
 
 	pci_bus_for_each_resource(bus, r, i) {
 		if (!r)
@@ -147,6 +199,7 @@ pci_bus_alloc_resource(struct pci_bus *bus, struct resource *res,
 		    !(res->flags & IORESOURCE_PREFETCH))
 			continue;
 
+<<<<<<< HEAD
 		/* Ok, try it out.. */
 		ret = allocate_resource(r, res, size,
 					r->start ? : min,
@@ -157,6 +210,76 @@ pci_bus_alloc_resource(struct pci_bus *bus, struct resource *res,
 	}
 	return ret;
 }
+=======
+		avail = *r;
+		pci_clip_resource_to_region(bus, &avail, region);
+
+		/*
+		 * "min" is typically PCIBIOS_MIN_IO or PCIBIOS_MIN_MEM to
+		 * protect badly documented motherboard resources, but if
+		 * this is an already-configured bridge window, its start
+		 * overrides "min".
+		 */
+		if (avail.start)
+			min = avail.start;
+
+		max = avail.end;
+
+		/* Ok, try it out.. */
+		ret = allocate_resource(r, res, size, min, max,
+					align, alignf, alignf_data);
+		if (ret == 0)
+			return 0;
+	}
+	return -ENOMEM;
+}
+
+/**
+ * pci_bus_alloc_resource - allocate a resource from a parent bus
+ * @bus: PCI bus
+ * @res: resource to allocate
+ * @size: size of resource to allocate
+ * @align: alignment of resource to allocate
+ * @min: minimum /proc/iomem address to allocate
+ * @type_mask: IORESOURCE_* type flags
+ * @alignf: resource alignment function
+ * @alignf_data: data argument for resource alignment function
+ *
+ * Given the PCI bus a device resides on, the size, minimum address,
+ * alignment and type, try to find an acceptable resource allocation
+ * for a specific device resource.
+ */
+int pci_bus_alloc_resource(struct pci_bus *bus, struct resource *res,
+		resource_size_t size, resource_size_t align,
+		resource_size_t min, unsigned long type_mask,
+		resource_size_t (*alignf)(void *,
+					  const struct resource *,
+					  resource_size_t,
+					  resource_size_t),
+		void *alignf_data)
+{
+#ifdef CONFIG_ARCH_DMA_ADDR_T_64BIT
+	int rc;
+
+	if (res->flags & IORESOURCE_MEM_64) {
+		rc = pci_bus_alloc_from_region(bus, res, size, align, min,
+					       type_mask, alignf, alignf_data,
+					       &pci_high);
+		if (rc == 0)
+			return 0;
+
+		return pci_bus_alloc_from_region(bus, res, size, align, min,
+						 type_mask, alignf, alignf_data,
+						 &pci_64_bit);
+	}
+#endif
+
+	return pci_bus_alloc_from_region(bus, res, size, align, min,
+					 type_mask, alignf, alignf_data,
+					 &pci_32_bit);
+}
+EXPORT_SYMBOL(pci_bus_alloc_resource);
+>>>>>>> v3.18
 
 void __weak pcibios_resource_survey_bus(struct pci_bus *bus) { }
 
@@ -166,7 +289,11 @@ void __weak pcibios_resource_survey_bus(struct pci_bus *bus) { }
  *
  * This adds add sysfs entries and start device drivers
  */
+<<<<<<< HEAD
 int pci_bus_add_device(struct pci_dev *dev)
+=======
+void pci_bus_add_device(struct pci_dev *dev)
+>>>>>>> v3.18
 {
 	int retval;
 
@@ -176,15 +303,24 @@ int pci_bus_add_device(struct pci_dev *dev)
 	 */
 	pci_fixup_device(pci_fixup_final, dev);
 	pci_create_sysfs_dev_files(dev);
+<<<<<<< HEAD
+=======
+	pci_proc_attach_device(dev);
+>>>>>>> v3.18
 
 	dev->match_driver = true;
 	retval = device_attach(&dev->dev);
 	WARN_ON(retval < 0);
 
 	dev->is_added = 1;
+<<<<<<< HEAD
 
 	return 0;
 }
+=======
+}
+EXPORT_SYMBOL_GPL(pci_bus_add_device);
+>>>>>>> v3.18
 
 /**
  * pci_bus_add_devices - start driver for PCI devices
@@ -196,16 +332,23 @@ void pci_bus_add_devices(const struct pci_bus *bus)
 {
 	struct pci_dev *dev;
 	struct pci_bus *child;
+<<<<<<< HEAD
 	int retval;
+=======
+>>>>>>> v3.18
 
 	list_for_each_entry(dev, &bus->devices, bus_list) {
 		/* Skip already-added devices */
 		if (dev->is_added)
 			continue;
+<<<<<<< HEAD
 		retval = pci_bus_add_device(dev);
 		if (retval)
 			dev_err(&dev->dev, "Error adding device (%d)\n",
 				retval);
+=======
+		pci_bus_add_device(dev);
+>>>>>>> v3.18
 	}
 
 	list_for_each_entry(dev, &bus->devices, bus_list) {
@@ -215,6 +358,7 @@ void pci_bus_add_devices(const struct pci_bus *bus)
 			pci_bus_add_devices(child);
 	}
 }
+<<<<<<< HEAD
 
 void pci_enable_bridges(struct pci_bus *bus)
 {
@@ -233,6 +377,9 @@ void pci_enable_bridges(struct pci_bus *bus)
 		}
 	}
 }
+=======
+EXPORT_SYMBOL(pci_bus_add_devices);
+>>>>>>> v3.18
 
 /** pci_walk_bus - walk devices on/under bus, calling callback.
  *  @top      bus whose devices should be walked
@@ -283,7 +430,25 @@ void pci_walk_bus(struct pci_bus *top, int (*cb)(struct pci_dev *, void *),
 }
 EXPORT_SYMBOL_GPL(pci_walk_bus);
 
+<<<<<<< HEAD
 EXPORT_SYMBOL(pci_bus_alloc_resource);
 EXPORT_SYMBOL_GPL(pci_bus_add_device);
 EXPORT_SYMBOL(pci_bus_add_devices);
 EXPORT_SYMBOL(pci_enable_bridges);
+=======
+struct pci_bus *pci_bus_get(struct pci_bus *bus)
+{
+	if (bus)
+		get_device(&bus->dev);
+	return bus;
+}
+EXPORT_SYMBOL(pci_bus_get);
+
+void pci_bus_put(struct pci_bus *bus)
+{
+	if (bus)
+		put_device(&bus->dev);
+}
+EXPORT_SYMBOL(pci_bus_put);
+
+>>>>>>> v3.18

@@ -25,7 +25,10 @@
 #include <linux/i2c.h>
 #include <linux/i2c-mux.h>
 #include <linux/of.h>
+<<<<<<< HEAD
 #include <linux/of_i2c.h>
+=======
+>>>>>>> v3.18
 
 /* multiplexer per channel data */
 struct i2c_mux_priv {
@@ -140,6 +143,11 @@ struct i2c_adapter *i2c_add_mux_adapter(struct i2c_adapter *parent,
 	priv->adap.algo = &priv->algo;
 	priv->adap.algo_data = priv;
 	priv->adap.dev.parent = &parent->dev;
+<<<<<<< HEAD
+=======
+	priv->adap.retries = parent->retries;
+	priv->adap.timeout = parent->timeout;
+>>>>>>> v3.18
 
 	/* Sanity check on class */
 	if (i2c_mux_parent_classes(parent) & class)
@@ -185,8 +193,11 @@ struct i2c_adapter *i2c_add_mux_adapter(struct i2c_adapter *parent,
 	dev_info(&parent->dev, "Added multiplexed i2c bus %d\n",
 		 i2c_adapter_id(&priv->adap));
 
+<<<<<<< HEAD
 	of_i2c_register_devices(&priv->adap);
 
+=======
+>>>>>>> v3.18
 	return &priv->adap;
 }
 EXPORT_SYMBOL_GPL(i2c_add_mux_adapter);

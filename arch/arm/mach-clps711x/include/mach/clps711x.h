@@ -21,6 +21,11 @@
 #ifndef __MACH_CLPS711X_H
 #define __MACH_CLPS711X_H
 
+<<<<<<< HEAD
+=======
+#include <linux/mfd/syscon/clps711x.h>
+
+>>>>>>> v3.18
 #define CLPS711X_PHYS_BASE	(0x80000000)
 
 #define PADR		(0x0000)
@@ -38,8 +43,11 @@
 #define MEMCFG1		(0x0180)
 #define MEMCFG2		(0x01c0)
 #define DRFPR		(0x0200)
+<<<<<<< HEAD
 #define INTSR1		(0x0240)
 #define INTMR1		(0x0280)
+=======
+>>>>>>> v3.18
 #define LCDCON		(0x02c0)
 #define TC1D		(0x0300)
 #define TC2D		(0x0340)
@@ -53,6 +61,7 @@
 #define PALLSW		(0x0540)
 #define PALMSW		(0x0580)
 #define STFCLR		(0x05c0)
+<<<<<<< HEAD
 #define BLEOI		(0x0600)
 #define MCEOI		(0x0640)
 #define TEOI		(0x0680)
@@ -61,12 +70,15 @@
 #define RTCEOI		(0x0740)
 #define UMSEOI		(0x0780)
 #define COEOI		(0x07c0)
+=======
+>>>>>>> v3.18
 #define HALT		(0x0800)
 #define STDBY		(0x0840)
 
 #define FBADDR		(0x1000)
 #define SYSCON2		(0x1100)
 #define SYSFLG2		(0x1140)
+<<<<<<< HEAD
 #define INTSR2		(0x1240)
 #define INTMR2		(0x1280)
 #define UARTDR2		(0x1480)
@@ -75,6 +87,12 @@
 #define SRXEOF		(0x1600)
 #define SS2POP		(0x16c0)
 #define KBDEOI		(0x1700)
+=======
+#define UARTDR2		(0x1480)
+#define UBRLCR2		(0x14c0)
+#define SS2DR		(0x1500)
+#define SS2POP		(0x16c0)
+>>>>>>> v3.18
 
 #define DAIR		(0x2000)
 #define DAIDR0		(0x2040)
@@ -82,8 +100,11 @@
 #define DAIDR2		(0x20c0)
 #define DAISR		(0x2100)
 #define SYSCON3		(0x2200)
+<<<<<<< HEAD
 #define INTSR3		(0x2240)
 #define INTMR3		(0x2280)
+=======
+>>>>>>> v3.18
 #define LEDFLSH		(0x22c0)
 #define SDCONF		(0x2300)
 #define SDRFPR		(0x2340)
@@ -96,6 +117,7 @@
 #define RANDID2		(0x2708)
 #define RANDID3		(0x270c)
 
+<<<<<<< HEAD
 /* common bits: SYSCON1 / SYSCON2 */
 #define SYSCON_UARTEN		(1 << 8)
 
@@ -173,6 +195,11 @@
 #define SYSCON2_CLKENSL		(1 << 13)
 #define SYSCON2_BUZFREQ		(1 << 14)
 
+=======
+#define LCDCON_GSEN		(1 << 30)
+#define LCDCON_GSMD		(1 << 31)
+
+>>>>>>> v3.18
 /* common bits: UARTDR1 / UARTDR2 */
 #define UARTDR_FRMERR		(1 << 8)
 #define UARTDR_PARERR		(1 << 9)
@@ -228,6 +255,7 @@
 #define DAI64FS_MCLK256EN	(1 << 3)
 #define DAI64FS_LOOPBACK	(1 << 5)
 
+<<<<<<< HEAD
 #define SYSCON3_ADCCON		(1 << 0)
 #define SYSCON3_CLKCTL0		(1 << 1)
 #define SYSCON3_CLKCTL1		(1 << 2)
@@ -240,6 +268,8 @@
 #define SYSCON3_128FS		SYSCON3_DAIEN
 #define SYSCON3_ENPD67		(1 << 10)
 
+=======
+>>>>>>> v3.18
 #define SDCONF_ACTIVE		(1 << 10)
 #define SDCONF_CLKCTL		(1 << 9)
 #define SDCONF_WIDTH_4		(0 << 7)

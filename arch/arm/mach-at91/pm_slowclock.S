@@ -13,8 +13,13 @@
  */
 
 #include <linux/linkage.h>
+<<<<<<< HEAD
 #include <mach/hardware.h>
 #include <mach/at91_pmc.h>
+=======
+#include <linux/clk/at91_pmc.h>
+#include <mach/hardware.h>
+>>>>>>> v3.18
 #include <mach/at91_ramc.h>
 
 

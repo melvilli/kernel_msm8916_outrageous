@@ -90,7 +90,11 @@ static irqreturn_t lpc32xx_timer_interrupt(int irq, void *dev_id)
 
 static struct irqaction lpc32xx_timer_irq = {
 	.name		= "LPC32XX Timer Tick",
+<<<<<<< HEAD
 	.flags		= IRQF_DISABLED | IRQF_TIMER | IRQF_IRQPOLL,
+=======
+	.flags		= IRQF_TIMER | IRQF_IRQPOLL,
+>>>>>>> v3.18
 	.handler	= lpc32xx_timer_interrupt,
 };
 

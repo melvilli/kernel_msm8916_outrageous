@@ -6,7 +6,10 @@
  */
 
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/input.h>
 #include <linux/interrupt.h>
@@ -87,7 +90,11 @@ static const struct stmpe_keypad_variant stmpe_keypad_variants[] = {
 		.max_cols		= 8,
 		.max_rows		= 12,
 		.col_gpios		= 0x0000ff,	/* GPIO 0 - 7*/
+<<<<<<< HEAD
 		.row_gpios		= 0x1fef00,	/* GPIO 8-14, 16-20 */
+=======
+		.row_gpios		= 0x1f7f00,	/* GPIO 8-14, 16-20 */
+>>>>>>> v3.18
 	},
 	[STMPE2403] = {
 		.auto_increment		= true,

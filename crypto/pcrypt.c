@@ -78,7 +78,11 @@ static int pcrypt_do_parallel(struct padata_priv *padata, unsigned int *cb_cpu,
 	cpu = *cb_cpu;
 
 	rcu_read_lock_bh();
+<<<<<<< HEAD
 	cpumask = rcu_dereference(pcrypt->cb_cpumask);
+=======
+	cpumask = rcu_dereference_bh(pcrypt->cb_cpumask);
+>>>>>>> v3.18
 	if (cpumask_test_cpu(cpu, cpumask->mask))
 			goto out;
 
@@ -455,8 +459,13 @@ static int pcrypt_init_padata(struct padata_pcrypt *pcrypt,
 
 	get_online_cpus();
 
+<<<<<<< HEAD
 	pcrypt->wq = alloc_workqueue(name,
 				     WQ_MEM_RECLAIM | WQ_CPU_INTENSIVE, 1);
+=======
+	pcrypt->wq = alloc_workqueue("%s", WQ_MEM_RECLAIM | WQ_CPU_INTENSIVE,
+				     1, name);
+>>>>>>> v3.18
 	if (!pcrypt->wq)
 		goto err;
 
@@ -565,4 +574,7 @@ module_exit(pcrypt_exit);
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Steffen Klassert <steffen.klassert@secunet.com>");
 MODULE_DESCRIPTION("Parallel crypto wrapper");
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("pcrypt");
+=======
+>>>>>>> v3.18

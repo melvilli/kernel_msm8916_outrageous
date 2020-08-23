@@ -14,11 +14,14 @@
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 */
 
 #ifndef _MITE_H_
@@ -26,6 +29,7 @@
 
 #include <linux/pci.h>
 #include <linux/log2.h>
+<<<<<<< HEAD
 #include "../comedidev.h"
 
 /*  #define DEBUG_MITE */
@@ -43,6 +47,19 @@ struct mite_dma_descriptor {
 	u32 count;
 	u32 addr;
 	u32 next;
+=======
+#include <linux/slab.h>
+#include "../comedidev.h"
+
+#define PCIMIO_COMPAT
+
+#define MAX_MITE_DMA_CHANNELS 8
+
+struct mite_dma_descriptor {
+	__le32 count;
+	__le32 addr;
+	__le32 next;
+>>>>>>> v3.18
 	u32 dar;
 };
 
@@ -66,7 +83,10 @@ struct mite_struct {
 	resource_size_t mite_phys_addr;
 	void __iomem *mite_io_addr;
 	resource_size_t daq_phys_addr;
+<<<<<<< HEAD
 	void __iomem *daq_io_addr;
+=======
+>>>>>>> v3.18
 	struct mite_channel channels[MAX_MITE_DMA_CHANNELS];
 	short channel_allocated[MAX_MITE_DMA_CHANNELS];
 	int num_channels;
@@ -76,6 +96,7 @@ struct mite_struct {
 
 struct mite_struct *mite_alloc(struct pci_dev *pcidev);
 
+<<<<<<< HEAD
 static inline void mite_free(struct mite_struct *mite)
 {
 	kfree(mite);
@@ -94,6 +115,17 @@ static inline unsigned int mite_device_id(struct mite_struct *mite)
 int mite_setup(struct mite_struct *mite);
 int mite_setup2(struct mite_struct *mite, unsigned use_iodwbsr_1);
 void mite_unsetup(struct mite_struct *mite);
+=======
+int mite_setup2(struct comedi_device *, struct mite_struct *, bool use_win1);
+
+static inline int mite_setup(struct comedi_device *dev,
+			     struct mite_struct *mite)
+{
+	return mite_setup2(dev, mite, false);
+}
+
+void mite_detach(struct mite_struct *mite);
+>>>>>>> v3.18
 struct mite_dma_descriptor_ring *mite_alloc_ring(struct mite_struct *mite);
 void mite_free_ring(struct mite_dma_descriptor_ring *ring);
 struct mite_channel *mite_request_channel_in_range(struct mite_struct *mite,
@@ -117,9 +149,15 @@ unsigned mite_dma_tcr(struct mite_channel *mite_chan);
 void mite_dma_arm(struct mite_channel *mite_chan);
 void mite_dma_disarm(struct mite_channel *mite_chan);
 int mite_sync_input_dma(struct mite_channel *mite_chan,
+<<<<<<< HEAD
 			struct comedi_async *async);
 int mite_sync_output_dma(struct mite_channel *mite_chan,
 			 struct comedi_async *async);
+=======
+			struct comedi_subdevice *s);
+int mite_sync_output_dma(struct mite_channel *mite_chan,
+			 struct comedi_subdevice *s);
+>>>>>>> v3.18
 u32 mite_bytes_written_to_memory_lb(struct mite_channel *mite_chan);
 u32 mite_bytes_written_to_memory_ub(struct mite_channel *mite_chan);
 u32 mite_bytes_read_from_memory_lb(struct mite_channel *mite_chan);
@@ -131,6 +169,7 @@ int mite_done(struct mite_channel *mite_chan);
 void mite_prep_dma(struct mite_channel *mite_chan,
 		   unsigned int num_device_bits, unsigned int num_memory_bits);
 int mite_buf_change(struct mite_dma_descriptor_ring *ring,
+<<<<<<< HEAD
 		    struct comedi_async *async);
 
 #ifdef DEBUG_MITE
@@ -142,6 +181,9 @@ static inline int CHAN_OFFSET(int channel)
 {
 	return 0x500 + 0x100 * channel;
 };
+=======
+		    struct comedi_subdevice *s);
+>>>>>>> v3.18
 
 enum mite_registers {
 	/* The bits 0x90180700 in MITE_UNKNOWN_DMA_BURST_REG can be
@@ -154,6 +196,7 @@ enum mite_registers {
 	MITE_PCI_CONFIG_OFFSET = 0x300,
 	MITE_CSIGR = 0x460	/* chip signature */
 };
+<<<<<<< HEAD
 static inline int MITE_CHOR(int channel)
 {				/*  channel operation */
 	return CHAN_OFFSET(channel) + 0x0;
@@ -238,6 +281,27 @@ static inline int MITE_FCR(int channel)
 {				/*  fifo count */
 	return CHAN_OFFSET(channel) + 0x40;
 };
+=======
+
+#define MITE_CHAN(x)	(0x500 + 0x100 * (x))
+#define MITE_CHOR(x)	(0x00 + MITE_CHAN(x))	/* channel operation */
+#define MITE_CHCR(x)	(0x04 + MITE_CHAN(x))	/* channel control */
+#define MITE_TCR(x)	(0x08 + MITE_CHAN(x))	/* transfer count */
+#define MITE_MCR(x)	(0x0c + MITE_CHAN(x))	/* memory configuration */
+#define MITE_MAR(x)	(0x10 + MITE_CHAN(x))	/* memory address */
+#define MITE_DCR(x)	(0x14 + MITE_CHAN(x))	/* device configuration */
+#define MITE_DAR(x)	(0x18 + MITE_CHAN(x))	/* device address */
+#define MITE_LKCR(x)	(0x1c + MITE_CHAN(x))	/* link configuration */
+#define MITE_LKAR(x)	(0x20 + MITE_CHAN(x))	/* link address */
+#define MITE_LLKAR(x)	(0x24 + MITE_CHAN(x))	/* see tnt5002 manual */
+#define MITE_BAR(x)	(0x28 + MITE_CHAN(x))	/* base address */
+#define MITE_BCR(x)	(0x2c + MITE_CHAN(x))	/* base count */
+#define MITE_SAR(x)	(0x30 + MITE_CHAN(x))	/* ? address */
+#define MITE_WSCR(x)	(0x34 + MITE_CHAN(x))	/* ? */
+#define MITE_WSER(x)	(0x38 + MITE_CHAN(x))	/* ? */
+#define MITE_CHSR(x)	(0x3c + MITE_CHAN(x))	/* channel status */
+#define MITE_FCR(x)	(0x40 + MITE_CHAN(x))	/* fifo count */
+>>>>>>> v3.18
 
 enum MITE_IODWBSR_bits {
 	WENAB = 0x80,		/*  window enable */
@@ -285,11 +349,17 @@ static inline int mite_csigr_dmac(u32 csigr_bits)
 static inline int mite_csigr_wpdep(u32 csigr_bits)
 {				/*  write post fifo depth */
 	unsigned int wpdep_bits = (csigr_bits >> 20) & 0x7;
+<<<<<<< HEAD
 	if (wpdep_bits == 0)
 		return 0;
 	else
 		return 1 << (wpdep_bits - 1);
 };
+=======
+
+	return (wpdep_bits) ? (1 << (wpdep_bits - 1)) : 0;
+}
+>>>>>>> v3.18
 
 static inline int mite_csigr_wins(u32 csigr_bits)
 {

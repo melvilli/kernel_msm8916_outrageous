@@ -8,9 +8,12 @@
 
 #ifndef __ASSEMBLY__
 
+<<<<<<< HEAD
 #include <linux/percpu.h>
 #include <linux/threads.h>
 
+=======
+>>>>>>> v3.18
 typedef struct {
 	/* Dcache line 1 */
 	unsigned int	__softirq_pending; /* must be 1st, see rtrap.S */
@@ -33,9 +36,13 @@ typedef struct {
 
 DECLARE_PER_CPU(cpuinfo_sparc, __cpu_data);
 #define cpu_data(__cpu)		per_cpu(__cpu_data, (__cpu))
+<<<<<<< HEAD
 #define local_cpu_data()	__get_cpu_var(__cpu_data)
 
 extern const struct seq_operations cpuinfo_op;
+=======
+#define local_cpu_data()	(*this_cpu_ptr(&__cpu_data))
+>>>>>>> v3.18
 
 #endif /* !(__ASSEMBLY__) */
 

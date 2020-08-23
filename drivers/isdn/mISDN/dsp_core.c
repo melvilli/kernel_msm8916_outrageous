@@ -288,8 +288,15 @@ dsp_control_req(struct dsp *dsp, struct mISDNhead *hh, struct sk_buff *skb)
 	u8 *data;
 	int len;
 
+<<<<<<< HEAD
 	if (skb->len < sizeof(int))
 		printk(KERN_ERR "%s: PH_CONTROL message too short\n", __func__);
+=======
+	if (skb->len < sizeof(int)) {
+		printk(KERN_ERR "%s: PH_CONTROL message too short\n", __func__);
+		return -EINVAL;
+	}
+>>>>>>> v3.18
 	cont = *((int *)skb->data);
 	len = skb->len - sizeof(int);
 	data = skb->data + sizeof(int);

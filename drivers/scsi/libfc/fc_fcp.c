@@ -902,7 +902,12 @@ static void fc_fcp_resp(struct fc_fcp_pkt *fsp, struct fc_frame *fp)
 	/*
 	 * Check for missing or extra data frames.
 	 */
+<<<<<<< HEAD
 	if (unlikely(fsp->xfer_len != expected_len)) {
+=======
+	if (unlikely(fsp->cdb_status == SAM_STAT_GOOD &&
+		     fsp->xfer_len != expected_len)) {
+>>>>>>> v3.18
 		if (fsp->xfer_len < expected_len) {
 			/*
 			 * Some data may be queued locally,
@@ -955,12 +960,20 @@ static void fc_fcp_complete_locked(struct fc_fcp_pkt *fsp)
 		 * Test for transport underrun, independent of response
 		 * underrun status.
 		 */
+<<<<<<< HEAD
 		if (fsp->xfer_len < fsp->data_len && !fsp->io_status &&
 		    (!(fsp->scsi_comp_flags & FCP_RESID_UNDER) ||
 		     fsp->xfer_len < fsp->data_len - fsp->scsi_resid)) {
 			fsp->status_code = FC_DATA_UNDRUN;
 			fsp->io_status = 0;
 		}
+=======
+		if (fsp->cdb_status == SAM_STAT_GOOD &&
+		    fsp->xfer_len < fsp->data_len && !fsp->io_status &&
+		    (!(fsp->scsi_comp_flags & FCP_RESID_UNDER) ||
+		     fsp->xfer_len < fsp->data_len - fsp->scsi_resid))
+			fsp->status_code = FC_DATA_UNDRUN;
+>>>>>>> v3.18
 	}
 
 	seq = fsp->seq_ptr;
@@ -1039,6 +1052,7 @@ restart:
 		fc_fcp_pkt_hold(fsp);
 		spin_unlock_irqrestore(&si->scsi_queue_lock, flags);
 
+<<<<<<< HEAD
 		spin_lock_bh(&fsp->scsi_pkt_lock);
 		if (!(fsp->state & FC_SRB_COMPL)) {
 			fsp->state |= FC_SRB_COMPL;
@@ -1059,6 +1073,13 @@ restart:
 			fc_io_compl(fsp);
 		}
 		spin_unlock_bh(&fsp->scsi_pkt_lock);
+=======
+		if (!fc_fcp_lock_pkt(fsp)) {
+			fc_fcp_cleanup_cmd(fsp, error);
+			fc_io_compl(fsp);
+			fc_fcp_unlock_pkt(fsp);
+		}
+>>>>>>> v3.18
 
 		fc_fcp_pkt_release(fsp);
 		spin_lock_irqsave(&si->scsi_queue_lock, flags);
@@ -2058,7 +2079,11 @@ int fc_eh_abort(struct scsi_cmnd *sc_cmd)
 		spin_unlock_irqrestore(&si->scsi_queue_lock, flags);
 		return SUCCESS;
 	}
+<<<<<<< HEAD
 	/* grab a ref so the fsp and sc_cmd cannot be relased from under us */
+=======
+	/* grab a ref so the fsp and sc_cmd cannot be released from under us */
+>>>>>>> v3.18
 	fc_fcp_pkt_hold(fsp);
 	spin_unlock_irqrestore(&si->scsi_queue_lock, flags);
 

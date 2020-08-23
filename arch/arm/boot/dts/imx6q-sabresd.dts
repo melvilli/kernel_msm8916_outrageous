@@ -20,6 +20,7 @@
 	compatible = "fsl,imx6q-sabresd", "fsl,imx6q";
 };
 
+<<<<<<< HEAD
 &iomuxc {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_hog>;
@@ -36,4 +37,8 @@
 			>;
 		};
 	};
+=======
+&sata {
+	status = "okay";
+>>>>>>> v3.18
 };

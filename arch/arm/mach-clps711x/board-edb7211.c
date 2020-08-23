@@ -12,9 +12,18 @@
 #include <linux/delay.h>
 #include <linux/memblock.h>
 #include <linux/types.h>
+<<<<<<< HEAD
 #include <linux/interrupt.h>
 #include <linux/backlight.h>
 #include <linux/platform_device.h>
+=======
+#include <linux/i2c-gpio.h>
+#include <linux/interrupt.h>
+#include <linux/platform_device.h>
+#include <linux/pwm.h>
+#include <linux/pwm_backlight.h>
+#include <linux/memblock.h>
+>>>>>>> v3.18
 
 #include <linux/mtd/physmap.h>
 #include <linux/mtd/partitions.h>
@@ -29,6 +38,10 @@
 #include <mach/hardware.h>
 
 #include "common.h"
+<<<<<<< HEAD
+=======
+#include "devices.h"
+>>>>>>> v3.18
 
 #define VIDEORAM_SIZE		SZ_128K
 
@@ -36,11 +49,32 @@
 #define EDB7211_LCDEN		CLPS711X_GPIO(3, 2)
 #define EDB7211_LCDBL		CLPS711X_GPIO(3, 3)
 
+<<<<<<< HEAD
 #define EDB7211_FLASH0_BASE	(CS0_PHYS_BASE)
 #define EDB7211_FLASH1_BASE	(CS1_PHYS_BASE)
 #define EDB7211_CS8900_BASE	(CS2_PHYS_BASE + 0x300)
 #define EDB7211_CS8900_IRQ	(IRQ_EINT3)
 
+=======
+#define EDB7211_I2C_SDA		CLPS711X_GPIO(3, 4)
+#define EDB7211_I2C_SCL		CLPS711X_GPIO(3, 5)
+
+#define EDB7211_FLASH0_BASE	(CS0_PHYS_BASE)
+#define EDB7211_FLASH1_BASE	(CS1_PHYS_BASE)
+
+#define EDB7211_CS8900_BASE	(CS2_PHYS_BASE + 0x300)
+#define EDB7211_CS8900_IRQ	(IRQ_EINT3)
+
+/* The extra 8 lines of the keyboard matrix */
+#define EDB7211_EXTKBD_BASE	(CS3_PHYS_BASE)
+
+static struct i2c_gpio_platform_data edb7211_i2c_pdata __initdata = {
+	.sda_pin	= EDB7211_I2C_SDA,
+	.scl_pin	= EDB7211_I2C_SCL,
+	.scl_is_output_only = 1,
+};
+
+>>>>>>> v3.18
 static struct resource edb7211_cs8900_resource[] __initdata = {
 	DEFINE_RES_MEM(EDB7211_CS8900_BASE, SZ_1K),
 	DEFINE_RES_IRQ(EDB7211_CS8900_IRQ),
@@ -92,6 +126,7 @@ static struct plat_lcd_data edb7211_lcd_power_pdata = {
 	.set_power	= edb7211_lcd_power_set,
 };
 
+<<<<<<< HEAD
 static void edb7211_lcd_backlight_set_intensity(int intensity)
 {
 	gpio_set_value(EDB7211_LCDBL, intensity);
@@ -125,6 +160,27 @@ void __init edb7211_map_io(void)
 	iotable_init(edb7211_io_desc, ARRAY_SIZE(edb7211_io_desc));
 }
 
+=======
+static struct pwm_lookup edb7211_pwm_lookup[] = {
+	PWM_LOOKUP("clps711x-pwm", 0, "pwm-backlight.0", NULL,
+		   0, PWM_POLARITY_NORMAL),
+};
+
+static struct platform_pwm_backlight_data pwm_bl_pdata = {
+	.dft_brightness	= 0x01,
+	.max_brightness	= 0x0f,
+	.enable_gpio	= EDB7211_LCDBL,
+};
+
+static struct resource clps711x_pwm_res =
+	DEFINE_RES_MEM(CLPS711X_PHYS_BASE + PMPCON, SZ_4);
+
+static struct gpio edb7211_gpios[] __initconst = {
+	{ EDB7211_LCD_DC_DC_EN,	GPIOF_OUT_INIT_LOW,	"LCD DC-DC" },
+	{ EDB7211_LCDEN,	GPIOF_OUT_INIT_LOW,	"LCD POWER" },
+};
+
+>>>>>>> v3.18
 /* Reserve screen memory region at the start of main system memory. */
 static void __init edb7211_reserve(void)
 {
@@ -132,7 +188,11 @@ static void __init edb7211_reserve(void)
 }
 
 static void __init
+<<<<<<< HEAD
 fixup_edb7211(struct tag *tags, char **cmdline, struct meminfo *mi)
+=======
+fixup_edb7211(struct tag *tags, char **cmdline)
+>>>>>>> v3.18
 {
 	/*
 	 * Bank start addresses are not present in the information
@@ -142,6 +202,7 @@ fixup_edb7211(struct tag *tags, char **cmdline, struct meminfo *mi)
 	 * Banks sizes _are_ present in the param block, but we're
 	 * not using that information yet.
 	 */
+<<<<<<< HEAD
 	mi->bank[0].start = 0xc0000000;
 	mi->bank[0].size = SZ_8M;
 	mi->bank[1].start = 0xc1000000;
@@ -150,10 +211,18 @@ fixup_edb7211(struct tag *tags, char **cmdline, struct meminfo *mi)
 }
 
 static void __init edb7211_init(void)
+=======
+	memblock_add(0xc0000000, SZ_8M);
+	memblock_add(0xc1000000, SZ_8M);
+}
+
+static void __init edb7211_init_late(void)
+>>>>>>> v3.18
 {
 	gpio_request_array(edb7211_gpios, ARRAY_SIZE(edb7211_gpios));
 
 	platform_device_register(&edb7211_flash_pdev);
+<<<<<<< HEAD
 	platform_device_register_data(&platform_bus, "platform-lcd", 0,
 				      &edb7211_lcd_power_pdata,
 				      sizeof(edb7211_lcd_power_pdata));
@@ -163,11 +232,32 @@ static void __init edb7211_init(void)
 	platform_device_register_simple("video-clps711x", 0, NULL, 0);
 	platform_device_register_simple("cs89x0", 0, edb7211_cs8900_resource,
 					ARRAY_SIZE(edb7211_cs8900_resource));
+=======
+
+	platform_device_register_data(NULL, "platform-lcd", 0,
+				      &edb7211_lcd_power_pdata,
+				      sizeof(edb7211_lcd_power_pdata));
+
+	platform_device_register_simple("clps711x-pwm", PLATFORM_DEVID_NONE,
+					&clps711x_pwm_res, 1);
+	pwm_add_table(edb7211_pwm_lookup, ARRAY_SIZE(edb7211_pwm_lookup));
+
+	platform_device_register_data(&platform_bus, "pwm-backlight", 0,
+				      &pwm_bl_pdata, sizeof(pwm_bl_pdata));
+
+	platform_device_register_simple("video-clps711x", 0, NULL, 0);
+	platform_device_register_simple("cs89x0", 0, edb7211_cs8900_resource,
+					ARRAY_SIZE(edb7211_cs8900_resource));
+	platform_device_register_data(NULL, "i2c-gpio", 0,
+				      &edb7211_i2c_pdata,
+				      sizeof(edb7211_i2c_pdata));
+>>>>>>> v3.18
 }
 
 MACHINE_START(EDB7211, "CL-EDB7211 (EP7211 eval board)")
 	/* Maintainer: Jon McClintock */
 	.atag_offset	= VIDEORAM_SIZE + 0x100,
+<<<<<<< HEAD
 	.nr_irqs	= CLPS711X_NR_IRQS,
 	.fixup		= fixup_edb7211,
 	.reserve	= edb7211_reserve,
@@ -176,5 +266,14 @@ MACHINE_START(EDB7211, "CL-EDB7211 (EP7211 eval board)")
 	.init_time	= clps711x_timer_init,
 	.init_machine	= edb7211_init,
 	.handle_irq	= clps711x_handle_irq,
+=======
+	.fixup		= fixup_edb7211,
+	.reserve	= edb7211_reserve,
+	.map_io		= clps711x_map_io,
+	.init_irq	= clps711x_init_irq,
+	.init_time	= clps711x_timer_init,
+	.init_machine	= clps711x_devices_init,
+	.init_late	= edb7211_init_late,
+>>>>>>> v3.18
 	.restart	= clps711x_restart,
 MACHINE_END

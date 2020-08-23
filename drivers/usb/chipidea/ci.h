@@ -17,11 +17,16 @@
 #include <linux/irqreturn.h>
 #include <linux/usb.h>
 #include <linux/usb/gadget.h>
+<<<<<<< HEAD
+=======
+#include <linux/usb/otg-fsm.h>
+>>>>>>> v3.18
 
 /******************************************************************************
  * DEFINE
  *****************************************************************************/
 #define TD_PAGE_COUNT      5
+<<<<<<< HEAD
 #define CI13XXX_PAGE_SIZE  4096ul /* page size for TD's */
 #define ENDPT_MAX          32
 
@@ -30,6 +35,45 @@
  *****************************************************************************/
 /**
  * struct ci13xxx_ep - endpoint representation
+=======
+#define CI_HDRC_PAGE_SIZE  4096ul /* page size for TD's */
+#define ENDPT_MAX          32
+
+/******************************************************************************
+ * REGISTERS
+ *****************************************************************************/
+/* register indices */
+enum ci_hw_regs {
+	CAP_CAPLENGTH,
+	CAP_HCCPARAMS,
+	CAP_DCCPARAMS,
+	CAP_TESTMODE,
+	CAP_LAST = CAP_TESTMODE,
+	OP_USBCMD,
+	OP_USBSTS,
+	OP_USBINTR,
+	OP_DEVICEADDR,
+	OP_ENDPTLISTADDR,
+	OP_PORTSC,
+	OP_DEVLC,
+	OP_OTGSC,
+	OP_USBMODE,
+	OP_ENDPTSETUPSTAT,
+	OP_ENDPTPRIME,
+	OP_ENDPTFLUSH,
+	OP_ENDPTSTAT,
+	OP_ENDPTCOMPLETE,
+	OP_ENDPTCTRL,
+	/* endptctrl1..15 follow */
+	OP_LAST = OP_ENDPTCTRL + ENDPT_MAX / 2,
+};
+
+/******************************************************************************
+ * STRUCTURES
+ *****************************************************************************/
+/**
+ * struct ci_hw_ep - endpoint representation
+>>>>>>> v3.18
  * @ep: endpoint structure for gadget drivers
  * @dir: endpoint direction (TX/RX)
  * @num: endpoint number
@@ -41,7 +85,11 @@
  * @lock: pointer to controller's spinlock
  * @td_pool: pointer to controller's TD pool
  */
+<<<<<<< HEAD
 struct ci13xxx_ep {
+=======
+struct ci_hw_ep {
+>>>>>>> v3.18
 	struct usb_ep				ep;
 	u8					dir;
 	u8					num;
@@ -49,12 +97,17 @@ struct ci13xxx_ep {
 	char					name[16];
 	struct {
 		struct list_head	queue;
+<<<<<<< HEAD
 		struct ci13xxx_qh	*ptr;
+=======
+		struct ci_hw_qh		*ptr;
+>>>>>>> v3.18
 		dma_addr_t		dma;
 	}					qh;
 	int					wedge;
 
 	/* global resources */
+<<<<<<< HEAD
 	struct ci13xxx				*ci;
 	spinlock_t				*lock;
 	struct dma_pool				*td_pool;
@@ -65,6 +118,12 @@ struct ci13xxx_ep {
 	int				      prime_timer_count;
 	struct timer_list		      prime_timer;
 	bool                                  multi_req;
+=======
+	struct ci_hdrc				*ci;
+	spinlock_t				*lock;
+	struct dma_pool				*td_pool;
+	struct td_node				*pending_td;
+>>>>>>> v3.18
 };
 
 enum ci_role {
@@ -75,6 +134,7 @@ enum ci_role {
 
 /**
  * struct ci_role_driver - host/gadget role driver
+<<<<<<< HEAD
  * start: start this role
  * stop: stop this role
  * irq: irq handler for this role
@@ -101,6 +161,20 @@ struct ci13xxx_ebi_err_data {
 	struct ci13xxx_ebi_err_entry *ebi_err_entry;
 };
 
+=======
+ * @start: start this role
+ * @stop: stop this role
+ * @irq: irq handler for this role
+ * @name: role name string (host/gadget)
+ */
+struct ci_role_driver {
+	int		(*start)(struct ci_hdrc *);
+	void		(*stop)(struct ci_hdrc *);
+	irqreturn_t	(*irq)(struct ci_hdrc *);
+	const char	*name;
+};
+
+>>>>>>> v3.18
 /**
  * struct hw_bank - hardware register mapping representation
  * @lpm: set if the device is LPM capable
@@ -118,11 +192,19 @@ struct hw_bank {
 	void __iomem	*cap;
 	void __iomem	*op;
 	size_t		size;
+<<<<<<< HEAD
 	void __iomem	**regmap;
 };
 
 /**
  * struct ci13xxx - chipidea device representation
+=======
+	void __iomem	*regmap[OP_LAST + 1];
+};
+
+/**
+ * struct ci_hdrc - chipidea device representation
+>>>>>>> v3.18
  * @dev: pointer to parent device
  * @lock: access synchronization
  * @hw_bank: hardware register mapping
@@ -130,6 +212,11 @@ struct hw_bank {
  * @roles: array of supported roles for this controller
  * @role: current role
  * @is_otg: if the device is otg-capable
+<<<<<<< HEAD
+=======
+ * @fsm: otg finite state machine
+ * @fsm_timer: pointer to timer list of otg fsm
+>>>>>>> v3.18
  * @work: work for role changing
  * @wq: workqueue thread
  * @qh_pool: allocation pool for queue heads
@@ -137,7 +224,11 @@ struct hw_bank {
  * @gadget: device side representation for peripheral controller
  * @driver: gadget driver
  * @hw_ep_max: total number of endpoints supported by hardware
+<<<<<<< HEAD
  * @ci13xxx_ep: array of endpoints
+=======
+ * @ci_hw_ep: array of endpoints
+>>>>>>> v3.18
  * @ep0_dir: ep0 direction
  * @ep0out: pointer to ep0 OUT endpoint
  * @ep0in: pointer to ep0 IN endpoint
@@ -152,8 +243,17 @@ struct hw_bank {
  * @transceiver: pointer to USB PHY, if any
  * @hcd: pointer to usb_hcd for ehci host driver
  * @debugfs: root dentry for this controller in debugfs
+<<<<<<< HEAD
  */
 struct ci13xxx {
+=======
+ * @id_event: indicates there is an id event, and handled at ci_otg_work
+ * @b_sess_valid_event: indicates there is a vbus event, and handled
+ * at ci_otg_work
+ * @imx28_write_fix: Freescale imx28 needs swp instruction for writing
+ */
+struct ci_hdrc {
+>>>>>>> v3.18
 	struct device			*dev;
 	spinlock_t			lock;
 	struct hw_bank			hw_bank;
@@ -161,6 +261,11 @@ struct ci13xxx {
 	struct ci_role_driver		*roles[CI_ROLE_END];
 	enum ci_role			role;
 	bool				is_otg;
+<<<<<<< HEAD
+=======
+	struct otg_fsm			fsm;
+	struct ci_otg_fsm_timer_list	*fsm_timer;
+>>>>>>> v3.18
 	struct work_struct		work;
 	struct workqueue_struct		*wq;
 
@@ -170,16 +275,25 @@ struct ci13xxx {
 	struct usb_gadget		gadget;
 	struct usb_gadget_driver	*driver;
 	unsigned			hw_ep_max;
+<<<<<<< HEAD
 	struct ci13xxx_ep		ci13xxx_ep[ENDPT_MAX];
 	u32				ep0_dir;
 	struct ci13xxx_ep		*ep0out, *ep0in;
 
 	struct usb_request		*status;
 	void				*status_buf;/* GET_STATUS buffer */
+=======
+	struct ci_hw_ep			ci_hw_ep[ENDPT_MAX];
+	u32				ep0_dir;
+	struct ci_hw_ep			*ep0out, *ep0in;
+
+	struct usb_request		*status;
+>>>>>>> v3.18
 	bool				setaddr;
 	u8				address;
 	u8				remote_wakeup;
 	u8				suspended;
+<<<<<<< HEAD
 	u8				configured; /* is device configured */
 	u8				test_mode;
 
@@ -196,12 +310,31 @@ struct ci13xxx {
 };
 
 static inline struct ci_role_driver *ci_role(struct ci13xxx *ci)
+=======
+	u8				test_mode;
+
+	struct ci_hdrc_platform_data	*platdata;
+	int				vbus_active;
+	struct usb_phy			*transceiver;
+	struct usb_hcd			*hcd;
+	struct dentry			*debugfs;
+	bool				id_event;
+	bool				b_sess_valid_event;
+	bool				imx28_write_fix;
+};
+
+static inline struct ci_role_driver *ci_role(struct ci_hdrc *ci)
+>>>>>>> v3.18
 {
 	BUG_ON(ci->role >= CI_ROLE_END || !ci->roles[ci->role]);
 	return ci->roles[ci->role];
 }
 
+<<<<<<< HEAD
 static inline int ci_role_start(struct ci13xxx *ci, enum ci_role role)
+=======
+static inline int ci_role_start(struct ci_hdrc *ci, enum ci_role role)
+>>>>>>> v3.18
 {
 	int ret;
 
@@ -217,7 +350,11 @@ static inline int ci_role_start(struct ci13xxx *ci, enum ci_role role)
 	return ret;
 }
 
+<<<<<<< HEAD
 static inline void ci_role_stop(struct ci13xxx *ci)
+=======
+static inline void ci_role_stop(struct ci_hdrc *ci)
+>>>>>>> v3.18
 {
 	enum ci_role role = ci->role;
 
@@ -229,6 +366,7 @@ static inline void ci_role_stop(struct ci13xxx *ci)
 	ci->roles[role]->stop(ci);
 }
 
+<<<<<<< HEAD
 /******************************************************************************
  * REGISTERS
  *****************************************************************************/
@@ -264,57 +402,120 @@ enum ci13xxx_regs {
 
 /**
  * hw_read: reads from a hw register
+=======
+/**
+ * hw_read: reads from a hw register
+ * @ci: the controller
+>>>>>>> v3.18
  * @reg:  register index
  * @mask: bitfield mask
  *
  * This function returns register contents
  */
+<<<<<<< HEAD
 static inline u32 hw_read(struct ci13xxx *ci, enum ci13xxx_regs reg, u32 mask)
+=======
+static inline u32 hw_read(struct ci_hdrc *ci, enum ci_hw_regs reg, u32 mask)
+>>>>>>> v3.18
 {
 	return ioread32(ci->hw_bank.regmap[reg]) & mask;
 }
 
+<<<<<<< HEAD
 /**
  * hw_write: writes to a hw register
+=======
+#ifdef CONFIG_SOC_IMX28
+static inline void imx28_ci_writel(u32 val, volatile void __iomem *addr)
+{
+	__asm__ ("swp %0, %0, [%1]" : : "r"(val), "r"(addr));
+}
+#else
+static inline void imx28_ci_writel(u32 val, volatile void __iomem *addr)
+{
+}
+#endif
+
+static inline void __hw_write(struct ci_hdrc *ci, u32 val,
+		void __iomem *addr)
+{
+	if (ci->imx28_write_fix)
+		imx28_ci_writel(val, addr);
+	else
+		iowrite32(val, addr);
+}
+
+/**
+ * hw_write: writes to a hw register
+ * @ci: the controller
+>>>>>>> v3.18
  * @reg:  register index
  * @mask: bitfield mask
  * @data: new value
  */
+<<<<<<< HEAD
 static inline void hw_write(struct ci13xxx *ci, enum ci13xxx_regs reg,
+=======
+static inline void hw_write(struct ci_hdrc *ci, enum ci_hw_regs reg,
+>>>>>>> v3.18
 			    u32 mask, u32 data)
 {
 	if (~mask)
 		data = (ioread32(ci->hw_bank.regmap[reg]) & ~mask)
 			| (data & mask);
 
+<<<<<<< HEAD
 	iowrite32(data, ci->hw_bank.regmap[reg]);
+=======
+	__hw_write(ci, data, ci->hw_bank.regmap[reg]);
+>>>>>>> v3.18
 }
 
 /**
  * hw_test_and_clear: tests & clears a hw register
+<<<<<<< HEAD
+=======
+ * @ci: the controller
+>>>>>>> v3.18
  * @reg:  register index
  * @mask: bitfield mask
  *
  * This function returns register contents
  */
+<<<<<<< HEAD
 static inline u32 hw_test_and_clear(struct ci13xxx *ci, enum ci13xxx_regs reg,
+=======
+static inline u32 hw_test_and_clear(struct ci_hdrc *ci, enum ci_hw_regs reg,
+>>>>>>> v3.18
 				    u32 mask)
 {
 	u32 val = ioread32(ci->hw_bank.regmap[reg]) & mask;
 
+<<<<<<< HEAD
 	iowrite32(val, ci->hw_bank.regmap[reg]);
+=======
+	__hw_write(ci, val, ci->hw_bank.regmap[reg]);
+>>>>>>> v3.18
 	return val;
 }
 
 /**
  * hw_test_and_write: tests & writes a hw register
+<<<<<<< HEAD
+=======
+ * @ci: the controller
+>>>>>>> v3.18
  * @reg:  register index
  * @mask: bitfield mask
  * @data: new value
  *
  * This function returns register contents
  */
+<<<<<<< HEAD
 static inline u32 hw_test_and_write(struct ci13xxx *ci, enum ci13xxx_regs reg,
+=======
+static inline u32 hw_test_and_write(struct ci_hdrc *ci, enum ci_hw_regs reg,
+>>>>>>> v3.18
 				    u32 mask, u32 data)
 {
 	u32 val = hw_read(ci, reg, ~0);
@@ -323,6 +524,7 @@ static inline u32 hw_test_and_write(struct ci13xxx *ci, enum ci13xxx_regs reg,
 	return (val & mask) >> __ffs(mask);
 }
 
+<<<<<<< HEAD
 int hw_device_reset(struct ci13xxx *ci, u32 mode);
 
 int hw_port_test_set(struct ci13xxx *ci, u8 mode);
@@ -330,5 +532,35 @@ int hw_port_test_set(struct ci13xxx *ci, u8 mode);
 u8 hw_port_test_get(struct ci13xxx *ci);
 
 int ci13xxx_wakeup(struct usb_gadget *_gadget);
+=======
+/**
+ * ci_otg_is_fsm_mode: runtime check if otg controller
+ * is in otg fsm mode.
+ *
+ * @ci: chipidea device
+ */
+static inline bool ci_otg_is_fsm_mode(struct ci_hdrc *ci)
+{
+#ifdef CONFIG_USB_OTG_FSM
+	return ci->is_otg && ci->roles[CI_ROLE_HOST] &&
+					ci->roles[CI_ROLE_GADGET];
+#else
+	return false;
+#endif
+}
+
+u32 hw_read_intr_enable(struct ci_hdrc *ci);
+
+u32 hw_read_intr_status(struct ci_hdrc *ci);
+
+int hw_device_reset(struct ci_hdrc *ci, u32 mode);
+
+int hw_port_test_set(struct ci_hdrc *ci, u8 mode);
+
+u8 hw_port_test_get(struct ci_hdrc *ci);
+
+int hw_wait_reg(struct ci_hdrc *ci, enum ci_hw_regs reg, u32 mask,
+				u32 value, unsigned int timeout_ms);
+>>>>>>> v3.18
 
 #endif	/* __DRIVERS_USB_CHIPIDEA_CI_H */

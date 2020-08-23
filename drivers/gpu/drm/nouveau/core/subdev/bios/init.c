@@ -9,8 +9,13 @@
 #include <subdev/bios/dp.h>
 #include <subdev/bios/gpio.h>
 #include <subdev/bios/init.h>
+<<<<<<< HEAD
 #include <subdev/devinit.h>
 #include <subdev/clock.h>
+=======
+#include <subdev/bios/ramcfg.h>
+#include <subdev/devinit.h>
+>>>>>>> v3.18
 #include <subdev/i2c.h>
 #include <subdev/vga.h>
 #include <subdev/gpio.h>
@@ -98,15 +103,27 @@ static u8
 init_conn(struct nvbios_init *init)
 {
 	struct nouveau_bios *bios = init->bios;
+<<<<<<< HEAD
 	u8  ver, len;
 	u16 conn;
+=======
+	struct nvbios_connE connE;
+	u8  ver, hdr;
+	u32 conn;
+>>>>>>> v3.18
 
 	if (init_exec(init)) {
 		if (init->outp) {
 			conn = init->outp->connector;
+<<<<<<< HEAD
 			conn = dcb_conn(bios, conn, &ver, &len);
 			if (conn)
 				return nv_ro08(bios, conn);
+=======
+			conn = nvbios_connEp(bios, conn, &ver, &hdr, &connE);
+			if (conn)
+				return connE.type;
+>>>>>>> v3.18
 		}
 
 		error("script needs connector type\n");
@@ -118,6 +135,11 @@ init_conn(struct nvbios_init *init)
 static inline u32
 init_nvreg(struct nvbios_init *init, u32 reg)
 {
+<<<<<<< HEAD
+=======
+	struct nouveau_devinit *devinit = nouveau_devinit(init->bios);
+
+>>>>>>> v3.18
 	/* C51 (at least) sometimes has the lower bits set which the VBIOS
 	 * interprets to mean that access needs to go through certain IO
 	 * ports instead.  The NVIDIA binary driver has been seen to access
@@ -147,6 +169,12 @@ init_nvreg(struct nvbios_init *init, u32 reg)
 
 	if (reg & ~0x00fffffc)
 		warn("unknown bits in register 0x%08x\n", reg);
+<<<<<<< HEAD
+=======
+
+	if (devinit->mmio)
+		reg = devinit->mmio(devinit, reg);
+>>>>>>> v3.18
 	return reg;
 }
 
@@ -154,7 +182,11 @@ static u32
 init_rd32(struct nvbios_init *init, u32 reg)
 {
 	reg = init_nvreg(init, reg);
+<<<<<<< HEAD
 	if (init_exec(init))
+=======
+	if (reg != ~0 && init_exec(init))
+>>>>>>> v3.18
 		return nv_rd32(init->subdev, reg);
 	return 0x00000000;
 }
@@ -163,7 +195,11 @@ static void
 init_wr32(struct nvbios_init *init, u32 reg, u32 val)
 {
 	reg = init_nvreg(init, reg);
+<<<<<<< HEAD
 	if (init_exec(init))
+=======
+	if (reg != ~0 && init_exec(init))
+>>>>>>> v3.18
 		nv_wr32(init->subdev, reg, val);
 }
 
@@ -171,7 +207,11 @@ static u32
 init_mask(struct nvbios_init *init, u32 reg, u32 mask, u32 val)
 {
 	reg = init_nvreg(init, reg);
+<<<<<<< HEAD
 	if (init_exec(init)) {
+=======
+	if (reg != ~0 && init_exec(init)) {
+>>>>>>> v3.18
 		u32 tmp = nv_rd32(init->subdev, reg);
 		nv_wr32(init->subdev, reg, (tmp & ~mask) | val);
 		return tmp;
@@ -300,9 +340,15 @@ init_wrauxr(struct nvbios_init *init, u32 addr, u8 data)
 static void
 init_prog_pll(struct nvbios_init *init, u32 id, u32 freq)
 {
+<<<<<<< HEAD
 	struct nouveau_clock *clk = nouveau_clock(init->bios);
 	if (clk && clk->pll_set && init_exec(init)) {
 		int ret = clk->pll_set(clk, id, freq);
+=======
+	struct nouveau_devinit *devinit = nouveau_devinit(init->bios);
+	if (devinit->pll_set && init_exec(init)) {
+		int ret = devinit->pll_set(devinit, id, freq);
+>>>>>>> v3.18
 		if (ret)
 			warn("failed to prog pll 0x%08x to %dkHz\n", id, freq);
 	}
@@ -392,6 +438,7 @@ init_unknown_script(struct nouveau_bios *bios)
 	return 0x0000;
 }
 
+<<<<<<< HEAD
 static u16
 init_ram_restrict_table(struct nvbios_init *init)
 {
@@ -429,6 +476,16 @@ init_ram_restrict_group_count(struct nvbios_init *init)
 
 static u8
 init_ram_restrict_strap(struct nvbios_init *init)
+=======
+static u8
+init_ram_restrict_group_count(struct nvbios_init *init)
+{
+	return nvbios_ramcfg_count(init->bios);
+}
+
+static u8
+init_ram_restrict(struct nvbios_init *init)
+>>>>>>> v3.18
 {
 	/* This appears to be the behaviour of the VBIOS parser, and *is*
 	 * important to cache the NV_PEXTDEV_BOOT0 on later chipsets to
@@ -439,6 +496,7 @@ init_ram_restrict_strap(struct nvbios_init *init)
 	 * in case *not* re-reading the strap causes similar breakage.
 	 */
 	if (!init->ramcfg || init->bios->version.major < 0x70)
+<<<<<<< HEAD
 		init->ramcfg = init_rd32(init, 0x101000);
 	return (init->ramcfg & 0x00000003c) >> 2;
 }
@@ -451,6 +509,10 @@ init_ram_restrict(struct nvbios_init *init)
 	if (table)
 		return nv_ro08(init->bios, table + strap);
 	return 0x00;
+=======
+		init->ramcfg = 0x80000000 | nvbios_ramcfg_index(init->subdev);
+	return (init->ramcfg & 0x7fffffff);
+>>>>>>> v3.18
 }
 
 static u8
@@ -884,9 +946,14 @@ init_idx_addr_latched(struct nvbios_init *init)
 	u32 data = nv_ro32(bios, init->offset + 13);
 	u8 count = nv_ro08(bios, init->offset + 17);
 
+<<<<<<< HEAD
 	trace("INDEX_ADDRESS_LATCHED\t"
 	      "R[0x%06x] : R[0x%06x]\n\tCTRL &= 0x%08x |= 0x%08x\n",
 	      creg, dreg, mask, data);
+=======
+	trace("INDEX_ADDRESS_LATCHED\tR[0x%06x] : R[0x%06x]\n", creg, dreg);
+	trace("\tCTRL &= 0x%08x |= 0x%08x\n", mask, data);
+>>>>>>> v3.18
 	init->offset += 18;
 
 	while (count--) {
@@ -1456,7 +1523,11 @@ init_configure_mem(struct nvbios_init *init)
 	data = init_rdvgai(init, 0x03c4, 0x01);
 	init_wrvgai(init, 0x03c4, 0x01, data | 0x20);
 
+<<<<<<< HEAD
 	while ((addr = nv_ro32(bios, sdata)) != 0xffffffff) {
+=======
+	for (; (addr = nv_ro32(bios, sdata)) != 0xffffffff; sdata += 4) {
+>>>>>>> v3.18
 		switch (addr) {
 		case 0x10021c: /* CKE_NORMAL */
 		case 0x1002d0: /* CMD_REFRESH */
@@ -2215,5 +2286,9 @@ nvbios_init(struct nouveau_subdev *subdev, bool execute)
 		ret = nvbios_exec(&init);
 	}
 
+<<<<<<< HEAD
 	return 0;
+=======
+	return ret;
+>>>>>>> v3.18
 }

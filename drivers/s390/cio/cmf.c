@@ -1182,7 +1182,11 @@ static ssize_t cmb_enable_store(struct device *dev,
 	int ret;
 	unsigned long val;
 
+<<<<<<< HEAD
 	ret = strict_strtoul(buf, 16, &val);
+=======
+	ret = kstrtoul(buf, 16, &val);
+>>>>>>> v3.18
 	if (ret)
 		return ret;
 

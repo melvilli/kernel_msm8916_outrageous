@@ -20,6 +20,10 @@
 #include <asm/chpid.h>
 #include <asm/chsc.h>
 #include <asm/crw.h>
+<<<<<<< HEAD
+=======
+#include <asm/isc.h>
+>>>>>>> v3.18
 
 #include "css.h"
 #include "cio.h"
@@ -54,6 +58,10 @@ int chsc_error_from_response(int response)
 	case 0x0004:
 		return -EOPNOTSUPP;
 	case 0x000b:
+<<<<<<< HEAD
+=======
+	case 0x0107:		/* "Channel busy" for the op 0x003d */
+>>>>>>> v3.18
 		return -EBUSY;
 	case 0x0100:
 	case 0x0102:
@@ -144,6 +152,68 @@ out:
 	return ret;
 }
 
+<<<<<<< HEAD
+=======
+/**
+ * chsc_ssqd() - store subchannel QDIO data (SSQD)
+ * @schid: id of the subchannel on which SSQD is performed
+ * @ssqd: request and response block for SSQD
+ *
+ * Returns 0 on success.
+ */
+int chsc_ssqd(struct subchannel_id schid, struct chsc_ssqd_area *ssqd)
+{
+	memset(ssqd, 0, sizeof(*ssqd));
+	ssqd->request.length = 0x0010;
+	ssqd->request.code = 0x0024;
+	ssqd->first_sch = schid.sch_no;
+	ssqd->last_sch = schid.sch_no;
+	ssqd->ssid = schid.ssid;
+
+	if (chsc(ssqd))
+		return -EIO;
+
+	return chsc_error_from_response(ssqd->response.code);
+}
+EXPORT_SYMBOL_GPL(chsc_ssqd);
+
+/**
+ * chsc_sadc() - set adapter device controls (SADC)
+ * @schid: id of the subchannel on which SADC is performed
+ * @scssc: request and response block for SADC
+ * @summary_indicator_addr: summary indicator address
+ * @subchannel_indicator_addr: subchannel indicator address
+ *
+ * Returns 0 on success.
+ */
+int chsc_sadc(struct subchannel_id schid, struct chsc_scssc_area *scssc,
+	      u64 summary_indicator_addr, u64 subchannel_indicator_addr)
+{
+	memset(scssc, 0, sizeof(*scssc));
+	scssc->request.length = 0x0fe0;
+	scssc->request.code = 0x0021;
+	scssc->operation_code = 0;
+
+	scssc->summary_indicator_addr = summary_indicator_addr;
+	scssc->subchannel_indicator_addr = subchannel_indicator_addr;
+
+	scssc->ks = PAGE_DEFAULT_KEY >> 4;
+	scssc->kc = PAGE_DEFAULT_KEY >> 4;
+	scssc->isc = QDIO_AIRQ_ISC;
+	scssc->schid = schid;
+
+	/* enable the time delay disablement facility */
+	if (css_general_characteristics.aif_tdd)
+		scssc->word_with_d_bit = 0x10000000;
+
+	if (chsc(scssc))
+		return -EIO;
+
+	return chsc_error_from_response(scssc->response.code);
+}
+EXPORT_SYMBOL_GPL(chsc_sadc);
+
+>>>>>>> v3.18
 static int s390_subchannel_remove_chpid(struct subchannel *sch, void *data)
 {
 	spin_lock_irq(sch->lock);
@@ -177,6 +247,7 @@ void chsc_chp_offline(struct chp_id chpid)
 	for_each_subchannel_staged(s390_subchannel_remove_chpid, NULL, &link);
 }
 
+<<<<<<< HEAD
 static int s390_process_res_acc_new_sch(struct subchannel_id schid, void *data)
 {
 	struct schib schib;
@@ -197,6 +268,8 @@ static int s390_process_res_acc_new_sch(struct subchannel_id schid, void *data)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 static int __s390_process_res_acc(struct subchannel *sch, void *data)
 {
 	spin_lock_irq(sch->lock);
@@ -227,8 +300,13 @@ static void s390_process_res_acc(struct chp_link *link)
 	 * The more information we have (info), the less scanning
 	 * will we have to do.
 	 */
+<<<<<<< HEAD
 	for_each_subchannel_staged(__s390_process_res_acc,
 				   s390_process_res_acc_new_sch, link);
+=======
+	for_each_subchannel_staged(__s390_process_res_acc, NULL, link);
+	css_schedule_reprobe();
+>>>>>>> v3.18
 }
 
 static int
@@ -581,6 +659,10 @@ void chsc_chp_online(struct chp_id chpid)
 		css_wait_for_slow_path();
 		for_each_subchannel_staged(__s390_process_res_acc, NULL,
 					   &link);
+<<<<<<< HEAD
+=======
+		css_schedule_reprobe();
+>>>>>>> v3.18
 	}
 }
 
@@ -615,6 +697,7 @@ static int s390_subchannel_vary_chpid_on(struct subchannel *sch, void *data)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int
 __s390_vary_chpid_on(struct subchannel_id schid, void *data)
 {
@@ -628,6 +711,8 @@ __s390_vary_chpid_on(struct subchannel_id schid, void *data)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 /**
  * chsc_chp_vary - propagate channel-path vary operation to subchannels
  * @chpid: channl-path ID
@@ -646,7 +731,12 @@ int chsc_chp_vary(struct chp_id chpid, int on)
 		/* Try to update the channel path description. */
 		chp_update_desc(chp);
 		for_each_subchannel_staged(s390_subchannel_vary_chpid_on,
+<<<<<<< HEAD
 					   __s390_vary_chpid_on, &chpid);
+=======
+					   NULL, &chpid);
+		css_schedule_reprobe();
+>>>>>>> v3.18
 	} else
 		for_each_subchannel_staged(s390_subchannel_vary_chpid_off,
 					   NULL, &chpid);
@@ -1186,3 +1276,38 @@ out:
 	return ret;
 }
 EXPORT_SYMBOL_GPL(chsc_scm_info);
+<<<<<<< HEAD
+=======
+
+/**
+ * chsc_pnso_brinfo() - Perform Network-Subchannel Operation, Bridge Info.
+ * @schid:		id of the subchannel on which PNSO is performed
+ * @brinfo_area:	request and response block for the operation
+ * @resume_token:	resume token for multiblock response
+ * @cnc:		Boolean change-notification control
+ *
+ * brinfo_area must be allocated by the caller with get_zeroed_page(GFP_KERNEL)
+ *
+ * Returns 0 on success.
+ */
+int chsc_pnso_brinfo(struct subchannel_id schid,
+		struct chsc_pnso_area *brinfo_area,
+		struct chsc_brinfo_resume_token resume_token,
+		int cnc)
+{
+	memset(brinfo_area, 0, sizeof(*brinfo_area));
+	brinfo_area->request.length = 0x0030;
+	brinfo_area->request.code = 0x003d; /* network-subchannel operation */
+	brinfo_area->m	   = schid.m;
+	brinfo_area->ssid  = schid.ssid;
+	brinfo_area->sch   = schid.sch_no;
+	brinfo_area->cssid = schid.cssid;
+	brinfo_area->oc    = 0; /* Store-network-bridging-information list */
+	brinfo_area->resume_token = resume_token;
+	brinfo_area->n	   = (cnc != 0);
+	if (chsc(brinfo_area))
+		return -EIO;
+	return chsc_error_from_response(brinfo_area->response.code);
+}
+EXPORT_SYMBOL_GPL(chsc_pnso_brinfo);
+>>>>>>> v3.18

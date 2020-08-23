@@ -93,7 +93,11 @@ static void __init vmware_platform_setup(void)
  * serial key should be enough, as this will always have a VMware
  * specific string when running under VMware hypervisor.
  */
+<<<<<<< HEAD
 static bool __init vmware_platform(void)
+=======
+static uint32_t __init vmware_platform(void)
+>>>>>>> v3.18
 {
 	if (cpu_has_hypervisor) {
 		unsigned int eax;
@@ -102,12 +106,21 @@ static bool __init vmware_platform(void)
 		cpuid(CPUID_VMWARE_INFO_LEAF, &eax, &hyper_vendor_id[0],
 		      &hyper_vendor_id[1], &hyper_vendor_id[2]);
 		if (!memcmp(hyper_vendor_id, "VMwareVMware", 12))
+<<<<<<< HEAD
 			return true;
 	} else if (dmi_available && dmi_name_in_serial("VMware") &&
 		   __vmware_platform())
 		return true;
 
 	return false;
+=======
+			return CPUID_VMWARE_INFO_LEAF;
+	} else if (dmi_available && dmi_name_in_serial("VMware") &&
+		   __vmware_platform())
+		return 1;
+
+	return 0;
+>>>>>>> v3.18
 }
 
 /*
@@ -122,7 +135,11 @@ static bool __init vmware_platform(void)
  * so that the kernel could just trust the hypervisor with providing a
  * reliable virtual TSC that is suitable for timekeeping.
  */
+<<<<<<< HEAD
 static void __cpuinit vmware_set_cpu_features(struct cpuinfo_x86 *c)
+=======
+static void vmware_set_cpu_features(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 {
 	set_cpu_cap(c, X86_FEATURE_CONSTANT_TSC);
 	set_cpu_cap(c, X86_FEATURE_TSC_RELIABLE);

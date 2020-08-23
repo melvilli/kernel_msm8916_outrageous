@@ -5,7 +5,12 @@
 
 obj-$(CONFIG_SUNRPC) += sunrpc.o
 obj-$(CONFIG_SUNRPC_GSS) += auth_gss/
+<<<<<<< HEAD
 obj-$(CONFIG_SUNRPC_XPRT_RDMA) += xprtrdma/
+=======
+
+obj-y += xprtrdma/
+>>>>>>> v3.18
 
 sunrpc-y := clnt.o xprt.o socklib.o xprtsock.o sched.o \
 	    auth.o auth_null.o auth_unix.o auth_generic.o \

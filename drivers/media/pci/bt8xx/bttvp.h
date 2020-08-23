@@ -133,8 +133,11 @@ struct bttv_ir {
 	u32                     polling;
 	u32                     last_gpio;
 	int                     shift_by;
+<<<<<<< HEAD
 	int                     start; // What should RC5_START() be
 	int                     addr; // What RC5_ADDR() should be.
+=======
+>>>>>>> v3.18
 	int                     rc5_remote_gap;
 
 	/* RC5 gpio */
@@ -459,6 +462,12 @@ struct bttv {
 	int mbox_iow;
 	int mbox_csel;
 
+<<<<<<< HEAD
+=======
+	/* switch status for multi-controller cards */
+	char sw_status[4];
+
+>>>>>>> v3.18
 	/* risc memory management data
 	   - must acquire s_lock before changing these
 	   - only the irq handler is supported to touch top + bottom + vcurr */

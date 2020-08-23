@@ -9,8 +9,13 @@
  * we cannot have a different canary value per task.
  */
 
+<<<<<<< HEAD
 #ifndef _ASM_STACKPROTECTOR_H
 #define _ASM_STACKPROTECTOR_H 1
+=======
+#ifndef __ASM_STACKPROTECTOR_H
+#define __ASM_STACKPROTECTOR_H
+>>>>>>> v3.18
 
 #include <linux/random.h>
 #include <linux/version.h>

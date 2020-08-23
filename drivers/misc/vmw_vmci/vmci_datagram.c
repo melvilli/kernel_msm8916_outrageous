@@ -328,7 +328,12 @@ int vmci_datagram_dispatch(u32 context_id,
 
 	BUILD_BUG_ON(sizeof(struct vmci_datagram) != 24);
 
+<<<<<<< HEAD
 	if (VMCI_DG_SIZE(dg) > VMCI_MAX_DG_SIZE) {
+=======
+	if (dg->payload_size > VMCI_MAX_DG_SIZE ||
+	    VMCI_DG_SIZE(dg) > VMCI_MAX_DG_SIZE) {
+>>>>>>> v3.18
 		pr_devel("Payload (size=%llu bytes) too big to send\n",
 			 (unsigned long long)dg->payload_size);
 		return VMCI_ERROR_INVALID_ARGS;

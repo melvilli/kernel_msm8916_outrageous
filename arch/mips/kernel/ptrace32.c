@@ -22,7 +22,10 @@
 #include <linux/errno.h>
 #include <linux/ptrace.h>
 #include <linux/smp.h>
+<<<<<<< HEAD
 #include <linux/user.h>
+=======
+>>>>>>> v3.18
 #include <linux/security.h>
 
 #include <asm/cpu.h>
@@ -32,6 +35,10 @@
 #include <asm/mipsmtregs.h>
 #include <asm/pgtable.h>
 #include <asm/page.h>
+<<<<<<< HEAD
+=======
+#include <asm/reg.h>
+>>>>>>> v3.18
 #include <asm/uaccess.h>
 #include <asm/bootinfo.h>
 
@@ -80,6 +87,10 @@ long compat_arch_ptrace(struct task_struct *child, compat_long_t request,
 	/* Read the word at location addr in the USER area. */
 	case PTRACE_PEEKUSR: {
 		struct pt_regs *regs;
+<<<<<<< HEAD
+=======
+		union fpureg *fregs;
+>>>>>>> v3.18
 		unsigned int tmp;
 
 		regs = task_pt_regs(child);
@@ -90,14 +101,25 @@ long compat_arch_ptrace(struct task_struct *child, compat_long_t request,
 			tmp = regs->regs[addr];
 			break;
 		case FPR_BASE ... FPR_BASE + 31:
+<<<<<<< HEAD
 			if (tsk_used_math(child)) {
 				fpureg_t *fregs = get_fpu_regs(child);
 
+=======
+			if (!tsk_used_math(child)) {
+				/* FP not yet used */
+				tmp = -1;
+				break;
+			}
+			fregs = get_fpu_regs(child);
+			if (test_thread_flag(TIF_32BIT_FPREGS)) {
+>>>>>>> v3.18
 				/*
 				 * The odd registers are actually the high
 				 * order bits of the values stored in the even
 				 * registers - unless we're using r2k_switch.S.
 				 */
+<<<<<<< HEAD
 				if (addr & 1)
 					tmp = (unsigned long) (fregs[((addr & ~1) - 32)] >> 32);
 				else
@@ -105,6 +127,13 @@ long compat_arch_ptrace(struct task_struct *child, compat_long_t request,
 			} else {
 				tmp = -1;	/* FP not yet used  */
 			}
+=======
+				tmp = get_fpr32(&fregs[(addr & ~1) - FPR_BASE],
+						addr & 1);
+				break;
+			}
+			tmp = get_fpr32(&fregs[addr - FPR_BASE], 0);
+>>>>>>> v3.18
 			break;
 		case PC:
 			tmp = regs->cp0_epc;
@@ -124,6 +153,7 @@ long compat_arch_ptrace(struct task_struct *child, compat_long_t request,
 		case FPC_CSR:
 			tmp = child->thread.fpu.fcr31;
 			break;
+<<<<<<< HEAD
 		case FPC_EIR: { /* implementation / version register */
 			unsigned int flags;
 #ifdef CONFIG_MIPS_MT_SMTC
@@ -164,6 +194,12 @@ long compat_arch_ptrace(struct task_struct *child, compat_long_t request,
 			preempt_enable();
 			break;
 		}
+=======
+		case FPC_EIR:
+			/* implementation / version register */
+			tmp = boot_cpu_data.fpu_id;
+			break;
+>>>>>>> v3.18
 		case DSP_BASE ... DSP_BASE + 5: {
 			dspreg_t *dregs;
 
@@ -228,7 +264,11 @@ long compat_arch_ptrace(struct task_struct *child, compat_long_t request,
 			regs->regs[addr] = data;
 			break;
 		case FPR_BASE ... FPR_BASE + 31: {
+<<<<<<< HEAD
 			fpureg_t *fregs = get_fpu_regs(child);
+=======
+			union fpureg *fregs = get_fpu_regs(child);
+>>>>>>> v3.18
 
 			if (!tsk_used_math(child)) {
 				/* FP not yet used  */
@@ -236,6 +276,7 @@ long compat_arch_ptrace(struct task_struct *child, compat_long_t request,
 				       sizeof(child->thread.fpu));
 				child->thread.fpu.fcr31 = 0;
 			}
+<<<<<<< HEAD
 			/*
 			 * The odd registers are actually the high order bits
 			 * of the values stored in the even registers - unless
@@ -250,6 +291,19 @@ long compat_arch_ptrace(struct task_struct *child, compat_long_t request,
 				   bits!  */
 				fregs[addr - FPR_BASE] |= (unsigned int)data;
 			}
+=======
+			if (test_thread_flag(TIF_32BIT_FPREGS)) {
+				/*
+				 * The odd registers are actually the high
+				 * order bits of the values stored in the even
+				 * registers - unless we're using r2k_switch.S.
+				 */
+				set_fpr32(&fregs[(addr & ~1) - FPR_BASE],
+					  addr & 1, data);
+				break;
+			}
+			set_fpr64(&fregs[addr - FPR_BASE], 0, data);
+>>>>>>> v3.18
 			break;
 		}
 		case PC:
@@ -292,11 +346,21 @@ long compat_arch_ptrace(struct task_struct *child, compat_long_t request,
 		}
 
 	case PTRACE_GETREGS:
+<<<<<<< HEAD
 		ret = ptrace_getregs(child, (__s64 __user *) (__u64) data);
 		break;
 
 	case PTRACE_SETREGS:
 		ret = ptrace_setregs(child, (__s64 __user *) (__u64) data);
+=======
+		ret = ptrace_getregs(child,
+				(struct user_pt_regs __user *) (__u64) data);
+		break;
+
+	case PTRACE_SETREGS:
+		ret = ptrace_setregs(child,
+				(struct user_pt_regs __user *) (__u64) data);
+>>>>>>> v3.18
 		break;
 
 	case PTRACE_GETFPREGS:

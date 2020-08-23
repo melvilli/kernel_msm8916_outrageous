@@ -3,6 +3,7 @@
 #
 menu "Analog to digital converters"
 
+<<<<<<< HEAD
 config AD7291
 	tristate "Analog Devices AD7291 ADC driver"
 	depends on I2C
@@ -10,6 +11,8 @@ config AD7291
 	  Say yes here to build support for Analog Devices AD7291
 	  8 Channel ADC with temperature sensor.
 
+=======
+>>>>>>> v3.18
 config AD7606
 	tristate "Analog Devices AD7606 ADC driver"
 	depends on GPIOLIB
@@ -29,6 +32,12 @@ config AD7606_IFACE_PARALLEL
 	  Say yes here to include parallel interface support on the AD7606
 	  ADC driver.
 
+<<<<<<< HEAD
+=======
+	  To compile this driver as a module, choose M here: the
+	  module will be called ad7606_iface_parallel.
+
+>>>>>>> v3.18
 config AD7606_IFACE_SPI
 	tristate "spi interface support"
 	depends on AD7606
@@ -37,6 +46,7 @@ config AD7606_IFACE_SPI
 	  Say yes here to include parallel interface support on the AD7606
 	  ADC driver.
 
+<<<<<<< HEAD
 config AD799X
 	tristate "Analog Devices AD799x ADC driver"
 	depends on I2C
@@ -56,6 +66,10 @@ config AD799X_RING_BUFFER
 	help
 	  Say yes here to include ring buffer support in the AD799X
 	  ADC driver.
+=======
+	  To compile this driver as a module, choose M here: the
+	  module will be called ad7606_iface_spi.
+>>>>>>> v3.18
 
 config AD7780
 	tristate "Analog Devices AD7780 and similar ADCs driver"
@@ -102,7 +116,12 @@ config AD7280
 
 config LPC32XX_ADC
 	tristate "NXP LPC32XX ADC"
+<<<<<<< HEAD
 	depends on ARCH_LPC32XX
+=======
+	depends on ARCH_LPC32XX || COMPILE_TEST
+	depends on HAS_IOMEM
+>>>>>>> v3.18
 	help
 	  Say yes here to build support for the integrated ADC inside the
 	  LPC32XX SoC. Note that this feature uses the same hardware as the
@@ -113,7 +132,13 @@ config LPC32XX_ADC
 
 config MXS_LRADC
 	tristate "Freescale i.MX23/i.MX28 LRADC"
+<<<<<<< HEAD
 	depends on ARCH_MXS
+=======
+	depends on (ARCH_MXS || COMPILE_TEST) && HAS_IOMEM
+	depends on INPUT
+	select STMP_DEVICE
+>>>>>>> v3.18
 	select IIO_BUFFER
 	select IIO_TRIGGERED_BUFFER
 	help
@@ -125,9 +150,19 @@ config MXS_LRADC
 
 config SPEAR_ADC
 	tristate "ST SPEAr ADC"
+<<<<<<< HEAD
 	depends on PLAT_SPEAR
+=======
+	depends on PLAT_SPEAR || COMPILE_TEST
+	depends on HAS_IOMEM
+>>>>>>> v3.18
 	help
 	  Say yes here to build support for the integrated ADC inside the
 	  ST SPEAr SoC. Provides direct access via sysfs.
 
+<<<<<<< HEAD
+=======
+	  To compile this driver as a module, choose M here: the
+	  module will be called spear_adc.
+>>>>>>> v3.18
 endmenu

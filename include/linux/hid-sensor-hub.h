@@ -21,6 +21,11 @@
 
 #include <linux/hid.h>
 #include <linux/hid-sensor-ids.h>
+<<<<<<< HEAD
+=======
+#include <linux/iio/iio.h>
+#include <linux/iio/trigger.h>
+>>>>>>> v3.18
 
 /**
  * struct hid_sensor_hub_attribute_info - Attribute info
@@ -40,6 +45,11 @@ struct hid_sensor_hub_attribute_info {
 	s32 units;
 	s32 unit_expo;
 	s32 size;
+<<<<<<< HEAD
+=======
+	s32 logical_minimum;
+	s32 logical_maximum;
+>>>>>>> v3.18
 };
 
 /**
@@ -47,11 +57,21 @@ struct hid_sensor_hub_attribute_info {
  * @hdev:		Stores the hid instance.
  * @vendor_id:		Vendor id of hub device.
  * @product_id:		Product id of hub device.
+<<<<<<< HEAD
+=======
+ * @start_collection_index: Starting index for a phy type collection
+ * @end_collection_index: Last index for a phy type collection
+>>>>>>> v3.18
  */
 struct hid_sensor_hub_device {
 	struct hid_device *hdev;
 	u32 vendor_id;
 	u32 product_id;
+<<<<<<< HEAD
+=======
+	int start_collection_index;
+	int end_collection_index;
+>>>>>>> v3.18
 };
 
 /**
@@ -74,6 +94,25 @@ struct hid_sensor_hub_callbacks {
 			 void *priv);
 };
 
+<<<<<<< HEAD
+=======
+/**
+* sensor_hub_device_open() - Open hub device
+* @hsdev:	Hub device instance.
+*
+* Used to open hid device for sensor hub.
+*/
+int sensor_hub_device_open(struct hid_sensor_hub_device *hsdev);
+
+/**
+* sensor_hub_device_clode() - Close hub device
+* @hsdev:	Hub device instance.
+*
+* Used to clode hid device for sensor hub.
+*/
+void sensor_hub_device_close(struct hid_sensor_hub_device *hsdev);
+
+>>>>>>> v3.18
 /* Registration functions */
 
 /**
@@ -165,14 +204,23 @@ struct hid_sensor_common {
 	struct hid_sensor_hub_device *hsdev;
 	struct platform_device *pdev;
 	unsigned usage_id;
+<<<<<<< HEAD
 	bool data_ready;
+=======
+	atomic_t data_ready;
+	struct iio_trigger *trigger;
+>>>>>>> v3.18
 	struct hid_sensor_hub_attribute_info poll;
 	struct hid_sensor_hub_attribute_info report_state;
 	struct hid_sensor_hub_attribute_info power_state;
 	struct hid_sensor_hub_attribute_info sensitivity;
 };
 
+<<<<<<< HEAD
 /*Convert from hid unit expo to regular exponent*/
+=======
+/* Convert from hid unit expo to regular exponent */
+>>>>>>> v3.18
 static inline int hid_sensor_convert_exponent(int unit_expo)
 {
 	if (unit_expo < 0x08)
@@ -195,4 +243,16 @@ int hid_sensor_write_samp_freq_value(struct hid_sensor_common *st,
 int hid_sensor_read_samp_freq_value(struct hid_sensor_common *st,
 					int *val1, int *val2);
 
+<<<<<<< HEAD
+=======
+int hid_sensor_get_usage_index(struct hid_sensor_hub_device *hsdev,
+				u32 report_id, int field_index, u32 usage_id);
+
+int hid_sensor_format_scale(u32 usage_id,
+			    struct hid_sensor_hub_attribute_info *attr_info,
+			    int *val0, int *val1);
+
+s32 hid_sensor_read_poll_value(struct hid_sensor_common *st);
+
+>>>>>>> v3.18
 #endif

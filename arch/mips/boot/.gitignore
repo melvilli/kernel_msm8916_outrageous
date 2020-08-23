@@ -4,3 +4,8 @@ vmlinux.*
 zImage
 zImage.tmp
 calc_vmlinuz_load_addr
+<<<<<<< HEAD
+=======
+uImage
+*.dtb
+>>>>>>> v3.18

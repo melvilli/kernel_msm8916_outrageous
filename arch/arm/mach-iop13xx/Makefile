@@ -1,8 +1,11 @@
+<<<<<<< HEAD
 obj-y			:=
 obj-m			:=
 obj-n			:=
 obj-			:=
 
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_ARCH_IOP13XX) += setup.o
 obj-$(CONFIG_ARCH_IOP13XX) += irq.o
 obj-$(CONFIG_ARCH_IOP13XX) += pci.o

@@ -2,7 +2,10 @@
  * drivers/staging/android/ion/ion_priv.h
  *
  * Copyright (C) 2011 Google, Inc.
+<<<<<<< HEAD
  * Copyright (c) 2011-2014,2017, The Linux Foundation. All rights reserved.
+=======
+>>>>>>> v3.18
  *
  * This software is licensed under the terms of the GNU General Public
  * License version 2, as published by the Free Software Foundation, and
@@ -24,9 +27,12 @@
 #include <linux/mm_types.h>
 #include <linux/mutex.h>
 #include <linux/rbtree.h>
+<<<<<<< HEAD
 #include <linux/seq_file.h>
 
 #include "msm_ion_priv.h"
+=======
+>>>>>>> v3.18
 #include <linux/sched.h>
 #include <linux/shrinker.h>
 #include <linux/types.h>
@@ -94,11 +100,15 @@ void ion_buffer_destroy(struct ion_buffer *buffer);
 /**
  * struct ion_heap_ops - ops to operate on a given heap
  * @allocate:		allocate memory
+<<<<<<< HEAD
  * @free:		free memory. Will be called with
  *			ION_PRIV_FLAG_SHRINKER_FREE set in buffer flags when
  *			called from a shrinker. In that case, the pages being
  *			free'd must be truly free'd back to the system, not put
  *			in a page pool or otherwise cached.
+=======
+ * @free:		free memory
+>>>>>>> v3.18
  * @phys		get physical address of a buffer (only define on
  *			physically contiguous heaps)
  * @map_dma		map the memory for dma to a scatterlist
@@ -106,7 +116,10 @@ void ion_buffer_destroy(struct ion_buffer *buffer);
  * @map_kernel		map memory to the kernel
  * @unmap_kernel	unmap memory to the kernel
  * @map_user		map memory to userspace
+<<<<<<< HEAD
  * @unmap_user		unmap memory to userspace
+=======
+>>>>>>> v3.18
  *
  * allocate, phys, and map_user return 0 on success, -errno on error.
  * map_dma and map_kernel return pointer on success, ERR_PTR on
@@ -116,6 +129,7 @@ void ion_buffer_destroy(struct ion_buffer *buffer);
  * system, not put in a page pool or otherwise cached.
  */
 struct ion_heap_ops {
+<<<<<<< HEAD
 	int (*allocate) (struct ion_heap *heap,
 			 struct ion_buffer *buffer, unsigned long len,
 			 unsigned long align, unsigned long flags);
@@ -133,6 +147,22 @@ struct ion_heap_ops {
 	int (*shrink)(struct ion_heap *heap, gfp_t gfp_mask, int nr_to_scan);
 	int (*print_debug)(struct ion_heap *heap, struct seq_file *s,
 			   const struct list_head *mem_map);
+=======
+	int (*allocate)(struct ion_heap *heap,
+			struct ion_buffer *buffer, unsigned long len,
+			unsigned long align, unsigned long flags);
+	void (*free)(struct ion_buffer *buffer);
+	int (*phys)(struct ion_heap *heap, struct ion_buffer *buffer,
+		    ion_phys_addr_t *addr, size_t *len);
+	struct sg_table * (*map_dma)(struct ion_heap *heap,
+				     struct ion_buffer *buffer);
+	void (*unmap_dma)(struct ion_heap *heap, struct ion_buffer *buffer);
+	void * (*map_kernel)(struct ion_heap *heap, struct ion_buffer *buffer);
+	void (*unmap_kernel)(struct ion_heap *heap, struct ion_buffer *buffer);
+	int (*map_user)(struct ion_heap *mapper, struct ion_buffer *buffer,
+			struct vm_area_struct *vma);
+	int (*shrink)(struct ion_heap *heap, gfp_t gfp_mask, int nr_to_scan);
+>>>>>>> v3.18
 };
 
 /**
@@ -151,7 +181,10 @@ struct ion_heap_ops {
  */
 #define ION_PRIV_FLAG_SHRINKER_FREE (1 << 0)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 /**
  * struct ion_heap - represents a heap in the system
  * @node:		rb node to put the heap on the device's tree of heaps
@@ -164,7 +197,10 @@ struct ion_heap_ops {
  *			MUST be unique
  * @name:		used for debugging
  * @shrinker:		a shrinker for the heap
+<<<<<<< HEAD
  * @priv:		private heap data
+=======
+>>>>>>> v3.18
  * @free_list:		free list head if deferred free is used
  * @free_list_size	size of the deferred free list in bytes
  * @lock:		protects the free list
@@ -187,15 +223,23 @@ struct ion_heap {
 	unsigned int id;
 	const char *name;
 	struct shrinker shrinker;
+<<<<<<< HEAD
 	void *priv;
+=======
+>>>>>>> v3.18
 	struct list_head free_list;
 	size_t free_list_size;
 	spinlock_t free_lock;
 	wait_queue_head_t waitqueue;
 	struct task_struct *task;
+<<<<<<< HEAD
 	int (*debug_show)(struct ion_heap *heap, struct seq_file *, void *);
 	atomic_t total_allocated;
 	atomic_t total_handles;
+=======
+
+	int (*debug_show)(struct ion_heap *heap, struct seq_file *, void *);
+>>>>>>> v3.18
 };
 
 /**
@@ -239,12 +283,15 @@ void ion_device_destroy(struct ion_device *dev);
  */
 void ion_device_add_heap(struct ion_device *dev, struct ion_heap *heap);
 
+<<<<<<< HEAD
 struct pages_mem {
 	struct page **pages;
 	u32 size;
 	void (*free_fn) (const void *);
 };
 
+=======
+>>>>>>> v3.18
 /**
  * some helpers for common operations on buffers using the sg_table
  * and vaddr fields
@@ -254,12 +301,16 @@ void ion_heap_unmap_kernel(struct ion_heap *, struct ion_buffer *);
 int ion_heap_map_user(struct ion_heap *, struct ion_buffer *,
 			struct vm_area_struct *);
 int ion_heap_buffer_zero(struct ion_buffer *buffer);
+<<<<<<< HEAD
 
 int msm_ion_heap_high_order_page_zero(struct page *page, int order);
 int msm_ion_heap_buffer_zero(struct ion_buffer *buffer);
 int msm_ion_heap_pages_zero(struct page **pages, int num_pages);
 int msm_ion_heap_alloc_pages_mem(struct pages_mem *pages_mem);
 void msm_ion_heap_free_pages_mem(struct pages_mem *pages_mem);
+=======
+int ion_heap_pages_zero(struct page *page, size_t size, pgprot_t pgprot);
+>>>>>>> v3.18
 
 /**
  * ion_heap_init_shrinker
@@ -303,7 +354,11 @@ void ion_heap_freelist_add(struct ion_heap *heap, struct ion_buffer *buffer);
 size_t ion_heap_freelist_drain(struct ion_heap *heap, size_t size);
 
 /**
+<<<<<<< HEAD
  * ion_heap_freelist_drain_from_shrinker - drain the deferred free
+=======
+ * ion_heap_freelist_shrink - drain the deferred free
+>>>>>>> v3.18
  *				list, skipping any heap-specific
  *				pooling or caching mechanisms
  *
@@ -319,10 +374,17 @@ size_t ion_heap_freelist_drain(struct ion_heap *heap, size_t size);
  * page pools or otherwise cache the pages. Everything must be
  * genuinely free'd back to the system. If you're free'ing from a
  * shrinker you probably want to use this. Note that this relies on
+<<<<<<< HEAD
  * the heap.ops.free callback honoring the
  * ION_PRIV_FLAG_SHRINKER_FREE flag.
  */
 size_t ion_heap_freelist_drain_from_shrinker(struct ion_heap *heap,
+=======
+ * the heap.ops.free callback honoring the ION_PRIV_FLAG_SHRINKER_FREE
+ * flag.
+ */
+size_t ion_heap_freelist_shrink(struct ion_heap *heap,
+>>>>>>> v3.18
 					size_t size);
 
 /**
@@ -405,7 +467,11 @@ struct ion_page_pool {
 
 struct ion_page_pool *ion_page_pool_create(gfp_t gfp_mask, unsigned int order);
 void ion_page_pool_destroy(struct ion_page_pool *);
+<<<<<<< HEAD
 void *ion_page_pool_alloc(struct ion_page_pool *, bool *from_pool);
+=======
+struct page *ion_page_pool_alloc(struct ion_page_pool *);
+>>>>>>> v3.18
 void ion_page_pool_free(struct ion_page_pool *, struct page *);
 
 /** ion_page_pool_shrink - shrinks the size of the memory cached in the pool
@@ -429,6 +495,7 @@ int ion_page_pool_shrink(struct ion_page_pool *pool, gfp_t gfp_mask,
 void ion_pages_sync_for_device(struct device *dev, struct page *page,
 		size_t size, enum dma_data_direction dir);
 
+<<<<<<< HEAD
 int ion_walk_heaps(struct ion_client *client, int heap_id,
 			enum ion_heap_type type, void *data,
 			int (*f)(struct ion_heap *heap, void *data));
@@ -438,4 +505,6 @@ struct ion_handle *ion_handle_get_by_id(struct ion_client *client,
 
 int ion_handle_put(struct ion_handle *handle);
 
+=======
+>>>>>>> v3.18
 #endif /* _ION_PRIV_H */

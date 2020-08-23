@@ -21,6 +21,10 @@
 #include <linux/gfs2_ondisk.h>
 #include <linux/backing-dev.h>
 #include <linux/aio.h>
+<<<<<<< HEAD
+=======
+#include <trace/events/writeback.h>
+>>>>>>> v3.18
 
 #include "gfs2.h"
 #include "incore.h"
@@ -110,7 +114,11 @@ static int gfs2_writepage_common(struct page *page,
 	/* Is the page fully outside i_size? (truncate in progress) */
 	offset = i_size & (PAGE_CACHE_SIZE-1);
 	if (page->index > end_index || (page->index == end_index && !offset)) {
+<<<<<<< HEAD
 		page->mapping->a_ops->invalidatepage(page, 0);
+=======
+		page->mapping->a_ops->invalidatepage(page, 0, PAGE_CACHE_SIZE);
+>>>>>>> v3.18
 		goto out;
 	}
 	return 1;
@@ -122,14 +130,22 @@ out:
 }
 
 /**
+<<<<<<< HEAD
  * gfs2_writeback_writepage - Write page for writeback mappings
+=======
+ * gfs2_writepage - Write page for writeback mappings
+>>>>>>> v3.18
  * @page: The page
  * @wbc: The writeback control
  *
  */
 
+<<<<<<< HEAD
 static int gfs2_writeback_writepage(struct page *page,
 				    struct writeback_control *wbc)
+=======
+static int gfs2_writepage(struct page *page, struct writeback_control *wbc)
+>>>>>>> v3.18
 {
 	int ret;
 
@@ -141,6 +157,7 @@ static int gfs2_writeback_writepage(struct page *page,
 }
 
 /**
+<<<<<<< HEAD
  * gfs2_ordered_writepage - Write page for ordered data files
  * @page: The page to write
  * @wbc: The writeback control
@@ -167,6 +184,8 @@ static int gfs2_ordered_writepage(struct page *page,
 }
 
 /**
+=======
+>>>>>>> v3.18
  * __gfs2_jdata_writepage - The core of jdata writepage
  * @page: The page to write
  * @wbc: The writeback control
@@ -257,6 +276,7 @@ static int gfs2_writepages(struct address_space *mapping,
 static int gfs2_write_jdata_pagevec(struct address_space *mapping,
 				    struct writeback_control *wbc,
 				    struct pagevec *pvec,
+<<<<<<< HEAD
 				    int nr_pages, pgoff_t end)
 {
 	struct inode *inode = mapping->host;
@@ -264,6 +284,13 @@ static int gfs2_write_jdata_pagevec(struct address_space *mapping,
 	loff_t i_size = i_size_read(inode);
 	pgoff_t end_index = i_size >> PAGE_CACHE_SHIFT;
 	unsigned offset = i_size & (PAGE_CACHE_SIZE-1);
+=======
+				    int nr_pages, pgoff_t end,
+				    pgoff_t *done_index)
+{
+	struct inode *inode = mapping->host;
+	struct gfs2_sbd *sdp = GFS2_SB(inode);
+>>>>>>> v3.18
 	unsigned nrblocks = nr_pages * (PAGE_CACHE_SIZE/inode->i_sb->s_blocksize);
 	int i;
 	int ret;
@@ -275,13 +302,39 @@ static int gfs2_write_jdata_pagevec(struct address_space *mapping,
 	for(i = 0; i < nr_pages; i++) {
 		struct page *page = pvec->pages[i];
 
+<<<<<<< HEAD
 		lock_page(page);
 
 		if (unlikely(page->mapping != mapping)) {
+=======
+		/*
+		 * At this point, the page may be truncated or
+		 * invalidated (changing page->mapping to NULL), or
+		 * even swizzled back from swapper_space to tmpfs file
+		 * mapping. However, page->index will not change
+		 * because we have a reference on the page.
+		 */
+		if (page->index > end) {
+			/*
+			 * can't be range_cyclic (1st pass) because
+			 * end == -1 in that case.
+			 */
+			ret = 1;
+			break;
+		}
+
+		*done_index = page->index;
+
+		lock_page(page);
+
+		if (unlikely(page->mapping != mapping)) {
+continue_unlock:
+>>>>>>> v3.18
 			unlock_page(page);
 			continue;
 		}
 
+<<<<<<< HEAD
 		if (!wbc->range_cyclic && page->index > end) {
 			ret = 1;
 			unlock_page(page);
@@ -308,6 +361,59 @@ static int gfs2_write_jdata_pagevec(struct address_space *mapping,
 
 		if (ret || (--(wbc->nr_to_write) <= 0))
 			ret = 1;
+=======
+		if (!PageDirty(page)) {
+			/* someone wrote it for us */
+			goto continue_unlock;
+		}
+
+		if (PageWriteback(page)) {
+			if (wbc->sync_mode != WB_SYNC_NONE)
+				wait_on_page_writeback(page);
+			else
+				goto continue_unlock;
+		}
+
+		BUG_ON(PageWriteback(page));
+		if (!clear_page_dirty_for_io(page))
+			goto continue_unlock;
+
+		trace_wbc_writepage(wbc, mapping->backing_dev_info);
+
+		ret = __gfs2_jdata_writepage(page, wbc);
+		if (unlikely(ret)) {
+			if (ret == AOP_WRITEPAGE_ACTIVATE) {
+				unlock_page(page);
+				ret = 0;
+			} else {
+
+				/*
+				 * done_index is set past this page,
+				 * so media errors will not choke
+				 * background writeout for the entire
+				 * file. This has consequences for
+				 * range_cyclic semantics (ie. it may
+				 * not be suitable for data integrity
+				 * writeout).
+				 */
+				*done_index = page->index + 1;
+				ret = 1;
+				break;
+			}
+		}
+
+		/*
+		 * We stop writing back only if we are not doing
+		 * integrity sync. In case of integrity sync we have to
+		 * keep going until we have written all the pages
+		 * we tagged for writeback prior to entering this loop.
+		 */
+		if (--wbc->nr_to_write <= 0 && wbc->sync_mode == WB_SYNC_NONE) {
+			ret = 1;
+			break;
+		}
+
+>>>>>>> v3.18
 	}
 	gfs2_trans_end(sdp);
 	return ret;
@@ -332,6 +438,7 @@ static int gfs2_write_cache_jdata(struct address_space *mapping,
 	int done = 0;
 	struct pagevec pvec;
 	int nr_pages;
+<<<<<<< HEAD
 	pgoff_t index;
 	pgoff_t end;
 	int scanned = 0;
@@ -340,12 +447,31 @@ static int gfs2_write_cache_jdata(struct address_space *mapping,
 	pagevec_init(&pvec, 0);
 	if (wbc->range_cyclic) {
 		index = mapping->writeback_index; /* Start from prev offset */
+=======
+	pgoff_t uninitialized_var(writeback_index);
+	pgoff_t index;
+	pgoff_t end;
+	pgoff_t done_index;
+	int cycled;
+	int range_whole = 0;
+	int tag;
+
+	pagevec_init(&pvec, 0);
+	if (wbc->range_cyclic) {
+		writeback_index = mapping->writeback_index; /* prev offset */
+		index = writeback_index;
+		if (index == 0)
+			cycled = 1;
+		else
+			cycled = 0;
+>>>>>>> v3.18
 		end = -1;
 	} else {
 		index = wbc->range_start >> PAGE_CACHE_SHIFT;
 		end = wbc->range_end >> PAGE_CACHE_SHIFT;
 		if (wbc->range_start == 0 && wbc->range_end == LLONG_MAX)
 			range_whole = 1;
+<<<<<<< HEAD
 		scanned = 1;
 	}
 
@@ -356,15 +482,39 @@ retry:
 					       min(end - index, (pgoff_t)PAGEVEC_SIZE-1) + 1))) {
 		scanned = 1;
 		ret = gfs2_write_jdata_pagevec(mapping, wbc, &pvec, nr_pages, end);
+=======
+		cycled = 1; /* ignore range_cyclic tests */
+	}
+	if (wbc->sync_mode == WB_SYNC_ALL || wbc->tagged_writepages)
+		tag = PAGECACHE_TAG_TOWRITE;
+	else
+		tag = PAGECACHE_TAG_DIRTY;
+
+retry:
+	if (wbc->sync_mode == WB_SYNC_ALL || wbc->tagged_writepages)
+		tag_pages_for_writeback(mapping, index, end);
+	done_index = index;
+	while (!done && (index <= end)) {
+		nr_pages = pagevec_lookup_tag(&pvec, mapping, &index, tag,
+			      min(end - index, (pgoff_t)PAGEVEC_SIZE-1) + 1);
+		if (nr_pages == 0)
+			break;
+
+		ret = gfs2_write_jdata_pagevec(mapping, wbc, &pvec, nr_pages, end, &done_index);
+>>>>>>> v3.18
 		if (ret)
 			done = 1;
 		if (ret > 0)
 			ret = 0;
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 		pagevec_release(&pvec);
 		cond_resched();
 	}
 
+<<<<<<< HEAD
 	if (!scanned && !done) {
 		/*
 		 * We hit the last page and there is more work to be done: wrap
@@ -372,11 +522,27 @@ retry:
 		 */
 		scanned = 1;
 		index = 0;
+=======
+	if (!cycled && !done) {
+		/*
+		 * range_cyclic:
+		 * We hit the last page and there is more work to be done: wrap
+		 * back to the start of the file
+		 */
+		cycled = 1;
+		index = 0;
+		end = writeback_index - 1;
+>>>>>>> v3.18
 		goto retry;
 	}
 
 	if (wbc->range_cyclic || (range_whole && wbc->nr_to_write > 0))
+<<<<<<< HEAD
 		mapping->writeback_index = index;
+=======
+		mapping->writeback_index = done_index;
+
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -397,7 +563,11 @@ static int gfs2_jdata_writepages(struct address_space *mapping,
 
 	ret = gfs2_write_cache_jdata(mapping, wbc);
 	if (ret == 0 && wbc->sync_mode == WB_SYNC_ALL) {
+<<<<<<< HEAD
 		gfs2_log_flush(sdp, ip->i_gl);
+=======
+		gfs2_log_flush(sdp, ip->i_gl, NORMAL_FLUSH);
+>>>>>>> v3.18
 		ret = gfs2_write_cache_jdata(mapping, wbc);
 	}
 	return ret;
@@ -543,7 +713,10 @@ int gfs2_internal_read(struct gfs2_inode *ip, char *buf, loff_t *pos,
 		p = kmap_atomic(page);
 		memcpy(buf + copied, p + offset, amt);
 		kunmap_atomic(p);
+<<<<<<< HEAD
 		mark_page_accessed(page);
+=======
+>>>>>>> v3.18
 		page_cache_release(page);
 		copied += amt;
 		index++;
@@ -637,12 +810,21 @@ static int gfs2_write_begin(struct file *file, struct address_space *mapping,
 		gfs2_write_calc_reserv(ip, len, &data_blocks, &ind_blocks);
 
 	if (alloc_required) {
+<<<<<<< HEAD
+=======
+		struct gfs2_alloc_parms ap = { .aflags = 0, };
+>>>>>>> v3.18
 		error = gfs2_quota_lock_check(ip);
 		if (error)
 			goto out_unlock;
 
 		requested = data_blocks + ind_blocks;
+<<<<<<< HEAD
 		error = gfs2_inplace_reserve(ip, requested, 0);
+=======
+		ap.target = requested;
+		error = gfs2_inplace_reserve(ip, &ap);
+>>>>>>> v3.18
 		if (error)
 			goto out_qunlock;
 	}
@@ -841,6 +1023,11 @@ static int gfs2_write_end(struct file *file, struct address_space *mapping,
 	unsigned int from = pos & (PAGE_CACHE_SIZE - 1);
 	unsigned int to = from + len;
 	int ret;
+<<<<<<< HEAD
+=======
+	struct gfs2_trans *tr = current->journal_info;
+	BUG_ON(!tr);
+>>>>>>> v3.18
 
 	BUG_ON(gfs2_glock_is_locked_by_me(ip->i_gl) == NULL);
 
@@ -851,8 +1038,11 @@ static int gfs2_write_end(struct file *file, struct address_space *mapping,
 		goto failed;
 	}
 
+<<<<<<< HEAD
 	gfs2_trans_add_meta(ip->i_gl, dibh);
 
+=======
+>>>>>>> v3.18
 	if (gfs2_is_stuffed(ip))
 		return gfs2_stuffed_write_end(inode, dibh, pos, len, copied, page);
 
@@ -860,6 +1050,14 @@ static int gfs2_write_end(struct file *file, struct address_space *mapping,
 		gfs2_page_add_databufs(ip, page, from, to);
 
 	ret = generic_write_end(file, mapping, pos, len, copied, page, fsdata);
+<<<<<<< HEAD
+=======
+	if (tr->tr_num_buf_new)
+		__mark_inode_dirty(inode, I_DIRTY_DATASYNC);
+	else
+		gfs2_trans_add_meta(ip->i_gl, dibh);
+
+>>>>>>> v3.18
 
 	if (inode == sdp->sd_rindex) {
 		adjust_fs_space(inode);
@@ -943,27 +1141,50 @@ static void gfs2_discard(struct gfs2_sbd *sdp, struct buffer_head *bh)
 	unlock_buffer(bh);
 }
 
+<<<<<<< HEAD
 static void gfs2_invalidatepage(struct page *page, unsigned long offset)
 {
 	struct gfs2_sbd *sdp = GFS2_SB(page->mapping->host);
+=======
+static void gfs2_invalidatepage(struct page *page, unsigned int offset,
+				unsigned int length)
+{
+	struct gfs2_sbd *sdp = GFS2_SB(page->mapping->host);
+	unsigned int stop = offset + length;
+	int partial_page = (offset || length < PAGE_CACHE_SIZE);
+>>>>>>> v3.18
 	struct buffer_head *bh, *head;
 	unsigned long pos = 0;
 
 	BUG_ON(!PageLocked(page));
+<<<<<<< HEAD
 	if (offset == 0)
+=======
+	if (!partial_page)
+>>>>>>> v3.18
 		ClearPageChecked(page);
 	if (!page_has_buffers(page))
 		goto out;
 
 	bh = head = page_buffers(page);
 	do {
+<<<<<<< HEAD
+=======
+		if (pos + bh->b_size > stop)
+			return;
+
+>>>>>>> v3.18
 		if (offset <= pos)
 			gfs2_discard(sdp, bh);
 		pos += bh->b_size;
 		bh = bh->b_this_page;
 	} while (bh != head);
 out:
+<<<<<<< HEAD
 	if (offset == 0)
+=======
+	if (!partial_page)
+>>>>>>> v3.18
 		try_to_release_page(page, 0);
 }
 
@@ -994,8 +1215,12 @@ static int gfs2_ok_for_dio(struct gfs2_inode *ip, int rw, loff_t offset)
 
 
 static ssize_t gfs2_direct_IO(int rw, struct kiocb *iocb,
+<<<<<<< HEAD
 			      const struct iovec *iov, loff_t offset,
 			      unsigned long nr_segs)
+=======
+			      struct iov_iter *iter, loff_t offset)
+>>>>>>> v3.18
 {
 	struct file *file = iocb->ki_filp;
 	struct inode *inode = file->f_mapping->host;
@@ -1035,7 +1260,11 @@ static ssize_t gfs2_direct_IO(int rw, struct kiocb *iocb,
 	 */
 	if (mapping->nrpages) {
 		loff_t lstart = offset & (PAGE_CACHE_SIZE - 1);
+<<<<<<< HEAD
 		loff_t len = iov_length(iov, nr_segs);
+=======
+		loff_t len = iov_iter_count(iter);
+>>>>>>> v3.18
 		loff_t end = PAGE_ALIGN(offset + len) - 1;
 
 		rv = 0;
@@ -1045,6 +1274,7 @@ static ssize_t gfs2_direct_IO(int rw, struct kiocb *iocb,
 			unmap_shared_mapping_range(ip->i_inode.i_mapping, offset, len);
 		rv = filemap_write_and_wait_range(mapping, lstart, end);
 		if (rv)
+<<<<<<< HEAD
 			return rv;
 		truncate_inode_pages_range(mapping, lstart, end);
 	}
@@ -1052,6 +1282,16 @@ static ssize_t gfs2_direct_IO(int rw, struct kiocb *iocb,
 	rv = __blockdev_direct_IO(rw, iocb, inode, inode->i_sb->s_bdev, iov,
 				  offset, nr_segs, gfs2_get_block_direct,
 				  NULL, NULL, 0);
+=======
+			goto out;
+		if (rw == WRITE)
+			truncate_inode_pages_range(mapping, lstart, end);
+	}
+
+	rv = __blockdev_direct_IO(rw, iocb, inode, inode->i_sb->s_bdev,
+				  iter, offset,
+				  gfs2_get_block_direct, NULL, NULL, 0);
+>>>>>>> v3.18
 out:
 	gfs2_glock_dq(&gh);
 	gfs2_holder_uninit(&gh);
@@ -1093,6 +1333,7 @@ int gfs2_releasepage(struct page *page, gfp_t gfp_mask)
 		bh = bh->b_this_page;
 	} while(bh != head);
 	spin_unlock(&sdp->sd_ail_lock);
+<<<<<<< HEAD
 	gfs2_log_unlock(sdp);
 
 	head = bh = page_buffers(page);
@@ -1117,6 +1358,24 @@ int gfs2_releasepage(struct page *page, gfp_t gfp_mask)
 
 		bh = bh->b_this_page;
 	} while (bh != head);
+=======
+
+	head = bh = page_buffers(page);
+	do {
+		bd = bh->b_private;
+		if (bd) {
+			gfs2_assert_warn(sdp, bd->bd_bh == bh);
+			if (!list_empty(&bd->bd_list))
+				list_del_init(&bd->bd_list);
+			bd->bd_bh = NULL;
+			bh->b_private = NULL;
+			kmem_cache_free(gfs2_bufdata_cachep, bd);
+		}
+
+		bh = bh->b_this_page;
+	} while (bh != head);
+	gfs2_log_unlock(sdp);
+>>>>>>> v3.18
 
 	return try_to_free_buffers(page);
 
@@ -1130,7 +1389,11 @@ cannot_release:
 }
 
 static const struct address_space_operations gfs2_writeback_aops = {
+<<<<<<< HEAD
 	.writepage = gfs2_writeback_writepage,
+=======
+	.writepage = gfs2_writepage,
+>>>>>>> v3.18
 	.writepages = gfs2_writepages,
 	.readpage = gfs2_readpage,
 	.readpages = gfs2_readpages,
@@ -1146,7 +1409,11 @@ static const struct address_space_operations gfs2_writeback_aops = {
 };
 
 static const struct address_space_operations gfs2_ordered_aops = {
+<<<<<<< HEAD
 	.writepage = gfs2_ordered_writepage,
+=======
+	.writepage = gfs2_writepage,
+>>>>>>> v3.18
 	.writepages = gfs2_writepages,
 	.readpage = gfs2_readpage,
 	.readpages = gfs2_readpages,

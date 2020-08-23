@@ -12,6 +12,10 @@
 #include <asm/processor.h>
 #include <asm/x86_init.h>
 #include <asm/apic.h>
+<<<<<<< HEAD
+=======
+#include <asm/hpet.h>
+>>>>>>> v3.18
 
 #include "irq_remapping.h"
 
@@ -51,16 +55,24 @@ static void irq_remapping_disable_io_apic(void)
 
 static int do_setup_msi_irqs(struct pci_dev *dev, int nvec)
 {
+<<<<<<< HEAD
 	int node, ret, sub_handle, index = 0;
 	unsigned int irq;
 	struct msi_desc *msidesc;
 
 	nvec = __roundup_pow_of_two(nvec);
 
+=======
+	int ret, sub_handle, nvec_pow2, index = 0;
+	unsigned int irq;
+	struct msi_desc *msidesc;
+
+>>>>>>> v3.18
 	WARN_ON(!list_is_singular(&dev->msi_list));
 	msidesc = list_entry(dev->msi_list.next, struct msi_desc, list);
 	WARN_ON(msidesc->irq);
 	WARN_ON(msidesc->msi_attrib.multiple);
+<<<<<<< HEAD
 
 	node = dev_to_node(&dev->dev);
 	irq = __create_irqs(get_nr_irqs_gsi(), nvec, node);
@@ -71,6 +83,20 @@ static int do_setup_msi_irqs(struct pci_dev *dev, int nvec)
 	for (sub_handle = 0; sub_handle < nvec; sub_handle++) {
 		if (!sub_handle) {
 			index = msi_alloc_remapped_irq(dev, irq, nvec);
+=======
+	WARN_ON(msidesc->nvec_used);
+
+	irq = irq_alloc_hwirqs(nvec, dev_to_node(&dev->dev));
+	if (irq == 0)
+		return -ENOSPC;
+
+	nvec_pow2 = __roundup_pow_of_two(nvec);
+	msidesc->nvec_used = nvec;
+	msidesc->msi_attrib.multiple = ilog2(nvec_pow2);
+	for (sub_handle = 0; sub_handle < nvec; sub_handle++) {
+		if (!sub_handle) {
+			index = msi_alloc_remapped_irq(dev, irq, nvec_pow2);
+>>>>>>> v3.18
 			if (index < 0) {
 				ret = index;
 				goto error;
@@ -88,13 +114,21 @@ static int do_setup_msi_irqs(struct pci_dev *dev, int nvec)
 	return 0;
 
 error:
+<<<<<<< HEAD
 	destroy_irqs(irq, nvec);
+=======
+	irq_free_hwirqs(irq, nvec);
+>>>>>>> v3.18
 
 	/*
 	 * Restore altered MSI descriptor fields and prevent just destroyed
 	 * IRQs from tearing down again in default_teardown_msi_irqs()
 	 */
 	msidesc->irq = 0;
+<<<<<<< HEAD
+=======
+	msidesc->nvec_used = 0;
+>>>>>>> v3.18
 	msidesc->msi_attrib.multiple = 0;
 
 	return ret;
@@ -107,12 +141,19 @@ static int do_setup_msix_irqs(struct pci_dev *dev, int nvec)
 	unsigned int irq;
 
 	node		= dev_to_node(&dev->dev);
+<<<<<<< HEAD
 	irq		= get_nr_irqs_gsi();
+=======
+>>>>>>> v3.18
 	sub_handle	= 0;
 
 	list_for_each_entry(msidesc, &dev->msi_list, list) {
 
+<<<<<<< HEAD
 		irq = create_irq_nr(irq, node);
+=======
+		irq = irq_alloc_hwirq(node);
+>>>>>>> v3.18
 		if (irq == 0)
 			return -1;
 
@@ -135,7 +176,11 @@ static int do_setup_msix_irqs(struct pci_dev *dev, int nvec)
 	return 0;
 
 error:
+<<<<<<< HEAD
 	destroy_irq(irq);
+=======
+	irq_free_hwirq(irq);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -148,7 +193,11 @@ static int irq_remapping_setup_msi_irqs(struct pci_dev *dev,
 		return do_setup_msix_irqs(dev, nvec);
 }
 
+<<<<<<< HEAD
 void eoi_ioapic_pin_remapped(int apic, int pin, int vector)
+=======
+static void eoi_ioapic_pin_remapped(int apic, int pin, int vector)
+>>>>>>> v3.18
 {
 	/*
 	 * Intr-remapping uses pin number as the virtual vector
@@ -293,8 +342,13 @@ int setup_ioapic_remapped_entry(int irq,
 					     vector, attr);
 }
 
+<<<<<<< HEAD
 int set_remapped_irq_affinity(struct irq_data *data, const struct cpumask *mask,
 			      bool force)
+=======
+static int set_remapped_irq_affinity(struct irq_data *data,
+				     const struct cpumask *mask, bool force)
+>>>>>>> v3.18
 {
 	if (!config_enabled(CONFIG_SMP) || !remap_ops ||
 	    !remap_ops->set_affinity)
@@ -345,10 +399,23 @@ static int msi_setup_remapped_irq(struct pci_dev *pdev, unsigned int irq,
 
 int setup_hpet_msi_remapped(unsigned int irq, unsigned int id)
 {
+<<<<<<< HEAD
 	if (!remap_ops || !remap_ops->setup_hpet_msi)
 		return -ENODEV;
 
 	return remap_ops->setup_hpet_msi(irq, id);
+=======
+	int ret;
+
+	if (!remap_ops || !remap_ops->alloc_hpet_msi)
+		return -ENODEV;
+
+	ret = remap_ops->alloc_hpet_msi(irq, id);
+	if (ret)
+		return -EINVAL;
+
+	return default_setup_hpet_msi(irq, id);
+>>>>>>> v3.18
 }
 
 void panic_if_irq_remap(const char *msg)

@@ -101,7 +101,11 @@ struct swsusp_header {
 	unsigned int flags;	/* Flags to pass to the "boot" kernel */
 	char	orig_sig[10];
 	char	sig[10];
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 
 static struct swsusp_header *swsusp_header;
 
@@ -567,7 +571,11 @@ static int lzo_compress_threadfn(void *data)
 
 /**
  * save_image_lzo - Save the suspend image data compressed with LZO.
+<<<<<<< HEAD
  * @handle: Swap mam handle to use for saving the image.
+=======
+ * @handle: Swap map handle to use for saving the image.
+>>>>>>> v3.18
  * @snapshot: Image to read data from.
  * @nr_to_write: Number of pages to save.
  */

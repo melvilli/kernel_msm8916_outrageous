@@ -239,6 +239,7 @@ config DM_CRYPT
 
 	  If unsure, say N.
 
+<<<<<<< HEAD
 config DM_REQ_CRYPT
 	tristate "Crypt target support"
 	depends on BLK_DEV_DM
@@ -259,6 +260,12 @@ config DM_REQ_CRYPT
 config DM_SNAPSHOT
        tristate "Snapshot target"
        depends on BLK_DEV_DM
+=======
+config DM_SNAPSHOT
+       tristate "Snapshot target"
+       depends on BLK_DEV_DM
+       select DM_BUFIO
+>>>>>>> v3.18
        ---help---
          Allow volume managers to take writable snapshots of a device.
 
@@ -270,6 +277,7 @@ config DM_THIN_PROVISIONING
        ---help---
          Provides thin provisioning and snapshots that share a data store.
 
+<<<<<<< HEAD
 config DM_DEBUG_BLOCK_STACK_TRACING
 	boolean "Keep stack trace of thin provisioning block lock holders"
 	depends on STACKTRACE_SUPPORT && DM_THIN_PROVISIONING
@@ -280,6 +288,8 @@ config DM_DEBUG_BLOCK_STACK_TRACING
 
 	  If unsure, say N.
 
+=======
+>>>>>>> v3.18
 config DM_CACHE
        tristate "Cache target (EXPERIMENTAL)"
        depends on BLK_DEV_DM
@@ -311,6 +321,20 @@ config DM_CACHE_CLEANER
          A simple cache policy that writes back all data to the
          origin.  Used when decommissioning a dm-cache.
 
+<<<<<<< HEAD
+=======
+config DM_ERA
+       tristate "Era target (EXPERIMENTAL)"
+       depends on BLK_DEV_DM
+       default n
+       select DM_PERSISTENT_DATA
+       select DM_BIO_PRISON
+       ---help---
+         dm-era tracks which parts of a block device are written to
+         over time.  Useful for maintaining cache coherency when using
+         vendor snapshots.
+
+>>>>>>> v3.18
 config DM_MIRROR
        tristate "Mirror target"
        depends on BLK_DEV_DM
@@ -318,6 +342,20 @@ config DM_MIRROR
          Allow volume managers to mirror logical volumes, also
          needed for live data migration tools such as 'pvmove'.
 
+<<<<<<< HEAD
+=======
+config DM_LOG_USERSPACE
+	tristate "Mirror userspace logging"
+	depends on DM_MIRROR && NET
+	select CONNECTOR
+	---help---
+	  The userspace logging module provides a mechanism for
+	  relaying the dm-dirty-log API to userspace.  Log designs
+	  which are more suited to userspace implementation (e.g.
+	  shared storage logs) or experimental logs can be implemented
+	  by leveraging this framework.
+
+>>>>>>> v3.18
 config DM_RAID
        tristate "RAID 1/4/5/6/10 target"
        depends on BLK_DEV_DM
@@ -344,6 +382,7 @@ config DM_RAID
 	 RAID-5, RAID-6 distributes the syndromes across the drives
 	 in one of the available parity distribution methods.
 
+<<<<<<< HEAD
 config DM_LOG_USERSPACE
 	tristate "Mirror userspace logging"
 	depends on DM_MIRROR && NET
@@ -355,6 +394,8 @@ config DM_LOG_USERSPACE
 	  shared storage logs) or experimental logs can be implemented
 	  by leveraging this framework.
 
+=======
+>>>>>>> v3.18
 config DM_ZERO
 	tristate "Zero target"
 	depends on BLK_DEV_DM
@@ -433,4 +474,21 @@ config DM_VERITY
 
 	  If unsure, say N.
 
+<<<<<<< HEAD
+=======
+config DM_SWITCH
+	tristate "Switch target support (EXPERIMENTAL)"
+	depends on BLK_DEV_DM
+	---help---
+	  This device-mapper target creates a device that supports an arbitrary
+	  mapping of fixed-size regions of I/O across a fixed set of paths.
+	  The path used for any specific region can be switched dynamically
+	  by sending the target a message.
+
+	  To compile this code as a module, choose M here: the module will
+	  be called dm-switch.
+
+	  If unsure, say N.
+
+>>>>>>> v3.18
 endif # MD

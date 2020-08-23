@@ -365,10 +365,15 @@ static int spear_rtc_probe(struct platform_device *pdev)
 	}
 
 	config = devm_kzalloc(&pdev->dev, sizeof(*config), GFP_KERNEL);
+<<<<<<< HEAD
 	if (!config) {
 		dev_err(&pdev->dev, "out of memory\n");
 		return -ENOMEM;
 	}
+=======
+	if (!config)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	/* alarm irqs */
 	irq = platform_get_irq(pdev, 0);
@@ -417,7 +422,10 @@ static int spear_rtc_probe(struct platform_device *pdev)
 	return 0;
 
 err_disable_clock:
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	clk_disable_unprepare(config->clk);
 
 	return status;

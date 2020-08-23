@@ -9,7 +9,10 @@
 #define _LINUX_EVENTFD_H
 
 #include <linux/fcntl.h>
+<<<<<<< HEAD
 #include <linux/file.h>
+=======
+>>>>>>> v3.18
 #include <linux/wait.h>
 
 /*
@@ -26,6 +29,11 @@
 #define EFD_SHARED_FCNTL_FLAGS (O_CLOEXEC | O_NONBLOCK)
 #define EFD_FLAGS_SET (EFD_SHARED_FCNTL_FLAGS | EFD_SEMAPHORE)
 
+<<<<<<< HEAD
+=======
+struct file;
+
+>>>>>>> v3.18
 #ifdef CONFIG_EVENTFD
 
 struct file *eventfd_file_create(unsigned int count, int flags);

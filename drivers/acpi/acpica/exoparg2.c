@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -215,7 +219,11 @@ acpi_status acpi_ex_opcode_2A_2T_1R(struct acpi_walk_state *walk_state)
 		goto cleanup;
 	}
 
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 	/*
 	 * Since the remainder is not returned indirectly, remove a reference to
 	 * it. Only the quotient is returned indirectly.
@@ -304,7 +312,10 @@ acpi_status acpi_ex_opcode_2A_1T_1R(struct acpi_walk_state *walk_state)
 		break;
 
 	case AML_TO_STRING_OP:	/* to_string (Buffer, Length, Result) (ACPI 2.0) */
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 		/*
 		 * Input object is guaranteed to be a buffer at this point (it may have
 		 * been converted.)  Copy the raw buffer data to a new object of
@@ -446,7 +457,11 @@ acpi_status acpi_ex_opcode_2A_1T_1R(struct acpi_walk_state *walk_state)
 		break;
 	}
 
+<<<<<<< HEAD
       store_result_to_target:
+=======
+store_result_to_target:
+>>>>>>> v3.18
 
 	if (ACPI_SUCCESS(status)) {
 		/*
@@ -463,7 +478,11 @@ acpi_status acpi_ex_opcode_2A_1T_1R(struct acpi_walk_state *walk_state)
 		}
 	}
 
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 
 	/* Delete return object on error */
 
@@ -554,7 +573,11 @@ acpi_status acpi_ex_opcode_2A_0T_1R(struct acpi_walk_state *walk_state)
 		goto cleanup;
 	}
 
+<<<<<<< HEAD
       store_logical_result:
+=======
+store_logical_result:
+>>>>>>> v3.18
 	/*
 	 * Set return value to according to logical_result. logical TRUE (all ones)
 	 * Default is FALSE (zero)
@@ -563,7 +586,11 @@ acpi_status acpi_ex_opcode_2A_0T_1R(struct acpi_walk_state *walk_state)
 		return_desc->integer.value = ACPI_UINT64_MAX;
 	}
 
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 
 	/* Delete return object on error */
 

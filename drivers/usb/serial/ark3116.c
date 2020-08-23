@@ -23,7 +23,10 @@
  */
 
 #include <linux/kernel.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/ioctl.h>
 #include <linux/tty.h>
 #include <linux/slab.h>
@@ -71,7 +74,11 @@ struct ark3116_private {
 	__u32			lcr;	/* line control register value */
 	__u32			hcr;	/* handshake control register (0x8)
 					 * value */
+<<<<<<< HEAD
 	__u32			mcr;	/* modem contol register value */
+=======
+	__u32			mcr;	/* modem control register value */
+>>>>>>> v3.18
 
 	/* protects the status values below */
 	spinlock_t		status_lock;
@@ -100,6 +107,7 @@ static int ark3116_read_reg(struct usb_serial *serial,
 				 usb_rcvctrlpipe(serial->dev, 0),
 				 0xfe, 0xc0, 0, reg,
 				 buf, 1, ARK_TIMEOUT);
+<<<<<<< HEAD
 	if (result < 1) {
 		dev_err(&serial->interface->dev,
 				"failed to read register %u: %d\n",
@@ -111,6 +119,12 @@ static int ark3116_read_reg(struct usb_serial *serial,
 	}
 
 	return buf[0];
+=======
+	if (result < 0)
+		return result;
+	else
+		return buf[0];
+>>>>>>> v3.18
 }
 
 static inline int calc_divisor(int bps)
@@ -420,8 +434,13 @@ static int ark3116_ioctl(struct tty_struct *tty,
 		/* XXX: Some of these values are probably wrong. */
 		memset(&serstruct, 0, sizeof(serstruct));
 		serstruct.type = PORT_16654;
+<<<<<<< HEAD
 		serstruct.line = port->serial->minor;
 		serstruct.port = port->number;
+=======
+		serstruct.line = port->minor;
+		serstruct.port = port->port_number;
+>>>>>>> v3.18
 		serstruct.custom_divisor = 0;
 		serstruct.baud_base = 460800;
 
@@ -616,7 +635,11 @@ static void ark3116_read_int_callback(struct urb *urb)
 }
 
 
+<<<<<<< HEAD
 /* Data comes in via the bulk (data) URB, erors/interrupts via the int URB.
+=======
+/* Data comes in via the bulk (data) URB, errors/interrupts via the int URB.
+>>>>>>> v3.18
  * This means that we cannot be sure which data byte has an associated error
  * condition, so we report an error for all data in the next bulk read.
  *

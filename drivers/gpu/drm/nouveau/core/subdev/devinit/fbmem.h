@@ -24,6 +24,7 @@
  *
  */
 
+<<<<<<< HEAD
 #define NV04_PFB_BOOT_0						0x00100000
 #	define NV04_PFB_BOOT_0_RAM_AMOUNT			0x00000003
 #	define NV04_PFB_BOOT_0_RAM_AMOUNT_32MB			0x00000000
@@ -40,6 +41,12 @@
 #	define NV04_PFB_BOOT_0_RAM_TYPE_SDRAM_64MBITX16		0x00000028
 #	define NV04_PFB_BOOT_0_UMA_ENABLE			0x00000100
 #	define NV04_PFB_BOOT_0_UMA_SIZE				0x0000f000
+=======
+#include <core/device.h>
+
+#include <subdev/fb/regsnv04.h>
+
+>>>>>>> v3.18
 #define NV04_PFB_DEBUG_0					0x00100080
 #	define NV04_PFB_DEBUG_0_PAGE_MODE			0x00000001
 #	define NV04_PFB_DEBUG_0_REFRESH_OFF			0x00000010
@@ -60,10 +67,17 @@
 #	define NV10_PFB_REFCTRL_VALID_1				(1 << 31)
 
 static inline struct io_mapping *
+<<<<<<< HEAD
 fbmem_init(struct pci_dev *pdev)
 {
 	return io_mapping_create_wc(pci_resource_start(pdev, 1),
 				    pci_resource_len(pdev, 1));
+=======
+fbmem_init(struct nouveau_device *dev)
+{
+	return io_mapping_create_wc(nv_device_resource_start(dev, 1),
+				    nv_device_resource_len(dev, 1));
+>>>>>>> v3.18
 }
 
 static inline void

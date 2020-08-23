@@ -12,6 +12,10 @@
 
 #include <linux/futex.h>
 #include <linux/uaccess.h>
+<<<<<<< HEAD
+=======
+#include <asm/asm-eva.h>
+>>>>>>> v3.18
 #include <asm/barrier.h>
 #include <asm/errno.h>
 #include <asm/war.h>
@@ -22,11 +26,19 @@
 		__asm__ __volatile__(					\
 		"	.set	push				\n"	\
 		"	.set	noat				\n"	\
+<<<<<<< HEAD
 		"	.set	mips3				\n"	\
 		"1:	ll	%1, %4	# __futex_atomic_op	\n"	\
 		"	.set	mips0				\n"	\
 		"	" insn	"				\n"	\
 		"	.set	mips3				\n"	\
+=======
+		"	.set	arch=r4000			\n"	\
+		"1:	ll	%1, %4	# __futex_atomic_op	\n"	\
+		"	.set	mips0				\n"	\
+		"	" insn	"				\n"	\
+		"	.set	arch=r4000			\n"	\
+>>>>>>> v3.18
 		"2:	sc	$1, %2				\n"	\
 		"	beqzl	$1, 1b				\n"	\
 		__WEAK_LLSC_MB						\
@@ -48,12 +60,21 @@
 		__asm__ __volatile__(					\
 		"	.set	push				\n"	\
 		"	.set	noat				\n"	\
+<<<<<<< HEAD
 		"	.set	mips3				\n"	\
 		"1:	ll	%1, %4	# __futex_atomic_op	\n"	\
 		"	.set	mips0				\n"	\
 		"	" insn	"				\n"	\
 		"	.set	mips3				\n"	\
 		"2:	sc	$1, %2				\n"	\
+=======
+		"	.set	arch=r4000			\n"	\
+		"1:	"user_ll("%1", "%4")" # __futex_atomic_op\n"	\
+		"	.set	mips0				\n"	\
+		"	" insn	"				\n"	\
+		"	.set	arch=r4000			\n"	\
+		"2:	"user_sc("$1", "%2")"			\n"	\
+>>>>>>> v3.18
 		"	beqz	$1, 1b				\n"	\
 		__WEAK_LLSC_MB						\
 		"3:						\n"	\
@@ -146,12 +167,20 @@ futex_atomic_cmpxchg_inatomic(u32 *uval, u32 __user *uaddr,
 		"# futex_atomic_cmpxchg_inatomic			\n"
 		"	.set	push					\n"
 		"	.set	noat					\n"
+<<<<<<< HEAD
 		"	.set	mips3					\n"
+=======
+		"	.set	arch=r4000				\n"
+>>>>>>> v3.18
 		"1:	ll	%1, %3					\n"
 		"	bne	%1, %z4, 3f				\n"
 		"	.set	mips0					\n"
 		"	move	$1, %z5					\n"
+<<<<<<< HEAD
 		"	.set	mips3					\n"
+=======
+		"	.set	arch=r4000				\n"
+>>>>>>> v3.18
 		"2:	sc	$1, %2					\n"
 		"	beqzl	$1, 1b					\n"
 		__WEAK_LLSC_MB
@@ -173,6 +202,7 @@ futex_atomic_cmpxchg_inatomic(u32 *uval, u32 __user *uaddr,
 		"# futex_atomic_cmpxchg_inatomic			\n"
 		"	.set	push					\n"
 		"	.set	noat					\n"
+<<<<<<< HEAD
 		"	.set	mips3					\n"
 		"1:	ll	%1, %3					\n"
 		"	bne	%1, %z4, 3f				\n"
@@ -180,6 +210,15 @@ futex_atomic_cmpxchg_inatomic(u32 *uval, u32 __user *uaddr,
 		"	move	$1, %z5					\n"
 		"	.set	mips3					\n"
 		"2:	sc	$1, %2					\n"
+=======
+		"	.set	arch=r4000				\n"
+		"1:	"user_ll("%1", "%3")"				\n"
+		"	bne	%1, %z4, 3f				\n"
+		"	.set	mips0					\n"
+		"	move	$1, %z5					\n"
+		"	.set	arch=r4000				\n"
+		"2:	"user_sc("$1", "%2")"				\n"
+>>>>>>> v3.18
 		"	beqz	$1, 1b					\n"
 		__WEAK_LLSC_MB
 		"3:							\n"

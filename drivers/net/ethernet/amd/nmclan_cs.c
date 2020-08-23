@@ -132,7 +132,10 @@ Include Files
 
 #include <linux/module.h>
 #include <linux/kernel.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/ptrace.h>
 #include <linux/slab.h>
 #include <linux/string.h>
@@ -458,7 +461,11 @@ static int nmclan_probe(struct pcmcia_device *link)
     lp->tx_free_frames=AM2150_MAX_TX_FRAMES;
 
     dev->netdev_ops = &mace_netdev_ops;
+<<<<<<< HEAD
     SET_ETHTOOL_OPS(dev, &netdev_ethtool_ops);
+=======
+    dev->ethtool_ops = &netdev_ethtool_ops;
+>>>>>>> v3.18
     dev->watchdog_timeo = TX_TIMEOUT;
 
     return nmclan_config(link);
@@ -622,7 +629,11 @@ static int nmclan_config(struct pcmcia_device *link)
   ret = pcmcia_request_io(link);
   if (ret)
 	  goto failed;
+<<<<<<< HEAD
   ret = pcmcia_request_exclusive_irq(link, mace_interrupt);
+=======
+  ret = pcmcia_request_irq(link, mace_interrupt);
+>>>>>>> v3.18
   if (ret)
 	  goto failed;
   ret = pcmcia_enable_device(link);

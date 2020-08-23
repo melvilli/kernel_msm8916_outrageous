@@ -31,8 +31,13 @@
 
 struct workspace {
 	void *mem;
+<<<<<<< HEAD
 	void *buf;	/* where compressed data goes */
 	void *cbuf;	/* where decompressed data goes */
+=======
+	void *buf;	/* where decompressed data goes */
+	void *cbuf;	/* where compressed data goes */
+>>>>>>> v3.18
 	struct list_head list;
 };
 
@@ -141,9 +146,15 @@ static int lzo_compress_pages(struct list_head *ws,
 		ret = lzo1x_1_compress(data_in, in_len, workspace->cbuf,
 				       &out_len, workspace->mem);
 		if (ret != LZO_E_OK) {
+<<<<<<< HEAD
 			printk(KERN_DEBUG "btrfs deflate in loop returned %d\n",
 			       ret);
 			ret = -1;
+=======
+			printk(KERN_DEBUG "BTRFS: deflate in loop returned %d\n",
+			       ret);
+			ret = -EIO;
+>>>>>>> v3.18
 			goto out;
 		}
 
@@ -189,7 +200,11 @@ static int lzo_compress_pages(struct list_head *ws,
 				kunmap(out_page);
 				if (nr_pages == nr_dest_pages) {
 					out_page = NULL;
+<<<<<<< HEAD
 					ret = -1;
+=======
+					ret = -E2BIG;
+>>>>>>> v3.18
 					goto out;
 				}
 
@@ -207,8 +222,15 @@ static int lzo_compress_pages(struct list_head *ws,
 		}
 
 		/* we're making it bigger, give up */
+<<<<<<< HEAD
 		if (tot_in > 8192 && tot_in < tot_out)
 			goto out;
+=======
+		if (tot_in > 8192 && tot_in < tot_out) {
+			ret = -E2BIG;
+			goto out;
+		}
+>>>>>>> v3.18
 
 		/* we're all done */
 		if (tot_in >= len)
@@ -264,8 +286,12 @@ static int lzo_decompress_biovec(struct list_head *ws,
 	char *data_in;
 	unsigned long page_in_index = 0;
 	unsigned long page_out_index = 0;
+<<<<<<< HEAD
 	unsigned long total_pages_in = (srclen + PAGE_CACHE_SIZE - 1) /
 					PAGE_CACHE_SIZE;
+=======
+	unsigned long total_pages_in = DIV_ROUND_UP(srclen, PAGE_CACHE_SIZE);
+>>>>>>> v3.18
 	unsigned long buf_start;
 	unsigned long buf_offset = 0;
 	unsigned long bytes;
@@ -333,7 +359,11 @@ cont:
 					break;
 
 				if (page_in_index + 1 >= total_pages_in) {
+<<<<<<< HEAD
 					ret = -1;
+=======
+					ret = -EIO;
+>>>>>>> v3.18
 					goto done;
 				}
 
@@ -355,8 +385,13 @@ cont:
 		if (need_unmap)
 			kunmap(pages_in[page_in_index - 1]);
 		if (ret != LZO_E_OK) {
+<<<<<<< HEAD
 			printk(KERN_WARNING "btrfs decompress failed\n");
 			ret = -1;
+=======
+			printk(KERN_WARNING "BTRFS: decompress failed\n");
+			ret = -EIO;
+>>>>>>> v3.18
 			break;
 		}
 
@@ -372,6 +407,11 @@ cont:
 	}
 done:
 	kunmap(pages_in[page_in_index]);
+<<<<<<< HEAD
+=======
+	if (!ret)
+		btrfs_clear_biovec_end(bvec, vcnt, page_out_index, pg_offset);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -399,20 +439,48 @@ static int lzo_decompress(struct list_head *ws, unsigned char *data_in,
 	out_len = PAGE_CACHE_SIZE;
 	ret = lzo1x_decompress_safe(data_in, in_len, workspace->buf, &out_len);
 	if (ret != LZO_E_OK) {
+<<<<<<< HEAD
 		printk(KERN_WARNING "btrfs decompress failed!\n");
 		ret = -1;
+=======
+		printk(KERN_WARNING "BTRFS: decompress failed!\n");
+		ret = -EIO;
+>>>>>>> v3.18
 		goto out;
 	}
 
 	if (out_len < start_byte) {
+<<<<<<< HEAD
 		ret = -1;
 		goto out;
 	}
 
+=======
+		ret = -EIO;
+		goto out;
+	}
+
+	/*
+	 * the caller is already checking against PAGE_SIZE, but lets
+	 * move this check closer to the memcpy/memset
+	 */
+	destlen = min_t(unsigned long, destlen, PAGE_SIZE);
+>>>>>>> v3.18
 	bytes = min_t(unsigned long, destlen, out_len - start_byte);
 
 	kaddr = kmap_atomic(dest_page);
 	memcpy(kaddr, workspace->buf + start_byte, bytes);
+<<<<<<< HEAD
+=======
+
+	/*
+	 * btrfs_getblock is doing a zero on the tail of the page too,
+	 * but this will cover anything missing from the decompressed
+	 * data.
+	 */
+	if (bytes < destlen)
+		memset(kaddr+bytes, 0, destlen-bytes);
+>>>>>>> v3.18
 	kunmap_atomic(kaddr);
 out:
 	return ret;

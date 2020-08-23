@@ -29,7 +29,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/pci.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/blkdev.h>
 #include <linux/delay.h>
 #include <linux/device.h>
@@ -531,10 +534,17 @@ err_out:
 	return rc;
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 static int atp867x_reinit_one(struct pci_dev *pdev)
 {
 	struct ata_host *host = dev_get_drvdata(&pdev->dev);
+=======
+#ifdef CONFIG_PM_SLEEP
+static int atp867x_reinit_one(struct pci_dev *pdev)
+{
+	struct ata_host *host = pci_get_drvdata(pdev);
+>>>>>>> v3.18
 	int rc;
 
 	rc = ata_pci_device_do_resume(pdev);
@@ -559,7 +569,11 @@ static struct pci_driver atp867x_driver = {
 	.id_table 	= atp867x_pci_tbl,
 	.probe 		= atp867x_init_one,
 	.remove		= ata_pci_remove_one,
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 	.suspend	= ata_pci_device_suspend,
 	.resume		= atp867x_reinit_one,
 #endif

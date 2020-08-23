@@ -71,7 +71,11 @@ static int __init init_ras_IRQ(void)
 
 	return 0;
 }
+<<<<<<< HEAD
 subsys_initcall(init_ras_IRQ);
+=======
+machine_subsys_initcall(pseries, init_ras_IRQ);
+>>>>>>> v3.18
 
 #define EPOW_SHUTDOWN_NORMAL				1
 #define EPOW_SHUTDOWN_ON_UPS				2
@@ -83,7 +87,11 @@ static void handle_system_shutdown(char event_modifier)
 	switch (event_modifier) {
 	case EPOW_SHUTDOWN_NORMAL:
 		pr_emerg("Firmware initiated power off");
+<<<<<<< HEAD
 		orderly_poweroff(1);
+=======
+		orderly_poweroff(true);
+>>>>>>> v3.18
 		break;
 
 	case EPOW_SHUTDOWN_ON_UPS:
@@ -95,13 +103,21 @@ static void handle_system_shutdown(char event_modifier)
 		pr_emerg("Loss of system critical functions reported by "
 			"firmware");
 		pr_emerg("Check RTAS error log for details");
+<<<<<<< HEAD
 		orderly_poweroff(1);
+=======
+		orderly_poweroff(true);
+>>>>>>> v3.18
 		break;
 
 	case EPOW_SHUTDOWN_AMBIENT_TEMPERATURE_TOO_HIGH:
 		pr_emerg("Ambient temperature too high reported by firmware");
 		pr_emerg("Check RTAS error log for details");
+<<<<<<< HEAD
 		orderly_poweroff(1);
+=======
+		orderly_poweroff(true);
+>>>>>>> v3.18
 		break;
 
 	default:
@@ -126,7 +142,11 @@ struct epow_errorlog {
 #define EPOW_MAIN_ENCLOSURE		5
 #define EPOW_POWER_OFF			7
 
+<<<<<<< HEAD
 void rtas_parse_epow_errlog(struct rtas_error_log *log)
+=======
+static void rtas_parse_epow_errlog(struct rtas_error_log *log)
+>>>>>>> v3.18
 {
 	struct pseries_errorlog *pseries_log;
 	struct epow_errorlog *epow_log;
@@ -162,7 +182,11 @@ void rtas_parse_epow_errlog(struct rtas_error_log *log)
 
 	case EPOW_SYSTEM_HALT:
 		pr_emerg("Firmware initiated power off");
+<<<<<<< HEAD
 		orderly_poweroff(1);
+=======
+		orderly_poweroff(true);
+>>>>>>> v3.18
 		break;
 
 	case EPOW_MAIN_ENCLOSURE:
@@ -187,8 +211,12 @@ static irqreturn_t ras_epow_interrupt(int irq, void *dev_id)
 	int state;
 	int critical;
 
+<<<<<<< HEAD
 	status = rtas_get_sensor_fast(EPOW_SENSOR_TOKEN, EPOW_SENSOR_INDEX,
 				      &state);
+=======
+	status = rtas_get_sensor(EPOW_SENSOR_TOKEN, EPOW_SENSOR_INDEX, &state);
+>>>>>>> v3.18
 
 	if (state > 3)
 		critical = 1;		/* Time Critical */
@@ -237,7 +265,12 @@ static irqreturn_t ras_error_interrupt(int irq, void *dev_id)
 
 	rtas_elog = (struct rtas_error_log *)ras_log_buf;
 
+<<<<<<< HEAD
 	if ((status == 0) && (rtas_elog->severity >= RTAS_SEVERITY_ERROR_SYNC))
+=======
+	if (status == 0 &&
+	    rtas_error_severity(rtas_elog) >= RTAS_SEVERITY_ERROR_SYNC)
+>>>>>>> v3.18
 		fatal = 1;
 	else
 		fatal = 0;
@@ -288,6 +321,12 @@ static struct rtas_error_log *fwnmi_get_errinfo(struct pt_regs *regs)
 	unsigned long *savep;
 	struct rtas_error_log *h, *errhdr = NULL;
 
+<<<<<<< HEAD
+=======
+	/* Mask top two bits */
+	regs->gpr[3] &= ~(0x3UL << 62);
+
+>>>>>>> v3.18
 	if (!VALID_FWNMI_BUFFER(regs->gpr[3])) {
 		printk(KERN_ERR "FWNMI: corrupt r3 0x%016lx\n", regs->gpr[3]);
 		return NULL;
@@ -298,6 +337,7 @@ static struct rtas_error_log *fwnmi_get_errinfo(struct pt_regs *regs)
 
 	/* If it isn't an extended log we can use the per cpu 64bit buffer */
 	h = (struct rtas_error_log *)&savep[1];
+<<<<<<< HEAD
 	if (!h->extended) {
 		memcpy(&__get_cpu_var(mce_data_buf), h, sizeof(__u64));
 		errhdr = (struct rtas_error_log *)&__get_cpu_var(mce_data_buf);
@@ -305,6 +345,16 @@ static struct rtas_error_log *fwnmi_get_errinfo(struct pt_regs *regs)
 		int len;
 
 		len = max_t(int, 8+h->extended_log_length, RTAS_ERROR_LOG_MAX);
+=======
+	if (!rtas_error_extended(h)) {
+		memcpy(&__get_cpu_var(mce_data_buf), h, sizeof(__u64));
+		errhdr = (struct rtas_error_log *)&__get_cpu_var(mce_data_buf);
+	} else {
+		int len, error_log_length;
+
+		error_log_length = 8 + rtas_error_extended_log_length(h);
+		len = max_t(int, error_log_length, RTAS_ERROR_LOG_MAX);
+>>>>>>> v3.18
 		memset(global_mce_data_buf, 0, RTAS_ERROR_LOG_MAX);
 		memcpy(global_mce_data_buf, h, len);
 		errhdr = (struct rtas_error_log *)global_mce_data_buf;
@@ -348,23 +398,39 @@ int pSeries_system_reset_exception(struct pt_regs *regs)
 static int recover_mce(struct pt_regs *regs, struct rtas_error_log *err)
 {
 	int recovered = 0;
+<<<<<<< HEAD
+=======
+	int disposition = rtas_error_disposition(err);
+>>>>>>> v3.18
 
 	if (!(regs->msr & MSR_RI)) {
 		/* If MSR_RI isn't set, we cannot recover */
 		recovered = 0;
 
+<<<<<<< HEAD
 	} else if (err->disposition == RTAS_DISP_FULLY_RECOVERED) {
 		/* Platform corrected itself */
 		recovered = 1;
 
 	} else if (err->disposition == RTAS_DISP_LIMITED_RECOVERY) {
+=======
+	} else if (disposition == RTAS_DISP_FULLY_RECOVERED) {
+		/* Platform corrected itself */
+		recovered = 1;
+
+	} else if (disposition == RTAS_DISP_LIMITED_RECOVERY) {
+>>>>>>> v3.18
 		/* Platform corrected itself but could be degraded */
 		printk(KERN_ERR "MCE: limited recovery, system may "
 		       "be degraded\n");
 		recovered = 1;
 
 	} else if (user_mode(regs) && !is_global_init(current) &&
+<<<<<<< HEAD
 		   err->severity == RTAS_SEVERITY_ERROR_SYNC) {
+=======
+		   rtas_error_severity(err) == RTAS_SEVERITY_ERROR_SYNC) {
+>>>>>>> v3.18
 
 		/*
 		 * If we received a synchronous error when in userspace

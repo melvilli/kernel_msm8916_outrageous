@@ -290,6 +290,7 @@ static struct pci_driver mantis_pci_driver = {
 	.remove		= mantis_pci_remove,
 };
 
+<<<<<<< HEAD
 static int mantis_init(void)
 {
 	return pci_register_driver(&mantis_pci_driver);
@@ -302,6 +303,9 @@ static void mantis_exit(void)
 
 module_init(mantis_init);
 module_exit(mantis_exit);
+=======
+module_pci_driver(mantis_pci_driver);
+>>>>>>> v3.18
 
 MODULE_DESCRIPTION("MANTIS driver");
 MODULE_AUTHOR("Manu Abraham");

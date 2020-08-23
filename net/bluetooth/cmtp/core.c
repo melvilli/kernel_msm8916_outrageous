@@ -108,7 +108,11 @@ static inline void cmtp_add_msgpart(struct cmtp_session *session, int id, const 
 	struct sk_buff *skb = session->reassembly[id], *nskb;
 	int size;
 
+<<<<<<< HEAD
 	BT_DBG("session %pK buf %pK count %d", session, buf, count);
+=======
+	BT_DBG("session %p buf %p count %d", session, buf, count);
+>>>>>>> v3.18
 
 	size = (skb) ? skb->len + count : count;
 
@@ -133,7 +137,11 @@ static inline int cmtp_recv_frame(struct cmtp_session *session, struct sk_buff *
 	__u8 hdr, hdrlen, id;
 	__u16 len;
 
+<<<<<<< HEAD
 	BT_DBG("session %pK skb %pK len %d", session, skb, skb->len);
+=======
+	BT_DBG("session %p skb %p len %d", session, skb, skb->len);
+>>>>>>> v3.18
 
 	while (skb->len > 0) {
 		hdr = skb->data[0];
@@ -196,7 +204,11 @@ static int cmtp_send_frame(struct cmtp_session *session, unsigned char *data, in
 	struct kvec iv = { data, len };
 	struct msghdr msg;
 
+<<<<<<< HEAD
 	BT_DBG("session %pK data %pK len %d", session, data, len);
+=======
+	BT_DBG("session %p data %p len %d", session, data, len);
+>>>>>>> v3.18
 
 	if (!len)
 		return 0;
@@ -212,7 +224,11 @@ static void cmtp_process_transmit(struct cmtp_session *session)
 	unsigned char *hdr;
 	unsigned int size, tail;
 
+<<<<<<< HEAD
 	BT_DBG("session %pK", session);
+=======
+	BT_DBG("session %p", session);
+>>>>>>> v3.18
 
 	nskb = alloc_skb(session->mtu, GFP_ATOMIC);
 	if (!nskb) {
@@ -282,7 +298,11 @@ static int cmtp_session(void *arg)
 	struct sk_buff *skb;
 	wait_queue_t wait;
 
+<<<<<<< HEAD
 	BT_DBG("session %pK", session);
+=======
+	BT_DBG("session %p", session);
+>>>>>>> v3.18
 
 	set_user_nice(current, -15);
 
@@ -334,29 +354,44 @@ int cmtp_add_connection(struct cmtp_connadd_req *req, struct socket *sock)
 
 	BT_DBG("");
 
+<<<<<<< HEAD
 	if (!l2cap_is_socket(sock))
 		return -EBADFD;
 
+=======
+>>>>>>> v3.18
 	session = kzalloc(sizeof(struct cmtp_session), GFP_KERNEL);
 	if (!session)
 		return -ENOMEM;
 
 	down_write(&cmtp_session_sem);
 
+<<<<<<< HEAD
 	s = __cmtp_get_session(&bt_sk(sock->sk)->dst);
+=======
+	s = __cmtp_get_session(&l2cap_pi(sock->sk)->chan->dst);
+>>>>>>> v3.18
 	if (s && s->state == BT_CONNECTED) {
 		err = -EEXIST;
 		goto failed;
 	}
 
+<<<<<<< HEAD
 	bacpy(&session->bdaddr, &bt_sk(sock->sk)->dst);
+=======
+	bacpy(&session->bdaddr, &l2cap_pi(sock->sk)->chan->dst);
+>>>>>>> v3.18
 
 	session->mtu = min_t(uint, l2cap_pi(sock->sk)->chan->omtu,
 					l2cap_pi(sock->sk)->chan->imtu);
 
 	BT_DBG("mtu %d", session->mtu);
 
+<<<<<<< HEAD
 	sprintf(session->name, "%pMR", &bt_sk(sock->sk)->dst);
+=======
+	sprintf(session->name, "%pMR", &session->bdaddr);
+>>>>>>> v3.18
 
 	session->sock  = sock;
 	session->state = BT_CONFIG;

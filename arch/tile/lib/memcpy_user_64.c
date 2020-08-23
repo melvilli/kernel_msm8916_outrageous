@@ -31,6 +31,10 @@
 		    ".pushsection .coldtext.memcpy,\"ax\";"	\
 		    "2: { move r0, %2; jrp lr };"		\
 		    ".section __ex_table,\"a\";"		\
+<<<<<<< HEAD
+=======
+		    ".align 8;"					\
+>>>>>>> v3.18
 		    ".quad 1b, 2b;"				\
 		    ".popsection"				\
 		    : "=m" (*(p)) : "r" (v), "r" (n));		\
@@ -43,6 +47,10 @@
 		    ".pushsection .coldtext.memcpy,\"ax\";"	\
 		    "2: { move r0, %2; jrp lr };"		\
 		    ".section __ex_table,\"a\";"		\
+<<<<<<< HEAD
+=======
+		    ".align 8;"					\
+>>>>>>> v3.18
 		    ".quad 1b, 2b;"				\
 		    ".popsection"				\
 		    : "=r" (__v) : "m" (*(p)), "r" (n));	\

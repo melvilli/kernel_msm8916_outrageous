@@ -44,14 +44,22 @@ static void *prism2_wep_init(int keyidx)
 
 	priv->tx_tfm = crypto_alloc_blkcipher("ecb(arc4)", 0, CRYPTO_ALG_ASYNC);
 	if (IS_ERR(priv->tx_tfm)) {
+<<<<<<< HEAD
 		printk(KERN_DEBUG "rtllib_crypt_wep: could not allocate "
+=======
+		pr_debug("rtllib_crypt_wep: could not allocate "
+>>>>>>> v3.18
 		       "crypto API arc4\n");
 		priv->tx_tfm = NULL;
 		goto fail;
 	}
 	priv->rx_tfm = crypto_alloc_blkcipher("ecb(arc4)", 0, CRYPTO_ALG_ASYNC);
 	if (IS_ERR(priv->rx_tfm)) {
+<<<<<<< HEAD
 		printk(KERN_DEBUG "rtllib_crypt_wep: could not allocate "
+=======
+		pr_debug("rtllib_crypt_wep: could not allocate "
+>>>>>>> v3.18
 		       "crypto API arc4\n");
 		priv->rx_tfm = NULL;
 		goto fail;
@@ -105,6 +113,10 @@ static int prism2_wep_encrypt(struct sk_buff *skb, int hdr_len, void *priv)
 	u32 crc;
 	u8 *icv;
 	struct scatterlist sg;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	if (skb_headroom(skb) < 4 || skb_tailroom(skb) < 4 ||
 	    skb->len < hdr_len){
 		printk(KERN_ERR "Error!!! headroom=%d tailroom=%d skblen=%d"
@@ -126,6 +138,10 @@ static int prism2_wep_encrypt(struct sk_buff *skb, int hdr_len, void *priv)
 	 * can be used to speedup attacks, so avoid using them. */
 	if ((wep->iv & 0xff00) == 0xff00) {
 		u8 B = (wep->iv >> 16) & 0xff;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		if (B >= 3 && B < klen)
 			wep->iv += 0x0100;
 	}
@@ -177,6 +193,10 @@ static int prism2_wep_decrypt(struct sk_buff *skb, int hdr_len, void *priv)
 	u32 crc;
 	u8 icv[4];
 	struct scatterlist sg;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	if (skb->len < hdr_len + 8)
 		return -1;
 
@@ -250,6 +270,10 @@ static int prism2_wep_get_key(void *key, int len, u8 *seq, void *priv)
 static void prism2_wep_print_stats(struct seq_file *m, void *priv)
 {
 	struct prism2_wep_data *wep = priv;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	seq_printf(m, "key[%d] alg=WEP len=%d\n", wep->key_idx, wep->key_len);
 }
 
@@ -270,13 +294,21 @@ static struct lib80211_crypto_ops rtllib_crypt_wep = {
 };
 
 
+<<<<<<< HEAD
 int __init rtllib_crypto_wep_init(void)
+=======
+static int __init rtllib_crypto_wep_init(void)
+>>>>>>> v3.18
 {
 	return lib80211_register_crypto_ops(&rtllib_crypt_wep);
 }
 
 
+<<<<<<< HEAD
 void __exit rtllib_crypto_wep_exit(void)
+=======
+static void __exit rtllib_crypto_wep_exit(void)
+>>>>>>> v3.18
 {
 	lib80211_unregister_crypto_ops(&rtllib_crypt_wep);
 }

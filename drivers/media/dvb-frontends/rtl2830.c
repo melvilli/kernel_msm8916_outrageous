@@ -710,6 +710,10 @@ struct dvb_frontend *rtl2830_attach(const struct rtl2830_config *cfg,
 		sizeof(priv->tuner_i2c_adapter.name));
 	priv->tuner_i2c_adapter.algo = &rtl2830_tuner_i2c_algo;
 	priv->tuner_i2c_adapter.algo_data = NULL;
+<<<<<<< HEAD
+=======
+	priv->tuner_i2c_adapter.dev.parent = &i2c->dev;
+>>>>>>> v3.18
 	i2c_set_adapdata(&priv->tuner_i2c_adapter, priv);
 	if (i2c_add_adapter(&priv->tuner_i2c_adapter) < 0) {
 		dev_err(&i2c->dev,

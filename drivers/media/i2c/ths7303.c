@@ -26,7 +26,10 @@
 #include <linux/slab.h>
 
 #include <media/ths7303.h>
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 #include <media/v4l2-device.h>
 
 #define THS7303_CHANNEL_1	1
@@ -35,11 +38,18 @@
 
 struct ths7303_state {
 	struct v4l2_subdev		sd;
+<<<<<<< HEAD
 	struct ths7303_platform_data	pdata;
 	struct v4l2_bt_timings		bt;
 	int std_id;
 	int stream_on;
 	int driver_data;
+=======
+	const struct ths7303_platform_data *pdata;
+	struct v4l2_bt_timings		bt;
+	int std_id;
+	int stream_on;
+>>>>>>> v3.18
 };
 
 enum ths7303_filter_mode {
@@ -85,11 +95,20 @@ static int ths7303_write(struct v4l2_subdev *sd, u8 reg, u8 val)
 }
 
 /* following function is used to set ths7303 */
+<<<<<<< HEAD
 int ths7303_setval(struct v4l2_subdev *sd, enum ths7303_filter_mode mode)
 {
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 	struct ths7303_state *state = to_state(sd);
 	struct ths7303_platform_data *pdata = &state->pdata;
+=======
+static int ths7303_setval(struct v4l2_subdev *sd,
+			  enum ths7303_filter_mode mode)
+{
+	struct i2c_client *client = v4l2_get_subdevdata(sd);
+	struct ths7303_state *state = to_state(sd);
+	const struct ths7303_platform_data *pdata = state->pdata;
+>>>>>>> v3.18
 	u8 val, sel = 0;
 	int err, disable = 0;
 
@@ -212,6 +231,7 @@ static int ths7303_s_dv_timings(struct v4l2_subdev *sd,
 	return ths7303_config(sd);
 }
 
+<<<<<<< HEAD
 static int ths7303_g_chip_ident(struct v4l2_subdev *sd,
 				struct v4l2_dbg_chip_ident *chip)
 {
@@ -221,6 +241,8 @@ static int ths7303_g_chip_ident(struct v4l2_subdev *sd,
 	return v4l2_chip_ident_i2c_client(client, chip, state->driver_data, 0);
 }
 
+=======
+>>>>>>> v3.18
 static const struct v4l2_subdev_video_ops ths7303_video_ops = {
 	.s_stream	= ths7303_s_stream,
 	.s_std_output	= ths7303_s_std_output,
@@ -232,6 +254,7 @@ static const struct v4l2_subdev_video_ops ths7303_video_ops = {
 static int ths7303_g_register(struct v4l2_subdev *sd,
 			      struct v4l2_dbg_register *reg)
 {
+<<<<<<< HEAD
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 
 	if (!v4l2_chip_match_i2c_client(client, &reg->match))
@@ -239,6 +262,8 @@ static int ths7303_g_register(struct v4l2_subdev *sd,
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
 
+=======
+>>>>>>> v3.18
 	reg->size = 1;
 	reg->val = ths7303_read(sd, reg->reg);
 	return 0;
@@ -247,6 +272,7 @@ static int ths7303_g_register(struct v4l2_subdev *sd,
 static int ths7303_s_register(struct v4l2_subdev *sd,
 			      const struct v4l2_dbg_register *reg)
 {
+<<<<<<< HEAD
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 
 	if (!v4l2_chip_match_i2c_client(client, &reg->match))
@@ -254,6 +280,8 @@ static int ths7303_s_register(struct v4l2_subdev *sd,
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
 
+=======
+>>>>>>> v3.18
 	ths7303_write(sd, reg->reg, reg->val);
 	return 0;
 }
@@ -316,10 +344,15 @@ static int ths7303_log_status(struct v4l2_subdev *sd)
 		struct v4l2_bt_timings *bt = bt = &state->bt;
 		u32 frame_width, frame_height;
 
+<<<<<<< HEAD
 		frame_width = bt->width + bt->hfrontporch +
 			      bt->hsync + bt->hbackporch;
 		frame_height = bt->height + bt->vfrontporch +
 			       bt->vsync + bt->vbackporch;
+=======
+		frame_width = V4L2_DV_BT_FRAME_WIDTH(bt);
+		frame_height = V4L2_DV_BT_FRAME_HEIGHT(bt);
+>>>>>>> v3.18
 		v4l2_info(sd,
 			  "timings: %dx%d%s%d (%dx%d). Pix freq. = %d Hz. Polarities = 0x%x\n",
 			  bt->width, bt->height, bt->interlaced ? "i" : "p",
@@ -340,7 +373,10 @@ static int ths7303_log_status(struct v4l2_subdev *sd)
 }
 
 static const struct v4l2_subdev_core_ops ths7303_core_ops = {
+<<<<<<< HEAD
 	.g_chip_ident = ths7303_g_chip_ident,
+=======
+>>>>>>> v3.18
 	.log_status = ths7303_log_status,
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 	.g_register = ths7303_g_register,
@@ -353,6 +389,7 @@ static const struct v4l2_subdev_ops ths7303_ops = {
 	.video 	= &ths7303_video_ops,
 };
 
+<<<<<<< HEAD
 static int ths7303_setup(struct v4l2_subdev *sd)
 {
 	struct ths7303_state *state = to_state(sd);
@@ -379,6 +416,8 @@ static int ths7303_setup(struct v4l2_subdev *sd)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 static int ths7303_probe(struct i2c_client *client,
 			const struct i2c_device_id *id)
 {
@@ -386,6 +425,14 @@ static int ths7303_probe(struct i2c_client *client,
 	struct ths7303_state *state;
 	struct v4l2_subdev *sd;
 
+<<<<<<< HEAD
+=======
+	if (pdata == NULL) {
+		dev_err(&client->dev, "No platform data\n");
+		return -EINVAL;
+	}
+
+>>>>>>> v3.18
 	if (!i2c_check_functionality(client->adapter, I2C_FUNC_SMBUS_BYTE_DATA))
 		return -ENODEV;
 
@@ -397,6 +444,7 @@ static int ths7303_probe(struct i2c_client *client,
 	if (!state)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 	if (!pdata)
 		v4l_warn(client, "No platform data, using default data!\n");
 	else
@@ -411,6 +459,16 @@ static int ths7303_probe(struct i2c_client *client,
 	if (ths7303_setup(sd) < 0) {
 		v4l_err(client, "init failed\n");
 		return -EIO;
+=======
+	state->pdata = pdata;
+	sd = &state->sd;
+	v4l2_i2c_subdev_init(sd, client, &ths7303_ops);
+
+	/* set to default 480I_576I filter mode */
+	if (ths7303_setval(sd, THS7303_FILTER_MODE_480I_576I) < 0) {
+		v4l_err(client, "Setting to 480I_576I filter mode failed!\n");
+		return -EINVAL;
+>>>>>>> v3.18
 	}
 
 	return 0;
@@ -426,8 +484,13 @@ static int ths7303_remove(struct i2c_client *client)
 }
 
 static const struct i2c_device_id ths7303_id[] = {
+<<<<<<< HEAD
 	{"ths7303", V4L2_IDENT_THS7303},
 	{"ths7353", V4L2_IDENT_THS7353},
+=======
+	{"ths7303", 0},
+	{"ths7353", 0},
+>>>>>>> v3.18
 	{},
 };
 

@@ -110,8 +110,13 @@ struct nfs_subversion *get_nfs_version(unsigned int version)
 		mutex_unlock(&nfs_version_mutex);
 	}
 
+<<<<<<< HEAD
 	if (!IS_ERR(nfs))
 		try_module_get(nfs->owner);
+=======
+	if (!IS_ERR(nfs) && !try_module_get(nfs->owner))
+		return ERR_PTR(-EAGAIN);
+>>>>>>> v3.18
 	return nfs;
 }
 
@@ -158,7 +163,12 @@ struct nfs_client *nfs_alloc_client(const struct nfs_client_initdata *cl_init)
 		goto error_0;
 
 	clp->cl_nfs_mod = cl_init->nfs_mod;
+<<<<<<< HEAD
 	try_module_get(clp->cl_nfs_mod->owner);
+=======
+	if (!try_module_get(clp->cl_nfs_mod->owner))
+		goto error_dealloc;
+>>>>>>> v3.18
 
 	clp->rpc_ops = clp->cl_nfs_mod->rpc_ops;
 
@@ -190,6 +200,10 @@ struct nfs_client *nfs_alloc_client(const struct nfs_client_initdata *cl_init)
 
 error_cleanup:
 	put_nfs_version(clp->cl_nfs_mod);
+<<<<<<< HEAD
+=======
+error_dealloc:
+>>>>>>> v3.18
 	kfree(clp);
 error_0:
 	return ERR_PTR(err);
@@ -252,6 +266,10 @@ void nfs_free_client(struct nfs_client *clp)
 	put_net(clp->cl_net);
 	put_nfs_version(clp->cl_nfs_mod);
 	kfree(clp->cl_hostname);
+<<<<<<< HEAD
+=======
+	kfree(clp->cl_acceptor);
+>>>>>>> v3.18
 	kfree(clp);
 
 	dprintk("<-- nfs_free_client()\n");
@@ -482,8 +500,18 @@ nfs_get_client(const struct nfs_client_initdata *cl_init,
 	struct nfs_net *nn = net_generic(cl_init->net, nfs_net_id);
 	const struct nfs_rpc_ops *rpc_ops = cl_init->nfs_mod->rpc_ops;
 
+<<<<<<< HEAD
 	dprintk("--> nfs_get_client(%s,v%u)\n",
 		cl_init->hostname ?: "", rpc_ops->version);
+=======
+	if (cl_init->hostname == NULL) {
+		WARN_ON(1);
+		return NULL;
+	}
+
+	dprintk("--> nfs_get_client(%s,v%u)\n",
+		cl_init->hostname, rpc_ops->version);
+>>>>>>> v3.18
 
 	/* see if the client already exists */
 	do {
@@ -501,8 +529,12 @@ nfs_get_client(const struct nfs_client_initdata *cl_init,
 					&nn->nfs_client_list);
 			spin_unlock(&nn->nfs_client_lock);
 			new->cl_flags = cl_init->init_flags;
+<<<<<<< HEAD
 			return rpc_ops->init_client(new, timeparms, ip_addr,
 						    authflavour);
+=======
+			return rpc_ops->init_client(new, timeparms, ip_addr);
+>>>>>>> v3.18
 		}
 
 		spin_unlock(&nn->nfs_client_lock);
@@ -511,7 +543,11 @@ nfs_get_client(const struct nfs_client_initdata *cl_init,
 	} while (!IS_ERR(new));
 
 	dprintk("<-- nfs_get_client() Failed to find %s (%ld)\n",
+<<<<<<< HEAD
 		cl_init->hostname ?: "", PTR_ERR(new));
+=======
+		cl_init->hostname, PTR_ERR(new));
+>>>>>>> v3.18
 	return new;
 }
 EXPORT_SYMBOL_GPL(nfs_get_client);
@@ -591,6 +627,11 @@ int nfs_create_rpc_client(struct nfs_client *clp,
 
 	if (test_bit(NFS_CS_DISCRTRY, &clp->cl_flags))
 		args.flags |= RPC_CLNT_CREATE_DISCRTRY;
+<<<<<<< HEAD
+=======
+	if (test_bit(NFS_CS_NO_RETRANS_TIMEOUT, &clp->cl_flags))
+		args.flags |= RPC_CLNT_CREATE_NO_RETRANS_TIMEOUT;
+>>>>>>> v3.18
 	if (test_bit(NFS_CS_NORESVPORT, &clp->cl_flags))
 		args.flags |= RPC_CLNT_CREATE_NONPRIVPORT;
 	if (test_bit(NFS_CS_INFINITE_SLOTS, &clp->cl_flags))
@@ -694,13 +735,20 @@ EXPORT_SYMBOL_GPL(nfs_init_server_rpcclient);
  * @clp: nfs_client to initialise
  * @timeparms: timeout parameters for underlying RPC transport
  * @ip_addr: IP presentation address (not used)
+<<<<<<< HEAD
  * @authflavor: authentication flavor for underlying RPC transport
+=======
+>>>>>>> v3.18
  *
  * Returns pointer to an NFS client, or an ERR_PTR value.
  */
 struct nfs_client *nfs_init_client(struct nfs_client *clp,
 		    const struct rpc_timeout *timeparms,
+<<<<<<< HEAD
 		    const char *ip_addr, rpc_authflavor_t authflavour)
+=======
+		    const char *ip_addr)
+>>>>>>> v3.18
 {
 	int error;
 
@@ -753,8 +801,11 @@ static int nfs_init_server(struct nfs_server *server,
 			data->timeo, data->retrans);
 	if (data->flags & NFS_MOUNT_NORESVPORT)
 		set_bit(NFS_CS_NORESVPORT, &cl_init.init_flags);
+<<<<<<< HEAD
 	if (server->options & NFS_OPTION_MIGRATION)
 		set_bit(NFS_CS_MIGRATION, &cl_init.init_flags);
+=======
+>>>>>>> v3.18
 
 	/* Allocate or find a client reference we can use */
 	clp = nfs_get_client(&cl_init, &timeparms, NULL, RPC_AUTH_UNIX);
@@ -788,8 +839,15 @@ static int nfs_init_server(struct nfs_server *server,
 		goto error;
 
 	server->port = data->nfs_server.port;
+<<<<<<< HEAD
 
 	error = nfs_init_server_rpcclient(server, &timeparms, data->auth_flavors[0]);
+=======
+	server->auth_info = data->auth_info;
+
+	error = nfs_init_server_rpcclient(server, &timeparms,
+					  data->selected_flavor);
+>>>>>>> v3.18
 	if (error < 0)
 		goto error;
 
@@ -930,6 +988,10 @@ void nfs_server_copy_userdata(struct nfs_server *target, struct nfs_server *sour
 	target->acdirmax = source->acdirmax;
 	target->caps = source->caps;
 	target->options = source->options;
+<<<<<<< HEAD
+=======
+	target->auth_info = source->auth_info;
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(nfs_server_copy_userdata);
 
@@ -947,7 +1009,11 @@ void nfs_server_insert_lists(struct nfs_server *server)
 }
 EXPORT_SYMBOL_GPL(nfs_server_insert_lists);
 
+<<<<<<< HEAD
 static void nfs_server_remove_lists(struct nfs_server *server)
+=======
+void nfs_server_remove_lists(struct nfs_server *server)
+>>>>>>> v3.18
 {
 	struct nfs_client *clp = server->nfs_client;
 	struct nfs_net *nn;
@@ -964,6 +1030,10 @@ static void nfs_server_remove_lists(struct nfs_server *server)
 
 	synchronize_rcu();
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(nfs_server_remove_lists);
+>>>>>>> v3.18
 
 /*
  * Allocate and initialise a server record
@@ -1076,7 +1146,11 @@ struct nfs_server *nfs_create_server(struct nfs_mount_info *mount_info,
 	}
 
 	if (!(fattr->valid & NFS_ATTR_FATTR)) {
+<<<<<<< HEAD
 		error = nfs_mod->rpc_ops->getattr(server, mount_info->mntfh, fattr);
+=======
+		error = nfs_mod->rpc_ops->getattr(server, mount_info->mntfh, fattr, NULL);
+>>>>>>> v3.18
 		if (error < 0) {
 			dprintk("nfs_create_server: getattr error = %d\n", -error);
 			goto error;
@@ -1203,7 +1277,11 @@ static const struct file_operations nfs_server_list_fops = {
 	.open		= nfs_server_list_open,
 	.read		= seq_read,
 	.llseek		= seq_lseek,
+<<<<<<< HEAD
 	.release	= seq_release,
+=======
+	.release	= seq_release_net,
+>>>>>>> v3.18
 	.owner		= THIS_MODULE,
 };
 
@@ -1224,7 +1302,11 @@ static const struct file_operations nfs_volume_list_fops = {
 	.open		= nfs_volume_list_open,
 	.read		= seq_read,
 	.llseek		= seq_lseek,
+<<<<<<< HEAD
 	.release	= seq_release,
+=======
+	.release	= seq_release_net,
+>>>>>>> v3.18
 	.owner		= THIS_MODULE,
 };
 
@@ -1234,6 +1316,7 @@ static const struct file_operations nfs_volume_list_fops = {
  */
 static int nfs_server_list_open(struct inode *inode, struct file *file)
 {
+<<<<<<< HEAD
 	struct seq_file *m;
 	int ret;
 	struct pid_namespace *pid_ns = file->f_dentry->d_sb->s_fs_info;
@@ -1247,14 +1330,24 @@ static int nfs_server_list_open(struct inode *inode, struct file *file)
 	m->private = net;
 
 	return 0;
+=======
+	return seq_open_net(inode, file, &nfs_server_list_ops,
+			   sizeof(struct seq_net_private));
+>>>>>>> v3.18
 }
 
 /*
  * set up the iterator to start reading from the server list and return the first item
  */
 static void *nfs_server_list_start(struct seq_file *m, loff_t *_pos)
+<<<<<<< HEAD
 {
 	struct nfs_net *nn = net_generic(m->private, nfs_net_id);
+=======
+				__acquires(&nn->nfs_client_lock)
+{
+	struct nfs_net *nn = net_generic(seq_file_net(m), nfs_net_id);
+>>>>>>> v3.18
 
 	/* lock the list against modification */
 	spin_lock(&nn->nfs_client_lock);
@@ -1266,7 +1359,11 @@ static void *nfs_server_list_start(struct seq_file *m, loff_t *_pos)
  */
 static void *nfs_server_list_next(struct seq_file *p, void *v, loff_t *pos)
 {
+<<<<<<< HEAD
 	struct nfs_net *nn = net_generic(p->private, nfs_net_id);
+=======
+	struct nfs_net *nn = net_generic(seq_file_net(p), nfs_net_id);
+>>>>>>> v3.18
 
 	return seq_list_next(v, &nn->nfs_client_list, pos);
 }
@@ -1275,8 +1372,14 @@ static void *nfs_server_list_next(struct seq_file *p, void *v, loff_t *pos)
  * clean up after reading from the transports list
  */
 static void nfs_server_list_stop(struct seq_file *p, void *v)
+<<<<<<< HEAD
 {
 	struct nfs_net *nn = net_generic(p->private, nfs_net_id);
+=======
+				__releases(&nn->nfs_client_lock)
+{
+	struct nfs_net *nn = net_generic(seq_file_net(p), nfs_net_id);
+>>>>>>> v3.18
 
 	spin_unlock(&nn->nfs_client_lock);
 }
@@ -1287,7 +1390,11 @@ static void nfs_server_list_stop(struct seq_file *p, void *v)
 static int nfs_server_list_show(struct seq_file *m, void *v)
 {
 	struct nfs_client *clp;
+<<<<<<< HEAD
 	struct nfs_net *nn = net_generic(m->private, nfs_net_id);
+=======
+	struct nfs_net *nn = net_generic(seq_file_net(m), nfs_net_id);
+>>>>>>> v3.18
 
 	/* display header on line 1 */
 	if (v == &nn->nfs_client_list) {
@@ -1319,6 +1426,7 @@ static int nfs_server_list_show(struct seq_file *m, void *v)
  */
 static int nfs_volume_list_open(struct inode *inode, struct file *file)
 {
+<<<<<<< HEAD
 	struct seq_file *m;
 	int ret;
 	struct pid_namespace *pid_ns = file->f_dentry->d_sb->s_fs_info;
@@ -1332,14 +1440,24 @@ static int nfs_volume_list_open(struct inode *inode, struct file *file)
 	m->private = net;
 
 	return 0;
+=======
+	return seq_open_net(inode, file, &nfs_volume_list_ops,
+			   sizeof(struct seq_net_private));
+>>>>>>> v3.18
 }
 
 /*
  * set up the iterator to start reading from the volume list and return the first item
  */
 static void *nfs_volume_list_start(struct seq_file *m, loff_t *_pos)
+<<<<<<< HEAD
 {
 	struct nfs_net *nn = net_generic(m->private, nfs_net_id);
+=======
+				__acquires(&nn->nfs_client_lock)
+{
+	struct nfs_net *nn = net_generic(seq_file_net(m), nfs_net_id);
+>>>>>>> v3.18
 
 	/* lock the list against modification */
 	spin_lock(&nn->nfs_client_lock);
@@ -1351,7 +1469,11 @@ static void *nfs_volume_list_start(struct seq_file *m, loff_t *_pos)
  */
 static void *nfs_volume_list_next(struct seq_file *p, void *v, loff_t *pos)
 {
+<<<<<<< HEAD
 	struct nfs_net *nn = net_generic(p->private, nfs_net_id);
+=======
+	struct nfs_net *nn = net_generic(seq_file_net(p), nfs_net_id);
+>>>>>>> v3.18
 
 	return seq_list_next(v, &nn->nfs_volume_list, pos);
 }
@@ -1360,8 +1482,14 @@ static void *nfs_volume_list_next(struct seq_file *p, void *v, loff_t *pos)
  * clean up after reading from the transports list
  */
 static void nfs_volume_list_stop(struct seq_file *p, void *v)
+<<<<<<< HEAD
 {
 	struct nfs_net *nn = net_generic(p->private, nfs_net_id);
+=======
+				__releases(&nn->nfs_client_lock)
+{
+	struct nfs_net *nn = net_generic(seq_file_net(p), nfs_net_id);
+>>>>>>> v3.18
 
 	spin_unlock(&nn->nfs_client_lock);
 }
@@ -1374,7 +1502,11 @@ static int nfs_volume_list_show(struct seq_file *m, void *v)
 	struct nfs_server *server;
 	struct nfs_client *clp;
 	char dev[8], fsid[17];
+<<<<<<< HEAD
 	struct nfs_net *nn = net_generic(m->private, nfs_net_id);
+=======
+	struct nfs_net *nn = net_generic(seq_file_net(m), nfs_net_id);
+>>>>>>> v3.18
 
 	/* display header on line 1 */
 	if (v == &nn->nfs_volume_list) {
@@ -1405,6 +1537,42 @@ static int nfs_volume_list_show(struct seq_file *m, void *v)
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+int nfs_fs_proc_net_init(struct net *net)
+{
+	struct nfs_net *nn = net_generic(net, nfs_net_id);
+	struct proc_dir_entry *p;
+
+	nn->proc_nfsfs = proc_net_mkdir(net, "nfsfs", net->proc_net);
+	if (!nn->proc_nfsfs)
+		goto error_0;
+
+	/* a file of servers with which we're dealing */
+	p = proc_create("servers", S_IFREG|S_IRUGO,
+			nn->proc_nfsfs, &nfs_server_list_fops);
+	if (!p)
+		goto error_1;
+
+	/* a file of volumes that we have mounted */
+	p = proc_create("volumes", S_IFREG|S_IRUGO,
+			nn->proc_nfsfs, &nfs_volume_list_fops);
+	if (!p)
+		goto error_1;
+	return 0;
+
+error_1:
+	remove_proc_subtree("nfsfs", net->proc_net);
+error_0:
+	return -ENOMEM;
+}
+
+void nfs_fs_proc_net_exit(struct net *net)
+{
+	remove_proc_subtree("nfsfs", net->proc_net);
+}
+
+>>>>>>> v3.18
 /*
  * initialise the /proc/fs/nfsfs/ directory
  */
@@ -1417,14 +1585,22 @@ int __init nfs_fs_proc_init(void)
 		goto error_0;
 
 	/* a file of servers with which we're dealing */
+<<<<<<< HEAD
 	p = proc_create("servers", S_IFREG|S_IRUGO,
 			proc_fs_nfs, &nfs_server_list_fops);
+=======
+	p = proc_symlink("servers", proc_fs_nfs, "../../net/nfsfs/servers");
+>>>>>>> v3.18
 	if (!p)
 		goto error_1;
 
 	/* a file of volumes that we have mounted */
+<<<<<<< HEAD
 	p = proc_create("volumes", S_IFREG|S_IRUGO,
 			proc_fs_nfs, &nfs_volume_list_fops);
+=======
+	p = proc_symlink("volumes", proc_fs_nfs, "../../net/nfsfs/volumes");
+>>>>>>> v3.18
 	if (!p)
 		goto error_2;
 	return 0;

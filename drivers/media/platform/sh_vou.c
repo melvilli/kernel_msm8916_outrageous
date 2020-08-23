@@ -286,7 +286,11 @@ static int sh_vou_buf_prepare(struct videobuf_queue *vq,
 	vb->size = vb->height * bytes_per_line;
 	if (vb->baddr && vb->bsize < vb->size) {
 		/* User buffer too small */
+<<<<<<< HEAD
 		dev_warn(vq->dev, "User buffer too small: [%u] @ %lx\n",
+=======
+		dev_warn(vq->dev, "User buffer too small: [%zu] @ %lx\n",
+>>>>>>> v3.18
 			 vb->bsize, vb->baddr);
 		return -EINVAL;
 	}
@@ -302,9 +306,16 @@ static int sh_vou_buf_prepare(struct videobuf_queue *vq,
 	}
 
 	dev_dbg(vou_dev->v4l2_dev.dev,
+<<<<<<< HEAD
 		"%s(): fmt #%d, %u bytes per line, phys 0x%x, type %d, state %d\n",
 		__func__, vou_dev->pix_idx, bytes_per_line,
 		videobuf_to_dma_contig(vb), vb->memory, vb->state);
+=======
+		"%s(): fmt #%d, %u bytes per line, phys %pad, type %d, state %d\n",
+		__func__, vou_dev->pix_idx, bytes_per_line,
+		({ dma_addr_t addr = videobuf_to_dma_contig(vb); &addr; }),
+		vb->memory, vb->state);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -442,7 +453,11 @@ static void sh_vou_configure_geometry(struct sh_vou_device *vou_dev,
 				      int pix_idx, int w_idx, int h_idx)
 {
 	struct sh_vou_fmt *fmt = vou_fmt + pix_idx;
+<<<<<<< HEAD
 	unsigned int black_left, black_top, width_max, height_max,
+=======
+	unsigned int black_left, black_top, width_max,
+>>>>>>> v3.18
 		frame_in_height, frame_out_height, frame_out_top;
 	struct v4l2_rect *rect = &vou_dev->rect;
 	struct v4l2_pix_format *pix = &vou_dev->pix;
@@ -450,10 +465,17 @@ static void sh_vou_configure_geometry(struct sh_vou_device *vou_dev,
 
 	if (vou_dev->std & V4L2_STD_525_60) {
 		width_max = 858;
+<<<<<<< HEAD
 		height_max = 262;
 	} else {
 		width_max = 864;
 		height_max = 312;
+=======
+		/* height_max = 262; */
+	} else {
+		width_max = 864;
+		/* height_max = 312; */
+>>>>>>> v3.18
 	}
 
 	frame_in_height = pix->height / 2;
@@ -1052,7 +1074,10 @@ static irqreturn_t sh_vou_isr(int irq, void *dev_id)
 	static unsigned long j;
 	struct videobuf_buffer *vb;
 	static int cnt;
+<<<<<<< HEAD
 	static int side;
+=======
+>>>>>>> v3.18
 	u32 irq_status = sh_vou_reg_a_read(vou_dev, VOUIR), masked;
 	u32 vou_status = sh_vou_reg_a_read(vou_dev, VOUSTR);
 
@@ -1080,7 +1105,11 @@ static irqreturn_t sh_vou_isr(int irq, void *dev_id)
 		irq_status, masked, vou_status, cnt);
 
 	cnt++;
+<<<<<<< HEAD
 	side = vou_status & 0x10000;
+=======
+	/* side = vou_status & 0x10000; */
+>>>>>>> v3.18
 
 	/* Clear only set interrupts */
 	sh_vou_reg_a_write(vou_dev, VOUIR, masked);
@@ -1248,6 +1277,7 @@ static unsigned int sh_vou_poll(struct file *file, poll_table *wait)
 	return res;
 }
 
+<<<<<<< HEAD
 static int sh_vou_g_chip_ident(struct file *file, void *fh,
 				   struct v4l2_dbg_chip_ident *id)
 {
@@ -1274,6 +1304,8 @@ static int sh_vou_s_register(struct file *file, void *fh,
 }
 #endif
 
+=======
+>>>>>>> v3.18
 /* sh_vou display ioctl operations */
 static const struct v4l2_ioctl_ops sh_vou_ioctl_ops = {
 	.vidioc_querycap        	= sh_vou_querycap,
@@ -1292,11 +1324,14 @@ static const struct v4l2_ioctl_ops sh_vou_ioctl_ops = {
 	.vidioc_cropcap			= sh_vou_cropcap,
 	.vidioc_g_crop			= sh_vou_g_crop,
 	.vidioc_s_crop			= sh_vou_s_crop,
+<<<<<<< HEAD
 	.vidioc_g_chip_ident		= sh_vou_g_chip_ident,
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 	.vidioc_g_register		= sh_vou_g_register,
 	.vidioc_s_register		= sh_vou_s_register,
 #endif
+=======
+>>>>>>> v3.18
 };
 
 static const struct v4l2_file_operations sh_vou_fops = {
@@ -1313,7 +1348,10 @@ static const struct video_device sh_vou_video_template = {
 	.fops		= &sh_vou_fops,
 	.ioctl_ops	= &sh_vou_ioctl_ops,
 	.tvnorms	= V4L2_STD_525_60, /* PAL only supported in 8-bit non-bt656 mode */
+<<<<<<< HEAD
 	.current_norm	= V4L2_STD_NTSC_M,
+=======
+>>>>>>> v3.18
 	.vfl_dir	= VFL_DIR_TX,
 };
 
@@ -1352,7 +1390,11 @@ static int sh_vou_probe(struct platform_device *pdev)
 	pix = &vou_dev->pix;
 
 	/* Fill in defaults */
+<<<<<<< HEAD
 	vou_dev->std		= sh_vou_video_template.current_norm;
+=======
+	vou_dev->std		= V4L2_STD_NTSC_M;
+>>>>>>> v3.18
 	rect->left		= 0;
 	rect->top		= 0;
 	rect->width		= VOU_MAX_IMAGE_WIDTH;

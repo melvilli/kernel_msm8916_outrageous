@@ -9,6 +9,7 @@
 
 #include "persistent-data/dm-block-manager.h"
 #include "persistent-data/dm-space-map.h"
+<<<<<<< HEAD
 
 #define THIN_METADATA_BLOCK_SIZE 4096
 
@@ -19,6 +20,16 @@
  * index entry contains allocation info about 16k metadata blocks.
  */
 #define THIN_METADATA_MAX_SECTORS (255 * (1 << 14) * (THIN_METADATA_BLOCK_SIZE / (1 << SECTOR_SHIFT)))
+=======
+#include "persistent-data/dm-space-map-metadata.h"
+
+#define THIN_METADATA_BLOCK_SIZE DM_SM_METADATA_BLOCK_SIZE
+
+/*
+ * The metadata device is currently limited in size.
+ */
+#define THIN_METADATA_MAX_SECTORS DM_SM_METADATA_MAX_SECTORS
+>>>>>>> v3.18
 
 /*
  * A metadata device larger than 16GB triggers a warning.
@@ -27,6 +38,14 @@
 
 /*----------------------------------------------------------------*/
 
+<<<<<<< HEAD
+=======
+/*
+ * Thin metadata superblock flags.
+ */
+#define THIN_METADATA_NEEDS_CHECK_FLAG (1 << 0)
+
+>>>>>>> v3.18
 struct dm_pool_metadata;
 struct dm_thin_device;
 
@@ -131,7 +150,11 @@ dm_thin_id dm_thin_dev_id(struct dm_thin_device *td);
 
 struct dm_thin_lookup_result {
 	dm_block_t block;
+<<<<<<< HEAD
 	unsigned shared:1;
+=======
+	bool shared:1;
+>>>>>>> v3.18
 };
 
 /*
@@ -197,12 +220,25 @@ int dm_pool_resize_metadata_dev(struct dm_pool_metadata *pmd, dm_block_t new_siz
  * that nothing is changing.
  */
 void dm_pool_metadata_read_only(struct dm_pool_metadata *pmd);
+<<<<<<< HEAD
+=======
+void dm_pool_metadata_read_write(struct dm_pool_metadata *pmd);
+>>>>>>> v3.18
 
 int dm_pool_register_metadata_threshold(struct dm_pool_metadata *pmd,
 					dm_block_t threshold,
 					dm_sm_threshold_fn fn,
 					void *context);
 
+<<<<<<< HEAD
+=======
+/*
+ * Updates the superblock immediately.
+ */
+int dm_pool_metadata_set_needs_check(struct dm_pool_metadata *pmd);
+bool dm_pool_metadata_needs_check(struct dm_pool_metadata *pmd);
+
+>>>>>>> v3.18
 /*----------------------------------------------------------------*/
 
 #endif

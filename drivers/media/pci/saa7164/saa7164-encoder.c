@@ -228,6 +228,10 @@ static int vidioc_s_std(struct file *file, void *priv, v4l2_std_id id)
 		return -EINVAL;
 
 	port->encodernorm = saa7164_tvnorms[i];
+<<<<<<< HEAD
+=======
+	port->std = id;
+>>>>>>> v3.18
 
 	/* Update the audio decoder while is not running in
 	 * auto detect mode.
@@ -239,6 +243,18 @@ static int vidioc_s_std(struct file *file, void *priv, v4l2_std_id id)
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+static int vidioc_g_std(struct file *file, void *priv, v4l2_std_id *id)
+{
+	struct saa7164_encoder_fh *fh = file->private_data;
+	struct saa7164_port *port = fh->port;
+
+	*id = port->std;
+	return 0;
+}
+
+>>>>>>> v3.18
 static int vidioc_enum_input(struct file *file, void *priv,
 	struct v4l2_input *i)
 {
@@ -1288,6 +1304,7 @@ static const struct v4l2_file_operations mpeg_fops = {
 	.unlocked_ioctl	= video_ioctl2,
 };
 
+<<<<<<< HEAD
 static int saa7164_g_chip_ident(struct file *file, void *fh,
 				struct v4l2_dbg_chip_ident *chip)
 {
@@ -1328,6 +1345,11 @@ static int saa7164_s_register(struct file *file, void *fh,
 
 static const struct v4l2_ioctl_ops mpeg_ioctl_ops = {
 	.vidioc_s_std		 = vidioc_s_std,
+=======
+static const struct v4l2_ioctl_ops mpeg_ioctl_ops = {
+	.vidioc_s_std		 = vidioc_s_std,
+	.vidioc_g_std		 = vidioc_g_std,
+>>>>>>> v3.18
 	.vidioc_enum_input	 = vidioc_enum_input,
 	.vidioc_g_input		 = vidioc_g_input,
 	.vidioc_s_input		 = vidioc_s_input,
@@ -1346,11 +1368,14 @@ static const struct v4l2_ioctl_ops mpeg_ioctl_ops = {
 	.vidioc_s_ext_ctrls	 = vidioc_s_ext_ctrls,
 	.vidioc_try_ext_ctrls	 = vidioc_try_ext_ctrls,
 	.vidioc_queryctrl	 = vidioc_queryctrl,
+<<<<<<< HEAD
 	.vidioc_g_chip_ident	 = saa7164_g_chip_ident,
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 	.vidioc_g_register	 = saa7164_g_register,
 	.vidioc_s_register	 = saa7164_s_register,
 #endif
+=======
+>>>>>>> v3.18
 };
 
 static struct video_device saa7164_mpeg_template = {
@@ -1359,7 +1384,10 @@ static struct video_device saa7164_mpeg_template = {
 	.ioctl_ops     = &mpeg_ioctl_ops,
 	.minor         = -1,
 	.tvnorms       = SAA7164_NORMS,
+<<<<<<< HEAD
 	.current_norm  = V4L2_STD_NTSC_M,
+=======
+>>>>>>> v3.18
 };
 
 static struct video_device *saa7164_encoder_alloc(
@@ -1381,7 +1409,11 @@ static struct video_device *saa7164_encoder_alloc(
 	snprintf(vfd->name, sizeof(vfd->name), "%s %s (%s)", dev->name,
 		type, saa7164_boards[dev->board].name);
 
+<<<<<<< HEAD
 	vfd->parent  = &pci->dev;
+=======
+	vfd->v4l2_dev  = &dev->v4l2_dev;
+>>>>>>> v3.18
 	vfd->release = video_device_release;
 	return vfd;
 }
@@ -1426,6 +1458,10 @@ int saa7164_encoder_register(struct saa7164_port *port)
 	port->encoder_params.ctl_aspect = V4L2_MPEG_VIDEO_ASPECT_4x3;
 	port->encoder_params.refdist = 1;
 	port->encoder_params.gop_size = SAA7164_ENCODER_DEFAULT_GOP_SIZE;
+<<<<<<< HEAD
+=======
+	port->std = V4L2_STD_NTSC_M;
+>>>>>>> v3.18
 
 	if (port->encodernorm.id & V4L2_STD_525_60)
 		port->height = 480;

@@ -331,11 +331,19 @@ extern void do_IRQ(int irq, struct pt_regs * regs);
 void
 crisv32_do_IRQ(int irq, int block, struct pt_regs* regs)
 {
+<<<<<<< HEAD
 	/* Interrupts that may not be moved to another CPU and
          * are IRQF_DISABLED may skip blocking. This is currently
          * only valid for the timer IRQ and the IPI and is used
          * for the timer interrupt to avoid watchdog starvation.
          */
+=======
+	/* Interrupts that may not be moved to another CPU may
+	 * skip blocking. This is currently only valid for the
+	 * timer IRQ and the IPI and is used for the timer
+	 * interrupt to avoid watchdog starvation.
+	 */
+>>>>>>> v3.18
 	if (!block) {
 		do_IRQ(irq, regs);
 		return;

@@ -2,20 +2,32 @@
  *
  * Copyright(c) 2009-2012  Realtek Corporation.
  *
+<<<<<<< HEAD
  * Tmis program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
  * published by the Free Software Foundation.
  *
  * Tmis program is distributed in the hope that it will be useful, but WITHOUT
+=======
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of version 2 of the GNU General Public License as
+ * published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+>>>>>>> v3.18
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
  * more details.
  *
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * tmis program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
  * Tme full GNU General Public License is included in this distribution in the
+=======
+ * The full GNU General Public License is included in this distribution in the
+>>>>>>> v3.18
  * file called LICENSE.
  *
  * Contact Information:
@@ -108,6 +120,10 @@
 #define COMP_USB			BIT(29)
 #define COMP_EASY_CONCURRENT	COMP_USB /* reuse of this bit is OK */
 #define COMP_BT_COEXIST			BIT(30)
+<<<<<<< HEAD
+=======
+#define COMP_IQK			BIT(31)
+>>>>>>> v3.18
 
 /*--------------------------------------------------------------
 		Define the rt_print components

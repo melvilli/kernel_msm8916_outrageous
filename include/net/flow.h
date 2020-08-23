@@ -28,10 +28,15 @@ struct flowi_common {
 	__u8	flowic_proto;
 	__u8	flowic_flags;
 #define FLOWI_FLAG_ANYSRC		0x01
+<<<<<<< HEAD
 #define FLOWI_FLAG_CAN_SLEEP		0x02
 #define FLOWI_FLAG_KNOWN_NH		0x04
 	__u32	flowic_secid;
 	uid_t	flowic_uid;
+=======
+#define FLOWI_FLAG_KNOWN_NH		0x02
+	__u32	flowic_secid;
+>>>>>>> v3.18
 };
 
 union flowi_uli {
@@ -68,7 +73,10 @@ struct flowi4 {
 #define flowi4_proto		__fl_common.flowic_proto
 #define flowi4_flags		__fl_common.flowic_flags
 #define flowi4_secid		__fl_common.flowic_secid
+<<<<<<< HEAD
 #define flowi4_uid		__fl_common.flowic_uid
+=======
+>>>>>>> v3.18
 
 	/* (saddr,daddr) must be grouped, same order as in IP header */
 	__be32			saddr;
@@ -88,8 +96,12 @@ static inline void flowi4_init_output(struct flowi4 *fl4, int oif,
 				      __u32 mark, __u8 tos, __u8 scope,
 				      __u8 proto, __u8 flags,
 				      __be32 daddr, __be32 saddr,
+<<<<<<< HEAD
 				      __be16 dport, __be16 sport,
 				      uid_t uid)
+=======
+				      __be16 dport, __be16 sport)
+>>>>>>> v3.18
 {
 	fl4->flowi4_oif = oif;
 	fl4->flowi4_iif = LOOPBACK_IFINDEX;
@@ -99,7 +111,10 @@ static inline void flowi4_init_output(struct flowi4 *fl4, int oif,
 	fl4->flowi4_proto = proto;
 	fl4->flowi4_flags = flags;
 	fl4->flowi4_secid = 0;
+<<<<<<< HEAD
 	fl4->flowi4_uid = uid;
+=======
+>>>>>>> v3.18
 	fl4->daddr = daddr;
 	fl4->saddr = saddr;
 	fl4->fl4_dport = dport;
@@ -127,7 +142,10 @@ struct flowi6 {
 #define flowi6_proto		__fl_common.flowic_proto
 #define flowi6_flags		__fl_common.flowic_flags
 #define flowi6_secid		__fl_common.flowic_secid
+<<<<<<< HEAD
 #define flowi6_uid		__fl_common.flowic_uid
+=======
+>>>>>>> v3.18
 	struct in6_addr		daddr;
 	struct in6_addr		saddr;
 	__be32			flowlabel;
@@ -171,7 +189,10 @@ struct flowi {
 #define flowi_proto	u.__fl_common.flowic_proto
 #define flowi_flags	u.__fl_common.flowic_flags
 #define flowi_secid	u.__fl_common.flowic_secid
+<<<<<<< HEAD
 #define flowi_uid	u.__fl_common.flowic_uid
+=======
+>>>>>>> v3.18
 } __attribute__((__aligned__(BITS_PER_LONG/8)));
 
 static inline struct flowi *flowi4_to_flowi(struct flowi4 *fl4)
@@ -229,12 +250,24 @@ typedef struct flow_cache_object *(*flow_resolve_t)(
 		struct net *net, const struct flowi *key, u16 family,
 		u8 dir, struct flow_cache_object *oldobj, void *ctx);
 
+<<<<<<< HEAD
 extern struct flow_cache_object *flow_cache_lookup(
 		struct net *net, const struct flowi *key, u16 family,
 		u8 dir, flow_resolve_t resolver, void *ctx);
 
 extern void flow_cache_flush(void);
 extern void flow_cache_flush_deferred(void);
+=======
+struct flow_cache_object *flow_cache_lookup(struct net *net,
+					    const struct flowi *key, u16 family,
+					    u8 dir, flow_resolve_t resolver,
+					    void *ctx);
+int flow_cache_init(struct net *net);
+void flow_cache_fini(struct net *net);
+
+void flow_cache_flush(struct net *net);
+void flow_cache_flush_deferred(struct net *net);
+>>>>>>> v3.18
 extern atomic_t flow_cache_genid;
 
 #endif

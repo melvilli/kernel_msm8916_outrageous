@@ -57,6 +57,7 @@ DVB_DEFINE_MOD_OPT_ADAPTER_NR(adapter_nr);
 
 #define dprintk	if (debug) printk
 
+<<<<<<< HEAD
 #define ngwriteb(dat, adr)         writeb((dat), (char *)(dev->iomem + (adr)))
 #define ngwritel(dat, adr)         writel((dat), (char *)(dev->iomem + (adr)))
 #define ngwriteb(dat, adr)         writeb((dat), (char *)(dev->iomem + (adr)))
@@ -66,6 +67,15 @@ DVB_DEFINE_MOD_OPT_ADAPTER_NR(adapter_nr);
 				   (dev->iomem + (adr)), (src), (count))
 #define ngcpyfrom(dst, adr, count) memcpy_fromio((dst), (char *) \
 				   (dev->iomem + (adr)), (count))
+=======
+#define ngwriteb(dat, adr)         writeb((dat), dev->iomem + (adr))
+#define ngwritel(dat, adr)         writel((dat), dev->iomem + (adr))
+#define ngwriteb(dat, adr)         writeb((dat), dev->iomem + (adr))
+#define ngreadl(adr)               readl(dev->iomem + (adr))
+#define ngreadb(adr)               readb(dev->iomem + (adr))
+#define ngcpyto(adr, src, count)   memcpy_toio(dev->iomem + (adr), (src), (count))
+#define ngcpyfrom(dst, adr, count) memcpy_fromio((dst), dev->iomem + (adr), (count))
+>>>>>>> v3.18
 
 /****************************************************************************/
 /* nGene interrupt handler **************************************************/
@@ -910,7 +920,10 @@ static int AllocateRingBuffers(struct pci_dev *pci_dev,
 {
 	dma_addr_t tmp;
 	u32 i, j;
+<<<<<<< HEAD
 	int status = 0;
+=======
+>>>>>>> v3.18
 	u32 SCListMemSize = pRingBuffer->NumBuffers
 		* ((Buffer2Length != 0) ? (NUM_SCATTER_GATHER_ENTRIES * 2) :
 		    NUM_SCATTER_GATHER_ENTRIES)
@@ -1010,14 +1023,21 @@ static int AllocateRingBuffers(struct pci_dev *pci_dev,
 
 	}
 
+<<<<<<< HEAD
 	return status;
+=======
+	return 0;
+>>>>>>> v3.18
 }
 
 static int FillTSIdleBuffer(struct SRingBufferDescriptor *pIdleBuffer,
 			    struct SRingBufferDescriptor *pRingBuffer)
 {
+<<<<<<< HEAD
 	int status = 0;
 
+=======
+>>>>>>> v3.18
 	/* Copy pointer to scatter gather list in TSRingbuffer
 	   structure for buffer 2
 	   Load number of buffer
@@ -1038,7 +1058,11 @@ static int FillTSIdleBuffer(struct SRingBufferDescriptor *pIdleBuffer,
 			pIdleBuffer->Head->ngeneBuffer.Number_of_entries_1;
 		Cur = Cur->Next;
 	}
+<<<<<<< HEAD
 	return status;
+=======
+	return 0;
+>>>>>>> v3.18
 }
 
 static u32 RingBufferSizes[MAX_STREAM] = {
@@ -1078,12 +1102,20 @@ static int AllocCommonBuffers(struct ngene *dev)
 	dev->ngenetohost = dev->FWInterfaceBuffer + 256;
 	dev->EventBuffer = dev->FWInterfaceBuffer + 512;
 
+<<<<<<< HEAD
 	dev->OverflowBuffer = pci_alloc_consistent(dev->pci_dev,
 						   OVERFLOW_BUFFER_SIZE,
 						   &dev->PAOverflowBuffer);
 	if (!dev->OverflowBuffer)
 		return -ENOMEM;
 	memset(dev->OverflowBuffer, 0, OVERFLOW_BUFFER_SIZE);
+=======
+	dev->OverflowBuffer = pci_zalloc_consistent(dev->pci_dev,
+						    OVERFLOW_BUFFER_SIZE,
+						    &dev->PAOverflowBuffer);
+	if (!dev->OverflowBuffer)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	for (i = STREAM_VIDEOIN1; i < MAX_STREAM; i++) {
 		int type = dev->card_info->io_type[i];
@@ -1596,7 +1628,11 @@ static void cxd_detach(struct ngene *dev)
 
 	dvb_ca_en50221_release(ci->en);
 	kfree(ci->en);
+<<<<<<< HEAD
 	ci->en = 0;
+=======
+	ci->en = NULL;
+>>>>>>> v3.18
 }
 
 /***********************************/
@@ -1622,7 +1658,11 @@ static void ngene_unlink(struct ngene *dev)
 
 void ngene_shutdown(struct pci_dev *pdev)
 {
+<<<<<<< HEAD
 	struct ngene *dev = (struct ngene *)pci_get_drvdata(pdev);
+=======
+	struct ngene *dev = pci_get_drvdata(pdev);
+>>>>>>> v3.18
 
 	if (!dev || !shutdown_workaround)
 		return;
@@ -1648,7 +1688,10 @@ void ngene_remove(struct pci_dev *pdev)
 		cxd_detach(dev);
 	ngene_stop(dev);
 	ngene_release_buffers(dev);
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	pci_disable_device(pdev);
 }
 
@@ -1702,6 +1745,9 @@ fail1:
 	ngene_release_buffers(dev);
 fail0:
 	pci_disable_device(pci_dev);
+<<<<<<< HEAD
 	pci_set_drvdata(pci_dev, NULL);
+=======
+>>>>>>> v3.18
 	return stat;
 }

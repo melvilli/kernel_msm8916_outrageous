@@ -8,7 +8,10 @@
 
 #include <linux/kernel.h>
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/interrupt.h>
 #include <linux/input.h>
 #include <linux/platform_device.h>
@@ -84,7 +87,12 @@ static void pxa930_rotary_close(struct input_dev *dev)
 
 static int pxa930_rotary_probe(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct pxa930_rotary_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct pxa930_rotary_platform_data *pdata =
+			dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	struct pxa930_rotary *r;
 	struct input_dev *input_dev;
 	struct resource *res;
@@ -181,7 +189,10 @@ static int pxa930_rotary_remove(struct platform_device *pdev)
 	free_irq(platform_get_irq(pdev, 0), r);
 	input_unregister_device(r->input_dev);
 	iounmap(r->mmio_base);
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	kfree(r);
 
 	return 0;

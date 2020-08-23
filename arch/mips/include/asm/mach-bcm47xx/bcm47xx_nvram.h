@@ -48,4 +48,9 @@ static inline void bcm47xx_nvram_parse_macaddr(char *buf, u8 macaddr[6])
 		printk(KERN_WARNING "Can not parse mac address: %s\n", buf);
 }
 
+<<<<<<< HEAD
+=======
+int bcm47xx_nvram_gpio_pin(const char *name);
+
+>>>>>>> v3.18
 #endif /* __BCM47XX_NVRAM_H */

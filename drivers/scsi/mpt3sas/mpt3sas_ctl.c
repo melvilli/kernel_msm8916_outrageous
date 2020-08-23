@@ -3,7 +3,11 @@
  * controllers
  *
  * This code is based on drivers/scsi/mpt3sas/mpt3sas_ctl.c
+<<<<<<< HEAD
  * Copyright (C) 2012  LSI Corporation
+=======
+ * Copyright (C) 2012-2014  LSI Corporation
+>>>>>>> v3.18
  *  (mailto:DL-MPTFusionLinux@lsi.com)
  *
  * This program is free software; you can redistribute it and/or
@@ -980,7 +984,11 @@ _ctl_do_mpt_command(struct MPT3SAS_ADAPTER *ioc, struct mpt3_ioctl_command karg,
 			mpt3sas_scsih_issue_tm(ioc,
 			    le16_to_cpu(mpi_request->FunctionDependent1), 0, 0,
 			    0, MPI2_SCSITASKMGMT_TASKTYPE_TARGET_RESET, 0, 30,
+<<<<<<< HEAD
 			    0, TM_MUTEX_ON);
+=======
+			    TM_MUTEX_ON);
+>>>>>>> v3.18
 		} else
 			mpt3sas_base_hard_reset_handler(ioc, CAN_SLEEP,
 			    FORCE_BIG_HAMMER);

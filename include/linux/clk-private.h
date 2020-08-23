@@ -12,6 +12,10 @@
 #define __LINUX_CLK_PRIVATE_H
 
 #include <linux/clk-provider.h>
+<<<<<<< HEAD
+=======
+#include <linux/kref.h>
+>>>>>>> v3.18
 #include <linux/list.h>
 
 /*
@@ -25,14 +29,24 @@
 
 #ifdef CONFIG_COMMON_CLK
 
+<<<<<<< HEAD
+=======
+struct module;
+
+>>>>>>> v3.18
 struct clk {
 	const char		*name;
 	const struct clk_ops	*ops;
 	struct clk_hw		*hw;
+<<<<<<< HEAD
+=======
+	struct module		*owner;
+>>>>>>> v3.18
 	struct clk		*parent;
 	const char		**parent_names;
 	struct clk		**parents;
 	u8			num_parents;
+<<<<<<< HEAD
 	unsigned long		rate;
 	unsigned long		new_rate;
 	unsigned long		flags;
@@ -44,6 +58,26 @@ struct clk {
 #ifdef CONFIG_COMMON_CLK_DEBUG
 	struct dentry		*dentry;
 #endif
+=======
+	u8			new_parent_index;
+	unsigned long		rate;
+	unsigned long		new_rate;
+	struct clk		*new_parent;
+	struct clk		*new_child;
+	unsigned long		flags;
+	unsigned int		enable_count;
+	unsigned int		prepare_count;
+	unsigned long		accuracy;
+	int			phase;
+	struct hlist_head	children;
+	struct hlist_node	child_node;
+	struct hlist_node	debug_node;
+	unsigned int		notifier_count;
+#ifdef CONFIG_DEBUG_FS
+	struct dentry		*dentry;
+#endif
+	struct kref		ref;
+>>>>>>> v3.18
 };
 
 /*

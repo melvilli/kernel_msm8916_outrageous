@@ -15,6 +15,10 @@
 #include <drm/drmP.h>
 #include <drm/drm_crtc_helper.h>
 
+<<<<<<< HEAD
+=======
+#include "exynos_drm_crtc.h"
+>>>>>>> v3.18
 #include "exynos_drm_drv.h"
 #include "exynos_drm_encoder.h"
 #include "exynos_drm_plane.h"
@@ -31,6 +35,7 @@ enum exynos_crtc_mode {
  * Exynos specific crtc structure.
  *
  * @drm_crtc: crtc object.
+<<<<<<< HEAD
  * @drm_plane: pointer of private plane object for this crtc
  * @pipe: a crtc index created at load() with a new crtc object creation
  *	and the crtc object would be set to private->crtc array
@@ -38,13 +43,26 @@ enum exynos_crtc_mode {
  *	array when irq interrupt occured. the reason of using this pipe is that
  *	drm framework doesn't support multiple irq yet.
  *	we can refer to the crtc to current hardware interrupt occured through
+=======
+ * @manager: the manager associated with this crtc
+ * @pipe: a crtc index created at load() with a new crtc object creation
+ *	and the crtc object would be set to private->crtc array
+ *	to get a crtc object corresponding to this pipe from private->crtc
+ *	array when irq interrupt occurred. the reason of using this pipe is that
+ *	drm framework doesn't support multiple irq yet.
+ *	we can refer to the crtc to current hardware interrupt occurred through
+>>>>>>> v3.18
  *	this pipe value.
  * @dpms: store the crtc dpms value
  * @mode: store the crtc mode value
  */
 struct exynos_drm_crtc {
 	struct drm_crtc			drm_crtc;
+<<<<<<< HEAD
 	struct drm_plane		*plane;
+=======
+	struct exynos_drm_manager	*manager;
+>>>>>>> v3.18
 	unsigned int			pipe;
 	unsigned int			dpms;
 	enum exynos_crtc_mode		mode;
@@ -55,6 +73,10 @@ struct exynos_drm_crtc {
 static void exynos_drm_crtc_dpms(struct drm_crtc *crtc, int mode)
 {
 	struct exynos_drm_crtc *exynos_crtc = to_exynos_crtc(crtc);
+<<<<<<< HEAD
+=======
+	struct exynos_drm_manager *manager = exynos_crtc->manager;
+>>>>>>> v3.18
 
 	DRM_DEBUG_KMS("crtc[%d] mode[%d]\n", crtc->base.id, mode);
 
@@ -65,6 +87,7 @@ static void exynos_drm_crtc_dpms(struct drm_crtc *crtc, int mode)
 
 	if (mode > DRM_MODE_DPMS_ON) {
 		/* wait for the completion of page flip. */
+<<<<<<< HEAD
 		wait_event(exynos_crtc->pending_flip_queue,
 				atomic_read(&exynos_crtc->pending_flip) == 0);
 		drm_vblank_off(crtc->dev, exynos_crtc->pipe);
@@ -72,24 +95,56 @@ static void exynos_drm_crtc_dpms(struct drm_crtc *crtc, int mode)
 
 	exynos_drm_fn_encoder(crtc, &mode, exynos_drm_encoder_crtc_dpms);
 	exynos_crtc->dpms = mode;
+=======
+		if (!wait_event_timeout(exynos_crtc->pending_flip_queue,
+				!atomic_read(&exynos_crtc->pending_flip),
+				HZ/20))
+			atomic_set(&exynos_crtc->pending_flip, 0);
+		drm_crtc_vblank_off(crtc);
+	}
+
+	if (manager->ops->dpms)
+		manager->ops->dpms(manager, mode);
+
+	exynos_crtc->dpms = mode;
+
+	if (mode == DRM_MODE_DPMS_ON)
+		drm_crtc_vblank_on(crtc);
+>>>>>>> v3.18
 }
 
 static void exynos_drm_crtc_prepare(struct drm_crtc *crtc)
 {
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __FILE__);
 
+=======
+>>>>>>> v3.18
 	/* drm framework doesn't check NULL. */
 }
 
 static void exynos_drm_crtc_commit(struct drm_crtc *crtc)
 {
 	struct exynos_drm_crtc *exynos_crtc = to_exynos_crtc(crtc);
+<<<<<<< HEAD
 
 	DRM_DEBUG_KMS("%s\n", __FILE__);
 
 	exynos_drm_crtc_dpms(crtc, DRM_MODE_DPMS_ON);
 	exynos_plane_commit(exynos_crtc->plane);
 	exynos_plane_dpms(exynos_crtc->plane, DRM_MODE_DPMS_ON);
+=======
+	struct exynos_drm_manager *manager = exynos_crtc->manager;
+
+	exynos_drm_crtc_dpms(crtc, DRM_MODE_DPMS_ON);
+
+	exynos_plane_commit(crtc->primary);
+
+	if (manager->ops->commit)
+		manager->ops->commit(manager);
+
+	exynos_plane_dpms(crtc->primary, DRM_MODE_DPMS_ON);
+>>>>>>> v3.18
 }
 
 static bool
@@ -97,9 +152,18 @@ exynos_drm_crtc_mode_fixup(struct drm_crtc *crtc,
 			    const struct drm_display_mode *mode,
 			    struct drm_display_mode *adjusted_mode)
 {
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __FILE__);
 
 	/* drm framework doesn't check NULL */
+=======
+	struct exynos_drm_crtc *exynos_crtc = to_exynos_crtc(crtc);
+	struct exynos_drm_manager *manager = exynos_crtc->manager;
+
+	if (manager->ops->mode_fixup)
+		return manager->ops->mode_fixup(manager, mode, adjusted_mode);
+
+>>>>>>> v3.18
 	return true;
 }
 
@@ -109,6 +173,7 @@ exynos_drm_crtc_mode_set(struct drm_crtc *crtc, struct drm_display_mode *mode,
 			  struct drm_framebuffer *old_fb)
 {
 	struct exynos_drm_crtc *exynos_crtc = to_exynos_crtc(crtc);
+<<<<<<< HEAD
 	struct drm_plane *plane = exynos_crtc->plane;
 	unsigned int crtc_w;
 	unsigned int crtc_h;
@@ -116,6 +181,12 @@ exynos_drm_crtc_mode_set(struct drm_crtc *crtc, struct drm_display_mode *mode,
 	int ret;
 
 	DRM_DEBUG_KMS("%s\n", __FILE__);
+=======
+	struct exynos_drm_manager *manager = exynos_crtc->manager;
+	struct drm_framebuffer *fb = crtc->primary->fb;
+	unsigned int crtc_w;
+	unsigned int crtc_h;
+>>>>>>> v3.18
 
 	/*
 	 * copy the mode data adjusted by mode_fixup() into crtc->mode
@@ -123,6 +194,7 @@ exynos_drm_crtc_mode_set(struct drm_crtc *crtc, struct drm_display_mode *mode,
 	 */
 	memcpy(&crtc->mode, adjusted_mode, sizeof(*adjusted_mode));
 
+<<<<<<< HEAD
 	crtc_w = crtc->fb->width - x;
 	crtc_h = crtc->fb->height - y;
 
@@ -144,23 +216,51 @@ static int exynos_drm_crtc_mode_set_base(struct drm_crtc *crtc, int x, int y,
 {
 	struct exynos_drm_crtc *exynos_crtc = to_exynos_crtc(crtc);
 	struct drm_plane *plane = exynos_crtc->plane;
+=======
+	crtc_w = fb->width - x;
+	crtc_h = fb->height - y;
+
+	if (manager->ops->mode_set)
+		manager->ops->mode_set(manager, &crtc->mode);
+
+	return exynos_plane_mode_set(crtc->primary, crtc, fb, 0, 0,
+				     crtc_w, crtc_h, x, y, crtc_w, crtc_h);
+}
+
+static int exynos_drm_crtc_mode_set_commit(struct drm_crtc *crtc, int x, int y,
+					  struct drm_framebuffer *old_fb)
+{
+	struct exynos_drm_crtc *exynos_crtc = to_exynos_crtc(crtc);
+	struct drm_framebuffer *fb = crtc->primary->fb;
+>>>>>>> v3.18
 	unsigned int crtc_w;
 	unsigned int crtc_h;
 	int ret;
 
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __FILE__);
 
+=======
+>>>>>>> v3.18
 	/* when framebuffer changing is requested, crtc's dpms should be on */
 	if (exynos_crtc->dpms > DRM_MODE_DPMS_ON) {
 		DRM_ERROR("failed framebuffer changing request.\n");
 		return -EPERM;
 	}
 
+<<<<<<< HEAD
 	crtc_w = crtc->fb->width - x;
 	crtc_h = crtc->fb->height - y;
 
 	ret = exynos_plane_mode_set(plane, crtc, crtc->fb, 0, 0, crtc_w, crtc_h,
 				    x, y, crtc_w, crtc_h);
+=======
+	crtc_w = fb->width - x;
+	crtc_h = fb->height - y;
+
+	ret = exynos_plane_mode_set(crtc->primary, crtc, fb, 0, 0,
+				    crtc_w, crtc_h, x, y, crtc_w, crtc_h);
+>>>>>>> v3.18
 	if (ret)
 		return ret;
 
@@ -169,20 +269,43 @@ static int exynos_drm_crtc_mode_set_base(struct drm_crtc *crtc, int x, int y,
 	return 0;
 }
 
+<<<<<<< HEAD
 static void exynos_drm_crtc_load_lut(struct drm_crtc *crtc)
 {
 	DRM_DEBUG_KMS("%s\n", __FILE__);
 	/* drm framework doesn't check NULL */
+=======
+static int exynos_drm_crtc_mode_set_base(struct drm_crtc *crtc, int x, int y,
+					  struct drm_framebuffer *old_fb)
+{
+	return exynos_drm_crtc_mode_set_commit(crtc, x, y, old_fb);
+>>>>>>> v3.18
 }
 
 static void exynos_drm_crtc_disable(struct drm_crtc *crtc)
 {
+<<<<<<< HEAD
 	struct exynos_drm_crtc *exynos_crtc = to_exynos_crtc(crtc);
 
 	DRM_DEBUG_KMS("%s\n", __FILE__);
 
 	exynos_plane_dpms(exynos_crtc->plane, DRM_MODE_DPMS_OFF);
 	exynos_drm_crtc_dpms(crtc, DRM_MODE_DPMS_OFF);
+=======
+	struct drm_plane *plane;
+	int ret;
+
+	exynos_drm_crtc_dpms(crtc, DRM_MODE_DPMS_OFF);
+
+	drm_for_each_legacy_plane(plane, &crtc->dev->mode_config.plane_list) {
+		if (plane->crtc != crtc)
+			continue;
+
+		ret = plane->funcs->disable_plane(plane);
+		if (ret)
+			DRM_ERROR("Failed to disable plane %d\n", ret);
+	}
+>>>>>>> v3.18
 }
 
 static struct drm_crtc_helper_funcs exynos_crtc_helper_funcs = {
@@ -192,22 +315,37 @@ static struct drm_crtc_helper_funcs exynos_crtc_helper_funcs = {
 	.mode_fixup	= exynos_drm_crtc_mode_fixup,
 	.mode_set	= exynos_drm_crtc_mode_set,
 	.mode_set_base	= exynos_drm_crtc_mode_set_base,
+<<<<<<< HEAD
 	.load_lut	= exynos_drm_crtc_load_lut,
+=======
+>>>>>>> v3.18
 	.disable	= exynos_drm_crtc_disable,
 };
 
 static int exynos_drm_crtc_page_flip(struct drm_crtc *crtc,
+<<<<<<< HEAD
 				      struct drm_framebuffer *fb,
 				      struct drm_pending_vblank_event *event)
+=======
+				     struct drm_framebuffer *fb,
+				     struct drm_pending_vblank_event *event,
+				     uint32_t page_flip_flags)
+>>>>>>> v3.18
 {
 	struct drm_device *dev = crtc->dev;
 	struct exynos_drm_private *dev_priv = dev->dev_private;
 	struct exynos_drm_crtc *exynos_crtc = to_exynos_crtc(crtc);
+<<<<<<< HEAD
 	struct drm_framebuffer *old_fb = crtc->fb;
 	int ret = -EINVAL;
 
 	DRM_DEBUG_KMS("%s\n", __FILE__);
 
+=======
+	struct drm_framebuffer *old_fb = crtc->primary->fb;
+	int ret = -EINVAL;
+
+>>>>>>> v3.18
 	/* when the page flip is requested, crtc's dpms should be on */
 	if (exynos_crtc->dpms > DRM_MODE_DPMS_ON) {
 		DRM_ERROR("failed page flip request.\n");
@@ -236,15 +374,27 @@ static int exynos_drm_crtc_page_flip(struct drm_crtc *crtc,
 		atomic_set(&exynos_crtc->pending_flip, 1);
 		spin_unlock_irq(&dev->event_lock);
 
+<<<<<<< HEAD
 		crtc->fb = fb;
 		ret = exynos_drm_crtc_mode_set_base(crtc, crtc->x, crtc->y,
 						    NULL);
 		if (ret) {
 			crtc->fb = old_fb;
+=======
+		crtc->primary->fb = fb;
+		ret = exynos_drm_crtc_mode_set_commit(crtc, crtc->x, crtc->y,
+						    NULL);
+		if (ret) {
+			crtc->primary->fb = old_fb;
+>>>>>>> v3.18
 
 			spin_lock_irq(&dev->event_lock);
 			drm_vblank_put(dev, exynos_crtc->pipe);
 			list_del(&event->base.link);
+<<<<<<< HEAD
+=======
+			atomic_set(&exynos_crtc->pending_flip, 0);
+>>>>>>> v3.18
 			spin_unlock_irq(&dev->event_lock);
 
 			goto out;
@@ -260,8 +410,11 @@ static void exynos_drm_crtc_destroy(struct drm_crtc *crtc)
 	struct exynos_drm_crtc *exynos_crtc = to_exynos_crtc(crtc);
 	struct exynos_drm_private *private = crtc->dev->dev_private;
 
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __FILE__);
 
+=======
+>>>>>>> v3.18
 	private->crtc[exynos_crtc->pipe] = NULL;
 
 	drm_crtc_cleanup(crtc);
@@ -276,8 +429,11 @@ static int exynos_drm_crtc_set_property(struct drm_crtc *crtc,
 	struct exynos_drm_private *dev_priv = dev->dev_private;
 	struct exynos_drm_crtc *exynos_crtc = to_exynos_crtc(crtc);
 
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __func__);
 
+=======
+>>>>>>> v3.18
 	if (property == dev_priv->crtc_mode_property) {
 		enum exynos_crtc_mode mode = val;
 
@@ -291,8 +447,12 @@ static int exynos_drm_crtc_set_property(struct drm_crtc *crtc,
 			exynos_drm_crtc_commit(crtc);
 			break;
 		case CRTC_MODE_BLANK:
+<<<<<<< HEAD
 			exynos_plane_dpms(exynos_crtc->plane,
 					  DRM_MODE_DPMS_OFF);
+=======
+			exynos_plane_dpms(crtc->primary, DRM_MODE_DPMS_OFF);
+>>>>>>> v3.18
 			break;
 		default:
 			break;
@@ -322,8 +482,11 @@ static void exynos_drm_crtc_attach_mode_property(struct drm_crtc *crtc)
 	struct exynos_drm_private *dev_priv = dev->dev_private;
 	struct drm_property *prop;
 
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __func__);
 
+=======
+>>>>>>> v3.18
 	prop = dev_priv->crtc_mode_property;
 	if (!prop) {
 		prop = drm_property_create_enum(dev, 0, "mode", mode_names,
@@ -337,6 +500,7 @@ static void exynos_drm_crtc_attach_mode_property(struct drm_crtc *crtc)
 	drm_object_attach_property(&crtc->base, prop, 0);
 }
 
+<<<<<<< HEAD
 int exynos_drm_crtc_create(struct drm_device *dev, unsigned int nr)
 {
 	struct exynos_drm_crtc *exynos_crtc;
@@ -366,11 +530,49 @@ int exynos_drm_crtc_create(struct drm_device *dev, unsigned int nr)
 	private->crtc[nr] = crtc;
 
 	drm_crtc_init(dev, crtc, &exynos_crtc_funcs);
+=======
+int exynos_drm_crtc_create(struct exynos_drm_manager *manager)
+{
+	struct exynos_drm_crtc *exynos_crtc;
+	struct drm_plane *plane;
+	struct exynos_drm_private *private = manager->drm_dev->dev_private;
+	struct drm_crtc *crtc;
+	int ret;
+
+	exynos_crtc = kzalloc(sizeof(*exynos_crtc), GFP_KERNEL);
+	if (!exynos_crtc)
+		return -ENOMEM;
+
+	init_waitqueue_head(&exynos_crtc->pending_flip_queue);
+	atomic_set(&exynos_crtc->pending_flip, 0);
+
+	exynos_crtc->dpms = DRM_MODE_DPMS_OFF;
+	exynos_crtc->manager = manager;
+	exynos_crtc->pipe = manager->pipe;
+	plane = exynos_plane_init(manager->drm_dev, 1 << manager->pipe,
+				  DRM_PLANE_TYPE_PRIMARY);
+	if (IS_ERR(plane)) {
+		ret = PTR_ERR(plane);
+		goto err_plane;
+	}
+
+	manager->crtc = &exynos_crtc->drm_crtc;
+	crtc = &exynos_crtc->drm_crtc;
+
+	private->crtc[manager->pipe] = crtc;
+
+	ret = drm_crtc_init_with_planes(manager->drm_dev, crtc, plane, NULL,
+					&exynos_crtc_funcs);
+	if (ret < 0)
+		goto err_crtc;
+
+>>>>>>> v3.18
 	drm_crtc_helper_add(crtc, &exynos_crtc_helper_funcs);
 
 	exynos_drm_crtc_attach_mode_property(crtc);
 
 	return 0;
+<<<<<<< HEAD
 }
 
 int exynos_drm_crtc_enable_vblank(struct drm_device *dev, int crtc)
@@ -380,16 +582,38 @@ int exynos_drm_crtc_enable_vblank(struct drm_device *dev, int crtc)
 		to_exynos_crtc(private->crtc[crtc]);
 
 	DRM_DEBUG_KMS("%s\n", __FILE__);
+=======
+
+err_crtc:
+	plane->funcs->destroy(plane);
+err_plane:
+	kfree(exynos_crtc);
+	return ret;
+}
+
+int exynos_drm_crtc_enable_vblank(struct drm_device *dev, int pipe)
+{
+	struct exynos_drm_private *private = dev->dev_private;
+	struct exynos_drm_crtc *exynos_crtc =
+		to_exynos_crtc(private->crtc[pipe]);
+	struct exynos_drm_manager *manager = exynos_crtc->manager;
+>>>>>>> v3.18
 
 	if (exynos_crtc->dpms != DRM_MODE_DPMS_ON)
 		return -EPERM;
 
+<<<<<<< HEAD
 	exynos_drm_fn_encoder(private->crtc[crtc], &crtc,
 			exynos_drm_enable_vblank);
+=======
+	if (manager->ops->enable_vblank)
+		manager->ops->enable_vblank(manager);
+>>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 void exynos_drm_crtc_disable_vblank(struct drm_device *dev, int crtc)
 {
 	struct exynos_drm_private *private = dev->dev_private;
@@ -397,10 +621,19 @@ void exynos_drm_crtc_disable_vblank(struct drm_device *dev, int crtc)
 		to_exynos_crtc(private->crtc[crtc]);
 
 	DRM_DEBUG_KMS("%s\n", __FILE__);
+=======
+void exynos_drm_crtc_disable_vblank(struct drm_device *dev, int pipe)
+{
+	struct exynos_drm_private *private = dev->dev_private;
+	struct exynos_drm_crtc *exynos_crtc =
+		to_exynos_crtc(private->crtc[pipe]);
+	struct exynos_drm_manager *manager = exynos_crtc->manager;
+>>>>>>> v3.18
 
 	if (exynos_crtc->dpms != DRM_MODE_DPMS_ON)
 		return;
 
+<<<<<<< HEAD
 	exynos_drm_fn_encoder(private->crtc[crtc], &crtc,
 			exynos_drm_disable_vblank);
 }
@@ -415,20 +648,125 @@ void exynos_drm_crtc_finish_pageflip(struct drm_device *dev, int crtc)
 
 	DRM_DEBUG_KMS("%s\n", __FILE__);
 
+=======
+	if (manager->ops->disable_vblank)
+		manager->ops->disable_vblank(manager);
+}
+
+void exynos_drm_crtc_finish_pageflip(struct drm_device *dev, int pipe)
+{
+	struct exynos_drm_private *dev_priv = dev->dev_private;
+	struct drm_pending_vblank_event *e, *t;
+	struct drm_crtc *drm_crtc = dev_priv->crtc[pipe];
+	struct exynos_drm_crtc *exynos_crtc = to_exynos_crtc(drm_crtc);
+	unsigned long flags;
+
+>>>>>>> v3.18
 	spin_lock_irqsave(&dev->event_lock, flags);
 
 	list_for_each_entry_safe(e, t, &dev_priv->pageflip_event_list,
 			base.link) {
 		/* if event's pipe isn't same as crtc then ignore it. */
+<<<<<<< HEAD
 		if (crtc != e->pipe)
+=======
+		if (pipe != e->pipe)
+>>>>>>> v3.18
 			continue;
 
 		list_del(&e->base.link);
 		drm_send_vblank_event(dev, -1, e);
+<<<<<<< HEAD
 		drm_vblank_put(dev, crtc);
+=======
+		drm_vblank_put(dev, pipe);
+>>>>>>> v3.18
 		atomic_set(&exynos_crtc->pending_flip, 0);
 		wake_up(&exynos_crtc->pending_flip_queue);
 	}
 
 	spin_unlock_irqrestore(&dev->event_lock, flags);
 }
+<<<<<<< HEAD
+=======
+
+void exynos_drm_crtc_plane_mode_set(struct drm_crtc *crtc,
+			struct exynos_drm_overlay *overlay)
+{
+	struct exynos_drm_manager *manager = to_exynos_crtc(crtc)->manager;
+
+	if (manager->ops->win_mode_set)
+		manager->ops->win_mode_set(manager, overlay);
+}
+
+void exynos_drm_crtc_plane_commit(struct drm_crtc *crtc, int zpos)
+{
+	struct exynos_drm_manager *manager = to_exynos_crtc(crtc)->manager;
+
+	if (manager->ops->win_commit)
+		manager->ops->win_commit(manager, zpos);
+}
+
+void exynos_drm_crtc_plane_enable(struct drm_crtc *crtc, int zpos)
+{
+	struct exynos_drm_manager *manager = to_exynos_crtc(crtc)->manager;
+
+	if (manager->ops->win_enable)
+		manager->ops->win_enable(manager, zpos);
+}
+
+void exynos_drm_crtc_plane_disable(struct drm_crtc *crtc, int zpos)
+{
+	struct exynos_drm_manager *manager = to_exynos_crtc(crtc)->manager;
+
+	if (manager->ops->win_disable)
+		manager->ops->win_disable(manager, zpos);
+}
+
+void exynos_drm_crtc_complete_scanout(struct drm_framebuffer *fb)
+{
+	struct exynos_drm_manager *manager;
+	struct drm_device *dev = fb->dev;
+	struct drm_crtc *crtc;
+
+	/*
+	 * make sure that overlay data are updated to real hardware
+	 * for all encoders.
+	 */
+	list_for_each_entry(crtc, &dev->mode_config.crtc_list, head) {
+		manager = to_exynos_crtc(crtc)->manager;
+
+		/*
+		 * wait for vblank interrupt
+		 * - this makes sure that overlay data are updated to
+		 *	real hardware.
+		 */
+		if (manager->ops->wait_for_vblank)
+			manager->ops->wait_for_vblank(manager);
+	}
+}
+
+int exynos_drm_crtc_get_pipe_from_type(struct drm_device *drm_dev,
+					unsigned int out_type)
+{
+	struct drm_crtc *crtc;
+
+	list_for_each_entry(crtc, &drm_dev->mode_config.crtc_list, head) {
+		struct exynos_drm_crtc *exynos_crtc;
+
+		exynos_crtc = to_exynos_crtc(crtc);
+		if (exynos_crtc->manager->type == out_type)
+			return exynos_crtc->manager->pipe;
+	}
+
+	return -EPERM;
+}
+
+void exynos_drm_crtc_te_handler(struct drm_crtc *crtc)
+{
+	struct exynos_drm_manager *manager = to_exynos_crtc(crtc)->manager;
+
+	if (manager->ops->te_handler)
+		manager->ops->te_handler(manager);
+}
+>>>>>>> v3.18

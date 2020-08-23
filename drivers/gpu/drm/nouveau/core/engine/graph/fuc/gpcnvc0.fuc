@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 /* fuc microcode for nvc0 PGRAPH/GPC
  *
  * Copyright 2011 Red Hat Inc.
+=======
+/*
+ * Copyright 2013 Red Hat Inc.
+>>>>>>> v3.18
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -20,6 +25,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  *
+<<<<<<< HEAD
  * Authors: Ben Skeggs
  */
 
@@ -542,3 +548,26 @@ ctx_xfer:
 	ret
 
 .align 256
+=======
+ * Authors: Ben Skeggs <bskeggs@redhat.com>
+ */
+
+#define NV_PGRAPH_GPCX_UNK__SIZE                                     0x00000000
+
+#define CHIPSET GF100
+#include "macros.fuc"
+
+.section #nvc0_grgpc_data
+#define INCLUDE_DATA
+#include "com.fuc"
+#include "gpc.fuc"
+#undef INCLUDE_DATA
+
+.section #nvc0_grgpc_code
+#define INCLUDE_CODE
+bra #init
+#include "com.fuc"
+#include "gpc.fuc"
+.align 256
+#undef INCLUDE_CODE
+>>>>>>> v3.18

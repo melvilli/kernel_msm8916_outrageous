@@ -117,7 +117,10 @@ struct mxs_saif {
 	unsigned int mclk_in_use;
 	void __iomem *base;
 	int irq;
+<<<<<<< HEAD
 	struct mxs_pcm_dma_params dma_param;
+=======
+>>>>>>> v3.18
 	unsigned int id;
 	unsigned int master_id;
 	unsigned int cur_rate;
@@ -125,6 +128,14 @@ struct mxs_saif {
 
 	u32 fifo_underrun;
 	u32 fifo_overrun;
+<<<<<<< HEAD
+=======
+
+	enum {
+		MXS_SAIF_STATE_STOPPED,
+		MXS_SAIF_STATE_RUNNING,
+	} state;
+>>>>>>> v3.18
 };
 
 extern int mxs_saif_put_mclk(unsigned int saif_id);

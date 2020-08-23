@@ -36,8 +36,13 @@
 #define FW_FS			"ramdisk.jffs2"
 
 struct dn_header {
+<<<<<<< HEAD
 	u32	magic_num;
 	u32	file_size;
+=======
+	__be32	magic_num;
+	__be32	file_size;
+>>>>>>> v3.18
 };
 
 struct img_header {
@@ -67,8 +72,14 @@ struct fw_info {
 static void array_le32_to_cpu(u32 *arr, int num)
 {
 	int i;
+<<<<<<< HEAD
 	for (i = 0; i < num; i++, arr++)
 		*arr = __le32_to_cpu(*arr);
+=======
+
+	for (i = 0; i < num; i++, arr++)
+		le32_to_cpus(arr);
+>>>>>>> v3.18
 }
 
 static u8 *tx_buf;
@@ -79,7 +90,11 @@ static int gdm_wibro_send(struct usb_device *usbdev, void *data, int len)
 	int actual;
 
 	ret = usb_bulk_msg(usbdev, usb_sndbulkpipe(usbdev, 1), data, len,
+<<<<<<< HEAD
 			&actual, 1000);
+=======
+			   &actual, 1000);
+>>>>>>> v3.18
 
 	if (ret < 0) {
 		dev_err(&usbdev->dev, "Error : usb_bulk_msg ( result = %d )\n",
@@ -95,7 +110,11 @@ static int gdm_wibro_recv(struct usb_device *usbdev, void *data, int len)
 	int actual;
 
 	ret = usb_bulk_msg(usbdev, usb_rcvbulkpipe(usbdev, 2), data, len,
+<<<<<<< HEAD
 			&actual, 5000);
+=======
+			   &actual, 5000);
+>>>>>>> v3.18
 
 	if (ret < 0) {
 		dev_err(&usbdev->dev,
@@ -106,16 +125,26 @@ static int gdm_wibro_recv(struct usb_device *usbdev, void *data, int len)
 }
 
 static int download_image(struct usb_device *usbdev,
+<<<<<<< HEAD
 				const struct firmware *firm,
 				loff_t pos, u32 img_len, u32 magic_num)
+=======
+			  const struct firmware *firm,
+			  loff_t pos, u32 img_len, u32 magic_num)
+>>>>>>> v3.18
 {
 	struct dn_header h;
 	int ret = 0;
 	u32 size;
 
 	size = ALIGN(img_len, DOWNLOAD_SIZE);
+<<<<<<< HEAD
 	h.magic_num = __cpu_to_be32(magic_num);
 	h.file_size = __cpu_to_be32(size);
+=======
+	h.magic_num = cpu_to_be32(magic_num);
+	h.file_size = cpu_to_be32(size);
+>>>>>>> v3.18
 
 	ret = gdm_wibro_send(usbdev, &h, sizeof(h));
 	if (ret < 0)
@@ -169,6 +198,7 @@ int usb_boot(struct usb_device *usbdev, u16 pid)
 	memcpy(&hdr, firm->data, sizeof(hdr));
 
 	array_le32_to_cpu((u32 *)&hdr, 19);
+<<<<<<< HEAD
 #if 0
 	if (hdr.magic_code != 0x10767fff) {
 		dev_err(&usbdev->dev, "Invalid magic code 0x%08x\n",
@@ -177,6 +207,9 @@ int usb_boot(struct usb_device *usbdev, u16 pid)
 		goto out;
 	}
 #endif
+=======
+
+>>>>>>> v3.18
 	if (hdr.count > MAX_IMG_CNT) {
 		dev_err(&usbdev->dev, "Too many images. %d\n", hdr.count);
 		ret = -EINVAL;
@@ -201,6 +234,7 @@ int usb_boot(struct usb_device *usbdev, u16 pid)
 		memcpy(&fw_info, firm->data + pos, sizeof(fw_info));
 
 		array_le32_to_cpu((u32 *)&fw_info, 8);
+<<<<<<< HEAD
 #if 0
 		if ((fw_info.id & 0xfffff000) != 0x10767000) {
 			dev_err(&usbdev->dev, "Invalid FW id. 0x%08x\n",
@@ -209,6 +243,8 @@ int usb_boot(struct usb_device *usbdev, u16 pid)
 			goto out;
 		}
 #endif
+=======
+>>>>>>> v3.18
 
 		if ((fw_info.id & 0xffff) != pid)
 			continue;
@@ -219,8 +255,13 @@ int usb_boot(struct usb_device *usbdev, u16 pid)
 			goto out;
 		}
 
+<<<<<<< HEAD
 		ret = download_image(usbdev, firm, pos,
 				fw_info.kernel_len, DN_KERNEL_MAGIC_NUMBER);
+=======
+		ret = download_image(usbdev, firm, pos, fw_info.kernel_len,
+				     DN_KERNEL_MAGIC_NUMBER);
+>>>>>>> v3.18
 		if (ret < 0)
 			goto out;
 		dev_info(&usbdev->dev, "GCT: Kernel download success.\n");
@@ -231,7 +272,11 @@ int usb_boot(struct usb_device *usbdev, u16 pid)
 			goto out;
 		}
 		ret = download_image(usbdev, firm, pos, fw_info.rootfs_len,
+<<<<<<< HEAD
 				DN_ROOTFS_MAGIC_NUMBER);
+=======
+				     DN_ROOTFS_MAGIC_NUMBER);
+>>>>>>> v3.18
 		if (ret < 0)
 			goto out;
 		dev_info(&usbdev->dev, "GCT: Filesystem download success.\n");
@@ -276,7 +321,11 @@ out:
 }
 
 static int em_download_image(struct usb_device *usbdev, const char *img_name,
+<<<<<<< HEAD
 				char *type_string)
+=======
+			     char *type_string)
+>>>>>>> v3.18
 {
 	char *buf = NULL;
 	loff_t pos = 0;
@@ -347,11 +396,16 @@ out:
 
 static int em_fw_reset(struct usb_device *usbdev)
 {
+<<<<<<< HEAD
 	int ret;
 
 	/*Send ZLP*/
 	ret = gdm_wibro_send(usbdev, NULL, 0);
 	return ret;
+=======
+	/*Send ZLP*/
+	return gdm_wibro_send(usbdev, NULL, 0);
+>>>>>>> v3.18
 }
 
 int usb_emergency(struct usb_device *usbdev)

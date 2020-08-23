@@ -7,9 +7,15 @@
  * Free Software Foundation.
  */
 #include <linux/err.h>
+<<<<<<< HEAD
 #include <linux/platform_device.h>
 #include <linux/slab.h>
 #include <linux/leds.h>
+=======
+#include <linux/leds.h>
+#include <linux/platform_device.h>
+#include <linux/slab.h>
+>>>>>>> v3.18
 
 /**
  * gpio_led_register_device - register a gpio-led device
@@ -28,6 +34,12 @@ struct platform_device *__init gpio_led_register_device(
 	struct platform_device *ret;
 	struct gpio_led_platform_data _pdata = *pdata;
 
+<<<<<<< HEAD
+=======
+	if (!pdata->num_leds)
+		return ERR_PTR(-EINVAL);
+
+>>>>>>> v3.18
 	_pdata.leds = kmemdup(pdata->leds,
 			pdata->num_leds * sizeof(*pdata->leds), GFP_KERNEL);
 	if (!_pdata.leds)

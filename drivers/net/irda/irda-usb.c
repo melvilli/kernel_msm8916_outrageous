@@ -58,7 +58,10 @@
 #include <linux/moduleparam.h>
 #include <linux/kernel.h>
 #include <linux/types.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/skbuff.h>
 #include <linux/netdevice.h>
 #include <linux/slab.h>

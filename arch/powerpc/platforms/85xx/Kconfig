@@ -32,6 +32,24 @@ config BSC9131_RDB
 	  StarCore SC3850 DSP
 	  Manufacturer : Freescale Semiconductor, Inc
 
+<<<<<<< HEAD
+=======
+config C293_PCIE
+	  bool "Freescale C293PCIE"
+	  select DEFAULT_UIMAGE
+	  help
+	  This option enables support for the C293PCIE board
+
+config BSC9132_QDS
+	bool "Freescale BSC9132QDS"
+	select DEFAULT_UIMAGE
+	help
+	  This option enables support for the Freescale BSC9132 QDS board.
+	  BSC9132 is a heterogeneous SoC containing dual e500v2 powerpc cores
+	  and dual StarCore SC3850 DSP cores.
+	  Manufacturer : Freescale Semiconductor, Inc
+
+>>>>>>> v3.18
 config MPC8540_ADS
 	bool "Freescale MPC8540 ADS"
 	select DEFAULT_UIMAGE
@@ -111,11 +129,25 @@ config P1022_RDK
 	  This option enables support for the Freescale / iVeia P1022RDK
 	  reference board.
 
+<<<<<<< HEAD
 config P1023_RDS
 	bool "Freescale P1023 RDS"
 	select DEFAULT_UIMAGE
 	help
 	  This option enables support for the P1023 RDS board
+=======
+config P1023_RDB
+	bool "Freescale P1023 RDB"
+	select DEFAULT_UIMAGE
+	help
+	  This option enables support for the P1023 RDB board.
+
+config TWR_P102x
+	bool "Freescale TWR-P102x"
+	select DEFAULT_UIMAGE
+	help
+	  This option enables support for the TWR-P1025 board.
+>>>>>>> v3.18
 
 config SOCRATES
 	bool "Socrates"
@@ -212,6 +244,7 @@ config GE_IMP3A
 	  This board is a 3U CompactPCI Single Board Computer with a Freescale
 	  P2020 processor.
 
+<<<<<<< HEAD
 config P2041_RDB
 	bool "Freescale P2041 RDB"
 	select DEFAULT_UIMAGE
@@ -251,16 +284,23 @@ config P4080_DS
 	help
 	  This option enables support for the P4080 DS board
 
+=======
+>>>>>>> v3.18
 config SGY_CTS1000
 	tristate "Servergy CTS-1000 support"
 	select GPIOLIB
 	select OF_GPIO
+<<<<<<< HEAD
 	depends on P4080_DS
+=======
+	depends on CORENET_GENERIC
+>>>>>>> v3.18
 	help
 	  Enable this to support functionality in Servergy's CTS-1000 systems.
 
 endif # PPC32
 
+<<<<<<< HEAD
 config P5020_DS
 	bool "Freescale P5020 DS"
 	select DEFAULT_UIMAGE
@@ -289,6 +329,8 @@ config P5040_DS
 	help
 	  This option enables support for the P5040 DS board
 
+=======
+>>>>>>> v3.18
 config PPC_QEMU_E500
 	bool "QEMU generic e500 platform"
 	select DEFAULT_UIMAGE
@@ -304,10 +346,15 @@ config PPC_QEMU_E500
 	  unset based on the emulated CPU (or actual host CPU in the case
 	  of KVM).
 
+<<<<<<< HEAD
 if PPC64
 
 config T4240_QDS
 	bool "Freescale T4240 QDS"
+=======
+config CORENET_GENERIC
+	bool "Freescale CoreNet Generic"
+>>>>>>> v3.18
 	select DEFAULT_UIMAGE
 	select E500
 	select PPC_E500MC
@@ -318,6 +365,7 @@ config T4240_QDS
 	select HAS_RAPIDIO
 	select PPC_EPAPR_HV_PIC
 	help
+<<<<<<< HEAD
 	  This option enables support for the T4240 QDS board
 
 config B4_QDS
@@ -338,6 +386,16 @@ config B4_QDS
 	  applications for the B4.
 
 endif
+=======
+	  This option enables support for the FSL CoreNet based boards.
+	  For 32bit kernel, the following boards are supported:
+	    P2041 RDB, P3041 DS, P4080 DS, kmcoge4, and OCA4080
+	  For 64bit kernel, the following boards are supported:
+	    T208x QDS/RDB, T4240 QDS/RDB and B4 QDS
+	  The following boards are supported for both 32bit and 64bit kernel:
+	    P5020 DS, P5040 DS and T104xQDS/RDB
+
+>>>>>>> v3.18
 endif # FSL_SOC_BOOKE
 
 config TQM85xx

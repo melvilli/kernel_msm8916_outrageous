@@ -64,7 +64,11 @@ static int __init testfunc(void)
 
 	/* put values into the fifo */
 	for (i = 0; i != 10; i++)
+<<<<<<< HEAD
 		kfifo_put(&test, &i);
+=======
+		kfifo_put(&test, i);
+>>>>>>> v3.18
 
 	/* show the number of used elements */
 	printk(KERN_INFO "fifo len: %u\n", kfifo_len(&test));
@@ -85,7 +89,11 @@ static int __init testfunc(void)
 	kfifo_skip(&test);
 
 	/* put values into the fifo until is full */
+<<<<<<< HEAD
 	for (i = 20; kfifo_put(&test, &i); i++)
+=======
+	for (i = 20; kfifo_put(&test, i); i++)
+>>>>>>> v3.18
 		;
 
 	printk(KERN_INFO "queue len: %u\n", kfifo_len(&test));

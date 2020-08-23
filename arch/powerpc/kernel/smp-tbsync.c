@@ -9,7 +9,10 @@
 #include <linux/sched.h>
 #include <linux/smp.h>
 #include <linux/unistd.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/atomic.h>
 #include <asm/smp.h>

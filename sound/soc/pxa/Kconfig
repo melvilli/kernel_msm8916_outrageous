@@ -1,6 +1,10 @@
 config SND_PXA2XX_SOC
 	tristate "SoC Audio for the Intel PXA2xx chip"
 	depends on ARCH_PXA
+<<<<<<< HEAD
+=======
+	select SND_ARM
+>>>>>>> v3.18
 	select SND_PXA2XX_LIB
 	help
 	  Say Y or M if you want to add support for codecs attached to
@@ -10,7 +14,12 @@ config SND_PXA2XX_SOC
 config SND_MMP_SOC
 	bool "Soc Audio for Marvell MMP chips"
 	depends on ARCH_MMP
+<<<<<<< HEAD
 	select SND_SOC_DMAENGINE_PCM
+=======
+	select MMP_SRAM
+	select SND_SOC_GENERIC_DMAENGINE_PCM
+>>>>>>> v3.18
 	select SND_ARM
 	help
 	  Say Y if you want to add support for codecs attached to
@@ -23,6 +32,10 @@ config SND_PXA2XX_AC97
 config SND_PXA2XX_SOC_AC97
 	tristate
 	select AC97_BUS
+<<<<<<< HEAD
+=======
+	select SND_ARM
+>>>>>>> v3.18
 	select SND_PXA2XX_LIB_AC97
 	select SND_SOC_AC97_BUS
 
@@ -38,7 +51,11 @@ config SND_MMP_SOC_SSPA
 
 config SND_PXA2XX_SOC_CORGI
 	tristate "SoC Audio support for Sharp Zaurus SL-C7x0"
+<<<<<<< HEAD
 	depends on SND_PXA2XX_SOC && PXA_SHARP_C7xx
+=======
+	depends on SND_PXA2XX_SOC && PXA_SHARP_C7xx && I2C
+>>>>>>> v3.18
 	select SND_PXA2XX_SOC_I2S
 	select SND_SOC_WM8731
 	help
@@ -47,7 +64,11 @@ config SND_PXA2XX_SOC_CORGI
 
 config SND_PXA2XX_SOC_SPITZ
 	tristate "SoC Audio support for Sharp Zaurus SL-Cxx00"
+<<<<<<< HEAD
 	depends on SND_PXA2XX_SOC && PXA_SHARP_Cxx00
+=======
+	depends on SND_PXA2XX_SOC && PXA_SHARP_Cxx00 && I2C
+>>>>>>> v3.18
 	select SND_PXA2XX_SOC_I2S
 	select SND_SOC_WM8750
 	help
@@ -56,7 +77,11 @@ config SND_PXA2XX_SOC_SPITZ
 
 config SND_PXA2XX_SOC_Z2
 	tristate "SoC Audio support for Zipit Z2"
+<<<<<<< HEAD
 	depends on SND_PXA2XX_SOC && MACH_ZIPIT2
+=======
+	depends on SND_PXA2XX_SOC && MACH_ZIPIT2 && I2C
+>>>>>>> v3.18
 	select SND_PXA2XX_SOC_I2S
 	select SND_SOC_WM8750
 	help
@@ -64,7 +89,11 @@ config SND_PXA2XX_SOC_Z2
 
 config SND_PXA2XX_SOC_POODLE
 	tristate "SoC Audio support for Poodle"
+<<<<<<< HEAD
 	depends on SND_PXA2XX_SOC && MACH_POODLE
+=======
+	depends on SND_PXA2XX_SOC && MACH_POODLE && I2C
+>>>>>>> v3.18
 	select SND_PXA2XX_SOC_I2S
 	select SND_SOC_WM8731
 	help
@@ -128,6 +157,7 @@ config SND_PXA2XX_SOC_PALM27X
 	  Say Y if you want to add support for SoC audio on
 	  Palm T|X, T5, E2 or LifeDrive handheld computer.
 
+<<<<<<< HEAD
 config SND_SOC_SAARB
 	tristate "SoC Audio support for Marvell Saarb"
 	depends on SND_PXA2XX_SOC && MACH_SAARB
@@ -148,6 +178,8 @@ config SND_SOC_TAVOREVB3
 	  Say Y if you want to add support for SoC audio on the
 	  Marvell Saarb reference platform.
 
+=======
+>>>>>>> v3.18
 config SND_PXA910_SOC
 	tristate "SoC Audio for Marvell PXA910 chip"
 	depends on ARCH_MMP && SND
@@ -158,7 +190,11 @@ config SND_PXA910_SOC
 
 config SND_SOC_TTC_DKB
 	bool "SoC Audio support for TTC DKB"
+<<<<<<< HEAD
 	depends on SND_PXA910_SOC && MACH_TTC_DKB
+=======
+	depends on SND_PXA910_SOC && MACH_TTC_DKB && I2C=y
+>>>>>>> v3.18
 	select PXA_SSP
 	select SND_PXA_SOC_SSP
 	select SND_MMP_SOC
@@ -199,7 +235,11 @@ config SND_PXA2XX_SOC_HX4700
 
 config SND_PXA2XX_SOC_MAGICIAN
 	tristate "SoC Audio support for HTC Magician"
+<<<<<<< HEAD
 	depends on SND_PXA2XX_SOC && MACH_MAGICIAN
+=======
+	depends on SND_PXA2XX_SOC && MACH_MAGICIAN && I2C
+>>>>>>> v3.18
 	select SND_PXA2XX_SOC_I2S
 	select SND_PXA_SOC_SSP
 	select SND_SOC_UDA1380

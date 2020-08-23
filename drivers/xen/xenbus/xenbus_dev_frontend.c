@@ -35,6 +35,11 @@
  *                              Turned xenfs into a loadable module.
  */
 
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/errno.h>
 #include <linux/uio.h>
@@ -616,7 +621,11 @@ static int __init xenbus_init(void)
 
 	err = misc_register(&xenbus_dev);
 	if (err)
+<<<<<<< HEAD
 		printk(KERN_ERR "Could not register xenbus frontend device\n");
+=======
+		pr_err("Could not register xenbus frontend device\n");
+>>>>>>> v3.18
 	return err;
 }
 

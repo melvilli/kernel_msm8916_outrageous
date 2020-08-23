@@ -22,10 +22,13 @@
 #ifdef __KERNEL__
 #include  <linux/irqreturn.h>
 
+<<<<<<< HEAD
 #ifndef bool
 #define bool int
 #endif
 
+=======
+>>>>>>> v3.18
 /*
  * RECON_THRESHOLD is the maximum number of RECON messages to receive
  * within one minute before printing a "cabling problem" warning. The
@@ -285,9 +288,15 @@ struct arcnet_local {
 	unsigned long first_recon; /* time of "first" RECON message to count */
 	unsigned long last_recon;  /* time of most recent RECON */
 	int num_recons;		/* number of RECONs between first and last. */
+<<<<<<< HEAD
 	bool network_down;	/* do we think the network is down? */
 
 	bool excnak_pending;    /* We just got an excesive nak interrupt */
+=======
+	int network_down;	/* do we think the network is down? */
+
+	int excnak_pending;    /* We just got an excesive nak interrupt */
+>>>>>>> v3.18
 
 	struct {
 		uint16_t sequence;	/* sequence number (incs with each packet) */
@@ -305,7 +314,11 @@ struct arcnet_local {
 		void (*command) (struct net_device * dev, int cmd);
 		int (*status) (struct net_device * dev);
 		void (*intmask) (struct net_device * dev, int mask);
+<<<<<<< HEAD
 		bool (*reset) (struct net_device * dev, bool really_reset);
+=======
+		int (*reset) (struct net_device * dev, int really_reset);
+>>>>>>> v3.18
 		void (*open) (struct net_device * dev);
 		void (*close) (struct net_device * dev);
 

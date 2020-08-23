@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 #include <linux/pci.h>
 
 #include "../comedidev.h"
@@ -17,7 +21,11 @@ static const struct addi_board apci035_boardtypes[] = {
 		.pc_DriverName		= "apci035",
 		.i_IorangeBase1		= APCI035_ADDRESS_RANGE,
 		.i_PCIEeprom		= 1,
+<<<<<<< HEAD
 		.pc_EepromChip		= ADDIDATA_S5920,
+=======
+		.pc_EepromChip		= "S5920",
+>>>>>>> v3.18
 		.i_NbrAiChannel		= 16,
 		.i_NbrAiChannelDiff	= 8,
 		.i_AiChannelList	= 16,
@@ -26,6 +34,7 @@ static const struct addi_board apci035_boardtypes[] = {
 		.i_Timer		= 1,
 		.ui_MinAcquisitiontimeNs = 10000,
 		.ui_MinDelaytimeNs	= 100000,
+<<<<<<< HEAD
 		.interrupt		= v_APCI035_Interrupt,
 		.reset			= i_APCI035_Reset,
 		.ai_config		= i_APCI035_ConfigAnalogInput,
@@ -33,6 +42,15 @@ static const struct addi_board apci035_boardtypes[] = {
 		.timer_config		= i_APCI035_ConfigTimerWatchdog,
 		.timer_write		= i_APCI035_StartStopWriteTimerWatchdog,
 		.timer_read		= i_APCI035_ReadTimerWatchdog,
+=======
+		.interrupt		= apci035_interrupt,
+		.reset			= apci035_reset,
+		.ai_config		= apci035_ai_config,
+		.ai_read		= apci035_ai_read,
+		.timer_config		= apci035_timer_config,
+		.timer_write		= apci035_timer_write,
+		.timer_read		= apci035_timer_read,
+>>>>>>> v3.18
 	},
 };
 
@@ -57,7 +75,11 @@ static int apci035_pci_probe(struct pci_dev *dev,
 	return comedi_pci_auto_config(dev, &apci035_driver, id->driver_data);
 }
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(apci035_pci_table) = {
+=======
+static const struct pci_device_id apci035_pci_table[] = {
+>>>>>>> v3.18
 	{ PCI_DEVICE(PCI_VENDOR_ID_ADDIDATA,  0x0300) },
 	{ 0 }
 };

@@ -87,6 +87,7 @@ static void __inet_twsk_kill(struct inet_timewait_sock *tw,
 	refcnt += inet_twsk_bind_unhash(tw, hashinfo);
 	spin_unlock(&bhead->lock);
 
+<<<<<<< HEAD
 #ifdef SOCK_REFCNT_DEBUG
 	if (atomic_read(&tw->tw_refcnt) != 1) {
 		pr_debug("%s timewait_sock %p refcnt=%d\n",
@@ -100,6 +101,13 @@ static void __inet_twsk_kill(struct inet_timewait_sock *tw,
 }
 
 static noinline void inet_twsk_free(struct inet_timewait_sock *tw)
+=======
+	BUG_ON(refcnt >= atomic_read(&tw->tw_refcnt));
+	atomic_sub(refcnt, &tw->tw_refcnt);
+}
+
+void inet_twsk_free(struct inet_timewait_sock *tw)
+>>>>>>> v3.18
 {
 	struct module *owner = tw->tw_prot->owner;
 	twsk_destructor((struct sock *)tw);
@@ -118,6 +126,21 @@ void inet_twsk_put(struct inet_timewait_sock *tw)
 }
 EXPORT_SYMBOL_GPL(inet_twsk_put);
 
+<<<<<<< HEAD
+=======
+static void inet_twsk_add_node_rcu(struct inet_timewait_sock *tw,
+				   struct hlist_nulls_head *list)
+{
+	hlist_nulls_add_head_rcu(&tw->tw_node, list);
+}
+
+static void inet_twsk_add_bind_node(struct inet_timewait_sock *tw,
+				    struct hlist_head *list)
+{
+	hlist_add_head(&tw->tw_bind_node, list);
+}
+
+>>>>>>> v3.18
 /*
  * Enter the time wait state. This is called with locally disabled BH.
  * Essentially we whip up a timewait bucket, copy the relevant info into it
@@ -146,6 +169,7 @@ void __inet_twsk_hashdance(struct inet_timewait_sock *tw, struct sock *sk,
 	spin_lock(lock);
 
 	/*
+<<<<<<< HEAD
 	 * Step 2: Hash TW into TIMEWAIT chain.
 	 * Should be done before removing sk from established chain
 	 * because readers are lockless and search established first.
@@ -166,6 +190,23 @@ void __inet_twsk_hashdance(struct inet_timewait_sock *tw, struct sock *sk,
 	 */
 	atomic_add(1 + 1 + 1, &tw->tw_refcnt);
 
+=======
+	 * Step 2: Hash TW into tcp ehash chain.
+	 * Notes :
+	 * - tw_refcnt is set to 3 because :
+	 * - We have one reference from bhash chain.
+	 * - We have one reference from ehash chain.
+	 * We can use atomic_set() because prior spin_lock()/spin_unlock()
+	 * committed into memory all tw fields.
+	 */
+	atomic_set(&tw->tw_refcnt, 1 + 1 + 1);
+	inet_twsk_add_node_rcu(tw, &ehead->chain);
+
+	/* Step 3: Remove SK from hash chain */
+	if (__sk_nulls_del_node_init_rcu(sk))
+		sock_prot_inuse_add(sock_net(sk), sk->sk_prot, -1);
+
+>>>>>>> v3.18
 	spin_unlock(lock);
 }
 EXPORT_SYMBOL_GPL(__inet_twsk_hashdance);
@@ -387,11 +428,19 @@ void inet_twsk_schedule(struct inet_timewait_sock *tw,
 			if (slot >= INET_TWDR_TWKILL_SLOTS)
 				slot = INET_TWDR_TWKILL_SLOTS - 1;
 		}
+<<<<<<< HEAD
 		tw->tw_ttd = jiffies + timeo;
 		slot = (twdr->slot + slot) & (INET_TWDR_TWKILL_SLOTS - 1);
 		list = &twdr->cells[slot];
 	} else {
 		tw->tw_ttd = jiffies + (slot << INET_TWDR_RECYCLE_TICK);
+=======
+		tw->tw_ttd = inet_tw_time_stamp() + timeo;
+		slot = (twdr->slot + slot) & (INET_TWDR_TWKILL_SLOTS - 1);
+		list = &twdr->cells[slot];
+	} else {
+		tw->tw_ttd = inet_tw_time_stamp() + (slot << INET_TWDR_RECYCLE_TICK);
+>>>>>>> v3.18
 
 		if (twdr->twcal_hand < 0) {
 			twdr->twcal_hand = 0;
@@ -490,7 +539,13 @@ void inet_twsk_purge(struct inet_hashinfo *hashinfo,
 restart_rcu:
 		rcu_read_lock();
 restart:
+<<<<<<< HEAD
 		sk_nulls_for_each_rcu(sk, node, &head->twchain) {
+=======
+		sk_nulls_for_each_rcu(sk, node, &head->chain) {
+			if (sk->sk_state != TCP_TIME_WAIT)
+				continue;
+>>>>>>> v3.18
 			tw = inet_twsk(sk);
 			if ((tw->tw_family != family) ||
 				atomic_read(&twsk_net(tw)->count))

@@ -16,8 +16,11 @@
 
 #include <asm/page.h>
 
+<<<<<<< HEAD
 #define PREEMPT_ACTIVE		0x10000000
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_4KSTACKS
 #define THREAD_SIZE		(4096)
 #define THREAD_SIZE_ORDER	(0)

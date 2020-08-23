@@ -260,6 +260,7 @@ static struct pci_driver hopper_pci_driver = {
 	.remove		= hopper_pci_remove,
 };
 
+<<<<<<< HEAD
 static int hopper_init(void)
 {
 	return pci_register_driver(&hopper_pci_driver);
@@ -272,6 +273,9 @@ static void hopper_exit(void)
 
 module_init(hopper_init);
 module_exit(hopper_exit);
+=======
+module_pci_driver(hopper_pci_driver);
+>>>>>>> v3.18
 
 MODULE_DESCRIPTION("HOPPER driver");
 MODULE_AUTHOR("Manu Abraham");

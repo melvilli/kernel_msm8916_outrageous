@@ -42,9 +42,12 @@
 
 /*---------------------  Static Classes  ----------------------------*/
 
+<<<<<<< HEAD
 /*---------------------  Static Variables  --------------------------*/
 static int msglevel = MSG_LEVEL_INFO;
 //static int          msglevel                =MSG_LEVEL_DEBUG;
+=======
+>>>>>>> v3.18
 /*---------------------  Static Functions  --------------------------*/
 
 /*---------------------  Export Variables  --------------------------*/
@@ -63,7 +66,12 @@ static int msglevel = MSG_LEVEL_INFO;
  * Return Value: true if packet duplicate; otherwise false
  *
  */
+<<<<<<< HEAD
 bool ROUTEbRelay(PSDevice pDevice, unsigned char *pbySkbData, unsigned int uDataLen, unsigned int uNodeIndex)
+=======
+bool ROUTEbRelay(struct vnt_private *pDevice, unsigned char *pbySkbData,
+		 unsigned int uDataLen, unsigned int uNodeIndex)
+>>>>>>> v3.18
 {
 	PSMgmtObject    pMgmt = pDevice->pMgmt;
 	PSTxDesc        pHeadTD, pLastTD;
@@ -78,7 +86,11 @@ bool ROUTEbRelay(PSDevice pDevice, unsigned char *pbySkbData, unsigned int uData
 	unsigned char *pbyBSSID;
 
 	if (AVAIL_TD(pDevice, TYPE_AC0DMA) <= 0) {
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Relay can't allocate TD1..\n");
+=======
+		pr_debug("Relay can't allocate TD1..\n");
+>>>>>>> v3.18
 		return false;
 	}
 
@@ -86,6 +98,7 @@ bool ROUTEbRelay(PSDevice pDevice, unsigned char *pbySkbData, unsigned int uData
 
 	pHeadTD->m_td1TD1.byTCR = (TCR_EDP | TCR_STP);
 
+<<<<<<< HEAD
 	memcpy(pDevice->sTxEthHeader.abyDstAddr, (unsigned char *)pbySkbData, ETH_HLEN);
 
 	cbFrameBodySize = uDataLen - ETH_HLEN;
@@ -93,17 +106,35 @@ bool ROUTEbRelay(PSDevice pDevice, unsigned char *pbySkbData, unsigned int uData
 	if (ntohs(pDevice->sTxEthHeader.wType) > ETH_DATA_LEN) {
 		cbFrameBodySize += 8;
 	}
+=======
+	memcpy(pDevice->sTxEthHeader.abyDstAddr, pbySkbData, ETH_HLEN);
+
+	cbFrameBodySize = uDataLen - ETH_HLEN;
+
+	if (ntohs(pDevice->sTxEthHeader.wType) > ETH_DATA_LEN)
+		cbFrameBodySize += 8;
+>>>>>>> v3.18
 
 	if (pDevice->bEncryptionEnable == true) {
 		bNeedEncryption = true;
 
 		// get group key
 		pbyBSSID = pDevice->abyBroadcastAddr;
+<<<<<<< HEAD
 		if (KeybGetTransmitKey(&(pDevice->sKey), pbyBSSID, GROUP_KEY, &pTransmitKey) == false) {
 			pTransmitKey = NULL;
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_DEBUG "KEY is NULL. [%d]\n", pDevice->pMgmt->eCurrMode);
 		} else {
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_DEBUG "Get GTK.\n");
+=======
+		if (KeybGetTransmitKey(&(pDevice->sKey), pbyBSSID,
+		    GROUP_KEY, &pTransmitKey) == false) {
+			pTransmitKey = NULL;
+			pr_debug("KEY is NULL. [%d]\n",
+				 pDevice->pMgmt->eCurrMode);
+		} else {
+			pr_debug("Get GTK\n");
+>>>>>>> v3.18
 		}
 	}
 
@@ -117,6 +148,7 @@ bool ROUTEbRelay(PSDevice pDevice, unsigned char *pbySkbData, unsigned int uData
 			pTransmitKey->wTSC15_0 = pMgmt->sNodeDBTable[uNodeIndex].wTSC15_0;
 			memcpy(pTransmitKey->abyKey,
 			       &pMgmt->sNodeDBTable[uNodeIndex].abyWepKey[0],
+<<<<<<< HEAD
 			       pTransmitKey->uKeyLength
 );
 		}
@@ -136,6 +168,26 @@ bool ROUTEbRelay(PSDevice pDevice, unsigned char *pbySkbData, unsigned int uData
 			} else {
 				pDevice->wCurrentRate = (unsigned short)pDevice->uConnectionRate;
 			}
+=======
+			       pTransmitKey->uKeyLength);
+		}
+	}
+
+	uMACfragNum = cbGetFragCount(pDevice, pTransmitKey,
+				     cbFrameBodySize, &pDevice->sTxEthHeader);
+
+	if (uMACfragNum > AVAIL_TD(pDevice, TYPE_AC0DMA))
+		return false;
+
+	byPktType = pDevice->byPacketType;
+
+	if (pDevice->bFixRate) {
+		if (pDevice->eCurrentPHYType == PHY_TYPE_11B) {
+			if (pDevice->uConnectionRate >= RATE_11M)
+				pDevice->wCurrentRate = RATE_11M;
+			else
+				pDevice->wCurrentRate = pDevice->uConnectionRate;
+>>>>>>> v3.18
 		} else {
 			if ((pDevice->eCurrentPHYType == PHY_TYPE_11A) &&
 			    (pDevice->uConnectionRate <= RATE_6M)) {
@@ -144,7 +196,11 @@ bool ROUTEbRelay(PSDevice pDevice, unsigned char *pbySkbData, unsigned int uData
 				if (pDevice->uConnectionRate >= RATE_54M)
 					pDevice->wCurrentRate = RATE_54M;
 				else
+<<<<<<< HEAD
 					pDevice->wCurrentRate = (unsigned short)pDevice->uConnectionRate;
+=======
+					pDevice->wCurrentRate = pDevice->uConnectionRate;
+>>>>>>> v3.18
 			}
 		}
 	} else {
@@ -154,12 +210,20 @@ bool ROUTEbRelay(PSDevice pDevice, unsigned char *pbySkbData, unsigned int uData
 	if (pDevice->wCurrentRate <= RATE_11M)
 		byPktType = PK_TYPE_11B;
 
+<<<<<<< HEAD
 	vGenerateFIFOHeader(pDevice, byPktType, pDevice->pbyTmpBuff, bNeedEncryption,
 			    cbFrameBodySize, TYPE_AC0DMA, pHeadTD,
 			    &pDevice->sTxEthHeader, pbySkbData, pTransmitKey, uNodeIndex,
 			    &uMACfragNum,
 			    &cbHeaderSize
 );
+=======
+	vGenerateFIFOHeader(pDevice, byPktType, pDevice->pbyTmpBuff,
+			    bNeedEncryption, cbFrameBodySize, TYPE_AC0DMA,
+			    pHeadTD, &pDevice->sTxEthHeader, pbySkbData,
+			    pTransmitKey, uNodeIndex, &uMACfragNum,
+			    &cbHeaderSize);
+>>>>>>> v3.18
 
 	if (MACbIsRegBitsOn(pDevice->PortOffset, MAC_REG_PSCTL, PSCTL_PS)) {
 		// Disable PS
@@ -179,7 +243,11 @@ bool ROUTEbRelay(PSDevice pDevice, unsigned char *pbySkbData, unsigned int uData
 		pHeadTD = pHeadTD->next;
 	}
 
+<<<<<<< HEAD
 	pLastTD->pTDInfo->skb = 0;
+=======
+	pLastTD->pTDInfo->skb = NULL;
+>>>>>>> v3.18
 	pLastTD->pTDInfo->byFlags = 0;
 
 	pDevice->apCurrTD[TYPE_AC0DMA] = pHeadTD;

@@ -11,6 +11,10 @@
  */
 
 #include <linux/linkage.h>
+<<<<<<< HEAD
+=======
+#include <asm/assembler.h>
+>>>>>>> v3.18
 
 #ifdef __ARMEB__
 #define xh r0
@@ -31,7 +35,11 @@ ENTRY(__ucmpdi2)
 	movlo	r0, #0
 	moveq	r0, #1
 	movhi	r0, #2
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 
 ENDPROC(__ucmpdi2)
 
@@ -44,7 +52,11 @@ ENTRY(__aeabi_ulcmp)
 	movlo	r0, #-1
 	moveq	r0, #0
 	movhi	r0, #1
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 
 ENDPROC(__aeabi_ulcmp)
 

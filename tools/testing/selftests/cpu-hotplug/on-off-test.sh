@@ -11,6 +11,11 @@ prerequisite()
 		exit 0
 	fi
 
+<<<<<<< HEAD
+=======
+	taskset -p 01 $$
+
+>>>>>>> v3.18
 	SYSFS=`mount -t sysfs | head -1 | awk '{ print $3 }'`
 
 	if [ ! -d "$SYSFS" ]; then
@@ -22,6 +27,22 @@ prerequisite()
 		echo $msg cpu hotplug is not supported >&2
 		exit 0
 	fi
+<<<<<<< HEAD
+=======
+
+	echo "CPU online/offline summary:"
+	online_cpus=`cat $SYSFS/devices/system/cpu/online`
+	online_max=${online_cpus##*-}
+	echo -e "\t Cpus in online state: $online_cpus"
+
+	offline_cpus=`cat $SYSFS/devices/system/cpu/offline`
+	if [[ "a$offline_cpus" = "a" ]]; then
+		offline_cpus=0
+	else
+		offline_max=${offline_cpus##*-}
+	fi
+	echo -e "\t Cpus in offline state: $offline_cpus"
+>>>>>>> v3.18
 }
 
 #
@@ -113,15 +134,36 @@ offline_cpu_expect_fail()
 }
 
 error=-12
+<<<<<<< HEAD
 priority=0
 
 while getopts e:hp: opt; do
+=======
+allcpus=0
+priority=0
+online_cpus=0
+online_max=0
+offline_cpus=0
+offline_max=0
+
+while getopts e:ahp: opt; do
+>>>>>>> v3.18
 	case $opt in
 	e)
 		error=$OPTARG
 		;;
+<<<<<<< HEAD
 	h)
 		echo "Usage $0 [ -e errno ] [ -p notifier-priority ]"
+=======
+	a)
+		allcpus=1
+		;;
+	h)
+		echo "Usage $0 [ -a ] [ -e errno ] [ -p notifier-priority ]"
+		echo -e "\t default offline one cpu"
+		echo -e "\t run with -a option to offline all cpus"
+>>>>>>> v3.18
 		exit
 		;;
 	p)
@@ -138,6 +180,32 @@ fi
 prerequisite
 
 #
+<<<<<<< HEAD
+=======
+# Safe test (default) - offline and online one cpu
+#
+if [ $allcpus -eq 0 ]; then
+	echo "Limited scope test: one hotplug cpu"
+	echo -e "\t (leaves cpu in the original state):"
+	echo -e "\t online to offline to online: cpu $online_max"
+	offline_cpu_expect_success $online_max
+	online_cpu_expect_success $online_max
+
+	if [[ $offline_cpus -gt 0 ]]; then
+		echo -e "\t offline to online to offline: cpu $offline_max"
+		online_cpu_expect_success $offline_max
+		offline_cpu_expect_success $offline_max
+	fi
+	exit 0
+else
+	echo "Full scope test: all hotplug cpus"
+	echo -e "\t online all offline cpus"
+	echo -e "\t offline all online cpus"
+	echo -e "\t online all offline cpus"
+fi
+
+#
+>>>>>>> v3.18
 # Online all hot-pluggable CPUs
 #
 for cpu in `hotplaggable_offline_cpus`; do

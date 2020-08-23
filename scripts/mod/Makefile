@@ -15,8 +15,13 @@ endef
 quiet_cmd_offsets = GEN     $@
 define cmd_offsets
 	(set -e; \
+<<<<<<< HEAD
 	 echo "#ifndef __DEVICEVTABLE_OFFSETS_H__"; \
 	 echo "#define __DEVICEVTABLE_OFFSETS_H__"; \
+=======
+	 echo "#ifndef __DEVICETABLE_OFFSETS_H__"; \
+	 echo "#define __DEVICETABLE_OFFSETS_H__"; \
+>>>>>>> v3.18
 	 echo "/*"; \
 	 echo " * DO NOT MODIFY."; \
 	 echo " *"; \
@@ -29,6 +34,7 @@ define cmd_offsets
 	 echo "#endif" ) > $@
 endef
 
+<<<<<<< HEAD
 # We use internal kbuild rules to avoid the "is up to date" message from make
 scripts/mod/devicetable-offsets.s: scripts/mod/devicetable-offsets.c FORCE
 	$(Q)mkdir -p $(dir $@)
@@ -38,6 +44,12 @@ $(obj)/$(devicetable-offsets-file): scripts/mod/devicetable-offsets.s
 	$(call cmd,offsets)
 
 targets += $(devicetable-offsets-file)
+=======
+$(obj)/$(devicetable-offsets-file): $(obj)/devicetable-offsets.s
+	$(call if_changed,offsets)
+
+targets += $(devicetable-offsets-file) devicetable-offsets.s
+>>>>>>> v3.18
 
 # dependencies on generated files need to be listed explicitly
 

@@ -165,6 +165,10 @@ void __init setup_arch(char **cmdline_p)
 	strcpy(init_utsname()->machine, cris_machine_name);
 }
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PROC_FS
+>>>>>>> v3.18
 static void *c_start(struct seq_file *m, loff_t *pos)
 {
 	return *pos < nr_cpu_ids ? (void *)(int)(*pos + 1) : NULL;
@@ -188,6 +192,10 @@ const struct seq_operations cpuinfo_op = {
 	.stop  = c_stop,
 	.show  = show_cpuinfo,
 };
+<<<<<<< HEAD
+=======
+#endif /* CONFIG_PROC_FS */
+>>>>>>> v3.18
 
 static int __init topology_init(void)
 {

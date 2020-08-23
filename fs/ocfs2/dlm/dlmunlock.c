@@ -191,7 +191,13 @@ static enum dlm_status dlmunlock_common(struct dlm_ctxt *dlm,
 				     DLM_UNLOCK_CLEAR_CONVERT_TYPE);
 		} else if (status == DLM_RECOVERING ||
 			   status == DLM_MIGRATING ||
+<<<<<<< HEAD
 			   status == DLM_FORWARD) {
+=======
+			   status == DLM_FORWARD ||
+			   status == DLM_NOLOCKMGR
+			   ) {
+>>>>>>> v3.18
 			/* must clear the actions because this unlock
 			 * is about to be retried.  cannot free or do
 			 * any list manipulation. */
@@ -200,7 +206,12 @@ static enum dlm_status dlmunlock_common(struct dlm_ctxt *dlm,
 			     res->lockname.name,
 			     status==DLM_RECOVERING?"recovering":
 			     (status==DLM_MIGRATING?"migrating":
+<<<<<<< HEAD
 			      "forward"));
+=======
+				(status == DLM_FORWARD ? "forward" :
+						"nolockmanager")));
+>>>>>>> v3.18
 			actions = 0;
 		}
 		if (flags & LKM_CANCEL)
@@ -364,7 +375,14 @@ static enum dlm_status dlm_send_remote_unlock_request(struct dlm_ctxt *dlm,
 			 * updated state to the recovery master.  this thread
 			 * just needs to finish out the operation and call
 			 * the unlockast. */
+<<<<<<< HEAD
 			ret = DLM_NORMAL;
+=======
+			if (dlm_is_node_dead(dlm, owner))
+				ret = DLM_NORMAL;
+			else
+				ret = DLM_NOLOCKMGR;
+>>>>>>> v3.18
 		} else {
 			/* something bad.  this will BUG in ocfs2 */
 			ret = dlm_err_to_dlm_status(tmpret);
@@ -388,7 +406,10 @@ int dlm_unlock_lock_handler(struct o2net_msg *msg, u32 len, void *data,
 	struct dlm_ctxt *dlm = data;
 	struct dlm_unlock_lock *unlock = (struct dlm_unlock_lock *)msg->buf;
 	struct dlm_lock_resource *res = NULL;
+<<<<<<< HEAD
 	struct list_head *iter;
+=======
+>>>>>>> v3.18
 	struct dlm_lock *lock = NULL;
 	enum dlm_status status = DLM_NORMAL;
 	int found = 0, i;
@@ -458,8 +479,12 @@ int dlm_unlock_lock_handler(struct o2net_msg *msg, u32 len, void *data,
 	}
 
 	for (i=0; i<3; i++) {
+<<<<<<< HEAD
 		list_for_each(iter, queue) {
 			lock = list_entry(iter, struct dlm_lock, list);
+=======
+		list_for_each_entry(lock, queue, list) {
+>>>>>>> v3.18
 			if (lock->ml.cookie == unlock->cookie &&
 		    	    lock->ml.node == unlock->node_idx) {
 				dlm_lock_get(lock);
@@ -640,7 +665,13 @@ retry:
 
 	if (status == DLM_RECOVERING ||
 	    status == DLM_MIGRATING ||
+<<<<<<< HEAD
 	    status == DLM_FORWARD) {
+=======
+	    status == DLM_FORWARD ||
+	    status == DLM_NOLOCKMGR) {
+
+>>>>>>> v3.18
 		/* We want to go away for a tiny bit to allow recovery
 		 * / migration to complete on this resource. I don't
 		 * know of any wait queue we could sleep on as this
@@ -652,7 +683,11 @@ retry:
 		msleep(50);
 
 		mlog(0, "retrying unlock due to pending recovery/"
+<<<<<<< HEAD
 		     "migration/in-progress\n");
+=======
+		     "migration/in-progress/reconnect\n");
+>>>>>>> v3.18
 		goto retry;
 	}
 

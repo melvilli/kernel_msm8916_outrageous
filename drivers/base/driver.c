@@ -15,6 +15,10 @@
 #include <linux/errno.h>
 #include <linux/slab.h>
 #include <linux/string.h>
+<<<<<<< HEAD
+=======
+#include <linux/sysfs.h>
+>>>>>>> v3.18
 #include "base.h"
 
 static struct device *next_device(struct klist_iter *i)
@@ -123,6 +127,7 @@ void driver_remove_file(struct device_driver *drv,
 }
 EXPORT_SYMBOL_GPL(driver_remove_file);
 
+<<<<<<< HEAD
 static int driver_add_groups(struct device_driver *drv,
 			     const struct attribute_group **groups)
 {
@@ -151,6 +156,18 @@ static void driver_remove_groups(struct device_driver *drv,
 	if (groups)
 		for (i = 0; groups[i]; i++)
 			sysfs_remove_group(&drv->p->kobj, groups[i]);
+=======
+int driver_add_groups(struct device_driver *drv,
+		      const struct attribute_group **groups)
+{
+	return sysfs_create_groups(&drv->p->kobj, groups);
+}
+
+void driver_remove_groups(struct device_driver *drv,
+			  const struct attribute_group **groups)
+{
+	sysfs_remove_groups(&drv->p->kobj, groups);
+>>>>>>> v3.18
 }
 
 /**

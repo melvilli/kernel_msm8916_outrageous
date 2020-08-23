@@ -9,7 +9,11 @@ Supported chips:
                http://www.winbond-usa.com/products/winbond_products/pdfs/PCIC/W83L785TS-S.pdf
 
 Authors:
+<<<<<<< HEAD
         Jean Delvare <khali@linux-fr.org>
+=======
+        Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 
 Description
 -----------

@@ -244,7 +244,11 @@ static void juli_akm_set_rate_val(struct snd_akm4xxx *ak, unsigned int rate)
 	/* AK5385 first, since it requires cold reset affecting both codecs */
 	old_gpio = ice->gpio.get_data(ice);
 	new_gpio =  (old_gpio & ~GPIO_AK5385A_MASK) | ak5385_pins;
+<<<<<<< HEAD
 	/* printk(KERN_DEBUG "JULI - ak5385 set_rate_val: new gpio 0x%x\n",
+=======
+	/* dev_dbg(ice->card->dev, "JULI - ak5385 set_rate_val: new gpio 0x%x\n",
+>>>>>>> v3.18
 		new_gpio); */
 	ice->gpio.set_data(ice, new_gpio);
 
@@ -344,7 +348,11 @@ static int juli_mute_put(struct snd_kcontrol *kcontrol,
 			new_gpio =  old_gpio &
 				~((unsigned int) kcontrol->private_value);
 	}
+<<<<<<< HEAD
 	/* printk(KERN_DEBUG
+=======
+	/* dev_dbg(ice->card->dev,
+>>>>>>> v3.18
 		"JULI - mute/unmute: control_value: 0x%x, old_gpio: 0x%x, "
 		"new_gpio 0x%x\n",
 		(unsigned int)ucontrol->value.integer.value[0], old_gpio,
@@ -439,9 +447,15 @@ static void add_slaves(struct snd_card *card,
 {
 	for (; *list; list++) {
 		struct snd_kcontrol *slave = ctl_find(card, *list);
+<<<<<<< HEAD
 		/* printk(KERN_DEBUG "add_slaves - %s\n", *list); */
 		if (slave) {
 			/* printk(KERN_DEBUG "slave %s found\n", *list); */
+=======
+		/* dev_dbg(card->dev, "add_slaves - %s\n", *list); */
+		if (slave) {
+			/* dev_dbg(card->dev, "slave %s found\n", *list); */
+>>>>>>> v3.18
 			snd_ctl_add_slave(master, slave);
 		}
 	}
@@ -536,7 +550,11 @@ static void juli_set_rate(struct snd_ice1712 *ice, unsigned int rate)
 
 	old = ice->gpio.get_data(ice);
 	new =  (old & ~GPIO_RATE_MASK) | get_gpio_val(rate);
+<<<<<<< HEAD
 	/* printk(KERN_DEBUG "JULI - set_rate: old %x, new %x\n",
+=======
+	/* dev_dbg(ice->card->dev, "JULI - set_rate: old %x, new %x\n",
+>>>>>>> v3.18
 			old & GPIO_RATE_MASK,
 			new & GPIO_RATE_MASK); */
 
@@ -573,7 +591,11 @@ static void juli_ak4114_change(struct ak4114 *ak4114, unsigned char c0,
 	if (ice->is_spdif_master(ice) && c1) {
 		/* only for SPDIF master mode, rate was changed */
 		rate = snd_ak4114_external_rate(ak4114);
+<<<<<<< HEAD
 		/* printk(KERN_DEBUG "ak4114 - input rate changed to %d\n",
+=======
+		/* dev_dbg(ice->card->dev, "ak4114 - input rate changed to %d\n",
+>>>>>>> v3.18
 				rate); */
 		juli_akm_set_rate_val(ice->akm, rate);
 	}
@@ -628,7 +650,11 @@ static int juli_init(struct snd_ice1712 *ice)
 #endif
 
 	if (spec->analog) {
+<<<<<<< HEAD
 		printk(KERN_INFO "juli@: analog I/O detected\n");
+=======
+		dev_info(ice->card->dev, "juli@: analog I/O detected\n");
+>>>>>>> v3.18
 		ice->num_total_dacs = 2;
 		ice->num_total_adcs = 2;
 

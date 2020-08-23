@@ -62,10 +62,15 @@ extern user_regset_set_fn fpregs_set, xfpregs_set, fpregs_soft_set,
 #define xstateregs_active	fpregs_active
 
 #ifdef CONFIG_MATH_EMULATION
+<<<<<<< HEAD
 # define HAVE_HWFP		(boot_cpu_data.hard_math)
 extern void finit_soft_fpu(struct i387_soft_struct *soft);
 #else
 # define HAVE_HWFP		1
+=======
+extern void finit_soft_fpu(struct i387_soft_struct *soft);
+#else
+>>>>>>> v3.18
 static inline void finit_soft_fpu(struct i387_soft_struct *soft) {}
 #endif
 
@@ -89,22 +94,38 @@ static inline int is_x32_frame(void)
 
 static __always_inline __pure bool use_eager_fpu(void)
 {
+<<<<<<< HEAD
 	return static_cpu_has(X86_FEATURE_EAGER_FPU);
+=======
+	return static_cpu_has_safe(X86_FEATURE_EAGER_FPU);
+>>>>>>> v3.18
 }
 
 static __always_inline __pure bool use_xsaveopt(void)
 {
+<<<<<<< HEAD
 	return static_cpu_has(X86_FEATURE_XSAVEOPT);
+=======
+	return static_cpu_has_safe(X86_FEATURE_XSAVEOPT);
+>>>>>>> v3.18
 }
 
 static __always_inline __pure bool use_xsave(void)
 {
+<<<<<<< HEAD
 	return static_cpu_has(X86_FEATURE_XSAVE);
+=======
+	return static_cpu_has_safe(X86_FEATURE_XSAVE);
+>>>>>>> v3.18
 }
 
 static __always_inline __pure bool use_fxsr(void)
 {
+<<<<<<< HEAD
         return static_cpu_has(X86_FEATURE_FXSR);
+=======
+	return static_cpu_has_safe(X86_FEATURE_FXSR);
+>>>>>>> v3.18
 }
 
 static inline void fx_finit(struct i387_fxsave_struct *fx)
@@ -295,7 +316,11 @@ static inline int restore_fpu_checking(struct task_struct *tsk)
 	/* AMD K7/K8 CPUs don't save/restore FDP/FIP/FOP unless an exception
 	   is pending.  Clear the x87 state here by setting it to fixed
 	   values. "m" is a random variable that should be in L1 */
+<<<<<<< HEAD
 	if (unlikely(static_cpu_has(X86_FEATURE_FXSAVE_LEAK))) {
+=======
+	if (unlikely(static_cpu_has_bug_safe(X86_BUG_FXSAVE_LEAK))) {
+>>>>>>> v3.18
 		asm volatile(
 			"fnclex\n\t"
 			"emms\n\t"
@@ -368,9 +393,15 @@ static inline void drop_fpu(struct task_struct *tsk)
 	 * Forget coprocessor state..
 	 */
 	preempt_disable();
+<<<<<<< HEAD
 	tsk->fpu_counter = 0;
 	__drop_fpu(tsk);
 	clear_stopped_child_used_math(tsk);
+=======
+	tsk->thread.fpu_counter = 0;
+	__drop_fpu(tsk);
+	clear_used_math();
+>>>>>>> v3.18
 	preempt_enable();
 }
 
@@ -427,7 +458,11 @@ static inline fpu_switch_t switch_fpu_prepare(struct task_struct *old, struct ta
 	 * or if the past 5 consecutive context-switches used math.
 	 */
 	fpu.preload = tsk_used_math(new) && (use_eager_fpu() ||
+<<<<<<< HEAD
 					     new->fpu_counter > 5);
+=======
+					     new->thread.fpu_counter > 5);
+>>>>>>> v3.18
 	if (__thread_has_fpu(old)) {
 		if (!__save_init_fpu(old))
 			cpu = ~0;
@@ -436,16 +471,27 @@ static inline fpu_switch_t switch_fpu_prepare(struct task_struct *old, struct ta
 
 		/* Don't change CR0.TS if we just switch! */
 		if (fpu.preload) {
+<<<<<<< HEAD
 			new->fpu_counter++;
+=======
+			new->thread.fpu_counter++;
+>>>>>>> v3.18
 			__thread_set_has_fpu(new);
 			prefetch(new->thread.fpu.state);
 		} else if (!use_eager_fpu())
 			stts();
 	} else {
+<<<<<<< HEAD
 		old->fpu_counter = 0;
 		old->thread.fpu.last_cpu = ~0;
 		if (fpu.preload) {
 			new->fpu_counter++;
+=======
+		old->thread.fpu_counter = 0;
+		old->thread.fpu.last_cpu = ~0;
+		if (fpu.preload) {
+			new->thread.fpu_counter++;
+>>>>>>> v3.18
 			if (!use_eager_fpu() && fpu_lazy_restore(new, cpu))
 				fpu.preload = 0;
 			else
@@ -510,9 +556,18 @@ static inline void user_fpu_begin(void)
 
 static inline void __save_fpu(struct task_struct *tsk)
 {
+<<<<<<< HEAD
 	if (use_xsave())
 		xsave_state(&tsk->thread.fpu.state->xsave, -1);
 	else
+=======
+	if (use_xsave()) {
+		if (unlikely(system_state == SYSTEM_BOOTING))
+			xsave_state_booting(&tsk->thread.fpu.state->xsave, -1);
+		else
+			xsave_state(&tsk->thread.fpu.state->xsave, -1);
+	} else
+>>>>>>> v3.18
 		fpu_fxsave(&tsk->thread.fpu);
 }
 

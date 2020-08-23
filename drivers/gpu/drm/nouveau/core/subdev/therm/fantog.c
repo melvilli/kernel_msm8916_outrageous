@@ -97,6 +97,16 @@ nouveau_fantog_create(struct nouveau_therm *therm, struct dcb_gpio_func *func)
 {
 	struct nouveau_therm_priv *tpriv = (void *)therm;
 	struct nouveau_fantog_priv *priv;
+<<<<<<< HEAD
+=======
+	int ret;
+
+	if (therm->pwm_ctrl) {
+		ret = therm->pwm_ctrl(therm, func->line, false);
+		if (ret)
+			return ret;
+	}
+>>>>>>> v3.18
 
 	priv = kzalloc(sizeof(*priv), GFP_KERNEL);
 	tpriv->fan = &priv->base;

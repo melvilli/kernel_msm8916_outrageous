@@ -84,14 +84,26 @@
  *	processing.  <cp> is a pointer to the buffer of input
  *	character received by the device.  <fp> is a pointer to a
  *	pointer of flag bytes which indicate whether a character was
+<<<<<<< HEAD
  *	received with a parity error, etc.
+=======
+ *	received with a parity error, etc. <fp> may be NULL to indicate
+ *	all data received is TTY_NORMAL.
+>>>>>>> v3.18
  *
  * void	(*write_wakeup)(struct tty_struct *);
  *
  *	This function is called by the low-level tty driver to signal
  *	that line discpline should try to send more characters to the
  *	low-level driver for transmission.  If the line discpline does
+<<<<<<< HEAD
  *	not have any more data to send, it can just return.
+=======
+ *	not have any more data to send, it can just return. If the line
+ *	discipline does have some data to send, please arise a tasklet
+ *	or workqueue to do the real data transfer. Do not send data in
+ *	this hook, it may leads to a deadlock.
+>>>>>>> v3.18
  *
  * int (*hangup)(struct tty_struct *)
  *
@@ -100,15 +112,41 @@
  *	seek to perform this action quickly but should wait until
  *	any pending driver I/O is completed.
  *
+<<<<<<< HEAD
+=======
+ * void (*fasync)(struct tty_struct *, int on)
+ *
+ *	Notify line discipline when signal-driven I/O is enabled or
+ *	disabled.
+ *
+>>>>>>> v3.18
  * void (*dcd_change)(struct tty_struct *tty, unsigned int status)
  *
  *	Tells the discipline that the DCD pin has changed its status.
  *	Used exclusively by the N_PPS (Pulse-Per-Second) line discipline.
+<<<<<<< HEAD
+=======
+ *
+ * int	(*receive_buf2)(struct tty_struct *, const unsigned char *cp,
+ *			char *fp, int count);
+ *
+ *	This function is called by the low-level tty driver to send
+ *	characters received by the hardware to the line discpline for
+ *	processing.  <cp> is a pointer to the buffer of input
+ *	character received by the device.  <fp> is a pointer to a
+ *	pointer of flag bytes which indicate whether a character was
+ *	received with a parity error, etc. <fp> may be NULL to indicate
+ *	all data received is TTY_NORMAL.
+ *	If assigned, prefer this function for automatic flow control.
+>>>>>>> v3.18
  */
 
 #include <linux/fs.h>
 #include <linux/wait.h>
+<<<<<<< HEAD
 #include <linux/wait.h>
+=======
+>>>>>>> v3.18
 
 
 /*
@@ -189,6 +227,12 @@ struct tty_ldisc_ops {
 			       char *fp, int count);
 	void	(*write_wakeup)(struct tty_struct *);
 	void	(*dcd_change)(struct tty_struct *, unsigned int);
+<<<<<<< HEAD
+=======
+	void	(*fasync)(struct tty_struct *tty, int on);
+	int	(*receive_buf2)(struct tty_struct *, const unsigned char *cp,
+				char *fp, int count);
+>>>>>>> v3.18
 
 	struct  module *owner;
 

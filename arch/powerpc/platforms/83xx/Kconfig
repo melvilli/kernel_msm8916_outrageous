@@ -99,7 +99,10 @@ config SBC834x
 config ASP834x
 	bool "Analogue & Micro ASP 834x"
 	select PPC_MPC834x
+<<<<<<< HEAD
 	select REDBOOT
+=======
+>>>>>>> v3.18
 	help
 	  This enables support for the Analogue & Micro ASP 83xx
 	  board.

@@ -44,12 +44,21 @@
  *
  */
 
+<<<<<<< HEAD
 typedef u32 rtas_arg_t;
 
 struct rtas_args {
 	u32 token;
 	u32 nargs;
 	u32 nret; 
+=======
+typedef __be32 rtas_arg_t;
+
+struct rtas_args {
+	__be32 token;
+	__be32 nargs;
+	__be32 nret; 
+>>>>>>> v3.18
 	rtas_arg_t args[16];
 	rtas_arg_t *rets;     /* Pointer to return values in args[]. */
 };  
@@ -150,6 +159,7 @@ struct rtas_suspend_me_data {
 #define RTAS_VECTOR_EXTERNAL_INTERRUPT	0x500
 
 struct rtas_error_log {
+<<<<<<< HEAD
 	unsigned long version:8;		/* Architectural version */
 	unsigned long severity:3;		/* Severity level of error */
 	unsigned long disposition:2;		/* Degree of recovery */
@@ -163,6 +173,55 @@ struct rtas_error_log {
 						/* Variable length.      */
 };
 
+=======
+	/* Byte 0 */
+	uint8_t		byte0;			/* Architectural version */
+
+	/* Byte 1 */
+	uint8_t		byte1;
+	/* XXXXXXXX
+	 * XXX		3: Severity level of error
+	 *    XX	2: Degree of recovery
+	 *      X	1: Extended log present?
+	 *       XX	2: Reserved
+	 */
+
+	/* Byte 2 */
+	uint8_t		byte2;
+	/* XXXXXXXX
+	 * XXXX		4: Initiator of event
+	 *     XXXX	4: Target of failed operation
+	 */
+	uint8_t		byte3;			/* General event or error*/
+	__be32		extended_log_length;	/* length in bytes */
+	unsigned char	buffer[1];		/* Start of extended log */
+						/* Variable length.      */
+};
+
+static inline uint8_t rtas_error_severity(const struct rtas_error_log *elog)
+{
+	return (elog->byte1 & 0xE0) >> 5;
+}
+
+static inline uint8_t rtas_error_disposition(const struct rtas_error_log *elog)
+{
+	return (elog->byte1 & 0x18) >> 3;
+}
+
+static inline uint8_t rtas_error_extended(const struct rtas_error_log *elog)
+{
+	return (elog->byte1 & 0x04) >> 2;
+}
+
+#define rtas_error_type(x)	((x)->byte3)
+
+static inline
+uint32_t rtas_error_extended_log_length(const struct rtas_error_log *elog)
+{
+	return be32_to_cpu(elog->extended_log_length);
+}
+
+>>>>>>> v3.18
 #define RTAS_V6EXT_LOG_FORMAT_EVENT_LOG	14
 
 #define RTAS_V6EXT_COMPANY_ID_IBM	(('I' << 24) | ('B' << 16) | ('M' << 8))
@@ -172,6 +231,7 @@ struct rtas_error_log {
  */
 struct rtas_ext_event_log_v6 {
 	/* Byte 0 */
+<<<<<<< HEAD
 	uint32_t log_valid:1;		/* 1:Log valid */
 	uint32_t unrecoverable_error:1;	/* 1:Unrecoverable error */
 	uint32_t recoverable_error:1;	/* 1:recoverable (correctable	*/
@@ -198,6 +258,37 @@ struct rtas_ext_event_log_v6 {
 	uint8_t reserved[8];		/* reserved */
 	/* Byte 12-15 */
 	uint32_t company_id;		/* Company ID of the company	*/
+=======
+	uint8_t byte0;
+	/* XXXXXXXX
+	 * X		1: Log valid
+	 *  X		1: Unrecoverable error
+	 *   X		1: Recoverable (correctable or successfully retried)
+	 *    X		1: Bypassed unrecoverable error (degraded operation)
+	 *     X	1: Predictive error
+	 *      X	1: "New" log (always 1 for data returned from RTAS)
+	 *       X	1: Big Endian
+	 *        X	1: Reserved
+	 */
+
+	/* Byte 1 */
+	uint8_t byte1;			/* reserved */
+
+	/* Byte 2 */
+	uint8_t byte2;
+	/* XXXXXXXX
+	 * X		1: Set to 1 (indicating log is in PowerPC format)
+	 *  XXX		3: Reserved
+	 *     XXXX	4: Log format used for bytes 12-2047
+	 */
+
+	/* Byte 3 */
+	uint8_t byte3;			/* reserved */
+	/* Byte 4-11 */
+	uint8_t reserved[8];		/* reserved */
+	/* Byte 12-15 */
+	__be32  company_id;		/* Company ID of the company	*/
+>>>>>>> v3.18
 					/* that defines the format for	*/
 					/* the vendor specific log type	*/
 	/* Byte 16-end of log */
@@ -205,6 +296,21 @@ struct rtas_ext_event_log_v6 {
 					/* Variable length.		*/
 };
 
+<<<<<<< HEAD
+=======
+static
+inline uint8_t rtas_ext_event_log_format(struct rtas_ext_event_log_v6 *ext_log)
+{
+	return ext_log->byte2 & 0x0F;
+}
+
+static
+inline uint32_t rtas_ext_event_company_id(struct rtas_ext_event_log_v6 *ext_log)
+{
+	return be32_to_cpu(ext_log->company_id);
+}
+
+>>>>>>> v3.18
 /* pSeries event log format */
 
 /* Two bytes ASCII section IDs */
@@ -227,6 +333,7 @@ struct rtas_ext_event_log_v6 {
 
 /* Vendor specific Platform Event Log Format, Version 6, section header */
 struct pseries_errorlog {
+<<<<<<< HEAD
 	uint16_t id;			/* 0x00 2-byte ASCII section ID	*/
 	uint16_t length;		/* 0x02 Section length in bytes	*/
 	uint8_t version;		/* 0x04 Section version		*/
@@ -235,6 +342,28 @@ struct pseries_errorlog {
 	uint8_t data[];			/* 0x08 Start of section data	*/
 };
 
+=======
+	__be16 id;			/* 0x00 2-byte ASCII section ID	*/
+	__be16 length;			/* 0x02 Section length in bytes	*/
+	uint8_t version;		/* 0x04 Section version		*/
+	uint8_t subtype;		/* 0x05 Section subtype		*/
+	__be16 creator_component;	/* 0x06 Creator component ID	*/
+	uint8_t data[];			/* 0x08 Start of section data	*/
+};
+
+static
+inline uint16_t pseries_errorlog_id(struct pseries_errorlog *sect)
+{
+	return be16_to_cpu(sect->id);
+}
+
+static
+inline uint16_t pseries_errorlog_length(struct pseries_errorlog *sect)
+{
+	return be16_to_cpu(sect->length);
+}
+
+>>>>>>> v3.18
 struct pseries_errorlog *get_pseries_errorlog(struct rtas_error_log *log,
 					      uint16_t section_id);
 
@@ -255,7 +384,10 @@ extern void rtas_power_off(void);
 extern void rtas_halt(void);
 extern void rtas_os_term(char *str);
 extern int rtas_get_sensor(int sensor, int index, int *state);
+<<<<<<< HEAD
 extern int rtas_get_sensor_fast(int sensor, int index, int *state);
+=======
+>>>>>>> v3.18
 extern int rtas_get_power_level(int powerdomain, int *level);
 extern int rtas_set_power_level(int powerdomain, int level, int *setlevel);
 extern bool rtas_indicator_present(int token, int *maxindex);
@@ -284,6 +416,10 @@ extern void pSeries_log_error(char *buf, unsigned int err_type, int fatal);
 
 #ifdef CONFIG_PPC_PSERIES
 extern int pseries_devicetree_update(s32 scope);
+<<<<<<< HEAD
+=======
+extern void post_mobility_fixup(void);
+>>>>>>> v3.18
 #endif
 
 #ifdef CONFIG_PPC_RTAS_DAEMON
@@ -351,8 +487,13 @@ static inline u32 rtas_config_addr(int busno, int devfn, int reg)
 			(devfn << 8) | (reg & 0xff);
 }
 
+<<<<<<< HEAD
 extern void __cpuinit rtas_give_timebase(void);
 extern void __cpuinit rtas_take_timebase(void);
+=======
+extern void rtas_give_timebase(void);
+extern void rtas_take_timebase(void);
+>>>>>>> v3.18
 
 #ifdef CONFIG_PPC_RTAS
 static inline int page_is_rtas_user_buf(unsigned long pfn)

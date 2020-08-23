@@ -32,7 +32,11 @@ static DEFINE_PER_CPU(struct clock_event_device, local_clockevent);
  */
 void local_timer_interrupt(void)
 {
+<<<<<<< HEAD
 	struct clock_event_device *clk = &__get_cpu_var(local_clockevent);
+=======
+	struct clock_event_device *clk = this_cpu_ptr(&local_clockevent);
+>>>>>>> v3.18
 
 	irq_enter();
 	clk->event_handler(clk);

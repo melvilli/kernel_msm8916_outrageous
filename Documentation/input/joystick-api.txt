@@ -16,14 +16,22 @@ joystick.
 
 By default, the device is opened in blocking mode.
 
+<<<<<<< HEAD
 	int fd = open ("/dev/js0", O_RDONLY);
+=======
+	int fd = open ("/dev/input/js0", O_RDONLY);
+>>>>>>> v3.18
 
 
 2. Event Reading
 ~~~~~~~~~~~~~~~~
 
 	struct js_event e;
+<<<<<<< HEAD
 	read (fd, &e, sizeof(struct js_event));
+=======
+	read (fd, &e, sizeof(e));
+>>>>>>> v3.18
 
 where js_event is defined as
 
@@ -34,8 +42,13 @@ where js_event is defined as
 		__u8 number;    /* axis/button number */
 	};
 
+<<<<<<< HEAD
 If the read is successful, it will return sizeof(struct js_event), unless
 you wanted to read more than one event per read as described in section 3.1.
+=======
+If the read is successful, it will return sizeof(e), unless you wanted to read
+more than one event per read as described in section 3.1.
+>>>>>>> v3.18
 
 
 2.1 js_event.type
@@ -99,9 +112,15 @@ may work well if you handle JS_EVENT_INIT events separately,
 
 	if ((js_event.type & ~JS_EVENT_INIT) == JS_EVENT_BUTTON) {
 		if (js_event.value)
+<<<<<<< HEAD
 	        	buttons_state |= (1 << js_event.number);
 	   	else
 	      		buttons_state &= ~(1 << js_event.number);
+=======
+			buttons_state |= (1 << js_event.number);
+		else
+			buttons_state &= ~(1 << js_event.number);
+>>>>>>> v3.18
 	}
 
 is much safer since it can't lose sync with the driver. As you would
@@ -144,6 +163,7 @@ all events on the queue (that is, until you get a -1).
 For example,
 
 	while (1) {
+<<<<<<< HEAD
 		while (read (fd, &e, sizeof(struct js_event)) > 0) {
 	        	process_event (e);
 	   	}
@@ -152,6 +172,16 @@ For example,
 	      		/* error */
 	   	}
 	   	/* do something interesting with processed events */
+=======
+		while (read (fd, &e, sizeof(e)) > 0) {
+			process_event (e);
+		}
+		/* EAGAIN is returned when the queue is empty */
+		if (errno != EAGAIN) {
+			/* error */
+		}
+		/* do something interesting with processed events */
+>>>>>>> v3.18
 	}
 
 One reason for emptying the queue is that if it gets full you'll start
@@ -181,7 +211,11 @@ at a time using the typical read(2) functionality. For that, you would
 replace the read above with something like
 
 	struct js_event mybuffer[0xff];
+<<<<<<< HEAD
 	int i = read (fd, mybuffer, sizeof(struct mybuffer));
+=======
+	int i = read (fd, mybuffer, sizeof(mybuffer));
+>>>>>>> v3.18
 
 In this case, read would return -1 if the queue was empty, or some
 other value in which the number of events read would be i /
@@ -269,9 +303,15 @@ The driver offers backward compatibility, though. Here's a quick summary:
 	struct JS_DATA_TYPE js;
 	while (1) {
 		if (read (fd, &js, JS_RETURN) != JS_RETURN) {
+<<<<<<< HEAD
 	      		/* error */
 	   	}
 	   	usleep (1000);
+=======
+			/* error */
+		}
+		usleep (1000);
+>>>>>>> v3.18
 	}
 
 As you can figure out from the example, the read returns immediately,

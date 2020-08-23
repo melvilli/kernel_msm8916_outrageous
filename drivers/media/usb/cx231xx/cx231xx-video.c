@@ -36,7 +36,10 @@
 #include <media/v4l2-common.h>
 #include <media/v4l2-ioctl.h>
 #include <media/v4l2-event.h>
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 #include <media/msp3400.h>
 #include <media/tuner.h>
 
@@ -209,7 +212,11 @@ static inline void get_next_buf(struct cx231xx_dmaqueue *dma_q,
 static inline int cx231xx_isoc_copy(struct cx231xx *dev, struct urb *urb)
 {
 	struct cx231xx_dmaqueue *dma_q = urb->context;
+<<<<<<< HEAD
 	int i, rc = 1;
+=======
+	int i;
+>>>>>>> v3.18
 	unsigned char *p_buffer;
 	u32 bytes_parsed = 0, buffer_size = 0;
 	u8 sav_eav = 0;
@@ -300,13 +307,20 @@ static inline int cx231xx_isoc_copy(struct cx231xx *dev, struct urb *urb)
 		bytes_parsed = 0;
 
 	}
+<<<<<<< HEAD
 	return rc;
+=======
+	return 1;
+>>>>>>> v3.18
 }
 
 static inline int cx231xx_bulk_copy(struct cx231xx *dev, struct urb *urb)
 {
 	struct cx231xx_dmaqueue *dma_q = urb->context;
+<<<<<<< HEAD
 	int rc = 1;
+=======
+>>>>>>> v3.18
 	unsigned char *p_buffer;
 	u32 bytes_parsed = 0, buffer_size = 0;
 	u8 sav_eav = 0;
@@ -380,7 +394,11 @@ static inline int cx231xx_bulk_copy(struct cx231xx *dev, struct urb *urb)
 		bytes_parsed = 0;
 
 	}
+<<<<<<< HEAD
 	return rc;
+=======
+	return 1;
+>>>>>>> v3.18
 }
 
 
@@ -887,7 +905,10 @@ static int vidioc_g_fmt_vid_cap(struct file *file, void *priv,
 	f->fmt.pix.colorspace = V4L2_COLORSPACE_SMPTE170M;
 
 	f->fmt.pix.field = V4L2_FIELD_INTERLACED;
+<<<<<<< HEAD
 	f->fmt.pix.priv = 0;
+=======
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -932,7 +953,10 @@ static int vidioc_try_fmt_vid_cap(struct file *file, void *priv,
 	f->fmt.pix.sizeimage = f->fmt.pix.bytesperline * height;
 	f->fmt.pix.colorspace = V4L2_COLORSPACE_SMPTE170M;
 	f->fmt.pix.field = V4L2_FIELD_INTERLACED;
+<<<<<<< HEAD
 	f->fmt.pix.priv = 0;
+=======
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -1010,7 +1034,11 @@ static int vidioc_s_std(struct file *file, void *priv, v4l2_std_id norm)
 	dev->width = 720;
 	dev->height = (dev->norm & V4L2_STD_625_50) ? 576 : 480;
 
+<<<<<<< HEAD
 	call_all(dev, core, s_std, dev->norm);
+=======
+	call_all(dev, video, s_std, dev->norm);
+>>>>>>> v3.18
 
 	/* We need to reset basic properties in the decoder related to
 	   resolution (since a standard change effects things like the number
@@ -1109,7 +1137,11 @@ int cx231xx_s_input(struct file *file, void *priv, unsigned int i)
 		/* There's a tuner, so reset the standard and put it on the
 		   last known frequency (since it was probably powered down
 		   until now */
+<<<<<<< HEAD
 		call_all(dev, core, s_std, dev->norm);
+=======
+		call_all(dev, video, s_std, dev->norm);
+>>>>>>> v3.18
 	}
 
 	return 0;
@@ -1228,6 +1260,7 @@ int cx231xx_s_frequency(struct file *file, void *priv,
 	return rc;
 }
 
+<<<<<<< HEAD
 int cx231xx_g_chip_ident(struct file *file, void *fh,
 			struct v4l2_dbg_chip_ident *chip)
 {
@@ -1236,11 +1269,39 @@ int cx231xx_g_chip_ident(struct file *file, void *fh,
 	if (chip->match.type == V4L2_CHIP_MATCH_HOST) {
 		if (v4l2_chip_match_host(&chip->match))
 			chip->ident = V4L2_IDENT_CX23100;
+=======
+#ifdef CONFIG_VIDEO_ADV_DEBUG
+
+int cx231xx_g_chip_info(struct file *file, void *fh,
+			struct v4l2_dbg_chip_info *chip)
+{
+	switch (chip->match.addr) {
+	case 0:	/* Cx231xx - internal registers */
+		return 0;
+	case 1:	/* AFE - read byte */
+		strlcpy(chip->name, "AFE (byte)", sizeof(chip->name));
+		return 0;
+	case 2:	/* Video Block - read byte */
+		strlcpy(chip->name, "Video (byte)", sizeof(chip->name));
+		return 0;
+	case 3:	/* I2S block - read byte */
+		strlcpy(chip->name, "I2S (byte)", sizeof(chip->name));
+		return 0;
+	case 4: /* AFE - read dword */
+		strlcpy(chip->name, "AFE (dword)", sizeof(chip->name));
+		return 0;
+	case 5: /* Video Block - read dword */
+		strlcpy(chip->name, "Video (dword)", sizeof(chip->name));
+		return 0;
+	case 6: /* I2S Block - read dword */
+		strlcpy(chip->name, "I2S (dword)", sizeof(chip->name));
+>>>>>>> v3.18
 		return 0;
 	}
 	return -EINVAL;
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 
 /*
@@ -1256,11 +1317,14 @@ int cx231xx_g_chip_ident(struct file *file, void *fh,
   if type == i2caddr, then <chip> is the 7-bit I2C address
 */
 
+=======
+>>>>>>> v3.18
 int cx231xx_g_register(struct file *file, void *priv,
 			     struct v4l2_dbg_register *reg)
 {
 	struct cx231xx_fh *fh = priv;
 	struct cx231xx *dev = fh->dev;
+<<<<<<< HEAD
 	int ret = 0;
 	u8 value[4] = { 0, 0, 0, 0 };
 	u32 data = 0;
@@ -1401,6 +1465,60 @@ int cx231xx_g_register(struct file *file, void *priv,
 	call_all(dev, core, g_register, reg);
 
 	return ret;
+=======
+	int ret;
+	u8 value[4] = { 0, 0, 0, 0 };
+	u32 data = 0;
+
+	switch (reg->match.addr) {
+	case 0:	/* Cx231xx - internal registers */
+		ret = cx231xx_read_ctrl_reg(dev, VRT_GET_REGISTER,
+				(u16)reg->reg, value, 4);
+		reg->val = value[0] | value[1] << 8 |
+			value[2] << 16 | value[3] << 24;
+		reg->size = 4;
+		break;
+	case 1:	/* AFE - read byte */
+		ret = cx231xx_read_i2c_data(dev, AFE_DEVICE_ADDRESS,
+				(u16)reg->reg, 2, &data, 1);
+		reg->val = data;
+		reg->size = 1;
+		break;
+	case 2:	/* Video Block - read byte */
+		ret = cx231xx_read_i2c_data(dev, VID_BLK_I2C_ADDRESS,
+				(u16)reg->reg, 2, &data, 1);
+		reg->val = data;
+		reg->size = 1;
+		break;
+	case 3:	/* I2S block - read byte */
+		ret = cx231xx_read_i2c_data(dev, I2S_BLK_DEVICE_ADDRESS,
+				(u16)reg->reg, 1, &data, 1);
+		reg->val = data;
+		reg->size = 1;
+		break;
+	case 4: /* AFE - read dword */
+		ret = cx231xx_read_i2c_data(dev, AFE_DEVICE_ADDRESS,
+				(u16)reg->reg, 2, &data, 4);
+		reg->val = data;
+		reg->size = 4;
+		break;
+	case 5: /* Video Block - read dword */
+		ret = cx231xx_read_i2c_data(dev, VID_BLK_I2C_ADDRESS,
+				(u16)reg->reg, 2, &data, 4);
+		reg->val = data;
+		reg->size = 4;
+		break;
+	case 6: /* I2S Block - read dword */
+		ret = cx231xx_read_i2c_data(dev, I2S_BLK_DEVICE_ADDRESS,
+				(u16)reg->reg, 1, &data, 4);
+		reg->val = data;
+		reg->size = 4;
+		break;
+	default:
+		return -EINVAL;
+	}
+	return ret < 0 ? ret : 0;
+>>>>>>> v3.18
 }
 
 int cx231xx_s_register(struct file *file, void *priv,
@@ -1408,6 +1526,7 @@ int cx231xx_s_register(struct file *file, void *priv,
 {
 	struct cx231xx_fh *fh = priv;
 	struct cx231xx *dev = fh->dev;
+<<<<<<< HEAD
 	int ret = 0;
 	__le64 buf;
 	u32 value;
@@ -1567,6 +1686,48 @@ int cx231xx_s_register(struct file *file, void *priv,
 	call_all(dev, core, s_register, reg);
 
 	return ret;
+=======
+	int ret;
+	u8 data[4] = { 0, 0, 0, 0 };
+
+	switch (reg->match.addr) {
+	case 0:	/* cx231xx internal registers */
+		data[0] = (u8) reg->val;
+		data[1] = (u8) (reg->val >> 8);
+		data[2] = (u8) (reg->val >> 16);
+		data[3] = (u8) (reg->val >> 24);
+		ret = cx231xx_write_ctrl_reg(dev, VRT_SET_REGISTER,
+				(u16)reg->reg, data, 4);
+		break;
+	case 1:	/* AFE - write byte */
+		ret = cx231xx_write_i2c_data(dev, AFE_DEVICE_ADDRESS,
+				(u16)reg->reg, 2, reg->val, 1);
+		break;
+	case 2:	/* Video Block - write byte */
+		ret = cx231xx_write_i2c_data(dev, VID_BLK_I2C_ADDRESS,
+				(u16)reg->reg, 2, reg->val, 1);
+		break;
+	case 3:	/* I2S block - write byte */
+		ret = cx231xx_write_i2c_data(dev, I2S_BLK_DEVICE_ADDRESS,
+				(u16)reg->reg, 1, reg->val, 1);
+		break;
+	case 4: /* AFE - write dword */
+		ret = cx231xx_write_i2c_data(dev, AFE_DEVICE_ADDRESS,
+				(u16)reg->reg, 2, reg->val, 4);
+		break;
+	case 5: /* Video Block - write dword */
+		ret = cx231xx_write_i2c_data(dev, VID_BLK_I2C_ADDRESS,
+				(u16)reg->reg, 2, reg->val, 4);
+		break;
+	case 6: /* I2S block - write dword */
+		ret = cx231xx_write_i2c_data(dev, I2S_BLK_DEVICE_ADDRESS,
+				(u16)reg->reg, 1, reg->val, 4);
+		break;
+	default:
+		return -EINVAL;
+	}
+	return ret < 0 ? ret : 0;
+>>>>>>> v3.18
 }
 #endif
 
@@ -1826,7 +1987,11 @@ static int radio_s_tuner(struct file *file, void *priv, const struct v4l2_tuner 
  */
 static int cx231xx_v4l2_open(struct file *filp)
 {
+<<<<<<< HEAD
 	int errCode = 0, radio = 0;
+=======
+	int radio = 0;
+>>>>>>> v3.18
 	struct video_device *vdev = video_devdata(filp);
 	struct cx231xx *dev = video_drvdata(filp);
 	struct cx231xx_fh *fh;
@@ -1924,7 +2089,11 @@ static int cx231xx_v4l2_open(struct file *filp)
 	mutex_unlock(&dev->lock);
 	v4l2_fh_add(&fh->fh);
 
+<<<<<<< HEAD
 	return errCode;
+=======
+	return 0;
+>>>>>>> v3.18
 }
 
 /*
@@ -2208,8 +2377,13 @@ static const struct v4l2_ioctl_ops video_ioctl_ops = {
 	.vidioc_s_tuner                = cx231xx_s_tuner,
 	.vidioc_g_frequency            = cx231xx_g_frequency,
 	.vidioc_s_frequency            = cx231xx_s_frequency,
+<<<<<<< HEAD
 	.vidioc_g_chip_ident           = cx231xx_g_chip_ident,
 #ifdef CONFIG_VIDEO_ADV_DEBUG
+=======
+#ifdef CONFIG_VIDEO_ADV_DEBUG
+	.vidioc_g_chip_info            = cx231xx_g_chip_info,
+>>>>>>> v3.18
 	.vidioc_g_register             = cx231xx_g_register,
 	.vidioc_s_register             = cx231xx_s_register,
 #endif
@@ -2240,8 +2414,13 @@ static const struct v4l2_ioctl_ops radio_ioctl_ops = {
 	.vidioc_s_tuner     = radio_s_tuner,
 	.vidioc_g_frequency = cx231xx_g_frequency,
 	.vidioc_s_frequency = cx231xx_s_frequency,
+<<<<<<< HEAD
 	.vidioc_g_chip_ident = cx231xx_g_chip_ident,
 #ifdef CONFIG_VIDEO_ADV_DEBUG
+=======
+#ifdef CONFIG_VIDEO_ADV_DEBUG
+	.vidioc_g_chip_info = cx231xx_g_chip_info,
+>>>>>>> v3.18
 	.vidioc_g_register  = cx231xx_g_register,
 	.vidioc_s_register  = cx231xx_s_register,
 #endif
@@ -2272,7 +2451,10 @@ static struct video_device *cx231xx_vdev_init(struct cx231xx *dev,
 	vfd->release = video_device_release;
 	vfd->debug = video_debug;
 	vfd->lock = &dev->lock;
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &vfd->flags);
+=======
+>>>>>>> v3.18
 
 	snprintf(vfd->name, sizeof(vfd->name), "%s %s", dev->name, type_name);
 
@@ -2305,7 +2487,11 @@ int cx231xx_register_analog_devices(struct cx231xx *dev)
 	/* Set the initial input */
 	video_mux(dev, dev->video_input);
 
+<<<<<<< HEAD
 	call_all(dev, core, s_std, dev->norm);
+=======
+	call_all(dev, video, s_std, dev->norm);
+>>>>>>> v3.18
 
 	v4l2_ctrl_handler_init(&dev->ctrl_handler, 10);
 	v4l2_ctrl_handler_init(&dev->radio_ctrl_handler, 5);

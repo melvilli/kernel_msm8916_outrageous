@@ -15,10 +15,18 @@
 
 #include <linux/slab.h>
 
+<<<<<<< HEAD
+=======
+#ifndef CONFIG_COMMON_CLK
+>>>>>>> v3.18
 struct clk;
 
 static inline int __clk_get(struct clk *clk) { return 1; }
 static inline void __clk_put(struct clk *clk) { }
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 
 static inline struct clk_lookup_alloc *__clkdev_alloc(size_t size)
 {

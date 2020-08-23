@@ -95,7 +95,10 @@ static void p80211req_mibset_mibget(wlandevice_t *wlandev,
 ----------------------------------------------------------------*/
 int p80211req_dorequest(wlandevice_t *wlandev, u8 *msgbuf)
 {
+<<<<<<< HEAD
 	int result = 0;
+=======
+>>>>>>> v3.18
 	struct p80211msg *msg = (struct p80211msg *) msgbuf;
 
 	/* Check to make sure the MSD is running */
@@ -109,9 +112,15 @@ int p80211req_dorequest(wlandevice_t *wlandev, u8 *msgbuf)
 	/* Check Permissions */
 	if (!capable(CAP_NET_ADMIN) &&
 	(msg->msgcode != DIDmsg_dot11req_mibget)) {
+<<<<<<< HEAD
 		printk(KERN_ERR
 		       "%s: only dot11req_mibget allowed for non-root.\n",
 		       wlandev->name);
+=======
+		netdev_err(wlandev->netdev,
+			   "%s: only dot11req_mibget allowed for non-root.\n",
+			   wlandev->name);
+>>>>>>> v3.18
 		return -EPERM;
 	}
 
@@ -129,7 +138,11 @@ int p80211req_dorequest(wlandevice_t *wlandev, u8 *msgbuf)
 		wlandev->mlmerequest(wlandev, msg);
 
 	clear_bit(1, &(wlandev->request_pending));
+<<<<<<< HEAD
 	return result;	/* if result==0, msg->status still may contain an err */
+=======
+	return 0;	/* if result==0, msg->status still may contain an err */
+>>>>>>> v3.18
 }
 
 /*----------------------------------------------------------------

@@ -40,6 +40,7 @@ config SCSI_DMA
 	bool
 	default n
 
+<<<<<<< HEAD
 config SCSI_TGT
 	tristate "SCSI target support"
 	depends on SCSI
@@ -51,6 +52,23 @@ config SCSI_NETLINK
 	bool
 	default	n
 	select NET
+=======
+config SCSI_NETLINK
+	bool
+	default	n
+	depends on NET
+
+config SCSI_MQ_DEFAULT
+	bool "SCSI: use blk-mq I/O path by default"
+	depends on SCSI
+	---help---
+	  This option enables the new blk-mq based I/O path for SCSI
+	  devices by default.  With the option the scsi_mod.use_blk_mq
+	  module/boot option defaults to Y, without it to N, but it can
+	  still be overriden either way.
+
+	  If unsure say N.
+>>>>>>> v3.18
 
 config SCSI_PROC_FS
 	bool "legacy /proc/scsi/ support"
@@ -69,7 +87,10 @@ comment "SCSI support type (disk, tape, CD-ROM)"
 config BLK_DEV_SD
 	tristate "SCSI disk support"
 	depends on SCSI
+<<<<<<< HEAD
 	select CRC_T10DIF if BLK_DEV_INTEGRITY
+=======
+>>>>>>> v3.18
 	---help---
 	  If you want to use SCSI hard disks, Fibre Channel disks,
 	  Serial ATA (SATA) or Parallel ATA (PATA) hard disks,
@@ -197,6 +218,7 @@ config SCSI_ENCLOSURE
 	  it has an enclosure device.  Selecting this option will just allow
 	  certain enclosure conditions to be reported and is not required.
 
+<<<<<<< HEAD
 config SCSI_MULTI_LUN
 	bool "Probe all LUNs on each SCSI device"
 	depends on SCSI
@@ -211,6 +233,8 @@ config SCSI_MULTI_LUN
 	  those rare devices which reacts in an unexpected way when probed for
 	  multiple LUNs.
 
+=======
+>>>>>>> v3.18
 config SCSI_CONSTANTS
 	bool "Verbose SCSI error reporting (kernel size +=12K)"
 	depends on SCSI
@@ -263,6 +287,12 @@ config SCSI_SCAN_ASYNC
 	  You can override this choice by specifying "scsi_mod.scan=sync"
 	  or async on the kernel's command line.
 
+<<<<<<< HEAD
+=======
+	  Note that this setting also affects whether resuming from
+	  system suspend will be performed asynchronously.
+
+>>>>>>> v3.18
 menu "SCSI Transports"
 	depends on SCSI
 
@@ -275,13 +305,18 @@ config SCSI_SPI_ATTRS
 
 config SCSI_FC_ATTRS
 	tristate "FiberChannel Transport Attributes"
+<<<<<<< HEAD
 	depends on SCSI
+=======
+	depends on SCSI && NET
+>>>>>>> v3.18
 	select SCSI_NETLINK
 	help
 	  If you wish to export transport-specific information about
 	  each attached FiberChannel device to sysfs, say Y.
 	  Otherwise, say N.
 
+<<<<<<< HEAD
 config SCSI_FC_TGT_ATTRS
 	bool "SCSI target support for FiberChannel Transport Attributes"
 	depends on SCSI_FC_ATTRS
@@ -289,6 +324,8 @@ config SCSI_FC_TGT_ATTRS
 	help
 		If you want to use SCSI target mode drivers enable this option.
 
+=======
+>>>>>>> v3.18
 config SCSI_ISCSI_ATTRS
 	tristate "iSCSI Transport Attributes"
 	depends on SCSI && NET
@@ -315,6 +352,7 @@ config SCSI_SRP_ATTRS
 	  If you wish to export transport-specific information about
 	  each attached SRP device to sysfs, say Y.
 
+<<<<<<< HEAD
 config SCSI_SRP_TGT_ATTRS
 	bool "SCSI target support for SRP Transport Attributes"
 	depends on SCSI_SRP_ATTRS
@@ -322,6 +360,8 @@ config SCSI_SRP_TGT_ATTRS
 	help
 		If you want to use SCSI target mode drivers enable this option.
 
+=======
+>>>>>>> v3.18
 endmenu
 
 menuconfig SCSI_LOWLEVEL
@@ -499,6 +539,7 @@ config SCSI_AACRAID
 
 
 source "drivers/scsi/aic7xxx/Kconfig.aic7xxx"
+<<<<<<< HEAD
 
 config SCSI_AIC7XXX_OLD
 	tristate "Adaptec AIC7xxx support (old driver)"
@@ -540,6 +581,8 @@ config SCSI_AIC7XXX_OLD
 	  To compile this driver as a module, choose M here: the
 	  module will be called aic7xxx_old.
 
+=======
+>>>>>>> v3.18
 source "drivers/scsi/aic7xxx/Kconfig.aic79xx"
 source "drivers/scsi/aic94xx/Kconfig"
 source "drivers/scsi/mvsas/Kconfig"
@@ -566,7 +609,11 @@ config SCSI_DPT_I2O
 
 config SCSI_ADVANSYS
 	tristate "AdvanSys SCSI support"
+<<<<<<< HEAD
 	depends on SCSI && VIRT_TO_BUS
+=======
+	depends on SCSI && VIRT_TO_BUS && !ARM
+>>>>>>> v3.18
 	depends on ISA || EISA || PCI
 	help
 	  This is a driver for all SCSI host adapters manufactured by
@@ -601,6 +648,10 @@ config SCSI_ARCMSR
 	  To compile this driver as a module, choose M here: the
 	  module will be called arcmsr (modprobe arcmsr).
 
+<<<<<<< HEAD
+=======
+source "drivers/scsi/esas2r/Kconfig"
+>>>>>>> v3.18
 source "drivers/scsi/megaraid/Kconfig.megaraid"
 source "drivers/scsi/mpt2sas/Kconfig"
 source "drivers/scsi/mpt3sas/Kconfig"
@@ -633,7 +684,11 @@ config SCSI_BUSLOGIC
 
 config SCSI_FLASHPOINT
 	bool "FlashPoint support"
+<<<<<<< HEAD
 	depends on SCSI_BUSLOGIC && PCI && X86_32
+=======
+	depends on SCSI_BUSLOGIC && PCI
+>>>>>>> v3.18
 	help
 	  This option allows you to add FlashPoint support to the
 	  BusLogic SCSI driver. The FlashPoint SCCB Manager code is
@@ -648,6 +703,19 @@ config VMWARE_PVSCSI
 	  To compile this driver as a module, choose M here: the
 	  module will be called vmw_pvscsi.
 
+<<<<<<< HEAD
+=======
+config XEN_SCSI_FRONTEND
+	tristate "XEN SCSI frontend driver"
+	depends on SCSI && XEN
+	select XEN_XENBUS_FRONTEND
+	help
+	  The XEN SCSI frontend driver allows the kernel to access SCSI Devices
+	  within another guest OS (usually Dom0).
+	  Only needed if the kernel is running in a XEN guest and generic
+	  SCSI access to a device is needed.
+
+>>>>>>> v3.18
 config HYPERV_STORAGE
 	tristate "Microsoft Hyper-V virtual storage driver"
 	depends on SCSI && HYPERV
@@ -657,28 +725,44 @@ config HYPERV_STORAGE
 
 config LIBFC
 	tristate "LibFC module"
+<<<<<<< HEAD
 	select SCSI_FC_ATTRS
+=======
+	depends on SCSI_FC_ATTRS
+>>>>>>> v3.18
 	select CRC32
 	---help---
 	  Fibre Channel library module
 
 config LIBFCOE
 	tristate "LibFCoE module"
+<<<<<<< HEAD
 	select LIBFC
+=======
+	depends on LIBFC
+>>>>>>> v3.18
 	---help---
 	  Library for Fibre Channel over Ethernet module
 
 config FCOE
 	tristate "FCoE module"
 	depends on PCI
+<<<<<<< HEAD
 	select LIBFCOE
+=======
+	depends on LIBFCOE
+>>>>>>> v3.18
 	---help---
 	  Fibre Channel over Ethernet module
 
 config FCOE_FNIC
 	tristate "Cisco FNIC Driver"
 	depends on PCI && X86
+<<<<<<< HEAD
 	select LIBFCOE
+=======
+	depends on LIBFCOE
+>>>>>>> v3.18
 	help
 	  This is support for the Cisco PCI-Express FCoE HBA.
 
@@ -885,6 +969,7 @@ config SCSI_IBMVSCSI
 	  To compile this driver as a module, choose M here: the
 	  module will be called ibmvscsi.
 
+<<<<<<< HEAD
 config SCSI_IBMVSCSIS
 	tristate "IBM Virtual SCSI Server support"
 	depends on PPC_PSERIES && SCSI_SRP && SCSI_SRP_TGT_ATTRS
@@ -903,6 +988,12 @@ config SCSI_IBMVFC
 	tristate "IBM Virtual FC support"
 	depends on PPC_PSERIES && SCSI
 	select SCSI_FC_ATTRS
+=======
+config SCSI_IBMVFC
+	tristate "IBM Virtual FC support"
+	depends on PPC_PSERIES && SCSI
+	depends on SCSI_FC_ATTRS
+>>>>>>> v3.18
 	help
 	  This is the IBM POWER Virtual FC Client
 
@@ -1352,7 +1443,11 @@ source "drivers/scsi/qla4xxx/Kconfig"
 config SCSI_LPFC
 	tristate "Emulex LightPulse Fibre Channel Support"
 	depends on PCI && SCSI
+<<<<<<< HEAD
 	select SCSI_FC_ATTRS
+=======
+	depends on SCSI_FC_ATTRS
+>>>>>>> v3.18
 	select CRC_T10DIF
 	help
           This lpfc driver supports the Emulex LightPulse
@@ -1762,7 +1857,11 @@ config SCSI_SUNESP
 config ZFCP
 	tristate "FCP host bus adapter driver for IBM eServer zSeries"
 	depends on S390 && QDIO && SCSI
+<<<<<<< HEAD
 	select SCSI_FC_ATTRS
+=======
+	depends on SCSI_FC_ATTRS
+>>>>>>> v3.18
 	help
           If you want to access SCSI devices attached to your IBM eServer
           zSeries by means of Fibre Channel interfaces say Y.
@@ -1787,6 +1886,7 @@ config SCSI_PM8001
 	  This driver supports PMC-Sierra PCIE SAS/SATA 8x6G SPC 8001 chip
 	  based host adapters.
 
+<<<<<<< HEAD
 config SCSI_SRP
 	tristate "SCSI RDMA Protocol helper library"
 	depends on SCSI && PCI
@@ -1801,6 +1901,12 @@ config SCSI_BFA_FC
 	tristate "Brocade BFA Fibre Channel Support"
 	depends on PCI && SCSI
 	select SCSI_FC_ATTRS
+=======
+config SCSI_BFA_FC
+	tristate "Brocade BFA Fibre Channel Support"
+	depends on PCI && SCSI
+	depends on SCSI_FC_ATTRS
+>>>>>>> v3.18
 	help
 	  This bfa driver supports all Brocade PCIe FC/FCOE host adapters.
 
@@ -1810,6 +1916,10 @@ config SCSI_BFA_FC
 config SCSI_VIRTIO
 	tristate "virtio-scsi support"
 	depends on VIRTIO
+<<<<<<< HEAD
+=======
+	select BLK_DEV_INTEGRITY
+>>>>>>> v3.18
 	help
           This is the virtual HBA driver for virtio.  If the kernel will
           be used in a virtual machine, say Y or M.

@@ -23,7 +23,15 @@
  */
 
 #include <core/object.h>
+<<<<<<< HEAD
 #include <subdev/bar.h>
+=======
+
+#include <subdev/fb.h>
+#include <subdev/vm.h>
+
+#include "priv.h"
+>>>>>>> v3.18
 
 struct nouveau_barobj {
 	struct nouveau_object base;
@@ -34,10 +42,19 @@ struct nouveau_barobj {
 static int
 nouveau_barobj_ctor(struct nouveau_object *parent,
 		    struct nouveau_object *engine,
+<<<<<<< HEAD
 		    struct nouveau_oclass *oclass, void *mem, u32 size,
 		    struct nouveau_object **pobject)
 {
 	struct nouveau_bar *bar = (void *)engine;
+=======
+		    struct nouveau_oclass *oclass, void *data, u32 size,
+		    struct nouveau_object **pobject)
+{
+	struct nouveau_device *device = nv_device(parent);
+	struct nouveau_bar *bar = (void *)engine;
+	struct nouveau_mem *mem = data;
+>>>>>>> v3.18
 	struct nouveau_barobj *barobj;
 	int ret;
 
@@ -50,7 +67,17 @@ nouveau_barobj_ctor(struct nouveau_object *parent,
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 	barobj->iomem = bar->iomem + (u32)barobj->vma.offset;
+=======
+	barobj->iomem = ioremap(nv_device_resource_start(device, 3) +
+				(u32)barobj->vma.offset, mem->size << 12);
+	if (!barobj->iomem) {
+		nv_warn(bar, "PRAMIN ioremap failed\n");
+		return -ENOMEM;
+	}
+
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -59,8 +86,16 @@ nouveau_barobj_dtor(struct nouveau_object *object)
 {
 	struct nouveau_bar *bar = (void *)object->engine;
 	struct nouveau_barobj *barobj = (void *)object;
+<<<<<<< HEAD
 	if (barobj->vma.node)
 		bar->unmap(bar, &barobj->vma);
+=======
+	if (barobj->vma.node) {
+		if (barobj->iomem)
+			iounmap(barobj->iomem);
+		bar->unmap(bar, &barobj->vma);
+	}
+>>>>>>> v3.18
 	nouveau_object_destroy(&barobj->base);
 }
 
@@ -95,8 +130,17 @@ nouveau_bar_alloc(struct nouveau_bar *bar, struct nouveau_object *parent,
 		  struct nouveau_mem *mem, struct nouveau_object **pobject)
 {
 	struct nouveau_object *engine = nv_object(bar);
+<<<<<<< HEAD
 	return nouveau_object_ctor(parent, engine, &nouveau_barobj_oclass,
 				   mem, 0, pobject);
+=======
+	struct nouveau_object *gpuobj;
+	int ret = nouveau_object_ctor(parent, engine, &nouveau_barobj_oclass,
+				      mem, 0, &gpuobj);
+	if (ret == 0)
+		*pobject = gpuobj;
+	return ret;
+>>>>>>> v3.18
 }
 
 int
@@ -104,7 +148,10 @@ nouveau_bar_create_(struct nouveau_object *parent,
 		    struct nouveau_object *engine,
 		    struct nouveau_oclass *oclass, int length, void **pobject)
 {
+<<<<<<< HEAD
 	struct nouveau_device *device = nv_device(parent);
+=======
+>>>>>>> v3.18
 	struct nouveau_bar *bar;
 	int ret;
 
@@ -114,16 +161,22 @@ nouveau_bar_create_(struct nouveau_object *parent,
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 	bar->iomem = ioremap(pci_resource_start(device->pdev, 3),
 			     pci_resource_len(device->pdev, 3));
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
 void
 nouveau_bar_destroy(struct nouveau_bar *bar)
 {
+<<<<<<< HEAD
 	if (bar->iomem)
 		iounmap(bar->iomem);
+=======
+>>>>>>> v3.18
 	nouveau_subdev_destroy(&bar->base);
 }
 

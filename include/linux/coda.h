@@ -60,7 +60,10 @@ Mellon the rights to redistribute these changes without encumbrance.
 
 #if defined(__linux__)
 typedef unsigned long long u_quad_t;
+<<<<<<< HEAD
 #else
+=======
+>>>>>>> v3.18
 #endif
 #include <uapi/linux/coda.h>
 #endif 

@@ -14,7 +14,10 @@
 
 #include <linux/kernel.h>
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/bug.h>
 #include <linux/device.h>
 #include <linux/interrupt.h>
@@ -498,7 +501,12 @@ int wm8350_irq_init(struct wm8350 *wm8350, int irq,
 	if (pdata && pdata->irq_base > 0)
 		irq_base = pdata->irq_base;
 
+<<<<<<< HEAD
 	wm8350->irq_base = irq_alloc_descs(irq_base, 0, ARRAY_SIZE(wm8350_irqs), 0);
+=======
+	wm8350->irq_base =
+		irq_alloc_descs(irq_base, 0, ARRAY_SIZE(wm8350_irqs), 0);
+>>>>>>> v3.18
 	if (wm8350->irq_base < 0) {
 		dev_warn(wm8350->dev, "Allocating irqs failed with %d\n",
 			wm8350->irq_base);

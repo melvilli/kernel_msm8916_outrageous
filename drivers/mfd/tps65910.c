@@ -25,6 +25,10 @@
 #include <linux/mfd/core.h>
 #include <linux/regmap.h>
 #include <linux/mfd/tps65910.h>
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 #include <linux/of_device.h>
 
 static struct resource rtc_resources[] = {
@@ -35,7 +39,11 @@ static struct resource rtc_resources[] = {
 	}
 };
 
+<<<<<<< HEAD
 static struct mfd_cell tps65910s[] = {
+=======
+static const struct mfd_cell tps65910s[] = {
+>>>>>>> v3.18
 	{
 		.name = "tps65910-gpio",
 	},
@@ -378,7 +386,11 @@ err_sleep_init:
 }
 
 #ifdef CONFIG_OF
+<<<<<<< HEAD
 static struct of_device_id tps65910_of_match[] = {
+=======
+static const struct of_device_id tps65910_of_match[] = {
+>>>>>>> v3.18
 	{ .compatible = "ti,tps65910", .data = (void *)TPS65910},
 	{ .compatible = "ti,tps65911", .data = (void *)TPS65911},
 	{ },
@@ -386,7 +398,11 @@ static struct of_device_id tps65910_of_match[] = {
 MODULE_DEVICE_TABLE(of, tps65910_of_match);
 
 static struct tps65910_board *tps65910_parse_dt(struct i2c_client *client,
+<<<<<<< HEAD
 						int *chip_id)
+=======
+						unsigned long *chip_id)
+>>>>>>> v3.18
 {
 	struct device_node *np = client->dev.of_node;
 	struct tps65910_board *board_info;
@@ -400,7 +416,11 @@ static struct tps65910_board *tps65910_parse_dt(struct i2c_client *client,
 		return NULL;
 	}
 
+<<<<<<< HEAD
 	*chip_id  = (int)match->data;
+=======
+	*chip_id  = (unsigned long)match->data;
+>>>>>>> v3.18
 
 	board_info = devm_kzalloc(&client->dev, sizeof(*board_info),
 			GFP_KERNEL);
@@ -412,14 +432,20 @@ static struct tps65910_board *tps65910_parse_dt(struct i2c_client *client,
 	ret = of_property_read_u32(np, "ti,vmbch-threshold", &prop);
 	if (!ret)
 		board_info->vmbch_threshold = prop;
+<<<<<<< HEAD
 	else if (*chip_id == TPS65911)
 		dev_warn(&client->dev, "VMBCH-Threshold not specified");
+=======
+>>>>>>> v3.18
 
 	ret = of_property_read_u32(np, "ti,vmbch2-threshold", &prop);
 	if (!ret)
 		board_info->vmbch2_threshold = prop;
+<<<<<<< HEAD
 	else if (*chip_id == TPS65911)
 		dev_warn(&client->dev, "VMBCH2-Threshold not specified");
+=======
+>>>>>>> v3.18
 
 	prop = of_property_read_bool(np, "ti,en-ck32k-xtal");
 	board_info->en_ck32k_xtal = prop;
@@ -434,7 +460,11 @@ static struct tps65910_board *tps65910_parse_dt(struct i2c_client *client,
 #else
 static inline
 struct tps65910_board *tps65910_parse_dt(struct i2c_client *client,
+<<<<<<< HEAD
 					 int *chip_id)
+=======
+					 unsigned long *chip_id)
+>>>>>>> v3.18
 {
 	return NULL;
 }
@@ -456,14 +486,23 @@ static void tps65910_power_off(void)
 }
 
 static int tps65910_i2c_probe(struct i2c_client *i2c,
+<<<<<<< HEAD
 					const struct i2c_device_id *id)
+=======
+			      const struct i2c_device_id *id)
+>>>>>>> v3.18
 {
 	struct tps65910 *tps65910;
 	struct tps65910_board *pmic_plat_data;
 	struct tps65910_board *of_pmic_plat_data = NULL;
 	struct tps65910_platform_data *init_data;
+<<<<<<< HEAD
 	int ret = 0;
 	int chip_id = id->driver_data;
+=======
+	unsigned long chip_id = id->driver_data;
+	int ret = 0;
+>>>>>>> v3.18
 
 	pmic_plat_data = dev_get_platdata(&i2c->dev);
 
@@ -489,6 +528,14 @@ static int tps65910_i2c_probe(struct i2c_client *i2c,
 	tps65910->i2c_client = i2c;
 	tps65910->id = chip_id;
 
+<<<<<<< HEAD
+=======
+	/* Work around silicon erratum SWCZ010: the tps65910 may miss the
+	 * first I2C transfer. So issue a dummy transfer before the first
+	 * real transfer.
+	 */
+	i2c_master_send(i2c, "", 1);
+>>>>>>> v3.18
 	tps65910->regmap = devm_regmap_init_i2c(i2c, &tps65910_regmap_config);
 	if (IS_ERR(tps65910->regmap)) {
 		ret = PTR_ERR(tps65910->regmap);
@@ -514,6 +561,10 @@ static int tps65910_i2c_probe(struct i2c_client *i2c,
 			      regmap_irq_get_domain(tps65910->irq_data));
 	if (ret < 0) {
 		dev_err(&i2c->dev, "mfd_add_devices failed: %d\n", ret);
+<<<<<<< HEAD
+=======
+		tps65910_irq_exit(tps65910);
+>>>>>>> v3.18
 		return ret;
 	}
 

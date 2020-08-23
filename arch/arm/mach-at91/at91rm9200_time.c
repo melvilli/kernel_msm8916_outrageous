@@ -31,6 +31,10 @@
 #include <asm/mach/time.h>
 
 #include <mach/at91_st.h>
+<<<<<<< HEAD
+=======
+#include <mach/hardware.h>
+>>>>>>> v3.18
 
 static unsigned long last_crtr;
 static u32 irqmask;
@@ -93,7 +97,11 @@ static irqreturn_t at91rm9200_timer_interrupt(int irq, void *dev_id)
 
 static struct irqaction at91rm9200_timer_irq = {
 	.name		= "at91_tick",
+<<<<<<< HEAD
 	.flags		= IRQF_SHARED | IRQF_DISABLED | IRQF_TIMER | IRQF_IRQPOLL,
+=======
+	.flags		= IRQF_SHARED | IRQF_TIMER | IRQF_IRQPOLL,
+>>>>>>> v3.18
 	.handler	= at91rm9200_timer_interrupt,
 	.irq		= NR_IRQS_LEGACY + AT91_ID_SYS,
 };
@@ -174,7 +182,10 @@ clkevt32k_next_event(unsigned long delta, struct clock_event_device *dev)
 static struct clock_event_device clkevt = {
 	.name		= "at91_tick",
 	.features	= CLOCK_EVT_FEAT_PERIODIC | CLOCK_EVT_FEAT_ONESHOT,
+<<<<<<< HEAD
 	.shift		= 32,
+=======
+>>>>>>> v3.18
 	.rating		= 150,
 	.set_next_event	= clkevt32k_next_event,
 	.set_mode	= clkevt32k_mode,
@@ -265,11 +276,17 @@ void __init at91rm9200_timer_init(void)
 	at91_st_write(AT91_ST_RTMR, 1);
 
 	/* Setup timer clockevent, with minimum of two ticks (important!!) */
+<<<<<<< HEAD
 	clkevt.mult = div_sc(AT91_SLOW_CLOCK, NSEC_PER_SEC, clkevt.shift);
 	clkevt.max_delta_ns = clockevent_delta2ns(AT91_ST_ALMV, &clkevt);
 	clkevt.min_delta_ns = clockevent_delta2ns(2, &clkevt) + 1;
 	clkevt.cpumask = cpumask_of(0);
 	clockevents_register_device(&clkevt);
+=======
+	clkevt.cpumask = cpumask_of(0);
+	clockevents_config_and_register(&clkevt, AT91_SLOW_CLOCK,
+					2, AT91_ST_ALMV);
+>>>>>>> v3.18
 
 	/* register clocksource */
 	clocksource_register_hz(&clk32k, AT91_SLOW_CLOCK);

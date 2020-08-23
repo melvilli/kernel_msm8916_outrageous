@@ -9,7 +9,11 @@
 #include <asm/errno.h>
 #include <asm-generic/uaccess-unaligned.h>
 
+<<<<<<< HEAD
 #include <linux/string.h>
+=======
+#include <linux/bug.h>
+>>>>>>> v3.18
 
 #define VERIFY_READ 0
 #define VERIFY_WRITE 1
@@ -30,11 +34,14 @@
  * that put_user is the same as __put_user, etc.
  */
 
+<<<<<<< HEAD
 extern int __get_kernel_bad(void);
 extern int __get_user_bad(void);
 extern int __put_kernel_bad(void);
 extern int __put_user_bad(void);
 
+=======
+>>>>>>> v3.18
 static inline long access_ok(int type, const void __user * addr,
 		unsigned long size)
 {
@@ -45,8 +52,13 @@ static inline long access_ok(int type, const void __user * addr,
 #define get_user __get_user
 
 #if !defined(CONFIG_64BIT)
+<<<<<<< HEAD
 #define LDD_KERNEL(ptr)		__get_kernel_bad();
 #define LDD_USER(ptr)		__get_user_bad();
+=======
+#define LDD_KERNEL(ptr)		BUILD_BUG()
+#define LDD_USER(ptr)		BUILD_BUG()
+>>>>>>> v3.18
 #define STD_KERNEL(x, ptr)	__put_kernel_asm64(x,ptr)
 #define STD_USER(x, ptr)	__put_user_asm64(x,ptr)
 #define ASM_WORD_INSN		".word\t"
@@ -61,12 +73,22 @@ static inline long access_ok(int type, const void __user * addr,
 /*
  * The exception table contains two values: the first is an address
  * for an instruction that is allowed to fault, and the second is
+<<<<<<< HEAD
  * the address to the fixup routine. 
  */
 
 struct exception_table_entry {
 	unsigned long insn;  /* address of insn that is allowed to fault.   */
 	long fixup;          /* fixup routine */
+=======
+ * the address to the fixup routine. Even on a 64bit kernel we could
+ * use a 32bit (unsigned int) address here.
+ */
+
+struct exception_table_entry {
+	unsigned long insn;	/* address of insn that is allowed to fault. */
+	unsigned long fixup;	/* fixup routine */
+>>>>>>> v3.18
 };
 
 #define ASM_EXCEPTIONTABLE_ENTRY( fault_addr, except_addr )\
@@ -95,7 +117,11 @@ struct exception_data {
 	    case 2: __get_kernel_asm("ldh",ptr); break; \
 	    case 4: __get_kernel_asm("ldw",ptr); break; \
 	    case 8: LDD_KERNEL(ptr); break;		\
+<<<<<<< HEAD
 	    default: __get_kernel_bad(); break;         \
+=======
+	    default: BUILD_BUG(); break;		\
+>>>>>>> v3.18
 	    }                                           \
 	}                                               \
 	else {                                          \
@@ -104,7 +130,11 @@ struct exception_data {
 	    case 2: __get_user_asm("ldh",ptr); break;   \
 	    case 4: __get_user_asm("ldw",ptr); break;   \
 	    case 8: LDD_USER(ptr);  break;		\
+<<<<<<< HEAD
 	    default: __get_user_bad(); break;           \
+=======
+	    default: BUILD_BUG(); break;		\
+>>>>>>> v3.18
 	    }                                           \
 	}                                               \
 							\
@@ -137,7 +167,11 @@ struct exception_data {
 	    case 2: __put_kernel_asm("sth",__x,ptr); break;     \
 	    case 4: __put_kernel_asm("stw",__x,ptr); break;     \
 	    case 8: STD_KERNEL(__x,ptr); break;			\
+<<<<<<< HEAD
 	    default: __put_kernel_bad(); break;			\
+=======
+	    default: BUILD_BUG(); break;			\
+>>>>>>> v3.18
 	    }                                                   \
 	}                                                       \
 	else {                                                  \
@@ -146,7 +180,11 @@ struct exception_data {
 	    case 2: __put_user_asm("sth",__x,ptr); break;       \
 	    case 4: __put_user_asm("stw",__x,ptr); break;       \
 	    case 8: STD_USER(__x,ptr); break;			\
+<<<<<<< HEAD
 	    default: __put_user_bad(); break;			\
+=======
+	    default: BUILD_BUG(); break;			\
+>>>>>>> v3.18
 	    }                                                   \
 	}                                                       \
 								\
@@ -248,14 +286,22 @@ static inline unsigned long __must_check copy_from_user(void *to,
                                           unsigned long n)
 {
         int sz = __compiletime_object_size(to);
+<<<<<<< HEAD
         unsigned long ret = n;
+=======
+        int ret = -EFAULT;
+>>>>>>> v3.18
 
         if (likely(sz == -1 || !__builtin_constant_p(n) || sz >= n))
                 ret = __copy_from_user(to, from, n);
         else
                 copy_from_user_overflow();
+<<<<<<< HEAD
 	if (unlikely(ret))
 		memset(to + (n - ret), 0, ret);
+=======
+
+>>>>>>> v3.18
         return ret;
 }
 

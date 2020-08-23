@@ -16,11 +16,14 @@
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 */
 /*
 Driver: amplc_pci263
@@ -37,10 +40,15 @@ connected to a reed-relay. Relay contacts are closed when output is 1.
 The state of the outputs can be read.
 */
 
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 #include <linux/pci.h>
 
 #include "../comedidev.h"
 
+<<<<<<< HEAD
 #define PCI263_DRIVER_NAME	"amplc_pci263"
 
 /* PCI263 PCI configuration register information */
@@ -58,6 +66,16 @@ static int pci263_do_insn_bits(struct comedi_device *dev,
 		/* Write out the new digital output lines */
 		outb(s->state & 0xFF, dev->iobase);
 		outb(s->state >> 8, dev->iobase + 1);
+=======
+static int pci263_do_insn_bits(struct comedi_device *dev,
+			       struct comedi_subdevice *s,
+			       struct comedi_insn *insn,
+			       unsigned int *data)
+{
+	if (comedi_dio_update_state(s, data)) {
+		outb(s->state & 0xff, dev->iobase);
+		outb((s->state >> 8) & 0xff, dev->iobase + 1);
+>>>>>>> v3.18
 	}
 
 	data[1] = s->state;
@@ -92,12 +110,16 @@ static int pci263_auto_attach(struct comedi_device *dev,
 	/* read initial relay state */
 	s->state = inb(dev->iobase) | (inb(dev->iobase + 1) << 8);
 
+<<<<<<< HEAD
 	dev_info(dev->class_dev, "%s (pci %s) attached\n", dev->board_name,
 		 pci_name(pci_dev));
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
 static struct comedi_driver amplc_pci263_driver = {
+<<<<<<< HEAD
 	.driver_name	= PCI263_DRIVER_NAME,
 	.module		= THIS_MODULE,
 	.auto_attach	= pci263_auto_attach,
@@ -106,6 +128,16 @@ static struct comedi_driver amplc_pci263_driver = {
 
 static DEFINE_PCI_DEVICE_TABLE(pci263_pci_table) = {
 	{ PCI_DEVICE(PCI_VENDOR_ID_AMPLICON, PCI_DEVICE_ID_AMPLICON_PCI263) },
+=======
+	.driver_name	= "amplc_pci263",
+	.module		= THIS_MODULE,
+	.auto_attach	= pci263_auto_attach,
+	.detach		= comedi_pci_detach,
+};
+
+static const struct pci_device_id pci263_pci_table[] = {
+	{ PCI_DEVICE(PCI_VENDOR_ID_AMPLICON, 0x000c) },
+>>>>>>> v3.18
 	{0}
 };
 MODULE_DEVICE_TABLE(pci, pci263_pci_table);
@@ -118,7 +150,11 @@ static int amplc_pci263_pci_probe(struct pci_dev *dev,
 }
 
 static struct pci_driver amplc_pci263_pci_driver = {
+<<<<<<< HEAD
 	.name		= PCI263_DRIVER_NAME,
+=======
+	.name		= "amplc_pci263",
+>>>>>>> v3.18
 	.id_table	= pci263_pci_table,
 	.probe		= &amplc_pci263_pci_probe,
 	.remove		= comedi_pci_auto_unconfig,

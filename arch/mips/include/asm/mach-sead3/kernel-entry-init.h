@@ -10,6 +10,7 @@
 #define __ASM_MACH_MIPS_KERNEL_ENTRY_INIT_H
 
 	.macro	kernel_entry_setup
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	mfc0	t0, CP0_CONFIG
 	bgez	t0, 9f
@@ -41,6 +42,8 @@ nonmt_processor :
 	__FINIT
 0 :
 #endif
+=======
+>>>>>>> v3.18
 	.endm
 
 /*

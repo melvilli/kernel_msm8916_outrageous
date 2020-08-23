@@ -22,6 +22,13 @@
 
 */
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_BCM47XX_BCMA
+#include <asm/mach-bcm47xx/bcm47xx.h>
+#endif
+
+>>>>>>> v3.18
 #include "b43.h"
 #include "bus.h"
 
@@ -102,6 +109,15 @@ struct b43_bus_dev *b43_bus_dev_bcma_init(struct bcma_device *core)
 	dev->write32 = b43_bus_bcma_write32;
 	dev->block_read = b43_bus_bcma_block_read;
 	dev->block_write = b43_bus_bcma_block_write;
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_BCM47XX_BCMA
+	if (b43_bus_host_is_pci(dev) &&
+	    bcm47xx_bus_type == BCM47XX_BUS_TYPE_BCMA &&
+	    bcm47xx_bus.bcma.bus.chipinfo.id == BCMA_CHIP_ID_BCM4716)
+		dev->flush_writes = true;
+#endif
+>>>>>>> v3.18
 
 	dev->dev = &core->dev;
 	dev->dma_dev = core->dma_dev;

@@ -16,7 +16,10 @@
 
 #ifdef CONFIG_PPC64
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <asm/types.h>
 #include <asm/lppaca.h>
 #include <asm/mmu.h>
@@ -68,16 +71,29 @@ struct paca_struct {
 	 * instruction.  They must travel together and be properly
 	 * aligned.
 	 */
+<<<<<<< HEAD
 	u16 lock_token;			/* Constant 0x8000, used in locks */
 	u16 paca_index;			/* Logical processor number */
+=======
+#ifdef __BIG_ENDIAN__
+	u16 lock_token;			/* Constant 0x8000, used in locks */
+	u16 paca_index;			/* Logical processor number */
+#else
+	u16 paca_index;			/* Logical processor number */
+	u16 lock_token;			/* Constant 0x8000, used in locks */
+#endif
+>>>>>>> v3.18
 
 	u64 kernel_toc;			/* Kernel TOC address */
 	u64 kernelbase;			/* Base address of kernel */
 	u64 kernel_msr;			/* MSR while running in kernel */
+<<<<<<< HEAD
 #ifdef CONFIG_PPC_STD_MMU_64
 	u64 stab_real;			/* Absolute address of segment table */
 	u64 stab_addr;			/* Virtual address of segment table */
 #endif /* CONFIG_PPC_STD_MMU_64 */
+=======
+>>>>>>> v3.18
 	void *emergency_sp;		/* pointer to emergency stack */
 	u64 data_offset;		/* per cpu data offset */
 	s16 hw_cpu_id;			/* Physical processor number */
@@ -88,14 +104,27 @@ struct paca_struct {
 	struct slb_shadow *slb_shadow_ptr;
 	struct dtl_entry *dispatch_log;
 	struct dtl_entry *dispatch_log_end;
+<<<<<<< HEAD
 
+=======
+#endif /* CONFIG_PPC_STD_MMU_64 */
+	u64 dscr_default;		/* per-CPU default DSCR */
+
+#ifdef CONFIG_PPC_STD_MMU_64
+>>>>>>> v3.18
 	/*
 	 * Now, starting in cacheline 2, the exception save areas
 	 */
 	/* used for most interrupts/exceptions */
+<<<<<<< HEAD
 	u64 exgen[12] __attribute__((aligned(0x80)));
 	u64 exmc[12];		/* used for machine checks */
 	u64 exslb[12];		/* used for SLB/segment table misses
+=======
+	u64 exgen[13] __attribute__((aligned(0x80)));
+	u64 exmc[13];		/* used for machine checks */
+	u64 exslb[13];		/* used for SLB/segment table misses
+>>>>>>> v3.18
  				 * on the linear mapping */
 	/* SLB related definitions */
 	u16 vmalloc_sllp;
@@ -108,8 +137,20 @@ struct paca_struct {
 	/* Keep pgd in the same cacheline as the start of extlb */
 	pgd_t *pgd __attribute__((aligned(0x80))); /* Current PGD */
 	pgd_t *kernel_pgd;		/* Kernel PGD */
+<<<<<<< HEAD
 	/* We can have up to 3 levels of reentrancy in the TLB miss handler */
 	u64 extlb[3][EX_TLB_SIZE / sizeof(u64)];
+=======
+
+	/* Shared by all threads of a core -- points to tcd of first thread */
+	struct tlb_core_data *tcd_ptr;
+
+	/*
+	 * We can have up to 3 levels of reentrancy in the TLB miss handler,
+	 * in each of four exception levels (normal, crit, mcheck, debug).
+	 */
+	u64 extlb[12][EX_TLB_SIZE / sizeof(u64)];
+>>>>>>> v3.18
 	u64 exmc[8];		/* used for machine checks */
 	u64 excrit[8];		/* used for crit interrupts */
 	u64 exdbg[8];		/* used for debug interrupts */
@@ -118,6 +159,11 @@ struct paca_struct {
 	void *mc_kstack;
 	void *crit_kstack;
 	void *dbg_kstack;
+<<<<<<< HEAD
+=======
+
+	struct tlb_core_data tcd;
+>>>>>>> v3.18
 #endif /* CONFIG_PPC_BOOK3E */
 
 	mm_context_t context;
@@ -136,7 +182,11 @@ struct paca_struct {
 	u8 io_sync;			/* writel() needs spin_unlock sync */
 	u8 irq_work_pending;		/* IRQ_WORK interrupt while soft-disable */
 	u8 nap_state_lost;		/* NV GPR values lost in power7_idle */
+<<<<<<< HEAD
 	u64 sprg3;			/* Saved user-visible sprg */
+=======
+	u64 sprg_vdso;			/* Saved user-visible sprg */
+>>>>>>> v3.18
 #ifdef CONFIG_PPC_TRANSACTIONAL_MEM
 	u64 tm_scratch;                 /* TM scratch area for reclaim */
 #endif
@@ -147,6 +197,19 @@ struct paca_struct {
 	 */
 	struct opal_machine_check_event *opal_mc_evt;
 #endif
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PPC_BOOK3S_64
+	/* Exclusive emergency stack pointer for machine check exception. */
+	void *mc_emergency_sp;
+	/*
+	 * Flag to check whether we are in machine check early handler
+	 * and already using emergency stack.
+	 */
+	u16 in_mce;
+	u8 hmi_event_available;		 /* HMI event is available */
+#endif
+>>>>>>> v3.18
 
 	/* Stuff for accurate time accounting */
 	u64 user_time;			/* accumulated usermode TB ticks */
@@ -161,7 +224,11 @@ struct paca_struct {
 	struct dtl_entry *dtl_curr;	/* pointer corresponding to dtl_ridx */
 
 #ifdef CONFIG_KVM_BOOK3S_HANDLER
+<<<<<<< HEAD
 #ifdef CONFIG_KVM_BOOK3S_PR
+=======
+#ifdef CONFIG_KVM_BOOK3S_PR_POSSIBLE
+>>>>>>> v3.18
 	/* We use this to store guest state in */
 	struct kvmppc_book3s_shadow_vcpu shadow_vcpu;
 #endif

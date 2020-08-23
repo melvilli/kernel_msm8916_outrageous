@@ -27,8 +27,13 @@
 #include <linux/platform_device.h>
 #include <linux/dma-mapping.h>
 #include <linux/remoteproc.h>
+<<<<<<< HEAD
 
 #include <plat/mailbox.h>
+=======
+#include <linux/omap-mailbox.h>
+
+>>>>>>> v3.18
 #include <linux/platform_data/remoteproc-omap.h>
 
 #include "omap_remoteproc.h"

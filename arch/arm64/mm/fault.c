@@ -37,8 +37,11 @@
 #include <asm/pgtable.h>
 #include <asm/tlbflush.h>
 
+<<<<<<< HEAD
 #include <trace/events/exception.h>
 
+=======
+>>>>>>> v3.18
 static const char *fault_name(unsigned int esr);
 
 /*
@@ -64,6 +67,10 @@ void show_pte(struct mm_struct *mm, unsigned long addr)
 			break;
 
 		pud = pud_offset(pgd, addr);
+<<<<<<< HEAD
+=======
+		printk(", *pud=%016llx", pud_val(*pud));
+>>>>>>> v3.18
 		if (pud_none(*pud) || pud_bad(*pud))
 			break;
 
@@ -116,8 +123,11 @@ static void __do_user_fault(struct task_struct *tsk, unsigned long addr,
 {
 	struct siginfo si;
 
+<<<<<<< HEAD
 	trace_user_fault(tsk, addr, esr);
 
+=======
+>>>>>>> v3.18
 	if (show_unhandled_signals && unhandled_signal(tsk, sig) &&
 	    printk_ratelimit()) {
 		pr_info("%s[%d]: unhandled %s (%d) at 0x%08lx, esr 0x%03x\n",
@@ -222,8 +232,12 @@ static int __kprobes do_page_fault(unsigned long addr, unsigned int esr,
 
 	if (esr & ESR_LNX_EXEC) {
 		vm_flags = VM_EXEC;
+<<<<<<< HEAD
 	} else if (((esr & ESR_EL1_WRITE) && !(esr & ESR_EL1_CM)) ||
 			((esr & ESR_EL1_CM) && !(mm_flags & FAULT_FLAG_USER))) {
+=======
+	} else if ((esr & ESR_EL1_WRITE) && !(esr & ESR_EL1_CM)) {
+>>>>>>> v3.18
 		vm_flags = VM_WRITE;
 		mm_flags |= FAULT_FLAG_WRITE;
 	}
@@ -283,7 +297,10 @@ retry:
 			 * starvation.
 			 */
 			mm_flags &= ~FAULT_FLAG_ALLOW_RETRY;
+<<<<<<< HEAD
 			mm_flags |= FAULT_FLAG_TRIED;
+=======
+>>>>>>> v3.18
 			goto retry;
 		}
 	}

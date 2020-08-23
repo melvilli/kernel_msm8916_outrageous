@@ -1,6 +1,7 @@
 #ifndef _LINUX_SLAB_DEF_H
 #define	_LINUX_SLAB_DEF_H
 
+<<<<<<< HEAD
 /*
  * Definitions unique to the original Linux SLAB allocator.
  *
@@ -21,12 +22,28 @@
 
 struct kmem_cache {
 /* 1) Cache tunables. Protected by cache_chain_mutex */
+=======
+#include <linux/reciprocal_div.h>
+
+/*
+ * Definitions unique to the original Linux SLAB allocator.
+ */
+
+struct kmem_cache {
+	struct array_cache __percpu *cpu_cache;
+
+/* 1) Cache tunables. Protected by slab_mutex */
+>>>>>>> v3.18
 	unsigned int batchcount;
 	unsigned int limit;
 	unsigned int shared;
 
 	unsigned int size;
+<<<<<<< HEAD
 	u32 reciprocal_buffer_size;
+=======
+	struct reciprocal_value reciprocal_buffer_size;
+>>>>>>> v3.18
 /* 2) touched by every alloc & free from the backend */
 
 	unsigned int flags;		/* constant flags */
@@ -41,8 +58,13 @@ struct kmem_cache {
 
 	size_t colour;			/* cache colouring range */
 	unsigned int colour_off;	/* colour offset */
+<<<<<<< HEAD
 	struct kmem_cache *slabp_cache;
 	unsigned int slab_size;
+=======
+	struct kmem_cache *freelist_cache;
+	unsigned int freelist_size;
+>>>>>>> v3.18
 
 	/* constructor func */
 	void (*ctor)(void *obj);
@@ -83,6 +105,7 @@ struct kmem_cache {
 	struct memcg_cache_params *memcg_params;
 #endif
 
+<<<<<<< HEAD
 /* 6) per-cpu/per-node data, touched during every alloc/free */
 	/*
 	 * We put array[] at the end of kmem_cache, because we want to size
@@ -194,4 +217,9 @@ static __always_inline void *kmalloc_node(size_t size, gfp_t flags, int node)
 
 #endif	/* CONFIG_NUMA */
 
+=======
+	struct kmem_cache_node *node[MAX_NUMNODES];
+};
+
+>>>>>>> v3.18
 #endif	/* _LINUX_SLAB_DEF_H */

@@ -75,6 +75,7 @@ int verify_iovec(struct msghdr *m, struct iovec *iov, struct sockaddr_storage *a
 }
 
 /*
+<<<<<<< HEAD
  *	Copy kernel to iovec. Returns -EFAULT on error.
  */
 
@@ -134,6 +135,8 @@ int memcpy_fromiovecend(unsigned char *kdata, const struct iovec *iov,
 EXPORT_SYMBOL(memcpy_fromiovecend);
 
 /*
+=======
+>>>>>>> v3.18
  *	And now for the all-in-one: copy and checksum from a user iovec
  *	directly to a datagram
  *	Calls to csum_partial but the last must be in 32 bit chunks
@@ -217,3 +220,30 @@ out_fault:
 	goto out;
 }
 EXPORT_SYMBOL(csum_partial_copy_fromiovecend);
+<<<<<<< HEAD
+=======
+
+unsigned long iov_pages(const struct iovec *iov, int offset,
+			unsigned long nr_segs)
+{
+	unsigned long seg, base;
+	int pages = 0, len, size;
+
+	while (nr_segs && (offset >= iov->iov_len)) {
+		offset -= iov->iov_len;
+		++iov;
+		--nr_segs;
+	}
+
+	for (seg = 0; seg < nr_segs; seg++) {
+		base = (unsigned long)iov[seg].iov_base + offset;
+		len = iov[seg].iov_len - offset;
+		size = ((base & ~PAGE_MASK) + len + ~PAGE_MASK) >> PAGE_SHIFT;
+		pages += size;
+		offset = 0;
+	}
+
+	return pages;
+}
+EXPORT_SYMBOL(iov_pages);
+>>>>>>> v3.18

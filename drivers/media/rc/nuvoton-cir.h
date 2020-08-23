@@ -84,8 +84,13 @@ struct nvt_dev {
 	} tx;
 
 	/* EFER Config register index/data pair */
+<<<<<<< HEAD
 	u8 cr_efir;
 	u8 cr_efdr;
+=======
+	u32 cr_efir;
+	u32 cr_efdr;
+>>>>>>> v3.18
 
 	/* hardware I/O settings */
 	unsigned long cir_addr;
@@ -363,7 +368,10 @@ struct nvt_dev {
 #define LOGICAL_DEV_ENABLE	0x01
 
 #define CIR_WAKE_ENABLE_BIT	0x08
+<<<<<<< HEAD
 #define CIR_INTR_MOUSE_IRQ_BIT	0x80
+=======
+>>>>>>> v3.18
 #define PME_INTR_CIR_PASS_BIT	0x08
 
 /* w83677hg CIR pin config */

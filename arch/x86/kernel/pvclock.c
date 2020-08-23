@@ -43,6 +43,17 @@ unsigned long pvclock_tsc_khz(struct pvclock_vcpu_time_info *src)
 	return pv_tsc_khz;
 }
 
+<<<<<<< HEAD
+=======
+void pvclock_touch_watchdogs(void)
+{
+	touch_softlockup_watchdog_sync();
+	clocksource_touch_watchdog();
+	rcu_cpu_stall_reset();
+	reset_hung_task_detector();
+}
+
+>>>>>>> v3.18
 static atomic64_t last_value = ATOMIC64_INIT(0);
 
 void pvclock_resume(void)
@@ -74,6 +85,14 @@ cycle_t pvclock_clocksource_read(struct pvclock_vcpu_time_info *src)
 		version = __pvclock_read_cycles(src, &ret, &flags);
 	} while ((src->version & 1) || version != src->version);
 
+<<<<<<< HEAD
+=======
+	if (unlikely((flags & PVCLOCK_GUEST_STOPPED) != 0)) {
+		src->flags &= ~PVCLOCK_GUEST_STOPPED;
+		pvclock_touch_watchdogs();
+	}
+
+>>>>>>> v3.18
 	if ((valid_flags & PVCLOCK_TSC_STABLE_BIT) &&
 		(flags & PVCLOCK_TSC_STABLE_BIT))
 		return ret;
@@ -128,6 +147,7 @@ void pvclock_read_wallclock(struct pvclock_wall_clock *wall_clock,
 	set_normalized_timespec(ts, now.tv_sec, now.tv_nsec);
 }
 
+<<<<<<< HEAD
 static struct pvclock_vsyscall_time_info *pvclock_vdso_info;
 
 static struct pvclock_vsyscall_time_info *
@@ -168,6 +188,9 @@ static struct notifier_block pvclock_migrate = {
 	.notifier_call = pvclock_task_migrate,
 };
 
+=======
+#ifdef CONFIG_X86_64
+>>>>>>> v3.18
 /*
  * Initialize the generic pvclock vsyscall state.  This will allocate
  * a/some page(s) for the per-vcpu pvclock information, set up a
@@ -181,17 +204,23 @@ int __init pvclock_init_vsyscall(struct pvclock_vsyscall_time_info *i,
 
 	WARN_ON (size != PVCLOCK_VSYSCALL_NR_PAGES*PAGE_SIZE);
 
+<<<<<<< HEAD
 	pvclock_vdso_info = i;
 
+=======
+>>>>>>> v3.18
 	for (idx = 0; idx <= (PVCLOCK_FIXMAP_END-PVCLOCK_FIXMAP_BEGIN); idx++) {
 		__set_fixmap(PVCLOCK_FIXMAP_BEGIN + idx,
 			     __pa(i) + (idx*PAGE_SIZE),
 			     PAGE_KERNEL_VVAR);
 	}
 
+<<<<<<< HEAD
 
 	register_task_migration_notifier(&pvclock_migrate);
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 #endif

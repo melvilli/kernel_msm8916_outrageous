@@ -47,56 +47,101 @@ static int corgi_spk_func;
 
 static void corgi_ext_control(struct snd_soc_dapm_context *dapm)
 {
+<<<<<<< HEAD
+=======
+	snd_soc_dapm_mutex_lock(dapm);
+
+>>>>>>> v3.18
 	/* set up jack connection */
 	switch (corgi_jack_func) {
 	case CORGI_HP:
 		/* set = unmute headphone */
 		gpio_set_value(CORGI_GPIO_MUTE_L, 1);
 		gpio_set_value(CORGI_GPIO_MUTE_R, 1);
+<<<<<<< HEAD
 		snd_soc_dapm_disable_pin(dapm, "Mic Jack");
 		snd_soc_dapm_disable_pin(dapm, "Line Jack");
 		snd_soc_dapm_enable_pin(dapm, "Headphone Jack");
 		snd_soc_dapm_disable_pin(dapm, "Headset Jack");
+=======
+		snd_soc_dapm_disable_pin_unlocked(dapm, "Mic Jack");
+		snd_soc_dapm_disable_pin_unlocked(dapm, "Line Jack");
+		snd_soc_dapm_enable_pin_unlocked(dapm, "Headphone Jack");
+		snd_soc_dapm_disable_pin_unlocked(dapm, "Headset Jack");
+>>>>>>> v3.18
 		break;
 	case CORGI_MIC:
 		/* reset = mute headphone */
 		gpio_set_value(CORGI_GPIO_MUTE_L, 0);
 		gpio_set_value(CORGI_GPIO_MUTE_R, 0);
+<<<<<<< HEAD
 		snd_soc_dapm_enable_pin(dapm, "Mic Jack");
 		snd_soc_dapm_disable_pin(dapm, "Line Jack");
 		snd_soc_dapm_disable_pin(dapm, "Headphone Jack");
 		snd_soc_dapm_disable_pin(dapm, "Headset Jack");
+=======
+		snd_soc_dapm_enable_pin_unlocked(dapm, "Mic Jack");
+		snd_soc_dapm_disable_pin_unlocked(dapm, "Line Jack");
+		snd_soc_dapm_disable_pin_unlocked(dapm, "Headphone Jack");
+		snd_soc_dapm_disable_pin_unlocked(dapm, "Headset Jack");
+>>>>>>> v3.18
 		break;
 	case CORGI_LINE:
 		gpio_set_value(CORGI_GPIO_MUTE_L, 0);
 		gpio_set_value(CORGI_GPIO_MUTE_R, 0);
+<<<<<<< HEAD
 		snd_soc_dapm_disable_pin(dapm, "Mic Jack");
 		snd_soc_dapm_enable_pin(dapm, "Line Jack");
 		snd_soc_dapm_disable_pin(dapm, "Headphone Jack");
 		snd_soc_dapm_disable_pin(dapm, "Headset Jack");
+=======
+		snd_soc_dapm_disable_pin_unlocked(dapm, "Mic Jack");
+		snd_soc_dapm_enable_pin_unlocked(dapm, "Line Jack");
+		snd_soc_dapm_disable_pin_unlocked(dapm, "Headphone Jack");
+		snd_soc_dapm_disable_pin_unlocked(dapm, "Headset Jack");
+>>>>>>> v3.18
 		break;
 	case CORGI_HEADSET:
 		gpio_set_value(CORGI_GPIO_MUTE_L, 0);
 		gpio_set_value(CORGI_GPIO_MUTE_R, 1);
+<<<<<<< HEAD
 		snd_soc_dapm_enable_pin(dapm, "Mic Jack");
 		snd_soc_dapm_disable_pin(dapm, "Line Jack");
 		snd_soc_dapm_disable_pin(dapm, "Headphone Jack");
 		snd_soc_dapm_enable_pin(dapm, "Headset Jack");
+=======
+		snd_soc_dapm_enable_pin_unlocked(dapm, "Mic Jack");
+		snd_soc_dapm_disable_pin_unlocked(dapm, "Line Jack");
+		snd_soc_dapm_disable_pin_unlocked(dapm, "Headphone Jack");
+		snd_soc_dapm_enable_pin_unlocked(dapm, "Headset Jack");
+>>>>>>> v3.18
 		break;
 	}
 
 	if (corgi_spk_func == CORGI_SPK_ON)
+<<<<<<< HEAD
 		snd_soc_dapm_enable_pin(dapm, "Ext Spk");
 	else
 		snd_soc_dapm_disable_pin(dapm, "Ext Spk");
 
 	/* signal a DAPM event */
 	snd_soc_dapm_sync(dapm);
+=======
+		snd_soc_dapm_enable_pin_unlocked(dapm, "Ext Spk");
+	else
+		snd_soc_dapm_disable_pin_unlocked(dapm, "Ext Spk");
+
+	/* signal a DAPM event */
+	snd_soc_dapm_sync_unlocked(dapm);
+
+	snd_soc_dapm_mutex_unlock(dapm);
+>>>>>>> v3.18
 }
 
 static int corgi_startup(struct snd_pcm_substream *substream)
 {
 	struct snd_soc_pcm_runtime *rtd = substream->private_data;
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = rtd->codec;
 
 	mutex_lock(&codec->mutex);
@@ -105,6 +150,11 @@ static int corgi_startup(struct snd_pcm_substream *substream)
 	corgi_ext_control(&codec->dapm);
 
 	mutex_unlock(&codec->mutex);
+=======
+
+	/* check the jack status at stream startup */
+	corgi_ext_control(&rtd->card->dapm);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -329,6 +379,10 @@ static struct platform_driver corgi_driver = {
 	.driver		= {
 		.name	= "corgi-audio",
 		.owner	= THIS_MODULE,
+<<<<<<< HEAD
+=======
+		.pm     = &snd_soc_pm_ops,
+>>>>>>> v3.18
 	},
 	.probe		= corgi_probe,
 	.remove		= corgi_remove,

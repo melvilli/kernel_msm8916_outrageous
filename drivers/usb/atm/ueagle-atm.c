@@ -57,7 +57,10 @@
 
 #include <linux/module.h>
 #include <linux/moduleparam.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/crc32.h>
 #include <linux/usb.h>
 #include <linux/firmware.h>

@@ -14,6 +14,7 @@
 
 #include "sh_pfc.h"
 
+<<<<<<< HEAD
 #define CPU_32_PORT5(fn, pfx, sfx)				\
 	PORT_1(fn, pfx##0, sfx), PORT_1(fn, pfx##1, sfx),	\
 	PORT_1(fn, pfx##2, sfx), PORT_1(fn, pfx##3, sfx),	\
@@ -48,6 +49,32 @@
 #define PINMUX_IPSR_DATA(ipsr, fn) PINMUX_DATA(fn##_MARK, FN_##ipsr, FN_##fn)
 #define PINMUX_IPSR_MODSEL_DATA(ipsr, fn, ms) PINMUX_DATA(fn##_MARK, FN_##ms, \
 							  FN_##ipsr, FN_##fn)
+=======
+#define PORT_GP_12(bank, fn, sfx)					\
+	PORT_GP_1(bank, 0, fn, sfx),  PORT_GP_1(bank, 1, fn, sfx),	\
+	PORT_GP_1(bank, 2, fn, sfx),  PORT_GP_1(bank, 3, fn, sfx),	\
+	PORT_GP_1(bank, 4, fn, sfx),  PORT_GP_1(bank, 5, fn, sfx),	\
+	PORT_GP_1(bank, 6, fn, sfx),  PORT_GP_1(bank, 7, fn, sfx),	\
+	PORT_GP_1(bank, 8, fn, sfx),  PORT_GP_1(bank, 9, fn, sfx),	\
+	PORT_GP_1(bank, 10, fn, sfx), PORT_GP_1(bank, 11, fn, sfx)
+
+#define CPU_ALL_PORT(fn, sfx)						\
+	PORT_GP_32(0, fn, sfx),						\
+	PORT_GP_32(1, fn, sfx),						\
+	PORT_GP_32(2, fn, sfx),						\
+	PORT_GP_32(3, fn, sfx),						\
+	PORT_GP_32(4, fn, sfx),						\
+	PORT_GP_12(5, fn, sfx)
+
+#undef _GP_DATA
+#define _GP_DATA(bank, pin, name, sfx)					\
+	PINMUX_DATA(name##_DATA, name##_FN, name##_IN, name##_OUT)
+
+#define _GP_INOUTSEL(bank, pin, name, sfx)	name##_IN, name##_OUT
+#define _GP_INDT(bank, pin, name, sfx)		name##_DATA
+#define GP_INOUTSEL(bank)	PORT_GP_32_REV(bank, _GP_INOUTSEL, unused)
+#define GP_INDT(bank)		PORT_GP_32_REV(bank, _GP_INDT, unused)
+>>>>>>> v3.18
 
 enum {
 	PINMUX_RESERVED = 0,
@@ -592,7 +619,11 @@ enum {
 	PINMUX_MARK_END,
 };
 
+<<<<<<< HEAD
 static const pinmux_enum_t pinmux_data[] = {
+=======
+static const u16 pinmux_data[] = {
+>>>>>>> v3.18
 	PINMUX_DATA_GP_ALL(), /* PINMUX_DATA(GP_M_N_DATA, GP_M_N_FN...), */
 
 	PINMUX_DATA(CLKOUT_MARK, FN_CLKOUT),
@@ -1367,7 +1398,11 @@ static const pinmux_enum_t pinmux_data[] = {
 	PINMUX_IPSR_DATA(IP11_28, ST_CLKOUT),
 };
 
+<<<<<<< HEAD
 static struct sh_pfc_pin pinmux_pins[] = {
+=======
+static const struct sh_pfc_pin pinmux_pins[] = {
+>>>>>>> v3.18
 	PINMUX_GPIO_GP_ALL(),
 };
 

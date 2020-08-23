@@ -31,7 +31,11 @@
 #define PARPORT_MIN_SPINTIME_VALUE 1
 #define PARPORT_MAX_SPINTIME_VALUE 1000
 
+<<<<<<< HEAD
 static int do_active_device(ctl_table *table, int write,
+=======
+static int do_active_device(struct ctl_table *table, int write,
+>>>>>>> v3.18
 		      void __user *result, size_t *lenp, loff_t *ppos)
 {
 	struct parport *port = (struct parport *)table->extra1;
@@ -68,7 +72,11 @@ static int do_active_device(ctl_table *table, int write,
 }
 
 #ifdef CONFIG_PARPORT_1284
+<<<<<<< HEAD
 static int do_autoprobe(ctl_table *table, int write,
+=======
+static int do_autoprobe(struct ctl_table *table, int write,
+>>>>>>> v3.18
 			void __user *result, size_t *lenp, loff_t *ppos)
 {
 	struct parport_device_info *info = table->extra2;
@@ -110,9 +118,15 @@ static int do_autoprobe(ctl_table *table, int write,
 }
 #endif /* IEEE1284.3 support. */
 
+<<<<<<< HEAD
 static int do_hardware_base_addr (ctl_table *table, int write,
 				  void __user *result,
 				  size_t *lenp, loff_t *ppos)
+=======
+static int do_hardware_base_addr(struct ctl_table *table, int write,
+				 void __user *result,
+				 size_t *lenp, loff_t *ppos)
+>>>>>>> v3.18
 {
 	struct parport *port = (struct parport *)table->extra1;
 	char buffer[20];
@@ -138,9 +152,15 @@ static int do_hardware_base_addr (ctl_table *table, int write,
 	return copy_to_user(result, buffer, len) ? -EFAULT : 0;
 }
 
+<<<<<<< HEAD
 static int do_hardware_irq (ctl_table *table, int write,
 			    void __user *result,
 			    size_t *lenp, loff_t *ppos)
+=======
+static int do_hardware_irq(struct ctl_table *table, int write,
+			   void __user *result,
+			   size_t *lenp, loff_t *ppos)
+>>>>>>> v3.18
 {
 	struct parport *port = (struct parport *)table->extra1;
 	char buffer[20];
@@ -166,9 +186,15 @@ static int do_hardware_irq (ctl_table *table, int write,
 	return copy_to_user(result, buffer, len) ? -EFAULT : 0;
 }
 
+<<<<<<< HEAD
 static int do_hardware_dma (ctl_table *table, int write,
 			    void __user *result,
 			    size_t *lenp, loff_t *ppos)
+=======
+static int do_hardware_dma(struct ctl_table *table, int write,
+			   void __user *result,
+			   size_t *lenp, loff_t *ppos)
+>>>>>>> v3.18
 {
 	struct parport *port = (struct parport *)table->extra1;
 	char buffer[20];
@@ -194,9 +220,15 @@ static int do_hardware_dma (ctl_table *table, int write,
 	return copy_to_user(result, buffer, len) ? -EFAULT : 0;
 }
 
+<<<<<<< HEAD
 static int do_hardware_modes (ctl_table *table, int write,
 			      void __user *result,
 			      size_t *lenp, loff_t *ppos)
+=======
+static int do_hardware_modes(struct ctl_table *table, int write,
+			     void __user *result,
+			     size_t *lenp, loff_t *ppos)
+>>>>>>> v3.18
 {
 	struct parport *port = (struct parport *)table->extra1;
 	char buffer[40];
@@ -255,11 +287,19 @@ PARPORT_MAX_SPINTIME_VALUE;
 
 struct parport_sysctl_table {
 	struct ctl_table_header *sysctl_header;
+<<<<<<< HEAD
 	ctl_table vars[12];
 	ctl_table device_dir[2];
 	ctl_table port_dir[2];
 	ctl_table parport_dir[2];
 	ctl_table dev_dir[2];
+=======
+	struct ctl_table vars[12];
+	struct ctl_table device_dir[2];
+	struct ctl_table port_dir[2];
+	struct ctl_table parport_dir[2];
+	struct ctl_table dev_dir[2];
+>>>>>>> v3.18
 };
 
 static const struct parport_sysctl_table parport_sysctl_template = {
@@ -369,12 +409,21 @@ static const struct parport_sysctl_table parport_sysctl_template = {
 struct parport_device_sysctl_table
 {
 	struct ctl_table_header *sysctl_header;
+<<<<<<< HEAD
 	ctl_table vars[2];
 	ctl_table device_dir[2];
 	ctl_table devices_root_dir[2];
 	ctl_table port_dir[2];
 	ctl_table parport_dir[2];
 	ctl_table dev_dir[2];
+=======
+	struct ctl_table vars[2];
+	struct ctl_table device_dir[2];
+	struct ctl_table devices_root_dir[2];
+	struct ctl_table port_dir[2];
+	struct ctl_table parport_dir[2];
+	struct ctl_table dev_dir[2];
+>>>>>>> v3.18
 };
 
 static const struct parport_device_sysctl_table
@@ -422,10 +471,17 @@ parport_device_sysctl_template = {
 struct parport_default_sysctl_table
 {
 	struct ctl_table_header *sysctl_header;
+<<<<<<< HEAD
 	ctl_table vars[3];
         ctl_table default_dir[2];
 	ctl_table parport_dir[2];
 	ctl_table dev_dir[2];
+=======
+	struct ctl_table vars[3];
+	struct ctl_table default_dir[2];
+	struct ctl_table parport_dir[2];
+	struct ctl_table dev_dir[2];
+>>>>>>> v3.18
 };
 
 static struct parport_default_sysctl_table

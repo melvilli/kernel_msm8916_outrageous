@@ -2,12 +2,17 @@ Allwinner Sunxi Interrupt Controller
 
 Required properties:
 
+<<<<<<< HEAD
 - compatible : should be "allwinner,sun4i-ic"
+=======
+- compatible : should be "allwinner,sun4i-a10-ic"
+>>>>>>> v3.18
 - reg : Specifies base physical address and size of the registers.
 - interrupt-controller : Identifies the node as an interrupt controller
 - #interrupt-cells : Specifies the number of cells needed to encode an
   interrupt source. The value shall be 1.
 
+<<<<<<< HEAD
 The interrupt sources are as follows:
 
 0: ENMI
@@ -101,4 +106,13 @@ intc: interrupt-controller {
 	reg = <0x01c20400 0x400>;
 	interrupt-controller;
 	#interrupt-cells = <2>;
+=======
+Example:
+
+intc: interrupt-controller {
+	compatible = "allwinner,sun4i-a10-ic";
+	reg = <0x01c20400 0x400>;
+	interrupt-controller;
+	#interrupt-cells = <1>;
+>>>>>>> v3.18
 };

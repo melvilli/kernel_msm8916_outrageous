@@ -18,7 +18,10 @@
  */
 
 #include <linux/kernel.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/export.h>
 #include <linux/pci.h>
 #include <linux/slab.h>

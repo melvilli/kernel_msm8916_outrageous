@@ -1,6 +1,7 @@
 #ifndef _IMX_DRM_H_
 #define _IMX_DRM_H_
 
+<<<<<<< HEAD
 #include <linux/videodev2.h>
 
 #define IPU_PIX_FMT_GBR24	v4l2_fourcc('G', 'B', 'R', '3')
@@ -14,6 +15,21 @@ struct drm_fbdev_cma;
 struct drm_framebuffer;
 struct platform_device;
 
+=======
+struct device_node;
+struct drm_crtc;
+struct drm_connector;
+struct drm_device;
+struct drm_display_mode;
+struct drm_encoder;
+struct drm_fbdev_cma;
+struct drm_framebuffer;
+struct imx_drm_crtc;
+struct platform_device;
+
+int imx_drm_crtc_id(struct imx_drm_crtc *crtc);
+
+>>>>>>> v3.18
 struct imx_drm_crtc_helper_funcs {
 	int (*enable_vblank)(struct drm_crtc *crtc);
 	void (*disable_vblank)(struct drm_crtc *crtc);
@@ -23,10 +39,17 @@ struct imx_drm_crtc_helper_funcs {
 	const struct drm_crtc_funcs *crtc_funcs;
 };
 
+<<<<<<< HEAD
 int imx_drm_add_crtc(struct drm_crtc *crtc,
 		struct imx_drm_crtc **new_crtc,
 		const struct imx_drm_crtc_helper_funcs *imx_helper_funcs,
 		struct module *owner, void *cookie, int id);
+=======
+int imx_drm_add_crtc(struct drm_device *drm, struct drm_crtc *crtc,
+		struct imx_drm_crtc **new_crtc,
+		const struct imx_drm_crtc_helper_funcs *imx_helper_funcs,
+		struct device_node *port);
+>>>>>>> v3.18
 int imx_drm_remove_crtc(struct imx_drm_crtc *);
 int imx_drm_init_drm(struct platform_device *pdev,
 		int preferred_bpp);
@@ -36,6 +59,7 @@ int imx_drm_crtc_vblank_get(struct imx_drm_crtc *imx_drm_crtc);
 void imx_drm_crtc_vblank_put(struct imx_drm_crtc *imx_drm_crtc);
 void imx_drm_handle_vblank(struct imx_drm_crtc *imx_drm_crtc);
 
+<<<<<<< HEAD
 struct imx_drm_encoder;
 int imx_drm_add_encoder(struct drm_encoder *encoder,
 		struct imx_drm_encoder **new_enc,
@@ -48,10 +72,13 @@ int imx_drm_add_connector(struct drm_connector *connector,
 		struct module *owner);
 int imx_drm_remove_connector(struct imx_drm_connector *);
 
+=======
+>>>>>>> v3.18
 void imx_drm_mode_config_init(struct drm_device *drm);
 
 struct drm_gem_cma_object *imx_drm_fb_get_obj(struct drm_framebuffer *fb);
 
+<<<<<<< HEAD
 struct drm_device *imx_drm_device_get(void);
 void imx_drm_device_put(void);
 int imx_drm_crtc_panel_format_pins(struct drm_crtc *crtc, u32 encoder_type,
@@ -66,5 +93,19 @@ int imx_drm_encoder_get_mux_id(struct imx_drm_encoder *imx_drm_encoder,
 		struct drm_crtc *crtc);
 int imx_drm_encoder_add_possible_crtcs(struct imx_drm_encoder *imx_drm_encoder,
 		struct device_node *np);
+=======
+int imx_drm_panel_format_pins(struct drm_encoder *encoder,
+		u32 interface_pix_fmt, int hsync_pin, int vsync_pin);
+int imx_drm_panel_format(struct drm_encoder *encoder,
+		u32 interface_pix_fmt);
+
+int imx_drm_encoder_get_mux_id(struct device_node *node,
+		struct drm_encoder *encoder);
+int imx_drm_encoder_parse_of(struct drm_device *drm,
+	struct drm_encoder *encoder, struct device_node *np);
+
+void imx_drm_connector_destroy(struct drm_connector *connector);
+void imx_drm_encoder_destroy(struct drm_encoder *encoder);
+>>>>>>> v3.18
 
 #endif /* _IMX_DRM_H_ */

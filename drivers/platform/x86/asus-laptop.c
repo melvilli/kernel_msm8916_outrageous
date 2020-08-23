@@ -53,8 +53,12 @@
 #include <linux/rfkill.h>
 #include <linux/slab.h>
 #include <linux/dmi.h>
+<<<<<<< HEAD
 #include <acpi/acpi_drivers.h>
 #include <acpi/acpi_bus.h>
+=======
+#include <linux/acpi.h>
+>>>>>>> v3.18
 
 #define ASUS_LAPTOP_VERSION	"0.42"
 
@@ -1494,10 +1498,16 @@ static int asus_input_init(struct asus_laptop *asus)
 	int error;
 
 	input = input_allocate_device();
+<<<<<<< HEAD
 	if (!input) {
 		pr_warn("Unable to allocate input device\n");
 		return -ENOMEM;
 	}
+=======
+	if (!input)
+		return -ENOMEM;
+
+>>>>>>> v3.18
 	input->name = "Asus Laptop extra buttons";
 	input->phys = ASUS_LAPTOP_FILE "/input0";
 	input->id.bustype = BUS_HOST;
@@ -1543,7 +1553,10 @@ static void asus_acpi_notify(struct acpi_device *device, u32 event)
 
 	/* TODO Find a better way to handle events count. */
 	count = asus->event_count[event % 128]++;
+<<<<<<< HEAD
 	acpi_bus_generate_proc_event(asus->device, event, count);
+=======
+>>>>>>> v3.18
 	acpi_bus_generate_netlink_event(asus->device->pnp.device_class,
 					dev_name(&asus->device->dev), event,
 					count);
@@ -1935,7 +1948,10 @@ fail_input:
 fail_backlight:
 	asus_platform_exit(asus);
 fail_platform:
+<<<<<<< HEAD
 	kfree(asus->name);
+=======
+>>>>>>> v3.18
 	kfree(asus);
 
 	return result;

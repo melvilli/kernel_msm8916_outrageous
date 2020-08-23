@@ -77,7 +77,11 @@ err3;	stb	r0,0(r3)
 	mr	r3,r4
 	blr
 
+<<<<<<< HEAD
 _GLOBAL(__clear_user)
+=======
+_GLOBAL_TOC(__clear_user)
+>>>>>>> v3.18
 	cmpdi	r4,32
 	neg	r6,r3
 	li	r0,0

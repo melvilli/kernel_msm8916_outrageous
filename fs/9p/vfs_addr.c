@@ -148,13 +148,22 @@ static int v9fs_release_page(struct page *page, gfp_t gfp)
  * @offset: offset in the page
  */
 
+<<<<<<< HEAD
 static void v9fs_invalidate_page(struct page *page, unsigned long offset)
+=======
+static void v9fs_invalidate_page(struct page *page, unsigned int offset,
+				 unsigned int length)
+>>>>>>> v3.18
 {
 	/*
 	 * If called with zero offset, we should release
 	 * the private state assocated with the page
 	 */
+<<<<<<< HEAD
 	if (offset == 0)
+=======
+	if (offset == 0 && length == PAGE_CACHE_SIZE)
+>>>>>>> v3.18
 		v9fs_fscache_invalidate_page(page);
 }
 
@@ -201,6 +210,11 @@ static int v9fs_vfs_writepage(struct page *page, struct writeback_control *wbc)
 {
 	int retval;
 
+<<<<<<< HEAD
+=======
+	p9_debug(P9_DEBUG_VFS, "page %p\n", page);
+
+>>>>>>> v3.18
 	retval = v9fs_vfs_writepage_locked(page);
 	if (retval < 0) {
 		if (retval == -EAGAIN) {
@@ -256,17 +270,27 @@ static int v9fs_launder_page(struct page *page)
  *
  */
 static ssize_t
+<<<<<<< HEAD
 v9fs_direct_IO(int rw, struct kiocb *iocb, const struct iovec *iov,
 	       loff_t pos, unsigned long nr_segs)
+=======
+v9fs_direct_IO(int rw, struct kiocb *iocb, struct iov_iter *iter, loff_t pos)
+>>>>>>> v3.18
 {
 	/*
 	 * FIXME
 	 * Now that we do caching with cache mode enabled, We need
 	 * to support direct IO
 	 */
+<<<<<<< HEAD
 	p9_debug(P9_DEBUG_VFS, "v9fs_direct_IO: v9fs_direct_IO (%s) off/no(%lld/%lu) EINVAL\n",
 		 iocb->ki_filp->f_path.dentry->d_name.name,
 		 (long long)pos, nr_segs);
+=======
+	p9_debug(P9_DEBUG_VFS, "v9fs_direct_IO: v9fs_direct_IO (%pD) off/no(%lld/%lu) EINVAL\n",
+		 iocb->ki_filp,
+		 (long long)pos, iter->nr_segs);
+>>>>>>> v3.18
 
 	return -EINVAL;
 }
@@ -281,6 +305,12 @@ static int v9fs_write_begin(struct file *filp, struct address_space *mapping,
 	pgoff_t index = pos >> PAGE_CACHE_SHIFT;
 	struct inode *inode = mapping->host;
 
+<<<<<<< HEAD
+=======
+
+	p9_debug(P9_DEBUG_VFS, "filp %p, mapping %p\n", filp, mapping);
+
+>>>>>>> v3.18
 	v9inode = V9FS_I(inode);
 start:
 	page = grab_cache_page_write_begin(mapping, index, flags);
@@ -311,6 +341,11 @@ static int v9fs_write_end(struct file *filp, struct address_space *mapping,
 	loff_t last_pos = pos + copied;
 	struct inode *inode = page->mapping->host;
 
+<<<<<<< HEAD
+=======
+	p9_debug(P9_DEBUG_VFS, "filp %p, mapping %p\n", filp, mapping);
+
+>>>>>>> v3.18
 	if (unlikely(copied < len)) {
 		/*
 		 * zero out the rest of the area

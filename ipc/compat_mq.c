@@ -12,7 +12,11 @@
 #include <linux/mqueue.h>
 #include <linux/syscalls.h>
 
+<<<<<<< HEAD
 #include <asm/uaccess.h>
+=======
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 
 struct compat_mq_attr {
 	compat_long_t mq_flags;      /* message queue flags		     */
@@ -46,9 +50,15 @@ static inline int put_compat_mq_attr(const struct mq_attr *attr,
 		| __put_user(attr->mq_curmsgs, &uattr->mq_curmsgs);
 }
 
+<<<<<<< HEAD
 asmlinkage long compat_sys_mq_open(const char __user *u_name,
 			int oflag, compat_mode_t mode,
 			struct compat_mq_attr __user *u_attr)
+=======
+COMPAT_SYSCALL_DEFINE4(mq_open, const char __user *, u_name,
+		       int, oflag, compat_mode_t, mode,
+		       struct compat_mq_attr __user *, u_attr)
+>>>>>>> v3.18
 {
 	void __user *p = NULL;
 	if (u_attr && oflag & O_CREAT) {
@@ -64,6 +74,7 @@ asmlinkage long compat_sys_mq_open(const char __user *u_name,
 	return sys_mq_open(u_name, oflag, mode, p);
 }
 
+<<<<<<< HEAD
 static int compat_prepare_timeout(struct timespec __user * *p,
 				  const struct compat_timespec __user *u)
 {
@@ -86,12 +97,23 @@ asmlinkage long compat_sys_mq_timedsend(mqd_t mqdes,
 	struct timespec __user *u_ts;
 
 	if (compat_prepare_timeout(&u_ts, u_abs_timeout))
+=======
+COMPAT_SYSCALL_DEFINE5(mq_timedsend, mqd_t, mqdes,
+		       const char __user *, u_msg_ptr,
+		       compat_size_t, msg_len, unsigned int, msg_prio,
+		       const struct compat_timespec __user *, u_abs_timeout)
+{
+	struct timespec __user *u_ts;
+
+	if (compat_convert_timespec(&u_ts, u_abs_timeout))
+>>>>>>> v3.18
 		return -EFAULT;
 
 	return sys_mq_timedsend(mqdes, u_msg_ptr, msg_len,
 			msg_prio, u_ts);
 }
 
+<<<<<<< HEAD
 asmlinkage ssize_t compat_sys_mq_timedreceive(mqd_t mqdes,
 			char __user *u_msg_ptr,
 			size_t msg_len, unsigned int __user *u_msg_prio,
@@ -99,14 +121,29 @@ asmlinkage ssize_t compat_sys_mq_timedreceive(mqd_t mqdes,
 {
 	struct timespec __user *u_ts;
 	if (compat_prepare_timeout(&u_ts, u_abs_timeout))
+=======
+COMPAT_SYSCALL_DEFINE5(mq_timedreceive, mqd_t, mqdes,
+		       char __user *, u_msg_ptr,
+		       compat_size_t, msg_len, unsigned int __user *, u_msg_prio,
+		       const struct compat_timespec __user *, u_abs_timeout)
+{
+	struct timespec __user *u_ts;
+
+	if (compat_convert_timespec(&u_ts, u_abs_timeout))
+>>>>>>> v3.18
 		return -EFAULT;
 
 	return sys_mq_timedreceive(mqdes, u_msg_ptr, msg_len,
 			u_msg_prio, u_ts);
 }
 
+<<<<<<< HEAD
 asmlinkage long compat_sys_mq_notify(mqd_t mqdes,
 			const struct compat_sigevent __user *u_notification)
+=======
+COMPAT_SYSCALL_DEFINE2(mq_notify, mqd_t, mqdes,
+		       const struct compat_sigevent __user *, u_notification)
+>>>>>>> v3.18
 {
 	struct sigevent __user *p = NULL;
 	if (u_notification) {
@@ -122,9 +159,15 @@ asmlinkage long compat_sys_mq_notify(mqd_t mqdes,
 	return sys_mq_notify(mqdes, p);
 }
 
+<<<<<<< HEAD
 asmlinkage long compat_sys_mq_getsetattr(mqd_t mqdes,
 			const struct compat_mq_attr __user *u_mqstat,
 			struct compat_mq_attr __user *u_omqstat)
+=======
+COMPAT_SYSCALL_DEFINE3(mq_getsetattr, mqd_t, mqdes,
+		       const struct compat_mq_attr __user *, u_mqstat,
+		       struct compat_mq_attr __user *, u_omqstat)
+>>>>>>> v3.18
 {
 	struct mq_attr mqstat;
 	struct mq_attr __user *p = compat_alloc_user_space(2 * sizeof(*p));

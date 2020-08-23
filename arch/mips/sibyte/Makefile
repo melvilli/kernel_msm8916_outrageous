@@ -25,3 +25,7 @@ obj-$(CONFIG_SIBYTE_RHONE)	+= swarm/
 obj-$(CONFIG_SIBYTE_SENTOSA)	+= swarm/
 obj-$(CONFIG_SIBYTE_SWARM)	+= swarm/
 obj-$(CONFIG_SIBYTE_BIGSUR)	+= swarm/
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_SIBYTE_LITTLESUR)	+= swarm/
+>>>>>>> v3.18

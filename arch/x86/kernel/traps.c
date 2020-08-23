@@ -23,6 +23,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/ptrace.h>
+<<<<<<< HEAD
+=======
+#include <linux/uprobes.h>
+>>>>>>> v3.18
 #include <linux/string.h>
 #include <linux/delay.h>
 #include <linux/errno.h>
@@ -58,16 +62,27 @@
 #include <asm/mce.h>
 #include <asm/fixmap.h>
 #include <asm/mach_traps.h>
+<<<<<<< HEAD
+=======
+#include <asm/alternative.h>
+>>>>>>> v3.18
 
 #ifdef CONFIG_X86_64
 #include <asm/x86_init.h>
 #include <asm/pgalloc.h>
 #include <asm/proto.h>
+<<<<<<< HEAD
+=======
+
+/* No need to be aligned, but done to keep all IDTs defined the same way. */
+gate_desc debug_idt_table[NR_VECTORS] __page_aligned_bss;
+>>>>>>> v3.18
 #else
 #include <asm/processor-flags.h>
 #include <asm/setup.h>
 
 asmlinkage int system_call(void);
+<<<<<<< HEAD
 
 /*
  * The IDT has to be page-aligned to simplify the Pentium
@@ -76,6 +91,13 @@ asmlinkage int system_call(void);
 gate_desc idt_table[NR_VECTORS] __page_aligned_data = { { { { 0, 0 } } }, };
 #endif
 
+=======
+#endif
+
+/* Must be page-aligned because the real IDT is used in a fixmap. */
+gate_desc idt_table[NR_VECTORS] __page_aligned_bss;
+
+>>>>>>> v3.18
 DECLARE_BITMAP(used_vectors, NR_VECTORS);
 EXPORT_SYMBOL_GPL(used_vectors);
 
@@ -87,7 +109,11 @@ static inline void conditional_sti(struct pt_regs *regs)
 
 static inline void preempt_conditional_sti(struct pt_regs *regs)
 {
+<<<<<<< HEAD
 	inc_preempt_count();
+=======
+	preempt_count_inc();
+>>>>>>> v3.18
 	if (regs->flags & X86_EFLAGS_IF)
 		local_irq_enable();
 }
@@ -102,10 +128,17 @@ static inline void preempt_conditional_cli(struct pt_regs *regs)
 {
 	if (regs->flags & X86_EFLAGS_IF)
 		local_irq_disable();
+<<<<<<< HEAD
 	dec_preempt_count();
 }
 
 static int __kprobes
+=======
+	preempt_count_dec();
+}
+
+static nokprobe_inline int
+>>>>>>> v3.18
 do_trap_no_signal(struct task_struct *tsk, int trapnr, char *str,
 		  struct pt_regs *regs,	long error_code)
 {
@@ -135,7 +168,42 @@ do_trap_no_signal(struct task_struct *tsk, int trapnr, char *str,
 	return -1;
 }
 
+<<<<<<< HEAD
 static void __kprobes
+=======
+static siginfo_t *fill_trap_info(struct pt_regs *regs, int signr, int trapnr,
+				siginfo_t *info)
+{
+	unsigned long siaddr;
+	int sicode;
+
+	switch (trapnr) {
+	default:
+		return SEND_SIG_PRIV;
+
+	case X86_TRAP_DE:
+		sicode = FPE_INTDIV;
+		siaddr = uprobe_get_trap_addr(regs);
+		break;
+	case X86_TRAP_UD:
+		sicode = ILL_ILLOPN;
+		siaddr = uprobe_get_trap_addr(regs);
+		break;
+	case X86_TRAP_AC:
+		sicode = BUS_ADRALN;
+		siaddr = 0;
+		break;
+	}
+
+	info->si_signo = signr;
+	info->si_errno = 0;
+	info->si_code = sicode;
+	info->si_addr = (void __user *)siaddr;
+	return info;
+}
+
+static void
+>>>>>>> v3.18
 do_trap(int trapnr, int signr, char *str, struct pt_regs *regs,
 	long error_code, siginfo_t *info)
 {
@@ -167,6 +235,7 @@ do_trap(int trapnr, int signr, char *str, struct pt_regs *regs,
 	}
 #endif
 
+<<<<<<< HEAD
 	if (info)
 		force_sig_info(signr, info, tsk);
 	else
@@ -223,6 +292,43 @@ DO_ERROR(X86_TRAP_NP, SIGBUS, "segment not present", segment_not_present)
 DO_ERROR(X86_TRAP_SS, SIGBUS, "stack segment", stack_segment)
 DO_ERROR_INFO(X86_TRAP_AC, SIGBUS, "alignment check", alignment_check,
 		BUS_ADRALN, 0)
+=======
+	force_sig_info(signr, info ?: SEND_SIG_PRIV, tsk);
+}
+NOKPROBE_SYMBOL(do_trap);
+
+static void do_error_trap(struct pt_regs *regs, long error_code, char *str,
+			  unsigned long trapnr, int signr)
+{
+	enum ctx_state prev_state = exception_enter();
+	siginfo_t info;
+
+	if (notify_die(DIE_TRAP, str, regs, error_code, trapnr, signr) !=
+			NOTIFY_STOP) {
+		conditional_sti(regs);
+		do_trap(trapnr, signr, str, regs, error_code,
+			fill_trap_info(regs, signr, trapnr, &info));
+	}
+
+	exception_exit(prev_state);
+}
+
+#define DO_ERROR(trapnr, signr, str, name)				\
+dotraplinkage void do_##name(struct pt_regs *regs, long error_code)	\
+{									\
+	do_error_trap(regs, error_code, str, trapnr, signr);		\
+}
+
+DO_ERROR(X86_TRAP_DE,     SIGFPE,  "divide error",		divide_error)
+DO_ERROR(X86_TRAP_OF,     SIGSEGV, "overflow",			overflow)
+DO_ERROR(X86_TRAP_BR,     SIGSEGV, "bounds",			bounds)
+DO_ERROR(X86_TRAP_UD,     SIGILL,  "invalid opcode",		invalid_op)
+DO_ERROR(X86_TRAP_OLD_MF, SIGFPE,  "coprocessor segment overrun",coprocessor_segment_overrun)
+DO_ERROR(X86_TRAP_TS,     SIGSEGV, "invalid TSS",		invalid_TSS)
+DO_ERROR(X86_TRAP_NP,     SIGBUS,  "segment not present",	segment_not_present)
+DO_ERROR(X86_TRAP_SS,     SIGBUS,  "stack segment",		stack_segment)
+DO_ERROR(X86_TRAP_AC,     SIGBUS,  "alignment check",		alignment_check)
+>>>>>>> v3.18
 
 #ifdef CONFIG_X86_64
 /* Runs on IST stack */
@@ -262,6 +368,12 @@ dotraplinkage void do_double_fault(struct pt_regs *regs, long error_code)
 	tsk->thread.error_code = error_code;
 	tsk->thread.trap_nr = X86_TRAP_DF;
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_DOUBLEFAULT
+	df_debug(regs, error_code);
+#endif
+>>>>>>> v3.18
 	/*
 	 * This is always a kernel trap and never fixable (and thus must
 	 * never return).
@@ -271,7 +383,11 @@ dotraplinkage void do_double_fault(struct pt_regs *regs, long error_code)
 }
 #endif
 
+<<<<<<< HEAD
 dotraplinkage void __kprobes
+=======
+dotraplinkage void
+>>>>>>> v3.18
 do_general_protection(struct pt_regs *regs, long error_code)
 {
 	struct task_struct *tsk;
@@ -313,6 +429,7 @@ do_general_protection(struct pt_regs *regs, long error_code)
 		pr_cont("\n");
 	}
 
+<<<<<<< HEAD
 	force_sig(SIGSEGV, tsk);
 exit:
 	exception_exit(prev_state);
@@ -320,6 +437,16 @@ exit:
 
 /* May run on IST stack. */
 dotraplinkage void __kprobes notrace do_int3(struct pt_regs *regs, long error_code)
+=======
+	force_sig_info(SIGSEGV, SEND_SIG_PRIV, tsk);
+exit:
+	exception_exit(prev_state);
+}
+NOKPROBE_SYMBOL(do_general_protection);
+
+/* May run on IST stack. */
+dotraplinkage void notrace do_int3(struct pt_regs *regs, long error_code)
+>>>>>>> v3.18
 {
 	enum ctx_state prev_state;
 
@@ -332,6 +459,12 @@ dotraplinkage void __kprobes notrace do_int3(struct pt_regs *regs, long error_co
 	    ftrace_int3_handler(regs))
 		return;
 #endif
+<<<<<<< HEAD
+=======
+	if (poke_int3_handler(regs))
+		return;
+
+>>>>>>> v3.18
 	prev_state = exception_enter();
 #ifdef CONFIG_KGDB_LOW_LEVEL_TRAP
 	if (kgdb_ll_trap(DIE_INT3, "int3", regs, error_code, X86_TRAP_BP,
@@ -339,6 +472,14 @@ dotraplinkage void __kprobes notrace do_int3(struct pt_regs *regs, long error_co
 		goto exit;
 #endif /* CONFIG_KGDB_LOW_LEVEL_TRAP */
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_KPROBES
+	if (kprobe_int3_handler(regs))
+		goto exit;
+#endif
+
+>>>>>>> v3.18
 	if (notify_die(DIE_INT3, "int3", regs, error_code, X86_TRAP_BP,
 			SIGTRAP) == NOTIFY_STOP)
 		goto exit;
@@ -355,6 +496,10 @@ dotraplinkage void __kprobes notrace do_int3(struct pt_regs *regs, long error_co
 exit:
 	exception_exit(prev_state);
 }
+<<<<<<< HEAD
+=======
+NOKPROBE_SYMBOL(do_int3);
+>>>>>>> v3.18
 
 #ifdef CONFIG_X86_64
 /*
@@ -362,7 +507,11 @@ exit:
  * for scheduling or signal handling. The actual stack switch is done in
  * entry.S
  */
+<<<<<<< HEAD
 asmlinkage notrace __kprobes struct pt_regs *sync_regs(struct pt_regs *eregs)
+=======
+asmlinkage __visible struct pt_regs *sync_regs(struct pt_regs *eregs)
+>>>>>>> v3.18
 {
 	struct pt_regs *regs = eregs;
 	/* Did already sync */
@@ -381,13 +530,21 @@ asmlinkage notrace __kprobes struct pt_regs *sync_regs(struct pt_regs *eregs)
 		*regs = *eregs;
 	return regs;
 }
+<<<<<<< HEAD
+=======
+NOKPROBE_SYMBOL(sync_regs);
+>>>>>>> v3.18
 
 struct bad_iret_stack {
 	void *error_entry_ret;
 	struct pt_regs regs;
 };
 
+<<<<<<< HEAD
 asmlinkage __visible notrace __kprobes
+=======
+asmlinkage __visible
+>>>>>>> v3.18
 struct bad_iret_stack *fixup_bad_iret(struct bad_iret_stack *s)
 {
 	/*
@@ -436,7 +593,11 @@ struct bad_iret_stack *fixup_bad_iret(struct bad_iret_stack *s)
  *
  * May run on IST stack.
  */
+<<<<<<< HEAD
 dotraplinkage void __kprobes do_debug(struct pt_regs *regs, long error_code)
+=======
+dotraplinkage void do_debug(struct pt_regs *regs, long error_code)
+>>>>>>> v3.18
 {
 	struct task_struct *tsk = current;
 	enum ctx_state prev_state;
@@ -474,7 +635,16 @@ dotraplinkage void __kprobes do_debug(struct pt_regs *regs, long error_code)
 	/* Store the virtualized DR6 value */
 	tsk->thread.debugreg6 = dr6;
 
+<<<<<<< HEAD
 	if (notify_die(DIE_DEBUG, "debug", regs, PTR_ERR(&dr6), error_code,
+=======
+#ifdef CONFIG_KPROBES
+	if (kprobe_debug_handler(regs))
+		goto exit;
+#endif
+
+	if (notify_die(DIE_DEBUG, "debug", regs, (long)&dr6, error_code,
+>>>>>>> v3.18
 							SIGTRAP) == NOTIFY_STOP)
 		goto exit;
 
@@ -516,13 +686,21 @@ dotraplinkage void __kprobes do_debug(struct pt_regs *regs, long error_code)
 exit:
 	exception_exit(prev_state);
 }
+<<<<<<< HEAD
+=======
+NOKPROBE_SYMBOL(do_debug);
+>>>>>>> v3.18
 
 /*
  * Note that we play around with the 'TS' bit in an attempt to get
  * the correct behaviour even in the presence of the asynchronous
  * IRQ13 behaviour
  */
+<<<<<<< HEAD
 void math_error(struct pt_regs *regs, int error_code, int trapnr)
+=======
+static void math_error(struct pt_regs *regs, int error_code, int trapnr)
+>>>>>>> v3.18
 {
 	struct task_struct *task = current;
 	siginfo_t info;
@@ -552,7 +730,11 @@ void math_error(struct pt_regs *regs, int error_code, int trapnr)
 	task->thread.error_code = error_code;
 	info.si_signo = SIGFPE;
 	info.si_errno = 0;
+<<<<<<< HEAD
 	info.si_addr = (void __user *)regs->ip;
+=======
+	info.si_addr = (void __user *)uprobe_get_trap_addr(regs);
+>>>>>>> v3.18
 	if (trapnr == X86_TRAP_MF) {
 		unsigned short cwd, swd;
 		/*
@@ -635,11 +817,19 @@ do_spurious_interrupt_bug(struct pt_regs *regs, long error_code)
 #endif
 }
 
+<<<<<<< HEAD
 asmlinkage void __attribute__((weak)) smp_thermal_interrupt(void)
 {
 }
 
 asmlinkage void __attribute__((weak)) smp_threshold_interrupt(void)
+=======
+asmlinkage __visible void __attribute__((weak)) smp_thermal_interrupt(void)
+{
+}
+
+asmlinkage __visible void __attribute__((weak)) smp_threshold_interrupt(void)
+>>>>>>> v3.18
 {
 }
 
@@ -679,6 +869,7 @@ void math_state_restore(void)
 	 */
 	if (unlikely(restore_fpu_checking(tsk))) {
 		drop_init_fpu(tsk);
+<<<<<<< HEAD
 		force_sig(SIGSEGV, tsk);
 		return;
 	}
@@ -688,6 +879,17 @@ void math_state_restore(void)
 EXPORT_SYMBOL_GPL(math_state_restore);
 
 dotraplinkage void __kprobes
+=======
+		force_sig_info(SIGSEGV, SEND_SIG_PRIV, tsk);
+		return;
+	}
+
+	tsk->thread.fpu_counter++;
+}
+EXPORT_SYMBOL_GPL(math_state_restore);
+
+dotraplinkage void
+>>>>>>> v3.18
 do_device_not_available(struct pt_regs *regs, long error_code)
 {
 	enum ctx_state prev_state;
@@ -713,6 +915,10 @@ do_device_not_available(struct pt_regs *regs, long error_code)
 #endif
 	exception_exit(prev_state);
 }
+<<<<<<< HEAD
+=======
+NOKPROBE_SYMBOL(do_device_not_available);
+>>>>>>> v3.18
 
 #ifdef CONFIG_X86_32
 dotraplinkage void do_iret_error(struct pt_regs *regs, long error_code)
@@ -743,7 +949,11 @@ void __init early_trap_init(void)
 	/* int3 can be called from all */
 	set_system_intr_gate_ist(X86_TRAP_BP, &int3, DEBUG_STACK);
 #ifdef CONFIG_X86_32
+<<<<<<< HEAD
 	set_intr_gate(X86_TRAP_PF, &page_fault);
+=======
+	set_intr_gate(X86_TRAP_PF, page_fault);
+>>>>>>> v3.18
 #endif
 	load_idt(&idt_descr);
 }
@@ -751,7 +961,11 @@ void __init early_trap_init(void)
 void __init early_trap_pf_init(void)
 {
 #ifdef CONFIG_X86_64
+<<<<<<< HEAD
 	set_intr_gate(X86_TRAP_PF, &page_fault);
+=======
+	set_intr_gate(X86_TRAP_PF, page_fault);
+>>>>>>> v3.18
 #endif
 }
 
@@ -767,6 +981,7 @@ void __init trap_init(void)
 	early_iounmap(p, 4);
 #endif
 
+<<<<<<< HEAD
 	set_intr_gate(X86_TRAP_DE, &divide_error);
 	set_intr_gate_ist(X86_TRAP_NMI, &nmi, NMI_STACK);
 	/* int4 can be called from all */
@@ -774,11 +989,21 @@ void __init trap_init(void)
 	set_intr_gate(X86_TRAP_BR, &bounds);
 	set_intr_gate(X86_TRAP_UD, &invalid_op);
 	set_intr_gate(X86_TRAP_NM, &device_not_available);
+=======
+	set_intr_gate(X86_TRAP_DE, divide_error);
+	set_intr_gate_ist(X86_TRAP_NMI, &nmi, NMI_STACK);
+	/* int4 can be called from all */
+	set_system_intr_gate(X86_TRAP_OF, &overflow);
+	set_intr_gate(X86_TRAP_BR, bounds);
+	set_intr_gate(X86_TRAP_UD, invalid_op);
+	set_intr_gate(X86_TRAP_NM, device_not_available);
+>>>>>>> v3.18
 #ifdef CONFIG_X86_32
 	set_task_gate(X86_TRAP_DF, GDT_ENTRY_DOUBLEFAULT_TSS);
 #else
 	set_intr_gate_ist(X86_TRAP_DF, &double_fault, DOUBLEFAULT_STACK);
 #endif
+<<<<<<< HEAD
 	set_intr_gate(X86_TRAP_OLD_MF, &coprocessor_segment_overrun);
 	set_intr_gate(X86_TRAP_TS, &invalid_TSS);
 	set_intr_gate(X86_TRAP_NP, &segment_not_present);
@@ -791,6 +1016,20 @@ void __init trap_init(void)
 	set_intr_gate_ist(X86_TRAP_MC, &machine_check, MCE_STACK);
 #endif
 	set_intr_gate(X86_TRAP_XF, &simd_coprocessor_error);
+=======
+	set_intr_gate(X86_TRAP_OLD_MF, coprocessor_segment_overrun);
+	set_intr_gate(X86_TRAP_TS, invalid_TSS);
+	set_intr_gate(X86_TRAP_NP, segment_not_present);
+	set_intr_gate(X86_TRAP_SS, stack_segment);
+	set_intr_gate(X86_TRAP_GP, general_protection);
+	set_intr_gate(X86_TRAP_SPURIOUS, spurious_interrupt_bug);
+	set_intr_gate(X86_TRAP_MF, coprocessor_error);
+	set_intr_gate(X86_TRAP_AC, alignment_check);
+#ifdef CONFIG_X86_MCE
+	set_intr_gate_ist(X86_TRAP_MC, &machine_check, MCE_STACK);
+#endif
+	set_intr_gate(X86_TRAP_XF, simd_coprocessor_error);
+>>>>>>> v3.18
 
 	/* Reserve all the builtin and the syscall vector: */
 	for (i = 0; i < FIRST_EXTERNAL_VECTOR; i++)
@@ -822,7 +1061,11 @@ void __init trap_init(void)
 	x86_init.irqs.trap_init();
 
 #ifdef CONFIG_X86_64
+<<<<<<< HEAD
 	memcpy(&nmi_idt_table, &idt_table, IDT_ENTRIES * 16);
+=======
+	memcpy(&debug_idt_table, &idt_table, IDT_ENTRIES * 16);
+>>>>>>> v3.18
 	set_nmi_gate(X86_TRAP_DB, &debug);
 	set_nmi_gate(X86_TRAP_BP, &int3);
 #endif

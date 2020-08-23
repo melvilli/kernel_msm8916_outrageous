@@ -26,12 +26,18 @@ struct tps65912_gpio_data {
 	struct gpio_chip gpio_chip;
 };
 
+<<<<<<< HEAD
 #define to_tgd(gc) container_of(gc, struct tps65912_gpio_data, gpio_chip)
 
 static int tps65912_gpio_get(struct gpio_chip *gc, unsigned offset)
 {
 	struct tps65912_gpio_data *tps65912_gpio = to_tgd(gc);
 	struct tps65912 *tps65912 = tps65912_gpio->tps65912;
+=======
+static int tps65912_gpio_get(struct gpio_chip *gc, unsigned offset)
+{
+	struct tps65912 *tps65912 = container_of(gc, struct tps65912, gpio);
+>>>>>>> v3.18
 	int val;
 
 	val = tps65912_reg_read(tps65912, TPS65912_GPIO1 + offset);
@@ -45,8 +51,12 @@ static int tps65912_gpio_get(struct gpio_chip *gc, unsigned offset)
 static void tps65912_gpio_set(struct gpio_chip *gc, unsigned offset,
 			      int value)
 {
+<<<<<<< HEAD
 	struct tps65912_gpio_data *tps65912_gpio = to_tgd(gc);
 	struct tps65912 *tps65912 = tps65912_gpio->tps65912;
+=======
+	struct tps65912 *tps65912 = container_of(gc, struct tps65912, gpio);
+>>>>>>> v3.18
 
 	if (value)
 		tps65912_set_bits(tps65912, TPS65912_GPIO1 + offset,
@@ -59,8 +69,12 @@ static void tps65912_gpio_set(struct gpio_chip *gc, unsigned offset,
 static int tps65912_gpio_output(struct gpio_chip *gc, unsigned offset,
 				int value)
 {
+<<<<<<< HEAD
 	struct tps65912_gpio_data *tps65912_gpio = to_tgd(gc);
 	struct tps65912 *tps65912 = tps65912_gpio->tps65912;
+=======
+	struct tps65912 *tps65912 = container_of(gc, struct tps65912, gpio);
+>>>>>>> v3.18
 
 	/* Set the initial value */
 	tps65912_gpio_set(gc, offset, value);
@@ -71,8 +85,12 @@ static int tps65912_gpio_output(struct gpio_chip *gc, unsigned offset,
 
 static int tps65912_gpio_input(struct gpio_chip *gc, unsigned offset)
 {
+<<<<<<< HEAD
 	struct tps65912_gpio_data *tps65912_gpio = to_tgd(gc);
 	struct tps65912 *tps65912 = tps65912_gpio->tps65912;
+=======
+	struct tps65912 *tps65912 = container_of(gc, struct tps65912, gpio);
+>>>>>>> v3.18
 
 	return tps65912_clear_bits(tps65912, TPS65912_GPIO1 + offset,
 								GPIO_CFG_MASK);
@@ -85,7 +103,11 @@ static struct gpio_chip template_chip = {
 	.direction_output	= tps65912_gpio_output,
 	.get			= tps65912_gpio_get,
 	.set			= tps65912_gpio_set,
+<<<<<<< HEAD
 	.can_sleep		= 1,
+=======
+	.can_sleep		= true,
+>>>>>>> v3.18
 	.ngpio			= 5,
 	.base			= -1,
 };
@@ -93,7 +115,11 @@ static struct gpio_chip template_chip = {
 static int tps65912_gpio_probe(struct platform_device *pdev)
 {
 	struct tps65912 *tps65912 = dev_get_drvdata(pdev->dev.parent);
+<<<<<<< HEAD
 	struct tps65912_board *pdata = tps65912->dev->platform_data;
+=======
+	struct tps65912_board *pdata = dev_get_platdata(tps65912->dev);
+>>>>>>> v3.18
 	struct tps65912_gpio_data *tps65912_gpio;
 	int ret;
 
@@ -123,7 +149,12 @@ static int tps65912_gpio_remove(struct platform_device *pdev)
 {
 	struct tps65912_gpio_data  *tps65912_gpio = platform_get_drvdata(pdev);
 
+<<<<<<< HEAD
 	return gpiochip_remove(&tps65912_gpio->gpio_chip);
+=======
+	gpiochip_remove(&tps65912_gpio->gpio_chip);
+	return 0;
+>>>>>>> v3.18
 }
 
 static struct platform_driver tps65912_gpio_driver = {

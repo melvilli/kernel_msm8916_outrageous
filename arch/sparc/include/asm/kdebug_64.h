@@ -3,7 +3,11 @@
 
 struct pt_regs;
 
+<<<<<<< HEAD
 extern void bad_trap(struct pt_regs *, long);
+=======
+void bad_trap(struct pt_regs *, long);
+>>>>>>> v3.18
 
 /* Grossly misnamed. */
 enum die_val {

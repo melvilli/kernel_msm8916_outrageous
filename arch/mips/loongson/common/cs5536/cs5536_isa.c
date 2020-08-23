@@ -13,6 +13,10 @@
  * option) any later version.
  */
 
+<<<<<<< HEAD
+=======
+#include <linux/pci.h>
+>>>>>>> v3.18
 #include <cs5536/cs5536.h>
 #include <cs5536/cs5536_pci.h>
 
@@ -314,3 +318,19 @@ u32 pci_isa_read_reg(int reg)
 
 	return conf_data;
 }
+<<<<<<< HEAD
+=======
+
+/*
+ * The mfgpt timer interrupt is running early, so we must keep the south bridge
+ * mmio always enabled. Otherwise we may race with the PCI configuration which
+ * may temporarily disable it. When that happens and the timer interrupt fires,
+ * we are not able to clear it and the system will hang.
+ */
+static void cs5536_isa_mmio_always_on(struct pci_dev *dev)
+{
+	dev->mmio_always_on = 1;
+}
+DECLARE_PCI_FIXUP_CLASS_EARLY(PCI_VENDOR_ID_AMD, PCI_DEVICE_ID_AMD_CS5536_ISA,
+	PCI_CLASS_BRIDGE_ISA, 8, cs5536_isa_mmio_always_on);
+>>>>>>> v3.18

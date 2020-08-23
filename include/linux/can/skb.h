@@ -7,8 +7,13 @@
  *
  */
 
+<<<<<<< HEAD
 #ifndef CAN_SKB_H
 #define CAN_SKB_H
+=======
+#ifndef _CAN_SKB_H
+#define _CAN_SKB_H
+>>>>>>> v3.18
 
 #include <linux/types.h>
 #include <linux/skbuff.h>
@@ -80,4 +85,8 @@ static inline struct sk_buff *can_create_echo_skb(struct sk_buff *skb)
 	return skb;
 }
 
+<<<<<<< HEAD
 #endif /* CAN_SKB_H */
+=======
+#endif /* !_CAN_SKB_H */
+>>>>>>> v3.18

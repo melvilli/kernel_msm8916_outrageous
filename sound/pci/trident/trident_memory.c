@@ -139,12 +139,19 @@ static inline void *offset_ptr(struct snd_trident *trident, int offset)
 static struct snd_util_memblk *
 search_empty(struct snd_util_memhdr *hdr, int size)
 {
+<<<<<<< HEAD
 	struct snd_util_memblk *blk, *prev;
+=======
+	struct snd_util_memblk *blk;
+>>>>>>> v3.18
 	int page, psize;
 	struct list_head *p;
 
 	psize = get_aligned_page(size + ALIGN_PAGE_SIZE -1);
+<<<<<<< HEAD
 	prev = NULL;
+=======
+>>>>>>> v3.18
 	page = 0;
 	list_for_each(p, &hdr->block) {
 		blk = list_entry(p, struct snd_util_memblk, list);

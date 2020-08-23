@@ -44,18 +44,30 @@ static void sitesurvey_ctrl_handler(void *FunctionContext)
 static void join_timeout_handler (void *FunctionContext)
 {
 	struct _adapter *adapter = (struct _adapter *)FunctionContext;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	_r8712_join_timeout_handler(adapter);
 }
 
 static void _scan_timeout_handler (void *FunctionContext)
 {
 	struct _adapter *adapter = (struct _adapter *)FunctionContext;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	r8712_scan_timeout_handler(adapter);
 }
 
 static void dhcp_timeout_handler (void *FunctionContext)
 {
 	struct _adapter *adapter = (struct _adapter *)FunctionContext;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	_r8712_dhcp_timeout_handler(adapter);
 }
 
@@ -147,10 +159,16 @@ void r8712_report_sec_ie(struct _adapter *adapter, u8 authmode, u8 *sec_ie)
 
 	buff = NULL;
 	if (authmode == _WPA_IE_ID_) {
+<<<<<<< HEAD
 		buff = _malloc(IW_CUSTOM_MAX);
 		if (buff == NULL)
 			return;
 		memset(buff, 0, IW_CUSTOM_MAX);
+=======
+		buff = kzalloc(IW_CUSTOM_MAX, GFP_ATOMIC);
+		if (buff == NULL)
+			return;
+>>>>>>> v3.18
 		p = buff;
 		p += sprintf(p, "ASSOCINFO(ReqIEs=");
 		len = sec_ie[1] + 2;

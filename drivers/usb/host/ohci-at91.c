@@ -13,26 +13,56 @@
  */
 
 #include <linux/clk.h>
+<<<<<<< HEAD
 #include <linux/platform_device.h>
 #include <linux/of_platform.h>
 #include <linux/of_gpio.h>
 #include <linux/platform_data/atmel.h>
+=======
+#include <linux/dma-mapping.h>
+#include <linux/of_platform.h>
+#include <linux/of_gpio.h>
+#include <linux/platform_device.h>
+#include <linux/platform_data/atmel.h>
+#include <linux/io.h>
+#include <linux/kernel.h>
+#include <linux/module.h>
+#include <linux/usb.h>
+#include <linux/usb/hcd.h>
+>>>>>>> v3.18
 
 #include <mach/hardware.h>
 #include <asm/gpio.h>
 
 #include <mach/cpu.h>
 
+<<<<<<< HEAD
 #ifndef CONFIG_ARCH_AT91
 #error "CONFIG_ARCH_AT91 must be defined."
 #endif
+=======
+
+#include "ohci.h"
+>>>>>>> v3.18
 
 #define valid_port(index)	((index) >= 0 && (index) < AT91_MAX_USBH_PORTS)
 #define at91_for_each_port(index)	\
 		for ((index) = 0; (index) < AT91_MAX_USBH_PORTS; (index)++)
 
+<<<<<<< HEAD
 /* interface and function clocks; sometimes also an AHB clock */
 static struct clk *iclk, *fclk, *hclk;
+=======
+/* interface, function and usb clocks; sometimes also an AHB clock */
+static struct clk *iclk, *fclk, *uclk, *hclk;
+/* interface and function clocks; sometimes also an AHB clock */
+
+#define DRIVER_DESC "OHCI Atmel driver"
+
+static const char hcd_name[] = "ohci-atmel";
+
+static struct hc_driver __read_mostly ohci_at91_hc_driver;
+>>>>>>> v3.18
 static int clocked;
 
 extern int usb_disabled(void);
@@ -41,17 +71,35 @@ extern int usb_disabled(void);
 
 static void at91_start_clock(void)
 {
+<<<<<<< HEAD
 	clk_enable(hclk);
 	clk_enable(iclk);
 	clk_enable(fclk);
+=======
+	if (IS_ENABLED(CONFIG_COMMON_CLK)) {
+		clk_set_rate(uclk, 48000000);
+		clk_prepare_enable(uclk);
+	}
+	clk_prepare_enable(hclk);
+	clk_prepare_enable(iclk);
+	clk_prepare_enable(fclk);
+>>>>>>> v3.18
 	clocked = 1;
 }
 
 static void at91_stop_clock(void)
 {
+<<<<<<< HEAD
 	clk_disable(fclk);
 	clk_disable(iclk);
 	clk_disable(hclk);
+=======
+	clk_disable_unprepare(fclk);
+	clk_disable_unprepare(iclk);
+	clk_disable_unprepare(hclk);
+	if (IS_ENABLED(CONFIG_COMMON_CLK))
+		clk_disable_unprepare(uclk);
+>>>>>>> v3.18
 	clocked = 0;
 }
 
@@ -111,6 +159,7 @@ static void usb_hcd_at91_remove (struct usb_hcd *, struct platform_device *);
 static int usb_hcd_at91_probe(const struct hc_driver *driver,
 			struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	int retval;
 	struct usb_hcd *hcd = NULL;
 
@@ -169,10 +218,82 @@ static int usb_hcd_at91_probe(const struct hc_driver *driver,
 	retval = usb_add_hcd(hcd, pdev->resource[1].start, IRQF_SHARED);
 	if (retval == 0)
 		return retval;
+=======
+	struct at91_usbh_data *board;
+	struct ohci_hcd *ohci;
+	int retval;
+	struct usb_hcd *hcd = NULL;
+	struct device *dev = &pdev->dev;
+	struct resource *res;
+	int irq;
+
+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+	if (!res) {
+		dev_dbg(dev, "hcd probe: missing memory resource\n");
+		return -ENXIO;
+	}
+
+	irq = platform_get_irq(pdev, 0);
+	if (irq < 0) {
+		dev_dbg(dev, "hcd probe: missing irq resource\n");
+		return irq;
+	}
+
+	hcd = usb_create_hcd(driver, dev, "at91");
+	if (!hcd)
+		return -ENOMEM;
+	hcd->rsrc_start = res->start;
+	hcd->rsrc_len = resource_size(res);
+
+	hcd->regs = devm_ioremap_resource(dev, res);
+	if (IS_ERR(hcd->regs)) {
+		retval = PTR_ERR(hcd->regs);
+		goto err;
+	}
+
+	iclk = devm_clk_get(dev, "ohci_clk");
+	if (IS_ERR(iclk)) {
+		dev_err(dev, "failed to get ohci_clk\n");
+		retval = PTR_ERR(iclk);
+		goto err;
+	}
+	fclk = devm_clk_get(dev, "uhpck");
+	if (IS_ERR(fclk)) {
+		dev_err(dev, "failed to get uhpck\n");
+		retval = PTR_ERR(fclk);
+		goto err;
+	}
+	hclk = devm_clk_get(dev, "hclk");
+	if (IS_ERR(hclk)) {
+		dev_err(dev, "failed to get hclk\n");
+		retval = PTR_ERR(hclk);
+		goto err;
+	}
+	if (IS_ENABLED(CONFIG_COMMON_CLK)) {
+		uclk = devm_clk_get(dev, "usb_clk");
+		if (IS_ERR(uclk)) {
+			dev_err(dev, "failed to get uclk\n");
+			retval = PTR_ERR(uclk);
+			goto err;
+		}
+	}
+
+	board = hcd->self.controller->platform_data;
+	ohci = hcd_to_ohci(hcd);
+	ohci->num_ports = board->ports;
+	at91_start_hc(pdev);
+
+	retval = usb_add_hcd(hcd, irq, IRQF_SHARED);
+	if (retval == 0) {
+		device_wakeup_enable(hcd->self.controller);
+		return retval;
+	}
+>>>>>>> v3.18
 
 	/* Error handling */
 	at91_stop_hc(pdev);
 
+<<<<<<< HEAD
 	clk_put(hclk);
  err5:
 	clk_put(fclk);
@@ -186,6 +307,9 @@ static int usb_hcd_at91_probe(const struct hc_driver *driver,
 	release_mem_region(hcd->rsrc_start, hcd->rsrc_len);
 
  err1:
+=======
+ err:
+>>>>>>> v3.18
 	usb_put_hcd(hcd);
 	return retval;
 }
@@ -208,6 +332,7 @@ static void usb_hcd_at91_remove(struct usb_hcd *hcd,
 {
 	usb_remove_hcd(hcd);
 	at91_stop_hc(pdev);
+<<<<<<< HEAD
 	iounmap(hcd->regs);
 	release_mem_region(hcd->rsrc_start, hcd->rsrc_len);
 	usb_put_hcd(hcd);
@@ -251,6 +376,12 @@ ohci_at91_start (struct usb_hcd *hcd)
 	return 0;
 }
 
+=======
+	usb_put_hcd(hcd);
+}
+
+/*-------------------------------------------------------------------------*/
+>>>>>>> v3.18
 static void ohci_at91_usb_set_power(struct at91_usbh_data *pdata, int port, int enable)
 {
 	if (!valid_port(port))
@@ -301,7 +432,11 @@ static int ohci_at91_hub_status_data(struct usb_hcd *hcd, char *buf)
 static int ohci_at91_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 				 u16 wIndex, char *buf, u16 wLength)
 {
+<<<<<<< HEAD
 	struct at91_usbh_data *pdata = hcd->self.controller->platform_data;
+=======
+	struct at91_usbh_data *pdata = dev_get_platdata(hcd->self.controller);
+>>>>>>> v3.18
 	struct usb_hub_descriptor *desc;
 	int ret = -EINVAL;
 	u32 *data = (u32 *)buf;
@@ -413,6 +548,7 @@ static int ohci_at91_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 
 /*-------------------------------------------------------------------------*/
 
+<<<<<<< HEAD
 static const struct hc_driver ohci_at91_hc_driver = {
 	.description =		hcd_name,
 	.product_desc =		"AT91 OHCI",
@@ -462,6 +598,12 @@ static irqreturn_t ohci_hcd_at91_overcurrent_irq(int irq, void *data)
 {
 	struct platform_device *pdev = data;
 	struct at91_usbh_data *pdata = pdev->dev.platform_data;
+=======
+static irqreturn_t ohci_hcd_at91_overcurrent_irq(int irq, void *data)
+{
+	struct platform_device *pdev = data;
+	struct at91_usbh_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	int val, gpio, port;
 
 	/* From the GPIO notifying the over-current situation, find
@@ -507,7 +649,11 @@ MODULE_DEVICE_TABLE(of, at91_ohci_dt_ids);
 static int ohci_at91_of_init(struct platform_device *pdev)
 {
 	struct device_node *np = pdev->dev.of_node;
+<<<<<<< HEAD
 	int i, gpio;
+=======
+	int i, gpio, ret;
+>>>>>>> v3.18
 	enum of_gpio_flags flags;
 	struct at91_usbh_data	*pdata;
 	u32 ports;
@@ -519,10 +665,16 @@ static int ohci_at91_of_init(struct platform_device *pdev)
 	 * Since shared usb code relies on it, set it here for now.
 	 * Once we have dma capability bindings this can go away.
 	 */
+<<<<<<< HEAD
 	if (!pdev->dev.dma_mask)
 		pdev->dev.dma_mask = &pdev->dev.coherent_dma_mask;
 	if (!pdev->dev.coherent_dma_mask)
 		pdev->dev.coherent_dma_mask = DMA_BIT_MASK(32);
+=======
+	ret = dma_coerce_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(32));
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 
 	pdata = devm_kzalloc(&pdev->dev, sizeof(*pdata), GFP_KERNEL);
 	if (!pdata)
@@ -567,7 +719,11 @@ static int ohci_hcd_at91_drv_probe(struct platform_device *pdev)
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 
 	if (pdata) {
 		at91_for_each_port(i) {
@@ -643,7 +799,11 @@ static int ohci_hcd_at91_drv_probe(struct platform_device *pdev)
 
 static int ohci_hcd_at91_drv_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct at91_usbh_data	*pdata = pdev->dev.platform_data;
+=======
+	struct at91_usbh_data	*pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	int			i;
 
 	if (pdata) {
@@ -674,10 +834,24 @@ ohci_hcd_at91_drv_suspend(struct platform_device *pdev, pm_message_t mesg)
 {
 	struct usb_hcd	*hcd = platform_get_drvdata(pdev);
 	struct ohci_hcd	*ohci = hcd_to_ohci(hcd);
+<<<<<<< HEAD
 
 	if (device_may_wakeup(&pdev->dev))
 		enable_irq_wake(hcd->irq);
 
+=======
+	bool		do_wakeup = device_may_wakeup(&pdev->dev);
+	int		ret;
+
+	if (do_wakeup)
+		enable_irq_wake(hcd->irq);
+
+	ret = ohci_suspend(hcd, do_wakeup);
+	if (ret) {
+		disable_irq_wake(hcd->irq);
+		return ret;
+	}
+>>>>>>> v3.18
 	/*
 	 * The integrated transceivers seem unable to notice disconnect,
 	 * reconnect, or wakeup without the 48 MHz clock active.  so for
@@ -686,13 +860,25 @@ ohci_hcd_at91_drv_suspend(struct platform_device *pdev, pm_message_t mesg)
 	 * REVISIT: some boards will be able to turn VBUS off...
 	 */
 	if (at91_suspend_entering_slow_clock()) {
+<<<<<<< HEAD
 		ohci_usb_reset (ohci);
+=======
+		ohci->hc_control = ohci_readl(ohci, &ohci->regs->control);
+		ohci->hc_control &= OHCI_CTRL_RWC;
+		ohci_writel(ohci, ohci->hc_control, &ohci->regs->control);
+		ohci->rh_state = OHCI_RH_HALTED;
+
+>>>>>>> v3.18
 		/* flush the writes */
 		(void) ohci_readl (ohci, &ohci->regs->control);
 		at91_stop_clock();
 	}
 
+<<<<<<< HEAD
 	return 0;
+=======
+	return ret;
+>>>>>>> v3.18
 }
 
 static int ohci_hcd_at91_drv_resume(struct platform_device *pdev)
@@ -713,8 +899,11 @@ static int ohci_hcd_at91_drv_resume(struct platform_device *pdev)
 #define ohci_hcd_at91_drv_resume  NULL
 #endif
 
+<<<<<<< HEAD
 MODULE_ALIAS("platform:at91_ohci");
 
+=======
+>>>>>>> v3.18
 static struct platform_driver ohci_hcd_at91_driver = {
 	.probe		= ohci_hcd_at91_drv_probe,
 	.remove		= ohci_hcd_at91_drv_remove,
@@ -727,3 +916,40 @@ static struct platform_driver ohci_hcd_at91_driver = {
 		.of_match_table	= of_match_ptr(at91_ohci_dt_ids),
 	},
 };
+<<<<<<< HEAD
+=======
+
+static int __init ohci_at91_init(void)
+{
+	if (usb_disabled())
+		return -ENODEV;
+
+	pr_info("%s: " DRIVER_DESC "\n", hcd_name);
+	ohci_init_driver(&ohci_at91_hc_driver, NULL);
+
+	/*
+	 * The Atmel HW has some unusual quirks, which require Atmel-specific
+	 * workarounds. We override certain hc_driver functions here to
+	 * achieve that. We explicitly do not enhance ohci_driver_overrides to
+	 * allow this more easily, since this is an unusual case, and we don't
+	 * want to encourage others to override these functions by making it
+	 * too easy.
+	 */
+
+	ohci_at91_hc_driver.hub_status_data	= ohci_at91_hub_status_data;
+	ohci_at91_hc_driver.hub_control		= ohci_at91_hub_control;
+
+	return platform_driver_register(&ohci_hcd_at91_driver);
+}
+module_init(ohci_at91_init);
+
+static void __exit ohci_at91_cleanup(void)
+{
+	platform_driver_unregister(&ohci_hcd_at91_driver);
+}
+module_exit(ohci_at91_cleanup);
+
+MODULE_DESCRIPTION(DRIVER_DESC);
+MODULE_LICENSE("GPL");
+MODULE_ALIAS("platform:at91_ohci");
+>>>>>>> v3.18

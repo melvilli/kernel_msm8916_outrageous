@@ -12,6 +12,10 @@
 #include <linux/module.h>
 #include <linux/delay.h>
 #include <linux/device.h>
+<<<<<<< HEAD
+=======
+#include <linux/gpio.h>
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/io.h>
 #include <linux/ioport.h>
@@ -350,7 +354,10 @@ static void *bfin_spi_next_transfer(struct bfin_spi_master_data *drv_data)
 static void bfin_spi_giveback(struct bfin_spi_master_data *drv_data)
 {
 	struct bfin_spi_slave_data *chip = drv_data->cur_chip;
+<<<<<<< HEAD
 	struct spi_transfer *last_transfer;
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 	struct spi_message *msg;
 
@@ -362,9 +369,12 @@ static void bfin_spi_giveback(struct bfin_spi_master_data *drv_data)
 	queue_work(drv_data->workqueue, &drv_data->pump_messages);
 	spin_unlock_irqrestore(&drv_data->lock, flags);
 
+<<<<<<< HEAD
 	last_transfer = list_entry(msg->transfers.prev,
 				   struct spi_transfer, transfer_list);
 
+=======
+>>>>>>> v3.18
 	msg->state = NULL;
 
 	if (!drv_data->cs_change)
@@ -524,7 +534,11 @@ static irqreturn_t bfin_spi_dma_irq_handler(int irq, void *dev_id)
 	timeout = jiffies + HZ;
 	while (!(bfin_read(&drv_data->regs->stat) & BIT_STAT_SPIF))
 		if (!time_before(jiffies, timeout)) {
+<<<<<<< HEAD
 			dev_warn(&drv_data->pdev->dev, "timeout waiting for SPIF");
+=======
+			dev_warn(&drv_data->pdev->dev, "timeout waiting for SPIF\n");
+>>>>>>> v3.18
 			break;
 		} else
 			cpu_relax();
@@ -643,21 +657,32 @@ static void bfin_spi_pump_transfers(unsigned long data)
 
 	/* Bits per word setup */
 	bits_per_word = transfer->bits_per_word;
+<<<<<<< HEAD
 	if (bits_per_word % 16 == 0) {
+=======
+	if (bits_per_word == 16) {
+>>>>>>> v3.18
 		drv_data->n_bytes = bits_per_word/8;
 		drv_data->len = (transfer->len) >> 1;
 		cr_width = BIT_CTL_WORDSIZE;
 		drv_data->ops = &bfin_bfin_spi_transfer_ops_u16;
+<<<<<<< HEAD
 	} else if (bits_per_word % 8 == 0) {
+=======
+	} else if (bits_per_word == 8) {
+>>>>>>> v3.18
 		drv_data->n_bytes = bits_per_word/8;
 		drv_data->len = transfer->len;
 		cr_width = 0;
 		drv_data->ops = &bfin_bfin_spi_transfer_ops_u8;
+<<<<<<< HEAD
 	} else {
 		dev_err(&drv_data->pdev->dev, "transfer: unsupported bits_per_word\n");
 		message->status = -EINVAL;
 		bfin_spi_giveback(drv_data);
 		return;
+=======
+>>>>>>> v3.18
 	}
 	cr = bfin_read(&drv_data->regs->ctl) & ~(BIT_CTL_TIMOD | BIT_CTL_WORDSIZE);
 	cr |= cr_width;
@@ -808,13 +833,21 @@ static void bfin_spi_pump_transfers(unsigned long data)
 			bfin_write(&drv_data->regs->tdbr, chip->idle_tx_val);
 		else {
 			int loop;
+<<<<<<< HEAD
 			if (bits_per_word % 16 == 0) {
+=======
+			if (bits_per_word == 16) {
+>>>>>>> v3.18
 				u16 *buf = (u16 *)drv_data->tx;
 				for (loop = 0; loop < bits_per_word / 16;
 						loop++) {
 					bfin_write(&drv_data->regs->tdbr, *buf++);
 				}
+<<<<<<< HEAD
 			} else if (bits_per_word % 8 == 0) {
+=======
+			} else if (bits_per_word == 8) {
+>>>>>>> v3.18
 				u8 *buf = (u8 *)drv_data->tx;
 				for (loop = 0; loop < bits_per_word / 8; loop++)
 					bfin_write(&drv_data->regs->tdbr, *buf++);
@@ -918,8 +951,14 @@ static void bfin_spi_pump_messages(struct work_struct *work)
 	drv_data->cur_transfer = list_entry(drv_data->cur_msg->transfers.next,
 					    struct spi_transfer, transfer_list);
 
+<<<<<<< HEAD
 	dev_dbg(&drv_data->pdev->dev, "got a message to pump, "
 		"state is set to: baud %d, flag 0x%x, ctl 0x%x\n",
+=======
+	dev_dbg(&drv_data->pdev->dev,
+		"got a message to pump, state is set to: baud "
+		"%d, flag 0x%x, ctl 0x%x\n",
+>>>>>>> v3.18
 		drv_data->cur_chip->baud, drv_data->cur_chip->flag,
 		drv_data->cur_chip->ctl_reg);
 
@@ -1018,8 +1057,13 @@ static int bfin_spi_setup(struct spi_device *spi)
 		 * but let's assume (for now) they do.
 		 */
 		if (chip_info->ctl_reg & ~bfin_ctl_reg) {
+<<<<<<< HEAD
 			dev_err(&spi->dev, "do not set bits in ctl_reg "
 				"that the SPI framework manages\n");
+=======
+			dev_err(&spi->dev,
+				"do not set bits in ctl_reg that the SPI framework manages\n");
+>>>>>>> v3.18
 			goto error;
 		}
 		chip->enable_dma = chip_info->enable_dma != 0
@@ -1033,6 +1077,7 @@ static int bfin_spi_setup(struct spi_device *spi)
 		chip->ctl_reg &= bfin_ctl_reg;
 	}
 
+<<<<<<< HEAD
 	if (spi->bits_per_word % 8) {
 		dev_err(&spi->dev, "%d bits_per_word is not supported\n",
 				spi->bits_per_word);
@@ -1044,6 +1089,9 @@ static int bfin_spi_setup(struct spi_device *spi)
 		dev_err(&spi->dev, "unsupported spi modes detected\n");
 		goto error;
 	}
+=======
+	/* translate common spi framework into our register */
+>>>>>>> v3.18
 	if (spi->mode & SPI_CPOL)
 		chip->ctl_reg |= BIT_CTL_CPOL;
 	if (spi->mode & SPI_CPHA)
@@ -1061,17 +1109,28 @@ static int bfin_spi_setup(struct spi_device *spi)
 	chip->chip_select_num = spi->chip_select;
 	if (chip->chip_select_num < MAX_CTRL_CS) {
 		if (!(spi->mode & SPI_CPHA))
+<<<<<<< HEAD
 			dev_warn(&spi->dev, "Warning: SPI CPHA not set:"
 				" Slave Select not under software control!\n"
 				" See Documentation/blackfin/bfin-spi-notes.txt");
+=======
+			dev_warn(&spi->dev,
+				"Warning: SPI CPHA not set: Slave Select not under software control!\n"
+				"See Documentation/blackfin/bfin-spi-notes.txt\n");
+>>>>>>> v3.18
 
 		chip->flag = (1 << spi->chip_select) << 8;
 	} else
 		chip->cs_gpio = chip->chip_select_num - MAX_CTRL_CS;
 
 	if (chip->enable_dma && chip->pio_interrupt) {
+<<<<<<< HEAD
 		dev_err(&spi->dev, "enable_dma is set, "
 				"do not set pio_interrupt\n");
+=======
+		dev_err(&spi->dev,
+			"enable_dma is set, do not set pio_interrupt\n");
+>>>>>>> v3.18
 		goto error;
 	}
 	/*
@@ -1282,7 +1341,11 @@ static int bfin_spi_probe(struct platform_device *pdev)
 	struct resource *res;
 	int status = 0;
 
+<<<<<<< HEAD
 	platform_info = dev->platform_data;
+=======
+	platform_info = dev_get_platdata(dev);
+>>>>>>> v3.18
 
 	/* Allocate master with space for drv_data */
 	master = spi_alloc_master(dev, sizeof(*drv_data));
@@ -1299,7 +1362,11 @@ static int bfin_spi_probe(struct platform_device *pdev)
 
 	/* the spi->mode bits supported by this driver: */
 	master->mode_bits = SPI_CPOL | SPI_CPHA | SPI_LSB_FIRST;
+<<<<<<< HEAD
 
+=======
+	master->bits_per_word_mask = SPI_BPW_MASK(8) | SPI_BPW_MASK(16);
+>>>>>>> v3.18
 	master->bus_num = pdev->id;
 	master->num_chipselect = platform_info->num_chipselect;
 	master->cleanup = bfin_spi_cleanup;
@@ -1418,6 +1485,7 @@ static int bfin_spi_remove(struct platform_device *pdev)
 
 	peripheral_free_list(drv_data->pin_req);
 
+<<<<<<< HEAD
 	/* Prevent double remove */
 	platform_set_drvdata(pdev, NULL);
 
@@ -1428,6 +1496,15 @@ static int bfin_spi_remove(struct platform_device *pdev)
 static int bfin_spi_suspend(struct platform_device *pdev, pm_message_t state)
 {
 	struct bfin_spi_master_data *drv_data = platform_get_drvdata(pdev);
+=======
+	return 0;
+}
+
+#ifdef CONFIG_PM_SLEEP
+static int bfin_spi_suspend(struct device *dev)
+{
+	struct bfin_spi_master_data *drv_data = dev_get_drvdata(dev);
+>>>>>>> v3.18
 	int status = 0;
 
 	status = bfin_spi_stop_queue(drv_data);
@@ -1446,9 +1523,15 @@ static int bfin_spi_suspend(struct platform_device *pdev, pm_message_t state)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int bfin_spi_resume(struct platform_device *pdev)
 {
 	struct bfin_spi_master_data *drv_data = platform_get_drvdata(pdev);
+=======
+static int bfin_spi_resume(struct device *dev)
+{
+	struct bfin_spi_master_data *drv_data = dev_get_drvdata(dev);
+>>>>>>> v3.18
 	int status = 0;
 
 	bfin_write(&drv_data->regs->ctl, drv_data->ctrl_reg);
@@ -1457,31 +1540,55 @@ static int bfin_spi_resume(struct platform_device *pdev)
 	/* Start the queue running */
 	status = bfin_spi_start_queue(drv_data);
 	if (status != 0) {
+<<<<<<< HEAD
 		dev_err(&pdev->dev, "problem starting queue (%d)\n", status);
+=======
+		dev_err(dev, "problem starting queue (%d)\n", status);
+>>>>>>> v3.18
 		return status;
 	}
 
 	return 0;
 }
+<<<<<<< HEAD
 #else
 #define bfin_spi_suspend NULL
 #define bfin_spi_resume NULL
 #endif				/* CONFIG_PM */
+=======
+
+static SIMPLE_DEV_PM_OPS(bfin_spi_pm_ops, bfin_spi_suspend, bfin_spi_resume);
+
+#define BFIN_SPI_PM_OPS		(&bfin_spi_pm_ops)
+#else
+#define BFIN_SPI_PM_OPS		NULL
+#endif
+>>>>>>> v3.18
 
 MODULE_ALIAS("platform:bfin-spi");
 static struct platform_driver bfin_spi_driver = {
 	.driver	= {
 		.name	= DRV_NAME,
 		.owner	= THIS_MODULE,
+<<<<<<< HEAD
 	},
 	.suspend	= bfin_spi_suspend,
 	.resume		= bfin_spi_resume,
+=======
+		.pm	= BFIN_SPI_PM_OPS,
+	},
+	.probe		= bfin_spi_probe,
+>>>>>>> v3.18
 	.remove		= bfin_spi_remove,
 };
 
 static int __init bfin_spi_init(void)
 {
+<<<<<<< HEAD
 	return platform_driver_probe(&bfin_spi_driver, bfin_spi_probe);
+=======
+	return platform_driver_register(&bfin_spi_driver);
+>>>>>>> v3.18
 }
 subsys_initcall(bfin_spi_init);
 

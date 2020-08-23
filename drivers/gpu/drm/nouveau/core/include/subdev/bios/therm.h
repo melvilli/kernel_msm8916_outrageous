@@ -23,6 +23,15 @@ struct nvbios_therm_sensor {
 	struct nvbios_therm_threshold thrs_shutdown;
 };
 
+<<<<<<< HEAD
+=======
+enum nvbios_therm_fan_type {
+	NVBIOS_THERM_FAN_UNK = 0,
+	NVBIOS_THERM_FAN_TOGGLE = 1,
+	NVBIOS_THERM_FAN_PWM = 2,
+};
+
+>>>>>>> v3.18
 /* no vbios have more than 6 */
 #define NOUVEAU_TEMP_FAN_TRIP_MAX 10
 struct nouveau_therm_trip_point {
@@ -31,8 +40,21 @@ struct nouveau_therm_trip_point {
 	int hysteresis;
 };
 
+<<<<<<< HEAD
 struct nvbios_therm_fan {
 	u16 pwm_freq;
+=======
+enum nvbios_therm_fan_mode {
+	NVBIOS_THERM_FAN_TRIP = 0,
+	NVBIOS_THERM_FAN_LINEAR = 1,
+	NVBIOS_THERM_FAN_OTHER = 2,
+};
+
+struct nvbios_therm_fan {
+	enum nvbios_therm_fan_type type;
+
+	u32 pwm_freq;
+>>>>>>> v3.18
 
 	u8 min_duty;
 	u8 max_duty;
@@ -40,6 +62,10 @@ struct nvbios_therm_fan {
 	u16 bump_period;
 	u16 slow_down_period;
 
+<<<<<<< HEAD
+=======
+	enum nvbios_therm_fan_mode fan_mode;
+>>>>>>> v3.18
 	struct nouveau_therm_trip_point trip[NOUVEAU_TEMP_FAN_TRIP_MAX];
 	u8 nr_fan_trip;
 	u8 linear_min_temp;

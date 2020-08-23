@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -88,22 +92,42 @@ acpi_ex_system_memory_space_handler(u32 function,
 
 	switch (bit_width) {
 	case 8:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		length = 1;
 		break;
 
 	case 16:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		length = 2;
 		break;
 
 	case 32:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		length = 4;
 		break;
 
 	case 64:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		length = 8;
 		break;
 
 	default:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		ACPI_ERROR((AE_INFO, "Invalid SystemMemory width %u",
 			    bit_width));
 		return_ACPI_STATUS(AE_AML_OPERAND_VALUE);
@@ -176,7 +200,11 @@ acpi_ex_system_memory_space_handler(u32 function,
 		if (!mem_info->mapped_logical_address) {
 			ACPI_ERROR((AE_INFO,
 				    "Could not map memory at 0x%8.8X%8.8X, size %u",
+<<<<<<< HEAD
 				    ACPI_FORMAT_UINT64(address),
+=======
+				    ACPI_FORMAT_NATIVE_UINT(address),
+>>>>>>> v3.18
 				    (u32) map_length));
 			mem_info->mapped_length = 0;
 			return_ACPI_STATUS(AE_NO_MEMORY);
@@ -197,7 +225,12 @@ acpi_ex_system_memory_space_handler(u32 function,
 
 	ACPI_DEBUG_PRINT((ACPI_DB_INFO,
 			  "System-Memory (width %u) R/W %u Address=%8.8X%8.8X\n",
+<<<<<<< HEAD
 			  bit_width, function, ACPI_FORMAT_UINT64(address)));
+=======
+			  bit_width, function,
+			  ACPI_FORMAT_NATIVE_UINT(address)));
+>>>>>>> v3.18
 
 	/*
 	 * Perform the memory read or write
@@ -213,6 +246,7 @@ acpi_ex_system_memory_space_handler(u32 function,
 		*value = 0;
 		switch (bit_width) {
 		case 8:
+<<<<<<< HEAD
 			*value = (u64) ACPI_GET8(logical_addr_ptr);
 			break;
 
@@ -230,6 +264,31 @@ acpi_ex_system_memory_space_handler(u32 function,
 
 		default:
 			/* bit_width was already validated */
+=======
+
+			*value = (u64)ACPI_GET8(logical_addr_ptr);
+			break;
+
+		case 16:
+
+			*value = (u64)ACPI_GET16(logical_addr_ptr);
+			break;
+
+		case 32:
+
+			*value = (u64)ACPI_GET32(logical_addr_ptr);
+			break;
+
+		case 64:
+
+			*value = (u64)ACPI_GET64(logical_addr_ptr);
+			break;
+
+		default:
+
+			/* bit_width was already validated */
+
+>>>>>>> v3.18
 			break;
 		}
 		break;
@@ -238,28 +297,54 @@ acpi_ex_system_memory_space_handler(u32 function,
 
 		switch (bit_width) {
 		case 8:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 			ACPI_SET8(logical_addr_ptr, *value);
 			break;
 
 		case 16:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 			ACPI_SET16(logical_addr_ptr, *value);
 			break;
 
 		case 32:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 			ACPI_SET32(logical_addr_ptr, *value);
 			break;
 
 		case 64:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 			ACPI_SET64(logical_addr_ptr, *value);
 			break;
 
 		default:
+<<<<<<< HEAD
 			/* bit_width was already validated */
+=======
+
+			/* bit_width was already validated */
+
+>>>>>>> v3.18
 			break;
 		}
 		break;
 
 	default:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		status = AE_BAD_PARAMETER;
 		break;
 	}
@@ -299,7 +384,12 @@ acpi_ex_system_io_space_handler(u32 function,
 
 	ACPI_DEBUG_PRINT((ACPI_DB_INFO,
 			  "System-IO (width %u) R/W %u Address=%8.8X%8.8X\n",
+<<<<<<< HEAD
 			  bit_width, function, ACPI_FORMAT_UINT64(address)));
+=======
+			  bit_width, function,
+			  ACPI_FORMAT_NATIVE_UINT(address)));
+>>>>>>> v3.18
 
 	/* Decode the function parameter */
 
@@ -318,6 +408,10 @@ acpi_ex_system_io_space_handler(u32 function,
 		break;
 
 	default:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		status = AE_BAD_PARAMETER;
 		break;
 	}
@@ -379,6 +473,10 @@ acpi_ex_pci_config_space_handler(u32 function,
 	switch (function) {
 	case ACPI_READ:
 
+<<<<<<< HEAD
+=======
+		*value = 0;
+>>>>>>> v3.18
 		status = acpi_os_read_pci_configuration(pci_id, pci_register,
 							value, bit_width);
 		break;

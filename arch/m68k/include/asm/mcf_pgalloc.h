@@ -56,6 +56,13 @@ static inline struct page *pte_alloc_one(struct mm_struct *mm,
 
 	if (!page)
 		return NULL;
+<<<<<<< HEAD
+=======
+	if (!pgtable_page_ctor(page)) {
+		__free_page(page);
+		return NULL;
+	}
+>>>>>>> v3.18
 
 	pte = kmap(page);
 	if (pte) {

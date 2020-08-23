@@ -565,12 +565,20 @@ static int pctv452e_rc_query(struct dvb_usb_device *d)
 
 	if ((rx[3] == 9) &&  (rx[12] & 0x01)) {
 		/* got a "press" event */
+<<<<<<< HEAD
 		state->last_rc_key = (rx[7] << 8) | rx[6];
+=======
+		state->last_rc_key = RC_SCANCODE_RC5(rx[7], rx[6]);
+>>>>>>> v3.18
 		if (debug > 2)
 			info("%s: cmd=0x%02x sys=0x%02x\n",
 				__func__, rx[6], rx[7]);
 
+<<<<<<< HEAD
 		rc_keydown(d->rc_dev, state->last_rc_key, 0);
+=======
+		rc_keydown(d->rc_dev, RC_TYPE_RC5, state->last_rc_key, 0);
+>>>>>>> v3.18
 	} else if (state->last_rc_key) {
 		rc_keyup(d->rc_dev);
 		state->last_rc_key = 0;
@@ -828,7 +836,11 @@ static struct stb0899_config stb0899_config = {
 	.block_sync_mode = STB0899_SYNC_FORCED, /* ? */
 
 	.xtal_freq       = 27000000,	 /* Assume Hz ? */
+<<<<<<< HEAD
 	.inversion       = IQ_SWAP_ON,       /* ? */
+=======
+	.inversion       = IQ_SWAP_ON,
+>>>>>>> v3.18
 
 	.lo_clk	  = 76500000,
 	.hi_clk	  = 99000000,
@@ -883,7 +895,11 @@ static int pctv452e_frontend_attach(struct dvb_usb_adapter *a)
 	if (!a->fe_adap[0].fe)
 		return -ENODEV;
 	if ((dvb_attach(lnbp22_attach, a->fe_adap[0].fe,
+<<<<<<< HEAD
 					&a->dev->i2c_adap)) == 0)
+=======
+					&a->dev->i2c_adap)) == NULL)
+>>>>>>> v3.18
 		err("Cannot attach lnbp22\n");
 
 	id = a->dev->desc->warm_ids[0];
@@ -900,7 +916,11 @@ static int pctv452e_tuner_attach(struct dvb_usb_adapter *a)
 	if (!a->fe_adap[0].fe)
 		return -ENODEV;
 	if (dvb_attach(stb6100_attach, a->fe_adap[0].fe, &stb6100_config,
+<<<<<<< HEAD
 					&a->dev->i2c_adap) == 0) {
+=======
+					&a->dev->i2c_adap) == NULL) {
+>>>>>>> v3.18
 		err("%s failed\n", __func__);
 		return -ENODEV;
 	}
@@ -927,7 +947,11 @@ static struct dvb_usb_device_properties pctv452e_properties = {
 
 	.rc.core = {
 		.rc_codes	= RC_MAP_DIB0700_RC5_TABLE,
+<<<<<<< HEAD
 		.allowed_protos	= RC_BIT_UNKNOWN,
+=======
+		.allowed_protos	= RC_BIT_RC5,
+>>>>>>> v3.18
 		.rc_query	= pctv452e_rc_query,
 		.rc_interval	= 100,
 	},
@@ -965,7 +989,11 @@ static struct dvb_usb_device_properties pctv452e_properties = {
 		  .cold_ids = { NULL, NULL }, /* this is a warm only device */
 		  .warm_ids = { &pctv452e_usb_table[0], NULL }
 		},
+<<<<<<< HEAD
 		{ 0 },
+=======
+		{ NULL },
+>>>>>>> v3.18
 	}
 };
 
@@ -980,7 +1008,11 @@ static struct dvb_usb_device_properties tt_connect_s2_3600_properties = {
 
 	.rc.core = {
 		.rc_codes	= RC_MAP_TT_1500,
+<<<<<<< HEAD
 		.allowed_protos	= RC_BIT_UNKNOWN,
+=======
+		.allowed_protos	= RC_BIT_RC5,
+>>>>>>> v3.18
 		.rc_query	= pctv452e_rc_query,
 		.rc_interval	= 100,
 	},
@@ -1023,7 +1055,11 @@ static struct dvb_usb_device_properties tt_connect_s2_3600_properties = {
 		  .cold_ids = { NULL, NULL },
 		  .warm_ids = { &pctv452e_usb_table[2], NULL }
 		},
+<<<<<<< HEAD
 		{ 0 },
+=======
+		{ NULL },
+>>>>>>> v3.18
 	}
 };
 

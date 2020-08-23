@@ -36,8 +36,25 @@
 #include <linux/highmem.h>
 #include <linux/export.h>
 #include <drm/drmP.h>
+<<<<<<< HEAD
 
 #if __OS_HAS_AGP
+=======
+#include "drm_legacy.h"
+
+#if __OS_HAS_AGP
+
+#ifdef HAVE_PAGE_AGP
+# include <asm/agp.h>
+#else
+# ifdef __powerpc__
+#  define PAGE_AGP	__pgprot(_PAGE_KERNEL | _PAGE_NO_CACHE)
+# else
+#  define PAGE_AGP	PAGE_KERNEL
+# endif
+#endif
+
+>>>>>>> v3.18
 static void *agp_remap(unsigned long offset, unsigned long size,
 		       struct drm_device * dev)
 {
@@ -82,6 +99,7 @@ static void *agp_remap(unsigned long offset, unsigned long size,
 }
 
 /** Wrapper around agp_free_memory() */
+<<<<<<< HEAD
 void drm_free_agp(DRM_AGP_MEM * handle, int pages)
 {
 	agp_free_memory(handle);
@@ -90,16 +108,32 @@ EXPORT_SYMBOL(drm_free_agp);
 
 /** Wrapper around agp_bind_memory() */
 int drm_bind_agp(DRM_AGP_MEM * handle, unsigned int start)
+=======
+void drm_free_agp(struct agp_memory * handle, int pages)
+{
+	agp_free_memory(handle);
+}
+
+/** Wrapper around agp_bind_memory() */
+int drm_bind_agp(struct agp_memory * handle, unsigned int start)
+>>>>>>> v3.18
 {
 	return agp_bind_memory(handle, start);
 }
 
 /** Wrapper around agp_unbind_memory() */
+<<<<<<< HEAD
 int drm_unbind_agp(DRM_AGP_MEM * handle)
 {
 	return agp_unbind_memory(handle);
 }
 EXPORT_SYMBOL(drm_unbind_agp);
+=======
+int drm_unbind_agp(struct agp_memory * handle)
+{
+	return agp_unbind_memory(handle);
+}
+>>>>>>> v3.18
 
 #else  /*  __OS_HAS_AGP  */
 static inline void *agp_remap(unsigned long offset, unsigned long size,
@@ -110,35 +144,63 @@ static inline void *agp_remap(unsigned long offset, unsigned long size,
 
 #endif				/* agp */
 
+<<<<<<< HEAD
 void drm_core_ioremap(struct drm_local_map *map, struct drm_device *dev)
 {
 	if (drm_core_has_AGP(dev) &&
 	    dev->agp && dev->agp->cant_use_aperture && map->type == _DRM_AGP)
+=======
+void drm_legacy_ioremap(struct drm_local_map *map, struct drm_device *dev)
+{
+	if (dev->agp && dev->agp->cant_use_aperture && map->type == _DRM_AGP)
+>>>>>>> v3.18
 		map->handle = agp_remap(map->offset, map->size, dev);
 	else
 		map->handle = ioremap(map->offset, map->size);
 }
+<<<<<<< HEAD
 EXPORT_SYMBOL(drm_core_ioremap);
 
 void drm_core_ioremap_wc(struct drm_local_map *map, struct drm_device *dev)
 {
 	if (drm_core_has_AGP(dev) &&
 	    dev->agp && dev->agp->cant_use_aperture && map->type == _DRM_AGP)
+=======
+EXPORT_SYMBOL(drm_legacy_ioremap);
+
+void drm_legacy_ioremap_wc(struct drm_local_map *map, struct drm_device *dev)
+{
+	if (dev->agp && dev->agp->cant_use_aperture && map->type == _DRM_AGP)
+>>>>>>> v3.18
 		map->handle = agp_remap(map->offset, map->size, dev);
 	else
 		map->handle = ioremap_wc(map->offset, map->size);
 }
+<<<<<<< HEAD
 EXPORT_SYMBOL(drm_core_ioremap_wc);
 
 void drm_core_ioremapfree(struct drm_local_map *map, struct drm_device *dev)
+=======
+EXPORT_SYMBOL(drm_legacy_ioremap_wc);
+
+void drm_legacy_ioremapfree(struct drm_local_map *map, struct drm_device *dev)
+>>>>>>> v3.18
 {
 	if (!map->handle || !map->size)
 		return;
 
+<<<<<<< HEAD
 	if (drm_core_has_AGP(dev) &&
 	    dev->agp && dev->agp->cant_use_aperture && map->type == _DRM_AGP)
+=======
+	if (dev->agp && dev->agp->cant_use_aperture && map->type == _DRM_AGP)
+>>>>>>> v3.18
 		vunmap(map->handle);
 	else
 		iounmap(map->handle);
 }
+<<<<<<< HEAD
 EXPORT_SYMBOL(drm_core_ioremapfree);
+=======
+EXPORT_SYMBOL(drm_legacy_ioremapfree);
+>>>>>>> v3.18

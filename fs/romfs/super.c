@@ -56,6 +56,11 @@
  * 2 of the Licence, or (at your option) any later version.
  */
 
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/string.h>
 #include <linux/fs.h>
@@ -145,6 +150,7 @@ static const struct address_space_operations romfs_aops = {
 /*
  * read the entries from a directory
  */
+<<<<<<< HEAD
 static int romfs_readdir(struct file *filp, void *dirent, filldir_t filldir)
 {
 	struct inode *i = file_inode(filp);
@@ -152,12 +158,24 @@ static int romfs_readdir(struct file *filp, void *dirent, filldir_t filldir)
 	unsigned long offset, maxoff;
 	int j, ino, nextfh;
 	int stored = 0;
+=======
+static int romfs_readdir(struct file *file, struct dir_context *ctx)
+{
+	struct inode *i = file_inode(file);
+	struct romfs_inode ri;
+	unsigned long offset, maxoff;
+	int j, ino, nextfh;
+>>>>>>> v3.18
 	char fsname[ROMFS_MAXFN];	/* XXX dynamic? */
 	int ret;
 
 	maxoff = romfs_maxsize(i->i_sb);
 
+<<<<<<< HEAD
 	offset = filp->f_pos;
+=======
+	offset = ctx->pos;
+>>>>>>> v3.18
 	if (!offset) {
 		offset = i->i_ino & ROMFH_MASK;
 		ret = romfs_dev_read(i->i_sb, offset, &ri, ROMFH_SIZE);
@@ -170,10 +188,17 @@ static int romfs_readdir(struct file *filp, void *dirent, filldir_t filldir)
 	for (;;) {
 		if (!offset || offset >= maxoff) {
 			offset = maxoff;
+<<<<<<< HEAD
 			filp->f_pos = offset;
 			goto out;
 		}
 		filp->f_pos = offset;
+=======
+			ctx->pos = offset;
+			goto out;
+		}
+		ctx->pos = offset;
+>>>>>>> v3.18
 
 		/* Fetch inode info */
 		ret = romfs_dev_read(i->i_sb, offset, &ri, ROMFH_SIZE);
@@ -194,6 +219,7 @@ static int romfs_readdir(struct file *filp, void *dirent, filldir_t filldir)
 		nextfh = be32_to_cpu(ri.next);
 		if ((nextfh & ROMFH_TYPE) == ROMFH_HRD)
 			ino = be32_to_cpu(ri.spec);
+<<<<<<< HEAD
 		if (filldir(dirent, fsname, j, offset, ino,
 			    romfs_dtype_table[nextfh & ROMFH_TYPE]) < 0)
 			goto out;
@@ -204,6 +230,16 @@ static int romfs_readdir(struct file *filp, void *dirent, filldir_t filldir)
 
 out:
 	return stored;
+=======
+		if (!dir_emit(ctx, fsname, j, ino,
+			    romfs_dtype_table[nextfh & ROMFH_TYPE]))
+			goto out;
+
+		offset = nextfh & ROMFH_MASK;
+	}
+out:
+	return 0;
+>>>>>>> v3.18
 }
 
 /*
@@ -281,7 +317,11 @@ error:
 
 static const struct file_operations romfs_dir_operations = {
 	.read		= generic_read_dir,
+<<<<<<< HEAD
 	.readdir	= romfs_readdir,
+=======
+	.iterate	= romfs_readdir,
+>>>>>>> v3.18
 	.llseek		= default_llseek,
 };
 
@@ -383,7 +423,11 @@ static struct inode *romfs_iget(struct super_block *sb, unsigned long pos)
 eio:
 	ret = -EIO;
 error:
+<<<<<<< HEAD
 	printk(KERN_ERR "ROMFS: read error for inode 0x%lx\n", pos);
+=======
+	pr_err("read error for inode 0x%lx\n", pos);
+>>>>>>> v3.18
 	return ERR_PTR(ret);
 }
 
@@ -393,6 +437,10 @@ error:
 static struct inode *romfs_alloc_inode(struct super_block *sb)
 {
 	struct romfs_inode_info *inode;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	inode = kmem_cache_alloc(romfs_inode_cachep, GFP_KERNEL);
 	return inode ? &inode->vfs_inode : NULL;
 }
@@ -403,6 +451,10 @@ static struct inode *romfs_alloc_inode(struct super_block *sb)
 static void romfs_i_callback(struct rcu_head *head)
 {
 	struct inode *inode = container_of(head, struct inode, i_rcu);
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	kmem_cache_free(romfs_inode_cachep, ROMFS_I(inode));
 }
 
@@ -435,6 +487,10 @@ static int romfs_statfs(struct dentry *dentry, struct kstatfs *buf)
  */
 static int romfs_remount(struct super_block *sb, int *flags, char *data)
 {
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+>>>>>>> v3.18
 	*flags |= MS_RDONLY;
 	return 0;
 }
@@ -509,15 +565,23 @@ static int romfs_fill_super(struct super_block *sb, void *data, int silent)
 	if (rsb->word0 != ROMSB_WORD0 || rsb->word1 != ROMSB_WORD1 ||
 	    img_size < ROMFH_SIZE) {
 		if (!silent)
+<<<<<<< HEAD
 			printk(KERN_WARNING "VFS:"
 			       " Can't find a romfs filesystem on dev %s.\n",
+=======
+			pr_warn("VFS: Can't find a romfs filesystem on dev %s.\n",
+>>>>>>> v3.18
 			       sb->s_id);
 		goto error_rsb_inval;
 	}
 
 	if (romfs_checksum(rsb, min_t(size_t, img_size, 512))) {
+<<<<<<< HEAD
 		printk(KERN_ERR "ROMFS: bad initial checksum on dev %s.\n",
 		       sb->s_id);
+=======
+		pr_err("bad initial checksum on dev %s.\n", sb->s_id);
+>>>>>>> v3.18
 		goto error_rsb_inval;
 	}
 
@@ -525,8 +589,13 @@ static int romfs_fill_super(struct super_block *sb, void *data, int silent)
 
 	len = strnlen(rsb->name, ROMFS_MAXFN);
 	if (!silent)
+<<<<<<< HEAD
 		printk(KERN_NOTICE "ROMFS: Mounting image '%*.*s' through %s\n",
 		       (unsigned) len, (unsigned) len, rsb->name, storage);
+=======
+		pr_notice("Mounting image '%*.*s' through %s\n",
+			  (unsigned) len, (unsigned) len, rsb->name, storage);
+>>>>>>> v3.18
 
 	kfree(rsb);
 	rsb = NULL;
@@ -536,6 +605,7 @@ static int romfs_fill_super(struct super_block *sb, void *data, int silent)
 
 	root = romfs_iget(sb, pos);
 	if (IS_ERR(root))
+<<<<<<< HEAD
 		goto error;
 
 	sb->s_root = d_make_root(root);
@@ -546,6 +616,16 @@ static int romfs_fill_super(struct super_block *sb, void *data, int silent)
 
 error:
 	return -EINVAL;
+=======
+		return PTR_ERR(root);
+
+	sb->s_root = d_make_root(root);
+	if (!sb->s_root)
+		return -ENOMEM;
+
+	return 0;
+
+>>>>>>> v3.18
 error_rsb_inval:
 	ret = -EINVAL;
 error_rsb:
@@ -618,7 +698,11 @@ static int __init init_romfs_fs(void)
 {
 	int ret;
 
+<<<<<<< HEAD
 	printk(KERN_INFO "ROMFS MTD (C) 2007 Red Hat, Inc.\n");
+=======
+	pr_info("ROMFS MTD (C) 2007 Red Hat, Inc.\n");
+>>>>>>> v3.18
 
 	romfs_inode_cachep =
 		kmem_cache_create("romfs_i",
@@ -627,13 +711,21 @@ static int __init init_romfs_fs(void)
 				  romfs_i_init_once);
 
 	if (!romfs_inode_cachep) {
+<<<<<<< HEAD
 		printk(KERN_ERR
 		       "ROMFS error: Failed to initialise inode cache\n");
+=======
+		pr_err("Failed to initialise inode cache\n");
+>>>>>>> v3.18
 		return -ENOMEM;
 	}
 	ret = register_filesystem(&romfs_fs_type);
 	if (ret) {
+<<<<<<< HEAD
 		printk(KERN_ERR "ROMFS error: Failed to register filesystem\n");
+=======
+		pr_err("Failed to register filesystem\n");
+>>>>>>> v3.18
 		goto error_register;
 	}
 	return 0;

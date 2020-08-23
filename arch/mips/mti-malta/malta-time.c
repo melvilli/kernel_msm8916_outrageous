@@ -27,6 +27,10 @@
 #include <linux/timex.h>
 #include <linux/mc146818rtc.h>
 
+<<<<<<< HEAD
+=======
+#include <asm/cpu.h>
+>>>>>>> v3.18
 #include <asm/mipsregs.h>
 #include <asm/mipsmtregs.h>
 #include <asm/hardirq.h>
@@ -41,8 +45,11 @@
 #include <asm/mips-boards/generic.h>
 #include <asm/mips-boards/maltaint.h>
 
+<<<<<<< HEAD
 unsigned long cpu_khz;
 
+=======
+>>>>>>> v3.18
 static int mips_cpu_timer_irq;
 static int mips_cpu_perf_irq;
 extern int cp0_perfcount_irq;
@@ -75,6 +82,7 @@ static void __init estimate_frequencies(void)
 	unsigned int giccount = 0, gicstart = 0;
 #endif
 
+<<<<<<< HEAD
 #if defined (CONFIG_KVM_GUEST) && defined (CONFIG_KVM_HOST_FREQ)
 	unsigned int prid = read_c0_prid() & 0xffff00;
 
@@ -87,6 +95,10 @@ static void __init estimate_frequencies(void)
 		count *= 2;
 
 	mips_hpt_frequency = count;
+=======
+#if defined(CONFIG_KVM_GUEST) && CONFIG_KVM_GUEST_TIMER_FREQ
+	mips_hpt_frequency = CONFIG_KVM_GUEST_TIMER_FREQ * 1000000;
+>>>>>>> v3.18
 	return;
 #endif
 
@@ -150,7 +162,11 @@ static void __init plat_perf_setup(void)
 	}
 }
 
+<<<<<<< HEAD
 unsigned int __cpuinit get_c0_compare_int(void)
+=======
+unsigned int get_c0_compare_int(void)
+>>>>>>> v3.18
 {
 #ifdef MSC01E_INT_BASE
 	if (cpu_has_veic) {
@@ -167,11 +183,32 @@ unsigned int __cpuinit get_c0_compare_int(void)
 	return mips_cpu_timer_irq;
 }
 
+<<<<<<< HEAD
 void __init plat_time_init(void)
 {
 	unsigned int prid = read_c0_prid() & 0xffff00;
 	unsigned int freq;
 
+=======
+static void __init init_rtc(void)
+{
+	/* stop the clock whilst setting it up */
+	CMOS_WRITE(RTC_SET | RTC_24H, RTC_CONTROL);
+
+	/* 32KHz time base */
+	CMOS_WRITE(RTC_REF_CLCK_32KHZ, RTC_FREQ_SELECT);
+
+	/* start the clock */
+	CMOS_WRITE(RTC_24H, RTC_CONTROL);
+}
+
+void __init plat_time_init(void)
+{
+	unsigned int prid = read_c0_prid() & (PRID_COMP_MASK | PRID_IMP_MASK);
+	unsigned int freq;
+
+	init_rtc();
+>>>>>>> v3.18
 	estimate_frequencies();
 
 	freq = mips_hpt_frequency;
@@ -181,7 +218,10 @@ void __init plat_time_init(void)
 	freq = freqround(freq, 5000);
 	printk("CPU frequency %d.%02d MHz\n", freq/1000000,
 	       (freq%1000000)*100/1000000);
+<<<<<<< HEAD
 	cpu_khz = freq / 1000;
+=======
+>>>>>>> v3.18
 
 	mips_scroll_message();
 

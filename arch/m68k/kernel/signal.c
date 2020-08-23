@@ -50,6 +50,10 @@
 #include <asm/pgtable.h>
 #include <asm/traps.h>
 #include <asm/ucontext.h>
+<<<<<<< HEAD
+=======
+#include <asm/cacheflush.h>
+>>>>>>> v3.18
 
 #ifdef CONFIG_MMU
 
@@ -181,6 +185,16 @@ static inline void push_cache (unsigned long vaddr)
 		asm volatile ("movec %0,%%caar\n\t"
 			      "movec %1,%%cacr"
 			      : : "r" (vaddr + 4), "r" (temp));
+<<<<<<< HEAD
+=======
+	} else {
+		/* CPU_IS_COLDFIRE */
+#if defined(CONFIG_CACHE_COPYBACK)
+		flush_cf_dcache(0, DCACHE_MAX_ADDR);
+#endif
+		/* Invalidate instruction cache for the pushed bytes */
+		clear_cf_icache(vaddr, vaddr + 8);
+>>>>>>> v3.18
 	}
 }
 
@@ -827,6 +841,7 @@ static inline int rt_setup_ucontext(struct ucontext __user *uc, struct pt_regs *
 }
 
 static inline void __user *
+<<<<<<< HEAD
 get_sigframe(struct k_sigaction *ka, struct pt_regs *regs, size_t frame_size)
 {
 	unsigned long usp;
@@ -844,21 +859,43 @@ get_sigframe(struct k_sigaction *ka, struct pt_regs *regs, size_t frame_size)
 
 static int setup_frame (int sig, struct k_sigaction *ka,
 			 sigset_t *set, struct pt_regs *regs)
+=======
+get_sigframe(struct ksignal *ksig, size_t frame_size)
+{
+	unsigned long usp = sigsp(rdusp(), ksig);
+
+	return (void __user *)((usp - frame_size) & -8UL);
+}
+
+static int setup_frame(struct ksignal *ksig, sigset_t *set,
+			struct pt_regs *regs)
+>>>>>>> v3.18
 {
 	struct sigframe __user *frame;
 	int fsize = frame_extra_sizes(regs->format);
 	struct sigcontext context;
+<<<<<<< HEAD
 	int err = 0;
+=======
+	int err = 0, sig = ksig->sig;
+>>>>>>> v3.18
 
 	if (fsize < 0) {
 #ifdef DEBUG
 		printk ("setup_frame: Unknown frame format %#x\n",
 			regs->format);
 #endif
+<<<<<<< HEAD
 		goto give_sigsegv;
 	}
 
 	frame = get_sigframe(ka, regs, sizeof(*frame) + fsize);
+=======
+		return -EFAULT;
+	}
+
+	frame = get_sigframe(ksig, sizeof(*frame) + fsize);
+>>>>>>> v3.18
 
 	if (fsize)
 		err |= copy_to_user (frame + 1, regs + 1, fsize);
@@ -891,7 +928,11 @@ static int setup_frame (int sig, struct k_sigaction *ka,
 #endif
 
 	if (err)
+<<<<<<< HEAD
 		goto give_sigsegv;
+=======
+		return -EFAULT;
+>>>>>>> v3.18
 
 	push_cache ((unsigned long) &frame->retcode);
 
@@ -900,7 +941,11 @@ static int setup_frame (int sig, struct k_sigaction *ka,
 	 * to destroy is successfully copied to sigframe.
 	 */
 	wrusp ((unsigned long) frame);
+<<<<<<< HEAD
 	regs->pc = (unsigned long) ka->sa.sa_handler;
+=======
+	regs->pc = (unsigned long) ksig->ka.sa.sa_handler;
+>>>>>>> v3.18
 	adjustformat(regs);
 
 	/*
@@ -926,6 +971,7 @@ static int setup_frame (int sig, struct k_sigaction *ka,
 		tregs->sr = regs->sr;
 	}
 	return 0;
+<<<<<<< HEAD
 
 give_sigsegv:
 	force_sigsegv(sig, current);
@@ -938,16 +984,33 @@ static int setup_rt_frame (int sig, struct k_sigaction *ka, siginfo_t *info,
 	struct rt_sigframe __user *frame;
 	int fsize = frame_extra_sizes(regs->format);
 	int err = 0;
+=======
+}
+
+static int setup_rt_frame(struct ksignal *ksig, sigset_t *set,
+			   struct pt_regs *regs)
+{
+	struct rt_sigframe __user *frame;
+	int fsize = frame_extra_sizes(regs->format);
+	int err = 0, sig = ksig->sig;
+>>>>>>> v3.18
 
 	if (fsize < 0) {
 #ifdef DEBUG
 		printk ("setup_frame: Unknown frame format %#x\n",
 			regs->format);
 #endif
+<<<<<<< HEAD
 		goto give_sigsegv;
 	}
 
 	frame = get_sigframe(ka, regs, sizeof(*frame));
+=======
+		return -EFAULT;
+	}
+
+	frame = get_sigframe(ksig, sizeof(*frame));
+>>>>>>> v3.18
 
 	if (fsize)
 		err |= copy_to_user (&frame->uc.uc_extra, regs + 1, fsize);
@@ -960,7 +1023,11 @@ static int setup_rt_frame (int sig, struct k_sigaction *ka, siginfo_t *info,
 			  &frame->sig);
 	err |= __put_user(&frame->info, &frame->pinfo);
 	err |= __put_user(&frame->uc, &frame->puc);
+<<<<<<< HEAD
 	err |= copy_siginfo_to_user(&frame->info, info);
+=======
+	err |= copy_siginfo_to_user(&frame->info, &ksig->info);
+>>>>>>> v3.18
 
 	/* Create the ucontext.  */
 	err |= __put_user(0, &frame->uc.uc_flags);
@@ -988,7 +1055,11 @@ static int setup_rt_frame (int sig, struct k_sigaction *ka, siginfo_t *info,
 #endif /* CONFIG_MMU */
 
 	if (err)
+<<<<<<< HEAD
 		goto give_sigsegv;
+=======
+		return -EFAULT;
+>>>>>>> v3.18
 
 	push_cache ((unsigned long) &frame->retcode);
 
@@ -997,7 +1068,11 @@ static int setup_rt_frame (int sig, struct k_sigaction *ka, siginfo_t *info,
 	 * to destroy is successfully copied to sigframe.
 	 */
 	wrusp ((unsigned long) frame);
+<<<<<<< HEAD
 	regs->pc = (unsigned long) ka->sa.sa_handler;
+=======
+	regs->pc = (unsigned long) ksig->ka.sa.sa_handler;
+>>>>>>> v3.18
 	adjustformat(regs);
 
 	/*
@@ -1023,10 +1098,13 @@ static int setup_rt_frame (int sig, struct k_sigaction *ka, siginfo_t *info,
 		tregs->sr = regs->sr;
 	}
 	return 0;
+<<<<<<< HEAD
 
 give_sigsegv:
 	force_sigsegv(sig, current);
 	return err;
+=======
+>>>>>>> v3.18
 }
 
 static inline void
@@ -1066,14 +1144,19 @@ handle_restart(struct pt_regs *regs, struct k_sigaction *ka, int has_handler)
  * OK, we're invoking a handler
  */
 static void
+<<<<<<< HEAD
 handle_signal(int sig, struct k_sigaction *ka, siginfo_t *info,
 	      struct pt_regs *regs)
+=======
+handle_signal(struct ksignal *ksig, struct pt_regs *regs)
+>>>>>>> v3.18
 {
 	sigset_t *oldset = sigmask_to_save();
 	int err;
 	/* are we from a system call? */
 	if (regs->orig_d0 >= 0)
 		/* If so, check system call restarting.. */
+<<<<<<< HEAD
 		handle_restart(regs, ka, 1);
 
 	/* set up the stack frame */
@@ -1086,6 +1169,17 @@ handle_signal(int sig, struct k_sigaction *ka, siginfo_t *info,
 		return;
 
 	signal_delivered(sig, info, ka, regs, 0);
+=======
+		handle_restart(regs, &ksig->ka, 1);
+
+	/* set up the stack frame */
+	if (ksig->ka.sa.sa_flags & SA_SIGINFO)
+		err = setup_rt_frame(ksig, oldset, regs);
+	else
+		err = setup_frame(ksig, oldset, regs);
+
+	signal_setup_done(err, ksig, 0);
+>>>>>>> v3.18
 
 	if (test_thread_flag(TIF_DELAYED_TRACE)) {
 		regs->sr &= ~0x8000;
@@ -1100,6 +1194,7 @@ handle_signal(int sig, struct k_sigaction *ka, siginfo_t *info,
  */
 static void do_signal(struct pt_regs *regs)
 {
+<<<<<<< HEAD
 	siginfo_t info;
 	struct k_sigaction ka;
 	int signr;
@@ -1110,6 +1205,15 @@ static void do_signal(struct pt_regs *regs)
 	if (signr > 0) {
 		/* Whee!  Actually deliver the signal.  */
 		handle_signal(signr, &ka, &info, regs);
+=======
+	struct ksignal ksig;
+
+	current->thread.esp0 = (unsigned long) regs;
+
+	if (get_signal(&ksig)) {
+		/* Whee!  Actually deliver the signal.  */
+		handle_signal(&ksig, regs);
+>>>>>>> v3.18
 		return;
 	}
 

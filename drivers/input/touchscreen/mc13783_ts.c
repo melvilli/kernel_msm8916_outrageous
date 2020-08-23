@@ -233,8 +233,11 @@ static int mc13783_ts_remove(struct platform_device *pdev)
 {
 	struct mc13783_ts_priv *priv = platform_get_drvdata(pdev);
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 	destroy_workqueue(priv->workq);
 	input_unregister_device(priv->idev);
 	kfree(priv);

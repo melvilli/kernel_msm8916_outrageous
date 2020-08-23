@@ -30,6 +30,12 @@
 #include <asm/cputhreads.h>
 #include <asm/xics.h>
 #include <asm/opal.h>
+<<<<<<< HEAD
+=======
+#include <asm/runlatch.h>
+#include <asm/code-patching.h>
+#include <asm/dbell.h>
+>>>>>>> v3.18
 
 #include "powernv.h"
 
@@ -40,6 +46,7 @@
 #define DBG(fmt...)
 #endif
 
+<<<<<<< HEAD
 static void __cpuinit pnv_smp_setup_cpu(int cpu)
 {
 	if (cpu != boot_cpuid)
@@ -67,6 +74,24 @@ int pnv_smp_kick_cpu(int nr)
 	unsigned int pcpu = get_hard_smp_processor_id(nr);
 	unsigned long start_here = __pa(*((unsigned long *)
 					  generic_secondary_smp_init));
+=======
+static void pnv_smp_setup_cpu(int cpu)
+{
+	if (cpu != boot_cpuid)
+		xics_setup_cpu();
+
+#ifdef CONFIG_PPC_DOORBELL
+	if (cpu_has_feature(CPU_FTR_DBELL))
+		doorbell_setup_this_cpu();
+#endif
+}
+
+static int pnv_smp_kick_cpu(int nr)
+{
+	unsigned int pcpu = get_hard_smp_processor_id(nr);
+	unsigned long start_here =
+			__pa(ppc_function_entry(generic_secondary_smp_init));
+>>>>>>> v3.18
 	long rc;
 
 	BUG_ON(nr < 0 || nr >= NR_CPUS);
@@ -172,6 +197,7 @@ static void pnv_smp_cpu_kill_self(void)
 	 */
 	mtspr(SPRN_LPCR, mfspr(SPRN_LPCR) & ~(u64)LPCR_PECE1);
 	while (!generic_check_cpu_restart(cpu)) {
+<<<<<<< HEAD
 		power7_nap();
 		if (!generic_check_cpu_restart(cpu)) {
 			DBG("CPU%d Unexpected exit while offline !\n", cpu);
@@ -182,6 +208,22 @@ static void pnv_smp_cpu_kill_self(void)
 			local_irq_enable();
 			local_irq_disable();
 		}
+=======
+		ppc64_runlatch_off();
+		power7_nap(1);
+		ppc64_runlatch_on();
+
+		/* Clear the IPI that woke us up */
+		icp_native_flush_interrupt();
+		local_paca->irq_happened &= PACA_IRQ_HARD_DIS;
+		mb();
+
+		if (cpu_core_split_required())
+			continue;
+
+		if (!generic_check_cpu_restart(cpu))
+			DBG("CPU%d Unexpected exit while offline !\n", cpu);
+>>>>>>> v3.18
 	}
 	mtspr(SPRN_LPCR, mfspr(SPRN_LPCR) | LPCR_PECE1);
 	DBG("CPU%d coming online...\n", cpu);
@@ -195,7 +237,11 @@ static struct smp_ops_t pnv_smp_ops = {
 	.probe		= xics_smp_probe,
 	.kick_cpu	= pnv_smp_kick_cpu,
 	.setup_cpu	= pnv_smp_setup_cpu,
+<<<<<<< HEAD
 	.cpu_bootable	= pnv_smp_cpu_bootable,
+=======
+	.cpu_bootable	= smp_generic_cpu_bootable,
+>>>>>>> v3.18
 #ifdef CONFIG_HOTPLUG_CPU
 	.cpu_disable	= pnv_smp_cpu_disable,
 	.cpu_die	= generic_cpu_die,

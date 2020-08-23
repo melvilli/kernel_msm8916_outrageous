@@ -199,6 +199,10 @@ struct ov9640_reg {
 struct ov9640_priv {
 	struct v4l2_subdev		subdev;
 	struct v4l2_ctrl_handler	hdl;
+<<<<<<< HEAD
+=======
+	struct v4l2_clk			*clk;
+>>>>>>> v3.18
 
 	int				model;
 	int				revision;

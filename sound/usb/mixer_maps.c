@@ -322,6 +322,7 @@ static struct usbmix_name_map hercules_usb51_map[] = {
 	{ 0 }				/* terminator */
 };
 
+<<<<<<< HEAD
 /* some (all?) SCMS USB3318 devices are affected by a firmware lock up
  * when anything attempts to access FU 10 (control)
  */
@@ -342,6 +343,17 @@ static struct usbmix_dB_map dragonfly_1_2_dB = {0, 5000};
 static struct usbmix_name_map dragonfly_1_2_map[] = {
 	{ 7, NULL, .dB = &dragonfly_1_2_dB },
 	{ 0 }	/* terminator */
+=======
+/* Plantronics Gamecom 780 has a broken volume control, better to disable it */
+static struct usbmix_name_map gamecom780_map[] = {
+	{ 9, NULL }, /* FU, speaker out */
+	{}
+};
+
+static const struct usbmix_name_map kef_x300a_map[] = {
+	{ 10, NULL }, /* firmware locks up (?) when we try to access this FU */
+	{ 0 }
+>>>>>>> v3.18
 };
 
 /*
@@ -380,6 +392,13 @@ static struct usbmix_ctl_map usbmix_ctl_maps[] = {
 		.id = USB_ID(0x046d, 0x09a4),
 		.ignore_ctl_error = 1,
 	},
+<<<<<<< HEAD
+=======
+	{	/* Plantronics GameCom 780 */
+		.id = USB_ID(0x047f, 0xc010),
+		.map = gamecom780_map,
+	},
+>>>>>>> v3.18
 	{
 		/* Hercules DJ Console (Windows Edition) */
 		.id = USB_ID(0x06f8, 0xb000),
@@ -432,6 +451,7 @@ static struct usbmix_ctl_map usbmix_ctl_maps[] = {
 		.map = ebox44_map,
 	},
 	{
+<<<<<<< HEAD
 		/* MAYA44 USB+ */
 		.id = USB_ID(0x2573, 0x0008),
 		.map = maya44_map,
@@ -455,6 +475,10 @@ static struct usbmix_ctl_map usbmix_ctl_maps[] = {
 		/* Dragonfly DAC 1.2 */
 		.id = USB_ID(0x21b4, 0x0081),
 		.map = dragonfly_1_2_map,
+=======
+		.id = USB_ID(0x27ac, 0x1000),
+		.map = kef_x300a_map,
+>>>>>>> v3.18
 	},
 	{ 0 } /* terminator */
 };

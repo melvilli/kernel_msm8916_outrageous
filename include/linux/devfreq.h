@@ -52,10 +52,13 @@ struct devfreq_dev_status {
  */
 #define DEVFREQ_FLAG_LEAST_UPPER_BOUND		0x1
 
+<<<<<<< HEAD
 #define DEVFREQ_FLAG_FAST_HINT			0x2
 #define DEVFREQ_FLAG_SLOW_HINT			0x4
 #define DEVFREQ_FLAG_WAKEUP_MAXFREQ		0x8
 
+=======
+>>>>>>> v3.18
 /**
  * struct devfreq_dev_profile - Devfreq's user device profile
  * @initial_freq:	The operating frequency when devfreq_add_device() is
@@ -115,8 +118,12 @@ struct devfreq_governor {
 	struct list_head node;
 
 	const char name[DEVFREQ_NAME_LEN];
+<<<<<<< HEAD
 	int (*get_target_freq)(struct devfreq *this, unsigned long *freq,
 				u32 *flag);
+=======
+	int (*get_target_freq)(struct devfreq *this, unsigned long *freq);
+>>>>>>> v3.18
 	int (*event_handler)(struct devfreq *devfreq,
 				unsigned int event, void *data);
 };
@@ -173,7 +180,11 @@ struct devfreq {
 	unsigned long max_freq;
 	bool stop_polling;
 
+<<<<<<< HEAD
 	/* information for device freqeuncy transition */
+=======
+	/* information for device frequency transition */
+>>>>>>> v3.18
 	unsigned int total_trans;
 	unsigned int *trans_table;
 	unsigned long *time_in_state;
@@ -186,16 +197,38 @@ extern struct devfreq *devfreq_add_device(struct device *dev,
 				  const char *governor_name,
 				  void *data);
 extern int devfreq_remove_device(struct devfreq *devfreq);
+<<<<<<< HEAD
+=======
+extern struct devfreq *devm_devfreq_add_device(struct device *dev,
+				  struct devfreq_dev_profile *profile,
+				  const char *governor_name,
+				  void *data);
+extern void devm_devfreq_remove_device(struct device *dev,
+				  struct devfreq *devfreq);
+
+/* Supposed to be called by PM_SLEEP/PM_RUNTIME callbacks */
+>>>>>>> v3.18
 extern int devfreq_suspend_device(struct devfreq *devfreq);
 extern int devfreq_resume_device(struct devfreq *devfreq);
 
 /* Helper functions for devfreq user device driver with OPP. */
+<<<<<<< HEAD
 extern struct opp *devfreq_recommended_opp(struct device *dev,
+=======
+extern struct dev_pm_opp *devfreq_recommended_opp(struct device *dev,
+>>>>>>> v3.18
 					   unsigned long *freq, u32 flags);
 extern int devfreq_register_opp_notifier(struct device *dev,
 					 struct devfreq *devfreq);
 extern int devfreq_unregister_opp_notifier(struct device *dev,
 					   struct devfreq *devfreq);
+<<<<<<< HEAD
+=======
+extern int devm_devfreq_register_opp_notifier(struct device *dev,
+					      struct devfreq *devfreq);
+extern void devm_devfreq_unregister_opp_notifier(struct device *dev,
+						struct devfreq *devfreq);
+>>>>>>> v3.18
 
 #if IS_ENABLED(CONFIG_DEVFREQ_GOV_SIMPLE_ONDEMAND)
 /**
@@ -207,9 +240,12 @@ extern int devfreq_unregister_opp_notifier(struct device *dev,
  *			the governor may consider slowing the frequency down.
  *			Specify 0 to use the default. Valid value = 0 to 100.
  *			downdifferential < upthreshold must hold.
+<<<<<<< HEAD
  * @simple_scaling:	Setting this flag will scale the clocks up only if the
  *			load is above @upthreshold and will scale the clocks
  *			down only if the load is below @downdifferential.
+=======
+>>>>>>> v3.18
  *
  * If the fed devfreq_simple_ondemand_data pointer is NULL to the governor,
  * the governor uses the default values.
@@ -217,7 +253,10 @@ extern int devfreq_unregister_opp_notifier(struct device *dev,
 struct devfreq_simple_ondemand_data {
 	unsigned int upthreshold;
 	unsigned int downdifferential;
+<<<<<<< HEAD
 	unsigned int simple_scaling;
+=======
+>>>>>>> v3.18
 };
 #endif
 
@@ -227,7 +266,11 @@ static inline struct devfreq *devfreq_add_device(struct device *dev,
 					  const char *governor_name,
 					  void *data)
 {
+<<<<<<< HEAD
 	return NULL;
+=======
+	return ERR_PTR(-ENOSYS);
+>>>>>>> v3.18
 }
 
 static inline int devfreq_remove_device(struct devfreq *devfreq)
@@ -235,6 +278,22 @@ static inline int devfreq_remove_device(struct devfreq *devfreq)
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+static inline struct devfreq *devm_devfreq_add_device(struct device *dev,
+					struct devfreq_dev_profile *profile,
+					const char *governor_name,
+					void *data)
+{
+	return ERR_PTR(-ENOSYS);
+}
+
+static inline void devm_devfreq_remove_device(struct device *dev,
+					struct devfreq *devfreq)
+{
+}
+
+>>>>>>> v3.18
 static inline int devfreq_suspend_device(struct devfreq *devfreq)
 {
 	return 0;
@@ -245,7 +304,11 @@ static inline int devfreq_resume_device(struct devfreq *devfreq)
 	return 0;
 }
 
+<<<<<<< HEAD
 static inline struct opp *devfreq_recommended_opp(struct device *dev,
+=======
+static inline struct dev_pm_opp *devfreq_recommended_opp(struct device *dev,
+>>>>>>> v3.18
 					   unsigned long *freq, u32 flags)
 {
 	return ERR_PTR(-EINVAL);
@@ -263,6 +326,19 @@ static inline int devfreq_unregister_opp_notifier(struct device *dev,
 	return -EINVAL;
 }
 
+<<<<<<< HEAD
+=======
+static inline int devm_devfreq_register_opp_notifier(struct device *dev,
+						     struct devfreq *devfreq)
+{
+	return -EINVAL;
+}
+
+static inline void devm_devfreq_unregister_opp_notifier(struct device *dev,
+							struct devfreq *devfreq)
+{
+}
+>>>>>>> v3.18
 #endif /* CONFIG_PM_DEVFREQ */
 
 #endif /* __LINUX_DEVFREQ_H__ */

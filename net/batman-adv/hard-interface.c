@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* Copyright (C) 2007-2013 B.A.T.M.A.N. contributors:
+=======
+/* Copyright (C) 2007-2014 B.A.T.M.A.N. contributors:
+>>>>>>> v3.18
  *
  * Marek Lindner, Simon Wunderlich
  *
@@ -12,9 +16,13 @@
  * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
  */
 
 #include "main.h"
@@ -25,9 +33,17 @@
 #include "translation-table.h"
 #include "routing.h"
 #include "sysfs.h"
+<<<<<<< HEAD
 #include "originator.h"
 #include "hash.h"
 #include "bridge_loop_avoidance.h"
+=======
+#include "debugfs.h"
+#include "originator.h"
+#include "hash.h"
+#include "bridge_loop_avoidance.h"
+#include "gateway_client.h"
+>>>>>>> v3.18
 
 #include <linux/if_arp.h>
 #include <linux/if_ether.h>
@@ -83,19 +99,30 @@ static bool batadv_is_on_batman_iface(const struct net_device *net_dev)
 		return true;
 
 	/* no more parents..stop recursion */
+<<<<<<< HEAD
 	if (net_dev->iflink == net_dev->ifindex)
 		return false;
 
 	/* recurse over the parent device */
 	parent_dev = dev_get_by_index(&init_net, net_dev->iflink);
+=======
+	if (net_dev->iflink == 0 || net_dev->iflink == net_dev->ifindex)
+		return false;
+
+	/* recurse over the parent device */
+	parent_dev = __dev_get_by_index(&init_net, net_dev->iflink);
+>>>>>>> v3.18
 	/* if we got a NULL parent_dev there is something broken.. */
 	if (WARN(!parent_dev, "Cannot find parent device"))
 		return false;
 
 	ret = batadv_is_on_batman_iface(parent_dev);
 
+<<<<<<< HEAD
 	if (parent_dev)
 		dev_put(parent_dev);
+=======
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -117,6 +144,36 @@ static int batadv_is_valid_iface(const struct net_device *net_dev)
 	return 1;
 }
 
+<<<<<<< HEAD
+=======
+/**
+ * batadv_is_wifi_netdev - check if the given net_device struct is a wifi
+ *  interface
+ * @net_device: the device to check
+ *
+ * Returns true if the net device is a 802.11 wireless device, false otherwise.
+ */
+bool batadv_is_wifi_netdev(struct net_device *net_device)
+{
+	if (!net_device)
+		return false;
+
+#ifdef CONFIG_WIRELESS_EXT
+	/* pre-cfg80211 drivers have to implement WEXT, so it is possible to
+	 * check for wireless_handlers != NULL
+	 */
+	if (net_device->wireless_handlers)
+		return true;
+#endif
+
+	/* cfg80211 drivers have to set ieee80211_ptr */
+	if (net_device->ieee80211_ptr)
+		return true;
+
+	return false;
+}
+
+>>>>>>> v3.18
 static struct batadv_hard_iface *
 batadv_hardif_get_active(const struct net_device *soft_iface)
 {
@@ -142,15 +199,20 @@ out:
 static void batadv_primary_if_update_addr(struct batadv_priv *bat_priv,
 					  struct batadv_hard_iface *oldif)
 {
+<<<<<<< HEAD
 	struct batadv_vis_packet *vis_packet;
 	struct batadv_hard_iface *primary_if;
 	struct sk_buff *skb;
+=======
+	struct batadv_hard_iface *primary_if;
+>>>>>>> v3.18
 
 	primary_if = batadv_primary_if_get_selected(bat_priv);
 	if (!primary_if)
 		goto out;
 
 	batadv_dat_init_own_addr(bat_priv, primary_if);
+<<<<<<< HEAD
 
 	skb = bat_priv->vis.my_info->skb_packet;
 	vis_packet = (struct batadv_vis_packet *)skb->data;
@@ -158,6 +220,8 @@ static void batadv_primary_if_update_addr(struct batadv_priv *bat_priv,
 	memcpy(vis_packet->sender_orig,
 	       primary_if->net_dev->dev_addr, ETH_ALEN);
 
+=======
+>>>>>>> v3.18
 	batadv_bla_update_orig_address(bat_priv, primary_if, oldif);
 out:
 	if (primary_if)
@@ -223,6 +287,7 @@ static void batadv_check_known_mac_addr(const struct net_device *net_dev)
 
 int batadv_hardif_min_mtu(struct net_device *soft_iface)
 {
+<<<<<<< HEAD
 	const struct batadv_priv *bat_priv = netdev_priv(soft_iface);
 	const struct batadv_hard_iface *hard_iface;
 	/* allow big frames if all devices are capable to do so
@@ -232,6 +297,11 @@ int batadv_hardif_min_mtu(struct net_device *soft_iface)
 
 	if (atomic_read(&bat_priv->fragmentation))
 		goto out;
+=======
+	struct batadv_priv *bat_priv = netdev_priv(soft_iface);
+	const struct batadv_hard_iface *hard_iface;
+	int min_mtu = INT_MAX;
+>>>>>>> v3.18
 
 	rcu_read_lock();
 	list_for_each_entry_rcu(hard_iface, &batadv_hardif_list, list) {
@@ -242,6 +312,7 @@ int batadv_hardif_min_mtu(struct net_device *soft_iface)
 		if (hard_iface->soft_iface != soft_iface)
 			continue;
 
+<<<<<<< HEAD
 		min_mtu = min_t(int,
 				hard_iface->net_dev->mtu - BATADV_HEADER_LEN,
 				min_mtu);
@@ -249,16 +320,56 @@ int batadv_hardif_min_mtu(struct net_device *soft_iface)
 	rcu_read_unlock();
 out:
 	return min_mtu;
+=======
+		min_mtu = min_t(int, hard_iface->net_dev->mtu, min_mtu);
+	}
+	rcu_read_unlock();
+
+	if (atomic_read(&bat_priv->fragmentation) == 0)
+		goto out;
+
+	/* with fragmentation enabled the maximum size of internally generated
+	 * packets such as translation table exchanges or tvlv containers, etc
+	 * has to be calculated
+	 */
+	min_mtu = min_t(int, min_mtu, BATADV_FRAG_MAX_FRAG_SIZE);
+	min_mtu -= sizeof(struct batadv_frag_packet);
+	min_mtu *= BATADV_FRAG_MAX_FRAGMENTS;
+
+out:
+	/* report to the other components the maximum amount of bytes that
+	 * batman-adv can send over the wire (without considering the payload
+	 * overhead). For example, this value is used by TT to compute the
+	 * maximum local table table size
+	 */
+	atomic_set(&bat_priv->packet_size_max, min_mtu);
+
+	/* the real soft-interface MTU is computed by removing the payload
+	 * overhead from the maximum amount of bytes that was just computed.
+	 *
+	 * However batman-adv does not support MTUs bigger than ETH_DATA_LEN
+	 */
+	return min_t(int, min_mtu - batadv_max_header_len(), ETH_DATA_LEN);
+>>>>>>> v3.18
 }
 
 /* adjusts the MTU if a new interface with a smaller MTU appeared. */
 void batadv_update_min_mtu(struct net_device *soft_iface)
 {
+<<<<<<< HEAD
 	int min_mtu;
 
 	min_mtu = batadv_hardif_min_mtu(soft_iface);
 	if (soft_iface->mtu != min_mtu)
 		soft_iface->mtu = min_mtu;
+=======
+	soft_iface->mtu = batadv_hardif_min_mtu(soft_iface);
+
+	/* Check if the local translate table should be cleaned up to match a
+	 * new (and smaller) MTU.
+	 */
+	batadv_tt_local_resize_to_mtu(soft_iface);
+>>>>>>> v3.18
 }
 
 static void
@@ -336,7 +447,12 @@ int batadv_hardif_enable_interface(struct batadv_hard_iface *hard_iface,
 {
 	struct batadv_priv *bat_priv;
 	struct net_device *soft_iface, *master;
+<<<<<<< HEAD
 	__be16 ethertype = __constant_htons(ETH_P_BATMAN);
+=======
+	__be16 ethertype = htons(ETH_P_BATMAN);
+	int max_header_len = batadv_max_header_len();
+>>>>>>> v3.18
 	int ret;
 
 	if (hard_iface->if_status != BATADV_IF_NOT_IN_USE)
@@ -401,11 +517,15 @@ int batadv_hardif_enable_interface(struct batadv_hard_iface *hard_iface,
 	hard_iface->batman_adv_ptype.dev = hard_iface->net_dev;
 	dev_add_pack(&hard_iface->batman_adv_ptype);
 
+<<<<<<< HEAD
 	atomic_set(&hard_iface->frag_seqno, 1);
+=======
+>>>>>>> v3.18
 	batadv_info(hard_iface->soft_iface, "Adding interface: %s\n",
 		    hard_iface->net_dev->name);
 
 	if (atomic_read(&bat_priv->fragmentation) &&
+<<<<<<< HEAD
 	    hard_iface->net_dev->mtu < ETH_DATA_LEN + BATADV_HEADER_LEN)
 		batadv_info(hard_iface->soft_iface,
 			    "The MTU of interface %s is too small (%i) to handle the transport of batman-adv packets. Packets going over this interface will be fragmented on layer2 which could impact the performance. Setting the MTU to %zi would solve the problem.\n",
@@ -418,6 +538,20 @@ int batadv_hardif_enable_interface(struct batadv_hard_iface *hard_iface,
 			    "The MTU of interface %s is too small (%i) to handle the transport of batman-adv packets. If you experience problems getting traffic through try increasing the MTU to %zi.\n",
 			    hard_iface->net_dev->name, hard_iface->net_dev->mtu,
 			    ETH_DATA_LEN + BATADV_HEADER_LEN);
+=======
+	    hard_iface->net_dev->mtu < ETH_DATA_LEN + max_header_len)
+		batadv_info(hard_iface->soft_iface,
+			    "The MTU of interface %s is too small (%i) to handle the transport of batman-adv packets. Packets going over this interface will be fragmented on layer2 which could impact the performance. Setting the MTU to %i would solve the problem.\n",
+			    hard_iface->net_dev->name, hard_iface->net_dev->mtu,
+			    ETH_DATA_LEN + max_header_len);
+
+	if (!atomic_read(&bat_priv->fragmentation) &&
+	    hard_iface->net_dev->mtu < ETH_DATA_LEN + max_header_len)
+		batadv_info(hard_iface->soft_iface,
+			    "The MTU of interface %s is too small (%i) to handle the transport of batman-adv packets. If you experience problems getting traffic through try increasing the MTU to %i.\n",
+			    hard_iface->net_dev->name, hard_iface->net_dev->mtu,
+			    ETH_DATA_LEN + max_header_len);
+>>>>>>> v3.18
 
 	if (batadv_hardif_is_iface_up(hard_iface))
 		batadv_hardif_activate_interface(hard_iface);
@@ -481,8 +615,17 @@ void batadv_hardif_disable_interface(struct batadv_hard_iface *hard_iface,
 	dev_put(hard_iface->soft_iface);
 
 	/* nobody uses this interface anymore */
+<<<<<<< HEAD
 	if (!bat_priv->num_ifaces && autodel == BATADV_IF_CLEANUP_AUTO)
 		batadv_softif_destroy_sysfs(hard_iface->soft_iface);
+=======
+	if (!bat_priv->num_ifaces) {
+		batadv_gw_check_client_stop(bat_priv);
+
+		if (autodel == BATADV_IF_CLEANUP_AUTO)
+			batadv_softif_destroy_sysfs(hard_iface->soft_iface);
+	}
+>>>>>>> v3.18
 
 	netdev_upper_dev_unlink(hard_iface->net_dev, hard_iface->soft_iface);
 	hard_iface->soft_iface = NULL;
@@ -507,6 +650,10 @@ static void batadv_hardif_remove_interface_finish(struct work_struct *work)
 	hard_iface = container_of(work, struct batadv_hard_iface,
 				  cleanup_work);
 
+<<<<<<< HEAD
+=======
+	batadv_debugfs_del_hardif(hard_iface);
+>>>>>>> v3.18
 	batadv_sysfs_del_hardif(&hard_iface->hardif_obj);
 	batadv_hardif_free_ref(hard_iface);
 }
@@ -525,7 +672,11 @@ batadv_hardif_add_interface(struct net_device *net_dev)
 
 	dev_hold(net_dev);
 
+<<<<<<< HEAD
 	hard_iface = kmalloc(sizeof(*hard_iface), GFP_ATOMIC);
+=======
+	hard_iface = kzalloc(sizeof(*hard_iface), GFP_ATOMIC);
+>>>>>>> v3.18
 	if (!hard_iface)
 		goto release_dev;
 
@@ -537,16 +688,32 @@ batadv_hardif_add_interface(struct net_device *net_dev)
 	hard_iface->net_dev = net_dev;
 	hard_iface->soft_iface = NULL;
 	hard_iface->if_status = BATADV_IF_NOT_IN_USE;
+<<<<<<< HEAD
+=======
+
+	ret = batadv_debugfs_add_hardif(hard_iface);
+	if (ret)
+		goto free_sysfs;
+
+>>>>>>> v3.18
 	INIT_LIST_HEAD(&hard_iface->list);
 	INIT_WORK(&hard_iface->cleanup_work,
 		  batadv_hardif_remove_interface_finish);
 
+<<<<<<< HEAD
+=======
+	hard_iface->num_bcasts = BATADV_NUM_BCASTS_DEFAULT;
+	if (batadv_is_wifi_netdev(net_dev))
+		hard_iface->num_bcasts = BATADV_NUM_BCASTS_WIRELESS;
+
+>>>>>>> v3.18
 	/* extra reference for return */
 	atomic_set(&hard_iface->refcount, 2);
 
 	batadv_check_known_mac_addr(hard_iface->net_dev);
 	list_add_tail_rcu(&hard_iface->list, &batadv_hardif_list);
 
+<<<<<<< HEAD
 	/* This can't be called via a bat_priv callback because
 	 * we have no bat_priv yet.
 	 */
@@ -555,6 +722,12 @@ batadv_hardif_add_interface(struct net_device *net_dev)
 
 	return hard_iface;
 
+=======
+	return hard_iface;
+
+free_sysfs:
+	batadv_sysfs_del_hardif(&hard_iface->hardif_obj);
+>>>>>>> v3.18
 free_if:
 	kfree(hard_iface);
 release_dev:
@@ -595,13 +768,22 @@ void batadv_hardif_remove_interfaces(void)
 static int batadv_hard_if_event(struct notifier_block *this,
 				unsigned long event, void *ptr)
 {
+<<<<<<< HEAD
 	struct net_device *net_dev = ptr;
+=======
+	struct net_device *net_dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 	struct batadv_hard_iface *hard_iface;
 	struct batadv_hard_iface *primary_if = NULL;
 	struct batadv_priv *bat_priv;
 
 	if (batadv_softif_is_valid(net_dev) && event == NETDEV_REGISTER) {
 		batadv_sysfs_add_meshif(net_dev);
+<<<<<<< HEAD
+=======
+		bat_priv = netdev_priv(net_dev);
+		batadv_softif_create_vlan(bat_priv, BATADV_NO_FLAGS);
+>>>>>>> v3.18
 		return NOTIFY_DONE;
 	}
 
@@ -657,6 +839,7 @@ out:
 	return NOTIFY_DONE;
 }
 
+<<<<<<< HEAD
 /* This function returns true if the interface represented by ifindex is a
  * 802.11 wireless device
  */
@@ -689,6 +872,8 @@ out:
 	return ret;
 }
 
+=======
+>>>>>>> v3.18
 struct notifier_block batadv_hard_if_notifier = {
 	.notifier_call = batadv_hard_if_event,
 };

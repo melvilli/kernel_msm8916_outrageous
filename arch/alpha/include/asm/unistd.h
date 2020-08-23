@@ -3,8 +3,12 @@
 
 #include <uapi/asm/unistd.h>
 
+<<<<<<< HEAD
 
 #define NR_SYSCALLS			506
+=======
+#define NR_SYSCALLS			511
+>>>>>>> v3.18
 
 #define __ARCH_WANT_OLD_READDIR
 #define __ARCH_WANT_STAT64

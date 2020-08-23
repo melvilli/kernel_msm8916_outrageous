@@ -34,6 +34,11 @@
 #include <linux/export.h>
 #include <drm/drmP.h>
 
+<<<<<<< HEAD
+=======
+#include <drm/ati_pcigart.h>
+
+>>>>>>> v3.18
 # define ATI_PCIGART_PAGE_SIZE		4096	/**< PCI GART page size */
 
 static int drm_ati_alloc_pcigart_table(struct drm_device *dev,

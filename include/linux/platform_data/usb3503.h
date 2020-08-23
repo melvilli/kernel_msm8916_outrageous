@@ -3,6 +3,13 @@
 
 #define USB3503_I2C_NAME	"usb3503"
 
+<<<<<<< HEAD
+=======
+#define USB3503_OFF_PORT1	(1 << 1)
+#define USB3503_OFF_PORT2	(1 << 2)
+#define USB3503_OFF_PORT3	(1 << 3)
+
+>>>>>>> v3.18
 enum usb3503_mode {
 	USB3503_MODE_UNKNOWN,
 	USB3503_MODE_HUB,
@@ -11,6 +18,10 @@ enum usb3503_mode {
 
 struct usb3503_platform_data {
 	enum usb3503_mode	initial_mode;
+<<<<<<< HEAD
+=======
+	u8	port_off_mask;
+>>>>>>> v3.18
 	int	gpio_intn;
 	int	gpio_connect;
 	int	gpio_reset;

@@ -15,12 +15,20 @@ generic-y += exec.h
 generic-y += fb.h
 generic-y += fcntl.h
 generic-y += futex.h
+<<<<<<< HEAD
+=======
+generic-y += hash.h
+>>>>>>> v3.18
 generic-y += hw_irq.h
 generic-y += io.h
 generic-y += ioctl.h
 generic-y += ioctls.h
 generic-y += ipcbuf.h
 generic-y += irq_regs.h
+<<<<<<< HEAD
+=======
+generic-y += irq_work.h
+>>>>>>> v3.18
 generic-y += kdebug.h
 generic-y += kmap_types.h
 generic-y += local.h
@@ -35,6 +43,10 @@ generic-y += percpu.h
 generic-y += pgalloc.h
 generic-y += poll.h
 generic-y += posix_types.h
+<<<<<<< HEAD
+=======
+generic-y += preempt.h
+>>>>>>> v3.18
 generic-y += resource.h
 generic-y += scatterlist.h
 generic-y += segment.h
@@ -56,3 +68,7 @@ generic-y += types.h
 generic-y += ucontext.h
 generic-y += user.h
 generic-y += vga.h
+<<<<<<< HEAD
+=======
+generic-y += xor.h
+>>>>>>> v3.18

@@ -35,6 +35,7 @@
 /*---------------------  Export Definitions -------------------------*/
 
 //
+<<<<<<< HEAD
 //  For IO mapped
 //
 
@@ -67,41 +68,64 @@ do {						\
 #else
 
 //
+=======
+>>>>>>> v3.18
 //  For memory mapped IO
 //
 
 #define VNSvInPortB(dwIOAddress, pbyData)				\
 do {									\
+<<<<<<< HEAD
 	volatile unsigned char *pbyAddr = (unsigned char *)(dwIOAddress); \
 	*(pbyData) = readb(pbyAddr);					\
+=======
+	*(pbyData) = ioread8(dwIOAddress);				\
+>>>>>>> v3.18
 } while (0)
 
 #define VNSvInPortW(dwIOAddress, pwData)				\
 do {									\
+<<<<<<< HEAD
 	volatile unsigned short *pwAddr = (unsigned short *)(dwIOAddress); \
 	*(pwData) = readw(pwAddr);					\
+=======
+	*(pwData) = ioread16(dwIOAddress);				\
+>>>>>>> v3.18
 } while (0)
 
 #define VNSvInPortD(dwIOAddress, pdwData)				\
 do {									\
+<<<<<<< HEAD
 	volatile unsigned long *pdwAddr = (unsigned long *)(dwIOAddress); \
 	*(pdwData) = readl(pdwAddr);					\
+=======
+	*(pdwData) = ioread32(dwIOAddress);				\
+>>>>>>> v3.18
 } while (0)
 
 #define VNSvOutPortB(dwIOAddress, byData)				\
 do {									\
+<<<<<<< HEAD
 	volatile unsigned char *pbyAddr = (unsigned char *)(dwIOAddress); \
 	writeb((unsigned char)byData, pbyAddr);				\
+=======
+	iowrite8((u8)byData, dwIOAddress);				\
+>>>>>>> v3.18
 } while (0)
 
 #define VNSvOutPortW(dwIOAddress, wData)				\
 do {									\
+<<<<<<< HEAD
 	volatile unsigned short *pwAddr = ((unsigned short *)(dwIOAddress)); \
 	writew((unsigned short)wData, pwAddr);				\
+=======
+	iowrite16((u16)wData, dwIOAddress);				\
+>>>>>>> v3.18
 } while (0)
 
 #define VNSvOutPortD(dwIOAddress, dwData)				\
 do {									\
+<<<<<<< HEAD
 	volatile unsigned long *pdwAddr = (unsigned long *)(dwIOAddress); \
 	writel((unsigned long)dwData, pdwAddr);				\
 } while (0)
@@ -135,6 +159,11 @@ do {						\
 #define PCBvOutPortD(dwIOAddress, dwData)	\
 	outl(dwData, dwIOAddress)
 
+=======
+	iowrite32((u32)dwData, dwIOAddress);				\
+} while (0)
+
+>>>>>>> v3.18
 #define PCAvDelayByIO(uDelayUnit)				\
 do {								\
 	unsigned char byData;					\

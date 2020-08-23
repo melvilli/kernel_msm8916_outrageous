@@ -52,7 +52,10 @@
 #include <linux/sched.h>
 #include <linux/signal.h>
 #include <linux/poll.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/lp.h>
 #include <linux/mutex.h>
@@ -870,11 +873,18 @@ static int usblp_wwait(struct usblp *usblp, int nonblock)
 
 	add_wait_queue(&usblp->wwait, &waita);
 	for (;;) {
+<<<<<<< HEAD
+=======
+		set_current_state(TASK_INTERRUPTIBLE);
+>>>>>>> v3.18
 		if (mutex_lock_interruptible(&usblp->mut)) {
 			rc = -EINTR;
 			break;
 		}
+<<<<<<< HEAD
 		set_current_state(TASK_INTERRUPTIBLE);
+=======
+>>>>>>> v3.18
 		rc = usblp_wtest(usblp, nonblock);
 		mutex_unlock(&usblp->mut);
 		if (rc <= 0)

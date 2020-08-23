@@ -23,6 +23,15 @@
 #ifndef MAC802154_H
 #define MAC802154_H
 
+<<<<<<< HEAD
+=======
+#include <linux/mutex.h>
+#include <net/mac802154.h>
+#include <net/ieee802154_netdev.h>
+
+#include "llsec.h"
+
+>>>>>>> v3.18
 /* mac802154 device private data */
 struct mac802154_priv {
 	struct ieee802154_dev hw;
@@ -71,19 +80,42 @@ struct mac802154_sub_if_data {
 	struct net_device *dev;
 
 	int type;
+<<<<<<< HEAD
+=======
+	bool running;
+>>>>>>> v3.18
 
 	spinlock_t mib_lock;
 
 	__le16 pan_id;
 	__le16 short_addr;
+<<<<<<< HEAD
+=======
+	__le64 extended_addr;
+>>>>>>> v3.18
 
 	u8 chan;
 	u8 page;
 
+<<<<<<< HEAD
+=======
+	struct ieee802154_mac_params mac_params;
+
+>>>>>>> v3.18
 	/* MAC BSN field */
 	u8 bsn;
 	/* MAC DSN field */
 	u8 dsn;
+<<<<<<< HEAD
+=======
+
+	/* protects sec from concurrent access by netlink. access by
+	 * encrypt/decrypt/header_create safe without additional protection.
+	 */
+	struct mutex sec_mtx;
+
+	struct mac802154_llsec sec;
+>>>>>>> v3.18
 };
 
 #define mac802154_to_priv(_hw)	container_of(_hw, struct mac802154_priv, hw)
@@ -106,6 +138,7 @@ netdev_tx_t mac802154_tx(struct mac802154_priv *priv, struct sk_buff *skb,
 			 u8 page, u8 chan);
 
 /* MIB callbacks */
+<<<<<<< HEAD
 void mac802154_dev_set_short_addr(struct net_device *dev, u16 val);
 u16 mac802154_dev_get_short_addr(const struct net_device *dev);
 void mac802154_dev_set_ieee_addr(struct net_device *dev);
@@ -114,4 +147,52 @@ void mac802154_dev_set_pan_id(struct net_device *dev, u16 val);
 void mac802154_dev_set_page_channel(struct net_device *dev, u8 page, u8 chan);
 u8 mac802154_dev_get_dsn(const struct net_device *dev);
 
+=======
+void mac802154_dev_set_short_addr(struct net_device *dev, __le16 val);
+__le16 mac802154_dev_get_short_addr(const struct net_device *dev);
+void mac802154_dev_set_ieee_addr(struct net_device *dev);
+__le16 mac802154_dev_get_pan_id(const struct net_device *dev);
+void mac802154_dev_set_pan_id(struct net_device *dev, __le16 val);
+void mac802154_dev_set_page_channel(struct net_device *dev, u8 page, u8 chan);
+u8 mac802154_dev_get_dsn(const struct net_device *dev);
+
+int mac802154_set_mac_params(struct net_device *dev,
+			     const struct ieee802154_mac_params *params);
+void mac802154_get_mac_params(struct net_device *dev,
+			      struct ieee802154_mac_params *params);
+
+int mac802154_get_params(struct net_device *dev,
+			 struct ieee802154_llsec_params *params);
+int mac802154_set_params(struct net_device *dev,
+			 const struct ieee802154_llsec_params *params,
+			 int changed);
+
+int mac802154_add_key(struct net_device *dev,
+		      const struct ieee802154_llsec_key_id *id,
+		      const struct ieee802154_llsec_key *key);
+int mac802154_del_key(struct net_device *dev,
+		      const struct ieee802154_llsec_key_id *id);
+
+int mac802154_add_dev(struct net_device *dev,
+		      const struct ieee802154_llsec_device *llsec_dev);
+int mac802154_del_dev(struct net_device *dev, __le64 dev_addr);
+
+int mac802154_add_devkey(struct net_device *dev,
+			 __le64 device_addr,
+			 const struct ieee802154_llsec_device_key *key);
+int mac802154_del_devkey(struct net_device *dev,
+			 __le64 device_addr,
+			 const struct ieee802154_llsec_device_key *key);
+
+int mac802154_add_seclevel(struct net_device *dev,
+			   const struct ieee802154_llsec_seclevel *sl);
+int mac802154_del_seclevel(struct net_device *dev,
+			   const struct ieee802154_llsec_seclevel *sl);
+
+void mac802154_lock_table(struct net_device *dev);
+void mac802154_get_table(struct net_device *dev,
+			 struct ieee802154_llsec_table **t);
+void mac802154_unlock_table(struct net_device *dev);
+
+>>>>>>> v3.18
 #endif /* MAC802154_H */

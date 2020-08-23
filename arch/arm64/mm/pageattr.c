@@ -12,11 +12,16 @@
  */
 #include <linux/kernel.h>
 #include <linux/mm.h>
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 #include <linux/sched.h>
 
 #include <asm/pgtable.h>
 #include <asm/tlbflush.h>
 
+<<<<<<< HEAD
 static pte_t clear_pte_bit(pte_t pte, pgprot_t prot)
 {
 	pte_val(pte) &= ~pgprot_val(prot);
@@ -38,10 +43,27 @@ static int __change_memory(pte_t *ptep, pgtable_t token, unsigned long addr,
 		pte = set_pte_bit(*ptep, prot);
 	else
 		pte = clear_pte_bit(*ptep, prot);
+=======
+struct page_change_data {
+	pgprot_t set_mask;
+	pgprot_t clear_mask;
+};
+
+static int change_page_range(pte_t *ptep, pgtable_t token, unsigned long addr,
+			void *data)
+{
+	struct page_change_data *cdata = data;
+	pte_t pte = *ptep;
+
+	pte = clear_pte_bit(pte, cdata->clear_mask);
+	pte = set_pte_bit(pte, cdata->set_mask);
+
+>>>>>>> v3.18
 	set_pte(ptep, pte);
 	return 0;
 }
 
+<<<<<<< HEAD
 static int set_page_range(pte_t *ptep, pgtable_t token, unsigned long addr,
 			void *data)
 {
@@ -60,11 +82,16 @@ static int clear_page_range(pte_t *ptep, pgtable_t token, unsigned long addr,
 
 static int change_memory_common(unsigned long addr, int numpages,
 				pgprot_t prot, bool set)
+=======
+static int change_memory_common(unsigned long addr, int numpages,
+				pgprot_t set_mask, pgprot_t clear_mask)
+>>>>>>> v3.18
 {
 	unsigned long start = addr;
 	unsigned long size = PAGE_SIZE*numpages;
 	unsigned long end = start + size;
 	int ret;
+<<<<<<< HEAD
 
 	if (!IS_ENABLED(CONFIG_FORCE_PAGES)) {
 		if (start < MODULES_VADDR || start >= MODULES_END)
@@ -96,10 +123,32 @@ static int change_memory_clear_bit(unsigned long addr, int numpages,
 					pgprot_t prot)
 {
 	return change_memory_common(addr, numpages, prot, false);
+=======
+	struct page_change_data data;
+
+	if (!IS_ALIGNED(addr, PAGE_SIZE)) {
+		start &= PAGE_MASK;
+		end = start + size;
+		WARN_ON_ONCE(1);
+	}
+
+	if (!is_module_address(start) || !is_module_address(end - 1))
+		return -EINVAL;
+
+	data.set_mask = set_mask;
+	data.clear_mask = clear_mask;
+
+	ret = apply_to_page_range(&init_mm, start, size, change_page_range,
+					&data);
+
+	flush_tlb_kernel_range(start, end);
+	return ret;
+>>>>>>> v3.18
 }
 
 int set_memory_ro(unsigned long addr, int numpages)
 {
+<<<<<<< HEAD
 	return change_memory_set_bit(addr, numpages, __pgprot(PTE_RDONLY));
 }
 EXPORT_SYMBOL(set_memory_ro);
@@ -121,3 +170,34 @@ int set_memory_x(unsigned long addr, int numpages)
 	return change_memory_clear_bit(addr, numpages, __pgprot(PTE_PXN));
 }
 EXPORT_SYMBOL(set_memory_x);
+=======
+	return change_memory_common(addr, numpages,
+					__pgprot(PTE_RDONLY),
+					__pgprot(PTE_WRITE));
+}
+EXPORT_SYMBOL_GPL(set_memory_ro);
+
+int set_memory_rw(unsigned long addr, int numpages)
+{
+	return change_memory_common(addr, numpages,
+					__pgprot(PTE_WRITE),
+					__pgprot(PTE_RDONLY));
+}
+EXPORT_SYMBOL_GPL(set_memory_rw);
+
+int set_memory_nx(unsigned long addr, int numpages)
+{
+	return change_memory_common(addr, numpages,
+					__pgprot(PTE_PXN),
+					__pgprot(0));
+}
+EXPORT_SYMBOL_GPL(set_memory_nx);
+
+int set_memory_x(unsigned long addr, int numpages)
+{
+	return change_memory_common(addr, numpages,
+					__pgprot(0),
+					__pgprot(PTE_PXN));
+}
+EXPORT_SYMBOL_GPL(set_memory_x);
+>>>>>>> v3.18

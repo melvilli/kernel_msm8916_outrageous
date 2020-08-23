@@ -11,3 +11,8 @@ menuconfig RESET_CONTROLLER
 	  via GPIOs or SoC-internal reset controller modules.
 
 	  If unsure, say no.
+<<<<<<< HEAD
+=======
+
+source "drivers/reset/sti/Kconfig"
+>>>>>>> v3.18

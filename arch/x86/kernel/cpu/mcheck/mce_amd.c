@@ -51,7 +51,11 @@ static const char * const th_names[] = {
 	"load_store",
 	"insn_fetch",
 	"combined_unit",
+<<<<<<< HEAD
 	"decode_unit",
+=======
+	"",
+>>>>>>> v3.18
 	"northbridge",
 	"execution_unit",
 };
@@ -310,7 +314,11 @@ static void amd_threshold_interrupt(void)
 			 * event.
 			 */
 			machine_check_poll(MCP_TIMESTAMP,
+<<<<<<< HEAD
 					&__get_cpu_var(mce_poll_banks));
+=======
+					this_cpu_ptr(&mce_poll_banks));
+>>>>>>> v3.18
 
 			if (high & MASK_OVERFLOW_HI) {
 				rdmsrl(address, m.misc);
@@ -353,7 +361,11 @@ store_interrupt_enable(struct threshold_block *b, const char *buf, size_t size)
 	if (!b->interrupt_capable)
 		return -EINVAL;
 
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &new) < 0)
+=======
+	if (kstrtoul(buf, 0, &new) < 0)
+>>>>>>> v3.18
 		return -EINVAL;
 
 	b->interrupt_enable = !!new;
@@ -372,7 +384,11 @@ store_threshold_limit(struct threshold_block *b, const char *buf, size_t size)
 	struct thresh_restart tr;
 	unsigned long new;
 
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &new) < 0)
+=======
+	if (kstrtoul(buf, 0, &new) < 0)
+>>>>>>> v3.18
 		return -EINVAL;
 
 	if (new > THRESHOLD_MAX)
@@ -458,10 +474,15 @@ static struct kobj_type threshold_ktype = {
 	.default_attrs		= default_attrs,
 };
 
+<<<<<<< HEAD
 static __cpuinit int allocate_threshold_blocks(unsigned int cpu,
 					       unsigned int bank,
 					       unsigned int block,
 					       u32 address)
+=======
+static int allocate_threshold_blocks(unsigned int cpu, unsigned int bank,
+				     unsigned int block, u32 address)
+>>>>>>> v3.18
 {
 	struct threshold_block *b = NULL;
 	u32 low, high;
@@ -543,7 +564,11 @@ out_free:
 	return err;
 }
 
+<<<<<<< HEAD
 static __cpuinit int __threshold_add_blocks(struct threshold_bank *b)
+=======
+static int __threshold_add_blocks(struct threshold_bank *b)
+>>>>>>> v3.18
 {
 	struct list_head *head = &b->blocks->miscj;
 	struct threshold_block *pos = NULL;
@@ -567,7 +592,11 @@ static __cpuinit int __threshold_add_blocks(struct threshold_bank *b)
 	return err;
 }
 
+<<<<<<< HEAD
 static __cpuinit int threshold_create_bank(unsigned int cpu, unsigned int bank)
+=======
+static int threshold_create_bank(unsigned int cpu, unsigned int bank)
+>>>>>>> v3.18
 {
 	struct device *dev = per_cpu(mce_device, cpu);
 	struct amd_northbridge *nb = NULL;
@@ -632,7 +661,11 @@ static __cpuinit int threshold_create_bank(unsigned int cpu, unsigned int bank)
 }
 
 /* create dir/files for all valid threshold banks */
+<<<<<<< HEAD
 static __cpuinit int threshold_create_device(unsigned int cpu)
+=======
+static int threshold_create_device(unsigned int cpu)
+>>>>>>> v3.18
 {
 	unsigned int bank;
 	struct threshold_bank **bp;
@@ -736,7 +769,11 @@ static void threshold_remove_device(unsigned int cpu)
 }
 
 /* get notified when a cpu comes on/off */
+<<<<<<< HEAD
 static void __cpuinit
+=======
+static void
+>>>>>>> v3.18
 amd_64_threshold_cpu_callback(unsigned long action, unsigned int cpu)
 {
 	switch (action) {

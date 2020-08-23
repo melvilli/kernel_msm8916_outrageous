@@ -16,7 +16,10 @@
 
 #include <linux/kernel.h>
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/interrupt.h>
 #include <linux/input.h>
 #include <linux/device.h>
@@ -24,6 +27,10 @@
 #include <linux/gpio.h>
 #include <linux/rotary_encoder.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 #include <linux/of_platform.h>
 #include <linux/of_gpio.h>
 
@@ -143,7 +150,11 @@ static irqreturn_t rotary_encoder_half_period_irq(int irq, void *dev_id)
 }
 
 #ifdef CONFIG_OF
+<<<<<<< HEAD
 static struct of_device_id rotary_encoder_of_match[] = {
+=======
+static const struct of_device_id rotary_encoder_of_match[] = {
+>>>>>>> v3.18
 	{ .compatible = "rotary-encoder", },
 	{ },
 };
@@ -317,8 +328,11 @@ static int rotary_encoder_remove(struct platform_device *pdev)
 	if (!dev_get_platdata(&pdev->dev))
 		kfree(pdata);
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

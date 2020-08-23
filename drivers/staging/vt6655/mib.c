@@ -44,8 +44,11 @@
 #include "wctl.h"
 #include "baseband.h"
 
+<<<<<<< HEAD
 /*---------------------  Static Definitions -------------------------*/
 static int msglevel = MSG_LEVEL_INFO;
+=======
+>>>>>>> v3.18
 /*---------------------  Static Classes  ----------------------------*/
 
 /*---------------------  Static Variables  --------------------------*/
@@ -187,6 +190,7 @@ void STAvUpdateRDStatCounter(PSStatCounter pStatistic,
 
 	if (byRxRate == 22) {
 		pStatistic->CustomStat.ullRsr11M++;
+<<<<<<< HEAD
 		if (byRSR & RSR_CRCOK) {
 			pStatistic->CustomStat.ullRsr11MCRCOk++;
 		}
@@ -259,6 +263,106 @@ void STAvUpdateRDStatCounter(PSStatCounter pStatistic,
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "54M: ALL[%d], OK[%d]\n", (int)pStatistic->CustomStat.ullRsr54M, (int)pStatistic->CustomStat.ullRsr54MCRCOk);
 	} else {
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Unknown: Total[%d], CRCOK[%d]\n", (int)pStatistic->dwRsrRxPacket+1, (int)pStatistic->dwRsrCRCOk);
+=======
+		if (byRSR & RSR_CRCOK)
+			pStatistic->CustomStat.ullRsr11MCRCOk++;
+
+		pr_debug("11M: ALL[%d], OK[%d]:[%02x]\n",
+			 (int)pStatistic->CustomStat.ullRsr11M,
+			 (int)pStatistic->CustomStat.ullRsr11MCRCOk, byRSR);
+	} else if (byRxRate == 11) {
+		pStatistic->CustomStat.ullRsr5M++;
+		if (byRSR & RSR_CRCOK)
+			pStatistic->CustomStat.ullRsr5MCRCOk++;
+
+		pr_debug(" 5M: ALL[%d], OK[%d]:[%02x]\n",
+			 (int)pStatistic->CustomStat.ullRsr5M,
+			 (int)pStatistic->CustomStat.ullRsr5MCRCOk, byRSR);
+	} else if (byRxRate == 4) {
+		pStatistic->CustomStat.ullRsr2M++;
+		if (byRSR & RSR_CRCOK)
+			pStatistic->CustomStat.ullRsr2MCRCOk++;
+
+		pr_debug(" 2M: ALL[%d], OK[%d]:[%02x]\n",
+			 (int)pStatistic->CustomStat.ullRsr2M,
+			 (int)pStatistic->CustomStat.ullRsr2MCRCOk, byRSR);
+	} else if (byRxRate == 2) {
+		pStatistic->CustomStat.ullRsr1M++;
+		if (byRSR & RSR_CRCOK)
+			pStatistic->CustomStat.ullRsr1MCRCOk++;
+
+		pr_debug(" 1M: ALL[%d], OK[%d]:[%02x]\n",
+			 (int)pStatistic->CustomStat.ullRsr1M,
+			 (int)pStatistic->CustomStat.ullRsr1MCRCOk, byRSR);
+	} else if (byRxRate == 12) {
+		pStatistic->CustomStat.ullRsr6M++;
+		if (byRSR & RSR_CRCOK)
+			pStatistic->CustomStat.ullRsr6MCRCOk++;
+
+		pr_debug(" 6M: ALL[%d], OK[%d]\n",
+			 (int)pStatistic->CustomStat.ullRsr6M,
+			 (int)pStatistic->CustomStat.ullRsr6MCRCOk);
+	} else if (byRxRate == 18) {
+		pStatistic->CustomStat.ullRsr9M++;
+		if (byRSR & RSR_CRCOK)
+			pStatistic->CustomStat.ullRsr9MCRCOk++;
+
+		pr_debug(" 9M: ALL[%d], OK[%d]\n",
+			 (int)pStatistic->CustomStat.ullRsr9M,
+			 (int)pStatistic->CustomStat.ullRsr9MCRCOk);
+	} else if (byRxRate == 24) {
+		pStatistic->CustomStat.ullRsr12M++;
+		if (byRSR & RSR_CRCOK)
+			pStatistic->CustomStat.ullRsr12MCRCOk++;
+
+		pr_debug("12M: ALL[%d], OK[%d]\n",
+			 (int)pStatistic->CustomStat.ullRsr12M,
+			 (int)pStatistic->CustomStat.ullRsr12MCRCOk);
+	} else if (byRxRate == 36) {
+		pStatistic->CustomStat.ullRsr18M++;
+		if (byRSR & RSR_CRCOK)
+			pStatistic->CustomStat.ullRsr18MCRCOk++;
+
+		pr_debug("18M: ALL[%d], OK[%d]\n",
+			 (int)pStatistic->CustomStat.ullRsr18M,
+			 (int)pStatistic->CustomStat.ullRsr18MCRCOk);
+	} else if (byRxRate == 48) {
+		pStatistic->CustomStat.ullRsr24M++;
+		if (byRSR & RSR_CRCOK)
+			pStatistic->CustomStat.ullRsr24MCRCOk++;
+
+		pr_debug("24M: ALL[%d], OK[%d]\n",
+			 (int)pStatistic->CustomStat.ullRsr24M,
+			 (int)pStatistic->CustomStat.ullRsr24MCRCOk);
+	} else if (byRxRate == 72) {
+		pStatistic->CustomStat.ullRsr36M++;
+		if (byRSR & RSR_CRCOK)
+			pStatistic->CustomStat.ullRsr36MCRCOk++;
+
+		pr_debug("36M: ALL[%d], OK[%d]\n",
+			 (int)pStatistic->CustomStat.ullRsr36M,
+			 (int)pStatistic->CustomStat.ullRsr36MCRCOk);
+	} else if (byRxRate == 96) {
+		pStatistic->CustomStat.ullRsr48M++;
+		if (byRSR & RSR_CRCOK)
+			pStatistic->CustomStat.ullRsr48MCRCOk++;
+
+		pr_debug("48M: ALL[%d], OK[%d]\n",
+			 (int)pStatistic->CustomStat.ullRsr48M,
+			 (int)pStatistic->CustomStat.ullRsr48MCRCOk);
+	} else if (byRxRate == 108) {
+		pStatistic->CustomStat.ullRsr54M++;
+		if (byRSR & RSR_CRCOK)
+			pStatistic->CustomStat.ullRsr54MCRCOk++;
+
+		pr_debug("54M: ALL[%d], OK[%d]\n",
+			 (int)pStatistic->CustomStat.ullRsr54M,
+			 (int)pStatistic->CustomStat.ullRsr54MCRCOk);
+	} else {
+		pr_debug("Unknown: Total[%d], CRCOK[%d]\n",
+			 (int)pStatistic->dwRsrRxPacket+1,
+			 (int)pStatistic->dwRsrCRCOk);
+>>>>>>> v3.18
 	}
 
 	if (byRSR & RSR_BSSIDOK)
@@ -288,6 +392,7 @@ void STAvUpdateRDStatCounter(PSStatCounter pStatistic,
 	pStatistic->dwRsrRxPacket++;
 	pStatistic->dwRsrRxOctet += cbFrameLength;
 
+<<<<<<< HEAD
 	if (IS_TYPE_DATA(pbyBuffer)) {
 		pStatistic->dwRsrRxData++;
 	} else if (IS_TYPE_MGMT(pbyBuffer)) {
@@ -295,6 +400,14 @@ void STAvUpdateRDStatCounter(PSStatCounter pStatistic,
 	} else if (IS_TYPE_CONTROL(pbyBuffer)) {
 		pStatistic->dwRsrRxControl++;
 	}
+=======
+	if (IS_TYPE_DATA(pbyBuffer))
+		pStatistic->dwRsrRxData++;
+	else if (IS_TYPE_MGMT(pbyBuffer))
+		pStatistic->dwRsrRxManage++;
+	else if (IS_TYPE_CONTROL(pbyBuffer))
+		pStatistic->dwRsrRxControl++;
+>>>>>>> v3.18
 
 	if (byRSR & RSR_ADDRBROAD)
 		pStatistic->dwRsrBroadcast++;
@@ -306,6 +419,7 @@ void STAvUpdateRDStatCounter(PSStatCounter pStatistic,
 	if (WLAN_GET_FC_MOREFRAG(pHeader->wFrameCtl))
 		pStatistic->dwRsrRxFragment++;
 
+<<<<<<< HEAD
 	if (cbFrameLength < ETH_ZLEN + 4) {
 		pStatistic->dwRsrRunt++;
 	} else if (cbFrameLength == ETH_ZLEN + 4) {
@@ -323,6 +437,24 @@ void STAvUpdateRDStatCounter(PSStatCounter pStatistic,
 	} else if (cbFrameLength > ETH_FRAME_LEN + 4) {
 		pStatistic->dwRsrLong++;
 	}
+=======
+	if (cbFrameLength < ETH_ZLEN + 4)
+		pStatistic->dwRsrRunt++;
+	else if (cbFrameLength == ETH_ZLEN + 4)
+		pStatistic->dwRsrRxFrmLen64++;
+	else if ((65 <= cbFrameLength) && (cbFrameLength <= 127))
+		pStatistic->dwRsrRxFrmLen65_127++;
+	else if ((128 <= cbFrameLength) && (cbFrameLength <= 255))
+		pStatistic->dwRsrRxFrmLen128_255++;
+	else if ((256 <= cbFrameLength) && (cbFrameLength <= 511))
+		pStatistic->dwRsrRxFrmLen256_511++;
+	else if ((512 <= cbFrameLength) && (cbFrameLength <= 1023))
+		pStatistic->dwRsrRxFrmLen512_1023++;
+	else if ((1024 <= cbFrameLength) && (cbFrameLength <= ETH_FRAME_LEN + 4))
+		pStatistic->dwRsrRxFrmLen1024_1518++;
+	else if (cbFrameLength > ETH_FRAME_LEN + 4)
+		pStatistic->dwRsrLong++;
+>>>>>>> v3.18
 }
 
 /*
@@ -399,11 +531,19 @@ STAvUpdateTDStatCounter(
 	unsigned char byTSR0_NCR = byTSR0 & TSR0_NCR;
 
 	pHeader = (PWLAN_80211HDR_A4) pbyBuffer;
+<<<<<<< HEAD
 	if (WLAN_GET_FC_TODS(pHeader->wFrameCtl) == 0) {
 		pbyDestAddr = &(pHeader->abyAddr1[0]);
 	} else {
 		pbyDestAddr = &(pHeader->abyAddr3[0]);
 	}
+=======
+	if (WLAN_GET_FC_TODS(pHeader->wFrameCtl) == 0)
+		pbyDestAddr = &(pHeader->abyAddr1[0]);
+	else
+		pbyDestAddr = &(pHeader->abyAddr3[0]);
+
+>>>>>>> v3.18
 	// increase tx packet count
 	pStatistic->dwTsrTxPacket[uIdx]++;
 	pStatistic->dwTsrTxOctet[uIdx] += cbFrameLength;
@@ -504,7 +644,10 @@ STAvUpdate802_11Counter(
 	unsigned long dwCounter
 )
 {
+<<<<<<< HEAD
 	//p802_11Counter->TransmittedFragmentCount
+=======
+>>>>>>> v3.18
 	p802_11Counter->MulticastTransmittedFrameCount = (unsigned long long) (pStatistic->dwTsrBroadcast[TYPE_AC0DMA] +
 									       pStatistic->dwTsrBroadcast[TYPE_TXDMA0] +
 									       pStatistic->dwTsrMulticast[TYPE_AC0DMA] +
@@ -513,12 +656,18 @@ STAvUpdate802_11Counter(
 	p802_11Counter->RetryCount = (unsigned long long) (pStatistic->dwTsrRetry[TYPE_AC0DMA] + pStatistic->dwTsrRetry[TYPE_TXDMA0]);
 	p802_11Counter->MultipleRetryCount = (unsigned long long) (pStatistic->dwTsrMoreThanOnceRetry[TYPE_AC0DMA] +
 								   pStatistic->dwTsrMoreThanOnceRetry[TYPE_TXDMA0]);
+<<<<<<< HEAD
 	//p802_11Counter->FrameDuplicateCount
+=======
+>>>>>>> v3.18
 	p802_11Counter->RTSSuccessCount += (unsigned long long)  (dwCounter & 0x000000ff);
 	p802_11Counter->RTSFailureCount += (unsigned long long) ((dwCounter & 0x0000ff00) >> 8);
 	p802_11Counter->ACKFailureCount += (unsigned long long) ((dwCounter & 0x00ff0000) >> 16);
 	p802_11Counter->FCSErrorCount +=   (unsigned long long) ((dwCounter & 0xff000000) >> 24);
+<<<<<<< HEAD
 	//p802_11Counter->ReceivedFragmentCount
+=======
+>>>>>>> v3.18
 	p802_11Counter->MulticastReceivedFrameCount = (unsigned long long) (pStatistic->dwRsrBroadcast +
 									    pStatistic->dwRsrMulticast);
 }

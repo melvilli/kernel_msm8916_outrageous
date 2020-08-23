@@ -34,12 +34,20 @@
 
 struct flow_head {
 	struct list_head	filters;
+<<<<<<< HEAD
+=======
+	struct rcu_head		rcu;
+>>>>>>> v3.18
 };
 
 struct flow_filter {
 	struct list_head	list;
 	struct tcf_exts		exts;
 	struct tcf_ematch_tree	ematches;
+<<<<<<< HEAD
+=======
+	struct tcf_proto	*tp;
+>>>>>>> v3.18
 	struct timer_list	perturb_timer;
 	u32			perturb_period;
 	u32			handle;
@@ -54,11 +62,15 @@ struct flow_filter {
 	u32			divisor;
 	u32			baseclass;
 	u32			hashrnd;
+<<<<<<< HEAD
 };
 
 static const struct tcf_ext_map flow_ext_map = {
 	.action	= TCA_FLOW_ACT,
 	.police	= TCA_FLOW_POLICE,
+=======
+	struct rcu_head		rcu;
+>>>>>>> v3.18
 };
 
 static inline u32 addr_fold(void *addr)
@@ -220,7 +232,11 @@ static u32 flow_get_vlan_tag(const struct sk_buff *skb)
 
 static u32 flow_get_rxhash(struct sk_buff *skb)
 {
+<<<<<<< HEAD
 	return skb_get_rxhash(skb);
+=======
+	return skb_get_hash(skb);
+>>>>>>> v3.18
 }
 
 static u32 flow_key_get(struct sk_buff *skb, int key, struct flow_keys *flow)
@@ -281,14 +297,22 @@ static u32 flow_key_get(struct sk_buff *skb, int key, struct flow_keys *flow)
 static int flow_classify(struct sk_buff *skb, const struct tcf_proto *tp,
 			 struct tcf_result *res)
 {
+<<<<<<< HEAD
 	struct flow_head *head = tp->root;
+=======
+	struct flow_head *head = rcu_dereference_bh(tp->root);
+>>>>>>> v3.18
 	struct flow_filter *f;
 	u32 keymask;
 	u32 classid;
 	unsigned int n, key;
 	int r;
 
+<<<<<<< HEAD
 	list_for_each_entry(f, &head->filters, list) {
+=======
+	list_for_each_entry_rcu(f, &head->filters, list) {
+>>>>>>> v3.18
 		u32 keys[FLOW_KEY_MAX + 1];
 		struct flow_keys flow_keys;
 
@@ -351,6 +375,7 @@ static const struct nla_policy flow_policy[TCA_FLOW_MAX + 1] = {
 	[TCA_FLOW_PERTURB]	= { .type = NLA_U32 },
 };
 
+<<<<<<< HEAD
 static int flow_change(struct net *net, struct sk_buff *in_skb,
 		       struct tcf_proto *tp, unsigned long base,
 		       u32 handle, struct nlattr **tca,
@@ -358,6 +383,25 @@ static int flow_change(struct net *net, struct sk_buff *in_skb,
 {
 	struct flow_head *head = tp->root;
 	struct flow_filter *f;
+=======
+static void flow_destroy_filter(struct rcu_head *head)
+{
+	struct flow_filter *f = container_of(head, struct flow_filter, rcu);
+
+	del_timer_sync(&f->perturb_timer);
+	tcf_exts_destroy(&f->exts);
+	tcf_em_tree_destroy(&f->ematches);
+	kfree(f);
+}
+
+static int flow_change(struct net *net, struct sk_buff *in_skb,
+		       struct tcf_proto *tp, unsigned long base,
+		       u32 handle, struct nlattr **tca,
+		       unsigned long *arg, bool ovr)
+{
+	struct flow_head *head = rtnl_dereference(tp->root);
+	struct flow_filter *fold, *fnew;
+>>>>>>> v3.18
 	struct nlattr *opt = tca[TCA_OPTIONS];
 	struct nlattr *tb[TCA_FLOW_MAX + 1];
 	struct tcf_exts e;
@@ -397,7 +441,12 @@ static int flow_change(struct net *net, struct sk_buff *in_skb,
 			return -EOPNOTSUPP;
 	}
 
+<<<<<<< HEAD
 	err = tcf_exts_validate(net, tp, tb, tca[TCA_RATE], &e, &flow_ext_map);
+=======
+	tcf_exts_init(&e, TCA_FLOW_ACT, TCA_FLOW_POLICE);
+	err = tcf_exts_validate(net, tp, tb, tca[TCA_RATE], &e, ovr);
+>>>>>>> v3.18
 	if (err < 0)
 		return err;
 
@@ -405,6 +454,7 @@ static int flow_change(struct net *net, struct sk_buff *in_skb,
 	if (err < 0)
 		goto err1;
 
+<<<<<<< HEAD
 	f = (struct flow_filter *)*arg;
 	if (f != NULL) {
 		err = -EINVAL;
@@ -412,13 +462,48 @@ static int flow_change(struct net *net, struct sk_buff *in_skb,
 			goto err2;
 
 		mode = f->mode;
+=======
+	err = -ENOBUFS;
+	fnew = kzalloc(sizeof(*fnew), GFP_KERNEL);
+	if (!fnew)
+		goto err2;
+
+	fold = (struct flow_filter *)*arg;
+	if (fold) {
+		err = -EINVAL;
+		if (fold->handle != handle && handle)
+			goto err2;
+
+		/* Copy fold into fnew */
+		fnew->handle = fold->handle;
+		fnew->keymask = fold->keymask;
+		fnew->tp = fold->tp;
+
+		fnew->handle = fold->handle;
+		fnew->nkeys = fold->nkeys;
+		fnew->keymask = fold->keymask;
+		fnew->mode = fold->mode;
+		fnew->mask = fold->mask;
+		fnew->xor = fold->xor;
+		fnew->rshift = fold->rshift;
+		fnew->addend = fold->addend;
+		fnew->divisor = fold->divisor;
+		fnew->baseclass = fold->baseclass;
+		fnew->hashrnd = fold->hashrnd;
+
+		mode = fold->mode;
+>>>>>>> v3.18
 		if (tb[TCA_FLOW_MODE])
 			mode = nla_get_u32(tb[TCA_FLOW_MODE]);
 		if (mode != FLOW_MODE_HASH && nkeys > 1)
 			goto err2;
 
 		if (mode == FLOW_MODE_HASH)
+<<<<<<< HEAD
 			perturb_period = f->perturb_period;
+=======
+			perturb_period = fold->perturb_period;
+>>>>>>> v3.18
 		if (tb[TCA_FLOW_PERTURB]) {
 			if (mode != FLOW_MODE_HASH)
 				goto err2;
@@ -448,6 +533,7 @@ static int flow_change(struct net *net, struct sk_buff *in_skb,
 		if (TC_H_MIN(baseclass) == 0)
 			baseclass = TC_H_MAKE(baseclass, 1);
 
+<<<<<<< HEAD
 		err = -ENOBUFS;
 		f = kzalloc(sizeof(*f), GFP_KERNEL);
 		if (f == NULL)
@@ -516,14 +602,81 @@ static void flow_destroy_filter(struct tcf_proto *tp, struct flow_filter *f)
 	kfree(f);
 }
 
+=======
+		fnew->handle = handle;
+		fnew->mask  = ~0U;
+		fnew->tp = tp;
+		get_random_bytes(&fnew->hashrnd, 4);
+		tcf_exts_init(&fnew->exts, TCA_FLOW_ACT, TCA_FLOW_POLICE);
+	}
+
+	fnew->perturb_timer.function = flow_perturbation;
+	fnew->perturb_timer.data = (unsigned long)fnew;
+	init_timer_deferrable(&fnew->perturb_timer);
+
+	tcf_exts_change(tp, &fnew->exts, &e);
+	tcf_em_tree_change(tp, &fnew->ematches, &t);
+
+	netif_keep_dst(qdisc_dev(tp->q));
+
+	if (tb[TCA_FLOW_KEYS]) {
+		fnew->keymask = keymask;
+		fnew->nkeys   = nkeys;
+	}
+
+	fnew->mode = mode;
+
+	if (tb[TCA_FLOW_MASK])
+		fnew->mask = nla_get_u32(tb[TCA_FLOW_MASK]);
+	if (tb[TCA_FLOW_XOR])
+		fnew->xor = nla_get_u32(tb[TCA_FLOW_XOR]);
+	if (tb[TCA_FLOW_RSHIFT])
+		fnew->rshift = nla_get_u32(tb[TCA_FLOW_RSHIFT]);
+	if (tb[TCA_FLOW_ADDEND])
+		fnew->addend = nla_get_u32(tb[TCA_FLOW_ADDEND]);
+
+	if (tb[TCA_FLOW_DIVISOR])
+		fnew->divisor = nla_get_u32(tb[TCA_FLOW_DIVISOR]);
+	if (baseclass)
+		fnew->baseclass = baseclass;
+
+	fnew->perturb_period = perturb_period;
+	if (perturb_period)
+		mod_timer(&fnew->perturb_timer, jiffies + perturb_period);
+
+	if (*arg == 0)
+		list_add_tail_rcu(&fnew->list, &head->filters);
+	else
+		list_replace_rcu(&fnew->list, &fold->list);
+
+	*arg = (unsigned long)fnew;
+
+	if (fold)
+		call_rcu(&fold->rcu, flow_destroy_filter);
+	return 0;
+
+err2:
+	tcf_em_tree_destroy(&t);
+	kfree(fnew);
+err1:
+	tcf_exts_destroy(&e);
+	return err;
+}
+
+>>>>>>> v3.18
 static int flow_delete(struct tcf_proto *tp, unsigned long arg)
 {
 	struct flow_filter *f = (struct flow_filter *)arg;
 
+<<<<<<< HEAD
 	tcf_tree_lock(tp);
 	list_del(&f->list);
 	tcf_tree_unlock(tp);
 	flow_destroy_filter(tp, f);
+=======
+	list_del_rcu(&f->list);
+	call_rcu(&f->rcu, flow_destroy_filter);
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -535,12 +688,17 @@ static int flow_init(struct tcf_proto *tp)
 	if (head == NULL)
 		return -ENOBUFS;
 	INIT_LIST_HEAD(&head->filters);
+<<<<<<< HEAD
 	tp->root = head;
+=======
+	rcu_assign_pointer(tp->root, head);
+>>>>>>> v3.18
 	return 0;
 }
 
 static void flow_destroy(struct tcf_proto *tp)
 {
+<<<<<<< HEAD
 	struct flow_head *head = tp->root;
 	struct flow_filter *f, *next;
 
@@ -549,14 +707,32 @@ static void flow_destroy(struct tcf_proto *tp)
 		flow_destroy_filter(tp, f);
 	}
 	kfree(head);
+=======
+	struct flow_head *head = rtnl_dereference(tp->root);
+	struct flow_filter *f, *next;
+
+	list_for_each_entry_safe(f, next, &head->filters, list) {
+		list_del_rcu(&f->list);
+		call_rcu(&f->rcu, flow_destroy_filter);
+	}
+	RCU_INIT_POINTER(tp->root, NULL);
+	kfree_rcu(head, rcu);
+>>>>>>> v3.18
 }
 
 static unsigned long flow_get(struct tcf_proto *tp, u32 handle)
 {
+<<<<<<< HEAD
 	struct flow_head *head = tp->root;
 	struct flow_filter *f;
 
 	list_for_each_entry(f, &head->filters, list)
+=======
+	struct flow_head *head = rtnl_dereference(tp->root);
+	struct flow_filter *f;
+
+	list_for_each_entry_rcu(f, &head->filters, list)
+>>>>>>> v3.18
 		if (f->handle == handle)
 			return (unsigned long)f;
 	return 0;
@@ -566,7 +742,11 @@ static void flow_put(struct tcf_proto *tp, unsigned long f)
 {
 }
 
+<<<<<<< HEAD
 static int flow_dump(struct tcf_proto *tp, unsigned long fh,
+=======
+static int flow_dump(struct net *net, struct tcf_proto *tp, unsigned long fh,
+>>>>>>> v3.18
 		     struct sk_buff *skb, struct tcmsg *t)
 {
 	struct flow_filter *f = (struct flow_filter *)fh;
@@ -608,7 +788,11 @@ static int flow_dump(struct tcf_proto *tp, unsigned long fh,
 	    nla_put_u32(skb, TCA_FLOW_PERTURB, f->perturb_period / HZ))
 		goto nla_put_failure;
 
+<<<<<<< HEAD
 	if (tcf_exts_dump(skb, &f->exts, &flow_ext_map) < 0)
+=======
+	if (tcf_exts_dump(skb, &f->exts) < 0)
+>>>>>>> v3.18
 		goto nla_put_failure;
 #ifdef CONFIG_NET_EMATCH
 	if (f->ematches.hdr.nmatches &&
@@ -617,7 +801,11 @@ static int flow_dump(struct tcf_proto *tp, unsigned long fh,
 #endif
 	nla_nest_end(skb, nest);
 
+<<<<<<< HEAD
 	if (tcf_exts_dump_stats(skb, &f->exts, &flow_ext_map) < 0)
+=======
+	if (tcf_exts_dump_stats(skb, &f->exts) < 0)
+>>>>>>> v3.18
 		goto nla_put_failure;
 
 	return skb->len;
@@ -629,10 +817,17 @@ nla_put_failure:
 
 static void flow_walk(struct tcf_proto *tp, struct tcf_walker *arg)
 {
+<<<<<<< HEAD
 	struct flow_head *head = tp->root;
 	struct flow_filter *f;
 
 	list_for_each_entry(f, &head->filters, list) {
+=======
+	struct flow_head *head = rtnl_dereference(tp->root);
+	struct flow_filter *f;
+
+	list_for_each_entry_rcu(f, &head->filters, list) {
+>>>>>>> v3.18
 		if (arg->count < arg->skip)
 			goto skip;
 		if (arg->fn(tp, (unsigned long)f, arg) < 0) {

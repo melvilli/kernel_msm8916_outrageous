@@ -53,7 +53,14 @@ void ceph_put_page_vector(struct page **pages, int num_pages, bool dirty)
 			set_page_dirty_lock(pages[i]);
 		put_page(pages[i]);
 	}
+<<<<<<< HEAD
 	kfree(pages);
+=======
+	if (is_vmalloc_addr(pages))
+		vfree(pages);
+	else
+		kfree(pages);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(ceph_put_page_vector);
 
@@ -165,6 +172,7 @@ void ceph_copy_from_page_vector(struct page **pages,
 EXPORT_SYMBOL(ceph_copy_from_page_vector);
 
 /*
+<<<<<<< HEAD
  * copy user data from a page vector into a user pointer
  */
 int ceph_copy_page_vector_to_user(struct page **pages,
@@ -195,6 +203,8 @@ int ceph_copy_page_vector_to_user(struct page **pages,
 EXPORT_SYMBOL(ceph_copy_page_vector_to_user);
 
 /*
+=======
+>>>>>>> v3.18
  * Zero an extent within a page vector.  Offset is relative to the
  * start of the first page.
  */

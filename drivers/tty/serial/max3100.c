@@ -779,7 +779,11 @@ static int max3100_probe(struct spi_device *spi)
 	max3100s[i]->irq = spi->irq;
 	spin_lock_init(&max3100s[i]->conf_lock);
 	spi_set_drvdata(spi, max3100s[i]);
+<<<<<<< HEAD
 	pdata = spi->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&spi->dev);
+>>>>>>> v3.18
 	max3100s[i]->crystal = pdata->crystal;
 	max3100s[i]->loopback = pdata->loopback;
 	max3100s[i]->poll_time = pdata->poll_time * HZ / 1000;

@@ -19,8 +19,15 @@
 #include <linux/gpio.h>
 #include <linux/rfkill.h>
 
+<<<<<<< HEAD
 #include <mach/hardware.h>
 #include <mach/regs-gpio.h>
+=======
+#include <plat/gpio-cfg.h>
+#include <mach/hardware.h>
+#include <mach/regs-gpio.h>
+#include <mach/gpio-samsung.h>
+>>>>>>> v3.18
 
 #include "h1940.h"
 

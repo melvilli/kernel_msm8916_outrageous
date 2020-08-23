@@ -25,7 +25,11 @@ static void afs_wake_up_call_waiter(struct afs_call *);
 static int afs_wait_for_call_to_complete(struct afs_call *);
 static void afs_wake_up_async_call(struct afs_call *);
 static int afs_dont_wait_for_call_to_complete(struct afs_call *);
+<<<<<<< HEAD
 static void afs_process_async_call(struct work_struct *);
+=======
+static void afs_process_async_call(struct afs_call *);
+>>>>>>> v3.18
 static void afs_rx_interceptor(struct sock *, unsigned long, struct sk_buff *);
 static int afs_deliver_cm_op_id(struct afs_call *, struct sk_buff *, bool);
 
@@ -58,6 +62,16 @@ static void afs_collect_incoming_call(struct work_struct *);
 static struct sk_buff_head afs_incoming_calls;
 static DECLARE_WORK(afs_collect_incoming_call_work, afs_collect_incoming_call);
 
+<<<<<<< HEAD
+=======
+static void afs_async_workfn(struct work_struct *work)
+{
+	struct afs_call *call = container_of(work, struct afs_call, async_work);
+
+	call->async_workfn(call);
+}
+
+>>>>>>> v3.18
 /*
  * open an RxRPC socket and bind it to be a server for callback notifications
  * - the socket is left in blocking mode and non-blocking ops use MSG_DONTWAIT
@@ -184,6 +198,31 @@ static void afs_free_call(struct afs_call *call)
 }
 
 /*
+<<<<<<< HEAD
+=======
+ * End a call but do not free it
+ */
+static void afs_end_call_nofree(struct afs_call *call)
+{
+	if (call->rxcall) {
+		rxrpc_kernel_end_call(call->rxcall);
+		call->rxcall = NULL;
+	}
+	if (call->type->destructor)
+		call->type->destructor(call);
+}
+
+/*
+ * End a call and free it
+ */
+static void afs_end_call(struct afs_call *call)
+{
+	afs_end_call_nofree(call);
+	afs_free_call(call);
+}
+
+/*
+>>>>>>> v3.18
  * allocate a call with flat request and reply buffers
  */
 struct afs_call *afs_alloc_flat_call(const struct afs_call_type *type,
@@ -326,7 +365,12 @@ int afs_make_call(struct in_addr *addr, struct afs_call *call, gfp_t gfp,
 	       atomic_read(&afs_outstanding_calls));
 
 	call->wait_mode = wait_mode;
+<<<<<<< HEAD
 	INIT_WORK(&call->async_work, afs_process_async_call);
+=======
+	call->async_workfn = afs_process_async_call;
+	INIT_WORK(&call->async_work, afs_async_workfn);
+>>>>>>> v3.18
 
 	memset(&srx, 0, sizeof(srx));
 	srx.srx_family = AF_RXRPC;
@@ -383,11 +427,16 @@ error_do_abort:
 	rxrpc_kernel_abort_call(rxcall, RX_USER_ABORT);
 	while ((skb = skb_dequeue(&call->rx_queue)))
 		afs_free_skb(skb);
+<<<<<<< HEAD
 	rxrpc_kernel_end_call(rxcall);
 	call->rxcall = NULL;
 error_kill_call:
 	call->type->destructor(call);
 	afs_free_call(call);
+=======
+error_kill_call:
+	afs_end_call(call);
+>>>>>>> v3.18
 	_leave(" = %d", ret);
 	return ret;
 }
@@ -509,12 +558,17 @@ static void afs_deliver_to_call(struct afs_call *call)
 	if (call->state >= AFS_CALL_COMPLETE) {
 		while ((skb = skb_dequeue(&call->rx_queue)))
 			afs_free_skb(skb);
+<<<<<<< HEAD
 		if (call->incoming) {
 			rxrpc_kernel_end_call(call->rxcall);
 			call->rxcall = NULL;
 			call->type->destructor(call);
 			afs_free_call(call);
 		}
+=======
+		if (call->incoming)
+			afs_end_call(call);
+>>>>>>> v3.18
 	}
 
 	_leave("");
@@ -564,10 +618,14 @@ static int afs_wait_for_call_to_complete(struct afs_call *call)
 	}
 
 	_debug("call complete");
+<<<<<<< HEAD
 	rxrpc_kernel_end_call(call->rxcall);
 	call->rxcall = NULL;
 	call->type->destructor(call);
 	afs_free_call(call);
+=======
+	afs_end_call(call);
+>>>>>>> v3.18
 	_leave(" = %d", ret);
 	return ret;
 }
@@ -603,11 +661,16 @@ static int afs_dont_wait_for_call_to_complete(struct afs_call *call)
 /*
  * delete an asynchronous call
  */
+<<<<<<< HEAD
 static void afs_delete_async_call(struct work_struct *work)
 {
 	struct afs_call *call =
 		container_of(work, struct afs_call, async_work);
 
+=======
+static void afs_delete_async_call(struct afs_call *call)
+{
+>>>>>>> v3.18
 	_enter("");
 
 	afs_free_call(call);
@@ -620,11 +683,16 @@ static void afs_delete_async_call(struct work_struct *work)
  * - on a multiple-thread workqueue this work item may try to run on several
  *   CPUs at the same time
  */
+<<<<<<< HEAD
 static void afs_process_async_call(struct work_struct *work)
 {
 	struct afs_call *call =
 		container_of(work, struct afs_call, async_work);
 
+=======
+static void afs_process_async_call(struct afs_call *call)
+{
+>>>>>>> v3.18
 	_enter("");
 
 	if (!skb_queue_empty(&call->rx_queue))
@@ -637,6 +705,7 @@ static void afs_process_async_call(struct work_struct *work)
 		call->reply = NULL;
 
 		/* kill the call */
+<<<<<<< HEAD
 		rxrpc_kernel_end_call(call->rxcall);
 		call->rxcall = NULL;
 		if (call->type->destructor)
@@ -645,6 +714,13 @@ static void afs_process_async_call(struct work_struct *work)
 		/* we can't just delete the call because the work item may be
 		 * queued */
 		PREPARE_WORK(&call->async_work, afs_delete_async_call);
+=======
+		afs_end_call_nofree(call);
+
+		/* we can't just delete the call because the work item may be
+		 * queued */
+		call->async_workfn = afs_delete_async_call;
+>>>>>>> v3.18
 		queue_work(afs_async_calls, &call->async_work);
 	}
 
@@ -685,7 +761,12 @@ static void afs_collect_incoming_call(struct work_struct *work)
 				return;
 			}
 
+<<<<<<< HEAD
 			INIT_WORK(&call->async_work, afs_process_async_call);
+=======
+			call->async_workfn = afs_process_async_call;
+			INIT_WORK(&call->async_work, afs_async_workfn);
+>>>>>>> v3.18
 			call->wait_mode = &afs_async_incoming_call;
 			call->type = &afs_RXCMxxxx;
 			init_waitqueue_head(&call->waitq);
@@ -782,10 +863,14 @@ void afs_send_empty_reply(struct afs_call *call)
 		_debug("oom");
 		rxrpc_kernel_abort_call(call->rxcall, RX_USER_ABORT);
 	default:
+<<<<<<< HEAD
 		rxrpc_kernel_end_call(call->rxcall);
 		call->rxcall = NULL;
 		call->type->destructor(call);
 		afs_free_call(call);
+=======
+		afs_end_call(call);
+>>>>>>> v3.18
 		_leave(" [error]");
 		return;
 	}
@@ -815,17 +900,29 @@ void afs_send_simple_reply(struct afs_call *call, const void *buf, size_t len)
 	call->state = AFS_CALL_AWAIT_ACK;
 	n = rxrpc_kernel_send_data(call->rxcall, &msg, len);
 	if (n >= 0) {
+<<<<<<< HEAD
 		_leave(" [replied]");
 		return;
 	}
+=======
+		/* Success */
+		_leave(" [replied]");
+		return;
+	}
+
+>>>>>>> v3.18
 	if (n == -ENOMEM) {
 		_debug("oom");
 		rxrpc_kernel_abort_call(call->rxcall, RX_USER_ABORT);
 	}
+<<<<<<< HEAD
 	rxrpc_kernel_end_call(call->rxcall);
 	call->rxcall = NULL;
 	call->type->destructor(call);
 	afs_free_call(call);
+=======
+	afs_end_call(call);
+>>>>>>> v3.18
 	_leave(" [error]");
 }
 

@@ -784,6 +784,7 @@ _GLOBAL(__fixup_440A_mcheck)
 	sync
 	blr
 
+<<<<<<< HEAD
 /*
  * extern void giveup_fpu(struct task_struct *prev)
  *
@@ -794,6 +795,8 @@ _GLOBAL(giveup_fpu)
 	blr
 #endif
 
+=======
+>>>>>>> v3.18
 _GLOBAL(set_context)
 
 #ifdef CONFIG_BDI_SWITCH
@@ -1220,10 +1223,19 @@ clear_utlb_entry:
 
 	/* We configure icbi to invalidate 128 bytes at a time since the
 	 * current 32-bit kernel code isn't too happy with icache != dcache
+<<<<<<< HEAD
 	 * block size
 	 */
 	mfspr	r3,SPRN_CCR0
 	oris	r3,r3,0x0020
+=======
+	 * block size. We also disable the BTAC as this can cause errors
+	 * in some circumstances (see IBM Erratum 47).
+	 */
+	mfspr	r3,SPRN_CCR0
+	oris	r3,r3,0x0020
+	ori	r3,r3,0x0040
+>>>>>>> v3.18
 	mtspr	SPRN_CCR0,r3
 	isync
 

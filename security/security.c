@@ -12,6 +12,10 @@
  */
 
 #include <linux/capability.h>
+<<<<<<< HEAD
+=======
+#include <linux/dcache.h>
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/init.h>
 #include <linux/kernel.h>
@@ -134,6 +138,7 @@ int __init register_security(struct security_operations *ops)
 
 /* Security operations */
 
+<<<<<<< HEAD
 int security_binder_set_context_mgr(struct task_struct *mgr)
 {
 	return security_ops->binder_set_context_mgr(mgr);
@@ -154,6 +159,8 @@ int security_binder_transfer_file(struct task_struct *from, struct task_struct *
 	return security_ops->binder_transfer_file(from, to, file);
 }
 
+=======
+>>>>>>> v3.18
 int security_ptrace_access_check(struct task_struct *child, unsigned int mode)
 {
 #ifdef CONFIG_SECURITY_YAMA_STACKED
@@ -313,9 +320,18 @@ int security_sb_pivotroot(struct path *old_path, struct path *new_path)
 }
 
 int security_sb_set_mnt_opts(struct super_block *sb,
+<<<<<<< HEAD
 				struct security_mnt_opts *opts)
 {
 	return security_ops->sb_set_mnt_opts(sb, opts);
+=======
+				struct security_mnt_opts *opts,
+				unsigned long kern_flags,
+				unsigned long *set_kern_flags)
+{
+	return security_ops->sb_set_mnt_opts(sb, opts, kern_flags,
+						set_kern_flags);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(security_sb_set_mnt_opts);
 
@@ -344,6 +360,18 @@ void security_inode_free(struct inode *inode)
 	security_ops->inode_free_security(inode);
 }
 
+<<<<<<< HEAD
+=======
+int security_dentry_init_security(struct dentry *dentry, int mode,
+					struct qstr *name, void **ctx,
+					u32 *ctxlen)
+{
+	return security_ops->dentry_init_security(dentry, mode, name,
+							ctx, ctxlen);
+}
+EXPORT_SYMBOL(security_dentry_init_security);
+
+>>>>>>> v3.18
 int security_inode_init_security(struct inode *inode, struct inode *dir,
 				 const struct qstr *qstr,
 				 const initxattrs initxattrs, void *fs_data)
@@ -355,10 +383,17 @@ int security_inode_init_security(struct inode *inode, struct inode *dir,
 	if (unlikely(IS_PRIVATE(inode)))
 		return 0;
 
+<<<<<<< HEAD
 	memset(new_xattrs, 0, sizeof new_xattrs);
 	if (!initxattrs)
 		return security_ops->inode_init_security(inode, dir, qstr,
 							 NULL, NULL, NULL);
+=======
+	if (!initxattrs)
+		return security_ops->inode_init_security(inode, dir, qstr,
+							 NULL, NULL, NULL);
+	memset(new_xattrs, 0, sizeof(new_xattrs));
+>>>>>>> v3.18
 	lsm_xattr = new_xattrs;
 	ret = security_ops->inode_init_security(inode, dir, qstr,
 						&lsm_xattr->name,
@@ -373,16 +408,25 @@ int security_inode_init_security(struct inode *inode, struct inode *dir,
 		goto out;
 	ret = initxattrs(inode, new_xattrs, fs_data);
 out:
+<<<<<<< HEAD
 	for (xattr = new_xattrs; xattr->name != NULL; xattr++) {
 		kfree(xattr->name);
 		kfree(xattr->value);
 	}
+=======
+	for (xattr = new_xattrs; xattr->value != NULL; xattr++)
+		kfree(xattr->value);
+>>>>>>> v3.18
 	return (ret == -EOPNOTSUPP) ? 0 : ret;
 }
 EXPORT_SYMBOL(security_inode_init_security);
 
 int security_old_inode_init_security(struct inode *inode, struct inode *dir,
+<<<<<<< HEAD
 				     const struct qstr *qstr, char **name,
+=======
+				     const struct qstr *qstr, const char **name,
+>>>>>>> v3.18
 				     void **value, size_t *len)
 {
 	if (unlikely(IS_PRIVATE(inode)))
@@ -442,11 +486,27 @@ int security_path_link(struct dentry *old_dentry, struct path *new_dir,
 }
 
 int security_path_rename(struct path *old_dir, struct dentry *old_dentry,
+<<<<<<< HEAD
 			 struct path *new_dir, struct dentry *new_dentry)
+=======
+			 struct path *new_dir, struct dentry *new_dentry,
+			 unsigned int flags)
+>>>>>>> v3.18
 {
 	if (unlikely(IS_PRIVATE(old_dentry->d_inode) ||
 		     (new_dentry->d_inode && IS_PRIVATE(new_dentry->d_inode))))
 		return 0;
+<<<<<<< HEAD
+=======
+
+	if (flags & RENAME_EXCHANGE) {
+		int err = security_ops->path_rename(new_dir, new_dentry,
+						    old_dir, old_dentry);
+		if (err)
+			return err;
+	}
+
+>>>>>>> v3.18
 	return security_ops->path_rename(old_dir, old_dentry, new_dir,
 					 new_dentry);
 }
@@ -487,6 +547,7 @@ int security_inode_create(struct inode *dir, struct dentry *dentry, umode_t mode
 }
 EXPORT_SYMBOL_GPL(security_inode_create);
 
+<<<<<<< HEAD
 int security_inode_post_create(struct inode *dir, struct dentry *dentry,
 			       umode_t mode)
 {
@@ -497,6 +558,8 @@ int security_inode_post_create(struct inode *dir, struct dentry *dentry,
 	return security_ops->inode_post_create(dir, dentry, mode);
 }
 
+=======
+>>>>>>> v3.18
 int security_inode_link(struct dentry *old_dentry, struct inode *dir,
 			 struct dentry *new_dentry)
 {
@@ -543,11 +606,27 @@ int security_inode_mknod(struct inode *dir, struct dentry *dentry, umode_t mode,
 }
 
 int security_inode_rename(struct inode *old_dir, struct dentry *old_dentry,
+<<<<<<< HEAD
 			   struct inode *new_dir, struct dentry *new_dentry)
+=======
+			   struct inode *new_dir, struct dentry *new_dentry,
+			   unsigned int flags)
+>>>>>>> v3.18
 {
         if (unlikely(IS_PRIVATE(old_dentry->d_inode) ||
             (new_dentry->d_inode && IS_PRIVATE(new_dentry->d_inode))))
 		return 0;
+<<<<<<< HEAD
+=======
+
+	if (flags & RENAME_EXCHANGE) {
+		int err = security_ops->inode_rename(new_dir, new_dentry,
+						     old_dir, old_dentry);
+		if (err)
+			return err;
+	}
+
+>>>>>>> v3.18
 	return security_ops->inode_rename(old_dir, old_dentry,
 					   new_dir, new_dentry);
 }
@@ -677,6 +756,10 @@ int security_inode_listsecurity(struct inode *inode, char *buffer, size_t buffer
 		return 0;
 	return security_ops->inode_listsecurity(inode, buffer, buffer_size);
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(security_inode_listsecurity);
+>>>>>>> v3.18
 
 void security_inode_getsecid(const struct inode *inode, u32 *secid)
 {
@@ -775,9 +858,15 @@ int security_file_fcntl(struct file *file, unsigned int cmd, unsigned long arg)
 	return security_ops->file_fcntl(file, cmd, arg);
 }
 
+<<<<<<< HEAD
 int security_file_set_fowner(struct file *file)
 {
 	return security_ops->file_set_fowner(file);
+=======
+void security_file_set_fowner(struct file *file)
+{
+	security_ops->file_set_fowner(file);
+>>>>>>> v3.18
 }
 
 int security_file_send_sigiotask(struct task_struct *tsk,
@@ -802,6 +891,7 @@ int security_file_open(struct file *file, const struct cred *cred)
 	return fsnotify_perm(file, MAY_OPEN);
 }
 
+<<<<<<< HEAD
 int security_file_close(struct file *file)
 {
 	if (security_ops->file_close)
@@ -818,6 +908,8 @@ bool security_allow_merge_bio(struct bio *bio1, struct bio *bio2)
 	return true;
 }
 
+=======
+>>>>>>> v3.18
 int security_task_create(unsigned long clone_flags)
 {
 	return security_ops->task_create(clone_flags);
@@ -861,6 +953,20 @@ int security_kernel_create_files_as(struct cred *new, struct inode *inode)
 	return security_ops->kernel_create_files_as(new, inode);
 }
 
+<<<<<<< HEAD
+=======
+int security_kernel_fw_from_file(struct file *file, char *buf, size_t size)
+{
+	int ret;
+
+	ret = security_ops->kernel_fw_from_file(file, buf, size);
+	if (ret)
+		return ret;
+	return ima_fw_from_file(file, buf, size);
+}
+EXPORT_SYMBOL_GPL(security_kernel_fw_from_file);
+
+>>>>>>> v3.18
 int security_kernel_module_request(char *kmod_name)
 {
 	return security_ops->kernel_module_request(kmod_name);
@@ -1093,6 +1199,15 @@ int security_netlink_send(struct sock *sk, struct sk_buff *skb)
 	return security_ops->netlink_send(sk, skb);
 }
 
+<<<<<<< HEAD
+=======
+int security_ismaclabel(const char *name)
+{
+	return security_ops->ismaclabel(name);
+}
+EXPORT_SYMBOL(security_ismaclabel);
+
+>>>>>>> v3.18
 int security_secid_to_secctx(u32 secid, char **secdata, u32 *seclen)
 {
 	return security_ops->secid_to_secctx(secid, secdata, seclen);
@@ -1345,9 +1460,17 @@ void security_skb_owned_by(struct sk_buff *skb, struct sock *sk)
 
 #ifdef CONFIG_SECURITY_NETWORK_XFRM
 
+<<<<<<< HEAD
 int security_xfrm_policy_alloc(struct xfrm_sec_ctx **ctxp, struct xfrm_user_sec_ctx *sec_ctx)
 {
 	return security_ops->xfrm_policy_alloc_security(ctxp, sec_ctx);
+=======
+int security_xfrm_policy_alloc(struct xfrm_sec_ctx **ctxp,
+			       struct xfrm_user_sec_ctx *sec_ctx,
+			       gfp_t gfp)
+{
+	return security_ops->xfrm_policy_alloc_security(ctxp, sec_ctx, gfp);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(security_xfrm_policy_alloc);
 
@@ -1368,15 +1491,23 @@ int security_xfrm_policy_delete(struct xfrm_sec_ctx *ctx)
 	return security_ops->xfrm_policy_delete_security(ctx);
 }
 
+<<<<<<< HEAD
 int security_xfrm_state_alloc(struct xfrm_state *x, struct xfrm_user_sec_ctx *sec_ctx)
 {
 	return security_ops->xfrm_state_alloc_security(x, sec_ctx, 0);
+=======
+int security_xfrm_state_alloc(struct xfrm_state *x,
+			      struct xfrm_user_sec_ctx *sec_ctx)
+{
+	return security_ops->xfrm_state_alloc(x, sec_ctx);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(security_xfrm_state_alloc);
 
 int security_xfrm_state_alloc_acquire(struct xfrm_state *x,
 				      struct xfrm_sec_ctx *polsec, u32 secid)
 {
+<<<<<<< HEAD
 	if (!polsec)
 		return 0;
 	/*
@@ -1384,6 +1515,9 @@ int security_xfrm_state_alloc_acquire(struct xfrm_state *x,
 	 * from the sock.
 	 */
 	return security_ops->xfrm_state_alloc_security(x, NULL, secid);
+=======
+	return security_ops->xfrm_state_alloc_acquire(x, polsec, secid);
+>>>>>>> v3.18
 }
 
 int security_xfrm_state_delete(struct xfrm_state *x)
@@ -1438,7 +1572,11 @@ void security_key_free(struct key *key)
 }
 
 int security_key_permission(key_ref_t key_ref,
+<<<<<<< HEAD
 			    const struct cred *cred, key_perm_t perm)
+=======
+			    const struct cred *cred, unsigned perm)
+>>>>>>> v3.18
 {
 	return security_ops->key_permission(key_ref, cred, perm);
 }

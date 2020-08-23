@@ -232,7 +232,11 @@ static int firmware_download(struct usb_device *udev)
 		goto out;
 	}
 
+<<<<<<< HEAD
 	max_packet_size = udev->ep_out[0x1]->desc.wMaxPacketSize;
+=======
+	max_packet_size = le16_to_cpu(udev->ep_out[0x1]->desc.wMaxPacketSize);
+>>>>>>> v3.18
 	log("\t\t download size : %d", (int)max_packet_size);
 
 	for (offset = 0; offset < fwlength; offset += max_packet_size) {
@@ -375,7 +379,11 @@ static inline void set_map_flags(struct poseidon *pd, struct usb_device *udev)
 }
 #endif
 
+<<<<<<< HEAD
 static int check_firmware(struct usb_device *udev, int *down_firmware)
+=======
+static int check_firmware(struct usb_device *udev)
+>>>>>>> v3.18
 {
 	void *buf;
 	int ret;
@@ -395,10 +403,15 @@ static int check_firmware(struct usb_device *udev, int *down_firmware)
 			 USB_CTRL_GET_TIMEOUT);
 	kfree(buf);
 
+<<<<<<< HEAD
 	if (ret < 0) {
 		*down_firmware = 1;
 		return firmware_download(udev);
 	}
+=======
+	if (ret < 0)
+		return firmware_download(udev);
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -411,9 +424,15 @@ static int poseidon_probe(struct usb_interface *interface,
 	int new_one = 0;
 
 	/* download firmware */
+<<<<<<< HEAD
 	check_firmware(udev, &ret);
 	if (ret)
 		return 0;
+=======
+	ret = check_firmware(udev);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 
 	/* Do I recovery from the hibernate ? */
 	pd = find_old_poseidon(udev);
@@ -436,12 +455,31 @@ static int poseidon_probe(struct usb_interface *interface,
 
 		/* register v4l2 device */
 		ret = v4l2_device_register(&interface->dev, &pd->v4l2_dev);
+<<<<<<< HEAD
 
 		/* register devices in directory /dev */
 		ret = pd_video_init(pd);
 		poseidon_audio_init(pd);
 		poseidon_fm_init(pd);
 		pd_dvb_usb_device_init(pd);
+=======
+		if (ret)
+			goto err_v4l2;
+
+		/* register devices in directory /dev */
+		ret = pd_video_init(pd);
+		if (ret)
+			goto err_video;
+		ret = poseidon_audio_init(pd);
+		if (ret)
+			goto err_audio;
+		ret = poseidon_fm_init(pd);
+		if (ret)
+			goto err_fm;
+		ret = pd_dvb_usb_device_init(pd);
+		if (ret)
+			goto err_dvb;
+>>>>>>> v3.18
 
 		INIT_LIST_HEAD(&pd->device_list);
 		list_add_tail(&pd->device_list, &pd_device_list);
@@ -459,6 +497,22 @@ static int poseidon_probe(struct usb_interface *interface,
 	}
 #endif
 	return 0;
+<<<<<<< HEAD
+=======
+err_dvb:
+	poseidon_fm_exit(pd);
+err_fm:
+	poseidon_audio_free(pd);
+err_audio:
+	pd_video_exit(pd);
+err_video:
+	v4l2_device_unregister(&pd->v4l2_dev);
+err_v4l2:
+	usb_put_intf(pd->interface);
+	usb_put_dev(pd->udev);
+	kfree(pd);
+	return ret;
+>>>>>>> v3.18
 }
 
 static void poseidon_disconnect(struct usb_interface *interface)

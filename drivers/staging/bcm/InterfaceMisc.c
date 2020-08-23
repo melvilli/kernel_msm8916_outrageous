@@ -1,15 +1,49 @@
 #include "headers.h"
 
+<<<<<<< HEAD
+=======
+static int adapter_err_occurred(const struct bcm_interface_adapter *ad)
+{
+	if (ad->psAdapter->device_removed == TRUE) {
+		BCM_DEBUG_PRINT(ad->psAdapter, DBG_TYPE_PRINTK, 0, 0,
+				"Device got removed");
+		return -ENODEV;
+	}
+
+	if ((ad->psAdapter->StopAllXaction == TRUE) &&
+	    (ad->psAdapter->chip_id >= T3LPB)) {
+		BCM_DEBUG_PRINT(ad->psAdapter, DBG_TYPE_OTHERS, RDM,
+				DBG_LVL_ALL,
+				"Currently Xaction is not allowed on the bus");
+		return -EACCES;
+	}
+
+	if (ad->bSuspended == TRUE || ad->bPreparingForBusSuspend == TRUE) {
+		BCM_DEBUG_PRINT(ad->psAdapter, DBG_TYPE_OTHERS, RDM,
+				DBG_LVL_ALL,
+				"Bus is in suspended states hence RDM not allowed..");
+		return -EACCES;
+	}
+
+	return 0;
+}
+
+>>>>>>> v3.18
 int InterfaceRDM(struct bcm_interface_adapter *psIntfAdapter,
 		unsigned int addr,
 		void *buff,
 		int len)
 {
 	int bytes;
+<<<<<<< HEAD
+=======
+	int err = 0;
+>>>>>>> v3.18
 
 	if (!psIntfAdapter)
 		return -EINVAL;
 
+<<<<<<< HEAD
 	if (psIntfAdapter->psAdapter->device_removed == TRUE) {
 		BCM_DEBUG_PRINT(psIntfAdapter->psAdapter, DBG_TYPE_PRINTK, 0, 0, "Device got removed");
 		return -ENODEV;
@@ -24,6 +58,12 @@ int InterfaceRDM(struct bcm_interface_adapter *psIntfAdapter,
 		BCM_DEBUG_PRINT(psIntfAdapter->psAdapter, DBG_TYPE_OTHERS, RDM, DBG_LVL_ALL, "Bus is in suspended states hence RDM not allowed..");
 		return -EACCES;
 	}
+=======
+	err = adapter_err_occurred(psIntfAdapter);
+	if (err)
+		return err;
+
+>>>>>>> v3.18
 	psIntfAdapter->psAdapter->DeviceAccess = TRUE;
 
 	bytes = usb_control_msg(psIntfAdapter->udev,
@@ -40,11 +80,21 @@ int InterfaceRDM(struct bcm_interface_adapter *psIntfAdapter,
 		psIntfAdapter->psAdapter->device_removed = TRUE;
 
 	if (bytes < 0)
+<<<<<<< HEAD
 		BCM_DEBUG_PRINT(psIntfAdapter->psAdapter, DBG_TYPE_OTHERS, RDM, DBG_LVL_ALL, "RDM failed status :%d", bytes);
 	else
 		BCM_DEBUG_PRINT(psIntfAdapter->psAdapter, DBG_TYPE_OTHERS, RDM, DBG_LVL_ALL, "RDM sent %d", bytes);
 
 	psIntfAdapter->psAdapter->DeviceAccess = FALSE;
+=======
+		BCM_DEBUG_PRINT(psIntfAdapter->psAdapter, DBG_TYPE_OTHERS, RDM,
+				DBG_LVL_ALL, "RDM failed status :%d", bytes);
+	else
+		BCM_DEBUG_PRINT(psIntfAdapter->psAdapter, DBG_TYPE_OTHERS, RDM,
+				DBG_LVL_ALL, "RDM sent %d", bytes);
+
+	psIntfAdapter->psAdapter->DeviceAccess = false;
+>>>>>>> v3.18
 	return bytes;
 }
 
@@ -54,10 +104,15 @@ int InterfaceWRM(struct bcm_interface_adapter *psIntfAdapter,
 		int len)
 {
 	int retval = 0;
+<<<<<<< HEAD
+=======
+	int err = 0;
+>>>>>>> v3.18
 
 	if (!psIntfAdapter)
 		return -EINVAL;
 
+<<<<<<< HEAD
 	if (psIntfAdapter->psAdapter->device_removed == TRUE) {
 		BCM_DEBUG_PRINT(psIntfAdapter->psAdapter, DBG_TYPE_PRINTK, 0, 0, "Device got removed");
 		return -ENODEV;
@@ -72,6 +127,11 @@ int InterfaceWRM(struct bcm_interface_adapter *psIntfAdapter,
 		BCM_DEBUG_PRINT(psIntfAdapter->psAdapter, DBG_TYPE_OTHERS, WRM, DBG_LVL_ALL, "Bus is in suspended states hence RDM not allowed..");
 		return -EACCES;
 	}
+=======
+	err = adapter_err_occurred(psIntfAdapter);
+	if (err)
+		return err;
+>>>>>>> v3.18
 
 	psIntfAdapter->psAdapter->DeviceAccess = TRUE;
 
@@ -89,12 +149,23 @@ int InterfaceWRM(struct bcm_interface_adapter *psIntfAdapter,
 		psIntfAdapter->psAdapter->device_removed = TRUE;
 
 	if (retval < 0)	{
+<<<<<<< HEAD
 		BCM_DEBUG_PRINT(psIntfAdapter->psAdapter, DBG_TYPE_OTHERS, WRM, DBG_LVL_ALL, "WRM failed status :%d", retval);
 		psIntfAdapter->psAdapter->DeviceAccess = FALSE;
 		return retval;
 	} else {
 		psIntfAdapter->psAdapter->DeviceAccess = FALSE;
 		BCM_DEBUG_PRINT(psIntfAdapter->psAdapter, DBG_TYPE_OTHERS, WRM, DBG_LVL_ALL, "WRM sent %d", retval);
+=======
+		BCM_DEBUG_PRINT(psIntfAdapter->psAdapter, DBG_TYPE_OTHERS, WRM,
+				DBG_LVL_ALL, "WRM failed status :%d", retval);
+		psIntfAdapter->psAdapter->DeviceAccess = false;
+		return retval;
+	} else {
+		psIntfAdapter->psAdapter->DeviceAccess = false;
+		BCM_DEBUG_PRINT(psIntfAdapter->psAdapter, DBG_TYPE_OTHERS, WRM,
+				DBG_LVL_ALL, "WRM sent %d", retval);
+>>>>>>> v3.18
 		return STATUS_SUCCESS;
 	}
 }
@@ -104,7 +175,12 @@ int BcmRDM(void *arg,
 	void *buff,
 	int len)
 {
+<<<<<<< HEAD
 	return InterfaceRDM((struct bcm_interface_adapter*)arg, addr, buff, len);
+=======
+	return InterfaceRDM((struct bcm_interface_adapter *)arg, addr, buff,
+			    len);
+>>>>>>> v3.18
 }
 
 int BcmWRM(void *arg,
@@ -112,12 +188,22 @@ int BcmWRM(void *arg,
 	void *buff,
 	int len)
 {
+<<<<<<< HEAD
 	return InterfaceWRM((struct bcm_interface_adapter *)arg, addr, buff, len);
+=======
+	return InterfaceWRM((struct bcm_interface_adapter *)arg, addr, buff,
+			    len);
+>>>>>>> v3.18
 }
 
 int Bcm_clear_halt_of_endpoints(struct bcm_mini_adapter *Adapter)
 {
+<<<<<<< HEAD
 	struct bcm_interface_adapter *psIntfAdapter = (struct bcm_interface_adapter *)(Adapter->pvInterfaceAdapter);
+=======
+	struct bcm_interface_adapter *psIntfAdapter =
+		(struct bcm_interface_adapter *)(Adapter->pvInterfaceAdapter);
+>>>>>>> v3.18
 	int status = STATUS_SUCCESS;
 
 	/*
@@ -126,12 +212,23 @@ int Bcm_clear_halt_of_endpoints(struct bcm_mini_adapter *Adapter)
 	 * @pipe: endpoint "pipe" being cleared
 	 * @ Context: !in_interrupt ()
 	 *
+<<<<<<< HEAD
 	 * usb_clear_halt is the synchrnous call and returns 0 on success else returns with error code.
 	 * This is used to clear halt conditions for bulk and interrupt endpoints only.
 	 * Control and isochronous endpoints never halts.
 	 *
 	 * Any URBs  queued for such an endpoint should normally be unlinked by the driver
 	 * before clearing the halt condition.
+=======
+	 * usb_clear_halt is the synchrnous call and returns 0 on success else
+	 * returns with error code.
+	 * This is used to clear halt conditions for bulk and interrupt
+	 * endpoints only.
+	 * Control and isochronous endpoints never halts.
+	 *
+	 * Any URBs  queued for such an endpoint should normally be unlinked by
+	 * the driver before clearing the halt condition.
+>>>>>>> v3.18
 	 *
 	 */
 
@@ -139,6 +236,7 @@ int Bcm_clear_halt_of_endpoints(struct bcm_mini_adapter *Adapter)
 	Bcm_kill_all_URBs(psIntfAdapter);
 
 	/* clear the halted/stalled state for every end point */
+<<<<<<< HEAD
 	status = usb_clear_halt(psIntfAdapter->udev, psIntfAdapter->sIntrIn.int_in_pipe);
 	if (status != STATUS_SUCCESS)
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, INTF_INIT, DBG_LVL_ALL, "Unable to Clear Halt of Interrupt IN end point. :%d ", status);
@@ -150,6 +248,31 @@ int Bcm_clear_halt_of_endpoints(struct bcm_mini_adapter *Adapter)
 	status = usb_clear_halt(psIntfAdapter->udev, psIntfAdapter->sBulkOut.bulk_out_pipe);
 	if (status != STATUS_SUCCESS)
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, INTF_INIT, DBG_LVL_ALL, "Unable to Clear Halt of Bulk OUT end point. :%d ", status);
+=======
+	status = usb_clear_halt(psIntfAdapter->udev,
+				psIntfAdapter->sIntrIn.int_in_pipe);
+	if (status != STATUS_SUCCESS)
+		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, INTF_INIT,
+				DBG_LVL_ALL,
+				"Unable to Clear Halt of Interrupt IN end point. :%d ",
+				status);
+
+	status = usb_clear_halt(psIntfAdapter->udev,
+				psIntfAdapter->sBulkIn.bulk_in_pipe);
+	if (status != STATUS_SUCCESS)
+		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, INTF_INIT,
+				DBG_LVL_ALL,
+				"Unable to Clear Halt of Bulk IN end point. :%d ",
+				status);
+
+	status = usb_clear_halt(psIntfAdapter->udev,
+				psIntfAdapter->sBulkOut.bulk_out_pipe);
+	if (status != STATUS_SUCCESS)
+		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, INTF_INIT,
+				DBG_LVL_ALL,
+				"Unable to Clear Halt of Bulk OUT end point. :%d ",
+				status);
+>>>>>>> v3.18
 
 	return status;
 }
@@ -168,9 +291,15 @@ void Bcm_kill_all_URBs(struct bcm_interface_adapter *psIntfAdapter)
 	 * upon return all completion handlers will have finished and the URB
 	 * will be totally idle and available for reuse
 	 *
+<<<<<<< HEAD
 	 * This routine may not be used in an interrupt context (such as a bottom
 	 * half or a completion handler), or when holding a spinlock, or in other
 	 * situations where the caller can't schedule().
+=======
+	 * This routine may not be used in an interrupt context (such as a
+	 * bottom half or a completion handler), or when holding a spinlock, or
+	 * in other situations where the caller can't schedule().
+>>>>>>> v3.18
 	 *
 	 */
 
@@ -208,10 +337,19 @@ void putUsbSuspend(struct work_struct *work)
 {
 	struct bcm_interface_adapter *psIntfAdapter = NULL;
 	struct usb_interface *intf = NULL;
+<<<<<<< HEAD
 	psIntfAdapter = container_of(work, struct bcm_interface_adapter, usbSuspendWork);
 	intf = psIntfAdapter->interface;
 
 	if (psIntfAdapter->bSuspended == FALSE)
+=======
+
+	psIntfAdapter = container_of(work, struct bcm_interface_adapter,
+				     usbSuspendWork);
+	intf = psIntfAdapter->interface;
+
+	if (psIntfAdapter->bSuspended == false)
+>>>>>>> v3.18
 		usb_autopm_put_interface(intf);
 }
 

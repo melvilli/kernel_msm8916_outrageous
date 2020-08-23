@@ -63,6 +63,16 @@ extern void __chk_io_ptr(const volatile void __iomem *);
 # include <linux/compiler-intel.h>
 #endif
 
+<<<<<<< HEAD
+=======
+/* Clang compiler defines __GNUC__. So we will overwrite implementations
+ * coming from above header files here
+ */
+#ifdef __clang__
+#include <linux/compiler-clang.h>
+#endif
+
+>>>>>>> v3.18
 /*
  * Generic compiler-dependent macros required for kernel
  * build go below this comment. Actual compiler/compiler version
@@ -131,7 +141,11 @@ void ftrace_likely_update(struct ftrace_branch_data *f, int val, int expect);
  */
 #define if(cond, ...) __trace_if( (cond , ## __VA_ARGS__) )
 #define __trace_if(cond) \
+<<<<<<< HEAD
 	if (__builtin_constant_p(!!(cond)) ? !!(cond) :			\
+=======
+	if (__builtin_constant_p((cond)) ? !!(cond) :			\
+>>>>>>> v3.18
 	({								\
 		int ______r;						\
 		static struct ftrace_branch_data			\
@@ -316,9 +330,24 @@ void ftrace_likely_update(struct ftrace_branch_data *f, int val, int expect);
 #endif
 #ifndef __compiletime_error
 # define __compiletime_error(message)
+<<<<<<< HEAD
 # define __compiletime_error_fallback(condition) \
 	do { ((void)sizeof(char[1 - 2 * condition])); } while (0)
 #else
+=======
+/*
+ * Sparse complains of variable sized arrays due to the temporary variable in
+ * __compiletime_assert. Unfortunately we can't just expand it out to make
+ * sparse see a constant array size without breaking compiletime_assert on old
+ * versions of GCC (e.g. 4.2.4), so hide the array from sparse altogether.
+ */
+# ifndef __CHECKER__
+#  define __compiletime_error_fallback(condition) \
+	do { ((void)sizeof(char[1 - 2 * condition])); } while (0)
+# endif
+#endif
+#ifndef __compiletime_error_fallback
+>>>>>>> v3.18
 # define __compiletime_error_fallback(condition) do { } while (0)
 #endif
 
@@ -367,7 +396,14 @@ void ftrace_likely_update(struct ftrace_branch_data *f, int val, int expect);
 /* Ignore/forbid kprobes attach on very low level functions marked by this attribute: */
 #ifdef CONFIG_KPROBES
 # define __kprobes	__attribute__((__section__(".kprobes.text")))
+<<<<<<< HEAD
 #else
 # define __kprobes
+=======
+# define nokprobe_inline	__always_inline
+#else
+# define __kprobes
+# define nokprobe_inline	inline
+>>>>>>> v3.18
 #endif
 #endif /* __LINUX_COMPILER_H */

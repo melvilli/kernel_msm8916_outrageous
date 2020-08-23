@@ -28,5 +28,8 @@ for arch in ${archs}; do
 		;;
 	esac
 done
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> v3.18

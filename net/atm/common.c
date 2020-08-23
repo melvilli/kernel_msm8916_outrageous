@@ -300,7 +300,11 @@ static int adjust_tp(struct atm_trafprm *tp, unsigned char aal)
 		max_sdu = ATM_MAX_AAL34_PDU;
 		break;
 	default:
+<<<<<<< HEAD
 		pr_warning("AAL problems ... (%d)\n", aal);
+=======
+		pr_warn("AAL problems ... (%d)\n", aal);
+>>>>>>> v3.18
 		/* fall through */
 	case ATM_AAL5:
 		max_sdu = ATM_MAX_AAL5_PDU;

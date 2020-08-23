@@ -3,6 +3,11 @@
  * Author: Rickard Andersson <rickard.andersson@stericsson.com> for
  *         ST-Ericsson.
  * Author: Daniel Lezcano <daniel.lezcano@linaro.org> for Linaro.
+<<<<<<< HEAD
+=======
+ * Author: Ulf Hansson <ulf.hansson@linaro.org> for Linaro.
+ *
+>>>>>>> v3.18
  * License terms: GNU General Public License (GPL) version 2
  *
  */
@@ -11,6 +16,10 @@
 #include <linux/irqchip/arm-gic.h>
 #include <linux/delay.h>
 #include <linux/io.h>
+<<<<<<< HEAD
+=======
+#include <linux/suspend.h>
+>>>>>>> v3.18
 #include <linux/platform_data/arm-ux500-pm.h>
 
 #include "db8500-regs.h"
@@ -128,8 +137,13 @@ bool prcmu_pending_irq(void)
  */
 bool prcmu_is_cpu_in_wfi(int cpu)
 {
+<<<<<<< HEAD
 	return readl(PRCM_ARM_WFI_STANDBY) &
 		(cpu ? PRCM_ARM_WFI_STANDBY_WFI1 : PRCM_ARM_WFI_STANDBY_WFI0);
+=======
+	return readl(PRCM_ARM_WFI_STANDBY) & cpu ? PRCM_ARM_WFI_STANDBY_WFI1 :
+		     PRCM_ARM_WFI_STANDBY_WFI0;
+>>>>>>> v3.18
 }
 
 /*
@@ -152,6 +166,30 @@ int prcmu_copy_gic_settings(void)
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_SUSPEND
+static int ux500_suspend_enter(suspend_state_t state)
+{
+	cpu_do_idle();
+	return 0;
+}
+
+static int ux500_suspend_valid(suspend_state_t state)
+{
+	return state == PM_SUSPEND_MEM || state == PM_SUSPEND_STANDBY;
+}
+
+static const struct platform_suspend_ops ux500_suspend_ops = {
+	.enter	      = ux500_suspend_enter,
+	.valid	      = ux500_suspend_valid,
+};
+#define UX500_SUSPEND_OPS	(&ux500_suspend_ops)
+#else
+#define UX500_SUSPEND_OPS	NULL
+#endif
+
+>>>>>>> v3.18
 void __init ux500_pm_init(u32 phy_base, u32 size)
 {
 	prcmu_base = ioremap(phy_base, size);
@@ -164,4 +202,10 @@ void __init ux500_pm_init(u32 phy_base, u32 size)
 	 * This will make sure that the GIC is correctly configured.
 	 */
 	prcmu_gic_recouple();
+<<<<<<< HEAD
+=======
+
+	/* Set up ux500 suspend callbacks. */
+	suspend_set_ops(UX500_SUSPEND_OPS);
+>>>>>>> v3.18
 }

@@ -880,7 +880,11 @@ static void hw_breakpoint_reset(void *unused)
 	}
 }
 
+<<<<<<< HEAD
 static int __cpuinit hw_breakpoint_reset_notify(struct notifier_block *self,
+=======
+static int hw_breakpoint_reset_notify(struct notifier_block *self,
+>>>>>>> v3.18
 						unsigned long action,
 						void *hcpu)
 {
@@ -890,7 +894,11 @@ static int __cpuinit hw_breakpoint_reset_notify(struct notifier_block *self,
 	return NOTIFY_OK;
 }
 
+<<<<<<< HEAD
 static struct notifier_block __cpuinitdata hw_breakpoint_reset_nb = {
+=======
+static struct notifier_block hw_breakpoint_reset_nb = {
+>>>>>>> v3.18
 	.notifier_call = hw_breakpoint_reset_notify,
 };
 

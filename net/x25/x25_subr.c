@@ -23,6 +23,11 @@
  *						restriction on response.
  */
 
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) "X25: " fmt
+
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/kernel.h>
 #include <linux/string.h>
@@ -148,7 +153,11 @@ void x25_write_internal(struct sock *sk, int frametype)
 	case X25_RESET_CONFIRMATION:
 		break;
 	default:
+<<<<<<< HEAD
 		printk(KERN_ERR "X.25: invalid frame type %02X\n", frametype);
+=======
+		pr_err("invalid frame type %02X\n", frametype);
+>>>>>>> v3.18
 		return;
 	}
 
@@ -338,7 +347,11 @@ int x25_decode(struct sock *sk, struct sk_buff *skb, int *ns, int *nr, int *q,
 		}
 	}
 
+<<<<<<< HEAD
 	printk(KERN_DEBUG "X.25: invalid PLP frame %02X %02X %02X\n",
+=======
+	pr_debug("invalid PLP frame %02X %02X %02X\n",
+>>>>>>> v3.18
 	       frame[0], frame[1], frame[2]);
 
 	return X25_ILLEGAL;

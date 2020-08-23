@@ -43,11 +43,18 @@ extern struct ppc_emulated {
 	struct ppc_emulated_entry popcntb;
 	struct ppc_emulated_entry spe;
 	struct ppc_emulated_entry string;
+<<<<<<< HEAD
 	struct ppc_emulated_entry unaligned;
 #ifdef CONFIG_MATH_EMULATION
 	struct ppc_emulated_entry math;
 #elif defined(CONFIG_8XX_MINIMAL_FPEMU)
 	struct ppc_emulated_entry 8xx;
+=======
+	struct ppc_emulated_entry sync;
+	struct ppc_emulated_entry unaligned;
+#ifdef CONFIG_MATH_EMULATION
+	struct ppc_emulated_entry math;
+>>>>>>> v3.18
 #endif
 #ifdef CONFIG_VSX
 	struct ppc_emulated_entry vsx;
@@ -55,6 +62,10 @@ extern struct ppc_emulated {
 #ifdef CONFIG_PPC64
 	struct ppc_emulated_entry mfdscr;
 	struct ppc_emulated_entry mtdscr;
+<<<<<<< HEAD
+=======
+	struct ppc_emulated_entry lq_stq;
+>>>>>>> v3.18
 #endif
 } ppc_emulated;
 

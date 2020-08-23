@@ -18,6 +18,10 @@
 #include <linux/timer.h>
 #include <linux/init.h>
 #include <linux/serial_core.h>
+<<<<<<< HEAD
+=======
+#include <linux/serial_s3c.h>
+>>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <linux/io.h>
 #include <linux/slab.h>
@@ -30,8 +34,15 @@
 #include <linux/mtd/partitions.h>
 #include <linux/mmc/host.h>
 #include <linux/ioport.h>
+<<<<<<< HEAD
 #include <linux/platform_data/s3c-hsudc.h>
 #include <linux/platform_data/s3c-hsotg.h>
+=======
+#include <linux/sizes.h>
+#include <linux/platform_data/s3c-hsudc.h>
+#include <linux/platform_data/s3c-hsotg.h>
+#include <linux/platform_data/dma-s3c24xx.h>
+>>>>>>> v3.18
 
 #include <media/s5p_hdmi.h>
 
@@ -40,7 +51,10 @@
 #include <asm/mach/map.h>
 #include <asm/mach/irq.h>
 
+<<<<<<< HEAD
 #include <mach/hardware.h>
+=======
+>>>>>>> v3.18
 #include <mach/dma.h>
 #include <mach/irqs.h>
 #include <mach/map.h>
@@ -49,21 +63,33 @@
 #include <plat/devs.h>
 #include <plat/adc.h>
 #include <linux/platform_data/ata-samsung_cf.h>
+<<<<<<< HEAD
 #include <linux/platform_data/usb-ehci-s5p.h>
 #include <plat/fb.h>
 #include <plat/fb-s3c2410.h>
 #include <plat/hdmi.h>
+=======
+#include <plat/fb.h>
+#include <plat/fb-s3c2410.h>
+>>>>>>> v3.18
 #include <linux/platform_data/hwmon-s3c.h>
 #include <linux/platform_data/i2c-s3c2410.h>
 #include <plat/keypad.h>
 #include <linux/platform_data/mmc-s3cmci.h>
 #include <linux/platform_data/mtd-nand-s3c2410.h>
+<<<<<<< HEAD
+=======
+#include <plat/pwm-core.h>
+>>>>>>> v3.18
 #include <plat/sdhci.h>
 #include <linux/platform_data/touchscreen-s3c2410.h>
 #include <linux/platform_data/usb-s3c2410_udc.h>
 #include <linux/platform_data/usb-ohci-s3c2410.h>
 #include <plat/usb-phy.h>
+<<<<<<< HEAD
 #include <plat/regs-serial.h>
+=======
+>>>>>>> v3.18
 #include <plat/regs-spi.h>
 #include <linux/platform_data/spi-s3c64xx.h>
 
@@ -144,6 +170,7 @@ struct platform_device s3c_device_camif = {
 };
 #endif /* CONFIG_CPU_S3C2440 */
 
+<<<<<<< HEAD
 /* ASOC DMA */
 
 #ifdef CONFIG_PLAT_S5P 
@@ -161,6 +188,8 @@ struct platform_device samsung_asoc_idma = {
 };
 #endif
 
+=======
+>>>>>>> v3.18
 /* FB */
 
 #ifdef CONFIG_S3C_DEV_FB
@@ -189,6 +218,7 @@ void __init s3c_fb_set_platdata(struct s3c_fb_platdata *pd)
 }
 #endif /* CONFIG_S3C_DEV_FB */
 
+<<<<<<< HEAD
 /* FIMC */
 
 #ifdef CONFIG_S5P_DEV_FIMC0
@@ -334,6 +364,8 @@ void __init s5p_fimd0_set_platdata(struct s3c_fb_platdata *pd)
 }
 #endif /* CONFIG_S5P_DEV_FIMD0 */
 
+=======
+>>>>>>> v3.18
 /* HWMON */
 
 #ifdef CONFIG_S3C_DEV_HWMON
@@ -721,6 +753,7 @@ void __init s3c_i2c7_set_platdata(struct s3c2410_platform_i2c *pd)
 }
 #endif /* CONFIG_S3C_DEV_I2C7 */
 
+<<<<<<< HEAD
 /* I2C HDMIPHY */
 
 #ifdef CONFIG_S5P_DEV_I2C_HDMIPHY
@@ -781,6 +814,8 @@ void __init s5p_hdmi_set_platdata(struct i2c_board_info *hdmiphy_info,
 
 #endif /* CONFIG_S5P_DEV_I2C_HDMIPHY */
 
+=======
+>>>>>>> v3.18
 /* I2S */
 
 #ifdef CONFIG_PLAT_S3C24XX
@@ -884,6 +919,7 @@ void __init s3c24xx_fb_set_platdata(struct s3c2410fb_mach_info *pd)
 }
 #endif /* CONFIG_PLAT_S3C24XX */
 
+<<<<<<< HEAD
 /* MIPI CSIS */
 
 #ifdef CONFIG_S5P_DEV_CSIS0
@@ -914,6 +950,8 @@ struct platform_device s5p_device_mipi_csis1 = {
 };
 #endif
 
+=======
+>>>>>>> v3.18
 /* NAND */
 
 #ifdef CONFIG_S3C_DEV_NAND
@@ -1057,6 +1095,7 @@ void __init s3c64xx_onenand1_set_platdata(struct onenand_platform_data *pdata)
 }
 #endif /* CONFIG_S3C64XX_DEV_ONENAND1 */
 
+<<<<<<< HEAD
 #ifdef CONFIG_S5P_DEV_ONENAND
 static struct resource s5p_onenand_resources[] = {
 	[0] = DEFINE_RES_MEM(S5P_PA_ONENAND, SZ_128K),
@@ -1127,6 +1166,26 @@ struct platform_device s3c_device_timer[] = {
 	[3] = { DEFINE_S3C_TIMER(3, IRQ_TIMER3) },
 	[4] = { DEFINE_S3C_TIMER(4, IRQ_TIMER4) },
 };
+=======
+/* PWM Timer */
+
+#ifdef CONFIG_SAMSUNG_DEV_PWM
+static struct resource samsung_pwm_resource[] = {
+	DEFINE_RES_MEM(SAMSUNG_PA_TIMER, SZ_4K),
+};
+
+struct platform_device samsung_device_pwm = {
+	.name		= "samsung-pwm",
+	.id		= -1,
+	.num_resources	= ARRAY_SIZE(samsung_pwm_resource),
+	.resource	= samsung_pwm_resource,
+};
+
+void __init samsung_pwm_set_platdata(struct samsung_pwm_variant *pd)
+{
+	samsung_device_pwm.dev.platform_data = pd;
+}
+>>>>>>> v3.18
 #endif /* CONFIG_SAMSUNG_DEV_PWM */
 
 /* RTC */
@@ -1271,6 +1330,7 @@ void __init s3c24xx_ts_set_platdata(struct s3c2410_ts_mach_info *pd)
 }
 #endif /* CONFIG_SAMSUNG_DEV_TS */
 
+<<<<<<< HEAD
 /* TV */
 
 #ifdef CONFIG_S5P_DEV_TV
@@ -1317,6 +1377,8 @@ struct platform_device s5p_device_mixer = {
 };
 #endif /* CONFIG_S5P_DEV_TV */
 
+=======
+>>>>>>> v3.18
 /* USB */
 
 #ifdef CONFIG_S3C_DEV_USB_HOST
@@ -1373,6 +1435,7 @@ void __init s3c24xx_udc_set_platdata(struct s3c2410_udc_mach_info *pd)
 }
 #endif /* CONFIG_PLAT_S3C24XX */
 
+<<<<<<< HEAD
 /* USB EHCI Host Controller */
 
 #ifdef CONFIG_S5P_DEV_USB_EHCI
@@ -1406,6 +1469,8 @@ void __init s5p_ehci_set_platdata(struct s5p_ehci_platdata *pd)
 }
 #endif /* CONFIG_S5P_DEV_USB_EHCI */
 
+=======
+>>>>>>> v3.18
 /* USB HSOTG */
 
 #ifdef CONFIG_S3C_DEV_USB_HSOTG
@@ -1513,8 +1578,17 @@ void __init s3c64xx_spi0_set_platdata(int (*cfg_gpio)(void), int src_clk_nr,
 	pd.num_cs = num_cs;
 	pd.src_clk_nr = src_clk_nr;
 	pd.cfg_gpio = (cfg_gpio) ? cfg_gpio : s3c64xx_spi0_cfg_gpio;
+<<<<<<< HEAD
 #ifdef CONFIG_PL330_DMA
 	pd.filter = pl330_filter;
+=======
+#if defined(CONFIG_PL330_DMA)
+	pd.filter = pl330_filter;
+#elif defined(CONFIG_S3C64XX_PL080)
+	pd.filter = pl08x_filter_id;
+#elif defined(CONFIG_S3C24XX_DMAC)
+	pd.filter = s3c24xx_dma_filter;
+>>>>>>> v3.18
 #endif
 
 	s3c_set_platdata(&pd, sizeof(pd), &s3c64xx_device_spi0);
@@ -1554,8 +1628,15 @@ void __init s3c64xx_spi1_set_platdata(int (*cfg_gpio)(void), int src_clk_nr,
 	pd.num_cs = num_cs;
 	pd.src_clk_nr = src_clk_nr;
 	pd.cfg_gpio = (cfg_gpio) ? cfg_gpio : s3c64xx_spi1_cfg_gpio;
+<<<<<<< HEAD
 #ifdef CONFIG_PL330_DMA
 	pd.filter = pl330_filter;
+=======
+#if defined(CONFIG_PL330_DMA)
+	pd.filter = pl330_filter;
+#elif defined(CONFIG_S3C64XX_PL080)
+	pd.filter = pl08x_filter_id;
+>>>>>>> v3.18
 #endif
 
 	s3c_set_platdata(&pd, sizeof(pd), &s3c64xx_device_spi1);
@@ -1595,8 +1676,15 @@ void __init s3c64xx_spi2_set_platdata(int (*cfg_gpio)(void), int src_clk_nr,
 	pd.num_cs = num_cs;
 	pd.src_clk_nr = src_clk_nr;
 	pd.cfg_gpio = (cfg_gpio) ? cfg_gpio : s3c64xx_spi2_cfg_gpio;
+<<<<<<< HEAD
 #ifdef CONFIG_PL330_DMA
 	pd.filter = pl330_filter;
+=======
+#if defined(CONFIG_PL330_DMA)
+	pd.filter = pl330_filter;
+#elif defined(CONFIG_S3C64XX_PL080)
+	pd.filter = pl08x_filter_id;
+>>>>>>> v3.18
 #endif
 
 	s3c_set_platdata(&pd, sizeof(pd), &s3c64xx_device_spi2);

@@ -15,12 +15,20 @@
  * details.
  */
 
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/init.h>
 #include <linux/types.h>
 #include <linux/acpi.h>
+<<<<<<< HEAD
 #include <acpi/acpi_drivers.h>
+=======
+>>>>>>> v3.18
 #include <xen/acpi.h>
 #include <xen/interface/platform.h>
 #include <asm/xen/hypercall.h>
@@ -167,7 +175,11 @@ static int acpi_memory_get_device(acpi_handle handle,
 	acpi_scan_lock_acquire();
 
 	acpi_bus_get_device(handle, &device);
+<<<<<<< HEAD
 	if (device)
+=======
+	if (acpi_device_enumerated(device))
+>>>>>>> v3.18
 		goto end;
 
 	/*
@@ -180,8 +192,14 @@ static int acpi_memory_get_device(acpi_handle handle,
 		result = -EINVAL;
 		goto out;
 	}
+<<<<<<< HEAD
 	result = acpi_bus_get_device(handle, &device);
 	if (result) {
+=======
+	device = NULL;
+	acpi_bus_get_device(handle, &device);
+	if (!acpi_device_enumerated(device)) {
+>>>>>>> v3.18
 		pr_warn(PREFIX "Missing device object\n");
 		result = -EINVAL;
 		goto out;
@@ -283,7 +301,11 @@ static void acpi_memory_device_notify(acpi_handle handle, u32 event, void *data)
 		return;
 	}
 
+<<<<<<< HEAD
 	(void) acpi_evaluate_hotplug_ost(handle, event, ost_code, NULL);
+=======
+	(void) acpi_evaluate_ost(handle, event, ost_code, NULL);
+>>>>>>> v3.18
 	return;
 }
 

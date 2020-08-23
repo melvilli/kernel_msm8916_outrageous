@@ -22,27 +22,39 @@ choice
 config ARCH_SCORE7
 	bool "SCORE7 processor"
 	select SYS_SUPPORTS_32BIT_KERNEL
+<<<<<<< HEAD
 	select CPU_SCORE7
 	select GENERIC_HAS_IOMAP
+=======
+>>>>>>> v3.18
 
 config MACH_SPCT6600
 	bool "SPCT6600 series based machines"
 	select SYS_SUPPORTS_32BIT_KERNEL
+<<<<<<< HEAD
 	select CPU_SCORE7
 	select GENERIC_HAS_IOMAP
+=======
+>>>>>>> v3.18
 
 config SCORE_SIM
 	bool "Score simulator"
 	select SYS_SUPPORTS_32BIT_KERNEL
+<<<<<<< HEAD
 	select CPU_SCORE7
 	select GENERIC_HAS_IOMAP
+=======
+>>>>>>> v3.18
 endchoice
 
 endmenu
 
+<<<<<<< HEAD
 config CPU_SCORE7
 	bool
 
+=======
+>>>>>>> v3.18
 config NO_DMA
 	bool
 	default y
@@ -86,6 +98,11 @@ config STACKTRACE_SUPPORT
 
 source "init/Kconfig"
 
+<<<<<<< HEAD
+=======
+source "kernel/Kconfig.freezer"
+
+>>>>>>> v3.18
 config MMU
 	def_bool y
 

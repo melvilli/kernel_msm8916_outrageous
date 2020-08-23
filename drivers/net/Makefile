@@ -22,6 +22,10 @@ obj-$(CONFIG_TUN) += tun.o
 obj-$(CONFIG_VETH) += veth.o
 obj-$(CONFIG_VIRTIO_NET) += virtio_net.o
 obj-$(CONFIG_VXLAN) += vxlan.o
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_NLMON) += nlmon.o
+>>>>>>> v3.18
 
 #
 # Networking Drivers
@@ -55,12 +59,16 @@ obj-$(CONFIG_WAN) += wan/
 obj-$(CONFIG_WLAN) += wireless/
 obj-$(CONFIG_WIMAX) += wimax/
 obj-$(CONFIG_IEEE802154) += ieee802154/
+<<<<<<< HEAD
 obj-$(CONFIG_DANIPC) += danipc/
+=======
+>>>>>>> v3.18
 
 obj-$(CONFIG_VMXNET3) += vmxnet3/
 obj-$(CONFIG_XEN_NETDEV_FRONTEND) += xen-netfront.o
 obj-$(CONFIG_XEN_NETDEV_BACKEND) += xen-netback/
 
+<<<<<<< HEAD
 obj-$(CONFIG_USB_CATC)          += usb/
 obj-$(CONFIG_USB_KAWETH)        += usb/
 obj-$(CONFIG_USB_PEGASUS)       += usb/
@@ -70,6 +78,9 @@ obj-$(CONFIG_USB_USBNET)        += usb/
 obj-$(CONFIG_USB_ZD1201)        += usb/
 obj-$(CONFIG_USB_IPHETH)        += usb/
 obj-$(CONFIG_USB_CDC_PHONET)   += usb/
+=======
+obj-$(CONFIG_USB_NET_DRIVERS) += usb/
+>>>>>>> v3.18
 
 obj-$(CONFIG_HYPERV_NET) += hyperv/
 obj-$(CONFIG_NTB_NETDEV) += ntb_netdev.o

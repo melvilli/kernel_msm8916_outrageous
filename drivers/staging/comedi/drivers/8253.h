@@ -14,11 +14,14 @@
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 */
 
 #ifndef _8253_H
@@ -26,6 +29,7 @@
 
 #include "../comedi.h"
 
+<<<<<<< HEAD
 #define i8253_cascade_ns_to_timer i8253_cascade_ns_to_timer_2div
 
 static inline void i8253_cascade_ns_to_timer_2div_old(int i8253_osc_base,
@@ -126,6 +130,22 @@ static inline void i8253_cascade_ns_to_timer_2div(int i8253_osc_base,
 						  unsigned int *d2,
 						  unsigned int *nanosec,
 						  int round_mode)
+=======
+/*
+ * Common oscillator base values in nanoseconds
+ */
+#define I8254_OSC_BASE_10MHZ		100
+#define I8254_OSC_BASE_5MHZ		200
+#define I8254_OSC_BASE_4MHZ		250
+#define I8254_OSC_BASE_2MHZ		500
+#define I8254_OSC_BASE_1MHZ		1000
+
+static inline void i8253_cascade_ns_to_timer(int i8253_osc_base,
+					     unsigned int *d1,
+					     unsigned int *d2,
+					     unsigned int *nanosec,
+					     unsigned int flags)
+>>>>>>> v3.18
 {
 	unsigned int divider;
 	unsigned int div1, div2;
@@ -181,9 +201,14 @@ static inline void i8253_cascade_ns_to_timer_2div(int i8253_osc_base,
 		}
 	}
 
+<<<<<<< HEAD
 	round_mode &= TRIG_ROUND_MASK;
 	switch (round_mode) {
 	case TRIG_ROUND_NEAREST:
+=======
+	switch (flags & CMDF_ROUND_MASK) {
+	case CMDF_ROUND_NEAREST:
+>>>>>>> v3.18
 	default:
 		ns_high = div1_lub * div2_lub * i8253_osc_base;
 		ns_low = div1_glb * div2_glb * i8253_osc_base;
@@ -195,11 +220,19 @@ static inline void i8253_cascade_ns_to_timer_2div(int i8253_osc_base,
 			div2 = div2_glb;
 		}
 		break;
+<<<<<<< HEAD
 	case TRIG_ROUND_UP:
 		div1 = div1_lub;
 		div2 = div2_lub;
 		break;
 	case TRIG_ROUND_DOWN:
+=======
+	case CMDF_ROUND_UP:
+		div1 = div1_lub;
+		div2 = div2_lub;
+		break;
+	case CMDF_ROUND_DOWN:
+>>>>>>> v3.18
 		div1 = div1_glb;
 		div2 = div2_glb;
 		break;
@@ -209,7 +242,10 @@ static inline void i8253_cascade_ns_to_timer_2div(int i8253_osc_base,
 	/*  masking is done since counter maps zero to 0x10000 */
 	*d1 = div1 & 0xffff;
 	*d2 = div2 & 0xffff;
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 }
 
 #ifndef CMDTEST
@@ -382,7 +418,11 @@ static inline int i8254_set_mode(unsigned long base_address,
 
 	if (counter_number > 2)
 		return -1;
+<<<<<<< HEAD
 	if (mode > (I8254_MODE5 | I8254_BINARY))
+=======
+	if (mode > (I8254_MODE5 | I8254_BCD))
+>>>>>>> v3.18
 		return -1;
 
 	byte = counter_number << 6;
@@ -402,7 +442,11 @@ static inline int i8254_mm_set_mode(void __iomem *base_address,
 
 	if (counter_number > 2)
 		return -1;
+<<<<<<< HEAD
 	if (mode > (I8254_MODE5 | I8254_BINARY))
+=======
+	if (mode > (I8254_MODE5 | I8254_BCD))
+>>>>>>> v3.18
 		return -1;
 
 	byte = counter_number << 6;

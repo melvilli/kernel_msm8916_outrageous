@@ -110,7 +110,11 @@ static int tile_gpr_set(struct task_struct *target,
 			  const void *kbuf, const void __user *ubuf)
 {
 	int ret;
+<<<<<<< HEAD
 	struct pt_regs regs = *task_pt_regs(target);
+=======
+	struct pt_regs regs;
+>>>>>>> v3.18
 
 	ret = user_regset_copyin(&pos, &count, &kbuf, &ubuf, &regs, 0,
 				 sizeof(regs));
@@ -265,6 +269,24 @@ int do_syscall_trace_enter(struct pt_regs *regs)
 
 void do_syscall_trace_exit(struct pt_regs *regs)
 {
+<<<<<<< HEAD
+=======
+	long errno;
+
+	/*
+	 * The standard tile calling convention returns the value (or negative
+	 * errno) in r0, and zero (or positive errno) in r1.
+	 * It saves a couple of cycles on the hot path to do this work in
+	 * registers only as we return, rather than updating the in-memory
+	 * struct ptregs.
+	 */
+	errno = (long) regs->regs[0];
+	if (errno < 0 && errno > -4096)
+		regs->regs[1] = -errno;
+	else
+		regs->regs[1] = 0;
+
+>>>>>>> v3.18
 	if (test_thread_flag(TIF_SYSCALL_TRACE))
 		tracehook_report_syscall_exit(regs, 0);
 
@@ -272,7 +294,11 @@ void do_syscall_trace_exit(struct pt_regs *regs)
 		trace_sys_exit(regs, regs->regs[0]);
 }
 
+<<<<<<< HEAD
 void send_sigtrap(struct task_struct *tsk, struct pt_regs *regs, int error_code)
+=======
+void send_sigtrap(struct task_struct *tsk, struct pt_regs *regs)
+>>>>>>> v3.18
 {
 	struct siginfo info;
 
@@ -288,5 +314,9 @@ void send_sigtrap(struct task_struct *tsk, struct pt_regs *regs, int error_code)
 /* Handle synthetic interrupt delivered only by the simulator. */
 void __kprobes do_breakpoint(struct pt_regs* regs, int fault_num)
 {
+<<<<<<< HEAD
 	send_sigtrap(current, regs, fault_num);
+=======
+	send_sigtrap(current, regs);
+>>>>>>> v3.18
 }

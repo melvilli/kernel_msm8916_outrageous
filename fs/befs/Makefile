@@ -3,5 +3,9 @@
 #
  
 obj-$(CONFIG_BEFS_FS) += befs.o
+<<<<<<< HEAD
 
+=======
+ccflags-$(CONFIG_BEFS_DEBUG)    += -DDEBUG
+>>>>>>> v3.18
 befs-objs := datastream.o btree.o super.o inode.o debug.o io.o linuxvfs.o

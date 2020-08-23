@@ -33,5 +33,8 @@ void __init orion_gpio_init(struct device_node *np,
 			    int secondary_irq_base,
 			    int irq[4]);
 
+<<<<<<< HEAD
 void __init orion_gpio_of_init(int irq_gpio_base);
+=======
+>>>>>>> v3.18
 #endif

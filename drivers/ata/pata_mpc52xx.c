@@ -819,6 +819,7 @@ mpc52xx_ata_remove(struct platform_device *op)
 	return 0;
 }
 
+<<<<<<< HEAD
 
 #ifdef CONFIG_PM
 
@@ -826,6 +827,13 @@ static int
 mpc52xx_ata_suspend(struct platform_device *op, pm_message_t state)
 {
 	struct ata_host *host = dev_get_drvdata(&op->dev);
+=======
+#ifdef CONFIG_PM_SLEEP
+static int
+mpc52xx_ata_suspend(struct platform_device *op, pm_message_t state)
+{
+	struct ata_host *host = platform_get_drvdata(op);
+>>>>>>> v3.18
 
 	return ata_host_suspend(host, state);
 }
@@ -833,7 +841,11 @@ mpc52xx_ata_suspend(struct platform_device *op, pm_message_t state)
 static int
 mpc52xx_ata_resume(struct platform_device *op)
 {
+<<<<<<< HEAD
 	struct ata_host *host = dev_get_drvdata(&op->dev);
+=======
+	struct ata_host *host = platform_get_drvdata(op);
+>>>>>>> v3.18
 	struct mpc52xx_ata_priv *priv = host->private_data;
 	int rv;
 
@@ -847,10 +859,15 @@ mpc52xx_ata_resume(struct platform_device *op)
 
 	return 0;
 }
+<<<<<<< HEAD
 
 #endif
 
 
+=======
+#endif
+
+>>>>>>> v3.18
 static struct of_device_id mpc52xx_ata_of_match[] = {
 	{ .compatible = "fsl,mpc5200-ata", },
 	{ .compatible = "mpc5200-ata", },
@@ -861,7 +878,11 @@ static struct of_device_id mpc52xx_ata_of_match[] = {
 static struct platform_driver mpc52xx_ata_of_platform_driver = {
 	.probe		= mpc52xx_ata_probe,
 	.remove		= mpc52xx_ata_remove,
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 	.suspend	= mpc52xx_ata_suspend,
 	.resume		= mpc52xx_ata_resume,
 #endif

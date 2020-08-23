@@ -23,15 +23,23 @@
 #include <linux/interrupt.h>
 #include <linux/bitops.h>
 #include <linux/time.h>
+<<<<<<< HEAD
 #include <linux/timex.h>
+=======
+>>>>>>> v3.18
 #include <linux/clocksource.h>
 #include <linux/clockchips.h>
 #include <linux/io.h>
 #include <linux/export.h>
 #include <linux/gpio.h>
 #include <linux/cpu.h>
+<<<<<<< HEAD
 #include <linux/sched_clock.h>
 
+=======
+#include <linux/pci.h>
+#include <linux/sched_clock.h>
+>>>>>>> v3.18
 #include <mach/udc.h>
 #include <mach/hardware.h>
 #include <mach/io.h>
@@ -40,11 +48,28 @@
 #include <asm/page.h>
 #include <asm/irq.h>
 #include <asm/system_misc.h>
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 #include <asm/mach/map.h>
 #include <asm/mach/irq.h>
 #include <asm/mach/time.h>
 
+<<<<<<< HEAD
+=======
+#define IXP4XX_TIMER_FREQ 66666000
+
+/*
+ * The timer register doesn't allow to specify the two least significant bits of
+ * the timeout value and assumes them being zero. So make sure IXP4XX_LATCH is
+ * the best value with the two least significant bits unset.
+ */
+#define IXP4XX_LATCH DIV_ROUND_CLOSEST(IXP4XX_TIMER_FREQ, \
+				       (IXP4XX_OST_RELOAD_MASK + 1) * HZ) * \
+			(IXP4XX_OST_RELOAD_MASK + 1)
+
+>>>>>>> v3.18
 static void __init ixp4xx_clocksource_init(void);
 static void __init ixp4xx_clockevent_init(void);
 static struct clock_event_device clockevent_ixp4xx;
@@ -81,6 +106,47 @@ void __init ixp4xx_map_io(void)
   	iotable_init(ixp4xx_io_desc, ARRAY_SIZE(ixp4xx_io_desc));
 }
 
+<<<<<<< HEAD
+=======
+/*
+ * GPIO-functions
+ */
+/*
+ * The following converted to the real HW bits the gpio_line_config
+ */
+/* GPIO pin types */
+#define IXP4XX_GPIO_OUT 		0x1
+#define IXP4XX_GPIO_IN  		0x2
+
+/* GPIO signal types */
+#define IXP4XX_GPIO_LOW			0
+#define IXP4XX_GPIO_HIGH		1
+
+/* GPIO Clocks */
+#define IXP4XX_GPIO_CLK_0		14
+#define IXP4XX_GPIO_CLK_1		15
+
+static void gpio_line_config(u8 line, u32 direction)
+{
+	if (direction == IXP4XX_GPIO_IN)
+		*IXP4XX_GPIO_GPOER |= (1 << line);
+	else
+		*IXP4XX_GPIO_GPOER &= ~(1 << line);
+}
+
+static void gpio_line_get(u8 line, int *value)
+{
+	*value = (*IXP4XX_GPIO_GPINR >> line) & 0x1;
+}
+
+static void gpio_line_set(u8 line, int value)
+{
+	if (value == IXP4XX_GPIO_HIGH)
+	    *IXP4XX_GPIO_GPOUTR |= (1 << line);
+	else if (value == IXP4XX_GPIO_LOW)
+	    *IXP4XX_GPIO_GPOUTR &= ~(1 << line);
+}
+>>>>>>> v3.18
 
 /*************************************************************************
  * IXP4xx chipset IRQ handling
@@ -117,6 +183,7 @@ static int ixp4xx_gpio_to_irq(struct gpio_chip *chip, unsigned gpio)
 	return -EINVAL;
 }
 
+<<<<<<< HEAD
 int irq_to_gpio(unsigned int irq)
 {
 	int gpio = (irq < 32) ? irq2gpio[irq] : -EINVAL;
@@ -128,6 +195,8 @@ int irq_to_gpio(unsigned int irq)
 }
 EXPORT_SYMBOL(irq_to_gpio);
 
+=======
+>>>>>>> v3.18
 static int ixp4xx_set_irq_type(struct irq_data *d, unsigned int type)
 {
 	int line = irq2gpio[d->irq];
@@ -285,7 +354,11 @@ static irqreturn_t ixp4xx_timer_interrupt(int irq, void *dev_id)
 
 static struct irqaction ixp4xx_timer_irq = {
 	.name		= "timer1",
+<<<<<<< HEAD
 	.flags		= IRQF_DISABLED | IRQF_TIMER | IRQF_IRQPOLL,
+=======
+	.flags		= IRQF_TIMER | IRQF_IRQPOLL,
+>>>>>>> v3.18
 	.handler	= ixp4xx_timer_interrupt,
 	.dev_id		= &clockevent_ixp4xx,
 };
@@ -448,7 +521,11 @@ void __init ixp4xx_sys_init(void)
 /*
  * sched_clock()
  */
+<<<<<<< HEAD
 static u32 notrace ixp4xx_read_sched_clock(void)
+=======
+static u64 notrace ixp4xx_read_sched_clock(void)
+>>>>>>> v3.18
 {
 	return *IXP4XX_OSTS;
 }
@@ -466,7 +543,11 @@ unsigned long ixp4xx_timer_freq = IXP4XX_TIMER_FREQ;
 EXPORT_SYMBOL(ixp4xx_timer_freq);
 static void __init ixp4xx_clocksource_init(void)
 {
+<<<<<<< HEAD
 	setup_sched_clock(ixp4xx_read_sched_clock, 32, ixp4xx_timer_freq);
+=======
+	sched_clock_register(ixp4xx_read_sched_clock, 32, ixp4xx_timer_freq);
+>>>>>>> v3.18
 
 	clocksource_mmio_init(NULL, "OSTS", ixp4xx_timer_freq, 200, 32,
 			ixp4xx_clocksource_read);
@@ -493,7 +574,11 @@ static void ixp4xx_set_mode(enum clock_event_mode mode,
 
 	switch (mode) {
 	case CLOCK_EVT_MODE_PERIODIC:
+<<<<<<< HEAD
 		osrt = LATCH & ~IXP4XX_OST_RELOAD_MASK;
+=======
+		osrt = IXP4XX_LATCH & ~IXP4XX_OST_RELOAD_MASK;
+>>>>>>> v3.18
  		opts = IXP4XX_OST_ENABLE;
 		break;
 	case CLOCK_EVT_MODE_ONESHOT:
@@ -533,7 +618,11 @@ static void __init ixp4xx_clockevent_init(void)
 
 void ixp4xx_restart(enum reboot_mode mode, const char *cmd)
 {
+<<<<<<< HEAD
 	if ( 1 && mode == REBOOT_SOFT) {
+=======
+	if (mode == REBOOT_SOFT) {
+>>>>>>> v3.18
 		/* Jump into ROM at address 0 */
 		soft_restart(0);
 	} else {
@@ -551,6 +640,57 @@ void ixp4xx_restart(enum reboot_mode mode, const char *cmd)
 	}
 }
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PCI
+static int ixp4xx_needs_bounce(struct device *dev, dma_addr_t dma_addr, size_t size)
+{
+	return (dma_addr + size) > SZ_64M;
+}
+
+static int ixp4xx_platform_notify_remove(struct device *dev)
+{
+	if (dev_is_pci(dev))
+		dmabounce_unregister_dev(dev);
+
+	return 0;
+}
+#endif
+
+/*
+ * Setup DMA mask to 64MB on PCI devices and 4 GB on all other things.
+ */
+static int ixp4xx_platform_notify(struct device *dev)
+{
+	dev->dma_mask = &dev->coherent_dma_mask;
+
+#ifdef CONFIG_PCI
+	if (dev_is_pci(dev)) {
+		dev->coherent_dma_mask = DMA_BIT_MASK(28); /* 64 MB */
+		dmabounce_register_dev(dev, 2048, 4096, ixp4xx_needs_bounce);
+		return 0;
+	}
+#endif
+
+	dev->coherent_dma_mask = DMA_BIT_MASK(32);
+	return 0;
+}
+
+int dma_set_coherent_mask(struct device *dev, u64 mask)
+{
+	if (dev_is_pci(dev))
+		mask &= DMA_BIT_MASK(28); /* 64 MB */
+
+	if ((mask & DMA_BIT_MASK(28)) == DMA_BIT_MASK(28)) {
+		dev->coherent_dma_mask = mask;
+		return 0;
+	}
+
+	return -EIO;		/* device wanted sub-64MB mask */
+}
+EXPORT_SYMBOL(dma_set_coherent_mask);
+
+>>>>>>> v3.18
 #ifdef CONFIG_IXP4XX_INDIRECT_PCI
 /*
  * In the case of using indirect PCI, we simply return the actual PCI
@@ -573,6 +713,7 @@ static void ixp4xx_iounmap(void __iomem *addr)
 	if (!is_pci_memory((__force u32)addr))
 		__iounmap(addr);
 }
+<<<<<<< HEAD
 
 void __init ixp4xx_init_early(void)
 {
@@ -582,3 +723,18 @@ void __init ixp4xx_init_early(void)
 #else
 void __init ixp4xx_init_early(void) {}
 #endif
+=======
+#endif
+
+void __init ixp4xx_init_early(void)
+{
+	platform_notify = ixp4xx_platform_notify;
+#ifdef CONFIG_PCI
+	platform_notify_remove = ixp4xx_platform_notify_remove;
+#endif
+#ifdef CONFIG_IXP4XX_INDIRECT_PCI
+	arch_ioremap_caller = ixp4xx_ioremap_caller;
+	arch_iounmap = ixp4xx_iounmap;
+#endif
+}
+>>>>>>> v3.18

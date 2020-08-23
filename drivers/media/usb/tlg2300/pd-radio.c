@@ -327,7 +327,10 @@ int poseidon_fm_init(struct poseidon *p)
 	}
 	vfd->v4l2_dev = &p->v4l2_dev;
 	vfd->ctrl_handler = hdl;
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &vfd->flags);
+=======
+>>>>>>> v3.18
 	video_set_drvdata(vfd, p);
 	return video_register_device(vfd, VFL_TYPE_RADIO, -1);
 }

@@ -4,9 +4,12 @@
 #
 
 obj-y				:= cpu.o irq.o time.o devices.o
+<<<<<<< HEAD
 obj-m				:=
 obj-n				:=
 obj-				:=
+=======
+>>>>>>> v3.18
 
 # PCI support is optional
 obj-$(CONFIG_PCI)		+= pci.o

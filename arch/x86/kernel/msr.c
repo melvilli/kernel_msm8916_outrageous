@@ -46,7 +46,11 @@ static struct class *msr_class;
 static loff_t msr_seek(struct file *file, loff_t offset, int orig)
 {
 	loff_t ret;
+<<<<<<< HEAD
 	struct inode *inode = file->f_mapping->host;
+=======
+	struct inode *inode = file_inode(file);
+>>>>>>> v3.18
 
 	mutex_lock(&inode->i_mutex);
 	switch (orig) {
@@ -200,7 +204,11 @@ static const struct file_operations msr_fops = {
 	.compat_ioctl = msr_ioctl,
 };
 
+<<<<<<< HEAD
 static int __cpuinit msr_device_create(int cpu)
+=======
+static int msr_device_create(int cpu)
+>>>>>>> v3.18
 {
 	struct device *dev;
 
@@ -214,8 +222,13 @@ static void msr_device_destroy(int cpu)
 	device_destroy(msr_class, MKDEV(MSR_MAJOR, cpu));
 }
 
+<<<<<<< HEAD
 static int __cpuinit msr_class_cpu_callback(struct notifier_block *nfb,
 				unsigned long action, void *hcpu)
+=======
+static int msr_class_cpu_callback(struct notifier_block *nfb,
+				  unsigned long action, void *hcpu)
+>>>>>>> v3.18
 {
 	unsigned int cpu = (unsigned long)hcpu;
 	int err = 0;
@@ -259,14 +272,24 @@ static int __init msr_init(void)
 		goto out_chrdev;
 	}
 	msr_class->devnode = msr_devnode;
+<<<<<<< HEAD
 	get_online_cpus();
+=======
+
+	cpu_notifier_register_begin();
+>>>>>>> v3.18
 	for_each_online_cpu(i) {
 		err = msr_device_create(i);
 		if (err != 0)
 			goto out_class;
 	}
+<<<<<<< HEAD
 	register_hotcpu_notifier(&msr_class_cpu_notifier);
 	put_online_cpus();
+=======
+	__register_hotcpu_notifier(&msr_class_cpu_notifier);
+	cpu_notifier_register_done();
+>>>>>>> v3.18
 
 	err = 0;
 	goto out;
@@ -275,7 +298,11 @@ out_class:
 	i = 0;
 	for_each_online_cpu(i)
 		msr_device_destroy(i);
+<<<<<<< HEAD
 	put_online_cpus();
+=======
+	cpu_notifier_register_done();
+>>>>>>> v3.18
 	class_destroy(msr_class);
 out_chrdev:
 	__unregister_chrdev(MSR_MAJOR, 0, NR_CPUS, "cpu/msr");
@@ -286,13 +313,23 @@ out:
 static void __exit msr_exit(void)
 {
 	int cpu = 0;
+<<<<<<< HEAD
 	get_online_cpus();
+=======
+
+	cpu_notifier_register_begin();
+>>>>>>> v3.18
 	for_each_online_cpu(cpu)
 		msr_device_destroy(cpu);
 	class_destroy(msr_class);
 	__unregister_chrdev(MSR_MAJOR, 0, NR_CPUS, "cpu/msr");
+<<<<<<< HEAD
 	unregister_hotcpu_notifier(&msr_class_cpu_notifier);
 	put_online_cpus();
+=======
+	__unregister_hotcpu_notifier(&msr_class_cpu_notifier);
+	cpu_notifier_register_done();
+>>>>>>> v3.18
 }
 
 module_init(msr_init);

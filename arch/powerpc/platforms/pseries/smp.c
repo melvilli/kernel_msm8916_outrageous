@@ -43,8 +43,14 @@
 #include <asm/cputhreads.h>
 #include <asm/xics.h>
 #include <asm/dbell.h>
+<<<<<<< HEAD
 
 #include "plpar_wrappers.h"
+=======
+#include <asm/plpar_wrappers.h>
+#include <asm/code-patching.h>
+
+>>>>>>> v3.18
 #include "pseries.h"
 #include "offline_states.h"
 
@@ -96,8 +102,13 @@ int smp_query_cpu_stopped(unsigned int pcpu)
 static inline int smp_startup_cpu(unsigned int lcpu)
 {
 	int status;
+<<<<<<< HEAD
 	unsigned long start_here = __pa((u32)*((unsigned long *)
 					       generic_secondary_smp_init));
+=======
+	unsigned long start_here =
+			__pa(ppc_function_entry(generic_secondary_smp_init));
+>>>>>>> v3.18
 	unsigned int pcpu;
 	int start_cpu;
 
@@ -187,6 +198,7 @@ static int smp_pSeries_kick_cpu(int nr)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int smp_pSeries_cpu_bootable(unsigned int nr)
 {
 	/* Special case - we inhibit secondary thread startup
@@ -203,6 +215,8 @@ static int smp_pSeries_cpu_bootable(unsigned int nr)
 	return 1;
 }
 
+=======
+>>>>>>> v3.18
 /* Only used on systems that support multiple IPI mechanisms */
 static void pSeries_cause_ipi_mux(int cpu, unsigned long data)
 {
@@ -237,7 +251,11 @@ static struct smp_ops_t pSeries_xics_smp_ops = {
 	.probe		= pSeries_smp_probe,
 	.kick_cpu	= smp_pSeries_kick_cpu,
 	.setup_cpu	= smp_xics_setup_cpu,
+<<<<<<< HEAD
 	.cpu_bootable	= smp_pSeries_cpu_bootable,
+=======
+	.cpu_bootable	= smp_generic_cpu_bootable,
+>>>>>>> v3.18
 };
 
 /* This is called very early */
@@ -249,6 +267,7 @@ static void __init smp_init_pseries(void)
 
 	alloc_bootmem_cpumask_var(&of_spin_mask);
 
+<<<<<<< HEAD
 	/* Mark threads which are still spinning in hold loops. */
 	if (cpu_has_feature(CPU_FTR_SMT)) {
 		for_each_present_cpu(i) { 
@@ -261,6 +280,26 @@ static void __init smp_init_pseries(void)
 
 	cpumask_clear_cpu(boot_cpuid, of_spin_mask);
 
+=======
+	/*
+	 * Mark threads which are still spinning in hold loops
+	 *
+	 * We know prom_init will not have started them if RTAS supports
+	 * query-cpu-stopped-state.
+	 */
+	if (rtas_token("query-cpu-stopped-state") == RTAS_UNKNOWN_SERVICE) {
+		if (cpu_has_feature(CPU_FTR_SMT)) {
+			for_each_present_cpu(i) {
+				if (cpu_thread_in_core(i) == 0)
+					cpumask_set_cpu(i, of_spin_mask);
+			}
+		} else
+			cpumask_copy(of_spin_mask, cpu_present_mask);
+
+		cpumask_clear_cpu(boot_cpuid, of_spin_mask);
+	}
+
+>>>>>>> v3.18
 	/* Non-lpar has additional take/give timebase */
 	if (rtas_token("freeze-time-base") != RTAS_UNKNOWN_SERVICE) {
 		smp_ops->give_timebase = rtas_give_timebase;

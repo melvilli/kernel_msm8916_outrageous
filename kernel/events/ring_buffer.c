@@ -12,6 +12,7 @@
 #include <linux/perf_event.h>
 #include <linux/vmalloc.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
 
 #include "internal.h"
 
@@ -46,6 +47,12 @@ static bool perf_output_space(struct ring_buffer *rb, unsigned long tail,
 	return true;
 }
 
+=======
+#include <linux/circ_buf.h>
+
+#include "internal.h"
+
+>>>>>>> v3.18
 static void perf_output_wakeup(struct perf_output_handle *handle)
 {
 	atomic_set(&handle->rb->poll, POLL_IN);
@@ -91,6 +98,7 @@ again:
 	 *
 	 *   kernel				user
 	 *
+<<<<<<< HEAD
 	 *   READ ->data_tail			READ ->data_head
 	 *   smp_mb()	(A)			smp_rmb()	(C)
 	 *   WRITE $data			READ $data
@@ -104,6 +112,22 @@ again:
 	 * issue the data WRITE until we observe it. Be conservative for now.
 	 *
 	 * OTOH, D needs to be a full barrier since it separates the data READ
+=======
+	 *   if (LOAD ->data_tail) {		LOAD ->data_head
+	 *			(A)		smp_rmb()	(C)
+	 *	STORE $data			LOAD $data
+	 *	smp_wmb()	(B)		smp_mb()	(D)
+	 *	STORE ->data_head		STORE ->data_tail
+	 *   }
+	 *
+	 * Where A pairs with D, and B pairs with C.
+	 *
+	 * In our case (A) is a control dependency that separates the load of
+	 * the ->data_tail and the stores of $data. In case ->data_tail
+	 * indicates there is no room in the buffer to store $data we do not.
+	 *
+	 * D needs to be a full barrier since it separates the data READ
+>>>>>>> v3.18
 	 * from the tail WRITE.
 	 *
 	 * For B a WMB is sufficient since it separates two WRITEs, and for C
@@ -111,12 +135,21 @@ again:
 	 *
 	 * See perf_output_begin().
 	 */
+<<<<<<< HEAD
 	smp_wmb();
 	rb->user_page->data_head = head;
 
 	/*
 	 * Now check if we missed an update, rely on the (compiler)
 	 * barrier in atomic_dec_and_test() to re-read rb->head.
+=======
+	smp_wmb(); /* B, matches C */
+	rb->user_page->data_head = head;
+
+	/*
+	 * Now check if we missed an update -- rely on previous implied
+	 * compiler barriers to force a re-read.
+>>>>>>> v3.18
 	 */
 	if (unlikely(head != local_read(&rb->head))) {
 		local_inc(&rb->nest);
@@ -135,8 +168,12 @@ int perf_output_begin(struct perf_output_handle *handle,
 {
 	struct ring_buffer *rb;
 	unsigned long tail, offset, head;
+<<<<<<< HEAD
 	int have_lost;
 	struct perf_sample_data sample_data;
+=======
+	int have_lost, page_shift;
+>>>>>>> v3.18
 	struct {
 		struct perf_event_header header;
 		u64			 id;
@@ -151,6 +188,7 @@ int perf_output_begin(struct perf_output_handle *handle,
 		event = event->parent;
 
 	rb = rcu_dereference(event->rb);
+<<<<<<< HEAD
 	if (!rb)
 		goto out;
 
@@ -166,11 +204,28 @@ int perf_output_begin(struct perf_output_handle *handle,
 		perf_event_header__init_id(&lost_event.header, &sample_data,
 					   event);
 		size += lost_event.header.size;
+=======
+	if (unlikely(!rb))
+		goto out;
+
+	if (unlikely(!rb->nr_pages))
+		goto out;
+
+	handle->rb    = rb;
+	handle->event = event;
+
+	have_lost = local_read(&rb->lost);
+	if (unlikely(have_lost)) {
+		size += sizeof(lost_event);
+		if (event->attr.sample_id_all)
+			size += event->id_header_size;
+>>>>>>> v3.18
 	}
 
 	perf_output_get_handle(handle);
 
 	do {
+<<<<<<< HEAD
 		/*
 		 * Userspace could choose to issue a mb() before updating the
 		 * tail pointer. So that all reads will be completed before the
@@ -197,11 +252,58 @@ int perf_output_begin(struct perf_output_handle *handle,
 	handle->size = (PAGE_SIZE << page_order(rb)) - handle->size;
 
 	if (have_lost) {
+=======
+		tail = ACCESS_ONCE(rb->user_page->data_tail);
+		offset = head = local_read(&rb->head);
+		if (!rb->overwrite &&
+		    unlikely(CIRC_SPACE(head, tail, perf_data_size(rb)) < size))
+			goto fail;
+
+		/*
+		 * The above forms a control dependency barrier separating the
+		 * @tail load above from the data stores below. Since the @tail
+		 * load is required to compute the branch to fail below.
+		 *
+		 * A, matches D; the full memory barrier userspace SHOULD issue
+		 * after reading the data and before storing the new tail
+		 * position.
+		 *
+		 * See perf_output_put_handle().
+		 */
+
+		head += size;
+	} while (local_cmpxchg(&rb->head, offset, head) != offset);
+
+	/*
+	 * We rely on the implied barrier() by local_cmpxchg() to ensure
+	 * none of the data stores below can be lifted up by the compiler.
+	 */
+
+	if (unlikely(head - local_read(&rb->wakeup) > rb->watermark))
+		local_add(rb->watermark, &rb->wakeup);
+
+	page_shift = PAGE_SHIFT + page_order(rb);
+
+	handle->page = (offset >> page_shift) & (rb->nr_pages - 1);
+	offset &= (1UL << page_shift) - 1;
+	handle->addr = rb->data_pages[handle->page] + offset;
+	handle->size = (1UL << page_shift) - offset;
+
+	if (unlikely(have_lost)) {
+		struct perf_sample_data sample_data;
+
+		lost_event.header.size = sizeof(lost_event);
+>>>>>>> v3.18
 		lost_event.header.type = PERF_RECORD_LOST;
 		lost_event.header.misc = 0;
 		lost_event.id          = event->id;
 		lost_event.lost        = local_xchg(&rb->lost, 0);
 
+<<<<<<< HEAD
+=======
+		perf_event_header__init_id(&lost_event.header,
+					   &sample_data, event);
+>>>>>>> v3.18
 		perf_output_put(handle, lost_event);
 		perf_event__output_id_sample(event, handle, &sample_data);
 	}

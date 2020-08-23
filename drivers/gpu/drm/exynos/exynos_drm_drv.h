@@ -40,7 +40,16 @@ struct drm_device;
 struct exynos_drm_overlay;
 struct drm_connector;
 
+<<<<<<< HEAD
 extern unsigned int drm_vblank_offdelay;
+=======
+/* This enumerates device type. */
+enum exynos_drm_device_type {
+	EXYNOS_DEVICE_TYPE_NONE,
+	EXYNOS_DEVICE_TYPE_CRTC,
+	EXYNOS_DEVICE_TYPE_CONNECTOR,
+};
+>>>>>>> v3.18
 
 /* this enumerates display type. */
 enum exynos_drm_output_type {
@@ -54,6 +63,7 @@ enum exynos_drm_output_type {
 };
 
 /*
+<<<<<<< HEAD
  * Exynos drm overlay ops structure.
  *
  * @mode_set: copy drm overlay info to hw specific overlay info.
@@ -70,6 +80,8 @@ struct exynos_drm_overlay_ops {
 };
 
 /*
+=======
+>>>>>>> v3.18
  * Exynos drm common overlay structure.
  *
  * @fb_x: offset x on a framebuffer to be displayed.
@@ -138,6 +150,7 @@ struct exynos_drm_overlay {
  * Exynos DRM Display Structure.
  *	- this structure is common to analog tv, digital tv and lcd panel.
  *
+<<<<<<< HEAD
  * @type: one of EXYNOS_DISPLAY_TYPE_LCD and HDMI.
  * @is_connected: check for that display is connected or not.
  * @get_edid: get edid modes from display driver.
@@ -153,22 +166,72 @@ struct exynos_drm_display_ops {
 	void *(*get_panel)(struct device *dev);
 	int (*check_timing)(struct device *dev, void *timing);
 	int (*power_on)(struct device *dev, int mode);
+=======
+ * @remove: cleans up the display for removal
+ * @mode_fixup: fix mode data comparing to hw specific display mode.
+ * @mode_set: convert drm_display_mode to hw specific display mode and
+ *	      would be called by encoder->mode_set().
+ * @check_mode: check if mode is valid or not.
+ * @dpms: display device on or off.
+ * @commit: apply changes to hw
+ */
+struct exynos_drm_display;
+struct exynos_drm_display_ops {
+	int (*create_connector)(struct exynos_drm_display *display,
+				struct drm_encoder *encoder);
+	void (*remove)(struct exynos_drm_display *display);
+	void (*mode_fixup)(struct exynos_drm_display *display,
+				struct drm_connector *connector,
+				const struct drm_display_mode *mode,
+				struct drm_display_mode *adjusted_mode);
+	void (*mode_set)(struct exynos_drm_display *display,
+				struct drm_display_mode *mode);
+	int (*check_mode)(struct exynos_drm_display *display,
+				struct drm_display_mode *mode);
+	void (*dpms)(struct exynos_drm_display *display, int mode);
+	void (*commit)(struct exynos_drm_display *display);
+};
+
+/*
+ * Exynos drm display structure, maps 1:1 with an encoder/connector
+ *
+ * @list: the list entry for this manager
+ * @type: one of EXYNOS_DISPLAY_TYPE_LCD and HDMI.
+ * @encoder: encoder object this display maps to
+ * @connector: connector object this display maps to
+ * @ops: pointer to callbacks for exynos drm specific functionality
+ * @ctx: A pointer to the display's implementation specific context
+ */
+struct exynos_drm_display {
+	struct list_head list;
+	enum exynos_drm_output_type type;
+	struct drm_encoder *encoder;
+	struct drm_connector *connector;
+	struct exynos_drm_display_ops *ops;
+	void *ctx;
+>>>>>>> v3.18
 };
 
 /*
  * Exynos drm manager ops
  *
  * @dpms: control device power.
+<<<<<<< HEAD
  * @apply: set timing, vblank and overlay data to registers.
  * @mode_fixup: fix mode data comparing to hw specific display mode.
  * @mode_set: convert drm_display_mode to hw specific display mode and
  *	      would be called by encoder->mode_set().
  * @get_max_resol: get maximum resolution to specific hardware.
+=======
+ * @mode_fixup: fix mode data before applying it
+ * @mode_set: set the given mode to the manager
+>>>>>>> v3.18
  * @commit: set current hw specific display mode to hw.
  * @enable_vblank: specific driver callback for enabling vblank interrupt.
  * @disable_vblank: specific driver callback for disabling vblank interrupt.
  * @wait_for_vblank: wait for vblank interrupt to make sure that
  *	hardware overlay is updated.
+<<<<<<< HEAD
  */
 struct exynos_drm_manager_ops {
 	void (*dpms)(struct device *subdrv_dev, int mode);
@@ -209,6 +272,54 @@ struct exynos_drm_manager {
 	struct exynos_drm_manager_ops *ops;
 	struct exynos_drm_overlay_ops *overlay_ops;
 	struct exynos_drm_display_ops *display_ops;
+=======
+ * @win_mode_set: copy drm overlay info to hw specific overlay info.
+ * @win_commit: apply hardware specific overlay data to registers.
+ * @win_enable: enable hardware specific overlay.
+ * @win_disable: disable hardware specific overlay.
+ * @te_handler: trigger to transfer video image at the tearing effect
+ *	synchronization signal if there is a page flip request.
+ */
+struct exynos_drm_manager;
+struct exynos_drm_manager_ops {
+	void (*dpms)(struct exynos_drm_manager *mgr, int mode);
+	bool (*mode_fixup)(struct exynos_drm_manager *mgr,
+				const struct drm_display_mode *mode,
+				struct drm_display_mode *adjusted_mode);
+	void (*mode_set)(struct exynos_drm_manager *mgr,
+				const struct drm_display_mode *mode);
+	void (*commit)(struct exynos_drm_manager *mgr);
+	int (*enable_vblank)(struct exynos_drm_manager *mgr);
+	void (*disable_vblank)(struct exynos_drm_manager *mgr);
+	void (*wait_for_vblank)(struct exynos_drm_manager *mgr);
+	void (*win_mode_set)(struct exynos_drm_manager *mgr,
+				struct exynos_drm_overlay *overlay);
+	void (*win_commit)(struct exynos_drm_manager *mgr, int zpos);
+	void (*win_enable)(struct exynos_drm_manager *mgr, int zpos);
+	void (*win_disable)(struct exynos_drm_manager *mgr, int zpos);
+	void (*te_handler)(struct exynos_drm_manager *mgr);
+};
+
+/*
+ * Exynos drm common manager structure, maps 1:1 with a crtc
+ *
+ * @list: the list entry for this manager
+ * @type: one of EXYNOS_DISPLAY_TYPE_LCD and HDMI.
+ * @drm_dev: pointer to the drm device
+ * @crtc: crtc object.
+ * @pipe: the pipe number for this crtc/manager
+ * @ops: pointer to callbacks for exynos drm specific functionality
+ * @ctx: A pointer to the manager's implementation specific context
+ */
+struct exynos_drm_manager {
+	struct list_head list;
+	enum exynos_drm_output_type type;
+	struct drm_device *drm_dev;
+	struct drm_crtc *crtc;
+	int pipe;
+	struct exynos_drm_manager_ops *ops;
+	void *ctx;
+>>>>>>> v3.18
 };
 
 struct exynos_drm_g2d_private {
@@ -218,6 +329,7 @@ struct exynos_drm_g2d_private {
 	struct list_head	userptr_list;
 };
 
+<<<<<<< HEAD
 struct exynos_drm_ipp_private {
 	struct device	*dev;
 	struct list_head	event_list;
@@ -226,6 +338,11 @@ struct exynos_drm_ipp_private {
 struct drm_exynos_file_private {
 	struct exynos_drm_g2d_private	*g2d_priv;
 	struct exynos_drm_ipp_private	*ipp_priv;
+=======
+struct drm_exynos_file_private {
+	struct exynos_drm_g2d_private	*g2d_priv;
+	struct device			*ipp_dev;
+>>>>>>> v3.18
 };
 
 /*
@@ -236,7 +353,11 @@ struct drm_exynos_file_private {
  *	otherwise default one.
  * @da_space_size: size of device address space.
  *	if 0 then default value is used for it.
+<<<<<<< HEAD
  * @da_space_order: order to device address space.
+=======
+ * @pipe: the pipe number for this crtc/manager.
+>>>>>>> v3.18
  */
 struct exynos_drm_private {
 	struct drm_fb_helper *fb_helper;
@@ -254,7 +375,12 @@ struct exynos_drm_private {
 
 	unsigned long da_start;
 	unsigned long da_space_size;
+<<<<<<< HEAD
 	unsigned long da_space_order;
+=======
+
+	unsigned int pipe;
+>>>>>>> v3.18
 };
 
 /*
@@ -265,6 +391,7 @@ struct exynos_drm_private {
  * @drm_dev: pointer to drm_device and this pointer would be set
  *	when sub driver calls exynos_drm_subdrv_register().
  * @manager: subdrv has its own manager to control a hardware appropriately
+<<<<<<< HEAD
  *	and we can access a hardware drawing on this manager.
  * @probe: this callback would be called by exynos drm driver after
  *	subdrv is registered to it.
@@ -274,12 +401,24 @@ struct exynos_drm_private {
  * @close: this would be called with drm device file close.
  * @encoder: encoder object owned by this sub driver.
  * @connector: connector object owned by this sub driver.
+=======
+ *     and we can access a hardware drawing on this manager.
+ * @probe: this callback would be called by exynos drm driver after
+ *     subdrv is registered to it.
+ * @remove: this callback is used to release resources created
+ *     by probe callback.
+ * @open: this would be called with drm device file open.
+ * @close: this would be called with drm device file close.
+>>>>>>> v3.18
  */
 struct exynos_drm_subdrv {
 	struct list_head list;
 	struct device *dev;
 	struct drm_device *drm_dev;
+<<<<<<< HEAD
 	struct exynos_drm_manager *manager;
+=======
+>>>>>>> v3.18
 
 	int (*probe)(struct drm_device *drm_dev, struct device *dev);
 	void (*remove)(struct drm_device *drm_dev, struct device *dev);
@@ -287,6 +426,7 @@ struct exynos_drm_subdrv {
 			struct drm_file *file);
 	void (*close)(struct drm_device *drm_dev, struct device *dev,
 			struct drm_file *file);
+<<<<<<< HEAD
 
 	struct drm_encoder *encoder;
 	struct drm_connector *connector;
@@ -310,11 +450,21 @@ int exynos_drm_device_unregister(struct drm_device *dev);
  * and when a sub driver is registered to exynos drm driver a probe callback
  * of the sub driver is called and creates its own encoder and connector.
  */
+=======
+};
+
+ /* This function would be called by non kms drivers such as g2d and ipp. */
+>>>>>>> v3.18
 int exynos_drm_subdrv_register(struct exynos_drm_subdrv *drm_subdrv);
 
 /* this function removes subdrv list from exynos drm driver */
 int exynos_drm_subdrv_unregister(struct exynos_drm_subdrv *drm_subdrv);
 
+<<<<<<< HEAD
+=======
+int exynos_drm_device_subdrv_probe(struct drm_device *dev);
+int exynos_drm_device_subdrv_remove(struct drm_device *dev);
+>>>>>>> v3.18
 int exynos_drm_subdrv_open(struct drm_device *dev, struct drm_file *file);
 void exynos_drm_subdrv_close(struct drm_device *dev, struct drm_file *file);
 
@@ -339,9 +489,47 @@ int exynos_platform_device_ipp_register(void);
  */
 void exynos_platform_device_ipp_unregister(void);
 
+<<<<<<< HEAD
 extern struct platform_driver fimd_driver;
 extern struct platform_driver hdmi_driver;
 extern struct platform_driver mixer_driver;
+=======
+#ifdef CONFIG_DRM_EXYNOS_DPI
+struct exynos_drm_display * exynos_dpi_probe(struct device *dev);
+int exynos_dpi_remove(struct device *dev);
+#else
+static inline struct exynos_drm_display *
+exynos_dpi_probe(struct device *dev) { return NULL; }
+static inline int exynos_dpi_remove(struct device *dev) { return 0; }
+#endif
+
+/*
+ * this function registers exynos drm vidi platform device/driver.
+ */
+int exynos_drm_probe_vidi(void);
+
+/*
+ * this function unregister exynos drm vidi platform device/driver.
+ */
+void exynos_drm_remove_vidi(void);
+
+/* This function creates a encoder and a connector, and initializes them. */
+int exynos_drm_create_enc_conn(struct drm_device *dev,
+				struct exynos_drm_display *display);
+
+int exynos_drm_component_add(struct device *dev,
+				enum exynos_drm_device_type dev_type,
+				enum exynos_drm_output_type out_type);
+
+void exynos_drm_component_del(struct device *dev,
+				enum exynos_drm_device_type dev_type);
+
+extern struct platform_driver fimd_driver;
+extern struct platform_driver dp_driver;
+extern struct platform_driver dsi_driver;
+extern struct platform_driver mixer_driver;
+extern struct platform_driver hdmi_driver;
+>>>>>>> v3.18
 extern struct platform_driver exynos_drm_common_hdmi_driver;
 extern struct platform_driver vidi_driver;
 extern struct platform_driver g2d_driver;

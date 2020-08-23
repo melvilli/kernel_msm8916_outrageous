@@ -77,9 +77,15 @@ struct usbhsg_recip_handle {
 		struct usbhsg_gpriv, mod)
 
 #define __usbhsg_for_each_uep(start, pos, g, i)	\
+<<<<<<< HEAD
 	for (i = start, pos = (g)->uep + i;	\
 	     i < (g)->uep_size;			\
 	     i++, pos = (g)->uep + i)
+=======
+	for ((i) = start;					\
+	     ((i) < (g)->uep_size) && ((pos) = (g)->uep + (i));	\
+	     (i)++)
+>>>>>>> v3.18
 
 #define usbhsg_for_each_uep(pos, gpriv, i)	\
 	__usbhsg_for_each_uep(1, pos, gpriv, i)
@@ -129,7 +135,11 @@ static void usbhsg_queue_pop(struct usbhsg_uep *uep,
 	dev_dbg(dev, "pipe %d : queue pop\n", usbhs_pipe_number(pipe));
 
 	ureq->req.status = status;
+<<<<<<< HEAD
 	ureq->req.complete(&uep->ep, &ureq->req);
+=======
+	usb_gadget_giveback_request(&uep->ep, &ureq->req);
+>>>>>>> v3.18
 }
 
 static void usbhsg_queue_done(struct usbhs_priv *priv, struct usbhs_pkt *pkt)
@@ -558,9 +568,12 @@ static int usbhsg_ep_enable(struct usb_ep *ep,
 	struct usbhs_priv *priv = usbhsg_gpriv_to_priv(gpriv);
 	struct usbhs_pipe *pipe;
 	int ret = -EIO;
+<<<<<<< HEAD
 	unsigned long flags;
 
 	usbhs_lock(priv, flags);
+=======
+>>>>>>> v3.18
 
 	/*
 	 * if it already have pipe,
@@ -569,8 +582,12 @@ static int usbhsg_ep_enable(struct usb_ep *ep,
 	if (uep->pipe) {
 		usbhs_pipe_clear(uep->pipe);
 		usbhs_pipe_sequence_data0(uep->pipe);
+<<<<<<< HEAD
 		ret = 0;
 		goto usbhsg_ep_enable_end;
+=======
+		return 0;
+>>>>>>> v3.18
 	}
 
 	pipe = usbhs_pipe_malloc(priv,
@@ -598,17 +615,27 @@ static int usbhsg_ep_enable(struct usb_ep *ep,
 		ret = 0;
 	}
 
+<<<<<<< HEAD
 usbhsg_ep_enable_end:
 	usbhs_unlock(priv, flags);
 
+=======
+>>>>>>> v3.18
 	return ret;
 }
 
 static int usbhsg_ep_disable(struct usb_ep *ep)
 {
 	struct usbhsg_uep *uep = usbhsg_ep_to_uep(ep);
+<<<<<<< HEAD
 
 	usbhsg_pipe_disable(uep);
+=======
+	struct usbhs_pipe *pipe = usbhsg_uep_to_pipe(uep);
+
+	usbhsg_pipe_disable(uep);
+	usbhs_pipe_free(pipe);
+>>>>>>> v3.18
 
 	uep->pipe->mod_private	= NULL;
 	uep->pipe		= NULL;
@@ -862,10 +889,13 @@ static int usbhsg_gadget_stop(struct usb_gadget *gadget,
 	struct usbhsg_gpriv *gpriv = usbhsg_gadget_to_gpriv(gadget);
 	struct usbhs_priv *priv = usbhsg_gpriv_to_priv(gpriv);
 
+<<<<<<< HEAD
 	if (!driver		||
 	    !driver->unbind)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 	usbhsg_try_stop(priv, USBHSG_STATUS_REGISTERD);
 	gpriv->driver = NULL;
 
@@ -998,11 +1028,19 @@ int usbhs_mod_gadget_probe(struct usbhs_priv *priv)
 		/* init DCP */
 		if (usbhsg_is_dcp(uep)) {
 			gpriv->gadget.ep0 = &uep->ep;
+<<<<<<< HEAD
 			uep->ep.maxpacket = 64;
 		}
 		/* init normal pipe */
 		else {
 			uep->ep.maxpacket = 512;
+=======
+			usb_ep_set_maxpacket_limit(&uep->ep, 64);
+		}
+		/* init normal pipe */
+		else {
+			usb_ep_set_maxpacket_limit(&uep->ep, 512);
+>>>>>>> v3.18
 			list_add_tail(&uep->ep.ep_list, &gpriv->gadget.ep_list);
 		}
 	}

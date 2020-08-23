@@ -12,7 +12,11 @@
  * license other than the GPL, without Broadcom's express prior written
  * consent.
  *
+<<<<<<< HEAD
  * Maintained by: Eilon Greenstein <eilong@broadcom.com>
+=======
+ * Maintained by: Ariel Elior <ariel.elior@qlogic.com>
+>>>>>>> v3.18
  * Written by: Dmitry Kravkov
  *
  */
@@ -134,8 +138,11 @@ enum {
 #define PFC_BRB1_REG_HIGH_LLFC_LOW_THRESHOLD			130
 #define PFC_BRB1_REG_HIGH_LLFC_HIGH_THRESHOLD			170
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> v3.18
 struct cos_entry_help_data {
 	u32			pri_join_mask;
 	u32			cos_bw;
@@ -170,7 +177,10 @@ struct cos_help_data {
 			(!(IS_DCBX_PFC_PRI_ONLY_NON_PAUSE((bp), (pg_pri)) || \
 			 IS_DCBX_PFC_PRI_ONLY_PAUSE((bp), (pg_pri))))
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 struct pg_entry_help_data {
 	u8	num_of_dif_pri;
 	u8	pg;
@@ -202,4 +212,10 @@ extern const struct dcbnl_rtnl_ops bnx2x_dcbnl_ops;
 int bnx2x_dcbnl_update_applist(struct bnx2x *bp, bool delall);
 #endif /* BCM_DCBNL */
 
+<<<<<<< HEAD
+=======
+int bnx2x_dcbx_stop_hw_tx(struct bnx2x *bp);
+int bnx2x_dcbx_resume_hw_tx(struct bnx2x *bp);
+
+>>>>>>> v3.18
 #endif /* BNX2X_DCB_H */

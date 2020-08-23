@@ -95,7 +95,11 @@ static void	mptscsih_freeChainBuffers(MPT_ADAPTER *ioc, int req_idx);
 static void	mptscsih_copy_sense_data(struct scsi_cmnd *sc, MPT_SCSI_HOST *hd, MPT_FRAME_HDR *mf, SCSIIOReply_t *pScsiReply);
 
 int	mptscsih_IssueTaskMgmt(MPT_SCSI_HOST *hd, u8 type, u8 channel, u8 id,
+<<<<<<< HEAD
 		int lun, int ctx2abort, ulong timeout);
+=======
+		u64 lun, int ctx2abort, ulong timeout);
+>>>>>>> v3.18
 
 int		mptscsih_ioc_reset(MPT_ADAPTER *ioc, int post_reset);
 int		mptscsih_event_process(MPT_ADAPTER *ioc, EventNotificationReply_t *pEvReply);
@@ -536,7 +540,11 @@ mptscsih_info_scsiio(MPT_ADAPTER *ioc, struct scsi_cmnd *sc, SCSIIOReply_t * pSc
 	}
 
 	scsi_print_command(sc);
+<<<<<<< HEAD
 	printk(MYIOC_s_DEBUG_FMT "\tfw_channel = %d, fw_id = %d, lun = %d\n",
+=======
+	printk(MYIOC_s_DEBUG_FMT "\tfw_channel = %d, fw_id = %d, lun = %llu\n",
+>>>>>>> v3.18
 	    ioc->name, pScsiReply->Bus, pScsiReply->TargetID, sc->device->lun);
 	printk(MYIOC_s_DEBUG_FMT "\trequest_len = %d, underflow = %d, "
 	    "resid = %d\n", ioc->name, scsi_bufflen(sc), sc->underflow,
@@ -692,7 +700,11 @@ mptscsih_io_done(MPT_ADAPTER *ioc, MPT_FRAME_HDR *mf, MPT_FRAME_HDR *mr)
 		 */
 		if (scsi_state & MPI_SCSI_STATE_RESPONSE_INFO_VALID &&
 		    pScsiReply->ResponseInfo) {
+<<<<<<< HEAD
 			printk(MYIOC_s_NOTE_FMT "[%d:%d:%d:%d] "
+=======
+			printk(MYIOC_s_NOTE_FMT "[%d:%d:%d:%llu] "
+>>>>>>> v3.18
 			"FCP_ResponseInfo=%08xh\n", ioc->name,
 			sc->device->host->host_no, sc->device->channel,
 			sc->device->id, sc->device->lun,
@@ -1155,7 +1167,11 @@ mptscsih_report_queue_full(struct scsi_cmnd *sc, SCSIIOReply_t *pScsiReply, SCSI
 		return;
 	ioc = hd->ioc;
 	if (time - hd->last_queue_full > 10 * HZ) {
+<<<<<<< HEAD
 		dprintk(ioc, printk(MYIOC_s_WARN_FMT "Device (%d:%d:%d) reported QUEUE_FULL!\n",
+=======
+		dprintk(ioc, printk(MYIOC_s_WARN_FMT "Device (%d:%d:%llu) reported QUEUE_FULL!\n",
+>>>>>>> v3.18
 				ioc->name, 0, sc->device->id, sc->device->lun));
 		hd->last_queue_full = time;
 	}
@@ -1271,6 +1287,7 @@ mptscsih_info(struct Scsi_Host *SChost)
 
 	h = shost_priv(SChost);
 
+<<<<<<< HEAD
 	if (h) {
 		if (h->info_kbuf == NULL)
 			if ((h->info_kbuf = kmalloc(0x1000 /* 4Kb */, GFP_KERNEL)) == NULL)
@@ -1280,6 +1297,15 @@ mptscsih_info(struct Scsi_Host *SChost)
 		mpt_print_ioc_summary(h->ioc, h->info_kbuf, &size, 0, 0);
 		h->info_kbuf[size-1] = '\0';
 	}
+=======
+	if (h->info_kbuf == NULL)
+		if ((h->info_kbuf = kmalloc(0x1000 /* 4Kb */, GFP_KERNEL)) == NULL)
+			return h->info_kbuf;
+	h->info_kbuf[0] = '\0';
+
+	mpt_print_ioc_summary(h->ioc, h->info_kbuf, &size, 0, 0);
+	h->info_kbuf[size-1] = '\0';
+>>>>>>> v3.18
 
 	return h->info_kbuf;
 }
@@ -1304,7 +1330,10 @@ int mptscsih_show_info(struct seq_file *m, struct Scsi_Host *host)
 /**
  *	mptscsih_qcmd - Primary Fusion MPT SCSI initiator IO start routine.
  *	@SCpnt: Pointer to scsi_cmnd structure
+<<<<<<< HEAD
  *	@done: Pointer SCSI mid-layer IO completion function
+=======
+>>>>>>> v3.18
  *
  *	(linux scsi_host_template.queuecommand routine)
  *	This is the primary SCSI IO start routine.  Create a MPI SCSIIORequest
@@ -1313,7 +1342,11 @@ int mptscsih_show_info(struct seq_file *m, struct Scsi_Host *host)
  *	Returns 0. (rtn value discarded by linux scsi mid-layer)
  */
 int
+<<<<<<< HEAD
 mptscsih_qcmd(struct scsi_cmnd *SCpnt, void (*done)(struct scsi_cmnd *))
+=======
+mptscsih_qcmd(struct scsi_cmnd *SCpnt)
+>>>>>>> v3.18
 {
 	MPT_SCSI_HOST		*hd;
 	MPT_FRAME_HDR		*mf;
@@ -1329,10 +1362,16 @@ mptscsih_qcmd(struct scsi_cmnd *SCpnt, void (*done)(struct scsi_cmnd *))
 
 	hd = shost_priv(SCpnt->device->host);
 	ioc = hd->ioc;
+<<<<<<< HEAD
 	SCpnt->scsi_done = done;
 
 	dmfprintk(ioc, printk(MYIOC_s_DEBUG_FMT "qcmd: SCpnt=%p, done()=%p\n",
 		ioc->name, SCpnt, done));
+=======
+
+	dmfprintk(ioc, printk(MYIOC_s_DEBUG_FMT "qcmd: SCpnt=%p\n",
+		ioc->name, SCpnt));
+>>>>>>> v3.18
 
 	if (ioc->taskmgmt_quiesce_io)
 		return SCSI_MLQUEUE_HOST_BUSY;
@@ -1370,8 +1409,12 @@ mptscsih_qcmd(struct scsi_cmnd *SCpnt, void (*done)(struct scsi_cmnd *))
 	/* Default to untagged. Once a target structure has been allocated,
 	 * use the Inquiry data to determine if device supports tagged.
 	 */
+<<<<<<< HEAD
 	if (vdevice
 	    && (vdevice->vtarget->tflags & MPT_TARGET_FLAGS_Q_YES)
+=======
+	if ((vdevice->vtarget->tflags & MPT_TARGET_FLAGS_Q_YES)
+>>>>>>> v3.18
 	    && (SCpnt->device->tagged_supported)) {
 		scsictl = scsidir | MPI_SCSIIO_CONTROL_SIMPLEQ;
 		if (SCpnt->request && SCpnt->request->ioprio) {
@@ -1520,7 +1563,11 @@ mptscsih_freeChainBuffers(MPT_ADAPTER *ioc, int req_idx)
  *
  **/
 int
+<<<<<<< HEAD
 mptscsih_IssueTaskMgmt(MPT_SCSI_HOST *hd, u8 type, u8 channel, u8 id, int lun,
+=======
+mptscsih_IssueTaskMgmt(MPT_SCSI_HOST *hd, u8 type, u8 channel, u8 id, u64 lun,
+>>>>>>> v3.18
 	int ctx2abort, ulong timeout)
 {
 	MPT_FRAME_HDR	*mf;
@@ -2382,7 +2429,11 @@ mptscsih_slave_configure(struct scsi_device *sdev)
 	vdevice = sdev->hostdata;
 
 	dsprintk(ioc, printk(MYIOC_s_DEBUG_FMT
+<<<<<<< HEAD
 		"device @ %p, channel=%d, id=%d, lun=%d\n",
+=======
+		"device @ %p, channel=%d, id=%d, lun=%llu\n",
+>>>>>>> v3.18
 		ioc->name, sdev, sdev->channel, sdev->id, sdev->lun));
 	if (ioc->bus_type == SPI)
 		dsprintk(ioc, printk(MYIOC_s_DEBUG_FMT
@@ -2973,7 +3024,11 @@ mptscsih_do_cmd(MPT_SCSI_HOST *hd, INTERNAL_CMD *io)
 					   + (my_idx * MPT_SENSE_BUFFER_ALLOC));
 
 	devtprintk(ioc, printk(MYIOC_s_DEBUG_FMT
+<<<<<<< HEAD
 	    "%s: Sending Command 0x%02x for fw_channel=%d fw_id=%d lun=%d\n",
+=======
+	    "%s: Sending Command 0x%02x for fw_channel=%d fw_id=%d lun=%llu\n",
+>>>>>>> v3.18
 	    ioc->name, __func__, cmd, io->channel, io->id, io->lun));
 
 	if (dir == MPI_SCSIIO_CONTROL_READ)

@@ -34,8 +34,11 @@ static inline void set_64bit(volatile u64 *ptr, u64 value)
 		     : "memory");
 }
 
+<<<<<<< HEAD
 #define __HAVE_ARCH_CMPXCHG 1
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_X86_CMPXCHG64
 #define cmpxchg64(ptr, o, n)						\
 	((__typeof__(*(ptr)))__cmpxchg64((ptr), (unsigned long long)(o), \

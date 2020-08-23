@@ -8,7 +8,10 @@
  */
 #include <linux/fs.h>
 #include <linux/fcntl.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/linkage.h>
 #include <linux/module.h>
@@ -30,15 +33,26 @@ void (*flush_cache_range)(struct vm_area_struct *vma, unsigned long start,
 void (*flush_cache_page)(struct vm_area_struct *vma, unsigned long page,
 	unsigned long pfn);
 void (*flush_icache_range)(unsigned long start, unsigned long end);
+<<<<<<< HEAD
 void (*local_flush_icache_range)(unsigned long start, unsigned long end);
+=======
+EXPORT_SYMBOL_GPL(flush_icache_range);
+void (*local_flush_icache_range)(unsigned long start, unsigned long end);
+EXPORT_SYMBOL_GPL(local_flush_icache_range);
+>>>>>>> v3.18
 
 void (*__flush_cache_vmap)(void);
 void (*__flush_cache_vunmap)(void);
 
 void (*__flush_kernel_vmap_range)(unsigned long vaddr, int size);
+<<<<<<< HEAD
 void (*__invalidate_kernel_vmap_range)(unsigned long vaddr, int size);
 
 EXPORT_SYMBOL_GPL(__flush_kernel_vmap_range);
+=======
+EXPORT_SYMBOL_GPL(__flush_kernel_vmap_range);
+void (*__invalidate_kernel_vmap_range)(unsigned long vaddr, int size);
+>>>>>>> v3.18
 
 /* MIPS specific cache operations */
 void (*flush_cache_sigtramp)(unsigned long addr);
@@ -50,7 +64,11 @@ EXPORT_SYMBOL_GPL(local_flush_data_cache_page);
 EXPORT_SYMBOL(flush_data_cache_page);
 EXPORT_SYMBOL(flush_icache_all);
 
+<<<<<<< HEAD
 #ifdef CONFIG_DMA_NONCOHERENT
+=======
+#if defined(CONFIG_DMA_NONCOHERENT) || defined(CONFIG_DMA_MAYBE_COHERENT)
+>>>>>>> v3.18
 
 /* DMA cache operations. */
 void (*_dma_cache_wback_inv)(unsigned long start, unsigned long size);
@@ -59,7 +77,11 @@ void (*_dma_cache_inv)(unsigned long start, unsigned long size);
 
 EXPORT_SYMBOL(_dma_cache_wback_inv);
 
+<<<<<<< HEAD
 #endif /* CONFIG_DMA_NONCOHERENT */
+=======
+#endif /* CONFIG_DMA_NONCOHERENT || CONFIG_DMA_MAYBE_COHERENT */
+>>>>>>> v3.18
 
 /*
  * We could optimize the case where the cache argument is not BCACHE but
@@ -119,6 +141,7 @@ void __flush_anon_page(struct page *page, unsigned long vmaddr)
 
 EXPORT_SYMBOL(__flush_anon_page);
 
+<<<<<<< HEAD
 void __update_cache(struct vm_area_struct *vma, unsigned long address,
 	pte_t pte)
 {
@@ -134,10 +157,41 @@ void __update_cache(struct vm_area_struct *vma, unsigned long address,
 		addr = (unsigned long) page_address(page);
 		if (exec || pages_do_alias(addr, address & PAGE_MASK))
 			flush_data_cache_page(addr);
+=======
+static void mips_flush_dcache_from_pte(pte_t pteval, unsigned long address)
+{
+	struct page *page;
+	unsigned long pfn = pte_pfn(pteval);
+
+	if (unlikely(!pfn_valid(pfn)))
+		return;
+
+	page = pfn_to_page(pfn);
+	if (page_mapping(page) && Page_dcache_dirty(page)) {
+		unsigned long page_addr = (unsigned long) page_address(page);
+
+		if (!cpu_has_ic_fills_f_dc ||
+		    pages_do_alias(page_addr, address & PAGE_MASK))
+			flush_data_cache_page(page_addr);
+>>>>>>> v3.18
 		ClearPageDcacheDirty(page);
 	}
 }
 
+<<<<<<< HEAD
+=======
+void set_pte_at(struct mm_struct *mm, unsigned long addr,
+        pte_t *ptep, pte_t pteval)
+{
+        if (cpu_has_dc_aliases || !cpu_has_ic_fills_f_dc) {
+                if (pte_present(pteval))
+                        mips_flush_dcache_from_pte(pteval, addr);
+        }
+
+        set_pte(ptep, pteval);
+}
+
+>>>>>>> v3.18
 unsigned long _page_cachable_default;
 EXPORT_SYMBOL(_page_cachable_default);
 
@@ -182,7 +236,11 @@ static inline void setup_protection_map(void)
 	}
 }
 
+<<<<<<< HEAD
 void __cpuinit cpu_cache_init(void)
+=======
+void cpu_cache_init(void)
+>>>>>>> v3.18
 {
 	if (cpu_has_3k_cache) {
 		extern void __weak r3k_cache_init(void);

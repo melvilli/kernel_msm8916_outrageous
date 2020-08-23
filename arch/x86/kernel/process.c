@@ -36,10 +36,30 @@
  * section. Since TSS's are completely CPU-local, we want them
  * on exact cacheline boundaries, to eliminate cacheline ping-pong.
  */
+<<<<<<< HEAD
 DEFINE_PER_CPU_SHARED_ALIGNED(struct tss_struct, init_tss) = INIT_TSS;
 
 #ifdef CONFIG_X86_64
 static DEFINE_PER_CPU(unsigned char, is_idle);
+=======
+__visible DEFINE_PER_CPU_SHARED_ALIGNED(struct tss_struct, init_tss) = INIT_TSS;
+
+#ifdef CONFIG_X86_64
+static DEFINE_PER_CPU(unsigned char, is_idle);
+static ATOMIC_NOTIFIER_HEAD(idle_notifier);
+
+void idle_notifier_register(struct notifier_block *n)
+{
+	atomic_notifier_chain_register(&idle_notifier, n);
+}
+EXPORT_SYMBOL_GPL(idle_notifier_register);
+
+void idle_notifier_unregister(struct notifier_block *n)
+{
+	atomic_notifier_chain_unregister(&idle_notifier, n);
+}
+EXPORT_SYMBOL_GPL(idle_notifier_unregister);
+>>>>>>> v3.18
 #endif
 
 struct kmem_cache *task_xstate_cachep;
@@ -51,6 +71,7 @@ EXPORT_SYMBOL_GPL(task_xstate_cachep);
  */
 int arch_dup_task_struct(struct task_struct *dst, struct task_struct *src)
 {
+<<<<<<< HEAD
 	int ret;
 
 	*dst = *src;
@@ -59,6 +80,18 @@ int arch_dup_task_struct(struct task_struct *dst, struct task_struct *src)
 		ret = fpu_alloc(&dst->thread.fpu);
 		if (ret)
 			return ret;
+=======
+	*dst = *src;
+
+	dst->thread.fpu_counter = 0;
+	dst->thread.fpu.has_fpu = 0;
+	dst->thread.fpu.last_cpu = ~0;
+	dst->thread.fpu.state = NULL;
+	if (tsk_used_math(src)) {
+		int err = fpu_alloc(&dst->thread.fpu);
+		if (err)
+			return err;
+>>>>>>> v3.18
 		fpu_copy(dst, src);
 	}
 	return 0;
@@ -80,6 +113,10 @@ void arch_task_cache_init(void)
         	kmem_cache_create("task_xstate", xstate_size,
 				  __alignof__(union thread_xstate),
 				  SLAB_PANIC | SLAB_NOTRACK, NULL);
+<<<<<<< HEAD
+=======
+	setup_xstate_comp();
+>>>>>>> v3.18
 }
 
 /*
@@ -244,14 +281,22 @@ static inline void play_dead(void)
 void enter_idle(void)
 {
 	this_cpu_write(is_idle, 1);
+<<<<<<< HEAD
 	idle_notifier_call_chain(IDLE_START);
+=======
+	atomic_notifier_call_chain(&idle_notifier, IDLE_START, NULL);
+>>>>>>> v3.18
 }
 
 static void __exit_idle(void)
 {
 	if (x86_test_and_clear_bit_percpu(0, is_idle) == 0)
 		return;
+<<<<<<< HEAD
 	idle_notifier_call_chain(IDLE_END);
+=======
+	atomic_notifier_call_chain(&idle_notifier, IDLE_END, NULL);
+>>>>>>> v3.18
 }
 
 /* Called from interrupts to signify idle end */
@@ -285,10 +330,14 @@ void arch_cpu_idle_dead(void)
  */
 void arch_cpu_idle(void)
 {
+<<<<<<< HEAD
 	if (cpuidle_idle_call())
 		x86_idle();
 	else
 		local_irq_enable();
+=======
+	x86_idle();
+>>>>>>> v3.18
 }
 
 /*
@@ -385,7 +434,11 @@ static void amd_e400_idle(void)
 		default_idle();
 }
 
+<<<<<<< HEAD
 void __cpuinit select_idle_routine(const struct cpuinfo_x86 *c)
+=======
+void select_idle_routine(const struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 {
 #ifdef CONFIG_SMP
 	if (boot_option_idle_override == IDLE_POLL && smp_num_siblings > 1)

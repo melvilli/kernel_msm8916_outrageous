@@ -39,6 +39,10 @@
 #include <linux/mm.h>
 #include <linux/console.h>
 #include <linux/tty.h>
+<<<<<<< HEAD
+=======
+#include <linux/vt.h>
+>>>>>>> v3.18
 
 #include <asm/sibyte/bcm1480_regs.h>
 #include <asm/sibyte/bcm1480_scd.h>
@@ -257,7 +261,13 @@ static int __init bcm1480_pcibios_init(void)
 	register_pci_controller(&bcm1480_controller);
 
 #ifdef CONFIG_VGA_CONSOLE
+<<<<<<< HEAD
 	take_over_console(&vga_con, 0, MAX_NR_CONSOLES-1, 1);
+=======
+	console_lock();
+	do_take_over_console(&vga_con, 0, MAX_NR_CONSOLES-1, 1);
+	console_unlock();
+>>>>>>> v3.18
 #endif
 	return 0;
 }

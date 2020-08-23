@@ -25,6 +25,10 @@
 #include <linux/time.h>
 #include <linux/io.h>
 #include <mach/hardware.h>
+<<<<<<< HEAD
+=======
+#include <mach/at91x40.h>
+>>>>>>> v3.18
 #include <asm/mach/time.h>
 
 #include "at91_tc.h"
@@ -57,7 +61,11 @@ static irqreturn_t at91x40_timer_interrupt(int irq, void *dev_id)
 
 static struct irqaction at91x40_timer_irq = {
 	.name		= "at91_tick",
+<<<<<<< HEAD
 	.flags		= IRQF_DISABLED | IRQF_TIMER,
+=======
+	.flags		= IRQF_TIMER,
+>>>>>>> v3.18
 	.handler	= at91x40_timer_interrupt
 };
 

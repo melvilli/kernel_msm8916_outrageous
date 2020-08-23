@@ -10,6 +10,10 @@
 
 #include <linux/gpio.h>
 #include <plat/gpio-cfg.h>
+<<<<<<< HEAD
+=======
+#include <mach/gpio-samsung.h>
+>>>>>>> v3.18
 
 /* Number of camera port pins, without FIELD */
 #define S3C_CAMIF_NUM_GPIOS	13

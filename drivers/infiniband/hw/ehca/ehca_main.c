@@ -211,6 +211,10 @@ static int ehca_create_slab_caches(void)
 	if (!ctblk_cache) {
 		ehca_gen_err("Cannot create ctblk SLAB cache.");
 		ehca_cleanup_small_qp_cache();
+<<<<<<< HEAD
+=======
+		ret = -ENOMEM;
+>>>>>>> v3.18
 		goto create_slab_caches6;
 	}
 #endif
@@ -713,8 +717,12 @@ static struct attribute_group ehca_dev_attr_grp = {
 	.attrs = ehca_dev_attrs
 };
 
+<<<<<<< HEAD
 static int ehca_probe(struct platform_device *dev,
 		      const struct of_device_id *id)
+=======
+static int ehca_probe(struct platform_device *dev)
+>>>>>>> v3.18
 {
 	struct ehca_shca *shca;
 	const u64 *handle;
@@ -937,7 +945,11 @@ static struct of_device_id ehca_device_table[] =
 };
 MODULE_DEVICE_TABLE(of, ehca_device_table);
 
+<<<<<<< HEAD
 static struct of_platform_driver ehca_driver = {
+=======
+static struct platform_driver ehca_driver = {
+>>>>>>> v3.18
 	.probe       = ehca_probe,
 	.remove      = ehca_remove,
 	.driver = {

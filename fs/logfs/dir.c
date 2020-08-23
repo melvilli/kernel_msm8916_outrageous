@@ -281,6 +281,7 @@ static int logfs_rmdir(struct inode *dir, struct dentry *dentry)
 
 /* FIXME: readdir currently has it's own dir_walk code.  I don't see a good
  * way to combine the two copies */
+<<<<<<< HEAD
 #define IMPLICIT_NODES 2
 static int __logfs_readdir(struct file *file, void *buf, filldir_t filldir)
 {
@@ -292,6 +293,25 @@ static int __logfs_readdir(struct file *file, void *buf, filldir_t filldir)
 
 	BUG_ON(pos < 0);
 	for (;; pos++) {
+=======
+static int logfs_readdir(struct file *file, struct dir_context *ctx)
+{
+	struct inode *dir = file_inode(file);
+	loff_t pos;
+	struct page *page;
+	struct logfs_disk_dentry *dd;
+
+	if (ctx->pos < 0)
+		return -EINVAL;
+
+	if (!dir_emit_dots(file, ctx))
+		return 0;
+
+	pos = ctx->pos - 2;
+	BUG_ON(pos < 0);
+	for (;; pos++, ctx->pos++) {
+		bool full;
+>>>>>>> v3.18
 		if (beyond_eof(dir, pos))
 			break;
 		if (!logfs_exist_block(dir, pos)) {
@@ -306,13 +326,20 @@ static int __logfs_readdir(struct file *file, void *buf, filldir_t filldir)
 		dd = kmap(page);
 		BUG_ON(dd->namelen == 0);
 
+<<<<<<< HEAD
 		full = filldir(buf, (char *)dd->name, be16_to_cpu(dd->namelen),
 				pos, be64_to_cpu(dd->ino), dd->type);
+=======
+		full = !dir_emit(ctx, (char *)dd->name,
+				be16_to_cpu(dd->namelen),
+				be64_to_cpu(dd->ino), dd->type);
+>>>>>>> v3.18
 		kunmap(page);
 		page_cache_release(page);
 		if (full)
 			break;
 	}
+<<<<<<< HEAD
 
 	file->f_pos = pos + IMPLICIT_NODES;
 	return 0;
@@ -342,6 +369,11 @@ static int logfs_readdir(struct file *file, void *buf, filldir_t filldir)
 	return err;
 }
 
+=======
+	return 0;
+}
+
+>>>>>>> v3.18
 static void logfs_set_name(struct logfs_disk_dentry *dd, struct qstr *name)
 {
 	dd->namelen = cpu_to_be16(name->len);
@@ -814,7 +846,11 @@ const struct inode_operations logfs_dir_iops = {
 const struct file_operations logfs_dir_fops = {
 	.fsync		= logfs_fsync,
 	.unlocked_ioctl	= logfs_ioctl,
+<<<<<<< HEAD
 	.readdir	= logfs_readdir,
+=======
+	.iterate	= logfs_readdir,
+>>>>>>> v3.18
 	.read		= generic_read_dir,
 	.llseek		= default_llseek,
 };

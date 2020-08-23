@@ -235,8 +235,11 @@ static const struct of_device_id intc_ids[] __initconst = {
 void __init pxa_dt_irq_init(int (*fn)(struct irq_data *, unsigned int))
 {
 	struct device_node *node;
+<<<<<<< HEAD
 	const struct of_device_id *of_id;
 	struct pxa_intc_conf *conf;
+=======
+>>>>>>> v3.18
 	struct resource res;
 	int n, ret;
 
@@ -245,8 +248,11 @@ void __init pxa_dt_irq_init(int (*fn)(struct irq_data *, unsigned int))
 		pr_err("Failed to find interrupt controller in arch-pxa\n");
 		return;
 	}
+<<<<<<< HEAD
 	of_id = of_match_node(intc_ids, node);
 	conf = of_id->data;
+=======
+>>>>>>> v3.18
 
 	ret = of_property_read_u32(node, "marvell,intc-nr-irqs",
 				   &pxa_internal_irq_nr);

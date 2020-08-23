@@ -52,7 +52,11 @@
 #if defined(CONFIG_KERNEL_START_BOOL) || defined(CONFIG_LOWMEM_SIZE_BOOL)
 /* The amount of lowmem must be within 0xF0000000 - KERNELBASE. */
 #if (CONFIG_LOWMEM_SIZE > (0xF0000000 - PAGE_OFFSET))
+<<<<<<< HEAD
 #error "You must adjust CONFIG_LOWMEM_SIZE or CONFIG_START_KERNEL"
+=======
+#error "You must adjust CONFIG_LOWMEM_SIZE or CONFIG_KERNEL_START"
+>>>>>>> v3.18
 #endif
 #endif
 #define MAX_LOW_MEM	CONFIG_LOWMEM_SIZE
@@ -103,6 +107,7 @@ unsigned long __max_low_memory = MAX_LOW_MEM;
 /*
  * Check for command-line options that affect what MMU_init will do.
  */
+<<<<<<< HEAD
 void MMU_setup(void)
 {
 	/* Check for nobats option (used in mapin_ram). */
@@ -111,6 +116,16 @@ void MMU_setup(void)
 	}
 
 	if (strstr(cmd_line, "noltlbs")) {
+=======
+void __init MMU_setup(void)
+{
+	/* Check for nobats option (used in mapin_ram). */
+	if (strstr(boot_command_line, "nobats")) {
+		__map_without_bats = 1;
+	}
+
+	if (strstr(boot_command_line, "noltlbs")) {
+>>>>>>> v3.18
 		__map_without_ltlbs = 1;
 	}
 #ifdef CONFIG_DEBUG_PAGEALLOC
@@ -213,7 +228,17 @@ void setup_initial_memory_limit(phys_addr_t first_memblock_base,
 	 */
 	BUG_ON(first_memblock_base != 0);
 
+<<<<<<< HEAD
 	/* 8xx can only access 8MB at the moment */
 	memblock_set_current_limit(min_t(u64, first_memblock_size, 0x00800000));
+=======
+#ifdef CONFIG_PIN_TLB
+	/* 8xx can only access 24MB at the moment */
+	memblock_set_current_limit(min_t(u64, first_memblock_size, 0x01800000));
+#else
+	/* 8xx can only access 8MB at the moment */
+	memblock_set_current_limit(min_t(u64, first_memblock_size, 0x00800000));
+#endif
+>>>>>>> v3.18
 }
 #endif /* CONFIG_8xx */

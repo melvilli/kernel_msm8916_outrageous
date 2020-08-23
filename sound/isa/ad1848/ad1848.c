@@ -91,7 +91,11 @@ static int snd_ad1848_probe(struct device *dev, unsigned int n)
 	struct snd_pcm *pcm;
 	int error;
 
+<<<<<<< HEAD
 	error = snd_card_create(index[n], id[n], THIS_MODULE, 0, &card);
+=======
+	error = snd_card_new(dev, index[n], id[n], THIS_MODULE, 0, &card);
+>>>>>>> v3.18
 	if (error < 0)
 		return error;
 
@@ -119,8 +123,11 @@ static int snd_ad1848_probe(struct device *dev, unsigned int n)
 	if (thinkpad[n])
 		strcat(card->longname, " [Thinkpad]");
 
+<<<<<<< HEAD
 	snd_card_set_dev(card, dev);
 
+=======
+>>>>>>> v3.18
 	error = snd_card_register(card);
 	if (error < 0)
 		goto out;
@@ -135,7 +142,10 @@ out:	snd_card_free(card);
 static int snd_ad1848_remove(struct device *dev, unsigned int n)
 {
 	snd_card_free(dev_get_drvdata(dev));
+<<<<<<< HEAD
 	dev_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

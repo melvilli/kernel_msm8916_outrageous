@@ -65,6 +65,10 @@ config MDA_CONSOLE
 config SGI_NEWPORT_CONSOLE
         tristate "SGI Newport Console support"
         depends on SGI_IP22 
+<<<<<<< HEAD
+=======
+        select FONT_SUPPORT
+>>>>>>> v3.18
         help
           Say Y here if you want the console on the Newport aka XL graphics
           card of your Indy.  Most people say Y here.
@@ -92,8 +96,15 @@ config DUMMY_CONSOLE_ROWS
 
 config FRAMEBUFFER_CONSOLE
 	tristate "Framebuffer Console support"
+<<<<<<< HEAD
 	depends on FB
 	select CRC32
+=======
+	depends on FB && !UML
+	select VT_HW_CONSOLE_BINDING
+	select CRC32
+	select FONT_SUPPORT
+>>>>>>> v3.18
 	help
 	  Low-level framebuffer-based console driver.
 
@@ -126,12 +137,17 @@ config FRAMEBUFFER_CONSOLE_ROTATION
 config STI_CONSOLE
         bool "STI text console"
         depends on PARISC
+<<<<<<< HEAD
+=======
+        select FONT_SUPPORT
+>>>>>>> v3.18
         default y
         help
           The STI console is the builtin display/keyboard on HP-PARISC
           machines.  Say Y here to build support for it into your kernel.
           The alternative is to use your primary serial port as a console.
 
+<<<<<<< HEAD
 config FONTS
 	bool "Select compiled-in fonts"
 	depends on FRAMEBUFFER_CONSOLE || STI_CONSOLE
@@ -241,5 +257,7 @@ config FONT_AUTOSELECT
 	depends on !FONT_10x18
 	select FONT_8x16
 
+=======
+>>>>>>> v3.18
 endmenu
 

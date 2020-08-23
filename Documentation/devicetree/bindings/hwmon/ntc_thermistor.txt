@@ -3,11 +3,28 @@ NTC Thermistor hwmon sensors
 
 Requires node properties:
 - "compatible" value : one of
+<<<<<<< HEAD
 	"ntc,ncp15wb473"
 	"ntc,ncp18wb473"
 	"ntc,ncp21wb473"
 	"ntc,ncp03wb473"
 	"ntc,ncp15wl333"
+=======
+	"epcos,b57330v2103"
+	"murata,ncp15wb473"
+	"murata,ncp18wb473"
+	"murata,ncp21wb473"
+	"murata,ncp03wb473"
+	"murata,ncp15wl333"
+
+/* Usage of vendor name "ntc" is deprecated */
+<DEPRECATED>	"ntc,ncp15wb473"
+<DEPRECATED>	"ntc,ncp18wb473"
+<DEPRECATED>	"ntc,ncp21wb473"
+<DEPRECATED>	"ntc,ncp03wb473"
+<DEPRECATED>	"ntc,ncp15wl333"
+
+>>>>>>> v3.18
 - "pullup-uv"	Pull up voltage in micro volts
 - "pullup-ohm"	Pull up resistor value in ohms
 - "pulldown-ohm" Pull down resistor value in ohms
@@ -16,12 +33,22 @@ Requires node properties:
 - "io-channels"	Channel node of ADC to be used for
 		conversion.
 
+<<<<<<< HEAD
+=======
+Optional node properties:
+- "#thermal-sensor-cells" Used to expose itself to thermal fw.
+
+>>>>>>> v3.18
 Read more about iio bindings at
 	Documentation/devicetree/bindings/iio/iio-bindings.txt
 
 Example:
 	ncp15wb473@0 {
+<<<<<<< HEAD
 		compatible = "ntc,ncp15wb473";
+=======
+		compatible = "murata,ncp15wb473";
+>>>>>>> v3.18
 		pullup-uv = <1800000>;
 		pullup-ohm = <47000>;
 		pulldown-ohm = <0>;

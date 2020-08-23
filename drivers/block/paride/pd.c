@@ -126,7 +126,11 @@
 */
 #include <linux/types.h>
 
+<<<<<<< HEAD
 static int verbose = 0;
+=======
+static bool verbose = 0;
+>>>>>>> v3.18
 static int major = PD_MAJOR;
 static char *name = PD_NAME;
 static int cluster = 64;
@@ -161,7 +165,11 @@ enum {D_PRT, D_PRO, D_UNI, D_MOD, D_GEO, D_SBY, D_DLY, D_SLV};
 static DEFINE_MUTEX(pd_mutex);
 static DEFINE_SPINLOCK(pd_lock);
 
+<<<<<<< HEAD
 module_param(verbose, int, 0);
+=======
+module_param(verbose, bool, 0);
+>>>>>>> v3.18
 module_param(major, int, 0);
 module_param(name, charp, 0);
 module_param(cluster, int, 0);
@@ -454,7 +462,11 @@ static enum action do_pd_io_start(void)
 		if (pd_block + pd_count > get_capacity(pd_req->rq_disk))
 			return Fail;
 		pd_run = blk_rq_sectors(pd_req);
+<<<<<<< HEAD
 		pd_buf = pd_req->buffer;
+=======
+		pd_buf = bio_data(pd_req->bio);
+>>>>>>> v3.18
 		pd_retries = 0;
 		if (pd_cmd == READ)
 			return do_pd_read_start();
@@ -485,7 +497,11 @@ static int pd_next_buf(void)
 	spin_lock_irqsave(&pd_lock, saved_flags);
 	__blk_end_request_cur(pd_req, 0);
 	pd_count = blk_rq_cur_sectors(pd_req);
+<<<<<<< HEAD
 	pd_buf = pd_req->buffer;
+=======
+	pd_buf = bio_data(pd_req->bio);
+>>>>>>> v3.18
 	spin_unlock_irqrestore(&pd_lock, saved_flags);
 	return 0;
 }
@@ -722,6 +738,11 @@ static int pd_special_command(struct pd_unit *disk,
 	int err = 0;
 
 	rq = blk_get_request(disk->gd->queue, READ, __GFP_WAIT);
+<<<<<<< HEAD
+=======
+	if (IS_ERR(rq))
+		return PTR_ERR(rq);
+>>>>>>> v3.18
 
 	rq->cmd_type = REQ_TYPE_SPECIAL;
 	rq->special = func;

@@ -106,7 +106,11 @@ struct irqaction hub_rt_irqaction = {
 #define NSEC_PER_CYCLE		800
 #define CYCLES_PER_SEC		(NSEC_PER_SEC / NSEC_PER_CYCLE)
 
+<<<<<<< HEAD
 void __cpuinit hub_rt_clock_event_init(void)
+=======
+void hub_rt_clock_event_init(void)
+>>>>>>> v3.18
 {
 	unsigned int cpu = smp_processor_id();
 	struct clock_event_device *cd = &per_cpu(hub_rt_clockevent, cpu);
@@ -173,7 +177,11 @@ void __init plat_time_init(void)
 	hub_rt_clock_event_init();
 }
 
+<<<<<<< HEAD
 void __cpuinit cpu_time_init(void)
+=======
+void cpu_time_init(void)
+>>>>>>> v3.18
 {
 	lboard_t *board;
 	klcpu_t *cpu;
@@ -194,7 +202,11 @@ void __cpuinit cpu_time_init(void)
 	set_c0_status(SRB_TIMOCLK);
 }
 
+<<<<<<< HEAD
 void __cpuinit hub_rtc_init(cnodeid_t cnode)
+=======
+void hub_rtc_init(cnodeid_t cnode)
+>>>>>>> v3.18
 {
 
 	/*

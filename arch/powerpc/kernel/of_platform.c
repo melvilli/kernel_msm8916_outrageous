@@ -97,7 +97,11 @@ static int of_pci_phb_probe(struct platform_device *dev)
 	return 0;
 }
 
+<<<<<<< HEAD
 static struct of_device_id of_pci_phb_ids[] = {
+=======
+static const struct of_device_id of_pci_phb_ids[] = {
+>>>>>>> v3.18
 	{ .type = "pci", },
 	{ .type = "pcix", },
 	{ .type = "pcie", },

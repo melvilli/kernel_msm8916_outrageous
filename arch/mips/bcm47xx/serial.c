@@ -31,7 +31,12 @@ static int __init uart8250_init_ssb(void)
 
 	memset(&uart8250_data, 0,  sizeof(uart8250_data));
 
+<<<<<<< HEAD
 	for (i = 0; i < mcore->nr_serial_ports; i++) {
+=======
+	for (i = 0; i < mcore->nr_serial_ports &&
+		    i < ARRAY_SIZE(uart8250_data) - 1; i++) {
+>>>>>>> v3.18
 		struct plat_serial8250_port *p = &(uart8250_data[i]);
 		struct ssb_serial_port *ssb_port = &(mcore->serial_ports[i]);
 
@@ -55,7 +60,12 @@ static int __init uart8250_init_bcma(void)
 
 	memset(&uart8250_data, 0,  sizeof(uart8250_data));
 
+<<<<<<< HEAD
 	for (i = 0; i < cc->nr_serial_ports; i++) {
+=======
+	for (i = 0; i < cc->nr_serial_ports &&
+		    i < ARRAY_SIZE(uart8250_data) - 1; i++) {
+>>>>>>> v3.18
 		struct plat_serial8250_port *p = &(uart8250_data[i]);
 		struct bcma_serial_port *bcma_port;
 		bcma_port = &(cc->serial_ports[i]);

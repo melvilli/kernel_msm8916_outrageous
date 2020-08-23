@@ -83,7 +83,11 @@ struct pxamci_host {
 static inline void pxamci_init_ocr(struct pxamci_host *host)
 {
 #ifdef CONFIG_REGULATOR
+<<<<<<< HEAD
 	host->vcc = regulator_get(mmc_dev(host->mmc), "vmmc");
+=======
+	host->vcc = regulator_get_optional(mmc_dev(host->mmc), "vmmc");
+>>>>>>> v3.18
 
 	if (IS_ERR(host->vcc))
 		host->vcc = NULL;
@@ -128,7 +132,11 @@ static inline int pxamci_set_power(struct pxamci_host *host,
 			       !!on ^ host->pdata->gpio_power_invert);
 	}
 	if (!host->vcc && host->pdata && host->pdata->setpower)
+<<<<<<< HEAD
 		host->pdata->setpower(mmc_dev(host->mmc), vdd);
+=======
+		return host->pdata->setpower(mmc_dev(host->mmc), vdd);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -474,7 +482,11 @@ static void pxamci_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 		unsigned int clk = rate / ios->clock;
 
 		if (host->clkrt == CLKRT_OFF)
+<<<<<<< HEAD
 			clk_enable(host->clk);
+=======
+			clk_prepare_enable(host->clk);
+>>>>>>> v3.18
 
 		if (ios->clock == 26000000) {
 			/* to support 26MHz */
@@ -501,7 +513,11 @@ static void pxamci_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 		pxamci_stop_clock(host);
 		if (host->clkrt != CLKRT_OFF) {
 			host->clkrt = CLKRT_OFF;
+<<<<<<< HEAD
 			clk_disable(host->clk);
+=======
+			clk_disable_unprepare(host->clk);
+>>>>>>> v3.18
 		}
 	}
 
@@ -834,8 +850,11 @@ static int pxamci_remove(struct platform_device *pdev)
 	struct mmc_host *mmc = platform_get_drvdata(pdev);
 	int gpio_cd = -1, gpio_ro = -1, gpio_power = -1;
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 	if (mmc) {
 		struct pxamci_host *host = mmc_priv(mmc);
 
@@ -882,6 +901,7 @@ static int pxamci_remove(struct platform_device *pdev)
 	return 0;
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 static int pxamci_suspend(struct device *dev)
 {
@@ -911,16 +931,22 @@ static const struct dev_pm_ops pxamci_pm_ops = {
 };
 #endif
 
+=======
+>>>>>>> v3.18
 static struct platform_driver pxamci_driver = {
 	.probe		= pxamci_probe,
 	.remove		= pxamci_remove,
 	.driver		= {
 		.name	= DRIVER_NAME,
+<<<<<<< HEAD
 		.owner	= THIS_MODULE,
 		.of_match_table = of_match_ptr(pxa_mmc_dt_ids),
 #ifdef CONFIG_PM
 		.pm	= &pxamci_pm_ops,
 #endif
+=======
+		.of_match_table = of_match_ptr(pxa_mmc_dt_ids),
+>>>>>>> v3.18
 	},
 };
 

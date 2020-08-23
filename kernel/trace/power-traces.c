@@ -14,5 +14,9 @@
 #include <trace/events/power.h>
 
 EXPORT_TRACEPOINT_SYMBOL_GPL(cpu_idle);
+<<<<<<< HEAD
 EXPORT_TRACEPOINT_SYMBOL(core_ctl_set_busy);
 EXPORT_TRACEPOINT_SYMBOL(core_ctl_eval_need);
+=======
+
+>>>>>>> v3.18

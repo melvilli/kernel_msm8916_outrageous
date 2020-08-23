@@ -10,7 +10,11 @@
 #ifndef __INCLUDE_SOUND_ATMEL_ABDAC_H
 #define __INCLUDE_SOUND_ATMEL_ABDAC_H
 
+<<<<<<< HEAD
 #include <linux/dw_dmac.h>
+=======
+#include <linux/platform_data/dma-dw.h>
+>>>>>>> v3.18
 
 /**
  * struct atmel_abdac_pdata - board specific ABDAC configuration

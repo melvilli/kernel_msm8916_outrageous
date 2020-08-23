@@ -30,13 +30,22 @@
 #include <linux/gfp.h>
 #include <linux/delay.h>
 #include <linux/err.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/interrupt.h>
 #include <linux/io.h>
 #include <linux/mtd/mtd.h>
 #include <linux/mtd/nand.h>
 #include <linux/mtd/partitions.h>
+<<<<<<< HEAD
 #include <linux/of_device.h>
+=======
+#include <linux/of_address.h>
+#include <linux/of_device.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 #include <linux/of_platform.h>
 
 #include <asm/mpc5121.h>
@@ -617,10 +626,15 @@ static void mpc5121_nfc_free(struct device *dev, struct mtd_info *mtd)
 	struct nand_chip *chip = mtd->priv;
 	struct mpc5121_nfc_prv *prv = chip->priv;
 
+<<<<<<< HEAD
 	if (prv->clk) {
 		clk_disable(prv->clk);
 		clk_put(prv->clk);
 	}
+=======
+	if (prv->clk)
+		clk_disable_unprepare(prv->clk);
+>>>>>>> v3.18
 
 	if (prv->csreg)
 		iounmap(prv->csreg);
@@ -629,6 +643,10 @@ static void mpc5121_nfc_free(struct device *dev, struct mtd_info *mtd)
 static int mpc5121_nfc_probe(struct platform_device *op)
 {
 	struct device_node *rootnode, *dn = op->dev.of_node;
+<<<<<<< HEAD
+=======
+	struct clk *clk;
+>>>>>>> v3.18
 	struct device *dev = &op->dev;
 	struct mpc5121_nfc_prv *prv;
 	struct resource res;
@@ -652,10 +670,15 @@ static int mpc5121_nfc_probe(struct platform_device *op)
 	}
 
 	prv = devm_kzalloc(dev, sizeof(*prv), GFP_KERNEL);
+<<<<<<< HEAD
 	if (!prv) {
 		dev_err(dev, "Memory exhausted!\n");
 		return -ENOMEM;
 	}
+=======
+	if (!prv)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	mtd = &prv->mtd;
 	chip = &prv->chip;
@@ -730,6 +753,7 @@ static int mpc5121_nfc_probe(struct platform_device *op)
 	of_node_put(rootnode);
 
 	/* Enable NFC clock */
+<<<<<<< HEAD
 	prv->clk = clk_get(dev, "nfc_clk");
 	if (IS_ERR(prv->clk)) {
 		dev_err(dev, "Unable to acquire NFC clock!\n");
@@ -738,6 +762,20 @@ static int mpc5121_nfc_probe(struct platform_device *op)
 	}
 
 	clk_enable(prv->clk);
+=======
+	clk = devm_clk_get(dev, "ipg");
+	if (IS_ERR(clk)) {
+		dev_err(dev, "Unable to acquire NFC clock!\n");
+		retval = PTR_ERR(clk);
+		goto error;
+	}
+	retval = clk_prepare_enable(clk);
+	if (retval) {
+		dev_err(dev, "Unable to enable NFC clock!\n");
+		goto error;
+	}
+	prv->clk = clk;
+>>>>>>> v3.18
 
 	/* Reset NAND Flash controller */
 	nfc_set(mtd, NFC_CONFIG1, NFC_RESET);
@@ -781,7 +819,10 @@ static int mpc5121_nfc_probe(struct platform_device *op)
 	/* Detect NAND chips */
 	if (nand_scan(mtd, be32_to_cpup(chips_no))) {
 		dev_err(dev, "NAND Flash not found !\n");
+<<<<<<< HEAD
 		devm_free_irq(dev, prv->irq, mtd);
+=======
+>>>>>>> v3.18
 		retval = -ENXIO;
 		goto error;
 	}
@@ -806,7 +847,10 @@ static int mpc5121_nfc_probe(struct platform_device *op)
 
 	default:
 		dev_err(dev, "Unsupported NAND flash!\n");
+<<<<<<< HEAD
 		devm_free_irq(dev, prv->irq, mtd);
+=======
+>>>>>>> v3.18
 		retval = -ENXIO;
 		goto error;
 	}
@@ -817,7 +861,10 @@ static int mpc5121_nfc_probe(struct platform_device *op)
 	retval = mtd_device_parse_register(mtd, NULL, &ppdata, NULL, 0);
 	if (retval) {
 		dev_err(dev, "Error adding MTD device!\n");
+<<<<<<< HEAD
 		devm_free_irq(dev, prv->irq, mtd);
+=======
+>>>>>>> v3.18
 		goto error;
 	}
 
@@ -831,11 +878,16 @@ static int mpc5121_nfc_remove(struct platform_device *op)
 {
 	struct device *dev = &op->dev;
 	struct mtd_info *mtd = dev_get_drvdata(dev);
+<<<<<<< HEAD
 	struct nand_chip *chip = mtd->priv;
 	struct mpc5121_nfc_prv *prv = chip->priv;
 
 	nand_release(mtd);
 	devm_free_irq(dev, prv->irq, mtd);
+=======
+
+	nand_release(mtd);
+>>>>>>> v3.18
 	mpc5121_nfc_free(dev, mtd);
 
 	return 0;

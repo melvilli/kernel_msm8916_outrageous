@@ -523,7 +523,11 @@ static u32 write_mem32(void __iomem *mem_addr_start, const u32 *buf,
 }
 
 /* Setup pointers to different channels and also setup buffer sizes. */
+<<<<<<< HEAD
 static void setup_memory(struct nozomi *dc)
+=======
+static void nozomi_setup_memory(struct nozomi *dc)
+>>>>>>> v3.18
 {
 	void __iomem *offset = dc->base_addr + dc->config_table.dl_start;
 	/* The length reported is including the length field of 4 bytes,
@@ -671,7 +675,11 @@ static int nozomi_read_config_table(struct nozomi *dc)
 		int i;
 		DBG1("Second phase, configuring card");
 
+<<<<<<< HEAD
 		setup_memory(dc);
+=======
+		nozomi_setup_memory(dc);
+>>>>>>> v3.18
 
 		dc->port[PORT_MDM].toggle_ul = dc->config_table.toggle.mdm_ul;
 		dc->port[PORT_MDM].toggle_dl = dc->config_table.toggle.mdm_dl;
@@ -705,7 +713,11 @@ static int nozomi_read_config_table(struct nozomi *dc)
 			 dc->config_table.version);
 
 		/* Here we should disable all I/O over F32. */
+<<<<<<< HEAD
 		setup_memory(dc);
+=======
+		nozomi_setup_memory(dc);
+>>>>>>> v3.18
 
 		/*
 		 * We should send ALL channel pair tokens back along
@@ -823,7 +835,11 @@ static int receive_data(enum port_type index, struct nozomi *dc)
 	struct tty_struct *tty = tty_port_tty_get(&port->port);
 	int i, ret;
 
+<<<<<<< HEAD
 	size = __le32_to_cpu(readl(addr));
+=======
+	read_mem32((u32 *) &size, addr, 4);
+>>>>>>> v3.18
 	/*  DBG1( "%d bytes port: %d", size, index); */
 
 	if (tty && test_bit(TTY_THROTTLED, &tty->flags)) {
@@ -959,7 +975,11 @@ static int receive_flow_control(struct nozomi *dc)
 		dev_err(&dc->pdev->dev,
 			"ERROR: flow control received for non-existing port\n");
 		return 0;
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 
 	DBG1("0x%04X->0x%04X", *((u16 *)&dc->port[port].ctrl_dl),
 	   *((u16 *)&ctrl_dl));
@@ -1025,7 +1045,11 @@ static enum ctrl_port_type port2ctrl(enum port_type port,
 		dev_err(&dc->pdev->dev,
 			"ERROR: send flow control " \
 			"received for non-existing port\n");
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 	return CTRL_ERROR;
 }
 
@@ -1805,7 +1829,11 @@ static int ntty_ioctl(struct tty_struct *tty,
 	default:
 		DBG1("ERR: 0x%08X, %d", cmd, cmd);
 		break;
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 
 	return rval;
 }

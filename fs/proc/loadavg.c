@@ -42,4 +42,8 @@ static int __init proc_loadavg_init(void)
 	proc_create("loadavg", 0, NULL, &loadavg_proc_fops);
 	return 0;
 }
+<<<<<<< HEAD
 module_init(proc_loadavg_init);
+=======
+fs_initcall(proc_loadavg_init);
+>>>>>>> v3.18

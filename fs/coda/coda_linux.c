@@ -13,7 +13,11 @@
 #include <linux/fs.h>
 #include <linux/stat.h>
 #include <linux/errno.h>
+<<<<<<< HEAD
 #include <asm/uaccess.h>
+=======
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 #include <linux/string.h>
 
 #include <linux/coda.h>

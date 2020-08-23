@@ -24,7 +24,11 @@ asmlinkage long sys_iopl(unsigned int);
 asmlinkage int sys_modify_ldt(int, void __user *, unsigned long);
 
 /* kernel/signal.c */
+<<<<<<< HEAD
 long sys_rt_sigreturn(void);
+=======
+asmlinkage long sys_rt_sigreturn(void);
+>>>>>>> v3.18
 
 /* kernel/tls.c */
 asmlinkage long sys_set_thread_area(struct user_desc __user *);
@@ -34,7 +38,11 @@ asmlinkage long sys_get_thread_area(struct user_desc __user *);
 #ifdef CONFIG_X86_32
 
 /* kernel/signal.c */
+<<<<<<< HEAD
 unsigned long sys_sigreturn(void);
+=======
+asmlinkage unsigned long sys_sigreturn(void);
+>>>>>>> v3.18
 
 /* kernel/vm86_32.c */
 asmlinkage long sys_vm86old(struct vm86_struct __user *);
@@ -44,7 +52,11 @@ asmlinkage long sys_vm86(unsigned long, unsigned long);
 
 /* X86_64 only */
 /* kernel/process_64.c */
+<<<<<<< HEAD
 long sys_arch_prctl(int, unsigned long);
+=======
+asmlinkage long sys_arch_prctl(int, unsigned long);
+>>>>>>> v3.18
 
 /* kernel/sys_x86_64.c */
 asmlinkage long sys_mmap(unsigned long, unsigned long, unsigned long,

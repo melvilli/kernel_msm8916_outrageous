@@ -30,6 +30,10 @@
 #include <linux/gfp.h>
 #include <linux/sched.h>
 #include <linux/sched/rt.h>
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+>>>>>>> v3.18
 #include "cpupri.h"
 
 /* Convert between a 140 based task->prio, and our 102 based cpupri */
@@ -62,7 +66,11 @@ static int convert_prio(int prio)
  * any discrepancies created by racing against the uncertainty of the current
  * priority configuration.
  *
+<<<<<<< HEAD
  * Returns: (int)bool - CPUs were found
+=======
+ * Return: (int)bool - CPUs were found
+>>>>>>> v3.18
  */
 int cpupri_find(struct cpupri *cp, struct task_struct *p,
 		struct cpumask *lowest_mask)
@@ -202,7 +210,11 @@ void cpupri_set(struct cpupri *cp, int cpu, int newpri)
  * cpupri_init - initialize the cpupri structure
  * @cp: The cpupri context
  *
+<<<<<<< HEAD
  * Returns: -ENOMEM if memory fails.
+=======
+ * Return: -ENOMEM on memory allocation failure.
+>>>>>>> v3.18
  */
 int cpupri_init(struct cpupri *cp)
 {
@@ -218,8 +230,18 @@ int cpupri_init(struct cpupri *cp)
 			goto cleanup;
 	}
 
+<<<<<<< HEAD
 	for_each_possible_cpu(i)
 		cp->cpu_to_pri[i] = CPUPRI_INVALID;
+=======
+	cp->cpu_to_pri = kcalloc(nr_cpu_ids, sizeof(int), GFP_KERNEL);
+	if (!cp->cpu_to_pri)
+		goto cleanup;
+
+	for_each_possible_cpu(i)
+		cp->cpu_to_pri[i] = CPUPRI_INVALID;
+
+>>>>>>> v3.18
 	return 0;
 
 cleanup:
@@ -236,6 +258,10 @@ void cpupri_cleanup(struct cpupri *cp)
 {
 	int i;
 
+<<<<<<< HEAD
+=======
+	kfree(cp->cpu_to_pri);
+>>>>>>> v3.18
 	for (i = 0; i < CPUPRI_NR_PRIORITIES; i++)
 		free_cpumask_var(cp->pri_to_cpu[i].mask);
 }

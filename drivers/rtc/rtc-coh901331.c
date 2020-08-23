@@ -43,8 +43,11 @@
 struct coh901331_port {
 	struct rtc_device *rtc;
 	struct clk *clk;
+<<<<<<< HEAD
 	u32 phybase;
 	u32 physize;
+=======
+>>>>>>> v3.18
 	void __iomem *virtbase;
 	int irq;
 #ifdef CONFIG_PM_SLEEP
@@ -152,12 +155,19 @@ static struct rtc_class_ops coh901331_ops = {
 
 static int __exit coh901331_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct coh901331_port *rtap = dev_get_drvdata(&pdev->dev);
 
 	if (rtap) {
 		clk_unprepare(rtap->clk);
 		platform_set_drvdata(pdev, NULL);
 	}
+=======
+	struct coh901331_port *rtap = platform_get_drvdata(pdev);
+
+	if (rtap)
+		clk_unprepare(rtap->clk);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -175,6 +185,7 @@ static int __init coh901331_probe(struct platform_device *pdev)
 		return -ENOMEM;
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
 	if (!res)
 		return -ENOENT;
 
@@ -188,6 +199,11 @@ static int __init coh901331_probe(struct platform_device *pdev)
 	rtap->virtbase = devm_ioremap(&pdev->dev, rtap->phybase, rtap->physize);
 	if (!rtap->virtbase)
 		return -ENOMEM;
+=======
+	rtap->virtbase  = devm_ioremap_resource(&pdev->dev, res);
+	if (IS_ERR(rtap->virtbase))
+		return PTR_ERR(rtap->virtbase);
+>>>>>>> v3.18
 
 	rtap->irq = platform_get_irq(pdev, 0);
 	if (devm_request_irq(&pdev->dev, rtap->irq, coh901331_interrupt, 0,
@@ -220,7 +236,10 @@ static int __init coh901331_probe(struct platform_device *pdev)
 	return 0;
 
  out_no_rtc:
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	clk_unprepare(rtap->clk);
 	return ret;
 }
@@ -267,18 +286,34 @@ static SIMPLE_DEV_PM_OPS(coh901331_pm_ops, coh901331_suspend, coh901331_resume);
 
 static void coh901331_shutdown(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct coh901331_port *rtap = dev_get_drvdata(&pdev->dev);
+=======
+	struct coh901331_port *rtap = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 
 	clk_enable(rtap->clk);
 	writel(0, rtap->virtbase + COH901331_IRQ_MASK);
 	clk_disable_unprepare(rtap->clk);
 }
 
+<<<<<<< HEAD
+=======
+static const struct of_device_id coh901331_dt_match[] = {
+	{ .compatible = "stericsson,coh901331" },
+	{},
+};
+
+>>>>>>> v3.18
 static struct platform_driver coh901331_driver = {
 	.driver = {
 		.name = "rtc-coh901331",
 		.owner = THIS_MODULE,
 		.pm = &coh901331_pm_ops,
+<<<<<<< HEAD
+=======
+		.of_match_table = coh901331_dt_match,
+>>>>>>> v3.18
 	},
 	.remove = __exit_p(coh901331_remove),
 	.shutdown = coh901331_shutdown,

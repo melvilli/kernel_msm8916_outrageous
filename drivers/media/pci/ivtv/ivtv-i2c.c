@@ -148,7 +148,12 @@ static const char * const hw_devicenames[] = {
 	"ir_video",		/* IVTV_HW_I2C_IR_RX_ADAPTEC */
 };
 
+<<<<<<< HEAD
 static int get_key_adaptec(struct IR_i2c *ir, u32 *ir_key, u32 *ir_raw)
+=======
+static int get_key_adaptec(struct IR_i2c *ir, enum rc_type *protocol,
+			   u32 *scancode, u8 *toggle)
+>>>>>>> v3.18
 {
 	unsigned char keybuf[4];
 
@@ -167,9 +172,15 @@ static int get_key_adaptec(struct IR_i2c *ir, u32 *ir_key, u32 *ir_raw)
 	keybuf[2] &= 0x7f;
 	keybuf[3] |= 0x80;
 
+<<<<<<< HEAD
 	*ir_key = keybuf[3] | keybuf[2] << 8 | keybuf[1] << 16 |keybuf[0] << 24;
 	*ir_raw = *ir_key;
 
+=======
+	*protocol = RC_TYPE_UNKNOWN;
+	*scancode = keybuf[3] | keybuf[2] << 8 | keybuf[1] << 16 |keybuf[0] << 24;
+	*toggle = 0;
+>>>>>>> v3.18
 	return 1;
 }
 

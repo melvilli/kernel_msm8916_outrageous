@@ -26,6 +26,7 @@
 #include <linux/netdevice.h>
 #include <linux/random.h>
 #include <asm/unaligned.h>
+<<<<<<< HEAD
 
 #ifdef __KERNEL__
 extern __be16		eth_type_trans(struct sk_buff *skb, struct net_device *dev);
@@ -49,6 +50,30 @@ extern int eth_validate_addr(struct net_device *dev);
 
 
 extern struct net_device *alloc_etherdev_mqs(int sizeof_priv, unsigned int txqs,
+=======
+#include <asm/bitsperlong.h>
+
+#ifdef __KERNEL__
+u32 eth_get_headlen(void *data, unsigned int max_len);
+__be16 eth_type_trans(struct sk_buff *skb, struct net_device *dev);
+extern const struct header_ops eth_header_ops;
+
+int eth_header(struct sk_buff *skb, struct net_device *dev, unsigned short type,
+	       const void *daddr, const void *saddr, unsigned len);
+int eth_rebuild_header(struct sk_buff *skb);
+int eth_header_parse(const struct sk_buff *skb, unsigned char *haddr);
+int eth_header_cache(const struct neighbour *neigh, struct hh_cache *hh,
+		     __be16 type);
+void eth_header_cache_update(struct hh_cache *hh, const struct net_device *dev,
+			     const unsigned char *haddr);
+int eth_prepare_mac_addr_change(struct net_device *dev, void *p);
+void eth_commit_mac_addr_change(struct net_device *dev, void *p);
+int eth_mac_addr(struct net_device *dev, void *p);
+int eth_change_mtu(struct net_device *dev, int new_mtu);
+int eth_validate_addr(struct net_device *dev);
+
+struct net_device *alloc_etherdev_mqs(int sizeof_priv, unsigned int txqs,
+>>>>>>> v3.18
 					    unsigned int rxqs);
 #define alloc_etherdev(sizeof_priv) alloc_etherdev_mq(sizeof_priv, 1)
 #define alloc_etherdev_mq(sizeof_priv, count) alloc_etherdev_mqs(sizeof_priv, count, count)
@@ -63,6 +88,11 @@ static const u8 eth_reserved_addr_base[ETH_ALEN] __aligned(2) =
  *
  * Return true if address is link local reserved addr (01:80:c2:00:00:0X) per
  * IEEE 802.1Q 8.6.3 Frame filtering.
+<<<<<<< HEAD
+=======
+ *
+ * Please note: addr must be aligned to u16.
+>>>>>>> v3.18
  */
 static inline bool is_link_local_ether_addr(const u8 *addr)
 {
@@ -70,7 +100,16 @@ static inline bool is_link_local_ether_addr(const u8 *addr)
 	static const __be16 *b = (const __be16 *)eth_reserved_addr_base;
 	static const __be16 m = cpu_to_be16(0xfff0);
 
+<<<<<<< HEAD
 	return ((a[0] ^ b[0]) | (a[1] ^ b[1]) | ((a[2] ^ b[2]) & m)) == 0;
+=======
+#if defined(CONFIG_HAVE_EFFICIENT_UNALIGNED_ACCESS)
+	return (((*(const u32 *)addr) ^ (*(const u32 *)b)) |
+		((a[2] ^ b[2]) & m)) == 0;
+#else
+	return ((a[0] ^ b[0]) | (a[1] ^ b[1]) | ((a[2] ^ b[2]) & m)) == 0;
+#endif
+>>>>>>> v3.18
 }
 
 /**
@@ -78,10 +117,25 @@ static inline bool is_link_local_ether_addr(const u8 *addr)
  * @addr: Pointer to a six-byte array containing the Ethernet address
  *
  * Return true if the address is all zeroes.
+<<<<<<< HEAD
  */
 static inline bool is_zero_ether_addr(const u8 *addr)
 {
 	return !(addr[0] | addr[1] | addr[2] | addr[3] | addr[4] | addr[5]);
+=======
+ *
+ * Please note: addr must be aligned to u16.
+ */
+static inline bool is_zero_ether_addr(const u8 *addr)
+{
+#if defined(CONFIG_HAVE_EFFICIENT_UNALIGNED_ACCESS)
+	return ((*(const u32 *)addr) | (*(const u16 *)(addr + 4))) == 0;
+#else
+	return (*(const u16 *)(addr + 0) |
+		*(const u16 *)(addr + 2) |
+		*(const u16 *)(addr + 4)) == 0;
+#endif
+>>>>>>> v3.18
 }
 
 /**
@@ -112,10 +166,21 @@ static inline bool is_local_ether_addr(const u8 *addr)
  * @addr: Pointer to a six-byte array containing the Ethernet address
  *
  * Return true if the address is the broadcast address.
+<<<<<<< HEAD
  */
 static inline bool is_broadcast_ether_addr(const u8 *addr)
 {
 	return (addr[0] & addr[1] & addr[2] & addr[3] & addr[4] & addr[5]) == 0xff;
+=======
+ *
+ * Please note: addr must be aligned to u16.
+ */
+static inline bool is_broadcast_ether_addr(const u8 *addr)
+{
+	return (*(const u16 *)(addr + 0) &
+		*(const u16 *)(addr + 2) &
+		*(const u16 *)(addr + 4)) == 0xffff;
+>>>>>>> v3.18
 }
 
 /**
@@ -137,6 +202,11 @@ static inline bool is_unicast_ether_addr(const u8 *addr)
  * a multicast address, and is not FF:FF:FF:FF:FF:FF.
  *
  * Return true if the address is valid.
+<<<<<<< HEAD
+=======
+ *
+ * Please note: addr must be aligned to u16.
+>>>>>>> v3.18
  */
 static inline bool is_valid_ether_addr(const u8 *addr)
 {
@@ -199,6 +269,7 @@ static inline void eth_hw_addr_random(struct net_device *dev)
 }
 
 /**
+<<<<<<< HEAD
  * compare_ether_addr - Compare two Ethernet addresses
  * @addr1: Pointer to a six-byte array containing the Ethernet address
  * @addr2: Pointer other six-byte array containing the Ethernet address
@@ -213,6 +284,42 @@ static inline unsigned compare_ether_addr(const u8 *addr1, const u8 *addr2)
 
 	BUILD_BUG_ON(ETH_ALEN != 6);
 	return ((a[0] ^ b[0]) | (a[1] ^ b[1]) | (a[2] ^ b[2])) != 0;
+=======
+ * ether_addr_copy - Copy an Ethernet address
+ * @dst: Pointer to a six-byte array Ethernet address destination
+ * @src: Pointer to a six-byte array Ethernet address source
+ *
+ * Please note: dst & src must both be aligned to u16.
+ */
+static inline void ether_addr_copy(u8 *dst, const u8 *src)
+{
+#if defined(CONFIG_HAVE_EFFICIENT_UNALIGNED_ACCESS)
+	*(u32 *)dst = *(const u32 *)src;
+	*(u16 *)(dst + 4) = *(const u16 *)(src + 4);
+#else
+	u16 *a = (u16 *)dst;
+	const u16 *b = (const u16 *)src;
+
+	a[0] = b[0];
+	a[1] = b[1];
+	a[2] = b[2];
+#endif
+}
+
+/**
+ * eth_hw_addr_inherit - Copy dev_addr from another net_device
+ * @dst: pointer to net_device to copy dev_addr to
+ * @src: pointer to net_device to copy dev_addr from
+ *
+ * Copy the Ethernet address from one net_device to another along with
+ * the address attributes (addr_assign_type).
+ */
+static inline void eth_hw_addr_inherit(struct net_device *dst,
+				       struct net_device *src)
+{
+	dst->addr_assign_type = src->addr_assign_type;
+	ether_addr_copy(dst->dev_addr, src->dev_addr);
+>>>>>>> v3.18
 }
 
 /**
@@ -221,6 +328,7 @@ static inline unsigned compare_ether_addr(const u8 *addr1, const u8 *addr2)
  * @addr2: Pointer other six-byte array containing the Ethernet address
  *
  * Compare two Ethernet addresses, returns true if equal
+<<<<<<< HEAD
  */
 static inline bool ether_addr_equal(const u8 *addr1, const u8 *addr2)
 {
@@ -233,6 +341,23 @@ static inline unsigned long zap_last_2bytes(unsigned long value)
 	return value >> 16;
 #else
 	return value << 16;
+=======
+ *
+ * Please note: addr1 & addr2 must both be aligned to u16.
+ */
+static inline bool ether_addr_equal(const u8 *addr1, const u8 *addr2)
+{
+#if defined(CONFIG_HAVE_EFFICIENT_UNALIGNED_ACCESS)
+	u32 fold = ((*(const u32 *)addr1) ^ (*(const u32 *)addr2)) |
+		   ((*(const u16 *)(addr1 + 4)) ^ (*(const u16 *)(addr2 + 4)));
+
+	return fold == 0;
+#else
+	const u16 *a = (const u16 *)addr1;
+	const u16 *b = (const u16 *)addr2;
+
+	return ((a[0] ^ b[0]) | (a[1] ^ b[1]) | (a[2] ^ b[2])) == 0;
+>>>>>>> v3.18
 #endif
 }
 
@@ -253,6 +378,7 @@ static inline unsigned long zap_last_2bytes(unsigned long value)
 static inline bool ether_addr_equal_64bits(const u8 addr1[6+2],
 					   const u8 addr2[6+2])
 {
+<<<<<<< HEAD
 #ifdef CONFIG_HAVE_EFFICIENT_UNALIGNED_ACCESS
 	unsigned long fold = ((*(unsigned long *)addr1) ^
 			      (*(unsigned long *)addr2));
@@ -263,12 +389,43 @@ static inline bool ether_addr_equal_64bits(const u8 addr1[6+2],
 	fold |= zap_last_2bytes((*(unsigned long *)(addr1 + 4)) ^
 				(*(unsigned long *)(addr2 + 4)));
 	return fold == 0;
+=======
+#if defined(CONFIG_HAVE_EFFICIENT_UNALIGNED_ACCESS) && BITS_PER_LONG == 64
+	u64 fold = (*(const u64 *)addr1) ^ (*(const u64 *)addr2);
+
+#ifdef __BIG_ENDIAN
+	return (fold >> 16) == 0;
+#else
+	return (fold << 16) == 0;
+#endif
+>>>>>>> v3.18
 #else
 	return ether_addr_equal(addr1, addr2);
 #endif
 }
 
 /**
+<<<<<<< HEAD
+=======
+ * ether_addr_equal_unaligned - Compare two not u16 aligned Ethernet addresses
+ * @addr1: Pointer to a six-byte array containing the Ethernet address
+ * @addr2: Pointer other six-byte array containing the Ethernet address
+ *
+ * Compare two Ethernet addresses, returns true if equal
+ *
+ * Please note: Use only when any Ethernet address may not be u16 aligned.
+ */
+static inline bool ether_addr_equal_unaligned(const u8 *addr1, const u8 *addr2)
+{
+#if defined(CONFIG_HAVE_EFFICIENT_UNALIGNED_ACCESS)
+	return ether_addr_equal(addr1, addr2);
+#else
+	return memcmp(addr1, addr2, ETH_ALEN) == 0;
+#endif
+}
+
+/**
+>>>>>>> v3.18
  * is_etherdev_addr - Tell if given Ethernet address belongs to the device.
  * @dev: Pointer to a device structure
  * @addr: Pointer to a six-byte array containing the Ethernet address

@@ -25,8 +25,17 @@
 #else
 #define CAC_BASE		_AC(0x80000000, UL)
 #endif
+<<<<<<< HEAD
 #define IO_BASE			_AC(0xa0000000, UL)
 #define UNCAC_BASE		_AC(0xa0000000, UL)
+=======
+#ifndef IO_BASE
+#define IO_BASE			_AC(0xa0000000, UL)
+#endif
+#ifndef UNCAC_BASE
+#define UNCAC_BASE		_AC(0xa0000000, UL)
+#endif
+>>>>>>> v3.18
 
 #ifndef MAP_BASE
 #ifdef CONFIG_KVM_GUEST
@@ -90,11 +99,16 @@
 #endif
 
 #ifndef FIXADDR_TOP
+<<<<<<< HEAD
 #ifdef CONFIG_KVM_GUEST
 #define FIXADDR_TOP		((unsigned long)(long)(int)0x7ffe0000)
 #else
 #define FIXADDR_TOP		((unsigned long)(long)(int)0xfffe0000)
 #endif
 #endif
+=======
+#define FIXADDR_TOP		((unsigned long)(long)(int)0xfffe0000)
+#endif
+>>>>>>> v3.18
 
 #endif /* __ASM_MACH_GENERIC_SPACES_H */

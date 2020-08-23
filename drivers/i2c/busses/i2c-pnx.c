@@ -23,7 +23,11 @@
 #include <linux/err.h>
 #include <linux/clk.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
 #include <linux/of_i2c.h>
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 
 #define I2C_PNX_TIMEOUT_DEFAULT		10 /* msec */
 #define I2C_PNX_SPEED_KHZ_DEFAULT	100
@@ -595,7 +599,11 @@ static struct i2c_algorithm pnx_algorithm = {
 	.functionality = i2c_pnx_func,
 };
 
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 static int i2c_pnx_controller_suspend(struct device *dev)
 {
 	struct i2c_pnx_algo_data *alg_data = dev_get_drvdata(dev);
@@ -628,11 +636,17 @@ static int i2c_pnx_probe(struct platform_device *pdev)
 	struct resource *res;
 	u32 speed = I2C_PNX_SPEED_KHZ_DEFAULT * 1000;
 
+<<<<<<< HEAD
 	alg_data = kzalloc(sizeof(*alg_data), GFP_KERNEL);
 	if (!alg_data) {
 		ret = -ENOMEM;
 		goto err_kzalloc;
 	}
+=======
+	alg_data = devm_kzalloc(&pdev->dev, sizeof(*alg_data), GFP_KERNEL);
+	if (!alg_data)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	platform_set_drvdata(pdev, alg_data);
 
@@ -657,11 +671,17 @@ static int i2c_pnx_probe(struct platform_device *pdev)
 		 */
 	}
 #endif
+<<<<<<< HEAD
 	alg_data->clk = clk_get(&pdev->dev, NULL);
 	if (IS_ERR(alg_data->clk)) {
 		ret = PTR_ERR(alg_data->clk);
 		goto out_drvdata;
 	}
+=======
+	alg_data->clk = devm_clk_get(&pdev->dev, NULL);
+	if (IS_ERR(alg_data->clk))
+		return PTR_ERR(alg_data->clk);
+>>>>>>> v3.18
 
 	init_timer(&alg_data->mif.timer);
 	alg_data->mif.timer.function = i2c_pnx_timeout;
@@ -672,6 +692,7 @@ static int i2c_pnx_probe(struct platform_device *pdev)
 
 	/* Register I/O resource */
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
 	if (!res) {
 		dev_err(&pdev->dev, "Unable to get mem resource.\n");
 		ret = -EBUSY;
@@ -697,6 +718,15 @@ static int i2c_pnx_probe(struct platform_device *pdev)
 	ret = clk_enable(alg_data->clk);
 	if (ret)
 		goto out_unmap;
+=======
+	alg_data->ioaddr = devm_ioremap_resource(&pdev->dev, res);
+	if (IS_ERR(alg_data->ioaddr))
+		return PTR_ERR(alg_data->ioaddr);
+
+	ret = clk_enable(alg_data->clk);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 
 	freq = clk_get_rate(alg_data->clk);
 
@@ -727,10 +757,18 @@ static int i2c_pnx_probe(struct platform_device *pdev)
 	alg_data->irq = platform_get_irq(pdev, 0);
 	if (alg_data->irq < 0) {
 		dev_err(&pdev->dev, "Failed to get IRQ from platform resource\n");
+<<<<<<< HEAD
 		goto out_irq;
 	}
 	ret = request_irq(alg_data->irq, i2c_pnx_interrupt,
 			0, pdev->name, alg_data);
+=======
+		ret = alg_data->irq;
+		goto out_clock;
+	}
+	ret = devm_request_irq(&pdev->dev, alg_data->irq, i2c_pnx_interrupt,
+			       0, pdev->name, alg_data);
+>>>>>>> v3.18
 	if (ret)
 		goto out_clock;
 
@@ -738,16 +776,23 @@ static int i2c_pnx_probe(struct platform_device *pdev)
 	ret = i2c_add_numbered_adapter(&alg_data->adapter);
 	if (ret < 0) {
 		dev_err(&pdev->dev, "I2C: Failed to add bus\n");
+<<<<<<< HEAD
 		goto out_irq;
 	}
 
 	of_i2c_register_devices(&alg_data->adapter);
 
+=======
+		goto out_clock;
+	}
+
+>>>>>>> v3.18
 	dev_dbg(&pdev->dev, "%s: Master at %#8x, irq %d.\n",
 		alg_data->adapter.name, res->start, alg_data->irq);
 
 	return 0;
 
+<<<<<<< HEAD
 out_irq:
 	free_irq(alg_data->irq, alg_data);
 out_clock:
@@ -761,6 +806,10 @@ out_clkget:
 out_drvdata:
 	kfree(alg_data);
 err_kzalloc:
+=======
+out_clock:
+	clk_disable(alg_data->clk);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -768,6 +817,7 @@ static int i2c_pnx_remove(struct platform_device *pdev)
 {
 	struct i2c_pnx_algo_data *alg_data = platform_get_drvdata(pdev);
 
+<<<<<<< HEAD
 	free_irq(alg_data->irq, alg_data);
 	i2c_del_adapter(&alg_data->adapter);
 	clk_disable(alg_data->clk);
@@ -775,6 +825,10 @@ static int i2c_pnx_remove(struct platform_device *pdev)
 	release_mem_region(alg_data->base, I2C_PNX_REGION_SIZE);
 	clk_put(alg_data->clk);
 	kfree(alg_data);
+=======
+	i2c_del_adapter(&alg_data->adapter);
+	clk_disable(alg_data->clk);
+>>>>>>> v3.18
 
 	return 0;
 }

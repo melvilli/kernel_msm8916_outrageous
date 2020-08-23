@@ -106,7 +106,11 @@ snd_seq_oss_synth_register(struct snd_seq_device *dev)
 	unsigned long flags;
 
 	if ((rec = kzalloc(sizeof(*rec), GFP_KERNEL)) == NULL) {
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "can't malloc synth info\n");
+=======
+		pr_err("ALSA: seq_oss: can't malloc synth info\n");
+>>>>>>> v3.18
 		return -ENOMEM;
 	}
 	rec->seq_device = -1;
@@ -130,7 +134,11 @@ snd_seq_oss_synth_register(struct snd_seq_device *dev)
 	if (i >= max_synth_devs) {
 		if (max_synth_devs >= SNDRV_SEQ_OSS_MAX_SYNTH_DEVS) {
 			spin_unlock_irqrestore(&register_lock, flags);
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "no more synth slot\n");
+=======
+			pr_err("ALSA: seq_oss: no more synth slot\n");
+>>>>>>> v3.18
 			kfree(rec);
 			return -ENOMEM;
 		}
@@ -138,7 +146,10 @@ snd_seq_oss_synth_register(struct snd_seq_device *dev)
 	}
 	rec->seq_device = i;
 	synth_devs[i] = rec;
+<<<<<<< HEAD
 	debug_printk(("synth %s registered %d\n", rec->name, i));
+=======
+>>>>>>> v3.18
 	spin_unlock_irqrestore(&register_lock, flags);
 	dev->driver_data = rec;
 #ifdef SNDRV_OSS_INFO_DEV_SYNTH
@@ -163,7 +174,11 @@ snd_seq_oss_synth_unregister(struct snd_seq_device *dev)
 	}
 	if (index >= max_synth_devs) {
 		spin_unlock_irqrestore(&register_lock, flags);
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "can't unregister synth\n");
+=======
+		pr_err("ALSA: seq_oss: can't unregister synth\n");
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 	synth_devs[index] = NULL;
@@ -248,7 +263,11 @@ snd_seq_oss_synth_setup(struct seq_oss_devinfo *dp)
 		if (info->nr_voices > 0) {
 			info->ch = kcalloc(info->nr_voices, sizeof(struct seq_oss_chinfo), GFP_KERNEL);
 			if (!info->ch) {
+<<<<<<< HEAD
 				snd_printk(KERN_ERR "Cannot malloc\n");
+=======
+				pr_err("ALSA: seq_oss: Cannot malloc voices\n");
+>>>>>>> v3.18
 				rec->oper.close(&info->arg);
 				module_put(rec->oper.owner);
 				snd_use_lock_free(&rec->use_lock);
@@ -256,7 +275,10 @@ snd_seq_oss_synth_setup(struct seq_oss_devinfo *dp)
 			}
 			reset_channels(info);
 		}
+<<<<<<< HEAD
 		debug_printk(("synth %d assigned\n", i));
+=======
+>>>>>>> v3.18
 		info->opened++;
 		rec->opened++;
 		dp->synth_opened++;
@@ -310,7 +332,11 @@ snd_seq_oss_synth_cleanup(struct seq_oss_devinfo *dp)
 	struct seq_oss_synth *rec;
 	struct seq_oss_synthinfo *info;
 
+<<<<<<< HEAD
 	if (snd_BUG_ON(dp->max_synthdev > SNDRV_SEQ_OSS_MAX_SYNTH_DEVS))
+=======
+	if (snd_BUG_ON(dp->max_synthdev >= SNDRV_SEQ_OSS_MAX_SYNTH_DEVS))
+>>>>>>> v3.18
 		return;
 	for (i = 0; i < dp->max_synthdev; i++) {
 		info = &dp->synths[i];
@@ -326,7 +352,10 @@ snd_seq_oss_synth_cleanup(struct seq_oss_devinfo *dp)
 			if (rec == NULL)
 				continue;
 			if (rec->opened > 0) {
+<<<<<<< HEAD
 				debug_printk(("synth %d closed\n", i));
+=======
+>>>>>>> v3.18
 				rec->oper.close(&info->arg);
 				module_put(rec->oper.owner);
 				rec->opened = 0;

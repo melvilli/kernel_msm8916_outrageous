@@ -66,6 +66,7 @@ const struct imx_imx_ssi_data imx35_imx_ssi_data[] __initconst = {
 };
 #endif /* ifdef CONFIG_SOC_IMX35 */
 
+<<<<<<< HEAD
 #ifdef CONFIG_SOC_IMX51
 const struct imx_imx_ssi_data imx51_imx_ssi_data[] __initconst = {
 #define imx51_imx_ssi_data_entry(_id, _hwid)				\
@@ -86,6 +87,8 @@ const struct imx_imx_ssi_data imx53_imx_ssi_data[] __initconst = {
 };
 #endif /* ifdef CONFIG_SOC_IMX53 */
 
+=======
+>>>>>>> v3.18
 struct platform_device *__init imx_add_imx_ssi(
 		const struct imx_imx_ssi_data *data,
 		const struct imx_ssi_platform_data *pdata)

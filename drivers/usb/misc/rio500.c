@@ -36,7 +36,10 @@
 #include <linux/errno.h>
 #include <linux/random.h>
 #include <linux/poll.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/spinlock.h>
 #include <linux/usb.h>

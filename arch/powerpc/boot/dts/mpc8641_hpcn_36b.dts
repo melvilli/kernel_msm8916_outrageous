@@ -211,25 +211,37 @@
 					interrupt-parent = <&mpic>;
 					interrupts = <10 1>;
 					reg = <0>;
+<<<<<<< HEAD
 					device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 				};
 				phy1: ethernet-phy@1 {
 					interrupt-parent = <&mpic>;
 					interrupts = <10 1>;
 					reg = <1>;
+<<<<<<< HEAD
 					device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 				};
 				phy2: ethernet-phy@2 {
 					interrupt-parent = <&mpic>;
 					interrupts = <10 1>;
 					reg = <2>;
+<<<<<<< HEAD
 					device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 				};
 				phy3: ethernet-phy@3 {
 					interrupt-parent = <&mpic>;
 					interrupts = <10 1>;
 					reg = <3>;
+<<<<<<< HEAD
 					device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 				};
 				tbi0: tbi-phy@11 {
 					reg = <0x11>;

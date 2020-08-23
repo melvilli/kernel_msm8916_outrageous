@@ -62,7 +62,26 @@ static struct file_system_type bm_fs_type;
 static struct vfsmount *bm_mnt;
 static int entry_count;
 
+<<<<<<< HEAD
 /* 
+=======
+/*
+ * Max length of the register string.  Determined by:
+ *  - 7 delimiters
+ *  - name:   ~50 bytes
+ *  - type:   1 byte
+ *  - offset: 3 bytes (has to be smaller than BINPRM_BUF_SIZE)
+ *  - magic:  128 bytes (512 in escaped form)
+ *  - mask:   128 bytes (512 in escaped form)
+ *  - interp: ~50 bytes
+ *  - flags:  5 bytes
+ * Round that up a bit, and then back off to hold the internal data
+ * (like struct Node).
+ */
+#define MAX_REGISTER_LENGTH 1920
+
+/*
+>>>>>>> v3.18
  * Check if we support the binfmt
  * if we do, return the node, else NULL
  * locking is done in load_misc_binary
@@ -279,7 +298,11 @@ static Node *create_entry(const char __user *buffer, size_t count)
 
 	/* some sanity checks */
 	err = -EINVAL;
+<<<<<<< HEAD
 	if ((count < 11) || (count > 256))
+=======
+	if ((count < 11) || (count > MAX_REGISTER_LENGTH))
+>>>>>>> v3.18
 		goto out;
 
 	err = -ENOMEM;
@@ -396,12 +419,20 @@ static int parse_command(const char __user *buffer, size_t count)
 {
 	char s[4];
 
+<<<<<<< HEAD
 	if (!count)
 		return 0;
+=======
+>>>>>>> v3.18
 	if (count > 3)
 		return -EINVAL;
 	if (copy_from_user(s, buffer, count))
 		return -EFAULT;
+<<<<<<< HEAD
+=======
+	if (!count)
+		return 0;
+>>>>>>> v3.18
 	if (s[count-1] == '\n')
 		count--;
 	if (count == 1 && s[0] == '0')
@@ -656,6 +687,10 @@ static ssize_t bm_status_write(struct file * file, const char __user * buffer,
 
 			mutex_unlock(&root->d_inode->i_mutex);
 			dput(root);
+<<<<<<< HEAD
+=======
+			break;
+>>>>>>> v3.18
 		default: return res;
 	}
 	return count;

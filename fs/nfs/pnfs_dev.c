@@ -29,6 +29,12 @@
  */
 
 #include <linux/export.h>
+<<<<<<< HEAD
+=======
+#include <linux/nfs_fs.h>
+#include "nfs4session.h"
+#include "internal.h"
+>>>>>>> v3.18
 #include "pnfs.h"
 
 #define NFSDBG_FACILITY		NFSDBG_PNFS
@@ -89,6 +95,77 @@ _lookup_deviceid(const struct pnfs_layoutdriver_type *ld,
 	return NULL;
 }
 
+<<<<<<< HEAD
+=======
+static struct nfs4_deviceid_node *
+nfs4_get_device_info(struct nfs_server *server,
+		const struct nfs4_deviceid *dev_id,
+		struct rpc_cred *cred, gfp_t gfp_flags)
+{
+	struct nfs4_deviceid_node *d = NULL;
+	struct pnfs_device *pdev = NULL;
+	struct page **pages = NULL;
+	u32 max_resp_sz;
+	int max_pages;
+	int rc, i;
+
+	/*
+	 * Use the session max response size as the basis for setting
+	 * GETDEVICEINFO's maxcount
+	 */
+	max_resp_sz = server->nfs_client->cl_session->fc_attrs.max_resp_sz;
+	if (server->pnfs_curr_ld->max_deviceinfo_size &&
+	    server->pnfs_curr_ld->max_deviceinfo_size < max_resp_sz)
+		max_resp_sz = server->pnfs_curr_ld->max_deviceinfo_size;
+	max_pages = nfs_page_array_len(0, max_resp_sz);
+	dprintk("%s: server %p max_resp_sz %u max_pages %d\n",
+		__func__, server, max_resp_sz, max_pages);
+
+	pdev = kzalloc(sizeof(*pdev), gfp_flags);
+	if (!pdev)
+		return NULL;
+
+	pages = kcalloc(max_pages, sizeof(struct page *), gfp_flags);
+	if (!pages)
+		goto out_free_pdev;
+
+	for (i = 0; i < max_pages; i++) {
+		pages[i] = alloc_page(gfp_flags);
+		if (!pages[i])
+			goto out_free_pages;
+	}
+
+	memcpy(&pdev->dev_id, dev_id, sizeof(*dev_id));
+	pdev->layout_type = server->pnfs_curr_ld->id;
+	pdev->pages = pages;
+	pdev->pgbase = 0;
+	pdev->pglen = max_resp_sz;
+	pdev->mincount = 0;
+	pdev->maxcount = max_resp_sz - nfs41_maxgetdevinfo_overhead;
+
+	rc = nfs4_proc_getdeviceinfo(server, pdev, cred);
+	dprintk("%s getdevice info returns %d\n", __func__, rc);
+	if (rc)
+		goto out_free_pages;
+
+	/*
+	 * Found new device, need to decode it and then add it to the
+	 * list of known devices for this mountpoint.
+	 */
+	d = server->pnfs_curr_ld->alloc_deviceid_node(server, pdev,
+			gfp_flags);
+
+out_free_pages:
+	for (i = 0; i < max_pages; i++)
+		__free_page(pages[i]);
+	kfree(pages);
+out_free_pdev:
+	kfree(pdev);
+	dprintk("<-- %s d %p\n", __func__, d);
+	return d;
+}
+
+>>>>>>> v3.18
 /*
  * Lookup a deviceid in cache and get a reference count on it if found
  *
@@ -96,14 +173,24 @@ _lookup_deviceid(const struct pnfs_layoutdriver_type *ld,
  * @id deviceid to look up
  */
 static struct nfs4_deviceid_node *
+<<<<<<< HEAD
 _find_get_deviceid(const struct pnfs_layoutdriver_type *ld,
 		   const struct nfs_client *clp, const struct nfs4_deviceid *id,
 		   long hash)
+=======
+__nfs4_find_get_deviceid(struct nfs_server *server,
+		const struct nfs4_deviceid *id, long hash)
+>>>>>>> v3.18
 {
 	struct nfs4_deviceid_node *d;
 
 	rcu_read_lock();
+<<<<<<< HEAD
 	d = _lookup_deviceid(ld, clp, id, hash);
+=======
+	d = _lookup_deviceid(server->pnfs_curr_ld, server->nfs_client, id,
+			hash);
+>>>>>>> v3.18
 	if (d != NULL)
 		atomic_inc(&d->ref);
 	rcu_read_unlock();
@@ -111,10 +198,40 @@ _find_get_deviceid(const struct pnfs_layoutdriver_type *ld,
 }
 
 struct nfs4_deviceid_node *
+<<<<<<< HEAD
 nfs4_find_get_deviceid(const struct pnfs_layoutdriver_type *ld,
 		       const struct nfs_client *clp, const struct nfs4_deviceid *id)
 {
 	return _find_get_deviceid(ld, clp, id, nfs4_deviceid_hash(id));
+=======
+nfs4_find_get_deviceid(struct nfs_server *server,
+		const struct nfs4_deviceid *id, struct rpc_cred *cred,
+		gfp_t gfp_mask)
+{
+	long hash = nfs4_deviceid_hash(id);
+	struct nfs4_deviceid_node *d, *new;
+
+	d = __nfs4_find_get_deviceid(server, id, hash);
+	if (d)
+		return d;
+
+	new = nfs4_get_device_info(server, id, cred, gfp_mask);
+	if (!new)
+		return new;
+
+	spin_lock(&nfs4_deviceid_lock);
+	d = __nfs4_find_get_deviceid(server, id, hash);
+	if (d) {
+		spin_unlock(&nfs4_deviceid_lock);
+		server->pnfs_curr_ld->free_deviceid_node(new);
+		return d;
+	}
+	hlist_add_head_rcu(&new->node, &nfs4_deviceid_cache[hash]);
+	atomic_inc(&new->ref);
+	spin_unlock(&nfs4_deviceid_lock);
+
+	return new;
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(nfs4_find_get_deviceid);
 
@@ -151,15 +268,24 @@ nfs4_delete_deviceid(const struct pnfs_layoutdriver_type *ld,
 EXPORT_SYMBOL_GPL(nfs4_delete_deviceid);
 
 void
+<<<<<<< HEAD
 nfs4_init_deviceid_node(struct nfs4_deviceid_node *d,
 			const struct pnfs_layoutdriver_type *ld,
 			const struct nfs_client *nfs_client,
+=======
+nfs4_init_deviceid_node(struct nfs4_deviceid_node *d, struct nfs_server *server,
+>>>>>>> v3.18
 			const struct nfs4_deviceid *id)
 {
 	INIT_HLIST_NODE(&d->node);
 	INIT_HLIST_NODE(&d->tmpnode);
+<<<<<<< HEAD
 	d->ld = ld;
 	d->nfs_client = nfs_client;
+=======
+	d->ld = server->pnfs_curr_ld;
+	d->nfs_client = server->nfs_client;
+>>>>>>> v3.18
 	d->flags = 0;
 	d->deviceid = *id;
 	atomic_set(&d->ref, 1);
@@ -167,6 +293,7 @@ nfs4_init_deviceid_node(struct nfs4_deviceid_node *d,
 EXPORT_SYMBOL_GPL(nfs4_init_deviceid_node);
 
 /*
+<<<<<<< HEAD
  * Uniquely initialize and insert a deviceid node into cache
  *
  * @new new deviceid node
@@ -200,6 +327,8 @@ nfs4_insert_deviceid_node(struct nfs4_deviceid_node *new)
 EXPORT_SYMBOL_GPL(nfs4_insert_deviceid_node);
 
 /*
+=======
+>>>>>>> v3.18
  * Dereference a deviceid node and delete it when its reference count drops
  * to zero.
  *
@@ -299,4 +428,7 @@ nfs4_deviceid_mark_client_invalid(struct nfs_client *clp)
 	}
 	rcu_read_unlock();
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18

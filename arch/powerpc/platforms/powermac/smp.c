@@ -192,7 +192,11 @@ static int psurge_secondary_ipi_init(void)
 {
 	int rc = -ENOMEM;
 
+<<<<<<< HEAD
 	psurge_host = irq_domain_add_nomap(NULL, 0, &psurge_host_ops, NULL);
+=======
+	psurge_host = irq_domain_add_nomap(NULL, ~0, &psurge_host_ops, NULL);
+>>>>>>> v3.18
 
 	if (psurge_host)
 		psurge_secondary_virq = irq_create_direct_mapping(psurge_host);
@@ -577,7 +581,11 @@ static void __init smp_core99_setup_i2c_hwsync(int ncpus)
 	int ok;
 
 	/* Look for the clock chip */
+<<<<<<< HEAD
 	while ((cc = of_find_node_by_name(cc, "i2c-hwclock")) != NULL) {
+=======
+	for_each_node_by_name(cc, "i2c-hwclock") {
+>>>>>>> v3.18
 		p = of_get_parent(cc);
 		ok = p && of_device_is_compatible(p, "uni-n-i2c");
 		of_node_put(p);
@@ -885,7 +893,11 @@ static int smp_core99_cpu_notify(struct notifier_block *self,
 	return NOTIFY_OK;
 }
 
+<<<<<<< HEAD
 static struct notifier_block __cpuinitdata smp_core99_cpu_nb = {
+=======
+static struct notifier_block smp_core99_cpu_nb = {
+>>>>>>> v3.18
 	.notifier_call	= smp_core99_cpu_notify,
 };
 #endif /* CONFIG_HOTPLUG_CPU */

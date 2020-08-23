@@ -27,19 +27,32 @@
 # define PR_TSC_SIGSEGV		2   /* throw a SIGSEGV instead of reading the TSC */
 #endif
 
+<<<<<<< HEAD
 uint64_t rdtsc() {
+=======
+static uint64_t rdtsc(void)
+{
+>>>>>>> v3.18
 uint32_t lo, hi;
 /* We cannot use "=A", since this would use %rax on x86_64 */
 __asm__ __volatile__ ("rdtsc" : "=a" (lo), "=d" (hi));
 return (uint64_t)hi << 32 | lo;
 }
 
+<<<<<<< HEAD
 void sigsegv_expect(int sig)
+=======
+static void sigsegv_expect(int sig)
+>>>>>>> v3.18
 {
 	/* */
 }
 
+<<<<<<< HEAD
 void segvtask(void)
+=======
+static void segvtask(void)
+>>>>>>> v3.18
 {
 	if (prctl(PR_SET_TSC, PR_TSC_SIGSEGV) < 0)
 	{
@@ -54,13 +67,21 @@ void segvtask(void)
 }
 
 
+<<<<<<< HEAD
 void sigsegv_fail(int sig)
+=======
+static void sigsegv_fail(int sig)
+>>>>>>> v3.18
 {
 	fprintf(stderr, "FATAL ERROR, rdtsc() failed while enabled\n");
 	exit(0);
 }
 
+<<<<<<< HEAD
 void rdtsctask(void)
+=======
+static void rdtsctask(void)
+>>>>>>> v3.18
 {
 	if (prctl(PR_SET_TSC, PR_TSC_ENABLE) < 0)
 	{

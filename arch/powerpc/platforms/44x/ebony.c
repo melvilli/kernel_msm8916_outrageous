@@ -28,7 +28,11 @@
 #include <asm/pci-bridge.h>
 #include <asm/ppc4xx.h>
 
+<<<<<<< HEAD
 static __initdata struct of_device_id ebony_of_bus[] = {
+=======
+static const struct of_device_id ebony_of_bus[] __initconst = {
+>>>>>>> v3.18
 	{ .compatible = "ibm,plb4", },
 	{ .compatible = "ibm,opb", },
 	{ .compatible = "ibm,ebc", },

@@ -30,7 +30,10 @@
 
 #include <linux/module.h>
 #include <linux/ioport.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/gameport.h>
 #include <linux/slab.h>
 #include <linux/pci.h>

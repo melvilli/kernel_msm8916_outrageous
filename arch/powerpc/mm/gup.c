@@ -34,8 +34,18 @@ static noinline int gup_pte_range(pmd_t pmd, unsigned long addr,
 
 	ptep = pte_offset_kernel(&pmd, addr);
 	do {
+<<<<<<< HEAD
 		pte_t pte = *ptep;
 		struct page *page;
+=======
+		pte_t pte = ACCESS_ONCE(*ptep);
+		struct page *page;
+		/*
+		 * Similar to the PMD case, NUMA hinting must take slow path
+		 */
+		if (pte_numa(pte))
+			return 0;
+>>>>>>> v3.18
 
 		if ((pte_val(pte) & mask) != result)
 			return 0;
@@ -63,12 +73,35 @@ static int gup_pmd_range(pud_t pud, unsigned long addr, unsigned long end,
 
 	pmdp = pmd_offset(&pud, addr);
 	do {
+<<<<<<< HEAD
 		pmd_t pmd = *pmdp;
 
 		next = pmd_addr_end(addr, end);
 		if (pmd_none(pmd))
 			return 0;
 		if (pmd_huge(pmd)) {
+=======
+		pmd_t pmd = ACCESS_ONCE(*pmdp);
+
+		next = pmd_addr_end(addr, end);
+		/*
+		 * If we find a splitting transparent hugepage we
+		 * return zero. That will result in taking the slow
+		 * path which will call wait_split_huge_page()
+		 * if the pmd is still in splitting state
+		 */
+		if (pmd_none(pmd) || pmd_trans_splitting(pmd))
+			return 0;
+		if (pmd_huge(pmd) || pmd_large(pmd)) {
+			/*
+			 * NUMA hinting faults need to be handled in the GUP
+			 * slowpath for accounting purposes and so that they
+			 * can be serialised against THP migration.
+			 */
+			if (pmd_numa(pmd))
+				return 0;
+
+>>>>>>> v3.18
 			if (!gup_hugepte((pte_t *)pmdp, PMD_SIZE, addr, next,
 					 write, pages, nr))
 				return 0;
@@ -91,7 +124,11 @@ static int gup_pud_range(pgd_t pgd, unsigned long addr, unsigned long end,
 
 	pudp = pud_offset(&pgd, addr);
 	do {
+<<<<<<< HEAD
 		pud_t pud = *pudp;
+=======
+		pud_t pud = ACCESS_ONCE(*pudp);
+>>>>>>> v3.18
 
 		next = pud_addr_end(addr, end);
 		if (pud_none(pud))
@@ -111,12 +148,21 @@ static int gup_pud_range(pgd_t pgd, unsigned long addr, unsigned long end,
 	return 1;
 }
 
+<<<<<<< HEAD
 int get_user_pages_fast(unsigned long start, int nr_pages, int write,
 			struct page **pages)
+=======
+int __get_user_pages_fast(unsigned long start, int nr_pages, int write,
+			  struct page **pages)
+>>>>>>> v3.18
 {
 	struct mm_struct *mm = current->mm;
 	unsigned long addr, len, end;
 	unsigned long next;
+<<<<<<< HEAD
+=======
+	unsigned long flags;
+>>>>>>> v3.18
 	pgd_t *pgdp;
 	int nr = 0;
 
@@ -129,7 +175,11 @@ int get_user_pages_fast(unsigned long start, int nr_pages, int write,
 
 	if (unlikely(!access_ok(write ? VERIFY_WRITE : VERIFY_READ,
 					start, len)))
+<<<<<<< HEAD
 		goto slow_irqon;
+=======
+		return 0;
+>>>>>>> v3.18
 
 	pr_devel("  aligned: %lx .. %lx\n", start, end);
 
@@ -150,16 +200,25 @@ int get_user_pages_fast(unsigned long start, int nr_pages, int write,
 	 * So long as we atomically load page table pointers versus teardown,
 	 * we can follow the address down to the the page and take a ref on it.
 	 */
+<<<<<<< HEAD
 	local_irq_disable();
 
 	pgdp = pgd_offset(mm, addr);
 	do {
 		pgd_t pgd = *pgdp;
+=======
+	local_irq_save(flags);
+
+	pgdp = pgd_offset(mm, addr);
+	do {
+		pgd_t pgd = ACCESS_ONCE(*pgdp);
+>>>>>>> v3.18
 
 		pr_devel("  %016lx: normal pgd %p\n", addr,
 			 (void *)pgd_val(pgd));
 		next = pgd_addr_end(addr, end);
 		if (pgd_none(pgd))
+<<<<<<< HEAD
 			goto slow;
 		if (pgd_huge(pgd)) {
 			if (!gup_hugepte((pte_t *)pgdp, PGDIR_SIZE, addr, next,
@@ -184,6 +243,37 @@ int get_user_pages_fast(unsigned long start, int nr_pages, int write,
 slow:
 		local_irq_enable();
 slow_irqon:
+=======
+			break;
+		if (pgd_huge(pgd)) {
+			if (!gup_hugepte((pte_t *)pgdp, PGDIR_SIZE, addr, next,
+					 write, pages, &nr))
+				break;
+		} else if (is_hugepd(pgdp)) {
+			if (!gup_hugepd((hugepd_t *)pgdp, PGDIR_SHIFT,
+					addr, next, write, pages, &nr))
+				break;
+		} else if (!gup_pud_range(pgd, addr, next, write, pages, &nr))
+			break;
+	} while (pgdp++, addr = next, addr != end);
+
+	local_irq_restore(flags);
+
+	return nr;
+}
+
+int get_user_pages_fast(unsigned long start, int nr_pages, int write,
+			struct page **pages)
+{
+	struct mm_struct *mm = current->mm;
+	int nr, ret;
+
+	start &= PAGE_MASK;
+	nr = __get_user_pages_fast(start, nr_pages, write, pages);
+	ret = nr;
+
+	if (nr < nr_pages) {
+>>>>>>> v3.18
 		pr_devel("  slow path ! nr = %d\n", nr);
 
 		/* Try to get the remaining pages with get_user_pages */
@@ -192,7 +282,11 @@ slow_irqon:
 
 		down_read(&mm->mmap_sem);
 		ret = get_user_pages(current, mm, start,
+<<<<<<< HEAD
 			(end - start) >> PAGE_SHIFT, write, 0, pages, NULL);
+=======
+				     nr_pages - nr, write, 0, pages, NULL);
+>>>>>>> v3.18
 		up_read(&mm->mmap_sem);
 
 		/* Have to be a bit careful with return values */
@@ -202,9 +296,15 @@ slow_irqon:
 			else
 				ret += nr;
 		}
+<<<<<<< HEAD
 
 		return ret;
 	}
+=======
+	}
+
+	return ret;
+>>>>>>> v3.18
 }
 
 #endif /* __HAVE_ARCH_PTE_SPECIAL */

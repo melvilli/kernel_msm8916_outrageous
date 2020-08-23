@@ -138,8 +138,14 @@ static ssize_t cluster_cluster_name_read(struct dlm_cluster *cl, char *buf)
 static ssize_t cluster_cluster_name_write(struct dlm_cluster *cl,
 					  const char *buf, size_t len)
 {
+<<<<<<< HEAD
 	strncpy(dlm_config.ci_cluster_name, buf, DLM_LOCKSPACE_LEN);
 	strncpy(cl->cl_cluster_name, buf, DLM_LOCKSPACE_LEN);
+=======
+	strlcpy(dlm_config.ci_cluster_name, buf,
+				sizeof(dlm_config.ci_cluster_name));
+	strlcpy(cl->cl_cluster_name, buf, sizeof(cl->cl_cluster_name));
+>>>>>>> v3.18
 	return len;
 }
 
@@ -156,11 +162,21 @@ static ssize_t cluster_set(struct dlm_cluster *cl, unsigned int *cl_field,
 			   const char *buf, size_t len)
 {
 	unsigned int x;
+<<<<<<< HEAD
 
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
 
 	x = simple_strtoul(buf, NULL, 0);
+=======
+	int rc;
+
+	if (!capable(CAP_SYS_ADMIN))
+		return -EPERM;
+	rc = kstrtouint(buf, 0, &x);
+	if (rc)
+		return rc;
+>>>>>>> v3.18
 
 	if (check_zero && !x)
 		return -EINVAL;
@@ -729,7 +745,14 @@ static ssize_t comm_nodeid_read(struct dlm_comm *cm, char *buf)
 static ssize_t comm_nodeid_write(struct dlm_comm *cm, const char *buf,
 				 size_t len)
 {
+<<<<<<< HEAD
 	cm->nodeid = simple_strtol(buf, NULL, 0);
+=======
+	int rc = kstrtoint(buf, 0, &cm->nodeid);
+
+	if (rc)
+		return rc;
+>>>>>>> v3.18
 	return len;
 }
 
@@ -741,7 +764,14 @@ static ssize_t comm_local_read(struct dlm_comm *cm, char *buf)
 static ssize_t comm_local_write(struct dlm_comm *cm, const char *buf,
 				size_t len)
 {
+<<<<<<< HEAD
 	cm->local= simple_strtol(buf, NULL, 0);
+=======
+	int rc = kstrtoint(buf, 0, &cm->local);
+
+	if (rc)
+		return rc;
+>>>>>>> v3.18
 	if (cm->local && !local_comm)
 		local_comm = cm;
 	return len;
@@ -845,7 +875,14 @@ static ssize_t node_nodeid_write(struct dlm_node *nd, const char *buf,
 				 size_t len)
 {
 	uint32_t seq = 0;
+<<<<<<< HEAD
 	nd->nodeid = simple_strtol(buf, NULL, 0);
+=======
+	int rc = kstrtoint(buf, 0, &nd->nodeid);
+
+	if (rc)
+		return rc;
+>>>>>>> v3.18
 	dlm_comm_seq(nd->nodeid, &seq);
 	nd->comm_seq = seq;
 	return len;
@@ -859,7 +896,14 @@ static ssize_t node_weight_read(struct dlm_node *nd, char *buf)
 static ssize_t node_weight_write(struct dlm_node *nd, const char *buf,
 				 size_t len)
 {
+<<<<<<< HEAD
 	nd->weight = simple_strtol(buf, NULL, 0);
+=======
+	int rc = kstrtoint(buf, 0, &nd->weight);
+
+	if (rc)
+		return rc;
+>>>>>>> v3.18
 	return len;
 }
 

@@ -140,7 +140,11 @@ int ipoib_vlan_add(struct net_device *pdev, unsigned short pkey)
 	if (!rtnl_trylock())
 		return restart_syscall();
 
+<<<<<<< HEAD
 	mutex_lock(&ppriv->vlan_mutex);
+=======
+	down_write(&ppriv->vlan_rwsem);
+>>>>>>> v3.18
 
 	/*
 	 * First ensure this isn't a duplicate. We check the parent device and
@@ -163,13 +167,22 @@ int ipoib_vlan_add(struct net_device *pdev, unsigned short pkey)
 	result = __ipoib_vlan_add(ppriv, priv, pkey, IPOIB_LEGACY_CHILD);
 
 out:
+<<<<<<< HEAD
 	mutex_unlock(&ppriv->vlan_mutex);
 
 	rtnl_unlock();
+=======
+	up_write(&ppriv->vlan_rwsem);
+>>>>>>> v3.18
 
 	if (result)
 		free_netdev(priv->dev);
 
+<<<<<<< HEAD
+=======
+	rtnl_unlock();
+
+>>>>>>> v3.18
 	return result;
 }
 
@@ -185,7 +198,12 @@ int ipoib_vlan_delete(struct net_device *pdev, unsigned short pkey)
 
 	if (!rtnl_trylock())
 		return restart_syscall();
+<<<<<<< HEAD
 	mutex_lock(&ppriv->vlan_mutex);
+=======
+
+	down_write(&ppriv->vlan_rwsem);
+>>>>>>> v3.18
 	list_for_each_entry_safe(priv, tpriv, &ppriv->child_intfs, list) {
 		if (priv->pkey == pkey &&
 		    priv->child_type == IPOIB_LEGACY_CHILD) {
@@ -195,7 +213,12 @@ int ipoib_vlan_delete(struct net_device *pdev, unsigned short pkey)
 			break;
 		}
 	}
+<<<<<<< HEAD
 	mutex_unlock(&ppriv->vlan_mutex);
+=======
+	up_write(&ppriv->vlan_rwsem);
+
+>>>>>>> v3.18
 	rtnl_unlock();
 
 	if (dev) {

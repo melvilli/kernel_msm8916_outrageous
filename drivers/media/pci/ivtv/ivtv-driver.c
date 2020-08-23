@@ -58,7 +58,10 @@
 #include <linux/dma-mapping.h>
 #include <media/tveeprom.h>
 #include <media/saa7115.h>
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 #include "tuner-xc2028.h"
 
 /* If you have already X v4l cards, then set this to X. This way
@@ -753,7 +756,11 @@ static int ivtv_init_struct1(struct ivtv *itv)
 
 	init_kthread_worker(&itv->irq_worker);
 	itv->irq_worker_task = kthread_run(kthread_worker_fn, &itv->irq_worker,
+<<<<<<< HEAD
 					   itv->v4l2_dev.name);
+=======
+					   "%s", itv->v4l2_dev.name);
+>>>>>>> v3.18
 	if (IS_ERR(itv->irq_worker_task)) {
 		IVTV_ERR("Could not create ivtv task\n");
 		return -1;
@@ -968,6 +975,7 @@ static void ivtv_load_and_init_modules(struct ivtv *itv)
 	}
 
 	if (hw & IVTV_HW_SAA711X) {
+<<<<<<< HEAD
 		struct v4l2_dbg_chip_ident v;
 
 		/* determine the exact saa711x model */
@@ -977,6 +985,12 @@ static void ivtv_load_and_init_modules(struct ivtv *itv)
 		strlcpy(v.match.name, "saa7115", sizeof(v.match.name));
 		ivtv_call_hw(itv, IVTV_HW_SAA711X, core, g_chip_ident, &v);
 		if (v.ident == V4L2_IDENT_SAA7114) {
+=======
+		/* determine the exact saa711x model */
+		itv->hw_flags &= ~IVTV_HW_SAA711X;
+
+		if (strstr(itv->sd_video->name, "saa7114")) {
+>>>>>>> v3.18
 			itv->hw_flags |= IVTV_HW_SAA7114;
 			/* VBI is not yet supported by the saa7114 driver. */
 			itv->v4l2_cap &= ~(V4L2_CAP_SLICED_VBI_CAPTURE|V4L2_CAP_VBI_CAPTURE);
@@ -1267,7 +1281,11 @@ static int ivtv_probe(struct pci_dev *pdev, const struct pci_device_id *pci_id)
 
 	/* Register IRQ */
 	retval = request_irq(itv->pdev->irq, ivtv_irq_handler,
+<<<<<<< HEAD
 	     IRQF_SHARED | IRQF_DISABLED, itv->v4l2_dev.name, (void *)itv);
+=======
+	     IRQF_SHARED, itv->v4l2_dev.name, (void *)itv);
+>>>>>>> v3.18
 	if (retval) {
 		IVTV_ERR("Failed to register irq %d\n", retval);
 		goto free_i2c;

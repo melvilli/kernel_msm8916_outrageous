@@ -4,7 +4,10 @@
  */
 
 #include <linux/kernel.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/percpu.h>
 #include <linux/mm.h>
 #include <linux/swap.h>
@@ -53,14 +56,22 @@ out:
 
 void arch_enter_lazy_mmu_mode(void)
 {
+<<<<<<< HEAD
 	struct tlb_batch *tb = &__get_cpu_var(tlb_batch);
+=======
+	struct tlb_batch *tb = this_cpu_ptr(&tlb_batch);
+>>>>>>> v3.18
 
 	tb->active = 1;
 }
 
 void arch_leave_lazy_mmu_mode(void)
 {
+<<<<<<< HEAD
 	struct tlb_batch *tb = &__get_cpu_var(tlb_batch);
+=======
+	struct tlb_batch *tb = this_cpu_ptr(&tlb_batch);
+>>>>>>> v3.18
 
 	if (tb->tlb_nr)
 		flush_tlb_pending();
@@ -135,7 +146,11 @@ no_cache_flush:
 
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
 static void tlb_batch_pmd_scan(struct mm_struct *mm, unsigned long vaddr,
+<<<<<<< HEAD
 			       pmd_t pmd, bool exec)
+=======
+			       pmd_t pmd)
+>>>>>>> v3.18
 {
 	unsigned long end;
 	pte_t *pte;
@@ -143,8 +158,16 @@ static void tlb_batch_pmd_scan(struct mm_struct *mm, unsigned long vaddr,
 	pte = pte_offset_map(&pmd, vaddr);
 	end = vaddr + HPAGE_SIZE;
 	while (vaddr < end) {
+<<<<<<< HEAD
 		if (pte_val(*pte) & _PAGE_VALID)
 			tlb_batch_add_one(mm, vaddr, exec);
+=======
+		if (pte_val(*pte) & _PAGE_VALID) {
+			bool exec = pte_exec(*pte);
+
+			tlb_batch_add_one(mm, vaddr, exec);
+		}
+>>>>>>> v3.18
 		pte++;
 		vaddr += PAGE_SIZE;
 	}
@@ -161,8 +184,13 @@ void set_pmd_at(struct mm_struct *mm, unsigned long addr,
 	if (mm == &init_mm)
 		return;
 
+<<<<<<< HEAD
 	if ((pmd_val(pmd) ^ pmd_val(orig)) & PMD_ISHUGE) {
 		if (pmd_val(pmd) & PMD_ISHUGE)
+=======
+	if ((pmd_val(pmd) ^ pmd_val(orig)) & _PAGE_PMD_HUGE) {
+		if (pmd_val(pmd) & _PAGE_PMD_HUGE)
+>>>>>>> v3.18
 			mm->context.huge_pte_count++;
 		else
 			mm->context.huge_pte_count--;
@@ -178,6 +206,7 @@ void set_pmd_at(struct mm_struct *mm, unsigned long addr,
 	}
 
 	if (!pmd_none(orig)) {
+<<<<<<< HEAD
 		bool exec = ((pmd_val(orig) & PMD_HUGE_EXEC) != 0);
 
 		addr &= HPAGE_MASK;
@@ -189,12 +218,41 @@ void set_pmd_at(struct mm_struct *mm, unsigned long addr,
 }
 
 void pgtable_trans_huge_deposit(struct mm_struct *mm, pgtable_t pgtable)
+=======
+		addr &= HPAGE_MASK;
+		if (pmd_trans_huge(orig)) {
+			pte_t orig_pte = __pte(pmd_val(orig));
+			bool exec = pte_exec(orig_pte);
+
+			tlb_batch_add_one(mm, addr, exec);
+			tlb_batch_add_one(mm, addr + REAL_HPAGE_SIZE, exec);
+		} else {
+			tlb_batch_pmd_scan(mm, addr, orig);
+		}
+	}
+}
+
+void pmdp_invalidate(struct vm_area_struct *vma, unsigned long address,
+		     pmd_t *pmdp)
+{
+	pmd_t entry = *pmdp;
+
+	pmd_val(entry) &= ~_PAGE_VALID;
+
+	set_pmd_at(vma->vm_mm, address, pmdp, entry);
+	flush_tlb_range(vma, address, address + HPAGE_PMD_SIZE);
+}
+
+void pgtable_trans_huge_deposit(struct mm_struct *mm, pmd_t *pmdp,
+				pgtable_t pgtable)
+>>>>>>> v3.18
 {
 	struct list_head *lh = (struct list_head *) pgtable;
 
 	assert_spin_locked(&mm->page_table_lock);
 
 	/* FIFO */
+<<<<<<< HEAD
 	if (!mm->pmd_huge_pte)
 		INIT_LIST_HEAD(lh);
 	else
@@ -203,6 +261,16 @@ void pgtable_trans_huge_deposit(struct mm_struct *mm, pgtable_t pgtable)
 }
 
 pgtable_t pgtable_trans_huge_withdraw(struct mm_struct *mm)
+=======
+	if (!pmd_huge_pte(mm, pmdp))
+		INIT_LIST_HEAD(lh);
+	else
+		list_add(lh, (struct list_head *) pmd_huge_pte(mm, pmdp));
+	pmd_huge_pte(mm, pmdp) = pgtable;
+}
+
+pgtable_t pgtable_trans_huge_withdraw(struct mm_struct *mm, pmd_t *pmdp)
+>>>>>>> v3.18
 {
 	struct list_head *lh;
 	pgtable_t pgtable;
@@ -210,12 +278,21 @@ pgtable_t pgtable_trans_huge_withdraw(struct mm_struct *mm)
 	assert_spin_locked(&mm->page_table_lock);
 
 	/* FIFO */
+<<<<<<< HEAD
 	pgtable = mm->pmd_huge_pte;
 	lh = (struct list_head *) pgtable;
 	if (list_empty(lh))
 		mm->pmd_huge_pte = NULL;
 	else {
 		mm->pmd_huge_pte = (pgtable_t) lh->next;
+=======
+	pgtable = pmd_huge_pte(mm, pmdp);
+	lh = (struct list_head *) pgtable;
+	if (list_empty(lh))
+		pmd_huge_pte(mm, pmdp) = NULL;
+	else {
+		pmd_huge_pte(mm, pmdp) = (pgtable_t) lh->next;
+>>>>>>> v3.18
 		list_del(lh);
 	}
 	pte_val(pgtable[0]) = 0;

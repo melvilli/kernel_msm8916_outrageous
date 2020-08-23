@@ -17,7 +17,11 @@
 
 
 struct ingress_qdisc_data {
+<<<<<<< HEAD
 	struct tcf_proto	*filter_list;
+=======
+	struct tcf_proto __rcu	*filter_list;
+>>>>>>> v3.18
 };
 
 /* ------------------------- Class/flow operations ------------------------- */
@@ -46,7 +50,12 @@ static void ingress_walk(struct Qdisc *sch, struct qdisc_walker *walker)
 {
 }
 
+<<<<<<< HEAD
 static struct tcf_proto **ingress_find_tcf(struct Qdisc *sch, unsigned long cl)
+=======
+static struct tcf_proto __rcu **ingress_find_tcf(struct Qdisc *sch,
+						 unsigned long cl)
+>>>>>>> v3.18
 {
 	struct ingress_qdisc_data *p = qdisc_priv(sch);
 
@@ -59,15 +68,26 @@ static int ingress_enqueue(struct sk_buff *skb, struct Qdisc *sch)
 {
 	struct ingress_qdisc_data *p = qdisc_priv(sch);
 	struct tcf_result res;
+<<<<<<< HEAD
 	int result;
 
 	result = tc_classify(skb, p->filter_list, &res);
+=======
+	struct tcf_proto *fl = rcu_dereference_bh(p->filter_list);
+	int result;
+
+	result = tc_classify(skb, fl, &res);
+>>>>>>> v3.18
 
 	qdisc_bstats_update(sch, skb);
 	switch (result) {
 	case TC_ACT_SHOT:
 		result = TC_ACT_SHOT;
+<<<<<<< HEAD
 		sch->qstats.drops++;
+=======
+		qdisc_qstats_drop(sch);
+>>>>>>> v3.18
 		break;
 	case TC_ACT_STOLEN:
 	case TC_ACT_QUEUED:
@@ -100,8 +120,12 @@ static int ingress_dump(struct Qdisc *sch, struct sk_buff *skb)
 	nest = nla_nest_start(skb, TCA_OPTIONS);
 	if (nest == NULL)
 		goto nla_put_failure;
+<<<<<<< HEAD
 	nla_nest_end(skb, nest);
 	return skb->len;
+=======
+	return nla_nest_end(skb, nest);
+>>>>>>> v3.18
 
 nla_put_failure:
 	nla_nest_cancel(skb, nest);

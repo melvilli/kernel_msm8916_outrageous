@@ -55,6 +55,10 @@ static inline int valid_user_regs(struct pt_regs *regs)
 
 #define instruction_pointer(regs)	((regs)->UCreg_pc)
 #define user_stack_pointer(regs)	((regs)->UCreg_sp)
+<<<<<<< HEAD
+=======
+#define profile_pc(regs)		instruction_pointer(regs)
+>>>>>>> v3.18
 
 #endif /* __ASSEMBLY__ */
 #endif

@@ -24,6 +24,10 @@
  */
 
 #include <linux/module.h>
+<<<<<<< HEAD
+=======
+#include <asm/unaligned.h>
+>>>>>>> v3.18
 
 #include <linux/kernel.h>
 #include <linux/init.h>
@@ -39,17 +43,28 @@
 #include <net/bluetooth/bluetooth.h>
 #include <net/bluetooth/hci_core.h>
 
+<<<<<<< HEAD
 #define VERSION "1.3"
+=======
+#define VERSION "1.5"
+>>>>>>> v3.18
 
 static bool amp;
 
 struct vhci_data {
 	struct hci_dev *hdev;
 
+<<<<<<< HEAD
 	unsigned long flags;
 
 	wait_queue_head_t read_wait;
 	struct sk_buff_head readq;
+=======
+	wait_queue_head_t read_wait;
+	struct sk_buff_head readq;
+
+	struct delayed_work open_timeout;
+>>>>>>> v3.18
 };
 
 static int vhci_open_dev(struct hci_dev *hdev)
@@ -80,6 +95,7 @@ static int vhci_flush(struct hci_dev *hdev)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int vhci_send_frame(struct sk_buff *skb)
 {
 	struct hci_dev* hdev = (struct hci_dev *) skb->dev;
@@ -100,10 +116,88 @@ static int vhci_send_frame(struct sk_buff *skb)
 
 	wake_up_interruptible(&data->read_wait);
 
+=======
+static int vhci_send_frame(struct hci_dev *hdev, struct sk_buff *skb)
+{
+	struct vhci_data *data = hci_get_drvdata(hdev);
+
+	if (!test_bit(HCI_RUNNING, &hdev->flags))
+		return -EBUSY;
+
+	memcpy(skb_push(skb, 1), &bt_cb(skb)->pkt_type, 1);
+	skb_queue_tail(&data->readq, skb);
+
+	wake_up_interruptible(&data->read_wait);
+	return 0;
+}
+
+static int vhci_create_device(struct vhci_data *data, __u8 opcode)
+{
+	struct hci_dev *hdev;
+	struct sk_buff *skb;
+	__u8 dev_type;
+
+	/* bits 0-1 are dev_type (BR/EDR or AMP) */
+	dev_type = opcode & 0x03;
+
+	if (dev_type != HCI_BREDR && dev_type != HCI_AMP)
+		return -EINVAL;
+
+	/* bits 2-5 are reserved (must be zero) */
+	if (opcode & 0x3c)
+		return -EINVAL;
+
+	skb = bt_skb_alloc(4, GFP_KERNEL);
+	if (!skb)
+		return -ENOMEM;
+
+	hdev = hci_alloc_dev();
+	if (!hdev) {
+		kfree_skb(skb);
+		return -ENOMEM;
+	}
+
+	data->hdev = hdev;
+
+	hdev->bus = HCI_VIRTUAL;
+	hdev->dev_type = dev_type;
+	hci_set_drvdata(hdev, data);
+
+	hdev->open  = vhci_open_dev;
+	hdev->close = vhci_close_dev;
+	hdev->flush = vhci_flush;
+	hdev->send  = vhci_send_frame;
+
+	/* bit 6 is for external configuration */
+	if (opcode & 0x40)
+		set_bit(HCI_QUIRK_EXTERNAL_CONFIG, &hdev->quirks);
+
+	/* bit 7 is for raw device */
+	if (opcode & 0x80)
+		set_bit(HCI_QUIRK_RAW_DEVICE, &hdev->quirks);
+
+	if (hci_register_dev(hdev) < 0) {
+		BT_ERR("Can't register HCI device");
+		hci_free_dev(hdev);
+		data->hdev = NULL;
+		kfree_skb(skb);
+		return -EBUSY;
+	}
+
+	bt_cb(skb)->pkt_type = HCI_VENDOR_PKT;
+
+	*skb_put(skb, 1) = 0xff;
+	*skb_put(skb, 1) = opcode;
+	put_unaligned_le16(hdev->id, skb_put(skb, 2));
+	skb_queue_tail(&data->readq, skb);
+
+	wake_up_interruptible(&data->read_wait);
+>>>>>>> v3.18
 	return 0;
 }
 
 static inline ssize_t vhci_get_user(struct vhci_data *data,
+<<<<<<< HEAD
 					const char __user *buf, size_t count)
 {
 	struct sk_buff *skb;
@@ -116,10 +210,28 @@ static inline ssize_t vhci_get_user(struct vhci_data *data,
 		return -ENOMEM;
 
 	if (copy_from_user(skb_put(skb, count), buf, count)) {
+=======
+				    struct iov_iter *from)
+{
+	size_t len = iov_iter_count(from);
+	struct sk_buff *skb;
+	__u8 pkt_type, opcode;
+	int ret;
+
+	if (len < 2 || len > HCI_MAX_FRAME_SIZE)
+		return -EINVAL;
+
+	skb = bt_skb_alloc(len, GFP_KERNEL);
+	if (!skb)
+		return -ENOMEM;
+
+	if (copy_from_iter(skb_put(skb, len), len, from) != len) {
+>>>>>>> v3.18
 		kfree_skb(skb);
 		return -EFAULT;
 	}
 
+<<<<<<< HEAD
 	skb->dev = (void *) data->hdev;
 	bt_cb(skb)->pkt_type = *((__u8 *) skb->data);
 	skb_pull(skb, 1);
@@ -134,13 +246,72 @@ static inline ssize_t vhci_put_user(struct vhci_data *data,
 {
 	char __user *ptr = buf;
 	int len, total = 0;
+=======
+	pkt_type = *((__u8 *) skb->data);
+	skb_pull(skb, 1);
+
+	switch (pkt_type) {
+	case HCI_EVENT_PKT:
+	case HCI_ACLDATA_PKT:
+	case HCI_SCODATA_PKT:
+		if (!data->hdev) {
+			kfree_skb(skb);
+			return -ENODEV;
+		}
+
+		bt_cb(skb)->pkt_type = pkt_type;
+
+		ret = hci_recv_frame(data->hdev, skb);
+		break;
+
+	case HCI_VENDOR_PKT:
+		if (data->hdev) {
+			kfree_skb(skb);
+			return -EBADFD;
+		}
+
+		cancel_delayed_work_sync(&data->open_timeout);
+
+		opcode = *((__u8 *) skb->data);
+		skb_pull(skb, 1);
+
+		if (skb->len > 0) {
+			kfree_skb(skb);
+			return -EINVAL;
+		}
+
+		kfree_skb(skb);
+
+		ret = vhci_create_device(data, opcode);
+		break;
+
+	default:
+		kfree_skb(skb);
+		return -EINVAL;
+	}
+
+	return (ret < 0) ? ret : len;
+}
+
+static inline ssize_t vhci_put_user(struct vhci_data *data,
+				    struct sk_buff *skb,
+				    char __user *buf, int count)
+{
+	char __user *ptr = buf;
+	int len;
+>>>>>>> v3.18
 
 	len = min_t(unsigned int, skb->len, count);
 
 	if (copy_to_user(ptr, skb->data, len))
 		return -EFAULT;
 
+<<<<<<< HEAD
 	total += len;
+=======
+	if (!data->hdev)
+		return len;
+>>>>>>> v3.18
 
 	data->hdev->stat.byte_tx += len;
 
@@ -148,21 +319,35 @@ static inline ssize_t vhci_put_user(struct vhci_data *data,
 	case HCI_COMMAND_PKT:
 		data->hdev->stat.cmd_tx++;
 		break;
+<<<<<<< HEAD
 
 	case HCI_ACLDATA_PKT:
 		data->hdev->stat.acl_tx++;
 		break;
 
+=======
+	case HCI_ACLDATA_PKT:
+		data->hdev->stat.acl_tx++;
+		break;
+>>>>>>> v3.18
 	case HCI_SCODATA_PKT:
 		data->hdev->stat.sco_tx++;
 		break;
 	}
 
+<<<<<<< HEAD
 	return total;
 }
 
 static ssize_t vhci_read(struct file *file,
 				char __user *buf, size_t count, loff_t *pos)
+=======
+	return len;
+}
+
+static ssize_t vhci_read(struct file *file,
+			 char __user *buf, size_t count, loff_t *pos)
+>>>>>>> v3.18
 {
 	struct vhci_data *data = file->private_data;
 	struct sk_buff *skb;
@@ -185,7 +370,11 @@ static ssize_t vhci_read(struct file *file,
 		}
 
 		ret = wait_event_interruptible(data->read_wait,
+<<<<<<< HEAD
 					!skb_queue_empty(&data->readq));
+=======
+					       !skb_queue_empty(&data->readq));
+>>>>>>> v3.18
 		if (ret < 0)
 			break;
 	}
@@ -193,12 +382,21 @@ static ssize_t vhci_read(struct file *file,
 	return ret;
 }
 
+<<<<<<< HEAD
 static ssize_t vhci_write(struct file *file,
 			const char __user *buf, size_t count, loff_t *pos)
 {
 	struct vhci_data *data = file->private_data;
 
 	return vhci_get_user(data, buf, count);
+=======
+static ssize_t vhci_write(struct kiocb *iocb, struct iov_iter *from)
+{
+	struct file *file = iocb->ki_filp;
+	struct vhci_data *data = file->private_data;
+
+	return vhci_get_user(data, from);
+>>>>>>> v3.18
 }
 
 static unsigned int vhci_poll(struct file *file, poll_table *wait)
@@ -213,10 +411,24 @@ static unsigned int vhci_poll(struct file *file, poll_table *wait)
 	return POLLOUT | POLLWRNORM;
 }
 
+<<<<<<< HEAD
 static int vhci_open(struct inode *inode, struct file *file)
 {
 	struct vhci_data *data;
 	struct hci_dev *hdev;
+=======
+static void vhci_open_timeout(struct work_struct *work)
+{
+	struct vhci_data *data = container_of(work, struct vhci_data,
+					      open_timeout.work);
+
+	vhci_create_device(data, amp ? HCI_AMP : HCI_BREDR);
+}
+
+static int vhci_open(struct inode *inode, struct file *file)
+{
+	struct vhci_data *data;
+>>>>>>> v3.18
 
 	data = kzalloc(sizeof(struct vhci_data), GFP_KERNEL);
 	if (!data)
@@ -225,6 +437,7 @@ static int vhci_open(struct inode *inode, struct file *file)
 	skb_queue_head_init(&data->readq);
 	init_waitqueue_head(&data->read_wait);
 
+<<<<<<< HEAD
 	hdev = hci_alloc_dev();
 	if (!hdev) {
 		kfree(data);
@@ -250,10 +463,18 @@ static int vhci_open(struct inode *inode, struct file *file)
 		hci_free_dev(hdev);
 		return -EBUSY;
 	}
+=======
+	INIT_DELAYED_WORK(&data->open_timeout, vhci_open_timeout);
+>>>>>>> v3.18
 
 	file->private_data = data;
 	nonseekable_open(inode, file);
 
+<<<<<<< HEAD
+=======
+	schedule_delayed_work(&data->open_timeout, msecs_to_jiffies(1000));
+
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -262,10 +483,20 @@ static int vhci_release(struct inode *inode, struct file *file)
 	struct vhci_data *data = file->private_data;
 	struct hci_dev *hdev = data->hdev;
 
+<<<<<<< HEAD
 	hci_unregister_dev(hdev);
 	hci_free_dev(hdev);
 
 	skb_queue_purge(&data->readq);
+=======
+	cancel_delayed_work_sync(&data->open_timeout);
+
+	if (hdev) {
+		hci_unregister_dev(hdev);
+		hci_free_dev(hdev);
+	}
+
+>>>>>>> v3.18
 	file->private_data = NULL;
 	kfree(data);
 
@@ -275,7 +506,11 @@ static int vhci_release(struct inode *inode, struct file *file)
 static const struct file_operations vhci_fops = {
 	.owner		= THIS_MODULE,
 	.read		= vhci_read,
+<<<<<<< HEAD
 	.write		= vhci_write,
+=======
+	.write_iter	= vhci_write,
+>>>>>>> v3.18
 	.poll		= vhci_poll,
 	.open		= vhci_open,
 	.release	= vhci_release,
@@ -285,7 +520,11 @@ static const struct file_operations vhci_fops = {
 static struct miscdevice vhci_miscdev= {
 	.name	= "vhci",
 	.fops	= &vhci_fops,
+<<<<<<< HEAD
 	.minor	= MISC_DYNAMIC_MINOR,
+=======
+	.minor	= VHCI_MINOR,
+>>>>>>> v3.18
 };
 
 static int __init vhci_init(void)
@@ -310,3 +549,8 @@ MODULE_AUTHOR("Marcel Holtmann <marcel@holtmann.org>");
 MODULE_DESCRIPTION("Bluetooth virtual HCI driver ver " VERSION);
 MODULE_VERSION(VERSION);
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
+=======
+MODULE_ALIAS("devname:vhci");
+MODULE_ALIAS_MISCDEV(VHCI_MINOR);
+>>>>>>> v3.18

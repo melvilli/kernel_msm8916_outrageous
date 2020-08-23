@@ -224,75 +224,127 @@ def trace_end():
 			(len(rx_skb_list), of_count_rx_skb_list)
 
 # called from perf, when it finds a correspoinding event
+<<<<<<< HEAD
 def irq__softirq_entry(name, context, cpu, sec, nsec, pid, comm, vec):
+=======
+def irq__softirq_entry(name, context, cpu, sec, nsec, pid, comm, callchain, vec):
+>>>>>>> v3.18
 	if symbol_str("irq__softirq_entry", "vec", vec) != "NET_RX":
 		return
 	event_info = (name, context, cpu, nsecs(sec, nsec), pid, comm, vec)
 	all_event_list.append(event_info)
 
+<<<<<<< HEAD
 def irq__softirq_exit(name, context, cpu, sec, nsec, pid, comm, vec):
+=======
+def irq__softirq_exit(name, context, cpu, sec, nsec, pid, comm, callchain, vec):
+>>>>>>> v3.18
 	if symbol_str("irq__softirq_entry", "vec", vec) != "NET_RX":
 		return
 	event_info = (name, context, cpu, nsecs(sec, nsec), pid, comm, vec)
 	all_event_list.append(event_info)
 
+<<<<<<< HEAD
 def irq__softirq_raise(name, context, cpu, sec, nsec, pid, comm, vec):
+=======
+def irq__softirq_raise(name, context, cpu, sec, nsec, pid, comm, callchain, vec):
+>>>>>>> v3.18
 	if symbol_str("irq__softirq_entry", "vec", vec) != "NET_RX":
 		return
 	event_info = (name, context, cpu, nsecs(sec, nsec), pid, comm, vec)
 	all_event_list.append(event_info)
 
 def irq__irq_handler_entry(name, context, cpu, sec, nsec, pid, comm,
+<<<<<<< HEAD
 			irq, irq_name):
+=======
+			callchain, irq, irq_name):
+>>>>>>> v3.18
 	event_info = (name, context, cpu, nsecs(sec, nsec), pid, comm,
 			irq, irq_name)
 	all_event_list.append(event_info)
 
+<<<<<<< HEAD
 def irq__irq_handler_exit(name, context, cpu, sec, nsec, pid, comm, irq, ret):
 	event_info = (name, context, cpu, nsecs(sec, nsec), pid, comm, irq, ret)
 	all_event_list.append(event_info)
 
 def napi__napi_poll(name, context, cpu, sec, nsec, pid, comm, napi, dev_name):
+=======
+def irq__irq_handler_exit(name, context, cpu, sec, nsec, pid, comm, callchain, irq, ret):
+	event_info = (name, context, cpu, nsecs(sec, nsec), pid, comm, irq, ret)
+	all_event_list.append(event_info)
+
+def napi__napi_poll(name, context, cpu, sec, nsec, pid, comm, callchain, napi, dev_name):
+>>>>>>> v3.18
 	event_info = (name, context, cpu, nsecs(sec, nsec), pid, comm,
 			napi, dev_name)
 	all_event_list.append(event_info)
 
+<<<<<<< HEAD
 def net__netif_receive_skb(name, context, cpu, sec, nsec, pid, comm, skbaddr,
+=======
+def net__netif_receive_skb(name, context, cpu, sec, nsec, pid, comm, callchain, skbaddr,
+>>>>>>> v3.18
 			skblen, dev_name):
 	event_info = (name, context, cpu, nsecs(sec, nsec), pid, comm,
 			skbaddr, skblen, dev_name)
 	all_event_list.append(event_info)
 
+<<<<<<< HEAD
 def net__netif_rx(name, context, cpu, sec, nsec, pid, comm, skbaddr,
+=======
+def net__netif_rx(name, context, cpu, sec, nsec, pid, comm, callchain, skbaddr,
+>>>>>>> v3.18
 			skblen, dev_name):
 	event_info = (name, context, cpu, nsecs(sec, nsec), pid, comm,
 			skbaddr, skblen, dev_name)
 	all_event_list.append(event_info)
 
+<<<<<<< HEAD
 def net__net_dev_queue(name, context, cpu, sec, nsec, pid, comm,
+=======
+def net__net_dev_queue(name, context, cpu, sec, nsec, pid, comm, callchain,
+>>>>>>> v3.18
 			skbaddr, skblen, dev_name):
 	event_info = (name, context, cpu, nsecs(sec, nsec), pid, comm,
 			skbaddr, skblen, dev_name)
 	all_event_list.append(event_info)
 
+<<<<<<< HEAD
 def net__net_dev_xmit(name, context, cpu, sec, nsec, pid, comm,
+=======
+def net__net_dev_xmit(name, context, cpu, sec, nsec, pid, comm, callchain,
+>>>>>>> v3.18
 			skbaddr, skblen, rc, dev_name):
 	event_info = (name, context, cpu, nsecs(sec, nsec), pid, comm,
 			skbaddr, skblen, rc ,dev_name)
 	all_event_list.append(event_info)
 
+<<<<<<< HEAD
 def skb__kfree_skb(name, context, cpu, sec, nsec, pid, comm,
+=======
+def skb__kfree_skb(name, context, cpu, sec, nsec, pid, comm, callchain,
+>>>>>>> v3.18
 			skbaddr, protocol, location):
 	event_info = (name, context, cpu, nsecs(sec, nsec), pid, comm,
 			skbaddr, protocol, location)
 	all_event_list.append(event_info)
 
+<<<<<<< HEAD
 def skb__consume_skb(name, context, cpu, sec, nsec, pid, comm, skbaddr):
+=======
+def skb__consume_skb(name, context, cpu, sec, nsec, pid, comm, callchain, skbaddr):
+>>>>>>> v3.18
 	event_info = (name, context, cpu, nsecs(sec, nsec), pid, comm,
 			skbaddr)
 	all_event_list.append(event_info)
 
+<<<<<<< HEAD
 def skb__skb_copy_datagram_iovec(name, context, cpu, sec, nsec, pid, comm,
+=======
+def skb__skb_copy_datagram_iovec(name, context, cpu, sec, nsec, pid, comm, callchain,
+>>>>>>> v3.18
 	skbaddr, skblen):
 	event_info = (name, context, cpu, nsecs(sec, nsec), pid, comm,
 			skbaddr, skblen)

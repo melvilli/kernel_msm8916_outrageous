@@ -80,6 +80,10 @@
 #define LCDC_INVERT_PIXEL_CLOCK                  BIT(22)
 #define LCDC_INVERT_HSYNC                        BIT(21)
 #define LCDC_INVERT_VSYNC                        BIT(20)
+<<<<<<< HEAD
+=======
+#define LCDC_LPP_B10                             BIT(26)
+>>>>>>> v3.18
 
 /* LCDC Block */
 #define LCDC_PID_REG                             0x0

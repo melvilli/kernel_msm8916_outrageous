@@ -23,6 +23,10 @@ struct ip_conntrack_stat {
 };
 
 /* call to create an explicit dependency on nf_conntrack. */
+<<<<<<< HEAD
 extern void need_conntrack(void);
+=======
+void need_conntrack(void);
+>>>>>>> v3.18
 
 #endif /* _NF_CONNTRACK_COMMON_H */

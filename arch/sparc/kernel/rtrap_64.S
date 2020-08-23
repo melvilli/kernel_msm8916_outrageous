@@ -18,10 +18,23 @@
 #define		RTRAP_PSTATE_IRQOFF	(PSTATE_TSO|PSTATE_PEF|PSTATE_PRIV)
 #define		RTRAP_PSTATE_AG_IRQOFF	(PSTATE_TSO|PSTATE_PEF|PSTATE_PRIV|PSTATE_AG)
 
+<<<<<<< HEAD
 		.text
 		.align			32
 __handle_preemption:
 		call			schedule
+=======
+#ifdef CONFIG_CONTEXT_TRACKING
+# define SCHEDULE_USER schedule_user
+#else
+# define SCHEDULE_USER schedule
+#endif
+
+		.text
+		.align			32
+__handle_preemption:
+		call			SCHEDULE_USER
+>>>>>>> v3.18
 		 wrpr			%g0, RTRAP_PSTATE, %pstate
 		ba,pt			%xcc, __handle_preemption_continue
 		 wrpr			%g0, RTRAP_PSTATE_IRQOFF, %pstate
@@ -306,12 +319,19 @@ to_kernel:
 		 nop
 		cmp			%l4, 0
 		bne,pn			%xcc, kern_fpucheck
+<<<<<<< HEAD
 		 sethi			%hi(PREEMPT_ACTIVE), %l6
 		stw			%l6, [%g6 + TI_PRE_COUNT]
 		call			schedule
 		 nop
 		ba,pt			%xcc, rtrap
 		 stw			%g0, [%g6 + TI_PRE_COUNT]
+=======
+		 nop
+		call			preempt_schedule_irq
+		 nop
+		ba,pt			%xcc, rtrap
+>>>>>>> v3.18
 #endif
 kern_fpucheck:	ldub			[%g6 + TI_FPDEPTH], %l5
 		brz,pt			%l5, rt_continue

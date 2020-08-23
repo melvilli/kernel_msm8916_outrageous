@@ -32,6 +32,7 @@ void copy_page_asm(void *to, void *from);
 void copy_user_page(void *vto, void *vfrom, unsigned long vaddr,
 			struct page *pg);
 
+<<<<<<< HEAD
 /* #define CONFIG_PARISC_TMPALIAS */
 
 #ifdef CONFIG_PARISC_TMPALIAS
@@ -43,6 +44,8 @@ void copy_user_highpage(struct page *to, struct page *from,
 #define __HAVE_ARCH_COPY_USER_HIGHPAGE
 #endif
 
+=======
+>>>>>>> v3.18
 /*
  * These are used to make use of C type-checking..
  */

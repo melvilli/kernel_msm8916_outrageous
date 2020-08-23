@@ -167,6 +167,10 @@ struct si470x_device {
 	/* reference to USB and video device */
 	struct usb_device *usbdev;
 	struct usb_interface *intf;
+<<<<<<< HEAD
+=======
+	char *usb_buf;
+>>>>>>> v3.18
 
 	/* Interrupt endpoint handling */
 	char *int_in_buffer;

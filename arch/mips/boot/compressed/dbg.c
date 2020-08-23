@@ -6,7 +6,10 @@
  * need to implement your own putc().
  */
 #include <linux/compiler.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/types.h>
 
 void __weak putc(char c)

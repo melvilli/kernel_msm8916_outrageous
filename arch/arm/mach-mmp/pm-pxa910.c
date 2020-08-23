@@ -27,6 +27,7 @@
 
 int pxa910_set_wake(struct irq_data *data, unsigned int on)
 {
+<<<<<<< HEAD
 	int irq = data->irq;
 	struct irq_desc *desc = irq_to_desc(data->irq);
 	uint32_t awucrm = 0, apcr = 0;
@@ -43,6 +44,10 @@ int pxa910_set_wake(struct irq_data *data, unsigned int on)
 		if (desc->action)
 			desc->action->flags &= ~IRQF_NO_SUSPEND;
 	}
+=======
+	uint32_t awucrm = 0, apcr = 0;
+	int irq = data->irq;
+>>>>>>> v3.18
 
 	/* setting wakeup sources */
 	switch (irq) {
@@ -115,9 +120,17 @@ int pxa910_set_wake(struct irq_data *data, unsigned int on)
 		if (irq >= IRQ_GPIO_START && irq < IRQ_BOARD_START) {
 			awucrm = MPMU_AWUCRM_WAKEUP(2);
 			apcr |= MPMU_APCR_SLPWP2;
+<<<<<<< HEAD
 		} else
 			printk(KERN_ERR "Error: no defined wake up source irq: %d\n",
 				irq);
+=======
+		} else {
+			/* FIXME: This should return a proper error code ! */
+			printk(KERN_ERR "Error: no defined wake up source irq: %d\n",
+				irq);
+		}
+>>>>>>> v3.18
 	}
 
 	if (on) {

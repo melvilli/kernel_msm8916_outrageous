@@ -68,7 +68,11 @@
 void __iomem *da8xx_syscfg0_base;
 void __iomem *da8xx_syscfg1_base;
 
+<<<<<<< HEAD
 static struct plat_serial8250_port da8xx_serial_pdata[] = {
+=======
+static struct plat_serial8250_port da8xx_serial0_pdata[] = {
+>>>>>>> v3.18
 	{
 		.mapbase	= DA8XX_UART0_BASE,
 		.irq		= IRQ_DA8XX_UARTINT0,
@@ -78,6 +82,14 @@ static struct plat_serial8250_port da8xx_serial_pdata[] = {
 		.regshift	= 2,
 	},
 	{
+<<<<<<< HEAD
+=======
+		.flags	= 0,
+	}
+};
+static struct plat_serial8250_port da8xx_serial1_pdata[] = {
+	{
+>>>>>>> v3.18
 		.mapbase	= DA8XX_UART1_BASE,
 		.irq		= IRQ_DA8XX_UARTINT1,
 		.flags		= UPF_BOOT_AUTOCONF | UPF_SKIP_TEST |
@@ -86,6 +98,14 @@ static struct plat_serial8250_port da8xx_serial_pdata[] = {
 		.regshift	= 2,
 	},
 	{
+<<<<<<< HEAD
+=======
+		.flags	= 0,
+	}
+};
+static struct plat_serial8250_port da8xx_serial2_pdata[] = {
+	{
+>>>>>>> v3.18
 		.mapbase	= DA8XX_UART2_BASE,
 		.irq		= IRQ_DA8XX_UARTINT2,
 		.flags		= UPF_BOOT_AUTOCONF | UPF_SKIP_TEST |
@@ -95,6 +115,7 @@ static struct plat_serial8250_port da8xx_serial_pdata[] = {
 	},
 	{
 		.flags	= 0,
+<<<<<<< HEAD
 	},
 };
 
@@ -114,12 +135,45 @@ static const s8 da8xx_queue_tc_mapping[][2] = {
 };
 
 static const s8 da8xx_queue_priority_mapping[][2] = {
+=======
+	}
+};
+
+struct platform_device da8xx_serial_device[] = {
+	{
+		.name	= "serial8250",
+		.id	= PLAT8250_DEV_PLATFORM,
+		.dev	= {
+			.platform_data	= da8xx_serial0_pdata,
+		}
+	},
+	{
+		.name	= "serial8250",
+		.id	= PLAT8250_DEV_PLATFORM1,
+		.dev	= {
+			.platform_data	= da8xx_serial1_pdata,
+		}
+	},
+	{
+		.name	= "serial8250",
+		.id	= PLAT8250_DEV_PLATFORM2,
+		.dev	= {
+			.platform_data	= da8xx_serial2_pdata,
+		}
+	},
+	{
+	}
+};
+
+static s8 da8xx_queue_priority_mapping[][2] = {
+>>>>>>> v3.18
 	/* {event queue no, Priority} */
 	{0, 3},
 	{1, 7},
 	{-1, -1}
 };
 
+<<<<<<< HEAD
 static const s8 da850_queue_tc_mapping[][2] = {
 	/* {event queue no, TC no} */
 	{0, 0},
@@ -127,18 +181,24 @@ static const s8 da850_queue_tc_mapping[][2] = {
 };
 
 static const s8 da850_queue_priority_mapping[][2] = {
+=======
+static s8 da850_queue_priority_mapping[][2] = {
+>>>>>>> v3.18
 	/* {event queue no, Priority} */
 	{0, 3},
 	{-1, -1}
 };
 
 static struct edma_soc_info da830_edma_cc0_info = {
+<<<<<<< HEAD
 	.n_channel		= 32,
 	.n_region		= 4,
 	.n_slot			= 128,
 	.n_tc			= 2,
 	.n_cc			= 1,
 	.queue_tc_mapping	= da8xx_queue_tc_mapping,
+=======
+>>>>>>> v3.18
 	.queue_priority_mapping	= da8xx_queue_priority_mapping,
 	.default_queue		= EVENTQ_1,
 };
@@ -149,22 +209,28 @@ static struct edma_soc_info *da830_edma_info[EDMA_MAX_CC] = {
 
 static struct edma_soc_info da850_edma_cc_info[] = {
 	{
+<<<<<<< HEAD
 		.n_channel		= 32,
 		.n_region		= 4,
 		.n_slot			= 128,
 		.n_tc			= 2,
 		.n_cc			= 1,
 		.queue_tc_mapping	= da8xx_queue_tc_mapping,
+=======
+>>>>>>> v3.18
 		.queue_priority_mapping	= da8xx_queue_priority_mapping,
 		.default_queue		= EVENTQ_1,
 	},
 	{
+<<<<<<< HEAD
 		.n_channel		= 32,
 		.n_region		= 4,
 		.n_slot			= 128,
 		.n_tc			= 1,
 		.n_cc			= 1,
 		.queue_tc_mapping	= da850_queue_tc_mapping,
+=======
+>>>>>>> v3.18
 		.queue_priority_mapping	= da850_queue_priority_mapping,
 		.default_queue		= EVENTQ_0,
 	},
@@ -361,7 +427,11 @@ static struct resource da8xx_watchdog_resources[] = {
 };
 
 static struct platform_device da8xx_wdt_device = {
+<<<<<<< HEAD
 	.name		= "watchdog",
+=======
+	.name		= "davinci-wdt",
+>>>>>>> v3.18
 	.id		= -1,
 	.num_resources	= ARRAY_SIZE(da8xx_watchdog_resources),
 	.resource	= da8xx_watchdog_resources,
@@ -371,7 +441,11 @@ void da8xx_restart(enum reboot_mode mode, const char *cmd)
 {
 	struct device *dev;
 
+<<<<<<< HEAD
 	dev = bus_find_device_by_name(&platform_bus_type, NULL, "watchdog");
+=======
+	dev = bus_find_device_by_name(&platform_bus_type, NULL, "davinci-wdt");
+>>>>>>> v3.18
 	if (!dev) {
 		pr_err("%s: failed to find watchdog device\n", __func__);
 		return;
@@ -453,17 +527,26 @@ int __init da8xx_register_emac(void)
 	ret = platform_device_register(&da8xx_mdio_device);
 	if (ret < 0)
 		return ret;
+<<<<<<< HEAD
 	ret = platform_device_register(&da8xx_emac_device);
 	if (ret < 0)
 		return ret;
 	ret = clk_add_alias(NULL, dev_name(&da8xx_mdio_device.dev),
 			    NULL, &da8xx_emac_device.dev);
 	return ret;
+=======
+
+	return platform_device_register(&da8xx_emac_device);
+>>>>>>> v3.18
 }
 
 static struct resource da830_mcasp1_resources[] = {
 	{
+<<<<<<< HEAD
 		.name	= "mcasp1",
+=======
+		.name	= "mpu",
+>>>>>>> v3.18
 		.start	= DAVINCI_DA830_MCASP1_REG_BASE,
 		.end	= DAVINCI_DA830_MCASP1_REG_BASE + (SZ_1K * 12) - 1,
 		.flags	= IORESOURCE_MEM,
@@ -491,7 +574,11 @@ static struct platform_device da830_mcasp1_device = {
 
 static struct resource da850_mcasp_resources[] = {
 	{
+<<<<<<< HEAD
 		.name	= "mcasp",
+=======
+		.name	= "mpu",
+>>>>>>> v3.18
 		.start	= DAVINCI_DA8XX_MCASP0_REG_BASE,
 		.end	= DAVINCI_DA8XX_MCASP0_REG_BASE + (SZ_1K * 12) - 1,
 		.flags	= IORESOURCE_MEM,
@@ -641,6 +728,35 @@ int __init da8xx_register_lcdc(struct da8xx_lcdc_platform_data *pdata)
 	return platform_device_register(&da8xx_lcdc_device);
 }
 
+<<<<<<< HEAD
+=======
+static struct resource da8xx_gpio_resources[] = {
+	{ /* registers */
+		.start	= DA8XX_GPIO_BASE,
+		.end	= DA8XX_GPIO_BASE + SZ_4K - 1,
+		.flags	= IORESOURCE_MEM,
+	},
+	{ /* interrupt */
+		.start	= IRQ_DA8XX_GPIO0,
+		.end	= IRQ_DA8XX_GPIO8,
+		.flags	= IORESOURCE_IRQ,
+	},
+};
+
+static struct platform_device da8xx_gpio_device = {
+	.name		= "davinci_gpio",
+	.id		= -1,
+	.num_resources	= ARRAY_SIZE(da8xx_gpio_resources),
+	.resource	= da8xx_gpio_resources,
+};
+
+int __init da8xx_register_gpio(void *pdata)
+{
+	da8xx_gpio_device.dev.platform_data = pdata;
+	return platform_device_register(&da8xx_gpio_device);
+}
+
+>>>>>>> v3.18
 static struct resource da8xx_mmcsd0_resources[] = {
 	{		/* registers */
 		.start	= DA8XX_MMCSD0_BASE,
@@ -828,6 +944,7 @@ static struct platform_device da8xx_rtc_device = {
 
 int da8xx_register_rtc(void)
 {
+<<<<<<< HEAD
 	int ret;
 
 	ret = platform_device_register(&da8xx_rtc_device);
@@ -836,6 +953,9 @@ int da8xx_register_rtc(void)
 		device_init_wakeup(&da8xx_rtc_device.dev, true);
 
 	return ret;
+=======
+	return platform_device_register(&da8xx_rtc_device);
+>>>>>>> v3.18
 }
 
 static void __iomem *da8xx_ddr2_ctlr_base;
@@ -977,7 +1097,10 @@ int __init da8xx_register_spi_bus(int instance, unsigned num_chipselect)
 }
 
 #ifdef CONFIG_ARCH_DAVINCI_DA850
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 static struct resource da850_sata_resources[] = {
 	{
 		.start	= DA850_SATA_BASE,
@@ -985,11 +1108,20 @@ static struct resource da850_sata_resources[] = {
 		.flags	= IORESOURCE_MEM,
 	},
 	{
+<<<<<<< HEAD
+=======
+		.start	= DA8XX_SYSCFG1_BASE + DA8XX_PWRDN_REG,
+		.end	= DA8XX_SYSCFG1_BASE + DA8XX_PWRDN_REG + 0x3,
+		.flags	= IORESOURCE_MEM,
+	},
+	{
+>>>>>>> v3.18
 		.start	= IRQ_DA850_SATAINT,
 		.flags	= IORESOURCE_IRQ,
 	},
 };
 
+<<<<<<< HEAD
 /* SATA PHY Control Register offset from AHCI base */
 #define SATA_P0PHYCR_REG	0x178
 
@@ -1082,6 +1214,14 @@ static struct platform_device da850_sata_device = {
 	.id	= -1,
 	.dev	= {
 		.platform_data		= &da850_sata_pdata,
+=======
+static u64 da850_sata_dmamask = DMA_BIT_MASK(32);
+
+static struct platform_device da850_sata_device = {
+	.name	= "ahci_da850",
+	.id	= -1,
+	.dev	= {
+>>>>>>> v3.18
 		.dma_mask		= &da850_sata_dmamask,
 		.coherent_dma_mask	= DMA_BIT_MASK(32),
 	},
@@ -1091,9 +1231,14 @@ static struct platform_device da850_sata_device = {
 
 int __init da850_register_sata(unsigned long refclkpn)
 {
+<<<<<<< HEAD
 	da850_sata_refclkpn = refclkpn;
 	if (!da850_sata_refclkpn)
 		return -EINVAL;
+=======
+	/* please see comment in drivers/ata/ahci_da850.c */
+	BUG_ON(refclkpn != 100 * 1000 * 1000);
+>>>>>>> v3.18
 
 	return platform_device_register(&da850_sata_device);
 }

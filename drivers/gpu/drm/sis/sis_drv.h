@@ -28,6 +28,11 @@
 #ifndef _SIS_DRV_H_
 #define _SIS_DRV_H_
 
+<<<<<<< HEAD
+=======
+#include <drm/drm_legacy.h>
+
+>>>>>>> v3.18
 /* General customization:
  */
 
@@ -70,7 +75,11 @@ extern void sis_reclaim_buffers_locked(struct drm_device *dev,
 				       struct drm_file *file_priv);
 extern void sis_lastclose(struct drm_device *dev);
 
+<<<<<<< HEAD
 extern struct drm_ioctl_desc sis_ioctls[];
+=======
+extern const struct drm_ioctl_desc sis_ioctls[];
+>>>>>>> v3.18
 extern int sis_max_ioctl;
 
 #endif

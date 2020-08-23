@@ -13,9 +13,13 @@
 	GNU General Public License for more details.
 
 	You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
 	along with this program; if not, write to the
 	Free Software Foundation, Inc.,
 	59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+	along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
  */
 
 /*
@@ -26,7 +30,10 @@
 
 #include <linux/delay.h>
 #include <linux/etherdevice.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/pci.h>
@@ -1885,6 +1892,14 @@ static int rt2500pci_probe_hw_mode(struct rt2x00_dev *rt2x00dev)
 						   EEPROM_MAC_ADDR_0));
 
 	/*
+<<<<<<< HEAD
+=======
+	 * Disable powersaving as default.
+	 */
+	rt2x00dev->hw->wiphy->flags &= ~WIPHY_FLAG_PS_ON_BY_DEFAULT;
+
+	/*
+>>>>>>> v3.18
 	 * Initialize hw_mode information.
 	 */
 	spec->supported_bands = SUPPORT_BAND_2GHZ;
@@ -2061,6 +2076,7 @@ static const struct rt2x00lib_ops rt2500pci_rt2x00_ops = {
 	.config			= rt2500pci_config,
 };
 
+<<<<<<< HEAD
 static const struct data_queue_desc rt2500pci_queue_rx = {
 	.entry_num		= 32,
 	.data_size		= DATA_FRAME_SIZE,
@@ -2088,6 +2104,47 @@ static const struct data_queue_desc rt2500pci_queue_atim = {
 	.desc_size		= TXD_DESC_SIZE,
 	.priv_size		= sizeof(struct queue_entry_priv_mmio),
 };
+=======
+static void rt2500pci_queue_init(struct data_queue *queue)
+{
+	switch (queue->qid) {
+	case QID_RX:
+		queue->limit = 32;
+		queue->data_size = DATA_FRAME_SIZE;
+		queue->desc_size = RXD_DESC_SIZE;
+		queue->priv_size = sizeof(struct queue_entry_priv_mmio);
+		break;
+
+	case QID_AC_VO:
+	case QID_AC_VI:
+	case QID_AC_BE:
+	case QID_AC_BK:
+		queue->limit = 32;
+		queue->data_size = DATA_FRAME_SIZE;
+		queue->desc_size = TXD_DESC_SIZE;
+		queue->priv_size = sizeof(struct queue_entry_priv_mmio);
+		break;
+
+	case QID_BEACON:
+		queue->limit = 1;
+		queue->data_size = MGMT_FRAME_SIZE;
+		queue->desc_size = TXD_DESC_SIZE;
+		queue->priv_size = sizeof(struct queue_entry_priv_mmio);
+		break;
+
+	case QID_ATIM:
+		queue->limit = 8;
+		queue->data_size = DATA_FRAME_SIZE;
+		queue->desc_size = TXD_DESC_SIZE;
+		queue->priv_size = sizeof(struct queue_entry_priv_mmio);
+		break;
+
+	default:
+		BUG();
+		break;
+	}
+}
+>>>>>>> v3.18
 
 static const struct rt2x00_ops rt2500pci_ops = {
 	.name			= KBUILD_MODNAME,
@@ -2095,11 +2152,15 @@ static const struct rt2x00_ops rt2500pci_ops = {
 	.eeprom_size		= EEPROM_SIZE,
 	.rf_size		= RF_SIZE,
 	.tx_queues		= NUM_TX_QUEUES,
+<<<<<<< HEAD
 	.extra_tx_headroom	= 0,
 	.rx			= &rt2500pci_queue_rx,
 	.tx			= &rt2500pci_queue_tx,
 	.bcn			= &rt2500pci_queue_bcn,
 	.atim			= &rt2500pci_queue_atim,
+=======
+	.queue_init		= rt2500pci_queue_init,
+>>>>>>> v3.18
 	.lib			= &rt2500pci_rt2x00_ops,
 	.hw			= &rt2500pci_mac80211_ops,
 #ifdef CONFIG_RT2X00_LIB_DEBUGFS
@@ -2110,7 +2171,11 @@ static const struct rt2x00_ops rt2500pci_ops = {
 /*
  * RT2500pci module information.
  */
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(rt2500pci_device_table) = {
+=======
+static const struct pci_device_id rt2500pci_device_table[] = {
+>>>>>>> v3.18
 	{ PCI_DEVICE(0x1814, 0x0201) },
 	{ 0, }
 };

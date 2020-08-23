@@ -31,4 +31,8 @@ static int __init proc_version_init(void)
 	proc_create("version", 0, NULL, &version_proc_fops);
 	return 0;
 }
+<<<<<<< HEAD
 module_init(proc_version_init);
+=======
+fs_initcall(proc_version_init);
+>>>>>>> v3.18

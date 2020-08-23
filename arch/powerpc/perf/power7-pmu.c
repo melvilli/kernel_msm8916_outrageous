@@ -53,6 +53,7 @@
 /*
  * Power7 event codes.
  */
+<<<<<<< HEAD
 #define	PME_PM_CYC			0x1e
 #define	PME_PM_GCT_NOSLOT_CYC		0x100f8
 #define	PME_PM_CMPLU_STALL		0x4000a
@@ -61,6 +62,15 @@
 #define	PME_PM_LD_MISS_L1		0x400f0
 #define	PME_PM_BRU_FIN			0x10068
 #define	PME_PM_BRU_MPRED		0x400f6
+=======
+#define EVENT(_name, _code) \
+	PME_##_name = _code,
+
+enum {
+#include "power7-events-list.h"
+};
+#undef EVENT
+>>>>>>> v3.18
 
 /*
  * Layout of constraint bits:
@@ -246,7 +256,11 @@ static int power7_marked_instr_event(u64 event)
 }
 
 static int power7_compute_mmcr(u64 event[], int n_ev,
+<<<<<<< HEAD
 			       unsigned int hwc[], unsigned long mmcr[])
+=======
+			       unsigned int hwc[], unsigned long mmcr[], struct perf_event *pevents[])
+>>>>>>> v3.18
 {
 	unsigned long mmcr1 = 0;
 	unsigned long mmcra = MMCRA_SDAR_DCACHE_MISS | MMCRA_SDAR_ERAT_MISS;
@@ -326,7 +340,11 @@ static int power7_generic_events[] = {
 	[PERF_COUNT_HW_CACHE_REFERENCES] =		PME_PM_LD_REF_L1,
 	[PERF_COUNT_HW_CACHE_MISSES] =			PME_PM_LD_MISS_L1,
 	[PERF_COUNT_HW_BRANCH_INSTRUCTIONS] =		PME_PM_BRU_FIN,
+<<<<<<< HEAD
 	[PERF_COUNT_HW_BRANCH_MISSES] =			PME_PM_BRU_MPRED,
+=======
+	[PERF_COUNT_HW_BRANCH_MISSES] =			PME_PM_BR_MPRED,
+>>>>>>> v3.18
 };
 
 #define C(x)	PERF_COUNT_HW_CACHE_##x
@@ -375,6 +393,7 @@ static int power7_cache_events[C(MAX)][C(OP_MAX)][C(RESULT_MAX)] = {
 };
 
 
+<<<<<<< HEAD
 GENERIC_EVENT_ATTR(cpu-cycles,			CYC);
 GENERIC_EVENT_ATTR(stalled-cycles-frontend,	GCT_NOSLOT_CYC);
 GENERIC_EVENT_ATTR(stalled-cycles-backend,	CMPLU_STALL);
@@ -415,6 +434,38 @@ static struct attribute *power7_events_attr[] = {
 };
 
 
+=======
+GENERIC_EVENT_ATTR(cpu-cycles,			PM_CYC);
+GENERIC_EVENT_ATTR(stalled-cycles-frontend,	PM_GCT_NOSLOT_CYC);
+GENERIC_EVENT_ATTR(stalled-cycles-backend,	PM_CMPLU_STALL);
+GENERIC_EVENT_ATTR(instructions,		PM_INST_CMPL);
+GENERIC_EVENT_ATTR(cache-references,		PM_LD_REF_L1);
+GENERIC_EVENT_ATTR(cache-misses,		PM_LD_MISS_L1);
+GENERIC_EVENT_ATTR(branch-instructions,		PM_BRU_FIN);
+GENERIC_EVENT_ATTR(branch-misses,		PM_BR_MPRED);
+
+#define EVENT(_name, _code)     POWER_EVENT_ATTR(_name, _name);
+#include "power7-events-list.h"
+#undef EVENT
+
+#define EVENT(_name, _code)     POWER_EVENT_PTR(_name),
+
+static struct attribute *power7_events_attr[] = {
+	GENERIC_EVENT_PTR(PM_CYC),
+	GENERIC_EVENT_PTR(PM_GCT_NOSLOT_CYC),
+	GENERIC_EVENT_PTR(PM_CMPLU_STALL),
+	GENERIC_EVENT_PTR(PM_INST_CMPL),
+	GENERIC_EVENT_PTR(PM_LD_REF_L1),
+	GENERIC_EVENT_PTR(PM_LD_MISS_L1),
+	GENERIC_EVENT_PTR(PM_BRU_FIN),
+	GENERIC_EVENT_PTR(PM_BR_MPRED),
+
+	#include "power7-events-list.h"
+	#undef EVENT
+	NULL
+};
+
+>>>>>>> v3.18
 static struct attribute_group power7_pmu_events_group = {
 	.name = "events",
 	.attrs = power7_events_attr,

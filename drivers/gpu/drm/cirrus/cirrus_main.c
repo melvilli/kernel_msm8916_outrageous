@@ -255,6 +255,7 @@ int cirrus_dumb_create(struct drm_file *file,
 	return 0;
 }
 
+<<<<<<< HEAD
 int cirrus_dumb_destroy(struct drm_file *file,
 		     struct drm_device *dev,
 		     uint32_t handle)
@@ -269,6 +270,9 @@ int cirrus_gem_init_object(struct drm_gem_object *obj)
 }
 
 void cirrus_bo_unref(struct cirrus_bo **bo)
+=======
+static void cirrus_bo_unref(struct cirrus_bo **bo)
+>>>>>>> v3.18
 {
 	struct ttm_buffer_object *tbo;
 
@@ -277,24 +281,35 @@ void cirrus_bo_unref(struct cirrus_bo **bo)
 
 	tbo = &((*bo)->bo);
 	ttm_bo_unref(&tbo);
+<<<<<<< HEAD
 	if (tbo == NULL)
 		*bo = NULL;
 
+=======
+	*bo = NULL;
+>>>>>>> v3.18
 }
 
 void cirrus_gem_free_object(struct drm_gem_object *obj)
 {
 	struct cirrus_bo *cirrus_bo = gem_to_cirrus_bo(obj);
 
+<<<<<<< HEAD
 	if (!cirrus_bo)
 		return;
+=======
+>>>>>>> v3.18
 	cirrus_bo_unref(&cirrus_bo);
 }
 
 
 static inline u64 cirrus_bo_mmap_offset(struct cirrus_bo *bo)
 {
+<<<<<<< HEAD
 	return bo->bo.addr_space_offset;
+=======
+	return drm_vma_node_offset_addr(&bo->bo.vma_node);
+>>>>>>> v3.18
 }
 
 int

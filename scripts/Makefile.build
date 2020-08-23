@@ -50,6 +50,7 @@ ifeq ($(KBUILD_NOPEDANTIC),)
         endif
 endif
 
+<<<<<<< HEAD
 #
 # make W=... settings
 #
@@ -101,6 +102,8 @@ endif
 KBUILD_CFLAGS += $(warning)
 endif
 
+=======
+>>>>>>> v3.18
 include scripts/Makefile.lib
 
 ifdef host-progs
@@ -130,11 +133,19 @@ endif
 
 # ===========================================================================
 
+<<<<<<< HEAD
 ifneq ($(strip $(lib-y) $(lib-m) $(lib-n) $(lib-)),)
 lib-target := $(obj)/lib.a
 endif
 
 ifneq ($(strip $(obj-y) $(obj-m) $(obj-n) $(obj-) $(subdir-m) $(lib-target)),)
+=======
+ifneq ($(strip $(lib-y) $(lib-m) $(lib-)),)
+lib-target := $(obj)/lib.a
+endif
+
+ifneq ($(strip $(obj-y) $(obj-m) $(obj-) $(subdir-m) $(lib-target)),)
+>>>>>>> v3.18
 builtin-target := $(obj)/built-in.o
 endif
 
@@ -198,7 +209,11 @@ $(multi-objs-y:.o=.s)   : modname = $(modname-multi)
 $(multi-objs-y:.o=.lst) : modname = $(modname-multi)
 
 quiet_cmd_cc_s_c = CC $(quiet_modtag)  $@
+<<<<<<< HEAD
 cmd_cc_s_c       = $(CC) $(c_flags) -fverbose-asm -S -o $@ $<
+=======
+cmd_cc_s_c       = $(CC) $(c_flags) $(DISABLE_LTO) -fverbose-asm -S -o $@ $<
+>>>>>>> v3.18
 
 $(obj)/%.s: $(src)/%.c FORCE
 	$(call if_changed_dep,cc_s_c)
@@ -332,7 +347,11 @@ $(real-objs-m)      : modkern_aflags := $(KBUILD_AFLAGS_MODULE) $(AFLAGS_MODULE)
 $(real-objs-m:.o=.s): modkern_aflags := $(KBUILD_AFLAGS_MODULE) $(AFLAGS_MODULE)
 
 quiet_cmd_as_s_S = CPP $(quiet_modtag) $@
+<<<<<<< HEAD
 cmd_as_s_S       = $(CPP) $(a_flags)   -o $@ $< 
+=======
+cmd_as_s_S       = $(CPP) $(a_flags)   -o $@ $<
+>>>>>>> v3.18
 
 $(obj)/%.s: $(src)/%.S FORCE
 	$(call if_changed_dep,as_s_S)
@@ -426,13 +445,18 @@ link_multi_deps =                     \
 $(filter $(addprefix $(obj)/,         \
 $($(subst $(obj)/,,$(@:.o=-objs)))    \
 $($(subst $(obj)/,,$(@:.o=-y)))), $^)
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> v3.18
 quiet_cmd_link_multi-y = LD      $@
 cmd_link_multi-y = $(LD) $(ld_flags) -r -o $@ $(link_multi_deps) $(cmd_secanalysis)
 
 quiet_cmd_link_multi-m = LD [M]  $@
 cmd_link_multi-m = $(cmd_link_multi-y)
 
+<<<<<<< HEAD
 # We would rather have a list of rules like
 # 	foo.o: $(foo-objs)
 # but that's not so easy, so we rather make all composite objects depend
@@ -443,6 +467,16 @@ $(multi-used-y) : %.o: $(multi-objs-y) FORCE
 $(multi-used-m) : %.o: $(multi-objs-m) FORCE
 	$(call if_changed,link_multi-m)
 	@{ echo $(@:.o=.ko); echo $(link_multi_deps); } > $(MODVERDIR)/$(@F:.o=.mod)
+=======
+$(multi-used-y): FORCE
+	$(call if_changed,link_multi-y)
+$(call multi_depend, $(multi-used-y), .o, -objs -y)
+
+$(multi-used-m): FORCE
+	$(call if_changed,link_multi-m)
+	@{ echo $(@:.o=.ko); echo $(link_multi_deps); } > $(MODVERDIR)/$(@F:.o=.mod)
+$(call multi_depend, $(multi-used-m), .o, -objs -y)
+>>>>>>> v3.18
 
 targets += $(multi-used-y) $(multi-used-m)
 

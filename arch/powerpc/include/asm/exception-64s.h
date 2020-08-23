@@ -48,17 +48,29 @@
 #define EX_LR		72
 #define EX_CFAR		80
 #define EX_PPR		88	/* SMT thread status register (priority) */
+<<<<<<< HEAD
+=======
+#define EX_CTR		96
+>>>>>>> v3.18
 
 #ifdef CONFIG_RELOCATABLE
 #define __EXCEPTION_RELON_PROLOG_PSERIES_1(label, h)			\
 	ld	r12,PACAKBASE(r13);	/* get high part of &label */	\
 	mfspr	r11,SPRN_##h##SRR0;	/* save SRR0 */			\
 	LOAD_HANDLER(r12,label);					\
+<<<<<<< HEAD
 	mtlr	r12;							\
 	mfspr	r12,SPRN_##h##SRR1;	/* and SRR1 */			\
 	li	r10,MSR_RI;						\
 	mtmsrd 	r10,1;			/* Set RI (EE=0) */		\
 	blr;
+=======
+	mtctr	r12;							\
+	mfspr	r12,SPRN_##h##SRR1;	/* and SRR1 */			\
+	li	r10,MSR_RI;						\
+	mtmsrd 	r10,1;			/* Set RI (EE=0) */		\
+	bctr;
+>>>>>>> v3.18
 #else
 /* If not relocatable, we can jump directly -- and save messing with LR */
 #define __EXCEPTION_RELON_PROLOG_PSERIES_1(label, h)			\
@@ -97,6 +109,7 @@
 
 #if defined(CONFIG_RELOCATABLE)
 /*
+<<<<<<< HEAD
  * If we support interrupts with relocation on AND we're a relocatable
  * kernel, we need to use LR to get to the 2nd level handler.  So, save/restore
  * it when required.
@@ -109,6 +122,20 @@
 #define SAVE_LR(reg, area)
 #define GET_LR(reg, area) 	mflr	reg
 #define RESTORE_LR(reg, area)
+=======
+ * If we support interrupts with relocation on AND we're a relocatable kernel,
+ * we need to use CTR to get to the 2nd level handler.  So, save/restore it
+ * when required.
+ */
+#define SAVE_CTR(reg, area)	mfctr	reg ; 	std	reg,area+EX_CTR(r13)
+#define GET_CTR(reg, area) 			ld	reg,area+EX_CTR(r13)
+#define RESTORE_CTR(reg, area)	ld	reg,area+EX_CTR(r13) ; mtctr reg
+#else
+/* ...else CTR is unused and in register. */
+#define SAVE_CTR(reg, area)
+#define GET_CTR(reg, area) 	mfctr	reg
+#define RESTORE_CTR(reg, area)
+>>>>>>> v3.18
 #endif
 
 /*
@@ -146,6 +173,17 @@ BEGIN_FTR_SECTION_NESTED(943)						\
 END_FTR_SECTION_NESTED(ftr,ftr,943)
 
 /*
+<<<<<<< HEAD
+=======
+ * Set an SPR from a register if the CPU has the given feature
+ */
+#define OPT_SET_SPR(ra, spr, ftr)					\
+BEGIN_FTR_SECTION_NESTED(943)						\
+	mtspr	spr,ra;							\
+END_FTR_SECTION_NESTED(ftr,ftr,943)
+
+/*
+>>>>>>> v3.18
  * Save a register to the PACA if the CPU has the given feature
  */
 #define OPT_SAVE_REG_TO_PACA(offset, ra, ftr)				\
@@ -164,7 +202,11 @@ END_FTR_SECTION_NESTED(ftr,ftr,943)
 #define __EXCEPTION_PROLOG_1(area, extra, vec)				\
 	OPT_SAVE_REG_TO_PACA(area+EX_PPR, r9, CPU_FTR_HAS_PPR);		\
 	OPT_SAVE_REG_TO_PACA(area+EX_CFAR, r10, CPU_FTR_CFAR);		\
+<<<<<<< HEAD
 	SAVE_LR(r10, area);						\
+=======
+	SAVE_CTR(r10, area);						\
+>>>>>>> v3.18
 	mfcr	r9;							\
 	extra(vec);							\
 	std	r11,area+EX_R11(r13);					\
@@ -197,12 +239,33 @@ END_FTR_SECTION_NESTED(ftr,ftr,943)
 	cmpwi	r10,0;							\
 	bne	do_kvm_##n
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_KVM_BOOK3S_HV_POSSIBLE
+/*
+ * If hv is possible, interrupts come into to the hv version
+ * of the kvmppc_interrupt code, which then jumps to the PR handler,
+ * kvmppc_interrupt_pr, if the guest is a PR guest.
+ */
+#define kvmppc_interrupt kvmppc_interrupt_hv
+#else
+#define kvmppc_interrupt kvmppc_interrupt_pr
+#endif
+
+>>>>>>> v3.18
 #define __KVM_HANDLER(area, h, n)					\
 do_kvm_##n:								\
 	BEGIN_FTR_SECTION_NESTED(947)					\
 	ld	r10,area+EX_CFAR(r13);					\
 	std	r10,HSTATE_CFAR(r13);					\
 	END_FTR_SECTION_NESTED(CPU_FTR_CFAR,CPU_FTR_CFAR,947);		\
+<<<<<<< HEAD
+=======
+	BEGIN_FTR_SECTION_NESTED(948)					\
+	ld	r10,area+EX_PPR(r13);					\
+	std	r10,HSTATE_PPR(r13);					\
+	END_FTR_SECTION_NESTED(CPU_FTR_HAS_PPR,CPU_FTR_HAS_PPR,948);	\
+>>>>>>> v3.18
 	ld	r10,area+EX_R10(r13);					\
 	stw	r9,HSTATE_SCRATCH1(r13);				\
 	ld	r9,area+EX_R9(r13);					\
@@ -216,6 +279,13 @@ do_kvm_##n:								\
 	ld	r10,area+EX_R10(r13);					\
 	beq	89f;							\
 	stw	r9,HSTATE_SCRATCH1(r13);			\
+<<<<<<< HEAD
+=======
+	BEGIN_FTR_SECTION_NESTED(948)					\
+	ld	r9,area+EX_PPR(r13);					\
+	std	r9,HSTATE_PPR(r13);					\
+	END_FTR_SECTION_NESTED(CPU_FTR_HAS_PPR,CPU_FTR_HAS_PPR,948);	\
+>>>>>>> v3.18
 	ld	r9,area+EX_R9(r13);					\
 	std	r12,HSTATE_SCRATCH0(r13);			\
 	li	r12,n;							\
@@ -235,7 +305,11 @@ do_kvm_##n:								\
 #define KVM_HANDLER_SKIP(area, h, n)
 #endif
 
+<<<<<<< HEAD
 #ifdef CONFIG_KVM_BOOK3S_PR
+=======
+#ifdef CONFIG_KVM_BOOK3S_PR_POSSIBLE
+>>>>>>> v3.18
 #define KVMTEST_PR(n)			__KVMTEST(n)
 #define KVM_HANDLER_PR(area, h, n)	__KVM_HANDLER(area, h, n)
 #define KVM_HANDLER_PR_SKIP(area, h, n)	__KVM_HANDLER_SKIP(area, h, n)
@@ -270,7 +344,11 @@ do_kvm_##n:								\
 	sth	r1,PACA_TRAP_SAVE(r13);					   \
 	std	r3,area+EX_R3(r13);					   \
 	addi	r3,r13,area;		/* r3 -> where regs are saved*/	   \
+<<<<<<< HEAD
 	RESTORE_LR(r1, area);						   \
+=======
+	RESTORE_CTR(r1, area);						   \
+>>>>>>> v3.18
 	b	bad_stack;						   \
 3:	std	r9,_CCR(r1);		/* save CR in stackframe	*/ \
 	std	r11,_NIP(r1);		/* save SRR0 in stackframe	*/ \
@@ -281,9 +359,18 @@ do_kvm_##n:								\
 	beq	4f;			/* if from kernel mode		*/ \
 	ACCOUNT_CPU_USER_ENTRY(r9, r10);				   \
 	SAVE_PPR(area, r9, r10);					   \
+<<<<<<< HEAD
 4:	std	r2,GPR2(r1);		/* save r2 in stackframe	*/ \
 	SAVE_4GPRS(3, r1);		/* save r3 - r6 in stackframe	*/ \
 	SAVE_2GPRS(7, r1);		/* save r7, r8 in stackframe	*/ \
+=======
+4:	EXCEPTION_PROLOG_COMMON_2(area)					   \
+	EXCEPTION_PROLOG_COMMON_3(n)					   \
+	ACCOUNT_STOLEN_TIME
+
+/* Save original regs values from save area to stack frame. */
+#define EXCEPTION_PROLOG_COMMON_2(area)					   \
+>>>>>>> v3.18
 	ld	r9,area+EX_R9(r13);	/* move r9, r10 to stackframe	*/ \
 	ld	r10,area+EX_R10(r13);					   \
 	std	r9,GPR9(r1);						   \
@@ -298,11 +385,24 @@ do_kvm_##n:								\
 	ld	r10,area+EX_CFAR(r13);					   \
 	std	r10,ORIG_GPR3(r1);					   \
 	END_FTR_SECTION_NESTED(CPU_FTR_CFAR, CPU_FTR_CFAR, 66);		   \
+<<<<<<< HEAD
 	GET_LR(r9,area);		/* Get LR, later save to stack	*/ \
 	ld	r2,PACATOC(r13);	/* get kernel TOC into r2	*/ \
 	std	r9,_LINK(r1);						   \
 	mfctr	r10;			/* save CTR in stackframe	*/ \
 	std	r10,_CTR(r1);						   \
+=======
+	GET_CTR(r10, area);						   \
+	std	r10,_CTR(r1);
+
+#define EXCEPTION_PROLOG_COMMON_3(n)					   \
+	std	r2,GPR2(r1);		/* save r2 in stackframe	*/ \
+	SAVE_4GPRS(3, r1);		/* save r3 - r6 in stackframe   */ \
+	SAVE_2GPRS(7, r1);		/* save r7, r8 in stackframe	*/ \
+	mflr	r9;			/* Get LR, later save to stack	*/ \
+	ld	r2,PACATOC(r13);	/* get kernel TOC into r2	*/ \
+	std	r9,_LINK(r1);						   \
+>>>>>>> v3.18
 	lbz	r10,PACASOFTIRQEN(r13);				   \
 	mfspr	r11,SPRN_XER;		/* save XER in stackframe	*/ \
 	std	r10,SOFTE(r1);						   \
@@ -312,8 +412,12 @@ do_kvm_##n:								\
 	li	r10,0;							   \
 	ld	r11,exception_marker@toc(r2);				   \
 	std	r10,RESULT(r1);		/* clear regs->result		*/ \
+<<<<<<< HEAD
 	std	r11,STACK_FRAME_OVERHEAD-16(r1); /* mark the frame	*/ \
 	ACCOUNT_STOLEN_TIME
+=======
+	std	r11,STACK_FRAME_OVERHEAD-16(r1); /* mark the frame	*/
+>>>>>>> v3.18
 
 /*
  * Exception vectors.
@@ -390,6 +494,11 @@ label##_relon_hv:						\
 #define SOFTEN_VALUE_0xa00	PACA_IRQ_DBELL
 #define SOFTEN_VALUE_0xe80	PACA_IRQ_DBELL
 #define SOFTEN_VALUE_0xe82	PACA_IRQ_DBELL
+<<<<<<< HEAD
+=======
+#define SOFTEN_VALUE_0xe60	PACA_IRQ_HMI
+#define SOFTEN_VALUE_0xe62	PACA_IRQ_HMI
+>>>>>>> v3.18
 
 #define __SOFTEN_TEST(h, vec)						\
 	lbz	r10,PACASOFTIRQEN(r13);					\
@@ -478,11 +587,22 @@ label##_relon_hv:							\
  * runlatch, etc...
  */
 
+<<<<<<< HEAD
 /* Exception addition: Hard disable interrupts */
 #define DISABLE_INTS	SOFT_DISABLE_INTS(r10,r11)
 
 #define ADD_NVGPRS				\
 	bl	.save_nvgprs
+=======
+/*
+ * This addition reconciles our actual IRQ state with the various software
+ * flags that track it. This may call C code.
+ */
+#define ADD_RECONCILE	RECONCILE_IRQ_STATE(r10,r11)
+
+#define ADD_NVGPRS				\
+	bl	save_nvgprs
+>>>>>>> v3.18
 
 #define RUNLATCH_ON				\
 BEGIN_FTR_SECTION				\
@@ -497,6 +617,10 @@ END_FTR_SECTION_IFSET(CPU_FTR_CTRL)
 	.globl label##_common;					\
 label##_common:							\
 	EXCEPTION_PROLOG_COMMON(trap, PACA_EXGEN);		\
+<<<<<<< HEAD
+=======
+	/* Volatile regs are potentially clobbered here */	\
+>>>>>>> v3.18
 	additions;						\
 	addi	r3,r1,STACK_FRAME_OVERHEAD;			\
 	bl	hdlr;						\
@@ -504,7 +628,11 @@ label##_common:							\
 
 #define STD_EXCEPTION_COMMON(trap, label, hdlr)			\
 	EXCEPTION_COMMON(trap, label, hdlr, ret_from_except,	\
+<<<<<<< HEAD
 			 ADD_NVGPRS;DISABLE_INTS)
+=======
+			 ADD_NVGPRS;ADD_RECONCILE)
+>>>>>>> v3.18
 
 /*
  * Like STD_EXCEPTION_COMMON, but for exceptions that can occur
@@ -513,7 +641,11 @@ label##_common:							\
  */
 #define STD_EXCEPTION_COMMON_ASYNC(trap, label, hdlr)		  \
 	EXCEPTION_COMMON(trap, label, hdlr, ret_from_except_lite, \
+<<<<<<< HEAD
 			 FINISH_NAP;DISABLE_INTS;RUNLATCH_ON)
+=======
+			 FINISH_NAP;ADD_RECONCILE;RUNLATCH_ON)
+>>>>>>> v3.18
 
 /*
  * When the idle code in power4_idle puts the CPU into NAP mode,

@@ -12,10 +12,13 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
  */
 
 /*
@@ -61,6 +64,7 @@
  * 320502b (lab-pc+)
  */
 
+<<<<<<< HEAD
 #include <linux/interrupt.h>
 #include <linux/slab.h>
 #include <linux/io.h>
@@ -235,10 +239,20 @@ static inline void labpc_writeb(unsigned int byte, unsigned long address)
 }
 
 #if IS_ENABLED(CONFIG_COMEDI_NI_LABPC_ISA)
+=======
+#include <linux/module.h>
+
+#include "../comedidev.h"
+
+#include "ni_labpc.h"
+#include "ni_labpc_isadma.h"
+
+>>>>>>> v3.18
 static const struct labpc_boardinfo labpc_boards[] = {
 	{
 		.name			= "lab-pc-1200",
 		.ai_speed		= 10000,
+<<<<<<< HEAD
 		.register_layout	= labpc_1200_layout,
 		.has_ao			= 1,
 		.ai_range_table		= &range_labpc_1200_ai,
@@ -1710,6 +1724,23 @@ void labpc_common_detach(struct comedi_device *dev)
 EXPORT_SYMBOL_GPL(labpc_common_detach);
 
 #if IS_ENABLED(CONFIG_COMEDI_NI_LABPC_ISA)
+=======
+		.ai_scan_up		= 1,
+		.has_ao			= 1,
+		.is_labpc1200		= 1,
+	}, {
+		.name			= "lab-pc-1200ai",
+		.ai_speed		= 10000,
+		.ai_scan_up		= 1,
+		.is_labpc1200		= 1,
+	}, {
+		.name			= "lab-pc+",
+		.ai_speed		= 12000,
+		.has_ao			= 1,
+	},
+};
+
+>>>>>>> v3.18
 static int labpc_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 {
 	struct labpc_private *devpriv;
@@ -1717,12 +1748,20 @@ static int labpc_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	unsigned int dma_chan = it->options[2];
 	int ret;
 
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
 
 	ret = comedi_request_region(dev, it->options[0], LABPC_SIZE);
+=======
+	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
+	if (!devpriv)
+		return -ENOMEM;
+
+	ret = comedi_request_region(dev, it->options[0], 0x20);
+>>>>>>> v3.18
 	if (ret)
 		return ret;
 
@@ -1730,6 +1769,7 @@ static int labpc_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 #ifdef CONFIG_ISA_DMA_API
 	if (dev->irq && (dma_chan == 1 || dma_chan == 3)) {
 		devpriv->dma_buffer = kmalloc(dma_buffer_size,
@@ -1753,6 +1793,10 @@ static int labpc_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 		}
 	}
 #endif
+=======
+	if (dev->irq)
+		labpc_init_dma_chan(dev, dma_chan);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -1761,6 +1805,7 @@ static void labpc_detach(struct comedi_device *dev)
 {
 	struct labpc_private *devpriv = dev->private;
 
+<<<<<<< HEAD
 	labpc_common_detach(dev);
 
 	if (devpriv) {
@@ -1768,6 +1813,11 @@ static void labpc_detach(struct comedi_device *dev)
 		if (devpriv->dma_chan)
 			free_dma(devpriv->dma_chan);
 	}
+=======
+	if (devpriv)
+		labpc_free_dma_chan(dev);
+
+>>>>>>> v3.18
 	comedi_legacy_detach(dev);
 }
 
@@ -1781,6 +1831,7 @@ static struct comedi_driver labpc_driver = {
 	.offset		= sizeof(struct labpc_boardinfo),
 };
 module_comedi_driver(labpc_driver);
+<<<<<<< HEAD
 #else
 static int __init labpc_common_init(void)
 {
@@ -1796,4 +1847,9 @@ module_exit(labpc_common_exit);
 
 MODULE_AUTHOR("Comedi http://www.comedi.org");
 MODULE_DESCRIPTION("Comedi low-level driver");
+=======
+
+MODULE_AUTHOR("Comedi http://www.comedi.org");
+MODULE_DESCRIPTION("Comedi driver for NI Lab-PC ISA boards");
+>>>>>>> v3.18
 MODULE_LICENSE("GPL");

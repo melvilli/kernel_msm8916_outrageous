@@ -21,8 +21,14 @@ int speakup_thread(void *data)
 	mutex_lock(&spk_mutex);
 	while (1) {
 		DEFINE_WAIT(wait);
+<<<<<<< HEAD
 		while (1) {
 			spk_lock(flags);
+=======
+
+		while (1) {
+			spin_lock_irqsave(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 			our_sound = spk_unprocessed_sound;
 			spk_unprocessed_sound.active = 0;
 			prepare_to_wait(&speakup_event, &wait,
@@ -32,7 +38,11 @@ int speakup_thread(void *data)
 				(synth && synth->catch_up && synth->alive &&
 					(speakup_info.flushing ||
 					!synth_buffer_empty()));
+<<<<<<< HEAD
 			spk_unlock(flags);
+=======
+			spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 			if (should_break)
 				break;
 			mutex_unlock(&spk_mutex);

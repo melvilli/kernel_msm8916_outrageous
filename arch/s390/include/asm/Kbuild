@@ -1,5 +1,13 @@
 
 
 generic-y += clkdev.h
+<<<<<<< HEAD
 generic-y += mcs_spinlock.h
+=======
+generic-y += hash.h
+generic-y += irq_work.h
+generic-y += mcs_spinlock.h
+generic-y += preempt.h
+generic-y += scatterlist.h
+>>>>>>> v3.18
 generic-y += trace_clock.h

@@ -112,7 +112,11 @@ static int sharpsl_nand_probe(struct platform_device *pdev)
 	struct resource *r;
 	int err = 0;
 	struct sharpsl_nand *sharpsl;
+<<<<<<< HEAD
 	struct sharpsl_nand_platform_data *data = pdev->dev.platform_data;
+=======
+	struct sharpsl_nand_platform_data *data = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 
 	if (!data) {
 		dev_err(&pdev->dev, "no platform data!\n");
@@ -121,10 +125,15 @@ static int sharpsl_nand_probe(struct platform_device *pdev)
 
 	/* Allocate memory for MTD device structure and private data */
 	sharpsl = kzalloc(sizeof(struct sharpsl_nand), GFP_KERNEL);
+<<<<<<< HEAD
 	if (!sharpsl) {
 		printk("Unable to allocate SharpSL NAND MTD device structure.\n");
 		return -ENOMEM;
 	}
+=======
+	if (!sharpsl)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	r = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!r) {
@@ -136,7 +145,11 @@ static int sharpsl_nand_probe(struct platform_device *pdev)
 	/* map physical address */
 	sharpsl->io = ioremap(r->start, resource_size(r));
 	if (!sharpsl->io) {
+<<<<<<< HEAD
 		printk("ioremap to access Sharp SL NAND chip failed\n");
+=======
+		dev_err(&pdev->dev, "ioremap to access Sharp SL NAND chip failed\n");
+>>>>>>> v3.18
 		err = -EIO;
 		goto err_ioremap;
 	}
@@ -194,7 +207,10 @@ err_add:
 	nand_release(&sharpsl->mtd);
 
 err_scan:
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	iounmap(sharpsl->io);
 err_ioremap:
 err_get_res:
@@ -212,8 +228,11 @@ static int sharpsl_nand_remove(struct platform_device *pdev)
 	/* Release resources, unregister device */
 	nand_release(&sharpsl->mtd);
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 	iounmap(sharpsl->io);
 
 	/* Free the MTD device structure */

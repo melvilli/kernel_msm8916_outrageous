@@ -431,7 +431,11 @@ static int cumanascsi2_probe(struct expansion_card *ec,
 		goto out_free;
 
 	ret = request_irq(ec->irq, cumanascsi_2_intr,
+<<<<<<< HEAD
 			  IRQF_DISABLED, "cumanascsi2", info);
+=======
+			  0, "cumanascsi2", info);
+>>>>>>> v3.18
 	if (ret) {
 		printk("scsi%d: IRQ%d not free: %d\n",
 		       host->host_no, ec->irq, ret);

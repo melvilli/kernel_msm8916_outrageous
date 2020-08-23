@@ -10,6 +10,10 @@
  * published by the Free Software Foundation.
  */
 
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/platform_device.h>
 #include <linux/err.h>
@@ -33,8 +37,11 @@ static int __init omap_iommu_dev_init(struct omap_hwmod *oh, void *unused)
 
 	pdata->name = oh->name;
 	pdata->nr_tlb_entries = a->nr_tlb_entries;
+<<<<<<< HEAD
 	pdata->da_start = a->da_start;
 	pdata->da_end = a->da_end;
+=======
+>>>>>>> v3.18
 
 	if (oh->rst_lines_cnt == 1) {
 		pdata->reset_name = oh->rst_lines->name;
@@ -58,6 +65,13 @@ static int __init omap_iommu_dev_init(struct omap_hwmod *oh, void *unused)
 
 static int __init omap_iommu_init(void)
 {
+<<<<<<< HEAD
+=======
+	/* If dtb is there, the devices will be created dynamically */
+	if (of_have_populated_dt())
+		return -ENODEV;
+
+>>>>>>> v3.18
 	return omap_hwmod_for_each_by_class("mmu", omap_iommu_dev_init, NULL);
 }
 /* must be ready before omap3isp is probed */

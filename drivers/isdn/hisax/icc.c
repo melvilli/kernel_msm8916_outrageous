@@ -134,7 +134,11 @@ icc_empty_fifo(struct IsdnCardState *cs, int count)
 
 		t += sprintf(t, "icc_empty_fifo cnt %d", count);
 		QuickHex(t, ptr, count);
+<<<<<<< HEAD
 		debugl1(cs, cs->dlog);
+=======
+		debugl1(cs, "%s", cs->dlog);
+>>>>>>> v3.18
 	}
 }
 
@@ -176,7 +180,11 @@ icc_fill_fifo(struct IsdnCardState *cs)
 
 		t += sprintf(t, "icc_fill_fifo cnt %d", count);
 		QuickHex(t, ptr, count);
+<<<<<<< HEAD
 		debugl1(cs, cs->dlog);
+=======
+		debugl1(cs, "%s", cs->dlog);
+>>>>>>> v3.18
 	}
 }
 
@@ -425,7 +433,11 @@ afterXPR:
 				if (cs->debug & L1_DEB_MONITOR)
 					debugl1(cs, "ICC %02x -> MOX1", cs->dc.icc.mon_tx[cs->dc.icc.mon_txp - 1]);
 			}
+<<<<<<< HEAD
 		AfterMOX1:
+=======
+		AfterMOX1: ;
+>>>>>>> v3.18
 #endif
 		}
 	}

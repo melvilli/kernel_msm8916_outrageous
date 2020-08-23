@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -253,26 +257,46 @@ acpi_ex_decode_field_access(union acpi_operand_object *obj_desc,
 
 	case AML_FIELD_ACCESS_BYTE:
 	case AML_FIELD_ACCESS_BUFFER:	/* ACPI 2.0 (SMBus Buffer) */
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		byte_alignment = 1;
 		bit_length = 8;
 		break;
 
 	case AML_FIELD_ACCESS_WORD:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		byte_alignment = 2;
 		bit_length = 16;
 		break;
 
 	case AML_FIELD_ACCESS_DWORD:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		byte_alignment = 4;
 		bit_length = 32;
 		break;
 
 	case AML_FIELD_ACCESS_QWORD:	/* ACPI 2.0 */
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		byte_alignment = 8;
 		bit_length = 64;
 		break;
 
 	default:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		/* Invalid field access type */
 
 		ACPI_ERROR((AE_INFO, "Unknown field access type 0x%X", access));
@@ -600,7 +624,13 @@ acpi_status acpi_ex_prep_field_value(struct acpi_create_field_info *info)
 		break;
 
 	default:
+<<<<<<< HEAD
 		/* No other types should get here */
+=======
+
+		/* No other types should get here */
+
+>>>>>>> v3.18
 		break;
 	}
 

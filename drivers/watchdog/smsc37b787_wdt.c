@@ -603,8 +603,11 @@ MODULE_DESCRIPTION("Driver for SMsC 37B787 watchdog component (Version "
 								VERSION ")");
 MODULE_LICENSE("GPL");
 
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
 
+=======
+>>>>>>> v3.18
 #ifdef SMSC_SUPPORT_MINUTES
 module_param(unit, int, 0);
 MODULE_PARM_DESC(unit,

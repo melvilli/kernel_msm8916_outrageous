@@ -10,5 +10,9 @@
 *.out
 *.png
 *.gif
+<<<<<<< HEAD
+=======
+*.svg
+>>>>>>> v3.18
 media-indices.tmpl
 media-entities.tmpl

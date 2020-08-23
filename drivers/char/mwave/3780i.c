@@ -50,7 +50,10 @@
 #include <linux/unistd.h>
 #include <linux/delay.h>
 #include <linux/ioport.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/bitops.h>
 #include <linux/sched.h>	/* cond_resched() */
 

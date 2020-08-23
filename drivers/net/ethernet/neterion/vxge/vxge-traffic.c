@@ -1956,8 +1956,12 @@ exit:
  * @vid: vlan id to be added for this vpath into the list
  *
  * Adds the given vlan id into the list for this  vpath.
+<<<<<<< HEAD
  * see also: vxge_hw_vpath_vid_delete, vxge_hw_vpath_vid_get and
  * vxge_hw_vpath_vid_get_next
+=======
+ * see also: vxge_hw_vpath_vid_delete
+>>>>>>> v3.18
  *
  */
 enum vxge_hw_status
@@ -1979,6 +1983,7 @@ exit:
 }
 
 /**
+<<<<<<< HEAD
  * vxge_hw_vpath_vid_get - Get the first vid entry for this vpath
  *               from vlan id table.
  * @vp: Vpath handle.
@@ -2010,14 +2015,20 @@ exit:
 }
 
 /**
+=======
+>>>>>>> v3.18
  * vxge_hw_vpath_vid_delete - Delete the vlan id entry for this vpath
  *               to vlan id table.
  * @vp: Vpath handle.
  * @vid: vlan id to be added for this vpath into the list
  *
  * Adds the given vlan id into the list for this  vpath.
+<<<<<<< HEAD
  * see also: vxge_hw_vpath_vid_add, vxge_hw_vpath_vid_get and
  * vxge_hw_vpath_vid_get_next
+=======
+ * see also: vxge_hw_vpath_vid_add
+>>>>>>> v3.18
  *
  */
 enum vxge_hw_status

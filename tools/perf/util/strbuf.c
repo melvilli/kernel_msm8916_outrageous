@@ -28,7 +28,11 @@ void strbuf_init(struct strbuf *sb, ssize_t hint)
 void strbuf_release(struct strbuf *sb)
 {
 	if (sb->alloc) {
+<<<<<<< HEAD
 		free(sb->buf);
+=======
+		zfree(&sb->buf);
+>>>>>>> v3.18
 		strbuf_init(sb, 0);
 	}
 }

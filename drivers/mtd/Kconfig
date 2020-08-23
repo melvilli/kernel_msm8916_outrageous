@@ -150,17 +150,29 @@ config MTD_BCM63XX_PARTS
 
 config MTD_BCM47XX_PARTS
 	tristate "BCM47XX partitioning support"
+<<<<<<< HEAD
 	depends on BCM47XX
+=======
+	depends on BCM47XX || ARCH_BCM_5301X
+>>>>>>> v3.18
 	help
 	  This provides partitions parser for devices based on BCM47xx
 	  boards.
 
 comment "User Modules And Translation Layers"
 
+<<<<<<< HEAD
 config MTD_BLKDEVS
 	tristate "Common interface to block layer for MTD 'translation layers'"
 	depends on BLOCK
 	default n
+=======
+#
+# MTD block device support is select'ed if needed
+#
+config MTD_BLKDEVS
+	tristate
+>>>>>>> v3.18
 
 config MTD_BLOCK
 	tristate "Caching block device access to MTD devices"
@@ -308,6 +320,7 @@ config MTD_SWAP
 	  The driver provides wear leveling by storing erase counter into the
 	  OOB.
 
+<<<<<<< HEAD
 config MTD_LAZYECCSTATS
 	bool "MTD Lazy ECC Stats collection support"
 	default y
@@ -319,6 +332,8 @@ config MTD_LAZYECCSTATS
 	  This can significantly decrease boot times depending on the size of
 	  the partition.  If unsure, say 'N'.
 
+=======
+>>>>>>> v3.18
 source "drivers/mtd/chips/Kconfig"
 
 source "drivers/mtd/maps/Kconfig"
@@ -331,6 +346,11 @@ source "drivers/mtd/onenand/Kconfig"
 
 source "drivers/mtd/lpddr/Kconfig"
 
+<<<<<<< HEAD
+=======
+source "drivers/mtd/spi-nor/Kconfig"
+
+>>>>>>> v3.18
 source "drivers/mtd/ubi/Kconfig"
 
 endif # MTD

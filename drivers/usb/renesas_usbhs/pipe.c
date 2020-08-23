@@ -653,6 +653,14 @@ static struct usbhs_pipe *usbhsp_get_pipe(struct usbhs_priv *priv, u32 type)
 	return pipe;
 }
 
+<<<<<<< HEAD
+=======
+static void usbhsp_put_pipe(struct usbhs_pipe *pipe)
+{
+	usbhsp_flags_init(pipe);
+}
+
+>>>>>>> v3.18
 void usbhs_pipe_init(struct usbhs_priv *priv,
 		     int (*dma_map_ctrl)(struct usbhs_pkt *pkt, int map))
 {
@@ -723,6 +731,10 @@ struct usbhs_pipe *usbhs_pipe_malloc(struct usbhs_priv *priv,
 	usbhsp_pipe_select(pipe);
 	usbhsp_pipe_cfg_set(pipe, 0xFFFF, pipecfg);
 	usbhsp_pipe_buf_set(pipe, 0xFFFF, pipebuf);
+<<<<<<< HEAD
+=======
+	usbhs_pipe_clear(pipe);
+>>>>>>> v3.18
 
 	usbhs_pipe_sequence_data0(pipe);
 
@@ -739,6 +751,14 @@ struct usbhs_pipe *usbhs_pipe_malloc(struct usbhs_priv *priv,
 	return pipe;
 }
 
+<<<<<<< HEAD
+=======
+void usbhs_pipe_free(struct usbhs_pipe *pipe)
+{
+	usbhsp_put_pipe(pipe);
+}
+
+>>>>>>> v3.18
 void usbhs_pipe_select_fifo(struct usbhs_pipe *pipe, struct usbhs_fifo *fifo)
 {
 	if (pipe->fifo)

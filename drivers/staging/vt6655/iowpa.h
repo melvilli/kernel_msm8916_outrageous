@@ -29,6 +29,7 @@
 #ifndef __IOWPA_H__
 #define __IOWPA_H__
 
+<<<<<<< HEAD
 /*---------------------  Export Definitions -------------------------*/
 
 #define WPA_IE_LEN 64
@@ -41,6 +42,11 @@
   typedef enum { KEY_MGMT_802_1X, KEY_MGMT_PSK, KEY_MGMT_NONE,
   KEY_MGMT_802_1X_NO_WPA, KEY_MGMT_WPA_NONE } wpa_key_mgmt;
 */
+=======
+#define WPA_IE_LEN 64
+
+//WPA related
+>>>>>>> v3.18
 
 enum {
 	VIAWGET_SET_WPA = 1,
@@ -84,7 +90,11 @@ struct viawget_wpa_param {
 			u8 bssid[6];
 			u8 ssid[32];
 			u8 ssid_len;
+<<<<<<< HEAD
 			u8 *wpa_ie;
+=======
+			u8 __user *wpa_ie;
+>>>>>>> v3.18
 			u16 wpa_ie_len;
 			int pairwise_suite;
 			int group_suite;
@@ -111,7 +121,11 @@ struct viawget_wpa_param {
 
 		struct {
 			u16 scan_count;
+<<<<<<< HEAD
 			u8 *buf;
+=======
+			u8 __user *buf;
+>>>>>>> v3.18
 		} scan_results;
 
 	} u;
@@ -134,6 +148,7 @@ struct viawget_scan_result {
 	int maxrate;
 };
 
+<<<<<<< HEAD
 //2006-1116-01,<Add> by NomadZhao
 #pragma pack()
 /*---------------------  Export Classes  ----------------------------*/
@@ -143,5 +158,8 @@ struct viawget_scan_result {
 /*---------------------  Export Types  ------------------------------*/
 
 /*---------------------  Export Functions  --------------------------*/
+=======
+#pragma pack()
+>>>>>>> v3.18
 
 #endif //__IOWPA_H__

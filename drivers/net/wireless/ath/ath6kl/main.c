@@ -29,6 +29,12 @@ struct ath6kl_sta *ath6kl_find_sta(struct ath6kl_vif *vif, u8 *node_addr)
 	struct ath6kl_sta *conn = NULL;
 	u8 i, max_conn;
 
+<<<<<<< HEAD
+=======
+	if (is_zero_ether_addr(node_addr))
+		return NULL;
+
+>>>>>>> v3.18
 	max_conn = (vif->nw_type == AP_NETWORK) ? AP_MAX_NUM_STA : 0;
 
 	for (i = 0; i < max_conn; i++) {
@@ -222,7 +228,11 @@ int ath6kl_diag_write32(struct ath6kl *ar, u32 address, __le32 value)
 	ret = ath6kl_hif_diag_write32(ar, address, value);
 
 	if (ret) {
+<<<<<<< HEAD
 		ath6kl_err("failed to write 0x%x during diagnose window to 0x%d\n",
+=======
+		ath6kl_err("failed to write 0x%x during diagnose window to 0x%x\n",
+>>>>>>> v3.18
 			   address, value);
 		return ret;
 	}
@@ -568,7 +578,10 @@ void ath6kl_scan_complete_evt(struct ath6kl_vif *vif, int status)
 
 static int ath6kl_commit_ch_switch(struct ath6kl_vif *vif, u16 channel)
 {
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 	struct ath6kl *ar = vif->ar;
 
 	vif->profile.ch = cpu_to_le16(channel);
@@ -597,7 +610,10 @@ static int ath6kl_commit_ch_switch(struct ath6kl_vif *vif, u16 channel)
 
 static void ath6kl_check_ch_switch(struct ath6kl *ar, u16 channel)
 {
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 	struct ath6kl_vif *vif;
 	int res = 0;
 
@@ -689,9 +705,15 @@ void ath6kl_tkip_micerr_event(struct ath6kl_vif *vif, u8 keyid, bool ismcast)
 		cfg80211_michael_mic_failure(vif->ndev, sta->mac,
 					     NL80211_KEYTYPE_PAIRWISE, keyid,
 					     tsc, GFP_KERNEL);
+<<<<<<< HEAD
 	} else
 		ath6kl_cfg80211_tkip_micerr_event(vif, keyid, ismcast);
 
+=======
+	} else {
+		ath6kl_cfg80211_tkip_micerr_event(vif, keyid, ismcast);
+	}
+>>>>>>> v3.18
 }
 
 static void ath6kl_update_target_stats(struct ath6kl_vif *vif, u8 *ptr, u32 len)
@@ -701,6 +723,10 @@ static void ath6kl_update_target_stats(struct ath6kl_vif *vif, u8 *ptr, u32 len)
 	struct ath6kl *ar = vif->ar;
 	struct target_stats *stats = &vif->target_stats;
 	struct tkip_ccmp_stats *ccmp_stats;
+<<<<<<< HEAD
+=======
+	s32 rate;
+>>>>>>> v3.18
 	u8 ac;
 
 	if (len < sizeof(*tgt_stats))
@@ -730,8 +756,14 @@ static void ath6kl_update_target_stats(struct ath6kl_vif *vif, u8 *ptr, u32 len)
 		le32_to_cpu(tgt_stats->stats.tx.mult_retry_cnt);
 	stats->tx_rts_fail_cnt +=
 		le32_to_cpu(tgt_stats->stats.tx.rts_fail_cnt);
+<<<<<<< HEAD
 	stats->tx_ucast_rate =
 	    ath6kl_wmi_get_rate(a_sle32_to_cpu(tgt_stats->stats.tx.ucast_rate));
+=======
+
+	rate = a_sle32_to_cpu(tgt_stats->stats.tx.ucast_rate);
+	stats->tx_ucast_rate = ath6kl_wmi_get_rate(ar->wmi, rate);
+>>>>>>> v3.18
 
 	stats->rx_pkt += le32_to_cpu(tgt_stats->stats.rx.pkt);
 	stats->rx_byte += le32_to_cpu(tgt_stats->stats.rx.byte);
@@ -748,8 +780,14 @@ static void ath6kl_update_target_stats(struct ath6kl_vif *vif, u8 *ptr, u32 len)
 		le32_to_cpu(tgt_stats->stats.rx.key_cache_miss);
 	stats->rx_decrypt_err += le32_to_cpu(tgt_stats->stats.rx.decrypt_err);
 	stats->rx_dupl_frame += le32_to_cpu(tgt_stats->stats.rx.dupl_frame);
+<<<<<<< HEAD
 	stats->rx_ucast_rate =
 	    ath6kl_wmi_get_rate(a_sle32_to_cpu(tgt_stats->stats.rx.ucast_rate));
+=======
+
+	rate = a_sle32_to_cpu(tgt_stats->stats.rx.ucast_rate);
+	stats->rx_ucast_rate = ath6kl_wmi_get_rate(ar->wmi, rate);
+>>>>>>> v3.18
 
 	ccmp_stats = &tgt_stats->stats.tkip_ccmp_stats;
 
@@ -1090,8 +1128,14 @@ static int ath6kl_open(struct net_device *dev)
 	if (test_bit(CONNECTED, &vif->flags)) {
 		netif_carrier_on(dev);
 		netif_wake_queue(dev);
+<<<<<<< HEAD
 	} else
 		netif_carrier_off(dev);
+=======
+	} else {
+		netif_carrier_off(dev);
+	}
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -1143,7 +1187,10 @@ static int ath6kl_set_features(struct net_device *dev,
 			dev->features = features | NETIF_F_RXCSUM;
 			return err;
 		}
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 	}
 
 	return err;
@@ -1289,6 +1336,11 @@ static const struct net_device_ops ath6kl_netdev_ops = {
 
 void init_netdev(struct net_device *dev)
 {
+<<<<<<< HEAD
+=======
+	struct ath6kl *ar = ath6kl_priv(dev);
+
+>>>>>>> v3.18
 	dev->netdev_ops = &ath6kl_netdev_ops;
 	dev->destructor = free_netdev;
 	dev->watchdog_timeo = ATH6KL_TX_TIMEOUT;
@@ -1300,7 +1352,13 @@ void init_netdev(struct net_device *dev)
 					WMI_MAX_TX_META_SZ +
 					ATH6KL_HTC_ALIGN_BYTES, 4);
 
+<<<<<<< HEAD
 	dev->hw_features |= NETIF_F_IP_CSUM | NETIF_F_RXCSUM;
+=======
+	if (!test_bit(ATH6KL_FW_CAPABILITY_NO_IP_CHECKSUM,
+		      ar->fw_capabilities))
+		dev->hw_features |= NETIF_F_IP_CSUM | NETIF_F_RXCSUM;
+>>>>>>> v3.18
 
 	return;
 }

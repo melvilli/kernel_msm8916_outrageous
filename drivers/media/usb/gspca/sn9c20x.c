@@ -27,7 +27,10 @@
 #include "gspca.h"
 #include "jpeg.h"
 
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 #include <linux/dmi.h>
 
 MODULE_AUTHOR("Brian Johnson <brijohn@gmail.com>, "
@@ -582,6 +585,7 @@ static const s16 hsv_blue_y[] = {
 	4,   2,   0,  -1,  -3,  -5,  -7,  -9, -11
 };
 
+<<<<<<< HEAD
 static const u16 i2c_ident[] = {
 	V4L2_IDENT_OV9650,
 	V4L2_IDENT_OV9655,
@@ -598,6 +602,8 @@ static const u16 i2c_ident[] = {
 [SENSOR_MT9VPRB] = V4L2_IDENT_UNKNOWN,
 };
 
+=======
+>>>>>>> v3.18
 static const u16 bridge_init[][2] = {
 	{0x1000, 0x78}, {0x1001, 0x40}, {0x1002, 0x1c},
 	{0x1020, 0x80}, {0x1061, 0x01}, {0x1067, 0x40},
@@ -1314,7 +1320,11 @@ static void set_cmatrix(struct gspca_dev *gspca_dev,
 	s32 hue_coord, hue_index = 180 + hue;
 	u8 cmatrix[21];
 
+<<<<<<< HEAD
 	memset(cmatrix, 0, sizeof cmatrix);
+=======
+	memset(cmatrix, 0, sizeof(cmatrix));
+>>>>>>> v3.18
 	cmatrix[2] = (contrast * 0x25 / 0x100) + 0x26;
 	cmatrix[0] = 0x13 + (cmatrix[2] - 0x26) * 0x13 / 0x25;
 	cmatrix[4] = 0x07 + (cmatrix[2] - 0x26) * 0x07 / 0x25;
@@ -1574,21 +1584,35 @@ static int sd_dbg_g_register(struct gspca_dev *gspca_dev,
 {
 	struct sd *sd = (struct sd *) gspca_dev;
 
+<<<<<<< HEAD
 	switch (reg->match.type) {
 	case V4L2_CHIP_MATCH_HOST:
 		if (reg->match.addr != 0)
 			return -EINVAL;
+=======
+	reg->size = 1;
+	switch (reg->match.addr) {
+	case 0:
+>>>>>>> v3.18
 		if (reg->reg < 0x1000 || reg->reg > 0x11ff)
 			return -EINVAL;
 		reg_r(gspca_dev, reg->reg, 1);
 		reg->val = gspca_dev->usb_buf[0];
 		return gspca_dev->usb_err;
+<<<<<<< HEAD
 	case V4L2_CHIP_MATCH_I2C_ADDR:
 		if (reg->match.addr != sd->i2c_addr)
 			return -EINVAL;
 		if (sd->sensor >= SENSOR_MT9V011 &&
 		    sd->sensor <= SENSOR_MT9M112) {
 			i2c_r2(gspca_dev, reg->reg, (u16 *) &reg->val);
+=======
+	case 1:
+		if (sd->sensor >= SENSOR_MT9V011 &&
+		    sd->sensor <= SENSOR_MT9M112) {
+			i2c_r2(gspca_dev, reg->reg, (u16 *) &reg->val);
+			reg->size = 2;
+>>>>>>> v3.18
 		} else {
 			i2c_r1(gspca_dev, reg->reg, (u8 *) &reg->val);
 		}
@@ -1602,17 +1626,26 @@ static int sd_dbg_s_register(struct gspca_dev *gspca_dev,
 {
 	struct sd *sd = (struct sd *) gspca_dev;
 
+<<<<<<< HEAD
 	switch (reg->match.type) {
 	case V4L2_CHIP_MATCH_HOST:
 		if (reg->match.addr != 0)
 			return -EINVAL;
+=======
+	switch (reg->match.addr) {
+	case 0:
+>>>>>>> v3.18
 		if (reg->reg < 0x1000 || reg->reg > 0x11ff)
 			return -EINVAL;
 		reg_w1(gspca_dev, reg->reg, reg->val);
 		return gspca_dev->usb_err;
+<<<<<<< HEAD
 	case V4L2_CHIP_MATCH_I2C_ADDR:
 		if (reg->match.addr != sd->i2c_addr)
 			return -EINVAL;
+=======
+	case 1:
+>>>>>>> v3.18
 		if (sd->sensor >= SENSOR_MT9V011 &&
 		    sd->sensor <= SENSOR_MT9M112) {
 			i2c_w2(gspca_dev, reg->reg, reg->val);
@@ -1623,6 +1656,7 @@ static int sd_dbg_s_register(struct gspca_dev *gspca_dev,
 	}
 	return -EINVAL;
 }
+<<<<<<< HEAD
 #endif
 
 static int sd_chip_ident(struct gspca_dev *gspca_dev,
@@ -1646,6 +1680,19 @@ static int sd_chip_ident(struct gspca_dev *gspca_dev,
 	}
 	return -EINVAL;
 }
+=======
+
+static int sd_chip_info(struct gspca_dev *gspca_dev,
+			struct v4l2_dbg_chip_info *chip)
+{
+	if (chip->match.addr > 1)
+		return -EINVAL;
+	if (chip->match.addr == 1)
+		strlcpy(chip->name, "sensor", sizeof(chip->name));
+	return 0;
+}
+#endif
+>>>>>>> v3.18
 
 static int sd_config(struct gspca_dev *gspca_dev,
 			const struct usb_device_id *id)
@@ -1822,8 +1869,14 @@ static int sd_init(struct gspca_dev *gspca_dev)
 	struct sd *sd = (struct sd *) gspca_dev;
 	int i;
 	u8 value;
+<<<<<<< HEAD
 	u8 i2c_init[9] =
 		{0x80, sd->i2c_addr, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03};
+=======
+	u8 i2c_init[9] = {
+		0x80, sd->i2c_addr, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03
+	};
+>>>>>>> v3.18
 
 	for (i = 0; i < ARRAY_SIZE(bridge_init); i++) {
 		value = bridge_init[i][1];
@@ -1990,7 +2043,11 @@ static int sd_isoc_init(struct gspca_dev *gspca_dev)
 			return 0;
 		}
 
+<<<<<<< HEAD
 		switch (gspca_dev->width) {
+=======
+		switch (gspca_dev->pixfmt.width) {
+>>>>>>> v3.18
 		case 160: /* 160x120 */
 			gspca_dev->alt = 2;
 			break;
@@ -2020,8 +2077,13 @@ static int sd_start(struct gspca_dev *gspca_dev)
 {
 	struct sd *sd = (struct sd *) gspca_dev;
 	int mode = gspca_dev->cam.cam_mode[(int) gspca_dev->curr_mode].priv;
+<<<<<<< HEAD
 	int width = gspca_dev->width;
 	int height = gspca_dev->height;
+=======
+	int width = gspca_dev->pixfmt.width;
+	int height = gspca_dev->pixfmt.height;
+>>>>>>> v3.18
 	u8 fmt, scale = 0;
 
 	jpeg_define(sd->jpeg_hdr, height, width,
@@ -2277,8 +2339,14 @@ static void sd_pkt_scan(struct gspca_dev *gspca_dev,
 {
 	struct sd *sd = (struct sd *) gspca_dev;
 	int avg_lum, is_jpeg;
+<<<<<<< HEAD
 	static const u8 frame_header[] =
 		{0xff, 0xff, 0x00, 0xc4, 0xc4, 0x96};
+=======
+	static const u8 frame_header[] = {
+		0xff, 0xff, 0x00, 0xc4, 0xc4, 0x96
+	};
+>>>>>>> v3.18
 
 	is_jpeg = (sd->fmt & 0x03) == 0;
 	if (len >= 64 && memcmp(data, frame_header, 6) == 0) {
@@ -2356,8 +2424,13 @@ static const struct sd_desc sd_desc = {
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 	.set_register = sd_dbg_s_register,
 	.get_register = sd_dbg_g_register,
+<<<<<<< HEAD
 #endif
 	.get_chip_ident = sd_chip_ident,
+=======
+	.get_chip_info = sd_chip_info,
+#endif
+>>>>>>> v3.18
 };
 
 #define SN9C20X(sensor, i2c_addr, flags) \

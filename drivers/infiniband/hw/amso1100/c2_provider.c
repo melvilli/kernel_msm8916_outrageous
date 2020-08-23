@@ -431,9 +431,15 @@ static struct ib_mr *c2_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 	u64 *pages;
 	u64 kva = 0;
 	int shift, n, len;
+<<<<<<< HEAD
 	int i, j, k;
 	int err = 0;
 	struct ib_umem_chunk *chunk;
+=======
+	int i, k, entry;
+	int err = 0;
+	struct scatterlist *sg;
+>>>>>>> v3.18
 	struct c2_pd *c2pd = to_c2pd(pd);
 	struct c2_mr *c2mr;
 
@@ -452,10 +458,14 @@ static struct ib_mr *c2_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 	}
 
 	shift = ffs(c2mr->umem->page_size) - 1;
+<<<<<<< HEAD
 
 	n = 0;
 	list_for_each_entry(chunk, &c2mr->umem->chunk_list, list)
 		n += chunk->nents;
+=======
+	n = c2mr->umem->nmap;
+>>>>>>> v3.18
 
 	pages = kmalloc(n * sizeof(u64), GFP_KERNEL);
 	if (!pages) {
@@ -464,6 +474,7 @@ static struct ib_mr *c2_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 	}
 
 	i = 0;
+<<<<<<< HEAD
 	list_for_each_entry(chunk, &c2mr->umem->chunk_list, list) {
 		for (j = 0; j < chunk->nmap; ++j) {
 			len = sg_dma_len(&chunk->page_list[j]) >> shift;
@@ -472,6 +483,14 @@ static struct ib_mr *c2_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 					sg_dma_address(&chunk->page_list[j]) +
 					(c2mr->umem->page_size * k);
 			}
+=======
+	for_each_sg(c2mr->umem->sg_head.sgl, sg, c2mr->umem->nmap, entry) {
+		len = sg_dma_len(sg) >> shift;
+		for (k = 0; k < len; ++k) {
+			pages[i++] =
+				sg_dma_address(sg) +
+				(c2mr->umem->page_size * k);
+>>>>>>> v3.18
 		}
 	}
 
@@ -739,7 +758,11 @@ static struct net_device *c2_pseudo_netdev_init(struct c2_dev *c2dev)
 	/* change ethxxx to iwxxx */
 	strcpy(name, "iw");
 	strcat(name, &c2dev->netdev->name[3]);
+<<<<<<< HEAD
 	netdev = alloc_netdev(0, name, setup);
+=======
+	netdev = alloc_netdev(0, name, NET_NAME_UNKNOWN, setup);
+>>>>>>> v3.18
 	if (!netdev) {
 		printk(KERN_ERR PFX "%s -  etherdev alloc failed",
 			__func__);

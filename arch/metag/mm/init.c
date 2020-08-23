@@ -12,7 +12,10 @@
 #include <linux/percpu.h>
 #include <linux/memblock.h>
 #include <linux/initrd.h>
+<<<<<<< HEAD
 #include <linux/of_fdt.h>
+=======
+>>>>>>> v3.18
 
 #include <asm/setup.h>
 #include <asm/page.h>
@@ -149,7 +152,11 @@ static void __init bootmem_init_one_node(unsigned int nid)
 	if (!p->node_spanned_pages)
 		return;
 
+<<<<<<< HEAD
 	end_pfn = p->node_start_pfn + p->node_spanned_pages;
+=======
+	end_pfn = pgdat_end_pfn(p);
+>>>>>>> v3.18
 #ifdef CONFIG_HIGHMEM
 	if (end_pfn > max_low_pfn)
 		end_pfn = max_low_pfn;
@@ -205,7 +212,12 @@ static void __init do_init_bootmem(void)
 		start_pfn = memblock_region_memory_base_pfn(reg);
 		end_pfn = memblock_region_memory_end_pfn(reg);
 		memblock_set_node(PFN_PHYS(start_pfn),
+<<<<<<< HEAD
 				  PFN_PHYS(end_pfn - start_pfn), 0);
+=======
+				  PFN_PHYS(end_pfn - start_pfn),
+				  &memblock.memory, 0);
+>>>>>>> v3.18
 	}
 
 	/* All of system RAM sits in node 0 for the non-NUMA case */
@@ -376,18 +388,26 @@ void __init paging_init(unsigned long mem_end)
 
 void __init mem_init(void)
 {
+<<<<<<< HEAD
 	int nid;
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_HIGHMEM
 	unsigned long tmp;
 
 	/*
 	 * Explicitly reset zone->managed_pages because highmem pages are
+<<<<<<< HEAD
 	 * freed before calling free_all_bootmem_node();
+=======
+	 * freed before calling free_all_bootmem();
+>>>>>>> v3.18
 	 */
 	reset_all_zones_managed_pages();
 	for (tmp = highstart_pfn; tmp < highend_pfn; tmp++)
 		free_highmem_page(pfn_to_page(tmp));
+<<<<<<< HEAD
 	num_physpages += totalhigh_pages;
 #endif /* CONFIG_HIGHMEM */
 
@@ -407,6 +427,13 @@ void __init mem_init(void)
 	show_mem(0);
 
 	return;
+=======
+#endif /* CONFIG_HIGHMEM */
+
+	free_all_bootmem();
+	mem_init_print_info(NULL);
+	show_mem(0);
+>>>>>>> v3.18
 }
 
 void free_initmem(void)
@@ -417,6 +444,7 @@ void free_initmem(void)
 #ifdef CONFIG_BLK_DEV_INITRD
 void free_initrd_mem(unsigned long start, unsigned long end)
 {
+<<<<<<< HEAD
 	free_reserved_area(start, end, POISON_FREE_INITMEM, "initrd");
 }
 #endif
@@ -428,3 +456,9 @@ void __init early_init_dt_setup_initrd_arch(u64 start, u64 end)
 	       __func__, start, end);
 }
 #endif /* CONFIG_OF_FLATTREE */
+=======
+	free_reserved_area((void *)start, (void *)end, POISON_FREE_INITMEM,
+			   "initrd");
+}
+#endif
+>>>>>>> v3.18

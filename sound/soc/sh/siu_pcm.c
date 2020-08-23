@@ -139,7 +139,11 @@ static int siu_pcm_wr_set(struct siu_port *port_info,
 
 	desc->callback = siu_dma_tx_complete;
 	desc->callback_param = siu_stream;
+<<<<<<< HEAD
 	cookie = desc->tx_submit(desc);
+=======
+	cookie = dmaengine_submit(desc);
+>>>>>>> v3.18
 	if (cookie < 0) {
 		dev_err(dev, "Failed to submit a dma transfer\n");
 		return cookie;
@@ -189,7 +193,11 @@ static int siu_pcm_rd_set(struct siu_port *port_info,
 
 	desc->callback = siu_dma_tx_complete;
 	desc->callback_param = siu_stream;
+<<<<<<< HEAD
 	cookie = desc->tx_submit(desc);
+=======
+	cookie = dmaengine_submit(desc);
+>>>>>>> v3.18
 	if (cookie < 0) {
 		dev_err(dev, "Failed to submit dma descriptor\n");
 		return cookie;

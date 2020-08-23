@@ -30,6 +30,7 @@ static const struct xt_table nf_nat_ipv6_table = {
 	.af		= NFPROTO_IPV6,
 };
 
+<<<<<<< HEAD
 static unsigned int alloc_null_binding(struct nf_conn *ct, unsigned int hooknum)
 {
 	/* Force range to this IP; let proto decide mapping for
@@ -247,12 +248,63 @@ nf_nat_ipv6_local_fn(unsigned int hooknum,
 #endif
 	}
 	return ret;
+=======
+static unsigned int ip6table_nat_do_chain(const struct nf_hook_ops *ops,
+					  struct sk_buff *skb,
+					  const struct net_device *in,
+					  const struct net_device *out,
+					  struct nf_conn *ct)
+{
+	struct net *net = nf_ct_net(ct);
+
+	return ip6t_do_table(skb, ops->hooknum, in, out, net->ipv6.ip6table_nat);
+}
+
+static unsigned int ip6table_nat_fn(const struct nf_hook_ops *ops,
+				    struct sk_buff *skb,
+				    const struct net_device *in,
+				    const struct net_device *out,
+				    int (*okfn)(struct sk_buff *))
+{
+	return nf_nat_ipv6_fn(ops, skb, in, out, ip6table_nat_do_chain);
+}
+
+static unsigned int ip6table_nat_in(const struct nf_hook_ops *ops,
+				    struct sk_buff *skb,
+				    const struct net_device *in,
+				    const struct net_device *out,
+				    int (*okfn)(struct sk_buff *))
+{
+	return nf_nat_ipv6_in(ops, skb, in, out, ip6table_nat_do_chain);
+}
+
+static unsigned int ip6table_nat_out(const struct nf_hook_ops *ops,
+				     struct sk_buff *skb,
+				     const struct net_device *in,
+				     const struct net_device *out,
+				     int (*okfn)(struct sk_buff *))
+{
+	return nf_nat_ipv6_out(ops, skb, in, out, ip6table_nat_do_chain);
+}
+
+static unsigned int ip6table_nat_local_fn(const struct nf_hook_ops *ops,
+					  struct sk_buff *skb,
+					  const struct net_device *in,
+					  const struct net_device *out,
+					  int (*okfn)(struct sk_buff *))
+{
+	return nf_nat_ipv6_local_fn(ops, skb, in, out, ip6table_nat_do_chain);
+>>>>>>> v3.18
 }
 
 static struct nf_hook_ops nf_nat_ipv6_ops[] __read_mostly = {
 	/* Before packet filtering, change destination */
 	{
+<<<<<<< HEAD
 		.hook		= nf_nat_ipv6_in,
+=======
+		.hook		= ip6table_nat_in,
+>>>>>>> v3.18
 		.owner		= THIS_MODULE,
 		.pf		= NFPROTO_IPV6,
 		.hooknum	= NF_INET_PRE_ROUTING,
@@ -260,7 +312,11 @@ static struct nf_hook_ops nf_nat_ipv6_ops[] __read_mostly = {
 	},
 	/* After packet filtering, change source */
 	{
+<<<<<<< HEAD
 		.hook		= nf_nat_ipv6_out,
+=======
+		.hook		= ip6table_nat_out,
+>>>>>>> v3.18
 		.owner		= THIS_MODULE,
 		.pf		= NFPROTO_IPV6,
 		.hooknum	= NF_INET_POST_ROUTING,
@@ -268,7 +324,11 @@ static struct nf_hook_ops nf_nat_ipv6_ops[] __read_mostly = {
 	},
 	/* Before packet filtering, change destination */
 	{
+<<<<<<< HEAD
 		.hook		= nf_nat_ipv6_local_fn,
+=======
+		.hook		= ip6table_nat_local_fn,
+>>>>>>> v3.18
 		.owner		= THIS_MODULE,
 		.pf		= NFPROTO_IPV6,
 		.hooknum	= NF_INET_LOCAL_OUT,
@@ -276,7 +336,11 @@ static struct nf_hook_ops nf_nat_ipv6_ops[] __read_mostly = {
 	},
 	/* After packet filtering, change source */
 	{
+<<<<<<< HEAD
 		.hook		= nf_nat_ipv6_fn,
+=======
+		.hook		= ip6table_nat_fn,
+>>>>>>> v3.18
 		.owner		= THIS_MODULE,
 		.pf		= NFPROTO_IPV6,
 		.hooknum	= NF_INET_LOCAL_IN,
@@ -293,7 +357,11 @@ static int __net_init ip6table_nat_net_init(struct net *net)
 		return -ENOMEM;
 	net->ipv6.ip6table_nat = ip6t_register_table(net, &nf_nat_ipv6_table, repl);
 	kfree(repl);
+<<<<<<< HEAD
 	return PTR_RET(net->ipv6.ip6table_nat);
+=======
+	return PTR_ERR_OR_ZERO(net->ipv6.ip6table_nat);
+>>>>>>> v3.18
 }
 
 static void __net_exit ip6table_nat_net_exit(struct net *net)

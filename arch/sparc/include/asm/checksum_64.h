@@ -29,7 +29,11 @@
  *
  * it's best to have buff aligned on a 32-bit boundary
  */
+<<<<<<< HEAD
 extern __wsum csum_partial(const void * buff, int len, __wsum sum);
+=======
+__wsum csum_partial(const void * buff, int len, __wsum sum);
+>>>>>>> v3.18
 
 /* the same as csum_partial, but copies from user space while it
  * checksums
@@ -37,12 +41,21 @@ extern __wsum csum_partial(const void * buff, int len, __wsum sum);
  * here even more important to align src and dst on a 32-bit (or even
  * better 64-bit) boundary
  */
+<<<<<<< HEAD
 extern __wsum csum_partial_copy_nocheck(const void *src, void *dst,
 					      int len, __wsum sum);
 
 extern long __csum_partial_copy_from_user(const void __user *src,
 					  void *dst, int len,
 					  __wsum sum);
+=======
+__wsum csum_partial_copy_nocheck(const void *src, void *dst,
+				 int len, __wsum sum);
+
+long __csum_partial_copy_from_user(const void __user *src,
+				   void *dst, int len,
+				   __wsum sum);
+>>>>>>> v3.18
 
 static inline __wsum
 csum_partial_copy_from_user(const void __user *src,
@@ -59,9 +72,15 @@ csum_partial_copy_from_user(const void __user *src,
  *	Copy and checksum to user
  */
 #define HAVE_CSUM_COPY_USER
+<<<<<<< HEAD
 extern long __csum_partial_copy_to_user(const void *src,
 					void __user *dst, int len,
 					  __wsum sum);
+=======
+long __csum_partial_copy_to_user(const void *src,
+				 void __user *dst, int len,
+				 __wsum sum);
+>>>>>>> v3.18
 
 static inline __wsum
 csum_and_copy_to_user(const void *src,
@@ -77,7 +96,11 @@ csum_and_copy_to_user(const void *src,
 /* ihl is always 5 or greater, almost always is 5, and iph is word aligned
  * the majority of the time.
  */
+<<<<<<< HEAD
 extern __sum16 ip_fast_csum(const void *iph, unsigned int ihl);
+=======
+__sum16 ip_fast_csum(const void *iph, unsigned int ihl);
+>>>>>>> v3.18
 
 /* Fold a partial checksum without adding pseudo headers. */
 static inline __sum16 csum_fold(__wsum sum)
@@ -96,9 +119,15 @@ static inline __sum16 csum_fold(__wsum sum)
 }
 
 static inline __wsum csum_tcpudp_nofold(__be32 saddr, __be32 daddr,
+<<<<<<< HEAD
 					       unsigned int len,
 					       unsigned short proto,
 					       __wsum sum)
+=======
+					unsigned int len,
+					unsigned short proto,
+					__wsum sum)
+>>>>>>> v3.18
 {
 	__asm__ __volatile__(
 "	addcc		%1, %0, %0\n"
@@ -116,9 +145,15 @@ static inline __wsum csum_tcpudp_nofold(__be32 saddr, __be32 daddr,
  * returns a 16-bit checksum, already complemented
  */
 static inline __sum16 csum_tcpudp_magic(__be32 saddr, __be32 daddr,
+<<<<<<< HEAD
 						   unsigned short len,
 						   unsigned short proto,
 						   __wsum sum)
+=======
+					unsigned short len,
+					unsigned short proto,
+					__wsum sum)
+>>>>>>> v3.18
 {
 	return csum_fold(csum_tcpudp_nofold(saddr,daddr,len,proto,sum));
 }
@@ -164,4 +199,19 @@ static inline __sum16 ip_compute_csum(const void *buff, int len)
 	return csum_fold(csum_partial(buff, len, 0));
 }
 
+<<<<<<< HEAD
+=======
+#define HAVE_ARCH_CSUM_ADD
+static inline __wsum csum_add(__wsum csum, __wsum addend)
+{
+	__asm__ __volatile__(
+		"addcc   %0, %1, %0\n"
+		"addx    %0, %%g0, %0"
+		: "=r" (csum)
+		: "r" (addend), "0" (csum));
+
+	return csum;
+}
+
+>>>>>>> v3.18
 #endif /* !(__SPARC64_CHECKSUM_H) */

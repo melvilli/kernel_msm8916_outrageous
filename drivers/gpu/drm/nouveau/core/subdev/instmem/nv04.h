@@ -5,7 +5,13 @@
 #include <core/ramht.h>
 #include <core/mm.h>
 
+<<<<<<< HEAD
 #include <subdev/instmem.h>
+=======
+#include "priv.h"
+
+extern struct nouveau_instobj_impl nv04_instobj_oclass;
+>>>>>>> v3.18
 
 struct nv04_instmem_priv {
 	struct nouveau_instmem base;

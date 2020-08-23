@@ -143,9 +143,14 @@ struct ppp {
 	struct sk_buff_head mrq;	/* MP: receive reconstruction queue */
 #endif /* CONFIG_PPP_MULTILINK */
 #ifdef CONFIG_PPP_FILTER
+<<<<<<< HEAD
 	struct sock_filter *pass_filter;	/* filter for packets to pass */
 	struct sock_filter *active_filter;/* filter for pkts to reset idle */
 	unsigned pass_len, active_len;
+=======
+	struct bpf_prog *pass_filter;	/* filter for packets to pass */
+	struct bpf_prog *active_filter; /* filter for pkts to reset idle */
+>>>>>>> v3.18
 #endif /* CONFIG_PPP_FILTER */
 	struct net	*ppp_net;	/* the net we belong to */
 	struct ppp_link_stats stats64;	/* 64 bit network stats */
@@ -540,7 +545,11 @@ static int get_filter(void __user *arg, struct sock_filter **p)
 {
 	struct sock_fprog uprog;
 	struct sock_filter *code = NULL;
+<<<<<<< HEAD
 	int len, err;
+=======
+	int len;
+>>>>>>> v3.18
 
 	if (copy_from_user(&uprog, arg, sizeof(uprog)))
 		return -EFAULT;
@@ -555,12 +564,15 @@ static int get_filter(void __user *arg, struct sock_filter **p)
 	if (IS_ERR(code))
 		return PTR_ERR(code);
 
+<<<<<<< HEAD
 	err = sk_chk_filter(code, uprog.len);
 	if (err) {
 		kfree(code);
 		return err;
 	}
 
+=======
+>>>>>>> v3.18
 	*p = code;
 	return uprog.len;
 }
@@ -662,6 +674,13 @@ static long ppp_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 			break;
 		ppp_lock(ppp);
 		cflags = ppp->flags & ~val;
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PPP_MULTILINK
+		if (!(ppp->flags & SC_MULTILINK) && (val & SC_MULTILINK))
+			ppp->nextseq = 0;
+#endif
+>>>>>>> v3.18
 		ppp->flags = val & SC_FLAG_BITS;
 		ppp_unlock(ppp);
 		if (cflags & SC_CCP_OPEN)
@@ -716,8 +735,15 @@ static long ppp_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 			val &= 0xffff;
 		}
 		vj = slhc_init(val2+1, val+1);
+<<<<<<< HEAD
 		if (IS_ERR(vj)) {
 			err = PTR_ERR(vj);
+=======
+		if (!vj) {
+			netdev_err(ppp->dev,
+				   "PPP: no memory (VJ compressor)\n");
+			err = -ENOMEM;
+>>>>>>> v3.18
 			break;
 		}
 		ppp_lock(ppp);
@@ -753,6 +779,7 @@ static long ppp_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 	case PPPIOCSPASS:
 	{
 		struct sock_filter *code;
+<<<<<<< HEAD
 		err = get_filter(argp, &code);
 		if (err >= 0) {
 			ppp_lock(ppp);
@@ -761,12 +788,35 @@ static long ppp_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 			ppp->pass_len = err;
 			ppp_unlock(ppp);
 			err = 0;
+=======
+
+		err = get_filter(argp, &code);
+		if (err >= 0) {
+			struct bpf_prog *pass_filter = NULL;
+			struct sock_fprog_kern fprog = {
+				.len = err,
+				.filter = code,
+			};
+
+			err = 0;
+			if (fprog.filter)
+				err = bpf_prog_create(&pass_filter, &fprog);
+			if (!err) {
+				ppp_lock(ppp);
+				if (ppp->pass_filter)
+					bpf_prog_destroy(ppp->pass_filter);
+				ppp->pass_filter = pass_filter;
+				ppp_unlock(ppp);
+			}
+			kfree(code);
+>>>>>>> v3.18
 		}
 		break;
 	}
 	case PPPIOCSACTIVE:
 	{
 		struct sock_filter *code;
+<<<<<<< HEAD
 		err = get_filter(argp, &code);
 		if (err >= 0) {
 			ppp_lock(ppp);
@@ -775,6 +825,28 @@ static long ppp_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 			ppp->active_len = err;
 			ppp_unlock(ppp);
 			err = 0;
+=======
+
+		err = get_filter(argp, &code);
+		if (err >= 0) {
+			struct bpf_prog *active_filter = NULL;
+			struct sock_fprog_kern fprog = {
+				.len = err,
+				.filter = code,
+			};
+
+			err = 0;
+			if (fprog.filter)
+				err = bpf_prog_create(&active_filter, &fprog);
+			if (!err) {
+				ppp_lock(ppp);
+				if (ppp->active_filter)
+					bpf_prog_destroy(ppp->active_filter);
+				ppp->active_filter = active_filter;
+				ppp_unlock(ppp);
+			}
+			kfree(code);
+>>>>>>> v3.18
 		}
 		break;
 	}
@@ -1080,7 +1152,11 @@ static void ppp_setup(struct net_device *dev)
 	dev->type = ARPHRD_PPP;
 	dev->flags = IFF_POINTOPOINT | IFF_NOARP | IFF_MULTICAST;
 	dev->features |= NETIF_F_NETNS_LOCAL;
+<<<<<<< HEAD
 	dev->priv_flags &= ~IFF_XMIT_DST_RELEASE;
+=======
+	netif_keep_dst(dev);
+>>>>>>> v3.18
 }
 
 /*
@@ -1182,7 +1258,11 @@ ppp_send_frame(struct ppp *ppp, struct sk_buff *skb)
 		   a four-byte PPP header on each packet */
 		*skb_push(skb, 2) = 1;
 		if (ppp->pass_filter &&
+<<<<<<< HEAD
 		    sk_run_filter(skb, ppp->pass_filter) == 0) {
+=======
+		    BPF_PROG_RUN(ppp->pass_filter, skb) == 0) {
+>>>>>>> v3.18
 			if (ppp->debug & 1)
 				netdev_printk(KERN_DEBUG, ppp->dev,
 					      "PPP: outbound frame "
@@ -1192,7 +1272,11 @@ ppp_send_frame(struct ppp *ppp, struct sk_buff *skb)
 		}
 		/* if this packet passes the active filter, record the time */
 		if (!(ppp->active_filter &&
+<<<<<<< HEAD
 		      sk_run_filter(skb, ppp->active_filter) == 0))
+=======
+		      BPF_PROG_RUN(ppp->active_filter, skb) == 0))
+>>>>>>> v3.18
 			ppp->last_xmit = jiffies;
 		skb_pull(skb, 2);
 #else
@@ -1816,7 +1900,11 @@ ppp_receive_nonmp_frame(struct ppp *ppp, struct sk_buff *skb)
 
 			*skb_push(skb, 2) = 0;
 			if (ppp->pass_filter &&
+<<<<<<< HEAD
 			    sk_run_filter(skb, ppp->pass_filter) == 0) {
+=======
+			    BPF_PROG_RUN(ppp->pass_filter, skb) == 0) {
+>>>>>>> v3.18
 				if (ppp->debug & 1)
 					netdev_printk(KERN_DEBUG, ppp->dev,
 						      "PPP: inbound frame "
@@ -1825,7 +1913,11 @@ ppp_receive_nonmp_frame(struct ppp *ppp, struct sk_buff *skb)
 				return;
 			}
 			if (!(ppp->active_filter &&
+<<<<<<< HEAD
 			      sk_run_filter(skb, ppp->active_filter) == 0))
+=======
+			      BPF_PROG_RUN(ppp->active_filter, skb) == 0))
+>>>>>>> v3.18
 				ppp->last_recv = jiffies;
 			__skb_pull(skb, 2);
 		} else
@@ -2220,7 +2312,11 @@ int ppp_register_net_channel(struct net *net, struct ppp_channel *chan)
 
 	pch->ppp = NULL;
 	pch->chan = chan;
+<<<<<<< HEAD
 	pch->chan_net = get_net(net);
+=======
+	pch->chan_net = net;
+>>>>>>> v3.18
 	chan->ppp = pch;
 	init_ppp_file(&pch->file, CHANNEL);
 	pch->file.hdrlen = chan->hdrlen;
@@ -2650,7 +2746,12 @@ ppp_create_interface(struct net *net, int unit, int *retp)
 	int ret = -ENOMEM;
 	int i;
 
+<<<<<<< HEAD
 	dev = alloc_netdev(sizeof(struct ppp), "", ppp_setup);
+=======
+	dev = alloc_netdev(sizeof(struct ppp), "", NET_NAME_UNKNOWN,
+			   ppp_setup);
+>>>>>>> v3.18
 	if (!dev)
 		goto out1;
 
@@ -2670,6 +2771,13 @@ ppp_create_interface(struct net *net, int unit, int *retp)
 	ppp->minseq = -1;
 	skb_queue_head_init(&ppp->mrq);
 #endif /* CONFIG_PPP_MULTILINK */
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PPP_FILTER
+	ppp->pass_filter = NULL;
+	ppp->active_filter = NULL;
+#endif /* CONFIG_PPP_FILTER */
+>>>>>>> v3.18
 
 	/*
 	 * drum roll: don't forget to set
@@ -2800,10 +2908,22 @@ static void ppp_destroy_interface(struct ppp *ppp)
 	skb_queue_purge(&ppp->mrq);
 #endif /* CONFIG_PPP_MULTILINK */
 #ifdef CONFIG_PPP_FILTER
+<<<<<<< HEAD
 	kfree(ppp->pass_filter);
 	ppp->pass_filter = NULL;
 	kfree(ppp->active_filter);
 	ppp->active_filter = NULL;
+=======
+	if (ppp->pass_filter) {
+		bpf_prog_destroy(ppp->pass_filter);
+		ppp->pass_filter = NULL;
+	}
+
+	if (ppp->active_filter) {
+		bpf_prog_destroy(ppp->active_filter);
+		ppp->active_filter = NULL;
+	}
+>>>>>>> v3.18
 #endif /* CONFIG_PPP_FILTER */
 
 	kfree_skb(ppp->xmit_pending);
@@ -2923,9 +3043,12 @@ ppp_disconnect_channel(struct channel *pch)
  */
 static void ppp_destroy_channel(struct channel *pch)
 {
+<<<<<<< HEAD
 	put_net(pch->chan_net);
 	pch->chan_net = NULL;
 
+=======
+>>>>>>> v3.18
 	atomic_dec(&channel_count);
 
 	if (!pch->file.dead) {

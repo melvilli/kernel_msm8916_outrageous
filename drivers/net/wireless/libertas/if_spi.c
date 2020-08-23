@@ -93,7 +93,10 @@ static void free_if_spi_card(struct if_spi_card *card)
 		list_del(&packet->list);
 		kfree(packet);
 	}
+<<<<<<< HEAD
 	spi_set_drvdata(card->spi, NULL);
+=======
+>>>>>>> v3.18
 	kfree(card);
 }
 
@@ -1094,11 +1097,15 @@ static int if_spi_init_card(struct if_spi_card *card)
 		goto out;
 
 out:
+<<<<<<< HEAD
 	release_firmware(helper);
 	release_firmware(mainfw);
 
 	lbs_deb_leave_args(LBS_DEB_SPI, "err %d\n", err);
 
+=======
+	lbs_deb_leave_args(LBS_DEB_SPI, "err %d\n", err);
+>>>>>>> v3.18
 	return err;
 }
 
@@ -1128,7 +1135,11 @@ static int if_spi_probe(struct spi_device *spi)
 {
 	struct if_spi_card *card;
 	struct lbs_private *priv = NULL;
+<<<<<<< HEAD
 	struct libertas_spi_platform_data *pdata = spi->dev.platform_data;
+=======
+	struct libertas_spi_platform_data *pdata = dev_get_platdata(&spi->dev);
+>>>>>>> v3.18
 	int err = 0;
 
 	lbs_deb_enter(LBS_DEB_SPI);

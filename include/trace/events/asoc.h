@@ -11,6 +11,7 @@
 
 struct snd_soc_jack;
 struct snd_soc_codec;
+<<<<<<< HEAD
 struct snd_soc_platform;
 struct snd_soc_card;
 struct snd_soc_dapm_widget;
@@ -105,6 +106,11 @@ DEFINE_EVENT(snd_soc_preg, snd_soc_preg_read,
 	TP_ARGS(platform, reg, val)
 
 );
+=======
+struct snd_soc_card;
+struct snd_soc_dapm_widget;
+struct snd_soc_dapm_path;
+>>>>>>> v3.18
 
 DECLARE_EVENT_CLASS(snd_soc_card,
 
@@ -266,7 +272,11 @@ TRACE_EVENT(snd_soc_dapm_output_path,
 		__entry->path_sink = (long)path->sink;
 	),
 
+<<<<<<< HEAD
 	TP_printk("%c%s -> %s -> %s\n",
+=======
+	TP_printk("%c%s -> %s -> %s",
+>>>>>>> v3.18
 		(int) __entry->path_sink &&
 		(int) __entry->path_connect ? '*' : ' ',
 		__get_str(wname), __get_str(pname), __get_str(psname))
@@ -295,7 +305,11 @@ TRACE_EVENT(snd_soc_dapm_input_path,
 		__entry->path_source = (long)path->source;
 	),
 
+<<<<<<< HEAD
 	TP_printk("%c%s <- %s <- %s\n",
+=======
+	TP_printk("%c%s <- %s <- %s",
+>>>>>>> v3.18
 		(int) __entry->path_source &&
 		(int) __entry->path_connect ? '*' : ' ',
 		__get_str(wname), __get_str(pname), __get_str(psname))
@@ -317,7 +331,11 @@ TRACE_EVENT(snd_soc_dapm_connected,
 		__entry->stream = stream;
 	),
 
+<<<<<<< HEAD
 	TP_printk("%s: found %d paths\n",
+=======
+	TP_printk("%s: found %d paths",
+>>>>>>> v3.18
 		__entry->stream ? "capture" : "playback", __entry->paths)
 );
 
@@ -387,17 +405,28 @@ TRACE_EVENT(snd_soc_cache_sync,
 	TP_ARGS(codec, type, status),
 
 	TP_STRUCT__entry(
+<<<<<<< HEAD
 		__string(	name,		codec->name	)
+=======
+		__string(	name,		codec->component.name)
+>>>>>>> v3.18
 		__string(	status,		status		)
 		__string(	type,		type		)
 		__field(	int,		id		)
 	),
 
 	TP_fast_assign(
+<<<<<<< HEAD
 		__assign_str(name, codec->name);
 		__assign_str(status, status);
 		__assign_str(type, type);
 		__entry->id = codec->id;
+=======
+		__assign_str(name, codec->component.name);
+		__assign_str(status, status);
+		__assign_str(type, type);
+		__entry->id = codec->component.id;
+>>>>>>> v3.18
 	),
 
 	TP_printk("codec=%s.%d type=%s status=%s", __get_str(name),

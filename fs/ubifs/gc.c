@@ -668,8 +668,12 @@ int ubifs_garbage_collect(struct ubifs_info *c, int anyway)
 	ubifs_assert(!wbuf->used);
 
 	for (i = 0; ; i++) {
+<<<<<<< HEAD
 		int space_before = c->leb_size - wbuf->offs - wbuf->used;
 		int space_after;
+=======
+		int space_before, space_after;
+>>>>>>> v3.18
 
 		cond_resched();
 

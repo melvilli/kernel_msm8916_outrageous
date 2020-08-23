@@ -29,6 +29,11 @@
 #endif				/* PRINTK_HEADER */
 #define PRINTK_HEADER "dasd(fba):"
 
+<<<<<<< HEAD
+=======
+#define FBA_DEFAULT_RETRIES 32
+
+>>>>>>> v3.18
 #define DASD_FBA_CCW_WRITE 0x41
 #define DASD_FBA_CCW_READ 0x42
 #define DASD_FBA_CCW_LOCATE 0x43
@@ -167,6 +172,10 @@ dasd_fba_check_characteristics(struct dasd_device *device)
 	}
 
 	device->default_expires = DASD_EXPIRES;
+<<<<<<< HEAD
+=======
+	device->default_retries = FBA_DEFAULT_RETRIES;
+>>>>>>> v3.18
 	device->path_data.opm = LPM_ANYPATH;
 
 	readonly = dasd_device_is_ro(device);
@@ -257,7 +266,11 @@ static struct dasd_ccw_req *dasd_fba_build_cp(struct dasd_device * memdev,
 	struct dasd_ccw_req *cqr;
 	struct ccw1 *ccw;
 	struct req_iterator iter;
+<<<<<<< HEAD
 	struct bio_vec *bv;
+=======
+	struct bio_vec bv;
+>>>>>>> v3.18
 	char *dst;
 	int count, cidaw, cplength, datasize;
 	sector_t recid, first_rec, last_rec;
@@ -280,6 +293,7 @@ static struct dasd_ccw_req *dasd_fba_build_cp(struct dasd_device * memdev,
 	count = 0;
 	cidaw = 0;
 	rq_for_each_segment(bv, req, iter) {
+<<<<<<< HEAD
 		if (bv->bv_len & (blksize - 1))
 			/* Fba can only do full blocks. */
 			return ERR_PTR(-EINVAL);
@@ -287,6 +301,15 @@ static struct dasd_ccw_req *dasd_fba_build_cp(struct dasd_device * memdev,
 #if defined(CONFIG_64BIT)
 		if (idal_is_needed (page_address(bv->bv_page), bv->bv_len))
 			cidaw += bv->bv_len / blksize;
+=======
+		if (bv.bv_len & (blksize - 1))
+			/* Fba can only do full blocks. */
+			return ERR_PTR(-EINVAL);
+		count += bv.bv_len >> (block->s2b_shift + 9);
+#if defined(CONFIG_64BIT)
+		if (idal_is_needed (page_address(bv.bv_page), bv.bv_len))
+			cidaw += bv.bv_len / blksize;
+>>>>>>> v3.18
 #endif
 	}
 	/* Paranoia. */
@@ -323,16 +346,28 @@ static struct dasd_ccw_req *dasd_fba_build_cp(struct dasd_device * memdev,
 	}
 	recid = first_rec;
 	rq_for_each_segment(bv, req, iter) {
+<<<<<<< HEAD
 		dst = page_address(bv->bv_page) + bv->bv_offset;
+=======
+		dst = page_address(bv.bv_page) + bv.bv_offset;
+>>>>>>> v3.18
 		if (dasd_page_cache) {
 			char *copy = kmem_cache_alloc(dasd_page_cache,
 						      GFP_DMA | __GFP_NOWARN);
 			if (copy && rq_data_dir(req) == WRITE)
+<<<<<<< HEAD
 				memcpy(copy + bv->bv_offset, dst, bv->bv_len);
 			if (copy)
 				dst = copy + bv->bv_offset;
 		}
 		for (off = 0; off < bv->bv_len; off += blksize) {
+=======
+				memcpy(copy + bv.bv_offset, dst, bv.bv_len);
+			if (copy)
+				dst = copy + bv.bv_offset;
+		}
+		for (off = 0; off < bv.bv_len; off += blksize) {
+>>>>>>> v3.18
 			/* Locate record for stupid devices. */
 			if (private->rdc_data.mode.bits.data_chain == 0) {
 				ccw[-1].flags |= CCW_FLAG_CC;
@@ -369,7 +404,11 @@ static struct dasd_ccw_req *dasd_fba_build_cp(struct dasd_device * memdev,
 	cqr->memdev = memdev;
 	cqr->block = block;
 	cqr->expires = memdev->default_expires * HZ;	/* default 5 minutes */
+<<<<<<< HEAD
 	cqr->retries = 32;
+=======
+	cqr->retries = memdev->default_retries;
+>>>>>>> v3.18
 	cqr->buildclk = get_tod_clock();
 	cqr->status = DASD_CQR_FILLED;
 	return cqr;
@@ -381,7 +420,11 @@ dasd_fba_free_cp(struct dasd_ccw_req *cqr, struct request *req)
 	struct dasd_fba_private *private;
 	struct ccw1 *ccw;
 	struct req_iterator iter;
+<<<<<<< HEAD
 	struct bio_vec *bv;
+=======
+	struct bio_vec bv;
+>>>>>>> v3.18
 	char *dst, *cda;
 	unsigned int blksize, off;
 	int status;
@@ -396,8 +439,13 @@ dasd_fba_free_cp(struct dasd_ccw_req *cqr, struct request *req)
 	if (private->rdc_data.mode.bits.data_chain != 0)
 		ccw++;
 	rq_for_each_segment(bv, req, iter) {
+<<<<<<< HEAD
 		dst = page_address(bv->bv_page) + bv->bv_offset;
 		for (off = 0; off < bv->bv_len; off += blksize) {
+=======
+		dst = page_address(bv.bv_page) + bv.bv_offset;
+		for (off = 0; off < bv.bv_len; off += blksize) {
+>>>>>>> v3.18
 			/* Skip locate record. */
 			if (private->rdc_data.mode.bits.data_chain == 0)
 				ccw++;
@@ -408,7 +456,11 @@ dasd_fba_free_cp(struct dasd_ccw_req *cqr, struct request *req)
 					cda = (char *)((addr_t) ccw->cda);
 				if (dst != cda) {
 					if (rq_data_dir(req) == READ)
+<<<<<<< HEAD
 						memcpy(dst, cda, bv->bv_len);
+=======
+						memcpy(dst, cda, bv.bv_len);
+>>>>>>> v3.18
 					kmem_cache_free(dasd_page_cache,
 					    (void *)((addr_t)cda & PAGE_MASK));
 				}
@@ -425,7 +477,14 @@ out:
 
 static void dasd_fba_handle_terminated_request(struct dasd_ccw_req *cqr)
 {
+<<<<<<< HEAD
 	cqr->status = DASD_CQR_FILLED;
+=======
+	if (cqr->retries < 0)
+		cqr->status = DASD_CQR_FAILED;
+	else
+		cqr->status = DASD_CQR_FILLED;
+>>>>>>> v3.18
 };
 
 static int

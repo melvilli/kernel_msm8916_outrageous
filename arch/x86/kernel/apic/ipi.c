@@ -1,6 +1,9 @@
 #include <linux/cpumask.h>
 #include <linux/interrupt.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 
 #include <linux/mm.h>
 #include <linux/delay.h>

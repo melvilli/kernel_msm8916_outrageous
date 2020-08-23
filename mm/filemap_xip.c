@@ -26,7 +26,11 @@
  * of ZERO_PAGE(), such as /dev/zero
  */
 static DEFINE_MUTEX(xip_sparse_mutex);
+<<<<<<< HEAD
 static seqcount_t xip_sparse_seq = SEQCNT_ZERO;
+=======
+static seqcount_t xip_sparse_seq = SEQCNT_ZERO(xip_sparse_seq);
+>>>>>>> v3.18
 static struct page *__xip_sparse_page;
 
 /* called under xip_sparse_mutex */

@@ -147,8 +147,13 @@ static void butterfly_chipselect(struct spi_device *spi, int value)
 
 /* we only needed to implement one mode here, and choose SPI_MODE_0 */
 
+<<<<<<< HEAD
 #define	spidelay(X)	do{}while(0)
 //#define	spidelay	ndelay
+=======
+#define spidelay(X)	do { } while (0)
+/* #define spidelay	ndelay */
+>>>>>>> v3.18
 
 #include "spi-bitbang-txrx.h"
 
@@ -171,15 +176,26 @@ static struct mtd_partition partitions[] = { {
 	/* sector 0 = 8 pages * 264 bytes/page (1 block)
 	 * sector 1 = 248 pages * 264 bytes/page
 	 */
+<<<<<<< HEAD
 	.name		= "bookkeeping",	// 66 KB
 	.offset		= 0,
 	.size		= (8 + 248) * 264,
 //	.mask_flags	= MTD_WRITEABLE,
+=======
+	.name		= "bookkeeping",	/* 66 KB */
+	.offset		= 0,
+	.size		= (8 + 248) * 264,
+	/* .mask_flags	= MTD_WRITEABLE, */
+>>>>>>> v3.18
 }, {
 	/* sector 2 = 256 pages * 264 bytes/page
 	 * sectors 3-5 = 512 pages * 264 bytes/page
 	 */
+<<<<<<< HEAD
 	.name		= "filesystem",		// 462 KB
+=======
+	.name		= "filesystem",		/* 462 KB */
+>>>>>>> v3.18
 	.offset		= MTDPART_OFS_APPEND,
 	.size		= MTDPART_SIZ_FULL,
 } };
@@ -209,7 +225,11 @@ static void butterfly_attach(struct parport *p)
 	 * and no way to be selective about what it binds to.
 	 */
 
+<<<<<<< HEAD
 	master = spi_alloc_master(dev, sizeof *pp);
+=======
+	master = spi_alloc_master(dev, sizeof(*pp));
+>>>>>>> v3.18
 	if (!master) {
 		status = -ENOMEM;
 		goto done;
@@ -225,7 +245,11 @@ static void butterfly_attach(struct parport *p)
 	master->bus_num = 42;
 	master->num_chipselect = 2;
 
+<<<<<<< HEAD
 	pp->bitbang.master = spi_master_get(master);
+=======
+	pp->bitbang.master = master;
+>>>>>>> v3.18
 	pp->bitbang.chipselect = butterfly_chipselect;
 	pp->bitbang.txrx_word[SPI_MODE_0] = butterfly_txrx_word_mode0;
 
@@ -289,7 +313,10 @@ static void butterfly_attach(struct parport *p)
 		pr_debug("%s: dataflash at %s\n", p->name,
 				dev_name(&pp->dataflash->dev));
 
+<<<<<<< HEAD
 	// dev_info(_what?_, ...)
+=======
+>>>>>>> v3.18
 	pr_info("%s: AVR Butterfly\n", p->name);
 	butterfly = pp;
 	return;
@@ -310,7 +337,10 @@ done:
 static void butterfly_detach(struct parport *p)
 {
 	struct butterfly	*pp;
+<<<<<<< HEAD
 	int			status;
+=======
+>>>>>>> v3.18
 
 	/* FIXME this global is ugly ... but, how to quickly get from
 	 * the parport to the "struct butterfly" associated with it?
@@ -322,7 +352,11 @@ static void butterfly_detach(struct parport *p)
 	butterfly = NULL;
 
 	/* stop() unregisters child devices too */
+<<<<<<< HEAD
 	status = spi_bitbang_stop(&pp->bitbang);
+=======
+	spi_bitbang_stop(&pp->bitbang);
+>>>>>>> v3.18
 
 	/* turn off VCC */
 	parport_write_data(pp->port, 0);

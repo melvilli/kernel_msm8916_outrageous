@@ -16,8 +16,13 @@
  * you mess up, the linker will catch it.)
  */
 
+<<<<<<< HEAD
 /* Base address of vvars.  This is not ABI. */
 #define VVAR_ADDRESS (-10*1024*1024 - 4096)
+=======
+#ifndef _ASM_X86_VVAR_H
+#define _ASM_X86_VVAR_H
+>>>>>>> v3.18
 
 #if defined(__VVAR_KERNEL_LDS)
 
@@ -29,6 +34,7 @@
 
 #else
 
+<<<<<<< HEAD
 #define DECLARE_VVAR(offset, type, name)				\
 	static type const * const vvaraddr_ ## name =			\
 		(void *)(VVAR_ADDRESS + (offset));
@@ -38,6 +44,18 @@
 	__attribute__((section(".vvar_" #name), aligned(16)))
 
 #define VVAR(name) (*vvaraddr_ ## name)
+=======
+extern char __vvar_page;
+
+#define DECLARE_VVAR(offset, type, name)				\
+	extern type vvar_ ## name __attribute__((visibility("hidden")));
+
+#define VVAR(name) (vvar_ ## name)
+
+#define DEFINE_VVAR(type, name)						\
+	type name							\
+	__attribute__((section(".vvar_" #name), aligned(16))) __visible
+>>>>>>> v3.18
 
 #endif
 
@@ -48,3 +66,8 @@ DECLARE_VVAR(16, int, vgetcpu_mode)
 DECLARE_VVAR(128, struct vsyscall_gtod_data, vsyscall_gtod_data)
 
 #undef DECLARE_VVAR
+<<<<<<< HEAD
+=======
+
+#endif
+>>>>>>> v3.18

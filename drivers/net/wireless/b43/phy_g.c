@@ -1587,6 +1587,10 @@ static void b43_phy_initb5(struct b43_wldev *dev)
 	b43_write16(dev, 0x03E4, (b43_read16(dev, 0x03E4) & 0xFFC0) | 0x0004);
 }
 
+<<<<<<< HEAD
+=======
+/* http://bcm-v4.sipsolutions.net/802.11/PHY/Init/B6 */
+>>>>>>> v3.18
 static void b43_phy_initb6(struct b43_wldev *dev)
 {
 	struct b43_phy *phy = &dev->phy;
@@ -1670,7 +1674,11 @@ static void b43_phy_initb6(struct b43_wldev *dev)
 		b43_radio_write16(dev, 0x50, 0x20);
 	}
 	if (phy->radio_rev <= 2) {
+<<<<<<< HEAD
 		b43_radio_write16(dev, 0x7C, 0x20);
+=======
+		b43_radio_write16(dev, 0x50, 0x20);
+>>>>>>> v3.18
 		b43_radio_write16(dev, 0x5A, 0x70);
 		b43_radio_write16(dev, 0x5B, 0x7B);
 		b43_radio_write16(dev, 0x5C, 0xB0);
@@ -1686,9 +1694,14 @@ static void b43_phy_initb6(struct b43_wldev *dev)
 		b43_phy_write(dev, 0x2A, 0x8AC0);
 	b43_phy_write(dev, 0x0038, 0x0668);
 	b43_set_txpower_g(dev, &gphy->bbatt, &gphy->rfatt, gphy->tx_control);
+<<<<<<< HEAD
 	if (phy->radio_rev <= 5) {
 		b43_phy_maskset(dev, 0x5D, 0xFF80, 0x0003);
 	}
+=======
+	if (phy->radio_rev == 4 || phy->radio_rev == 5)
+		b43_phy_maskset(dev, 0x5D, 0xFF80, 0x0003);
+>>>>>>> v3.18
 	if (phy->radio_rev <= 2)
 		b43_radio_write16(dev, 0x005D, 0x000D);
 
@@ -2555,13 +2568,21 @@ static void b43_gphy_op_exit(struct b43_wldev *dev)
 
 static u16 b43_gphy_op_read(struct b43_wldev *dev, u16 reg)
 {
+<<<<<<< HEAD
 	b43_write16(dev, B43_MMIO_PHY_CONTROL, reg);
+=======
+	b43_write16f(dev, B43_MMIO_PHY_CONTROL, reg);
+>>>>>>> v3.18
 	return b43_read16(dev, B43_MMIO_PHY_DATA);
 }
 
 static void b43_gphy_op_write(struct b43_wldev *dev, u16 reg, u16 value)
 {
+<<<<<<< HEAD
 	b43_write16(dev, B43_MMIO_PHY_CONTROL, reg);
+=======
+	b43_write16f(dev, B43_MMIO_PHY_CONTROL, reg);
+>>>>>>> v3.18
 	b43_write16(dev, B43_MMIO_PHY_DATA, value);
 }
 
@@ -2572,7 +2593,11 @@ static u16 b43_gphy_op_radio_read(struct b43_wldev *dev, u16 reg)
 	/* G-PHY needs 0x80 for read access. */
 	reg |= 0x80;
 
+<<<<<<< HEAD
 	b43_write16(dev, B43_MMIO_RADIO_CONTROL, reg);
+=======
+	b43_write16f(dev, B43_MMIO_RADIO_CONTROL, reg);
+>>>>>>> v3.18
 	return b43_read16(dev, B43_MMIO_RADIO_DATA_LOW);
 }
 
@@ -2581,7 +2606,11 @@ static void b43_gphy_op_radio_write(struct b43_wldev *dev, u16 reg, u16 value)
 	/* Register 1 is a 32-bit register. */
 	B43_WARN_ON(reg == 1);
 
+<<<<<<< HEAD
 	b43_write16(dev, B43_MMIO_RADIO_CONTROL, reg);
+=======
+	b43_write16f(dev, B43_MMIO_RADIO_CONTROL, reg);
+>>>>>>> v3.18
 	b43_write16(dev, B43_MMIO_RADIO_DATA_LOW, value);
 }
 

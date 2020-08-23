@@ -13,7 +13,11 @@
  *
  *  You should have received a copy of the GNU General Public License along
  *  with this program; if not, write to the Free Software Foundation, Inc.,
+<<<<<<< HEAD
  *  59 Temple Place - Suite 330, Boston MA 02111-1307, USA.
+=======
+ *  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.
+>>>>>>> v3.18
  *
  *  Nov 7, 2000
  *  Modification to allow integration with Linux kernel
@@ -24,6 +28,7 @@
 #ifndef __ARCH_MIPS_MATH_EMU_IEEE754_H
 #define __ARCH_MIPS_MATH_EMU_IEEE754_H
 
+<<<<<<< HEAD
 #include <asm/byteorder.h>
 #include <linux/types.h>
 #include <linux/sched.h>
@@ -98,10 +103,39 @@ typedef union _ieee754sp {
 	u32 bits;
 } ieee754sp;
 #endif
+=======
+#include <linux/compiler.h>
+#include <asm/byteorder.h>
+#include <linux/kernel.h>
+#include <linux/types.h>
+#include <linux/sched.h>
+#include <asm/bitfield.h>
+
+union ieee754dp {
+	struct {
+		__BITFIELD_FIELD(unsigned int sign:1,
+		__BITFIELD_FIELD(unsigned int bexp:11,
+		__BITFIELD_FIELD(u64 mant:52,
+		;)))
+	};
+	u64 bits;
+};
+
+union ieee754sp {
+	struct {
+		__BITFIELD_FIELD(unsigned sign:1,
+		__BITFIELD_FIELD(unsigned bexp:8,
+		__BITFIELD_FIELD(unsigned mant:23,
+		;)))
+	};
+	u32 bits;
+};
+>>>>>>> v3.18
 
 /*
  * single precision (often aka float)
 */
+<<<<<<< HEAD
 int ieee754sp_finite(ieee754sp x);
 int ieee754sp_class(ieee754sp x);
 
@@ -193,17 +227,74 @@ ieee754dp ieee754dp_floor(ieee754dp x);
 ieee754dp ieee754dp_trunc(ieee754dp x);
 
 ieee754dp ieee754dp_sqrt(ieee754dp x);
+=======
+int ieee754sp_class(union ieee754sp x);
+
+union ieee754sp ieee754sp_abs(union ieee754sp x);
+union ieee754sp ieee754sp_neg(union ieee754sp x);
+
+union ieee754sp ieee754sp_add(union ieee754sp x, union ieee754sp y);
+union ieee754sp ieee754sp_sub(union ieee754sp x, union ieee754sp y);
+union ieee754sp ieee754sp_mul(union ieee754sp x, union ieee754sp y);
+union ieee754sp ieee754sp_div(union ieee754sp x, union ieee754sp y);
+
+union ieee754sp ieee754sp_fint(int x);
+union ieee754sp ieee754sp_flong(s64 x);
+union ieee754sp ieee754sp_fdp(union ieee754dp x);
+
+int ieee754sp_tint(union ieee754sp x);
+s64 ieee754sp_tlong(union ieee754sp x);
+
+int ieee754sp_cmp(union ieee754sp x, union ieee754sp y, int cop, int sig);
+
+union ieee754sp ieee754sp_sqrt(union ieee754sp x);
+
+/*
+ * double precision (often aka double)
+*/
+int ieee754dp_class(union ieee754dp x);
+
+union ieee754dp ieee754dp_add(union ieee754dp x, union ieee754dp y);
+union ieee754dp ieee754dp_sub(union ieee754dp x, union ieee754dp y);
+union ieee754dp ieee754dp_mul(union ieee754dp x, union ieee754dp y);
+union ieee754dp ieee754dp_div(union ieee754dp x, union ieee754dp y);
+
+union ieee754dp ieee754dp_abs(union ieee754dp x);
+union ieee754dp ieee754dp_neg(union ieee754dp x);
+
+union ieee754dp ieee754dp_fint(int x);
+union ieee754dp ieee754dp_flong(s64 x);
+union ieee754dp ieee754dp_fsp(union ieee754sp x);
+
+int ieee754dp_tint(union ieee754dp x);
+s64 ieee754dp_tlong(union ieee754dp x);
+
+int ieee754dp_cmp(union ieee754dp x, union ieee754dp y, int cop, int sig);
+
+union ieee754dp ieee754dp_sqrt(union ieee754dp x);
+>>>>>>> v3.18
 
 
 
 /* 5 types of floating point number
 */
+<<<<<<< HEAD
 #define IEEE754_CLASS_NORM	0x00
 #define IEEE754_CLASS_ZERO	0x01
 #define IEEE754_CLASS_DNORM	0x02
 #define IEEE754_CLASS_INF	0x03
 #define IEEE754_CLASS_SNAN	0x04
 #define IEEE754_CLASS_QNAN	0x05
+=======
+enum {
+	IEEE754_CLASS_NORM	= 0x00,
+	IEEE754_CLASS_ZERO	= 0x01,
+	IEEE754_CLASS_DNORM	= 0x02,
+	IEEE754_CLASS_INF	= 0x03,
+	IEEE754_CLASS_SNAN	= 0x04,
+	IEEE754_CLASS_QNAN	= 0x05,
+};
+>>>>>>> v3.18
 
 /* exception numbers */
 #define IEEE754_INEXACT			0x01
@@ -219,6 +310,7 @@ ieee754dp ieee754dp_sqrt(ieee754dp x);
 #define IEEE754_CGT	0x04
 #define IEEE754_CUN	0x08
 
+<<<<<<< HEAD
 /* rounding mode
 */
 #define IEEE754_RN	0	/* round to nearest */
@@ -233,68 +325,118 @@ ieee754dp ieee754dp_sqrt(ieee754dp x);
 /* "normal" comparisons
 */
 static inline int ieee754sp_eq(ieee754sp x, ieee754sp y)
+=======
+/* "normal" comparisons
+*/
+static inline int ieee754sp_eq(union ieee754sp x, union ieee754sp y)
+>>>>>>> v3.18
 {
 	return ieee754sp_cmp(x, y, IEEE754_CEQ, 0);
 }
 
+<<<<<<< HEAD
 static inline int ieee754sp_ne(ieee754sp x, ieee754sp y)
+=======
+static inline int ieee754sp_ne(union ieee754sp x, union ieee754sp y)
+>>>>>>> v3.18
 {
 	return ieee754sp_cmp(x, y,
 			     IEEE754_CLT | IEEE754_CGT | IEEE754_CUN, 0);
 }
 
+<<<<<<< HEAD
 static inline int ieee754sp_lt(ieee754sp x, ieee754sp y)
+=======
+static inline int ieee754sp_lt(union ieee754sp x, union ieee754sp y)
+>>>>>>> v3.18
 {
 	return ieee754sp_cmp(x, y, IEEE754_CLT, 0);
 }
 
+<<<<<<< HEAD
 static inline int ieee754sp_le(ieee754sp x, ieee754sp y)
+=======
+static inline int ieee754sp_le(union ieee754sp x, union ieee754sp y)
+>>>>>>> v3.18
 {
 	return ieee754sp_cmp(x, y, IEEE754_CLT | IEEE754_CEQ, 0);
 }
 
+<<<<<<< HEAD
 static inline int ieee754sp_gt(ieee754sp x, ieee754sp y)
+=======
+static inline int ieee754sp_gt(union ieee754sp x, union ieee754sp y)
+>>>>>>> v3.18
 {
 	return ieee754sp_cmp(x, y, IEEE754_CGT, 0);
 }
 
 
+<<<<<<< HEAD
 static inline int ieee754sp_ge(ieee754sp x, ieee754sp y)
+=======
+static inline int ieee754sp_ge(union ieee754sp x, union ieee754sp y)
+>>>>>>> v3.18
 {
 	return ieee754sp_cmp(x, y, IEEE754_CGT | IEEE754_CEQ, 0);
 }
 
+<<<<<<< HEAD
 static inline int ieee754dp_eq(ieee754dp x, ieee754dp y)
+=======
+static inline int ieee754dp_eq(union ieee754dp x, union ieee754dp y)
+>>>>>>> v3.18
 {
 	return ieee754dp_cmp(x, y, IEEE754_CEQ, 0);
 }
 
+<<<<<<< HEAD
 static inline int ieee754dp_ne(ieee754dp x, ieee754dp y)
+=======
+static inline int ieee754dp_ne(union ieee754dp x, union ieee754dp y)
+>>>>>>> v3.18
 {
 	return ieee754dp_cmp(x, y,
 			     IEEE754_CLT | IEEE754_CGT | IEEE754_CUN, 0);
 }
 
+<<<<<<< HEAD
 static inline int ieee754dp_lt(ieee754dp x, ieee754dp y)
+=======
+static inline int ieee754dp_lt(union ieee754dp x, union ieee754dp y)
+>>>>>>> v3.18
 {
 	return ieee754dp_cmp(x, y, IEEE754_CLT, 0);
 }
 
+<<<<<<< HEAD
 static inline int ieee754dp_le(ieee754dp x, ieee754dp y)
+=======
+static inline int ieee754dp_le(union ieee754dp x, union ieee754dp y)
+>>>>>>> v3.18
 {
 	return ieee754dp_cmp(x, y, IEEE754_CLT | IEEE754_CEQ, 0);
 }
 
+<<<<<<< HEAD
 static inline int ieee754dp_gt(ieee754dp x, ieee754dp y)
+=======
+static inline int ieee754dp_gt(union ieee754dp x, union ieee754dp y)
+>>>>>>> v3.18
 {
 	return ieee754dp_cmp(x, y, IEEE754_CGT, 0);
 }
 
+<<<<<<< HEAD
 static inline int ieee754dp_ge(ieee754dp x, ieee754dp y)
+=======
+static inline int ieee754dp_ge(union ieee754dp x, union ieee754dp y)
+>>>>>>> v3.18
 {
 	return ieee754dp_cmp(x, y, IEEE754_CGT | IEEE754_CEQ, 0);
 }
 
+<<<<<<< HEAD
 
 /*
  * Like strtod
@@ -303,10 +445,13 @@ ieee754dp ieee754dp_fstr(const char *s, char **endp);
 char *ieee754dp_tstr(ieee754dp x, int prec, int fmt, int af);
 
 
+=======
+>>>>>>> v3.18
 /*
  * The control status register
  */
 struct _ieee754_csr {
+<<<<<<< HEAD
 #ifdef __BIG_ENDIAN
 	unsigned pad0:7;
 	unsigned nod:1;		/* set 1 for no denormalised numbers */
@@ -327,6 +472,17 @@ struct _ieee754_csr {
 	unsigned nod:1;		/* set 1 for no denormalised numbers */
 	unsigned pad0:7;
 #endif
+=======
+	__BITFIELD_FIELD(unsigned pad0:7,
+	__BITFIELD_FIELD(unsigned nod:1,	/* set 1 for no denormalised numbers */
+	__BITFIELD_FIELD(unsigned c:1,		/* condition */
+	__BITFIELD_FIELD(unsigned pad1:5,
+	__BITFIELD_FIELD(unsigned cx:6,		/* exceptions this operation */
+	__BITFIELD_FIELD(unsigned mx:5,		/* exception enable  mask */
+	__BITFIELD_FIELD(unsigned sx:5,		/* exceptions total */
+	__BITFIELD_FIELD(unsigned rm:2,		/* current rounding mode */
+	;))))))))
+>>>>>>> v3.18
 };
 #define ieee754_csr (*(struct _ieee754_csr *)(&current->thread.fpu.fcr31))
 
@@ -377,8 +533,13 @@ static inline int ieee754_sxtest(unsigned n)
 }
 
 /* debugging */
+<<<<<<< HEAD
 ieee754sp ieee754sp_dump(char *s, ieee754sp x);
 ieee754dp ieee754dp_dump(char *s, ieee754dp x);
+=======
+union ieee754sp ieee754sp_dump(char *s, union ieee754sp x);
+union ieee754dp ieee754dp_dump(char *s, union ieee754dp x);
+>>>>>>> v3.18
 
 #define IEEE754_SPCVAL_PZERO	0
 #define IEEE754_SPCVAL_NZERO	1
@@ -398,10 +559,17 @@ ieee754dp ieee754dp_dump(char *s, ieee754dp x);
 #define IEEE754_SPCVAL_P1E31	15	/* + 1.0e31 */
 #define IEEE754_SPCVAL_P1E63	16	/* + 1.0e63 */
 
+<<<<<<< HEAD
 extern const struct ieee754dp_konst __ieee754dp_spcvals[];
 extern const struct ieee754sp_konst __ieee754sp_spcvals[];
 #define ieee754dp_spcvals ((const ieee754dp *)__ieee754dp_spcvals)
 #define ieee754sp_spcvals ((const ieee754sp *)__ieee754sp_spcvals)
+=======
+extern const union ieee754dp __ieee754dp_spcvals[];
+extern const union ieee754sp __ieee754sp_spcvals[];
+#define ieee754dp_spcvals ((const union ieee754dp *)__ieee754dp_spcvals)
+#define ieee754sp_spcvals ((const union ieee754sp *)__ieee754sp_spcvals)
+>>>>>>> v3.18
 
 /*
  * Return infinity with given sign
@@ -431,6 +599,7 @@ extern const struct ieee754sp_konst __ieee754sp_spcvals[];
 /*
  * Indefinite integer value
  */
+<<<<<<< HEAD
 #define ieee754si_indef()	INT_MAX
 #ifdef LONG_LONG_MAX
 #define ieee754di_indef()	LONG_LONG_MAX
@@ -453,6 +622,17 @@ struct ieee754xctx {
 	} rv;			/* default result format implied by op */
 	va_list ap;
 };
+=======
+static inline int ieee754si_indef(void)
+{
+	return INT_MAX;
+}
+
+static inline s64 ieee754di_indef(void)
+{
+	return S64_MAX;
+}
+>>>>>>> v3.18
 
 /* result types for xctx.rt */
 #define IEEE754_RT_SP	0
@@ -461,8 +641,11 @@ struct ieee754xctx {
 #define IEEE754_RT_SI	3
 #define IEEE754_RT_DI	4
 
+<<<<<<< HEAD
 extern void ieee754_xcpt(struct ieee754xctx *xcp);
 
+=======
+>>>>>>> v3.18
 /* compat */
 #define ieee754dp_fix(x)	ieee754dp_tint(x)
 #define ieee754sp_fix(x)	ieee754sp_tint(x)

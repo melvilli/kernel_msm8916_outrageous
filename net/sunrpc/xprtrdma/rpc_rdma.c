@@ -53,6 +53,7 @@
 # define RPCDBG_FACILITY	RPCDBG_TRANS
 #endif
 
+<<<<<<< HEAD
 enum rpcrdma_chunktype {
 	rpcrdma_noch = 0,
 	rpcrdma_readch,
@@ -61,6 +62,8 @@ enum rpcrdma_chunktype {
 	rpcrdma_replych
 };
 
+=======
+>>>>>>> v3.18
 #ifdef RPC_DEBUG
 static const char transfertypes[][12] = {
 	"pure inline",	/* no chunks */
@@ -78,8 +81,12 @@ static const char transfertypes[][12] = {
  * elements. Segments are then coalesced when registered, if possible
  * within the selected memreg mode.
  *
+<<<<<<< HEAD
  * Note, this routine is never called if the connection's memory
  * registration strategy is 0 (bounce buffers).
+=======
+ * Returns positive number of segments converted, or a negative errno.
+>>>>>>> v3.18
  */
 
 static int
@@ -102,10 +109,24 @@ rpcrdma_convert_iovs(struct xdr_buf *xdrbuf, unsigned int pos,
 	page_base = xdrbuf->page_base & ~PAGE_MASK;
 	p = 0;
 	while (len && n < nsegs) {
+<<<<<<< HEAD
 		seg[n].mr_page = ppages[p];
 		seg[n].mr_offset = (void *)(unsigned long) page_base;
 		seg[n].mr_len = min_t(u32, PAGE_SIZE - page_base, len);
 		BUG_ON(seg[n].mr_len > PAGE_SIZE);
+=======
+		if (!ppages[p]) {
+			/* alloc the pagelist for receiving buffer */
+			ppages[p] = alloc_page(GFP_ATOMIC);
+			if (!ppages[p])
+				return -ENOMEM;
+		}
+		seg[n].mr_page = ppages[p];
+		seg[n].mr_offset = (void *)(unsigned long) page_base;
+		seg[n].mr_len = min_t(u32, PAGE_SIZE - page_base, len);
+		if (seg[n].mr_len > PAGE_SIZE)
+			return -EIO;
+>>>>>>> v3.18
 		len -= seg[n].mr_len;
 		++n;
 		++p;
@@ -114,7 +135,11 @@ rpcrdma_convert_iovs(struct xdr_buf *xdrbuf, unsigned int pos,
 
 	/* Message overflows the seg array */
 	if (len && n == nsegs)
+<<<<<<< HEAD
 		return 0;
+=======
+		return -EIO;
+>>>>>>> v3.18
 
 	if (xdrbuf->tail[0].iov_len) {
 		/* the rpcrdma protocol allows us to omit any trailing
@@ -123,7 +148,11 @@ rpcrdma_convert_iovs(struct xdr_buf *xdrbuf, unsigned int pos,
 			return n;
 		if (n == nsegs)
 			/* Tail remains, but we're out of segments */
+<<<<<<< HEAD
 			return 0;
+=======
+			return -EIO;
+>>>>>>> v3.18
 		seg[n].mr_page = NULL;
 		seg[n].mr_offset = xdrbuf->tail[0].iov_base;
 		seg[n].mr_len = xdrbuf->tail[0].iov_len;
@@ -164,15 +193,27 @@ rpcrdma_convert_iovs(struct xdr_buf *xdrbuf, unsigned int pos,
  *  Reply chunk (a counted array):
  *   N elements:
  *    1 - N - HLOO - HLOO - ... - HLOO
+<<<<<<< HEAD
  */
 
 static unsigned int
+=======
+ *
+ * Returns positive RPC/RDMA header size, or negative errno.
+ */
+
+static ssize_t
+>>>>>>> v3.18
 rpcrdma_create_chunks(struct rpc_rqst *rqst, struct xdr_buf *target,
 		struct rpcrdma_msg *headerp, enum rpcrdma_chunktype type)
 {
 	struct rpcrdma_req *req = rpcr_to_rdmar(rqst);
 	struct rpcrdma_xprt *r_xprt = rpcx_to_rdmax(rqst->rq_xprt);
+<<<<<<< HEAD
 	int nsegs, nchunks = 0;
+=======
+	int n, nsegs, nchunks = 0;
+>>>>>>> v3.18
 	unsigned int pos;
 	struct rpcrdma_mr_seg *seg = req->rl_segments;
 	struct rpcrdma_read_chunk *cur_rchunk = NULL;
@@ -198,12 +239,20 @@ rpcrdma_create_chunks(struct rpc_rqst *rqst, struct xdr_buf *target,
 		pos = target->head[0].iov_len;
 
 	nsegs = rpcrdma_convert_iovs(target, pos, type, seg, RPCRDMA_MAX_SEGS);
+<<<<<<< HEAD
 	if (nsegs == 0)
 		return 0;
 
 	do {
 		/* bind/register the memory, then build chunk from result. */
 		int n = rpcrdma_register_external(seg, nsegs,
+=======
+	if (nsegs < 0)
+		return nsegs;
+
+	do {
+		n = rpcrdma_register_external(seg, nsegs,
+>>>>>>> v3.18
 						cur_wchunk != NULL, r_xprt);
 		if (n <= 0)
 			goto out;
@@ -248,10 +297,13 @@ rpcrdma_create_chunks(struct rpc_rqst *rqst, struct xdr_buf *target,
 	/* success. all failures return above */
 	req->rl_nchunks = nchunks;
 
+<<<<<<< HEAD
 	BUG_ON(nchunks == 0);
 	BUG_ON((r_xprt->rx_ia.ri_memreg_strategy == RPCRDMA_FRMR)
 	       && (nchunks > 3));
 
+=======
+>>>>>>> v3.18
 	/*
 	 * finish off header. If write, marshal discrim and nchunks.
 	 */
@@ -276,10 +328,41 @@ rpcrdma_create_chunks(struct rpc_rqst *rqst, struct xdr_buf *target,
 	return (unsigned char *)iptr - (unsigned char *)headerp;
 
 out:
+<<<<<<< HEAD
 	for (pos = 0; nchunks--;)
 		pos += rpcrdma_deregister_external(
 				&req->rl_segments[pos], r_xprt, NULL);
 	return 0;
+=======
+	if (r_xprt->rx_ia.ri_memreg_strategy != RPCRDMA_FRMR) {
+		for (pos = 0; nchunks--;)
+			pos += rpcrdma_deregister_external(
+					&req->rl_segments[pos], r_xprt);
+	}
+	return n;
+}
+
+/*
+ * Marshal chunks. This routine returns the header length
+ * consumed by marshaling.
+ *
+ * Returns positive RPC/RDMA header size, or negative errno.
+ */
+
+ssize_t
+rpcrdma_marshal_chunks(struct rpc_rqst *rqst, ssize_t result)
+{
+	struct rpcrdma_req *req = rpcr_to_rdmar(rqst);
+	struct rpcrdma_msg *headerp = (struct rpcrdma_msg *)req->rl_base;
+
+	if (req->rl_rtype != rpcrdma_noch)
+		result = rpcrdma_create_chunks(rqst, &rqst->rq_snd_buf,
+					       headerp, req->rl_rtype);
+	else if (req->rl_wtype != rpcrdma_noch)
+		result = rpcrdma_create_chunks(rqst, &rqst->rq_rcv_buf,
+					       headerp, req->rl_wtype);
+	return result;
+>>>>>>> v3.18
 }
 
 /*
@@ -361,6 +444,11 @@ rpcrdma_inline_pullup(struct rpc_rqst *rqst, int pad)
  *  [1] -- the RPC header/data, marshaled by RPC and the NFS protocol.
  *  [2] -- optional padding.
  *  [3] -- if padded, header only in [1] and data here.
+<<<<<<< HEAD
+=======
+ *
+ * Returns zero on success, otherwise a negative errno.
+>>>>>>> v3.18
  */
 
 int
@@ -370,8 +458,13 @@ rpcrdma_marshal_req(struct rpc_rqst *rqst)
 	struct rpcrdma_xprt *r_xprt = rpcx_to_rdmax(xprt);
 	struct rpcrdma_req *req = rpcr_to_rdmar(rqst);
 	char *base;
+<<<<<<< HEAD
 	size_t hdrlen, rpclen, padlen;
 	enum rpcrdma_chunktype rtype, wtype;
+=======
+	size_t rpclen, padlen;
+	ssize_t hdrlen;
+>>>>>>> v3.18
 	struct rpcrdma_msg *headerp;
 
 	/*
@@ -409,6 +502,7 @@ rpcrdma_marshal_req(struct rpc_rqst *rqst)
 	 * into pages; otherwise use reply chunks.
 	 */
 	if (rqst->rq_rcv_buf.buflen <= RPCRDMA_INLINE_READ_THRESHOLD(rqst))
+<<<<<<< HEAD
 		wtype = rpcrdma_noch;
 	else if (rqst->rq_rcv_buf.page_len == 0)
 		wtype = rpcrdma_replych;
@@ -416,6 +510,15 @@ rpcrdma_marshal_req(struct rpc_rqst *rqst)
 		wtype = rpcrdma_writech;
 	else
 		wtype = rpcrdma_replych;
+=======
+		req->rl_wtype = rpcrdma_noch;
+	else if (rqst->rq_rcv_buf.page_len == 0)
+		req->rl_wtype = rpcrdma_replych;
+	else if (rqst->rq_rcv_buf.flags & XDRBUF_READ)
+		req->rl_wtype = rpcrdma_writech;
+	else
+		req->rl_wtype = rpcrdma_replych;
+>>>>>>> v3.18
 
 	/*
 	 * Chunks needed for arguments?
@@ -432,6 +535,7 @@ rpcrdma_marshal_req(struct rpc_rqst *rqst)
 	 * TBD check NFSv4 setacl
 	 */
 	if (rqst->rq_snd_buf.len <= RPCRDMA_INLINE_WRITE_THRESHOLD(rqst))
+<<<<<<< HEAD
 		rtype = rpcrdma_noch;
 	else if (rqst->rq_snd_buf.page_len == 0)
 		rtype = rpcrdma_areadch;
@@ -449,6 +553,21 @@ rpcrdma_marshal_req(struct rpc_rqst *rqst)
 		dprintk("RPC:       %s: too much data (%d/%d) for inline\n",
 			__func__, rqst->rq_rcv_buf.len, rqst->rq_snd_buf.len);
 		return -1;
+=======
+		req->rl_rtype = rpcrdma_noch;
+	else if (rqst->rq_snd_buf.page_len == 0)
+		req->rl_rtype = rpcrdma_areadch;
+	else
+		req->rl_rtype = rpcrdma_readch;
+
+	/* The following simplification is not true forever */
+	if (req->rl_rtype != rpcrdma_noch && req->rl_wtype == rpcrdma_replych)
+		req->rl_wtype = rpcrdma_noch;
+	if (req->rl_rtype != rpcrdma_noch && req->rl_wtype != rpcrdma_noch) {
+		dprintk("RPC:       %s: cannot marshal multiple chunk lists\n",
+			__func__);
+		return -EIO;
+>>>>>>> v3.18
 	}
 
 	hdrlen = 28; /*sizeof *headerp;*/
@@ -459,7 +578,11 @@ rpcrdma_marshal_req(struct rpc_rqst *rqst)
 	 * When padding is in use and applies to the transfer, insert
 	 * it and change the message type.
 	 */
+<<<<<<< HEAD
 	if (rtype == rpcrdma_noch) {
+=======
+	if (req->rl_rtype == rpcrdma_noch) {
+>>>>>>> v3.18
 
 		padlen = rpcrdma_inline_pullup(rqst,
 						RPCRDMA_INLINE_PAD_VALUE(rqst));
@@ -474,8 +597,16 @@ rpcrdma_marshal_req(struct rpc_rqst *rqst)
 			headerp->rm_body.rm_padded.rm_pempty[1] = xdr_zero;
 			headerp->rm_body.rm_padded.rm_pempty[2] = xdr_zero;
 			hdrlen += 2 * sizeof(u32); /* extra words in padhdr */
+<<<<<<< HEAD
 			BUG_ON(wtype != rpcrdma_noch);
 
+=======
+			if (req->rl_wtype != rpcrdma_noch) {
+				dprintk("RPC:       %s: invalid chunk list\n",
+					__func__);
+				return -EIO;
+			}
+>>>>>>> v3.18
 		} else {
 			headerp->rm_body.rm_nochunks.rm_empty[0] = xdr_zero;
 			headerp->rm_body.rm_nochunks.rm_empty[1] = xdr_zero;
@@ -492,6 +623,7 @@ rpcrdma_marshal_req(struct rpc_rqst *rqst)
 			 * on receive. Therefore, we request a reply chunk
 			 * for non-writes wherever feasible and efficient.
 			 */
+<<<<<<< HEAD
 			if (wtype == rpcrdma_noch &&
 			    r_xprt->rx_ia.ri_memreg_strategy > RPCRDMA_REGISTER)
 				wtype = rpcrdma_replych;
@@ -518,6 +650,20 @@ rpcrdma_marshal_req(struct rpc_rqst *rqst)
 	dprintk("RPC:       %s: %s: hdrlen %zd rpclen %zd padlen %zd"
 		" headerp 0x%p base 0x%p lkey 0x%x\n",
 		__func__, transfertypes[wtype], hdrlen, rpclen, padlen,
+=======
+			if (req->rl_wtype == rpcrdma_noch)
+				req->rl_wtype = rpcrdma_replych;
+		}
+	}
+
+	hdrlen = rpcrdma_marshal_chunks(rqst, hdrlen);
+	if (hdrlen < 0)
+		return hdrlen;
+
+	dprintk("RPC:       %s: %s: hdrlen %zd rpclen %zd padlen %zd"
+		" headerp 0x%p base 0x%p lkey 0x%x\n",
+		__func__, transfertypes[req->rl_wtype], hdrlen, rpclen, padlen,
+>>>>>>> v3.18
 		headerp, base, req->rl_iov.lkey);
 
 	/*
@@ -649,9 +795,13 @@ rpcrdma_inline_fixup(struct rpc_rqst *rqst, char *srcp, int copy_len, int pad)
 				break;
 			page_base = 0;
 		}
+<<<<<<< HEAD
 		rqst->rq_rcv_buf.page_len = olen - copy_len;
 	} else
 		rqst->rq_rcv_buf.page_len = 0;
+=======
+	}
+>>>>>>> v3.18
 
 	if (copy_len && rqst->rq_rcv_buf.tail[0].iov_len) {
 		curlen = copy_len;
@@ -682,6 +832,7 @@ rpcrdma_inline_fixup(struct rpc_rqst *rqst, char *srcp, int copy_len, int pad)
 	rqst->rq_private_buf = rqst->rq_rcv_buf;
 }
 
+<<<<<<< HEAD
 /*
  * This function is called when an async event is posted to
  * the connection which changes the connection state. All it
@@ -691,6 +842,13 @@ rpcrdma_inline_fixup(struct rpc_rqst *rqst, char *srcp, int copy_len, int pad)
 void
 rpcrdma_conn_func(struct rpcrdma_ep *ep)
 {
+=======
+void
+rpcrdma_connect_worker(struct work_struct *work)
+{
+	struct rpcrdma_ep *ep =
+		container_of(work, struct rpcrdma_ep, rep_connect_worker.work);
+>>>>>>> v3.18
 	struct rpc_xprt *xprt = ep->rep_xprt;
 
 	spin_lock_bh(&xprt->transport_lock);
@@ -707,6 +865,7 @@ rpcrdma_conn_func(struct rpcrdma_ep *ep)
 }
 
 /*
+<<<<<<< HEAD
  * This function is called when memory window unbind which we are waiting
  * for completes. Just use rr_func (zeroed by upcall) to signal completion.
  */
@@ -714,6 +873,17 @@ static void
 rpcrdma_unbind_func(struct rpcrdma_rep *rep)
 {
 	wake_up(&rep->rr_unbind);
+=======
+ * This function is called when an async event is posted to
+ * the connection which changes the connection state. All it
+ * does at this point is mark the connection up/down, the rpc
+ * timers do the rest.
+ */
+void
+rpcrdma_conn_func(struct rpcrdma_ep *ep)
+{
+	schedule_delayed_work(&ep->rep_connect_worker, 0);
+>>>>>>> v3.18
 }
 
 /*
@@ -730,7 +900,12 @@ rpcrdma_reply_handler(struct rpcrdma_rep *rep)
 	struct rpc_xprt *xprt = rep->rr_xprt;
 	struct rpcrdma_xprt *r_xprt = rpcx_to_rdmax(xprt);
 	__be32 *iptr;
+<<<<<<< HEAD
 	int i, rdmalen, status;
+=======
+	int rdmalen, status;
+	unsigned long cwnd;
+>>>>>>> v3.18
 
 	/* Check status. If bad, signal disconnect and return rep to pool */
 	if (rep->rr_len == ~0U) {
@@ -785,6 +960,10 @@ repost:
 
 	/* from here on, the reply is no longer an orphan */
 	req->rl_reply = rep;
+<<<<<<< HEAD
+=======
+	xprt->reestablish_timeout = 0;
+>>>>>>> v3.18
 
 	/* check for expected message types */
 	/* The order of some of these tests is important. */
@@ -859,6 +1038,7 @@ badheader:
 		break;
 	}
 
+<<<<<<< HEAD
 	/* If using mw bind, start the deregister process now. */
 	/* (Note: if mr_free(), cannot perform it here, in tasklet context) */
 	if (req->rl_nchunks) switch (r_xprt->rx_ia.ri_memreg_strategy) {
@@ -879,6 +1059,12 @@ badheader:
 	default:
 		break;
 	}
+=======
+	cwnd = xprt->cwnd;
+	xprt->cwnd = atomic_read(&r_xprt->rx_buf.rb_credits) << RPC_CWNDSHIFT;
+	if (xprt->cwnd > cwnd)
+		xprt_release_rqst_cong(rqst->rq_task);
+>>>>>>> v3.18
 
 	dprintk("RPC:       %s: xprt_complete_rqst(0x%p, 0x%p, %d)\n",
 			__func__, xprt, rqst, status);

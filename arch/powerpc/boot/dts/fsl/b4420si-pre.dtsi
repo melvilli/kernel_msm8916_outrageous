@@ -34,6 +34,11 @@
 
 /dts-v1/;
 
+<<<<<<< HEAD
+=======
+/include/ "e6500_power_isa.dtsi"
+
+>>>>>>> v3.18
 / {
 	compatible = "fsl,B4420";
 	#address-cells = <2>;
@@ -62,12 +67,24 @@
 		cpu0: PowerPC,e6500@0 {
 			device_type = "cpu";
 			reg = <0 1>;
+<<<<<<< HEAD
 			next-level-cache = <&L2>;
+=======
+			clocks = <&mux0>;
+			next-level-cache = <&L2>;
+			fsl,portid-mapping = <0x80000000>;
+>>>>>>> v3.18
 		};
 		cpu1: PowerPC,e6500@2 {
 			device_type = "cpu";
 			reg = <2 3>;
+<<<<<<< HEAD
 			next-level-cache = <&L2>;
+=======
+			clocks = <&mux0>;
+			next-level-cache = <&L2>;
+			fsl,portid-mapping = <0x80000000>;
+>>>>>>> v3.18
 		};
 	};
 };

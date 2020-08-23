@@ -19,6 +19,10 @@
 
 #include <plat/fb.h>
 #include <plat/gpio-cfg.h>
+<<<<<<< HEAD
+=======
+#include <mach/gpio-samsung.h>
+>>>>>>> v3.18
 
 void s3c64xx_fb_gpio_setup_24bpp(void)
 {

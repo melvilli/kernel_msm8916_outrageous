@@ -760,7 +760,11 @@ static irqreturn_t solos_irq(int irq, void *dev_id)
 	return IRQ_RETVAL(handled);
 }
 
+<<<<<<< HEAD
 void solos_bh(unsigned long card_arg)
+=======
+static void solos_bh(unsigned long card_arg)
+>>>>>>> v3.18
 {
 	struct solos_card *card = (void *)card_arg;
 	uint32_t card_flags;
@@ -1225,11 +1229,19 @@ static int fpga_probe(struct pci_dev *dev, const struct pci_device_id *id)
 	card->config_regs = pci_iomap(dev, 0, CONFIG_RAM_SIZE);
 	if (!card->config_regs) {
 		dev_warn(&dev->dev, "Failed to ioremap config registers\n");
+<<<<<<< HEAD
+=======
+		err = -ENOMEM;
+>>>>>>> v3.18
 		goto out_release_regions;
 	}
 	card->buffers = pci_iomap(dev, 1, DATA_RAM_SIZE);
 	if (!card->buffers) {
 		dev_warn(&dev->dev, "Failed to ioremap data buffers\n");
+<<<<<<< HEAD
+=======
+		err = -ENOMEM;
+>>>>>>> v3.18
 		goto out_unmap_config;
 	}
 
@@ -1278,6 +1290,10 @@ static int fpga_probe(struct pci_dev *dev, const struct pci_device_id *id)
 			card->dma_bounce = kmalloc(card->nr_ports * BUF_SIZE, GFP_KERNEL);
 			if (!card->dma_bounce) {
 				dev_warn(&card->dev->dev, "Failed to allocate DMA bounce buffers\n");
+<<<<<<< HEAD
+=======
+				err = -ENOMEM;
+>>>>>>> v3.18
 				/* Fallback to MMIO doesn't work */
 				goto out_unmap_both;
 			}
@@ -1335,7 +1351,10 @@ static int fpga_probe(struct pci_dev *dev, const struct pci_device_id *id)
 	
  out_unmap_both:
 	kfree(card->dma_bounce);
+<<<<<<< HEAD
 	pci_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 	pci_iounmap(dev, card->buffers);
  out_unmap_config:
 	pci_iounmap(dev, card->config_regs);
@@ -1457,7 +1476,10 @@ static void fpga_remove(struct pci_dev *dev)
 	pci_release_regions(dev);
 	pci_disable_device(dev);
 
+<<<<<<< HEAD
 	pci_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 	kfree(card);
 }
 

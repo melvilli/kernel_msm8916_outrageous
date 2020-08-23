@@ -16,6 +16,12 @@
 #include <linux/rtc.h>
 #include <linux/slab.h>
 #include <linux/module.h>
+<<<<<<< HEAD
+=======
+#include <linux/err.h>
+#include <linux/of.h>
+#include <linux/of_device.h>
+>>>>>>> v3.18
 
 #define DRV_VERSION "0.1"
 
@@ -267,6 +273,7 @@ static int isl12022_probe(struct i2c_client *client,
 	isl12022->rtc = devm_rtc_device_register(&client->dev,
 					isl12022_driver.driver.name,
 					&isl12022_rtc_ops, THIS_MODULE);
+<<<<<<< HEAD
 	if (IS_ERR(isl12022->rtc))
 		return PTR_ERR(isl12022->rtc);
 
@@ -277,6 +284,17 @@ static int isl12022_remove(struct i2c_client *client)
 {
 	return 0;
 }
+=======
+	return PTR_ERR_OR_ZERO(isl12022->rtc);
+}
+
+#ifdef CONFIG_OF
+static const struct of_device_id isl12022_dt_match[] = {
+	{ .compatible = "isl,isl12022" },
+	{ },
+};
+#endif
+>>>>>>> v3.18
 
 static const struct i2c_device_id isl12022_id[] = {
 	{ "isl12022", 0 },
@@ -287,9 +305,17 @@ MODULE_DEVICE_TABLE(i2c, isl12022_id);
 static struct i2c_driver isl12022_driver = {
 	.driver		= {
 		.name	= "rtc-isl12022",
+<<<<<<< HEAD
 	},
 	.probe		= isl12022_probe,
 	.remove		= isl12022_remove,
+=======
+#ifdef CONFIG_OF
+		.of_match_table = of_match_ptr(isl12022_dt_match),
+#endif
+	},
+	.probe		= isl12022_probe,
+>>>>>>> v3.18
 	.id_table	= isl12022_id,
 };
 

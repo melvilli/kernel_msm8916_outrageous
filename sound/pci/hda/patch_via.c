@@ -118,7 +118,10 @@ static void via_playback_pcm_hook(struct hda_pcm_stream *hinfo,
 				  struct hda_codec *codec,
 				  struct snd_pcm_substream *substream,
 				  int action);
+<<<<<<< HEAD
 static void via_hp_automute(struct hda_codec *codec, struct hda_jack_tbl *tbl);
+=======
+>>>>>>> v3.18
 
 static struct via_spec *via_new_spec(struct hda_codec *codec)
 {
@@ -138,6 +141,10 @@ static struct via_spec *via_new_spec(struct hda_codec *codec)
 	spec->gen.indep_hp = 1;
 	spec->gen.keep_eapd_on = 1;
 	spec->gen.pcm_playback_hook = via_playback_pcm_hook;
+<<<<<<< HEAD
+=======
+	spec->gen.add_stereo_mix_input = 1;
+>>>>>>> v3.18
 	return spec;
 }
 
@@ -207,9 +214,15 @@ static void vt1708_stop_hp_work(struct hda_codec *codec)
 		return;
 	if (spec->hp_work_active) {
 		snd_hda_codec_write(codec, 0x1, 0, 0xf81, 1);
+<<<<<<< HEAD
 		cancel_delayed_work_sync(&codec->jackpoll_work);
 		spec->hp_work_active = false;
 		codec->jackpoll_interval = 0;
+=======
+		codec->jackpoll_interval = 0;
+		cancel_delayed_work_sync(&codec->jackpoll_work);
+		spec->hp_work_active = false;
+>>>>>>> v3.18
 	}
 }
 
@@ -464,6 +477,7 @@ static void via_playback_pcm_hook(struct hda_pcm_stream *hinfo,
 
 static void via_free(struct hda_codec *codec)
 {
+<<<<<<< HEAD
 	struct via_spec *spec = codec->spec;
 
 	if (!spec)
@@ -472,6 +486,10 @@ static void via_free(struct hda_codec *codec)
 	vt1708_stop_hp_work(codec);
 	snd_hda_gen_spec_free(&spec->gen);
 	kfree(spec);
+=======
+	vt1708_stop_hp_work(codec);
+	snd_hda_gen_free(codec);
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_PM
@@ -480,6 +498,7 @@ static int via_suspend(struct hda_codec *codec)
 	struct via_spec *spec = codec->spec;
 	vt1708_stop_hp_work(codec);
 
+<<<<<<< HEAD
 	if (spec->codec_type == VT1802) {
 		/* Fix pop noise on headphones */
 		int i;
@@ -488,6 +507,11 @@ static int via_suspend(struct hda_codec *codec)
 					    0, AC_VERB_SET_PIN_WIDGET_CONTROL,
 					    0x00);
 	}
+=======
+	/* Fix pop noise on headphones */
+	if (spec->codec_type == VT1802)
+		snd_hda_shutup_pins(codec);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -585,6 +609,7 @@ static const struct snd_kcontrol_new vt1708_jack_detect_ctl[] = {
 	{} /* terminator */
 };
 
+<<<<<<< HEAD
 static void via_hp_automute(struct hda_codec *codec, struct hda_jack_tbl *tbl)
 {
 	set_widgets_power_state(codec);
@@ -604,6 +629,14 @@ static void via_jack_powerstate_event(struct hda_codec *codec, struct hda_jack_t
 
 #define VIA_JACK_EVENT	(HDA_GEN_LAST_EVENT + 1)
 
+=======
+static void via_jack_powerstate_event(struct hda_codec *codec,
+				      struct hda_jack_callback *tbl)
+{
+	set_widgets_power_state(codec);
+}
+
+>>>>>>> v3.18
 static void via_set_jack_unsol_events(struct hda_codec *codec)
 {
 	struct via_spec *spec = codec->spec;
@@ -611,6 +644,7 @@ static void via_set_jack_unsol_events(struct hda_codec *codec)
 	hda_nid_t pin;
 	int i;
 
+<<<<<<< HEAD
 	spec->gen.hp_automute_hook = via_hp_automute;
 	if (cfg->speaker_pins[0])
 		spec->gen.line_automute_hook = via_line_automute;
@@ -621,15 +655,26 @@ static void via_set_jack_unsol_events(struct hda_codec *codec)
 		    is_jack_detectable(codec, pin))
 			snd_hda_jack_detect_enable_callback(codec, pin,
 							    VIA_JACK_EVENT,
+=======
+	for (i = 0; i < cfg->line_outs; i++) {
+		pin = cfg->line_out_pins[i];
+		if (pin && is_jack_detectable(codec, pin))
+			snd_hda_jack_detect_enable_callback(codec, pin,
+>>>>>>> v3.18
 							    via_jack_powerstate_event);
 	}
 
 	for (i = 0; i < cfg->num_inputs; i++) {
 		pin = cfg->line_out_pins[i];
+<<<<<<< HEAD
 		if (pin && !snd_hda_jack_tbl_get(codec, pin) &&
 		    is_jack_detectable(codec, pin))
 			snd_hda_jack_detect_enable_callback(codec, pin,
 							    VIA_JACK_EVENT,
+=======
+		if (pin && is_jack_detectable(codec, pin))
+			snd_hda_jack_detect_enable_callback(codec, pin,
+>>>>>>> v3.18
 							    via_jack_powerstate_event);
 	}
 }
@@ -746,6 +791,11 @@ static int patch_vt1708(struct hda_codec *codec)
 	/* don't support the input jack switching due to lack of unsol event */
 	/* (it may work with polling, though, but it needs testing) */
 	spec->gen.suppress_auto_mic = 1;
+<<<<<<< HEAD
+=======
+	/* Some machines show the broken speaker mute */
+	spec->gen.auto_mute_via_amp = 1;
+>>>>>>> v3.18
 
 	/* Add HP and CD pin config connect bit re-config action */
 	vt1708_set_pinconfig_connect(codec, VT1708_HP_PIN_NID);

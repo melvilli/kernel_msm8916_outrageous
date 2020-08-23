@@ -11,8 +11,11 @@
 #ifndef __ASMARM_PROM_H
 #define __ASMARM_PROM_H
 
+<<<<<<< HEAD
 #define HAVE_ARCH_DEVTREE_FIXUPS
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 
 extern const struct machine_desc *setup_machine_fdt(unsigned int dt_phys);

@@ -49,7 +49,12 @@ struct kmem_cache *ubifs_inode_slab;
 
 /* UBIFS TNC shrinker description */
 static struct shrinker ubifs_shrinker_info = {
+<<<<<<< HEAD
 	.shrink = ubifs_shrinker,
+=======
+	.scan_objects = ubifs_shrink_scan,
+	.count_objects = ubifs_shrink_count,
+>>>>>>> v3.18
 	.seeks = DEFAULT_SEEKS,
 };
 
@@ -69,14 +74,23 @@ static int validate_inode(struct ubifs_info *c, const struct inode *inode)
 	const struct ubifs_inode *ui = ubifs_inode(inode);
 
 	if (inode->i_size > c->max_inode_sz) {
+<<<<<<< HEAD
 		ubifs_err("inode is too large (%lld)", c->vi.ubi_num,
+=======
+		ubifs_err("inode is too large (%lld)",
+>>>>>>> v3.18
 			  (long long)inode->i_size);
 		return 1;
 	}
 
+<<<<<<< HEAD
 	if (ui->compr_type < 0 || ui->compr_type >= UBIFS_COMPR_TYPES_CNT) {
 		ubifs_err("unknown compression type %d", c->vi.ubi_num,
 				ui->compr_type);
+=======
+	if (ui->compr_type >= UBIFS_COMPR_TYPES_CNT) {
+		ubifs_err("unknown compression type %d", ui->compr_type);
+>>>>>>> v3.18
 		return 2;
 	}
 
@@ -91,8 +105,12 @@ static int validate_inode(struct ubifs_info *c, const struct inode *inode)
 
 	if (!ubifs_compr_present(ui->compr_type)) {
 		ubifs_warn("inode %lu uses '%s' compression, but it was not compiled in",
+<<<<<<< HEAD
 				c->vi.ubi_num, inode->i_ino,
 				ubifs_compr_name(ui->compr_type));
+=======
+			   inode->i_ino, ubifs_compr_name(ui->compr_type));
+>>>>>>> v3.18
 	}
 
 	err = dbg_check_dir(c, inode);
@@ -246,16 +264,24 @@ struct inode *ubifs_iget(struct super_block *sb, unsigned long inum)
 	return inode;
 
 out_invalid:
+<<<<<<< HEAD
 	ubifs_err("inode %lu validation failed, error %d", c->vi.ubi_num,
 			inode->i_ino, err);
+=======
+	ubifs_err("inode %lu validation failed, error %d", inode->i_ino, err);
+>>>>>>> v3.18
 	ubifs_dump_node(c, ino);
 	ubifs_dump_inode(c, inode);
 	err = -EINVAL;
 out_ino:
 	kfree(ino);
 out:
+<<<<<<< HEAD
 	ubifs_err("failed to read inode %lu, error %d", c->vi.ubi_num,
 			inode->i_ino, err);
+=======
+	ubifs_err("failed to read inode %lu, error %d", inode->i_ino, err);
+>>>>>>> v3.18
 	iget_failed(inode);
 	return ERR_PTR(err);
 }
@@ -326,7 +352,11 @@ static int ubifs_write_inode(struct inode *inode, struct writeback_control *wbc)
 		err = ubifs_jnl_write_inode(c, inode);
 		if (err)
 			ubifs_err("can't write inode %lu, error %d",
+<<<<<<< HEAD
 				  c->vi.ubi_num, inode->i_ino, err);
+=======
+				  inode->i_ino, err);
+>>>>>>> v3.18
 		else
 			err = dbg_check_inode_size(c, inode, ui->ui_size);
 	}
@@ -354,7 +384,11 @@ static void ubifs_evict_inode(struct inode *inode)
 	dbg_gen("inode %lu, mode %#x", inode->i_ino, (int)inode->i_mode);
 	ubifs_assert(!atomic_read(&inode->i_count));
 
+<<<<<<< HEAD
 	truncate_inode_pages(&inode->i_data, 0);
+=======
+	truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 
 	if (inode->i_nlink)
 		goto done;
@@ -369,7 +403,11 @@ static void ubifs_evict_inode(struct inode *inode)
 		 * Worst case we have a lost orphan inode wasting space, so a
 		 * simple error message is OK here.
 		 */
+<<<<<<< HEAD
 		ubifs_err("can't delete inode %lu, error %d", c->vi.ubi_num,
+=======
+		ubifs_err("can't delete inode %lu, error %d",
+>>>>>>> v3.18
 			  inode->i_ino, err);
 
 out:
@@ -427,6 +465,7 @@ static int ubifs_show_options(struct seq_file *s, struct dentry *root)
 	struct ubifs_info *c = root->d_sb->s_fs_info;
 
 	if (c->mount_opts.unmount_mode == 2)
+<<<<<<< HEAD
 		seq_printf(s, ",fast_unmount");
 	else if (c->mount_opts.unmount_mode == 1)
 		seq_printf(s, ",norm_unmount");
@@ -440,6 +479,21 @@ static int ubifs_show_options(struct seq_file *s, struct dentry *root)
 		seq_printf(s, ",chk_data_crc");
 	else if (c->mount_opts.chk_data_crc == 1)
 		seq_printf(s, ",no_chk_data_crc");
+=======
+		seq_puts(s, ",fast_unmount");
+	else if (c->mount_opts.unmount_mode == 1)
+		seq_puts(s, ",norm_unmount");
+
+	if (c->mount_opts.bulk_read == 2)
+		seq_puts(s, ",bulk_read");
+	else if (c->mount_opts.bulk_read == 1)
+		seq_puts(s, ",no_bulk_read");
+
+	if (c->mount_opts.chk_data_crc == 2)
+		seq_puts(s, ",chk_data_crc");
+	else if (c->mount_opts.chk_data_crc == 1)
+		seq_puts(s, ",no_chk_data_crc");
+>>>>>>> v3.18
 
 	if (c->mount_opts.override_compr) {
 		seq_printf(s, ",compr=%s",
@@ -498,19 +552,31 @@ static int ubifs_sync_fs(struct super_block *sb, int wait)
 static int init_constants_early(struct ubifs_info *c)
 {
 	if (c->vi.corrupted) {
+<<<<<<< HEAD
 		ubifs_warn("UBI volume is corrupted - read-only mode",
 				c->vi.ubi_num);
+=======
+		ubifs_warn("UBI volume is corrupted - read-only mode");
+>>>>>>> v3.18
 		c->ro_media = 1;
 	}
 
 	if (c->di.ro_mode) {
+<<<<<<< HEAD
 		ubifs_msg("read-only UBI device", c->vi.ubi_num);
+=======
+		ubifs_msg("read-only UBI device");
+>>>>>>> v3.18
 		c->ro_media = 1;
 	}
 
 	if (c->vi.vol_type == UBI_STATIC_VOLUME) {
+<<<<<<< HEAD
 		ubifs_msg("static UBI volume - read-only mode",
 				c->vi.ubi_num);
+=======
+		ubifs_msg("static UBI volume - read-only mode");
+>>>>>>> v3.18
 		c->ro_media = 1;
 	}
 
@@ -525,19 +591,31 @@ static int init_constants_early(struct ubifs_info *c)
 
 	if (c->leb_size < UBIFS_MIN_LEB_SZ) {
 		ubifs_err("too small LEBs (%d bytes), min. is %d bytes",
+<<<<<<< HEAD
 			  c->vi.ubi_num, c->leb_size, UBIFS_MIN_LEB_SZ);
+=======
+			  c->leb_size, UBIFS_MIN_LEB_SZ);
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
 	if (c->leb_cnt < UBIFS_MIN_LEB_CNT) {
 		ubifs_err("too few LEBs (%d), min. is %d",
+<<<<<<< HEAD
 			  c->vi.ubi_num, c->leb_cnt, UBIFS_MIN_LEB_CNT);
+=======
+			  c->leb_cnt, UBIFS_MIN_LEB_CNT);
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
 	if (!is_power_of_2(c->min_io_size)) {
+<<<<<<< HEAD
 		ubifs_err("bad min. I/O size %d",
 				c->vi.ubi_num, c->min_io_size);
+=======
+		ubifs_err("bad min. I/O size %d", c->min_io_size);
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
@@ -549,7 +627,11 @@ static int init_constants_early(struct ubifs_info *c)
 	    c->max_write_size % c->min_io_size ||
 	    !is_power_of_2(c->max_write_size)) {
 		ubifs_err("bad write buffer size %d for %d min. I/O unit",
+<<<<<<< HEAD
 			  c->vi.ubi_num, c->max_write_size, c->min_io_size);
+=======
+			  c->max_write_size, c->min_io_size);
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
@@ -675,7 +757,11 @@ static int init_constants_sb(struct ubifs_info *c)
 	tmp = ALIGN(tmp, c->min_io_size);
 	if (tmp > c->leb_size) {
 		ubifs_err("too small LEB size %d, at least %d needed",
+<<<<<<< HEAD
 				c->vi.ubi_num, c->leb_size, tmp);
+=======
+			  c->leb_size, tmp);
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
@@ -690,7 +776,11 @@ static int init_constants_sb(struct ubifs_info *c)
 	tmp += 1;
 	if (c->log_lebs < tmp) {
 		ubifs_err("too small log %d LEBs, required min. %d LEBs",
+<<<<<<< HEAD
 				c->vi.ubi_num, c->log_lebs, tmp);
+=======
+			  c->log_lebs, tmp);
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
@@ -781,7 +871,11 @@ static int take_gc_lnum(struct ubifs_info *c)
 	int err;
 
 	if (c->gc_lnum == -1) {
+<<<<<<< HEAD
 		ubifs_err("no LEB for GC", c->vi.ubi_num);
+=======
+		ubifs_err("no LEB for GC");
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
@@ -802,8 +896,13 @@ static int alloc_wbufs(struct ubifs_info *c)
 {
 	int i, err;
 
+<<<<<<< HEAD
 	c->jheads = kzalloc(c->jhead_cnt * sizeof(struct ubifs_jhead),
 			   GFP_KERNEL);
+=======
+	c->jheads = kcalloc(c->jhead_cnt, sizeof(struct ubifs_jhead),
+			    GFP_KERNEL);
+>>>>>>> v3.18
 	if (!c->jheads)
 		return -ENOMEM;
 
@@ -866,7 +965,11 @@ static void free_orphans(struct ubifs_info *c)
 		orph = list_entry(c->orph_list.next, struct ubifs_orphan, list);
 		list_del(&orph->list);
 		kfree(orph);
+<<<<<<< HEAD
 		ubifs_err("orphan list not empty at unmount", c->vi.ubi_num);
+=======
+		ubifs_err("orphan list not empty at unmount");
+>>>>>>> v3.18
 	}
 
 	vfree(c->orph_buf);
@@ -879,6 +982,7 @@ static void free_orphans(struct ubifs_info *c)
  */
 static void free_buds(struct ubifs_info *c)
 {
+<<<<<<< HEAD
 	struct rb_node *this = c->buds.rb_node;
 	struct ubifs_bud *bud;
 
@@ -899,6 +1003,12 @@ static void free_buds(struct ubifs_info *c)
 			kfree(bud);
 		}
 	}
+=======
+	struct ubifs_bud *bud, *n;
+
+	rbtree_postorder_for_each_entry_safe(bud, n, &c->buds, rb)
+		kfree(bud);
+>>>>>>> v3.18
 }
 
 /**
@@ -979,7 +1089,11 @@ static const match_table_t tokens = {
  */
 static int parse_standard_option(const char *option)
 {
+<<<<<<< HEAD
 	ubifs_msg("parse %s", UBIFS_UNKNOWN_DEV_NUM, option);
+=======
+	ubifs_msg("parse %s", option);
+>>>>>>> v3.18
 	if (!strcmp(option, "sync"))
 		return MS_SYNCHRONOUS;
 	return 0;
@@ -1051,8 +1165,12 @@ static int ubifs_parse_options(struct ubifs_info *c, char *options,
 			else if (!strcmp(name, "zlib"))
 				c->mount_opts.compr_type = UBIFS_COMPR_ZLIB;
 			else {
+<<<<<<< HEAD
 				ubifs_err("unknown compressor \"%s\"",
 						c->vi.ubi_num, name);
+=======
+				ubifs_err("unknown compressor \"%s\"", name);
+>>>>>>> v3.18
 				kfree(name);
 				return -EINVAL;
 			}
@@ -1069,7 +1187,11 @@ static int ubifs_parse_options(struct ubifs_info *c, char *options,
 			flag = parse_standard_option(p);
 			if (!flag) {
 				ubifs_err("unrecognized mount option \"%s\" or missing value",
+<<<<<<< HEAD
 						c->vi.ubi_num, p);
+=======
+					  p);
+>>>>>>> v3.18
 				return -EINVAL;
 			}
 			sb->s_flags |= flag;
@@ -1132,7 +1254,11 @@ again:
 
 		/* Just disable bulk-read */
 		ubifs_warn("cannot allocate %d bytes of memory for bulk-read, disabling it",
+<<<<<<< HEAD
 				c->vi.ubi_num, c->max_bu_buf_len);
+=======
+			   c->max_bu_buf_len);
+>>>>>>> v3.18
 		c->mount_opts.bulk_read = 1;
 		c->bulk_read = 0;
 		return;
@@ -1150,8 +1276,12 @@ static int check_free_space(struct ubifs_info *c)
 {
 	ubifs_assert(c->dark_wm > 0);
 	if (c->lst.total_free + c->lst.total_dirty < c->dark_wm) {
+<<<<<<< HEAD
 		ubifs_err("insufficient free space to mount in R/W mode",
 				c->vi.ubi_num);
+=======
+		ubifs_err("insufficient free space to mount in R/W mode");
+>>>>>>> v3.18
 		ubifs_dump_budg(c, &c->bi);
 		ubifs_dump_lprops(c);
 		return -ENOSPC;
@@ -1173,6 +1303,12 @@ static int mount_ubifs(struct ubifs_info *c)
 	size_t sz;
 
 	c->ro_mount = !!(c->vfs_sb->s_flags & MS_RDONLY);
+<<<<<<< HEAD
+=======
+	/* Suppress error messages while probing if MS_SILENT is set */
+	c->probing = !!(c->vfs_sb->s_flags & MS_SILENT);
+
+>>>>>>> v3.18
 	err = init_constants_early(c);
 	if (err)
 		return err;
@@ -1191,14 +1327,22 @@ static int mount_ubifs(struct ubifs_info *c)
 		 * is mounted read-only - we cannot format it.
 		 */
 		ubifs_err("can't format empty UBI volume: read-only %s",
+<<<<<<< HEAD
 			  c->vi.ubi_num, c->ro_media ? "UBI volume" : "mount");
+=======
+			  c->ro_media ? "UBI volume" : "mount");
+>>>>>>> v3.18
 		err = -EROFS;
 		goto out_free;
 	}
 
 	if (c->ro_media && !c->ro_mount) {
+<<<<<<< HEAD
 		ubifs_err("cannot mount read-write - read-only media",
 			  c->vi.ubi_num);
+=======
+		ubifs_err("cannot mount read-write - read-only media");
+>>>>>>> v3.18
 		err = -EROFS;
 		goto out_free;
 	}
@@ -1239,13 +1383,22 @@ static int mount_ubifs(struct ubifs_info *c)
 	if (err)
 		goto out_free;
 
+<<<<<<< HEAD
+=======
+	c->probing = 0;
+
+>>>>>>> v3.18
 	/*
 	 * Make sure the compressor which is set as default in the superblock
 	 * or overridden by mount options is actually compiled in.
 	 */
 	if (!ubifs_compr_present(c->default_compr)) {
 		ubifs_err("'compressor \"%s\" is not compiled in",
+<<<<<<< HEAD
 			  c->vi.ubi_num, ubifs_compr_name(c->default_compr));
+=======
+			  ubifs_compr_name(c->default_compr));
+>>>>>>> v3.18
 		err = -ENOTSUPP;
 		goto out_free;
 	}
@@ -1274,7 +1427,11 @@ static int mount_ubifs(struct ubifs_info *c)
 			err = PTR_ERR(c->bgt);
 			c->bgt = NULL;
 			ubifs_err("cannot spawn \"%s\", error %d",
+<<<<<<< HEAD
 					c->vi.ubi_num, c->bgt_name, err);
+=======
+				  c->bgt_name, err);
+>>>>>>> v3.18
 			goto out_wbufs;
 		}
 		wake_up_process(c->bgt);
@@ -1287,7 +1444,11 @@ static int mount_ubifs(struct ubifs_info *c)
 	init_constants_master(c);
 
 	if ((c->mst_node->flags & cpu_to_le32(UBIFS_MST_DIRTY)) != 0) {
+<<<<<<< HEAD
 		ubifs_msg("recovery needed", c->vi.ubi_num);
+=======
+		ubifs_msg("recovery needed");
+>>>>>>> v3.18
 		c->need_recovery = 1;
 	}
 
@@ -1396,10 +1557,17 @@ static int mount_ubifs(struct ubifs_info *c)
 
 	if (c->need_recovery) {
 		if (c->ro_mount)
+<<<<<<< HEAD
 			ubifs_msg("recovery deferred", c->vi.ubi_num);
 		else {
 			c->need_recovery = 0;
 			ubifs_msg("recovery completed", c->vi.ubi_num);
+=======
+			ubifs_msg("recovery deferred");
+		else {
+			c->need_recovery = 0;
+			ubifs_msg("recovery completed");
+>>>>>>> v3.18
 			/*
 			 * GC LEB has to be empty and taken at this point. But
 			 * the journal head LEBs may also be accounted as
@@ -1420,6 +1588,7 @@ static int mount_ubifs(struct ubifs_info *c)
 
 	c->mounting = 0;
 
+<<<<<<< HEAD
 	ubifs_msg("mounted UBI, volume %d, name \"%s\"%s", c->vi.ubi_num,
 		  c->vi.vol_id, c->vi.name, c->ro_mount ? ", R/O mode" : "");
 	x = (long long)c->main_lebs * c->leb_size;
@@ -1434,6 +1603,23 @@ static int mount_ubifs(struct ubifs_info *c)
 		  c->report_rp_size, c->report_rp_size >> 10);
 	ubifs_msg("media format: w%d/r%d (latest is w%d/r%d), UUID %pUB%s",
 		  c->vi.ubi_num, c->fmt_version, c->ro_compat_version,
+=======
+	ubifs_msg("mounted UBI device %d, volume %d, name \"%s\"%s",
+		  c->vi.ubi_num, c->vi.vol_id, c->vi.name,
+		  c->ro_mount ? ", R/O mode" : "");
+	x = (long long)c->main_lebs * c->leb_size;
+	y = (long long)c->log_lebs * c->leb_size + c->max_bud_bytes;
+	ubifs_msg("LEB size: %d bytes (%d KiB), min./max. I/O unit sizes: %d bytes/%d bytes",
+		  c->leb_size, c->leb_size >> 10, c->min_io_size,
+		  c->max_write_size);
+	ubifs_msg("FS size: %lld bytes (%lld MiB, %d LEBs), journal size %lld bytes (%lld MiB, %d LEBs)",
+		  x, x >> 20, c->main_lebs,
+		  y, y >> 20, c->log_lebs + c->max_bud_cnt);
+	ubifs_msg("reserved for root: %llu bytes (%llu KiB)",
+		  c->report_rp_size, c->report_rp_size >> 10);
+	ubifs_msg("media format: w%d/r%d (latest is w%d/r%d), UUID %pUB%s",
+		  c->fmt_version, c->ro_compat_version,
+>>>>>>> v3.18
 		  UBIFS_FORMAT_VERSION, UBIFS_RO_COMPAT_VERSION, c->uuid,
 		  c->big_lpt ? ", big LPT model" : ", small LPT model");
 
@@ -1565,10 +1751,16 @@ static int ubifs_remount_rw(struct ubifs_info *c)
 	int err, lnum;
 
 	if (c->rw_incompat) {
+<<<<<<< HEAD
 		ubifs_err("the file-system is not R/W-compatible",
 			  c->vi.ubi_num);
 		ubifs_msg("on-flash format version is w%d/r%d, but software only supports up to version w%d/r%d",
 			  c->vi.ubi_num, c->fmt_version, c->ro_compat_version,
+=======
+		ubifs_err("the file-system is not R/W-compatible");
+		ubifs_msg("on-flash format version is w%d/r%d, but software only supports up to version w%d/r%d",
+			  c->fmt_version, c->ro_compat_version,
+>>>>>>> v3.18
 			  UBIFS_FORMAT_VERSION, UBIFS_RO_COMPAT_VERSION);
 		return -EROFS;
 	}
@@ -1581,7 +1773,11 @@ static int ubifs_remount_rw(struct ubifs_info *c)
 	if (c->space_fixup) {
 		err = ubifs_fixup_free_space(c);
 		if (err)
+<<<<<<< HEAD
 			return err;
+=======
+			goto out;
+>>>>>>> v3.18
 	}
 
 	err = check_free_space(c);
@@ -1604,7 +1800,11 @@ static int ubifs_remount_rw(struct ubifs_info *c)
 	}
 
 	if (c->need_recovery) {
+<<<<<<< HEAD
 		ubifs_msg("completing deferred recovery", c->vi.ubi_num);
+=======
+		ubifs_msg("completing deferred recovery");
+>>>>>>> v3.18
 		err = ubifs_write_rcvrd_mst_node(c);
 		if (err)
 			goto out;
@@ -1639,8 +1839,15 @@ static int ubifs_remount_rw(struct ubifs_info *c)
 	}
 
 	c->write_reserve_buf = kmalloc(COMPRESSED_DATA_NODE_BUF_SZ, GFP_KERNEL);
+<<<<<<< HEAD
 	if (!c->write_reserve_buf)
 		goto out;
+=======
+	if (!c->write_reserve_buf) {
+		err = -ENOMEM;
+		goto out;
+	}
+>>>>>>> v3.18
 
 	err = ubifs_lpt_init(c, 0, 1);
 	if (err)
@@ -1651,7 +1858,11 @@ static int ubifs_remount_rw(struct ubifs_info *c)
 	if (IS_ERR(c->bgt)) {
 		err = PTR_ERR(c->bgt);
 		c->bgt = NULL;
+<<<<<<< HEAD
 		ubifs_err("cannot spawn \"%s\", error %d", c->vi.ubi_num,
+=======
+		ubifs_err("cannot spawn \"%s\", error %d",
+>>>>>>> v3.18
 			  c->bgt_name, err);
 		goto out;
 	}
@@ -1685,7 +1896,11 @@ static int ubifs_remount_rw(struct ubifs_info *c)
 
 	if (c->need_recovery) {
 		c->need_recovery = 0;
+<<<<<<< HEAD
 		ubifs_msg("deferred recovery completed", c->vi.ubi_num);
+=======
+		ubifs_msg("deferred recovery completed");
+>>>>>>> v3.18
 	} else {
 		/*
 		 * Do not run the debugging space check if the were doing
@@ -1774,7 +1989,11 @@ static void ubifs_put_super(struct super_block *sb)
 	struct ubifs_info *c = sb->s_fs_info;
 
 	ubifs_msg("un-mount UBI device %d, volume %d", c->vi.ubi_num,
+<<<<<<< HEAD
 		  c->vi.ubi_num, c->vi.vol_id);
+=======
+		  c->vi.vol_id);
+>>>>>>> v3.18
 
 	/*
 	 * The following asserts are only valid if there has not been a failure
@@ -1831,7 +2050,11 @@ static void ubifs_put_super(struct super_block *sb)
 				 * continue to unmount normally.
 				 */
 				ubifs_err("failed to write master node, error %d",
+<<<<<<< HEAD
 						c->vi.ubi_num, err);
+=======
+					  err);
+>>>>>>> v3.18
 		} else {
 			for (i = 0; i < c->jhead_cnt; i++)
 				/* Make sure write-buffer timers are canceled */
@@ -1850,17 +2073,26 @@ static int ubifs_remount_fs(struct super_block *sb, int *flags, char *data)
 	int err;
 	struct ubifs_info *c = sb->s_fs_info;
 
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+>>>>>>> v3.18
 	dbg_gen("old flags %#lx, new flags %#x", sb->s_flags, *flags);
 
 	err = ubifs_parse_options(c, data, 1);
 	if (err) {
+<<<<<<< HEAD
 		ubifs_err("invalid or unknown remount parameter",
 				c->vi.ubi_num);
+=======
+		ubifs_err("invalid or unknown remount parameter");
+>>>>>>> v3.18
 		return err;
 	}
 
 	if (c->ro_mount && !(*flags & MS_RDONLY)) {
 		if (c->ro_error) {
+<<<<<<< HEAD
 			ubifs_msg("cannot re-mount R/W due to prior errors",
 					c->vi.ubi_num);
 			return -EROFS;
@@ -1868,6 +2100,13 @@ static int ubifs_remount_fs(struct super_block *sb, int *flags, char *data)
 		if (c->ro_media) {
 			ubifs_msg("cannot re-mount R/W - UBI volume is R/O",
 					c->vi.ubi_num);
+=======
+			ubifs_msg("cannot re-mount R/W due to prior errors");
+			return -EROFS;
+		}
+		if (c->ro_media) {
+			ubifs_msg("cannot re-mount R/W - UBI volume is R/O");
+>>>>>>> v3.18
 			return -EROFS;
 		}
 		err = ubifs_remount_rw(c);
@@ -1875,8 +2114,12 @@ static int ubifs_remount_fs(struct super_block *sb, int *flags, char *data)
 			return err;
 	} else if (!c->ro_mount && (*flags & MS_RDONLY)) {
 		if (c->ro_error) {
+<<<<<<< HEAD
 			ubifs_msg("cannot re-mount R/O due to prior errors",
 					c->vi.ubi_num);
+=======
+			ubifs_msg("cannot re-mount R/O due to prior errors");
+>>>>>>> v3.18
 			return -EROFS;
 		}
 		ubifs_remount_ro(c);
@@ -2076,8 +2319,15 @@ static int ubifs_fill_super(struct super_block *sb, void *data, int silent)
 	}
 
 	sb->s_root = d_make_root(root);
+<<<<<<< HEAD
 	if (!sb->s_root)
 		goto out_umount;
+=======
+	if (!sb->s_root) {
+		err = -ENOMEM;
+		goto out_umount;
+	}
+>>>>>>> v3.18
 
 	mutex_unlock(&c->umount_mutex);
 	return 0;
@@ -2125,7 +2375,11 @@ static struct dentry *ubifs_mount(struct file_system_type *fs_type, int flags,
 	 */
 	ubi = open_ubi(name, UBI_READONLY);
 	if (IS_ERR(ubi)) {
+<<<<<<< HEAD
 		ubifs_err("cannot open \"%s\", error %d", UBIFS_UNKNOWN_DEV_NUM,
+=======
+		ubifs_err("cannot open \"%s\", error %d",
+>>>>>>> v3.18
 			  name, (int)PTR_ERR(ubi));
 		return ERR_CAST(ubi);
 	}
@@ -2255,7 +2509,11 @@ static int __init ubifs_init(void)
 	 */
 	if (PAGE_CACHE_SIZE < UBIFS_BLOCK_SIZE) {
 		ubifs_err("VFS page cache size is %u bytes, but UBIFS requires at least 4096 bytes",
+<<<<<<< HEAD
 			  UBIFS_UNKNOWN_DEV_NUM, (unsigned int)PAGE_CACHE_SIZE);
+=======
+			  (unsigned int)PAGE_CACHE_SIZE);
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
@@ -2278,8 +2536,12 @@ static int __init ubifs_init(void)
 
 	err = register_filesystem(&ubifs_fs_type);
 	if (err) {
+<<<<<<< HEAD
 		ubifs_err("cannot register file system, error %d",
 				UBIFS_UNKNOWN_DEV_NUM, err);
+=======
+		ubifs_err("cannot register file system, error %d", err);
+>>>>>>> v3.18
 		goto out_dbg;
 	}
 	return 0;

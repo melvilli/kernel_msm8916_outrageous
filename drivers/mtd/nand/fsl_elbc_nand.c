@@ -24,10 +24,17 @@
 
 #include <linux/module.h>
 #include <linux/types.h>
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/kernel.h>
 #include <linux/string.h>
 #include <linux/ioport.h>
+=======
+#include <linux/kernel.h>
+#include <linux/string.h>
+#include <linux/ioport.h>
+#include <linux/of_address.h>
+>>>>>>> v3.18
 #include <linux/of_platform.h>
 #include <linux/platform_device.h>
 #include <linux/slab.h>
@@ -650,8 +657,11 @@ static int fsl_elbc_chip_init_tail(struct mtd_info *mtd)
 	        chip->page_shift);
 	dev_dbg(priv->dev, "fsl_elbc_init: nand->phys_erase_shift = %d\n",
 	        chip->phys_erase_shift);
+<<<<<<< HEAD
 	dev_dbg(priv->dev, "fsl_elbc_init: nand->ecclayout = %p\n",
 	        chip->ecclayout);
+=======
+>>>>>>> v3.18
 	dev_dbg(priv->dev, "fsl_elbc_init: nand->ecc.mode = %d\n",
 	        chip->ecc.mode);
 	dev_dbg(priv->dev, "fsl_elbc_init: nand->ecc.steps = %d\n",
@@ -862,7 +872,10 @@ static int fsl_elbc_nand_probe(struct platform_device *pdev)
 	if (!fsl_lbc_ctrl_dev->nand) {
 		elbc_fcm_ctrl = kzalloc(sizeof(*elbc_fcm_ctrl), GFP_KERNEL);
 		if (!elbc_fcm_ctrl) {
+<<<<<<< HEAD
 			dev_err(dev, "failed to allocate memory\n");
+=======
+>>>>>>> v3.18
 			mutex_unlock(&fsl_elbc_nand_mutex);
 			ret = -ENOMEM;
 			goto err;
@@ -890,7 +903,11 @@ static int fsl_elbc_nand_probe(struct platform_device *pdev)
 		goto err;
 	}
 
+<<<<<<< HEAD
 	priv->mtd.name = kasprintf(GFP_KERNEL, "%x.flash", (unsigned)res.start);
+=======
+	priv->mtd.name = kasprintf(GFP_KERNEL, "%llx.flash", (u64)res.start);
+>>>>>>> v3.18
 	if (!priv->mtd.name) {
 		ret = -ENOMEM;
 		goto err;

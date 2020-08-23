@@ -116,6 +116,7 @@ parse_edp(struct drm_psb_private *dev_priv, struct bdb_header *bdb)
 
 	switch (edp_link_params->preemphasis) {
 	case 0:
+<<<<<<< HEAD
 		dev_priv->edp.preemphasis = DP_TRAIN_PRE_EMPHASIS_0;
 		break;
 	case 1:
@@ -126,10 +127,23 @@ parse_edp(struct drm_psb_private *dev_priv, struct bdb_header *bdb)
 		break;
 	case 3:
 		dev_priv->edp.preemphasis = DP_TRAIN_PRE_EMPHASIS_9_5;
+=======
+		dev_priv->edp.preemphasis = DP_TRAIN_PRE_EMPH_LEVEL_0;
+		break;
+	case 1:
+		dev_priv->edp.preemphasis = DP_TRAIN_PRE_EMPH_LEVEL_1;
+		break;
+	case 2:
+		dev_priv->edp.preemphasis = DP_TRAIN_PRE_EMPH_LEVEL_2;
+		break;
+	case 3:
+		dev_priv->edp.preemphasis = DP_TRAIN_PRE_EMPH_LEVEL_3;
+>>>>>>> v3.18
 		break;
 	}
 	switch (edp_link_params->vswing) {
 	case 0:
+<<<<<<< HEAD
 		dev_priv->edp.vswing = DP_TRAIN_VOLTAGE_SWING_400;
 		break;
 	case 1:
@@ -140,6 +154,18 @@ parse_edp(struct drm_psb_private *dev_priv, struct bdb_header *bdb)
 		break;
 	case 3:
 		dev_priv->edp.vswing = DP_TRAIN_VOLTAGE_SWING_1200;
+=======
+		dev_priv->edp.vswing = DP_TRAIN_VOLTAGE_SWING_LEVEL_0;
+		break;
+	case 1:
+		dev_priv->edp.vswing = DP_TRAIN_VOLTAGE_SWING_LEVEL_1;
+		break;
+	case 2:
+		dev_priv->edp.vswing = DP_TRAIN_VOLTAGE_SWING_LEVEL_2;
+		break;
+	case 3:
+		dev_priv->edp.vswing = DP_TRAIN_VOLTAGE_SWING_LEVEL_3;
+>>>>>>> v3.18
 		break;
 	}
 	DRM_DEBUG_KMS("VBT reports EDP: VSwing  %d, Preemph %d\n",

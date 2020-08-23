@@ -44,6 +44,7 @@ static unsigned int irq_counter[16];
 
 static irqreturn_t deferred_fiq(int irq, void *dev_id)
 {
+<<<<<<< HEAD
 	struct irq_desc *irq_desc;
 	struct irq_chip *irq_chip = NULL;
 	int gpio, irq_num, fiq_count;
@@ -51,6 +52,12 @@ static irqreturn_t deferred_fiq(int irq, void *dev_id)
 	irq_desc = irq_to_desc(gpio_to_irq(AMS_DELTA_GPIO_PIN_KEYBRD_CLK));
 	if (irq_desc)
 		irq_chip = irq_desc->irq_data.chip;
+=======
+	int gpio, irq_num, fiq_count;
+	struct irq_chip *irq_chip;
+
+	irq_chip = irq_get_chip(gpio_to_irq(AMS_DELTA_GPIO_PIN_KEYBRD_CLK));
+>>>>>>> v3.18
 
 	/*
 	 * For each handled GPIO interrupt, keep calling its interrupt handler

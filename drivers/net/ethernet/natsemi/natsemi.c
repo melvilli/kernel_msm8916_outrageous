@@ -247,7 +247,11 @@ static struct {
 	{ "NatSemi DP8381[56]", 0, 24 },
 };
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(natsemi_pci_tbl) = {
+=======
+static const struct pci_device_id natsemi_pci_tbl[] = {
+>>>>>>> v3.18
 	{ PCI_VENDOR_ID_NS, 0x0020, 0x12d9,     0x000c,     0, 0, 0 },
 	{ PCI_VENDOR_ID_NS, 0x0020, PCI_ANY_ID, PCI_ANY_ID, 0, 0, 1 },
 	{ }	/* terminate list */
@@ -927,7 +931,11 @@ static int natsemi_probe1(struct pci_dev *pdev, const struct pci_device_id *ent)
 	dev->netdev_ops = &natsemi_netdev_ops;
 	dev->watchdog_timeo = TX_TIMEOUT;
 
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(dev, &ethtool_ops);
+=======
+	dev->ethtool_ops = &ethtool_ops;
+>>>>>>> v3.18
 
 	if (mtu)
 		dev->mtu = mtu;
@@ -970,7 +978,10 @@ static int natsemi_probe1(struct pci_dev *pdev, const struct pci_device_id *ent)
 
  err_ioremap:
 	pci_release_regions(pdev);
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 
  err_pci_request_regions:
 	free_netdev(dev);
@@ -3220,7 +3231,10 @@ static void natsemi_remove1(struct pci_dev *pdev)
 	pci_release_regions (pdev);
 	iounmap(ioaddr);
 	free_netdev (dev);
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_PM

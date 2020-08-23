@@ -15,12 +15,47 @@
 #ifndef __LINUX_MFD_SYSCON_H__
 #define __LINUX_MFD_SYSCON_H__
 
+<<<<<<< HEAD
 struct device_node;
 
+=======
+#include <linux/err.h>
+
+struct device_node;
+
+#ifdef CONFIG_MFD_SYSCON
+>>>>>>> v3.18
 extern struct regmap *syscon_node_to_regmap(struct device_node *np);
 extern struct regmap *syscon_regmap_lookup_by_compatible(const char *s);
 extern struct regmap *syscon_regmap_lookup_by_pdevname(const char *s);
 extern struct regmap *syscon_regmap_lookup_by_phandle(
 					struct device_node *np,
 					const char *property);
+<<<<<<< HEAD
+=======
+#else
+static inline struct regmap *syscon_node_to_regmap(struct device_node *np)
+{
+	return ERR_PTR(-ENOSYS);
+}
+
+static inline struct regmap *syscon_regmap_lookup_by_compatible(const char *s)
+{
+	return ERR_PTR(-ENOSYS);
+}
+
+static inline struct regmap *syscon_regmap_lookup_by_pdevname(const char *s)
+{
+	return ERR_PTR(-ENOSYS);
+}
+
+static inline struct regmap *syscon_regmap_lookup_by_phandle(
+					struct device_node *np,
+					const char *property)
+{
+	return ERR_PTR(-ENOSYS);
+}
+#endif
+
+>>>>>>> v3.18
 #endif /* __LINUX_MFD_SYSCON_H__ */

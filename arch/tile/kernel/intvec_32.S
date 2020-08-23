@@ -28,20 +28,26 @@
 #include <arch/interrupts.h>
 #include <arch/spr_def.h>
 
+<<<<<<< HEAD
 #ifdef CONFIG_PREEMPT
 # error "No support for kernel preemption currently"
 #endif
 
+=======
+>>>>>>> v3.18
 #define PTREGS_PTR(reg, ptreg) addli reg, sp, C_ABI_SAVE_AREA_SIZE + (ptreg)
 
 #define PTREGS_OFFSET_SYSCALL PTREGS_OFFSET_REG(TREG_SYSCALL_NR)
 
+<<<<<<< HEAD
 #if !CHIP_HAS_WH64()
 	/* By making this an empty macro, we can use wh64 in the code. */
 	.macro  wh64 reg
 	.endm
 #endif
 
+=======
+>>>>>>> v3.18
 	.macro  push_reg reg, ptr=sp, delta=-4
 	{
 	 sw     \ptr, \reg
@@ -189,7 +195,11 @@ intvec_\vecname:
 	 * point sp at the top aligned address on the actual stack page.
 	 */
 	mfspr   r0, SPR_SYSTEM_SAVE_K_0
+<<<<<<< HEAD
 	mm      r0, r0, zero, LOG2_THREAD_SIZE, 31
+=======
+	mm      r0, r0, zero, LOG2_NR_CPU_IDS, 31
+>>>>>>> v3.18
 
 0:
 	/*
@@ -207,6 +217,12 @@ intvec_\vecname:
 	 *    cache line 1: r14...r29
 	 *    cache line 0: 2 x frame, r0..r13
 	 */
+<<<<<<< HEAD
+=======
+#if STACK_TOP_DELTA != 64
+#error STACK_TOP_DELTA must be 64 for assumptions here and in task_pt_regs()
+#endif
+>>>>>>> v3.18
 	andi    r0, r0, -64
 
 	/*
@@ -320,24 +336,37 @@ intvec_\vecname:
 	 movei  r3, 0
 	}
 	.else
+<<<<<<< HEAD
 	.ifc \c_routine, op_handle_perf_interrupt
+=======
+	.ifc \c_routine, handle_perf_interrupt
+>>>>>>> v3.18
 	{
 	 mfspr  r2, PERF_COUNT_STS
 	 movei  r3, -1   /* not used, but set for consistency */
 	}
 	.else
+<<<<<<< HEAD
 #if CHIP_HAS_AUX_PERF_COUNTERS()
 	.ifc \c_routine, op_handle_aux_perf_interrupt
+=======
+	.ifc \c_routine, handle_perf_interrupt
+>>>>>>> v3.18
 	{
 	 mfspr  r2, AUX_PERF_COUNT_STS
 	 movei  r3, -1   /* not used, but set for consistency */
 	}
 	.else
+<<<<<<< HEAD
 #endif
 	movei   r3, 0
 #if CHIP_HAS_AUX_PERF_COUNTERS()
 	.endif
 #endif
+=======
+	movei   r3, 0
+	.endif
+>>>>>>> v3.18
 	.endif
 	.endif
 	.endif
@@ -354,7 +383,11 @@ intvec_\vecname:
 #ifdef __COLLECT_LINKER_FEEDBACK__
 	.pushsection .text.intvec_feedback,"ax"
 	.org    (\vecnum << 5)
+<<<<<<< HEAD
 	FEEDBACK_ENTER_EXPLICIT(intvec_\vecname, .intrpt1, 1 << 8)
+=======
+	FEEDBACK_ENTER_EXPLICIT(intvec_\vecname, .intrpt, 1 << 8)
+>>>>>>> v3.18
 	jrp     lr
 	.popsection
 #endif
@@ -468,7 +501,11 @@ intvec_\vecname:
 	}
 	{
 	 auli   r21, r21, ha16(__per_cpu_offset)
+<<<<<<< HEAD
 	 mm     r20, r20, zero, 0, LOG2_THREAD_SIZE-1
+=======
+	 mm     r20, r20, zero, 0, LOG2_NR_CPU_IDS-1
+>>>>>>> v3.18
 	}
 	s2a     r20, r20, r21
 	lw      tp, r20
@@ -562,7 +599,10 @@ intvec_\vecname:
 	.endif
 	mtspr   INTERRUPT_CRITICAL_SECTION, zero
 
+<<<<<<< HEAD
 #if CHIP_HAS_WH64()
+=======
+>>>>>>> v3.18
 	/*
 	 * Prepare the first 256 stack bytes to be rapidly accessible
 	 * without having to fetch the background data.  We don't really
@@ -583,7 +623,10 @@ intvec_\vecname:
 	 addi   r52, r52, -64
 	}
 	wh64    r52
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_TRACE_IRQFLAGS
 	.ifnc \function,handle_nmi
@@ -762,7 +805,11 @@ intvec_\vecname:
 	.macro  dc_dispatch vecnum, vecname
 	.org    (\vecnum << 8)
 intvec_\vecname:
+<<<<<<< HEAD
 	j       hv_downcall_dispatch
+=======
+	j       _hv_downcall_dispatch
+>>>>>>> v3.18
 	ENDPROC(intvec_\vecname)
 	.endm
 
@@ -812,6 +859,7 @@ STD_ENTRY(interrupt_return)
 	}
 	lw      r29, r29
 	andi    r29, r29, SPR_EX_CONTEXT_1_1__PL_MASK  /* mask off ICS */
+<<<<<<< HEAD
 	{
 	 bzt    r29, .Lresume_userspace
 	 PTREGS_PTR(r29, PTREGS_OFFSET_PC)
@@ -823,6 +871,39 @@ STD_ENTRY(interrupt_return)
 	 moveli r27, lo16(_cpu_idle_nap)
 	}
 	{
+=======
+	bzt     r29, .Lresume_userspace
+
+#ifdef CONFIG_PREEMPT
+	/* Returning to kernel space. Check if we need preemption. */
+	GET_THREAD_INFO(r29)
+	addli   r28, r29, THREAD_INFO_FLAGS_OFFSET
+	{
+	 lw     r28, r28
+	 addli  r29, r29, THREAD_INFO_PREEMPT_COUNT_OFFSET
+	}
+	{
+	 andi   r28, r28, _TIF_NEED_RESCHED
+	 lw     r29, r29
+	}
+	bzt     r28, 1f
+	bnz     r29, 1f
+	/* Disable interrupts explicitly for preemption. */
+	IRQ_DISABLE(r20,r21)
+	TRACE_IRQS_OFF
+	jal     preempt_schedule_irq
+	FEEDBACK_REENTER(interrupt_return)
+1:
+#endif
+
+	/* If we're resuming to _cpu_idle_nap, bump PC forward by 8. */
+	{
+	 PTREGS_PTR(r29, PTREGS_OFFSET_PC)
+	 moveli r27, lo16(_cpu_idle_nap)
+	}
+	{
+	 lw     r28, r29
+>>>>>>> v3.18
 	 auli   r27, r27, ha16(_cpu_idle_nap)
 	}
 	{
@@ -939,6 +1020,16 @@ STD_ENTRY(interrupt_return)
 	bzt     r30, .Lrestore_regs
 3:
 
+<<<<<<< HEAD
+=======
+	/* We are relying on INT_PERF_COUNT at 33, and AUX_PERF_COUNT at 48 */
+	{
+	 moveli r0, lo16(1 << (INT_PERF_COUNT - 32))
+	 bz     r31, .Lrestore_regs
+	}
+	auli    r0, r0, ha16(1 << (INT_AUX_PERF_COUNT - 32))
+	mtspr   SPR_INTERRUPT_MASK_RESET_K_1, r0
+>>>>>>> v3.18
 
 	/*
 	 * We now commit to returning from this interrupt, since we will be
@@ -1164,6 +1255,13 @@ handle_nmi:
 	 PTREGS_PTR(r0, PTREGS_OFFSET_BASE)
 	}
 	FEEDBACK_REENTER(handle_nmi)
+<<<<<<< HEAD
+=======
+	{
+	 movei  r30, 1
+	 seq    r31, r0, zero
+	}
+>>>>>>> v3.18
 	j       interrupt_return
 	STD_ENDPROC(handle_nmi)
 
@@ -1420,7 +1518,10 @@ handle_ill:
 	{
 	 lw     r0, r0          /* indirect thru thread_info to get task_info*/
 	 addi   r1, sp, C_ABI_SAVE_AREA_SIZE  /* put ptregs pointer into r1 */
+<<<<<<< HEAD
 	 move   r2, zero        /* load error code into r2 */
+=======
+>>>>>>> v3.18
 	}
 
 	jal     send_sigtrap    /* issue a SIGTRAP */
@@ -1518,12 +1619,18 @@ STD_ENTRY(_sys_clone)
 	__HEAD
 	.align 64
 	/* Align much later jump on the start of a cache line. */
+<<<<<<< HEAD
 #if !ATOMIC_LOCKS_FOUND_VIA_TABLE()
+=======
+>>>>>>> v3.18
 	nop
 #if PAGE_SIZE >= 0x10000
 	nop
 #endif
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 ENTRY(sys_cmpxchg)
 
 	/*
@@ -1557,6 +1664,7 @@ ENTRY(sys_cmpxchg)
 # error Code here assumes PAGE_OFFSET can be loaded with just hi16()
 #endif
 
+<<<<<<< HEAD
 #if ATOMIC_LOCKS_FOUND_VIA_TABLE()
 	{
 	 /* Check for unaligned input. */
@@ -1596,6 +1704,8 @@ ENTRY(sys_cmpxchg)
 	}
 
 #else /* ATOMIC_LOCKS_FOUND_VIA_TABLE() */
+=======
+>>>>>>> v3.18
 	{
 	 /* Check for unaligned input. */
 	 bnz    sp, .Lcmpxchg_badaddr
@@ -1609,7 +1719,11 @@ ENTRY(sys_cmpxchg)
 	  * Because of C pointer arithmetic, we want to compute this:
 	  *
 	  * ((char*)atomic_locks +
+<<<<<<< HEAD
 	  *  (((r0 >> 3) & (1 << (ATOMIC_HASH_SIZE - 1))) << 2))
+=======
+	  *  (((r0 >> 3) & ((1 << ATOMIC_HASH_SHIFT) - 1)) << 2))
+>>>>>>> v3.18
 	  *
 	  * Instead of two shifts we just ">> 1", and use 'mm'
 	  * to ignore the low and high bits we don't want.
@@ -1620,12 +1734,18 @@ ENTRY(sys_cmpxchg)
 
 	 /*
 	  * Ensure that the TLB is loaded before we take out the lock.
+<<<<<<< HEAD
 	  * On tilepro, this will start fetching the value all the way
 	  * into our L1 as well (and if it gets modified before we
 	  * grab the lock, it will be invalidated from our cache
 	  * before we reload it).  On tile64, we'll start fetching it
 	  * into our L1 if we're the home, and if we're not, we'll
 	  * still at least start fetching it into the home's L2.
+=======
+	  * This will start fetching the value all the way into our L1
+	  * as well (and if it gets modified before we grab the lock,
+	  * it will be invalidated from our cache before we reload it).
+>>>>>>> v3.18
 	  */
 	 lw	r26, r0
 	}
@@ -1668,8 +1788,11 @@ ENTRY(sys_cmpxchg)
 	 j      .Lcmpxchg32_tns
 	}
 
+<<<<<<< HEAD
 #endif /* ATOMIC_LOCKS_FOUND_VIA_TABLE() */
 
+=======
+>>>>>>> v3.18
 /* Symbol for do_page_fault_ics() to use to compare against the PC. */
 .global __sys_cmpxchg_grab_lock
 __sys_cmpxchg_grab_lock:
@@ -1807,9 +1930,12 @@ __sys_cmpxchg_grab_lock:
 	.align 64
 .Lcmpxchg64:
 	{
+<<<<<<< HEAD
 #if ATOMIC_LOCKS_FOUND_VIA_TABLE()
 	 s2a	ATOMIC_LOCK_REG_NAME, r25, r21
 #endif
+=======
+>>>>>>> v3.18
 	 bzt     r23, .Lcmpxchg64_tns
 	}
 	j       .Lcmpxchg_badaddr
@@ -1875,11 +2001,20 @@ int_unalign:
 	push_extra_callee_saves r0
 	j       do_trap
 
+<<<<<<< HEAD
 /* Include .intrpt1 array of interrupt vectors */
 	.section ".intrpt1", "ax"
 
 #define op_handle_perf_interrupt bad_intr
 #define op_handle_aux_perf_interrupt bad_intr
+=======
+/* Include .intrpt array of interrupt vectors */
+	.section ".intrpt", "ax"
+
+#ifndef CONFIG_USE_PMC
+#define handle_perf_interrupt bad_intr
+#endif
+>>>>>>> v3.18
 
 #ifndef CONFIG_HARDWALL
 #define do_hardwall_trap bad_intr
@@ -1920,7 +2055,11 @@ int_unalign:
 	int_hand     INT_IDN_AVAIL, IDN_AVAIL, bad_intr
 	int_hand     INT_UDN_AVAIL, UDN_AVAIL, bad_intr
 	int_hand     INT_PERF_COUNT, PERF_COUNT, \
+<<<<<<< HEAD
 		     op_handle_perf_interrupt, handle_nmi
+=======
+		     handle_perf_interrupt, handle_nmi
+>>>>>>> v3.18
 	int_hand     INT_INTCTRL_3, INTCTRL_3, bad_intr
 #if CONFIG_KERNEL_PL == 2
 	dc_dispatch  INT_INTCTRL_2, INTCTRL_2
@@ -1944,10 +2083,15 @@ int_unalign:
 		     do_page_fault
 	int_hand     INT_SN_CPL, SN_CPL, bad_intr
 	int_hand     INT_DOUBLE_FAULT, DOUBLE_FAULT, do_trap
+<<<<<<< HEAD
 #if CHIP_HAS_AUX_PERF_COUNTERS()
 	int_hand     INT_AUX_PERF_COUNT, AUX_PERF_COUNT, \
 		     op_handle_aux_perf_interrupt, handle_nmi
 #endif
+=======
+	int_hand     INT_AUX_PERF_COUNT, AUX_PERF_COUNT, \
+		     handle_perf_interrupt, handle_nmi
+>>>>>>> v3.18
 
 	/* Synthetic interrupt delivered only by the simulator */
 	int_hand     INT_BREAKPOINT, BREAKPOINT, do_breakpoint

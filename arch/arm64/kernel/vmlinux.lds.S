@@ -8,6 +8,7 @@
 #include <asm/thread_info.h>
 #include <asm/memory.h>
 #include <asm/page.h>
+<<<<<<< HEAD
 #ifdef CONFIG_STRICT_MEMORY_RWX
 #include <asm/pgtable.h>
 #endif
@@ -19,6 +20,13 @@
 #define ARM_EXIT_KEEP(x)
 #define ARM_EXIT_DISCARD(x)	x
 #endif
+=======
+
+#include "image.h"
+
+#define ARM_EXIT_KEEP(x)
+#define ARM_EXIT_DISCARD(x)	x
+>>>>>>> v3.18
 
 OUTPUT_ARCH(aarch64)
 ENTRY(_text)
@@ -60,12 +68,17 @@ SECTIONS
 		_text = .;
 		HEAD_TEXT
 	}
+<<<<<<< HEAD
 #ifdef CONFIG_STRICT_MEMORY_RWX
 	. = ALIGN(1<<SECTION_SHIFT);
 #endif
 	.text : {			/* Real text segment		*/
 		_stext = .;		/* Text and read-only data	*/
 			*(.latehead.text)
+=======
+	.text : {			/* Real text segment		*/
+		_stext = .;		/* Text and read-only data	*/
+>>>>>>> v3.18
 			__exception_text_start = .;
 			*(.exception.text)
 			__exception_text_end = .;
@@ -80,31 +93,42 @@ SECTIONS
 		*(.got)			/* Global offset table		*/
 	}
 
+<<<<<<< HEAD
 #ifdef CONFIG_STRICT_MEMORY_RWX
 	. = ALIGN(1<<SECTION_SHIFT);
 #endif
+=======
+>>>>>>> v3.18
 	RO_DATA(PAGE_SIZE)
 	EXCEPTION_TABLE(8)
 	NOTES
 	_etext = .;			/* End of text and rodata section */
 
+<<<<<<< HEAD
 #ifdef CONFIG_STRICT_MEMORY_RWX
 	. = ALIGN(1<<SECTION_SHIFT);
 #else
 	. = ALIGN(PAGE_SIZE);
 #endif
+=======
+	. = ALIGN(PAGE_SIZE);
+>>>>>>> v3.18
 	__init_begin = .;
 
 	INIT_TEXT_SECTION(8)
 	.exit.text : {
 		ARM_EXIT_KEEP(EXIT_TEXT)
 	}
+<<<<<<< HEAD
 #ifdef CONFIG_STRICT_MEMORY_RWX
 	. = ALIGN(1<<SECTION_SHIFT);
 	__init_data_begin = .;
 #else
 	. = ALIGN(16);
 #endif
+=======
+	. = ALIGN(16);
+>>>>>>> v3.18
 	.init.data : {
 		INIT_DATA
 		INIT_SETUP(16)
@@ -119,18 +143,39 @@ SECTIONS
 
 	PERCPU_SECTION(64)
 
+<<<<<<< HEAD
 	__init_end = .;
 
 	. = ALIGN(PAGE_SIZE);
+=======
+	. = ALIGN(PAGE_SIZE);
+	__init_end = .;
+
+>>>>>>> v3.18
 	_data = .;
 	_sdata = .;
 	RW_DATA_SECTION(64, PAGE_SIZE, THREAD_SIZE)
 	_edata = .;
 
 	BSS_SECTION(0, 0, 0)
+<<<<<<< HEAD
 	_end = .;
 
 	STABS_DEBUG
+=======
+
+	. = ALIGN(PAGE_SIZE);
+	idmap_pg_dir = .;
+	. += IDMAP_DIR_SIZE;
+	swapper_pg_dir = .;
+	. += SWAPPER_DIR_SIZE;
+
+	_end = .;
+
+	STABS_DEBUG
+
+	HEAD_SYMBOLS
+>>>>>>> v3.18
 }
 
 /*
@@ -138,3 +183,11 @@ SECTIONS
  */
 ASSERT(((__hyp_idmap_text_start + PAGE_SIZE) > __hyp_idmap_text_end),
        "HYP init code too big")
+<<<<<<< HEAD
+=======
+
+/*
+ * If padding is applied before .head.text, virt<->phys conversions will fail.
+ */
+ASSERT(_text == (PAGE_OFFSET + TEXT_OFFSET), "HEAD is misaligned")
+>>>>>>> v3.18

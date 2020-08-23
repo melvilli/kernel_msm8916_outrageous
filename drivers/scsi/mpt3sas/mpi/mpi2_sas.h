@@ -1,12 +1,20 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2000-2012 LSI Corporation.
+=======
+ * Copyright (c) 2000-2014 LSI Corporation.
+>>>>>>> v3.18
  *
  *
  *          Name:  mpi2_sas.h
  *         Title:  MPI Serial Attached SCSI structures and definitions
  * Creation Date:  February 9, 2007
  *
+<<<<<<< HEAD
  * mpi2_sas.h Version:  02.00.07
+=======
+ * mpi2_sas.h Version:  02.00.08
+>>>>>>> v3.18
  *
  * NOTE: Names (typedefs, defines, etc.) beginning with an MPI25 or Mpi25
  *       prefix are for use only on MPI v2.5 products, and must not be used
@@ -30,6 +38,11 @@
  * 11-18-11  02.00.06  Incorporating additions for MPI v2.5.
  * 07-10-12  02.00.07  Added MPI2_SATA_PT_SGE_UNION for use in the SATA
  *                     Passthrough Request message.
+<<<<<<< HEAD
+=======
+ * 08-19-13  02.00.08  Made MPI2_SAS_OP_TRANSMIT_PORT_SELECT_SIGNAL obsolete
+ *			for anything newer than MPI v2.0.
+>>>>>>> v3.18
  * --------------------------------------------------------------------------
  */
 
@@ -251,7 +264,11 @@ typedef struct _MPI2_SAS_IOUNIT_CONTROL_REQUEST {
 #define MPI2_SAS_OP_PHY_CLEAR_ERROR_LOG         (0x08)
 #define MPI2_SAS_OP_SEND_PRIMITIVE              (0x0A)
 #define MPI2_SAS_OP_FORCE_FULL_DISCOVERY        (0x0B)
+<<<<<<< HEAD
 #define MPI2_SAS_OP_TRANSMIT_PORT_SELECT_SIGNAL (0x0C)
+=======
+#define MPI2_SAS_OP_TRANSMIT_PORT_SELECT_SIGNAL (0x0C) /* MPI v2.0 only */
+>>>>>>> v3.18
 #define MPI2_SAS_OP_REMOVE_DEVICE               (0x0D)
 #define MPI2_SAS_OP_LOOKUP_MAPPING              (0x0E)
 #define MPI2_SAS_OP_SET_IOC_PARAMETER           (0x0F)

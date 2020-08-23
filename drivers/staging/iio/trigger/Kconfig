@@ -12,6 +12,7 @@ config IIO_PERIODIC_RTC_TRIGGER
 	  Provides support for using periodic capable real time
 	  clocks as IIO triggers.
 
+<<<<<<< HEAD
 config IIO_GPIO_TRIGGER
 	tristate "GPIO trigger"
 	depends on GPIOLIB
@@ -29,6 +30,8 @@ config IIO_SYSFS_TRIGGER
 	  To compile this driver as a module, choose M here: the
 	  module will be called iio-trig-sysfs.
 
+=======
+>>>>>>> v3.18
 config IIO_BFIN_TMR_TRIGGER
 	tristate "Blackfin TIMER trigger"
 	depends on BLACKFIN

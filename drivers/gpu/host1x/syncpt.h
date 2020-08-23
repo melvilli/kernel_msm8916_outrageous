@@ -20,6 +20,10 @@
 #define __HOST1X_SYNCPT_H
 
 #include <linux/atomic.h>
+<<<<<<< HEAD
+=======
+#include <linux/host1x.h>
+>>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/sched.h>
 
@@ -30,15 +34,30 @@ struct host1x;
 /* Reserved for replacing an expired wait with a NOP */
 #define HOST1X_SYNCPT_RESERVED			0
 
+<<<<<<< HEAD
+=======
+struct host1x_syncpt_base {
+	unsigned int id;
+	bool requested;
+};
+
+>>>>>>> v3.18
 struct host1x_syncpt {
 	int id;
 	atomic_t min_val;
 	atomic_t max_val;
 	u32 base_val;
 	const char *name;
+<<<<<<< HEAD
 	int client_managed;
 	struct host1x *host;
 	struct device *dev;
+=======
+	bool client_managed;
+	struct host1x *host;
+	struct device *dev;
+	struct host1x_syncpt_base *base;
+>>>>>>> v3.18
 
 	/* interrupt data */
 	struct host1x_syncpt_intr intr;
@@ -50,6 +69,7 @@ int host1x_syncpt_init(struct host1x *host);
 /*  Free sync point array */
 void host1x_syncpt_deinit(struct host1x *host);
 
+<<<<<<< HEAD
 /*
  * Read max. It indicates how many operations there are in queue, either in
  * channel or in a software thread.
@@ -69,6 +89,8 @@ static inline u32 host1x_syncpt_read_min(struct host1x_syncpt *sp)
 	return (u32)atomic_read(&sp->min_val);
 }
 
+=======
+>>>>>>> v3.18
 /* Return number of sync point supported. */
 int host1x_syncpt_nb_pts(struct host1x *host);
 
@@ -94,7 +116,11 @@ static inline bool host1x_syncpt_check_max(struct host1x_syncpt *sp, u32 real)
 }
 
 /* Return true if sync point is client managed. */
+<<<<<<< HEAD
 static inline int host1x_syncpt_client_managed(struct host1x_syncpt *sp)
+=======
+static inline bool host1x_syncpt_client_managed(struct host1x_syncpt *sp)
+>>>>>>> v3.18
 {
 	return sp->client_managed;
 }
@@ -112,12 +138,15 @@ static inline bool host1x_syncpt_idle(struct host1x_syncpt *sp)
 	return (min == max);
 }
 
+<<<<<<< HEAD
 /* Return pointer to struct denoting sync point id. */
 struct host1x_syncpt *host1x_syncpt_get(struct host1x *host, u32 id);
 
 /* Request incrementing a sync point. */
 void host1x_syncpt_cpu_incr(struct host1x_syncpt *sp);
 
+=======
+>>>>>>> v3.18
 /* Load current value from hardware to the shadow register. */
 u32 host1x_syncpt_load(struct host1x_syncpt *sp);
 
@@ -133,6 +162,7 @@ void host1x_syncpt_restore(struct host1x *host);
 /* Read current wait base value into shadow register and return it. */
 u32 host1x_syncpt_load_wait_base(struct host1x_syncpt *sp);
 
+<<<<<<< HEAD
 /* Increment sync point and its max. */
 void host1x_syncpt_incr(struct host1x_syncpt *sp);
 
@@ -143,6 +173,11 @@ u32 host1x_syncpt_incr_max(struct host1x_syncpt *sp, u32 incrs);
 int host1x_syncpt_wait(struct host1x_syncpt *sp, u32 thresh,
 			long timeout, u32 *value);
 
+=======
+/* Indicate future operations by incrementing the sync point max. */
+u32 host1x_syncpt_incr_max(struct host1x_syncpt *sp, u32 incrs);
+
+>>>>>>> v3.18
 /* Check if sync point id is valid. */
 static inline int host1x_syncpt_is_valid(struct host1x_syncpt *sp)
 {
@@ -152,6 +187,7 @@ static inline int host1x_syncpt_is_valid(struct host1x_syncpt *sp)
 /* Patch a wait by replacing it with a wait for syncpt 0 value 0 */
 int host1x_syncpt_patch_wait(struct host1x_syncpt *sp, void *patch_addr);
 
+<<<<<<< HEAD
 /* Return id of the sync point */
 u32 host1x_syncpt_id(struct host1x_syncpt *sp);
 
@@ -162,4 +198,6 @@ struct host1x_syncpt *host1x_syncpt_request(struct device *dev,
 /* Free a sync point. */
 void host1x_syncpt_free(struct host1x_syncpt *sp);
 
+=======
+>>>>>>> v3.18
 #endif

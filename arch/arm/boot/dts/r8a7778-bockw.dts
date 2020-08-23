@@ -15,14 +15,22 @@
  */
 
 /dts-v1/;
+<<<<<<< HEAD
 /include/ "r8a7778.dtsi"
+=======
+#include "r8a7778.dtsi"
+>>>>>>> v3.18
 
 / {
 	model = "bockw";
 	compatible = "renesas,bockw", "renesas,r8a7778";
 
 	chosen {
+<<<<<<< HEAD
 		bootargs = "console=ttySC0,115200 ignore_loglevel ip=dhcp root=/dev/nfs";
+=======
+		bootargs = "console=ttySC0,115200 ignore_loglevel ip=dhcp root=/dev/nfs rw";
+>>>>>>> v3.18
 	};
 
 	memory {

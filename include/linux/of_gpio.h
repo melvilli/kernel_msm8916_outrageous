@@ -116,6 +116,7 @@ static inline int of_gpio_count(struct device_node *np)
 	return of_gpio_named_count(np, "gpios");
 }
 
+<<<<<<< HEAD
 /**
  * of_get_gpio_flags() - Get a GPIO number and flags to use with GPIO API
  * @np:		device node to get GPIO from
@@ -126,6 +127,8 @@ static inline int of_gpio_count(struct device_node *np)
  * value on the error condition. If @flags is not NULL the function also fills
  * in flags for the GPIO.
  */
+=======
+>>>>>>> v3.18
 static inline int of_get_gpio_flags(struct device_node *np, int index,
 		      enum of_gpio_flags *flags)
 {

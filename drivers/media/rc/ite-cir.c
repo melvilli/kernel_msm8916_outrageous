@@ -263,8 +263,11 @@ static void ite_set_carrier_params(struct ite_dev *dev)
 
 			if (allowance > ITE_RXDCR_MAX)
 				allowance = ITE_RXDCR_MAX;
+<<<<<<< HEAD
 
 			use_demodulator = true;
+=======
+>>>>>>> v3.18
 		}
 	}
 
@@ -1565,7 +1568,11 @@ static int ite_probe(struct pnp_dev *pdev, const struct pnp_device_id
 	/* set up ir-core props */
 	rdev->priv = itdev;
 	rdev->driver_type = RC_DRIVER_IR_RAW;
+<<<<<<< HEAD
 	rdev->allowed_protos = RC_BIT_ALL;
+=======
+	rdev->allowed_protocols = RC_BIT_ALL;
+>>>>>>> v3.18
 	rdev->open = ite_open;
 	rdev->close = ite_close;
 	rdev->s_idle = ite_s_idle;
@@ -1668,7 +1675,10 @@ static int ite_suspend(struct pnp_dev *pdev, pm_message_t state)
 
 static int ite_resume(struct pnp_dev *pdev)
 {
+<<<<<<< HEAD
 	int ret = 0;
+=======
+>>>>>>> v3.18
 	struct ite_dev *dev = pnp_get_drvdata(pdev);
 	unsigned long flags;
 
@@ -1683,7 +1693,11 @@ static int ite_resume(struct pnp_dev *pdev)
 
 	spin_unlock_irqrestore(&dev->lock, flags);
 
+<<<<<<< HEAD
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 }
 
 static void ite_shutdown(struct pnp_dev *pdev)
@@ -1711,12 +1725,20 @@ static struct pnp_driver ite_driver = {
 	.shutdown	= ite_shutdown,
 };
 
+<<<<<<< HEAD
 static int ite_init(void)
+=======
+static int __init ite_init(void)
+>>>>>>> v3.18
 {
 	return pnp_register_driver(&ite_driver);
 }
 
+<<<<<<< HEAD
 static void ite_exit(void)
+=======
+static void __exit ite_exit(void)
+>>>>>>> v3.18
 {
 	pnp_unregister_driver(&ite_driver);
 }

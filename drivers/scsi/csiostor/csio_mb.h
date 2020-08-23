@@ -183,6 +183,7 @@ void csio_mb_caps_config(struct csio_hw *, struct csio_mb *, uint32_t,
 			    bool, bool, bool, bool,
 			    void (*)(struct csio_hw *, struct csio_mb *));
 
+<<<<<<< HEAD
 void csio_rss_glb_config(struct csio_hw *, struct csio_mb *,
 			 uint32_t, uint8_t, unsigned int,
 			 void (*)(struct csio_hw *, struct csio_mb *));
@@ -194,6 +195,8 @@ void csio_mb_pfvf(struct csio_hw *, struct csio_mb *, uint32_t,
 		  unsigned int, unsigned int, unsigned int,
 		  unsigned int, void (*) (struct csio_hw *, struct csio_mb *));
 
+=======
+>>>>>>> v3.18
 void csio_mb_port(struct csio_hw *, struct csio_mb *, uint32_t,
 		  uint8_t, bool, uint32_t, uint16_t,
 		  void (*) (struct csio_hw *, struct csio_mb *));

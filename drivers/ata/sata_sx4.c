@@ -82,7 +82,10 @@
 #include <linux/module.h>
 #include <linux/pci.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/blkdev.h>
 #include <linux/delay.h>
 #include <linux/interrupt.h>
@@ -1021,8 +1024,12 @@ static void pdc20621_get_from_dimm(struct ata_host *host, void *psource,
 	idx++;
 	dist = ((long) (window_size - (offset + size))) >= 0 ? size :
 		(long) (window_size - offset);
+<<<<<<< HEAD
 	memcpy_fromio((char *) psource, (char *) (dimm_mmio + offset / 4),
 		      dist);
+=======
+	memcpy_fromio(psource, dimm_mmio + offset / 4, dist);
+>>>>>>> v3.18
 
 	psource += dist;
 	size -= dist;
@@ -1031,8 +1038,12 @@ static void pdc20621_get_from_dimm(struct ata_host *host, void *psource,
 		readl(mmio + PDC_GENERAL_CTLR);
 		writel(((idx) << page_mask), mmio + PDC_DIMM_WINDOW_CTLR);
 		readl(mmio + PDC_DIMM_WINDOW_CTLR);
+<<<<<<< HEAD
 		memcpy_fromio((char *) psource, (char *) (dimm_mmio),
 			      window_size / 4);
+=======
+		memcpy_fromio(psource, dimm_mmio, window_size / 4);
+>>>>>>> v3.18
 		psource += window_size;
 		size -= window_size;
 		idx++;
@@ -1043,8 +1054,12 @@ static void pdc20621_get_from_dimm(struct ata_host *host, void *psource,
 		readl(mmio + PDC_GENERAL_CTLR);
 		writel(((idx) << page_mask), mmio + PDC_DIMM_WINDOW_CTLR);
 		readl(mmio + PDC_DIMM_WINDOW_CTLR);
+<<<<<<< HEAD
 		memcpy_fromio((char *) psource, (char *) (dimm_mmio),
 			      size / 4);
+=======
+		memcpy_fromio(psource, dimm_mmio, size / 4);
+>>>>>>> v3.18
 	}
 }
 #endif

@@ -185,6 +185,10 @@ static void __init sni_pcimt_resource_init(void)
 
 extern struct pci_ops sni_pcimt_ops;
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PCI
+>>>>>>> v3.18
 static struct pci_controller sni_controller = {
 	.pci_ops	= &sni_pcimt_ops,
 	.mem_resource	= &sni_mem_resource,
@@ -193,6 +197,10 @@ static struct pci_controller sni_controller = {
 	.io_offset	= 0x00000000UL,
 	.io_map_base	= SNI_PORT_BASE
 };
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 
 static void enable_pcimt_irq(struct irq_data *d)
 {

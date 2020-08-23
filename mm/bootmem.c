@@ -16,9 +16,15 @@
 #include <linux/kmemleak.h>
 #include <linux/range.h>
 #include <linux/memblock.h>
+<<<<<<< HEAD
 
 #include <asm/bug.h>
 #include <asm/io.h>
+=======
+#include <linux/bug.h>
+#include <linux/io.h>
+
+>>>>>>> v3.18
 #include <asm/processor.h>
 
 #include "internal.h"
@@ -154,7 +160,11 @@ unsigned long __init init_bootmem(unsigned long start, unsigned long pages)
  * down, but we are still initializing the system.  Pages are given directly
  * to the page allocator, no bootmem metadata is updated because it is gone.
  */
+<<<<<<< HEAD
 void free_bootmem_late(unsigned long physaddr, unsigned long size)
+=======
+void __init free_bootmem_late(unsigned long physaddr, unsigned long size)
+>>>>>>> v3.18
 {
 	unsigned long cursor, end;
 
@@ -172,11 +182,19 @@ void free_bootmem_late(unsigned long physaddr, unsigned long size)
 static unsigned long __init free_all_bootmem_core(bootmem_data_t *bdata)
 {
 	struct page *page;
+<<<<<<< HEAD
 	unsigned long start, end, pages, count = 0;
+=======
+	unsigned long *map, start, end, pages, count = 0;
+>>>>>>> v3.18
 
 	if (!bdata->node_bootmem_map)
 		return 0;
 
+<<<<<<< HEAD
+=======
+	map = bdata->node_bootmem_map;
+>>>>>>> v3.18
 	start = bdata->node_min_pfn;
 	end = bdata->node_low_pfn;
 
@@ -184,10 +202,16 @@ static unsigned long __init free_all_bootmem_core(bootmem_data_t *bdata)
 		bdata - bootmem_node_data, start, end);
 
 	while (start < end) {
+<<<<<<< HEAD
 		unsigned long *map, idx, vec;
 		unsigned shift;
 
 		map = bdata->node_bootmem_map;
+=======
+		unsigned long idx, vec;
+		unsigned shift;
+
+>>>>>>> v3.18
 		idx = start - bdata->node_min_pfn;
 		shift = idx & (BITS_PER_LONG - 1);
 		/*
@@ -243,6 +267,7 @@ static unsigned long __init free_all_bootmem_core(bootmem_data_t *bdata)
 
 static int reset_managed_pages_done __initdata;
 
+<<<<<<< HEAD
 static inline void __init reset_node_managed_pages(pg_data_t *pgdat)
 {
 	struct zone *z;
@@ -250,6 +275,12 @@ static inline void __init reset_node_managed_pages(pg_data_t *pgdat)
 	if (reset_managed_pages_done)
 		return;
 
+=======
+void reset_node_managed_pages(pg_data_t *pgdat)
+{
+	struct zone *z;
+
+>>>>>>> v3.18
 	for (z = pgdat->node_zones; z < pgdat->node_zones + MAX_NR_ZONES; z++)
 		z->managed_pages = 0;
 }
@@ -258,6 +289,7 @@ void __init reset_all_zones_managed_pages(void)
 {
 	struct pglist_data *pgdat;
 
+<<<<<<< HEAD
 	for_each_online_pgdat(pgdat)
 		reset_node_managed_pages(pgdat);
 	reset_managed_pages_done = 1;
@@ -279,6 +311,15 @@ unsigned long __init free_all_bootmem_node(pg_data_t *pgdat)
 	totalram_pages += pages;
 
 	return pages;
+=======
+	if (reset_managed_pages_done)
+		return;
+
+	for_each_online_pgdat(pgdat)
+		reset_node_managed_pages(pgdat);
+
+	reset_managed_pages_done = 1;
+>>>>>>> v3.18
 }
 
 /**
@@ -802,7 +843,11 @@ void * __init __alloc_bootmem_node_high(pg_data_t *pgdat, unsigned long size,
 		return kzalloc_node(size, GFP_NOWAIT, pgdat->node_id);
 
 	/* update goal according ...MAX_DMA32_PFN */
+<<<<<<< HEAD
 	end_pfn = pgdat->node_start_pfn + pgdat->node_spanned_pages;
+=======
+	end_pfn = pgdat_end_pfn(pgdat);
+>>>>>>> v3.18
 
 	if (end_pfn > MAX_DMA32_PFN + (128 >> (20 - PAGE_SHIFT)) &&
 	    (goal >> PAGE_SHIFT) < MAX_DMA32_PFN) {

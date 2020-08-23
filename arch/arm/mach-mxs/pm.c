@@ -15,6 +15,10 @@
 #include <linux/kernel.h>
 #include <linux/suspend.h>
 #include <linux/io.h>
+<<<<<<< HEAD
+=======
+#include "pm.h"
+>>>>>>> v3.18
 
 static int mxs_suspend_enter(suspend_state_t state)
 {

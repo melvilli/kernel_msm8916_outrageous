@@ -528,7 +528,11 @@ ips_setup(char *ips_str)
 		 * Update the variables
 		 */
 		for (i = 0; i < ARRAY_SIZE(options); i++) {
+<<<<<<< HEAD
 			if (strnicmp
+=======
+			if (strncasecmp
+>>>>>>> v3.18
 			    (key, options[i].option_name,
 			     strlen(options[i].option_name)) == 0) {
 				if (value)

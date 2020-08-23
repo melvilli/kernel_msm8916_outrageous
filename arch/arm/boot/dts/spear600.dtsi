@@ -15,8 +15,17 @@
 	compatible = "st,spear600";
 
 	cpus {
+<<<<<<< HEAD
 		cpu@0 {
 			compatible = "arm,arm926ejs";
+=======
+		#address-cells = <0>;
+		#size-cells = <0>;
+
+		cpu {
+			compatible = "arm,arm926ej-s";
+			device_type = "cpu";
+>>>>>>> v3.18
 		};
 	};
 

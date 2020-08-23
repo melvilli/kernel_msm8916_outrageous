@@ -50,7 +50,10 @@ static const struct snd_pcm_hardware atmel_pcm_dma_hardware = {
 				  SNDRV_PCM_INFO_INTERLEAVED |
 				  SNDRV_PCM_INFO_RESUME |
 				  SNDRV_PCM_INFO_PAUSE,
+<<<<<<< HEAD
 	.formats		= SNDRV_PCM_FMTBIT_S16_LE,
+=======
+>>>>>>> v3.18
 	.period_bytes_min	= 256,		/* lighting DMA overhead */
 	.period_bytes_max	= 2 * 0xffff,	/* if 2 bytes format */
 	.periods_min		= 8,
@@ -91,6 +94,7 @@ static void atmel_pcm_dma_irq(u32 ssc_sr,
 	}
 }
 
+<<<<<<< HEAD
 /*--------------------------------------------------------------------------*\
  * DMAENGINE operations
 \*--------------------------------------------------------------------------*/
@@ -118,12 +122,27 @@ static int atmel_pcm_configure_dma(struct snd_pcm_substream *substream,
 
 	ret = snd_hwparams_to_dma_slave_config(substream, params,
 			&slave_config);
+=======
+static int atmel_pcm_configure_dma(struct snd_pcm_substream *substream,
+	struct snd_pcm_hw_params *params, struct dma_slave_config *slave_config)
+{
+	struct snd_soc_pcm_runtime *rtd = substream->private_data;
+	struct atmel_pcm_dma_params *prtd;
+	struct ssc_device *ssc;
+	int ret;
+
+	prtd = snd_soc_dai_get_dma_data(rtd->cpu_dai, substream);
+	ssc = prtd->ssc;
+
+	ret = snd_hwparams_to_dma_slave_config(substream, params, slave_config);
+>>>>>>> v3.18
 	if (ret) {
 		pr_err("atmel-pcm: hwparams to dma slave configure failed\n");
 		return ret;
 	}
 
 	if (substream->stream == SNDRV_PCM_STREAM_PLAYBACK) {
+<<<<<<< HEAD
 		slave_config.dst_addr = (dma_addr_t)ssc->phybase + SSC_THR;
 		slave_config.dst_maxburst = 1;
 	} else {
@@ -167,11 +186,19 @@ static int atmel_pcm_hw_params(struct snd_pcm_substream *substream,
 	if (ret) {
 		pr_err("atmel-pcm: failed to configure dmai\n");
 		goto err;
+=======
+		slave_config->dst_addr = ssc->phybase + SSC_THR;
+		slave_config->dst_maxburst = 1;
+	} else {
+		slave_config->src_addr = ssc->phybase + SSC_RHR;
+		slave_config->src_maxburst = 1;
+>>>>>>> v3.18
 	}
 
 	prtd->dma_intr_handler = atmel_pcm_dma_irq;
 
 	return 0;
+<<<<<<< HEAD
 err:
 	snd_dmaengine_pcm_close_release_chan(substream);
 	return ret;
@@ -212,17 +239,34 @@ static struct snd_soc_platform_driver atmel_soc_platform = {
 	.ops		= &atmel_pcm_ops,
 	.pcm_new	= atmel_pcm_new,
 	.pcm_free	= atmel_pcm_free,
+=======
+}
+
+static const struct snd_dmaengine_pcm_config atmel_dmaengine_pcm_config = {
+	.prepare_slave_config = atmel_pcm_configure_dma,
+	.pcm_hardware = &atmel_pcm_dma_hardware,
+	.prealloc_buffer_size = ATMEL_SSC_DMABUF_SIZE,
+>>>>>>> v3.18
 };
 
 int atmel_pcm_dma_platform_register(struct device *dev)
 {
+<<<<<<< HEAD
 	return snd_soc_register_platform(dev, &atmel_soc_platform);
+=======
+	return snd_dmaengine_pcm_register(dev, &atmel_dmaengine_pcm_config,
+			SND_DMAENGINE_PCM_FLAG_NO_RESIDUE);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(atmel_pcm_dma_platform_register);
 
 void atmel_pcm_dma_platform_unregister(struct device *dev)
 {
+<<<<<<< HEAD
 	snd_soc_unregister_platform(dev);
+=======
+	snd_dmaengine_pcm_unregister(dev);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(atmel_pcm_dma_platform_unregister);
 

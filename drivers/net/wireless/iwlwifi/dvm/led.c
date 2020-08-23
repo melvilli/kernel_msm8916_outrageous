@@ -1,6 +1,10 @@
 /******************************************************************************
  *
+<<<<<<< HEAD
  * Copyright(c) 2003 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2003 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -27,7 +31,10 @@
 
 #include <linux/kernel.h>
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/delay.h>
 #include <linux/skbuff.h>
 #include <linux/netdevice.h>

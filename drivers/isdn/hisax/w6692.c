@@ -154,7 +154,11 @@ W6692_empty_fifo(struct IsdnCardState *cs, int count)
 
 		t += sprintf(t, "W6692_empty_fifo cnt %d", count);
 		QuickHex(t, ptr, count);
+<<<<<<< HEAD
 		debugl1(cs, cs->dlog);
+=======
+		debugl1(cs, "%s", cs->dlog);
+>>>>>>> v3.18
 	}
 }
 
@@ -196,7 +200,11 @@ W6692_fill_fifo(struct IsdnCardState *cs)
 
 		t += sprintf(t, "W6692_fill_fifo cnt %d", count);
 		QuickHex(t, ptr, count);
+<<<<<<< HEAD
 		debugl1(cs, cs->dlog);
+=======
+		debugl1(cs, "%s", cs->dlog);
+>>>>>>> v3.18
 	}
 }
 
@@ -226,7 +234,11 @@ W6692B_empty_fifo(struct BCState *bcs, int count)
 		t += sprintf(t, "W6692B_empty_fifo %c cnt %d",
 			     bcs->channel + '1', count);
 		QuickHex(t, ptr, count);
+<<<<<<< HEAD
 		debugl1(cs, bcs->blog);
+=======
+		debugl1(cs, "%s", bcs->blog);
+>>>>>>> v3.18
 	}
 }
 
@@ -264,7 +276,11 @@ W6692B_fill_fifo(struct BCState *bcs)
 		t += sprintf(t, "W6692B_fill_fifo %c cnt %d",
 			     bcs->channel + '1', count);
 		QuickHex(t, ptr, count);
+<<<<<<< HEAD
 		debugl1(cs, bcs->blog);
+=======
+		debugl1(cs, "%s", bcs->blog);
+>>>>>>> v3.18
 	}
 }
 

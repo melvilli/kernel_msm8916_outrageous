@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * ffs-test.c.c -- user mode filesystem api for usb composite function
+=======
+ * ffs-test.c -- user mode filesystem api for usb composite function
+>>>>>>> v3.18
  *
  * Copyright (C) 2010 Samsung Electronics
  *                    Author: Michal Nazarewicz <mina86@mina86.com>
@@ -29,6 +33,10 @@
 #include <fcntl.h>
 #include <pthread.h>
 #include <stdarg.h>
+<<<<<<< HEAD
+=======
+#include <stdbool.h>
+>>>>>>> v3.18
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -106,7 +114,13 @@ static void _msg(unsigned level, const char *fmt, ...)
 /******************** Descriptors and Strings *******************************/
 
 static const struct {
+<<<<<<< HEAD
 	struct usb_functionfs_descs_head header;
+=======
+	struct usb_functionfs_descs_head_v2 header;
+	__le32 fs_count;
+	__le32 hs_count;
+>>>>>>> v3.18
 	struct {
 		struct usb_interface_descriptor intf;
 		struct usb_endpoint_descriptor_no_audio sink;
@@ -114,11 +128,20 @@ static const struct {
 	} __attribute__((packed)) fs_descs, hs_descs;
 } __attribute__((packed)) descriptors = {
 	.header = {
+<<<<<<< HEAD
 		.magic = cpu_to_le32(FUNCTIONFS_DESCRIPTORS_MAGIC),
 		.length = cpu_to_le32(sizeof descriptors),
 		.fs_count = cpu_to_le32(3),
 		.hs_count = cpu_to_le32(3),
 	},
+=======
+		.magic = cpu_to_le32(FUNCTIONFS_DESCRIPTORS_MAGIC_V2),
+		.flags = cpu_to_le32(FUNCTIONFS_HAS_FS_DESC |
+				     FUNCTIONFS_HAS_HS_DESC),
+		.length = cpu_to_le32(sizeof descriptors),
+	},
+	.fs_count = cpu_to_le32(3),
+>>>>>>> v3.18
 	.fs_descs = {
 		.intf = {
 			.bLength = sizeof descriptors.fs_descs.intf,
@@ -142,6 +165,10 @@ static const struct {
 			/* .wMaxPacketSize = autoconfiguration (kernel) */
 		},
 	},
+<<<<<<< HEAD
+=======
+	.hs_count = cpu_to_le32(3),
+>>>>>>> v3.18
 	.hs_descs = {
 		.intf = {
 			.bLength = sizeof descriptors.fs_descs.intf,
@@ -168,6 +195,92 @@ static const struct {
 	},
 };
 
+<<<<<<< HEAD
+=======
+static size_t descs_to_legacy(void **legacy, const void *descriptors_v2)
+{
+	const unsigned char *descs_end, *descs_start;
+	__u32 length, fs_count = 0, hs_count = 0, count;
+
+	/* Read v2 header */
+	{
+		const struct {
+			const struct usb_functionfs_descs_head_v2 header;
+			const __le32 counts[];
+		} __attribute__((packed)) *const in = descriptors_v2;
+		const __le32 *counts = in->counts;
+		__u32 flags;
+
+		if (le32_to_cpu(in->header.magic) !=
+		    FUNCTIONFS_DESCRIPTORS_MAGIC_V2)
+			return 0;
+		length = le32_to_cpu(in->header.length);
+		if (length <= sizeof in->header)
+			return 0;
+		length -= sizeof in->header;
+		flags = le32_to_cpu(in->header.flags);
+		if (flags & ~(FUNCTIONFS_HAS_FS_DESC | FUNCTIONFS_HAS_HS_DESC |
+			      FUNCTIONFS_HAS_SS_DESC))
+			return 0;
+
+#define GET_NEXT_COUNT_IF_FLAG(ret, flg) do {		\
+			if (!(flags & (flg)))		\
+				break;			\
+			if (length < 4)			\
+				return 0;		\
+			ret = le32_to_cpu(*counts);	\
+			length -= 4;			\
+			++counts;			\
+		} while (0)
+
+		GET_NEXT_COUNT_IF_FLAG(fs_count, FUNCTIONFS_HAS_FS_DESC);
+		GET_NEXT_COUNT_IF_FLAG(hs_count, FUNCTIONFS_HAS_HS_DESC);
+		GET_NEXT_COUNT_IF_FLAG(count, FUNCTIONFS_HAS_SS_DESC);
+
+		count = fs_count + hs_count;
+		if (!count)
+			return 0;
+		descs_start = (const void *)counts;
+
+#undef GET_NEXT_COUNT_IF_FLAG
+	}
+
+	/*
+	 * Find the end of FS and HS USB descriptors.  SS descriptors
+	 * are ignored since legacy format does not support them.
+	 */
+	descs_end = descs_start;
+	do {
+		if (length < *descs_end)
+			return 0;
+		length -= *descs_end;
+		descs_end += *descs_end;
+	} while (--count);
+
+	/* Allocate legacy descriptors and copy the data. */
+	{
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+		struct {
+			struct usb_functionfs_descs_head header;
+			__u8 descriptors[];
+		} __attribute__((packed)) *out;
+#pragma GCC diagnostic pop
+
+		length = sizeof out->header + (descs_end - descs_start);
+		out = malloc(length);
+		out->header.magic = cpu_to_le32(FUNCTIONFS_DESCRIPTORS_MAGIC);
+		out->header.length = cpu_to_le32(length);
+		out->header.fs_count = cpu_to_le32(fs_count);
+		out->header.hs_count = cpu_to_le32(hs_count);
+		memcpy(out->descriptors, descs_start, descs_end - descs_start);
+		*legacy = out;
+	}
+
+	return length;
+}
+
+>>>>>>> v3.18
 
 #define STR_INTERFACE_ "Source/Sink"
 
@@ -487,12 +600,38 @@ ep0_consume(struct thread *ignore, const void *buf, size_t nbytes)
 	return nbytes;
 }
 
+<<<<<<< HEAD
 static void ep0_init(struct thread *t)
 {
 	ssize_t ret;
 
 	info("%s: writing descriptors\n", t->filename);
 	ret = write(t->fd, &descriptors, sizeof descriptors);
+=======
+static void ep0_init(struct thread *t, bool legacy_descriptors)
+{
+	void *legacy;
+	ssize_t ret;
+	size_t len;
+
+	if (legacy_descriptors) {
+		info("%s: writing descriptors\n", t->filename);
+		goto legacy;
+	}
+
+	info("%s: writing descriptors (in v2 format)\n", t->filename);
+	ret = write(t->fd, &descriptors, sizeof descriptors);
+
+	if (ret < 0 && errno == EINVAL) {
+		warn("%s: new format rejected, trying legacy\n", t->filename);
+legacy:
+		len = descs_to_legacy(&legacy, &descriptors);
+		if (len) {
+			ret = write(t->fd, legacy, len);
+			free(legacy);
+		}
+	}
+>>>>>>> v3.18
 	die_on(ret < 0, "%s: write: descriptors", t->filename);
 
 	info("%s: writing strings\n", t->filename);
@@ -503,6 +642,7 @@ static void ep0_init(struct thread *t)
 
 /******************** Main **************************************************/
 
+<<<<<<< HEAD
 int main(void)
 {
 	unsigned i;
@@ -511,6 +651,17 @@ int main(void)
 
 	init_thread(threads);
 	ep0_init(threads);
+=======
+int main(int argc, char **argv)
+{
+	bool legacy_descriptors;
+	unsigned i;
+
+	legacy_descriptors = argc > 2 && !strcmp(argv[1], "-l");
+
+	init_thread(threads);
+	ep0_init(threads, legacy_descriptors);
+>>>>>>> v3.18
 
 	for (i = 1; i < sizeof threads / sizeof *threads; ++i)
 		init_thread(threads + i);

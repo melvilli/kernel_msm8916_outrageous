@@ -364,6 +364,12 @@ static int saa7146_init_one(struct pci_dev *pci, const struct pci_device_id *ent
 		goto out;
 	}
 
+<<<<<<< HEAD
+=======
+	/* create a nice device name */
+	sprintf(dev->name, "saa7146 (%d)", saa7146_num);
+
+>>>>>>> v3.18
 	DEB_EE("pci:%p\n", pci);
 
 	err = pci_enable_device(pci);
@@ -411,7 +417,11 @@ static int saa7146_init_one(struct pci_dev *pci, const struct pci_device_id *ent
 	saa7146_write(dev, MC2, 0xf8000000);
 
 	/* request an interrupt for the saa7146 */
+<<<<<<< HEAD
 	err = request_irq(pci->irq, interrupt_hw, IRQF_SHARED | IRQF_DISABLED,
+=======
+	err = request_irq(pci->irq, interrupt_hw, IRQF_SHARED,
+>>>>>>> v3.18
 			  dev->name, dev);
 	if (err < 0) {
 		ERR("request_irq() failed\n");
@@ -421,6 +431,7 @@ static int saa7146_init_one(struct pci_dev *pci, const struct pci_device_id *ent
 	err = -ENOMEM;
 
 	/* get memory for various stuff */
+<<<<<<< HEAD
 	dev->d_rps0.cpu_addr = pci_alloc_consistent(pci, SAA7146_RPS_MEM,
 						    &dev->d_rps0.dma_handle);
 	if (!dev->d_rps0.cpu_addr)
@@ -444,6 +455,25 @@ static int saa7146_init_one(struct pci_dev *pci, const struct pci_device_id *ent
 	/* create a nice device name */
 	sprintf(dev->name, "saa7146 (%d)", saa7146_num);
 
+=======
+	dev->d_rps0.cpu_addr = pci_zalloc_consistent(pci, SAA7146_RPS_MEM,
+						     &dev->d_rps0.dma_handle);
+	if (!dev->d_rps0.cpu_addr)
+		goto err_free_irq;
+
+	dev->d_rps1.cpu_addr = pci_zalloc_consistent(pci, SAA7146_RPS_MEM,
+						     &dev->d_rps1.dma_handle);
+	if (!dev->d_rps1.cpu_addr)
+		goto err_free_rps0;
+
+	dev->d_i2c.cpu_addr = pci_zalloc_consistent(pci, SAA7146_RPS_MEM,
+						    &dev->d_i2c.dma_handle);
+	if (!dev->d_i2c.cpu_addr)
+		goto err_free_rps1;
+
+	/* the rest + print status message */
+
+>>>>>>> v3.18
 	pr_info("found saa7146 @ mem %p (revision %d, irq %d) (0x%04x,0x%04x)\n",
 		dev->mem, dev->revision, pci->irq,
 		pci->subsystem_vendor, pci->subsystem_device);
@@ -524,8 +554,11 @@ static void saa7146_remove_one(struct pci_dev *pdev)
 	DEB_EE("dev:%p\n", dev);
 
 	dev->ext->detach(dev);
+<<<<<<< HEAD
 	/* Zero the PCI drvdata after use. */
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 
 	/* shut down all video dma transfers */
 	saa7146_write(dev, MC1, 0x00ff0000);

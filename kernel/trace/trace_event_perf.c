@@ -24,10 +24,51 @@ static int	total_ref_count;
 static int perf_trace_event_perm(struct ftrace_event_call *tp_event,
 				 struct perf_event *p_event)
 {
+<<<<<<< HEAD
 	/* The ftrace function trace is allowed only for root. */
 	if (ftrace_event_is_function(tp_event) &&
 	    perf_paranoid_tracepoint_raw() && !capable(CAP_SYS_ADMIN))
 		return -EPERM;
+=======
+	if (tp_event->perf_perm) {
+		int ret = tp_event->perf_perm(tp_event, p_event);
+		if (ret)
+			return ret;
+	}
+
+	/*
+	 * We checked and allowed to create parent,
+	 * allow children without checking.
+	 */
+	if (p_event->parent)
+		return 0;
+
+	/*
+	 * It's ok to check current process (owner) permissions in here,
+	 * because code below is called only via perf_event_open syscall.
+	 */
+
+	/* The ftrace function trace is allowed only for root. */
+	if (ftrace_event_is_function(tp_event)) {
+		if (perf_paranoid_tracepoint_raw() && !capable(CAP_SYS_ADMIN))
+			return -EPERM;
+
+		/*
+		 * We don't allow user space callchains for  function trace
+		 * event, due to issues with page faults while tracing page
+		 * fault handler and its overall trickiness nature.
+		 */
+		if (!p_event->attr.exclude_callchain_user)
+			return -EINVAL;
+
+		/*
+		 * Same reason to disable user stack dump as for user space
+		 * callchains above.
+		 */
+		if (p_event->attr.sample_type & PERF_SAMPLE_STACK_USER)
+			return -EINVAL;
+	}
+>>>>>>> v3.18
 
 	/* No tracing, just counting, so no obvious leak */
 	if (!(p_event->attr.sample_type & PERF_SAMPLE_RAW))
@@ -173,7 +214,11 @@ static int perf_trace_event_init(struct ftrace_event_call *tp_event,
 int perf_trace_init(struct perf_event *p_event)
 {
 	struct ftrace_event_call *tp_event;
+<<<<<<< HEAD
 	int event_id = p_event->attr.config;
+=======
+	u64 event_id = p_event->attr.config;
+>>>>>>> v3.18
 	int ret = -EINVAL;
 
 	mutex_lock(&event_mutex);
@@ -222,6 +267,7 @@ int perf_trace_add(struct perf_event *p_event, int flags)
 void perf_trace_del(struct perf_event *p_event, int flags)
 {
 	struct ftrace_event_call *tp_event = p_event->tp_event;
+<<<<<<< HEAD
 	if (!hlist_unhashed(&p_event->hlist_entry))
 		hlist_del_rcu(&p_event->hlist_entry);
 	tp_event->class->reg(tp_event, TRACE_REG_PERF_DEL, p_event);
@@ -229,6 +275,14 @@ void perf_trace_del(struct perf_event *p_event, int flags)
 
 __kprobes void *perf_trace_buf_prepare(int size, unsigned short type,
 				       struct pt_regs *regs, int *rctxp)
+=======
+	hlist_del_rcu(&p_event->hlist_entry);
+	tp_event->class->reg(tp_event, TRACE_REG_PERF_DEL, p_event);
+}
+
+void *perf_trace_buf_prepare(int size, unsigned short type,
+			     struct pt_regs *regs, int *rctxp)
+>>>>>>> v3.18
 {
 	struct trace_entry *entry;
 	unsigned long flags;
@@ -237,6 +291,13 @@ __kprobes void *perf_trace_buf_prepare(int size, unsigned short type,
 
 	BUILD_BUG_ON(PERF_MAX_TRACE_SIZE % sizeof(unsigned long));
 
+<<<<<<< HEAD
+=======
+	if (WARN_ONCE(size > PERF_MAX_TRACE_SIZE,
+			"perf buffer not large enough"))
+		return NULL;
+
+>>>>>>> v3.18
 	pc = preempt_count();
 
 	*rctxp = perf_swevent_get_recursion_context();
@@ -256,6 +317,10 @@ __kprobes void *perf_trace_buf_prepare(int size, unsigned short type,
 	return raw_data;
 }
 EXPORT_SYMBOL_GPL(perf_trace_buf_prepare);
+<<<<<<< HEAD
+=======
+NOKPROBE_SYMBOL(perf_trace_buf_prepare);
+>>>>>>> v3.18
 
 #ifdef CONFIG_FUNCTION_TRACER
 static void
@@ -267,6 +332,13 @@ perf_ftrace_function_call(unsigned long ip, unsigned long parent_ip,
 	struct pt_regs regs;
 	int rctx;
 
+<<<<<<< HEAD
+=======
+	head = this_cpu_ptr(event_function.perf_events);
+	if (hlist_empty(head))
+		return;
+
+>>>>>>> v3.18
 #define ENTRY_SIZE (ALIGN(sizeof(struct ftrace_entry) + sizeof(u32), \
 		    sizeof(u64)) - sizeof(u32))
 
@@ -280,8 +352,11 @@ perf_ftrace_function_call(unsigned long ip, unsigned long parent_ip,
 
 	entry->ip = ip;
 	entry->parent_ip = parent_ip;
+<<<<<<< HEAD
 
 	head = this_cpu_ptr(event_function.perf_events);
+=======
+>>>>>>> v3.18
 	perf_trace_buf_submit(entry, ENTRY_SIZE, rctx, 0,
 			      1, &regs, head, NULL);
 

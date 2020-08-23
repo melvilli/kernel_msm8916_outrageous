@@ -22,7 +22,11 @@
 #include <linux/time.h>
 #include "nodelist.h"
 
+<<<<<<< HEAD
 static int jffs2_readdir (struct file *, void *, filldir_t);
+=======
+static int jffs2_readdir (struct file *, struct dir_context *);
+>>>>>>> v3.18
 
 static int jffs2_create (struct inode *,struct dentry *,umode_t,
 			 bool);
@@ -40,7 +44,11 @@ static int jffs2_rename (struct inode *, struct dentry *,
 const struct file_operations jffs2_dir_operations =
 {
 	.read =		generic_read_dir,
+<<<<<<< HEAD
 	.readdir =	jffs2_readdir,
+=======
+	.iterate =	jffs2_readdir,
+>>>>>>> v3.18
 	.unlocked_ioctl=jffs2_ioctl,
 	.fsync =	jffs2_fsync,
 	.llseek =	generic_file_llseek,
@@ -59,6 +67,10 @@ const struct inode_operations jffs2_dir_inode_operations =
 	.mknod =	jffs2_mknod,
 	.rename =	jffs2_rename,
 	.get_acl =	jffs2_get_acl,
+<<<<<<< HEAD
+=======
+	.set_acl =	jffs2_set_acl,
+>>>>>>> v3.18
 	.setattr =	jffs2_setattr,
 	.setxattr =	jffs2_setxattr,
 	.getxattr =	jffs2_getxattr,
@@ -114,6 +126,7 @@ static struct dentry *jffs2_lookup(struct inode *dir_i, struct dentry *target,
 /***********************************************************************/
 
 
+<<<<<<< HEAD
 static int jffs2_readdir(struct file *filp, void *dirent, filldir_t filldir)
 {
 	struct jffs2_inode_info *f;
@@ -151,11 +164,33 @@ static int jffs2_readdir(struct file *filp, void *dirent, filldir_t filldir)
 		if (curofs < offset) {
 			jffs2_dbg(2, "Skipping dirent: \"%s\", ino #%u, type %d, because curofs %ld < offset %ld\n",
 				  fd->name, fd->ino, fd->type, curofs, offset);
+=======
+static int jffs2_readdir(struct file *file, struct dir_context *ctx)
+{
+	struct inode *inode = file_inode(file);
+	struct jffs2_inode_info *f = JFFS2_INODE_INFO(inode);
+	struct jffs2_full_dirent *fd;
+	unsigned long curofs = 1;
+
+	jffs2_dbg(1, "jffs2_readdir() for dir_i #%lu\n", inode->i_ino);
+
+	if (!dir_emit_dots(file, ctx))
+		return 0;
+
+	mutex_lock(&f->sem);
+	for (fd = f->dents; fd; fd = fd->next) {
+		curofs++;
+		/* First loop: curofs = 2; pos = 2 */
+		if (curofs < ctx->pos) {
+			jffs2_dbg(2, "Skipping dirent: \"%s\", ino #%u, type %d, because curofs %ld < offset %ld\n",
+				  fd->name, fd->ino, fd->type, curofs, (unsigned long)ctx->pos);
+>>>>>>> v3.18
 			continue;
 		}
 		if (!fd->ino) {
 			jffs2_dbg(2, "Skipping deletion dirent \"%s\"\n",
 				  fd->name);
+<<<<<<< HEAD
 			offset++;
 			continue;
 		}
@@ -168,6 +203,18 @@ static int jffs2_readdir(struct file *filp, void *dirent, filldir_t filldir)
 	mutex_unlock(&f->sem);
  out:
 	filp->f_pos = offset;
+=======
+			ctx->pos++;
+			continue;
+		}
+		jffs2_dbg(2, "Dirent %ld: \"%s\", ino #%u, type %d\n",
+			  (unsigned long)ctx->pos, fd->name, fd->ino, fd->type);
+		if (!dir_emit(ctx, fd->name, strlen(fd->name), fd->ino, fd->type))
+			break;
+		ctx->pos++;
+	}
+	mutex_unlock(&f->sem);
+>>>>>>> v3.18
 	return 0;
 }
 

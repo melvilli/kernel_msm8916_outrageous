@@ -24,11 +24,19 @@
 #include <linux/interrupt.h>
 #include <linux/irq.h>
 #include <linux/module.h>
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+#include <linux/swab.h>
+>>>>>>> v3.18
 #include <linux/crc7.h>
 #include <linux/spi/spi.h>
 #include <linux/wl12xx.h>
 #include <linux/platform_device.h>
+<<<<<<< HEAD
 #include <linux/slab.h>
+=======
+>>>>>>> v3.18
 
 #include "wlcore.h"
 #include "wl12xx_80211.h"
@@ -72,10 +80,14 @@
  */
 #define SPI_AGGR_BUFFER_SIZE (4 * PAGE_SIZE)
 
+<<<<<<< HEAD
 /* Maximum number of SPI write chunks */
 #define WSPI_MAX_NUM_OF_CHUNKS \
 	((SPI_AGGR_BUFFER_SIZE / WSPI_MAX_CHUNK_SIZE) + 1)
 
+=======
+#define WSPI_MAX_NUM_OF_CHUNKS (SPI_AGGR_BUFFER_SIZE / WSPI_MAX_CHUNK_SIZE)
+>>>>>>> v3.18
 
 struct wl12xx_spi_glue {
 	struct device *dev;
@@ -113,18 +125,28 @@ static void wl12xx_spi_reset(struct device *child)
 static void wl12xx_spi_init(struct device *child)
 {
 	struct wl12xx_spi_glue *glue = dev_get_drvdata(child->parent);
+<<<<<<< HEAD
 	u8 crc[WSPI_INIT_CMD_CRC_LEN], *cmd;
 	struct spi_transfer t;
 	struct spi_message m;
 
 	cmd = kzalloc(WSPI_INIT_CMD_LEN, GFP_KERNEL);
+=======
+	struct spi_transfer t;
+	struct spi_message m;
+	u8 *cmd = kzalloc(WSPI_INIT_CMD_LEN, GFP_KERNEL);
+
+>>>>>>> v3.18
 	if (!cmd) {
 		dev_err(child->parent,
 			"could not allocate cmd for spi init\n");
 		return;
 	}
 
+<<<<<<< HEAD
 	memset(crc, 0, sizeof(crc));
+=======
+>>>>>>> v3.18
 	memset(&t, 0, sizeof(t));
 	spi_message_init(&m);
 
@@ -132,6 +154,7 @@ static void wl12xx_spi_init(struct device *child)
 	 * Set WSPI_INIT_COMMAND
 	 * the data is being send from the MSB to LSB
 	 */
+<<<<<<< HEAD
 	cmd[2] = 0xff;
 	cmd[3] = 0xff;
 	cmd[1] = WSPI_INIT_CMD_START | WSPI_INIT_CMD_TX;
@@ -156,6 +179,31 @@ static void wl12xx_spi_init(struct device *child)
 
 	cmd[4] |= crc7(0, crc, WSPI_INIT_CMD_CRC_LEN) << 1;
 	cmd[4] |= WSPI_INIT_CMD_END;
+=======
+	cmd[0] = 0xff;
+	cmd[1] = 0xff;
+	cmd[2] = WSPI_INIT_CMD_START | WSPI_INIT_CMD_TX;
+	cmd[3] = 0;
+	cmd[4] = 0;
+	cmd[5] = HW_ACCESS_WSPI_INIT_CMD_MASK << 3;
+	cmd[5] |= HW_ACCESS_WSPI_FIXED_BUSY_LEN & WSPI_INIT_CMD_FIXEDBUSY_LEN;
+
+	cmd[6] = WSPI_INIT_CMD_IOD | WSPI_INIT_CMD_IP | WSPI_INIT_CMD_CS
+		| WSPI_INIT_CMD_WSPI | WSPI_INIT_CMD_WS;
+
+	if (HW_ACCESS_WSPI_FIXED_BUSY_LEN == 0)
+		cmd[6] |= WSPI_INIT_CMD_DIS_FIXEDBUSY;
+	else
+		cmd[6] |= WSPI_INIT_CMD_EN_FIXEDBUSY;
+
+	cmd[7] = crc7_be(0, cmd+2, WSPI_INIT_CMD_CRC_LEN) | WSPI_INIT_CMD_END;
+	/*
+	 * The above is the logical order; it must actually be stored
+	 * in the buffer byte-swapped.
+	 */
+	__swab32s((u32 *)cmd);
+	__swab32s((u32 *)cmd+1);
+>>>>>>> v3.18
 
 	t.tx_buf = cmd;
 	t.len = WSPI_INIT_CMD_LEN;
@@ -214,7 +262,11 @@ static int __must_check wl12xx_spi_raw_read(struct device *child, int addr,
 	u32 chunk_len;
 
 	while (len > 0) {
+<<<<<<< HEAD
 		chunk_len = min((size_t)WSPI_MAX_CHUNK_SIZE, len);
+=======
+		chunk_len = min_t(size_t, WSPI_MAX_CHUNK_SIZE, len);
+>>>>>>> v3.18
 
 		cmd = &wl->buffer_cmd;
 		busy_buf = wl->buffer_busyword;
@@ -273,10 +325,16 @@ static int __must_check wl12xx_spi_raw_write(struct device *child, int addr,
 					     void *buf, size_t len, bool fixed)
 {
 	struct wl12xx_spi_glue *glue = dev_get_drvdata(child->parent);
+<<<<<<< HEAD
 	/* SPI write buffers - 2 for each chunk */
 	struct spi_transfer t[2 * WSPI_MAX_NUM_OF_CHUNKS];
 	struct spi_message m;
 	u32 commands[WSPI_MAX_NUM_OF_CHUNKS]; /* 1 command per chunk */
+=======
+	struct spi_transfer t[2 * (WSPI_MAX_NUM_OF_CHUNKS + 1)];
+	struct spi_message m;
+	u32 commands[WSPI_MAX_NUM_OF_CHUNKS];
+>>>>>>> v3.18
 	u32 *cmd;
 	u32 chunk_len;
 	int i;
@@ -289,7 +347,11 @@ static int __must_check wl12xx_spi_raw_write(struct device *child, int addr,
 	cmd = &commands[0];
 	i = 0;
 	while (len > 0) {
+<<<<<<< HEAD
 		chunk_len = min((size_t)WSPI_MAX_CHUNK_SIZE, len);
+=======
+		chunk_len = min_t(size_t, WSPI_MAX_CHUNK_SIZE, len);
+>>>>>>> v3.18
 
 		*cmd = 0;
 		*cmd |= WSPI_CMD_WRITE;
@@ -331,6 +393,7 @@ static struct wl1271_if_operations spi_ops = {
 static int wl1271_probe(struct spi_device *spi)
 {
 	struct wl12xx_spi_glue *glue;
+<<<<<<< HEAD
 	struct wlcore_platdev_data *pdev_data;
 	struct resource res[1];
 	int ret = -ENOMEM;
@@ -352,6 +415,26 @@ static int wl1271_probe(struct spi_device *spi)
 	if (!glue) {
 		dev_err(&spi->dev, "can't allocate glue\n");
 		goto out_free_pdev_data;
+=======
+	struct wlcore_platdev_data pdev_data;
+	struct resource res[1];
+	int ret;
+
+	memset(&pdev_data, 0x00, sizeof(pdev_data));
+
+	pdev_data.pdata = dev_get_platdata(&spi->dev);
+	if (!pdev_data.pdata) {
+		dev_err(&spi->dev, "no platform data\n");
+		return -ENODEV;
+	}
+
+	pdev_data.if_ops = &spi_ops;
+
+	glue = devm_kzalloc(&spi->dev, sizeof(*glue), GFP_KERNEL);
+	if (!glue) {
+		dev_err(&spi->dev, "can't allocate glue\n");
+		return -ENOMEM;
+>>>>>>> v3.18
 	}
 
 	glue->dev = &spi->dev;
@@ -365,14 +448,22 @@ static int wl1271_probe(struct spi_device *spi)
 	ret = spi_setup(spi);
 	if (ret < 0) {
 		dev_err(glue->dev, "spi_setup failed\n");
+<<<<<<< HEAD
 		goto out_free_glue;
+=======
+		return ret;
+>>>>>>> v3.18
 	}
 
 	glue->core = platform_device_alloc("wl12xx", PLATFORM_DEVID_AUTO);
 	if (!glue->core) {
 		dev_err(glue->dev, "can't allocate platform_device\n");
+<<<<<<< HEAD
 		ret = -ENOMEM;
 		goto out_free_glue;
+=======
+		return -ENOMEM;
+>>>>>>> v3.18
 	}
 
 	glue->core->dev.parent = &spi->dev;
@@ -389,8 +480,13 @@ static int wl1271_probe(struct spi_device *spi)
 		goto out_dev_put;
 	}
 
+<<<<<<< HEAD
 	ret = platform_device_add_data(glue->core, pdev_data,
 				       sizeof(*pdev_data));
+=======
+	ret = platform_device_add_data(glue->core, &pdev_data,
+				       sizeof(pdev_data));
+>>>>>>> v3.18
 	if (ret) {
 		dev_err(glue->dev, "can't add platform data\n");
 		goto out_dev_put;
@@ -406,6 +502,7 @@ static int wl1271_probe(struct spi_device *spi)
 
 out_dev_put:
 	platform_device_put(glue->core);
+<<<<<<< HEAD
 
 out_free_glue:
 	kfree(glue);
@@ -414,6 +511,8 @@ out_free_pdev_data:
 	kfree(pdev_data);
 
 out:
+=======
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -422,7 +521,10 @@ static int wl1271_remove(struct spi_device *spi)
 	struct wl12xx_spi_glue *glue = spi_get_drvdata(spi);
 
 	platform_device_unregister(glue->core);
+<<<<<<< HEAD
 	kfree(glue);
+=======
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -438,6 +540,7 @@ static struct spi_driver wl1271_spi_driver = {
 	.remove		= wl1271_remove,
 };
 
+<<<<<<< HEAD
 static int __init wl1271_init(void)
 {
 	return spi_register_driver(&wl1271_spi_driver);
@@ -451,6 +554,9 @@ static void __exit wl1271_exit(void)
 module_init(wl1271_init);
 module_exit(wl1271_exit);
 
+=======
+module_spi_driver(wl1271_spi_driver);
+>>>>>>> v3.18
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Luciano Coelho <coelho@ti.com>");
 MODULE_AUTHOR("Juuso Oikarinen <juuso.oikarinen@nokia.com>");

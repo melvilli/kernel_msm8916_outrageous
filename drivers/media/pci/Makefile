@@ -7,10 +7,17 @@ obj-y        +=	ttpci/		\
 		pluto2/		\
 		dm1105/		\
 		pt1/		\
+<<<<<<< HEAD
 		mantis/		\
 		ngene/		\
 		ddbridge/	\
 		b2c2/		\
+=======
+		pt3/		\
+		mantis/		\
+		ngene/		\
+		ddbridge/	\
+>>>>>>> v3.18
 		saa7146/
 
 obj-$(CONFIG_VIDEO_IVTV) += ivtv/
@@ -22,5 +29,12 @@ obj-$(CONFIG_VIDEO_CX88) += cx88/
 obj-$(CONFIG_VIDEO_BT848) += bt8xx/
 obj-$(CONFIG_VIDEO_SAA7134) += saa7134/
 obj-$(CONFIG_VIDEO_SAA7164) += saa7164/
+<<<<<<< HEAD
 obj-$(CONFIG_VIDEO_MEYE) += meye/
 obj-$(CONFIG_STA2X11_VIP) += sta2x11/
+=======
+obj-$(CONFIG_VIDEO_TW68) += tw68/
+obj-$(CONFIG_VIDEO_MEYE) += meye/
+obj-$(CONFIG_STA2X11_VIP) += sta2x11/
+obj-$(CONFIG_VIDEO_SOLO6X10) += solo6x10/
+>>>>>>> v3.18

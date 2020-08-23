@@ -142,12 +142,20 @@ loop:
 	mutex_unlock(&dst_gc_mutex);
 }
 
+<<<<<<< HEAD
 int dst_discard(struct sk_buff *skb)
+=======
+int dst_discard_sk(struct sock *sk, struct sk_buff *skb)
+>>>>>>> v3.18
 {
 	kfree_skb(skb);
 	return 0;
 }
+<<<<<<< HEAD
 EXPORT_SYMBOL(dst_discard);
+=======
+EXPORT_SYMBOL(dst_discard_sk);
+>>>>>>> v3.18
 
 const u32 dst_default_metrics[RTAX_MAX + 1] = {
 	/* This initializer is needed to force linker to place this variable
@@ -184,7 +192,11 @@ void *dst_alloc(struct dst_ops *ops, struct net_device *dev,
 	dst->xfrm = NULL;
 #endif
 	dst->input = dst_discard;
+<<<<<<< HEAD
 	dst->output = dst_discard;
+=======
+	dst->output = dst_discard_sk;
+>>>>>>> v3.18
 	dst->error = 0;
 	dst->obsolete = initial_obsolete;
 	dst->header_len = 0;
@@ -209,8 +221,15 @@ static void ___dst_free(struct dst_entry *dst)
 	/* The first case (dev==NULL) is required, when
 	   protocol module is unloaded.
 	 */
+<<<<<<< HEAD
 	if (dst->dev == NULL || !(dst->dev->flags&IFF_UP))
 		dst->input = dst->output = dst_discard;
+=======
+	if (dst->dev == NULL || !(dst->dev->flags&IFF_UP)) {
+		dst->input = dst_discard;
+		dst->output = dst_discard_sk;
+	}
+>>>>>>> v3.18
 	dst->obsolete = DST_OBSOLETE_DEAD;
 }
 
@@ -280,6 +299,7 @@ void dst_release(struct dst_entry *dst)
 {
 	if (dst) {
 		int newrefcnt;
+<<<<<<< HEAD
 		unsigned short nocache = dst->flags & DST_NOCACHE;
 
 		newrefcnt = atomic_dec_return(&dst->__refcnt);
@@ -287,6 +307,12 @@ void dst_release(struct dst_entry *dst)
 			net_warn_ratelimited("%s: dst:%p refcnt:%d\n",
 					     __func__, dst, newrefcnt);
 		if (!newrefcnt && unlikely(nocache))
+=======
+
+		newrefcnt = atomic_dec_return(&dst->__refcnt);
+		WARN_ON(newrefcnt < 0);
+		if (unlikely(dst->flags & DST_NOCACHE) && !newrefcnt)
+>>>>>>> v3.18
 			call_rcu(&dst->rcu_head, dst_destroy_rcu);
 	}
 }
@@ -370,7 +396,12 @@ static void dst_ifdown(struct dst_entry *dst, struct net_device *dev,
 		return;
 
 	if (!unregister) {
+<<<<<<< HEAD
 		dst->input = dst->output = dst_discard;
+=======
+		dst->input = dst_discard;
+		dst->output = dst_discard_sk;
+>>>>>>> v3.18
 	} else {
 		dst->dev = dev_net(dst->dev)->loopback_dev;
 		dev_hold(dst->dev);
@@ -381,7 +412,11 @@ static void dst_ifdown(struct dst_entry *dst, struct net_device *dev,
 static int dst_dev_event(struct notifier_block *this, unsigned long event,
 			 void *ptr)
 {
+<<<<<<< HEAD
 	struct net_device *dev = ptr;
+=======
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 	struct dst_entry *dst, *last = NULL;
 
 	switch (event) {

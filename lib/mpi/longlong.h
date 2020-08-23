@@ -151,6 +151,7 @@ do { \
 #endif /* __a29k__ */
 
 #if defined(__alpha) && W_TYPE_SIZE == 64
+<<<<<<< HEAD
 #define umul_ppmm(ph, pl, m0, m1) \
 do { \
 		UDItype __m0 = (m0), __m1 = (m1); \
@@ -160,6 +161,14 @@ do { \
 			"rI" (__m1)); \
 		(pl) = __m0 * __m1; \
 	} while (0)
+=======
+#define umul_ppmm(ph, pl, m0, m1)			\
+do {							\
+	UDItype __m0 = (m0), __m1 = (m1);		\
+	(ph) = __builtin_alpha_umulh(__m0, __m1);	\
+	(pl) = __m0 * __m1;                             \
+} while (0)
+>>>>>>> v3.18
 #define UMUL_TIME 46
 #ifndef LONGLONG_STANDALONE
 #define udiv_qrnnd(q, r, n1, n0, d) \
@@ -167,7 +176,11 @@ do { UDItype __r; \
 	(q) = __udiv_qrnnd(&__r, (n1), (n0), (d)); \
 	(r) = __r; \
 } while (0)
+<<<<<<< HEAD
 extern UDItype __udiv_qrnnd();
+=======
+extern UDItype __udiv_qrnnd(UDItype *, UDItype, UDItype, UDItype);
+>>>>>>> v3.18
 #define UDIV_TIME 220
 #endif /* LONGLONG_STANDALONE */
 #endif /* __alpha */

@@ -19,6 +19,10 @@
 #include <linux/spinlock_types.h>
 
 struct bgpio_pdata {
+<<<<<<< HEAD
+=======
+	const char *label;
+>>>>>>> v3.18
 	int base;
 	int ngpio;
 };

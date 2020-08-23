@@ -54,7 +54,11 @@ struct res_counter {
 	struct res_counter *parent;
 };
 
+<<<<<<< HEAD
 #define RESOURCE_MAX (unsigned long long)LLONG_MAX
+=======
+#define RES_COUNTER_MAX ULLONG_MAX
+>>>>>>> v3.18
 
 /**
  * Helpers to interact with userspace
@@ -104,15 +108,22 @@ void res_counter_init(struct res_counter *counter, struct res_counter *parent);
  *       units, e.g. numbers, bytes, Kbytes, etc
  *
  * returns 0 on success and <0 if the counter->usage will exceed the
+<<<<<<< HEAD
  * counter->limit _locked call expects the counter->lock to be taken
+=======
+ * counter->limit
+>>>>>>> v3.18
  *
  * charge_nofail works the same, except that it charges the resource
  * counter unconditionally, and returns < 0 if the after the current
  * charge we are over limit.
  */
 
+<<<<<<< HEAD
 int __must_check res_counter_charge_locked(struct res_counter *counter,
 					   unsigned long val, bool force);
+=======
+>>>>>>> v3.18
 int __must_check res_counter_charge(struct res_counter *counter,
 		unsigned long val, struct res_counter **limit_fail_at);
 int res_counter_charge_nofail(struct res_counter *counter,
@@ -125,12 +136,18 @@ int res_counter_charge_nofail(struct res_counter *counter,
  * @val: the amount of the resource
  *
  * these calls check for usage underflow and show a warning on the console
+<<<<<<< HEAD
  * _locked call expects the counter->lock to be taken
+=======
+>>>>>>> v3.18
  *
  * returns the total charges still present in @counter.
  */
 
+<<<<<<< HEAD
 u64 res_counter_uncharge_locked(struct res_counter *counter, unsigned long val);
+=======
+>>>>>>> v3.18
 u64 res_counter_uncharge(struct res_counter *counter, unsigned long val);
 
 u64 res_counter_uncharge_until(struct res_counter *counter,

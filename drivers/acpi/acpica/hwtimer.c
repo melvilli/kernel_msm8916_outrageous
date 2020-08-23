@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -41,7 +45,12 @@
  * POSSIBILITY OF SUCH DAMAGES.
  */
 
+<<<<<<< HEAD
 #include <linux/export.h>
+=======
+#define EXPORT_ACPI_INTERFACES
+
+>>>>>>> v3.18
 #include <acpi/acpi.h>
 #include "accommon.h"
 
@@ -100,8 +109,18 @@ acpi_status acpi_get_timer(u32 * ticks)
 		return_ACPI_STATUS(AE_BAD_PARAMETER);
 	}
 
+<<<<<<< HEAD
 	status = acpi_hw_read(ticks, &acpi_gbl_FADT.xpm_timer_block);
 
+=======
+	/* ACPI 5.0A: PM Timer is optional */
+
+	if (!acpi_gbl_FADT.xpm_timer_block.address) {
+		return_ACPI_STATUS(AE_SUPPORT);
+	}
+
+	status = acpi_hw_read(ticks, &acpi_gbl_FADT.xpm_timer_block);
+>>>>>>> v3.18
 	return_ACPI_STATUS(status);
 }
 
@@ -148,6 +167,15 @@ acpi_get_timer_duration(u32 start_ticks, u32 end_ticks, u32 * time_elapsed)
 		return_ACPI_STATUS(AE_BAD_PARAMETER);
 	}
 
+<<<<<<< HEAD
+=======
+	/* ACPI 5.0A: PM Timer is optional */
+
+	if (!acpi_gbl_FADT.xpm_timer_block.address) {
+		return_ACPI_STATUS(AE_SUPPORT);
+	}
+
+>>>>>>> v3.18
 	/*
 	 * Compute Tick Delta:
 	 * Handle (max one) timer rollovers on 24-bit versus 32-bit timers.

@@ -14,19 +14,32 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+<<<<<<< HEAD
 #include <linux/linkage.h>
 #include <linux/init.h>
 
 #include <asm/cache.h>
 #include <asm/asm-offsets.h>
 #include <asm/hardware/cache-l2x0.h>
+=======
+#include <linux/init.h>
+#include <linux/linkage.h>
+
+#include <soc/tegra/fuse.h>
+
+#include <asm/asm-offsets.h>
+#include <asm/cache.h>
+>>>>>>> v3.18
 
 #include "flowctrl.h"
 #include "iomap.h"
 #include "reset.h"
 #include "sleep.h"
 
+<<<<<<< HEAD
 #define APB_MISC_GP_HIDREV	0x804
+=======
+>>>>>>> v3.18
 #define PMC_SCRATCH41	0x140
 
 #define RESET_DATA(x)	((TEGRA_RESET_##x)*4)
@@ -38,15 +51,26 @@
  *	  CPU boot vector when restarting the a CPU following
  *	  an LP2 transition. Also branched to by LP0 and LP1 resume after
  *	  re-enabling sdram.
+<<<<<<< HEAD
  */
 ENTRY(tegra_resume)
 	bl	v7_invalidate_l1
+=======
+ *
+ *	r6: SoC ID
+ *	r8: CPU part number
+ */
+ENTRY(tegra_resume)
+	check_cpu_part_num 0xc09, r8, r9
+	bleq	v7_invalidate_l1
+>>>>>>> v3.18
 
 	cpu_id	r0
 	cmp	r0, #0				@ CPU0?
  THUMB(	it	ne )
 	bne	cpu_resume			@ no
 
+<<<<<<< HEAD
 #ifdef CONFIG_ARCH_TEGRA_3x_SOC
 	/* Are we on Tegra20? */
 	mov32	r6, TEGRA_APB_MISC_BASE
@@ -66,6 +90,27 @@ ENTRY(tegra_resume)
 1:
 #endif
 
+=======
+	/* Are we on Tegra20? */
+	cmp	r6, #TEGRA20
+	beq	1f				@ Yes
+	/* Clear the flow controller flags for this CPU. */
+	cpu_to_csr_reg r1, r0
+	mov32	r2, TEGRA_FLOW_CTRL_BASE
+	ldr	r1, [r2, r1]
+	/* Clear event & intr flag */
+	orr	r1, r1, \
+		#FLOW_CTRL_CSR_INTR_FLAG | FLOW_CTRL_CSR_EVENT_FLAG
+	movw	r0, #0x3FFD	@ enable, cluster_switch, immed, bitmaps
+				@ & ext flags for CPU power mgnt
+	bic	r1, r1, r0
+	str	r1, [r2]
+1:
+
+	mov32	r9, 0xc09
+	cmp	r8, r9
+	bne	end_ca9_scu_l2_resume
+>>>>>>> v3.18
 #ifdef CONFIG_HAVE_ARM_SCU
 	/* enable SCU */
 	mov32	r0, TEGRA_ARM_PERIF_BASE
@@ -74,19 +119,33 @@ ENTRY(tegra_resume)
 	str	r1, [r0]
 #endif
 
+<<<<<<< HEAD
 	/* L2 cache resume & re-enable */
 	l2_cache_resume r0, r1, r2, l2x0_saved_regs_addr
+=======
+#ifdef CONFIG_CACHE_L2X0
+	/* L2 cache resume & re-enable */
+	bl	l2c310_early_resume
+#endif
+end_ca9_scu_l2_resume:
+	mov32	r9, 0xc0f
+	cmp	r8, r9
+	bleq	tegra_init_l2_for_a15
+>>>>>>> v3.18
 
 	b	cpu_resume
 ENDPROC(tegra_resume)
 #endif
 
+<<<<<<< HEAD
 #ifdef CONFIG_CACHE_L2X0
 	.globl	l2x0_saved_regs_addr
 l2x0_saved_regs_addr:
 	.long	0
 #endif
 
+=======
+>>>>>>> v3.18
 	.align L1_CACHE_SHIFT
 ENTRY(__tegra_cpu_reset_handler_start)
 
@@ -98,7 +157,11 @@ ENTRY(__tegra_cpu_reset_handler_start)
  * Register usage within the reset handler:
  *
  *      Others: scratch
+<<<<<<< HEAD
  *      R6  = SoC ID << 8
+=======
+ *      R6  = SoC ID
+>>>>>>> v3.18
  *      R7  = CPU present (to the OS) mask
  *      R8  = CPU in LP1 state mask
  *      R9  = CPU in LP2 state mask
@@ -115,12 +178,19 @@ ENTRY(__tegra_cpu_reset_handler)
 
 	cpsid	aif, 0x13			@ SVC mode, interrupts disabled
 
+<<<<<<< HEAD
 	mov32	r6, TEGRA_APB_MISC_BASE
 	ldr	r6, [r6, #APB_MISC_GP_HIDREV]
 	and	r6, r6, #0xff00
 #ifdef CONFIG_ARCH_TEGRA_2x_SOC
 t20_check:
 	cmp	r6, #(0x20 << 8)
+=======
+	tegra_get_soc_id TEGRA_APB_MISC_BASE, r6
+#ifdef CONFIG_ARCH_TEGRA_2x_SOC
+t20_check:
+	cmp	r6, #TEGRA20
+>>>>>>> v3.18
 	bne	after_t20_check
 t20_errata:
 	# Tegra20 is a Cortex-A9 r1p1
@@ -136,7 +206,11 @@ after_t20_check:
 #endif
 #ifdef CONFIG_ARCH_TEGRA_3x_SOC
 t30_check:
+<<<<<<< HEAD
 	cmp	r6, #(0x30 << 8)
+=======
+	cmp	r6, #TEGRA30
+>>>>>>> v3.18
 	bne	after_t30_check
 t30_errata:
 	# Tegra30 is a Cortex-A9 r2p9
@@ -163,7 +237,11 @@ after_errata:
 
 #ifdef CONFIG_ARCH_TEGRA_2x_SOC
 	/* Are we on Tegra20? */
+<<<<<<< HEAD
 	cmp	r6, #(0x20 << 8)
+=======
+	cmp	r6, #TEGRA20
+>>>>>>> v3.18
 	bne	1f
 	/* If not CPU0, don't let CPU0 reset CPU1 now that CPU1 is coming up. */
 	mov32	r5, TEGRA_PMC_BASE
@@ -173,6 +251,22 @@ after_errata:
 1:
 #endif
 
+<<<<<<< HEAD
+=======
+	/* Waking up from LP1? */
+	ldr	r8, [r12, #RESET_DATA(MASK_LP1)]
+	tst	r8, r11				@ if in_lp1
+	beq	__is_not_lp1
+	cmp	r10, #0
+	bne	__die				@ only CPU0 can be here
+	ldr	lr, [r12, #RESET_DATA(STARTUP_LP1)]
+	cmp	lr, #0
+	bleq	__die				@ no LP1 startup handler
+ THUMB(	add	lr, lr, #1 )			@ switch to Thumb mode
+	bx	lr
+__is_not_lp1:
+
+>>>>>>> v3.18
 	/* Waking up from LP2? */
 	ldr	r9, [r12, #RESET_DATA(MASK_LP2)]
 	tst	r9, r11				@ if in_lp2
@@ -186,11 +280,22 @@ __is_not_lp2:
 
 #ifdef CONFIG_SMP
 	/*
+<<<<<<< HEAD
 	 * Can only be secondary boot (initial or hotplug) but CPU 0
 	 * cannot be here.
 	 */
 	cmp	r10, #0
 	bleq	__die				@ CPU0 cannot be here
+=======
+	 * Can only be secondary boot (initial or hotplug)
+	 * CPU0 can't be here for Tegra20/30
+	 */
+	cmp	r6, #TEGRA114
+	beq	__no_cpu0_chk
+	cmp	r10, #0
+	bleq	__die				@ CPU0 cannot be here
+__no_cpu0_chk:
+>>>>>>> v3.18
 	ldr	lr, [r12, #RESET_DATA(STARTUP_SECONDARY)]
 	cmp	lr, #0
 	bleq	__die				@ no secondary startup handler
@@ -210,10 +315,14 @@ __die:
 	mov32	r7, TEGRA_CLK_RESET_BASE
 
 	/* Are we on Tegra20? */
+<<<<<<< HEAD
 	mov32	r6, TEGRA_APB_MISC_BASE
 	ldr	r0, [r6, #APB_MISC_GP_HIDREV]
 	and	r0, r0, #0xff00
 	cmp	r0, #(0x20 << 8)
+=======
+	cmp	r6, #TEGRA20
+>>>>>>> v3.18
 	bne	1f
 
 #ifdef CONFIG_ARCH_TEGRA_2x_SOC

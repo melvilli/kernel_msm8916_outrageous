@@ -149,7 +149,11 @@ static int codel_change(struct Qdisc *sch, struct nlattr *opt)
 	while (sch->q.qlen > sch->limit) {
 		struct sk_buff *skb = __skb_dequeue(&sch->q);
 
+<<<<<<< HEAD
 		sch->qstats.backlog -= qdisc_pkt_len(skb);
+=======
+		qdisc_qstats_backlog_dec(sch, skb);
+>>>>>>> v3.18
 		qdisc_drop(skb, sch);
 	}
 	qdisc_tree_decrease_qlen(sch, qlen - sch->q.qlen);

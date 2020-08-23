@@ -61,12 +61,20 @@ void rds_tcp_state_change(struct sock *sk);
 /* tcp_listen.c */
 int rds_tcp_listen_init(void);
 void rds_tcp_listen_stop(void);
+<<<<<<< HEAD
 void rds_tcp_listen_data_ready(struct sock *sk, int bytes);
+=======
+void rds_tcp_listen_data_ready(struct sock *sk);
+>>>>>>> v3.18
 
 /* tcp_recv.c */
 int rds_tcp_recv_init(void);
 void rds_tcp_recv_exit(void);
+<<<<<<< HEAD
 void rds_tcp_data_ready(struct sock *sk, int bytes);
+=======
+void rds_tcp_data_ready(struct sock *sk);
+>>>>>>> v3.18
 int rds_tcp_recv(struct rds_connection *conn);
 void rds_tcp_inc_free(struct rds_incoming *inc);
 int rds_tcp_inc_copy_to_user(struct rds_incoming *inc, struct iovec *iov,

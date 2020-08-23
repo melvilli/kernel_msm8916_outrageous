@@ -70,6 +70,14 @@ enum rdma_port_space {
 	RDMA_PS_UDP   = 0x0111,
 };
 
+<<<<<<< HEAD
+=======
+#define RDMA_IB_IP_PS_MASK   0xFFFFFFFFFFFF0000ULL
+#define RDMA_IB_IP_PS_TCP    0x0000000001060000ULL
+#define RDMA_IB_IP_PS_UDP    0x0000000001110000ULL
+#define RDMA_IB_IP_PS_IB     0x00000000013F0000ULL
+
+>>>>>>> v3.18
 struct rdma_addr {
 	struct sockaddr_storage src_addr;
 	struct sockaddr_storage dst_addr;
@@ -93,6 +101,10 @@ struct rdma_conn_param {
 	/* Fields below ignored if a QP is created on the rdma_cm_id. */
 	u8 srq;
 	u32 qp_num;
+<<<<<<< HEAD
+=======
+	u32 qkey;
+>>>>>>> v3.18
 };
 
 struct rdma_ud_param {
@@ -367,4 +379,14 @@ int rdma_set_reuseaddr(struct rdma_cm_id *id, int reuse);
  */
 int rdma_set_afonly(struct rdma_cm_id *id, int afonly);
 
+<<<<<<< HEAD
+=======
+ /**
+ * rdma_get_service_id - Return the IB service ID for a specified address.
+ * @id: Communication identifier associated with the address.
+ * @addr: Address for the service ID.
+ */
+__be64 rdma_get_service_id(struct rdma_cm_id *id, struct sockaddr *addr);
+
+>>>>>>> v3.18
 #endif /* RDMA_CM_H */

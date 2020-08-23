@@ -68,17 +68,26 @@
 static bool debug;
 static bool check_pselecd;
 
+<<<<<<< HEAD
 unsigned int irq = LIRC_IRQ;
 unsigned int io = LIRC_PORT;
 #ifdef LIRC_TIMER
 unsigned int timer;
 unsigned int default_timer = LIRC_TIMER;
+=======
+static unsigned int irq = LIRC_IRQ;
+static unsigned int io = LIRC_PORT;
+#ifdef LIRC_TIMER
+static unsigned int timer;
+static unsigned int default_timer = LIRC_TIMER;
+>>>>>>> v3.18
 #endif
 
 #define RBUF_SIZE (256) /* this must be a power of 2 larger than 1 */
 
 static int rbuf[RBUF_SIZE];
 
+<<<<<<< HEAD
 DECLARE_WAIT_QUEUE_HEAD(lirc_wait);
 
 unsigned int rptr;
@@ -91,6 +100,20 @@ struct pardevice *ppdevice;
 int is_claimed;
 
 unsigned int tx_mask = 1;
+=======
+static DECLARE_WAIT_QUEUE_HEAD(lirc_wait);
+
+static unsigned int rptr;
+static unsigned int wptr;
+static unsigned int lost_irqs;
+static int is_open;
+
+static struct parport *pport;
+static struct pardevice *ppdevice;
+static int is_claimed;
+
+static unsigned int tx_mask = 1;
+>>>>>>> v3.18
 
 /*** Internal Functions ***/
 
@@ -169,6 +192,7 @@ static unsigned int init_lirc_timer(void)
 			newtimer = (1000000*count)/timeelapsed;
 			pr_info("%u Hz timer detected\n", newtimer);
 			return newtimer;
+<<<<<<< HEAD
 		}  else {
 			newtimer = (1000000*count)/timeelapsed;
 			if (abs(newtimer - default_timer) > default_timer/10) {
@@ -186,6 +210,23 @@ static unsigned int init_lirc_timer(void)
 		pr_notice("no timer detected\n");
 		return 0;
 	}
+=======
+		}
+		newtimer = (1000000*count)/timeelapsed;
+		if (abs(newtimer - default_timer) > default_timer/10) {
+			/* bad timer */
+			pr_notice("bad timer: %u Hz\n", newtimer);
+			pr_notice("using default timer: %u Hz\n",
+				  default_timer);
+			return default_timer;
+		}
+		pr_info("%u Hz timer detected\n", newtimer);
+		return newtimer; /* use detected value */
+	}
+
+	pr_notice("no timer detected\n");
+	return 0;
+>>>>>>> v3.18
 }
 
 static int lirc_claim(void)
@@ -220,7 +261,11 @@ static void rbuf_write(int signal)
 	wptr = nwptr;
 }
 
+<<<<<<< HEAD
 static void irq_handler(void *blah)
+=======
+static void lirc_lirc_irq_handler(void *blah)
+>>>>>>> v3.18
 {
 	struct timeval tv;
 	static struct timeval lasttv;
@@ -324,7 +369,12 @@ static loff_t lirc_lseek(struct file *filep, loff_t offset, int orig)
 	return -ESPIPE;
 }
 
+<<<<<<< HEAD
 static ssize_t lirc_read(struct file *filep, char *buf, size_t n, loff_t *ppos)
+=======
+static ssize_t lirc_read(struct file *filep, char __user *buf, size_t n,
+			 loff_t *ppos)
+>>>>>>> v3.18
 {
 	int result = 0;
 	int count = 0;
@@ -362,7 +412,11 @@ static ssize_t lirc_read(struct file *filep, char *buf, size_t n, loff_t *ppos)
 	return count ? count : result;
 }
 
+<<<<<<< HEAD
 static ssize_t lirc_write(struct file *filep, const char *buf, size_t n,
+=======
+static ssize_t lirc_write(struct file *filep, const char __user *buf, size_t n,
+>>>>>>> v3.18
 			  loff_t *ppos)
 {
 	int count;
@@ -463,6 +517,7 @@ static unsigned int lirc_poll(struct file *file, poll_table *wait)
 static long lirc_ioctl(struct file *filep, unsigned int cmd, unsigned long arg)
 {
 	int result;
+<<<<<<< HEAD
 	__u32 features = LIRC_CAN_SET_TRANSMITTER_MASK |
 			 LIRC_CAN_SEND_PULSE | LIRC_CAN_REC_MODE2;
 	__u32 mode;
@@ -471,35 +526,66 @@ static long lirc_ioctl(struct file *filep, unsigned int cmd, unsigned long arg)
 	switch (cmd) {
 	case LIRC_GET_FEATURES:
 		result = put_user(features, (__u32 *) arg);
+=======
+	u32 __user *uptr = (u32 __user *)arg;
+	u32 features = LIRC_CAN_SET_TRANSMITTER_MASK |
+		       LIRC_CAN_SEND_PULSE | LIRC_CAN_REC_MODE2;
+	u32 mode;
+	u32 value;
+
+	switch (cmd) {
+	case LIRC_GET_FEATURES:
+		result = put_user(features, uptr);
+>>>>>>> v3.18
 		if (result)
 			return result;
 		break;
 	case LIRC_GET_SEND_MODE:
+<<<<<<< HEAD
 		result = put_user(LIRC_MODE_PULSE, (__u32 *) arg);
+=======
+		result = put_user(LIRC_MODE_PULSE, uptr);
+>>>>>>> v3.18
 		if (result)
 			return result;
 		break;
 	case LIRC_GET_REC_MODE:
+<<<<<<< HEAD
 		result = put_user(LIRC_MODE_MODE2, (__u32 *) arg);
+=======
+		result = put_user(LIRC_MODE_MODE2, uptr);
+>>>>>>> v3.18
 		if (result)
 			return result;
 		break;
 	case LIRC_SET_SEND_MODE:
+<<<<<<< HEAD
 		result = get_user(mode, (__u32 *) arg);
+=======
+		result = get_user(mode, uptr);
+>>>>>>> v3.18
 		if (result)
 			return result;
 		if (mode != LIRC_MODE_PULSE)
 			return -EINVAL;
 		break;
 	case LIRC_SET_REC_MODE:
+<<<<<<< HEAD
 		result = get_user(mode, (__u32 *) arg);
+=======
+		result = get_user(mode, uptr);
+>>>>>>> v3.18
 		if (result)
 			return result;
 		if (mode != LIRC_MODE_MODE2)
 			return -ENOSYS;
 		break;
 	case LIRC_SET_TRANSMITTER_MASK:
+<<<<<<< HEAD
 		result = get_user(value, (__u32 *) arg);
+=======
+		result = get_user(value, uptr);
+>>>>>>> v3.18
 		if (result)
 			return result;
 		if ((value & LIRC_PARALLEL_TRANSMITTER_MASK) != value)
@@ -659,7 +745,12 @@ static int __init lirc_parallel_init(void)
 		goto exit_device_put;
 	}
 	ppdevice = parport_register_device(pport, LIRC_DRIVER_NAME,
+<<<<<<< HEAD
 					   pf, kf, irq_handler, 0, NULL);
+=======
+					   pf, kf, lirc_lirc_irq_handler, 0,
+					   NULL);
+>>>>>>> v3.18
 	parport_put_port(pport);
 	if (ppdevice == NULL) {
 		pr_notice("parport_register_device() failed\n");

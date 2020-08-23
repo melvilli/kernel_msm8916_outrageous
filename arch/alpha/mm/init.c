@@ -276,6 +276,7 @@ srm_paging_stop (void)
 }
 #endif
 
+<<<<<<< HEAD
 #ifndef CONFIG_DISCONTIGMEM
 static void __init
 printk_memory_info(void)
@@ -315,17 +316,35 @@ mem_init(void)
 	printk_memory_info();
 }
 #endif /* CONFIG_DISCONTIGMEM */
+=======
+void __init
+mem_init(void)
+{
+	set_max_mapnr(max_low_pfn);
+	high_memory = (void *) __va(max_low_pfn * PAGE_SIZE);
+	free_all_bootmem();
+	mem_init_print_info(NULL);
+}
+>>>>>>> v3.18
 
 void
 free_initmem(void)
 {
+<<<<<<< HEAD
 	free_initmem_default(0);
+=======
+	free_initmem_default(-1);
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_BLK_DEV_INITRD
 void
 free_initrd_mem(unsigned long start, unsigned long end)
 {
+<<<<<<< HEAD
 	free_reserved_area(start, end, 0, "initrd");
+=======
+	free_reserved_area((void *)start, (void *)end, -1, "initrd");
+>>>>>>> v3.18
 }
 #endif

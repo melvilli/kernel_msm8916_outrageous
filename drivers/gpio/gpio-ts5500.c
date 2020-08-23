@@ -322,7 +322,11 @@ static void ts5500_disable_irq(struct ts5500_priv *priv)
 static int ts5500_dio_probe(struct platform_device *pdev)
 {
 	enum ts5500_blocks block = platform_get_device_id(pdev)->driver_data;
+<<<<<<< HEAD
 	struct ts5500_dio_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct ts5500_dio_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	struct device *dev = &pdev->dev;
 	const char *name = dev_name(dev);
 	struct ts5500_priv *priv;
@@ -427,8 +431,12 @@ static int ts5500_dio_probe(struct platform_device *pdev)
 
 	return 0;
 cleanup:
+<<<<<<< HEAD
 	if (gpiochip_remove(&priv->gpio_chip))
 		dev_err(dev, "failed to remove gpio chip\n");
+=======
+	gpiochip_remove(&priv->gpio_chip);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -437,7 +445,12 @@ static int ts5500_dio_remove(struct platform_device *pdev)
 	struct ts5500_priv *priv = platform_get_drvdata(pdev);
 
 	ts5500_disable_irq(priv);
+<<<<<<< HEAD
 	return gpiochip_remove(&priv->gpio_chip);
+=======
+	gpiochip_remove(&priv->gpio_chip);
+	return 0;
+>>>>>>> v3.18
 }
 
 static struct platform_device_id ts5500_dio_ids[] = {

@@ -28,7 +28,11 @@
 
 static int smiapp_write_8(struct smiapp_sensor *sensor, u16 reg, u8 val)
 {
+<<<<<<< HEAD
 	return smiapp_write(sensor, (SMIA_REG_8BIT << 16) | reg, val);
+=======
+	return smiapp_write(sensor, SMIAPP_REG_MK_U8(reg), val);
+>>>>>>> v3.18
 }
 
 static int smiapp_write_8s(struct smiapp_sensor *sensor,
@@ -61,6 +65,7 @@ void smiapp_replace_limit(struct smiapp_sensor *sensor,
 	sensor->limits[limit] = val;
 }
 
+<<<<<<< HEAD
 bool smiapp_quirk_reg(struct smiapp_sensor *sensor,
 		      u32 reg, u32 *val)
 {
@@ -107,6 +112,8 @@ bool smiapp_quirk_reg(struct smiapp_sensor *sensor,
 	return false;
 }
 
+=======
+>>>>>>> v3.18
 static int jt8ew9_limits(struct smiapp_sensor *sensor)
 {
 	if (sensor->minfo.revision_number_major < 0x03)
@@ -266,12 +273,24 @@ static int jt8ev1_post_streamoff(struct smiapp_sensor *sensor)
 	return smiapp_write_8(sensor, 0x3328, 0x80);
 }
 
+<<<<<<< HEAD
+=======
+static unsigned long jt8ev1_pll_flags(struct smiapp_sensor *sensor)
+{
+	return SMIAPP_PLL_FLAG_OP_PIX_CLOCK_PER_LANE;
+}
+
+>>>>>>> v3.18
 const struct smiapp_quirk smiapp_jt8ev1_quirk = {
 	.limits = jt8ev1_limits,
 	.post_poweron = jt8ev1_post_poweron,
 	.pre_streamon = jt8ev1_pre_streamon,
 	.post_streamoff = jt8ev1_post_streamoff,
+<<<<<<< HEAD
 	.flags = SMIAPP_QUIRK_FLAG_OP_PIX_CLOCK_PER_LANE,
+=======
+	.pll_flags = jt8ev1_pll_flags,
+>>>>>>> v3.18
 };
 
 static int tcm8500md_limits(struct smiapp_sensor *sensor)

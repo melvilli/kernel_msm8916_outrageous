@@ -7,6 +7,7 @@
 #include <linux/timex.h>
 #include <linux/alarmtimer.h>
 
+<<<<<<< HEAD
 union cpu_time_count {
 	cputime_t cpu;
 	unsigned long long sched;
@@ -15,6 +16,22 @@ union cpu_time_count {
 struct cpu_timer_list {
 	struct list_head entry;
 	union cpu_time_count expires, incr;
+=======
+
+static inline unsigned long long cputime_to_expires(cputime_t expires)
+{
+	return (__force unsigned long long)expires;
+}
+
+static inline cputime_t expires_to_cputime(unsigned long long expires)
+{
+	return (__force cputime_t)expires;
+}
+
+struct cpu_timer_list {
+	struct list_head entry;
+	unsigned long long expires, incr;
+>>>>>>> v3.18
 	struct task_struct *task;
 	int firing;
 };

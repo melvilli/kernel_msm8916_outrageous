@@ -1,4 +1,5 @@
 /*
+<<<<<<< HEAD
  * vdso_test.c: Sample code to test parse_vdso.c on x86_64
  * Copyright (c) 2011 Andy Lutomirski
  * Subject to the GNU General Public License, version 2
@@ -14,11 +15,29 @@
 #include <sys/time.h>
 #include <unistd.h>
 #include <stdint.h>
+=======
+ * vdso_test.c: Sample code to test parse_vdso.c
+ * Copyright (c) 2014 Andy Lutomirski
+ * Subject to the GNU General Public License, version 2
+ *
+ * Compile with:
+ * gcc -std=gnu99 vdso_test.c parse_vdso.c
+ *
+ * Tested on x86, 32-bit and 64-bit.  It may work on other architectures, too.
+ */
+
+#include <stdint.h>
+#include <elf.h>
+#include <stdio.h>
+#include <sys/auxv.h>
+#include <sys/time.h>
+>>>>>>> v3.18
 
 extern void *vdso_sym(const char *version, const char *name);
 extern void vdso_init_from_sysinfo_ehdr(uintptr_t base);
 extern void vdso_init_from_auxv(void *auxv);
 
+<<<<<<< HEAD
 /* We need a libc functions... */
 int strcmp(const char *a, const char *b)
 {
@@ -74,18 +93,37 @@ __attribute__((externally_visible)) void c_main(void **stack)
 
 	/* Now we're pointing at auxv.  Initialize the vDSO parser. */
 	vdso_init_from_auxv((void *)stack);
+=======
+int main(int argc, char **argv)
+{
+	unsigned long sysinfo_ehdr = getauxval(AT_SYSINFO_EHDR);
+	if (!sysinfo_ehdr) {
+		printf("AT_SYSINFO_EHDR is not present!\n");
+		return 0;
+	}
+
+	vdso_init_from_sysinfo_ehdr(getauxval(AT_SYSINFO_EHDR));
+>>>>>>> v3.18
 
 	/* Find gettimeofday. */
 	typedef long (*gtod_t)(struct timeval *tv, struct timezone *tz);
 	gtod_t gtod = (gtod_t)vdso_sym("LINUX_2.6", "__vdso_gettimeofday");
 
+<<<<<<< HEAD
 	if (!gtod)
 		linux_exit(1);
+=======
+	if (!gtod) {
+		printf("Could not find __vdso_gettimeofday\n");
+		return 1;
+	}
+>>>>>>> v3.18
 
 	struct timeval tv;
 	long ret = gtod(&tv, 0);
 
 	if (ret == 0) {
+<<<<<<< HEAD
 		char buf[] = "The time is                     .000000\n";
 		to_base10(buf + 31, tv.tv_sec);
 		to_base10(buf + 38, tv.tv_usec);
@@ -109,3 +147,13 @@ asm (
         "mov %rsp,%rdi\n\t"
         "jmp c_main"
 	);
+=======
+		printf("The time is %lld.%06lld\n",
+		       (long long)tv.tv_sec, (long long)tv.tv_usec);
+	} else {
+		printf("__vdso_gettimeofday failed\n");
+	}
+
+	return 0;
+}
+>>>>>>> v3.18

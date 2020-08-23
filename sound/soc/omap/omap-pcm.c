@@ -31,6 +31,10 @@
 #include <sound/pcm_params.h>
 #include <sound/dmaengine_pcm.h>
 #include <sound/soc.h>
+<<<<<<< HEAD
+=======
+#include <sound/omap-pcm.h>
+>>>>>>> v3.18
 
 #ifdef CONFIG_ARCH_OMAP1
 #define pcm_omap1510()	cpu_is_omap1510()
@@ -45,8 +49,11 @@ static const struct snd_pcm_hardware omap_pcm_hardware = {
 				  SNDRV_PCM_INFO_PAUSE |
 				  SNDRV_PCM_INFO_RESUME |
 				  SNDRV_PCM_INFO_NO_PERIOD_WAKEUP,
+<<<<<<< HEAD
 	.formats		= SNDRV_PCM_FMTBIT_S16_LE |
 				  SNDRV_PCM_FMTBIT_S32_LE,
+=======
+>>>>>>> v3.18
 	.period_bytes_min	= 32,
 	.period_bytes_max	= 64 * 1024,
 	.periods_min		= 2,
@@ -113,14 +120,34 @@ static int omap_pcm_open(struct snd_pcm_substream *substream)
 {
 	struct snd_soc_pcm_runtime *rtd = substream->private_data;
 	struct snd_dmaengine_dai_dma_data *dma_data;
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 
 	snd_soc_set_runtime_hwparams(substream, &omap_pcm_hardware);
 
 	dma_data = snd_soc_dai_get_dma_data(rtd->cpu_dai, substream);
 
+<<<<<<< HEAD
 	return snd_dmaengine_pcm_open_request_chan(substream,
 						   omap_dma_filter_fn,
 						   dma_data->filter_data);
+=======
+	/* DT boot: filter_data is the DMA name */
+	if (rtd->cpu_dai->dev->of_node) {
+		struct dma_chan *chan;
+
+		chan = dma_request_slave_channel(rtd->cpu_dai->dev,
+						 dma_data->filter_data);
+		ret = snd_dmaengine_pcm_open(substream, chan);
+	} else {
+		ret = snd_dmaengine_pcm_open_request_chan(substream,
+							  omap_dma_filter_fn,
+							  dma_data->filter_data);
+	}
+	return ret;
+>>>>>>> v3.18
 }
 
 static int omap_pcm_mmap(struct snd_pcm_substream *substream,
@@ -145,8 +172,11 @@ static struct snd_pcm_ops omap_pcm_ops = {
 	.mmap		= omap_pcm_mmap,
 };
 
+<<<<<<< HEAD
 static u64 omap_pcm_dmamask = DMA_BIT_MASK(64);
 
+=======
+>>>>>>> v3.18
 static int omap_pcm_preallocate_dma_buffer(struct snd_pcm *pcm,
 	int stream)
 {
@@ -191,12 +221,20 @@ static int omap_pcm_new(struct snd_soc_pcm_runtime *rtd)
 {
 	struct snd_card *card = rtd->card->snd_card;
 	struct snd_pcm *pcm = rtd->pcm;
+<<<<<<< HEAD
 	int ret = 0;
 
 	if (!card->dev->dma_mask)
 		card->dev->dma_mask = &omap_pcm_dmamask;
 	if (!card->dev->coherent_dma_mask)
 		card->dev->coherent_dma_mask = DMA_BIT_MASK(64);
+=======
+	int ret;
+
+	ret = dma_coerce_mask_and_coherent(card->dev, DMA_BIT_MASK(64));
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 
 	if (pcm->streams[SNDRV_PCM_STREAM_PLAYBACK].substream) {
 		ret = omap_pcm_preallocate_dma_buffer(pcm,
@@ -226,6 +264,7 @@ static struct snd_soc_platform_driver omap_soc_platform = {
 	.pcm_free	= omap_pcm_free_dma_buffers,
 };
 
+<<<<<<< HEAD
 static int omap_pcm_probe(struct platform_device *pdev)
 {
 	return snd_soc_register_platform(&pdev->dev,
@@ -249,8 +288,18 @@ static struct platform_driver omap_pcm_driver = {
 };
 
 module_platform_driver(omap_pcm_driver);
+=======
+int omap_pcm_platform_register(struct device *dev)
+{
+	return devm_snd_soc_register_platform(dev, &omap_soc_platform);
+}
+EXPORT_SYMBOL_GPL(omap_pcm_platform_register);
+>>>>>>> v3.18
 
 MODULE_AUTHOR("Jarkko Nikula <jarkko.nikula@bitmer.com>");
 MODULE_DESCRIPTION("OMAP PCM DMA module");
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
 MODULE_ALIAS("platform:omap-pcm-audio");
+=======
+>>>>>>> v3.18

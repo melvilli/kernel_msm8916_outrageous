@@ -43,7 +43,11 @@ static const struct hc_driver ehci_grlib_hc_driver = {
 	 * generic hardware linkage
 	 */
 	.irq			= ehci_irq,
+<<<<<<< HEAD
 	.flags			= HCD_MEMORY | HCD_USB2,
+=======
+	.flags			= HCD_MEMORY | HCD_USB2 | HCD_BH,
+>>>>>>> v3.18
 
 	/*
 	 * basic lifecycle operations
@@ -113,7 +117,12 @@ static int ehci_hcd_grlib_probe(struct platform_device *op)
 
 	irq = irq_of_parse_and_map(dn, 0);
 	if (irq == NO_IRQ) {
+<<<<<<< HEAD
 		printk(KERN_ERR "%s: irq_of_parse_and_map failed\n", __FILE__);
+=======
+		dev_err(&op->dev, "%s: irq_of_parse_and_map failed\n",
+			__FILE__);
+>>>>>>> v3.18
 		rv = -EBUSY;
 		goto err_irq;
 	}
@@ -140,6 +149,10 @@ static int ehci_hcd_grlib_probe(struct platform_device *op)
 	if (rv)
 		goto err_ioremap;
 
+<<<<<<< HEAD
+=======
+	device_wakeup_enable(hcd->self.controller);
+>>>>>>> v3.18
 	return 0;
 
 err_ioremap:
@@ -153,9 +166,13 @@ err_irq:
 
 static int ehci_hcd_grlib_remove(struct platform_device *op)
 {
+<<<<<<< HEAD
 	struct usb_hcd *hcd = dev_get_drvdata(&op->dev);
 
 	dev_set_drvdata(&op->dev, NULL);
+=======
+	struct usb_hcd *hcd = platform_get_drvdata(op);
+>>>>>>> v3.18
 
 	dev_dbg(&op->dev, "stopping GRLIB GRUSBHC EHCI USB Controller\n");
 
@@ -169,6 +186,7 @@ static int ehci_hcd_grlib_remove(struct platform_device *op)
 }
 
 
+<<<<<<< HEAD
 static void ehci_hcd_grlib_shutdown(struct platform_device *op)
 {
 	struct usb_hcd *hcd = dev_get_drvdata(&op->dev);
@@ -178,6 +196,8 @@ static void ehci_hcd_grlib_shutdown(struct platform_device *op)
 }
 
 
+=======
+>>>>>>> v3.18
 static const struct of_device_id ehci_hcd_grlib_of_match[] = {
 	{
 		.name = "GAISLER_EHCI",
@@ -193,7 +213,11 @@ MODULE_DEVICE_TABLE(of, ehci_hcd_grlib_of_match);
 static struct platform_driver ehci_grlib_driver = {
 	.probe		= ehci_hcd_grlib_probe,
 	.remove		= ehci_hcd_grlib_remove,
+<<<<<<< HEAD
 	.shutdown	= ehci_hcd_grlib_shutdown,
+=======
+	.shutdown	= usb_hcd_platform_shutdown,
+>>>>>>> v3.18
 	.driver = {
 		.name = "grlib-ehci",
 		.owner = THIS_MODULE,

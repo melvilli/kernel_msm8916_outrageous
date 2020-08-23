@@ -108,11 +108,38 @@ static struct uvc_format_desc uvc_fmts[] = {
 		.fcc		= V4L2_PIX_FMT_Y16,
 	},
 	{
+<<<<<<< HEAD
 		.name		= "RGB Bayer",
+=======
+		.name		= "BGGR Bayer (BY8 )",
+>>>>>>> v3.18
 		.guid		= UVC_GUID_FORMAT_BY8,
 		.fcc		= V4L2_PIX_FMT_SBGGR8,
 	},
 	{
+<<<<<<< HEAD
+=======
+		.name		= "BGGR Bayer (BA81)",
+		.guid		= UVC_GUID_FORMAT_BA81,
+		.fcc		= V4L2_PIX_FMT_SBGGR8,
+	},
+	{
+		.name		= "GBRG Bayer (GBRG)",
+		.guid		= UVC_GUID_FORMAT_GBRG,
+		.fcc		= V4L2_PIX_FMT_SGBRG8,
+	},
+	{
+		.name		= "GRBG Bayer (GRBG)",
+		.guid		= UVC_GUID_FORMAT_GRBG,
+		.fcc		= V4L2_PIX_FMT_SGRBG8,
+	},
+	{
+		.name		= "RGGB Bayer (RGGB)",
+		.guid		= UVC_GUID_FORMAT_RGGB,
+		.fcc		= V4L2_PIX_FMT_SRGGB8,
+	},
+	{
+>>>>>>> v3.18
 		.name		= "RGB565",
 		.guid		= UVC_GUID_FORMAT_RGBP,
 		.fcc		= V4L2_PIX_FMT_RGB565,
@@ -925,7 +952,11 @@ static int uvc_parse_standard_control(struct uvc_device *dev,
 	case UVC_VC_HEADER:
 		n = buflen >= 12 ? buffer[11] : 0;
 
+<<<<<<< HEAD
 		if (buflen < 12 || buflen < 12 + n) {
+=======
+		if (buflen < 12 + n) {
+>>>>>>> v3.18
 			uvc_trace(UVC_TRACE_DESCR, "device %d videocontrol "
 				"interface %d HEADER error\n", udev->devnum,
 				alts->desc.bInterfaceNumber);
@@ -1533,6 +1564,7 @@ static const char *uvc_print_chain(struct uvc_video_chain *chain)
 	return buffer;
 }
 
+<<<<<<< HEAD
 static struct uvc_video_chain *uvc_alloc_chain(struct uvc_device *dev)
 {
 	struct uvc_video_chain *chain;
@@ -1641,6 +1673,8 @@ error:
 	return -EINVAL;
 }
 
+=======
+>>>>>>> v3.18
 /*
  * Scan the device for video chains and register video devices.
  *
@@ -1663,10 +1697,22 @@ static int uvc_scan_device(struct uvc_device *dev)
 		if (term->chain.next || term->chain.prev)
 			continue;
 
+<<<<<<< HEAD
 		chain = uvc_alloc_chain(dev);
 		if (chain == NULL)
 			return -ENOMEM;
 
+=======
+		chain = kzalloc(sizeof(*chain), GFP_KERNEL);
+		if (chain == NULL)
+			return -ENOMEM;
+
+		INIT_LIST_HEAD(&chain->entities);
+		mutex_init(&chain->ctrl_mutex);
+		chain->dev = dev;
+		v4l2_prio_init(&chain->prio);
+
+>>>>>>> v3.18
 		term->flags |= UVC_ENTITY_FLAG_DEFAULT;
 
 		if (uvc_scan_chain(chain, term) < 0) {
@@ -1680,9 +1726,12 @@ static int uvc_scan_device(struct uvc_device *dev)
 		list_add_tail(&chain->list, &dev->chains);
 	}
 
+<<<<<<< HEAD
 	if (list_empty(&dev->chains))
 		uvc_scan_fallback(dev);
 
+=======
+>>>>>>> v3.18
 	if (list_empty(&dev->chains)) {
 		uvc_printk(KERN_INFO, "No valid video chain found.\n");
 		return -1;
@@ -1709,12 +1758,21 @@ static void uvc_delete(struct uvc_device *dev)
 {
 	struct list_head *p, *n;
 
+<<<<<<< HEAD
 	uvc_status_cleanup(dev);
 	uvc_ctrl_cleanup_device(dev);
 
 	usb_put_intf(dev->intf);
 	usb_put_dev(dev->udev);
 
+=======
+	usb_put_intf(dev->intf);
+	usb_put_dev(dev->udev);
+
+	uvc_status_cleanup(dev);
+	uvc_ctrl_cleanup_device(dev);
+
+>>>>>>> v3.18
 	if (dev->vdev.dev)
 		v4l2_device_unregister(&dev->vdev);
 #ifdef CONFIG_MEDIA_CONTROLLER
@@ -1832,7 +1890,10 @@ static int uvc_register_video(struct uvc_device *dev,
 	vdev->fops = &uvc_fops;
 	vdev->release = uvc_release;
 	vdev->prio = &stream->chain->prio;
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &vdev->flags);
+=======
+>>>>>>> v3.18
 	if (stream->type == V4L2_BUF_TYPE_VIDEO_OUTPUT)
 		vdev->vfl_dir = VFL_DIR_TX;
 	strlcpy(vdev->name, dev->name, sizeof vdev->name);
@@ -1942,8 +2003,13 @@ static int uvc_probe(struct usb_interface *intf,
 	INIT_LIST_HEAD(&dev->chains);
 	INIT_LIST_HEAD(&dev->streams);
 	atomic_set(&dev->nstreams, 0);
+<<<<<<< HEAD
 	atomic_set(&dev->users, 0);
 	atomic_set(&dev->nmappings, 0);
+=======
+	atomic_set(&dev->nmappings, 0);
+	mutex_init(&dev->lock);
+>>>>>>> v3.18
 
 	dev->udev = usb_get_dev(udev);
 	dev->intf = usb_get_intf(intf);
@@ -2056,8 +2122,18 @@ static int uvc_suspend(struct usb_interface *intf, pm_message_t message)
 
 	/* Controls are cached on the fly so they don't need to be saved. */
 	if (intf->cur_altsetting->desc.bInterfaceSubClass ==
+<<<<<<< HEAD
 	    UVC_SC_VIDEOCONTROL)
 		return uvc_status_suspend(dev);
+=======
+	    UVC_SC_VIDEOCONTROL) {
+		mutex_lock(&dev->lock);
+		if (dev->users)
+			uvc_status_stop(dev);
+		mutex_unlock(&dev->lock);
+		return 0;
+	}
+>>>>>>> v3.18
 
 	list_for_each_entry(stream, &dev->streams, list) {
 		if (stream->intf == intf)
@@ -2079,14 +2155,30 @@ static int __uvc_resume(struct usb_interface *intf, int reset)
 
 	if (intf->cur_altsetting->desc.bInterfaceSubClass ==
 	    UVC_SC_VIDEOCONTROL) {
+<<<<<<< HEAD
 		if (reset) {
 			int ret = uvc_ctrl_resume_device(dev);
 
+=======
+		int ret = 0;
+
+		if (reset) {
+			ret = uvc_ctrl_restore_values(dev);
+>>>>>>> v3.18
 			if (ret < 0)
 				return ret;
 		}
 
+<<<<<<< HEAD
 		return uvc_status_resume(dev);
+=======
+		mutex_lock(&dev->lock);
+		if (dev->users)
+			ret = uvc_status_start(dev, GFP_NOIO);
+		mutex_unlock(&dev->lock);
+
+		return ret;
+>>>>>>> v3.18
 	}
 
 	list_for_each_entry(stream, &dev->streams, list) {
@@ -2185,6 +2277,18 @@ static struct usb_device_id uvc_ids[] = {
 	  .bInterfaceSubClass	= 1,
 	  .bInterfaceProtocol	= 0,
 	  .driver_info		= UVC_QUIRK_PROBE_MINMAX },
+<<<<<<< HEAD
+=======
+	/* Microsoft Lifecam NX-3000 */
+	{ .match_flags		= USB_DEVICE_ID_MATCH_DEVICE
+				| USB_DEVICE_ID_MATCH_INT_INFO,
+	  .idVendor		= 0x045e,
+	  .idProduct		= 0x0721,
+	  .bInterfaceClass	= USB_CLASS_VIDEO,
+	  .bInterfaceSubClass	= 1,
+	  .bInterfaceProtocol	= 0,
+	  .driver_info		= UVC_QUIRK_PROBE_DEF },
+>>>>>>> v3.18
 	/* Microsoft Lifecam VX-7000 */
 	{ .match_flags		= USB_DEVICE_ID_MATCH_DEVICE
 				| USB_DEVICE_ID_MATCH_INT_INFO,
@@ -2242,6 +2346,18 @@ static struct usb_device_id uvc_ids[] = {
 	  .bInterfaceClass	= USB_CLASS_VENDOR_SPEC,
 	  .bInterfaceSubClass	= 1,
 	  .bInterfaceProtocol	= 0 },
+<<<<<<< HEAD
+=======
+	/* Logitech HD Pro Webcam C920 */
+	{ .match_flags		= USB_DEVICE_ID_MATCH_DEVICE
+				| USB_DEVICE_ID_MATCH_INT_INFO,
+	  .idVendor		= 0x046d,
+	  .idProduct		= 0x082d,
+	  .bInterfaceClass	= USB_CLASS_VIDEO,
+	  .bInterfaceSubClass	= 1,
+	  .bInterfaceProtocol	= 0,
+	  .driver_info		= UVC_QUIRK_RESTORE_CTRLS_ON_INIT },
+>>>>>>> v3.18
 	/* Chicony CNF7129 (Asus EEE 100HE) */
 	{ .match_flags		= USB_DEVICE_ID_MATCH_DEVICE
 				| USB_DEVICE_ID_MATCH_INT_INFO,
@@ -2269,6 +2385,45 @@ static struct usb_device_id uvc_ids[] = {
 	  .bInterfaceSubClass	= 1,
 	  .bInterfaceProtocol	= 0,
 	  .driver_info 		= UVC_QUIRK_PROBE_DEF },
+<<<<<<< HEAD
+=======
+	/* Dell SP2008WFP Monitor */
+	{ .match_flags		= USB_DEVICE_ID_MATCH_DEVICE
+				| USB_DEVICE_ID_MATCH_INT_INFO,
+	  .idVendor		= 0x05a9,
+	  .idProduct		= 0x2641,
+	  .bInterfaceClass	= USB_CLASS_VIDEO,
+	  .bInterfaceSubClass	= 1,
+	  .bInterfaceProtocol	= 0,
+	  .driver_info 		= UVC_QUIRK_PROBE_DEF },
+	/* Dell Alienware X51 */
+	{ .match_flags		= USB_DEVICE_ID_MATCH_DEVICE
+				| USB_DEVICE_ID_MATCH_INT_INFO,
+	  .idVendor		= 0x05a9,
+	  .idProduct		= 0x2643,
+	  .bInterfaceClass	= USB_CLASS_VIDEO,
+	  .bInterfaceSubClass	= 1,
+	  .bInterfaceProtocol	= 0,
+	  .driver_info	= UVC_QUIRK_PROBE_DEF },
+	/* Dell Studio Hybrid 140g (OmniVision webcam) */
+	{ .match_flags		= USB_DEVICE_ID_MATCH_DEVICE
+				| USB_DEVICE_ID_MATCH_INT_INFO,
+	  .idVendor		= 0x05a9,
+	  .idProduct		= 0x264a,
+	  .bInterfaceClass	= USB_CLASS_VIDEO,
+	  .bInterfaceSubClass	= 1,
+	  .bInterfaceProtocol	= 0,
+	  .driver_info		= UVC_QUIRK_PROBE_DEF },
+	/* Dell XPS M1330 (OmniVision OV7670 webcam) */
+	{ .match_flags		= USB_DEVICE_ID_MATCH_DEVICE
+				| USB_DEVICE_ID_MATCH_INT_INFO,
+	  .idVendor		= 0x05a9,
+	  .idProduct		= 0x7670,
+	  .bInterfaceClass	= USB_CLASS_VIDEO,
+	  .bInterfaceSubClass	= 1,
+	  .bInterfaceProtocol	= 0,
+	  .driver_info		= UVC_QUIRK_PROBE_DEF },
+>>>>>>> v3.18
 	/* Apple Built-In iSight */
 	{ .match_flags		= USB_DEVICE_ID_MATCH_DEVICE
 				| USB_DEVICE_ID_MATCH_INT_INFO,

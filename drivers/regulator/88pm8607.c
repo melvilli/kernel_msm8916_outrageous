@@ -2,7 +2,11 @@
  * Regulators driver for Marvell 88PM8607
  *
  * Copyright (C) 2009 Marvell International Ltd.
+<<<<<<< HEAD
  * 	Haojian Zhuang <haojian.zhuang@marvell.com>
+=======
+ *	Haojian Zhuang <haojian.zhuang@marvell.com>
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -78,7 +82,11 @@ static const unsigned int BUCK2_suspend_table[] = {
 };
 
 static const unsigned int BUCK3_table[] = {
+<<<<<<< HEAD
               0,   25000,   50000,   75000,  100000,  125000,  150000,  175000,
+=======
+	      0,   25000,   50000,   75000,  100000,  125000,  150000,  175000,
+>>>>>>> v3.18
 	 200000,  225000,  250000,  275000,  300000,  325000,  350000,  375000,
 	 400000,  425000,  450000,  475000,  500000,  525000,  550000,  575000,
 	 600000,  625000,  650000,  675000,  700000,  725000,  750000,  775000,
@@ -89,7 +97,11 @@ static const unsigned int BUCK3_table[] = {
 };
 
 static const unsigned int BUCK3_suspend_table[] = {
+<<<<<<< HEAD
               0,   25000,   50000,   75000,  100000,  125000,  150000,  175000,
+=======
+	      0,   25000,   50000,   75000,  100000,  125000,  150000,  175000,
+>>>>>>> v3.18
 	 200000,  225000,  250000,  275000,  300000,  325000,  350000,  375000,
 	 400000,  425000,  450000,  475000,  500000,  525000,  550000,  575000,
 	 600000,  625000,  650000,  675000,  700000,  725000,  750000,  775000,
@@ -319,10 +331,17 @@ static int pm8607_regulator_dt_init(struct platform_device *pdev,
 				    struct regulator_config *config)
 {
 	struct device_node *nproot, *np;
+<<<<<<< HEAD
 	nproot = of_node_get(pdev->dev.parent->of_node);
 	if (!nproot)
 		return -ENODEV;
 	nproot = of_find_node_by_name(nproot, "regulators");
+=======
+	nproot = pdev->dev.parent->of_node;
+	if (!nproot)
+		return -ENODEV;
+	nproot = of_get_child_by_name(nproot, "regulators");
+>>>>>>> v3.18
 	if (!nproot) {
 		dev_err(&pdev->dev, "failed to find regulators node\n");
 		return -ENODEV;
@@ -346,7 +365,11 @@ static int pm8607_regulator_probe(struct platform_device *pdev)
 {
 	struct pm860x_chip *chip = dev_get_drvdata(pdev->dev.parent);
 	struct pm8607_regulator_info *info = NULL;
+<<<<<<< HEAD
 	struct regulator_init_data *pdata = pdev->dev.platform_data;
+=======
+	struct regulator_init_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	struct regulator_config config = { };
 	struct resource *res;
 	int i;
@@ -391,7 +414,12 @@ static int pm8607_regulator_probe(struct platform_device *pdev)
 	else
 		config.regmap = chip->regmap_companion;
 
+<<<<<<< HEAD
 	info->regulator = regulator_register(&info->desc, &config);
+=======
+	info->regulator = devm_regulator_register(&pdev->dev, &info->desc,
+						  &config);
+>>>>>>> v3.18
 	if (IS_ERR(info->regulator)) {
 		dev_err(&pdev->dev, "failed to register regulator %s\n",
 			info->desc.name);
@@ -402,6 +430,7 @@ static int pm8607_regulator_probe(struct platform_device *pdev)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int pm8607_regulator_remove(struct platform_device *pdev)
 {
 	struct pm8607_regulator_info *info = platform_get_drvdata(pdev);
@@ -411,6 +440,8 @@ static int pm8607_regulator_remove(struct platform_device *pdev)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 static struct platform_device_id pm8607_regulator_driver_ids[] = {
 	{
 		.name	= "88pm860x-regulator",
@@ -429,7 +460,10 @@ static struct platform_driver pm8607_regulator_driver = {
 		.owner	= THIS_MODULE,
 	},
 	.probe		= pm8607_regulator_probe,
+<<<<<<< HEAD
 	.remove		= pm8607_regulator_remove,
+=======
+>>>>>>> v3.18
 	.id_table	= pm8607_regulator_driver_ids,
 };
 

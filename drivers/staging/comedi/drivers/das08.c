@@ -16,12 +16,15 @@
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
+<<<<<<< HEAD
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *****************************************************************
+=======
+>>>>>>> v3.18
  */
 
 /*
@@ -39,7 +42,11 @@
  * cheap das08 hardware doesn't really support them.
  */
 
+<<<<<<< HEAD
 #include <linux/delay.h>
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 
 #include "../comedidev.h"
 
@@ -126,6 +133,7 @@
 
 /* gainlist same as _pgx_ below */
 
+<<<<<<< HEAD
 static const struct comedi_lrange range_das08_pgl = { 9, {
 							  BIP_RANGE(10),
 							  BIP_RANGE(5),
@@ -166,6 +174,51 @@ static const struct comedi_lrange range_das08_pgm = { 9, {
 							  UNI_RANGE(0.1),
 							  UNI_RANGE(0.01)
 							  }
+=======
+static const struct comedi_lrange range_das08_pgl = {
+	9, {
+		BIP_RANGE(10),
+		BIP_RANGE(5),
+		BIP_RANGE(2.5),
+		BIP_RANGE(1.25),
+		BIP_RANGE(0.625),
+		UNI_RANGE(10),
+		UNI_RANGE(5),
+		UNI_RANGE(2.5),
+		UNI_RANGE(1.25)
+	}
+};
+
+static const struct comedi_lrange range_das08_pgh = {
+	12, {
+		BIP_RANGE(10),
+		BIP_RANGE(5),
+		BIP_RANGE(1),
+		BIP_RANGE(0.5),
+		BIP_RANGE(0.1),
+		BIP_RANGE(0.05),
+		BIP_RANGE(0.01),
+		BIP_RANGE(0.005),
+		UNI_RANGE(10),
+		UNI_RANGE(1),
+		UNI_RANGE(0.1),
+		UNI_RANGE(0.01)
+	}
+};
+
+static const struct comedi_lrange range_das08_pgm = {
+	9, {
+		BIP_RANGE(10),
+		BIP_RANGE(5),
+		BIP_RANGE(0.5),
+		BIP_RANGE(0.05),
+		BIP_RANGE(0.01),
+		UNI_RANGE(10),
+		UNI_RANGE(1),
+		UNI_RANGE(0.1),
+		UNI_RANGE(0.01)
+	}
+>>>>>>> v3.18
 };				/*
 				   cio-das08jr.pdf
 
@@ -204,17 +257,42 @@ static const int *const das08_gainlists[] = {
 	das08_pgm_gainlist,
 };
 
+<<<<<<< HEAD
 #define TIMEOUT 100000
+=======
+static int das08_ai_eoc(struct comedi_device *dev,
+			struct comedi_subdevice *s,
+			struct comedi_insn *insn,
+			unsigned long context)
+{
+	unsigned int status;
+
+	status = inb(dev->iobase + DAS08_STATUS);
+	if ((status & DAS08_EOC) == 0)
+		return 0;
+	return -EBUSY;
+}
+>>>>>>> v3.18
 
 static int das08_ai_rinsn(struct comedi_device *dev, struct comedi_subdevice *s,
 			  struct comedi_insn *insn, unsigned int *data)
 {
+<<<<<<< HEAD
 	const struct das08_board_struct *thisboard = comedi_board(dev);
 	struct das08_private_struct *devpriv = dev->private;
 	int i, n;
 	int chan;
 	int range;
 	int lsb, msb;
+=======
+	const struct das08_board_struct *thisboard = dev->board_ptr;
+	struct das08_private_struct *devpriv = dev->private;
+	int n;
+	int chan;
+	int range;
+	int lsb, msb;
+	int ret;
+>>>>>>> v3.18
 
 	chan = CR_CHAN(insn->chanspec);
 	range = CR_RANGE(insn->chanspec);
@@ -247,6 +325,7 @@ static int das08_ai_rinsn(struct comedi_device *dev, struct comedi_subdevice *s,
 		/* trigger conversion */
 		outb_p(0, dev->iobase + DAS08_TRIG_12BIT);
 
+<<<<<<< HEAD
 		for (i = 0; i < TIMEOUT; i++) {
 			if (!(inb(dev->iobase + DAS08_STATUS) & DAS08_EOC))
 				break;
@@ -255,6 +334,12 @@ static int das08_ai_rinsn(struct comedi_device *dev, struct comedi_subdevice *s,
 			dev_err(dev->class_dev, "timeout\n");
 			return -ETIME;
 		}
+=======
+		ret = comedi_timeout(dev, s, insn, das08_ai_eoc, 0);
+		if (ret)
+			return ret;
+
+>>>>>>> v3.18
 		msb = inb(dev->iobase + DAS08_MSB);
 		lsb = inb(dev->iobase + DAS08_LSB);
 		if (thisboard->ai_encoding == das08_encode12) {
@@ -268,7 +353,11 @@ static int das08_ai_rinsn(struct comedi_device *dev, struct comedi_subdevice *s,
 			else
 				data[n] = (1 << 15) - (lsb | (msb & 0x7f) << 8);
 		} else {
+<<<<<<< HEAD
 			comedi_error(dev, "bug! unknown ai encoding");
+=======
+			dev_err(dev->class_dev, "bug! unknown ai encoding\n");
+>>>>>>> v3.18
 			return -1;
 		}
 	}
@@ -285,6 +374,7 @@ static int das08_di_rbits(struct comedi_device *dev, struct comedi_subdevice *s,
 	return insn->n;
 }
 
+<<<<<<< HEAD
 static int das08_do_wbits(struct comedi_device *dev, struct comedi_subdevice *s,
 			  struct comedi_insn *insn, unsigned int *data)
 {
@@ -306,6 +396,25 @@ static int das08_do_wbits(struct comedi_device *dev, struct comedi_subdevice *s,
 	spin_unlock(&dev->spinlock);
 
 	data[1] = wbits;
+=======
+static int das08_do_wbits(struct comedi_device *dev,
+			  struct comedi_subdevice *s,
+			  struct comedi_insn *insn,
+			  unsigned int *data)
+{
+	struct das08_private_struct *devpriv = dev->private;
+
+	if (comedi_dio_update_state(s, data)) {
+		/* prevent race with setting of analog input mux */
+		spin_lock(&dev->spinlock);
+		devpriv->do_mux_bits &= ~DAS08_DO_MASK;
+		devpriv->do_mux_bits |= DAS08_OP(s->state);
+		outb(devpriv->do_mux_bits, dev->iobase + DAS08_CONTROL);
+		spin_unlock(&dev->spinlock);
+	}
+
+	data[1] = s->state;
+>>>>>>> v3.18
 
 	return insn->n;
 }
@@ -322,6 +431,7 @@ static int das08jr_di_rbits(struct comedi_device *dev,
 
 static int das08jr_do_wbits(struct comedi_device *dev,
 			    struct comedi_subdevice *s,
+<<<<<<< HEAD
 			    struct comedi_insn *insn, unsigned int *data)
 {
 	struct das08_private_struct *devpriv = dev->private;
@@ -333,6 +443,15 @@ static int das08jr_do_wbits(struct comedi_device *dev,
 	outb(devpriv->do_bits, dev->iobase + DAS08JR_DIO);
 
 	data[1] = devpriv->do_bits;
+=======
+			    struct comedi_insn *insn,
+			    unsigned int *data)
+{
+	if (comedi_dio_update_state(s, data))
+		outb(s->state, dev->iobase + DAS08JR_DIO);
+
+	data[1] = s->state;
+>>>>>>> v3.18
 
 	return insn->n;
 }
@@ -340,8 +459,12 @@ static int das08jr_do_wbits(struct comedi_device *dev,
 static void das08_ao_set_data(struct comedi_device *dev,
 			      unsigned int chan, unsigned int data)
 {
+<<<<<<< HEAD
 	const struct das08_board_struct *thisboard = comedi_board(dev);
 	struct das08_private_struct *devpriv = dev->private;
+=======
+	const struct das08_board_struct *thisboard = dev->board_ptr;
+>>>>>>> v3.18
 	unsigned char lsb;
 	unsigned char msb;
 
@@ -358,6 +481,7 @@ static void das08_ao_set_data(struct comedi_device *dev,
 		/* load DACs */
 		inb(dev->iobase + DAS08AO_AO_UPDATE);
 	}
+<<<<<<< HEAD
 	devpriv->ao_readback[chan] = data;
 }
 
@@ -401,11 +525,35 @@ static int das08_ao_rinsn(struct comedi_device *dev,
 		data[n] = devpriv->ao_readback[chan];
 
 	return n;
+=======
+}
+
+static int das08_ao_insn_write(struct comedi_device *dev,
+			       struct comedi_subdevice *s,
+			       struct comedi_insn *insn,
+			       unsigned int *data)
+{
+	unsigned int chan = CR_CHAN(insn->chanspec);
+	unsigned int val = s->readback[chan];
+	int i;
+
+	for (i = 0; i < insn->n; i++) {
+		val = data[i];
+		das08_ao_set_data(dev, chan, val);
+	}
+	s->readback[chan] = val;
+
+	return insn->n;
+>>>>>>> v3.18
 }
 
 static void i8254_initialize(struct comedi_device *dev)
 {
+<<<<<<< HEAD
 	const struct das08_board_struct *thisboard = comedi_board(dev);
+=======
+	const struct das08_board_struct *thisboard = dev->board_ptr;
+>>>>>>> v3.18
 	unsigned long i8254_iobase = dev->iobase + thisboard->i8254_offset;
 	unsigned int mode = I8254_MODE0 | I8254_BINARY;
 	int i;
@@ -418,7 +566,11 @@ static int das08_counter_read(struct comedi_device *dev,
 			      struct comedi_subdevice *s,
 			      struct comedi_insn *insn, unsigned int *data)
 {
+<<<<<<< HEAD
 	const struct das08_board_struct *thisboard = comedi_board(dev);
+=======
+	const struct das08_board_struct *thisboard = dev->board_ptr;
+>>>>>>> v3.18
 	unsigned long i8254_iobase = dev->iobase + thisboard->i8254_offset;
 	int chan = insn->chanspec;
 
@@ -430,7 +582,11 @@ static int das08_counter_write(struct comedi_device *dev,
 			       struct comedi_subdevice *s,
 			       struct comedi_insn *insn, unsigned int *data)
 {
+<<<<<<< HEAD
 	const struct das08_board_struct *thisboard = comedi_board(dev);
+=======
+	const struct das08_board_struct *thisboard = dev->board_ptr;
+>>>>>>> v3.18
 	unsigned long i8254_iobase = dev->iobase + thisboard->i8254_offset;
 	int chan = insn->chanspec;
 
@@ -442,7 +598,11 @@ static int das08_counter_config(struct comedi_device *dev,
 				struct comedi_subdevice *s,
 				struct comedi_insn *insn, unsigned int *data)
 {
+<<<<<<< HEAD
 	const struct das08_board_struct *thisboard = comedi_board(dev);
+=======
+	const struct das08_board_struct *thisboard = dev->board_ptr;
+>>>>>>> v3.18
 	unsigned long i8254_iobase = dev->iobase + thisboard->i8254_offset;
 	int chan = insn->chanspec;
 
@@ -455,17 +615,28 @@ static int das08_counter_config(struct comedi_device *dev,
 		break;
 	default:
 		return -EINVAL;
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 	}
 	return 2;
 }
 
 int das08_common_attach(struct comedi_device *dev, unsigned long iobase)
 {
+<<<<<<< HEAD
 	const struct das08_board_struct *thisboard = comedi_board(dev);
 	struct das08_private_struct *devpriv = dev->private;
 	struct comedi_subdevice *s;
 	int ret;
+=======
+	const struct das08_board_struct *thisboard = dev->board_ptr;
+	struct das08_private_struct *devpriv = dev->private;
+	struct comedi_subdevice *s;
+	int ret;
+	int i;
+>>>>>>> v3.18
 
 	dev->iobase = iobase;
 
@@ -502,9 +673,24 @@ int das08_common_attach(struct comedi_device *dev, unsigned long iobase)
 		s->n_chan = 2;
 		s->maxdata = (1 << thisboard->ao_nbits) - 1;
 		s->range_table = &range_bipolar5;
+<<<<<<< HEAD
 		s->insn_write = das08_ao_winsn;
 		s->insn_read = das08_ao_rinsn;
 		das08_ao_initialize(dev, s);
+=======
+		s->insn_write = das08_ao_insn_write;
+		s->insn_read = comedi_readback_insn_read;
+
+		ret = comedi_alloc_subdev_readback(s);
+		if (ret)
+			return ret;
+
+		/* intialize all channels to 0V */
+		for (i = 0; i < s->n_chan; i++) {
+			s->readback[i] = s->maxdata / 2;
+			das08_ao_set_data(dev, i, s->readback[i]);
+		}
+>>>>>>> v3.18
 	} else {
 		s->type = COMEDI_SUBD_UNUSED;
 	}
@@ -540,9 +726,15 @@ int das08_common_attach(struct comedi_device *dev, unsigned long iobase)
 	s = &dev->subdevices[4];
 	/* 8255 */
 	if (thisboard->i8255_offset != 0) {
+<<<<<<< HEAD
 		subdev_8255_init(dev, s, NULL, (unsigned long)(dev->iobase +
 							       thisboard->
 							       i8255_offset));
+=======
+		ret = subdev_8255_init(dev, s, NULL, thisboard->i8255_offset);
+		if (ret)
+			return ret;
+>>>>>>> v3.18
 	} else {
 		s->type = COMEDI_SUBD_UNUSED;
 	}
@@ -566,12 +758,15 @@ int das08_common_attach(struct comedi_device *dev, unsigned long iobase)
 }
 EXPORT_SYMBOL_GPL(das08_common_attach);
 
+<<<<<<< HEAD
 void das08_common_detach(struct comedi_device *dev)
 {
 	comedi_spriv_free(dev, 4);
 }
 EXPORT_SYMBOL_GPL(das08_common_detach);
 
+=======
+>>>>>>> v3.18
 static int __init das08_init(void)
 {
 	return 0;

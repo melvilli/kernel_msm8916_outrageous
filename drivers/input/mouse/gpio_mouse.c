@@ -8,7 +8,10 @@
  * published by the Free Software Foundation.
  */
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/platform_device.h>
 #include <linux/input-polldev.h>
@@ -48,7 +51,11 @@ static void gpio_mouse_scan(struct input_polled_dev *dev)
 
 static int gpio_mouse_probe(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct gpio_mouse_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct gpio_mouse_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	struct input_polled_dev *input_poll;
 	struct input_dev *input;
 	int pin, i;
@@ -138,7 +145,10 @@ static int gpio_mouse_probe(struct platform_device *pdev)
 
  out_free_polldev:
 	input_free_polled_device(input_poll);
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 
  out_free_gpios:
 	while (--i >= 0) {
@@ -165,8 +175,11 @@ static int gpio_mouse_remove(struct platform_device *pdev)
 			gpio_free(pin);
 	}
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

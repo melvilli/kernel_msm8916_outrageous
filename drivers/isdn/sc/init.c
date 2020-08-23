@@ -336,7 +336,11 @@ static int __init sc_init(void)
 		 */
 		sc_adapter[cinst]->interrupt = irq[b];
 		if (request_irq(sc_adapter[cinst]->interrupt, interrupt_handler,
+<<<<<<< HEAD
 				IRQF_DISABLED, interface->id,
+=======
+				0, interface->id,
+>>>>>>> v3.18
 				(void *)(unsigned long) cinst))
 		{
 			kfree(sc_adapter[cinst]->channel);
@@ -390,8 +394,13 @@ static void __exit sc_exit(void)
 		/*
 		 * kill the timers
 		 */
+<<<<<<< HEAD
 		del_timer(&(sc_adapter[i]->reset_timer));
 		del_timer(&(sc_adapter[i]->stat_timer));
+=======
+		del_timer_sync(&(sc_adapter[i]->reset_timer));
+		del_timer_sync(&(sc_adapter[i]->stat_timer));
+>>>>>>> v3.18
 
 		/*
 		 * Tell I4L we're toast

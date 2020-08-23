@@ -26,9 +26,14 @@
 #include "bus.h"
 
 #define to_mmc_driver(d)	container_of(d, struct mmc_driver, drv)
+<<<<<<< HEAD
 #define RUNTIME_SUSPEND_DELAY_MS 10000
 
 static ssize_t mmc_type_show(struct device *dev,
+=======
+
+static ssize_t type_show(struct device *dev,
+>>>>>>> v3.18
 	struct device_attribute *attr, char *buf)
 {
 	struct mmc_card *card = mmc_dev_to_card(dev);
@@ -46,11 +51,21 @@ static ssize_t mmc_type_show(struct device *dev,
 		return -EFAULT;
 	}
 }
+<<<<<<< HEAD
 
 static struct device_attribute mmc_dev_attrs[] = {
 	__ATTR(type, S_IRUGO, mmc_type_show, NULL),
 	__ATTR_NULL,
 };
+=======
+static DEVICE_ATTR_RO(type);
+
+static struct attribute *mmc_dev_attrs[] = {
+	&dev_attr_type.attr,
+	NULL,
+};
+ATTRIBUTE_GROUPS(mmc_dev);
+>>>>>>> v3.18
 
 /*
  * This currently matches any MMC driver to any MMC card - drivers
@@ -127,6 +142,7 @@ static void mmc_bus_shutdown(struct device *dev)
 {
 	struct mmc_driver *drv = to_mmc_driver(dev->driver);
 	struct mmc_card *card = mmc_dev_to_card(dev);
+<<<<<<< HEAD
 
 	if (!drv) {
 		pr_debug("%s: %s: drv is NULL\n", dev_name(dev), __func__);
@@ -140,6 +156,20 @@ static void mmc_bus_shutdown(struct device *dev)
 
 	if (drv->shutdown)
 		drv->shutdown(card);
+=======
+	struct mmc_host *host = card->host;
+	int ret;
+
+	if (dev->driver && drv->shutdown)
+		drv->shutdown(card);
+
+	if (host->bus_ops->shutdown) {
+		ret = host->bus_ops->shutdown(host);
+		if (ret)
+			pr_warn("%s: error %d during shutdown\n",
+				mmc_hostname(host), ret);
+	}
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_PM_SLEEP
@@ -147,10 +177,23 @@ static int mmc_bus_suspend(struct device *dev)
 {
 	struct mmc_driver *drv = to_mmc_driver(dev->driver);
 	struct mmc_card *card = mmc_dev_to_card(dev);
+<<<<<<< HEAD
 	int ret = 0;
 
 	if (dev->driver && drv->suspend)
 		ret = drv->suspend(card);
+=======
+	struct mmc_host *host = card->host;
+	int ret;
+
+	if (dev->driver && drv->suspend) {
+		ret = drv->suspend(card);
+		if (ret)
+			return ret;
+	}
+
+	ret = host->bus_ops->suspend(host);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -158,15 +201,30 @@ static int mmc_bus_resume(struct device *dev)
 {
 	struct mmc_driver *drv = to_mmc_driver(dev->driver);
 	struct mmc_card *card = mmc_dev_to_card(dev);
+<<<<<<< HEAD
 	int ret = 0;
 
 	if (dev->driver && drv->resume)
 		ret = drv->resume(card);
+=======
+	struct mmc_host *host = card->host;
+	int ret;
+
+	ret = host->bus_ops->resume(host);
+	if (ret)
+		pr_warn("%s: error %d during resume (card was removed?)\n",
+			mmc_hostname(host), ret);
+
+	if (dev->driver && drv->resume)
+		ret = drv->resume(card);
+
+>>>>>>> v3.18
 	return ret;
 }
 #endif
 
 #ifdef CONFIG_PM_RUNTIME
+<<<<<<< HEAD
 
 static int mmc_runtime_suspend(struct device *dev)
 {
@@ -184,11 +242,20 @@ static int mmc_runtime_suspend(struct device *dev)
 	} else {
 		return mmc_power_save_host(card->host);
 	}
+=======
+static int mmc_runtime_suspend(struct device *dev)
+{
+	struct mmc_card *card = mmc_dev_to_card(dev);
+	struct mmc_host *host = card->host;
+
+	return host->bus_ops->runtime_suspend(host);
+>>>>>>> v3.18
 }
 
 static int mmc_runtime_resume(struct device *dev)
 {
 	struct mmc_card *card = mmc_dev_to_card(dev);
+<<<<<<< HEAD
 
 	if (mmc_use_core_runtime_pm(card->host))
 		return 0;
@@ -263,11 +330,31 @@ static ssize_t store_rpm_delay(struct device *dev, struct device_attribute
 static struct bus_type mmc_bus_type = {
 	.name		= "mmc",
 	.dev_attrs	= mmc_dev_attrs,
+=======
+	struct mmc_host *host = card->host;
+
+	return host->bus_ops->runtime_resume(host);
+}
+#endif /* !CONFIG_PM_RUNTIME */
+
+static const struct dev_pm_ops mmc_bus_pm_ops = {
+	SET_RUNTIME_PM_OPS(mmc_runtime_suspend, mmc_runtime_resume, NULL)
+	SET_SYSTEM_SLEEP_PM_OPS(mmc_bus_suspend, mmc_bus_resume)
+};
+
+static struct bus_type mmc_bus_type = {
+	.name		= "mmc",
+	.dev_groups	= mmc_dev_groups,
+>>>>>>> v3.18
 	.match		= mmc_bus_match,
 	.uevent		= mmc_bus_uevent,
 	.probe		= mmc_bus_probe,
 	.remove		= mmc_bus_remove,
+<<<<<<< HEAD
 	.shutdown        = mmc_bus_shutdown,
+=======
+	.shutdown	= mmc_bus_shutdown,
+>>>>>>> v3.18
 	.pm		= &mmc_bus_pm_ops,
 };
 
@@ -336,9 +423,12 @@ struct mmc_card *mmc_alloc_card(struct mmc_host *host, struct device_type *type)
 	card->dev.release = mmc_release_card;
 	card->dev.type = type;
 
+<<<<<<< HEAD
 	spin_lock_init(&card->bkops_info.bkops_stats.lock);
 	spin_lock_init(&card->wr_pack_stats.lock);
 
+=======
+>>>>>>> v3.18
 	return card;
 }
 
@@ -387,13 +477,18 @@ int mmc_add_card(struct mmc_card *card)
 		break;
 	}
 
+<<<<<<< HEAD
 	if (mmc_sd_card_uhs(card) &&
+=======
+	if (mmc_card_uhs(card) &&
+>>>>>>> v3.18
 		(card->sd_bus_speed < ARRAY_SIZE(uhs_speeds)))
 		uhs_bus_speed_mode = uhs_speeds[card->sd_bus_speed];
 
 	if (mmc_host_is_spi(card->host)) {
 		pr_info("%s: new %s%s%s card on SPI\n",
 			mmc_hostname(card->host),
+<<<<<<< HEAD
 			mmc_card_highspeed(card) ? "high speed " : "",
 			mmc_card_ddr_mode(card) ? "DDR " : "",
 			type);
@@ -405,6 +500,19 @@ int mmc_add_card(struct mmc_card *card)
 			(mmc_card_hs400(card) ? "HS400 " : ""),
 			(mmc_card_hs200(card) ? "HS200 " : ""),
 			mmc_card_ddr_mode(card) ? "DDR " : "",
+=======
+			mmc_card_hs(card) ? "high speed " : "",
+			mmc_card_ddr52(card) ? "DDR " : "",
+			type);
+	} else {
+		pr_info("%s: new %s%s%s%s%s card at address %04x\n",
+			mmc_hostname(card->host),
+			mmc_card_uhs(card) ? "ultra high speed " :
+			(mmc_card_hs(card) ? "high speed " : ""),
+			mmc_card_hs400(card) ? "HS400 " :
+			(mmc_card_hs200(card) ? "HS200 " : ""),
+			mmc_card_ddr52(card) ? "DDR " : "",
+>>>>>>> v3.18
 			uhs_bus_speed_mode, type, card->rca);
 	}
 
@@ -413,6 +521,7 @@ int mmc_add_card(struct mmc_card *card)
 #endif
 	mmc_init_context_info(card->host);
 
+<<<<<<< HEAD
 	ret = pm_runtime_set_active(&card->dev);
 	if (ret)
 		pr_err("%s: %s: failed setting runtime active: ret: %d\n",
@@ -426,10 +535,13 @@ int mmc_add_card(struct mmc_card *card)
 			pr_err("%s: %s: failed to init wakeup: %d\n",
 			       mmc_hostname(card->host), __func__, ret);
 	}
+=======
+>>>>>>> v3.18
 	ret = device_add(&card->dev);
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 	device_enable_async_suspend(&card->dev);
 	if (mmc_use_core_runtime_pm(card->host) && !mmc_card_sdio(card)) {
 		card->rpm_attrib.show = show_rpm_delay;
@@ -446,6 +558,8 @@ int mmc_add_card(struct mmc_card *card)
 		card->idle_timeout = RUNTIME_SUSPEND_DELAY_MS;
 	}
 
+=======
+>>>>>>> v3.18
 	mmc_card_set_present(card);
 
 	return 0;
@@ -472,9 +586,12 @@ void mmc_remove_card(struct mmc_card *card)
 		device_del(&card->dev);
 	}
 
+<<<<<<< HEAD
 	kfree(card->wr_pack_stats.packing_events);
 	kfree(card->cached_ext_csd);
 
+=======
+>>>>>>> v3.18
 	put_device(&card->dev);
 }
 

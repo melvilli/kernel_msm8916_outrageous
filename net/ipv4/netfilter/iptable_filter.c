@@ -33,20 +33,33 @@ static const struct xt_table packet_filter = {
 };
 
 static unsigned int
+<<<<<<< HEAD
 iptable_filter_hook(unsigned int hook, struct sk_buff *skb,
+=======
+iptable_filter_hook(const struct nf_hook_ops *ops, struct sk_buff *skb,
+>>>>>>> v3.18
 		    const struct net_device *in, const struct net_device *out,
 		    int (*okfn)(struct sk_buff *))
 {
 	const struct net *net;
 
+<<<<<<< HEAD
 	if (hook == NF_INET_LOCAL_OUT &&
+=======
+	if (ops->hooknum == NF_INET_LOCAL_OUT &&
+>>>>>>> v3.18
 	    (skb->len < sizeof(struct iphdr) ||
 	     ip_hdrlen(skb) < sizeof(struct iphdr)))
 		/* root is playing with raw sockets. */
 		return NF_ACCEPT;
 
 	net = dev_net((in != NULL) ? in : out);
+<<<<<<< HEAD
 	return ipt_do_table(skb, hook, in, out, net->ipv4.iptable_filter);
+=======
+	return ipt_do_table(skb, ops->hooknum, in, out,
+			    net->ipv4.iptable_filter);
+>>>>>>> v3.18
 }
 
 static struct nf_hook_ops *filter_ops __read_mostly;
@@ -69,7 +82,11 @@ static int __net_init iptable_filter_net_init(struct net *net)
 	net->ipv4.iptable_filter =
 		ipt_register_table(net, &packet_filter, repl);
 	kfree(repl);
+<<<<<<< HEAD
 	return PTR_RET(net->ipv4.iptable_filter);
+=======
+	return PTR_ERR_OR_ZERO(net->ipv4.iptable_filter);
+>>>>>>> v3.18
 }
 
 static void __net_exit iptable_filter_net_exit(struct net *net)

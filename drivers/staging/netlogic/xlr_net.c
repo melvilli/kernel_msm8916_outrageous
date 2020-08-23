@@ -44,8 +44,13 @@
 #include <linux/platform_device.h>
 
 #include <asm/mipsregs.h>
+<<<<<<< HEAD
 
 /* fmn.h - For FMN credit configuration and registering fmn_handler.
+=======
+/*
+ * fmn.h - For FMN credit configuration and registering fmn_handler.
+>>>>>>> v3.18
  * FMN is communication mechanism that allows processing agents within
  * XLR/XLS to communicate each other.
  */
@@ -78,6 +83,7 @@ static inline void xlr_reg_update(u32 *base_addr,
 	xlr_nae_wreg(base_addr, off, (tmp & ~mask) | (val & mask));
 }
 
+<<<<<<< HEAD
 /*
  * Table of net_device pointers indexed by port, this will be used to
  * lookup the net_device corresponding to a port by the message ring handler.
@@ -109,6 +115,9 @@ static inline void mac_put_skb_back_ptr(struct sk_buff *skb)
 	skb_reserve(skb, MAC_SKB_BACK_PTR_SIZE);
 	*back_ptr = skb;
 }
+=======
+#define MAC_SKB_BACK_PTR_SIZE SMP_CACHE_BYTES
+>>>>>>> v3.18
 
 static int send_to_rfr_fifo(struct xlr_net_priv *priv, void *addr)
 {
@@ -123,9 +132,15 @@ static int send_to_rfr_fifo(struct xlr_net_priv *priv, void *addr)
 	msg.msg3 = 0;
 	stnid = priv->nd->rfr_station;
 	do {
+<<<<<<< HEAD
 		mflags = nlm_cop2_enable();
 		ret = nlm_fmn_send(1, 0, stnid, &msg);
 		nlm_cop2_restore(mflags);
+=======
+		mflags = nlm_cop2_enable_irqsave();
+		ret = nlm_fmn_send(1, 0, stnid, &msg);
+		nlm_cop2_disable_irqrestore(mflags);
+>>>>>>> v3.18
 		if (ret == 0)
 			return 0;
 	} while (++num_try < 10000);
@@ -134,6 +149,7 @@ static int send_to_rfr_fifo(struct xlr_net_priv *priv, void *addr)
 	return ret;
 }
 
+<<<<<<< HEAD
 static inline struct sk_buff *xlr_alloc_skb(void)
 {
 	struct sk_buff *skb;
@@ -146,20 +162,49 @@ static inline struct sk_buff *xlr_alloc_skb(void)
 	}
 	mac_put_skb_back_ptr(skb);
 	return skb;
+=======
+static inline unsigned char *xlr_alloc_skb(void)
+{
+	struct sk_buff *skb;
+	int buf_len = sizeof(struct sk_buff *);
+	unsigned char *skb_data;
+
+	/* skb->data is cache aligned */
+	skb = alloc_skb(XLR_RX_BUF_SIZE, GFP_ATOMIC);
+	if (!skb)
+		return NULL;
+	skb_data = skb->data;
+	skb_put(skb, MAC_SKB_BACK_PTR_SIZE);
+	skb_pull(skb, MAC_SKB_BACK_PTR_SIZE);
+	memcpy(skb_data, &skb, buf_len);
+
+	return skb->data;
+>>>>>>> v3.18
 }
 
 static void xlr_net_fmn_handler(int bkt, int src_stnid, int size,
 		int code, struct nlm_fmn_msg *msg, void *arg)
 {
+<<<<<<< HEAD
 	struct sk_buff *skb, *skb_new = NULL;
 	struct net_device *ndev;
 	struct xlr_net_priv *priv;
 	u64 length, port;
 	void *addr;
+=======
+	struct sk_buff *skb;
+	void *skb_data = NULL;
+	struct net_device *ndev;
+	struct xlr_net_priv *priv;
+	u32 port, length;
+	unsigned char *addr;
+	struct xlr_adapter *adapter = (struct xlr_adapter *) arg;
+>>>>>>> v3.18
 
 	length = (msg->msg0 >> 40) & 0x3fff;
 	if (length == 0) {
 		addr = bus_to_virt(msg->msg0 & 0xffffffffffULL);
+<<<<<<< HEAD
 		dev_kfree_skb_any(addr);
 	} else if (length) {
 		addr = bus_to_virt(msg->msg0 & 0xffffffffe0ULL);
@@ -169,6 +214,21 @@ static void xlr_net_fmn_handler(int bkt, int src_stnid, int size,
 			port = port + 4;
 		skb = mac_get_skb_back_ptr(addr);
 		skb->dev = mac_to_ndev[port];
+=======
+		addr = addr - MAC_SKB_BACK_PTR_SIZE;
+		skb = (struct sk_buff *) *(unsigned long *)addr;
+		dev_kfree_skb_any((struct sk_buff *)addr);
+	} else {
+		addr = (unsigned char *)
+			bus_to_virt(msg->msg0 & 0xffffffffe0ULL);
+		length = length - BYTE_OFFSET - MAC_CRC_LEN;
+		port = ((int)msg->msg0) & 0x0f;
+		addr = addr - MAC_SKB_BACK_PTR_SIZE;
+		skb = (struct sk_buff *) *(unsigned long *)addr;
+		skb->dev = adapter->netdev[port];
+		if (skb->dev == NULL)
+			return;
+>>>>>>> v3.18
 		ndev = skb->dev;
 		priv = netdev_priv(ndev);
 
@@ -179,6 +239,7 @@ static void xlr_net_fmn_handler(int bkt, int src_stnid, int size,
 		skb->dev->last_rx = jiffies;
 		netif_rx(skb);
 		/* Fill rx ring */
+<<<<<<< HEAD
 		skb_new = xlr_alloc_skb();
 		if (skb_new)
 			send_to_rfr_fifo(priv, skb_new->data);
@@ -187,6 +248,17 @@ static void xlr_net_fmn_handler(int bkt, int src_stnid, int size,
 }
 
 /* Ethtool operation */
+=======
+		skb_data = xlr_alloc_skb();
+		if (skb_data)
+			send_to_rfr_fifo(priv, skb_data);
+	}
+}
+
+/*
+ * Ethtool operation
+ */
+>>>>>>> v3.18
 static int xlr_get_settings(struct net_device *ndev, struct ethtool_cmd *ecmd)
 {
 	struct xlr_net_priv *priv = netdev_priv(ndev);
@@ -212,6 +284,7 @@ static struct ethtool_ops xlr_ethtool_ops = {
 	.set_settings = xlr_set_settings,
 };
 
+<<<<<<< HEAD
 /* Net operations */
 static int xlr_net_fill_rx_ring(struct net_device *ndev)
 {
@@ -224,6 +297,24 @@ static int xlr_net_fill_rx_ring(struct net_device *ndev)
 		if (!skb)
 			return -ENOMEM;
 		send_to_rfr_fifo(priv, skb->data);
+=======
+/*
+ * Net operations
+ */
+static int xlr_net_fill_rx_ring(struct net_device *ndev)
+{
+	void *skb_data;
+	struct xlr_net_priv *priv = netdev_priv(ndev);
+	int i;
+
+	for (i = 0; i < MAX_FRIN_SPILL/4; i++) {
+		skb_data = xlr_alloc_skb();
+		if (!skb_data) {
+			pr_err("SKB allocation failed\n");
+			return -ENOMEM;
+		}
+		send_to_rfr_fifo(priv, skb_data);
+>>>>>>> v3.18
 	}
 	pr_info("Rx ring setup done\n");
 	return 0;
@@ -243,10 +334,18 @@ static int xlr_net_open(struct net_device *ndev)
 		pr_err("Autoneg failed\n");
 		return err;
 	}
+<<<<<<< HEAD
 
 	/* Setup the speed from PHY to internal reg*/
 	xlr_set_gmac_speed(priv);
 	netif_tx_start_all_queues(ndev);
+=======
+	/* Setup the speed from PHY to internal reg*/
+	xlr_set_gmac_speed(priv);
+
+	netif_tx_start_all_queues(ndev);
+
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -266,6 +365,10 @@ static void xlr_make_tx_desc(struct nlm_fmn_msg *msg, unsigned long addr,
 	unsigned long physkb = virt_to_phys(skb);
 	int cpu_core = nlm_core_id();
 	int fr_stn_id = cpu_core * 8 + XLR_FB_STN;	/* FB to 6th bucket */
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	msg->msg0 = (((u64)1 << 63)	|	/* End of packet descriptor */
 		((u64)127 << 54)	|	/* No Free back */
 		(u64)skb->len << 40	|	/* Length of data */
@@ -296,15 +399,27 @@ static netdev_tx_t xlr_net_start_xmit(struct sk_buff *skb,
 	u32 flags;
 
 	xlr_make_tx_desc(&msg, virt_to_phys(skb->data), skb);
+<<<<<<< HEAD
 	flags = nlm_cop2_enable();
 	ret = nlm_fmn_send(2, 0, priv->nd->tx_stnid, &msg);
 	nlm_cop2_restore(flags);
+=======
+	flags = nlm_cop2_enable_irqsave();
+	ret = nlm_fmn_send(2, 0, priv->tx_stnid, &msg);
+	nlm_cop2_disable_irqrestore(flags);
+>>>>>>> v3.18
 	if (ret)
 		dev_kfree_skb_any(skb);
 	return NETDEV_TX_OK;
 }
 
+<<<<<<< HEAD
 static u16 xlr_net_select_queue(struct net_device *ndev, struct sk_buff *skb)
+=======
+static u16 xlr_net_select_queue(struct net_device *ndev, struct sk_buff *skb,
+				void *accel_priv,
+				select_queue_fallback_t fallback)
+>>>>>>> v3.18
 {
 	return (u16)smp_processor_id();
 }
@@ -428,7 +543,13 @@ static struct net_device_ops xlr_netdev_ops = {
 	.ndo_get_stats64 = xlr_get_stats64,
 };
 
+<<<<<<< HEAD
 /* Gmac init */
+=======
+/*
+ * Gmac init
+ */
+>>>>>>> v3.18
 static void *xlr_config_spill(struct xlr_net_priv *priv, int reg_start_0,
 		int reg_start_1, int reg_size, int size)
 {
@@ -500,8 +621,15 @@ static void xlr_config_fifo_spill_area(struct xlr_net_priv *priv)
 			sizeof(u64));
 }
 
+<<<<<<< HEAD
 /* Configure PDE to Round-Robin distribution of packets to the
  * available cpu */
+=======
+/*
+ * Configure PDE to Round-Robin distribution of packets to the
+ * available cpu
+ */
+>>>>>>> v3.18
 static void xlr_config_pde(struct xlr_net_priv *priv)
 {
 	int i = 0;
@@ -528,15 +656,27 @@ static void xlr_config_pde(struct xlr_net_priv *priv)
 			((bkt_map >> 32) & 0xffffffff));
 }
 
+<<<<<<< HEAD
 /* Setup the Message ring credits, bucket size and other
  * common configuration */
 static void xlr_config_common(struct xlr_net_priv *priv)
+=======
+/*
+ * Setup the Message ring credits, bucket size and other
+ * common configuration
+ */
+static int xlr_config_common(struct xlr_net_priv *priv)
+>>>>>>> v3.18
 {
 	struct xlr_fmn_info *gmac = priv->nd->gmac_fmn_info;
 	int start_stn_id = gmac->start_stn_id;
 	int end_stn_id = gmac->end_stn_id;
 	int *bucket_size = priv->nd->bucket_size;
+<<<<<<< HEAD
 	int i, j;
+=======
+	int i, j, err;
+>>>>>>> v3.18
 
 	/* Setting non-core MsgBktSize(0x321 - 0x325) */
 	for (i = start_stn_id; i <= end_stn_id; i++) {
@@ -545,8 +685,15 @@ static void xlr_config_common(struct xlr_net_priv *priv)
 				bucket_size[i]);
 	}
 
+<<<<<<< HEAD
 	/* Setting non-core Credit counter register
 	 * Distributing Gmac's credit to CPU's*/
+=======
+	/*
+	 * Setting non-core Credit counter register
+	 * Distributing Gmac's credit to CPU's
+	 */
+>>>>>>> v3.18
 	for (i = 0; i < 8; i++) {
 		for (j = 0; j < 8; j++)
 			xlr_nae_wreg(priv->base_addr,
@@ -561,9 +708,18 @@ static void xlr_config_common(struct xlr_net_priv *priv)
 	xlr_nae_wreg(priv->base_addr, R_DMACR3, 0xffffffff);
 	xlr_nae_wreg(priv->base_addr, R_FREEQCARVE, 0);
 
+<<<<<<< HEAD
 	xlr_net_fill_rx_ring(priv->ndev);
 	nlm_register_fmn_handler(start_stn_id, end_stn_id, xlr_net_fmn_handler,
 					NULL);
+=======
+	err = xlr_net_fill_rx_ring(priv->ndev);
+	if (err)
+		return err;
+	nlm_register_fmn_handler(start_stn_id, end_stn_id, xlr_net_fmn_handler,
+			priv->adapter);
+	return 0;
+>>>>>>> v3.18
 }
 
 static void xlr_config_translate_table(struct xlr_net_priv *priv)
@@ -593,7 +749,12 @@ static void xlr_config_translate_table(struct xlr_net_priv *priv)
 	c1 = 3;
 	c2 = 0;
 	for (i = 0; i < 64; i++) {
+<<<<<<< HEAD
 		/* On use_bkt set the b0, b1 are used, else
+=======
+		/*
+		 * On use_bkt set the b0, b1 are used, else
+>>>>>>> v3.18
 		 * the 4 classes are used, here implemented
 		 * a logic to distribute the packets to the
 		 * buckets equally or based on the class
@@ -604,8 +765,11 @@ static void xlr_config_translate_table(struct xlr_net_priv *priv)
 		k = (k + 1) % j;
 		b2 = bkts[k];
 		k = (k + 1) % j;
+<<<<<<< HEAD
 		val = ((c1 << 23) | (b1 << 17) | (use_bkt << 16) |
 				(c2 << 7) | (b2 << 1) | (use_bkt << 0));
+=======
+>>>>>>> v3.18
 
 		val = ((c1 << 23) | (b1 << 17) | (use_bkt << 16) |
 				(c2 << 7) | (b2 << 1) | (use_bkt << 0));
@@ -694,7 +858,10 @@ static int xlr_phy_read(u32 *base_addr, int phy_addr, int regnum)
 	xlr_nae_wreg(base_addr, R_MII_MGMT_COMMAND,
 			(1 << O_MII_MGMT_COMMAND__rstat));
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 	/* poll for the read cycle to complete */
 	while (!timedout) {
 		checktime = jiffies;
@@ -736,7 +903,12 @@ static int xlr_mii_read(struct mii_bus *bus, int phy_addr, int regnum)
 	return ret;
 }
 
+<<<<<<< HEAD
 /* XLR ports are RGMII. XLS ports are SGMII mostly except the port0,
+=======
+/*
+ * XLR ports are RGMII. XLS ports are SGMII mostly except the port0,
+>>>>>>> v3.18
  * which can be configured either SGMII or RGMII, considered SGMII
  * by default, if board setup to RGMII the port_type need to set
  * accordingly.Serdes and PCS layer need to configured for SGMII
@@ -765,7 +937,11 @@ static void xlr_sgmii_init(struct xlr_net_priv *priv)
 	xlr_nae_wreg(priv->gpio_addr, 0x21, 0x7104);
 
 	/* enable autoneg - more magic */
+<<<<<<< HEAD
 	phy = priv->port_id % 4 + 27;
+=======
+	phy = priv->phy_addr % 4 + 27;
+>>>>>>> v3.18
 	xlr_phy_write(priv->pcs_addr, phy, 0, 0x1000);
 	xlr_phy_write(priv->pcs_addr, phy, 0, 0x0200);
 }
@@ -779,7 +955,10 @@ void xlr_set_gmac_speed(struct xlr_net_priv *priv)
 		xlr_sgmii_init(priv);
 
 	if (phydev->speed != priv->phy_speed) {
+<<<<<<< HEAD
 		pr_info("change %d to %d\n", priv->phy_speed, phydev->speed);
+=======
+>>>>>>> v3.18
 		speed = phydev->speed;
 		if (speed == SPEED_1000) {
 			/* Set interface to Byte mode */
@@ -821,12 +1000,21 @@ static void xlr_gmac_link_adjust(struct net_device *ndev)
 	intreg = xlr_nae_rdreg(priv->base_addr, R_INTREG);
 	if (phydev->link) {
 		if (phydev->speed != priv->phy_speed) {
+<<<<<<< HEAD
 			pr_info("gmac%d : Link up\n", priv->port_id);
 			xlr_set_gmac_speed(priv);
 		}
 	} else {
 		pr_info("gmac%d : Link down\n", priv->port_id);
 		xlr_set_gmac_speed(priv);
+=======
+			xlr_set_gmac_speed(priv);
+			pr_info("gmac%d : Link up\n", priv->port_id);
+		}
+	} else {
+		xlr_set_gmac_speed(priv);
+		pr_info("gmac%d : Link down\n", priv->port_id);
+>>>>>>> v3.18
 	}
 }
 
@@ -866,7 +1054,10 @@ static int xlr_setup_mdio(struct xlr_net_priv *priv,
 {
 	int err;
 
+<<<<<<< HEAD
 	priv->phy_addr = priv->nd->phy_addr;
+=======
+>>>>>>> v3.18
 	priv->mii_bus = mdiobus_alloc();
 	if (!priv->mii_bus) {
 		pr_err("mdiobus alloc failed\n");
@@ -881,6 +1072,15 @@ static int xlr_setup_mdio(struct xlr_net_priv *priv,
 	priv->mii_bus->write = xlr_mii_write;
 	priv->mii_bus->parent = &pdev->dev;
 	priv->mii_bus->irq = kmalloc(sizeof(int)*PHY_MAX_ADDR, GFP_KERNEL);
+<<<<<<< HEAD
+=======
+	if (priv->mii_bus->irq == NULL) {
+		pr_err("irq alloc failed\n");
+		mdiobus_free(priv->mii_bus);
+		return -ENOMEM;
+	}
+
+>>>>>>> v3.18
 	priv->mii_bus->irq[priv->phy_addr] = priv->ndev->irq;
 
 	/* Scan only the enabled address */
@@ -896,7 +1096,11 @@ static int xlr_setup_mdio(struct xlr_net_priv *priv,
 		return err;
 	}
 
+<<<<<<< HEAD
 	pr_info("Registerd mdio bus id : %s\n", priv->mii_bus->id);
+=======
+	pr_info("Registered mdio bus id : %s\n", priv->mii_bus->id);
+>>>>>>> v3.18
 	err = xlr_mii_probe(priv);
 	if (err) {
 		mdiobus_free(priv->mii_bus);
@@ -951,7 +1155,13 @@ static void xlr_port_disable(struct xlr_net_priv *priv)
 		1 << O_RX_CONTROL__RxEnable, 0);
 }
 
+<<<<<<< HEAD
 /* Initialization of gmac */
+=======
+/*
+ * Initialization of gmac
+ */
+>>>>>>> v3.18
 static int xlr_gmac_init(struct xlr_net_priv *priv,
 		struct platform_device *pdev)
 {
@@ -960,6 +1170,10 @@ static int xlr_gmac_init(struct xlr_net_priv *priv,
 	pr_info("Initializing the gmac%d\n", priv->port_id);
 
 	xlr_port_disable(priv);
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	xlr_nae_wreg(priv->base_addr, R_DESC_PACK_CTRL,
 			(1 << O_DESC_PACK_CTRL__MaxEntry)
 			| (BYTE_OFFSET << O_DESC_PACK_CTRL__ByteOffset)
@@ -988,8 +1202,13 @@ static int xlr_gmac_init(struct xlr_net_priv *priv,
 	/* Clear all stats */
 	xlr_reg_update(priv->base_addr, R_STATCTRL,
 		0, 1 << O_STATCTRL__ClrCnt);
+<<<<<<< HEAD
 	xlr_reg_update(priv->base_addr, R_STATCTRL,
 		1 << O_STATCTRL__ClrCnt, 1 << O_STATCTRL__ClrCnt);
+=======
+	xlr_reg_update(priv->base_addr, R_STATCTRL, 1 << 2,
+		1 << 2);
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -998,6 +1217,7 @@ static int xlr_net_probe(struct platform_device *pdev)
 	struct xlr_net_priv *priv = NULL;
 	struct net_device *ndev;
 	struct resource *res;
+<<<<<<< HEAD
 	int mac, err;
 
 	mac = pdev->id;
@@ -1057,10 +1277,88 @@ static int xlr_net_probe(struct platform_device *pdev)
 
 	/* Common registers, do one time initialization */
 	if (mac == 0 || mac == 4) {
+=======
+	struct xlr_adapter *adapter;
+	int err, port;
+
+	pr_info("XLR/XLS Ethernet Driver controller %d\n", pdev->id);
+	/*
+	 * Allocate our adapter data structure and attach it to the device.
+	 */
+	adapter = (struct xlr_adapter *)
+		devm_kzalloc(&pdev->dev, sizeof(adapter), GFP_KERNEL);
+	if (!adapter) {
+		err = -ENOMEM;
+		return err;
+	}
+
+	/*
+	 * XLR and XLS have 1 and 2 NAE controller respectively
+	 * Each controller has 4 gmac ports, mapping each controller
+	 * under one parent device, 4 gmac ports under one device.
+	 */
+	for (port = 0; port < pdev->num_resources/2; port++) {
+		ndev = alloc_etherdev_mq(sizeof(struct xlr_net_priv), 32);
+		if (!ndev) {
+			pr_err("Allocation of Ethernet device failed\n");
+			return -ENOMEM;
+		}
+
+		priv = netdev_priv(ndev);
+		priv->pdev = pdev;
+		priv->ndev = ndev;
+		priv->port_id = (pdev->id * 4) + port;
+		priv->nd = (struct xlr_net_data *)pdev->dev.platform_data;
+		res = platform_get_resource(pdev, IORESOURCE_MEM, port);
+
+		if (res == NULL) {
+			pr_err("No memory resource for MAC %d\n",
+					priv->port_id);
+			err = -ENODEV;
+			goto err_gmac;
+		}
+		priv->base_addr = devm_ioremap_resource(&pdev->dev, res);
+		if (IS_ERR(priv->base_addr)) {
+			err = PTR_ERR(priv->base_addr);
+			goto err_gmac;
+		}
+		priv->adapter = adapter;
+		adapter->netdev[port] = ndev;
+
+		res = platform_get_resource(pdev, IORESOURCE_IRQ, port);
+		if (res == NULL) {
+			pr_err("No irq resource for MAC %d\n", priv->port_id);
+			err = -ENODEV;
+			goto err_gmac;
+		}
+
+		ndev->irq = res->start;
+
+		priv->phy_addr = priv->nd->phy_addr[port];
+		priv->tx_stnid = priv->nd->tx_stnid[port];
+		priv->mii_addr = priv->nd->mii_addr;
+		priv->serdes_addr = priv->nd->serdes_addr;
+		priv->pcs_addr = priv->nd->pcs_addr;
+		priv->gpio_addr = priv->nd->gpio_addr;
+
+		ndev->netdev_ops = &xlr_netdev_ops;
+		ndev->watchdog_timeo = HZ;
+
+		/* Setup Mac address and Rx mode */
+		eth_hw_addr_random(ndev);
+		xlr_hw_set_mac_addr(ndev);
+		xlr_set_rx_mode(ndev);
+
+		priv->num_rx_desc += MAX_NUM_DESC_SPILL;
+		ndev->ethtool_ops = &xlr_ethtool_ops;
+		SET_NETDEV_DEV(ndev, &pdev->dev);
+
+>>>>>>> v3.18
 		xlr_config_fifo_spill_area(priv);
 		/* Configure PDE to Round-Robin pkt distribution */
 		xlr_config_pde(priv);
 		xlr_config_parser(priv);
+<<<<<<< HEAD
 	}
 	/* Call init with respect to port */
 	if (strcmp(res->name, "gmac") == 0) {
@@ -1078,6 +1376,33 @@ static int xlr_net_probe(struct platform_device *pdev)
 	if (err)
 		goto err_netdev;
 	platform_set_drvdata(pdev, priv);
+=======
+
+		/* Call init with respect to port */
+		if (strcmp(res->name, "gmac") == 0) {
+			err = xlr_gmac_init(priv, pdev);
+			if (err) {
+				pr_err("gmac%d init failed\n", priv->port_id);
+				goto err_gmac;
+			}
+		}
+
+		if (priv->port_id == 0 || priv->port_id == 4) {
+			err = xlr_config_common(priv);
+			if (err)
+				goto err_netdev;
+		}
+
+		err = register_netdev(ndev);
+		if (err) {
+			pr_err("Registering netdev failed for gmac%d\n",
+					priv->port_id);
+			goto err_netdev;
+		}
+		platform_set_drvdata(pdev, priv);
+	}
+
+>>>>>>> v3.18
 	return 0;
 
 err_netdev:
@@ -1090,6 +1415,10 @@ err_gmac:
 static int xlr_net_remove(struct platform_device *pdev)
 {
 	struct xlr_net_priv *priv = platform_get_drvdata(pdev);
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	unregister_netdev(priv->ndev);
 	mdiobus_unregister(priv->mii_bus);
 	mdiobus_free(priv->mii_bus);

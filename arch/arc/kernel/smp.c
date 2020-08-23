@@ -12,12 +12,16 @@
  *    -- Initial Write (Borrowed heavily from ARM)
  */
 
+<<<<<<< HEAD
 #include <linux/module.h>
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/spinlock.h>
 #include <linux/sched.h>
 #include <linux/interrupt.h>
 #include <linux/profile.h>
+<<<<<<< HEAD
 #include <linux/errno.h>
 #include <linux/err.h>
 #include <linux/mm.h>
@@ -29,6 +33,13 @@
 #include <linux/percpu.h>
 #include <linux/cpumask.h>
 #include <linux/spinlock_types.h>
+=======
+#include <linux/mm.h>
+#include <linux/cpu.h>
+#include <linux/irq.h>
+#include <linux/atomic.h>
+#include <linux/cpumask.h>
+>>>>>>> v3.18
 #include <linux/reboot.h>
 #include <asm/processor.h>
 #include <asm/setup.h>
@@ -95,7 +106,11 @@ void __init smp_cpus_done(unsigned int max_cpus)
  *        If it turns out to be elaborate, it's better to code it in assembly
  *
  */
+<<<<<<< HEAD
 void __attribute__((weak)) arc_platform_smp_wait_to_boot(int cpu)
+=======
+void __weak arc_platform_smp_wait_to_boot(int cpu)
+>>>>>>> v3.18
 {
 	/*
 	 * As a hack for debugging - since debugger will single-step over the
@@ -109,7 +124,11 @@ void __attribute__((weak)) arc_platform_smp_wait_to_boot(int cpu)
 
 const char *arc_platform_smp_cpuinfo(void)
 {
+<<<<<<< HEAD
 	return plat_smp_ops.info;
+=======
+	return plat_smp_ops.info ? : "";
+>>>>>>> v3.18
 }
 
 /*
@@ -117,7 +136,11 @@ const char *arc_platform_smp_cpuinfo(void)
  * Called from asm stub in head.S
  * "current"/R25 already setup by low level boot code
  */
+<<<<<<< HEAD
 void __cpuinit start_kernel_secondary(void)
+=======
+void start_kernel_secondary(void)
+>>>>>>> v3.18
 {
 	struct mm_struct *mm = &init_mm;
 	unsigned int cpu = smp_processor_id();
@@ -128,6 +151,10 @@ void __cpuinit start_kernel_secondary(void)
 	atomic_inc(&mm->mm_users);
 	atomic_inc(&mm->mm_count);
 	current->active_mm = mm;
+<<<<<<< HEAD
+=======
+	cpumask_set_cpu(cpu, mm_cpumask(mm));
+>>>>>>> v3.18
 
 	notify_cpu_starting(cpu);
 	set_cpu_online(cpu, true);
@@ -135,9 +162,15 @@ void __cpuinit start_kernel_secondary(void)
 	pr_info("## CPU%u LIVE ##: Executing Code...\n", cpu);
 
 	if (machine_desc->init_smp)
+<<<<<<< HEAD
 		machine_desc->init_smp(smp_processor_id());
 
 	arc_local_timer_setup(cpu);
+=======
+		machine_desc->init_smp(cpu);
+
+	arc_local_timer_setup();
+>>>>>>> v3.18
 
 	local_irq_enable();
 	preempt_disable();
@@ -154,7 +187,11 @@ void __cpuinit start_kernel_secondary(void)
  *
  * Essential requirements being where to run from (PC) and stack (SP)
 */
+<<<<<<< HEAD
 int __cpuinit __cpu_up(unsigned int cpu, struct task_struct *idle)
+=======
+int __cpu_up(unsigned int cpu, struct task_struct *idle)
+>>>>>>> v3.18
 {
 	unsigned long wait_till;
 
@@ -196,6 +233,7 @@ int __init setup_profiling_timer(unsigned int multiplier)
 /*              Inter Processor Interrupt Handling                           */
 /*****************************************************************************/
 
+<<<<<<< HEAD
 /*
  * structures for inter-processor calls
  * A Collection of single bit ipi messages
@@ -235,13 +273,73 @@ static void ipi_send_msg(const struct cpumask *callmap, enum ipi_msg_type msg)
 	/* Call the platform specific cross-CPU call function  */
 	if (plat_smp_ops.ipi_send)
 		plat_smp_ops.ipi_send((void *)callmap);
+=======
+enum ipi_msg_type {
+	IPI_EMPTY = 0,
+	IPI_RESCHEDULE = 1,
+	IPI_CALL_FUNC,
+	IPI_CPU_STOP,
+};
+
+/*
+ * In arches with IRQ for each msg type (above), receiver can use IRQ-id  to
+ * figure out what msg was sent. For those which don't (ARC has dedicated IPI
+ * IRQ), the msg-type needs to be conveyed via per-cpu data
+ */
+
+static DEFINE_PER_CPU(unsigned long, ipi_data);
+
+static void ipi_send_msg_one(int cpu, enum ipi_msg_type msg)
+{
+	unsigned long __percpu *ipi_data_ptr = per_cpu_ptr(&ipi_data, cpu);
+	unsigned long old, new;
+	unsigned long flags;
+
+	pr_debug("%d Sending msg [%d] to %d\n", smp_processor_id(), msg, cpu);
+
+	local_irq_save(flags);
+
+	/*
+	 * Atomically write new msg bit (in case others are writing too),
+	 * and read back old value
+	 */
+	do {
+		new = old = *ipi_data_ptr;
+		new |= 1U << msg;
+	} while (cmpxchg(ipi_data_ptr, old, new) != old);
+
+	/*
+	 * Call the platform specific IPI kick function, but avoid if possible:
+	 * Only do so if there's no pending msg from other concurrent sender(s).
+	 * Otherwise, recevier will see this msg as well when it takes the
+	 * IPI corresponding to that msg. This is true, even if it is already in
+	 * IPI handler, because !@old means it has not yet dequeued the msg(s)
+	 * so @new msg can be a free-loader
+	 */
+	if (plat_smp_ops.ipi_send && !old)
+		plat_smp_ops.ipi_send(cpu);
+>>>>>>> v3.18
 
 	local_irq_restore(flags);
 }
 
+<<<<<<< HEAD
 void smp_send_reschedule(int cpu)
 {
 	ipi_send_msg(cpumask_of(cpu), IPI_RESCHEDULE);
+=======
+static void ipi_send_msg(const struct cpumask *callmap, enum ipi_msg_type msg)
+{
+	unsigned int cpu;
+
+	for_each_cpu(cpu, callmap)
+		ipi_send_msg_one(cpu, msg);
+}
+
+void smp_send_reschedule(int cpu)
+{
+	ipi_send_msg_one(cpu, IPI_RESCHEDULE);
+>>>>>>> v3.18
 }
 
 void smp_send_stop(void)
@@ -254,7 +352,11 @@ void smp_send_stop(void)
 
 void arch_send_call_function_single_ipi(int cpu)
 {
+<<<<<<< HEAD
 	ipi_send_msg(cpumask_of(cpu), IPI_CALL_FUNC_SINGLE);
+=======
+	ipi_send_msg_one(cpu, IPI_CALL_FUNC);
+>>>>>>> v3.18
 }
 
 void arch_send_call_function_ipi_mask(const struct cpumask *mask)
@@ -265,11 +367,16 @@ void arch_send_call_function_ipi_mask(const struct cpumask *mask)
 /*
  * ipi_cpu_stop - handle IPI from smp_send_stop()
  */
+<<<<<<< HEAD
 static void ipi_cpu_stop(unsigned int cpu)
+=======
+static void ipi_cpu_stop(void)
+>>>>>>> v3.18
 {
 	machine_halt();
 }
 
+<<<<<<< HEAD
 static inline void __do_IPI(unsigned long *ops, struct ipi_data *ipi, int cpu)
 {
 	unsigned long msg = 0;
@@ -296,6 +403,26 @@ static inline void __do_IPI(unsigned long *ops, struct ipi_data *ipi, int cpu)
 		}
 	} while (msg < BITS_PER_LONG);
 
+=======
+static inline void __do_IPI(unsigned long msg)
+{
+	switch (msg) {
+	case IPI_RESCHEDULE:
+		scheduler_ipi();
+		break;
+
+	case IPI_CALL_FUNC:
+		generic_smp_call_function_interrupt();
+		break;
+
+	case IPI_CPU_STOP:
+		ipi_cpu_stop();
+		break;
+
+	default:
+		pr_warn("IPI with unexpected msg %ld\n", msg);
+	}
+>>>>>>> v3.18
 }
 
 /*
@@ -304,6 +431,7 @@ static inline void __do_IPI(unsigned long *ops, struct ipi_data *ipi, int cpu)
  */
 irqreturn_t do_IPI(int irq, void *dev_id)
 {
+<<<<<<< HEAD
 	int cpu = smp_processor_id();
 	struct ipi_data *ipi = &per_cpu(ipi_data, cpu);
 	unsigned long ops;
@@ -317,6 +445,27 @@ irqreturn_t do_IPI(int irq, void *dev_id)
 	 */
 	while ((ops = xchg(&ipi->bits, 0)) != 0)
 		__do_IPI(&ops, ipi, cpu);
+=======
+	unsigned long pending;
+
+	pr_debug("IPI [%ld] received on cpu %d\n",
+		 *this_cpu_ptr(&ipi_data), smp_processor_id());
+
+	if (plat_smp_ops.ipi_clear)
+		plat_smp_ops.ipi_clear(irq);
+
+	/*
+	 * "dequeue" the msg corresponding to this IPI (and possibly other
+	 * piggybacked msg from elided IPIs: see ipi_send_msg_one() above)
+	 */
+	pending = xchg(this_cpu_ptr(&ipi_data), 0);
+
+	do {
+		unsigned long msg = __ffs(pending);
+		__do_IPI(msg);
+		pending &= ~(1U << msg);
+	} while (pending);
+>>>>>>> v3.18
 
 	return IRQ_HANDLED;
 }
@@ -325,8 +474,19 @@ irqreturn_t do_IPI(int irq, void *dev_id)
  * API called by platform code to hookup arch-common ISR to their IPI IRQ
  */
 static DEFINE_PER_CPU(int, ipi_dev);
+<<<<<<< HEAD
 int smp_ipi_irq_setup(int cpu, int irq)
 {
 	int *dev_id = &per_cpu(ipi_dev, smp_processor_id());
 	return request_percpu_irq(irq, do_IPI, "IPI Interrupt", dev_id);
+=======
+
+int smp_ipi_irq_setup(int cpu, int irq)
+{
+	int *dev = per_cpu_ptr(&ipi_dev, cpu);
+
+	arc_request_percpu_irq(irq, cpu, do_IPI, "IPI Interrupt", dev);
+
+	return 0;
+>>>>>>> v3.18
 }

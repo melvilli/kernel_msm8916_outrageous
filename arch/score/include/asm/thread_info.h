@@ -72,8 +72,11 @@ register struct thread_info *__current_thread_info __asm__("r28");
 
 #endif /* !__ASSEMBLY__ */
 
+<<<<<<< HEAD
 #define PREEMPT_ACTIVE		0x10000000
 
+=======
+>>>>>>> v3.18
 /*
  * thread information flags
  * - these are process state flags that various assembly files may need to

@@ -246,7 +246,11 @@ static void enclosure_component_release(struct device *dev)
 	put_device(dev->parent);
 }
 
+<<<<<<< HEAD
 static const struct attribute_group *enclosure_groups[];
+=======
+static const struct attribute_group *enclosure_component_groups[];
+>>>>>>> v3.18
 
 /**
  * enclosure_component_register - add a particular component to an enclosure
@@ -289,7 +293,11 @@ enclosure_component_register(struct enclosure_device *edev,
 		dev_set_name(cdev, "%u", number);
 
 	cdev->release = enclosure_component_release;
+<<<<<<< HEAD
 	cdev->groups = enclosure_groups;
+=======
+	cdev->groups = enclosure_component_groups;
+>>>>>>> v3.18
 
 	err = device_register(cdev);
 	if (err) {
@@ -372,25 +380,44 @@ EXPORT_SYMBOL_GPL(enclosure_remove_device);
  * sysfs pieces below
  */
 
+<<<<<<< HEAD
 static ssize_t enclosure_show_components(struct device *cdev,
 					 struct device_attribute *attr,
 					 char *buf)
+=======
+static ssize_t components_show(struct device *cdev,
+			       struct device_attribute *attr, char *buf)
+>>>>>>> v3.18
 {
 	struct enclosure_device *edev = to_enclosure_device(cdev);
 
 	return snprintf(buf, 40, "%d\n", edev->components);
 }
+<<<<<<< HEAD
 
 static struct device_attribute enclosure_attrs[] = {
 	__ATTR(components, S_IRUGO, enclosure_show_components, NULL),
 	__ATTR_NULL
 };
+=======
+static DEVICE_ATTR_RO(components);
+
+static struct attribute *enclosure_class_attrs[] = {
+	&dev_attr_components.attr,
+	NULL,
+};
+ATTRIBUTE_GROUPS(enclosure_class);
+>>>>>>> v3.18
 
 static struct class enclosure_class = {
 	.name			= "enclosure",
 	.owner			= THIS_MODULE,
 	.dev_release		= enclosure_release,
+<<<<<<< HEAD
 	.dev_attrs		= enclosure_attrs,
+=======
+	.dev_groups		= enclosure_class_groups,
+>>>>>>> v3.18
 };
 
 static const char *const enclosure_status [] = {
@@ -543,6 +570,7 @@ static struct attribute *enclosure_component_attrs[] = {
 	&dev_attr_type.attr,
 	NULL
 };
+<<<<<<< HEAD
 
 static struct attribute_group enclosure_group = {
 	.attrs = enclosure_component_attrs,
@@ -552,6 +580,9 @@ static const struct attribute_group *enclosure_groups[] = {
 	&enclosure_group,
 	NULL
 };
+=======
+ATTRIBUTE_GROUPS(enclosure_component);
+>>>>>>> v3.18
 
 static int __init enclosure_init(void)
 {

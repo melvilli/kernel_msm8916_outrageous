@@ -14,10 +14,13 @@
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St - Fifth Floor, Boston, MA 02110-1301 USA.
+=======
+>>>>>>> v3.18
  * The full GNU General Public License is included in this distribution
  * in the file called LICENSE.GPL.
  *
@@ -62,7 +65,10 @@
  */
 
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/pci.h>
 #include <linux/kernel.h>
 #include <linux/stddef.h>
@@ -82,7 +88,11 @@
 #define PCI_DEVICE_ID_INTEL_S1200_SMT1	0x0c5a
 #define PCI_DEVICE_ID_INTEL_AVOTON_SMT	0x1f15
 
+<<<<<<< HEAD
 #define ISMT_DESC_ENTRIES	32	/* number of descriptor entries */
+=======
+#define ISMT_DESC_ENTRIES	2	/* number of descriptor entries */
+>>>>>>> v3.18
 #define ISMT_MAX_RETRIES	3	/* number of SMBus retries to attempt */
 
 /* Hardware Descriptor Constants - Control Field */
@@ -183,7 +193,11 @@ struct ismt_priv {
 /**
  * ismt_ids - PCI device IDs supported by this driver
  */
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(ismt_ids) = {
+=======
+static const struct pci_device_id ismt_ids[] = {
+>>>>>>> v3.18
 	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_S1200_SMT0) },
 	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_S1200_SMT1) },
 	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_AVOTON_SMT) },
@@ -344,6 +358,10 @@ static int ismt_process_desc(const struct ismt_desc *desc,
 			data->word = dma_buffer[0] | (dma_buffer[1] << 8);
 			break;
 		case I2C_SMBUS_BLOCK_DATA:
+<<<<<<< HEAD
+=======
+		case I2C_SMBUS_I2C_BLOCK_DATA:
+>>>>>>> v3.18
 			memcpy(&data->block[1], dma_buffer, desc->rxbytes);
 			data->block[0] = desc->rxbytes;
 			break;
@@ -497,7 +515,11 @@ static int ismt_access(struct i2c_adapter *adap, u16 addr,
 			desc->wr_len_cmd = dma_size;
 			desc->control |= ISMT_DESC_BLK;
 			priv->dma_buffer[0] = command;
+<<<<<<< HEAD
 			memcpy(&priv->dma_buffer[1], &data->block[1], dma_size);
+=======
+			memcpy(&priv->dma_buffer[1], &data->block[1], dma_size - 1);
+>>>>>>> v3.18
 		} else {
 			/* Block Read */
 			dev_dbg(dev, "I2C_SMBUS_BLOCK_DATA:  READ\n");
@@ -509,6 +531,44 @@ static int ismt_access(struct i2c_adapter *adap, u16 addr,
 		}
 		break;
 
+<<<<<<< HEAD
+=======
+	case I2C_SMBUS_I2C_BLOCK_DATA:
+		/* Make sure the length is valid */
+		if (data->block[0] < 1)
+			data->block[0] = 1;
+
+		if (data->block[0] > I2C_SMBUS_BLOCK_MAX)
+			data->block[0] = I2C_SMBUS_BLOCK_MAX;
+
+		if (read_write == I2C_SMBUS_WRITE) {
+			/* i2c Block Write */
+			dev_dbg(dev, "I2C_SMBUS_I2C_BLOCK_DATA:  WRITE\n");
+			dma_size = data->block[0] + 1;
+			dma_direction = DMA_TO_DEVICE;
+			desc->wr_len_cmd = dma_size;
+			desc->control |= ISMT_DESC_I2C;
+			priv->dma_buffer[0] = command;
+			memcpy(&priv->dma_buffer[1], &data->block[1], dma_size - 1);
+		} else {
+			/* i2c Block Read */
+			dev_dbg(dev, "I2C_SMBUS_I2C_BLOCK_DATA:  READ\n");
+			dma_size = data->block[0];
+			dma_direction = DMA_FROM_DEVICE;
+			desc->rd_len = dma_size;
+			desc->wr_len_cmd = command;
+			desc->control |= (ISMT_DESC_I2C | ISMT_DESC_CWRL);
+			/*
+			 * Per the "Table 15-15. I2C Commands",
+			 * in the External Design Specification (EDS),
+			 * (Document Number: 508084, Revision: 2.0),
+			 * the _rw bit must be 0
+			 */
+			desc->tgtaddr_rw = ISMT_DESC_ADDR_RW(addr, 0);
+		}
+		break;
+
+>>>>>>> v3.18
 	default:
 		dev_err(dev, "Unsupported transaction %d\n",
 			size);
@@ -541,7 +601,11 @@ static int ismt_access(struct i2c_adapter *adap, u16 addr,
 		desc->dptr_high = upper_32_bits(dma_addr);
 	}
 
+<<<<<<< HEAD
 	INIT_COMPLETION(priv->cmp);
+=======
+	reinit_completion(&priv->cmp);
+>>>>>>> v3.18
 
 	/* Add the descriptor */
 	ismt_submit_desc(priv);
@@ -582,6 +646,10 @@ static u32 ismt_func(struct i2c_adapter *adap)
 	       I2C_FUNC_SMBUS_WORD_DATA		|
 	       I2C_FUNC_SMBUS_PROC_CALL		|
 	       I2C_FUNC_SMBUS_BLOCK_DATA	|
+<<<<<<< HEAD
+=======
+	       I2C_FUNC_SMBUS_I2C_BLOCK		|
+>>>>>>> v3.18
 	       I2C_FUNC_SMBUS_PEC;
 }
 
@@ -882,6 +950,10 @@ ismt_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 						 DMA_BIT_MASK(32)) != 0)) {
 			dev_err(&pdev->dev, "pci_set_dma_mask fail %p\n",
 				pdev);
+<<<<<<< HEAD
+=======
+			err = -ENODEV;
+>>>>>>> v3.18
 			goto fail;
 		}
 	}

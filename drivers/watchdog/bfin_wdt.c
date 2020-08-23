@@ -465,7 +465,10 @@ module_exit(bfin_wdt_exit);
 MODULE_AUTHOR("Michele d'Amico, Mike Frysinger <vapier@gentoo.org>");
 MODULE_DESCRIPTION("Blackfin Watchdog Device Driver");
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 
 module_param(timeout, uint, 0);
 MODULE_PARM_DESC(timeout,

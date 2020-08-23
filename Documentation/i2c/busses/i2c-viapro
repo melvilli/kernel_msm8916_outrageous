@@ -28,7 +28,11 @@ Supported adapters:
 Authors:
 	Kyösti Mälkki <kmalkki@cc.hut.fi>,
 	Mark D. Studebaker <mdsxyz123@yahoo.com>,
+<<<<<<< HEAD
 	Jean Delvare <khali@linux-fr.org>
+=======
+	Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 
 Module Parameters
 -----------------

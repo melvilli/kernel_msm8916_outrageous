@@ -22,9 +22,17 @@
 #include <linux/delay.h>
 #include <linux/spinlock.h>
 #include <linux/timer.h>
+<<<<<<< HEAD
 #include <linux/omap-dma.h>
 #include <linux/mmc/host.h>
 #include <linux/mmc/card.h>
+=======
+#include <linux/of.h>
+#include <linux/omap-dma.h>
+#include <linux/mmc/host.h>
+#include <linux/mmc/card.h>
+#include <linux/mmc/mmc.h>
+>>>>>>> v3.18
 #include <linux/clk.h>
 #include <linux/scatterlist.h>
 #include <linux/slab.h>
@@ -90,6 +98,7 @@
 #define OMAP_MMC_CMDTYPE_AC	2
 #define OMAP_MMC_CMDTYPE_ADTC	3
 
+<<<<<<< HEAD
 #define OMAP_DMA_MMC_TX		21
 #define OMAP_DMA_MMC_RX		22
 #define OMAP_DMA_MMC2_TX	54
@@ -101,6 +110,8 @@
 #define OMAP24XX_DMA_MMC1_RX	62
 
 
+=======
+>>>>>>> v3.18
 #define DRIVER_NAME "mmci-omap"
 
 /* Specifies how often in millisecs to poll for card status changes
@@ -128,7 +139,10 @@ struct mmc_omap_slot {
 
 struct mmc_omap_host {
 	int			initialized;
+<<<<<<< HEAD
 	int			suspended;
+=======
+>>>>>>> v3.18
 	struct mmc_request *	mrq;
 	struct mmc_command *	cmd;
 	struct mmc_data *	data;
@@ -141,7 +155,10 @@ struct mmc_omap_host {
 	u32			dma_rx_burst;
 	struct dma_chan		*dma_tx;
 	u32			dma_tx_burst;
+<<<<<<< HEAD
 	struct resource		*mem_res;
+=======
+>>>>>>> v3.18
 	void __iomem		*virt_base;
 	unsigned int		phys_base;
 	int			irq;
@@ -164,7 +181,10 @@ struct mmc_omap_host {
 	u32			total_bytes_left;
 
 	unsigned		features;
+<<<<<<< HEAD
 	unsigned		use_dma:1;
+=======
+>>>>>>> v3.18
 	unsigned		brs_received:1, dma_done:1;
 	unsigned		dma_in_use:1;
 	spinlock_t		dma_lock;
@@ -189,7 +209,11 @@ static void mmc_omap_fclk_offdelay(struct mmc_omap_slot *slot)
 	unsigned long tick_ns;
 
 	if (slot != NULL && slot->host->fclk_enabled && slot->fclk_freq > 0) {
+<<<<<<< HEAD
 		tick_ns = (1000000000 + slot->fclk_freq - 1) / slot->fclk_freq;
+=======
+		tick_ns = DIV_ROUND_UP(NSEC_PER_SEC, slot->fclk_freq);
+>>>>>>> v3.18
 		ndelay(8 * tick_ns);
 	}
 }
@@ -349,6 +373,10 @@ mmc_omap_start_command(struct mmc_omap_host *host, struct mmc_command *cmd)
 	u32 cmdreg;
 	u32 resptype;
 	u32 cmdtype;
+<<<<<<< HEAD
+=======
+	u16 irq_mask;
+>>>>>>> v3.18
 
 	host->cmd = cmd;
 
@@ -401,12 +429,23 @@ mmc_omap_start_command(struct mmc_omap_host *host, struct mmc_command *cmd)
 	OMAP_MMC_WRITE(host, CTO, 200);
 	OMAP_MMC_WRITE(host, ARGL, cmd->arg & 0xffff);
 	OMAP_MMC_WRITE(host, ARGH, cmd->arg >> 16);
+<<<<<<< HEAD
 	OMAP_MMC_WRITE(host, IE,
 		       OMAP_MMC_STAT_A_EMPTY    | OMAP_MMC_STAT_A_FULL    |
 		       OMAP_MMC_STAT_CMD_CRC    | OMAP_MMC_STAT_CMD_TOUT  |
 		       OMAP_MMC_STAT_DATA_CRC   | OMAP_MMC_STAT_DATA_TOUT |
 		       OMAP_MMC_STAT_END_OF_CMD | OMAP_MMC_STAT_CARD_ERR  |
 		       OMAP_MMC_STAT_END_OF_DATA);
+=======
+	irq_mask = OMAP_MMC_STAT_A_EMPTY    | OMAP_MMC_STAT_A_FULL    |
+		   OMAP_MMC_STAT_CMD_CRC    | OMAP_MMC_STAT_CMD_TOUT  |
+		   OMAP_MMC_STAT_DATA_CRC   | OMAP_MMC_STAT_DATA_TOUT |
+		   OMAP_MMC_STAT_END_OF_CMD | OMAP_MMC_STAT_CARD_ERR  |
+		   OMAP_MMC_STAT_END_OF_DATA;
+	if (cmd->opcode == MMC_ERASE)
+		irq_mask &= ~OMAP_MMC_STAT_DATA_TOUT;
+	OMAP_MMC_WRITE(host, IE, irq_mask);
+>>>>>>> v3.18
 	OMAP_MMC_WRITE(host, CMD, cmdreg);
 }
 
@@ -444,7 +483,11 @@ static void mmc_omap_send_stop_work(struct work_struct *work)
 	struct mmc_data *data = host->stop_data;
 	unsigned long tick_ns;
 
+<<<<<<< HEAD
 	tick_ns = (1000000000 + slot->fclk_freq - 1)/slot->fclk_freq;
+=======
+	tick_ns = DIV_ROUND_UP(NSEC_PER_SEC, slot->fclk_freq);
+>>>>>>> v3.18
 	ndelay(8*tick_ns);
 
 	mmc_omap_start_command(host, data->stop);
@@ -486,7 +529,11 @@ mmc_omap_send_abort(struct mmc_omap_host *host, int maxloops)
 	u16 stat = 0;
 
 	/* Sending abort takes 80 clocks. Have some extra and round up */
+<<<<<<< HEAD
 	timeout = (120*1000000 + slot->fclk_freq - 1)/slot->fclk_freq;
+=======
+	timeout = DIV_ROUND_UP(120 * USEC_PER_SEC, slot->fclk_freq);
+>>>>>>> v3.18
 	restarts = 0;
 	while (restarts < maxloops) {
 		OMAP_MMC_WRITE(host, STAT, 0xFFFF);
@@ -686,8 +733,13 @@ mmc_omap_xfer_data(struct mmc_omap_host *host, int write)
 	if (n > host->buffer_bytes_left)
 		n = host->buffer_bytes_left;
 
+<<<<<<< HEAD
 	nwords = n / 2;
 	nwords += n & 1; /* handle odd number of bytes to transfer */
+=======
+	/* Round up to handle odd number of bytes to transfer */
+	nwords = DIV_ROUND_UP(n, 2);
+>>>>>>> v3.18
 
 	host->buffer_bytes_left -= n;
 	host->total_bytes_left -= n;
@@ -956,7 +1008,11 @@ static void
 mmc_omap_prepare_data(struct mmc_omap_host *host, struct mmc_request *req)
 {
 	struct mmc_data *data = req->data;
+<<<<<<< HEAD
 	int i, use_dma, block_size;
+=======
+	int i, use_dma = 1, block_size;
+>>>>>>> v3.18
 	unsigned sg_len;
 
 	host->data = data;
@@ -981,6 +1037,7 @@ mmc_omap_prepare_data(struct mmc_omap_host *host, struct mmc_request *req)
 	sg_len = (data->blocks == 1) ? 1 : data->sg_len;
 
 	/* Only do DMA for entire blocks */
+<<<<<<< HEAD
 	use_dma = host->use_dma;
 	if (use_dma) {
 		for (i = 0; i < sg_len; i++) {
@@ -988,6 +1045,12 @@ mmc_omap_prepare_data(struct mmc_omap_host *host, struct mmc_request *req)
 				use_dma = 0;
 				break;
 			}
+=======
+	for (i = 0; i < sg_len; i++) {
+		if ((data->sg[i].length % block_size) != 0) {
+			use_dma = 0;
+			break;
+>>>>>>> v3.18
 		}
 	}
 
@@ -1250,7 +1313,11 @@ static int mmc_omap_new_slot(struct mmc_omap_host *host, int id)
 
 	mmc->caps = 0;
 	if (host->pdata->slots[id].wires >= 4)
+<<<<<<< HEAD
 		mmc->caps |= MMC_CAP_4_BIT_DATA;
+=======
+		mmc->caps |= MMC_CAP_4_BIT_DATA | MMC_CAP_ERASE;
+>>>>>>> v3.18
 
 	mmc->ops = &mmc_omap_ops;
 	mmc->f_min = 400000;
@@ -1273,6 +1340,16 @@ static int mmc_omap_new_slot(struct mmc_omap_host *host, int id)
 	mmc->max_req_size = mmc->max_blk_size * mmc->max_blk_count;
 	mmc->max_seg_size = mmc->max_req_size;
 
+<<<<<<< HEAD
+=======
+	if (slot->pdata->get_cover_state != NULL) {
+		setup_timer(&slot->cover_timer, mmc_omap_cover_timer,
+			    (unsigned long)slot);
+		tasklet_init(&slot->cover_tasklet, mmc_omap_cover_handler,
+			     (unsigned long)slot);
+	}
+
+>>>>>>> v3.18
 	r = mmc_add_host(mmc);
 	if (r < 0)
 		goto err_remove_host;
@@ -1289,11 +1366,14 @@ static int mmc_omap_new_slot(struct mmc_omap_host *host, int id)
 					&dev_attr_cover_switch);
 		if (r < 0)
 			goto err_remove_slot_name;
+<<<<<<< HEAD
 
 		setup_timer(&slot->cover_timer, mmc_omap_cover_timer,
 			    (unsigned long)slot);
 		tasklet_init(&slot->cover_tasklet, mmc_omap_cover_handler,
 			     (unsigned long)slot);
+=======
+>>>>>>> v3.18
 		tasklet_schedule(&slot->cover_tasklet);
 	}
 
@@ -1331,7 +1411,11 @@ static int mmc_omap_probe(struct platform_device *pdev)
 	struct mmc_omap_host *host = NULL;
 	struct resource *res;
 	dma_cap_mask_t mask;
+<<<<<<< HEAD
 	unsigned sig;
+=======
+	unsigned sig = 0;
+>>>>>>> v3.18
 	int i, ret = 0;
 	int irq;
 
@@ -1341,6 +1425,7 @@ static int mmc_omap_probe(struct platform_device *pdev)
 	}
 	if (pdata->nr_slots == 0) {
 		dev_err(&pdev->dev, "no slots\n");
+<<<<<<< HEAD
 		return -ENXIO;
 	}
 
@@ -1359,6 +1444,24 @@ static int mmc_omap_probe(struct platform_device *pdev)
 		ret = -ENOMEM;
 		goto err_free_mem_region;
 	}
+=======
+		return -EPROBE_DEFER;
+	}
+
+	host = devm_kzalloc(&pdev->dev, sizeof(struct mmc_omap_host),
+			    GFP_KERNEL);
+	if (host == NULL)
+		return -ENOMEM;
+
+	irq = platform_get_irq(pdev, 0);
+	if (irq < 0)
+		return -ENXIO;
+
+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+	host->virt_base = devm_ioremap_resource(&pdev->dev, res);
+	if (IS_ERR(host->virt_base))
+		return PTR_ERR(host->virt_base);
+>>>>>>> v3.18
 
 	INIT_WORK(&host->slot_release_work, mmc_omap_slot_release_work);
 	INIT_WORK(&host->send_stop_work, mmc_omap_send_stop_work);
@@ -1380,6 +1483,7 @@ static int mmc_omap_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, host);
 
 	host->id = pdev->id;
+<<<<<<< HEAD
 	host->mem_res = res;
 	host->irq = irq;
 	host->use_dma = 1;
@@ -1394,6 +1498,13 @@ static int mmc_omap_probe(struct platform_device *pdev)
 		ret = PTR_ERR(host->iclk);
 		goto err_free_mmc_host;
 	}
+=======
+	host->irq = irq;
+	host->phys_base = res->start;
+	host->iclk = clk_get(&pdev->dev, "ick");
+	if (IS_ERR(host->iclk))
+		return PTR_ERR(host->iclk);
+>>>>>>> v3.18
 	clk_enable(host->iclk);
 
 	host->fclk = clk_get(&pdev->dev, "fck");
@@ -1408,6 +1519,7 @@ static int mmc_omap_probe(struct platform_device *pdev)
 	host->dma_tx_burst = -1;
 	host->dma_rx_burst = -1;
 
+<<<<<<< HEAD
 	if (mmc_omap2())
 		sig = host->id == 0 ? OMAP24XX_DMA_MMC1_TX : OMAP24XX_DMA_MMC2_TX;
 	else
@@ -1440,6 +1552,25 @@ static int mmc_omap_probe(struct platform_device *pdev)
 		dev_warn(host->dev, "unable to obtain RX DMA engine channel %u\n",
 			sig);
 #endif
+=======
+	res = platform_get_resource_byname(pdev, IORESOURCE_DMA, "tx");
+	if (res)
+		sig = res->start;
+	host->dma_tx = dma_request_slave_channel_compat(mask,
+				omap_dma_filter_fn, &sig, &pdev->dev, "tx");
+	if (!host->dma_tx)
+		dev_warn(host->dev, "unable to obtain TX DMA engine channel %u\n",
+			sig);
+
+	res = platform_get_resource_byname(pdev, IORESOURCE_DMA, "rx");
+	if (res)
+		sig = res->start;
+	host->dma_rx = dma_request_slave_channel_compat(mask,
+				omap_dma_filter_fn, &sig, &pdev->dev, "rx");
+	if (!host->dma_rx)
+		dev_warn(host->dev, "unable to obtain RX DMA engine channel %u\n",
+			sig);
+>>>>>>> v3.18
 
 	ret = request_irq(host->irq, mmc_omap_irq, 0, DRIVER_NAME, host);
 	if (ret)
@@ -1486,12 +1617,15 @@ err_free_dma:
 err_free_iclk:
 	clk_disable(host->iclk);
 	clk_put(host->iclk);
+<<<<<<< HEAD
 err_free_mmc_host:
 	iounmap(host->virt_base);
 err_ioremap:
 	kfree(host);
 err_free_mem_region:
 	release_mem_region(res->start, resource_size(res));
+=======
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -1500,8 +1634,11 @@ static int mmc_omap_remove(struct platform_device *pdev)
 	struct mmc_omap_host *host = platform_get_drvdata(pdev);
 	int i;
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 	BUG_ON(host == NULL);
 
 	for (i = 0; i < host->nr_slots; i++)
@@ -1521,6 +1658,7 @@ static int mmc_omap_remove(struct platform_device *pdev)
 	if (host->dma_rx)
 		dma_release_channel(host->dma_rx);
 
+<<<<<<< HEAD
 	iounmap(host->virt_base);
 	release_mem_region(pdev->resource[0].start,
 			   pdev->resource[0].end - pdev->resource[0].start + 1);
@@ -1579,16 +1717,34 @@ static int mmc_omap_resume(struct platform_device *pdev)
 #else
 #define mmc_omap_suspend	NULL
 #define mmc_omap_resume		NULL
+=======
+	destroy_workqueue(host->mmc_omap_wq);
+
+	return 0;
+}
+
+#if IS_BUILTIN(CONFIG_OF)
+static const struct of_device_id mmc_omap_match[] = {
+	{ .compatible = "ti,omap2420-mmc", },
+	{ },
+};
+>>>>>>> v3.18
 #endif
 
 static struct platform_driver mmc_omap_driver = {
 	.probe		= mmc_omap_probe,
 	.remove		= mmc_omap_remove,
+<<<<<<< HEAD
 	.suspend	= mmc_omap_suspend,
 	.resume		= mmc_omap_resume,
 	.driver		= {
 		.name	= DRIVER_NAME,
 		.owner	= THIS_MODULE,
+=======
+	.driver		= {
+		.name	= DRIVER_NAME,
+		.of_match_table = of_match_ptr(mmc_omap_match),
+>>>>>>> v3.18
 	},
 };
 

@@ -152,6 +152,10 @@ struct iscsi_transport {
 	int (*get_chap) (struct Scsi_Host *shost, uint16_t chap_tbl_idx,
 			 uint32_t *num_entries, char *buf);
 	int (*delete_chap) (struct Scsi_Host *shost, uint16_t chap_tbl_idx);
+<<<<<<< HEAD
+=======
+	int (*set_chap) (struct Scsi_Host *shost, void *data, int len);
+>>>>>>> v3.18
 	int (*get_flashnode_param) (struct iscsi_bus_flash_session *fnode_sess,
 				    int param, char *buf);
 	int (*set_flashnode_param) (struct iscsi_bus_flash_session *fnode_sess,
@@ -165,6 +169,11 @@ struct iscsi_transport {
 	int (*logout_flashnode) (struct iscsi_bus_flash_session *fnode_sess,
 				 struct iscsi_bus_flash_conn *fnode_conn);
 	int (*logout_flashnode_sid) (struct iscsi_cls_session *cls_sess);
+<<<<<<< HEAD
+=======
+	int (*get_host_stats) (struct Scsi_Host *shost, char *buf, int len);
+	u8 (*check_protection)(struct iscsi_task *task, sector_t *sector);
+>>>>>>> v3.18
 };
 
 /*
@@ -477,4 +486,10 @@ iscsi_find_flashnode_sess(struct Scsi_Host *shost, void *data,
 extern struct device *
 iscsi_find_flashnode_conn(struct iscsi_bus_flash_session *fnode_sess);
 
+<<<<<<< HEAD
+=======
+extern char *
+iscsi_get_ipaddress_state_name(enum iscsi_ipaddress_state port_state);
+extern char *iscsi_get_router_state_name(enum iscsi_router_state router_state);
+>>>>>>> v3.18
 #endif

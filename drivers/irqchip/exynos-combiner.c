@@ -15,6 +15,7 @@
 #include <linux/slab.h>
 #include <linux/irqdomain.h>
 #include <linux/irqchip/chained_irq.h>
+<<<<<<< HEAD
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
 #include <asm/mach/irq.h>
@@ -22,6 +23,11 @@
 #ifdef CONFIG_EXYNOS_ATAGS
 #include <plat/cpu.h>
 #endif
+=======
+#include <linux/interrupt.h>
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 
 #include "irqchip.h"
 
@@ -85,7 +91,11 @@ static void combiner_handle_cascade_irq(unsigned int irq, struct irq_desc *desc)
 	cascade_irq = irq_find_mapping(combiner_irq_domain, combiner_irq);
 
 	if (unlikely(!cascade_irq))
+<<<<<<< HEAD
 		do_bad_IRQ(irq, desc);
+=======
+		handle_bad_irq(irq, desc);
+>>>>>>> v3.18
 	else
 		generic_handle_irq(cascade_irq);
 
@@ -138,7 +148,10 @@ static void __init combiner_init_one(struct combiner_chip_data *combiner_data,
 	__raw_writel(combiner_data->irq_mask, base + COMBINER_ENABLE_CLEAR);
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_OF
+=======
+>>>>>>> v3.18
 static int combiner_irq_domain_xlate(struct irq_domain *d,
 				     struct device_node *controller,
 				     const u32 *intspec, unsigned int intsize,
@@ -156,6 +169,7 @@ static int combiner_irq_domain_xlate(struct irq_domain *d,
 
 	return 0;
 }
+<<<<<<< HEAD
 #else
 static int combiner_irq_domain_xlate(struct irq_domain *d,
 				     struct device_node *controller,
@@ -166,6 +180,8 @@ static int combiner_irq_domain_xlate(struct irq_domain *d,
 	return -EINVAL;
 }
 #endif
+=======
+>>>>>>> v3.18
 
 static int combiner_irq_domain_map(struct irq_domain *d, unsigned int irq,
 				   irq_hw_number_t hw)
@@ -184,6 +200,7 @@ static struct irq_domain_ops combiner_irq_domain_ops = {
 	.map	= combiner_irq_domain_map,
 };
 
+<<<<<<< HEAD
 static unsigned int combiner_lookup_irq(int group)
 {
 #ifdef CONFIG_EXYNOS_ATAGS
@@ -208,6 +225,11 @@ void __init combiner_init(void __iomem *combiner_base,
 			  struct device_node *np,
 			  unsigned int max_nr,
 			  int irq_base)
+=======
+static void __init combiner_init(void __iomem *combiner_base,
+				 struct device_node *np,
+				 unsigned int max_nr)
+>>>>>>> v3.18
 {
 	int i, irq;
 	unsigned int nr_irq;
@@ -221,7 +243,11 @@ void __init combiner_init(void __iomem *combiner_base,
 		return;
 	}
 
+<<<<<<< HEAD
 	combiner_irq_domain = irq_domain_add_simple(np, nr_irq, irq_base,
+=======
+	combiner_irq_domain = irq_domain_add_linear(np, nr_irq,
+>>>>>>> v3.18
 				&combiner_irq_domain_ops, combiner_data);
 	if (WARN_ON(!combiner_irq_domain)) {
 		pr_warning("%s: irq domain init failed\n", __func__);
@@ -229,12 +255,16 @@ void __init combiner_init(void __iomem *combiner_base,
 	}
 
 	for (i = 0; i < max_nr; i++) {
+<<<<<<< HEAD
 #ifdef CONFIG_OF
 		if (np)
 			irq = irq_of_parse_and_map(np, i);
 		else
 #endif
 			irq = combiner_lookup_irq(i);
+=======
+		irq = irq_of_parse_and_map(np, i);
+>>>>>>> v3.18
 
 		combiner_init_one(&combiner_data[i], i,
 				  combiner_base + (i >> 2) * 0x10, irq);
@@ -242,13 +272,19 @@ void __init combiner_init(void __iomem *combiner_base,
 	}
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_OF
+=======
+>>>>>>> v3.18
 static int __init combiner_of_init(struct device_node *np,
 				   struct device_node *parent)
 {
 	void __iomem *combiner_base;
 	unsigned int max_nr = 20;
+<<<<<<< HEAD
 	int irq_base = -1;
+=======
+>>>>>>> v3.18
 
 	combiner_base = of_iomap(np, 0);
 	if (!combiner_base) {
@@ -262,6 +298,7 @@ static int __init combiner_of_init(struct device_node *np,
 			__func__, max_nr);
 	}
 
+<<<<<<< HEAD
 	/* 
 	 * FIXME: This is a hardwired COMBINER_IRQ(0,0). Once all devices
 	 * get their IRQ from DT, remove this in order to get dynamic
@@ -270,9 +307,15 @@ static int __init combiner_of_init(struct device_node *np,
 	irq_base = 160;
 
 	combiner_init(combiner_base, np, max_nr, irq_base);
+=======
+	combiner_init(combiner_base, np, max_nr);
+>>>>>>> v3.18
 
 	return 0;
 }
 IRQCHIP_DECLARE(exynos4210_combiner, "samsung,exynos4210-combiner",
 		combiner_of_init);
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18

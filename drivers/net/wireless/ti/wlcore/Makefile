@@ -1,5 +1,9 @@
 wlcore-objs		= main.o cmd.o io.o event.o tx.o rx.o ps.o acx.o \
+<<<<<<< HEAD
 			  boot.o init.o debugfs.o scan.o
+=======
+			  boot.o init.o debugfs.o scan.o sysfs.o vendor_cmd.o
+>>>>>>> v3.18
 
 wlcore_spi-objs 	= spi.o
 wlcore_sdio-objs	= sdio.o

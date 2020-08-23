@@ -1,9 +1,17 @@
 #ifndef __ASM_SPARC_SYSCALL_H
 #define __ASM_SPARC_SYSCALL_H
 
+<<<<<<< HEAD
 #include <linux/kernel.h>
 #include <linux/sched.h>
 #include <asm/ptrace.h>
+=======
+#include <uapi/linux/audit.h>
+#include <linux/kernel.h>
+#include <linux/sched.h>
+#include <asm/ptrace.h>
+#include <asm/thread_info.h>
+>>>>>>> v3.18
 
 /*
  * The syscall table always contains 32 bit pointers since we know that the
@@ -124,4 +132,12 @@ static inline void syscall_set_arguments(struct task_struct *task,
 		regs->u_regs[UREG_I0 + i + j] = args[j];
 }
 
+<<<<<<< HEAD
+=======
+static inline int syscall_get_arch(void)
+{
+	return is_32bit_task() ? AUDIT_ARCH_SPARC : AUDIT_ARCH_SPARC64;
+}
+
+>>>>>>> v3.18
 #endif /* __ASM_SPARC_SYSCALL_H */

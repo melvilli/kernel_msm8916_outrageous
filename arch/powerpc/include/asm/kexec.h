@@ -81,7 +81,10 @@ extern void default_machine_crash_shutdown(struct pt_regs *regs);
 extern int crash_shutdown_register(crash_shutdown_t handler);
 extern int crash_shutdown_unregister(crash_shutdown_t handler);
 
+<<<<<<< HEAD
 extern void machine_kexec_simple(struct kimage *image);
+=======
+>>>>>>> v3.18
 extern void crash_kexec_secondary(struct pt_regs *regs);
 extern int overlaps_crashkernel(unsigned long start, unsigned long size);
 extern void reserve_crashkernel(void);

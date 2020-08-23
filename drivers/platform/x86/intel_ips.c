@@ -269,7 +269,11 @@ struct ips_mcp_limits {
 
 /* Max temps are -10 degrees C to avoid PROCHOT# */
 
+<<<<<<< HEAD
 struct ips_mcp_limits ips_sv_limits = {
+=======
+static struct ips_mcp_limits ips_sv_limits = {
+>>>>>>> v3.18
 	.mcp_power_limit = 35000,
 	.core_power_limit = 29000,
 	.mch_power_limit = 20000,
@@ -277,7 +281,11 @@ struct ips_mcp_limits ips_sv_limits = {
 	.mch_temp_limit = 90
 };
 
+<<<<<<< HEAD
 struct ips_mcp_limits ips_lv_limits = {
+=======
+static struct ips_mcp_limits ips_lv_limits = {
+>>>>>>> v3.18
 	.mcp_power_limit = 25000,
 	.core_power_limit = 21000,
 	.mch_power_limit = 13000,
@@ -285,7 +293,11 @@ struct ips_mcp_limits ips_lv_limits = {
 	.mch_temp_limit = 90
 };
 
+<<<<<<< HEAD
 struct ips_mcp_limits ips_ulv_limits = {
+=======
+static struct ips_mcp_limits ips_ulv_limits = {
+>>>>>>> v3.18
 	.mcp_power_limit = 18000,
 	.core_power_limit = 14000,
 	.mch_power_limit = 11000,
@@ -1478,7 +1490,11 @@ ips_link_to_i915_driver(void)
 }
 EXPORT_SYMBOL_GPL(ips_link_to_i915_driver);
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(ips_id_table) = {
+=======
+static const struct pci_device_id ips_id_table[] = {
+>>>>>>> v3.18
 	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL,
 		     PCI_DEVICE_ID_INTEL_THERMAL_SENSOR), },
 	{ 0, }
@@ -1731,6 +1747,7 @@ static struct pci_driver ips_pci_driver = {
 	.shutdown = ips_shutdown,
 };
 
+<<<<<<< HEAD
 static int __init ips_init(void)
 {
 	return pci_register_driver(&ips_pci_driver);
@@ -1743,6 +1760,9 @@ static void ips_exit(void)
 	return;
 }
 module_exit(ips_exit);
+=======
+module_pci_driver(ips_pci_driver);
+>>>>>>> v3.18
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Jesse Barnes <jbarnes@virtuousgeek.org>");

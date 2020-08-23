@@ -285,7 +285,11 @@ struct fsl_lbc_ctrl {
 	/* device info */
 	struct device			*dev;
 	struct fsl_lbc_regs __iomem	*regs;
+<<<<<<< HEAD
 	int				irq;
+=======
+	int				irq[2];
+>>>>>>> v3.18
 	wait_queue_head_t		irq_wait;
 	spinlock_t			lock;
 	void				*nand;

@@ -55,7 +55,11 @@ static int caching_kthread(void *data)
 	key.type = BTRFS_INODE_ITEM_KEY;
 again:
 	/* need to make sure the commit_root doesn't disappear */
+<<<<<<< HEAD
 	mutex_lock(&root->fs_commit_mutex);
+=======
+	down_read(&fs_info->commit_root_sem);
+>>>>>>> v3.18
 
 	ret = btrfs_search_slot(NULL, root, &key, path, 0, 0);
 	if (ret < 0)
@@ -78,10 +82,15 @@ again:
 			    btrfs_transaction_in_commit(fs_info)) {
 				leaf = path->nodes[0];
 
+<<<<<<< HEAD
 				if (btrfs_header_nritems(leaf) == 0) {
 					WARN_ON(1);
 					break;
 				}
+=======
+				if (WARN_ON(btrfs_header_nritems(leaf) == 0))
+					break;
+>>>>>>> v3.18
 
 				/*
 				 * Save the key so we can advances forward
@@ -89,8 +98,13 @@ again:
 				 */
 				btrfs_item_key_to_cpu(leaf, &key, 0);
 				btrfs_release_path(path);
+<<<<<<< HEAD
 				root->cache_progress = last;
 				mutex_unlock(&root->fs_commit_mutex);
+=======
+				root->ino_cache_progress = last;
+				up_read(&fs_info->commit_root_sem);
+>>>>>>> v3.18
 				schedule_timeout(1);
 				goto again;
 			} else
@@ -108,7 +122,11 @@ again:
 		if (last != (u64)-1 && last + 1 != key.objectid) {
 			__btrfs_add_free_space(ctl, last + 1,
 					       key.objectid - last - 1);
+<<<<<<< HEAD
 			wake_up(&root->cache_wait);
+=======
+			wake_up(&root->ino_cache_wait);
+>>>>>>> v3.18
 		}
 
 		last = key.objectid;
@@ -121,6 +139,7 @@ next:
 				       root->highest_objectid - last - 1);
 	}
 
+<<<<<<< HEAD
 	spin_lock(&root->cache_lock);
 	root->cached = BTRFS_CACHE_FINISHED;
 	spin_unlock(&root->cache_lock);
@@ -130,6 +149,17 @@ next:
 out:
 	wake_up(&root->cache_wait);
 	mutex_unlock(&root->fs_commit_mutex);
+=======
+	spin_lock(&root->ino_cache_lock);
+	root->ino_cache_state = BTRFS_CACHE_FINISHED;
+	spin_unlock(&root->ino_cache_lock);
+
+	root->ino_cache_progress = (u64)-1;
+	btrfs_unpin_free_ino(root);
+out:
+	wake_up(&root->ino_cache_wait);
+	up_read(&fs_info->commit_root_sem);
+>>>>>>> v3.18
 
 	btrfs_free_path(path);
 
@@ -146,6 +176,7 @@ static void start_caching(struct btrfs_root *root)
 	if (!btrfs_test_opt(root, INODE_MAP_CACHE))
 		return;
 
+<<<<<<< HEAD
 	spin_lock(&root->cache_lock);
 	if (root->cached != BTRFS_CACHE_NO) {
 		spin_unlock(&root->cache_lock);
@@ -160,6 +191,22 @@ static void start_caching(struct btrfs_root *root)
 		spin_lock(&root->cache_lock);
 		root->cached = BTRFS_CACHE_FINISHED;
 		spin_unlock(&root->cache_lock);
+=======
+	spin_lock(&root->ino_cache_lock);
+	if (root->ino_cache_state != BTRFS_CACHE_NO) {
+		spin_unlock(&root->ino_cache_lock);
+		return;
+	}
+
+	root->ino_cache_state = BTRFS_CACHE_STARTED;
+	spin_unlock(&root->ino_cache_lock);
+
+	ret = load_free_ino_cache(root->fs_info, root);
+	if (ret == 1) {
+		spin_lock(&root->ino_cache_lock);
+		root->ino_cache_state = BTRFS_CACHE_FINISHED;
+		spin_unlock(&root->ino_cache_lock);
+>>>>>>> v3.18
 		return;
 	}
 
@@ -176,9 +223,19 @@ static void start_caching(struct btrfs_root *root)
 				       BTRFS_LAST_FREE_OBJECTID - objectid + 1);
 	}
 
+<<<<<<< HEAD
 	tsk = kthread_run(caching_kthread, root, "btrfs-ino-cache-%llu\n",
 			  root->root_key.objectid);
 	BUG_ON(IS_ERR(tsk)); /* -ENOMEM */
+=======
+	tsk = kthread_run(caching_kthread, root, "btrfs-ino-cache-%llu",
+			  root->root_key.objectid);
+	if (IS_ERR(tsk)) {
+		btrfs_warn(root->fs_info, "failed to start inode caching task");
+		btrfs_clear_and_info(root, CHANGE_INODE_CACHE,
+				"disabling inode map caching");
+	}
+>>>>>>> v3.18
 }
 
 int btrfs_find_free_ino(struct btrfs_root *root, u64 *objectid)
@@ -194,11 +251,19 @@ again:
 
 	start_caching(root);
 
+<<<<<<< HEAD
 	wait_event(root->cache_wait,
 		   root->cached == BTRFS_CACHE_FINISHED ||
 		   root->free_ino_ctl->free_space > 0);
 
 	if (root->cached == BTRFS_CACHE_FINISHED &&
+=======
+	wait_event(root->ino_cache_wait,
+		   root->ino_cache_state == BTRFS_CACHE_FINISHED ||
+		   root->free_ino_ctl->free_space > 0);
+
+	if (root->ino_cache_state == BTRFS_CACHE_FINISHED &&
+>>>>>>> v3.18
 	    root->free_ino_ctl->free_space == 0)
 		return -ENOSPC;
 	else
@@ -207,11 +272,15 @@ again:
 
 void btrfs_return_ino(struct btrfs_root *root, u64 objectid)
 {
+<<<<<<< HEAD
 	struct btrfs_free_space_ctl *ctl = root->free_ino_ctl;
+=======
+>>>>>>> v3.18
 	struct btrfs_free_space_ctl *pinned = root->free_ino_pinned;
 
 	if (!btrfs_test_opt(root, INODE_MAP_CACHE))
 		return;
+<<<<<<< HEAD
 
 again:
 	if (root->cached == BTRFS_CACHE_FINISHED) {
@@ -243,16 +312,45 @@ again:
 			__btrfs_add_free_space(pinned, objectid, 1);
 
 		mutex_unlock(&root->fs_commit_mutex);
+=======
+again:
+	if (root->ino_cache_state == BTRFS_CACHE_FINISHED) {
+		__btrfs_add_free_space(pinned, objectid, 1);
+	} else {
+		down_write(&root->fs_info->commit_root_sem);
+		spin_lock(&root->ino_cache_lock);
+		if (root->ino_cache_state == BTRFS_CACHE_FINISHED) {
+			spin_unlock(&root->ino_cache_lock);
+			up_write(&root->fs_info->commit_root_sem);
+			goto again;
+		}
+		spin_unlock(&root->ino_cache_lock);
+
+		start_caching(root);
+
+		__btrfs_add_free_space(pinned, objectid, 1);
+
+		up_write(&root->fs_info->commit_root_sem);
+>>>>>>> v3.18
 	}
 }
 
 /*
+<<<<<<< HEAD
  * When a transaction is committed, we'll move those inode numbers which
  * are smaller than root->cache_progress from pinned tree to free_ino tree,
  * and others will just be dropped, because the commit root we were
  * searching has changed.
  *
  * Must be called with root->fs_commit_mutex held
+=======
+ * When a transaction is committed, we'll move those inode numbers which are
+ * smaller than root->ino_cache_progress from pinned tree to free_ino tree, and
+ * others will just be dropped, because the commit root we were searching has
+ * changed.
+ *
+ * Must be called with root->fs_info->commit_root_sem held
+>>>>>>> v3.18
  */
 void btrfs_unpin_free_ino(struct btrfs_root *root)
 {
@@ -273,17 +371,28 @@ void btrfs_unpin_free_ino(struct btrfs_root *root)
 		info = rb_entry(n, struct btrfs_free_space, offset_index);
 		BUG_ON(info->bitmap); /* Logic error */
 
+<<<<<<< HEAD
 		if (info->offset > root->cache_progress)
 			goto free;
 		else if (info->offset + info->bytes > root->cache_progress)
 			count = root->cache_progress - info->offset + 1;
+=======
+		if (info->offset > root->ino_cache_progress)
+			goto free;
+		else if (info->offset + info->bytes > root->ino_cache_progress)
+			count = root->ino_cache_progress - info->offset + 1;
+>>>>>>> v3.18
 		else
 			count = info->bytes;
 
 		__btrfs_add_free_space(ctl, info->offset, count);
 free:
 		rb_erase(&info->offset_index, rbroot);
+<<<<<<< HEAD
 		kmem_cache_free(btrfs_free_space_cachep, info);
+=======
+		kfree(info);
+>>>>>>> v3.18
 	}
 }
 
@@ -412,8 +521,12 @@ int btrfs_save_ino_cache(struct btrfs_root *root,
 		return 0;
 
 	/* Don't save inode cache if we are deleting this root */
+<<<<<<< HEAD
 	if (btrfs_root_refs(&root->root_item) == 0 &&
 	    root != root->fs_info->tree_root)
+=======
+	if (btrfs_root_refs(&root->root_item) == 0)
+>>>>>>> v3.18
 		return 0;
 
 	if (!btrfs_test_opt(root, INODE_MAP_CACHE))
@@ -467,7 +580,11 @@ again:
 	}
 
 	if (i_size_read(inode) > 0) {
+<<<<<<< HEAD
 		ret = btrfs_truncate_free_space_cache(root, trans, path, inode);
+=======
+		ret = btrfs_truncate_free_space_cache(root, trans, inode);
+>>>>>>> v3.18
 		if (ret) {
 			if (ret != -ENOSPC)
 				btrfs_abort_transaction(trans, root, ret);
@@ -475,6 +592,7 @@ again:
 		}
 	}
 
+<<<<<<< HEAD
 	spin_lock(&root->cache_lock);
 	if (root->cached != BTRFS_CACHE_FINISHED) {
 		ret = -1;
@@ -482,6 +600,15 @@ again:
 		goto out_put;
 	}
 	spin_unlock(&root->cache_lock);
+=======
+	spin_lock(&root->ino_cache_lock);
+	if (root->ino_cache_state != BTRFS_CACHE_FINISHED) {
+		ret = -1;
+		spin_unlock(&root->ino_cache_lock);
+		goto out_put;
+	}
+	spin_unlock(&root->ino_cache_lock);
+>>>>>>> v3.18
 
 	spin_lock(&ctl->tree_lock);
 	prealloc = sizeof(struct btrfs_free_space) * ctl->free_extents;
@@ -504,7 +631,11 @@ again:
 	}
 	btrfs_free_reserved_data_space(inode, prealloc);
 
+<<<<<<< HEAD
 	ret = btrfs_write_out_ino_cache(root, trans, path);
+=======
+	ret = btrfs_write_out_ino_cache(root, trans, path, inode);
+>>>>>>> v3.18
 out_put:
 	iput(inode);
 out_release:

@@ -35,6 +35,10 @@
 #include "elantech.h"
 #include "sentelic.h"
 #include "cypress_ps2.h"
+<<<<<<< HEAD
+=======
+#include "focaltech.h"
+>>>>>>> v3.18
 
 #define DRIVER_DESC	"PS/2 mouse driver"
 
@@ -462,6 +466,23 @@ static int psmouse_poll(struct psmouse *psmouse)
 			   PSMOUSE_CMD_POLL | (psmouse->pktsize << 8));
 }
 
+<<<<<<< HEAD
+=======
+/*
+ * psmouse_matches_pnp_id - check if psmouse matches one of the passed in ids.
+ */
+bool psmouse_matches_pnp_id(struct psmouse *psmouse, const char * const ids[])
+{
+	int i;
+
+	if (!strncmp(psmouse->ps2dev.serio->firmware_id, "PNP:", 4))
+		for (i = 0; ids[i]; i++)
+			if (strstr(psmouse->ps2dev.serio->firmware_id, ids[i]))
+				return true;
+
+	return false;
+}
+>>>>>>> v3.18
 
 /*
  * Genius NetMouse magic init.
@@ -670,6 +691,11 @@ static void psmouse_apply_defaults(struct psmouse *psmouse)
 	__set_bit(REL_X, input_dev->relbit);
 	__set_bit(REL_Y, input_dev->relbit);
 
+<<<<<<< HEAD
+=======
+	__set_bit(INPUT_PROP_POINTER, input_dev->propbit);
+
+>>>>>>> v3.18
 	psmouse->set_rate = psmouse_set_rate;
 	psmouse->set_resolution = psmouse_set_resolution;
 	psmouse->poll = psmouse_poll;
@@ -706,6 +732,24 @@ static int psmouse_extensions(struct psmouse *psmouse,
 {
 	bool synaptics_hardware = false;
 
+<<<<<<< HEAD
+=======
+/* Always check for focaltech, this is safe as it uses pnp-id matching */
+	if (psmouse_do_detect(focaltech_detect, psmouse, set_properties) == 0) {
+		if (!set_properties || focaltech_init(psmouse) == 0) {
+			/*
+			 * Not supported yet, use bare protocol.
+			 * Note that we need to also restrict
+			 * psmouse_max_proto so that psmouse_initialize()
+			 * does not try to reset rate and resolution,
+			 * because even that upsets the device.
+			 */
+			psmouse_max_proto = PSMOUSE_PS2;
+			return PSMOUSE_PS2;
+		}
+	}
+
+>>>>>>> v3.18
 /*
  * We always check for lifebook because it does not disturb mouse
  * (it only checks DMI information).
@@ -1504,6 +1548,7 @@ static int psmouse_reconnect(struct serio *serio)
 {
 	struct psmouse *psmouse = serio_get_drvdata(serio);
 	struct psmouse *parent = NULL;
+<<<<<<< HEAD
 	struct serio_driver *drv = serio->drv;
 	unsigned char type;
 	int rc = -1;
@@ -1514,6 +1559,11 @@ static int psmouse_reconnect(struct serio *serio)
 		return -1;
 	}
 
+=======
+	unsigned char type;
+	int rc = -1;
+
+>>>>>>> v3.18
 	mutex_lock(&psmouse_mutex);
 
 	if (serio->parent && serio->id.type == SERIO_PS_PSTHRU) {

@@ -2,6 +2,10 @@
 #define __ASM_MACH_MIPS_IRQ_H
 
 
+<<<<<<< HEAD
+=======
+#define GIC_NUM_INTRS (24 + NR_CPUS * 2)
+>>>>>>> v3.18
 #define NR_IRQS 256
 
 #include_next <irq.h>

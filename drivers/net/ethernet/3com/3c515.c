@@ -515,7 +515,11 @@ static struct net_device *corkscrew_scan(int unit)
 			if (pnp_device_attach(idev) < 0)
 				continue;
 			if (pnp_activate_dev(idev) < 0) {
+<<<<<<< HEAD
 				pr_warning("pnp activate failed (out of resources?)\n");
+=======
+				pr_warn("pnp activate failed (out of resources?)\n");
+>>>>>>> v3.18
 				pnp_device_detach(idev);
 				continue;
 			}
@@ -659,7 +663,11 @@ static int corkscrew_setup(struct net_device *dev, int ioaddr,
 	pr_cont(", IRQ %d\n", dev->irq);
 	/* Tell them about an invalid IRQ. */
 	if (corkscrew_debug && (dev->irq <= 0 || dev->irq > 15))
+<<<<<<< HEAD
 		pr_warning(" *** Warning: this IRQ is unlikely to work! ***\n");
+=======
+		pr_warn(" *** Warning: this IRQ is unlikely to work! ***\n");
+>>>>>>> v3.18
 
 	{
 		static const char * const ram_split[] = {
@@ -967,6 +975,7 @@ static void corkscrew_timeout(struct net_device *dev)
 	struct corkscrew_private *vp = netdev_priv(dev);
 	int ioaddr = dev->base_addr;
 
+<<<<<<< HEAD
 	pr_warning("%s: transmit timed out, tx_status %2.2x status %4.4x.\n",
 	       dev->name, inb(ioaddr + TxStatus),
 	       inw(ioaddr + EL3_STATUS));
@@ -974,6 +983,15 @@ static void corkscrew_timeout(struct net_device *dev)
 	if ((inb(ioaddr + TxStatus) & 0x88) == 0x88)
 		pr_warning("%s: Transmitter encountered 16 collisions --"
 		       " network cable problem?\n", dev->name);
+=======
+	pr_warn("%s: transmit timed out, tx_status %2.2x status %4.4x\n",
+		dev->name, inb(ioaddr + TxStatus),
+		inw(ioaddr + EL3_STATUS));
+	/* Slight code bloat to be user friendly. */
+	if ((inb(ioaddr + TxStatus) & 0x88) == 0x88)
+		pr_warn("%s: Transmitter encountered 16 collisions -- network cable problem?\n",
+			dev->name);
+>>>>>>> v3.18
 #ifndef final_version
 	pr_debug("  Flags; bus-master %d, full %d; dirty %d current %d.\n",
 	       vp->full_bus_master_tx, vp->tx_full, vp->dirty_tx,
@@ -1382,6 +1400,7 @@ static int boomerang_rx(struct net_device *dev)
 				temp = skb_put(skb, pkt_len);
 				/* Remove this checking code for final release. */
 				if (isa_bus_to_virt(vp->rx_ring[entry].addr) != temp)
+<<<<<<< HEAD
 					pr_warning("%s: Warning -- the skbuff addresses do not match"
 					     " in boomerang_rx: %p vs. %p / %p.\n",
 					     dev->name,
@@ -1389,6 +1408,12 @@ static int boomerang_rx(struct net_device *dev)
 							 rx_ring[entry].
 							 addr), skb->head,
 					     temp);
+=======
+					pr_warn("%s: Warning -- the skbuff addresses do not match in boomerang_rx: %p vs. %p / %p\n",
+						dev->name,
+						isa_bus_to_virt(vp->rx_ring[entry].addr),
+						skb->head, temp);
+>>>>>>> v3.18
 				rx_nocopy++;
 			}
 			skb->protocol = eth_type_trans(skb, dev);

@@ -9,7 +9,10 @@
  * published by the Free Software Foundation.
  */
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/device.h>
 #include <linux/dma-mapping.h>
 #include <linux/dmaengine.h>
@@ -30,6 +33,7 @@ static int pxa2xx_spi_map_dma_buffer(struct driver_data *drv_data,
 	struct sg_table *sgt;
 	void *buf, *pbuf;
 
+<<<<<<< HEAD
 	/*
 	 * Some DMA controllers have problems transferring buffers that are
 	 * not multiple of 4 bytes. So we truncate the transfer so that it
@@ -42,6 +46,8 @@ static int pxa2xx_spi_map_dma_buffer(struct driver_data *drv_data,
 	 */
 	len = ALIGN(drv_data->len, 4);
 
+=======
+>>>>>>> v3.18
 	if (dir == DMA_TO_DEVICE) {
 		dmadev = drv_data->tx_chan->device->dev;
 		sgt = &drv_data->tx_sgt;
@@ -145,12 +151,17 @@ static void pxa2xx_spi_dma_transfer_complete(struct driver_data *drv_data,
 		if (!error) {
 			pxa2xx_spi_unmap_dma_buffers(drv_data);
 
+<<<<<<< HEAD
 			/* Handle the last bytes of unaligned transfer */
 			drv_data->tx += drv_data->tx_map_len;
 			drv_data->write(drv_data);
 
 			drv_data->rx += drv_data->rx_map_len;
 			drv_data->read(drv_data);
+=======
+			drv_data->tx += drv_data->tx_map_len;
+			drv_data->rx += drv_data->rx_map_len;
+>>>>>>> v3.18
 
 			msg->actual_length += drv_data->len;
 			msg->state = pxa2xx_spi_next_transfer(drv_data);
@@ -174,7 +185,10 @@ static struct dma_async_tx_descriptor *
 pxa2xx_spi_dma_prepare_one(struct driver_data *drv_data,
 			   enum dma_transfer_direction dir)
 {
+<<<<<<< HEAD
 	struct pxa2xx_spi_master *pdata = drv_data->master_info;
+=======
+>>>>>>> v3.18
 	struct chip_data *chip = drv_data->cur_chip;
 	enum dma_slave_buswidth width;
 	struct dma_slave_config cfg;
@@ -201,7 +215,10 @@ pxa2xx_spi_dma_prepare_one(struct driver_data *drv_data,
 		cfg.dst_addr = drv_data->ssdr_physical;
 		cfg.dst_addr_width = width;
 		cfg.dst_maxburst = chip->dma_burst_size;
+<<<<<<< HEAD
 		cfg.slave_id = pdata->tx_slave_id;
+=======
+>>>>>>> v3.18
 
 		sgt = &drv_data->tx_sgt;
 		nents = drv_data->tx_nents;
@@ -210,7 +227,10 @@ pxa2xx_spi_dma_prepare_one(struct driver_data *drv_data,
 		cfg.src_addr = drv_data->ssdr_physical;
 		cfg.src_addr_width = width;
 		cfg.src_maxburst = chip->dma_burst_size;
+<<<<<<< HEAD
 		cfg.slave_id = pdata->rx_slave_id;
+=======
+>>>>>>> v3.18
 
 		sgt = &drv_data->rx_sgt;
 		nents = drv_data->rx_nents;
@@ -227,6 +247,7 @@ pxa2xx_spi_dma_prepare_one(struct driver_data *drv_data,
 				       DMA_PREP_INTERRUPT | DMA_CTRL_ACK);
 }
 
+<<<<<<< HEAD
 static bool pxa2xx_spi_dma_filter(struct dma_chan *chan, void *param)
 {
 	const struct pxa2xx_spi_master *pdata = param;
@@ -235,6 +256,8 @@ static bool pxa2xx_spi_dma_filter(struct dma_chan *chan, void *param)
 	       chan->chan_id == pdata->rx_chan_id;
 }
 
+=======
+>>>>>>> v3.18
 bool pxa2xx_spi_dma_is_possible(size_t len)
 {
 	return len <= MAX_DMA_LEN;
@@ -327,11 +350,16 @@ void pxa2xx_spi_dma_start(struct driver_data *drv_data)
 int pxa2xx_spi_dma_setup(struct driver_data *drv_data)
 {
 	struct pxa2xx_spi_master *pdata = drv_data->master_info;
+<<<<<<< HEAD
+=======
+	struct device *dev = &drv_data->pdev->dev;
+>>>>>>> v3.18
 	dma_cap_mask_t mask;
 
 	dma_cap_zero(mask);
 	dma_cap_set(DMA_SLAVE, mask);
 
+<<<<<<< HEAD
 	drv_data->dummy = devm_kzalloc(&drv_data->pdev->dev, SZ_2K, GFP_KERNEL);
 	if (!drv_data->dummy)
 		return -ENOMEM;
@@ -343,6 +371,19 @@ int pxa2xx_spi_dma_setup(struct driver_data *drv_data)
 
 	drv_data->rx_chan = dma_request_channel(mask, pxa2xx_spi_dma_filter,
 						pdata);
+=======
+	drv_data->dummy = devm_kzalloc(dev, SZ_2K, GFP_KERNEL);
+	if (!drv_data->dummy)
+		return -ENOMEM;
+
+	drv_data->tx_chan = dma_request_slave_channel_compat(mask,
+				pdata->dma_filter, pdata->tx_param, dev, "tx");
+	if (!drv_data->tx_chan)
+		return -ENODEV;
+
+	drv_data->rx_chan = dma_request_slave_channel_compat(mask,
+				pdata->dma_filter, pdata->rx_param, dev, "rx");
+>>>>>>> v3.18
 	if (!drv_data->rx_chan) {
 		dma_release_channel(drv_data->tx_chan);
 		drv_data->tx_chan = NULL;
@@ -384,7 +425,11 @@ int pxa2xx_spi_set_dma_burst_and_threshold(struct chip_data *chip,
 	 * otherwise we use the default. Also we use the default FIFO
 	 * thresholds for now.
 	 */
+<<<<<<< HEAD
 	*burst_code = chip_info ? chip_info->dma_burst_size : 16;
+=======
+	*burst_code = chip_info ? chip_info->dma_burst_size : 1;
+>>>>>>> v3.18
 	*threshold = SSCR1_RxTresh(RX_THRESH_DFLT)
 		   | SSCR1_TxTresh(TX_THRESH_DFLT);
 

@@ -7,11 +7,16 @@
  */
 
 #include <linux/linkage.h>
+<<<<<<< HEAD
 #include <asm/alternative-asm.h>
 #include <asm/frame.h>
 #include <asm/dwarf2.h>
 
 
+=======
+#include <asm/dwarf2.h>
+
+>>>>>>> v3.18
 .text
 
 /*
@@ -30,6 +35,7 @@ CFI_STARTPROC
 # set the whole ZF thing (caller will just compare
 # eax:edx with the expected value)
 #
+<<<<<<< HEAD
 cmpxchg8b_emu:
 	pushfl
 	cli
@@ -38,10 +44,20 @@ cmpxchg8b_emu:
 	jne not_same
 	cmpl 4(%esi), %edx
 	jne half_same
+=======
+	pushfl_cfi
+	cli
+
+	cmpl  (%esi), %eax
+	jne .Lnot_same
+	cmpl 4(%esi), %edx
+	jne .Lhalf_same
+>>>>>>> v3.18
 
 	movl %ebx,  (%esi)
 	movl %ecx, 4(%esi)
 
+<<<<<<< HEAD
 	popfl
 	ret
 
@@ -51,6 +67,19 @@ cmpxchg8b_emu:
 	movl 4(%esi), %edx
 
 	popfl
+=======
+	CFI_REMEMBER_STATE
+	popfl_cfi
+	ret
+
+	CFI_RESTORE_STATE
+.Lnot_same:
+	movl  (%esi), %eax
+.Lhalf_same:
+	movl 4(%esi), %edx
+
+	popfl_cfi
+>>>>>>> v3.18
 	ret
 
 CFI_ENDPROC

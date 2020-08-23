@@ -292,7 +292,11 @@ retry:
 	}
 
 	device_create(sound_class, dev, MKDEV(SOUND_MAJOR, s->unit_minor),
+<<<<<<< HEAD
 		      NULL, s->name+6);
+=======
+		      NULL, "%s", s->name+6);
+>>>>>>> v3.18
 	return s->unit_minor;
 
 fail:
@@ -626,6 +630,7 @@ static int soundcore_open(struct inode *inode, struct file *file)
 		if (s)
 			new_fops = fops_get(s->unit_fops);
 	}
+<<<<<<< HEAD
 	if (new_fops) {
 		/*
 		 * We rely upon the fact that we can't be unloaded while the
@@ -638,10 +643,21 @@ static int soundcore_open(struct inode *inode, struct file *file)
 		const struct file_operations *old_fops = file->f_op;
 		file->f_op = new_fops;
 		spin_unlock(&sound_loader_lock);
+=======
+	spin_unlock(&sound_loader_lock);
+	if (new_fops) {
+		/*
+		 * We rely upon the fact that we can't be unloaded while the
+		 * subdriver is there.
+		 */
+		int err = 0;
+		replace_fops(file, new_fops);
+>>>>>>> v3.18
 
 		if (file->f_op->open)
 			err = file->f_op->open(inode,file);
 
+<<<<<<< HEAD
 		if (err) {
 			fops_put(file->f_op);
 			file->f_op = fops_get(old_fops);
@@ -651,6 +667,10 @@ static int soundcore_open(struct inode *inode, struct file *file)
 		return err;
 	}
 	spin_unlock(&sound_loader_lock);
+=======
+		return err;
+	}
+>>>>>>> v3.18
 	return -ENODEV;
 }
 

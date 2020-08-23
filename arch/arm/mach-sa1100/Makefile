@@ -4,9 +4,12 @@
 
 # Common support
 obj-y := clock.o generic.o irq.o time.o #nmi-oopser.o
+<<<<<<< HEAD
 obj-m :=
 obj-n :=
 obj-  :=
+=======
+>>>>>>> v3.18
 
 # Specific board support
 obj-$(CONFIG_SA1100_ASSABET)		+= assabet.o

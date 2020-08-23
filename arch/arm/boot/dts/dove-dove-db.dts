@@ -1,6 +1,10 @@
 /dts-v1/;
 
+<<<<<<< HEAD
 /include/ "dove.dtsi"
+=======
+#include "dove.dtsi"
+>>>>>>> v3.18
 
 / {
 	model = "Marvell DB-MV88AP510-BP Development Board";

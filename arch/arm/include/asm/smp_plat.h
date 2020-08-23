@@ -8,6 +8,10 @@
 #include <linux/cpumask.h>
 #include <linux/err.h>
 
+<<<<<<< HEAD
+=======
+#include <asm/cpu.h>
+>>>>>>> v3.18
 #include <asm/cputype.h>
 
 /*
@@ -25,7 +29,28 @@ static inline bool is_smp(void)
 #endif
 }
 
+<<<<<<< HEAD
 /* all SMP configurations have the extended CPUID registers */
+=======
+/**
+ * smp_cpuid_part() - return part id for a given cpu
+ * @cpu:	logical cpu id.
+ *
+ * Return: part id of logical cpu passed as argument.
+ */
+static inline unsigned int smp_cpuid_part(int cpu)
+{
+	struct cpuinfo_arm *cpu_info = &per_cpu(cpu_data, cpu);
+
+	return is_smp() ? cpu_info->cpuid & ARM_CPU_PART_MASK :
+			  read_cpuid_part();
+}
+
+/* all SMP configurations have the extended CPUID registers */
+#ifndef CONFIG_MMU
+#define tlb_ops_need_broadcast()	0
+#else
+>>>>>>> v3.18
 static inline int tlb_ops_need_broadcast(void)
 {
 	if (!is_smp())
@@ -33,6 +58,10 @@ static inline int tlb_ops_need_broadcast(void)
 
 	return ((read_cpuid_ext(CPUID_EXT_MMFR3) >> 12) & 0xf) < 2;
 }
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 
 #if !defined(CONFIG_SMP) || __LINUX_ARM_ARCH__ >= 7
 #define cache_ops_need_broadcast()	0
@@ -84,4 +113,10 @@ static inline u32 mpidr_hash_size(void)
 {
 	return 1 << mpidr_hash.bits;
 }
+<<<<<<< HEAD
+=======
+
+extern int platform_can_cpu_hotplug(void);
+
+>>>>>>> v3.18
 #endif

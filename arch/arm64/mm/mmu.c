@@ -26,13 +26,20 @@
 #include <linux/memblock.h>
 #include <linux/fs.h>
 #include <linux/io.h>
+<<<<<<< HEAD
 #include <linux/dma-contiguous.h>
+=======
+>>>>>>> v3.18
 
 #include <asm/cputype.h>
 #include <asm/sections.h>
 #include <asm/setup.h>
 #include <asm/sizes.h>
 #include <asm/tlb.h>
+<<<<<<< HEAD
+=======
+#include <asm/memblock.h>
+>>>>>>> v3.18
 #include <asm/mmu_context.h>
 
 #include "mm.h"
@@ -44,11 +51,14 @@
 struct page *empty_zero_page;
 EXPORT_SYMBOL(empty_zero_page);
 
+<<<<<<< HEAD
 pgprot_t pgprot_default;
 EXPORT_SYMBOL(pgprot_default);
 
 static pmdval_t prot_sect_kernel;
 
+=======
+>>>>>>> v3.18
 struct cachepolicy {
 	const char	policy[16];
 	u64		mair;
@@ -71,6 +81,7 @@ static struct cachepolicy cache_policies[] __initdata = {
 	}
 };
 
+<<<<<<< HEAD
 #ifdef CONFIG_STRICT_MEMORY_RWX
 static struct {
 	pmd_t *pmd;
@@ -164,6 +175,8 @@ void mem_text_write_kernel_word(u32 *addr, u32 word)
 }
 EXPORT_SYMBOL(mem_text_write_kernel_word);
 
+=======
+>>>>>>> v3.18
 /*
  * These are useful for identifying cache coherency problems by allowing the
  * cache or the cache and writebuffer to be turned off. It changes the Normal
@@ -192,7 +205,11 @@ static int __init early_cachepolicy(char *p)
 	 */
 	asm volatile(
 	"	mrs	%0, mair_el1\n"
+<<<<<<< HEAD
 	"	bfi	%0, %1, #%2, #8\n"
+=======
+	"	bfi	%0, %1, %2, #8\n"
+>>>>>>> v3.18
 	"	msr	mair_el1, %0\n"
 	"	isb\n"
 	: "=&r" (tmp)
@@ -216,6 +233,7 @@ static int __init early_cachepolicy(char *p)
 }
 early_param("cachepolicy", early_cachepolicy);
 
+<<<<<<< HEAD
 /*
  * Adjust the PMD section entries according to the CPU in use.
  */
@@ -243,6 +261,8 @@ void __init init_mem_pgprot(void)
 	pgprot_default = __pgprot(PTE_TYPE_PAGE | PTE_AF | default_pgprot);
 }
 
+=======
+>>>>>>> v3.18
 pgprot_t phys_mem_access_prot(struct file *file, unsigned long pfn,
 			      unsigned long size, pgprot_t vma_prot)
 {
@@ -280,6 +300,7 @@ static void __init alloc_init_pte(pmd_t *pmd, unsigned long addr,
 	} while (pte++, addr += PAGE_SIZE, addr != end);
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_STRICT_MEMORY_RWX
 pmdval_t get_pmd_prot_sect_kernel(unsigned long addr)
 {
@@ -303,6 +324,11 @@ pmdval_t get_pmd_prot_sect_kernel(unsigned long addr)
 static void __init alloc_init_pmd(pud_t *pud, unsigned long addr,
 				  unsigned long end, phys_addr_t phys,
 				  int map_io, bool pages)
+=======
+static void __init alloc_init_pmd(pud_t *pud, unsigned long addr,
+				  unsigned long end, phys_addr_t phys,
+				  int map_io)
+>>>>>>> v3.18
 {
 	pmd_t *pmd;
 	unsigned long next;
@@ -310,12 +336,20 @@ static void __init alloc_init_pmd(pud_t *pud, unsigned long addr,
 	pgprot_t prot_pte;
 
 	if (map_io) {
+<<<<<<< HEAD
 		prot_sect = PMD_TYPE_SECT | PMD_SECT_AF |
 			    PMD_ATTRINDX(MT_DEVICE_nGnRE);
 		prot_pte = __pgprot(PROT_DEVICE_nGnRE);
 	} else {
 		prot_sect = prot_sect_kernel;
 		prot_pte = PAGE_KERNEL;
+=======
+		prot_sect = PROT_SECT_DEVICE_nGnRE;
+		prot_pte = __pgprot(PROT_DEVICE_nGnRE);
+	} else {
+		prot_sect = PROT_SECT_NORMAL_EXEC;
+		prot_pte = PAGE_KERNEL_EXEC;
+>>>>>>> v3.18
 	}
 
 	/*
@@ -330,10 +364,16 @@ static void __init alloc_init_pmd(pud_t *pud, unsigned long addr,
 	do {
 		next = pmd_addr_end(addr, end);
 		/* try section mapping first */
+<<<<<<< HEAD
 		if (!pages && ((addr | next | phys) & ~SECTION_MASK) == 0) {
 			pmd_t old_pmd =*pmd;
 			set_pmd(pmd,
 				__pmd(phys | get_pmd_prot_sect_kernel(addr)));
+=======
+		if (((addr | next | phys) & ~SECTION_MASK) == 0) {
+			pmd_t old_pmd =*pmd;
+			set_pmd(pmd, __pmd(phys | prot_sect));
+>>>>>>> v3.18
 			/*
 			 * Check for previous table entries created during
 			 * boot (__create_page_tables) and flush them.
@@ -349,6 +389,7 @@ static void __init alloc_init_pmd(pud_t *pud, unsigned long addr,
 }
 
 static void __init alloc_init_pud(pgd_t *pgd, unsigned long addr,
+<<<<<<< HEAD
 				  unsigned long end, unsigned long phys,
 				  int map_io, bool force_pages)
 {
@@ -358,6 +399,47 @@ static void __init alloc_init_pud(pgd_t *pgd, unsigned long addr,
 	do {
 		next = pud_addr_end(addr, end);
 		alloc_init_pmd(pud, addr, next, phys, map_io, force_pages);
+=======
+				  unsigned long end, phys_addr_t phys,
+				  int map_io)
+{
+	pud_t *pud;
+	unsigned long next;
+
+	if (pgd_none(*pgd)) {
+		pud = early_alloc(PTRS_PER_PUD * sizeof(pud_t));
+		pgd_populate(&init_mm, pgd, pud);
+	}
+	BUG_ON(pgd_bad(*pgd));
+
+	pud = pud_offset(pgd, addr);
+	do {
+		next = pud_addr_end(addr, end);
+
+		/*
+		 * For 4K granule only, attempt to put down a 1GB block
+		 */
+		if (!map_io && (PAGE_SHIFT == 12) &&
+		    ((addr | next | phys) & ~PUD_MASK) == 0) {
+			pud_t old_pud = *pud;
+			set_pud(pud, __pud(phys | PROT_SECT_NORMAL_EXEC));
+
+			/*
+			 * If we have an old value for a pud, it will
+			 * be pointing to a pmd table that we no longer
+			 * need (from swapper_pg_dir).
+			 *
+			 * Look up the old pmd table and free it.
+			 */
+			if (!pud_none(old_pud)) {
+				phys_addr_t table = __pa(pmd_offset(&old_pud, 0));
+				memblock_free(table, PAGE_SIZE);
+				flush_tlb_all();
+			}
+		} else {
+			alloc_init_pmd(pud, addr, next, phys, map_io);
+		}
+>>>>>>> v3.18
 		phys += next - addr;
 	} while (pud++, addr = next, addr != end);
 }
@@ -368,7 +450,11 @@ static void __init alloc_init_pud(pgd_t *pgd, unsigned long addr,
  */
 static void __init __create_mapping(pgd_t *pgd, phys_addr_t phys,
 				    unsigned long virt, phys_addr_t size,
+<<<<<<< HEAD
 				    int map_io, bool force_pages)
+=======
+				    int map_io)
+>>>>>>> v3.18
 {
 	unsigned long addr, length, end, next;
 
@@ -378,20 +464,32 @@ static void __init __create_mapping(pgd_t *pgd, phys_addr_t phys,
 	end = addr + length;
 	do {
 		next = pgd_addr_end(addr, end);
+<<<<<<< HEAD
 		alloc_init_pud(pgd, addr, next, phys, map_io, force_pages);
+=======
+		alloc_init_pud(pgd, addr, next, phys, map_io);
+>>>>>>> v3.18
 		phys += next - addr;
 	} while (pgd++, addr = next, addr != end);
 }
 
 static void __init create_mapping(phys_addr_t phys, unsigned long virt,
+<<<<<<< HEAD
 				  phys_addr_t size, bool force_pages)
+=======
+				  phys_addr_t size)
+>>>>>>> v3.18
 {
 	if (virt < VMALLOC_START) {
 		pr_warn("BUG: not creating mapping for %pa at 0x%016lx - outside kernel range\n",
 			&phys, virt);
 		return;
 	}
+<<<<<<< HEAD
 	__create_mapping(pgd_offset_k(virt & PAGE_MASK), phys, virt, size, 0, force_pages);
+=======
+	__create_mapping(pgd_offset_k(virt & PAGE_MASK), phys, virt, size, 0);
+>>>>>>> v3.18
 }
 
 void __init create_id_mapping(phys_addr_t addr, phys_addr_t size, int map_io)
@@ -401,6 +499,7 @@ void __init create_id_mapping(phys_addr_t addr, phys_addr_t size, int map_io)
 		return;
 	}
 	__create_mapping(&idmap_pg_dir[pgd_index(addr)],
+<<<<<<< HEAD
 			 addr, addr, size, map_io, false);
 }
 
@@ -450,6 +549,11 @@ static void __init dma_contiguous_remap(void)
 
 
 
+=======
+			 addr, addr, size, map_io);
+}
+
+>>>>>>> v3.18
 static void __init map_mem(void)
 {
 	struct memblock_region *reg;
@@ -460,11 +564,23 @@ static void __init map_mem(void)
 	 * create_mapping requires puds, pmds and ptes to be allocated from
 	 * memory addressable from the initial direct kernel mapping.
 	 *
+<<<<<<< HEAD
 	 * The initial direct kernel mapping, located at swapper_pg_dir,
 	 * gives us PGDIR_SIZE memory starting from PHYS_OFFSET (which must be
 	 * aligned to 2MB as per Documentation/arm64/booting.txt).
 	 */
 	limit = PHYS_OFFSET + PGDIR_SIZE;
+=======
+	 * The initial direct kernel mapping, located at swapper_pg_dir, gives
+	 * us PUD_SIZE (4K pages) or PMD_SIZE (64K pages) memory starting from
+	 * PHYS_OFFSET (which must be aligned to 2MB as per
+	 * Documentation/arm64/booting.txt).
+	 */
+	if (IS_ENABLED(CONFIG_ARM64_64K_PAGES))
+		limit = PHYS_OFFSET + PMD_SIZE;
+	else
+		limit = PHYS_OFFSET + PUD_SIZE;
+>>>>>>> v3.18
 	memblock_set_current_limit(limit);
 
 	/* map all the memory banks */
@@ -491,13 +607,18 @@ static void __init map_mem(void)
 		}
 #endif
 
+<<<<<<< HEAD
 		create_mapping(start, __phys_to_virt(start), end - start,
 					false);
+=======
+		create_mapping(start, __phys_to_virt(start), end - start);
+>>>>>>> v3.18
 	}
 
 	/* Limit no longer required. */
 	memblock_set_current_limit(MEMBLOCK_ALLOC_ANYWHERE);
 }
+<<<<<<< HEAD
 #ifdef CONFIG_FORCE_PAGES
 static noinline void split_pmd(pmd_t *pmd, unsigned long addr,
 				unsigned long end, unsigned long pfn)
@@ -569,6 +690,8 @@ static void __init remap_pages(void)
 
 }
 #endif
+=======
+>>>>>>> v3.18
 
 /*
  * paging_init() sets up the page tables, initialises the zone memory
@@ -579,8 +702,11 @@ void __init paging_init(void)
 	void *zero_page;
 
 	map_mem();
+<<<<<<< HEAD
 	dma_contiguous_remap();
 	remap_pages();
+=======
+>>>>>>> v3.18
 
 	/*
 	 * Finally flush the caches and tlb to ensure that we're in a
@@ -596,9 +722,12 @@ void __init paging_init(void)
 
 	empty_zero_page = virt_to_page(zero_page);
 
+<<<<<<< HEAD
 	/* Ensure the zero page is visible to the page table walker */
 	dsb(ishst);
 
+=======
+>>>>>>> v3.18
 	/*
 	 * TTBR0 is only used for the identity mapping at this stage. Make it
 	 * point to zero page to avoid speculatively fetching new entries.
@@ -637,6 +766,12 @@ int kern_addr_valid(unsigned long addr)
 	if (pud_none(*pud))
 		return 0;
 
+<<<<<<< HEAD
+=======
+	if (pud_sect(*pud))
+		return pfn_valid(pud_pfn(*pud));
+
+>>>>>>> v3.18
 	pmd = pmd_offset(pud, addr);
 	if (pmd_none(*pmd))
 		return 0;
@@ -684,7 +819,11 @@ int __meminit vmemmap_populate(unsigned long start, unsigned long end, int node)
 			if (!p)
 				return -ENOMEM;
 
+<<<<<<< HEAD
 			set_pmd(pmd, __pmd(__pa(p) | prot_sect_kernel));
+=======
+			set_pmd(pmd, __pmd(__pa(p) | PROT_SECT_NORMAL));
+>>>>>>> v3.18
 		} else
 			vmemmap_verify((pte_t *)pmd, node, addr, next);
 	} while (addr = next, addr != end);

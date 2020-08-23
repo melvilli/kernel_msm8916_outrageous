@@ -6,6 +6,13 @@
 #include "spk_priv.h"
 #include "serialio.h"
 
+<<<<<<< HEAD
+=======
+#ifndef SERIAL_PORT_DFNS
+#define SERIAL_PORT_DFNS
+#endif
+
+>>>>>>> v3.18
 static void start_serial_interrupt(int irq);
 
 static const struct old_serial_port rs_table[] = {
@@ -36,7 +43,11 @@ const struct old_serial_port *spk_serial_init(int index)
 		cval |= UART_LCR_EPAR;
 	if (synth_request_region(ser->port, 8)) {
 		/* try to take it back. */
+<<<<<<< HEAD
 		printk(KERN_INFO "Ports not available, trying to steal them\n");
+=======
+		pr_info("Ports not available, trying to steal them\n");
+>>>>>>> v3.18
 		__release_region(&ioport_resource, ser->port, 8);
 		err = synth_request_region(ser->port, 8);
 		if (err) {
@@ -79,7 +90,12 @@ static irqreturn_t synth_readbuf_handler(int irq, void *dev_id)
 /*printk(KERN_ERR "in irq\n"); */
 /*pr_warn("in IRQ\n"); */
 	int c;
+<<<<<<< HEAD
 	spk_lock(flags);
+=======
+
+	spin_lock_irqsave(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 	while (inb_p(speakup_info.port_tts + UART_LSR) & UART_LSR_DR) {
 
 		c = inb_p(speakup_info.port_tts+UART_RX);
@@ -87,7 +103,11 @@ static irqreturn_t synth_readbuf_handler(int irq, void *dev_id)
 /*printk(KERN_ERR "c = %d\n", c); */
 /*pr_warn("C = %d\n", c); */
 	}
+<<<<<<< HEAD
 	spk_unlock(flags);
+=======
+	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 	return IRQ_HANDLED;
 }
 
@@ -102,7 +122,11 @@ static void start_serial_interrupt(int irq)
 			 "serial", (void *) synth_readbuf_handler);
 
 	if (rv)
+<<<<<<< HEAD
 		printk(KERN_ERR "Unable to request Speakup serial I R Q\n");
+=======
+		pr_err("Unable to request Speakup serial I R Q\n");
+>>>>>>> v3.18
 	/* Set MCR */
 	outb(UART_MCR_DTR | UART_MCR_RTS | UART_MCR_OUT2,
 			speakup_info.port_tts + UART_MCR);
@@ -133,6 +157,10 @@ void spk_stop_serial_interrupt(void)
 int spk_wait_for_xmitr(void)
 {
 	int tmout = SPK_XMITR_TIMEOUT;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	if ((synth->alive) && (timeouts >= NUM_DISABLE_TIMEOUTS)) {
 		pr_warn("%s: too many timeouts, deactivating speakup\n",
 			synth->long_name);

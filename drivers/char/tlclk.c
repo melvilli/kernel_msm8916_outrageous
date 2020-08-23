@@ -222,7 +222,11 @@ static int tlclk_open(struct inode *inode, struct file *filp)
 	/* This device is wired through the FPGA IO space of the ATCA blade
 	 * we can't share this IRQ */
 	result = request_irq(telclk_interrupt, &tlclk_interrupt,
+<<<<<<< HEAD
 			     IRQF_DISABLED, "telco_clock", tlclk_interrupt);
+=======
+			     0, "telco_clock", tlclk_interrupt);
+>>>>>>> v3.18
 	if (result == -EBUSY)
 		printk(KERN_ERR "tlclk: Interrupt can't be reserved.\n");
 	else

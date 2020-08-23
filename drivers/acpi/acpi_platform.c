@@ -16,12 +16,17 @@
 #include <linux/err.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
+<<<<<<< HEAD
+=======
+#include <linux/dma-mapping.h>
+>>>>>>> v3.18
 #include <linux/platform_device.h>
 
 #include "internal.h"
 
 ACPI_MODULE_NAME("platform");
 
+<<<<<<< HEAD
 /*
  * The following ACPI IDs are known to be suitable for representing as
  * platform devices.
@@ -31,12 +36,22 @@ static const struct acpi_device_id acpi_platform_device_ids[] = {
 	{ "PNP0D40" },
 
 	{ }
+=======
+static const struct acpi_device_id forbidden_id_list[] = {
+	{"PNP0000", 0},	/* PIC */
+	{"PNP0100", 0},	/* Timer */
+	{"PNP0200", 0},	/* AT DMA Controller */
+	{"", 0},
+>>>>>>> v3.18
 };
 
 /**
  * acpi_create_platform_device - Create platform device for ACPI device node
  * @adev: ACPI device node to create a platform device for.
+<<<<<<< HEAD
  * @id: ACPI device ID used to match @adev.
+=======
+>>>>>>> v3.18
  *
  * Check if the given @adev can be represented as a platform device and, if
  * that's the case, create and register a platform device, populate its common
@@ -44,19 +59,28 @@ static const struct acpi_device_id acpi_platform_device_ids[] = {
  *
  * Name of the platform device will be the same as @adev's.
  */
+<<<<<<< HEAD
 int acpi_create_platform_device(struct acpi_device *adev,
 				const struct acpi_device_id *id)
+=======
+struct platform_device *acpi_create_platform_device(struct acpi_device *adev)
+>>>>>>> v3.18
 {
 	struct platform_device *pdev = NULL;
 	struct acpi_device *acpi_parent;
 	struct platform_device_info pdevinfo;
 	struct resource_list_entry *rentry;
 	struct list_head resource_list;
+<<<<<<< HEAD
 	struct resource *resources;
+=======
+	struct resource *resources = NULL;
+>>>>>>> v3.18
 	int count;
 
 	/* If the ACPI node already has a physical device attached, skip it. */
 	if (adev->physical_node_count)
+<<<<<<< HEAD
 		return 0;
 
 	INIT_LIST_HEAD(&resource_list);
@@ -75,6 +99,31 @@ int acpi_create_platform_device(struct acpi_device *adev,
 		resources[count++] = rentry->res;
 
 	acpi_dev_free_resource_list(&resource_list);
+=======
+		return NULL;
+
+	if (!acpi_match_device_ids(adev, forbidden_id_list))
+		return ERR_PTR(-EINVAL);
+
+	INIT_LIST_HEAD(&resource_list);
+	count = acpi_dev_get_resources(adev, &resource_list, NULL, NULL);
+	if (count < 0) {
+		return NULL;
+	} else if (count > 0) {
+		resources = kmalloc(count * sizeof(struct resource),
+				    GFP_KERNEL);
+		if (!resources) {
+			dev_err(&adev->dev, "No memory for resources\n");
+			acpi_dev_free_resource_list(&resource_list);
+			return ERR_PTR(-ENOMEM);
+		}
+		count = 0;
+		list_for_each_entry(rentry, &resource_list, node)
+			resources[count++] = rentry->res;
+
+		acpi_dev_free_resource_list(&resource_list);
+	}
+>>>>>>> v3.18
 
 	memset(&pdevinfo, 0, sizeof(pdevinfo));
 	/*
@@ -102,6 +151,7 @@ int acpi_create_platform_device(struct acpi_device *adev,
 	pdevinfo.id = -1;
 	pdevinfo.res = resources;
 	pdevinfo.num_res = count;
+<<<<<<< HEAD
 	pdevinfo.acpi_node.handle = adev->handle;
 	pdev = platform_device_register_full(&pdevinfo);
 	if (IS_ERR(pdev)) {
@@ -126,3 +176,19 @@ void __init acpi_platform_init(void)
 {
 	acpi_scan_add_handler(&platform_handler);
 }
+=======
+	pdevinfo.acpi_node.companion = adev;
+	pdevinfo.dma_mask = DMA_BIT_MASK(32);
+	pdev = platform_device_register_full(&pdevinfo);
+	if (IS_ERR(pdev))
+		dev_err(&adev->dev, "platform device creation failed: %ld\n",
+			PTR_ERR(pdev));
+	else
+		dev_dbg(&adev->dev, "created platform device %s\n",
+			dev_name(&pdev->dev));
+
+	kfree(resources);
+	return pdev;
+}
+EXPORT_SYMBOL_GPL(acpi_create_platform_device);
+>>>>>>> v3.18

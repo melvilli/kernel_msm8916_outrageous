@@ -36,7 +36,11 @@
 #define DPI 72
 #define VFREQ 60 /* Hz */
 #define TIMING_NAME "Linux XGA"
+<<<<<<< HEAD
 #define ESTABLISHED_TIMINGS_BITS 0x08 /* Bit 3 -> 1024x768 @60 Hz */
+=======
+#define ESTABLISHED_TIMING2_BITS 0x08 /* Bit 3 -> 1024x768 @60 Hz */
+>>>>>>> v3.18
 #define HSYNC_POL 0
 #define VSYNC_POL 0
 #define CRC 0x55

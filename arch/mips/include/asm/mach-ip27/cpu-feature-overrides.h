@@ -8,6 +8,11 @@
 #ifndef __ASM_MACH_IP27_CPU_FEATURE_OVERRIDES_H
 #define __ASM_MACH_IP27_CPU_FEATURE_OVERRIDES_H
 
+<<<<<<< HEAD
+=======
+#include <asm/cpu.h>
+
+>>>>>>> v3.18
 /*
  * IP27 only comes with R10000 family processors all using the same config
  */

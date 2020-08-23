@@ -17,6 +17,10 @@
  * @nb_args: number of parameters it takes
  * @types: list of types as strings
  * @args: list of args as strings (args[i] matches types[i])
+<<<<<<< HEAD
+=======
+ * @enter_fields: list of fields for syscall_enter trace event
+>>>>>>> v3.18
  * @enter_event: associated syscall_enter trace event
  * @exit_event: associated syscall_exit trace event
  */

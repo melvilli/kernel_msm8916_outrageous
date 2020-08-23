@@ -98,14 +98,22 @@ void unregister_vlan_dev(struct net_device *dev, struct list_head *head)
 		vlan_gvrp_request_leave(dev);
 
 	vlan_group_set_device(grp, vlan->vlan_proto, vlan_id, NULL);
+<<<<<<< HEAD
+=======
+
+	netdev_upper_dev_unlink(real_dev, dev);
+>>>>>>> v3.18
 	/* Because unregister_netdevice_queue() makes sure at least one rcu
 	 * grace period is respected before device freeing,
 	 * we dont need to call synchronize_net() here.
 	 */
 	unregister_netdevice_queue(dev, head);
 
+<<<<<<< HEAD
 	netdev_upper_dev_unlink(real_dev, dev);
 
+=======
+>>>>>>> v3.18
 	if (grp->nr_vlan_devs == 0) {
 		vlan_mvrp_uninit_applicant(real_dev);
 		vlan_gvrp_uninit_applicant(real_dev);
@@ -169,6 +177,7 @@ int register_vlan_dev(struct net_device *dev)
 	if (err < 0)
 		goto out_uninit_mvrp;
 
+<<<<<<< HEAD
 	err = netdev_upper_dev_link(real_dev, dev);
 	if (err)
 		goto out_uninit_mvrp;
@@ -176,6 +185,16 @@ int register_vlan_dev(struct net_device *dev)
 	err = register_netdevice(dev);
 	if (err < 0)
 		goto out_upper_dev_unlink;
+=======
+	vlan->nest_level = dev_get_nest_level(real_dev, is_vlan_dev) + 1;
+	err = register_netdevice(dev);
+	if (err < 0)
+		goto out_uninit_mvrp;
+
+	err = netdev_upper_dev_link(real_dev, dev);
+	if (err)
+		goto out_unregister_netdev;
+>>>>>>> v3.18
 
 	/* Account for reference in struct vlan_dev_priv */
 	dev_hold(real_dev);
@@ -191,8 +210,13 @@ int register_vlan_dev(struct net_device *dev)
 
 	return 0;
 
+<<<<<<< HEAD
 out_upper_dev_unlink:
 	netdev_upper_dev_unlink(real_dev, dev);
+=======
+out_unregister_netdev:
+	unregister_netdevice(dev);
+>>>>>>> v3.18
 out_uninit_mvrp:
 	if (grp->nr_vlan_devs == 0)
 		vlan_mvrp_uninit_applicant(real_dev);
@@ -210,6 +234,10 @@ out_vid_del:
 static int register_vlan_device(struct net_device *real_dev, u16 vlan_id)
 {
 	struct net_device *new_dev;
+<<<<<<< HEAD
+=======
+	struct vlan_dev_priv *vlan;
+>>>>>>> v3.18
 	struct net *net = dev_net(real_dev);
 	struct vlan_net *vn = net_generic(net, vlan_net_id);
 	char name[IFNAMSIZ];
@@ -248,7 +276,12 @@ static int register_vlan_device(struct net_device *real_dev, u16 vlan_id)
 		snprintf(name, IFNAMSIZ, "vlan%.4i", vlan_id);
 	}
 
+<<<<<<< HEAD
 	new_dev = alloc_netdev(sizeof(struct vlan_dev_priv), name, vlan_setup);
+=======
+	new_dev = alloc_netdev(sizeof(struct vlan_dev_priv), name,
+			       NET_NAME_UNKNOWN, vlan_setup);
+>>>>>>> v3.18
 
 	if (new_dev == NULL)
 		return -ENOBUFS;
@@ -260,11 +293,20 @@ static int register_vlan_device(struct net_device *real_dev, u16 vlan_id)
 	new_dev->mtu = real_dev->mtu;
 	new_dev->priv_flags |= (real_dev->priv_flags & IFF_UNICAST_FLT);
 
+<<<<<<< HEAD
 	vlan_dev_priv(new_dev)->vlan_proto = htons(ETH_P_8021Q);
 	vlan_dev_priv(new_dev)->vlan_id = vlan_id;
 	vlan_dev_priv(new_dev)->real_dev = real_dev;
 	vlan_dev_priv(new_dev)->dent = NULL;
 	vlan_dev_priv(new_dev)->flags = VLAN_FLAG_REORDER_HDR;
+=======
+	vlan = vlan_dev_priv(new_dev);
+	vlan->vlan_proto = htons(ETH_P_8021Q);
+	vlan->vlan_id = vlan_id;
+	vlan->real_dev = real_dev;
+	vlan->dent = NULL;
+	vlan->flags = VLAN_FLAG_REORDER_HDR;
+>>>>>>> v3.18
 
 	new_dev->rtnl_link_ops = &vlan_link_ops;
 	err = register_vlan_dev(new_dev);
@@ -274,8 +316,12 @@ static int register_vlan_device(struct net_device *real_dev, u16 vlan_id)
 	return 0;
 
 out_free_newdev:
+<<<<<<< HEAD
 	if (new_dev->reg_state == NETREG_UNINITIALIZED)
 		free_netdev(new_dev);
+=======
+	free_netdev(new_dev);
+>>>>>>> v3.18
 	return err;
 }
 
@@ -300,7 +346,11 @@ static void vlan_sync_address(struct net_device *dev,
 	    !ether_addr_equal(vlandev->dev_addr, dev->dev_addr))
 		dev_uc_add(dev, vlandev->dev_addr);
 
+<<<<<<< HEAD
 	memcpy(vlan->real_dev_addr, dev->dev_addr, ETH_ALEN);
+=======
+	ether_addr_copy(vlan->real_dev_addr, dev->dev_addr);
+>>>>>>> v3.18
 }
 
 static void vlan_transfer_features(struct net_device *dev,
@@ -322,6 +372,7 @@ static void vlan_transfer_features(struct net_device *dev,
 	netdev_update_features(vlandev);
 }
 
+<<<<<<< HEAD
 static void __vlan_device_event(struct net_device *dev, unsigned long event)
 {
 	switch (event) {
@@ -334,17 +385,39 @@ static void __vlan_device_event(struct net_device *dev, unsigned long event)
 	case NETDEV_REGISTER:
 		if (vlan_proc_add_dev(dev) < 0)
 			pr_warn("failed to add proc entry for %s\n", dev->name);
+=======
+static int __vlan_device_event(struct net_device *dev, unsigned long event)
+{
+	int err = 0;
+
+	switch (event) {
+	case NETDEV_CHANGENAME:
+		vlan_proc_rem_dev(dev);
+		err = vlan_proc_add_dev(dev);
+		break;
+	case NETDEV_REGISTER:
+		err = vlan_proc_add_dev(dev);
+>>>>>>> v3.18
 		break;
 	case NETDEV_UNREGISTER:
 		vlan_proc_rem_dev(dev);
 		break;
 	}
+<<<<<<< HEAD
+=======
+
+	return err;
+>>>>>>> v3.18
 }
 
 static int vlan_device_event(struct notifier_block *unused, unsigned long event,
 			     void *ptr)
 {
+<<<<<<< HEAD
 	struct net_device *dev = ptr;
+=======
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 	struct vlan_group *grp;
 	struct vlan_info *vlan_info;
 	int i, flgs;
@@ -353,8 +426,17 @@ static int vlan_device_event(struct notifier_block *unused, unsigned long event,
 	bool last = false;
 	LIST_HEAD(list);
 
+<<<<<<< HEAD
 	if (is_vlan_dev(dev))
 		__vlan_device_event(dev, event);
+=======
+	if (is_vlan_dev(dev)) {
+		int err = __vlan_device_event(dev, event);
+
+		if (err)
+			return notifier_from_errno(err);
+	}
+>>>>>>> v3.18
 
 	if ((event == NETDEV_UP) &&
 	    (dev->features & NETIF_F_HW_VLAN_CTAG_FILTER)) {
@@ -462,6 +544,10 @@ static int vlan_device_event(struct notifier_block *unused, unsigned long event,
 
 	case NETDEV_NOTIFY_PEERS:
 	case NETDEV_BONDING_FAILOVER:
+<<<<<<< HEAD
+=======
+	case NETDEV_RESEND_IGMP:
+>>>>>>> v3.18
 		/* Propagate to vlan devices */
 		vlan_group_for_each_dev(grp, i, vlandev)
 			call_netdevice_notifiers(event, vlandev);

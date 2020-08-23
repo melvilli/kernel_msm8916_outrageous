@@ -24,6 +24,7 @@
  *
  */
 
+<<<<<<< HEAD
 #include <subdev/fb.h>
 
 struct nv41_fb_priv {
@@ -45,6 +46,9 @@ nv41_fb_vram_init(struct nouveau_fb *pfb)
 	pfb->ram.parts = (nv_rd32(pfb, 0x100200) & 0x00000003) + 1;
 	return nv_rd32(pfb, 0x100320);
 }
+=======
+#include "nv04.h"
+>>>>>>> v3.18
 
 void
 nv41_fb_tile_prog(struct nouveau_fb *pfb, int i, struct nouveau_fb_tile *tile)
@@ -59,7 +63,11 @@ nv41_fb_tile_prog(struct nouveau_fb *pfb, int i, struct nouveau_fb_tile *tile)
 int
 nv41_fb_init(struct nouveau_object *object)
 {
+<<<<<<< HEAD
 	struct nv41_fb_priv *priv = (void *)object;
+=======
+	struct nv04_fb_priv *priv = (void *)object;
+>>>>>>> v3.18
 	int ret;
 
 	ret = nouveau_fb_init(&priv->base);
@@ -70,6 +78,7 @@ nv41_fb_init(struct nouveau_object *object)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int
 nv41_fb_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	     struct nouveau_oclass *oclass, void *data, u32 size,
@@ -99,8 +108,26 @@ nv41_fb_oclass = {
 	.handle = NV_SUBDEV(FB, 0x41),
 	.ofuncs = &(struct nouveau_ofuncs) {
 		.ctor = nv41_fb_ctor,
+=======
+struct nouveau_oclass *
+nv41_fb_oclass = &(struct nv04_fb_impl) {
+	.base.base.handle = NV_SUBDEV(FB, 0x41),
+	.base.base.ofuncs = &(struct nouveau_ofuncs) {
+		.ctor = nv04_fb_ctor,
+>>>>>>> v3.18
 		.dtor = _nouveau_fb_dtor,
 		.init = nv41_fb_init,
 		.fini = _nouveau_fb_fini,
 	},
+<<<<<<< HEAD
 };
+=======
+	.base.memtype = nv04_fb_memtype_valid,
+	.base.ram = &nv41_ram_oclass,
+	.tile.regions = 12,
+	.tile.init = nv30_fb_tile_init,
+	.tile.comp = nv40_fb_tile_comp,
+	.tile.fini = nv20_fb_tile_fini,
+	.tile.prog = nv41_fb_tile_prog,
+}.base.base;
+>>>>>>> v3.18

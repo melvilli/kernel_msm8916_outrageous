@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Copyright (c) 2003-2013 QLogic Corporation
+=======
+Copyright (c) 2003-2014 QLogic Corporation
+>>>>>>> v3.18
 QLogic Linux FC-FCoE Driver
 
 This program includes a device driver for Linux 3.x.

@@ -48,9 +48,19 @@ int ext3_sync_file(struct file *file, loff_t start, loff_t end, int datasync)
 
 	trace_ext3_sync_file_enter(file, datasync);
 
+<<<<<<< HEAD
 	if (inode->i_sb->s_flags & MS_RDONLY)
 		return 0;
 
+=======
+	if (inode->i_sb->s_flags & MS_RDONLY) {
+		/* Make sure that we read updated state */
+		smp_rmb();
+		if (EXT3_SB(inode->i_sb)->s_mount_state & EXT3_ERROR_FS)
+			return -EROFS;
+		return 0;
+	}
+>>>>>>> v3.18
 	ret = filemap_write_and_wait_range(inode->i_mapping, start, end);
 	if (ret)
 		goto out;

@@ -83,6 +83,10 @@
 #include <linux/delay.h>
 #include <linux/init.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
+=======
+#include <linux/workqueue.h>
+>>>>>>> v3.18
 #include "slip.h"
 #ifdef CONFIG_INET
 #include <linux/ip.h>
@@ -163,7 +167,11 @@ static int sl_alloc_bufs(struct slip *sl, int mtu)
 	if (cbuff == NULL)
 		goto err_exit;
 	slcomp = slhc_init(16, 16);
+<<<<<<< HEAD
 	if (IS_ERR(slcomp))
+=======
+	if (slcomp == NULL)
+>>>>>>> v3.18
 		goto err_exit;
 #endif
 	spin_lock_bh(&sl->lock);
@@ -416,6 +424,7 @@ static void sl_encaps(struct slip *sl, unsigned char *icp, int len)
 #endif
 }
 
+<<<<<<< HEAD
 /*
  * Called by the driver when there's room for more data.  If we have
  * more packets to send, we send them here.
@@ -428,19 +437,56 @@ static void slip_write_wakeup(struct tty_struct *tty)
 	/* First make sure we're connected. */
 	if (!sl || sl->magic != SLIP_MAGIC || !netif_running(sl->dev))
 		return;
+=======
+/* Write out any remaining transmit buffer. Scheduled when tty is writable */
+static void slip_transmit(struct work_struct *work)
+{
+	struct slip *sl = container_of(work, struct slip, tx_work);
+	int actual;
+
+	spin_lock_bh(&sl->lock);
+	/* First make sure we're connected. */
+	if (!sl->tty || sl->magic != SLIP_MAGIC || !netif_running(sl->dev)) {
+		spin_unlock_bh(&sl->lock);
+		return;
+	}
+>>>>>>> v3.18
 
 	if (sl->xleft <= 0)  {
 		/* Now serial buffer is almost free & we can start
 		 * transmission of another packet */
 		sl->dev->stats.tx_packets++;
+<<<<<<< HEAD
 		clear_bit(TTY_DO_WRITE_WAKEUP, &tty->flags);
+=======
+		clear_bit(TTY_DO_WRITE_WAKEUP, &sl->tty->flags);
+		spin_unlock_bh(&sl->lock);
+>>>>>>> v3.18
 		sl_unlock(sl);
 		return;
 	}
 
+<<<<<<< HEAD
 	actual = tty->ops->write(tty, sl->xhead, sl->xleft);
 	sl->xleft -= actual;
 	sl->xhead += actual;
+=======
+	actual = sl->tty->ops->write(sl->tty, sl->xhead, sl->xleft);
+	sl->xleft -= actual;
+	sl->xhead += actual;
+	spin_unlock_bh(&sl->lock);
+}
+
+/*
+ * Called by the driver when there's room for more data.
+ * Schedule the transmit.
+ */
+static void slip_write_wakeup(struct tty_struct *tty)
+{
+	struct slip *sl = tty->disc_data;
+
+	schedule_work(&sl->tx_work);
+>>>>>>> v3.18
 }
 
 static void sl_tx_timeout(struct net_device *dev)
@@ -735,7 +781,11 @@ static struct slip *sl_alloc(dev_t line)
 		return NULL;
 
 	sprintf(name, "sl%d", i);
+<<<<<<< HEAD
 	dev = alloc_netdev(sizeof(*sl), name, sl_setup);
+=======
+	dev = alloc_netdev(sizeof(*sl), name, NET_NAME_UNKNOWN, sl_setup);
+>>>>>>> v3.18
 	if (!dev)
 		return NULL;
 
@@ -746,6 +796,10 @@ static struct slip *sl_alloc(dev_t line)
 	sl->magic       = SLIP_MAGIC;
 	sl->dev	      	= dev;
 	spin_lock_init(&sl->lock);
+<<<<<<< HEAD
+=======
+	INIT_WORK(&sl->tx_work, slip_transmit);
+>>>>>>> v3.18
 	sl->mode        = SL_MODE_DEFAULT;
 #ifdef CONFIG_SLIP_SMART
 	/* initialize timer_list struct */
@@ -869,8 +923,17 @@ static void slip_close(struct tty_struct *tty)
 	if (!sl || sl->magic != SLIP_MAGIC || sl->tty != tty)
 		return;
 
+<<<<<<< HEAD
 	tty->disc_data = NULL;
 	sl->tty = NULL;
+=======
+	spin_lock_bh(&sl->lock);
+	tty->disc_data = NULL;
+	sl->tty = NULL;
+	spin_unlock_bh(&sl->lock);
+
+	flush_work(&sl->tx_work);
+>>>>>>> v3.18
 
 	/* VSV = very important to remove timers */
 #ifdef CONFIG_SLIP_SMART

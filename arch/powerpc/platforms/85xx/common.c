@@ -5,13 +5,25 @@
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
  */
+<<<<<<< HEAD
 #include <linux/of_platform.h>
 
+=======
+
+#include <linux/of_irq.h>
+#include <linux/of_platform.h>
+
+#include <asm/qe.h>
+>>>>>>> v3.18
 #include <sysdev/cpm2_pic.h>
 
 #include "mpc85xx.h"
 
+<<<<<<< HEAD
 static struct of_device_id __initdata mpc85xx_common_ids[] = {
+=======
+static const struct of_device_id mpc85xx_common_ids[] __initconst = {
+>>>>>>> v3.18
 	{ .type = "soc", },
 	{ .compatible = "soc", },
 	{ .compatible = "simple-bus", },
@@ -80,3 +92,49 @@ void __init mpc85xx_cpm2_pic_init(void)
 	irq_set_chained_handler(irq, cpm2_cascade);
 }
 #endif
+<<<<<<< HEAD
+=======
+
+#ifdef CONFIG_QUICC_ENGINE
+void __init mpc85xx_qe_init(void)
+{
+	struct device_node *np;
+
+	np = of_find_compatible_node(NULL, NULL, "fsl,qe");
+	if (!np) {
+		np = of_find_node_by_name(NULL, "qe");
+		if (!np) {
+			pr_err("%s: Could not find Quicc Engine node\n",
+					__func__);
+			return;
+		}
+	}
+
+	if (!of_device_is_available(np)) {
+		of_node_put(np);
+		return;
+	}
+
+	qe_reset();
+	of_node_put(np);
+
+}
+
+void __init mpc85xx_qe_par_io_init(void)
+{
+	struct device_node *np;
+
+	np = of_find_node_by_name(NULL, "par_io");
+	if (np) {
+		struct device_node *ucc;
+
+		par_io_init(np);
+		of_node_put(np);
+
+		for_each_node_by_name(ucc, "ucc")
+			par_io_of_config(ucc);
+
+	}
+}
+#endif
+>>>>>>> v3.18

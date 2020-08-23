@@ -45,7 +45,11 @@ static ssize_t bad_file_aio_write(struct kiocb *iocb, const struct iovec *iov,
 	return -EIO;
 }
 
+<<<<<<< HEAD
 static int bad_file_readdir(struct file *filp, void *dirent, filldir_t filldir)
+=======
+static int bad_file_readdir(struct file *file, struct dir_context *ctx)
+>>>>>>> v3.18
 {
 	return -EIO;
 }
@@ -152,7 +156,11 @@ static const struct file_operations bad_file_ops =
 	.write		= bad_file_write,
 	.aio_read	= bad_file_aio_read,
 	.aio_write	= bad_file_aio_write,
+<<<<<<< HEAD
 	.readdir	= bad_file_readdir,
+=======
+	.iterate	= bad_file_readdir,
+>>>>>>> v3.18
 	.poll		= bad_file_poll,
 	.unlocked_ioctl	= bad_file_unlocked_ioctl,
 	.compat_ioctl	= bad_file_compat_ioctl,
@@ -218,8 +226,14 @@ static int bad_inode_mknod (struct inode *dir, struct dentry *dentry,
 	return -EIO;
 }
 
+<<<<<<< HEAD
 static int bad_inode_rename (struct inode *old_dir, struct dentry *old_dentry,
 		struct inode *new_dir, struct dentry *new_dentry)
+=======
+static int bad_inode_rename2(struct inode *old_dir, struct dentry *old_dentry,
+			     struct inode *new_dir, struct dentry *new_dentry,
+			     unsigned int flags)
+>>>>>>> v3.18
 {
 	return -EIO;
 }
@@ -279,7 +293,11 @@ static const struct inode_operations bad_inode_ops =
 	.mkdir		= bad_inode_mkdir,
 	.rmdir		= bad_inode_rmdir,
 	.mknod		= bad_inode_mknod,
+<<<<<<< HEAD
 	.rename		= bad_inode_rename,
+=======
+	.rename2	= bad_inode_rename2,
+>>>>>>> v3.18
 	.readlink	= bad_inode_readlink,
 	/* follow_link must be no-op, otherwise unmounting this inode
 	   won't work */

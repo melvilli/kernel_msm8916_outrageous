@@ -49,4 +49,11 @@ static inline bool has_zero(unsigned long val, unsigned long *data, const struct
 	return (val + c->high_bits) & ~rhs;
 }
 
+<<<<<<< HEAD
+=======
+#ifndef zero_bytemask
+#define zero_bytemask(mask) (~1ul << __fls(mask))
+#endif
+
+>>>>>>> v3.18
 #endif /* _ASM_WORD_AT_A_TIME_H */

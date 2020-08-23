@@ -24,7 +24,10 @@
 #include <linux/seq_file.h>
 #include <linux/module.h>
 #include <linux/sunrpc/stats.h>
+<<<<<<< HEAD
 #include <linux/nfsd/stats.h>
+=======
+>>>>>>> v3.18
 #include <net/net_namespace.h>
 
 #include "nfsd.h"

@@ -173,8 +173,12 @@
 /* ======= */
 struct compal_data{
 	/* Fan control */
+<<<<<<< HEAD
 	struct device *hwmon_dev;
 	int pwm_enable; /* 0:full on, 1:set by pwm1, 2:control by moterboard */
+=======
+	int pwm_enable; /* 0:full on, 1:set by pwm1, 2:control by motherboard */
+>>>>>>> v3.18
 	unsigned char curr_pwm;
 
 	/* Power supply */
@@ -402,6 +406,7 @@ SIMPLE_MASKED_STORE_SHOW(wake_up_wlan,	WAKE_UP_ADDR, WAKE_UP_WLAN)
 SIMPLE_MASKED_STORE_SHOW(wake_up_key,	WAKE_UP_ADDR, WAKE_UP_KEY)
 SIMPLE_MASKED_STORE_SHOW(wake_up_mouse,	WAKE_UP_ADDR, WAKE_UP_MOUSE)
 
+<<<<<<< HEAD
 
 /* General hwmon interface */
 static ssize_t hwmon_name_show(struct device *dev,
@@ -411,6 +416,8 @@ static ssize_t hwmon_name_show(struct device *dev,
 }
 
 
+=======
+>>>>>>> v3.18
 /* Fan control interface */
 static ssize_t pwm_enable_show(struct device *dev,
 		struct device_attribute *attr, char *buf)
@@ -425,7 +432,12 @@ static ssize_t pwm_enable_store(struct device *dev,
 	struct compal_data *data = dev_get_drvdata(dev);
 	long val;
 	int err;
+<<<<<<< HEAD
 	err = strict_strtol(buf, 10, &val);
+=======
+
+	err = kstrtol(buf, 10, &val);
+>>>>>>> v3.18
 	if (err)
 		return err;
 	if (val < 0)
@@ -463,7 +475,12 @@ static ssize_t pwm_store(struct device *dev, struct device_attribute *attr,
 	struct compal_data *data = dev_get_drvdata(dev);
 	long val;
 	int err;
+<<<<<<< HEAD
 	err = strict_strtol(buf, 10, &val);
+=======
+
+	err = kstrtol(buf, 10, &val);
+>>>>>>> v3.18
 	if (err)
 		return err;
 	if (val < 0 || val > 255)
@@ -663,6 +680,7 @@ static DEVICE_ATTR(wake_up_key,
 static DEVICE_ATTR(wake_up_mouse,
 		0644, wake_up_mouse_show,	wake_up_mouse_store);
 
+<<<<<<< HEAD
 static SENSOR_DEVICE_ATTR(name,        S_IRUGO, hwmon_name_show,   NULL, 1);
 static SENSOR_DEVICE_ATTR(fan1_input,  S_IRUGO, fan_show,          NULL, 1);
 static SENSOR_DEVICE_ATTR(temp1_input, S_IRUGO, temp_cpu,          NULL, 1);
@@ -682,12 +700,33 @@ static SENSOR_DEVICE_ATTR(pwm1_enable,
 		S_IRUGO | S_IWUSR, pwm_enable_show, pwm_enable_store, 0);
 
 static struct attribute *compal_attributes[] = {
+=======
+static DEVICE_ATTR(fan1_input,  S_IRUGO, fan_show,          NULL);
+static DEVICE_ATTR(temp1_input, S_IRUGO, temp_cpu,          NULL);
+static DEVICE_ATTR(temp2_input, S_IRUGO, temp_cpu_local,    NULL);
+static DEVICE_ATTR(temp3_input, S_IRUGO, temp_cpu_DTS,      NULL);
+static DEVICE_ATTR(temp4_input, S_IRUGO, temp_northbridge,  NULL);
+static DEVICE_ATTR(temp5_input, S_IRUGO, temp_vga,          NULL);
+static DEVICE_ATTR(temp6_input, S_IRUGO, temp_SKIN,         NULL);
+static DEVICE_ATTR(temp1_label, S_IRUGO, label_cpu,         NULL);
+static DEVICE_ATTR(temp2_label, S_IRUGO, label_cpu_local,   NULL);
+static DEVICE_ATTR(temp3_label, S_IRUGO, label_cpu_DTS,     NULL);
+static DEVICE_ATTR(temp4_label, S_IRUGO, label_northbridge, NULL);
+static DEVICE_ATTR(temp5_label, S_IRUGO, label_vga,         NULL);
+static DEVICE_ATTR(temp6_label, S_IRUGO, label_SKIN,        NULL);
+static DEVICE_ATTR(pwm1, S_IRUGO | S_IWUSR, pwm_show, pwm_store);
+static DEVICE_ATTR(pwm1_enable,
+		   S_IRUGO | S_IWUSR, pwm_enable_show, pwm_enable_store);
+
+static struct attribute *compal_platform_attrs[] = {
+>>>>>>> v3.18
 	&dev_attr_wake_up_pme.attr,
 	&dev_attr_wake_up_modem.attr,
 	&dev_attr_wake_up_lan.attr,
 	&dev_attr_wake_up_wlan.attr,
 	&dev_attr_wake_up_key.attr,
 	&dev_attr_wake_up_mouse.attr,
+<<<<<<< HEAD
 	/* Maybe put the sensor-stuff in a separate hwmon-driver? That way,
 	 * the hwmon sysfs won't be cluttered with the above files. */
 	&sensor_dev_attr_name.dev_attr.attr,
@@ -712,6 +751,33 @@ static struct attribute *compal_attributes[] = {
 static struct attribute_group compal_attribute_group = {
 	.attrs = compal_attributes
 };
+=======
+	NULL
+};
+static struct attribute_group compal_platform_attr_group = {
+	.attrs = compal_platform_attrs
+};
+
+static struct attribute *compal_hwmon_attrs[] = {
+	&dev_attr_pwm1_enable.attr,
+	&dev_attr_pwm1.attr,
+	&dev_attr_fan1_input.attr,
+	&dev_attr_temp1_input.attr,
+	&dev_attr_temp2_input.attr,
+	&dev_attr_temp3_input.attr,
+	&dev_attr_temp4_input.attr,
+	&dev_attr_temp5_input.attr,
+	&dev_attr_temp6_input.attr,
+	&dev_attr_temp1_label.attr,
+	&dev_attr_temp2_label.attr,
+	&dev_attr_temp3_label.attr,
+	&dev_attr_temp4_label.attr,
+	&dev_attr_temp5_label.attr,
+	&dev_attr_temp6_label.attr,
+	NULL
+};
+ATTRIBUTE_GROUPS(compal_hwmon);
+>>>>>>> v3.18
 
 static int compal_probe(struct platform_device *);
 static int compal_remove(struct platform_device *);
@@ -1019,17 +1085,26 @@ static int compal_probe(struct platform_device *pdev)
 {
 	int err;
 	struct compal_data *data;
+<<<<<<< HEAD
+=======
+	struct device *hwmon_dev;
+>>>>>>> v3.18
 
 	if (!extra_features)
 		return 0;
 
 	/* Fan control */
+<<<<<<< HEAD
 	data = kzalloc(sizeof(struct compal_data), GFP_KERNEL);
+=======
+	data = devm_kzalloc(&pdev->dev, sizeof(struct compal_data), GFP_KERNEL);
+>>>>>>> v3.18
 	if (!data)
 		return -ENOMEM;
 
 	initialize_fan_control_data(data);
 
+<<<<<<< HEAD
 	err = sysfs_create_group(&pdev->dev.kobj, &compal_attribute_group);
 	if (err) {
 		kfree(data);
@@ -1043,6 +1118,18 @@ static int compal_probe(struct platform_device *pdev)
 				&compal_attribute_group);
 		kfree(data);
 		return err;
+=======
+	err = sysfs_create_group(&pdev->dev.kobj, &compal_platform_attr_group);
+	if (err)
+		return err;
+
+	hwmon_dev = hwmon_device_register_with_groups(&pdev->dev,
+						      "compal", data,
+						      compal_hwmon_groups);
+	if (IS_ERR(hwmon_dev)) {
+		err = PTR_ERR(hwmon_dev);
+		goto remove;
+>>>>>>> v3.18
 	}
 
 	/* Power supply */
@@ -1052,6 +1139,13 @@ static int compal_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, data);
 
 	return 0;
+<<<<<<< HEAD
+=======
+
+remove:
+	sysfs_remove_group(&pdev->dev.kobj, &compal_platform_attr_group);
+	return err;
+>>>>>>> v3.18
 }
 
 static void __exit compal_cleanup(void)
@@ -1078,6 +1172,7 @@ static int compal_remove(struct platform_device *pdev)
 	pwm_disable_control();
 
 	data = platform_get_drvdata(pdev);
+<<<<<<< HEAD
 	hwmon_device_unregister(data->hwmon_dev);
 	power_supply_unregister(&data->psy);
 
@@ -1085,6 +1180,11 @@ static int compal_remove(struct platform_device *pdev)
 	kfree(data);
 
 	sysfs_remove_group(&pdev->dev.kobj, &compal_attribute_group);
+=======
+	power_supply_unregister(&data->psy);
+
+	sysfs_remove_group(&pdev->dev.kobj, &compal_platform_attr_group);
+>>>>>>> v3.18
 
 	return 0;
 }

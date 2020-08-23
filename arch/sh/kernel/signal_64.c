@@ -41,8 +41,12 @@
 #define DEBUG_SIG 0
 
 static void
+<<<<<<< HEAD
 handle_signal(unsigned long sig, siginfo_t *info, struct k_sigaction *ka,
 		struct pt_regs * regs);
+=======
+handle_signal(struct ksignal *ksig, struct pt_regs *regs);
+>>>>>>> v3.18
 
 static inline void
 handle_syscall_restart(struct pt_regs *regs, struct sigaction *sa)
@@ -82,9 +86,13 @@ handle_syscall_restart(struct pt_regs *regs, struct sigaction *sa)
  */
 static void do_signal(struct pt_regs *regs)
 {
+<<<<<<< HEAD
 	siginfo_t info;
 	int signr;
 	struct k_sigaction ka;
+=======
+	struct ksignal ksig;
+>>>>>>> v3.18
 
 	/*
 	 * We want the common case to go fast, which
@@ -95,12 +103,20 @@ static void do_signal(struct pt_regs *regs)
 	if (!user_mode(regs))
 		return;
 
+<<<<<<< HEAD
 	signr = get_signal_to_deliver(&info, &ka, regs, 0);
 	if (signr > 0) {
 		handle_syscall_restart(regs, &ka.sa);
 
 		/* Whee!  Actually deliver the signal.  */
 		handle_signal(signr, &info, &ka, regs);
+=======
+	if (get_signal(&ksig)) {
+		handle_syscall_restart(regs, &ksig.ka.sa);
+
+		/* Whee!  Actually deliver the signal.  */
+		handle_signal(&ksig, regs);
+>>>>>>> v3.18
 		return;
 	}
 
@@ -378,6 +394,7 @@ get_sigframe(struct k_sigaction *ka, unsigned long sp, size_t frame_size)
 void sa_default_restorer(void);		/* See comments below */
 void sa_default_rt_restorer(void);	/* See comments below */
 
+<<<<<<< HEAD
 static int setup_frame(int sig, struct k_sigaction *ka,
 		       sigset_t *set, struct pt_regs *regs)
 {
@@ -389,6 +406,18 @@ static int setup_frame(int sig, struct k_sigaction *ka,
 
 	if (!access_ok(VERIFY_WRITE, frame, sizeof(*frame)))
 		goto give_sigsegv;
+=======
+static int setup_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs)
+{
+	struct sigframe __user *frame;
+	int err = 0, sig = ksig->sig;
+	int signal;
+
+	frame = get_sigframe(&ksig->ka, regs->regs[REG_SP], sizeof(*frame));
+
+	if (!access_ok(VERIFY_WRITE, frame, sizeof(*frame)))
+		return -EFAULT;
+>>>>>>> v3.18
 
 	signal = current_thread_info()->exec_domain
 		&& current_thread_info()->exec_domain->signal_invmap
@@ -400,7 +429,11 @@ static int setup_frame(int sig, struct k_sigaction *ka,
 
 	/* Give up earlier as i386, in case */
 	if (err)
+<<<<<<< HEAD
 		goto give_sigsegv;
+=======
+		return -EFAULT;
+>>>>>>> v3.18
 
 	if (_NSIG_WORDS > 1) {
 		err |= __copy_to_user(frame->extramask, &set->sig[1],
@@ -408,16 +441,28 @@ static int setup_frame(int sig, struct k_sigaction *ka,
 
 	/* Give up earlier as i386, in case */
 	if (err)
+<<<<<<< HEAD
 		goto give_sigsegv;
 
 	/* Set up to return from userspace.  If provided, use a stub
 	   already in userspace.  */
 	if (ka->sa.sa_flags & SA_RESTORER) {
+=======
+		return -EFAULT;
+
+	/* Set up to return from userspace.  If provided, use a stub
+	   already in userspace.  */
+	if (ksig->ka.sa.sa_flags & SA_RESTORER) {
+>>>>>>> v3.18
 		/*
 		 * On SH5 all edited pointers are subject to NEFF
 		 */
 		DEREF_REG_PR = neff_sign_extend((unsigned long)
+<<<<<<< HEAD
 			ka->sa.sa_restorer | 0x1);
+=======
+			ksig->ka->sa.sa_restorer | 0x1);
+>>>>>>> v3.18
 	} else {
 		/*
 		 * Different approach on SH5.
@@ -435,7 +480,11 @@ static int setup_frame(int sig, struct k_sigaction *ka,
 
 		if (__copy_to_user(frame->retcode,
 			(void *)((unsigned long)sa_default_restorer & (~1)), 16) != 0)
+<<<<<<< HEAD
 			goto give_sigsegv;
+=======
+			return -EFAULT;
+>>>>>>> v3.18
 
 		/* Cohere the trampoline with the I-cache. */
 		flush_cache_sigtramp(DEREF_REG_PR-1);
@@ -460,7 +509,11 @@ static int setup_frame(int sig, struct k_sigaction *ka,
 	regs->regs[REG_ARG2] = (unsigned long long)(unsigned long)(signed long)&frame->sc;
 	regs->regs[REG_ARG3] = (unsigned long long)(unsigned long)(signed long)&frame->sc;
 
+<<<<<<< HEAD
 	regs->pc = neff_sign_extend((unsigned long)ka->sa.sa_handler);
+=======
+	regs->pc = neff_sign_extend((unsigned long)ksig->ka.sa.sa_handler);
+>>>>>>> v3.18
 
 	set_fs(USER_DS);
 
@@ -471,6 +524,7 @@ static int setup_frame(int sig, struct k_sigaction *ka,
 		 DEREF_REG_PR >> 32, DEREF_REG_PR & 0xffffffff);
 
 	return 0;
+<<<<<<< HEAD
 
 give_sigsegv:
 	force_sigsegv(sig, current);
@@ -488,6 +542,21 @@ static int setup_rt_frame(int sig, struct k_sigaction *ka, siginfo_t *info,
 
 	if (!access_ok(VERIFY_WRITE, frame, sizeof(*frame)))
 		goto give_sigsegv;
+=======
+}
+
+static int setup_rt_frame(struct ksignal *kig, sigset_t *set,
+			  struct pt_regs *regs)
+{
+	struct rt_sigframe __user *frame;
+	int err = 0, sig = ksig->sig;
+	int signal;
+
+	frame = get_sigframe(&ksig->ka, regs->regs[REG_SP], sizeof(*frame));
+
+	if (!access_ok(VERIFY_WRITE, frame, sizeof(*frame)))
+		return -EFAULT;
+>>>>>>> v3.18
 
 	signal = current_thread_info()->exec_domain
 		&& current_thread_info()->exec_domain->signal_invmap
@@ -497,11 +566,19 @@ static int setup_rt_frame(int sig, struct k_sigaction *ka, siginfo_t *info,
 
 	err |= __put_user(&frame->info, &frame->pinfo);
 	err |= __put_user(&frame->uc, &frame->puc);
+<<<<<<< HEAD
 	err |= copy_siginfo_to_user(&frame->info, info);
 
 	/* Give up earlier as i386, in case */
 	if (err)
 		goto give_sigsegv;
+=======
+	err |= copy_siginfo_to_user(&frame->info, &ksig->info);
+
+	/* Give up earlier as i386, in case */
+	if (err)
+		return -EFAULT;
+>>>>>>> v3.18
 
 	/* Create the ucontext.  */
 	err |= __put_user(0, &frame->uc.uc_flags);
@@ -513,16 +590,28 @@ static int setup_rt_frame(int sig, struct k_sigaction *ka, siginfo_t *info,
 
 	/* Give up earlier as i386, in case */
 	if (err)
+<<<<<<< HEAD
 		goto give_sigsegv;
 
 	/* Set up to return from userspace.  If provided, use a stub
 	   already in userspace.  */
 	if (ka->sa.sa_flags & SA_RESTORER) {
+=======
+		return -EFAULT;
+
+	/* Set up to return from userspace.  If provided, use a stub
+	   already in userspace.  */
+	if (ksig->ka.sa.sa_flags & SA_RESTORER) {
+>>>>>>> v3.18
 		/*
 		 * On SH5 all edited pointers are subject to NEFF
 		 */
 		DEREF_REG_PR = neff_sign_extend((unsigned long)
+<<<<<<< HEAD
 			ka->sa.sa_restorer | 0x1);
+=======
+			ksig->ka.sa.sa_restorer | 0x1);
+>>>>>>> v3.18
 	} else {
 		/*
 		 * Different approach on SH5.
@@ -540,7 +629,11 @@ static int setup_rt_frame(int sig, struct k_sigaction *ka, siginfo_t *info,
 
 		if (__copy_to_user(frame->retcode,
 			(void *)((unsigned long)sa_default_rt_restorer & (~1)), 16) != 0)
+<<<<<<< HEAD
 			goto give_sigsegv;
+=======
+			return -EFAULT;
+>>>>>>> v3.18
 
 		/* Cohere the trampoline with the I-cache. */
 		flush_icache_range(DEREF_REG_PR-1, DEREF_REG_PR-1+15);
@@ -554,7 +647,11 @@ static int setup_rt_frame(int sig, struct k_sigaction *ka, siginfo_t *info,
 	regs->regs[REG_ARG1] = signal; /* Arg for signal handler */
 	regs->regs[REG_ARG2] = (unsigned long long)(unsigned long)(signed long)&frame->info;
 	regs->regs[REG_ARG3] = (unsigned long long)(unsigned long)(signed long)&frame->uc.uc_mcontext;
+<<<<<<< HEAD
 	regs->pc = neff_sign_extend((unsigned long)ka->sa.sa_handler);
+=======
+	regs->pc = neff_sign_extend((unsigned long)ksig->ka.sa.sa_handler);
+>>>>>>> v3.18
 
 	set_fs(USER_DS);
 
@@ -564,23 +661,31 @@ static int setup_rt_frame(int sig, struct k_sigaction *ka, siginfo_t *info,
 		 DEREF_REG_PR >> 32, DEREF_REG_PR & 0xffffffff);
 
 	return 0;
+<<<<<<< HEAD
 
 give_sigsegv:
 	force_sigsegv(sig, current);
 	return -EFAULT;
+=======
+>>>>>>> v3.18
 }
 
 /*
  * OK, we're invoking a handler
  */
 static void
+<<<<<<< HEAD
 handle_signal(unsigned long sig, siginfo_t *info, struct k_sigaction *ka,
 		struct pt_regs * regs)
+=======
+handle_signal(struct ksignal *ksig, struct pt_regs *regs)
+>>>>>>> v3.18
 {
 	sigset_t *oldset = sigmask_to_save();
 	int ret;
 
 	/* Set up the stack frame */
+<<<<<<< HEAD
 	if (ka->sa.sa_flags & SA_SIGINFO)
 		ret = setup_rt_frame(sig, ka, info, oldset, regs);
 	else
@@ -591,6 +696,14 @@ handle_signal(unsigned long sig, siginfo_t *info, struct k_sigaction *ka,
 
 	signal_delivered(sig, info, ka, regs,
 			test_thread_flag(TIF_SINGLESTEP));
+=======
+	if (ksig->ka.sa.sa_flags & SA_SIGINFO)
+		ret = setup_rt_frame(ksig, oldset, regs);
+	else
+		ret = setup_frame(ksig, oldset, regs);
+
+	signal_setup_done(ret, ksig, test_thread_flag(TIF_SINGLESTEP));
+>>>>>>> v3.18
 }
 
 asmlinkage void do_notify_resume(struct pt_regs *regs, unsigned long thread_info_flags)

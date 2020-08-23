@@ -158,8 +158,13 @@ static loff_t zisofs_uncompress_block(struct inode *inode, loff_t block_start,
 					       "zisofs: zisofs_inflate returned"
 					       " %d, inode = %lu,"
 					       " page idx = %d, bh idx = %d,"
+<<<<<<< HEAD
 					       " avail_in = %d,"
 					       " avail_out = %d\n",
+=======
+					       " avail_in = %ld,"
+					       " avail_out = %ld\n",
+>>>>>>> v3.18
 					       zerr, inode->i_ino, curpage,
 					       curbh, stream.avail_in,
 					       stream.avail_out);

@@ -293,6 +293,7 @@ static int jz4740_codec_dev_probe(struct snd_soc_codec *codec)
 	regmap_update_bits(jz4740_codec->regmap, JZ4740_REG_CODEC_1,
 			JZ4740_CODEC_1_SW2_ENABLE, JZ4740_CODEC_1_SW2_ENABLE);
 
+<<<<<<< HEAD
 	jz4740_codec_set_bias_level(codec, SND_SOC_BIAS_STANDBY);
 
 	return 0;
@@ -328,6 +329,15 @@ static struct snd_soc_codec_driver soc_codec_dev_jz4740_codec = {
 	.suspend = jz4740_codec_suspend,
 	.resume = jz4740_codec_resume,
 	.set_bias_level = jz4740_codec_set_bias_level,
+=======
+	return 0;
+}
+
+static struct snd_soc_codec_driver soc_codec_dev_jz4740_codec = {
+	.probe = jz4740_codec_dev_probe,
+	.set_bias_level = jz4740_codec_set_bias_level,
+	.suspend_bias_off = true,
+>>>>>>> v3.18
 
 	.controls = jz4740_codec_controls,
 	.num_controls = ARRAY_SIZE(jz4740_codec_controls),
@@ -384,8 +394,11 @@ static int jz4740_codec_remove(struct platform_device *pdev)
 {
 	snd_soc_unregister_codec(&pdev->dev);
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

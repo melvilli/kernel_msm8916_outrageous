@@ -67,6 +67,12 @@ struct i2c_pxa_platform_data {
 	unsigned int		class;
 	unsigned int		use_pio :1;
 	unsigned int		fast_mode :1;
+<<<<<<< HEAD
+=======
+	unsigned int		high_mode:1;
+	unsigned char		master_code;
+	unsigned long		rate;
+>>>>>>> v3.18
 };
 
 extern void pxa_set_i2c_info(struct i2c_pxa_platform_data *info);

@@ -153,6 +153,10 @@ int fsnotify_add_vfsmount_mark(struct fsnotify_mark *mark,
 	struct mount *m = real_mount(mnt);
 	struct fsnotify_mark *lmark, *last = NULL;
 	int ret = 0;
+<<<<<<< HEAD
+=======
+	int cmp;
+>>>>>>> v3.18
 
 	mark->flags |= FSNOTIFY_MARK_FLAG_VFSMOUNT;
 
@@ -178,11 +182,16 @@ int fsnotify_add_vfsmount_mark(struct fsnotify_mark *mark,
 			goto out;
 		}
 
+<<<<<<< HEAD
 		if (mark->group->priority < lmark->group->priority)
 			continue;
 
 		if ((mark->group->priority == lmark->group->priority) &&
 		    (mark->group < lmark->group))
+=======
+		cmp = fsnotify_compare_groups(lmark->group, mark->group);
+		if (cmp < 0)
+>>>>>>> v3.18
 			continue;
 
 		hlist_add_before_rcu(&mark->m.m_list, &lmark->m.m_list);
@@ -191,7 +200,11 @@ int fsnotify_add_vfsmount_mark(struct fsnotify_mark *mark,
 
 	BUG_ON(last == NULL);
 	/* mark should be the last entry.  last is the current last entry */
+<<<<<<< HEAD
 	hlist_add_after_rcu(&last->m.m_list, &mark->m.m_list);
+=======
+	hlist_add_behind_rcu(&mark->m.m_list, &last->m.m_list);
+>>>>>>> v3.18
 out:
 	fsnotify_recalc_vfsmount_mask_locked(mnt);
 	spin_unlock(&mnt->mnt_root->d_lock);

@@ -7,7 +7,11 @@
  */
 
 #ifndef CT20K1REG_H
+<<<<<<< HEAD
 #define CT20k1REG_H
+=======
+#define CT20K1REG_H
+>>>>>>> v3.18
 
 /* 20k1 registers */
 #define 	DSPXRAM_START 			0x000000
@@ -632,5 +636,8 @@
 #define I2SD_R    0x19L
 
 #endif /* CT20K1REG_H */
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> v3.18

@@ -6,7 +6,10 @@
  * version 2 as published by the Free Software Foundation.
  */
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/signal.h>
 #include <linux/slab.h>
 #include <linux/module.h>
@@ -156,6 +159,7 @@ static const char driver_name [] = "rtl8150";
 */
 static int get_registers(rtl8150_t * dev, u16 indx, u16 size, void *data)
 {
+<<<<<<< HEAD
 	void *buf;
 	int ret;
 
@@ -186,6 +190,18 @@ static int set_registers(rtl8150_t * dev, u16 indx, u16 size, const void *data)
 			      indx, 0, buf, size, 500);
 	kfree(buf);
 	return ret;
+=======
+	return usb_control_msg(dev->udev, usb_rcvctrlpipe(dev->udev, 0),
+			       RTL8150_REQ_GET_REGS, RTL8150_REQT_READ,
+			       indx, 0, data, size, 500);
+}
+
+static int set_registers(rtl8150_t * dev, u16 indx, u16 size, void *data)
+{
+	return usb_control_msg(dev->udev, usb_sndctrlpipe(dev->udev, 0),
+			       RTL8150_REQ_SET_REGS, RTL8150_REQT_WRITE,
+			       indx, 0, data, size, 500);
+>>>>>>> v3.18
 }
 
 static void async_set_reg_cb(struct urb *urb)
@@ -899,7 +915,11 @@ static int rtl8150_probe(struct usb_interface *intf,
 	dev->netdev = netdev;
 	netdev->netdev_ops = &rtl8150_netdev_ops;
 	netdev->watchdog_timeo = RTL8150_TX_TIMEOUT;
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(netdev, &ops);
+=======
+	netdev->ethtool_ops = &ops;
+>>>>>>> v3.18
 	dev->intr_interval = 100;	/* 100ms */
 
 	if (!alloc_all_urbs(dev)) {

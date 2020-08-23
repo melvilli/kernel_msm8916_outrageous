@@ -30,10 +30,16 @@ extern struct oprofile_operations oprofile_ops;
 extern unsigned long oprofile_started;
 extern unsigned long oprofile_backtrace_depth;
 
+<<<<<<< HEAD
 struct super_block;
 struct dentry;
 
 void oprofile_create_files(struct super_block *sb, struct dentry *root);
+=======
+struct dentry;
+
+void oprofile_create_files(struct dentry *root);
+>>>>>>> v3.18
 int oprofile_timer_init(struct oprofile_operations *ops);
 #ifdef CONFIG_OPROFILE_NMI_TIMER
 int op_nmi_timer_init(struct oprofile_operations *ops);

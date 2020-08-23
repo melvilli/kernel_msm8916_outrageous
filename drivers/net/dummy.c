@@ -63,10 +63,17 @@ static struct rtnl_link_stats64 *dummy_get_stats64(struct net_device *dev,
 
 		dstats = per_cpu_ptr(dev->dstats, i);
 		do {
+<<<<<<< HEAD
 			start = u64_stats_fetch_begin_bh(&dstats->syncp);
 			tbytes = dstats->tx_bytes;
 			tpackets = dstats->tx_packets;
 		} while (u64_stats_fetch_retry_bh(&dstats->syncp, start));
+=======
+			start = u64_stats_fetch_begin_irq(&dstats->syncp);
+			tbytes = dstats->tx_bytes;
+			tpackets = dstats->tx_packets;
+		} while (u64_stats_fetch_retry_irq(&dstats->syncp, start));
+>>>>>>> v3.18
 		stats->tx_bytes += tbytes;
 		stats->tx_packets += tpackets;
 	}
@@ -88,7 +95,11 @@ static netdev_tx_t dummy_xmit(struct sk_buff *skb, struct net_device *dev)
 
 static int dummy_dev_init(struct net_device *dev)
 {
+<<<<<<< HEAD
 	dev->dstats = alloc_percpu(struct pcpu_dstats);
+=======
+	dev->dstats = netdev_alloc_pcpu_stats(struct pcpu_dstats);
+>>>>>>> v3.18
 	if (!dev->dstats)
 		return -ENOMEM;
 
@@ -164,7 +175,11 @@ static int __init dummy_init_one(void)
 	struct net_device *dev_dummy;
 	int err;
 
+<<<<<<< HEAD
 	dev_dummy = alloc_netdev(0, "dummy%d", dummy_setup);
+=======
+	dev_dummy = alloc_netdev(0, "dummy%d", NET_NAME_UNKNOWN, dummy_setup);
+>>>>>>> v3.18
 	if (!dev_dummy)
 		return -ENOMEM;
 

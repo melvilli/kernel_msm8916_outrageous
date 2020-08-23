@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Makefile for the Linux video drivers.
 # 5 Aug 1999, James Simmons, <mailto:jsimmons@users.sf.net>
 # Rewritten to use lists instead of if-statements.
@@ -13,10 +14,16 @@ fb-y                              := fbmem.o fbmon.o fbcmap.o fbsysfs.o \
 fb-objs                           := $(fb-y)
 
 obj-$(CONFIG_ADF)		  += adf/
+=======
+obj-$(CONFIG_VGASTATE)            += vgastate.o
+obj-$(CONFIG_HDMI)                += hdmi.o
+
+>>>>>>> v3.18
 obj-$(CONFIG_VT)		  += console/
 obj-$(CONFIG_LOGO)		  += logo/
 obj-y				  += backlight/
 
+<<<<<<< HEAD
 obj-$(CONFIG_EXYNOS_VIDEO)     += exynos/
 
 obj-$(CONFIG_FB_CFB_FILLRECT)  += cfbfillrect.o
@@ -174,6 +181,10 @@ obj-$(CONFIG_FB_VIRTUAL)          += vfb.o
 
 #video output switch sysfs driver
 obj-$(CONFIG_VIDEO_OUTPUT_CONTROL) += output.o
+=======
+obj-y				  += fbdev/
+
+>>>>>>> v3.18
 obj-$(CONFIG_VIDEOMODE_HELPERS) += display_timing.o videomode.o
 ifeq ($(CONFIG_OF),y)
 obj-$(CONFIG_VIDEOMODE_HELPERS) += of_display_timing.o of_videomode.o

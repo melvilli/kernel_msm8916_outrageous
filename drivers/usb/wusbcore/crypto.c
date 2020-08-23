@@ -87,7 +87,11 @@ struct aes_ccm_block {
  * B1 contains l(a), the MAC header, the encryption offset and padding.
  *
  * If EO is nonzero, additional blocks are built from payload bytes
+<<<<<<< HEAD
  * until EO is exahusted (FIXME: padding to 16 bytes, I guess). The
+=======
+ * until EO is exhausted (FIXME: padding to 16 bytes, I guess). The
+>>>>>>> v3.18
  * padding is not xmitted.
  */
 
@@ -222,8 +226,11 @@ static int wusb_ccm_mac(struct crypto_blkcipher *tfm_cbc,
 	WARN_ON(sizeof(ax) != sizeof(struct aes_ccm_block));
 
 	result = -ENOMEM;
+<<<<<<< HEAD
 	zero_padding = sizeof(struct aes_ccm_block)
 		- blen % sizeof(struct aes_ccm_block);
+=======
+>>>>>>> v3.18
 	zero_padding = blen % sizeof(struct aes_ccm_block);
 	if (zero_padding)
 		zero_padding = sizeof(struct aes_ccm_block) - zero_padding;

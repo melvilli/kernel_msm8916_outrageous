@@ -78,10 +78,17 @@ static void do_msg(int fd, int len)
 
 static void dumpstat(const char *name, int fd)
 {
+<<<<<<< HEAD
 	__u8	mode, lsb, bits;
 	__u32	speed;
 
 	if (ioctl(fd, SPI_IOC_RD_MODE, &mode) < 0) {
+=======
+	__u8	lsb, bits;
+	__u32	mode, speed;
+
+	if (ioctl(fd, SPI_IOC_RD_MODE32, &mode) < 0) {
+>>>>>>> v3.18
 		perror("SPI rd_mode");
 		return;
 	}
@@ -98,7 +105,11 @@ static void dumpstat(const char *name, int fd)
 		return;
 	}
 
+<<<<<<< HEAD
 	printf("%s: spi mode %d, %d bits %sper word, %d Hz max\n",
+=======
+	printf("%s: spi mode 0x%x, %d bits %sper word, %d Hz max\n",
+>>>>>>> v3.18
 		name, mode, bits, lsb ? "(lsb first) " : "", speed);
 }
 

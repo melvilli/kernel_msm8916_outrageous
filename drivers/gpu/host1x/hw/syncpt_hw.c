@@ -18,8 +18,13 @@
 
 #include <linux/io.h>
 
+<<<<<<< HEAD
 #include "dev.h"
 #include "syncpt.h"
+=======
+#include "../dev.h"
+#include "../syncpt.h"
+>>>>>>> v3.18
 
 /*
  * Write the current syncpoint value back to hw.
@@ -77,12 +82,17 @@ static u32 syncpt_load(struct host1x_syncpt *sp)
  * Write a cpu syncpoint increment to the hardware, without touching
  * the cache.
  */
+<<<<<<< HEAD
 static void syncpt_cpu_incr(struct host1x_syncpt *sp)
+=======
+static int syncpt_cpu_incr(struct host1x_syncpt *sp)
+>>>>>>> v3.18
 {
 	struct host1x *host = sp->host;
 	u32 reg_offset = sp->id / 32;
 
 	if (!host1x_syncpt_client_managed(sp) &&
+<<<<<<< HEAD
 	    host1x_syncpt_idle(sp)) {
 		dev_err(host->dev, "Trying to increment syncpoint id %d beyond max\n",
 			sp->id);
@@ -92,6 +102,15 @@ static void syncpt_cpu_incr(struct host1x_syncpt *sp)
 	host1x_sync_writel(host, BIT_MASK(sp->id),
 			   HOST1X_SYNC_SYNCPT_CPU_INCR(reg_offset));
 	wmb();
+=======
+	    host1x_syncpt_idle(sp))
+		return -EINVAL;
+	host1x_sync_writel(host, BIT_MASK(sp->id),
+			   HOST1X_SYNC_SYNCPT_CPU_INCR(reg_offset));
+	wmb();
+
+	return 0;
+>>>>>>> v3.18
 }
 
 /* remove a wait pointed to by patch_addr */

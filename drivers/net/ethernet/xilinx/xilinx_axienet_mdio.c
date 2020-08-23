@@ -19,10 +19,17 @@
 /* Wait till MDIO interface is ready to accept a new transaction.*/
 int axienet_mdio_wait_until_ready(struct axienet_local *lp)
 {
+<<<<<<< HEAD
 	long end = jiffies + 2;
 	while (!(axienet_ior(lp, XAE_MDIO_MCR_OFFSET) &
 		 XAE_MDIO_MCR_READY_MASK)) {
 		if (end - jiffies <= 0) {
+=======
+	unsigned long end = jiffies + 2;
+	while (!(axienet_ior(lp, XAE_MDIO_MCR_OFFSET) &
+		 XAE_MDIO_MCR_READY_MASK)) {
+		if (time_before_eq(end, jiffies)) {
+>>>>>>> v3.18
 			WARN_ON(1);
 			return -ETIMEDOUT;
 		}
@@ -175,6 +182,10 @@ int axienet_mdio_setup(struct axienet_local *lp, struct device_node *np)
 		printk(KERN_WARNING "Setting MDIO clock divisor to "
 		       "default %d\n", DEFAULT_CLOCK_DIVISOR);
 		clk_div = DEFAULT_CLOCK_DIVISOR;
+<<<<<<< HEAD
+=======
+		of_node_put(np1);
+>>>>>>> v3.18
 		goto issue;
 	}
 

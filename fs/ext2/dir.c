@@ -287,17 +287,28 @@ static inline void ext2_set_de_type(ext2_dirent *de, struct inode *inode)
 }
 
 static int
+<<<<<<< HEAD
 ext2_readdir (struct file * filp, void * dirent, filldir_t filldir)
 {
 	loff_t pos = filp->f_pos;
 	struct inode *inode = file_inode(filp);
+=======
+ext2_readdir(struct file *file, struct dir_context *ctx)
+{
+	loff_t pos = ctx->pos;
+	struct inode *inode = file_inode(file);
+>>>>>>> v3.18
 	struct super_block *sb = inode->i_sb;
 	unsigned int offset = pos & ~PAGE_CACHE_MASK;
 	unsigned long n = pos >> PAGE_CACHE_SHIFT;
 	unsigned long npages = dir_pages(inode);
 	unsigned chunk_mask = ~(ext2_chunk_size(inode)-1);
 	unsigned char *types = NULL;
+<<<<<<< HEAD
 	int need_revalidate = filp->f_version != inode->i_version;
+=======
+	int need_revalidate = file->f_version != inode->i_version;
+>>>>>>> v3.18
 
 	if (pos > inode->i_size - EXT2_DIR_REC_LEN(1))
 		return 0;
@@ -314,16 +325,26 @@ ext2_readdir (struct file * filp, void * dirent, filldir_t filldir)
 			ext2_error(sb, __func__,
 				   "bad page in #%lu",
 				   inode->i_ino);
+<<<<<<< HEAD
 			filp->f_pos += PAGE_CACHE_SIZE - offset;
+=======
+			ctx->pos += PAGE_CACHE_SIZE - offset;
+>>>>>>> v3.18
 			return PTR_ERR(page);
 		}
 		kaddr = page_address(page);
 		if (unlikely(need_revalidate)) {
 			if (offset) {
 				offset = ext2_validate_entry(kaddr, offset, chunk_mask);
+<<<<<<< HEAD
 				filp->f_pos = (n<<PAGE_CACHE_SHIFT) + offset;
 			}
 			filp->f_version = inode->i_version;
+=======
+				ctx->pos = (n<<PAGE_CACHE_SHIFT) + offset;
+			}
+			file->f_version = inode->i_version;
+>>>>>>> v3.18
 			need_revalidate = 0;
 		}
 		de = (ext2_dirent *)(kaddr+offset);
@@ -336,22 +357,35 @@ ext2_readdir (struct file * filp, void * dirent, filldir_t filldir)
 				return -EIO;
 			}
 			if (de->inode) {
+<<<<<<< HEAD
 				int over;
+=======
+>>>>>>> v3.18
 				unsigned char d_type = DT_UNKNOWN;
 
 				if (types && de->file_type < EXT2_FT_MAX)
 					d_type = types[de->file_type];
 
+<<<<<<< HEAD
 				offset = (char *)de - kaddr;
 				over = filldir(dirent, de->name, de->name_len,
 						(n<<PAGE_CACHE_SHIFT) | offset,
 						le32_to_cpu(de->inode), d_type);
 				if (over) {
+=======
+				if (!dir_emit(ctx, de->name, de->name_len,
+						le32_to_cpu(de->inode),
+						d_type)) {
+>>>>>>> v3.18
 					ext2_put_page(page);
 					return 0;
 				}
 			}
+<<<<<<< HEAD
 			filp->f_pos += ext2_rec_len_from_disk(de->rec_len);
+=======
+			ctx->pos += ext2_rec_len_from_disk(de->rec_len);
+>>>>>>> v3.18
 		}
 		ext2_put_page(page);
 	}
@@ -724,7 +758,11 @@ not_empty:
 const struct file_operations ext2_dir_operations = {
 	.llseek		= generic_file_llseek,
 	.read		= generic_read_dir,
+<<<<<<< HEAD
 	.readdir	= ext2_readdir,
+=======
+	.iterate	= ext2_readdir,
+>>>>>>> v3.18
 	.unlocked_ioctl = ext2_ioctl,
 #ifdef CONFIG_COMPAT
 	.compat_ioctl	= ext2_compat_ioctl,

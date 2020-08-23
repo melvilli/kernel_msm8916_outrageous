@@ -23,6 +23,11 @@
 #define MC13XXX_RTCDAY	22
 #define MC13XXX_RTCDAYA	23
 
+<<<<<<< HEAD
+=======
+#define SEC_PER_DAY	(24 * 60 * 60)
+
+>>>>>>> v3.18
 struct mc13xxx_rtc {
 	struct rtc_device *rtc;
 	struct mc13xxx *mc13xxx;
@@ -42,15 +47,24 @@ static int mc13xxx_rtc_irq_enable_unlocked(struct device *dev,
 	return func(priv->mc13xxx, irq);
 }
 
+<<<<<<< HEAD
 static int mc13xxx_rtc_irq_enable(struct device *dev,
 		unsigned int enabled, int irq)
+=======
+static int mc13xxx_rtc_alarm_irq_enable(struct device *dev,
+					unsigned int enabled)
+>>>>>>> v3.18
 {
 	struct mc13xxx_rtc *priv = dev_get_drvdata(dev);
 	int ret;
 
 	mc13xxx_lock(priv->mc13xxx);
 
+<<<<<<< HEAD
 	ret = mc13xxx_rtc_irq_enable_unlocked(dev, enabled, irq);
+=======
+	ret = mc13xxx_rtc_irq_enable_unlocked(dev, enabled, MC13XXX_IRQ_TODA);
+>>>>>>> v3.18
 
 	mc13xxx_unlock(priv->mc13xxx);
 
@@ -61,6 +75,7 @@ static int mc13xxx_rtc_read_time(struct device *dev, struct rtc_time *tm)
 {
 	struct mc13xxx_rtc *priv = dev_get_drvdata(dev);
 	unsigned int seconds, days1, days2;
+<<<<<<< HEAD
 	unsigned long s1970;
 	int ret;
 
@@ -99,6 +114,29 @@ out:
 	s1970 = days1 * 86400 + seconds;
 
 	rtc_time_to_tm(s1970, tm);
+=======
+
+	if (!priv->valid)
+		return -ENODATA;
+
+	do {
+		int ret;
+
+		ret = mc13xxx_reg_read(priv->mc13xxx, MC13XXX_RTCDAY, &days1);
+		if (ret)
+			return ret;
+
+		ret = mc13xxx_reg_read(priv->mc13xxx, MC13XXX_RTCTOD, &seconds);
+		if (ret)
+			return ret;
+
+		ret = mc13xxx_reg_read(priv->mc13xxx, MC13XXX_RTCDAY, &days2);
+		if (ret)
+			return ret;
+	} while (days1 != days2);
+
+	rtc_time_to_tm(days1 * SEC_PER_DAY + seconds, tm);
+>>>>>>> v3.18
 
 	return rtc_valid_tm(tm);
 }
@@ -110,8 +148,13 @@ static int mc13xxx_rtc_set_mmss(struct device *dev, unsigned long secs)
 	unsigned int alarmseconds;
 	int ret;
 
+<<<<<<< HEAD
 	seconds = secs % 86400;
 	days = secs / 86400;
+=======
+	seconds = secs % SEC_PER_DAY;
+	days = secs / SEC_PER_DAY;
+>>>>>>> v3.18
 
 	mc13xxx_lock(priv->mc13xxx);
 
@@ -123,7 +166,11 @@ static int mc13xxx_rtc_set_mmss(struct device *dev, unsigned long secs)
 	if (unlikely(ret))
 		goto out;
 
+<<<<<<< HEAD
 	if (alarmseconds < 86400) {
+=======
+	if (alarmseconds < SEC_PER_DAY) {
+>>>>>>> v3.18
 		ret = mc13xxx_reg_write(priv->mc13xxx,
 				MC13XXX_RTCTODA, 0x1ffff);
 		if (unlikely(ret))
@@ -147,18 +194,33 @@ static int mc13xxx_rtc_set_mmss(struct device *dev, unsigned long secs)
 		goto out;
 
 	/* restore alarm */
+<<<<<<< HEAD
 	if (alarmseconds < 86400) {
+=======
+	if (alarmseconds < SEC_PER_DAY) {
+>>>>>>> v3.18
 		ret = mc13xxx_reg_write(priv->mc13xxx,
 				MC13XXX_RTCTODA, alarmseconds);
 		if (unlikely(ret))
 			goto out;
 	}
 
+<<<<<<< HEAD
 	ret = mc13xxx_irq_ack(priv->mc13xxx, MC13XXX_IRQ_RTCRST);
 	if (unlikely(ret))
 		goto out;
 
 	ret = mc13xxx_irq_unmask(priv->mc13xxx, MC13XXX_IRQ_RTCRST);
+=======
+	if (!priv->valid) {
+		ret = mc13xxx_irq_ack(priv->mc13xxx, MC13XXX_IRQ_RTCRST);
+		if (unlikely(ret))
+			goto out;
+
+		ret = mc13xxx_irq_unmask(priv->mc13xxx, MC13XXX_IRQ_RTCRST);
+	}
+
+>>>>>>> v3.18
 out:
 	priv->valid = !ret;
 
@@ -180,7 +242,11 @@ static int mc13xxx_rtc_read_alarm(struct device *dev, struct rtc_wkalrm *alarm)
 	ret = mc13xxx_reg_read(priv->mc13xxx, MC13XXX_RTCTODA, &seconds);
 	if (unlikely(ret))
 		goto out;
+<<<<<<< HEAD
 	if (seconds >= 86400) {
+=======
+	if (seconds >= SEC_PER_DAY) {
+>>>>>>> v3.18
 		ret = -ENODATA;
 		goto out;
 	}
@@ -201,7 +267,11 @@ out:
 	alarm->enabled = enabled;
 	alarm->pending = pending;
 
+<<<<<<< HEAD
 	s1970 = days * 86400 + seconds;
+=======
+	s1970 = days * SEC_PER_DAY + seconds;
+>>>>>>> v3.18
 
 	rtc_time_to_tm(s1970, &alarm->time);
 	dev_dbg(dev, "%s: %lu\n", __func__, s1970);
@@ -239,8 +309,13 @@ static int mc13xxx_rtc_set_alarm(struct device *dev, struct rtc_wkalrm *alarm)
 	if (unlikely(ret))
 		goto out;
 
+<<<<<<< HEAD
 	seconds = s1970 % 86400;
 	days = s1970 / 86400;
+=======
+	seconds = s1970 % SEC_PER_DAY;
+	days = s1970 / SEC_PER_DAY;
+>>>>>>> v3.18
 
 	ret = mc13xxx_reg_write(priv->mc13xxx, MC13XXX_RTCDAYA, days);
 	if (unlikely(ret))
@@ -259,8 +334,11 @@ static irqreturn_t mc13xxx_rtc_alarm_handler(int irq, void *dev)
 	struct mc13xxx_rtc *priv = dev;
 	struct mc13xxx *mc13xxx = priv->mc13xxx;
 
+<<<<<<< HEAD
 	dev_dbg(&priv->rtc->dev, "Alarm\n");
 
+=======
+>>>>>>> v3.18
 	rtc_update_irq(priv->rtc, 1, RTC_IRQF | RTC_AF);
 
 	mc13xxx_irq_ack(mc13xxx, irq);
@@ -273,8 +351,11 @@ static irqreturn_t mc13xxx_rtc_update_handler(int irq, void *dev)
 	struct mc13xxx_rtc *priv = dev;
 	struct mc13xxx *mc13xxx = priv->mc13xxx;
 
+<<<<<<< HEAD
 	dev_dbg(&priv->rtc->dev, "1HZ\n");
 
+=======
+>>>>>>> v3.18
 	rtc_update_irq(priv->rtc, 1, RTC_IRQF | RTC_UF);
 
 	mc13xxx_irq_ack(mc13xxx, irq);
@@ -282,12 +363,15 @@ static irqreturn_t mc13xxx_rtc_update_handler(int irq, void *dev)
 	return IRQ_HANDLED;
 }
 
+<<<<<<< HEAD
 static int mc13xxx_rtc_alarm_irq_enable(struct device *dev,
 		unsigned int enabled)
 {
 	return mc13xxx_rtc_irq_enable(dev, enabled, MC13XXX_IRQ_TODA);
 }
 
+=======
+>>>>>>> v3.18
 static const struct rtc_class_ops mc13xxx_rtc_ops = {
 	.read_time = mc13xxx_rtc_read_time,
 	.set_mmss = mc13xxx_rtc_set_mmss,
@@ -301,7 +385,10 @@ static irqreturn_t mc13xxx_rtc_reset_handler(int irq, void *dev)
 	struct mc13xxx_rtc *priv = dev;
 	struct mc13xxx *mc13xxx = priv->mc13xxx;
 
+<<<<<<< HEAD
 	dev_dbg(&priv->rtc->dev, "RTCRST\n");
+=======
+>>>>>>> v3.18
 	priv->valid = 0;
 
 	mc13xxx_irq_mask(mc13xxx, irq);
@@ -314,7 +401,10 @@ static int __init mc13xxx_rtc_probe(struct platform_device *pdev)
 	int ret;
 	struct mc13xxx_rtc *priv;
 	struct mc13xxx *mc13xxx;
+<<<<<<< HEAD
 	int rtcrst_pending;
+=======
+>>>>>>> v3.18
 
 	priv = devm_kzalloc(&pdev->dev, sizeof(*priv), GFP_KERNEL);
 	if (!priv)
@@ -322,11 +412,16 @@ static int __init mc13xxx_rtc_probe(struct platform_device *pdev)
 
 	mc13xxx = dev_get_drvdata(pdev->dev.parent);
 	priv->mc13xxx = mc13xxx;
+<<<<<<< HEAD
+=======
+	priv->valid = 1;
+>>>>>>> v3.18
 
 	platform_set_drvdata(pdev, priv);
 
 	mc13xxx_lock(mc13xxx);
 
+<<<<<<< HEAD
 	ret = mc13xxx_irq_request(mc13xxx, MC13XXX_IRQ_RTCRST,
 			mc13xxx_rtc_reset_handler, DRIVER_NAME, priv);
 	if (ret)
@@ -343,15 +438,33 @@ static int __init mc13xxx_rtc_probe(struct platform_device *pdev)
 			mc13xxx_rtc_update_handler, DRIVER_NAME, priv);
 	if (ret)
 		goto err_update_irq_request;
+=======
+	mc13xxx_irq_ack(mc13xxx, MC13XXX_IRQ_RTCRST);
+
+	ret = mc13xxx_irq_request(mc13xxx, MC13XXX_IRQ_RTCRST,
+			mc13xxx_rtc_reset_handler, DRIVER_NAME, priv);
+	if (ret)
+		goto err_irq_request;
+
+	ret = mc13xxx_irq_request(mc13xxx, MC13XXX_IRQ_1HZ,
+			mc13xxx_rtc_update_handler, DRIVER_NAME, priv);
+	if (ret)
+		goto err_irq_request;
+>>>>>>> v3.18
 
 	ret = mc13xxx_irq_request_nounmask(mc13xxx, MC13XXX_IRQ_TODA,
 			mc13xxx_rtc_alarm_handler, DRIVER_NAME, priv);
 	if (ret)
+<<<<<<< HEAD
 		goto err_alarm_irq_request;
+=======
+		goto err_irq_request;
+>>>>>>> v3.18
 
 	mc13xxx_unlock(mc13xxx);
 
 	priv->rtc = devm_rtc_device_register(&pdev->dev, pdev->name,
+<<<<<<< HEAD
 					&mc13xxx_rtc_ops, THIS_MODULE);
 	if (IS_ERR(priv->rtc)) {
 		ret = PTR_ERR(priv->rtc);
@@ -373,11 +486,27 @@ err_reset_irq_request:
 
 		platform_set_drvdata(pdev, NULL);
 	}
+=======
+					     &mc13xxx_rtc_ops, THIS_MODULE);
+
+	return 0;
+
+err_irq_request:
+	mc13xxx_irq_free(mc13xxx, MC13XXX_IRQ_TODA, priv);
+	mc13xxx_irq_free(mc13xxx, MC13XXX_IRQ_1HZ, priv);
+	mc13xxx_irq_free(mc13xxx, MC13XXX_IRQ_RTCRST, priv);
+
+	mc13xxx_unlock(mc13xxx);
+>>>>>>> v3.18
 
 	return ret;
 }
 
+<<<<<<< HEAD
 static int __exit mc13xxx_rtc_remove(struct platform_device *pdev)
+=======
+static int mc13xxx_rtc_remove(struct platform_device *pdev)
+>>>>>>> v3.18
 {
 	struct mc13xxx_rtc *priv = platform_get_drvdata(pdev);
 
@@ -389,8 +518,11 @@ static int __exit mc13xxx_rtc_remove(struct platform_device *pdev)
 
 	mc13xxx_unlock(priv->mc13xxx);
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -408,7 +540,11 @@ MODULE_DEVICE_TABLE(platform, mc13xxx_rtc_idtable);
 
 static struct platform_driver mc13xxx_rtc_driver = {
 	.id_table = mc13xxx_rtc_idtable,
+<<<<<<< HEAD
 	.remove = __exit_p(mc13xxx_rtc_remove),
+=======
+	.remove = mc13xxx_rtc_remove,
+>>>>>>> v3.18
 	.driver = {
 		.name = DRIVER_NAME,
 		.owner = THIS_MODULE,

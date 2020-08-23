@@ -31,4 +31,10 @@ bool is_affinity_mask_valid(const struct cpumask *cpumask);
 
 #define is_affinity_mask_valid is_affinity_mask_valid
 
+<<<<<<< HEAD
+=======
+int create_irq(void);
+void destroy_irq(unsigned int irq);
+
+>>>>>>> v3.18
 #endif /* _ASM_IA64_IRQ_H */

@@ -24,7 +24,11 @@
 
 static LIST_HEAD(pernet_list);
 static struct list_head *first_device = &pernet_list;
+<<<<<<< HEAD
 static DEFINE_MUTEX(net_mutex);
+=======
+DEFINE_MUTEX(net_mutex);
+>>>>>>> v3.18
 
 LIST_HEAD(net_namespace_list);
 EXPORT_SYMBOL_GPL(net_namespace_list);
@@ -224,7 +228,11 @@ static void net_free(struct net *net)
 		return;
 	}
 #endif
+<<<<<<< HEAD
 	kfree(net->gen);
+=======
+	kfree(rcu_access_pointer(net->gen));
+>>>>>>> v3.18
 	kmem_cache_free(net_cachep, net);
 }
 
@@ -273,7 +281,11 @@ static void cleanup_net(struct work_struct *work)
 {
 	const struct pernet_operations *ops;
 	struct net *net, *tmp;
+<<<<<<< HEAD
 	LIST_HEAD(net_kill_list);
+=======
+	struct list_head net_kill_list;
+>>>>>>> v3.18
 	LIST_HEAD(net_exit_list);
 
 	/* Atomically snapshot the list of namespaces to cleanup */
@@ -373,9 +385,17 @@ struct net *get_net_ns_by_pid(pid_t pid)
 	tsk = find_task_by_vpid(pid);
 	if (tsk) {
 		struct nsproxy *nsproxy;
+<<<<<<< HEAD
 		nsproxy = task_nsproxy(tsk);
 		if (nsproxy)
 			net = get_net(nsproxy->net_ns);
+=======
+		task_lock(tsk);
+		nsproxy = tsk->nsproxy;
+		if (nsproxy)
+			net = get_net(nsproxy->net_ns);
+		task_unlock(tsk);
+>>>>>>> v3.18
 	}
 	rcu_read_unlock();
 	return net;
@@ -632,11 +652,19 @@ static void *netns_get(struct task_struct *task)
 	struct net *net = NULL;
 	struct nsproxy *nsproxy;
 
+<<<<<<< HEAD
 	rcu_read_lock();
 	nsproxy = task_nsproxy(task);
 	if (nsproxy)
 		net = get_net(nsproxy->net_ns);
 	rcu_read_unlock();
+=======
+	task_lock(task);
+	nsproxy = task->nsproxy;
+	if (nsproxy)
+		net = get_net(nsproxy->net_ns);
+	task_unlock(task);
+>>>>>>> v3.18
 
 	return net;
 }
@@ -651,7 +679,11 @@ static int netns_install(struct nsproxy *nsproxy, void *ns)
 	struct net *net = ns;
 
 	if (!ns_capable(net->user_ns, CAP_SYS_ADMIN) ||
+<<<<<<< HEAD
 	    !nsown_capable(CAP_SYS_ADMIN))
+=======
+	    !ns_capable(current_user_ns(), CAP_SYS_ADMIN))
+>>>>>>> v3.18
 		return -EPERM;
 
 	put_net(nsproxy->net_ns);

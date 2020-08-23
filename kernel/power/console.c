@@ -9,6 +9,10 @@
 #include <linux/kbd_kern.h>
 #include <linux/vt.h>
 #include <linux/module.h>
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+>>>>>>> v3.18
 #include "power.h"
 
 #define SUSPEND_CONSOLE	(MAX_NR_CONSOLES-1)
@@ -81,6 +85,10 @@ void pm_vt_switch_unregister(struct device *dev)
 	list_for_each_entry(tmp, &pm_vt_switch_list, head) {
 		if (tmp->dev == dev) {
 			list_del(&tmp->head);
+<<<<<<< HEAD
+=======
+			kfree(tmp);
+>>>>>>> v3.18
 			break;
 		}
 	}

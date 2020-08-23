@@ -163,10 +163,13 @@ static void altera_uart_break_ctl(struct uart_port *port, int break_state)
 	spin_unlock_irqrestore(&port->lock, flags);
 }
 
+<<<<<<< HEAD
 static void altera_uart_enable_ms(struct uart_port *port)
 {
 }
 
+=======
+>>>>>>> v3.18
 static void altera_uart_set_termios(struct uart_port *port,
 				    struct ktermios *termios,
 				    struct ktermios *old)
@@ -185,6 +188,15 @@ static void altera_uart_set_termios(struct uart_port *port,
 	uart_update_timeout(port, termios->c_cflag, baud);
 	altera_uart_writel(port, baudclk, ALTERA_UART_DIVISOR_REG);
 	spin_unlock_irqrestore(&port->lock, flags);
+<<<<<<< HEAD
+=======
+
+	/*
+	 * FIXME: port->read_status_mask and port->ignore_status_mask
+	 * need to be initialized based on termios settings for
+	 * INPCK, IGNBRK, IGNPAR, PARMRK, BRKINT
+	 */
+>>>>>>> v3.18
 }
 
 static void altera_uart_rx_chars(struct altera_uart *pp)
@@ -231,7 +243,13 @@ static void altera_uart_rx_chars(struct altera_uart *pp)
 				 flag);
 	}
 
+<<<<<<< HEAD
 	tty_flip_buffer_push(&port->state->port);
+=======
+	spin_unlock(&port->lock);
+	tty_flip_buffer_push(&port->state->port);
+	spin_lock(&port->lock);
+>>>>>>> v3.18
 }
 
 static void altera_uart_tx_chars(struct altera_uart *pp)
@@ -407,7 +425,10 @@ static struct uart_ops altera_uart_ops = {
 	.start_tx	= altera_uart_start_tx,
 	.stop_tx	= altera_uart_stop_tx,
 	.stop_rx	= altera_uart_stop_rx,
+<<<<<<< HEAD
 	.enable_ms	= altera_uart_enable_ms,
+=======
+>>>>>>> v3.18
 	.break_ctl	= altera_uart_break_ctl,
 	.startup	= altera_uart_startup,
 	.shutdown	= altera_uart_shutdown,
@@ -427,7 +448,11 @@ static struct altera_uart altera_uart_ports[CONFIG_SERIAL_ALTERA_UART_MAXPORTS];
 
 #if defined(CONFIG_SERIAL_ALTERA_UART_CONSOLE)
 
+<<<<<<< HEAD
 static void altera_uart_console_putc(struct uart_port *port, const char c)
+=======
+static void altera_uart_console_putc(struct uart_port *port, int c)
+>>>>>>> v3.18
 {
 	while (!(altera_uart_readl(port, ALTERA_UART_STATUS_REG) &
 		 ALTERA_UART_STATUS_TRDY_MSK))
@@ -441,11 +466,15 @@ static void altera_uart_console_write(struct console *co, const char *s,
 {
 	struct uart_port *port = &(altera_uart_ports + co->index)->port;
 
+<<<<<<< HEAD
 	for (; count; count--, s++) {
 		altera_uart_console_putc(port, *s);
 		if (*s == '\n')
 			altera_uart_console_putc(port, '\r');
 	}
+=======
+	uart_console_write(port, s, count, altera_uart_console_putc);
+>>>>>>> v3.18
 }
 
 static int __init altera_uart_console_setup(struct console *co, char *options)
@@ -534,7 +563,11 @@ static int altera_uart_get_of_uartclk(struct platform_device *pdev,
 
 static int altera_uart_probe(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct altera_uart_platform_uart *platp = pdev->dev.platform_data;
+=======
+	struct altera_uart_platform_uart *platp = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	struct uart_port *port;
 	struct resource *res_mem;
 	struct resource *res_irq;
@@ -604,7 +637,10 @@ static int altera_uart_remove(struct platform_device *pdev)
 
 	if (port) {
 		uart_remove_one_port(&altera_uart_driver, port);
+<<<<<<< HEAD
 		platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 		port->mapbase = 0;
 	}
 
@@ -612,8 +648,14 @@ static int altera_uart_remove(struct platform_device *pdev)
 }
 
 #ifdef CONFIG_OF
+<<<<<<< HEAD
 static struct of_device_id altera_uart_match[] = {
 	{ .compatible = "ALTR,uart-1.0", },
+=======
+static const struct of_device_id altera_uart_match[] = {
+	{ .compatible = "ALTR,uart-1.0", },
+	{ .compatible = "altr,uart-1.0", },
+>>>>>>> v3.18
 	{},
 };
 MODULE_DEVICE_TABLE(of, altera_uart_match);

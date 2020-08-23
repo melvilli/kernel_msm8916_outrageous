@@ -9,7 +9,10 @@
  */
 
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/bitops.h>
 #include <linux/interrupt.h>
@@ -529,6 +532,10 @@ static const struct net_device_ops bfin_can_netdev_ops = {
 	.ndo_open               = bfin_can_open,
 	.ndo_stop               = bfin_can_close,
 	.ndo_start_xmit         = bfin_can_start_xmit,
+<<<<<<< HEAD
+=======
+	.ndo_change_mtu         = can_change_mtu,
+>>>>>>> v3.18
 };
 
 static int bfin_can_probe(struct platform_device *pdev)
@@ -539,7 +546,11 @@ static int bfin_can_probe(struct platform_device *pdev)
 	struct resource *res_mem, *rx_irq, *tx_irq, *err_irq;
 	unsigned short *pdata;
 
+<<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	if (!pdata) {
 		dev_err(&pdev->dev, "No platform data provided!\n");
 		err = -EINVAL;
@@ -580,7 +591,11 @@ static int bfin_can_probe(struct platform_device *pdev)
 	priv->pin_list = pdata;
 	priv->can.clock.freq = get_sclk();
 
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, dev);
+=======
+	platform_set_drvdata(pdev, dev);
+>>>>>>> v3.18
 	SET_NETDEV_DEV(dev, &pdev->dev);
 
 	dev->flags |= IFF_ECHO;	/* we support local echo */
@@ -613,7 +628,11 @@ exit:
 
 static int bfin_can_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct net_device *dev = dev_get_drvdata(&pdev->dev);
+=======
+	struct net_device *dev = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 	struct bfin_can_priv *priv = netdev_priv(dev);
 	struct resource *res;
 
@@ -621,8 +640,11 @@ static int bfin_can_remove(struct platform_device *pdev)
 
 	unregister_candev(dev);
 
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, NULL);
 
+=======
+>>>>>>> v3.18
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	release_mem_region(res->start, resource_size(res));
 
@@ -635,7 +657,11 @@ static int bfin_can_remove(struct platform_device *pdev)
 #ifdef CONFIG_PM
 static int bfin_can_suspend(struct platform_device *pdev, pm_message_t mesg)
 {
+<<<<<<< HEAD
 	struct net_device *dev = dev_get_drvdata(&pdev->dev);
+=======
+	struct net_device *dev = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 	struct bfin_can_priv *priv = netdev_priv(dev);
 	struct bfin_can_regs __iomem *reg = priv->membase;
 	int timeout = BFIN_CAN_TIMEOUT;
@@ -658,7 +684,11 @@ static int bfin_can_suspend(struct platform_device *pdev, pm_message_t mesg)
 
 static int bfin_can_resume(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct net_device *dev = dev_get_drvdata(&pdev->dev);
+=======
+	struct net_device *dev = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 	struct bfin_can_priv *priv = netdev_priv(dev);
 	struct bfin_can_regs __iomem *reg = priv->membase;
 

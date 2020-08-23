@@ -32,7 +32,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <linux/sunrpc/sched.h>
 
 #ifdef CONFIG_SUNRPC_BACKCHANNEL
+<<<<<<< HEAD
 struct rpc_rqst *xprt_alloc_bc_request(struct rpc_xprt *xprt);
+=======
+struct rpc_rqst *xprt_lookup_bc_request(struct rpc_xprt *xprt, __be32 xid);
+void xprt_complete_bc_request(struct rpc_rqst *req, uint32_t copied);
+>>>>>>> v3.18
 void xprt_free_bc_request(struct rpc_rqst *req);
 int xprt_setup_backchannel(struct rpc_xprt *, unsigned int min_reqs);
 void xprt_destroy_backchannel(struct rpc_xprt *, unsigned int max_reqs);

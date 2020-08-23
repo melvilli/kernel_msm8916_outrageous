@@ -166,6 +166,7 @@ static inline void palmtc_keys_init(void) {}
  * Backlight
  ******************************************************************************/
 #if defined(CONFIG_BACKLIGHT_PWM) || defined(CONFIG_BACKLIGHT_PWM_MODULE)
+<<<<<<< HEAD
 static int palmtc_backlight_init(struct device *dev)
 {
 	int ret;
@@ -197,14 +198,20 @@ static void palmtc_backlight_exit(struct device *dev)
 	gpio_free(GPIO_NR_PALMTC_BL_POWER);
 }
 
+=======
+>>>>>>> v3.18
 static struct platform_pwm_backlight_data palmtc_backlight_data = {
 	.pwm_id		= 1,
 	.max_brightness	= PALMTC_MAX_INTENSITY,
 	.dft_brightness	= PALMTC_MAX_INTENSITY,
 	.pwm_period_ns	= PALMTC_PERIOD_NS,
+<<<<<<< HEAD
 	.init		= palmtc_backlight_init,
 	.notify		= palmtc_backlight_notify,
 	.exit		= palmtc_backlight_exit,
+=======
+	.enable_gpio	= GPIO_NR_PALMTC_BL_POWER,
+>>>>>>> v3.18
 };
 
 static struct platform_device palmtc_backlight = {

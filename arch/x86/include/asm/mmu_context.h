@@ -3,6 +3,13 @@
 
 #include <asm/desc.h>
 #include <linux/atomic.h>
+<<<<<<< HEAD
+=======
+#include <linux/mm_types.h>
+
+#include <trace/events/tlb.h>
+
+>>>>>>> v3.18
 #include <asm/pgalloc.h>
 #include <asm/tlbflush.h>
 #include <asm/paravirt.h>
@@ -42,6 +49,7 @@ static inline void switch_mm(struct mm_struct *prev, struct mm_struct *next,
 #endif
 		cpumask_set_cpu(cpu, mm_cpumask(next));
 
+<<<<<<< HEAD
 		/*
 		 * Re-load page tables.
 		 *
@@ -71,6 +79,11 @@ static inline void switch_mm(struct mm_struct *prev, struct mm_struct *next,
 		 *
 		 */
 		load_cr3(next->pgd);
+=======
+		/* Re-load page tables */
+		load_cr3(next->pgd);
+		trace_tlb_flush(TLB_FLUSH_ON_TASK_SWITCH, TLB_FLUSH_ALL);
+>>>>>>> v3.18
 
 		/* Stop flush ipis for the previous mm */
 		cpumask_clear_cpu(cpu, mm_cpumask(prev));
@@ -92,16 +105,25 @@ static inline void switch_mm(struct mm_struct *prev, struct mm_struct *next,
 			 * schedule, protecting us from simultaneous changes.
 			 */
 			cpumask_set_cpu(cpu, mm_cpumask(next));
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 			/*
 			 * We were in lazy tlb mode and leave_mm disabled
 			 * tlb flush IPI delivery. We must reload CR3
 			 * to make sure to use no freed page tables.
+<<<<<<< HEAD
 			 *
 			 * As above, load_cr3() is serializing and orders TLB
 			 * fills with respect to the mm_cpumask write.
 			 */
 			load_cr3(next->pgd);
+=======
+			 */
+			load_cr3(next->pgd);
+			trace_tlb_flush(TLB_FLUSH_ON_TASK_SWITCH, TLB_FLUSH_ALL);
+>>>>>>> v3.18
 			load_LDT_nolock(&next->context);
 		}
 	}

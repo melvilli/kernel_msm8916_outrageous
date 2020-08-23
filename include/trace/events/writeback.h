@@ -4,6 +4,10 @@
 #if !defined(_TRACE_WRITEBACK_H) || defined(TRACE_HEADER_MULTI_READ)
 #define _TRACE_WRITEBACK_H
 
+<<<<<<< HEAD
+=======
+#include <linux/tracepoint.h>
+>>>>>>> v3.18
 #include <linux/backing-dev.h>
 #include <linux/writeback.h>
 

@@ -21,7 +21,11 @@
 #include <linux/resource.h>
 #include <linux/regulator/consumer.h>
 
+<<<<<<< HEAD
 #define AMBA_NR_IRQS	2
+=======
+#define AMBA_NR_IRQS	9
+>>>>>>> v3.18
 #define AMBA_CID	0xb105f00d
 
 struct clk;
@@ -30,7 +34,10 @@ struct amba_device {
 	struct device		dev;
 	struct resource		res;
 	struct clk		*pclk;
+<<<<<<< HEAD
 	u64			dma_mask;
+=======
+>>>>>>> v3.18
 	unsigned int		periphid;
 	unsigned int		irq[AMBA_NR_IRQS];
 };
@@ -45,9 +52,21 @@ struct amba_driver {
 	const struct amba_id	*id_table;
 };
 
+<<<<<<< HEAD
 enum amba_vendor {
 	AMBA_VENDOR_ARM = 0x41,
 	AMBA_VENDOR_ST = 0x80,
+=======
+/*
+ * Constants for the designer field of the Peripheral ID register. When bit 7
+ * is set to '1', bits [6:0] should be the JEP106 manufacturer identity code.
+ */
+enum amba_vendor {
+	AMBA_VENDOR_ARM = 0x41,
+	AMBA_VENDOR_ST = 0x80,
+	AMBA_VENDOR_QCOM = 0x51,
+	AMBA_VENDOR_LSI = 0xb6,
+>>>>>>> v3.18
 };
 
 extern struct bus_type amba_bustype;
@@ -131,7 +150,10 @@ struct amba_device name##_device = {				\
 struct amba_device name##_device = {				\
 	.dev = __AMBA_DEV(busid, data, ~0ULL),			\
 	.res = DEFINE_RES_MEM(base, SZ_4K),			\
+<<<<<<< HEAD
 	.dma_mask = ~0ULL,					\
+=======
+>>>>>>> v3.18
 	.irq = irqs,						\
 	.periphid = id,						\
 }

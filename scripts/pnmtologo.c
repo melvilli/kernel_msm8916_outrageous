@@ -512,4 +512,7 @@ int main(int argc, char *argv[])
     }
     exit(0);
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18

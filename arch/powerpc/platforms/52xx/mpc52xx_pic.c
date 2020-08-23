@@ -119,12 +119,20 @@
 
 
 /* MPC5200 device tree match tables */
+<<<<<<< HEAD
 static struct of_device_id mpc52xx_pic_ids[] __initdata = {
+=======
+static const struct of_device_id mpc52xx_pic_ids[] __initconst = {
+>>>>>>> v3.18
 	{ .compatible = "fsl,mpc5200-pic", },
 	{ .compatible = "mpc5200-pic", },
 	{}
 };
+<<<<<<< HEAD
 static struct of_device_id mpc52xx_sdma_ids[] __initdata = {
+=======
+static const struct of_device_id mpc52xx_sdma_ids[] __initconst = {
+>>>>>>> v3.18
 	{ .compatible = "fsl,mpc5200-bestcomm", },
 	{ .compatible = "mpc5200-bestcomm", },
 	{}
@@ -340,7 +348,11 @@ static int mpc52xx_irqhost_map(struct irq_domain *h, unsigned int virq,
 {
 	int l1irq;
 	int l2irq;
+<<<<<<< HEAD
 	struct irq_chip *irqchip;
+=======
+	struct irq_chip *uninitialized_var(irqchip);
+>>>>>>> v3.18
 	void *hndlr;
 	int type;
 	u32 reg;

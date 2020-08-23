@@ -225,6 +225,12 @@ static int hdmiphy_s_dv_timings(struct v4l2_subdev *sd,
 static int hdmiphy_dv_timings_cap(struct v4l2_subdev *sd,
 	struct v4l2_dv_timings_cap *cap)
 {
+<<<<<<< HEAD
+=======
+	if (cap->pad != 0)
+		return -EINVAL;
+
+>>>>>>> v3.18
 	cap->type = V4L2_DV_BT_656_1120;
 	/* The phy only determines the pixelclock, leave the other values
 	 * at 0 to signify that we have no information for them. */
@@ -259,6 +265,7 @@ static const struct v4l2_subdev_core_ops hdmiphy_core_ops = {
 
 static const struct v4l2_subdev_video_ops hdmiphy_video_ops = {
 	.s_dv_timings = hdmiphy_s_dv_timings,
+<<<<<<< HEAD
 	.dv_timings_cap = hdmiphy_dv_timings_cap,
 	.s_stream =  hdmiphy_s_stream,
 };
@@ -266,6 +273,19 @@ static const struct v4l2_subdev_video_ops hdmiphy_video_ops = {
 static const struct v4l2_subdev_ops hdmiphy_ops = {
 	.core = &hdmiphy_core_ops,
 	.video = &hdmiphy_video_ops,
+=======
+	.s_stream =  hdmiphy_s_stream,
+};
+
+static const struct v4l2_subdev_pad_ops hdmiphy_pad_ops = {
+	.dv_timings_cap = hdmiphy_dv_timings_cap,
+};
+
+static const struct v4l2_subdev_ops hdmiphy_ops = {
+	.core = &hdmiphy_core_ops,
+	.video = &hdmiphy_video_ops,
+	.pad = &hdmiphy_pad_ops,
+>>>>>>> v3.18
 };
 
 static int hdmiphy_probe(struct i2c_client *client,

@@ -3,6 +3,10 @@
 
 #include <linux/linkage.h>
 #include <linux/lockdep.h>
+<<<<<<< HEAD
+=======
+#include <linux/debug_locks.h>
+>>>>>>> v3.18
 
 /*
  * Mutexes - debugging helpers:

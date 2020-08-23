@@ -31,6 +31,10 @@ int test__basic_mmap(void)
 	unsigned int nr_events[nsyscalls],
 		     expected_nr_events[nsyscalls], i, j;
 	struct perf_evsel *evsels[nsyscalls], *evsel;
+<<<<<<< HEAD
+=======
+	char sbuf[STRERR_BUFSIZE];
+>>>>>>> v3.18
 
 	threads = thread_map__new(-1, getpid(), UINT_MAX);
 	if (threads == NULL) {
@@ -49,7 +53,11 @@ int test__basic_mmap(void)
 	sched_setaffinity(0, sizeof(cpu_set), &cpu_set);
 	if (sched_setaffinity(0, sizeof(cpu_set), &cpu_set) < 0) {
 		pr_debug("sched_setaffinity() failed on CPU %d: %s ",
+<<<<<<< HEAD
 			 cpus->map[0], strerror(errno));
+=======
+			 cpus->map[0], strerror_r(errno, sbuf, sizeof(sbuf)));
+>>>>>>> v3.18
 		goto out_free_cpus;
 	}
 
@@ -65,6 +73,7 @@ int test__basic_mmap(void)
 		char name[64];
 
 		snprintf(name, sizeof(name), "sys_enter_%s", syscall_names[i]);
+<<<<<<< HEAD
 		evsels[i] = perf_evsel__newtp("syscalls", name, i);
 		if (evsels[i] == NULL) {
 			pr_debug("perf_evsel__new\n");
@@ -73,14 +82,29 @@ int test__basic_mmap(void)
 
 		evsels[i]->attr.wakeup_events = 1;
 		perf_evsel__set_sample_id(evsels[i]);
+=======
+		evsels[i] = perf_evsel__newtp("syscalls", name);
+		if (evsels[i] == NULL) {
+			pr_debug("perf_evsel__new\n");
+			goto out_delete_evlist;
+		}
+
+		evsels[i]->attr.wakeup_events = 1;
+		perf_evsel__set_sample_id(evsels[i], false);
+>>>>>>> v3.18
 
 		perf_evlist__add(evlist, evsels[i]);
 
 		if (perf_evsel__open(evsels[i], cpus, threads) < 0) {
 			pr_debug("failed to open counter: %s, "
 				 "tweak /proc/sys/kernel/perf_event_paranoid?\n",
+<<<<<<< HEAD
 				 strerror(errno));
 			goto out_close_fd;
+=======
+				 strerror_r(errno, sbuf, sizeof(sbuf)));
+			goto out_delete_evlist;
+>>>>>>> v3.18
 		}
 
 		nr_events[i] = 0;
@@ -89,8 +113,13 @@ int test__basic_mmap(void)
 
 	if (perf_evlist__mmap(evlist, 128, true) < 0) {
 		pr_debug("failed to mmap events: %d (%s)\n", errno,
+<<<<<<< HEAD
 			 strerror(errno));
 		goto out_close_fd;
+=======
+			 strerror_r(errno, sbuf, sizeof(sbuf)));
+		goto out_delete_evlist;
+>>>>>>> v3.18
 	}
 
 	for (i = 0; i < nsyscalls; ++i)
@@ -105,13 +134,21 @@ int test__basic_mmap(void)
 		if (event->header.type != PERF_RECORD_SAMPLE) {
 			pr_debug("unexpected %s event\n",
 				 perf_event__name(event->header.type));
+<<<<<<< HEAD
 			goto out_munmap;
+=======
+			goto out_delete_evlist;
+>>>>>>> v3.18
 		}
 
 		err = perf_evlist__parse_sample(evlist, event, &sample);
 		if (err) {
 			pr_err("Can't parse sample, err = %d\n", err);
+<<<<<<< HEAD
 			goto out_munmap;
+=======
+			goto out_delete_evlist;
+>>>>>>> v3.18
 		}
 
 		err = -1;
@@ -119,6 +156,7 @@ int test__basic_mmap(void)
 		if (evsel == NULL) {
 			pr_debug("event with id %" PRIu64
 				 " doesn't map to an evsel\n", sample.id);
+<<<<<<< HEAD
 			goto out_munmap;
 		}
 		nr_events[evsel->idx]++;
@@ -126,11 +164,22 @@ int test__basic_mmap(void)
 
 	err = 0;
 	list_for_each_entry(evsel, &evlist->entries, node) {
+=======
+			goto out_delete_evlist;
+		}
+		nr_events[evsel->idx]++;
+		perf_evlist__mmap_consume(evlist, 0);
+	}
+
+	err = 0;
+	evlist__for_each(evlist, evsel) {
+>>>>>>> v3.18
 		if (nr_events[evsel->idx] != expected_nr_events[evsel->idx]) {
 			pr_debug("expected %d %s events, got %d\n",
 				 expected_nr_events[evsel->idx],
 				 perf_evsel__name(evsel), nr_events[evsel->idx]);
 			err = -1;
+<<<<<<< HEAD
 			goto out_munmap;
 		}
 	}
@@ -142,6 +191,16 @@ out_close_fd:
 		perf_evsel__close_fd(evsels[i], 1, threads->nr);
 out_free_evlist:
 	perf_evlist__delete(evlist);
+=======
+			goto out_delete_evlist;
+		}
+	}
+
+out_delete_evlist:
+	perf_evlist__delete(evlist);
+	cpus	= NULL;
+	threads = NULL;
+>>>>>>> v3.18
 out_free_cpus:
 	cpu_map__delete(cpus);
 out_free_threads:

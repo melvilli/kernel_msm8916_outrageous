@@ -24,7 +24,10 @@
  *      vUpdateIFS - Update slotTime,SIFS,DIFS, and EIFS
  *      CARDvUpdateBasicTopRate - Update BasicTopRate
  *      CARDbAddBasicRate - Add to BasicRateSet
+<<<<<<< HEAD
  *      CARDbSetBasicRate - Set Basic Tx Rate
+=======
+>>>>>>> v3.18
  *      CARDbIsOFDMinBasicRate - Check if any OFDM rate is in BasicRateSet
  *      CARDvSetLoopbackMode - Set Loopback mode
  *      CARDbSoftwareReset - Sortware reset NIC
@@ -60,9 +63,12 @@
 
 /*---------------------  Static Definitions -------------------------*/
 
+<<<<<<< HEAD
 //static int          msglevel                =MSG_LEVEL_DEBUG;
 static int msglevel = MSG_LEVEL_INFO;
 
+=======
+>>>>>>> v3.18
 #define C_SIFS_A        16      // micro sec.
 #define C_SIFS_BG       10
 
@@ -89,7 +95,11 @@ static unsigned char abyDefaultSuppRatesB[] = {WLAN_EID_SUPP_RATES, 4, 0x02, 0x0
 
 /*---------------------  Static Variables  --------------------------*/
 
+<<<<<<< HEAD
 const unsigned short cwRXBCNTSFOff[MAX_RATE] =
+=======
+static const unsigned short cwRXBCNTSFOff[MAX_RATE] =
+>>>>>>> v3.18
 {17, 17, 17, 17, 34, 23, 17, 11, 8, 5, 4, 3};
 
 /*---------------------  Static Functions  --------------------------*/
@@ -226,15 +236,23 @@ s_vCalculateOFDMRParameter(
  */
 static
 void
+<<<<<<< HEAD
 s_vSetRSPINF(PSDevice pDevice, CARD_PHY_TYPE ePHYType, void *pvSupportRateIEs, void *pvExtSupportRateIEs)
 {
 	unsigned char byServ = 0, bySignal = 0; // For CCK
 	unsigned short wLen = 0;
+=======
+s_vSetRSPINF(struct vnt_private *pDevice, CARD_PHY_TYPE ePHYType,
+	     void *pvSupportRateIEs, void *pvExtSupportRateIEs)
+{
+	union vnt_phy_field_swap phy;
+>>>>>>> v3.18
 	unsigned char byTxRate = 0, byRsvTime = 0;    // For OFDM
 
 	//Set to Page1
 	MACvSelectPage1(pDevice->PortOffset);
 
+<<<<<<< HEAD
 	//RSPINF_b_1
 	BBvCalculateParameter(pDevice,
 			      14,
@@ -279,6 +297,47 @@ s_vSetRSPINF(PSDevice pDevice, CARD_PHY_TYPE ePHYType, void *pvSupportRateIEs, v
 );
 
 	VNSvOutPortD(pDevice->PortOffset + MAC_REG_RSPINF_B_11, MAKEDWORD(wLen, MAKEWORD(bySignal, byServ)));
+=======
+	/* RSPINF_b_1 */
+	vnt_get_phy_field(pDevice,
+			  14,
+			  VNTWIFIbyGetACKTxRate(RATE_1M, pvSupportRateIEs, pvExtSupportRateIEs),
+			  PK_TYPE_11B,
+			  &phy.field_read);
+
+	 /* swap over to get correct write order */
+	swap(phy.swap[0], phy.swap[1]);
+
+	VNSvOutPortD(pDevice->PortOffset + MAC_REG_RSPINF_B_1, phy.field_write);
+
+	/* RSPINF_b_2 */
+	vnt_get_phy_field(pDevice, 14,
+			  VNTWIFIbyGetACKTxRate(RATE_2M, pvSupportRateIEs, pvExtSupportRateIEs),
+			  PK_TYPE_11B, &phy.field_read);
+
+	swap(phy.swap[0], phy.swap[1]);
+
+	VNSvOutPortD(pDevice->PortOffset + MAC_REG_RSPINF_B_2, phy.field_write);
+
+	/* RSPINF_b_5 */
+	vnt_get_phy_field(pDevice, 14,
+			  VNTWIFIbyGetACKTxRate(RATE_5M, pvSupportRateIEs, pvExtSupportRateIEs),
+			  PK_TYPE_11B, &phy.field_read);
+
+	swap(phy.swap[0], phy.swap[1]);
+
+	VNSvOutPortD(pDevice->PortOffset + MAC_REG_RSPINF_B_5, phy.field_write);
+
+	/* RSPINF_b_11 */
+	vnt_get_phy_field(pDevice, 14,
+			  VNTWIFIbyGetACKTxRate(RATE_11M, pvSupportRateIEs, pvExtSupportRateIEs),
+			  PK_TYPE_11B, &phy.field_read);
+
+	swap(phy.swap[0], phy.swap[1]);
+
+	VNSvOutPortD(pDevice->PortOffset + MAC_REG_RSPINF_B_11, phy.field_write);
+
+>>>>>>> v3.18
 	//RSPINF_a_6
 	s_vCalculateOFDMRParameter(RATE_6M,
 				   ePHYType,
@@ -339,6 +398,7 @@ s_vSetRSPINF(PSDevice pDevice, CARD_PHY_TYPE ePHYType, void *pvSupportRateIEs, v
 /*---------------------  Export Functions  --------------------------*/
 
 /*
+<<<<<<< HEAD
  * Description: Card Send packet function
  *
  * Parameters:
@@ -369,6 +429,8 @@ s_vSetRSPINF(PSDevice pDevice, CARD_PHY_TYPE ePHYType, void *pvSupportRateIEs, v
 */
 
 /*
+=======
+>>>>>>> v3.18
  * Description: Get Card short preamble option value
  *
  * Parameters:
@@ -380,12 +442,21 @@ s_vSetRSPINF(PSDevice pDevice, CARD_PHY_TYPE ePHYType, void *pvSupportRateIEs, v
  * Return Value: true if short preamble; otherwise false
  *
  */
+<<<<<<< HEAD
 bool CARDbIsShortPreamble(void *pDeviceHandler)
 {
 	PSDevice    pDevice = (PSDevice) pDeviceHandler;
 	if (pDevice->byPreambleType == 0) {
 		return false;
 	}
+=======
+bool CARDbIsShortPreamble(struct vnt_private *pDevice)
+{
+
+	if (pDevice->byPreambleType == 0)
+		return false;
+
+>>>>>>> v3.18
 	return true;
 }
 
@@ -401,9 +472,15 @@ bool CARDbIsShortPreamble(void *pDeviceHandler)
  * Return Value: true if short slot time; otherwise false
  *
  */
+<<<<<<< HEAD
 bool CARDbIsShorSlotTime(void *pDeviceHandler)
 {
 	PSDevice    pDevice = (PSDevice) pDeviceHandler;
+=======
+bool CARDbIsShorSlotTime(struct vnt_private *pDevice)
+{
+
+>>>>>>> v3.18
 	return pDevice->bShortSlotTime;
 }
 
@@ -419,23 +496,39 @@ bool CARDbIsShorSlotTime(void *pDeviceHandler)
  * Return Value: None.
  *
  */
+<<<<<<< HEAD
 bool CARDbSetPhyParameter(void *pDeviceHandler, CARD_PHY_TYPE ePHYType, unsigned short wCapInfo, unsigned char byERPField, void *pvSupportRateIEs, void *pvExtSupportRateIEs)
 {
 	PSDevice    pDevice = (PSDevice) pDeviceHandler;
+=======
+bool CARDbSetPhyParameter(struct vnt_private *pDevice, CARD_PHY_TYPE ePHYType,
+			  unsigned short wCapInfo, unsigned char byERPField,
+			  void *pvSupportRateIEs, void *pvExtSupportRateIEs)
+{
+>>>>>>> v3.18
 	unsigned char byCWMaxMin = 0;
 	unsigned char bySlot = 0;
 	unsigned char bySIFS = 0;
 	unsigned char byDIFS = 0;
 	unsigned char byData;
+<<<<<<< HEAD
 //    PWLAN_IE_SUPP_RATES pRates = NULL;
+=======
+>>>>>>> v3.18
 	PWLAN_IE_SUPP_RATES pSupportRates = (PWLAN_IE_SUPP_RATES) pvSupportRateIEs;
 	PWLAN_IE_SUPP_RATES pExtSupportRates = (PWLAN_IE_SUPP_RATES) pvExtSupportRateIEs;
 
 	//Set SIFS, DIFS, EIFS, SlotTime, CwMin
 	if (ePHYType == PHY_TYPE_11A) {
+<<<<<<< HEAD
 		if (pSupportRates == NULL) {
 			pSupportRates = (PWLAN_IE_SUPP_RATES) abyDefaultSuppRatesA;
 		}
+=======
+		if (pSupportRates == NULL)
+			pSupportRates = (PWLAN_IE_SUPP_RATES) abyDefaultSuppRatesA;
+
+>>>>>>> v3.18
 		if (pDevice->byRFType == RF_AIROHA7230) {
 			// AL7230 use single PAPE and connect to PAPE_2.4G
 			MACvSetBBType(pDevice->PortOffset, BB_TYPE_11G);
@@ -443,9 +536,15 @@ bool CARDbSetPhyParameter(void *pDeviceHandler, CARD_PHY_TYPE ePHYType, unsigned
 			pDevice->abyBBVGA[2] = 0x10;
 			pDevice->abyBBVGA[3] = 0x10;
 			BBbReadEmbedded(pDevice->PortOffset, 0xE7, &byData);
+<<<<<<< HEAD
 			if (byData == 0x1C) {
 				BBbWriteEmbedded(pDevice->PortOffset, 0xE7, pDevice->abyBBVGA[0]);
 			}
+=======
+			if (byData == 0x1C)
+				BBbWriteEmbedded(pDevice->PortOffset, 0xE7, pDevice->abyBBVGA[0]);
+
+>>>>>>> v3.18
 		} else if (pDevice->byRFType == RF_UW2452) {
 			MACvSetBBType(pDevice->PortOffset, BB_TYPE_11A);
 			pDevice->abyBBVGA[0] = 0x18;
@@ -463,18 +562,30 @@ bool CARDbSetPhyParameter(void *pDeviceHandler, CARD_PHY_TYPE ePHYType, unsigned
 		byDIFS = C_SIFS_A + 2*C_SLOT_SHORT;
 		byCWMaxMin = 0xA4;
 	} else if (ePHYType == PHY_TYPE_11B) {
+<<<<<<< HEAD
 		if (pSupportRates == NULL) {
 			pSupportRates = (PWLAN_IE_SUPP_RATES) abyDefaultSuppRatesB;
 		}
+=======
+		if (pSupportRates == NULL)
+			pSupportRates = (PWLAN_IE_SUPP_RATES) abyDefaultSuppRatesB;
+
+>>>>>>> v3.18
 		MACvSetBBType(pDevice->PortOffset, BB_TYPE_11B);
 		if (pDevice->byRFType == RF_AIROHA7230) {
 			pDevice->abyBBVGA[0] = 0x1C;
 			pDevice->abyBBVGA[2] = 0x00;
 			pDevice->abyBBVGA[3] = 0x00;
 			BBbReadEmbedded(pDevice->PortOffset, 0xE7, &byData);
+<<<<<<< HEAD
 			if (byData == 0x20) {
 				BBbWriteEmbedded(pDevice->PortOffset, 0xE7, pDevice->abyBBVGA[0]);
 			}
+=======
+			if (byData == 0x20)
+				BBbWriteEmbedded(pDevice->PortOffset, 0xE7, pDevice->abyBBVGA[0]);
+
+>>>>>>> v3.18
 		} else if (pDevice->byRFType == RF_UW2452) {
 			pDevice->abyBBVGA[0] = 0x14;
 			BBbReadEmbedded(pDevice->PortOffset, 0xE7, &byData);
@@ -499,9 +610,15 @@ bool CARDbSetPhyParameter(void *pDeviceHandler, CARD_PHY_TYPE ePHYType, unsigned
 			pDevice->abyBBVGA[2] = 0x00;
 			pDevice->abyBBVGA[3] = 0x00;
 			BBbReadEmbedded(pDevice->PortOffset, 0xE7, &byData);
+<<<<<<< HEAD
 			if (byData == 0x20) {
 				BBbWriteEmbedded(pDevice->PortOffset, 0xE7, pDevice->abyBBVGA[0]);
 			}
+=======
+			if (byData == 0x20)
+				BBbWriteEmbedded(pDevice->PortOffset, 0xE7, pDevice->abyBBVGA[0]);
+
+>>>>>>> v3.18
 		} else if (pDevice->byRFType == RF_UW2452) {
 			pDevice->abyBBVGA[0] = 0x14;
 			BBbReadEmbedded(pDevice->PortOffset, 0xE7, &byData);
@@ -519,6 +636,7 @@ bool CARDbSetPhyParameter(void *pDeviceHandler, CARD_PHY_TYPE ePHYType, unsigned
 			bySlot = C_SLOT_LONG;
 			byDIFS = C_SIFS_BG + 2*C_SLOT_LONG;
 		}
+<<<<<<< HEAD
 		if (VNTWIFIbyGetMaxSupportRate(pSupportRates, pExtSupportRates) > RATE_11M) {
 			byCWMaxMin = 0xA4;
 		} else {
@@ -539,6 +657,27 @@ bool CARDbSetPhyParameter(void *pDeviceHandler, CARD_PHY_TYPE ePHYType, unsigned
 			} else {
 				MACvDisableBarkerPreambleMd(pDevice->PortOffset);
 			}
+=======
+		if (VNTWIFIbyGetMaxSupportRate(pSupportRates, pExtSupportRates) > RATE_11M)
+			byCWMaxMin = 0xA4;
+		else
+			byCWMaxMin = 0xA5;
+
+		if (pDevice->bProtectMode != VNTWIFIbIsProtectMode(byERPField)) {
+			pDevice->bProtectMode = VNTWIFIbIsProtectMode(byERPField);
+			if (pDevice->bProtectMode)
+				MACvEnableProtectMD(pDevice->PortOffset);
+			else
+				MACvDisableProtectMD(pDevice->PortOffset);
+
+		}
+		if (pDevice->bBarkerPreambleMd != VNTWIFIbIsBarkerMode(byERPField)) {
+			pDevice->bBarkerPreambleMd = VNTWIFIbIsBarkerMode(byERPField);
+			if (pDevice->bBarkerPreambleMd)
+				MACvEnableBarkerPreambleMd(pDevice->PortOffset);
+			else
+				MACvDisableBarkerPreambleMd(pDevice->PortOffset);
+>>>>>>> v3.18
 		}
 	}
 
@@ -567,22 +706,38 @@ bool CARDbSetPhyParameter(void *pDeviceHandler, CARD_PHY_TYPE ePHYType, unsigned
 	if (pDevice->bySlot != bySlot) {
 		pDevice->bySlot = bySlot;
 		VNSvOutPortB(pDevice->PortOffset + MAC_REG_SLOT, pDevice->bySlot);
+<<<<<<< HEAD
 		if (pDevice->bySlot == C_SLOT_SHORT) {
 			pDevice->bShortSlotTime = true;
 		} else {
 			pDevice->bShortSlotTime = false;
 		}
+=======
+		if (pDevice->bySlot == C_SLOT_SHORT)
+			pDevice->bShortSlotTime = true;
+		else
+			pDevice->bShortSlotTime = false;
+
+>>>>>>> v3.18
 		BBvSetShortSlotTime(pDevice);
 	}
 	if (pDevice->byCWMaxMin != byCWMaxMin) {
 		pDevice->byCWMaxMin = byCWMaxMin;
 		VNSvOutPortB(pDevice->PortOffset + MAC_REG_CWMAXMIN0, pDevice->byCWMaxMin);
 	}
+<<<<<<< HEAD
 	if (VNTWIFIbIsShortPreamble(wCapInfo)) {
 		pDevice->byPreambleType = pDevice->byShortPreamble;
 	} else {
 		pDevice->byPreambleType = 0;
 	}
+=======
+	if (VNTWIFIbIsShortPreamble(wCapInfo))
+		pDevice->byPreambleType = pDevice->byShortPreamble;
+	else
+		pDevice->byPreambleType = 0;
+
+>>>>>>> v3.18
 	s_vSetRSPINF(pDevice, ePHYType, pSupportRates, pExtSupportRates);
 	pDevice->eCurrentPHYType = ePHYType;
 	// set for NDIS OID_802_11SUPPORTED_RATES
@@ -605,6 +760,7 @@ bool CARDbSetPhyParameter(void *pDeviceHandler, CARD_PHY_TYPE ePHYType, unsigned
  * Return Value: none
  *
  */
+<<<<<<< HEAD
 bool CARDbUpdateTSF(void *pDeviceHandler, unsigned char byRxRate, QWORD qwBSSTimestamp, QWORD qwLocalTSF)
 {
 	PSDevice    pDevice = (PSDevice) pDeviceHandler;
@@ -620,6 +776,19 @@ bool CARDbUpdateTSF(void *pDeviceHandler, unsigned char byRxRate, QWORD qwBSSTim
 		// HW's TSF add TSF Offset reg
 		VNSvOutPortD(pDevice->PortOffset + MAC_REG_TSFOFST, LODWORD(qwTSFOffset));
 		VNSvOutPortD(pDevice->PortOffset + MAC_REG_TSFOFST + 4, HIDWORD(qwTSFOffset));
+=======
+bool CARDbUpdateTSF(struct vnt_private *pDevice, unsigned char byRxRate,
+		    u64 qwBSSTimestamp, u64 qwLocalTSF)
+{
+	u64 qwTSFOffset = 0;
+
+	if (qwBSSTimestamp != qwLocalTSF) {
+		qwTSFOffset = CARDqGetTSFOffset(byRxRate, qwBSSTimestamp, qwLocalTSF);
+		// adjust TSF
+		// HW's TSF add TSF Offset reg
+		VNSvOutPortD(pDevice->PortOffset + MAC_REG_TSFOFST, (u32)qwTSFOffset);
+		VNSvOutPortD(pDevice->PortOffset + MAC_REG_TSFOFST + 4, (u32)(qwTSFOffset >> 32));
+>>>>>>> v3.18
 		MACvRegBitsOn(pDevice->PortOffset, MAC_REG_TFTCTL, TFTCTL_TSFSYNCEN);
 	}
 	return true;
@@ -639,6 +808,7 @@ bool CARDbUpdateTSF(void *pDeviceHandler, unsigned char byRxRate, QWORD qwBSSTim
  * Return Value: true if succeed; otherwise false
  *
  */
+<<<<<<< HEAD
 bool CARDbSetBeaconPeriod(void *pDeviceHandler, unsigned short wBeaconInterval)
 {
 	PSDevice    pDevice = (PSDevice) pDeviceHandler;
@@ -666,13 +836,28 @@ bool CARDbSetBeaconPeriod(void *pDeviceHandler, unsigned short wBeaconInterval)
 		HIDWORD(qwNextTBTT)++;
 	}
 	LODWORD(qwNextTBTT) = uLowNextTBTT + uLowRemain;
+=======
+bool CARDbSetBeaconPeriod(struct vnt_private *pDevice,
+			  unsigned short wBeaconInterval)
+{
+	u64 qwNextTBTT = 0;
+
+	CARDbGetCurrentTSF(pDevice->PortOffset, &qwNextTBTT); //Get Local TSF counter
+
+	qwNextTBTT = CARDqGetNextTBTT(qwNextTBTT, wBeaconInterval);
+>>>>>>> v3.18
 
 	// set HW beacon interval
 	VNSvOutPortW(pDevice->PortOffset + MAC_REG_BI, wBeaconInterval);
 	pDevice->wBeaconInterval = wBeaconInterval;
 	// Set NextTBTT
+<<<<<<< HEAD
 	VNSvOutPortD(pDevice->PortOffset + MAC_REG_NEXTTBTT, LODWORD(qwNextTBTT));
 	VNSvOutPortD(pDevice->PortOffset + MAC_REG_NEXTTBTT + 4, HIDWORD(qwNextTBTT));
+=======
+	VNSvOutPortD(pDevice->PortOffset + MAC_REG_NEXTTBTT, (u32)qwNextTBTT);
+	VNSvOutPortD(pDevice->PortOffset + MAC_REG_NEXTTBTT + 4, (u32)(qwNextTBTT >> 32));
+>>>>>>> v3.18
 	MACvRegBitsOn(pDevice->PortOffset, MAC_REG_TFTCTL, TFTCTL_TBTTSYNCEN);
 
 	return true;
@@ -691,9 +876,14 @@ bool CARDbSetBeaconPeriod(void *pDeviceHandler, unsigned short wBeaconInterval)
  * Return Value: true if all data packet complete; otherwise false.
  *
  */
+<<<<<<< HEAD
 bool CARDbStopTxPacket(void *pDeviceHandler, CARD_PKT_TYPE ePktType)
 {
 	PSDevice    pDevice = (PSDevice) pDeviceHandler;
+=======
+bool CARDbStopTxPacket(struct vnt_private *pDevice, CARD_PKT_TYPE ePktType)
+{
+>>>>>>> v3.18
 
 	if (ePktType == PKT_TYPE_802_11_ALL) {
 		pDevice->bStopBeacon = true;
@@ -720,6 +910,7 @@ bool CARDbStopTxPacket(void *pDeviceHandler, CARD_PKT_TYPE ePktType)
 	}
 	// wait all TD0 complete
 	if (pDevice->bStopTx0Pkt == true) {
+<<<<<<< HEAD
 		if (pDevice->iTDUsed[TYPE_TXDMA0] != 0) {
 			return false;
 		}
@@ -729,6 +920,15 @@ bool CARDbStopTxPacket(void *pDeviceHandler, CARD_PKT_TYPE ePktType)
 		if (pDevice->iTDUsed[TYPE_AC0DMA] != 0) {
 			return false;
 		}
+=======
+		if (pDevice->iTDUsed[TYPE_TXDMA0] != 0)
+			return false;
+	}
+	// wait all Data TD complete
+	if (pDevice->bStopDataPkt == true) {
+		if (pDevice->iTDUsed[TYPE_AC0DMA] != 0)
+			return false;
+>>>>>>> v3.18
 	}
 
 	return true;
@@ -747,9 +947,14 @@ bool CARDbStopTxPacket(void *pDeviceHandler, CARD_PKT_TYPE ePktType)
  * Return Value: true if success; false if failed.
  *
  */
+<<<<<<< HEAD
 bool CARDbStartTxPacket(void *pDeviceHandler, CARD_PKT_TYPE ePktType)
 {
 	PSDevice    pDevice = (PSDevice) pDeviceHandler;
+=======
+bool CARDbStartTxPacket(struct vnt_private *pDevice, CARD_PKT_TYPE ePktType)
+{
+>>>>>>> v3.18
 
 	if (ePktType == PKT_TYPE_802_11_ALL) {
 		pDevice->bStopBeacon = false;
@@ -765,7 +970,11 @@ bool CARDbStartTxPacket(void *pDeviceHandler, CARD_PKT_TYPE ePktType)
 
 	if ((pDevice->bStopBeacon == false) &&
 	    (pDevice->bBeaconBufReady == true) &&
+<<<<<<< HEAD
 	    (pDevice->eOPMode == OP_MODE_ADHOC)) {
+=======
+	    (pDevice->op_mode == NL80211_IFTYPE_ADHOC)) {
+>>>>>>> v3.18
 		MACvRegBitsOn(pDevice->PortOffset, MAC_REG_TCR, TCR_AUTOBCNTX);
 	}
 
@@ -786,6 +995,7 @@ bool CARDbStartTxPacket(void *pDeviceHandler, CARD_PKT_TYPE ePktType)
  * Return Value: true if success; false if failed.
  *
  */
+<<<<<<< HEAD
 bool CARDbSetBSSID(void *pDeviceHandler, unsigned char *pbyBSSID, CARD_OP_MODE eOPMode)
 {
 	PSDevice    pDevice = (PSDevice) pDeviceHandler;
@@ -807,16 +1017,46 @@ bool CARDbSetBSSID(void *pDeviceHandler, unsigned char *pbyBSSID, CARD_OP_MODE e
 		pDevice->bBSSIDFilter = false;
 		pDevice->byRxMode &= ~RCR_BSSID;
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "wcmd: rx_mode = %x\n", pDevice->byRxMode);
+=======
+bool CARDbSetBSSID(struct vnt_private *pDevice,
+		   unsigned char *pbyBSSID, enum nl80211_iftype op_mode)
+{
+
+	MACvWriteBSSIDAddress(pDevice->PortOffset, pbyBSSID);
+	memcpy(pDevice->abyBSSID, pbyBSSID, WLAN_BSSID_LEN);
+	if (op_mode == NL80211_IFTYPE_ADHOC)
+		MACvRegBitsOn(pDevice->PortOffset, MAC_REG_HOSTCR, HOSTCR_ADHOC);
+	else
+		MACvRegBitsOff(pDevice->PortOffset, MAC_REG_HOSTCR, HOSTCR_ADHOC);
+
+	if (op_mode == NL80211_IFTYPE_AP)
+		MACvRegBitsOn(pDevice->PortOffset, MAC_REG_HOSTCR, HOSTCR_AP);
+	else
+		MACvRegBitsOff(pDevice->PortOffset, MAC_REG_HOSTCR, HOSTCR_AP);
+
+	if (op_mode == NL80211_IFTYPE_UNSPECIFIED) {
+		MACvRegBitsOff(pDevice->PortOffset, MAC_REG_RCR, RCR_BSSID);
+		pDevice->bBSSIDFilter = false;
+		pDevice->byRxMode &= ~RCR_BSSID;
+		pr_debug("wcmd: rx_mode = %x\n", pDevice->byRxMode);
+>>>>>>> v3.18
 	} else {
 		if (is_zero_ether_addr(pDevice->abyBSSID) == false) {
 			MACvRegBitsOn(pDevice->PortOffset, MAC_REG_RCR, RCR_BSSID);
 			pDevice->bBSSIDFilter = true;
 			pDevice->byRxMode |= RCR_BSSID;
 		}
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "wmgr: rx_mode = %x\n", pDevice->byRxMode);
 	}
 	// Adopt BSS state in Adapter Device Object
 	pDevice->eOPMode = eOPMode;
+=======
+		pr_debug("wmgr: rx_mode = %x\n", pDevice->byRxMode);
+	}
+	// Adopt BSS state in Adapter Device Object
+	pDevice->op_mode = op_mode;
+>>>>>>> v3.18
 	return true;
 }
 
@@ -852,11 +1092,18 @@ bool CARDbSetBSSID(void *pDeviceHandler, unsigned char *pbyBSSID, CARD_OP_MODE e
  *
  */
 bool CARDbSetTxDataRate(
+<<<<<<< HEAD
 	void *pDeviceHandler,
 	unsigned short wDataRate
 )
 {
 	PSDevice    pDevice = (PSDevice) pDeviceHandler;
+=======
+	struct vnt_private *pDevice,
+	unsigned short wDataRate
+)
+{
+>>>>>>> v3.18
 
 	pDevice->wCurrentRate = wDataRate;
 	return true;
@@ -878,10 +1125,16 @@ bool CARDbSetTxDataRate(
  -*/
 bool
 CARDbPowerDown(
+<<<<<<< HEAD
 	void *pDeviceHandler
 )
 {
 	PSDevice        pDevice = (PSDevice)pDeviceHandler;
+=======
+	struct vnt_private *pDevice
+)
+{
+>>>>>>> v3.18
 	unsigned int uIdx;
 
 	// check if already in Doze mode
@@ -899,7 +1152,11 @@ CARDbPowerDown(
 	}
 
 	MACvRegBitsOn(pDevice->PortOffset, MAC_REG_PSCTL, PSCTL_GO2DOZE);
+<<<<<<< HEAD
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Go to Doze ZZZZZZZZZZZZZZZ\n");
+=======
+	pr_debug("Go to Doze ZZZZZZZZZZZZZZZ\n");
+>>>>>>> v3.18
 	return true;
 }
 
@@ -915,9 +1172,14 @@ CARDbPowerDown(
  * Return Value: true if success; otherwise false
  *
  */
+<<<<<<< HEAD
 bool CARDbRadioPowerOff(void *pDeviceHandler)
 {
 	PSDevice    pDevice = (PSDevice)pDeviceHandler;
+=======
+bool CARDbRadioPowerOff(struct vnt_private *pDevice)
+{
+>>>>>>> v3.18
 	bool bResult = true;
 
 	if (pDevice->bRadioOff == true)
@@ -944,7 +1206,11 @@ bool CARDbRadioPowerOff(void *pDeviceHandler)
 
 	pDevice->bRadioOff = true;
 	//2007-0409-03,<Add> by chester
+<<<<<<< HEAD
 	printk("chester power off\n");
+=======
+	pr_debug("chester power off\n");
+>>>>>>> v3.18
 	MACvRegBitsOn(pDevice->PortOffset, MAC_REG_GPIOCTL0, LED_ACTSET);  //LED issue
 	return bResult;
 }
@@ -961,6 +1227,7 @@ bool CARDbRadioPowerOff(void *pDeviceHandler)
  * Return Value: true if success; otherwise false
  *
  */
+<<<<<<< HEAD
 bool CARDbRadioPowerOn(void *pDeviceHandler)
 {
 	PSDevice    pDevice = (PSDevice) pDeviceHandler;
@@ -973,6 +1240,22 @@ bool CARDbRadioPowerOn(void *pDeviceHandler)
 
 	if (pDevice->bRadioOff == false) {
 		printk("chester pbRadioOff\n");
+=======
+bool CARDbRadioPowerOn(struct vnt_private *pDevice)
+{
+	bool bResult = true;
+
+	pr_debug("chester power on\n");
+	if (pDevice->bRadioControlOff == true) {
+		if (pDevice->bHWRadioOff == true)
+			pr_debug("chester bHWRadioOff\n");
+		if (pDevice->bRadioControlOff == true)
+			pr_debug("chester bRadioControlOff\n");
+		return false; }
+
+	if (pDevice->bRadioOff == false) {
+		pr_debug("chester pbRadioOff\n");
+>>>>>>> v3.18
 		return true; }
 
 	BBvExitDeepSleep(pDevice->PortOffset, pDevice->byLocalID);
@@ -996,14 +1279,23 @@ bool CARDbRadioPowerOn(void *pDeviceHandler)
 
 	pDevice->bRadioOff = false;
 //  2007-0409-03,<Add> by chester
+<<<<<<< HEAD
 	printk("chester power on\n");
+=======
+	pr_debug("chester power on\n");
+>>>>>>> v3.18
 	MACvRegBitsOff(pDevice->PortOffset, MAC_REG_GPIOCTL0, LED_ACTSET); //LED issue
 	return bResult;
 }
 
+<<<<<<< HEAD
 bool CARDbRemoveKey(void *pDeviceHandler, unsigned char *pbyBSSID)
 {
 	PSDevice    pDevice = (PSDevice) pDeviceHandler;
+=======
+bool CARDbRemoveKey(struct vnt_private *pDevice, unsigned char *pbyBSSID)
+{
+>>>>>>> v3.18
 
 	KeybRemoveAllKey(&(pDevice->sKey), pbyBSSID, pDevice->PortOffset);
 	return true;
@@ -1027,12 +1319,17 @@ bool CARDbRemoveKey(void *pDeviceHandler, unsigned char *pbyBSSID)
  -*/
 bool
 CARDbAdd_PMKID_Candidate(
+<<<<<<< HEAD
 	void *pDeviceHandler,
+=======
+	struct vnt_private *pDevice,
+>>>>>>> v3.18
 	unsigned char *pbyBSSID,
 	bool bRSNCapExist,
 	unsigned short wRSNCap
 )
 {
+<<<<<<< HEAD
 	PSDevice            pDevice = (PSDevice) pDeviceHandler;
 	PPMKID_CANDIDATE    pCandidateList;
 	unsigned int ii = 0;
@@ -1048,22 +1345,48 @@ CARDbAdd_PMKID_Candidate(
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "%02X ", *(pbyBSSID + ii));
 	}
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "\n");
+=======
+	struct pmkid_candidate *pCandidateList;
+	unsigned int ii = 0;
+
+	pr_debug("bAdd_PMKID_Candidate START: (%d)\n",
+		 (int)pDevice->gsPMKIDCandidate.NumCandidates);
+
+	if (pDevice->gsPMKIDCandidate.NumCandidates >= MAX_PMKIDLIST) {
+		pr_debug("vFlush_PMKID_Candidate: 3\n");
+		memset(&pDevice->gsPMKIDCandidate, 0, sizeof(SPMKIDCandidateEvent));
+	}
+
+	for (ii = 0; ii < 6; ii++)
+		pr_debug("%02X ", *(pbyBSSID + ii));
+
+	pr_debug("\n");
+>>>>>>> v3.18
 
 	// Update Old Candidate
 	for (ii = 0; ii < pDevice->gsPMKIDCandidate.NumCandidates; ii++) {
 		pCandidateList = &pDevice->gsPMKIDCandidate.CandidateList[ii];
 		if (!memcmp(pCandidateList->BSSID, pbyBSSID, ETH_ALEN)) {
+<<<<<<< HEAD
 			if ((bRSNCapExist == true) && (wRSNCap & BIT0)) {
 				pCandidateList->Flags |= NDIS_802_11_PMKID_CANDIDATE_PREAUTH_ENABLED;
 			} else {
 				pCandidateList->Flags &= ~(NDIS_802_11_PMKID_CANDIDATE_PREAUTH_ENABLED);
 			}
+=======
+			if (bRSNCapExist && (wRSNCap & BIT0))
+				pCandidateList->Flags |= NDIS_802_11_PMKID_CANDIDATE_PREAUTH_ENABLED;
+			else
+				pCandidateList->Flags &= ~(NDIS_802_11_PMKID_CANDIDATE_PREAUTH_ENABLED);
+
+>>>>>>> v3.18
 			return true;
 		}
 	}
 
 	// New Candidate
 	pCandidateList = &pDevice->gsPMKIDCandidate.CandidateList[pDevice->gsPMKIDCandidate.NumCandidates];
+<<<<<<< HEAD
 	if ((bRSNCapExist == true) && (wRSNCap & BIT0)) {
 		pCandidateList->Flags |= NDIS_802_11_PMKID_CANDIDATE_PREAUTH_ENABLED;
 	} else {
@@ -1072,15 +1395,32 @@ CARDbAdd_PMKID_Candidate(
 	memcpy(pCandidateList->BSSID, pbyBSSID, ETH_ALEN);
 	pDevice->gsPMKIDCandidate.NumCandidates++;
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "NumCandidates:%d\n", (int)pDevice->gsPMKIDCandidate.NumCandidates);
+=======
+	if (bRSNCapExist && (wRSNCap & BIT0))
+		pCandidateList->Flags |= NDIS_802_11_PMKID_CANDIDATE_PREAUTH_ENABLED;
+	else
+		pCandidateList->Flags &= ~(NDIS_802_11_PMKID_CANDIDATE_PREAUTH_ENABLED);
+
+	memcpy(pCandidateList->BSSID, pbyBSSID, ETH_ALEN);
+	pDevice->gsPMKIDCandidate.NumCandidates++;
+	pr_debug("NumCandidates:%d\n",
+		 (int)pDevice->gsPMKIDCandidate.NumCandidates);
+>>>>>>> v3.18
 	return true;
 }
 
 void *
 CARDpGetCurrentAddress(
+<<<<<<< HEAD
 	void *pDeviceHandler
 )
 {
 	PSDevice            pDevice = (PSDevice) pDeviceHandler;
+=======
+	struct vnt_private *pDevice
+)
+{
+>>>>>>> v3.18
 
 	return pDevice->abyCurrentNetAddr;
 }
@@ -1101,15 +1441,25 @@ CARDpGetCurrentAddress(
  -*/
 bool
 CARDbStartMeasure(
+<<<<<<< HEAD
 	void *pDeviceHandler,
+=======
+	struct vnt_private *pDevice,
+>>>>>>> v3.18
 	void *pvMeasureEIDs,
 	unsigned int uNumOfMeasureEIDs
 )
 {
+<<<<<<< HEAD
 	PSDevice                pDevice = (PSDevice) pDeviceHandler;
 	PWLAN_IE_MEASURE_REQ    pEID = (PWLAN_IE_MEASURE_REQ) pvMeasureEIDs;
 	QWORD                   qwCurrTSF;
 	QWORD                   qwStartTSF;
+=======
+	PWLAN_IE_MEASURE_REQ    pEID = (PWLAN_IE_MEASURE_REQ) pvMeasureEIDs;
+	u64 qwCurrTSF;
+	u64 qwStartTSF;
+>>>>>>> v3.18
 	bool bExpired = true;
 	unsigned short wDuration = 0;
 
@@ -1140,6 +1490,7 @@ CARDbStartMeasure(
 		pDevice->uNumOfMeasureEIDs--;
 
 		if (pDevice->byLocalID > REV_ID_VT3253_B1) {
+<<<<<<< HEAD
 			HIDWORD(qwStartTSF) = HIDWORD(*((PQWORD)(pDevice->pCurrMeasureEID->sReq.abyStartTime)));
 			LODWORD(qwStartTSF) = LODWORD(*((PQWORD)(pDevice->pCurrMeasureEID->sReq.abyStartTime)));
 			wDuration = *((unsigned short *)(pDevice->pCurrMeasureEID->sReq.abyDuration));
@@ -1152,10 +1503,21 @@ CARDbStartMeasure(
 				if (LODWORD(qwCurrTSF) > LODWORD(qwStartTSF)) {
 					HIDWORD(qwStartTSF)++;
 				}
+=======
+			qwStartTSF = *((u64 *)(pDevice->pCurrMeasureEID->sReq.abyStartTime));
+			wDuration = *((unsigned short *)(pDevice->pCurrMeasureEID->sReq.abyDuration));
+			wDuration += 1; // 1 TU for channel switching
+
+			if (qwStartTSF == 0) {
+				// start immediately by setting start TSF == current TSF + 2 TU
+				qwStartTSF = qwCurrTSF + 2048;
+
+>>>>>>> v3.18
 				bExpired = false;
 				break;
 			} else {
 				// start at setting start TSF - 1TU(for channel switching)
+<<<<<<< HEAD
 				if (LODWORD(qwStartTSF) < 1024) {
 					HIDWORD(qwStartTSF)--;
 				}
@@ -1166,6 +1528,12 @@ CARDbStartMeasure(
 			    ((HIDWORD(qwCurrTSF) == HIDWORD(qwStartTSF)) &&
 			     (LODWORD(qwCurrTSF) < LODWORD(qwStartTSF)))
 ) {
+=======
+				qwStartTSF -= 1024;
+			}
+
+			if (qwCurrTSF < qwStartTSF) {
+>>>>>>> v3.18
 				bExpired = false;
 				break;
 			}
@@ -1190,10 +1558,17 @@ CARDbStartMeasure(
 		}
 	} while (pDevice->uNumOfMeasureEIDs != 0);
 
+<<<<<<< HEAD
 	if (bExpired == false) {
 		MACvSelectPage1(pDevice->PortOffset);
 		VNSvOutPortD(pDevice->PortOffset + MAC_REG_MSRSTART, LODWORD(qwStartTSF));
 		VNSvOutPortD(pDevice->PortOffset + MAC_REG_MSRSTART + 4, HIDWORD(qwStartTSF));
+=======
+	if (!bExpired) {
+		MACvSelectPage1(pDevice->PortOffset);
+		VNSvOutPortD(pDevice->PortOffset + MAC_REG_MSRSTART, (u32)qwStartTSF);
+		VNSvOutPortD(pDevice->PortOffset + MAC_REG_MSRSTART + 4, (u32)(qwStartTSF >> 32));
+>>>>>>> v3.18
 		VNSvOutPortW(pDevice->PortOffset + MAC_REG_MSRDURATION, wDuration);
 		MACvRegBitsOn(pDevice->PortOffset, MAC_REG_MSRCTL, MSRCTL_EN);
 		MACvSelectPage0(pDevice->PortOffset);
@@ -1227,13 +1602,20 @@ CARDbStartMeasure(
  -*/
 bool
 CARDbChannelSwitch(
+<<<<<<< HEAD
 	void *pDeviceHandler,
+=======
+	struct vnt_private *pDevice,
+>>>>>>> v3.18
 	unsigned char byMode,
 	unsigned char byNewChannel,
 	unsigned char byCount
 )
 {
+<<<<<<< HEAD
 	PSDevice    pDevice = (PSDevice) pDeviceHandler;
+=======
+>>>>>>> v3.18
 	bool bResult = true;
 
 	if (byCount == 0) {
@@ -1247,9 +1629,15 @@ CARDbChannelSwitch(
 	pDevice->byChannelSwitchCount = byCount;
 	pDevice->byNewChannel = byNewChannel;
 	pDevice->bChannelSwitch = true;
+<<<<<<< HEAD
 	if (byMode == 1) {
 		bResult = CARDbStopTxPacket(pDevice, PKT_TYPE_802_11_ALL);
 	}
+=======
+	if (byMode == 1)
+		bResult = CARDbStopTxPacket(pDevice, PKT_TYPE_802_11_ALL);
+
+>>>>>>> v3.18
 	return bResult;
 }
 
@@ -1269,7 +1657,11 @@ CARDbChannelSwitch(
  -*/
 bool
 CARDbSetQuiet(
+<<<<<<< HEAD
 	void *pDeviceHandler,
+=======
+	struct vnt_private *pDevice,
+>>>>>>> v3.18
 	bool bResetQuiet,
 	unsigned char byQuietCount,
 	unsigned char byQuietPeriod,
@@ -1277,6 +1669,7 @@ CARDbSetQuiet(
 	unsigned short wQuietOffset
 )
 {
+<<<<<<< HEAD
 	PSDevice    pDevice = (PSDevice) pDeviceHandler;
 	unsigned int ii = 0;
 
@@ -1285,6 +1678,15 @@ CARDbSetQuiet(
 		for (ii = 0; ii < MAX_QUIET_COUNT; ii++) {
 			pDevice->sQuiet[ii].bEnable = false;
 		}
+=======
+	unsigned int ii = 0;
+
+	if (bResetQuiet) {
+		MACvRegBitsOff(pDevice->PortOffset, MAC_REG_MSRCTL, (MSRCTL_QUIETTXCHK | MSRCTL_QUIETEN));
+		for (ii = 0; ii < MAX_QUIET_COUNT; ii++)
+			pDevice->sQuiet[ii].bEnable = false;
+
+>>>>>>> v3.18
 		pDevice->uQuietEnqueue = 0;
 		pDevice->bEnableFirstQuiet = false;
 		pDevice->bQuietEnable = false;
@@ -1299,11 +1701,16 @@ CARDbSetQuiet(
 		pDevice->sQuiet[pDevice->uQuietEnqueue].dwStartTime += wQuietOffset;
 		pDevice->uQuietEnqueue++;
 		pDevice->uQuietEnqueue %= MAX_QUIET_COUNT;
+<<<<<<< HEAD
 		if (pDevice->byQuietStartCount < byQuietCount) {
 			pDevice->byQuietStartCount = byQuietCount;
 		}
 	} else {
 		// we can not handle Quiet EID more
+=======
+		if (pDevice->byQuietStartCount < byQuietCount)
+			pDevice->byQuietStartCount = byQuietCount;
+>>>>>>> v3.18
 	}
 	return true;
 }
@@ -1325,10 +1732,16 @@ CARDbSetQuiet(
  -*/
 bool
 CARDbStartQuiet(
+<<<<<<< HEAD
 	void *pDeviceHandler
 )
 {
 	PSDevice    pDevice = (PSDevice) pDeviceHandler;
+=======
+	struct vnt_private *pDevice
+)
+{
+>>>>>>> v3.18
 	unsigned int ii = 0;
 	unsigned long dwStartTime = 0xFFFFFFFF;
 	unsigned int uCurrentQuietIndex = 0;
@@ -1399,9 +1812,15 @@ CARDbStartQuiet(
 		if (pDevice->dwCurrentQuietEndTime > 0x80010000) {
 			// decreament all time to avoid wrap around
 			for (ii = 0; ii < MAX_QUIET_COUNT; ii++) {
+<<<<<<< HEAD
 				if (pDevice->sQuiet[ii].bEnable == true) {
 					pDevice->sQuiet[ii].dwStartTime -= 0x80000000;
 				}
+=======
+				if (pDevice->sQuiet[ii].bEnable == true)
+					pDevice->sQuiet[ii].dwStartTime -= 0x80000000;
+
+>>>>>>> v3.18
 			}
 			pDevice->dwCurrentQuietEndTime -= 0x80000000;
 		}
@@ -1425,11 +1844,16 @@ CARDbStartQuiet(
  -*/
 void
 CARDvSetPowerConstraint(
+<<<<<<< HEAD
 	void *pDeviceHandler,
+=======
+	struct vnt_private *pDevice,
+>>>>>>> v3.18
 	unsigned char byChannel,
 	char byPower
 )
 {
+<<<<<<< HEAD
 	PSDevice    pDevice = (PSDevice) pDeviceHandler;
 
 	if (byChannel > CB_MAX_CHANNEL_24G) {
@@ -1440,6 +1864,17 @@ CARDvSetPowerConstraint(
 		if (pDevice->bCountryInfo24G == true) {
 			pDevice->abyLocalPwr[byChannel] = pDevice->abyRegPwr[byChannel] - byPower;
 		}
+=======
+
+	if (byChannel > CB_MAX_CHANNEL_24G) {
+		if (pDevice->bCountryInfo5G == true)
+			pDevice->abyLocalPwr[byChannel] = pDevice->abyRegPwr[byChannel] - byPower;
+
+	} else {
+		if (pDevice->bCountryInfo24G == true)
+			pDevice->abyLocalPwr[byChannel] = pDevice->abyRegPwr[byChannel] - byPower;
+
+>>>>>>> v3.18
 	}
 }
 
@@ -1459,12 +1894,19 @@ CARDvSetPowerConstraint(
  -*/
 void
 CARDvGetPowerCapability(
+<<<<<<< HEAD
 	void *pDeviceHandler,
+=======
+	struct vnt_private *pDevice,
+>>>>>>> v3.18
 	unsigned char *pbyMinPower,
 	unsigned char *pbyMaxPower
 )
 {
+<<<<<<< HEAD
 	PSDevice    pDevice = (PSDevice) pDeviceHandler;
+=======
+>>>>>>> v3.18
 	unsigned char byDec = 0;
 
 	*pbyMaxPower = pDevice->abyOFDMDefaultPwr[pDevice->byCurrentCh];
@@ -1494,10 +1936,16 @@ CARDvGetPowerCapability(
  */
 char
 CARDbyGetTransmitPower(
+<<<<<<< HEAD
 	void *pDeviceHandler
 )
 {
 	PSDevice    pDevice = (PSDevice) pDeviceHandler;
+=======
+	struct vnt_private *pDevice
+)
+{
+>>>>>>> v3.18
 
 	return pDevice->byCurPwrdBm;
 }
@@ -1505,10 +1953,16 @@ CARDbyGetTransmitPower(
 //xxx
 void
 CARDvSafeResetTx(
+<<<<<<< HEAD
 	void *pDeviceHandler
 )
 {
 	PSDevice    pDevice = (PSDevice) pDeviceHandler;
+=======
+	struct vnt_private *pDevice
+)
+{
+>>>>>>> v3.18
 	unsigned int uu;
 	PSTxDesc    pCurrTD;
 
@@ -1558,10 +2012,16 @@ CARDvSafeResetTx(
  -*/
 void
 CARDvSafeResetRx(
+<<<<<<< HEAD
 	void *pDeviceHandler
 )
 {
 	PSDevice    pDevice = (PSDevice) pDeviceHandler;
+=======
+	struct vnt_private *pDevice
+)
+{
+>>>>>>> v3.18
 	unsigned int uu;
 	PSRxDesc    pDesc;
 
@@ -1612,6 +2072,7 @@ CARDvSafeResetRx(
  * Return Value: response Control frame rate
  *
  */
+<<<<<<< HEAD
 unsigned short CARDwGetCCKControlRate(void *pDeviceHandler, unsigned short wRateIdx)
 {
 	PSDevice    pDevice = (PSDevice) pDeviceHandler;
@@ -1621,6 +2082,17 @@ unsigned short CARDwGetCCKControlRate(void *pDeviceHandler, unsigned short wRate
 		if (pDevice->wBasicRate & ((unsigned short)1 << ui)) {
 			return (unsigned short)ui;
 		}
+=======
+static unsigned short CARDwGetCCKControlRate(struct vnt_private *pDevice,
+					     unsigned short wRateIdx)
+{
+	unsigned int ui = (unsigned int) wRateIdx;
+
+	while (ui > RATE_1M) {
+		if (pDevice->wBasicRate & ((unsigned short)1 << ui))
+			return (unsigned short)ui;
+
+>>>>>>> v3.18
 		ui--;
 	}
 	return (unsigned short)RATE_1M;
@@ -1639,6 +2111,7 @@ unsigned short CARDwGetCCKControlRate(void *pDeviceHandler, unsigned short wRate
  * Return Value: response Control frame rate
  *
  */
+<<<<<<< HEAD
 unsigned short CARDwGetOFDMControlRate(void *pDeviceHandler, unsigned short wRateIdx)
 {
 	PSDevice pDevice = (PSDevice) pDeviceHandler;
@@ -1648,18 +2121,37 @@ unsigned short CARDwGetOFDMControlRate(void *pDeviceHandler, unsigned short wRat
 
 	if (!CARDbIsOFDMinBasicRate((void *)pDevice)) {
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "CARDwGetOFDMControlRate:(NO OFDM) %d\n", wRateIdx);
+=======
+static unsigned short CARDwGetOFDMControlRate(struct vnt_private *pDevice,
+					      unsigned short wRateIdx)
+{
+	unsigned int ui = (unsigned int) wRateIdx;
+
+	pr_debug("BASIC RATE: %X\n", pDevice->wBasicRate);
+
+	if (!CARDbIsOFDMinBasicRate((void *)pDevice)) {
+		pr_debug("CARDwGetOFDMControlRate:(NO OFDM) %d\n", wRateIdx);
+>>>>>>> v3.18
 		if (wRateIdx > RATE_24M)
 			wRateIdx = RATE_24M;
 		return wRateIdx;
 	}
 	while (ui > RATE_11M) {
 		if (pDevice->wBasicRate & ((unsigned short)1 << ui)) {
+<<<<<<< HEAD
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "CARDwGetOFDMControlRate : %d\n", ui);
+=======
+			pr_debug("CARDwGetOFDMControlRate : %d\n", ui);
+>>>>>>> v3.18
 			return (unsigned short)ui;
 		}
 		ui--;
 	}
+<<<<<<< HEAD
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "CARDwGetOFDMControlRate: 6M\n");
+=======
+	pr_debug("CARDwGetOFDMControlRate: 6M\n");
+>>>>>>> v3.18
 	return (unsigned short)RATE_24M;
 }
 
@@ -1675,16 +2167,23 @@ unsigned short CARDwGetOFDMControlRate(void *pDeviceHandler, unsigned short wRat
  * Return Value: None.
  *
  */
+<<<<<<< HEAD
 void CARDvSetRSPINF(void *pDeviceHandler, CARD_PHY_TYPE ePHYType)
 {
 	PSDevice pDevice = (PSDevice) pDeviceHandler;
 	unsigned char byServ = 0x00, bySignal = 0x00; //For CCK
 	unsigned short wLen = 0x0000;
+=======
+void CARDvSetRSPINF(struct vnt_private *pDevice, CARD_PHY_TYPE ePHYType)
+{
+	union vnt_phy_field_swap phy;
+>>>>>>> v3.18
 	unsigned char byTxRate, byRsvTime;             //For OFDM
 
 	//Set to Page1
 	MACvSelectPage1(pDevice->PortOffset);
 
+<<<<<<< HEAD
 	//RSPINF_b_1
 	BBvCalculateParameter(pDevice,
 			      14,
@@ -1729,6 +2228,45 @@ void CARDvSetRSPINF(void *pDeviceHandler, CARD_PHY_TYPE ePHYType)
 );
 
 	VNSvOutPortD(pDevice->PortOffset + MAC_REG_RSPINF_B_11, MAKEDWORD(wLen, MAKEWORD(bySignal, byServ)));
+=======
+	/* RSPINF_b_1 */
+	vnt_get_phy_field(pDevice, 14,
+			  CARDwGetCCKControlRate(pDevice, RATE_1M),
+			  PK_TYPE_11B, &phy.field_read);
+
+	 /* swap over to get correct write order */
+	swap(phy.swap[0], phy.swap[1]);
+
+	VNSvOutPortD(pDevice->PortOffset + MAC_REG_RSPINF_B_1, phy.field_write);
+
+	/* RSPINF_b_2 */
+	vnt_get_phy_field(pDevice, 14,
+			  CARDwGetCCKControlRate(pDevice, RATE_2M),
+			  PK_TYPE_11B, &phy.field_read);
+
+	swap(phy.swap[0], phy.swap[1]);
+
+	VNSvOutPortD(pDevice->PortOffset + MAC_REG_RSPINF_B_2, phy.field_write);
+
+	/* RSPINF_b_5 */
+	vnt_get_phy_field(pDevice, 14,
+			  CARDwGetCCKControlRate(pDevice, RATE_5M),
+			  PK_TYPE_11B, &phy.field_read);
+
+	swap(phy.swap[0], phy.swap[1]);
+
+	VNSvOutPortD(pDevice->PortOffset + MAC_REG_RSPINF_B_5, phy.field_write);
+
+	/* RSPINF_b_11 */
+	vnt_get_phy_field(pDevice, 14,
+			  CARDwGetCCKControlRate(pDevice, RATE_11M),
+			  PK_TYPE_11B, &phy.field_read);
+
+	swap(phy.swap[0], phy.swap[1]);
+
+	VNSvOutPortD(pDevice->PortOffset + MAC_REG_RSPINF_B_11, phy.field_write);
+
+>>>>>>> v3.18
 	//RSPINF_a_6
 	s_vCalculateOFDMRParameter(RATE_6M,
 				   ePHYType,
@@ -1800,12 +2338,21 @@ void CARDvSetRSPINF(void *pDeviceHandler, CARD_PHY_TYPE ePHYType)
  * Return Value: None.
  *
  */
+<<<<<<< HEAD
 void vUpdateIFS(void *pDeviceHandler)
 {
 	//Set SIFS, DIFS, EIFS, SlotTime, CwMin
 	PSDevice pDevice = (PSDevice) pDeviceHandler;
 
 	unsigned char byMaxMin = 0;
+=======
+void vUpdateIFS(struct vnt_private *pDevice)
+{
+	/* Set SIFS, DIFS, EIFS, SlotTime, CwMin */
+
+	unsigned char byMaxMin = 0;
+
+>>>>>>> v3.18
 	if (pDevice->byPacketType == PK_TYPE_11A) {//0000 0000 0000 0000,11a
 		pDevice->uSlot = C_SLOT_SHORT;
 		pDevice->uSIFS = C_SIFS_A;
@@ -1820,11 +2367,19 @@ void vUpdateIFS(void *pDeviceHandler)
 		byMaxMin = 5;
 	} else { // PK_TYPE_11GA & PK_TYPE_11GB
 		pDevice->uSIFS = C_SIFS_BG;
+<<<<<<< HEAD
 		if (pDevice->bShortSlotTime) {
 			pDevice->uSlot = C_SLOT_SHORT;
 		} else {
 			pDevice->uSlot = C_SLOT_LONG;
 		}
+=======
+		if (pDevice->bShortSlotTime)
+			pDevice->uSlot = C_SLOT_SHORT;
+		else
+			pDevice->uSlot = C_SLOT_LONG;
+
+>>>>>>> v3.18
 		pDevice->uDIFS = C_SIFS_BG + 2*pDevice->uSlot;
 		if (pDevice->wBasicRate & 0x0150) { //0000 0001 0101 0000,24M,12M,6M
 			pDevice->uCwMin = C_CWMIN_A;
@@ -1851,9 +2406,14 @@ void vUpdateIFS(void *pDeviceHandler)
 	VNSvOutPortB(pDevice->PortOffset + MAC_REG_CWMAXMIN0, (unsigned char)byMaxMin);
 }
 
+<<<<<<< HEAD
 void CARDvUpdateBasicTopRate(void *pDeviceHandler)
 {
 	PSDevice pDevice = (PSDevice) pDeviceHandler;
+=======
+void CARDvUpdateBasicTopRate(struct vnt_private *pDevice)
+{
+>>>>>>> v3.18
 	unsigned char byTopOFDM = RATE_24M, byTopCCK = RATE_1M;
 	unsigned char ii;
 
@@ -1877,6 +2437,7 @@ void CARDvUpdateBasicTopRate(void *pDeviceHandler)
 	pDevice->byTopCCKBasicRate = byTopCCK;
 }
 
+<<<<<<< HEAD
 /*
  * Description: Set NIC Tx Basic Rate
  *
@@ -1893,6 +2454,10 @@ void CARDvUpdateBasicTopRate(void *pDeviceHandler)
 bool CARDbAddBasicRate(void *pDeviceHandler, unsigned short wRateIdx)
 {
 	PSDevice pDevice = (PSDevice) pDeviceHandler;
+=======
+bool CARDbAddBasicRate(struct vnt_private *pDevice, unsigned short wRateIdx)
+{
+>>>>>>> v3.18
 	unsigned short wRate = (unsigned short)(1<<wRateIdx);
 
 	pDevice->wBasicRate |= wRate;
@@ -1903,9 +2468,14 @@ bool CARDbAddBasicRate(void *pDeviceHandler, unsigned short wRateIdx)
 	return true;
 }
 
+<<<<<<< HEAD
 bool CARDbIsOFDMinBasicRate(void *pDeviceHandler)
 {
 	PSDevice pDevice = (PSDevice)pDeviceHandler;
+=======
+bool CARDbIsOFDMinBasicRate(struct vnt_private *pDevice)
+{
+>>>>>>> v3.18
 	int ii;
 
 	for (ii = RATE_54M; ii >= RATE_6M; ii--) {
@@ -1915,6 +2485,7 @@ bool CARDbIsOFDMinBasicRate(void *pDeviceHandler)
 	return false;
 }
 
+<<<<<<< HEAD
 unsigned char CARDbyGetPktType(void *pDeviceHandler)
 {
 	PSDevice pDevice = (PSDevice) pDeviceHandler;
@@ -1926,6 +2497,17 @@ unsigned char CARDbyGetPktType(void *pDeviceHandler)
 	} else {
 		return PK_TYPE_11GB;
 	}
+=======
+unsigned char CARDbyGetPktType(struct vnt_private *pDevice)
+{
+
+	if (pDevice->byBBType == BB_TYPE_11A || pDevice->byBBType == BB_TYPE_11B)
+		return (unsigned char)pDevice->byBBType;
+	else if (CARDbIsOFDMinBasicRate((void *)pDevice))
+		return PK_TYPE_11GA;
+	else
+		return PK_TYPE_11GB;
+>>>>>>> v3.18
 }
 
 /*
@@ -1941,7 +2523,11 @@ unsigned char CARDbyGetPktType(void *pDeviceHandler)
  * Return Value: none
  *
  */
+<<<<<<< HEAD
 void CARDvSetLoopbackMode(unsigned long dwIoBase, unsigned short wLoopbackMode)
+=======
+void CARDvSetLoopbackMode(void __iomem *dwIoBase, unsigned short wLoopbackMode)
+>>>>>>> v3.18
 {
 	switch (wLoopbackMode) {
 	case CARD_LB_NONE:
@@ -1969,9 +2555,14 @@ void CARDvSetLoopbackMode(unsigned long dwIoBase, unsigned short wLoopbackMode)
  * Return Value: none
  *
  */
+<<<<<<< HEAD
 bool CARDbSoftwareReset(void *pDeviceHandler)
 {
 	PSDevice pDevice = (PSDevice) pDeviceHandler;
+=======
+bool CARDbSoftwareReset(struct vnt_private *pDevice)
+{
+>>>>>>> v3.18
 
 	// reset MAC
 	if (!MACbSafeSoftwareReset(pDevice->PortOffset))
@@ -1995,6 +2586,7 @@ bool CARDbSoftwareReset(void *pDeviceHandler)
  * Return Value: TSF Offset value
  *
  */
+<<<<<<< HEAD
 QWORD CARDqGetTSFOffset(unsigned char byRxRate, QWORD qwTSF1, QWORD qwTSF2)
 {
 	QWORD   qwTSFOffset;
@@ -2014,6 +2606,19 @@ QWORD CARDqGetTSFOffset(unsigned char byRxRate, QWORD qwTSF1, QWORD qwTSF2)
 	} else {
 		HIDWORD(qwTSFOffset) = HIDWORD(qwTSF1) - HIDWORD(qwTSF2);
 	};
+=======
+u64 CARDqGetTSFOffset(unsigned char byRxRate, u64 qwTSF1, u64 qwTSF2)
+{
+	u64 qwTSFOffset = 0;
+	unsigned short wRxBcnTSFOffst = 0;
+
+	wRxBcnTSFOffst = cwRXBCNTSFOff[byRxRate%MAX_RATE];
+
+	qwTSF2 += (u64)wRxBcnTSFOffst;
+
+	qwTSFOffset = qwTSF1 - qwTSF2;
+
+>>>>>>> v3.18
 	return qwTSFOffset;
 }
 
@@ -2030,7 +2635,11 @@ QWORD CARDqGetTSFOffset(unsigned char byRxRate, QWORD qwTSF1, QWORD qwTSF2)
  * Return Value: true if success; otherwise false
  *
  */
+<<<<<<< HEAD
 bool CARDbGetCurrentTSF(unsigned long dwIoBase, PQWORD pqwCurrTSF)
+=======
+bool CARDbGetCurrentTSF(void __iomem *dwIoBase, u64 *pqwCurrTSF)
+>>>>>>> v3.18
 {
 	unsigned short ww;
 	unsigned char byData;
@@ -2043,8 +2652,13 @@ bool CARDbGetCurrentTSF(unsigned long dwIoBase, PQWORD pqwCurrTSF)
 	}
 	if (ww == W_MAX_TIMEOUT)
 		return false;
+<<<<<<< HEAD
 	VNSvInPortD(dwIoBase + MAC_REG_TSFCNTR, &LODWORD(*pqwCurrTSF));
 	VNSvInPortD(dwIoBase + MAC_REG_TSFCNTR + 4, &HIDWORD(*pqwCurrTSF));
+=======
+	VNSvInPortD(dwIoBase + MAC_REG_TSFCNTR, (u32 *)pqwCurrTSF);
+	VNSvInPortD(dwIoBase + MAC_REG_TSFCNTR + 4, (u32 *)pqwCurrTSF + 1);
+>>>>>>> v3.18
 
 	return true;
 }
@@ -2063,6 +2677,7 @@ bool CARDbGetCurrentTSF(unsigned long dwIoBase, PQWORD pqwCurrTSF)
  * Return Value: TSF value of next Beacon
  *
  */
+<<<<<<< HEAD
 QWORD CARDqGetNextTBTT(QWORD qwTSF, unsigned short wBeaconInterval)
 {
 	unsigned int uLowNextTBTT;
@@ -2087,6 +2702,22 @@ QWORD CARDqGetNextTBTT(QWORD qwTSF, unsigned short wBeaconInterval)
 		HIDWORD(qwTSF)++;
 
 	LODWORD(qwTSF) = uLowNextTBTT + uLowRemain;
+=======
+u64 CARDqGetNextTBTT(u64 qwTSF, unsigned short wBeaconInterval)
+{
+	u32 beacon_int;
+
+	beacon_int = wBeaconInterval * 1024;
+
+	/* Next TBTT =
+	*	((local_current_TSF / beacon_interval) + 1) * beacon_interval
+	*/
+	if (beacon_int) {
+		do_div(qwTSF, beacon_int);
+		qwTSF += 1;
+		qwTSF *= beacon_int;
+	}
+>>>>>>> v3.18
 
 	return qwTSF;
 }
@@ -2105,6 +2736,7 @@ QWORD CARDqGetNextTBTT(QWORD qwTSF, unsigned short wBeaconInterval)
  * Return Value: none
  *
  */
+<<<<<<< HEAD
 void CARDvSetFirstNextTBTT(unsigned long dwIoBase, unsigned short wBeaconInterval)
 {
 	QWORD   qwNextTBTT;
@@ -2119,6 +2751,19 @@ void CARDvSetFirstNextTBTT(unsigned long dwIoBase, unsigned short wBeaconInterva
 	MACvRegBitsOn(dwIoBase, MAC_REG_TFTCTL, TFTCTL_TBTTSYNCEN);
 	//DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Card:First Next TBTT[%8xh:%8xh] \n", HIDWORD(qwNextTBTT), LODWORD(qwNextTBTT));
 	return;
+=======
+void CARDvSetFirstNextTBTT(void __iomem *dwIoBase, unsigned short wBeaconInterval)
+{
+	u64 qwNextTBTT = 0;
+
+	CARDbGetCurrentTSF(dwIoBase, &qwNextTBTT); //Get Local TSF counter
+
+	qwNextTBTT = CARDqGetNextTBTT(qwNextTBTT, wBeaconInterval);
+	// Set NextTBTT
+	VNSvOutPortD(dwIoBase + MAC_REG_NEXTTBTT, (u32)qwNextTBTT);
+	VNSvOutPortD(dwIoBase + MAC_REG_NEXTTBTT + 4, (u32)(qwNextTBTT >> 32));
+	MACvRegBitsOn(dwIoBase, MAC_REG_TFTCTL, TFTCTL_TBTTSYNCEN);
+>>>>>>> v3.18
 }
 
 /*
@@ -2136,6 +2781,7 @@ void CARDvSetFirstNextTBTT(unsigned long dwIoBase, unsigned short wBeaconInterva
  * Return Value: none
  *
  */
+<<<<<<< HEAD
 void CARDvUpdateNextTBTT(unsigned long dwIoBase, QWORD qwTSF, unsigned short wBeaconInterval)
 {
 	qwTSF = CARDqGetNextTBTT(qwTSF, wBeaconInterval);
@@ -2147,4 +2793,14 @@ void CARDvUpdateNextTBTT(unsigned long dwIoBase, QWORD qwTSF, unsigned short wBe
 		(unsigned int) HIDWORD(qwTSF), (unsigned int) LODWORD(qwTSF));
 
 	return;
+=======
+void CARDvUpdateNextTBTT(void __iomem *dwIoBase, u64 qwTSF, unsigned short wBeaconInterval)
+{
+	qwTSF = CARDqGetNextTBTT(qwTSF, wBeaconInterval);
+	// Set NextTBTT
+	VNSvOutPortD(dwIoBase + MAC_REG_NEXTTBTT, (u32)qwTSF);
+	VNSvOutPortD(dwIoBase + MAC_REG_NEXTTBTT + 4, (u32)(qwTSF >> 32));
+	MACvRegBitsOn(dwIoBase, MAC_REG_TFTCTL, TFTCTL_TBTTSYNCEN);
+	pr_debug("Card:Update Next TBTT[%8llx]\n", qwTSF);
+>>>>>>> v3.18
 }

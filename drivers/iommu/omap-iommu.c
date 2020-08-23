@@ -23,6 +23,13 @@
 #include <linux/spinlock.h>
 #include <linux/io.h>
 #include <linux/pm_runtime.h>
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+#include <linux/of_iommu.h>
+#include <linux/of_irq.h>
+#include <linux/of_platform.h>
+>>>>>>> v3.18
 
 #include <asm/cacheflush.h>
 
@@ -31,6 +38,12 @@
 #include "omap-iopgtable.h"
 #include "omap-iommu.h"
 
+<<<<<<< HEAD
+=======
+#define to_iommu(dev)							\
+	((struct omap_iommu *)platform_get_drvdata(to_platform_device(dev)))
+
+>>>>>>> v3.18
 #define for_each_iotlb_cr(obj, n, __i, cr)				\
 	for (__i = 0;							\
 	     (__i < (n)) && (cr = __iotlb_read_cr((obj), __i), true);	\
@@ -146,6 +159,7 @@ static int iommu_enable(struct omap_iommu *obj)
 	struct platform_device *pdev = to_platform_device(obj->dev);
 	struct iommu_platform_data *pdata = pdev->dev.platform_data;
 
+<<<<<<< HEAD
 	if (!pdata)
 		return -EINVAL;
 
@@ -153,6 +167,12 @@ static int iommu_enable(struct omap_iommu *obj)
 		return -ENODEV;
 
 	if (pdata->deassert_reset) {
+=======
+	if (!arch_iommu)
+		return -ENODEV;
+
+	if (pdata && pdata->deassert_reset) {
+>>>>>>> v3.18
 		err = pdata->deassert_reset(pdev, pdata->reset_name);
 		if (err) {
 			dev_err(obj->dev, "deassert_reset failed: %d\n", err);
@@ -172,14 +192,21 @@ static void iommu_disable(struct omap_iommu *obj)
 	struct platform_device *pdev = to_platform_device(obj->dev);
 	struct iommu_platform_data *pdata = pdev->dev.platform_data;
 
+<<<<<<< HEAD
 	if (!pdata)
 		return;
 
+=======
+>>>>>>> v3.18
 	arch_iommu->disable(obj);
 
 	pm_runtime_put_sync(obj->dev);
 
+<<<<<<< HEAD
 	if (pdata->assert_reset)
+=======
+	if (pdata && pdata->assert_reset)
+>>>>>>> v3.18
 		pdata->assert_reset(pdev, pdata->reset_name);
 }
 
@@ -394,6 +421,10 @@ static void flush_iotlb_page(struct omap_iommu *obj, u32 da)
 				__func__, start, da, bytes);
 			iotlb_load_cr(obj, &cr);
 			iommu_write_reg(obj, 1, MMU_FLUSH_ENTRY);
+<<<<<<< HEAD
+=======
+			break;
+>>>>>>> v3.18
 		}
 	}
 	pm_runtime_put_sync(obj->dev);
@@ -523,7 +554,12 @@ static void flush_iopte_range(u32 *first, u32 *last)
 static void iopte_free(u32 *iopte)
 {
 	/* Note: freed iopte's must be clean ready for re-use */
+<<<<<<< HEAD
 	kmem_cache_free(iopte_cachep, iopte);
+=======
+	if (iopte)
+		kmem_cache_free(iopte_cachep, iopte);
+>>>>>>> v3.18
 }
 
 static u32 *iopte_alloc(struct omap_iommu *obj, u32 *iopgd, u32 da)
@@ -833,16 +869,26 @@ static irqreturn_t iommu_fault_handler(int irq, void *data)
 	iopgd = iopgd_offset(obj, da);
 
 	if (!iopgd_is_table(*iopgd)) {
+<<<<<<< HEAD
 		dev_err(obj->dev, "%s: errs:0x%08x da:0x%08x pgd:0x%p "
 			"*pgd:px%08x\n", obj->name, errs, da, iopgd, *iopgd);
+=======
+		dev_err(obj->dev, "%s: errs:0x%08x da:0x%08x pgd:0x%p *pgd:px%08x\n",
+				obj->name, errs, da, iopgd, *iopgd);
+>>>>>>> v3.18
 		return IRQ_NONE;
 	}
 
 	iopte = iopte_offset(iopgd, da);
 
+<<<<<<< HEAD
 	dev_err(obj->dev, "%s: errs:0x%08x da:0x%08x pgd:0x%p *pgd:0x%08x "
 		"pte:0x%p *pte:0x%08x\n", obj->name, errs, da, iopgd, *iopgd,
 		iopte, *iopte);
+=======
+	dev_err(obj->dev, "%s: errs:0x%08x da:0x%08x pgd:0x%p *pgd:0x%08x pte:0x%p *pte:0x%08x\n",
+			obj->name, errs, da, iopgd, *iopgd, iopte, *iopte);
+>>>>>>> v3.18
 
 	return IRQ_NONE;
 }
@@ -864,7 +910,11 @@ static int device_match_by_alias(struct device *dev, void *data)
  **/
 static struct omap_iommu *omap_iommu_attach(const char *name, u32 *iopgd)
 {
+<<<<<<< HEAD
 	int err = -ENOMEM;
+=======
+	int err;
+>>>>>>> v3.18
 	struct device *dev;
 	struct omap_iommu *obj;
 
@@ -872,7 +922,11 @@ static struct omap_iommu *omap_iommu_attach(const char *name, u32 *iopgd)
 				(void *)name,
 				device_match_by_alias);
 	if (!dev)
+<<<<<<< HEAD
 		return NULL;
+=======
+		return ERR_PTR(-ENODEV);
+>>>>>>> v3.18
 
 	obj = to_iommu(dev);
 
@@ -891,17 +945,23 @@ static struct omap_iommu *omap_iommu_attach(const char *name, u32 *iopgd)
 		goto err_enable;
 	flush_iotlb_all(obj);
 
+<<<<<<< HEAD
 	if (!try_module_get(obj->owner))
 		goto err_module;
 
+=======
+>>>>>>> v3.18
 	spin_unlock(&obj->iommu_lock);
 
 	dev_dbg(obj->dev, "%s: %s\n", __func__, obj->name);
 	return obj;
 
+<<<<<<< HEAD
 err_module:
 	if (obj->refcount == 1)
 		iommu_disable(obj);
+=======
+>>>>>>> v3.18
 err_enable:
 	obj->refcount--;
 	spin_unlock(&obj->iommu_lock);
@@ -922,8 +982,11 @@ static void omap_iommu_detach(struct omap_iommu *obj)
 	if (--obj->refcount == 0)
 		iommu_disable(obj);
 
+<<<<<<< HEAD
 	module_put(obj->owner);
 
+=======
+>>>>>>> v3.18
 	obj->iopgd = NULL;
 
 	spin_unlock(&obj->iommu_lock);
@@ -941,6 +1004,7 @@ static int omap_iommu_probe(struct platform_device *pdev)
 	struct omap_iommu *obj;
 	struct resource *res;
 	struct iommu_platform_data *pdata = pdev->dev.platform_data;
+<<<<<<< HEAD
 
 	obj = kzalloc(sizeof(*obj) + MMU_REG_SIZE, GFP_KERNEL);
 	if (!obj)
@@ -986,6 +1050,49 @@ static int omap_iommu_probe(struct platform_device *pdev)
 			  dev_name(&pdev->dev), obj);
 	if (err < 0)
 		goto err_irq;
+=======
+	struct device_node *of = pdev->dev.of_node;
+
+	obj = devm_kzalloc(&pdev->dev, sizeof(*obj) + MMU_REG_SIZE, GFP_KERNEL);
+	if (!obj)
+		return -ENOMEM;
+
+	if (of) {
+		obj->name = dev_name(&pdev->dev);
+		obj->nr_tlb_entries = 32;
+		err = of_property_read_u32(of, "ti,#tlb-entries",
+					   &obj->nr_tlb_entries);
+		if (err && err != -EINVAL)
+			return err;
+		if (obj->nr_tlb_entries != 32 && obj->nr_tlb_entries != 8)
+			return -EINVAL;
+		if (of_find_property(of, "ti,iommu-bus-err-back", NULL))
+			obj->has_bus_err_back = MMU_GP_REG_BUS_ERR_BACK_EN;
+	} else {
+		obj->nr_tlb_entries = pdata->nr_tlb_entries;
+		obj->name = pdata->name;
+	}
+
+	obj->dev = &pdev->dev;
+	obj->ctx = (void *)obj + sizeof(*obj);
+
+	spin_lock_init(&obj->iommu_lock);
+	spin_lock_init(&obj->page_table_lock);
+
+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+	obj->regbase = devm_ioremap_resource(obj->dev, res);
+	if (IS_ERR(obj->regbase))
+		return PTR_ERR(obj->regbase);
+
+	irq = platform_get_irq(pdev, 0);
+	if (irq < 0)
+		return -ENODEV;
+
+	err = devm_request_irq(obj->dev, irq, iommu_fault_handler, IRQF_SHARED,
+			       dev_name(obj->dev), obj);
+	if (err < 0)
+		return err;
+>>>>>>> v3.18
 	platform_set_drvdata(pdev, obj);
 
 	pm_runtime_irq_safe(obj->dev);
@@ -993,6 +1100,7 @@ static int omap_iommu_probe(struct platform_device *pdev)
 
 	dev_info(&pdev->dev, "%s registered\n", obj->name);
 	return 0;
+<<<<<<< HEAD
 
 err_irq:
 	iounmap(obj->regbase);
@@ -1001,10 +1109,13 @@ err_ioremap:
 err_mem:
 	kfree(obj);
 	return err;
+=======
+>>>>>>> v3.18
 }
 
 static int omap_iommu_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	int irq;
 	struct resource *res;
 	struct omap_iommu *obj = platform_get_drvdata(pdev);
@@ -1026,11 +1137,35 @@ static int omap_iommu_remove(struct platform_device *pdev)
 	return 0;
 }
 
+=======
+	struct omap_iommu *obj = platform_get_drvdata(pdev);
+
+	iopgtable_clear_entry_all(obj);
+
+	pm_runtime_disable(obj->dev);
+
+	dev_info(&pdev->dev, "%s removed\n", obj->name);
+	return 0;
+}
+
+static const struct of_device_id omap_iommu_of_match[] = {
+	{ .compatible = "ti,omap2-iommu" },
+	{ .compatible = "ti,omap4-iommu" },
+	{ .compatible = "ti,dra7-iommu"	},
+	{},
+};
+MODULE_DEVICE_TABLE(of, omap_iommu_of_match);
+
+>>>>>>> v3.18
 static struct platform_driver omap_iommu_driver = {
 	.probe	= omap_iommu_probe,
 	.remove	= omap_iommu_remove,
 	.driver	= {
 		.name	= "omap-iommu",
+<<<<<<< HEAD
+=======
+		.of_match_table = of_match_ptr(omap_iommu_of_match),
+>>>>>>> v3.18
 	},
 };
 
@@ -1039,19 +1174,32 @@ static void iopte_cachep_ctor(void *iopte)
 	clean_dcache_area(iopte, IOPTE_TABLE_SIZE);
 }
 
+<<<<<<< HEAD
 static u32 iotlb_init_entry(struct iotlb_entry *e, u32 da, u32 pa,
 				   u32 flags)
+=======
+static u32 iotlb_init_entry(struct iotlb_entry *e, u32 da, u32 pa, int pgsz)
+>>>>>>> v3.18
 {
 	memset(e, 0, sizeof(*e));
 
 	e->da		= da;
 	e->pa		= pa;
+<<<<<<< HEAD
 	e->valid	= 1;
 	/* FIXME: add OMAP1 support */
 	e->pgsz		= flags & MMU_CAM_PGSZ_MASK;
 	e->endian	= flags & MMU_RAM_ENDIAN_MASK;
 	e->elsz		= flags & MMU_RAM_ELSZ_MASK;
 	e->mixed	= flags & MMU_RAM_MIXED_MASK;
+=======
+	e->valid	= MMU_CAM_V;
+	/* FIXME: add OMAP1 support */
+	e->pgsz		= pgsz;
+	e->endian	= MMU_RAM_ENDIAN_LITTLE;
+	e->elsz		= MMU_RAM_ELSZ_8;
+	e->mixed	= 0;
+>>>>>>> v3.18
 
 	return iopgsz_to_bytes(e->pgsz);
 }
@@ -1064,9 +1212,14 @@ static int omap_iommu_map(struct iommu_domain *domain, unsigned long da,
 	struct device *dev = oiommu->dev;
 	struct iotlb_entry e;
 	int omap_pgsz;
+<<<<<<< HEAD
 	u32 ret, flags;
 
 	/* we only support mapping a single iommu page for now */
+=======
+	u32 ret;
+
+>>>>>>> v3.18
 	omap_pgsz = bytes_to_iopgsz(bytes);
 	if (omap_pgsz < 0) {
 		dev_err(dev, "invalid size to map: %d\n", bytes);
@@ -1075,9 +1228,13 @@ static int omap_iommu_map(struct iommu_domain *domain, unsigned long da,
 
 	dev_dbg(dev, "mapping da 0x%lx to pa 0x%x size 0x%x\n", da, pa, bytes);
 
+<<<<<<< HEAD
 	flags = omap_pgsz | prot;
 
 	iotlb_init_entry(&e, da, pa, flags);
+=======
+	iotlb_init_entry(&e, da, pa, omap_pgsz);
+>>>>>>> v3.18
 
 	ret = omap_iopgtable_store_entry(oiommu, &e);
 	if (ret)
@@ -1106,6 +1263,14 @@ omap_iommu_attach_dev(struct iommu_domain *domain, struct device *dev)
 	struct omap_iommu_arch_data *arch_data = dev->archdata.iommu;
 	int ret = 0;
 
+<<<<<<< HEAD
+=======
+	if (!arch_data || !arch_data->name) {
+		dev_err(dev, "device doesn't have an associated iommu\n");
+		return -EINVAL;
+	}
+
+>>>>>>> v3.18
 	spin_lock(&omap_domain->lock);
 
 	/* only a single device is supported per domain for now */
@@ -1235,19 +1400,30 @@ static phys_addr_t omap_iommu_iova_to_phys(struct iommu_domain *domain,
 		else if (iopte_is_large(*pte))
 			ret = omap_iommu_translate(*pte, da, IOLARGE_MASK);
 		else
+<<<<<<< HEAD
 			dev_err(dev, "bogus pte 0x%x, da 0x%lx", *pte, da);
+=======
+			dev_err(dev, "bogus pte 0x%x, da 0x%llx", *pte,
+							(unsigned long long)da);
+>>>>>>> v3.18
 	} else {
 		if (iopgd_is_section(*pgd))
 			ret = omap_iommu_translate(*pgd, da, IOSECTION_MASK);
 		else if (iopgd_is_super(*pgd))
 			ret = omap_iommu_translate(*pgd, da, IOSUPER_MASK);
 		else
+<<<<<<< HEAD
 			dev_err(dev, "bogus pgd 0x%x, da 0x%lx", *pgd, da);
+=======
+			dev_err(dev, "bogus pgd 0x%x, da 0x%llx", *pgd,
+							(unsigned long long)da);
+>>>>>>> v3.18
 	}
 
 	return ret;
 }
 
+<<<<<<< HEAD
 static int omap_iommu_domain_has_cap(struct iommu_domain *domain,
 				    unsigned long cap)
 {
@@ -1255,6 +1431,59 @@ static int omap_iommu_domain_has_cap(struct iommu_domain *domain,
 }
 
 static struct iommu_ops omap_iommu_ops = {
+=======
+static int omap_iommu_add_device(struct device *dev)
+{
+	struct omap_iommu_arch_data *arch_data;
+	struct device_node *np;
+	struct platform_device *pdev;
+
+	/*
+	 * Allocate the archdata iommu structure for DT-based devices.
+	 *
+	 * TODO: Simplify this when removing non-DT support completely from the
+	 * IOMMU users.
+	 */
+	if (!dev->of_node)
+		return 0;
+
+	np = of_parse_phandle(dev->of_node, "iommus", 0);
+	if (!np)
+		return 0;
+
+	pdev = of_find_device_by_node(np);
+	if (WARN_ON(!pdev)) {
+		of_node_put(np);
+		return -EINVAL;
+	}
+
+	arch_data = kzalloc(sizeof(*arch_data), GFP_KERNEL);
+	if (!arch_data) {
+		of_node_put(np);
+		return -ENOMEM;
+	}
+
+	arch_data->name = kstrdup(dev_name(&pdev->dev), GFP_KERNEL);
+	dev->archdata.iommu = arch_data;
+
+	of_node_put(np);
+
+	return 0;
+}
+
+static void omap_iommu_remove_device(struct device *dev)
+{
+	struct omap_iommu_arch_data *arch_data = dev->archdata.iommu;
+
+	if (!dev->of_node || !arch_data)
+		return;
+
+	kfree(arch_data->name);
+	kfree(arch_data);
+}
+
+static const struct iommu_ops omap_iommu_ops = {
+>>>>>>> v3.18
 	.domain_init	= omap_iommu_domain_init,
 	.domain_destroy	= omap_iommu_domain_destroy,
 	.attach_dev	= omap_iommu_attach_dev,
@@ -1262,7 +1491,12 @@ static struct iommu_ops omap_iommu_ops = {
 	.map		= omap_iommu_map,
 	.unmap		= omap_iommu_unmap,
 	.iova_to_phys	= omap_iommu_iova_to_phys,
+<<<<<<< HEAD
 	.domain_has_cap	= omap_iommu_domain_has_cap,
+=======
+	.add_device	= omap_iommu_add_device,
+	.remove_device	= omap_iommu_remove_device,
+>>>>>>> v3.18
 	.pgsize_bitmap	= OMAP_IOMMU_PGSIZES,
 };
 

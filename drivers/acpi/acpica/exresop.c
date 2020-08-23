@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -307,7 +311,10 @@ acpi_ex_resolve_operands(u16 opcode,
 		case ARGI_TARGETREF:	/* Allows implicit conversion rules before store */
 		case ARGI_FIXED_TARGET:	/* No implicit conversion before store to target */
 		case ARGI_SIMPLE_TARGET:	/* Name, Local, or arg - no implicit conversion  */
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 			/*
 			 * Need an operand of type ACPI_TYPE_LOCAL_REFERENCE
 			 * A Namespace Node is OK as-is
@@ -326,7 +333,10 @@ acpi_ex_resolve_operands(u16 opcode,
 			goto next_operand;
 
 		case ARGI_DATAREFOBJ:	/* Store operator only */
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 			/*
 			 * We don't want to resolve index_op reference objects during
 			 * a store because this would be an implicit de_ref_of operation.
@@ -343,7 +353,13 @@ acpi_ex_resolve_operands(u16 opcode,
 			break;
 
 		default:
+<<<<<<< HEAD
 			/* All cases covered above */
+=======
+
+			/* All cases covered above */
+
+>>>>>>> v3.18
 			break;
 		}
 
@@ -433,7 +449,10 @@ acpi_ex_resolve_operands(u16 opcode,
 			goto next_operand;
 
 		case ARGI_BUFFER:
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 			/*
 			 * Need an operand of type ACPI_TYPE_BUFFER,
 			 * But we can implicitly convert from a STRING or INTEGER
@@ -459,7 +478,10 @@ acpi_ex_resolve_operands(u16 opcode,
 			goto next_operand;
 
 		case ARGI_STRING:
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 			/*
 			 * Need an operand of type ACPI_TYPE_STRING,
 			 * But we can implicitly convert from a BUFFER or INTEGER
@@ -562,6 +584,10 @@ acpi_ex_resolve_operands(u16 opcode,
 				break;
 
 			default:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 				ACPI_ERROR((AE_INFO,
 					    "Needed [Buffer/String/Package/Reference], found [%s] %p",
 					    acpi_ut_get_object_type_name
@@ -584,6 +610,10 @@ acpi_ex_resolve_operands(u16 opcode,
 				break;
 
 			default:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 				ACPI_ERROR((AE_INFO,
 					    "Needed [Buffer/String/Package], found [%s] %p",
 					    acpi_ut_get_object_type_name
@@ -605,6 +635,10 @@ acpi_ex_resolve_operands(u16 opcode,
 				break;
 
 			default:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 				ACPI_ERROR((AE_INFO,
 					    "Needed [Region/Buffer], found [%s] %p",
 					    acpi_ut_get_object_type_name
@@ -682,7 +716,11 @@ acpi_ex_resolve_operands(u16 opcode,
 			return_ACPI_STATUS(status);
 		}
 
+<<<<<<< HEAD
 	      next_operand:
+=======
+next_operand:
+>>>>>>> v3.18
 		/*
 		 * If more operands needed, decrement stack_ptr to point
 		 * to next operand on stack

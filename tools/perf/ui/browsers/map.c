@@ -18,6 +18,7 @@ struct map_browser {
 	u8		  addrlen;
 };
 
+<<<<<<< HEAD
 static void map_browser__write(struct ui_browser *self, void *nd, int row)
 {
 	struct symbol *sym = rb_entry(nd, struct symbol, rb_node);
@@ -26,22 +27,45 @@ static void map_browser__write(struct ui_browser *self, void *nd, int row)
 	int width;
 
 	ui_browser__set_percent_color(self, 0, current_entry);
+=======
+static void map_browser__write(struct ui_browser *browser, void *nd, int row)
+{
+	struct symbol *sym = rb_entry(nd, struct symbol, rb_node);
+	struct map_browser *mb = container_of(browser, struct map_browser, b);
+	bool current_entry = ui_browser__is_current_entry(browser, row);
+	int width;
+
+	ui_browser__set_percent_color(browser, 0, current_entry);
+>>>>>>> v3.18
 	slsmg_printf("%*" PRIx64 " %*" PRIx64 " %c ",
 		     mb->addrlen, sym->start, mb->addrlen, sym->end,
 		     sym->binding == STB_GLOBAL ? 'g' :
 		     sym->binding == STB_LOCAL  ? 'l' : 'w');
+<<<<<<< HEAD
 	width = self->width - ((mb->addrlen * 2) + 4);
+=======
+	width = browser->width - ((mb->addrlen * 2) + 4);
+>>>>>>> v3.18
 	if (width > 0)
 		slsmg_write_nstring(sym->name, width);
 }
 
 /* FIXME uber-kludgy, see comment on cmd_report... */
+<<<<<<< HEAD
 static u32 *symbol__browser_index(struct symbol *self)
 {
 	return ((void *)self) - sizeof(struct rb_node) - sizeof(u32);
 }
 
 static int map_browser__search(struct map_browser *self)
+=======
+static u32 *symbol__browser_index(struct symbol *browser)
+{
+	return ((void *)browser) - sizeof(struct rb_node) - sizeof(u32);
+}
+
+static int map_browser__search(struct map_browser *browser)
+>>>>>>> v3.18
 {
 	char target[512];
 	struct symbol *sym;
@@ -53,37 +77,64 @@ static int map_browser__search(struct map_browser *self)
 
 	if (target[0] == '0' && tolower(target[1]) == 'x') {
 		u64 addr = strtoull(target, NULL, 16);
+<<<<<<< HEAD
 		sym = map__find_symbol(self->map, addr, NULL);
 	} else
 		sym = map__find_symbol_by_name(self->map, target, NULL);
+=======
+		sym = map__find_symbol(browser->map, addr, NULL);
+	} else
+		sym = map__find_symbol_by_name(browser->map, target, NULL);
+>>>>>>> v3.18
 
 	if (sym != NULL) {
 		u32 *idx = symbol__browser_index(sym);
 
+<<<<<<< HEAD
 		self->b.top = &sym->rb_node;
 		self->b.index = self->b.top_idx = *idx;
+=======
+		browser->b.top = &sym->rb_node;
+		browser->b.index = browser->b.top_idx = *idx;
+>>>>>>> v3.18
 	} else
 		ui_helpline__fpush("%s not found!", target);
 
 	return 0;
 }
 
+<<<<<<< HEAD
 static int map_browser__run(struct map_browser *self)
 {
 	int key;
 
 	if (ui_browser__show(&self->b, self->map->dso->long_name,
+=======
+static int map_browser__run(struct map_browser *browser)
+{
+	int key;
+
+	if (ui_browser__show(&browser->b, browser->map->dso->long_name,
+>>>>>>> v3.18
 			     "Press <- or ESC to exit, %s / to search",
 			     verbose ? "" : "restart with -v to use") < 0)
 		return -1;
 
 	while (1) {
+<<<<<<< HEAD
 		key = ui_browser__run(&self->b, 0);
+=======
+		key = ui_browser__run(&browser->b, 0);
+>>>>>>> v3.18
 
 		switch (key) {
 		case '/':
 			if (verbose)
+<<<<<<< HEAD
 				map_browser__search(self);
+=======
+				map_browser__search(browser);
+>>>>>>> v3.18
 		default:
 			break;
                 case K_LEFT:
@@ -94,6 +145,7 @@ static int map_browser__run(struct map_browser *self)
 		}
 	}
 out:
+<<<<<<< HEAD
 	ui_browser__hide(&self->b);
 	return key;
 }
@@ -103,11 +155,26 @@ int map__browse(struct map *self)
 	struct map_browser mb = {
 		.b = {
 			.entries = &self->dso->symbols[self->type],
+=======
+	ui_browser__hide(&browser->b);
+	return key;
+}
+
+int map__browse(struct map *map)
+{
+	struct map_browser mb = {
+		.b = {
+			.entries = &map->dso->symbols[map->type],
+>>>>>>> v3.18
 			.refresh = ui_browser__rb_tree_refresh,
 			.seek	 = ui_browser__rb_tree_seek,
 			.write	 = map_browser__write,
 		},
+<<<<<<< HEAD
 		.map = self,
+=======
+		.map = map,
+>>>>>>> v3.18
 	};
 	struct rb_node *nd;
 	char tmp[BITS_PER_LONG / 4];

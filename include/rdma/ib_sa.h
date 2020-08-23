@@ -137,12 +137,20 @@ struct ib_sa_path_rec {
 	union ib_gid sgid;
 	__be16       dlid;
 	__be16       slid;
+<<<<<<< HEAD
 	u8           raw_traffic;
+=======
+	int          raw_traffic;
+>>>>>>> v3.18
 	/* reserved */
 	__be32       flow_label;
 	u8           hop_limit;
 	u8           traffic_class;
+<<<<<<< HEAD
 	u8           reversible;
+=======
+	int          reversible;
+>>>>>>> v3.18
 	u8           numb_path;
 	__be16       pkey;
 	__be16       qos_class;
@@ -154,6 +162,12 @@ struct ib_sa_path_rec {
 	u8           packet_life_time_selector;
 	u8           packet_life_time;
 	u8           preference;
+<<<<<<< HEAD
+=======
+	u8           smac[ETH_ALEN];
+	u8           dmac[ETH_ALEN];
+	u16	     vlan_id;
+>>>>>>> v3.18
 };
 
 #define IB_SA_MCMEMBER_REC_MGID				IB_SA_COMP_MASK( 0)
@@ -193,7 +207,11 @@ struct ib_sa_mcmember_rec {
 	u8           hop_limit;
 	u8           scope;
 	u8           join_state;
+<<<<<<< HEAD
 	u8           proxy_join;
+=======
+	int          proxy_join;
+>>>>>>> v3.18
 };
 
 /* Service Record Component Mask Sec 15.2.5.14 Ver 1.1	*/
@@ -402,6 +420,15 @@ int ib_init_ah_from_path(struct ib_device *device, u8 port_num,
 			 struct ib_ah_attr *ah_attr);
 
 /**
+<<<<<<< HEAD
+=======
+ * ib_sa_pack_path - Conert a path record from struct ib_sa_path_rec
+ * to IB MAD wire format.
+ */
+void ib_sa_pack_path(struct ib_sa_path_rec *rec, void *attribute);
+
+/**
+>>>>>>> v3.18
  * ib_sa_unpack_path - Convert a path record from MAD format to struct
  * ib_sa_path_rec.
  */
@@ -418,4 +445,8 @@ int ib_sa_guid_info_rec_query(struct ib_sa_client *client,
 					       void *context),
 			      void *context,
 			      struct ib_sa_query **sa_query);
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 #endif /* IB_SA_H */

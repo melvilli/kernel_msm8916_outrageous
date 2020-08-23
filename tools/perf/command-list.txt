@@ -15,7 +15,10 @@ perf-kvm			mainporcelain common
 perf-list			mainporcelain common
 perf-lock			mainporcelain common
 perf-mem			mainporcelain common
+<<<<<<< HEAD
 perf-periodic			mainporcelain common
+=======
+>>>>>>> v3.18
 perf-probe			mainporcelain full
 perf-record			mainporcelain common
 perf-report			mainporcelain common

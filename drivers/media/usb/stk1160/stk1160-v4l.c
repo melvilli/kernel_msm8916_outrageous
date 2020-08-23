@@ -31,7 +31,10 @@
 #include <media/v4l2-ioctl.h>
 #include <media/v4l2-fh.h>
 #include <media/v4l2-event.h>
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 #include <media/videobuf2-vmalloc.h>
 
 #include <media/saa7115.h>
@@ -245,11 +248,14 @@ static int stk1160_stop_streaming(struct stk1160 *dev)
 	if (mutex_lock_interruptible(&dev->v4l_lock))
 		return -ERESTARTSYS;
 
+<<<<<<< HEAD
 	/*
 	 * Once URBs are cancelled, the URB complete handler
 	 * won't be running. This is required to safely release the
 	 * current buffer (dev->isoc_ctl.buf).
 	 */
+=======
+>>>>>>> v3.18
 	stk1160_cancel_isoc(dev);
 
 	/*
@@ -385,6 +391,12 @@ static int vidioc_s_std(struct file *file, void *priv, v4l2_std_id norm)
 	struct stk1160 *dev = video_drvdata(file);
 	struct vb2_queue *q = &dev->vb_vidq;
 
+<<<<<<< HEAD
+=======
+	if (dev->norm == norm)
+		return 0;
+
+>>>>>>> v3.18
 	if (vb2_is_busy(q))
 		return -EBUSY;
 
@@ -409,7 +421,11 @@ static int vidioc_s_std(struct file *file, void *priv, v4l2_std_id norm)
 
 	stk1160_set_std(dev);
 
+<<<<<<< HEAD
 	v4l2_device_call_all(&dev->v4l2_dev, 0, core, s_std,
+=======
+	v4l2_device_call_all(&dev->v4l2_dev, 0, video, s_std,
+>>>>>>> v3.18
 			dev->norm);
 
 	return 0;
@@ -446,9 +462,12 @@ static int vidioc_s_input(struct file *file, void *priv, unsigned int i)
 {
 	struct stk1160 *dev = video_drvdata(file);
 
+<<<<<<< HEAD
 	if (vb2_is_busy(&dev->vb_vidq))
 		return -EBUSY;
 
+=======
+>>>>>>> v3.18
 	if (i > STK1160_MAX_INPUT)
 		return -EINVAL;
 
@@ -459,6 +478,7 @@ static int vidioc_s_input(struct file *file, void *priv, unsigned int i)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int vidioc_g_chip_ident(struct file *file, void *priv,
 	       struct v4l2_dbg_chip_ident *chip)
 {
@@ -472,6 +492,8 @@ static int vidioc_g_chip_ident(struct file *file, void *priv,
 	}
 }
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 static int vidioc_g_register(struct file *file, void *priv,
 			     struct v4l2_dbg_register *reg)
@@ -480,6 +502,7 @@ static int vidioc_g_register(struct file *file, void *priv,
 	int rc;
 	u8 val;
 
+<<<<<<< HEAD
 	switch (reg->match.type) {
 	case V4L2_CHIP_MATCH_I2C_DRIVER:
 		v4l2_device_call_all(&dev->v4l2_dev, 0, core, g_register, reg);
@@ -493,6 +516,8 @@ static int vidioc_g_register(struct file *file, void *priv,
 			return -EINVAL;
 	}
 
+=======
+>>>>>>> v3.18
 	/* Match host */
 	rc = stk1160_read_reg(dev, reg->reg, &val);
 	reg->val = val;
@@ -506,6 +531,7 @@ static int vidioc_s_register(struct file *file, void *priv,
 {
 	struct stk1160 *dev = video_drvdata(file);
 
+<<<<<<< HEAD
 	switch (reg->match.type) {
 	case V4L2_CHIP_MATCH_I2C_DRIVER:
 		v4l2_device_call_all(&dev->v4l2_dev, 0, core, s_register, reg);
@@ -519,6 +545,8 @@ static int vidioc_s_register(struct file *file, void *priv,
 			return -EINVAL;
 	}
 
+=======
+>>>>>>> v3.18
 	/* Match host */
 	return stk1160_write_reg(dev, reg->reg, cpu_to_le16(reg->val));
 }
@@ -548,7 +576,10 @@ static const struct v4l2_ioctl_ops stk1160_ioctl_ops = {
 	.vidioc_log_status  = v4l2_ctrl_log_status,
 	.vidioc_subscribe_event = v4l2_ctrl_subscribe_event,
 	.vidioc_unsubscribe_event = v4l2_event_unsubscribe,
+<<<<<<< HEAD
 	.vidioc_g_chip_ident = vidioc_g_chip_ident,
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 	.vidioc_g_register = vidioc_g_register,
@@ -629,10 +660,17 @@ static int start_streaming(struct vb2_queue *vq, unsigned int count)
 }
 
 /* abort streaming and wait for last buffer */
+<<<<<<< HEAD
 static int stop_streaming(struct vb2_queue *vq)
 {
 	struct stk1160 *dev = vb2_get_drv_priv(vq);
 	return stk1160_stop_streaming(dev);
+=======
+static void stop_streaming(struct vb2_queue *vq)
+{
+	struct stk1160 *dev = vb2_get_drv_priv(vq);
+	stk1160_stop_streaming(dev);
+>>>>>>> v3.18
 }
 
 static struct vb2_ops stk1160_video_qops = {
@@ -670,6 +708,7 @@ void stk1160_clear_queue(struct stk1160 *dev)
 		stk1160_info("buffer [%p/%d] aborted\n",
 				buf, buf->vb.v4l2_buf.index);
 	}
+<<<<<<< HEAD
 
 	/* It's important to release the current buffer */
 	if (dev->isoc_ctl.buf) {
@@ -680,6 +719,10 @@ void stk1160_clear_queue(struct stk1160 *dev)
 		stk1160_info("buffer [%p/%d] aborted\n",
 				buf, buf->vb.v4l2_buf.index);
 	}
+=======
+	/* It's important to clear current buffer */
+	dev->isoc_ctl.buf = NULL;
+>>>>>>> v3.18
 	spin_unlock_irqrestore(&dev->buf_lock, flags);
 }
 
@@ -695,7 +738,11 @@ int stk1160_vb2_setup(struct stk1160 *dev)
 	q->buf_struct_size = sizeof(struct stk1160_buffer);
 	q->ops = &stk1160_video_qops;
 	q->mem_ops = &vb2_vmalloc_memops;
+<<<<<<< HEAD
 	q->timestamp_type = V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC;
+=======
+	q->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC;
+>>>>>>> v3.18
 
 	rc = vb2_queue_init(q);
 	if (rc < 0)
@@ -725,7 +772,10 @@ int stk1160_video_register(struct stk1160 *dev)
 
 	/* This will be used to set video_device parent */
 	dev->vdev.v4l2_dev = &dev->v4l2_dev;
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &dev->vdev.flags);
+=======
+>>>>>>> v3.18
 
 	/* NTSC is default */
 	dev->norm = V4L2_STD_NTSC_M;
@@ -736,7 +786,11 @@ int stk1160_video_register(struct stk1160 *dev)
 	dev->fmt = &format[0];
 	stk1160_set_std(dev);
 
+<<<<<<< HEAD
 	v4l2_device_call_all(&dev->v4l2_dev, 0, core, s_std,
+=======
+	v4l2_device_call_all(&dev->v4l2_dev, 0, video, s_std,
+>>>>>>> v3.18
 			dev->norm);
 
 	video_set_drvdata(&dev->vdev, dev);

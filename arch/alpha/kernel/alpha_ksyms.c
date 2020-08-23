@@ -40,6 +40,10 @@ EXPORT_SYMBOL(strrchr);
 EXPORT_SYMBOL(memmove);
 EXPORT_SYMBOL(__memcpy);
 EXPORT_SYMBOL(__memset);
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(___memset);
+>>>>>>> v3.18
 EXPORT_SYMBOL(__memsetw);
 EXPORT_SYMBOL(__constant_c_memset);
 EXPORT_SYMBOL(copy_page);

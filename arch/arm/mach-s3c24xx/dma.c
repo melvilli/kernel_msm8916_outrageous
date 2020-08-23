@@ -742,7 +742,11 @@ int s3c2410_dma_request(enum dma_ch channel,
 		chan->irq_claimed = 1;
 		local_irq_restore(flags);
 
+<<<<<<< HEAD
 		err = request_irq(chan->irq, s3c2410_dma_irq, IRQF_DISABLED,
+=======
+		err = request_irq(chan->irq, s3c2410_dma_irq, 0,
+>>>>>>> v3.18
 				  client->name, (void *)chan);
 
 		local_irq_save(flags);
@@ -1159,9 +1163,12 @@ int s3c2410_dma_devconfig(enum dma_ch channel,
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 	if (dma_sel.direction != NULL)
 		(dma_sel.direction)(chan, chan->map, source);
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

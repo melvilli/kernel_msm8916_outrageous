@@ -23,6 +23,11 @@
 #ifndef _MEDIA_ENTITY_H
 #define _MEDIA_ENTITY_H
 
+<<<<<<< HEAD
+=======
+#include <linux/bitops.h>
+#include <linux/kernel.h>
+>>>>>>> v3.18
 #include <linux/list.h>
 #include <linux/media.h>
 
@@ -113,12 +118,21 @@ static inline u32 media_entity_subtype(struct media_entity *entity)
 }
 
 #define MEDIA_ENTITY_ENUM_MAX_DEPTH	16
+<<<<<<< HEAD
+=======
+#define MEDIA_ENTITY_ENUM_MAX_ID	64
+>>>>>>> v3.18
 
 struct media_entity_graph {
 	struct {
 		struct media_entity *entity;
 		int link;
 	} stack[MEDIA_ENTITY_ENUM_MAX_DEPTH];
+<<<<<<< HEAD
+=======
+
+	DECLARE_BITMAP(entities, MEDIA_ENTITY_ENUM_MAX_ID);
+>>>>>>> v3.18
 	int top;
 };
 
@@ -128,11 +142,21 @@ void media_entity_cleanup(struct media_entity *entity);
 
 int media_entity_create_link(struct media_entity *source, u16 source_pad,
 		struct media_entity *sink, u16 sink_pad, u32 flags);
+<<<<<<< HEAD
+=======
+void __media_entity_remove_links(struct media_entity *entity);
+void media_entity_remove_links(struct media_entity *entity);
+
+>>>>>>> v3.18
 int __media_entity_setup_link(struct media_link *link, u32 flags);
 int media_entity_setup_link(struct media_link *link, u32 flags);
 struct media_link *media_entity_find_link(struct media_pad *source,
 		struct media_pad *sink);
+<<<<<<< HEAD
 struct media_pad *media_entity_remote_source(struct media_pad *pad);
+=======
+struct media_pad *media_entity_remote_pad(struct media_pad *pad);
+>>>>>>> v3.18
 
 struct media_entity *media_entity_get(struct media_entity *entity);
 void media_entity_put(struct media_entity *entity);

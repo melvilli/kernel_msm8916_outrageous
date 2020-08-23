@@ -11,10 +11,13 @@
  * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
  * more details.
  *
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
+=======
+>>>>>>> v3.18
  * The full GNU General Public License is included in this distribution in the
  * file called LICENSE.
  *
@@ -92,6 +95,10 @@ int rtl88e_init_sw_vars(struct ieee80211_hw *hw)
 	u8 tid;
 
 	rtl8188ee_bt_reg_init(hw);
+<<<<<<< HEAD
+=======
+	rtlpci->msi_support = rtlpriv->cfg->mod_params->msi_support;
+>>>>>>> v3.18
 
 	rtlpriv->dm.dm_initialgain_enable = 1;
 	rtlpriv->dm.dm_flag = 0;
@@ -120,7 +127,11 @@ int rtl88e_init_sw_vars(struct ieee80211_hw *hw)
 				  0);
 
 	rtlpci->irq_mask[0] =
+<<<<<<< HEAD
 				(u32) (IMR_PSTIMEOUT	|
+=======
+				(u32)(IMR_PSTIMEOUT	|
+>>>>>>> v3.18
 				IMR_HSISR_IND_ON_INT	|
 				IMR_C2HCMD		|
 				IMR_HIGHDOK		|
@@ -141,6 +152,11 @@ int rtl88e_init_sw_vars(struct ieee80211_hw *hw)
 	rtlpriv->psc.inactiveps = rtlpriv->cfg->mod_params->inactiveps;
 	rtlpriv->psc.swctrl_lps = rtlpriv->cfg->mod_params->swctrl_lps;
 	rtlpriv->psc.fwctrl_lps = rtlpriv->cfg->mod_params->fwctrl_lps;
+<<<<<<< HEAD
+=======
+	if (rtlpriv->cfg->mod_params->disable_watchdog)
+		pr_info("watchdog disabled\n");
+>>>>>>> v3.18
 	if (!rtlpriv->psc.inactiveps)
 		pr_info("rtl8188ee: Power Save off (module option)\n");
 	if (!rtlpriv->psc.fwctrl_lps)
@@ -160,7 +176,11 @@ int rtl88e_init_sw_vars(struct ieee80211_hw *hw)
 		rtlpriv->psc.fwctrl_psmode = FW_PS_DTIM_MODE;
 
 	/* for firmware buf */
+<<<<<<< HEAD
 	rtlpriv->rtlhal.pfirmware = vmalloc(0x8000);
+=======
+	rtlpriv->rtlhal.pfirmware = vzalloc(0x8000);
+>>>>>>> v3.18
 	if (!rtlpriv->rtlhal.pfirmware) {
 		RT_TRACE(rtlpriv, COMP_ERR, DBG_EMERG,
 			 "Can't alloc buffer for fw.\n");
@@ -197,7 +217,11 @@ int rtl88e_init_sw_vars(struct ieee80211_hw *hw)
 	init_timer(&rtlpriv->works.fast_antenna_training_timer);
 	setup_timer(&rtlpriv->works.fast_antenna_training_timer,
 		    rtl88e_dm_fast_antenna_training_callback,
+<<<<<<< HEAD
 		    (unsigned long)hw);
+=======
+			(unsigned long)hw);
+>>>>>>> v3.18
 	return err;
 }
 
@@ -216,6 +240,15 @@ void rtl88e_deinit_sw_vars(struct ieee80211_hw *hw)
 	del_timer_sync(&rtlpriv->works.fast_antenna_training_timer);
 }
 
+<<<<<<< HEAD
+=======
+/* get bt coexist status */
+bool rtl88e_get_btc_status(void)
+{
+	return false;
+}
+
+>>>>>>> v3.18
 static struct rtl_hal_ops rtl8188ee_hal_ops = {
 	.init_sw_vars = rtl88e_init_sw_vars,
 	.deinit_sw_vars = rtl88e_deinit_sw_vars,
@@ -249,22 +282,42 @@ static struct rtl_hal_ops rtl8188ee_hal_ops = {
 	.led_control = rtl88ee_led_control,
 	.set_desc = rtl88ee_set_desc,
 	.get_desc = rtl88ee_get_desc,
+<<<<<<< HEAD
+=======
+	.is_tx_desc_closed = rtl88ee_is_tx_desc_closed,
+>>>>>>> v3.18
 	.tx_polling = rtl88ee_tx_polling,
 	.enable_hw_sec = rtl88ee_enable_hw_security_config,
 	.set_key = rtl88ee_set_key,
 	.init_sw_leds = rtl88ee_init_sw_leds,
+<<<<<<< HEAD
 	.allow_all_destaddr = rtl88ee_allow_all_destaddr,
+=======
+>>>>>>> v3.18
 	.get_bbreg = rtl88e_phy_query_bb_reg,
 	.set_bbreg = rtl88e_phy_set_bb_reg,
 	.get_rfreg = rtl88e_phy_query_rf_reg,
 	.set_rfreg = rtl88e_phy_set_rf_reg,
+<<<<<<< HEAD
+=======
+	.get_btc_status = rtl88e_get_btc_status,
+	.rx_command_packet = rtl88ee_rx_command_packet,
+
+>>>>>>> v3.18
 };
 
 static struct rtl_mod_params rtl88ee_mod_params = {
 	.sw_crypto = false,
+<<<<<<< HEAD
 	.inactiveps = true,
 	.swctrl_lps = false,
 	.fwctrl_lps = true,
+=======
+	.inactiveps = false,
+	.swctrl_lps = false,
+	.fwctrl_lps = false,
+	.msi_support = true,
+>>>>>>> v3.18
 	.debug = DBG_EMERG,
 };
 
@@ -272,6 +325,10 @@ static struct rtl_hal_cfg rtl88ee_hal_cfg = {
 	.bar_id = 2,
 	.write_readback = true,
 	.name = "rtl88e_pci",
+<<<<<<< HEAD
+=======
+	.fw_name = "rtlwifi/rtl8188efw.bin",
+>>>>>>> v3.18
 	.ops = &rtl8188ee_hal_ops,
 	.mod_params = &rtl88ee_mod_params,
 
@@ -283,6 +340,12 @@ static struct rtl_hal_cfg rtl88ee_hal_cfg = {
 	.maps[MAC_RCR_ACRC32] = ACRC32,
 	.maps[MAC_RCR_ACF] = ACF,
 	.maps[MAC_RCR_AAP] = AAP,
+<<<<<<< HEAD
+=======
+	.maps[MAC_HIMR] = REG_HIMR,
+	.maps[MAC_HIMRE] = REG_HIMRE,
+	.maps[MAC_HSISR] = REG_HSISR,
+>>>>>>> v3.18
 
 	.maps[EFUSE_ACCESS] = REG_EFUSE_ACCESS,
 
@@ -343,6 +406,10 @@ static struct rtl_hal_cfg rtl88ee_hal_cfg = {
 	.maps[RTL_IMR_VIDOK] = IMR_VIDOK,
 	.maps[RTL_IMR_VODOK] = IMR_VODOK,
 	.maps[RTL_IMR_ROK] = IMR_ROK,
+<<<<<<< HEAD
+=======
+	.maps[RTL_IMR_HSISR_IND] = IMR_HSISR_IND_ON_INT,
+>>>>>>> v3.18
 	.maps[RTL_IBSS_INT_MASKS] = (IMR_BCNDMAINT0 | IMR_TBDOK | IMR_TBDER),
 
 	.maps[RTL_RC_CCK_RATE1M] = DESC92C_RATE1M,
@@ -362,7 +429,11 @@ static struct rtl_hal_cfg rtl88ee_hal_cfg = {
 	.maps[RTL_RC_HT_RATEMCS15] = DESC92C_RATEMCS15,
 };
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(rtl88ee_pci_ids) = {
+=======
+static struct pci_device_id rtl88ee_pci_ids[] = {
+>>>>>>> v3.18
 	{RTL_PCI_DEVICE(PCI_VENDOR_ID_REALTEK, 0x8179, rtl88ee_hal_cfg)},
 	{},
 };
@@ -381,11 +452,23 @@ module_param_named(debug, rtl88ee_mod_params.debug, int, 0444);
 module_param_named(ips, rtl88ee_mod_params.inactiveps, bool, 0444);
 module_param_named(swlps, rtl88ee_mod_params.swctrl_lps, bool, 0444);
 module_param_named(fwlps, rtl88ee_mod_params.fwctrl_lps, bool, 0444);
+<<<<<<< HEAD
+=======
+module_param_named(msi, rtl88ee_mod_params.msi_support, bool, 0444);
+module_param_named(disable_watchdog, rtl88ee_mod_params.disable_watchdog,
+		   bool, 0444);
+>>>>>>> v3.18
 MODULE_PARM_DESC(swenc, "Set to 1 for software crypto (default 0)\n");
 MODULE_PARM_DESC(ips, "Set to 0 to not use link power save (default 1)\n");
 MODULE_PARM_DESC(swlps, "Set to 1 to use SW control power save (default 0)\n");
 MODULE_PARM_DESC(fwlps, "Set to 1 to use FW control power save (default 1)\n");
+<<<<<<< HEAD
 MODULE_PARM_DESC(debug, "Set debug level (0-5) (default 0)");
+=======
+MODULE_PARM_DESC(msi, "Set to 1 to use MSI interrupts mode (default 1)\n");
+MODULE_PARM_DESC(debug, "Set debug level (0-5) (default 0)");
+MODULE_PARM_DESC(disable_watchdog, "Set to 1 to disable the watchdog (default 0)\n");
+>>>>>>> v3.18
 
 static SIMPLE_DEV_PM_OPS(rtlwifi_pm_ops, rtl_pci_suspend, rtl_pci_resume);
 

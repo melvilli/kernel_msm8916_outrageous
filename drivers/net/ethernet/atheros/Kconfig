@@ -22,7 +22,10 @@ config ATL2
 	tristate "Atheros L2 Fast Ethernet support"
 	depends on PCI
 	select CRC32
+<<<<<<< HEAD
 	select NET_CORE
+=======
+>>>>>>> v3.18
 	select MII
 	---help---
 	  This driver supports the Atheros L2 fast ethernet adapter.
@@ -34,7 +37,10 @@ config ATL1
 	tristate "Atheros/Attansic L1 Gigabit Ethernet support"
 	depends on PCI
 	select CRC32
+<<<<<<< HEAD
 	select NET_CORE
+=======
+>>>>>>> v3.18
 	select MII
 	---help---
 	  This driver supports the Atheros/Attansic L1 gigabit ethernet
@@ -47,7 +53,10 @@ config ATL1E
 	tristate "Atheros L1E Gigabit Ethernet support"
 	depends on PCI
 	select CRC32
+<<<<<<< HEAD
 	select NET_CORE
+=======
+>>>>>>> v3.18
 	select MII
 	---help---
 	  This driver supports the Atheros L1E gigabit ethernet adapter.
@@ -59,7 +68,10 @@ config ATL1C
 	tristate "Atheros L1C Gigabit Ethernet support"
 	depends on PCI
 	select CRC32
+<<<<<<< HEAD
 	select NET_CORE
+=======
+>>>>>>> v3.18
 	select MII
 	---help---
 	  This driver supports the Atheros L1C gigabit ethernet adapter.
@@ -71,7 +83,10 @@ config ALX
 	tristate "Qualcomm Atheros AR816x/AR817x support"
 	depends on PCI
 	select CRC32
+<<<<<<< HEAD
 	select NET_CORE
+=======
+>>>>>>> v3.18
 	select MDIO
 	help
 	  This driver supports the Qualcomm Atheros L1F ethernet adapter,

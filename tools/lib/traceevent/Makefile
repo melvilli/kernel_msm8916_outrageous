@@ -39,6 +39,7 @@ bindir_relative = bin
 bindir = $(prefix)/$(bindir_relative)
 man_dir = $(prefix)/share/man
 man_dir_SQ = '$(subst ','\'',$(man_dir))'
+<<<<<<< HEAD
 html_install = $(prefix)/share/kernelshark/html
 html_install_SQ = '$(subst ','\'',$(html_install))'
 img_install = $(prefix)/share/kernelshark/html/images
@@ -48,6 +49,38 @@ export man_dir man_dir_SQ html_install html_install_SQ INSTALL
 export img_install img_install_SQ
 export DESTDIR DESTDIR_SQ
 
+=======
+
+export man_dir man_dir_SQ INSTALL
+export DESTDIR DESTDIR_SQ
+
+set_plugin_dir := 1
+
+# Set plugin_dir to preffered global plugin location
+# If we install under $HOME directory we go under
+# $(HOME)/.traceevent/plugins
+#
+# We dont set PLUGIN_DIR in case we install under $HOME
+# directory, because by default the code looks under:
+# $(HOME)/.traceevent/plugins by default.
+#
+ifeq ($(plugin_dir),)
+ifeq ($(prefix),$(HOME))
+override plugin_dir = $(HOME)/.traceevent/plugins
+set_plugin_dir := 0
+else
+override plugin_dir = $(prefix)/lib/traceevent/plugins
+endif
+endif
+
+ifeq ($(set_plugin_dir),1)
+PLUGIN_DIR = -DPLUGIN_DIR="$(plugin_dir)"
+PLUGIN_DIR_SQ = '$(subst ','\'',$(PLUGIN_DIR))'
+endif
+
+include $(if $(BUILD_SRC),$(BUILD_SRC)/)../../scripts/Makefile.include
+
+>>>>>>> v3.18
 # copy a bit from Linux kbuild
 
 ifeq ("$(origin V)", "command line")
@@ -62,6 +95,7 @@ ifeq ("$(origin O)", "command line")
 endif
 
 ifeq ($(BUILD_SRC),)
+<<<<<<< HEAD
 ifneq ($(BUILD_OUTPUT),)
 
 define build_output
@@ -80,6 +114,18 @@ gui: force
 	$(call build_output, all_cmd)
 
 $(filter-out gui,$(MAKECMDGOALS)): sub-make
+=======
+ifneq ($(OUTPUT),)
+
+define build_output
+  $(if $(VERBOSE:1=),@)+$(MAKE) -C $(OUTPUT) \
+  BUILD_SRC=$(CURDIR)/ -f $(CURDIR)/Makefile $1
+endef
+
+all: sub-make
+
+$(MAKECMDGOALS): sub-make
+>>>>>>> v3.18
 
 sub-make: force
 	$(call build_output, $(MAKECMDGOALS))
@@ -88,7 +134,11 @@ sub-make: force
 # Leave processing to above invocation of make
 skip-makefile := 1
 
+<<<<<<< HEAD
 endif # BUILD_OUTPUT
+=======
+endif # OUTPUT
+>>>>>>> v3.18
 endif # BUILD_SRC
 
 # We process the rest of the Makefile if this is the final invocation of make
@@ -104,6 +154,10 @@ export prefix bindir src obj
 # Shell quotes
 bindir_SQ = $(subst ','\'',$(bindir))
 bindir_relative_SQ = $(subst ','\'',$(bindir_relative))
+<<<<<<< HEAD
+=======
+plugin_dir_SQ = $(subst ','\'',$(plugin_dir))
+>>>>>>> v3.18
 
 LIB_FILE = libtraceevent.a libtraceevent.so
 
@@ -122,7 +176,11 @@ export Q VERBOSE
 
 EVENT_PARSE_VERSION = $(EP_VERSION).$(EP_PATCHLEVEL).$(EP_EXTRAVERSION)
 
+<<<<<<< HEAD
 INCLUDES = -I. $(CONFIG_INCLUDES)
+=======
+INCLUDES = -I. -I $(srctree)/../../include $(CONFIG_INCLUDES)
+>>>>>>> v3.18
 
 # Set compile option CFLAGS if not set elsewhere
 CFLAGS ?= -g -Wall
@@ -133,6 +191,7 @@ override CFLAGS += $(udis86-flags) -D_GNU_SOURCE
 
 ifeq ($(VERBOSE),1)
   Q =
+<<<<<<< HEAD
   print_compile =
   print_app_build =
   print_fpic_compile =
@@ -160,14 +219,23 @@ do_app_build =						\
 	($(print_app_build)				\
 	$(CC) $^ -rdynamic -o $@ $(CONFIG_LIBS) $(LIBS))
 
+=======
+else
+  Q = @
+endif
+
+>>>>>>> v3.18
 do_compile_shared_library =			\
 	($(print_shared_lib_compile)		\
 	$(CC) --shared $^ -o $@)
 
+<<<<<<< HEAD
 do_compile_plugin_obj =				\
 	($(print_plugin_obj_compile)		\
 	$(CC) -c $(CFLAGS) -fPIC -o $@ $<)
 
+=======
+>>>>>>> v3.18
 do_plugin_build =				\
 	($(print_plugin_build)			\
 	$(CC) $(CFLAGS) -shared -nostartfiles -o $@ $<)
@@ -177,6 +245,7 @@ do_build_static_lib =				\
 	$(RM) $@;  $(AR) rcs $@ $^)
 
 
+<<<<<<< HEAD
 define do_compile
 	$(print_compile)						\
 	$(CC) -c $(CFLAGS) $(EXT) $< -o $(obj)/$@;
@@ -193,6 +262,39 @@ PEVENT_LIB_OBJS = event-parse.o trace-seq.o parse-filter.o parse-utils.o
 ALL_OBJS = $(PEVENT_LIB_OBJS)
 
 CMD_TARGETS = $(LIB_FILE)
+=======
+do_compile = $(QUIET_CC)$(CC) -c $(CFLAGS) $(EXT) $< -o $(obj)/$@;
+
+$(obj)/%.o: $(src)/%.c
+	$(call do_compile)
+
+%.o: $(src)/%.c
+	$(call do_compile)
+
+PEVENT_LIB_OBJS  = event-parse.o
+PEVENT_LIB_OBJS += event-plugin.o
+PEVENT_LIB_OBJS += trace-seq.o
+PEVENT_LIB_OBJS += parse-filter.o
+PEVENT_LIB_OBJS += parse-utils.o
+PEVENT_LIB_OBJS += kbuffer-parse.o
+
+PLUGIN_OBJS  = plugin_jbd2.o
+PLUGIN_OBJS += plugin_hrtimer.o
+PLUGIN_OBJS += plugin_kmem.o
+PLUGIN_OBJS += plugin_kvm.o
+PLUGIN_OBJS += plugin_mac80211.o
+PLUGIN_OBJS += plugin_sched_switch.o
+PLUGIN_OBJS += plugin_function.o
+PLUGIN_OBJS += plugin_xen.o
+PLUGIN_OBJS += plugin_scsi.o
+PLUGIN_OBJS += plugin_cfg80211.o
+
+PLUGINS := $(PLUGIN_OBJS:.o=.so)
+
+ALL_OBJS = $(PEVENT_LIB_OBJS) $(PLUGIN_OBJS)
+
+CMD_TARGETS = $(LIB_FILE) $(PLUGINS)
+>>>>>>> v3.18
 
 TARGETS = $(CMD_TARGETS)
 
@@ -202,6 +304,7 @@ all: all_cmd
 all_cmd: $(CMD_TARGETS)
 
 libtraceevent.so: $(PEVENT_LIB_OBJS)
+<<<<<<< HEAD
 	$(Q)$(do_compile_shared_library)
 
 libtraceevent.a: $(PEVENT_LIB_OBJS)
@@ -228,6 +331,42 @@ define update_version.h
 		echo '  UPDATE                 $@';	\
 		mv -f $@.tmp $@;			\
 	fi);
+=======
+	$(QUIET_LINK)$(CC) --shared $^ -o $@
+
+libtraceevent.a: $(PEVENT_LIB_OBJS)
+	$(QUIET_LINK)$(RM) $@; $(AR) rcs $@ $^
+
+plugins: $(PLUGINS)
+
+$(PEVENT_LIB_OBJS): %.o: $(src)/%.c TRACEEVENT-CFLAGS
+	$(QUIET_CC_FPIC)$(CC) -c $(CFLAGS) $(EXT) -fPIC $< -o $@
+
+$(PLUGIN_OBJS): %.o : $(src)/%.c
+	$(QUIET_CC_FPIC)$(CC) -c $(CFLAGS) -fPIC -o $@ $<
+
+$(PLUGINS): %.so: %.o
+	$(QUIET_LINK)$(CC) $(CFLAGS) -shared -nostartfiles -o $@ $<
+
+define make_version.h
+  (echo '/* This file is automatically generated. Do not modify. */';		\
+   echo \#define VERSION_CODE $(shell						\
+   expr $(VERSION) \* 256 + $(PATCHLEVEL));					\
+   echo '#define EXTRAVERSION ' $(EXTRAVERSION);				\
+   echo '#define VERSION_STRING "'$(VERSION).$(PATCHLEVEL).$(EXTRAVERSION)'"';	\
+   echo '#define FILE_VERSION '$(FILE_VERSION);					\
+  ) > $1
+endef
+
+define update_version.h
+  ($(call make_version.h, $@.tmp);		\
+    if [ -r $@ ] && cmp -s $@ $@.tmp; then	\
+      rm -f $@.tmp;				\
+    else					\
+      echo '  UPDATE                 $@';	\
+      mv -f $@.tmp $@;				\
+    fi);
+>>>>>>> v3.18
 endef
 
 ep_version.h: force
@@ -236,6 +375,7 @@ ep_version.h: force
 VERSION_FILES = ep_version.h
 
 define update_dir
+<<<<<<< HEAD
 	(echo $1 > $@.tmp;	\
 	if [ -r $@ ] && cmp -s $@ $@.tmp; then		\
 		rm -f $@.tmp;				\
@@ -243,6 +383,15 @@ define update_dir
 		echo '  UPDATE                 $@';	\
 		mv -f $@.tmp $@;			\
 	fi);
+=======
+  (echo $1 > $@.tmp;				\
+   if [ -r $@ ] && cmp -s $@ $@.tmp; then	\
+     rm -f $@.tmp;				\
+   else						\
+     echo '  UPDATE                 $@';	\
+     mv -f $@.tmp $@;				\
+   fi);
+>>>>>>> v3.18
 endef
 
 ## make deps
@@ -252,6 +401,7 @@ all_deps := $(all_objs:%.o=.%.d)
 
 # let .d file also depends on the source and header files
 define check_deps
+<<<<<<< HEAD
 		@set -e; $(RM) $@; \
 		$(CC) -MM $(CFLAGS) $< > $@.$$$$; \
 		sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $@; \
@@ -261,6 +411,14 @@ endef
 $(gui_deps): ks_version.h
 $(non_gui_deps): tc_version.h
 
+=======
+  @set -e; $(RM) $@; \
+  $(CC) -MM $(CFLAGS) $< > $@.$$$$; \
+  sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $@; \
+  $(RM) $@.$$$$
+endef
+
+>>>>>>> v3.18
 $(all_deps): .%.d: $(src)/%.c
 	$(Q)$(call check_deps)
 
@@ -278,7 +436,11 @@ TRACK_CFLAGS = $(subst ','\'',$(CFLAGS)):$(ARCH):$(CROSS_COMPILE)
 TRACEEVENT-CFLAGS: force
 	@FLAGS='$(TRACK_CFLAGS)'; \
 	    if test x"$$FLAGS" != x"`cat TRACEEVENT-CFLAGS 2>/dev/null`" ; then \
+<<<<<<< HEAD
 		echo 1>&2 "    * new build flags or cross compiler"; \
+=======
+		echo 1>&2 "  FLAGS:   * new build flags or cross compiler"; \
+>>>>>>> v3.18
 		echo "$$FLAGS" >TRACEEVENT-CFLAGS; \
             fi
 
@@ -293,19 +455,39 @@ TAGS:	force
 	--regex='/_PE(\([^,)]*\).*/PEVENT_ERRNO__\1/'
 
 define do_install
+<<<<<<< HEAD
 	$(print_install)				\
+=======
+>>>>>>> v3.18
 	if [ ! -d '$(DESTDIR_SQ)$2' ]; then		\
 		$(INSTALL) -d -m 755 '$(DESTDIR_SQ)$2';	\
 	fi;						\
 	$(INSTALL) $1 '$(DESTDIR_SQ)$2'
 endef
 
+<<<<<<< HEAD
 install_lib: all_cmd install_plugins install_python
 	$(Q)$(call do_install,$(LIB_FILE),$(bindir_SQ))
+=======
+define do_install_plugins
+	for plugin in $1; do				\
+	  $(call do_install,$$plugin,$(plugin_dir_SQ));	\
+	done
+endef
+
+install_lib: all_cmd install_plugins
+	$(call QUIET_INSTALL, $(LIB_FILE)) \
+		$(call do_install,$(LIB_FILE),$(bindir_SQ))
+
+install_plugins: $(PLUGINS)
+	$(call QUIET_INSTALL, trace_plugins) \
+		$(call do_install_plugins, $(PLUGINS))
+>>>>>>> v3.18
 
 install: install_lib
 
 clean:
+<<<<<<< HEAD
 	$(RM) *.o *~ $(TARGETS) *.a *.so $(VERSION_FILES) .*.d
 	$(RM) TRACEEVENT-CFLAGS tags TAGS
 
@@ -314,6 +496,20 @@ endif # skip-makefile
 PHONY += force
 force:
 
+=======
+	$(call QUIET_CLEAN, libtraceevent) \
+		$(RM) *.o *~ $(TARGETS) *.a *.so $(VERSION_FILES) .*.d \
+		$(RM) TRACEEVENT-CFLAGS tags TAGS
+
+endif # skip-makefile
+
+PHONY += force plugins
+force:
+
+plugins:
+	@echo > /dev/null
+
+>>>>>>> v3.18
 # Declare the contents of the .PHONY variable as phony.  We keep that
 # information in a variable so we can use it in if_changed and friends.
 .PHONY: $(PHONY)

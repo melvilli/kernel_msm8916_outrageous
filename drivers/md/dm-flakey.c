@@ -176,7 +176,11 @@ static int flakey_ctr(struct dm_target *ti, unsigned int argc, char **argv)
 
 	fc = kzalloc(sizeof(*fc), GFP_KERNEL);
 	if (!fc) {
+<<<<<<< HEAD
 		ti->error = "Cannot allocate linear context";
+=======
+		ti->error = "Cannot allocate context";
+>>>>>>> v3.18
 		return -ENOMEM;
 	}
 	fc->start_time = jiffies;
@@ -248,7 +252,12 @@ static void flakey_map_bio(struct dm_target *ti, struct bio *bio)
 
 	bio->bi_bdev = fc->dev->bdev;
 	if (bio_sectors(bio))
+<<<<<<< HEAD
 		bio->bi_sector = flakey_map_sector(ti, bio->bi_sector);
+=======
+		bio->bi_iter.bi_sector =
+			flakey_map_sector(ti, bio->bi_iter.bi_sector);
+>>>>>>> v3.18
 }
 
 static void corrupt_bio_data(struct bio *bio, struct flakey_c *fc)
@@ -265,8 +274,13 @@ static void corrupt_bio_data(struct bio *bio, struct flakey_c *fc)
 		DMDEBUG("Corrupting data bio=%p by writing %u to byte %u "
 			"(rw=%c bi_rw=%lu bi_sector=%llu cur_bytes=%u)\n",
 			bio, fc->corrupt_bio_value, fc->corrupt_bio_byte,
+<<<<<<< HEAD
 			(bio_data_dir(bio) == WRITE) ? 'w' : 'r',
 			bio->bi_rw, (unsigned long long)bio->bi_sector, bio_bytes);
+=======
+			(bio_data_dir(bio) == WRITE) ? 'w' : 'r', bio->bi_rw,
+			(unsigned long long)bio->bi_iter.bi_sector, bio_bytes);
+>>>>>>> v3.18
 	}
 }
 
@@ -286,6 +300,7 @@ static int flakey_map(struct dm_target *ti, struct bio *bio)
 		pb->bio_submitted = true;
 
 		/*
+<<<<<<< HEAD
 		 * Error reads if neither corrupt_bio_byte or drop_writes are set.
 		 * Otherwise, flakey_end_io() will decide if the reads should be modified.
 		 */
@@ -294,6 +309,12 @@ static int flakey_map(struct dm_target *ti, struct bio *bio)
 				return -EIO;
 			goto map_bio;
 		}
+=======
+		 * Map reads as normal.
+		 */
+		if (bio_data_dir(bio) == READ)
+			goto map_bio;
+>>>>>>> v3.18
 
 		/*
 		 * Drop writes?
@@ -329,6 +350,7 @@ static int flakey_end_io(struct dm_target *ti, struct bio *bio, int error)
 	struct flakey_c *fc = ti->private;
 	struct per_bio_data *pb = dm_per_bio_data(bio, sizeof(struct per_bio_data));
 
+<<<<<<< HEAD
 	if (!error && pb->bio_submitted && (bio_data_dir(bio) == READ)) {
 		if (fc->corrupt_bio_byte && (fc->corrupt_bio_rw == READ) &&
 		    all_corrupt_bio_flags_match(bio, fc)) {
@@ -345,6 +367,16 @@ static int flakey_end_io(struct dm_target *ti, struct bio *bio, int error)
 			return -EIO;
 		}
 	}
+=======
+	/*
+	 * Corrupt successful READs while in down state.
+	 * If flags were specified, only corrupt those that match.
+	 */
+	if (fc->corrupt_bio_byte && !error && pb->bio_submitted &&
+	    (bio_data_dir(bio) == READ) && (fc->corrupt_bio_rw == READ) &&
+	    all_corrupt_bio_flags_match(bio, fc))
+		corrupt_bio_data(bio, fc);
+>>>>>>> v3.18
 
 	return error;
 }

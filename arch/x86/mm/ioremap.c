@@ -86,6 +86,10 @@ static void __iomem *__ioremap_caller(resource_size_t phys_addr,
 	pgprot_t prot;
 	int retval;
 	void __iomem *ret_addr;
+<<<<<<< HEAD
+=======
+	int ram_region;
+>>>>>>> v3.18
 
 	/* Don't allow wraparound or zero size */
 	last_addr = phys_addr + size - 1;
@@ -108,12 +112,32 @@ static void __iomem *__ioremap_caller(resource_size_t phys_addr,
 	/*
 	 * Don't allow anybody to remap normal RAM that we're using..
 	 */
+<<<<<<< HEAD
 	pfn      = phys_addr >> PAGE_SHIFT;
 	last_pfn = last_addr >> PAGE_SHIFT;
 	if (walk_system_ram_range(pfn, last_pfn - pfn + 1, NULL,
 				  __ioremap_check_ram) == 1)
 		return NULL;
 
+=======
+	/* First check if whole region can be identified as RAM or not */
+	ram_region = region_is_ram(phys_addr, size);
+	if (ram_region > 0) {
+		WARN_ONCE(1, "ioremap on RAM at 0x%lx - 0x%lx\n",
+				(unsigned long int)phys_addr,
+				(unsigned long int)last_addr);
+		return NULL;
+	}
+
+	/* If could not be identified(-1), check page by page */
+	if (ram_region < 0) {
+		pfn      = phys_addr >> PAGE_SHIFT;
+		last_pfn = last_addr >> PAGE_SHIFT;
+		if (walk_system_ram_range(pfn, last_pfn - pfn + 1, NULL,
+					  __ioremap_check_ram) == 1)
+			return NULL;
+	}
+>>>>>>> v3.18
 	/*
 	 * Mappings have to be page-aligned
 	 */
@@ -340,6 +364,7 @@ void unxlate_dev_mem_ptr(unsigned long phys, void *addr)
 	return;
 }
 
+<<<<<<< HEAD
 static int __initdata early_ioremap_debug;
 
 static int __init early_ioremap_debug_setup(char *str)
@@ -351,6 +376,8 @@ static int __init early_ioremap_debug_setup(char *str)
 early_param("early_ioremap_debug", early_ioremap_debug_setup);
 
 static __initdata int after_paging_init;
+=======
+>>>>>>> v3.18
 static pte_t bm_pte[PAGE_SIZE/sizeof(pte_t)] __page_aligned_bss;
 
 static inline pmd_t * __init early_ioremap_pmd(unsigned long addr)
@@ -374,6 +401,7 @@ bool __init is_early_ioremap_ptep(pte_t *ptep)
 	return ptep >= &bm_pte[0] && ptep < &bm_pte[PAGE_SIZE/sizeof(pte_t)];
 }
 
+<<<<<<< HEAD
 static unsigned long slot_virt[FIX_BTMAPS_SLOTS] __initdata;
 
 void __init early_ioremap_init(void)
@@ -386,6 +414,19 @@ void __init early_ioremap_init(void)
 
 	for (i = 0; i < FIX_BTMAPS_SLOTS; i++)
 		slot_virt[i] = __fix_to_virt(FIX_BTMAP_BEGIN - NR_FIX_BTMAPS*i);
+=======
+void __init early_ioremap_init(void)
+{
+	pmd_t *pmd;
+
+#ifdef CONFIG_X86_64
+	BUILD_BUG_ON((fix_to_virt(0) + PAGE_SIZE) & ((1 << PMD_SHIFT) - 1));
+#else
+	WARN_ON((fix_to_virt(0) + PAGE_SIZE) & ((1 << PMD_SHIFT) - 1));
+#endif
+
+	early_ioremap_setup();
+>>>>>>> v3.18
 
 	pmd = early_ioremap_pmd(fix_to_virt(FIX_BTMAP_BEGIN));
 	memset(bm_pte, 0, sizeof(bm_pte));
@@ -414,6 +455,7 @@ void __init early_ioremap_init(void)
 	}
 }
 
+<<<<<<< HEAD
 void __init early_ioremap_reset(void)
 {
 	after_paging_init = 1;
@@ -421,6 +463,10 @@ void __init early_ioremap_reset(void)
 
 static void __init __early_set_fixmap(enum fixed_addresses idx,
 				      phys_addr_t phys, pgprot_t flags)
+=======
+void __init __early_set_fixmap(enum fixed_addresses idx,
+			       phys_addr_t phys, pgprot_t flags)
+>>>>>>> v3.18
 {
 	unsigned long addr = __fix_to_virt(idx);
 	pte_t *pte;
@@ -437,6 +483,7 @@ static void __init __early_set_fixmap(enum fixed_addresses idx,
 		pte_clear(&init_mm, addr, pte);
 	__flush_tlb_one(addr);
 }
+<<<<<<< HEAD
 
 static inline void __init early_set_fixmap(enum fixed_addresses idx,
 					   phys_addr_t phys, pgprot_t prot)
@@ -633,3 +680,5 @@ void __init early_iounmap(void __iomem *addr, unsigned long size)
 	}
 	prev_map[slot] = NULL;
 }
+=======
+>>>>>>> v3.18

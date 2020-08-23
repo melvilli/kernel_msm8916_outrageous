@@ -130,8 +130,12 @@ static int mxc_mmc1_init(struct device *dev,
 	gpio_direction_input(gpio_wp);
 
 	ret = request_irq(gpio_to_irq(IOMUX_TO_GPIO(MX31_PIN_GPIO1_1)),
+<<<<<<< HEAD
 			  detect_irq,
 			  IRQF_DISABLED | IRQF_TRIGGER_FALLING,
+=======
+			  detect_irq, IRQF_TRIGGER_FALLING,
+>>>>>>> v3.18
 			  "MMC detect", data);
 	if (ret)
 		goto exit_free_wp;

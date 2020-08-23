@@ -24,8 +24,11 @@ static int lowlevel_buffer_allocate(struct drm_device *dev,
 	enum dma_attr attr;
 	unsigned int nr_pages;
 
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __FILE__);
 
+=======
+>>>>>>> v3.18
 	if (buf->dma_addr) {
 		DRM_DEBUG_KMS("already allocated.\n");
 		return 0;
@@ -59,20 +62,34 @@ static int lowlevel_buffer_allocate(struct drm_device *dev,
 		dma_addr_t start_addr;
 		unsigned int i = 0;
 
+<<<<<<< HEAD
 		buf->pages = kzalloc(sizeof(struct page) * nr_pages,
 					GFP_KERNEL);
+=======
+		buf->pages = drm_calloc_large(nr_pages, sizeof(struct page *));
+>>>>>>> v3.18
 		if (!buf->pages) {
 			DRM_ERROR("failed to allocate pages.\n");
 			return -ENOMEM;
 		}
 
+<<<<<<< HEAD
 		buf->kvaddr = dma_alloc_attrs(dev->dev, buf->size,
+=======
+		buf->kvaddr = (void __iomem *)dma_alloc_attrs(dev->dev,
+					buf->size,
+>>>>>>> v3.18
 					&buf->dma_addr, GFP_KERNEL,
 					&buf->dma_attrs);
 		if (!buf->kvaddr) {
 			DRM_ERROR("failed to allocate buffer.\n");
+<<<<<<< HEAD
 			kfree(buf->pages);
 			return -ENOMEM;
+=======
+			ret = -ENOMEM;
+			goto err_free;
+>>>>>>> v3.18
 		}
 
 		start_addr = buf->dma_addr;
@@ -93,9 +110,15 @@ static int lowlevel_buffer_allocate(struct drm_device *dev,
 	}
 
 	buf->sgt = drm_prime_pages_to_sg(buf->pages, nr_pages);
+<<<<<<< HEAD
 	if (!buf->sgt) {
 		DRM_ERROR("failed to get sg table.\n");
 		ret = -ENOMEM;
+=======
+	if (IS_ERR(buf->sgt)) {
+		DRM_ERROR("failed to get sg table.\n");
+		ret = PTR_ERR(buf->sgt);
+>>>>>>> v3.18
 		goto err_free_attrs;
 	}
 
@@ -109,9 +132,15 @@ err_free_attrs:
 	dma_free_attrs(dev->dev, buf->size, buf->pages,
 			(dma_addr_t)buf->dma_addr, &buf->dma_attrs);
 	buf->dma_addr = (dma_addr_t)NULL;
+<<<<<<< HEAD
 
 	if (!is_drm_iommu_supported(dev))
 		kfree(buf->pages);
+=======
+err_free:
+	if (!is_drm_iommu_supported(dev))
+		drm_free_large(buf->pages);
+>>>>>>> v3.18
 
 	return ret;
 }
@@ -119,8 +148,11 @@ err_free_attrs:
 static void lowlevel_buffer_deallocate(struct drm_device *dev,
 		unsigned int flags, struct exynos_drm_gem_buf *buf)
 {
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s.\n", __FILE__);
 
+=======
+>>>>>>> v3.18
 	if (!buf->dma_addr) {
 		DRM_DEBUG_KMS("dma_addr is invalid.\n");
 		return;
@@ -138,7 +170,11 @@ static void lowlevel_buffer_deallocate(struct drm_device *dev,
 	if (!is_drm_iommu_supported(dev)) {
 		dma_free_attrs(dev->dev, buf->size, buf->kvaddr,
 				(dma_addr_t)buf->dma_addr, &buf->dma_attrs);
+<<<<<<< HEAD
 		kfree(buf->pages);
+=======
+		drm_free_large(buf->pages);
+>>>>>>> v3.18
 	} else
 		dma_free_attrs(dev->dev, buf->size, buf->pages,
 				(dma_addr_t)buf->dma_addr, &buf->dma_attrs);
@@ -151,6 +187,7 @@ struct exynos_drm_gem_buf *exynos_drm_init_buf(struct drm_device *dev,
 {
 	struct exynos_drm_gem_buf *buffer;
 
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s.\n", __FILE__);
 	DRM_DEBUG_KMS("desired size = 0x%x\n", size);
 
@@ -159,6 +196,13 @@ struct exynos_drm_gem_buf *exynos_drm_init_buf(struct drm_device *dev,
 		DRM_ERROR("failed to allocate exynos_drm_gem_buf.\n");
 		return NULL;
 	}
+=======
+	DRM_DEBUG_KMS("desired size = 0x%x\n", size);
+
+	buffer = kzalloc(sizeof(*buffer), GFP_KERNEL);
+	if (!buffer)
+		return NULL;
+>>>>>>> v3.18
 
 	buffer->size = size;
 	return buffer;
@@ -167,6 +211,7 @@ struct exynos_drm_gem_buf *exynos_drm_init_buf(struct drm_device *dev,
 void exynos_drm_fini_buf(struct drm_device *dev,
 				struct exynos_drm_gem_buf *buffer)
 {
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s.\n", __FILE__);
 
 	if (!buffer) {
@@ -174,6 +219,8 @@ void exynos_drm_fini_buf(struct drm_device *dev,
 		return;
 	}
 
+=======
+>>>>>>> v3.18
 	kfree(buffer);
 	buffer = NULL;
 }

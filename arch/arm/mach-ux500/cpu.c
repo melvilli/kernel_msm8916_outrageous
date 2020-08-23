@@ -25,12 +25,26 @@
 #include <asm/mach/map.h>
 
 #include "setup.h"
+<<<<<<< HEAD
 #include "devices.h"
+=======
+>>>>>>> v3.18
 
 #include "board-mop500.h"
 #include "db8500-regs.h"
 #include "id.h"
 
+<<<<<<< HEAD
+=======
+void ux500_restart(enum reboot_mode mode, const char *cmd)
+{
+	local_irq_disable();
+	local_fiq_disable();
+
+	prcmu_system_reset(0);
+}
+
+>>>>>>> v3.18
 /*
  * FIXME: Should we set up the GPIO domain here?
  *
@@ -45,6 +59,7 @@
 */
 void __init ux500_init_irq(void)
 {
+<<<<<<< HEAD
 	void __iomem *dist_base;
 	void __iomem *cpu_base;
 
@@ -62,6 +77,10 @@ void __init ux500_init_irq(void)
 	else
 #endif
 		gic_init(0, 29, dist_base, cpu_base);
+=======
+	gic_arch_extn.flags = IRQCHIP_SKIP_SET_WAKE | IRQCHIP_MASK_ON_SUSPEND;
+	irqchip_init();
+>>>>>>> v3.18
 
 	/*
 	 * Init clocks here so that they are available for system timer
@@ -70,6 +89,7 @@ void __init ux500_init_irq(void)
 	if (cpu_is_u8500_family()) {
 		prcmu_early_init(U8500_PRCMU_BASE, SZ_8K - 1);
 		ux500_pm_init(U8500_PRCMU_BASE, SZ_8K - 1);
+<<<<<<< HEAD
 		u8500_clk_init(U8500_CLKRST1_BASE, U8500_CLKRST2_BASE,
 			       U8500_CLKRST3_BASE, U8500_CLKRST5_BASE,
 			       U8500_CLKRST6_BASE);
@@ -77,11 +97,24 @@ void __init ux500_init_irq(void)
 		prcmu_early_init(U8500_PRCMU_BASE, SZ_8K - 1);
 		ux500_pm_init(U8500_PRCMU_BASE, SZ_8K - 1);
 		u8500_clk_init(U8500_CLKRST1_BASE, U8500_CLKRST2_BASE,
+=======
+
+		u8500_of_clk_init(U8500_CLKRST1_BASE,
+				  U8500_CLKRST2_BASE,
+				  U8500_CLKRST3_BASE,
+				  U8500_CLKRST5_BASE,
+				  U8500_CLKRST6_BASE);
+	} else if (cpu_is_u9540()) {
+		prcmu_early_init(U8500_PRCMU_BASE, SZ_8K - 1);
+		ux500_pm_init(U8500_PRCMU_BASE, SZ_8K - 1);
+		u9540_clk_init(U8500_CLKRST1_BASE, U8500_CLKRST2_BASE,
+>>>>>>> v3.18
 			       U8500_CLKRST3_BASE, U8500_CLKRST5_BASE,
 			       U8500_CLKRST6_BASE);
 	} else if (cpu_is_u8540()) {
 		prcmu_early_init(U8500_PRCMU_BASE, SZ_8K + SZ_4K - 1);
 		ux500_pm_init(U8500_PRCMU_BASE, SZ_8K + SZ_4K - 1);
+<<<<<<< HEAD
 		u8540_clk_init();
 	}
 }
@@ -91,6 +124,14 @@ void __init ux500_init_late(void)
 	mop500_uib_init();
 }
 
+=======
+		u8540_clk_init(U8500_CLKRST1_BASE, U8500_CLKRST2_BASE,
+			       U8500_CLKRST3_BASE, U8500_CLKRST5_BASE,
+			       U8500_CLKRST6_BASE);
+	}
+}
+
+>>>>>>> v3.18
 static const char * __init ux500_get_machine(void)
 {
 	return kasprintf(GFP_KERNEL, "DB%4x", dbx500_partnumber());
@@ -133,7 +174,11 @@ static void __init soc_info_populate(struct soc_device_attribute *soc_dev_attr,
 	soc_dev_attr->revision = ux500_get_revision();
 }
 
+<<<<<<< HEAD
 struct device_attribute ux500_soc_attr =
+=======
+static const struct device_attribute ux500_soc_attr =
+>>>>>>> v3.18
 	__ATTR(process,  S_IRUGO, ux500_get_process,  NULL);
 
 struct device * __init ux500_soc_device_init(const char *soc_id)

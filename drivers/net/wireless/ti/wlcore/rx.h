@@ -142,7 +142,11 @@ struct wl1271_rx_descriptor {
 	u8  reserved;
 } __packed;
 
+<<<<<<< HEAD
 int wlcore_rx(struct wl1271 *wl, struct wl_fw_status_1 *status);
+=======
+int wlcore_rx(struct wl1271 *wl, struct wl_fw_status *status);
+>>>>>>> v3.18
 u8 wl1271_rate_to_idx(int rate, enum ieee80211_band band);
 int wl1271_rx_filter_enable(struct wl1271 *wl,
 			    int index, bool enable,

@@ -5,7 +5,11 @@
  *
  * Copyright (C) 2012 MIPS Technologies, Inc.  All rights reserved.
  */
+<<<<<<< HEAD
 #include <linux/module.h>
+=======
+#include <linux/init.h>
+>>>>>>> v3.18
 #include <linux/leds.h>
 #include <linux/platform_device.h>
 
@@ -76,8 +80,12 @@ static int __init led_init(void)
 	return platform_device_register(&fled_device);
 }
 
+<<<<<<< HEAD
 module_init(led_init);
 
 MODULE_AUTHOR("Chris Dearman <chris@mips.com>");
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("LED probe driver for SEAD-3");
+=======
+device_initcall(led_init);
+>>>>>>> v3.18

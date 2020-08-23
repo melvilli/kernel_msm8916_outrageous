@@ -19,16 +19,26 @@ struct task_struct;
 struct mm_struct;
 
 struct thread_struct {
+<<<<<<< HEAD
 	struct task_struct *saved_task;
 	struct pt_regs regs;
+=======
+	struct pt_regs regs;
+	struct pt_regs *segv_regs;
+>>>>>>> v3.18
 	int singlestep_syscall;
 	void *fault_addr;
 	jmp_buf *fault_catcher;
 	struct task_struct *prev_sched;
+<<<<<<< HEAD
 	unsigned long temp_stack;
 	struct arch_thread arch;
 	jmp_buf switch_buf;
 	int mm_count;
+=======
+	struct arch_thread arch;
+	jmp_buf switch_buf;
+>>>>>>> v3.18
 	struct {
 		int op;
 		union {
@@ -52,7 +62,10 @@ struct thread_struct {
 	.regs		   	= EMPTY_REGS,	\
 	.fault_addr		= NULL, \
 	.prev_sched		= NULL, \
+<<<<<<< HEAD
 	.temp_stack		= 0, \
+=======
+>>>>>>> v3.18
 	.arch			= INIT_ARCH_THREAD, \
 	.request		= { 0 } \
 }

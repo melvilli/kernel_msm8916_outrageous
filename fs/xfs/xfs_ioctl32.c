@@ -22,6 +22,7 @@
 #include <asm/uaccess.h>
 #include "xfs.h"
 #include "xfs_fs.h"
+<<<<<<< HEAD
 #include "xfs_log.h"
 #include "xfs_trans.h"
 #include "xfs_sb.h"
@@ -35,6 +36,17 @@
 #include "xfs_error.h"
 #include "xfs_dfrag.h"
 #include "xfs_vnodeops.h"
+=======
+#include "xfs_format.h"
+#include "xfs_log_format.h"
+#include "xfs_trans_resv.h"
+#include "xfs_sb.h"
+#include "xfs_ag.h"
+#include "xfs_mount.h"
+#include "xfs_inode.h"
+#include "xfs_itable.h"
+#include "xfs_error.h"
+>>>>>>> v3.18
 #include "xfs_fsops.h"
 #include "xfs_alloc.h"
 #include "xfs_rtalloc.h"
@@ -59,7 +71,11 @@ xfs_compat_flock64_copyin(
 	    get_user(bf->l_sysid,	&arg32->l_sysid) ||
 	    get_user(bf->l_pid,		&arg32->l_pid) ||
 	    copy_from_user(bf->l_pad,	&arg32->l_pad,	4*sizeof(u32)))
+<<<<<<< HEAD
 		return -XFS_ERROR(EFAULT);
+=======
+		return -EFAULT;
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -73,10 +89,17 @@ xfs_compat_ioc_fsgeometry_v1(
 
 	error = xfs_fs_geometry(mp, &fsgeo, 3);
 	if (error)
+<<<<<<< HEAD
 		return -error;
 	/* The 32-bit variant simply has some padding at the end */
 	if (copy_to_user(arg32, &fsgeo, sizeof(struct compat_xfs_fsop_geom_v1)))
 		return -XFS_ERROR(EFAULT);
+=======
+		return error;
+	/* The 32-bit variant simply has some padding at the end */
+	if (copy_to_user(arg32, &fsgeo, sizeof(struct compat_xfs_fsop_geom_v1)))
+		return -EFAULT;
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -87,7 +110,11 @@ xfs_compat_growfs_data_copyin(
 {
 	if (get_user(in->newblocks, &arg32->newblocks) ||
 	    get_user(in->imaxpct,   &arg32->imaxpct))
+<<<<<<< HEAD
 		return -XFS_ERROR(EFAULT);
+=======
+		return -EFAULT;
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -98,14 +125,22 @@ xfs_compat_growfs_rt_copyin(
 {
 	if (get_user(in->newblocks, &arg32->newblocks) ||
 	    get_user(in->extsize,   &arg32->extsize))
+<<<<<<< HEAD
 		return -XFS_ERROR(EFAULT);
+=======
+		return -EFAULT;
+>>>>>>> v3.18
 	return 0;
 }
 
 STATIC int
 xfs_inumbers_fmt_compat(
 	void			__user *ubuffer,
+<<<<<<< HEAD
 	const xfs_inogrp_t	*buffer,
+=======
+	const struct xfs_inogrp	*buffer,
+>>>>>>> v3.18
 	long			count,
 	long			*written)
 {
@@ -116,7 +151,11 @@ xfs_inumbers_fmt_compat(
 		if (put_user(buffer[i].xi_startino,   &p32[i].xi_startino) ||
 		    put_user(buffer[i].xi_alloccount, &p32[i].xi_alloccount) ||
 		    put_user(buffer[i].xi_allocmask,  &p32[i].xi_allocmask))
+<<<<<<< HEAD
 			return -XFS_ERROR(EFAULT);
+=======
+			return -EFAULT;
+>>>>>>> v3.18
 	}
 	*written = count * sizeof(*p32);
 	return 0;
@@ -135,7 +174,11 @@ xfs_ioctl32_bstime_copyin(
 
 	if (get_user(sec32,		&bstime32->tv_sec)	||
 	    get_user(bstime->tv_nsec,	&bstime32->tv_nsec))
+<<<<<<< HEAD
 		return -XFS_ERROR(EFAULT);
+=======
+		return -EFAULT;
+>>>>>>> v3.18
 	bstime->tv_sec = sec32;
 	return 0;
 }
@@ -164,10 +207,18 @@ xfs_ioctl32_bstat_copyin(
 	    get_user(bstat->bs_gen,	&bstat32->bs_gen)	||
 	    get_user(bstat->bs_projid_lo, &bstat32->bs_projid_lo) ||
 	    get_user(bstat->bs_projid_hi, &bstat32->bs_projid_hi) ||
+<<<<<<< HEAD
 	    get_user(bstat->bs_dmevmask, &bstat32->bs_dmevmask)	||
 	    get_user(bstat->bs_dmstate,	&bstat32->bs_dmstate)	||
 	    get_user(bstat->bs_aextents, &bstat32->bs_aextents))
 		return -XFS_ERROR(EFAULT);
+=======
+	    get_user(bstat->bs_forkoff,	&bstat32->bs_forkoff)	||
+	    get_user(bstat->bs_dmevmask, &bstat32->bs_dmevmask)	||
+	    get_user(bstat->bs_dmstate,	&bstat32->bs_dmstate)	||
+	    get_user(bstat->bs_aextents, &bstat32->bs_aextents))
+		return -EFAULT;
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -183,7 +234,11 @@ xfs_bstime_store_compat(
 	sec32 = p->tv_sec;
 	if (put_user(sec32, &p32->tv_sec) ||
 	    put_user(p->tv_nsec, &p32->tv_nsec))
+<<<<<<< HEAD
 		return -XFS_ERROR(EFAULT);
+=======
+		return -EFAULT;
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -198,7 +253,11 @@ xfs_bulkstat_one_fmt_compat(
 	compat_xfs_bstat_t	__user *p32 = ubuffer;
 
 	if (ubsize < sizeof(*p32))
+<<<<<<< HEAD
 		return XFS_ERROR(ENOMEM);
+=======
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	if (put_user(buffer->bs_ino,	  &p32->bs_ino)		||
 	    put_user(buffer->bs_mode,	  &p32->bs_mode)	||
@@ -218,10 +277,18 @@ xfs_bulkstat_one_fmt_compat(
 	    put_user(buffer->bs_gen,	  &p32->bs_gen)		||
 	    put_user(buffer->bs_projid,	  &p32->bs_projid)	||
 	    put_user(buffer->bs_projid_hi,	&p32->bs_projid_hi)	||
+<<<<<<< HEAD
 	    put_user(buffer->bs_dmevmask, &p32->bs_dmevmask)	||
 	    put_user(buffer->bs_dmstate,  &p32->bs_dmstate)	||
 	    put_user(buffer->bs_aextents, &p32->bs_aextents))
 		return XFS_ERROR(EFAULT);
+=======
+	    put_user(buffer->bs_forkoff,  &p32->bs_forkoff)	||
+	    put_user(buffer->bs_dmevmask, &p32->bs_dmevmask)	||
+	    put_user(buffer->bs_dmstate,  &p32->bs_dmstate)	||
+	    put_user(buffer->bs_aextents, &p32->bs_aextents))
+		return -EFAULT;
+>>>>>>> v3.18
 	if (ubused)
 		*ubused = sizeof(*p32);
 	return 0;
@@ -259,6 +326,7 @@ xfs_compat_ioc_bulkstat(
 	/* should be called again (unused here, but used in dmapi) */
 
 	if (!capable(CAP_SYS_ADMIN))
+<<<<<<< HEAD
 		return -XFS_ERROR(EPERM);
 
 	if (XFS_FORCED_SHUTDOWN(mp))
@@ -283,6 +351,32 @@ xfs_compat_ioc_bulkstat(
 
 	if (bulkreq.ubuffer == NULL)
 		return -XFS_ERROR(EINVAL);
+=======
+		return -EPERM;
+
+	if (XFS_FORCED_SHUTDOWN(mp))
+		return -EIO;
+
+	if (get_user(addr, &p32->lastip))
+		return -EFAULT;
+	bulkreq.lastip = compat_ptr(addr);
+	if (get_user(bulkreq.icount, &p32->icount) ||
+	    get_user(addr, &p32->ubuffer))
+		return -EFAULT;
+	bulkreq.ubuffer = compat_ptr(addr);
+	if (get_user(addr, &p32->ocount))
+		return -EFAULT;
+	bulkreq.ocount = compat_ptr(addr);
+
+	if (copy_from_user(&inlast, bulkreq.lastip, sizeof(__s64)))
+		return -EFAULT;
+
+	if ((count = bulkreq.icount) <= 0)
+		return -EINVAL;
+
+	if (bulkreq.ubuffer == NULL)
+		return -EINVAL;
+>>>>>>> v3.18
 
 	if (cmd == XFS_IOC_FSINUMBERS_32) {
 		error = xfs_inumbers(mp, &inlast, &count,
@@ -297,17 +391,30 @@ xfs_compat_ioc_bulkstat(
 			xfs_bulkstat_one_compat, sizeof(compat_xfs_bstat_t),
 			bulkreq.ubuffer, &done);
 	} else
+<<<<<<< HEAD
 		error = XFS_ERROR(EINVAL);
 	if (error)
 		return -error;
+=======
+		error = -EINVAL;
+	if (error)
+		return error;
+>>>>>>> v3.18
 
 	if (bulkreq.ocount != NULL) {
 		if (copy_to_user(bulkreq.lastip, &inlast,
 						sizeof(xfs_ino_t)))
+<<<<<<< HEAD
 			return -XFS_ERROR(EFAULT);
 
 		if (copy_to_user(bulkreq.ocount, &count, sizeof(count)))
 			return -XFS_ERROR(EFAULT);
+=======
+			return -EFAULT;
+
+		if (copy_to_user(bulkreq.ocount, &count, sizeof(count)))
+			return -EFAULT;
+>>>>>>> v3.18
 	}
 
 	return 0;
@@ -321,7 +428,11 @@ xfs_compat_handlereq_copyin(
 	compat_xfs_fsop_handlereq_t	hreq32;
 
 	if (copy_from_user(&hreq32, arg32, sizeof(compat_xfs_fsop_handlereq_t)))
+<<<<<<< HEAD
 		return -XFS_ERROR(EFAULT);
+=======
+		return -EFAULT;
+>>>>>>> v3.18
 
 	hreq->fd = hreq32.fd;
 	hreq->path = compat_ptr(hreq32.path);
@@ -355,6 +466,7 @@ xfs_compat_attrlist_by_handle(
 	char			*kbuf;
 
 	if (!capable(CAP_SYS_ADMIN))
+<<<<<<< HEAD
 		return -XFS_ERROR(EPERM);
 	if (copy_from_user(&al_hreq, arg,
 			   sizeof(compat_xfs_fsop_attrlist_handlereq_t)))
@@ -362,18 +474,32 @@ xfs_compat_attrlist_by_handle(
 	if (al_hreq.buflen < sizeof(struct attrlist) ||
 	    al_hreq.buflen > XATTR_LIST_MAX)
 		return -XFS_ERROR(EINVAL);
+=======
+		return -EPERM;
+	if (copy_from_user(&al_hreq, arg,
+			   sizeof(compat_xfs_fsop_attrlist_handlereq_t)))
+		return -EFAULT;
+	if (al_hreq.buflen < sizeof(struct attrlist) ||
+	    al_hreq.buflen > XATTR_LIST_MAX)
+		return -EINVAL;
+>>>>>>> v3.18
 
 	/*
 	 * Reject flags, only allow namespaces.
 	 */
 	if (al_hreq.flags & ~(ATTR_ROOT | ATTR_SECURE))
+<<<<<<< HEAD
 		return -XFS_ERROR(EINVAL);
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 
 	dentry = xfs_compat_handlereq_to_dentry(parfilp, &al_hreq.hreq);
 	if (IS_ERR(dentry))
 		return PTR_ERR(dentry);
 
 	error = -ENOMEM;
+<<<<<<< HEAD
 	kbuf = kmem_zalloc(al_hreq.buflen, KM_SLEEP | KM_MAYFAIL);
 	if (!kbuf) {
 		kbuf = kmem_zalloc_large(al_hreq.buflen);
@@ -383,6 +509,14 @@ xfs_compat_attrlist_by_handle(
 
 	cursor = (attrlist_cursor_kern_t *)&al_hreq.pos;
 	error = -xfs_attr_list(XFS_I(dentry->d_inode), kbuf, al_hreq.buflen,
+=======
+	kbuf = kmem_zalloc_large(al_hreq.buflen, KM_SLEEP);
+	if (!kbuf)
+		goto out_dput;
+
+	cursor = (attrlist_cursor_kern_t *)&al_hreq.pos;
+	error = xfs_attr_list(XFS_I(dentry->d_inode), kbuf, al_hreq.buflen,
+>>>>>>> v3.18
 					al_hreq.flags, cursor);
 	if (error)
 		goto out_kfree;
@@ -390,12 +524,18 @@ xfs_compat_attrlist_by_handle(
 	if (copy_to_user(compat_ptr(al_hreq.buffer), kbuf, al_hreq.buflen))
 		error = -EFAULT;
 
+<<<<<<< HEAD
  out_kfree:
 	if (is_vmalloc_addr(kbuf))
 		kmem_free_large(kbuf);
 	else
 		kmem_free(kbuf);
  out_dput:
+=======
+out_kfree:
+	kmem_free(kbuf);
+out_dput:
+>>>>>>> v3.18
 	dput(dentry);
 	return error;
 }
@@ -413,10 +553,17 @@ xfs_compat_attrmulti_by_handle(
 	unsigned char				*attr_name;
 
 	if (!capable(CAP_SYS_ADMIN))
+<<<<<<< HEAD
 		return -XFS_ERROR(EPERM);
 	if (copy_from_user(&am_hreq, arg,
 			   sizeof(compat_xfs_fsop_attrmulti_handlereq_t)))
 		return -XFS_ERROR(EFAULT);
+=======
+		return -EPERM;
+	if (copy_from_user(&am_hreq, arg,
+			   sizeof(compat_xfs_fsop_attrmulti_handlereq_t)))
+		return -EFAULT;
+>>>>>>> v3.18
 
 	/* overflow check */
 	if (am_hreq.opcount >= INT_MAX / sizeof(compat_xfs_attr_multiop_t))
@@ -426,17 +573,29 @@ xfs_compat_attrmulti_by_handle(
 	if (IS_ERR(dentry))
 		return PTR_ERR(dentry);
 
+<<<<<<< HEAD
 	error = E2BIG;
+=======
+	error = -E2BIG;
+>>>>>>> v3.18
 	size = am_hreq.opcount * sizeof(compat_xfs_attr_multiop_t);
 	if (!size || size > 16 * PAGE_SIZE)
 		goto out_dput;
 
 	ops = memdup_user(compat_ptr(am_hreq.ops), size);
 	if (IS_ERR(ops)) {
+<<<<<<< HEAD
 		error = PTR_ERR(ops);
 		goto out_dput;
 	}
 
+=======
+		error = -PTR_ERR(ops);
+		goto out_dput;
+	}
+
+	error = -ENOMEM;
+>>>>>>> v3.18
 	attr_name = kmalloc(MAXNAMELEN, GFP_KERNEL);
 	if (!attr_name)
 		goto out_kfree_ops;
@@ -478,19 +637,31 @@ xfs_compat_attrmulti_by_handle(
 			mnt_drop_write_file(parfilp);
 			break;
 		default:
+<<<<<<< HEAD
 			ops[i].am_error = EINVAL;
+=======
+			ops[i].am_error = -EINVAL;
+>>>>>>> v3.18
 		}
 	}
 
 	if (copy_to_user(compat_ptr(am_hreq.ops), ops, size))
+<<<<<<< HEAD
 		error = XFS_ERROR(EFAULT);
+=======
+		error = -EFAULT;
+>>>>>>> v3.18
 
 	kfree(attr_name);
  out_kfree_ops:
 	kfree(ops);
  out_dput:
 	dput(dentry);
+<<<<<<< HEAD
 	return -error;
+=======
+	return error;
+>>>>>>> v3.18
 }
 
 STATIC int
@@ -504,26 +675,45 @@ xfs_compat_fssetdm_by_handle(
 	struct dentry		*dentry;
 
 	if (!capable(CAP_MKNOD))
+<<<<<<< HEAD
 		return -XFS_ERROR(EPERM);
 	if (copy_from_user(&dmhreq, arg,
 			   sizeof(compat_xfs_fsop_setdm_handlereq_t)))
 		return -XFS_ERROR(EFAULT);
+=======
+		return -EPERM;
+	if (copy_from_user(&dmhreq, arg,
+			   sizeof(compat_xfs_fsop_setdm_handlereq_t)))
+		return -EFAULT;
+>>>>>>> v3.18
 
 	dentry = xfs_compat_handlereq_to_dentry(parfilp, &dmhreq.hreq);
 	if (IS_ERR(dentry))
 		return PTR_ERR(dentry);
 
 	if (IS_IMMUTABLE(dentry->d_inode) || IS_APPEND(dentry->d_inode)) {
+<<<<<<< HEAD
 		error = -XFS_ERROR(EPERM);
+=======
+		error = -EPERM;
+>>>>>>> v3.18
 		goto out;
 	}
 
 	if (copy_from_user(&fsd, compat_ptr(dmhreq.data), sizeof(fsd))) {
+<<<<<<< HEAD
 		error = -XFS_ERROR(EFAULT);
 		goto out;
 	}
 
 	error = -xfs_set_dmattrs(XFS_I(dentry->d_inode), fsd.fsd_dmevmask,
+=======
+		error = -EFAULT;
+		goto out;
+	}
+
+	error = xfs_set_dmattrs(XFS_I(dentry->d_inode), fsd.fsd_dmevmask,
+>>>>>>> v3.18
 				 fsd.fsd_dmstate);
 
 out:
@@ -545,7 +735,11 @@ xfs_file_compat_ioctl(
 	int			error;
 
 	if (filp->f_mode & FMODE_NOCMTIME)
+<<<<<<< HEAD
 		ioflags |= IO_INVIS;
+=======
+		ioflags |= XFS_IO_INVIS;
+>>>>>>> v3.18
 
 	trace_xfs_file_compat_ioctl(ip);
 
@@ -596,7 +790,11 @@ xfs_file_compat_ioctl(
 		struct xfs_flock64	bf;
 
 		if (xfs_compat_flock64_copyin(&bf, arg))
+<<<<<<< HEAD
 			return -XFS_ERROR(EFAULT);
+=======
+			return -EFAULT;
+>>>>>>> v3.18
 		cmd = _NATIVE_IOC(cmd, struct xfs_flock64);
 		return xfs_ioc_space(ip, inode, filp, ioflags, cmd, &bf);
 	}
@@ -606,25 +804,41 @@ xfs_file_compat_ioctl(
 		struct xfs_growfs_data	in;
 
 		if (xfs_compat_growfs_data_copyin(&in, arg))
+<<<<<<< HEAD
 			return -XFS_ERROR(EFAULT);
+=======
+			return -EFAULT;
+>>>>>>> v3.18
 		error = mnt_want_write_file(filp);
 		if (error)
 			return error;
 		error = xfs_growfs_data(mp, &in);
 		mnt_drop_write_file(filp);
+<<<<<<< HEAD
 		return -error;
+=======
+		return error;
+>>>>>>> v3.18
 	}
 	case XFS_IOC_FSGROWFSRT_32: {
 		struct xfs_growfs_rt	in;
 
 		if (xfs_compat_growfs_rt_copyin(&in, arg))
+<<<<<<< HEAD
 			return -XFS_ERROR(EFAULT);
+=======
+			return -EFAULT;
+>>>>>>> v3.18
 		error = mnt_want_write_file(filp);
 		if (error)
 			return error;
 		error = xfs_growfs_rt(mp, &in);
 		mnt_drop_write_file(filp);
+<<<<<<< HEAD
 		return -error;
+=======
+		return error;
+>>>>>>> v3.18
 	}
 #endif
 	/* long changes size, but xfs only copiese out 32 bits */
@@ -641,6 +855,7 @@ xfs_file_compat_ioctl(
 		if (copy_from_user(&sxp, sxu,
 				   offsetof(struct xfs_swapext, sx_stat)) ||
 		    xfs_ioctl32_bstat_copyin(&sxp.sx_stat, &sxu->sx_stat))
+<<<<<<< HEAD
 			return -XFS_ERROR(EFAULT);
 		error = mnt_want_write_file(filp);
 		if (error)
@@ -648,6 +863,15 @@ xfs_file_compat_ioctl(
 		error = xfs_swapext(&sxp);
 		mnt_drop_write_file(filp);
 		return -error;
+=======
+			return -EFAULT;
+		error = mnt_want_write_file(filp);
+		if (error)
+			return error;
+		error = xfs_ioc_swapext(&sxp);
+		mnt_drop_write_file(filp);
+		return error;
+>>>>>>> v3.18
 	}
 	case XFS_IOC_FSBULKSTAT_32:
 	case XFS_IOC_FSBULKSTAT_SINGLE_32:
@@ -659,7 +883,11 @@ xfs_file_compat_ioctl(
 		struct xfs_fsop_handlereq	hreq;
 
 		if (xfs_compat_handlereq_copyin(&hreq, arg))
+<<<<<<< HEAD
 			return -XFS_ERROR(EFAULT);
+=======
+			return -EFAULT;
+>>>>>>> v3.18
 		cmd = _NATIVE_IOC(cmd, struct xfs_fsop_handlereq);
 		return xfs_find_handle(cmd, &hreq);
 	}
@@ -667,14 +895,22 @@ xfs_file_compat_ioctl(
 		struct xfs_fsop_handlereq	hreq;
 
 		if (xfs_compat_handlereq_copyin(&hreq, arg))
+<<<<<<< HEAD
 			return -XFS_ERROR(EFAULT);
+=======
+			return -EFAULT;
+>>>>>>> v3.18
 		return xfs_open_by_handle(filp, &hreq);
 	}
 	case XFS_IOC_READLINK_BY_HANDLE_32: {
 		struct xfs_fsop_handlereq	hreq;
 
 		if (xfs_compat_handlereq_copyin(&hreq, arg))
+<<<<<<< HEAD
 			return -XFS_ERROR(EFAULT);
+=======
+			return -EFAULT;
+>>>>>>> v3.18
 		return xfs_readlink_by_handle(filp, &hreq);
 	}
 	case XFS_IOC_ATTRLIST_BY_HANDLE_32:
@@ -684,6 +920,10 @@ xfs_file_compat_ioctl(
 	case XFS_IOC_FSSETDM_BY_HANDLE_32:
 		return xfs_compat_fssetdm_by_handle(filp, arg);
 	default:
+<<<<<<< HEAD
 		return -XFS_ERROR(ENOIOCTLCMD);
+=======
+		return -ENOIOCTLCMD;
+>>>>>>> v3.18
 	}
 }

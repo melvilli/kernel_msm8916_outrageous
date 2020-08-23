@@ -1083,7 +1083,11 @@ static int ov965x_enum_frame_sizes(struct v4l2_subdev *sd,
 {
 	int i = ARRAY_SIZE(ov965x_formats);
 
+<<<<<<< HEAD
 	if (fse->index > ARRAY_SIZE(ov965x_framesizes))
+=======
+	if (fse->index >= ARRAY_SIZE(ov965x_framesizes))
+>>>>>>> v3.18
 		return -EINVAL;
 
 	while (--i)

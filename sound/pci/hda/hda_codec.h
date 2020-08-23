@@ -25,6 +25,7 @@
 #include <sound/control.h>
 #include <sound/pcm.h>
 #include <sound/hwdep.h>
+<<<<<<< HEAD
 
 /*
  * nodes
@@ -553,6 +554,9 @@ enum {
 
 /* max. codec address */
 #define HDA_MAX_CODEC_ADDRESS	0x0f
+=======
+#include <sound/hda_verbs.h>
+>>>>>>> v3.18
 
 /*
  * generic arrays
@@ -655,6 +659,10 @@ struct hda_bus {
 
 	/* codec linked list */
 	struct list_head codec_list;
+<<<<<<< HEAD
+=======
+	unsigned int num_codecs;
+>>>>>>> v3.18
 	/* link caddr -> codec */
 	struct hda_codec *caddr_tbl[HDA_MAX_CODEC_ADDRESS + 1];
 
@@ -679,6 +687,10 @@ struct hda_bus {
 	unsigned int response_reset:1;	/* controller was reset */
 	unsigned int in_reset:1;	/* during reset operation */
 	unsigned int power_keep_link_on:1; /* don't power off HDA link */
+<<<<<<< HEAD
+=======
+	unsigned int no_response_fallback:1; /* don't fallback at RIRB error */
+>>>>>>> v3.18
 
 	int primary_dig_out_type;	/* primary digital out PCM type */
 };
@@ -796,6 +808,10 @@ struct hda_pcm {
 
 /* codec information */
 struct hda_codec {
+<<<<<<< HEAD
+=======
+	struct device dev;
+>>>>>>> v3.18
 	struct hda_bus *bus;
 	unsigned int addr;	/* codec addr*/
 	struct list_head list;	/* list point */
@@ -815,6 +831,10 @@ struct hda_codec {
 	/* detected preset */
 	const struct hda_codec_preset *preset;
 	struct module *owner;
+<<<<<<< HEAD
+=======
+	int (*parser)(struct hda_codec *codec);
+>>>>>>> v3.18
 	const char *vendor_name;	/* codec vendor name */
 	const char *chip_name;		/* codec chip name */
 	const char *modelname;	/* model name for preset */
@@ -856,14 +876,26 @@ struct hda_codec {
 	struct snd_array driver_pins;	/* pin configs set by codec parser */
 	struct snd_array cvt_setups;	/* audio convert setups */
 
+<<<<<<< HEAD
 #ifdef CONFIG_SND_HDA_HWDEP
 	struct mutex user_mutex;
 	struct snd_hwdep *hwdep;	/* assigned hwdep device */
+=======
+	struct mutex user_mutex;
+#ifdef CONFIG_SND_HDA_RECONFIG
+>>>>>>> v3.18
 	struct snd_array init_verbs;	/* additional init verbs */
 	struct snd_array hints;		/* additional hints */
 	struct snd_array user_pins;	/* default pin configs to override */
 #endif
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_SND_HDA_HWDEP
+	struct snd_hwdep *hwdep;	/* assigned hwdep device */
+#endif
+
+>>>>>>> v3.18
 	/* misc flags */
 	unsigned int spdif_status_reset :1; /* needs to toggle SPDIF for each
 					     * status change
@@ -884,10 +916,19 @@ struct hda_codec {
 	unsigned int pcm_format_first:1; /* PCM format must be set first */
 	unsigned int epss:1;		/* supporting EPSS? */
 	unsigned int cached_write:1;	/* write only to caches */
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 	unsigned int power_on :1;	/* current (global) power-state */
 	unsigned int d3_stop_clk:1;	/* support D3 operation without BCLK */
 	unsigned int pm_down_notified:1; /* PM notified to controller */
+=======
+	unsigned int dp_mst:1; /* support DP1.2 Multi-stream transport */
+	unsigned int dump_coef:1; /* dump processing coefs in codec proc file */
+#ifdef CONFIG_PM
+	unsigned int power_on :1;	/* current (global) power-state */
+	unsigned int d3_stop_clk:1;	/* support D3 operation without BCLK */
+	unsigned int pm_up_notified:1;	/* PM notified to controller */
+>>>>>>> v3.18
 	unsigned int in_pm:1;		/* suspend/resume being performed */
 	int power_transition;	/* power-state in transition */
 	int power_count;	/* current (global) power refcount */
@@ -916,6 +957,11 @@ struct hda_codec {
 	struct snd_array jacks;
 #endif
 
+<<<<<<< HEAD
+=======
+	int depop_delay; /* depop delay in ms, -1 for default delay time */
+
+>>>>>>> v3.18
 	/* fix-up list */
 	int fixup_id;
 	const struct hda_fixup *fixup_list;
@@ -930,6 +976,11 @@ enum {
 	HDA_INPUT, HDA_OUTPUT
 };
 
+<<<<<<< HEAD
+=======
+/* snd_hda_codec_read/write optional flags */
+#define HDA_RW_NO_RESPONSE_FALLBACK	(1 << 0)
+>>>>>>> v3.18
 
 /*
  * constructors
@@ -945,9 +996,15 @@ int snd_hda_codec_update_widgets(struct hda_codec *codec);
  * low level functions
  */
 unsigned int snd_hda_codec_read(struct hda_codec *codec, hda_nid_t nid,
+<<<<<<< HEAD
 				int direct,
 				unsigned int verb, unsigned int parm);
 int snd_hda_codec_write(struct hda_codec *codec, hda_nid_t nid, int direct,
+=======
+				int flags,
+				unsigned int verb, unsigned int parm);
+int snd_hda_codec_write(struct hda_codec *codec, hda_nid_t nid, int flags,
+>>>>>>> v3.18
 			unsigned int verb, unsigned int parm);
 #define snd_hda_param_read(codec, nid, param) \
 	snd_hda_codec_read(codec, nid, 0, AC_VERB_PARAMETERS, param)
@@ -969,6 +1026,11 @@ int snd_hda_override_conn_list(struct hda_codec *codec, hda_nid_t nid, int nums,
 			  const hda_nid_t *list);
 int snd_hda_get_conn_index(struct hda_codec *codec, hda_nid_t mux,
 			   hda_nid_t nid, int recursive);
+<<<<<<< HEAD
+=======
+int snd_hda_get_devices(struct hda_codec *codec, hda_nid_t nid,
+			u8 *dev_list, int max_devices);
+>>>>>>> v3.18
 int snd_hda_query_supported_pcm(struct hda_codec *codec, hda_nid_t nid,
 				u32 *ratesp, u64 *formatsp, unsigned int *bpsp);
 
@@ -986,11 +1048,19 @@ int snd_hda_queue_unsol_event(struct hda_bus *bus, u32 res, u32 res_ex);
 
 /* cached write */
 int snd_hda_codec_write_cache(struct hda_codec *codec, hda_nid_t nid,
+<<<<<<< HEAD
 			      int direct, unsigned int verb, unsigned int parm);
 void snd_hda_sequence_write_cache(struct hda_codec *codec,
 				  const struct hda_verb *seq);
 int snd_hda_codec_update_cache(struct hda_codec *codec, hda_nid_t nid,
 			      int direct, unsigned int verb, unsigned int parm);
+=======
+			      int flags, unsigned int verb, unsigned int parm);
+void snd_hda_sequence_write_cache(struct hda_codec *codec,
+				  const struct hda_verb *seq);
+int snd_hda_codec_update_cache(struct hda_codec *codec, hda_nid_t nid,
+			      int flags, unsigned int verb, unsigned int parm);
+>>>>>>> v3.18
 void snd_hda_codec_resume_cache(struct hda_codec *codec);
 /* both for cmd & amp caches */
 void snd_hda_codec_flush_cache(struct hda_codec *codec);
@@ -1049,7 +1119,12 @@ void __snd_hda_codec_cleanup_stream(struct hda_codec *codec, hda_nid_t nid,
 				    int do_now);
 #define snd_hda_codec_cleanup_stream(codec, nid) \
 	__snd_hda_codec_cleanup_stream(codec, nid, 0)
+<<<<<<< HEAD
 unsigned int snd_hda_calc_stream_format(unsigned int rate,
+=======
+unsigned int snd_hda_calc_stream_format(struct hda_codec *codec,
+					unsigned int rate,
+>>>>>>> v3.18
 					unsigned int channels,
 					unsigned int format,
 					unsigned int maxbps,
@@ -1198,6 +1273,7 @@ snd_hda_codec_load_dsp_cleanup(struct hda_codec *codec,
 				struct snd_dma_buffer *dmab) {}
 #endif
 
+<<<<<<< HEAD
 /*
  * Codec modularization
  */
@@ -1213,4 +1289,6 @@ snd_hda_codec_load_dsp_cleanup(struct hda_codec *codec,
 #define EXPORT_SYMBOL_HDA(sym)
 #endif
 
+=======
+>>>>>>> v3.18
 #endif /* __SOUND_HDA_CODEC_H */

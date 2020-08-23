@@ -258,7 +258,10 @@ static void release_ir_rx(struct kref *ref)
 	/* Don't put_ir_device(rx->ir) here; lock can't be freed yet */
 	ir->rx = NULL;
 	/* Don't do the kfree(rx) here; we still need to kill the poll thread */
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 }
 
 static int put_ir_rx(struct IR_rx *rx, bool ir_devices_lock_held)
@@ -512,7 +515,10 @@ static int set_use_inc(void *data)
 
 static void set_use_dec(void *data)
 {
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 }
 
 /* safe read of a uint32 (always network byte order) */
@@ -618,6 +624,10 @@ static int get_key_data(unsigned char *buf,
 	for (base = 0, lim = keys - 1; lim; lim >>= 1) {
 		/* Seek to block */
 		unsigned char *key_data;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		pos = base + (lim >> 1);
 		key_data = key_block + (ndiffs + 1) * pos;
 
@@ -628,6 +638,10 @@ static int get_key_data(unsigned char *buf,
 			/* found, so unpack the diffs */
 			for (i = 0; i < ndiffs; ++i) {
 				unsigned char val;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 				if (!read_uint8(&key_data, endp, &val) ||
 				    diffs[i] >= TX_BLOCK_SIZE)
 					goto corrupt;
@@ -656,6 +670,10 @@ static int send_data_block(struct IR_tx *tx, unsigned char *data_block)
 
 	for (i = 0; i < TX_BLOCK_SIZE;) {
 		int tosend = TX_BLOCK_SIZE - i;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		if (tosend > 4)
 			tosend = 4;
 		buf[0] = (unsigned char)(i + 1);
@@ -767,8 +785,13 @@ static int fw_load(struct IR_tx *tx)
 	/* Request codeset data file */
 	ret = request_firmware(&fw_entry, "haup-ir-blaster.bin", tx->ir->l.dev);
 	if (ret != 0) {
+<<<<<<< HEAD
 		zilog_error("firmware haup-ir-blaster.bin not available "
 			    "(%d)\n", ret);
+=======
+		zilog_error("firmware haup-ir-blaster.bin not available (%d)\n",
+			    ret);
+>>>>>>> v3.18
 		ret = ret < 0 ? ret : -EFAULT;
 		goto out;
 	}
@@ -838,6 +861,10 @@ static int fw_load(struct IR_tx *tx)
 		goto corrupt;
 	for (i = 0; i < num_global_fixed; ++i) {
 		unsigned char pos, val;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		if (!read_uint8(&data, tx_data->endp, &pos) ||
 		    !read_uint8(&data, tx_data->endp, &val) ||
 		    pos >= TX_BLOCK_SIZE)
@@ -892,7 +919,12 @@ out:
 }
 
 /* copied from lirc_dev */
+<<<<<<< HEAD
 static ssize_t read(struct file *filep, char *outbuf, size_t n, loff_t *ppos)
+=======
+static ssize_t read(struct file *filep, char __user *outbuf, size_t n,
+		    loff_t *ppos)
+>>>>>>> v3.18
 {
 	struct IR *ir = filep->private_data;
 	struct IR_rx *rx;
@@ -954,7 +986,11 @@ static ssize_t read(struct file *filep, char *outbuf, size_t n, loff_t *ppos)
 			}
 			m = lirc_buffer_read(rbuf, buf);
 			if (m == rbuf->chunk_size) {
+<<<<<<< HEAD
 				ret = copy_to_user((void *)outbuf+written, buf,
+=======
+				ret = copy_to_user(outbuf + written, buf,
+>>>>>>> v3.18
 						   rbuf->chunk_size);
 				written += rbuf->chunk_size;
 			} else {
@@ -1094,8 +1130,13 @@ static int send_code(struct IR_tx *tx, unsigned int code, unsigned int key)
  * sent to the device.  We have a spin lock as per i2c documentation to prevent
  * multiple concurrent sends which would probably cause the device to explode.
  */
+<<<<<<< HEAD
 static ssize_t write(struct file *filep, const char *buf, size_t n,
 			  loff_t *ppos)
+=======
+static ssize_t write(struct file *filep, const char __user *buf, size_t n,
+		     loff_t *ppos)
+>>>>>>> v3.18
 {
 	struct IR *ir = filep->private_data;
 	struct IR_tx *tx;
@@ -1237,6 +1278,10 @@ static unsigned int poll(struct file *filep, poll_table *wait)
 static long ioctl(struct file *filep, unsigned int cmd, unsigned long arg)
 {
 	struct IR *ir = filep->private_data;
+<<<<<<< HEAD
+=======
+	unsigned long __user *uptr = (unsigned long __user *)arg;
+>>>>>>> v3.18
 	int result;
 	unsigned long mode, features;
 
@@ -1244,11 +1289,18 @@ static long ioctl(struct file *filep, unsigned int cmd, unsigned long arg)
 
 	switch (cmd) {
 	case LIRC_GET_LENGTH:
+<<<<<<< HEAD
 		result = put_user((unsigned long)13,
 				  (unsigned long *)arg);
 		break;
 	case LIRC_GET_FEATURES:
 		result = put_user(features, (unsigned long *) arg);
+=======
+		result = put_user(13UL, uptr);
+		break;
+	case LIRC_GET_FEATURES:
+		result = put_user(features, uptr);
+>>>>>>> v3.18
 		break;
 	case LIRC_GET_REC_MODE:
 		if (!(features&LIRC_CAN_REC_MASK))
@@ -1256,13 +1308,21 @@ static long ioctl(struct file *filep, unsigned int cmd, unsigned long arg)
 
 		result = put_user(LIRC_REC2MODE
 				  (features&LIRC_CAN_REC_MASK),
+<<<<<<< HEAD
 				  (unsigned long *)arg);
+=======
+				  uptr);
+>>>>>>> v3.18
 		break;
 	case LIRC_SET_REC_MODE:
 		if (!(features&LIRC_CAN_REC_MASK))
 			return -ENOSYS;
 
+<<<<<<< HEAD
 		result = get_user(mode, (unsigned long *)arg);
+=======
+		result = get_user(mode, uptr);
+>>>>>>> v3.18
 		if (!result && !(LIRC_MODE2REC(mode) & features))
 			result = -EINVAL;
 		break;
@@ -1270,13 +1330,21 @@ static long ioctl(struct file *filep, unsigned int cmd, unsigned long arg)
 		if (!(features&LIRC_CAN_SEND_MASK))
 			return -ENOSYS;
 
+<<<<<<< HEAD
 		result = put_user(LIRC_MODE_PULSE, (unsigned long *) arg);
+=======
+		result = put_user(LIRC_MODE_PULSE, uptr);
+>>>>>>> v3.18
 		break;
 	case LIRC_SET_SEND_MODE:
 		if (!(features&LIRC_CAN_SEND_MASK))
 			return -ENOSYS;
 
+<<<<<<< HEAD
 		result = get_user(mode, (unsigned long *) arg);
+=======
+		result = get_user(mode, uptr);
+>>>>>>> v3.18
 		if (!result && mode != LIRC_MODE_PULSE)
 			return -EINVAL;
 		break;
@@ -1335,6 +1403,10 @@ static int close(struct inode *node, struct file *filep)
 {
 	/* find our IR struct */
 	struct IR *ir = filep->private_data;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	if (ir == NULL) {
 		zilog_error("close: no private_data attached to the file!\n");
 		return -ENODEV;
@@ -1401,6 +1473,10 @@ static int ir_remove(struct i2c_client *client)
 {
 	if (strncmp("ir_tx_z8", client->name, 8) == 0) {
 		struct IR_tx *tx = i2c_get_clientdata(client);
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		if (tx != NULL) {
 			mutex_lock(&tx->client_lock);
 			tx->c = NULL;
@@ -1409,6 +1485,10 @@ static int ir_remove(struct i2c_client *client)
 		}
 	} else if (strncmp("ir_rx_z8", client->name, 8) == 0) {
 		struct IR_rx *rx = i2c_get_clientdata(client);
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		if (rx != NULL) {
 			mutex_lock(&rx->client_lock);
 			rx->c = NULL;

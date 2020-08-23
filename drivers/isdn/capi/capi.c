@@ -1260,7 +1260,11 @@ static int __init capinc_tty_init(void)
 	if (capi_ttyminors <= 0)
 		capi_ttyminors = CAPINC_NR_PORTS;
 
+<<<<<<< HEAD
 	capiminors = kzalloc(sizeof(struct capi_minor *) * capi_ttyminors,
+=======
+	capiminors = kzalloc(sizeof(struct capiminor *) * capi_ttyminors,
+>>>>>>> v3.18
 			     GFP_KERNEL);
 	if (!capiminors)
 		return -ENOMEM;
@@ -1271,7 +1275,11 @@ static int __init capinc_tty_init(void)
 		return -ENOMEM;
 	}
 	drv->driver_name = "capi_nc";
+<<<<<<< HEAD
 	drv->name = "capi";
+=======
+	drv->name = "capi!";
+>>>>>>> v3.18
 	drv->major = 0;
 	drv->minor_start = 0;
 	drv->type = TTY_DRIVER_TYPE_SERIAL;
@@ -1417,7 +1425,11 @@ static int __init capi_init(void)
 		return PTR_ERR(capi_class);
 	}
 
+<<<<<<< HEAD
 	device_create(capi_class, NULL, MKDEV(capi_major, 0), NULL, "capi");
+=======
+	device_create(capi_class, NULL, MKDEV(capi_major, 0), NULL, "capi20");
+>>>>>>> v3.18
 
 	if (capinc_tty_init() < 0) {
 		device_destroy(capi_class, MKDEV(capi_major, 0));

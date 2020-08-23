@@ -14121,7 +14121,11 @@ static u8 ant_sw_ctrl_tbl_rev8_2057v7_core1[] = {
 
 bool wlc_phy_bist_check_phy(struct brcms_phy_pub *pih)
 {
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 	u32 phybist0, phybist1, phybist2, phybist3, phybist4;
 
 	if (NREV_GE(pi->pubpi.phy_rev, 16))
@@ -19734,7 +19738,11 @@ void wlc_phy_rxcore_setstate_nphy(struct brcms_phy_pub *pih, u8 rxcore_bitmask)
 	u16 regval;
 	u16 tbl_buf[16];
 	uint i;
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 	u16 tbl_opcode;
 	bool suspend;
 
@@ -19812,7 +19820,11 @@ void wlc_phy_rxcore_setstate_nphy(struct brcms_phy_pub *pih, u8 rxcore_bitmask)
 u8 wlc_phy_rxcore_getstate_nphy(struct brcms_phy_pub *pih)
 {
 	u16 regval, rxen_bits;
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 
 	regval = read_phy_reg(pi, 0xa2);
 	rxen_bits = (regval >> 4) & 0xf;
@@ -21342,7 +21354,11 @@ void wlc_phy_chanspec_set_nphy(struct brcms_phy *pi, u16 chanspec)
 
 void wlc_phy_antsel_init(struct brcms_phy_pub *ppi, bool lut_init)
 {
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) ppi;
+=======
+	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 	u16 mask = 0xfc00;
 	u32 mc = 0;
 
@@ -22916,7 +22932,10 @@ static void wlc_phy_rssi_cal_nphy_rev2(struct brcms_phy *pi, u8 rssi_type)
 		break;
 	default:
 		return;
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 	}
 
 	classif_state = wlc_phy_classifier_nphy(pi, 0, 0);

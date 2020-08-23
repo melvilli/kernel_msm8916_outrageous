@@ -290,6 +290,7 @@ DEFINE_EVENT(ext3__page_op, ext3_releasepage,
 );
 
 TRACE_EVENT(ext3_invalidatepage,
+<<<<<<< HEAD
 	TP_PROTO(struct page *page, unsigned long offset),
 
 	TP_ARGS(page, offset),
@@ -297,6 +298,16 @@ TRACE_EVENT(ext3_invalidatepage,
 	TP_STRUCT__entry(
 		__field(	pgoff_t, index			)
 		__field(	unsigned long, offset		)
+=======
+	TP_PROTO(struct page *page, unsigned int offset, unsigned int length),
+
+	TP_ARGS(page, offset, length),
+
+	TP_STRUCT__entry(
+		__field(	pgoff_t, index			)
+		__field(	unsigned int, offset		)
+		__field(	unsigned int, length		)
+>>>>>>> v3.18
 		__field(	ino_t,	ino			)
 		__field(	dev_t,	dev			)
 
@@ -305,14 +316,25 @@ TRACE_EVENT(ext3_invalidatepage,
 	TP_fast_assign(
 		__entry->index	= page->index;
 		__entry->offset	= offset;
+<<<<<<< HEAD
+=======
+		__entry->length	= length;
+>>>>>>> v3.18
 		__entry->ino	= page->mapping->host->i_ino;
 		__entry->dev	= page->mapping->host->i_sb->s_dev;
 	),
 
+<<<<<<< HEAD
 	TP_printk("dev %d,%d ino %lu page_index %lu offset %lu",
 		  MAJOR(__entry->dev), MINOR(__entry->dev),
 		  (unsigned long) __entry->ino,
 		  __entry->index, __entry->offset)
+=======
+	TP_printk("dev %d,%d ino %lu page_index %lu offset %u length %u",
+		  MAJOR(__entry->dev), MINOR(__entry->dev),
+		  (unsigned long) __entry->ino,
+		  __entry->index, __entry->offset, __entry->length)
+>>>>>>> v3.18
 );
 
 TRACE_EVENT(ext3_discard_blocks,

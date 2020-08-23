@@ -6,12 +6,18 @@
  * not have done anything significant (but they may have had interrupts
  * enabled briefly - prom_smp_finish() should not be responsible for enabling
  * interrupts...)
+<<<<<<< HEAD
  *
  * FIXME: broken for SMTC
  */
 
 #include <linux/kernel.h>
 #include <linux/init.h>
+=======
+ */
+
+#include <linux/kernel.h>
+>>>>>>> v3.18
 #include <linux/irqflags.h>
 #include <linux/cpumask.h>
 
@@ -20,20 +26,32 @@
 #include <asm/barrier.h>
 #include <asm/mipsregs.h>
 
+<<<<<<< HEAD
 static atomic_t __cpuinitdata count_start_flag = ATOMIC_INIT(0);
 static atomic_t __cpuinitdata count_count_start = ATOMIC_INIT(0);
 static atomic_t __cpuinitdata count_count_stop = ATOMIC_INIT(0);
 static atomic_t __cpuinitdata count_reference = ATOMIC_INIT(0);
+=======
+static atomic_t count_start_flag = ATOMIC_INIT(0);
+static atomic_t count_count_start = ATOMIC_INIT(0);
+static atomic_t count_count_stop = ATOMIC_INIT(0);
+static atomic_t count_reference = ATOMIC_INIT(0);
+>>>>>>> v3.18
 
 #define COUNTON 100
 #define NR_LOOPS 5
 
+<<<<<<< HEAD
 void __cpuinit synchronise_count_master(int cpu)
+=======
+void synchronise_count_master(int cpu)
+>>>>>>> v3.18
 {
 	int i;
 	unsigned long flags;
 	unsigned int initcount;
 
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	/*
 	 * SMTC needs to synchronise per VPE, not per CPU
@@ -42,6 +60,8 @@ void __cpuinit synchronise_count_master(int cpu)
 	return;
 #endif
 
+=======
+>>>>>>> v3.18
 	printk(KERN_INFO "Synchronize counters for CPU %u: ", cpu);
 
 	local_irq_save(flags);
@@ -106,11 +126,16 @@ void __cpuinit synchronise_count_master(int cpu)
 	printk("done.\n");
 }
 
+<<<<<<< HEAD
 void __cpuinit synchronise_count_slave(int cpu)
+=======
+void synchronise_count_slave(int cpu)
+>>>>>>> v3.18
 {
 	int i;
 	unsigned int initcount;
 
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	/*
 	 * SMTC needs to synchronise per VPE, not per CPU
@@ -119,6 +144,8 @@ void __cpuinit synchronise_count_slave(int cpu)
 	return;
 #endif
 
+=======
+>>>>>>> v3.18
 	/*
 	 * Not every cpu is online at the time this gets called,
 	 * so we first wait for the master to say everyone is ready

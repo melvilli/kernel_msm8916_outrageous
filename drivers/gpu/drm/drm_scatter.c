@@ -34,6 +34,10 @@
 #include <linux/vmalloc.h>
 #include <linux/slab.h>
 #include <drm/drmP.h>
+<<<<<<< HEAD
+=======
+#include "drm_legacy.h"
+>>>>>>> v3.18
 
 #define DEBUG_SCATTER 0
 
@@ -46,7 +50,11 @@ static inline void *drm_vmalloc_dma(unsigned long size)
 #endif
 }
 
+<<<<<<< HEAD
 void drm_sg_cleanup(struct drm_sg_mem * entry)
+=======
+static void drm_sg_cleanup(struct drm_sg_mem * entry)
+>>>>>>> v3.18
 {
 	struct page *page;
 	int i;
@@ -64,19 +72,43 @@ void drm_sg_cleanup(struct drm_sg_mem * entry)
 	kfree(entry);
 }
 
+<<<<<<< HEAD
+=======
+void drm_legacy_sg_cleanup(struct drm_device *dev)
+{
+	if (drm_core_check_feature(dev, DRIVER_SG) && dev->sg &&
+	    !drm_core_check_feature(dev, DRIVER_MODESET)) {
+		drm_sg_cleanup(dev->sg);
+		dev->sg = NULL;
+	}
+}
+>>>>>>> v3.18
 #ifdef _LP64
 # define ScatterHandle(x) (unsigned int)((x >> 32) + (x & ((1L << 32) - 1)))
 #else
 # define ScatterHandle(x) (unsigned int)(x)
 #endif
 
+<<<<<<< HEAD
 int drm_sg_alloc(struct drm_device *dev, struct drm_scatter_gather * request)
 {
+=======
+int drm_legacy_sg_alloc(struct drm_device *dev, void *data,
+			struct drm_file *file_priv)
+{
+	struct drm_scatter_gather *request = data;
+>>>>>>> v3.18
 	struct drm_sg_mem *entry;
 	unsigned long pages, i, j;
 
 	DRM_DEBUG("\n");
 
+<<<<<<< HEAD
+=======
+	if (drm_core_check_feature(dev, DRIVER_MODESET))
+		return -EINVAL;
+
+>>>>>>> v3.18
 	if (!drm_core_check_feature(dev, DRIVER_SG))
 		return -EINVAL;
 
@@ -181,6 +213,7 @@ int drm_sg_alloc(struct drm_device *dev, struct drm_scatter_gather * request)
 	return -ENOMEM;
 }
 
+<<<<<<< HEAD
 int drm_sg_alloc_ioctl(struct drm_device *dev, void *data,
 		       struct drm_file *file_priv)
 {
@@ -196,6 +229,17 @@ int drm_sg_free(struct drm_device *dev, void *data,
 	struct drm_scatter_gather *request = data;
 	struct drm_sg_mem *entry;
 
+=======
+int drm_legacy_sg_free(struct drm_device *dev, void *data,
+		       struct drm_file *file_priv)
+{
+	struct drm_scatter_gather *request = data;
+	struct drm_sg_mem *entry;
+
+	if (drm_core_check_feature(dev, DRIVER_MODESET))
+		return -EINVAL;
+
+>>>>>>> v3.18
 	if (!drm_core_check_feature(dev, DRIVER_SG))
 		return -EINVAL;
 

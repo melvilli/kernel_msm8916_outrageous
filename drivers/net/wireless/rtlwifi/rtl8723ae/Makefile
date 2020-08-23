@@ -10,7 +10,10 @@ rtl8723ae-objs :=		\
 		led.o		\
 		phy.o		\
 		pwrseq.o	\
+<<<<<<< HEAD
 		pwrseqcmd.o	\
+=======
+>>>>>>> v3.18
 		rf.o		\
 		sw.o		\
 		table.o		\

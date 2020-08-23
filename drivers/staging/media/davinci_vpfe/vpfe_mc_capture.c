@@ -228,10 +228,15 @@ static int vpfe_enable_clock(struct vpfe_device *vpfe_dev)
 
 	vpfe_dev->clks = kzalloc(vpfe_cfg->num_clocks *
 				   sizeof(struct clock *), GFP_KERNEL);
+<<<<<<< HEAD
 	if (vpfe_dev->clks == NULL) {
 		v4l2_err(vpfe_dev->pdev->driver, "Memory allocation failed\n");
 		return -ENOMEM;
 	}
+=======
+	if (vpfe_dev->clks == NULL)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	for (i = 0; i < vpfe_cfg->num_clocks; i++) {
 		if (vpfe_cfg->clocks[i] == NULL) {
@@ -298,7 +303,11 @@ static int vpfe_attach_irq(struct vpfe_device *vpfe_dev)
 {
 	int ret = 0;
 
+<<<<<<< HEAD
 	ret = request_irq(vpfe_dev->ccdc_irq0, vpfe_isr, IRQF_DISABLED,
+=======
+	ret = request_irq(vpfe_dev->ccdc_irq0, vpfe_isr, 0,
+>>>>>>> v3.18
 			  "vpfe_capture0", vpfe_dev);
 	if (ret < 0) {
 		v4l2_err(&vpfe_dev->v4l2_dev,
@@ -306,7 +315,11 @@ static int vpfe_attach_irq(struct vpfe_device *vpfe_dev)
 		return ret;
 	}
 
+<<<<<<< HEAD
 	ret = request_irq(vpfe_dev->ccdc_irq1, vpfe_vdint1_isr, IRQF_DISABLED,
+=======
+	ret = request_irq(vpfe_dev->ccdc_irq1, vpfe_vdint1_isr, 0,
+>>>>>>> v3.18
 			  "vpfe_capture1", vpfe_dev);
 	if (ret < 0) {
 		v4l2_err(&vpfe_dev->v4l2_dev,
@@ -316,7 +329,11 @@ static int vpfe_attach_irq(struct vpfe_device *vpfe_dev)
 	}
 
 	ret = request_irq(vpfe_dev->imp_dma_irq, vpfe_imp_dma_isr,
+<<<<<<< HEAD
 			  IRQF_DISABLED, "Imp_Sdram_Irq", vpfe_dev);
+=======
+			  0, "Imp_Sdram_Irq", vpfe_dev);
+>>>>>>> v3.18
 	if (ret < 0) {
 		v4l2_err(&vpfe_dev->v4l2_dev,
 			 "Error: requesting IMP IRQ interrupt\n");
@@ -349,11 +366,16 @@ static int register_i2c_devices(struct vpfe_device *vpfe_dev)
 	num_subdevs = vpfe_cfg->num_subdevs;
 	vpfe_dev->sd =
 		  kzalloc(sizeof(struct v4l2_subdev *)*num_subdevs, GFP_KERNEL);
+<<<<<<< HEAD
 	if (vpfe_dev->sd == NULL) {
 		v4l2_err(&vpfe_dev->v4l2_dev,
 			"unable to allocate memory for subdevice\n");
 		return -ENOMEM;
 	}
+=======
+	if (vpfe_dev->sd == NULL)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	for (i = 0, k = 0; i < num_subdevs; i++) {
 		sdinfo = &vpfe_cfg->sub_devs[i];
@@ -582,11 +604,16 @@ static int vpfe_probe(struct platform_device *pdev)
 	int ret = -ENOMEM;
 
 	vpfe_dev = kzalloc(sizeof(*vpfe_dev), GFP_KERNEL);
+<<<<<<< HEAD
 	if (!vpfe_dev) {
 		v4l2_err(pdev->dev.driver,
 			"Failed to allocate memory for vpfe_dev\n");
 		return ret;
 	}
+=======
+	if (!vpfe_dev)
+		return ret;
+>>>>>>> v3.18
 
 	if (pdev->dev.platform_data == NULL) {
 		v4l2_err(pdev->dev.driver, "Unable to get vpfe config\n");

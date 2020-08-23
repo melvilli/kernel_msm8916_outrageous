@@ -1590,7 +1590,10 @@ lba_driver_probe(struct parisc_device *dev)
 		lba_dump_res(&lba_dev->hba.lmmio_space, 2);
 #endif
 	}
+<<<<<<< HEAD
 	pci_enable_bridges(lba_bus);
+=======
+>>>>>>> v3.18
 
 	/*
 	** Once PCI register ops has walked the bus, access to config

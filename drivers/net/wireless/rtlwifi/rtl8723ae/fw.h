@@ -24,12 +24,17 @@
  * Hsinchu 300, Taiwan.
  * Larry Finger <Larry.Finger@lwfinger.net>
  *
+<<<<<<< HEAD
  ****************************************************************************
  */
+=======
+ *****************************************************************************/
+>>>>>>> v3.18
 
 #ifndef __RTL92C__FW__H__
 #define __RTL92C__FW__H__
 
+<<<<<<< HEAD
 #define FW_8192C_START_ADDRESS			0x1000
 #define FW_8192C_END_ADDRESS			0x3FFF
 #define FW_8192C_PAGE_SIZE			4096
@@ -76,6 +81,20 @@ enum rtl8192c_h2c_cmd {
 	H2C_RA_MASK = 7,
 	MAX_H2CCMD
 };
+=======
+#define FW_8192C_SIZE					0x3000
+#define FW_8192C_START_ADDRESS			0x1000
+#define FW_8192C_END_ADDRESS			0x3FFF
+#define FW_8192C_PAGE_SIZE				4096
+#define FW_8192C_POLLING_DELAY			5
+
+#define IS_FW_HEADER_EXIST(_pfwhdr)	\
+	((_pfwhdr->signature&0xFFFF) == 0x2300 ||\
+	(_pfwhdr->signature&0xFFFF) == 0x2301 ||\
+	(_pfwhdr->signature&0xFFFF) == 0x2302)
+
+#define pagenum_128(_len)	(u32)(((_len)>>7) + ((_len)&0x7F ? 1 : 0))
+>>>>>>> v3.18
 
 #define SET_H2CCMD_PWRMODE_PARM_MODE(__ph2ccmd, __val)			\
 	SET_BITS_TO_LE_1BYTE(__ph2ccmd, 0, 8, __val)
@@ -92,6 +111,7 @@ enum rtl8192c_h2c_cmd {
 #define SET_H2CCMD_RSVDPAGE_LOC_NULL_DATA(__ph2ccmd, __val)		\
 	SET_BITS_TO_LE_1BYTE((__ph2ccmd)+2, 0, 8, __val)
 
+<<<<<<< HEAD
 int rtl8723ae_download_fw(struct ieee80211_hw *hw);
 void rtl8723ae_fill_h2c_cmd(struct ieee80211_hw *hw, u8 element_id,
 			    u32 cmd_len, u8 *p_cmdbuffer);
@@ -101,4 +121,12 @@ void rtl8723ae_set_fw_rsvdpagepkt(struct ieee80211_hw *hw, bool b_dl_finished);
 void rtl8723ae_set_fw_joinbss_report_cmd(struct ieee80211_hw *hw, u8 mstatus);
 void rtl8723ae_set_p2p_ps_offload_cmd(struct ieee80211_hw *hw, u8 p2p_ps_state);
 
+=======
+void rtl8723e_fill_h2c_cmd(struct ieee80211_hw *hw, u8 element_id,
+			   u32 cmd_len, u8 *p_cmdbuffer);
+void rtl8723e_set_fw_pwrmode_cmd(struct ieee80211_hw *hw, u8 mode);
+void rtl8723e_set_fw_rsvdpagepkt(struct ieee80211_hw *hw, bool b_dl_finished);
+void rtl8723e_set_fw_joinbss_report_cmd(struct ieee80211_hw *hw, u8 mstatus);
+void rtl8723e_set_p2p_ps_offload_cmd(struct ieee80211_hw *hw, u8 p2p_ps_state);
+>>>>>>> v3.18
 #endif

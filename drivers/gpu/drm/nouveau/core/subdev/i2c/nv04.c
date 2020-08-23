@@ -22,9 +22,16 @@
  * Authors: Ben Skeggs
  */
 
+<<<<<<< HEAD
 #include <subdev/i2c.h>
 #include <subdev/vga.h>
 
+=======
+#include <subdev/vga.h>
+
+#include "priv.h"
+
+>>>>>>> v3.18
 struct nv04_i2c_priv {
 	struct nouveau_i2c base;
 };
@@ -91,12 +98,20 @@ nv04_i2c_port_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	int ret;
 
 	ret = nouveau_i2c_port_create(parent, engine, oclass, index,
+<<<<<<< HEAD
 				     &nouveau_i2c_bit_algo, &port);
+=======
+				      &nouveau_i2c_bit_algo, &nv04_i2c_func,
+				      &port);
+>>>>>>> v3.18
 	*pobject = nv_object(port);
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 	port->base.func = &nv04_i2c_func;
+=======
+>>>>>>> v3.18
 	port->drive = info->drive;
 	port->sense = info->sense;
 	return 0;
@@ -115,6 +130,7 @@ nv04_i2c_sclass[] = {
 	{}
 };
 
+<<<<<<< HEAD
 static int
 nv04_i2c_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	      struct nouveau_oclass *oclass, void *data, u32 size,
@@ -136,8 +152,21 @@ nv04_i2c_oclass = {
 	.handle = NV_SUBDEV(I2C, 0x04),
 	.ofuncs = &(struct nouveau_ofuncs) {
 		.ctor = nv04_i2c_ctor,
+=======
+struct nouveau_oclass *
+nv04_i2c_oclass = &(struct nouveau_i2c_impl) {
+	.base.handle = NV_SUBDEV(I2C, 0x04),
+	.base.ofuncs = &(struct nouveau_ofuncs) {
+		.ctor = _nouveau_i2c_ctor,
+>>>>>>> v3.18
 		.dtor = _nouveau_i2c_dtor,
 		.init = _nouveau_i2c_init,
 		.fini = _nouveau_i2c_fini,
 	},
+<<<<<<< HEAD
 };
+=======
+	.sclass = nv04_i2c_sclass,
+	.pad_x = &nv04_i2c_pad_oclass,
+}.base;
+>>>>>>> v3.18

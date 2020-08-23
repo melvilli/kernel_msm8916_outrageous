@@ -105,6 +105,7 @@ static u64 find_u4_magic_addr(struct pci_dev *pdev, unsigned int hwirq)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int u3msi_msi_check_device(struct pci_dev *pdev, int nvec, int type)
 {
 	if (type == PCI_CAP_ID_MSIX)
@@ -125,15 +126,27 @@ static void u3msi_teardown_msi_irqs(struct pci_dev *pdev)
 {
 	struct msi_desc *entry;
 	irq_hw_number_t hwirq;
+=======
+static void u3msi_teardown_msi_irqs(struct pci_dev *pdev)
+{
+	struct msi_desc *entry;
+>>>>>>> v3.18
 
         list_for_each_entry(entry, &pdev->msi_list, list) {
 		if (entry->irq == NO_IRQ)
 			continue;
 
+<<<<<<< HEAD
 		hwirq = virq_to_hw(entry->irq);
 		irq_set_msi_desc(entry->irq, NULL);
 		irq_dispose_mapping(entry->irq);
 		msi_bitmap_free_hwirqs(&msi_mpic->msi_bitmap, hwirq, 1);
+=======
+		irq_set_msi_desc(entry->irq, NULL);
+		msi_bitmap_free_hwirqs(&msi_mpic->msi_bitmap,
+				       virq_to_hw(entry->irq), 1);
+		irq_dispose_mapping(entry->irq);
+>>>>>>> v3.18
 	}
 
 	return;
@@ -147,6 +160,20 @@ static int u3msi_setup_msi_irqs(struct pci_dev *pdev, int nvec, int type)
 	u64 addr;
 	int hwirq;
 
+<<<<<<< HEAD
+=======
+	if (type == PCI_CAP_ID_MSIX)
+		pr_debug("u3msi: MSI-X untested, trying anyway.\n");
+
+	/* If we can't find a magic address then MSI ain't gonna work */
+	if (find_ht_magic_addr(pdev, 0) == 0 &&
+	    find_u4_magic_addr(pdev, 0) == 0) {
+		pr_debug("u3msi: no magic address found for %s\n",
+			 pci_name(pdev));
+		return -ENXIO;
+	}
+
+>>>>>>> v3.18
 	list_for_each_entry(entry, &pdev->msi_list, list) {
 		hwirq = msi_bitmap_alloc_hwirqs(&msi_mpic->msi_bitmap, 1);
 		if (hwirq < 0) {
@@ -203,7 +230,10 @@ int mpic_u3msi_init(struct mpic *mpic)
 	WARN_ON(ppc_md.setup_msi_irqs);
 	ppc_md.setup_msi_irqs = u3msi_setup_msi_irqs;
 	ppc_md.teardown_msi_irqs = u3msi_teardown_msi_irqs;
+<<<<<<< HEAD
 	ppc_md.msi_check_device = u3msi_msi_check_device;
+=======
+>>>>>>> v3.18
 
 	return 0;
 }

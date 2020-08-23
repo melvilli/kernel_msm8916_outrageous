@@ -29,5 +29,9 @@ void brcmf_fws_reset_interface(struct brcmf_if *ifp);
 void brcmf_fws_add_interface(struct brcmf_if *ifp);
 void brcmf_fws_del_interface(struct brcmf_if *ifp);
 void brcmf_fws_bustxfail(struct brcmf_fws_info *fws, struct sk_buff *skb);
+<<<<<<< HEAD
+=======
+void brcmf_fws_bus_blocked(struct brcmf_pub *drvr, bool flow_blocked);
+>>>>>>> v3.18
 
 #endif /* FWSIGNAL_H_ */

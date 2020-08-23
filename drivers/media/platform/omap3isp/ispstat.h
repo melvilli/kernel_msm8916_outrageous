@@ -13,6 +13,7 @@
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
+<<<<<<< HEAD
  *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -23,6 +24,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA
+=======
+>>>>>>> v3.18
  */
 
 #ifndef OMAP3_ISP_STAT_H
@@ -46,8 +49,12 @@
 struct ispstat;
 
 struct ispstat_buffer {
+<<<<<<< HEAD
 	unsigned long iommu_addr;
 	struct iovm_struct *iovm;
+=======
+	struct sg_table sgt;
+>>>>>>> v3.18
 	void *virt_addr;
 	dma_addr_t dma_addr;
 	struct timespec ts;

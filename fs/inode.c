@@ -17,6 +17,10 @@
 #include <linux/prefetch.h>
 #include <linux/buffer_head.h> /* for inode_has_buffers */
 #include <linux/ratelimit.h>
+<<<<<<< HEAD
+=======
+#include <linux/list_lru.h>
+>>>>>>> v3.18
 #include "internal.h"
 
 /*
@@ -24,7 +28,11 @@
  *
  * inode->i_lock protects:
  *   inode->i_state, inode->i_hash, __iget()
+<<<<<<< HEAD
  * inode->i_sb->s_inode_lru_lock protects:
+=======
+ * Inode LRU list locks protect:
+>>>>>>> v3.18
  *   inode->i_sb->s_inode_lru, inode->i_lru
  * inode_sb_list_lock protects:
  *   sb->s_inodes, inode->i_sb_list
@@ -37,7 +45,11 @@
  *
  * inode_sb_list_lock
  *   inode->i_lock
+<<<<<<< HEAD
  *     inode->i_sb->s_inode_lru_lock
+=======
+ *     Inode LRU list locks
+>>>>>>> v3.18
  *
  * bdi->wb.list_lock
  *   inode->i_lock
@@ -70,6 +82,7 @@ EXPORT_SYMBOL(empty_aops);
  */
 struct inodes_stat_t inodes_stat;
 
+<<<<<<< HEAD
 static DEFINE_PER_CPU(unsigned int, nr_inodes);
 static DEFINE_PER_CPU(unsigned int, nr_unused);
 
@@ -79,24 +92,49 @@ static int get_nr_inodes(void)
 {
 	int i;
 	int sum = 0;
+=======
+static DEFINE_PER_CPU(unsigned long, nr_inodes);
+static DEFINE_PER_CPU(unsigned long, nr_unused);
+
+static struct kmem_cache *inode_cachep __read_mostly;
+
+static long get_nr_inodes(void)
+{
+	int i;
+	long sum = 0;
+>>>>>>> v3.18
 	for_each_possible_cpu(i)
 		sum += per_cpu(nr_inodes, i);
 	return sum < 0 ? 0 : sum;
 }
 
+<<<<<<< HEAD
 static inline int get_nr_inodes_unused(void)
 {
 	int i;
 	int sum = 0;
+=======
+static inline long get_nr_inodes_unused(void)
+{
+	int i;
+	long sum = 0;
+>>>>>>> v3.18
 	for_each_possible_cpu(i)
 		sum += per_cpu(nr_unused, i);
 	return sum < 0 ? 0 : sum;
 }
 
+<<<<<<< HEAD
 int get_nr_dirty_inodes(void)
 {
 	/* not actually dirty inodes, but a wild approximation */
 	int nr_dirty = get_nr_inodes() - get_nr_inodes_unused();
+=======
+long get_nr_dirty_inodes(void)
+{
+	/* not actually dirty inodes, but a wild approximation */
+	long nr_dirty = get_nr_inodes() - get_nr_inodes_unused();
+>>>>>>> v3.18
 	return nr_dirty > 0 ? nr_dirty : 0;
 }
 
@@ -104,12 +142,20 @@ int get_nr_dirty_inodes(void)
  * Handle nr_inode sysctl
  */
 #ifdef CONFIG_SYSCTL
+<<<<<<< HEAD
 int proc_nr_inodes(ctl_table *table, int write,
+=======
+int proc_nr_inodes(struct ctl_table *table, int write,
+>>>>>>> v3.18
 		   void __user *buffer, size_t *lenp, loff_t *ppos)
 {
 	inodes_stat.nr_inodes = get_nr_inodes();
 	inodes_stat.nr_unused = get_nr_inodes_unused();
+<<<<<<< HEAD
 	return proc_dointvec(table, write, buffer, lenp, ppos);
+=======
+	return proc_doulongvec_minmax(table, write, buffer, lenp, ppos);
+>>>>>>> v3.18
 }
 #endif
 
@@ -164,6 +210,10 @@ int inode_init_always(struct super_block *sb, struct inode *inode)
 	mapping->a_ops = &empty_aops;
 	mapping->host = inode;
 	mapping->flags = 0;
+<<<<<<< HEAD
+=======
+	atomic_set(&mapping->i_mmap_writable, 0);
+>>>>>>> v3.18
 	mapping_set_gfp_mask(mapping, GFP_HIGHUSER_MOVABLE);
 	mapping->private_data = NULL;
 	mapping->backing_dev_info = &default_backing_dev_info;
@@ -401,6 +451,7 @@ EXPORT_SYMBOL(ihold);
 
 static void inode_lru_list_add(struct inode *inode)
 {
+<<<<<<< HEAD
 	spin_lock(&inode->i_sb->s_inode_lru_lock);
 	if (list_empty(&inode->i_lru)) {
 		list_add(&inode->i_lru, &inode->i_sb->s_inode_lru);
@@ -408,6 +459,10 @@ static void inode_lru_list_add(struct inode *inode)
 		this_cpu_inc(nr_unused);
 	}
 	spin_unlock(&inode->i_sb->s_inode_lru_lock);
+=======
+	if (list_lru_add(&inode->i_sb->s_inode_lru, &inode->i_lru))
+		this_cpu_inc(nr_unused);
+>>>>>>> v3.18
 }
 
 /*
@@ -425,6 +480,7 @@ void inode_add_lru(struct inode *inode)
 
 static void inode_lru_list_del(struct inode *inode)
 {
+<<<<<<< HEAD
 	spin_lock(&inode->i_sb->s_inode_lru_lock);
 	if (!list_empty(&inode->i_lru)) {
 		list_del_init(&inode->i_lru);
@@ -432,6 +488,11 @@ static void inode_lru_list_del(struct inode *inode)
 		this_cpu_dec(nr_unused);
 	}
 	spin_unlock(&inode->i_sb->s_inode_lru_lock);
+=======
+
+	if (list_lru_del(&inode->i_sb->s_inode_lru, &inode->i_lru))
+		this_cpu_dec(nr_unused);
+>>>>>>> v3.18
 }
 
 /**
@@ -511,6 +572,10 @@ void clear_inode(struct inode *inode)
 	 */
 	spin_lock_irq(&inode->i_data.tree_lock);
 	BUG_ON(inode->i_data.nrpages);
+<<<<<<< HEAD
+=======
+	BUG_ON(inode->i_data.nrshadows);
+>>>>>>> v3.18
 	spin_unlock_irq(&inode->i_data.tree_lock);
 	BUG_ON(!list_empty(&inode->i_data.private_list));
 	BUG_ON(!(inode->i_state & I_FREEING));
@@ -556,8 +621,12 @@ static void evict(struct inode *inode)
 	if (op->evict_inode) {
 		op->evict_inode(inode);
 	} else {
+<<<<<<< HEAD
 		if (inode->i_data.nrpages)
 			truncate_inode_pages(&inode->i_data, 0);
+=======
+		truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 		clear_inode(inode);
 	}
 	if (S_ISBLK(inode->i_mode) && inode->i_bdev)
@@ -675,6 +744,7 @@ int invalidate_inodes(struct super_block *sb, bool kill_dirty)
 	return busy;
 }
 
+<<<<<<< HEAD
 static int can_unuse(struct inode *inode)
 {
 	if (inode->i_state & ~I_REFERENCED)
@@ -693,6 +763,10 @@ static int can_unuse(struct inode *inode)
  * This is called from the superblock shrinker function with a number of inodes
  * to trim from the LRU. Inodes to be freed are moved to a temporary list and
  * then are freed outside inode_lock by dispose_list().
+=======
+/*
+ * Isolate the inode from the LRU in preparation for freeing it.
+>>>>>>> v3.18
  *
  * Any inodes which are pinned purely because of attached pagecache have their
  * pagecache removed.  If the inode has metadata buffers attached to
@@ -706,6 +780,7 @@ static int can_unuse(struct inode *inode)
  * LRU does not have strict ordering. Hence we don't want to reclaim inodes
  * with this flag set because they are the inodes that are out of order.
  */
+<<<<<<< HEAD
 void prune_icache_sb(struct super_block *sb, int nr_to_scan)
 {
 	LIST_HEAD(freeable);
@@ -789,6 +864,84 @@ void prune_icache_sb(struct super_block *sb, int nr_to_scan)
 		current->reclaim_state->reclaimed_slab += reap;
 
 	dispose_list(&freeable);
+=======
+static enum lru_status
+inode_lru_isolate(struct list_head *item, spinlock_t *lru_lock, void *arg)
+{
+	struct list_head *freeable = arg;
+	struct inode	*inode = container_of(item, struct inode, i_lru);
+
+	/*
+	 * we are inverting the lru lock/inode->i_lock here, so use a trylock.
+	 * If we fail to get the lock, just skip it.
+	 */
+	if (!spin_trylock(&inode->i_lock))
+		return LRU_SKIP;
+
+	/*
+	 * Referenced or dirty inodes are still in use. Give them another pass
+	 * through the LRU as we canot reclaim them now.
+	 */
+	if (atomic_read(&inode->i_count) ||
+	    (inode->i_state & ~I_REFERENCED)) {
+		list_del_init(&inode->i_lru);
+		spin_unlock(&inode->i_lock);
+		this_cpu_dec(nr_unused);
+		return LRU_REMOVED;
+	}
+
+	/* recently referenced inodes get one more pass */
+	if (inode->i_state & I_REFERENCED) {
+		inode->i_state &= ~I_REFERENCED;
+		spin_unlock(&inode->i_lock);
+		return LRU_ROTATE;
+	}
+
+	if (inode_has_buffers(inode) || inode->i_data.nrpages) {
+		__iget(inode);
+		spin_unlock(&inode->i_lock);
+		spin_unlock(lru_lock);
+		if (remove_inode_buffers(inode)) {
+			unsigned long reap;
+			reap = invalidate_mapping_pages(&inode->i_data, 0, -1);
+			if (current_is_kswapd())
+				__count_vm_events(KSWAPD_INODESTEAL, reap);
+			else
+				__count_vm_events(PGINODESTEAL, reap);
+			if (current->reclaim_state)
+				current->reclaim_state->reclaimed_slab += reap;
+		}
+		iput(inode);
+		spin_lock(lru_lock);
+		return LRU_RETRY;
+	}
+
+	WARN_ON(inode->i_state & I_NEW);
+	inode->i_state |= I_FREEING;
+	list_move(&inode->i_lru, freeable);
+	spin_unlock(&inode->i_lock);
+
+	this_cpu_dec(nr_unused);
+	return LRU_REMOVED;
+}
+
+/*
+ * Walk the superblock inode LRU for freeable inodes and attempt to free them.
+ * This is called from the superblock shrinker function with a number of inodes
+ * to trim from the LRU. Inodes to be freed are moved to a temporary list and
+ * then are freed outside inode_lock by dispose_list().
+ */
+long prune_icache_sb(struct super_block *sb, unsigned long nr_to_scan,
+		     int nid)
+{
+	LIST_HEAD(freeable);
+	long freed;
+
+	freed = list_lru_walk_node(&sb->s_inode_lru, nid, inode_lru_isolate,
+				       &freeable, &nr_to_scan);
+	dispose_list(&freeable);
+	return freed;
+>>>>>>> v3.18
 }
 
 static void __wait_on_freeing_inode(struct inode *inode);
@@ -804,6 +957,7 @@ static struct inode *find_inode(struct super_block *sb,
 
 repeat:
 	hlist_for_each_entry(inode, head, i_hash) {
+<<<<<<< HEAD
 		spin_lock(&inode->i_lock);
 		if (inode->i_sb != sb) {
 			spin_unlock(&inode->i_lock);
@@ -813,6 +967,13 @@ repeat:
 			spin_unlock(&inode->i_lock);
 			continue;
 		}
+=======
+		if (inode->i_sb != sb)
+			continue;
+		if (!test(inode, data))
+			continue;
+		spin_lock(&inode->i_lock);
+>>>>>>> v3.18
 		if (inode->i_state & (I_FREEING|I_WILL_FREE)) {
 			__wait_on_freeing_inode(inode);
 			goto repeat;
@@ -835,6 +996,7 @@ static struct inode *find_inode_fast(struct super_block *sb,
 
 repeat:
 	hlist_for_each_entry(inode, head, i_hash) {
+<<<<<<< HEAD
 		spin_lock(&inode->i_lock);
 		if (inode->i_ino != ino) {
 			spin_unlock(&inode->i_lock);
@@ -844,6 +1006,13 @@ repeat:
 			spin_unlock(&inode->i_lock);
 			continue;
 		}
+=======
+		if (inode->i_ino != ino)
+			continue;
+		if (inode->i_sb != sb)
+			continue;
+		spin_lock(&inode->i_lock);
+>>>>>>> v3.18
 		if (inode->i_state & (I_FREEING|I_WILL_FREE)) {
 			__wait_on_freeing_inode(inode);
 			goto repeat;
@@ -982,6 +1151,44 @@ void unlock_new_inode(struct inode *inode)
 EXPORT_SYMBOL(unlock_new_inode);
 
 /**
+<<<<<<< HEAD
+=======
+ * lock_two_nondirectories - take two i_mutexes on non-directory objects
+ *
+ * Lock any non-NULL argument that is not a directory.
+ * Zero, one or two objects may be locked by this function.
+ *
+ * @inode1: first inode to lock
+ * @inode2: second inode to lock
+ */
+void lock_two_nondirectories(struct inode *inode1, struct inode *inode2)
+{
+	if (inode1 > inode2)
+		swap(inode1, inode2);
+
+	if (inode1 && !S_ISDIR(inode1->i_mode))
+		mutex_lock(&inode1->i_mutex);
+	if (inode2 && !S_ISDIR(inode2->i_mode) && inode2 != inode1)
+		mutex_lock_nested(&inode2->i_mutex, I_MUTEX_NONDIR2);
+}
+EXPORT_SYMBOL(lock_two_nondirectories);
+
+/**
+ * unlock_two_nondirectories - release locks from lock_two_nondirectories()
+ * @inode1: first inode to unlock
+ * @inode2: second inode to unlock
+ */
+void unlock_two_nondirectories(struct inode *inode1, struct inode *inode2)
+{
+	if (inode1 && !S_ISDIR(inode1->i_mode))
+		mutex_unlock(&inode1->i_mutex);
+	if (inode2 && !S_ISDIR(inode2->i_mode) && inode2 != inode1)
+		mutex_unlock(&inode2->i_mutex);
+}
+EXPORT_SYMBOL(unlock_two_nondirectories);
+
+/**
+>>>>>>> v3.18
  * iget5_locked - obtain an inode from a mounted file system
  * @sb:		super block of file system
  * @hashval:	hash value (usually inode number) to get
@@ -1525,7 +1732,11 @@ static int update_time(struct inode *inode, struct timespec *time, int flags)
  *	This function automatically handles read only file systems and media,
  *	as well as the "noatime" flag and inode specific "noatime" markers.
  */
+<<<<<<< HEAD
 void touch_atime(struct path *path)
+=======
+void touch_atime(const struct path *path)
+>>>>>>> v3.18
 {
 	struct vfsmount *mnt = path->mnt;
 	struct inode *inode = path->dentry->d_inode;
@@ -1601,12 +1812,24 @@ int should_remove_suid(struct dentry *dentry)
 }
 EXPORT_SYMBOL(should_remove_suid);
 
+<<<<<<< HEAD
 static int __remove_suid(struct vfsmount *mnt, struct dentry *dentry, int kill)
+=======
+static int __remove_suid(struct dentry *dentry, int kill)
+>>>>>>> v3.18
 {
 	struct iattr newattrs;
 
 	newattrs.ia_valid = ATTR_FORCE | kill;
+<<<<<<< HEAD
 	return notify_change2(mnt, dentry, &newattrs);
+=======
+	/*
+	 * Note we call this on write, so notify_change will not
+	 * encounter any conflicting delegations:
+	 */
+	return notify_change(dentry, &newattrs, NULL);
+>>>>>>> v3.18
 }
 
 int file_remove_suid(struct file *file)
@@ -1629,9 +1852,15 @@ int file_remove_suid(struct file *file)
 	if (killpriv)
 		error = security_inode_killpriv(dentry);
 	if (!error && killsuid)
+<<<<<<< HEAD
 		error = __remove_suid(file->f_path.mnt, dentry, killsuid);
 	if (!error)
 		inode_has_no_xattr(inode);
+=======
+		error = __remove_suid(dentry, killsuid);
+	if (!error && (inode->i_sb->s_flags & MS_NOSEC))
+		inode->i_flags |= S_NOSEC;
+>>>>>>> v3.18
 
 	return error;
 }
@@ -1695,6 +1924,7 @@ int inode_needs_sync(struct inode *inode)
 }
 EXPORT_SYMBOL(inode_needs_sync);
 
+<<<<<<< HEAD
 int inode_wait(void *word)
 {
 	schedule();
@@ -1702,6 +1932,8 @@ int inode_wait(void *word)
 }
 EXPORT_SYMBOL(inode_wait);
 
+=======
+>>>>>>> v3.18
 /*
  * If we try to find an inode in the inode hash while it is being
  * deleted, we have to wait until the filesystem completes its
@@ -1902,3 +2134,37 @@ void inode_dio_done(struct inode *inode)
 		wake_up_bit(&inode->i_state, __I_DIO_WAKEUP);
 }
 EXPORT_SYMBOL(inode_dio_done);
+<<<<<<< HEAD
+=======
+
+/*
+ * inode_set_flags - atomically set some inode flags
+ *
+ * Note: the caller should be holding i_mutex, or else be sure that
+ * they have exclusive access to the inode structure (i.e., while the
+ * inode is being instantiated).  The reason for the cmpxchg() loop
+ * --- which wouldn't be necessary if all code paths which modify
+ * i_flags actually followed this rule, is that there is at least one
+ * code path which doesn't today --- for example,
+ * __generic_file_aio_write() calls file_remove_suid() without holding
+ * i_mutex --- so we use cmpxchg() out of an abundance of caution.
+ *
+ * In the long run, i_mutex is overkill, and we should probably look
+ * at using the i_lock spinlock to protect i_flags, and then make sure
+ * it is so documented in include/linux/fs.h and that all code follows
+ * the locking convention!!
+ */
+void inode_set_flags(struct inode *inode, unsigned int flags,
+		     unsigned int mask)
+{
+	unsigned int old_flags, new_flags;
+
+	WARN_ON_ONCE(flags & ~mask);
+	do {
+		old_flags = ACCESS_ONCE(inode->i_flags);
+		new_flags = (old_flags & ~mask) | flags;
+	} while (unlikely(cmpxchg(&inode->i_flags, old_flags,
+				  new_flags) != old_flags));
+}
+EXPORT_SYMBOL(inode_set_flags);
+>>>>>>> v3.18

@@ -65,29 +65,50 @@ int __ref _debug_hotplug_cpu(int cpu, int action)
 	if (!cpu_is_hotpluggable(cpu))
 		return -EINVAL;
 
+<<<<<<< HEAD
 	cpu_hotplug_driver_lock();
+=======
+	lock_device_hotplug();
+>>>>>>> v3.18
 
 	switch (action) {
 	case 0:
 		ret = cpu_down(cpu);
 		if (!ret) {
 			pr_info("CPU %u is now offline\n", cpu);
+<<<<<<< HEAD
+=======
+			dev->offline = true;
+>>>>>>> v3.18
 			kobject_uevent(&dev->kobj, KOBJ_OFFLINE);
 		} else
 			pr_debug("Can't offline CPU%d.\n", cpu);
 		break;
 	case 1:
 		ret = cpu_up(cpu);
+<<<<<<< HEAD
 		if (!ret)
 			kobject_uevent(&dev->kobj, KOBJ_ONLINE);
 		else
 			pr_debug("Can't online CPU%d.\n", cpu);
+=======
+		if (!ret) {
+			dev->offline = false;
+			kobject_uevent(&dev->kobj, KOBJ_ONLINE);
+		} else {
+			pr_debug("Can't online CPU%d.\n", cpu);
+		}
+>>>>>>> v3.18
 		break;
 	default:
 		ret = -EINVAL;
 	}
 
+<<<<<<< HEAD
 	cpu_hotplug_driver_unlock();
+=======
+	unlock_device_hotplug();
+>>>>>>> v3.18
 
 	return ret;
 }

@@ -253,7 +253,10 @@ static ssize_t snd_info_entry_write(struct file *file, const char __user *buffer
 	struct snd_info_buffer *buf;
 	ssize_t size = 0;
 	loff_t pos;
+<<<<<<< HEAD
 	unsigned long realloc_size;
+=======
+>>>>>>> v3.18
 
 	data = file->private_data;
 	if (snd_BUG_ON(!data))
@@ -262,8 +265,12 @@ static ssize_t snd_info_entry_write(struct file *file, const char __user *buffer
 	pos = *offset;
 	if (pos < 0 || (long) pos != pos || (ssize_t) count < 0)
 		return -EIO;
+<<<<<<< HEAD
 	realloc_size = (unsigned long) pos + (unsigned long) count;
 	if (realloc_size < (unsigned long) pos || realloc_size > UINT_MAX)
+=======
+	if ((unsigned long) pos + (unsigned long) count < (unsigned long) pos)
+>>>>>>> v3.18
 		return -EIO;
 	switch (entry->content) {
 	case SNDRV_INFO_CONTENT_TEXT:
@@ -420,9 +427,20 @@ static int snd_info_entry_release(struct inode *inode, struct file *file)
 			if (entry->c.text.write) {
 				entry->c.text.write(entry, data->wbuffer);
 				if (data->wbuffer->error) {
+<<<<<<< HEAD
 					snd_printk(KERN_WARNING "data write error to %s (%i)\n",
 						entry->name,
 						data->wbuffer->error);
+=======
+					if (entry->card)
+						dev_warn(entry->card->dev, "info: data write error to %s (%i)\n",
+							 entry->name,
+							 data->wbuffer->error);
+					else
+						pr_warn("ALSA: info: data write error to %s (%i)\n",
+							entry->name,
+							data->wbuffer->error);
+>>>>>>> v3.18
 				}
 			}
 			kfree(data->wbuffer->buffer);
@@ -542,7 +560,11 @@ int __init snd_info_init(void)
 		snd_oss_root = entry;
 	}
 #endif
+<<<<<<< HEAD
 #if defined(CONFIG_SND_SEQUENCER) || defined(CONFIG_SND_SEQUENCER_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SND_SEQUENCER)
+>>>>>>> v3.18
 	{
 		struct snd_info_entry *entry;
 		if ((entry = snd_info_create_module_entry(THIS_MODULE, "seq", NULL)) == NULL)
@@ -569,7 +591,11 @@ int __exit snd_info_done(void)
 	snd_minor_info_done();
 	snd_info_version_done();
 	if (snd_proc_root) {
+<<<<<<< HEAD
 #if defined(CONFIG_SND_SEQUENCER) || defined(CONFIG_SND_SEQUENCER_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SND_SEQUENCER)
+>>>>>>> v3.18
 		snd_info_free_entry(snd_seq_root);
 #endif
 #ifdef CONFIG_SND_OSSEMUL
@@ -676,6 +702,7 @@ int snd_info_card_free(struct snd_card *card)
 	return 0;
 }
 
+<<<<<<< HEAD
 /*
  * snd_register_module_info - create and register module
  * @module: the module pointer
@@ -706,6 +733,8 @@ struct snd_info_entry *snd_register_module_info(struct module *module,
 	return entry;
 }
 EXPORT_SYMBOL(snd_register_module_info);
+=======
+>>>>>>> v3.18
 
 /**
  * snd_info_get_line - read one line from the procfs buffer

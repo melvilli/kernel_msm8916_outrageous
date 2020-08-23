@@ -13,6 +13,7 @@ config DEBUG_RODATA
          If in doubt, say "N".
 
 endmenu
+<<<<<<< HEAD
 
 config DEBUG_STACKOVERFLOW
 	bool "Check for stack overflows"
@@ -24,3 +25,5 @@ config DEBUG_STACKOVERFLOW
 	  stacks in detail when free stack space drops below a certain
 	  limit.
 	  If in doubt, say "N".
+=======
+>>>>>>> v3.18

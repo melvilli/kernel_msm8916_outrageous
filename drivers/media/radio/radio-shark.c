@@ -33,7 +33,11 @@
 #include <linux/usb.h>
 #include <linux/workqueue.h>
 #include <media/v4l2-device.h>
+<<<<<<< HEAD
 #include <sound/tea575x-tuner.h>
+=======
+#include <media/tea575x.h>
+>>>>>>> v3.18
 
 #if defined(CONFIG_LEDS_CLASS) || \
     (defined(CONFIG_LEDS_CLASS_MODULE) && defined(CONFIG_RADIO_SHARK_MODULE))
@@ -271,7 +275,11 @@ static void shark_unregister_leds(struct shark_device *shark)
 	cancel_work_sync(&shark->led_work);
 }
 
+<<<<<<< HEAD
 static void shark_resume_leds(struct shark_device *shark)
+=======
+static inline void shark_resume_leds(struct shark_device *shark)
+>>>>>>> v3.18
 {
 	if (test_bit(BLUE_IS_PULSE, &shark->brightness_new))
 		set_bit(BLUE_PULSE_LED, &shark->brightness_new);

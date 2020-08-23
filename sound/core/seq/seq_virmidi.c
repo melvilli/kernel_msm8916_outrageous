@@ -254,6 +254,7 @@ static int snd_virmidi_output_open(struct snd_rawmidi_substream *substream)
  */
 static int snd_virmidi_input_close(struct snd_rawmidi_substream *substream)
 {
+<<<<<<< HEAD
 	struct snd_virmidi_dev *rdev = substream->rmidi->private_data;
 	struct snd_virmidi *vmidi = substream->runtime->private_data;
 
@@ -261,6 +262,11 @@ static int snd_virmidi_input_close(struct snd_rawmidi_substream *substream)
 	list_del(&vmidi->list);
 	write_unlock_irq(&rdev->filelist_lock);
 	snd_midi_event_free(vmidi->parser);
+=======
+	struct snd_virmidi *vmidi = substream->runtime->private_data;
+	snd_midi_event_free(vmidi->parser);
+	list_del(&vmidi->list);
+>>>>>>> v3.18
 	substream->runtime->private_data = NULL;
 	kfree(vmidi);
 	return 0;
@@ -450,7 +456,11 @@ static int snd_virmidi_dev_register(struct snd_rawmidi *rmidi)
 		/* should check presence of port more strictly.. */
 		break;
 	default:
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "seq_mode is not set: %d\n", rdev->seq_mode);
+=======
+		pr_err("ALSA: seq_virmidi: seq_mode is not set: %d\n", rdev->seq_mode);
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 	return 0;

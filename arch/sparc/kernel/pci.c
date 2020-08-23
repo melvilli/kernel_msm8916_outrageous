@@ -28,6 +28,10 @@
 #include <asm/apb.h>
 
 #include "pci_impl.h"
+<<<<<<< HEAD
+=======
+#include "kernel.h"
+>>>>>>> v3.18
 
 /* List of all PCI controllers found in the system. */
 struct pci_pbm_info *pci_pbm_root = NULL;
@@ -254,7 +258,11 @@ static struct pci_dev *of_create_pci_dev(struct pci_pbm_info *pbm,
 	const char *type;
 	u32 class;
 
+<<<<<<< HEAD
 	dev = alloc_pci_dev();
+=======
+	dev = pci_alloc_dev(bus);
+>>>>>>> v3.18
 	if (!dev)
 		return NULL;
 
@@ -281,7 +289,10 @@ static struct pci_dev *of_create_pci_dev(struct pci_pbm_info *pbm,
 		printk("    create device, devfn: %x, type: %s\n",
 		       devfn, type);
 
+<<<<<<< HEAD
 	dev->bus = bus;
+=======
+>>>>>>> v3.18
 	dev->sysdata = node;
 	dev->dev.parent = bus->bridge;
 	dev->dev.bus = &pci_bus_type;
@@ -327,7 +338,11 @@ static struct pci_dev *of_create_pci_dev(struct pci_pbm_info *pbm,
 	if ((dev->class >> 8) == PCI_CLASS_STORAGE_IDE)
 		pci_set_master(dev);
 
+<<<<<<< HEAD
 	dev->current_state = 4;		/* unknown power state */
+=======
+	dev->current_state = PCI_UNKNOWN;	/* unknown power state */
+>>>>>>> v3.18
 	dev->error_state = pci_channel_io_normal;
 	dev->dma_mask = 0xffffffff;
 
@@ -393,7 +408,11 @@ static void apb_fake_ranges(struct pci_dev *dev,
 	res->flags = IORESOURCE_IO;
 	region.start = (first << 21);
 	region.end = (last << 21) + ((1 << 21) - 1);
+<<<<<<< HEAD
 	pcibios_bus_to_resource(dev, res, &region);
+=======
+	pcibios_bus_to_resource(dev->bus, res, &region);
+>>>>>>> v3.18
 
 	pci_read_config_byte(dev, APB_MEM_ADDRESS_MAP, &map);
 	apb_calc_first_last(map, &first, &last);
@@ -401,7 +420,11 @@ static void apb_fake_ranges(struct pci_dev *dev,
 	res->flags = IORESOURCE_MEM;
 	region.start = (first << 29);
 	region.end = (last << 29) + ((1 << 29) - 1);
+<<<<<<< HEAD
 	pcibios_bus_to_resource(dev, res, &region);
+=======
+	pcibios_bus_to_resource(dev->bus, res, &region);
+>>>>>>> v3.18
 }
 
 static void pci_of_scan_bus(struct pci_pbm_info *pbm,
@@ -432,6 +455,14 @@ static void of_scan_pci_bridge(struct pci_pbm_info *pbm,
 		       node->full_name);
 		return;
 	}
+<<<<<<< HEAD
+=======
+
+	if (ofpci_verbose)
+		printk("    Bridge bus range [%u --> %u]\n",
+		       busrange[0], busrange[1]);
+
+>>>>>>> v3.18
 	ranges = of_get_property(node, "ranges", &len);
 	simba = 0;
 	if (ranges == NULL) {
@@ -451,6 +482,13 @@ static void of_scan_pci_bridge(struct pci_pbm_info *pbm,
 	pci_bus_insert_busn_res(bus, busrange[0], busrange[1]);
 	bus->bridge_ctl = 0;
 
+<<<<<<< HEAD
+=======
+	if (ofpci_verbose)
+		printk("    Bridge ranges[%p] simba[%d]\n",
+		       ranges, simba);
+
+>>>>>>> v3.18
 	/* parse ranges property, or cook one up by hand for Simba */
 	/* PCI #address-cells == 3 and #size-cells == 2 always */
 	res = &dev->resource[PCI_BRIDGE_RESOURCES];
@@ -468,10 +506,35 @@ static void of_scan_pci_bridge(struct pci_pbm_info *pbm,
 	}
 	i = 1;
 	for (; len >= 32; len -= 32, ranges += 8) {
+<<<<<<< HEAD
+=======
+		u64 start;
+
+		if (ofpci_verbose)
+			printk("    RAW Range[%08x:%08x:%08x:%08x:%08x:%08x:"
+			       "%08x:%08x]\n",
+			       ranges[0], ranges[1], ranges[2], ranges[3],
+			       ranges[4], ranges[5], ranges[6], ranges[7]);
+
+>>>>>>> v3.18
 		flags = pci_parse_of_flags(ranges[0]);
 		size = GET_64BIT(ranges, 6);
 		if (flags == 0 || size == 0)
 			continue;
+<<<<<<< HEAD
+=======
+
+		/* On PCI-Express systems, PCI bridges that have no devices downstream
+		 * have a bogus size value where the first 32-bit cell is 0xffffffff.
+		 * This results in a bogus range where start + size overflows.
+		 *
+		 * Just skip these otherwise the kernel will complain when the resource
+		 * tries to be claimed.
+		 */
+		if (size >> 32 == 0xffffffff)
+			continue;
+
+>>>>>>> v3.18
 		if (flags & IORESOURCE_IO) {
 			res = bus->resource[0];
 			if (res->flags) {
@@ -490,9 +553,20 @@ static void of_scan_pci_bridge(struct pci_pbm_info *pbm,
 		}
 
 		res->flags = flags;
+<<<<<<< HEAD
 		region.start = GET_64BIT(ranges, 1);
 		region.end = region.start + size - 1;
 		pcibios_bus_to_resource(dev, res, &region);
+=======
+		region.start = start = GET_64BIT(ranges, 1);
+		region.end = region.start + size - 1;
+
+		if (ofpci_verbose)
+			printk("      Using flags[%08x] start[%016llx] size[%016llx]\n",
+			       flags, start, size);
+
+		pcibios_bus_to_resource(dev->bus, res, &region);
+>>>>>>> v3.18
 	}
 after_ranges:
 	sprintf(bus->name, "PCI Bus %04x:%02x", pci_domain_nr(bus),
@@ -544,8 +618,12 @@ static void pci_of_scan_bus(struct pci_pbm_info *pbm,
 			printk("PCI: dev header type: %x\n",
 			       dev->hdr_type);
 
+<<<<<<< HEAD
 		if (dev->hdr_type == PCI_HEADER_TYPE_BRIDGE ||
 		    dev->hdr_type == PCI_HEADER_TYPE_CARDBUS)
+=======
+		if (pci_is_bridge(dev))
+>>>>>>> v3.18
 			of_scan_pci_bridge(pbm, child, dev);
 	}
 }
@@ -585,6 +663,39 @@ static void pci_bus_register_of_sysfs(struct pci_bus *bus)
 		pci_bus_register_of_sysfs(child_bus);
 }
 
+<<<<<<< HEAD
+=======
+static void pci_claim_bus_resources(struct pci_bus *bus)
+{
+	struct pci_bus *child_bus;
+	struct pci_dev *dev;
+
+	list_for_each_entry(dev, &bus->devices, bus_list) {
+		int i;
+
+		for (i = 0; i < PCI_NUM_RESOURCES; i++) {
+			struct resource *r = &dev->resource[i];
+
+			if (r->parent || !r->start || !r->flags)
+				continue;
+
+			if (ofpci_verbose)
+				printk("PCI: Claiming %s: "
+				       "Resource %d: %016llx..%016llx [%x]\n",
+				       pci_name(dev), i,
+				       (unsigned long long)r->start,
+				       (unsigned long long)r->end,
+				       (unsigned int)r->flags);
+
+			pci_claim_resource(dev, i);
+		}
+	}
+
+	list_for_each_entry(child_bus, &bus->children, node)
+		pci_claim_bus_resources(child_bus);
+}
+
+>>>>>>> v3.18
 struct pci_bus *pci_scan_one_pbm(struct pci_pbm_info *pbm,
 				 struct device *parent)
 {
@@ -615,6 +726,11 @@ struct pci_bus *pci_scan_one_pbm(struct pci_pbm_info *pbm,
 	pci_bus_add_devices(bus);
 	pci_bus_register_of_sysfs(bus);
 
+<<<<<<< HEAD
+=======
+	pci_claim_bus_resources(bus);
+
+>>>>>>> v3.18
 	return bus;
 }
 
@@ -773,6 +889,7 @@ static int __pci_mmap_make_offset(struct pci_dev *pdev,
 	return 0;
 }
 
+<<<<<<< HEAD
 /* Set vm_flags of VMA, as appropriate for this architecture, for a pci device
  * mapping.
  */
@@ -782,6 +899,8 @@ static void __pci_mmap_set_flags(struct pci_dev *dev, struct vm_area_struct *vma
 	vma->vm_flags |= VM_IO | VM_DONTEXPAND | VM_DONTDUMP;
 }
 
+=======
+>>>>>>> v3.18
 /* Set vm_page_prot of VMA, as appropriate for this architecture, for a pci
  * device mapping.
  */
@@ -809,7 +928,10 @@ int pci_mmap_page_range(struct pci_dev *dev, struct vm_area_struct *vma,
 	if (ret < 0)
 		return ret;
 
+<<<<<<< HEAD
 	__pci_mmap_set_flags(dev, vma, mmap_state);
+=======
+>>>>>>> v3.18
 	__pci_mmap_set_pgprot(dev, vma, mmap_state);
 
 	vma->vm_page_prot = pgprot_noncached(vma->vm_page_prot);
@@ -1016,6 +1138,10 @@ static int __init of_pci_slot_init(void)
 
 	return 0;
 }
+<<<<<<< HEAD
 
 module_init(of_pci_slot_init);
+=======
+device_initcall(of_pci_slot_init);
+>>>>>>> v3.18
 #endif

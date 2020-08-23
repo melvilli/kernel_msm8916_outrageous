@@ -242,7 +242,11 @@ static void do_powersaver(int cx_address, unsigned int mults_index,
  * Sets a new clock ratio.
  */
 
+<<<<<<< HEAD
 static void longhaul_setstate(struct cpufreq_policy *policy,
+=======
+static int longhaul_setstate(struct cpufreq_policy *policy,
+>>>>>>> v3.18
 		unsigned int table_index)
 {
 	unsigned int mults_index;
@@ -258,10 +262,19 @@ static void longhaul_setstate(struct cpufreq_policy *policy,
 	/* Safety precautions */
 	mult = mults[mults_index & 0x1f];
 	if (mult == -1)
+<<<<<<< HEAD
 		return;
 	speed = calc_speed(mult);
 	if ((speed > highest_speed) || (speed < lowest_speed))
 		return;
+=======
+		return -EINVAL;
+
+	speed = calc_speed(mult);
+	if ((speed > highest_speed) || (speed < lowest_speed))
+		return -EINVAL;
+
+>>>>>>> v3.18
 	/* Voltage transition before frequency transition? */
 	if (can_scale_voltage && longhaul_index < table_index)
 		dir = 1;
@@ -269,8 +282,11 @@ static void longhaul_setstate(struct cpufreq_policy *policy,
 	freqs.old = calc_speed(longhaul_get_cpu_mult());
 	freqs.new = speed;
 
+<<<<<<< HEAD
 	cpufreq_notify_transition(policy, &freqs, CPUFREQ_PRECHANGE);
 
+=======
+>>>>>>> v3.18
 	pr_debug("Setting to FSB:%dMHz Mult:%d.%dx (%s)\n",
 			fsb, mult/10, mult%10, print_speed(speed/1000));
 retry_loop:
@@ -385,12 +401,23 @@ retry_loop:
 			goto retry_loop;
 		}
 	}
+<<<<<<< HEAD
 	/* Report true CPU frequency */
 	cpufreq_notify_transition(policy, &freqs, CPUFREQ_POSTCHANGE);
 
 	if (!bm_timeout)
 		printk(KERN_INFO PFX "Warning: Timeout while waiting for "
 				"idle PCI bus.\n");
+=======
+
+	if (!bm_timeout) {
+		printk(KERN_INFO PFX "Warning: Timeout while waiting for "
+				"idle PCI bus.\n");
+		return -EBUSY;
+	}
+
+	return 0;
+>>>>>>> v3.18
 }
 
 /*
@@ -475,7 +502,11 @@ static int longhaul_get_ranges(void)
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 	longhaul_table = kmalloc((numscales + 1) * sizeof(*longhaul_table),
+=======
+	longhaul_table = kzalloc((numscales + 1) * sizeof(*longhaul_table),
+>>>>>>> v3.18
 			GFP_KERNEL);
 	if (!longhaul_table)
 		return -ENOMEM;
@@ -528,6 +559,10 @@ static int longhaul_get_ranges(void)
 
 static void longhaul_setup_voltagescaling(void)
 {
+<<<<<<< HEAD
+=======
+	struct cpufreq_frequency_table *freq_pos;
+>>>>>>> v3.18
 	union msr_longhaul longhaul;
 	struct mV_pos minvid, maxvid, vid;
 	unsigned int j, speed, pos, kHz_step, numvscales;
@@ -606,18 +641,30 @@ static void longhaul_setup_voltagescaling(void)
 	/* Calculate kHz for one voltage step */
 	kHz_step = (highest_speed - min_vid_speed) / numvscales;
 
+<<<<<<< HEAD
 	j = 0;
 	while (longhaul_table[j].frequency != CPUFREQ_TABLE_END) {
 		speed = longhaul_table[j].frequency;
+=======
+	cpufreq_for_each_entry(freq_pos, longhaul_table) {
+		speed = freq_pos->frequency;
+>>>>>>> v3.18
 		if (speed > min_vid_speed)
 			pos = (speed - min_vid_speed) / kHz_step + minvid.pos;
 		else
 			pos = minvid.pos;
+<<<<<<< HEAD
 		longhaul_table[j].driver_data |= mV_vrm_table[pos] << 8;
 		vid = vrm_mV_table[mV_vrm_table[pos]];
 		printk(KERN_INFO PFX "f: %d kHz, index: %d, vid: %d mV\n",
 				speed, j, vid.mV);
 		j++;
+=======
+		freq_pos->driver_data |= mV_vrm_table[pos] << 8;
+		vid = vrm_mV_table[mV_vrm_table[pos]];
+		printk(KERN_INFO PFX "f: %d kHz, index: %d, vid: %d mV\n",
+			speed, (int)(freq_pos - longhaul_table), vid.mV);
+>>>>>>> v3.18
 	}
 
 	can_scale_voltage = 1;
@@ -625,6 +672,7 @@ static void longhaul_setup_voltagescaling(void)
 }
 
 
+<<<<<<< HEAD
 static int longhaul_verify(struct cpufreq_policy *policy)
 {
 	return cpufreq_frequency_table_verify(policy, longhaul_table);
@@ -649,6 +697,18 @@ static int longhaul_target(struct cpufreq_policy *policy,
 
 	if (!can_scale_voltage)
 		longhaul_setstate(policy, table_index);
+=======
+static int longhaul_target(struct cpufreq_policy *policy,
+			    unsigned int table_index)
+{
+	unsigned int i;
+	unsigned int dir = 0;
+	u8 vid, current_vid;
+	int retval = 0;
+
+	if (!can_scale_voltage)
+		retval = longhaul_setstate(policy, table_index);
+>>>>>>> v3.18
 	else {
 		/* On test system voltage transitions exceeding single
 		 * step up or down were turning motherboard off. Both
@@ -663,7 +723,11 @@ static int longhaul_target(struct cpufreq_policy *policy,
 		while (i != table_index) {
 			vid = (longhaul_table[i].driver_data >> 8) & 0x1f;
 			if (vid != current_vid) {
+<<<<<<< HEAD
 				longhaul_setstate(policy, i);
+=======
+				retval = longhaul_setstate(policy, i);
+>>>>>>> v3.18
 				current_vid = vid;
 				msleep(200);
 			}
@@ -672,10 +736,18 @@ static int longhaul_target(struct cpufreq_policy *policy,
 			else
 				i--;
 		}
+<<<<<<< HEAD
 		longhaul_setstate(policy, table_index);
 	}
 	longhaul_index = table_index;
 	return 0;
+=======
+		retval = longhaul_setstate(policy, table_index);
+	}
+
+	longhaul_index = table_index;
+	return retval;
+>>>>>>> v3.18
 }
 
 
@@ -919,6 +991,7 @@ static int longhaul_cpu_init(struct cpufreq_policy *policy)
 		longhaul_setup_voltagescaling();
 
 	policy->cpuinfo.transition_latency = 200000;	/* nsec */
+<<<<<<< HEAD
 	policy->cur = calc_speed(longhaul_get_cpu_mult());
 
 	ret = cpufreq_frequency_table_cpuinfo(policy, longhaul_table);
@@ -949,6 +1022,19 @@ static struct cpufreq_driver longhaul_driver = {
 	.exit	= longhaul_cpu_exit,
 	.name	= "longhaul",
 	.attr	= longhaul_attr,
+=======
+
+	return cpufreq_table_validate_and_show(policy, longhaul_table);
+}
+
+static struct cpufreq_driver longhaul_driver = {
+	.verify	= cpufreq_generic_frequency_table_verify,
+	.target_index = longhaul_target,
+	.get	= longhaul_get,
+	.init	= longhaul_cpu_init,
+	.name	= "longhaul",
+	.attr	= cpufreq_generic_attr,
+>>>>>>> v3.18
 };
 
 static const struct x86_cpu_id longhaul_id[] = {
@@ -1002,7 +1088,19 @@ static void __exit longhaul_exit(void)
 
 	for (i = 0; i < numscales; i++) {
 		if (mults[i] == maxmult) {
+<<<<<<< HEAD
 			longhaul_setstate(policy, i);
+=======
+			struct cpufreq_freqs freqs;
+
+			freqs.old = policy->cur;
+			freqs.new = longhaul_table[i].frequency;
+			freqs.flags = 0;
+
+			cpufreq_freq_transition_begin(policy, &freqs);
+			longhaul_setstate(policy, i);
+			cpufreq_freq_transition_end(policy, &freqs, 0);
+>>>>>>> v3.18
 			break;
 		}
 	}

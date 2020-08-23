@@ -145,6 +145,7 @@ static struct scsi_transport_template *ahc_linux_transport_template = NULL;
 #endif
 
 /*
+<<<<<<< HEAD
  * Control collection of SCSI transfer statistics for the /proc filesystem.
  *
  * NOTE: Do NOT enable this when running on kernels version 1.2.x and below.
@@ -155,6 +156,8 @@ static struct scsi_transport_template *ahc_linux_transport_template = NULL;
 #endif
 
 /*
+=======
+>>>>>>> v3.18
  * To change the default number of tagged transactions allowed per-device,
  * add a line to the lilo.conf file like:
  * append="aic7xxx=verbose,tag_info:{{32,32,32,32},{32,32,32,32}}"
@@ -2120,7 +2123,11 @@ ahc_linux_queue_recovery_cmd(struct scsi_cmnd *cmd, scb_flag flag)
 		 */
 		printk("%s:%d:%d:%d: Is not an active device\n",
 		       ahc_name(ahc), cmd->device->channel, cmd->device->id,
+<<<<<<< HEAD
 		       cmd->device->lun);
+=======
+		       (u8)cmd->device->lun);
+>>>>>>> v3.18
 		retval = SUCCESS;
 		goto no_cmd;
 	}
@@ -2128,11 +2135,19 @@ ahc_linux_queue_recovery_cmd(struct scsi_cmnd *cmd, scb_flag flag)
 	if ((dev->flags & (AHC_DEV_Q_BASIC|AHC_DEV_Q_TAGGED)) == 0
 	 && ahc_search_untagged_queues(ahc, cmd, cmd->device->id,
 				       cmd->device->channel + 'A',
+<<<<<<< HEAD
 				       cmd->device->lun,
 				       CAM_REQ_ABORTED, SEARCH_COMPLETE) != 0) {
 		printk("%s:%d:%d:%d: Command found on untagged queue\n",
 		       ahc_name(ahc), cmd->device->channel, cmd->device->id,
 		       cmd->device->lun);
+=======
+				       (u8)cmd->device->lun,
+				       CAM_REQ_ABORTED, SEARCH_COMPLETE) != 0) {
+		printk("%s:%d:%d:%d: Command found on untagged queue\n",
+		       ahc_name(ahc), cmd->device->channel, cmd->device->id,
+		       (u8)cmd->device->lun);
+>>>>>>> v3.18
 		retval = SUCCESS;
 		goto done;
 	}
@@ -2198,13 +2213,22 @@ ahc_linux_queue_recovery_cmd(struct scsi_cmnd *cmd, scb_flag flag)
 				       SEARCH_COMPLETE) > 0) {
 			printk("%s:%d:%d:%d: Cmd aborted from QINFIFO\n",
 			       ahc_name(ahc), cmd->device->channel,
+<<<<<<< HEAD
 					cmd->device->id, cmd->device->lun);
+=======
+			       cmd->device->id, (u8)cmd->device->lun);
+>>>>>>> v3.18
 			retval = SUCCESS;
 			goto done;
 		}
 	} else if (ahc_search_qinfifo(ahc, cmd->device->id,
 				      cmd->device->channel + 'A',
+<<<<<<< HEAD
 				      cmd->device->lun, pending_scb->hscb->tag,
+=======
+				      cmd->device->lun,
+				      pending_scb->hscb->tag,
+>>>>>>> v3.18
 				      ROLE_INITIATOR, /*status*/0,
 				      SEARCH_COUNT) > 0) {
 		disconnected = FALSE;

@@ -37,7 +37,10 @@
 #include <linux/spinlock.h>
 #include <linux/ioport.h>
 #include <linux/highmem.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/timer.h>
 #include <linux/skbuff.h>
 #include <linux/interrupt.h>
@@ -70,10 +73,17 @@
 /*
  * Version numbers
  */
+<<<<<<< HEAD
 #define VMXNET3_DRIVER_VERSION_STRING   "1.1.30.0-k"
 
 /* a 32-bit int, each byte encode a verion number in VMXNET3_DRIVER_VERSION */
 #define VMXNET3_DRIVER_VERSION_NUM      0x01011E00
+=======
+#define VMXNET3_DRIVER_VERSION_STRING   "1.2.1.0-k"
+
+/* a 32-bit int, each byte encode a verion number in VMXNET3_DRIVER_VERSION */
+#define VMXNET3_DRIVER_VERSION_NUM      0x01020100
+>>>>>>> v3.18
 
 #if defined(CONFIG_PCI_MSI)
 	/* RSS only makes sense if MSI-X is supported. */
@@ -118,7 +128,10 @@ enum {
 /*
  * PCI vendor and device IDs.
  */
+<<<<<<< HEAD
 #define PCI_VENDOR_ID_VMWARE            0x15AD
+=======
+>>>>>>> v3.18
 #define PCI_DEVICE_ID_VMWARE_VMXNET3    0x07B0
 #define MAX_ETHERNET_CARDS		10
 #define MAX_PCI_PASSTHRU_DEVICE		6
@@ -229,6 +242,10 @@ struct vmxnet3_tx_queue {
 	spinlock_t                      tx_lock;
 	struct vmxnet3_cmd_ring         tx_ring;
 	struct vmxnet3_tx_buf_info      *buf_info;
+<<<<<<< HEAD
+=======
+	dma_addr_t                       buf_info_pa;
+>>>>>>> v3.18
 	struct vmxnet3_tx_data_ring     data_ring;
 	struct vmxnet3_comp_ring        comp_ring;
 	struct Vmxnet3_TxQueueCtrl      *shared;
@@ -277,6 +294,10 @@ struct vmxnet3_rx_queue {
 	u32 qid;            /* rqID in RCD for buffer from 1st ring */
 	u32 qid2;           /* rqID in RCD for buffer from 2nd ring */
 	struct vmxnet3_rx_buf_info     *buf_info[2];
+<<<<<<< HEAD
+=======
+	dma_addr_t                      buf_info_pa;
+>>>>>>> v3.18
 	struct Vmxnet3_RxQueueCtrl            *shared;
 	struct vmxnet3_rq_driver_stats  stats;
 } __attribute__((__aligned__(SMP_CACHE_BYTES)));
@@ -348,11 +369,26 @@ struct vmxnet3_adapter {
 	u32     link_speed; /* in mbps */
 
 	u64     tx_timeout_count;
+<<<<<<< HEAD
+=======
+
+	/* Ring sizes */
+	u32 tx_ring_size;
+	u32 rx_ring_size;
+
+>>>>>>> v3.18
 	struct work_struct work;
 
 	unsigned long  state;    /* VMXNET3_STATE_BIT_xxx */
 
 	int share_intr;
+<<<<<<< HEAD
+=======
+
+	dma_addr_t adapter_pa;
+	dma_addr_t pm_conf_pa;
+	dma_addr_t rss_conf_pa;
+>>>>>>> v3.18
 };
 
 #define VMXNET3_WRITE_BAR0_REG(adapter, reg, val)  \
@@ -404,9 +440,15 @@ int
 vmxnet3_create_queues(struct vmxnet3_adapter *adapter,
 		      u32 tx_ring_size, u32 rx_ring_size, u32 rx_ring2_size);
 
+<<<<<<< HEAD
 extern void vmxnet3_set_ethtool_ops(struct net_device *netdev);
 
 extern struct rtnl_link_stats64 *
+=======
+void vmxnet3_set_ethtool_ops(struct net_device *netdev);
+
+struct rtnl_link_stats64 *
+>>>>>>> v3.18
 vmxnet3_get_stats64(struct net_device *dev, struct rtnl_link_stats64 *stats);
 
 extern char vmxnet3_driver_name[];

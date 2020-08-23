@@ -1,6 +1,10 @@
 #include "cache.h"
 #include "run-command.h"
 #include "exec_cmd.h"
+<<<<<<< HEAD
+=======
+#include "debug.h"
+>>>>>>> v3.18
 
 static inline void close_pair(int fd[2])
 {
@@ -19,6 +23,10 @@ int start_command(struct child_process *cmd)
 {
 	int need_in, need_out, need_err;
 	int fdin[2], fdout[2], fderr[2];
+<<<<<<< HEAD
+=======
+	char sbuf[STRERR_BUFSIZE];
+>>>>>>> v3.18
 
 	/*
 	 * In case of errors we must keep the promise to close FDs
@@ -99,7 +107,11 @@ int start_command(struct child_process *cmd)
 
 		if (cmd->dir && chdir(cmd->dir))
 			die("exec %s: cd to %s failed (%s)", cmd->argv[0],
+<<<<<<< HEAD
 			    cmd->dir, strerror(errno));
+=======
+			    cmd->dir, strerror_r(errno, sbuf, sizeof(sbuf)));
+>>>>>>> v3.18
 		if (cmd->env) {
 			for (; *cmd->env; cmd->env++) {
 				if (strchr(*cmd->env, '='))
@@ -153,6 +165,11 @@ int start_command(struct child_process *cmd)
 
 static int wait_or_whine(pid_t pid)
 {
+<<<<<<< HEAD
+=======
+	char sbuf[STRERR_BUFSIZE];
+
+>>>>>>> v3.18
 	for (;;) {
 		int status, code;
 		pid_t waiting = waitpid(pid, &status, 0);
@@ -160,7 +177,12 @@ static int wait_or_whine(pid_t pid)
 		if (waiting < 0) {
 			if (errno == EINTR)
 				continue;
+<<<<<<< HEAD
 			error("waitpid failed (%s)", strerror(errno));
+=======
+			error("waitpid failed (%s)",
+			      strerror_r(errno, sbuf, sizeof(sbuf)));
+>>>>>>> v3.18
 			return -ERR_RUN_COMMAND_WAITPID;
 		}
 		if (waiting != pid)

@@ -115,7 +115,11 @@ OPTIONS
 -f::
 --fields::
         Comma separated list of fields to print. Options are:
+<<<<<<< HEAD
         comm, tid, pid, time, cpu, event, trace, ip, sym, dso, addr, symoff.
+=======
+        comm, tid, pid, time, cpu, event, trace, ip, sym, dso, addr, symoff, srcline, period.
+>>>>>>> v3.18
         Field list can be prepended with the type, trace, sw or hw,
         to indicate to which event type the field list applies.
         e.g., -f sw:comm,tid,time,ip,sym  and -f trace:time,cpu,trace
@@ -140,7 +144,11 @@ OPTIONS
     
 		"Overriding previous field request for all events."
     
+<<<<<<< HEAD
 	Alternativey, consider the order:
+=======
+	Alternatively, consider the order:
+>>>>>>> v3.18
     
 		-f comm,tid,time,ip,sym -f trace:
     
@@ -203,6 +211,21 @@ OPTIONS
 --show-kernel-path::
 	Try to resolve the path of [kernel.kallsyms]
 
+<<<<<<< HEAD
+=======
+--show-task-events
+	Display task related events (e.g. FORK, COMM, EXIT).
+
+--show-mmap-events
+	Display mmap related events (e.g. MMAP, MMAP2).
+
+--header
+	Show perf.data header.
+
+--header-only
+	Show only perf.data header.
+
+>>>>>>> v3.18
 SEE ALSO
 --------
 linkperf:perf-record[1], linkperf:perf-script-perl[1],

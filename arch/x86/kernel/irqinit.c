@@ -52,7 +52,11 @@ static struct irqaction irq2 = {
 };
 
 DEFINE_PER_CPU(vector_irq_t, vector_irq) = {
+<<<<<<< HEAD
 	[0 ... NR_VECTORS - 1] = -1,
+=======
+	[0 ... NR_VECTORS - 1] = VECTOR_UNDEFINED,
+>>>>>>> v3.18
 };
 
 int vector_used_by_percpu_irq(unsigned int vector)
@@ -60,7 +64,11 @@ int vector_used_by_percpu_irq(unsigned int vector)
 	int cpu;
 
 	for_each_online_cpu(cpu) {
+<<<<<<< HEAD
 		if (per_cpu(vector_irq, cpu)[vector] != -1)
+=======
+		if (per_cpu(vector_irq, cpu)[vector] > VECTOR_UNDEFINED)
+>>>>>>> v3.18
 			return 1;
 	}
 
@@ -70,7 +78,10 @@ int vector_used_by_percpu_irq(unsigned int vector)
 void __init init_ISA_irqs(void)
 {
 	struct irq_chip *chip = legacy_pic->chip;
+<<<<<<< HEAD
 	const char *name = chip->name;
+=======
+>>>>>>> v3.18
 	int i;
 
 #if defined(CONFIG_X86_64) || defined(CONFIG_X86_LOCAL_APIC)
@@ -78,8 +89,13 @@ void __init init_ISA_irqs(void)
 #endif
 	legacy_pic->init(0);
 
+<<<<<<< HEAD
 	for (i = 0; i < legacy_pic->nr_legacy_irqs; i++)
 		irq_set_chip_and_handler_name(i, chip, handle_level_irq, name);
+=======
+	for (i = 0; i < nr_legacy_irqs(); i++)
+		irq_set_chip_and_handler(i, chip, handle_level_irq);
+>>>>>>> v3.18
 }
 
 void __init init_IRQ(void)
@@ -87,12 +103,15 @@ void __init init_IRQ(void)
 	int i;
 
 	/*
+<<<<<<< HEAD
 	 * We probably need a better place for this, but it works for
 	 * now ...
 	 */
 	x86_add_irq_domains();
 
 	/*
+=======
+>>>>>>> v3.18
 	 * On cpu 0, Assign IRQ0_VECTOR..IRQ15_VECTOR's to IRQ 0..15.
 	 * If these IRQ's are handled by legacy interrupt-controllers like PIC,
 	 * then this configuration will likely be static after the boot. If
@@ -100,7 +119,11 @@ void __init init_IRQ(void)
 	 * then this vector space can be freed and re-used dynamically as the
 	 * irq's migrate etc.
 	 */
+<<<<<<< HEAD
 	for (i = 0; i < legacy_pic->nr_legacy_irqs; i++)
+=======
+	for (i = 0; i < nr_legacy_irqs(); i++)
+>>>>>>> v3.18
 		per_cpu(vector_irq, 0)[IRQ0_VECTOR + i] = i;
 
 	x86_init.irqs.intr_init();
@@ -121,7 +144,11 @@ void setup_vector_irq(int cpu)
 	 * legacy PIC, for the new cpu that is coming online, setup the static
 	 * legacy vector to irq mapping:
 	 */
+<<<<<<< HEAD
 	for (irq = 0; irq < legacy_pic->nr_legacy_irqs; irq++)
+=======
+	for (irq = 0; irq < nr_legacy_irqs(); irq++)
+>>>>>>> v3.18
 		per_cpu(vector_irq, cpu)[IRQ0_VECTOR + irq] = irq;
 #endif
 
@@ -209,7 +236,11 @@ void __init native_init_IRQ(void)
 		set_intr_gate(i, interrupt[i - FIRST_EXTERNAL_VECTOR]);
 	}
 
+<<<<<<< HEAD
 	if (!acpi_ioapic && !of_ioapic)
+=======
+	if (!acpi_ioapic && !of_ioapic && nr_legacy_irqs())
+>>>>>>> v3.18
 		setup_irq(2, &irq2);
 
 #ifdef CONFIG_X86_32

@@ -118,6 +118,7 @@ static void scm_request_done(struct scm_request *scmrq)
 	spin_unlock_irqrestore(&list_lock, flags);
 }
 
+<<<<<<< HEAD
 static int scm_open(struct block_device *blkdev, fmode_t mode)
 {
 	return scm_get_ref();
@@ -134,6 +135,8 @@ static const struct block_device_operations scm_blk_devops = {
 	.release = scm_release,
 };
 
+=======
+>>>>>>> v3.18
 static bool scm_permit_request(struct scm_blk_dev *bdev, struct request *req)
 {
 	return rq_data_dir(req) != WRITE || bdev->state != SCM_WR_PROHIBIT;
@@ -146,7 +149,11 @@ static void scm_request_prepare(struct scm_request *scmrq)
 	struct aidaw *aidaw = scmrq->aidaw;
 	struct msb *msb = &scmrq->aob->msb[0];
 	struct req_iterator iter;
+<<<<<<< HEAD
 	struct bio_vec *bv;
+=======
+	struct bio_vec bv;
+>>>>>>> v3.18
 
 	msb->bs = MSB_BS_4K;
 	scmrq->aob->request.msb_count = 1;
@@ -158,9 +165,15 @@ static void scm_request_prepare(struct scm_request *scmrq)
 	msb->data_addr = (u64) aidaw;
 
 	rq_for_each_segment(bv, scmrq->request, iter) {
+<<<<<<< HEAD
 		WARN_ON(bv->bv_offset);
 		msb->blk_count += bv->bv_len >> 12;
 		aidaw->data_addr = (u64) page_address(bv->bv_page);
+=======
+		WARN_ON(bv.bv_offset);
+		msb->blk_count += bv.bv_len >> 12;
+		aidaw->data_addr = (u64) page_address(bv.bv_page);
+>>>>>>> v3.18
 		aidaw++;
 	}
 }
@@ -223,8 +236,17 @@ static void scm_blk_request(struct request_queue *rq)
 	int ret;
 
 	while ((req = blk_peek_request(rq))) {
+<<<<<<< HEAD
 		if (req->cmd_type != REQ_TYPE_FS)
 			continue;
+=======
+		if (req->cmd_type != REQ_TYPE_FS) {
+			blk_start_request(req);
+			blk_dump_rq_flags(req, KMSG_COMPONENT " bad request");
+			blk_end_request_all(req, -EIO);
+			continue;
+		}
+>>>>>>> v3.18
 
 		if (!scm_permit_request(bdev, req)) {
 			scm_ensure_queue_restart(bdev);
@@ -252,7 +274,11 @@ static void scm_blk_request(struct request_queue *rq)
 		atomic_inc(&bdev->queued_reqs);
 		blk_start_request(req);
 
+<<<<<<< HEAD
 		ret = scm_start_aob(scmrq->aob);
+=======
+		ret = eadm_start_aob(scmrq->aob);
+>>>>>>> v3.18
 		if (ret) {
 			SCM_LOG(5, "no subchannel");
 			scm_request_requeue(scmrq);
@@ -316,7 +342,11 @@ static void scm_blk_handle_error(struct scm_request *scmrq)
 	}
 
 restart:
+<<<<<<< HEAD
 	if (!scm_start_aob(scmrq->aob))
+=======
+	if (!eadm_start_aob(scmrq->aob))
+>>>>>>> v3.18
 		return;
 
 requeue:
@@ -359,6 +389,13 @@ static void scm_blk_tasklet(struct scm_blk_dev *bdev)
 	blk_run_queue(bdev->rq);
 }
 
+<<<<<<< HEAD
+=======
+static const struct block_device_operations scm_blk_devops = {
+	.owner = THIS_MODULE,
+};
+
+>>>>>>> v3.18
 int scm_blk_dev_setup(struct scm_blk_dev *bdev, struct scm_device *scmdev)
 {
 	struct request_queue *rq;
@@ -394,6 +431,10 @@ int scm_blk_dev_setup(struct scm_blk_dev *bdev, struct scm_device *scmdev)
 	blk_queue_max_hw_sectors(rq, nr_max_blk << 3); /* 8 * 512 = blk_size */
 	blk_queue_max_segments(rq, nr_max_blk);
 	queue_flag_set_unlocked(QUEUE_FLAG_NONROT, rq);
+<<<<<<< HEAD
+=======
+	queue_flag_clear_unlocked(QUEUE_FLAG_ADD_RANDOM, rq);
+>>>>>>> v3.18
 	scm_blk_dev_cluster_setup(bdev);
 
 	bdev->gendisk = alloc_disk(SCM_NR_PARTS);

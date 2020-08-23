@@ -5,6 +5,7 @@
  *
  * Author(s): Martin Schwidefsky <schwidefsky@de.ibm.com>
  */
+<<<<<<< HEAD
 #include <linux/moduleloader.h>
 #include <linux/netdevice.h>
 #include <linux/if_vlan.h>
@@ -12,6 +13,15 @@
 #include <asm/cacheflush.h>
 #include <asm/processor.h>
 #include <asm/facility.h>
+=======
+#include <linux/netdevice.h>
+#include <linux/if_vlan.h>
+#include <linux/filter.h>
+#include <linux/init.h>
+#include <asm/cacheflush.h>
+#include <asm/facility.h>
+#include <asm/dis.h>
+>>>>>>> v3.18
 
 /*
  * Conventions:
@@ -146,6 +156,15 @@ struct bpf_jit {
 	ret;						\
 })
 
+<<<<<<< HEAD
+=======
+static void bpf_jit_fill_hole(void *area, unsigned int size)
+{
+	/* Fill whole space with illegal instructions */
+	memset(area, 0, size);
+}
+
+>>>>>>> v3.18
 static void bpf_jit_prologue(struct bpf_jit *jit)
 {
 	/* Save registers and create stack frame if necessary */
@@ -154,8 +173,13 @@ static void bpf_jit_prologue(struct bpf_jit *jit)
 		EMIT6(0xeb8ff058, 0x0024);
 		/* lgr %r14,%r15 */
 		EMIT4(0xb90400ef);
+<<<<<<< HEAD
 		/* ahi %r15,<offset> */
 		EMIT4_IMM(0xa7fa0000, (jit->seen & SEEN_MEM) ? -112 : -80);
+=======
+		/* aghi %r15,<offset> */
+		EMIT4_IMM(0xa7fb0000, (jit->seen & SEEN_MEM) ? -112 : -80);
+>>>>>>> v3.18
 		/* stg %r14,152(%r15) */
 		EMIT6(0xe3e0f098, 0x0024);
 	} else if ((jit->seen & SEEN_XREG) && (jit->seen & SEEN_LITERAL))
@@ -236,6 +260,7 @@ static void bpf_jit_noleaks(struct bpf_jit *jit, struct sock_filter *filter)
 		EMIT4(0xa7c80000);
 	/* Clear A if the first register does not set it. */
 	switch (filter[0].code) {
+<<<<<<< HEAD
 	case BPF_S_LD_W_ABS:
 	case BPF_S_LD_H_ABS:
 	case BPF_S_LD_B_ABS:
@@ -257,6 +282,19 @@ static void bpf_jit_noleaks(struct bpf_jit *jit, struct sock_filter *filter)
 	case BPF_S_ANC_VLAN_TAG:
 	case BPF_S_ANC_VLAN_TAG_PRESENT:
 	case BPF_S_RET_K:
+=======
+	case BPF_LD | BPF_W | BPF_ABS:
+	case BPF_LD | BPF_H | BPF_ABS:
+	case BPF_LD | BPF_B | BPF_ABS:
+	case BPF_LD | BPF_W | BPF_LEN:
+	case BPF_LD | BPF_W | BPF_IND:
+	case BPF_LD | BPF_H | BPF_IND:
+	case BPF_LD | BPF_B | BPF_IND:
+	case BPF_LD | BPF_IMM:
+	case BPF_LD | BPF_MEM:
+	case BPF_MISC | BPF_TXA:
+	case BPF_RET | BPF_K:
+>>>>>>> v3.18
 		/* first instruction sets A register */
 		break;
 	default: /* A = 0 */
@@ -271,15 +309,29 @@ static int bpf_jit_insn(struct bpf_jit *jit, struct sock_filter *filter,
 	unsigned int K;
 	int offset;
 	unsigned int mask;
+<<<<<<< HEAD
 
 	K = filter->k;
 	switch (filter->code) {
 	case BPF_S_ALU_ADD_X: /* A += X */
+=======
+	u16 code;
+
+	K = filter->k;
+	code = bpf_anc_helper(filter);
+
+	switch (code) {
+	case BPF_ALU | BPF_ADD | BPF_X: /* A += X */
+>>>>>>> v3.18
 		jit->seen |= SEEN_XREG;
 		/* ar %r5,%r12 */
 		EMIT2(0x1a5c);
 		break;
+<<<<<<< HEAD
 	case BPF_S_ALU_ADD_K: /* A += K */
+=======
+	case BPF_ALU | BPF_ADD | BPF_K: /* A += K */
+>>>>>>> v3.18
 		if (!K)
 			break;
 		if (K <= 16383)
@@ -292,12 +344,20 @@ static int bpf_jit_insn(struct bpf_jit *jit, struct sock_filter *filter,
 			/* a %r5,<d(K)>(%r13) */
 			EMIT4_DISP(0x5a50d000, EMIT_CONST(K));
 		break;
+<<<<<<< HEAD
 	case BPF_S_ALU_SUB_X: /* A -= X */
+=======
+	case BPF_ALU | BPF_SUB | BPF_X: /* A -= X */
+>>>>>>> v3.18
 		jit->seen |= SEEN_XREG;
 		/* sr %r5,%r12 */
 		EMIT2(0x1b5c);
 		break;
+<<<<<<< HEAD
 	case BPF_S_ALU_SUB_K: /* A -= K */
+=======
+	case BPF_ALU | BPF_SUB | BPF_K: /* A -= K */
+>>>>>>> v3.18
 		if (!K)
 			break;
 		if (K <= 16384)
@@ -310,12 +370,20 @@ static int bpf_jit_insn(struct bpf_jit *jit, struct sock_filter *filter,
 			/* s %r5,<d(K)>(%r13) */
 			EMIT4_DISP(0x5b50d000, EMIT_CONST(K));
 		break;
+<<<<<<< HEAD
 	case BPF_S_ALU_MUL_X: /* A *= X */
+=======
+	case BPF_ALU | BPF_MUL | BPF_X: /* A *= X */
+>>>>>>> v3.18
 		jit->seen |= SEEN_XREG;
 		/* msr %r5,%r12 */
 		EMIT4(0xb252005c);
 		break;
+<<<<<<< HEAD
 	case BPF_S_ALU_MUL_K: /* A *= K */
+=======
+	case BPF_ALU | BPF_MUL | BPF_K: /* A *= K */
+>>>>>>> v3.18
 		if (K <= 16383)
 			/* mhi %r5,K */
 			EMIT4_IMM(0xa75c0000, K);
@@ -326,7 +394,11 @@ static int bpf_jit_insn(struct bpf_jit *jit, struct sock_filter *filter,
 			/* ms %r5,<d(K)>(%r13) */
 			EMIT4_DISP(0x7150d000, EMIT_CONST(K));
 		break;
+<<<<<<< HEAD
 	case BPF_S_ALU_DIV_X: /* A /= X */
+=======
+	case BPF_ALU | BPF_DIV | BPF_X: /* A /= X */
+>>>>>>> v3.18
 		jit->seen |= SEEN_XREG | SEEN_RET0;
 		/* ltr %r12,%r12 */
 		EMIT2(0x12cc);
@@ -337,7 +409,11 @@ static int bpf_jit_insn(struct bpf_jit *jit, struct sock_filter *filter,
 		/* dlr %r4,%r12 */
 		EMIT4(0xb997004c);
 		break;
+<<<<<<< HEAD
 	case BPF_S_ALU_DIV_K: /* A /= K */
+=======
+	case BPF_ALU | BPF_DIV | BPF_K: /* A /= K */
+>>>>>>> v3.18
 		if (K == 1)
 			break;
 		/* lhi %r4,0 */
@@ -345,7 +421,11 @@ static int bpf_jit_insn(struct bpf_jit *jit, struct sock_filter *filter,
 		/* dl %r4,<d(K)>(%r13) */
 		EMIT6_DISP(0xe340d000, 0x0097, EMIT_CONST(K));
 		break;
+<<<<<<< HEAD
 	case BPF_S_ALU_MOD_X: /* A %= X */
+=======
+	case BPF_ALU | BPF_MOD | BPF_X: /* A %= X */
+>>>>>>> v3.18
 		jit->seen |= SEEN_XREG | SEEN_RET0;
 		/* ltr %r12,%r12 */
 		EMIT2(0x12cc);
@@ -358,7 +438,11 @@ static int bpf_jit_insn(struct bpf_jit *jit, struct sock_filter *filter,
 		/* lr %r5,%r4 */
 		EMIT2(0x1854);
 		break;
+<<<<<<< HEAD
 	case BPF_S_ALU_MOD_K: /* A %= K */
+=======
+	case BPF_ALU | BPF_MOD | BPF_K: /* A %= K */
+>>>>>>> v3.18
 		if (K == 1) {
 			/* lhi %r5,0 */
 			EMIT4(0xa7580000);
@@ -371,12 +455,20 @@ static int bpf_jit_insn(struct bpf_jit *jit, struct sock_filter *filter,
 		/* lr %r5,%r4 */
 		EMIT2(0x1854);
 		break;
+<<<<<<< HEAD
 	case BPF_S_ALU_AND_X: /* A &= X */
+=======
+	case BPF_ALU | BPF_AND | BPF_X: /* A &= X */
+>>>>>>> v3.18
 		jit->seen |= SEEN_XREG;
 		/* nr %r5,%r12 */
 		EMIT2(0x145c);
 		break;
+<<<<<<< HEAD
 	case BPF_S_ALU_AND_K: /* A &= K */
+=======
+	case BPF_ALU | BPF_AND | BPF_K: /* A &= K */
+>>>>>>> v3.18
 		if (test_facility(21))
 			/* nilf %r5,<K> */
 			EMIT6_IMM(0xc05b0000, K);
@@ -384,12 +476,20 @@ static int bpf_jit_insn(struct bpf_jit *jit, struct sock_filter *filter,
 			/* n %r5,<d(K)>(%r13) */
 			EMIT4_DISP(0x5450d000, EMIT_CONST(K));
 		break;
+<<<<<<< HEAD
 	case BPF_S_ALU_OR_X: /* A |= X */
+=======
+	case BPF_ALU | BPF_OR | BPF_X: /* A |= X */
+>>>>>>> v3.18
 		jit->seen |= SEEN_XREG;
 		/* or %r5,%r12 */
 		EMIT2(0x165c);
 		break;
+<<<<<<< HEAD
 	case BPF_S_ALU_OR_K: /* A |= K */
+=======
+	case BPF_ALU | BPF_OR | BPF_K: /* A |= K */
+>>>>>>> v3.18
 		if (test_facility(21))
 			/* oilf %r5,<K> */
 			EMIT6_IMM(0xc05d0000, K);
@@ -397,40 +497,66 @@ static int bpf_jit_insn(struct bpf_jit *jit, struct sock_filter *filter,
 			/* o %r5,<d(K)>(%r13) */
 			EMIT4_DISP(0x5650d000, EMIT_CONST(K));
 		break;
+<<<<<<< HEAD
 	case BPF_S_ANC_ALU_XOR_X: /* A ^= X; */
 	case BPF_S_ALU_XOR_X:
+=======
+	case BPF_ANC | SKF_AD_ALU_XOR_X: /* A ^= X; */
+	case BPF_ALU | BPF_XOR | BPF_X:
+>>>>>>> v3.18
 		jit->seen |= SEEN_XREG;
 		/* xr %r5,%r12 */
 		EMIT2(0x175c);
 		break;
+<<<<<<< HEAD
 	case BPF_S_ALU_XOR_K: /* A ^= K */
+=======
+	case BPF_ALU | BPF_XOR | BPF_K: /* A ^= K */
+>>>>>>> v3.18
 		if (!K)
 			break;
 		/* x %r5,<d(K)>(%r13) */
 		EMIT4_DISP(0x5750d000, EMIT_CONST(K));
 		break;
+<<<<<<< HEAD
 	case BPF_S_ALU_LSH_X: /* A <<= X; */
+=======
+	case BPF_ALU | BPF_LSH | BPF_X: /* A <<= X; */
+>>>>>>> v3.18
 		jit->seen |= SEEN_XREG;
 		/* sll %r5,0(%r12) */
 		EMIT4(0x8950c000);
 		break;
+<<<<<<< HEAD
 	case BPF_S_ALU_LSH_K: /* A <<= K */
+=======
+	case BPF_ALU | BPF_LSH | BPF_K: /* A <<= K */
+>>>>>>> v3.18
 		if (K == 0)
 			break;
 		/* sll %r5,K */
 		EMIT4_DISP(0x89500000, K);
 		break;
+<<<<<<< HEAD
 	case BPF_S_ALU_RSH_X: /* A >>= X; */
+=======
+	case BPF_ALU | BPF_RSH | BPF_X: /* A >>= X; */
+>>>>>>> v3.18
 		jit->seen |= SEEN_XREG;
 		/* srl %r5,0(%r12) */
 		EMIT4(0x8850c000);
 		break;
+<<<<<<< HEAD
 	case BPF_S_ALU_RSH_K: /* A >>= K; */
+=======
+	case BPF_ALU | BPF_RSH | BPF_K: /* A >>= K; */
+>>>>>>> v3.18
 		if (K == 0)
 			break;
 		/* srl %r5,K */
 		EMIT4_DISP(0x88500000, K);
 		break;
+<<<<<<< HEAD
 	case BPF_S_ALU_NEG: /* A = -A */
 		/* lnr %r5,%r5 */
 		EMIT2(0x1155);
@@ -446,6 +572,23 @@ static int bpf_jit_insn(struct bpf_jit *jit, struct sock_filter *filter,
 		mask = 0xa00000; /* jhe */
 		goto kbranch;
 	case BPF_S_JMP_JEQ_K: /* ip += (A == K) ? jt : jf */
+=======
+	case BPF_ALU | BPF_NEG: /* A = -A */
+		/* lnr %r5,%r5 */
+		EMIT2(0x1155);
+		break;
+	case BPF_JMP | BPF_JA: /* ip += K */
+		offset = addrs[i + K] + jit->start - jit->prg;
+		EMIT4_PCREL(0xa7f40000, offset);
+		break;
+	case BPF_JMP | BPF_JGT | BPF_K: /* ip += (A > K) ? jt : jf */
+		mask = 0x200000; /* jh */
+		goto kbranch;
+	case BPF_JMP | BPF_JGE | BPF_K: /* ip += (A >= K) ? jt : jf */
+		mask = 0xa00000; /* jhe */
+		goto kbranch;
+	case BPF_JMP | BPF_JEQ | BPF_K: /* ip += (A == K) ? jt : jf */
+>>>>>>> v3.18
 		mask = 0x800000; /* je */
 kbranch:	/* Emit compare if the branch targets are different */
 		if (filter->jt != filter->jf) {
@@ -478,7 +621,11 @@ branch:		if (filter->jt == filter->jf) {
 			EMIT4_PCREL(0xa7040000 | (mask ^ 0xf00000), offset);
 		}
 		break;
+<<<<<<< HEAD
 	case BPF_S_JMP_JSET_K: /* ip += (A & K) ? jt : jf */
+=======
+	case BPF_JMP | BPF_JSET | BPF_K: /* ip += (A & K) ? jt : jf */
+>>>>>>> v3.18
 		mask = 0x700000; /* jnz */
 		/* Emit test if the branch targets are different */
 		if (filter->jt != filter->jf) {
@@ -492,6 +639,7 @@ branch:		if (filter->jt == filter->jf) {
 				EMIT4_IMM(0xa7510000, K);
 		}
 		goto branch;
+<<<<<<< HEAD
 	case BPF_S_JMP_JGT_X: /* ip += (A > X) ? jt : jf */
 		mask = 0x200000; /* jh */
 		goto xbranch;
@@ -499,6 +647,15 @@ branch:		if (filter->jt == filter->jf) {
 		mask = 0xa00000; /* jhe */
 		goto xbranch;
 	case BPF_S_JMP_JEQ_X: /* ip += (A == X) ? jt : jf */
+=======
+	case BPF_JMP | BPF_JGT | BPF_X: /* ip += (A > X) ? jt : jf */
+		mask = 0x200000; /* jh */
+		goto xbranch;
+	case BPF_JMP | BPF_JGE | BPF_X: /* ip += (A >= X) ? jt : jf */
+		mask = 0xa00000; /* jhe */
+		goto xbranch;
+	case BPF_JMP | BPF_JEQ | BPF_X: /* ip += (A == X) ? jt : jf */
+>>>>>>> v3.18
 		mask = 0x800000; /* je */
 xbranch:	/* Emit compare if the branch targets are different */
 		if (filter->jt != filter->jf) {
@@ -507,7 +664,11 @@ xbranch:	/* Emit compare if the branch targets are different */
 			EMIT2(0x195c);
 		}
 		goto branch;
+<<<<<<< HEAD
 	case BPF_S_JMP_JSET_X: /* ip += (A & X) ? jt : jf */
+=======
+	case BPF_JMP | BPF_JSET | BPF_X: /* ip += (A & X) ? jt : jf */
+>>>>>>> v3.18
 		mask = 0x700000; /* jnz */
 		/* Emit test if the branch targets are different */
 		if (filter->jt != filter->jf) {
@@ -518,6 +679,7 @@ xbranch:	/* Emit compare if the branch targets are different */
 			EMIT2(0x144c);
 		}
 		goto branch;
+<<<<<<< HEAD
 	case BPF_S_LD_W_ABS: /* A = *(u32 *) (skb->data+K) */
 		jit->seen |= SEEN_DATAREF | SEEN_RET0 | SEEN_LOAD_WORD;
 		offset = jit->off_load_word;
@@ -527,6 +689,17 @@ xbranch:	/* Emit compare if the branch targets are different */
 		offset = jit->off_load_half;
 		goto load_abs;
 	case BPF_S_LD_B_ABS: /* A = *(u8 *) (skb->data+K) */
+=======
+	case BPF_LD | BPF_W | BPF_ABS: /* A = *(u32 *) (skb->data+K) */
+		jit->seen |= SEEN_DATAREF | SEEN_RET0 | SEEN_LOAD_WORD;
+		offset = jit->off_load_word;
+		goto load_abs;
+	case BPF_LD | BPF_H | BPF_ABS: /* A = *(u16 *) (skb->data+K) */
+		jit->seen |= SEEN_DATAREF | SEEN_RET0 | SEEN_LOAD_HALF;
+		offset = jit->off_load_half;
+		goto load_abs;
+	case BPF_LD | BPF_B | BPF_ABS: /* A = *(u8 *) (skb->data+K) */
+>>>>>>> v3.18
 		jit->seen |= SEEN_DATAREF | SEEN_RET0 | SEEN_LOAD_BYTE;
 		offset = jit->off_load_byte;
 load_abs:	if ((int) K < 0)
@@ -540,6 +713,7 @@ call_fn:	/* lg %r1,<d(function)>(%r13) */
 		/* jnz <ret0> */
 		EMIT4_PCREL(0xa7740000, (jit->ret0_ip - jit->prg));
 		break;
+<<<<<<< HEAD
 	case BPF_S_LD_W_IND: /* A = *(u32 *) (skb->data+K+X) */
 		jit->seen |= SEEN_DATAREF | SEEN_RET0 | SEEN_LOAD_IWORD;
 		offset = jit->off_load_iword;
@@ -553,6 +727,21 @@ call_fn:	/* lg %r1,<d(function)>(%r13) */
 		offset = jit->off_load_ibyte;
 		goto call_fn;
 	case BPF_S_LDX_B_MSH:
+=======
+	case BPF_LD | BPF_W | BPF_IND: /* A = *(u32 *) (skb->data+K+X) */
+		jit->seen |= SEEN_DATAREF | SEEN_RET0 | SEEN_LOAD_IWORD;
+		offset = jit->off_load_iword;
+		goto call_fn;
+	case BPF_LD | BPF_H | BPF_IND: /* A = *(u16 *) (skb->data+K+X) */
+		jit->seen |= SEEN_DATAREF | SEEN_RET0 | SEEN_LOAD_IHALF;
+		offset = jit->off_load_ihalf;
+		goto call_fn;
+	case BPF_LD | BPF_B | BPF_IND: /* A = *(u8 *) (skb->data+K+X) */
+		jit->seen |= SEEN_DATAREF | SEEN_RET0 | SEEN_LOAD_IBYTE;
+		offset = jit->off_load_ibyte;
+		goto call_fn;
+	case BPF_LDX | BPF_B | BPF_MSH:
+>>>>>>> v3.18
 		/* X = (*(u8 *)(skb->data+K) & 0xf) << 2 */
 		jit->seen |= SEEN_RET0;
 		if ((int) K < 0) {
@@ -563,17 +752,29 @@ call_fn:	/* lg %r1,<d(function)>(%r13) */
 		jit->seen |= SEEN_DATAREF | SEEN_LOAD_BMSH;
 		offset = jit->off_load_bmsh;
 		goto call_fn;
+<<<<<<< HEAD
 	case BPF_S_LD_W_LEN: /*	A = skb->len; */
+=======
+	case BPF_LD | BPF_W | BPF_LEN: /*	A = skb->len; */
+>>>>>>> v3.18
 		BUILD_BUG_ON(FIELD_SIZEOF(struct sk_buff, len) != 4);
 		/* l %r5,<d(len)>(%r2) */
 		EMIT4_DISP(0x58502000, offsetof(struct sk_buff, len));
 		break;
+<<<<<<< HEAD
 	case BPF_S_LDX_W_LEN: /* X = skb->len; */
+=======
+	case BPF_LDX | BPF_W | BPF_LEN: /* X = skb->len; */
+>>>>>>> v3.18
 		jit->seen |= SEEN_XREG;
 		/* l %r12,<d(len)>(%r2) */
 		EMIT4_DISP(0x58c02000, offsetof(struct sk_buff, len));
 		break;
+<<<<<<< HEAD
 	case BPF_S_LD_IMM: /* A = K */
+=======
+	case BPF_LD | BPF_IMM: /* A = K */
+>>>>>>> v3.18
 		if (K <= 16383)
 			/* lhi %r5,K */
 			EMIT4_IMM(0xa7580000, K);
@@ -584,7 +785,11 @@ call_fn:	/* lg %r1,<d(function)>(%r13) */
 			/* l %r5,<d(K)>(%r13) */
 			EMIT4_DISP(0x5850d000, EMIT_CONST(K));
 		break;
+<<<<<<< HEAD
 	case BPF_S_LDX_IMM: /* X = K */
+=======
+	case BPF_LDX | BPF_IMM: /* X = K */
+>>>>>>> v3.18
 		jit->seen |= SEEN_XREG;
 		if (K <= 16383)
 			/* lhi %r12,<K> */
@@ -596,29 +801,49 @@ call_fn:	/* lg %r1,<d(function)>(%r13) */
 			/* l %r12,<d(K)>(%r13) */
 			EMIT4_DISP(0x58c0d000, EMIT_CONST(K));
 		break;
+<<<<<<< HEAD
 	case BPF_S_LD_MEM: /* A = mem[K] */
+=======
+	case BPF_LD | BPF_MEM: /* A = mem[K] */
+>>>>>>> v3.18
 		jit->seen |= SEEN_MEM;
 		/* l %r5,<K>(%r15) */
 		EMIT4_DISP(0x5850f000,
 			   (jit->seen & SEEN_DATAREF) ? 160 + K*4 : K*4);
 		break;
+<<<<<<< HEAD
 	case BPF_S_LDX_MEM: /* X = mem[K] */
+=======
+	case BPF_LDX | BPF_MEM: /* X = mem[K] */
+>>>>>>> v3.18
 		jit->seen |= SEEN_XREG | SEEN_MEM;
 		/* l %r12,<K>(%r15) */
 		EMIT4_DISP(0x58c0f000,
 			   (jit->seen & SEEN_DATAREF) ? 160 + K*4 : K*4);
 		break;
+<<<<<<< HEAD
 	case BPF_S_MISC_TAX: /* X = A */
+=======
+	case BPF_MISC | BPF_TAX: /* X = A */
+>>>>>>> v3.18
 		jit->seen |= SEEN_XREG;
 		/* lr %r12,%r5 */
 		EMIT2(0x18c5);
 		break;
+<<<<<<< HEAD
 	case BPF_S_MISC_TXA: /* A = X */
+=======
+	case BPF_MISC | BPF_TXA: /* A = X */
+>>>>>>> v3.18
 		jit->seen |= SEEN_XREG;
 		/* lr %r5,%r12 */
 		EMIT2(0x185c);
 		break;
+<<<<<<< HEAD
 	case BPF_S_RET_K:
+=======
+	case BPF_RET | BPF_K:
+>>>>>>> v3.18
 		if (K == 0) {
 			jit->seen |= SEEN_RET0;
 			if (last)
@@ -638,33 +863,54 @@ call_fn:	/* lg %r1,<d(function)>(%r13) */
 			EMIT4_PCREL(0xa7f40000, jit->exit_ip - jit->prg);
 		}
 		break;
+<<<<<<< HEAD
 	case BPF_S_RET_A:
+=======
+	case BPF_RET | BPF_A:
+>>>>>>> v3.18
 		/* llgfr %r2,%r5 */
 		EMIT4(0xb9160025);
 		/* j <exit> */
 		EMIT4_PCREL(0xa7f40000, jit->exit_ip - jit->prg);
 		break;
+<<<<<<< HEAD
 	case BPF_S_ST: /* mem[K] = A */
+=======
+	case BPF_ST: /* mem[K] = A */
+>>>>>>> v3.18
 		jit->seen |= SEEN_MEM;
 		/* st %r5,<K>(%r15) */
 		EMIT4_DISP(0x5050f000,
 			   (jit->seen & SEEN_DATAREF) ? 160 + K*4 : K*4);
 		break;
+<<<<<<< HEAD
 	case BPF_S_STX: /* mem[K] = X : mov %ebx,off8(%rbp) */
+=======
+	case BPF_STX: /* mem[K] = X : mov %ebx,off8(%rbp) */
+>>>>>>> v3.18
 		jit->seen |= SEEN_XREG | SEEN_MEM;
 		/* st %r12,<K>(%r15) */
 		EMIT4_DISP(0x50c0f000,
 			   (jit->seen & SEEN_DATAREF) ? 160 + K*4 : K*4);
 		break;
+<<<<<<< HEAD
 	case BPF_S_ANC_PROTOCOL: /* A = ntohs(skb->protocol); */
+=======
+	case BPF_ANC | SKF_AD_PROTOCOL: /* A = ntohs(skb->protocol); */
+>>>>>>> v3.18
 		BUILD_BUG_ON(FIELD_SIZEOF(struct sk_buff, protocol) != 2);
 		/* lhi %r5,0 */
 		EMIT4(0xa7580000);
 		/* icm	%r5,3,<d(protocol)>(%r2) */
 		EMIT4_DISP(0xbf532000, offsetof(struct sk_buff, protocol));
 		break;
+<<<<<<< HEAD
 	case BPF_S_ANC_IFINDEX:	/* if (!skb->dev) return 0;
 				 * A = skb->dev->ifindex */
+=======
+	case BPF_ANC | SKF_AD_IFINDEX:	/* if (!skb->dev) return 0;
+					 * A = skb->dev->ifindex */
+>>>>>>> v3.18
 		BUILD_BUG_ON(FIELD_SIZEOF(struct net_device, ifindex) != 4);
 		jit->seen |= SEEN_RET0;
 		/* lg %r1,<d(dev)>(%r2) */
@@ -676,20 +922,33 @@ call_fn:	/* lg %r1,<d(function)>(%r13) */
 		/* l %r5,<d(ifindex)>(%r1) */
 		EMIT4_DISP(0x58501000, offsetof(struct net_device, ifindex));
 		break;
+<<<<<<< HEAD
 	case BPF_S_ANC_MARK: /* A = skb->mark */
+=======
+	case BPF_ANC | SKF_AD_MARK: /* A = skb->mark */
+>>>>>>> v3.18
 		BUILD_BUG_ON(FIELD_SIZEOF(struct sk_buff, mark) != 4);
 		/* l %r5,<d(mark)>(%r2) */
 		EMIT4_DISP(0x58502000, offsetof(struct sk_buff, mark));
 		break;
+<<<<<<< HEAD
 	case BPF_S_ANC_QUEUE: /* A = skb->queue_mapping */
+=======
+	case BPF_ANC | SKF_AD_QUEUE: /* A = skb->queue_mapping */
+>>>>>>> v3.18
 		BUILD_BUG_ON(FIELD_SIZEOF(struct sk_buff, queue_mapping) != 2);
 		/* lhi %r5,0 */
 		EMIT4(0xa7580000);
 		/* icm	%r5,3,<d(queue_mapping)>(%r2) */
 		EMIT4_DISP(0xbf532000, offsetof(struct sk_buff, queue_mapping));
 		break;
+<<<<<<< HEAD
 	case BPF_S_ANC_HATYPE:	/* if (!skb->dev) return 0;
 				 * A = skb->dev->type */
+=======
+	case BPF_ANC | SKF_AD_HATYPE:	/* if (!skb->dev) return 0;
+					 * A = skb->dev->type */
+>>>>>>> v3.18
 		BUILD_BUG_ON(FIELD_SIZEOF(struct net_device, type) != 2);
 		jit->seen |= SEEN_RET0;
 		/* lg %r1,<d(dev)>(%r2) */
@@ -703,6 +962,7 @@ call_fn:	/* lg %r1,<d(function)>(%r13) */
 		/* icm	%r5,3,<d(type)>(%r1) */
 		EMIT4_DISP(0xbf531000, offsetof(struct net_device, type));
 		break;
+<<<<<<< HEAD
 	case BPF_S_ANC_RXHASH: /* A = skb->rxhash */
 		BUILD_BUG_ON(FIELD_SIZEOF(struct sk_buff, rxhash) != 4);
 		/* l %r5,<d(rxhash)>(%r2) */
@@ -710,13 +970,26 @@ call_fn:	/* lg %r1,<d(function)>(%r13) */
 		break;
 	case BPF_S_ANC_VLAN_TAG:
 	case BPF_S_ANC_VLAN_TAG_PRESENT:
+=======
+	case BPF_ANC | SKF_AD_RXHASH: /* A = skb->hash */
+		BUILD_BUG_ON(FIELD_SIZEOF(struct sk_buff, hash) != 4);
+		/* l %r5,<d(hash)>(%r2) */
+		EMIT4_DISP(0x58502000, offsetof(struct sk_buff, hash));
+		break;
+	case BPF_ANC | SKF_AD_VLAN_TAG:
+	case BPF_ANC | SKF_AD_VLAN_TAG_PRESENT:
+>>>>>>> v3.18
 		BUILD_BUG_ON(FIELD_SIZEOF(struct sk_buff, vlan_tci) != 2);
 		BUILD_BUG_ON(VLAN_TAG_PRESENT != 0x1000);
 		/* lhi %r5,0 */
 		EMIT4(0xa7580000);
 		/* icm	%r5,3,<d(vlan_tci)>(%r2) */
 		EMIT4_DISP(0xbf532000, offsetof(struct sk_buff, vlan_tci));
+<<<<<<< HEAD
 		if (filter->code == BPF_S_ANC_VLAN_TAG) {
+=======
+		if (code == (BPF_ANC | SKF_AD_VLAN_TAG)) {
+>>>>>>> v3.18
 			/* nill %r5,0xefff */
 			EMIT4_IMM(0xa5570000, ~VLAN_TAG_PRESENT);
 		} else {
@@ -726,7 +999,19 @@ call_fn:	/* lg %r1,<d(function)>(%r13) */
 			EMIT4_DISP(0x88500000, 12);
 		}
 		break;
+<<<<<<< HEAD
 	case BPF_S_ANC_CPU: /* A = smp_processor_id() */
+=======
+	case BPF_ANC | SKF_AD_PKTTYPE:
+		/* lhi %r5,0 */
+		EMIT4(0xa7580000);
+		/* ic %r5,<d(pkt_type_offset)>(%r2) */
+		EMIT4_DISP(0x43502000, PKT_TYPE_OFFSET());
+		/* srl %r5,5 */
+		EMIT4_DISP(0x88500000, 5);
+		break;
+	case BPF_ANC | SKF_AD_CPU: /* A = smp_processor_id() */
+>>>>>>> v3.18
 #ifdef CONFIG_SMP
 		/* l %r5,<d(cpu_nr)> */
 		EMIT4_DISP(0x58500000, offsetof(struct _lowcore, cpu_nr));
@@ -744,8 +1029,14 @@ out:
 	return -1;
 }
 
+<<<<<<< HEAD
 void bpf_jit_compile(struct sk_filter *fp)
 {
+=======
+void bpf_jit_compile(struct bpf_prog *fp)
+{
+	struct bpf_binary_header *header = NULL;
+>>>>>>> v3.18
 	unsigned long size, prg_len, lit_len;
 	struct bpf_jit jit, cjit;
 	unsigned int *addrs;
@@ -778,12 +1069,21 @@ void bpf_jit_compile(struct sk_filter *fp)
 		} else if (jit.prg == cjit.prg && jit.lit == cjit.lit) {
 			prg_len = jit.prg - jit.start;
 			lit_len = jit.lit - jit.mid;
+<<<<<<< HEAD
 			size = max_t(unsigned long, prg_len + lit_len,
 				     sizeof(struct work_struct));
 			if (size >= BPF_SIZE_MAX)
 				goto out;
 			jit.start = module_alloc(size);
 			if (!jit.start)
+=======
+			size = prg_len + lit_len;
+			if (size >= BPF_SIZE_MAX)
+				goto out;
+			header = bpf_jit_binary_alloc(size, &jit.start,
+						      2, bpf_jit_fill_hole);
+			if (!header)
+>>>>>>> v3.18
 				goto out;
 			jit.prg = jit.mid = jit.start + prg_len;
 			jit.lit = jit.end = jit.start + prg_len + lit_len;
@@ -794,6 +1094,7 @@ void bpf_jit_compile(struct sk_filter *fp)
 		cjit = jit;
 	}
 	if (bpf_jit_enable > 1) {
+<<<<<<< HEAD
 		pr_err("flen=%d proglen=%lu pass=%d image=%p\n",
 		       fp->len, jit.end - jit.start, pass, jit.start);
 		if (jit.start) {
@@ -806,10 +1107,22 @@ void bpf_jit_compile(struct sk_filter *fp)
 	}
 	if (jit.start)
 		fp->bpf_func = (void *) jit.start;
+=======
+		bpf_jit_dump(fp->len, jit.end - jit.start, pass, jit.start);
+		if (jit.start)
+			print_fn_code(jit.start, jit.mid - jit.start);
+	}
+	if (jit.start) {
+		set_memory_ro((unsigned long)header, header->pages);
+		fp->bpf_func = (void *) jit.start;
+		fp->jited = true;
+	}
+>>>>>>> v3.18
 out:
 	kfree(addrs);
 }
 
+<<<<<<< HEAD
 static void jit_free_defer(struct work_struct *arg)
 {
 	module_free(NULL, arg);
@@ -827,4 +1140,19 @@ void bpf_jit_free(struct sk_filter *fp)
 	work = (struct work_struct *)fp->bpf_func;
 	INIT_WORK(work, jit_free_defer);
 	schedule_work(work);
+=======
+void bpf_jit_free(struct bpf_prog *fp)
+{
+	unsigned long addr = (unsigned long)fp->bpf_func & PAGE_MASK;
+	struct bpf_binary_header *header = (void *)addr;
+
+	if (!fp->jited)
+		goto free_filter;
+
+	set_memory_rw(addr, header->pages);
+	bpf_jit_binary_free(header);
+
+free_filter:
+	bpf_prog_unlock_free(fp);
+>>>>>>> v3.18
 }

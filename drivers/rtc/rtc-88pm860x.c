@@ -293,7 +293,11 @@ static int pm860x_rtc_dt_init(struct platform_device *pdev,
 	int ret;
 	if (!np)
 		return -ENODEV;
+<<<<<<< HEAD
 	np = of_find_node_by_name(np, "rtc");
+=======
+	np = of_get_child_by_name(np, "rtc");
+>>>>>>> v3.18
 	if (!np) {
 		dev_err(&pdev->dev, "failed to find rtc node\n");
 		return -ENODEV;
@@ -301,6 +305,10 @@ static int pm860x_rtc_dt_init(struct platform_device *pdev,
 	ret = of_property_read_u32(np, "marvell,88pm860x-vrtc", &info->vrtc);
 	if (ret)
 		info->vrtc = 0;
+<<<<<<< HEAD
+=======
+	of_node_put(np);
+>>>>>>> v3.18
 	return 0;
 }
 #else
@@ -316,7 +324,11 @@ static int pm860x_rtc_probe(struct platform_device *pdev)
 	unsigned long ticks = 0;
 	int ret;
 
+<<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 
 	info = devm_kzalloc(&pdev->dev, sizeof(struct pm860x_rtc_info),
 			    GFP_KERNEL);
@@ -418,7 +430,10 @@ static int pm860x_rtc_remove(struct platform_device *pdev)
 	pm860x_set_bits(info->i2c, PM8607_MEAS_EN2, MEAS2_VRTC, 0);
 #endif	/* VRTC_CALIBRATION */
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

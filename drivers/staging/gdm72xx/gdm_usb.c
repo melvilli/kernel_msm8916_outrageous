@@ -27,6 +27,10 @@
 MODULE_DEVICE_TABLE(usb, id_table);
 
 #define TX_BUF_SIZE		2048
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 #if defined(CONFIG_WIMAX_GDM72XX_WIMAX2)
 #define RX_BUF_SIZE		(128*1024)	/* For packet aggregation */
 #else
@@ -35,10 +39,13 @@ MODULE_DEVICE_TABLE(usb, id_table);
 
 #define GDM7205_PADDING		256
 
+<<<<<<< HEAD
 #define H2B(x)		__cpu_to_be16(x)
 #define B2H(x)		__be16_to_cpu(x)
 #define DB2H(x)		__be32_to_cpu(x)
 
+=======
+>>>>>>> v3.18
 #define DOWNLOAD_CONF_VALUE	0x21
 
 #ifdef CONFIG_WIMAX_GDM72XX_K_MODE
@@ -52,6 +59,7 @@ static int k_mode_stop;
 
 #endif /* CONFIG_WIMAX_GDM72XX_K_MODE */
 
+<<<<<<< HEAD
 static int init_usb(struct usbwm_dev *udev);
 static void release_usb(struct usbwm_dev *udev);
 
@@ -71,6 +79,8 @@ static void hexdump(char *title, u8 *data, int len)
 }
 #endif
 
+=======
+>>>>>>> v3.18
 static struct usb_tx *alloc_tx_struct(struct tx_cxt *tx)
 {
 	struct usb_tx *t = kzalloc(sizeof(*t), GFP_ATOMIC);
@@ -179,6 +189,7 @@ static void put_rx_struct(struct rx_cxt *rx, struct usb_rx *r)
 	list_move(&r->list, &rx->free_list);
 }
 
+<<<<<<< HEAD
 static int init_usb(struct usbwm_dev *udev)
 {
 	int ret = 0, i;
@@ -186,6 +197,57 @@ static int init_usb(struct usbwm_dev *udev)
 	struct rx_cxt	*rx = &udev->rx;
 	struct usb_tx	*t;
 	struct usb_rx	*r;
+=======
+static void release_usb(struct usbwm_dev *udev)
+{
+	struct tx_cxt *tx = &udev->tx;
+	struct rx_cxt *rx = &udev->rx;
+	struct usb_tx *t, *t_next;
+	struct usb_rx *r, *r_next;
+	unsigned long flags;
+
+	spin_lock_irqsave(&tx->lock, flags);
+
+	list_for_each_entry_safe(t, t_next, &tx->sdu_list, list) {
+		list_del(&t->list);
+		free_tx_struct(t);
+	}
+
+	list_for_each_entry_safe(t, t_next, &tx->hci_list, list) {
+		list_del(&t->list);
+		free_tx_struct(t);
+	}
+
+	list_for_each_entry_safe(t, t_next, &tx->free_list, list) {
+		list_del(&t->list);
+		free_tx_struct(t);
+	}
+
+	spin_unlock_irqrestore(&tx->lock, flags);
+
+	spin_lock_irqsave(&rx->lock, flags);
+
+	list_for_each_entry_safe(r, r_next, &rx->free_list, list) {
+		list_del(&r->list);
+		free_rx_struct(r);
+	}
+
+	list_for_each_entry_safe(r, r_next, &rx->used_list, list) {
+		list_del(&r->list);
+		free_rx_struct(r);
+	}
+
+	spin_unlock_irqrestore(&rx->lock, flags);
+}
+
+static int init_usb(struct usbwm_dev *udev)
+{
+	int ret = 0, i;
+	struct tx_cxt *tx = &udev->tx;
+	struct rx_cxt *rx = &udev->rx;
+	struct usb_tx *t;
+	struct usb_rx *r;
+>>>>>>> v3.18
 	unsigned long flags;
 
 	INIT_LIST_HEAD(&tx->free_list);
@@ -229,6 +291,7 @@ fail:
 	return ret;
 }
 
+<<<<<<< HEAD
 static void release_usb(struct usbwm_dev *udev)
 {
 	struct tx_cxt	*tx = &udev->tx;
@@ -271,6 +334,8 @@ static void release_usb(struct usbwm_dev *udev)
 	spin_unlock_irqrestore(&rx->lock, flags);
 }
 
+=======
+>>>>>>> v3.18
 static void __gdm_usb_send_complete(struct urb *urb)
 {
 	struct usb_tx *t = urb->context;
@@ -327,7 +392,12 @@ static int gdm_usb_send(void *priv_dev, void *data, int len,
 		return -ENODEV;
 	}
 
+<<<<<<< HEAD
 	BUG_ON(len > TX_BUF_SIZE - padding - 1);
+=======
+	if (len > TX_BUF_SIZE - padding - 1)
+		return -EINVAL;
+>>>>>>> v3.18
 
 	spin_lock_irqsave(&tx->lock, flags);
 
@@ -353,13 +423,18 @@ static int gdm_usb_send(void *priv_dev, void *data, int len,
 	t->callback = cb;
 	t->cb_data = cb_data;
 
+<<<<<<< HEAD
 	/*
 	 * In some cases, USB Module of WiMax is blocked when data size is
+=======
+	/* In some cases, USB Module of WiMax is blocked when data size is
+>>>>>>> v3.18
 	 * the multiple of 512. So, increment length by one in that case.
 	 */
 	if ((len % 512) == 0)
 		len++;
 
+<<<<<<< HEAD
 	usb_fill_bulk_urb(t->urb,
 			usbdev,
 			usb_sndbulkpipe(usbdev, 1),
@@ -371,6 +446,13 @@ static int gdm_usb_send(void *priv_dev, void *data, int len,
 #ifdef DEBUG
 	hexdump("usb_send", t->buf, len + padding);
 #endif
+=======
+	usb_fill_bulk_urb(t->urb, usbdev, usb_sndbulkpipe(usbdev, 1), t->buf,
+			  len + padding, gdm_usb_send_complete, t);
+
+	dev_dbg(&usbdev->dev, "usb_send: %*ph\n", len + padding, t->buf);
+
+>>>>>>> v3.18
 #ifdef CONFIG_WIMAX_GDM72XX_USB_PM
 	if (usbdev->state & USB_STATE_SUSPENDED) {
 		list_add_tail(&t->p_list, &tx->pending_list);
@@ -438,10 +520,14 @@ static void gdm_usb_rcv_complete(struct urb *urb)
 	struct usb_tx *t;
 	u16 cmd_evt;
 	unsigned long flags, flags2;
+<<<<<<< HEAD
 
 #ifdef CONFIG_WIMAX_GDM72XX_USB_PM
 	struct usb_device *dev = urb->dev;
 #endif
+=======
+	struct usb_device *dev = urb->dev;
+>>>>>>> v3.18
 
 	/* Completion by usb_unlink_urb */
 	if (urb->status == -ECONNRESET)
@@ -451,6 +537,7 @@ static void gdm_usb_rcv_complete(struct urb *urb)
 
 	if (!urb->status) {
 		cmd_evt = (r->buf[0] << 8) | (r->buf[1]);
+<<<<<<< HEAD
 #ifdef DEBUG
 		hexdump("usb_receive", r->buf, urb->actual_length);
 #endif
@@ -470,6 +557,23 @@ static void gdm_usb_rcv_complete(struct urb *urb)
 				}
 				/*
 				 * If free buffer for sdu tx doesn't
+=======
+
+		dev_dbg(&dev->dev, "usb_receive: %*ph\n", urb->actual_length,
+			r->buf);
+
+		if (cmd_evt == WIMAX_SDU_TX_FLOW) {
+			if (r->buf[4] == 0) {
+				dev_dbg(&dev->dev, "WIMAX ==> STOP SDU TX\n");
+				list_for_each_entry(t, &tx->sdu_list, list)
+					usb_unlink_urb(t->urb);
+			} else if (r->buf[4] == 1) {
+				dev_dbg(&dev->dev, "WIMAX ==> START SDU TX\n");
+				list_for_each_entry(t, &tx->sdu_list, list) {
+					usb_submit_urb(t->urb, GFP_ATOMIC);
+				}
+				/* If free buffer for sdu tx doesn't
+>>>>>>> v3.18
 				 * exist, then tx queue should not be
 				 * woken. For this reason, don't pass
 				 * the command, START_SDU_TX.
@@ -495,8 +599,13 @@ static void gdm_usb_rcv_complete(struct urb *urb)
 }
 
 static int gdm_usb_receive(void *priv_dev,
+<<<<<<< HEAD
 			void (*cb)(void *cb_data, void *data, int len),
 			void *cb_data)
+=======
+			   void (*cb)(void *cb_data, void *data, int len),
+			   void *cb_data)
+>>>>>>> v3.18
 {
 	struct usbwm_dev *udev = priv_dev;
 	struct usb_device *usbdev = udev->usbdev;
@@ -519,6 +628,7 @@ static int gdm_usb_receive(void *priv_dev,
 	r->callback = cb;
 	r->cb_data = cb_data;
 
+<<<<<<< HEAD
 	usb_fill_bulk_urb(r->urb,
 			usbdev,
 			usb_rcvbulkpipe(usbdev, 0x82),
@@ -526,6 +636,10 @@ static int gdm_usb_receive(void *priv_dev,
 			RX_BUF_SIZE,
 			gdm_usb_rcv_complete,
 			r);
+=======
+	usb_fill_bulk_urb(r->urb, usbdev, usb_rcvbulkpipe(usbdev, 0x82), r->buf,
+			  RX_BUF_SIZE, gdm_usb_rcv_complete, r);
+>>>>>>> v3.18
 
 	return usb_submit_urb(r->urb, GFP_ATOMIC);
 }
@@ -543,8 +657,13 @@ static void do_pm_control(struct work_struct *work)
 		usb_autopm_put_interface(udev->intf);
 
 	spin_lock_irqsave(&tx->lock, flags);
+<<<<<<< HEAD
 	if (!(udev->usbdev->state & USB_STATE_SUSPENDED)
 		&& (!list_empty(&tx->hci_list) || !list_empty(&tx->sdu_list))) {
+=======
+	if (!(udev->usbdev->state & USB_STATE_SUSPENDED) &&
+	    (!list_empty(&tx->hci_list) || !list_empty(&tx->sdu_list))) {
+>>>>>>> v3.18
 		struct usb_tx *t, *temp;
 
 		list_for_each_entry_safe(t, temp, &tx->pending_list, p_list) {
@@ -562,7 +681,11 @@ static void do_pm_control(struct work_struct *work)
 #endif /* CONFIG_WIMAX_GDM72XX_USB_PM */
 
 static int gdm_usb_probe(struct usb_interface *intf,
+<<<<<<< HEAD
 				const struct usb_device_id *id)
+=======
+			 const struct usb_device_id *id)
+>>>>>>> v3.18
 {
 	int ret = 0;
 	u8 bConfigurationValue;
@@ -576,9 +699,15 @@ static int gdm_usb_probe(struct usb_interface *intf,
 	bConfigurationValue = usbdev->actconfig->desc.bConfigurationValue;
 
 	/*USB description is set up with Little-Endian*/
+<<<<<<< HEAD
 	idVendor = L2H(usbdev->descriptor.idVendor);
 	idProduct = L2H(usbdev->descriptor.idProduct);
 	bcdDevice = L2H(usbdev->descriptor.bcdDevice);
+=======
+	idVendor = le16_to_cpu(usbdev->descriptor.idVendor);
+	idProduct = le16_to_cpu(usbdev->descriptor.idProduct);
+	bcdDevice = le16_to_cpu(usbdev->descriptor.bcdDevice);
+>>>>>>> v3.18
 
 	dev_info(&intf->dev, "Found GDM USB VID = 0x%04x PID = 0x%04x...\n",
 		 idVendor, idProduct);
@@ -592,7 +721,11 @@ static int gdm_usb_probe(struct usb_interface *intf,
 
 	/* Support for EEPROM bootloader */
 	if (bConfigurationValue == DOWNLOAD_CONF_VALUE ||
+<<<<<<< HEAD
 		idProduct & B_DOWNLOAD) {
+=======
+	    idProduct & B_DOWNLOAD) {
+>>>>>>> v3.18
 		ret = usb_boot(usbdev, bcdDevice);
 		goto out;
 	}
@@ -635,11 +768,20 @@ static int gdm_usb_probe(struct usb_interface *intf,
 #endif /* CONFIG_WIMAX_GDM72XX_USB_PM */
 
 	ret = register_wimax_device(phy_dev, &intf->dev);
+<<<<<<< HEAD
+=======
+	if (ret)
+		release_usb(udev);
+>>>>>>> v3.18
 
 out:
 	if (ret) {
 		kfree(phy_dev);
 		kfree(udev);
+<<<<<<< HEAD
+=======
+		usb_put_dev(usbdev);
+>>>>>>> v3.18
 	} else {
 		usb_set_intfdata(intf, phy_dev);
 	}
@@ -658,11 +800,19 @@ static void gdm_usb_disconnect(struct usb_interface *intf)
 	phy_dev = usb_get_intfdata(intf);
 
 	/*USB description is set up with Little-Endian*/
+<<<<<<< HEAD
 	idProduct = L2H(usbdev->descriptor.idProduct);
 
 	if (idProduct != EMERGENCY_PID &&
 			bConfigurationValue != DOWNLOAD_CONF_VALUE &&
 			(idProduct & B_DOWNLOAD) == 0) {
+=======
+	idProduct = le16_to_cpu(usbdev->descriptor.idProduct);
+
+	if (idProduct != EMERGENCY_PID &&
+	    bConfigurationValue != DOWNLOAD_CONF_VALUE &&
+	    (idProduct & B_DOWNLOAD) == 0) {
+>>>>>>> v3.18
 		udev = phy_dev->priv_dev;
 		udev->usbdev = NULL;
 
@@ -740,10 +890,15 @@ static int k_mode_thread(void *arg)
 	int ret;
 
 	while (!k_mode_stop) {
+<<<<<<< HEAD
 
 		spin_lock_irqsave(&k_lock, flags2);
 		while (!list_empty(&k_list)) {
 
+=======
+		spin_lock_irqsave(&k_lock, flags2);
+		while (!list_empty(&k_list)) {
+>>>>>>> v3.18
 			udev = list_entry(k_list.next, struct usbwm_dev, list);
 			tx = &udev->tx;
 			rx = &udev->rx;
@@ -752,7 +907,11 @@ static int k_mode_thread(void *arg)
 			spin_unlock_irqrestore(&k_lock, flags2);
 
 			expire = jiffies + K_WAIT_TIME;
+<<<<<<< HEAD
 			while (jiffies < expire)
+=======
+			while (time_before(jiffies, expire))
+>>>>>>> v3.18
 				schedule_timeout(K_WAIT_TIME);
 
 			spin_lock_irqsave(&rx->lock, flags);
@@ -765,7 +924,11 @@ static int k_mode_thread(void *arg)
 			spin_lock_irqsave(&tx->lock, flags);
 
 			list_for_each_entry_safe(t, temp, &tx->pending_list,
+<<<<<<< HEAD
 						p_list) {
+=======
+						 p_list) {
+>>>>>>> v3.18
 				list_del(&t->p_list);
 				ret = usb_submit_urb(t->urb, GFP_ATOMIC);
 
@@ -780,9 +943,16 @@ static int k_mode_thread(void *arg)
 
 			spin_lock_irqsave(&k_lock, flags2);
 		}
+<<<<<<< HEAD
 		spin_unlock_irqrestore(&k_lock, flags2);
 
 		interruptible_sleep_on(&k_wait);
+=======
+		wait_event_interruptible_lock_irq(k_wait,
+						  !list_empty(&k_list) ||
+						  k_mode_stop, k_lock);
+		spin_unlock_irqrestore(&k_lock, flags2);
+>>>>>>> v3.18
 	}
 	return 0;
 }

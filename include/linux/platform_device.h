@@ -28,6 +28,10 @@ struct platform_device {
 	struct resource	*resource;
 
 	const struct platform_device_id	*id_entry;
+<<<<<<< HEAD
+=======
+	char *driver_override; /* Driver name to force a match */
+>>>>>>> v3.18
 
 	/* MFD cell pointer */
 	struct mfd_cell *mfd_cell;
@@ -178,9 +182,25 @@ struct platform_driver {
 	int (*resume)(struct platform_device *);
 	struct device_driver driver;
 	const struct platform_device_id *id_table;
+<<<<<<< HEAD
 };
 
 extern int platform_driver_register(struct platform_driver *);
+=======
+	bool prevent_deferred_probe;
+};
+
+#define to_platform_driver(drv)	(container_of((drv), struct platform_driver, \
+				 driver))
+
+/*
+ * use a macro to avoid include chaining to get THIS_MODULE
+ */
+#define platform_driver_register(drv) \
+	__platform_driver_register(drv, THIS_MODULE)
+extern int __platform_driver_register(struct platform_driver *,
+					struct module *);
+>>>>>>> v3.18
 extern void platform_driver_unregister(struct platform_driver *);
 
 /* non-hotpluggable platform devices may use this so that probe() and

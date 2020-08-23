@@ -92,6 +92,7 @@ define archhelp
   echo  '* zImage        - Compressed kernel image (arch/$(ARCH)/boot/zImage)'
 endef
 
+<<<<<<< HEAD
 # If you make sure the .S files get compiled with debug info,
 # uncomment the following to disable optimisations
 # that are unhelpful whilst debugging.
@@ -100,6 +101,8 @@ ifdef CONFIG_DEBUG_INFO
 KBUILD_AFLAGS	+= -Wa,--gdwarf2
 endif
 
+=======
+>>>>>>> v3.18
 #
 # include the appropriate processor- and unit-specific headers
 #

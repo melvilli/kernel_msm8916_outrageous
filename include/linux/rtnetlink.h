@@ -4,6 +4,10 @@
 
 #include <linux/mutex.h>
 #include <linux/netdevice.h>
+<<<<<<< HEAD
+=======
+#include <linux/wait.h>
+>>>>>>> v3.18
 #include <uapi/linux/rtnetlink.h>
 
 extern int rtnetlink_send(struct sk_buff *skb, struct net *net, u32 pid, u32 group, int echo);
@@ -15,15 +19,33 @@ extern int rtnetlink_put_metrics(struct sk_buff *skb, u32 *metrics);
 extern int rtnl_put_cacheinfo(struct sk_buff *skb, struct dst_entry *dst,
 			      u32 id, long expires, u32 error);
 
+<<<<<<< HEAD
 extern void rtmsg_ifinfo(int type, struct net_device *dev, unsigned change);
+=======
+void rtmsg_ifinfo(int type, struct net_device *dev, unsigned change, gfp_t flags);
+>>>>>>> v3.18
 
 /* RTNL is used as a global lock for all changes to network configuration  */
 extern void rtnl_lock(void);
 extern void rtnl_unlock(void);
 extern int rtnl_trylock(void);
 extern int rtnl_is_locked(void);
+<<<<<<< HEAD
 #ifdef CONFIG_PROVE_LOCKING
 extern int lockdep_rtnl_is_held(void);
+=======
+
+extern wait_queue_head_t netdev_unregistering_wq;
+extern struct mutex net_mutex;
+
+#ifdef CONFIG_PROVE_LOCKING
+extern int lockdep_rtnl_is_held(void);
+#else
+static inline int lockdep_rtnl_is_held(void)
+{
+	return 1;
+}
+>>>>>>> v3.18
 #endif /* #ifdef CONFIG_PROVE_LOCKING */
 
 /**
@@ -37,6 +59,19 @@ extern int lockdep_rtnl_is_held(void);
 	rcu_dereference_check(p, lockdep_rtnl_is_held())
 
 /**
+<<<<<<< HEAD
+=======
+ * rcu_dereference_bh_rtnl - rcu_dereference_bh with debug checking
+ * @p: The pointer to read, prior to dereference
+ *
+ * Do an rcu_dereference_bh(p), but check caller either holds rcu_read_lock_bh()
+ * or RTNL. Note : Please prefer rtnl_dereference() or rcu_dereference_bh()
+ */
+#define rcu_dereference_bh_rtnl(p)				\
+	rcu_dereference_bh_check(p, lockdep_rtnl_is_held())
+
+/**
+>>>>>>> v3.18
  * rtnl_dereference - fetch RCU pointer when updates are prevented by RTNL
  * @p: The pointer to read, prior to dereferencing
  *
@@ -68,6 +103,10 @@ extern void __rtnl_unlock(void);
 extern int ndo_dflt_fdb_dump(struct sk_buff *skb,
 			     struct netlink_callback *cb,
 			     struct net_device *dev,
+<<<<<<< HEAD
+=======
+			     struct net_device *filter_dev,
+>>>>>>> v3.18
 			     int idx);
 extern int ndo_dflt_fdb_add(struct ndmsg *ndm,
 			    struct nlattr *tb[],

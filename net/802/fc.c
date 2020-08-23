@@ -126,6 +126,10 @@ static void fc_setup(struct net_device *dev)
  */
 struct net_device *alloc_fcdev(int sizeof_priv)
 {
+<<<<<<< HEAD
 	return alloc_netdev(sizeof_priv, "fc%d", fc_setup);
+=======
+	return alloc_netdev(sizeof_priv, "fc%d", NET_NAME_UNKNOWN, fc_setup);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(alloc_fcdev);

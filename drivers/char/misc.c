@@ -59,7 +59,11 @@ static DEFINE_MUTEX(misc_mtx);
 /*
  * Assigned numbers, used for dynamic minors
  */
+<<<<<<< HEAD
 #define DYNAMIC_MINORS 96 /* like dynamic majors */
+=======
+#define DYNAMIC_MINORS 64 /* like dynamic majors */
+>>>>>>> v3.18
 static DECLARE_BITMAP(misc_minors, DYNAMIC_MINORS);
 
 #ifdef CONFIG_PROC_FS
@@ -114,7 +118,11 @@ static int misc_open(struct inode * inode, struct file * file)
 	int minor = iminor(inode);
 	struct miscdevice *c;
 	int err = -ENODEV;
+<<<<<<< HEAD
 	const struct file_operations *old_fops, *new_fops = NULL;
+=======
+	const struct file_operations *new_fops = NULL;
+>>>>>>> v3.18
 
 	mutex_lock(&misc_mtx);
 	
@@ -141,6 +149,7 @@ static int misc_open(struct inode * inode, struct file * file)
 	}
 
 	err = 0;
+<<<<<<< HEAD
 	old_fops = file->f_op;
 	file->f_op = new_fops;
 	if (file->f_op->open) {
@@ -152,6 +161,13 @@ static int misc_open(struct inode * inode, struct file * file)
 		}
 	}
 	fops_put(old_fops);
+=======
+	replace_fops(file, new_fops);
+	if (file->f_op->open) {
+		file->private_data = c;
+		err = file->f_op->open(inode,file);
+	}
+>>>>>>> v3.18
 fail:
 	mutex_unlock(&misc_mtx);
 	return err;
@@ -193,8 +209,13 @@ int misc_register(struct miscdevice * misc)
 	if (misc->minor == MISC_DYNAMIC_MINOR) {
 		int i = find_first_zero_bit(misc_minors, DYNAMIC_MINORS);
 		if (i >= DYNAMIC_MINORS) {
+<<<<<<< HEAD
 			mutex_unlock(&misc_mtx);
 			return -EBUSY;
+=======
+			err = -EBUSY;
+			goto out;
+>>>>>>> v3.18
 		}
 		misc->minor = DYNAMIC_MINORS - i - 1;
 		set_bit(i, misc_minors);
@@ -203,8 +224,13 @@ int misc_register(struct miscdevice * misc)
 
 		list_for_each_entry(c, &misc_list, list) {
 			if (c->minor == misc->minor) {
+<<<<<<< HEAD
 				mutex_unlock(&misc_mtx);
 				return -EBUSY;
+=======
+				err = -EBUSY;
+				goto out;
+>>>>>>> v3.18
 			}
 		}
 	}

@@ -91,7 +91,10 @@ static inline struct mempolicy *mpol_dup(struct mempolicy *pol)
 }
 
 #define vma_policy(vma) ((vma)->vm_policy)
+<<<<<<< HEAD
 #define vma_set_policy(vma, pol) ((vma)->vm_policy = (pol))
+=======
+>>>>>>> v3.18
 
 static inline void mpol_get(struct mempolicy *pol)
 {
@@ -126,6 +129,10 @@ struct shared_policy {
 	spinlock_t lock;
 };
 
+<<<<<<< HEAD
+=======
+int vma_dup_policy(struct vm_area_struct *src, struct vm_area_struct *dst);
+>>>>>>> v3.18
 void mpol_shared_policy_init(struct shared_policy *sp, struct mempolicy *mpol);
 int mpol_set_shared_policy(struct shared_policy *info,
 				struct vm_area_struct *vma,
@@ -134,15 +141,25 @@ void mpol_free_shared_policy(struct shared_policy *p);
 struct mempolicy *mpol_shared_policy_lookup(struct shared_policy *sp,
 					    unsigned long idx);
 
+<<<<<<< HEAD
 struct mempolicy *get_vma_policy(struct task_struct *tsk,
 		struct vm_area_struct *vma, unsigned long addr);
+=======
+struct mempolicy *get_task_policy(struct task_struct *p);
+struct mempolicy *__get_vma_policy(struct vm_area_struct *vma,
+		unsigned long addr);
+bool vma_policy_mof(struct vm_area_struct *vma);
+>>>>>>> v3.18
 
 extern void numa_default_policy(void);
 extern void numa_policy_init(void);
 extern void mpol_rebind_task(struct task_struct *tsk, const nodemask_t *new,
 				enum mpol_rebind_step step);
 extern void mpol_rebind_mm(struct mm_struct *mm, nodemask_t *new);
+<<<<<<< HEAD
 extern void mpol_fix_fork_child_flag(struct task_struct *p);
+=======
+>>>>>>> v3.18
 
 extern struct zonelist *huge_zonelist(struct vm_area_struct *vma,
 				unsigned long addr, gfp_t gfp_flags,
@@ -150,7 +167,11 @@ extern struct zonelist *huge_zonelist(struct vm_area_struct *vma,
 extern bool init_nodemask_of_mempolicy(nodemask_t *mask);
 extern bool mempolicy_nodemask_intersects(struct task_struct *tsk,
 				const nodemask_t *mask);
+<<<<<<< HEAD
 extern unsigned slab_node(void);
+=======
+extern unsigned int mempolicy_slab_node(void);
+>>>>>>> v3.18
 
 extern enum zone_type policy_zone;
 
@@ -168,13 +189,28 @@ int do_migrate_pages(struct mm_struct *mm, const nodemask_t *from,
 extern int mpol_parse_str(char *str, struct mempolicy **mpol);
 #endif
 
+<<<<<<< HEAD
 extern int mpol_to_str(char *buffer, int maxlen, struct mempolicy *pol);
+=======
+extern void mpol_to_str(char *buffer, int maxlen, struct mempolicy *pol);
+>>>>>>> v3.18
 
 /* Check if a vma is migratable */
 static inline int vma_migratable(struct vm_area_struct *vma)
 {
+<<<<<<< HEAD
 	if (vma->vm_flags & (VM_IO | VM_HUGETLB | VM_PFNMAP))
 		return 0;
+=======
+	if (vma->vm_flags & (VM_IO | VM_PFNMAP))
+		return 0;
+
+#ifndef CONFIG_ARCH_ENABLE_HUGEPAGE_MIGRATION
+	if (vma->vm_flags & VM_HUGETLB)
+		return 0;
+#endif
+
+>>>>>>> v3.18
 	/*
 	 * Migration allocates pages in the highest zone. If we cannot
 	 * do so then migration (at least from node to node) is not
@@ -210,6 +246,7 @@ static inline void mpol_get(struct mempolicy *pol)
 {
 }
 
+<<<<<<< HEAD
 static inline struct mempolicy *mpol_dup(struct mempolicy *old)
 {
 	return NULL;
@@ -224,6 +261,10 @@ static inline int mpol_set_shared_policy(struct shared_policy *info,
 	return -EINVAL;
 }
 
+=======
+struct shared_policy {};
+
+>>>>>>> v3.18
 static inline void mpol_shared_policy_init(struct shared_policy *sp,
 						struct mempolicy *mpol)
 {
@@ -233,6 +274,7 @@ static inline void mpol_free_shared_policy(struct shared_policy *p)
 {
 }
 
+<<<<<<< HEAD
 static inline struct mempolicy *
 mpol_shared_policy_lookup(struct shared_policy *sp, unsigned long idx)
 {
@@ -242,6 +284,16 @@ mpol_shared_policy_lookup(struct shared_policy *sp, unsigned long idx)
 #define vma_policy(vma) NULL
 #define vma_set_policy(vma, pol) do {} while(0)
 
+=======
+#define vma_policy(vma) NULL
+
+static inline int
+vma_dup_policy(struct vm_area_struct *src, struct vm_area_struct *dst)
+{
+	return 0;
+}
+
+>>>>>>> v3.18
 static inline void numa_policy_init(void)
 {
 }
@@ -260,10 +312,13 @@ static inline void mpol_rebind_mm(struct mm_struct *mm, nodemask_t *new)
 {
 }
 
+<<<<<<< HEAD
 static inline void mpol_fix_fork_child_flag(struct task_struct *p)
 {
 }
 
+=======
+>>>>>>> v3.18
 static inline struct zonelist *huge_zonelist(struct vm_area_struct *vma,
 				unsigned long addr, gfp_t gfp_flags,
 				struct mempolicy **mpol, nodemask_t **nodemask)
@@ -278,12 +333,15 @@ static inline bool init_nodemask_of_mempolicy(nodemask_t *m)
 	return false;
 }
 
+<<<<<<< HEAD
 static inline bool mempolicy_nodemask_intersects(struct task_struct *tsk,
 			const nodemask_t *mask)
 {
 	return false;
 }
 
+=======
+>>>>>>> v3.18
 static inline int do_migrate_pages(struct mm_struct *mm, const nodemask_t *from,
 				   const nodemask_t *to, int flags)
 {
@@ -301,11 +359,14 @@ static inline int mpol_parse_str(char *str, struct mempolicy **mpol)
 }
 #endif
 
+<<<<<<< HEAD
 static inline int mpol_to_str(char *buffer, int maxlen, struct mempolicy *pol)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 static inline int mpol_misplaced(struct page *page, struct vm_area_struct *vma,
 				 unsigned long address)
 {

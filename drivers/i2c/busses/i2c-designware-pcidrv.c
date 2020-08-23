@@ -19,10 +19,13 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
  * ----------------------------------------------------------------------------
  *
  */
@@ -54,6 +57,20 @@ enum dw_pci_ctl_id_t {
 	medfield_3,
 	medfield_4,
 	medfield_5,
+<<<<<<< HEAD
+=======
+
+	baytrail,
+	haswell,
+};
+
+struct dw_scl_sda_cfg {
+	u32 ss_hcnt;
+	u32 fs_hcnt;
+	u32 ss_lcnt;
+	u32 fs_lcnt;
+	u32 sda_hold;
+>>>>>>> v3.18
 };
 
 struct dw_pci_controller {
@@ -62,12 +79,44 @@ struct dw_pci_controller {
 	u32 tx_fifo_depth;
 	u32 rx_fifo_depth;
 	u32 clk_khz;
+<<<<<<< HEAD
+=======
+	u32 functionality;
+	struct dw_scl_sda_cfg *scl_sda_cfg;
+>>>>>>> v3.18
 };
 
 #define INTEL_MID_STD_CFG  (DW_IC_CON_MASTER |			\
 				DW_IC_CON_SLAVE_DISABLE |	\
 				DW_IC_CON_RESTART_EN)
 
+<<<<<<< HEAD
+=======
+#define DW_DEFAULT_FUNCTIONALITY (I2C_FUNC_I2C |			\
+					I2C_FUNC_SMBUS_BYTE |		\
+					I2C_FUNC_SMBUS_BYTE_DATA |	\
+					I2C_FUNC_SMBUS_WORD_DATA |	\
+					I2C_FUNC_SMBUS_I2C_BLOCK)
+
+/* BayTrail HCNT/LCNT/SDA hold time */
+static struct dw_scl_sda_cfg byt_config = {
+	.ss_hcnt = 0x200,
+	.fs_hcnt = 0x55,
+	.ss_lcnt = 0x200,
+	.fs_lcnt = 0x99,
+	.sda_hold = 0x6,
+};
+
+/* Haswell HCNT/LCNT/SDA hold time */
+static struct dw_scl_sda_cfg hsw_config = {
+	.ss_hcnt = 0x01b0,
+	.fs_hcnt = 0x48,
+	.ss_lcnt = 0x01fb,
+	.fs_lcnt = 0xa0,
+	.sda_hold = 0x9,
+};
+
+>>>>>>> v3.18
 static struct  dw_pci_controller  dw_pci_controllers[] = {
 	[moorestown_0] = {
 		.bus_num     = 0,
@@ -132,12 +181,36 @@ static struct  dw_pci_controller  dw_pci_controllers[] = {
 		.rx_fifo_depth = 32,
 		.clk_khz      = 25000,
 	},
+<<<<<<< HEAD
 };
+=======
+	[baytrail] = {
+		.bus_num = -1,
+		.bus_cfg = INTEL_MID_STD_CFG | DW_IC_CON_SPEED_FAST,
+		.tx_fifo_depth = 32,
+		.rx_fifo_depth = 32,
+		.clk_khz = 100000,
+		.functionality = I2C_FUNC_10BIT_ADDR,
+		.scl_sda_cfg = &byt_config,
+	},
+	[haswell] = {
+		.bus_num = -1,
+		.bus_cfg = INTEL_MID_STD_CFG | DW_IC_CON_SPEED_FAST,
+		.tx_fifo_depth = 32,
+		.rx_fifo_depth = 32,
+		.clk_khz = 100000,
+		.functionality = I2C_FUNC_10BIT_ADDR,
+		.scl_sda_cfg = &hsw_config,
+	},
+};
+
+>>>>>>> v3.18
 static struct i2c_algorithm i2c_dw_algo = {
 	.master_xfer	= i2c_dw_xfer,
 	.functionality	= i2c_dw_func,
 };
 
+<<<<<<< HEAD
 static int i2c_dw_pci_suspend(struct device *dev)
 {
 	struct pci_dev *pdev = container_of(dev, struct pci_dev, dev);
@@ -159,12 +232,21 @@ static int i2c_dw_pci_suspend(struct device *dev)
 		return err;
 	}
 
+=======
+#ifdef CONFIG_PM
+static int i2c_dw_pci_suspend(struct device *dev)
+{
+	struct pci_dev *pdev = container_of(dev, struct pci_dev, dev);
+
+	i2c_dw_disable(pci_get_drvdata(pdev));
+>>>>>>> v3.18
 	return 0;
 }
 
 static int i2c_dw_pci_resume(struct device *dev)
 {
 	struct pci_dev *pdev = container_of(dev, struct pci_dev, dev);
+<<<<<<< HEAD
 	struct dw_i2c_dev *i2c = pci_get_drvdata(pdev);
 	int err;
 	u32 enabled;
@@ -201,6 +283,15 @@ static const struct dev_pm_ops i2c_dw_pm_ops = {
 	SET_RUNTIME_PM_OPS(i2c_dw_pci_suspend, i2c_dw_pci_resume,
 			   i2c_dw_pci_runtime_idle)
 };
+=======
+
+	return i2c_dw_init(pci_get_drvdata(pdev));
+}
+#endif
+
+static UNIVERSAL_DEV_PM_OPS(i2c_dw_pm_ops, i2c_dw_pci_suspend,
+			    i2c_dw_pci_resume, NULL);
+>>>>>>> v3.18
 
 static u32 i2c_dw_get_clk_rate_khz(struct dw_i2c_dev *dev)
 {
@@ -214,6 +305,10 @@ static int i2c_dw_pci_probe(struct pci_dev *pdev,
 	struct i2c_adapter *adap;
 	int r;
 	struct  dw_pci_controller *controller;
+<<<<<<< HEAD
+=======
+	struct dw_scl_sda_cfg *cfg;
+>>>>>>> v3.18
 
 	if (id->driver_data >= ARRAY_SIZE(dw_pci_controllers)) {
 		dev_err(&pdev->dev, "%s: invalid driver data %ld\n", __func__,
@@ -247,6 +342,7 @@ static int i2c_dw_pci_probe(struct pci_dev *pdev,
 	dev->get_clk_rate_khz = i2c_dw_get_clk_rate_khz;
 	dev->base = pcim_iomap_table(pdev)[0];
 	dev->dev = &pdev->dev;
+<<<<<<< HEAD
 	dev->functionality =
 		I2C_FUNC_I2C |
 		I2C_FUNC_SMBUS_BYTE |
@@ -254,6 +350,20 @@ static int i2c_dw_pci_probe(struct pci_dev *pdev,
 		I2C_FUNC_SMBUS_WORD_DATA |
 		I2C_FUNC_SMBUS_I2C_BLOCK;
 	dev->master_cfg =  controller->bus_cfg;
+=======
+	dev->functionality = controller->functionality |
+				DW_DEFAULT_FUNCTIONALITY;
+
+	dev->master_cfg =  controller->bus_cfg;
+	if (controller->scl_sda_cfg) {
+		cfg = controller->scl_sda_cfg;
+		dev->ss_hcnt = cfg->ss_hcnt;
+		dev->fs_hcnt = cfg->fs_hcnt;
+		dev->ss_lcnt = cfg->ss_lcnt;
+		dev->fs_lcnt = cfg->fs_lcnt;
+		dev->sda_hold_time = cfg->sda_hold;
+	}
+>>>>>>> v3.18
 
 	pci_set_drvdata(pdev, dev);
 
@@ -270,8 +380,13 @@ static int i2c_dw_pci_probe(struct pci_dev *pdev,
 	adap->algo = &i2c_dw_algo;
 	adap->dev.parent = &pdev->dev;
 	adap->nr = controller->bus_num;
+<<<<<<< HEAD
 	snprintf(adap->name, sizeof(adap->name), "i2c-designware-pci-%d",
 		adap->nr);
+=======
+
+	snprintf(adap->name, sizeof(adap->name), "i2c-designware-pci");
+>>>>>>> v3.18
 
 	r = devm_request_irq(&pdev->dev, pdev->irq, i2c_dw_isr, IRQF_SHARED,
 			adap->name, dev);
@@ -290,6 +405,10 @@ static int i2c_dw_pci_probe(struct pci_dev *pdev,
 
 	pm_runtime_set_autosuspend_delay(&pdev->dev, 1000);
 	pm_runtime_use_autosuspend(&pdev->dev);
+<<<<<<< HEAD
+=======
+	pm_runtime_put_autosuspend(&pdev->dev);
+>>>>>>> v3.18
 	pm_runtime_allow(&pdev->dev);
 
 	return 0;
@@ -309,7 +428,11 @@ static void i2c_dw_pci_remove(struct pci_dev *pdev)
 /* work with hotplug and coldplug */
 MODULE_ALIAS("i2c_designware-pci");
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(i2_designware_pci_ids) = {
+=======
+static const struct pci_device_id i2_designware_pci_ids[] = {
+>>>>>>> v3.18
 	/* Moorestown */
 	{ PCI_VDEVICE(INTEL, 0x0802), moorestown_0 },
 	{ PCI_VDEVICE(INTEL, 0x0803), moorestown_1 },
@@ -321,6 +444,28 @@ static DEFINE_PCI_DEVICE_TABLE(i2_designware_pci_ids) = {
 	{ PCI_VDEVICE(INTEL, 0x082C), medfield_0 },
 	{ PCI_VDEVICE(INTEL, 0x082D), medfield_1 },
 	{ PCI_VDEVICE(INTEL, 0x082E), medfield_2 },
+<<<<<<< HEAD
+=======
+	/* Baytrail */
+	{ PCI_VDEVICE(INTEL, 0x0F41), baytrail },
+	{ PCI_VDEVICE(INTEL, 0x0F42), baytrail },
+	{ PCI_VDEVICE(INTEL, 0x0F43), baytrail },
+	{ PCI_VDEVICE(INTEL, 0x0F44), baytrail },
+	{ PCI_VDEVICE(INTEL, 0x0F45), baytrail },
+	{ PCI_VDEVICE(INTEL, 0x0F46), baytrail },
+	{ PCI_VDEVICE(INTEL, 0x0F47), baytrail },
+	/* Haswell */
+	{ PCI_VDEVICE(INTEL, 0x9c61), haswell },
+	{ PCI_VDEVICE(INTEL, 0x9c62), haswell },
+	/* Braswell / Cherrytrail */
+	{ PCI_VDEVICE(INTEL, 0x22C1), baytrail,},
+	{ PCI_VDEVICE(INTEL, 0x22C2), baytrail },
+	{ PCI_VDEVICE(INTEL, 0x22C3), baytrail },
+	{ PCI_VDEVICE(INTEL, 0x22C4), baytrail },
+	{ PCI_VDEVICE(INTEL, 0x22C5), baytrail },
+	{ PCI_VDEVICE(INTEL, 0x22C6), baytrail },
+	{ PCI_VDEVICE(INTEL, 0x22C7), baytrail },
+>>>>>>> v3.18
 	{ 0,}
 };
 MODULE_DEVICE_TABLE(pci, i2_designware_pci_ids);

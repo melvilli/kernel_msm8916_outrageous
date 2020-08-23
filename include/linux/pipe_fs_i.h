@@ -35,14 +35,21 @@ struct pipe_buffer {
  *	@tmp_page: cached released page
  *	@readers: number of current readers of this pipe
  *	@writers: number of current writers of this pipe
+<<<<<<< HEAD
  *	@files: number of struct file refering this pipe (protected by ->i_lock)
+=======
+ *	@files: number of struct file referring this pipe (protected by ->i_lock)
+>>>>>>> v3.18
  *	@waiting_writers: number of writers blocked waiting for room
  *	@r_counter: reader counter
  *	@w_counter: writer counter
  *	@fasync_readers: reader side fasync
  *	@fasync_writers: writer side fasync
  *	@bufs: the circular array of pipe buffers
+<<<<<<< HEAD
  *	@user: the user who created this pipe
+=======
+>>>>>>> v3.18
  **/
 struct pipe_inode_info {
 	struct mutex mutex;
@@ -58,7 +65,10 @@ struct pipe_inode_info {
 	struct fasync_struct *fasync_readers;
 	struct fasync_struct *fasync_writers;
 	struct pipe_buffer *bufs;
+<<<<<<< HEAD
 	struct user_struct *user;
+=======
+>>>>>>> v3.18
 };
 
 /*
@@ -85,6 +95,7 @@ struct pipe_buf_operations {
 	int can_merge;
 
 	/*
+<<<<<<< HEAD
 	 * ->map() returns a virtual address mapping of the pipe buffer.
 	 * The last integer flag reflects whether this should be an atomic
 	 * mapping or not. The atomic map is faster, however you can't take
@@ -102,6 +113,8 @@ struct pipe_buf_operations {
 	void (*unmap)(struct pipe_inode_info *, struct pipe_buffer *, void *);
 
 	/*
+=======
+>>>>>>> v3.18
 	 * ->confirm() verifies that the data in the pipe buffer is there
 	 * and that the contents are good. If the pages in the pipe belong
 	 * to a file system, we may need to wait for IO completion in this
@@ -142,8 +155,11 @@ void pipe_unlock(struct pipe_inode_info *);
 void pipe_double_lock(struct pipe_inode_info *, struct pipe_inode_info *);
 
 extern unsigned int pipe_max_size, pipe_min_size;
+<<<<<<< HEAD
 extern unsigned long pipe_user_pages_hard;
 extern unsigned long pipe_user_pages_soft;
+=======
+>>>>>>> v3.18
 int pipe_proc_fn(struct ctl_table *, int, void __user *, size_t *, loff_t *);
 
 
@@ -154,8 +170,11 @@ struct pipe_inode_info *alloc_pipe_info(void);
 void free_pipe_info(struct pipe_inode_info *);
 
 /* Generic pipe buffer ops functions */
+<<<<<<< HEAD
 void *generic_pipe_buf_map(struct pipe_inode_info *, struct pipe_buffer *, int);
 void generic_pipe_buf_unmap(struct pipe_inode_info *, struct pipe_buffer *, void *);
+=======
+>>>>>>> v3.18
 void generic_pipe_buf_get(struct pipe_inode_info *, struct pipe_buffer *);
 int generic_pipe_buf_confirm(struct pipe_inode_info *, struct pipe_buffer *);
 int generic_pipe_buf_steal(struct pipe_inode_info *, struct pipe_buffer *);

@@ -134,12 +134,22 @@ static inline int INET_ECN_set_ce(struct sk_buff *skb)
 {
 	switch (skb->protocol) {
 	case cpu_to_be16(ETH_P_IP):
+<<<<<<< HEAD
 		if (skb->network_header + sizeof(struct iphdr) <= skb->tail)
+=======
+		if (skb_network_header(skb) + sizeof(struct iphdr) <=
+		    skb_tail_pointer(skb))
+>>>>>>> v3.18
 			return IP_ECN_set_ce(ip_hdr(skb));
 		break;
 
 	case cpu_to_be16(ETH_P_IPV6):
+<<<<<<< HEAD
 		if (skb->network_header + sizeof(struct ipv6hdr) <= skb->tail)
+=======
+		if (skb_network_header(skb) + sizeof(struct ipv6hdr) <=
+		    skb_tail_pointer(skb))
+>>>>>>> v3.18
 			return IP6_ECN_set_ce(ipv6_hdr(skb));
 		break;
 	}
@@ -148,7 +158,11 @@ static inline int INET_ECN_set_ce(struct sk_buff *skb)
 }
 
 /*
+<<<<<<< HEAD
  * RFC 6080 4.2
+=======
+ * RFC 6040 4.2
+>>>>>>> v3.18
  *  To decapsulate the inner header at the tunnel egress, a compliant
  *  tunnel egress MUST set the outgoing ECN field to the codepoint at the
  *  intersection of the appropriate arriving inner header (row) and outer

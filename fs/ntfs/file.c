@@ -1,7 +1,11 @@
 /*
  * file.c - NTFS kernel file operations.  Part of the Linux-NTFS project.
  *
+<<<<<<< HEAD
  * Copyright (c) 2001-2011 Anton Altaparmakov and Tuxera Inc.
+=======
+ * Copyright (c) 2001-2014 Anton Altaparmakov and Tuxera Inc.
+>>>>>>> v3.18
  *
  * This program/include file is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as published
@@ -74,8 +78,11 @@ static int ntfs_file_open(struct inode *vi, struct file *filp)
  * ntfs_attr_extend_initialized - extend the initialized size of an attribute
  * @ni:			ntfs inode of the attribute to extend
  * @new_init_size:	requested new initialized size in bytes
+<<<<<<< HEAD
  * @cached_page:	store any allocated but unused page here
  * @lru_pvec:		lru-buffering pagevec of the caller
+=======
+>>>>>>> v3.18
  *
  * Extend the initialized size of an attribute described by the ntfs inode @ni
  * to @new_init_size bytes.  This involves zeroing any non-sparse space between
@@ -395,7 +402,10 @@ static inline void ntfs_fault_in_pages_readable_iovec(const struct iovec *iov,
  * @nr_pages:	number of page cache pages to obtain
  * @pages:	array of pages in which to return the obtained page cache pages
  * @cached_page: allocated but as yet unused page
+<<<<<<< HEAD
  * @lru_pvec:	lru-buffering pagevec of caller
+=======
+>>>>>>> v3.18
  *
  * Obtain @nr_pages locked page cache pages from the mapping @mapping and
  * starting at index @index.
@@ -413,7 +423,12 @@ static inline int __ntfs_grab_cache_pages(struct address_space *mapping,
 	BUG_ON(!nr_pages);
 	err = nr = 0;
 	do {
+<<<<<<< HEAD
 		pages[nr] = find_lock_page(mapping, index);
+=======
+		pages[nr] = find_get_page_flags(mapping, index, FGP_LOCK |
+				FGP_ACCESSED);
+>>>>>>> v3.18
 		if (!pages[nr]) {
 			if (!*cached_page) {
 				*cached_page = page_cache_alloc(mapping);
@@ -1768,7 +1783,11 @@ static void ntfs_write_failed(struct address_space *mapping, loff_t to)
 	struct inode *inode = mapping->host;
 
 	if (to > inode->i_size) {
+<<<<<<< HEAD
 		truncate_pagecache(inode, to, inode->i_size);
+=======
+		truncate_pagecache(inode, inode->i_size);
+>>>>>>> v3.18
 		ntfs_truncate_vfs(inode);
 	}
 }
@@ -2060,7 +2079,10 @@ static ssize_t ntfs_file_buffered_write(struct kiocb *iocb,
 		}
 		do {
 			unlock_page(pages[--do_pages]);
+<<<<<<< HEAD
 			mark_page_accessed(pages[do_pages]);
+=======
+>>>>>>> v3.18
 			page_cache_release(pages[do_pages]);
 		} while (do_pages);
 		if (unlikely(status))
@@ -2091,10 +2113,14 @@ static ssize_t ntfs_file_aio_write_nolock(struct kiocb *iocb,
 	size_t count;		/* after file limit checks */
 	ssize_t written, err;
 
+<<<<<<< HEAD
 	count = 0;
 	err = generic_segment_checks(iov, &nr_segs, &count, VERIFY_READ);
 	if (err)
 		return err;
+=======
+	count = iov_length(iov, nr_segs);
+>>>>>>> v3.18
 	pos = *ppos;
 	/* We can write back this queue in page reclaim. */
 	current->backing_dev_info = mapping->backing_dev_info;
@@ -2134,7 +2160,11 @@ static ssize_t ntfs_file_aio_write(struct kiocb *iocb, const struct iovec *iov,
 	ret = ntfs_file_aio_write_nolock(iocb, iov, nr_segs, &iocb->ki_pos);
 	mutex_unlock(&inode->i_mutex);
 	if (ret > 0) {
+<<<<<<< HEAD
 		int err = generic_write_sync(file, pos, ret);
+=======
+		int err = generic_write_sync(file, iocb->ki_pos - ret, ret);
+>>>>>>> v3.18
 		if (err < 0)
 			ret = err;
 	}
@@ -2203,8 +2233,13 @@ static int ntfs_file_fsync(struct file *filp, loff_t start, loff_t end,
 
 const struct file_operations ntfs_file_ops = {
 	.llseek		= generic_file_llseek,	 /* Seek inside file. */
+<<<<<<< HEAD
 	.read		= do_sync_read,		 /* Read from file. */
 	.aio_read	= generic_file_aio_read, /* Async read from file. */
+=======
+	.read		= new_sync_read,	 /* Read from file. */
+	.read_iter	= generic_file_read_iter, /* Async read from file. */
+>>>>>>> v3.18
 #ifdef NTFS_RW
 	.write		= do_sync_write,	 /* Write to file. */
 	.aio_write	= ntfs_file_aio_write,	 /* Async write to file. */

@@ -44,7 +44,11 @@ static int lifebook_set_6byte_proto(const struct dmi_system_id *d)
 	return 1;
 }
 
+<<<<<<< HEAD
 static const struct dmi_system_id __initconst lifebook_dmi_table[] = {
+=======
+static const struct dmi_system_id lifebook_dmi_table[] __initconst = {
+>>>>>>> v3.18
 	{
 		/* FLORA-ie 55mi */
 		.matches = {

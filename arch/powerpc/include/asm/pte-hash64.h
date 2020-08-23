@@ -19,7 +19,11 @@
 #define _PAGE_FILE		0x0002 /* (!present only) software: pte holds file offset */
 #define _PAGE_EXEC		0x0004 /* No execute on POWER4 and newer (we invert) */
 #define _PAGE_GUARDED		0x0008
+<<<<<<< HEAD
 #define _PAGE_COHERENT		0x0010 /* M: enforce memory coherence (SMP systems) */
+=======
+/* We can derive Memory coherence from _PAGE_NO_CACHE */
+>>>>>>> v3.18
 #define _PAGE_NO_CACHE		0x0020 /* I: cache inhibit */
 #define _PAGE_WRITETHRU		0x0040 /* W: cache write-through */
 #define _PAGE_DIRTY		0x0080 /* C: page changed */
@@ -27,6 +31,15 @@
 #define _PAGE_RW		0x0200 /* software: user write access allowed */
 #define _PAGE_BUSY		0x0800 /* software: PTE & hash are busy */
 
+<<<<<<< HEAD
+=======
+/*
+ * Used for tracking numa faults
+ */
+#define _PAGE_NUMA	0x00000010 /* Gather numa placement stats */
+
+
+>>>>>>> v3.18
 /* No separate kernel read-only */
 #define _PAGE_KERNEL_RW		(_PAGE_RW | _PAGE_DIRTY) /* user access blocked by key */
 #define _PAGE_KERNEL_RO		 _PAGE_KERNEL_RW

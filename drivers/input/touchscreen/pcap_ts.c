@@ -11,7 +11,10 @@
  */
 
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/fs.h>
 #include <linux/string.h>
 #include <linux/slab.h>

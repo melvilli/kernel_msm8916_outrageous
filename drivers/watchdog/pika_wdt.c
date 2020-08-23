@@ -22,6 +22,10 @@
 #include <linux/bitops.h>
 #include <linux/uaccess.h>
 #include <linux/io.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+>>>>>>> v3.18
 #include <linux/of_platform.h>
 
 #define DRV_NAME "PIKA-WDT"
@@ -298,5 +302,8 @@ module_exit(pikawdt_exit);
 MODULE_AUTHOR("Sean MacLennan <smaclennan@pikatech.com>");
 MODULE_DESCRIPTION("PIKA FPGA based Watchdog Timer");
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
 
+=======
+>>>>>>> v3.18

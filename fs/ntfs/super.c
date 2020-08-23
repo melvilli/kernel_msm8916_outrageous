@@ -19,6 +19,10 @@
  * distribution in the file COPYING); if not, write to the Free Software
  * Foundation,Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+>>>>>>> v3.18
 
 #include <linux/stddef.h>
 #include <linux/init.h>
@@ -49,8 +53,13 @@
 static unsigned long ntfs_nr_compression_users;
 
 /* A global default upcase table and a corresponding reference count. */
+<<<<<<< HEAD
 static ntfschar *default_upcase = NULL;
 static unsigned long ntfs_nr_upcase_users = 0;
+=======
+static ntfschar *default_upcase;
+static unsigned long ntfs_nr_upcase_users;
+>>>>>>> v3.18
 
 /* Error constants/strings used in inode.c::ntfs_show_options(). */
 typedef enum {
@@ -468,6 +477,11 @@ static int ntfs_remount(struct super_block *sb, int *flags, char *opt)
 
 	ntfs_debug("Entering with remount options string: %s", opt);
 
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+
+>>>>>>> v3.18
 #ifndef NTFS_RW
 	/* For read-only compiled driver, enforce read-only flag. */
 	*flags |= MS_RDONLY;
@@ -1894,7 +1908,11 @@ get_ctx_vol_failed:
 	vol->minor_ver = vi->minor_ver;
 	ntfs_attr_put_search_ctx(ctx);
 	unmap_mft_record(NTFS_I(vol->vol_ino));
+<<<<<<< HEAD
 	printk(KERN_INFO "NTFS volume version %i.%i.\n", vol->major_ver,
+=======
+	pr_info("volume version %i.%i.\n", vol->major_ver,
+>>>>>>> v3.18
 			vol->minor_ver);
 	if (vol->major_ver < 3 && NVolSparseEnabled(vol)) {
 		ntfs_warning(vol->sb, "Disabling sparse support due to NTFS "
@@ -3093,7 +3111,11 @@ static int __init init_ntfs_fs(void)
 	int err = 0;
 
 	/* This may be ugly but it results in pretty output so who cares. (-8 */
+<<<<<<< HEAD
 	printk(KERN_INFO "NTFS driver " NTFS_VERSION " [Flags: R/"
+=======
+	pr_info("driver " NTFS_VERSION " [Flags: R/"
+>>>>>>> v3.18
 #ifdef NTFS_RW
 			"W"
 #else
@@ -3113,16 +3135,25 @@ static int __init init_ntfs_fs(void)
 			sizeof(ntfs_index_context), 0 /* offset */,
 			SLAB_HWCACHE_ALIGN, NULL /* ctor */);
 	if (!ntfs_index_ctx_cache) {
+<<<<<<< HEAD
 		printk(KERN_CRIT "NTFS: Failed to create %s!\n",
 				ntfs_index_ctx_cache_name);
+=======
+		pr_crit("Failed to create %s!\n", ntfs_index_ctx_cache_name);
+>>>>>>> v3.18
 		goto ictx_err_out;
 	}
 	ntfs_attr_ctx_cache = kmem_cache_create(ntfs_attr_ctx_cache_name,
 			sizeof(ntfs_attr_search_ctx), 0 /* offset */,
 			SLAB_HWCACHE_ALIGN, NULL /* ctor */);
 	if (!ntfs_attr_ctx_cache) {
+<<<<<<< HEAD
 		printk(KERN_CRIT "NTFS: Failed to create %s!\n",
 				ntfs_attr_ctx_cache_name);
+=======
+		pr_crit("NTFS: Failed to create %s!\n",
+			ntfs_attr_ctx_cache_name);
+>>>>>>> v3.18
 		goto actx_err_out;
 	}
 
@@ -3130,8 +3161,12 @@ static int __init init_ntfs_fs(void)
 			(NTFS_MAX_NAME_LEN+1) * sizeof(ntfschar), 0,
 			SLAB_HWCACHE_ALIGN, NULL);
 	if (!ntfs_name_cache) {
+<<<<<<< HEAD
 		printk(KERN_CRIT "NTFS: Failed to create %s!\n",
 				ntfs_name_cache_name);
+=======
+		pr_crit("Failed to create %s!\n", ntfs_name_cache_name);
+>>>>>>> v3.18
 		goto name_err_out;
 	}
 
@@ -3139,8 +3174,12 @@ static int __init init_ntfs_fs(void)
 			sizeof(ntfs_inode), 0,
 			SLAB_RECLAIM_ACCOUNT|SLAB_MEM_SPREAD, NULL);
 	if (!ntfs_inode_cache) {
+<<<<<<< HEAD
 		printk(KERN_CRIT "NTFS: Failed to create %s!\n",
 				ntfs_inode_cache_name);
+=======
+		pr_crit("Failed to create %s!\n", ntfs_inode_cache_name);
+>>>>>>> v3.18
 		goto inode_err_out;
 	}
 
@@ -3149,15 +3188,23 @@ static int __init init_ntfs_fs(void)
 			SLAB_HWCACHE_ALIGN|SLAB_RECLAIM_ACCOUNT|SLAB_MEM_SPREAD,
 			ntfs_big_inode_init_once);
 	if (!ntfs_big_inode_cache) {
+<<<<<<< HEAD
 		printk(KERN_CRIT "NTFS: Failed to create %s!\n",
 				ntfs_big_inode_cache_name);
+=======
+		pr_crit("Failed to create %s!\n", ntfs_big_inode_cache_name);
+>>>>>>> v3.18
 		goto big_inode_err_out;
 	}
 
 	/* Register the ntfs sysctls. */
 	err = ntfs_sysctl(1);
 	if (err) {
+<<<<<<< HEAD
 		printk(KERN_CRIT "NTFS: Failed to register NTFS sysctls!\n");
+=======
+		pr_crit("Failed to register NTFS sysctls!\n");
+>>>>>>> v3.18
 		goto sysctl_err_out;
 	}
 
@@ -3166,7 +3213,11 @@ static int __init init_ntfs_fs(void)
 		ntfs_debug("NTFS driver registered successfully.");
 		return 0; /* Success! */
 	}
+<<<<<<< HEAD
 	printk(KERN_CRIT "NTFS: Failed to register NTFS filesystem driver!\n");
+=======
+	pr_crit("Failed to register NTFS filesystem driver!\n");
+>>>>>>> v3.18
 
 	/* Unregister the ntfs sysctls. */
 	ntfs_sysctl(0);
@@ -3182,8 +3233,12 @@ actx_err_out:
 	kmem_cache_destroy(ntfs_index_ctx_cache);
 ictx_err_out:
 	if (!err) {
+<<<<<<< HEAD
 		printk(KERN_CRIT "NTFS: Aborting NTFS filesystem driver "
 				"registration...\n");
+=======
+		pr_crit("Aborting NTFS filesystem driver registration...\n");
+>>>>>>> v3.18
 		err = -ENOMEM;
 	}
 	return err;
@@ -3210,7 +3265,11 @@ static void __exit exit_ntfs_fs(void)
 }
 
 MODULE_AUTHOR("Anton Altaparmakov <anton@tuxera.com>");
+<<<<<<< HEAD
 MODULE_DESCRIPTION("NTFS 1.2/3.x driver - Copyright (c) 2001-2011 Anton Altaparmakov and Tuxera Inc.");
+=======
+MODULE_DESCRIPTION("NTFS 1.2/3.x driver - Copyright (c) 2001-2014 Anton Altaparmakov and Tuxera Inc.");
+>>>>>>> v3.18
 MODULE_VERSION(NTFS_VERSION);
 MODULE_LICENSE("GPL");
 #ifdef DEBUG

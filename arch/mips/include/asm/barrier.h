@@ -18,7 +18,11 @@
  * over this barrier.  All reads preceding this primitive are guaranteed
  * to access memory (but not necessarily other CPUs' caches) before any
  * reads following this primitive that depend on the data return by
+<<<<<<< HEAD
  * any of the preceding reads.	This primitive is much lighter weight than
+=======
+ * any of the preceding reads.  This primitive is much lighter weight than
+>>>>>>> v3.18
  * rmb() on most CPUs, and is never heavier weight than is
  * rmb().
  *
@@ -43,7 +47,11 @@
  * </programlisting>
  *
  * because the read of "*q" depends on the read of "p" and these
+<<<<<<< HEAD
  * two reads are separated by a read_barrier_depends().	 However,
+=======
+ * two reads are separated by a read_barrier_depends().  However,
+>>>>>>> v3.18
  * the following code, with the same initial values for "a" and "b":
  *
  * <programlisting>
@@ -57,7 +65,11 @@
  * </programlisting>
  *
  * does not enforce ordering, since there is no data dependency between
+<<<<<<< HEAD
  * the read of "a" and the read of "b".	 Therefore, on some CPUs, such
+=======
+ * the read of "a" and the read of "b".  Therefore, on some CPUs, such
+>>>>>>> v3.18
  * as Alpha, "y" could be set to 3 and "x" to 0.  Use rmb()
  * in cases like this where there are no data dependencies.
  */
@@ -195,4 +207,10 @@ do {									\
 	___p1;								\
 })
 
+<<<<<<< HEAD
+=======
+#define smp_mb__before_atomic()	smp_mb__before_llsc()
+#define smp_mb__after_atomic()	smp_llsc_mb()
+
+>>>>>>> v3.18
 #endif /* __ASM_BARRIER_H */

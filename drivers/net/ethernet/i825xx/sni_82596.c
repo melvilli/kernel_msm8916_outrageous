@@ -13,7 +13,10 @@
 #include <linux/netdevice.h>
 #include <linux/etherdevice.h>
 #include <linux/skbuff.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/types.h>
 #include <linux/bitops.h>
 #include <linux/platform_device.h>

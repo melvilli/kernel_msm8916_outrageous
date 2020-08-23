@@ -454,7 +454,11 @@ exit_done:
 
 				name = &p[str_table + name_id];
 
+<<<<<<< HEAD
 				if (strnicmp(aconf->action, name, strlen(name)) == 0) {
+=======
+				if (strncasecmp(aconf->action, name, strlen(name)) == 0) {
+>>>>>>> v3.18
 					action_found = 1;
 					current_proc =
 						get_unaligned_be32(&p[action_table +
@@ -2176,7 +2180,11 @@ static int altera_get_note(u8 *p, s32 program_size,
 			key_ptr = &p[note_strings +
 					get_unaligned_be32(
 					&p[note_table + (8 * i)])];
+<<<<<<< HEAD
 			if ((strnicmp(key, key_ptr, strlen(key_ptr)) == 0) &&
+=======
+			if ((strncasecmp(key, key_ptr, strlen(key_ptr)) == 0) &&
+>>>>>>> v3.18
 						(key != NULL)) {
 				status = 0;
 

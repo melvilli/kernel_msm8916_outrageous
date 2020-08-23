@@ -54,9 +54,18 @@ static inline struct page *pte_alloc_one(struct mm_struct *mm,
 	struct page *pte;
 
 	pte = alloc_pages(GFP_KERNEL | __GFP_REPEAT, PTE_ORDER);
+<<<<<<< HEAD
 	if (pte) {
 		clear_highpage(pte);
 		pgtable_page_ctor(pte);
+=======
+	if (!pte)
+		return NULL;
+	clear_highpage(pte);
+	if (!pgtable_page_ctor(pte)) {
+		__free_page(pte);
+		return NULL;
+>>>>>>> v3.18
 	}
 	return pte;
 }

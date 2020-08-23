@@ -4,7 +4,11 @@
  * Modern ConfigFS group context specific statistics based on original
  * target_core_mib.c code
  *
+<<<<<<< HEAD
  * (c) Copyright 2006-2012 RisingTide Systems LLC.
+=======
+ * (c) Copyright 2006-2013 Datera, Inc.
+>>>>>>> v3.18
  *
  * Nicholas A. Bellinger <nab@linux-iscsi.org>
  *
@@ -32,7 +36,10 @@
 #include <linux/utsname.h>
 #include <linux/proc_fs.h>
 #include <linux/seq_file.h>
+<<<<<<< HEAD
 #include <linux/blkdev.h>
+=======
+>>>>>>> v3.18
 #include <linux/configfs.h>
 #include <scsi/scsi.h>
 #include <scsi/scsi_device.h>
@@ -214,7 +221,12 @@ static ssize_t target_stat_scsi_tgt_dev_show_attr_resets(
 	struct se_device *dev =
 		container_of(sgrps, struct se_device, dev_stat_grps);
 
+<<<<<<< HEAD
 	return snprintf(page, PAGE_SIZE, "%u\n", dev->num_resets);
+=======
+	return snprintf(page, PAGE_SIZE, "%lu\n",
+			atomic_long_read(&dev->num_resets));
+>>>>>>> v3.18
 }
 DEV_STAT_SCSI_TGT_DEV_ATTR_RO(resets);
 
@@ -397,8 +409,13 @@ static ssize_t target_stat_scsi_lu_show_attr_num_cmds(
 		container_of(sgrps, struct se_device, dev_stat_grps);
 
 	/* scsiLuNumCommands */
+<<<<<<< HEAD
 	return snprintf(page, PAGE_SIZE, "%llu\n",
 			(unsigned long long)dev->num_cmds);
+=======
+	return snprintf(page, PAGE_SIZE, "%lu\n",
+			atomic_long_read(&dev->num_cmds));
+>>>>>>> v3.18
 }
 DEV_STAT_SCSI_LU_ATTR_RO(num_cmds);
 
@@ -409,7 +426,12 @@ static ssize_t target_stat_scsi_lu_show_attr_read_mbytes(
 		container_of(sgrps, struct se_device, dev_stat_grps);
 
 	/* scsiLuReadMegaBytes */
+<<<<<<< HEAD
 	return snprintf(page, PAGE_SIZE, "%u\n", (u32)(dev->read_bytes >> 20));
+=======
+	return snprintf(page, PAGE_SIZE, "%lu\n",
+			atomic_long_read(&dev->read_bytes) >> 20);
+>>>>>>> v3.18
 }
 DEV_STAT_SCSI_LU_ATTR_RO(read_mbytes);
 
@@ -420,7 +442,12 @@ static ssize_t target_stat_scsi_lu_show_attr_write_mbytes(
 		container_of(sgrps, struct se_device, dev_stat_grps);
 
 	/* scsiLuWrittenMegaBytes */
+<<<<<<< HEAD
 	return snprintf(page, PAGE_SIZE, "%u\n", (u32)(dev->write_bytes >> 20));
+=======
+	return snprintf(page, PAGE_SIZE, "%lu\n",
+			atomic_long_read(&dev->write_bytes) >> 20);
+>>>>>>> v3.18
 }
 DEV_STAT_SCSI_LU_ATTR_RO(write_mbytes);
 
@@ -431,7 +458,11 @@ static ssize_t target_stat_scsi_lu_show_attr_resets(
 		container_of(sgrps, struct se_device, dev_stat_grps);
 
 	/* scsiLuInResets */
+<<<<<<< HEAD
 	return snprintf(page, PAGE_SIZE, "%u\n", dev->num_resets);
+=======
+	return snprintf(page, PAGE_SIZE, "%lu\n", atomic_long_read(&dev->num_resets));
+>>>>>>> v3.18
 }
 DEV_STAT_SCSI_LU_ATTR_RO(resets);
 

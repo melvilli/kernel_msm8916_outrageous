@@ -48,8 +48,17 @@ struct ptp_clock {
 	long dialed_frequency; /* remembers the frequency adjustment */
 	struct timestamp_event_queue tsevq; /* simple fifo for time stamps */
 	struct mutex tsevq_mux; /* one process at a time reading the fifo */
+<<<<<<< HEAD
 	wait_queue_head_t tsev_wq;
 	int defunct; /* tells readers to go away when clock is being removed */
+=======
+	struct mutex pincfg_mux; /* protect concurrent info->pin_config access */
+	wait_queue_head_t tsev_wq;
+	int defunct; /* tells readers to go away when clock is being removed */
+	struct device_attribute *pin_dev_attr;
+	struct attribute **pin_attr;
+	struct attribute_group pin_attr_group;
+>>>>>>> v3.18
 };
 
 /*
@@ -69,6 +78,13 @@ static inline int queue_cnt(struct timestamp_event_queue *q)
  * see ptp_chardev.c
  */
 
+<<<<<<< HEAD
+=======
+/* caller must hold pincfg_mux */
+int ptp_set_pinfunc(struct ptp_clock *ptp, unsigned int pin,
+		    enum ptp_pin_function func, unsigned int chan);
+
+>>>>>>> v3.18
 long ptp_ioctl(struct posix_clock *pc,
 	       unsigned int cmd, unsigned long arg);
 
@@ -84,7 +100,11 @@ uint ptp_poll(struct posix_clock *pc,
  * see ptp_sysfs.c
  */
 
+<<<<<<< HEAD
 extern struct device_attribute ptp_dev_attrs[];
+=======
+extern const struct attribute_group *ptp_groups[];
+>>>>>>> v3.18
 
 int ptp_cleanup_sysfs(struct ptp_clock *ptp);
 

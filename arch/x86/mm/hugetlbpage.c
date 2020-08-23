@@ -16,6 +16,7 @@
 #include <asm/tlbflush.h>
 #include <asm/pgalloc.h>
 
+<<<<<<< HEAD
 static unsigned long page_table_shareable(struct vm_area_struct *svma,
 				struct vm_area_struct *vma,
 				unsigned long addr, pgoff_t idx)
@@ -179,6 +180,8 @@ pte_t *huge_pte_offset(struct mm_struct *mm, unsigned long addr)
 	return (pte_t *) pmd;
 }
 
+=======
+>>>>>>> v3.18
 #if 0	/* This is just for testing */
 struct page *
 follow_huge_addr(struct mm_struct *mm, unsigned long address, int write)
@@ -221,11 +224,14 @@ follow_huge_pmd(struct mm_struct *mm, unsigned long address,
 {
 	return NULL;
 }
+<<<<<<< HEAD
 
 int pmd_huge_support(void)
 {
 	return 0;
 }
+=======
+>>>>>>> v3.18
 #else
 
 struct page *
@@ -243,6 +249,7 @@ int pud_huge(pud_t pud)
 {
 	return !!(pud_val(pud) & _PAGE_PSE);
 }
+<<<<<<< HEAD
 
 struct page *
 follow_huge_pmd(struct mm_struct *mm, unsigned long address,
@@ -277,6 +284,11 @@ int pmd_huge_support(void)
 /* x86_64 also uses this file */
 
 #ifdef HAVE_ARCH_HUGETLB_UNMAPPED_AREA
+=======
+#endif
+
+#ifdef CONFIG_HUGETLB_PAGE
+>>>>>>> v3.18
 static unsigned long hugetlb_get_unmapped_area_bottomup(struct file *file,
 		unsigned long addr, unsigned long len,
 		unsigned long pgoff, unsigned long flags)
@@ -286,7 +298,11 @@ static unsigned long hugetlb_get_unmapped_area_bottomup(struct file *file,
 
 	info.flags = 0;
 	info.length = len;
+<<<<<<< HEAD
 	info.low_limit = TASK_UNMAPPED_BASE;
+=======
+	info.low_limit = current->mm->mmap_legacy_base;
+>>>>>>> v3.18
 	info.high_limit = TASK_SIZE;
 	info.align_mask = PAGE_MASK & ~huge_page_mask(h);
 	info.align_offset = 0;
@@ -349,7 +365,11 @@ hugetlb_get_unmapped_area(struct file *file, unsigned long addr,
 		addr = ALIGN(addr, huge_page_size(h));
 		vma = find_vma(mm, addr);
 		if (TASK_SIZE - len >= addr &&
+<<<<<<< HEAD
 		    (!vma || addr + len <= vm_start_gap(vma)))
+=======
+		    (!vma || addr + len <= vma->vm_start))
+>>>>>>> v3.18
 			return addr;
 	}
 	if (mm->get_unmapped_area == arch_get_unmapped_area)
@@ -359,8 +379,12 @@ hugetlb_get_unmapped_area(struct file *file, unsigned long addr,
 		return hugetlb_get_unmapped_area_topdown(file, addr, len,
 				pgoff, flags);
 }
+<<<<<<< HEAD
 
 #endif /*HAVE_ARCH_HUGETLB_UNMAPPED_AREA*/
+=======
+#endif /* CONFIG_HUGETLB_PAGE */
+>>>>>>> v3.18
 
 #ifdef CONFIG_X86_64
 static __init int setup_hugepagesz(char *opt)

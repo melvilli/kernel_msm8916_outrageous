@@ -62,7 +62,12 @@ static struct page *get_mapping_page(struct super_block *sb, pgoff_t index,
 		page = read_cache_page(mapping, index, filler, sb);
 	else {
 		page = find_or_create_page(mapping, index, GFP_NOFS);
+<<<<<<< HEAD
 		unlock_page(page);
+=======
+		if (page)
+			unlock_page(page);
+>>>>>>> v3.18
 	}
 	return page;
 }
@@ -884,7 +889,12 @@ static struct logfs_area *alloc_area(struct super_block *sb)
 	return area;
 }
 
+<<<<<<< HEAD
 static void map_invalidatepage(struct page *page, unsigned long l)
+=======
+static void map_invalidatepage(struct page *page, unsigned int o,
+			       unsigned int l)
+>>>>>>> v3.18
 {
 	return;
 }

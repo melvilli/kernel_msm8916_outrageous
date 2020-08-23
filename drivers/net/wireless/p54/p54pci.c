@@ -13,7 +13,10 @@
  * published by the Free Software Foundation.
  */
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/pci.h>
 #include <linux/slab.h>
 #include <linux/firmware.h>
@@ -33,7 +36,11 @@ MODULE_LICENSE("GPL");
 MODULE_ALIAS("prism54pci");
 MODULE_FIRMWARE("isl3886pci");
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(p54p_table) = {
+=======
+static const struct pci_device_id p54p_table[] = {
+>>>>>>> v3.18
 	/* Intersil PRISM Duette/Prism GT Wireless LAN adapter */
 	{ PCI_DEVICE(0x1260, 0x3890) },
 	/* 3COM 3CRWE154G72 Wireless LAN adapter */
@@ -631,7 +638,10 @@ static int p54p_probe(struct pci_dev *pdev,
 	iounmap(priv->map);
 
  err_free_dev:
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	p54_free_common(dev);
 
  err_free_reg:

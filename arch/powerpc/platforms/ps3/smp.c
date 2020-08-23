@@ -76,7 +76,11 @@ static int __init ps3_smp_probe(void)
 
 		BUILD_BUG_ON(PPC_MSG_CALL_FUNCTION    != 0);
 		BUILD_BUG_ON(PPC_MSG_RESCHEDULE       != 1);
+<<<<<<< HEAD
 		BUILD_BUG_ON(PPC_MSG_CALL_FUNC_SINGLE != 2);
+=======
+		BUILD_BUG_ON(PPC_MSG_TICK_BROADCAST   != 2);
+>>>>>>> v3.18
 		BUILD_BUG_ON(PPC_MSG_DEBUGGER_BREAK   != 3);
 
 		for (i = 0; i < MSG_COUNT; i++) {

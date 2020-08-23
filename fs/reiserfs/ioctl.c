@@ -7,7 +7,11 @@
 #include <linux/mount.h>
 #include "reiserfs.h"
 #include <linux/time.h>
+<<<<<<< HEAD
 #include <asm/uaccess.h>
+=======
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 #include <linux/pagemap.h>
 #include <linux/compat.h>
 
@@ -15,7 +19,12 @@
  * reiserfs_ioctl - handler for ioctl for inode
  * supported commands:
  *  1) REISERFS_IOC_UNPACK - try to unpack tail from direct item into indirect
+<<<<<<< HEAD
  *                           and prevent packing file (argument arg has to be non-zero)
+=======
+ *                           and prevent packing file (argument arg has t
+ *			      be non-zero)
+>>>>>>> v3.18
  *  2) REISERFS_IOC_[GS]ETFLAGS, REISERFS_IOC_[GS]ETVERSION
  *  3) That's all for a while ...
  */
@@ -132,7 +141,14 @@ setversion_out:
 long reiserfs_compat_ioctl(struct file *file, unsigned int cmd,
 				unsigned long arg)
 {
+<<<<<<< HEAD
 	/* These are just misnamed, they actually get/put from/to user an int */
+=======
+	/*
+	 * These are just misnamed, they actually
+	 * get/put from/to user an int
+	 */
+>>>>>>> v3.18
 	switch (cmd) {
 	case REISERFS_IOC32_UNPACK:
 		cmd = REISERFS_IOC_UNPACK;
@@ -160,6 +176,7 @@ long reiserfs_compat_ioctl(struct file *file, unsigned int cmd,
 int reiserfs_commit_write(struct file *f, struct page *page,
 			  unsigned from, unsigned to);
 /*
+<<<<<<< HEAD
 ** reiserfs_unpack
 ** Function try to convert tail from direct item into indirect.
 ** It set up nopack attribute in the REISERFS_I(inode)->nopack
@@ -168,6 +185,15 @@ int reiserfs_unpack(struct inode *inode, struct file *filp)
 {
 	int retval = 0;
 	int depth;
+=======
+ * reiserfs_unpack
+ * Function try to convert tail from direct item into indirect.
+ * It set up nopack attribute in the REISERFS_I(inode)->nopack
+ */
+int reiserfs_unpack(struct inode *inode, struct file *filp)
+{
+	int retval = 0;
+>>>>>>> v3.18
 	int index;
 	struct page *page;
 	struct address_space *mapping;
@@ -183,11 +209,19 @@ int reiserfs_unpack(struct inode *inode, struct file *filp)
 		return 0;
 	}
 
+<<<<<<< HEAD
 	depth = reiserfs_write_lock_once(inode->i_sb);
 
 	/* we need to make sure nobody is changing the file size beneath us */
 	reiserfs_mutex_lock_safe(&inode->i_mutex, inode->i_sb);
 
+=======
+	/* we need to make sure nobody is changing the file size beneath us */
+	reiserfs_mutex_lock_safe(&inode->i_mutex, inode->i_sb);
+
+	reiserfs_write_lock(inode->i_sb);
+
+>>>>>>> v3.18
 	write_from = inode->i_size & (blocksize - 1);
 	/* if we are on a block boundary, we are already unpacked.  */
 	if (write_from == 0) {
@@ -195,9 +229,16 @@ int reiserfs_unpack(struct inode *inode, struct file *filp)
 		goto out;
 	}
 
+<<<<<<< HEAD
 	/* we unpack by finding the page with the tail, and calling
 	 ** __reiserfs_write_begin on that page.  This will force a
 	 ** reiserfs_get_block to unpack the tail for us.
+=======
+	/*
+	 * we unpack by finding the page with the tail, and calling
+	 * __reiserfs_write_begin on that page.  This will force a
+	 * reiserfs_get_block to unpack the tail for us.
+>>>>>>> v3.18
 	 */
 	index = inode->i_size >> PAGE_CACHE_SHIFT;
 	mapping = inode->i_mapping;
@@ -215,6 +256,7 @@ int reiserfs_unpack(struct inode *inode, struct file *filp)
 	retval = reiserfs_commit_write(NULL, page, write_from, write_from);
 	REISERFS_I(inode)->i_flags |= i_nopack_mask;
 
+<<<<<<< HEAD
       out_unlock:
 	unlock_page(page);
 	page_cache_release(page);
@@ -222,5 +264,14 @@ int reiserfs_unpack(struct inode *inode, struct file *filp)
       out:
 	mutex_unlock(&inode->i_mutex);
 	reiserfs_write_unlock_once(inode->i_sb, depth);
+=======
+out_unlock:
+	unlock_page(page);
+	page_cache_release(page);
+
+out:
+	mutex_unlock(&inode->i_mutex);
+	reiserfs_write_unlock(inode->i_sb);
+>>>>>>> v3.18
 	return retval;
 }

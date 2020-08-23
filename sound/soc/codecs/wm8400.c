@@ -32,6 +32,7 @@
 
 #include "wm8400.h"
 
+<<<<<<< HEAD
 /* Fake register for internal state */
 #define WM8400_INTDRIVBITS      (WM8400_REGISTER_COUNT + 1)
 #define WM8400_INMIXL_PWR			0
@@ -39,6 +40,8 @@
 #define WM8400_INMIXR_PWR			2
 #define WM8400_AINRMUX_PWR			3
 
+=======
+>>>>>>> v3.18
 static struct regulator_bulk_data power[] = {
 	{
 		.supply = "I2S1VDD",
@@ -74,6 +77,7 @@ struct wm8400_priv {
 	int fll_in, fll_out;
 };
 
+<<<<<<< HEAD
 static inline unsigned int wm8400_read(struct snd_soc_codec *codec,
 				       unsigned int reg)
 {
@@ -100,6 +104,8 @@ static int wm8400_write(struct snd_soc_codec *codec, unsigned int reg,
 		return wm8400_set_bits(wm8400->wm8400, reg, 0xffff, value);
 }
 
+=======
+>>>>>>> v3.18
 static void wm8400_codec_reset(struct snd_soc_codec *codec)
 {
 	struct wm8400_priv *wm8400 = snd_soc_codec_get_drvdata(codec);
@@ -126,7 +132,11 @@ static const DECLARE_TLV_DB_SCALE(out_sidetone_tlv, -3600, 0, 0);
 static int wm8400_outpga_put_volsw_vu(struct snd_kcontrol *kcontrol,
         struct snd_ctl_elem_value *ucontrol)
 {
+<<<<<<< HEAD
         struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 	struct soc_mixer_control *mc =
 		(struct soc_mixer_control *)kcontrol->private_value;
 	int reg = mc->reg;
@@ -143,6 +153,7 @@ static int wm8400_outpga_put_volsw_vu(struct snd_kcontrol *kcontrol,
 }
 
 #define WM8400_OUTPGA_SINGLE_R_TLV(xname, reg, shift, max, invert, tlv_array) \
+<<<<<<< HEAD
 {	.iface = SNDRV_CTL_ELEM_IFACE_MIXER, .name = (xname), \
 	.access = SNDRV_CTL_ELEM_ACCESS_TLV_READ |\
 		SNDRV_CTL_ELEM_ACCESS_READWRITE,\
@@ -150,11 +161,16 @@ static int wm8400_outpga_put_volsw_vu(struct snd_kcontrol *kcontrol,
 	.info = snd_soc_info_volsw, \
 	.get = snd_soc_get_volsw, .put = wm8400_outpga_put_volsw_vu, \
 	.private_value = SOC_SINGLE_VALUE(reg, shift, max, invert) }
+=======
+	SOC_SINGLE_EXT_TLV(xname, reg, shift, max, invert, \
+		snd_soc_get_volsw, wm8400_outpga_put_volsw_vu, tlv_array)
+>>>>>>> v3.18
 
 
 static const char *wm8400_digital_sidetone[] =
 	{"None", "Left ADC", "Right ADC", "Reserved"};
 
+<<<<<<< HEAD
 static const struct soc_enum wm8400_left_digital_sidetone_enum =
 SOC_ENUM_SINGLE(WM8400_DIGITAL_SIDE_TONE,
 		WM8400_ADC_TO_DACL_SHIFT, 2, wm8400_digital_sidetone);
@@ -162,12 +178,30 @@ SOC_ENUM_SINGLE(WM8400_DIGITAL_SIDE_TONE,
 static const struct soc_enum wm8400_right_digital_sidetone_enum =
 SOC_ENUM_SINGLE(WM8400_DIGITAL_SIDE_TONE,
 		WM8400_ADC_TO_DACR_SHIFT, 2, wm8400_digital_sidetone);
+=======
+static SOC_ENUM_SINGLE_DECL(wm8400_left_digital_sidetone_enum,
+			    WM8400_DIGITAL_SIDE_TONE,
+			    WM8400_ADC_TO_DACL_SHIFT,
+			    wm8400_digital_sidetone);
+
+static SOC_ENUM_SINGLE_DECL(wm8400_right_digital_sidetone_enum,
+			    WM8400_DIGITAL_SIDE_TONE,
+			    WM8400_ADC_TO_DACR_SHIFT,
+			    wm8400_digital_sidetone);
+>>>>>>> v3.18
 
 static const char *wm8400_adcmode[] =
 	{"Hi-fi mode", "Voice mode 1", "Voice mode 2", "Voice mode 3"};
 
+<<<<<<< HEAD
 static const struct soc_enum wm8400_right_adcmode_enum =
 SOC_ENUM_SINGLE(WM8400_ADC_CTRL, WM8400_ADC_HPF_CUT_SHIFT, 3, wm8400_adcmode);
+=======
+static SOC_ENUM_SINGLE_DECL(wm8400_right_adcmode_enum,
+			    WM8400_ADC_CTRL,
+			    WM8400_ADC_HPF_CUT_SHIFT,
+			    wm8400_adcmode);
+>>>>>>> v3.18
 
 static const struct snd_kcontrol_new wm8400_snd_controls[] = {
 /* INMIXL */
@@ -357,6 +391,7 @@ SOC_SINGLE("RIN34 Mute Switch", WM8400_RIGHT_LINE_INPUT_3_4_VOLUME,
  * _DAPM_ Controls
  */
 
+<<<<<<< HEAD
 static int inmixer_event (struct snd_soc_dapm_widget *w,
 	struct snd_kcontrol *kcontrol, int event)
 {
@@ -383,6 +418,8 @@ static int inmixer_event (struct snd_soc_dapm_widget *w,
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 static int outmixer_event (struct snd_soc_dapm_widget *w,
 	struct snd_kcontrol * kcontrol, int event)
 {
@@ -486,9 +523,16 @@ SOC_DAPM_SINGLE("RINPGA34 Switch", WM8400_INPUT_MIXER3, WM8400_L34MNB_SHIFT,
 static const char *wm8400_ainlmux[] =
 	{"INMIXL Mix", "RXVOICE Mix", "DIFFINL Mix"};
 
+<<<<<<< HEAD
 static const struct soc_enum wm8400_ainlmux_enum =
 SOC_ENUM_SINGLE( WM8400_INPUT_MIXER1, WM8400_AINLMODE_SHIFT,
 	ARRAY_SIZE(wm8400_ainlmux), wm8400_ainlmux);
+=======
+static SOC_ENUM_SINGLE_DECL(wm8400_ainlmux_enum,
+			    WM8400_INPUT_MIXER1,
+			    WM8400_AINLMODE_SHIFT,
+			    wm8400_ainlmux);
+>>>>>>> v3.18
 
 static const struct snd_kcontrol_new wm8400_dapm_ainlmux_controls =
 SOC_DAPM_ENUM("Route", wm8400_ainlmux_enum);
@@ -499,9 +543,16 @@ SOC_DAPM_ENUM("Route", wm8400_ainlmux_enum);
 static const char *wm8400_ainrmux[] =
 	{"INMIXR Mix", "RXVOICE Mix", "DIFFINR Mix"};
 
+<<<<<<< HEAD
 static const struct soc_enum wm8400_ainrmux_enum =
 SOC_ENUM_SINGLE( WM8400_INPUT_MIXER1, WM8400_AINRMODE_SHIFT,
 	ARRAY_SIZE(wm8400_ainrmux), wm8400_ainrmux);
+=======
+static SOC_ENUM_SINGLE_DECL(wm8400_ainrmux_enum,
+			    WM8400_INPUT_MIXER1,
+			    WM8400_AINRMODE_SHIFT,
+			    wm8400_ainrmux);
+>>>>>>> v3.18
 
 static const struct snd_kcontrol_new wm8400_dapm_ainrmux_controls =
 SOC_DAPM_ENUM("Route", wm8400_ainrmux_enum);
@@ -663,6 +714,7 @@ SND_SOC_DAPM_MIXER("RIN34 PGA", WM8400_POWER_MANAGEMENT_2,
 		   0, &wm8400_dapm_rin34_pga_controls[0],
 		   ARRAY_SIZE(wm8400_dapm_rin34_pga_controls)),
 
+<<<<<<< HEAD
 /* INMIXL */
 SND_SOC_DAPM_MIXER_E("INMIXL", WM8400_INTDRIVBITS, WM8400_INMIXL_PWR, 0,
 	&wm8400_dapm_inmixl_controls[0],
@@ -684,6 +736,28 @@ SND_SOC_DAPM_MIXER_E("INMIXR", WM8400_INTDRIVBITS, WM8400_INMIXR_PWR, 0,
 SND_SOC_DAPM_MUX_E("AIRNMUX", WM8400_INTDRIVBITS, WM8400_AINRMUX_PWR, 0,
 	&wm8400_dapm_ainrmux_controls, inmixer_event,
 	SND_SOC_DAPM_POST_PMU | SND_SOC_DAPM_POST_PMD),
+=======
+SND_SOC_DAPM_SUPPLY("INL", WM8400_POWER_MANAGEMENT_2, WM8400_AINL_ENA_SHIFT,
+		    0, NULL, 0),
+SND_SOC_DAPM_SUPPLY("INR", WM8400_POWER_MANAGEMENT_2, WM8400_AINR_ENA_SHIFT,
+		    0, NULL, 0),
+
+/* INMIXL */
+SND_SOC_DAPM_MIXER("INMIXL", SND_SOC_NOPM, 0, 0,
+	&wm8400_dapm_inmixl_controls[0],
+	ARRAY_SIZE(wm8400_dapm_inmixl_controls)),
+
+/* AINLMUX */
+SND_SOC_DAPM_MUX("AILNMUX", SND_SOC_NOPM, 0, 0, &wm8400_dapm_ainlmux_controls),
+
+/* INMIXR */
+SND_SOC_DAPM_MIXER("INMIXR", SND_SOC_NOPM, 0, 0,
+	&wm8400_dapm_inmixr_controls[0],
+	ARRAY_SIZE(wm8400_dapm_inmixr_controls)),
+
+/* AINRMUX */
+SND_SOC_DAPM_MUX("AIRNMUX", SND_SOC_NOPM, 0, 0, &wm8400_dapm_ainrmux_controls),
+>>>>>>> v3.18
 
 /* Output Side */
 /* DACs */
@@ -794,11 +868,19 @@ static const struct snd_soc_dapm_route wm8400_dapm_routes[] = {
 	{"LIN34 PGA", "LIN3 Switch", "LIN3"},
 	{"LIN34 PGA", "LIN4 Switch", "LIN4/RXN"},
 	/* INMIXL */
+<<<<<<< HEAD
+=======
+	{"INMIXL", NULL, "INL"},
+>>>>>>> v3.18
 	{"INMIXL", "Record Left Volume", "LOMIX"},
 	{"INMIXL", "LIN2 Volume", "LIN2"},
 	{"INMIXL", "LINPGA12 Switch", "LIN12 PGA"},
 	{"INMIXL", "LINPGA34 Switch", "LIN34 PGA"},
 	/* AILNMUX */
+<<<<<<< HEAD
+=======
+	{"AILNMUX", NULL, "INL"},
+>>>>>>> v3.18
 	{"AILNMUX", "INMIXL Mix", "INMIXL"},
 	{"AILNMUX", "DIFFINL Mix", "LIN12 PGA"},
 	{"AILNMUX", "DIFFINL Mix", "LIN34 PGA"},
@@ -813,12 +895,21 @@ static const struct snd_soc_dapm_route wm8400_dapm_routes[] = {
 	/* RIN34 PGA */
 	{"RIN34 PGA", "RIN3 Switch", "RIN3"},
 	{"RIN34 PGA", "RIN4 Switch", "RIN4/RXP"},
+<<<<<<< HEAD
 	/* INMIXL */
+=======
+	/* INMIXR */
+	{"INMIXR", NULL, "INR"},
+>>>>>>> v3.18
 	{"INMIXR", "Record Right Volume", "ROMIX"},
 	{"INMIXR", "RIN2 Volume", "RIN2"},
 	{"INMIXR", "RINPGA12 Switch", "RIN12 PGA"},
 	{"INMIXR", "RINPGA34 Switch", "RIN34 PGA"},
 	/* AIRNMUX */
+<<<<<<< HEAD
+=======
+	{"AIRNMUX", NULL, "INR"},
+>>>>>>> v3.18
 	{"AIRNMUX", "INMIXR Mix", "INMIXR"},
 	{"AIRNMUX", "DIFFINR Mix", "RIN12 PGA"},
 	{"AIRNMUX", "DIFFINR Mix", "RIN34 PGA"},
@@ -1150,6 +1241,7 @@ static int wm8400_hw_params(struct snd_pcm_substream *substream,
 
 	audio1 &= ~WM8400_AIF_WL_MASK;
 	/* bit size */
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		break;
@@ -1160,6 +1252,18 @@ static int wm8400_hw_params(struct snd_pcm_substream *substream,
 		audio1 |= WM8400_AIF_WL_24BITS;
 		break;
 	case SNDRV_PCM_FORMAT_S32_LE:
+=======
+	switch (params_width(params)) {
+	case 16:
+		break;
+	case 20:
+		audio1 |= WM8400_AIF_WL_20BITS;
+		break;
+	case 24:
+		audio1 |= WM8400_AIF_WL_24BITS;
+		break;
+	case 32:
+>>>>>>> v3.18
 		audio1 |= WM8400_AIF_WL_32BITS;
 		break;
 	}
@@ -1370,7 +1474,11 @@ static int wm8400_codec_probe(struct snd_soc_codec *codec)
 		return -ENOMEM;
 
 	snd_soc_codec_set_drvdata(codec, priv);
+<<<<<<< HEAD
 	codec->control_data = priv->wm8400 = wm8400;
+=======
+	priv->wm8400 = wm8400;
+>>>>>>> v3.18
 	priv->codec = codec;
 
 	ret = devm_regulator_bulk_get(wm8400->dev,
@@ -1414,13 +1522,27 @@ static int  wm8400_codec_remove(struct snd_soc_codec *codec)
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+static struct regmap *wm8400_get_regmap(struct device *dev)
+{
+	struct wm8400 *wm8400 = dev_get_platdata(dev);
+
+	return wm8400->regmap;
+}
+
+>>>>>>> v3.18
 static struct snd_soc_codec_driver soc_codec_dev_wm8400 = {
 	.probe =	wm8400_codec_probe,
 	.remove =	wm8400_codec_remove,
 	.suspend =	wm8400_suspend,
 	.resume =	wm8400_resume,
+<<<<<<< HEAD
 	.read = snd_soc_read,
 	.write = wm8400_write,
+=======
+	.get_regmap =	wm8400_get_regmap,
+>>>>>>> v3.18
 	.set_bias_level = wm8400_set_bias_level,
 
 	.controls = wm8400_snd_controls,

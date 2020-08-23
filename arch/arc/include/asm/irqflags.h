@@ -15,10 +15,35 @@
  *  -Conditionally disable interrupts (if they are not enabled, don't disable)
 */
 
+<<<<<<< HEAD
 #ifdef __KERNEL__
 
 #include <asm/arcregs.h>
 
+=======
+#include <asm/arcregs.h>
+
+/* status32 Reg bits related to Interrupt Handling */
+#define STATUS_E1_BIT		1	/* Int 1 enable */
+#define STATUS_E2_BIT		2	/* Int 2 enable */
+#define STATUS_A1_BIT		3	/* Int 1 active */
+#define STATUS_A2_BIT		4	/* Int 2 active */
+
+#define STATUS_E1_MASK		(1<<STATUS_E1_BIT)
+#define STATUS_E2_MASK		(1<<STATUS_E2_BIT)
+#define STATUS_A1_MASK		(1<<STATUS_A1_BIT)
+#define STATUS_A2_MASK		(1<<STATUS_A2_BIT)
+
+/* Other Interrupt Handling related Aux regs */
+#define AUX_IRQ_LEV		0x200	/* IRQ Priority: L1 or L2 */
+#define AUX_IRQ_HINT		0x201	/* For generating Soft Interrupts */
+#define AUX_IRQ_LV12		0x43	/* interrupt level register */
+
+#define AUX_IENABLE		0x40c
+#define AUX_ITRIGGER		0x40d
+#define AUX_IPULSE		0x415
+
+>>>>>>> v3.18
 #ifndef __ASSEMBLY__
 
 /******************************************************************
@@ -111,6 +136,7 @@ static inline int arch_irqs_disabled(void)
 	return arch_irqs_disabled_flags(arch_local_save_flags());
 }
 
+<<<<<<< HEAD
 static inline void arch_mask_irq(unsigned int irq)
 {
 	unsigned int ienb;
@@ -131,20 +157,55 @@ static inline void arch_unmask_irq(unsigned int irq)
 
 #else
 
+=======
+#else
+
+#ifdef CONFIG_TRACE_IRQFLAGS
+
+.macro TRACE_ASM_IRQ_DISABLE
+	bl	trace_hardirqs_off
+.endm
+
+.macro TRACE_ASM_IRQ_ENABLE
+	bl	trace_hardirqs_on
+.endm
+
+#else
+
+.macro TRACE_ASM_IRQ_DISABLE
+.endm
+
+.macro TRACE_ASM_IRQ_ENABLE
+.endm
+
+#endif
+
+>>>>>>> v3.18
 .macro IRQ_DISABLE  scratch
 	lr	\scratch, [status32]
 	bic	\scratch, \scratch, (STATUS_E1_MASK | STATUS_E2_MASK)
 	flag	\scratch
+<<<<<<< HEAD
+=======
+	TRACE_ASM_IRQ_DISABLE
+>>>>>>> v3.18
 .endm
 
 .macro IRQ_ENABLE  scratch
 	lr	\scratch, [status32]
 	or	\scratch, \scratch, (STATUS_E1_MASK | STATUS_E2_MASK)
 	flag	\scratch
+<<<<<<< HEAD
+=======
+	TRACE_ASM_IRQ_ENABLE
+>>>>>>> v3.18
 .endm
 
 #endif	/* __ASSEMBLY__ */
 
+<<<<<<< HEAD
 #endif	/* KERNEL */
 
+=======
+>>>>>>> v3.18
 #endif

@@ -1,5 +1,8 @@
 TODO:
+<<<<<<< HEAD
 - Replace kernel_thread with kthread in gdm_usb.c
 - Replace hard-coded firmware paths with request_firmware in
   sdio_boot.c and usb_boot.c
+=======
+>>>>>>> v3.18
 - Clean up coding style to meet kernel standard.

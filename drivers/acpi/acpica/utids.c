@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -184,7 +188,11 @@ acpi_ut_execute_SUB(struct acpi_namespace_node *device_node,
 	sub->length = length;
 	*return_id = sub;
 
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 
 	/* On exit, we must delete the return object */
 
@@ -341,14 +349,26 @@ acpi_ut_execute_CID(struct acpi_namespace_node *device_node,
 
 		switch (cid_objects[i]->common.type) {
 		case ACPI_TYPE_INTEGER:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 			string_area_size += ACPI_EISAID_STRING_SIZE;
 			break;
 
 		case ACPI_TYPE_STRING:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 			string_area_size += cid_objects[i]->string.length + 1;
 			break;
 
 		default:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 			status = AE_TYPE;
 			goto cleanup;
 		}

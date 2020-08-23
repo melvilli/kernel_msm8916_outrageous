@@ -269,7 +269,11 @@ static struct platform_driver at91wdt_driver = {
 	.driver		= {
 		.name	= "at91_wdt",
 		.owner	= THIS_MODULE,
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(at91_wdt_dt_ids),
+=======
+		.of_match_table = at91_wdt_dt_ids,
+>>>>>>> v3.18
 	},
 };
 
@@ -297,5 +301,8 @@ module_exit(at91_wdt_exit);
 MODULE_AUTHOR("Andrew Victor");
 MODULE_DESCRIPTION("Watchdog driver for Atmel AT91RM9200");
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 MODULE_ALIAS("platform:at91_wdt");

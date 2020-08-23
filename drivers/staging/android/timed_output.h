@@ -20,10 +20,17 @@ struct timed_output_dev {
 	const char	*name;
 
 	/* enable the output and set the timer */
+<<<<<<< HEAD
 	void	(*enable)(struct timed_output_dev *sdev, int timeout);
 
 	/* returns the current number of milliseconds remaining on the timer */
 	int		(*get_time)(struct timed_output_dev *sdev);
+=======
+	void (*enable)(struct timed_output_dev *sdev, int timeout);
+
+	/* returns the current number of milliseconds remaining on the timer */
+	int (*get_time)(struct timed_output_dev *sdev);
+>>>>>>> v3.18
 
 	/* private data */
 	struct device	*dev;
@@ -31,7 +38,12 @@ struct timed_output_dev {
 	int		state;
 };
 
+<<<<<<< HEAD
 extern int timed_output_dev_register(struct timed_output_dev *dev);
 extern void timed_output_dev_unregister(struct timed_output_dev *dev);
+=======
+int timed_output_dev_register(struct timed_output_dev *dev);
+void timed_output_dev_unregister(struct timed_output_dev *dev);
+>>>>>>> v3.18
 
 #endif

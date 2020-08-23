@@ -14,12 +14,36 @@
 #ifndef __LINUX_MFD_SEC_CORE_H
 #define __LINUX_MFD_SEC_CORE_H
 
+<<<<<<< HEAD
 #define NUM_IRQ_REGS	4
+=======
+/* Macros to represent minimum voltages for LDO/BUCK */
+#define MIN_3000_MV		3000000
+#define MIN_2500_MV		2500000
+#define MIN_2000_MV		2000000
+#define MIN_1800_MV		1800000
+#define MIN_1500_MV		1500000
+#define MIN_1400_MV		1400000
+#define MIN_1000_MV		1000000
+
+#define MIN_900_MV		900000
+#define MIN_850_MV		850000
+#define MIN_800_MV		800000
+#define MIN_750_MV		750000
+#define MIN_600_MV		600000
+
+/* Macros to represent steps for LDO/BUCK */
+#define STEP_50_MV		50000
+#define STEP_25_MV		25000
+#define STEP_12_5_MV		12500
+#define STEP_6_25_MV		6250
+>>>>>>> v3.18
 
 enum sec_device_type {
 	S5M8751X,
 	S5M8763X,
 	S5M8767X,
+<<<<<<< HEAD
 	S2MPS11X,
 };
 
@@ -37,10 +61,37 @@ enum sec_device_type {
  * @irq_masks_cur: currently active value
  * @irq_masks_cache: cached hardware value
  * @type: indicate which s5m87xx "variant" is used
+=======
+	S2MPA01,
+	S2MPS11X,
+	S2MPS14X,
+	S2MPU02,
+};
+
+/**
+ * struct sec_pmic_dev - s2m/s5m master device for sub-drivers
+ * @dev:		Master device of the chip
+ * @pdata:		Platform data populated with data from DTS
+ *			or board files
+ * @regmap_pmic:	Regmap associated with PMIC's I2C address
+ * @i2c:		I2C client of the main driver
+ * @device_type:	Type of device, matches enum sec_device_type
+ * @irq_base:		Base IRQ number for device, required for IRQs
+ * @irq:		Generic IRQ number for device
+ * @irq_data:		Runtime data structure for IRQ controller
+ * @ono:		Power onoff IRQ number for s5m87xx
+ * @wakeup:		Whether or not this is a wakeup device
+ * @wtsr_smpl:		Whether or not to enable in RTC driver the Watchdog
+ *			Timer Software Reset (registers set to default value
+ *			after PWRHOLD falling) and Sudden Momentary Power Loss
+ *			(PMIC will enter power on sequence after short drop in
+ *			VBATT voltage).
+>>>>>>> v3.18
  */
 struct sec_pmic_dev {
 	struct device *dev;
 	struct sec_platform_data *pdata;
+<<<<<<< HEAD
 	struct regmap *regmap;
 	struct i2c_client *i2c;
 	struct i2c_client *rtc;
@@ -48,27 +99,41 @@ struct sec_pmic_dev {
 	struct mutex irqlock;
 
 	int device_type;
+=======
+	struct regmap *regmap_pmic;
+	struct i2c_client *i2c;
+
+	unsigned long device_type;
+>>>>>>> v3.18
 	int irq_base;
 	int irq;
 	struct regmap_irq_chip_data *irq_data;
 
 	int ono;
+<<<<<<< HEAD
 	u8 irq_masks_cur[NUM_IRQ_REGS];
 	u8 irq_masks_cache[NUM_IRQ_REGS];
 	int type;
 	bool wakeup;
+=======
+	bool wakeup;
+	bool wtsr_smpl;
+>>>>>>> v3.18
 };
 
 int sec_irq_init(struct sec_pmic_dev *sec_pmic);
 void sec_irq_exit(struct sec_pmic_dev *sec_pmic);
 int sec_irq_resume(struct sec_pmic_dev *sec_pmic);
 
+<<<<<<< HEAD
 extern int sec_reg_read(struct sec_pmic_dev *sec_pmic, u8 reg, void *dest);
 extern int sec_bulk_read(struct sec_pmic_dev *sec_pmic, u8 reg, int count, u8 *buf);
 extern int sec_reg_write(struct sec_pmic_dev *sec_pmic, u8 reg, u8 value);
 extern int sec_bulk_write(struct sec_pmic_dev *sec_pmic, u8 reg, int count, u8 *buf);
 extern int sec_reg_update(struct sec_pmic_dev *sec_pmic, u8 reg, u8 val, u8 mask);
 
+=======
+>>>>>>> v3.18
 struct sec_platform_data {
 	struct sec_regulator_data	*regulators;
 	struct sec_opmode_data		*opmode;
@@ -102,7 +167,11 @@ struct sec_platform_data {
 	int				buck3_default_idx;
 	int				buck4_default_idx;
 
+<<<<<<< HEAD
 	int                             buck_ramp_delay;
+=======
+	int				buck_ramp_delay;
+>>>>>>> v3.18
 
 	int				buck2_ramp_delay;
 	int				buck34_ramp_delay;
@@ -110,10 +179,22 @@ struct sec_platform_data {
 	int				buck16_ramp_delay;
 	int				buck7810_ramp_delay;
 	int				buck9_ramp_delay;
+<<<<<<< HEAD
 
 	bool                            buck2_ramp_enable;
 	bool                            buck3_ramp_enable;
 	bool                            buck4_ramp_enable;
+=======
+	int				buck24_ramp_delay;
+	int				buck3_ramp_delay;
+	int				buck7_ramp_delay;
+	int				buck8910_ramp_delay;
+
+	bool				buck1_ramp_enable;
+	bool				buck2_ramp_enable;
+	bool				buck3_ramp_enable;
+	bool				buck4_ramp_enable;
+>>>>>>> v3.18
 	bool				buck6_ramp_enable;
 
 	int				buck2_init;
@@ -129,7 +210,12 @@ struct sec_platform_data {
 struct sec_regulator_data {
 	int				id;
 	struct regulator_init_data	*initdata;
+<<<<<<< HEAD
 	struct device_node *reg_node;
+=======
+	struct device_node		*reg_node;
+	int				ext_control_gpio;
+>>>>>>> v3.18
 };
 
 /*

@@ -5,7 +5,11 @@
  *
  * GPL LICENSE SUMMARY
  *
+<<<<<<< HEAD
  * Copyright(c) 2007 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2007 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of version 2 of the GNU General Public License as
@@ -30,7 +34,11 @@
  *
  * BSD LICENSE
  *
+<<<<<<< HEAD
  * Copyright(c) 2005 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -96,6 +104,7 @@ enum iwl_disable_11n {
  *	use IWL_[DIS,EN]ABLE_HT_* constants
  * @amsdu_size_8K: enable 8K amsdu size, default = 0
  * @restart_fw: restart firmware, default = 1
+<<<<<<< HEAD
  * @plcp_check: enable plcp health check, default = true
  * @wd_disable: enable stuck queue check, default = 0
  * @bt_coex_active: enable bt coex, default = true
@@ -106,22 +115,45 @@ enum iwl_disable_11n {
  * @ant_coupling: antenna coupling in dB, default = 0
  * @bt_ch_announce: BT channel inhibition, default = enable
  * @auto_agg: enable agg. without check, default = true
+=======
+ * @wd_disable: disable stuck queue check, default = 1
+ * @bt_coex_active: enable bt coex, default = true
+ * @led_mode: system default, default = 0
+ * @power_save: enable power save, default = false
+ * @power_level: power level, default = 1
+ * @debug_level: levels are IWL_DL_*
+ * @ant_coupling: antenna coupling in dB, default = 0
+ * @fw_monitor: allow to use firmware monitor
+>>>>>>> v3.18
  */
 struct iwl_mod_params {
 	int sw_crypto;
 	unsigned int disable_11n;
 	int amsdu_size_8K;
 	bool restart_fw;
+<<<<<<< HEAD
 	bool plcp_check;
+=======
+>>>>>>> v3.18
 	int  wd_disable;
 	bool bt_coex_active;
 	int led_mode;
 	bool power_save;
 	int power_level;
+<<<<<<< HEAD
 	u32 debug_level;
 	int ant_coupling;
 	bool bt_ch_announce;
 	bool auto_agg;
+=======
+#ifdef CONFIG_IWLWIFI_DEBUG
+	u32 debug_level;
+#endif
+	int ant_coupling;
+	char *nvm_file;
+	bool uapsd_disable;
+	bool fw_monitor;
+>>>>>>> v3.18
 };
 
 #endif /* #__iwl_modparams_h__ */

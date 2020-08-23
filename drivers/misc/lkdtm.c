@@ -30,6 +30,10 @@
  *
  * See Documentation/fault-injection/provoke-crashes.txt for instructions
  */
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+>>>>>>> v3.18
 
 #include <linux/kernel.h>
 #include <linux/fs.h>
@@ -43,13 +47,36 @@
 #include <linux/slab.h>
 #include <scsi/scsi_cmnd.h>
 #include <linux/debugfs.h>
+<<<<<<< HEAD
+=======
+#include <linux/vmalloc.h>
+#include <linux/mman.h>
+#include <asm/cacheflush.h>
+>>>>>>> v3.18
 
 #ifdef CONFIG_IDE
 #include <linux/ide.h>
 #endif
 
+<<<<<<< HEAD
 #define DEFAULT_COUNT 10
 #define REC_NUM_DEFAULT 10
+=======
+/*
+ * Make sure our attempts to over run the kernel stack doesn't trigger
+ * a compiler warning when CONFIG_FRAME_WARN is set. Then make sure we
+ * recurse past the end of THREAD_SIZE by default.
+ */
+#if defined(CONFIG_FRAME_WARN) && (CONFIG_FRAME_WARN > 0)
+#define REC_STACK_SIZE (CONFIG_FRAME_WARN / 2)
+#else
+#define REC_STACK_SIZE (THREAD_SIZE / 8)
+#endif
+#define REC_NUM_DEFAULT ((THREAD_SIZE / REC_STACK_SIZE) * 2)
+
+#define DEFAULT_COUNT 10
+#define EXEC_SIZE 64
+>>>>>>> v3.18
 
 enum cname {
 	CN_INVALID,
@@ -68,6 +95,10 @@ enum ctype {
 	CT_NONE,
 	CT_PANIC,
 	CT_BUG,
+<<<<<<< HEAD
+=======
+	CT_WARNING,
+>>>>>>> v3.18
 	CT_EXCEPTION,
 	CT_LOOP,
 	CT_OVERFLOW,
@@ -77,7 +108,20 @@ enum ctype {
 	CT_WRITE_AFTER_FREE,
 	CT_SOFTLOCKUP,
 	CT_HARDLOCKUP,
+<<<<<<< HEAD
 	CT_HUNG_TASK,
+=======
+	CT_SPINLOCKUP,
+	CT_HUNG_TASK,
+	CT_EXEC_DATA,
+	CT_EXEC_STACK,
+	CT_EXEC_KMALLOC,
+	CT_EXEC_VMALLOC,
+	CT_EXEC_USERSPACE,
+	CT_ACCESS_USERSPACE,
+	CT_WRITE_RO,
+	CT_WRITE_KERN,
+>>>>>>> v3.18
 };
 
 static char* cp_name[] = {
@@ -95,6 +139,10 @@ static char* cp_name[] = {
 static char* cp_type[] = {
 	"PANIC",
 	"BUG",
+<<<<<<< HEAD
+=======
+	"WARNING",
+>>>>>>> v3.18
 	"EXCEPTION",
 	"LOOP",
 	"OVERFLOW",
@@ -104,7 +152,20 @@ static char* cp_type[] = {
 	"WRITE_AFTER_FREE",
 	"SOFTLOCKUP",
 	"HARDLOCKUP",
+<<<<<<< HEAD
 	"HUNG_TASK",
+=======
+	"SPINLOCKUP",
+	"HUNG_TASK",
+	"EXEC_DATA",
+	"EXEC_STACK",
+	"EXEC_KMALLOC",
+	"EXEC_VMALLOC",
+	"EXEC_USERSPACE",
+	"ACCESS_USERSPACE",
+	"WRITE_RO",
+	"WRITE_KERN",
+>>>>>>> v3.18
 };
 
 static struct jprobe lkdtm;
@@ -121,10 +182,21 @@ static enum cname cpoint = CN_INVALID;
 static enum ctype cptype = CT_NONE;
 static int count = DEFAULT_COUNT;
 static DEFINE_SPINLOCK(count_lock);
+<<<<<<< HEAD
 
 module_param(recur_count, int, 0644);
 MODULE_PARM_DESC(recur_count, " Recursion level for the stack overflow test, "\
 				 "default is 10");
+=======
+static DEFINE_SPINLOCK(lock_me_up);
+
+static u8 data_area[EXEC_SIZE];
+
+static const unsigned long rodata = 0xAA55AA55;
+
+module_param(recur_count, int, 0644);
+MODULE_PARM_DESC(recur_count, " Recursion level for the stack overflow test");
+>>>>>>> v3.18
 module_param(cpoint_name, charp, 0444);
 MODULE_PARM_DESC(cpoint_name, " Crash Point, where kernel is to be crashed");
 module_param(cpoint_type, charp, 0444);
@@ -188,7 +260,11 @@ static int jp_scsi_dispatch_cmd(struct scsi_cmnd *cmd)
 }
 
 #ifdef CONFIG_IDE
+<<<<<<< HEAD
 int jp_generic_ide_ioctl(ide_drive_t *drive, struct file *file,
+=======
+static int jp_generic_ide_ioctl(ide_drive_t *drive, struct file *file,
+>>>>>>> v3.18
 			struct block_device *bdev, unsigned int cmd,
 			unsigned long arg)
 {
@@ -263,6 +339,7 @@ static int lkdtm_parse_commandline(void)
 	return -EINVAL;
 }
 
+<<<<<<< HEAD
 static int recursive_loop(int a)
 {
 	char buf[1024];
@@ -273,6 +350,66 @@ static int recursive_loop(int a)
 		return 0;
 	else
         	return recursive_loop(a);
+=======
+static int recursive_loop(int remaining)
+{
+	char buf[REC_STACK_SIZE];
+
+	/* Make sure compiler does not optimize this away. */
+	memset(buf, (remaining & 0xff) | 0x1, REC_STACK_SIZE);
+	if (!remaining)
+		return 0;
+	else
+		return recursive_loop(remaining - 1);
+}
+
+static void do_nothing(void)
+{
+	return;
+}
+
+/* Must immediately follow do_nothing for size calculuations to work out. */
+static void do_overwritten(void)
+{
+	pr_info("do_overwritten wasn't overwritten!\n");
+	return;
+}
+
+static noinline void corrupt_stack(void)
+{
+	/* Use default char array length that triggers stack protection. */
+	char data[8];
+
+	memset((void *)data, 0, 64);
+}
+
+static void execute_location(void *dst)
+{
+	void (*func)(void) = dst;
+
+	pr_info("attempting ok execution at %p\n", do_nothing);
+	do_nothing();
+
+	memcpy(dst, do_nothing, EXEC_SIZE);
+	flush_icache_range((unsigned long)dst, (unsigned long)dst + EXEC_SIZE);
+	pr_info("attempting bad execution at %p\n", func);
+	func();
+}
+
+static void execute_user_location(void *dst)
+{
+	/* Intentionally crossing kernel/user memory boundary. */
+	void (*func)(void) = dst;
+
+	pr_info("attempting ok execution at %p\n", do_nothing);
+	do_nothing();
+
+	if (copy_to_user((void __user *)dst, do_nothing, EXEC_SIZE))
+		return;
+	flush_icache_range((unsigned long)dst, (unsigned long)dst + EXEC_SIZE);
+	pr_info("attempting bad execution at %p\n", func);
+	func();
+>>>>>>> v3.18
 }
 
 static void lkdtm_do_action(enum ctype which)
@@ -284,6 +421,12 @@ static void lkdtm_do_action(enum ctype which)
 	case CT_BUG:
 		BUG();
 		break;
+<<<<<<< HEAD
+=======
+	case CT_WARNING:
+		WARN_ON(1);
+		break;
+>>>>>>> v3.18
 	case CT_EXCEPTION:
 		*((int *) 0) = 0;
 		break;
@@ -292,6 +435,7 @@ static void lkdtm_do_action(enum ctype which)
 			;
 		break;
 	case CT_OVERFLOW:
+<<<<<<< HEAD
 		(void) recursive_loop(0);
 		break;
 	case CT_CORRUPT_STACK: {
@@ -301,6 +445,13 @@ static void lkdtm_do_action(enum ctype which)
 		p[12] = 0x12345678;
 		break;
 	}
+=======
+		(void) recursive_loop(recur_count);
+		break;
+	case CT_CORRUPT_STACK:
+		corrupt_stack();
+		break;
+>>>>>>> v3.18
 	case CT_UNALIGNED_LOAD_STORE_WRITE: {
 		static u8 data[5] __attribute__((aligned(4))) = {1, 2,
 				3, 4, 5};
@@ -340,10 +491,107 @@ static void lkdtm_do_action(enum ctype which)
 		for (;;)
 			cpu_relax();
 		break;
+<<<<<<< HEAD
+=======
+	case CT_SPINLOCKUP:
+		/* Must be called twice to trigger. */
+		spin_lock(&lock_me_up);
+		/* Let sparse know we intended to exit holding the lock. */
+		__release(&lock_me_up);
+		break;
+>>>>>>> v3.18
 	case CT_HUNG_TASK:
 		set_current_state(TASK_UNINTERRUPTIBLE);
 		schedule();
 		break;
+<<<<<<< HEAD
+=======
+	case CT_EXEC_DATA:
+		execute_location(data_area);
+		break;
+	case CT_EXEC_STACK: {
+		u8 stack_area[EXEC_SIZE];
+		execute_location(stack_area);
+		break;
+	}
+	case CT_EXEC_KMALLOC: {
+		u32 *kmalloc_area = kmalloc(EXEC_SIZE, GFP_KERNEL);
+		execute_location(kmalloc_area);
+		kfree(kmalloc_area);
+		break;
+	}
+	case CT_EXEC_VMALLOC: {
+		u32 *vmalloc_area = vmalloc(EXEC_SIZE);
+		execute_location(vmalloc_area);
+		vfree(vmalloc_area);
+		break;
+	}
+	case CT_EXEC_USERSPACE: {
+		unsigned long user_addr;
+
+		user_addr = vm_mmap(NULL, 0, PAGE_SIZE,
+				    PROT_READ | PROT_WRITE | PROT_EXEC,
+				    MAP_ANONYMOUS | MAP_PRIVATE, 0);
+		if (user_addr >= TASK_SIZE) {
+			pr_warn("Failed to allocate user memory\n");
+			return;
+		}
+		execute_user_location((void *)user_addr);
+		vm_munmap(user_addr, PAGE_SIZE);
+		break;
+	}
+	case CT_ACCESS_USERSPACE: {
+		unsigned long user_addr, tmp;
+		unsigned long *ptr;
+
+		user_addr = vm_mmap(NULL, 0, PAGE_SIZE,
+				    PROT_READ | PROT_WRITE | PROT_EXEC,
+				    MAP_ANONYMOUS | MAP_PRIVATE, 0);
+		if (user_addr >= TASK_SIZE) {
+			pr_warn("Failed to allocate user memory\n");
+			return;
+		}
+
+		ptr = (unsigned long *)user_addr;
+
+		pr_info("attempting bad read at %p\n", ptr);
+		tmp = *ptr;
+		tmp += 0xc0dec0de;
+
+		pr_info("attempting bad write at %p\n", ptr);
+		*ptr = tmp;
+
+		vm_munmap(user_addr, PAGE_SIZE);
+
+		break;
+	}
+	case CT_WRITE_RO: {
+		unsigned long *ptr;
+
+		ptr = (unsigned long *)&rodata;
+
+		pr_info("attempting bad write at %p\n", ptr);
+		*ptr ^= 0xabcd1234;
+
+		break;
+	}
+	case CT_WRITE_KERN: {
+		size_t size;
+		unsigned char *ptr;
+
+		size = (unsigned long)do_overwritten -
+		       (unsigned long)do_nothing;
+		ptr = (unsigned char *)do_overwritten;
+
+		pr_info("attempting bad %zu byte write at %p\n", size, ptr);
+		memcpy(ptr, (unsigned char *)do_nothing, size);
+		flush_icache_range((unsigned long)ptr,
+				   (unsigned long)(ptr + size));
+
+		do_overwritten();
+		break;
+	}
+>>>>>>> v3.18
 	case CT_NONE:
 	default:
 		break;
@@ -358,8 +606,13 @@ static void lkdtm_handler(void)
 
 	spin_lock_irqsave(&count_lock, flags);
 	count--;
+<<<<<<< HEAD
 	printk(KERN_INFO "lkdtm: Crash point %s of type %s hit, trigger in %d rounds\n",
 			cp_name_to_str(cpoint), cp_type_to_str(cptype), count);
+=======
+	pr_info("Crash point %s of type %s hit, trigger in %d rounds\n",
+		cp_name_to_str(cpoint), cp_type_to_str(cptype), count);
+>>>>>>> v3.18
 
 	if (count == 0) {
 		do_it = true;
@@ -416,18 +669,30 @@ static int lkdtm_register_cpoint(enum cname which)
 		lkdtm.kp.symbol_name = "generic_ide_ioctl";
 		lkdtm.entry = (kprobe_opcode_t*) jp_generic_ide_ioctl;
 #else
+<<<<<<< HEAD
 		printk(KERN_INFO "lkdtm: Crash point not available\n");
+=======
+		pr_info("Crash point not available\n");
+>>>>>>> v3.18
 		return -EINVAL;
 #endif
 		break;
 	default:
+<<<<<<< HEAD
 		printk(KERN_INFO "lkdtm: Invalid Crash Point\n");
+=======
+		pr_info("Invalid Crash Point\n");
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
 	cpoint = which;
 	if ((ret = register_jprobe(&lkdtm)) < 0) {
+<<<<<<< HEAD
 		printk(KERN_INFO "lkdtm: Couldn't register jprobe\n");
+=======
+		pr_info("Couldn't register jprobe\n");
+>>>>>>> v3.18
 		cpoint = CN_INVALID;
 	}
 
@@ -574,8 +839,12 @@ static ssize_t direct_entry(struct file *f, const char __user *user_buf,
 	if (type == CT_NONE)
 		return -EINVAL;
 
+<<<<<<< HEAD
 	printk(KERN_INFO "lkdtm: Performing direct entry %s\n",
 			cp_type_to_str(type));
+=======
+	pr_info("Performing direct entry %s\n", cp_type_to_str(type));
+>>>>>>> v3.18
 	lkdtm_do_action(type);
 	*off += count;
 
@@ -637,7 +906,11 @@ static int __init lkdtm_module_init(void)
 	/* Register debugfs interface */
 	lkdtm_debugfs_root = debugfs_create_dir("provoke-crash", NULL);
 	if (!lkdtm_debugfs_root) {
+<<<<<<< HEAD
 		printk(KERN_ERR "lkdtm: creating root dir failed\n");
+=======
+		pr_err("creating root dir failed\n");
+>>>>>>> v3.18
 		return -ENODEV;
 	}
 
@@ -652,20 +925,29 @@ static int __init lkdtm_module_init(void)
 		de = debugfs_create_file(cur->name, 0644, lkdtm_debugfs_root,
 				NULL, &cur->fops);
 		if (de == NULL) {
+<<<<<<< HEAD
 			printk(KERN_ERR "lkdtm: could not create %s\n",
 					cur->name);
+=======
+			pr_err("could not create %s\n", cur->name);
+>>>>>>> v3.18
 			goto out_err;
 		}
 	}
 
 	if (lkdtm_parse_commandline() == -EINVAL) {
+<<<<<<< HEAD
 		printk(KERN_INFO "lkdtm: Invalid command\n");
+=======
+		pr_info("Invalid command\n");
+>>>>>>> v3.18
 		goto out_err;
 	}
 
 	if (cpoint != CN_INVALID && cptype != CT_NONE) {
 		ret = lkdtm_register_cpoint(cpoint);
 		if (ret < 0) {
+<<<<<<< HEAD
 			printk(KERN_INFO "lkdtm: Invalid crash point %d\n",
 					cpoint);
 			goto out_err;
@@ -674,6 +956,15 @@ static int __init lkdtm_module_init(void)
 				cpoint_name, cpoint_type);
 	} else {
 		printk(KERN_INFO "lkdtm: No crash points registered, enable through debugfs\n");
+=======
+			pr_info("Invalid crash point %d\n", cpoint);
+			goto out_err;
+		}
+		pr_info("Crash point %s of type %s registered\n",
+			cpoint_name, cpoint_type);
+	} else {
+		pr_info("No crash points registered, enable through debugfs\n");
+>>>>>>> v3.18
 	}
 
 	return 0;
@@ -688,10 +979,18 @@ static void __exit lkdtm_module_exit(void)
 	debugfs_remove_recursive(lkdtm_debugfs_root);
 
 	unregister_jprobe(&lkdtm);
+<<<<<<< HEAD
 	printk(KERN_INFO "lkdtm: Crash point unregistered\n");
+=======
+	pr_info("Crash point unregistered\n");
+>>>>>>> v3.18
 }
 
 module_init(lkdtm_module_init);
 module_exit(lkdtm_module_exit);
 
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
+=======
+MODULE_DESCRIPTION("Kprobe module for testing crash dumps");
+>>>>>>> v3.18

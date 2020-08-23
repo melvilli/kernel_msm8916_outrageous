@@ -42,8 +42,11 @@ nvd0_i2c_sense_sda(struct nouveau_i2c_port *base)
 
 static const struct nouveau_i2c_func
 nvd0_i2c_func = {
+<<<<<<< HEAD
 	.acquire   = nv94_i2c_acquire,
 	.release   = nv94_i2c_release,
+=======
+>>>>>>> v3.18
 	.drive_scl = nv50_i2c_drive_scl,
 	.drive_sda = nv50_i2c_drive_sda,
 	.sense_scl = nvd0_i2c_sense_scl,
@@ -60,12 +63,20 @@ nvd0_i2c_port_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	int ret;
 
 	ret = nouveau_i2c_port_create(parent, engine, oclass, index,
+<<<<<<< HEAD
 				     &nouveau_i2c_bit_algo, &port);
+=======
+				      &nouveau_i2c_bit_algo, &nvd0_i2c_func,
+				      &port);
+>>>>>>> v3.18
 	*pobject = nv_object(port);
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 	port->base.func = &nvd0_i2c_func;
+=======
+>>>>>>> v3.18
 	port->state = 0x00000007;
 	port->addr = 0x00d014 + (info->drive * 0x20);
 	if (info->share != DCB_I2C_UNUSED) {
@@ -75,7 +86,11 @@ nvd0_i2c_port_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	return 0;
 }
 
+<<<<<<< HEAD
 static struct nouveau_oclass
+=======
+struct nouveau_oclass
+>>>>>>> v3.18
 nvd0_i2c_sclass[] = {
 	{ .handle = NV_I2C_TYPE_DCBI2C(DCB_I2C_NVIO_BIT),
 	  .ofuncs = &(struct nouveau_ofuncs) {
@@ -96,6 +111,7 @@ nvd0_i2c_sclass[] = {
 	{}
 };
 
+<<<<<<< HEAD
 static int
 nvd0_i2c_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	      struct nouveau_oclass *oclass, void *data, u32 size,
@@ -117,8 +133,25 @@ nvd0_i2c_oclass = {
 	.handle = NV_SUBDEV(I2C, 0xd0),
 	.ofuncs = &(struct nouveau_ofuncs) {
 		.ctor = nvd0_i2c_ctor,
+=======
+struct nouveau_oclass *
+nvd0_i2c_oclass = &(struct nouveau_i2c_impl) {
+	.base.handle = NV_SUBDEV(I2C, 0xd0),
+	.base.ofuncs = &(struct nouveau_ofuncs) {
+		.ctor = _nouveau_i2c_ctor,
+>>>>>>> v3.18
 		.dtor = _nouveau_i2c_dtor,
 		.init = _nouveau_i2c_init,
 		.fini = _nouveau_i2c_fini,
 	},
+<<<<<<< HEAD
 };
+=======
+	.sclass = nvd0_i2c_sclass,
+	.pad_x = &nv04_i2c_pad_oclass,
+	.pad_s = &nv94_i2c_pad_oclass,
+	.aux = 4,
+	.aux_stat = nv94_aux_stat,
+	.aux_mask = nv94_aux_mask,
+}.base;
+>>>>>>> v3.18

@@ -35,6 +35,10 @@
 #include <linux/device.h>
 #include <linux/cdev.h>
 
+<<<<<<< HEAD
+=======
+#include <media/rc-core.h>
+>>>>>>> v3.18
 #include <media/lirc.h>
 #include <media/lirc_dev.h>
 
@@ -467,6 +471,15 @@ int lirc_dev_fop_open(struct inode *inode, struct file *file)
 		goto error;
 	}
 
+<<<<<<< HEAD
+=======
+	if (ir->d.rdev) {
+		retval = rc_open(ir->d.rdev);
+		if (retval)
+			goto error;
+	}
+
+>>>>>>> v3.18
 	cdev = ir->cdev;
 	if (try_module_get(cdev->owner)) {
 		ir->open++;
@@ -511,6 +524,12 @@ int lirc_dev_fop_close(struct inode *inode, struct file *file)
 
 	WARN_ON(mutex_lock_killable(&lirc_dev_lock));
 
+<<<<<<< HEAD
+=======
+	if (ir->d.rdev)
+		rc_close(ir->d.rdev);
+
+>>>>>>> v3.18
 	ir->open--;
 	if (ir->attached) {
 		ir->d.set_use_dec(ir->d.data);
@@ -585,7 +604,11 @@ long lirc_dev_fop_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 
 	switch (cmd) {
 	case LIRC_GET_FEATURES:
+<<<<<<< HEAD
 		result = put_user(ir->d.features, (__u32 *)arg);
+=======
+		result = put_user(ir->d.features, (__u32 __user *)arg);
+>>>>>>> v3.18
 		break;
 	case LIRC_GET_REC_MODE:
 		if (!(ir->d.features & LIRC_CAN_REC_MASK)) {
@@ -595,7 +618,11 @@ long lirc_dev_fop_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 
 		result = put_user(LIRC_REC2MODE
 				  (ir->d.features & LIRC_CAN_REC_MASK),
+<<<<<<< HEAD
 				  (__u32 *)arg);
+=======
+				  (__u32 __user *)arg);
+>>>>>>> v3.18
 		break;
 	case LIRC_SET_REC_MODE:
 		if (!(ir->d.features & LIRC_CAN_REC_MASK)) {
@@ -603,7 +630,11 @@ long lirc_dev_fop_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 			break;
 		}
 
+<<<<<<< HEAD
 		result = get_user(mode, (__u32 *)arg);
+=======
+		result = get_user(mode, (__u32 __user *)arg);
+>>>>>>> v3.18
 		if (!result && !(LIRC_MODE2REC(mode) & ir->d.features))
 			result = -EINVAL;
 		/*
@@ -612,7 +643,11 @@ long lirc_dev_fop_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 		 */
 		break;
 	case LIRC_GET_LENGTH:
+<<<<<<< HEAD
 		result = put_user(ir->d.code_length, (__u32 *)arg);
+=======
+		result = put_user(ir->d.code_length, (__u32 __user *)arg);
+>>>>>>> v3.18
 		break;
 	case LIRC_GET_MIN_TIMEOUT:
 		if (!(ir->d.features & LIRC_CAN_SET_REC_TIMEOUT) ||
@@ -621,7 +656,11 @@ long lirc_dev_fop_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 			break;
 		}
 
+<<<<<<< HEAD
 		result = put_user(ir->d.min_timeout, (__u32 *)arg);
+=======
+		result = put_user(ir->d.min_timeout, (__u32 __user *)arg);
+>>>>>>> v3.18
 		break;
 	case LIRC_GET_MAX_TIMEOUT:
 		if (!(ir->d.features & LIRC_CAN_SET_REC_TIMEOUT) ||
@@ -630,7 +669,11 @@ long lirc_dev_fop_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 			break;
 		}
 
+<<<<<<< HEAD
 		result = put_user(ir->d.max_timeout, (__u32 *)arg);
+=======
+		result = put_user(ir->d.max_timeout, (__u32 __user *)arg);
+>>>>>>> v3.18
 		break;
 	default:
 		result = -EINVAL;
@@ -726,7 +769,11 @@ ssize_t lirc_dev_fop_read(struct file *file,
 			}
 		} else {
 			lirc_buffer_read(ir->buf, buf);
+<<<<<<< HEAD
 			ret = copy_to_user((void *)buffer+written, buf,
+=======
+			ret = copy_to_user((void __user *)buffer+written, buf,
+>>>>>>> v3.18
 					   ir->buf->chunk_size);
 			if (!ret)
 				written += ir->buf->chunk_size;

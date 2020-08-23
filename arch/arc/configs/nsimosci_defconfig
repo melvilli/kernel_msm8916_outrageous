@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 CONFIG_CROSS_COMPILE="arc-elf32-"
+=======
+CONFIG_CROSS_COMPILE="arc-linux-uclibc-"
+>>>>>>> v3.18
 # CONFIG_LOCALVERSION_AUTO is not set
 CONFIG_DEFAULT_HOSTNAME="ARCLinux"
 # CONFIG_SWAP is not set
@@ -21,7 +25,10 @@ CONFIG_MODULES=y
 # CONFIG_IOSCHED_DEADLINE is not set
 # CONFIG_IOSCHED_CFQ is not set
 CONFIG_ARC_PLAT_FPGA_LEGACY=y
+<<<<<<< HEAD
 CONFIG_ARC_BOARD_ML509=y
+=======
+>>>>>>> v3.18
 # CONFIG_ARC_IDE is not set
 # CONFIG_ARCTANGENT_EMAC is not set
 # CONFIG_ARC_HAS_RTSC is not set

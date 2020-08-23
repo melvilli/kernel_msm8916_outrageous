@@ -240,7 +240,11 @@ static int uml_net_start_xmit(struct sk_buff *skb, struct net_device *dev)
 
 	spin_unlock_irqrestore(&lp->lock, flags);
 
+<<<<<<< HEAD
 	dev_kfree_skb(skb);
+=======
+	dev_consume_skb_any(skb);
+>>>>>>> v3.18
 
 	return NETDEV_TX_OK;
 }
@@ -659,10 +663,13 @@ static int __init eth_setup(char *str)
 	}
 
 	new = alloc_bootmem(sizeof(*new));
+<<<<<<< HEAD
 	if (new == NULL) {
 		printk(KERN_ERR "eth_init : alloc_bootmem failed\n");
 		return 1;
 	}
+=======
+>>>>>>> v3.18
 
 	INIT_LIST_HEAD(&new->list);
 	new->index = n;

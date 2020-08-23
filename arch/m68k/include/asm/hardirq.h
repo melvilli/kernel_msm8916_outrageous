@@ -5,6 +5,7 @@
 #include <linux/cache.h>
 #include <asm/irq.h>
 
+<<<<<<< HEAD
 #define HARDIRQ_BITS	8
 
 /*
@@ -16,6 +17,8 @@
 # error HARDIRQ_BITS is too low!
 #endif
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_MMU
 
 static inline void ack_bad_irq(unsigned int irq)

@@ -48,11 +48,23 @@ enum {
 	WL12XX_TCXOCLOCK_33_6	= 7, /* 33.6 MHz */
 };
 
+<<<<<<< HEAD
 struct wl12xx_platform_data {
 	void (*set_power)(bool enable);
 	/* SDIO only: IRQ number if WLAN_IRQ line is used, 0 for SDIO IRQs */
 	int irq;
 	bool use_eeprom;
+=======
+struct wl1251_platform_data {
+	int power_gpio;
+	/* SDIO only: IRQ number if WLAN_IRQ line is used, 0 for SDIO IRQs */
+	int irq;
+	bool use_eeprom;
+};
+
+struct wl12xx_platform_data {
+	int irq;
+>>>>>>> v3.18
 	int board_ref_clock;
 	int board_tcxo_clock;
 	unsigned long platform_quirks;
@@ -68,6 +80,13 @@ int wl12xx_set_platform_data(const struct wl12xx_platform_data *data);
 
 struct wl12xx_platform_data *wl12xx_get_platform_data(void);
 
+<<<<<<< HEAD
+=======
+int wl1251_set_platform_data(const struct wl1251_platform_data *data);
+
+struct wl1251_platform_data *wl1251_get_platform_data(void);
+
+>>>>>>> v3.18
 #else
 
 static inline
@@ -82,6 +101,21 @@ struct wl12xx_platform_data *wl12xx_get_platform_data(void)
 	return ERR_PTR(-ENODATA);
 }
 
+<<<<<<< HEAD
+=======
+static inline
+int wl1251_set_platform_data(const struct wl1251_platform_data *data)
+{
+	return -ENOSYS;
+}
+
+static inline
+struct wl1251_platform_data *wl1251_get_platform_data(void)
+{
+	return ERR_PTR(-ENODATA);
+}
+
+>>>>>>> v3.18
 #endif
 
 #endif

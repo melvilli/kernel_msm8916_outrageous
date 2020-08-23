@@ -24,8 +24,11 @@ struct pci_dev;
 
 extern void pcibios_set_master(struct pci_dev *dev);
 
+<<<<<<< HEAD
 extern void pcibios_penalize_isa_irq(int irq);
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_MMU
 extern void *consistent_alloc(gfp_t gfp, size_t size, dma_addr_t *dma_handle);
 extern void consistent_free(void *vaddr);

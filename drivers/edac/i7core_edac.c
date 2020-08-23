@@ -9,7 +9,11 @@
  * GNU General Public License version 2 only.
  *
  * Copyright (c) 2009-2010 by:
+<<<<<<< HEAD
  *	 Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+ *	 Mauro Carvalho Chehab
+>>>>>>> v3.18
  *
  * Red Hat Inc. http://www.redhat.com
  *
@@ -394,7 +398,11 @@ static const struct pci_id_table pci_dev_table[] = {
 /*
  *	pci_device_id	table for which devices we are looking for
  */
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(i7core_pci_tbl) = {
+=======
+static const struct pci_device_id i7core_pci_tbl[] = {
+>>>>>>> v3.18
 	{PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_X58_HUB_MGMT)},
 	{PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_LYNNFIELD_QPI_LINK0)},
 	{0,}			/* 0 terminated list. */
@@ -704,7 +712,11 @@ static ssize_t i7core_inject_section_store(struct device *dev,
 	if (pvt->inject.enable)
 		disable_inject(mci);
 
+<<<<<<< HEAD
 	rc = strict_strtoul(data, 10, &value);
+=======
+	rc = kstrtoul(data, 10, &value);
+>>>>>>> v3.18
 	if ((rc < 0) || (value > 3))
 		return -EIO;
 
@@ -741,7 +753,11 @@ struct i7core_pvt *pvt = mci->pvt_info;
 	if (pvt->inject.enable)
 		disable_inject(mci);
 
+<<<<<<< HEAD
 	rc = strict_strtoul(data, 10, &value);
+=======
+	rc = kstrtoul(data, 10, &value);
+>>>>>>> v3.18
 	if ((rc < 0) || (value > 7))
 		return -EIO;
 
@@ -781,7 +797,11 @@ static ssize_t i7core_inject_eccmask_store(struct device *dev,
 	if (pvt->inject.enable)
 		disable_inject(mci);
 
+<<<<<<< HEAD
 	rc = strict_strtoul(data, 10, &value);
+=======
+	rc = kstrtoul(data, 10, &value);
+>>>>>>> v3.18
 	if (rc < 0)
 		return -EIO;
 
@@ -830,7 +850,11 @@ static ssize_t i7core_inject_store_##param(			\
 	if (!strcasecmp(data, "any") || !strcasecmp(data, "any\n"))\
 		value = -1;					\
 	else {							\
+<<<<<<< HEAD
 		rc = strict_strtoul(data, 10, &value);		\
+=======
+		rc = kstrtoul(data, 10, &value);		\
+>>>>>>> v3.18
 		if ((rc < 0) || (value >= limit))		\
 			return -EIO;				\
 	}							\
@@ -934,7 +958,11 @@ static ssize_t i7core_inject_enable_store(struct device *dev,
 	if (!pvt->pci_ch[pvt->inject.channel][0])
 		return 0;
 
+<<<<<<< HEAD
 	rc = strict_strtoul(data, 10, &enable);
+=======
+	rc = kstrtoul(data, 10, &enable);
+>>>>>>> v3.18
 	if ((rc < 0))
 		return 0;
 
@@ -1708,7 +1736,11 @@ static void i7core_mce_output_error(struct mem_ctl_info *mci,
 				    const struct mce *m)
 {
 	struct i7core_pvt *pvt = mci->pvt_info;
+<<<<<<< HEAD
 	char *type, *optype, *err;
+=======
+	char *optype, *err;
+>>>>>>> v3.18
 	enum hw_event_mc_err_type tp_event;
 	unsigned long error = m->status & 0x1ff0000l;
 	bool uncorrected_error = m->mcgstatus & 1ll << 61;
@@ -1721,6 +1753,7 @@ static void i7core_mce_output_error(struct mem_ctl_info *mci,
 	u32 errnum = find_first_bit(&error, 32);
 
 	if (uncorrected_error) {
+<<<<<<< HEAD
 		if (ripv) {
 			type = "FATAL";
 			tp_event = HW_EVENT_ERR_FATAL;
@@ -1730,6 +1763,13 @@ static void i7core_mce_output_error(struct mem_ctl_info *mci,
 		}
 	} else {
 		type = "CORRECTED";
+=======
+		if (ripv)
+			tp_event = HW_EVENT_ERR_FATAL;
+		else
+			tp_event = HW_EVENT_ERR_UNCORRECTED;
+	} else {
+>>>>>>> v3.18
 		tp_event = HW_EVENT_ERR_CORRECTED;
 	}
 
@@ -1878,7 +1918,11 @@ static int i7core_mce_check_error(struct notifier_block *nb, unsigned long val,
 
 	i7_dev = get_i7core_dev(mce->socketid);
 	if (!i7_dev)
+<<<<<<< HEAD
 		return NOTIFY_DONE;
+=======
+		return NOTIFY_BAD;
+>>>>>>> v3.18
 
 	mci = i7_dev->mci;
 	pvt = mci->pvt_info;
@@ -2461,7 +2505,11 @@ module_init(i7core_init);
 module_exit(i7core_exit);
 
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
 MODULE_AUTHOR("Mauro Carvalho Chehab <mchehab@redhat.com>");
+=======
+MODULE_AUTHOR("Mauro Carvalho Chehab");
+>>>>>>> v3.18
 MODULE_AUTHOR("Red Hat Inc. (http://www.redhat.com)");
 MODULE_DESCRIPTION("MC Driver for Intel i7 Core memory controllers - "
 		   I7CORE_REVISION);

@@ -514,14 +514,24 @@ static int snd_cmi8330_resume(struct snd_card *card)
 
 #define PFX	"cmi8330: "
 
+<<<<<<< HEAD
 static int snd_cmi8330_card_new(int dev, struct snd_card **cardp)
+=======
+static int snd_cmi8330_card_new(struct device *pdev, int dev,
+				struct snd_card **cardp)
+>>>>>>> v3.18
 {
 	struct snd_card *card;
 	struct snd_cmi8330 *acard;
 	int err;
 
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE,
 			      sizeof(struct snd_cmi8330), &card);
+=======
+	err = snd_card_new(pdev, index[dev], id[dev], THIS_MODULE,
+			   sizeof(struct snd_cmi8330), &card);
+>>>>>>> v3.18
 	if (err < 0) {
 		snd_printk(KERN_ERR PFX "could not get a new card\n");
 		return err;
@@ -635,10 +645,16 @@ static int snd_cmi8330_isa_probe(struct device *pdev,
 	struct snd_card *card;
 	int err;
 
+<<<<<<< HEAD
 	err = snd_cmi8330_card_new(dev, &card);
 	if (err < 0)
 		return err;
 	snd_card_set_dev(card, pdev);
+=======
+	err = snd_cmi8330_card_new(pdev, dev, &card);
+	if (err < 0)
+		return err;
+>>>>>>> v3.18
 	if ((err = snd_cmi8330_probe(card, dev)) < 0) {
 		snd_card_free(card);
 		return err;
@@ -651,7 +667,10 @@ static int snd_cmi8330_isa_remove(struct device *devptr,
 				  unsigned int dev)
 {
 	snd_card_free(dev_get_drvdata(devptr));
+<<<<<<< HEAD
 	dev_set_drvdata(devptr, NULL);
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -699,7 +718,11 @@ static int snd_cmi8330_pnp_detect(struct pnp_card_link *pcard,
 	if (dev >= SNDRV_CARDS)
 		return -ENODEV;
 			       
+<<<<<<< HEAD
 	res = snd_cmi8330_card_new(dev, &card);
+=======
+	res = snd_cmi8330_card_new(&pcard->card->dev, dev, &card);
+>>>>>>> v3.18
 	if (res < 0)
 		return res;
 	if ((res = snd_cmi8330_pnp(dev, card->private_data, pcard, pid)) < 0) {
@@ -707,7 +730,10 @@ static int snd_cmi8330_pnp_detect(struct pnp_card_link *pcard,
 		snd_card_free(card);
 		return res;
 	}
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pcard->card->dev);
+=======
+>>>>>>> v3.18
 	if ((res = snd_cmi8330_probe(card, dev)) < 0) {
 		snd_card_free(card);
 		return res;

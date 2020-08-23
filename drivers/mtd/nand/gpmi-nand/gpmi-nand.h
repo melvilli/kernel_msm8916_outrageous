@@ -26,8 +26,11 @@
 struct resources {
 	void __iomem  *gpmi_regs;
 	void __iomem  *bch_regs;
+<<<<<<< HEAD
 	unsigned int  bch_low_interrupt;
 	unsigned int  bch_high_interrupt;
+=======
+>>>>>>> v3.18
 	unsigned int  dma_low_channel;
 	unsigned int  dma_high_channel;
 	struct clk    *clock[GPMI_CLK_MAX];
@@ -121,11 +124,31 @@ struct nand_timing {
 	int8_t  tRHOH_in_ns;
 };
 
+<<<<<<< HEAD
+=======
+enum gpmi_type {
+	IS_MX23,
+	IS_MX28,
+	IS_MX6Q,
+	IS_MX6SX
+};
+
+struct gpmi_devdata {
+	enum gpmi_type type;
+	int bch_max_ecc_strength;
+	int max_chain_delay; /* See the async EDO mode */
+};
+
+>>>>>>> v3.18
 struct gpmi_nand_data {
 	/* flags */
 #define GPMI_ASYNC_EDO_ENABLED	(1 << 0)
 #define GPMI_TIMING_INIT_OK	(1 << 1)
 	int			flags;
+<<<<<<< HEAD
+=======
+	const struct gpmi_devdata *devdata;
+>>>>>>> v3.18
 
 	/* System Interface */
 	struct device		*dev;
@@ -283,6 +306,7 @@ extern int gpmi_read_page(struct gpmi_nand_data *,
 #define STATUS_ERASED		0xff
 #define STATUS_UNCORRECTABLE	0xfe
 
+<<<<<<< HEAD
 /* BCH's bit correction capability. */
 #define MXS_ECC_STRENGTH_MAX	20	/* mx23 and mx28 */
 #define MX6_ECC_STRENGTH_MAX	40
@@ -294,4 +318,13 @@ extern int gpmi_read_page(struct gpmi_nand_data *,
 #define GPMI_IS_MX23(x)		((x)->pdev->id_entry->driver_data == IS_MX23)
 #define GPMI_IS_MX28(x)		((x)->pdev->id_entry->driver_data == IS_MX28)
 #define GPMI_IS_MX6Q(x)		((x)->pdev->id_entry->driver_data == IS_MX6Q)
+=======
+/* Use the devdata to distinguish different Archs. */
+#define GPMI_IS_MX23(x)		((x)->devdata->type == IS_MX23)
+#define GPMI_IS_MX28(x)		((x)->devdata->type == IS_MX28)
+#define GPMI_IS_MX6Q(x)		((x)->devdata->type == IS_MX6Q)
+#define GPMI_IS_MX6SX(x)	((x)->devdata->type == IS_MX6SX)
+
+#define GPMI_IS_MX6(x)		(GPMI_IS_MX6Q(x) || GPMI_IS_MX6SX(x))
+>>>>>>> v3.18
 #endif

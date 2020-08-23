@@ -57,18 +57,42 @@ static __inline__ __wsum csum_and_copy_to_user
 }
 #endif
 
+<<<<<<< HEAD
+=======
+#ifndef HAVE_ARCH_CSUM_ADD
+>>>>>>> v3.18
 static inline __wsum csum_add(__wsum csum, __wsum addend)
 {
 	u32 res = (__force u32)csum;
 	res += (__force u32)addend;
 	return (__force __wsum)(res + (res < (__force u32)addend));
 }
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 
 static inline __wsum csum_sub(__wsum csum, __wsum addend)
 {
 	return csum_add(csum, ~addend);
 }
 
+<<<<<<< HEAD
+=======
+static inline __sum16 csum16_add(__sum16 csum, __be16 addend)
+{
+	u16 res = (__force u16)csum;
+
+	res += (__force u16)addend;
+	return (__force __sum16)(res + (res < (__force u16)addend));
+}
+
+static inline __sum16 csum16_sub(__sum16 csum, __be16 addend)
+{
+	return csum16_add(csum, ~addend);
+}
+
+>>>>>>> v3.18
 static inline __wsum
 csum_block_add(__wsum csum, __wsum csum2, int offset)
 {
@@ -79,6 +103,15 @@ csum_block_add(__wsum csum, __wsum csum2, int offset)
 }
 
 static inline __wsum
+<<<<<<< HEAD
+=======
+csum_block_add_ext(__wsum csum, __wsum csum2, int offset, int len)
+{
+	return csum_block_add(csum, csum2, offset);
+}
+
+static inline __wsum
+>>>>>>> v3.18
 csum_block_sub(__wsum csum, __wsum csum2, int offset)
 {
 	u32 sum = (__force u32)csum2;
@@ -92,10 +125,19 @@ static inline __wsum csum_unfold(__sum16 n)
 	return (__force __wsum)n;
 }
 
+<<<<<<< HEAD
+=======
+static inline __wsum csum_partial_ext(const void *buff, int len, __wsum sum)
+{
+	return csum_partial(buff, len, sum);
+}
+
+>>>>>>> v3.18
 #define CSUM_MANGLED_0 ((__force __sum16)0xffff)
 
 static inline void csum_replace4(__sum16 *sum, __be32 from, __be32 to)
 {
+<<<<<<< HEAD
 	__be32 diff[] = { ~from, to };
 
 	*sum = csum_fold(csum_partial(diff, sizeof(diff), ~csum_unfold(*sum)));
@@ -112,6 +154,28 @@ extern void inet_proto_csum_replace4(__sum16 *sum, struct sk_buff *skb,
 extern void inet_proto_csum_replace16(__sum16 *sum, struct sk_buff *skb,
 				      const __be32 *from, const __be32 *to,
 				      int pseudohdr);
+=======
+	*sum = csum_fold(csum_add(csum_sub(~csum_unfold(*sum), from), to));
+}
+
+/* Implements RFC 1624 (Incremental Internet Checksum)
+ * 3. Discussion states :
+ *     HC' = ~(~HC + ~m + m')
+ *  m : old value of a 16bit field
+ *  m' : new value of a 16bit field
+ */
+static inline void csum_replace2(__sum16 *sum, __be16 old, __be16 new)
+{
+	*sum = ~csum16_add(csum16_sub(~(*sum), old), new);
+}
+
+struct sk_buff;
+void inet_proto_csum_replace4(__sum16 *sum, struct sk_buff *skb,
+			      __be32 from, __be32 to, int pseudohdr);
+void inet_proto_csum_replace16(__sum16 *sum, struct sk_buff *skb,
+			       const __be32 *from, const __be32 *to,
+			       int pseudohdr);
+>>>>>>> v3.18
 
 static inline void inet_proto_csum_replace2(__sum16 *sum, struct sk_buff *skb,
 					    __be16 from, __be16 to,

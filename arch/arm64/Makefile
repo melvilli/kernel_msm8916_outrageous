@@ -30,19 +30,31 @@ AS		+= -EL
 LD		+= -EL
 endif
 
+<<<<<<< HEAD
 comma = ,
 
+=======
+>>>>>>> v3.18
 CHECKFLAGS	+= -D__aarch64__
 
 # Default value
 head-y		:= arch/arm64/kernel/head.o
 
 # The byte offset of the kernel image in RAM from the start of RAM.
+<<<<<<< HEAD
 TEXT_OFFSET := 0x00080000
+=======
+ifeq ($(CONFIG_ARM64_RANDOMIZE_TEXT_OFFSET), y)
+TEXT_OFFSET := $(shell awk 'BEGIN {srand(); printf "0x%03x000\n", int(512 * rand())}')
+else
+TEXT_OFFSET := 0x00080000
+endif
+>>>>>>> v3.18
 
 export	TEXT_OFFSET GZFLAGS
 
 core-y		+= arch/arm64/kernel/ arch/arm64/mm/
+<<<<<<< HEAD
 core-$(CONFIG_XEN)		+= arch/arm64/xen/
 core-$(CONFIG_KVM) += arch/arm64/kvm/
 core-$(CONFIG_CRYPTO) += arch/arm64/crypto/
@@ -56,6 +68,18 @@ else
 KBUILD_IMAGE	:= Image.gz
 endif
 
+=======
+core-$(CONFIG_NET) += arch/arm64/net/
+core-$(CONFIG_KVM) += arch/arm64/kvm/
+core-$(CONFIG_XEN) += arch/arm64/xen/
+core-$(CONFIG_CRYPTO) += arch/arm64/crypto/
+libs-y		:= arch/arm64/lib/ $(libs-y)
+libs-y		+= $(LIBGCC)
+libs-$(CONFIG_EFI_STUB) += drivers/firmware/efi/libstub/
+
+# Default target when executing plain make
+KBUILD_IMAGE	:= Image.gz
+>>>>>>> v3.18
 KBUILD_DTBS	:= dtbs
 
 all:	$(KBUILD_IMAGE) $(KBUILD_DTBS)
@@ -73,15 +97,21 @@ zinstall install: vmlinux
 
 dtbs: scripts
 	$(Q)$(MAKE) $(build)=$(boot)/dts dtbs
+<<<<<<< HEAD
 	$(Q)$(MAKE) $(build)=$(boot)/dts/qcom dtbs
+=======
+>>>>>>> v3.18
 
 PHONY += vdso_install
 vdso_install:
 	$(Q)$(MAKE) $(build)=arch/arm64/kernel/vdso $@
 
+<<<<<<< HEAD
 Image-dtb Image.gz-dtb: vmlinux scripts dtbs
 	$(Q)$(MAKE) $(build)=$(boot) $(boot)/$@
 
+=======
+>>>>>>> v3.18
 # We use MRPROPER_FILES and CLEAN_FILES now
 archclean:
 	$(Q)$(MAKE) $(clean)=$(boot)

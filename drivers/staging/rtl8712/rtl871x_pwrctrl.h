@@ -107,8 +107,13 @@ struct	pwrctrl_priv {
 	uint ImrContent;	/* used to store original imr. */
 	uint bSleep; /* sleep -> active is different from active -> sleep. */
 
+<<<<<<< HEAD
 	_workitem SetPSModeWorkItem;
 	_workitem rpwm_workitem;
+=======
+	struct work_struct SetPSModeWorkItem;
+	struct work_struct rpwm_workitem;
+>>>>>>> v3.18
 	struct timer_list rpwm_check_timer;
 	u8	rpwm_retry;
 	uint	bSetPSModeWorkItemInProgress;

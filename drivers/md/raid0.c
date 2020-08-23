@@ -1,10 +1,17 @@
 /*
    raid0.c : Multiple Devices driver for Linux
+<<<<<<< HEAD
              Copyright (C) 1994-96 Marc ZYNGIER
 	     <zyngier@ufr-info-p7.ibp.fr> or
 	     <maz@gloups.fdn.fr>
              Copyright (C) 1999, 2000 Ingo Molnar, Red Hat
 
+=======
+	     Copyright (C) 1994-96 Marc ZYNGIER
+	     <zyngier@ufr-info-p7.ibp.fr> or
+	     <maz@gloups.fdn.fr>
+	     Copyright (C) 1999, 2000 Ingo Molnar, Red Hat
+>>>>>>> v3.18
 
    RAID-0 management functions.
 
@@ -12,10 +19,17 @@
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2, or (at your option)
    any later version.
+<<<<<<< HEAD
    
    You should have received a copy of the GNU General Public License
    (for example /usr/src/linux/COPYING); if not, write to the Free
    Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  
+=======
+
+   You should have received a copy of the GNU General Public License
+   (for example /usr/src/linux/COPYING); if not, write to the Free
+   Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+>>>>>>> v3.18
 */
 
 #include <linux/blkdev.h>
@@ -501,10 +515,18 @@ static inline int is_io_in_chunk_boundary(struct mddev *mddev,
 			unsigned int chunk_sects, struct bio *bio)
 {
 	if (likely(is_power_of_2(chunk_sects))) {
+<<<<<<< HEAD
 		return chunk_sects >= ((bio->bi_sector & (chunk_sects-1))
 					+ bio_sectors(bio));
 	} else{
 		sector_t sector = bio->bi_sector;
+=======
+		return chunk_sects >=
+			((bio->bi_iter.bi_sector & (chunk_sects-1))
+					+ bio_sectors(bio));
+	} else{
+		sector_t sector = bio->bi_iter.bi_sector;
+>>>>>>> v3.18
 		return chunk_sects >= (sector_div(sector, chunk_sects)
 						+ bio_sectors(bio));
 	}
@@ -512,16 +534,23 @@ static inline int is_io_in_chunk_boundary(struct mddev *mddev,
 
 static void raid0_make_request(struct mddev *mddev, struct bio *bio)
 {
+<<<<<<< HEAD
 	unsigned int chunk_sects;
 	sector_t sector_offset;
 	struct strip_zone *zone;
 	struct md_rdev *tmp_dev;
+=======
+	struct strip_zone *zone;
+	struct md_rdev *tmp_dev;
+	struct bio *split;
+>>>>>>> v3.18
 
 	if (unlikely(bio->bi_rw & REQ_FLUSH)) {
 		md_flush_request(mddev, bio);
 		return;
 	}
 
+<<<<<<< HEAD
 	chunk_sects = mddev->chunk_sectors;
 	if (unlikely(!is_io_in_chunk_boundary(mddev, chunk_sects, bio))) {
 		sector_t sector = bio->bi_sector;
@@ -570,6 +599,37 @@ bad_map:
 
 	bio_io_error(bio);
 	return;
+=======
+	do {
+		sector_t sector = bio->bi_iter.bi_sector;
+		unsigned chunk_sects = mddev->chunk_sectors;
+
+		unsigned sectors = chunk_sects -
+			(likely(is_power_of_2(chunk_sects))
+			 ? (sector & (chunk_sects-1))
+			 : sector_div(sector, chunk_sects));
+
+		if (sectors < bio_sectors(bio)) {
+			split = bio_split(bio, sectors, GFP_NOIO, fs_bio_set);
+			bio_chain(split, bio);
+		} else {
+			split = bio;
+		}
+
+		zone = find_zone(mddev->private, &sector);
+		tmp_dev = map_sector(mddev, zone, sector, &sector);
+		split->bi_bdev = tmp_dev->bdev;
+		split->bi_iter.bi_sector = sector + zone->dev_start +
+			tmp_dev->data_offset;
+
+		if (unlikely((split->bi_rw & REQ_DISCARD) &&
+			 !blk_queue_discard(bdev_get_queue(split->bi_bdev)))) {
+			/* Just ignore it */
+			bio_endio(split, 0);
+		} else
+			generic_make_request(split);
+	} while (split != bio);
+>>>>>>> v3.18
 }
 
 static void raid0_status(struct seq_file *seq, struct mddev *mddev)
@@ -597,6 +657,10 @@ static void *raid0_takeover_raid45(struct mddev *mddev)
 			       mdname(mddev));
 			return ERR_PTR(-EINVAL);
 		}
+<<<<<<< HEAD
+=======
+		rdev->sectors = mddev->dev_sectors;
+>>>>>>> v3.18
 	}
 
 	/* Set new parameters */
@@ -703,6 +767,15 @@ static void *raid0_takeover(struct mddev *mddev)
 	 *  raid10 - assuming we have all necessary active disks
 	 *  raid1 - with (N -1) mirror drives faulty
 	 */
+<<<<<<< HEAD
+=======
+
+	if (mddev->bitmap) {
+		printk(KERN_ERR "md/raid0: %s: cannot takeover array with bitmap\n",
+		       mdname(mddev));
+		return ERR_PTR(-EBUSY);
+	}
+>>>>>>> v3.18
 	if (mddev->level == 4)
 		return raid0_takeover_raid45(mddev);
 

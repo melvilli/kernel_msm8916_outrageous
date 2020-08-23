@@ -214,13 +214,21 @@ $local_regex = "^[0-9a-fA-F]+\\s+t\\s+(\\S+)";
 $weak_regex = "^[0-9a-fA-F]+\\s+([wW])\\s+(\\S+)";
 $section_regex = "Disassembly of section\\s+(\\S+):";
 $function_regex = "^([0-9a-fA-F]+)\\s+<(.*?)>:";
+<<<<<<< HEAD
 $mcount_regex = "^\\s*([0-9a-fA-F]+):.*\\smcount\$";
+=======
+$mcount_regex = "^\\s*([0-9a-fA-F]+):.*\\s(mcount|__fentry__)\$";
+>>>>>>> v3.18
 $section_type = '@progbits';
 $mcount_adjust = 0;
 $type = ".long";
 
 if ($arch eq "x86_64") {
+<<<<<<< HEAD
     $mcount_regex = "^\\s*([0-9a-fA-F]+):.*\\smcount([+-]0x[0-9a-zA-Z]+)?\$";
+=======
+    $mcount_regex = "^\\s*([0-9a-fA-F]+):.*\\s(mcount|__fentry__)([+-]0x[0-9a-zA-Z]+)?\$";
+>>>>>>> v3.18
     $type = ".quad";
     $alignment = 8;
     $mcount_adjust = -1;
@@ -241,6 +249,7 @@ if ($arch eq "x86_64") {
     $objcopy .= " -O elf32-i386";
     $cc .= " -m32";
 
+<<<<<<< HEAD
 } elsif ($arch eq "s390" && $bits == 32) {
     $mcount_regex = "^\\s*([0-9a-fA-F]+):\\s*R_390_32\\s+_mcount\$";
     $mcount_adjust = -4;
@@ -248,6 +257,8 @@ if ($arch eq "x86_64") {
     $ld .= " -m elf_s390";
     $cc .= " -m31";
 
+=======
+>>>>>>> v3.18
 } elsif ($arch eq "s390" && $bits == 64) {
     $mcount_regex = "^\\s*([0-9a-fA-F]+):\\s*R_390_(PC|PLT)32DBL\\s+_mcount\\+0x2\$";
     $mcount_adjust = -8;
@@ -262,11 +273,19 @@ if ($arch eq "x86_64") {
     # force flags for this arch
     $ld .= " -m shlelf_linux";
     $objcopy .= " -O elf32-sh-linux";
+<<<<<<< HEAD
 
 } elsif ($arch eq "powerpc") {
     $local_regex = "^[0-9a-fA-F]+\\s+t\\s+(\\.?\\S+)";
     # See comment in the sparc64 section for why we use '\w'.
     $function_regex = "^([0-9a-fA-F]+)\\s+<(\\.?\\w*?)>:";
+=======
+    $cc .= " -m32";
+
+} elsif ($arch eq "powerpc") {
+    $local_regex = "^[0-9a-fA-F]+\\s+t\\s+(\\.?\\S+)";
+    $function_regex = "^([0-9a-fA-F]+)\\s+<(\\.?.*?)>:";
+>>>>>>> v3.18
     $mcount_regex = "^\\s*([0-9a-fA-F]+):.*\\s\\.?_mcount\$";
 
     if ($bits == 64) {
@@ -369,6 +388,14 @@ if ($arch eq "x86_64") {
 } elsif ($arch eq "blackfin") {
     $mcount_regex = "^\\s*([0-9a-fA-F]+):.*\\s__mcount\$";
     $mcount_adjust = -4;
+<<<<<<< HEAD
+=======
+} elsif ($arch eq "tilegx" || $arch eq "tile") {
+    # Default to the newer TILE-Gx architecture if only "tile" is given.
+    $mcount_regex = "^\\s*([0-9a-fA-F]+):.*\\s__mcount\$";
+    $type = ".quad";
+    $alignment = 8;
+>>>>>>> v3.18
 } else {
     die "Arch $arch is not supported with CONFIG_FTRACE_MCOUNT_RECORD";
 }

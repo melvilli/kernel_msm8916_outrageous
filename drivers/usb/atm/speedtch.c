@@ -27,7 +27,10 @@
 #include <linux/device.h>
 #include <linux/errno.h>
 #include <linux/firmware.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/moduleparam.h>
@@ -888,7 +891,11 @@ static int speedtch_bind(struct usbatm_data *usbatm,
 		usb_fill_int_urb(instance->int_urb, usb_dev,
 				 usb_rcvintpipe(usb_dev, ENDPOINT_INT),
 				 instance->int_data, sizeof(instance->int_data),
+<<<<<<< HEAD
 				 speedtch_handle_int, instance, 50);
+=======
+				 speedtch_handle_int, instance, 16);
+>>>>>>> v3.18
 	else
 		usb_dbg(usbatm, "%s: no memory for interrupt urb!\n", __func__);
 

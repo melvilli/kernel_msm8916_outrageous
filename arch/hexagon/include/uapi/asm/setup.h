@@ -19,7 +19,16 @@
 #ifndef _ASM_SETUP_H
 #define _ASM_SETUP_H
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+#ifdef __KERNEL__
+#include <linux/init.h>
+#else
+#define __init
+#endif
+
+>>>>>>> v3.18
 #include <asm-generic/setup.h>
 
 extern char external_cmdline_buffer;

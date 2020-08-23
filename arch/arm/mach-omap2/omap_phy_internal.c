@@ -57,7 +57,11 @@ static int __init omap4430_phy_power_down(void)
 	}
 
 	/* Power down the phy */
+<<<<<<< HEAD
 	__raw_writel(PHY_PD, ctrl_base + CONTROL_DEV_CONF);
+=======
+	writel_relaxed(PHY_PD, ctrl_base + CONTROL_DEV_CONF);
+>>>>>>> v3.18
 
 	iounmap(ctrl_base);
 
@@ -162,7 +166,11 @@ void ti81xx_musb_phy_power(u8 on)
 		return;
 	}
 
+<<<<<<< HEAD
 	usbphycfg = __raw_readl(scm_base + USBCTRL0);
+=======
+	usbphycfg = readl_relaxed(scm_base + USBCTRL0);
+>>>>>>> v3.18
 
 	if (on) {
 		if (cpu_is_ti816x()) {
@@ -181,7 +189,11 @@ void ti81xx_musb_phy_power(u8 on)
 			usbphycfg |= USBPHY_CM_PWRDN | USBPHY_OTG_PWRDN;
 
 	}
+<<<<<<< HEAD
 	__raw_writel(usbphycfg, scm_base + USBCTRL0);
+=======
+	writel_relaxed(usbphycfg, scm_base + USBCTRL0);
+>>>>>>> v3.18
 
 	iounmap(scm_base);
 }

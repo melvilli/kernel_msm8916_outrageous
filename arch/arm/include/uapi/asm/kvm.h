@@ -25,6 +25,10 @@
 
 #define __KVM_HAVE_GUEST_DEBUG
 #define __KVM_HAVE_IRQ_LINE
+<<<<<<< HEAD
+=======
+#define __KVM_HAVE_READONLY_MEM
+>>>>>>> v3.18
 
 #define KVM_REG_SIZE(id)						\
 	(1U << (((id) & KVM_REG_SIZE_MASK) >> KVM_REG_SIZE_SHIFT))
@@ -64,7 +68,12 @@ struct kvm_regs {
 
 /* Supported Processor Types */
 #define KVM_ARM_TARGET_CORTEX_A15	0
+<<<<<<< HEAD
 #define KVM_ARM_NUM_TARGETS		1
+=======
+#define KVM_ARM_TARGET_CORTEX_A7	1
+#define KVM_ARM_NUM_TARGETS		2
+>>>>>>> v3.18
 
 /* KVM_ARM_SET_DEVICE_ADDR ioctl id encoding */
 #define KVM_ARM_DEVICE_TYPE_SHIFT	0
@@ -164,6 +173,18 @@ struct kvm_arch_memory_slot {
 #define KVM_REG_ARM_VFP_FPINST		0x1009
 #define KVM_REG_ARM_VFP_FPINST2		0x100A
 
+<<<<<<< HEAD
+=======
+/* Device Control API: ARM VGIC */
+#define KVM_DEV_ARM_VGIC_GRP_ADDR	0
+#define KVM_DEV_ARM_VGIC_GRP_DIST_REGS	1
+#define KVM_DEV_ARM_VGIC_GRP_CPU_REGS	2
+#define   KVM_DEV_ARM_VGIC_CPUID_SHIFT	32
+#define   KVM_DEV_ARM_VGIC_CPUID_MASK	(0xffULL << KVM_DEV_ARM_VGIC_CPUID_SHIFT)
+#define   KVM_DEV_ARM_VGIC_OFFSET_SHIFT	0
+#define   KVM_DEV_ARM_VGIC_OFFSET_MASK	(0xffffffffULL << KVM_DEV_ARM_VGIC_OFFSET_SHIFT)
+#define KVM_DEV_ARM_VGIC_GRP_NR_IRQS	3
+>>>>>>> v3.18
 
 /* KVM_IRQ_LINE irq field index values */
 #define KVM_ARM_IRQ_TYPE_SHIFT		24

@@ -72,6 +72,10 @@ int ocrdma_query_qp(struct ib_qp *,
 		    struct ib_qp_attr *qp_attr,
 		    int qp_attr_mask, struct ib_qp_init_attr *);
 int ocrdma_destroy_qp(struct ib_qp *);
+<<<<<<< HEAD
+=======
+void ocrdma_del_flush_qp(struct ocrdma_qp *qp);
+>>>>>>> v3.18
 
 struct ib_srq *ocrdma_create_srq(struct ib_pd *, struct ib_srq_init_attr *,
 				 struct ib_udata *);
@@ -89,5 +93,13 @@ struct ib_mr *ocrdma_reg_kernel_mr(struct ib_pd *,
 				   int num_phys_buf, int acc, u64 *iova_start);
 struct ib_mr *ocrdma_reg_user_mr(struct ib_pd *, u64 start, u64 length,
 				 u64 virt, int acc, struct ib_udata *);
+<<<<<<< HEAD
+=======
+struct ib_mr *ocrdma_alloc_frmr(struct ib_pd *pd, int max_page_list_len);
+struct ib_fast_reg_page_list *ocrdma_alloc_frmr_page_list(struct ib_device
+							*ibdev,
+							int page_list_len);
+void ocrdma_free_frmr_page_list(struct ib_fast_reg_page_list *page_list);
+>>>>>>> v3.18
 
 #endif				/* __OCRDMA_VERBS_H__ */

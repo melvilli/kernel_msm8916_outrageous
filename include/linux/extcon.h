@@ -51,10 +51,17 @@
 enum extcon_cable_name {
 	EXTCON_USB = 0,
 	EXTCON_USB_HOST,
+<<<<<<< HEAD
 	EXTCON_TA, /* Travel Adaptor */
 	EXTCON_FAST_CHARGER,
 	EXTCON_SLOW_CHARGER,
 	EXTCON_CHARGE_DOWNSTREAM, /* Charging an external device */
+=======
+	EXTCON_TA,			/* Travel Adaptor */
+	EXTCON_FAST_CHARGER,
+	EXTCON_SLOW_CHARGER,
+	EXTCON_CHARGE_DOWNSTREAM,	/* Charging an external device */
+>>>>>>> v3.18
 	EXTCON_HDMI,
 	EXTCON_MHL,
 	EXTCON_DVI,
@@ -76,8 +83,13 @@ struct extcon_cable;
 
 /**
  * struct extcon_dev - An extcon device represents one external connector.
+<<<<<<< HEAD
  * @name:	The name of this extcon device. Parent device name is used
  *		if NULL.
+=======
+ * @name:		The name of this extcon device. Parent device name is
+ *			used if NULL.
+>>>>>>> v3.18
  * @supported_cable:	Array of supported cable names ending with NULL.
  *			If supported_cable is NULL, cable name related APIs
  *			are disabled.
@@ -89,6 +101,7 @@ struct extcon_cable;
  *			be attached simulataneously. {0x7, 0} is equivalent to
  *			{0x3, 0x6, 0x5, 0}. If it is {0xFFFFFFFF, 0}, there
  *			can be no simultaneous connections.
+<<<<<<< HEAD
  * @print_name:	An optional callback to override the method to print the
  *		name of the extcon device.
  * @print_state:	An optional callback to override the method to print the
@@ -99,11 +112,27 @@ struct extcon_cable;
  * @nh:	Notifier for the state change events from this extcon
  * @entry:	To support list of extcon devices so that users can search
  *		for extcon devices based on the extcon name.
+=======
+ * @print_name:		An optional callback to override the method to print the
+ *			name of the extcon device.
+ * @print_state:	An optional callback to override the method to print the
+ *			status of the extcon device.
+ * @dev:		Device of this extcon.
+ * @state:		Attach/detach state of this extcon. Do not provide at
+ *			register-time.
+ * @nh:			Notifier for the state change events from this extcon
+ * @entry:		To support list of extcon devices so that users can search
+ *			for extcon devices based on the extcon name.
+>>>>>>> v3.18
  * @lock:
  * @max_supported:	Internal value to store the number of cables.
  * @extcon_dev_type:	Device_type struct to provide attribute_groups
  *			customized for each extcon device.
+<<<<<<< HEAD
  * @cables:	Sysfs subdirectories. Each represents one cable.
+=======
+ * @cables:		Sysfs subdirectories. Each represents one cable.
+>>>>>>> v3.18
  *
  * In most cases, users only need to provide "User initializing data" of
  * this struct when registering an extcon. In some exceptional cases,
@@ -111,6 +140,7 @@ struct extcon_cable;
  * are overwritten by register function.
  */
 struct extcon_dev {
+<<<<<<< HEAD
 	/* --- Optional user initializing data --- */
 	const char	*name;
 	const char **supported_cable;
@@ -127,10 +157,32 @@ struct extcon_dev {
 	struct list_head entry;
 	spinlock_t lock; /* could be called by irq handler */
 	int max_supported;
+=======
+	/* Optional user initializing data */
+	const char *name;
+	const char **supported_cable;
+	const u32 *mutually_exclusive;
+
+	/* Optional callbacks to override class functions */
+	ssize_t	(*print_name)(struct extcon_dev *edev, char *buf);
+	ssize_t	(*print_state)(struct extcon_dev *edev, char *buf);
+
+	/* Internal data. Please do not set. */
+	struct device dev;
+	struct raw_notifier_head nh;
+	struct list_head entry;
+	int max_supported;
+	spinlock_t lock;	/* could be called by irq handler */
+	u32 state;
+>>>>>>> v3.18
 
 	/* /sys/class/extcon/.../cable.n/... */
 	struct device_type extcon_dev_type;
 	struct extcon_cable *cables;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	/* /sys/class/extcon/.../mutually_exclusive/... */
 	struct attribute_group attr_g_muex;
 	struct attribute **attrs_muex;
@@ -138,6 +190,7 @@ struct extcon_dev {
 };
 
 /**
+<<<<<<< HEAD
  * struct extcon_cable	- An internal data for each cable of extcon device.
  * @edev:	The extcon device
  * @cable_index:	Index of this cable in the edev
@@ -145,6 +198,15 @@ struct extcon_dev {
  * @attr_name:	"name" sysfs entry
  * @attr_state:	"state" sysfs entry
  * @attrs:	Array pointing to attr_name and attr_state for attr_g
+=======
+ * struct extcon_cable - An internal data for each cable of extcon device.
+ * @edev:		The extcon device
+ * @cable_index:	Index of this cable in the edev
+ * @attr_g:		Attribute group for the cable
+ * @attr_name:		"name" sysfs entry
+ * @attr_state:		"state" sysfs entry
+ * @attrs:		Array pointing to attr_name and attr_state for attr_g
+>>>>>>> v3.18
  */
 struct extcon_cable {
 	struct extcon_dev *edev;
@@ -159,11 +221,21 @@ struct extcon_cable {
 
 /**
  * struct extcon_specific_cable_nb - An internal data for
+<<<<<<< HEAD
  *				extcon_register_interest().
  * @internal_nb:	a notifier block bridging extcon notifier and cable notifier.
  * @user_nb:	user provided notifier block for events from a specific cable.
  * @cable_index:	the target cable.
  * @edev:	the target extcon device.
+=======
+ *				     extcon_register_interest().
+ * @internal_nb:	A notifier block bridging extcon notifier
+ *			and cable notifier.
+ * @user_nb:		user provided notifier block for events from
+ *			a specific cable.
+ * @cable_index:	the target cable.
+ * @edev:		the target extcon device.
+>>>>>>> v3.18
  * @previous_value:	the saved previous event value.
  */
 struct extcon_specific_cable_nb {
@@ -180,11 +252,32 @@ struct extcon_specific_cable_nb {
  * Following APIs are for notifiers or configurations.
  * Notifiers are the external port and connection devices.
  */
+<<<<<<< HEAD
 extern int extcon_dev_register(struct extcon_dev *edev, struct device *dev);
 extern void extcon_dev_unregister(struct extcon_dev *edev);
 extern struct extcon_dev *extcon_get_extcon_dev(const char *extcon_name);
 
 /*
+=======
+extern int extcon_dev_register(struct extcon_dev *edev);
+extern void extcon_dev_unregister(struct extcon_dev *edev);
+extern int devm_extcon_dev_register(struct device *dev,
+				    struct extcon_dev *edev);
+extern void devm_extcon_dev_unregister(struct device *dev,
+				       struct extcon_dev *edev);
+extern struct extcon_dev *extcon_get_extcon_dev(const char *extcon_name);
+
+/*
+ * Following APIs control the memory of extcon device.
+ */
+extern struct extcon_dev *extcon_dev_allocate(const char **cables);
+extern void extcon_dev_free(struct extcon_dev *edev);
+extern struct extcon_dev *devm_extcon_dev_allocate(struct device *dev,
+						   const char **cables);
+extern void devm_extcon_dev_free(struct device *dev, struct extcon_dev *edev);
+
+/*
+>>>>>>> v3.18
  * get/set/update_state access the 32b encoded state value, which represents
  * states of all possible cables of the multistate port. For example, if one
  * calls extcon_set_state(edev, 0x7), it may mean that all the three cables
@@ -237,15 +330,53 @@ extern int extcon_register_notifier(struct extcon_dev *edev,
 				    struct notifier_block *nb);
 extern int extcon_unregister_notifier(struct extcon_dev *edev,
 				      struct notifier_block *nb);
+<<<<<<< HEAD
 #else /* CONFIG_EXTCON */
 static inline int extcon_dev_register(struct extcon_dev *edev,
 				      struct device *dev)
+=======
+
+/*
+ * Following API get the extcon device from devicetree.
+ * This function use phandle of devicetree to get extcon device directly.
+ */
+extern struct extcon_dev *extcon_get_edev_by_phandle(struct device *dev, int index);
+#else /* CONFIG_EXTCON */
+static inline int extcon_dev_register(struct extcon_dev *edev)
+>>>>>>> v3.18
 {
 	return 0;
 }
 
 static inline void extcon_dev_unregister(struct extcon_dev *edev) { }
 
+<<<<<<< HEAD
+=======
+static inline int devm_extcon_dev_register(struct device *dev,
+					   struct extcon_dev *edev)
+{
+	return -EINVAL;
+}
+
+static inline void devm_extcon_dev_unregister(struct device *dev,
+					      struct extcon_dev *edev) { }
+
+static inline struct extcon_dev *extcon_dev_allocate(const char **cables)
+{
+	return ERR_PTR(-ENOSYS);
+}
+
+static inline void extcon_dev_free(struct extcon_dev *edev) { }
+
+static inline struct extcon_dev *devm_extcon_dev_allocate(struct device *dev,
+							  const char **cables)
+{
+	return ERR_PTR(-ENOSYS);
+}
+
+static inline void devm_extcon_dev_free(struct extcon_dev *edev) { }
+
+>>>>>>> v3.18
 static inline u32 extcon_get_state(struct extcon_dev *edev)
 {
 	return 0;
@@ -322,5 +453,14 @@ static inline int extcon_unregister_interest(struct extcon_specific_cable_nb
 {
 	return 0;
 }
+<<<<<<< HEAD
+=======
+
+static inline struct extcon_dev *extcon_get_edev_by_phandle(struct device *dev,
+							    int index)
+{
+	return ERR_PTR(-ENODEV);
+}
+>>>>>>> v3.18
 #endif /* CONFIG_EXTCON */
 #endif /* __LINUX_EXTCON_H__ */

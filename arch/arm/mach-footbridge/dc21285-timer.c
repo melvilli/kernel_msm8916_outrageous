@@ -9,6 +9,10 @@
 #include <linux/init.h>
 #include <linux/interrupt.h>
 #include <linux/irq.h>
+<<<<<<< HEAD
+=======
+#include <linux/sched_clock.h>
+>>>>>>> v3.18
 
 #include <asm/irq.h>
 
@@ -46,6 +50,19 @@ static struct clocksource cksrc_dc21285 = {
 	.flags		= CLOCK_SOURCE_IS_CONTINUOUS,
 };
 
+<<<<<<< HEAD
+=======
+static int ckevt_dc21285_set_next_event(unsigned long delta,
+	struct clock_event_device *c)
+{
+	*CSR_TIMER1_CLR = 0;
+	*CSR_TIMER1_LOAD = delta;
+	*CSR_TIMER1_CNTL = TIMER_CNTL_ENABLE | TIMER_CNTL_DIV16;
+
+	return 0;
+}
+
+>>>>>>> v3.18
 static void ckevt_dc21285_set_mode(enum clock_event_mode mode,
 	struct clock_event_device *c)
 {
@@ -58,7 +75,13 @@ static void ckevt_dc21285_set_mode(enum clock_event_mode mode,
 				   TIMER_CNTL_DIV16;
 		break;
 
+<<<<<<< HEAD
 	default:
+=======
+	case CLOCK_EVT_MODE_ONESHOT:
+	case CLOCK_EVT_MODE_UNUSED:
+	case CLOCK_EVT_MODE_SHUTDOWN:
+>>>>>>> v3.18
 		*CSR_TIMER1_CNTL = 0;
 		break;
 	}
@@ -66,9 +89,17 @@ static void ckevt_dc21285_set_mode(enum clock_event_mode mode,
 
 static struct clock_event_device ckevt_dc21285 = {
 	.name		= "dc21285_timer1",
+<<<<<<< HEAD
 	.features	= CLOCK_EVT_FEAT_PERIODIC,
 	.rating		= 200,
 	.irq		= IRQ_TIMER1,
+=======
+	.features	= CLOCK_EVT_FEAT_PERIODIC |
+			  CLOCK_EVT_FEAT_ONESHOT,
+	.rating		= 200,
+	.irq		= IRQ_TIMER1,
+	.set_next_event	= ckevt_dc21285_set_next_event,
+>>>>>>> v3.18
 	.set_mode	= ckevt_dc21285_set_mode,
 };
 
@@ -78,6 +109,13 @@ static irqreturn_t timer1_interrupt(int irq, void *dev_id)
 
 	*CSR_TIMER1_CLR = 0;
 
+<<<<<<< HEAD
+=======
+	/* Stop the timer if in one-shot mode */
+	if (ce->mode == CLOCK_EVT_MODE_ONESHOT)
+		*CSR_TIMER1_CNTL = 0;
+
+>>>>>>> v3.18
 	ce->event_handler(ce);
 
 	return IRQ_HANDLED;
@@ -86,7 +124,11 @@ static irqreturn_t timer1_interrupt(int irq, void *dev_id)
 static struct irqaction footbridge_timer_irq = {
 	.name		= "dc21285_timer1",
 	.handler	= timer1_interrupt,
+<<<<<<< HEAD
 	.flags		= IRQF_DISABLED | IRQF_TIMER | IRQF_IRQPOLL,
+=======
+	.flags		= IRQF_TIMER | IRQF_IRQPOLL,
+>>>>>>> v3.18
 	.dev_id		= &ckevt_dc21285,
 };
 
@@ -105,3 +147,22 @@ void __init footbridge_timer_init(void)
 	ce->cpumask = cpumask_of(smp_processor_id());
 	clockevents_config_and_register(ce, rate, 0x4, 0xffffff);
 }
+<<<<<<< HEAD
+=======
+
+static u64 notrace footbridge_read_sched_clock(void)
+{
+	return ~*CSR_TIMER3_VALUE;
+}
+
+void __init footbridge_sched_clock(void)
+{
+	unsigned rate = DIV_ROUND_CLOSEST(mem_fclk_21285, 16);
+
+	*CSR_TIMER3_LOAD = 0;
+	*CSR_TIMER3_CLR = 0;
+	*CSR_TIMER3_CNTL = TIMER_CNTL_ENABLE | TIMER_CNTL_DIV16;
+
+	sched_clock_register(footbridge_read_sched_clock, 24, rate);
+}
+>>>>>>> v3.18

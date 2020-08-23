@@ -26,6 +26,7 @@
 #include "intel_bios.h"
 #include "power.h"
 
+<<<<<<< HEAD
 static void do_gma_backlight_set(struct drm_device *dev)
 {
 #ifdef CONFIG_BACKLIGHT_CLASS_DEVICE
@@ -33,6 +34,15 @@ static void do_gma_backlight_set(struct drm_device *dev)
 	backlight_update_status(dev_priv->backlight_device);
 #endif	
 }
+=======
+#ifdef CONFIG_BACKLIGHT_CLASS_DEVICE
+static void do_gma_backlight_set(struct drm_device *dev)
+{
+	struct drm_psb_private *dev_priv = dev->dev_private;
+	backlight_update_status(dev_priv->backlight_device);
+}
+#endif
+>>>>>>> v3.18
 
 void gma_backlight_enable(struct drm_device *dev)
 {

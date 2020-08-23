@@ -8,11 +8,20 @@
  */
 #include <linux/linkage.h>
 #include <linux/init.h>
+<<<<<<< HEAD
 
 	__CPUINIT
 
 ENTRY(zynq_secondary_trampoline)
 	ldr	r0, [pc]
+=======
+#include <asm/assembler.h>
+
+ENTRY(zynq_secondary_trampoline)
+ARM_BE8(setend	be)				@ ensure we are in BE8 mode
+	ldr	r0, zynq_secondary_trampoline_jump
+ARM_BE8(rev	r0, r0)
+>>>>>>> v3.18
 	bx	r0
 .globl zynq_secondary_trampoline_jump
 zynq_secondary_trampoline_jump:
@@ -20,5 +29,14 @@ zynq_secondary_trampoline_jump:
 	.word	/* cpu 1 */
 .globl zynq_secondary_trampoline_end
 zynq_secondary_trampoline_end:
+<<<<<<< HEAD
 
 ENDPROC(zynq_secondary_trampoline)
+=======
+ENDPROC(zynq_secondary_trampoline)
+
+ENTRY(zynq_secondary_startup)
+	bl	v7_invalidate_l1
+	b	secondary_startup
+ENDPROC(zynq_secondary_startup)
+>>>>>>> v3.18

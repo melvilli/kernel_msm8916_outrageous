@@ -958,6 +958,7 @@ gpio_init(void)
 
 	printk(KERN_INFO "ETRAX FS GPIO driver v2.5, (c) 2003-2007 "
 		"Axis Communications AB\n");
+<<<<<<< HEAD
 	/* We call etrax_gpio_wake_up_check() from timer interrupt and
 	 * from cpu_idle() in kernel/process.c
 	 * The check in cpu_idle() reduces latency from ~15 ms to ~6 ms
@@ -969,6 +970,15 @@ gpio_init(void)
 
 	if (request_irq(GIO_INTR_VECT, gpio_pa_interrupt,
 			IRQF_SHARED | IRQF_DISABLED, "gpio PA", &alarmlist))
+=======
+	/* We call etrax_gpio_wake_up_check() from timer interrupt */
+	if (request_irq(TIMER0_INTR_VECT, gpio_poll_timer_interrupt,
+			IRQF_SHARED, "gpio poll", &alarmlist))
+		printk(KERN_ERR "timer0 irq for gpio\n");
+
+	if (request_irq(GIO_INTR_VECT, gpio_pa_interrupt,
+			IRQF_SHARED, "gpio PA", &alarmlist))
+>>>>>>> v3.18
 		printk(KERN_ERR "PA irq for gpio\n");
 
 #ifdef CONFIG_ETRAX_VIRTUAL_GPIO

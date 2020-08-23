@@ -16,8 +16,11 @@
 #ifndef _ASM_THREAD_INFO_H
 #define _ASM_THREAD_INFO_H
 
+<<<<<<< HEAD
 #ifdef __KERNEL__
 
+=======
+>>>>>>> v3.18
 #include <asm/page.h>
 
 #ifdef CONFIG_16KSTACKS
@@ -80,8 +83,11 @@ static inline __attribute_const__ struct thread_info *current_thread_info(void)
 
 #endif /* !__ASSEMBLY__ */
 
+<<<<<<< HEAD
 #define PREEMPT_ACTIVE      0x10000000
 
+=======
+>>>>>>> v3.18
 /*
  * thread information flags
  * - these are process state flags that various assembly files may need to
@@ -116,6 +122,9 @@ static inline __attribute_const__ struct thread_info *current_thread_info(void)
  * syscall, so all that reamins to be tested is _TIF_WORK_MASK
  */
 
+<<<<<<< HEAD
 #endif /* __KERNEL__ */
 
+=======
+>>>>>>> v3.18
 #endif /* _ASM_THREAD_INFO_H */

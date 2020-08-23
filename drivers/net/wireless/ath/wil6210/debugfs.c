@@ -566,6 +566,10 @@ static ssize_t wil_write_file_txmgmt(struct file *file, const char __user *buf,
 	struct wil6210_priv *wil = file->private_data;
 	struct wiphy *wiphy = wil_to_wiphy(wil);
 	struct wireless_dev *wdev = wil_to_wdev(wil);
+<<<<<<< HEAD
+=======
+	struct cfg80211_mgmt_tx_params params;
+>>>>>>> v3.18
 	int rc;
 	void *frame = kmalloc(len, GFP_KERNEL);
 
@@ -575,8 +579,16 @@ static ssize_t wil_write_file_txmgmt(struct file *file, const char __user *buf,
 	if (copy_from_user(frame, buf, len))
 		return -EIO;
 
+<<<<<<< HEAD
 	rc = wil_cfg80211_mgmt_tx(wiphy, wdev, wdev->preset_chandef.chan,
 				true, 0, frame, len, true, false, NULL);
+=======
+	params.buf = frame;
+	params.len = len;
+	params.chan = wdev->preset_chandef.chan;
+
+	rc = wil_cfg80211_mgmt_tx(wiphy, wdev, &params, NULL);
+>>>>>>> v3.18
 
 	kfree(frame);
 	wil_info(wil, "%s() -> %d\n", __func__, rc);
@@ -918,7 +930,11 @@ static int wil_freq_debugfs_show(struct seq_file *s, void *data)
 {
 	struct wil6210_priv *wil = s->private;
 	struct wireless_dev *wdev = wil_to_wdev(wil);
+<<<<<<< HEAD
 	u16 freq = wdev->channel ? wdev->channel->center_freq : 0;
+=======
+	u16 freq = wdev->chandef.chan ? wdev->chandef.chan->center_freq : 0;
+>>>>>>> v3.18
 
 	seq_printf(s, "Freq = %d\n", freq);
 
@@ -1037,6 +1053,74 @@ static const struct file_operations fops_info = {
 	.llseek		= seq_lseek,
 };
 
+<<<<<<< HEAD
+=======
+/*---------recovery------------*/
+/* mode = [manual|auto]
+ * state = [idle|pending|running]
+ */
+static ssize_t wil_read_file_recovery(struct file *file, char __user *user_buf,
+				      size_t count, loff_t *ppos)
+{
+	struct wil6210_priv *wil = file->private_data;
+	char buf[80];
+	int n;
+	static const char * const sstate[] = {"idle", "pending", "running"};
+
+	n = snprintf(buf, sizeof(buf), "mode = %s\nstate = %s\n",
+		     no_fw_recovery ? "manual" : "auto",
+		     sstate[wil->recovery_state]);
+
+	n = min_t(int, n, sizeof(buf));
+
+	return simple_read_from_buffer(user_buf, count, ppos,
+				       buf, n);
+}
+
+static ssize_t wil_write_file_recovery(struct file *file,
+				       const char __user *buf_,
+				       size_t count, loff_t *ppos)
+{
+	struct wil6210_priv *wil = file->private_data;
+	static const char run_command[] = "run";
+	char buf[sizeof(run_command) + 1]; /* to detect "runx" */
+	ssize_t rc;
+
+	if (wil->recovery_state != fw_recovery_pending) {
+		wil_err(wil, "No recovery pending\n");
+		return -EINVAL;
+	}
+
+	if (*ppos != 0) {
+		wil_err(wil, "Offset [%d]\n", (int)*ppos);
+		return -EINVAL;
+	}
+
+	if (count > sizeof(buf)) {
+		wil_err(wil, "Input too long, len = %d\n", (int)count);
+		return -EINVAL;
+	}
+
+	rc = simple_write_to_buffer(buf, sizeof(buf) - 1, ppos, buf_, count);
+	if (rc < 0)
+		return rc;
+
+	buf[rc] = '\0';
+	if (0 == strcmp(buf, run_command))
+		wil_set_recovery_state(wil, fw_recovery_running);
+	else
+		wil_err(wil, "Bad recovery command \"%s\"\n", buf);
+
+	return rc;
+}
+
+static const struct file_operations fops_recovery = {
+	.read = wil_read_file_recovery,
+	.write = wil_write_file_recovery,
+	.open  = simple_open,
+};
+
+>>>>>>> v3.18
 /*---------Station matrix------------*/
 static void wil_print_rxtid(struct seq_file *s, struct wil_tid_ampdu_rx *r)
 {
@@ -1148,6 +1232,10 @@ static const struct {
 	{"freq",	S_IRUGO,		&fops_freq},
 	{"link",	S_IRUGO,		&fops_link},
 	{"info",	S_IRUGO,		&fops_info},
+<<<<<<< HEAD
+=======
+	{"recovery",	S_IRUGO | S_IWUSR,	&fops_recovery},
+>>>>>>> v3.18
 };
 
 static void wil6210_debugfs_init_files(struct wil6210_priv *wil,
@@ -1190,6 +1278,10 @@ static const struct dbg_off dbg_wil_off[] = {
 	WIL_FIELD(status,	S_IRUGO | S_IWUSR,	doff_ulong),
 	WIL_FIELD(fw_version,	S_IRUGO,		doff_u32),
 	WIL_FIELD(hw_version,	S_IRUGO,		doff_x32),
+<<<<<<< HEAD
+=======
+	WIL_FIELD(recovery_count, S_IRUGO,		doff_u32),
+>>>>>>> v3.18
 	{},
 };
 

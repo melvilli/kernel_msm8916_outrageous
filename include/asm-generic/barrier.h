@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 /* Generic barrier definitions, based on MN10300 definitions.
+=======
+/*
+ * Generic barrier definitions, originally based on MN10300 definitions.
+>>>>>>> v3.18
  *
  * It should be possible to use these on really simple architectures,
  * but it serves more as a starting point for new ports.
@@ -16,6 +21,7 @@
 
 #ifndef __ASSEMBLY__
 
+<<<<<<< HEAD
 #define nop() asm volatile ("nop")
 
 /*
@@ -29,15 +35,50 @@
 #define mb()	asm volatile ("": : :"memory")
 #define rmb()	mb()
 #define wmb()	asm volatile ("": : :"memory")
+=======
+#include <linux/compiler.h>
+
+#ifndef nop
+#define nop()	asm volatile ("nop")
+#endif
+
+/*
+ * Force strict CPU ordering. And yes, this is required on UP too when we're
+ * talking to devices.
+ *
+ * Fall back to compiler barriers if nothing better is provided.
+ */
+
+#ifndef mb
+#define mb()	barrier()
+#endif
+
+#ifndef rmb
+#define rmb()	mb()
+#endif
+
+#ifndef wmb
+#define wmb()	mb()
+#endif
+
+#ifndef read_barrier_depends
+#define read_barrier_depends()		do { } while (0)
+#endif
+>>>>>>> v3.18
 
 #ifdef CONFIG_SMP
 #define smp_mb()	mb()
 #define smp_rmb()	rmb()
 #define smp_wmb()	wmb()
+<<<<<<< HEAD
+=======
+#define smp_read_barrier_depends()	read_barrier_depends()
+>>>>>>> v3.18
 #else
 #define smp_mb()	barrier()
 #define smp_rmb()	barrier()
 #define smp_wmb()	barrier()
+<<<<<<< HEAD
 #endif
 
 #define set_mb(var, value)  do { var = value;  mb(); } while (0)
@@ -45,6 +86,14 @@
 
 #define read_barrier_depends()		do {} while (0)
 #define smp_read_barrier_depends()	do {} while (0)
+=======
+#define smp_read_barrier_depends()	do { } while (0)
+#endif
+
+#ifndef set_mb
+#define set_mb(var, value)  do { (var) = (value); mb(); } while (0)
+#endif
+>>>>>>> v3.18
 
 #ifndef smp_mb__before_atomic
 #define smp_mb__before_atomic()	smp_mb()

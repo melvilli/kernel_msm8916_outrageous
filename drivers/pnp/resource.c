@@ -31,7 +31,11 @@ static int pnp_reserve_mem[16] = {[0 ... 15] = -1 };	/* reserve (don't use) some
  * option registration
  */
 
+<<<<<<< HEAD
 struct pnp_option *pnp_build_option(struct pnp_dev *dev, unsigned long type,
+=======
+static struct pnp_option *pnp_build_option(struct pnp_dev *dev, unsigned long type,
+>>>>>>> v3.18
 				    unsigned int option_flags)
 {
 	struct pnp_option *option;
@@ -360,7 +364,11 @@ int pnp_check_irq(struct pnp_dev *dev, struct resource *res)
 		return 1;
 
 	/* check if the resource is valid */
+<<<<<<< HEAD
 	if (*irq < 0 || *irq > 15)
+=======
+	if (*irq > 15)
+>>>>>>> v3.18
 		return 0;
 
 	/* check if the resource is reserved */
@@ -385,7 +393,11 @@ int pnp_check_irq(struct pnp_dev *dev, struct resource *res)
 	 * device is active because it itself may be in use */
 	if (!dev->active) {
 		if (request_irq(*irq, pnp_test_handler,
+<<<<<<< HEAD
 				IRQF_DISABLED | IRQF_PROBE_SHARED, "pnp", NULL))
+=======
+				IRQF_PROBE_SHARED, "pnp", NULL))
+>>>>>>> v3.18
 			return 0;
 		free_irq(*irq, NULL);
 	}
@@ -424,7 +436,11 @@ int pnp_check_dma(struct pnp_dev *dev, struct resource *res)
 		return 1;
 
 	/* check if the resource is valid */
+<<<<<<< HEAD
 	if (*dma < 0 || *dma == 4 || *dma > 7)
+=======
+	if (*dma == 4 || *dma > 7)
+>>>>>>> v3.18
 		return 0;
 
 	/* check if the resource is reserved */
@@ -515,6 +531,10 @@ struct pnp_resource *pnp_add_resource(struct pnp_dev *dev,
 	}
 
 	pnp_res->res = *res;
+<<<<<<< HEAD
+=======
+	pnp_res->res.name = dev->name;
+>>>>>>> v3.18
 	dev_dbg(&dev->dev, "%pR\n", res);
 	return pnp_res;
 }

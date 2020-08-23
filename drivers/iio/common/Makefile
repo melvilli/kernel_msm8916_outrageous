@@ -6,5 +6,9 @@
 # instead of duplicating in each module.
 #
 
+<<<<<<< HEAD
+=======
+# When adding new entries keep the list in alphabetical order
+>>>>>>> v3.18
 obj-y += hid-sensors/
 obj-y += st_sensors/

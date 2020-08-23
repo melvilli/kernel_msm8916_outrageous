@@ -12,6 +12,7 @@
 #include <linux/export.h>
 #include "led.h"
 
+<<<<<<< HEAD
 void ieee80211_led_rx(struct ieee80211_local *local)
 {
 	if (unlikely(!local->rx_led))
@@ -33,6 +34,24 @@ void ieee80211_led_tx(struct ieee80211_local *local, int q)
 		led_trigger_event(local->tx_led, LED_OFF);
 	else
 		led_trigger_event(local->tx_led, LED_FULL);
+=======
+#define MAC80211_BLINK_DELAY 50 /* ms */
+
+void ieee80211_led_rx(struct ieee80211_local *local)
+{
+	unsigned long led_delay = MAC80211_BLINK_DELAY;
+	if (unlikely(!local->rx_led))
+		return;
+	led_trigger_blink_oneshot(local->rx_led, &led_delay, &led_delay, 0);
+}
+
+void ieee80211_led_tx(struct ieee80211_local *local)
+{
+	unsigned long led_delay = MAC80211_BLINK_DELAY;
+	if (unlikely(!local->tx_led))
+		return;
+	led_trigger_blink_oneshot(local->tx_led, &led_delay, &led_delay, 0);
+>>>>>>> v3.18
 }
 
 void ieee80211_led_assoc(struct ieee80211_local *local, bool associated)

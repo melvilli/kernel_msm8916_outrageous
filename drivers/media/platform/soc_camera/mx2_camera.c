@@ -236,7 +236,10 @@ enum mx2_camera_type {
 struct mx2_camera_dev {
 	struct device		*dev;
 	struct soc_camera_host	soc_host;
+<<<<<<< HEAD
 	struct soc_camera_device *icd;
+=======
+>>>>>>> v3.18
 	struct clk		*clk_emma_ahb, *clk_emma_ipg;
 	struct clk		*clk_csi_ahb, *clk_csi_per;
 
@@ -394,8 +397,13 @@ static void mx27_update_emma_buf(struct mx2_camera_dev *pcdev,
 		writel(phys, pcdev->base_emma +
 			PRP_DEST_Y_PTR - 0x14 * bufnum);
 		if (prp->out_fmt == V4L2_PIX_FMT_YUV420) {
+<<<<<<< HEAD
 			u32 imgsize = pcdev->icd->user_height *
 					pcdev->icd->user_width;
+=======
+			u32 imgsize = pcdev->soc_host.icd->user_height *
+					pcdev->soc_host.icd->user_width;
+>>>>>>> v3.18
 
 			writel(phys + imgsize, pcdev->base_emma +
 				PRP_DEST_CB_PTR - 0x14 * bufnum);
@@ -413,20 +421,45 @@ static void mx2_camera_deactivate(struct mx2_camera_dev *pcdev)
 	writel(0, pcdev->base_emma + PRP_CNTL);
 }
 
+<<<<<<< HEAD
+=======
+static int mx2_camera_add_device(struct soc_camera_device *icd)
+{
+	dev_info(icd->parent, "Camera driver attached to camera %d\n",
+		 icd->devnum);
+
+	return 0;
+}
+
+static void mx2_camera_remove_device(struct soc_camera_device *icd)
+{
+	dev_info(icd->parent, "Camera driver detached from camera %d\n",
+		 icd->devnum);
+}
+
+>>>>>>> v3.18
 /*
  * The following two functions absolutely depend on the fact, that
  * there can be only one camera on mx2 camera sensor interface
  */
+<<<<<<< HEAD
 static int mx2_camera_add_device(struct soc_camera_device *icd)
 {
 	struct soc_camera_host *ici = to_soc_camera_host(icd->parent);
+=======
+static int mx2_camera_clock_start(struct soc_camera_host *ici)
+{
+>>>>>>> v3.18
 	struct mx2_camera_dev *pcdev = ici->priv;
 	int ret;
 	u32 csicr1;
 
+<<<<<<< HEAD
 	if (pcdev->icd)
 		return -EBUSY;
 
+=======
+>>>>>>> v3.18
 	ret = clk_prepare_enable(pcdev->clk_csi_ahb);
 	if (ret < 0)
 		return ret;
@@ -441,12 +474,17 @@ static int mx2_camera_add_device(struct soc_camera_device *icd)
 	pcdev->csicr1 = csicr1;
 	writel(pcdev->csicr1, pcdev->base_csi + CSICR1);
 
+<<<<<<< HEAD
 	pcdev->icd = icd;
 	pcdev->frame_count = 0;
 
 	dev_info(icd->parent, "Camera driver attached to camera %d\n",
 		 icd->devnum);
 
+=======
+	pcdev->frame_count = 0;
+
+>>>>>>> v3.18
 	return 0;
 
 exit_csi_ahb:
@@ -455,6 +493,7 @@ exit_csi_ahb:
 	return ret;
 }
 
+<<<<<<< HEAD
 static void mx2_camera_remove_device(struct soc_camera_device *icd)
 {
 	struct soc_camera_host *ici = to_soc_camera_host(icd->parent);
@@ -468,6 +507,13 @@ static void mx2_camera_remove_device(struct soc_camera_device *icd)
 	mx2_camera_deactivate(pcdev);
 
 	pcdev->icd = NULL;
+=======
+static void mx2_camera_clock_stop(struct soc_camera_host *ici)
+{
+	struct mx2_camera_dev *pcdev = ici->priv;
+
+	mx2_camera_deactivate(pcdev);
+>>>>>>> v3.18
 }
 
 /*
@@ -662,7 +708,11 @@ static int mx2_start_streaming(struct vb2_queue *q, unsigned int count)
 	unsigned long flags;
 
 	if (count < 2)
+<<<<<<< HEAD
 		return -EINVAL;
+=======
+		return -ENOBUFS;
+>>>>>>> v3.18
 
 	spin_lock_irqsave(&pcdev->lock, flags);
 
@@ -744,7 +794,11 @@ static int mx2_start_streaming(struct vb2_queue *q, unsigned int count)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int mx2_stop_streaming(struct vb2_queue *q)
+=======
+static void mx2_stop_streaming(struct vb2_queue *q)
+>>>>>>> v3.18
 {
 	struct soc_camera_device *icd = soc_camera_from_vb2q(q);
 	struct soc_camera_host *ici =
@@ -776,8 +830,11 @@ static int mx2_stop_streaming(struct vb2_queue *q)
 
 	dma_free_coherent(ici->v4l2_dev.dev,
 			  pcdev->discard_size, b, pcdev->discard_buffer_dma);
+<<<<<<< HEAD
 
 	return 0;
+=======
+>>>>>>> v3.18
 }
 
 static struct vb2_ops mx2_videobuf_ops = {
@@ -797,7 +854,11 @@ static int mx2_camera_init_videobuf(struct vb2_queue *q,
 	q->ops = &mx2_videobuf_ops;
 	q->mem_ops = &vb2_dma_contig_memops;
 	q->buf_struct_size = sizeof(struct mx2_buffer);
+<<<<<<< HEAD
 	q->timestamp_type = V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC;
+=======
+	q->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC;
+>>>>>>> v3.18
 
 	return vb2_queue_init(q);
 }
@@ -814,10 +875,16 @@ static int mx2_camera_init_videobuf(struct vb2_queue *q,
 
 static int mx27_camera_emma_prp_reset(struct mx2_camera_dev *pcdev)
 {
+<<<<<<< HEAD
 	u32 cntl;
 	int count = 0;
 
 	cntl = readl(pcdev->base_emma + PRP_CNTL);
+=======
+	int count = 0;
+
+	readl(pcdev->base_emma + PRP_CNTL);
+>>>>>>> v3.18
 	writel(PRP_CNTL_SWRST, pcdev->base_emma + PRP_CNTL);
 	while (count++ < 100) {
 		if (!(readl(pcdev->base_emma + PRP_CNTL) & PRP_CNTL_SWRST))
@@ -1008,7 +1075,11 @@ static int mx2_emmaprp_resize(struct mx2_camera_dev *pcdev,
 			      struct v4l2_mbus_framefmt *mf_in,
 			      struct v4l2_pix_format *pix_out, bool apply)
 {
+<<<<<<< HEAD
 	int num, den;
+=======
+	unsigned int num, den;
+>>>>>>> v3.18
 	unsigned long m;
 	int i, dir;
 
@@ -1280,6 +1351,11 @@ static struct soc_camera_host_ops mx2_soc_camera_host_ops = {
 	.owner		= THIS_MODULE,
 	.add		= mx2_camera_add_device,
 	.remove		= mx2_camera_remove_device,
+<<<<<<< HEAD
+=======
+	.clock_start	= mx2_camera_clock_start,
+	.clock_stop	= mx2_camera_clock_stop,
+>>>>>>> v3.18
 	.set_fmt	= mx2_camera_set_fmt,
 	.set_crop	= mx2_camera_set_crop,
 	.get_formats	= mx2_camera_get_formats,

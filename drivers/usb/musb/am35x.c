@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 /*
  * Texas Instruments AM35x "glue layer"
  *
@@ -26,14 +30,21 @@
  *
  */
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/clk.h>
 #include <linux/err.h>
 #include <linux/io.h>
 #include <linux/platform_device.h>
 #include <linux/dma-mapping.h>
+<<<<<<< HEAD
 #include <linux/usb/nop-usb-xceiv.h>
+=======
+#include <linux/usb/usb_phy_generic.h>
+>>>>>>> v3.18
 #include <linux/platform_data/usb-omap.h>
 
 #include "musb_core.h"
@@ -86,10 +97,17 @@
 struct am35x_glue {
 	struct device		*dev;
 	struct platform_device	*musb;
+<<<<<<< HEAD
 	struct clk		*phy_clk;
 	struct clk		*clk;
 };
 #define glue_to_musb(g)		platform_get_drvdata(g->musb)
+=======
+	struct platform_device	*phy;
+	struct clk		*phy_clk;
+	struct clk		*clk;
+};
+>>>>>>> v3.18
 
 /*
  * am35x_musb_enable - enable interrupts
@@ -218,7 +236,11 @@ static irqreturn_t am35x_musb_interrupt(int irq, void *hci)
 	struct musb  *musb = hci;
 	void __iomem *reg_base = musb->ctrl_base;
 	struct device *dev = musb->controller;
+<<<<<<< HEAD
 	struct musb_hdrc_platform_data *plat = dev->platform_data;
+=======
+	struct musb_hdrc_platform_data *plat = dev_get_platdata(dev);
+>>>>>>> v3.18
 	struct omap_musb_board_data *data = plat->board_data;
 	struct usb_otg *otg = musb->xceiv->otg;
 	unsigned long flags;
@@ -335,7 +357,11 @@ eoi:
 static int am35x_musb_set_mode(struct musb *musb, u8 musb_mode)
 {
 	struct device *dev = musb->controller;
+<<<<<<< HEAD
 	struct musb_hdrc_platform_data *plat = dev->platform_data;
+=======
+	struct musb_hdrc_platform_data *plat = dev_get_platdata(dev);
+>>>>>>> v3.18
 	struct omap_musb_board_data *data = plat->board_data;
 	int     retval = 0;
 
@@ -350,7 +376,11 @@ static int am35x_musb_set_mode(struct musb *musb, u8 musb_mode)
 static int am35x_musb_init(struct musb *musb)
 {
 	struct device *dev = musb->controller;
+<<<<<<< HEAD
 	struct musb_hdrc_platform_data *plat = dev->platform_data;
+=======
+	struct musb_hdrc_platform_data *plat = dev_get_platdata(dev);
+>>>>>>> v3.18
 	struct omap_musb_board_data *data = plat->board_data;
 	void __iomem *reg_base = musb->ctrl_base;
 	u32 rev;
@@ -362,7 +392,10 @@ static int am35x_musb_init(struct musb *musb)
 	if (!rev)
 		return -ENODEV;
 
+<<<<<<< HEAD
 	usb_nop_xceiv_register();
+=======
+>>>>>>> v3.18
 	musb->xceiv = usb_get_phy(USB_PHY_TYPE_USB2);
 	if (IS_ERR_OR_NULL(musb->xceiv))
 		return -EPROBE_DEFER;
@@ -394,7 +427,11 @@ static int am35x_musb_init(struct musb *musb)
 static int am35x_musb_exit(struct musb *musb)
 {
 	struct device *dev = musb->controller;
+<<<<<<< HEAD
 	struct musb_hdrc_platform_data *plat = dev->platform_data;
+=======
+	struct musb_hdrc_platform_data *plat = dev_get_platdata(dev);
+>>>>>>> v3.18
 	struct omap_musb_board_data *data = plat->board_data;
 
 	del_timer_sync(&otg_workaround);
@@ -404,7 +441,10 @@ static int am35x_musb_exit(struct musb *musb)
 		data->set_phy_power(0);
 
 	usb_put_phy(musb->xceiv);
+<<<<<<< HEAD
 	usb_nop_xceiv_unregister();
+=======
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -452,6 +492,7 @@ static const struct musb_platform_ops am35x_ops = {
 	.set_vbus	= am35x_musb_set_vbus,
 };
 
+<<<<<<< HEAD
 static u64 am35x_dmamask = DMA_BIT_MASK(32);
 
 static int am35x_probe(struct platform_device *pdev)
@@ -460,6 +501,20 @@ static int am35x_probe(struct platform_device *pdev)
 	struct platform_device		*musb;
 	struct am35x_glue		*glue;
 
+=======
+static const struct platform_device_info am35x_dev_info = {
+	.name		= "musb-hdrc",
+	.id		= PLATFORM_DEVID_AUTO,
+	.dma_mask	= DMA_BIT_MASK(32),
+};
+
+static int am35x_probe(struct platform_device *pdev)
+{
+	struct musb_hdrc_platform_data	*pdata = dev_get_platdata(&pdev->dev);
+	struct platform_device		*musb;
+	struct am35x_glue		*glue;
+	struct platform_device_info	pinfo;
+>>>>>>> v3.18
 	struct clk			*phy_clk;
 	struct clk			*clk;
 
@@ -471,12 +526,15 @@ static int am35x_probe(struct platform_device *pdev)
 		goto err0;
 	}
 
+<<<<<<< HEAD
 	musb = platform_device_alloc("musb-hdrc", PLATFORM_DEVID_AUTO);
 	if (!musb) {
 		dev_err(&pdev->dev, "failed to allocate musb device\n");
 		goto err1;
 	}
 
+=======
+>>>>>>> v3.18
 	phy_clk = clk_get(&pdev->dev, "fck");
 	if (IS_ERR(phy_clk)) {
 		dev_err(&pdev->dev, "failed to get PHY clock\n");
@@ -503,17 +561,22 @@ static int am35x_probe(struct platform_device *pdev)
 		goto err6;
 	}
 
+<<<<<<< HEAD
 	musb->dev.parent		= &pdev->dev;
 	musb->dev.dma_mask		= &am35x_dmamask;
 	musb->dev.coherent_dma_mask	= am35x_dmamask;
 
 	glue->dev			= &pdev->dev;
 	glue->musb			= musb;
+=======
+	glue->dev			= &pdev->dev;
+>>>>>>> v3.18
 	glue->phy_clk			= phy_clk;
 	glue->clk			= clk;
 
 	pdata->platform_ops		= &am35x_ops;
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, glue);
 
 	ret = platform_device_add_resources(musb, pdev->resource,
@@ -533,10 +596,35 @@ static int am35x_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(&pdev->dev, "failed to register musb device\n");
 		goto err7;
+=======
+	glue->phy = usb_phy_generic_register();
+	if (IS_ERR(glue->phy))
+		goto err7;
+	platform_set_drvdata(pdev, glue);
+
+	pinfo = am35x_dev_info;
+	pinfo.parent = &pdev->dev;
+	pinfo.res = pdev->resource;
+	pinfo.num_res = pdev->num_resources;
+	pinfo.data = pdata;
+	pinfo.size_data = sizeof(*pdata);
+
+	glue->musb = musb = platform_device_register_full(&pinfo);
+	if (IS_ERR(musb)) {
+		ret = PTR_ERR(musb);
+		dev_err(&pdev->dev, "failed to register musb device: %d\n", ret);
+		goto err8;
+>>>>>>> v3.18
 	}
 
 	return 0;
 
+<<<<<<< HEAD
+=======
+err8:
+	usb_phy_generic_unregister(glue->phy);
+
+>>>>>>> v3.18
 err7:
 	clk_disable(clk);
 
@@ -550,9 +638,12 @@ err4:
 	clk_put(phy_clk);
 
 err3:
+<<<<<<< HEAD
 	platform_device_put(musb);
 
 err1:
+=======
+>>>>>>> v3.18
 	kfree(glue);
 
 err0:
@@ -564,6 +655,10 @@ static int am35x_remove(struct platform_device *pdev)
 	struct am35x_glue	*glue = platform_get_drvdata(pdev);
 
 	platform_device_unregister(glue->musb);
+<<<<<<< HEAD
+=======
+	usb_phy_generic_unregister(glue->phy);
+>>>>>>> v3.18
 	clk_disable(glue->clk);
 	clk_disable(glue->phy_clk);
 	clk_put(glue->clk);
@@ -577,7 +672,11 @@ static int am35x_remove(struct platform_device *pdev)
 static int am35x_suspend(struct device *dev)
 {
 	struct am35x_glue	*glue = dev_get_drvdata(dev);
+<<<<<<< HEAD
 	struct musb_hdrc_platform_data *plat = dev->platform_data;
+=======
+	struct musb_hdrc_platform_data *plat = dev_get_platdata(dev);
+>>>>>>> v3.18
 	struct omap_musb_board_data *data = plat->board_data;
 
 	/* Shutdown the on-chip PHY and its PLL. */
@@ -593,7 +692,11 @@ static int am35x_suspend(struct device *dev)
 static int am35x_resume(struct device *dev)
 {
 	struct am35x_glue	*glue = dev_get_drvdata(dev);
+<<<<<<< HEAD
 	struct musb_hdrc_platform_data *plat = dev->platform_data;
+=======
+	struct musb_hdrc_platform_data *plat = dev_get_platdata(dev);
+>>>>>>> v3.18
 	struct omap_musb_board_data *data = plat->board_data;
 	int			ret;
 
@@ -615,6 +718,7 @@ static int am35x_resume(struct device *dev)
 
 	return 0;
 }
+<<<<<<< HEAD
 
 static struct dev_pm_ops am35x_pm_ops = {
 	.suspend	= am35x_suspend,
@@ -626,12 +730,22 @@ static struct dev_pm_ops am35x_pm_ops = {
 #define DEV_PM_OPS	NULL
 #endif
 
+=======
+#endif
+
+static SIMPLE_DEV_PM_OPS(am35x_pm_ops, am35x_suspend, am35x_resume);
+
+>>>>>>> v3.18
 static struct platform_driver am35x_driver = {
 	.probe		= am35x_probe,
 	.remove		= am35x_remove,
 	.driver		= {
 		.name	= "musb-am35x",
+<<<<<<< HEAD
 		.pm	= DEV_PM_OPS,
+=======
+		.pm	= &am35x_pm_ops,
+>>>>>>> v3.18
 	},
 };
 

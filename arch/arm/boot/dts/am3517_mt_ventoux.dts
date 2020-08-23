@@ -7,7 +7,11 @@
  */
 /dts-v1/;
 
+<<<<<<< HEAD
 /include/ "omap34xx.dtsi"
+=======
+#include "omap34xx.dtsi"
+>>>>>>> v3.18
 
 / {
 	model = "TeeJet Mt.Ventoux";

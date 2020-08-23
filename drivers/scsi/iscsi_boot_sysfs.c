@@ -490,5 +490,9 @@ void iscsi_boot_destroy_kset(struct iscsi_boot_kset *boot_kset)
 		iscsi_boot_remove_kobj(boot_kobj);
 
 	kset_unregister(boot_kset->kset);
+<<<<<<< HEAD
+=======
+	kfree(boot_kset);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(iscsi_boot_destroy_kset);

@@ -15,7 +15,10 @@
 #define _ASM_POWERPC_VIO_H
 #ifdef __KERNEL__
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/errno.h>
 #include <linux/device.h>
 #include <linux/dma-mapping.h>

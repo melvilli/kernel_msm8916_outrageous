@@ -8,6 +8,10 @@
 #ifdef __KERNEL__
 #include <linux/types.h>
 #include <asm/cmpxchg.h>
+<<<<<<< HEAD
+=======
+#include <asm/barrier.h>
+>>>>>>> v3.18
 
 #define ATOMIC_INIT(i)		{ (i) }
 
@@ -25,6 +29,7 @@ static __inline__ void atomic_set(atomic_t *v, int i)
 	__asm__ __volatile__("stw%U0%X0 %1,%0" : "=m"(v->counter) : "r"(i));
 }
 
+<<<<<<< HEAD
 static __inline__ void atomic_add(int a, atomic_t *v)
 {
 	int t;
@@ -95,6 +100,55 @@ static __inline__ int atomic_sub_return(int a, atomic_t *v)
 	return t;
 }
 
+=======
+#define ATOMIC_OP(op, asm_op)						\
+static __inline__ void atomic_##op(int a, atomic_t *v)			\
+{									\
+	int t;								\
+									\
+	__asm__ __volatile__(						\
+"1:	lwarx	%0,0,%3		# atomic_" #op "\n"			\
+	#asm_op " %0,%2,%0\n"						\
+	PPC405_ERR77(0,%3)						\
+"	stwcx.	%0,0,%3 \n"						\
+"	bne-	1b\n"							\
+	: "=&r" (t), "+m" (v->counter)					\
+	: "r" (a), "r" (&v->counter)					\
+	: "cc");							\
+}									\
+
+#define ATOMIC_OP_RETURN(op, asm_op)					\
+static __inline__ int atomic_##op##_return(int a, atomic_t *v)		\
+{									\
+	int t;								\
+									\
+	__asm__ __volatile__(						\
+	PPC_ATOMIC_ENTRY_BARRIER					\
+"1:	lwarx	%0,0,%2		# atomic_" #op "_return\n"		\
+	#asm_op " %0,%1,%0\n"						\
+	PPC405_ERR77(0,%2)						\
+"	stwcx.	%0,0,%2 \n"						\
+"	bne-	1b\n"							\
+	PPC_ATOMIC_EXIT_BARRIER						\
+	: "=&r" (t)							\
+	: "r" (a), "r" (&v->counter)					\
+	: "cc", "memory");						\
+									\
+	return t;							\
+}
+
+#define ATOMIC_OPS(op, asm_op) ATOMIC_OP(op, asm_op) ATOMIC_OP_RETURN(op, asm_op)
+
+ATOMIC_OPS(add, add)
+ATOMIC_OPS(sub, subf)
+
+#undef ATOMIC_OPS
+#undef ATOMIC_OP_RETURN
+#undef ATOMIC_OP
+
+#define atomic_add_negative(a, v)	(atomic_add_return((a), (v)) < 0)
+
+>>>>>>> v3.18
 static __inline__ void atomic_inc(atomic_t *v)
 {
 	int t;
@@ -270,11 +324,14 @@ static __inline__ int atomic_dec_if_positive(atomic_t *v)
 }
 #define atomic_dec_if_positive atomic_dec_if_positive
 
+<<<<<<< HEAD
 #define smp_mb__before_atomic_dec()     smp_mb()
 #define smp_mb__after_atomic_dec()      smp_mb()
 #define smp_mb__before_atomic_inc()     smp_mb()
 #define smp_mb__after_atomic_inc()      smp_mb()
 
+=======
+>>>>>>> v3.18
 #ifdef __powerpc64__
 
 #define ATOMIC64_INIT(i)	{ (i) }
@@ -293,6 +350,7 @@ static __inline__ void atomic64_set(atomic64_t *v, long i)
 	__asm__ __volatile__("std%U0%X0 %1,%0" : "=m"(v->counter) : "r"(i));
 }
 
+<<<<<<< HEAD
 static __inline__ void atomic64_add(long a, atomic64_t *v)
 {
 	long t;
@@ -358,6 +416,52 @@ static __inline__ long atomic64_sub_return(long a, atomic64_t *v)
 
 	return t;
 }
+=======
+#define ATOMIC64_OP(op, asm_op)						\
+static __inline__ void atomic64_##op(long a, atomic64_t *v)		\
+{									\
+	long t;								\
+									\
+	__asm__ __volatile__(						\
+"1:	ldarx	%0,0,%3		# atomic64_" #op "\n"			\
+	#asm_op " %0,%2,%0\n"						\
+"	stdcx.	%0,0,%3 \n"						\
+"	bne-	1b\n"							\
+	: "=&r" (t), "+m" (v->counter)					\
+	: "r" (a), "r" (&v->counter)					\
+	: "cc");							\
+}
+
+#define ATOMIC64_OP_RETURN(op, asm_op)					\
+static __inline__ long atomic64_##op##_return(long a, atomic64_t *v)	\
+{									\
+	long t;								\
+									\
+	__asm__ __volatile__(						\
+	PPC_ATOMIC_ENTRY_BARRIER					\
+"1:	ldarx	%0,0,%2		# atomic64_" #op "_return\n"		\
+	#asm_op " %0,%1,%0\n"						\
+"	stdcx.	%0,0,%2 \n"						\
+"	bne-	1b\n"							\
+	PPC_ATOMIC_EXIT_BARRIER						\
+	: "=&r" (t)							\
+	: "r" (a), "r" (&v->counter)					\
+	: "cc", "memory");						\
+									\
+	return t;							\
+}
+
+#define ATOMIC64_OPS(op, asm_op) ATOMIC64_OP(op, asm_op) ATOMIC64_OP_RETURN(op, asm_op)
+
+ATOMIC64_OPS(add, add)
+ATOMIC64_OPS(sub, subf)
+
+#undef ATOMIC64_OPS
+#undef ATOMIC64_OP_RETURN
+#undef ATOMIC64_OP
+
+#define atomic64_add_negative(a, v)	(atomic64_add_return((a), (v)) < 0)
+>>>>>>> v3.18
 
 static __inline__ void atomic64_inc(atomic64_t *v)
 {
@@ -501,7 +605,11 @@ static __inline__ int atomic64_add_unless(atomic64_t *v, long a, long u)
  * Atomically increments @v by 1, so long as @v is non-zero.
  * Returns non-zero if @v was non-zero, and zero otherwise.
  */
+<<<<<<< HEAD
 static __inline__ int atomic64_inc_not_zero(atomic64_t *v)
+=======
+static __inline__ long atomic64_inc_not_zero(atomic64_t *v)
+>>>>>>> v3.18
 {
 	long t1, t2;
 
@@ -520,7 +628,11 @@ static __inline__ int atomic64_inc_not_zero(atomic64_t *v)
 	: "r" (&v->counter)
 	: "cc", "xer", "memory");
 
+<<<<<<< HEAD
 	return t1 != 0;
+=======
+	return t1;
+>>>>>>> v3.18
 }
 
 #endif /* __powerpc64__ */

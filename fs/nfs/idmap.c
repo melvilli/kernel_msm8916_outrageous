@@ -49,6 +49,10 @@
 
 #include "internal.h"
 #include "netns.h"
+<<<<<<< HEAD
+=======
+#include "nfs4trace.h"
+>>>>>>> v3.18
 
 #define NFS_UINT_MAXLEN 11
 
@@ -63,6 +67,10 @@ struct idmap_legacy_upcalldata {
 };
 
 struct idmap {
+<<<<<<< HEAD
+=======
+	struct rpc_pipe_dir_object idmap_pdo;
+>>>>>>> v3.18
 	struct rpc_pipe		*idmap_pipe;
 	struct idmap_legacy_upcalldata *idmap_upcall_data;
 	struct mutex		idmap_mutex;
@@ -172,8 +180,14 @@ static int nfs_map_numeric_to_string(__u32 id, char *buf, size_t buflen)
 
 static struct key_type key_type_id_resolver = {
 	.name		= "id_resolver",
+<<<<<<< HEAD
 	.instantiate	= user_instantiate,
 	.match		= user_match,
+=======
+	.preparse	= user_preparse,
+	.free_preparse	= user_free_preparse,
+	.instantiate	= generic_key_instantiate,
+>>>>>>> v3.18
 	.revoke		= user_revoke,
 	.destroy	= user_destroy,
 	.describe	= user_describe,
@@ -262,6 +276,7 @@ static ssize_t nfs_idmap_get_desc(const char *name, size_t namelen,
 	return desclen;
 }
 
+<<<<<<< HEAD
 static ssize_t nfs_idmap_request_key(struct key_type *key_type,
 				     const char *name, size_t namelen,
 				     const char *type, void *data,
@@ -271,10 +286,18 @@ static ssize_t nfs_idmap_request_key(struct key_type *key_type,
 	struct key *rkey;
 	char *desc;
 	struct user_key_payload *payload;
+=======
+static struct key *nfs_idmap_request_key(const char *name, size_t namelen,
+					 const char *type, struct idmap *idmap)
+{
+	char *desc;
+	struct key *rkey;
+>>>>>>> v3.18
 	ssize_t ret;
 
 	ret = nfs_idmap_get_desc(name, namelen, type, strlen(type), &desc);
 	if (ret <= 0)
+<<<<<<< HEAD
 		goto out;
 
 	saved_cred = override_creds(id_resolver_cache);
@@ -285,6 +308,37 @@ static ssize_t nfs_idmap_request_key(struct key_type *key_type,
 	revert_creds(saved_cred);
 
 	kfree(desc);
+=======
+		return ERR_PTR(ret);
+
+	rkey = request_key(&key_type_id_resolver, desc, "");
+	if (IS_ERR(rkey)) {
+		mutex_lock(&idmap->idmap_mutex);
+		rkey = request_key_with_auxdata(&key_type_id_resolver_legacy,
+						desc, "", 0, idmap);
+		mutex_unlock(&idmap->idmap_mutex);
+	}
+	if (!IS_ERR(rkey))
+		set_bit(KEY_FLAG_ROOT_CAN_INVAL, &rkey->flags);
+
+	kfree(desc);
+	return rkey;
+}
+
+static ssize_t nfs_idmap_get_key(const char *name, size_t namelen,
+				 const char *type, void *data,
+				 size_t data_size, struct idmap *idmap)
+{
+	const struct cred *saved_cred;
+	struct key *rkey;
+	struct user_key_payload *payload;
+	ssize_t ret;
+
+	saved_cred = override_creds(id_resolver_cache);
+	rkey = nfs_idmap_request_key(name, namelen, type, idmap);
+	revert_creds(saved_cred);
+
+>>>>>>> v3.18
 	if (IS_ERR(rkey)) {
 		ret = PTR_ERR(rkey);
 		goto out;
@@ -297,7 +351,11 @@ static ssize_t nfs_idmap_request_key(struct key_type *key_type,
 	if (ret < 0)
 		goto out_up;
 
+<<<<<<< HEAD
 	payload = rcu_dereference(rkey->payload.data);
+=======
+	payload = rcu_dereference(rkey->payload.rcudata);
+>>>>>>> v3.18
 	if (IS_ERR_OR_NULL(payload)) {
 		ret = PTR_ERR(payload);
 		goto out_up;
@@ -316,6 +374,7 @@ out:
 	return ret;
 }
 
+<<<<<<< HEAD
 static ssize_t nfs_idmap_get_key(const char *name, size_t namelen,
 				 const char *type, void *data,
 				 size_t data_size, struct idmap *idmap)
@@ -333,6 +392,8 @@ static ssize_t nfs_idmap_get_key(const char *name, size_t namelen,
 	return ret;
 }
 
+=======
+>>>>>>> v3.18
 /* ID -> Name */
 static ssize_t nfs_idmap_lookup_name(__u32 id, const char *type, char *buf,
 				     size_t buflen, struct idmap *idmap)
@@ -396,8 +457,14 @@ static const struct rpc_pipe_ops idmap_upcall_ops = {
 
 static struct key_type key_type_id_resolver_legacy = {
 	.name		= "id_legacy",
+<<<<<<< HEAD
 	.instantiate	= user_instantiate,
 	.match		= user_match,
+=======
+	.preparse	= user_preparse,
+	.free_preparse	= user_free_preparse,
+	.instantiate	= generic_key_instantiate,
+>>>>>>> v3.18
 	.revoke		= user_revoke,
 	.destroy	= user_destroy,
 	.describe	= user_describe,
@@ -405,6 +472,7 @@ static struct key_type key_type_id_resolver_legacy = {
 	.request_key	= nfs_idmap_legacy_upcall,
 };
 
+<<<<<<< HEAD
 static void __nfs_idmap_unregister(struct rpc_pipe *pipe)
 {
 	if (pipe->dentry)
@@ -415,6 +483,25 @@ static int __nfs_idmap_register(struct dentry *dir,
 				     struct idmap *idmap,
 				     struct rpc_pipe *pipe)
 {
+=======
+static void nfs_idmap_pipe_destroy(struct dentry *dir,
+		struct rpc_pipe_dir_object *pdo)
+{
+	struct idmap *idmap = pdo->pdo_data;
+	struct rpc_pipe *pipe = idmap->idmap_pipe;
+
+	if (pipe->dentry) {
+		rpc_unlink(pipe->dentry);
+		pipe->dentry = NULL;
+	}
+}
+
+static int nfs_idmap_pipe_create(struct dentry *dir,
+		struct rpc_pipe_dir_object *pdo)
+{
+	struct idmap *idmap = pdo->pdo_data;
+	struct rpc_pipe *pipe = idmap->idmap_pipe;
+>>>>>>> v3.18
 	struct dentry *dentry;
 
 	dentry = rpc_mkpipe_dentry(dir, "idmap", idmap, pipe);
@@ -424,6 +511,7 @@ static int __nfs_idmap_register(struct dentry *dir,
 	return 0;
 }
 
+<<<<<<< HEAD
 static void nfs_idmap_unregister(struct nfs_client *clp,
 				      struct rpc_pipe *pipe)
 {
@@ -454,6 +542,12 @@ static int nfs_idmap_register(struct nfs_client *clp,
 	}
 	return err;
 }
+=======
+static const struct rpc_pipe_dir_object_ops nfs_idmap_pipe_dir_object_ops = {
+	.create = nfs_idmap_pipe_create,
+	.destroy = nfs_idmap_pipe_destroy,
+};
+>>>>>>> v3.18
 
 int
 nfs_idmap_new(struct nfs_client *clp)
@@ -466,6 +560,7 @@ nfs_idmap_new(struct nfs_client *clp)
 	if (idmap == NULL)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 	pipe = rpc_mkpipe_data(&idmap_upcall_ops, 0);
 	if (IS_ERR(pipe)) {
 		error = PTR_ERR(pipe);
@@ -477,12 +572,38 @@ nfs_idmap_new(struct nfs_client *clp)
 		rpc_destroy_pipe_data(pipe);
 		kfree(idmap);
 		return error;
+=======
+	rpc_init_pipe_dir_object(&idmap->idmap_pdo,
+			&nfs_idmap_pipe_dir_object_ops,
+			idmap);
+
+	pipe = rpc_mkpipe_data(&idmap_upcall_ops, 0);
+	if (IS_ERR(pipe)) {
+		error = PTR_ERR(pipe);
+		goto err;
+>>>>>>> v3.18
 	}
 	idmap->idmap_pipe = pipe;
 	mutex_init(&idmap->idmap_mutex);
 
+<<<<<<< HEAD
 	clp->cl_idmap = idmap;
 	return 0;
+=======
+	error = rpc_add_pipe_dir_object(clp->cl_net,
+			&clp->cl_rpcclient->cl_pipedir_objects,
+			&idmap->idmap_pdo);
+	if (error)
+		goto err_destroy_pipe;
+
+	clp->cl_idmap = idmap;
+	return 0;
+err_destroy_pipe:
+	rpc_destroy_pipe_data(idmap->idmap_pipe);
+err:
+	kfree(idmap);
+	return error;
+>>>>>>> v3.18
 }
 
 void
@@ -492,6 +613,7 @@ nfs_idmap_delete(struct nfs_client *clp)
 
 	if (!idmap)
 		return;
+<<<<<<< HEAD
 	nfs_idmap_unregister(clp, idmap->idmap_pipe);
 	rpc_destroy_pipe_data(idmap->idmap_pipe);
 	clp->cl_idmap = NULL;
@@ -600,22 +722,38 @@ static struct notifier_block nfs_idmap_block = {
 	.priority	= SUNRPC_PIPEFS_NFS_PRIO,
 };
 
+=======
+	clp->cl_idmap = NULL;
+	rpc_remove_pipe_dir_object(clp->cl_net,
+			&clp->cl_rpcclient->cl_pipedir_objects,
+			&idmap->idmap_pdo);
+	rpc_destroy_pipe_data(idmap->idmap_pipe);
+	kfree(idmap);
+}
+
+>>>>>>> v3.18
 int nfs_idmap_init(void)
 {
 	int ret;
 	ret = nfs_idmap_init_keyring();
 	if (ret != 0)
 		goto out;
+<<<<<<< HEAD
 	ret = rpc_pipefs_notifier_register(&nfs_idmap_block);
 	if (ret != 0)
 		nfs_idmap_quit_keyring();
+=======
+>>>>>>> v3.18
 out:
 	return ret;
 }
 
 void nfs_idmap_quit(void)
 {
+<<<<<<< HEAD
 	rpc_pipefs_notifier_unregister(&nfs_idmap_block);
+=======
+>>>>>>> v3.18
 	nfs_idmap_quit_keyring();
 }
 
@@ -853,6 +991,10 @@ int nfs_map_name_to_uid(const struct nfs_server *server, const char *name, size_
 		if (!uid_valid(*uid))
 			ret = -ERANGE;
 	}
+<<<<<<< HEAD
+=======
+	trace_nfs4_map_name_to_uid(name, namelen, id, ret);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -869,6 +1011,10 @@ int nfs_map_group_to_gid(const struct nfs_server *server, const char *name, size
 		if (!gid_valid(*gid))
 			ret = -ERANGE;
 	}
+<<<<<<< HEAD
+=======
+	trace_nfs4_map_group_to_gid(name, namelen, id, ret);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -883,6 +1029,10 @@ int nfs_map_uid_to_name(const struct nfs_server *server, kuid_t uid, char *buf, 
 		ret = nfs_idmap_lookup_name(id, "user", buf, buflen, idmap);
 	if (ret < 0)
 		ret = nfs_map_numeric_to_string(id, buf, buflen);
+<<<<<<< HEAD
+=======
+	trace_nfs4_map_uid_to_name(buf, ret, id, ret);
+>>>>>>> v3.18
 	return ret;
 }
 int nfs_map_gid_to_group(const struct nfs_server *server, kgid_t gid, char *buf, size_t buflen)
@@ -896,5 +1046,9 @@ int nfs_map_gid_to_group(const struct nfs_server *server, kgid_t gid, char *buf,
 		ret = nfs_idmap_lookup_name(id, "group", buf, buflen, idmap);
 	if (ret < 0)
 		ret = nfs_map_numeric_to_string(id, buf, buflen);
+<<<<<<< HEAD
+=======
+	trace_nfs4_map_gid_to_group(buf, ret, id, ret);
+>>>>>>> v3.18
 	return ret;
 }

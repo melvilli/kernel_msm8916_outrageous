@@ -174,6 +174,14 @@ static inline bool kvm_vcpu_trap_is_iabt(const struct kvm_vcpu *vcpu)
 
 static inline u8 kvm_vcpu_trap_get_fault(const struct kvm_vcpu *vcpu)
 {
+<<<<<<< HEAD
+=======
+	return kvm_vcpu_get_hsr(vcpu) & ESR_EL2_FSC;
+}
+
+static inline u8 kvm_vcpu_trap_get_fault_type(const struct kvm_vcpu *vcpu)
+{
+>>>>>>> v3.18
 	return kvm_vcpu_get_hsr(vcpu) & ESR_EL2_FSC_TYPE;
 }
 
@@ -213,6 +221,20 @@ static inline unsigned long vcpu_data_guest_to_host(struct kvm_vcpu *vcpu,
 		default:
 			return be64_to_cpu(data);
 		}
+<<<<<<< HEAD
+=======
+	} else {
+		switch (len) {
+		case 1:
+			return data & 0xff;
+		case 2:
+			return le16_to_cpu(data & 0xffff);
+		case 4:
+			return le32_to_cpu(data & 0xffffffff);
+		default:
+			return le64_to_cpu(data);
+		}
+>>>>>>> v3.18
 	}
 
 	return data;		/* Leave LE untouched */
@@ -233,6 +255,20 @@ static inline unsigned long vcpu_data_host_to_guest(struct kvm_vcpu *vcpu,
 		default:
 			return cpu_to_be64(data);
 		}
+<<<<<<< HEAD
+=======
+	} else {
+		switch (len) {
+		case 1:
+			return data & 0xff;
+		case 2:
+			return cpu_to_le16(data & 0xffff);
+		case 4:
+			return cpu_to_le32(data & 0xffffffff);
+		default:
+			return cpu_to_le64(data);
+		}
+>>>>>>> v3.18
 	}
 
 	return data;		/* Leave LE untouched */

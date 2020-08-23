@@ -926,6 +926,23 @@ err:
 	kref_put(&rdata->kref, rdata->local_port->tt.rport_destroy);
 }
 
+<<<<<<< HEAD
+=======
+static bool
+fc_rport_compatible_roles(struct fc_lport *lport, struct fc_rport_priv *rdata)
+{
+	if (rdata->ids.roles == FC_PORT_ROLE_UNKNOWN)
+		return true;
+	if ((rdata->ids.roles & FC_PORT_ROLE_FCP_TARGET) &&
+	    (lport->service_params & FCP_SPPF_INIT_FCN))
+		return true;
+	if ((rdata->ids.roles & FC_PORT_ROLE_FCP_INITIATOR) &&
+	    (lport->service_params & FCP_SPPF_TARG_FCN))
+		return true;
+	return false;
+}
+
+>>>>>>> v3.18
 /**
  * fc_rport_enter_plogi() - Send Port Login (PLOGI) request
  * @rdata: The remote port to send a PLOGI to
@@ -938,6 +955,15 @@ static void fc_rport_enter_plogi(struct fc_rport_priv *rdata)
 	struct fc_lport *lport = rdata->local_port;
 	struct fc_frame *fp;
 
+<<<<<<< HEAD
+=======
+	if (!fc_rport_compatible_roles(lport, rdata)) {
+		FC_RPORT_DBG(rdata, "PLOGI suppressed for incompatible role\n");
+		fc_rport_state_enter(rdata, RPORT_ST_PLOGI_WAIT);
+		return;
+	}
+
+>>>>>>> v3.18
 	FC_RPORT_DBG(rdata, "Port entered PLOGI state from %s state\n",
 		     fc_rport_state(rdata));
 
@@ -1646,6 +1672,16 @@ static void fc_rport_recv_plogi_req(struct fc_lport *lport,
 		rjt_data.explan = ELS_EXPL_NONE;
 		goto reject;
 	}
+<<<<<<< HEAD
+=======
+	if (!fc_rport_compatible_roles(lport, rdata)) {
+		FC_RPORT_DBG(rdata, "Received PLOGI for incompatible role\n");
+		mutex_unlock(&rdata->rp_mutex);
+		rjt_data.reason = ELS_RJT_LOGIC;
+		rjt_data.explan = ELS_EXPL_NONE;
+		goto reject;
+	}
+>>>>>>> v3.18
 
 	/*
 	 * Get session payload size from incoming PLOGI.
@@ -1678,7 +1714,11 @@ reject:
  * @rdata: The remote port that sent the PRLI request
  * @rx_fp: The PRLI request frame
  *
+<<<<<<< HEAD
  * Locking Note: The rport lock is exected to be held before calling
+=======
+ * Locking Note: The rport lock is expected to be held before calling
+>>>>>>> v3.18
  * this function.
  */
 static void fc_rport_recv_prli_req(struct fc_rport_priv *rdata,
@@ -1797,7 +1837,11 @@ drop:
  * @rdata: The remote port that sent the PRLO request
  * @rx_fp: The PRLO request frame
  *
+<<<<<<< HEAD
  * Locking Note: The rport lock is exected to be held before calling
+=======
+ * Locking Note: The rport lock is expected to be held before calling
+>>>>>>> v3.18
  * this function.
  */
 static void fc_rport_recv_prlo_req(struct fc_rport_priv *rdata,
@@ -1868,7 +1912,11 @@ drop:
  * @lport: The local port that received the LOGO request
  * @fp:	   The LOGO request frame
  *
+<<<<<<< HEAD
  * Locking Note: The rport lock is exected to be held before calling
+=======
+ * Locking Note: The rport lock is expected to be held before calling
+>>>>>>> v3.18
  * this function.
  */
 static void fc_rport_recv_logo_req(struct fc_lport *lport, struct fc_frame *fp)

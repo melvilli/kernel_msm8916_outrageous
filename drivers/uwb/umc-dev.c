@@ -66,6 +66,10 @@ int umc_device_register(struct umc_dev *umc)
 	return 0;
 
 error_device_register:
+<<<<<<< HEAD
+=======
+	put_device(&umc->dev);
+>>>>>>> v3.18
 	release_resource(&umc->resource);
 error_request_resource:
 	return err;

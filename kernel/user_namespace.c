@@ -24,7 +24,10 @@
 #include <linux/fs_struct.h>
 
 static struct kmem_cache *user_ns_cachep __read_mostly;
+<<<<<<< HEAD
 static DEFINE_MUTEX(userns_state_mutex);
+=======
+>>>>>>> v3.18
 
 static bool new_idmap_permitted(const struct file *file,
 				struct user_namespace *ns, int cap_setid,
@@ -39,7 +42,10 @@ static void set_cred_user_ns(struct cred *cred, struct user_namespace *user_ns)
 	cred->cap_inheritable = CAP_EMPTY_SET;
 	cred->cap_permitted = CAP_FULL_SET;
 	cred->cap_effective = CAP_FULL_SET;
+<<<<<<< HEAD
 	cred->cap_ambient = CAP_EMPTY_SET;
+=======
+>>>>>>> v3.18
 	cred->cap_bset = CAP_FULL_SET;
 #ifdef CONFIG_KEYS
 	key_put(cred->request_key_auth);
@@ -101,6 +107,7 @@ int create_user_ns(struct cred *new)
 	ns->owner = owner;
 	ns->group = group;
 
+<<<<<<< HEAD
 	/* Inherit USERNS_SETGROUPS_ALLOWED from our parent */
 	mutex_lock(&userns_state_mutex);
 	ns->flags = parent_ns->flags;
@@ -110,6 +117,13 @@ int create_user_ns(struct cred *new)
 
 	update_mnt_policy(ns);
 
+=======
+	set_cred_user_ns(new, ns);
+
+#ifdef CONFIG_PERSISTENT_KEYRINGS
+	init_rwsem(&ns->persistent_keyring_register_sem);
+#endif
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -139,6 +153,12 @@ void free_user_ns(struct user_namespace *ns)
 
 	do {
 		parent = ns->parent;
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PERSISTENT_KEYRINGS
+		key_put(ns->persistent_keyring_register);
+#endif
+>>>>>>> v3.18
 		proc_free_inum(ns->proc_inum);
 		kmem_cache_free(user_ns_cachep, ns);
 		ns = parent;
@@ -228,7 +248,11 @@ static u32 map_id_up(struct uid_gid_map *map, u32 id)
  *
  *	When there is no mapping defined for the user-namespace uid
  *	pair INVALID_UID is returned.  Callers are expected to test
+<<<<<<< HEAD
  *	for and handle handle INVALID_UID being returned.  INVALID_UID
+=======
+ *	for and handle INVALID_UID being returned.  INVALID_UID
+>>>>>>> v3.18
  *	may be tested for using uid_valid().
  */
 kuid_t make_kuid(struct user_namespace *ns, uid_t uid)
@@ -289,7 +313,11 @@ EXPORT_SYMBOL(from_kuid_munged);
 /**
  *	make_kgid - Map a user-namespace gid pair into a kgid.
  *	@ns:  User namespace that the gid is in
+<<<<<<< HEAD
  *	@uid: group identifier
+=======
+ *	@gid: group identifier
+>>>>>>> v3.18
  *
  *	Maps a user-namespace gid pair into a kernel internal kgid,
  *	and returns that kgid.
@@ -485,7 +513,12 @@ static int projid_m_show(struct seq_file *seq, void *v)
 	return 0;
 }
 
+<<<<<<< HEAD
 static void *m_start(struct seq_file *seq, loff_t *ppos, struct uid_gid_map *map)
+=======
+static void *m_start(struct seq_file *seq, loff_t *ppos,
+		     struct uid_gid_map *map)
+>>>>>>> v3.18
 {
 	struct uid_gid_extent *extent = NULL;
 	loff_t pos = *ppos;
@@ -528,28 +561,45 @@ static void m_stop(struct seq_file *seq, void *v)
 	return;
 }
 
+<<<<<<< HEAD
 struct seq_operations proc_uid_seq_operations = {
+=======
+const struct seq_operations proc_uid_seq_operations = {
+>>>>>>> v3.18
 	.start = uid_m_start,
 	.stop = m_stop,
 	.next = m_next,
 	.show = uid_m_show,
 };
 
+<<<<<<< HEAD
 struct seq_operations proc_gid_seq_operations = {
+=======
+const struct seq_operations proc_gid_seq_operations = {
+>>>>>>> v3.18
 	.start = gid_m_start,
 	.stop = m_stop,
 	.next = m_next,
 	.show = gid_m_show,
 };
 
+<<<<<<< HEAD
 struct seq_operations proc_projid_seq_operations = {
+=======
+const struct seq_operations proc_projid_seq_operations = {
+>>>>>>> v3.18
 	.start = projid_m_start,
 	.stop = m_stop,
 	.next = m_next,
 	.show = projid_m_show,
 };
 
+<<<<<<< HEAD
 static bool mappings_overlap(struct uid_gid_map *new_map, struct uid_gid_extent *extent)
+=======
+static bool mappings_overlap(struct uid_gid_map *new_map,
+			     struct uid_gid_extent *extent)
+>>>>>>> v3.18
 {
 	u32 upper_first, lower_first, upper_last, lower_last;
 	unsigned idx;
@@ -584,6 +634,12 @@ static bool mappings_overlap(struct uid_gid_map *new_map, struct uid_gid_extent 
 	return false;
 }
 
+<<<<<<< HEAD
+=======
+
+static DEFINE_MUTEX(id_map_mutex);
+
+>>>>>>> v3.18
 static ssize_t map_write(struct file *file, const char __user *buf,
 			 size_t count, loff_t *ppos,
 			 int cap_setid,
@@ -600,7 +656,11 @@ static ssize_t map_write(struct file *file, const char __user *buf,
 	ssize_t ret = -EINVAL;
 
 	/*
+<<<<<<< HEAD
 	 * The userns_state_mutex serializes all writes to any given map.
+=======
+	 * The id_map_mutex serializes all writes to any given map.
+>>>>>>> v3.18
 	 *
 	 * Any map is only ever written once.
 	 *
@@ -618,7 +678,11 @@ static ssize_t map_write(struct file *file, const char __user *buf,
 	 * order and smp_rmb() is guaranteed that we don't have crazy
 	 * architectures returning stale data.
 	 */
+<<<<<<< HEAD
 	mutex_lock(&userns_state_mutex);
+=======
+	mutex_lock(&id_map_mutex);
+>>>>>>> v3.18
 
 	ret = -EPERM;
 	/* Only allow one successful write to the map */
@@ -653,7 +717,11 @@ static ssize_t map_write(struct file *file, const char __user *buf,
 	ret = -EINVAL;
 	pos = kbuf;
 	new_map.nr_extents = 0;
+<<<<<<< HEAD
 	for (;pos; pos = next_line) {
+=======
+	for (; pos; pos = next_line) {
+>>>>>>> v3.18
 		extent = &new_map.extent[new_map.nr_extents];
 
 		/* Find the end of line and ensure I don't look past it */
@@ -687,6 +755,7 @@ static ssize_t map_write(struct file *file, const char __user *buf,
 
 		/* Verify we have been given valid starting values */
 		if ((extent->first == (u32) -1) ||
+<<<<<<< HEAD
 		    (extent->lower_first == (u32) -1 ))
 			goto out;
 
@@ -694,6 +763,18 @@ static ssize_t map_write(struct file *file, const char __user *buf,
 		if ((extent->first + extent->count) <= extent->first)
 			goto out;
 		if ((extent->lower_first + extent->count) <= extent->lower_first)
+=======
+		    (extent->lower_first == (u32) -1))
+			goto out;
+
+		/* Verify count is not zero and does not cause the
+		 * extent to wrap
+		 */
+		if ((extent->first + extent->count) <= extent->first)
+			goto out;
+		if ((extent->lower_first + extent->count) <=
+		     extent->lower_first)
+>>>>>>> v3.18
 			goto out;
 
 		/* Do the ranges in extent overlap any previous extents? */
@@ -745,13 +826,22 @@ static ssize_t map_write(struct file *file, const char __user *buf,
 	*ppos = count;
 	ret = count;
 out:
+<<<<<<< HEAD
 	mutex_unlock(&userns_state_mutex);
+=======
+	mutex_unlock(&id_map_mutex);
+>>>>>>> v3.18
 	if (page)
 		free_page(page);
 	return ret;
 }
 
+<<<<<<< HEAD
 ssize_t proc_uid_map_write(struct file *file, const char __user *buf, size_t size, loff_t *ppos)
+=======
+ssize_t proc_uid_map_write(struct file *file, const char __user *buf,
+			   size_t size, loff_t *ppos)
+>>>>>>> v3.18
 {
 	struct seq_file *seq = file->private_data;
 	struct user_namespace *ns = seq->private;
@@ -767,7 +857,12 @@ ssize_t proc_uid_map_write(struct file *file, const char __user *buf, size_t siz
 			 &ns->uid_map, &ns->parent->uid_map);
 }
 
+<<<<<<< HEAD
 ssize_t proc_gid_map_write(struct file *file, const char __user *buf, size_t size, loff_t *ppos)
+=======
+ssize_t proc_gid_map_write(struct file *file, const char __user *buf,
+			   size_t size, loff_t *ppos)
+>>>>>>> v3.18
 {
 	struct seq_file *seq = file->private_data;
 	struct user_namespace *ns = seq->private;
@@ -783,7 +878,12 @@ ssize_t proc_gid_map_write(struct file *file, const char __user *buf, size_t siz
 			 &ns->gid_map, &ns->parent->gid_map);
 }
 
+<<<<<<< HEAD
 ssize_t proc_projid_map_write(struct file *file, const char __user *buf, size_t size, loff_t *ppos)
+=======
+ssize_t proc_projid_map_write(struct file *file, const char __user *buf,
+			      size_t size, loff_t *ppos)
+>>>>>>> v3.18
 {
 	struct seq_file *seq = file->private_data;
 	struct user_namespace *ns = seq->private;
@@ -800,6 +900,7 @@ ssize_t proc_projid_map_write(struct file *file, const char __user *buf, size_t 
 			 &ns->projid_map, &ns->parent->projid_map);
 }
 
+<<<<<<< HEAD
 static bool new_idmap_permitted(const struct file *file, 
 				struct user_namespace *ns, int cap_setid,
 				struct uid_gid_map *new_map)
@@ -819,6 +920,22 @@ static bool new_idmap_permitted(const struct file *file,
 			kgid_t gid = make_kgid(ns->parent, id);
 			if (!(ns->flags & USERNS_SETGROUPS_ALLOWED) &&
 			    gid_eq(gid, cred->egid))
+=======
+static bool new_idmap_permitted(const struct file *file,
+				struct user_namespace *ns, int cap_setid,
+				struct uid_gid_map *new_map)
+{
+	/* Allow mapping to your own filesystem ids */
+	if ((new_map->nr_extents == 1) && (new_map->extent[0].count == 1)) {
+		u32 id = new_map->extent[0].lower_first;
+		if (cap_setid == CAP_SETUID) {
+			kuid_t uid = make_kuid(ns->parent, id);
+			if (uid_eq(uid, file->f_cred->fsuid))
+				return true;
+		} else if (cap_setid == CAP_SETGID) {
+			kgid_t gid = make_kgid(ns->parent, id);
+			if (gid_eq(gid, file->f_cred->fsgid))
+>>>>>>> v3.18
 				return true;
 		}
 	}
@@ -838,6 +955,7 @@ static bool new_idmap_permitted(const struct file *file,
 	return false;
 }
 
+<<<<<<< HEAD
 int proc_setgroups_show(struct seq_file *seq, void *v)
 {
 	struct user_namespace *ns = seq->private;
@@ -932,6 +1050,8 @@ bool userns_may_setgroups(const struct user_namespace *ns)
 	return allowed;
 }
 
+=======
+>>>>>>> v3.18
 static void *userns_get(struct task_struct *task)
 {
 	struct user_namespace *user_ns;
@@ -999,4 +1119,8 @@ static __init int user_namespaces_init(void)
 	user_ns_cachep = KMEM_CACHE(user_namespace, SLAB_PANIC);
 	return 0;
 }
+<<<<<<< HEAD
 module_init(user_namespaces_init);
+=======
+subsys_initcall(user_namespaces_init);
+>>>>>>> v3.18

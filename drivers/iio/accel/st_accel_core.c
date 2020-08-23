@@ -26,6 +26,11 @@
 #include <linux/iio/common/st_sensors.h>
 #include "st_accel.h"
 
+<<<<<<< HEAD
+=======
+#define ST_ACCEL_NUMBER_DATA_CHANNELS		3
+
+>>>>>>> v3.18
 /* DEFAULT VALUE FOR SENSORS */
 #define ST_ACCEL_DEFAULT_OUT_X_L_ADDR		0x28
 #define ST_ACCEL_DEFAULT_OUT_Y_L_ADDR		0x2a
@@ -63,7 +68,12 @@
 #define ST_ACCEL_1_BDU_ADDR			0x23
 #define ST_ACCEL_1_BDU_MASK			0x80
 #define ST_ACCEL_1_DRDY_IRQ_ADDR		0x22
+<<<<<<< HEAD
 #define ST_ACCEL_1_DRDY_IRQ_MASK		0x10
+=======
+#define ST_ACCEL_1_DRDY_IRQ_INT1_MASK		0x10
+#define ST_ACCEL_1_DRDY_IRQ_INT2_MASK		0x08
+>>>>>>> v3.18
 #define ST_ACCEL_1_MULTIREAD_BIT		true
 
 /* CUSTOM VALUES FOR SENSOR 2 */
@@ -87,7 +97,12 @@
 #define ST_ACCEL_2_BDU_ADDR			0x23
 #define ST_ACCEL_2_BDU_MASK			0x80
 #define ST_ACCEL_2_DRDY_IRQ_ADDR		0x22
+<<<<<<< HEAD
 #define ST_ACCEL_2_DRDY_IRQ_MASK		0x02
+=======
+#define ST_ACCEL_2_DRDY_IRQ_INT1_MASK		0x02
+#define ST_ACCEL_2_DRDY_IRQ_INT2_MASK		0x10
+>>>>>>> v3.18
 #define ST_ACCEL_2_MULTIREAD_BIT		true
 
 /* CUSTOM VALUES FOR SENSOR 3 */
@@ -119,28 +134,63 @@
 #define ST_ACCEL_3_BDU_ADDR			0x20
 #define ST_ACCEL_3_BDU_MASK			0x08
 #define ST_ACCEL_3_DRDY_IRQ_ADDR		0x23
+<<<<<<< HEAD
 #define ST_ACCEL_3_DRDY_IRQ_MASK		0x80
+=======
+#define ST_ACCEL_3_DRDY_IRQ_INT1_MASK		0x80
+#define ST_ACCEL_3_DRDY_IRQ_INT2_MASK		0x00
+>>>>>>> v3.18
 #define ST_ACCEL_3_IG1_EN_ADDR			0x23
 #define ST_ACCEL_3_IG1_EN_MASK			0x08
 #define ST_ACCEL_3_MULTIREAD_BIT		false
 
 static const struct iio_chan_spec st_accel_12bit_channels[] = {
+<<<<<<< HEAD
 	ST_SENSORS_LSM_CHANNELS(IIO_ACCEL, ST_SENSORS_SCAN_X, IIO_MOD_X, IIO_LE,
 		ST_SENSORS_DEFAULT_12_REALBITS, ST_ACCEL_DEFAULT_OUT_X_L_ADDR),
 	ST_SENSORS_LSM_CHANNELS(IIO_ACCEL, ST_SENSORS_SCAN_Y, IIO_MOD_Y, IIO_LE,
 		ST_SENSORS_DEFAULT_12_REALBITS, ST_ACCEL_DEFAULT_OUT_Y_L_ADDR),
 	ST_SENSORS_LSM_CHANNELS(IIO_ACCEL, ST_SENSORS_SCAN_Z, IIO_MOD_Z, IIO_LE,
 		ST_SENSORS_DEFAULT_12_REALBITS, ST_ACCEL_DEFAULT_OUT_Z_L_ADDR),
+=======
+	ST_SENSORS_LSM_CHANNELS(IIO_ACCEL,
+			BIT(IIO_CHAN_INFO_RAW) | BIT(IIO_CHAN_INFO_SCALE),
+			ST_SENSORS_SCAN_X, 1, IIO_MOD_X, 's', IIO_LE, 12, 16,
+			ST_ACCEL_DEFAULT_OUT_X_L_ADDR),
+	ST_SENSORS_LSM_CHANNELS(IIO_ACCEL,
+			BIT(IIO_CHAN_INFO_RAW) | BIT(IIO_CHAN_INFO_SCALE),
+			ST_SENSORS_SCAN_Y, 1, IIO_MOD_Y, 's', IIO_LE, 12, 16,
+			ST_ACCEL_DEFAULT_OUT_Y_L_ADDR),
+	ST_SENSORS_LSM_CHANNELS(IIO_ACCEL,
+			BIT(IIO_CHAN_INFO_RAW) | BIT(IIO_CHAN_INFO_SCALE),
+			ST_SENSORS_SCAN_Z, 1, IIO_MOD_Z, 's', IIO_LE, 12, 16,
+			ST_ACCEL_DEFAULT_OUT_Z_L_ADDR),
+>>>>>>> v3.18
 	IIO_CHAN_SOFT_TIMESTAMP(3)
 };
 
 static const struct iio_chan_spec st_accel_16bit_channels[] = {
+<<<<<<< HEAD
 	ST_SENSORS_LSM_CHANNELS(IIO_ACCEL, ST_SENSORS_SCAN_X, IIO_MOD_X, IIO_LE,
 		ST_SENSORS_DEFAULT_16_REALBITS, ST_ACCEL_DEFAULT_OUT_X_L_ADDR),
 	ST_SENSORS_LSM_CHANNELS(IIO_ACCEL, ST_SENSORS_SCAN_Y, IIO_MOD_Y, IIO_LE,
 		ST_SENSORS_DEFAULT_16_REALBITS, ST_ACCEL_DEFAULT_OUT_Y_L_ADDR),
 	ST_SENSORS_LSM_CHANNELS(IIO_ACCEL, ST_SENSORS_SCAN_Z, IIO_MOD_Z, IIO_LE,
 		ST_SENSORS_DEFAULT_16_REALBITS, ST_ACCEL_DEFAULT_OUT_Z_L_ADDR),
+=======
+	ST_SENSORS_LSM_CHANNELS(IIO_ACCEL,
+			BIT(IIO_CHAN_INFO_RAW) | BIT(IIO_CHAN_INFO_SCALE),
+			ST_SENSORS_SCAN_X, 1, IIO_MOD_X, 's', IIO_LE, 16, 16,
+			ST_ACCEL_DEFAULT_OUT_X_L_ADDR),
+	ST_SENSORS_LSM_CHANNELS(IIO_ACCEL,
+			BIT(IIO_CHAN_INFO_RAW) | BIT(IIO_CHAN_INFO_SCALE),
+			ST_SENSORS_SCAN_Y, 1, IIO_MOD_Y, 's', IIO_LE, 16, 16,
+			ST_ACCEL_DEFAULT_OUT_Y_L_ADDR),
+	ST_SENSORS_LSM_CHANNELS(IIO_ACCEL,
+			BIT(IIO_CHAN_INFO_RAW) | BIT(IIO_CHAN_INFO_SCALE),
+			ST_SENSORS_SCAN_Z, 1, IIO_MOD_Z, 's', IIO_LE, 16, 16,
+			ST_ACCEL_DEFAULT_OUT_Z_L_ADDR),
+>>>>>>> v3.18
 	IIO_CHAN_SOFT_TIMESTAMP(3)
 };
 
@@ -210,7 +260,12 @@ static const struct st_sensors st_accel_sensors[] = {
 		},
 		.drdy_irq = {
 			.addr = ST_ACCEL_1_DRDY_IRQ_ADDR,
+<<<<<<< HEAD
 			.mask = ST_ACCEL_1_DRDY_IRQ_MASK,
+=======
+			.mask_int1 = ST_ACCEL_1_DRDY_IRQ_INT1_MASK,
+			.mask_int2 = ST_ACCEL_1_DRDY_IRQ_INT2_MASK,
+>>>>>>> v3.18
 		},
 		.multi_read_bit = ST_ACCEL_1_MULTIREAD_BIT,
 		.bootime = 2,
@@ -271,7 +326,12 @@ static const struct st_sensors st_accel_sensors[] = {
 		},
 		.drdy_irq = {
 			.addr = ST_ACCEL_2_DRDY_IRQ_ADDR,
+<<<<<<< HEAD
 			.mask = ST_ACCEL_2_DRDY_IRQ_MASK,
+=======
+			.mask_int1 = ST_ACCEL_2_DRDY_IRQ_INT1_MASK,
+			.mask_int2 = ST_ACCEL_2_DRDY_IRQ_INT2_MASK,
+>>>>>>> v3.18
 		},
 		.multi_read_bit = ST_ACCEL_2_MULTIREAD_BIT,
 		.bootime = 2,
@@ -344,7 +404,12 @@ static const struct st_sensors st_accel_sensors[] = {
 		},
 		.drdy_irq = {
 			.addr = ST_ACCEL_3_DRDY_IRQ_ADDR,
+<<<<<<< HEAD
 			.mask = ST_ACCEL_3_DRDY_IRQ_MASK,
+=======
+			.mask_int1 = ST_ACCEL_3_DRDY_IRQ_INT1_MASK,
+			.mask_int2 = ST_ACCEL_3_DRDY_IRQ_INT2_MASK,
+>>>>>>> v3.18
 			.ig1 = {
 				.en_addr = ST_ACCEL_3_IG1_EN_ADDR,
 				.en_mask = ST_ACCEL_3_IG1_EN_MASK,
@@ -373,6 +438,12 @@ static int st_accel_read_raw(struct iio_dev *indio_dev,
 		*val = 0;
 		*val2 = adata->current_fullscale->gain;
 		return IIO_VAL_INT_PLUS_MICRO;
+<<<<<<< HEAD
+=======
+	case IIO_CHAN_INFO_SAMP_FREQ:
+		*val = adata->odr;
+		return IIO_VAL_INT;
+>>>>>>> v3.18
 	default:
 		return -EINVAL;
 	}
@@ -390,6 +461,16 @@ static int st_accel_write_raw(struct iio_dev *indio_dev,
 	case IIO_CHAN_INFO_SCALE:
 		err = st_sensors_set_fullscale_by_gain(indio_dev, val2);
 		break;
+<<<<<<< HEAD
+=======
+	case IIO_CHAN_INFO_SAMP_FREQ:
+		if (val2)
+			return -EINVAL;
+		mutex_lock(&indio_dev->mlock);
+		err = st_sensors_set_odr(indio_dev, val);
+		mutex_unlock(&indio_dev->mlock);
+		return err;
+>>>>>>> v3.18
 	default:
 		return -EINVAL;
 	}
@@ -397,14 +478,20 @@ static int st_accel_write_raw(struct iio_dev *indio_dev,
 	return err;
 }
 
+<<<<<<< HEAD
 static ST_SENSOR_DEV_ATTR_SAMP_FREQ();
+=======
+>>>>>>> v3.18
 static ST_SENSORS_DEV_ATTR_SAMP_FREQ_AVAIL();
 static ST_SENSORS_DEV_ATTR_SCALE_AVAIL(in_accel_scale_available);
 
 static struct attribute *st_accel_attributes[] = {
 	&iio_dev_attr_sampling_frequency_available.dev_attr.attr,
 	&iio_dev_attr_in_accel_scale_available.dev_attr.attr,
+<<<<<<< HEAD
 	&iio_dev_attr_sampling_frequency.dev_attr.attr,
+=======
+>>>>>>> v3.18
 	NULL,
 };
 
@@ -429,19 +516,39 @@ static const struct iio_trigger_ops st_accel_trigger_ops = {
 #define ST_ACCEL_TRIGGER_OPS NULL
 #endif
 
+<<<<<<< HEAD
 int st_accel_common_probe(struct iio_dev *indio_dev)
 {
 	int err;
 	struct st_sensor_data *adata = iio_priv(indio_dev);
+=======
+int st_accel_common_probe(struct iio_dev *indio_dev,
+				struct st_sensors_platform_data *plat_data)
+{
+	struct st_sensor_data *adata = iio_priv(indio_dev);
+	int irq = adata->get_irq_data_ready(indio_dev);
+	int err;
+>>>>>>> v3.18
 
 	indio_dev->modes = INDIO_DIRECT_MODE;
 	indio_dev->info = &accel_info;
 
+<<<<<<< HEAD
 	err = st_sensors_check_device_support(indio_dev,
 				ARRAY_SIZE(st_accel_sensors), st_accel_sensors);
 	if (err < 0)
 		goto st_accel_common_probe_error;
 
+=======
+	st_sensors_power_enable(indio_dev);
+
+	err = st_sensors_check_device_support(indio_dev,
+				ARRAY_SIZE(st_accel_sensors), st_accel_sensors);
+	if (err < 0)
+		return err;
+
+	adata->num_data_channels = ST_ACCEL_NUMBER_DATA_CHANNELS;
+>>>>>>> v3.18
 	adata->multiread_bit = adata->sensor->multi_read_bit;
 	indio_dev->channels = adata->sensor->ch;
 	indio_dev->num_channels = ST_SENSORS_NUMBER_ALL_CHANNELS;
@@ -450,6 +557,7 @@ int st_accel_common_probe(struct iio_dev *indio_dev)
 						&adata->sensor->fs.fs_avl[0];
 	adata->odr = adata->sensor->odr.odr_avl[0].hz;
 
+<<<<<<< HEAD
 	err = st_sensors_init_sensor(indio_dev);
 	if (err < 0)
 		goto st_accel_common_probe_error;
@@ -459,6 +567,21 @@ int st_accel_common_probe(struct iio_dev *indio_dev)
 		if (err < 0)
 			goto st_accel_common_probe_error;
 
+=======
+	if (!plat_data)
+		plat_data =
+			(struct st_sensors_platform_data *)&default_accel_pdata;
+
+	err = st_sensors_init_sensor(indio_dev, plat_data);
+	if (err < 0)
+		return err;
+
+	err = st_accel_allocate_ring(indio_dev);
+	if (err < 0)
+		return err;
+
+	if (irq > 0) {
+>>>>>>> v3.18
 		err = st_sensors_allocate_trigger(indio_dev,
 						 ST_ACCEL_TRIGGER_OPS);
 		if (err < 0)
@@ -469,6 +592,7 @@ int st_accel_common_probe(struct iio_dev *indio_dev)
 	if (err)
 		goto st_accel_device_register_error;
 
+<<<<<<< HEAD
 	return err;
 
 st_accel_device_register_error:
@@ -478,6 +602,19 @@ st_accel_probe_trigger_error:
 	if (adata->get_irq_data_ready(indio_dev) > 0)
 		st_accel_deallocate_ring(indio_dev);
 st_accel_common_probe_error:
+=======
+	dev_info(&indio_dev->dev, "registered accelerometer %s\n",
+		 indio_dev->name);
+
+	return 0;
+
+st_accel_device_register_error:
+	if (irq > 0)
+		st_sensors_deallocate_trigger(indio_dev);
+st_accel_probe_trigger_error:
+	st_accel_deallocate_ring(indio_dev);
+
+>>>>>>> v3.18
 	return err;
 }
 EXPORT_SYMBOL(st_accel_common_probe);
@@ -486,12 +623,22 @@ void st_accel_common_remove(struct iio_dev *indio_dev)
 {
 	struct st_sensor_data *adata = iio_priv(indio_dev);
 
+<<<<<<< HEAD
 	iio_device_unregister(indio_dev);
 	if (adata->get_irq_data_ready(indio_dev) > 0) {
 		st_sensors_deallocate_trigger(indio_dev);
 		st_accel_deallocate_ring(indio_dev);
 	}
 	iio_device_free(indio_dev);
+=======
+	st_sensors_power_disable(indio_dev);
+
+	iio_device_unregister(indio_dev);
+	if (adata->get_irq_data_ready(indio_dev) > 0)
+		st_sensors_deallocate_trigger(indio_dev);
+
+	st_accel_deallocate_ring(indio_dev);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(st_accel_common_remove);
 

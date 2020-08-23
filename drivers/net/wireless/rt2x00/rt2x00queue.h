@@ -13,9 +13,13 @@
 	GNU General Public License for more details.
 
 	You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
 	along with this program; if not, write to the
 	Free Software Foundation, Inc.,
 	59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+	along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
  */
 
 /*
@@ -355,6 +359,10 @@ struct txentry_desc {
  */
 enum queue_entry_flags {
 	ENTRY_BCN_ASSIGNED,
+<<<<<<< HEAD
+=======
+	ENTRY_BCN_ENABLED,
+>>>>>>> v3.18
 	ENTRY_OWNER_DEVICE_DATA,
 	ENTRY_DATA_PENDING,
 	ENTRY_DATA_IO_FAILED,
@@ -453,6 +461,10 @@ enum data_queue_flags {
  * @cw_max: The cw max value for outgoing frames (field ignored in RX queue).
  * @data_size: Maximum data size for the frames in this queue.
  * @desc_size: Hardware descriptor size for the data in this queue.
+<<<<<<< HEAD
+=======
+ * @priv_size: Size of per-queue_entry private data.
+>>>>>>> v3.18
  * @usb_endpoint: Device endpoint used for communication (USB only)
  * @usb_maxpacket: Max packet size for given endpoint (USB only)
  */
@@ -481,12 +493,17 @@ struct data_queue {
 	unsigned short data_size;
 	unsigned char  desc_size;
 	unsigned char  winfo_size;
+<<<<<<< HEAD
+=======
+	unsigned short priv_size;
+>>>>>>> v3.18
 
 	unsigned short usb_endpoint;
 	unsigned short usb_maxpacket;
 };
 
 /**
+<<<<<<< HEAD
  * struct data_queue_desc: Data queue description
  *
  * The information in this structure is used by drivers
@@ -506,6 +523,8 @@ struct data_queue_desc {
 };
 
 /**
+=======
+>>>>>>> v3.18
  * queue_end - Return pointer to the last queue (HELPER MACRO).
  * @__dev: Pointer to &struct rt2x00_dev
  *

@@ -48,9 +48,13 @@ enum {
 
 struct max8952_data {
 	struct i2c_client	*client;
+<<<<<<< HEAD
 	struct device		*dev;
 	struct max8952_platform_data *pdata;
 	struct regulator_dev	*rdev;
+=======
+	struct max8952_platform_data *pdata;
+>>>>>>> v3.18
 
 	bool vid0;
 	bool vid1;
@@ -59,6 +63,10 @@ struct max8952_data {
 static int max8952_read_reg(struct max8952_data *max8952, u8 reg)
 {
 	int ret = i2c_smbus_read_byte_data(max8952->client, reg);
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	if (ret > 0)
 		ret &= 0xff;
 
@@ -130,7 +138,11 @@ static const struct regulator_desc regulator = {
 };
 
 #ifdef CONFIG_OF
+<<<<<<< HEAD
 static struct of_device_id max8952_dt_match[] = {
+=======
+static const struct of_device_id max8952_dt_match[] = {
+>>>>>>> v3.18
 	{ .compatible = "maxim,max8952" },
 	{},
 };
@@ -144,10 +156,15 @@ static struct max8952_platform_data *max8952_parse_dt(struct device *dev)
 	int i;
 
 	pd = devm_kzalloc(dev, sizeof(*pd), GFP_KERNEL);
+<<<<<<< HEAD
 	if (!pd) {
 		dev_err(dev, "Failed to allocate platform data\n");
 		return NULL;
 	}
+=======
+	if (!pd)
+		return NULL;
+>>>>>>> v3.18
 
 	pd->gpio_vid0 = of_get_named_gpio(np, "max8952,vid-gpios", 0);
 	pd->gpio_vid1 = of_get_named_gpio(np, "max8952,vid-gpios", 1);
@@ -196,9 +213,16 @@ static int max8952_pmic_probe(struct i2c_client *client,
 		const struct i2c_device_id *i2c_id)
 {
 	struct i2c_adapter *adapter = to_i2c_adapter(client->dev.parent);
+<<<<<<< HEAD
 	struct max8952_platform_data *pdata = client->dev.platform_data;
 	struct regulator_config config = { };
 	struct max8952_data *max8952;
+=======
+	struct max8952_platform_data *pdata = dev_get_platdata(&client->dev);
+	struct regulator_config config = { };
+	struct max8952_data *max8952;
+	struct regulator_dev *rdev;
+>>>>>>> v3.18
 
 	int ret = 0, err = 0;
 
@@ -219,10 +243,16 @@ static int max8952_pmic_probe(struct i2c_client *client,
 		return -ENOMEM;
 
 	max8952->client = client;
+<<<<<<< HEAD
 	max8952->dev = &client->dev;
 	max8952->pdata = pdata;
 
 	config.dev = max8952->dev;
+=======
+	max8952->pdata = pdata;
+
+	config.dev = &client->dev;
+>>>>>>> v3.18
 	config.init_data = pdata->reg_data;
 	config.driver_data = max8952;
 	config.of_node = client->dev.of_node;
@@ -231,11 +261,18 @@ static int max8952_pmic_probe(struct i2c_client *client,
 	if (pdata->reg_data->constraints.boot_on)
 		config.ena_gpio_flags |= GPIOF_OUT_INIT_HIGH;
 
+<<<<<<< HEAD
 	max8952->rdev = regulator_register(&regulator, &config);
 
 	if (IS_ERR(max8952->rdev)) {
 		ret = PTR_ERR(max8952->rdev);
 		dev_err(max8952->dev, "regulator init failed (%d)\n", ret);
+=======
+	rdev = devm_regulator_register(&client->dev, &regulator, &config);
+	if (IS_ERR(rdev)) {
+		ret = PTR_ERR(rdev);
+		dev_err(&client->dev, "regulator init failed (%d)\n", ret);
+>>>>>>> v3.18
 		return ret;
 	}
 
@@ -244,6 +281,7 @@ static int max8952_pmic_probe(struct i2c_client *client,
 
 	if (gpio_is_valid(pdata->gpio_vid0) &&
 			gpio_is_valid(pdata->gpio_vid1)) {
+<<<<<<< HEAD
 		if (!gpio_request(pdata->gpio_vid0, "MAX8952 VID0"))
 			gpio_direction_output(pdata->gpio_vid0,
 					(pdata->default_mode) & 0x1);
@@ -259,11 +297,30 @@ static int max8952_pmic_probe(struct i2c_client *client,
 			err = 2;
 		}
 
+=======
+		unsigned long gpio_flags;
+
+		gpio_flags = max8952->vid0 ?
+			     GPIOF_OUT_INIT_HIGH : GPIOF_OUT_INIT_LOW;
+		if (devm_gpio_request_one(&client->dev, pdata->gpio_vid0,
+					  gpio_flags, "MAX8952 VID0"))
+			err = 1;
+
+		gpio_flags = max8952->vid1 ?
+			     GPIOF_OUT_INIT_HIGH : GPIOF_OUT_INIT_LOW;
+		if (devm_gpio_request_one(&client->dev, pdata->gpio_vid1,
+					  gpio_flags, "MAX8952 VID1"))
+			err = 2;
+>>>>>>> v3.18
 	} else
 		err = 3;
 
 	if (err) {
+<<<<<<< HEAD
 		dev_warn(max8952->dev, "VID0/1 gpio invalid: "
+=======
+		dev_warn(&client->dev, "VID0/1 gpio invalid: "
+>>>>>>> v3.18
 				"DVS not available.\n");
 		max8952->vid0 = 0;
 		max8952->vid1 = 0;
@@ -274,7 +331,11 @@ static int max8952_pmic_probe(struct i2c_client *client,
 		/* Disable Pulldown of EN only */
 		max8952_write_reg(max8952, MAX8952_REG_CONTROL, 0x60);
 
+<<<<<<< HEAD
 		dev_err(max8952->dev, "DVS modes disabled because VID0 and VID1"
+=======
+		dev_err(&client->dev, "DVS modes disabled because VID0 and VID1"
+>>>>>>> v3.18
 				" do not have proper controls.\n");
 	} else {
 		/*
@@ -317,6 +378,7 @@ static int max8952_pmic_probe(struct i2c_client *client,
 	return 0;
 }
 
+<<<<<<< HEAD
 static int max8952_pmic_remove(struct i2c_client *client)
 {
 	struct max8952_data *max8952 = i2c_get_clientdata(client);
@@ -330,6 +392,8 @@ static int max8952_pmic_remove(struct i2c_client *client)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 static const struct i2c_device_id max8952_ids[] = {
 	{ "max8952", 0 },
 	{ },
@@ -338,7 +402,10 @@ MODULE_DEVICE_TABLE(i2c, max8952_ids);
 
 static struct i2c_driver max8952_pmic_driver = {
 	.probe		= max8952_pmic_probe,
+<<<<<<< HEAD
 	.remove		= max8952_pmic_remove,
+=======
+>>>>>>> v3.18
 	.driver		= {
 		.name	= "max8952",
 		.of_match_table = of_match_ptr(max8952_dt_match),

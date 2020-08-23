@@ -29,6 +29,7 @@
 #ifndef __DATARATE_H__
 #define __DATARATE_H__
 
+<<<<<<< HEAD
 /*---------------------  Export Definitions -------------------------*/
 
 #define FALLBACK_PKT_COLLECT_TR_H  50   // pkts
@@ -48,6 +49,17 @@
 /*---------------------  Export Types  ------------------------------*/
 
 /*---------------------  Export Functions  --------------------------*/
+=======
+#define FALLBACK_PKT_COLLECT_TR_H  50
+#define FALLBACK_PKT_COLLECT_TR_L  10
+#define FALLBACK_POLL_SECOND       5
+#define FALLBACK_RECOVER_SECOND    30
+#define FALLBACK_THRESHOLD         15
+#define UPGRADE_THRESHOLD          5
+#define UPGRADE_CNT_THRD           3
+#define RETRY_TIMES_THRD_H         2
+#define RETRY_TIMES_THRD_L         1
+>>>>>>> v3.18
 
 void
 RATEvParseMaxRate(

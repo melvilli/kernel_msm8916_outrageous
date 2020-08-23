@@ -11,7 +11,10 @@
 
 #include <linux/kernel.h>
 #include <linux/errno.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/module.h>
 #include <linux/kref.h>
@@ -297,6 +300,10 @@ static int yurex_probe(struct usb_interface *interface, const struct usb_device_
 
 	/* save our data pointer in this interface device */
 	usb_set_intfdata(interface, dev);
+<<<<<<< HEAD
+=======
+	dev->bbu = -1;
+>>>>>>> v3.18
 
 	/* we can register the device now, as it is ready */
 	retval = usb_register_dev(interface, &yurex_class);
@@ -307,8 +314,11 @@ static int yurex_probe(struct usb_interface *interface, const struct usb_device_
 		goto error;
 	}
 
+<<<<<<< HEAD
 	dev->bbu = -1;
 
+=======
+>>>>>>> v3.18
 	dev_info(&interface->dev,
 		 "USB YUREX device now attached to Yurex #%d\n",
 		 interface->minor);
@@ -360,7 +370,11 @@ static int yurex_fasync(int fd, struct file *file, int on)
 {
 	struct usb_yurex *dev;
 
+<<<<<<< HEAD
 	dev = (struct usb_yurex *)file->private_data;
+=======
+	dev = file->private_data;
+>>>>>>> v3.18
 	return fasync_helper(fd, file, on, &dev->async_queue);
 }
 
@@ -403,7 +417,11 @@ static int yurex_release(struct inode *inode, struct file *file)
 {
 	struct usb_yurex *dev;
 
+<<<<<<< HEAD
 	dev = (struct usb_yurex *)file->private_data;
+=======
+	dev = file->private_data;
+>>>>>>> v3.18
 	if (dev == NULL)
 		return -ENODEV;
 
@@ -420,7 +438,11 @@ static ssize_t yurex_read(struct file *file, char *buffer, size_t count, loff_t 
 	char in_buffer[20];
 	unsigned long flags;
 
+<<<<<<< HEAD
 	dev = (struct usb_yurex *)file->private_data;
+=======
+	dev = file->private_data;
+>>>>>>> v3.18
 
 	mutex_lock(&dev->io_mutex);
 	if (!dev->interface) {		/* already disconnected */
@@ -457,14 +479,22 @@ static ssize_t yurex_write(struct file *file, const char *user_buffer, size_t co
 	DEFINE_WAIT(wait);
 
 	count = min(sizeof(buffer), count);
+<<<<<<< HEAD
 	dev = (struct usb_yurex *)file->private_data;
+=======
+	dev = file->private_data;
+>>>>>>> v3.18
 
 	/* verify that we actually have some data to write */
 	if (count == 0)
 		goto error;
 
 	mutex_lock(&dev->io_mutex);
+<<<<<<< HEAD
 	if (!dev->interface) {		/* alreaday disconnected */
+=======
+	if (!dev->interface) {		/* already disconnected */
+>>>>>>> v3.18
 		mutex_unlock(&dev->io_mutex);
 		retval = -ENODEV;
 		goto error;

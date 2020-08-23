@@ -49,6 +49,10 @@
 #include <linux/pid.h>
 #include <linux/smp.h>
 #include <linux/mm.h>
+<<<<<<< HEAD
+=======
+#include <linux/vmacache.h>
+>>>>>>> v3.18
 #include <linux/rcupdate.h>
 
 #include <asm/cacheflush.h>
@@ -86,10 +90,13 @@ static int kgdb_use_con;
 bool dbg_is_early = true;
 /* Next cpu to become the master debug core */
 int dbg_switch_cpu;
+<<<<<<< HEAD
 /* Flag for entering kdb when a panic occurs */
 static bool break_on_panic = true;
 /* Flag for entering kdb when an exception occurs */
 static bool break_on_exception = true;
+=======
+>>>>>>> v3.18
 
 /* Use kdb or gdbserver mode */
 int dbg_kdb_mode = 1;
@@ -104,8 +111,11 @@ early_param("kgdbcon", opt_kgdb_con);
 
 module_param(kgdb_use_con, int, 0644);
 module_param(kgdbreboot, int, 0644);
+<<<<<<< HEAD
 module_param(break_on_panic, bool, 0644);
 module_param(break_on_exception, bool, 0644);
+=======
+>>>>>>> v3.18
 
 /*
  * Holds information about breakpoints in a kernel. These breakpoints are
@@ -230,10 +240,24 @@ static void kgdb_flush_swbreak_addr(unsigned long addr)
 	if (!CACHE_FLUSH_IS_SAFE)
 		return;
 
+<<<<<<< HEAD
 	if (current->mm && current->mm->mmap_cache) {
 		flush_cache_range(current->mm->mmap_cache,
 				  addr, addr + BREAK_INSTR_SIZE);
 	}
+=======
+	if (current->mm) {
+		int i;
+
+		for (i = 0; i < VMACACHE_SIZE; i++) {
+			if (!current->vmacache[i])
+				continue;
+			flush_cache_range(current->vmacache[i],
+					  addr, addr + BREAK_INSTR_SIZE);
+		}
+	}
+
+>>>>>>> v3.18
 	/* Force flush instruction cache if it was outside the mm */
 	flush_icache_range(addr, addr + BREAK_INSTR_SIZE);
 }
@@ -581,8 +605,17 @@ return_normal:
 		raw_spin_lock(&dbg_slave_lock);
 
 #ifdef CONFIG_SMP
+<<<<<<< HEAD
 	/* Signal the other CPUs to enter kgdb_wait() */
 	if ((!kgdb_single_step) && kgdb_do_roundup)
+=======
+	/* If send_ready set, slaves are already waiting */
+	if (ks->send_ready)
+		atomic_set(ks->send_ready, 1);
+
+	/* Signal the other CPUs to enter kgdb_wait() */
+	else if ((!kgdb_single_step) && kgdb_do_roundup)
+>>>>>>> v3.18
 		kgdb_roundup_cpus(flags);
 #endif
 
@@ -684,14 +717,21 @@ kgdb_handle_exception(int evector, int signo, int ecode, struct pt_regs *regs)
 	if (arch_kgdb_ops.enable_nmi)
 		arch_kgdb_ops.enable_nmi(0);
 
+<<<<<<< HEAD
 	if (unlikely(signo != SIGTRAP && !break_on_exception))
 		return 1;
 
+=======
+	memset(ks, 0, sizeof(struct kgdb_state));
+>>>>>>> v3.18
 	ks->cpu			= raw_smp_processor_id();
 	ks->ex_vector		= evector;
 	ks->signo		= signo;
 	ks->err_code		= ecode;
+<<<<<<< HEAD
 	ks->kgdb_usethreadid	= 0;
+=======
+>>>>>>> v3.18
 	ks->linux_regs		= regs;
 
 	if (kgdb_reenter_check(ks))
@@ -741,6 +781,34 @@ int kgdb_nmicallback(int cpu, void *regs)
 	return 1;
 }
 
+<<<<<<< HEAD
+=======
+int kgdb_nmicallin(int cpu, int trapnr, void *regs, int err_code,
+							atomic_t *send_ready)
+{
+#ifdef CONFIG_SMP
+	if (!kgdb_io_ready(0) || !send_ready)
+		return 1;
+
+	if (kgdb_info[cpu].enter_kgdb == 0) {
+		struct kgdb_state kgdb_var;
+		struct kgdb_state *ks = &kgdb_var;
+
+		memset(ks, 0, sizeof(struct kgdb_state));
+		ks->cpu			= cpu;
+		ks->ex_vector		= trapnr;
+		ks->signo		= SIGTRAP;
+		ks->err_code		= err_code;
+		ks->linux_regs		= regs;
+		ks->send_ready		= send_ready;
+		kgdb_cpu_enter(ks, regs, DCPU_WANT_MASTER);
+		return 0;
+	}
+#endif
+	return 1;
+}
+
+>>>>>>> v3.18
 static void kgdb_console_write(struct console *co, const char *s,
    unsigned count)
 {
@@ -793,9 +861,12 @@ static int kgdb_panic_event(struct notifier_block *self,
 			    unsigned long val,
 			    void *data)
 {
+<<<<<<< HEAD
 	if (!break_on_panic)
 		return NOTIFY_DONE;
 
+=======
+>>>>>>> v3.18
 	if (dbg_kdb_mode)
 		kdb_printf("PANIC: %s\n", (char *)data);
 	kgdb_breakpoint();
@@ -1018,7 +1089,11 @@ int dbg_io_get_char(void)
  * otherwise as a quick means to stop program execution and "break" into
  * the debugger.
  */
+<<<<<<< HEAD
 void kgdb_breakpoint(void)
+=======
+noinline void kgdb_breakpoint(void)
+>>>>>>> v3.18
 {
 	atomic_inc(&kgdb_setting_breakpoint);
 	wmb(); /* Sync point before breakpoint */

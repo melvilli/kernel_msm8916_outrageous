@@ -28,7 +28,10 @@
 
 #ifdef CONFIG_8xx
 #include <asm/8xx_immap.h>
+<<<<<<< HEAD
 #include <asm/mpc8xx.h>
+=======
+>>>>>>> v3.18
 
 extern immap_t __iomem *mpc8xx_immr;
 

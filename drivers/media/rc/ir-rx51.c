@@ -201,8 +201,12 @@ static int lirc_rx51_init_port(struct lirc_rx51 *lirc_rx51)
 
 	lirc_rx51->irq_num = omap_dm_timer_get_irq(lirc_rx51->pulse_timer);
 	retval = request_irq(lirc_rx51->irq_num, lirc_rx51_interrupt_handler,
+<<<<<<< HEAD
 			     IRQF_DISABLED | IRQF_SHARED,
 			     "lirc_pulse_timer", lirc_rx51);
+=======
+			     IRQF_SHARED, "lirc_pulse_timer", lirc_rx51);
+>>>>>>> v3.18
 	if (retval) {
 		dev_err(lirc_rx51->dev, ": Failed to request interrupt line\n");
 		goto err2;

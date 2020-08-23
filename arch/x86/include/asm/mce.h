@@ -16,6 +16,10 @@
 #define MCG_EXT_CNT_SHIFT	16
 #define MCG_EXT_CNT(c)		(((c) & MCG_EXT_CNT_MASK) >> MCG_EXT_CNT_SHIFT)
 #define MCG_SER_P		(1ULL<<24)   /* MCA recovery/new status bits */
+<<<<<<< HEAD
+=======
+#define MCG_ELOG_P		(1ULL<<26)   /* Extended error log supported */
+>>>>>>> v3.18
 
 /* MCG_STATUS register defines */
 #define MCG_STATUS_RIPV  (1ULL<<0)   /* restart ip valid */
@@ -70,7 +74,11 @@
 #define MCJ_CTX_IRQ		0x2  /* inject context: IRQ */
 #define MCJ_NMI_BROADCAST	0x4  /* do NMI broadcasting */
 #define MCJ_EXCEPTION		0x8  /* raise as exception */
+<<<<<<< HEAD
 #define MCJ_IRQ_BRAODCAST	0x10 /* do IRQ broadcasting */
+=======
+#define MCJ_IRQ_BROADCAST	0x10 /* do IRQ broadcasting */
+>>>>>>> v3.18
 
 #define MCE_OVERFLOW 0		/* bit 0 in flags means overflow */
 
@@ -117,7 +125,10 @@ extern void mce_register_decode_chain(struct notifier_block *nb);
 extern void mce_unregister_decode_chain(struct notifier_block *nb);
 
 #include <linux/percpu.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/atomic.h>
 
 extern int mce_p5_enabled;
@@ -176,8 +187,11 @@ int mce_available(struct cpuinfo_x86 *c);
 DECLARE_PER_CPU(unsigned, mce_exception_count);
 DECLARE_PER_CPU(unsigned, mce_poll_count);
 
+<<<<<<< HEAD
 extern atomic_t mce_entry;
 
+=======
+>>>>>>> v3.18
 typedef DECLARE_BITMAP(mce_banks_t, MAX_NR_BANKS);
 DECLARE_PER_CPU(mce_banks_t, mce_poll_banks);
 
@@ -197,6 +211,12 @@ extern void register_mce_write_callback(ssize_t (*)(struct file *filp,
 				    const char __user *ubuf,
 				    size_t usize, loff_t *off));
 
+<<<<<<< HEAD
+=======
+/* Disable CMCI/polling for MCA bank claimed by firmware */
+extern void mce_disable_bank(int bank);
+
+>>>>>>> v3.18
 /*
  * Exception handler
  */
@@ -223,6 +243,16 @@ void mce_log_therm_throt_event(__u64 status);
 /* Interrupt Handler for core thermal thresholds */
 extern int (*platform_thermal_notify)(__u64 msr_val);
 
+<<<<<<< HEAD
+=======
+/* Interrupt Handler for package thermal thresholds */
+extern int (*platform_thermal_package_notify)(__u64 msr_val);
+
+/* Callback support of rate control, return true, if
+ * callback has rate control */
+extern bool (*platform_thermal_package_rate_control)(void);
+
+>>>>>>> v3.18
 #ifdef CONFIG_X86_THERMAL_VECTOR
 extern void mcheck_intel_therm_init(void);
 #else

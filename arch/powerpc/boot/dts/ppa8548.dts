@@ -110,12 +110,18 @@
 		phy0: ethernet-phy@0 {
 			interrupts = <7 1 0 0>;
 			reg = <0x0>;
+<<<<<<< HEAD
 			device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 		};
 		phy1: ethernet-phy@1 {
 			interrupts = <8 1 0 0>;
 			reg = <0x1>;
+<<<<<<< HEAD
 			device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 		};
 		tbi0: tbi-phy@11 {
 			reg = <0x11>;

@@ -131,9 +131,16 @@ static int hfsplus_system_write_inode(struct inode *inode)
 	hfsplus_inode_write_fork(inode, fork);
 	if (tree) {
 		int err = hfs_btree_write(tree);
+<<<<<<< HEAD
 		if (err) {
 			pr_err("b-tree write err: %d, ino %lu\n",
 					err, inode->i_ino);
+=======
+
+		if (err) {
+			pr_err("b-tree write err: %d, ino %lu\n",
+			       err, inode->i_ino);
+>>>>>>> v3.18
 			return err;
 		}
 	}
@@ -161,7 +168,11 @@ static int hfsplus_write_inode(struct inode *inode,
 static void hfsplus_evict_inode(struct inode *inode)
 {
 	hfs_dbg(INODE, "hfsplus_evict_inode: %lu\n", inode->i_ino);
+<<<<<<< HEAD
 	truncate_inode_pages(&inode->i_data, 0);
+=======
+	truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 	clear_inode(inode);
 	if (HFSPLUS_IS_RSRC(inode)) {
 		HFSPLUS_I(HFSPLUS_I(inode)->rsrc_inode)->rsrc_inode = NULL;
@@ -323,6 +334,10 @@ static int hfsplus_statfs(struct dentry *dentry, struct kstatfs *buf)
 
 static int hfsplus_remount(struct super_block *sb, int *flags, char *data)
 {
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+>>>>>>> v3.18
 	if ((*flags & MS_RDONLY) == (sb->s_flags & MS_RDONLY))
 		return 0;
 	if (!(*flags & MS_RDONLY)) {
@@ -474,12 +489,20 @@ static int hfsplus_fill_super(struct super_block *sb, void *data, int silent)
 		pr_err("failed to load catalog file\n");
 		goto out_close_ext_tree;
 	}
+<<<<<<< HEAD
+=======
+	atomic_set(&sbi->attr_tree_state, HFSPLUS_EMPTY_ATTR_TREE);
+>>>>>>> v3.18
 	if (vhdr->attr_file.total_blocks != 0) {
 		sbi->attr_tree = hfs_btree_open(sb, HFSPLUS_ATTR_CNID);
 		if (!sbi->attr_tree) {
 			pr_err("failed to load attributes file\n");
 			goto out_close_cat_tree;
 		}
+<<<<<<< HEAD
+=======
+		atomic_set(&sbi->attr_tree_state, HFSPLUS_VALID_ATTR_TREE);
+>>>>>>> v3.18
 	}
 	sb->s_xattr = hfsplus_xattr_handlers;
 

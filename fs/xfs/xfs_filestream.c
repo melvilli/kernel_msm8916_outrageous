@@ -1,5 +1,9 @@
 /*
  * Copyright (c) 2006-2007 Silicon Graphics, Inc.
+<<<<<<< HEAD
+=======
+ * Copyright (c) 2014 Christoph Hellwig.
+>>>>>>> v3.18
  * All Rights Reserved.
  *
  * This program is free software; you can redistribute it and/or
@@ -16,6 +20,7 @@
  * Inc.,  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 #include "xfs.h"
+<<<<<<< HEAD
 #include "xfs_bmap_btree.h"
 #include "xfs_inum.h"
 #include "xfs_dinode.h"
@@ -126,6 +131,38 @@ typedef struct fstrm_item
 /*
  * Allocation group filestream associations are tracked with per-ag atomic
  * counters.  These counters allow _xfs_filestream_pick_ag() to tell whether a
+=======
+#include "xfs_format.h"
+#include "xfs_log_format.h"
+#include "xfs_trans_resv.h"
+#include "xfs_ag.h"
+#include "xfs_sb.h"
+#include "xfs_mount.h"
+#include "xfs_inum.h"
+#include "xfs_inode.h"
+#include "xfs_bmap.h"
+#include "xfs_bmap_util.h"
+#include "xfs_alloc.h"
+#include "xfs_mru_cache.h"
+#include "xfs_dinode.h"
+#include "xfs_filestream.h"
+#include "xfs_trace.h"
+
+struct xfs_fstrm_item {
+	struct xfs_mru_cache_elem	mru;
+	struct xfs_inode		*ip;
+	xfs_agnumber_t			ag; /* AG in use for this directory */
+};
+
+enum xfs_fstrm_alloc {
+	XFS_PICK_USERDATA = 1,
+	XFS_PICK_LOWSPACE = 2,
+};
+
+/*
+ * Allocation group filestream associations are tracked with per-ag atomic
+ * counters.  These counters allow xfs_filestream_pick_ag() to tell whether a
+>>>>>>> v3.18
  * particular AG already has active filestreams associated with it. The mount
  * point's m_peraglock is used to protect these counters from per-ag array
  * re-allocation during a growfs operation.  When xfs_growfs_data_private() is
@@ -160,7 +197,11 @@ typedef struct fstrm_item
  * the cache that reference per-ag array elements that have since been
  * reallocated.
  */
+<<<<<<< HEAD
 static int
+=======
+int
+>>>>>>> v3.18
 xfs_filestream_peek_ag(
 	xfs_mount_t	*mp,
 	xfs_agnumber_t	agno)
@@ -200,11 +241,29 @@ xfs_filestream_put_ag(
 	xfs_perag_put(pag);
 }
 
+<<<<<<< HEAD
+=======
+static void
+xfs_fstrm_free_func(
+	struct xfs_mru_cache_elem *mru)
+{
+	struct xfs_fstrm_item	*item =
+		container_of(mru, struct xfs_fstrm_item, mru);
+
+	xfs_filestream_put_ag(item->ip->i_mount, item->ag);
+
+	trace_xfs_filestream_free(item->ip, item->ag);
+
+	kmem_free(item);
+}
+
+>>>>>>> v3.18
 /*
  * Scan the AGs starting at startag looking for an AG that isn't in use and has
  * at least minlen blocks free.
  */
 static int
+<<<<<<< HEAD
 _xfs_filestream_pick_ag(
 	xfs_mount_t	*mp,
 	xfs_agnumber_t	startag,
@@ -217,6 +276,23 @@ _xfs_filestream_pick_ag(
 	xfs_extlen_t	longest, free, minfree, maxfree = 0;
 	xfs_agnumber_t	ag, max_ag = NULLAGNUMBER;
 	struct xfs_perag *pag;
+=======
+xfs_filestream_pick_ag(
+	struct xfs_inode	*ip,
+	xfs_agnumber_t		startag,
+	xfs_agnumber_t		*agp,
+	int			flags,
+	xfs_extlen_t		minlen)
+{
+	struct xfs_mount	*mp = ip->i_mount;
+	struct xfs_fstrm_item	*item;
+	struct xfs_perag	*pag;
+	xfs_extlen_t		longest, free = 0, minfree, maxfree = 0;
+	xfs_agnumber_t		ag, max_ag = NULLAGNUMBER;
+	int			err, trylock, nscan;
+
+	ASSERT(S_ISDIR(ip->i_d.di_mode));
+>>>>>>> v3.18
 
 	/* 2% of an AG's blocks must be free for it to be chosen. */
 	minfree = mp->m_sb.sb_agblocks / 50;
@@ -228,8 +304,14 @@ _xfs_filestream_pick_ag(
 	trylock = XFS_ALLOC_FLAG_TRYLOCK;
 
 	for (nscan = 0; 1; nscan++) {
+<<<<<<< HEAD
 		pag = xfs_perag_get(mp, ag);
 		TRACE_AG_SCAN(mp, ag, atomic_read(&pag->pagf_fstrms));
+=======
+		trace_xfs_filestream_scan(ip, ag);
+
+		pag = xfs_perag_get(mp, ag);
+>>>>>>> v3.18
 
 		if (!pag->pagf_init) {
 			err = xfs_alloc_pagf_init(mp, NULL, ag, trylock);
@@ -246,7 +328,10 @@ _xfs_filestream_pick_ag(
 		/* Keep track of the AG with the most free blocks. */
 		if (pag->pagf_freeblks > maxfree) {
 			maxfree = pag->pagf_freeblks;
+<<<<<<< HEAD
 			max_streams = atomic_read(&pag->pagf_fstrms);
+=======
+>>>>>>> v3.18
 			max_ag = ag;
 		}
 
@@ -269,7 +354,10 @@ _xfs_filestream_pick_ag(
 
 			/* Break out, retaining the reference on the AG. */
 			free = pag->pagf_freeblks;
+<<<<<<< HEAD
 			streams = atomic_read(&pag->pagf_fstrms);
+=======
+>>>>>>> v3.18
 			xfs_perag_put(pag);
 			*agp = ag;
 			break;
@@ -305,19 +393,27 @@ next_ag:
 		 */
 		if (max_ag != NULLAGNUMBER) {
 			xfs_filestream_get_ag(mp, max_ag);
+<<<<<<< HEAD
 			TRACE_AG_PICK1(mp, max_ag, maxfree);
 			streams = max_streams;
+=======
+>>>>>>> v3.18
 			free = maxfree;
 			*agp = max_ag;
 			break;
 		}
 
 		/* take AG 0 if none matched */
+<<<<<<< HEAD
 		TRACE_AG_PICK1(mp, max_ag, maxfree);
+=======
+		trace_xfs_filestream_pick(ip, *agp, free, nscan);
+>>>>>>> v3.18
 		*agp = 0;
 		return 0;
 	}
 
+<<<<<<< HEAD
 	TRACE_AG_PICK2(mp, startag, *agp, streams, free, nscan, flags);
 
 	return 0;
@@ -616,6 +712,89 @@ xfs_filestream_associate(
 		err = _xfs_filestream_update_ag(ip, pip, ag);
 
 		goto exit;
+=======
+	trace_xfs_filestream_pick(ip, *agp, free, nscan);
+
+	if (*agp == NULLAGNUMBER)
+		return 0;
+
+	err = -ENOMEM;
+	item = kmem_alloc(sizeof(*item), KM_MAYFAIL);
+	if (!item)
+		goto out_put_ag;
+
+	item->ag = *agp;
+	item->ip = ip;
+
+	err = xfs_mru_cache_insert(mp->m_filestream, ip->i_ino, &item->mru);
+	if (err) {
+		if (err == -EEXIST)
+			err = 0;
+		goto out_free_item;
+	}
+
+	return 0;
+
+out_free_item:
+	kmem_free(item);
+out_put_ag:
+	xfs_filestream_put_ag(mp, *agp);
+	return err;
+}
+
+static struct xfs_inode *
+xfs_filestream_get_parent(
+	struct xfs_inode	*ip)
+{
+	struct inode		*inode = VFS_I(ip), *dir = NULL;
+	struct dentry		*dentry, *parent;
+
+	dentry = d_find_alias(inode);
+	if (!dentry)
+		goto out;
+
+	parent = dget_parent(dentry);
+	if (!parent)
+		goto out_dput;
+
+	dir = igrab(parent->d_inode);
+	dput(parent);
+
+out_dput:
+	dput(dentry);
+out:
+	return dir ? XFS_I(dir) : NULL;
+}
+
+/*
+ * Find the right allocation group for a file, either by finding an
+ * existing file stream or creating a new one.
+ *
+ * Returns NULLAGNUMBER in case of an error.
+ */
+xfs_agnumber_t
+xfs_filestream_lookup_ag(
+	struct xfs_inode	*ip)
+{
+	struct xfs_mount	*mp = ip->i_mount;
+	struct xfs_inode	*pip = NULL;
+	xfs_agnumber_t		startag, ag = NULLAGNUMBER;
+	struct xfs_mru_cache_elem *mru;
+
+	ASSERT(S_ISREG(ip->i_d.di_mode));
+
+	pip = xfs_filestream_get_parent(ip);
+	if (!pip)
+		goto out;
+
+	mru = xfs_mru_cache_lookup(mp->m_filestream, pip->i_ino);
+	if (mru) {
+		ag = container_of(mru, struct xfs_fstrm_item, mru)->ag;
+		xfs_mru_cache_done(mp->m_filestream);
+
+		trace_xfs_filestream_lookup(ip, ag);
+		goto out;
+>>>>>>> v3.18
 	}
 
 	/*
@@ -623,13 +802,18 @@ xfs_filestream_associate(
 	 * use the directory inode's AG.
 	 */
 	if (mp->m_flags & XFS_MOUNT_32BITINODES) {
+<<<<<<< HEAD
 		rotorstep = xfs_rotorstep;
+=======
+		xfs_agnumber_t	 rotorstep = xfs_rotorstep;
+>>>>>>> v3.18
 		startag = (mp->m_agfrotor / rotorstep) % mp->m_sb.sb_agcount;
 		mp->m_agfrotor = (mp->m_agfrotor + 1) %
 		                 (mp->m_sb.sb_agcount * rotorstep);
 	} else
 		startag = XFS_INO_TO_AGNO(mp, pip->i_ino);
 
+<<<<<<< HEAD
 	/* Pick a new AG for the parent inode starting at startag. */
 	err = _xfs_filestream_pick_ag(mp, startag, &ag, 0, 0);
 	if (err || ag == NULLAGNUMBER)
@@ -821,4 +1005,89 @@ xfs_filestream_deassociate(
 	xfs_mru_cache_t	*cache = ip->i_mount->m_filestream;
 
 	xfs_mru_cache_delete(cache, ip->i_ino);
+=======
+	if (xfs_filestream_pick_ag(pip, startag, &ag, 0, 0))
+		ag = NULLAGNUMBER;
+out:
+	IRELE(pip);
+	return ag;
+}
+
+/*
+ * Pick a new allocation group for the current file and its file stream.
+ *
+ * This is called when the allocator can't find a suitable extent in the
+ * current AG, and we have to move the stream into a new AG with more space.
+ */
+int
+xfs_filestream_new_ag(
+	struct xfs_bmalloca	*ap,
+	xfs_agnumber_t		*agp)
+{
+	struct xfs_inode	*ip = ap->ip, *pip;
+	struct xfs_mount	*mp = ip->i_mount;
+	xfs_extlen_t		minlen = ap->length;
+	xfs_agnumber_t		startag = 0;
+	int			flags, err = 0;
+	struct xfs_mru_cache_elem *mru;
+
+	*agp = NULLAGNUMBER;
+
+	pip = xfs_filestream_get_parent(ip);
+	if (!pip)
+		goto exit;
+
+	mru = xfs_mru_cache_remove(mp->m_filestream, pip->i_ino);
+	if (mru) {
+		struct xfs_fstrm_item *item =
+			container_of(mru, struct xfs_fstrm_item, mru);
+		startag = (item->ag + 1) % mp->m_sb.sb_agcount;
+	}
+
+	flags = (ap->userdata ? XFS_PICK_USERDATA : 0) |
+	        (ap->flist->xbf_low ? XFS_PICK_LOWSPACE : 0);
+
+	err = xfs_filestream_pick_ag(pip, startag, agp, flags, minlen);
+
+	/*
+	 * Only free the item here so we skip over the old AG earlier.
+	 */
+	if (mru)
+		xfs_fstrm_free_func(mru);
+
+	IRELE(pip);
+exit:
+	if (*agp == NULLAGNUMBER)
+		*agp = 0;
+	return err;
+}
+
+void
+xfs_filestream_deassociate(
+	struct xfs_inode	*ip)
+{
+	xfs_mru_cache_delete(ip->i_mount->m_filestream, ip->i_ino);
+}
+
+int
+xfs_filestream_mount(
+	xfs_mount_t	*mp)
+{
+	/*
+	 * The filestream timer tunable is currently fixed within the range of
+	 * one second to four minutes, with five seconds being the default.  The
+	 * group count is somewhat arbitrary, but it'd be nice to adhere to the
+	 * timer tunable to within about 10 percent.  This requires at least 10
+	 * groups.
+	 */
+	return xfs_mru_cache_create(&mp->m_filestream, xfs_fstrm_centisecs * 10,
+				    10, xfs_fstrm_free_func);
+}
+
+void
+xfs_filestream_unmount(
+	xfs_mount_t	*mp)
+{
+	xfs_mru_cache_destroy(mp->m_filestream);
+>>>>>>> v3.18
 }

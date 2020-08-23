@@ -13,12 +13,19 @@
 #error only <linux/bitops.h> can be included directly
 #endif
 
+<<<<<<< HEAD
 #ifdef __KERNEL__
 
+=======
+>>>>>>> v3.18
 #ifndef __ASSEMBLY__
 
 #include <linux/types.h>
 #include <linux/compiler.h>
+<<<<<<< HEAD
+=======
+#include <asm/barrier.h>
+>>>>>>> v3.18
 
 /*
  * Hardware assisted read-modify-write using ARC700 LLOCK/SCOND insns.
@@ -496,10 +503,13 @@ static inline __attribute__ ((const)) int __ffs(unsigned long word)
  */
 #define ffz(x)	__ffs(~(x))
 
+<<<<<<< HEAD
 /* TODO does this affect uni-processor code */
 #define smp_mb__before_clear_bit()  barrier()
 #define smp_mb__after_clear_bit()   barrier()
 
+=======
+>>>>>>> v3.18
 #include <asm-generic/bitops/hweight.h>
 #include <asm-generic/bitops/fls64.h>
 #include <asm-generic/bitops/sched.h>
@@ -511,6 +521,9 @@ static inline __attribute__ ((const)) int __ffs(unsigned long word)
 
 #endif /* !__ASSEMBLY__ */
 
+<<<<<<< HEAD
 #endif /* __KERNEL__ */
 
+=======
+>>>>>>> v3.18
 #endif

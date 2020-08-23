@@ -12,7 +12,10 @@
 
 #include <linux/pci.h>
 #include <linux/init.h>
+<<<<<<< HEAD
 #include <linux/acpi.h>
+=======
+>>>>>>> v3.18
 #include <linux/sfi_acpi.h>
 #include <linux/bitmap.h>
 #include <linux/dmi.h>
@@ -32,7 +35,11 @@ static DEFINE_MUTEX(pci_mmcfg_lock);
 
 LIST_HEAD(pci_mmcfg_list);
 
+<<<<<<< HEAD
 static __init void pci_mmconfig_remove(struct pci_mmcfg_region *cfg)
+=======
+static void __init pci_mmconfig_remove(struct pci_mmcfg_region *cfg)
+>>>>>>> v3.18
 {
 	if (cfg->res.parent)
 		release_resource(&cfg->res);
@@ -40,7 +47,11 @@ static __init void pci_mmconfig_remove(struct pci_mmcfg_region *cfg)
 	kfree(cfg);
 }
 
+<<<<<<< HEAD
 static __init void free_all_mmcfg(void)
+=======
+static void __init free_all_mmcfg(void)
+>>>>>>> v3.18
 {
 	struct pci_mmcfg_region *cfg, *tmp;
 
@@ -94,7 +105,11 @@ static struct pci_mmcfg_region *pci_mmconfig_alloc(int segment, int start,
 	return new;
 }
 
+<<<<<<< HEAD
 static __init struct pci_mmcfg_region *pci_mmconfig_add(int segment, int start,
+=======
+static struct pci_mmcfg_region *__init pci_mmconfig_add(int segment, int start,
+>>>>>>> v3.18
 							int end, u64 addr)
 {
 	struct pci_mmcfg_region *new;
@@ -126,7 +141,11 @@ struct pci_mmcfg_region *pci_mmconfig_lookup(int segment, int bus)
 	return NULL;
 }
 
+<<<<<<< HEAD
 static const char __init *pci_mmcfg_e7520(void)
+=======
+static const char *__init pci_mmcfg_e7520(void)
+>>>>>>> v3.18
 {
 	u32 win;
 	raw_pci_ops->read(0, 0, PCI_DEVFN(0, 0), 0xce, 2, &win);
@@ -141,7 +160,11 @@ static const char __init *pci_mmcfg_e7520(void)
 	return "Intel Corporation E7520 Memory Controller Hub";
 }
 
+<<<<<<< HEAD
 static const char __init *pci_mmcfg_intel_945(void)
+=======
+static const char *__init pci_mmcfg_intel_945(void)
+>>>>>>> v3.18
 {
 	u32 pciexbar, mask = 0, len = 0;
 
@@ -185,7 +208,11 @@ static const char __init *pci_mmcfg_intel_945(void)
 	return "Intel Corporation 945G/GZ/P/PL Express Memory Controller Hub";
 }
 
+<<<<<<< HEAD
 static const char __init *pci_mmcfg_amd_fam10h(void)
+=======
+static const char *__init pci_mmcfg_amd_fam10h(void)
+>>>>>>> v3.18
 {
 	u32 low, high, address;
 	u64 base, msr;
@@ -236,11 +263,16 @@ static const char __init *pci_mmcfg_amd_fam10h(void)
 }
 
 static bool __initdata mcp55_checked;
+<<<<<<< HEAD
 static const char __init *pci_mmcfg_nvidia_mcp55(void)
+=======
+static const char *__init pci_mmcfg_nvidia_mcp55(void)
+>>>>>>> v3.18
 {
 	int bus;
 	int mcp55_mmconf_found = 0;
 
+<<<<<<< HEAD
 	static const u32 extcfg_regnum		= 0x90;
 	static const u32 extcfg_regsize		= 4;
 	static const u32 extcfg_enable_mask	= 1<<31;
@@ -251,6 +283,22 @@ static const char __init *pci_mmcfg_nvidia_mcp55(void)
 	static const int extcfg_sizebus[]	= {0x100, 0x80, 0x40, 0x20};
 	static const u32 extcfg_base_mask[]	= {0x7ff8, 0x7ffc, 0x7ffe, 0x7fff};
 	static const int extcfg_base_lshift	= 25;
+=======
+	static const u32 extcfg_regnum __initconst	= 0x90;
+	static const u32 extcfg_regsize __initconst	= 4;
+	static const u32 extcfg_enable_mask __initconst	= 1 << 31;
+	static const u32 extcfg_start_mask __initconst	= 0xff << 16;
+	static const int extcfg_start_shift __initconst	= 16;
+	static const u32 extcfg_size_mask __initconst	= 0x3 << 28;
+	static const int extcfg_size_shift __initconst	= 28;
+	static const int extcfg_sizebus[] __initconst	= {
+		0x100, 0x80, 0x40, 0x20
+	};
+	static const u32 extcfg_base_mask[] __initconst	= {
+		0x7ff8, 0x7ffc, 0x7ffe, 0x7fff
+	};
+	static const int extcfg_base_lshift __initconst	= 25;
+>>>>>>> v3.18
 
 	/*
 	 * do check if amd fam10h already took over
@@ -303,7 +351,11 @@ struct pci_mmcfg_hostbridge_probe {
 	const char *(*probe)(void);
 };
 
+<<<<<<< HEAD
 static struct pci_mmcfg_hostbridge_probe pci_mmcfg_probes[] __initdata = {
+=======
+static const struct pci_mmcfg_hostbridge_probe pci_mmcfg_probes[] __initconst = {
+>>>>>>> v3.18
 	{ 0, PCI_DEVFN(0, 0), PCI_VENDOR_ID_INTEL,
 	  PCI_DEVICE_ID_INTEL_E7520_MCH, pci_mmcfg_e7520 },
 	{ 0, PCI_DEVFN(0, 0), PCI_VENDOR_ID_INTEL,

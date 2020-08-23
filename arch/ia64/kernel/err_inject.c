@@ -225,17 +225,29 @@ static struct attribute_group err_inject_attr_group = {
 	.name = "err_inject"
 };
 /* Add/Remove err_inject interface for CPU device */
+<<<<<<< HEAD
 static int __cpuinit err_inject_add_dev(struct device * sys_dev)
+=======
+static int err_inject_add_dev(struct device *sys_dev)
+>>>>>>> v3.18
 {
 	return sysfs_create_group(&sys_dev->kobj, &err_inject_attr_group);
 }
 
+<<<<<<< HEAD
 static int __cpuinit err_inject_remove_dev(struct device * sys_dev)
+=======
+static int err_inject_remove_dev(struct device *sys_dev)
+>>>>>>> v3.18
 {
 	sysfs_remove_group(&sys_dev->kobj, &err_inject_attr_group);
 	return 0;
 }
+<<<<<<< HEAD
 static int __cpuinit err_inject_cpu_callback(struct notifier_block *nfb,
+=======
+static int err_inject_cpu_callback(struct notifier_block *nfb,
+>>>>>>> v3.18
 		unsigned long action, void *hcpu)
 {
 	unsigned int cpu = (unsigned long)hcpu;
@@ -256,7 +268,11 @@ static int __cpuinit err_inject_cpu_callback(struct notifier_block *nfb,
 	return NOTIFY_OK;
 }
 
+<<<<<<< HEAD
 static struct notifier_block __cpuinitdata err_inject_cpu_notifier =
+=======
+static struct notifier_block err_inject_cpu_notifier =
+>>>>>>> v3.18
 {
 	.notifier_call = err_inject_cpu_callback,
 };
@@ -269,12 +285,24 @@ err_inject_init(void)
 #ifdef ERR_INJ_DEBUG
 	printk(KERN_INFO "Enter error injection driver.\n");
 #endif
+<<<<<<< HEAD
+=======
+
+	cpu_notifier_register_begin();
+
+>>>>>>> v3.18
 	for_each_online_cpu(i) {
 		err_inject_cpu_callback(&err_inject_cpu_notifier, CPU_ONLINE,
 				(void *)(long)i);
 	}
 
+<<<<<<< HEAD
 	register_hotcpu_notifier(&err_inject_cpu_notifier);
+=======
+	__register_hotcpu_notifier(&err_inject_cpu_notifier);
+
+	cpu_notifier_register_done();
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -288,11 +316,24 @@ err_inject_exit(void)
 #ifdef ERR_INJ_DEBUG
 	printk(KERN_INFO "Exit error injection driver.\n");
 #endif
+<<<<<<< HEAD
+=======
+
+	cpu_notifier_register_begin();
+
+>>>>>>> v3.18
 	for_each_online_cpu(i) {
 		sys_dev = get_cpu_device(i);
 		sysfs_remove_group(&sys_dev->kobj, &err_inject_attr_group);
 	}
+<<<<<<< HEAD
 	unregister_hotcpu_notifier(&err_inject_cpu_notifier);
+=======
+
+	__unregister_hotcpu_notifier(&err_inject_cpu_notifier);
+
+	cpu_notifier_register_done();
+>>>>>>> v3.18
 }
 
 module_init(err_inject_init);

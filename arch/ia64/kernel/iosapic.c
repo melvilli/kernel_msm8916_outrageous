@@ -735,7 +735,11 @@ iosapic_register_intr (unsigned int gsi,
 		rte = find_rte(irq, gsi);
 		if(iosapic_intr_info[irq].count == 0) {
 			assign_irq_vector(irq);
+<<<<<<< HEAD
 			dynamic_irq_init(irq);
+=======
+			irq_init_desc(irq);
+>>>>>>> v3.18
 		} else if (rte->refcnt != NO_REF_RTE) {
 			rte->refcnt++;
 			goto unlock_iosapic_lock;

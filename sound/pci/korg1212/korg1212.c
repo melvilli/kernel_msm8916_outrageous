@@ -418,7 +418,11 @@ module_param_array(enable, bool, NULL, 0444);
 MODULE_PARM_DESC(enable, "Enable Korg 1212 soundcard.");
 MODULE_AUTHOR("Haroldo Gamal <gamal@alternex.com.br>");
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(snd_korg1212_ids) = {
+=======
+static const struct pci_device_id snd_korg1212_ids[] = {
+>>>>>>> v3.18
 	{
 		.vendor	   = 0x10b5,
 		.device	   = 0x906d,
@@ -2418,8 +2422,11 @@ static int snd_korg1212_create(struct snd_card *card, struct pci_dev *pci,
 
         snd_korg1212_proc_init(korg1212);
         
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pci->dev);
 
+=======
+>>>>>>> v3.18
         * rchip = korg1212;
 	return 0;
 
@@ -2445,7 +2452,12 @@ snd_korg1212_probe(struct pci_dev *pci,
 		dev++;
 		return -ENOENT;
 	}
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE, 0, &card);
+=======
+	err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
+			   0, &card);
+>>>>>>> v3.18
 	if (err < 0)
 		return err;
 
@@ -2473,7 +2485,10 @@ snd_korg1212_probe(struct pci_dev *pci,
 static void snd_korg1212_remove(struct pci_dev *pci)
 {
 	snd_card_free(pci_get_drvdata(pci));
+<<<<<<< HEAD
 	pci_set_drvdata(pci, NULL);
+=======
+>>>>>>> v3.18
 }
 
 static struct pci_driver korg1212_driver = {

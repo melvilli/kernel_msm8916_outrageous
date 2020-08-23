@@ -13,6 +13,10 @@
 
 #include <asm/irqflags.h>
 #include <asm/cmpxchg.h>
+<<<<<<< HEAD
+=======
+#include <asm/barrier.h>
+>>>>>>> v3.18
 
 #ifndef CONFIG_SMP
 #include <asm-generic/atomic.h>
@@ -32,7 +36,10 @@
  * @v: pointer of type atomic_t
  *
  * Atomically reads the value of @v.  Note that the guaranteed
+<<<<<<< HEAD
  * useful range of an atomic_t is only 24 bits.
+=======
+>>>>>>> v3.18
  */
 #define atomic_read(v)	(ACCESS_ONCE((v)->counter))
 
@@ -42,6 +49,7 @@
  * @i: required value
  *
  * Atomically sets the value of @v to @i.  Note that the guaranteed
+<<<<<<< HEAD
  * useful range of an atomic_t is only 24 bits.
  */
 #define atomic_set(v, i) (((v)->counter) = (i))
@@ -122,12 +130,65 @@ static inline int atomic_sub_return(int i, atomic_t *v)
 #endif
 	return retval;
 }
+=======
+ */
+#define atomic_set(v, i) (((v)->counter) = (i))
+
+#define ATOMIC_OP(op)							\
+static inline void atomic_##op(int i, atomic_t *v)			\
+{									\
+	int retval, status;						\
+									\
+	asm volatile(							\
+		"1:	mov	%4,(_AAR,%3)	\n"			\
+		"	mov	(_ADR,%3),%1	\n"			\
+		"	" #op "	%5,%1		\n"			\
+		"	mov	%1,(_ADR,%3)	\n"			\
+		"	mov	(_ADR,%3),%0	\n"	/* flush */	\
+		"	mov	(_ASR,%3),%0	\n"			\
+		"	or	%0,%0		\n"			\
+		"	bne	1b		\n"			\
+		: "=&r"(status), "=&r"(retval), "=m"(v->counter)	\
+		: "a"(ATOMIC_OPS_BASE_ADDR), "r"(&v->counter), "r"(i)	\
+		: "memory", "cc");					\
+}
+
+#define ATOMIC_OP_RETURN(op)						\
+static inline int atomic_##op##_return(int i, atomic_t *v)		\
+{									\
+	int retval, status;						\
+									\
+	asm volatile(							\
+		"1:	mov	%4,(_AAR,%3)	\n"			\
+		"	mov	(_ADR,%3),%1	\n"			\
+		"	" #op "	%5,%1		\n"			\
+		"	mov	%1,(_ADR,%3)	\n"			\
+		"	mov	(_ADR,%3),%0	\n"	/* flush */	\
+		"	mov	(_ASR,%3),%0	\n"			\
+		"	or	%0,%0		\n"			\
+		"	bne	1b		\n"			\
+		: "=&r"(status), "=&r"(retval), "=m"(v->counter)	\
+		: "a"(ATOMIC_OPS_BASE_ADDR), "r"(&v->counter), "r"(i)	\
+		: "memory", "cc");					\
+	return retval;							\
+}
+
+#define ATOMIC_OPS(op) ATOMIC_OP(op) ATOMIC_OP_RETURN(op)
+
+ATOMIC_OPS(add)
+ATOMIC_OPS(sub)
+
+#undef ATOMIC_OPS
+#undef ATOMIC_OP_RETURN
+#undef ATOMIC_OP
+>>>>>>> v3.18
 
 static inline int atomic_add_negative(int i, atomic_t *v)
 {
 	return atomic_add_return(i, v) < 0;
 }
 
+<<<<<<< HEAD
 static inline void atomic_add(int i, atomic_t *v)
 {
 	atomic_add_return(i, v);
@@ -138,6 +199,8 @@ static inline void atomic_sub(int i, atomic_t *v)
 	atomic_sub_return(i, v);
 }
 
+=======
+>>>>>>> v3.18
 static inline void atomic_inc(atomic_t *v)
 {
 	atomic_add_return(1, v);
@@ -234,12 +297,15 @@ static inline void atomic_set_mask(unsigned long mask, unsigned long *addr)
 #endif
 }
 
+<<<<<<< HEAD
 /* Atomic operations are already serializing on MN10300??? */
 #define smp_mb__before_atomic_dec()	barrier()
 #define smp_mb__after_atomic_dec()	barrier()
 #define smp_mb__before_atomic_inc()	barrier()
 #define smp_mb__after_atomic_inc()	barrier()
 
+=======
+>>>>>>> v3.18
 #endif /* __KERNEL__ */
 #endif /* CONFIG_SMP */
 #endif /* _ASM_ATOMIC_H */

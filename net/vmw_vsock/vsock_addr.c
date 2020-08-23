@@ -17,8 +17,12 @@
 #include <linux/socket.h>
 #include <linux/stddef.h>
 #include <net/sock.h>
+<<<<<<< HEAD
 
 #include "vsock_addr.h"
+=======
+#include <net/vsock_addr.h>
+>>>>>>> v3.18
 
 void vsock_addr_init(struct sockaddr_vm *addr, u32 cid, u32 port)
 {

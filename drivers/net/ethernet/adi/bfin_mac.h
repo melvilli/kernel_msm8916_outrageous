@@ -26,6 +26,10 @@
 #endif
 
 #define TX_RECLAIM_JIFFIES (HZ / 5)
+<<<<<<< HEAD
+=======
+#define BFIN_MAC_RX_IRQ_DISABLED	1
+>>>>>>> v3.18
 
 struct dma_descriptor {
 	struct dma_descriptor *next_dma_desc;
@@ -80,6 +84,11 @@ struct bfin_mac_local {
 	int irq_wake_requested;
 	struct timer_list tx_reclaim_timer;
 	struct net_device *ndev;
+<<<<<<< HEAD
+=======
+	struct napi_struct napi;
+	unsigned long flags;
+>>>>>>> v3.18
 
 	/* Data for EMAC_VLAN1 regs */
 	u16 vlan1_mask, vlan2_mask;
@@ -104,6 +113,10 @@ struct bfin_mac_local {
 #endif
 };
 
+<<<<<<< HEAD
 extern int bfin_get_ether_addr(char *addr);
+=======
+int bfin_get_ether_addr(char *addr);
+>>>>>>> v3.18
 
 #endif

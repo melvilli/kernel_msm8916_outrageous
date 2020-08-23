@@ -16,6 +16,10 @@
 #include <linux/input.h>
 #include <linux/module.h>
 #include <linux/kernel.h>
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <linux/pwm.h>
 #include <linux/slab.h>
@@ -67,7 +71,11 @@ static int pwm_beeper_event(struct input_dev *input,
 
 static int pwm_beeper_probe(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	unsigned long pwm_id = (unsigned long)pdev->dev.platform_data;
+=======
+	unsigned long pwm_id = (unsigned long)dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	struct pwm_beeper *beeper;
 	int error;
 
@@ -133,7 +141,10 @@ static int pwm_beeper_remove(struct platform_device *pdev)
 {
 	struct pwm_beeper *beeper = platform_get_drvdata(pdev);
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	input_unregister_device(beeper->input);
 
 	pwm_disable(beeper->pwm);
@@ -144,7 +155,11 @@ static int pwm_beeper_remove(struct platform_device *pdev)
 	return 0;
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 static int pwm_beeper_suspend(struct device *dev)
 {
 	struct pwm_beeper *beeper = dev_get_drvdata(dev);

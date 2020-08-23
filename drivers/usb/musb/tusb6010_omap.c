@@ -11,7 +11,10 @@
 #include <linux/module.h>
 #include <linux/kernel.h>
 #include <linux/errno.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/usb.h>
 #include <linux/platform_device.h>
 #include <linux/dma-mapping.h>
@@ -66,6 +69,7 @@ struct tusb_omap_dma {
 	unsigned			multichannel:1;
 };
 
+<<<<<<< HEAD
 static int tusb_omap_dma_start(struct dma_controller *c)
 {
 	struct tusb_omap_dma	*tusb_dma;
@@ -88,6 +92,8 @@ static int tusb_omap_dma_stop(struct dma_controller *c)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 /*
  * Allocate dmareq0 to the current channel unless it's already taken
  */
@@ -695,14 +701,21 @@ struct dma_controller *dma_controller_create(struct musb *musb, void __iomem *ba
 	tusb_dma->dmareq = -1;
 	tusb_dma->sync_dev = -1;
 
+<<<<<<< HEAD
 	tusb_dma->controller.start = tusb_omap_dma_start;
 	tusb_dma->controller.stop = tusb_omap_dma_stop;
+=======
+>>>>>>> v3.18
 	tusb_dma->controller.channel_alloc = tusb_omap_dma_allocate;
 	tusb_dma->controller.channel_release = tusb_omap_dma_release;
 	tusb_dma->controller.channel_program = tusb_omap_dma_program;
 	tusb_dma->controller.channel_abort = tusb_omap_dma_abort;
 
+<<<<<<< HEAD
 	if (tusb_get_revision(musb) >= TUSB_REV_30)
+=======
+	if (musb->tusb_revision >= TUSB_REV_30)
+>>>>>>> v3.18
 		tusb_dma->multichannel = 1;
 
 	for (i = 0; i < MAX_DMAREQ; i++) {

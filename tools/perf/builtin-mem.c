@@ -5,6 +5,10 @@
 #include "util/trace-event.h"
 #include "util/tool.h"
 #include "util/session.h"
+<<<<<<< HEAD
+=======
+#include "util/data.h"
+>>>>>>> v3.18
 
 #define MEM_OPERATION_LOAD	"load"
 #define MEM_OPERATION_STORE	"store"
@@ -14,18 +18,24 @@ static const char	*mem_operation		= MEM_OPERATION_LOAD;
 struct perf_mem {
 	struct perf_tool	tool;
 	char const		*input_name;
+<<<<<<< HEAD
 	symbol_filter_t		annotate_init;
+=======
+>>>>>>> v3.18
 	bool			hide_unresolved;
 	bool			dump_raw;
 	const char		*cpu_list;
 	DECLARE_BITMAP(cpu_bitmap, MAX_NR_CPUS);
 };
 
+<<<<<<< HEAD
 static const char * const mem_usage[] = {
 	"perf mem [<options>] {record <command> |report}",
 	NULL
 };
 
+=======
+>>>>>>> v3.18
 static int __cmd_record(int argc, const char **argv)
 {
 	int rec_argc, i = 0, j;
@@ -62,15 +72,22 @@ static int
 dump_raw_samples(struct perf_tool *tool,
 		 union perf_event *event,
 		 struct perf_sample *sample,
+<<<<<<< HEAD
 		 struct perf_evsel *evsel __maybe_unused,
+=======
+>>>>>>> v3.18
 		 struct machine *machine)
 {
 	struct perf_mem *mem = container_of(tool, struct perf_mem, tool);
 	struct addr_location al;
 	const char *fmt;
 
+<<<<<<< HEAD
 	if (perf_event__preprocess_sample(event, machine, &al, sample,
 				mem->annotate_init) < 0) {
+=======
+	if (perf_event__preprocess_sample(event, machine, &al, sample) < 0) {
+>>>>>>> v3.18
 		fprintf(stderr, "problem processing %d event, skipping it.\n",
 				event->header.type);
 		return -1;
@@ -96,7 +113,11 @@ dump_raw_samples(struct perf_tool *tool,
 		symbol_conf.field_sep,
 		sample->tid,
 		symbol_conf.field_sep,
+<<<<<<< HEAD
 		event->ip.ip,
+=======
+		sample->ip,
+>>>>>>> v3.18
 		symbol_conf.field_sep,
 		sample->addr,
 		symbol_conf.field_sep,
@@ -113,14 +134,22 @@ dump_raw_samples(struct perf_tool *tool,
 static int process_sample_event(struct perf_tool *tool,
 				union perf_event *event,
 				struct perf_sample *sample,
+<<<<<<< HEAD
 				struct perf_evsel *evsel,
 				struct machine *machine)
 {
 	return dump_raw_samples(tool, event, sample, evsel, machine);
+=======
+				struct perf_evsel *evsel __maybe_unused,
+				struct machine *machine)
+{
+	return dump_raw_samples(tool, event, sample, machine);
+>>>>>>> v3.18
 }
 
 static int report_raw_events(struct perf_mem *mem)
 {
+<<<<<<< HEAD
 	int err = -EINVAL;
 	int ret;
 	struct perf_session *session = perf_session__new(input_name, O_RDONLY,
@@ -128,6 +157,19 @@ static int report_raw_events(struct perf_mem *mem)
 
 	if (session == NULL)
 		return -ENOMEM;
+=======
+	struct perf_data_file file = {
+		.path = input_name,
+		.mode = PERF_DATA_MODE_READ,
+	};
+	int err = -EINVAL;
+	int ret;
+	struct perf_session *session = perf_session__new(&file, false,
+							 &mem->tool);
+
+	if (session == NULL)
+		return -1;
+>>>>>>> v3.18
 
 	if (mem->cpu_list) {
 		ret = perf_session__cpu_bitmap(session, mem->cpu_list,
@@ -136,7 +178,11 @@ static int report_raw_events(struct perf_mem *mem)
 			goto out_delete;
 	}
 
+<<<<<<< HEAD
 	if (symbol__init() < 0)
+=======
+	if (symbol__init(&session->header.env) < 0)
+>>>>>>> v3.18
 		return -1;
 
 	printf("# PID, TID, IP, ADDR, LOCAL WEIGHT, DSRC, SYMBOL\n");
@@ -192,11 +238,19 @@ int cmd_mem(int argc, const char **argv, const char *prefix __maybe_unused)
 		.tool = {
 			.sample		= process_sample_event,
 			.mmap		= perf_event__process_mmap,
+<<<<<<< HEAD
+=======
+			.mmap2		= perf_event__process_mmap2,
+>>>>>>> v3.18
 			.comm		= perf_event__process_comm,
 			.lost		= perf_event__process_lost,
 			.fork		= perf_event__process_fork,
 			.build_id	= perf_event__process_build_id,
+<<<<<<< HEAD
 			.ordered_samples = true,
+=======
+			.ordered_events	= true,
+>>>>>>> v3.18
 		},
 		.input_name		 = "perf.data",
 	};
@@ -217,9 +271,21 @@ int cmd_mem(int argc, const char **argv, const char *prefix __maybe_unused)
 		   " between columns '.' is reserved."),
 	OPT_END()
 	};
+<<<<<<< HEAD
 
 	argc = parse_options(argc, argv, mem_options, mem_usage,
 			     PARSE_OPT_STOP_AT_NON_OPTION);
+=======
+	const char *const mem_subcommands[] = { "record", "report", NULL };
+	const char *mem_usage[] = {
+		NULL,
+		NULL
+	};
+
+
+	argc = parse_options_subcommand(argc, argv, mem_options, mem_subcommands,
+					mem_usage, PARSE_OPT_STOP_AT_NON_OPTION);
+>>>>>>> v3.18
 
 	if (!argc || !(strncmp(argv[0], "rec", 3) || mem_operation))
 		usage_with_options(mem_usage, mem_options);

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # MSM8974
    zreladdr-$(CONFIG_ARCH_MSM8974)	:= 0x00008000
 
@@ -22,3 +23,8 @@
 # MSM8610
    zreladdr-$(CONFIG_ARCH_MSM8610)	:= 0x00008000
 
+=======
+  zreladdr-y		+= 0x10008000
+params_phys-y		:= 0x10000100
+initrd_phys-y		:= 0x10800000
+>>>>>>> v3.18

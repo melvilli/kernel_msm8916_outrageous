@@ -29,6 +29,11 @@
 #include <drm/ttm/ttm_bo_driver.h>
 #include <drm/ttm/ttm_memory.h>
 
+<<<<<<< HEAD
+=======
+struct device;
+
+>>>>>>> v3.18
 /**
  * Initialize pool allocator.
  */
@@ -62,7 +67,11 @@ extern void ttm_pool_unpopulate(struct ttm_tt *ttm);
 extern int ttm_page_alloc_debugfs(struct seq_file *m, void *data);
 
 
+<<<<<<< HEAD
 #ifdef CONFIG_SWIOTLB
+=======
+#if defined(CONFIG_SWIOTLB) || defined(CONFIG_INTEL_IOMMU)
+>>>>>>> v3.18
 /**
  * Initialize pool allocator.
  */
@@ -94,6 +103,18 @@ static inline int ttm_dma_page_alloc_debugfs(struct seq_file *m, void *data)
 {
 	return 0;
 }
+<<<<<<< HEAD
+=======
+static inline int ttm_dma_populate(struct ttm_dma_tt *ttm_dma,
+				   struct device *dev)
+{
+	return -ENOMEM;
+}
+static inline void ttm_dma_unpopulate(struct ttm_dma_tt *ttm_dma,
+				      struct device *dev)
+{
+}
+>>>>>>> v3.18
 #endif
 
 #endif

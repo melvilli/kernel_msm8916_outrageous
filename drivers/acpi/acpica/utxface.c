@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -41,7 +45,12 @@
  * POSSIBILITY OF SUCH DAMAGES.
  */
 
+<<<<<<< HEAD
 #include <linux/export.h>
+=======
+#define EXPORT_ACPI_INTERFACES
+
+>>>>>>> v3.18
 #include <acpi/acpi.h>
 #include "accommon.h"
 #include "acdebug.h"
@@ -60,7 +69,11 @@ ACPI_MODULE_NAME("utxface")
  * DESCRIPTION: Shutdown the ACPICA subsystem and release all resources.
  *
  ******************************************************************************/
+<<<<<<< HEAD
 acpi_status acpi_terminate(void)
+=======
+acpi_status __init acpi_terminate(void)
+>>>>>>> v3.18
 {
 	acpi_status status;
 
@@ -104,7 +117,11 @@ acpi_status acpi_terminate(void)
 	return_ACPI_STATUS(status);
 }
 
+<<<<<<< HEAD
 ACPI_EXPORT_SYMBOL(acpi_terminate)
+=======
+ACPI_EXPORT_SYMBOL_INIT(acpi_terminate)
+>>>>>>> v3.18
 
 #ifndef ACPI_ASL_COMPILER
 #ifdef ACPI_FUTURE_USAGE
@@ -207,6 +224,47 @@ acpi_status acpi_get_system_info(struct acpi_buffer * out_buffer)
 
 ACPI_EXPORT_SYMBOL(acpi_get_system_info)
 
+<<<<<<< HEAD
+=======
+/*******************************************************************************
+ *
+ * FUNCTION:    acpi_get_statistics
+ *
+ * PARAMETERS:  stats           - Where the statistics are returned
+ *
+ * RETURN:      status          - the status of the call
+ *
+ * DESCRIPTION: Get the contents of the various system counters
+ *
+ ******************************************************************************/
+acpi_status acpi_get_statistics(struct acpi_statistics *stats)
+{
+	ACPI_FUNCTION_TRACE(acpi_get_statistics);
+
+	/* Parameter validation */
+
+	if (!stats) {
+		return_ACPI_STATUS(AE_BAD_PARAMETER);
+	}
+
+	/* Various interrupt-based event counters */
+
+	stats->sci_count = acpi_sci_count;
+	stats->gpe_count = acpi_gpe_count;
+
+	ACPI_MEMCPY(stats->fixed_event_count, acpi_fixed_event_count,
+		    sizeof(acpi_fixed_event_count));
+
+	/* Other counters */
+
+	stats->method_count = acpi_method_count;
+
+	return_ACPI_STATUS(AE_OK);
+}
+
+ACPI_EXPORT_SYMBOL(acpi_get_statistics)
+
+>>>>>>> v3.18
 /*****************************************************************************
  *
  * FUNCTION:    acpi_install_initialization_handler
@@ -389,6 +447,37 @@ ACPI_EXPORT_SYMBOL(acpi_install_interface_handler)
 
 /*****************************************************************************
  *
+<<<<<<< HEAD
+=======
+ * FUNCTION:    acpi_update_interfaces
+ *
+ * PARAMETERS:  action              - Actions to be performed during the
+ *                                    update
+ *
+ * RETURN:      Status
+ *
+ * DESCRIPTION: Update _OSI interface strings, disabling or enabling OS vendor
+ *              string or/and feature group strings.
+ *
+ ****************************************************************************/
+acpi_status acpi_update_interfaces(u8 action)
+{
+	acpi_status status;
+
+	status = acpi_os_acquire_mutex(acpi_gbl_osi_mutex, ACPI_WAIT_FOREVER);
+	if (ACPI_FAILURE(status)) {
+		return (status);
+	}
+
+	status = acpi_ut_update_interfaces(action);
+
+	acpi_os_release_mutex(acpi_gbl_osi_mutex);
+	return (status);
+}
+
+/*****************************************************************************
+ *
+>>>>>>> v3.18
  * FUNCTION:    acpi_check_address_range
  *
  * PARAMETERS:  space_id            - Address space ID
@@ -402,6 +491,10 @@ ACPI_EXPORT_SYMBOL(acpi_install_interface_handler)
  *              ASL operation region address ranges.
  *
  ****************************************************************************/
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 u32
 acpi_check_address_range(acpi_adr_space_type space_id,
 			 acpi_physical_address address,

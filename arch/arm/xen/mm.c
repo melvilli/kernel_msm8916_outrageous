@@ -16,7 +16,11 @@
 #include <asm/xen/hypercall.h>
 #include <asm/xen/interface.h>
 
+<<<<<<< HEAD
 int xen_create_contiguous_region(unsigned long vstart, unsigned int order,
+=======
+int xen_create_contiguous_region(phys_addr_t pstart, unsigned int order,
+>>>>>>> v3.18
 				 unsigned int address_bits,
 				 dma_addr_t *dma_handle)
 {
@@ -24,12 +28,20 @@ int xen_create_contiguous_region(unsigned long vstart, unsigned int order,
 		return -EINVAL;
 
 	/* we assume that dom0 is mapped 1:1 for now */
+<<<<<<< HEAD
 	*dma_handle = virt_to_phys(pstart);
+=======
+	*dma_handle = pstart;
+>>>>>>> v3.18
 	return 0;
 }
 EXPORT_SYMBOL_GPL(xen_create_contiguous_region);
 
+<<<<<<< HEAD
 void xen_destroy_contiguous_region(unsigned long vstart, unsigned int order)
+=======
+void xen_destroy_contiguous_region(phys_addr_t pstart, unsigned int order)
+>>>>>>> v3.18
 {
 	return;
 }
@@ -51,6 +63,10 @@ static struct dma_map_ops xen_swiotlb_dma_ops = {
 	.map_page = xen_swiotlb_map_page,
 	.unmap_page = xen_swiotlb_unmap_page,
 	.dma_supported = xen_swiotlb_dma_supported,
+<<<<<<< HEAD
+=======
+	.set_dma_mask = xen_swiotlb_set_dma_mask,
+>>>>>>> v3.18
 };
 
 int __init xen_mm_init(void)

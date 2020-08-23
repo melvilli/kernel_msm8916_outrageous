@@ -2,7 +2,11 @@
  * Copyright(c) 2008 - 2010 Realtek Corporation. All rights reserved.
  *
  * Based on the r8180 driver, which is:
+<<<<<<< HEAD
  * Copyright 2004-2005 Andrea Merello <andreamrl@tiscali.it>, et al.
+=======
+ * Copyright 2004-2005 Andrea Merello <andrea.merello@gmail.com>, et al.
+>>>>>>> v3.18
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
  * published by the Free Software Foundation.
@@ -28,7 +32,10 @@
 #include "r8190P_rtl8256.h" /* RTL8225 Radio frontend */
 #include "r8192E_cmdpkt.h"
 
+<<<<<<< HEAD
 extern int hwwep;
+=======
+>>>>>>> v3.18
 void CamResetAllEntry(struct net_device *dev)
 {
 	u32 ulcommand = 0;
@@ -54,6 +61,10 @@ void EnableHWSecurityConfig8192(struct net_device *dev)
 	u8 SECR_value = 0x0;
 	struct r8192_priv *priv = (struct r8192_priv *)rtllib_priv(dev);
 	struct rtllib_device *ieee = priv->rtllib;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	SECR_value = SCR_TxEncEnable | SCR_RxDecEnable;
 	if (((KEY_TYPE_WEP40 == ieee->pairwise_key_type) ||
 	     (KEY_TYPE_WEP104 == ieee->pairwise_key_type)) &&
@@ -85,6 +96,10 @@ void set_swcam(struct net_device *dev, u8 EntryNo, u8 KeyIndex, u16 KeyType,
 {
 	struct r8192_priv *priv = rtllib_priv(dev);
 	struct rtllib_device *ieee = priv->rtllib;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	RT_TRACE(COMP_DBG, "===========>%s():EntryNo is %d,KeyIndex is "
 		 "%d,KeyType is %d,is_mesh is %d\n", __func__, EntryNo,
 		 KeyIndex, KeyType, is_mesh);
@@ -107,6 +122,10 @@ void setKey(struct net_device *dev, u8 EntryNo, u8 KeyIndex, u16 KeyType,
 	u8 i;
 	struct r8192_priv *priv = (struct r8192_priv *)rtllib_priv(dev);
 	enum rt_rf_power_state rtState;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	rtState = priv->rtllib->eRFPowerState;
 	if (priv->rtllib->PowerSaveControl.bInactivePs) {
 		if (rtState == eRfOff) {
@@ -172,6 +191,10 @@ void CAM_read_entry(struct net_device *dev, u32 iIndex)
 	u8 entry_i = 0;
 	u32 ulStatus;
 	s32 i = 100;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	for (entry_i = 0; entry_i < CAM_CONTENT_COUNT; entry_i++) {
 		target_command = entry_i+CAM_CONTENT_COUNT*iIndex;
 		target_command = target_command | BIT31;

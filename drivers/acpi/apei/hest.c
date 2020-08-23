@@ -121,6 +121,18 @@ int apei_hest_parse(apei_hest_func_t func, void *data)
 }
 EXPORT_SYMBOL_GPL(apei_hest_parse);
 
+<<<<<<< HEAD
+=======
+/*
+ * Check if firmware advertises firmware first mode. We need FF bit to be set
+ * along with a set of MC banks which work in FF mode.
+ */
+static int __init hest_parse_cmc(struct acpi_hest_header *hest_hdr, void *data)
+{
+	return arch_apei_enable_cmcff(hest_hdr, data);
+}
+
+>>>>>>> v3.18
 struct ghes_arr {
 	struct platform_device **ghes_devs;
 	unsigned int count;
@@ -227,6 +239,12 @@ void __init acpi_hest_init(void)
 		goto err;
 	}
 
+<<<<<<< HEAD
+=======
+	if (!acpi_disable_cmcff)
+		apei_hest_parse(hest_parse_cmc, NULL);
+
+>>>>>>> v3.18
 	if (!ghes_disable) {
 		rc = apei_hest_parse(hest_parse_ghes_count, &ghes_count);
 		if (rc)

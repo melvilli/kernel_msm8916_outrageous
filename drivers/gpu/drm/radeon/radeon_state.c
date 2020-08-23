@@ -30,9 +30,15 @@
  */
 
 #include <drm/drmP.h>
+<<<<<<< HEAD
 #include <drm/drm_buffer.h>
 #include <drm/radeon_drm.h>
 #include "radeon_drv.h"
+=======
+#include <drm/radeon_drm.h>
+#include "radeon_drv.h"
+#include "drm_buffer.h"
+>>>>>>> v3.18
 
 /* ================================================================
  * Helper functions for client state checking and fixup
@@ -1810,7 +1816,11 @@ static int radeon_cp_dispatch_texture(struct drm_device * dev,
 		}
 		if (!buf) {
 			DRM_DEBUG("EAGAIN\n");
+<<<<<<< HEAD
 			if (DRM_COPY_TO_USER(tex->image, image, sizeof(*image)))
+=======
+			if (copy_to_user(tex->image, image, sizeof(*image)))
+>>>>>>> v3.18
 				return -EFAULT;
 			return -EAGAIN;
 		}
@@ -1823,7 +1833,11 @@ static int radeon_cp_dispatch_texture(struct drm_device * dev,
 
 #define RADEON_COPY_MT(_buf, _data, _width) \
 	do { \
+<<<<<<< HEAD
 		if (DRM_COPY_FROM_USER(_buf, _data, (_width))) {\
+=======
+		if (copy_from_user(_buf, _data, (_width))) {\
+>>>>>>> v3.18
 			DRM_ERROR("EFAULT on pad, %d bytes\n", (_width)); \
 			return -EFAULT; \
 		} \
@@ -2168,7 +2182,11 @@ static int radeon_cp_clear(struct drm_device *dev, void *data, struct drm_file *
 	if (sarea_priv->nbox > RADEON_NR_SAREA_CLIPRECTS)
 		sarea_priv->nbox = RADEON_NR_SAREA_CLIPRECTS;
 
+<<<<<<< HEAD
 	if (DRM_COPY_FROM_USER(&depth_boxes, clear->depth_boxes,
+=======
+	if (copy_from_user(&depth_boxes, clear->depth_boxes,
+>>>>>>> v3.18
 			       sarea_priv->nbox * sizeof(depth_boxes[0])))
 		return -EFAULT;
 
@@ -2436,7 +2454,11 @@ static int radeon_cp_texture(struct drm_device *dev, void *data, struct drm_file
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 	if (DRM_COPY_FROM_USER(&image,
+=======
+	if (copy_from_user(&image,
+>>>>>>> v3.18
 			       (drm_radeon_tex_image_t __user *) tex->image,
 			       sizeof(image)))
 		return -EFAULT;
@@ -2460,7 +2482,11 @@ static int radeon_cp_stipple(struct drm_device *dev, void *data, struct drm_file
 
 	LOCK_TEST_WITH_RETURN(dev, file_priv);
 
+<<<<<<< HEAD
 	if (DRM_COPY_FROM_USER(&mask, stipple->mask, 32 * sizeof(u32)))
+=======
+	if (copy_from_user(&mask, stipple->mask, 32 * sizeof(u32)))
+>>>>>>> v3.18
 		return -EFAULT;
 
 	RING_SPACE_TEST_WITH_RETURN(dev_priv);
@@ -2585,13 +2611,21 @@ static int radeon_cp_vertex2(struct drm_device *dev, void *data, struct drm_file
 		drm_radeon_prim_t prim;
 		drm_radeon_tcl_prim_t tclprim;
 
+<<<<<<< HEAD
 		if (DRM_COPY_FROM_USER(&prim, &vertex->prim[i], sizeof(prim)))
+=======
+		if (copy_from_user(&prim, &vertex->prim[i], sizeof(prim)))
+>>>>>>> v3.18
 			return -EFAULT;
 
 		if (prim.stateidx != laststate) {
 			drm_radeon_state_t state;
 
+<<<<<<< HEAD
 			if (DRM_COPY_FROM_USER(&state,
+=======
+			if (copy_from_user(&state,
+>>>>>>> v3.18
 					       &vertex->state[prim.stateidx],
 					       sizeof(state)))
 				return -EFAULT;
@@ -2799,7 +2833,11 @@ static int radeon_emit_packet3_cliprect(struct drm_device *dev,
 
 	do {
 		if (i < cmdbuf->nbox) {
+<<<<<<< HEAD
 			if (DRM_COPY_FROM_USER(&box, &boxes[i], sizeof(box)))
+=======
+			if (copy_from_user(&box, &boxes[i], sizeof(box)))
+>>>>>>> v3.18
 				return -EFAULT;
 			/* FIXME The second and subsequent times round
 			 * this loop, send a WAIT_UNTIL_3D_IDLE before
@@ -3054,7 +3092,11 @@ static int radeon_cp_getparam(struct drm_device *dev, void *data, struct drm_fil
 		if ((dev_priv->flags & RADEON_FAMILY_MASK) >= CHIP_R600)
 			value = 0;
 		else
+<<<<<<< HEAD
 			value = drm_dev_to_irq(dev);
+=======
+			value = dev->pdev->irq;
+>>>>>>> v3.18
 		break;
 	case RADEON_PARAM_GART_BASE:
 		value = dev_priv->gart_vm_start;
@@ -3116,7 +3158,11 @@ static int radeon_cp_getparam(struct drm_device *dev, void *data, struct drm_fil
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 	if (DRM_COPY_TO_USER(param->value, &value, sizeof(int))) {
+=======
+	if (copy_to_user(param->value, &value, sizeof(int))) {
+>>>>>>> v3.18
 		DRM_ERROR("copy_to_user\n");
 		return -EFAULT;
 	}
@@ -3258,4 +3304,8 @@ struct drm_ioctl_desc radeon_ioctls[] = {
 	DRM_IOCTL_DEF_DRV(RADEON_CS, r600_cs_legacy_ioctl, DRM_AUTH)
 };
 
+<<<<<<< HEAD
 int radeon_max_ioctl = DRM_ARRAY_SIZE(radeon_ioctls);
+=======
+int radeon_max_ioctl = ARRAY_SIZE(radeon_ioctls);
+>>>>>>> v3.18

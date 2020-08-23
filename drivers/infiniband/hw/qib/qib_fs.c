@@ -89,7 +89,10 @@ static int create_file(const char *name, umode_t mode,
 {
 	int error;
 
+<<<<<<< HEAD
 	*dentry = NULL;
+=======
+>>>>>>> v3.18
 	mutex_lock(&parent->d_inode->i_mutex);
 	*dentry = lookup_one_len(name, parent, strlen(name));
 	if (!IS_ERR(*dentry))
@@ -105,6 +108,10 @@ static int create_file(const char *name, umode_t mode,
 static ssize_t driver_stats_read(struct file *file, char __user *buf,
 				 size_t count, loff_t *ppos)
 {
+<<<<<<< HEAD
+=======
+	qib_stats.sps_ints = qib_sps_ints();
+>>>>>>> v3.18
 	return simple_read_from_buffer(buf, count, ppos, &qib_stats,
 				       sizeof qib_stats);
 }
@@ -456,13 +463,20 @@ static int remove_file(struct dentry *parent, char *name)
 
 	spin_lock(&tmp->d_lock);
 	if (!(d_unhashed(tmp) && tmp->d_inode)) {
+<<<<<<< HEAD
 		dget_dlock(tmp);
+=======
+>>>>>>> v3.18
 		__d_drop(tmp);
 		spin_unlock(&tmp->d_lock);
 		simple_unlink(parent->d_inode, tmp);
 	} else {
 		spin_unlock(&tmp->d_lock);
 	}
+<<<<<<< HEAD
+=======
+	dput(tmp);
+>>>>>>> v3.18
 
 	ret = 0;
 bail:
@@ -491,6 +505,10 @@ static int remove_device_files(struct super_block *sb,
 		goto bail;
 	}
 
+<<<<<<< HEAD
+=======
+	mutex_lock(&dir->d_inode->i_mutex);
+>>>>>>> v3.18
 	remove_file(dir, "counters");
 	remove_file(dir, "counter_names");
 	remove_file(dir, "portcounter_names");
@@ -505,8 +523,15 @@ static int remove_device_files(struct super_block *sb,
 		}
 	}
 	remove_file(dir, "flash");
+<<<<<<< HEAD
 	d_delete(dir);
 	ret = simple_rmdir(root->d_inode, dir);
+=======
+	mutex_unlock(&dir->d_inode->i_mutex);
+	ret = simple_rmdir(root->d_inode, dir);
+	d_delete(dir);
+	dput(dir);
+>>>>>>> v3.18
 
 bail:
 	mutex_unlock(&root->d_inode->i_mutex);

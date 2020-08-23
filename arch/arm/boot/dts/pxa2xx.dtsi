@@ -23,8 +23,16 @@
 	};
 
 	cpus {
+<<<<<<< HEAD
 		cpu@0 {
 			compatible = "arm,xscale";
+=======
+		#address-cells = <0>;
+		#size-cells = <0>;
+		cpu {
+			compatible = "marvell,xscale";
+			device_type = "cpu";
+>>>>>>> v3.18
 		};
 	};
 
@@ -110,14 +118,22 @@
 		};
 
 		usb0: ohci@4c000000 {
+<<<<<<< HEAD
 			compatible = "mrvl,pxa-ohci";
+=======
+			compatible = "marvell,pxa-ohci";
+>>>>>>> v3.18
 			reg = <0x4c000000 0x10000>;
 			interrupts = <3>;
 			status = "disabled";
 		};
 
 		mmc0: mmc@41100000 {
+<<<<<<< HEAD
 			compatible = "mrvl,pxa-mmc";
+=======
+			compatible = "marvell,pxa-mmc";
+>>>>>>> v3.18
 			reg = <0x41100000 0x1000>;
 			interrupts = <23>;
 			status = "disabled";

@@ -34,7 +34,10 @@
 #include <linux/module.h>
 #include <linux/delay.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/errno.h>
 #include <linux/platform_device.h>
 #include <linux/i2c.h>
@@ -176,7 +179,11 @@ iop3xx_i2c_wait_event(struct i2c_algo_iop3xx_data *iop3xx_adap,
 		interrupted = wait_event_interruptible_timeout (
 			iop3xx_adap->waitq,
 			(done = compare( sr = iop3xx_i2c_get_srstat(iop3xx_adap) ,flags )),
+<<<<<<< HEAD
 			1 * HZ;
+=======
+			1 * HZ
+>>>>>>> v3.18
 			);
 		if ((rc = iop3xx_i2c_error(sr)) < 0) {
 			*status = sr;

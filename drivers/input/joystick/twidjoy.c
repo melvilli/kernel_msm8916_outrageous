@@ -52,7 +52,10 @@
 #include <linux/slab.h>
 #include <linux/input.h>
 #include <linux/serio.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 
 #define DRIVER_DESC	"Handykey Twiddler keyboard as a joystick driver"
 

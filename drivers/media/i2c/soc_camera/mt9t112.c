@@ -27,8 +27,14 @@
 
 #include <media/mt9t112.h>
 #include <media/soc_camera.h>
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
 #include <media/v4l2-common.h>
+=======
+#include <media/v4l2-clk.h>
+#include <media/v4l2-common.h>
+#include <media/v4l2-image-sizes.h>
+>>>>>>> v3.18
 
 /* you can check PLL/clock info */
 /* #define EXT_CLOCK 24000000 */
@@ -42,9 +48,12 @@
 #define MAX_WIDTH   2048
 #define MAX_HEIGHT  1536
 
+<<<<<<< HEAD
 #define VGA_WIDTH   640
 #define VGA_HEIGHT  480
 
+=======
+>>>>>>> v3.18
 /*
  * macro of read/write
  */
@@ -90,8 +99,13 @@ struct mt9t112_priv {
 	struct mt9t112_camera_info	*info;
 	struct i2c_client		*client;
 	struct v4l2_rect		 frame;
+<<<<<<< HEAD
 	const struct mt9t112_format	*format;
 	int				 model;
+=======
+	struct v4l2_clk			*clk;
+	const struct mt9t112_format	*format;
+>>>>>>> v3.18
 	int				 num_formats;
 	u32				 flags;
 /* for flags */
@@ -738,6 +752,7 @@ static int mt9t112_init_camera(const struct i2c_client *client)
 /************************************************************************
 			v4l2_subdev_core_ops
 ************************************************************************/
+<<<<<<< HEAD
 static int mt9t112_g_chip_ident(struct v4l2_subdev *sd,
 				struct v4l2_dbg_chip_ident *id)
 {
@@ -749,6 +764,8 @@ static int mt9t112_g_chip_ident(struct v4l2_subdev *sd,
 
 	return 0;
 }
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 static int mt9t112_g_register(struct v4l2_subdev *sd,
@@ -781,12 +798,21 @@ static int mt9t112_s_power(struct v4l2_subdev *sd, int on)
 {
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 	struct soc_camera_subdev_desc *ssdd = soc_camera_i2c_to_desc(client);
+<<<<<<< HEAD
 
 	return soc_camera_set_power(&client->dev, ssdd, on);
 }
 
 static struct v4l2_subdev_core_ops mt9t112_subdev_core_ops = {
 	.g_chip_ident	= mt9t112_g_chip_ident,
+=======
+	struct mt9t112_priv *priv = to_mt9t112(client);
+
+	return soc_camera_set_power(&client->dev, ssdd, priv->clk, on);
+}
+
+static struct v4l2_subdev_core_ops mt9t112_subdev_core_ops = {
+>>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 	.g_register	= mt9t112_g_register,
 	.s_register	= mt9t112_s_register,
@@ -1061,12 +1087,18 @@ static int mt9t112_camera_probe(struct i2c_client *client)
 	switch (chipid) {
 	case 0x2680:
 		devname = "mt9t111";
+<<<<<<< HEAD
 		priv->model = V4L2_IDENT_MT9T111;
+=======
+>>>>>>> v3.18
 		priv->num_formats = 1;
 		break;
 	case 0x2682:
 		devname = "mt9t112";
+<<<<<<< HEAD
 		priv->model = V4L2_IDENT_MT9T112;
+=======
+>>>>>>> v3.18
 		priv->num_formats = ARRAY_SIZE(mt9t112_cfmts);
 		break;
 	default:
@@ -1108,18 +1140,38 @@ static int mt9t112_probe(struct i2c_client *client,
 
 	v4l2_i2c_subdev_init(&priv->subdev, client, &mt9t112_subdev_ops);
 
+<<<<<<< HEAD
 	ret = mt9t112_camera_probe(client);
 	if (ret)
 		return ret;
 
 	/* Cannot fail: using the default supported pixel code */
 	mt9t112_set_params(priv, &rect, V4L2_MBUS_FMT_UYVY8_2X8);
+=======
+	priv->clk = v4l2_clk_get(&client->dev, "mclk");
+	if (IS_ERR(priv->clk))
+		return PTR_ERR(priv->clk);
+
+	ret = mt9t112_camera_probe(client);
+
+	/* Cannot fail: using the default supported pixel code */
+	if (!ret)
+		mt9t112_set_params(priv, &rect, V4L2_MBUS_FMT_UYVY8_2X8);
+	else
+		v4l2_clk_put(priv->clk);
+>>>>>>> v3.18
 
 	return ret;
 }
 
 static int mt9t112_remove(struct i2c_client *client)
 {
+<<<<<<< HEAD
+=======
+	struct mt9t112_priv *priv = to_mt9t112(client);
+
+	v4l2_clk_put(priv->clk);
+>>>>>>> v3.18
 	return 0;
 }
 

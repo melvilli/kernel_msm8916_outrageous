@@ -5,7 +5,11 @@
  ******************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -285,6 +289,10 @@ acpi_ds_method_data_get_node(u8 type,
 		break;
 
 	default:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		ACPI_ERROR((AE_INFO, "Type %u is invalid", type));
 		return_ACPI_STATUS(AE_TYPE);
 	}
@@ -428,7 +436,10 @@ acpi_ds_method_data_get_value(u8 type,
 				return_ACPI_STATUS(AE_AML_UNINITIALIZED_ARG);
 
 			case ACPI_REFCLASS_LOCAL:
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 				/*
 				 * No error message for this case, will be trapped again later to
 				 * detect and ignore cases of Store(local_x,local_x)

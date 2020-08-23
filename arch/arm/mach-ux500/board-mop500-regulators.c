@@ -30,6 +30,7 @@ struct regulator_init_data gpio_en_3v3_regulator = {
        .consumer_supplies = gpio_en_3v3_consumers,
 };
 
+<<<<<<< HEAD
 static struct regulator_consumer_supply sdi0_reg_consumers[] = {
         REGULATOR_SUPPLY("vqmmc", "sdi0"),
 };
@@ -44,6 +45,8 @@ struct regulator_init_data sdi0_reg_init_data = {
         .consumer_supplies      = sdi0_reg_consumers,
 };
 
+=======
+>>>>>>> v3.18
 /*
  * TPS61052 regulator
  */
@@ -810,7 +813,11 @@ static struct ab8500_regulator_reg_init ab8505_reg_init[] = {
 	INIT_REGULATOR_REGISTER(AB8505_CTRLVAUX6,              0x00, 0x00),
 };
 
+<<<<<<< HEAD
 struct regulator_init_data ab8505_regulators[AB8505_NUM_REGULATORS] = {
+=======
+static struct regulator_init_data ab8505_regulators[AB8505_NUM_REGULATORS] = {
+>>>>>>> v3.18
 	/* supplies to the display/camera */
 	[AB8505_LDO_AUX1] = {
 		.constraints = {
@@ -999,7 +1006,10 @@ struct ab8500_regulator_platform_data ab8500_regulator_plat_data = {
 	.num_ext_regulator      = ARRAY_SIZE(ab8500_ext_regulators),
 };
 
+<<<<<<< HEAD
 /* Use the AB8500 init settings for AB8505 as they are the same right now */
+=======
+>>>>>>> v3.18
 struct ab8500_regulator_platform_data ab8505_regulator_plat_data = {
 	.reg_init               = ab8505_reg_init,
 	.num_reg_init           = ARRAY_SIZE(ab8505_reg_init),

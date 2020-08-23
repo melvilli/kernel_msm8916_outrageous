@@ -5,10 +5,20 @@
 #include <linux/init.h>
 #include <linux/kern_levels.h>
 #include <linux/linkage.h>
+<<<<<<< HEAD
+=======
+#include <linux/cache.h>
+>>>>>>> v3.18
 
 extern const char linux_banner[];
 extern const char linux_proc_banner[];
 
+<<<<<<< HEAD
+=======
+extern char *log_buf_addr_get(void);
+extern u32 log_buf_len_get(void);
+
+>>>>>>> v3.18
 static inline int printk_get_level(const char *buffer)
 {
 	if (buffer[0] == KERN_SOH_ASCII && buffer[1]) {
@@ -23,6 +33,7 @@ static inline int printk_get_level(const char *buffer)
 
 static inline const char *printk_skip_level(const char *buffer)
 {
+<<<<<<< HEAD
 	if (printk_get_level(buffer)) {
 		switch (buffer[1]) {
 		case '0' ... '7':
@@ -33,6 +44,25 @@ static inline const char *printk_skip_level(const char *buffer)
 	return buffer;
 }
 
+=======
+	if (printk_get_level(buffer))
+		return buffer + 2;
+
+	return buffer;
+}
+
+/* printk's without a loglevel use this.. */
+#define MESSAGE_LOGLEVEL_DEFAULT CONFIG_MESSAGE_LOGLEVEL_DEFAULT
+
+/* We show everything that is MORE important than this.. */
+#define CONSOLE_LOGLEVEL_SILENT  0 /* Mum's the word */
+#define CONSOLE_LOGLEVEL_MIN	 1 /* Minimum loglevel we let people use */
+#define CONSOLE_LOGLEVEL_QUIET	 4 /* Shhh ..., when booted with "quiet" */
+#define CONSOLE_LOGLEVEL_DEFAULT 7 /* anything MORE serious than KERN_DEBUG */
+#define CONSOLE_LOGLEVEL_DEBUG	10 /* issue debug messages */
+#define CONSOLE_LOGLEVEL_MOTORMOUTH 15	/* You can't shut this one up */
+
+>>>>>>> v3.18
 extern int console_printk[];
 
 #define console_loglevel (console_printk[0])
@@ -42,13 +72,21 @@ extern int console_printk[];
 
 static inline void console_silent(void)
 {
+<<<<<<< HEAD
 	console_loglevel = 0;
+=======
+	console_loglevel = CONSOLE_LOGLEVEL_SILENT;
+>>>>>>> v3.18
 }
 
 static inline void console_verbose(void)
 {
 	if (console_loglevel)
+<<<<<<< HEAD
 		console_loglevel = 15;
+=======
+		console_loglevel = CONSOLE_LOGLEVEL_MOTORMOUTH;
+>>>>>>> v3.18
 }
 
 struct va_format {
@@ -88,6 +126,16 @@ struct va_format {
 #define HW_ERR		"[Hardware Error]: "
 
 /*
+<<<<<<< HEAD
+=======
+ * DEPRECATED
+ * Add this to a message whenever you want to warn user space about the use
+ * of a deprecated aspect of an API so they can stop using it
+ */
+#define DEPRECATED	"[Deprecated]: "
+
+/*
+>>>>>>> v3.18
  * Dummy printk for disabled debugging statements to use whilst maintaining
  * gcc's format and side-effect checking.
  */
@@ -116,9 +164,15 @@ asmlinkage __printf(1, 0)
 int vprintk(const char *fmt, va_list args);
 
 asmlinkage __printf(5, 6) __cold
+<<<<<<< HEAD
 asmlinkage int printk_emit(int facility, int level,
 			   const char *dict, size_t dictlen,
 			   const char *fmt, ...);
+=======
+int printk_emit(int facility, int level,
+		const char *dict, size_t dictlen,
+		const char *fmt, ...);
+>>>>>>> v3.18
 
 asmlinkage __printf(1, 2) __cold
 int printk(const char *fmt, ...);
@@ -200,12 +254,25 @@ static inline void show_regs_print_info(const char *log_lvl)
 }
 #endif
 
+<<<<<<< HEAD
 extern void dump_stack(void) __cold;
+=======
+extern asmlinkage void dump_stack(void) __cold;
+>>>>>>> v3.18
 
 #ifndef pr_fmt
 #define pr_fmt(fmt) fmt
 #endif
 
+<<<<<<< HEAD
+=======
+/*
+ * These can be used to print at the various log levels.
+ * All of these will print unconditionally, although note that pr_debug()
+ * and other debug macros are compiled out unless either DEBUG is defined
+ * or CONFIG_DYNAMIC_DEBUG is set.
+ */
+>>>>>>> v3.18
 #define pr_emerg(fmt, ...) \
 	printk(KERN_EMERG pr_fmt(fmt), ##__VA_ARGS__)
 #define pr_alert(fmt, ...) \
@@ -233,6 +300,11 @@ extern void dump_stack(void) __cold;
 	no_printk(KERN_DEBUG pr_fmt(fmt), ##__VA_ARGS__)
 #endif
 
+<<<<<<< HEAD
+=======
+#include <linux/dynamic_debug.h>
+
+>>>>>>> v3.18
 /* If you are writing a driver, please use dev_dbg instead */
 #if defined(CONFIG_DYNAMIC_DEBUG)
 /* dynamic_pr_debug() uses pr_fmt() internally so we don't need it here */
@@ -251,6 +323,7 @@ extern void dump_stack(void) __cold;
  */
 
 #ifdef CONFIG_PRINTK
+<<<<<<< HEAD
 #define printk_once(fmt, ...)			\
 ({						\
 	static bool __print_once;		\
@@ -262,6 +335,30 @@ extern void dump_stack(void) __cold;
 })
 #else
 #define printk_once(fmt, ...)			\
+=======
+#define printk_once(fmt, ...)					\
+({								\
+	static bool __print_once __read_mostly;			\
+								\
+	if (!__print_once) {					\
+		__print_once = true;				\
+		printk(fmt, ##__VA_ARGS__);			\
+	}							\
+})
+#define printk_deferred_once(fmt, ...)				\
+({								\
+	static bool __print_once __read_mostly;			\
+								\
+	if (!__print_once) {					\
+		__print_once = true;				\
+		printk_deferred(fmt, ##__VA_ARGS__);		\
+	}							\
+})
+#else
+#define printk_once(fmt, ...)					\
+	no_printk(fmt, ##__VA_ARGS__)
+#define printk_deferred_once(fmt, ...)				\
+>>>>>>> v3.18
 	no_printk(fmt, ##__VA_ARGS__)
 #endif
 
@@ -343,7 +440,23 @@ extern void dump_stack(void) __cold;
 #endif
 
 /* If you are writing a driver, please use dev_dbg instead */
+<<<<<<< HEAD
 #if defined(DEBUG)
+=======
+#if defined(CONFIG_DYNAMIC_DEBUG)
+/* descriptor check is first to prevent flooding with "callbacks suppressed" */
+#define pr_debug_ratelimited(fmt, ...)					\
+do {									\
+	static DEFINE_RATELIMIT_STATE(_rs,				\
+				      DEFAULT_RATELIMIT_INTERVAL,	\
+				      DEFAULT_RATELIMIT_BURST);		\
+	DEFINE_DYNAMIC_DEBUG_METADATA(descriptor, fmt);			\
+	if (unlikely(descriptor.flags & _DPRINTK_FLAGS_PRINT) &&	\
+	    __ratelimit(&_rs))						\
+		__dynamic_pr_debug(&descriptor, fmt, ##__VA_ARGS__);	\
+} while (0)
+#elif defined(DEBUG)
+>>>>>>> v3.18
 #define pr_debug_ratelimited(fmt, ...)					\
 	printk_ratelimited(KERN_DEBUG pr_fmt(fmt), ##__VA_ARGS__)
 #else
@@ -397,6 +510,7 @@ static inline void print_hex_dump_bytes(const char *prefix_str, int prefix_type,
 		       groupsize, buf, len, ascii)
 #endif /* defined(CONFIG_DYNAMIC_DEBUG) */
 
+<<<<<<< HEAD
 #if defined(CONFIG_OOPS_LOG_BUFFER)
 extern void oops_printk_start(void);
 #else
@@ -405,4 +519,6 @@ static inline void oops_printk_start(void)
 }
 #endif
 
+=======
+>>>>>>> v3.18
 #endif

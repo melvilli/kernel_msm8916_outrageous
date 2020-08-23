@@ -16,10 +16,13 @@
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
+<<<<<<< HEAD
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
  */
 
 /*
@@ -35,14 +38,21 @@
  * Configuration Options: not applicable, uses PCI auto config
  */
 
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 #include <linux/pci.h>
 
 #include "../comedidev.h"
 
 #include "das08.h"
 
+<<<<<<< HEAD
 #define PCI_DEVICE_ID_PCIDAS08		0x0029
 
+=======
+>>>>>>> v3.18
 static const struct das08_board_struct das08_pci_boards[] = {
 	{
 		.name		= "pci-das08",
@@ -63,10 +73,16 @@ static int das08_pci_auto_attach(struct comedi_device *dev,
 	struct das08_private_struct *devpriv;
 	int ret;
 
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
+=======
+	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
+	if (!devpriv)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	/* The das08 driver needs the board_ptr */
 	dev->board_ptr = &das08_pci_boards[0];
@@ -79,17 +95,24 @@ static int das08_pci_auto_attach(struct comedi_device *dev,
 	return das08_common_attach(dev, dev->iobase);
 }
 
+<<<<<<< HEAD
 static void das08_pci_detach(struct comedi_device *dev)
 {
 	das08_common_detach(dev);
 	comedi_pci_disable(dev);
 }
 
+=======
+>>>>>>> v3.18
 static struct comedi_driver das08_pci_comedi_driver = {
 	.driver_name	= "pci-das08",
 	.module		= THIS_MODULE,
 	.auto_attach	= das08_pci_auto_attach,
+<<<<<<< HEAD
 	.detach		= das08_pci_detach,
+=======
+	.detach		= comedi_pci_detach,
+>>>>>>> v3.18
 };
 
 static int das08_pci_probe(struct pci_dev *dev,
@@ -99,8 +122,13 @@ static int das08_pci_probe(struct pci_dev *dev,
 				      id->driver_data);
 }
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(das08_pci_table) = {
 	{ PCI_DEVICE(PCI_VENDOR_ID_CB, PCI_DEVICE_ID_PCIDAS08) },
+=======
+static const struct pci_device_id das08_pci_table[] = {
+	{ PCI_DEVICE(PCI_VENDOR_ID_CB, 0x0029) },
+>>>>>>> v3.18
 	{ 0 }
 };
 MODULE_DEVICE_TABLE(pci, das08_pci_table);

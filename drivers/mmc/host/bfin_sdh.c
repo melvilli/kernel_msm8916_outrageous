@@ -391,6 +391,10 @@ static void sdh_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 		/* Disable 4 bit SDIO */
 		cfg &= ~SD4E;
 	}
+<<<<<<< HEAD
+=======
+	bfin_write_SDH_CFG(cfg);
+>>>>>>> v3.18
 
 	host->power_mode = ios->power_mode;
 #ifndef RSI_BLKSZ
@@ -415,7 +419,10 @@ static void sdh_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 		cfg &= ~SD_CMD_OD;
 # endif
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 	if (ios->power_mode != MMC_POWER_OFF)
 		cfg |= PWR_ON;
 	else
@@ -433,7 +440,10 @@ static void sdh_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 		clk_ctl |= CLK_E;
 		host->clk_div = clk_div;
 		bfin_write_SDH_CLK_CTL(clk_ctl);
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 	} else
 		sdh_stop_clock(host);
 
@@ -621,8 +631,11 @@ static int sdh_remove(struct platform_device *pdev)
 {
 	struct mmc_host *mmc = platform_get_drvdata(pdev);
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 	if (mmc) {
 		struct sdh_host *host = mmc_priv(mmc);
 
@@ -642,6 +655,7 @@ static int sdh_remove(struct platform_device *pdev)
 #ifdef CONFIG_PM
 static int sdh_suspend(struct platform_device *dev, pm_message_t state)
 {
+<<<<<<< HEAD
 	struct mmc_host *mmc = platform_get_drvdata(dev);
 	struct bfin_sd_host *drv_data = get_sdh_data(dev);
 	int ret = 0;
@@ -652,11 +666,21 @@ static int sdh_suspend(struct platform_device *dev, pm_message_t state)
 	peripheral_free_list(drv_data->pin_req);
 
 	return ret;
+=======
+	struct bfin_sd_host *drv_data = get_sdh_data(dev);
+
+	peripheral_free_list(drv_data->pin_req);
+
+	return 0;
+>>>>>>> v3.18
 }
 
 static int sdh_resume(struct platform_device *dev)
 {
+<<<<<<< HEAD
 	struct mmc_host *mmc = platform_get_drvdata(dev);
+=======
+>>>>>>> v3.18
 	struct bfin_sd_host *drv_data = get_sdh_data(dev);
 	int ret = 0;
 
@@ -667,10 +691,13 @@ static int sdh_resume(struct platform_device *dev)
 	}
 
 	sdh_reset();
+<<<<<<< HEAD
 
 	if (mmc)
 		ret = mmc_resume_host(mmc);
 
+=======
+>>>>>>> v3.18
 	return ret;
 }
 #else

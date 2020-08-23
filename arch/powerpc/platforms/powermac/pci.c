@@ -698,7 +698,11 @@ static void __init fixup_nec_usb2(void)
 {
 	struct device_node *nec;
 
+<<<<<<< HEAD
 	for (nec = NULL; (nec = of_find_node_by_name(nec, "usb")) != NULL;) {
+=======
+	for_each_node_by_name(nec, "usb") {
+>>>>>>> v3.18
 		struct pci_controller *hose;
 		u32 data;
 		const u32 *prop;

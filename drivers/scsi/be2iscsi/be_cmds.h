@@ -1,5 +1,9 @@
 /**
+<<<<<<< HEAD
  * Copyright (C) 2005 - 2013 Emulex
+=======
+ * Copyright (C) 2005 - 2014 Emulex
+>>>>>>> v3.18
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or
@@ -26,9 +30,15 @@
  * The commands are serviced by the ARM processor in the OneConnect's MPU.
  */
 struct be_sge {
+<<<<<<< HEAD
 	u32 pa_lo;
 	u32 pa_hi;
 	u32 len;
+=======
+	__le32 pa_lo;
+	__le32 pa_hi;
+	__le32 len;
+>>>>>>> v3.18
 };
 
 #define MCC_WRB_SGE_CNT_SHIFT 3	/* bits 3 - 7 of dword 0 */
@@ -40,6 +50,10 @@ struct be_mcc_wrb {
 	u32 tag1;		/* dword 3 */
 	u32 rsvd;		/* dword 4 */
 	union {
+<<<<<<< HEAD
+=======
+#define EMBED_MBX_MAX_PAYLOAD_SIZE  220
+>>>>>>> v3.18
 		u8 embedded_payload[236];	/* used by embedded cmds */
 		struct be_sge sgl[19];	/* used by non-embedded cmds */
 	} payload;
@@ -70,6 +84,10 @@ struct be_mcc_wrb {
 #define BEISCSI_FW_MBX_TIMEOUT	100
 
 /* MBOX Command VER */
+<<<<<<< HEAD
+=======
+#define MBX_CMD_VER1	0x01
+>>>>>>> v3.18
 #define MBX_CMD_VER2	0x02
 
 struct be_mcc_compl {
@@ -102,7 +120,11 @@ struct be_mcc_compl {
 
 /********** MCC door bell ************/
 #define DB_MCCQ_OFFSET 0x140
+<<<<<<< HEAD
 #define DB_MCCQ_RING_ID_MASK 0x7FF		/* bits 0 - 10 */
+=======
+#define DB_MCCQ_RING_ID_MASK 0xFFFF		/* bits 0 - 15 */
+>>>>>>> v3.18
 /* Number of entries posted */
 #define DB_MCCQ_NUM_POSTED_SHIFT 16		/* bits 16 - 29 */
 
@@ -116,6 +138,17 @@ struct be_mcc_compl {
 #define ASYNC_TRAILER_EVENT_CODE_SHIFT	8	/* bits 8 - 15 */
 #define ASYNC_TRAILER_EVENT_CODE_MASK	0xFF
 #define ASYNC_EVENT_CODE_LINK_STATE	0x1
+<<<<<<< HEAD
+=======
+#define ASYNC_EVENT_CODE_ISCSI		0x4
+
+#define ASYNC_TRAILER_EVENT_TYPE_SHIFT	16	/* bits 16 - 23 */
+#define ASYNC_TRAILER_EVENT_TYPE_MASK	0xF
+#define ASYNC_EVENT_NEW_ISCSI_TGT_DISC	0x4
+#define ASYNC_EVENT_NEW_ISCSI_CONN	0x5
+#define ASYNC_EVENT_NEW_TCP_CONN	0x7
+
+>>>>>>> v3.18
 struct be_async_event_trailer {
 	u32 code;
 };
@@ -162,6 +195,11 @@ struct be_mcc_mailbox {
 #define OPCODE_COMMON_CQ_CREATE				12
 #define OPCODE_COMMON_EQ_CREATE				13
 #define OPCODE_COMMON_MCC_CREATE			21
+<<<<<<< HEAD
+=======
+#define OPCODE_COMMON_ADD_TEMPLATE_HEADER_BUFFERS	24
+#define OPCODE_COMMON_REMOVE_TEMPLATE_HEADER_BUFFERS	25
+>>>>>>> v3.18
 #define OPCODE_COMMON_GET_CNTL_ATTRIBUTES		32
 #define OPCODE_COMMON_GET_FW_VERSION			35
 #define OPCODE_COMMON_MODIFY_EQ_DELAY			41
@@ -217,6 +255,13 @@ struct phys_addr {
 	u32 hi;
 };
 
+<<<<<<< HEAD
+=======
+struct virt_addr {
+	u32 lo;
+	u32 hi;
+};
+>>>>>>> v3.18
 /**************************
  * BE Command definitions *
  **************************/
@@ -264,6 +309,15 @@ struct be_cmd_resp_eq_create {
 	u16 rsvd0;		/* sword */
 } __packed;
 
+<<<<<<< HEAD
+=======
+struct be_set_eqd {
+	u32 eq_id;
+	u32 phase;
+	u32 delay_multiplier;
+} __packed;
+
+>>>>>>> v3.18
 struct mgmt_chap_format {
 	u32 flags;
 	u8  intr_chap_name[256];
@@ -610,12 +664,21 @@ static inline struct be_sge *nonembedded_sgl(struct be_mcc_wrb *wrb)
 /******************** Modify EQ Delay *******************/
 struct be_cmd_req_modify_eq_delay {
 	struct be_cmd_req_hdr hdr;
+<<<<<<< HEAD
 	u32 num_eq;
 	struct {
 		u32 eq_id;
 		u32 phase;
 		u32 delay_multiplier;
 	} delay[8];
+=======
+	__le32 num_eq;
+	struct {
+		__le32 eq_id;
+		__le32 phase;
+		__le32 delay_multiplier;
+	} delay[MAX_CPUS];
+>>>>>>> v3.18
 } __packed;
 
 /******************** Get MAC ADDR *******************/
@@ -701,8 +764,16 @@ unsigned int be_cmd_get_port_speed(struct beiscsi_hba *phba);
 
 void free_mcc_tag(struct be_ctrl_info *ctrl, unsigned int tag);
 
+<<<<<<< HEAD
 int beiscsi_mccq_compl(struct beiscsi_hba *phba,
 			uint32_t tag, struct be_mcc_wrb **wrb, void *cmd_va);
+=======
+int be_cmd_modify_eq_delay(struct beiscsi_hba *phba, struct be_set_eqd *,
+			    int num);
+int beiscsi_mccq_compl(struct beiscsi_hba *phba,
+			uint32_t tag, struct be_mcc_wrb **wrb,
+			struct be_dma_mem *mbx_cmd_mem);
+>>>>>>> v3.18
 /*ISCSI Functuions */
 int be_cmd_fw_initialize(struct be_ctrl_info *ctrl);
 int be_cmd_fw_uninit(struct be_ctrl_info *ctrl);
@@ -722,7 +793,17 @@ int be_mbox_notify(struct be_ctrl_info *ctrl);
 int be_cmd_create_default_pdu_queue(struct be_ctrl_info *ctrl,
 				    struct be_queue_info *cq,
 				    struct be_queue_info *dq, int length,
+<<<<<<< HEAD
 				    int entry_size);
+=======
+				    int entry_size, uint8_t is_header,
+				    uint8_t ulp_num);
+
+int be_cmd_iscsi_post_template_hdr(struct be_ctrl_info *ctrl,
+				    struct be_dma_mem *q_mem);
+
+int be_cmd_iscsi_remove_template_hdr(struct be_ctrl_info *ctrl);
+>>>>>>> v3.18
 
 int be_cmd_iscsi_post_sgl_pages(struct be_ctrl_info *ctrl,
 				struct be_dma_mem *q_mem, u32 page_offset,
@@ -731,7 +812,13 @@ int be_cmd_iscsi_post_sgl_pages(struct be_ctrl_info *ctrl,
 int beiscsi_cmd_reset_function(struct beiscsi_hba *phba);
 
 int be_cmd_wrbq_create(struct be_ctrl_info *ctrl, struct be_dma_mem *q_mem,
+<<<<<<< HEAD
 		       struct be_queue_info *wrbq);
+=======
+		       struct be_queue_info *wrbq,
+		       struct hwi_wrb_context *pwrb_context,
+		       uint8_t ulp_num);
+>>>>>>> v3.18
 
 bool is_link_state_evt(u32 trailer);
 
@@ -776,7 +863,13 @@ struct be_defq_create_req {
 	struct be_cmd_req_hdr hdr;
 	u16 num_pages;
 	u8 ulp_num;
+<<<<<<< HEAD
 	u8 rsvd0;
+=======
+#define BEISCSI_DUAL_ULP_AWARE_BIT	0	/* Byte 3 - Bit 0 */
+#define BEISCSI_BIND_Q_TO_ULP_BIT	1	/* Byte 3 - Bit 1 */
+	u8 dua_feature;
+>>>>>>> v3.18
 	struct be_default_pdu_context context;
 	struct phys_addr pages[8];
 } __packed;
@@ -784,6 +877,30 @@ struct be_defq_create_req {
 struct be_defq_create_resp {
 	struct be_cmd_req_hdr hdr;
 	u16 id;
+<<<<<<< HEAD
+=======
+	u8 rsvd0;
+	u8 ulp_num;
+	u32 doorbell_offset;
+	u16 register_set;
+	u16 doorbell_format;
+} __packed;
+
+struct be_post_template_pages_req {
+	struct be_cmd_req_hdr hdr;
+	u16 num_pages;
+#define BEISCSI_TEMPLATE_HDR_TYPE_ISCSI	0x1
+	u16 type;
+	struct phys_addr scratch_pa;
+	struct virt_addr scratch_va;
+	struct virt_addr pages_va;
+	struct phys_addr pages[16];
+} __packed;
+
+struct be_remove_template_pages_req {
+	struct be_cmd_req_hdr hdr;
+	u16 type;
+>>>>>>> v3.18
 	u16 rsvd0;
 } __packed;
 
@@ -800,14 +917,26 @@ struct be_wrbq_create_req {
 	struct be_cmd_req_hdr hdr;
 	u16 num_pages;
 	u8 ulp_num;
+<<<<<<< HEAD
 	u8 rsvd0;
+=======
+	u8 dua_feature;
+>>>>>>> v3.18
 	struct phys_addr pages[8];
 } __packed;
 
 struct be_wrbq_create_resp {
 	struct be_cmd_resp_hdr resp_hdr;
 	u16 cid;
+<<<<<<< HEAD
 	u16 rsvd0;
+=======
+	u8 rsvd0;
+	u8 ulp_num;
+	u32 doorbell_offset;
+	u16 register_set;
+	u16 doorbell_format;
+>>>>>>> v3.18
 } __packed;
 
 #define SOL_CID_MASK		0x0000FFC0
@@ -962,6 +1091,29 @@ struct tcp_connect_and_offload_in {
 	u8 rsvd0[3];
 } __packed;
 
+<<<<<<< HEAD
+=======
+struct tcp_connect_and_offload_in_v1 {
+	struct be_cmd_req_hdr hdr;
+	struct ip_addr_format ip_address;
+	u16 tcp_port;
+	u16 cid;
+	u16 cq_id;
+	u16 defq_id;
+	struct phys_addr dataout_template_pa;
+	u16 hdr_ring_id;
+	u16 data_ring_id;
+	u8 do_offload;
+	u8 ifd_state;
+	u8 rsvd0[2];
+	u16 tcp_window_size;
+	u8 tcp_window_scale_count;
+	u8 rsvd1;
+	u32 tcp_mss:24;
+	u8 rsvd2;
+} __packed;
+
+>>>>>>> v3.18
 struct tcp_connect_and_offload_out {
 	struct be_cmd_resp_hdr hdr;
 	u32 connection_handle;
@@ -975,8 +1127,13 @@ struct be_mcc_wrb_context {
 	int *users_final_status;
 } __packed;
 
+<<<<<<< HEAD
 #define DB_DEF_PDU_RING_ID_MASK		0x3FF	/* bits 0 - 9 */
 #define DB_DEF_PDU_CQPROC_MASK		0x3FFF	/* bits 0 - 9 */
+=======
+#define DB_DEF_PDU_RING_ID_MASK	0x3FFF	/* bits 0 - 13 */
+#define DB_DEF_PDU_CQPROC_MASK		0x3FFF	/* bits 16 - 29 */
+>>>>>>> v3.18
 #define DB_DEF_PDU_REARM_SHIFT		14
 #define DB_DEF_PDU_EVENT_SHIFT		15
 #define DB_DEF_PDU_CQPROC_SHIFT		16
@@ -1002,6 +1159,10 @@ union tcp_upload_params {
 } __packed;
 
 struct be_ulp_fw_cfg {
+<<<<<<< HEAD
+=======
+#define BEISCSI_ULP_ISCSI_INI_MODE	0x10
+>>>>>>> v3.18
 	u32 ulp_mode;
 	u32 etx_base;
 	u32 etx_count;
@@ -1017,14 +1178,35 @@ struct be_ulp_fw_cfg {
 	u32 icd_count;
 };
 
+<<<<<<< HEAD
+=======
+struct be_ulp_chain_icd {
+	u32 chain_base;
+	u32 chain_count;
+};
+
+>>>>>>> v3.18
 struct be_fw_cfg {
 	struct be_cmd_req_hdr hdr;
 	u32 be_config_number;
 	u32 asic_revision;
 	u32 phys_port;
+<<<<<<< HEAD
 	u32 function_mode;
 	struct be_ulp_fw_cfg ulp[2];
 	u32 function_caps;
+=======
+#define BEISCSI_FUNC_ISCSI_INI_MODE	0x10
+#define BEISCSI_FUNC_DUA_MODE	0x800
+	u32 function_mode;
+	struct be_ulp_fw_cfg ulp[2];
+	u32 function_caps;
+	u32 cqid_base;
+	u32 cqid_count;
+	u32 eqid_base;
+	u32 eqid_count;
+	struct be_ulp_chain_icd chain_icd[2];
+>>>>>>> v3.18
 } __packed;
 
 struct be_cmd_get_all_if_id_req {
@@ -1262,4 +1444,8 @@ void be_wrb_hdr_prepare(struct be_mcc_wrb *wrb, int payload_len,
 void be_cmd_hdr_prepare(struct be_cmd_req_hdr *req_hdr,
 			u8 subsystem, u8 opcode, int cmd_len);
 
+<<<<<<< HEAD
+=======
+void be2iscsi_fail_session(struct iscsi_cls_session *cls_session);
+>>>>>>> v3.18
 #endif /* !BEISCSI_CMDS_H */

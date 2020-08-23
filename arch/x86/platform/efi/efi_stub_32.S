@@ -27,13 +27,21 @@ ENTRY(efi_call_phys)
 	 * set to 0x0010, DS and SS have been set to 0x0018. In EFI, I found
 	 * the values of these registers are the same. And, the corresponding
 	 * GDT entries are identical. So I will do nothing about segment reg
+<<<<<<< HEAD
 	 * and GDT, but change GDT base register in prelog and epilog.
+=======
+	 * and GDT, but change GDT base register in prolog and epilog.
+>>>>>>> v3.18
 	 */
 
 	/*
 	 * 1. Now I am running with EIP = <physical address> + PAGE_OFFSET.
 	 * But to make it smoothly switch from virtual mode to flat mode.
+<<<<<<< HEAD
 	 * The mapping of lower virtual memory has been created in prelog and
+=======
+	 * The mapping of lower virtual memory has been created in prolog and
+>>>>>>> v3.18
 	 * epilog.
 	 */
 	movl	$1f, %edx

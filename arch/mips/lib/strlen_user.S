@@ -22,6 +22,7 @@
  *
  * Return 0 for error
  */
+<<<<<<< HEAD
 LEAF(__strlen_user_asm)
 	LONG_L		v0, TI_ADDR_LIMIT($28)	# pointer ok?
 	and		v0, a0
@@ -30,11 +31,52 @@ LEAF(__strlen_user_asm)
 FEXPORT(__strlen_user_nocheck_asm)
 	move		v0, a0
 1:	EX(lbu, v1, (v0), .Lfault)
+=======
+	.macro __BUILD_STRLEN_ASM func
+LEAF(__strlen_\func\()_asm)
+	LONG_L		v0, TI_ADDR_LIMIT($28)	# pointer ok?
+	and		v0, a0
+	bnez		v0, .Lfault\@
+
+FEXPORT(__strlen_\func\()_nocheck_asm)
+	move		v0, a0
+.ifeqs "\func", "kernel"
+1:	EX(lbu, v1, (v0), .Lfault\@)
+.else
+1:	EX(lbue, v1, (v0), .Lfault\@)
+.endif
+>>>>>>> v3.18
 	PTR_ADDIU	v0, 1
 	bnez		v1, 1b
 	PTR_SUBU	v0, a0
 	jr		ra
+<<<<<<< HEAD
 	END(__strlen_user_asm)
 
 .Lfault:	move		v0, zero
 	jr		ra
+=======
+	END(__strlen_\func\()_asm)
+
+.Lfault\@:	move		v0, zero
+	jr		ra
+	.endm
+
+#ifndef CONFIG_EVA
+	/* Set aliases */
+	.global __strlen_user_asm
+	.global __strlen_user_nocheck_asm
+	.set __strlen_user_asm, __strlen_kernel_asm
+	.set __strlen_user_nocheck_asm, __strlen_kernel_nocheck_asm
+#endif
+
+__BUILD_STRLEN_ASM kernel
+
+#ifdef CONFIG_EVA
+
+	.set push
+	.set eva
+__BUILD_STRLEN_ASM user
+	.set pop
+#endif
+>>>>>>> v3.18

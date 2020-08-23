@@ -27,8 +27,13 @@ static char *text;
 static int text_size, text_asize;
 
 struct buffer {
+<<<<<<< HEAD
         struct buffer *parent;
         YY_BUFFER_STATE state;
+=======
+	struct buffer *parent;
+	YY_BUFFER_STATE state;
+>>>>>>> v3.18
 };
 
 struct buffer *current_buf;
@@ -68,7 +73,10 @@ static void alloc_string(const char *str, int size)
 }
 %}
 
+<<<<<<< HEAD
 ws	[ \n\t]
+=======
+>>>>>>> v3.18
 n	[A-Za-z0-9_]
 
 %%

@@ -34,10 +34,17 @@
  */
 
 #include <drm/drmP.h>
+<<<<<<< HEAD
 #include <drm/drm_buffer.h>
 #include <drm/radeon_drm.h>
 #include "radeon_drv.h"
 #include "r300_reg.h"
+=======
+#include <drm/radeon_drm.h>
+#include "radeon_drv.h"
+#include "r300_reg.h"
+#include "drm_buffer.h"
+>>>>>>> v3.18
 
 #include <asm/unaligned.h>
 
@@ -75,7 +82,11 @@ static int r300_emit_cliprects(drm_radeon_private_t *dev_priv,
 		OUT_RING(CP_PACKET0(R300_RE_CLIPRECT_TL_0, nr * 2 - 1));
 
 		for (i = 0; i < nr; ++i) {
+<<<<<<< HEAD
 			if (DRM_COPY_FROM_USER
+=======
+			if (copy_from_user
+>>>>>>> v3.18
 			    (&box, &cmdbuf->boxes[n + i], sizeof(box))) {
 				DRM_ERROR("copy cliprect faulted\n");
 				return -EFAULT;
@@ -928,12 +939,20 @@ static int r300_scratch(drm_radeon_private_t *dev_priv,
 		buf_idx = drm_buffer_pointer_to_dword(cmdbuf->buffer, 0);
 		*buf_idx *= 2; /* 8 bytes per buf */
 
+<<<<<<< HEAD
 		if (DRM_COPY_TO_USER(ref_age_base + *buf_idx,
+=======
+		if (copy_to_user(ref_age_base + *buf_idx,
+>>>>>>> v3.18
 				&dev_priv->scratch_ages[header.scratch.reg],
 				sizeof(u32)))
 			return -EINVAL;
 
+<<<<<<< HEAD
 		if (DRM_COPY_FROM_USER(&h_pending,
+=======
+		if (copy_from_user(&h_pending,
+>>>>>>> v3.18
 				ref_age_base + *buf_idx + 1,
 				sizeof(u32)))
 			return -EINVAL;
@@ -943,7 +962,11 @@ static int r300_scratch(drm_radeon_private_t *dev_priv,
 
 		h_pending--;
 
+<<<<<<< HEAD
 		if (DRM_COPY_TO_USER(ref_age_base + *buf_idx + 1,
+=======
+		if (copy_to_user(ref_age_base + *buf_idx + 1,
+>>>>>>> v3.18
 					&h_pending,
 					sizeof(u32)))
 			return -EINVAL;

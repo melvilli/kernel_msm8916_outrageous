@@ -52,10 +52,18 @@
  */
 
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <asm/arcregs.h>
 #include <asm/setup.h>
 #include <asm/mmu_context.h>
 #include <asm/tlb.h>
+=======
+#include <linux/bug.h>
+#include <asm/arcregs.h>
+#include <asm/setup.h>
+#include <asm/mmu_context.h>
+#include <asm/mmu.h>
+>>>>>>> v3.18
 
 /*			Need for ARC MMU v2
  *
@@ -97,6 +105,7 @@
  * J-TLB entry got evicted/replaced.
  */
 
+<<<<<<< HEAD
 /* A copy of the ASID from the PID reg is kept in asid_cache */
 int asid_cache = FIRST_ASID;
 
@@ -113,12 +122,24 @@ struct mm_struct *asid_mm_map[NUM_ASID + 1];
  */
 
 static void __tlb_entry_erase(void)
+=======
+
+/* A copy of the ASID from the PID reg is kept in asid_cache */
+DEFINE_PER_CPU(unsigned int, asid_cache) = MM_CTXT_FIRST_CYCLE;
+
+/*
+ * Utility Routine to erase a J-TLB entry
+ * Caller needs to setup Index Reg (manually or via getIndex)
+ */
+static inline void __tlb_entry_erase(void)
+>>>>>>> v3.18
 {
 	write_aux_reg(ARC_REG_TLBPD1, 0);
 	write_aux_reg(ARC_REG_TLBPD0, 0);
 	write_aux_reg(ARC_REG_TLBCOMMAND, TLBWrite);
 }
 
+<<<<<<< HEAD
 static void tlb_entry_erase(unsigned int vaddr_n_asid)
 {
 	unsigned int idx;
@@ -140,6 +161,34 @@ static void tlb_entry_erase(unsigned int vaddr_n_asid)
 			       vaddr_n_asid);
 		}
 		/* else entry not found so nothing to do */
+=======
+static inline unsigned int tlb_entry_lkup(unsigned long vaddr_n_asid)
+{
+	unsigned int idx;
+
+	write_aux_reg(ARC_REG_TLBPD0, vaddr_n_asid);
+
+	write_aux_reg(ARC_REG_TLBCOMMAND, TLBProbe);
+	idx = read_aux_reg(ARC_REG_TLBINDEX);
+
+	return idx;
+}
+
+static void tlb_entry_erase(unsigned int vaddr_n_asid)
+{
+	unsigned int idx;
+
+	/* Locate the TLB entry for this vaddr + ASID */
+	idx = tlb_entry_lkup(vaddr_n_asid);
+
+	/* No error means entry found, zero it out */
+	if (likely(!(idx & TLB_LKUP_ERR))) {
+		__tlb_entry_erase();
+	} else {
+		/* Duplicate entry error */
+		WARN(idx == TLB_DUP_ERR, "Probe returned Dup PD for %x\n",
+					   vaddr_n_asid);
+>>>>>>> v3.18
 	}
 }
 
@@ -158,7 +207,11 @@ static void utlb_invalidate(void)
 {
 #if (CONFIG_ARC_MMU_VER >= 2)
 
+<<<<<<< HEAD
 #if (CONFIG_ARC_MMU_VER < 3)
+=======
+#if (CONFIG_ARC_MMU_VER == 2)
+>>>>>>> v3.18
 	/* MMU v2 introduced the uTLB Flush command.
 	 * There was however an obscure hardware bug, where uTLB flush would
 	 * fail when a prior probe for J-TLB (both totally unrelated) would
@@ -181,6 +234,39 @@ static void utlb_invalidate(void)
 
 }
 
+<<<<<<< HEAD
+=======
+static void tlb_entry_insert(unsigned int pd0, unsigned int pd1)
+{
+	unsigned int idx;
+
+	/*
+	 * First verify if entry for this vaddr+ASID already exists
+	 * This also sets up PD0 (vaddr, ASID..) for final commit
+	 */
+	idx = tlb_entry_lkup(pd0);
+
+	/*
+	 * If Not already present get a free slot from MMU.
+	 * Otherwise, Probe would have located the entry and set INDEX Reg
+	 * with existing location. This will cause Write CMD to over-write
+	 * existing entry with new PD0 and PD1
+	 */
+	if (likely(idx & TLB_LKUP_ERR))
+		write_aux_reg(ARC_REG_TLBCOMMAND, TLBGetIndex);
+
+	/* setup the other half of TLB entry (pfn, rwx..) */
+	write_aux_reg(ARC_REG_TLBPD1, pd1);
+
+	/*
+	 * Commit the Entry to MMU
+	 * It doesnt sound safe to use the TLBWriteNI cmd here
+	 * which doesn't flush uTLBs. I'd rather be safe than sorry.
+	 */
+	write_aux_reg(ARC_REG_TLBCOMMAND, TLBWrite);
+}
+
+>>>>>>> v3.18
 /*
  * Un-conditionally (without lookup) erase the entire MMU contents
  */
@@ -223,6 +309,7 @@ noinline void local_flush_tlb_mm(struct mm_struct *mm)
 		return;
 
 	/*
+<<<<<<< HEAD
 	 * Workaround for Android weirdism:
 	 * A binder VMA could end up in a task such that vma->mm != tsk->mm
 	 * old code would cause h/w - s/w ASID to get out of sync
@@ -230,6 +317,16 @@ noinline void local_flush_tlb_mm(struct mm_struct *mm)
 	if (current->mm != mm)
 		destroy_context(mm);
 	else
+=======
+	 * - Move to a new ASID, but only if the mm is still wired in
+	 *   (Android Binder ended up calling this for vma->mm != tsk->mm,
+	 *    causing h/w - s/w ASID to get out of sync)
+	 * - Also get_new_mmu_context() new implementation allocates a new
+	 *   ASID only if it is not allocated already - so unallocate first
+	 */
+	destroy_context(mm);
+	if (current->mm == mm)
+>>>>>>> v3.18
 		get_new_mmu_context(mm);
 }
 
@@ -244,8 +341,13 @@ noinline void local_flush_tlb_mm(struct mm_struct *mm)
 void local_flush_tlb_range(struct vm_area_struct *vma, unsigned long start,
 			   unsigned long end)
 {
+<<<<<<< HEAD
 	unsigned long flags;
 	unsigned int asid;
+=======
+	const unsigned int cpu = smp_processor_id();
+	unsigned long flags;
+>>>>>>> v3.18
 
 	/* If range @start to @end is more than 32 TLB entries deep,
 	 * its better to move to a new ASID rather than searching for
@@ -267,11 +369,18 @@ void local_flush_tlb_range(struct vm_area_struct *vma, unsigned long start,
 	start &= PAGE_MASK;
 
 	local_irq_save(flags);
+<<<<<<< HEAD
 	asid = vma->vm_mm->context.asid;
 
 	if (asid != NO_ASID) {
 		while (start < end) {
 			tlb_entry_erase(start | (asid & 0xff));
+=======
+
+	if (asid_mm(vma->vm_mm, cpu) != MM_CTXT_NO_ASID) {
+		while (start < end) {
+			tlb_entry_erase(start | hw_pid(vma->vm_mm, cpu));
+>>>>>>> v3.18
 			start += PAGE_SIZE;
 		}
 	}
@@ -318,6 +427,10 @@ void local_flush_tlb_kernel_range(unsigned long start, unsigned long end)
 
 void local_flush_tlb_page(struct vm_area_struct *vma, unsigned long page)
 {
+<<<<<<< HEAD
+=======
+	const unsigned int cpu = smp_processor_id();
+>>>>>>> v3.18
 	unsigned long flags;
 
 	/* Note that it is critical that interrupts are DISABLED between
@@ -325,23 +438,109 @@ void local_flush_tlb_page(struct vm_area_struct *vma, unsigned long page)
 	 */
 	local_irq_save(flags);
 
+<<<<<<< HEAD
 	if (vma->vm_mm->context.asid != NO_ASID) {
 		tlb_entry_erase((page & PAGE_MASK) |
 				(vma->vm_mm->context.asid & 0xff));
+=======
+	if (asid_mm(vma->vm_mm, cpu) != MM_CTXT_NO_ASID) {
+		tlb_entry_erase((page & PAGE_MASK) | hw_pid(vma->vm_mm, cpu));
+>>>>>>> v3.18
 		utlb_invalidate();
 	}
 
 	local_irq_restore(flags);
 }
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_SMP
+
+struct tlb_args {
+	struct vm_area_struct *ta_vma;
+	unsigned long ta_start;
+	unsigned long ta_end;
+};
+
+static inline void ipi_flush_tlb_page(void *arg)
+{
+	struct tlb_args *ta = arg;
+
+	local_flush_tlb_page(ta->ta_vma, ta->ta_start);
+}
+
+static inline void ipi_flush_tlb_range(void *arg)
+{
+	struct tlb_args *ta = arg;
+
+	local_flush_tlb_range(ta->ta_vma, ta->ta_start, ta->ta_end);
+}
+
+static inline void ipi_flush_tlb_kernel_range(void *arg)
+{
+	struct tlb_args *ta = (struct tlb_args *)arg;
+
+	local_flush_tlb_kernel_range(ta->ta_start, ta->ta_end);
+}
+
+void flush_tlb_all(void)
+{
+	on_each_cpu((smp_call_func_t)local_flush_tlb_all, NULL, 1);
+}
+
+void flush_tlb_mm(struct mm_struct *mm)
+{
+	on_each_cpu_mask(mm_cpumask(mm), (smp_call_func_t)local_flush_tlb_mm,
+			 mm, 1);
+}
+
+void flush_tlb_page(struct vm_area_struct *vma, unsigned long uaddr)
+{
+	struct tlb_args ta = {
+		.ta_vma = vma,
+		.ta_start = uaddr
+	};
+
+	on_each_cpu_mask(mm_cpumask(vma->vm_mm), ipi_flush_tlb_page, &ta, 1);
+}
+
+void flush_tlb_range(struct vm_area_struct *vma, unsigned long start,
+		     unsigned long end)
+{
+	struct tlb_args ta = {
+		.ta_vma = vma,
+		.ta_start = start,
+		.ta_end = end
+	};
+
+	on_each_cpu_mask(mm_cpumask(vma->vm_mm), ipi_flush_tlb_range, &ta, 1);
+}
+
+void flush_tlb_kernel_range(unsigned long start, unsigned long end)
+{
+	struct tlb_args ta = {
+		.ta_start = start,
+		.ta_end = end
+	};
+
+	on_each_cpu(ipi_flush_tlb_kernel_range, &ta, 1);
+}
+#endif
+
+>>>>>>> v3.18
 /*
  * Routine to create a TLB entry
  */
 void create_tlb(struct vm_area_struct *vma, unsigned long address, pte_t *ptep)
 {
 	unsigned long flags;
+<<<<<<< HEAD
 	unsigned int idx, asid_or_sasid;
 	unsigned long pd0_flags;
+=======
+	unsigned int asid_or_sasid, rwx;
+	unsigned long pd0, pd1;
+>>>>>>> v3.18
 
 	/*
 	 * create_tlb() assumes that current->mm == vma->mm, since
@@ -373,23 +572,32 @@ void create_tlb(struct vm_area_struct *vma, unsigned long address, pte_t *ptep)
 
 	local_irq_save(flags);
 
+<<<<<<< HEAD
 	tlb_paranoid_check(vma->vm_mm->context.asid, address);
+=======
+	tlb_paranoid_check(asid_mm(vma->vm_mm, smp_processor_id()), address);
+>>>>>>> v3.18
 
 	address &= PAGE_MASK;
 
 	/* update this PTE credentials */
 	pte_val(*ptep) |= (_PAGE_PRESENT | _PAGE_ACCESSED);
 
+<<<<<<< HEAD
 	/* Create HW TLB entry Flags (in PD0) from PTE Flags */
 #if (CONFIG_ARC_MMU_VER <= 2)
 	pd0_flags = ((pte_val(*ptep) & PTE_BITS_IN_PD0) >> 1);
 #else
 	pd0_flags = ((pte_val(*ptep) & PTE_BITS_IN_PD0));
 #endif
+=======
+	/* Create HW TLB(PD0,PD1) from PTE  */
+>>>>>>> v3.18
 
 	/* ASID for this task */
 	asid_or_sasid = read_aux_reg(ARC_REG_PID) & 0xff;
 
+<<<<<<< HEAD
 	write_aux_reg(ARC_REG_TLBPD0, address | pd0_flags | asid_or_sasid);
 
 	/* Load remaining info in PD1 (Page Frame Addr and Kx/Kw/Kr Flags) */
@@ -414,6 +622,27 @@ void create_tlb(struct vm_area_struct *vma, unsigned long address, pte_t *ptep)
 	 * which doesn't flush uTLBs. I'd rather be safe than sorry.
 	 */
 	write_aux_reg(ARC_REG_TLBCOMMAND, TLBWrite);
+=======
+	pd0 = address | asid_or_sasid | (pte_val(*ptep) & PTE_BITS_IN_PD0);
+
+	/*
+	 * ARC MMU provides fully orthogonal access bits for K/U mode,
+	 * however Linux only saves 1 set to save PTE real-estate
+	 * Here we convert 3 PTE bits into 6 MMU bits:
+	 * -Kernel only entries have Kr Kw Kx 0 0 0
+	 * -User entries have mirrored K and U bits
+	 */
+	rwx = pte_val(*ptep) & PTE_BITS_RWX;
+
+	if (pte_val(*ptep) & _PAGE_GLOBAL)
+		rwx <<= 3;		/* r w x => Kr Kw Kx 0 0 0 */
+	else
+		rwx |= (rwx << 3);	/* r w x => Kr Kw Kx Ur Uw Ux */
+
+	pd1 = rwx | (pte_val(*ptep) & PTE_BITS_NON_RWX_IN_PD1);
+
+	tlb_entry_insert(pd0, pd1);
+>>>>>>> v3.18
 
 	local_irq_restore(flags);
 }
@@ -432,9 +661,20 @@ void update_mmu_cache(struct vm_area_struct *vma, unsigned long vaddr_unaligned,
 {
 	unsigned long vaddr = vaddr_unaligned & PAGE_MASK;
 	unsigned long paddr = pte_val(*ptep) & PAGE_MASK;
+<<<<<<< HEAD
 
 	create_tlb(vma, vaddr, ptep);
 
+=======
+	struct page *page = pfn_to_page(pte_pfn(*ptep));
+
+	create_tlb(vma, vaddr, ptep);
+
+	if (page == ZERO_PAGE(0)) {
+		return;
+	}
+
+>>>>>>> v3.18
 	/*
 	 * Exec page : Independent of aliasing/page-color considerations,
 	 *	       since icache doesn't snoop dcache on ARC, any dirty
@@ -446,9 +686,14 @@ void update_mmu_cache(struct vm_area_struct *vma, unsigned long vaddr_unaligned,
 	 */
 	if ((vma->vm_flags & VM_EXEC) ||
 	     addr_not_cache_congruent(paddr, vaddr)) {
+<<<<<<< HEAD
 		struct page *page = pfn_to_page(pte_pfn(*ptep));
 
 		int dirty = test_and_clear_bit(PG_arch_1, &page->flags);
+=======
+
+		int dirty = !test_and_set_bit(PG_dc_clean, &page->flags);
+>>>>>>> v3.18
 		if (dirty) {
 			/* wback + inv dcache lines */
 			__flush_dcache_page(paddr, paddr);
@@ -464,12 +709,36 @@ void update_mmu_cache(struct vm_area_struct *vma, unsigned long vaddr_unaligned,
  * the cpuinfo structure for later use.
  * No Validation is done here, simply read/convert the BCRs
  */
+<<<<<<< HEAD
 void __cpuinit read_decode_mmu_bcr(void)
 {
 	unsigned int tmp;
 	struct bcr_mmu_1_2 *mmu2;	/* encoded MMU2 attr */
 	struct bcr_mmu_3 *mmu3;		/* encoded MMU3 attr */
 	struct cpuinfo_arc_mmu *mmu = &cpuinfo_arc700[smp_processor_id()].mmu;
+=======
+void read_decode_mmu_bcr(void)
+{
+	struct cpuinfo_arc_mmu *mmu = &cpuinfo_arc700[smp_processor_id()].mmu;
+	unsigned int tmp;
+	struct bcr_mmu_1_2 {
+#ifdef CONFIG_CPU_BIG_ENDIAN
+		unsigned int ver:8, ways:4, sets:4, u_itlb:8, u_dtlb:8;
+#else
+		unsigned int u_dtlb:8, u_itlb:8, sets:4, ways:4, ver:8;
+#endif
+	} *mmu2;
+
+	struct bcr_mmu_3 {
+#ifdef CONFIG_CPU_BIG_ENDIAN
+	unsigned int ver:8, ways:4, sets:4, osm:1, reserv:3, pg_sz:4,
+		     u_itlb:4, u_dtlb:4;
+#else
+	unsigned int u_dtlb:4, u_itlb:4, pg_sz:4, reserv:3, osm:1, sets:4,
+		     ways:4, ver:8;
+#endif
+	} *mmu3;
+>>>>>>> v3.18
 
 	tmp = read_aux_reg(ARC_REG_MMU_BCR);
 	mmu->ver = (tmp >> 24);
@@ -498,6 +767,7 @@ char *arc_mmu_mumbojumbo(int cpu_id, char *buf, int len)
 	int n = 0;
 	struct cpuinfo_arc_mmu *p_mmu = &cpuinfo_arc700[cpu_id].mmu;
 
+<<<<<<< HEAD
 	n += scnprintf(buf + n, len - n, "ARC700 MMU [v%x]\t: %dk PAGE, ",
 		       p_mmu->ver, TO_KB(p_mmu->pg_sz));
 
@@ -506,11 +776,23 @@ char *arc_mmu_mumbojumbo(int cpu_id, char *buf, int len)
 		       p_mmu->num_tlb, p_mmu->sets, p_mmu->ways,
 		       p_mmu->u_dtlb, p_mmu->u_itlb,
 		       __CONFIG_ARC_MMU_SASID_VAL ? "SASID" : "");
+=======
+	n += scnprintf(buf + n, len - n,
+		      "MMU [v%x]\t: %dk PAGE, JTLB %d (%dx%d), uDTLB %d, uITLB %d %s\n",
+		       p_mmu->ver, TO_KB(p_mmu->pg_sz),
+		       p_mmu->num_tlb, p_mmu->sets, p_mmu->ways,
+		       p_mmu->u_dtlb, p_mmu->u_itlb,
+		       IS_ENABLED(CONFIG_ARC_MMU_SASID) ? ",SASID" : "");
+>>>>>>> v3.18
 
 	return buf;
 }
 
+<<<<<<< HEAD
 void __cpuinit arc_mmu_init(void)
+=======
+void arc_mmu_init(void)
+>>>>>>> v3.18
 {
 	char str[256];
 	struct cpuinfo_arc_mmu *mmu = &cpuinfo_arc700[smp_processor_id()].mmu;
@@ -533,6 +815,7 @@ void __cpuinit arc_mmu_init(void)
 	if (mmu->pg_sz != PAGE_SIZE)
 		panic("MMU pg size != PAGE_SIZE (%luk)\n", TO_KB(PAGE_SIZE));
 
+<<<<<<< HEAD
 	/*
 	 * ASID mgmt data structures are compile time init
 	 *  asid_cache = FIRST_ASID and asid_mm_map[] all zeroes
@@ -540,6 +823,8 @@ void __cpuinit arc_mmu_init(void)
 
 	local_flush_tlb_all();
 
+=======
+>>>>>>> v3.18
 	/* Enable the MMU */
 	write_aux_reg(ARC_REG_PID, MMU_ENABLE);
 
@@ -581,9 +866,15 @@ void do_tlb_overlap_fault(unsigned long cause, unsigned long address,
 			  struct pt_regs *regs)
 {
 	int set, way, n;
+<<<<<<< HEAD
 	unsigned int pd0[4], pd1[4];	/* assume max 4 ways */
 	unsigned long flags, is_valid;
 	struct cpuinfo_arc_mmu *mmu = &cpuinfo_arc700[smp_processor_id()].mmu;
+=======
+	unsigned long flags, is_valid;
+	struct cpuinfo_arc_mmu *mmu = &cpuinfo_arc700[smp_processor_id()].mmu;
+	unsigned int pd0[mmu->ways], pd1[mmu->ways];
+>>>>>>> v3.18
 
 	local_irq_save(flags);
 
@@ -608,7 +899,11 @@ void do_tlb_overlap_fault(unsigned long cause, unsigned long address,
 			continue;
 
 		/* Scan the set for duplicate ways: needs a nested loop */
+<<<<<<< HEAD
 		for (way = 0; way < mmu->ways; way++) {
+=======
+		for (way = 0; way < mmu->ways - 1; way++) {
+>>>>>>> v3.18
 			if (!pd0[way])
 				continue;
 
@@ -651,6 +946,7 @@ void do_tlb_overlap_fault(unsigned long cause, unsigned long address,
  * Low Level ASM TLB handler calls this if it finds that HW and SW ASIDS
  * don't match
  */
+<<<<<<< HEAD
 void print_asid_mismatch(int is_fast_path)
 {
 	int pid_sw, pid_hw;
@@ -659,10 +955,17 @@ void print_asid_mismatch(int is_fast_path)
 
 	pr_emerg("ASID Mismatch in %s Path Handler: sw-pid=0x%x hw-pid=0x%x\n",
 	       is_fast_path ? "Fast" : "Slow", pid_sw, pid_hw);
+=======
+void print_asid_mismatch(int mm_asid, int mmu_asid, int is_fast_path)
+{
+	pr_emerg("ASID Mismatch in %s Path Handler: sw-pid=0x%x hw-pid=0x%x\n",
+	       is_fast_path ? "Fast" : "Slow", mm_asid, mmu_asid);
+>>>>>>> v3.18
 
 	__asm__ __volatile__("flag 1");
 }
 
+<<<<<<< HEAD
 void tlb_paranoid_check(unsigned int pid_sw, unsigned long addr)
 {
 	unsigned int pid_hw;
@@ -671,5 +974,22 @@ void tlb_paranoid_check(unsigned int pid_sw, unsigned long addr)
 
 	if (addr < 0x70000000 && ((pid_hw != pid_sw) || (pid_sw == NO_ASID)))
 		print_asid_mismatch(0);
+=======
+void tlb_paranoid_check(unsigned int mm_asid, unsigned long addr)
+{
+	unsigned int mmu_asid;
+
+	mmu_asid = read_aux_reg(ARC_REG_PID) & 0xff;
+
+	/*
+	 * At the time of a TLB miss/installation
+	 *   - HW version needs to match SW version
+	 *   - SW needs to have a valid ASID
+	 */
+	if (addr < 0x70000000 &&
+	    ((mm_asid == MM_CTXT_NO_ASID) ||
+	      (mmu_asid != (mm_asid & MM_CTXT_ASID_MASK))))
+		print_asid_mismatch(mm_asid, mmu_asid, 0);
+>>>>>>> v3.18
 }
 #endif

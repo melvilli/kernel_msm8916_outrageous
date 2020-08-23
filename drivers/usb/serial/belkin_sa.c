@@ -18,14 +18,21 @@
  * driver
  *
  * TODO:
+<<<<<<< HEAD
  * -- Add true modem contol line query capability.  Currently we track the
+=======
+ * -- Add true modem control line query capability.  Currently we track the
+>>>>>>> v3.18
  *    states reported by the interrupt and the states we request.
  * -- Add support for flush commands
  */
 
 #include <linux/kernel.h>
 #include <linux/errno.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/tty.h>
 #include <linux/tty_driver.h>

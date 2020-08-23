@@ -3,7 +3,11 @@
  * temperature/power/energy sensors and capping functionality.
  * Copyright (C) 2008 IBM
  *
+<<<<<<< HEAD
  * Author: Darrick J. Wong <djwong@us.ibm.com>
+=======
+ * Author: Darrick J. Wong <darrick.wong@oracle.com>
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -292,7 +296,11 @@ static int aem_init_ipmi_data(struct aem_ipmi_data *data, int iface,
 		dev_err(bmc,
 			"Unable to register user with IPMI interface %d\n",
 			data->interface);
+<<<<<<< HEAD
 		return -EACCES;
+=======
+		return err;
+>>>>>>> v3.18
 	}
 
 	return 0;
@@ -842,11 +850,18 @@ static ssize_t aem_show_power(struct device *dev,
 	struct aem_data *data = dev_get_drvdata(dev);
 	u64 before, after, delta, time;
 	signed long leftover;
+<<<<<<< HEAD
 	struct timespec b, a;
 
 	mutex_lock(&data->lock);
 	update_aem_energy_one(data, attr->index);
 	getnstimeofday(&b);
+=======
+
+	mutex_lock(&data->lock);
+	update_aem_energy_one(data, attr->index);
+	time = ktime_get_ns();
+>>>>>>> v3.18
 	before = data->energy[attr->index];
 
 	leftover = schedule_timeout_interruptible(
@@ -858,11 +873,18 @@ static ssize_t aem_show_power(struct device *dev,
 	}
 
 	update_aem_energy_one(data, attr->index);
+<<<<<<< HEAD
 	getnstimeofday(&a);
 	after = data->energy[attr->index];
 	mutex_unlock(&data->lock);
 
 	time = timespec_to_ns(&a) - timespec_to_ns(&b);
+=======
+	time = ktime_get_ns() - time;
+	after = data->energy[attr->index];
+	mutex_unlock(&data->lock);
+
+>>>>>>> v3.18
 	delta = (after - before) * UJ_PER_MJ;
 
 	return sprintf(buf, "%llu\n",
@@ -1103,7 +1125,11 @@ static void __exit aem_exit(void)
 		aem_delete(p1);
 }
 
+<<<<<<< HEAD
 MODULE_AUTHOR("Darrick J. Wong <djwong@us.ibm.com>");
+=======
+MODULE_AUTHOR("Darrick J. Wong <darrick.wong@oracle.com>");
+>>>>>>> v3.18
 MODULE_DESCRIPTION("IBM AEM power/temp/energy sensor driver");
 MODULE_LICENSE("GPL");
 

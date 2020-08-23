@@ -20,11 +20,18 @@
 #include <linux/interrupt.h>
 #include <linux/errno.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/list.h>
 #include <linux/io.h>
 #include <linux/of_address.h>
 #include <linux/of_device.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 #include <linux/of_platform.h>
 
 #define DRIVER_NAME		"xilinx_ps2"
@@ -235,12 +242,19 @@ static void sxps2_close(struct serio *pserio)
  */
 static int xps2_of_probe(struct platform_device *ofdev)
 {
+<<<<<<< HEAD
 	struct resource r_irq; /* Interrupt resources */
+=======
+>>>>>>> v3.18
 	struct resource r_mem; /* IO mem resources */
 	struct xps2data *drvdata;
 	struct serio *serio;
 	struct device *dev = &ofdev->dev;
 	resource_size_t remap_size, phys_addr;
+<<<<<<< HEAD
+=======
+	unsigned int irq;
+>>>>>>> v3.18
 	int error;
 
 	dev_info(dev, "Device Tree Probing \'%s\'\n",
@@ -254,7 +268,12 @@ static int xps2_of_probe(struct platform_device *ofdev)
 	}
 
 	/* Get IRQ for the device */
+<<<<<<< HEAD
 	if (!of_irq_to_resource(ofdev->dev.of_node, 0, &r_irq)) {
+=======
+	irq = irq_of_parse_and_map(ofdev->dev.of_node, 0);
+	if (!irq) {
+>>>>>>> v3.18
 		dev_err(dev, "no IRQ found\n");
 		return -ENODEV;
 	}
@@ -267,7 +286,11 @@ static int xps2_of_probe(struct platform_device *ofdev)
 	}
 
 	spin_lock_init(&drvdata->lock);
+<<<<<<< HEAD
 	drvdata->irq = r_irq.start;
+=======
+	drvdata->irq = irq;
+>>>>>>> v3.18
 	drvdata->serio = serio;
 	drvdata->dev = dev;
 
@@ -349,8 +372,11 @@ static int xps2_of_remove(struct platform_device *of_dev)
 
 	kfree(drvdata);
 
+<<<<<<< HEAD
 	platform_set_drvdata(of_dev, NULL);
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

@@ -37,7 +37,11 @@ static const struct usb_device_id vprbrd_table[] = {
 
 MODULE_DEVICE_TABLE(usb, vprbrd_table);
 
+<<<<<<< HEAD
 static struct mfd_cell vprbrd_devs[] = {
+=======
+static const struct mfd_cell vprbrd_devs[] = {
+>>>>>>> v3.18
 	{
 		.name = "viperboard-gpio",
 	},
@@ -93,8 +97,14 @@ static int vprbrd_probe(struct usb_interface *interface,
 		 version >> 8, version & 0xff,
 		 vb->usb_dev->bus->busnum, vb->usb_dev->devnum);
 
+<<<<<<< HEAD
 	ret = mfd_add_devices(&interface->dev, -1, vprbrd_devs,
 				ARRAY_SIZE(vprbrd_devs), NULL, 0, NULL);
+=======
+	ret = mfd_add_devices(&interface->dev, PLATFORM_DEVID_AUTO,
+				vprbrd_devs, ARRAY_SIZE(vprbrd_devs), NULL, 0,
+				NULL);
+>>>>>>> v3.18
 	if (ret != 0) {
 		dev_err(&interface->dev, "Failed to add mfd devices to core.");
 		goto error;

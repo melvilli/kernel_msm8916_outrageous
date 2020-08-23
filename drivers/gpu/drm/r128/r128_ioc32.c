@@ -33,6 +33,10 @@
 
 #include <drm/drmP.h>
 #include <drm/r128_drm.h>
+<<<<<<< HEAD
+=======
+#include "r128_drv.h"
+>>>>>>> v3.18
 
 typedef struct drm_r128_init32 {
 	int func;
@@ -202,7 +206,11 @@ long r128_compat_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 	if (nr < DRM_COMMAND_BASE)
 		return drm_compat_ioctl(filp, cmd, arg);
 
+<<<<<<< HEAD
 	if (nr < DRM_COMMAND_BASE + DRM_ARRAY_SIZE(r128_compat_ioctls))
+=======
+	if (nr < DRM_COMMAND_BASE + ARRAY_SIZE(r128_compat_ioctls))
+>>>>>>> v3.18
 		fn = r128_compat_ioctls[nr - DRM_COMMAND_BASE];
 
 	if (fn != NULL)

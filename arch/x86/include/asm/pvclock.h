@@ -14,6 +14,11 @@ void pvclock_read_wallclock(struct pvclock_wall_clock *wall,
 			    struct timespec *ts);
 void pvclock_resume(void);
 
+<<<<<<< HEAD
+=======
+void pvclock_touch_watchdogs(void);
+
+>>>>>>> v3.18
 /*
  * Scale a 64-bit delta by scaling and multiplying by a 32-bit fraction,
  * yielding a 64-bit result.
@@ -93,7 +98,10 @@ unsigned __pvclock_read_cycles(const struct pvclock_vcpu_time_info *src,
 
 struct pvclock_vsyscall_time_info {
 	struct pvclock_vcpu_time_info pvti;
+<<<<<<< HEAD
 	u32 migrate_count;
+=======
+>>>>>>> v3.18
 } __attribute__((__aligned__(SMP_CACHE_BYTES)));
 
 #define PVTI_SIZE sizeof(struct pvclock_vsyscall_time_info)

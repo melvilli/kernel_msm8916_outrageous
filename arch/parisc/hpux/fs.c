@@ -33,6 +33,7 @@
 
 int hpux_execve(struct pt_regs *regs)
 {
+<<<<<<< HEAD
 	int error;
 	struct filename *filename;
 
@@ -49,6 +50,11 @@ int hpux_execve(struct pt_regs *regs)
 
 out:
 	return error;
+=======
+	return  do_execve(getname((const char __user *) regs->gr[26]),
+			  (const char __user *const __user *) regs->gr[25],
+			  (const char __user *const __user *) regs->gr[24]);
+>>>>>>> v3.18
 }
 
 struct hpux_dirent {

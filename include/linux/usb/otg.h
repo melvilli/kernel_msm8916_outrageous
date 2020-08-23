@@ -11,6 +11,7 @@
 
 #include <linux/usb/phy.h>
 
+<<<<<<< HEAD
 enum usb_otg_event {
 	/* Device is not connected within
 	 * TA_WAIT_BCON or not responding.
@@ -39,6 +40,8 @@ enum usb_otg_event {
 	OTG_EVENT_NO_RESP_FOR_SRP,
 };
 
+=======
+>>>>>>> v3.18
 struct usb_otg {
 	u8			default_a;
 
@@ -62,10 +65,13 @@ struct usb_otg {
 	/* start or continue HNP role switch */
 	int	(*start_hnp)(struct usb_otg *otg);
 
+<<<<<<< HEAD
 	/* send events to user space */
 	int	(*send_event)(struct usb_otg *otg,
 			enum usb_otg_event event);
 
+=======
+>>>>>>> v3.18
 };
 
 extern const char *usb_otg_state_string(enum usb_otg_state state);
@@ -121,6 +127,7 @@ otg_start_srp(struct usb_otg *otg)
 	return -ENOTSUPP;
 }
 
+<<<<<<< HEAD
 static inline int
 otg_send_event(struct usb_otg *otg, enum usb_otg_event event)
 {
@@ -132,6 +139,8 @@ otg_send_event(struct usb_otg *otg, enum usb_otg_event event)
 	return ret;
 }
 
+=======
+>>>>>>> v3.18
 /* for OTG controller drivers (and maybe other stuff) */
 extern int usb_bus_start_enum(struct usb_bus *bus, unsigned port_num);
 

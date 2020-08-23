@@ -1,11 +1,19 @@
 /* rc-dvb0700-big.c - Keytable for devices in dvb0700
  *
+<<<<<<< HEAD
  * Copyright (c) 2010 by Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+ * Copyright (c) 2010 by Mauro Carvalho Chehab
+>>>>>>> v3.18
  *
  * TODO: This table is a real mess, as it merges RC codes from several
  * devices into a big table. It also has both RC-5 and NEC codes inside.
  * It should be broken into small tables, and the protocols should properly
+<<<<<<< HEAD
  * be indentificated.
+=======
+ * be identificated.
+>>>>>>> v3.18
  *
  * The table were imported from dib0700_devices.c.
  *
@@ -122,4 +130,8 @@ module_init(init_rc_map)
 module_exit(exit_rc_map)
 
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
 MODULE_AUTHOR("Mauro Carvalho Chehab <mchehab@redhat.com>");
+=======
+MODULE_AUTHOR("Mauro Carvalho Chehab");
+>>>>>>> v3.18

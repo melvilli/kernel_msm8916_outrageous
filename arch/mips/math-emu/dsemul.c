@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include <linux/compiler.h>
 #include <linux/mm.h>
 #include <linux/signal.h>
@@ -25,6 +26,17 @@
 #endif
 #define __mips 4
 
+=======
+#include <asm/branch.h>
+#include <asm/cacheflush.h>
+#include <asm/fpu_emulator.h>
+#include <asm/inst.h>
+#include <asm/mipsregs.h>
+#include <asm/uaccess.h>
+
+#include "ieee754.h"
+
+>>>>>>> v3.18
 /*
  * Emulate the arbritrary instruction ir at xcp->cp0_epc.  Required when
  * we have to emulate the instruction in a COP1 branch delay slot.  Do
@@ -59,6 +71,7 @@ int mips_dsemul(struct pt_regs *regs, mips_instruction ir, unsigned long cpc)
 		(ir == 0)) {
 		/* NOP is easy */
 		regs->cp0_epc = cpc;
+<<<<<<< HEAD
 		regs->cp0_cause &= ~CAUSEF_BD;
 		return 0;
 	}
@@ -66,6 +79,13 @@ int mips_dsemul(struct pt_regs *regs, mips_instruction ir, unsigned long cpc)
 	printk("dsemul %lx %lx\n", regs->cp0_epc, cpc);
 
 #endif
+=======
+		clear_delay_slot(regs);
+		return 0;
+	}
+
+	pr_debug("dsemul %lx %lx\n", regs->cp0_epc, cpc);
+>>>>>>> v3.18
 
 	/*
 	 * The strategy is to push the instruction onto the user stack
@@ -167,9 +187,14 @@ int do_dsemulret(struct pt_regs *xcp)
 	 * emulating the branch delay instruction.
 	 */
 
+<<<<<<< HEAD
 #ifdef DSEMUL_TRACE
 	printk("dsemulret\n");
 #endif
+=======
+	pr_debug("dsemulret\n");
+
+>>>>>>> v3.18
 	if (__get_user(epc, &fr->epc)) {		/* Saved EPC */
 		/* This is not a good situation to be in */
 		force_sig(SIGBUS, current);

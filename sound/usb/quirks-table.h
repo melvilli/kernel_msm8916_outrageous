@@ -72,6 +72,7 @@
 	}
 },
 
+<<<<<<< HEAD
 /* Creative/Toshiba Multimedia Center SB-0500 */
 {
 	USB_DEVICE(0x041e, 0x3048),
@@ -88,6 +89,23 @@
 	.driver_info = (unsigned long) & (const struct snd_usb_audio_quirk) {
 		.vendor_name = "Creative Labs",
 		.product_name = "Sound Blaster MP3+",
+=======
+/* Creative/E-Mu devices */
+{
+	USB_DEVICE(0x041e, 0x3010),
+	.driver_info = (unsigned long) & (const struct snd_usb_audio_quirk) {
+		.vendor_name = "Creative Labs",
+		.product_name = "Sound Blaster MP3+",
+		.ifnum = QUIRK_NO_INTERFACE
+	}
+},
+/* Creative/Toshiba Multimedia Center SB-0500 */
+{
+	USB_DEVICE(0x041e, 0x3048),
+	.driver_info = (unsigned long) & (const struct snd_usb_audio_quirk) {
+		.vendor_name = "Toshiba",
+		.product_name = "SB-0500",
+>>>>>>> v3.18
 		.ifnum = QUIRK_NO_INTERFACE
 	}
 },
@@ -491,6 +509,20 @@ YAMAHA_DEVICE(0x7000, "DTX"),
 YAMAHA_DEVICE(0x7010, "UB99"),
 #undef YAMAHA_DEVICE
 #undef YAMAHA_INTERFACE
+<<<<<<< HEAD
+=======
+/* this catches most recent vendor-specific Yamaha devices */
+{
+	.match_flags = USB_DEVICE_ID_MATCH_VENDOR |
+	               USB_DEVICE_ID_MATCH_INT_CLASS,
+	.idVendor = 0x0499,
+	.bInterfaceClass = USB_CLASS_VENDOR_SPEC,
+	.driver_info = (unsigned long) &(const struct snd_usb_audio_quirk) {
+		.ifnum = QUIRK_ANY_INTERFACE,
+		.type = QUIRK_AUTODETECT
+	}
+},
+>>>>>>> v3.18
 
 /*
  * Roland/RolandED/Edirol/BOSS devices
@@ -1166,7 +1198,10 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 		}
 	}
 },
+<<<<<<< HEAD
 	/* TODO: add Roland M-1000 support */
+=======
+>>>>>>> v3.18
 {
 	/*
 	 * Has ID 0x0038 when not in "Advanced Driver" mode;
@@ -1281,7 +1316,10 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 		}
 	}
 },
+<<<<<<< HEAD
 	/* TODO: add Edirol M-100FX support */
+=======
+>>>>>>> v3.18
 {
 	/* has ID 0x004e when not in "Advanced Driver" mode */
 	USB_DEVICE(0x0582, 0x004c),
@@ -1401,6 +1439,7 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 	}
 },
 {
+<<<<<<< HEAD
 	/* has ID 0x006b when not in "Advanced Driver" mode */
 	USB_DEVICE_VENDOR_SPEC(0x0582, 0x006a),
 	.driver_info = (unsigned long) & (const struct snd_usb_audio_quirk) {
@@ -1415,6 +1454,8 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 	}
 },
 {
+=======
+>>>>>>> v3.18
 	/* has ID 0x006e when not in "Advanced Driver" mode */
 	USB_DEVICE(0x0582, 0x006d),
 	.driver_info = (unsigned long) & (const struct snd_usb_audio_quirk) {
@@ -1501,8 +1542,11 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 		}
 	}
 },
+<<<<<<< HEAD
 	/* TODO: add Roland V-SYNTH XT support */
 	/* TODO: add BOSS GT-PRO support */
+=======
+>>>>>>> v3.18
 {
 	/* has ID 0x008c when not in "Advanced Driver" mode */
 	USB_DEVICE(0x0582, 0x008b),
@@ -1517,6 +1561,7 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 		}
 	}
 },
+<<<<<<< HEAD
 	/* TODO: add Edirol PC-80 support */
 {
 	USB_DEVICE(0x0582, 0x0096),
@@ -1553,6 +1598,8 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 		}
 	}
 },
+=======
+>>>>>>> v3.18
 {
 	/*
 	 * This quirk is for the "Advanced Driver" mode. If off, the UA-4FX
@@ -1583,6 +1630,7 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 		}
 	}
 },
+<<<<<<< HEAD
 	/* TODO: add Edirol MD-P1 support */
 {
 	USB_DEVICE(0x582, 0x00a6),
@@ -1603,6 +1651,12 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 	.driver_info = (unsigned long) & (const struct snd_usb_audio_quirk) {
 		.vendor_name = "Roland",
 		.product_name = "SH-201",
+=======
+{
+	/* Edirol M-16DX */
+	USB_DEVICE(0x0582, 0x00c4),
+	.driver_info = (unsigned long) & (const struct snd_usb_audio_quirk) {
+>>>>>>> v3.18
 		.ifnum = QUIRK_ANY_INTERFACE,
 		.type = QUIRK_COMPOSITE,
 		.data = (const struct snd_usb_audio_quirk[]) {
@@ -1629,6 +1683,7 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 	}
 },
 {
+<<<<<<< HEAD
 	/* Advanced mode of the Roland VG-99, with MIDI and 24-bit PCM at 44.1
 	 * kHz. In standard mode, the device has ID 0582:00b3, and offers
 	 * 16-bit PCM at 44.1 kHz with no MIDI.
@@ -1637,11 +1692,22 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 	.driver_info = (unsigned long) & (const struct snd_usb_audio_quirk) {
 		.vendor_name = "Roland",
 		.product_name = "VG-99",
+=======
+	/* Advanced modes of the Edirol UA-25EX.
+	 * For the standard mode, UA-25EX has ID 0582:00e7, which
+	 * offers only 16-bit PCM at 44.1 kHz and no MIDI.
+	 */
+	USB_DEVICE_VENDOR_SPEC(0x0582, 0x00e6),
+	.driver_info = (unsigned long) & (const struct snd_usb_audio_quirk) {
+		.vendor_name = "EDIROL",
+		.product_name = "UA-25EX",
+>>>>>>> v3.18
 		.ifnum = QUIRK_ANY_INTERFACE,
 		.type = QUIRK_COMPOSITE,
 		.data = (const struct snd_usb_audio_quirk[]) {
 			{
 				.ifnum = 0,
+<<<<<<< HEAD
 				.type = QUIRK_AUDIO_STANDARD_INTERFACE
 			},
 			{
@@ -1655,6 +1721,17 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 					.out_cables = 0x0003,
 					.in_cables  = 0x0003
 				}
+=======
+				.type = QUIRK_AUDIO_EDIROL_UAXX
+			},
+			{
+				.ifnum = 1,
+				.type = QUIRK_AUDIO_EDIROL_UAXX
+			},
+			{
+				.ifnum = 2,
+				.type = QUIRK_AUDIO_EDIROL_UAXX
+>>>>>>> v3.18
 			},
 			{
 				.ifnum = -1
@@ -1663,11 +1740,29 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 	}
 },
 {
+<<<<<<< HEAD
 	/* Roland SonicCell */
 	USB_DEVICE(0x0582, 0x00c2),
 	.driver_info = (unsigned long) & (const struct snd_usb_audio_quirk) {
 		.vendor_name = "Roland",
 		.product_name = "SonicCell",
+=======
+	/* Edirol UM-3G */
+	USB_DEVICE_VENDOR_SPEC(0x0582, 0x0108),
+	.driver_info = (unsigned long) & (const struct snd_usb_audio_quirk) {
+		.ifnum = 0,
+		.type = QUIRK_MIDI_FIXED_ENDPOINT,
+		.data = & (const struct snd_usb_midi_endpoint_info) {
+			.out_cables = 0x0007,
+			.in_cables  = 0x0007
+		}
+	}
+},
+{
+	/* BOSS ME-25 */
+	USB_DEVICE(0x0582, 0x0113),
+	.driver_info = (unsigned long) & (const struct snd_usb_audio_quirk) {
+>>>>>>> v3.18
 		.ifnum = QUIRK_ANY_INTERFACE,
 		.type = QUIRK_COMPOSITE,
 		.data = (const struct snd_usb_audio_quirk[]) {
@@ -1694,6 +1789,7 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 	}
 },
 {
+<<<<<<< HEAD
 	/* Edirol M-16DX */
 	/* FIXME: This quirk gives a good-working capture stream but the
 	 *        playback seems problematic because of lacking of sync
@@ -1703,16 +1799,59 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 	 */
 	USB_DEVICE(0x0582, 0x00c4),
 	.driver_info = (unsigned long) & (const struct snd_usb_audio_quirk) {
+=======
+	/* only 44.1 kHz works at the moment */
+	USB_DEVICE(0x0582, 0x0120),
+	.driver_info = (unsigned long) & (const struct snd_usb_audio_quirk) {
+		/* .vendor_name = "Roland", */
+		/* .product_name = "OCTO-CAPTURE", */
+>>>>>>> v3.18
 		.ifnum = QUIRK_ANY_INTERFACE,
 		.type = QUIRK_COMPOSITE,
 		.data = (const struct snd_usb_audio_quirk[]) {
 			{
 				.ifnum = 0,
+<<<<<<< HEAD
 				.type = QUIRK_AUDIO_STANDARD_INTERFACE
 			},
 			{
 				.ifnum = 1,
 				.type = QUIRK_AUDIO_STANDARD_INTERFACE
+=======
+				.type = QUIRK_AUDIO_FIXED_ENDPOINT,
+				.data = & (const struct audioformat) {
+					.formats = SNDRV_PCM_FMTBIT_S32_LE,
+					.channels = 10,
+					.iface = 0,
+					.altsetting = 1,
+					.altset_idx = 1,
+					.endpoint = 0x05,
+					.ep_attr = 0x05,
+					.rates = SNDRV_PCM_RATE_44100,
+					.rate_min = 44100,
+					.rate_max = 44100,
+					.nr_rates = 1,
+					.rate_table = (unsigned int[]) { 44100 }
+				}
+			},
+			{
+				.ifnum = 1,
+				.type = QUIRK_AUDIO_FIXED_ENDPOINT,
+				.data = & (const struct audioformat) {
+					.formats = SNDRV_PCM_FMTBIT_S32_LE,
+					.channels = 12,
+					.iface = 1,
+					.altsetting = 1,
+					.altset_idx = 1,
+					.endpoint = 0x85,
+					.ep_attr = 0x25,
+					.rates = SNDRV_PCM_RATE_44100,
+					.rate_min = 44100,
+					.rate_max = 44100,
+					.nr_rates = 1,
+					.rate_table = (unsigned int[]) { 44100 }
+				}
+>>>>>>> v3.18
 			},
 			{
 				.ifnum = 2,
@@ -1723,25 +1862,80 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 				}
 			},
 			{
+<<<<<<< HEAD
+=======
+				.ifnum = 3,
+				.type = QUIRK_IGNORE_INTERFACE
+			},
+			{
+				.ifnum = 4,
+				.type = QUIRK_IGNORE_INTERFACE
+			},
+			{
+>>>>>>> v3.18
 				.ifnum = -1
 			}
 		}
 	}
 },
 {
+<<<<<<< HEAD
 	/* BOSS GT-10 */
 	USB_DEVICE(0x0582, 0x00da),
 	.driver_info = (unsigned long) & (const struct snd_usb_audio_quirk) {
+=======
+	/* only 44.1 kHz works at the moment */
+	USB_DEVICE(0x0582, 0x012f),
+	.driver_info = (unsigned long) & (const struct snd_usb_audio_quirk) {
+		/* .vendor_name = "Roland", */
+		/* .product_name = "QUAD-CAPTURE", */
+>>>>>>> v3.18
 		.ifnum = QUIRK_ANY_INTERFACE,
 		.type = QUIRK_COMPOSITE,
 		.data = (const struct snd_usb_audio_quirk[]) {
 			{
 				.ifnum = 0,
+<<<<<<< HEAD
 				.type = QUIRK_AUDIO_STANDARD_INTERFACE
 			},
 			{
 				.ifnum = 1,
 				.type = QUIRK_AUDIO_STANDARD_INTERFACE
+=======
+				.type = QUIRK_AUDIO_FIXED_ENDPOINT,
+				.data = & (const struct audioformat) {
+					.formats = SNDRV_PCM_FMTBIT_S32_LE,
+					.channels = 4,
+					.iface = 0,
+					.altsetting = 1,
+					.altset_idx = 1,
+					.endpoint = 0x05,
+					.ep_attr = 0x05,
+					.rates = SNDRV_PCM_RATE_44100,
+					.rate_min = 44100,
+					.rate_max = 44100,
+					.nr_rates = 1,
+					.rate_table = (unsigned int[]) { 44100 }
+				}
+			},
+			{
+				.ifnum = 1,
+				.type = QUIRK_AUDIO_FIXED_ENDPOINT,
+				.data = & (const struct audioformat) {
+					.formats = SNDRV_PCM_FMTBIT_S32_LE,
+					.channels = 6,
+					.iface = 1,
+					.altsetting = 1,
+					.altset_idx = 1,
+					.endpoint = 0x85,
+					.ep_attr = 0x25,
+					.rates = SNDRV_PCM_RATE_44100,
+					.rate_min = 44100,
+					.rate_max = 44100,
+					.nr_rates = 1,
+					.rate_table = (unsigned int[]) { 44100 }
+				}
+>>>>>>> v3.18
 			},
 			{
 				.ifnum = 2,
@@ -1752,6 +1946,7 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 				}
 			},
 			{
+<<<<<<< HEAD
 				.ifnum = -1
 			}
 		}
@@ -1780,6 +1975,14 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 			{
 				.ifnum = 2,
 				.type = QUIRK_AUDIO_EDIROL_UAXX
+=======
+				.ifnum = 3,
+				.type = QUIRK_IGNORE_INTERFACE
+			},
+			{
+				.ifnum = 4,
+				.type = QUIRK_IGNORE_INTERFACE
+>>>>>>> v3.18
 			},
 			{
 				.ifnum = -1
@@ -1787,6 +1990,7 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 		}
 	}
 },
+<<<<<<< HEAD
 {
 	/* has ID 0x00ea when not in Advanced Driver mode */
 	USB_DEVICE_VENDOR_SPEC(0x0582, 0x00e9),
@@ -1832,10 +2036,57 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 		.data = & (const struct snd_usb_midi_endpoint_info) {
 			.out_cables = 0x0007,
 			.in_cables  = 0x0007
+=======
+/* this catches most recent vendor-specific Roland devices */
+{
+	.match_flags = USB_DEVICE_ID_MATCH_VENDOR |
+	               USB_DEVICE_ID_MATCH_INT_CLASS,
+	.idVendor = 0x0582,
+	.bInterfaceClass = USB_CLASS_VENDOR_SPEC,
+	.driver_info = (unsigned long) &(const struct snd_usb_audio_quirk) {
+		.ifnum = QUIRK_ANY_INTERFACE,
+		.type = QUIRK_AUTODETECT
+	}
+},
+
+/* Guillemot devices */
+{
+	/*
+	 * This is for the "Windows Edition" where the external MIDI ports are
+	 * the only MIDI ports; the control data is reported through HID
+	 * interfaces.  The "Macintosh Edition" has ID 0xd002 and uses standard
+	 * compliant USB MIDI ports for external MIDI and controls.
+	 */
+	USB_DEVICE_VENDOR_SPEC(0x06f8, 0xb000),
+	.driver_info = (unsigned long) & (const struct snd_usb_audio_quirk) {
+		.vendor_name = "Hercules",
+		.product_name = "DJ Console (WE)",
+		.ifnum = 4,
+		.type = QUIRK_MIDI_FIXED_ENDPOINT,
+		.data = & (const struct snd_usb_midi_endpoint_info) {
+			.out_cables = 0x0001,
+			.in_cables = 0x0001
+		}
+	}
+},
+
+/* Midiman/M-Audio devices */
+{
+	USB_DEVICE_VENDOR_SPEC(0x0763, 0x1002),
+	.driver_info = (unsigned long) & (const struct snd_usb_audio_quirk) {
+		.vendor_name = "M-Audio",
+		.product_name = "MidiSport 2x2",
+		.ifnum = QUIRK_ANY_INTERFACE,
+		.type = QUIRK_MIDI_MIDIMAN,
+		.data = & (const struct snd_usb_midi_endpoint_info) {
+			.out_cables = 0x0003,
+			.in_cables  = 0x0003
+>>>>>>> v3.18
 		}
 	}
 },
 {
+<<<<<<< HEAD
 	/* Boss JS-8 Jam Station  */
 	USB_DEVICE(0x0582, 0x0109),
 	.driver_info = (unsigned long) & (const struct snd_usb_audio_quirk) {
@@ -2112,6 +2363,12 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 	.driver_info = (unsigned long) & (const struct snd_usb_audio_quirk) {
 		.vendor_name = "M-Audio",
 		.product_name = "MidiSport 1x1",
+=======
+	USB_DEVICE_VENDOR_SPEC(0x0763, 0x1011),
+	.driver_info = (unsigned long) & (const struct snd_usb_audio_quirk) {
+		.vendor_name = "M-Audio",
+		.product_name = "MidiSport 1x1",
+>>>>>>> v3.18
 		.ifnum = QUIRK_ANY_INTERFACE,
 		.type = QUIRK_MIDI_MIDIMAN,
 		.data = & (const struct snd_usb_midi_endpoint_info) {
@@ -2773,6 +3030,7 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 	}
 },
 
+<<<<<<< HEAD
 /* Steinberg devices */
 {
 	/* Steinberg MI2 */
@@ -2841,6 +3099,8 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 	}
 },
 
+=======
+>>>>>>> v3.18
 /* TerraTec devices */
 {
 	USB_DEVICE_VENDOR_SPEC(0x0ccd, 0x0012),
@@ -2934,6 +3194,49 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 	}
 },
 {
+<<<<<<< HEAD
+=======
+	USB_DEVICE(0x1235, 0x0010),
+	.driver_info = (unsigned long) &(const struct snd_usb_audio_quirk) {
+		.vendor_name = "Focusrite",
+		.product_name = "Saffire 6 USB",
+		.ifnum = QUIRK_ANY_INTERFACE,
+		.type = QUIRK_COMPOSITE,
+		.data = (const struct snd_usb_audio_quirk[]) {
+			{
+				.ifnum = 0,
+				.type = QUIRK_AUDIO_FIXED_ENDPOINT,
+				.data = &(const struct audioformat) {
+					.formats = SNDRV_PCM_FMTBIT_S24_3LE,
+					.channels = 4,
+					.iface = 0,
+					.altsetting = 1,
+					.altset_idx = 1,
+					.attributes = UAC_EP_CS_ATTR_SAMPLE_RATE,
+					.endpoint = 0x01,
+					.ep_attr = USB_ENDPOINT_XFER_ISOC,
+					.rates = SNDRV_PCM_RATE_44100 |
+						 SNDRV_PCM_RATE_48000,
+					.rate_min = 44100,
+					.rate_max = 48000,
+					.nr_rates = 2,
+					.rate_table = (unsigned int[]) {
+						44100, 48000
+					}
+				}
+			},
+			{
+				.ifnum = 1,
+				.type = QUIRK_MIDI_RAW_BYTES
+			},
+			{
+				.ifnum = -1
+			}
+		}
+	}
+},
+{
+>>>>>>> v3.18
 	USB_DEVICE(0x1235, 0x0018),
 	.driver_info = (unsigned long) & (const struct snd_usb_audio_quirk) {
 		.vendor_name = "Novation",
@@ -2982,6 +3285,60 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 		.type = QUIRK_MIDI_NOVATION
 	}
 },
+<<<<<<< HEAD
+=======
+{
+	/*
+	 * Focusrite Scarlett 18i6
+	 *
+	 * Avoid mixer creation, which otherwise fails because some of
+	 * the interface descriptor subtypes for interface 0 are
+	 * unknown.  That should be fixed or worked-around but this at
+	 * least allows the device to be used successfully with a DAW
+	 * and an external mixer.  See comments below about other
+	 * ignored interfaces.
+	 */
+	USB_DEVICE(0x1235, 0x8004),
+	.driver_info = (unsigned long) & (const struct snd_usb_audio_quirk) {
+		.vendor_name = "Focusrite",
+		.product_name = "Scarlett 18i6",
+		.ifnum = QUIRK_ANY_INTERFACE,
+		.type = QUIRK_COMPOSITE,
+		.data = & (const struct snd_usb_audio_quirk[]) {
+			{
+				/* InterfaceSubClass 1 (Control Device) */
+				.ifnum = 0,
+				.type = QUIRK_IGNORE_INTERFACE
+			},
+			{
+				.ifnum = 1,
+				.type = QUIRK_AUDIO_STANDARD_INTERFACE
+			},
+			{
+				.ifnum = 2,
+				.type = QUIRK_AUDIO_STANDARD_INTERFACE
+			},
+			{
+				/* InterfaceSubClass 1 (Control Device) */
+				.ifnum = 3,
+				.type = QUIRK_IGNORE_INTERFACE
+			},
+			{
+				.ifnum = 4,
+				.type = QUIRK_MIDI_STANDARD_INTERFACE
+			},
+			{
+				/* InterfaceSubClass 1 (Device Firmware Update) */
+				.ifnum = 5,
+				.type = QUIRK_IGNORE_INTERFACE
+			},
+			{
+				.ifnum = -1
+			}
+		}
+	}
+},
+>>>>>>> v3.18
 
 /* Access Music devices */
 {
@@ -3041,6 +3398,7 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 	.idProduct = 0x1020,
 },
 
+<<<<<<< HEAD
 /* QinHeng devices */
 {
 	USB_DEVICE(0x1a86, 0x752d),
@@ -3052,6 +3410,8 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 	}
 },
 
+=======
+>>>>>>> v3.18
 /* KeithMcMillen Stringport */
 {
 	USB_DEVICE(0x1f38, 0x0001),
@@ -3095,21 +3455,11 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 	}
 },
 {
+<<<<<<< HEAD
 	USB_DEVICE_VENDOR_SPEC(0x2040, 0x7240),
-	.match_flags = USB_DEVICE_ID_MATCH_DEVICE |
-		       USB_DEVICE_ID_MATCH_INT_CLASS |
-		       USB_DEVICE_ID_MATCH_INT_SUBCLASS,
-	.bInterfaceClass = USB_CLASS_AUDIO,
-	.bInterfaceSubClass = USB_SUBCLASS_AUDIOCONTROL,
-	.driver_info = (unsigned long) &(const struct snd_usb_audio_quirk) {
-		.vendor_name = "Hauppauge",
-		.product_name = "HVR-850",
-		.ifnum = QUIRK_ANY_INTERFACE,
-		.type = QUIRK_AUDIO_ALIGN_TRANSFER,
-	}
-},
-{
+=======
 	USB_DEVICE_VENDOR_SPEC(0x2040, 0x7210),
+>>>>>>> v3.18
 	.match_flags = USB_DEVICE_ID_MATCH_DEVICE |
 		       USB_DEVICE_ID_MATCH_INT_CLASS |
 		       USB_DEVICE_ID_MATCH_INT_SUBCLASS,
@@ -3117,13 +3467,21 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 	.bInterfaceSubClass = USB_SUBCLASS_AUDIOCONTROL,
 	.driver_info = (unsigned long) &(const struct snd_usb_audio_quirk) {
 		.vendor_name = "Hauppauge",
+<<<<<<< HEAD
+		.product_name = "HVR-850",
+=======
 		.product_name = "HVR-950Q",
+>>>>>>> v3.18
 		.ifnum = QUIRK_ANY_INTERFACE,
 		.type = QUIRK_AUDIO_ALIGN_TRANSFER,
 	}
 },
 {
+<<<<<<< HEAD
+	USB_DEVICE_VENDOR_SPEC(0x2040, 0x7210),
+=======
 	USB_DEVICE_VENDOR_SPEC(0x2040, 0x7217),
+>>>>>>> v3.18
 	.match_flags = USB_DEVICE_ID_MATCH_DEVICE |
 		       USB_DEVICE_ID_MATCH_INT_CLASS |
 		       USB_DEVICE_ID_MATCH_INT_SUBCLASS,
@@ -3137,7 +3495,11 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 	}
 },
 {
+<<<<<<< HEAD
+	USB_DEVICE_VENDOR_SPEC(0x2040, 0x7217),
+=======
 	USB_DEVICE_VENDOR_SPEC(0x2040, 0x721b),
+>>>>>>> v3.18
 	.match_flags = USB_DEVICE_ID_MATCH_DEVICE |
 		       USB_DEVICE_ID_MATCH_INT_CLASS |
 		       USB_DEVICE_ID_MATCH_INT_SUBCLASS,
@@ -3151,7 +3513,11 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 	}
 },
 {
+<<<<<<< HEAD
+	USB_DEVICE_VENDOR_SPEC(0x2040, 0x721b),
+=======
 	USB_DEVICE_VENDOR_SPEC(0x2040, 0x721e),
+>>>>>>> v3.18
 	.match_flags = USB_DEVICE_ID_MATCH_DEVICE |
 		       USB_DEVICE_ID_MATCH_INT_CLASS |
 		       USB_DEVICE_ID_MATCH_INT_SUBCLASS,
@@ -3165,7 +3531,11 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 	}
 },
 {
+<<<<<<< HEAD
+	USB_DEVICE_VENDOR_SPEC(0x2040, 0x721e),
+=======
 	USB_DEVICE_VENDOR_SPEC(0x2040, 0x721f),
+>>>>>>> v3.18
 	.match_flags = USB_DEVICE_ID_MATCH_DEVICE |
 		       USB_DEVICE_ID_MATCH_INT_CLASS |
 		       USB_DEVICE_ID_MATCH_INT_SUBCLASS,
@@ -3174,6 +3544,28 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 	.driver_info = (unsigned long) &(const struct snd_usb_audio_quirk) {
 		.vendor_name = "Hauppauge",
 		.product_name = "HVR-950Q",
+		.ifnum = QUIRK_ANY_INTERFACE,
+		.type = QUIRK_AUDIO_ALIGN_TRANSFER,
+	}
+},
+{
+<<<<<<< HEAD
+	USB_DEVICE_VENDOR_SPEC(0x2040, 0x721f),
+=======
+	USB_DEVICE_VENDOR_SPEC(0x2040, 0x7240),
+>>>>>>> v3.18
+	.match_flags = USB_DEVICE_ID_MATCH_DEVICE |
+		       USB_DEVICE_ID_MATCH_INT_CLASS |
+		       USB_DEVICE_ID_MATCH_INT_SUBCLASS,
+	.bInterfaceClass = USB_CLASS_AUDIO,
+	.bInterfaceSubClass = USB_SUBCLASS_AUDIOCONTROL,
+	.driver_info = (unsigned long) &(const struct snd_usb_audio_quirk) {
+		.vendor_name = "Hauppauge",
+<<<<<<< HEAD
+		.product_name = "HVR-950Q",
+=======
+		.product_name = "HVR-850",
+>>>>>>> v3.18
 		.ifnum = QUIRK_ANY_INTERFACE,
 		.type = QUIRK_AUDIO_ALIGN_TRANSFER,
 	}
@@ -3478,6 +3870,7 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 
 {
 	/*
+<<<<<<< HEAD
 	 * Focusrite Scarlett 18i6
 	 *
 	 * Avoid mixer creation, which otherwise fails because some of
@@ -3530,6 +3923,8 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 
 {
 	/*
+=======
+>>>>>>> v3.18
 	 * Some USB MIDI devices don't have an audio control interface,
 	 * so we have to grab MIDI streaming interfaces here.
 	 */
@@ -3543,4 +3938,19 @@ YAMAHA_DEVICE(0x7010, "UB99"),
 	}
 },
 
+<<<<<<< HEAD
+=======
+{
+	/*
+	 * The original product_name is "USB Sound Device", however this name
+	 * is also used by the CM106 based cards, so make it unique.
+	 */
+	USB_DEVICE(0x0d8c, 0x0103),
+	.driver_info = (unsigned long) &(const struct snd_usb_audio_quirk) {
+		.product_name = "Audio Advantage MicroII",
+		.ifnum = QUIRK_NO_INTERFACE
+	}
+},
+
+>>>>>>> v3.18
 #undef USB_DEVICE_VENDOR_SPEC

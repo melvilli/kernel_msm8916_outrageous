@@ -19,5 +19,9 @@ config NET_VENDOR_MELLANOX
 if NET_VENDOR_MELLANOX
 
 source "drivers/net/ethernet/mellanox/mlx4/Kconfig"
+<<<<<<< HEAD
+=======
+source "drivers/net/ethernet/mellanox/mlx5/core/Kconfig"
+>>>>>>> v3.18
 
 endif # NET_VENDOR_MELLANOX

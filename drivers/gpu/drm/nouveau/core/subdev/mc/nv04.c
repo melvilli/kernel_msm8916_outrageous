@@ -22,17 +22,25 @@
  * Authors: Ben Skeggs
  */
 
+<<<<<<< HEAD
 #include <subdev/mc.h>
 
 struct nv04_mc_priv {
 	struct nouveau_mc base;
 };
+=======
+#include "nv04.h"
+>>>>>>> v3.18
 
 const struct nouveau_mc_intr
 nv04_mc_intr[] = {
 	{ 0x00000001, NVDEV_ENGINE_MPEG },	/* NV17- MPEG/ME */
 	{ 0x00000100, NVDEV_ENGINE_FIFO },
 	{ 0x00001000, NVDEV_ENGINE_GR },
+<<<<<<< HEAD
+=======
+	{ 0x00010000, NVDEV_ENGINE_DISP },
+>>>>>>> v3.18
 	{ 0x00020000, NVDEV_ENGINE_VP },	/* NV40- */
 	{ 0x00100000, NVDEV_SUBDEV_TIMER },
 	{ 0x01000000, NVDEV_ENGINE_DISP },	/* NV04- PCRTC0 */
@@ -42,7 +50,22 @@ nv04_mc_intr[] = {
 	{}
 };
 
+<<<<<<< HEAD
 static int
+=======
+int
+nv04_mc_init(struct nouveau_object *object)
+{
+	struct nv04_mc_priv *priv = (void *)object;
+
+	nv_wr32(priv, 0x000200, 0xffffffff); /* everything enabled */
+	nv_wr32(priv, 0x001850, 0x00000001); /* disable rom access */
+
+	return nouveau_mc_init(&priv->base);
+}
+
+int
+>>>>>>> v3.18
 nv04_mc_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	     struct nouveau_oclass *oclass, void *data, u32 size,
 	     struct nouveau_object **pobject)
@@ -50,7 +73,11 @@ nv04_mc_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	struct nv04_mc_priv *priv;
 	int ret;
 
+<<<<<<< HEAD
 	ret = nouveau_mc_create(parent, engine, oclass, nv04_mc_intr, &priv);
+=======
+	ret = nouveau_mc_create(parent, engine, oclass, &priv);
+>>>>>>> v3.18
 	*pobject = nv_object(priv);
 	if (ret)
 		return ret;
@@ -58,6 +85,7 @@ nv04_mc_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	return 0;
 }
 
+<<<<<<< HEAD
 int
 nv04_mc_init(struct nouveau_object *object)
 {
@@ -73,9 +101,20 @@ struct nouveau_oclass
 nv04_mc_oclass = {
 	.handle = NV_SUBDEV(MC, 0x04),
 	.ofuncs = &(struct nouveau_ofuncs) {
+=======
+struct nouveau_oclass *
+nv04_mc_oclass = &(struct nouveau_mc_oclass) {
+	.base.handle = NV_SUBDEV(MC, 0x04),
+	.base.ofuncs = &(struct nouveau_ofuncs) {
+>>>>>>> v3.18
 		.ctor = nv04_mc_ctor,
 		.dtor = _nouveau_mc_dtor,
 		.init = nv04_mc_init,
 		.fini = _nouveau_mc_fini,
 	},
+<<<<<<< HEAD
 };
+=======
+	.intr = nv04_mc_intr,
+}.base;
+>>>>>>> v3.18

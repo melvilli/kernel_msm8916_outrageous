@@ -29,7 +29,10 @@
 #include <asm/mipsregs.h>
 
 #include <asm/processor.h>
+<<<<<<< HEAD
 #include <asm/pci/bridge.h>
+=======
+>>>>>>> v3.18
 #include <asm/sn/addrs.h>
 #include <asm/sn/agent.h>
 #include <asm/sn/arch.h>
@@ -54,6 +57,7 @@
 
 extern asmlinkage void ip27_irq(void);
 
+<<<<<<< HEAD
 extern struct bridge_controller *irq_to_bridge[];
 extern int irq_to_slot[];
 
@@ -98,6 +102,8 @@ static inline int find_level(cpuid_t *cpunum, int irq)
 	panic("Could not identify cpu/level for irq %d", irq);
 }
 
+=======
+>>>>>>> v3.18
 /*
  * Find first bit set
  */
@@ -204,6 +210,7 @@ static void ip27_hub_error(void)
 	panic("CPU %d got a hub error interrupt", smp_processor_id());
 }
 
+<<<<<<< HEAD
 static int intr_connect_level(int cpu, int bit)
 {
 	nasid_t nasid = COMPACT_TO_NASID_NODEID(cpu_to_node(cpu));
@@ -373,6 +380,8 @@ int request_bridge_irq(struct bridge_controller *bc)
 	return irq;
 }
 
+=======
+>>>>>>> v3.18
 asmlinkage void plat_irq_dispatch(void)
 {
 	unsigned long pending = read_c0_cause() & read_c0_status();

@@ -34,6 +34,10 @@
 #include <media/videobuf-dma-sg.h>
 #include <media/soc_camera.h>
 #include <media/soc_mediabus.h>
+<<<<<<< HEAD
+=======
+#include <media/v4l2-of.h>
+>>>>>>> v3.18
 
 #include <linux/videodev2.h>
 
@@ -200,7 +204,10 @@ struct pxa_camera_dev {
 	 * interface. If anyone ever builds hardware to enable more than
 	 * one camera, they will have to modify this driver too
 	 */
+<<<<<<< HEAD
 	struct soc_camera_device *icd;
+=======
+>>>>>>> v3.18
 	struct clk		*clk;
 
 	unsigned int		irq;
@@ -956,11 +963,29 @@ static irqreturn_t pxa_camera_irq(int irq, void *data)
 	return IRQ_HANDLED;
 }
 
+<<<<<<< HEAD
+=======
+static int pxa_camera_add_device(struct soc_camera_device *icd)
+{
+	dev_info(icd->parent, "PXA Camera driver attached to camera %d\n",
+		 icd->devnum);
+
+	return 0;
+}
+
+static void pxa_camera_remove_device(struct soc_camera_device *icd)
+{
+	dev_info(icd->parent, "PXA Camera driver detached from camera %d\n",
+		 icd->devnum);
+}
+
+>>>>>>> v3.18
 /*
  * The following two functions absolutely depend on the fact, that
  * there can be only one camera on PXA quick capture interface
  * Called with .host_lock held
  */
+<<<<<<< HEAD
 static int pxa_camera_add_device(struct soc_camera_device *icd)
 {
 	struct soc_camera_host *ici = to_soc_camera_host(icd->parent);
@@ -976,10 +1001,19 @@ static int pxa_camera_add_device(struct soc_camera_device *icd)
 	dev_info(icd->parent, "PXA Camera driver attached to camera %d\n",
 		 icd->devnum);
 
+=======
+static int pxa_camera_clock_start(struct soc_camera_host *ici)
+{
+	struct pxa_camera_dev *pcdev = ici->priv;
+
+	pxa_camera_activate(pcdev);
+
+>>>>>>> v3.18
 	return 0;
 }
 
 /* Called with .host_lock held */
+<<<<<<< HEAD
 static void pxa_camera_remove_device(struct soc_camera_device *icd)
 {
 	struct soc_camera_host *ici = to_soc_camera_host(icd->parent);
@@ -990,6 +1024,12 @@ static void pxa_camera_remove_device(struct soc_camera_device *icd)
 	dev_info(icd->parent, "PXA Camera driver detached from camera %d\n",
 		 icd->devnum);
 
+=======
+static void pxa_camera_clock_stop(struct soc_camera_host *ici)
+{
+	struct pxa_camera_dev *pcdev = ici->priv;
+
+>>>>>>> v3.18
 	/* disable capture, disable interrupts */
 	__raw_writel(0x3ff, pcdev->base + CICR0);
 
@@ -999,8 +1039,11 @@ static void pxa_camera_remove_device(struct soc_camera_device *icd)
 	DCSR(pcdev->dma_chans[2]) = 0;
 
 	pxa_camera_deactivate(pcdev);
+<<<<<<< HEAD
 
 	pcdev->icd = NULL;
+=======
+>>>>>>> v3.18
 }
 
 static int test_platform_param(struct pxa_camera_dev *pcdev,
@@ -1596,8 +1639,13 @@ static int pxa_camera_suspend(struct device *dev)
 	pcdev->save_cicr[i++] = __raw_readl(pcdev->base + CICR3);
 	pcdev->save_cicr[i++] = __raw_readl(pcdev->base + CICR4);
 
+<<<<<<< HEAD
 	if (pcdev->icd) {
 		struct v4l2_subdev *sd = soc_camera_to_subdev(pcdev->icd);
+=======
+	if (pcdev->soc_host.icd) {
+		struct v4l2_subdev *sd = soc_camera_to_subdev(pcdev->soc_host.icd);
+>>>>>>> v3.18
 		ret = v4l2_subdev_call(sd, core, s_power, 0);
 		if (ret == -ENOIOCTLCMD)
 			ret = 0;
@@ -1622,8 +1670,13 @@ static int pxa_camera_resume(struct device *dev)
 	__raw_writel(pcdev->save_cicr[i++], pcdev->base + CICR3);
 	__raw_writel(pcdev->save_cicr[i++], pcdev->base + CICR4);
 
+<<<<<<< HEAD
 	if (pcdev->icd) {
 		struct v4l2_subdev *sd = soc_camera_to_subdev(pcdev->icd);
+=======
+	if (pcdev->soc_host.icd) {
+		struct v4l2_subdev *sd = soc_camera_to_subdev(pcdev->soc_host.icd);
+>>>>>>> v3.18
 		ret = v4l2_subdev_call(sd, core, s_power, 1);
 		if (ret == -ENOIOCTLCMD)
 			ret = 0;
@@ -1640,6 +1693,11 @@ static struct soc_camera_host_ops pxa_soc_camera_host_ops = {
 	.owner		= THIS_MODULE,
 	.add		= pxa_camera_add_device,
 	.remove		= pxa_camera_remove_device,
+<<<<<<< HEAD
+=======
+	.clock_start	= pxa_camera_clock_start,
+	.clock_stop	= pxa_camera_clock_stop,
+>>>>>>> v3.18
 	.set_crop	= pxa_camera_set_crop,
 	.get_formats	= pxa_camera_get_formats,
 	.put_formats	= pxa_camera_put_formats,
@@ -1652,6 +1710,71 @@ static struct soc_camera_host_ops pxa_soc_camera_host_ops = {
 	.set_bus_param	= pxa_camera_set_bus_param,
 };
 
+<<<<<<< HEAD
+=======
+static int pxa_camera_pdata_from_dt(struct device *dev,
+				    struct pxa_camera_dev *pcdev)
+{
+	u32 mclk_rate;
+	struct device_node *np = dev->of_node;
+	struct v4l2_of_endpoint ep;
+	int err = of_property_read_u32(np, "clock-frequency",
+				       &mclk_rate);
+	if (!err) {
+		pcdev->platform_flags |= PXA_CAMERA_MCLK_EN;
+		pcdev->mclk = mclk_rate;
+	}
+
+	np = of_graph_get_next_endpoint(np, NULL);
+	if (!np) {
+		dev_err(dev, "could not find endpoint\n");
+		return -EINVAL;
+	}
+
+	err = v4l2_of_parse_endpoint(np, &ep);
+	if (err) {
+		dev_err(dev, "could not parse endpoint\n");
+		goto out;
+	}
+
+	switch (ep.bus.parallel.bus_width) {
+	case 4:
+		pcdev->platform_flags |= PXA_CAMERA_DATAWIDTH_4;
+		break;
+	case 5:
+		pcdev->platform_flags |= PXA_CAMERA_DATAWIDTH_5;
+		break;
+	case 8:
+		pcdev->platform_flags |= PXA_CAMERA_DATAWIDTH_8;
+		break;
+	case 9:
+		pcdev->platform_flags |= PXA_CAMERA_DATAWIDTH_9;
+		break;
+	case 10:
+		pcdev->platform_flags |= PXA_CAMERA_DATAWIDTH_10;
+		break;
+	default:
+		break;
+	}
+
+	if (ep.bus.parallel.flags & V4L2_MBUS_MASTER)
+		pcdev->platform_flags |= PXA_CAMERA_MASTER;
+	if (ep.bus.parallel.flags & V4L2_MBUS_HSYNC_ACTIVE_HIGH)
+		pcdev->platform_flags |= PXA_CAMERA_HSP;
+	if (ep.bus.parallel.flags & V4L2_MBUS_VSYNC_ACTIVE_HIGH)
+		pcdev->platform_flags |= PXA_CAMERA_VSP;
+	if (ep.bus.parallel.flags & V4L2_MBUS_PCLK_SAMPLE_RISING)
+		pcdev->platform_flags |= PXA_CAMERA_PCLK_EN | PXA_CAMERA_PCP;
+	if (ep.bus.parallel.flags & V4L2_MBUS_PCLK_SAMPLE_FALLING)
+		pcdev->platform_flags |= PXA_CAMERA_PCLK_EN;
+
+out:
+	of_node_put(np);
+
+	return err;
+}
+
+>>>>>>> v3.18
 static int pxa_camera_probe(struct platform_device *pdev)
 {
 	struct pxa_camera_dev *pcdev;
@@ -1678,7 +1801,19 @@ static int pxa_camera_probe(struct platform_device *pdev)
 	pcdev->res = res;
 
 	pcdev->pdata = pdev->dev.platform_data;
+<<<<<<< HEAD
 	pcdev->platform_flags = pcdev->pdata->flags;
+=======
+	if (&pdev->dev.of_node && !pcdev->pdata) {
+		err = pxa_camera_pdata_from_dt(&pdev->dev, pcdev);
+	} else {
+		pcdev->platform_flags = pcdev->pdata->flags;
+		pcdev->mclk = pcdev->pdata->mclk_10khz * 10000;
+	}
+	if (err < 0)
+		return err;
+
+>>>>>>> v3.18
 	if (!(pcdev->platform_flags & (PXA_CAMERA_DATAWIDTH_8 |
 			PXA_CAMERA_DATAWIDTH_9 | PXA_CAMERA_DATAWIDTH_10))) {
 		/*
@@ -1695,7 +1830,10 @@ static int pxa_camera_probe(struct platform_device *pdev)
 		pcdev->width_flags |= 1 << 8;
 	if (pcdev->platform_flags & PXA_CAMERA_DATAWIDTH_10)
 		pcdev->width_flags |= 1 << 9;
+<<<<<<< HEAD
 	pcdev->mclk = pcdev->pdata->mclk_10khz * 10000;
+=======
+>>>>>>> v3.18
 	if (!pcdev->mclk) {
 		dev_warn(&pdev->dev,
 			 "mclk == 0! Please, fix your platform data. "
@@ -1801,10 +1939,23 @@ static const struct dev_pm_ops pxa_camera_pm = {
 	.resume		= pxa_camera_resume,
 };
 
+<<<<<<< HEAD
+=======
+static const struct of_device_id pxa_camera_of_match[] = {
+	{ .compatible = "marvell,pxa270-qci", },
+	{},
+};
+MODULE_DEVICE_TABLE(of, pxa_camera_of_match);
+
+>>>>>>> v3.18
 static struct platform_driver pxa_camera_driver = {
 	.driver		= {
 		.name	= PXA_CAM_DRV_NAME,
 		.pm	= &pxa_camera_pm,
+<<<<<<< HEAD
+=======
+		.of_match_table = of_match_ptr(pxa_camera_of_match),
+>>>>>>> v3.18
 	},
 	.probe		= pxa_camera_probe,
 	.remove		= pxa_camera_remove,

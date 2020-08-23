@@ -7,6 +7,11 @@
 
 #include <uapi/asm/tm.h>
 
+<<<<<<< HEAD
+=======
+#ifndef __ASSEMBLY__
+
+>>>>>>> v3.18
 #ifdef CONFIG_PPC_TRANSACTIONAL_MEM
 extern void do_load_up_transact_fpu(struct thread_struct *thread);
 extern void do_load_up_transact_altivec(struct thread_struct *thread);
@@ -15,8 +20,17 @@ extern void do_load_up_transact_altivec(struct thread_struct *thread);
 extern void tm_enable(void);
 extern void tm_reclaim(struct thread_struct *thread,
 		       unsigned long orig_msr, uint8_t cause);
+<<<<<<< HEAD
+=======
+extern void tm_reclaim_current(uint8_t cause);
+>>>>>>> v3.18
 extern void tm_recheckpoint(struct thread_struct *thread,
 			    unsigned long orig_msr);
 extern void tm_abort(uint8_t cause);
 extern void tm_save_sprs(struct thread_struct *thread);
 extern void tm_restore_sprs(struct thread_struct *thread);
+<<<<<<< HEAD
+=======
+
+#endif /* __ASSEMBLY__ */
+>>>>>>> v3.18

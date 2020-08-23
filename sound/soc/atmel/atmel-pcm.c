@@ -50,7 +50,11 @@ static int atmel_pcm_preallocate_dma_buffer(struct snd_pcm *pcm,
 	buf->area = dma_alloc_coherent(pcm->card->dev, size,
 			&buf->addr, GFP_KERNEL);
 	pr_debug("atmel-pcm: alloc dma buffer: area=%p, addr=%p, size=%zu\n",
+<<<<<<< HEAD
 			(void *)buf->area, (void *)buf->addr, size);
+=======
+			(void *)buf->area, (void *)(long)buf->addr, size);
+>>>>>>> v3.18
 
 	if (!buf->area)
 		return -ENOMEM;
@@ -68,18 +72,29 @@ int atmel_pcm_mmap(struct snd_pcm_substream *substream,
 }
 EXPORT_SYMBOL_GPL(atmel_pcm_mmap);
 
+<<<<<<< HEAD
 static u64 atmel_pcm_dmamask = DMA_BIT_MASK(32);
 
+=======
+>>>>>>> v3.18
 int atmel_pcm_new(struct snd_soc_pcm_runtime *rtd)
 {
 	struct snd_card *card = rtd->card->snd_card;
 	struct snd_pcm *pcm = rtd->pcm;
+<<<<<<< HEAD
 	int ret = 0;
 
 	if (!card->dev->dma_mask)
 		card->dev->dma_mask = &atmel_pcm_dmamask;
 	if (!card->dev->coherent_dma_mask)
 		card->dev->coherent_dma_mask = DMA_BIT_MASK(32);
+=======
+	int ret;
+
+	ret = dma_coerce_mask_and_coherent(card->dev, DMA_BIT_MASK(32));
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 
 	if (pcm->streams[SNDRV_PCM_STREAM_PLAYBACK].substream) {
 		pr_debug("atmel-pcm: allocating PCM playback DMA buffer\n");

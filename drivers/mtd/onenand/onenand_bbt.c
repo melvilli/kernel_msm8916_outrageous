@@ -133,7 +133,10 @@ static inline int onenand_memory_bbt (struct mtd_info *mtd, struct nand_bbt_desc
 {
 	struct onenand_chip *this = mtd->priv;
 
+<<<<<<< HEAD
         bd->options &= ~NAND_BBT_SCANEMPTY;
+=======
+>>>>>>> v3.18
 	return create_bbt(mtd, this->page_buf, bd, -1);
 }
 

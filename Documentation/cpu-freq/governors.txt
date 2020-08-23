@@ -28,7 +28,10 @@ Contents:
 2.3  Userspace
 2.4  Ondemand
 2.5  Conservative
+<<<<<<< HEAD
 2.6  Interactive
+=======
+>>>>>>> v3.18
 
 3.   The Governor Interface in the CPUfreq Core
 
@@ -219,6 +222,7 @@ a decision on when to decrease the frequency while running in any
 speed. Load for frequency increase is still evaluated every
 sampling rate.
 
+<<<<<<< HEAD
 2.6 Interactive
 ---------------
 
@@ -303,6 +307,8 @@ on a write to boostpulse, before allowing speed to drop according to
 load as usual.  Default is 80000 uS.
 
 
+=======
+>>>>>>> v3.18
 3. The Governor Interface in the CPUfreq Core
 =============================================
 

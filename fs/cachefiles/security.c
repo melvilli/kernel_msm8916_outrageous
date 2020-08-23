@@ -34,9 +34,13 @@ int cachefiles_get_security_ID(struct cachefiles_cache *cache)
 		ret = set_security_override_from_ctx(new, cache->secctx);
 		if (ret < 0) {
 			put_cred(new);
+<<<<<<< HEAD
 			printk(KERN_ERR "CacheFiles:"
 			       " Security denies permission to nominate"
 			       " security context: error %d\n",
+=======
+			pr_err("Security denies permission to nominate security context: error %d\n",
+>>>>>>> v3.18
 			       ret);
 			goto error;
 		}
@@ -59,16 +63,24 @@ static int cachefiles_check_cache_dir(struct cachefiles_cache *cache,
 
 	ret = security_inode_mkdir(root->d_inode, root, 0);
 	if (ret < 0) {
+<<<<<<< HEAD
 		printk(KERN_ERR "CacheFiles:"
 		       " Security denies permission to make dirs: error %d",
+=======
+		pr_err("Security denies permission to make dirs: error %d",
+>>>>>>> v3.18
 		       ret);
 		return ret;
 	}
 
 	ret = security_inode_create(root->d_inode, root, 0);
 	if (ret < 0)
+<<<<<<< HEAD
 		printk(KERN_ERR "CacheFiles:"
 		       " Security denies permission to create files: error %d",
+=======
+		pr_err("Security denies permission to create files: error %d",
+>>>>>>> v3.18
 		       ret);
 
 	return ret;

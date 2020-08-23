@@ -57,6 +57,7 @@
 
 #define _PAGE_ACCESSED      (1<<1)	/* Page is accessed (S) */
 #define _PAGE_CACHEABLE     (1<<2)	/* Page is cached (H) */
+<<<<<<< HEAD
 #define _PAGE_U_EXECUTE     (1<<3)	/* Page has user execute perm (H) */
 #define _PAGE_U_WRITE       (1<<4)	/* Page has user write perm (H) */
 #define _PAGE_U_READ        (1<<5)	/* Page has user read perm (H) */
@@ -94,6 +95,33 @@
 
 /* Kernel allowed all permissions for all pages */
 #define _K_PAGE_PERMS  (_PAGE_K_EXECUTE | _PAGE_K_WRITE | _PAGE_K_READ | \
+=======
+#define _PAGE_EXECUTE       (1<<3)	/* Page has user execute perm (H) */
+#define _PAGE_WRITE         (1<<4)	/* Page has user write perm (H) */
+#define _PAGE_READ          (1<<5)	/* Page has user read perm (H) */
+#define _PAGE_MODIFIED      (1<<6)	/* Page modified (dirty) (S) */
+#define _PAGE_FILE          (1<<7)	/* page cache/ swap (S) */
+#define _PAGE_GLOBAL        (1<<8)	/* Page is global (H) */
+#define _PAGE_PRESENT       (1<<10)	/* TLB entry is valid (H) */
+
+#else	/* MMU v3 onwards */
+
+#define _PAGE_CACHEABLE     (1<<0)	/* Page is cached (H) */
+#define _PAGE_EXECUTE       (1<<1)	/* Page has user execute perm (H) */
+#define _PAGE_WRITE         (1<<2)	/* Page has user write perm (H) */
+#define _PAGE_READ          (1<<3)	/* Page has user read perm (H) */
+#define _PAGE_ACCESSED      (1<<4)	/* Page is accessed (S) */
+#define _PAGE_MODIFIED      (1<<5)	/* Page modified (dirty) (S) */
+#define _PAGE_FILE          (1<<6)	/* page cache/ swap (S) */
+#define _PAGE_GLOBAL        (1<<8)	/* Page is global (H) */
+#define _PAGE_PRESENT       (1<<9)	/* TLB entry is valid (H) */
+#define _PAGE_SHARED_CODE   (1<<11)	/* Shared Code page with cmn vaddr
+					   usable for shared TLB entries (H) */
+#endif
+
+/* vmalloc permissions */
+#define _K_PAGE_PERMS  (_PAGE_EXECUTE | _PAGE_WRITE | _PAGE_READ | \
+>>>>>>> v3.18
 			_PAGE_GLOBAL | _PAGE_PRESENT)
 
 #ifdef CONFIG_ARC_CACHE_PAGES
@@ -109,10 +137,13 @@
  */
 #define ___DEF (_PAGE_PRESENT | _PAGE_DEF_CACHEABLE)
 
+<<<<<<< HEAD
 #define _PAGE_READ	(_PAGE_U_READ    | _PAGE_K_READ)
 #define _PAGE_WRITE	(_PAGE_U_WRITE   | _PAGE_K_WRITE)
 #define _PAGE_EXECUTE	(_PAGE_U_EXECUTE | _PAGE_K_EXECUTE)
 
+=======
+>>>>>>> v3.18
 /* Set of bits not changed in pte_modify */
 #define _PAGE_CHG_MASK	(PAGE_MASK | _PAGE_ACCESSED | _PAGE_MODIFIED)
 
@@ -126,8 +157,13 @@
 
 #define PAGE_SHARED	PAGE_U_W_R
 
+<<<<<<< HEAD
 /* While kernel runs out of unstrslated space, vmalloc/modules use a chunk of
  * kernel vaddr space - visible in all addr spaces, but kernel mode only
+=======
+/* While kernel runs out of unstranslated space, vmalloc/modules use a chunk of
+ * user vaddr space - visible in all addr spaces, but kernel mode only
+>>>>>>> v3.18
  * Thus Global, all-kernel-access, no-user-access, cached
  */
 #define PAGE_KERNEL          __pgprot(_K_PAGE_PERMS | _PAGE_DEF_CACHEABLE)
@@ -135,6 +171,14 @@
 /* ioremap */
 #define PAGE_KERNEL_NO_CACHE __pgprot(_K_PAGE_PERMS)
 
+<<<<<<< HEAD
+=======
+/* Masks for actual TLB "PD"s */
+#define PTE_BITS_IN_PD0		(_PAGE_GLOBAL | _PAGE_PRESENT)
+#define PTE_BITS_RWX		(_PAGE_EXECUTE | _PAGE_WRITE | _PAGE_READ)
+#define PTE_BITS_NON_RWX_IN_PD1	(PAGE_MASK | _PAGE_CACHEABLE)
+
+>>>>>>> v3.18
 /**************************************************************************
  * Mapping of vm_flags (Generic VM) to PTE flags (arch specific)
  *
@@ -270,8 +314,12 @@ static inline void pmd_set(pmd_t *pmdp, pte_t *ptep)
 #define pmd_clear(xp)			do { pmd_val(*(xp)) = 0; } while (0)
 
 #define pte_page(x) (mem_map + \
+<<<<<<< HEAD
 		(unsigned long)(((pte_val(x) - CONFIG_LINUX_LINK_BASE) >> \
 				PAGE_SHIFT)))
+=======
+		(unsigned long)(((pte_val(x) - PAGE_OFFSET) >> PAGE_SHIFT)))
+>>>>>>> v3.18
 
 #define mk_pte(page, pgprot)						\
 ({									\

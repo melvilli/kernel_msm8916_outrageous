@@ -58,6 +58,11 @@ obj-$(CONFIG_MWIFIEX)	+= mwifiex/
 obj-$(CONFIG_BRCMFMAC)	+= brcm80211/
 obj-$(CONFIG_BRCMSMAC)	+= brcm80211/
 
+<<<<<<< HEAD
 obj-$(CONFIG_LIBRA_SDIOIF)	+= libra/
 obj-$(CONFIG_WCNSS_CORE)	+= wcnss/
 obj-$(CONFIG_CNSS)		+= cnss/
+=======
+obj-$(CONFIG_CW1200)	+= cw1200/
+obj-$(CONFIG_RSI_91X)	+= rsi/
+>>>>>>> v3.18

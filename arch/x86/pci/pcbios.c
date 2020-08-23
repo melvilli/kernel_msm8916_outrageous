@@ -79,13 +79,21 @@ union bios32 {
 static struct {
 	unsigned long address;
 	unsigned short segment;
+<<<<<<< HEAD
 } bios32_indirect = { 0, __KERNEL_CS };
+=======
+} bios32_indirect __initdata = { 0, __KERNEL_CS };
+>>>>>>> v3.18
 
 /*
  * Returns the entry point for the given service, NULL on error
  */
 
+<<<<<<< HEAD
 static unsigned long bios32_service(unsigned long service)
+=======
+static unsigned long __init bios32_service(unsigned long service)
+>>>>>>> v3.18
 {
 	unsigned char return_code;	/* %al */
 	unsigned long address;		/* %ebx */
@@ -124,7 +132,11 @@ static struct {
 
 static int pci_bios_present;
 
+<<<<<<< HEAD
 static int check_pcibios(void)
+=======
+static int __init check_pcibios(void)
+>>>>>>> v3.18
 {
 	u32 signature, eax, ebx, ecx;
 	u8 status, major_ver, minor_ver, hw_mech;
@@ -312,7 +324,11 @@ static const struct pci_raw_ops pci_bios_access = {
  * Try to find PCI BIOS.
  */
 
+<<<<<<< HEAD
 static const struct pci_raw_ops *pci_find_bios(void)
+=======
+static const struct pci_raw_ops *__init pci_find_bios(void)
+>>>>>>> v3.18
 {
 	union bios32 *check;
 	unsigned char sum;

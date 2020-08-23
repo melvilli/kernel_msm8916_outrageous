@@ -11,10 +11,13 @@
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 */
 
 /*
@@ -22,7 +25,11 @@
 	Intel PIIX4, 440MX
 	Serverworks OSB4, CSB5, CSB6, HT-1000, HT-1100
 	ATI IXP200, IXP300, IXP400, SB600, SB700/SP5100, SB800
+<<<<<<< HEAD
 	AMD Hudson-2, CZ
+=======
+	AMD Hudson-2, ML, CZ
+>>>>>>> v3.18
 	SMSC Victory66
 
    Note: we assume there can only be one device, with one or more
@@ -38,7 +45,10 @@
 #include <linux/ioport.h>
 #include <linux/i2c.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/dmi.h>
 #include <linux/acpi.h>
 #include <linux/io.h>
@@ -208,16 +218,26 @@ static int piix4_setup(struct pci_dev *PIIX4_dev,
 				   "WARNING: SMBus interface has been FORCEFULLY ENABLED!\n");
 		} else {
 			dev_err(&PIIX4_dev->dev,
+<<<<<<< HEAD
 				"Host SMBus controller not enabled!\n");
+=======
+				"SMBus Host Controller not enabled!\n");
+>>>>>>> v3.18
 			release_region(piix4_smba, SMBIOSIZE);
 			return -ENODEV;
 		}
 	}
 
 	if (((temp & 0x0E) == 8) || ((temp & 0x0E) == 2))
+<<<<<<< HEAD
 		dev_dbg(&PIIX4_dev->dev, "Using Interrupt 9 for SMBus.\n");
 	else if ((temp & 0x0E) == 0)
 		dev_dbg(&PIIX4_dev->dev, "Using Interrupt SMI# for SMBus.\n");
+=======
+		dev_dbg(&PIIX4_dev->dev, "Using IRQ for SMBus\n");
+	else if ((temp & 0x0E) == 0)
+		dev_dbg(&PIIX4_dev->dev, "Using SMI# for SMBus\n");
+>>>>>>> v3.18
 	else
 		dev_err(&PIIX4_dev->dev, "Illegal Interrupt configuration "
 			"(or code out of date)!\n");
@@ -231,11 +251,20 @@ static int piix4_setup(struct pci_dev *PIIX4_dev,
 }
 
 static int piix4_setup_sb800(struct pci_dev *PIIX4_dev,
+<<<<<<< HEAD
 			     const struct pci_device_id *id)
 {
 	unsigned short piix4_smba;
 	unsigned short smba_idx = 0xcd6;
 	u8 smba_en_lo, smba_en_hi, i2ccfg, i2ccfg_offset = 0x10, smb_en = 0x2c;
+=======
+			     const struct pci_device_id *id, u8 aux)
+{
+	unsigned short piix4_smba;
+	unsigned short smba_idx = 0xcd6;
+	u8 smba_en_lo, smba_en_hi, smb_en, smb_en_status;
+	u8 i2ccfg, i2ccfg_offset = 0x10;
+>>>>>>> v3.18
 
 	/* SB800 and later SMBus does not support forcing address */
 	if (force || force_addr) {
@@ -245,6 +274,19 @@ static int piix4_setup_sb800(struct pci_dev *PIIX4_dev,
 	}
 
 	/* Determine the address of the SMBus areas */
+<<<<<<< HEAD
+=======
+	if ((PIIX4_dev->vendor == PCI_VENDOR_ID_AMD &&
+	     PIIX4_dev->device == PCI_DEVICE_ID_AMD_HUDSON2_SMBUS &&
+	     PIIX4_dev->revision >= 0x41) ||
+	    (PIIX4_dev->vendor == PCI_VENDOR_ID_AMD &&
+	     PIIX4_dev->device == 0x790b &&
+	     PIIX4_dev->revision >= 0x49))
+		smb_en = 0x00;
+	else
+		smb_en = (aux) ? 0x28 : 0x2c;
+
+>>>>>>> v3.18
 	if (!request_region(smba_idx, 2, "smba_idx")) {
 		dev_err(&PIIX4_dev->dev, "SMBus base address index region "
 			"0x%x already in use!\n", smba_idx);
@@ -256,6 +298,7 @@ static int piix4_setup_sb800(struct pci_dev *PIIX4_dev,
 	smba_en_hi = inb_p(smba_idx + 1);
 	release_region(smba_idx, 2);
 
+<<<<<<< HEAD
 	if ((smba_en_lo & 1) == 0) {
 		dev_err(&PIIX4_dev->dev,
 			"Host SMBus controller not enabled!\n");
@@ -263,6 +306,24 @@ static int piix4_setup_sb800(struct pci_dev *PIIX4_dev,
 	}
 
 	piix4_smba = ((smba_en_hi << 8) | smba_en_lo) & 0xffe0;
+=======
+	if (!smb_en) {
+		smb_en_status = smba_en_lo & 0x10;
+		piix4_smba = smba_en_hi << 8;
+		if (aux)
+			piix4_smba |= 0x20;
+	} else {
+		smb_en_status = smba_en_lo & 0x01;
+		piix4_smba = ((smba_en_hi << 8) | smba_en_lo) & 0xffe0;
+	}
+
+	if (!smb_en_status) {
+		dev_err(&PIIX4_dev->dev,
+			"SMBus Host Controller not enabled!\n");
+		return -ENODEV;
+	}
+
+>>>>>>> v3.18
 	if (acpi_check_region(piix4_smba, SMBIOSIZE, piix4_driver.name))
 		return -ENODEV;
 
@@ -272,6 +333,17 @@ static int piix4_setup_sb800(struct pci_dev *PIIX4_dev,
 		return -EBUSY;
 	}
 
+<<<<<<< HEAD
+=======
+	/* Aux SMBus does not support IRQ information */
+	if (aux) {
+		dev_info(&PIIX4_dev->dev,
+			 "Auxiliary SMBus Host Controller at 0x%x\n",
+			 piix4_smba);
+		return piix4_smba;
+	}
+
+>>>>>>> v3.18
 	/* Request the SMBus I2C bus config region */
 	if (!request_region(piix4_smba + i2ccfg_offset, 1, "i2ccfg")) {
 		dev_err(&PIIX4_dev->dev, "SMBus I2C bus config region "
@@ -283,9 +355,15 @@ static int piix4_setup_sb800(struct pci_dev *PIIX4_dev,
 	release_region(piix4_smba + i2ccfg_offset, 1);
 
 	if (i2ccfg & 1)
+<<<<<<< HEAD
 		dev_dbg(&PIIX4_dev->dev, "Using IRQ for SMBus.\n");
 	else
 		dev_dbg(&PIIX4_dev->dev, "Using SMI# for SMBus.\n");
+=======
+		dev_dbg(&PIIX4_dev->dev, "Using IRQ for SMBus\n");
+	else
+		dev_dbg(&PIIX4_dev->dev, "Using SMI# for SMBus\n");
+>>>>>>> v3.18
 
 	dev_info(&PIIX4_dev->dev,
 		 "SMBus Host Controller at 0x%x, revision %d\n",
@@ -513,7 +591,11 @@ static const struct i2c_algorithm smbus_algorithm = {
 	.functionality	= piix4_func,
 };
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(piix4_ids) = {
+=======
+static const struct pci_device_id piix4_ids[] = {
+>>>>>>> v3.18
 	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_82371AB_3) },
 	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_82443MX_3) },
 	{ PCI_DEVICE(PCI_VENDOR_ID_EFAR, PCI_DEVICE_ID_EFAR_SLC90E66_3) },
@@ -597,7 +679,11 @@ static int piix4_probe(struct pci_dev *dev, const struct pci_device_id *id)
 	     dev->revision >= 0x40) ||
 	    dev->vendor == PCI_VENDOR_ID_AMD)
 		/* base address location etc changed in SB800 */
+<<<<<<< HEAD
 		retval = piix4_setup_sb800(dev, id);
+=======
+		retval = piix4_setup_sb800(dev, id, 0);
+>>>>>>> v3.18
 	else
 		retval = piix4_setup(dev, id);
 
@@ -611,6 +697,7 @@ static int piix4_probe(struct pci_dev *dev, const struct pci_device_id *id)
 		return retval;
 
 	/* Check for auxiliary SMBus on some AMD chipsets */
+<<<<<<< HEAD
 	if (dev->vendor == PCI_VENDOR_ID_ATI &&
 	    dev->device == PCI_DEVICE_ID_ATI_SBX00_SMBUS &&
 	    dev->revision < 0x40) {
@@ -622,6 +709,31 @@ static int piix4_probe(struct pci_dev *dev, const struct pci_device_id *id)
 		}
 	}
 
+=======
+	retval = -ENODEV;
+
+	if (dev->vendor == PCI_VENDOR_ID_ATI &&
+	    dev->device == PCI_DEVICE_ID_ATI_SBX00_SMBUS) {
+		if (dev->revision < 0x40) {
+			retval = piix4_setup_aux(dev, id, 0x58);
+		} else {
+			/* SB800 added aux bus too */
+			retval = piix4_setup_sb800(dev, id, 1);
+		}
+	}
+
+	if (dev->vendor == PCI_VENDOR_ID_AMD &&
+	    dev->device == PCI_DEVICE_ID_AMD_HUDSON2_SMBUS) {
+		retval = piix4_setup_sb800(dev, id, 1);
+	}
+
+	if (retval > 0) {
+		/* Try to add the aux adapter if it exists,
+		 * piix4_add_adapter will clean up if this fails */
+		piix4_add_adapter(dev, retval, &piix4_aux_adapter);
+	}
+
+>>>>>>> v3.18
 	return 0;
 }
 

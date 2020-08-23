@@ -10,10 +10,18 @@ generic-y += emergency-restart.h
 generic-y += errno.h
 generic-y += fb.h
 generic-y += futex.h
+<<<<<<< HEAD
+=======
+generic-y += hash.h
+>>>>>>> v3.18
 generic-y += hw_irq.h
 generic-y += ioctl.h
 generic-y += ipcbuf.h
 generic-y += irq_regs.h
+<<<<<<< HEAD
+=======
+generic-y += irq_work.h
+>>>>>>> v3.18
 generic-y += kdebug.h
 generic-y += kmap_types.h
 generic-y += kvm_para.h
@@ -26,6 +34,10 @@ generic-y += mutex.h
 generic-y += param.h
 generic-y += percpu.h
 generic-y += pgalloc.h
+<<<<<<< HEAD
+=======
+generic-y += preempt.h
+>>>>>>> v3.18
 generic-y += resource.h
 generic-y += scatterlist.h
 generic-y += sembuf.h

@@ -99,7 +99,11 @@ struct iommu_regs {
 #define IOPTE_WAZ           0x00000001 /* Write as zeros */
 
 struct iommu_struct {
+<<<<<<< HEAD
 	struct iommu_regs *regs;
+=======
+	struct iommu_regs __iomem *regs;
+>>>>>>> v3.18
 	iopte_t *page_table;
 	/* For convenience */
 	unsigned long start; /* First managed virtual address */
@@ -108,6 +112,7 @@ struct iommu_struct {
 	struct bit_map usemap;
 };
 
+<<<<<<< HEAD
 static inline void iommu_invalidate(struct iommu_regs *regs)
 {
 	regs->tlbflush = 0;
@@ -116,6 +121,16 @@ static inline void iommu_invalidate(struct iommu_regs *regs)
 static inline void iommu_invalidate_page(struct iommu_regs *regs, unsigned long ba)
 {
 	regs->pageflush = (ba & PAGE_MASK);
+=======
+static inline void iommu_invalidate(struct iommu_regs __iomem *regs)
+{
+	sbus_writel(0, &regs->tlbflush);
+}
+
+static inline void iommu_invalidate_page(struct iommu_regs __iomem *regs, unsigned long ba)
+{
+	sbus_writel(ba & PAGE_MASK, &regs->pageflush);
+>>>>>>> v3.18
 }
 
 #endif /* !(_SPARC_IOMMU_H) */

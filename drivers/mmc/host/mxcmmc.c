@@ -124,9 +124,14 @@ enum mxcmci_type {
 
 struct mxcmci_host {
 	struct mmc_host		*mmc;
+<<<<<<< HEAD
 	struct resource		*res;
 	void __iomem		*base;
 	int			irq;
+=======
+	void __iomem		*base;
+	dma_addr_t		phys_base;
+>>>>>>> v3.18
 	int			detect_irq;
 	struct dma_chan		*dma;
 	struct dma_async_tx_descriptor *desc;
@@ -154,8 +159,11 @@ struct mxcmci_host {
 	struct work_struct	datawork;
 	spinlock_t		lock;
 
+<<<<<<< HEAD
 	struct regulator	*vcc;
 
+=======
+>>>>>>> v3.18
 	int			burstlen;
 	int			dmareq;
 	struct dma_slave_config dma_slave_config;
@@ -241,6 +249,7 @@ static inline void mxcmci_writew(struct mxcmci_host *host, u16 val, int reg)
 
 static void mxcmci_set_clk_rate(struct mxcmci_host *host, unsigned int clk_ios);
 
+<<<<<<< HEAD
 static inline void mxcmci_init_ocr(struct mxcmci_host *host)
 {
 	host->vcc = regulator_get(mmc_dev(host->mmc), "vmmc");
@@ -272,6 +281,17 @@ static inline void mxcmci_set_power(struct mxcmci_host *host,
 			mmc_regulator_set_ocr(host->mmc, host->vcc, vdd);
 		else if (power_mode == MMC_POWER_OFF)
 			mmc_regulator_set_ocr(host->mmc, host->vcc, 0);
+=======
+static void mxcmci_set_power(struct mxcmci_host *host, unsigned int vdd)
+{
+	if (!IS_ERR(host->mmc->supply.vmmc)) {
+		if (host->power_mode == MMC_POWER_UP)
+			mmc_regulator_set_ocr(host->mmc,
+					      host->mmc->supply.vmmc, vdd);
+		else if (host->power_mode == MMC_POWER_OFF)
+			mmc_regulator_set_ocr(host->mmc,
+					      host->mmc->supply.vmmc, 0);
+>>>>>>> v3.18
 	}
 
 	if (host->pdata && host->pdata->setpower)
@@ -299,7 +319,10 @@ static void mxcmci_softreset(struct mxcmci_host *host)
 
 	mxcmci_writew(host, 0xff, MMC_REG_RES_TO);
 }
+<<<<<<< HEAD
 static int mxcmci_setup_dma(struct mmc_host *mmc);
+=======
+>>>>>>> v3.18
 
 #if IS_ENABLED(CONFIG_PPC_MPC512x)
 static inline void buffer_swap32(u32 *buf, int len)
@@ -868,8 +891,13 @@ static int mxcmci_setup_dma(struct mmc_host *mmc)
 	struct mxcmci_host *host = mmc_priv(mmc);
 	struct dma_slave_config *config = &host->dma_slave_config;
 
+<<<<<<< HEAD
 	config->dst_addr = host->res->start + MMC_REG_BUFFER_ACCESS;
 	config->src_addr = host->res->start + MMC_REG_BUFFER_ACCESS;
+=======
+	config->dst_addr = host->phys_base + MMC_REG_BUFFER_ACCESS;
+	config->src_addr = host->phys_base + MMC_REG_BUFFER_ACCESS;
+>>>>>>> v3.18
 	config->dst_addr_width = 4;
 	config->src_addr_width = 4;
 	config->dst_maxburst = host->burstlen;
@@ -911,8 +939,13 @@ static void mxcmci_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 		host->cmdat &= ~CMD_DAT_CONT_BUS_WIDTH_4;
 
 	if (host->power_mode != ios->power_mode) {
+<<<<<<< HEAD
 		mxcmci_set_power(host, ios->power_mode, ios->vdd);
 		host->power_mode = ios->power_mode;
+=======
+		host->power_mode = ios->power_mode;
+		mxcmci_set_power(host, ios->vdd);
+>>>>>>> v3.18
 
 		if (ios->power_mode == MMC_POWER_ON)
 			host->cmdat |= CMD_DAT_CONT_INIT;
@@ -1040,8 +1073,13 @@ static const struct mmc_host_ops mxcmci_ops = {
 static int mxcmci_probe(struct platform_device *pdev)
 {
 	struct mmc_host *mmc;
+<<<<<<< HEAD
 	struct mxcmci_host *host = NULL;
 	struct resource *iores, *r;
+=======
+	struct mxcmci_host *host;
+	struct resource *res;
+>>>>>>> v3.18
 	int ret = 0, irq;
 	bool dat3_card_detect = false;
 	dma_cap_mask_t mask;
@@ -1052,6 +1090,7 @@ static int mxcmci_probe(struct platform_device *pdev)
 
 	of_id = of_match_device(mxcmci_of_match, &pdev->dev);
 
+<<<<<<< HEAD
 	iores = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	irq = platform_get_irq(pdev, 0);
 	if (!iores || irq < 0)
@@ -1068,6 +1107,30 @@ static int mxcmci_probe(struct platform_device *pdev)
 	}
 
 	mmc_of_parse(mmc);
+=======
+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+	irq = platform_get_irq(pdev, 0);
+	if (irq < 0)
+		return -EINVAL;
+
+	mmc = mmc_alloc_host(sizeof(*host), &pdev->dev);
+	if (!mmc)
+		return -ENOMEM;
+
+	host = mmc_priv(mmc);
+
+	host->base = devm_ioremap_resource(&pdev->dev, res);
+	if (IS_ERR(host->base)) {
+		ret = PTR_ERR(host->base);
+		goto out_free;
+	}
+
+	host->phys_base = res->start;
+
+	ret = mmc_of_parse(mmc);
+	if (ret)
+		goto out_free;
+>>>>>>> v3.18
 	mmc->ops = &mxcmci_ops;
 
 	/* For devicetree parsing, the bus width is read from devicetree */
@@ -1082,6 +1145,7 @@ static int mxcmci_probe(struct platform_device *pdev)
 	mmc->max_req_size = mmc->max_blk_size * mmc->max_blk_count;
 	mmc->max_seg_size = mmc->max_req_size;
 
+<<<<<<< HEAD
 	host = mmc_priv(mmc);
 	host->base = ioremap(r->start, resource_size(r));
 	if (!host->base) {
@@ -1089,6 +1153,8 @@ static int mxcmci_probe(struct platform_device *pdev)
 		goto out_free;
 	}
 
+=======
+>>>>>>> v3.18
 	if (of_id) {
 		const struct platform_device_id *id_entry = of_id->data;
 		host->devtype = id_entry->driver_data;
@@ -1110,7 +1176,18 @@ static int mxcmci_probe(struct platform_device *pdev)
 			&& !of_property_read_bool(pdev->dev.of_node, "cd-gpios"))
 		dat3_card_detect = true;
 
+<<<<<<< HEAD
 	mxcmci_init_ocr(host);
+=======
+	ret = mmc_regulator_get_supply(mmc);
+	if (ret) {
+		if (pdata && ret != -EPROBE_DEFER)
+			mmc->ocr_avail = pdata->ocr_avail ? :
+				MMC_VDD_32_33 | MMC_VDD_33_34;
+		else
+			goto out_free;
+	}
+>>>>>>> v3.18
 
 	if (dat3_card_detect)
 		host->default_irq_mask =
@@ -1118,6 +1195,7 @@ static int mxcmci_probe(struct platform_device *pdev)
 	else
 		host->default_irq_mask = 0;
 
+<<<<<<< HEAD
 	host->res = r;
 	host->irq = irq;
 
@@ -1125,12 +1203,22 @@ static int mxcmci_probe(struct platform_device *pdev)
 	if (IS_ERR(host->clk_ipg)) {
 		ret = PTR_ERR(host->clk_ipg);
 		goto out_iounmap;
+=======
+	host->clk_ipg = devm_clk_get(&pdev->dev, "ipg");
+	if (IS_ERR(host->clk_ipg)) {
+		ret = PTR_ERR(host->clk_ipg);
+		goto out_free;
+>>>>>>> v3.18
 	}
 
 	host->clk_per = devm_clk_get(&pdev->dev, "per");
 	if (IS_ERR(host->clk_per)) {
 		ret = PTR_ERR(host->clk_per);
+<<<<<<< HEAD
 		goto out_iounmap;
+=======
+		goto out_free;
+>>>>>>> v3.18
 	}
 
 	clk_prepare_enable(host->clk_per);
@@ -1157,9 +1245,15 @@ static int mxcmci_probe(struct platform_device *pdev)
 	if (!host->pdata) {
 		host->dma = dma_request_slave_channel(&pdev->dev, "rx-tx");
 	} else {
+<<<<<<< HEAD
 		r = platform_get_resource(pdev, IORESOURCE_DMA, 0);
 		if (r) {
 			host->dmareq = r->start;
+=======
+		res = platform_get_resource(pdev, IORESOURCE_DMA, 0);
+		if (res) {
+			host->dmareq = res->start;
+>>>>>>> v3.18
 			host->dma_data.peripheral_type = IMX_DMATYPE_SDHC;
 			host->dma_data.priority = DMA_PRIO_LOW;
 			host->dma_data.dma_request = host->dmareq;
@@ -1176,7 +1270,12 @@ static int mxcmci_probe(struct platform_device *pdev)
 
 	INIT_WORK(&host->datawork, mxcmci_datawork);
 
+<<<<<<< HEAD
 	ret = request_irq(host->irq, mxcmci_irq, 0, DRIVER_NAME, host);
+=======
+	ret = devm_request_irq(&pdev->dev, irq, mxcmci_irq, 0,
+			       dev_name(&pdev->dev), host);
+>>>>>>> v3.18
 	if (ret)
 		goto out_free_dma;
 
@@ -1186,7 +1285,11 @@ static int mxcmci_probe(struct platform_device *pdev)
 		ret = host->pdata->init(&pdev->dev, mxcmci_detect_irq,
 				host->mmc);
 		if (ret)
+<<<<<<< HEAD
 			goto out_free_irq;
+=======
+			goto out_free_dma;
+>>>>>>> v3.18
 	}
 
 	init_timer(&host->watchdog);
@@ -1197,6 +1300,7 @@ static int mxcmci_probe(struct platform_device *pdev)
 
 	return 0;
 
+<<<<<<< HEAD
 out_free_irq:
 	free_irq(host->irq, host);
 out_free_dma:
@@ -1211,6 +1315,19 @@ out_free:
 	mmc_free_host(mmc);
 out_release_mem:
 	release_mem_region(iores->start, resource_size(iores));
+=======
+out_free_dma:
+	if (host->dma)
+		dma_release_channel(host->dma);
+
+out_clk_put:
+	clk_disable_unprepare(host->clk_per);
+	clk_disable_unprepare(host->clk_ipg);
+
+out_free:
+	mmc_free_host(mmc);
+
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -1219,6 +1336,7 @@ static int mxcmci_remove(struct platform_device *pdev)
 	struct mmc_host *mmc = platform_get_drvdata(pdev);
 	struct mxcmci_host *host = mmc_priv(mmc);
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
 	mmc_remove_host(mmc);
@@ -1232,19 +1350,30 @@ static int mxcmci_remove(struct platform_device *pdev)
 	free_irq(host->irq, host);
 	iounmap(host->base);
 
+=======
+	mmc_remove_host(mmc);
+
+	if (host->pdata && host->pdata->exit)
+		host->pdata->exit(&pdev->dev, mmc);
+
+>>>>>>> v3.18
 	if (host->dma)
 		dma_release_channel(host->dma);
 
 	clk_disable_unprepare(host->clk_per);
 	clk_disable_unprepare(host->clk_ipg);
 
+<<<<<<< HEAD
 	release_mem_region(host->res->start, resource_size(host->res));
 
+=======
+>>>>>>> v3.18
 	mmc_free_host(mmc);
 
 	return 0;
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 static int mxcmci_suspend(struct device *dev)
 {
@@ -1279,6 +1408,29 @@ static const struct dev_pm_ops mxcmci_pm_ops = {
 	.resume		= mxcmci_resume,
 };
 #endif
+=======
+static int __maybe_unused mxcmci_suspend(struct device *dev)
+{
+	struct mmc_host *mmc = dev_get_drvdata(dev);
+	struct mxcmci_host *host = mmc_priv(mmc);
+
+	clk_disable_unprepare(host->clk_per);
+	clk_disable_unprepare(host->clk_ipg);
+	return 0;
+}
+
+static int __maybe_unused mxcmci_resume(struct device *dev)
+{
+	struct mmc_host *mmc = dev_get_drvdata(dev);
+	struct mxcmci_host *host = mmc_priv(mmc);
+
+	clk_prepare_enable(host->clk_per);
+	clk_prepare_enable(host->clk_ipg);
+	return 0;
+}
+
+static SIMPLE_DEV_PM_OPS(mxcmci_pm_ops, mxcmci_suspend, mxcmci_resume);
+>>>>>>> v3.18
 
 static struct platform_driver mxcmci_driver = {
 	.probe		= mxcmci_probe,
@@ -1286,10 +1438,14 @@ static struct platform_driver mxcmci_driver = {
 	.id_table	= mxcmci_devtype,
 	.driver		= {
 		.name		= DRIVER_NAME,
+<<<<<<< HEAD
 		.owner		= THIS_MODULE,
 #ifdef CONFIG_PM
 		.pm	= &mxcmci_pm_ops,
 #endif
+=======
+		.pm	= &mxcmci_pm_ops,
+>>>>>>> v3.18
 		.of_match_table	= mxcmci_of_match,
 	}
 };

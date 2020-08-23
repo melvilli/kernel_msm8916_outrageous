@@ -21,7 +21,11 @@
 
 #include "dvb_usb_common.h"
 
+<<<<<<< HEAD
 int dvb_usbv2_disable_rc_polling;
+=======
+static int dvb_usbv2_disable_rc_polling;
+>>>>>>> v3.18
 module_param_named(disable_rc_polling, dvb_usbv2_disable_rc_polling, int, 0644);
 MODULE_PARM_DESC(disable_rc_polling,
 		"disable remote control polling (default: 0)");
@@ -164,7 +168,11 @@ static int dvb_usbv2_remote_init(struct dvb_usb_device *d)
 	dev->driver_name = (char *) d->props->driver_name;
 	dev->map_name = d->rc.map_name;
 	dev->driver_type = d->rc.driver_type;
+<<<<<<< HEAD
 	dev->allowed_protos = d->rc.allowed_protos;
+=======
+	dev->allowed_protocols = d->rc.allowed_protos;
+>>>>>>> v3.18
 	dev->change_protocol = d->rc.change_protocol;
 	dev->priv = d;
 
@@ -253,6 +261,7 @@ static int dvb_usbv2_adapter_stream_exit(struct dvb_usb_adapter *adap)
 	return usb_urb_exitv2(&adap->stream);
 }
 
+<<<<<<< HEAD
 static int wait_schedule(void *ptr)
 {
 	schedule();
@@ -260,6 +269,8 @@ static int wait_schedule(void *ptr)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 static int dvb_usb_start_feed(struct dvb_demux_feed *dvbdmxfeed)
 {
 	struct dvb_usb_adapter *adap = dvbdmxfeed->demux->priv;
@@ -273,8 +284,12 @@ static int dvb_usb_start_feed(struct dvb_demux_feed *dvbdmxfeed)
 			dvbdmxfeed->pid, dvbdmxfeed->index);
 
 	/* wait init is done */
+<<<<<<< HEAD
 	wait_on_bit(&adap->state_bits, ADAP_INIT, wait_schedule,
 			TASK_UNINTERRUPTIBLE);
+=======
+	wait_on_bit(&adap->state_bits, ADAP_INIT, TASK_UNINTERRUPTIBLE);
+>>>>>>> v3.18
 
 	if (adap->active_fe == -1)
 		return -EINVAL;
@@ -568,7 +583,11 @@ static int dvb_usb_fe_sleep(struct dvb_frontend *fe)
 
 	if (!adap->suspend_resume_active) {
 		set_bit(ADAP_SLEEP, &adap->state_bits);
+<<<<<<< HEAD
 		wait_on_bit(&adap->state_bits, ADAP_STREAMING, wait_schedule,
+=======
+		wait_on_bit(&adap->state_bits, ADAP_STREAMING,
+>>>>>>> v3.18
 				TASK_UNINTERRUPTIBLE);
 	}
 
@@ -672,9 +691,16 @@ err:
 
 static int dvb_usbv2_adapter_frontend_exit(struct dvb_usb_adapter *adap)
 {
+<<<<<<< HEAD
 	int i;
 	dev_dbg(&adap_to_d(adap)->udev->dev, "%s: adap=%d\n", __func__,
 			adap->id);
+=======
+	int ret, i;
+	struct dvb_usb_device *d = adap_to_d(adap);
+
+	dev_dbg(&d->udev->dev, "%s: adap=%d\n", __func__, adap->id);
+>>>>>>> v3.18
 
 	for (i = MAX_NO_OF_FE_PER_ADAP - 1; i >= 0; i--) {
 		if (adap->fe[i]) {
@@ -683,6 +709,26 @@ static int dvb_usbv2_adapter_frontend_exit(struct dvb_usb_adapter *adap)
 		}
 	}
 
+<<<<<<< HEAD
+=======
+	if (d->props->tuner_detach) {
+		ret = d->props->tuner_detach(adap);
+		if (ret < 0) {
+			dev_dbg(&d->udev->dev, "%s: tuner_detach() failed=%d\n",
+					__func__, ret);
+		}
+	}
+
+	if (d->props->frontend_detach) {
+		ret = d->props->frontend_detach(adap);
+		if (ret < 0) {
+			dev_dbg(&d->udev->dev,
+					"%s: frontend_detach() failed=%d\n",
+					__func__, ret);
+		}
+	}
+
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -770,9 +816,15 @@ static int dvb_usbv2_adapter_exit(struct dvb_usb_device *d)
 
 	for (i = MAX_NO_OF_ADAPTER_PER_DEVICE - 1; i >= 0; i--) {
 		if (d->adapter[i].props) {
+<<<<<<< HEAD
 			dvb_usbv2_adapter_frontend_exit(&d->adapter[i]);
 			dvb_usbv2_adapter_dvb_exit(&d->adapter[i]);
 			dvb_usbv2_adapter_stream_exit(&d->adapter[i]);
+=======
+			dvb_usbv2_adapter_dvb_exit(&d->adapter[i]);
+			dvb_usbv2_adapter_stream_exit(&d->adapter[i]);
+			dvb_usbv2_adapter_frontend_exit(&d->adapter[i]);
+>>>>>>> v3.18
 		}
 	}
 
@@ -833,6 +885,7 @@ err:
 	return ret;
 }
 
+<<<<<<< HEAD
 /*
  * udev, which is used for the firmware downloading, requires we cannot
  * block during module_init(). module_init() calls USB probe() which
@@ -847,6 +900,46 @@ static void dvb_usbv2_init_work(struct work_struct *work)
 
 	d->work_pid = current->pid;
 	dev_dbg(&d->udev->dev, "%s: work_pid=%d\n", __func__, d->work_pid);
+=======
+int dvb_usbv2_probe(struct usb_interface *intf,
+		const struct usb_device_id *id)
+{
+	int ret;
+	struct dvb_usb_device *d;
+	struct usb_device *udev = interface_to_usbdev(intf);
+	struct dvb_usb_driver_info *driver_info =
+			(struct dvb_usb_driver_info *) id->driver_info;
+
+	dev_dbg(&udev->dev, "%s: bInterfaceNumber=%d\n", __func__,
+			intf->cur_altsetting->desc.bInterfaceNumber);
+
+	if (!id->driver_info) {
+		dev_err(&udev->dev, "%s: driver_info failed\n", KBUILD_MODNAME);
+		ret = -ENODEV;
+		goto err;
+	}
+
+	d = kzalloc(sizeof(struct dvb_usb_device), GFP_KERNEL);
+	if (!d) {
+		dev_err(&udev->dev, "%s: kzalloc() failed\n", KBUILD_MODNAME);
+		ret = -ENOMEM;
+		goto err;
+	}
+
+	d->name = driver_info->name;
+	d->rc_map = driver_info->rc_map;
+	d->udev = udev;
+	d->props = driver_info->props;
+
+	if (intf->cur_altsetting->desc.bInterfaceNumber !=
+			d->props->bInterfaceNumber) {
+		ret = -ENODEV;
+		goto err_free_all;
+	}
+
+	mutex_init(&d->usb_mutex);
+	mutex_init(&d->i2c_mutex);
+>>>>>>> v3.18
 
 	if (d->props->size_of_priv) {
 		d->priv = kzalloc(d->props->size_of_priv, GFP_KERNEL);
@@ -854,7 +947,11 @@ static void dvb_usbv2_init_work(struct work_struct *work)
 			dev_err(&d->udev->dev, "%s: kzalloc() failed\n",
 					KBUILD_MODNAME);
 			ret = -ENOMEM;
+<<<<<<< HEAD
 			goto err_usb_driver_release_interface;
+=======
+			goto err_free_all;
+>>>>>>> v3.18
 		}
 	}
 
@@ -884,6 +981,7 @@ static void dvb_usbv2_init_work(struct work_struct *work)
 				 * device. As 'new' device is warm we should
 				 * never go here again.
 				 */
+<<<<<<< HEAD
 				return;
 			} else {
 				/*
@@ -898,6 +996,14 @@ static void dvb_usbv2_init_work(struct work_struct *work)
 			}
 		} else {
 			goto err_usb_driver_release_interface;
+=======
+				goto exit;
+			} else {
+				goto err_free_all;
+			}
+		} else {
+			goto err_free_all;
+>>>>>>> v3.18
 		}
 	}
 
@@ -906,11 +1012,16 @@ static void dvb_usbv2_init_work(struct work_struct *work)
 
 	ret = dvb_usbv2_init(d);
 	if (ret < 0)
+<<<<<<< HEAD
 		goto err_usb_driver_release_interface;
+=======
+		goto err_free_all;
+>>>>>>> v3.18
 
 	dev_info(&d->udev->dev,
 			"%s: '%s' successfully initialized and connected\n",
 			KBUILD_MODNAME, d->name);
+<<<<<<< HEAD
 
 	return;
 err_usb_driver_release_interface:
@@ -973,6 +1084,14 @@ int dvb_usbv2_probe(struct usb_interface *intf,
 	return 0;
 err_kfree:
 	kfree(d);
+=======
+exit:
+	usb_set_intfdata(intf, d);
+
+	return 0;
+err_free_all:
+	dvb_usbv2_exit(d);
+>>>>>>> v3.18
 err:
 	dev_dbg(&udev->dev, "%s: failed=%d\n", __func__, ret);
 	return ret;
@@ -984,12 +1103,17 @@ void dvb_usbv2_disconnect(struct usb_interface *intf)
 	struct dvb_usb_device *d = usb_get_intfdata(intf);
 	const char *name = d->name;
 	struct device dev = d->udev->dev;
+<<<<<<< HEAD
 	dev_dbg(&d->udev->dev, "%s: pid=%d work_pid=%d\n", __func__,
 			current->pid, d->work_pid);
 
 	/* ensure initialization work is finished until release resources */
 	if (d->work_pid != current->pid)
 		cancel_work_sync(&d->probe_work);
+=======
+	dev_dbg(&d->udev->dev, "%s: bInterfaceNumber=%d\n", __func__,
+			intf->cur_altsetting->desc.bInterfaceNumber);
+>>>>>>> v3.18
 
 	if (d->props->exit)
 		d->props->exit(d);

@@ -52,7 +52,10 @@
 #include <linux/mutex.h>
 #include <linux/sctp.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
 #include <linux/sctp.h>
+=======
+>>>>>>> v3.18
 #include <net/sctp/sctp.h>
 #include <net/ipv6.h>
 
@@ -126,6 +129,10 @@ struct connection {
 	struct connection *othercon;
 	struct work_struct rwork; /* Receive workqueue */
 	struct work_struct swork; /* Send workqueue */
+<<<<<<< HEAD
+=======
+	bool try_new_addr;
+>>>>>>> v3.18
 };
 #define sock2con(x) ((struct connection *)(x)->sk_user_data)
 
@@ -144,6 +151,10 @@ struct dlm_node_addr {
 	struct list_head list;
 	int nodeid;
 	int addr_count;
+<<<<<<< HEAD
+=======
+	int curr_addr_index;
+>>>>>>> v3.18
 	struct sockaddr_storage *addr[DLM_MAX_ADDR_COUNT];
 };
 
@@ -310,7 +321,11 @@ static int addr_compare(struct sockaddr_storage *x, struct sockaddr_storage *y)
 }
 
 static int nodeid_to_addr(int nodeid, struct sockaddr_storage *sas_out,
+<<<<<<< HEAD
 			  struct sockaddr *sa_out)
+=======
+			  struct sockaddr *sa_out, bool try_new_addr)
+>>>>>>> v3.18
 {
 	struct sockaddr_storage sas;
 	struct dlm_node_addr *na;
@@ -320,8 +335,21 @@ static int nodeid_to_addr(int nodeid, struct sockaddr_storage *sas_out,
 
 	spin_lock(&dlm_node_addrs_spin);
 	na = find_node_addr(nodeid);
+<<<<<<< HEAD
 	if (na && na->addr_count)
 		memcpy(&sas, na->addr[0], sizeof(struct sockaddr_storage));
+=======
+	if (na && na->addr_count) {
+		if (try_new_addr) {
+			na->curr_addr_index++;
+			if (na->curr_addr_index == na->addr_count)
+				na->curr_addr_index = 0;
+		}
+
+		memcpy(&sas, na->addr[na->curr_addr_index ],
+			sizeof(struct sockaddr_storage));
+	}
+>>>>>>> v3.18
 	spin_unlock(&dlm_node_addrs_spin);
 
 	if (!na)
@@ -353,12 +381,17 @@ static int addr_to_nodeid(struct sockaddr_storage *addr, int *nodeid)
 {
 	struct dlm_node_addr *na;
 	int rv = -EEXIST;
+<<<<<<< HEAD
+=======
+	int addr_i;
+>>>>>>> v3.18
 
 	spin_lock(&dlm_node_addrs_spin);
 	list_for_each_entry(na, &dlm_node_addrs, list) {
 		if (!na->addr_count)
 			continue;
 
+<<<<<<< HEAD
 		if (!addr_compare(na->addr[0], addr))
 			continue;
 
@@ -366,6 +399,17 @@ static int addr_to_nodeid(struct sockaddr_storage *addr, int *nodeid)
 		rv = 0;
 		break;
 	}
+=======
+		for (addr_i = 0; addr_i < na->addr_count; addr_i++) {
+			if (addr_compare(na->addr[addr_i], addr)) {
+				*nodeid = na->nodeid;
+				rv = 0;
+				goto unlock;
+			}
+		}
+	}
+unlock:
+>>>>>>> v3.18
 	spin_unlock(&dlm_node_addrs_spin);
 	return rv;
 }
@@ -412,7 +456,11 @@ int dlm_lowcomms_addr(int nodeid, struct sockaddr_storage *addr, int len)
 }
 
 /* Data available on socket or listen socket received a connect */
+<<<<<<< HEAD
 static void lowcomms_data_ready(struct sock *sk, int count_unused)
+=======
+static void lowcomms_data_ready(struct sock *sk)
+>>>>>>> v3.18
 {
 	struct connection *con = sock2con(sk);
 	if (con && !test_and_set_bit(CF_READ_PENDING, &con->flags))
@@ -561,8 +609,28 @@ static void sctp_send_shutdown(sctp_assoc_t associd)
 
 static void sctp_init_failed_foreach(struct connection *con)
 {
+<<<<<<< HEAD
 	con->sctp_assoc = 0;
 	if (test_and_clear_bit(CF_CONNECT_PENDING, &con->flags)) {
+=======
+
+	/*
+	 * Don't try to recover base con and handle race where the
+	 * other node's assoc init creates a assoc and we get that
+	 * notification, then we get a notification that our attempt
+	 * failed due. This happens when we are still trying the primary
+	 * address, but the other node has already tried secondary addrs
+	 * and found one that worked.
+	 */
+	if (!con->nodeid || con->sctp_assoc)
+		return;
+
+	log_print("Retrying SCTP association init for node %d\n", con->nodeid);
+
+	con->try_new_addr = true;
+	con->sctp_assoc = 0;
+	if (test_and_clear_bit(CF_INIT_PENDING, &con->flags)) {
+>>>>>>> v3.18
 		if (!test_and_set_bit(CF_WRITE_PENDING, &con->flags))
 			queue_work(send_workqueue, &con->swork);
 	}
@@ -579,15 +647,72 @@ static void sctp_init_failed(void)
 	mutex_unlock(&connections_lock);
 }
 
+<<<<<<< HEAD
+=======
+static void retry_failed_sctp_send(struct connection *recv_con,
+				   struct sctp_send_failed *sn_send_failed,
+				   char *buf)
+{
+	int len = sn_send_failed->ssf_length - sizeof(struct sctp_send_failed);
+	struct dlm_mhandle *mh;
+	struct connection *con;
+	char *retry_buf;
+	int nodeid = sn_send_failed->ssf_info.sinfo_ppid;
+
+	log_print("Retry sending %d bytes to node id %d", len, nodeid);
+	
+	if (!nodeid) {
+		log_print("Shouldn't resend data via listening connection.");
+		return;
+	}
+
+	con = nodeid2con(nodeid, 0);
+	if (!con) {
+		log_print("Could not look up con for nodeid %d\n",
+			  nodeid);
+		return;
+	}
+
+	mh = dlm_lowcomms_get_buffer(nodeid, len, GFP_NOFS, &retry_buf);
+	if (!mh) {
+		log_print("Could not allocate buf for retry.");
+		return;
+	}
+	memcpy(retry_buf, buf + sizeof(struct sctp_send_failed), len);
+	dlm_lowcomms_commit_buffer(mh);
+
+	/*
+	 * If we got a assoc changed event before the send failed event then
+	 * we only need to retry the send.
+	 */
+	if (con->sctp_assoc) {
+		if (!test_and_set_bit(CF_WRITE_PENDING, &con->flags))
+			queue_work(send_workqueue, &con->swork);
+	} else
+		sctp_init_failed_foreach(con);
+}
+
+>>>>>>> v3.18
 /* Something happened to an association */
 static void process_sctp_notification(struct connection *con,
 				      struct msghdr *msg, char *buf)
 {
 	union sctp_notification *sn = (union sctp_notification *)buf;
+<<<<<<< HEAD
 
 	if (sn->sn_header.sn_type == SCTP_ASSOC_CHANGE) {
 		switch (sn->sn_assoc_change.sac_state) {
 
+=======
+	struct linger linger;
+
+	switch (sn->sn_header.sn_type) {
+	case SCTP_SEND_FAILED:
+		retry_failed_sctp_send(con, &sn->sn_send_failed, buf);
+		break;
+	case SCTP_ASSOC_CHANGE:
+		switch (sn->sn_assoc_change.sac_state) {
+>>>>>>> v3.18
 		case SCTP_COMM_UP:
 		case SCTP_RESTART:
 		{
@@ -645,11 +770,19 @@ static void process_sctp_notification(struct connection *con,
 				return;
 
 			/* Peel off a new sock */
+<<<<<<< HEAD
 			sctp_lock_sock(con->sock->sk);
 			ret = sctp_do_peeloff(con->sock->sk,
 				sn->sn_assoc_change.sac_assoc_id,
 				&new_con->sock);
 			sctp_release_sock(con->sock->sk);
+=======
+			lock_sock(con->sock->sk);
+			ret = sctp_do_peeloff(con->sock->sk,
+				sn->sn_assoc_change.sac_assoc_id,
+				&new_con->sock);
+			release_sock(con->sock->sk);
+>>>>>>> v3.18
 			if (ret < 0) {
 				log_print("Can't peel off a socket for "
 					  "connection %d to node %d: err=%d",
@@ -659,12 +792,30 @@ static void process_sctp_notification(struct connection *con,
 			}
 			add_sock(new_con->sock, new_con);
 
+<<<<<<< HEAD
 			log_print("connecting to %d sctp association %d",
 				 nodeid, (int)sn->sn_assoc_change.sac_assoc_id);
 
 			/* Send any pending writes */
 			clear_bit(CF_CONNECT_PENDING, &new_con->flags);
 			clear_bit(CF_INIT_PENDING, &con->flags);
+=======
+			linger.l_onoff = 1;
+			linger.l_linger = 0;
+			ret = kernel_setsockopt(new_con->sock, SOL_SOCKET, SO_LINGER,
+						(char *)&linger, sizeof(linger));
+			if (ret < 0)
+				log_print("set socket option SO_LINGER failed");
+
+			log_print("connecting to %d sctp association %d",
+				 nodeid, (int)sn->sn_assoc_change.sac_assoc_id);
+
+			new_con->sctp_assoc = sn->sn_assoc_change.sac_assoc_id;
+			new_con->try_new_addr = false;
+			/* Send any pending writes */
+			clear_bit(CF_CONNECT_PENDING, &new_con->flags);
+			clear_bit(CF_INIT_PENDING, &new_con->flags);
+>>>>>>> v3.18
 			if (!test_and_set_bit(CF_WRITE_PENDING, &new_con->flags)) {
 				queue_work(send_workqueue, &new_con->swork);
 			}
@@ -683,6 +834,7 @@ static void process_sctp_notification(struct connection *con,
 		}
 		break;
 
+<<<<<<< HEAD
 		/* We don't know which INIT failed, so clear the PENDING flags
 		 * on them all.  if assoc_id is zero then it will then try
 		 * again */
@@ -691,6 +843,12 @@ static void process_sctp_notification(struct connection *con,
 		{
 			log_print("Can't start SCTP association - retrying");
 			sctp_init_failed();
+=======
+		case SCTP_CANT_STR_ASSOC:
+		{
+			/* Will retry init when we get the send failed notification */
+			log_print("Can't start SCTP association - retrying");
+>>>>>>> v3.18
 		}
 		break;
 
@@ -699,6 +857,11 @@ static void process_sctp_notification(struct connection *con,
 				  (int)sn->sn_assoc_change.sac_assoc_id,
 				  sn->sn_assoc_change.sac_state);
 		}
+<<<<<<< HEAD
+=======
+	default:
+		; /* fall through */
+>>>>>>> v3.18
 	}
 }
 
@@ -958,6 +1121,27 @@ static void free_entry(struct writequeue_entry *e)
 	kfree(e);
 }
 
+<<<<<<< HEAD
+=======
+/*
+ * writequeue_entry_complete - try to delete and free write queue entry
+ * @e: write queue entry to try to delete
+ * @completed: bytes completed
+ *
+ * writequeue_lock must be held.
+ */
+static void writequeue_entry_complete(struct writequeue_entry *e, int completed)
+{
+	e->offset += completed;
+	e->len -= completed;
+
+	if (e->len == 0 && e->users == 0) {
+		list_del(&e->list);
+		free_entry(e);
+	}
+}
+
+>>>>>>> v3.18
 /* Initiate an SCTP association.
    This is a special case of send_to_sock() in that we don't yet have a
    peeled-off socket for this association, so we use the listening socket
@@ -977,6 +1161,7 @@ static void sctp_init_assoc(struct connection *con)
 	int addrlen;
 	struct kvec iov[1];
 
+<<<<<<< HEAD
 	if (test_and_set_bit(CF_INIT_PENDING, &con->flags))
 		return;
 
@@ -986,6 +1171,16 @@ static void sctp_init_assoc(struct connection *con)
 	if (nodeid_to_addr(con->nodeid, NULL, (struct sockaddr *)&rem_addr)) {
 		log_print("no address for nodeid %d", con->nodeid);
 		return;
+=======
+	mutex_lock(&con->sock_mutex);
+	if (test_and_set_bit(CF_INIT_PENDING, &con->flags))
+		goto unlock;
+
+	if (nodeid_to_addr(con->nodeid, NULL, (struct sockaddr *)&rem_addr,
+			   con->try_new_addr)) {
+		log_print("no address for nodeid %d", con->nodeid);
+		goto unlock;
+>>>>>>> v3.18
 	}
 	base_con = nodeid2con(0, 0);
 	BUG_ON(base_con == NULL);
@@ -1003,17 +1198,36 @@ static void sctp_init_assoc(struct connection *con)
 	if (list_empty(&con->writequeue)) {
 		spin_unlock(&con->writequeue_lock);
 		log_print("writequeue empty for nodeid %d", con->nodeid);
+<<<<<<< HEAD
 		return;
+=======
+		goto unlock;
+>>>>>>> v3.18
 	}
 
 	e = list_first_entry(&con->writequeue, struct writequeue_entry, list);
 	len = e->len;
 	offset = e->offset;
+<<<<<<< HEAD
 	spin_unlock(&con->writequeue_lock);
+=======
+>>>>>>> v3.18
 
 	/* Send the first block off the write queue */
 	iov[0].iov_base = page_address(e->page)+offset;
 	iov[0].iov_len = len;
+<<<<<<< HEAD
+=======
+	spin_unlock(&con->writequeue_lock);
+
+	if (rem_addr.ss_family == AF_INET) {
+		struct sockaddr_in *sin = (struct sockaddr_in *)&rem_addr;
+		log_print("Trying to connect to %pI4", &sin->sin_addr.s_addr);
+	} else {
+		struct sockaddr_in6 *sin6 = (struct sockaddr_in6 *)&rem_addr;
+		log_print("Trying to connect to %pI6", &sin6->sin6_addr);
+	}
+>>>>>>> v3.18
 
 	cmsg = CMSG_FIRSTHDR(&outmessage);
 	cmsg->cmsg_level = IPPROTO_SCTP;
@@ -1021,8 +1235,14 @@ static void sctp_init_assoc(struct connection *con)
 	cmsg->cmsg_len = CMSG_LEN(sizeof(struct sctp_sndrcvinfo));
 	sinfo = CMSG_DATA(cmsg);
 	memset(sinfo, 0x00, sizeof(struct sctp_sndrcvinfo));
+<<<<<<< HEAD
 	sinfo->sinfo_ppid = cpu_to_le32(dlm_our_nodeid());
 	outmessage.msg_controllen = cmsg->cmsg_len;
+=======
+	sinfo->sinfo_ppid = cpu_to_le32(con->nodeid);
+	outmessage.msg_controllen = cmsg->cmsg_len;
+	sinfo->sinfo_flags |= SCTP_ADDR_OVER;
+>>>>>>> v3.18
 
 	ret = kernel_sendmsg(base_con->sock, &outmessage, iov, 1, len);
 	if (ret < 0) {
@@ -1035,6 +1255,7 @@ static void sctp_init_assoc(struct connection *con)
 	}
 	else {
 		spin_lock(&con->writequeue_lock);
+<<<<<<< HEAD
 		e->offset += ret;
 		e->len -= ret;
 
@@ -1044,6 +1265,14 @@ static void sctp_init_assoc(struct connection *con)
 		}
 		spin_unlock(&con->writequeue_lock);
 	}
+=======
+		writequeue_entry_complete(e, ret);
+		spin_unlock(&con->writequeue_lock);
+	}
+
+unlock:
+	mutex_unlock(&con->sock_mutex);
+>>>>>>> v3.18
 }
 
 /* Connect a new socket to its peer */
@@ -1075,7 +1304,11 @@ static void tcp_connect_to_sock(struct connection *con)
 		goto out_err;
 
 	memset(&saddr, 0, sizeof(saddr));
+<<<<<<< HEAD
 	result = nodeid_to_addr(con->nodeid, &saddr, NULL);
+=======
+	result = nodeid_to_addr(con->nodeid, &saddr, NULL, false);
+>>>>>>> v3.18
 	if (result < 0) {
 		log_print("no address for nodeid %d", con->nodeid);
 		goto out_err;
@@ -1254,6 +1487,10 @@ static int sctp_listen_for_all(void)
 	int result = -EINVAL, num = 1, i, addr_len;
 	struct connection *con = nodeid2con(0, GFP_NOFS);
 	int bufsize = NEEDED_RMEM;
+<<<<<<< HEAD
+=======
+	int one = 1;
+>>>>>>> v3.18
 
 	if (!con)
 		return -ENOMEM;
@@ -1288,6 +1525,14 @@ static int sctp_listen_for_all(void)
 		goto create_delsock;
 	}
 
+<<<<<<< HEAD
+=======
+	result = kernel_setsockopt(sock, SOL_SCTP, SCTP_NODELAY, (char *)&one,
+				   sizeof(one));
+	if (result < 0)
+		log_print("Could not set SCTP NODELAY error %d\n", result);
+
+>>>>>>> v3.18
 	/* Init con struct */
 	sock->sk->sk_user_data = con;
 	con->sock = sock;
@@ -1493,6 +1738,7 @@ static void send_to_sock(struct connection *con)
 		}
 
 		spin_lock(&con->writequeue_lock);
+<<<<<<< HEAD
 		e->offset += ret;
 		e->len -= ret;
 
@@ -1500,6 +1746,9 @@ static void send_to_sock(struct connection *con)
 			list_del(&e->list);
 			free_entry(e);
 		}
+=======
+		writequeue_entry_complete(e, ret);
+>>>>>>> v3.18
 	}
 	spin_unlock(&con->writequeue_lock);
 out:

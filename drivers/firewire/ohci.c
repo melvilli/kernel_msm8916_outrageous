@@ -235,13 +235,22 @@ struct fw_ohci {
 	dma_addr_t next_config_rom_bus;
 	__be32     next_header;
 
+<<<<<<< HEAD
 	__le32    *self_id_cpu;
+=======
+	__le32    *self_id;
+>>>>>>> v3.18
 	dma_addr_t self_id_bus;
 	struct work_struct bus_reset_work;
 
 	u32 self_id_buffer[512];
 };
 
+<<<<<<< HEAD
+=======
+static struct workqueue_struct *selfid_workqueue;
+
+>>>>>>> v3.18
 static inline struct fw_ohci *fw_ohci(struct fw_card *card)
 {
 	return container_of(card, struct fw_ohci, card);
@@ -280,6 +289,10 @@ static char ohci_driver_name[] = KBUILD_MODNAME;
 #define PCI_DEVICE_ID_TI_TSB82AA2	0x8025
 #define PCI_DEVICE_ID_VIA_VT630X	0x3044
 #define PCI_REV_ID_VIA_VT6306		0x46
+<<<<<<< HEAD
+=======
+#define PCI_DEVICE_ID_VIA_VT6315	0x3403
+>>>>>>> v3.18
 
 #define QUIRK_CYCLE_TIMER		0x1
 #define QUIRK_RESET_PACKET		0x2
@@ -332,6 +345,15 @@ static const struct {
 	{PCI_VENDOR_ID_VIA, PCI_DEVICE_ID_VIA_VT630X, PCI_REV_ID_VIA_VT6306,
 		QUIRK_CYCLE_TIMER | QUIRK_IR_WAKE},
 
+<<<<<<< HEAD
+=======
+	{PCI_VENDOR_ID_VIA, PCI_DEVICE_ID_VIA_VT6315, 0,
+		QUIRK_CYCLE_TIMER /* FIXME: necessary? */ | QUIRK_NO_MSI},
+
+	{PCI_VENDOR_ID_VIA, PCI_DEVICE_ID_VIA_VT6315, PCI_ANY_ID,
+		QUIRK_NO_MSI},
+
+>>>>>>> v3.18
 	{PCI_VENDOR_ID_VIA, PCI_ANY_ID, PCI_ANY_ID,
 		QUIRK_CYCLE_TIMER | QUIRK_NO_MSI},
 };
@@ -363,6 +385,13 @@ MODULE_PARM_DESC(debug, "Verbose logging (default = 0"
 	", busReset events = "	__stringify(OHCI_PARAM_DEBUG_BUSRESETS)
 	", or a combination, or all = -1)");
 
+<<<<<<< HEAD
+=======
+static bool param_remote_dma;
+module_param_named(remote_dma, param_remote_dma, bool, 0444);
+MODULE_PARM_DESC(remote_dma, "Enable unfiltered remote DMA (default = N)");
+
+>>>>>>> v3.18
 static void log_irqs(struct fw_ohci *ohci, u32 evt)
 {
 	if (likely(!(param_debug &
@@ -1924,12 +1953,21 @@ static void bus_reset_work(struct work_struct *work)
 		return;
 	}
 
+<<<<<<< HEAD
 	generation = (cond_le32_to_cpu(ohci->self_id_cpu[0]) >> 16) & 0xff;
 	rmb();
 
 	for (i = 1, j = 0; j < self_id_count; i += 2, j++) {
 		u32 id  = cond_le32_to_cpu(ohci->self_id_cpu[i]);
 		u32 id2 = cond_le32_to_cpu(ohci->self_id_cpu[i + 1]);
+=======
+	generation = (cond_le32_to_cpu(ohci->self_id[0]) >> 16) & 0xff;
+	rmb();
+
+	for (i = 1, j = 0; j < self_id_count; i += 2, j++) {
+		u32 id  = cond_le32_to_cpu(ohci->self_id[i]);
+		u32 id2 = cond_le32_to_cpu(ohci->self_id[i + 1]);
+>>>>>>> v3.18
 
 		if (id != ~id2) {
 			/*
@@ -2043,10 +2081,17 @@ static void bus_reset_work(struct work_struct *work)
 			  be32_to_cpu(ohci->next_header));
 	}
 
+<<<<<<< HEAD
 #ifdef CONFIG_FIREWIRE_OHCI_REMOTE_DMA
 	reg_write(ohci, OHCI1394_PhyReqFilterHiSet, ~0);
 	reg_write(ohci, OHCI1394_PhyReqFilterLoSet, ~0);
 #endif
+=======
+	if (param_remote_dma) {
+		reg_write(ohci, OHCI1394_PhyReqFilterHiSet, ~0);
+		reg_write(ohci, OHCI1394_PhyReqFilterLoSet, ~0);
+	}
+>>>>>>> v3.18
 
 	spin_unlock_irq(&ohci->lock);
 
@@ -2082,7 +2127,11 @@ static irqreturn_t irq_handler(int irq, void *data)
 	log_irqs(ohci, event);
 
 	if (event & OHCI1394_selfIDComplete)
+<<<<<<< HEAD
 		queue_work(fw_workqueue, &ohci->bus_reset_work);
+=======
+		queue_work(selfid_workqueue, &ohci->bus_reset_work);
+>>>>>>> v3.18
 
 	if (event & OHCI1394_RQPkt)
 		tasklet_schedule(&ohci->ar_request_ctx.tasklet);
@@ -2350,7 +2399,11 @@ static int ohci_enable(struct fw_card *card,
 	reg_write(ohci, OHCI1394_FairnessControl, 0);
 	card->priority_budget_implemented = ohci->pri_req_max != 0;
 
+<<<<<<< HEAD
 	reg_write(ohci, OHCI1394_PhyUpperBound, 0x00010000);
+=======
+	reg_write(ohci, OHCI1394_PhyUpperBound, FW_MAX_PHYSICAL_RANGE >> 16);
+>>>>>>> v3.18
 	reg_write(ohci, OHCI1394_IntEventClear, ~0);
 	reg_write(ohci, OHCI1394_IntMaskClear, ~0);
 
@@ -2574,13 +2627,22 @@ static int ohci_cancel_packet(struct fw_card *card, struct fw_packet *packet)
 static int ohci_enable_phys_dma(struct fw_card *card,
 				int node_id, int generation)
 {
+<<<<<<< HEAD
 #ifdef CONFIG_FIREWIRE_OHCI_REMOTE_DMA
 	return 0;
 #else
+=======
+>>>>>>> v3.18
 	struct fw_ohci *ohci = fw_ohci(card);
 	unsigned long flags;
 	int n, ret = 0;
 
+<<<<<<< HEAD
+=======
+	if (param_remote_dma)
+		return 0;
+
+>>>>>>> v3.18
 	/*
 	 * FIXME:  Make sure this bitmask is cleared when we clear the busReset
 	 * interrupt bit.  Clear physReqResourceAllBuses on bus reset.
@@ -2609,7 +2671,10 @@ static int ohci_enable_phys_dma(struct fw_card *card,
 	spin_unlock_irqrestore(&ohci->lock, flags);
 
 	return ret;
+<<<<<<< HEAD
 #endif /* CONFIG_FIREWIRE_OHCI_REMOTE_DMA */
+=======
+>>>>>>> v3.18
 }
 
 static u32 ohci_read_csr(struct fw_card *card, int csr_offset)
@@ -3670,11 +3735,14 @@ static int pci_probe(struct pci_dev *dev,
 
 	reg_write(ohci, OHCI1394_IsoXmitIntMaskSet, ~0);
 	ohci->it_context_support = reg_read(ohci, OHCI1394_IsoXmitIntMaskSet);
+<<<<<<< HEAD
 	/* JMicron JMB38x often shows 0 at first read, just ignore it */
 	if (!ohci->it_context_support) {
 		ohci_notice(ohci, "overriding IsoXmitIntMask\n");
 		ohci->it_context_support = 0xf;
 	}
+=======
+>>>>>>> v3.18
 	reg_write(ohci, OHCI1394_IsoXmitIntMaskClear, ~0);
 	ohci->it_context_mask = ohci->it_context_support;
 	ohci->n_it = hweight32(ohci->it_context_mask);
@@ -3686,7 +3754,11 @@ static int pci_probe(struct pci_dev *dev,
 		goto fail_contexts;
 	}
 
+<<<<<<< HEAD
 	ohci->self_id_cpu = ohci->misc_buffer     + PAGE_SIZE/2;
+=======
+	ohci->self_id     = ohci->misc_buffer     + PAGE_SIZE/2;
+>>>>>>> v3.18
 	ohci->self_id_bus = ohci->misc_buffer_bus + PAGE_SIZE/2;
 
 	bus_options = reg_read(ohci, OHCI1394_BusOptions);
@@ -3712,9 +3784,17 @@ static int pci_probe(struct pci_dev *dev,
 	version = reg_read(ohci, OHCI1394_Version) & 0x00ff00ff;
 	ohci_notice(ohci,
 		    "added OHCI v%x.%x device as card %d, "
+<<<<<<< HEAD
 		    "%d IR + %d IT contexts, quirks 0x%x\n",
 		    version >> 16, version & 0xff, ohci->card.index,
 		    ohci->n_ir, ohci->n_it, ohci->quirks);
+=======
+		    "%d IR + %d IT contexts, quirks 0x%x%s\n",
+		    version >> 16, version & 0xff, ohci->card.index,
+		    ohci->n_ir, ohci->n_it, ohci->quirks,
+		    reg_read(ohci, OHCI1394_PhyUpperBound) ?
+			", physUB" : "");
+>>>>>>> v3.18
 
 	return 0;
 
@@ -3864,7 +3944,27 @@ static struct pci_driver fw_ohci_pci_driver = {
 #endif
 };
 
+<<<<<<< HEAD
 module_pci_driver(fw_ohci_pci_driver);
+=======
+static int __init fw_ohci_init(void)
+{
+	selfid_workqueue = alloc_workqueue(KBUILD_MODNAME, WQ_MEM_RECLAIM, 0);
+	if (!selfid_workqueue)
+		return -ENOMEM;
+
+	return pci_register_driver(&fw_ohci_pci_driver);
+}
+
+static void __exit fw_ohci_cleanup(void)
+{
+	pci_unregister_driver(&fw_ohci_pci_driver);
+	destroy_workqueue(selfid_workqueue);
+}
+
+module_init(fw_ohci_init);
+module_exit(fw_ohci_cleanup);
+>>>>>>> v3.18
 
 MODULE_AUTHOR("Kristian Hoegsberg <krh@bitplanet.net>");
 MODULE_DESCRIPTION("Driver for PCI OHCI IEEE1394 controllers");

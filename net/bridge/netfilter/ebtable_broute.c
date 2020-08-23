@@ -23,8 +23,12 @@ static struct ebt_entries initial_chain = {
 	.policy		= EBT_ACCEPT,
 };
 
+<<<<<<< HEAD
 static struct ebt_replace_kernel initial_table =
 {
+=======
+static struct ebt_replace_kernel initial_table = {
+>>>>>>> v3.18
 	.name		= "broute",
 	.valid_hooks	= 1 << NF_BR_BROUTING,
 	.entries_size	= sizeof(struct ebt_entries),
@@ -41,8 +45,12 @@ static int check(const struct ebt_table_info *info, unsigned int valid_hooks)
 	return 0;
 }
 
+<<<<<<< HEAD
 static const struct ebt_table broute_table =
 {
+=======
+static const struct ebt_table broute_table = {
+>>>>>>> v3.18
 	.name		= "broute",
 	.table		= &initial_table,
 	.valid_hooks	= 1 << NF_BR_BROUTING,
@@ -64,7 +72,11 @@ static int ebt_broute(struct sk_buff *skb)
 static int __net_init broute_net_init(struct net *net)
 {
 	net->xt.broute_table = ebt_register_table(net, &broute_table);
+<<<<<<< HEAD
 	return PTR_RET(net->xt.broute_table);
+=======
+	return PTR_ERR_OR_ZERO(net->xt.broute_table);
+>>>>>>> v3.18
 }
 
 static void __net_exit broute_net_exit(struct net *net)

@@ -17,11 +17,19 @@
 #include <linux/mfd/core.h>
 #include <linux/mfd/max8907.h>
 #include <linux/module.h>
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 #include <linux/of_device.h>
 #include <linux/regmap.h>
 #include <linux/slab.h>
 
+<<<<<<< HEAD
 static struct mfd_cell max8907_cells[] = {
+=======
+static const struct mfd_cell max8907_cells[] = {
+>>>>>>> v3.18
 	{ .name = "max8907-regulator", },
 	{ .name = "max8907-rtc", },
 };
@@ -304,7 +312,11 @@ static int max8907_i2c_remove(struct i2c_client *i2c)
 }
 
 #ifdef CONFIG_OF
+<<<<<<< HEAD
 static struct of_device_id max8907_of_match[] = {
+=======
+static const struct of_device_id max8907_of_match[] = {
+>>>>>>> v3.18
 	{ .compatible = "maxim,max8907" },
 	{ },
 };

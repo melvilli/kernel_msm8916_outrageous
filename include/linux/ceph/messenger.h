@@ -1,6 +1,10 @@
 #ifndef __FS_CEPH_MESSENGER_H
 #define __FS_CEPH_MESSENGER_H
 
+<<<<<<< HEAD
+=======
+#include <linux/blk_types.h>
+>>>>>>> v3.18
 #include <linux/kref.h>
 #include <linux/mutex.h>
 #include <linux/net.h>
@@ -60,8 +64,13 @@ struct ceph_messenger {
 	u32 global_seq;
 	spinlock_t global_seq_lock;
 
+<<<<<<< HEAD
 	u32 supported_features;
 	u32 required_features;
+=======
+	u64 supported_features;
+	u64 required_features;
+>>>>>>> v3.18
 };
 
 enum ceph_msg_data_type {
@@ -119,8 +128,12 @@ struct ceph_msg_data_cursor {
 #ifdef CONFIG_BLOCK
 		struct {				/* bio */
 			struct bio	*bio;		/* bio from list */
+<<<<<<< HEAD
 			unsigned int	vector_index;	/* vector from bio */
 			unsigned int	vector_offset;	/* bytes from vector */
+=======
+			struct bvec_iter bvec_iter;
+>>>>>>> v3.18
 		};
 #endif /* CONFIG_BLOCK */
 		struct {				/* pages */
@@ -154,7 +167,10 @@ struct ceph_msg {
 	struct list_head list_head;	/* links for connection lists */
 
 	struct kref kref;
+<<<<<<< HEAD
 	bool front_is_vmalloc;
+=======
+>>>>>>> v3.18
 	bool more_to_follow;
 	bool needs_out_seq;
 	int front_alloc_len;
@@ -192,7 +208,11 @@ struct ceph_connection {
 
 	struct ceph_entity_name peer_name; /* peer name */
 
+<<<<<<< HEAD
 	unsigned peer_features;
+=======
+	u64 peer_features;
+>>>>>>> v3.18
 	u32 connect_seq;      /* identify the most recent connection
 				 attempt for this connection, client */
 	u32 peer_global_seq;  /* peer's global seq for this connection */
@@ -256,8 +276,13 @@ extern void ceph_msgr_flush(void);
 
 extern void ceph_messenger_init(struct ceph_messenger *msgr,
 			struct ceph_entity_addr *myaddr,
+<<<<<<< HEAD
 			u32 supported_features,
 			u32 required_features,
+=======
+			u64 supported_features,
+			u64 required_features,
+>>>>>>> v3.18
 			bool nocrc);
 
 extern void ceph_con_init(struct ceph_connection *con, void *private,
@@ -286,6 +311,7 @@ extern void ceph_msg_data_add_bio(struct ceph_msg *msg, struct bio *bio,
 
 extern struct ceph_msg *ceph_msg_new(int type, int front_len, gfp_t flags,
 				     bool can_fail);
+<<<<<<< HEAD
 extern void ceph_msg_kfree(struct ceph_msg *m);
 
 
@@ -299,6 +325,11 @@ static inline void ceph_msg_put(struct ceph_msg *msg)
 {
 	kref_put(&msg->kref, ceph_msg_last_put);
 }
+=======
+
+extern struct ceph_msg *ceph_msg_get(struct ceph_msg *msg);
+extern void ceph_msg_put(struct ceph_msg *msg);
+>>>>>>> v3.18
 
 extern void ceph_msg_dump(struct ceph_msg *msg);
 

@@ -73,7 +73,11 @@ ENTRY(do_suspend_lowlevel)
 	call	save_processor_state
 	call	save_registers
 	pushl	$3
+<<<<<<< HEAD
 	call	acpi_enter_sleep_state
+=======
+	call	x86_acpi_enter_sleep_state
+>>>>>>> v3.18
 	addl	$4, %esp
 
 #	In case of S3 failure, we'll emerge here.  Jump

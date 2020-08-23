@@ -26,6 +26,10 @@
 #include <linux/interrupt.h>
 #include <linux/mfd/88pm860x.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
+=======
+#include <linux/device.h>
+>>>>>>> v3.18
 
 #define PM8607_WAKEUP		0x0b
 
@@ -68,7 +72,12 @@ static int pm860x_onkey_probe(struct platform_device *pdev)
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 	info = kzalloc(sizeof(struct pm860x_onkey_info), GFP_KERNEL);
+=======
+	info = devm_kzalloc(&pdev->dev, sizeof(struct pm860x_onkey_info),
+			    GFP_KERNEL);
+>>>>>>> v3.18
 	if (!info)
 		return -ENOMEM;
 	info->chip = chip;
@@ -76,11 +85,18 @@ static int pm860x_onkey_probe(struct platform_device *pdev)
 	info->dev = &pdev->dev;
 	info->irq = irq;
 
+<<<<<<< HEAD
 	info->idev = input_allocate_device();
 	if (!info->idev) {
 		dev_err(chip->dev, "Failed to allocate input dev\n");
 		ret = -ENOMEM;
 		goto out;
+=======
+	info->idev = devm_input_allocate_device(&pdev->dev);
+	if (!info->idev) {
+		dev_err(chip->dev, "Failed to allocate input dev\n");
+		return -ENOMEM;
+>>>>>>> v3.18
 	}
 
 	info->idev->name = "88pm860x_on";
@@ -93,6 +109,7 @@ static int pm860x_onkey_probe(struct platform_device *pdev)
 	ret = input_register_device(info->idev);
 	if (ret) {
 		dev_err(chip->dev, "Can't register input device: %d\n", ret);
+<<<<<<< HEAD
 		goto out_reg;
 	}
 
@@ -102,12 +119,25 @@ static int pm860x_onkey_probe(struct platform_device *pdev)
 		dev_err(chip->dev, "Failed to request IRQ: #%d: %d\n",
 			info->irq, ret);
 		goto out_irq;
+=======
+		return ret;
+	}
+
+	ret = devm_request_threaded_irq(&pdev->dev, info->irq, NULL,
+					pm860x_onkey_handler, IRQF_ONESHOT,
+					"onkey", info);
+	if (ret < 0) {
+		dev_err(chip->dev, "Failed to request IRQ: #%d: %d\n",
+			info->irq, ret);
+		return ret;
+>>>>>>> v3.18
 	}
 
 	platform_set_drvdata(pdev, info);
 	device_init_wakeup(&pdev->dev, 1);
 
 	return 0;
+<<<<<<< HEAD
 
 out_irq:
 	input_unregister_device(info->idev);
@@ -129,6 +159,8 @@ static int pm860x_onkey_remove(struct platform_device *pdev)
 	input_unregister_device(info->idev);
 	kfree(info);
 	return 0;
+=======
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_PM_SLEEP
@@ -161,7 +193,10 @@ static struct platform_driver pm860x_onkey_driver = {
 		.pm	= &pm860x_onkey_pm_ops,
 	},
 	.probe		= pm860x_onkey_probe,
+<<<<<<< HEAD
 	.remove		= pm860x_onkey_remove,
+=======
+>>>>>>> v3.18
 };
 module_platform_driver(pm860x_onkey_driver);
 

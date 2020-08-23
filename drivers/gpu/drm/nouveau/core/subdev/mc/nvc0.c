@@ -22,6 +22,7 @@
  * Authors: Ben Skeggs
  */
 
+<<<<<<< HEAD
 #include <subdev/mc.h>
 
 struct nvc0_mc_priv {
@@ -35,19 +36,42 @@ nvc0_mc_intr[] = {
 	{ 0x00000040, NVDEV_ENGINE_COPY1 },
 	{ 0x00000100, NVDEV_ENGINE_FIFO },
 	{ 0x00001000, NVDEV_ENGINE_GR },
+=======
+#include "nv04.h"
+
+const struct nouveau_mc_intr
+nvc0_mc_intr[] = {
+	{ 0x04000000, NVDEV_ENGINE_DISP },  /* DISP first, so pageflip timestamps work. */
+	{ 0x00000001, NVDEV_ENGINE_PPP },
+	{ 0x00000020, NVDEV_ENGINE_COPY0 },
+	{ 0x00000040, NVDEV_ENGINE_COPY1 },
+	{ 0x00000080, NVDEV_ENGINE_COPY2 },
+	{ 0x00000100, NVDEV_ENGINE_FIFO },
+	{ 0x00001000, NVDEV_ENGINE_GR },
+	{ 0x00002000, NVDEV_SUBDEV_FB },
+>>>>>>> v3.18
 	{ 0x00008000, NVDEV_ENGINE_BSP },
 	{ 0x00040000, NVDEV_SUBDEV_THERM },
 	{ 0x00020000, NVDEV_ENGINE_VP },
 	{ 0x00100000, NVDEV_SUBDEV_TIMER },
+<<<<<<< HEAD
 	{ 0x00200000, NVDEV_SUBDEV_GPIO },
 	{ 0x02000000, NVDEV_SUBDEV_LTCG },
 	{ 0x04000000, NVDEV_ENGINE_DISP },
+=======
+	{ 0x00200000, NVDEV_SUBDEV_GPIO },	/* PMGR->GPIO */
+	{ 0x00200000, NVDEV_SUBDEV_I2C },	/* PMGR->I2C/AUX */
+	{ 0x01000000, NVDEV_SUBDEV_PWR },
+	{ 0x02000000, NVDEV_SUBDEV_LTC },
+	{ 0x08000000, NVDEV_SUBDEV_FB },
+>>>>>>> v3.18
 	{ 0x10000000, NVDEV_SUBDEV_BUS },
 	{ 0x40000000, NVDEV_SUBDEV_IBUS },
 	{ 0x80000000, NVDEV_ENGINE_SW },
 	{},
 };
 
+<<<<<<< HEAD
 static int
 nvc0_mc_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	     struct nouveau_oclass *oclass, void *data, u32 size,
@@ -69,8 +93,35 @@ nvc0_mc_oclass = {
 	.handle = NV_SUBDEV(MC, 0xc0),
 	.ofuncs = &(struct nouveau_ofuncs) {
 		.ctor = nvc0_mc_ctor,
+=======
+static void
+nvc0_mc_msi_rearm(struct nouveau_mc *pmc)
+{
+	struct nv04_mc_priv *priv = (void *)pmc;
+	nv_wr32(priv, 0x088704, 0x00000000);
+}
+
+void
+nvc0_mc_unk260(struct nouveau_mc *pmc, u32 data)
+{
+	nv_wr32(pmc, 0x000260, data);
+}
+
+struct nouveau_oclass *
+nvc0_mc_oclass = &(struct nouveau_mc_oclass) {
+	.base.handle = NV_SUBDEV(MC, 0xc0),
+	.base.ofuncs = &(struct nouveau_ofuncs) {
+		.ctor = nv04_mc_ctor,
+>>>>>>> v3.18
 		.dtor = _nouveau_mc_dtor,
 		.init = nv50_mc_init,
 		.fini = _nouveau_mc_fini,
 	},
+<<<<<<< HEAD
 };
+=======
+	.intr = nvc0_mc_intr,
+	.msi_rearm = nvc0_mc_msi_rearm,
+	.unk260 = nvc0_mc_unk260,
+}.base;
+>>>>>>> v3.18

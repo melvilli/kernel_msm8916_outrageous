@@ -32,6 +32,10 @@
 #include "cifsproto.h"
 #include "cifs_debug.h"
 #include "cifs_fs_sb.h"
+<<<<<<< HEAD
+=======
+#include "cifs_unicode.h"
+>>>>>>> v3.18
 
 static void
 renew_parental_timestamps(struct dentry *direntry)
@@ -83,7 +87,10 @@ build_path_from_dentry(struct dentry *direntry)
 	struct dentry *temp;
 	int namelen;
 	int dfsplen;
+<<<<<<< HEAD
 	int pplen = 0;
+=======
+>>>>>>> v3.18
 	char *full_path;
 	char dirsep;
 	struct cifs_sb_info *cifs_sb = CIFS_SB(direntry->d_sb);
@@ -95,12 +102,17 @@ build_path_from_dentry(struct dentry *direntry)
 		dfsplen = strnlen(tcon->treeName, MAX_TREE_SIZE + 1);
 	else
 		dfsplen = 0;
+<<<<<<< HEAD
 
 	if (cifs_sb->mnt_cifs_flags & CIFS_MOUNT_USE_PREFIX_PATH)
 		pplen = cifs_sb->prepath ? strlen(cifs_sb->prepath) + 1 : 0;
 
 cifs_bp_rename_retry:
 	namelen = dfsplen + pplen;
+=======
+cifs_bp_rename_retry:
+	namelen = dfsplen;
+>>>>>>> v3.18
 	seq = read_seqbegin(&rename_lock);
 	rcu_read_lock();
 	for (temp = direntry; !IS_ROOT(temp);) {
@@ -141,7 +153,11 @@ cifs_bp_rename_retry:
 		}
 	}
 	rcu_read_unlock();
+<<<<<<< HEAD
 	if (namelen != dfsplen + pplen || read_seqretry(&rename_lock, seq)) {
+=======
+	if (namelen != dfsplen || read_seqretry(&rename_lock, seq)) {
+>>>>>>> v3.18
 		cifs_dbg(FYI, "did not end path lookup where expected. namelen=%ddfsplen=%d\n",
 			 namelen, dfsplen);
 		/* presumably this is only possible if racing with a rename
@@ -157,6 +173,7 @@ cifs_bp_rename_retry:
 	   those safely to '/' if any are found in the middle of the prepath */
 	/* BB test paths to Windows with '/' in the midst of prepath */
 
+<<<<<<< HEAD
 	if (pplen) {
 		int i;
 
@@ -168,6 +185,8 @@ cifs_bp_rename_retry:
 				full_path[dfsplen+1+i] = CIFS_DIR_SEP(cifs_sb);
 	}
 
+=======
+>>>>>>> v3.18
 	if (dfsplen) {
 		strncpy(full_path, tcon->treeName, dfsplen);
 		if (cifs_sb->mnt_cifs_flags & CIFS_MOUNT_POSIX_PATHS) {
@@ -208,7 +227,11 @@ check_name(struct dentry *direntry)
 static int
 cifs_do_create(struct inode *inode, struct dentry *direntry, unsigned int xid,
 	       struct tcon_link *tlink, unsigned oflags, umode_t mode,
+<<<<<<< HEAD
 	       __u32 *oplock, struct cifs_fid *fid, int *created)
+=======
+	       __u32 *oplock, struct cifs_fid *fid)
+>>>>>>> v3.18
 {
 	int rc = -ENOENT;
 	int create_options = CREATE_NOT_DIR;
@@ -220,6 +243,10 @@ cifs_do_create(struct inode *inode, struct dentry *direntry, unsigned int xid,
 	struct inode *newinode = NULL;
 	int disposition;
 	struct TCP_Server_Info *server = tcon->ses->server;
+<<<<<<< HEAD
+=======
+	struct cifs_open_parms oparms;
+>>>>>>> v3.18
 
 	*oplock = 0;
 	if (tcon->ses->server->oplocks)
@@ -243,6 +270,7 @@ cifs_do_create(struct inode *inode, struct dentry *direntry, unsigned int xid,
 				goto cifs_create_get_file_info;
 			}
 
+<<<<<<< HEAD
 			if (S_ISDIR(newinode->i_mode)) {
 				CIFSSMBClose(xid, tcon, fid->netfid);
 				iput(newinode);
@@ -250,6 +278,8 @@ cifs_do_create(struct inode *inode, struct dentry *direntry, unsigned int xid,
 				goto out;
 			}
 
+=======
+>>>>>>> v3.18
 			if (!S_ISREG(newinode->i_mode)) {
 				/*
 				 * The server may allow us to open things like
@@ -342,9 +372,22 @@ cifs_do_create(struct inode *inode, struct dentry *direntry, unsigned int xid,
 	if (backup_cred(cifs_sb))
 		create_options |= CREATE_OPEN_BACKUP_INTENT;
 
+<<<<<<< HEAD
 	rc = server->ops->open(xid, tcon, full_path, disposition,
 			       desired_access, create_options, fid, oplock,
 			       buf, cifs_sb);
+=======
+	oparms.tcon = tcon;
+	oparms.cifs_sb = cifs_sb;
+	oparms.desired_access = desired_access;
+	oparms.create_options = create_options;
+	oparms.disposition = disposition;
+	oparms.path = full_path;
+	oparms.fid = fid;
+	oparms.reconnect = false;
+
+	rc = server->ops->open(xid, &oparms, oplock, buf);
+>>>>>>> v3.18
 	if (rc) {
 		cifs_dbg(FYI, "cifs_create returned 0x%x\n", rc);
 		goto out;
@@ -363,7 +406,10 @@ cifs_do_create(struct inode *inode, struct dentry *direntry, unsigned int xid,
 				.device	= 0,
 		};
 
+<<<<<<< HEAD
 		*created |= FILE_CREATED;
+=======
+>>>>>>> v3.18
 		if (cifs_sb->mnt_cifs_flags & CIFS_MOUNT_SET_UID) {
 			args.uid = current_fsuid();
 			if (inode->i_mode & S_ISGID)
@@ -393,7 +439,11 @@ cifs_create_get_file_info:
 					      xid);
 	else {
 		rc = cifs_get_inode_info(&newinode, full_path, buf, inode->i_sb,
+<<<<<<< HEAD
 					 xid, &fid->netfid);
+=======
+					 xid, fid);
+>>>>>>> v3.18
 		if (newinode) {
 			if (server->ops->set_lease_key)
 				server->ops->set_lease_key(newinode, fid);
@@ -414,6 +464,7 @@ cifs_create_set_dentry:
 	if (rc != 0) {
 		cifs_dbg(FYI, "Create worked, get_inode_info failed rc = %d\n",
 			 rc);
+<<<<<<< HEAD
 		goto out_err;
 	}
 
@@ -422,6 +473,12 @@ cifs_create_set_dentry:
 		goto out_err;
 	}
 
+=======
+		if (server->ops->close)
+			server->ops->close(xid, tcon, fid);
+		goto out;
+	}
+>>>>>>> v3.18
 	d_drop(direntry);
 	d_add(direntry, newinode);
 
@@ -429,6 +486,7 @@ out:
 	kfree(buf);
 	kfree(full_path);
 	return rc;
+<<<<<<< HEAD
 
 out_err:
 	if (server->ops->close)
@@ -436,6 +494,8 @@ out_err:
 	if (newinode)
 		iput(newinode);
 	goto out;
+=======
+>>>>>>> v3.18
 }
 
 int
@@ -487,8 +547,13 @@ cifs_atomic_open(struct inode *inode, struct dentry *direntry,
 
 	xid = get_xid();
 
+<<<<<<< HEAD
 	cifs_dbg(FYI, "parent inode = 0x%p name is: %s and dentry = 0x%p\n",
 		 inode, direntry->d_name.name, direntry);
+=======
+	cifs_dbg(FYI, "parent inode = 0x%p name is: %pd and dentry = 0x%p\n",
+		 inode, direntry, direntry);
+>>>>>>> v3.18
 
 	tlink = cifs_sb_tlink(CIFS_SB(inode->i_sb));
 	if (IS_ERR(tlink)) {
@@ -505,13 +570,23 @@ cifs_atomic_open(struct inode *inode, struct dentry *direntry,
 	cifs_add_pending_open(&fid, tlink, &open);
 
 	rc = cifs_do_create(inode, direntry, xid, tlink, oflags, mode,
+<<<<<<< HEAD
 			    &oplock, &fid, opened);
+=======
+			    &oplock, &fid);
+>>>>>>> v3.18
 
 	if (rc) {
 		cifs_del_pending_open(&open);
 		goto out;
 	}
 
+<<<<<<< HEAD
+=======
+	if ((oflags & (O_CREAT | O_EXCL)) == (O_CREAT | O_EXCL))
+		*opened |= FILE_CREATED;
+
+>>>>>>> v3.18
 	rc = finish_open(file, direntry, generic_file_open, opened);
 	if (rc) {
 		if (server->ops->close)
@@ -520,6 +595,17 @@ cifs_atomic_open(struct inode *inode, struct dentry *direntry,
 		goto out;
 	}
 
+<<<<<<< HEAD
+=======
+	if (file->f_flags & O_DIRECT &&
+	    CIFS_SB(inode->i_sb)->mnt_cifs_flags & CIFS_MOUNT_STRICT_IO) {
+		if (CIFS_SB(inode->i_sb)->mnt_cifs_flags & CIFS_MOUNT_NO_BRL)
+			file->f_op = &cifs_file_direct_nobrl_ops;
+		else
+			file->f_op = &cifs_file_direct_ops;
+		}
+
+>>>>>>> v3.18
 	file_info = cifs_new_fileinfo(&fid, file, tlink, oplock);
 	if (file_info == NULL) {
 		if (server->ops->close)
@@ -554,10 +640,16 @@ int cifs_create(struct inode *inode, struct dentry *direntry, umode_t mode,
 	struct TCP_Server_Info *server;
 	struct cifs_fid fid;
 	__u32 oplock;
+<<<<<<< HEAD
 	int created = FILE_CREATED;
 
 	cifs_dbg(FYI, "cifs_create parent inode = 0x%p name is: %s and dentry = 0x%p\n",
 		 inode, direntry->d_name.name, direntry);
+=======
+
+	cifs_dbg(FYI, "cifs_create parent inode = 0x%p name is: %pd and dentry = 0x%p\n",
+		 inode, direntry, direntry);
+>>>>>>> v3.18
 
 	tlink = cifs_sb_tlink(CIFS_SB(inode->i_sb));
 	rc = PTR_ERR(tlink);
@@ -571,7 +663,11 @@ int cifs_create(struct inode *inode, struct dentry *direntry, umode_t mode,
 		server->ops->new_lease_key(&fid);
 
 	rc = cifs_do_create(inode, direntry, xid, tlink, oflags, mode,
+<<<<<<< HEAD
 			    &oplock, &fid, &created);
+=======
+			    &oplock, &fid);
+>>>>>>> v3.18
 	if (!rc && server->ops->close)
 		server->ops->close(xid, tcon, &fid);
 
@@ -589,6 +685,7 @@ int cifs_mknod(struct inode *inode, struct dentry *direntry, umode_t mode,
 	int create_options = CREATE_NOT_DIR | CREATE_OPTION_SPECIAL;
 	struct cifs_sb_info *cifs_sb;
 	struct tcon_link *tlink;
+<<<<<<< HEAD
 	struct cifs_tcon *pTcon;
 	struct cifs_io_parms io_parms;
 	char *full_path = NULL;
@@ -598,6 +695,19 @@ int cifs_mknod(struct inode *inode, struct dentry *direntry, umode_t mode,
 	FILE_ALL_INFO *buf = NULL;
 	unsigned int bytes_written;
 	struct win_dev *pdev;
+=======
+	struct cifs_tcon *tcon;
+	struct cifs_io_parms io_parms;
+	char *full_path = NULL;
+	struct inode *newinode = NULL;
+	__u32 oplock = 0;
+	struct cifs_fid fid;
+	struct cifs_open_parms oparms;
+	FILE_ALL_INFO *buf = NULL;
+	unsigned int bytes_written;
+	struct win_dev *pdev;
+	struct kvec iov[2];
+>>>>>>> v3.18
 
 	if (!old_valid_dev(device_number))
 		return -EINVAL;
@@ -607,7 +717,11 @@ int cifs_mknod(struct inode *inode, struct dentry *direntry, umode_t mode,
 	if (IS_ERR(tlink))
 		return PTR_ERR(tlink);
 
+<<<<<<< HEAD
 	pTcon = tlink_tcon(tlink);
+=======
+	tcon = tlink_tcon(tlink);
+>>>>>>> v3.18
 
 	xid = get_xid();
 
@@ -617,7 +731,11 @@ int cifs_mknod(struct inode *inode, struct dentry *direntry, umode_t mode,
 		goto mknod_out;
 	}
 
+<<<<<<< HEAD
 	if (pTcon->unix_ext) {
+=======
+	if (tcon->unix_ext) {
+>>>>>>> v3.18
 		struct cifs_unix_set_info_args args = {
 			.mode	= mode & ~current_umask(),
 			.ctime	= NO_CHANGE_64,
@@ -632,7 +750,11 @@ int cifs_mknod(struct inode *inode, struct dentry *direntry, umode_t mode,
 			args.uid = INVALID_UID; /* no change */
 			args.gid = INVALID_GID; /* no change */
 		}
+<<<<<<< HEAD
 		rc = CIFSSMBUnixSetPathInfo(xid, pTcon, full_path, &args,
+=======
+		rc = CIFSSMBUnixSetPathInfo(xid, tcon, full_path, &args,
+>>>>>>> v3.18
 					    cifs_sb->local_nls,
 					    cifs_sb->mnt_cifs_flags &
 						CIFS_MOUNT_MAP_SPECIAL_CHR);
@@ -664,6 +786,7 @@ int cifs_mknod(struct inode *inode, struct dentry *direntry, umode_t mode,
 	if (backup_cred(cifs_sb))
 		create_options |= CREATE_OPEN_BACKUP_INTENT;
 
+<<<<<<< HEAD
 	rc = CIFSSMBOpen(xid, pTcon, full_path, FILE_CREATE,
 			 GENERIC_WRITE, create_options,
 			 &fileHandle, &oplock, buf, cifs_sb->local_nls,
@@ -700,6 +823,51 @@ int cifs_mknod(struct inode *inode, struct dentry *direntry, umode_t mode,
 			NULL, 0);
 	} /* else if (S_ISFIFO) */
 	CIFSSMBClose(xid, pTcon, fileHandle);
+=======
+	oparms.tcon = tcon;
+	oparms.cifs_sb = cifs_sb;
+	oparms.desired_access = GENERIC_WRITE;
+	oparms.create_options = create_options;
+	oparms.disposition = FILE_CREATE;
+	oparms.path = full_path;
+	oparms.fid = &fid;
+	oparms.reconnect = false;
+
+	if (tcon->ses->server->oplocks)
+		oplock = REQ_OPLOCK;
+	else
+		oplock = 0;
+	rc = tcon->ses->server->ops->open(xid, &oparms, &oplock, buf);
+	if (rc)
+		goto mknod_out;
+
+	/*
+	 * BB Do not bother to decode buf since no local inode yet to put
+	 * timestamps in, but we can reuse it safely.
+	 */
+
+	pdev = (struct win_dev *)buf;
+	io_parms.pid = current->tgid;
+	io_parms.tcon = tcon;
+	io_parms.offset = 0;
+	io_parms.length = sizeof(struct win_dev);
+	iov[1].iov_base = buf;
+	iov[1].iov_len = sizeof(struct win_dev);
+	if (S_ISCHR(mode)) {
+		memcpy(pdev->type, "IntxCHR", 8);
+		pdev->major = cpu_to_le64(MAJOR(device_number));
+		pdev->minor = cpu_to_le64(MINOR(device_number));
+		rc = tcon->ses->server->ops->sync_write(xid, &fid, &io_parms,
+							&bytes_written, iov, 1);
+	} else if (S_ISBLK(mode)) {
+		memcpy(pdev->type, "IntxBLK", 8);
+		pdev->major = cpu_to_le64(MAJOR(device_number));
+		pdev->minor = cpu_to_le64(MINOR(device_number));
+		rc = tcon->ses->server->ops->sync_write(xid, &fid, &io_parms,
+							&bytes_written, iov, 1);
+	} /* else if (S_ISFIFO) */
+	tcon->ses->server->ops->close(xid, tcon, &fid);
+>>>>>>> v3.18
 	d_drop(direntry);
 
 	/* FIXME: add code here to set EAs */
@@ -726,8 +894,13 @@ cifs_lookup(struct inode *parent_dir_inode, struct dentry *direntry,
 
 	xid = get_xid();
 
+<<<<<<< HEAD
 	cifs_dbg(FYI, "parent inode = 0x%p name is: %s and dentry = 0x%p\n",
 		 parent_dir_inode, direntry->d_name.name, direntry);
+=======
+	cifs_dbg(FYI, "parent inode = 0x%p name is: %pd and dentry = 0x%p\n",
+		 parent_dir_inode, direntry, direntry);
+>>>>>>> v3.18
 
 	/* check whether path exists */
 
@@ -781,7 +954,11 @@ cifs_lookup(struct inode *parent_dir_inode, struct dentry *direntry,
 	/*	if it was once a directory (but how can we tell?) we could do
 		shrink_dcache_parent(direntry); */
 	} else if (rc != -EACCES) {
+<<<<<<< HEAD
 		cifs_dbg(VFS, "Unexpected lookup error %d\n", rc);
+=======
+		cifs_dbg(FYI, "Unexpected lookup error %d\n", rc);
+>>>>>>> v3.18
 		/* We special case check for Access Denied - since that
 		is a common return code */
 	}
@@ -846,7 +1023,11 @@ cifs_d_revalidate(struct dentry *direntry, unsigned int flags)
 {
 	int rc = 0;
 
+<<<<<<< HEAD
 	cifs_dbg(FYI, "In cifs d_delete, name = %s\n", direntry->d_name.name);
+=======
+	cifs_dbg(FYI, "In cifs d_delete, name = %pd\n", direntry);
+>>>>>>> v3.18
 
 	return rc;
 }     */
@@ -857,6 +1038,7 @@ const struct dentry_operations cifs_dentry_ops = {
 /* d_delete:       cifs_d_delete,      */ /* not needed except for debugging */
 };
 
+<<<<<<< HEAD
 static int cifs_ci_hash(const struct dentry *dentry, const struct inode *inode,
 		struct qstr *q)
 {
@@ -868,11 +1050,29 @@ static int cifs_ci_hash(const struct dentry *dentry, const struct inode *inode,
 	for (i = 0; i < q->len; i++)
 		hash = partial_name_hash(nls_tolower(codepage, q->name[i]),
 					 hash);
+=======
+static int cifs_ci_hash(const struct dentry *dentry, struct qstr *q)
+{
+	struct nls_table *codepage = CIFS_SB(dentry->d_sb)->local_nls;
+	unsigned long hash;
+	wchar_t c;
+	int i, charlen;
+
+	hash = init_name_hash();
+	for (i = 0; i < q->len; i += charlen) {
+		charlen = codepage->char2uni(&q->name[i], q->len - i, &c);
+		/* error out if we can't convert the character */
+		if (unlikely(charlen < 0))
+			return charlen;
+		hash = partial_name_hash(cifs_toupper(c), hash);
+	}
+>>>>>>> v3.18
 	q->hash = end_name_hash(hash);
 
 	return 0;
 }
 
+<<<<<<< HEAD
 static int cifs_ci_compare(const struct dentry *parent,
 		const struct inode *pinode,
 		const struct dentry *dentry, const struct inode *inode,
@@ -884,6 +1084,53 @@ static int cifs_ci_compare(const struct dentry *parent,
 	    (nls_strnicmp(codepage, name->name, str, len) == 0))
 		return 0;
 	return 1;
+=======
+static int cifs_ci_compare(const struct dentry *parent, const struct dentry *dentry,
+		unsigned int len, const char *str, const struct qstr *name)
+{
+	struct nls_table *codepage = CIFS_SB(parent->d_sb)->local_nls;
+	wchar_t c1, c2;
+	int i, l1, l2;
+
+	/*
+	 * We make the assumption here that uppercase characters in the local
+	 * codepage are always the same length as their lowercase counterparts.
+	 *
+	 * If that's ever not the case, then this will fail to match it.
+	 */
+	if (name->len != len)
+		return 1;
+
+	for (i = 0; i < len; i += l1) {
+		/* Convert characters in both strings to UTF-16. */
+		l1 = codepage->char2uni(&str[i], len - i, &c1);
+		l2 = codepage->char2uni(&name->name[i], name->len - i, &c2);
+
+		/*
+		 * If we can't convert either character, just declare it to
+		 * be 1 byte long and compare the original byte.
+		 */
+		if (unlikely(l1 < 0 && l2 < 0)) {
+			if (str[i] != name->name[i])
+				return 1;
+			l1 = 1;
+			continue;
+		}
+
+		/*
+		 * Here, we again ass|u|me that upper/lowercase versions of
+		 * a character are the same length in the local NLS.
+		 */
+		if (l1 != l2)
+			return 1;
+
+		/* Now compare uppercase versions of these characters */
+		if (cifs_toupper(c1) != cifs_toupper(c2))
+			return 1;
+	}
+
+	return 0;
+>>>>>>> v3.18
 }
 
 const struct dentry_operations cifs_ci_dentry_ops = {

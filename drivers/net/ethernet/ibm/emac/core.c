@@ -39,6 +39,11 @@
 #include <linux/bitops.h>
 #include <linux/workqueue.h>
 #include <linux/of.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 #include <linux/of_net.h>
 #include <linux/slab.h>
 
@@ -2312,7 +2317,11 @@ static int emac_check_deps(struct emac_instance *dev,
 		if (deps[i].ofdev == NULL)
 			continue;
 		if (deps[i].drvdata == NULL)
+<<<<<<< HEAD
 			deps[i].drvdata = dev_get_drvdata(&deps[i].ofdev->dev);
+=======
+			deps[i].drvdata = platform_get_drvdata(deps[i].ofdev);
+>>>>>>> v3.18
 		if (deps[i].drvdata != NULL)
 			there++;
 	}
@@ -2676,7 +2685,11 @@ static int emac_init_config(struct emac_instance *dev)
 		       np->full_name);
 		return -ENXIO;
 	}
+<<<<<<< HEAD
 	memcpy(dev->ndev->dev_addr, p, 6);
+=======
+	memcpy(dev->ndev->dev_addr, p, ETH_ALEN);
+>>>>>>> v3.18
 
 	/* IAHT and GAHT filter parameterization */
 	if (emac_has_feature(dev, EMAC_FTR_EMAC4SYNC)) {
@@ -2799,9 +2812,15 @@ static int emac_probe(struct platform_device *ofdev)
 		/*  display more info about what's missing ? */
 		goto err_reg_unmap;
 	}
+<<<<<<< HEAD
 	dev->mal = dev_get_drvdata(&dev->mal_dev->dev);
 	if (dev->mdio_dev != NULL)
 		dev->mdio_instance = dev_get_drvdata(&dev->mdio_dev->dev);
+=======
+	dev->mal = platform_get_drvdata(dev->mal_dev);
+	if (dev->mdio_dev != NULL)
+		dev->mdio_instance = platform_get_drvdata(dev->mdio_dev);
+>>>>>>> v3.18
 
 	/* Register with MAL */
 	dev->commac.ops = &emac_commac_ops;
@@ -2877,7 +2896,11 @@ static int emac_probe(struct platform_device *ofdev)
 		dev->commac.ops = &emac_commac_sg_ops;
 	} else
 		ndev->netdev_ops = &emac_netdev_ops;
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(ndev, &emac_ethtool_ops);
+=======
+	ndev->ethtool_ops = &emac_ethtool_ops;
+>>>>>>> v3.18
 
 	netif_carrier_off(ndev);
 
@@ -2892,7 +2915,11 @@ static int emac_probe(struct platform_device *ofdev)
 	 * fully initialized
 	 */
 	wmb();
+<<<<<<< HEAD
 	dev_set_drvdata(&ofdev->dev, dev);
+=======
+	platform_set_drvdata(ofdev, dev);
+>>>>>>> v3.18
 
 	/* There's a new kid in town ! Let's tell everybody */
 	wake_up_all(&emac_probe_wait);
@@ -2951,12 +2978,19 @@ static int emac_probe(struct platform_device *ofdev)
 
 static int emac_remove(struct platform_device *ofdev)
 {
+<<<<<<< HEAD
 	struct emac_instance *dev = dev_get_drvdata(&ofdev->dev);
 
 	DBG(dev, "remove" NL);
 
 	dev_set_drvdata(&ofdev->dev, NULL);
 
+=======
+	struct emac_instance *dev = platform_get_drvdata(ofdev);
+
+	DBG(dev, "remove" NL);
+
+>>>>>>> v3.18
 	unregister_netdev(dev->ndev);
 
 	cancel_work_sync(&dev->reset_work);

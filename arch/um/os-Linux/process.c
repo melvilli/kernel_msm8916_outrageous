@@ -294,5 +294,8 @@ void init_new_thread_signals(void)
 	signal(SIGHUP, SIG_IGN);
 	set_handler(SIGIO);
 	signal(SIGWINCH, SIG_IGN);
+<<<<<<< HEAD
 	signal(SIGTERM, SIG_DFL);
+=======
+>>>>>>> v3.18
 }

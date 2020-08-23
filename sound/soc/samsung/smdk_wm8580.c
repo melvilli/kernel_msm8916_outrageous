@@ -37,6 +37,7 @@ static int smdk_hw_params(struct snd_pcm_substream *substream,
 	unsigned int pll_out;
 	int bfs, rfs, ret;
 
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_U8:
 	case SNDRV_PCM_FORMAT_S8:
@@ -44,6 +45,13 @@ static int smdk_hw_params(struct snd_pcm_substream *substream,
 		break;
 	case SNDRV_PCM_FORMAT_U16_LE:
 	case SNDRV_PCM_FORMAT_S16_LE:
+=======
+	switch (params_width(params)) {
+	case 8:
+		bfs = 16;
+		break;
+	case 16:
+>>>>>>> v3.18
 		bfs = 32;
 		break;
 	default:

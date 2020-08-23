@@ -171,7 +171,11 @@ static irqreturn_t epit_timer_interrupt(int irq, void *dev_id)
 
 static struct irqaction epit_timer_irq = {
 	.name		= "i.MX EPIT Timer Tick",
+<<<<<<< HEAD
 	.flags		= IRQF_DISABLED | IRQF_TIMER | IRQF_IRQPOLL,
+=======
+	.flags		= IRQF_TIMER | IRQF_IRQPOLL,
+>>>>>>> v3.18
 	.handler	= epit_timer_interrupt,
 };
 

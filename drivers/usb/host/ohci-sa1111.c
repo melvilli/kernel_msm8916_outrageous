@@ -185,6 +185,15 @@ static int ohci_hcd_sa1111_probe(struct sa1111_dev *dev)
 	if (usb_disabled())
 		return -ENODEV;
 
+<<<<<<< HEAD
+=======
+	/*
+	 * We don't call dma_set_mask_and_coherent() here because the
+	 * DMA mask has already been appropraitely setup by the core
+	 * SA-1111 bus code (which includes bug workarounds.)
+	 */
+
+>>>>>>> v3.18
 	hcd = usb_create_hcd(&ohci_sa1111_hc_driver, &dev->dev, "sa1111");
 	if (!hcd)
 		return -ENOMEM;
@@ -205,8 +214,15 @@ static int ohci_hcd_sa1111_probe(struct sa1111_dev *dev)
 		goto err2;
 
 	ret = usb_add_hcd(hcd, dev->irq[1], 0);
+<<<<<<< HEAD
 	if (ret == 0)
 		return ret;
+=======
+	if (ret == 0) {
+		device_wakeup_enable(hcd->self.controller);
+		return ret;
+	}
+>>>>>>> v3.18
 
 	sa1111_stop_hc(dev);
  err2:

@@ -3,7 +3,11 @@
 
 #include <linux/types.h>
 #ifdef CONFIG_MMU
+<<<<<<< HEAD
 #include <linux/hardirq.h>
+=======
+#include <linux/preempt_mask.h>
+>>>>>>> v3.18
 #endif
 #include <linux/preempt.h>
 #include <asm/thread_info.h>
@@ -67,6 +71,13 @@ static inline void arch_local_irq_restore(unsigned long flags)
 
 static inline bool arch_irqs_disabled_flags(unsigned long flags)
 {
+<<<<<<< HEAD
+=======
+	if (MACH_IS_ATARI) {
+		/* Ignore HSYNC = ipl 2 on Atari */
+		return (flags & ~(ALLOWINT | 0x200)) != 0;
+	}
+>>>>>>> v3.18
 	return (flags & ~ALLOWINT) != 0;
 }
 

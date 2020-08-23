@@ -11,7 +11,10 @@
  * option) any later version.
  */
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/types.h>
 #include <linux/module.h>
 #include <linux/ssb/ssb.h>
@@ -22,11 +25,18 @@
 #include <asm/mach-bcm47xx/bcm47xx.h>
 
 static char nvram_buf[NVRAM_SPACE];
+<<<<<<< HEAD
+=======
+static const u32 nvram_sizes[] = {0x8000, 0xF000, 0x10000};
+>>>>>>> v3.18
 
 static u32 find_nvram_size(u32 end)
 {
 	struct nvram_header *header;
+<<<<<<< HEAD
 	u32 nvram_sizes[] = {0x8000, 0xF000, 0x10000};
+=======
+>>>>>>> v3.18
 	int i;
 
 	for (i = 0; i < ARRAY_SIZE(nvram_sizes); i++) {
@@ -190,3 +200,26 @@ int bcm47xx_nvram_getenv(char *name, char *val, size_t val_len)
 	return -ENOENT;
 }
 EXPORT_SYMBOL(bcm47xx_nvram_getenv);
+<<<<<<< HEAD
+=======
+
+int bcm47xx_nvram_gpio_pin(const char *name)
+{
+	int i, err;
+	char nvram_var[10];
+	char buf[30];
+
+	for (i = 0; i < 32; i++) {
+		err = snprintf(nvram_var, sizeof(nvram_var), "gpio%i", i);
+		if (err <= 0)
+			continue;
+		err = bcm47xx_nvram_getenv(nvram_var, buf, sizeof(buf));
+		if (err <= 0)
+			continue;
+		if (!strcmp(name, buf))
+			return i;
+	}
+	return -ENOENT;
+}
+EXPORT_SYMBOL(bcm47xx_nvram_gpio_pin);
+>>>>>>> v3.18

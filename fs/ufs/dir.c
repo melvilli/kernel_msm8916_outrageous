@@ -430,16 +430,27 @@ ufs_validate_entry(struct super_block *sb, char *base,
  * This is blatantly stolen from ext2fs
  */
 static int
+<<<<<<< HEAD
 ufs_readdir(struct file *filp, void *dirent, filldir_t filldir)
 {
 	loff_t pos = filp->f_pos;
 	struct inode *inode = file_inode(filp);
+=======
+ufs_readdir(struct file *file, struct dir_context *ctx)
+{
+	loff_t pos = ctx->pos;
+	struct inode *inode = file_inode(file);
+>>>>>>> v3.18
 	struct super_block *sb = inode->i_sb;
 	unsigned int offset = pos & ~PAGE_CACHE_MASK;
 	unsigned long n = pos >> PAGE_CACHE_SHIFT;
 	unsigned long npages = ufs_dir_pages(inode);
 	unsigned chunk_mask = ~(UFS_SB(sb)->s_uspi->s_dirblksize - 1);
+<<<<<<< HEAD
 	int need_revalidate = filp->f_version != inode->i_version;
+=======
+	int need_revalidate = file->f_version != inode->i_version;
+>>>>>>> v3.18
 	unsigned flags = UFS_SB(sb)->s_flags;
 
 	UFSD("BEGIN\n");
@@ -457,16 +468,26 @@ ufs_readdir(struct file *filp, void *dirent, filldir_t filldir)
 			ufs_error(sb, __func__,
 				  "bad page in #%lu",
 				  inode->i_ino);
+<<<<<<< HEAD
 			filp->f_pos += PAGE_CACHE_SIZE - offset;
+=======
+			ctx->pos += PAGE_CACHE_SIZE - offset;
+>>>>>>> v3.18
 			return -EIO;
 		}
 		kaddr = page_address(page);
 		if (unlikely(need_revalidate)) {
 			if (offset) {
 				offset = ufs_validate_entry(sb, kaddr, offset, chunk_mask);
+<<<<<<< HEAD
 				filp->f_pos = (n<<PAGE_CACHE_SHIFT) + offset;
 			}
 			filp->f_version = inode->i_version;
+=======
+				ctx->pos = (n<<PAGE_CACHE_SHIFT) + offset;
+			}
+			file->f_version = inode->i_version;
+>>>>>>> v3.18
 			need_revalidate = 0;
 		}
 		de = (struct ufs_dir_entry *)(kaddr+offset);
@@ -479,11 +500,16 @@ ufs_readdir(struct file *filp, void *dirent, filldir_t filldir)
 				return -EIO;
 			}
 			if (de->d_ino) {
+<<<<<<< HEAD
 				int over;
 				unsigned char d_type = DT_UNKNOWN;
 
 				offset = (char *)de - kaddr;
 
+=======
+				unsigned char d_type = DT_UNKNOWN;
+
+>>>>>>> v3.18
 				UFSD("filldir(%s,%u)\n", de->d_name,
 				      fs32_to_cpu(sb, de->d_ino));
 				UFSD("namlen %u\n", ufs_get_de_namlen(sb, de));
@@ -491,16 +517,27 @@ ufs_readdir(struct file *filp, void *dirent, filldir_t filldir)
 				if ((flags & UFS_DE_MASK) == UFS_DE_44BSD)
 					d_type = de->d_u.d_44.d_type;
 
+<<<<<<< HEAD
 				over = filldir(dirent, de->d_name,
 					       ufs_get_de_namlen(sb, de),
 						(n<<PAGE_CACHE_SHIFT) | offset,
 					       fs32_to_cpu(sb, de->d_ino), d_type);
 				if (over) {
+=======
+				if (!dir_emit(ctx, de->d_name,
+					       ufs_get_de_namlen(sb, de),
+					       fs32_to_cpu(sb, de->d_ino),
+					       d_type)) {
+>>>>>>> v3.18
 					ufs_put_page(page);
 					return 0;
 				}
 			}
+<<<<<<< HEAD
 			filp->f_pos += fs16_to_cpu(sb, de->d_reclen);
+=======
+			ctx->pos += fs16_to_cpu(sb, de->d_reclen);
+>>>>>>> v3.18
 		}
 		ufs_put_page(page);
 	}
@@ -660,7 +697,11 @@ not_empty:
 
 const struct file_operations ufs_dir_operations = {
 	.read		= generic_read_dir,
+<<<<<<< HEAD
 	.readdir	= ufs_readdir,
+=======
+	.iterate	= ufs_readdir,
+>>>>>>> v3.18
 	.fsync		= generic_file_fsync,
 	.llseek		= generic_file_llseek,
 };

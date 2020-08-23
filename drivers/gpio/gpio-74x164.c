@@ -12,7 +12,10 @@
 #include <linux/init.h>
 #include <linux/mutex.h>
 #include <linux/spi/spi.h>
+<<<<<<< HEAD
 #include <linux/spi/74x164.h>
+=======
+>>>>>>> v3.18
 #include <linux/gpio.h>
 #include <linux/of_gpio.h>
 #include <linux/slab.h>
@@ -21,7 +24,10 @@
 #define GEN_74X164_NUMBER_GPIOS	8
 
 struct gen_74x164_chip {
+<<<<<<< HEAD
 	struct spi_device	*spi;
+=======
+>>>>>>> v3.18
 	u8			*buffer;
 	struct gpio_chip	gpio_chip;
 	struct mutex		lock;
@@ -35,6 +41,10 @@ static struct gen_74x164_chip *gpio_to_74x164_chip(struct gpio_chip *gc)
 
 static int __gen_74x164_write_config(struct gen_74x164_chip *chip)
 {
+<<<<<<< HEAD
+=======
+	struct spi_device *spi = to_spi_device(chip->gpio_chip.dev);
+>>>>>>> v3.18
 	struct spi_message message;
 	struct spi_transfer *msg_buf;
 	int i, ret = 0;
@@ -55,12 +65,20 @@ static int __gen_74x164_write_config(struct gen_74x164_chip *chip)
 	 * byte of the buffer will end up in the last register.
 	 */
 	for (i = chip->registers - 1; i >= 0; i--) {
+<<<<<<< HEAD
 		msg_buf[i].tx_buf = chip->buffer +i;
+=======
+		msg_buf[i].tx_buf = chip->buffer + i;
+>>>>>>> v3.18
 		msg_buf[i].len = sizeof(u8);
 		spi_message_add_tail(msg_buf + i, &message);
 	}
 
+<<<<<<< HEAD
 	ret = spi_sync(chip->spi, &message);
+=======
+	ret = spi_sync(spi, &message);
+>>>>>>> v3.18
 
 	kfree(msg_buf);
 
@@ -108,6 +126,7 @@ static int gen_74x164_direction_output(struct gpio_chip *gc,
 static int gen_74x164_probe(struct spi_device *spi)
 {
 	struct gen_74x164_chip *chip;
+<<<<<<< HEAD
 	struct gen_74x164_chip_platform_data *pdata;
 	int ret;
 
@@ -116,6 +135,10 @@ static int gen_74x164_probe(struct spi_device *spi)
 		return -EINVAL;
 	}
 
+=======
+	int ret;
+
+>>>>>>> v3.18
 	/*
 	 * bits_per_word cannot be configured in platform data
 	 */
@@ -129,6 +152,7 @@ static int gen_74x164_probe(struct spi_device *spi)
 	if (!chip)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 	pdata = spi->dev.platform_data;
 	if (pdata && pdata->base)
 		chip->gpio_chip.base = pdata->base;
@@ -141,19 +165,34 @@ static int gen_74x164_probe(struct spi_device *spi)
 
 	chip->spi = spi;
 
+=======
+	spi_set_drvdata(spi, chip);
+
+>>>>>>> v3.18
 	chip->gpio_chip.label = spi->modalias;
 	chip->gpio_chip.direction_output = gen_74x164_direction_output;
 	chip->gpio_chip.get = gen_74x164_get_value;
 	chip->gpio_chip.set = gen_74x164_set_value;
+<<<<<<< HEAD
 
 	if (of_property_read_u32(spi->dev.of_node, "registers-number", &chip->registers)) {
 		dev_err(&spi->dev, "Missing registers-number property in the DT.\n");
 		ret = -EINVAL;
 		goto exit_destroy;
+=======
+	chip->gpio_chip.base = -1;
+
+	if (of_property_read_u32(spi->dev.of_node, "registers-number",
+				 &chip->registers)) {
+		dev_err(&spi->dev,
+			"Missing registers-number property in the DT.\n");
+		return -EINVAL;
+>>>>>>> v3.18
 	}
 
 	chip->gpio_chip.ngpio = GEN_74X164_NUMBER_GPIOS * chip->registers;
 	chip->buffer = devm_kzalloc(&spi->dev, chip->registers, GFP_KERNEL);
+<<<<<<< HEAD
 	if (!chip->buffer) {
 		ret = -ENOMEM;
 		goto exit_destroy;
@@ -163,6 +202,17 @@ static int gen_74x164_probe(struct spi_device *spi)
 	chip->gpio_chip.dev = &spi->dev;
 	chip->gpio_chip.owner = THIS_MODULE;
 
+=======
+	if (!chip->buffer)
+		return -ENOMEM;
+
+	chip->gpio_chip.can_sleep = true;
+	chip->gpio_chip.dev = &spi->dev;
+	chip->gpio_chip.owner = THIS_MODULE;
+
+	mutex_init(&chip->lock);
+
+>>>>>>> v3.18
 	ret = __gen_74x164_write_config(chip);
 	if (ret) {
 		dev_err(&spi->dev, "Failed writing: %d\n", ret);
@@ -170,6 +220,7 @@ static int gen_74x164_probe(struct spi_device *spi)
 	}
 
 	ret = gpiochip_add(&chip->gpio_chip);
+<<<<<<< HEAD
 	if (ret)
 		goto exit_destroy;
 
@@ -178,11 +229,20 @@ static int gen_74x164_probe(struct spi_device *spi)
 exit_destroy:
 	spi_set_drvdata(spi, NULL);
 	mutex_destroy(&chip->lock);
+=======
+	if (!ret)
+		return 0;
+
+exit_destroy:
+	mutex_destroy(&chip->lock);
+
+>>>>>>> v3.18
 	return ret;
 }
 
 static int gen_74x164_remove(struct spi_device *spi)
 {
+<<<<<<< HEAD
 	struct gen_74x164_chip *chip;
 	int ret;
 
@@ -200,6 +260,14 @@ static int gen_74x164_remove(struct spi_device *spi)
 				ret);
 
 	return ret;
+=======
+	struct gen_74x164_chip *chip = spi_get_drvdata(spi);
+
+	gpiochip_remove(&chip->gpio_chip);
+	mutex_destroy(&chip->lock);
+
+	return 0;
+>>>>>>> v3.18
 }
 
 static const struct of_device_id gen_74x164_dt_ids[] = {
@@ -212,7 +280,11 @@ static struct spi_driver gen_74x164_driver = {
 	.driver = {
 		.name		= "74x164",
 		.owner		= THIS_MODULE,
+<<<<<<< HEAD
 		.of_match_table	= of_match_ptr(gen_74x164_dt_ids),
+=======
+		.of_match_table	= gen_74x164_dt_ids,
+>>>>>>> v3.18
 	},
 	.probe		= gen_74x164_probe,
 	.remove		= gen_74x164_remove,

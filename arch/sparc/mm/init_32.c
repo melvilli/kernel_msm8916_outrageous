@@ -31,10 +31,19 @@
 #include <asm/pgtable.h>
 #include <asm/vaddrs.h>
 #include <asm/pgalloc.h>	/* bug in asm-generic/tlb.h: check_pgt_cache */
+<<<<<<< HEAD
+=======
+#include <asm/setup.h>
+>>>>>>> v3.18
 #include <asm/tlb.h>
 #include <asm/prom.h>
 #include <asm/leon.h>
 
+<<<<<<< HEAD
+=======
+#include "mm_32.h"
+
+>>>>>>> v3.18
 unsigned long *sparc_valid_addr_bitmap;
 EXPORT_SYMBOL(sparc_valid_addr_bitmap);
 
@@ -63,7 +72,10 @@ void show_mem(unsigned int filter)
 }
 
 
+<<<<<<< HEAD
 extern unsigned long cmdline_memory_size;
+=======
+>>>>>>> v3.18
 unsigned long last_valid_pfn;
 
 unsigned long calc_highpages(void)
@@ -246,9 +258,12 @@ unsigned long __init bootmem_init(unsigned long *pages_avail)
  * init routine based upon the Sun model type on the Sparc.
  *
  */
+<<<<<<< HEAD
 extern void srmmu_paging_init(void);
 extern void device_scan(void);
 
+=======
+>>>>>>> v3.18
 void __init paging_init(void)
 {
 	srmmu_paging_init();
@@ -288,10 +303,13 @@ static void map_high_region(unsigned long start_pfn, unsigned long end_pfn)
 
 void __init mem_init(void)
 {
+<<<<<<< HEAD
 	int codepages = 0;
 	int datapages = 0;
 	int initpages = 0; 
 	int reservedpages = 0;
+=======
+>>>>>>> v3.18
 	int i;
 
 	if (PKMAP_BASE+LAST_PKMAP*PAGE_SIZE >= FIXADDR_START) {
@@ -329,8 +347,11 @@ void __init mem_init(void)
 		unsigned long start_pfn = sp_banks[i].base_addr >> PAGE_SHIFT;
 		unsigned long end_pfn = (sp_banks[i].base_addr + sp_banks[i].num_bytes) >> PAGE_SHIFT;
 
+<<<<<<< HEAD
 		num_physpages += sp_banks[i].num_bytes >> PAGE_SHIFT;
 
+=======
+>>>>>>> v3.18
 		if (end_pfn <= highstart_pfn)
 			continue;
 
@@ -340,6 +361,7 @@ void __init mem_init(void)
 		map_high_region(start_pfn, end_pfn);
 	}
 	
+<<<<<<< HEAD
 	codepages = (((unsigned long) &_etext) - ((unsigned long)&_start));
 	codepages = PAGE_ALIGN(codepages) >> PAGE_SHIFT;
 	datapages = (((unsigned long) &_edata) - ((unsigned long)&_etext));
@@ -361,18 +383,30 @@ void __init mem_init(void)
 	       datapages << (PAGE_SHIFT-10), 
 	       initpages << (PAGE_SHIFT-10),
 	       totalhigh_pages << (PAGE_SHIFT-10));
+=======
+	mem_init_print_info(NULL);
+>>>>>>> v3.18
 }
 
 void free_initmem (void)
 {
+<<<<<<< HEAD
 	num_physpages += free_initmem_default(POISON_FREE_INITMEM);
+=======
+	free_initmem_default(POISON_FREE_INITMEM);
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_BLK_DEV_INITRD
 void free_initrd_mem(unsigned long start, unsigned long end)
 {
+<<<<<<< HEAD
 	num_physpages += free_reserved_area(start, end, POISON_FREE_INITMEM,
 					    "initrd");
+=======
+	free_reserved_area((void *)start, (void *)end, POISON_FREE_INITMEM,
+			   "initrd");
+>>>>>>> v3.18
 }
 #endif
 

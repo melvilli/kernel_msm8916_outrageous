@@ -25,6 +25,12 @@ menuconfig NETDEVICES
 # that for each of the symbols.
 if NETDEVICES
 
+<<<<<<< HEAD
+=======
+config MII
+	tristate
+
+>>>>>>> v3.18
 config NET_CORE
 	default y
 	bool "Network core driver support"
@@ -100,6 +106,7 @@ config NET_FC
 	  adaptor below. You also should have said Y to "SCSI support" and
 	  "SCSI generic support".
 
+<<<<<<< HEAD
 config MII
 	tristate "Generic Media Independent Interface device support"
 	help
@@ -107,6 +114,8 @@ config MII
 	  or internal device.  It is safe to say Y or M here even if your
 	  ethernet card lacks MII.
 
+=======
+>>>>>>> v3.18
 config IFB
 	tristate "Intermediate Functional Block support"
 	depends on NET_CLS_ACT
@@ -144,7 +153,11 @@ config MACVTAP
 	  This adds a specialized tap character device driver that is based
 	  on the MAC-VLAN network interface, called macvtap. A macvtap device
 	  can be added in the same way as a macvlan device, using 'type
+<<<<<<< HEAD
 	  macvlan', and then be accessed through the tap user space interface.
+=======
+	  macvtap', and then be accessed through the tap user space interface.
+>>>>>>> v3.18
 
 	  To compile this driver as a module, choose M here: the module
 	  will be called macvtap.
@@ -152,7 +165,11 @@ config MACVTAP
 config VXLAN
        tristate "Virtual eXtensible Local Area Network (VXLAN)"
        depends on INET
+<<<<<<< HEAD
        select NET_IP_TUNNEL
+=======
+       select NET_UDP_TUNNEL
+>>>>>>> v3.18
        ---help---
 	  This allows one to create vxlan virtual interfaces that provide
 	  Layer 2 Networks over Layer 3 Networks. VXLAN is often used
@@ -182,11 +199,14 @@ config NETCONSOLE_DYNAMIC
 config NETPOLL
 	def_bool NETCONSOLE
 
+<<<<<<< HEAD
 config NETPOLL_TRAP
 	bool "Netpoll traffic trapping"
 	default n
 	depends on NETPOLL
 
+=======
+>>>>>>> v3.18
 config NET_POLL_CONTROLLER
 	def_bool NETPOLL
 
@@ -242,10 +262,27 @@ config VETH
 config VIRTIO_NET
 	tristate "Virtio network driver"
 	depends on VIRTIO
+<<<<<<< HEAD
+=======
+	select AVERAGE
+>>>>>>> v3.18
 	---help---
 	  This is the virtual network driver for virtio.  It can be used with
 	  lguest or QEMU based VMMs (like KVM or Xen).  Say Y or M.
 
+<<<<<<< HEAD
+=======
+config NLMON
+	tristate "Virtual netlink monitoring device"
+	---help---
+	  This option enables a monitoring net device for netlink skbs. The
+	  purpose of this is to analyze netlink messages with packet sockets.
+	  Thus applications like tcpdump will be able to see local netlink
+	  messages if they tap into the netlink device, record pcaps for further
+	  diagnostics, etc. This is mostly intended for developers or support
+	  to debug netlink issues. If unsure, say N.
+
+>>>>>>> v3.18
 endif # NET_CORE
 
 config SUNGEM_PHY
@@ -309,6 +346,7 @@ source "drivers/net/wan/Kconfig"
 
 source "drivers/net/ieee802154/Kconfig"
 
+<<<<<<< HEAD
 config DANIPC
 	tristate "DAN IPC network device"
 	depends on PACKET
@@ -318,6 +356,8 @@ config DANIPC
 		enable an efficient and reliable communication between
 		the different processors in the SoC.
 
+=======
+>>>>>>> v3.18
 config XEN_NETDEV_FRONTEND
 	tristate "Xen network device frontend driver"
 	depends on XEN

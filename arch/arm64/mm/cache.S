@@ -3,7 +3,10 @@
  *
  * Copyright (C) 2001 Deep Blue Solutions Ltd.
  * Copyright (C) 2012 ARM Ltd.
+<<<<<<< HEAD
  * Copyright (c) 2014, The Linux Foundation. All rights reserved.
+=======
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -24,6 +27,7 @@
 
 #include "proc-macros.S"
 
+<<<<<<< HEAD
  /*
  *     flush_dcache_louis()
  *
@@ -58,6 +62,8 @@ ENTRY(flush_cache_louis)
 	ret x12
 ENDPROC(flush_cache_louis)
 
+=======
+>>>>>>> v3.18
 /*
  *	__flush_dcache_all()
  *
@@ -215,7 +221,11 @@ ENTRY(__inval_cache_range)
  *	- start   - virtual start address of region
  *	- end     - virtual end address of region
  */
+<<<<<<< HEAD
 ENTRY(__dma_inv_range)
+=======
+__dma_inv_range:
+>>>>>>> v3.18
 	dcache_line_size x2, x3
 	sub	x3, x2, #1
 	tst	x1, x3				// end cache line aligned?
@@ -241,7 +251,11 @@ ENDPROC(__dma_inv_range)
  *	- start   - virtual start address of region
  *	- end     - virtual end address of region
  */
+<<<<<<< HEAD
 ENTRY(__dma_clean_range)
+=======
+__dma_clean_range:
+>>>>>>> v3.18
 	dcache_line_size x2, x3
 	sub	x3, x2, #1
 	bic	x0, x0, x3

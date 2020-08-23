@@ -46,6 +46,7 @@ static void lib80211_crypt_deinit_entries(struct lib80211_crypt_info *info,
 static void lib80211_crypt_quiescing(struct lib80211_crypt_info *info);
 static void lib80211_crypt_deinit_handler(unsigned long data);
 
+<<<<<<< HEAD
 const char *print_ssid(char *buf, const char *ssid, u8 ssid_len)
 {
 	const char *s = ssid;
@@ -78,6 +79,8 @@ const char *print_ssid(char *buf, const char *ssid, u8 ssid_len)
 }
 EXPORT_SYMBOL(print_ssid);
 
+=======
+>>>>>>> v3.18
 int lib80211_crypt_info_init(struct lib80211_crypt_info *info, char *name,
 				spinlock_t *lock)
 {

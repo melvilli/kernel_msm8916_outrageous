@@ -915,7 +915,11 @@ static inline void p4_pmu_disable_event(struct perf_event *event)
 
 static void p4_pmu_disable_all(void)
 {
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 	int idx;
 
 	for (idx = 0; idx < x86_pmu.num_counters; idx++) {
@@ -984,7 +988,11 @@ static void p4_pmu_enable_event(struct perf_event *event)
 
 static void p4_pmu_enable_all(int added)
 {
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 	int idx;
 
 	for (idx = 0; idx < x86_pmu.num_counters; idx++) {
@@ -1004,7 +1012,11 @@ static int p4_pmu_handle_irq(struct pt_regs *regs)
 	int idx, handled = 0;
 	u64 val;
 
+<<<<<<< HEAD
 	cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 
 	for (idx = 0; idx < x86_pmu.num_counters; idx++) {
 		int overflow;
@@ -1257,7 +1269,28 @@ again:
 			pass++;
 			goto again;
 		}
+<<<<<<< HEAD
 
+=======
+		/*
+		 * Perf does test runs to see if a whole group can be assigned
+		 * together succesfully.  There can be multiple rounds of this.
+		 * Unfortunately, p4_pmu_swap_config_ts touches the hwc->config
+		 * bits, such that the next round of group assignments will
+		 * cause the above p4_should_swap_ts to pass instead of fail.
+		 * This leads to counters exclusive to thread0 being used by
+		 * thread1.
+		 *
+		 * Solve this with a cheap hack, reset the idx back to -1 to
+		 * force a new lookup (p4_next_cntr) to get the right counter
+		 * for the right thread.
+		 *
+		 * This probably doesn't comply with the general spirit of how
+		 * perf wants to work, but P4 is special. :-(
+		 */
+		if (p4_should_swap_ts(hwc->config, cpu))
+			hwc->idx = -1;
+>>>>>>> v3.18
 		p4_pmu_swap_config_ts(hwc, cpu);
 		if (assign)
 			assign[i] = cntr_idx;
@@ -1322,6 +1355,10 @@ static __initconst const struct x86_pmu p4_pmu = {
 __init int p4_pmu_init(void)
 {
 	unsigned int low, high;
+<<<<<<< HEAD
+=======
+	int i, reg;
+>>>>>>> v3.18
 
 	/* If we get stripped -- indexing fails */
 	BUILD_BUG_ON(ARCH_P4_MAX_CCCR > INTEL_PMC_MAX_GENERIC);
@@ -1340,5 +1377,22 @@ __init int p4_pmu_init(void)
 
 	x86_pmu = p4_pmu;
 
+<<<<<<< HEAD
+=======
+	/*
+	 * Even though the counters are configured to interrupt a particular
+	 * logical processor when an overflow happens, testing has shown that
+	 * on kdump kernels (which uses a single cpu), thread1's counter
+	 * continues to run and will report an NMI on thread0.  Due to the
+	 * overflow bug, this leads to a stream of unknown NMIs.
+	 *
+	 * Solve this by zero'ing out the registers to mimic a reset.
+	 */
+	for (i = 0; i < x86_pmu.num_counters; i++) {
+		reg = x86_pmu_config_addr(i);
+		wrmsrl_safe(reg, 0ULL);
+	}
+
+>>>>>>> v3.18
 	return 0;
 }

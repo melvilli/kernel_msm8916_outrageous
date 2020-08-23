@@ -20,11 +20,19 @@
 #include <linux/in6.h>
 
 #include <asm/uaccess.h>
+<<<<<<< HEAD
+=======
+#include <asm/cacheflush.h>
+>>>>>>> v3.18
 #include <asm/checksum.h>
 #include <asm/dma.h>
 #include <asm/io.h>
 #include <asm/page.h>
 #include <asm/pgalloc.h>
+<<<<<<< HEAD
+=======
+#include <asm/ftrace.h>
+>>>>>>> v3.18
 #ifdef CONFIG_BLK_DEV_FD
 #include <asm/floppy.h>
 #endif
@@ -104,6 +112,10 @@ EXPORT_SYMBOL(csum_partial_copy_generic);
  * Architecture-specific symbols
  */
 EXPORT_SYMBOL(__xtensa_copy_user);
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(__invalidate_icache_range);
+>>>>>>> v3.18
 
 /*
  * Kernel hacking ...
@@ -121,6 +133,19 @@ EXPORT_SYMBOL(insw);
 EXPORT_SYMBOL(insl);
 
 extern long common_exception_return;
+<<<<<<< HEAD
 extern long _spill_registers;
 EXPORT_SYMBOL(common_exception_return);
 EXPORT_SYMBOL(_spill_registers);
+=======
+EXPORT_SYMBOL(common_exception_return);
+
+#ifdef CONFIG_FUNCTION_TRACER
+EXPORT_SYMBOL(_mcount);
+#endif
+
+EXPORT_SYMBOL(__invalidate_dcache_range);
+#if XCHAL_DCACHE_IS_WRITEBACK
+EXPORT_SYMBOL(__flush_dcache_range);
+#endif
+>>>>>>> v3.18

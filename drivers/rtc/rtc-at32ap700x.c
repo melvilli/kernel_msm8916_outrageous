@@ -141,7 +141,11 @@ static int at32_rtc_alarm_irq_enable(struct device *dev, unsigned int enabled)
 
 	spin_lock_irq(&rtc->lock);
 
+<<<<<<< HEAD
 	if(enabled) {
+=======
+	if (enabled) {
+>>>>>>> v3.18
 		if (rtc_readl(rtc, VAL) > rtc->alarm_time) {
 			ret = -EINVAL;
 			goto out;
@@ -204,31 +208,49 @@ static int __init at32_rtc_probe(struct platform_device *pdev)
 
 	rtc = devm_kzalloc(&pdev->dev, sizeof(struct rtc_at32ap700x),
 			   GFP_KERNEL);
+<<<<<<< HEAD
 	if (!rtc) {
 		dev_dbg(&pdev->dev, "out of memory\n");
 		return -ENOMEM;
 	}
+=======
+	if (!rtc)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	regs = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!regs) {
 		dev_dbg(&pdev->dev, "no mmio resource defined\n");
+<<<<<<< HEAD
 		ret = -ENXIO;
 		goto out;
+=======
+		return -ENXIO;
+>>>>>>> v3.18
 	}
 
 	irq = platform_get_irq(pdev, 0);
 	if (irq <= 0) {
 		dev_dbg(&pdev->dev, "could not get irq\n");
+<<<<<<< HEAD
 		ret = -ENXIO;
 		goto out;
+=======
+		return -ENXIO;
+>>>>>>> v3.18
 	}
 
 	rtc->irq = irq;
 	rtc->regs = devm_ioremap(&pdev->dev, regs->start, resource_size(regs));
 	if (!rtc->regs) {
+<<<<<<< HEAD
 		ret = -ENOMEM;
 		dev_dbg(&pdev->dev, "could not map I/O memory\n");
 		goto out;
+=======
+		dev_dbg(&pdev->dev, "could not map I/O memory\n");
+		return -ENOMEM;
+>>>>>>> v3.18
 	}
 	spin_lock_init(&rtc->lock);
 
@@ -249,7 +271,11 @@ static int __init at32_rtc_probe(struct platform_device *pdev)
 				"rtc", rtc);
 	if (ret) {
 		dev_dbg(&pdev->dev, "could not request irq %d\n", irq);
+<<<<<<< HEAD
 		goto out;
+=======
+		return ret;
+>>>>>>> v3.18
 	}
 
 	platform_set_drvdata(pdev, rtc);
@@ -258,8 +284,12 @@ static int __init at32_rtc_probe(struct platform_device *pdev)
 				&at32_rtc_ops, THIS_MODULE);
 	if (IS_ERR(rtc->rtc)) {
 		dev_dbg(&pdev->dev, "could not register rtc device\n");
+<<<<<<< HEAD
 		ret = PTR_ERR(rtc->rtc);
 		goto out;
+=======
+		return PTR_ERR(rtc->rtc);
+>>>>>>> v3.18
 	}
 
 	device_init_wakeup(&pdev->dev, 1);
@@ -268,18 +298,24 @@ static int __init at32_rtc_probe(struct platform_device *pdev)
 			(unsigned long)rtc->regs, rtc->irq);
 
 	return 0;
+<<<<<<< HEAD
 
 out:
 	platform_set_drvdata(pdev, NULL);
 	return ret;
+=======
+>>>>>>> v3.18
 }
 
 static int __exit at32_rtc_remove(struct platform_device *pdev)
 {
 	device_init_wakeup(&pdev->dev, 0);
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

@@ -40,14 +40,20 @@
 #include <mach/mux.h>
 #include <linux/omap-dma.h>
 #include <mach/tc.h>
+<<<<<<< HEAD
 #include <mach/irda.h>
+=======
+>>>>>>> v3.18
 #include <linux/platform_data/keypad-omap.h>
 
 #include <mach/hardware.h>
 #include <mach/usb.h>
 
 #include "common.h"
+<<<<<<< HEAD
 #include "dma.h"
+=======
+>>>>>>> v3.18
 
 #define PALMZ71_USBDETECT_GPIO	0
 #define PALMZ71_PENIRQ_GPIO	6
@@ -153,6 +159,7 @@ static struct platform_device palmz71_lcd_device = {
 	.id	= -1,
 };
 
+<<<<<<< HEAD
 static struct omap_irda_config palmz71_irda_config = {
 	.transceiver_cap	= IR_SIRMODE,
 	.rx_channel		= OMAP_DMA_UART3_RX,
@@ -181,6 +188,8 @@ static struct platform_device palmz71_irda_device = {
 	.resource	= palmz71_irda_resources,
 };
 
+=======
+>>>>>>> v3.18
 static struct platform_device palmz71_spi_device = {
 	.name	= "spi_palmz71",
 	.id	= -1,
@@ -202,7 +211,10 @@ static struct platform_device *devices[] __initdata = {
 	&palmz71_rom_device,
 	&palmz71_kp_device,
 	&palmz71_lcd_device,
+<<<<<<< HEAD
 	&palmz71_irda_device,
+=======
+>>>>>>> v3.18
 	&palmz71_spi_device,
 	&palmz71_backlight_device,
 };

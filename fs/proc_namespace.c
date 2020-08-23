@@ -20,6 +20,7 @@ static unsigned mounts_poll(struct file *file, poll_table *wait)
 	struct proc_mounts *p = proc_mounts(file->private_data);
 	struct mnt_namespace *ns = p->ns;
 	unsigned res = POLLIN | POLLRDNORM;
+<<<<<<< HEAD
 
 	poll_wait(file, &p->ns->poll, wait);
 
@@ -29,6 +30,17 @@ static unsigned mounts_poll(struct file *file, poll_table *wait)
 		res |= POLLERR | POLLPRI;
 	}
 	br_read_unlock(&vfsmount_lock);
+=======
+	int event;
+
+	poll_wait(file, &p->ns->poll, wait);
+
+	event = ACCESS_ONCE(ns->event);
+	if (p->m.poll_event != event) {
+		p->m.poll_event = event;
+		res |= POLLERR | POLLPRI;
+	}
+>>>>>>> v3.18
 
 	return res;
 }
@@ -112,9 +124,13 @@ static int show_vfsmnt(struct seq_file *m, struct vfsmount *mnt)
 	if (err)
 		goto out;
 	show_mnt_opts(m, mnt);
+<<<<<<< HEAD
 	if (sb->s_op->show_options2)
 			err = sb->s_op->show_options2(mnt, m, mnt_path.dentry);
 	else if (sb->s_op->show_options)
+=======
+	if (sb->s_op->show_options)
+>>>>>>> v3.18
 		err = sb->s_op->show_options(m, mnt_path.dentry);
 	seq_puts(m, " 0 0\n");
 out:
@@ -175,9 +191,13 @@ static int show_mountinfo(struct seq_file *m, struct vfsmount *mnt)
 	err = show_sb_opts(m, sb);
 	if (err)
 		goto out;
+<<<<<<< HEAD
 	if (sb->s_op->show_options2) {
 		err = sb->s_op->show_options2(mnt, m, mnt->mnt_root);
 	} else if (sb->s_op->show_options)
+=======
+	if (sb->s_op->show_options)
+>>>>>>> v3.18
 		err = sb->s_op->show_options(m, mnt->mnt_root);
 	seq_putc(m, '\n');
 out:
@@ -236,14 +256,22 @@ static int mounts_open_common(struct inode *inode, struct file *file,
 	if (!task)
 		goto err;
 
+<<<<<<< HEAD
 	rcu_read_lock();
 	nsp = task_nsproxy(task);
 	if (!nsp) {
 		rcu_read_unlock();
+=======
+	task_lock(task);
+	nsp = task->nsproxy;
+	if (!nsp || !nsp->mnt_ns) {
+		task_unlock(task);
+>>>>>>> v3.18
 		put_task_struct(task);
 		goto err;
 	}
 	ns = nsp->mnt_ns;
+<<<<<<< HEAD
 	if (!ns) {
 		rcu_read_unlock();
 		put_task_struct(task);
@@ -252,6 +280,9 @@ static int mounts_open_common(struct inode *inode, struct file *file,
 	get_mnt_ns(ns);
 	rcu_read_unlock();
 	task_lock(task);
+=======
+	get_mnt_ns(ns);
+>>>>>>> v3.18
 	if (!task->fs) {
 		task_unlock(task);
 		put_task_struct(task);
@@ -276,6 +307,10 @@ static int mounts_open_common(struct inode *inode, struct file *file,
 	p->root = root;
 	p->m.poll_event = ns->event;
 	p->show = show;
+<<<<<<< HEAD
+=======
+	p->cached_event = ~0ULL;
+>>>>>>> v3.18
 
 	return 0;
 

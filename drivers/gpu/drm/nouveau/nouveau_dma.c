@@ -24,8 +24,11 @@
  *
  */
 
+<<<<<<< HEAD
 #include <core/client.h>
 
+=======
+>>>>>>> v3.18
 #include "nouveau_drm.h"
 #include "nouveau_dma.h"
 
@@ -54,9 +57,15 @@ READ_GET(struct nouveau_channel *chan, uint64_t *prev_get, int *timeout)
 {
 	uint64_t val;
 
+<<<<<<< HEAD
 	val = nv_ro32(chan->object, chan->user_get);
         if (chan->user_get_hi)
                 val |= (uint64_t)nv_ro32(chan->object, chan->user_get_hi) << 32;
+=======
+	val = nvif_rd32(chan, chan->user_get);
+        if (chan->user_get_hi)
+                val |= (uint64_t)nvif_rd32(chan, chan->user_get_hi) << 32;
+>>>>>>> v3.18
 
 	/* reset counter as long as GET is still advancing, this is
 	 * to avoid misdetecting a GPU lockup if the GPU happens to
@@ -84,12 +93,20 @@ void
 nv50_dma_push(struct nouveau_channel *chan, struct nouveau_bo *bo,
 	      int delta, int length)
 {
+<<<<<<< HEAD
+=======
+	struct nouveau_cli *cli = (void *)nvif_client(&chan->device->base);
+>>>>>>> v3.18
 	struct nouveau_bo *pb = chan->push.buffer;
 	struct nouveau_vma *vma;
 	int ip = (chan->dma.ib_put * 2) + chan->dma.ib_base;
 	u64 offset;
 
+<<<<<<< HEAD
 	vma = nouveau_bo_vma_find(bo, nv_client(chan->cli)->vm);
+=======
+	vma = nouveau_bo_vma_find(bo, cli->vm);
+>>>>>>> v3.18
 	BUG_ON(!vma);
 	offset = vma->offset + delta;
 
@@ -100,11 +117,19 @@ nv50_dma_push(struct nouveau_channel *chan, struct nouveau_bo *bo,
 
 	chan->dma.ib_put = (chan->dma.ib_put + 1) & chan->dma.ib_max;
 
+<<<<<<< HEAD
 	DRM_MEMORYBARRIER();
 	/* Flush writes. */
 	nouveau_bo_rd32(pb, 0);
 
 	nv_wo32(chan->object, 0x8c, chan->dma.ib_put);
+=======
+	mb();
+	/* Flush writes. */
+	nouveau_bo_rd32(pb, 0);
+
+	nvif_wr32(chan, 0x8c, chan->dma.ib_put);
+>>>>>>> v3.18
 	chan->dma.ib_free--;
 }
 
@@ -114,7 +139,11 @@ nv50_dma_push_wait(struct nouveau_channel *chan, int count)
 	uint32_t cnt = 0, prev_get = 0;
 
 	while (chan->dma.ib_free < count) {
+<<<<<<< HEAD
 		uint32_t get = nv_ro32(chan->object, 0x88);
+=======
+		uint32_t get = nvif_rd32(chan, 0x88);
+>>>>>>> v3.18
 		if (get != prev_get) {
 			prev_get = get;
 			cnt = 0;

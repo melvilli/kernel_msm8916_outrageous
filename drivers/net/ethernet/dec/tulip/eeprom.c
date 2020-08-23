@@ -13,7 +13,10 @@
 #include <linux/pci.h>
 #include <linux/slab.h>
 #include "tulip.h"
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <asm/unaligned.h>
 
 

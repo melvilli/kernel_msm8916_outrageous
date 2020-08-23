@@ -33,6 +33,7 @@
 
 #include "wm8994.h"
 
+<<<<<<< HEAD
 /**
  * wm8994_reg_read: Read a single WM8994 register.
  *
@@ -112,6 +113,9 @@ int wm8994_set_bits(struct wm8994 *wm8994, unsigned short reg,
 EXPORT_SYMBOL_GPL(wm8994_set_bits);
 
 static struct mfd_cell wm8994_regulator_devs[] = {
+=======
+static const struct mfd_cell wm8994_regulator_devs[] = {
+>>>>>>> v3.18
 	{
 		.name = "wm8994-ldo",
 		.id = 1,
@@ -140,7 +144,11 @@ static struct resource wm8994_gpio_resources[] = {
 	},
 };
 
+<<<<<<< HEAD
 static struct mfd_cell wm8994_devs[] = {
+=======
+static const struct mfd_cell wm8994_devs[] = {
+>>>>>>> v3.18
 	{
 		.name = "wm8994-codec",
 		.num_resources = ARRAY_SIZE(wm8994_codec_resources),
@@ -201,6 +209,7 @@ static int wm8994_suspend(struct device *dev)
 	int ret;
 
 	/* Don't actually go through with the suspend if the CODEC is
+<<<<<<< HEAD
 	 * still active (eg, for audio passthrough from CP. */
 	ret = wm8994_reg_read(wm8994, WM8994_POWER_MANAGEMENT_1);
 	if (ret < 0) {
@@ -230,6 +239,9 @@ static int wm8994_suspend(struct device *dev)
 		return 0;
 	}
 
+=======
+	 * still active for accessory detect. */
+>>>>>>> v3.18
 	switch (wm8994->type) {
 	case WM8958:
 	case WM1811:
@@ -245,6 +257,7 @@ static int wm8994_suspend(struct device *dev)
 		break;
 	}
 
+<<<<<<< HEAD
 	switch (wm8994->type) {
 	case WM1811:
 		ret = wm8994_reg_read(wm8994, WM8994_ANTIPOP_2);
@@ -273,6 +286,8 @@ static int wm8994_suspend(struct device *dev)
 		break;
 	}
 
+=======
+>>>>>>> v3.18
 	/* Disable LDO pulldowns while the device is suspended if we
 	 * don't know that something will be driving them. */
 	if (!wm8994->ldo_ena_always_driven)
@@ -652,6 +667,20 @@ static int wm8994_device_init(struct wm8994 *wm8994, int irq)
 		return ret;
 	}
 
+<<<<<<< HEAD
+=======
+	/* Explicitly put the device into reset in case regulators
+	 * don't get disabled in order to ensure we know the device
+	 * state.
+	 */
+	ret = wm8994_reg_write(wm8994, WM8994_SOFTWARE_RESET,
+			       wm8994_reg_read(wm8994, WM8994_SOFTWARE_RESET));
+	if (ret != 0) {
+		dev_err(wm8994->dev, "Failed to reset device: %d\n", ret);
+		return ret;
+	}
+
+>>>>>>> v3.18
 	if (regmap_patch) {
 		ret = regmap_register_patch(wm8994->regmap, regmap_patch,
 					    patch_regs);
@@ -759,7 +788,11 @@ static int wm8994_i2c_probe(struct i2c_client *i2c,
 	if (i2c->dev.of_node) {
 		of_id = of_match_device(wm8994_of_match, &i2c->dev);
 		if (of_id)
+<<<<<<< HEAD
 			wm8994->type = (int)of_id->data;
+=======
+			wm8994->type = (enum wm8994_type)of_id->data;
+>>>>>>> v3.18
 	} else {
 		wm8994->type = id->driver_data;
 	}

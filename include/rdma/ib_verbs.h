@@ -48,6 +48,10 @@
 #include <linux/rwsem.h>
 #include <linux/scatterlist.h>
 #include <linux/workqueue.h>
+<<<<<<< HEAD
+=======
+#include <uapi/linux/if_ether.h>
+>>>>>>> v3.18
 
 #include <linux/atomic.h>
 #include <asm/uaccess.h>
@@ -67,16 +71,32 @@ enum rdma_node_type {
 	RDMA_NODE_IB_CA 	= 1,
 	RDMA_NODE_IB_SWITCH,
 	RDMA_NODE_IB_ROUTER,
+<<<<<<< HEAD
 	RDMA_NODE_RNIC
+=======
+	RDMA_NODE_RNIC,
+	RDMA_NODE_USNIC,
+	RDMA_NODE_USNIC_UDP,
+>>>>>>> v3.18
 };
 
 enum rdma_transport_type {
 	RDMA_TRANSPORT_IB,
+<<<<<<< HEAD
 	RDMA_TRANSPORT_IWARP
 };
 
 enum rdma_transport_type
 rdma_node_get_transport(enum rdma_node_type node_type) __attribute_const__;
+=======
+	RDMA_TRANSPORT_IWARP,
+	RDMA_TRANSPORT_USNIC,
+	RDMA_TRANSPORT_USNIC_UDP
+};
+
+__attribute_const__ enum rdma_transport_type
+rdma_node_get_transport(enum rdma_node_type node_type);
+>>>>>>> v3.18
 
 enum rdma_link_layer {
 	IB_LINK_LAYER_UNSPECIFIED,
@@ -116,7 +136,24 @@ enum ib_device_cap_flags {
 	IB_DEVICE_MEM_MGT_EXTENSIONS	= (1<<21),
 	IB_DEVICE_BLOCK_MULTICAST_LOOPBACK = (1<<22),
 	IB_DEVICE_MEM_WINDOW_TYPE_2A	= (1<<23),
+<<<<<<< HEAD
 	IB_DEVICE_MEM_WINDOW_TYPE_2B	= (1<<24)
+=======
+	IB_DEVICE_MEM_WINDOW_TYPE_2B	= (1<<24),
+	IB_DEVICE_MANAGED_FLOW_STEERING = (1<<29),
+	IB_DEVICE_SIGNATURE_HANDOVER	= (1<<30)
+};
+
+enum ib_signature_prot_cap {
+	IB_PROT_T10DIF_TYPE_1 = 1,
+	IB_PROT_T10DIF_TYPE_2 = 1 << 1,
+	IB_PROT_T10DIF_TYPE_3 = 1 << 2,
+};
+
+enum ib_signature_guard_cap {
+	IB_GUARD_T10DIF_CRC	= 1,
+	IB_GUARD_T10DIF_CSUM	= 1 << 1,
+>>>>>>> v3.18
 };
 
 enum ib_atomic_cap {
@@ -166,6 +203,11 @@ struct ib_device_attr {
 	unsigned int		max_fast_reg_page_list_len;
 	u16			max_pkeys;
 	u8			local_ca_ack_delay;
+<<<<<<< HEAD
+=======
+	int			sig_prot_cap;
+	int			sig_guard_cap;
+>>>>>>> v3.18
 };
 
 enum ib_mtu {
@@ -220,7 +262,12 @@ enum ib_port_cap_flags {
 	IB_PORT_CAP_MASK_NOTICE_SUP		= 1 << 22,
 	IB_PORT_BOOT_MGMT_SUP			= 1 << 23,
 	IB_PORT_LINK_LATENCY_SUP		= 1 << 24,
+<<<<<<< HEAD
 	IB_PORT_CLIENT_REG_SUP			= 1 << 25
+=======
+	IB_PORT_CLIENT_REG_SUP			= 1 << 25,
+	IB_PORT_IP_BASED_GIDS			= 1 << 26
+>>>>>>> v3.18
 };
 
 enum ib_port_width {
@@ -445,21 +492,153 @@ enum ib_rate {
  * converted to 2, since 5 Gbit/sec is 2 * 2.5 Gbit/sec.
  * @rate: rate to convert.
  */
+<<<<<<< HEAD
 int ib_rate_to_mult(enum ib_rate rate) __attribute_const__;
+=======
+__attribute_const__ int ib_rate_to_mult(enum ib_rate rate);
+>>>>>>> v3.18
 
 /**
  * ib_rate_to_mbps - Convert the IB rate enum to Mbps.
  * For example, IB_RATE_2_5_GBPS will be converted to 2500.
  * @rate: rate to convert.
  */
+<<<<<<< HEAD
 int ib_rate_to_mbps(enum ib_rate rate) __attribute_const__;
+=======
+__attribute_const__ int ib_rate_to_mbps(enum ib_rate rate);
+
+enum ib_mr_create_flags {
+	IB_MR_SIGNATURE_EN = 1,
+};
+
+/**
+ * ib_mr_init_attr - Memory region init attributes passed to routine
+ *     ib_create_mr.
+ * @max_reg_descriptors: max number of registration descriptors that
+ *     may be used with registration work requests.
+ * @flags: MR creation flags bit mask.
+ */
+struct ib_mr_init_attr {
+	int	    max_reg_descriptors;
+	u32	    flags;
+};
+
+/**
+ * Signature types
+ * IB_SIG_TYPE_NONE: Unprotected.
+ * IB_SIG_TYPE_T10_DIF: Type T10-DIF
+ */
+enum ib_signature_type {
+	IB_SIG_TYPE_NONE,
+	IB_SIG_TYPE_T10_DIF,
+};
+
+/**
+ * Signature T10-DIF block-guard types
+ * IB_T10DIF_CRC: Corresponds to T10-PI mandated CRC checksum rules.
+ * IB_T10DIF_CSUM: Corresponds to IP checksum rules.
+ */
+enum ib_t10_dif_bg_type {
+	IB_T10DIF_CRC,
+	IB_T10DIF_CSUM
+};
+
+/**
+ * struct ib_t10_dif_domain - Parameters specific for T10-DIF
+ *     domain.
+ * @bg_type: T10-DIF block guard type (CRC|CSUM)
+ * @pi_interval: protection information interval.
+ * @bg: seed of guard computation.
+ * @app_tag: application tag of guard block
+ * @ref_tag: initial guard block reference tag.
+ * @ref_remap: Indicate wethear the reftag increments each block
+ * @app_escape: Indicate to skip block check if apptag=0xffff
+ * @ref_escape: Indicate to skip block check if reftag=0xffffffff
+ * @apptag_check_mask: check bitmask of application tag.
+ */
+struct ib_t10_dif_domain {
+	enum ib_t10_dif_bg_type bg_type;
+	u16			pi_interval;
+	u16			bg;
+	u16			app_tag;
+	u32			ref_tag;
+	bool			ref_remap;
+	bool			app_escape;
+	bool			ref_escape;
+	u16			apptag_check_mask;
+};
+
+/**
+ * struct ib_sig_domain - Parameters for signature domain
+ * @sig_type: specific signauture type
+ * @sig: union of all signature domain attributes that may
+ *     be used to set domain layout.
+ */
+struct ib_sig_domain {
+	enum ib_signature_type sig_type;
+	union {
+		struct ib_t10_dif_domain dif;
+	} sig;
+};
+
+/**
+ * struct ib_sig_attrs - Parameters for signature handover operation
+ * @check_mask: bitmask for signature byte check (8 bytes)
+ * @mem: memory domain layout desciptor.
+ * @wire: wire domain layout desciptor.
+ */
+struct ib_sig_attrs {
+	u8			check_mask;
+	struct ib_sig_domain	mem;
+	struct ib_sig_domain	wire;
+};
+
+enum ib_sig_err_type {
+	IB_SIG_BAD_GUARD,
+	IB_SIG_BAD_REFTAG,
+	IB_SIG_BAD_APPTAG,
+};
+
+/**
+ * struct ib_sig_err - signature error descriptor
+ */
+struct ib_sig_err {
+	enum ib_sig_err_type	err_type;
+	u32			expected;
+	u32			actual;
+	u64			sig_err_offset;
+	u32			key;
+};
+
+enum ib_mr_status_check {
+	IB_MR_CHECK_SIG_STATUS = 1,
+};
+
+/**
+ * struct ib_mr_status - Memory region status container
+ *
+ * @fail_status: Bitmask of MR checks status. For each
+ *     failed check a corresponding status bit is set.
+ * @sig_err: Additional info for IB_MR_CEHCK_SIG_STATUS
+ *     failure.
+ */
+struct ib_mr_status {
+	u32		    fail_status;
+	struct ib_sig_err   sig_err;
+};
+>>>>>>> v3.18
 
 /**
  * mult_to_ib_rate - Convert a multiple of 2.5 Gbit/sec to an IB rate
  * enum.
  * @mult: multiple to convert.
  */
+<<<<<<< HEAD
 enum ib_rate mult_to_ib_rate(int mult) __attribute_const__;
+=======
+__attribute_const__ enum ib_rate mult_to_ib_rate(int mult);
+>>>>>>> v3.18
 
 struct ib_ah_attr {
 	struct ib_global_route	grh;
@@ -469,6 +648,11 @@ struct ib_ah_attr {
 	u8			static_rate;
 	u8			ah_flags;
 	u8			port_num;
+<<<<<<< HEAD
+=======
+	u8			dmac[ETH_ALEN];
+	u16			vlan_id;
+>>>>>>> v3.18
 };
 
 enum ib_wc_status {
@@ -521,6 +705,11 @@ enum ib_wc_flags {
 	IB_WC_WITH_IMM		= (1<<1),
 	IB_WC_WITH_INVALIDATE	= (1<<2),
 	IB_WC_IP_CSUM_OK	= (1<<3),
+<<<<<<< HEAD
+=======
+	IB_WC_WITH_SMAC		= (1<<4),
+	IB_WC_WITH_VLAN		= (1<<5),
+>>>>>>> v3.18
 };
 
 struct ib_wc {
@@ -541,6 +730,11 @@ struct ib_wc {
 	u8			sl;
 	u8			dlid_path_bits;
 	u8			port_num;	/* valid only for DR SMPs on switches */
+<<<<<<< HEAD
+=======
+	u8			smac[ETH_ALEN];
+	u16			vlan_id;
+>>>>>>> v3.18
 };
 
 enum ib_cq_notify_flags {
@@ -610,17 +804,50 @@ enum ib_qp_type {
 	IB_QPT_RAW_PACKET = 8,
 	IB_QPT_XRC_INI = 9,
 	IB_QPT_XRC_TGT,
+<<<<<<< HEAD
 	IB_QPT_MAX
+=======
+	IB_QPT_MAX,
+	/* Reserve a range for qp types internal to the low level driver.
+	 * These qp types will not be visible at the IB core layer, so the
+	 * IB_QPT_MAX usages should not be affected in the core layer
+	 */
+	IB_QPT_RESERVED1 = 0x1000,
+	IB_QPT_RESERVED2,
+	IB_QPT_RESERVED3,
+	IB_QPT_RESERVED4,
+	IB_QPT_RESERVED5,
+	IB_QPT_RESERVED6,
+	IB_QPT_RESERVED7,
+	IB_QPT_RESERVED8,
+	IB_QPT_RESERVED9,
+	IB_QPT_RESERVED10,
+>>>>>>> v3.18
 };
 
 enum ib_qp_create_flags {
 	IB_QP_CREATE_IPOIB_UD_LSO		= 1 << 0,
 	IB_QP_CREATE_BLOCK_MULTICAST_LOOPBACK	= 1 << 1,
+<<<<<<< HEAD
+=======
+	IB_QP_CREATE_NETIF_QP			= 1 << 5,
+	IB_QP_CREATE_SIGNATURE_EN		= 1 << 6,
+	IB_QP_CREATE_USE_GFP_NOIO		= 1 << 7,
+>>>>>>> v3.18
 	/* reserve bits 26-31 for low level drivers' internal use */
 	IB_QP_CREATE_RESERVED_START		= 1 << 26,
 	IB_QP_CREATE_RESERVED_END		= 1 << 31,
 };
 
+<<<<<<< HEAD
+=======
+
+/*
+ * Note: users may not call ib_close_qp or ib_destroy_qp from the event_handler
+ * callback to destroy the passed in QP.
+ */
+
+>>>>>>> v3.18
 struct ib_qp_init_attr {
 	void                  (*event_handler)(struct ib_event *, void *);
 	void		       *qp_context;
@@ -698,7 +925,15 @@ enum ib_qp_attr_mask {
 	IB_QP_MAX_DEST_RD_ATOMIC	= (1<<17),
 	IB_QP_PATH_MIG_STATE		= (1<<18),
 	IB_QP_CAP			= (1<<19),
+<<<<<<< HEAD
 	IB_QP_DEST_QPN			= (1<<20)
+=======
+	IB_QP_DEST_QPN			= (1<<20),
+	IB_QP_SMAC			= (1<<21),
+	IB_QP_ALT_SMAC			= (1<<22),
+	IB_QP_VID			= (1<<23),
+	IB_QP_ALT_VID			= (1<<24),
+>>>>>>> v3.18
 };
 
 enum ib_qp_state {
@@ -748,6 +983,13 @@ struct ib_qp_attr {
 	u8			rnr_retry;
 	u8			alt_port_num;
 	u8			alt_timeout;
+<<<<<<< HEAD
+=======
+	u8			smac[ETH_ALEN];
+	u8			alt_smac[ETH_ALEN];
+	u16			vlan_id;
+	u16			alt_vlan_id;
+>>>>>>> v3.18
 };
 
 enum ib_wr_opcode {
@@ -766,6 +1008,23 @@ enum ib_wr_opcode {
 	IB_WR_MASKED_ATOMIC_CMP_AND_SWP,
 	IB_WR_MASKED_ATOMIC_FETCH_AND_ADD,
 	IB_WR_BIND_MW,
+<<<<<<< HEAD
+=======
+	IB_WR_REG_SIG_MR,
+	/* reserve values for low level drivers' internal use.
+	 * These values will not be used at all in the ib core layer.
+	 */
+	IB_WR_RESERVED1 = 0xf0,
+	IB_WR_RESERVED2,
+	IB_WR_RESERVED3,
+	IB_WR_RESERVED4,
+	IB_WR_RESERVED5,
+	IB_WR_RESERVED6,
+	IB_WR_RESERVED7,
+	IB_WR_RESERVED8,
+	IB_WR_RESERVED9,
+	IB_WR_RESERVED10,
+>>>>>>> v3.18
 };
 
 enum ib_send_flags {
@@ -773,7 +1032,15 @@ enum ib_send_flags {
 	IB_SEND_SIGNALED	= (1<<1),
 	IB_SEND_SOLICITED	= (1<<2),
 	IB_SEND_INLINE		= (1<<3),
+<<<<<<< HEAD
 	IB_SEND_IP_CSUM		= (1<<4)
+=======
+	IB_SEND_IP_CSUM		= (1<<4),
+
+	/* reserve bits 26-31 for low level drivers' internal use */
+	IB_SEND_RESERVED_START	= (1 << 26),
+	IB_SEND_RESERVED_END	= (1 << 31),
+>>>>>>> v3.18
 };
 
 struct ib_sge {
@@ -854,6 +1121,15 @@ struct ib_send_wr {
 			u32                      rkey;
 			struct ib_mw_bind_info   bind_info;
 		} bind_mw;
+<<<<<<< HEAD
+=======
+		struct {
+			struct ib_sig_attrs    *sig_attrs;
+			struct ib_mr	       *sig_mr;
+			int			access_flags;
+			struct ib_sge	       *prot;
+		} sig_handover;
+>>>>>>> v3.18
 	} wr;
 	u32			xrc_remote_srq_num;	/* XRC TGT QPs only */
 };
@@ -891,7 +1167,12 @@ struct ib_mr_attr {
 enum ib_mr_rereg_flags {
 	IB_MR_REREG_TRANS	= 1,
 	IB_MR_REREG_PD		= (1<<1),
+<<<<<<< HEAD
 	IB_MR_REREG_ACCESS	= (1<<2)
+=======
+	IB_MR_REREG_ACCESS	= (1<<2),
+	IB_MR_REREG_SUPPORTED	= ((IB_MR_REREG_ACCESS << 1) - 1)
+>>>>>>> v3.18
 };
 
 /**
@@ -922,6 +1203,10 @@ struct ib_ucontext {
 	struct list_head	srq_list;
 	struct list_head	ah_list;
 	struct list_head	xrcd_list;
+<<<<<<< HEAD
+=======
+	struct list_head	rule_list;
+>>>>>>> v3.18
 	int			closing;
 };
 
@@ -937,7 +1222,11 @@ struct ib_uobject {
 };
 
 struct ib_udata {
+<<<<<<< HEAD
 	void __user *inbuf;
+=======
+	const void __user *inbuf;
+>>>>>>> v3.18
 	void __user *outbuf;
 	size_t       inlen;
 	size_t       outlen;
@@ -1002,7 +1291,12 @@ struct ib_qp {
 	struct ib_srq	       *srq;
 	struct ib_xrcd	       *xrcd; /* XRC TGT QPs only */
 	struct list_head	xrcd_list;
+<<<<<<< HEAD
 	atomic_t		usecnt; /* count times opened, mcast attaches */
+=======
+	/* count times opened, mcast attaches, flow attaches */
+	atomic_t		usecnt;
+>>>>>>> v3.18
 	struct list_head	open_list;
 	struct ib_qp           *real_qp;
 	struct ib_uobject      *uobject;
@@ -1037,6 +1331,129 @@ struct ib_fmr {
 	u32			rkey;
 };
 
+<<<<<<< HEAD
+=======
+/* Supported steering options */
+enum ib_flow_attr_type {
+	/* steering according to rule specifications */
+	IB_FLOW_ATTR_NORMAL		= 0x0,
+	/* default unicast and multicast rule -
+	 * receive all Eth traffic which isn't steered to any QP
+	 */
+	IB_FLOW_ATTR_ALL_DEFAULT	= 0x1,
+	/* default multicast rule -
+	 * receive all Eth multicast traffic which isn't steered to any QP
+	 */
+	IB_FLOW_ATTR_MC_DEFAULT		= 0x2,
+	/* sniffer rule - receive all port traffic */
+	IB_FLOW_ATTR_SNIFFER		= 0x3
+};
+
+/* Supported steering header types */
+enum ib_flow_spec_type {
+	/* L2 headers*/
+	IB_FLOW_SPEC_ETH	= 0x20,
+	IB_FLOW_SPEC_IB		= 0x22,
+	/* L3 header*/
+	IB_FLOW_SPEC_IPV4	= 0x30,
+	/* L4 headers*/
+	IB_FLOW_SPEC_TCP	= 0x40,
+	IB_FLOW_SPEC_UDP	= 0x41
+};
+#define IB_FLOW_SPEC_LAYER_MASK	0xF0
+#define IB_FLOW_SPEC_SUPPORT_LAYERS 4
+
+/* Flow steering rule priority is set according to it's domain.
+ * Lower domain value means higher priority.
+ */
+enum ib_flow_domain {
+	IB_FLOW_DOMAIN_USER,
+	IB_FLOW_DOMAIN_ETHTOOL,
+	IB_FLOW_DOMAIN_RFS,
+	IB_FLOW_DOMAIN_NIC,
+	IB_FLOW_DOMAIN_NUM /* Must be last */
+};
+
+struct ib_flow_eth_filter {
+	u8	dst_mac[6];
+	u8	src_mac[6];
+	__be16	ether_type;
+	__be16	vlan_tag;
+};
+
+struct ib_flow_spec_eth {
+	enum ib_flow_spec_type	  type;
+	u16			  size;
+	struct ib_flow_eth_filter val;
+	struct ib_flow_eth_filter mask;
+};
+
+struct ib_flow_ib_filter {
+	__be16 dlid;
+	__u8   sl;
+};
+
+struct ib_flow_spec_ib {
+	enum ib_flow_spec_type	 type;
+	u16			 size;
+	struct ib_flow_ib_filter val;
+	struct ib_flow_ib_filter mask;
+};
+
+struct ib_flow_ipv4_filter {
+	__be32	src_ip;
+	__be32	dst_ip;
+};
+
+struct ib_flow_spec_ipv4 {
+	enum ib_flow_spec_type	   type;
+	u16			   size;
+	struct ib_flow_ipv4_filter val;
+	struct ib_flow_ipv4_filter mask;
+};
+
+struct ib_flow_tcp_udp_filter {
+	__be16	dst_port;
+	__be16	src_port;
+};
+
+struct ib_flow_spec_tcp_udp {
+	enum ib_flow_spec_type	      type;
+	u16			      size;
+	struct ib_flow_tcp_udp_filter val;
+	struct ib_flow_tcp_udp_filter mask;
+};
+
+union ib_flow_spec {
+	struct {
+		enum ib_flow_spec_type	type;
+		u16			size;
+	};
+	struct ib_flow_spec_eth		eth;
+	struct ib_flow_spec_ib		ib;
+	struct ib_flow_spec_ipv4        ipv4;
+	struct ib_flow_spec_tcp_udp	tcp_udp;
+};
+
+struct ib_flow_attr {
+	enum ib_flow_attr_type type;
+	u16	     size;
+	u16	     priority;
+	u32	     flags;
+	u8	     num_of_specs;
+	u8	     port;
+	/* Following are the optional layers according to user request
+	 * struct ib_flow_spec_xxx
+	 * struct ib_flow_spec_yyy
+	 */
+};
+
+struct ib_flow {
+	struct ib_qp		*qp;
+	struct ib_uobject	*uobject;
+};
+
+>>>>>>> v3.18
 struct ib_mad;
 struct ib_grh;
 
@@ -1085,10 +1502,13 @@ struct ib_dma_mapping_ops {
 	void		(*unmap_sg)(struct ib_device *dev,
 				    struct scatterlist *sg, int nents,
 				    enum dma_data_direction direction);
+<<<<<<< HEAD
 	u64		(*dma_address)(struct ib_device *dev,
 				       struct scatterlist *sg);
 	unsigned int	(*dma_len)(struct ib_device *dev,
 				   struct scatterlist *sg);
+=======
+>>>>>>> v3.18
 	void		(*sync_single_for_cpu)(struct ib_device *dev,
 					       u64 dma_handle,
 					       size_t size,
@@ -1223,9 +1643,25 @@ struct ib_device {
 						  u64 virt_addr,
 						  int mr_access_flags,
 						  struct ib_udata *udata);
+<<<<<<< HEAD
 	int                        (*query_mr)(struct ib_mr *mr,
 					       struct ib_mr_attr *mr_attr);
 	int                        (*dereg_mr)(struct ib_mr *mr);
+=======
+	int			   (*rereg_user_mr)(struct ib_mr *mr,
+						    int flags,
+						    u64 start, u64 length,
+						    u64 virt_addr,
+						    int mr_access_flags,
+						    struct ib_pd *pd,
+						    struct ib_udata *udata);
+	int                        (*query_mr)(struct ib_mr *mr,
+					       struct ib_mr_attr *mr_attr);
+	int                        (*dereg_mr)(struct ib_mr *mr);
+	int                        (*destroy_mr)(struct ib_mr *mr);
+	struct ib_mr *		   (*create_mr)(struct ib_pd *pd,
+						struct ib_mr_init_attr *mr_init_attr);
+>>>>>>> v3.18
 	struct ib_mr *		   (*alloc_fast_reg_mr)(struct ib_pd *pd,
 					       int max_page_list_len);
 	struct ib_fast_reg_page_list * (*alloc_fast_reg_page_list)(struct ib_device *device,
@@ -1269,6 +1705,16 @@ struct ib_device {
 						 struct ib_ucontext *ucontext,
 						 struct ib_udata *udata);
 	int			   (*dealloc_xrcd)(struct ib_xrcd *xrcd);
+<<<<<<< HEAD
+=======
+	struct ib_flow *	   (*create_flow)(struct ib_qp *qp,
+						  struct ib_flow_attr
+						  *flow_attr,
+						  int domain);
+	int			   (*destroy_flow)(struct ib_flow *flow_id);
+	int			   (*check_mr_status)(struct ib_mr *mr, u32 check_mask,
+						      struct ib_mr_status *mr_status);
+>>>>>>> v3.18
 
 	struct ib_dma_mapping_ops   *dma_ops;
 
@@ -1285,6 +1731,10 @@ struct ib_device {
 
 	int			     uverbs_abi_ver;
 	u64			     uverbs_cmd_mask;
+<<<<<<< HEAD
+=======
+	u64			     uverbs_ex_cmd_mask;
+>>>>>>> v3.18
 
 	char			     node_desc[64];
 	__be64			     node_guid;
@@ -1334,6 +1784,10 @@ static inline int ib_copy_to_udata(struct ib_udata *udata, void *src, size_t len
  * @next_state: Next QP state
  * @type: QP type
  * @mask: Mask of supplied QP attributes
+<<<<<<< HEAD
+=======
+ * @ll : link layer of port
+>>>>>>> v3.18
  *
  * This function is a helper function that a low-level driver's
  * modify_qp method can use to validate the consumer's input.  It
@@ -1342,7 +1796,12 @@ static inline int ib_copy_to_udata(struct ib_udata *udata, void *src, size_t len
  * and that the attribute mask supplied is allowed for the transition.
  */
 int ib_modify_qp_is_ok(enum ib_qp_state cur_state, enum ib_qp_state next_state,
+<<<<<<< HEAD
 		       enum ib_qp_type type, enum ib_qp_attr_mask mask);
+=======
+		       enum ib_qp_type type, enum ib_qp_attr_mask mask,
+		       enum rdma_link_layer ll);
+>>>>>>> v3.18
 
 int ib_register_event_handler  (struct ib_event_handler *event_handler);
 int ib_unregister_event_handler(struct ib_event_handler *event_handler);
@@ -1900,12 +2359,21 @@ static inline void ib_dma_unmap_sg_attrs(struct ib_device *dev,
  * ib_sg_dma_address - Return the DMA address from a scatter/gather entry
  * @dev: The device for which the DMA addresses were created
  * @sg: The scatter/gather entry
+<<<<<<< HEAD
+=======
+ *
+ * Note: this function is obsolete. To do: change all occurrences of
+ * ib_sg_dma_address() into sg_dma_address().
+>>>>>>> v3.18
  */
 static inline u64 ib_sg_dma_address(struct ib_device *dev,
 				    struct scatterlist *sg)
 {
+<<<<<<< HEAD
 	if (dev->dma_ops)
 		return dev->dma_ops->dma_address(dev, sg);
+=======
+>>>>>>> v3.18
 	return sg_dma_address(sg);
 }
 
@@ -1913,12 +2381,21 @@ static inline u64 ib_sg_dma_address(struct ib_device *dev,
  * ib_sg_dma_len - Return the DMA length from a scatter/gather entry
  * @dev: The device for which the DMA addresses were created
  * @sg: The scatter/gather entry
+<<<<<<< HEAD
+=======
+ *
+ * Note: this function is obsolete. To do: change all occurrences of
+ * ib_sg_dma_len() into sg_dma_len().
+>>>>>>> v3.18
  */
 static inline unsigned int ib_sg_dma_len(struct ib_device *dev,
 					 struct scatterlist *sg)
 {
+<<<<<<< HEAD
 	if (dev->dma_ops)
 		return dev->dma_ops->dma_len(dev, sg);
+=======
+>>>>>>> v3.18
 	return sg_dma_len(sg);
 }
 
@@ -2061,6 +2538,28 @@ int ib_query_mr(struct ib_mr *mr, struct ib_mr_attr *mr_attr);
  */
 int ib_dereg_mr(struct ib_mr *mr);
 
+<<<<<<< HEAD
+=======
+
+/**
+ * ib_create_mr - Allocates a memory region that may be used for
+ *     signature handover operations.
+ * @pd: The protection domain associated with the region.
+ * @mr_init_attr: memory region init attributes.
+ */
+struct ib_mr *ib_create_mr(struct ib_pd *pd,
+			   struct ib_mr_init_attr *mr_init_attr);
+
+/**
+ * ib_destroy_mr - Destroys a memory region that was created using
+ *     ib_create_mr and removes it from HW translation tables.
+ * @mr: The memory region to destroy.
+ *
+ * This function can fail, if the memory region has memory windows bound to it.
+ */
+int ib_destroy_mr(struct ib_mr *mr);
+
+>>>>>>> v3.18
 /**
  * ib_alloc_fast_reg_mr - Allocates memory region usable with the
  *   IB_WR_FAST_REG_MR send work request.
@@ -2229,4 +2728,39 @@ struct ib_xrcd *ib_alloc_xrcd(struct ib_device *device);
  */
 int ib_dealloc_xrcd(struct ib_xrcd *xrcd);
 
+<<<<<<< HEAD
+=======
+struct ib_flow *ib_create_flow(struct ib_qp *qp,
+			       struct ib_flow_attr *flow_attr, int domain);
+int ib_destroy_flow(struct ib_flow *flow_id);
+
+static inline int ib_check_mr_access(int flags)
+{
+	/*
+	 * Local write permission is required if remote write or
+	 * remote atomic permission is also requested.
+	 */
+	if (flags & (IB_ACCESS_REMOTE_ATOMIC | IB_ACCESS_REMOTE_WRITE) &&
+	    !(flags & IB_ACCESS_LOCAL_WRITE))
+		return -EINVAL;
+
+	return 0;
+}
+
+/**
+ * ib_check_mr_status: lightweight check of MR status.
+ *     This routine may provide status checks on a selected
+ *     ib_mr. first use is for signature status check.
+ *
+ * @mr: A memory region.
+ * @check_mask: Bitmask of which checks to perform from
+ *     ib_mr_status_check enumeration.
+ * @mr_status: The container of relevant status checks.
+ *     failed checks will be indicated in the status bitmask
+ *     and the relevant info shall be in the error item.
+ */
+int ib_check_mr_status(struct ib_mr *mr, u32 check_mask,
+		       struct ib_mr_status *mr_status);
+
+>>>>>>> v3.18
 #endif /* IB_VERBS_H */

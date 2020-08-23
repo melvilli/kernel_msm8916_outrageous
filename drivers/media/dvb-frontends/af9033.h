@@ -24,6 +24,7 @@
 
 #include <linux/kconfig.h>
 
+<<<<<<< HEAD
 struct af9033_config {
 	/*
 	 * I2C address
@@ -31,6 +32,14 @@ struct af9033_config {
 	u8 i2c_addr;
 
 	/*
+=======
+/*
+ * I2C address (TODO: are these in 8-bit format?)
+ * 0x38, 0x3a, 0x3c, 0x3e
+ */
+struct af9033_config {
+	/*
+>>>>>>> v3.18
 	 * clock Hz
 	 * 12000000, 22000000, 24000000, 34000000, 32000000, 28000000, 26000000,
 	 * 30000000, 36000000, 20480000, 16384000
@@ -75,6 +84,7 @@ struct af9033_config {
 	 * input spectrum inversion
 	 */
 	bool spec_inv;
+<<<<<<< HEAD
 };
 
 
@@ -89,5 +99,30 @@ static inline struct dvb_frontend *af9033_attach(
 	return NULL;
 }
 #endif
+=======
+
+	/*
+	 *
+	 */
+	bool dyn0_clk;
+
+	/*
+	 * PID filter ops
+	 */
+	struct af9033_ops *ops;
+
+	/*
+	 * frontend
+	 * returned by that driver
+	 */
+	struct dvb_frontend **fe;
+};
+
+struct af9033_ops {
+	int (*pid_filter_ctrl)(struct dvb_frontend *fe, int onoff);
+	int (*pid_filter)(struct dvb_frontend *fe, int index, u16 pid,
+			  int onoff);
+};
+>>>>>>> v3.18
 
 #endif /* AF9033_H */

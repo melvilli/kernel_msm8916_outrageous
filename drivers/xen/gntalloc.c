@@ -48,6 +48,11 @@
  * grant operation.
  */
 
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) "xen:" KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 #include <linux/atomic.h>
 #include <linux/module.h>
 #include <linux/miscdevice.h>
@@ -122,7 +127,11 @@ static int add_grefs(struct ioctl_gntalloc_alloc_gref *op,
 	int i, rc, readonly;
 	LIST_HEAD(queue_gref);
 	LIST_HEAD(queue_file);
+<<<<<<< HEAD
 	struct gntalloc_gref *gref;
+=======
+	struct gntalloc_gref *gref, *next;
+>>>>>>> v3.18
 
 	readonly = !(op->flags & GNTALLOC_FLAG_WRITABLE);
 	rc = -ENOMEM;
@@ -139,6 +148,7 @@ static int add_grefs(struct ioctl_gntalloc_alloc_gref *op,
 			goto undo;
 
 		/* Grant foreign access to the page. */
+<<<<<<< HEAD
 		gref->gref_id = gnttab_grant_foreign_access(op->domid,
 			pfn_to_mfn(page_to_pfn(gref->page)), readonly);
 		if ((int)gref->gref_id < 0) {
@@ -146,6 +156,13 @@ static int add_grefs(struct ioctl_gntalloc_alloc_gref *op,
 			goto undo;
 		}
 		gref_ids[i] = gref->gref_id;
+=======
+		rc = gnttab_grant_foreign_access(op->domid,
+			pfn_to_mfn(page_to_pfn(gref->page)), readonly);
+		if (rc < 0)
+			goto undo;
+		gref_ids[i] = gref->gref_id = rc;
+>>>>>>> v3.18
 	}
 
 	/* Add to gref lists. */
@@ -160,8 +177,13 @@ undo:
 	mutex_lock(&gref_mutex);
 	gref_size -= (op->count - i);
 
+<<<<<<< HEAD
 	list_for_each_entry(gref, &queue_file, next_file) {
 		/* __del_gref does not remove from queue_file */
+=======
+	list_for_each_entry_safe(gref, next, &queue_file, next_file) {
+		list_del(&gref->next_file);
+>>>>>>> v3.18
 		__del_gref(gref);
 	}
 
@@ -191,7 +213,11 @@ static void __del_gref(struct gntalloc_gref *gref)
 
 	gref->notify.flags = 0;
 
+<<<<<<< HEAD
 	if (gref->gref_id > 0) {
+=======
+	if (gref->gref_id) {
+>>>>>>> v3.18
 		if (gnttab_query_foreign_access(gref->gref_id))
 			return;
 
@@ -507,7 +533,11 @@ static int gntalloc_mmap(struct file *filp, struct vm_area_struct *vma)
 	int rv, i;
 
 	if (!(vma->vm_flags & VM_SHARED)) {
+<<<<<<< HEAD
 		printk(KERN_ERR "%s: Mapping must be shared.\n", __func__);
+=======
+		pr_err("%s: Mapping must be shared\n", __func__);
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
@@ -584,7 +614,11 @@ static int __init gntalloc_init(void)
 
 	err = misc_register(&gntalloc_miscdev);
 	if (err != 0) {
+<<<<<<< HEAD
 		printk(KERN_ERR "Could not register misc gntalloc device\n");
+=======
+		pr_err("Could not register misc gntalloc device\n");
+>>>>>>> v3.18
 		return err;
 	}
 

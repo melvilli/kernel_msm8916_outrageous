@@ -50,8 +50,11 @@
 #include <linux/pnp.h>
 #include <linux/spinlock.h>
 
+<<<<<<< HEAD
 #define DEB(x)
 #define DEB1(x)
+=======
+>>>>>>> v3.18
 #include "sound_config.h"
 
 #include "ad1848.h"
@@ -1016,8 +1019,11 @@ static void ad1848_close(int dev)
 	ad1848_info    *devc = (ad1848_info *) audio_devs[dev]->devc;
 	ad1848_port_info *portc = (ad1848_port_info *) audio_devs[dev]->portc;
 
+<<<<<<< HEAD
 	DEB(printk("ad1848_close(void)\n"));
 
+=======
+>>>>>>> v3.18
 	devc->intr_active = 0;
 	ad1848_halt(dev);
 

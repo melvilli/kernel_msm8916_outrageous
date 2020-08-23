@@ -5,7 +5,11 @@
  ******************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -381,7 +385,12 @@ acpi_ns_search_and_enter(u32 target_name,
 
 	/* Node is an object defined by an External() statement */
 
+<<<<<<< HEAD
 	if (flags & ACPI_NS_EXTERNAL) {
+=======
+	if (flags & ACPI_NS_EXTERNAL ||
+	    (walk_state && walk_state->opcode == AML_SCOPE_OP)) {
+>>>>>>> v3.18
 		new_node->flags |= ANOBJ_IS_EXTERNAL;
 	}
 #endif

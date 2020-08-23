@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/types.h>
 #include <linux/mm.h>
@@ -127,7 +132,11 @@ static int __init xenbus_backend_init(void)
 
 	err = misc_register(&xenbus_backend_dev);
 	if (err)
+<<<<<<< HEAD
 		printk(KERN_ERR "Could not register xenbus backend device\n");
+=======
+		pr_err("Could not register xenbus backend device\n");
+>>>>>>> v3.18
 	return err;
 }
 

@@ -406,4 +406,7 @@ module_exit(w83877f_wdt_unload);
 MODULE_AUTHOR("Scott and Bill Jennings");
 MODULE_DESCRIPTION("Driver for watchdog timer in w83877f chip");
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18

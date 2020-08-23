@@ -32,12 +32,20 @@
 
 #include "core.h"
 #include "pinctrl-tegra.h"
+<<<<<<< HEAD
+=======
+#include "pinctrl-utils.h"
+>>>>>>> v3.18
 
 struct tegra_pmx {
 	struct device *dev;
 	struct pinctrl_dev *pctl;
 
 	const struct tegra_pinctrl_soc_data *soc;
+<<<<<<< HEAD
+=======
+	const char **group_pins;
+>>>>>>> v3.18
 
 	int nbanks;
 	void __iomem **regs;
@@ -90,6 +98,7 @@ static void tegra_pinctrl_pin_dbg_show(struct pinctrl_dev *pctldev,
 }
 #endif
 
+<<<<<<< HEAD
 static int reserve_map(struct device *dev, struct pinctrl_map **map,
 		       unsigned *reserved_maps, unsigned *num_maps,
 		       unsigned reserve)
@@ -191,6 +200,8 @@ static void tegra_pinctrl_dt_free_map(struct pinctrl_dev *pctldev,
 	kfree(map);
 }
 
+=======
+>>>>>>> v3.18
 static const struct cfg_param {
 	const char *property;
 	enum tegra_pinconf_param param;
@@ -212,12 +223,20 @@ static const struct cfg_param {
 	{"nvidia,drive-type",		TEGRA_PINCONF_PARAM_DRIVE_TYPE},
 };
 
+<<<<<<< HEAD
 static int tegra_pinctrl_dt_subnode_to_map(struct device *dev,
+=======
+static int tegra_pinctrl_dt_subnode_to_map(struct pinctrl_dev *pctldev,
+>>>>>>> v3.18
 					   struct device_node *np,
 					   struct pinctrl_map **map,
 					   unsigned *reserved_maps,
 					   unsigned *num_maps)
 {
+<<<<<<< HEAD
+=======
+	struct device *dev = pctldev->dev;
+>>>>>>> v3.18
 	int ret, i;
 	const char *function;
 	u32 val;
@@ -241,7 +260,12 @@ static int tegra_pinctrl_dt_subnode_to_map(struct device *dev,
 		ret = of_property_read_u32(np, cfg_params[i].property, &val);
 		if (!ret) {
 			config = TEGRA_PINCONF_PACK(cfg_params[i].param, val);
+<<<<<<< HEAD
 			ret = add_config(dev, &configs, &num_configs, config);
+=======
+			ret = pinctrl_utils_add_config(pctldev, &configs,
+					&num_configs, config);
+>>>>>>> v3.18
 			if (ret < 0)
 				goto exit;
 		/* EINVAL=missing, which is fine since it's optional */
@@ -263,22 +287,40 @@ static int tegra_pinctrl_dt_subnode_to_map(struct device *dev,
 	}
 	reserve *= ret;
 
+<<<<<<< HEAD
 	ret = reserve_map(dev, map, reserved_maps, num_maps, reserve);
+=======
+	ret = pinctrl_utils_reserve_map(pctldev, map, reserved_maps,
+					num_maps, reserve);
+>>>>>>> v3.18
 	if (ret < 0)
 		goto exit;
 
 	of_property_for_each_string(np, "nvidia,pins", prop, group) {
 		if (function) {
+<<<<<<< HEAD
 			ret = add_map_mux(map, reserved_maps, num_maps,
 					  group, function);
+=======
+			ret = pinctrl_utils_add_map_mux(pctldev, map,
+					reserved_maps, num_maps, group,
+					function);
+>>>>>>> v3.18
 			if (ret < 0)
 				goto exit;
 		}
 
 		if (num_configs) {
+<<<<<<< HEAD
 			ret = add_map_configs(dev, map, reserved_maps,
 					      num_maps, group, configs,
 					      num_configs);
+=======
+			ret = pinctrl_utils_add_map_configs(pctldev, map,
+					reserved_maps, num_maps, group,
+					configs, num_configs,
+					PIN_MAP_TYPE_CONFIGS_GROUP);
+>>>>>>> v3.18
 			if (ret < 0)
 				goto exit;
 		}
@@ -305,10 +347,18 @@ static int tegra_pinctrl_dt_node_to_map(struct pinctrl_dev *pctldev,
 	*num_maps = 0;
 
 	for_each_child_of_node(np_config, np) {
+<<<<<<< HEAD
 		ret = tegra_pinctrl_dt_subnode_to_map(pctldev->dev, np, map,
 						      &reserved_maps, num_maps);
 		if (ret < 0) {
 			tegra_pinctrl_dt_free_map(pctldev, *map, *num_maps);
+=======
+		ret = tegra_pinctrl_dt_subnode_to_map(pctldev, np, map,
+						      &reserved_maps, num_maps);
+		if (ret < 0) {
+			pinctrl_utils_dt_free_map(pctldev, *map,
+				*num_maps);
+>>>>>>> v3.18
 			return ret;
 		}
 	}
@@ -324,7 +374,11 @@ static const struct pinctrl_ops tegra_pinctrl_ops = {
 	.pin_dbg_show = tegra_pinctrl_pin_dbg_show,
 #endif
 	.dt_node_to_map = tegra_pinctrl_dt_node_to_map,
+<<<<<<< HEAD
 	.dt_free_map = tegra_pinctrl_dt_free_map,
+=======
+	.dt_free_map = pinctrl_utils_dt_free_map,
+>>>>>>> v3.18
 };
 
 static int tegra_pinctrl_get_funcs_count(struct pinctrl_dev *pctldev)
@@ -355,8 +409,14 @@ static int tegra_pinctrl_get_func_groups(struct pinctrl_dev *pctldev,
 	return 0;
 }
 
+<<<<<<< HEAD
 static int tegra_pinctrl_enable(struct pinctrl_dev *pctldev, unsigned function,
 			       unsigned group)
+=======
+static int tegra_pinctrl_set_mux(struct pinctrl_dev *pctldev,
+				 unsigned function,
+				 unsigned group)
+>>>>>>> v3.18
 {
 	struct tegra_pmx *pmx = pinctrl_dev_get_drvdata(pctldev);
 	const struct tegra_pingroup *g;
@@ -383,6 +443,7 @@ static int tegra_pinctrl_enable(struct pinctrl_dev *pctldev, unsigned function,
 	return 0;
 }
 
+<<<<<<< HEAD
 static void tegra_pinctrl_disable(struct pinctrl_dev *pctldev,
 				  unsigned function, unsigned group)
 {
@@ -401,12 +462,18 @@ static void tegra_pinctrl_disable(struct pinctrl_dev *pctldev,
 	pmx_writel(pmx, val, g->mux_bank, g->mux_reg);
 }
 
+=======
+>>>>>>> v3.18
 static const struct pinmux_ops tegra_pinmux_ops = {
 	.get_functions_count = tegra_pinctrl_get_funcs_count,
 	.get_function_name = tegra_pinctrl_get_func_name,
 	.get_function_groups = tegra_pinctrl_get_func_groups,
+<<<<<<< HEAD
 	.enable = tegra_pinctrl_enable,
 	.disable = tegra_pinctrl_disable,
+=======
+	.set_mux = tegra_pinctrl_set_mux,
+>>>>>>> v3.18
 };
 
 static int tegra_pinconf_reg(struct tegra_pmx *pmx,
@@ -429,32 +496,57 @@ static int tegra_pinconf_reg(struct tegra_pmx *pmx,
 		*width = 1;
 		break;
 	case TEGRA_PINCONF_PARAM_ENABLE_INPUT:
+<<<<<<< HEAD
 		*bank = g->einput_bank;
 		*reg = g->einput_reg;
+=======
+		*bank = g->mux_bank;
+		*reg = g->mux_reg;
+>>>>>>> v3.18
 		*bit = g->einput_bit;
 		*width = 1;
 		break;
 	case TEGRA_PINCONF_PARAM_OPEN_DRAIN:
+<<<<<<< HEAD
 		*bank = g->odrain_bank;
 		*reg = g->odrain_reg;
+=======
+		*bank = g->mux_bank;
+		*reg = g->mux_reg;
+>>>>>>> v3.18
 		*bit = g->odrain_bit;
 		*width = 1;
 		break;
 	case TEGRA_PINCONF_PARAM_LOCK:
+<<<<<<< HEAD
 		*bank = g->lock_bank;
 		*reg = g->lock_reg;
+=======
+		*bank = g->mux_bank;
+		*reg = g->mux_reg;
+>>>>>>> v3.18
 		*bit = g->lock_bit;
 		*width = 1;
 		break;
 	case TEGRA_PINCONF_PARAM_IORESET:
+<<<<<<< HEAD
 		*bank = g->ioreset_bank;
 		*reg = g->ioreset_reg;
+=======
+		*bank = g->mux_bank;
+		*reg = g->mux_reg;
+>>>>>>> v3.18
 		*bit = g->ioreset_bit;
 		*width = 1;
 		break;
 	case TEGRA_PINCONF_PARAM_RCV_SEL:
+<<<<<<< HEAD
 		*bank = g->rcv_sel_bank;
 		*reg = g->rcv_sel_reg;
+=======
+		*bank = g->mux_bank;
+		*reg = g->mux_reg;
+>>>>>>> v3.18
 		*bit = g->rcv_sel_bit;
 		*width = 1;
 		break;
@@ -501,8 +593,13 @@ static int tegra_pinconf_reg(struct tegra_pmx *pmx,
 		*width = g->slwr_width;
 		break;
 	case TEGRA_PINCONF_PARAM_DRIVE_TYPE:
+<<<<<<< HEAD
 		*bank = g->drvtype_bank;
 		*reg = g->drvtype_reg;
+=======
+		*bank = g->drv_bank;
+		*reg = g->drv_reg;
+>>>>>>> v3.18
 		*bit = g->drvtype_bit;
 		*width = 2;
 		break;
@@ -511,11 +608,30 @@ static int tegra_pinconf_reg(struct tegra_pmx *pmx,
 		return -ENOTSUPP;
 	}
 
+<<<<<<< HEAD
 	if (*reg < 0) {
 		if (report_err)
 			dev_err(pmx->dev,
 				"Config param %04x not supported on group %s\n",
 				param, g->name);
+=======
+	if (*reg < 0 || *bit > 31) {
+		if (report_err) {
+			const char *prop = "unknown";
+			int i;
+
+			for (i = 0; i < ARRAY_SIZE(cfg_params); i++) {
+				if (cfg_params[i].param == param) {
+					prop = cfg_params[i].property;
+					break;
+				}
+			}
+
+			dev_err(pmx->dev,
+				"Config param %04x (%s) not supported on group %s\n",
+				param, prop, g->name);
+		}
+>>>>>>> v3.18
 		return -ENOTSUPP;
 	}
 
@@ -530,7 +646,12 @@ static int tegra_pinconf_get(struct pinctrl_dev *pctldev,
 }
 
 static int tegra_pinconf_set(struct pinctrl_dev *pctldev,
+<<<<<<< HEAD
 			     unsigned pin, unsigned long config)
+=======
+			     unsigned pin, unsigned long *configs,
+			     unsigned num_configs)
+>>>>>>> v3.18
 {
 	dev_err(pctldev->dev, "pin_config_set op not supported\n");
 	return -ENOTSUPP;
@@ -565,6 +686,7 @@ static int tegra_pinconf_group_get(struct pinctrl_dev *pctldev,
 }
 
 static int tegra_pinconf_group_set(struct pinctrl_dev *pctldev,
+<<<<<<< HEAD
 				   unsigned group, unsigned long config)
 {
 	struct tegra_pmx *pmx = pinctrl_dev_get_drvdata(pctldev);
@@ -572,12 +694,23 @@ static int tegra_pinconf_group_set(struct pinctrl_dev *pctldev,
 	u16 arg = TEGRA_PINCONF_UNPACK_ARG(config);
 	const struct tegra_pingroup *g;
 	int ret;
+=======
+				   unsigned group, unsigned long *configs,
+				   unsigned num_configs)
+{
+	struct tegra_pmx *pmx = pinctrl_dev_get_drvdata(pctldev);
+	enum tegra_pinconf_param param;
+	u16 arg;
+	const struct tegra_pingroup *g;
+	int ret, i;
+>>>>>>> v3.18
 	s8 bank, bit, width;
 	s16 reg;
 	u32 val, mask;
 
 	g = &pmx->soc->groups[group];
 
+<<<<<<< HEAD
 	ret = tegra_pinconf_reg(pmx, g, param, true, &bank, &reg, &bit,
 				&width);
 	if (ret < 0)
@@ -610,6 +743,45 @@ static int tegra_pinconf_group_set(struct pinctrl_dev *pctldev,
 	val &= ~(mask << bit);
 	val |= arg << bit;
 	pmx_writel(pmx, val, bank, reg);
+=======
+	for (i = 0; i < num_configs; i++) {
+		param = TEGRA_PINCONF_UNPACK_PARAM(configs[i]);
+		arg = TEGRA_PINCONF_UNPACK_ARG(configs[i]);
+
+		ret = tegra_pinconf_reg(pmx, g, param, true, &bank, &reg, &bit,
+					&width);
+		if (ret < 0)
+			return ret;
+
+		val = pmx_readl(pmx, bank, reg);
+
+		/* LOCK can't be cleared */
+		if (param == TEGRA_PINCONF_PARAM_LOCK) {
+			if ((val & BIT(bit)) && !arg) {
+				dev_err(pctldev->dev, "LOCK bit cannot be cleared\n");
+				return -EINVAL;
+			}
+		}
+
+		/* Special-case Boolean values; allow any non-zero as true */
+		if (width == 1)
+			arg = !!arg;
+
+		/* Range-check user-supplied value */
+		mask = (1 << width) - 1;
+		if (arg & ~mask) {
+			dev_err(pctldev->dev,
+				"config %lx: %x too big for %d bit register\n",
+				configs[i], arg, width);
+			return -EINVAL;
+		}
+
+		/* Update register */
+		val &= ~(mask << bit);
+		val |= arg << bit;
+		pmx_writel(pmx, val, bank, reg);
+	} /* for each config */
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -707,6 +879,11 @@ int tegra_pinctrl_probe(struct platform_device *pdev,
 	struct tegra_pmx *pmx;
 	struct resource *res;
 	int i;
+<<<<<<< HEAD
+=======
+	const char **group_pins;
+	int fn, gn, gfn;
+>>>>>>> v3.18
 
 	pmx = devm_kzalloc(&pdev->dev, sizeof(*pmx), GFP_KERNEL);
 	if (!pmx) {
@@ -716,6 +893,44 @@ int tegra_pinctrl_probe(struct platform_device *pdev,
 	pmx->dev = &pdev->dev;
 	pmx->soc = soc_data;
 
+<<<<<<< HEAD
+=======
+	/*
+	 * Each mux group will appear in 4 functions' list of groups.
+	 * This over-allocates slightly, since not all groups are mux groups.
+	 */
+	pmx->group_pins = devm_kzalloc(&pdev->dev,
+		soc_data->ngroups * 4 * sizeof(*pmx->group_pins),
+		GFP_KERNEL);
+	if (!pmx->group_pins)
+		return -ENOMEM;
+
+	group_pins = pmx->group_pins;
+	for (fn = 0; fn < soc_data->nfunctions; fn++) {
+		struct tegra_function *func = &soc_data->functions[fn];
+
+		func->groups = group_pins;
+
+		for (gn = 0; gn < soc_data->ngroups; gn++) {
+			const struct tegra_pingroup *g = &soc_data->groups[gn];
+
+			if (g->mux_reg == -1)
+				continue;
+
+			for (gfn = 0; gfn < 4; gfn++)
+				if (g->funcs[gfn] == fn)
+					break;
+			if (gfn == 4)
+				continue;
+
+			BUG_ON(group_pins - pmx->group_pins >=
+				soc_data->ngroups * 4);
+			*group_pins++ = g->name;
+			func->ngroups++;
+		}
+	}
+
+>>>>>>> v3.18
 	tegra_pinctrl_gpio_range.npins = pmx->soc->ngpios;
 	tegra_pinctrl_desc.name = dev_name(&pdev->dev);
 	tegra_pinctrl_desc.pins = pmx->soc->pins;
@@ -732,11 +947,16 @@ int tegra_pinctrl_probe(struct platform_device *pdev,
 				 GFP_KERNEL);
 	if (!pmx->regs) {
 		dev_err(&pdev->dev, "Can't alloc regs pointer\n");
+<<<<<<< HEAD
 		return -ENODEV;
+=======
+		return -ENOMEM;
+>>>>>>> v3.18
 	}
 
 	for (i = 0; i < pmx->nbanks; i++) {
 		res = platform_get_resource(pdev, IORESOURCE_MEM, i);
+<<<<<<< HEAD
 		if (!res) {
 			dev_err(&pdev->dev, "Missing MEM resource\n");
 			return -ENODEV;
@@ -756,6 +976,11 @@ int tegra_pinctrl_probe(struct platform_device *pdev,
 			dev_err(&pdev->dev, "Couldn't ioremap regs %d\n", i);
 			return -ENODEV;
 		}
+=======
+		pmx->regs[i] = devm_ioremap_resource(&pdev->dev, res);
+		if (IS_ERR(pmx->regs[i]))
+			return PTR_ERR(pmx->regs[i]);
+>>>>>>> v3.18
 	}
 
 	pmx->pctl = pinctrl_register(&tegra_pinctrl_desc, &pdev->dev, pmx);

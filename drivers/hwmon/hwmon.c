@@ -15,19 +15,156 @@
 #include <linux/module.h>
 #include <linux/device.h>
 #include <linux/err.h>
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+>>>>>>> v3.18
 #include <linux/kdev_t.h>
 #include <linux/idr.h>
 #include <linux/hwmon.h>
 #include <linux/gfp.h>
 #include <linux/spinlock.h>
 #include <linux/pci.h>
+<<<<<<< HEAD
+=======
+#include <linux/string.h>
+>>>>>>> v3.18
 
 #define HWMON_ID_PREFIX "hwmon"
 #define HWMON_ID_FORMAT HWMON_ID_PREFIX "%d"
 
+<<<<<<< HEAD
 static struct class *hwmon_class;
+=======
+struct hwmon_device {
+	const char *name;
+	struct device dev;
+};
+#define to_hwmon_device(d) container_of(d, struct hwmon_device, dev)
+
+static ssize_t
+show_name(struct device *dev, struct device_attribute *attr, char *buf)
+{
+	return sprintf(buf, "%s\n", to_hwmon_device(dev)->name);
+}
+static DEVICE_ATTR(name, S_IRUGO, show_name, NULL);
+
+static struct attribute *hwmon_dev_attrs[] = {
+	&dev_attr_name.attr,
+	NULL
+};
+
+static umode_t hwmon_dev_name_is_visible(struct kobject *kobj,
+					 struct attribute *attr, int n)
+{
+	struct device *dev = container_of(kobj, struct device, kobj);
+
+	if (to_hwmon_device(dev)->name == NULL)
+		return 0;
+
+	return attr->mode;
+}
+
+static struct attribute_group hwmon_dev_attr_group = {
+	.attrs		= hwmon_dev_attrs,
+	.is_visible	= hwmon_dev_name_is_visible,
+};
+
+static const struct attribute_group *hwmon_dev_attr_groups[] = {
+	&hwmon_dev_attr_group,
+	NULL
+};
+
+static void hwmon_dev_release(struct device *dev)
+{
+	kfree(to_hwmon_device(dev));
+}
+
+static struct class hwmon_class = {
+	.name = "hwmon",
+	.owner = THIS_MODULE,
+	.dev_groups = hwmon_dev_attr_groups,
+	.dev_release = hwmon_dev_release,
+};
+>>>>>>> v3.18
 
 static DEFINE_IDA(hwmon_ida);
+
+/**
+<<<<<<< HEAD
+ * hwmon_device_register - register w/ hwmon
+ * @dev: the device to register
+=======
+ * hwmon_device_register_with_groups - register w/ hwmon
+ * @dev: the parent device
+ * @name: hwmon name attribute
+ * @drvdata: driver data to attach to created device
+ * @groups: List of attribute groups to create
+>>>>>>> v3.18
+ *
+ * hwmon_device_unregister() must be called when the device is no
+ * longer needed.
+ *
+ * Returns the pointer to the new device.
+ */
+<<<<<<< HEAD
+struct device *hwmon_device_register(struct device *dev)
+{
+	struct device *hwdev;
+	int id;
+=======
+struct device *
+hwmon_device_register_with_groups(struct device *dev, const char *name,
+				  void *drvdata,
+				  const struct attribute_group **groups)
+{
+	struct hwmon_device *hwdev;
+	int err, id;
+
+	/* Do not accept invalid characters in hwmon name attribute */
+	if (name && (!strlen(name) || strpbrk(name, "-* \t\n")))
+		return ERR_PTR(-EINVAL);
+>>>>>>> v3.18
+
+	id = ida_simple_get(&hwmon_ida, 0, 0, GFP_KERNEL);
+	if (id < 0)
+		return ERR_PTR(id);
+
+<<<<<<< HEAD
+	hwdev = device_create(hwmon_class, dev, MKDEV(0, 0), NULL,
+			      HWMON_ID_FORMAT, id);
+
+	if (IS_ERR(hwdev))
+		ida_simple_remove(&hwmon_ida, id);
+
+	return hwdev;
+=======
+	hwdev = kzalloc(sizeof(*hwdev), GFP_KERNEL);
+	if (hwdev == NULL) {
+		err = -ENOMEM;
+		goto ida_remove;
+	}
+
+	hwdev->name = name;
+	hwdev->dev.class = &hwmon_class;
+	hwdev->dev.parent = dev;
+	hwdev->dev.groups = groups;
+	hwdev->dev.of_node = dev ? dev->of_node : NULL;
+	dev_set_drvdata(&hwdev->dev, drvdata);
+	dev_set_name(&hwdev->dev, HWMON_ID_FORMAT, id);
+	err = device_register(&hwdev->dev);
+	if (err)
+		goto free;
+
+	return &hwdev->dev;
+
+free:
+	kfree(hwdev);
+ida_remove:
+	ida_simple_remove(&hwmon_ida, id);
+	return ERR_PTR(err);
+}
+EXPORT_SYMBOL_GPL(hwmon_device_register_with_groups);
 
 /**
  * hwmon_device_register - register w/ hwmon
@@ -40,20 +177,8 @@ static DEFINE_IDA(hwmon_ida);
  */
 struct device *hwmon_device_register(struct device *dev)
 {
-	struct device *hwdev;
-	int id;
-
-	id = ida_simple_get(&hwmon_ida, 0, 0, GFP_KERNEL);
-	if (id < 0)
-		return ERR_PTR(id);
-
-	hwdev = device_create(hwmon_class, dev, MKDEV(0, 0), NULL,
-			      HWMON_ID_FORMAT, id);
-
-	if (IS_ERR(hwdev))
-		ida_simple_remove(&hwmon_ida, id);
-
-	return hwdev;
+	return hwmon_device_register_with_groups(dev, NULL, NULL, NULL);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(hwmon_device_register);
 
@@ -75,6 +200,72 @@ void hwmon_device_unregister(struct device *dev)
 }
 EXPORT_SYMBOL_GPL(hwmon_device_unregister);
 
+<<<<<<< HEAD
+=======
+static void devm_hwmon_release(struct device *dev, void *res)
+{
+	struct device *hwdev = *(struct device **)res;
+
+	hwmon_device_unregister(hwdev);
+}
+
+/**
+ * devm_hwmon_device_register_with_groups - register w/ hwmon
+ * @dev: the parent device
+ * @name: hwmon name attribute
+ * @drvdata: driver data to attach to created device
+ * @groups: List of attribute groups to create
+ *
+ * Returns the pointer to the new device. The new device is automatically
+ * unregistered with the parent device.
+ */
+struct device *
+devm_hwmon_device_register_with_groups(struct device *dev, const char *name,
+				       void *drvdata,
+				       const struct attribute_group **groups)
+{
+	struct device **ptr, *hwdev;
+
+	if (!dev)
+		return ERR_PTR(-EINVAL);
+
+	ptr = devres_alloc(devm_hwmon_release, sizeof(*ptr), GFP_KERNEL);
+	if (!ptr)
+		return ERR_PTR(-ENOMEM);
+
+	hwdev = hwmon_device_register_with_groups(dev, name, drvdata, groups);
+	if (IS_ERR(hwdev))
+		goto error;
+
+	*ptr = hwdev;
+	devres_add(dev, ptr);
+	return hwdev;
+
+error:
+	devres_free(ptr);
+	return hwdev;
+}
+EXPORT_SYMBOL_GPL(devm_hwmon_device_register_with_groups);
+
+static int devm_hwmon_match(struct device *dev, void *res, void *data)
+{
+	struct device **hwdev = res;
+
+	return *hwdev == data;
+}
+
+/**
+ * devm_hwmon_device_unregister - removes a previously registered hwmon device
+ *
+ * @dev: the parent device of the device to unregister
+ */
+void devm_hwmon_device_unregister(struct device *dev)
+{
+	WARN_ON(devres_release(dev, devm_hwmon_release, devm_hwmon_match, dev));
+}
+EXPORT_SYMBOL_GPL(devm_hwmon_device_unregister);
+
+>>>>>>> v3.18
 static void __init hwmon_pci_quirks(void)
 {
 #if defined CONFIG_X86 && defined CONFIG_PCI
@@ -105,19 +296,34 @@ static void __init hwmon_pci_quirks(void)
 
 static int __init hwmon_init(void)
 {
+<<<<<<< HEAD
 	hwmon_pci_quirks();
 
 	hwmon_class = class_create(THIS_MODULE, "hwmon");
 	if (IS_ERR(hwmon_class)) {
 		pr_err("couldn't create sysfs class\n");
 		return PTR_ERR(hwmon_class);
+=======
+	int err;
+
+	hwmon_pci_quirks();
+
+	err = class_register(&hwmon_class);
+	if (err) {
+		pr_err("couldn't register hwmon sysfs class\n");
+		return err;
+>>>>>>> v3.18
 	}
 	return 0;
 }
 
 static void __exit hwmon_exit(void)
 {
+<<<<<<< HEAD
 	class_destroy(hwmon_class);
+=======
+	class_unregister(&hwmon_class);
+>>>>>>> v3.18
 }
 
 subsys_initcall(hwmon_init);

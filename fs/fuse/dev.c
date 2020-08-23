@@ -7,14 +7,20 @@
 */
 
 #include "fuse_i.h"
+<<<<<<< HEAD
 #include "fuse_shortcircuit.h"
+=======
+>>>>>>> v3.18
 
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/poll.h>
 #include <linux/uio.h>
 #include <linux/miscdevice.h>
+<<<<<<< HEAD
 #include <linux/namei.h>
+=======
+>>>>>>> v3.18
 #include <linux/pagemap.h>
 #include <linux/file.h>
 #include <linux/slab.h>
@@ -22,7 +28,10 @@
 #include <linux/swap.h>
 #include <linux/splice.h>
 #include <linux/aio.h>
+<<<<<<< HEAD
 #include <linux/freezer.h>
+=======
+>>>>>>> v3.18
 
 MODULE_ALIAS_MISCDEV(FUSE_MINOR);
 MODULE_ALIAS("devname:fuse");
@@ -467,10 +476,14 @@ __acquires(fc->lock)
 	 * Wait it out.
 	 */
 	spin_unlock(&fc->lock);
+<<<<<<< HEAD
 
 	while (req->state != FUSE_REQ_FINISHED)
 		wait_event_freezable(req->waitq,
 				     req->state == FUSE_REQ_FINISHED);
+=======
+	wait_event(req->waitq, req->state == FUSE_REQ_FINISHED);
+>>>>>>> v3.18
 	spin_lock(&fc->lock);
 
 	if (!req->aborted)
@@ -649,9 +662,14 @@ struct fuse_copy_state {
 	unsigned long seglen;
 	unsigned long addr;
 	struct page *pg;
+<<<<<<< HEAD
 	void *mapaddr;
 	void *buf;
 	unsigned len;
+=======
+	unsigned len;
+	unsigned offset;
+>>>>>>> v3.18
 	unsigned move_pages:1;
 };
 
@@ -672,6 +690,7 @@ static void fuse_copy_finish(struct fuse_copy_state *cs)
 	if (cs->currbuf) {
 		struct pipe_buffer *buf = cs->currbuf;
 
+<<<<<<< HEAD
 		if (!cs->write) {
 			buf->ops->unmap(cs->pipe, buf, cs->mapaddr);
 		} else {
@@ -682,13 +701,24 @@ static void fuse_copy_finish(struct fuse_copy_state *cs)
 		cs->mapaddr = NULL;
 	} else if (cs->mapaddr) {
 		kunmap(cs->pg);
+=======
+		if (cs->write)
+			buf->len = PAGE_SIZE - cs->len;
+		cs->currbuf = NULL;
+	} else if (cs->pg) {
+>>>>>>> v3.18
 		if (cs->write) {
 			flush_dcache_page(cs->pg);
 			set_page_dirty_lock(cs->pg);
 		}
 		put_page(cs->pg);
+<<<<<<< HEAD
 		cs->mapaddr = NULL;
 	}
+=======
+	}
+	cs->pg = NULL;
+>>>>>>> v3.18
 }
 
 /*
@@ -697,7 +727,11 @@ static void fuse_copy_finish(struct fuse_copy_state *cs)
  */
 static int fuse_copy_fill(struct fuse_copy_state *cs)
 {
+<<<<<<< HEAD
 	unsigned long offset;
+=======
+	struct page *page;
+>>>>>>> v3.18
 	int err;
 
 	unlock_request(cs->fc, cs->req);
@@ -712,6 +746,7 @@ static int fuse_copy_fill(struct fuse_copy_state *cs)
 
 			BUG_ON(!cs->nr_segs);
 			cs->currbuf = buf;
+<<<<<<< HEAD
 			cs->mapaddr = buf->ops->map(cs->pipe, buf, 0);
 			cs->len = buf->len;
 			cs->buf = cs->mapaddr + buf->offset;
@@ -720,6 +755,14 @@ static int fuse_copy_fill(struct fuse_copy_state *cs)
 		} else {
 			struct page *page;
 
+=======
+			cs->pg = buf->page;
+			cs->offset = buf->offset;
+			cs->len = buf->len;
+			cs->pipebufs++;
+			cs->nr_segs--;
+		} else {
+>>>>>>> v3.18
 			if (cs->nr_segs == cs->pipe->buffers)
 				return -EIO;
 
@@ -732,8 +775,13 @@ static int fuse_copy_fill(struct fuse_copy_state *cs)
 			buf->len = 0;
 
 			cs->currbuf = buf;
+<<<<<<< HEAD
 			cs->mapaddr = kmap(page);
 			cs->buf = cs->mapaddr;
+=======
+			cs->pg = page;
+			cs->offset = 0;
+>>>>>>> v3.18
 			cs->len = PAGE_SIZE;
 			cs->pipebufs++;
 			cs->nr_segs++;
@@ -746,6 +794,7 @@ static int fuse_copy_fill(struct fuse_copy_state *cs)
 			cs->iov++;
 			cs->nr_segs--;
 		}
+<<<<<<< HEAD
 		err = get_user_pages_fast(cs->addr, 1, cs->write, &cs->pg);
 		if (err < 0)
 			return err;
@@ -754,6 +803,15 @@ static int fuse_copy_fill(struct fuse_copy_state *cs)
 		cs->mapaddr = kmap(cs->pg);
 		cs->buf = cs->mapaddr + offset;
 		cs->len = min(PAGE_SIZE - offset, cs->seglen);
+=======
+		err = get_user_pages_fast(cs->addr, 1, cs->write, &page);
+		if (err < 0)
+			return err;
+		BUG_ON(err != 1);
+		cs->pg = page;
+		cs->offset = cs->addr % PAGE_SIZE;
+		cs->len = min(PAGE_SIZE - cs->offset, cs->seglen);
+>>>>>>> v3.18
 		cs->seglen -= cs->len;
 		cs->addr += cs->len;
 	}
@@ -766,15 +824,31 @@ static int fuse_copy_do(struct fuse_copy_state *cs, void **val, unsigned *size)
 {
 	unsigned ncpy = min(*size, cs->len);
 	if (val) {
+<<<<<<< HEAD
 		if (cs->write)
 			memcpy(cs->buf, *val, ncpy);
 		else
 			memcpy(*val, cs->buf, ncpy);
+=======
+		void *pgaddr = kmap_atomic(cs->pg);
+		void *buf = pgaddr + cs->offset;
+
+		if (cs->write)
+			memcpy(buf, *val, ncpy);
+		else
+			memcpy(*val, buf, ncpy);
+
+		kunmap_atomic(pgaddr);
+>>>>>>> v3.18
 		*val += ncpy;
 	}
 	*size -= ncpy;
 	cs->len -= ncpy;
+<<<<<<< HEAD
 	cs->buf += ncpy;
+=======
+	cs->offset += ncpy;
+>>>>>>> v3.18
 	return ncpy;
 }
 
@@ -825,8 +899,13 @@ static int fuse_try_move_page(struct fuse_copy_state *cs, struct page **pagep)
 
 	newpage = buf->page;
 
+<<<<<<< HEAD
 	if (!PageUptodate(newpage))
 		SetPageUptodate(newpage);
+=======
+	if (WARN_ON(!PageUptodate(newpage)))
+		return -EIO;
+>>>>>>> v3.18
 
 	ClearPageMappedToDisk(newpage);
 
@@ -880,8 +959,13 @@ static int fuse_try_move_page(struct fuse_copy_state *cs, struct page **pagep)
 out_fallback_unlock:
 	unlock_page(newpage);
 out_fallback:
+<<<<<<< HEAD
 	cs->mapaddr = buf->ops->map(cs->pipe, buf, 1);
 	cs->buf = cs->mapaddr + buf->offset;
+=======
+	cs->pg = buf->page;
+	cs->offset = buf->offset;
+>>>>>>> v3.18
 
 	err = lock_request(cs->fc, cs->req);
 	if (err)
@@ -1593,7 +1677,12 @@ static int fuse_notify_store(struct fuse_conn *fc, unsigned int size,
 
 		this_num = min_t(unsigned, num, PAGE_CACHE_SIZE - offset);
 		err = fuse_copy_page(cs, &page, offset, this_num, 0);
+<<<<<<< HEAD
 		if (!err && offset == 0 && (num != 0 || file_size == end))
+=======
+		if (!err && offset == 0 &&
+		    (this_num == PAGE_CACHE_SIZE || file_size == end))
+>>>>>>> v3.18
 			SetPageUptodate(page);
 		unlock_page(page);
 		page_cache_release(page);
@@ -1619,7 +1708,11 @@ out_finish:
 
 static void fuse_retrieve_end(struct fuse_conn *fc, struct fuse_req *req)
 {
+<<<<<<< HEAD
 	release_pages(req->pages, req->num_pages, 0);
+=======
+	release_pages(req->pages, req->num_pages, false);
+>>>>>>> v3.18
 }
 
 static int fuse_retrieve(struct fuse_conn *fc, struct inode *inode,
@@ -1731,9 +1824,12 @@ copy_finish:
 static int fuse_notify(struct fuse_conn *fc, enum fuse_notify_code code,
 		       unsigned int size, struct fuse_copy_state *cs)
 {
+<<<<<<< HEAD
 	/* Don't try to move pages (yet) */
 	cs->move_pages = 0;
 
+=======
+>>>>>>> v3.18
 	switch (code) {
 	case FUSE_NOTIFY_POLL:
 		return fuse_notify_poll(fc, size, cs);
@@ -1762,11 +1858,17 @@ static int fuse_notify(struct fuse_conn *fc, enum fuse_notify_code code,
 /* Look up request on processing list by unique ID */
 static struct fuse_req *request_find(struct fuse_conn *fc, u64 unique)
 {
+<<<<<<< HEAD
 	struct list_head *entry;
 
 	list_for_each(entry, &fc->processing) {
 		struct fuse_req *req;
 		req = list_entry(entry, struct fuse_req, list);
+=======
+	struct fuse_req *req;
+
+	list_for_each_entry(req, &fc->processing, list) {
+>>>>>>> v3.18
 		if (req->in.h.unique == unique || req->intr_unique == unique)
 			return req;
 	}
@@ -1876,6 +1978,7 @@ static ssize_t fuse_dev_do_write(struct fuse_conn *fc,
 	spin_unlock(&fc->lock);
 
 	err = copy_out_args(cs, &req->out, nbytes);
+<<<<<<< HEAD
 	if (req->in.h.opcode == FUSE_CANONICAL_PATH) {
 		req->out.h.error = kern_path((char *)req->out.args[0].value, 0,
 							req->canonical_path);
@@ -1884,6 +1987,10 @@ static ssize_t fuse_dev_do_write(struct fuse_conn *fc,
 
 	fuse_setup_shortcircuit(fc, req);
 
+=======
+	fuse_copy_finish(cs);
+
+>>>>>>> v3.18
 	spin_lock(&fc->lock);
 	req->locked = 0;
 	if (!err) {

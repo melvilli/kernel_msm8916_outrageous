@@ -1,7 +1,13 @@
 /**
+<<<<<<< HEAD
  * inode.c - NTFS kernel inode handling. Part of the Linux-NTFS project.
  *
  * Copyright (c) 2001-2007 Anton Altaparmakov
+=======
+ * inode.c - NTFS kernel inode handling.
+ *
+ * Copyright (c) 2001-2014 Anton Altaparmakov and Tuxera Inc.
+>>>>>>> v3.18
  *
  * This program/include file is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as published
@@ -55,7 +61,11 @@
  *
  * Return 1 if the attributes match and 0 if not.
  *
+<<<<<<< HEAD
  * NOTE: This function runs with the inode->i_lock spin lock held so it is not
+=======
+ * NOTE: This function runs with the inode_hash_lock spin lock held so it is not
+>>>>>>> v3.18
  * allowed to sleep.
  */
 int ntfs_test_inode(struct inode *vi, ntfs_attr *na)
@@ -1012,6 +1022,10 @@ skip_large_dir_stuff:
 		/* Setup the operations for this inode. */
 		vi->i_op = &ntfs_dir_inode_ops;
 		vi->i_fop = &ntfs_dir_ops;
+<<<<<<< HEAD
+=======
+		vi->i_mapping->a_ops = &ntfs_mst_aops;
+>>>>>>> v3.18
 	} else {
 		/* It is a file. */
 		ntfs_attr_reinit_search_ctx(ctx);
@@ -1160,11 +1174,20 @@ no_data_attr_special_case:
 		/* Setup the operations for this inode. */
 		vi->i_op = &ntfs_file_inode_ops;
 		vi->i_fop = &ntfs_file_ops;
+<<<<<<< HEAD
 	}
 	if (NInoMstProtected(ni))
 		vi->i_mapping->a_ops = &ntfs_mst_aops;
 	else
 		vi->i_mapping->a_ops = &ntfs_aops;
+=======
+		vi->i_mapping->a_ops = &ntfs_normal_aops;
+		if (NInoMstProtected(ni))
+			vi->i_mapping->a_ops = &ntfs_mst_aops;
+		else if (NInoCompressed(ni))
+			vi->i_mapping->a_ops = &ntfs_compressed_aops;
+	}
+>>>>>>> v3.18
 	/*
 	 * The number of 512-byte blocks used on disk (for stat). This is in so
 	 * far inaccurate as it doesn't account for any named streams or other
@@ -1414,10 +1437,18 @@ static int ntfs_read_locked_attr_inode(struct inode *base_vi, struct inode *vi)
 		ni->allocated_size = sle64_to_cpu(
 				a->data.non_resident.allocated_size);
 	}
+<<<<<<< HEAD
 	if (NInoMstProtected(ni))
 		vi->i_mapping->a_ops = &ntfs_mst_aops;
 	else
 		vi->i_mapping->a_ops = &ntfs_aops;
+=======
+	vi->i_mapping->a_ops = &ntfs_normal_aops;
+	if (NInoMstProtected(ni))
+		vi->i_mapping->a_ops = &ntfs_mst_aops;
+	else if (NInoCompressed(ni))
+		vi->i_mapping->a_ops = &ntfs_compressed_aops;
+>>>>>>> v3.18
 	if ((NInoCompressed(ni) || NInoSparse(ni)) && ni->type != AT_INDEX_ROOT)
 		vi->i_blocks = ni->itype.compressed.size >> 9;
 	else
@@ -1704,8 +1735,11 @@ static int ntfs_read_locked_index_inode(struct inode *base_vi, struct inode *vi)
 	iput(bvi);
 skip_large_index_stuff:
 	/* Setup the operations for this index inode. */
+<<<<<<< HEAD
 	vi->i_op = NULL;
 	vi->i_fop = NULL;
+=======
+>>>>>>> v3.18
 	vi->i_mapping->a_ops = &ntfs_mst_aops;
 	vi->i_blocks = ni->allocated_size >> 9;
 	/*
@@ -2259,7 +2293,11 @@ void ntfs_evict_big_inode(struct inode *vi)
 {
 	ntfs_inode *ni = NTFS_I(vi);
 
+<<<<<<< HEAD
 	truncate_inode_pages(&vi->i_data, 0);
+=======
+	truncate_inode_pages_final(&vi->i_data);
+>>>>>>> v3.18
 	clear_inode(vi);
 
 #ifdef NTFS_RW

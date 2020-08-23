@@ -255,7 +255,11 @@ static struct miscdevice mv64x60_wdt_miscdev = {
 
 static int mv64x60_wdt_probe(struct platform_device *dev)
 {
+<<<<<<< HEAD
 	struct mv64x60_wdt_pdata *pdata = dev->dev.platform_data;
+=======
+	struct mv64x60_wdt_pdata *pdata = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 	struct resource *r;
 	int timeout = 10;
 
@@ -276,7 +280,11 @@ static int mv64x60_wdt_probe(struct platform_device *dev)
 	if (!r)
 		return -ENODEV;
 
+<<<<<<< HEAD
 	mv64x60_wdt_regs = ioremap(r->start, resource_size(r));
+=======
+	mv64x60_wdt_regs = devm_ioremap(&dev->dev, r->start, resource_size(r));
+>>>>>>> v3.18
 	if (mv64x60_wdt_regs == NULL)
 		return -ENOMEM;
 
@@ -293,8 +301,11 @@ static int mv64x60_wdt_remove(struct platform_device *dev)
 
 	mv64x60_wdt_handler_disable();
 
+<<<<<<< HEAD
 	iounmap(mv64x60_wdt_regs);
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -325,5 +336,8 @@ module_exit(mv64x60_wdt_exit);
 MODULE_AUTHOR("James Chapman <jchapman@katalix.com>");
 MODULE_DESCRIPTION("MV64x60 watchdog driver");
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 MODULE_ALIAS("platform:" MV64x60_WDT_NAME);

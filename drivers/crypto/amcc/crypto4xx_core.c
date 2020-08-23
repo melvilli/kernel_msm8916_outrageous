@@ -27,6 +27,12 @@
 #include <linux/dma-mapping.h>
 #include <linux/platform_device.h>
 #include <linux/init.h>
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 #include <linux/of_platform.h>
 #include <linux/slab.h>
 #include <asm/dcr.h>
@@ -721,7 +727,10 @@ static void crypto4xx_stop_all(struct crypto4xx_core_device *core_dev)
 	crypto4xx_destroy_pdr(core_dev->dev);
 	crypto4xx_destroy_gdr(core_dev->dev);
 	crypto4xx_destroy_sdr(core_dev->dev);
+<<<<<<< HEAD
 	dev_set_drvdata(core_dev->device, NULL);
+=======
+>>>>>>> v3.18
 	iounmap(core_dev->dev->ce_base);
 	kfree(core_dev->dev);
 	kfree(core_dev);
@@ -1290,7 +1299,11 @@ static struct platform_driver crypto4xx_driver = {
 		.of_match_table = crypto4xx_match,
 	},
 	.probe		= crypto4xx_probe,
+<<<<<<< HEAD
 	.remove		= crypto4xx_remove,
+=======
+	.remove		= __exit_p(crypto4xx_remove),
+>>>>>>> v3.18
 };
 
 module_platform_driver(crypto4xx_driver);

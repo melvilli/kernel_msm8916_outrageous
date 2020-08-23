@@ -2,7 +2,11 @@
  * Copyright (C) 2005, 2006
  * Avishay Traeger (avishay@gmail.com)
  * Copyright (C) 2008, 2009
+<<<<<<< HEAD
  * Boaz Harrosh <bharrosh@panasas.com>
+=======
+ * Boaz Harrosh <ooo@electrozaur.com>
+>>>>>>> v3.18
  *
  * Copyrights for code taken from ext2:
  *     Copyright (C) 1992, 1993, 1994, 1995
@@ -543,7 +547,11 @@ static int exofs_devs_2_odi(struct exofs_dt_device_info *dt_dev,
 	return !(odi->systemid_len || odi->osdname_len);
 }
 
+<<<<<<< HEAD
 int __alloc_dev_table(struct exofs_sb_info *sbi, unsigned numdevs,
+=======
+static int __alloc_dev_table(struct exofs_sb_info *sbi, unsigned numdevs,
+>>>>>>> v3.18
 		      struct exofs_dev **peds)
 {
 	struct __alloc_ore_devs_and_exofs_devs {

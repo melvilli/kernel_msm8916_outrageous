@@ -117,6 +117,18 @@ int shash_ahash_update(struct ahash_request *req, struct shash_desc *desc);
 int shash_ahash_finup(struct ahash_request *req, struct shash_desc *desc);
 int shash_ahash_digest(struct ahash_request *req, struct shash_desc *desc);
 
+<<<<<<< HEAD
+=======
+int shash_ahash_mcryptd_update(struct ahash_request *req,
+			       struct shash_desc *desc);
+int shash_ahash_mcryptd_final(struct ahash_request *req,
+			      struct shash_desc *desc);
+int shash_ahash_mcryptd_finup(struct ahash_request *req,
+			      struct shash_desc *desc);
+int shash_ahash_mcryptd_digest(struct ahash_request *req,
+			       struct shash_desc *desc);
+
+>>>>>>> v3.18
 int crypto_init_shash_ops_async(struct crypto_tfm *tfm);
 
 static inline void *crypto_ahash_ctx(struct crypto_ahash *tfm)
@@ -164,6 +176,7 @@ static inline struct ahash_instance *ahash_alloc_instance(
 	return crypto_alloc_instance2(name, alg, ahash_instance_headroom());
 }
 
+<<<<<<< HEAD
 static inline void ahash_request_complete(struct ahash_request *req, int err)
 {
 	req->base.complete(&req->base, err);
@@ -174,6 +187,8 @@ static inline u32 ahash_request_flags(struct ahash_request *req)
 	return req->base.flags;
 }
 
+=======
+>>>>>>> v3.18
 static inline struct crypto_ahash *crypto_spawn_ahash(
 	struct crypto_ahash_spawn *spawn)
 {

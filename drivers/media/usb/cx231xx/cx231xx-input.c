@@ -1,7 +1,11 @@
 /*
  *   cx231xx IR glue driver
  *
+<<<<<<< HEAD
  *   Copyright (C) 2010 Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+ *   Copyright (C) 2010 Mauro Carvalho Chehab
+>>>>>>> v3.18
  *
  *   Polaris (cx231xx) has its support for IR's with a design close to MCE.
  *   however, a few designs are using an external I2C chip for IR, instead
@@ -21,11 +25,20 @@
 #include "cx231xx.h"
 #include <linux/usb.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
 
 #define MODULE_NAME "cx231xx-input"
 
 static int get_key_isdbt(struct IR_i2c *ir, u32 *ir_key,
 			 u32 *ir_raw)
+=======
+#include <linux/bitrev.h>
+
+#define MODULE_NAME "cx231xx-input"
+
+static int get_key_isdbt(struct IR_i2c *ir, enum rc_type *protocol,
+			 u32 *pscancode, u8 *toggle)
+>>>>>>> v3.18
 {
 	int	rc;
 	u8	cmd, scancode;
@@ -46,6 +59,7 @@ static int get_key_isdbt(struct IR_i2c *ir, u32 *ir_key,
 	if (cmd == 0xff)
 		return 0;
 
+<<<<<<< HEAD
 	scancode =
 		 ((cmd & 0x01) ? 0x80 : 0) |
 		 ((cmd & 0x02) ? 0x40 : 0) |
@@ -55,12 +69,21 @@ static int get_key_isdbt(struct IR_i2c *ir, u32 *ir_key,
 		 ((cmd & 0x20) ? 0x04 : 0) |
 		 ((cmd & 0x40) ? 0x02 : 0) |
 		 ((cmd & 0x80) ? 0x01 : 0);
+=======
+	scancode = bitrev8(cmd);
+>>>>>>> v3.18
 
 	dev_dbg(&ir->rc->input_dev->dev, "cmd %02x, scan = %02x\n",
 		cmd, scancode);
 
+<<<<<<< HEAD
 	*ir_key = scancode;
 	*ir_raw = scancode;
+=======
+	*protocol = RC_TYPE_OTHER;
+	*pscancode = scancode;
+	*toggle = 0;
+>>>>>>> v3.18
 	return 1;
 }
 
@@ -97,7 +120,11 @@ int cx231xx_ir_init(struct cx231xx *dev)
 	dev->init_data.get_key = get_key_isdbt;
 	dev->init_data.ir_codes = cx231xx_boards[dev->model].rc_map_name;
 	/* The i2c micro-controller only outputs the cmd part of NEC protocol */
+<<<<<<< HEAD
 	dev->init_data.rc_dev->scanmask = 0xff;
+=======
+	dev->init_data.rc_dev->scancode_mask = 0xff;
+>>>>>>> v3.18
 	dev->init_data.rc_dev->driver_name = "cx231xx";
 	dev->init_data.type = RC_BIT_NEC;
 	info.addr = 0x30;

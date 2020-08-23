@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2007-2011 Nicira, Inc.
+=======
+ * Copyright (c) 2007-2014 Nicira, Inc.
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of version 2 of the GNU General Public
@@ -19,6 +23,10 @@
 #ifndef FLOW_H
 #define FLOW_H 1
 
+<<<<<<< HEAD
+=======
+#include <linux/cache.h>
+>>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/netlink.h>
 #include <linux/openvswitch.h>
@@ -34,6 +42,7 @@
 
 struct sk_buff;
 
+<<<<<<< HEAD
 struct sw_flow_actions {
 	struct rcu_head rcu;
 	u32 actions_len;
@@ -41,11 +50,73 @@ struct sw_flow_actions {
 };
 
 struct sw_flow_key {
+=======
+/* Used to memset ovs_key_ipv4_tunnel padding. */
+#define OVS_TUNNEL_KEY_SIZE					\
+	(offsetof(struct ovs_key_ipv4_tunnel, ipv4_ttl) +	\
+	FIELD_SIZEOF(struct ovs_key_ipv4_tunnel, ipv4_ttl))
+
+struct ovs_key_ipv4_tunnel {
+	__be64 tun_id;
+	__be32 ipv4_src;
+	__be32 ipv4_dst;
+	__be16 tun_flags;
+	u8   ipv4_tos;
+	u8   ipv4_ttl;
+} __packed __aligned(4); /* Minimize padding. */
+
+struct ovs_tunnel_info {
+	struct ovs_key_ipv4_tunnel tunnel;
+	struct geneve_opt *options;
+	u8 options_len;
+};
+
+/* Store options at the end of the array if they are less than the
+ * maximum size. This allows us to get the benefits of variable length
+ * matching for small options.
+ */
+#define GENEVE_OPTS(flow_key, opt_len)	\
+	((struct geneve_opt *)((flow_key)->tun_opts + \
+			       FIELD_SIZEOF(struct sw_flow_key, tun_opts) - \
+			       opt_len))
+
+static inline void ovs_flow_tun_info_init(struct ovs_tunnel_info *tun_info,
+					  const struct iphdr *iph,
+					  __be64 tun_id, __be16 tun_flags,
+					  struct geneve_opt *opts,
+					  u8 opts_len)
+{
+	tun_info->tunnel.tun_id = tun_id;
+	tun_info->tunnel.ipv4_src = iph->saddr;
+	tun_info->tunnel.ipv4_dst = iph->daddr;
+	tun_info->tunnel.ipv4_tos = iph->tos;
+	tun_info->tunnel.ipv4_ttl = iph->ttl;
+	tun_info->tunnel.tun_flags = tun_flags;
+
+	/* clear struct padding. */
+	memset((unsigned char *)&tun_info->tunnel + OVS_TUNNEL_KEY_SIZE, 0,
+	       sizeof(tun_info->tunnel) - OVS_TUNNEL_KEY_SIZE);
+
+	tun_info->options = opts;
+	tun_info->options_len = opts_len;
+}
+
+struct sw_flow_key {
+	u8 tun_opts[255];
+	u8 tun_opts_len;
+	struct ovs_key_ipv4_tunnel tun_key;  /* Encapsulating tunnel key. */
+>>>>>>> v3.18
 	struct {
 		u32	priority;	/* Packet QoS priority. */
 		u32	skb_mark;	/* SKB mark. */
 		u16	in_port;	/* Input switch port (or DP_MAX_PORTS). */
+<<<<<<< HEAD
 	} phy;
+=======
+	} __packed phy; /* Safe when right after 'tun_key'. */
+	u32 ovs_flow_hash;		/* Datapath computed hash value.  */
+	u32 recirc_id;			/* Recirculation ID.  */
+>>>>>>> v3.18
 	struct {
 		u8     src[ETH_ALEN];	/* Ethernet source address. */
 		u8     dst[ETH_ALEN];	/* Ethernet destination address. */
@@ -58,12 +129,21 @@ struct sw_flow_key {
 		u8     ttl;		/* IP TTL/hop limit. */
 		u8     frag;		/* One of OVS_FRAG_TYPE_*. */
 	} ip;
+<<<<<<< HEAD
+=======
+	struct {
+		__be16 src;		/* TCP/UDP/SCTP source port. */
+		__be16 dst;		/* TCP/UDP/SCTP destination port. */
+		__be16 flags;		/* TCP flags. */
+	} tp;
+>>>>>>> v3.18
 	union {
 		struct {
 			struct {
 				__be32 src;	/* IP source address. */
 				__be32 dst;	/* IP destination address. */
 			} addr;
+<<<<<<< HEAD
 			union {
 				struct {
 					__be16 src;		/* TCP/UDP source port. */
@@ -74,6 +154,12 @@ struct sw_flow_key {
 					u8 tha[ETH_ALEN];	/* ARP target hardware address. */
 				} arp;
 			};
+=======
+			struct {
+				u8 sha[ETH_ALEN];	/* ARP source hardware address. */
+				u8 tha[ETH_ALEN];	/* ARP target hardware address. */
+			} arp;
+>>>>>>> v3.18
 		} ipv4;
 		struct {
 			struct {
@@ -82,22 +168,62 @@ struct sw_flow_key {
 			} addr;
 			__be32 label;			/* IPv6 flow label. */
 			struct {
+<<<<<<< HEAD
 				__be16 src;		/* TCP/UDP source port. */
 				__be16 dst;		/* TCP/UDP destination port. */
 			} tp;
 			struct {
+=======
+>>>>>>> v3.18
 				struct in6_addr target;	/* ND target address. */
 				u8 sll[ETH_ALEN];	/* ND source link layer address. */
 				u8 tll[ETH_ALEN];	/* ND target link layer address. */
 			} nd;
 		} ipv6;
 	};
+<<<<<<< HEAD
+=======
+} __aligned(BITS_PER_LONG/8); /* Ensure that we can do comparisons as longs. */
+
+struct sw_flow_key_range {
+	unsigned short int start;
+	unsigned short int end;
+};
+
+struct sw_flow_mask {
+	int ref_count;
+	struct rcu_head rcu;
+	struct list_head list;
+	struct sw_flow_key_range range;
+	struct sw_flow_key key;
+};
+
+struct sw_flow_match {
+	struct sw_flow_key *key;
+	struct sw_flow_key_range range;
+	struct sw_flow_mask *mask;
+};
+
+struct sw_flow_actions {
+	struct rcu_head rcu;
+	u32 actions_len;
+	struct nlattr actions[];
+};
+
+struct flow_stats {
+	u64 packet_count;		/* Number of packets matched. */
+	u64 byte_count;			/* Number of bytes matched. */
+	unsigned long used;		/* Last used time (in jiffies). */
+	spinlock_t lock;		/* Lock for atomic stats update. */
+	__be16 tcp_flags;		/* Union of seen TCP flags. */
+>>>>>>> v3.18
 };
 
 struct sw_flow {
 	struct rcu_head rcu;
 	struct hlist_node hash_node[2];
 	u32 hash;
+<<<<<<< HEAD
 
 	struct sw_flow_key key;
 	struct sw_flow_actions __rcu *sf_acts;
@@ -107,6 +233,20 @@ struct sw_flow {
 	u64 packet_count;	/* Number of packets matched. */
 	u64 byte_count;		/* Number of bytes matched. */
 	u8 tcp_flags;		/* Union of seen TCP flags. */
+=======
+	int stats_last_writer;		/* NUMA-node id of the last writer on
+					 * 'stats[0]'.
+					 */
+	struct sw_flow_key key;
+	struct sw_flow_key unmasked_key;
+	struct sw_flow_mask *mask;
+	struct sw_flow_actions __rcu *sf_acts;
+	struct flow_stats __rcu *stats[]; /* One for each NUMA node.  First one
+					   * is allocated at flow creation time,
+					   * the rest are allocated on demand
+					   * while holding the 'stats[0].lock'.
+					   */
+>>>>>>> v3.18
 };
 
 struct arp_eth_header {
@@ -123,6 +263,7 @@ struct arp_eth_header {
 	unsigned char       ar_tip[4];		/* target IP address        */
 } __packed;
 
+<<<<<<< HEAD
 int ovs_flow_init(void);
 void ovs_flow_exit(void);
 
@@ -179,5 +320,21 @@ u32 ovs_flow_hash(const struct sw_flow_key *key, int key_len);
 
 struct sw_flow *ovs_flow_tbl_next(struct flow_table *table, u32 *bucket, u32 *idx);
 extern const int ovs_key_lens[OVS_KEY_ATTR_MAX + 1];
+=======
+void ovs_flow_stats_update(struct sw_flow *, __be16 tcp_flags,
+			   struct sk_buff *);
+void ovs_flow_stats_get(const struct sw_flow *, struct ovs_flow_stats *,
+			unsigned long *used, __be16 *tcp_flags);
+void ovs_flow_stats_clear(struct sw_flow *);
+u64 ovs_flow_used_time(unsigned long flow_jiffies);
+
+int ovs_flow_key_update(struct sk_buff *skb, struct sw_flow_key *key);
+int ovs_flow_key_extract(struct ovs_tunnel_info *tun_info, struct sk_buff *skb,
+			 struct sw_flow_key *key);
+/* Extract key from packet coming from userspace. */
+int ovs_flow_key_extract_userspace(const struct nlattr *attr,
+				   struct sk_buff *skb,
+				   struct sw_flow_key *key);
+>>>>>>> v3.18
 
 #endif /* flow.h */

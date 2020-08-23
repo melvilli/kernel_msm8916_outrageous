@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -140,7 +144,11 @@ acpi_ns_one_complete_parse(u32 pass_number,
 			  pass_number));
 	status = acpi_ps_parse_aml(walk_state);
 
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 	acpi_ps_delete_parse_tree(parse_root);
 	return_ACPI_STATUS(status);
 }

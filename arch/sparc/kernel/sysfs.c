@@ -151,7 +151,11 @@ static ssize_t store_mmustat_enable(struct device *s,
 			size_t count)
 {
 	unsigned long val, err;
+<<<<<<< HEAD
 	int ret = sscanf(buf, "%ld", &val);
+=======
+	int ret = sscanf(buf, "%lu", &val);
+>>>>>>> v3.18
 
 	if (ret != 1)
 		return -EINVAL;
@@ -246,7 +250,11 @@ static void unregister_cpu_online(unsigned int cpu)
 }
 #endif
 
+<<<<<<< HEAD
 static int __cpuinit sysfs_cpu_notify(struct notifier_block *self,
+=======
+static int sysfs_cpu_notify(struct notifier_block *self,
+>>>>>>> v3.18
 				      unsigned long action, void *hcpu)
 {
 	unsigned int cpu = (unsigned int)(long)hcpu;
@@ -266,7 +274,11 @@ static int __cpuinit sysfs_cpu_notify(struct notifier_block *self,
 	return NOTIFY_OK;
 }
 
+<<<<<<< HEAD
 static struct notifier_block __cpuinitdata sysfs_cpu_nb = {
+=======
+static struct notifier_block sysfs_cpu_nb = {
+>>>>>>> v3.18
 	.notifier_call	= sysfs_cpu_notify,
 };
 
@@ -300,7 +312,11 @@ static int __init topology_init(void)
 
 	check_mmu_stats();
 
+<<<<<<< HEAD
 	register_cpu_notifier(&sysfs_cpu_nb);
+=======
+	cpu_notifier_register_begin();
+>>>>>>> v3.18
 
 	for_each_possible_cpu(cpu) {
 		struct cpu *c = &per_cpu(cpu_devices, cpu);
@@ -310,6 +326,13 @@ static int __init topology_init(void)
 			register_cpu_online(cpu);
 	}
 
+<<<<<<< HEAD
+=======
+	__register_cpu_notifier(&sysfs_cpu_nb);
+
+	cpu_notifier_register_done();
+
+>>>>>>> v3.18
 	return 0;
 }
 

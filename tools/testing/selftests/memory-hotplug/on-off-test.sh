@@ -142,10 +142,22 @@ fi
 
 prerequisite
 
+<<<<<<< HEAD
+=======
+echo "Test scope: $ratio% hotplug memory"
+echo -e "\t online all hotplug memory in offline state"
+echo -e "\t offline $ratio% hotplug memory in online state"
+echo -e "\t online all hotplug memory in offline state"
+
+>>>>>>> v3.18
 #
 # Online all hot-pluggable memory
 #
 for memory in `hotplaggable_offline_memory`; do
+<<<<<<< HEAD
+=======
+	echo offline-online $memory
+>>>>>>> v3.18
 	online_memory_expect_success $memory
 done
 
@@ -154,6 +166,10 @@ done
 #
 for memory in `hotpluggable_online_memory`; do
 	if [ $((RANDOM % 100)) -lt $ratio ]; then
+<<<<<<< HEAD
+=======
+		echo online-offline $memory
+>>>>>>> v3.18
 		offline_memory_expect_success $memory
 	fi
 done
@@ -162,6 +178,10 @@ done
 # Online all hot-pluggable memory again
 #
 for memory in `hotplaggable_offline_memory`; do
+<<<<<<< HEAD
+=======
+	echo offline-online $memory
+>>>>>>> v3.18
 	online_memory_expect_success $memory
 done
 

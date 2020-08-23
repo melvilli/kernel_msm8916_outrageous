@@ -50,6 +50,10 @@
 #include "sdrc.h"
 #include "sram.h"
 #include "control.h"
+<<<<<<< HEAD
+=======
+#include "vc.h"
+>>>>>>> v3.18
 
 /* pm34xx errata defined in pm.h */
 u16 pm34xx_errata;
@@ -120,7 +124,11 @@ static void omap3_save_secure_ram_context(void)
 		 * will hang the system.
 		 */
 		pwrdm_set_next_pwrst(mpu_pwrdm, PWRDM_POWER_ON);
+<<<<<<< HEAD
 		ret = _omap_save_secure_sram((u32 *)
+=======
+		ret = _omap_save_secure_sram((u32 *)(unsigned long)
+>>>>>>> v3.18
 				__pa(omap3_secure_ram_storage));
 		pwrdm_set_next_pwrst(mpu_pwrdm, mpu_next_state);
 		/* Following is for error tracking, it should not happen */
@@ -132,6 +140,7 @@ static void omap3_save_secure_ram_context(void)
 	}
 }
 
+<<<<<<< HEAD
 /*
  * PRCM Interrupt Handler Helper Function
  *
@@ -180,12 +189,20 @@ static int prcm_clear_mod_irqs(s16 module, u8 regs, u32 ignore_bits)
 	return c;
 }
 
+=======
+>>>>>>> v3.18
 static irqreturn_t _prcm_int_handle_io(int irq, void *unused)
 {
 	int c;
 
+<<<<<<< HEAD
 	c = prcm_clear_mod_irqs(WKUP_MOD, 1,
 		~(OMAP3430_ST_IO_MASK | OMAP3430_ST_IO_CHAIN_MASK));
+=======
+	c = omap3xxx_prm_clear_mod_irqs(WKUP_MOD, 1,
+					~(OMAP3430_ST_IO_MASK |
+					  OMAP3430_ST_IO_CHAIN_MASK));
+>>>>>>> v3.18
 
 	return c ? IRQ_HANDLED : IRQ_NONE;
 }
@@ -199,6 +216,7 @@ static irqreturn_t _prcm_int_handle_wakeup(int irq, void *unused)
 	 * these are handled in a separate handler to avoid acking
 	 * IO events before parsing in mux code
 	 */
+<<<<<<< HEAD
 	c = prcm_clear_mod_irqs(WKUP_MOD, 1,
 		OMAP3430_ST_IO_MASK | OMAP3430_ST_IO_CHAIN_MASK);
 	c += prcm_clear_mod_irqs(CORE_MOD, 1, 0);
@@ -206,6 +224,16 @@ static irqreturn_t _prcm_int_handle_wakeup(int irq, void *unused)
 	if (omap_rev() > OMAP3430_REV_ES1_0) {
 		c += prcm_clear_mod_irqs(CORE_MOD, 3, 0);
 		c += prcm_clear_mod_irqs(OMAP3430ES2_USBHOST_MOD, 1, 0);
+=======
+	c = omap3xxx_prm_clear_mod_irqs(WKUP_MOD, 1,
+					OMAP3430_ST_IO_MASK |
+					OMAP3430_ST_IO_CHAIN_MASK);
+	c += omap3xxx_prm_clear_mod_irqs(CORE_MOD, 1, 0);
+	c += omap3xxx_prm_clear_mod_irqs(OMAP3430_PER_MOD, 1, 0);
+	if (omap_rev() > OMAP3430_REV_ES1_0) {
+		c += omap3xxx_prm_clear_mod_irqs(CORE_MOD, 3, 0);
+		c += omap3xxx_prm_clear_mod_irqs(OMAP3430ES2_USBHOST_MOD, 1, 0);
+>>>>>>> v3.18
 	}
 
 	return c ? IRQ_HANDLED : IRQ_NONE;
@@ -288,6 +316,12 @@ void omap_sram_idle(void)
 		}
 	}
 
+<<<<<<< HEAD
+=======
+	/* Configure PMIC signaling for I2C4 or sys_off_mode */
+	omap3_vc_set_pmic_signaling(core_next_state);
+
+>>>>>>> v3.18
 	omap3_intc_prepare_idle();
 
 	/*
@@ -330,10 +364,13 @@ void omap_sram_idle(void)
 			omap3_sram_restore_context();
 			omap2_sms_restore_context();
 		}
+<<<<<<< HEAD
 		if (core_next_state == PWRDM_POWER_OFF)
 			omap2_prm_clear_mod_reg_bits(OMAP3430_AUTO_OFF_MASK,
 					       OMAP3430_GR_MOD,
 					       OMAP3_PRM_VOLTCTRL_OFFSET);
+=======
+>>>>>>> v3.18
 	}
 	omap3_intc_resume_idle();
 
@@ -395,6 +432,7 @@ restore:
 
 	return ret;
 }
+<<<<<<< HEAD
 
 #endif /* CONFIG_SUSPEND */
 
@@ -552,6 +590,17 @@ static void __init prcm_setup_regs(void)
 	omap3_iva_idle();
 
 	omap3_d2d_idle();
+=======
+#else
+#define omap3_pm_suspend NULL
+#endif /* CONFIG_SUSPEND */
+
+static void __init prcm_setup_regs(void)
+{
+	omap3_ctrl_init();
+
+	omap3_prm_init_pm(cpu_is_omap3630(), omap3_has_iva());
+>>>>>>> v3.18
 }
 
 void omap3_pm_off_mode_enable(int enable)
@@ -659,7 +708,11 @@ int __init omap3_pm_init(void)
 	int ret;
 
 	if (!omap3_has_io_chain_ctrl())
+<<<<<<< HEAD
 		pr_warning("PM: no software I/O chain control; some wakeups may be lost\n");
+=======
+		pr_warn("PM: no software I/O chain control; some wakeups may be lost\n");
+>>>>>>> v3.18
 
 	pm_errata_configure();
 
@@ -710,9 +763,13 @@ int __init omap3_pm_init(void)
 	per_clkdm = clkdm_lookup("per_clkdm");
 	wkup_clkdm = clkdm_lookup("wkup_clkdm");
 
+<<<<<<< HEAD
 #ifdef CONFIG_SUSPEND
 	omap_pm_suspend = omap3_pm_suspend;
 #endif
+=======
+	omap_common_suspend_init(omap3_pm_suspend);
+>>>>>>> v3.18
 
 	arm_pm_idle = omap3_pm_idle;
 	omap3_idle_init();

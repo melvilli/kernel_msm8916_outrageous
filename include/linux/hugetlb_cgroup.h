@@ -15,6 +15,10 @@
 #ifndef _LINUX_HUGETLB_CGROUP_H
 #define _LINUX_HUGETLB_CGROUP_H
 
+<<<<<<< HEAD
+=======
+#include <linux/mmdebug.h>
+>>>>>>> v3.18
 #include <linux/res_counter.h>
 
 struct hugetlb_cgroup;
@@ -28,7 +32,11 @@ struct hugetlb_cgroup;
 
 static inline struct hugetlb_cgroup *hugetlb_cgroup_from_page(struct page *page)
 {
+<<<<<<< HEAD
 	VM_BUG_ON(!PageHuge(page));
+=======
+	VM_BUG_ON_PAGE(!PageHuge(page), page);
+>>>>>>> v3.18
 
 	if (compound_order(page) < HUGETLB_CGROUP_MIN_ORDER)
 		return NULL;
@@ -38,7 +46,11 @@ static inline struct hugetlb_cgroup *hugetlb_cgroup_from_page(struct page *page)
 static inline
 int set_hugetlb_cgroup(struct page *page, struct hugetlb_cgroup *h_cg)
 {
+<<<<<<< HEAD
 	VM_BUG_ON(!PageHuge(page));
+=======
+	VM_BUG_ON_PAGE(!PageHuge(page), page);
+>>>>>>> v3.18
 
 	if (compound_order(page) < HUGETLB_CGROUP_MIN_ORDER)
 		return -1;
@@ -48,7 +60,11 @@ int set_hugetlb_cgroup(struct page *page, struct hugetlb_cgroup *h_cg)
 
 static inline bool hugetlb_cgroup_disabled(void)
 {
+<<<<<<< HEAD
 	if (hugetlb_subsys.disabled)
+=======
+	if (hugetlb_cgrp_subsys.disabled)
+>>>>>>> v3.18
 		return true;
 	return false;
 }

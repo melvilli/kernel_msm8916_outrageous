@@ -26,6 +26,10 @@
 #include <linux/videodev2.h>
 #include <linux/clk.h>
 #include <linux/i2c.h>
+<<<<<<< HEAD
+=======
+#include <media/v4l2-fh.h>
+>>>>>>> v3.18
 #include <media/v4l2-ioctl.h>
 #include <media/v4l2-device.h>
 #include <media/videobuf-dma-contig.h>
@@ -110,8 +114,11 @@ struct vpfe_device {
 	struct v4l2_device v4l2_dev;
 	/* parent device */
 	struct device *pdev;
+<<<<<<< HEAD
 	/* Used to keep track of state of the priority */
 	struct v4l2_prio_state prio;
+=======
+>>>>>>> v3.18
 	/* number of open instances of the channel */
 	u32 usrs;
 	/* Indicates id of the field which is being displayed */
@@ -174,11 +181,18 @@ struct vpfe_device {
 
 /* File handle structure */
 struct vpfe_fh {
+<<<<<<< HEAD
 	struct vpfe_device *vpfe_dev;
 	/* Indicates whether this file handle is doing IO */
 	u8 io_allowed;
 	/* Used to keep track priority of this instance */
 	enum v4l2_priority prio;
+=======
+	struct v4l2_fh fh;
+	struct vpfe_device *vpfe_dev;
+	/* Indicates whether this file handle is doing IO */
+	u8 io_allowed;
+>>>>>>> v3.18
 };
 
 struct vpfe_config_params {

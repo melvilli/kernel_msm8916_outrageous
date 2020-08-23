@@ -1,13 +1,25 @@
+<<<<<<< HEAD
 /* 57xx_iscsi_constants.h: Broadcom NetXtreme II iSCSI HSI
  *
  * Copyright (c) 2006 - 2012 Broadcom Corporation
+=======
+/* 57xx_iscsi_constants.h: QLogic NetXtreme II iSCSI HSI
+ *
+ * Copyright (c) 2006 - 2013 Broadcom Corporation
+ * Copyright (c) 2014, QLogic Corporation
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation.
  *
  * Written by: Anil Veerabhadrappa (anilgv@broadcom.com)
+<<<<<<< HEAD
  * Maintained by: Eddie Wai (eddie.wai@broadcom.com)
+=======
+ * Previously Maintained by: Eddie Wai (eddie.wai@broadcom.com)
+ * Maintained by: QLogic-Storage-Upstream@qlogic.com
+>>>>>>> v3.18
  */
 #ifndef __57XX_ISCSI_CONSTANTS_H_
 #define __57XX_ISCSI_CONSTANTS_H_

@@ -13,6 +13,10 @@
 #ifndef __ASM_ARCH_CORGI_H
 #define __ASM_ARCH_CORGI_H  1
 
+<<<<<<< HEAD
+=======
+#include "irqs.h" /* PXA_NR_BUILTIN_GPIO */
+>>>>>>> v3.18
 
 /*
  * Corgi (Non Standard) GPIO Definitions

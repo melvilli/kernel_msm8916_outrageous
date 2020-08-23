@@ -913,7 +913,11 @@ static int __init dino_probe(struct parisc_device *dev)
 	printk("%s version %s found at 0x%lx\n", name, version, hpa);
 
 	if (!request_mem_region(hpa, PAGE_SIZE, name)) {
+<<<<<<< HEAD
 		printk(KERN_ERR "DINO: Hey! Someone took my MMIO space (0x%ld)!\n",
+=======
+		printk(KERN_ERR "DINO: Hey! Someone took my MMIO space (0x%lx)!\n",
+>>>>>>> v3.18
 			hpa);
 		return 1;
 	}

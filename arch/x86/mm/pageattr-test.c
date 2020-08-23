@@ -8,7 +8,10 @@
 #include <linux/kthread.h>
 #include <linux/random.h>
 #include <linux/kernel.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/mm.h>
 
 #include <asm/cacheflush.h>
@@ -36,7 +39,11 @@ enum {
 
 static int pte_testbit(pte_t pte)
 {
+<<<<<<< HEAD
 	return pte_flags(pte) & _PAGE_UNUSED1;
+=======
+	return pte_flags(pte) & _PAGE_SOFTW1;
+>>>>>>> v3.18
 }
 
 struct split_state {

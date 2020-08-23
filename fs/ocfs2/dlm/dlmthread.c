@@ -259,12 +259,24 @@ static void dlm_run_purge_list(struct dlm_ctxt *dlm,
 		 * refs on it. */
 		unused = __dlm_lockres_unused(lockres);
 		if (!unused ||
+<<<<<<< HEAD
 		    (lockres->state & DLM_LOCK_RES_MIGRATING)) {
 			mlog(0, "%s: res %.*s is in use or being remastered, "
 			     "used %d, state %d\n", dlm->name,
 			     lockres->lockname.len, lockres->lockname.name,
 			     !unused, lockres->state);
 			list_move_tail(&dlm->purge_list, &lockres->purge);
+=======
+		    (lockres->state & DLM_LOCK_RES_MIGRATING) ||
+		    (lockres->inflight_assert_workers != 0)) {
+			mlog(0, "%s: res %.*s is in use or being remastered, "
+			     "used %d, state %d, assert master workers %u\n",
+			     dlm->name, lockres->lockname.len,
+			     lockres->lockname.name,
+			     !unused, lockres->state,
+			     lockres->inflight_assert_workers);
+			list_move_tail(&lockres->purge, &dlm->purge_list);
+>>>>>>> v3.18
 			spin_unlock(&lockres->spinlock);
 			continue;
 		}
@@ -286,8 +298,11 @@ static void dlm_shuffle_lists(struct dlm_ctxt *dlm,
 			      struct dlm_lock_resource *res)
 {
 	struct dlm_lock *lock, *target;
+<<<<<<< HEAD
 	struct list_head *iter;
 	struct list_head *head;
+=======
+>>>>>>> v3.18
 	int can_grant = 1;
 
 	/*
@@ -314,9 +329,13 @@ converting:
 		     dlm->name, res->lockname.len, res->lockname.name);
 		BUG();
 	}
+<<<<<<< HEAD
 	head = &res->granted;
 	list_for_each(iter, head) {
 		lock = list_entry(iter, struct dlm_lock, list);
+=======
+	list_for_each_entry(lock, &res->granted, list) {
+>>>>>>> v3.18
 		if (lock==target)
 			continue;
 		if (!dlm_lock_compatible(lock->ml.type,
@@ -333,9 +352,14 @@ converting:
 					target->ml.convert_type;
 		}
 	}
+<<<<<<< HEAD
 	head = &res->converting;
 	list_for_each(iter, head) {
 		lock = list_entry(iter, struct dlm_lock, list);
+=======
+
+	list_for_each_entry(lock, &res->converting, list) {
+>>>>>>> v3.18
 		if (lock==target)
 			continue;
 		if (!dlm_lock_compatible(lock->ml.type,
@@ -384,9 +408,13 @@ blocked:
 		goto leave;
 	target = list_entry(res->blocked.next, struct dlm_lock, list);
 
+<<<<<<< HEAD
 	head = &res->granted;
 	list_for_each(iter, head) {
 		lock = list_entry(iter, struct dlm_lock, list);
+=======
+	list_for_each_entry(lock, &res->granted, list) {
+>>>>>>> v3.18
 		if (lock==target)
 			continue;
 		if (!dlm_lock_compatible(lock->ml.type, target->ml.type)) {
@@ -400,9 +428,13 @@ blocked:
 		}
 	}
 
+<<<<<<< HEAD
 	head = &res->converting;
 	list_for_each(iter, head) {
 		lock = list_entry(iter, struct dlm_lock, list);
+=======
+	list_for_each_entry(lock, &res->converting, list) {
+>>>>>>> v3.18
 		if (lock==target)
 			continue;
 		if (!dlm_lock_compatible(lock->ml.type, target->ml.type)) {

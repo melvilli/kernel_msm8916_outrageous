@@ -144,7 +144,10 @@ static struct usb_device_id rtl871x_usb_id_tbl[] = {
 	{USB_DEVICE(0x0DF6, 0x0058)},
 	{USB_DEVICE(0x0DF6, 0x0049)},
 	{USB_DEVICE(0x0DF6, 0x004C)},
+<<<<<<< HEAD
 	{USB_DEVICE(0x0DF6, 0x006C)},
+=======
+>>>>>>> v3.18
 	{USB_DEVICE(0x0DF6, 0x0064)},
 	/* Skyworth */
 	{USB_DEVICE(0x14b2, 0x3300)},
@@ -354,11 +357,14 @@ static void disable_ht_for_spec_devid(const struct usb_device_id *pdid,
 	}
 }
 
+<<<<<<< HEAD
 static u8 key_2char2num(u8 hch, u8 lch)
 {
 	return (hex_to_bin(hch) << 4) | hex_to_bin(lch);
 }
 
+=======
+>>>>>>> v3.18
 static const struct device_type wlan_type = {
 	.name = "wlan",
 };
@@ -471,6 +477,7 @@ static int r871xu_drv_init(struct usb_interface *pusb_intf,
 				r8712_efuse_pg_packet_read(padapter, offset,
 						     &pdata[i]);
 
+<<<<<<< HEAD
 			if (r8712_initmac) {
 				/* Users specify the mac address */
 				int jj, kk;
@@ -481,6 +488,9 @@ static int r871xu_drv_init(struct usb_interface *pusb_intf,
 					   key_2char2num(r8712_initmac[kk],
 					   r8712_initmac[kk + 1]);
 			} else {
+=======
+			if (!r8712_initmac || !mac_pton(r8712_initmac, mac)) {
+>>>>>>> v3.18
 				/* Use the mac address stored in the Efuse
 				 * offset = 0x12 for usb in efuse
 				 */
@@ -596,9 +606,17 @@ static int r871xu_drv_init(struct usb_interface *pusb_intf,
 			 * address by setting bit 1 of first octet.
 			 */
 			mac[0] &= 0xFE;
+<<<<<<< HEAD
 			dev_info(&udev->dev, "r8712u: MAC Address from user = %pM\n", mac);
 		} else
 			dev_info(&udev->dev, "r8712u: MAC Address from efuse = %pM\n", mac);
+=======
+			dev_info(&udev->dev,
+				"r8712u: MAC Address from user = %pM\n", mac);
+		} else
+			dev_info(&udev->dev,
+				"r8712u: MAC Address from efuse = %pM\n", mac);
+>>>>>>> v3.18
 		memcpy(pnetdev->dev_addr, mac, ETH_ALEN);
 	}
 	/* step 6. Load the firmware asynchronously */
@@ -610,7 +628,11 @@ static int r871xu_drv_init(struct usb_interface *pusb_intf,
 error:
 	usb_put_dev(udev);
 	usb_set_intfdata(pusb_intf, NULL);
+<<<<<<< HEAD
 	if (padapter->dvobj_deinit != NULL)
+=======
+	if (padapter && padapter->dvobj_deinit != NULL)
+>>>>>>> v3.18
 		padapter->dvobj_deinit(padapter);
 	if (pnetdev)
 		free_netdev(pnetdev);
@@ -622,6 +644,7 @@ error:
 static void r871xu_dev_remove(struct usb_interface *pusb_intf)
 {
 	struct net_device *pnetdev = usb_get_intfdata(pusb_intf);
+<<<<<<< HEAD
 	struct _adapter *padapter = netdev_priv(pnetdev);
 	struct usb_device *udev = interface_to_usbdev(pusb_intf);
 
@@ -647,12 +670,40 @@ static void r871xu_dev_remove(struct usb_interface *pusb_intf)
 	/* decrease the reference count of the usb device structure
 	 * when disconnect */
 	usb_put_dev(udev);
+=======
+	struct usb_device *udev = interface_to_usbdev(pusb_intf);
+
+	if (pnetdev) {
+		struct _adapter *padapter = netdev_priv(pnetdev);
+
+		usb_set_intfdata(pusb_intf, NULL);
+		release_firmware(padapter->fw);
+		/* never exit with a firmware callback pending */
+		wait_for_completion(&padapter->rtl8712_fw_ready);
+		if (drvpriv.drv_registered == true)
+			padapter->bSurpriseRemoved = true;
+		unregister_netdev(pnetdev); /* will call netdev_close() */
+		flush_scheduled_work();
+		udelay(1);
+		/* Stop driver mlme relation timer */
+		r8712_stop_drv_timers(padapter);
+		r871x_dev_unload(padapter);
+		r8712_free_drv_sw(padapter);
+
+		/* decrease the reference count of the usb device structure
+		 * when disconnect */
+		usb_put_dev(udev);
+	}
+>>>>>>> v3.18
 	/* If we didn't unplug usb dongle and remove/insert module, driver
 	 * fails on sitesurvey for the first time when device is up.
 	 * Reset usb port for sitesurvey fail issue. */
 	if (udev->state != USB_STATE_NOTATTACHED)
 		usb_reset_device(udev);
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 }
 
 static int __init r8712u_drv_entry(void)

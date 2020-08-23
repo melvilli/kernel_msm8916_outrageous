@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -127,14 +131,26 @@ acpi_hw_low_set_gpe(struct acpi_gpe_event_info *gpe_event_info, u32 action)
 		/*lint -fallthrough */
 
 	case ACPI_GPE_ENABLE:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		ACPI_SET_BIT(enable_mask, register_bit);
 		break;
 
 	case ACPI_GPE_DISABLE:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		ACPI_CLEAR_BIT(enable_mask, register_bit);
 		break;
 
 	default:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		ACPI_ERROR((AE_INFO, "Invalid GPE Action, %u", action));
 		return (AE_BAD_PARAMETER);
 	}
@@ -199,7 +215,11 @@ acpi_status acpi_hw_clear_gpe(struct acpi_gpe_event_info * gpe_event_info)
 
 acpi_status
 acpi_hw_get_gpe_status(struct acpi_gpe_event_info * gpe_event_info,
+<<<<<<< HEAD
 		       acpi_event_status * event_status)
+=======
+		       acpi_event_status *event_status)
+>>>>>>> v3.18
 {
 	u32 in_byte;
 	u32 register_bit;
@@ -213,6 +233,16 @@ acpi_hw_get_gpe_status(struct acpi_gpe_event_info * gpe_event_info,
 		return (AE_BAD_PARAMETER);
 	}
 
+<<<<<<< HEAD
+=======
+	/* GPE currently handled? */
+
+	if ((gpe_event_info->flags & ACPI_GPE_DISPATCH_MASK) !=
+	    ACPI_GPE_DISPATCH_NONE) {
+		local_event_status |= ACPI_EVENT_FLAG_HAS_HANDLER;
+	}
+
+>>>>>>> v3.18
 	/* Get the info block for the entire GPE register */
 
 	gpe_register_info = gpe_event_info->register_info;
@@ -393,11 +423,19 @@ acpi_hw_enable_wakeup_gpe_block(struct acpi_gpe_xrupt_info *gpe_xrupt_info,
 	/* Examine each GPE Register within the block */
 
 	for (i = 0; i < gpe_block->register_count; i++) {
+<<<<<<< HEAD
 		if (!gpe_block->register_info[i].enable_for_wake) {
 			continue;
 		}
 
 		/* Enable all "wake" GPEs in this register */
+=======
+
+		/*
+		 * Enable all "wake" GPEs in this register and disable the
+		 * remaining ones.
+		 */
+>>>>>>> v3.18
 
 		status =
 		    acpi_hw_write(gpe_block->register_info[i].enable_for_wake,

@@ -20,6 +20,10 @@
 #include <linux/device.h>
 #include <linux/syscore_ops.h>
 #include <linux/serial_core.h>
+<<<<<<< HEAD
+=======
+#include <linux/serial_s3c.h>
+>>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <linux/io.h>
 #include <linux/reboot.h>
@@ -36,23 +40,33 @@
 #include <mach/regs-clock.h>
 #include <mach/regs-gpio.h>
 
+<<<<<<< HEAD
 #include <plat/clock.h>
+=======
+>>>>>>> v3.18
 #include <plat/cpu.h>
 #include <plat/cpu-freq.h>
 #include <plat/devs.h>
 #include <plat/nand-core.h>
+<<<<<<< HEAD
 #include <plat/pll.h>
 #include <plat/pm.h>
 #include <plat/regs-serial.h>
+=======
+#include <plat/pm.h>
+>>>>>>> v3.18
 #include <plat/regs-spi.h>
 
 #include "common.h"
 #include "regs-dsc.h"
 #include "s3c2412-power.h"
 
+<<<<<<< HEAD
 #define S3C2412_SWRST			(S3C24XX_VA_CLKPWR + 0x30)
 #define S3C2412_SWRST_RESET		(0x533C2412)
 
+=======
+>>>>>>> v3.18
 #ifndef CONFIG_CPU_S3C2412_ONLY
 void __iomem *s3c24xx_va_gpio2 = S3C24XX_VA_GPIO;
 
@@ -130,6 +144,7 @@ static void s3c2412_idle(void)
 	cpu_do_idle();
 }
 
+<<<<<<< HEAD
 void s3c2412_restart(enum reboot_mode mode, const char *cmd)
 {
 	if (mode == REBOOT_SOFT)
@@ -150,6 +165,8 @@ void s3c2412_restart(enum reboot_mode mode, const char *cmd)
 	mdelay(1);
 }
 
+=======
+>>>>>>> v3.18
 /* s3c2412_map_io
  *
  * register the standard cpu IO areas, and any passed in from the
@@ -171,6 +188,7 @@ void __init s3c2412_map_io(void)
 	iotable_init(s3c2412_iodesc, ARRAY_SIZE(s3c2412_iodesc));
 }
 
+<<<<<<< HEAD
 void __init_or_cpufreq s3c2412_setup_clocks(void)
 {
 	struct clk *xtal_clk;
@@ -218,6 +236,8 @@ void __init s3c2412_init_clocks(int xtal)
 	s3c2412_baseclk_add();
 }
 
+=======
+>>>>>>> v3.18
 /* need to register the subsystem before we actually register the device, and
  * we also need to ensure that it has been initialised before any of the
  * drivers even try to use it (even if not on an s3c2412 based system)

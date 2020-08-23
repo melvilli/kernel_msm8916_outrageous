@@ -12,8 +12,13 @@
 
 /* pull in the relevant register and map files. */
 
+<<<<<<< HEAD
 #include <mach/map.h>
 #include <plat/regs-serial.h>
+=======
+#include <linux/serial_s3c.h>
+#include <mach/map.h>
+>>>>>>> v3.18
 
 	/* note, for the boot process to work we have to keep the UART
 	 * virtual address aligned to an 1MiB boundary for the L1

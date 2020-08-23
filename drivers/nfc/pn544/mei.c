@@ -13,9 +13,13 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
  * along with this program; if not, write to the
  * Free Software Foundation, Inc.,
  * 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
  */
 
 #include <linux/module.h>
@@ -45,7 +49,11 @@ static int pn544_mei_probe(struct mei_cl_device *device,
 
 	r = pn544_hci_probe(phy, &mei_phy_ops, LLC_NOP_NAME,
 			    MEI_NFC_HEADER_SIZE, 0, MEI_NFC_MAX_HCI_PAYLOAD,
+<<<<<<< HEAD
 			    &phy->hdev);
+=======
+			    NULL, &phy->hdev);
+>>>>>>> v3.18
 	if (r < 0) {
 		nfc_mei_phy_free(phy);
 

@@ -30,9 +30,17 @@
 #include <linux/err.h>
 #include <linux/spinlock.h>
 #include <linux/export.h>
+<<<<<<< HEAD
 #include <asm/mman.h>
 #include <asm/mmu.h>
 #include <asm/spu.h>
+=======
+#include <linux/hugetlb.h>
+#include <asm/mman.h>
+#include <asm/mmu.h>
+#include <asm/copro.h>
+#include <asm/hugetlb.h>
+>>>>>>> v3.18
 
 /* some sanity checks */
 #if (PGTABLE_RANGE >> 43) > SLICE_MASK_SIZE
@@ -103,7 +111,11 @@ static int slice_area_is_free(struct mm_struct *mm, unsigned long addr,
 	if ((mm->task_size - len) < addr)
 		return 0;
 	vma = find_vma(mm, addr);
+<<<<<<< HEAD
 	return (!vma || (addr + len) <= vm_start_gap(vma));
+=======
+	return (!vma || (addr + len) <= vma->vm_start);
+>>>>>>> v3.18
 }
 
 static int slice_low_has_vma(struct mm_struct *mm, unsigned long slice)
@@ -232,9 +244,13 @@ static void slice_convert(struct mm_struct *mm, struct slice_mask mask, int psiz
 
 	spin_unlock_irqrestore(&slice_convert_lock, flags);
 
+<<<<<<< HEAD
 #ifdef CONFIG_SPU_BASE
 	spu_flush_all_slbs(mm);
 #endif
+=======
+	copro_flush_all_slbs(mm);
+>>>>>>> v3.18
 }
 
 /*
@@ -408,7 +424,11 @@ unsigned long slice_get_unmapped_area(unsigned long addr, unsigned long len,
 	if (fixed && (addr & ((1ul << pshift) - 1)))
 		return -EINVAL;
 	if (fixed && addr > (mm->task_size - len))
+<<<<<<< HEAD
 		return -EINVAL;
+=======
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	/* If hint, make sure it matches our alignment restrictions */
 	if (!fixed && addr) {
@@ -671,9 +691,13 @@ void slice_set_psize(struct mm_struct *mm, unsigned long address,
 
 	spin_unlock_irqrestore(&slice_convert_lock, flags);
 
+<<<<<<< HEAD
 #ifdef CONFIG_SPU_BASE
 	spu_flush_all_slbs(mm);
 #endif
+=======
+	copro_flush_all_slbs(mm);
+>>>>>>> v3.18
 }
 
 void slice_set_range_psize(struct mm_struct *mm, unsigned long start,
@@ -684,6 +708,10 @@ void slice_set_range_psize(struct mm_struct *mm, unsigned long start,
 	slice_convert(mm, mask, psize);
 }
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_HUGETLB_PAGE
+>>>>>>> v3.18
 /*
  * is_hugepage_only_range() is used by generic code to verify whether
  * a normal mmap mapping (non hugetlbfs) is valid on a given area.
@@ -728,4 +756,8 @@ int is_hugepage_only_range(struct mm_struct *mm, unsigned long addr,
 #endif
 	return !slice_check_fit(mask, available);
 }
+<<<<<<< HEAD
 
+=======
+#endif
+>>>>>>> v3.18

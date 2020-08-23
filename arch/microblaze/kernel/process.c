@@ -8,6 +8,10 @@
  * for more details.
  */
 
+<<<<<<< HEAD
+=======
+#include <linux/cpu.h>
+>>>>>>> v3.18
 #include <linux/export.h>
 #include <linux/sched.h>
 #include <linux/pm.h>

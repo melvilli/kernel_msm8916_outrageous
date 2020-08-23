@@ -374,7 +374,11 @@ int fm_tx_get_tune_cap_val(struct fmdev *fmdev)
 	if (ret < 0)
 		return ret;
 
+<<<<<<< HEAD
 	curr_val = be16_to_cpu(curr_val);
+=======
+	curr_val = be16_to_cpu((__force __be16)curr_val);
+>>>>>>> v3.18
 
 	return curr_val;
 }

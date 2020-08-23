@@ -40,6 +40,10 @@ cacheit=
 binary=
 gzip=.gz
 pie=
+<<<<<<< HEAD
+=======
+format=
+>>>>>>> v3.18
 
 # cross-compilation prefix
 CROSS=
@@ -136,6 +140,17 @@ if [ -z "$kernel" ]; then
     kernel=vmlinux
 fi
 
+<<<<<<< HEAD
+=======
+elfformat="`${CROSS}objdump -p "$kernel" | grep 'file format' | awk '{print $4}'`"
+case "$elfformat" in
+    elf64-powerpcle)	format=elf64lppc	;;
+    elf64-powerpc)	format=elf32ppc	;;
+    elf32-powerpc)	format=elf32ppc	;;
+esac
+
+
+>>>>>>> v3.18
 platformo=$object/"$platform".o
 lds=$object/zImage.lds
 ext=strip
@@ -147,6 +162,7 @@ link_address='0x400000'
 make_space=y
 
 case "$platform" in
+<<<<<<< HEAD
 pseries)
     platformo=$object/of.o
     link_address='0x4000000'
@@ -162,6 +178,35 @@ coff)
     platformo="$object/crt0.o $object/of.o"
     lds=$object/zImage.coff.lds
     link_address='0x500000'
+=======
+of)
+    platformo="$object/of.o $object/epapr.o"
+    make_space=n
+    ;;
+pseries)
+    platformo="$object/pseries-head.o $object/of.o $object/epapr.o"
+    link_address='0x4000000'
+    if [ "$format" != "elf32ppc" ]; then
+	link_address=
+	pie=-pie
+    fi
+    make_space=n
+    ;;
+maple)
+    platformo="$object/of.o $object/epapr.o"
+    link_address='0x400000'
+    make_space=n
+    ;;
+pmac|chrp)
+    platformo="$object/of.o $object/epapr.o"
+    make_space=n
+    ;;
+coff)
+    platformo="$object/crt0.o $object/of.o $object/epapr.o"
+    lds=$object/zImage.coff.lds
+    link_address='0x500000'
+    make_space=n
+>>>>>>> v3.18
     pie=
     ;;
 miboot|uboot*)
@@ -249,13 +294,30 @@ gamecube|wii)
 treeboot-currituck)
     link_address='0x1000000'
     ;;
+<<<<<<< HEAD
+=======
+treeboot-akebono)
+    link_address='0x1000000'
+    ;;
+>>>>>>> v3.18
 treeboot-iss4xx-mpic)
     platformo="$object/treeboot-iss4xx.o"
     ;;
 epapr)
+<<<<<<< HEAD
     link_address='0x20000000'
     pie=-pie
     ;;
+=======
+    platformo="$object/epapr.o $object/epapr-wrapper.o"
+    link_address='0x20000000'
+    pie=-pie
+    ;;
+mvme5100)
+    platformo="$object/fixed-head.o $object/mvme5100.o"
+    binary=y
+    ;;
+>>>>>>> v3.18
 esac
 
 vmz="$tmpdir/`basename \"$kernel\"`.$ext"
@@ -366,7 +428,11 @@ if [ "$platform" != "miboot" ]; then
     if [ -n "$link_address" ] ; then
         text_start="-Ttext $link_address"
     fi
+<<<<<<< HEAD
     ${CROSS}ld -m elf32ppc -T $lds $text_start $pie -o "$ofile" \
+=======
+    ${CROSS}ld -m $format -T $lds $text_start $pie -o "$ofile" \
+>>>>>>> v3.18
 	$platformo $tmp $object/wrapper.a
     rm $tmp
 fi

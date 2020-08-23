@@ -33,7 +33,11 @@ struct kthread_create_info
 
 	/* Result passed back to kthread_create() from kthreadd. */
 	struct task_struct *result;
+<<<<<<< HEAD
 	struct completion done;
+=======
+	struct completion *done;
+>>>>>>> v3.18
 
 	struct list_head list;
 };
@@ -178,6 +182,10 @@ static int kthread(void *_create)
 	struct kthread_create_info *create = _create;
 	int (*threadfn)(void *data) = create->threadfn;
 	void *data = create->data;
+<<<<<<< HEAD
+=======
+	struct completion *done;
+>>>>>>> v3.18
 	struct kthread self;
 	int ret;
 
@@ -187,10 +195,23 @@ static int kthread(void *_create)
 	init_completion(&self.parked);
 	current->vfork_done = &self.exited;
 
+<<<<<<< HEAD
 	/* OK, tell user we're spawned, wait for stop or wakeup */
 	__set_current_state(TASK_UNINTERRUPTIBLE);
 	create->result = current;
 	complete(&create->done);
+=======
+	/* If user was SIGKILLed, I release the structure. */
+	done = xchg(&create->done, NULL);
+	if (!done) {
+		kfree(create);
+		do_exit(-EINTR);
+	}
+	/* OK, tell user we're spawned, wait for stop or wakeup */
+	__set_current_state(TASK_UNINTERRUPTIBLE);
+	create->result = current;
+	complete(done);
+>>>>>>> v3.18
 	schedule();
 
 	ret = -EINTR;
@@ -210,7 +231,11 @@ int tsk_fork_get_node(struct task_struct *tsk)
 	if (tsk == kthreadd_task)
 		return tsk->pref_node_fork;
 #endif
+<<<<<<< HEAD
 	return numa_node_id();
+=======
+	return NUMA_NO_NODE;
+>>>>>>> v3.18
 }
 
 static void create_kthread(struct kthread_create_info *create)
@@ -223,8 +248,20 @@ static void create_kthread(struct kthread_create_info *create)
 	/* We want our own signal handler (we take no signals by default). */
 	pid = kernel_thread(kthread, create, CLONE_FS | CLONE_FILES | SIGCHLD);
 	if (pid < 0) {
+<<<<<<< HEAD
 		create->result = ERR_PTR(pid);
 		complete(&create->done);
+=======
+		/* If user was SIGKILLed, I release the structure. */
+		struct completion *done = xchg(&create->done, NULL);
+
+		if (!done) {
+			kfree(create);
+			return;
+		}
+		create->result = ERR_PTR(pid);
+		complete(done);
+>>>>>>> v3.18
 	}
 }
 
@@ -248,13 +285,18 @@ static void create_kthread(struct kthread_create_info *create)
  * kthread_stop() has been called).  The return value should be zero
  * or a negative error number; it will be passed to kthread_stop().
  *
+<<<<<<< HEAD
  * Returns a task_struct or ERR_PTR(-ENOMEM).
+=======
+ * Returns a task_struct or ERR_PTR(-ENOMEM) or ERR_PTR(-EINTR).
+>>>>>>> v3.18
  */
 struct task_struct *kthread_create_on_node(int (*threadfn)(void *data),
 					   void *data, int node,
 					   const char namefmt[],
 					   ...)
 {
+<<<<<<< HEAD
 	struct kthread_create_info create;
 
 	create.threadfn = threadfn;
@@ -270,21 +312,73 @@ struct task_struct *kthread_create_on_node(int (*threadfn)(void *data),
 	wait_for_completion(&create.done);
 
 	if (!IS_ERR(create.result)) {
+=======
+	DECLARE_COMPLETION_ONSTACK(done);
+	struct task_struct *task;
+	struct kthread_create_info *create = kmalloc(sizeof(*create),
+						     GFP_KERNEL);
+
+	if (!create)
+		return ERR_PTR(-ENOMEM);
+	create->threadfn = threadfn;
+	create->data = data;
+	create->node = node;
+	create->done = &done;
+
+	spin_lock(&kthread_create_lock);
+	list_add_tail(&create->list, &kthread_create_list);
+	spin_unlock(&kthread_create_lock);
+
+	wake_up_process(kthreadd_task);
+	/*
+	 * Wait for completion in killable state, for I might be chosen by
+	 * the OOM killer while kthreadd is trying to allocate memory for
+	 * new kernel thread.
+	 */
+	if (unlikely(wait_for_completion_killable(&done))) {
+		/*
+		 * If I was SIGKILLed before kthreadd (or new kernel thread)
+		 * calls complete(), leave the cleanup of this structure to
+		 * that thread.
+		 */
+		if (xchg(&create->done, NULL))
+			return ERR_PTR(-EINTR);
+		/*
+		 * kthreadd (or new kernel thread) will call complete()
+		 * shortly.
+		 */
+		wait_for_completion(&done);
+	}
+	task = create->result;
+	if (!IS_ERR(task)) {
+>>>>>>> v3.18
 		static const struct sched_param param = { .sched_priority = 0 };
 		va_list args;
 
 		va_start(args, namefmt);
+<<<<<<< HEAD
 		vsnprintf(create.result->comm, sizeof(create.result->comm),
 			  namefmt, args);
+=======
+		vsnprintf(task->comm, sizeof(task->comm), namefmt, args);
+>>>>>>> v3.18
 		va_end(args);
 		/*
 		 * root may have changed our (kthreadd's) priority or CPU mask.
 		 * The kernel thread should not inherit these properties.
 		 */
+<<<<<<< HEAD
 		sched_setscheduler_nocheck(create.result, SCHED_NORMAL, &param);
 		set_cpus_allowed_ptr(create.result, cpu_all_mask);
 	}
 	return create.result;
+=======
+		sched_setscheduler_nocheck(task, SCHED_NORMAL, &param);
+		set_cpus_allowed_ptr(task, cpu_all_mask);
+	}
+	kfree(create);
+	return task;
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(kthread_create_on_node);
 
@@ -398,8 +492,11 @@ int kthread_park(struct task_struct *k)
 			if (k != current) {
 				wake_up_process(k);
 				wait_for_completion(&kthread->parked);
+<<<<<<< HEAD
 				while (k->state != TASK_PARKED)
 					cond_resched();
+=======
+>>>>>>> v3.18
 			}
 		}
 		ret = 0;
@@ -556,7 +653,11 @@ static void insert_kthread_work(struct kthread_worker *worker,
 
 	list_add_tail(&work->node, pos);
 	work->worker = worker;
+<<<<<<< HEAD
 	if (likely(worker->task))
+=======
+	if (!worker->current_work && likely(worker->task))
+>>>>>>> v3.18
 		wake_up_process(worker->task);
 }
 

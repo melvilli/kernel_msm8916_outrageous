@@ -13,8 +13,11 @@
 #ifndef LINUX_RIO_IDS_H
 #define LINUX_RIO_IDS_H
 
+<<<<<<< HEAD
 #define RIO_ANY_ID			0xffff
 
+=======
+>>>>>>> v3.18
 #define RIO_VID_FREESCALE		0x0002
 #define RIO_DID_MPC8560			0x0003
 

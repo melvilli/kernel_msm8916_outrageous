@@ -29,21 +29,40 @@
 
 struct idr_layer {
 	int			prefix;	/* the ID prefix of this idr_layer */
+<<<<<<< HEAD
 	DECLARE_BITMAP(bitmap, IDR_SIZE); /* A zero bit means "space here" */
 	struct idr_layer __rcu	*ary[1<<IDR_BITS];
 	int			count;	/* When zero, we can release it */
 	int			layer;	/* distance from leaf */
 	struct rcu_head		rcu_head;
+=======
+	int			layer;	/* distance from leaf */
+	struct idr_layer __rcu	*ary[1<<IDR_BITS];
+	int			count;	/* When zero, we can release it */
+	union {
+		/* A zero bit means "space here" */
+		DECLARE_BITMAP(bitmap, IDR_SIZE);
+		struct rcu_head		rcu_head;
+	};
+>>>>>>> v3.18
 };
 
 struct idr {
 	struct idr_layer __rcu	*hint;	/* the last layer allocated from */
 	struct idr_layer __rcu	*top;
+<<<<<<< HEAD
 	struct idr_layer	*id_free;
 	int			layers;	/* only valid w/o concurrent changes */
 	int			id_free_cnt;
 	int			cur;	/* current pos for cyclic allocation */
 	spinlock_t		lock;
+=======
+	int			layers;	/* only valid w/o concurrent changes */
+	int			cur;	/* current pos for cyclic allocation */
+	spinlock_t		lock;
+	int			id_free_cnt;
+	struct idr_layer	*id_free;
+>>>>>>> v3.18
 };
 
 #define IDR_INIT(name)							\
@@ -82,9 +101,15 @@ int idr_for_each(struct idr *idp,
 void *idr_get_next(struct idr *idp, int *nextid);
 void *idr_replace(struct idr *idp, void *ptr, int id);
 void idr_remove(struct idr *idp, int id);
+<<<<<<< HEAD
 void idr_free(struct idr *idp, int id);
 void idr_destroy(struct idr *idp);
 void idr_init(struct idr *idp);
+=======
+void idr_destroy(struct idr *idp);
+void idr_init(struct idr *idp);
+bool idr_is_empty(struct idr *idp);
+>>>>>>> v3.18
 
 /**
  * idr_preload_end - end preload section started with idr_preload()
@@ -133,6 +158,7 @@ static inline void *idr_find(struct idr *idr, int id)
 	for (id = 0; ((entry) = idr_get_next(idp, &(id))) != NULL; ++id)
 
 /*
+<<<<<<< HEAD
  * Don't use the following functions.  These exist only to suppress
  * deprecated warnings on EXPORT_SYMBOL()s.
  */
@@ -196,6 +222,8 @@ static inline void __deprecated idr_remove_all(struct idr *idp)
 }
 
 /*
+=======
+>>>>>>> v3.18
  * IDA - IDR based id allocator, use when translation from id to
  * pointer isn't necessary.
  *

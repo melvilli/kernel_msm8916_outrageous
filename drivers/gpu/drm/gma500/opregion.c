@@ -22,7 +22,10 @@
  *
  */
 #include <linux/acpi.h>
+<<<<<<< HEAD
 #include <linux/acpi_io.h>
+=======
+>>>>>>> v3.18
 #include "psb_drv.h"
 #include "psb_intel_reg.h"
 
@@ -174,10 +177,20 @@ static u32 asle_set_backlight(struct drm_device *dev, u32 bclp)
 	return 0;
 }
 
+<<<<<<< HEAD
 void psb_intel_opregion_asle_intr(struct drm_device *dev)
 {
 	struct drm_psb_private *dev_priv = dev->dev_private;
 	struct opregion_asle *asle = dev_priv->opregion.asle;
+=======
+static void psb_intel_opregion_asle_work(struct work_struct *work)
+{
+	struct psb_intel_opregion *opregion =
+		container_of(work, struct psb_intel_opregion, asle_work);
+	struct drm_psb_private *dev_priv =
+		container_of(opregion, struct drm_psb_private, opregion);
+	struct opregion_asle *asle = opregion->asle;
+>>>>>>> v3.18
 	u32 asle_stat = 0;
 	u32 asle_req;
 
@@ -191,9 +204,24 @@ void psb_intel_opregion_asle_intr(struct drm_device *dev)
 	}
 
 	if (asle_req & ASLE_SET_BACKLIGHT)
+<<<<<<< HEAD
 		asle_stat |= asle_set_backlight(dev, asle->bclp);
 
 	asle->aslc = asle_stat;
+=======
+		asle_stat |= asle_set_backlight(dev_priv->dev, asle->bclp);
+
+	asle->aslc = asle_stat;
+
+}
+
+void psb_intel_opregion_asle_intr(struct drm_device *dev)
+{
+	struct drm_psb_private *dev_priv = dev->dev_private;
+
+	if (dev_priv->opregion.asle)
+		schedule_work(&dev_priv->opregion.asle_work);
+>>>>>>> v3.18
 }
 
 #define ASLE_ALS_EN    (1<<0)
@@ -283,6 +311,11 @@ void psb_intel_opregion_fini(struct drm_device *dev)
 		unregister_acpi_notifier(&psb_intel_opregion_notifier);
 	}
 
+<<<<<<< HEAD
+=======
+	cancel_work_sync(&opregion->asle_work);
+
+>>>>>>> v3.18
 	/* just clear all opregion memory pointers now */
 	iounmap(opregion->header);
 	opregion->header = NULL;
@@ -305,6 +338,12 @@ int psb_intel_opregion_setup(struct drm_device *dev)
 		DRM_DEBUG_DRIVER("ACPI Opregion not supported\n");
 		return -ENOTSUPP;
 	}
+<<<<<<< HEAD
+=======
+
+	INIT_WORK(&opregion->asle_work, psb_intel_opregion_asle_work);
+
+>>>>>>> v3.18
 	DRM_DEBUG("OpRegion detected at 0x%8x\n", opregion_phy);
 	base = acpi_os_ioremap(opregion_phy, 8*1024);
 	if (!base)

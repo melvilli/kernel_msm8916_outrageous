@@ -8,10 +8,15 @@
  */
 #include <linux/vga_switcheroo.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
 #include <acpi/acpi.h>
 #include <acpi/acpi_bus.h>
 #include <linux/pci.h>
 #include <linux/delay.h>
+=======
+#include <linux/acpi.h>
+#include <linux/pci.h>
+>>>>>>> v3.18
 
 #include "radeon_acpi.h"
 
@@ -60,6 +65,13 @@ struct atpx_mux {
 	u16 mux;
 } __packed;
 
+<<<<<<< HEAD
+=======
+bool radeon_has_atpx(void) {
+	return radeon_atpx_priv.atpx_detected;
+}
+
+>>>>>>> v3.18
 /**
  * radeon_atpx_call - call an ATPX method
  *
@@ -253,10 +265,13 @@ static int radeon_atpx_set_discrete_state(struct radeon_atpx *atpx, u8 state)
 		if (!info)
 			return -EIO;
 		kfree(info);
+<<<<<<< HEAD
 
 		/* 200ms delay is required after off */
 		if (state == 0)
 			msleep(200);
+=======
+>>>>>>> v3.18
 	}
 	return 0;
 }
@@ -449,7 +464,11 @@ static bool radeon_atpx_pci_probe_handle(struct pci_dev *pdev)
 	acpi_handle dhandle, atpx_handle;
 	acpi_status status;
 
+<<<<<<< HEAD
 	dhandle = DEVICE_ACPI_HANDLE(&pdev->dev);
+=======
+	dhandle = ACPI_HANDLE(&pdev->dev);
+>>>>>>> v3.18
 	if (!dhandle)
 		return false;
 
@@ -495,7 +514,11 @@ static int radeon_atpx_init(void)
  */
 static int radeon_atpx_get_client_id(struct pci_dev *pdev)
 {
+<<<<<<< HEAD
 	if (radeon_atpx_priv.dhandle == DEVICE_ACPI_HANDLE(&pdev->dev))
+=======
+	if (radeon_atpx_priv.dhandle == ACPI_HANDLE(&pdev->dev))
+>>>>>>> v3.18
 		return VGA_SWITCHEROO_IGD;
 	else
 		return VGA_SWITCHEROO_DIS;

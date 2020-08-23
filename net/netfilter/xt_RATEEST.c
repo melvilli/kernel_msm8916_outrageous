@@ -136,7 +136,11 @@ static int xt_rateest_tg_checkentry(const struct xt_tgchk_param *par)
 	cfg.est.interval	= info->interval;
 	cfg.est.ewma_log	= info->ewma_log;
 
+<<<<<<< HEAD
 	ret = gen_new_estimator(&est->bstats, &est->rstats,
+=======
+	ret = gen_new_estimator(&est->bstats, NULL, &est->rstats,
+>>>>>>> v3.18
 				&est->lock, &cfg.opt);
 	if (ret < 0)
 		goto err2;

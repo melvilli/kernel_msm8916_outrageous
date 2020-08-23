@@ -958,8 +958,15 @@ static unsigned int dvb_video_poll(struct file *file, poll_table *wait)
 		if (av7110->playing) {
 			if (FREE_COND)
 				mask |= (POLLOUT | POLLWRNORM);
+<<<<<<< HEAD
 			} else /* if not playing: may play if asked for */
 				mask |= (POLLOUT | POLLWRNORM);
+=======
+		} else {
+			/* if not playing: may play if asked for */
+			mask |= (POLLOUT | POLLWRNORM);
+		}
+>>>>>>> v3.18
 	}
 
 	return mask;

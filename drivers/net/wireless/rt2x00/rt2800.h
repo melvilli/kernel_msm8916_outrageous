@@ -21,9 +21,13 @@
 	GNU General Public License for more details.
 
 	You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
 	along with this program; if not, write to the
 	Free Software Foundation, Inc.,
 	59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+	along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
  */
 
 /*
@@ -52,7 +56,13 @@
  * RF3322 2.4G 2T2R(RT3352/RT3371/RT3372/RT3391/RT3392)
  * RF3053 2.4G/5G 3T3R(RT3883/RT3563/RT3573/RT3593/RT3662)
  * RF5592 2.4G/5G 2T2R
+<<<<<<< HEAD
  * RF5360 2.4G 1T1R
+=======
+ * RF3070 2.4G 1T1R
+ * RF5360 2.4G 1T1R
+ * RF5362 2.4G 1T1R
+>>>>>>> v3.18
  * RF5370 2.4G 1T1R
  * RF5390 2.4G 1T1R
  */
@@ -70,8 +80,15 @@
 #define RF3322				0x000c
 #define RF3053				0x000d
 #define RF5592				0x000f
+<<<<<<< HEAD
 #define RF3290				0x3290
 #define RF5360				0x5360
+=======
+#define RF3070				0x3070
+#define RF3290				0x3290
+#define RF5360				0x5360
+#define RF5362				0x5362
+>>>>>>> v3.18
 #define RF5370				0x5370
 #define RF5372				0x5372
 #define RF5390				0x5390
@@ -88,6 +105,10 @@
 #define REV_RT3071E			0x0211
 #define REV_RT3090E			0x0211
 #define REV_RT3390E			0x0211
+<<<<<<< HEAD
+=======
+#define REV_RT3593E			0x0211
+>>>>>>> v3.18
 #define REV_RT5390F			0x0502
 #define REV_RT5390R			0x1502
 #define REV_RT5592C			0x0221
@@ -100,7 +121,11 @@
 #define CSR_REG_BASE			0x1000
 #define CSR_REG_SIZE			0x0800
 #define EEPROM_BASE			0x0000
+<<<<<<< HEAD
 #define EEPROM_SIZE			0x0110
+=======
+#define EEPROM_SIZE			0x0200
+>>>>>>> v3.18
 #define BBP_BASE			0x0000
 #define BBP_SIZE			0x00ff
 #define RF_BASE				0x0004
@@ -121,7 +146,11 @@
 /*
  * MAC_CSR0_3290: MAC_CSR0 for RT3290 to identity MAC version number.
  */
+<<<<<<< HEAD
 #define MAC_CSR0_3290				0x0000
+=======
+#define MAC_CSR0_3290			0x0000
+>>>>>>> v3.18
 
 /*
  * E2PROM_CSR: PCI EEPROM control register.
@@ -210,17 +239,29 @@
 /*
  * COEX_CFG_0
  */
+<<<<<<< HEAD
 #define COEX_CFG0			0x0040
+=======
+#define COEX_CFG0		0x0040
+>>>>>>> v3.18
 #define COEX_CFG_ANT		FIELD32(0xff000000)
 /*
  * COEX_CFG_1
  */
+<<<<<<< HEAD
 #define COEX_CFG1			0x0044
+=======
+#define COEX_CFG1		0x0044
+>>>>>>> v3.18
 
 /*
  * COEX_CFG_2
  */
+<<<<<<< HEAD
 #define COEX_CFG2			0x0048
+=======
+#define COEX_CFG2		0x0048
+>>>>>>> v3.18
 #define BT_COEX_CFG1		FIELD32(0xff000000)
 #define BT_COEX_CFG0		FIELD32(0x00ff0000)
 #define WL_COEX_CFG1		FIELD32(0x0000ff00)
@@ -234,8 +275,13 @@
 #define PLL_RESERVED_INPUT2	FIELD32(0x0000ff00)
 #define PLL_CONTROL		FIELD32(0x00070000)
 #define PLL_LPF_R1		FIELD32(0x00080000)
+<<<<<<< HEAD
 #define PLL_LPF_C1_CTRL	FIELD32(0x00300000)
 #define PLL_LPF_C2_CTRL	FIELD32(0x00c00000)
+=======
+#define PLL_LPF_C1_CTRL		FIELD32(0x00300000)
+#define PLL_LPF_C2_CTRL		FIELD32(0x00c00000)
+>>>>>>> v3.18
 #define PLL_CP_CURRENT_CTRL	FIELD32(0x03000000)
 #define PLL_PFD_DELAY_CTRL	FIELD32(0x0c000000)
 #define PLL_LOCK_CTRL		FIELD32(0x70000000)
@@ -1082,6 +1128,18 @@
 #define TX_PWR_CFG_0_9MBS		FIELD32(0x00f00000)
 #define TX_PWR_CFG_0_12MBS		FIELD32(0x0f000000)
 #define TX_PWR_CFG_0_18MBS		FIELD32(0xf0000000)
+<<<<<<< HEAD
+=======
+/* bits for 3T devices */
+#define TX_PWR_CFG_0_CCK1_CH0		FIELD32(0x0000000f)
+#define TX_PWR_CFG_0_CCK1_CH1		FIELD32(0x000000f0)
+#define TX_PWR_CFG_0_CCK5_CH0		FIELD32(0x00000f00)
+#define TX_PWR_CFG_0_CCK5_CH1		FIELD32(0x0000f000)
+#define TX_PWR_CFG_0_OFDM6_CH0		FIELD32(0x000f0000)
+#define TX_PWR_CFG_0_OFDM6_CH1		FIELD32(0x00f00000)
+#define TX_PWR_CFG_0_OFDM12_CH0		FIELD32(0x0f000000)
+#define TX_PWR_CFG_0_OFDM12_CH1		FIELD32(0xf0000000)
+>>>>>>> v3.18
 
 /*
  * TX_PWR_CFG_1:
@@ -1095,6 +1153,18 @@
 #define TX_PWR_CFG_1_MCS1		FIELD32(0x00f00000)
 #define TX_PWR_CFG_1_MCS2		FIELD32(0x0f000000)
 #define TX_PWR_CFG_1_MCS3		FIELD32(0xf0000000)
+<<<<<<< HEAD
+=======
+/* bits for 3T devices */
+#define TX_PWR_CFG_1_OFDM24_CH0		FIELD32(0x0000000f)
+#define TX_PWR_CFG_1_OFDM24_CH1		FIELD32(0x000000f0)
+#define TX_PWR_CFG_1_OFDM48_CH0		FIELD32(0x00000f00)
+#define TX_PWR_CFG_1_OFDM48_CH1		FIELD32(0x0000f000)
+#define TX_PWR_CFG_1_MCS0_CH0		FIELD32(0x000f0000)
+#define TX_PWR_CFG_1_MCS0_CH1		FIELD32(0x00f00000)
+#define TX_PWR_CFG_1_MCS2_CH0		FIELD32(0x0f000000)
+#define TX_PWR_CFG_1_MCS2_CH1		FIELD32(0xf0000000)
+>>>>>>> v3.18
 
 /*
  * TX_PWR_CFG_2:
@@ -1108,6 +1178,18 @@
 #define TX_PWR_CFG_2_MCS9		FIELD32(0x00f00000)
 #define TX_PWR_CFG_2_MCS10		FIELD32(0x0f000000)
 #define TX_PWR_CFG_2_MCS11		FIELD32(0xf0000000)
+<<<<<<< HEAD
+=======
+/* bits for 3T devices */
+#define TX_PWR_CFG_2_MCS4_CH0		FIELD32(0x0000000f)
+#define TX_PWR_CFG_2_MCS4_CH1		FIELD32(0x000000f0)
+#define TX_PWR_CFG_2_MCS6_CH0		FIELD32(0x00000f00)
+#define TX_PWR_CFG_2_MCS6_CH1		FIELD32(0x0000f000)
+#define TX_PWR_CFG_2_MCS8_CH0		FIELD32(0x000f0000)
+#define TX_PWR_CFG_2_MCS8_CH1		FIELD32(0x00f00000)
+#define TX_PWR_CFG_2_MCS10_CH0		FIELD32(0x0f000000)
+#define TX_PWR_CFG_2_MCS10_CH1		FIELD32(0xf0000000)
+>>>>>>> v3.18
 
 /*
  * TX_PWR_CFG_3:
@@ -1121,6 +1203,18 @@
 #define TX_PWR_CFG_3_UKNOWN2		FIELD32(0x00f00000)
 #define TX_PWR_CFG_3_UKNOWN3		FIELD32(0x0f000000)
 #define TX_PWR_CFG_3_UKNOWN4		FIELD32(0xf0000000)
+<<<<<<< HEAD
+=======
+/* bits for 3T devices */
+#define TX_PWR_CFG_3_MCS12_CH0		FIELD32(0x0000000f)
+#define TX_PWR_CFG_3_MCS12_CH1		FIELD32(0x000000f0)
+#define TX_PWR_CFG_3_MCS14_CH0		FIELD32(0x00000f00)
+#define TX_PWR_CFG_3_MCS14_CH1		FIELD32(0x0000f000)
+#define TX_PWR_CFG_3_STBC0_CH0		FIELD32(0x000f0000)
+#define TX_PWR_CFG_3_STBC0_CH1		FIELD32(0x00f00000)
+#define TX_PWR_CFG_3_STBC2_CH0		FIELD32(0x0f000000)
+#define TX_PWR_CFG_3_STBC2_CH1		FIELD32(0xf0000000)
+>>>>>>> v3.18
 
 /*
  * TX_PWR_CFG_4:
@@ -1130,6 +1224,14 @@
 #define TX_PWR_CFG_4_UKNOWN6		FIELD32(0x000000f0)
 #define TX_PWR_CFG_4_UKNOWN7		FIELD32(0x00000f00)
 #define TX_PWR_CFG_4_UKNOWN8		FIELD32(0x0000f000)
+<<<<<<< HEAD
+=======
+/* bits for 3T devices */
+#define TX_PWR_CFG_3_STBC4_CH0		FIELD32(0x0000000f)
+#define TX_PWR_CFG_3_STBC4_CH1		FIELD32(0x000000f0)
+#define TX_PWR_CFG_3_STBC6_CH0		FIELD32(0x00000f00)
+#define TX_PWR_CFG_3_STBC6_CH1		FIELD32(0x0000f000)
+>>>>>>> v3.18
 
 /*
  * TX_PIN_CFG:
@@ -1451,6 +1553,84 @@
  */
 #define EXP_ACK_TIME			0x1380
 
+<<<<<<< HEAD
+=======
+/* TX_PWR_CFG_5 */
+#define TX_PWR_CFG_5			0x1384
+#define TX_PWR_CFG_5_MCS16_CH0		FIELD32(0x0000000f)
+#define TX_PWR_CFG_5_MCS16_CH1		FIELD32(0x000000f0)
+#define TX_PWR_CFG_5_MCS16_CH2		FIELD32(0x00000f00)
+#define TX_PWR_CFG_5_MCS18_CH0		FIELD32(0x000f0000)
+#define TX_PWR_CFG_5_MCS18_CH1		FIELD32(0x00f00000)
+#define TX_PWR_CFG_5_MCS18_CH2		FIELD32(0x0f000000)
+
+/* TX_PWR_CFG_6 */
+#define TX_PWR_CFG_6			0x1388
+#define TX_PWR_CFG_6_MCS20_CH0		FIELD32(0x0000000f)
+#define TX_PWR_CFG_6_MCS20_CH1		FIELD32(0x000000f0)
+#define TX_PWR_CFG_6_MCS20_CH2		FIELD32(0x00000f00)
+#define TX_PWR_CFG_6_MCS22_CH0		FIELD32(0x000f0000)
+#define TX_PWR_CFG_6_MCS22_CH1		FIELD32(0x00f00000)
+#define TX_PWR_CFG_6_MCS22_CH2		FIELD32(0x0f000000)
+
+/* TX_PWR_CFG_0_EXT */
+#define TX_PWR_CFG_0_EXT		0x1390
+#define TX_PWR_CFG_0_EXT_CCK1_CH2	FIELD32(0x0000000f)
+#define TX_PWR_CFG_0_EXT_CCK5_CH2	FIELD32(0x00000f00)
+#define TX_PWR_CFG_0_EXT_OFDM6_CH2	FIELD32(0x000f0000)
+#define TX_PWR_CFG_0_EXT_OFDM12_CH2	FIELD32(0x0f000000)
+
+/* TX_PWR_CFG_1_EXT */
+#define TX_PWR_CFG_1_EXT		0x1394
+#define TX_PWR_CFG_1_EXT_OFDM24_CH2	FIELD32(0x0000000f)
+#define TX_PWR_CFG_1_EXT_OFDM48_CH2	FIELD32(0x00000f00)
+#define TX_PWR_CFG_1_EXT_MCS0_CH2	FIELD32(0x000f0000)
+#define TX_PWR_CFG_1_EXT_MCS2_CH2	FIELD32(0x0f000000)
+
+/* TX_PWR_CFG_2_EXT */
+#define TX_PWR_CFG_2_EXT		0x1398
+#define TX_PWR_CFG_2_EXT_MCS4_CH2	FIELD32(0x0000000f)
+#define TX_PWR_CFG_2_EXT_MCS6_CH2	FIELD32(0x00000f00)
+#define TX_PWR_CFG_2_EXT_MCS8_CH2	FIELD32(0x000f0000)
+#define TX_PWR_CFG_2_EXT_MCS10_CH2	FIELD32(0x0f000000)
+
+/* TX_PWR_CFG_3_EXT */
+#define TX_PWR_CFG_3_EXT		0x139c
+#define TX_PWR_CFG_3_EXT_MCS12_CH2	FIELD32(0x0000000f)
+#define TX_PWR_CFG_3_EXT_MCS14_CH2	FIELD32(0x00000f00)
+#define TX_PWR_CFG_3_EXT_STBC0_CH2	FIELD32(0x000f0000)
+#define TX_PWR_CFG_3_EXT_STBC2_CH2	FIELD32(0x0f000000)
+
+/* TX_PWR_CFG_4_EXT */
+#define TX_PWR_CFG_4_EXT		0x13a0
+#define TX_PWR_CFG_4_EXT_STBC4_CH2	FIELD32(0x0000000f)
+#define TX_PWR_CFG_4_EXT_STBC6_CH2	FIELD32(0x00000f00)
+
+/* TX_PWR_CFG_7 */
+#define TX_PWR_CFG_7			0x13d4
+#define TX_PWR_CFG_7_OFDM54_CH0		FIELD32(0x0000000f)
+#define TX_PWR_CFG_7_OFDM54_CH1		FIELD32(0x000000f0)
+#define TX_PWR_CFG_7_OFDM54_CH2		FIELD32(0x00000f00)
+#define TX_PWR_CFG_7_MCS7_CH0		FIELD32(0x000f0000)
+#define TX_PWR_CFG_7_MCS7_CH1		FIELD32(0x00f00000)
+#define TX_PWR_CFG_7_MCS7_CH2		FIELD32(0x0f000000)
+
+/* TX_PWR_CFG_8 */
+#define TX_PWR_CFG_8			0x13d8
+#define TX_PWR_CFG_8_MCS15_CH0		FIELD32(0x0000000f)
+#define TX_PWR_CFG_8_MCS15_CH1		FIELD32(0x000000f0)
+#define TX_PWR_CFG_8_MCS15_CH2		FIELD32(0x00000f00)
+#define TX_PWR_CFG_8_MCS23_CH0		FIELD32(0x000f0000)
+#define TX_PWR_CFG_8_MCS23_CH1		FIELD32(0x00f00000)
+#define TX_PWR_CFG_8_MCS23_CH2		FIELD32(0x0f000000)
+
+/* TX_PWR_CFG_9 */
+#define TX_PWR_CFG_9			0x13dc
+#define TX_PWR_CFG_9_STBC7_CH0		FIELD32(0x0000000f)
+#define TX_PWR_CFG_9_STBC7_CH1		FIELD32(0x000000f0)
+#define TX_PWR_CFG_9_STBC7_CH2		FIELD32(0x00000f00)
+
+>>>>>>> v3.18
 /*
  * RX_FILTER_CFG: RX configuration register.
  */
@@ -1902,11 +2082,20 @@ struct mac_iveiv_entry {
 #define HW_BEACON_BASE6			0x5dc0
 #define HW_BEACON_BASE7			0x5bc0
 
+<<<<<<< HEAD
 #define HW_BEACON_OFFSET(__index) \
+=======
+#define HW_BEACON_BASE(__index) \
+>>>>>>> v3.18
 	(((__index) < 4) ? (HW_BEACON_BASE0 + (__index * 0x0200)) : \
 	  (((__index) < 6) ? (HW_BEACON_BASE4 + ((__index - 4) * 0x0200)) : \
 	  (HW_BEACON_BASE6 - ((__index - 6) * 0x0200))))
 
+<<<<<<< HEAD
+=======
+#define BEACON_BASE_TO_OFFSET(_base)	(((_base) - 0x4000) / 64)
+
+>>>>>>> v3.18
 /*
  * BBP registers.
  * The wordsize of the BBP is 8 bits.
@@ -1975,6 +2164,13 @@ struct mac_iveiv_entry {
 #define BBP109_TX0_POWER		FIELD8(0x0f)
 #define BBP109_TX1_POWER		FIELD8(0xf0)
 
+<<<<<<< HEAD
+=======
+/* BBP 110 */
+#define BBP110_TX2_POWER		FIELD8(0x0f)
+
+
+>>>>>>> v3.18
 /*
  * BBP 138: Unknown
  */
@@ -2022,8 +2218,19 @@ struct mac_iveiv_entry {
 /* Bits [7-4] for RF3320 (RT3370/RT3390), on other chipsets reserved */
 #define RFCSR3_PA1_BIAS_CCK		FIELD8(0x70)
 #define RFCSR3_PA2_CASCODE_BIAS_CCKK	FIELD8(0x80)
+<<<<<<< HEAD
 /* Bits for RF3290/RF5360/RF5370/RF5372/RF5390/RF5392 */
 #define RFCSR3_VCOCAL_EN		FIELD8(0x80)
+=======
+/* Bits for RF3290/RF5360/RF5362/RF5370/RF5372/RF5390/RF5392 */
+#define RFCSR3_VCOCAL_EN		FIELD8(0x80)
+/* Bits for RF3050 */
+#define RFCSR3_BIT1			FIELD8(0x02)
+#define RFCSR3_BIT2			FIELD8(0x04)
+#define RFCSR3_BIT3			FIELD8(0x08)
+#define RFCSR3_BIT4			FIELD8(0x10)
+#define RFCSR3_BIT5			FIELD8(0x20)
+>>>>>>> v3.18
 
 /*
  * FRCSR 5:
@@ -2035,7 +2242,13 @@ struct mac_iveiv_entry {
  */
 #define RFCSR6_R1			FIELD8(0x03)
 #define RFCSR6_R2			FIELD8(0x40)
+<<<<<<< HEAD
 #define RFCSR6_TXDIV		FIELD8(0x0c)
+=======
+#define RFCSR6_TXDIV			FIELD8(0x0c)
+/* bits for RF3053 */
+#define RFCSR6_VCO_IC			FIELD8(0xc0)
+>>>>>>> v3.18
 
 /*
  * RFCSR 7:
@@ -2060,19 +2273,36 @@ struct mac_iveiv_entry {
  * RFCSR 11:
  */
 #define RFCSR11_R			FIELD8(0x03)
+<<<<<<< HEAD
 #define RFCSR11_MOD			FIELD8(0xc0)
+=======
+#define RFCSR11_PLL_MOD			FIELD8(0x0c)
+#define RFCSR11_MOD			FIELD8(0xc0)
+/* bits for RF3053 */
+/* TODO: verify RFCSR11_MOD usage on other chips */
+#define RFCSR11_PLL_IDOH		FIELD8(0x40)
+
+>>>>>>> v3.18
 
 /*
  * RFCSR 12:
  */
 #define RFCSR12_TX_POWER		FIELD8(0x1f)
+<<<<<<< HEAD
 #define RFCSR12_DR0				FIELD8(0xe0)
+=======
+#define RFCSR12_DR0			FIELD8(0xe0)
+>>>>>>> v3.18
 
 /*
  * RFCSR 13:
  */
 #define RFCSR13_TX_POWER		FIELD8(0x1f)
+<<<<<<< HEAD
 #define RFCSR13_DR0				FIELD8(0xe0)
+=======
+#define RFCSR13_DR0			FIELD8(0xe0)
+>>>>>>> v3.18
 
 /*
  * RFCSR 15:
@@ -2090,7 +2320,15 @@ struct mac_iveiv_entry {
 #define RFCSR17_TXMIXER_GAIN		FIELD8(0x07)
 #define RFCSR17_TX_LO1_EN		FIELD8(0x08)
 #define RFCSR17_R			FIELD8(0x20)
+<<<<<<< HEAD
 #define RFCSR17_CODE                   FIELD8(0x7f)
+=======
+#define RFCSR17_CODE			FIELD8(0x7f)
+
+/* RFCSR 18 */
+#define RFCSR18_XO_TUNE_BYPASS		FIELD8(0x40)
+
+>>>>>>> v3.18
 
 /*
  * RFCSR 20:
@@ -2152,6 +2390,15 @@ struct mac_iveiv_entry {
 #define RFCSR31_RX_H20M			FIELD8(0x20)
 #define RFCSR31_RX_CALIB		FIELD8(0x7f)
 
+<<<<<<< HEAD
+=======
+/* RFCSR 32 bits for RF3053 */
+#define RFCSR32_TX_AGC_FC		FIELD8(0xf8)
+
+/* RFCSR 36 bits for RF3053 */
+#define RFCSR36_RF_BS			FIELD8(0x80)
+
+>>>>>>> v3.18
 /*
  * RFCSR 38:
  */
@@ -2160,6 +2407,10 @@ struct mac_iveiv_entry {
 /*
  * RFCSR 39:
  */
+<<<<<<< HEAD
+=======
+#define RFCSR39_RX_DIV			FIELD8(0x40)
+>>>>>>> v3.18
 #define RFCSR39_RX_LO2_EN		FIELD8(0x80)
 
 /*
@@ -2167,12 +2418,42 @@ struct mac_iveiv_entry {
  */
 #define RFCSR49_TX			FIELD8(0x3f)
 #define RFCSR49_EP			FIELD8(0xc0)
+<<<<<<< HEAD
+=======
+/* bits for RT3593 */
+#define RFCSR49_TX_LO1_IC		FIELD8(0x1c)
+#define RFCSR49_TX_DIV			FIELD8(0x20)
+>>>>>>> v3.18
 
 /*
  * RFCSR 50:
  */
 #define RFCSR50_TX			FIELD8(0x3f)
 #define RFCSR50_EP			FIELD8(0xc0)
+<<<<<<< HEAD
+=======
+/* bits for RT3593 */
+#define RFCSR50_TX_LO1_EN		FIELD8(0x20)
+#define RFCSR50_TX_LO2_EN		FIELD8(0x10)
+
+/* RFCSR 51 */
+/* bits for RT3593 */
+#define RFCSR51_BITS01			FIELD8(0x03)
+#define RFCSR51_BITS24			FIELD8(0x1c)
+#define RFCSR51_BITS57			FIELD8(0xe0)
+
+#define RFCSR53_TX_POWER		FIELD8(0x3f)
+#define RFCSR53_UNKNOWN			FIELD8(0xc0)
+
+#define RFCSR54_TX_POWER		FIELD8(0x3f)
+#define RFCSR54_UNKNOWN			FIELD8(0xc0)
+
+#define RFCSR55_TX_POWER		FIELD8(0x3f)
+#define RFCSR55_UNKNOWN			FIELD8(0xc0)
+
+#define RFCSR57_DRV_CC			FIELD8(0xfc)
+
+>>>>>>> v3.18
 
 /*
  * RF registers
@@ -2206,21 +2487,75 @@ struct mac_iveiv_entry {
  * The wordsize of the EEPROM is 16 bits.
  */
 
+<<<<<<< HEAD
 /*
  * Chip ID
  */
 #define EEPROM_CHIP_ID			0x0000
+=======
+enum rt2800_eeprom_word {
+	EEPROM_CHIP_ID = 0,
+	EEPROM_VERSION,
+	EEPROM_MAC_ADDR_0,
+	EEPROM_MAC_ADDR_1,
+	EEPROM_MAC_ADDR_2,
+	EEPROM_NIC_CONF0,
+	EEPROM_NIC_CONF1,
+	EEPROM_FREQ,
+	EEPROM_LED_AG_CONF,
+	EEPROM_LED_ACT_CONF,
+	EEPROM_LED_POLARITY,
+	EEPROM_NIC_CONF2,
+	EEPROM_LNA,
+	EEPROM_RSSI_BG,
+	EEPROM_RSSI_BG2,
+	EEPROM_TXMIXER_GAIN_BG,
+	EEPROM_RSSI_A,
+	EEPROM_RSSI_A2,
+	EEPROM_TXMIXER_GAIN_A,
+	EEPROM_EIRP_MAX_TX_POWER,
+	EEPROM_TXPOWER_DELTA,
+	EEPROM_TXPOWER_BG1,
+	EEPROM_TXPOWER_BG2,
+	EEPROM_TSSI_BOUND_BG1,
+	EEPROM_TSSI_BOUND_BG2,
+	EEPROM_TSSI_BOUND_BG3,
+	EEPROM_TSSI_BOUND_BG4,
+	EEPROM_TSSI_BOUND_BG5,
+	EEPROM_TXPOWER_A1,
+	EEPROM_TXPOWER_A2,
+	EEPROM_TSSI_BOUND_A1,
+	EEPROM_TSSI_BOUND_A2,
+	EEPROM_TSSI_BOUND_A3,
+	EEPROM_TSSI_BOUND_A4,
+	EEPROM_TSSI_BOUND_A5,
+	EEPROM_TXPOWER_BYRATE,
+	EEPROM_BBP_START,
+
+	/* IDs for extended EEPROM format used by three-chain devices */
+	EEPROM_EXT_LNA2,
+	EEPROM_EXT_TXPOWER_BG3,
+	EEPROM_EXT_TXPOWER_A3,
+
+	/* New values must be added before this */
+	EEPROM_WORD_COUNT
+};
+>>>>>>> v3.18
 
 /*
  * EEPROM Version
  */
+<<<<<<< HEAD
 #define EEPROM_VERSION			0x0001
+=======
+>>>>>>> v3.18
 #define EEPROM_VERSION_FAE		FIELD16(0x00ff)
 #define EEPROM_VERSION_VERSION		FIELD16(0xff00)
 
 /*
  * HW MAC address.
  */
+<<<<<<< HEAD
 #define EEPROM_MAC_ADDR_0		0x0002
 #define EEPROM_MAC_ADDR_BYTE0		FIELD16(0x00ff)
 #define EEPROM_MAC_ADDR_BYTE1		FIELD16(0xff00)
@@ -2228,6 +2563,12 @@ struct mac_iveiv_entry {
 #define EEPROM_MAC_ADDR_BYTE2		FIELD16(0x00ff)
 #define EEPROM_MAC_ADDR_BYTE3		FIELD16(0xff00)
 #define EEPROM_MAC_ADDR_2		0x0004
+=======
+#define EEPROM_MAC_ADDR_BYTE0		FIELD16(0x00ff)
+#define EEPROM_MAC_ADDR_BYTE1		FIELD16(0xff00)
+#define EEPROM_MAC_ADDR_BYTE2		FIELD16(0x00ff)
+#define EEPROM_MAC_ADDR_BYTE3		FIELD16(0xff00)
+>>>>>>> v3.18
 #define EEPROM_MAC_ADDR_BYTE4		FIELD16(0x00ff)
 #define EEPROM_MAC_ADDR_BYTE5		FIELD16(0xff00)
 
@@ -2237,10 +2578,16 @@ struct mac_iveiv_entry {
  * TXPATH: 1: 1T, 2: 2T, 3: 3T
  * RF_TYPE: RFIC type
  */
+<<<<<<< HEAD
 #define	EEPROM_NIC_CONF0		0x001a
 #define EEPROM_NIC_CONF0_RXPATH		FIELD16(0x000f)
 #define EEPROM_NIC_CONF0_TXPATH		FIELD16(0x00f0)
 #define EEPROM_NIC_CONF0_RF_TYPE		FIELD16(0x0f00)
+=======
+#define EEPROM_NIC_CONF0_RXPATH		FIELD16(0x000f)
+#define EEPROM_NIC_CONF0_TXPATH		FIELD16(0x00f0)
+#define EEPROM_NIC_CONF0_RF_TYPE	FIELD16(0x0f00)
+>>>>>>> v3.18
 
 /*
  * EEPROM NIC Configuration 1
@@ -2261,27 +2608,43 @@ struct mac_iveiv_entry {
  * BT_COEXIST: 0: disable, 1: enable
  * DAC_TEST: 0: disable, 1: enable
  */
+<<<<<<< HEAD
 #define	EEPROM_NIC_CONF1		0x001b
 #define EEPROM_NIC_CONF1_HW_RADIO		FIELD16(0x0001)
 #define EEPROM_NIC_CONF1_EXTERNAL_TX_ALC		FIELD16(0x0002)
 #define EEPROM_NIC_CONF1_EXTERNAL_LNA_2G		FIELD16(0x0004)
 #define EEPROM_NIC_CONF1_EXTERNAL_LNA_5G		FIELD16(0x0008)
+=======
+#define EEPROM_NIC_CONF1_HW_RADIO		FIELD16(0x0001)
+#define EEPROM_NIC_CONF1_EXTERNAL_TX_ALC	FIELD16(0x0002)
+#define EEPROM_NIC_CONF1_EXTERNAL_LNA_2G	FIELD16(0x0004)
+#define EEPROM_NIC_CONF1_EXTERNAL_LNA_5G	FIELD16(0x0008)
+>>>>>>> v3.18
 #define EEPROM_NIC_CONF1_CARDBUS_ACCEL		FIELD16(0x0010)
 #define EEPROM_NIC_CONF1_BW40M_SB_2G		FIELD16(0x0020)
 #define EEPROM_NIC_CONF1_BW40M_SB_5G		FIELD16(0x0040)
 #define EEPROM_NIC_CONF1_WPS_PBC		FIELD16(0x0080)
 #define EEPROM_NIC_CONF1_BW40M_2G		FIELD16(0x0100)
 #define EEPROM_NIC_CONF1_BW40M_5G		FIELD16(0x0200)
+<<<<<<< HEAD
 #define EEPROM_NIC_CONF1_BROADBAND_EXT_LNA		FIELD16(0x400)
 #define EEPROM_NIC_CONF1_ANT_DIVERSITY		FIELD16(0x1800)
 #define EEPROM_NIC_CONF1_INTERNAL_TX_ALC		FIELD16(0x2000)
+=======
+#define EEPROM_NIC_CONF1_BROADBAND_EXT_LNA	FIELD16(0x400)
+#define EEPROM_NIC_CONF1_ANT_DIVERSITY		FIELD16(0x1800)
+#define EEPROM_NIC_CONF1_INTERNAL_TX_ALC	FIELD16(0x2000)
+>>>>>>> v3.18
 #define EEPROM_NIC_CONF1_BT_COEXIST		FIELD16(0x4000)
 #define EEPROM_NIC_CONF1_DAC_TEST		FIELD16(0x8000)
 
 /*
  * EEPROM frequency
  */
+<<<<<<< HEAD
 #define	EEPROM_FREQ			0x001d
+=======
+>>>>>>> v3.18
 #define EEPROM_FREQ_OFFSET		FIELD16(0x00ff)
 #define EEPROM_FREQ_LED_MODE		FIELD16(0x7f00)
 #define EEPROM_FREQ_LED_POLARITY	FIELD16(0x1000)
@@ -2298,9 +2661,12 @@ struct mac_iveiv_entry {
  * POLARITY_GPIO_4: Polarity GPIO4 setting.
  * LED_MODE: Led mode.
  */
+<<<<<<< HEAD
 #define EEPROM_LED_AG_CONF		0x001e
 #define EEPROM_LED_ACT_CONF		0x001f
 #define EEPROM_LED_POLARITY		0x0020
+=======
+>>>>>>> v3.18
 #define EEPROM_LED_POLARITY_RDY_BG	FIELD16(0x0001)
 #define EEPROM_LED_POLARITY_RDY_A	FIELD16(0x0002)
 #define EEPROM_LED_POLARITY_ACT		FIELD16(0x0004)
@@ -2317,62 +2683,92 @@ struct mac_iveiv_entry {
  * TX_STREAM: 0: Reserved, 1: 1 Stream, 2: 2 Stream
  * CRYSTAL: 00: Reserved, 01: One crystal, 10: Two crystal, 11: Reserved
  */
+<<<<<<< HEAD
 #define EEPROM_NIC_CONF2		0x0021
 #define EEPROM_NIC_CONF2_RX_STREAM		FIELD16(0x000f)
 #define EEPROM_NIC_CONF2_TX_STREAM		FIELD16(0x00f0)
 #define EEPROM_NIC_CONF2_CRYSTAL		FIELD16(0x0600)
+=======
+#define EEPROM_NIC_CONF2_RX_STREAM	FIELD16(0x000f)
+#define EEPROM_NIC_CONF2_TX_STREAM	FIELD16(0x00f0)
+#define EEPROM_NIC_CONF2_CRYSTAL	FIELD16(0x0600)
+>>>>>>> v3.18
 
 /*
  * EEPROM LNA
  */
+<<<<<<< HEAD
 #define EEPROM_LNA			0x0022
+=======
+>>>>>>> v3.18
 #define EEPROM_LNA_BG			FIELD16(0x00ff)
 #define EEPROM_LNA_A0			FIELD16(0xff00)
 
 /*
  * EEPROM RSSI BG offset
  */
+<<<<<<< HEAD
 #define EEPROM_RSSI_BG			0x0023
+=======
+>>>>>>> v3.18
 #define EEPROM_RSSI_BG_OFFSET0		FIELD16(0x00ff)
 #define EEPROM_RSSI_BG_OFFSET1		FIELD16(0xff00)
 
 /*
  * EEPROM RSSI BG2 offset
  */
+<<<<<<< HEAD
 #define EEPROM_RSSI_BG2			0x0024
+=======
+>>>>>>> v3.18
 #define EEPROM_RSSI_BG2_OFFSET2		FIELD16(0x00ff)
 #define EEPROM_RSSI_BG2_LNA_A1		FIELD16(0xff00)
 
 /*
  * EEPROM TXMIXER GAIN BG offset (note overlaps with EEPROM RSSI BG2).
  */
+<<<<<<< HEAD
 #define EEPROM_TXMIXER_GAIN_BG		0x0024
+=======
+>>>>>>> v3.18
 #define EEPROM_TXMIXER_GAIN_BG_VAL	FIELD16(0x0007)
 
 /*
  * EEPROM RSSI A offset
  */
+<<<<<<< HEAD
 #define EEPROM_RSSI_A			0x0025
+=======
+>>>>>>> v3.18
 #define EEPROM_RSSI_A_OFFSET0		FIELD16(0x00ff)
 #define EEPROM_RSSI_A_OFFSET1		FIELD16(0xff00)
 
 /*
  * EEPROM RSSI A2 offset
  */
+<<<<<<< HEAD
 #define EEPROM_RSSI_A2			0x0026
+=======
+>>>>>>> v3.18
 #define EEPROM_RSSI_A2_OFFSET2		FIELD16(0x00ff)
 #define EEPROM_RSSI_A2_LNA_A2		FIELD16(0xff00)
 
 /*
  * EEPROM TXMIXER GAIN A offset (note overlaps with EEPROM RSSI A2).
  */
+<<<<<<< HEAD
 #define EEPROM_TXMIXER_GAIN_A		0x0026
+=======
+>>>>>>> v3.18
 #define EEPROM_TXMIXER_GAIN_A_VAL	FIELD16(0x0007)
 
 /*
  * EEPROM EIRP Maximum TX power values(unit: dbm)
  */
+<<<<<<< HEAD
 #define EEPROM_EIRP_MAX_TX_POWER	0x0027
+=======
+>>>>>>> v3.18
 #define EEPROM_EIRP_MAX_TX_POWER_2GHZ	FIELD16(0x00ff)
 #define EEPROM_EIRP_MAX_TX_POWER_5GHZ	FIELD16(0xff00)
 
@@ -2383,7 +2779,10 @@ struct mac_iveiv_entry {
  * TYPE: 1: Plus the delta value, 0: minus the delta value
  * ENABLE: enable tx power compensation for 40BW
  */
+<<<<<<< HEAD
 #define EEPROM_TXPOWER_DELTA		0x0028
+=======
+>>>>>>> v3.18
 #define EEPROM_TXPOWER_DELTA_VALUE_2G	FIELD16(0x003f)
 #define EEPROM_TXPOWER_DELTA_TYPE_2G	FIELD16(0x0040)
 #define EEPROM_TXPOWER_DELTA_ENABLE_2G	FIELD16(0x0080)
@@ -2394,8 +2793,11 @@ struct mac_iveiv_entry {
 /*
  * EEPROM TXPOWER 802.11BG
  */
+<<<<<<< HEAD
 #define	EEPROM_TXPOWER_BG1		0x0029
 #define	EEPROM_TXPOWER_BG2		0x0030
+=======
+>>>>>>> v3.18
 #define EEPROM_TXPOWER_BG_SIZE		7
 #define EEPROM_TXPOWER_BG_1		FIELD16(0x00ff)
 #define EEPROM_TXPOWER_BG_2		FIELD16(0xff00)
@@ -2407,7 +2809,10 @@ struct mac_iveiv_entry {
  * MINUS3: If the actual TSSI is below this boundary, tx power needs to be
  *         reduced by (agc_step * -3)
  */
+<<<<<<< HEAD
 #define EEPROM_TSSI_BOUND_BG1		0x0037
+=======
+>>>>>>> v3.18
 #define EEPROM_TSSI_BOUND_BG1_MINUS4	FIELD16(0x00ff)
 #define EEPROM_TSSI_BOUND_BG1_MINUS3	FIELD16(0xff00)
 
@@ -2418,7 +2823,10 @@ struct mac_iveiv_entry {
  * MINUS1: If the actual TSSI is below this boundary, tx power needs to be
  *         reduced by (agc_step * -1)
  */
+<<<<<<< HEAD
 #define EEPROM_TSSI_BOUND_BG2		0x0038
+=======
+>>>>>>> v3.18
 #define EEPROM_TSSI_BOUND_BG2_MINUS2	FIELD16(0x00ff)
 #define EEPROM_TSSI_BOUND_BG2_MINUS1	FIELD16(0xff00)
 
@@ -2428,7 +2836,10 @@ struct mac_iveiv_entry {
  * PLUS1: If the actual TSSI is above this boundary, tx power needs to be
  *        increased by (agc_step * 1)
  */
+<<<<<<< HEAD
 #define EEPROM_TSSI_BOUND_BG3		0x0039
+=======
+>>>>>>> v3.18
 #define EEPROM_TSSI_BOUND_BG3_REF	FIELD16(0x00ff)
 #define EEPROM_TSSI_BOUND_BG3_PLUS1	FIELD16(0xff00)
 
@@ -2439,7 +2850,10 @@ struct mac_iveiv_entry {
  * PLUS3: If the actual TSSI is above this boundary, tx power needs to be
  *        increased by (agc_step * 3)
  */
+<<<<<<< HEAD
 #define EEPROM_TSSI_BOUND_BG4		0x003a
+=======
+>>>>>>> v3.18
 #define EEPROM_TSSI_BOUND_BG4_PLUS2	FIELD16(0x00ff)
 #define EEPROM_TSSI_BOUND_BG4_PLUS3	FIELD16(0xff00)
 
@@ -2449,19 +2863,32 @@ struct mac_iveiv_entry {
  *        increased by (agc_step * 4)
  * AGC_STEP: Temperature compensation step.
  */
+<<<<<<< HEAD
 #define EEPROM_TSSI_BOUND_BG5		0x003b
+=======
+>>>>>>> v3.18
 #define EEPROM_TSSI_BOUND_BG5_PLUS4	FIELD16(0x00ff)
 #define EEPROM_TSSI_BOUND_BG5_AGC_STEP	FIELD16(0xff00)
 
 /*
  * EEPROM TXPOWER 802.11A
  */
+<<<<<<< HEAD
 #define EEPROM_TXPOWER_A1		0x003c
 #define EEPROM_TXPOWER_A2		0x0053
+=======
+>>>>>>> v3.18
 #define EEPROM_TXPOWER_A_SIZE		6
 #define EEPROM_TXPOWER_A_1		FIELD16(0x00ff)
 #define EEPROM_TXPOWER_A_2		FIELD16(0xff00)
 
+<<<<<<< HEAD
+=======
+/* EEPROM_TXPOWER_{A,G} fields for RT3593 */
+#define EEPROM_TXPOWER_ALC		FIELD8(0x1f)
+#define EEPROM_TXPOWER_FINE_CTRL	FIELD8(0xe0)
+
+>>>>>>> v3.18
 /*
  * EEPROM temperature compensation boundaries 802.11A
  * MINUS4: If the actual TSSI is below this boundary, tx power needs to be
@@ -2469,7 +2896,10 @@ struct mac_iveiv_entry {
  * MINUS3: If the actual TSSI is below this boundary, tx power needs to be
  *         reduced by (agc_step * -3)
  */
+<<<<<<< HEAD
 #define EEPROM_TSSI_BOUND_A1		0x006a
+=======
+>>>>>>> v3.18
 #define EEPROM_TSSI_BOUND_A1_MINUS4	FIELD16(0x00ff)
 #define EEPROM_TSSI_BOUND_A1_MINUS3	FIELD16(0xff00)
 
@@ -2480,7 +2910,10 @@ struct mac_iveiv_entry {
  * MINUS1: If the actual TSSI is below this boundary, tx power needs to be
  *         reduced by (agc_step * -1)
  */
+<<<<<<< HEAD
 #define EEPROM_TSSI_BOUND_A2		0x006b
+=======
+>>>>>>> v3.18
 #define EEPROM_TSSI_BOUND_A2_MINUS2	FIELD16(0x00ff)
 #define EEPROM_TSSI_BOUND_A2_MINUS1	FIELD16(0xff00)
 
@@ -2490,7 +2923,10 @@ struct mac_iveiv_entry {
  * PLUS1: If the actual TSSI is above this boundary, tx power needs to be
  *        increased by (agc_step * 1)
  */
+<<<<<<< HEAD
 #define EEPROM_TSSI_BOUND_A3		0x006c
+=======
+>>>>>>> v3.18
 #define EEPROM_TSSI_BOUND_A3_REF	FIELD16(0x00ff)
 #define EEPROM_TSSI_BOUND_A3_PLUS1	FIELD16(0xff00)
 
@@ -2501,7 +2937,10 @@ struct mac_iveiv_entry {
  * PLUS3: If the actual TSSI is above this boundary, tx power needs to be
  *        increased by (agc_step * 3)
  */
+<<<<<<< HEAD
 #define EEPROM_TSSI_BOUND_A4		0x006d
+=======
+>>>>>>> v3.18
 #define EEPROM_TSSI_BOUND_A4_PLUS2	FIELD16(0x00ff)
 #define EEPROM_TSSI_BOUND_A4_PLUS3	FIELD16(0xff00)
 
@@ -2511,14 +2950,20 @@ struct mac_iveiv_entry {
  *        increased by (agc_step * 4)
  * AGC_STEP: Temperature compensation step.
  */
+<<<<<<< HEAD
 #define EEPROM_TSSI_BOUND_A5		0x006e
+=======
+>>>>>>> v3.18
 #define EEPROM_TSSI_BOUND_A5_PLUS4	FIELD16(0x00ff)
 #define EEPROM_TSSI_BOUND_A5_AGC_STEP	FIELD16(0xff00)
 
 /*
  * EEPROM TXPOWER by rate: tx power per tx rate for HT20 mode
  */
+<<<<<<< HEAD
 #define EEPROM_TXPOWER_BYRATE		0x006f
+=======
+>>>>>>> v3.18
 #define EEPROM_TXPOWER_BYRATE_SIZE	9
 
 #define EEPROM_TXPOWER_BYRATE_RATE0	FIELD16(0x000f)
@@ -2529,11 +2974,21 @@ struct mac_iveiv_entry {
 /*
  * EEPROM BBP.
  */
+<<<<<<< HEAD
 #define	EEPROM_BBP_START		0x0078
+=======
+>>>>>>> v3.18
 #define EEPROM_BBP_SIZE			16
 #define EEPROM_BBP_VALUE		FIELD16(0x00ff)
 #define EEPROM_BBP_REG_ID		FIELD16(0xff00)
 
+<<<<<<< HEAD
+=======
+/* EEPROM_EXT_LNA2 */
+#define EEPROM_EXT_LNA2_A1		FIELD16(0x00ff)
+#define EEPROM_EXT_LNA2_A2		FIELD16(0xff00)
+
+>>>>>>> v3.18
 /*
  * EEPROM IQ Calibration, unlike other entries those are byte addresses.
  */
@@ -2604,15 +3059,26 @@ struct mac_iveiv_entry {
 #define MCU_CURRENT			0x36
 #define MCU_LED				0x50
 #define MCU_LED_STRENGTH		0x51
+<<<<<<< HEAD
 #define MCU_LED_AG_CONF		0x52
+=======
+#define MCU_LED_AG_CONF			0x52
+>>>>>>> v3.18
 #define MCU_LED_ACT_CONF		0x53
 #define MCU_LED_LED_POLARITY		0x54
 #define MCU_RADAR			0x60
 #define MCU_BOOT_SIGNAL			0x72
 #define MCU_ANT_SELECT			0X73
+<<<<<<< HEAD
 #define MCU_BBP_SIGNAL			0x80
 #define MCU_POWER_SAVE			0x83
 #define MCU_BAND_SELECT		0x91
+=======
+#define MCU_FREQ_OFFSET			0x74
+#define MCU_BBP_SIGNAL			0x80
+#define MCU_POWER_SAVE			0x83
+#define MCU_BAND_SELECT			0x91
+>>>>>>> v3.18
 
 /*
  * MCU mailbox tokens
@@ -2625,11 +3091,22 @@ struct mac_iveiv_entry {
 /*
  * DMA descriptor defines.
  */
+<<<<<<< HEAD
 #define TXWI_DESC_SIZE			(4 * sizeof(__le32))
 #define RXWI_DESC_SIZE			(4 * sizeof(__le32))
 
 #define TXWI_DESC_SIZE_5592		(5 * sizeof(__le32))
 #define RXWI_DESC_SIZE_5592		(6 * sizeof(__le32))
+=======
+
+#define TXWI_DESC_SIZE_4WORDS		(4 * sizeof(__le32))
+#define TXWI_DESC_SIZE_5WORDS		(5 * sizeof(__le32))
+
+#define RXWI_DESC_SIZE_4WORDS		(4 * sizeof(__le32))
+#define RXWI_DESC_SIZE_5WORDS		(5 * sizeof(__le32))
+#define RXWI_DESC_SIZE_6WORDS		(6 * sizeof(__le32))
+
+>>>>>>> v3.18
 /*
  * TX WI structure
  */
@@ -2748,6 +3225,7 @@ struct mac_iveiv_entry {
 #define MAX_A_TXPOWER	15
 #define DEFAULT_TXPOWER	5
 
+<<<<<<< HEAD
 #define TXPOWER_G_FROM_DEV(__txpower) \
 	((__txpower) > MAX_G_TXPOWER) ? DEFAULT_TXPOWER : (__txpower)
 
@@ -2760,6 +3238,17 @@ struct mac_iveiv_entry {
 #define TXPOWER_A_TO_DEV(__txpower) \
 	clamp_t(char, __txpower, MIN_A_TXPOWER, MAX_A_TXPOWER)
 
+=======
+#define MIN_A_TXPOWER_3593	0
+#define MAX_A_TXPOWER_3593	31
+
+#define TXPOWER_G_FROM_DEV(__txpower) \
+	((__txpower) > MAX_G_TXPOWER) ? DEFAULT_TXPOWER : (__txpower)
+
+#define TXPOWER_A_FROM_DEV(__txpower) \
+	((__txpower) > MAX_A_TXPOWER) ? DEFAULT_TXPOWER : (__txpower)
+
+>>>>>>> v3.18
 /*
  *  Board's maximun TX power limitation
  */

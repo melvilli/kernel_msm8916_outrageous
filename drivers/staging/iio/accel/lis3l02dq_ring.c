@@ -19,6 +19,10 @@ static inline u16 combine_8_to_16(u8 lower, u8 upper)
 {
 	u16 _lower = lower;
 	u16 _upper = upper;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	return _lower | (_upper << 8);
 }
 
@@ -31,10 +35,17 @@ irqreturn_t lis3l02dq_data_rdy_trig_poll(int irq, void *private)
 	struct lis3l02dq_state *st = iio_priv(indio_dev);
 
 	if (st->trigger_on) {
+<<<<<<< HEAD
 		iio_trigger_poll(st->trig, iio_get_time_ns());
 		return IRQ_HANDLED;
 	} else
 		return IRQ_WAKE_THREAD;
+=======
+		iio_trigger_poll(st->trig);
+		return IRQ_HANDLED;
+	}
+	return IRQ_WAKE_THREAD;
+>>>>>>> v3.18
 }
 
 static const u8 read_all_tx_array[] = {
@@ -111,7 +122,11 @@ static int lis3l02dq_get_buffer_element(struct iio_dev *indio_dev,
 				u8 *buf)
 {
 	int ret, i;
+<<<<<<< HEAD
 	u8 *rx_array ;
+=======
+	u8 *rx_array;
+>>>>>>> v3.18
 	s16 *data = (s16 *)buf;
 	int scan_count = bitmap_weight(indio_dev->active_scan_mask,
 				       indio_dev->masklength);
@@ -146,11 +161,15 @@ static irqreturn_t lis3l02dq_trigger_handler(int irq, void *p)
 	if (!bitmap_empty(indio_dev->active_scan_mask, indio_dev->masklength))
 		len = lis3l02dq_get_buffer_element(indio_dev, data);
 
+<<<<<<< HEAD
 	  /* Guaranteed to be aligned with 8 byte boundary */
 	if (indio_dev->scan_timestamp)
 		*(s64 *)((u8 *)data + ALIGN(len, sizeof(s64)))
 			= pf->timestamp;
 	iio_push_to_buffers(indio_dev, (u8 *)data);
+=======
+	iio_push_to_buffers_with_timestamp(indio_dev, data, pf->timestamp);
+>>>>>>> v3.18
 
 	kfree(data);
 done:
@@ -264,8 +283,12 @@ static int lis3l02dq_trig_try_reen(struct iio_trigger *trig)
 		else
 			break;
 	if (i == 5)
+<<<<<<< HEAD
 		printk(KERN_INFO
 		       "Failed to clear the interrupt for lis3l02dq\n");
+=======
+		pr_info("Failed to clear the interrupt for lis3l02dq\n");
+>>>>>>> v3.18
 
 	/* irq reenabled so success! */
 	return 0;
@@ -387,7 +410,10 @@ error_ret:
 }
 
 static const struct iio_buffer_setup_ops lis3l02dq_buffer_setup_ops = {
+<<<<<<< HEAD
 	.preenable = &iio_sw_buffer_preenable,
+=======
+>>>>>>> v3.18
 	.postenable = &lis3l02dq_buffer_postenable,
 	.predisable = &lis3l02dq_buffer_predisable,
 };
@@ -401,7 +427,11 @@ int lis3l02dq_configure_buffer(struct iio_dev *indio_dev)
 	if (!buffer)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 	indio_dev->buffer = buffer;
+=======
+	iio_device_attach_buffer(indio_dev, buffer);
+>>>>>>> v3.18
 
 	buffer->scan_timestamp = true;
 	indio_dev->setup_ops = &lis3l02dq_buffer_setup_ops;

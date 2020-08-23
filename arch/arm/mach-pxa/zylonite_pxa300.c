@@ -18,7 +18,11 @@
 #include <linux/init.h>
 #include <linux/i2c.h>
 #include <linux/i2c/pxa-i2c.h>
+<<<<<<< HEAD
 #include <linux/i2c/pca953x.h>
+=======
+#include <linux/platform_data/pca953x.h>
+>>>>>>> v3.18
 #include <linux/gpio.h>
 
 #include <mach/pxa300.h>

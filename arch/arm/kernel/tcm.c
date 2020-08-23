@@ -52,7 +52,11 @@ static struct map_desc dtcm_iomap[] __initdata = {
 		.virtual	= DTCM_OFFSET,
 		.pfn		= __phys_to_pfn(DTCM_OFFSET),
 		.length		= 0,
+<<<<<<< HEAD
 		.type		= MT_MEMORY_DTCM
+=======
+		.type		= MT_MEMORY_RW_DTCM
+>>>>>>> v3.18
 	}
 };
 
@@ -61,7 +65,11 @@ static struct map_desc itcm_iomap[] __initdata = {
 		.virtual	= ITCM_OFFSET,
 		.pfn		= __phys_to_pfn(ITCM_OFFSET),
 		.length		= 0,
+<<<<<<< HEAD
 		.type		= MT_MEMORY_ITCM
+=======
+		.type		= MT_MEMORY_RWX_ITCM,
+>>>>>>> v3.18
 	}
 };
 

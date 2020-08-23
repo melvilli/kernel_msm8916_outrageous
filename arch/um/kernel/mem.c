@@ -70,10 +70,15 @@ void __init mem_init(void)
 #ifdef CONFIG_HIGHMEM
 	setup_highmem(end_iomem, highmem);
 #endif
+<<<<<<< HEAD
 	num_physpages = totalram_pages;
 	max_pfn = totalram_pages;
 	printk(KERN_INFO "Memory: %luk available\n",
 	       nr_free_pages() << (PAGE_SHIFT-10));
+=======
+	max_pfn = totalram_pages;
+	mem_init_print_info(NULL);
+>>>>>>> v3.18
 	kmalloc_ok = 1;
 }
 
@@ -244,7 +249,11 @@ void free_initmem(void)
 #ifdef CONFIG_BLK_DEV_INITRD
 void free_initrd_mem(unsigned long start, unsigned long end)
 {
+<<<<<<< HEAD
 	free_reserved_area(start, end, 0, "initrd");
+=======
+	free_reserved_area((void *)start, (void *)end, -1, "initrd");
+>>>>>>> v3.18
 }
 #endif
 
@@ -281,8 +290,17 @@ pgtable_t pte_alloc_one(struct mm_struct *mm, unsigned long address)
 	struct page *pte;
 
 	pte = alloc_page(GFP_KERNEL|__GFP_REPEAT|__GFP_ZERO);
+<<<<<<< HEAD
 	if (pte)
 		pgtable_page_ctor(pte);
+=======
+	if (!pte)
+		return NULL;
+	if (!pgtable_page_ctor(pte)) {
+		__free_page(pte);
+		return NULL;
+	}
+>>>>>>> v3.18
 	return pte;
 }
 

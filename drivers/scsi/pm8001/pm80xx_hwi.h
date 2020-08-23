@@ -168,6 +168,14 @@
 #define LINKRATE_15			(0x01 << 8)
 #define LINKRATE_30			(0x02 << 8)
 #define LINKRATE_60			(0x06 << 8)
+<<<<<<< HEAD
+=======
+#define LINKRATE_120			(0x08 << 8)
+
+/* phy_profile */
+#define SAS_PHY_ANALOG_SETTINGS_PAGE	0x04
+#define PHY_DWORD_LENGTH		0xC
+>>>>>>> v3.18
 
 /* Thermal related */
 #define	THERMAL_ENABLE			0x1
@@ -210,6 +218,11 @@
 #define SAS_DOPNRJT_RTRY_TMO            128
 #define SAS_COPNRJT_RTRY_TMO            128
 
+<<<<<<< HEAD
+=======
+/* for phy state */
+#define PHY_STATE_LINK_UP_SPCV		0x2
+>>>>>>> v3.18
 /*
   Making ORR bigger than IT NEXUS LOSS which is 2000000us = 2 second.
   Assuming a bigger value 3 second, 3000000/128 = 23437.5 where 128
@@ -1223,10 +1236,17 @@ typedef struct SASProtocolTimerConfig SASProtocolTimerConfig_t;
 
 /* MSGU CONFIGURATION TABLE*/
 
+<<<<<<< HEAD
 #define SPCv_MSGU_CFG_TABLE_UPDATE		0x01
 #define SPCv_MSGU_CFG_TABLE_RESET		0x02
 #define SPCv_MSGU_CFG_TABLE_FREEZE		0x04
 #define SPCv_MSGU_CFG_TABLE_UNFREEZE		0x08
+=======
+#define SPCv_MSGU_CFG_TABLE_UPDATE		0x001
+#define SPCv_MSGU_CFG_TABLE_RESET		0x002
+#define SPCv_MSGU_CFG_TABLE_FREEZE		0x004
+#define SPCv_MSGU_CFG_TABLE_UNFREEZE		0x008
+>>>>>>> v3.18
 #define MSGU_IBDB_SET				0x00
 #define MSGU_HOST_INT_STATUS			0x08
 #define MSGU_HOST_INT_MASK			0x0C
@@ -1520,4 +1540,9 @@ typedef struct SASProtocolTimerConfig SASProtocolTimerConfig_t;
 #define DEVREG_FAILURE_PORT_NOT_VALID_STATE		0x06
 #define DEVREG_FAILURE_DEVICE_TYPE_NOT_VALID		0x07
 
+<<<<<<< HEAD
+=======
+
+#define MEMBASE_II_SHIFT_REGISTER       0x1010
+>>>>>>> v3.18
 #endif

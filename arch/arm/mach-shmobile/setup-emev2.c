@@ -18,6 +18,7 @@
  */
 #include <linux/kernel.h>
 #include <linux/init.h>
+<<<<<<< HEAD
 #include <linux/interrupt.h>
 #include <linux/irq.h>
 #include <linux/irqchip.h>
@@ -46,6 +47,16 @@ static struct map_desc emev2_io_desc[] __initdata = {
 		.length		= SZ_128K,
 		.type		= MT_DEVICE
 	},
+=======
+#include <linux/mm.h>
+#include <asm/mach-types.h>
+#include <asm/mach/arch.h>
+#include <asm/mach/map.h>
+#include "common.h"
+
+static struct map_desc emev2_io_desc[] __initdata = {
+#ifdef CONFIG_SMP
+>>>>>>> v3.18
 	/* 2M mapping for SCU + L2 controller */
 	{
 		.virtual	= 0xf0000000,
@@ -56,11 +67,16 @@ static struct map_desc emev2_io_desc[] __initdata = {
 #endif
 };
 
+<<<<<<< HEAD
 void __init emev2_map_io(void)
+=======
+static void __init emev2_map_io(void)
+>>>>>>> v3.18
 {
 	iotable_init(emev2_io_desc, ARRAY_SIZE(emev2_io_desc));
 }
 
+<<<<<<< HEAD
 /* UART */
 static struct resource uart0_resources[] = {
 	[0]	= {
@@ -446,10 +462,14 @@ static void __init emev2_add_standard_devices_dt(void)
 }
 
 static const char *emev2_boards_compat_dt[] __initdata = {
+=======
+static const char *emev2_boards_compat_dt[] __initconst = {
+>>>>>>> v3.18
 	"renesas,emev2",
 	NULL,
 };
 
+<<<<<<< HEAD
 DT_MACHINE_START(EMEV2_DT, "Generic Emma Mobile EV2 (Flattened Device Tree)")
 	.smp		= smp_ops(emev2_smp_ops),
 	.init_early	= emev2_init_delay,
@@ -460,3 +480,14 @@ DT_MACHINE_START(EMEV2_DT, "Generic Emma Mobile EV2 (Flattened Device Tree)")
 MACHINE_END
 
 #endif /* CONFIG_USE_OF */
+=======
+extern struct smp_operations emev2_smp_ops;
+
+DT_MACHINE_START(EMEV2_DT, "Generic Emma Mobile EV2 (Flattened Device Tree)")
+	.smp		= smp_ops(emev2_smp_ops),
+	.map_io		= emev2_map_io,
+	.init_early	= shmobile_init_delay,
+	.init_late	= shmobile_init_late,
+	.dt_compat	= emev2_boards_compat_dt,
+MACHINE_END
+>>>>>>> v3.18

@@ -44,12 +44,24 @@ static __net_init int sunrpc_init_net(struct net *net)
 	if (err)
 		goto err_unixgid;
 
+<<<<<<< HEAD
 	rpc_pipefs_init_net(net);
+=======
+	err = rpc_pipefs_init_net(net);
+	if (err)
+		goto err_pipefs;
+
+>>>>>>> v3.18
 	INIT_LIST_HEAD(&sn->all_clients);
 	spin_lock_init(&sn->rpc_client_lock);
 	spin_lock_init(&sn->rpcb_clnt_lock);
 	return 0;
 
+<<<<<<< HEAD
+=======
+err_pipefs:
+	unix_gid_cache_destroy(net);
+>>>>>>> v3.18
 err_unixgid:
 	ip_map_cache_destroy(net);
 err_ipmap:
@@ -60,6 +72,10 @@ err_proc:
 
 static __net_exit void sunrpc_exit_net(struct net *net)
 {
+<<<<<<< HEAD
+=======
+	rpc_pipefs_exit_net(net);
+>>>>>>> v3.18
 	unix_gid_cache_destroy(net);
 	ip_map_cache_destroy(net);
 	rpc_proc_exit(net);

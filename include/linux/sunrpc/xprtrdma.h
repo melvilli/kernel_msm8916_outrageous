@@ -62,8 +62,11 @@
 #define RPCRDMA_INLINE_PAD_THRESH  (512)/* payload threshold to pad (bytes) */
 
 /* memory registration strategies */
+<<<<<<< HEAD
 #define RPCRDMA_PERSISTENT_REGISTRATION (1)
 
+=======
+>>>>>>> v3.18
 enum rpcrdma_memreg {
 	RPCRDMA_BOUNCEBUFFERS = 0,
 	RPCRDMA_REGISTER,

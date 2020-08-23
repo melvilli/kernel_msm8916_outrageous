@@ -4,7 +4,10 @@
  * Copyright (C) 2001-2003 Andreas Gruenbacher, <agruen@suse.de>
  */
 
+<<<<<<< HEAD
 #include <linux/capability.h>
+=======
+>>>>>>> v3.18
 #include <linux/init.h>
 #include <linux/sched.h>
 #include <linux/slab.h>
@@ -148,6 +151,7 @@ ext2_get_acl(struct inode *inode, int type)
 	struct posix_acl *acl;
 	int retval;
 
+<<<<<<< HEAD
 	if (!test_opt(inode->i_sb, POSIX_ACL))
 		return NULL;
 
@@ -155,6 +159,8 @@ ext2_get_acl(struct inode *inode, int type)
 	if (acl != ACL_NOT_CACHED)
 		return acl;
 
+=======
+>>>>>>> v3.18
 	switch (type) {
 	case ACL_TYPE_ACCESS:
 		name_index = EXT2_XATTR_INDEX_POSIX_ACL_ACCESS;
@@ -189,29 +195,49 @@ ext2_get_acl(struct inode *inode, int type)
 /*
  * inode->i_mutex: down
  */
+<<<<<<< HEAD
 static int
 ext2_set_acl(struct inode *inode, int type, struct posix_acl *acl)
+=======
+int
+ext2_set_acl(struct inode *inode, struct posix_acl *acl, int type)
+>>>>>>> v3.18
 {
 	int name_index;
 	void *value = NULL;
 	size_t size = 0;
 	int error;
 
+<<<<<<< HEAD
 	if (S_ISLNK(inode->i_mode))
 		return -EOPNOTSUPP;
 	if (!test_opt(inode->i_sb, POSIX_ACL))
 		return 0;
 
+=======
+>>>>>>> v3.18
 	switch(type) {
 		case ACL_TYPE_ACCESS:
 			name_index = EXT2_XATTR_INDEX_POSIX_ACL_ACCESS;
 			if (acl) {
+<<<<<<< HEAD
 				error = posix_acl_update_mode(inode,
 					&inode->i_mode, &acl);
 				if (error)
 					return error;
 				inode->i_ctime = CURRENT_TIME_SEC;
 				mark_inode_dirty(inode);
+=======
+				error = posix_acl_equiv_mode(acl, &inode->i_mode);
+				if (error < 0)
+					return error;
+				else {
+					inode->i_ctime = CURRENT_TIME_SEC;
+					mark_inode_dirty(inode);
+					if (error == 0)
+						acl = NULL;
+				}
+>>>>>>> v3.18
 			}
 			break;
 
@@ -247,6 +273,7 @@ ext2_set_acl(struct inode *inode, int type, struct posix_acl *acl)
 int
 ext2_init_acl(struct inode *inode, struct inode *dir)
 {
+<<<<<<< HEAD
 	struct posix_acl *acl = NULL;
 	int error = 0;
 
@@ -413,3 +440,23 @@ const struct xattr_handler ext2_xattr_acl_default_handler = {
 	.get	= ext2_xattr_get_acl,
 	.set	= ext2_xattr_set_acl,
 };
+=======
+	struct posix_acl *default_acl, *acl;
+	int error;
+
+	error = posix_acl_create(dir, &inode->i_mode, &default_acl, &acl);
+	if (error)
+		return error;
+
+	if (default_acl) {
+		error = ext2_set_acl(inode, default_acl, ACL_TYPE_DEFAULT);
+		posix_acl_release(default_acl);
+	}
+	if (acl) {
+		if (!error)
+			error = ext2_set_acl(inode, acl, ACL_TYPE_ACCESS);
+		posix_acl_release(acl);
+	}
+	return error;
+}
+>>>>>>> v3.18

@@ -514,6 +514,10 @@ static struct ptp_clock_info ptp_pch_caps = {
 	.name		= "PCH timer",
 	.max_adj	= 50000000,
 	.n_ext_ts	= N_EXT_TS,
+<<<<<<< HEAD
+=======
+	.n_pins		= 0,
+>>>>>>> v3.18
 	.pps		= 0,
 	.adjfreq	= ptp_pch_adjfreq,
 	.adjtime	= ptp_pch_adjtime,
@@ -690,7 +694,11 @@ err_pci_en:
 	return ret;
 }
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(pch_ieee1588_pcidev_id) = {
+=======
+static const struct pci_device_id pch_ieee1588_pcidev_id[] = {
+>>>>>>> v3.18
 	{
 	  .vendor = PCI_VENDOR_ID_INTEL,
 	  .device = PCI_DEVICE_ID_PCH_1588

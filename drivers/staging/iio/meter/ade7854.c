@@ -100,9 +100,15 @@ static ssize_t ade7854_write_8bit(struct device *dev,
 	struct ade7854_state *st = iio_priv(indio_dev);
 
 	int ret;
+<<<<<<< HEAD
 	long val;
 
 	ret = strict_strtol(buf, 10, &val);
+=======
+	u8 val;
+
+	ret = kstrtou8(buf, 10, &val);
+>>>>>>> v3.18
 	if (ret)
 		goto error_ret;
 	ret = st->write_reg_8(dev, this_attr->address, val);
@@ -121,9 +127,15 @@ static ssize_t ade7854_write_16bit(struct device *dev,
 	struct ade7854_state *st = iio_priv(indio_dev);
 
 	int ret;
+<<<<<<< HEAD
 	long val;
 
 	ret = strict_strtol(buf, 10, &val);
+=======
+	u16 val;
+
+	ret = kstrtou16(buf, 10, &val);
+>>>>>>> v3.18
 	if (ret)
 		goto error_ret;
 	ret = st->write_reg_16(dev, this_attr->address, val);
@@ -142,9 +154,15 @@ static ssize_t ade7854_write_24bit(struct device *dev,
 	struct ade7854_state *st = iio_priv(indio_dev);
 
 	int ret;
+<<<<<<< HEAD
 	long val;
 
 	ret = strict_strtol(buf, 10, &val);
+=======
+	u32 val;
+
+	ret = kstrtou32(buf, 10, &val);
+>>>>>>> v3.18
 	if (ret)
 		goto error_ret;
 	ret = st->write_reg_24(dev, this_attr->address, val);
@@ -163,9 +181,15 @@ static ssize_t ade7854_write_32bit(struct device *dev,
 	struct ade7854_state *st = iio_priv(indio_dev);
 
 	int ret;
+<<<<<<< HEAD
 	long val;
 
 	ret = strict_strtol(buf, 10, &val);
+=======
+	u32 val;
+
+	ret = kstrtou32(buf, 10, &val);
+>>>>>>> v3.18
 	if (ret)
 		goto error_ret;
 	ret = st->write_reg_32(dev, this_attr->address, val);
@@ -186,6 +210,7 @@ static int ade7854_reset(struct device *dev)
 	return st->write_reg_16(dev, ADE7854_CONFIG, val);
 }
 
+<<<<<<< HEAD
 
 static ssize_t ade7854_write_reset(struct device *dev,
 		struct device_attribute *attr,
@@ -202,6 +227,8 @@ static ssize_t ade7854_write_reset(struct device *dev,
 	return -1;
 }
 
+=======
+>>>>>>> v3.18
 static IIO_DEV_ATTR_AIGAIN(S_IWUSR | S_IRUGO,
 		ade7854_read_24bit,
 		ade7854_write_24bit,
@@ -468,8 +495,11 @@ err_ret:
 	return ret;
 }
 
+<<<<<<< HEAD
 static IIO_DEV_ATTR_RESET(ade7854_write_reset);
 
+=======
+>>>>>>> v3.18
 static IIO_CONST_ATTR_SAMP_FREQ_AVAIL("8000");
 
 static IIO_CONST_ATTR(name, "ade7854");
@@ -515,7 +545,10 @@ static struct attribute *ade7854_attributes[] = {
 	&iio_dev_attr_bvahr.dev_attr.attr,
 	&iio_dev_attr_cvahr.dev_attr.attr,
 	&iio_const_attr_sampling_frequency_available.dev_attr.attr,
+<<<<<<< HEAD
 	&iio_dev_attr_reset.dev_attr.attr,
+=======
+>>>>>>> v3.18
 	&iio_const_attr_name.dev_attr.attr,
 	&iio_dev_attr_vpeak.dev_attr.attr,
 	&iio_dev_attr_ipeak.dev_attr.attr,
@@ -569,7 +602,11 @@ int ade7854_probe(struct iio_dev *indio_dev, struct device *dev)
 
 	ret = iio_device_register(indio_dev);
 	if (ret)
+<<<<<<< HEAD
 		goto error_free_dev;
+=======
+		return ret;
+>>>>>>> v3.18
 
 	/* Get the device into a sane initial state */
 	ret = ade7854_initial_setup(indio_dev);
@@ -580,9 +617,12 @@ int ade7854_probe(struct iio_dev *indio_dev, struct device *dev)
 
 error_unreg_dev:
 	iio_device_unregister(indio_dev);
+<<<<<<< HEAD
 error_free_dev:
 	iio_device_free(indio_dev);
 
+=======
+>>>>>>> v3.18
 	return ret;
 }
 EXPORT_SYMBOL(ade7854_probe);
@@ -590,7 +630,10 @@ EXPORT_SYMBOL(ade7854_probe);
 int ade7854_remove(struct iio_dev *indio_dev)
 {
 	iio_device_unregister(indio_dev);
+<<<<<<< HEAD
 	iio_device_free(indio_dev);
+=======
+>>>>>>> v3.18
 
 	return 0;
 }

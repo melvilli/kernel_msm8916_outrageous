@@ -5,6 +5,13 @@ menu "IRQ subsystem"
 config MAY_HAVE_SPARSE_IRQ
        bool
 
+<<<<<<< HEAD
+=======
+# Legacy support, required for itanic
+config GENERIC_IRQ_LEGACY
+       bool
+
+>>>>>>> v3.18
 # Enable the generic irq autoprobe mechanism
 config GENERIC_IRQ_PROBE
 	bool
@@ -17,6 +24,14 @@ config GENERIC_IRQ_SHOW
 config GENERIC_IRQ_SHOW_LEVEL
        bool
 
+<<<<<<< HEAD
+=======
+# Facility to allocate a hardware interrupt. This is legacy support
+# and should not be used in new code. Use irq domains instead.
+config GENERIC_IRQ_LEGACY_ALLOC_HWIRQ
+       bool
+
+>>>>>>> v3.18
 # Support for delayed migration from interrupt context
 config GENERIC_PENDING_IRQ
 	bool
@@ -40,11 +55,21 @@ config IRQ_EDGE_EOI_HANDLER
 # Generic configurable interrupt chip implementation
 config GENERIC_IRQ_CHIP
        bool
+<<<<<<< HEAD
+=======
+       select IRQ_DOMAIN
+>>>>>>> v3.18
 
 # Generic irq_domain hw <--> linux irq number translation
 config IRQ_DOMAIN
 	bool
 
+<<<<<<< HEAD
+=======
+config HANDLE_DOMAIN_IRQ
+	bool
+
+>>>>>>> v3.18
 config IRQ_DOMAIN_DEBUG
 	bool "Expose hardware/virtual IRQ mapping via debugfs"
 	depends on IRQ_DOMAIN && DEBUG_FS

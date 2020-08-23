@@ -37,6 +37,11 @@
 #include <linux/module.h>
 
 #include <asm/bootinfo.h>
+<<<<<<< HEAD
+=======
+#include <asm/bootinfo-atari.h>
+#include <asm/byteorder.h>
+>>>>>>> v3.18
 #include <asm/setup.h>
 #include <asm/atarihw.h>
 #include <asm/atariints.h>
@@ -129,6 +134,7 @@ static int __init scc_test(volatile char *ctla)
 int __init atari_parse_bootinfo(const struct bi_record *record)
 {
 	int unknown = 0;
+<<<<<<< HEAD
 	const u_long *data = record->data;
 
 	switch (record->tag) {
@@ -137,6 +143,16 @@ int __init atari_parse_bootinfo(const struct bi_record *record)
 		break;
 	case BI_ATARI_MCH_TYPE:
 		atari_mch_type = *data;
+=======
+	const void *data = record->data;
+
+	switch (be16_to_cpu(record->tag)) {
+	case BI_ATARI_MCH_COOKIE:
+		atari_mch_cookie = be32_to_cpup(data);
+		break;
+	case BI_ATARI_MCH_TYPE:
+		atari_mch_type = be32_to_cpup(data);
+>>>>>>> v3.18
 		break;
 	default:
 		unknown = 1;

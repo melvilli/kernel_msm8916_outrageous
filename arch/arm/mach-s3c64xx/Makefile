@@ -5,6 +5,7 @@
 #
 # Licensed under GPLv2
 
+<<<<<<< HEAD
 obj-y				:=
 obj-m				:=
 obj-n				:=
@@ -13,6 +14,11 @@ obj-				:=
 # Core
 
 obj-y				+= common.o clock.o
+=======
+# Core
+
+obj-y				+= common.o
+>>>>>>> v3.18
 
 # Core support
 
@@ -26,7 +32,11 @@ obj-$(CONFIG_CPU_IDLE)		+= cpuidle.o
 
 # DMA support
 
+<<<<<<< HEAD
 obj-$(CONFIG_S3C64XX_DMA)	+= dma.o
+=======
+obj-$(CONFIG_S3C64XX_PL080)	+= pl080.o
+>>>>>>> v3.18
 
 # Device support
 
@@ -57,3 +67,7 @@ obj-$(CONFIG_MACH_SMARTQ7)		+= mach-smartq7.o
 obj-$(CONFIG_MACH_SMDK6400)		+= mach-smdk6400.o
 obj-$(CONFIG_MACH_SMDK6410)		+= mach-smdk6410.o
 obj-$(CONFIG_MACH_WLF_CRAGG_6410)	+= mach-crag6410.o mach-crag6410-module.o
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_MACH_S3C64XX_DT)		+= mach-s3c64xx-dt.o
+>>>>>>> v3.18

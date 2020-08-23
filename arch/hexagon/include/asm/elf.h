@@ -1,7 +1,11 @@
 /*
  * ELF definitions for the Hexagon architecture
  *
+<<<<<<< HEAD
  * Copyright (c) 2010-2012, The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2010-2013, The Linux Foundation. All rights reserved.
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -202,7 +206,11 @@ do {					\
 #define CORE_DUMP_USE_REGSET
 
 /* Hrm is this going to cause problems for changing PAGE_SIZE?  */
+<<<<<<< HEAD
 #define ELF_EXEC_PAGESIZE	4096
+=======
+#define ELF_EXEC_PAGESIZE	PAGE_SIZE
+>>>>>>> v3.18
 
 /*
  * This is the location that an ET_DYN program is loaded if exec'ed.  Typical

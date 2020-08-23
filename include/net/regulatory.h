@@ -38,6 +38,7 @@ enum environment_cap {
  *
  * @rcu_head: RCU head struct used to free the request
  * @wiphy_idx: this is set if this request's initiator is
+<<<<<<< HEAD
  * 	%REGDOM_SET_BY_COUNTRY_IE or %REGDOM_SET_BY_DRIVER. This
  * 	can be used by the wireless core to deal with conflicts
  * 	and potentially inform users of which devices specifically
@@ -49,6 +50,19 @@ enum environment_cap {
  * 	00 - World regulatory domain
  * 	99 - built by driver but a specific alpha2 cannot be determined
  * 	98 - result of an intersection between two regulatory domains
+=======
+ *	%REGDOM_SET_BY_COUNTRY_IE or %REGDOM_SET_BY_DRIVER. This
+ *	can be used by the wireless core to deal with conflicts
+ *	and potentially inform users of which devices specifically
+ *	cased the conflicts.
+ * @initiator: indicates who sent this request, could be any of
+ *	of those set in nl80211_reg_initiator (%NL80211_REGDOM_SET_BY_*)
+ * @alpha2: the ISO / IEC 3166 alpha2 country code of the requested
+ *	regulatory domain. We have a few special codes:
+ *	00 - World regulatory domain
+ *	99 - built by driver but a specific alpha2 cannot be determined
+ *	98 - result of an intersection between two regulatory domains
+>>>>>>> v3.18
  *	97 - regulatory domain has not yet been configured
  * @dfs_region: If CRDA responded with a regulatory domain that requires
  *	DFS master operation on a known DFS region (NL80211_DFS_*),
@@ -59,8 +73,13 @@ enum environment_cap {
  *	of hint passed. This could be any of the %NL80211_USER_REG_HINT_*
  *	types.
  * @intersect: indicates whether the wireless core should intersect
+<<<<<<< HEAD
  * 	the requested regulatory domain with the presently set regulatory
  * 	domain.
+=======
+ *	the requested regulatory domain with the presently set regulatory
+ *	domain.
+>>>>>>> v3.18
  * @processed: indicates whether or not this requests has already been
  *	processed. When the last request is processed it means that the
  *	currently regulatory domain set on cfg80211 is updated from
@@ -68,9 +87,15 @@ enum environment_cap {
  *	the last request is not yet processed we must yield until it
  *	is processed before processing any new requests.
  * @country_ie_checksum: checksum of the last processed and accepted
+<<<<<<< HEAD
  * 	country IE
  * @country_ie_env: lets us know if the AP is telling us we are outdoor,
  * 	indoor, or if it doesn't matter
+=======
+ *	country IE
+ * @country_ie_env: lets us know if the AP is telling us we are outdoor,
+ *	indoor, or if it doesn't matter
+>>>>>>> v3.18
  * @list: used to insert into the reg_requests_list linked list
  */
 struct regulatory_request {
@@ -79,13 +104,80 @@ struct regulatory_request {
 	enum nl80211_reg_initiator initiator;
 	enum nl80211_user_reg_hint_type user_reg_hint_type;
 	char alpha2[2];
+<<<<<<< HEAD
 	u8 dfs_region;
+=======
+	enum nl80211_dfs_regions dfs_region;
+>>>>>>> v3.18
 	bool intersect;
 	bool processed;
 	enum environment_cap country_ie_env;
 	struct list_head list;
 };
 
+<<<<<<< HEAD
+=======
+/**
+ * enum ieee80211_regulatory_flags - device regulatory flags
+ *
+ * @REGULATORY_CUSTOM_REG: tells us the driver for this device
+ *	has its own custom regulatory domain and cannot identify the
+ *	ISO / IEC 3166 alpha2 it belongs to. When this is enabled
+ *	we will disregard the first regulatory hint (when the
+ *	initiator is %REGDOM_SET_BY_CORE). Drivers that use
+ *	wiphy_apply_custom_regulatory() should have this flag set
+ *	or the regulatory core will set it for the wiphy.
+ *	If you use regulatory_hint() *after* using
+ *	wiphy_apply_custom_regulatory() the wireless core will
+ *	clear the REGULATORY_CUSTOM_REG for your wiphy as it would be
+ *	implied that the device somehow gained knowledge of its region.
+ * @REGULATORY_STRICT_REG: tells us that the wiphy for this device
+ *	has regulatory domain that it wishes to be considered as the
+ *	superset for regulatory rules. After this device gets its regulatory
+ *	domain programmed further regulatory hints shall only be considered
+ *	for this device to enhance regulatory compliance, forcing the
+ *	device to only possibly use subsets of the original regulatory
+ *	rules. For example if channel 13 and 14 are disabled by this
+ *	device's regulatory domain no user specified regulatory hint which
+ *	has these channels enabled would enable them for this wiphy,
+ *	the device's original regulatory domain will be trusted as the
+ *	base. You can program the superset of regulatory rules for this
+ *	wiphy with regulatory_hint() for cards programmed with an
+ *	ISO3166-alpha2 country code. wiphys that use regulatory_hint()
+ *	will have their wiphy->regd programmed once the regulatory
+ *	domain is set, and all other regulatory hints will be ignored
+ *	until their own regulatory domain gets programmed.
+ * @REGULATORY_DISABLE_BEACON_HINTS: enable this if your driver needs to
+ *	ensure that passive scan flags and beaconing flags may not be lifted by
+ *	cfg80211 due to regulatory beacon hints. For more information on beacon
+ *	hints read the documenation for regulatory_hint_found_beacon()
+ * @REGULATORY_COUNTRY_IE_FOLLOW_POWER:  for devices that have a preference
+ *	that even though they may have programmed their own custom power
+ *	setting prior to wiphy registration, they want to ensure their channel
+ *	power settings are updated for this connection with the power settings
+ *	derived from the regulatory domain. The regulatory domain used will be
+ *	based on the ISO3166-alpha2 from country IE provided through
+ *	regulatory_hint_country_ie()
+ * @REGULATORY_COUNTRY_IE_IGNORE: for devices that have a preference to ignore
+ * 	all country IE information processed by the regulatory core. This will
+ * 	override %REGULATORY_COUNTRY_IE_FOLLOW_POWER as all country IEs will
+ * 	be ignored.
+ * @REGULATORY_ENABLE_RELAX_NO_IR: for devices that wish to allow the
+ *      NO_IR relaxation, which enables transmissions on channels on which
+ *      otherwise initiating radiation is not allowed. This will enable the
+ *      relaxations enabled under the CFG80211_REG_RELAX_NO_IR configuration
+ *      option
+ */
+enum ieee80211_regulatory_flags {
+	REGULATORY_CUSTOM_REG			= BIT(0),
+	REGULATORY_STRICT_REG			= BIT(1),
+	REGULATORY_DISABLE_BEACON_HINTS		= BIT(2),
+	REGULATORY_COUNTRY_IE_FOLLOW_POWER	= BIT(3),
+	REGULATORY_COUNTRY_IE_IGNORE		= BIT(4),
+	REGULATORY_ENABLE_RELAX_NO_IR           = BIT(5),
+};
+
+>>>>>>> v3.18
 struct ieee80211_freq_range {
 	u32 start_freq_khz;
 	u32 end_freq_khz;
@@ -101,13 +193,22 @@ struct ieee80211_reg_rule {
 	struct ieee80211_freq_range freq_range;
 	struct ieee80211_power_rule power_rule;
 	u32 flags;
+<<<<<<< HEAD
+=======
+	u32 dfs_cac_ms;
+>>>>>>> v3.18
 };
 
 struct ieee80211_regdomain {
 	struct rcu_head rcu_head;
 	u32 n_reg_rules;
+<<<<<<< HEAD
 	char alpha2[2];
 	u8 dfs_region;
+=======
+	char alpha2[3];
+	enum nl80211_dfs_regions dfs_region;
+>>>>>>> v3.18
 	struct ieee80211_reg_rule reg_rules[];
 };
 
@@ -118,6 +219,7 @@ struct ieee80211_regdomain {
 #define DBM_TO_MBM(gain) ((gain) * 100)
 #define MBM_TO_DBM(gain) ((gain) / 100)
 
+<<<<<<< HEAD
 #define REG_RULE(start, end, bw, gain, eirp, reg_flags) \
 {							\
 	.freq_range.start_freq_khz = MHZ_TO_KHZ(start),	\
@@ -128,4 +230,20 @@ struct ieee80211_regdomain {
 	.flags = reg_flags,				\
 }
 
+=======
+#define REG_RULE_EXT(start, end, bw, gain, eirp, dfs_cac, reg_flags)	\
+{									\
+	.freq_range.start_freq_khz = MHZ_TO_KHZ(start),			\
+	.freq_range.end_freq_khz = MHZ_TO_KHZ(end),			\
+	.freq_range.max_bandwidth_khz = MHZ_TO_KHZ(bw),			\
+	.power_rule.max_antenna_gain = DBI_TO_MBI(gain),		\
+	.power_rule.max_eirp = DBM_TO_MBM(eirp),			\
+	.flags = reg_flags,						\
+	.dfs_cac_ms = dfs_cac,						\
+}
+
+#define REG_RULE(start, end, bw, gain, eirp, reg_flags) \
+	REG_RULE_EXT(start, end, bw, gain, eirp, 0, reg_flags)
+
+>>>>>>> v3.18
 #endif

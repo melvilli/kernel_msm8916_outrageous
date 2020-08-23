@@ -72,8 +72,11 @@ enum {
 	REG_UIC_COMMAND_ARG_1			= 0x94,
 	REG_UIC_COMMAND_ARG_2			= 0x98,
 	REG_UIC_COMMAND_ARG_3			= 0x9C,
+<<<<<<< HEAD
 
 	UFSHCI_REG_SPACE_SIZE			= 0xA0,
+=======
+>>>>>>> v3.18
 };
 
 /* Controller capability masks */
@@ -93,7 +96,10 @@ enum {
 enum {
 	UFSHCI_VERSION_10 = 0x00010000,
 	UFSHCI_VERSION_11 = 0x00010100,
+<<<<<<< HEAD
 	UFSHCI_VERSION_20 = 0x00020000,
+=======
+>>>>>>> v3.18
 };
 
 /*
@@ -167,7 +173,10 @@ enum {
 /* UECPA - Host UIC Error Code PHY Adapter Layer 38h */
 #define UIC_PHY_ADAPTER_LAYER_ERROR			UFS_BIT(31)
 #define UIC_PHY_ADAPTER_LAYER_ERROR_CODE_MASK		0x1F
+<<<<<<< HEAD
 #define UIC_PHY_ADAPTER_LAYER_LANE_ERR_MASK		0xF
+=======
+>>>>>>> v3.18
 
 /* UECDL - Host UIC Error Code Data Link Layer 3Ch */
 #define UIC_DATA_LINK_LAYER_ERROR		UFS_BIT(31)

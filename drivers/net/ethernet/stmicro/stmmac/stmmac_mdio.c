@@ -27,6 +27,12 @@
 #include <linux/mii.h>
 #include <linux/phy.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+#include <linux/of_gpio.h>
+
+>>>>>>> v3.18
 #include <asm/io.h>
 
 #include "stmmac.h"
@@ -125,16 +131,62 @@ static int stmmac_mdio_write(struct mii_bus *bus, int phyaddr, int phyreg,
  * @bus: points to the mii_bus structure
  * Description: reset the MII bus
  */
+<<<<<<< HEAD
 static int stmmac_mdio_reset(struct mii_bus *bus)
+=======
+int stmmac_mdio_reset(struct mii_bus *bus)
+>>>>>>> v3.18
 {
 #if defined(CONFIG_STMMAC_PLATFORM)
 	struct net_device *ndev = bus->priv;
 	struct stmmac_priv *priv = netdev_priv(ndev);
 	unsigned int mii_address = priv->hw->mii.addr;
+<<<<<<< HEAD
 
 	if (priv->plat->mdio_bus_data->phy_reset) {
 		pr_debug("stmmac_mdio_reset: calling phy_reset\n");
 		priv->plat->mdio_bus_data->phy_reset(priv->plat->bsp_priv);
+=======
+	struct stmmac_mdio_bus_data *data = priv->plat->mdio_bus_data;
+
+#ifdef CONFIG_OF
+	if (priv->device->of_node) {
+		int reset_gpio, active_low;
+
+		if (data->reset_gpio < 0) {
+			struct device_node *np = priv->device->of_node;
+			if (!np)
+				return 0;
+
+			data->reset_gpio = of_get_named_gpio(np,
+						"snps,reset-gpio", 0);
+			if (data->reset_gpio < 0)
+				return 0;
+
+			data->active_low = of_property_read_bool(np,
+						"snps,reset-active-low");
+			of_property_read_u32_array(np,
+				"snps,reset-delays-us", data->delays, 3);
+		}
+
+		reset_gpio = data->reset_gpio;
+		active_low = data->active_low;
+
+		if (!gpio_request(reset_gpio, "mdio-reset")) {
+			gpio_direction_output(reset_gpio, active_low ? 1 : 0);
+			udelay(data->delays[0]);
+			gpio_set_value(reset_gpio, active_low ? 0 : 1);
+			udelay(data->delays[1]);
+			gpio_set_value(reset_gpio, active_low ? 1 : 0);
+			udelay(data->delays[2]);
+		}
+	}
+#endif
+
+	if (data->phy_reset) {
+		pr_debug("stmmac_mdio_reset: calling phy_reset\n");
+		data->phy_reset(priv->plat->bsp_priv);
+>>>>>>> v3.18
 	}
 
 	/* This is a workaround for problems with the STE101P PHY.
@@ -167,10 +219,25 @@ int stmmac_mdio_register(struct net_device *ndev)
 	if (new_bus == NULL)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 	if (mdio_bus_data->irqs)
 		irqlist = mdio_bus_data->irqs;
 	else
 		irqlist = priv->mii_irq;
+=======
+	if (mdio_bus_data->irqs) {
+		irqlist = mdio_bus_data->irqs;
+	} else {
+		for (addr = 0; addr < PHY_MAX_ADDR; addr++)
+			priv->mii_irq[addr] = PHY_POLL;
+		irqlist = priv->mii_irq;
+	}
+
+#ifdef CONFIG_OF
+	if (priv->device->of_node)
+		mdio_bus_data->reset_gpio = -1;
+#endif
+>>>>>>> v3.18
 
 	new_bus->name = "stmmac";
 	new_bus->read = &stmmac_mdio_read;
@@ -207,7 +274,11 @@ int stmmac_mdio_register(struct net_device *ndev)
 			}
 
 			/*
+<<<<<<< HEAD
 			 * If we're  going to bind the MAC to this PHY bus,
+=======
+			 * If we're going to bind the MAC to this PHY bus,
+>>>>>>> v3.18
 			 * and no PHY number was provided to the MAC,
 			 * use the one probed here.
 			 */
@@ -236,7 +307,11 @@ int stmmac_mdio_register(struct net_device *ndev)
 	}
 
 	if (!found) {
+<<<<<<< HEAD
 		pr_warning("%s: No PHY found\n", ndev->name);
+=======
+		pr_warn("%s: No PHY found\n", ndev->name);
+>>>>>>> v3.18
 		mdiobus_unregister(new_bus);
 		mdiobus_free(new_bus);
 		return -ENODEV;

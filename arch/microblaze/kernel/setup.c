@@ -9,12 +9,21 @@
  */
 
 #include <linux/init.h>
+<<<<<<< HEAD
+=======
+#include <linux/clk-provider.h>
+#include <linux/clocksource.h>
+>>>>>>> v3.18
 #include <linux/string.h>
 #include <linux/seq_file.h>
 #include <linux/cpu.h>
 #include <linux/initrd.h>
 #include <linux/console.h>
 #include <linux/debugfs.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_fdt.h>
+>>>>>>> v3.18
 
 #include <asm/setup.h>
 #include <asm/sections.h>
@@ -49,7 +58,11 @@ char cmd_line[COMMAND_LINE_SIZE] __attribute__ ((section(".data")));
 
 void __init setup_arch(char **cmdline_p)
 {
+<<<<<<< HEAD
 	*cmdline_p = cmd_line;
+=======
+	*cmdline_p = boot_command_line;
+>>>>>>> v3.18
 
 	console_verbose();
 
@@ -68,6 +81,7 @@ void __init setup_arch(char **cmdline_p)
 
 	xilinx_pci_init();
 
+<<<<<<< HEAD
 #if defined(CONFIG_SELFMOD_INTC) || defined(CONFIG_SELFMOD_TIMER)
 	pr_notice("Self modified code enable\n");
 #endif
@@ -79,6 +93,11 @@ void __init setup_arch(char **cmdline_p)
 	conswitchp = &dummy_con;
 #endif
 #endif
+=======
+#if defined(CONFIG_DUMMY_CONSOLE)
+	conswitchp = &dummy_con;
+#endif
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_MTD_UCLINUX
@@ -138,7 +157,11 @@ void __init machine_early_init(const char *cmdline, unsigned int ram,
 	lockdep_init();
 
 /* initialize device tree for usage in early_printk */
+<<<<<<< HEAD
 	early_init_devtree((void *)_fdt_start);
+=======
+	early_init_devtree(_fdt_start);
+>>>>>>> v3.18
 
 #ifdef CONFIG_EARLY_PRINTK
 	setup_early_printk(NULL);
@@ -154,8 +177,12 @@ void __init machine_early_init(const char *cmdline, unsigned int ram,
 	if (fdt)
 		pr_info("FDT at 0x%08x\n", fdt);
 	else
+<<<<<<< HEAD
 		pr_info("Compiled-in FDT at 0x%08x\n",
 					(unsigned int)_fdt_start);
+=======
+		pr_info("Compiled-in FDT at %p\n", _fdt_start);
+>>>>>>> v3.18
 
 #ifdef CONFIG_MTD_UCLINUX
 	pr_info("Found romfs @ 0x%08x (0x%08x)\n",
@@ -177,7 +204,11 @@ void __init machine_early_init(const char *cmdline, unsigned int ram,
 #else
 	if (!msr) {
 		pr_info("!!!Your kernel not setup MSR instruction but ");
+<<<<<<< HEAD
 		pr_cont"CPU have it %x\n", msr);
+=======
+		pr_cont("CPU have it %x\n", msr);
+>>>>>>> v3.18
 	}
 #endif
 
@@ -196,6 +227,16 @@ void __init machine_early_init(const char *cmdline, unsigned int ram,
 	per_cpu(CURRENT_SAVE, 0) = (unsigned long)current;
 }
 
+<<<<<<< HEAD
+=======
+void __init time_init(void)
+{
+	of_clk_init(NULL);
+	setup_cpuinfo_clk();
+	clocksource_of_init();
+}
+
+>>>>>>> v3.18
 #ifdef CONFIG_DEBUG_FS
 struct dentry *of_debugfs_root;
 
@@ -224,6 +265,7 @@ static int __init debugfs_tlb(void)
 device_initcall(debugfs_tlb);
 # endif
 #endif
+<<<<<<< HEAD
 
 static int dflt_bus_notify(struct notifier_block *nb,
 				unsigned long action, void *data)
@@ -252,3 +294,5 @@ static int __init setup_bus_notifier(void)
 }
 
 arch_initcall(setup_bus_notifier);
+=======
+>>>>>>> v3.18

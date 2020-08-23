@@ -20,6 +20,7 @@
 #ifndef __ASM_ARCH_MEMORY_H
 #define __ASM_ARCH_MEMORY_H
 
+<<<<<<< HEAD
 /*
  * Physical DRAM offset.
  */
@@ -29,6 +30,8 @@
 #define PLAT_PHYS_OFFSET		UL(0x00000000)
 #endif
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SPARSEMEM
 
 /*

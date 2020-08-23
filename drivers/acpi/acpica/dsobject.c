@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -240,7 +244,11 @@ acpi_ds_build_internal_object(struct acpi_walk_state *walk_state,
 		return_ACPI_STATUS(status);
 	}
 
+<<<<<<< HEAD
       exit:
+=======
+exit:
+>>>>>>> v3.18
 	*obj_desc_ptr = obj_desc;
 	return_ACPI_STATUS(status);
 }
@@ -648,7 +656,10 @@ acpi_ds_init_object_from_op(struct acpi_walk_state *walk_state,
 
 	switch (obj_desc->common.type) {
 	case ACPI_TYPE_BUFFER:
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 		/*
 		 * Defer evaluation of Buffer term_arg operand
 		 */
@@ -660,7 +671,10 @@ acpi_ds_init_object_from_op(struct acpi_walk_state *walk_state,
 		break;
 
 	case ACPI_TYPE_PACKAGE:
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 		/*
 		 * Defer evaluation of Package term_arg operand
 		 */
@@ -741,6 +755,10 @@ acpi_ds_init_object_from_op(struct acpi_walk_state *walk_state,
 			break;
 
 		default:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 			ACPI_ERROR((AE_INFO, "Unknown Integer type 0x%X",
 				    op_info->type));
 			status = AE_AML_OPERAND_TYPE;

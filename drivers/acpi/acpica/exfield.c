@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -45,10 +49,77 @@
 #include "accommon.h"
 #include "acdispat.h"
 #include "acinterp.h"
+<<<<<<< HEAD
+=======
+#include "amlcode.h"
+>>>>>>> v3.18
 
 #define _COMPONENT          ACPI_EXECUTER
 ACPI_MODULE_NAME("exfield")
 
+<<<<<<< HEAD
+=======
+/* Local prototypes */
+static u32
+acpi_ex_get_serial_access_length(u32 accessor_type, u32 access_length);
+
+/*******************************************************************************
+ *
+ * FUNCTION:    acpi_ex_get_serial_access_length
+ *
+ * PARAMETERS:  accessor_type   - The type of the protocol indicated by region
+ *                                field access attributes
+ *              access_length   - The access length of the region field
+ *
+ * RETURN:      Decoded access length
+ *
+ * DESCRIPTION: This routine returns the length of the generic_serial_bus
+ *              protocol bytes
+ *
+ ******************************************************************************/
+
+static u32
+acpi_ex_get_serial_access_length(u32 accessor_type, u32 access_length)
+{
+	u32 length;
+
+	switch (accessor_type) {
+	case AML_FIELD_ATTRIB_QUICK:
+
+		length = 0;
+		break;
+
+	case AML_FIELD_ATTRIB_SEND_RCV:
+	case AML_FIELD_ATTRIB_BYTE:
+
+		length = 1;
+		break;
+
+	case AML_FIELD_ATTRIB_WORD:
+	case AML_FIELD_ATTRIB_WORD_CALL:
+
+		length = 2;
+		break;
+
+	case AML_FIELD_ATTRIB_MULTIBYTE:
+	case AML_FIELD_ATTRIB_RAW_BYTES:
+	case AML_FIELD_ATTRIB_RAW_PROCESS:
+
+		length = access_length;
+		break;
+
+	case AML_FIELD_ATTRIB_BLOCK:
+	case AML_FIELD_ATTRIB_BLOCK_CALL:
+	default:
+
+		length = ACPI_GSBUS_BUFFER_SIZE - 2;
+		break;
+	}
+
+	return (length);
+}
+
+>>>>>>> v3.18
 /*******************************************************************************
  *
  * FUNCTION:    acpi_ex_read_data_from_field
@@ -63,8 +134,14 @@ ACPI_MODULE_NAME("exfield")
  *              Buffer, depending on the size of the field.
  *
  ******************************************************************************/
+<<<<<<< HEAD
 acpi_status
 acpi_ex_read_data_from_field(struct acpi_walk_state *walk_state,
+=======
+
+acpi_status
+acpi_ex_read_data_from_field(struct acpi_walk_state * walk_state,
+>>>>>>> v3.18
 			     union acpi_operand_object *obj_desc,
 			     union acpi_operand_object **ret_buffer_desc)
 {
@@ -73,6 +150,10 @@ acpi_ex_read_data_from_field(struct acpi_walk_state *walk_state,
 	acpi_size length;
 	void *buffer;
 	u32 function;
+<<<<<<< HEAD
+=======
+	u16 accessor_type;
+>>>>>>> v3.18
 
 	ACPI_FUNCTION_TRACE_PTR(ex_read_data_from_field, obj_desc);
 
@@ -116,9 +197,27 @@ acpi_ex_read_data_from_field(struct acpi_walk_state *walk_state,
 			    ACPI_READ | (obj_desc->field.attribute << 16);
 		} else if (obj_desc->field.region_obj->region.space_id ==
 			   ACPI_ADR_SPACE_GSBUS) {
+<<<<<<< HEAD
 			length = ACPI_GSBUS_BUFFER_SIZE;
 			function =
 			    ACPI_READ | (obj_desc->field.attribute << 16);
+=======
+			accessor_type = obj_desc->field.attribute;
+			length = acpi_ex_get_serial_access_length(accessor_type,
+								  obj_desc->
+								  field.
+								  access_length);
+
+			/*
+			 * Add additional 2 bytes for the generic_serial_bus data buffer:
+			 *
+			 *     Status;      (Byte 0 of the data buffer)
+			 *     Length;      (Byte 1 of the data buffer)
+			 *     Data[x-1];   (Bytes 2-x of the arbitrary length data buffer)
+			 */
+			length += 2;
+			function = ACPI_READ | (accessor_type << 16);
+>>>>>>> v3.18
 		} else {	/* IPMI */
 
 			length = ACPI_IPMI_BUFFER_SIZE;
@@ -228,7 +327,11 @@ acpi_ex_read_data_from_field(struct acpi_walk_state *walk_state,
 	status = acpi_ex_extract_from_field(obj_desc, buffer, (u32) length);
 	acpi_ex_release_global_lock(obj_desc->common_field.field_flags);
 
+<<<<<<< HEAD
       exit:
+=======
+exit:
+>>>>>>> v3.18
 	if (ACPI_FAILURE(status)) {
 		acpi_ut_remove_reference(buffer_desc);
 	} else {
@@ -262,6 +365,10 @@ acpi_ex_write_data_to_field(union acpi_operand_object *source_desc,
 	void *buffer;
 	union acpi_operand_object *buffer_desc;
 	u32 function;
+<<<<<<< HEAD
+=======
+	u16 accessor_type;
+>>>>>>> v3.18
 
 	ACPI_FUNCTION_TRACE_PTR(ex_write_data_to_field, obj_desc);
 
@@ -315,9 +422,27 @@ acpi_ex_write_data_to_field(union acpi_operand_object *source_desc,
 			    ACPI_WRITE | (obj_desc->field.attribute << 16);
 		} else if (obj_desc->field.region_obj->region.space_id ==
 			   ACPI_ADR_SPACE_GSBUS) {
+<<<<<<< HEAD
 			length = ACPI_GSBUS_BUFFER_SIZE;
 			function =
 			    ACPI_WRITE | (obj_desc->field.attribute << 16);
+=======
+			accessor_type = obj_desc->field.attribute;
+			length = acpi_ex_get_serial_access_length(accessor_type,
+								  obj_desc->
+								  field.
+								  access_length);
+
+			/*
+			 * Add additional 2 bytes for the generic_serial_bus data buffer:
+			 *
+			 *     Status;      (Byte 0 of the data buffer)
+			 *     Length;      (Byte 1 of the data buffer)
+			 *     Data[x-1];   (Bytes 2-x of the arbitrary length data buffer)
+			 */
+			length += 2;
+			function = ACPI_WRITE | (accessor_type << 16);
+>>>>>>> v3.18
 		} else {	/* IPMI */
 
 			length = ACPI_IPMI_BUFFER_SIZE;
@@ -398,21 +523,37 @@ acpi_ex_write_data_to_field(union acpi_operand_object *source_desc,
 
 	switch (source_desc->common.type) {
 	case ACPI_TYPE_INTEGER:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		buffer = &source_desc->integer.value;
 		length = sizeof(source_desc->integer.value);
 		break;
 
 	case ACPI_TYPE_BUFFER:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		buffer = source_desc->buffer.pointer;
 		length = source_desc->buffer.length;
 		break;
 
 	case ACPI_TYPE_STRING:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		buffer = source_desc->string.pointer;
 		length = source_desc->string.length;
 		break;
 
 	default:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		return_ACPI_STATUS(AE_AML_OPERAND_TYPE);
 	}
 

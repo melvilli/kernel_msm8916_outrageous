@@ -264,7 +264,11 @@ static int put_v4l2_create32(struct v4l2_create_buffers *kp, struct v4l2_create_
 
 struct v4l2_standard32 {
 	__u32		     index;
+<<<<<<< HEAD
 	compat_u64	     id;
+=======
+	__u32		     id[2]; /* __u64 would get the alignment wrong */
+>>>>>>> v3.18
 	__u8		     name[24];
 	struct v4l2_fract    frameperiod; /* Frames, not fields */
 	__u32		     framelines;
@@ -284,7 +288,11 @@ static int put_v4l2_standard32(struct v4l2_standard *kp, struct v4l2_standard32 
 {
 	if (!access_ok(VERIFY_WRITE, up, sizeof(struct v4l2_standard32)) ||
 		put_user(kp->index, &up->index) ||
+<<<<<<< HEAD
 		put_user(kp->id, &up->id) ||
+=======
+		copy_to_user(up->id, &kp->id, sizeof(__u64)) ||
+>>>>>>> v3.18
 		copy_to_user(up->name, kp->name, 24) ||
 		copy_to_user(&up->frameperiod, &kp->frameperiod, sizeof(kp->frameperiod)) ||
 		put_user(kp->framelines, &up->framelines) ||
@@ -328,7 +336,11 @@ struct v4l2_buffer32 {
 	__u32			reserved;
 };
 
+<<<<<<< HEAD
 static int get_v4l2_plane32(struct v4l2_plane *up, struct v4l2_plane32 *up32,
+=======
+static int get_v4l2_plane32(struct v4l2_plane __user *up, struct v4l2_plane32 __user *up32,
+>>>>>>> v3.18
 				enum v4l2_memory memory)
 {
 	void __user *up_pln;
@@ -336,10 +348,13 @@ static int get_v4l2_plane32(struct v4l2_plane *up, struct v4l2_plane32 *up32,
 
 	if (copy_in_user(up, up32, 2 * sizeof(__u32)) ||
 		copy_in_user(&up->data_offset, &up32->data_offset,
+<<<<<<< HEAD
 				sizeof(__u32)) ||
 		copy_in_user(up->reserved, up32->reserved,
 				sizeof(up->reserved)) ||
 		copy_in_user(&up->length, &up32->length,
+=======
+>>>>>>> v3.18
 				sizeof(__u32)))
 		return -EFAULT;
 
@@ -361,12 +376,19 @@ static int get_v4l2_plane32(struct v4l2_plane *up, struct v4l2_plane32 *up32,
 	return 0;
 }
 
+<<<<<<< HEAD
 static int put_v4l2_plane32(struct v4l2_plane *up, struct v4l2_plane32 *up32,
 				enum v4l2_memory memory)
 {
 	if (copy_in_user(up32, up, 2 * sizeof(__u32)) ||
 		copy_in_user(up32->reserved, up->reserved,
 				sizeof(up32->reserved)) ||
+=======
+static int put_v4l2_plane32(struct v4l2_plane __user *up, struct v4l2_plane32 __user *up32,
+				enum v4l2_memory memory)
+{
+	if (copy_in_user(up32, up, 2 * sizeof(__u32)) ||
+>>>>>>> v3.18
 		copy_in_user(&up32->data_offset, &up->data_offset,
 				sizeof(__u32)))
 		return -EFAULT;
@@ -398,8 +420,12 @@ static int get_v4l2_buffer32(struct v4l2_buffer *kp, struct v4l2_buffer32 __user
 		get_user(kp->index, &up->index) ||
 		get_user(kp->type, &up->type) ||
 		get_user(kp->flags, &up->flags) ||
+<<<<<<< HEAD
 		get_user(kp->memory, &up->memory) ||
 		get_user(kp->length, &up->length))
+=======
+		get_user(kp->memory, &up->memory))
+>>>>>>> v3.18
 			return -EFAULT;
 
 	if (V4L2_TYPE_IS_OUTPUT(kp->type))
@@ -410,6 +436,7 @@ static int get_v4l2_buffer32(struct v4l2_buffer *kp, struct v4l2_buffer32 __user
 					&up->timestamp.tv_usec))
 			return -EFAULT;
 
+<<<<<<< HEAD
 	if (V4L2_TYPE_IS_PRIVATE(kp->type)) {
 		compat_long_t tmp;
 
@@ -421,6 +448,12 @@ static int get_v4l2_buffer32(struct v4l2_buffer *kp, struct v4l2_buffer32 __user
 	}
 
 	if (V4L2_TYPE_IS_MULTIPLANAR(kp->type)) {
+=======
+	if (V4L2_TYPE_IS_MULTIPLANAR(kp->type)) {
+		if (get_user(kp->length, &up->length))
+			return -EFAULT;
+
+>>>>>>> v3.18
 		num_planes = kp->length;
 		if (num_planes == 0) {
 			kp->m.planes = NULL;
@@ -441,7 +474,11 @@ static int get_v4l2_buffer32(struct v4l2_buffer *kp, struct v4l2_buffer32 __user
 		 * by passing a very big num_planes value */
 		uplane = compat_alloc_user_space(num_planes *
 						sizeof(struct v4l2_plane));
+<<<<<<< HEAD
 		kp->m.planes = uplane;
+=======
+		kp->m.planes = (__force struct v4l2_plane *)uplane;
+>>>>>>> v3.18
 
 		while (--num_planes >= 0) {
 			ret = get_v4l2_plane32(uplane, uplane32, kp->memory);
@@ -453,14 +490,24 @@ static int get_v4l2_buffer32(struct v4l2_buffer *kp, struct v4l2_buffer32 __user
 	} else {
 		switch (kp->memory) {
 		case V4L2_MEMORY_MMAP:
+<<<<<<< HEAD
 			if (get_user(kp->m.offset, &up->m.offset))
+=======
+			if (get_user(kp->length, &up->length) ||
+				get_user(kp->m.offset, &up->m.offset))
+>>>>>>> v3.18
 				return -EFAULT;
 			break;
 		case V4L2_MEMORY_USERPTR:
 			{
 			compat_long_t tmp;
 
+<<<<<<< HEAD
 			if (get_user(tmp, &up->m.userptr))
+=======
+			if (get_user(kp->length, &up->length) ||
+			    get_user(tmp, &up->m.userptr))
+>>>>>>> v3.18
 				return -EFAULT;
 
 			kp->m.userptr = (unsigned long)compat_ptr(tmp);
@@ -502,6 +549,7 @@ static int put_v4l2_buffer32(struct v4l2_buffer *kp, struct v4l2_buffer32 __user
 		copy_to_user(&up->timecode, &kp->timecode, sizeof(struct v4l2_timecode)) ||
 		put_user(kp->sequence, &up->sequence) ||
 		put_user(kp->reserved2, &up->reserved2) ||
+<<<<<<< HEAD
 		put_user(kp->reserved, &up->reserved) ||
 		put_user(kp->length, &up->length))
 			return -EFAULT;
@@ -512,12 +560,21 @@ static int put_v4l2_buffer32(struct v4l2_buffer *kp, struct v4l2_buffer32 __user
 			return -EFAULT;
 	}
 
+=======
+		put_user(kp->reserved, &up->reserved))
+			return -EFAULT;
+
+>>>>>>> v3.18
 	if (V4L2_TYPE_IS_MULTIPLANAR(kp->type)) {
 		num_planes = kp->length;
 		if (num_planes == 0)
 			return 0;
 
+<<<<<<< HEAD
 		uplane = kp->m.planes;
+=======
+		uplane = (__force struct v4l2_plane __user *)kp->m.planes;
+>>>>>>> v3.18
 		if (get_user(p, &up->m.planes))
 			return -EFAULT;
 		uplane32 = compat_ptr(p);
@@ -532,11 +589,21 @@ static int put_v4l2_buffer32(struct v4l2_buffer *kp, struct v4l2_buffer32 __user
 	} else {
 		switch (kp->memory) {
 		case V4L2_MEMORY_MMAP:
+<<<<<<< HEAD
 			if (put_user(kp->m.offset, &up->m.offset))
 				return -EFAULT;
 			break;
 		case V4L2_MEMORY_USERPTR:
 			if (put_user(kp->m.userptr, &up->m.userptr))
+=======
+			if (put_user(kp->length, &up->length) ||
+				put_user(kp->m.offset, &up->m.offset))
+				return -EFAULT;
+			break;
+		case V4L2_MEMORY_USERPTR:
+			if (put_user(kp->length, &up->length) ||
+				put_user(kp->m.userptr, &up->m.userptr))
+>>>>>>> v3.18
 				return -EFAULT;
 			break;
 		case V4L2_MEMORY_OVERLAY:
@@ -557,7 +624,20 @@ struct v4l2_framebuffer32 {
 	__u32			capability;
 	__u32			flags;
 	compat_caddr_t 		base;
+<<<<<<< HEAD
 	struct v4l2_pix_format	fmt;
+=======
+	struct {
+		__u32		width;
+		__u32		height;
+		__u32		pixelformat;
+		__u32		field;
+		__u32		bytesperline;
+		__u32		sizeimage;
+		__u32		colorspace;
+		__u32		priv;
+	} fmt;
+>>>>>>> v3.18
 };
 
 static int get_v4l2_framebuffer32(struct v4l2_framebuffer *kp, struct v4l2_framebuffer32 __user *up)
@@ -567,10 +647,17 @@ static int get_v4l2_framebuffer32(struct v4l2_framebuffer *kp, struct v4l2_frame
 	if (!access_ok(VERIFY_READ, up, sizeof(struct v4l2_framebuffer32)) ||
 		get_user(tmp, &up->base) ||
 		get_user(kp->capability, &up->capability) ||
+<<<<<<< HEAD
 		get_user(kp->flags, &up->flags))
 			return -EFAULT;
 	kp->base = compat_ptr(tmp);
 	get_v4l2_pix_format(&kp->fmt, &up->fmt);
+=======
+		get_user(kp->flags, &up->flags) ||
+		copy_from_user(&kp->fmt, &up->fmt, sizeof(up->fmt)))
+			return -EFAULT;
+	kp->base = (__force void *)compat_ptr(tmp);
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -581,9 +668,15 @@ static int put_v4l2_framebuffer32(struct v4l2_framebuffer *kp, struct v4l2_frame
 	if (!access_ok(VERIFY_WRITE, up, sizeof(struct v4l2_framebuffer32)) ||
 		put_user(tmp, &up->base) ||
 		put_user(kp->capability, &up->capability) ||
+<<<<<<< HEAD
 		put_user(kp->flags, &up->flags))
 			return -EFAULT;
 	put_v4l2_pix_format(&kp->fmt, &up->fmt);
+=======
+		put_user(kp->flags, &up->flags) ||
+		copy_to_user(&up->fmt, &kp->fmt, sizeof(up->fmt)))
+			return -EFAULT;
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -593,10 +686,17 @@ struct v4l2_input32 {
 	__u32	     type;		/*  Type of input */
 	__u32	     audioset;		/*  Associated audios (bitfield) */
 	__u32        tuner;             /*  Associated tuner */
+<<<<<<< HEAD
 	compat_u64   std;
 	__u32	     status;
 	__u32	     reserved[4];
 };
+=======
+	v4l2_std_id  std;
+	__u32	     status;
+	__u32	     reserved[4];
+} __attribute__ ((packed));
+>>>>>>> v3.18
 
 /* The 64-bit v4l2_input struct has extra padding at the end of the struct.
    Otherwise it is identical to the 32-bit version. */
@@ -675,11 +775,23 @@ static int get_v4l2_ext_controls32(struct v4l2_ext_controls *kp, struct v4l2_ext
 			n * sizeof(struct v4l2_ext_control32)))
 		return -EFAULT;
 	kcontrols = compat_alloc_user_space(n * sizeof(struct v4l2_ext_control));
+<<<<<<< HEAD
 	kp->controls = kcontrols;
 	while (--n >= 0) {
 		if (copy_in_user(kcontrols, ucontrols, sizeof(*ucontrols)))
 			return -EFAULT;
 		if (ctrl_is_pointer(kcontrols->id)) {
+=======
+	kp->controls = (__force struct v4l2_ext_control *)kcontrols;
+	while (--n >= 0) {
+		u32 id;
+
+		if (copy_in_user(kcontrols, ucontrols, sizeof(*ucontrols)))
+			return -EFAULT;
+		if (get_user(id, &kcontrols->id))
+			return -EFAULT;
+		if (ctrl_is_pointer(id)) {
+>>>>>>> v3.18
 			void __user *s;
 
 			if (get_user(p, &ucontrols->string))
@@ -697,7 +809,12 @@ static int get_v4l2_ext_controls32(struct v4l2_ext_controls *kp, struct v4l2_ext
 static int put_v4l2_ext_controls32(struct v4l2_ext_controls *kp, struct v4l2_ext_controls32 __user *up)
 {
 	struct v4l2_ext_control32 __user *ucontrols;
+<<<<<<< HEAD
 	struct v4l2_ext_control __user *kcontrols = kp->controls;
+=======
+	struct v4l2_ext_control __user *kcontrols =
+		(__force struct v4l2_ext_control __user *)kp->controls;
+>>>>>>> v3.18
 	int n = kp->count;
 	compat_caddr_t p;
 
@@ -719,11 +836,22 @@ static int put_v4l2_ext_controls32(struct v4l2_ext_controls *kp, struct v4l2_ext
 
 	while (--n >= 0) {
 		unsigned size = sizeof(*ucontrols);
+<<<<<<< HEAD
 
 		/* Do not modify the pointer when copying a pointer control.
 		   The contents of the pointer was changed, not the pointer
 		   itself. */
 		if (ctrl_is_pointer(kcontrols->id))
+=======
+		u32 id;
+
+		if (get_user(id, &kcontrols->id))
+			return -EFAULT;
+		/* Do not modify the pointer when copying a pointer control.
+		   The contents of the pointer was changed, not the pointer
+		   itself. */
+		if (ctrl_is_pointer(id))
+>>>>>>> v3.18
 			size -= sizeof(ucontrols->value64);
 		if (copy_in_user(ucontrols, kcontrols, size))
 			return -EFAULT;
@@ -736,10 +864,13 @@ static int put_v4l2_ext_controls32(struct v4l2_ext_controls *kp, struct v4l2_ext
 struct v4l2_event32 {
 	__u32				type;
 	union {
+<<<<<<< HEAD
 		struct v4l2_event_vsync		vsync;
 		struct v4l2_event_ctrl		ctrl;
 		struct v4l2_event_frame_sync	frame_sync;
 		compat_s64		value64;
+=======
+>>>>>>> v3.18
 		__u8			data[64];
 	} u;
 	__u32				pending;
@@ -756,14 +887,22 @@ static int put_v4l2_event32(struct v4l2_event *kp, struct v4l2_event32 __user *u
 		copy_to_user(&up->u, &kp->u, sizeof(kp->u)) ||
 		put_user(kp->pending, &up->pending) ||
 		put_user(kp->sequence, &up->sequence) ||
+<<<<<<< HEAD
 		put_compat_timespec(&kp->timestamp, &up->timestamp) ||
+=======
+		compat_put_timespec(&kp->timestamp, &up->timestamp) ||
+>>>>>>> v3.18
 		put_user(kp->id, &up->id) ||
 		copy_to_user(up->reserved, kp->reserved, 8 * sizeof(__u32)))
 			return -EFAULT;
 	return 0;
 }
 
+<<<<<<< HEAD
 struct v4l2_subdev_edid32 {
+=======
+struct v4l2_edid32 {
+>>>>>>> v3.18
 	__u32 pad;
 	__u32 start_block;
 	__u32 blocks;
@@ -771,17 +910,26 @@ struct v4l2_subdev_edid32 {
 	compat_caddr_t edid;
 };
 
+<<<<<<< HEAD
 static int get_v4l2_subdev_edid32(struct v4l2_subdev_edid *kp, struct v4l2_subdev_edid32 __user *up)
 {
 	u32 tmp;
 
 	if (!access_ok(VERIFY_READ, up, sizeof(struct v4l2_subdev_edid32)) ||
+=======
+static int get_v4l2_edid32(struct v4l2_edid *kp, struct v4l2_edid32 __user *up)
+{
+	u32 tmp;
+
+	if (!access_ok(VERIFY_READ, up, sizeof(struct v4l2_edid32)) ||
+>>>>>>> v3.18
 		get_user(kp->pad, &up->pad) ||
 		get_user(kp->start_block, &up->start_block) ||
 		get_user(kp->blocks, &up->blocks) ||
 		get_user(tmp, &up->edid) ||
 		copy_from_user(kp->reserved, up->reserved, sizeof(kp->reserved)))
 			return -EFAULT;
+<<<<<<< HEAD
 	kp->edid = compat_ptr(tmp);
 	return 0;
 }
@@ -791,11 +939,26 @@ static int put_v4l2_subdev_edid32(struct v4l2_subdev_edid *kp, struct v4l2_subde
 	u32 tmp = (u32)((unsigned long)kp->edid);
 
 	if (!access_ok(VERIFY_WRITE, up, sizeof(struct v4l2_subdev_edid32)) ||
+=======
+	kp->edid = (__force u8 *)compat_ptr(tmp);
+	return 0;
+}
+
+static int put_v4l2_edid32(struct v4l2_edid *kp, struct v4l2_edid32 __user *up)
+{
+	u32 tmp = (u32)((unsigned long)kp->edid);
+
+	if (!access_ok(VERIFY_WRITE, up, sizeof(struct v4l2_edid32)) ||
+>>>>>>> v3.18
 		put_user(kp->pad, &up->pad) ||
 		put_user(kp->start_block, &up->start_block) ||
 		put_user(kp->blocks, &up->blocks) ||
 		put_user(tmp, &up->edid) ||
+<<<<<<< HEAD
 		copy_to_user(kp->reserved, up->reserved, sizeof(kp->reserved)))
+=======
+		copy_to_user(up->reserved, kp->reserved, sizeof(up->reserved)))
+>>>>>>> v3.18
 			return -EFAULT;
 	return 0;
 }
@@ -810,8 +973,13 @@ static int put_v4l2_subdev_edid32(struct v4l2_subdev_edid *kp, struct v4l2_subde
 #define VIDIOC_DQBUF32		_IOWR('V', 17, struct v4l2_buffer32)
 #define VIDIOC_ENUMSTD32	_IOWR('V', 25, struct v4l2_standard32)
 #define VIDIOC_ENUMINPUT32	_IOWR('V', 26, struct v4l2_input32)
+<<<<<<< HEAD
 #define VIDIOC_SUBDEV_G_EDID32	_IOWR('V', 40, struct v4l2_subdev_edid32)
 #define VIDIOC_SUBDEV_S_EDID32	_IOWR('V', 41, struct v4l2_subdev_edid32)
+=======
+#define VIDIOC_G_EDID32		_IOWR('V', 40, struct v4l2_edid32)
+#define VIDIOC_S_EDID32		_IOWR('V', 41, struct v4l2_edid32)
+>>>>>>> v3.18
 #define VIDIOC_TRY_FMT32      	_IOWR('V', 64, struct v4l2_format32)
 #define VIDIOC_G_EXT_CTRLS32    _IOWR('V', 71, struct v4l2_ext_controls32)
 #define VIDIOC_S_EXT_CTRLS32    _IOWR('V', 72, struct v4l2_ext_controls32)
@@ -839,7 +1007,11 @@ static long do_video_ioctl(struct file *file, unsigned int cmd, unsigned long ar
 		struct v4l2_ext_controls v2ecs;
 		struct v4l2_event v2ev;
 		struct v4l2_create_buffers v2crt;
+<<<<<<< HEAD
 		struct v4l2_subdev_edid v2edid;
+=======
+		struct v4l2_edid v2edid;
+>>>>>>> v3.18
 		unsigned long vx;
 		int vi;
 	} karg;
@@ -847,7 +1019,10 @@ static long do_video_ioctl(struct file *file, unsigned int cmd, unsigned long ar
 	int compatible_arg = 1;
 	long err = 0;
 
+<<<<<<< HEAD
 	memset(&karg, 0, sizeof(karg));
+=======
+>>>>>>> v3.18
 	/* First, convert the command. */
 	switch (cmd) {
 	case VIDIOC_G_FMT32: cmd = VIDIOC_G_FMT; break;
@@ -873,8 +1048,13 @@ static long do_video_ioctl(struct file *file, unsigned int cmd, unsigned long ar
 	case VIDIOC_S_OUTPUT32: cmd = VIDIOC_S_OUTPUT; break;
 	case VIDIOC_CREATE_BUFS32: cmd = VIDIOC_CREATE_BUFS; break;
 	case VIDIOC_PREPARE_BUF32: cmd = VIDIOC_PREPARE_BUF; break;
+<<<<<<< HEAD
 	case VIDIOC_SUBDEV_G_EDID32: cmd = VIDIOC_SUBDEV_G_EDID; break;
 	case VIDIOC_SUBDEV_S_EDID32: cmd = VIDIOC_SUBDEV_S_EDID; break;
+=======
+	case VIDIOC_G_EDID32: cmd = VIDIOC_G_EDID; break;
+	case VIDIOC_S_EDID32: cmd = VIDIOC_S_EDID; break;
+>>>>>>> v3.18
 	}
 
 	switch (cmd) {
@@ -892,9 +1072,15 @@ static long do_video_ioctl(struct file *file, unsigned int cmd, unsigned long ar
 		compatible_arg = 0;
 		break;
 
+<<<<<<< HEAD
 	case VIDIOC_SUBDEV_G_EDID:
 	case VIDIOC_SUBDEV_S_EDID:
 		err = get_v4l2_subdev_edid32(&karg.v2edid, up);
+=======
+	case VIDIOC_G_EDID:
+	case VIDIOC_S_EDID:
+		err = get_v4l2_edid32(&karg.v2edid, up);
+>>>>>>> v3.18
 		compatible_arg = 0;
 		break;
 
@@ -990,9 +1176,15 @@ static long do_video_ioctl(struct file *file, unsigned int cmd, unsigned long ar
 		err = put_v4l2_event32(&karg.v2ev, up);
 		break;
 
+<<<<<<< HEAD
 	case VIDIOC_SUBDEV_G_EDID:
 	case VIDIOC_SUBDEV_S_EDID:
 		err = put_v4l2_subdev_edid32(&karg.v2edid, up);
+=======
+	case VIDIOC_G_EDID:
+	case VIDIOC_S_EDID:
+		err = put_v4l2_edid32(&karg.v2edid, up);
+>>>>>>> v3.18
 		break;
 
 	case VIDIOC_G_FMT:
@@ -1030,6 +1222,7 @@ long v4l2_compat_ioctl32(struct file *file, unsigned int cmd, unsigned long arg)
 	if (!file->f_op->unlocked_ioctl)
 		return ret;
 
+<<<<<<< HEAD
 	switch (cmd) {
 	case VIDIOC_QUERYCAP:
 	case VIDIOC_RESERVED:
@@ -1128,6 +1321,16 @@ long v4l2_compat_ioctl32(struct file *file, unsigned int cmd, unsigned long arg)
 				cmd);
 		break;
 	}
+=======
+	if (_IOC_TYPE(cmd) == 'V' && _IOC_NR(cmd) < BASE_VIDIOC_PRIVATE)
+		ret = do_video_ioctl(file, cmd, arg);
+	else if (vdev->fops->compat_ioctl32)
+		ret = vdev->fops->compat_ioctl32(file, cmd, arg);
+
+	if (ret == -ENOIOCTLCMD)
+		pr_warn("compat_ioctl32: unknown ioctl '%c', dir=%d, #%d (0x%08x)\n",
+			_IOC_TYPE(cmd), _IOC_DIR(cmd), _IOC_NR(cmd), cmd);
+>>>>>>> v3.18
 	return ret;
 }
 EXPORT_SYMBOL_GPL(v4l2_compat_ioctl32);

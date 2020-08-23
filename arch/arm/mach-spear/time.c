@@ -2,7 +2,11 @@
  * arch/arm/plat-spear/time.c
  *
  * Copyright (C) 2010 ST Microelectronics
+<<<<<<< HEAD
  * Shiraz Hashim<shiraz.hashim@st.com>
+=======
+ * Shiraz Hashim<shiraz.linux.kernel@gmail.com>
+>>>>>>> v3.18
  *
  * This file is licensed under the terms of the GNU General Public
  * License version 2. This program is licensed "as is" without any
@@ -71,7 +75,11 @@ static void clockevent_set_mode(enum clock_event_mode mode,
 static int clockevent_next_event(unsigned long evt,
 				 struct clock_event_device *clk_event_dev);
 
+<<<<<<< HEAD
 static void spear_clocksource_init(void)
+=======
+static void __init spear_clocksource_init(void)
+>>>>>>> v3.18
 {
 	u32 tick_rate;
 	u16 val;
@@ -172,7 +180,11 @@ static irqreturn_t spear_timer_interrupt(int irq, void *dev_id)
 
 static struct irqaction spear_timer_irq = {
 	.name = "timer",
+<<<<<<< HEAD
 	.flags = IRQF_DISABLED | IRQF_TIMER,
+=======
+	.flags = IRQF_TIMER,
+>>>>>>> v3.18
 	.handler = spear_timer_interrupt
 };
 

@@ -217,7 +217,11 @@ void ia64_mca_printk(const char *fmt, ...)
 	/* Copy the output into mlogbuf */
 	if (oops_in_progress) {
 		/* mlogbuf was abandoned, use printk directly instead. */
+<<<<<<< HEAD
 		printk(temp_buf);
+=======
+		printk("%s", temp_buf);
+>>>>>>> v3.18
 	} else {
 		spin_lock(&mlogbuf_wlock);
 		for (p = temp_buf; *p; p++) {
@@ -268,7 +272,11 @@ void ia64_mlogbuf_dump(void)
 		}
 		*p = '\0';
 		if (temp_buf[0])
+<<<<<<< HEAD
 			printk(temp_buf);
+=======
+			printk("%s", temp_buf);
+>>>>>>> v3.18
 		mlogbuf_start = index;
 
 		mlogbuf_timestamp = 0;
@@ -631,7 +639,11 @@ ia64_mca_register_cpev (int cpev)
  * Outputs
  *	None
  */
+<<<<<<< HEAD
 void __cpuinit
+=======
+void
+>>>>>>> v3.18
 ia64_mca_cmc_vector_setup (void)
 {
 	cmcv_reg_t	cmcv;
@@ -1341,7 +1353,11 @@ ia64_mca_handler(struct pt_regs *regs, struct switch_stack *sw,
 		ia64_mlogbuf_finish(1);
 	}
 
+<<<<<<< HEAD
 	if (__get_cpu_var(ia64_mca_tr_reload)) {
+=======
+	if (__this_cpu_read(ia64_mca_tr_reload)) {
+>>>>>>> v3.18
 		mca_insert_tr(0x1); /*Reload dynamic itrs*/
 		mca_insert_tr(0x2); /*Reload dynamic itrs*/
 	}
@@ -1772,38 +1788,56 @@ __setup("disable_cpe_poll", ia64_mca_disable_cpe_polling);
 
 static struct irqaction cmci_irqaction = {
 	.handler =	ia64_mca_cmc_int_handler,
+<<<<<<< HEAD
 	.flags =	IRQF_DISABLED,
+=======
+>>>>>>> v3.18
 	.name =		"cmc_hndlr"
 };
 
 static struct irqaction cmcp_irqaction = {
 	.handler =	ia64_mca_cmc_int_caller,
+<<<<<<< HEAD
 	.flags =	IRQF_DISABLED,
+=======
+>>>>>>> v3.18
 	.name =		"cmc_poll"
 };
 
 static struct irqaction mca_rdzv_irqaction = {
 	.handler =	ia64_mca_rendez_int_handler,
+<<<<<<< HEAD
 	.flags =	IRQF_DISABLED,
+=======
+>>>>>>> v3.18
 	.name =		"mca_rdzv"
 };
 
 static struct irqaction mca_wkup_irqaction = {
 	.handler =	ia64_mca_wakeup_int_handler,
+<<<<<<< HEAD
 	.flags =	IRQF_DISABLED,
+=======
+>>>>>>> v3.18
 	.name =		"mca_wkup"
 };
 
 #ifdef CONFIG_ACPI
 static struct irqaction mca_cpe_irqaction = {
 	.handler =	ia64_mca_cpe_int_handler,
+<<<<<<< HEAD
 	.flags =	IRQF_DISABLED,
+=======
+>>>>>>> v3.18
 	.name =		"cpe_hndlr"
 };
 
 static struct irqaction mca_cpep_irqaction = {
 	.handler =	ia64_mca_cpe_int_caller,
+<<<<<<< HEAD
 	.flags =	IRQF_DISABLED,
+=======
+>>>>>>> v3.18
 	.name =		"cpe_poll"
 };
 #endif /* CONFIG_ACPI */
@@ -1814,7 +1848,11 @@ static struct irqaction mca_cpep_irqaction = {
  * format most of the fields.
  */
 
+<<<<<<< HEAD
 static void __cpuinit
+=======
+static void
+>>>>>>> v3.18
 format_mca_init_stack(void *mca_data, unsigned long offset,
 		const char *type, int cpu)
 {
@@ -1844,7 +1882,11 @@ static void * __init_refok mca_bootmem(void)
 }
 
 /* Do per-CPU MCA-related initialization.  */
+<<<<<<< HEAD
 void __cpuinit
+=======
+void
+>>>>>>> v3.18
 ia64_mca_cpu_init(void *cpu_data)
 {
 	void *pal_vaddr;
@@ -1874,14 +1916,23 @@ ia64_mca_cpu_init(void *cpu_data)
 		"MCA", cpu);
 	format_mca_init_stack(data, offsetof(struct ia64_mca_cpu, init_stack),
 		"INIT", cpu);
+<<<<<<< HEAD
 	__get_cpu_var(ia64_mca_data) = __per_cpu_mca[cpu] = __pa(data);
+=======
+	__this_cpu_write(ia64_mca_data, (__per_cpu_mca[cpu] = __pa(data)));
+>>>>>>> v3.18
 
 	/*
 	 * Stash away a copy of the PTE needed to map the per-CPU page.
 	 * We may need it during MCA recovery.
 	 */
+<<<<<<< HEAD
 	__get_cpu_var(ia64_mca_per_cpu_pte) =
 		pte_val(mk_pte_phys(__pa(cpu_data), PAGE_KERNEL));
+=======
+	__this_cpu_write(ia64_mca_per_cpu_pte,
+		pte_val(mk_pte_phys(__pa(cpu_data), PAGE_KERNEL)));
+>>>>>>> v3.18
 
 	/*
 	 * Also, stash away a copy of the PAL address and the PTE
@@ -1890,6 +1941,7 @@ ia64_mca_cpu_init(void *cpu_data)
 	pal_vaddr = efi_get_pal_addr();
 	if (!pal_vaddr)
 		return;
+<<<<<<< HEAD
 	__get_cpu_var(ia64_mca_pal_base) =
 		GRANULEROUNDDOWN((unsigned long) pal_vaddr);
 	__get_cpu_var(ia64_mca_pal_pte) = pte_val(mk_pte_phys(__pa(pal_vaddr),
@@ -1897,6 +1949,15 @@ ia64_mca_cpu_init(void *cpu_data)
 }
 
 static void __cpuinit ia64_mca_cmc_vector_adjust(void *dummy)
+=======
+	__this_cpu_write(ia64_mca_pal_base,
+		GRANULEROUNDDOWN((unsigned long) pal_vaddr));
+	__this_cpu_write(ia64_mca_pal_pte, pte_val(mk_pte_phys(__pa(pal_vaddr),
+							      PAGE_KERNEL)));
+}
+
+static void ia64_mca_cmc_vector_adjust(void *dummy)
+>>>>>>> v3.18
 {
 	unsigned long flags;
 
@@ -1906,7 +1967,11 @@ static void __cpuinit ia64_mca_cmc_vector_adjust(void *dummy)
 	local_irq_restore(flags);
 }
 
+<<<<<<< HEAD
 static int __cpuinit mca_cpu_callback(struct notifier_block *nfb,
+=======
+static int mca_cpu_callback(struct notifier_block *nfb,
+>>>>>>> v3.18
 				      unsigned long action,
 				      void *hcpu)
 {
@@ -1922,7 +1987,11 @@ static int __cpuinit mca_cpu_callback(struct notifier_block *nfb,
 	return NOTIFY_OK;
 }
 
+<<<<<<< HEAD
 static struct notifier_block mca_cpu_notifier __cpuinitdata = {
+=======
+static struct notifier_block mca_cpu_notifier = {
+>>>>>>> v3.18
 	.notifier_call = mca_cpu_callback
 };
 

@@ -11,6 +11,10 @@
  */
 
 #include <linux/errno.h>
+<<<<<<< HEAD
+=======
+#include <linux/export.h>
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/sched.h>
 #include <linux/kernel.h>
@@ -28,6 +32,14 @@
 #include <linux/timex.h>
 #include <linux/profile.h>
 
+<<<<<<< HEAD
+=======
+
+unsigned long (*mach_random_get_entropy)(void);
+EXPORT_SYMBOL_GPL(mach_random_get_entropy);
+
+
+>>>>>>> v3.18
 /*
  * timer_interrupt() needs to keep up the real-time clock,
  * as well as call the "xtime_update()" routine every clocktick
@@ -90,7 +102,11 @@ static int __init rtc_init(void)
 		return -ENODEV;
 
 	pdev = platform_device_register_simple("rtc-generic", -1, NULL, 0);
+<<<<<<< HEAD
 	return PTR_RET(pdev);
+=======
+	return PTR_ERR_OR_ZERO(pdev);
+>>>>>>> v3.18
 }
 
 module_init(rtc_init);

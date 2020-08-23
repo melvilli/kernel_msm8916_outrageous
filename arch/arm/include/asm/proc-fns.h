@@ -60,7 +60,11 @@ extern struct processor {
 	/*
 	 * Set the page table
 	 */
+<<<<<<< HEAD
 	void (*switch_mm)(unsigned long pgd_phys, struct mm_struct *mm);
+=======
+	void (*switch_mm)(phys_addr_t pgd_phys, struct mm_struct *mm);
+>>>>>>> v3.18
 	/*
 	 * Set a possibly extended PTE.  Non-extended PTEs should
 	 * ignore 'ext'.
@@ -82,7 +86,11 @@ extern void cpu_proc_init(void);
 extern void cpu_proc_fin(void);
 extern int cpu_do_idle(void);
 extern void cpu_dcache_clean_area(void *, int);
+<<<<<<< HEAD
 extern void cpu_do_switch_mm(unsigned long pgd_phys, struct mm_struct *mm);
+=======
+extern void cpu_do_switch_mm(phys_addr_t pgd_phys, struct mm_struct *mm);
+>>>>>>> v3.18
 #ifdef CONFIG_ARM_LPAE
 extern void cpu_set_pte_ext(pte_t *ptep, pte_t pte);
 #else
@@ -116,6 +124,7 @@ extern void cpu_resume(void);
 #define cpu_switch_mm(pgd,mm) cpu_do_switch_mm(virt_to_phys(pgd),mm)
 
 #ifdef CONFIG_ARM_LPAE
+<<<<<<< HEAD
 #define cpu_get_pgd()	\
 	({						\
 		unsigned long pg, pg2;			\
@@ -123,6 +132,27 @@ extern void cpu_resume(void);
 			: "=r" (pg), "=r" (pg2)		\
 			:				\
 			: "cc");			\
+=======
+
+#define cpu_get_ttbr(nr)					\
+	({							\
+		u64 ttbr;					\
+		__asm__("mrrc	p15, " #nr ", %Q0, %R0, c2"	\
+			: "=r" (ttbr));				\
+		ttbr;						\
+	})
+
+#define cpu_set_ttbr(nr, val)					\
+	do {							\
+		u64 ttbr = val;					\
+		__asm__("mcrr	p15, " #nr ", %Q0, %R0, c2"	\
+			: : "r" (ttbr));			\
+	} while (0)
+
+#define cpu_get_pgd()	\
+	({						\
+		u64 pg = cpu_get_ttbr(0);		\
+>>>>>>> v3.18
 		pg &= ~(PTRS_PER_PGD*sizeof(pgd_t)-1);	\
 		(pgd_t *)phys_to_virt(pg);		\
 	})
@@ -137,6 +167,13 @@ extern void cpu_resume(void);
 	})
 #endif
 
+<<<<<<< HEAD
+=======
+#else	/*!CONFIG_MMU */
+
+#define cpu_switch_mm(pgd,mm)	{ }
+
+>>>>>>> v3.18
 #endif
 
 #endif /* __ASSEMBLY__ */

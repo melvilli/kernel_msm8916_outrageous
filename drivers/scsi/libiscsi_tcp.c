@@ -446,7 +446,11 @@ iscsi_tcp_data_recv_prep(struct iscsi_tcp_conn *tcp_conn)
  * iscsi_tcp_cleanup_task - free tcp_task resources
  * @task: iscsi task
  *
+<<<<<<< HEAD
  * must be called with session lock
+=======
+ * must be called with session back_lock
+>>>>>>> v3.18
  */
 void iscsi_tcp_cleanup_task(struct iscsi_task *task)
 {
@@ -457,6 +461,10 @@ void iscsi_tcp_cleanup_task(struct iscsi_task *task)
 	if (!task->sc)
 		return;
 
+<<<<<<< HEAD
+=======
+	spin_lock_bh(&tcp_task->queue2pool);
+>>>>>>> v3.18
 	/* flush task's r2t queues */
 	while (kfifo_out(&tcp_task->r2tqueue, (void*)&r2t, sizeof(void*))) {
 		kfifo_in(&tcp_task->r2tpool.queue, (void*)&r2t,
@@ -470,6 +478,10 @@ void iscsi_tcp_cleanup_task(struct iscsi_task *task)
 			    sizeof(void*));
 		tcp_task->r2t = NULL;
 	}
+<<<<<<< HEAD
+=======
+	spin_unlock_bh(&tcp_task->queue2pool);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(iscsi_tcp_cleanup_task);
 
@@ -529,6 +541,11 @@ static int iscsi_tcp_r2t_rsp(struct iscsi_conn *conn, struct iscsi_task *task)
 	struct iscsi_r2t_rsp *rhdr = (struct iscsi_r2t_rsp *)tcp_conn->in.hdr;
 	struct iscsi_r2t_info *r2t;
 	int r2tsn = be32_to_cpu(rhdr->r2tsn);
+<<<<<<< HEAD
+=======
+	u32 data_length;
+	u32 data_offset;
+>>>>>>> v3.18
 	int rc;
 
 	if (tcp_conn->in.datalen) {
@@ -554,6 +571,7 @@ static int iscsi_tcp_r2t_rsp(struct iscsi_conn *conn, struct iscsi_task *task)
 		return 0;
 	}
 
+<<<<<<< HEAD
 	rc = kfifo_out(&tcp_task->r2tpool.queue, (void*)&r2t, sizeof(void*));
 	if (!rc) {
 		iscsi_conn_printk(KERN_ERR, conn, "Could not allocate R2T. "
@@ -588,6 +606,43 @@ static int iscsi_tcp_r2t_rsp(struct iscsi_conn *conn, struct iscsi_task *task)
 		return ISCSI_ERR_DATALEN;
 	}
 
+=======
+	data_length = be32_to_cpu(rhdr->data_length);
+	if (data_length == 0) {
+		iscsi_conn_printk(KERN_ERR, conn,
+				  "invalid R2T with zero data len\n");
+		return ISCSI_ERR_DATALEN;
+	}
+
+	if (data_length > session->max_burst)
+		ISCSI_DBG_TCP(conn, "invalid R2T with data len %u and max "
+			      "burst %u. Attempting to execute request.\n",
+			      data_length, session->max_burst);
+
+	data_offset = be32_to_cpu(rhdr->data_offset);
+	if (data_offset + data_length > scsi_out(task->sc)->length) {
+		iscsi_conn_printk(KERN_ERR, conn,
+				  "invalid R2T with data len %u at offset %u "
+				  "and total length %d\n", data_length,
+				  data_offset, scsi_out(task->sc)->length);
+		return ISCSI_ERR_DATALEN;
+	}
+
+	spin_lock(&tcp_task->pool2queue);
+	rc = kfifo_out(&tcp_task->r2tpool.queue, (void *)&r2t, sizeof(void *));
+	if (!rc) {
+		iscsi_conn_printk(KERN_ERR, conn, "Could not allocate R2T. "
+				  "Target has sent more R2Ts than it "
+				  "negotiated for or driver has leaked.\n");
+		spin_unlock(&tcp_task->pool2queue);
+		return ISCSI_ERR_PROTO;
+	}
+
+	r2t->exp_statsn = rhdr->statsn;
+	r2t->data_length = data_length;
+	r2t->data_offset = data_offset;
+
+>>>>>>> v3.18
 	r2t->ttt = rhdr->ttt; /* no flip */
 	r2t->datasn = 0;
 	r2t->sent = 0;
@@ -595,6 +650,10 @@ static int iscsi_tcp_r2t_rsp(struct iscsi_conn *conn, struct iscsi_task *task)
 	tcp_task->exp_datasn = r2tsn + 1;
 	kfifo_in(&tcp_task->r2tqueue, (void*)&r2t, sizeof(void*));
 	conn->r2t_pdus_cnt++;
+<<<<<<< HEAD
+=======
+	spin_unlock(&tcp_task->pool2queue);
+>>>>>>> v3.18
 
 	iscsi_requeue_task(task);
 	return 0;
@@ -667,14 +726,22 @@ iscsi_tcp_hdr_dissect(struct iscsi_conn *conn, struct iscsi_hdr *hdr)
 
 	switch(opcode) {
 	case ISCSI_OP_SCSI_DATA_IN:
+<<<<<<< HEAD
 		spin_lock(&conn->session->lock);
+=======
+		spin_lock(&conn->session->back_lock);
+>>>>>>> v3.18
 		task = iscsi_itt_to_ctask(conn, hdr->itt);
 		if (!task)
 			rc = ISCSI_ERR_BAD_ITT;
 		else
 			rc = iscsi_tcp_data_in(conn, task);
 		if (rc) {
+<<<<<<< HEAD
 			spin_unlock(&conn->session->lock);
+=======
+			spin_unlock(&conn->session->back_lock);
+>>>>>>> v3.18
 			break;
 		}
 
@@ -707,11 +774,19 @@ iscsi_tcp_hdr_dissect(struct iscsi_conn *conn, struct iscsi_hdr *hdr)
 						   tcp_conn->in.datalen,
 						   iscsi_tcp_process_data_in,
 						   rx_hash);
+<<<<<<< HEAD
 			spin_unlock(&conn->session->lock);
 			return rc;
 		}
 		rc = __iscsi_complete_pdu(conn, hdr, NULL, 0);
 		spin_unlock(&conn->session->lock);
+=======
+			spin_unlock(&conn->session->back_lock);
+			return rc;
+		}
+		rc = __iscsi_complete_pdu(conn, hdr, NULL, 0);
+		spin_unlock(&conn->session->back_lock);
+>>>>>>> v3.18
 		break;
 	case ISCSI_OP_SCSI_CMD_RSP:
 		if (tcp_conn->in.datalen) {
@@ -721,18 +796,32 @@ iscsi_tcp_hdr_dissect(struct iscsi_conn *conn, struct iscsi_hdr *hdr)
 		rc = iscsi_complete_pdu(conn, hdr, NULL, 0);
 		break;
 	case ISCSI_OP_R2T:
+<<<<<<< HEAD
 		spin_lock(&conn->session->lock);
 		task = iscsi_itt_to_ctask(conn, hdr->itt);
+=======
+		spin_lock(&conn->session->back_lock);
+		task = iscsi_itt_to_ctask(conn, hdr->itt);
+		spin_unlock(&conn->session->back_lock);
+>>>>>>> v3.18
 		if (!task)
 			rc = ISCSI_ERR_BAD_ITT;
 		else if (ahslen)
 			rc = ISCSI_ERR_AHSLEN;
 		else if (task->sc->sc_data_direction == DMA_TO_DEVICE) {
 			task->last_xfer = jiffies;
+<<<<<<< HEAD
 			rc = iscsi_tcp_r2t_rsp(conn, task);
 		} else
 			rc = ISCSI_ERR_PROTO;
 		spin_unlock(&conn->session->lock);
+=======
+			spin_lock(&conn->session->frwd_lock);
+			rc = iscsi_tcp_r2t_rsp(conn, task);
+			spin_unlock(&conn->session->frwd_lock);
+		} else
+			rc = ISCSI_ERR_PROTO;
+>>>>>>> v3.18
 		break;
 	case ISCSI_OP_LOGIN_RSP:
 	case ISCSI_OP_TEXT_RSP:
@@ -906,7 +995,10 @@ int iscsi_tcp_recv_skb(struct iscsi_conn *conn, struct sk_buff *skb,
 			ISCSI_DBG_TCP(conn, "no more data avail. Consumed %d\n",
 				      consumed);
 			*status = ISCSI_TCP_SKB_DONE;
+<<<<<<< HEAD
 			skb_abort_seq_read(&seq);
+=======
+>>>>>>> v3.18
 			goto skb_done;
 		}
 		BUG_ON(segment->copied >= segment->size);
@@ -981,14 +1073,21 @@ EXPORT_SYMBOL_GPL(iscsi_tcp_task_init);
 
 static struct iscsi_r2t_info *iscsi_tcp_get_curr_r2t(struct iscsi_task *task)
 {
+<<<<<<< HEAD
 	struct iscsi_session *session = task->conn->session;
+=======
+>>>>>>> v3.18
 	struct iscsi_tcp_task *tcp_task = task->dd_data;
 	struct iscsi_r2t_info *r2t = NULL;
 
 	if (iscsi_task_has_unsol_data(task))
 		r2t = &task->unsol_r2t;
 	else {
+<<<<<<< HEAD
 		spin_lock_bh(&session->lock);
+=======
+		spin_lock_bh(&tcp_task->queue2pool);
+>>>>>>> v3.18
 		if (tcp_task->r2t) {
 			r2t = tcp_task->r2t;
 			/* Continue with this R2T? */
@@ -1010,7 +1109,11 @@ static struct iscsi_r2t_info *iscsi_tcp_get_curr_r2t(struct iscsi_task *task)
 			else
 				r2t = tcp_task->r2t;
 		}
+<<<<<<< HEAD
 		spin_unlock_bh(&session->lock);
+=======
+		spin_unlock_bh(&tcp_task->queue2pool);
+>>>>>>> v3.18
 	}
 
 	return r2t;
@@ -1140,6 +1243,11 @@ int iscsi_tcp_r2tpool_alloc(struct iscsi_session *session)
 			iscsi_pool_free(&tcp_task->r2tpool);
 			goto r2t_alloc_fail;
 		}
+<<<<<<< HEAD
+=======
+		spin_lock_init(&tcp_task->pool2queue);
+		spin_lock_init(&tcp_task->queue2pool);
+>>>>>>> v3.18
 	}
 
 	return 0;

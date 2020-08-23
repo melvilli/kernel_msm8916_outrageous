@@ -99,29 +99,49 @@ static const char *micbias_enum_text[] = {
 	"100%",
 };
 
+<<<<<<< HEAD
 static const struct soc_enum micbias_enum =
 	SOC_ENUM_SINGLE(WM8737_MIC_PREAMP_CONTROL, 0, 4, micbias_enum_text);
+=======
+static SOC_ENUM_SINGLE_DECL(micbias_enum,
+			    WM8737_MIC_PREAMP_CONTROL, 0, micbias_enum_text);
+>>>>>>> v3.18
 
 static const char *low_cutoff_text[] = {
 	"Low", "High"
 };
 
+<<<<<<< HEAD
 static const struct soc_enum low_3d =
 	SOC_ENUM_SINGLE(WM8737_3D_ENHANCE, 6, 2, low_cutoff_text);
+=======
+static SOC_ENUM_SINGLE_DECL(low_3d,
+			    WM8737_3D_ENHANCE, 6, low_cutoff_text);
+>>>>>>> v3.18
 
 static const char *high_cutoff_text[] = {
 	"High", "Low"
 };
 
+<<<<<<< HEAD
 static const struct soc_enum high_3d =
 	SOC_ENUM_SINGLE(WM8737_3D_ENHANCE, 5, 2, high_cutoff_text);
+=======
+static SOC_ENUM_SINGLE_DECL(high_3d,
+			    WM8737_3D_ENHANCE, 5, high_cutoff_text);
+>>>>>>> v3.18
 
 static const char *alc_fn_text[] = {
 	"Disabled", "Right", "Left", "Stereo"
 };
 
+<<<<<<< HEAD
 static const struct soc_enum alc_fn =
 	SOC_ENUM_SINGLE(WM8737_ALC1, 7, 4, alc_fn_text);
+=======
+static SOC_ENUM_SINGLE_DECL(alc_fn,
+			    WM8737_ALC1, 7, alc_fn_text);
+>>>>>>> v3.18
 
 static const char *alc_hold_text[] = {
 	"0", "2.67ms", "5.33ms", "10.66ms", "21.32ms", "42.64ms", "85.28ms",
@@ -129,24 +149,39 @@ static const char *alc_hold_text[] = {
 	"10.916s", "21.832s", "43.691s"
 };
 
+<<<<<<< HEAD
 static const struct soc_enum alc_hold =
 	SOC_ENUM_SINGLE(WM8737_ALC2, 0, 16, alc_hold_text);
+=======
+static SOC_ENUM_SINGLE_DECL(alc_hold,
+			    WM8737_ALC2, 0, alc_hold_text);
+>>>>>>> v3.18
 
 static const char *alc_atk_text[] = {
 	"8.4ms", "16.8ms", "33.6ms", "67.2ms", "134.4ms", "268.8ms", "537.6ms",
 	"1.075s", "2.15s", "4.3s", "8.6s"
 };
 
+<<<<<<< HEAD
 static const struct soc_enum alc_atk =
 	SOC_ENUM_SINGLE(WM8737_ALC3, 0, 11, alc_atk_text);
+=======
+static SOC_ENUM_SINGLE_DECL(alc_atk,
+			    WM8737_ALC3, 0, alc_atk_text);
+>>>>>>> v3.18
 
 static const char *alc_dcy_text[] = {
 	"33.6ms", "67.2ms", "134.4ms", "268.8ms", "537.6ms", "1.075s", "2.15s",
 	"4.3s", "8.6s", "17.2s", "34.41s"
 };
 
+<<<<<<< HEAD
 static const struct soc_enum alc_dcy =
 	SOC_ENUM_SINGLE(WM8737_ALC3, 4, 11, alc_dcy_text);
+=======
+static SOC_ENUM_SINGLE_DECL(alc_dcy,
+			    WM8737_ALC3, 4, alc_dcy_text);
+>>>>>>> v3.18
 
 static const struct snd_kcontrol_new wm8737_snd_controls[] = {
 SOC_DOUBLE_R_TLV("Mic Boost Volume", WM8737_AUDIO_PATH_L, WM8737_AUDIO_PATH_R,
@@ -191,8 +226,13 @@ static const char *linsel_text[] = {
 	"LINPUT1", "LINPUT2", "LINPUT3", "LINPUT1 DC",
 };
 
+<<<<<<< HEAD
 static const struct soc_enum linsel_enum =
 	SOC_ENUM_SINGLE(WM8737_AUDIO_PATH_L, 7, 4, linsel_text);
+=======
+static SOC_ENUM_SINGLE_DECL(linsel_enum,
+			    WM8737_AUDIO_PATH_L, 7, linsel_text);
+>>>>>>> v3.18
 
 static const struct snd_kcontrol_new linsel_mux =
 	SOC_DAPM_ENUM("LINSEL", linsel_enum);
@@ -202,8 +242,13 @@ static const char *rinsel_text[] = {
 	"RINPUT1", "RINPUT2", "RINPUT3", "RINPUT1 DC",
 };
 
+<<<<<<< HEAD
 static const struct soc_enum rinsel_enum =
 	SOC_ENUM_SINGLE(WM8737_AUDIO_PATH_R, 7, 4, rinsel_text);
+=======
+static SOC_ENUM_SINGLE_DECL(rinsel_enum,
+			    WM8737_AUDIO_PATH_R, 7, rinsel_text);
+>>>>>>> v3.18
 
 static const struct snd_kcontrol_new rinsel_mux =
 	SOC_DAPM_ENUM("RINSEL", rinsel_enum);
@@ -212,15 +257,25 @@ static const char *bypass_text[] = {
 	"Direct", "Preamp"
 };
 
+<<<<<<< HEAD
 static const struct soc_enum lbypass_enum =
 	SOC_ENUM_SINGLE(WM8737_MIC_PREAMP_CONTROL, 2, 2, bypass_text);
+=======
+static SOC_ENUM_SINGLE_DECL(lbypass_enum,
+			    WM8737_MIC_PREAMP_CONTROL, 2, bypass_text);
+>>>>>>> v3.18
 
 static const struct snd_kcontrol_new lbypass_mux =
 	SOC_DAPM_ENUM("Left Bypass", lbypass_enum);
 
 
+<<<<<<< HEAD
 static const struct soc_enum rbypass_enum =
 	SOC_ENUM_SINGLE(WM8737_MIC_PREAMP_CONTROL, 3, 2, bypass_text);
+=======
+static SOC_ENUM_SINGLE_DECL(rbypass_enum,
+			    WM8737_MIC_PREAMP_CONTROL, 3, bypass_text);
+>>>>>>> v3.18
 
 static const struct snd_kcontrol_new rbypass_mux =
 	SOC_DAPM_ENUM("Left Bypass", rbypass_enum);
@@ -367,6 +422,7 @@ static int wm8737_hw_params(struct snd_pcm_substream *substream,
 
 	clocking |= coeff_div[i].usb | (coeff_div[i].sr << WM8737_SR_SHIFT);
 
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		break;
@@ -377,6 +433,18 @@ static int wm8737_hw_params(struct snd_pcm_substream *substream,
 		af |= 0x10;
 		break;
 	case SNDRV_PCM_FORMAT_S32_LE:
+=======
+	switch (params_width(params)) {
+	case 16:
+		break;
+	case 20:
+		af |= 0x8;
+		break;
+	case 24:
+		af |= 0x10;
+		break;
+	case 32:
+>>>>>>> v3.18
 		af |= 0x18;
 		break;
 	default:
@@ -494,8 +562,12 @@ static int wm8737_set_bias_level(struct snd_soc_codec *codec,
 
 			/* Fast VMID ramp at 2*2.5k */
 			snd_soc_update_bits(codec, WM8737_MISC_BIAS_CONTROL,
+<<<<<<< HEAD
 					    WM8737_VMIDSEL_MASK,
 					    2 << WM8737_VMIDSEL_SHIFT);
+=======
+					    WM8737_VMIDSEL_MASK, 0x4);
+>>>>>>> v3.18
 
 			/* Bring VMID up */
 			snd_soc_update_bits(codec, WM8737_POWER_MANAGEMENT,
@@ -509,8 +581,12 @@ static int wm8737_set_bias_level(struct snd_soc_codec *codec,
 
 		/* VMID at 2*300k */
 		snd_soc_update_bits(codec, WM8737_MISC_BIAS_CONTROL,
+<<<<<<< HEAD
 				    WM8737_VMIDSEL_MASK,
 				    1 << WM8737_VMIDSEL_SHIFT);
+=======
+				    WM8737_VMIDSEL_MASK, 2);
+>>>>>>> v3.18
 
 		break;
 
@@ -572,12 +648,15 @@ static int wm8737_probe(struct snd_soc_codec *codec)
 	struct wm8737_priv *wm8737 = snd_soc_codec_get_drvdata(codec);
 	int ret;
 
+<<<<<<< HEAD
 	ret = snd_soc_codec_set_cache_io(codec, 7, 9, SND_SOC_REGMAP);
 	if (ret != 0) {
 		dev_err(codec->dev, "Failed to set cache I/O: %d\n", ret);
 		return ret;
 	}
 
+=======
+>>>>>>> v3.18
 	ret = regulator_bulk_enable(ARRAY_SIZE(wm8737->supplies),
 				    wm8737->supplies);
 	if (ret != 0) {
@@ -646,7 +725,11 @@ static const struct regmap_config wm8737_regmap = {
 	.volatile_reg = wm8737_volatile,
 };
 
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 static int wm8737_i2c_probe(struct i2c_client *i2c,
 			    const struct i2c_device_id *id)
 {
@@ -760,7 +843,11 @@ static struct spi_driver wm8737_spi_driver = {
 static int __init wm8737_modinit(void)
 {
 	int ret;
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 	ret = i2c_add_driver(&wm8737_i2c_driver);
 	if (ret != 0) {
 		printk(KERN_ERR "Failed to register WM8737 I2C driver: %d\n",
@@ -783,7 +870,11 @@ static void __exit wm8737_exit(void)
 #if defined(CONFIG_SPI_MASTER)
 	spi_unregister_driver(&wm8737_spi_driver);
 #endif
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 	i2c_del_driver(&wm8737_i2c_driver);
 #endif
 }

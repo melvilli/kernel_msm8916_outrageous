@@ -101,9 +101,14 @@ static dispatch_init_table_t __initdata dispatch_init_table[] = {
 #if XCHAL_UNALIGNED_LOAD_EXCEPTION || XCHAL_UNALIGNED_STORE_EXCEPTION
 #ifdef CONFIG_XTENSA_UNALIGNED_USER
 { EXCCAUSE_UNALIGNED,		USER,	   fast_unaligned },
+<<<<<<< HEAD
 #else
 { EXCCAUSE_UNALIGNED,		0,	   do_unaligned_user },
 #endif
+=======
+#endif
+{ EXCCAUSE_UNALIGNED,		0,	   do_unaligned_user },
+>>>>>>> v3.18
 { EXCCAUSE_UNALIGNED,		KRNL,	   fast_unaligned },
 #endif
 #ifdef CONFIG_MMU
@@ -157,7 +162,11 @@ COPROCESSOR(7),
  * 2. it is a temporary memory buffer for the exception handlers.
  */
 
+<<<<<<< HEAD
 unsigned long exc_table[EXC_TABLE_SIZE/4];
+=======
+DEFINE_PER_CPU(unsigned long, exc_table[EXC_TABLE_SIZE/4]);
+>>>>>>> v3.18
 
 void die(const char*, struct pt_regs*, long);
 
@@ -212,6 +221,12 @@ void do_interrupt(struct pt_regs *regs)
 		XCHAL_INTLEVEL6_MASK,
 		XCHAL_INTLEVEL7_MASK,
 	};
+<<<<<<< HEAD
+=======
+	struct pt_regs *old_regs = set_irq_regs(regs);
+
+	irq_enter();
+>>>>>>> v3.18
 
 	for (;;) {
 		unsigned intread = get_sr(interrupt);
@@ -227,6 +242,7 @@ void do_interrupt(struct pt_regs *regs)
 		}
 
 		if (level == 0)
+<<<<<<< HEAD
 			return;
 
 		/*
@@ -242,6 +258,15 @@ void do_interrupt(struct pt_regs *regs)
 			do_IRQ(i, regs);
 		}
 	}
+=======
+			break;
+
+		do_IRQ(__ffs(int_at_level), regs);
+	}
+
+	irq_exit();
+	set_irq_regs(old_regs);
+>>>>>>> v3.18
 }
 
 /*
@@ -269,7 +294,10 @@ do_illegal_instruction(struct pt_regs *regs)
  */
 
 #if XCHAL_UNALIGNED_LOAD_EXCEPTION || XCHAL_UNALIGNED_STORE_EXCEPTION
+<<<<<<< HEAD
 #ifndef CONFIG_XTENSA_UNALIGNED_USER
+=======
+>>>>>>> v3.18
 void
 do_unaligned_user (struct pt_regs *regs)
 {
@@ -291,7 +319,10 @@ do_unaligned_user (struct pt_regs *regs)
 
 }
 #endif
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 
 void
 do_debug(struct pt_regs *regs)
@@ -318,17 +349,43 @@ do_debug(struct pt_regs *regs)
 }
 
 
+<<<<<<< HEAD
+=======
+static void set_handler(int idx, void *handler)
+{
+	unsigned int cpu;
+
+	for_each_possible_cpu(cpu)
+		per_cpu(exc_table, cpu)[idx] = (unsigned long)handler;
+}
+
+>>>>>>> v3.18
 /* Set exception C handler - for temporary use when probing exceptions */
 
 void * __init trap_set_handler(int cause, void *handler)
 {
+<<<<<<< HEAD
 	unsigned long *entry = &exc_table[EXC_TABLE_DEFAULT / 4 + cause];
 	void *previous = (void *)*entry;
 	*entry = (unsigned long)handler;
+=======
+	void *previous = (void *)per_cpu(exc_table, 0)[
+		EXC_TABLE_DEFAULT / 4 + cause];
+	set_handler(EXC_TABLE_DEFAULT / 4 + cause, handler);
+>>>>>>> v3.18
 	return previous;
 }
 
 
+<<<<<<< HEAD
+=======
+static void trap_init_excsave(void)
+{
+	unsigned long excsave1 = (unsigned long)this_cpu_ptr(exc_table);
+	__asm__ __volatile__("wsr  %0, excsave1\n" : : "a" (excsave1));
+}
+
+>>>>>>> v3.18
 /*
  * Initialize dispatch tables.
  *
@@ -342,8 +399,11 @@ void * __init trap_set_handler(int cause, void *handler)
  * See vectors.S for more details.
  */
 
+<<<<<<< HEAD
 #define set_handler(idx,handler) (exc_table[idx] = (unsigned long) (handler))
 
+=======
+>>>>>>> v3.18
 void __init trap_init(void)
 {
 	int i;
@@ -373,10 +433,22 @@ void __init trap_init(void)
 	}
 
 	/* Initialize EXCSAVE_1 to hold the address of the exception table. */
+<<<<<<< HEAD
 
 	i = (unsigned long)exc_table;
 	__asm__ __volatile__("wsr  %0, excsave1\n" : : "a" (i));
 }
+=======
+	trap_init_excsave();
+}
+
+#ifdef CONFIG_SMP
+void secondary_trap_init(void)
+{
+	trap_init_excsave();
+}
+#endif
+>>>>>>> v3.18
 
 /*
  * This function dumps the current valid window frame and other base registers.

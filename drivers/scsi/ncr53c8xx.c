@@ -1615,7 +1615,11 @@ struct ncb {
 	spinlock_t	smp_lock;	/* Lock for SMP threading       */
 
 	/*----------------------------------------------------------------
+<<<<<<< HEAD
 	**	Chip and controller indentification.
+=======
+	**	Chip and controller identification.
+>>>>>>> v3.18
 	**----------------------------------------------------------------
 	*/
 	int		unit;		/* Unit number			*/
@@ -6633,7 +6637,11 @@ static void ncr_sir_to_redo(struct ncb *np, int num, struct ccb *cp)
 		**	patch requested size into sense command
 		*/
 		cp->sensecmd[0]		= 0x03;
+<<<<<<< HEAD
 		cp->sensecmd[1]		= cmd->device->lun << 5;
+=======
+		cp->sensecmd[1]		= (cmd->device->lun & 0x7) << 5;
+>>>>>>> v3.18
 		cp->sensecmd[4]		= sizeof(cp->sense_buf);
 
 		/*

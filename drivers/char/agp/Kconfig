@@ -68,6 +68,10 @@ config AGP_AMD64
 config AGP_INTEL
 	tristate "Intel 440LX/BX/GX, I8xx and E7x05 chipset support"
 	depends on AGP && X86
+<<<<<<< HEAD
+=======
+	select INTEL_GTT
+>>>>>>> v3.18
 	help
 	  This option gives you AGP support for the GLX component of X
 	  on Intel 440LX/BX/GX, 815, 820, 830, 840, 845, 850, 860, 875,
@@ -155,3 +159,10 @@ config AGP_SGI_TIOCA
           This option gives you AGP GART support for the SGI TIO chipset
           for IA64 processors.
 
+<<<<<<< HEAD
+=======
+config INTEL_GTT
+	tristate
+	depends on X86 && PCI
+
+>>>>>>> v3.18

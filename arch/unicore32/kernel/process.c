@@ -51,6 +51,7 @@ void arch_cpu_idle(void)
 	local_irq_enable();
 }
 
+<<<<<<< HEAD
 static enum reboot_mode reboot_mode = REBOOT_HARD;
 
 int __init reboot_setup(char *str)
@@ -61,6 +62,8 @@ int __init reboot_setup(char *str)
 }
 __setup("reboot=", reboot_setup);
 
+=======
+>>>>>>> v3.18
 void machine_halt(void)
 {
 	gpio_set_value(GPO_SOFT_OFF, 0);
@@ -70,6 +73,10 @@ void machine_halt(void)
  * Function pointers to optional machine specific functions
  */
 void (*pm_power_off)(void) = NULL;
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(pm_power_off);
+>>>>>>> v3.18
 
 void machine_power_off(void)
 {

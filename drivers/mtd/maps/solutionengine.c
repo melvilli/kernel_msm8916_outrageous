@@ -33,6 +33,7 @@ struct map_info soleng_flash_map = {
 
 static const char * const probes[] = { "RedBoot", "cmdlinepart", NULL };
 
+<<<<<<< HEAD
 #ifdef CONFIG_MTD_SUPERH_RESERVE
 static struct mtd_partition superh_se_partitions[] = {
 	/* Reserved for boot code, read-only */
@@ -55,6 +56,8 @@ static struct mtd_partition superh_se_partitions[] = {
 #define NUM_PARTITIONS 0
 #endif /* CONFIG_MTD_SUPERH_RESERVE */
 
+=======
+>>>>>>> v3.18
 static int __init init_soleng_maps(void)
 {
 	/* First probe at offset 0 */
@@ -92,8 +95,12 @@ static int __init init_soleng_maps(void)
 		mtd_device_register(eprom_mtd, NULL, 0);
 	}
 
+<<<<<<< HEAD
 	mtd_device_parse_register(flash_mtd, probes, NULL,
 				  superh_se_partitions, NUM_PARTITIONS);
+=======
+	mtd_device_parse_register(flash_mtd, probes, NULL, NULL, 0);
+>>>>>>> v3.18
 
 	return 0;
 }

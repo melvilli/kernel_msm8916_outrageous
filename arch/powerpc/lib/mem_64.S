@@ -77,10 +77,17 @@ _GLOBAL(memset)
 	stb	r4,0(r6)
 	blr
 
+<<<<<<< HEAD
 _GLOBAL(memmove)
 	cmplw	0,r3,r4
 	bgt	.backwards_memcpy
 	b	.memcpy
+=======
+_GLOBAL_TOC(memmove)
+	cmplw	0,r3,r4
+	bgt	backwards_memcpy
+	b	memcpy
+>>>>>>> v3.18
 
 _GLOBAL(backwards_memcpy)
 	rlwinm.	r7,r5,32-3,3,31		/* r0 = r5 >> 3 */

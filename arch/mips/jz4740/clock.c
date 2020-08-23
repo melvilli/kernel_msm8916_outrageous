@@ -687,7 +687,11 @@ static struct clk jz4740_clock_simple_clks[] = {
 	[3] = {
 		.name = "dma",
 		.parent = &jz_clk_high_speed_peripheral.clk,
+<<<<<<< HEAD
 		.gate_bit = JZ_CLOCK_GATE_UART0,
+=======
+		.gate_bit = JZ_CLOCK_GATE_DMAC,
+>>>>>>> v3.18
 		.ops = &jz_clk_simple_ops,
 	},
 	[4] = {

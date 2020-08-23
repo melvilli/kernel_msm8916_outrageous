@@ -18,6 +18,7 @@
  *
  */
 
+<<<<<<< HEAD
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/init.h>
@@ -26,6 +27,16 @@
 
 #include <asm/page.h>
 #include <asm/mach/map.h>
+=======
+#include <linux/init.h>
+#include <linux/io.h>
+#include <linux/kernel.h>
+#include <linux/mm.h>
+#include <linux/module.h>
+
+#include <asm/mach/map.h>
+#include <asm/page.h>
+>>>>>>> v3.18
 
 #include "board.h"
 #include "iomap.h"

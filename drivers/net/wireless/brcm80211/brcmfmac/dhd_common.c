@@ -21,9 +21,15 @@
 #include <brcmu_utils.h>
 #include "dhd.h"
 #include "dhd_bus.h"
+<<<<<<< HEAD
 #include "dhd_proto.h"
 #include "dhd_dbg.h"
 #include "fwil.h"
+=======
+#include "dhd_dbg.h"
+#include "fwil.h"
+#include "fwil_types.h"
+>>>>>>> v3.18
 #include "tracepoint.h"
 
 #define PKTFILTER_BUF_SIZE		128
@@ -32,6 +38,7 @@
 #define BRCMF_DEFAULT_SCAN_UNASSOC_TIME	40
 #define BRCMF_DEFAULT_PACKET_FILTER	"100 0 0 0 0x01 0x00"
 
+<<<<<<< HEAD
 #ifdef DEBUG
 static const char brcmf_version[] =
 	"Dongle Host Driver, version " BRCMF_VERSION_STR "\nCompiled on "
@@ -40,6 +47,10 @@ static const char brcmf_version[] =
 static const char brcmf_version[] =
 	"Dongle Host Driver, version " BRCMF_VERSION_STR;
 #endif
+=======
+/* boost value for RSSI_DELTA in preferred join selection */
+#define BRCMF_JOIN_PREF_RSSI_BOOST	8
+>>>>>>> v3.18
 
 
 bool brcmf_c_prec_enq(struct device *dev, struct pktq *q,
@@ -255,10 +266,16 @@ int brcmf_c_preinit_dcmds(struct brcmf_if *ifp)
 {
 	s8 eventmask[BRCMF_EVENTING_MASK_LEN];
 	u8 buf[BRCMF_DCMD_SMLEN];
+<<<<<<< HEAD
 	char *ptr;
 	s32 err;
 	struct brcmf_bus_dcmd *cmdlst;
 	struct list_head *cur, *q;
+=======
+	struct brcmf_join_pref_params join_pref_params[2];
+	char *ptr;
+	s32 err;
+>>>>>>> v3.18
 
 	/* retreive mac address */
 	err = brcmf_fil_iovar_data_get(ifp, "cur_etheraddr", ifp->mac_addr,
@@ -281,9 +298,27 @@ int brcmf_c_preinit_dcmds(struct brcmf_if *ifp)
 	}
 	ptr = (char *)buf;
 	strsep(&ptr, "\n");
+<<<<<<< HEAD
 	/* Print fw version info */
 	brcmf_err("Firmware version = %s\n", buf);
 
+=======
+
+	/* Print fw version info */
+	brcmf_err("Firmware version = %s\n", buf);
+
+	/* locate firmware version number for ethtool */
+	ptr = strrchr(buf, ' ') + 1;
+	strlcpy(ifp->drvr->fwver, ptr, sizeof(ifp->drvr->fwver));
+
+	/* set mpc */
+	err = brcmf_fil_iovar_int_set(ifp, "mpc", 1);
+	if (err) {
+		brcmf_err("failed setting mpc\n");
+		goto done;
+	}
+
+>>>>>>> v3.18
 	/*
 	 * Setup timeout if Beacons are lost and roam is off to report
 	 * link down
@@ -304,6 +339,23 @@ int brcmf_c_preinit_dcmds(struct brcmf_if *ifp)
 		goto done;
 	}
 
+<<<<<<< HEAD
+=======
+	/* Setup join_pref to select target by RSSI(with boost on 5GHz) */
+	join_pref_params[0].type = BRCMF_JOIN_PREF_RSSI_DELTA;
+	join_pref_params[0].len = 2;
+	join_pref_params[0].rssi_gain = BRCMF_JOIN_PREF_RSSI_BOOST;
+	join_pref_params[0].band = WLC_BAND_5G;
+	join_pref_params[1].type = BRCMF_JOIN_PREF_RSSI;
+	join_pref_params[1].len = 2;
+	join_pref_params[1].rssi_gain = 0;
+	join_pref_params[1].band = 0;
+	err = brcmf_fil_iovar_data_set(ifp, "join_pref", join_pref_params,
+				       sizeof(join_pref_params));
+	if (err)
+		brcmf_err("Set join_pref error (%d)\n", err);
+
+>>>>>>> v3.18
 	/* Setup event_msgs, enable E_IF */
 	err = brcmf_fil_iovar_data_get(ifp, "event_msgs", eventmask,
 				       BRCMF_EVENTING_MASK_LEN);
@@ -342,6 +394,7 @@ int brcmf_c_preinit_dcmds(struct brcmf_if *ifp)
 	brcmf_c_pktfilter_offload_enable(ifp, BRCMF_DEFAULT_PACKET_FILTER,
 					 0, true);
 
+<<<<<<< HEAD
 	/* set bus specific command if there is any */
 	list_for_each_safe(cur, q, &ifp->drvr->bus_if->dcmd_list) {
 		cmdlst = list_entry(cur, struct brcmf_bus_dcmd, list);
@@ -353,6 +406,10 @@ int brcmf_c_preinit_dcmds(struct brcmf_if *ifp)
 		list_del(cur);
 		kfree(cmdlst);
 	}
+=======
+	/* do bus specific preinit here */
+	err = brcmf_bus_preinit(ifp->drvr->bus_if);
+>>>>>>> v3.18
 done:
 	return err;
 }

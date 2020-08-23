@@ -2614,6 +2614,7 @@ static struct pci_driver lanai_driver = {
 	.probe    = lanai_init_one,
 };
 
+<<<<<<< HEAD
 static int __init lanai_module_init(void)
 {
 	int x;
@@ -2635,6 +2636,9 @@ static void __exit lanai_module_exit(void)
 
 module_init(lanai_module_init);
 module_exit(lanai_module_exit);
+=======
+module_pci_driver(lanai_driver);
+>>>>>>> v3.18
 
 MODULE_AUTHOR("Mitchell Blank Jr <mitch@sfgoth.com>");
 MODULE_DESCRIPTION("Efficient Networks Speedstream 3010 driver");

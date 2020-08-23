@@ -14,7 +14,11 @@
 #include <linux/sysctl.h>
 
 #ifdef CONFIG_PROC_SYSCTL
+<<<<<<< HEAD
 static void *get_mq(ctl_table *table)
+=======
+static void *get_mq(struct ctl_table *table)
+>>>>>>> v3.18
 {
 	char *which = table->data;
 	struct ipc_namespace *ipc_ns = current->nsproxy->ipc_ns;
@@ -22,7 +26,11 @@ static void *get_mq(ctl_table *table)
 	return which;
 }
 
+<<<<<<< HEAD
 static int proc_mq_dointvec(ctl_table *table, int write,
+=======
+static int proc_mq_dointvec(struct ctl_table *table, int write,
+>>>>>>> v3.18
 			    void __user *buffer, size_t *lenp, loff_t *ppos)
 {
 	struct ctl_table mq_table;
@@ -32,7 +40,11 @@ static int proc_mq_dointvec(ctl_table *table, int write,
 	return proc_dointvec(&mq_table, write, buffer, lenp, ppos);
 }
 
+<<<<<<< HEAD
 static int proc_mq_dointvec_minmax(ctl_table *table, int write,
+=======
+static int proc_mq_dointvec_minmax(struct ctl_table *table, int write,
+>>>>>>> v3.18
 	void __user *buffer, size_t *lenp, loff_t *ppos)
 {
 	struct ctl_table mq_table;
@@ -53,7 +65,11 @@ static int msg_max_limit_max = HARD_MSGMAX;
 static int msg_maxsize_limit_min = MIN_MSGSIZEMAX;
 static int msg_maxsize_limit_max = HARD_MSGSIZEMAX;
 
+<<<<<<< HEAD
 static ctl_table mq_sysctls[] = {
+=======
+static struct ctl_table mq_sysctls[] = {
+>>>>>>> v3.18
 	{
 		.procname	= "queues_max",
 		.data		= &init_ipc_ns.mq_queues_max,
@@ -100,7 +116,11 @@ static ctl_table mq_sysctls[] = {
 	{}
 };
 
+<<<<<<< HEAD
 static ctl_table mq_sysctl_dir[] = {
+=======
+static struct ctl_table mq_sysctl_dir[] = {
+>>>>>>> v3.18
 	{
 		.procname	= "mqueue",
 		.mode		= 0555,
@@ -109,7 +129,11 @@ static ctl_table mq_sysctl_dir[] = {
 	{}
 };
 
+<<<<<<< HEAD
 static ctl_table mq_sysctl_root[] = {
+=======
+static struct ctl_table mq_sysctl_root[] = {
+>>>>>>> v3.18
 	{
 		.procname	= "fs",
 		.mode		= 0555,

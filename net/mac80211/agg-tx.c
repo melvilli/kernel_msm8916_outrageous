@@ -107,7 +107,11 @@ static void ieee80211_send_addba_request(struct ieee80211_sub_if_data *sdata,
 	mgmt->u.action.u.addba_req.start_seq_num =
 					cpu_to_le16(start_seq_num << 4);
 
+<<<<<<< HEAD
 	ieee80211_tx_skb_tid(sdata, skb, tid);
+=======
+	ieee80211_tx_skb(sdata, skb);
+>>>>>>> v3.18
 }
 
 void ieee80211_send_bar(struct ieee80211_vif *vif, u8 *ra, u16 tid, u16 ssn)
@@ -170,10 +174,20 @@ ieee80211_stop_queue_agg(struct ieee80211_sub_if_data *sdata, int tid)
 {
 	int queue = sdata->vif.hw_queue[ieee80211_ac_from_tid(tid)];
 
+<<<<<<< HEAD
 	if (atomic_inc_return(&sdata->local->agg_queue_stop[queue]) == 1)
 		ieee80211_stop_queue_by_reason(
 			&sdata->local->hw, queue,
 			IEEE80211_QUEUE_STOP_REASON_AGGREGATION);
+=======
+	/* we do refcounting here, so don't use the queue reason refcounting */
+
+	if (atomic_inc_return(&sdata->local->agg_queue_stop[queue]) == 1)
+		ieee80211_stop_queue_by_reason(
+			&sdata->local->hw, queue,
+			IEEE80211_QUEUE_STOP_REASON_AGGREGATION,
+			false);
+>>>>>>> v3.18
 	__acquire(agg_queue);
 }
 
@@ -185,7 +199,12 @@ ieee80211_wake_queue_agg(struct ieee80211_sub_if_data *sdata, int tid)
 	if (atomic_dec_return(&sdata->local->agg_queue_stop[queue]) == 0)
 		ieee80211_wake_queue_by_reason(
 			&sdata->local->hw, queue,
+<<<<<<< HEAD
 			IEEE80211_QUEUE_STOP_REASON_AGGREGATION);
+=======
+			IEEE80211_QUEUE_STOP_REASON_AGGREGATION,
+			false);
+>>>>>>> v3.18
 	__release(agg_queue);
 }
 

@@ -74,8 +74,12 @@ static const char *wm9713_rec_src[] =
 	"Mono Out", "Zh"};
 static const char *wm9713_rec_gain[] = {"+1.5dB Steps", "+0.75dB Steps"};
 static const char *wm9713_alc_select[] = {"None", "Left", "Right", "Stereo"};
+<<<<<<< HEAD
 static const char *wm9713_mono_pga[] = {"Vmid", "Zh", "Mono", "Inv",
 	"Mono Vmid", "Inv Vmid"};
+=======
+static const char *wm9713_mono_pga[] = {"Vmid", "Zh", "Mono", "Inv"};
+>>>>>>> v3.18
 static const char *wm9713_spk_pga[] =
 	{"Vmid", "Zh", "Headphone", "Speaker", "Inv", "Headphone Vmid",
 	"Speaker Vmid", "Inv Vmid"};
@@ -221,7 +225,12 @@ static int wm9713_voice_shutdown(struct snd_soc_dapm_widget *w,
 	struct snd_soc_codec *codec = w->codec;
 	u16 status, rate;
 
+<<<<<<< HEAD
 	BUG_ON(event != SND_SOC_DAPM_PRE_PMD);
+=======
+	if (WARN_ON(event != SND_SOC_DAPM_PRE_PMD))
+		return -EINVAL;
+>>>>>>> v3.18
 
 	/* Gracefully shut down the voice interface. */
 	status = ac97_read(codec, AC97_EXTENDED_MID) | 0x1000;
@@ -652,7 +661,11 @@ static unsigned int ac97_read(struct snd_soc_codec *codec,
 	if (reg == AC97_RESET || reg == AC97_GPIO_STATUS ||
 		reg == AC97_VENDOR_ID1 || reg == AC97_VENDOR_ID2 ||
 		reg == AC97_CD)
+<<<<<<< HEAD
 		return soc_ac97_ops.read(codec->ac97, reg);
+=======
+		return soc_ac97_ops->read(codec->ac97, reg);
+>>>>>>> v3.18
 	else {
 		reg = reg >> 1;
 
@@ -668,7 +681,11 @@ static int ac97_write(struct snd_soc_codec *codec, unsigned int reg,
 {
 	u16 *cache = codec->reg_cache;
 	if (reg < 0x7c)
+<<<<<<< HEAD
 		soc_ac97_ops.write(codec->ac97, reg, val);
+=======
+		soc_ac97_ops->write(codec->ac97, reg, val);
+>>>>>>> v3.18
 	reg = reg >> 1;
 	if (reg < (ARRAY_SIZE(wm9713_reg)))
 		cache[reg] = val;
@@ -953,6 +970,7 @@ static int wm9713_pcm_hw_params(struct snd_pcm_substream *substream,
 	struct snd_soc_codec *codec = dai->codec;
 	u16 reg = ac97_read(codec, AC97_CENTER_LFE_MASTER) & 0xfff3;
 
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		break;
@@ -963,6 +981,18 @@ static int wm9713_pcm_hw_params(struct snd_pcm_substream *substream,
 		reg |= 0x0008;
 		break;
 	case SNDRV_PCM_FORMAT_S32_LE:
+=======
+	switch (params_width(params)) {
+	case 16:
+		break;
+	case 20:
+		reg |= 0x0004;
+		break;
+	case 24:
+		reg |= 0x0008;
+		break;
+	case 32:
+>>>>>>> v3.18
 		reg |= 0x000c;
 		break;
 	}
@@ -1095,15 +1125,26 @@ static struct snd_soc_dai_driver wm9713_dai[] = {
 
 int wm9713_reset(struct snd_soc_codec *codec, int try_warm)
 {
+<<<<<<< HEAD
 	if (try_warm && soc_ac97_ops.warm_reset) {
 		soc_ac97_ops.warm_reset(codec->ac97);
+=======
+	if (try_warm && soc_ac97_ops->warm_reset) {
+		soc_ac97_ops->warm_reset(codec->ac97);
+>>>>>>> v3.18
 		if (ac97_read(codec, 0) == wm9713_reg[0])
 			return 1;
 	}
 
+<<<<<<< HEAD
 	soc_ac97_ops.reset(codec->ac97);
 	if (soc_ac97_ops.warm_reset)
 		soc_ac97_ops.warm_reset(codec->ac97);
+=======
+	soc_ac97_ops->reset(codec->ac97);
+	if (soc_ac97_ops->warm_reset)
+		soc_ac97_ops->warm_reset(codec->ac97);
+>>>>>>> v3.18
 	if (ac97_read(codec, 0) != wm9713_reg[0])
 		return -EIO;
 	return 0;
@@ -1180,7 +1221,11 @@ static int wm9713_soc_resume(struct snd_soc_codec *codec)
 			if (i == AC97_POWERDOWN || i == AC97_EXTENDED_MID ||
 				i == AC97_EXTENDED_MSTATUS || i > 0x66)
 				continue;
+<<<<<<< HEAD
 			soc_ac97_ops.write(codec->ac97, i, cache[i>>1]);
+=======
+			soc_ac97_ops->write(codec->ac97, i, cache[i>>1]);
+>>>>>>> v3.18
 		}
 	}
 
@@ -1197,7 +1242,11 @@ static int wm9713_soc_probe(struct snd_soc_codec *codec)
 		return -ENOMEM;
 	snd_soc_codec_set_drvdata(codec, wm9713);
 
+<<<<<<< HEAD
 	ret = snd_soc_new_ac97_codec(codec, &soc_ac97_ops, 0);
+=======
+	ret = snd_soc_new_ac97_codec(codec, soc_ac97_ops, 0);
+>>>>>>> v3.18
 	if (ret < 0)
 		goto codec_err;
 

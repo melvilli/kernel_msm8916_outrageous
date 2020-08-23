@@ -5,12 +5,15 @@
 #include <asm/barrier.h>
 #include <asm/global_lock.h>
 
+<<<<<<< HEAD
 /*
  * clear_bit() doesn't provide any barrier for the compiler.
  */
 #define smp_mb__before_clear_bit()	barrier()
 #define smp_mb__after_clear_bit()	barrier()
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SMP
 /*
  * These functions are the basis of our bit ops.

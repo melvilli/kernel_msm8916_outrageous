@@ -13,6 +13,7 @@
 #include <asm/siginfo.h>
 
 struct mips_abi {
+<<<<<<< HEAD
 	int (* const setup_frame)(void *sig_return, struct k_sigaction *ka,
 				  struct pt_regs *regs, int signr,
 				  sigset_t *set);
@@ -20,6 +21,13 @@ struct mips_abi {
 	int (* const setup_rt_frame)(void *sig_return, struct k_sigaction *ka,
 			       struct pt_regs *regs, int signr,
 			       sigset_t *set, siginfo_t *info);
+=======
+	int (* const setup_frame)(void *sig_return, struct ksignal *ksig,
+				  struct pt_regs *regs, sigset_t *set);
+	const unsigned long	signal_return_offset;
+	int (* const setup_rt_frame)(void *sig_return, struct ksignal *ksig,
+				     struct pt_regs *regs, sigset_t *set);
+>>>>>>> v3.18
 	const unsigned long	rt_signal_return_offset;
 	const unsigned long	restart;
 };

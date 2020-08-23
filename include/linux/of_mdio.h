@@ -19,16 +19,31 @@ extern struct phy_device *of_phy_connect(struct net_device *dev,
 					 struct device_node *phy_np,
 					 void (*hndlr)(struct net_device *),
 					 u32 flags, phy_interface_t iface);
+<<<<<<< HEAD
 extern struct phy_device *of_phy_connect_fixed_link(struct net_device *dev,
 					 void (*hndlr)(struct net_device *),
 					 phy_interface_t iface);
+=======
+struct phy_device *of_phy_attach(struct net_device *dev,
+				 struct device_node *phy_np, u32 flags,
+				 phy_interface_t iface);
+>>>>>>> v3.18
 
 extern struct mii_bus *of_mdio_find_bus(struct device_node *mdio_np);
 
 #else /* CONFIG_OF */
 static inline int of_mdiobus_register(struct mii_bus *mdio, struct device_node *np)
 {
+<<<<<<< HEAD
 	return -ENOSYS;
+=======
+	/*
+	 * Fall back to the non-DT function to register a bus.
+	 * This way, we don't have to keep compat bits around in drivers.
+	 */
+
+	return mdiobus_register(mdio);
+>>>>>>> v3.18
 }
 
 static inline struct phy_device *of_phy_find_device(struct device_node *phy_np)
@@ -44,9 +59,15 @@ static inline struct phy_device *of_phy_connect(struct net_device *dev,
 	return NULL;
 }
 
+<<<<<<< HEAD
 static inline struct phy_device *of_phy_connect_fixed_link(struct net_device *dev,
 							   void (*hndlr)(struct net_device *),
 							   phy_interface_t iface)
+=======
+static inline struct phy_device *of_phy_attach(struct net_device *dev,
+					       struct device_node *phy_np,
+					       u32 flags, phy_interface_t iface)
+>>>>>>> v3.18
 {
 	return NULL;
 }
@@ -57,4 +78,22 @@ static inline struct mii_bus *of_mdio_find_bus(struct device_node *mdio_np)
 }
 #endif /* CONFIG_OF */
 
+<<<<<<< HEAD
+=======
+#if defined(CONFIG_OF) && defined(CONFIG_FIXED_PHY)
+extern int of_phy_register_fixed_link(struct device_node *np);
+extern bool of_phy_is_fixed_link(struct device_node *np);
+#else
+static inline int of_phy_register_fixed_link(struct device_node *np)
+{
+	return -ENOSYS;
+}
+static inline bool of_phy_is_fixed_link(struct device_node *np)
+{
+	return false;
+}
+#endif
+
+
+>>>>>>> v3.18
 #endif /* __LINUX_OF_MDIO_H */

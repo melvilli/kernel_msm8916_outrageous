@@ -10,8 +10,11 @@
 #endif
 
 struct qnx4_sb_info {
+<<<<<<< HEAD
 	struct buffer_head	*sb_buf;	/* superblock buffer */
 	struct qnx4_super_block	*sb;		/* our superblock */
+=======
+>>>>>>> v3.18
 	unsigned int		Version;	/* may be useful */
 	struct qnx4_inode_entry	*BitMap;	/* useful */
 };

@@ -28,8 +28,12 @@
 
 #include "udf_sb.h"
 
+<<<<<<< HEAD
 static int udf_translate_to_linux(uint8_t *, int, uint8_t *, int, uint8_t *,
 				  int);
+=======
+static int udf_translate_to_linux(uint8_t *, uint8_t *, int, uint8_t *, int);
+>>>>>>> v3.18
 
 static int udf_char_to_ustr(struct ustr *dest, const uint8_t *src, int strlen)
 {
@@ -133,15 +137,21 @@ int udf_CS0toUTF8(struct ustr *utf_o, const struct ustr *ocu_i)
 		if (c < 0x80U)
 			utf_o->u_name[utf_o->u_len++] = (uint8_t)c;
 		else if (c < 0x800U) {
+<<<<<<< HEAD
 			if (utf_o->u_len > (UDF_NAME_LEN - 4))
 				break;
+=======
+>>>>>>> v3.18
 			utf_o->u_name[utf_o->u_len++] =
 						(uint8_t)(0xc0 | (c >> 6));
 			utf_o->u_name[utf_o->u_len++] =
 						(uint8_t)(0x80 | (c & 0x3f));
 		} else {
+<<<<<<< HEAD
 			if (utf_o->u_len > (UDF_NAME_LEN - 5))
 				break;
+=======
+>>>>>>> v3.18
 			utf_o->u_name[utf_o->u_len++] =
 						(uint8_t)(0xe0 | (c >> 12));
 			utf_o->u_name[utf_o->u_len++] =
@@ -182,22 +192,32 @@ int udf_CS0toUTF8(struct ustr *utf_o, const struct ustr *ocu_i)
 static int udf_UTF8toCS0(dstring *ocu, struct ustr *utf, int length)
 {
 	unsigned c, i, max_val, utf_char;
+<<<<<<< HEAD
 	int utf_cnt, u_len, u_ch;
+=======
+	int utf_cnt, u_len;
+>>>>>>> v3.18
 
 	memset(ocu, 0, sizeof(dstring) * length);
 	ocu[0] = 8;
 	max_val = 0xffU;
+<<<<<<< HEAD
 	u_ch = 1;
+=======
+>>>>>>> v3.18
 
 try_again:
 	u_len = 0U;
 	utf_char = 0U;
 	utf_cnt = 0U;
 	for (i = 0U; i < utf->u_len; i++) {
+<<<<<<< HEAD
 		/* Name didn't fit? */
 		if (u_len + 1 + u_ch >= length)
 			return 0;
 
+=======
+>>>>>>> v3.18
 		c = (uint8_t)utf->u_name[i];
 
 		/* Complete a multi-byte UTF-8 character */
@@ -239,7 +259,10 @@ try_again:
 			if (max_val == 0xffU) {
 				max_val = 0xffffU;
 				ocu[0] = (uint8_t)0x10U;
+<<<<<<< HEAD
 				u_ch = 2;
+=======
+>>>>>>> v3.18
 				goto try_again;
 			}
 			goto error_out;
@@ -292,7 +315,11 @@ static int udf_CS0toNLS(struct nls_table *nls, struct ustr *utf_o,
 			c = (c << 8) | ocu[i++];
 
 		len = nls->uni2char(c, &utf_o->u_name[utf_o->u_len],
+<<<<<<< HEAD
 				    UDF_NAME_LEN - 2 - utf_o->u_len);
+=======
+				    UDF_NAME_LEN - utf_o->u_len);
+>>>>>>> v3.18
 		/* Valid character? */
 		if (len >= 0)
 			utf_o->u_len += len;
@@ -310,19 +337,29 @@ static int udf_NLStoCS0(struct nls_table *nls, dstring *ocu, struct ustr *uni,
 	int len;
 	unsigned i, max_val;
 	uint16_t uni_char;
+<<<<<<< HEAD
 	int u_len, u_ch;
+=======
+	int u_len;
+>>>>>>> v3.18
 
 	memset(ocu, 0, sizeof(dstring) * length);
 	ocu[0] = 8;
 	max_val = 0xffU;
+<<<<<<< HEAD
 	u_ch = 1;
+=======
+>>>>>>> v3.18
 
 try_again:
 	u_len = 0U;
 	for (i = 0U; i < uni->u_len; i++) {
+<<<<<<< HEAD
 		/* Name didn't fit? */
 		if (u_len + 1 + u_ch >= length)
 			return 0;
+=======
+>>>>>>> v3.18
 		len = nls->char2uni(&uni->u_name[i], uni->u_len - i, &uni_char);
 		if (!len)
 			continue;
@@ -335,7 +372,10 @@ try_again:
 		if (uni_char > max_val) {
 			max_val = 0xffffU;
 			ocu[0] = (uint8_t)0x10U;
+<<<<<<< HEAD
 			u_ch = 2;
+=======
+>>>>>>> v3.18
 			goto try_again;
 		}
 
@@ -349,8 +389,13 @@ try_again:
 	return u_len + 1;
 }
 
+<<<<<<< HEAD
 int udf_get_filename(struct super_block *sb, uint8_t *sname, int slen,
 		     uint8_t *dname, int dlen)
+=======
+int udf_get_filename(struct super_block *sb, uint8_t *sname, uint8_t *dname,
+		     int flen)
+>>>>>>> v3.18
 {
 	struct ustr *filename, *unifilename;
 	int len = 0;
@@ -363,7 +408,11 @@ int udf_get_filename(struct super_block *sb, uint8_t *sname, int slen,
 	if (!unifilename)
 		goto out1;
 
+<<<<<<< HEAD
 	if (udf_build_ustr_exact(unifilename, sname, slen))
+=======
+	if (udf_build_ustr_exact(unifilename, sname, flen))
+>>>>>>> v3.18
 		goto out2;
 
 	if (UDF_QUERY_FLAG(sb, UDF_FLAG_UTF8)) {
@@ -382,8 +431,12 @@ int udf_get_filename(struct super_block *sb, uint8_t *sname, int slen,
 	} else
 		goto out2;
 
+<<<<<<< HEAD
 	len = udf_translate_to_linux(dname, dlen,
 				     filename->u_name, filename->u_len,
+=======
+	len = udf_translate_to_linux(dname, filename->u_name, filename->u_len,
+>>>>>>> v3.18
 				     unifilename->u_name, unifilename->u_len);
 out2:
 	kfree(unifilename);
@@ -420,18 +473,28 @@ int udf_put_filename(struct super_block *sb, const uint8_t *sname,
 #define EXT_MARK		'.'
 #define CRC_MARK		'#'
 #define EXT_SIZE 		5
+<<<<<<< HEAD
 /* Number of chars we need to store generated CRC to make filename unique */
 #define CRC_LEN			5
 
 static int udf_translate_to_linux(uint8_t *newName, int newLen,
 				  uint8_t *udfName, int udfLen,
 				  uint8_t *fidName, int fidNameLen)
+=======
+
+static int udf_translate_to_linux(uint8_t *newName, uint8_t *udfName,
+				  int udfLen, uint8_t *fidName,
+				  int fidNameLen)
+>>>>>>> v3.18
 {
 	int index, newIndex = 0, needsCRC = 0;
 	int extIndex = 0, newExtIndex = 0, hasExt = 0;
 	unsigned short valueCRC;
 	uint8_t curr;
+<<<<<<< HEAD
 	const uint8_t hexChar[] = "0123456789ABCDEF";
+=======
+>>>>>>> v3.18
 
 	if (udfName[0] == '.' &&
 	    (udfLen == 1 || (udfLen == 2 && udfName[1] == '.'))) {
@@ -459,7 +522,11 @@ static int udf_translate_to_linux(uint8_t *newName, int newLen,
 					newExtIndex = newIndex;
 				}
 			}
+<<<<<<< HEAD
 			if (newIndex < newLen)
+=======
+			if (newIndex < 256)
+>>>>>>> v3.18
 				newName[newIndex++] = curr;
 			else
 				needsCRC = 1;
@@ -487,11 +554,16 @@ static int udf_translate_to_linux(uint8_t *newName, int newLen,
 				}
 				ext[localExtIndex++] = curr;
 			}
+<<<<<<< HEAD
 			maxFilenameLen = newLen - CRC_LEN - localExtIndex;
+=======
+			maxFilenameLen = 250 - localExtIndex;
+>>>>>>> v3.18
 			if (newIndex > maxFilenameLen)
 				newIndex = maxFilenameLen;
 			else
 				newIndex = newExtIndex;
+<<<<<<< HEAD
 		} else if (newIndex > newLen - CRC_LEN)
 			newIndex = newLen - CRC_LEN;
 		newName[newIndex++] = CRC_MARK;
@@ -500,6 +572,16 @@ static int udf_translate_to_linux(uint8_t *newName, int newLen,
 		newName[newIndex++] = hexChar[(valueCRC & 0x0f00) >> 8];
 		newName[newIndex++] = hexChar[(valueCRC & 0x00f0) >> 4];
 		newName[newIndex++] = hexChar[(valueCRC & 0x000f)];
+=======
+		} else if (newIndex > 250)
+			newIndex = 250;
+		newName[newIndex++] = CRC_MARK;
+		valueCRC = crc_itu_t(0, fidName, fidNameLen);
+		newName[newIndex++] = hex_asc_upper_hi(valueCRC >> 8);
+		newName[newIndex++] = hex_asc_upper_lo(valueCRC >> 8);
+		newName[newIndex++] = hex_asc_upper_hi(valueCRC);
+		newName[newIndex++] = hex_asc_upper_lo(valueCRC);
+>>>>>>> v3.18
 
 		if (hasExt) {
 			newName[newIndex++] = EXT_MARK;

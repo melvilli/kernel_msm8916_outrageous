@@ -66,7 +66,11 @@
 #include "probe_roms.h"
 
 #define MAJ 1
+<<<<<<< HEAD
 #define MIN 1
+=======
+#define MIN 2
+>>>>>>> v3.18
 #define BUILD 0
 #define DRV_VERSION __stringify(MAJ) "." __stringify(MIN) "." \
 	__stringify(BUILD)
@@ -75,7 +79,11 @@ MODULE_VERSION(DRV_VERSION);
 
 static struct scsi_transport_template *isci_transport_template;
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(isci_id_table) = {
+=======
+static const struct pci_device_id isci_id_table[] = {
+>>>>>>> v3.18
 	{ PCI_VDEVICE(INTEL, 0x1D61),},
 	{ PCI_VDEVICE(INTEL, 0x1D63),},
 	{ PCI_VDEVICE(INTEL, 0x1D65),},
@@ -356,7 +364,11 @@ static int isci_setup_interrupts(struct pci_dev *pdev)
 	for (i = 0; i < num_msix; i++)
 		pci_info->msix_entries[i].entry = i;
 
+<<<<<<< HEAD
 	err = pci_enable_msix(pdev, pci_info->msix_entries, num_msix);
+=======
+	err = pci_enable_msix_exact(pdev, pci_info->msix_entries, num_msix);
+>>>>>>> v3.18
 	if (err)
 		goto intx;
 

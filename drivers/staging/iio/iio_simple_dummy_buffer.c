@@ -71,6 +71,10 @@ static irqreturn_t iio_simple_dummy_trigger_h(int irq, void *p)
 		 * in the constant table fakedata.
 		 */
 		int i, j;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		for (i = 0, j = 0;
 		     i < bitmap_weight(indio_dev->active_scan_mask,
 				       indio_dev->masklength);
@@ -82,11 +86,16 @@ static irqreturn_t iio_simple_dummy_trigger_h(int irq, void *p)
 			len += 2;
 		}
 	}
+<<<<<<< HEAD
 	/* Store the timestamp at an 8 byte aligned offset */
 	if (indio_dev->scan_timestamp)
 		*(s64 *)((u8 *)data + ALIGN(len, sizeof(s64)))
 			= iio_get_time_ns();
 	iio_push_to_buffers(indio_dev, (u8 *)data);
+=======
+
+	iio_push_to_buffers_with_timestamp(indio_dev, data, iio_get_time_ns());
+>>>>>>> v3.18
 
 	kfree(data);
 
@@ -102,6 +111,7 @@ done:
 
 static const struct iio_buffer_setup_ops iio_simple_dummy_buffer_setup_ops = {
 	/*
+<<<<<<< HEAD
 	 * iio_sw_buffer_preenable:
 	 * Generic function for equal sized ring elements + 64 bit timestamp
 	 * Assumes that any combination of channels can be enabled.
@@ -110,6 +120,8 @@ static const struct iio_buffer_setup_ops iio_simple_dummy_buffer_setup_ops = {
 	 */
 	.preenable = &iio_sw_buffer_preenable,
 	/*
+=======
+>>>>>>> v3.18
 	 * iio_triggered_buffer_postenable:
 	 * Generic function that simply attaches the pollfunc to the trigger.
 	 * Replace this to mess with hardware state before we attach the
@@ -138,7 +150,11 @@ int iio_simple_dummy_configure_buffer(struct iio_dev *indio_dev,
 		goto error_ret;
 	}
 
+<<<<<<< HEAD
 	indio_dev->buffer = buffer;
+=======
+	iio_device_attach_buffer(indio_dev, buffer);
+>>>>>>> v3.18
 
 	/* Enable timestamps by default */
 	buffer->scan_timestamp = true;

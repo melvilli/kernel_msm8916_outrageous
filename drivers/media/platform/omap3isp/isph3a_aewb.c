@@ -13,6 +13,7 @@
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
+<<<<<<< HEAD
  *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -23,6 +24,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA
+=======
+>>>>>>> v3.18
  */
 
 #include <linux/slab.h>
@@ -47,7 +50,11 @@ static void h3a_aewb_setup_regs(struct ispstat *aewb, void *priv)
 	if (aewb->state == ISPSTAT_DISABLED)
 		return;
 
+<<<<<<< HEAD
 	isp_reg_writel(aewb->isp, aewb->active_buf->iommu_addr,
+=======
+	isp_reg_writel(aewb->isp, aewb->active_buf->dma_addr,
+>>>>>>> v3.18
 		       OMAP3_ISP_IOMEM_H3A, ISPH3A_AEWBUFST);
 
 	if (!aewb->update)

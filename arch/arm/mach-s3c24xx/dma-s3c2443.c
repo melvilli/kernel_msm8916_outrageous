@@ -16,6 +16,10 @@
 #include <linux/init.h>
 #include <linux/device.h>
 #include <linux/serial_core.h>
+<<<<<<< HEAD
+=======
+#include <linux/serial_s3c.h>
+>>>>>>> v3.18
 #include <linux/io.h>
 
 #include <mach/dma.h>
@@ -23,7 +27,10 @@
 #include <plat/dma-s3c24xx.h>
 #include <plat/cpu.h>
 
+<<<<<<< HEAD
 #include <plat/regs-serial.h>
+=======
+>>>>>>> v3.18
 #include <mach/regs-gpio.h>
 #include <plat/regs-dma.h>
 #include <mach/regs-lcd.h>
@@ -128,7 +135,12 @@ static struct s3c24xx_dma_map __initdata s3c2443_dma_mappings[] = {
 static void s3c2443_dma_select(struct s3c2410_dma_chan *chan,
 			       struct s3c24xx_dma_map *map)
 {
+<<<<<<< HEAD
 	writel(map->channels[0] | S3C2443_DMAREQSEL_HW,
+=======
+	unsigned long chsel = map->channels[0] & (~DMA_CH_VALID);
+	writel(chsel | S3C2443_DMAREQSEL_HW,
+>>>>>>> v3.18
 	       chan->regs + S3C2443_DMA_DMAREQSEL);
 }
 

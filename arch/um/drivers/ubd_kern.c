@@ -41,7 +41,11 @@
 #include <os.h>
 #include "cow.h"
 
+<<<<<<< HEAD
 enum ubd_req { UBD_READ, UBD_WRITE };
+=======
+enum ubd_req { UBD_READ, UBD_WRITE, UBD_FLUSH };
+>>>>>>> v3.18
 
 struct io_thread_req {
 	struct request *req;
@@ -866,6 +870,10 @@ static int ubd_add(int n, char **error_out)
 		goto out;
 	}
 	ubd_dev->queue->queuedata = ubd_dev;
+<<<<<<< HEAD
+=======
+	blk_queue_flush(ubd_dev->queue, REQ_FLUSH);
+>>>>>>> v3.18
 
 	blk_queue_max_segments(ubd_dev->queue, MAX_SG);
 	err = ubd_disk_register(UBD_MAJOR, ubd_dev->size, n, &ubd_gendisk[n]);
@@ -1239,15 +1247,55 @@ static void prepare_request(struct request *req, struct io_thread_req *io_req,
 }
 
 /* Called with dev->lock held */
+<<<<<<< HEAD
+=======
+static void prepare_flush_request(struct request *req,
+				  struct io_thread_req *io_req)
+{
+	struct gendisk *disk = req->rq_disk;
+	struct ubd *ubd_dev = disk->private_data;
+
+	io_req->req = req;
+	io_req->fds[0] = (ubd_dev->cow.file != NULL) ? ubd_dev->cow.fd :
+		ubd_dev->fd;
+	io_req->op = UBD_FLUSH;
+}
+
+static bool submit_request(struct io_thread_req *io_req, struct ubd *dev)
+{
+	int n = os_write_file(thread_fd, &io_req,
+			     sizeof(io_req));
+	if (n != sizeof(io_req)) {
+		if (n != -EAGAIN)
+			printk("write to io thread failed, "
+			       "errno = %d\n", -n);
+		else if (list_empty(&dev->restart))
+			list_add(&dev->restart, &restart);
+
+		kfree(io_req);
+		return false;
+	}
+	return true;
+}
+
+/* Called with dev->lock held */
+>>>>>>> v3.18
 static void do_ubd_request(struct request_queue *q)
 {
 	struct io_thread_req *io_req;
 	struct request *req;
+<<<<<<< HEAD
 	int n;
 
 	while(1){
 		struct ubd *dev = q->queuedata;
 		if(dev->end_sg == 0){
+=======
+
+	while(1){
+		struct ubd *dev = q->queuedata;
+		if(dev->request == NULL){
+>>>>>>> v3.18
 			struct request *req = blk_fetch_request(q);
 			if(req == NULL)
 				return;
@@ -1259,6 +1307,23 @@ static void do_ubd_request(struct request_queue *q)
 		}
 
 		req = dev->request;
+<<<<<<< HEAD
+=======
+
+		if (req->cmd_flags & REQ_FLUSH) {
+			io_req = kmalloc(sizeof(struct io_thread_req),
+					 GFP_ATOMIC);
+			if (io_req == NULL) {
+				if (list_empty(&dev->restart))
+					list_add(&dev->restart, &restart);
+				return;
+			}
+			prepare_flush_request(req, io_req);
+			if (submit_request(io_req, dev) == false)
+				return;
+		}
+
+>>>>>>> v3.18
 		while(dev->start_sg < dev->end_sg){
 			struct scatterlist *sg = &dev->sg[dev->start_sg];
 
@@ -1273,6 +1338,7 @@ static void do_ubd_request(struct request_queue *q)
 					(unsigned long long)dev->rq_pos << 9,
 					sg->offset, sg->length, sg_page(sg));
 
+<<<<<<< HEAD
 			n = os_write_file(thread_fd, &io_req,
 					  sizeof(struct io_thread_req *));
 			if(n != sizeof(struct io_thread_req *)){
@@ -1284,6 +1350,10 @@ static void do_ubd_request(struct request_queue *q)
 				kfree(io_req);
 				return;
 			}
+=======
+			if (submit_request(io_req, dev) == false)
+				return;
+>>>>>>> v3.18
 
 			dev->rq_pos += sg->length >> 9;
 			dev->start_sg++;
@@ -1367,6 +1437,20 @@ static void do_io(struct io_thread_req *req)
 	int err;
 	__u64 off;
 
+<<<<<<< HEAD
+=======
+	if (req->op == UBD_FLUSH) {
+		/* fds[0] is always either the rw image or our cow file */
+		n = os_sync_file(req->fds[0]);
+		if (n != 0) {
+			printk("do_io - sync failed err = %d "
+			       "fd = %d\n", -n, req->fds[0]);
+			req->error = 1;
+		}
+		return;
+	}
+
+>>>>>>> v3.18
 	nsectors = req->length / req->sectorsize;
 	start = 0;
 	do {
@@ -1431,7 +1515,12 @@ int io_thread(void *arg)
 	struct io_thread_req *req;
 	int n;
 
+<<<<<<< HEAD
 	ignore_sigwinch_sig();
+=======
+	os_fix_helper_signals();
+
+>>>>>>> v3.18
 	while(1){
 		n = os_read_file(kernel_fd, &req,
 				 sizeof(struct io_thread_req *));

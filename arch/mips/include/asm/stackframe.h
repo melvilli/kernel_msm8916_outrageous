@@ -17,6 +17,7 @@
 #include <asm/asmmacro.h>
 #include <asm/mipsregs.h>
 #include <asm/asm-offsets.h>
+<<<<<<< HEAD
 
 /*
  * For SMTC kernel, global IE should be left set, and interrupts
@@ -25,15 +26,23 @@
 #ifdef CONFIG_MIPS_MT_SMTC
 #define STATMASK 0x1e
 #elif defined(CONFIG_CPU_R3000) || defined(CONFIG_CPU_TX39XX)
+=======
+#include <asm/thread_info.h>
+
+#if defined(CONFIG_CPU_R3000) || defined(CONFIG_CPU_TX39XX)
+>>>>>>> v3.18
 #define STATMASK 0x3f
 #else
 #define STATMASK 0x1f
 #endif
 
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 #include <asm/mipsmtregs.h>
 #endif /* CONFIG_MIPS_MT_SMTC */
 
+=======
+>>>>>>> v3.18
 		.macro	SAVE_AT
 		.set	push
 		.set	noat
@@ -70,6 +79,17 @@
 #ifndef CONFIG_CPU_HAS_SMARTMIPS
 		LONG_S	v1, PT_LO(sp)
 #endif
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_CPU_CAVIUM_OCTEON
+		/*
+		 * The Octeon multiplier state is affected by general
+		 * multiply instructions. It must be saved before and
+		 * kernel code might corrupt it
+		 */
+		jal     octeon_mult_save
+#endif
+>>>>>>> v3.18
 		.endm
 
 		.macro	SAVE_STATIC
@@ -85,6 +105,7 @@
 		.endm
 
 #ifdef CONFIG_SMP
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 #define PTEBASE_SHIFT	19	/* TCBIND */
 #define CPU_ID_REG CP0_TCBIND
@@ -100,6 +121,10 @@
 #endif
 		.macro	get_saved_sp	/* SMP variation */
 		CPU_ID_MFC0	k0, CPU_ID_REG
+=======
+		.macro	get_saved_sp	/* SMP variation */
+		ASM_CPUID_MFC0	k0, ASM_SMP_CPUID_REG
+>>>>>>> v3.18
 #if defined(CONFIG_32BIT) || defined(KBUILD_64BIT_SYM32)
 		lui	k1, %hi(kernelsp)
 #else
@@ -109,17 +134,29 @@
 		daddiu	k1, %hi(kernelsp)
 		dsll	k1, 16
 #endif
+<<<<<<< HEAD
 		LONG_SRL	k0, PTEBASE_SHIFT
+=======
+		LONG_SRL	k0, SMP_CPUID_PTRSHIFT
+>>>>>>> v3.18
 		LONG_ADDU	k1, k0
 		LONG_L	k1, %lo(kernelsp)(k1)
 		.endm
 
 		.macro	set_saved_sp stackp temp temp2
+<<<<<<< HEAD
 		CPU_ID_MFC0	\temp, CPU_ID_REG
 		LONG_SRL	\temp, PTEBASE_SHIFT
 		LONG_S	\stackp, kernelsp(\temp)
 		.endm
 #else
+=======
+		ASM_CPUID_MFC0	\temp, ASM_SMP_CPUID_REG
+		LONG_SRL	\temp, SMP_CPUID_PTRSHIFT
+		LONG_S	\stackp, kernelsp(\temp)
+		.endm
+#else /* !CONFIG_SMP */
+>>>>>>> v3.18
 		.macro	get_saved_sp	/* Uniprocessor variation */
 #ifdef CONFIG_CPU_JUMP_WORKAROUNDS
 		/*
@@ -190,6 +227,7 @@
 		mfc0	v1, CP0_STATUS
 		LONG_S	$2, PT_R2(sp)
 		LONG_S	v1, PT_STATUS(sp)
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 		/*
 		 * Ideally, these instructions would be shuffled in
@@ -200,6 +238,8 @@
 		.set	mips0
 		LONG_S	k0, PT_TCSTATUS(sp)
 #endif /* CONFIG_MIPS_MT_SMTC */
+=======
+>>>>>>> v3.18
 		LONG_S	$4, PT_R4(sp)
 		mfc0	v1, CP0_CAUSE
 		LONG_S	$5, PT_R5(sp)
@@ -218,6 +258,7 @@
 		ori	$28, sp, _THREAD_MASK
 		xori	$28, _THREAD_MASK
 #ifdef CONFIG_CPU_CAVIUM_OCTEON
+<<<<<<< HEAD
 		.set	mips64
 		pref	0, 0($28)	/* Prefetch the current pointer */
 		pref	0, PT_R31(sp)	/* Prefetch the $31(ra) */
@@ -229,6 +270,10 @@
 			 /* Restore $31(ra) that was changed by the jal */
 		LONG_L	ra, PT_R31(sp)
 		pref	0, 0(v1)    /* Prefetch the current thread */
+=======
+		.set    mips64
+		pref    0, 0($28)       /* Prefetch the current pointer */
+>>>>>>> v3.18
 #endif
 		.set	pop
 		.endm
@@ -248,6 +293,13 @@
 		.endm
 
 		.macro	RESTORE_TEMP
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_CPU_CAVIUM_OCTEON
+		/* Restore the Octeon multiplier state */
+		jal	octeon_mult_restore
+#endif
+>>>>>>> v3.18
 #ifdef CONFIG_CPU_HAS_SMARTMIPS
 		LONG_L	$24, PT_ACX(sp)
 		mtlhx	$24
@@ -330,6 +382,7 @@
 		.set	push
 		.set	reorder
 		.set	noat
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 		.set	mips32r2
 		/*
@@ -364,6 +417,8 @@
 		/* Restore the Octeon multiplier state */
 		jal	octeon_mult_restore
 #endif
+=======
+>>>>>>> v3.18
 		mfc0	a0, CP0_STATUS
 		ori	a0, STATMASK
 		xori	a0, STATMASK
@@ -375,6 +430,7 @@
 		and	v0, v1
 		or	v0, a0
 		mtc0	v0, CP0_STATUS
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 /*
  * Only after EXL/ERL have been restored to status can we
@@ -428,6 +484,8 @@
 
 		.set	mips0
 #endif /* CONFIG_MIPS_MT_SMTC */
+=======
+>>>>>>> v3.18
 		LONG_L	v1, PT_EPC(sp)
 		MTC0	v1, CP0_EPC
 		LONG_L	$31, PT_R31(sp)
@@ -448,7 +506,11 @@
 
 		.macro	RESTORE_SP_AND_RET
 		LONG_L	sp, PT_R29(sp)
+<<<<<<< HEAD
 		.set	mips3
+=======
+		.set	arch=r4000
+>>>>>>> v3.18
 		eret
 		.set	mips0
 		.endm
@@ -480,12 +542,16 @@
  * Set cp0 enable bit as sign that we're running on the kernel stack
  */
 		.macro	CLI
+<<<<<<< HEAD
 #if !defined(CONFIG_MIPS_MT_SMTC)
+=======
+>>>>>>> v3.18
 		mfc0	t0, CP0_STATUS
 		li	t1, ST0_CU0 | STATMASK
 		or	t0, t1
 		xori	t0, STATMASK
 		mtc0	t0, CP0_STATUS
+<<<<<<< HEAD
 #else /* CONFIG_MIPS_MT_SMTC */
 		/*
 		 * For SMTC, we need to set privilege
@@ -507,6 +573,8 @@
 		xori	t0, ST0_EXL | ST0_ERL
 		mtc0	t0, CP0_STATUS
 #endif /* CONFIG_MIPS_MT_SMTC */
+=======
+>>>>>>> v3.18
 		irq_disable_hazard
 		.endm
 
@@ -515,12 +583,16 @@
  * Set cp0 enable bit as sign that we're running on the kernel stack
  */
 		.macro	STI
+<<<<<<< HEAD
 #if !defined(CONFIG_MIPS_MT_SMTC)
+=======
+>>>>>>> v3.18
 		mfc0	t0, CP0_STATUS
 		li	t1, ST0_CU0 | STATMASK
 		or	t0, t1
 		xori	t0, STATMASK & ~1
 		mtc0	t0, CP0_STATUS
+<<<<<<< HEAD
 #else /* CONFIG_MIPS_MT_SMTC */
 		/*
 		 * For SMTC, we need to set privilege
@@ -544,6 +616,8 @@
 		mtc0	t0, CP0_STATUS
 		/* irq_enable_hazard below should expand to EHB for 24K/34K cpus */
 #endif /* CONFIG_MIPS_MT_SMTC */
+=======
+>>>>>>> v3.18
 		irq_enable_hazard
 		.endm
 
@@ -553,6 +627,7 @@
  * Set cp0 enable bit as sign that we're running on the kernel stack
  */
 		.macro	KMODE
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 		/*
 		 * This gets baroque in SMTC.  We want to
@@ -579,6 +654,8 @@
 		nop	/* delay slot */
 		move	ra, t0
 #endif /* CONFIG_MIPS_MT_SMTC */
+=======
+>>>>>>> v3.18
 		mfc0	t0, CP0_STATUS
 		li	t1, ST0_CU0 | (STATMASK & ~1)
 #if defined(CONFIG_CPU_R3000) || defined(CONFIG_CPU_TX39XX)
@@ -589,6 +666,7 @@
 		or	t0, t1
 		xori	t0, STATMASK & ~1
 		mtc0	t0, CP0_STATUS
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 		_ehb
 		andi	v0, v0, VPECONTROL_TE
@@ -608,6 +686,8 @@
 		 */
 		.set pop
 #endif /* CONFIG_MIPS_MT_SMTC */
+=======
+>>>>>>> v3.18
 		irq_disable_hazard
 		.endm
 

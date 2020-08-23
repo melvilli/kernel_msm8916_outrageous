@@ -18,16 +18,26 @@
 #include <linux/amba/bus.h>
 #include <linux/amba/kmi.h>
 #include <linux/amba/clcd.h>
+<<<<<<< HEAD
 #include <linux/amba/mmci.h>
 #include <linux/io.h>
 #include <linux/irqchip/versatile-fpga.h>
 #include <linux/gfp.h>
 #include <linux/mtd/physmap.h>
 #include <linux/platform_data/clk-integrator.h>
+=======
+#include <linux/platform_data/video-clcd-versatile.h>
+#include <linux/amba/mmci.h>
+#include <linux/io.h>
+#include <linux/irqchip.h>
+#include <linux/gfp.h>
+#include <linux/mtd/physmap.h>
+>>>>>>> v3.18
 #include <linux/of_irq.h>
 #include <linux/of_address.h>
 #include <linux/of_platform.h>
 #include <linux/sys_soc.h>
+<<<<<<< HEAD
 
 #include <mach/hardware.h>
 #include <mach/platform.h>
@@ -40,16 +50,27 @@
 #include <mach/lm.h>
 #include <mach/irqs.h>
 
+=======
+#include <linux/sched_clock.h>
+
+#include <asm/setup.h>
+#include <asm/mach-types.h>
+>>>>>>> v3.18
 #include <asm/mach/arch.h>
 #include <asm/mach/irq.h>
 #include <asm/mach/map.h>
 #include <asm/mach/time.h>
 
+<<<<<<< HEAD
 #include <asm/hardware/timer-sp.h>
 
 #include <plat/clcd.h>
 #include <plat/sched_clock.h>
 
+=======
+#include "hardware.h"
+#include "cm.h"
+>>>>>>> v3.18
 #include "common.h"
 
 /* Base address to the CP controller */
@@ -66,8 +87,11 @@ static void __iomem *intcp_con_base;
 /*
  * Logical      Physical
  * f1000000	10000000	Core module registers
+<<<<<<< HEAD
  * f1100000	11000000	System controller registers
  * f1200000	12000000	EBI registers
+=======
+>>>>>>> v3.18
  * f1300000	13000000	Counter/Timer
  * f1400000	14000000	Interrupt controller
  * f1600000	16000000	UART 0
@@ -75,7 +99,10 @@ static void __iomem *intcp_con_base;
  * f1a00000	1a000000	Debug LEDs
  * fc900000	c9000000	GPIO
  * fca00000	ca000000	SIC
+<<<<<<< HEAD
  * fcb00000	cb000000	CP system control
+=======
+>>>>>>> v3.18
  */
 
 static struct map_desc intcp_io_desc[] __initdata __maybe_unused = {
@@ -85,11 +112,14 @@ static struct map_desc intcp_io_desc[] __initdata __maybe_unused = {
 		.length		= SZ_4K,
 		.type		= MT_DEVICE
 	}, {
+<<<<<<< HEAD
 		.virtual	= IO_ADDRESS(INTEGRATOR_EBI_BASE),
 		.pfn		= __phys_to_pfn(INTEGRATOR_EBI_BASE),
 		.length		= SZ_4K,
 		.type		= MT_DEVICE
 	}, {
+=======
+>>>>>>> v3.18
 		.virtual	= IO_ADDRESS(INTEGRATOR_CT_BASE),
 		.pfn		= __phys_to_pfn(INTEGRATOR_CT_BASE),
 		.length		= SZ_4K,
@@ -243,6 +273,7 @@ static struct clcd_board clcd_data = {
 
 #define REFCOUNTER (__io_address(INTEGRATOR_HDR_BASE) + 0x28)
 
+<<<<<<< HEAD
 static void __init intcp_init_early(void)
 {
 #ifdef CONFIG_PLAT_VERSATILE_SCHED_CLOCK
@@ -260,6 +291,22 @@ static void __init intcp_init_irq_of(void)
 {
 	of_irq_init(fpga_irq_of_match);
 	integrator_clk_init(true);
+=======
+static u64 notrace intcp_read_sched_clock(void)
+{
+	return readl(REFCOUNTER);
+}
+
+static void __init intcp_init_early(void)
+{
+	sched_clock_register(intcp_read_sched_clock, 32, 24000000);
+}
+
+static void __init intcp_init_irq_of(void)
+{
+	cm_init();
+	irqchip_init();
+>>>>>>> v3.18
 }
 
 /*
@@ -288,14 +335,25 @@ static struct of_dev_auxdata intcp_auxdata_lookup[] __initdata = {
 	{ /* sentinel */ },
 };
 
+<<<<<<< HEAD
 static void __init intcp_init_of(void)
 {
 	struct device_node *root;
+=======
+static const struct of_device_id intcp_syscon_match[] = {
+	{ .compatible = "arm,integrator-cp-syscon"},
+	{ },
+};
+
+static void __init intcp_init_of(void)
+{
+>>>>>>> v3.18
 	struct device_node *cpcon;
 	struct device *parent;
 	struct soc_device *soc_dev;
 	struct soc_device_attribute *soc_dev_attr;
 	u32 intcp_sc_id;
+<<<<<<< HEAD
 	int err;
 
 	/* Here we create an SoC device for the root node */
@@ -303,6 +361,10 @@ static void __init intcp_init_of(void)
 	if (!root)
 		return;
 	cpcon = of_find_node_by_path("/cpcon");
+=======
+
+	cpcon = of_find_matching_node(NULL, intcp_syscon_match);
+>>>>>>> v3.18
 	if (!cpcon)
 		return;
 
@@ -310,12 +372,19 @@ static void __init intcp_init_of(void)
 	if (!intcp_con_base)
 		return;
 
+<<<<<<< HEAD
+=======
+	of_platform_populate(NULL, of_default_bus_match_table,
+			     intcp_auxdata_lookup, NULL);
+
+>>>>>>> v3.18
 	intcp_sc_id = readl(intcp_con_base);
 
 	soc_dev_attr = kzalloc(sizeof(*soc_dev_attr), GFP_KERNEL);
 	if (!soc_dev_attr)
 		return;
 
+<<<<<<< HEAD
 	err = of_property_read_string(root, "compatible",
 				      &soc_dev_attr->soc_id);
 	if (err)
@@ -323,6 +392,10 @@ static void __init intcp_init_of(void)
 	err = of_property_read_string(root, "model", &soc_dev_attr->machine);
 	if (err)
 		return;
+=======
+	soc_dev_attr->soc_id = "XCV";
+	soc_dev_attr->machine = "Integrator/CP";
+>>>>>>> v3.18
 	soc_dev_attr->family = "Integrator";
 	soc_dev_attr->revision = kasprintf(GFP_KERNEL, "%c",
 					   'A' + (intcp_sc_id & 0x0f));
@@ -336,8 +409,11 @@ static void __init intcp_init_of(void)
 
 	parent = soc_device_to_device(soc_dev);
 	integrator_init_sysfs(parent, intcp_sc_id);
+<<<<<<< HEAD
 	of_platform_populate(root, of_default_bus_match_table,
 			intcp_auxdata_lookup, parent);
+=======
+>>>>>>> v3.18
 }
 
 static const char * intcp_dt_board_compat[] = {
@@ -350,11 +426,15 @@ DT_MACHINE_START(INTEGRATOR_CP_DT, "ARM Integrator/CP (Device Tree)")
 	.map_io		= intcp_map_io,
 	.init_early	= intcp_init_early,
 	.init_irq	= intcp_init_irq_of,
+<<<<<<< HEAD
 	.handle_irq	= fpga_handle_irq,
+=======
+>>>>>>> v3.18
 	.init_machine	= intcp_init_of,
 	.restart	= integrator_restart,
 	.dt_compat      = intcp_dt_board_compat,
 MACHINE_END
+<<<<<<< HEAD
 
 #endif
 
@@ -527,3 +607,5 @@ MACHINE_START(CINTEGRATOR, "ARM-IntegratorCP")
 MACHINE_END
 
 #endif
+=======
+>>>>>>> v3.18

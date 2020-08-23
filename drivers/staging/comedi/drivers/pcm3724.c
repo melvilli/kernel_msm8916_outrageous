@@ -28,6 +28,7 @@ Copy/pasted/hacked from pcm724.c
  *   struct comedi_insn
  */
 
+<<<<<<< HEAD
 #include "../comedidev.h"
 
 #include <linux/ioport.h>
@@ -38,6 +39,13 @@ Copy/pasted/hacked from pcm724.c
 #define PCM3724_SIZE   16
 #define SIZE_8255	4
 
+=======
+#include <linux/module.h>
+#include "../comedidev.h"
+
+#include "8255.h"
+
+>>>>>>> v3.18
 #define BUF_C0 0x1
 #define BUF_B0 0x2
 #define BUF_A0 0x4
@@ -52,6 +60,7 @@ Copy/pasted/hacked from pcm724.c
 #define GATE_B1	0x10
 #define GATE_C1 0x8
 
+<<<<<<< HEAD
 /* from 8255.c */
 #define CR_CW		0x80
 #define _8255_CR 3
@@ -62,12 +71,15 @@ Copy/pasted/hacked from pcm724.c
 #define CR_A_MODE(a)	((a)<<5)
 #define CR_CW		0x80
 
+=======
+>>>>>>> v3.18
 /* used to track configured dios */
 struct priv_pcm3724 {
 	int dio_1;
 	int dio_2;
 };
 
+<<<<<<< HEAD
 static int subdev_8255_cb(int dir, int port, int data, unsigned long arg)
 {
 	unsigned long iobase = arg;
@@ -84,6 +96,8 @@ static int subdev_8255_cb(int dir, int port, int data, unsigned long arg)
 	}
 }
 
+=======
+>>>>>>> v3.18
 static int compute_buffer(int config, int devno, struct comedi_subdevice *s)
 {
 	/* 1 in io_bits indicates output */
@@ -117,11 +131,16 @@ static void do_3724_config(struct comedi_device *dev,
 	int buffer_config;
 	unsigned long port_8255_cfg;
 
+<<<<<<< HEAD
 	config = CR_CW;
+=======
+	config = I8255_CTRL_CW;
+>>>>>>> v3.18
 	buffer_config = 0;
 
 	/* 1 in io_bits indicates output, 1 in config indicates input */
 	if (!(s->io_bits & 0x0000ff))
+<<<<<<< HEAD
 		config |= CR_A_IO;
 
 	if (!(s->io_bits & 0x00ff00))
@@ -129,11 +148,21 @@ static void do_3724_config(struct comedi_device *dev,
 
 	if (!(s->io_bits & 0xff0000))
 		config |= CR_C_IO;
+=======
+		config |= I8255_CTRL_A_IO;
+
+	if (!(s->io_bits & 0x00ff00))
+		config |= I8255_CTRL_B_IO;
+
+	if (!(s->io_bits & 0xff0000))
+		config |= I8255_CTRL_C_HI_IO | I8255_CTRL_C_LO_IO;
+>>>>>>> v3.18
 
 	buffer_config = compute_buffer(0, 0, s_dio1);
 	buffer_config = compute_buffer(buffer_config, 1, s_dio2);
 
 	if (s == s_dio1)
+<<<<<<< HEAD
 		port_8255_cfg = dev->iobase + _8255_CR;
 	else
 		port_8255_cfg = dev->iobase + SIZE_8255 + _8255_CR;
@@ -141,6 +170,13 @@ static void do_3724_config(struct comedi_device *dev,
 	outb(buffer_config, dev->iobase + 8);	/* update buffer register */
 	/* printk("pcm3724 buffer_config (%lx) %d, %x\n",
 	       dev->iobase + _8255_CR, chanspec, buffer_config); */
+=======
+		port_8255_cfg = dev->iobase + I8255_CTRL_REG;
+	else
+		port_8255_cfg = dev->iobase + I8255_SIZE + I8255_CTRL_REG;
+
+	outb(buffer_config, dev->iobase + 8);	/* update buffer register */
+>>>>>>> v3.18
 
 	outb(config, port_8255_cfg);
 }
@@ -179,13 +215,17 @@ static void enable_chan(struct comedi_device *dev, struct comedi_subdevice *s,
 	if (priv->dio_2 & 0xff)
 		gatecfg |= GATE_A1;
 
+<<<<<<< HEAD
 	/*       printk("gate control %x\n", gatecfg); */
+=======
+>>>>>>> v3.18
 	outb(gatecfg, dev->iobase + 9);
 }
 
 /* overriding the 8255 insn config */
 static int subdev_3724_insn_config(struct comedi_device *dev,
 				   struct comedi_subdevice *s,
+<<<<<<< HEAD
 				   struct comedi_insn *insn, unsigned int *data)
 {
 	unsigned int mask;
@@ -219,6 +259,32 @@ static int subdev_3724_insn_config(struct comedi_device *dev,
 	do_3724_config(dev, s, insn->chanspec);
 	enable_chan(dev, s, insn->chanspec);
 	return 1;
+=======
+				   struct comedi_insn *insn,
+				   unsigned int *data)
+{
+	unsigned int chan = CR_CHAN(insn->chanspec);
+	unsigned int mask;
+	int ret;
+
+	if (chan < 8)
+		mask = 0x0000ff;
+	else if (chan < 16)
+		mask = 0x00ff00;
+	else if (chan < 20)
+		mask = 0x0f0000;
+	else
+		mask = 0xf00000;
+
+	ret = comedi_dio_insn_config(dev, s, insn, data, mask);
+	if (ret)
+		return ret;
+
+	do_3724_config(dev, s, insn->chanspec);
+	enable_chan(dev, s, insn->chanspec);
+
+	return insn->n;
+>>>>>>> v3.18
 }
 
 static int pcm3724_attach(struct comedi_device *dev,
@@ -228,12 +294,20 @@ static int pcm3724_attach(struct comedi_device *dev,
 	struct comedi_subdevice *s;
 	int ret, i;
 
+<<<<<<< HEAD
 	priv = kzalloc(sizeof(*priv), GFP_KERNEL);
 	if (!priv)
 		return -ENOMEM;
 	dev->private = priv;
 
 	ret = comedi_request_region(dev, it->options[0], PCM3724_SIZE);
+=======
+	priv = comedi_alloc_devpriv(dev, sizeof(*priv));
+	if (!priv)
+		return -ENOMEM;
+
+	ret = comedi_request_region(dev, it->options[0], 0x10);
+>>>>>>> v3.18
 	if (ret)
 		return ret;
 
@@ -243,13 +317,20 @@ static int pcm3724_attach(struct comedi_device *dev,
 
 	for (i = 0; i < dev->n_subdevices; i++) {
 		s = &dev->subdevices[i];
+<<<<<<< HEAD
 		subdev_8255_init(dev, s, subdev_8255_cb,
 				 (unsigned long)(dev->iobase + SIZE_8255 * i));
+=======
+		ret = subdev_8255_init(dev, s, NULL, i * I8255_SIZE);
+		if (ret)
+			return ret;
+>>>>>>> v3.18
 		s->insn_config = subdev_3724_insn_config;
 	}
 	return 0;
 }
 
+<<<<<<< HEAD
 static void pcm3724_detach(struct comedi_device *dev)
 {
 	int i;
@@ -259,11 +340,17 @@ static void pcm3724_detach(struct comedi_device *dev)
 	comedi_legacy_detach(dev);
 }
 
+=======
+>>>>>>> v3.18
 static struct comedi_driver pcm3724_driver = {
 	.driver_name	= "pcm3724",
 	.module		= THIS_MODULE,
 	.attach		= pcm3724_attach,
+<<<<<<< HEAD
 	.detach		= pcm3724_detach,
+=======
+	.detach		= comedi_legacy_detach,
+>>>>>>> v3.18
 };
 module_comedi_driver(pcm3724_driver);
 

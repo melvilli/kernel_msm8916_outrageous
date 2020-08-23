@@ -25,7 +25,10 @@
 #include <linux/module.h>
 #include <linux/moduleparam.h>
 #include <linux/kernel.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/delay.h>
 #include <linux/irq.h>
 #include <linux/interrupt.h>

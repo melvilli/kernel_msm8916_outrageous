@@ -23,7 +23,11 @@
 #define SIRFSOC_INT_RISC_LEVEL1         0x0024
 #define SIRFSOC_INIT_IRQ_ID		0x0038
 
+<<<<<<< HEAD
 #define SIRFSOC_NUM_IRQS		128
+=======
+#define SIRFSOC_NUM_IRQS		64
+>>>>>>> v3.18
 
 static struct irq_domain *sirfsoc_irqdomain;
 
@@ -32,6 +36,7 @@ sirfsoc_alloc_gc(void __iomem *base, unsigned int irq_start, unsigned int num)
 {
 	struct irq_chip_generic *gc;
 	struct irq_chip_type *ct;
+<<<<<<< HEAD
 
 	gc = irq_alloc_generic_chip("SIRFINTC", 1, irq_start, base, handle_level_irq);
 	ct = gc->chip_types;
@@ -55,14 +60,47 @@ static asmlinkage void __exception_irq_entry sirfsoc_handle_irq(struct pt_regs *
 }
 
 static int __init sirfsoc_irq_init(struct device_node *np, struct device_node *parent)
+=======
+	int ret;
+	unsigned int clr = IRQ_NOREQUEST | IRQ_NOPROBE | IRQ_NOAUTOEN;
+	unsigned int set = IRQ_LEVEL;
+
+	ret = irq_alloc_domain_generic_chips(sirfsoc_irqdomain, num, 1, "irq_sirfsoc",
+		handle_level_irq, clr, set, IRQ_GC_INIT_MASK_CACHE);
+
+	gc = irq_get_domain_generic_chip(sirfsoc_irqdomain, irq_start);
+	gc->reg_base = base;
+	ct = gc->chip_types;
+	ct->chip.irq_mask = irq_gc_mask_clr_bit;
+	ct->chip.irq_unmask = irq_gc_mask_set_bit;
+	ct->regs.mask = SIRFSOC_INT_RISC_MASK0;
+}
+
+static void __exception_irq_entry sirfsoc_handle_irq(struct pt_regs *regs)
+{
+	void __iomem *base = sirfsoc_irqdomain->host_data;
+	u32 irqstat;
+
+	irqstat = readl_relaxed(base + SIRFSOC_INIT_IRQ_ID);
+	handle_domain_irq(sirfsoc_irqdomain, irqstat & 0xff, regs);
+}
+
+static int __init sirfsoc_irq_init(struct device_node *np,
+	struct device_node *parent)
+>>>>>>> v3.18
 {
 	void __iomem *base = of_iomap(np, 0);
 	if (!base)
 		panic("unable to map intc cpu registers\n");
 
+<<<<<<< HEAD
 	/* using legacy because irqchip_generic does not work with linear */
 	sirfsoc_irqdomain = irq_domain_add_legacy(np, SIRFSOC_NUM_IRQS, 0, 0,
 				 &irq_domain_simple_ops, base);
+=======
+	sirfsoc_irqdomain = irq_domain_add_linear(np, SIRFSOC_NUM_IRQS,
+		&irq_generic_chip_ops, base);
+>>>>>>> v3.18
 
 	sirfsoc_alloc_gc(base, 0, 32);
 	sirfsoc_alloc_gc(base + 4, 32, SIRFSOC_NUM_IRQS - 32);

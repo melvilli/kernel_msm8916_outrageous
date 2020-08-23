@@ -25,13 +25,20 @@
 */
 
 #include <linux/linkage.h>
+<<<<<<< HEAD
+=======
+#include <linux/serial_s3c.h>
+>>>>>>> v3.18
 #include <asm/assembler.h>
 #include <mach/hardware.h>
 #include <mach/map.h>
 
 #include <mach/regs-gpio.h>
 #include <mach/regs-clock.h>
+<<<<<<< HEAD
 #include <plat/regs-serial.h>
+=======
+>>>>>>> v3.18
 
 #include "regs-mem.h"
 
@@ -66,4 +73,8 @@ s3c2410_do_sleep:
 	streq	r8, [r5]			@ SDRAM power-down config
 	streq	r9, [r6]			@ CPU sleep
 1:	beq	1b
+<<<<<<< HEAD
 	mov	pc, r14
+=======
+	ret	lr
+>>>>>>> v3.18

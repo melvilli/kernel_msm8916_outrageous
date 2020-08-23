@@ -1,7 +1,11 @@
 config NTB
        tristate "Intel Non-Transparent Bridge support"
        depends on PCI
+<<<<<<< HEAD
        depends on X86_64
+=======
+       depends on X86
+>>>>>>> v3.18
        help
         The PCI-E Non-transparent bridge hardware is a point-to-point PCI-E bus
         connecting 2 systems.  When configured, writes to the device's PCI

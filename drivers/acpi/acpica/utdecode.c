@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -41,7 +45,10 @@
  * POSSIBILITY OF SUCH DAMAGES.
  */
 
+<<<<<<< HEAD
 #include <linux/export.h>
+=======
+>>>>>>> v3.18
 #include <acpi/acpi.h>
 #include "accommon.h"
 #include "acnamesp.h"
@@ -89,6 +96,7 @@ const u8 acpi_gbl_ns_properties[ACPI_NUM_NS_TYPES] = {
 
 /*******************************************************************************
  *
+<<<<<<< HEAD
  * FUNCTION:    acpi_ut_hex_to_ascii_char
  *
  * PARAMETERS:  integer             - Contains the hex digit
@@ -116,6 +124,8 @@ char acpi_ut_hex_to_ascii_char(u64 integer, u32 position)
 
 /*******************************************************************************
  *
+=======
+>>>>>>> v3.18
  * FUNCTION:    acpi_ut_get_region_name
  *
  * PARAMETERS:  Space ID            - ID for the region
@@ -463,7 +473,11 @@ char *acpi_ut_get_mutex_name(u32 mutex_id)
 
 /* Names for Notify() values, used for debug output */
 
+<<<<<<< HEAD
 static const char *acpi_gbl_notify_value_names[ACPI_NOTIFY_MAX + 1] = {
+=======
+static const char *acpi_gbl_generic_notify[ACPI_NOTIFY_MAX + 1] = {
+>>>>>>> v3.18
 	/* 00 */ "Bus Check",
 	/* 01 */ "Device Check",
 	/* 02 */ "Device Wake",
@@ -474,6 +488,7 @@ static const char *acpi_gbl_notify_value_names[ACPI_NOTIFY_MAX + 1] = {
 	/* 07 */ "Power Fault",
 	/* 08 */ "Capabilities Check",
 	/* 09 */ "Device PLD Check",
+<<<<<<< HEAD
 	/* 10 */ "Reserved",
 	/* 11 */ "System Locality Update",
 	/* 12 */ "Shutdown Request"
@@ -491,6 +506,78 @@ const char *acpi_ut_get_notify_name(u32 notify_value)
 	} else {
 		return ("Hardware Specific");
 	}
+=======
+	/* 0A */ "Reserved",
+	/* 0B */ "System Locality Update",
+	/* 0C */ "Shutdown Request",
+	/* 0D */ "System Resource Affinity Update"
+};
+
+static const char *acpi_gbl_device_notify[4] = {
+	/* 80 */ "Status Change",
+	/* 81 */ "Information Change",
+	/* 82 */ "Device-Specific Change",
+	/* 83 */ "Device-Specific Change"
+};
+
+static const char *acpi_gbl_processor_notify[4] = {
+	/* 80 */ "Performance Capability Change",
+	/* 81 */ "C-State Change",
+	/* 82 */ "Throttling Capability Change",
+	/* 83 */ "Device-Specific Change"
+};
+
+static const char *acpi_gbl_thermal_notify[4] = {
+	/* 80 */ "Thermal Status Change",
+	/* 81 */ "Thermal Trip Point Change",
+	/* 82 */ "Thermal Device List Change",
+	/* 83 */ "Thermal Relationship Change"
+};
+
+const char *acpi_ut_get_notify_name(u32 notify_value, acpi_object_type type)
+{
+
+	/* 00 - 0D are common to all object types */
+
+	if (notify_value <= ACPI_NOTIFY_MAX) {
+		return (acpi_gbl_generic_notify[notify_value]);
+	}
+
+	/* 0D - 7F are reserved */
+
+	if (notify_value <= ACPI_MAX_SYS_NOTIFY) {
+		return ("Reserved");
+	}
+
+	/* 80 - 83 are per-object-type */
+
+	if (notify_value <= 0x83) {
+		switch (type) {
+		case ACPI_TYPE_ANY:
+		case ACPI_TYPE_DEVICE:
+			return (acpi_gbl_device_notify[notify_value - 0x80]);
+
+		case ACPI_TYPE_PROCESSOR:
+			return (acpi_gbl_processor_notify[notify_value - 0x80]);
+
+		case ACPI_TYPE_THERMAL:
+			return (acpi_gbl_thermal_notify[notify_value - 0x80]);
+
+		default:
+			return ("Target object type does not support notifies");
+		}
+	}
+
+	/* 84 - BF are device-specific */
+
+	if (notify_value <= ACPI_MAX_DEVICE_SPECIFIC_NOTIFY) {
+		return ("Device-Specific");
+	}
+
+	/* C0 and above are hardware-specific */
+
+	return ("Hardware-Specific");
+>>>>>>> v3.18
 }
 #endif
 

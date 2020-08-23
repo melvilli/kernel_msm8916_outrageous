@@ -1,6 +1,7 @@
 config ARCH_PICOXCELL
 	bool "Picochip PicoXcell" if ARCH_MULTI_V6
 	select ARCH_REQUIRE_GPIOLIB
+<<<<<<< HEAD
 	select ARM_PATCH_PHYS_VIRT
 	select ARM_VIC
 	select CPU_V6K
@@ -11,3 +12,9 @@ config ARCH_PICOXCELL
 	select NO_IOPORT_MAP
 	select SPARSE_IRQ
 	select USE_OF
+=======
+	select ARM_VIC
+	select DW_APB_TIMER_OF
+	select HAVE_TCM
+	select NO_IOPORT_MAP
+>>>>>>> v3.18

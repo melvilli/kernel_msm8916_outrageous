@@ -23,6 +23,10 @@
 #include "ctimap.h"
 #include <linux/spinlock.h>
 #include <linux/list.h>
+<<<<<<< HEAD
+=======
+#include <sound/core.h>
+>>>>>>> v3.18
 
 /* Define the descriptor of a daio resource */
 enum DAIOTYP {
@@ -53,14 +57,22 @@ struct dao {
 	struct dao_rsc_ops *ops;	/* DAO specific operations */
 	struct imapper **imappers;
 	struct daio_mgr *mgr;
+<<<<<<< HEAD
 	void *hw;
+=======
+	struct hw *hw;
+>>>>>>> v3.18
 	void *ctrl_blk;
 };
 
 struct dai {
 	struct daio daio;
 	struct dai_rsc_ops *ops;	/* DAI specific operations */
+<<<<<<< HEAD
 	void *hw;
+=======
+	struct hw *hw;
+>>>>>>> v3.18
 	void *ctrl_blk;
 };
 
@@ -98,6 +110,10 @@ struct daio_desc {
 
 struct daio_mgr {
 	struct rsc_mgr mgr;	/* Basic resource manager info */
+<<<<<<< HEAD
+=======
+	struct snd_card *card;	/* pointer to this card */
+>>>>>>> v3.18
 	spinlock_t mgr_lock;
 	spinlock_t imap_lock;
 	struct list_head imappers;
@@ -117,7 +133,11 @@ struct daio_mgr {
 };
 
 /* Constructor and destructor of daio resource manager */
+<<<<<<< HEAD
 int daio_mgr_create(void *hw, struct daio_mgr **rdaio_mgr);
+=======
+int daio_mgr_create(struct hw *hw, struct daio_mgr **rdaio_mgr);
+>>>>>>> v3.18
 int daio_mgr_destroy(struct daio_mgr *daio_mgr);
 
 #endif /* CTDAIO_H */

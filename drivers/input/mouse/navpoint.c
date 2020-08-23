@@ -9,7 +9,10 @@
  */
 
 #include <linux/kernel.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/platform_device.h>
 #include <linux/clk.h>
@@ -287,7 +290,11 @@ static int navpoint_probe(struct platform_device *pdev)
 	return 0;
 
 err_free_irq:
+<<<<<<< HEAD
 	free_irq(ssp->irq, &pdev->dev);
+=======
+	free_irq(ssp->irq, navpoint);
+>>>>>>> v3.18
 err_free_mem:
 	input_free_device(input);
 	kfree(navpoint);

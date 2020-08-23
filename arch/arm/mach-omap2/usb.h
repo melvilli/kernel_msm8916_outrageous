@@ -58,7 +58,10 @@ struct usbhs_phy_data {
 	int reset_gpio;
 	int vcc_gpio;
 	bool vcc_polarity;	/* 1 active high, 0 active low */
+<<<<<<< HEAD
 	void *platform_data;
+=======
+>>>>>>> v3.18
 };
 
 extern void usb_musb_init(struct omap_musb_board_data *board_data);

@@ -12,7 +12,10 @@
 #include <linux/string.h>
 #include <linux/slab.h>
 #include <linux/sched.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/wait.h>
 #include <linux/bitops.h>
 #include <linux/delay.h>
@@ -140,6 +143,13 @@ EXPORT_SYMBOL(tty_port_destroy);
 static void tty_port_destructor(struct kref *kref)
 {
 	struct tty_port *port = container_of(kref, struct tty_port, kref);
+<<<<<<< HEAD
+=======
+
+	/* check if last port ref was dropped before tty release */
+	if (WARN_ON(port->itty))
+		return;
+>>>>>>> v3.18
 	if (port->xmit_buf)
 		free_page((unsigned long)port->xmit_buf);
 	tty_port_destroy(port);
@@ -224,6 +234,11 @@ out:
  *
  *	Perform port level tty hangup flag and count changes. Drop the tty
  *	reference.
+<<<<<<< HEAD
+=======
+ *
+ *	Caller holds tty lock.
+>>>>>>> v3.18
  */
 
 void tty_port_hangup(struct tty_port *port)
@@ -345,6 +360,14 @@ EXPORT_SYMBOL(tty_port_lower_dtr_rts);
  *	do carrier detect and the dtr_rts method if it supports software
  *	management of these lines. Note that the dtr/rts raise is done each
  *	iteration as a hangup may have previously dropped them while we wait.
+<<<<<<< HEAD
+=======
+ *
+ *	Caller holds tty lock.
+ *
+ *      NB: May drop and reacquire tty lock when blocking, so tty and tty_port
+ *      may have changed state (eg., may have been hung up).
+>>>>>>> v3.18
  */
 
 int tty_port_block_til_ready(struct tty_port *port,
@@ -355,7 +378,11 @@ int tty_port_block_til_ready(struct tty_port *port,
 	DEFINE_WAIT(wait);
 
 	/* block if port is in the process of being closed */
+<<<<<<< HEAD
 	if (tty_hung_up_p(filp) || port->flags & ASYNC_CLOSING) {
+=======
+	if (port->flags & ASYNC_CLOSING) {
+>>>>>>> v3.18
 		wait_event_interruptible_tty(tty, port->close_wait,
 				!(port->flags & ASYNC_CLOSING));
 		if (port->flags & ASYNC_HUP_NOTIFY)
@@ -389,8 +416,12 @@ int tty_port_block_til_ready(struct tty_port *port,
 
 	/* The port lock protects the port counts */
 	spin_lock_irqsave(&port->lock, flags);
+<<<<<<< HEAD
 	if (!tty_hung_up_p(filp))
 		port->count--;
+=======
+	port->count--;
+>>>>>>> v3.18
 	port->blocked_open++;
 	spin_unlock_irqrestore(&port->lock, flags);
 
@@ -455,6 +486,13 @@ static void tty_port_drain_delay(struct tty_port *port, struct tty_struct *tty)
 	schedule_timeout_interruptible(timeout);
 }
 
+<<<<<<< HEAD
+=======
+/* Caller holds tty lock.
+ * NB: may drop and reacquire tty lock (in tty_wait_until_sent_from_close())
+ * so tty and tty port may have changed state (but not hung up or reopened).
+ */
+>>>>>>> v3.18
 int tty_port_close_start(struct tty_port *port,
 				struct tty_struct *tty, struct file *filp)
 {
@@ -480,6 +518,7 @@ int tty_port_close_start(struct tty_port *port,
 
 	if (port->count) {
 		spin_unlock_irqrestore(&port->lock, flags);
+<<<<<<< HEAD
 		if (port->ops->drop)
 			port->ops->drop(port);
 		return 0;
@@ -488,6 +527,15 @@ int tty_port_close_start(struct tty_port *port,
 	tty->closing = 1;
 	spin_unlock_irqrestore(&port->lock, flags);
 
+=======
+		return 0;
+	}
+	set_bit(ASYNCB_CLOSING, &port->flags);
+	spin_unlock_irqrestore(&port->lock, flags);
+
+	tty->closing = 1;
+
+>>>>>>> v3.18
 	if (test_bit(ASYNCB_INITIALIZED, &port->flags)) {
 		/* Don't block on a stalled port, just pull the chain */
 		if (tty->flow_stopped)
@@ -500,20 +548,35 @@ int tty_port_close_start(struct tty_port *port,
 	/* Flush the ldisc buffering */
 	tty_ldisc_flush(tty);
 
+<<<<<<< HEAD
 	/* Don't call port->drop for the last reference. Callers will want
 	   to drop the last active reference in ->shutdown() or the tty
 	   shutdown path */
+=======
+	/* Report to caller this is the last port reference */
+>>>>>>> v3.18
 	return 1;
 }
 EXPORT_SYMBOL(tty_port_close_start);
 
+<<<<<<< HEAD
+=======
+/* Caller holds tty lock */
+>>>>>>> v3.18
 void tty_port_close_end(struct tty_port *port, struct tty_struct *tty)
 {
 	unsigned long flags;
 
+<<<<<<< HEAD
 	spin_lock_irqsave(&port->lock, flags);
 	tty->closing = 0;
 
+=======
+	tty->closing = 0;
+
+	spin_lock_irqsave(&port->lock, flags);
+
+>>>>>>> v3.18
 	if (port->blocked_open) {
 		spin_unlock_irqrestore(&port->lock, flags);
 		if (port->close_delay) {
@@ -529,6 +592,18 @@ void tty_port_close_end(struct tty_port *port, struct tty_struct *tty)
 }
 EXPORT_SYMBOL(tty_port_close_end);
 
+<<<<<<< HEAD
+=======
+/**
+ * tty_port_close
+ *
+ * Caller holds tty lock
+ *
+ * NB: may drop and reacquire tty lock (in tty_port_close_start()->
+ * tty_wait_until_sent_from_close()) so tty and tty_port may have changed
+ * state (but not hung up or reopened).
+ */
+>>>>>>> v3.18
 void tty_port_close(struct tty_port *port, struct tty_struct *tty,
 							struct file *filp)
 {
@@ -559,12 +634,27 @@ int tty_port_install(struct tty_port *port, struct tty_driver *driver,
 }
 EXPORT_SYMBOL_GPL(tty_port_install);
 
+<<<<<<< HEAD
+=======
+/**
+ * tty_port_open
+ *
+ * Caller holds tty lock.
+ *
+ * NB: may drop and reacquire tty lock (in tty_port_block_til_ready()) so
+ * tty and tty_port may have changed state (eg., may be hung up now)
+ */
+>>>>>>> v3.18
 int tty_port_open(struct tty_port *port, struct tty_struct *tty,
 							struct file *filp)
 {
 	spin_lock_irq(&port->lock);
+<<<<<<< HEAD
 	if (!tty_hung_up_p(filp))
 		++port->count;
+=======
+	++port->count;
+>>>>>>> v3.18
 	spin_unlock_irq(&port->lock);
 	tty_port_tty_set(port, tty);
 

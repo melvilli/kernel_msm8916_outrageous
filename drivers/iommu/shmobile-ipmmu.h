@@ -14,7 +14,11 @@ struct shmobile_ipmmu {
 	struct device *dev;
 	void __iomem *ipmmu_base;
 	int tlb_enabled;
+<<<<<<< HEAD
 	struct mutex flush_lock;
+=======
+	spinlock_t flush_lock;
+>>>>>>> v3.18
 	const char * const *dev_names;
 	unsigned int num_dev_names;
 };

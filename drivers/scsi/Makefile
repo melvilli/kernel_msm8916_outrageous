@@ -20,7 +20,10 @@ CFLAGS_gdth.o    = # -DDEBUG_GDTH=2 -D__SERIAL__ -D__COM2__ -DGDTH_STATISTICS
 obj-$(CONFIG_PCMCIA)		+= pcmcia/
 
 obj-$(CONFIG_SCSI)		+= scsi_mod.o
+<<<<<<< HEAD
 obj-$(CONFIG_SCSI_TGT)		+= scsi_tgt.o
+=======
+>>>>>>> v3.18
 
 obj-$(CONFIG_RAID_ATTRS)	+= raid_class.o
 
@@ -70,7 +73,10 @@ obj-$(CONFIG_SCSI_AHA1740)	+= aha1740.o
 obj-$(CONFIG_SCSI_AIC7XXX)	+= aic7xxx/
 obj-$(CONFIG_SCSI_AIC79XX)	+= aic7xxx/
 obj-$(CONFIG_SCSI_AACRAID)	+= aacraid/
+<<<<<<< HEAD
 obj-$(CONFIG_SCSI_AIC7XXX_OLD)	+= aic7xxx_old.o
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_SCSI_AIC94XX)	+= aic94xx/
 obj-$(CONFIG_SCSI_PM8001)	+= pm8001/
 obj-$(CONFIG_SCSI_ISCI)		+= isci/
@@ -128,9 +134,13 @@ obj-$(CONFIG_SCSI_LASI700)	+= 53c700.o lasi700.o
 obj-$(CONFIG_SCSI_SNI_53C710)	+= 53c700.o sni_53c710.o
 obj-$(CONFIG_SCSI_NSP32)	+= nsp32.o
 obj-$(CONFIG_SCSI_IPR)		+= ipr.o
+<<<<<<< HEAD
 obj-$(CONFIG_SCSI_SRP)		+= libsrp.o
 obj-$(CONFIG_SCSI_IBMVSCSI)	+= ibmvscsi/
 obj-$(CONFIG_SCSI_IBMVSCSIS)	+= ibmvscsi/
+=======
+obj-$(CONFIG_SCSI_IBMVSCSI)	+= ibmvscsi/
+>>>>>>> v3.18
 obj-$(CONFIG_SCSI_IBMVFC)	+= ibmvscsi/
 obj-$(CONFIG_SCSI_HPTIOP)	+= hptiop.o
 obj-$(CONFIG_SCSI_STEX)		+= stex.o
@@ -141,9 +151,17 @@ obj-$(CONFIG_SCSI_CXGB3_ISCSI)	+= libiscsi.o libiscsi_tcp.o cxgbi/
 obj-$(CONFIG_SCSI_CXGB4_ISCSI)	+= libiscsi.o libiscsi_tcp.o cxgbi/
 obj-$(CONFIG_SCSI_BNX2_ISCSI)	+= libiscsi.o bnx2i/
 obj-$(CONFIG_BE2ISCSI)		+= libiscsi.o be2iscsi/
+<<<<<<< HEAD
 obj-$(CONFIG_SCSI_PMCRAID)	+= pmcraid.o
 obj-$(CONFIG_SCSI_VIRTIO)	+= virtio_scsi.o
 obj-$(CONFIG_VMWARE_PVSCSI)	+= vmw_pvscsi.o
+=======
+obj-$(CONFIG_SCSI_ESAS2R)	+= esas2r/
+obj-$(CONFIG_SCSI_PMCRAID)	+= pmcraid.o
+obj-$(CONFIG_SCSI_VIRTIO)	+= virtio_scsi.o
+obj-$(CONFIG_VMWARE_PVSCSI)	+= vmw_pvscsi.o
+obj-$(CONFIG_XEN_SCSI_FRONTEND)	+= xen-scsifront.o
+>>>>>>> v3.18
 obj-$(CONFIG_HYPERV_STORAGE)	+= hv_storvsc.o
 
 obj-$(CONFIG_ARM)		+= arm/
@@ -173,8 +191,11 @@ scsi_mod-$(CONFIG_PM)		+= scsi_pm.o
 
 hv_storvsc-y			:= storvsc_drv.o
 
+<<<<<<< HEAD
 scsi_tgt-y			+= scsi_tgt_lib.o scsi_tgt_if.o
 
+=======
+>>>>>>> v3.18
 sd_mod-objs	:= sd.o
 sd_mod-$(CONFIG_BLK_DEV_INTEGRITY) += sd_dif.o
 

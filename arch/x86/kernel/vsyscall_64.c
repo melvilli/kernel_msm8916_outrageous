@@ -47,14 +47,20 @@
 #include <asm/segment.h>
 #include <asm/desc.h>
 #include <asm/topology.h>
+<<<<<<< HEAD
 #include <asm/vgtod.h>
+=======
+>>>>>>> v3.18
 #include <asm/traps.h>
 
 #define CREATE_TRACE_POINTS
 #include "vsyscall_trace.h"
 
 DEFINE_VVAR(int, vgetcpu_mode);
+<<<<<<< HEAD
 DEFINE_VVAR(struct vsyscall_gtod_data, vsyscall_gtod_data);
+=======
+>>>>>>> v3.18
 
 static enum { EMULATE, NATIVE, NONE } vsyscall_mode = EMULATE;
 
@@ -77,6 +83,7 @@ static int __init vsyscall_setup(char *str)
 }
 early_param("vsyscall", vsyscall_setup);
 
+<<<<<<< HEAD
 void update_vsyscall_tz(void)
 {
 	vsyscall_gtod_data.sys_tz = sys_tz;
@@ -119,6 +126,8 @@ void update_vsyscall(struct timekeeper *tk)
 	write_seqcount_end(&vdata->seq);
 }
 
+=======
+>>>>>>> v3.18
 static void warn_bad_vsyscall(const char *level, struct pt_regs *regs,
 			      const char *message)
 {
@@ -135,7 +144,11 @@ static int addr_to_vsyscall_nr(unsigned long addr)
 {
 	int nr;
 
+<<<<<<< HEAD
 	if ((addr & ~0xC00UL) != VSYSCALL_START)
+=======
+	if ((addr & ~0xC00UL) != VSYSCALL_ADDR)
+>>>>>>> v3.18
 		return -EINVAL;
 
 	nr = (addr & 0xC00UL) >> 10;
@@ -260,7 +273,11 @@ bool emulate_vsyscall(struct pt_regs *regs, unsigned long address)
 	 */
 	regs->orig_ax = syscall_nr;
 	regs->ax = -ENOSYS;
+<<<<<<< HEAD
 	tmp = secure_computing(syscall_nr);
+=======
+	tmp = secure_computing();
+>>>>>>> v3.18
 	if ((!tmp && regs->orig_ax != syscall_nr) || regs->ip != address) {
 		warn_bad_vsyscall(KERN_DEBUG, regs,
 				  "seccomp tried to change syscall nr or ip");
@@ -331,7 +348,11 @@ sigsegv:
  * Assume __initcall executes before all user space. Hopefully kmod
  * doesn't violate that. We'll find out if it does.
  */
+<<<<<<< HEAD
 static void __cpuinit vsyscall_set_cpu(int cpu)
+=======
+static void vsyscall_set_cpu(int cpu)
+>>>>>>> v3.18
 {
 	unsigned long d;
 	unsigned long node = 0;
@@ -353,13 +374,21 @@ static void __cpuinit vsyscall_set_cpu(int cpu)
 	write_gdt_entry(get_cpu_gdt_table(cpu), GDT_ENTRY_PER_CPU, &d, DESCTYPE_S);
 }
 
+<<<<<<< HEAD
 static void __cpuinit cpu_vsyscall_init(void *arg)
+=======
+static void cpu_vsyscall_init(void *arg)
+>>>>>>> v3.18
 {
 	/* preemption should be already off */
 	vsyscall_set_cpu(raw_smp_processor_id());
 }
 
+<<<<<<< HEAD
 static int __cpuinit
+=======
+static int
+>>>>>>> v3.18
 cpu_vsyscall_notifier(struct notifier_block *n, unsigned long action, void *arg)
 {
 	long cpu = (long)arg;
@@ -374,6 +403,7 @@ void __init map_vsyscall(void)
 {
 	extern char __vsyscall_page;
 	unsigned long physaddr_vsyscall = __pa_symbol(&__vsyscall_page);
+<<<<<<< HEAD
 	extern char __vvar_page;
 	unsigned long physaddr_vvar_page = __pa_symbol(&__vvar_page);
 
@@ -387,15 +417,34 @@ void __init map_vsyscall(void)
 	__set_fixmap(VVAR_PAGE, physaddr_vvar_page, PAGE_KERNEL_VVAR);
 	BUILD_BUG_ON((unsigned long)__fix_to_virt(VVAR_PAGE) !=
 		     (unsigned long)VVAR_ADDRESS);
+=======
+
+	__set_fixmap(VSYSCALL_PAGE, physaddr_vsyscall,
+		     vsyscall_mode == NATIVE
+		     ? PAGE_KERNEL_VSYSCALL
+		     : PAGE_KERNEL_VVAR);
+	BUILD_BUG_ON((unsigned long)__fix_to_virt(VSYSCALL_PAGE) !=
+		     (unsigned long)VSYSCALL_ADDR);
+>>>>>>> v3.18
 }
 
 static int __init vsyscall_init(void)
 {
+<<<<<<< HEAD
 	BUG_ON(VSYSCALL_ADDR(0) != __fix_to_virt(VSYSCALL_FIRST_PAGE));
 
 	on_each_cpu(cpu_vsyscall_init, NULL, 1);
 	/* notifier priority > KVM */
 	hotcpu_notifier(cpu_vsyscall_notifier, 30);
+=======
+	cpu_notifier_register_begin();
+
+	on_each_cpu(cpu_vsyscall_init, NULL, 1);
+	/* notifier priority > KVM */
+	__hotcpu_notifier(cpu_vsyscall_notifier, 30);
+
+	cpu_notifier_register_done();
+>>>>>>> v3.18
 
 	return 0;
 }

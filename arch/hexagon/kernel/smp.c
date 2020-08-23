@@ -64,10 +64,13 @@ static inline void __handle_ipi(unsigned long *ops, struct ipi_data *ipi,
 			generic_smp_call_function_interrupt();
 			break;
 
+<<<<<<< HEAD
 		case IPI_CALL_FUNC_SINGLE:
 			generic_smp_call_function_single_interrupt();
 			break;
 
+=======
+>>>>>>> v3.18
 		case IPI_CPU_STOP:
 			/*
 			 * call vmstop()
@@ -146,7 +149,11 @@ void __init smp_prepare_boot_cpu(void)
  * to point to current thread info
  */
 
+<<<<<<< HEAD
 void __cpuinit start_secondary(void)
+=======
+void start_secondary(void)
+>>>>>>> v3.18
 {
 	unsigned int cpu;
 	unsigned long thread_ptr;
@@ -194,7 +201,11 @@ void __cpuinit start_secondary(void)
  * maintains control until "cpu_online(cpu)" is set.
  */
 
+<<<<<<< HEAD
 int __cpuinit __cpu_up(unsigned int cpu, struct task_struct *idle)
+=======
+int __cpu_up(unsigned int cpu, struct task_struct *idle)
+>>>>>>> v3.18
 {
 	struct thread_info *thread = (struct thread_info *)idle->stack;
 	void *stack_start;
@@ -248,7 +259,11 @@ void smp_send_stop(void)
 
 void arch_send_call_function_single_ipi(int cpu)
 {
+<<<<<<< HEAD
 	send_ipi(cpumask_of(cpu), IPI_CALL_FUNC_SINGLE);
+=======
+	send_ipi(cpumask_of(cpu), IPI_CALL_FUNC);
+>>>>>>> v3.18
 }
 
 void arch_send_call_function_ipi_mask(const struct cpumask *mask)

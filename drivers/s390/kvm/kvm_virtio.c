@@ -166,11 +166,23 @@ static void kvm_reset(struct virtio_device *vdev)
  * make a hypercall.  We hand the address  of the virtqueue so the Host
  * knows which virtqueue we're talking about.
  */
+<<<<<<< HEAD
 static void kvm_notify(struct virtqueue *vq)
 {
 	struct kvm_vqconfig *config = vq->priv;
 
 	kvm_hypercall1(KVM_S390_VIRTIO_NOTIFY, config->address);
+=======
+static bool kvm_notify(struct virtqueue *vq)
+{
+	long rc;
+	struct kvm_vqconfig *config = vq->priv;
+
+	rc = kvm_hypercall1(KVM_S390_VIRTIO_NOTIFY, config->address);
+	if (rc < 0)
+		return false;
+	return true;
+>>>>>>> v3.18
 }
 
 /*
@@ -402,6 +414,7 @@ static void kvm_extint_handler(struct ext_code ext_code,
 
 	switch (param) {
 	case VIRTIO_PARAM_CONFIG_CHANGED:
+<<<<<<< HEAD
 	{
 		struct virtio_driver *drv;
 		drv = container_of(vq->vdev->dev.driver,
@@ -411,6 +424,10 @@ static void kvm_extint_handler(struct ext_code ext_code,
 
 		break;
 	}
+=======
+		virtio_config_changed(vq->vdev);
+		break;
+>>>>>>> v3.18
 	case VIRTIO_PARAM_DEV_ADD:
 		schedule_work(&hotplug_work);
 		break;
@@ -472,8 +489,13 @@ static int __init kvm_devices_init(void)
 
 	INIT_WORK(&hotplug_work, hotplug_devices);
 
+<<<<<<< HEAD
 	service_subclass_irq_register();
 	register_external_interrupt(0x2603, kvm_extint_handler);
+=======
+	irq_subclass_register(IRQ_SUBCLASS_SERVICE_SIGNAL);
+	register_external_irq(EXT_IRQ_CP_SERVICE, kvm_extint_handler);
+>>>>>>> v3.18
 
 	scan_devices();
 	return 0;

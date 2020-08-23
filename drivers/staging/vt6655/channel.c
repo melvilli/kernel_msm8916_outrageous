@@ -30,9 +30,12 @@
 
 #define CARD_MAX_CHANNEL_TBL    56
 
+<<<<<<< HEAD
 //static int msglevel = MSG_LEVEL_DEBUG;
 static int msglevel = MSG_LEVEL_INFO;
 
+=======
+>>>>>>> v3.18
 /*---------------------  Static Variables  --------------------------*/
 
 static SChannelTblElement sChannelTbl[CARD_MAX_CHANNEL_TBL + 1] =
@@ -417,6 +420,7 @@ bool channel_get_list(unsigned int uCountryCodeIdx, unsigned char *pbyChannelTab
 
 void init_channel_table(void *pDeviceHandler)
 {
+<<<<<<< HEAD
 	PSDevice    pDevice = (PSDevice) pDeviceHandler;
 	bool bMultiBand = false;
 	unsigned int ii;
@@ -424,6 +428,14 @@ void init_channel_table(void *pDeviceHandler)
 	for (ii = 1; ii <= CARD_MAX_CHANNEL_TBL; ii++) {
 		sChannelTbl[ii].bValid = false;
 	}
+=======
+	struct vnt_private *pDevice = pDeviceHandler;
+	bool bMultiBand = false;
+	unsigned int ii;
+
+	for (ii = 1; ii <= CARD_MAX_CHANNEL_TBL; ii++)
+		sChannelTbl[ii].bValid = false;
+>>>>>>> v3.18
 
 	switch (pDevice->byRFType) {
 	case RF_RFMD2959:
@@ -441,8 +453,13 @@ void init_channel_table(void *pDeviceHandler)
 		break;
 	}
 
+<<<<<<< HEAD
 	if ((pDevice->dwDiagRefCount != 0) || (pDevice->b11hEnable == true)) {
 		if (bMultiBand == true) {
+=======
+	if ((pDevice->dwDiagRefCount != 0) || pDevice->b11hEnable) {
+		if (bMultiBand) {
+>>>>>>> v3.18
 			for (ii = 0; ii < CARD_MAX_CHANNEL_TBL; ii++) {
 				sChannelTbl[ii + 1].bValid = true;
 				pDevice->abyRegPwr[ii + 1] = pDevice->abyOFDMDefaultPwr[ii + 1];
@@ -463,7 +480,11 @@ void init_channel_table(void *pDeviceHandler)
 			}
 		}
 	} else if (pDevice->byZoneType <= CCODE_MAX) {
+<<<<<<< HEAD
 		if (bMultiBand == true) {
+=======
+		if (bMultiBand) {
+>>>>>>> v3.18
 			for (ii = 0; ii < CARD_MAX_CHANNEL_TBL; ii++) {
 				if (ChannelRuleTab[pDevice->byZoneType].bChannelIdxList[ii] != 0) {
 					sChannelTbl[ii + 1].bValid = true;
@@ -482,7 +503,14 @@ void init_channel_table(void *pDeviceHandler)
 		}
 	}
 
+<<<<<<< HEAD
 	DBG_PRT(MSG_LEVEL_NOTICE, KERN_INFO "Zone=[%d][%c][%c]!!\n", pDevice->byZoneType, ChannelRuleTab[pDevice->byZoneType].chCountryCode[0], ChannelRuleTab[pDevice->byZoneType].chCountryCode[1]);
+=======
+	pr_info("Zone=[%d][%c][%c]!!\n",
+		pDevice->byZoneType,
+		ChannelRuleTab[pDevice->byZoneType].chCountryCode[0],
+		ChannelRuleTab[pDevice->byZoneType].chCountryCode[1]);
+>>>>>>> v3.18
 
 	for (ii = 0; ii < CARD_MAX_CHANNEL_TBL; ii++) {
 		if (pDevice->abyRegPwr[ii + 1] == 0)
@@ -509,7 +537,10 @@ unsigned char get_channel_mapping(void *pDeviceHandler, unsigned char byChannelN
 
 unsigned char get_channel_number(void *pDeviceHandler, unsigned char byChannelIndex)
 {
+<<<<<<< HEAD
 	//PSDevice    pDevice = (PSDevice) pDeviceHandler;
+=======
+>>>>>>> v3.18
 	return sChannelTbl[byChannelIndex].byChannelNumber;
 }
 
@@ -524,6 +555,7 @@ unsigned char get_channel_number(void *pDeviceHandler, unsigned char byChannelIn
  */
 bool set_channel(void *pDeviceHandler, unsigned int uConnectionChannel)
 {
+<<<<<<< HEAD
 	PSDevice pDevice = (PSDevice) pDeviceHandler;
 	bool bResult = true;
 
@@ -534,6 +566,16 @@ bool set_channel(void *pDeviceHandler, unsigned int uConnectionChannel)
 	if (sChannelTbl[uConnectionChannel].bValid == false) {
 		return false;
 	}
+=======
+	struct vnt_private *pDevice = pDeviceHandler;
+	bool bResult = true;
+
+	if (pDevice->byCurrentCh == uConnectionChannel)
+		return bResult;
+
+	if (!sChannelTbl[uConnectionChannel].bValid)
+		return false;
+>>>>>>> v3.18
 
 	if ((uConnectionChannel > CB_MAX_CHANNEL_24G) &&
 	    (pDevice->eCurrentPHYType != PHY_TYPE_11A)) {
@@ -548,19 +590,30 @@ bool set_channel(void *pDeviceHandler, unsigned int uConnectionChannel)
 	//{{ RobertYu: 20041202
 	//// TX_PE will reserve 3 us for MAX2829 A mode only, it is for better TX throughput
 
+<<<<<<< HEAD
 	if (pDevice->byRFType == RF_AIROHA7230) {
 		RFbAL7230SelectChannelPostProcess(pDevice->PortOffset, pDevice->byCurrentCh, (unsigned char)uConnectionChannel);
 	}
+=======
+	if (pDevice->byRFType == RF_AIROHA7230)
+		RFbAL7230SelectChannelPostProcess(pDevice->PortOffset, pDevice->byCurrentCh, (unsigned char)uConnectionChannel);
+>>>>>>> v3.18
 	//}} RobertYu
 
 	pDevice->byCurrentCh = (unsigned char)uConnectionChannel;
 	bResult &= RFbSelectChannel(pDevice->PortOffset, pDevice->byRFType, (unsigned char)uConnectionChannel);
 
 	// Init Synthesizer Table
+<<<<<<< HEAD
 	if (pDevice->bEnablePSMode == true)
 		RFvWriteWakeProgSyn(pDevice->PortOffset, pDevice->byRFType, uConnectionChannel);
 
 	//DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "CARDbSetMediaChannel: %d\n", (unsigned char)uConnectionChannel);
+=======
+	if (pDevice->bEnablePSMode)
+		RFvWriteWakeProgSyn(pDevice->PortOffset, pDevice->byRFType, uConnectionChannel);
+
+>>>>>>> v3.18
 	BBvSoftwareReset(pDevice->PortOffset);
 
 	if (pDevice->byLocalID > REV_ID_VT3253_B1) {
@@ -573,11 +626,18 @@ bool set_channel(void *pDeviceHandler, unsigned int uConnectionChannel)
 		MACvSelectPage0(pDevice->PortOffset);
 	}
 
+<<<<<<< HEAD
 	if (pDevice->eCurrentPHYType == PHY_TYPE_11B) {
 		RFbSetPower(pDevice, RATE_1M, pDevice->byCurrentCh);
 	} else {
 		RFbSetPower(pDevice, RATE_6M, pDevice->byCurrentCh);
 	}
+=======
+	if (pDevice->eCurrentPHYType == PHY_TYPE_11B)
+		RFbSetPower(pDevice, RATE_1M, pDevice->byCurrentCh);
+	else
+		RFbSetPower(pDevice, RATE_6M, pDevice->byCurrentCh);
+>>>>>>> v3.18
 
 	return bResult;
 }
@@ -591,7 +651,11 @@ bool set_channel(void *pDeviceHandler, unsigned int uConnectionChannel)
 
 void set_country_info(void *pDeviceHandler, CARD_PHY_TYPE ePHYType, void *pIE)
 {
+<<<<<<< HEAD
 	PSDevice pDevice = (PSDevice) pDeviceHandler;
+=======
+	struct vnt_private *pDevice = pDeviceHandler;
+>>>>>>> v3.18
 	unsigned int ii = 0;
 	unsigned int uu = 0;
 	unsigned int step = 0;
@@ -604,6 +668,7 @@ void set_country_info(void *pDeviceHandler, CARD_PHY_TYPE ePHYType, void *pIE)
 
 	if (ePHYType == PHY_TYPE_11A) {
 		pDevice->bCountryInfo5G = true;
+<<<<<<< HEAD
 		for (ii = CB_MAX_CHANNEL_24G + 1; ii <= CARD_MAX_CHANNEL_TBL; ii++) {
 			sChannelTbl[ii].bValid = false;
 		}
@@ -613,6 +678,17 @@ void set_country_info(void *pDeviceHandler, CARD_PHY_TYPE ePHYType, void *pIE)
 		for (ii = 1; ii <= CB_MAX_CHANNEL_24G; ii++) {
 			sChannelTbl[ii].bValid = false;
 		}
+=======
+		for (ii = CB_MAX_CHANNEL_24G + 1; ii <= CARD_MAX_CHANNEL_TBL; ii++)
+			sChannelTbl[ii].bValid = false;
+
+		step = 4;
+	} else {
+		pDevice->bCountryInfo24G = true;
+		for (ii = 1; ii <= CB_MAX_CHANNEL_24G; ii++)
+			sChannelTbl[ii].bValid = false;
+
+>>>>>>> v3.18
 		step = 1;
 	}
 	pDevice->abyCountryCode[0] = pIE_Country->abyCountryString[0];
@@ -640,7 +716,11 @@ void set_country_info(void *pDeviceHandler, CARD_PHY_TYPE ePHYType, void *pIE)
 
 unsigned char set_support_channels(void *pDeviceHandler, unsigned char *pbyIEs)
 {
+<<<<<<< HEAD
 	PSDevice pDevice = (PSDevice) pDeviceHandler;
+=======
+	struct vnt_private *pDevice = pDeviceHandler;
+>>>>>>> v3.18
 	unsigned int ii;
 	unsigned char byCount;
 	PWLAN_IE_SUPP_CH pIE = (PWLAN_IE_SUPP_CH) pbyIEs;
@@ -655,19 +735,33 @@ unsigned char set_support_channels(void *pDeviceHandler, unsigned char *pbyIEs)
 	byCount = 0;
 	if (ChannelRuleTab[pDevice->byZoneType].bChannelIdxList[28] == true) {
 		for (ii = 28; ii < 36; ii += 2) {
+<<<<<<< HEAD
 			if (ChannelRuleTab[pDevice->byZoneType].bChannelIdxList[ii] == true) {
 				byCount++;
 			}
 		}
+=======
+			if (ChannelRuleTab[pDevice->byZoneType].bChannelIdxList[ii] == true)
+				byCount++;
+		}
+
+>>>>>>> v3.18
 		*pbyChTupple++ = 34;
 		*pbyChTupple++ = byCount;
 		byLen += 2;
 	} else if (ChannelRuleTab[pDevice->byZoneType].bChannelIdxList[29] == true) {
 		for (ii = 29; ii < 36; ii += 2) {
+<<<<<<< HEAD
 			if (ChannelRuleTab[pDevice->byZoneType].bChannelIdxList[ii] == true) {
 				byCount++;
 			}
 		}
+=======
+			if (ChannelRuleTab[pDevice->byZoneType].bChannelIdxList[ii] == true)
+				byCount++;
+		}
+
+>>>>>>> v3.18
 		*pbyChTupple++ = 36;
 		*pbyChTupple++ = byCount;
 		byLen += 2;
@@ -676,10 +770,17 @@ unsigned char set_support_channels(void *pDeviceHandler, unsigned char *pbyIEs)
 	byCount = 0;
 	if (ChannelRuleTab[pDevice->byZoneType].bChannelIdxList[36] == true) {
 		for (ii = 36; ii < 40; ii++) {
+<<<<<<< HEAD
 			if (ChannelRuleTab[pDevice->byZoneType].bChannelIdxList[ii] == true) {
 				byCount++;
 			}
 		}
+=======
+			if (ChannelRuleTab[pDevice->byZoneType].bChannelIdxList[ii] == true)
+				byCount++;
+		}
+
+>>>>>>> v3.18
 		*pbyChTupple++ = 52;
 		*pbyChTupple++ = byCount;
 		byLen += 2;
@@ -688,19 +789,33 @@ unsigned char set_support_channels(void *pDeviceHandler, unsigned char *pbyIEs)
 	byCount = 0;
 	if (ChannelRuleTab[pDevice->byZoneType].bChannelIdxList[40] == true) {
 		for (ii = 40; ii < 51; ii++) {
+<<<<<<< HEAD
 			if (ChannelRuleTab[pDevice->byZoneType].bChannelIdxList[ii] == true) {
 				byCount++;
 			}
 		}
+=======
+			if (ChannelRuleTab[pDevice->byZoneType].bChannelIdxList[ii] == true)
+				byCount++;
+		}
+
+>>>>>>> v3.18
 		*pbyChTupple++ = 100;
 		*pbyChTupple++ = byCount;
 		byLen += 2;
 	} else if (ChannelRuleTab[pDevice->byZoneType].bChannelIdxList[51] == true) {
 		for (ii = 51; ii < 56; ii++) {
+<<<<<<< HEAD
 			if (ChannelRuleTab[pDevice->byZoneType].bChannelIdxList[ii] == true) {
 				byCount++;
 			}
 		}
+=======
+			if (ChannelRuleTab[pDevice->byZoneType].bChannelIdxList[ii] == true)
+				byCount++;
+		}
+
+>>>>>>> v3.18
 		*pbyChTupple++ = 149;
 		*pbyChTupple++ = byCount;
 		byLen += 2;
@@ -711,7 +826,11 @@ unsigned char set_support_channels(void *pDeviceHandler, unsigned char *pbyIEs)
 
 void set_country_IE(void *pDeviceHandler, void *pIE)
 {
+<<<<<<< HEAD
 	PSDevice pDevice = (PSDevice) pDeviceHandler;
+=======
+	struct vnt_private *pDevice = pDeviceHandler;
+>>>>>>> v3.18
 	unsigned int ii;
 	PWLAN_IE_COUNTRY pIECountry = (PWLAN_IE_COUNTRY) pIE;
 
@@ -766,6 +885,7 @@ unsigned char auto_channel_select(void *pDeviceHandler, CARD_PHY_TYPE ePHYType)
 
 	if (ePHYType == PHY_TYPE_11A) {
 		for (ii = CB_MAX_CHANNEL_24G + 1; ii <= CB_MAX_CHANNEL; ii++) {
+<<<<<<< HEAD
 			if (sChannelTbl[ii].bValid == true) {
 				if (byOptionChannel == 0) {
 					byOptionChannel = (unsigned char) ii;
@@ -775,11 +895,22 @@ unsigned char auto_channel_select(void *pDeviceHandler, CARD_PHY_TYPE ePHYType)
 				} else if (!(sChannelTbl[ii].byMAP & 0x08)) {
 					byOptionChannel = (unsigned char) ii;
 				}
+=======
+			if (sChannelTbl[ii].bValid) {
+				if (byOptionChannel == 0)
+					byOptionChannel = (unsigned char) ii;
+
+				if (sChannelTbl[ii].byMAP == 0)
+					return (unsigned char) ii;
+				else if (!(sChannelTbl[ii].byMAP & 0x08))
+					byOptionChannel = (unsigned char) ii;
+>>>>>>> v3.18
 			}
 		}
 	} else {
 		byOptionChannel = 0;
 		for (ii = 1; ii <= CB_MAX_CHANNEL_24G; ii++) {
+<<<<<<< HEAD
 			if (sChannelTbl[ii].bValid == true) {
 				if (sChannelTbl[ii].byMAP == 0) {
 					aiWeight[ii] += 100;
@@ -803,11 +934,39 @@ unsigned char auto_channel_select(void *pDeviceHandler, CARD_PHY_TYPE ePHYType)
 					if (ii < (CB_MAX_CHANNEL_24G - 2)) {
 						aiWeight[ii+3] -= 10;
 					}
+=======
+			if (sChannelTbl[ii].bValid) {
+				if (sChannelTbl[ii].byMAP == 0) {
+					aiWeight[ii] += 100;
+				} else if (sChannelTbl[ii].byMAP & 0x01) {
+					if (ii > 3)
+						aiWeight[ii - 3] -= 10;
+
+					if (ii > 2)
+						aiWeight[ii - 2] -= 20;
+
+					if (ii > 1)
+						aiWeight[ii - 1] -= 40;
+
+					aiWeight[ii] -= 80;
+					if (ii < CB_MAX_CHANNEL_24G)
+						aiWeight[ii + 1] -= 40;
+
+					if (ii < (CB_MAX_CHANNEL_24G - 1))
+						aiWeight[ii+2] -= 20;
+
+					if (ii < (CB_MAX_CHANNEL_24G - 2))
+						aiWeight[ii+3] -= 10;
+>>>>>>> v3.18
 				}
 			}
 		}
 		for (ii = 1; ii <= CB_MAX_CHANNEL_24G; ii++) {
+<<<<<<< HEAD
 			if ((sChannelTbl[ii].bValid == true) &&
+=======
+			if (sChannelTbl[ii].bValid &&
+>>>>>>> v3.18
 			    (aiWeight[ii] > aiWeight[byOptionChannel])) {
 				byOptionChannel = (unsigned char) ii;
 			}

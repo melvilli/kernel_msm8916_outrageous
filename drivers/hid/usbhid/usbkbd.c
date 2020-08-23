@@ -146,7 +146,11 @@ static void usb_kbd_irq(struct urb *urb)
 				input_report_key(kbd->dev, usb_kbd_keycode[kbd->new[i]], 1);
 			else
 				hid_info(urb->dev,
+<<<<<<< HEAD
 					 "Unknown key (scancode %#x) released.\n",
+=======
+					 "Unknown key (scancode %#x) pressed.\n",
+>>>>>>> v3.18
 					 kbd->new[i]);
 		}
 	}

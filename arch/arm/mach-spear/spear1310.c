@@ -14,7 +14,10 @@
 #define pr_fmt(fmt) "SPEAr1310: " fmt
 
 #include <linux/amba/pl022.h>
+<<<<<<< HEAD
 #include <linux/irqchip.h>
+=======
+>>>>>>> v3.18
 #include <linux/of_platform.h>
 #include <linux/pata_arasan_cf_data.h>
 #include <asm/mach/arch.h>
@@ -29,6 +32,10 @@
 static void __init spear1310_dt_init(void)
 {
 	of_platform_populate(NULL, of_default_bus_match_table, NULL, NULL);
+<<<<<<< HEAD
+=======
+	platform_device_register_simple("spear-cpufreq", -1, NULL, 0);
+>>>>>>> v3.18
 }
 
 static const char * const spear1310_dt_board_compat[] = {
@@ -42,7 +49,11 @@ static const char * const spear1310_dt_board_compat[] = {
  * PHYSICAL		VIRTUAL
  * 0xD8000000		0xFA000000
  */
+<<<<<<< HEAD
 struct map_desc spear1310_io_desc[] __initdata = {
+=======
+static struct map_desc spear1310_io_desc[] __initdata = {
+>>>>>>> v3.18
 	{
 		.virtual	= VA_SPEAR1310_RAS_GRP1_BASE,
 		.pfn		= __phys_to_pfn(SPEAR1310_RAS_GRP1_BASE),
@@ -60,7 +71,10 @@ static void __init spear1310_map_io(void)
 DT_MACHINE_START(SPEAR1310_DT, "ST SPEAr1310 SoC with Flattened Device Tree")
 	.smp		=	smp_ops(spear13xx_smp_ops),
 	.map_io		=	spear1310_map_io,
+<<<<<<< HEAD
 	.init_irq	=	irqchip_init,
+=======
+>>>>>>> v3.18
 	.init_time	=	spear13xx_timer_init,
 	.init_machine	=	spear1310_dt_init,
 	.restart	=	spear_restart,

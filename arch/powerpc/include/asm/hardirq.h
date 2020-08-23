@@ -6,10 +6,19 @@
 
 typedef struct {
 	unsigned int __softirq_pending;
+<<<<<<< HEAD
 	unsigned int timer_irqs;
 	unsigned int pmu_irqs;
 	unsigned int mce_exceptions;
 	unsigned int spurious_irqs;
+=======
+	unsigned int timer_irqs_event;
+	unsigned int timer_irqs_others;
+	unsigned int pmu_irqs;
+	unsigned int mce_exceptions;
+	unsigned int spurious_irqs;
+	unsigned int hmi_exceptions;
+>>>>>>> v3.18
 #ifdef CONFIG_PPC_DOORBELL
 	unsigned int doorbell_irqs;
 #endif

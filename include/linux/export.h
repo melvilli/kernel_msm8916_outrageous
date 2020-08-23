@@ -43,7 +43,11 @@ extern struct module __this_module;
 /* Mark the CRC weak since genksyms apparently decides not to
  * generate a checksums for some symbols */
 #define __CRC_SYMBOL(sym, sec)					\
+<<<<<<< HEAD
 	extern void *__crc_##sym __attribute__((weak));		\
+=======
+	extern __visible void *__crc_##sym __attribute__((weak));		\
+>>>>>>> v3.18
 	static const unsigned long __kcrctab_##sym		\
 	__used							\
 	__attribute__((section("___kcrctab" sec "+" #sym), unused))	\
@@ -59,7 +63,12 @@ extern struct module __this_module;
 	static const char __kstrtab_##sym[]			\
 	__attribute__((section("__ksymtab_strings"), aligned(1))) \
 	= VMLINUX_SYMBOL_STR(sym);				\
+<<<<<<< HEAD
 	static const struct kernel_symbol __ksymtab_##sym	\
+=======
+	extern const struct kernel_symbol __ksymtab_##sym;	\
+	__visible const struct kernel_symbol __ksymtab_##sym	\
+>>>>>>> v3.18
 	__used							\
 	__attribute__((section("___ksymtab" sec "+" #sym), unused))	\
 	= { (unsigned long)&sym, __kstrtab_##sym }

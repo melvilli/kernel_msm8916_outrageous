@@ -65,12 +65,36 @@ static struct list_head family_ht[GENL_FAM_TAB_SIZE];
  * To avoid an allocation at boot of just one unsigned long,
  * declare it global instead.
  * Bit 0 is marked as already used since group 0 is invalid.
+<<<<<<< HEAD
  */
 static unsigned long mc_group_start = 0x1;
 static unsigned long *mc_groups = &mc_group_start;
 static unsigned long mc_groups_longs = 1;
 
 static int genl_ctrl_event(int event, void *data);
+=======
+ * Bit 1 is marked as already used since the drop-monitor code
+ * abuses the API and thinks it can statically use group 1.
+ * That group will typically conflict with other groups that
+ * any proper users use.
+ * Bit 16 is marked as used since it's used for generic netlink
+ * and the code no longer marks pre-reserved IDs as used.
+ * Bit 17 is marked as already used since the VFS quota code
+ * also abused this API and relied on family == group ID, we
+ * cater to that by giving it a static family and group ID.
+ * Bit 18 is marked as already used since the PMCRAID driver
+ * did the same thing as the VFS quota code (maybe copied?)
+ */
+static unsigned long mc_group_start = 0x3 | BIT(GENL_ID_CTRL) |
+				      BIT(GENL_ID_VFS_DQUOT) |
+				      BIT(GENL_ID_PMCRAID);
+static unsigned long *mc_groups = &mc_group_start;
+static unsigned long mc_groups_longs = 1;
+
+static int genl_ctrl_event(int event, struct genl_family *family,
+			   const struct genl_multicast_group *grp,
+			   int grp_id);
+>>>>>>> v3.18
 
 static inline unsigned int genl_family_hash(unsigned int id)
 {
@@ -106,6 +130,7 @@ static struct genl_family *genl_family_find_byname(char *name)
 	return NULL;
 }
 
+<<<<<<< HEAD
 static struct genl_ops *genl_get_cmd(u8 cmd, struct genl_family *family)
 {
 	struct genl_ops *ops;
@@ -113,6 +138,15 @@ static struct genl_ops *genl_get_cmd(u8 cmd, struct genl_family *family)
 	list_for_each_entry(ops, &family->ops_list, ops_list)
 		if (ops->cmd == cmd)
 			return ops;
+=======
+static const struct genl_ops *genl_get_cmd(u8 cmd, struct genl_family *family)
+{
+	int i;
+
+	for (i = 0; i < family->n_ops; i++)
+		if (family->ops[i].cmd == cmd)
+			return &family->ops[i];
+>>>>>>> v3.18
 
 	return NULL;
 }
@@ -126,7 +160,13 @@ static u16 genl_generate_id(void)
 	int i;
 
 	for (i = 0; i <= GENL_MAX_ID - GENL_MIN_ID; i++) {
+<<<<<<< HEAD
 		if (!genl_family_find_byid(id_gen_idx))
+=======
+		if (id_gen_idx != GENL_ID_VFS_DQUOT &&
+		    id_gen_idx != GENL_ID_PMCRAID &&
+		    !genl_family_find_byid(id_gen_idx))
+>>>>>>> v3.18
 			return id_gen_idx;
 		if (++id_gen_idx > GENL_MAX_ID)
 			id_gen_idx = GENL_MIN_ID;
@@ -135,6 +175,7 @@ static u16 genl_generate_id(void)
 	return 0;
 }
 
+<<<<<<< HEAD
 static struct genl_multicast_group notify_grp;
 
 /**
@@ -191,6 +232,115 @@ int genl_register_mc_group(struct genl_family *family,
 		mc_groups_longs++;
 	}
 
+=======
+static int genl_allocate_reserve_groups(int n_groups, int *first_id)
+{
+	unsigned long *new_groups;
+	int start = 0;
+	int i;
+	int id;
+	bool fits;
+
+	do {
+		if (start == 0)
+			id = find_first_zero_bit(mc_groups,
+						 mc_groups_longs *
+						 BITS_PER_LONG);
+		else
+			id = find_next_zero_bit(mc_groups,
+						mc_groups_longs * BITS_PER_LONG,
+						start);
+
+		fits = true;
+		for (i = id;
+		     i < min_t(int, id + n_groups,
+			       mc_groups_longs * BITS_PER_LONG);
+		     i++) {
+			if (test_bit(i, mc_groups)) {
+				start = i;
+				fits = false;
+				break;
+			}
+		}
+
+		if (id >= mc_groups_longs * BITS_PER_LONG) {
+			unsigned long new_longs = mc_groups_longs +
+						  BITS_TO_LONGS(n_groups);
+			size_t nlen = new_longs * sizeof(unsigned long);
+
+			if (mc_groups == &mc_group_start) {
+				new_groups = kzalloc(nlen, GFP_KERNEL);
+				if (!new_groups)
+					return -ENOMEM;
+				mc_groups = new_groups;
+				*mc_groups = mc_group_start;
+			} else {
+				new_groups = krealloc(mc_groups, nlen,
+						      GFP_KERNEL);
+				if (!new_groups)
+					return -ENOMEM;
+				mc_groups = new_groups;
+				for (i = 0; i < BITS_TO_LONGS(n_groups); i++)
+					mc_groups[mc_groups_longs + i] = 0;
+			}
+			mc_groups_longs = new_longs;
+		}
+	} while (!fits);
+
+	for (i = id; i < id + n_groups; i++)
+		set_bit(i, mc_groups);
+	*first_id = id;
+	return 0;
+}
+
+static struct genl_family genl_ctrl;
+
+static int genl_validate_assign_mc_groups(struct genl_family *family)
+{
+	int first_id;
+	int n_groups = family->n_mcgrps;
+	int err = 0, i;
+	bool groups_allocated = false;
+
+	if (!n_groups)
+		return 0;
+
+	for (i = 0; i < n_groups; i++) {
+		const struct genl_multicast_group *grp = &family->mcgrps[i];
+
+		if (WARN_ON(grp->name[0] == '\0'))
+			return -EINVAL;
+		if (WARN_ON(memchr(grp->name, '\0', GENL_NAMSIZ) == NULL))
+			return -EINVAL;
+	}
+
+	/* special-case our own group and hacks */
+	if (family == &genl_ctrl) {
+		first_id = GENL_ID_CTRL;
+		BUG_ON(n_groups != 1);
+	} else if (strcmp(family->name, "NET_DM") == 0) {
+		first_id = 1;
+		BUG_ON(n_groups != 1);
+	} else if (family->id == GENL_ID_VFS_DQUOT) {
+		first_id = GENL_ID_VFS_DQUOT;
+		BUG_ON(n_groups != 1);
+	} else if (family->id == GENL_ID_PMCRAID) {
+		first_id = GENL_ID_PMCRAID;
+		BUG_ON(n_groups != 1);
+	} else {
+		groups_allocated = true;
+		err = genl_allocate_reserve_groups(n_groups, &first_id);
+		if (err)
+			return err;
+	}
+
+	family->mcgrp_offset = first_id;
+
+	/* if still initializing, can't and don't need to to realloc bitmaps */
+	if (!init_net.genl_sock)
+		return 0;
+
+>>>>>>> v3.18
 	if (family->netnsok) {
 		struct net *net;
 
@@ -206,9 +356,13 @@ int genl_register_mc_group(struct genl_family *family,
 				 * number of _possible_ groups has been
 				 * increased on some sockets which is ok.
 				 */
+<<<<<<< HEAD
 				rcu_read_unlock();
 				netlink_table_ungrab();
 				goto out;
+=======
+				break;
+>>>>>>> v3.18
 			}
 		}
 		rcu_read_unlock();
@@ -216,6 +370,7 @@ int genl_register_mc_group(struct genl_family *family,
 	} else {
 		err = netlink_change_ngroups(init_net.genl_sock,
 					     mc_groups_longs * BITS_PER_LONG);
+<<<<<<< HEAD
 		if (err)
 			goto out;
 	}
@@ -362,6 +517,65 @@ int genl_unregister_ops(struct genl_family *family, struct genl_ops *ops)
 	return -ENOENT;
 }
 EXPORT_SYMBOL(genl_unregister_ops);
+=======
+	}
+
+	if (groups_allocated && err) {
+		for (i = 0; i < family->n_mcgrps; i++)
+			clear_bit(family->mcgrp_offset + i, mc_groups);
+	}
+
+	return err;
+}
+
+static void genl_unregister_mc_groups(struct genl_family *family)
+{
+	struct net *net;
+	int i;
+
+	netlink_table_grab();
+	rcu_read_lock();
+	for_each_net_rcu(net) {
+		for (i = 0; i < family->n_mcgrps; i++)
+			__netlink_clear_multicast_users(
+				net->genl_sock, family->mcgrp_offset + i);
+	}
+	rcu_read_unlock();
+	netlink_table_ungrab();
+
+	for (i = 0; i < family->n_mcgrps; i++) {
+		int grp_id = family->mcgrp_offset + i;
+
+		if (grp_id != 1)
+			clear_bit(grp_id, mc_groups);
+		genl_ctrl_event(CTRL_CMD_DELMCAST_GRP, family,
+				&family->mcgrps[i], grp_id);
+	}
+}
+
+static int genl_validate_ops(const struct genl_family *family)
+{
+	const struct genl_ops *ops = family->ops;
+	unsigned int n_ops = family->n_ops;
+	int i, j;
+
+	if (WARN_ON(n_ops && !ops))
+		return -EINVAL;
+
+	if (!n_ops)
+		return 0;
+
+	for (i = 0; i < n_ops; i++) {
+		if (ops[i].dumpit == NULL && ops[i].doit == NULL)
+			return -EINVAL;
+		for (j = i + 1; j < n_ops; j++)
+			if (ops[i].cmd == ops[j].cmd)
+				return -EINVAL;
+	}
+
+	return 0;
+}
+>>>>>>> v3.18
 
 /**
  * __genl_register_family - register a generic netlink family
@@ -372,11 +586,21 @@ EXPORT_SYMBOL(genl_unregister_ops);
  * The family id may equal GENL_ID_GENERATE causing an unique id to
  * be automatically generated and assigned.
  *
+<<<<<<< HEAD
+=======
+ * The family's ops array must already be assigned, you can use the
+ * genl_register_family_with_ops() helper function.
+ *
+>>>>>>> v3.18
  * Return 0 on success or a negative error code.
  */
 int __genl_register_family(struct genl_family *family)
 {
+<<<<<<< HEAD
 	int err = -EINVAL;
+=======
+	int err = -EINVAL, i;
+>>>>>>> v3.18
 
 	if (family->id && family->id < GENL_MIN_ID)
 		goto errout;
@@ -384,8 +608,14 @@ int __genl_register_family(struct genl_family *family)
 	if (family->id > GENL_MAX_ID)
 		goto errout;
 
+<<<<<<< HEAD
 	INIT_LIST_HEAD(&family->ops_list);
 	INIT_LIST_HEAD(&family->mcast_groups);
+=======
+	err = genl_validate_ops(family);
+	if (err)
+		return err;
+>>>>>>> v3.18
 
 	genl_lock_all();
 
@@ -418,10 +648,25 @@ int __genl_register_family(struct genl_family *family)
 	} else
 		family->attrbuf = NULL;
 
+<<<<<<< HEAD
 	list_add_tail(&family->family_list, genl_family_chain(family->id));
 	genl_unlock_all();
 
 	genl_ctrl_event(CTRL_CMD_NEWFAMILY, family);
+=======
+	err = genl_validate_assign_mc_groups(family);
+	if (err)
+		goto errout_locked;
+
+	list_add_tail(&family->family_list, genl_family_chain(family->id));
+	genl_unlock_all();
+
+	/* send all events */
+	genl_ctrl_event(CTRL_CMD_NEWFAMILY, family, NULL, 0);
+	for (i = 0; i < family->n_mcgrps; i++)
+		genl_ctrl_event(CTRL_CMD_NEWMCAST_GRP, family,
+				&family->mcgrps[i], family->mcgrp_offset + i);
+>>>>>>> v3.18
 
 	return 0;
 
@@ -433,6 +678,7 @@ errout:
 EXPORT_SYMBOL(__genl_register_family);
 
 /**
+<<<<<<< HEAD
  * __genl_register_family_with_ops - register a generic netlink family
  * @family: generic netlink family
  * @ops: operations to be registered
@@ -479,6 +725,8 @@ err_out:
 EXPORT_SYMBOL(__genl_register_family_with_ops);
 
 /**
+=======
+>>>>>>> v3.18
  * genl_unregister_family - unregister generic netlink family
  * @family: generic netlink family
  *
@@ -499,11 +747,19 @@ int genl_unregister_family(struct genl_family *family)
 			continue;
 
 		list_del(&rc->family_list);
+<<<<<<< HEAD
 		INIT_LIST_HEAD(&family->ops_list);
 		genl_unlock_all();
 
 		kfree(family->attrbuf);
 		genl_ctrl_event(CTRL_CMD_DELFAMILY, family);
+=======
+		family->n_ops = 0;
+		genl_unlock_all();
+
+		kfree(family->attrbuf);
+		genl_ctrl_event(CTRL_CMD_DELFAMILY, family, NULL, 0);
+>>>>>>> v3.18
 		return 0;
 	}
 
@@ -514,6 +770,29 @@ int genl_unregister_family(struct genl_family *family)
 EXPORT_SYMBOL(genl_unregister_family);
 
 /**
+<<<<<<< HEAD
+=======
+ * genlmsg_new_unicast - Allocate generic netlink message for unicast
+ * @payload: size of the message payload
+ * @info: information on destination
+ * @flags: the type of memory to allocate
+ *
+ * Allocates a new sk_buff large enough to cover the specified payload
+ * plus required Netlink headers. Will check receiving socket for
+ * memory mapped i/o capability and use it if enabled. Will fall back
+ * to non-mapped skb if message size exceeds the frame size of the ring.
+ */
+struct sk_buff *genlmsg_new_unicast(size_t payload, struct genl_info *info,
+				    gfp_t flags)
+{
+	size_t len = nlmsg_total_size(genlmsg_total_size(payload));
+
+	return netlink_alloc_skb(info->dst_sk, len, info->snd_portid, flags);
+}
+EXPORT_SYMBOL_GPL(genlmsg_new_unicast);
+
+/**
+>>>>>>> v3.18
  * genlmsg_put - Add generic netlink header to netlink message
  * @skb: socket buffer holding the message
  * @portid: netlink portid the message is addressed to
@@ -546,7 +825,12 @@ EXPORT_SYMBOL(genlmsg_put);
 
 static int genl_lock_dumpit(struct sk_buff *skb, struct netlink_callback *cb)
 {
+<<<<<<< HEAD
 	struct genl_ops *ops = cb->data;
+=======
+	/* our ops are always const - netlink API doesn't propagate that */
+	const struct genl_ops *ops = cb->data;
+>>>>>>> v3.18
 	int rc;
 
 	genl_lock();
@@ -557,7 +841,12 @@ static int genl_lock_dumpit(struct sk_buff *skb, struct netlink_callback *cb)
 
 static int genl_lock_done(struct netlink_callback *cb)
 {
+<<<<<<< HEAD
 	struct genl_ops *ops = cb->data;
+=======
+	/* our ops are always const - netlink API doesn't propagate that */
+	const struct genl_ops *ops = cb->data;
+>>>>>>> v3.18
 	int rc = 0;
 
 	if (ops->done) {
@@ -572,7 +861,11 @@ static int genl_family_rcv_msg(struct genl_family *family,
 			       struct sk_buff *skb,
 			       struct nlmsghdr *nlh)
 {
+<<<<<<< HEAD
 	struct genl_ops *ops;
+=======
+	const struct genl_ops *ops;
+>>>>>>> v3.18
 	struct net *net = sock_net(skb->sk);
 	struct genl_info info;
 	struct genlmsghdr *hdr = nlmsg_data(nlh);
@@ -604,7 +897,12 @@ static int genl_family_rcv_msg(struct genl_family *family,
 		if (!family->parallel_ops) {
 			struct netlink_dump_control c = {
 				.module = family->module,
+<<<<<<< HEAD
 				.data = ops,
+=======
+				/* we have const, but the netlink API doesn't */
+				.data = (void *)ops,
+>>>>>>> v3.18
 				.dump = genl_lock_dumpit,
 				.done = genl_lock_done,
 			};
@@ -650,6 +948,10 @@ static int genl_family_rcv_msg(struct genl_family *family,
 	info.genlhdr = nlmsg_data(nlh);
 	info.userhdr = nlmsg_data(nlh) + GENL_HDRLEN;
 	info.attrs = attrbuf;
+<<<<<<< HEAD
+=======
+	info.dst_sk = skb->sk;
+>>>>>>> v3.18
 	genl_info_net_set(&info, net);
 	memset(&info.user_ptr, 0, sizeof(info.user_ptr));
 
@@ -726,24 +1028,50 @@ static int ctrl_fill_info(struct genl_family *family, u32 portid, u32 seq,
 	    nla_put_u32(skb, CTRL_ATTR_MAXATTR, family->maxattr))
 		goto nla_put_failure;
 
+<<<<<<< HEAD
 	if (!list_empty(&family->ops_list)) {
 		struct nlattr *nla_ops;
 		struct genl_ops *ops;
 		int idx = 1;
+=======
+	if (family->n_ops) {
+		struct nlattr *nla_ops;
+		int i;
+>>>>>>> v3.18
 
 		nla_ops = nla_nest_start(skb, CTRL_ATTR_OPS);
 		if (nla_ops == NULL)
 			goto nla_put_failure;
 
+<<<<<<< HEAD
 		list_for_each_entry(ops, &family->ops_list, ops_list) {
 			struct nlattr *nest;
 
 			nest = nla_nest_start(skb, idx++);
+=======
+		for (i = 0; i < family->n_ops; i++) {
+			struct nlattr *nest;
+			const struct genl_ops *ops = &family->ops[i];
+			u32 op_flags = ops->flags;
+
+			if (ops->dumpit)
+				op_flags |= GENL_CMD_CAP_DUMP;
+			if (ops->doit)
+				op_flags |= GENL_CMD_CAP_DO;
+			if (ops->policy)
+				op_flags |= GENL_CMD_CAP_HASPOL;
+
+			nest = nla_nest_start(skb, i + 1);
+>>>>>>> v3.18
 			if (nest == NULL)
 				goto nla_put_failure;
 
 			if (nla_put_u32(skb, CTRL_ATTR_OP_ID, ops->cmd) ||
+<<<<<<< HEAD
 			    nla_put_u32(skb, CTRL_ATTR_OP_FLAGS, ops->flags))
+=======
+			    nla_put_u32(skb, CTRL_ATTR_OP_FLAGS, op_flags))
+>>>>>>> v3.18
 				goto nla_put_failure;
 
 			nla_nest_end(skb, nest);
@@ -752,15 +1080,22 @@ static int ctrl_fill_info(struct genl_family *family, u32 portid, u32 seq,
 		nla_nest_end(skb, nla_ops);
 	}
 
+<<<<<<< HEAD
 	if (!list_empty(&family->mcast_groups)) {
 		struct genl_multicast_group *grp;
 		struct nlattr *nla_grps;
 		int idx = 1;
+=======
+	if (family->n_mcgrps) {
+		struct nlattr *nla_grps;
+		int i;
+>>>>>>> v3.18
 
 		nla_grps = nla_nest_start(skb, CTRL_ATTR_MCAST_GROUPS);
 		if (nla_grps == NULL)
 			goto nla_put_failure;
 
+<<<<<<< HEAD
 		list_for_each_entry(grp, &family->mcast_groups, list) {
 			struct nlattr *nest;
 
@@ -769,6 +1104,20 @@ static int ctrl_fill_info(struct genl_family *family, u32 portid, u32 seq,
 				goto nla_put_failure;
 
 			if (nla_put_u32(skb, CTRL_ATTR_MCAST_GRP_ID, grp->id) ||
+=======
+		for (i = 0; i < family->n_mcgrps; i++) {
+			struct nlattr *nest;
+			const struct genl_multicast_group *grp;
+
+			grp = &family->mcgrps[i];
+
+			nest = nla_nest_start(skb, i + 1);
+			if (nest == NULL)
+				goto nla_put_failure;
+
+			if (nla_put_u32(skb, CTRL_ATTR_MCAST_GRP_ID,
+					family->mcgrp_offset + i) ||
+>>>>>>> v3.18
 			    nla_put_string(skb, CTRL_ATTR_MCAST_GRP_NAME,
 					   grp->name))
 				goto nla_put_failure;
@@ -785,9 +1134,16 @@ nla_put_failure:
 	return -EMSGSIZE;
 }
 
+<<<<<<< HEAD
 static int ctrl_fill_mcgrp_info(struct genl_multicast_group *grp, u32 portid,
 				u32 seq, u32 flags, struct sk_buff *skb,
 				u8 cmd)
+=======
+static int ctrl_fill_mcgrp_info(struct genl_family *family,
+				const struct genl_multicast_group *grp,
+				int grp_id, u32 portid, u32 seq, u32 flags,
+				struct sk_buff *skb, u8 cmd)
+>>>>>>> v3.18
 {
 	void *hdr;
 	struct nlattr *nla_grps;
@@ -797,8 +1153,13 @@ static int ctrl_fill_mcgrp_info(struct genl_multicast_group *grp, u32 portid,
 	if (hdr == NULL)
 		return -1;
 
+<<<<<<< HEAD
 	if (nla_put_string(skb, CTRL_ATTR_FAMILY_NAME, grp->family->name) ||
 	    nla_put_u16(skb, CTRL_ATTR_FAMILY_ID, grp->family->id))
+=======
+	if (nla_put_string(skb, CTRL_ATTR_FAMILY_NAME, family->name) ||
+	    nla_put_u16(skb, CTRL_ATTR_FAMILY_ID, family->id))
+>>>>>>> v3.18
 		goto nla_put_failure;
 
 	nla_grps = nla_nest_start(skb, CTRL_ATTR_MCAST_GROUPS);
@@ -809,7 +1170,11 @@ static int ctrl_fill_mcgrp_info(struct genl_multicast_group *grp, u32 portid,
 	if (nest == NULL)
 		goto nla_put_failure;
 
+<<<<<<< HEAD
 	if (nla_put_u32(skb, CTRL_ATTR_MCAST_GRP_ID, grp->id) ||
+=======
+	if (nla_put_u32(skb, CTRL_ATTR_MCAST_GRP_ID, grp_id) ||
+>>>>>>> v3.18
 	    nla_put_string(skb, CTRL_ATTR_MCAST_GRP_NAME,
 			   grp->name))
 		goto nla_put_failure;
@@ -875,8 +1240,15 @@ static struct sk_buff *ctrl_build_family_msg(struct genl_family *family,
 	return skb;
 }
 
+<<<<<<< HEAD
 static struct sk_buff *ctrl_build_mcgrp_msg(struct genl_multicast_group *grp,
 					    u32 portid, int seq, u8 cmd)
+=======
+static struct sk_buff *
+ctrl_build_mcgrp_msg(struct genl_family *family,
+		     const struct genl_multicast_group *grp,
+		     int grp_id, u32 portid, int seq, u8 cmd)
+>>>>>>> v3.18
 {
 	struct sk_buff *skb;
 	int err;
@@ -885,7 +1257,12 @@ static struct sk_buff *ctrl_build_mcgrp_msg(struct genl_multicast_group *grp,
 	if (skb == NULL)
 		return ERR_PTR(-ENOBUFS);
 
+<<<<<<< HEAD
 	err = ctrl_fill_mcgrp_info(grp, portid, seq, 0, skb, cmd);
+=======
+	err = ctrl_fill_mcgrp_info(family, grp, grp_id, portid,
+				   seq, 0, skb, cmd);
+>>>>>>> v3.18
 	if (err < 0) {
 		nlmsg_free(skb);
 		return ERR_PTR(err);
@@ -947,11 +1324,19 @@ static int ctrl_getfamily(struct sk_buff *skb, struct genl_info *info)
 	return genlmsg_reply(msg, info);
 }
 
+<<<<<<< HEAD
 static int genl_ctrl_event(int event, void *data)
 {
 	struct sk_buff *msg;
 	struct genl_family *family;
 	struct genl_multicast_group *grp;
+=======
+static int genl_ctrl_event(int event, struct genl_family *family,
+			   const struct genl_multicast_group *grp,
+			   int grp_id)
+{
+	struct sk_buff *msg;
+>>>>>>> v3.18
 
 	/* genl is still initialising */
 	if (!init_net.genl_sock)
@@ -960,14 +1345,23 @@ static int genl_ctrl_event(int event, void *data)
 	switch (event) {
 	case CTRL_CMD_NEWFAMILY:
 	case CTRL_CMD_DELFAMILY:
+<<<<<<< HEAD
 		family = data;
+=======
+		WARN_ON(grp);
+>>>>>>> v3.18
 		msg = ctrl_build_family_msg(family, 0, 0, event);
 		break;
 	case CTRL_CMD_NEWMCAST_GRP:
 	case CTRL_CMD_DELMCAST_GRP:
+<<<<<<< HEAD
 		grp = data;
 		family = grp->family;
 		msg = ctrl_build_mcgrp_msg(data, 0, 0, event);
+=======
+		BUG_ON(!grp);
+		msg = ctrl_build_mcgrp_msg(family, grp, grp_id, 0, 0, event);
+>>>>>>> v3.18
 		break;
 	default:
 		return -EINVAL;
@@ -977,17 +1371,27 @@ static int genl_ctrl_event(int event, void *data)
 		return PTR_ERR(msg);
 
 	if (!family->netnsok) {
+<<<<<<< HEAD
 		genlmsg_multicast_netns(&init_net, msg, 0,
 					GENL_ID_CTRL, GFP_KERNEL);
 	} else {
 		rcu_read_lock();
 		genlmsg_multicast_allns(msg, 0, GENL_ID_CTRL, GFP_ATOMIC);
+=======
+		genlmsg_multicast_netns(&genl_ctrl, &init_net, msg, 0,
+					0, GFP_KERNEL);
+	} else {
+		rcu_read_lock();
+		genlmsg_multicast_allns(&genl_ctrl, msg, 0,
+					0, GFP_ATOMIC);
+>>>>>>> v3.18
 		rcu_read_unlock();
 	}
 
 	return 0;
 }
 
+<<<<<<< HEAD
 static struct genl_ops genl_ctrl_ops = {
 	.cmd		= CTRL_CMD_GETFAMILY,
 	.doit		= ctrl_getfamily,
@@ -997,6 +1401,19 @@ static struct genl_ops genl_ctrl_ops = {
 
 static struct genl_multicast_group notify_grp = {
 	.name		= "notify",
+=======
+static struct genl_ops genl_ctrl_ops[] = {
+	{
+		.cmd		= CTRL_CMD_GETFAMILY,
+		.doit		= ctrl_getfamily,
+		.dumpit		= ctrl_dumpfamily,
+		.policy		= ctrl_policy,
+	},
+};
+
+static struct genl_multicast_group genl_ctrl_groups[] = {
+	{ .name = "notify", },
+>>>>>>> v3.18
 };
 
 static int __net_init genl_pernet_init(struct net *net)
@@ -1036,7 +1453,12 @@ static int __init genl_init(void)
 	for (i = 0; i < GENL_FAM_TAB_SIZE; i++)
 		INIT_LIST_HEAD(&family_ht[i]);
 
+<<<<<<< HEAD
 	err = genl_register_family_with_ops(&genl_ctrl, &genl_ctrl_ops, 1);
+=======
+	err = genl_register_family_with_ops_groups(&genl_ctrl, genl_ctrl_ops,
+						   genl_ctrl_groups);
+>>>>>>> v3.18
 	if (err < 0)
 		goto problem;
 
@@ -1044,10 +1466,13 @@ static int __init genl_init(void)
 	if (err)
 		goto problem;
 
+<<<<<<< HEAD
 	err = genl_register_mc_group(&genl_ctrl, &notify_grp);
 	if (err < 0)
 		goto problem;
 
+=======
+>>>>>>> v3.18
 	return 0;
 
 problem:
@@ -1085,14 +1510,28 @@ static int genlmsg_mcast(struct sk_buff *skb, u32 portid, unsigned long group,
 	return err;
 }
 
+<<<<<<< HEAD
 int genlmsg_multicast_allns(struct sk_buff *skb, u32 portid, unsigned int group,
 			    gfp_t flags)
 {
+=======
+int genlmsg_multicast_allns(struct genl_family *family, struct sk_buff *skb,
+			    u32 portid, unsigned int group, gfp_t flags)
+{
+	if (WARN_ON_ONCE(group >= family->n_mcgrps))
+		return -EINVAL;
+	group = family->mcgrp_offset + group;
+>>>>>>> v3.18
 	return genlmsg_mcast(skb, portid, group, flags);
 }
 EXPORT_SYMBOL(genlmsg_multicast_allns);
 
+<<<<<<< HEAD
 void genl_notify(struct sk_buff *skb, struct net *net, u32 portid, u32 group,
+=======
+void genl_notify(struct genl_family *family,
+		 struct sk_buff *skb, struct net *net, u32 portid, u32 group,
+>>>>>>> v3.18
 		 struct nlmsghdr *nlh, gfp_t flags)
 {
 	struct sock *sk = net->genl_sock;
@@ -1101,6 +1540,12 @@ void genl_notify(struct sk_buff *skb, struct net *net, u32 portid, u32 group,
 	if (nlh)
 		report = nlmsg_report(nlh);
 
+<<<<<<< HEAD
+=======
+	if (WARN_ON_ONCE(group >= family->n_mcgrps))
+		return;
+	group = family->mcgrp_offset + group;
+>>>>>>> v3.18
 	nlmsg_notify(sk, skb, portid, group, report, flags);
 }
 EXPORT_SYMBOL(genl_notify);

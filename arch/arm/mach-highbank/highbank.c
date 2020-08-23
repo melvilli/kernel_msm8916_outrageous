@@ -17,14 +17,22 @@
 #include <linux/clkdev.h>
 #include <linux/clocksource.h>
 #include <linux/dma-mapping.h>
+<<<<<<< HEAD
 #include <linux/io.h>
 #include <linux/irq.h>
 #include <linux/irqchip.h>
 #include <linux/irqdomain.h>
+=======
+#include <linux/input.h>
+#include <linux/io.h>
+#include <linux/irqchip.h>
+#include <linux/pl320-ipc.h>
+>>>>>>> v3.18
 #include <linux/of.h>
 #include <linux/of_irq.h>
 #include <linux/of_platform.h>
 #include <linux/of_address.h>
+<<<<<<< HEAD
 #include <linux/smp.h>
 #include <linux/amba/bus.h>
 #include <linux/clk-provider.h>
@@ -36,6 +44,16 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 #include <asm/mach/time.h>
+=======
+#include <linux/reboot.h>
+#include <linux/amba/bus.h>
+#include <linux/platform_device.h>
+
+#include <asm/psci.h>
+#include <asm/hardware/cache-l2x0.h>
+#include <asm/mach/arch.h>
+#include <asm/mach/map.h>
+>>>>>>> v3.18
 
 #include "core.h"
 #include "sysregs.h"
@@ -53,6 +71,7 @@ static void __init highbank_scu_map_io(void)
 	scu_base_addr = ioremap(base, SZ_4K);
 }
 
+<<<<<<< HEAD
 #define HB_JUMP_TABLE_PHYS(cpu)		(0x40 + (0x10 * (cpu)))
 #define HB_JUMP_TABLE_VIRT(cpu)		phys_to_virt(HB_JUMP_TABLE_PHYS(cpu))
 
@@ -70,6 +89,16 @@ static void highbank_l2x0_disable(void)
 	outer_flush_all();
 	/* Disable PL310 L2 Cache controller */
 	highbank_smc1(0x102, 0x0);
+=======
+
+static void highbank_l2c310_write_sec(unsigned long val, unsigned reg)
+{
+	if (reg == L2X0_CTRL)
+		highbank_smc1(0x102, val);
+	else
+		WARN_ONCE(1, "Highbank L2C310: ignoring write to reg 0x%x\n",
+			  reg);
+>>>>>>> v3.18
 }
 
 static void __init highbank_init_irq(void)
@@ -78,6 +107,7 @@ static void __init highbank_init_irq(void)
 
 	if (of_find_compatible_node(NULL, NULL, "arm,cortex-a9"))
 		highbank_scu_map_io();
+<<<<<<< HEAD
 
 	/* Enable PL310 L2 Cache controller */
 	if (IS_ENABLED(CONFIG_CACHE_L2X0) &&
@@ -100,6 +130,8 @@ static void __init highbank_timer_init(void)
 	of_clk_init(NULL);
 
 	clocksource_of_init();
+=======
+>>>>>>> v3.18
 }
 
 static void highbank_power_off(void)
@@ -115,6 +147,10 @@ static int highbank_platform_notifier(struct notifier_block *nb,
 {
 	struct resource *res;
 	int reg = -1;
+<<<<<<< HEAD
+=======
+	u32 val;
+>>>>>>> v3.18
 	struct device *dev = __dev;
 
 	if (event != BUS_NOTIFY_ADD_DEVICE)
@@ -141,10 +177,17 @@ static int highbank_platform_notifier(struct notifier_block *nb,
 		return NOTIFY_DONE;
 
 	if (of_property_read_bool(dev->of_node, "dma-coherent")) {
+<<<<<<< HEAD
 		writel(0xff31, sregs_base + reg);
 		set_dma_ops(dev, &arm_coherent_dma_ops);
 	} else
 		writel(0, sregs_base + reg);
+=======
+		val = readl(sregs_base + reg);
+		writel(val | 0xff01, sregs_base + reg);
+		set_dma_ops(dev, &arm_coherent_dma_ops);
+	}
+>>>>>>> v3.18
 
 	return NOTIFY_OK;
 }
@@ -157,15 +200,58 @@ static struct notifier_block highbank_platform_nb = {
 	.notifier_call = highbank_platform_notifier,
 };
 
+<<<<<<< HEAD
 static void __init highbank_init(void)
 {
+=======
+static struct platform_device highbank_cpuidle_device = {
+	.name = "cpuidle-calxeda",
+};
+
+static int hb_keys_notifier(struct notifier_block *nb, unsigned long event, void *data)
+{
+	u32 key = *(u32 *)data;
+
+	if (event != 0x1000)
+		return 0;
+
+	if (key == KEY_POWER)
+		orderly_poweroff(false);
+	else if (key == 0xffff)
+		ctrl_alt_del();
+
+	return 0;
+}
+static struct notifier_block hb_keys_nb = {
+	.notifier_call = hb_keys_notifier,
+};
+
+static void __init highbank_init(void)
+{
+	struct device_node *np;
+
+	/* Map system registers */
+	np = of_find_compatible_node(NULL, NULL, "calxeda,hb-sregs");
+	sregs_base = of_iomap(np, 0);
+	WARN_ON(!sregs_base);
+
+>>>>>>> v3.18
 	pm_power_off = highbank_power_off;
 	highbank_pm_init();
 
 	bus_register_notifier(&platform_bus_type, &highbank_platform_nb);
 	bus_register_notifier(&amba_bustype, &highbank_amba_nb);
 
+<<<<<<< HEAD
 	of_platform_populate(NULL, of_default_bus_match_table, NULL, NULL);
+=======
+	pl320_ipc_register_notifier(&hb_keys_nb);
+
+	of_platform_populate(NULL, of_default_bus_match_table, NULL, NULL);
+
+	if (psci_ops.cpu_suspend)
+		platform_device_register(&highbank_cpuidle_device);
+>>>>>>> v3.18
 }
 
 static const char *highbank_match[] __initconst = {
@@ -175,10 +261,20 @@ static const char *highbank_match[] __initconst = {
 };
 
 DT_MACHINE_START(HIGHBANK, "Highbank")
+<<<<<<< HEAD
 	.smp		= smp_ops(highbank_smp_ops),
 	.map_io		= debug_ll_io_init,
 	.init_irq	= highbank_init_irq,
 	.init_time	= highbank_timer_init,
+=======
+#if defined(CONFIG_ZONE_DMA) && defined(CONFIG_ARM_LPAE)
+	.dma_zone_size	= (4ULL * SZ_1G),
+#endif
+	.l2c_aux_val	= 0,
+	.l2c_aux_mask	= ~0,
+	.l2c_write_sec	= highbank_l2c310_write_sec,
+	.init_irq	= highbank_init_irq,
+>>>>>>> v3.18
 	.init_machine	= highbank_init,
 	.dt_compat	= highbank_match,
 	.restart	= highbank_restart,

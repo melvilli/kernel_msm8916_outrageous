@@ -58,6 +58,10 @@ int bt_to_errno(__u16 code)
 		return EIO;
 
 	case 0x04:
+<<<<<<< HEAD
+=======
+	case 0x3c:
+>>>>>>> v3.18
 		return EHOSTDOWN;
 
 	case 0x05:
@@ -134,17 +138,25 @@ int bt_to_errno(__u16 code)
 }
 EXPORT_SYMBOL(bt_to_errno);
 
+<<<<<<< HEAD
 int bt_info(const char *format, ...)
 {
 	struct va_format vaf;
 	va_list args;
 	int r;
+=======
+void bt_info(const char *format, ...)
+{
+	struct va_format vaf;
+	va_list args;
+>>>>>>> v3.18
 
 	va_start(args, format);
 
 	vaf.fmt = format;
 	vaf.va = &args;
 
+<<<<<<< HEAD
 	r = pr_info("%pKV", &vaf);
 
 	va_end(args);
@@ -158,16 +170,34 @@ int bt_err(const char *format, ...)
 	struct va_format vaf;
 	va_list args;
 	int r;
+=======
+	pr_info("%pV", &vaf);
+
+	va_end(args);
+}
+EXPORT_SYMBOL(bt_info);
+
+void bt_err(const char *format, ...)
+{
+	struct va_format vaf;
+	va_list args;
+>>>>>>> v3.18
 
 	va_start(args, format);
 
 	vaf.fmt = format;
 	vaf.va = &args;
 
+<<<<<<< HEAD
 	r = pr_err("%pKV", &vaf);
 
 	va_end(args);
 
 	return r;
+=======
+	pr_err("%pV", &vaf);
+
+	va_end(args);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(bt_err);

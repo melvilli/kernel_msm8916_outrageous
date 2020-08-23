@@ -64,11 +64,21 @@ static int wm831x_i2c_suspend(struct device *dev)
 	return wm831x_device_suspend(wm831x);
 }
 
+<<<<<<< HEAD
 static void wm831x_i2c_shutdown(struct i2c_client *i2c)
 {
 	struct wm831x *wm831x = i2c_get_clientdata(i2c);
 
 	wm831x_device_shutdown(wm831x);
+=======
+static int wm831x_i2c_poweroff(struct device *dev)
+{
+	struct wm831x *wm831x = dev_get_drvdata(dev);
+
+	wm831x_device_shutdown(wm831x);
+
+	return 0;
+>>>>>>> v3.18
 }
 
 static const struct i2c_device_id wm831x_i2c_id[] = {
@@ -85,6 +95,10 @@ MODULE_DEVICE_TABLE(i2c, wm831x_i2c_id);
 
 static const struct dev_pm_ops wm831x_pm_ops = {
 	.suspend = wm831x_i2c_suspend,
+<<<<<<< HEAD
+=======
+	.poweroff = wm831x_i2c_poweroff,
+>>>>>>> v3.18
 };
 
 static struct i2c_driver wm831x_i2c_driver = {
@@ -95,7 +109,10 @@ static struct i2c_driver wm831x_i2c_driver = {
 	},
 	.probe = wm831x_i2c_probe,
 	.remove = wm831x_i2c_remove,
+<<<<<<< HEAD
 	.shutdown = wm831x_i2c_shutdown,
+=======
+>>>>>>> v3.18
 	.id_table = wm831x_i2c_id,
 };
 

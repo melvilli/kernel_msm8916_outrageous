@@ -4,7 +4,15 @@
  */
 #include <asm/vdso.h>
 
+<<<<<<< HEAD
 OUTPUT_FORMAT("elf64-powerpc", "elf64-powerpc", "elf64-powerpc")
+=======
+#ifdef __LITTLE_ENDIAN__
+OUTPUT_FORMAT("elf64-powerpcle", "elf64-powerpcle", "elf64-powerpcle")
+#else
+OUTPUT_FORMAT("elf64-powerpc", "elf64-powerpc", "elf64-powerpc")
+#endif
+>>>>>>> v3.18
 OUTPUT_ARCH(powerpc:common64)
 ENTRY(_start)
 

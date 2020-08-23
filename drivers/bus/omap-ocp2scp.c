@@ -22,6 +22,7 @@
 #include <linux/pm_runtime.h>
 #include <linux/of.h>
 #include <linux/of_platform.h>
+<<<<<<< HEAD
 #include <linux/platform_data/omap_ocp2scp.h>
 
 /**
@@ -42,6 +43,8 @@ static unsigned _count_resources(struct resource *res)
 
 	return cnt;
 }
+=======
+>>>>>>> v3.18
 
 static int ocp2scp_remove_devices(struct device *dev, void *c)
 {
@@ -55,11 +58,15 @@ static int ocp2scp_remove_devices(struct device *dev, void *c)
 static int omap_ocp2scp_probe(struct platform_device *pdev)
 {
 	int ret;
+<<<<<<< HEAD
 	unsigned res_cnt, i;
 	struct device_node *np = pdev->dev.of_node;
 	struct platform_device *pdev_child;
 	struct omap_ocp2scp_platform_data *pdata = pdev->dev.platform_data;
 	struct omap_ocp2scp_dev *dev;
+=======
+	struct device_node *np = pdev->dev.of_node;
+>>>>>>> v3.18
 
 	if (np) {
 		ret = of_platform_populate(np, NULL, NULL, &pdev->dev);
@@ -68,6 +75,7 @@ static int omap_ocp2scp_probe(struct platform_device *pdev)
 			    "failed to add resources for ocp2scp child\n");
 			goto err0;
 		}
+<<<<<<< HEAD
 	} else if (pdata) {
 		for (i = 0, dev = *pdata->devices; i < pdata->dev_cnt; i++,
 		    dev++) {
@@ -101,15 +109,20 @@ static int omap_ocp2scp_probe(struct platform_device *pdev)
 	} else {
 		dev_err(&pdev->dev, "OCP2SCP initialized without plat data\n");
 		return -EINVAL;
+=======
+>>>>>>> v3.18
 	}
 
 	pm_runtime_enable(&pdev->dev);
 
 	return 0;
 
+<<<<<<< HEAD
 err1:
 	platform_device_put(pdev_child);
 
+=======
+>>>>>>> v3.18
 err0:
 	device_for_each_child(&pdev->dev, NULL, ocp2scp_remove_devices);
 

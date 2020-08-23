@@ -28,19 +28,25 @@
 #include <linux/mfd/wm8350/core.h>
 #include <linux/mfd/wm8350/comparator.h>
 
+<<<<<<< HEAD
 static ssize_t show_name(struct device *dev,
 			 struct device_attribute *attr, char *buf)
 {
 	return sprintf(buf, "wm8350\n");
 }
 
+=======
+>>>>>>> v3.18
 static const char * const input_names[] = {
 	[WM8350_AUXADC_USB]  = "USB",
 	[WM8350_AUXADC_LINE] = "Line",
 	[WM8350_AUXADC_BATT] = "Battery",
 };
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 static ssize_t show_voltage(struct device *dev,
 			    struct device_attribute *attr, char *buf)
 {
@@ -68,15 +74,22 @@ static ssize_t show_label(struct device *dev,
 	static SENSOR_DEVICE_ATTR(in##id##_label, S_IRUGO, show_label,	\
 				  NULL, name)
 
+<<<<<<< HEAD
 static DEVICE_ATTR(name, S_IRUGO, show_name, NULL);
 
+=======
+>>>>>>> v3.18
 WM8350_NAMED_VOLTAGE(0, WM8350_AUXADC_USB);
 WM8350_NAMED_VOLTAGE(1, WM8350_AUXADC_BATT);
 WM8350_NAMED_VOLTAGE(2, WM8350_AUXADC_LINE);
 
+<<<<<<< HEAD
 static struct attribute *wm8350_attributes[] = {
 	&dev_attr_name.attr,
 
+=======
+static struct attribute *wm8350_attrs[] = {
+>>>>>>> v3.18
 	&sensor_dev_attr_in0_input.dev_attr.attr,
 	&sensor_dev_attr_in0_label.dev_attr.attr,
 	&sensor_dev_attr_in1_input.dev_attr.attr,
@@ -87,13 +100,18 @@ static struct attribute *wm8350_attributes[] = {
 	NULL,
 };
 
+<<<<<<< HEAD
 static const struct attribute_group wm8350_attr_group = {
 	.attrs	= wm8350_attributes,
 };
+=======
+ATTRIBUTE_GROUPS(wm8350);
+>>>>>>> v3.18
 
 static int wm8350_hwmon_probe(struct platform_device *pdev)
 {
 	struct wm8350 *wm8350 = platform_get_drvdata(pdev);
+<<<<<<< HEAD
 	int ret;
 
 	ret = sysfs_create_group(&pdev->dev.kobj, &wm8350_attr_group);
@@ -122,11 +140,22 @@ static int wm8350_hwmon_remove(struct platform_device *pdev)
 	sysfs_remove_group(&pdev->dev.kobj, &wm8350_attr_group);
 
 	return 0;
+=======
+	struct device *hwmon_dev;
+
+	hwmon_dev = devm_hwmon_device_register_with_groups(&pdev->dev, "wm8350",
+							   wm8350,
+							   wm8350_groups);
+	return PTR_ERR_OR_ZERO(hwmon_dev);
+>>>>>>> v3.18
 }
 
 static struct platform_driver wm8350_hwmon_driver = {
 	.probe = wm8350_hwmon_probe,
+<<<<<<< HEAD
 	.remove = wm8350_hwmon_remove,
+=======
+>>>>>>> v3.18
 	.driver = {
 		.name = "wm8350-hwmon",
 		.owner = THIS_MODULE,

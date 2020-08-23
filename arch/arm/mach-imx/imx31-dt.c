@@ -20,10 +20,19 @@
 
 static void __init imx31_dt_init(void)
 {
+<<<<<<< HEAD
 	of_platform_populate(NULL, of_default_bus_match_table, NULL, NULL);
 }
 
 static const char *imx31_dt_board_compat[] __initdata = {
+=======
+	mxc_arch_reset_init_dt();
+
+	of_platform_populate(NULL, of_default_bus_match_table, NULL, NULL);
+}
+
+static const char * const imx31_dt_board_compat[] __initconst = {
+>>>>>>> v3.18
 	"fsl,imx31",
 	NULL
 };
@@ -37,7 +46,10 @@ DT_MACHINE_START(IMX31_DT, "Freescale i.MX31 (Device Tree Support)")
 	.map_io		= mx31_map_io,
 	.init_early	= imx31_init_early,
 	.init_irq	= mx31_init_irq,
+<<<<<<< HEAD
 	.handle_irq	= imx31_handle_irq,
+=======
+>>>>>>> v3.18
 	.init_time	= imx31_dt_timer_init,
 	.init_machine	= imx31_dt_init,
 	.dt_compat	= imx31_dt_board_compat,

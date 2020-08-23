@@ -7,7 +7,10 @@
 #include <linux/export.h>
 #include <linux/kernel.h>
 #include <linux/types.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/interrupt.h>
 #include <linux/delay.h>
 

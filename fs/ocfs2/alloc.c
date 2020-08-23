@@ -1025,7 +1025,11 @@ static int ocfs2_create_new_meta_bhs(handle_t *handle,
 		for(i = count;  i < (num_got + count); i++) {
 			bhs[i] = sb_getblk(osb->sb, first_blkno);
 			if (bhs[i] == NULL) {
+<<<<<<< HEAD
 				status = -EIO;
+=======
+				status = -ENOMEM;
+>>>>>>> v3.18
 				mlog_errno(status);
 				goto bail;
 			}
@@ -4742,6 +4746,10 @@ int ocfs2_add_clusters_in_btree(handle_t *handle,
 				enum ocfs2_alloc_restarted *reason_ret)
 {
 	int status = 0, err = 0;
+<<<<<<< HEAD
+=======
+	int need_free = 0;
+>>>>>>> v3.18
 	int free_extents;
 	enum ocfs2_alloc_restarted reason = RESTART_NONE;
 	u32 bit_off, num_bits;
@@ -4796,7 +4804,12 @@ int ocfs2_add_clusters_in_btree(handle_t *handle,
 					      OCFS2_JOURNAL_ACCESS_WRITE);
 	if (status < 0) {
 		mlog_errno(status);
+<<<<<<< HEAD
 		goto leave;
+=======
+		need_free = 1;
+		goto bail;
+>>>>>>> v3.18
 	}
 
 	block = ocfs2_clusters_to_blocks(osb->sb, bit_off);
@@ -4807,7 +4820,12 @@ int ocfs2_add_clusters_in_btree(handle_t *handle,
 				     num_bits, flags, meta_ac);
 	if (status < 0) {
 		mlog_errno(status);
+<<<<<<< HEAD
 		goto leave;
+=======
+		need_free = 1;
+		goto bail;
+>>>>>>> v3.18
 	}
 
 	ocfs2_journal_dirty(handle, et->et_root_bh);
@@ -4821,6 +4839,22 @@ int ocfs2_add_clusters_in_btree(handle_t *handle,
 		reason = RESTART_TRANS;
 	}
 
+<<<<<<< HEAD
+=======
+bail:
+	if (need_free) {
+		if (data_ac->ac_which == OCFS2_AC_USE_LOCAL)
+			ocfs2_free_local_alloc_bits(osb, handle, data_ac,
+					bit_off, num_bits);
+		else
+			ocfs2_free_clusters(handle,
+					data_ac->ac_inode,
+					data_ac->ac_bh,
+					ocfs2_clusters_to_blocks(osb->sb, bit_off),
+					num_bits);
+	}
+
+>>>>>>> v3.18
 leave:
 	if (reason_ret)
 		*reason_ret = reason;
@@ -4945,6 +4979,18 @@ leftright:
 
 		el = path_leaf_el(path);
 		split_index = ocfs2_search_extent_list(el, cpos);
+<<<<<<< HEAD
+=======
+		if (split_index == -1) {
+			ocfs2_error(ocfs2_metadata_cache_get_super(et->et_ci),
+					"Owner %llu has an extent at cpos %u "
+					"which can no longer be found.\n",
+					(unsigned long long)ocfs2_metadata_cache_owner(et->et_ci),
+					cpos);
+			ret = -EROFS;
+			goto out;
+		}
+>>>>>>> v3.18
 		goto leftright;
 	}
 out:
@@ -5119,7 +5165,11 @@ int ocfs2_change_extent_flag(handle_t *handle,
 	el = path_leaf_el(left_path);
 
 	index = ocfs2_search_extent_list(el, cpos);
+<<<<<<< HEAD
 	if (index == -1 || index >= le16_to_cpu(el->l_next_free_rec)) {
+=======
+	if (index == -1) {
+>>>>>>> v3.18
 		ocfs2_error(sb,
 			    "Owner %llu has an extent at cpos %u which can no "
 			    "longer be found.\n",
@@ -5475,7 +5525,11 @@ int ocfs2_remove_extent(handle_t *handle,
 
 	el = path_leaf_el(path);
 	index = ocfs2_search_extent_list(el, cpos);
+<<<<<<< HEAD
 	if (index == -1 || index >= le16_to_cpu(el->l_next_free_rec)) {
+=======
+	if (index == -1) {
+>>>>>>> v3.18
 		ocfs2_error(ocfs2_metadata_cache_get_super(et->et_ci),
 			    "Owner %llu has an extent at cpos %u which can no "
 			    "longer be found.\n",
@@ -5541,7 +5595,11 @@ int ocfs2_remove_extent(handle_t *handle,
 
 		el = path_leaf_el(path);
 		index = ocfs2_search_extent_list(el, cpos);
+<<<<<<< HEAD
 		if (index == -1 || index >= le16_to_cpu(el->l_next_free_rec)) {
+=======
+		if (index == -1) {
+>>>>>>> v3.18
 			ocfs2_error(ocfs2_metadata_cache_get_super(et->et_ci),
 				    "Owner %llu: split at cpos %u lost record.",
 				    (unsigned long long)ocfs2_metadata_cache_owner(et->et_ci),
@@ -5655,7 +5713,11 @@ int ocfs2_remove_btree_range(struct inode *inode,
 					       &ref_tree, NULL);
 		if (ret) {
 			mlog_errno(ret);
+<<<<<<< HEAD
 			goto out;
+=======
+			goto bail;
+>>>>>>> v3.18
 		}
 
 		ret = ocfs2_prepare_refcount_change_for_del(inode,
@@ -5666,7 +5728,11 @@ int ocfs2_remove_btree_range(struct inode *inode,
 							    &extra_blocks);
 		if (ret < 0) {
 			mlog_errno(ret);
+<<<<<<< HEAD
 			goto out;
+=======
+			goto bail;
+>>>>>>> v3.18
 		}
 	}
 
@@ -5674,7 +5740,11 @@ int ocfs2_remove_btree_range(struct inode *inode,
 						 extra_blocks);
 	if (ret) {
 		mlog_errno(ret);
+<<<<<<< HEAD
 		return ret;
+=======
+		goto bail;
+>>>>>>> v3.18
 	}
 
 	mutex_lock(&tl_inode->i_mutex);
@@ -5712,6 +5782,10 @@ int ocfs2_remove_btree_range(struct inode *inode,
 	}
 
 	ocfs2_et_update_clusters(et, -len);
+<<<<<<< HEAD
+=======
+	ocfs2_update_inode_fsync_trans(handle, inode, 1);
+>>>>>>> v3.18
 
 	ocfs2_journal_dirty(handle, et->et_root_bh);
 
@@ -5734,7 +5808,11 @@ out_commit:
 	ocfs2_commit_trans(osb, handle);
 out:
 	mutex_unlock(&tl_inode->i_mutex);
+<<<<<<< HEAD
 
+=======
+bail:
+>>>>>>> v3.18
 	if (meta_ac)
 		ocfs2_free_alloc_context(meta_ac);
 
@@ -6029,7 +6107,12 @@ static void ocfs2_truncate_log_worker(struct work_struct *work)
 void ocfs2_schedule_truncate_log_flush(struct ocfs2_super *osb,
 				       int cancel)
 {
+<<<<<<< HEAD
 	if (osb->osb_tl_inode) {
+=======
+	if (osb->osb_tl_inode &&
+			atomic_read(&osb->osb_tl_disable) == 0) {
+>>>>>>> v3.18
 		/* We want to push off log flushes while truncates are
 		 * still running. */
 		if (cancel)
@@ -6206,6 +6289,11 @@ void ocfs2_truncate_log_shutdown(struct ocfs2_super *osb)
 	int status;
 	struct inode *tl_inode = osb->osb_tl_inode;
 
+<<<<<<< HEAD
+=======
+	atomic_set(&osb->osb_tl_disable, 1);
+
+>>>>>>> v3.18
 	if (tl_inode) {
 		cancel_delayed_work(&osb->osb_truncate_log_wq);
 		flush_workqueue(ocfs2_wq);
@@ -6237,6 +6325,10 @@ int ocfs2_truncate_log_init(struct ocfs2_super *osb)
 	 * until we're sure all is well. */
 	INIT_DELAYED_WORK(&osb->osb_truncate_log_wq,
 			  ocfs2_truncate_log_worker);
+<<<<<<< HEAD
+=======
+	atomic_set(&osb->osb_tl_disable, 0);
+>>>>>>> v3.18
 	osb->osb_tl_bh    = tl_bh;
 	osb->osb_tl_inode = tl_inode;
 
@@ -6805,6 +6897,11 @@ int ocfs2_convert_inline_data_to_extents(struct inode *inode,
 					 struct buffer_head *di_bh)
 {
 	int ret, i, has_data, num_pages = 0;
+<<<<<<< HEAD
+=======
+	int need_free = 0;
+	u32 bit_off, num;
+>>>>>>> v3.18
 	handle_t *handle;
 	u64 uninitialized_var(block);
 	struct ocfs2_inode_info *oi = OCFS2_I(inode);
@@ -6850,7 +6947,10 @@ int ocfs2_convert_inline_data_to_extents(struct inode *inode,
 	}
 
 	if (has_data) {
+<<<<<<< HEAD
 		u32 bit_off, num;
+=======
+>>>>>>> v3.18
 		unsigned int page_end;
 		u64 phys;
 
@@ -6886,6 +6986,10 @@ int ocfs2_convert_inline_data_to_extents(struct inode *inode,
 		ret = ocfs2_grab_eof_pages(inode, 0, end, pages, &num_pages);
 		if (ret) {
 			mlog_errno(ret);
+<<<<<<< HEAD
+=======
+			need_free = 1;
+>>>>>>> v3.18
 			goto out_commit;
 		}
 
@@ -6896,6 +7000,10 @@ int ocfs2_convert_inline_data_to_extents(struct inode *inode,
 		ret = ocfs2_read_inline_data(inode, pages[0], di_bh);
 		if (ret) {
 			mlog_errno(ret);
+<<<<<<< HEAD
+=======
+			need_free = 1;
+>>>>>>> v3.18
 			goto out_commit;
 		}
 
@@ -6913,6 +7021,10 @@ int ocfs2_convert_inline_data_to_extents(struct inode *inode,
 	di->i_dyn_features = cpu_to_le16(oi->ip_dyn_features);
 	spin_unlock(&oi->ip_lock);
 
+<<<<<<< HEAD
+=======
+	ocfs2_update_inode_fsync_trans(handle, inode, 1);
+>>>>>>> v3.18
 	ocfs2_dinode_new_extent_list(inode, di);
 
 	ocfs2_journal_dirty(handle, di_bh);
@@ -6927,6 +7039,10 @@ int ocfs2_convert_inline_data_to_extents(struct inode *inode,
 		ret = ocfs2_insert_extent(handle, &et, 0, block, 1, 0, NULL);
 		if (ret) {
 			mlog_errno(ret);
+<<<<<<< HEAD
+=======
+			need_free = 1;
+>>>>>>> v3.18
 			goto out_commit;
 		}
 
@@ -6938,6 +7054,21 @@ out_commit:
 		dquot_free_space_nodirty(inode,
 					  ocfs2_clusters_to_bytes(osb->sb, 1));
 
+<<<<<<< HEAD
+=======
+	if (need_free) {
+		if (data_ac->ac_which == OCFS2_AC_USE_LOCAL)
+			ocfs2_free_local_alloc_bits(osb, handle, data_ac,
+					bit_off, num);
+		else
+			ocfs2_free_clusters(handle,
+					data_ac->ac_inode,
+					data_ac->ac_bh,
+					ocfs2_clusters_to_blocks(osb->sb, bit_off),
+					num);
+	}
+
+>>>>>>> v3.18
 	ocfs2_commit_trans(osb, handle);
 
 out_unlock:
@@ -7126,7 +7257,11 @@ int ocfs2_truncate_inline(struct inode *inode, struct buffer_head *di_bh,
 	if (end > i_size_read(inode))
 		end = i_size_read(inode);
 
+<<<<<<< HEAD
 	BUG_ON(start >= end);
+=======
+	BUG_ON(start > end);
+>>>>>>> v3.18
 
 	if (!(OCFS2_I(inode)->ip_dyn_features & OCFS2_INLINE_DATA_FL) ||
 	    !(le16_to_cpu(di->i_dyn_features) & OCFS2_INLINE_DATA_FL) ||
@@ -7176,6 +7311,10 @@ int ocfs2_truncate_inline(struct inode *inode, struct buffer_head *di_bh,
 	di->i_ctime = di->i_mtime = cpu_to_le64(inode->i_ctime.tv_sec);
 	di->i_ctime_nsec = di->i_mtime_nsec = cpu_to_le32(inode->i_ctime.tv_nsec);
 
+<<<<<<< HEAD
+=======
+	ocfs2_update_inode_fsync_trans(handle, inode, 1);
+>>>>>>> v3.18
 	ocfs2_journal_dirty(handle, di_bh);
 
 out_commit:
@@ -7260,6 +7399,7 @@ int ocfs2_trim_fs(struct super_block *sb, struct fstrim_range *range)
 	start = range->start >> osb->s_clustersize_bits;
 	len = range->len >> osb->s_clustersize_bits;
 	minlen = range->minlen >> osb->s_clustersize_bits;
+<<<<<<< HEAD
 	trimmed = 0;
 
 	if (!len) {
@@ -7268,6 +7408,10 @@ int ocfs2_trim_fs(struct super_block *sb, struct fstrim_range *range)
 	}
 
 	if (minlen >= osb->bitmap_cpg)
+=======
+
+	if (minlen >= osb->bitmap_cpg || range->len < sb->s_blocksize)
+>>>>>>> v3.18
 		return -EINVAL;
 
 	main_bm_inode = ocfs2_get_system_file_inode(osb,
@@ -7293,6 +7437,10 @@ int ocfs2_trim_fs(struct super_block *sb, struct fstrim_range *range)
 		goto out_unlock;
 	}
 
+<<<<<<< HEAD
+=======
+	len = range->len >> osb->s_clustersize_bits;
+>>>>>>> v3.18
 	if (start + len > le32_to_cpu(main_bm->i_clusters))
 		len = le32_to_cpu(main_bm->i_clusters) - start;
 
@@ -7307,6 +7455,10 @@ int ocfs2_trim_fs(struct super_block *sb, struct fstrim_range *range)
 	last_group = ocfs2_which_cluster_group(main_bm_inode, start + len - 1);
 	last_bit = osb->bitmap_cpg;
 
+<<<<<<< HEAD
+=======
+	trimmed = 0;
+>>>>>>> v3.18
 	for (group = first_group; group <= last_group;) {
 		if (first_bit + len >= osb->bitmap_cpg)
 			last_bit = osb->bitmap_cpg;

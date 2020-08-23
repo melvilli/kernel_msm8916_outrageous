@@ -22,7 +22,11 @@
 #include <linux/gpio.h>
 #include <linux/platform_device.h>
 #include <linux/i2c.h>
+<<<<<<< HEAD
 #include <linux/i2c/at24.h>
+=======
+#include <linux/platform_data/at24.h>
+>>>>>>> v3.18
 #include <linux/i2c/pcf857x.h>
 
 #include <media/tvp514x.h>
@@ -33,17 +37,31 @@
 #include <linux/mtd/partitions.h>
 #include <linux/clk.h>
 #include <linux/export.h>
+<<<<<<< HEAD
+=======
+#include <linux/platform_data/gpio-davinci.h>
+#include <linux/platform_data/i2c-davinci.h>
+#include <linux/platform_data/mtd-davinci.h>
+#include <linux/platform_data/mtd-davinci-aemif.h>
+>>>>>>> v3.18
 
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 
 #include <mach/common.h>
+<<<<<<< HEAD
 #include <mach/serial.h>
 #include <linux/platform_data/i2c-davinci.h>
 #include <linux/platform_data/mtd-davinci.h>
 #include <mach/clock.h>
 #include <mach/cdce949.h>
 #include <linux/platform_data/mtd-davinci-aemif.h>
+=======
+#include <mach/irqs.h>
+#include <mach/serial.h>
+#include <mach/clock.h>
+#include <mach/cdce949.h>
+>>>>>>> v3.18
 
 #include "davinci.h"
 #include "clock.h"
@@ -750,10 +768,13 @@ static void __init davinci_map_io(void)
 	cdce_clk_init();
 }
 
+<<<<<<< HEAD
 static struct davinci_uart_config uart_config __initdata = {
 	.enabled_uarts = (1 << 0),
 };
 
+=======
+>>>>>>> v3.18
 #define DM646X_EVM_PHY_ID		"davinci_mdio-0:01"
 /*
  * The following EDMA channels/slots are not being used by drivers (for
@@ -790,10 +811,22 @@ static struct edma_rsv_info dm646x_edma_rsv[] = {
 
 static __init void evm_init(void)
 {
+<<<<<<< HEAD
 	struct davinci_soc_info *soc_info = &davinci_soc_info;
 
 	evm_init_i2c();
 	davinci_serial_init(&uart_config);
+=======
+	int ret;
+	struct davinci_soc_info *soc_info = &davinci_soc_info;
+
+	ret = dm646x_gpio_register();
+	if (ret)
+		pr_warn("%s: GPIO init failed: %d\n", __func__, ret);
+
+	evm_init_i2c();
+	davinci_serial_init(dm646x_serial_device);
+>>>>>>> v3.18
 	dm646x_init_mcasp0(&dm646x_evm_snd_data[0]);
 	dm646x_init_mcasp1(&dm646x_evm_snd_data[1]);
 
@@ -802,6 +835,12 @@ static __init void evm_init(void)
 
 	platform_device_register(&davinci_nand_device);
 
+<<<<<<< HEAD
+=======
+	if (davinci_aemif_setup(&davinci_nand_device))
+		pr_warn("%s: Cannot configure AEMIF.\n", __func__);
+
+>>>>>>> v3.18
 	dm646x_init_edma(dm646x_edma_rsv);
 
 	if (HAS_ATA)

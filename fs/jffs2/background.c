@@ -75,10 +75,20 @@ void jffs2_stop_garbage_collect_thread(struct jffs2_sb_info *c)
 static int jffs2_garbage_collect_thread(void *_c)
 {
 	struct jffs2_sb_info *c = _c;
+<<<<<<< HEAD
 
 	allow_signal(SIGKILL);
 	allow_signal(SIGSTOP);
 	allow_signal(SIGCONT);
+=======
+	sigset_t hupmask;
+
+	siginitset(&hupmask, sigmask(SIGHUP));
+	allow_signal(SIGKILL);
+	allow_signal(SIGSTOP);
+	allow_signal(SIGCONT);
+	allow_signal(SIGHUP);
+>>>>>>> v3.18
 
 	c->gc_task = current;
 	complete(&c->gc_thread_start);
@@ -87,7 +97,11 @@ static int jffs2_garbage_collect_thread(void *_c)
 
 	set_freezable();
 	for (;;) {
+<<<<<<< HEAD
 		allow_signal(SIGHUP);
+=======
+		sigprocmask(SIG_UNBLOCK, &hupmask, NULL);
+>>>>>>> v3.18
 	again:
 		spin_lock(&c->erase_completion_lock);
 		if (!jffs2_thread_should_wake(c)) {
@@ -95,10 +109,16 @@ static int jffs2_garbage_collect_thread(void *_c)
 			spin_unlock(&c->erase_completion_lock);
 			jffs2_dbg(1, "%s(): sleeping...\n", __func__);
 			schedule();
+<<<<<<< HEAD
 		} else
 			spin_unlock(&c->erase_completion_lock);
 			
 
+=======
+		} else {
+			spin_unlock(&c->erase_completion_lock);
+		}
+>>>>>>> v3.18
 		/* Problem - immediately after bootup, the GCD spends a lot
 		 * of time in places like jffs2_kill_fragtree(); so much so
 		 * that userspace processes (like gdm and X) are starved
@@ -150,7 +170,11 @@ static int jffs2_garbage_collect_thread(void *_c)
 			}
 		}
 		/* We don't want SIGHUP to interrupt us. STOP and KILL are OK though. */
+<<<<<<< HEAD
 		disallow_signal(SIGHUP);
+=======
+		sigprocmask(SIG_BLOCK, &hupmask, NULL);
+>>>>>>> v3.18
 
 		jffs2_dbg(1, "%s(): pass\n", __func__);
 		if (jffs2_garbage_collect_pass(c) == -ENOSPC) {

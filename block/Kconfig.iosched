@@ -12,6 +12,7 @@ config IOSCHED_NOOP
 	  that do their own scheduling and require only minimal assistance from
 	  the kernel.
 
+<<<<<<< HEAD
 config IOSCHED_TEST
 	tristate "Test I/O scheduler"
 	depends on DEBUG_FS
@@ -23,6 +24,8 @@ config IOSCHED_TEST
 	  according to the test case and declare PASS/FAIL according to the
 	  requests completion error code.
 
+=======
+>>>>>>> v3.18
 config IOSCHED_DEADLINE
 	tristate "Deadline I/O scheduler"
 	default y
@@ -32,6 +35,7 @@ config IOSCHED_DEADLINE
 	  a new point in the service tree and doing a batch of IO from there
 	  in case of expiry.
 
+<<<<<<< HEAD
 config IOSCHED_ROW
 	tristate "ROW I/O scheduler"
 	default y
@@ -43,6 +47,8 @@ config IOSCHED_ROW
 	  according to queue priority.
 	  Most suitable for mobile devices.
 
+=======
+>>>>>>> v3.18
 config IOSCHED_CFQ
 	tristate "CFQ I/O scheduler"
 	default y
@@ -61,6 +67,7 @@ config CFQ_GROUP_IOSCHED
 	---help---
 	  Enable group IO scheduling in CFQ.
 
+<<<<<<< HEAD
 
 config IOSCHED_BFQ
 	tristate "BFQ I/O scheduler"
@@ -83,6 +90,8 @@ config CGROUP_BFQIO
 	  filesystem interface.  The name of the subsystem will be
 	  bfqio.
 
+=======
+>>>>>>> v3.18
 choice
 	prompt "Default I/O scheduler"
 	default DEFAULT_CFQ
@@ -93,6 +102,7 @@ choice
 	config DEFAULT_DEADLINE
 		bool "Deadline" if IOSCHED_DEADLINE=y
 
+<<<<<<< HEAD
 	config DEFAULT_ROW
 		bool "ROW" if IOSCHED_ROW=y
 		help
@@ -117,6 +127,11 @@ choice
 		  interactive and soft real-time applications.
 
 
+=======
+	config DEFAULT_CFQ
+		bool "CFQ" if IOSCHED_CFQ=y
+
+>>>>>>> v3.18
 	config DEFAULT_NOOP
 		bool "No-op"
 
@@ -125,9 +140,13 @@ endchoice
 config DEFAULT_IOSCHED
 	string
 	default "deadline" if DEFAULT_DEADLINE
+<<<<<<< HEAD
 	default "row" if DEFAULT_ROW
 	default "cfq" if DEFAULT_CFQ
 	default "bfq" if DEFAULT_BFQ
+=======
+	default "cfq" if DEFAULT_CFQ
+>>>>>>> v3.18
 	default "noop" if DEFAULT_NOOP
 
 endmenu

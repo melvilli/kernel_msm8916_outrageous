@@ -885,7 +885,11 @@ isdn_net_log_skb(struct sk_buff *skb, isdn_net_local *lp)
 
 	addinfo[0] = '\0';
 	/* This check stolen from 2.1.72 dev_queue_xmit_nit() */
+<<<<<<< HEAD
 	if (p < skb->data || skb->network_header >= skb->tail) {
+=======
+	if (p < skb->data || skb_network_header(skb) >= skb_tail_pointer(skb)) {
+>>>>>>> v3.18
 		/* fall back to old isdn_net_log_packet method() */
 		char *buf = skb->data;
 
@@ -1371,7 +1375,11 @@ isdn_net_type_trans(struct sk_buff *skb, struct net_device *dev)
 	eth = eth_hdr(skb);
 
 	if (*eth->h_dest & 1) {
+<<<<<<< HEAD
 		if (memcmp(eth->h_dest, dev->broadcast, ETH_ALEN) == 0)
+=======
+		if (ether_addr_equal(eth->h_dest, dev->broadcast))
+>>>>>>> v3.18
 			skb->pkt_type = PACKET_BROADCAST;
 		else
 			skb->pkt_type = PACKET_MULTICAST;
@@ -1382,7 +1390,11 @@ isdn_net_type_trans(struct sk_buff *skb, struct net_device *dev)
 	 */
 
 	else if (dev->flags & (IFF_PROMISC /*| IFF_ALLMULTI*/)) {
+<<<<<<< HEAD
 		if (memcmp(eth->h_dest, dev->dev_addr, ETH_ALEN))
+=======
+		if (!ether_addr_equal(eth->h_dest, dev->dev_addr))
+>>>>>>> v3.18
 			skb->pkt_type = PACKET_OTHERHOST;
 	}
 	if (ntohs(eth->h_proto) >= ETH_P_802_3_MIN)
@@ -2588,7 +2600,12 @@ isdn_net_new(char *name, struct net_device *master)
 		printk(KERN_WARNING "isdn_net: Could not allocate net-device\n");
 		return NULL;
 	}
+<<<<<<< HEAD
 	netdev->dev = alloc_netdev(sizeof(isdn_net_local), name, _isdn_setup);
+=======
+	netdev->dev = alloc_netdev(sizeof(isdn_net_local), name,
+				   NET_NAME_UNKNOWN, _isdn_setup);
+>>>>>>> v3.18
 	if (!netdev->dev) {
 		printk(KERN_WARNING "isdn_net: Could not allocate network device\n");
 		kfree(netdev);
@@ -2917,8 +2934,13 @@ isdn_net_getcfg(isdn_net_ioctl_cfg *cfg)
 			cfg->callback = 2;
 		cfg->cbhup = (lp->flags & ISDN_NET_CBHUP) ? 1 : 0;
 		cfg->dialmode = lp->flags & ISDN_NET_DIALMODE_MASK;
+<<<<<<< HEAD
 		cfg->chargehup = (lp->hupflags & 4) ? 1 : 0;
 		cfg->ihup = (lp->hupflags & 8) ? 1 : 0;
+=======
+		cfg->chargehup = (lp->hupflags & ISDN_CHARGEHUP) ? 1 : 0;
+		cfg->ihup = (lp->hupflags & ISDN_INHUP) ? 1 : 0;
+>>>>>>> v3.18
 		cfg->cbdelay = lp->cbdelay;
 		cfg->dialmax = lp->dialmax;
 		cfg->triggercps = lp->triggercps;

@@ -11,8 +11,11 @@
 #include <linux/linkage.h>
 #include <linux/init.h>
 
+<<<<<<< HEAD
 	__INIT
 
+=======
+>>>>>>> v3.18
 /*
  * U8500 specific entry point for secondary CPUs.
  */

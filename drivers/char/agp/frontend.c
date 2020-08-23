@@ -31,7 +31,10 @@
 #include <linux/module.h>
 #include <linux/mman.h>
 #include <linux/pci.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/miscdevice.h>
 #include <linux/agp_backend.h>
 #include <linux/agpgart.h>
@@ -603,7 +606,12 @@ static int agp_mmap(struct file *file, struct vm_area_struct *vma)
 			vma->vm_ops = kerninfo.vm_ops;
 		} else if (io_remap_pfn_range(vma, vma->vm_start,
 				(kerninfo.aper_base + offset) >> PAGE_SHIFT,
+<<<<<<< HEAD
 					    size, vma->vm_page_prot)) {
+=======
+				size,
+				pgprot_writecombine(vma->vm_page_prot))) {
+>>>>>>> v3.18
 			goto out_again;
 		}
 		mutex_unlock(&(agp_fe.agp_mutex));
@@ -618,8 +626,14 @@ static int agp_mmap(struct file *file, struct vm_area_struct *vma)
 		if (kerninfo.vm_ops) {
 			vma->vm_ops = kerninfo.vm_ops;
 		} else if (io_remap_pfn_range(vma, vma->vm_start,
+<<<<<<< HEAD
 					    kerninfo.aper_base >> PAGE_SHIFT,
 					    size, vma->vm_page_prot)) {
+=======
+				kerninfo.aper_base >> PAGE_SHIFT,
+				size,
+				pgprot_writecombine(vma->vm_page_prot))) {
+>>>>>>> v3.18
 			goto out_again;
 		}
 		mutex_unlock(&(agp_fe.agp_mutex));
@@ -709,6 +723,7 @@ static int agp_open(struct inode *inode, struct file *file)
 	return 0;
 }
 
+<<<<<<< HEAD
 
 static ssize_t agp_read(struct file *file, char __user *buf,
 			size_t count, loff_t * ppos)
@@ -722,6 +737,8 @@ static ssize_t agp_write(struct file *file, const char __user *buf,
 	return -EINVAL;
 }
 
+=======
+>>>>>>> v3.18
 static int agpioc_info_wrap(struct agp_file_private *priv, void __user *arg)
 {
 	struct agp_info userinfo;
@@ -729,6 +746,10 @@ static int agpioc_info_wrap(struct agp_file_private *priv, void __user *arg)
 
 	agp_copy_info(agp_bridge, &kerninfo);
 
+<<<<<<< HEAD
+=======
+	memset(&userinfo, 0, sizeof(userinfo));
+>>>>>>> v3.18
 	userinfo.version.major = kerninfo.version.major;
 	userinfo.version.minor = kerninfo.version.minor;
 	userinfo.bridge_id = kerninfo.device->vendor |
@@ -1045,8 +1066,11 @@ static const struct file_operations agp_fops =
 {
 	.owner		= THIS_MODULE,
 	.llseek		= no_llseek,
+<<<<<<< HEAD
 	.read		= agp_read,
 	.write		= agp_write,
+=======
+>>>>>>> v3.18
 	.unlocked_ioctl	= agp_ioctl,
 #ifdef CONFIG_COMPAT
 	.compat_ioctl	= compat_agp_ioctl,

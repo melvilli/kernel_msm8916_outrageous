@@ -21,19 +21,30 @@
 #include <asm/uaccess.h>
 #include "br_private.h"
 
+<<<<<<< HEAD
+=======
+/* called with RTNL */
+>>>>>>> v3.18
 static int get_bridge_ifindices(struct net *net, int *indices, int num)
 {
 	struct net_device *dev;
 	int i = 0;
 
+<<<<<<< HEAD
 	rcu_read_lock();
 	for_each_netdev_rcu(net, dev) {
+=======
+	for_each_netdev(net, dev) {
+>>>>>>> v3.18
 		if (i >= num)
 			break;
 		if (dev->priv_flags & IFF_EBRIDGE)
 			indices[i++] = dev->ifindex;
 	}
+<<<<<<< HEAD
 	rcu_read_unlock();
+=======
+>>>>>>> v3.18
 
 	return i;
 }
@@ -248,7 +259,13 @@ static int old_dev_ioctl(struct net_device *dev, struct ifreq *rq, int cmd)
 		if (!ns_capable(dev_net(dev)->user_ns, CAP_NET_ADMIN))
 			return -EPERM;
 
+<<<<<<< HEAD
 		br_stp_set_bridge_priority(br, args[1]);
+=======
+		spin_lock_bh(&br->lock);
+		br_stp_set_bridge_priority(br, args[1]);
+		spin_unlock_bh(&br->lock);
+>>>>>>> v3.18
 		return 0;
 
 	case BRCTL_SET_PORT_PRIORITY:
@@ -380,7 +397,11 @@ int br_dev_ioctl(struct net_device *dev, struct ifreq *rq, int cmd)
 {
 	struct net_bridge *br = netdev_priv(dev);
 
+<<<<<<< HEAD
 	switch(cmd) {
+=======
+	switch (cmd) {
+>>>>>>> v3.18
 	case SIOCDEVPRIVATE:
 		return old_dev_ioctl(dev, rq, cmd);
 

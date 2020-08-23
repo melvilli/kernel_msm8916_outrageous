@@ -13,7 +13,10 @@
 #include <linux/delay.h>
 #include <linux/device.h>
 #include <linux/err.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/input/matrix_keypad.h>
 #include <linux/interrupt.h>
 #include <linux/io.h>
@@ -416,7 +419,11 @@ open_err:
 }
 
 #ifdef CONFIG_OF
+<<<<<<< HEAD
 static struct of_device_id imx_keypad_of_match[] = {
+=======
+static const struct of_device_id imx_keypad_of_match[] = {
+>>>>>>> v3.18
 	{ .compatible = "fsl,imx21-kpp", },
 	{ /* sentinel */ }
 };
@@ -425,7 +432,12 @@ MODULE_DEVICE_TABLE(of, imx_keypad_of_match);
 
 static int imx_keypad_probe(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	const struct matrix_keymap_data *keymap_data = pdev->dev.platform_data;
+=======
+	const struct matrix_keymap_data *keymap_data =
+			dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	struct imx_keypad *keypad;
 	struct input_dev *input_dev;
 	struct resource *res;
@@ -439,6 +451,7 @@ static int imx_keypad_probe(struct platform_device *pdev)
 	irq = platform_get_irq(pdev, 0);
 	if (irq < 0) {
 		dev_err(&pdev->dev, "no irq defined in platform data\n");
+<<<<<<< HEAD
 		return -EINVAL;
 	}
 
@@ -446,6 +459,9 @@ static int imx_keypad_probe(struct platform_device *pdev)
 	if (res == NULL) {
 		dev_err(&pdev->dev, "no I/O memory defined in platform data\n");
 		return -EINVAL;
+=======
+		return irq;
+>>>>>>> v3.18
 	}
 
 	input_dev = devm_input_allocate_device(&pdev->dev);
@@ -455,7 +471,11 @@ static int imx_keypad_probe(struct platform_device *pdev)
 	}
 
 	keypad = devm_kzalloc(&pdev->dev, sizeof(struct imx_keypad),
+<<<<<<< HEAD
 			     GFP_KERNEL);
+=======
+			      GFP_KERNEL);
+>>>>>>> v3.18
 	if (!keypad) {
 		dev_err(&pdev->dev, "not enough memory for driver data\n");
 		return -ENOMEM;
@@ -468,6 +488,10 @@ static int imx_keypad_probe(struct platform_device *pdev)
 	setup_timer(&keypad->check_matrix_timer,
 		    imx_keypad_check_for_events, (unsigned long) keypad);
 
+<<<<<<< HEAD
+=======
+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+>>>>>>> v3.18
 	keypad->mmio_base = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(keypad->mmio_base))
 		return PTR_ERR(keypad->mmio_base);
@@ -536,8 +560,12 @@ static int imx_keypad_probe(struct platform_device *pdev)
 	return 0;
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_PM_SLEEP
 static int imx_kbd_suspend(struct device *dev)
+=======
+static int __maybe_unused imx_kbd_suspend(struct device *dev)
+>>>>>>> v3.18
 {
 	struct platform_device *pdev = to_platform_device(dev);
 	struct imx_keypad *kbd = platform_get_drvdata(pdev);
@@ -557,7 +585,11 @@ static int imx_kbd_suspend(struct device *dev)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int imx_kbd_resume(struct device *dev)
+=======
+static int __maybe_unused imx_kbd_resume(struct device *dev)
+>>>>>>> v3.18
 {
 	struct platform_device *pdev = to_platform_device(dev);
 	struct imx_keypad *kbd = platform_get_drvdata(pdev);
@@ -580,7 +612,10 @@ err_clk:
 
 	return ret;
 }
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 
 static SIMPLE_DEV_PM_OPS(imx_kbd_pm_ops, imx_kbd_suspend, imx_kbd_resume);
 

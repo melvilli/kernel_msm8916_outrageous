@@ -26,6 +26,10 @@ struct kgdb_state {
 	unsigned long		threadid;
 	long			kgdb_usethreadid;
 	struct pt_regs		*linux_regs;
+<<<<<<< HEAD
+=======
+	atomic_t		*send_ready;
+>>>>>>> v3.18
 };
 
 /* Exception state values */

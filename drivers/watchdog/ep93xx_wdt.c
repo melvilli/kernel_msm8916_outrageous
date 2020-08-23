@@ -28,7 +28,10 @@
 
 #include <linux/platform_device.h>
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/miscdevice.h>
+=======
+>>>>>>> v3.18
 #include <linux/watchdog.h>
 #include <linux/timer.h>
 #include <linux/io.h>
@@ -119,6 +122,7 @@ static int ep93xx_wdt_probe(struct platform_device *pdev)
 	int err;
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
 	if (!res)
 		return -ENXIO;
 
@@ -129,6 +133,11 @@ static int ep93xx_wdt_probe(struct platform_device *pdev)
 	mmio_base = devm_ioremap(&pdev->dev, res->start, resource_size(res));
 	if (!mmio_base)
 		return -ENXIO;
+=======
+	mmio_base = devm_ioremap_resource(&pdev->dev, res);
+	if (IS_ERR(mmio_base))
+		return PTR_ERR(mmio_base);
+>>>>>>> v3.18
 
 	if (timeout < 1 || timeout > 3600) {
 		timeout = WDT_TIMEOUT;
@@ -173,6 +182,7 @@ static struct platform_driver ep93xx_wdt_driver = {
 
 module_platform_driver(ep93xx_wdt_driver);
 
+<<<<<<< HEAD
 MODULE_AUTHOR("Ray Lehtiniemi <rayl@mail.com>,"
 		"Alessandro Zummo <a.zummo@towertech.it>,"
 		"H Hartley Sweeten <hsweeten@visionengravers.com>");
@@ -180,3 +190,11 @@ MODULE_DESCRIPTION("EP93xx Watchdog");
 MODULE_LICENSE("GPL");
 MODULE_VERSION(WDT_VERSION);
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+MODULE_AUTHOR("Ray Lehtiniemi <rayl@mail.com>");
+MODULE_AUTHOR("Alessandro Zummo <a.zummo@towertech.it>");
+MODULE_AUTHOR("H Hartley Sweeten <hsweeten@visionengravers.com>");
+MODULE_DESCRIPTION("EP93xx Watchdog");
+MODULE_LICENSE("GPL");
+MODULE_VERSION(WDT_VERSION);
+>>>>>>> v3.18

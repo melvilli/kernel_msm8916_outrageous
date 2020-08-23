@@ -85,7 +85,11 @@ enum {
 #define CH_DEVICE(devid, idx) \
 	{ PCI_VENDOR_ID_CHELSIO, devid, PCI_ANY_ID, PCI_ANY_ID, 0, 0, idx }
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(cxgb3_pci_tbl) = {
+=======
+static const struct pci_device_id cxgb3_pci_tbl[] = {
+>>>>>>> v3.18
 	CH_DEVICE(0x20, 0),	/* PE9000 */
 	CH_DEVICE(0x21, 1),	/* T302E */
 	CH_DEVICE(0x22, 2),	/* T310E */
@@ -1809,8 +1813,13 @@ static int get_settings(struct net_device *dev, struct ethtool_cmd *cmd)
 		ethtool_cmd_speed_set(cmd, p->link_config.speed);
 		cmd->duplex = p->link_config.duplex;
 	} else {
+<<<<<<< HEAD
 		ethtool_cmd_speed_set(cmd, -1);
 		cmd->duplex = -1;
+=======
+		ethtool_cmd_speed_set(cmd, SPEED_UNKNOWN);
+		cmd->duplex = DUPLEX_UNKNOWN;
+>>>>>>> v3.18
 	}
 
 	cmd->port = (cmd->supported & SUPPORTED_TP) ? PORT_TP : PORT_FIBRE;
@@ -3037,7 +3046,13 @@ static void t3_io_resume(struct pci_dev *pdev)
 	CH_ALERT(adapter, "adapter recovering, PEX ERR 0x%x\n",
 		 t3_read_reg(adapter, A_PCIE_PEX_ERR));
 
+<<<<<<< HEAD
 	t3_resume_ports(adapter);
+=======
+	rtnl_lock();
+	t3_resume_ports(adapter);
+	rtnl_unlock();
+>>>>>>> v3.18
 }
 
 static const struct pci_error_handlers t3_err_handler = {
@@ -3086,12 +3101,17 @@ static int cxgb_enable_msix(struct adapter *adap)
 {
 	struct msix_entry entries[SGE_QSETS + 1];
 	int vectors;
+<<<<<<< HEAD
 	int i, err;
+=======
+	int i;
+>>>>>>> v3.18
 
 	vectors = ARRAY_SIZE(entries);
 	for (i = 0; i < vectors; ++i)
 		entries[i].entry = i;
 
+<<<<<<< HEAD
 	while ((err = pci_enable_msix(adap->pdev, entries, vectors)) > 0)
 		vectors = err;
 
@@ -3110,6 +3130,18 @@ static int cxgb_enable_msix(struct adapter *adap)
 	}
 
 	return err;
+=======
+	vectors = pci_enable_msix_range(adap->pdev, entries,
+					adap->params.nports + 1, vectors);
+	if (vectors < 0)
+		return vectors;
+
+	for (i = 0; i < vectors; ++i)
+		adap->msix_info[i].vec = entries[i].vector;
+	adap->msix_nvectors = vectors;
+
+	return 0;
+>>>>>>> v3.18
 }
 
 static void print_port_info(struct adapter *adap, const struct adapter_info *ai)
@@ -3297,7 +3329,11 @@ static int init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 			netdev->features |= NETIF_F_HIGHDMA;
 
 		netdev->netdev_ops = &cxgb_netdev_ops;
+<<<<<<< HEAD
 		SET_ETHTOOL_OPS(netdev, &cxgb_ethtool_ops);
+=======
+		netdev->ethtool_ops = &cxgb_ethtool_ops;
+>>>>>>> v3.18
 	}
 
 	pci_set_drvdata(pdev, adapter);
@@ -3372,7 +3408,10 @@ out_release_regions:
 	pci_release_regions(pdev);
 out_disable_device:
 	pci_disable_device(pdev);
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 out:
 	return err;
 }
@@ -3413,7 +3452,10 @@ static void remove_one(struct pci_dev *pdev)
 		kfree(adapter);
 		pci_release_regions(pdev);
 		pci_disable_device(pdev);
+<<<<<<< HEAD
 		pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	}
 }
 

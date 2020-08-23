@@ -17,6 +17,10 @@
 #ifndef S5C73M3_H_
 #define S5C73M3_H_
 
+<<<<<<< HEAD
+=======
+#include <linux/clk.h>
+>>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/regulator/consumer.h>
 #include <media/v4l2-common.h>
@@ -321,6 +325,10 @@ enum s5c73m3_oif_pads {
 
 
 #define S5C73M3_MAX_SUPPLIES			6
+<<<<<<< HEAD
+=======
+#define S5C73M3_DEFAULT_MCLK_FREQ		24000000U
+>>>>>>> v3.18
 
 struct s5c73m3_ctrls {
 	struct v4l2_ctrl_handler handler;
@@ -391,9 +399,17 @@ struct s5c73m3 {
 	struct regulator_bulk_data supplies[S5C73M3_MAX_SUPPLIES];
 	struct s5c73m3_gpio gpio[GPIO_NUM];
 
+<<<<<<< HEAD
 	/* External master clock frequency */
 	u32 mclk_frequency;
 	/* Video bus type - MIPI-CSI2/paralell */
+=======
+	struct clk *clock;
+
+	/* External master clock frequency */
+	u32 mclk_frequency;
+	/* Video bus type - MIPI-CSI2/parallel */
+>>>>>>> v3.18
 	enum v4l2_mbus_type bus_type;
 
 	const struct s5c73m3_frame_size *sensor_pix_size[2];

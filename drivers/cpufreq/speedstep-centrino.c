@@ -28,7 +28,11 @@
 #include <asm/cpu_device_id.h>
 
 #define PFX		"speedstep-centrino: "
+<<<<<<< HEAD
 #define MAINTAINER	"cpufreq@vger.kernel.org"
+=======
+#define MAINTAINER	"linux-pm@vger.kernel.org"
+>>>>>>> v3.18
 
 #define INTEL_MSR_RANGE	(0xffff)
 
@@ -343,9 +347,13 @@ static unsigned int get_cur_freq(unsigned int cpu)
 static int centrino_cpu_init(struct cpufreq_policy *policy)
 {
 	struct cpuinfo_x86 *cpu = &cpu_data(policy->cpu);
+<<<<<<< HEAD
 	unsigned freq;
 	unsigned l, h;
 	int ret;
+=======
+	unsigned l, h;
+>>>>>>> v3.18
 	int i;
 
 	/* Only Intel makes Enhanced Speedstep-capable CPUs */
@@ -373,9 +381,14 @@ static int centrino_cpu_init(struct cpufreq_policy *policy)
 		return -ENODEV;
 	}
 
+<<<<<<< HEAD
 	if (centrino_cpu_init_table(policy)) {
 		return -ENODEV;
 	}
+=======
+	if (centrino_cpu_init_table(policy))
+		return -ENODEV;
+>>>>>>> v3.18
 
 	/* Check to see if Enhanced SpeedStep is enabled, and try to
 	   enable it if not. */
@@ -395,6 +408,7 @@ static int centrino_cpu_init(struct cpufreq_policy *policy)
 		}
 	}
 
+<<<<<<< HEAD
 	freq = get_cur_freq(policy->cpu);
 	policy->cpuinfo.transition_latency = 10000;
 						/* 10uS transition latency */
@@ -411,6 +425,13 @@ static int centrino_cpu_init(struct cpufreq_policy *policy)
 		per_cpu(centrino_model, policy->cpu)->op_points, policy->cpu);
 
 	return 0;
+=======
+	policy->cpuinfo.transition_latency = 10000;
+						/* 10uS transition latency */
+
+	return cpufreq_table_validate_and_show(policy,
+		per_cpu(centrino_model, policy->cpu)->op_points);
+>>>>>>> v3.18
 }
 
 static int centrino_cpu_exit(struct cpufreq_policy *policy)
@@ -420,14 +441,18 @@ static int centrino_cpu_exit(struct cpufreq_policy *policy)
 	if (!per_cpu(centrino_model, cpu))
 		return -ENODEV;
 
+<<<<<<< HEAD
 	cpufreq_frequency_table_put_attr(cpu);
 
+=======
+>>>>>>> v3.18
 	per_cpu(centrino_model, cpu) = NULL;
 
 	return 0;
 }
 
 /**
+<<<<<<< HEAD
  * centrino_verify - verifies a new CPUFreq policy
  * @policy: new policy
  *
@@ -458,6 +483,20 @@ static int centrino_target (struct cpufreq_policy *policy,
 	struct cpufreq_freqs	freqs;
 	int			retval = 0;
 	unsigned int		j, first_cpu, tmp;
+=======
+ * centrino_setpolicy - set a new CPUFreq policy
+ * @policy: new policy
+ * @index: index of target frequency
+ *
+ * Sets a new CPUFreq policy.
+ */
+static int centrino_target(struct cpufreq_policy *policy, unsigned int index)
+{
+	unsigned int	msr, oldmsr = 0, h = 0, cpu = policy->cpu;
+	int			retval = 0;
+	unsigned int		j, first_cpu;
+	struct cpufreq_frequency_table *op_points;
+>>>>>>> v3.18
 	cpumask_var_t covered_cpus;
 
 	if (unlikely(!zalloc_cpumask_var(&covered_cpus, GFP_KERNEL)))
@@ -468,6 +507,7 @@ static int centrino_target (struct cpufreq_policy *policy,
 		goto out;
 	}
 
+<<<<<<< HEAD
 	if (unlikely(cpufreq_frequency_table_target(policy,
 			per_cpu(centrino_model, cpu)->op_points,
 			target_freq,
@@ -478,6 +518,10 @@ static int centrino_target (struct cpufreq_policy *policy,
 	}
 
 	first_cpu = 1;
+=======
+	first_cpu = 1;
+	op_points = &per_cpu(centrino_model, cpu)->op_points[index];
+>>>>>>> v3.18
 	for_each_cpu(j, policy->cpus) {
 		int good_cpu;
 
@@ -501,7 +545,11 @@ static int centrino_target (struct cpufreq_policy *policy,
 			break;
 		}
 
+<<<<<<< HEAD
 		msr = per_cpu(centrino_model, cpu)->op_points[newstate].driver_data;
+=======
+		msr = op_points->driver_data;
+>>>>>>> v3.18
 
 		if (first_cpu) {
 			rdmsr_on_cpu(good_cpu, MSR_IA32_PERF_CTL, &oldmsr, &h);
@@ -512,6 +560,7 @@ static int centrino_target (struct cpufreq_policy *policy,
 				goto out;
 			}
 
+<<<<<<< HEAD
 			freqs.old = extract_clock(oldmsr, cpu, 0);
 			freqs.new = extract_clock(msr, cpu, 0);
 
@@ -521,6 +570,8 @@ static int centrino_target (struct cpufreq_policy *policy,
 			cpufreq_notify_transition(policy, &freqs,
 					CPUFREQ_PRECHANGE);
 
+=======
+>>>>>>> v3.18
 			first_cpu = 0;
 			/* all but 16 LSB are reserved, treat them with care */
 			oldmsr &= ~0xffff;
@@ -535,8 +586,11 @@ static int centrino_target (struct cpufreq_policy *policy,
 		cpumask_set_cpu(j, covered_cpus);
 	}
 
+<<<<<<< HEAD
 	cpufreq_notify_transition(policy, &freqs, CPUFREQ_POSTCHANGE);
 
+=======
+>>>>>>> v3.18
 	if (unlikely(retval)) {
 		/*
 		 * We have failed halfway through the frequency change.
@@ -547,12 +601,15 @@ static int centrino_target (struct cpufreq_policy *policy,
 
 		for_each_cpu(j, covered_cpus)
 			wrmsr_on_cpu(j, MSR_IA32_PERF_CTL, oldmsr, h);
+<<<<<<< HEAD
 
 		tmp = freqs.new;
 		freqs.new = freqs.old;
 		freqs.old = tmp;
 		cpufreq_notify_transition(policy, &freqs, CPUFREQ_PRECHANGE);
 		cpufreq_notify_transition(policy, &freqs, CPUFREQ_POSTCHANGE);
+=======
+>>>>>>> v3.18
 	}
 	retval = 0;
 
@@ -561,20 +618,30 @@ out:
 	return retval;
 }
 
+<<<<<<< HEAD
 static struct freq_attr* centrino_attr[] = {
 	&cpufreq_freq_attr_scaling_available_freqs,
 	NULL,
 };
 
+=======
+>>>>>>> v3.18
 static struct cpufreq_driver centrino_driver = {
 	.name		= "centrino", /* should be speedstep-centrino,
 					 but there's a 16 char limit */
 	.init		= centrino_cpu_init,
 	.exit		= centrino_cpu_exit,
+<<<<<<< HEAD
 	.verify		= centrino_verify,
 	.target		= centrino_target,
 	.get		= get_cur_freq,
 	.attr           = centrino_attr,
+=======
+	.verify		= cpufreq_generic_frequency_table_verify,
+	.target_index	= centrino_target,
+	.get		= get_cur_freq,
+	.attr		= cpufreq_generic_attr,
+>>>>>>> v3.18
 };
 
 /*

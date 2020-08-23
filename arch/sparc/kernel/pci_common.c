@@ -5,7 +5,10 @@
 
 #include <linux/string.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/pci.h>
 #include <linux/device.h>
 #include <linux/of_device.h>

@@ -79,7 +79,11 @@ static void RxPktPendingTimeout(unsigned long data)
 
 		if (index > REORDER_WIN_SIZE) {
 			RTLLIB_DEBUG(RTLLIB_DL_ERR, "RxReorderIndicatePacket():"
+<<<<<<< HEAD
 				     " Rx Reorer struct buffer full!!\n");
+=======
+				     " Rx Reorder struct buffer full!!\n");
+>>>>>>> v3.18
 			spin_unlock_irqrestore(&(ieee->reorder_spinlock),
 					       flags);
 			return;
@@ -143,6 +147,10 @@ void TSInitialize(struct rtllib_device *ieee)
 	struct rx_ts_record *pRxTS  = ieee->RxTsRecord;
 	struct rx_reorder_entry *pRxReorderEntry = ieee->RxReorderEntry;
 	u8				count = 0;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	RTLLIB_DEBUG(RTLLIB_DL_TS, "==========>%s()\n", __func__);
 	INIT_LIST_HEAD(&ieee->Tx_TS_Admit_List);
 	INIT_LIST_HEAD(&ieee->Tx_TS_Pending_List);
@@ -233,6 +241,10 @@ static struct ts_common_info *SearchAdmitTRStream(struct rtllib_device *ieee,
 	bool	search_dir[4] = {0};
 	struct list_head *psearch_list;
 	struct ts_common_info *pRet = NULL;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	if (ieee->iw_mode == IW_MODE_MASTER) {
 		if (TxRxSelect == TX_DIR) {
 			search_dir[DIR_DOWN] = true;
@@ -264,7 +276,11 @@ static struct ts_common_info *SearchAdmitTRStream(struct rtllib_device *ieee,
 		psearch_list = &ieee->Rx_TS_Admit_List;
 
 	for (dir = 0; dir <= DIR_BI_DIR; dir++) {
+<<<<<<< HEAD
 		if (search_dir[dir] == false)
+=======
+		if (!search_dir[dir])
+>>>>>>> v3.18
 			continue;
 		list_for_each_entry(pRet, psearch_list, List) {
 			if (memcmp(pRet->Addr, Addr, 6) == 0)
@@ -278,9 +294,14 @@ static struct ts_common_info *SearchAdmitTRStream(struct rtllib_device *ieee,
 	}
 
 	if (pRet && &pRet->List  != psearch_list)
+<<<<<<< HEAD
 		return pRet ;
 	else
 		return NULL;
+=======
+		return pRet;
+	return NULL;
+>>>>>>> v3.18
 }
 
 static void MakeTSEntry(struct ts_common_info *pTsCommonInfo, u8 *Addr,
@@ -310,6 +331,10 @@ bool GetTs(struct rtllib_device *ieee, struct ts_common_info **ppTS,
 	   u8 *Addr, u8 TID, enum tr_select TxRxSelect, bool bAddNewTs)
 {
 	u8	UP = 0;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	if (is_multicast_ether_addr(Addr)) {
 		RTLLIB_DEBUG(RTLLIB_DL_ERR, "ERR! get TS for Broadcast or "
 			     "Multicast\n");
@@ -348,7 +373,11 @@ bool GetTs(struct rtllib_device *ieee, struct ts_common_info **ppTS,
 	if (*ppTS != NULL) {
 		return true;
 	} else {
+<<<<<<< HEAD
 		if (bAddNewTs == false) {
+=======
+		if (!bAddNewTs) {
+>>>>>>> v3.18
 			RTLLIB_DEBUG(RTLLIB_DL_TS, "add new TS failed"
 				     "(tid:%d)\n", UP);
 			return false;
@@ -443,6 +472,10 @@ static void RemoveTsEntry(struct rtllib_device *ieee, struct ts_common_info *pTs
 			{
 				int i = 0;
 				struct rtllib_rxb *prxb = pRxReorderEntry->prxb;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 				if (unlikely(!prxb))
 					return;
 				for (i = 0; i < prxb->nr_subframes; i++)
@@ -455,6 +488,10 @@ static void RemoveTsEntry(struct rtllib_device *ieee, struct ts_common_info *pTs
 		}
 	} else {
 		struct tx_ts_record *pTxTS = (struct tx_ts_record *)pTs;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		del_timer_sync(&pTxTS->TsAddBaTimer);
 	}
 }
@@ -462,6 +499,10 @@ static void RemoveTsEntry(struct rtllib_device *ieee, struct ts_common_info *pTs
 void RemovePeerTS(struct rtllib_device *ieee, u8 *Addr)
 {
 	struct ts_common_info *pTS, *pTmpTS;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	printk(KERN_INFO "===========>RemovePeerTS, %pM\n", Addr);
 
 	list_for_each_entry_safe(pTS, pTmpTS, &ieee->Tx_TS_Pending_List, List) {

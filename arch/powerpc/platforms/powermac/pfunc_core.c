@@ -5,7 +5,10 @@
  * FIXME: LOCKING !!!
  */
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/delay.h>
 #include <linux/kernel.h>
 #include <linux/spinlock.h>

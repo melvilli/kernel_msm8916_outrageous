@@ -8,5 +8,9 @@ extern struct nouveau_oclass nvc0_copy0_oclass;
 extern struct nouveau_oclass nvc0_copy1_oclass;
 extern struct nouveau_oclass nve0_copy0_oclass;
 extern struct nouveau_oclass nve0_copy1_oclass;
+<<<<<<< HEAD
+=======
+extern struct nouveau_oclass nve0_copy2_oclass;
+>>>>>>> v3.18
 
 #endif

@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 /include/ "kirkwood.dtsi"
 
+=======
+>>>>>>> v3.18
 / {
 	model = "QNAP TS219 family";
 	compatible = "qnap,ts219", "marvell,kirkwood";
@@ -11,6 +14,20 @@
 
 	chosen {
 		bootargs = "console=ttyS0,115200n8";
+<<<<<<< HEAD
+=======
+		stdout-path = &uart0;
+	};
+
+	mbus {
+		pcie-controller {
+			status = "okay";
+
+			pcie@1,0 {
+				status = "okay";
+			};
+		};
+>>>>>>> v3.18
 	};
 
 	ocp@f1000000 {
@@ -24,6 +41,7 @@
 			};
 		};
 		serial@12000 {
+<<<<<<< HEAD
 			clock-frequency = <200000000>;
 			status = "okay";
 		};
@@ -31,6 +49,18 @@
 			clock-frequency = <200000000>;
 			status = "okay";
 		};
+=======
+			status = "okay";
+		};
+		serial@12100 {
+			status = "okay";
+		};
+		poweroff@12100 {
+			compatible = "qnap,power-off";
+			reg = <0x12000 0x100>;
+			clocks = <&gate_clk 7>;
+		};
+>>>>>>> v3.18
 		spi@10600 {
 			status = "okay";
 
@@ -71,8 +101,31 @@
 			};
 		};
 		sata@80000 {
+<<<<<<< HEAD
+=======
+			pinctrl-0 = <&pmx_sata0 &pmx_sata1>;
+			pinctrl-names = "default";
+>>>>>>> v3.18
 			status = "okay";
 			nr-ports = <2>;
 		};
 	};
 };
+<<<<<<< HEAD
+=======
+
+&mdio {
+	status = "okay";
+
+	ethphy0: ethernet-phy {
+                /* overwrite reg property in board file */
+	};
+};
+
+&eth0 {
+	status = "okay";
+	ethernet0-port@0 {
+		phy-handle = <&ethphy0>;
+	};
+};
+>>>>>>> v3.18

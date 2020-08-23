@@ -189,7 +189,11 @@ static inline int p4_ht_thread(int cpu)
 {
 #ifdef CONFIG_SMP
 	if (smp_num_siblings == 2)
+<<<<<<< HEAD
 		return cpu != cpumask_first(__get_cpu_var(cpu_sibling_map));
+=======
+		return cpu != cpumask_first(this_cpu_cpumask_var_ptr(cpu_sibling_map));
+>>>>>>> v3.18
 #endif
 	return 0;
 }

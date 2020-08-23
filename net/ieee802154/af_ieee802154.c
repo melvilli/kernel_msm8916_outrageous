@@ -40,6 +40,7 @@
 
 #include "af802154.h"
 
+<<<<<<< HEAD
 /*
  * Utility function for families
  */
@@ -54,14 +55,36 @@ struct net_device *ieee802154_get_dev(struct net *net,
 	case IEEE802154_ADDR_LONG:
 		rcu_read_lock();
 		dev = dev_getbyhwaddr_rcu(net, ARPHRD_IEEE802154, addr->hwaddr);
+=======
+/* Utility function for families */
+struct net_device*
+ieee802154_get_dev(struct net *net, const struct ieee802154_addr *addr)
+{
+	struct net_device *dev = NULL;
+	struct net_device *tmp;
+	__le16 pan_id, short_addr;
+	u8 hwaddr[IEEE802154_ADDR_LEN];
+
+	switch (addr->mode) {
+	case IEEE802154_ADDR_LONG:
+		ieee802154_devaddr_to_raw(hwaddr, addr->extended_addr);
+		rcu_read_lock();
+		dev = dev_getbyhwaddr_rcu(net, ARPHRD_IEEE802154, hwaddr);
+>>>>>>> v3.18
 		if (dev)
 			dev_hold(dev);
 		rcu_read_unlock();
 		break;
 	case IEEE802154_ADDR_SHORT:
+<<<<<<< HEAD
 		if (addr->pan_id == 0xffff ||
 		    addr->short_addr == IEEE802154_ADDR_UNDEF ||
 		    addr->short_addr == 0xffff)
+=======
+		if (addr->pan_id == cpu_to_le16(IEEE802154_PANID_BROADCAST) ||
+		    addr->short_addr == cpu_to_le16(IEEE802154_ADDR_UNDEF) ||
+		    addr->short_addr == cpu_to_le16(IEEE802154_ADDR_BROADCAST))
+>>>>>>> v3.18
 			break;
 
 		rtnl_lock();
@@ -85,8 +108,13 @@ struct net_device *ieee802154_get_dev(struct net *net,
 		rtnl_unlock();
 		break;
 	default:
+<<<<<<< HEAD
 		pr_warning("Unsupported ieee802154 address type: %d\n",
 				addr->addr_type);
+=======
+		pr_warn("Unsupported ieee802154 address type: %d\n",
+			addr->mode);
+>>>>>>> v3.18
 		break;
 	}
 
@@ -104,7 +132,11 @@ static int ieee802154_sock_release(struct socket *sock)
 	return 0;
 }
 static int ieee802154_sock_sendmsg(struct kiocb *iocb, struct socket *sock,
+<<<<<<< HEAD
 		struct msghdr *msg, size_t len)
+=======
+				   struct msghdr *msg, size_t len)
+>>>>>>> v3.18
 {
 	struct sock *sk = sock->sk;
 
@@ -112,7 +144,11 @@ static int ieee802154_sock_sendmsg(struct kiocb *iocb, struct socket *sock,
 }
 
 static int ieee802154_sock_bind(struct socket *sock, struct sockaddr *uaddr,
+<<<<<<< HEAD
 		int addr_len)
+=======
+				int addr_len)
+>>>>>>> v3.18
 {
 	struct sock *sk = sock->sk;
 
@@ -123,7 +159,11 @@ static int ieee802154_sock_bind(struct socket *sock, struct sockaddr *uaddr,
 }
 
 static int ieee802154_sock_connect(struct socket *sock, struct sockaddr *uaddr,
+<<<<<<< HEAD
 			int addr_len, int flags)
+=======
+				   int addr_len, int flags)
+>>>>>>> v3.18
 {
 	struct sock *sk = sock->sk;
 
@@ -137,7 +177,11 @@ static int ieee802154_sock_connect(struct socket *sock, struct sockaddr *uaddr,
 }
 
 static int ieee802154_dev_ioctl(struct sock *sk, struct ifreq __user *arg,
+<<<<<<< HEAD
 		unsigned int cmd)
+=======
+				unsigned int cmd)
+>>>>>>> v3.18
 {
 	struct ifreq ifr;
 	int ret = -ENOIOCTLCMD;
@@ -165,7 +209,11 @@ static int ieee802154_dev_ioctl(struct sock *sk, struct ifreq __user *arg,
 }
 
 static int ieee802154_sock_ioctl(struct socket *sock, unsigned int cmd,
+<<<<<<< HEAD
 		unsigned long arg)
+=======
+				 unsigned long arg)
+>>>>>>> v3.18
 {
 	struct sock *sk = sock->sk;
 
@@ -236,8 +284,12 @@ static const struct proto_ops ieee802154_dgram_ops = {
 };
 
 
+<<<<<<< HEAD
 /*
  * Create a socket. Initialise the socket, blank the addresses
+=======
+/* Create a socket. Initialise the socket, blank the addresses
+>>>>>>> v3.18
  * set the state.
  */
 static int ieee802154_create(struct net *net, struct socket *sock,
@@ -299,13 +351,22 @@ static const struct net_proto_family ieee802154_family_ops = {
 };
 
 static int ieee802154_rcv(struct sk_buff *skb, struct net_device *dev,
+<<<<<<< HEAD
 	struct packet_type *pt, struct net_device *orig_dev)
+=======
+			  struct packet_type *pt, struct net_device *orig_dev)
+>>>>>>> v3.18
 {
 	if (!netif_running(dev))
 		goto drop;
 	pr_debug("got frame, type %d, dev %p\n", dev->type, dev);
 #ifdef DEBUG
+<<<<<<< HEAD
 	print_hex_dump_bytes("ieee802154_rcv ", DUMP_PREFIX_NONE, skb->data, skb->len);
+=======
+	print_hex_dump_bytes("ieee802154_rcv ",
+			     DUMP_PREFIX_NONE, skb->data, skb->len);
+>>>>>>> v3.18
 #endif
 
 	if (!net_eq(dev_net(dev), &init_net))
@@ -326,7 +387,11 @@ drop:
 
 
 static struct packet_type ieee802154_packet_type = {
+<<<<<<< HEAD
 	.type = __constant_htons(ETH_P_IEEE802154),
+=======
+	.type = htons(ETH_P_IEEE802154),
+>>>>>>> v3.18
 	.func = ieee802154_rcv,
 };
 

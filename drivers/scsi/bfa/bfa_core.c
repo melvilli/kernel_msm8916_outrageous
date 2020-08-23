@@ -1367,10 +1367,13 @@ bfa_faa_query(struct bfa_s *bfa, struct bfa_faa_attr_s *attr,
 	struct bfa_iocfc_s      *iocfc = &bfa->iocfc;
 	bfa_status_t            status;
 
+<<<<<<< HEAD
 	iocfc->faa_args.faa_attr = attr;
 	iocfc->faa_args.faa_cb.faa_cbfn = cbfn;
 	iocfc->faa_args.faa_cb.faa_cbarg = cbarg;
 
+=======
+>>>>>>> v3.18
 	status = bfa_faa_validate_request(bfa);
 	if (status != BFA_STATUS_OK)
 		return status;
@@ -1378,6 +1381,13 @@ bfa_faa_query(struct bfa_s *bfa, struct bfa_faa_attr_s *attr,
 	if (iocfc->faa_args.busy == BFA_TRUE)
 		return BFA_STATUS_DEVBUSY;
 
+<<<<<<< HEAD
+=======
+	iocfc->faa_args.faa_attr = attr;
+	iocfc->faa_args.faa_cb.faa_cbfn = cbfn;
+	iocfc->faa_args.faa_cb.faa_cbarg = cbarg;
+
+>>>>>>> v3.18
 	iocfc->faa_args.busy = BFA_TRUE;
 	memset(&faa_attr_req, 0, sizeof(struct bfi_faa_query_s));
 	bfi_h2i_set(faa_attr_req.mh, BFI_MC_IOCFC,
@@ -1432,6 +1442,10 @@ bfa_iocfc_disable_cbfn(void *bfa_arg)
 {
 	struct bfa_s	*bfa = bfa_arg;
 
+<<<<<<< HEAD
+=======
+	bfa->queue_process = BFA_FALSE;
+>>>>>>> v3.18
 	bfa_fsm_send_event(&bfa->iocfc, IOCFC_E_IOC_DISABLED);
 }
 
@@ -1567,7 +1581,10 @@ bfa_iocfc_start(struct bfa_s *bfa)
 void
 bfa_iocfc_stop(struct bfa_s *bfa)
 {
+<<<<<<< HEAD
 	bfa->queue_process = BFA_FALSE;
+=======
+>>>>>>> v3.18
 	bfa_fsm_send_event(&bfa->iocfc, IOCFC_E_STOP);
 }
 
@@ -1674,7 +1691,10 @@ bfa_iocfc_disable(struct bfa_s *bfa)
 	bfa_plog_str(bfa->plog, BFA_PL_MID_HAL, BFA_PL_EID_MISC, 0,
 		     "IOC Disable");
 
+<<<<<<< HEAD
 	bfa->queue_process = BFA_FALSE;
+=======
+>>>>>>> v3.18
 	bfa_fsm_send_event(&bfa->iocfc, IOCFC_E_DISABLE);
 }
 

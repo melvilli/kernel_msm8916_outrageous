@@ -20,6 +20,17 @@
 
 /* AR955X 1.0 */
 
+<<<<<<< HEAD
+=======
+#define ar955x_1p0_soc_postamble ar9300_2p2_soc_postamble
+
+#define ar955x_1p0_common_rx_gain_table ar9300Common_rx_gain_table_2p2
+
+#define ar955x_1p0_common_wo_xlna_rx_gain_table ar9300Common_wo_xlna_rx_gain_table_2p2
+
+#define ar955x_1p0_baseband_core_txfir_coeff_japan_2484 ar9300_2p2_baseband_core_txfir_coeff_japan_2484
+
+>>>>>>> v3.18
 static const u32 ar955x_1p0_radio_postamble[][5] = {
 	/* Addr      5G_HT20     5G_HT40     2G_HT40     2G_HT20   */
 	{0x00016098, 0xd2dd5554, 0xd2dd5554, 0xd28b3330, 0xd28b3330},
@@ -37,6 +48,7 @@ static const u32 ar955x_1p0_radio_postamble[][5] = {
 	{0x00016940, 0x10804008, 0x10804008, 0x10804008, 0x10804008},
 };
 
+<<<<<<< HEAD
 static const u32 ar955x_1p0_baseband_core_txfir_coeff_japan_2484[][2] = {
 	/* Addr      allmodes  */
 	{0x0000a398, 0x00000000},
@@ -44,6 +56,8 @@ static const u32 ar955x_1p0_baseband_core_txfir_coeff_japan_2484[][2] = {
 	{0x0000a3a0, 0xca9228ee},
 };
 
+=======
+>>>>>>> v3.18
 static const u32 ar955x_1p0_baseband_postamble[][5] = {
 	/* Addr      5G_HT20     5G_HT40     2G_HT40     2G_HT20   */
 	{0x00009810, 0xd00a8005, 0xd00a8005, 0xd00a8011, 0xd00a8011},
@@ -473,6 +487,7 @@ static const u32 ar955x_1p0_mac_core[][2] = {
 	{0x000083d0, 0x8c7901ff},
 };
 
+<<<<<<< HEAD
 static const u32 ar955x_1p0_common_rx_gain_table[][2] = {
 	/* Addr      allmodes  */
 	{0x0000a000, 0x00010000},
@@ -733,6 +748,8 @@ static const u32 ar955x_1p0_common_rx_gain_table[][2] = {
 	{0x0000b1fc, 0x00000196},
 };
 
+=======
+>>>>>>> v3.18
 static const u32 ar955x_1p0_baseband_core[][2] = {
 	/* Addr      allmodes  */
 	{0x00009800, 0xafe68e30},
@@ -891,6 +908,7 @@ static const u32 ar955x_1p0_baseband_core[][2] = {
 	{0x0000c420, 0x00000000},
 };
 
+<<<<<<< HEAD
 static const u32 ar955x_1p0_common_wo_xlna_rx_gain_table[][2] = {
 	/* Addr      allmodes  */
 	{0x0000a000, 0x00010000},
@@ -1151,6 +1169,8 @@ static const u32 ar955x_1p0_common_wo_xlna_rx_gain_table[][2] = {
 	{0x0000b1fc, 0x00000196},
 };
 
+=======
+>>>>>>> v3.18
 static const u32 ar955x_1p0_soc_preamble[][2] = {
 	/* Addr      allmodes  */
 	{0x00007000, 0x00000000},
@@ -1263,11 +1283,14 @@ static const u32 ar955x_1p0_modes_no_xpa_tx_gain_table[][9] = {
 	{0x00016848, 0x66482401, 0x66482401, 0x66482401, 0x66482401, 0x66482401, 0x66482401, 0x66482401, 0x66482401},
 };
 
+<<<<<<< HEAD
 static const u32 ar955x_1p0_soc_postamble[][5] = {
 	/* Addr      5G_HT20     5G_HT40     2G_HT40     2G_HT20   */
 	{0x00007010, 0x00000023, 0x00000023, 0x00000023, 0x00000023},
 };
 
+=======
+>>>>>>> v3.18
 static const u32 ar955x_1p0_modes_fast_clock[][3] = {
 	/* Addr      5G_HT20     5G_HT40   */
 	{0x00001030, 0x00000268, 0x000004d0},

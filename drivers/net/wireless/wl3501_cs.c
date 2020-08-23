@@ -29,7 +29,10 @@
 
 #include <linux/delay.h>
 #include <linux/types.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/interrupt.h>
 #include <linux/in.h>
 #include <linux/kernel.h>
@@ -43,7 +46,11 @@
 #include <linux/slab.h>
 #include <linux/string.h>
 #include <linux/wireless.h>
+<<<<<<< HEAD
 #include <linux/ieee80211.h>
+=======
+#include <net/cfg80211.h>
+>>>>>>> v3.18
 
 #include <net/iw_handler.h>
 
@@ -673,8 +680,12 @@ static void wl3501_mgmt_scan_confirm(struct wl3501_card *this, u16 addr)
 				matchflag = 1;
 			if (matchflag) {
 				for (i = 0; i < this->bss_cnt; i++) {
+<<<<<<< HEAD
 					if (!memcmp(this->bss_set[i].bssid,
 						    sig.bssid, ETH_ALEN)) {
+=======
+					if (ether_addr_equal_unaligned(this->bss_set[i].bssid, sig.bssid)) {
+>>>>>>> v3.18
 						matchflag = 0;
 						break;
 					}
@@ -1455,7 +1466,12 @@ static int wl3501_get_freq(struct net_device *dev, struct iw_request_info *info,
 {
 	struct wl3501_card *this = netdev_priv(dev);
 
+<<<<<<< HEAD
 	wrqu->freq.m = ieee80211_dsss_chan_to_freq(this->chan) * 100000;
+=======
+	wrqu->freq.m = 100000 *
+		ieee80211_channel_to_frequency(this->chan, IEEE80211_BAND_2GHZ);
+>>>>>>> v3.18
 	wrqu->freq.e = 1;
 	return 0;
 }

@@ -13,8 +13,11 @@
 
 #include <linux/device.h>
 #include <linux/mod_devicetable.h>
+<<<<<<< HEAD
 
 #ifdef CONFIG_OF_DEVICE
+=======
+>>>>>>> v3.18
 #include <linux/pm.h>
 #include <linux/of_device.h>
 #include <linux/platform_device.h>
@@ -39,7 +42,11 @@
  * Note: Using an auxdata lookup table should be considered a last resort when
  * converting a platform to use the DT.  Normally the automatically generated
  * device name will not matter, and drivers should obtain data from the device
+<<<<<<< HEAD
  * node instead of from an anonymouns platform_data pointer.
+=======
+ * node instead of from an anonymous platform_data pointer.
+>>>>>>> v3.18
  */
 struct of_dev_auxdata {
 	char *compatible;
@@ -53,6 +60,7 @@ struct of_dev_auxdata {
 	{ .compatible = _compat, .phys_addr = _phys, .name = _name, \
 	  .platform_data = _pdata }
 
+<<<<<<< HEAD
 /**
  * of_platform_driver - Legacy of-aware driver for platform devices.
  *
@@ -74,6 +82,8 @@ struct of_platform_driver
 #define	to_of_platform_driver(drv) \
 	container_of(drv,struct of_platform_driver, driver)
 
+=======
+>>>>>>> v3.18
 extern const struct of_device_id of_default_bus_match_table[];
 
 /* Platform drivers register/unregister */
@@ -82,7 +92,10 @@ extern struct platform_device *of_device_alloc(struct device_node *np,
 					 struct device *parent);
 extern struct platform_device *of_find_device_by_node(struct device_node *np);
 
+<<<<<<< HEAD
 #ifdef CONFIG_OF_ADDRESS /* device reg helpers depend on OF_ADDRESS */
+=======
+>>>>>>> v3.18
 /* Platform devices and busses creation */
 extern struct platform_device *of_platform_device_create(struct device_node *np,
 						   const char *bus_id,
@@ -91,10 +104,15 @@ extern struct platform_device *of_platform_device_create(struct device_node *np,
 extern int of_platform_bus_probe(struct device_node *root,
 				 const struct of_device_id *matches,
 				 struct device *parent);
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_OF_ADDRESS
+>>>>>>> v3.18
 extern int of_platform_populate(struct device_node *root,
 				const struct of_device_id *matches,
 				const struct of_dev_auxdata *lookup,
 				struct device *parent);
+<<<<<<< HEAD
 #endif /* CONFIG_OF_ADDRESS */
 
 #endif /* CONFIG_OF_DEVICE */
@@ -102,6 +120,10 @@ extern int of_platform_populate(struct device_node *root,
 #if !defined(CONFIG_OF_ADDRESS)
 struct of_dev_auxdata;
 struct device_node;
+=======
+extern void of_platform_depopulate(struct device *parent);
+#else
+>>>>>>> v3.18
 static inline int of_platform_populate(struct device_node *root,
 					const struct of_device_id *matches,
 					const struct of_dev_auxdata *lookup,
@@ -109,6 +131,11 @@ static inline int of_platform_populate(struct device_node *root,
 {
 	return -ENODEV;
 }
+<<<<<<< HEAD
 #endif /* !CONFIG_OF_ADDRESS */
+=======
+static inline void of_platform_depopulate(struct device *parent) { }
+#endif
+>>>>>>> v3.18
 
 #endif	/* _LINUX_OF_PLATFORM_H */

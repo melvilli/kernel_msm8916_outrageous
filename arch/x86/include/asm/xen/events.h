@@ -7,6 +7,10 @@ enum ipi_vector {
 	XEN_CALL_FUNCTION_SINGLE_VECTOR,
 	XEN_SPIN_UNLOCK_VECTOR,
 	XEN_IRQ_WORK_VECTOR,
+<<<<<<< HEAD
+=======
+	XEN_NMI_VECTOR,
+>>>>>>> v3.18
 
 	XEN_NR_IPIS,
 };

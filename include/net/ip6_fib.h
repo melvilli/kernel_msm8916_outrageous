@@ -64,7 +64,11 @@ struct fib6_node {
 
 	__u16			fn_bit;		/* bit key */
 	__u16			fn_flags;
+<<<<<<< HEAD
 	__u32			fn_sernum;
+=======
+	int			fn_sernum;
+>>>>>>> v3.18
 	struct rt6_info		*rr_ptr;
 };
 
@@ -114,16 +118,25 @@ struct rt6_info {
 	u32				rt6i_flags;
 	struct rt6key			rt6i_src;
 	struct rt6key			rt6i_prefsrc;
+<<<<<<< HEAD
 	u32				rt6i_metric;
+=======
+>>>>>>> v3.18
 
 	struct inet6_dev		*rt6i_idev;
 	unsigned long			_rt6i_peer;
 
+<<<<<<< HEAD
 	u32				rt6i_genid;
 
 	/* more non-fragment space at head required */
 	unsigned short			rt6i_nfheader_len;
 
+=======
+	u32				rt6i_metric;
+	/* more non-fragment space at head required */
+	unsigned short			rt6i_nfheader_len;
+>>>>>>> v3.18
 	u8				rt6i_protocol;
 };
 
@@ -205,6 +218,7 @@ static inline void ip6_rt_put(struct rt6_info *rt)
 	dst_release(&rt->dst);
 }
 
+<<<<<<< HEAD
 struct fib6_walker_t {
 	struct list_head lh;
 	struct fib6_node *root, *node;
@@ -214,6 +228,27 @@ struct fib6_walker_t {
 	unsigned int skip;
 	unsigned int count;
 	int (*func)(struct fib6_walker_t *);
+=======
+enum fib6_walk_state {
+#ifdef CONFIG_IPV6_SUBTREES
+	FWS_S,
+#endif
+	FWS_L,
+	FWS_R,
+	FWS_C,
+	FWS_U
+};
+
+struct fib6_walker {
+	struct list_head lh;
+	struct fib6_node *root, *node;
+	struct rt6_info *leaf;
+	enum fib6_walk_state state;
+	bool prune;
+	unsigned int skip;
+	unsigned int count;
+	int (*func)(struct fib6_walker *);
+>>>>>>> v3.18
 	void *args;
 };
 
@@ -268,6 +303,7 @@ typedef struct rt6_info *(*pol_lookup_t)(struct net *,
  *	exported functions
  */
 
+<<<<<<< HEAD
 extern struct fib6_table        *fib6_get_table(struct net *net, u32 id);
 extern struct fib6_table        *fib6_new_table(struct net *net, u32 id);
 extern struct dst_entry         *fib6_rule_lookup(struct net *net,
@@ -310,6 +346,42 @@ extern int			fib6_init(void);
 #ifdef CONFIG_IPV6_MULTIPLE_TABLES
 extern int			fib6_rules_init(void);
 extern void			fib6_rules_cleanup(void);
+=======
+struct fib6_table *fib6_get_table(struct net *net, u32 id);
+struct fib6_table *fib6_new_table(struct net *net, u32 id);
+struct dst_entry *fib6_rule_lookup(struct net *net, struct flowi6 *fl6,
+				   int flags, pol_lookup_t lookup);
+
+struct fib6_node *fib6_lookup(struct fib6_node *root,
+			      const struct in6_addr *daddr,
+			      const struct in6_addr *saddr);
+
+struct fib6_node *fib6_locate(struct fib6_node *root,
+			      const struct in6_addr *daddr, int dst_len,
+			      const struct in6_addr *saddr, int src_len);
+
+void fib6_clean_all(struct net *net, int (*func)(struct rt6_info *, void *arg),
+		    void *arg);
+
+int fib6_add(struct fib6_node *root, struct rt6_info *rt, struct nl_info *info,
+	     struct nlattr *mx, int mx_len);
+
+int fib6_del(struct rt6_info *rt, struct nl_info *info);
+
+void inet6_rt_notify(int event, struct rt6_info *rt, struct nl_info *info);
+
+void fib6_run_gc(unsigned long expires, struct net *net, bool force);
+
+void fib6_gc_cleanup(void);
+
+int fib6_init(void);
+
+int ipv6_route_open(struct inode *inode, struct file *file);
+
+#ifdef CONFIG_IPV6_MULTIPLE_TABLES
+int fib6_rules_init(void);
+void fib6_rules_cleanup(void);
+>>>>>>> v3.18
 #else
 static inline int               fib6_rules_init(void)
 {

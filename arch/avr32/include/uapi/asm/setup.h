@@ -13,5 +13,8 @@
 
 #define COMMAND_LINE_SIZE 256
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 #endif /* _UAPI__ASM_AVR32_SETUP_H__ */

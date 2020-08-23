@@ -16,7 +16,11 @@ static inline void native_clts(void)
  * all loads stores around it, which can hurt performance. Solution is to
  * use a variable and mimic reads and writes to it to enforce serialization
  */
+<<<<<<< HEAD
 static unsigned long __force_order;
+=======
+extern unsigned long __force_order;
+>>>>>>> v3.18
 
 static inline unsigned long native_read_cr0(void)
 {
@@ -101,7 +105,11 @@ static inline void native_wbinvd(void)
 	asm volatile("wbinvd": : :"memory");
 }
 
+<<<<<<< HEAD
 extern void native_load_gs_index(unsigned);
+=======
+extern asmlinkage void native_load_gs_index(unsigned);
+>>>>>>> v3.18
 
 #ifdef CONFIG_PARAVIRT
 #include <asm/paravirt.h>
@@ -191,6 +199,17 @@ static inline void clflush(volatile void *__p)
 	asm volatile("clflush %0" : "+m" (*(volatile char __force *)__p));
 }
 
+<<<<<<< HEAD
+=======
+static inline void clflushopt(volatile void *__p)
+{
+	alternative_io(".byte " __stringify(NOP_DS_PREFIX) "; clflush %P0",
+		       ".byte 0x66; clflush %P0",
+		       X86_FEATURE_CLFLUSHOPT,
+		       "+m" (*(volatile char __force *)__p));
+}
+
+>>>>>>> v3.18
 #define nop() asm volatile ("nop")
 
 

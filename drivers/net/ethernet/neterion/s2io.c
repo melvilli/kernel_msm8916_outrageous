@@ -471,7 +471,11 @@ module_param_array(rts_frm_len, uint, NULL, 0);
  * S2IO device table.
  * This table lists all the devices that this driver supports.
  */
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(s2io_tbl) = {
+=======
+static const struct pci_device_id s2io_tbl[] = {
+>>>>>>> v3.18
 	{PCI_VENDOR_ID_S2IO, PCI_DEVICE_ID_S2IO_WIN,
 	 PCI_ANY_ID, PCI_ANY_ID},
 	{PCI_VENDOR_ID_S2IO, PCI_DEVICE_ID_S2IO_UNI,
@@ -534,6 +538,7 @@ static inline void s2io_start_all_tx_queue(struct s2io_nic *sp)
 	netif_tx_start_all_queues(sp->dev);
 }
 
+<<<<<<< HEAD
 static inline void s2io_start_tx_queue(struct s2io_nic *sp, int fifo_no)
 {
 	if (!sp->config.multiq)
@@ -543,6 +548,8 @@ static inline void s2io_start_tx_queue(struct s2io_nic *sp, int fifo_no)
 	netif_tx_start_all_queues(sp->dev);
 }
 
+=======
+>>>>>>> v3.18
 static inline void s2io_wake_all_tx_queue(struct s2io_nic *sp)
 {
 	if (!sp->config.multiq) {
@@ -2914,6 +2921,12 @@ static int rx_intr_handler(struct ring_info *ring_data, int budget)
 	struct RxD1 *rxdp1;
 	struct RxD3 *rxdp3;
 
+<<<<<<< HEAD
+=======
+	if (budget <= 0)
+		return napi_pkts;
+
+>>>>>>> v3.18
 	get_info = ring_data->rx_curr_get_info;
 	get_block = get_info.block_index;
 	memcpy(&put_info, &ring_data->rx_curr_put_info, sizeof(put_info));
@@ -3792,9 +3805,16 @@ static int s2io_enable_msi_x(struct s2io_nic *nic)
 	writeq(rx_mat, &bar0->rx_mat);
 	readq(&bar0->rx_mat);
 
+<<<<<<< HEAD
 	ret = pci_enable_msix(nic->pdev, nic->entries, nic->num_entries);
 	/* We fail init if error or we get less vectors than min required */
 	if (ret) {
+=======
+	ret = pci_enable_msix_range(nic->pdev, nic->entries,
+				    nic->num_entries, nic->num_entries);
+	/* We fail init if error or we get less vectors than min required */
+	if (ret < 0) {
+>>>>>>> v3.18
 		DBG_PRINT(ERR_DBG, "Enabling MSI-X failed\n");
 		kfree(nic->entries);
 		swstats->mem_freed += nic->num_entries *
@@ -4045,7 +4065,11 @@ static netdev_tx_t s2io_xmit(struct sk_buff *skb, struct net_device *dev)
 	if (!is_s2io_card_up(sp)) {
 		DBG_PRINT(TX_DBG, "%s: Card going down for reset\n",
 			  dev->name);
+<<<<<<< HEAD
 		dev_kfree_skb(skb);
+=======
+		dev_kfree_skb_any(skb);
+>>>>>>> v3.18
 		return NETDEV_TX_OK;
 	}
 
@@ -4118,7 +4142,11 @@ static netdev_tx_t s2io_xmit(struct sk_buff *skb, struct net_device *dev)
 	    ((put_off+1) == queue_len ? 0 : (put_off+1)) == get_off) {
 		DBG_PRINT(TX_DBG, "Error in xmit, No free TXDs.\n");
 		s2io_stop_tx_queue(sp, fifo->fifo_no);
+<<<<<<< HEAD
 		dev_kfree_skb(skb);
+=======
+		dev_kfree_skb_any(skb);
+>>>>>>> v3.18
 		spin_unlock_irqrestore(&fifo->tx_lock, flags);
 		return NETDEV_TX_OK;
 	}
@@ -4240,7 +4268,11 @@ pci_map_failed:
 	swstats->pci_map_fail_cnt++;
 	s2io_stop_tx_queue(sp, fifo->fifo_no);
 	swstats->mem_freed += skb->truesize;
+<<<<<<< HEAD
 	dev_kfree_skb(skb);
+=======
+	dev_kfree_skb_any(skb);
+>>>>>>> v3.18
 	spin_unlock_irqrestore(&fifo->tx_lock, flags);
 	return NETDEV_TX_OK;
 }
@@ -5365,8 +5397,13 @@ static int s2io_ethtool_gset(struct net_device *dev, struct ethtool_cmd *info)
 		ethtool_cmd_speed_set(info, SPEED_10000);
 		info->duplex = DUPLEX_FULL;
 	} else {
+<<<<<<< HEAD
 		ethtool_cmd_speed_set(info, -1);
 		info->duplex = -1;
+=======
+		ethtool_cmd_speed_set(info, SPEED_UNKNOWN);
+		info->duplex = DUPLEX_UNKNOWN;
+>>>>>>> v3.18
 	}
 
 	info->autoneg = AUTONEG_DISABLE;
@@ -7915,7 +7952,11 @@ s2io_init_nic(struct pci_dev *pdev, const struct pci_device_id *pre)
 
 	/*  Driver entry points */
 	dev->netdev_ops = &s2io_netdev_ops;
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(dev, &netdev_ethtool_ops);
+=======
+	dev->ethtool_ops = &netdev_ethtool_ops;
+>>>>>>> v3.18
 	dev->hw_features = NETIF_F_SG | NETIF_F_IP_CSUM |
 		NETIF_F_TSO | NETIF_F_TSO6 |
 		NETIF_F_RXCSUM | NETIF_F_LRO;
@@ -8185,7 +8226,10 @@ mem_alloc_failed:
 	free_shared_mem(sp);
 	pci_disable_device(pdev);
 	pci_release_regions(pdev);
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	free_netdev(dev);
 
 	return ret;
@@ -8221,7 +8265,10 @@ static void s2io_rem_nic(struct pci_dev *pdev)
 	iounmap(sp->bar0);
 	iounmap(sp->bar1);
 	pci_release_regions(pdev);
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	free_netdev(dev);
 	pci_disable_device(pdev);
 }

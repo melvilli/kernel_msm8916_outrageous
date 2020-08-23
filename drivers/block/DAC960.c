@@ -6411,12 +6411,21 @@ static bool DAC960_V2_ExecuteUserCommand(DAC960_Controller_T *Controller,
 					.ScatterGatherSegments[0]
 					.SegmentByteCount =
 	    CommandMailbox->ControllerInfo.DataTransferSize;
+<<<<<<< HEAD
 	  DAC960_ExecuteCommand(Command);
 	  while (Controller->V2.NewControllerInformation->PhysicalScanActive)
 	    {
 	      DAC960_ExecuteCommand(Command);
 	      sleep_on_timeout(&Controller->CommandWaitQueue, HZ);
 	    }
+=======
+	  while (1) {
+	    DAC960_ExecuteCommand(Command);
+	    if (!Controller->V2.NewControllerInformation->PhysicalScanActive)
+		break;
+	    msleep(1000);
+	  }
+>>>>>>> v3.18
 	  DAC960_UserCritical("Discovery Completed\n", Controller);
  	}
     }
@@ -6741,11 +6750,19 @@ static long DAC960_gam_ioctl(struct file *file, unsigned int Request,
 	ErrorCode = -ENOMEM;
 	if (DataTransferLength > 0)
 	  {
+<<<<<<< HEAD
 	    DataTransferBuffer = pci_alloc_consistent(Controller->PCIDevice,
 				DataTransferLength, &DataTransferBufferDMA);
 	    if (DataTransferBuffer == NULL)
 	    	break;
 	    memset(DataTransferBuffer, 0, DataTransferLength);
+=======
+	    DataTransferBuffer = pci_zalloc_consistent(Controller->PCIDevice,
+                                                       DataTransferLength,
+                                                       &DataTransferBufferDMA);
+	    if (DataTransferBuffer == NULL)
+	    	break;
+>>>>>>> v3.18
 	  }
 	else if (DataTransferLength < 0)
 	  {
@@ -6877,11 +6894,19 @@ static long DAC960_gam_ioctl(struct file *file, unsigned int Request,
     	ErrorCode = -ENOMEM;
 	if (DataTransferLength > 0)
 	  {
+<<<<<<< HEAD
 	    DataTransferBuffer = pci_alloc_consistent(Controller->PCIDevice,
 				DataTransferLength, &DataTransferBufferDMA);
 	    if (DataTransferBuffer == NULL)
 	    	break;
 	    memset(DataTransferBuffer, 0, DataTransferLength);
+=======
+	    DataTransferBuffer = pci_zalloc_consistent(Controller->PCIDevice,
+                                                       DataTransferLength,
+                                                       &DataTransferBufferDMA);
+	    if (DataTransferBuffer == NULL)
+	    	break;
+>>>>>>> v3.18
 	  }
 	else if (DataTransferLength < 0)
 	  {
@@ -6899,14 +6924,23 @@ static long DAC960_gam_ioctl(struct file *file, unsigned int Request,
 	RequestSenseLength = UserCommand.RequestSenseLength;
 	if (RequestSenseLength > 0)
 	  {
+<<<<<<< HEAD
 	    RequestSenseBuffer = pci_alloc_consistent(Controller->PCIDevice,
 			RequestSenseLength, &RequestSenseBufferDMA);
+=======
+	    RequestSenseBuffer = pci_zalloc_consistent(Controller->PCIDevice,
+                                                       RequestSenseLength,
+                                                       &RequestSenseBufferDMA);
+>>>>>>> v3.18
 	    if (RequestSenseBuffer == NULL)
 	      {
 		ErrorCode = -ENOMEM;
 		goto Failure2;
 	      }
+<<<<<<< HEAD
 	    memset(RequestSenseBuffer, 0, RequestSenseLength);
+=======
+>>>>>>> v3.18
 	  }
 	spin_lock_irqsave(&Controller->queue_lock, flags);
 	while ((Command = DAC960_AllocateCommand(Controller)) == NULL)
@@ -7035,6 +7069,7 @@ static long DAC960_gam_ioctl(struct file *file, unsigned int Request,
 		ErrorCode = -EFAULT;
 		break;
 	}
+<<<<<<< HEAD
 	while (Controller->V2.HealthStatusBuffer->StatusChangeCounter
 	       == HealthStatusBuffer.StatusChangeCounter &&
 	       Controller->V2.HealthStatusBuffer->NextEventSequenceNumber
@@ -7047,6 +7082,18 @@ static long DAC960_gam_ioctl(struct file *file, unsigned int Request,
 	    	break;
 	    }
 	  }
+=======
+	ErrorCode = wait_event_interruptible_timeout(Controller->HealthStatusWaitQueue,
+			!(Controller->V2.HealthStatusBuffer->StatusChangeCounter
+			    == HealthStatusBuffer.StatusChangeCounter &&
+			  Controller->V2.HealthStatusBuffer->NextEventSequenceNumber
+			    == HealthStatusBuffer.NextEventSequenceNumber),
+			DAC960_MonitoringTimerInterval);
+	if (ErrorCode == -ERESTARTSYS) {
+		ErrorCode = -EINTR;
+		break;
+	}
+>>>>>>> v3.18
 	if (copy_to_user(GetHealthStatus.HealthStatusBuffer,
 			 Controller->V2.HealthStatusBuffer,
 			 sizeof(DAC960_V2_HealthStatusBuffer_T)))

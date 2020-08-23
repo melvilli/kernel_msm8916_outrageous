@@ -12,7 +12,10 @@
  */
 
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/leds.h>
 #include <linux/mfd/core.h>
 #include <linux/mutex.h>
@@ -646,6 +649,14 @@ static struct attribute_group lm3533_led_attribute_group = {
 	.attrs		= lm3533_led_attributes
 };
 
+<<<<<<< HEAD
+=======
+static const struct attribute_group *lm3533_led_attribute_groups[] = {
+	&lm3533_led_attribute_group,
+	NULL
+};
+
+>>>>>>> v3.18
 static int lm3533_led_setup(struct lm3533_led *led,
 					struct lm3533_led_platform_data *pdata)
 {
@@ -671,7 +682,11 @@ static int lm3533_led_probe(struct platform_device *pdev)
 	if (!lm3533)
 		return -EINVAL;
 
+<<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	if (!pdata) {
 		dev_err(&pdev->dev, "no platform data\n");
 		return -EINVAL;
@@ -693,6 +708,10 @@ static int lm3533_led_probe(struct platform_device *pdev)
 	led->cdev.brightness_get = lm3533_led_get;
 	led->cdev.blink_set = lm3533_led_blink_set;
 	led->cdev.brightness = LED_OFF;
+<<<<<<< HEAD
+=======
+	led->cdev.groups = lm3533_led_attribute_groups,
+>>>>>>> v3.18
 	led->id = pdev->id;
 
 	mutex_init(&led->mutex);
@@ -716,6 +735,7 @@ static int lm3533_led_probe(struct platform_device *pdev)
 
 	led->cb.dev = led->cdev.dev;
 
+<<<<<<< HEAD
 	ret = sysfs_create_group(&led->cdev.dev->kobj,
 						&lm3533_led_attribute_group);
 	if (ret < 0) {
@@ -735,6 +755,18 @@ static int lm3533_led_probe(struct platform_device *pdev)
 
 err_sysfs_remove:
 	sysfs_remove_group(&led->cdev.dev->kobj, &lm3533_led_attribute_group);
+=======
+	ret = lm3533_led_setup(led, pdata);
+	if (ret)
+		goto err_unregister;
+
+	ret = lm3533_ctrlbank_enable(&led->cb);
+	if (ret)
+		goto err_unregister;
+
+	return 0;
+
+>>>>>>> v3.18
 err_unregister:
 	led_classdev_unregister(&led->cdev);
 	flush_work(&led->work);
@@ -749,7 +781,10 @@ static int lm3533_led_remove(struct platform_device *pdev)
 	dev_dbg(&pdev->dev, "%s\n", __func__);
 
 	lm3533_ctrlbank_disable(&led->cb);
+<<<<<<< HEAD
 	sysfs_remove_group(&led->cdev.dev->kobj, &lm3533_led_attribute_group);
+=======
+>>>>>>> v3.18
 	led_classdev_unregister(&led->cdev);
 	flush_work(&led->work);
 

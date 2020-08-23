@@ -21,11 +21,19 @@
 
 struct dbx500_asic_id dbx500_id;
 
+<<<<<<< HEAD
 static unsigned int ux500_read_asicid(phys_addr_t addr)
 {
 	phys_addr_t base = addr & ~0xfff;
 	struct map_desc desc = {
 		.virtual	= UX500_VIRT_ROM,
+=======
+static unsigned int __init ux500_read_asicid(phys_addr_t addr)
+{
+	phys_addr_t base = addr & ~0xfff;
+	struct map_desc desc = {
+		.virtual	= (unsigned long)UX500_VIRT_ROM,
+>>>>>>> v3.18
 		.pfn		= __phys_to_pfn(base),
 		.length		= SZ_16K,
 		.type		= MT_DEVICE,
@@ -37,7 +45,11 @@ static unsigned int ux500_read_asicid(phys_addr_t addr)
 	local_flush_tlb_all();
 	flush_cache_all();
 
+<<<<<<< HEAD
 	return readl(IOMEM(UX500_VIRT_ROM + (addr & 0xfff)));
+=======
+	return readl(UX500_VIRT_ROM + (addr & 0xfff));
+>>>>>>> v3.18
 }
 
 static void ux500_print_soc_info(unsigned int asicid)

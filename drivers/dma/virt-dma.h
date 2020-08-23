@@ -84,10 +84,19 @@ static inline bool vchan_issue_pending(struct virt_dma_chan *vc)
 static inline void vchan_cookie_complete(struct virt_dma_desc *vd)
 {
 	struct virt_dma_chan *vc = to_virt_chan(vd->tx.chan);
+<<<<<<< HEAD
 
 	dma_cookie_complete(&vd->tx);
 	dev_vdbg(vc->chan.device->dev, "txd %p[%x]: marked complete\n",
 		vd, vd->tx.cookie);
+=======
+	dma_cookie_t cookie;
+
+	cookie = vd->tx.cookie;
+	dma_cookie_complete(&vd->tx);
+	dev_vdbg(vc->chan.device->dev, "txd %p[%x]: marked complete\n",
+		 vd, cookie);
+>>>>>>> v3.18
 	list_add_tail(&vd->node, &vc->desc_completed);
 
 	tasklet_schedule(&vc->task);

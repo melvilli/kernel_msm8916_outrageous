@@ -117,7 +117,11 @@ static int rds_add_bound(struct rds_sock *rs, __be32 addr, __be16 *port)
 		rover = be16_to_cpu(*port);
 		last = rover;
 	} else {
+<<<<<<< HEAD
 		rover = max_t(u16, net_random(), 2);
+=======
+		rover = max_t(u16, prandom_u32(), 2);
+>>>>>>> v3.18
 		last = rover - 1;
 	}
 

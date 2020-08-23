@@ -43,6 +43,7 @@ enum fixed_addresses {
 extern void __set_fixmap (enum fixed_addresses idx,
 			  unsigned long phys, pgprot_t flags);
 
+<<<<<<< HEAD
 #define set_fixmap(idx, phys) \
 		__set_fixmap(idx, phys, PAGE_KERNEL)
 /*
@@ -50,6 +51,8 @@ extern void __set_fixmap (enum fixed_addresses idx,
  */
 #define set_fixmap_nocache(idx, phys) \
 		__set_fixmap(idx, phys, PAGE_KERNEL_NOCACHE)
+=======
+>>>>>>> v3.18
 /*
  * used by vmalloc.c.
  *
@@ -62,6 +65,7 @@ extern void __set_fixmap (enum fixed_addresses idx,
 #define FIXADDR_SIZE	(__end_of_fixed_addresses << PAGE_SHIFT)
 #define FIXADDR_START	(FIXADDR_TOP - FIXADDR_SIZE)
 
+<<<<<<< HEAD
 #define __fix_to_virt(x)	(FIXADDR_TOP - ((x) << PAGE_SHIFT))
 #define __virt_to_fix(x)      ((FIXADDR_TOP - ((x)&PAGE_MASK)) >> PAGE_SHIFT)
 
@@ -94,5 +98,8 @@ static inline unsigned long virt_to_fix(const unsigned long vaddr)
       BUG_ON(vaddr >= FIXADDR_TOP || vaddr < FIXADDR_START);
       return __virt_to_fix(vaddr);
 }
+=======
+#include <asm-generic/fixmap.h>
+>>>>>>> v3.18
 
 #endif

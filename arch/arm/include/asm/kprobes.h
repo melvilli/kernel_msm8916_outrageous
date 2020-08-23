@@ -18,7 +18,11 @@
 
 #include <linux/types.h>
 #include <linux/ptrace.h>
+<<<<<<< HEAD
 #include <linux/percpu.h>
+=======
+#include <linux/notifier.h>
+>>>>>>> v3.18
 
 #define __ARCH_WANT_KPROBES_INSN_SLOT
 #define MAX_INSN_SIZE			2
@@ -28,6 +32,7 @@
 #define kretprobe_blacklist_size	0
 
 typedef u32 kprobe_opcode_t;
+<<<<<<< HEAD
 
 struct kprobe;
 typedef void (kprobe_insn_handler_t)(struct kprobe *, struct pt_regs *);
@@ -43,6 +48,12 @@ struct arch_specific_insn {
 	kprobe_insn_singlestep_t	*insn_singlestep;
 	kprobe_insn_fn_t		*insn_fn;
 };
+=======
+struct kprobe;
+#include <asm/probes.h>
+
+#define	arch_specific_insn	arch_probes_insn
+>>>>>>> v3.18
 
 struct prev_kprobe {
 	struct kprobe *kp;

@@ -5,7 +5,11 @@
  ******************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -382,10 +386,18 @@ acpi_ut_display_init_pathname(u8 type,
 
 	switch (type) {
 	case ACPI_TYPE_METHOD:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		acpi_os_printf("Executing  ");
 		break;
 
 	default:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		acpi_os_printf("Initializing ");
 		break;
 	}

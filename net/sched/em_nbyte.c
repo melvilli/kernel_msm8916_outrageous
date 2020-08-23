@@ -23,7 +23,11 @@ struct nbyte_data {
 	char			pattern[0];
 };
 
+<<<<<<< HEAD
 static int em_nbyte_change(struct tcf_proto *tp, void *data, int data_len,
+=======
+static int em_nbyte_change(struct net *net, void *data, int data_len,
+>>>>>>> v3.18
 			   struct tcf_ematch *em)
 {
 	struct tcf_em_nbyte *nbyte = data;

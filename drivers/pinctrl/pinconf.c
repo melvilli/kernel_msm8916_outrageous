@@ -28,12 +28,15 @@ int pinconf_check_ops(struct pinctrl_dev *pctldev)
 {
 	const struct pinconf_ops *ops = pctldev->desc->confops;
 
+<<<<<<< HEAD
 	/* We must be able to read out pin status */
 	if (!ops->pin_config_get && !ops->pin_config_group_get) {
 		dev_err(pctldev->dev,
 			"pinconf must be able to read out pin status\n");
 		return -EINVAL;
 	}
+=======
+>>>>>>> v3.18
 	/* We have to be able to config the pins in SOME way */
 	if (!ops->pin_config_set && !ops->pin_config_group_set) {
 		dev_err(pctldev->dev,
@@ -67,14 +70,21 @@ int pin_config_get_for_pin(struct pinctrl_dev *pctldev, unsigned pin,
 	const struct pinconf_ops *ops = pctldev->desc->confops;
 
 	if (!ops || !ops->pin_config_get) {
+<<<<<<< HEAD
 		dev_err(pctldev->dev, "cannot get pin configuration, missing "
 			"pin_config_get() function in driver\n");
 		return -EINVAL;
+=======
+		dev_dbg(pctldev->dev, "cannot get pin configuration, missing "
+			"pin_config_get() function in driver\n");
+		return -ENOTSUPP;
+>>>>>>> v3.18
 	}
 
 	return ops->pin_config_get(pctldev, pin, config);
 }
 
+<<<<<<< HEAD
 /**
  * pin_config_get() - get the configuration of a single pin parameter
  * @dev_name: name of the pin controller device for this pin
@@ -167,6 +177,8 @@ unlock:
 }
 EXPORT_SYMBOL(pin_config_set);
 
+=======
+>>>>>>> v3.18
 int pin_config_group_get(const char *dev_name, const char *pin_group,
 			 unsigned long *config)
 {
@@ -185,10 +197,17 @@ int pin_config_group_get(const char *dev_name, const char *pin_group,
 	ops = pctldev->desc->confops;
 
 	if (!ops || !ops->pin_config_group_get) {
+<<<<<<< HEAD
 		dev_err(pctldev->dev, "cannot get configuration for pin "
 			"group, missing group config get function in "
 			"driver\n");
 		ret = -EINVAL;
+=======
+		dev_dbg(pctldev->dev, "cannot get configuration for pin "
+			"group, missing group config get function in "
+			"driver\n");
+		ret = -ENOTSUPP;
+>>>>>>> v3.18
 		goto unlock;
 	}
 
@@ -204,6 +223,7 @@ unlock:
 	mutex_unlock(&pctldev->mutex);
 	return ret;
 }
+<<<<<<< HEAD
 EXPORT_SYMBOL(pin_config_group_get);
 
 int pin_config_group_set(const char *dev_name, const char *pin_group,
@@ -286,6 +306,8 @@ unlock:
 	return ret;
 }
 EXPORT_SYMBOL(pin_config_group_set);
+=======
+>>>>>>> v3.18
 
 int pinconf_map_to_setting(struct pinctrl_map const *map,
 			  struct pinctrl_setting *setting)
@@ -332,7 +354,11 @@ int pinconf_apply_setting(struct pinctrl_setting const *setting)
 {
 	struct pinctrl_dev *pctldev = setting->pctldev;
 	const struct pinconf_ops *ops = pctldev->desc->confops;
+<<<<<<< HEAD
 	int i, ret;
+=======
+	int ret;
+>>>>>>> v3.18
 
 	if (!ops) {
 		dev_err(pctldev->dev, "missing confops\n");
@@ -345,6 +371,7 @@ int pinconf_apply_setting(struct pinctrl_setting const *setting)
 			dev_err(pctldev->dev, "missing pin_config_set op\n");
 			return -EINVAL;
 		}
+<<<<<<< HEAD
 		for (i = 0; i < setting->data.configs.num_configs; i++) {
 			ret = ops->pin_config_set(pctldev,
 					setting->data.configs.group_or_pin,
@@ -356,6 +383,17 @@ int pinconf_apply_setting(struct pinctrl_setting const *setting)
 					setting->data.configs.configs[i]);
 				return ret;
 			}
+=======
+		ret = ops->pin_config_set(pctldev,
+				setting->data.configs.group_or_pin,
+				setting->data.configs.configs,
+				setting->data.configs.num_configs);
+		if (ret < 0) {
+			dev_err(pctldev->dev,
+				"pin_config_set op failed for pin %d\n",
+				setting->data.configs.group_or_pin);
+			return ret;
+>>>>>>> v3.18
 		}
 		break;
 	case PIN_MAP_TYPE_CONFIGS_GROUP:
@@ -364,6 +402,7 @@ int pinconf_apply_setting(struct pinctrl_setting const *setting)
 				"missing pin_config_group_set op\n");
 			return -EINVAL;
 		}
+<<<<<<< HEAD
 		for (i = 0; i < setting->data.configs.num_configs; i++) {
 			ret = ops->pin_config_group_set(pctldev,
 					setting->data.configs.group_or_pin,
@@ -375,6 +414,17 @@ int pinconf_apply_setting(struct pinctrl_setting const *setting)
 					setting->data.configs.configs[i]);
 				return ret;
 			}
+=======
+		ret = ops->pin_config_group_set(pctldev,
+				setting->data.configs.group_or_pin,
+				setting->data.configs.configs,
+				setting->data.configs.num_configs);
+		if (ret < 0) {
+			dev_err(pctldev->dev,
+				"pin_config_group_set op failed for group %d\n",
+				setting->data.configs.group_or_pin);
+			return ret;
+>>>>>>> v3.18
 		}
 		break;
 	default:
@@ -480,12 +530,17 @@ static void pinconf_dump_pin(struct pinctrl_dev *pctldev,
 static int pinconf_pins_show(struct seq_file *s, void *what)
 {
 	struct pinctrl_dev *pctldev = s->private;
+<<<<<<< HEAD
 	const struct pinconf_ops *ops = pctldev->desc->confops;
 	unsigned i, pin;
 
 	if (!ops || !ops->pin_config_get)
 		return 0;
 
+=======
+	unsigned i, pin;
+
+>>>>>>> v3.18
 	seq_puts(s, "Pin config settings per pin\n");
 	seq_puts(s, "Format: pin (name): configs\n");
 
@@ -530,6 +585,7 @@ static int pinconf_groups_show(struct seq_file *s, void *what)
 {
 	struct pinctrl_dev *pctldev = s->private;
 	const struct pinctrl_ops *pctlops = pctldev->desc->pctlops;
+<<<<<<< HEAD
 	const struct pinconf_ops *ops = pctldev->desc->confops;
 	unsigned ngroups = pctlops->get_groups_count(pctldev);
 	unsigned selector = 0;
@@ -537,6 +593,11 @@ static int pinconf_groups_show(struct seq_file *s, void *what)
 	if (!ops || !ops->pin_config_group_get)
 		return 0;
 
+=======
+	unsigned ngroups = pctlops->get_groups_count(pctldev);
+	unsigned selector = 0;
+
+>>>>>>> v3.18
 	seq_puts(s, "Pin config settings per pin group\n");
 	seq_puts(s, "Format: group (name): configs\n");
 
@@ -686,7 +747,11 @@ static ssize_t pinconf_dbg_config_write(struct file *file,
 	int i;
 
 	/* Get userspace string and assure termination */
+<<<<<<< HEAD
 	buf_size = min(count, (sizeof(buf)-1));
+=======
+	buf_size = min(count, sizeof(buf) - 1);
+>>>>>>> v3.18
 	if (copy_from_user(buf, user_buf, buf_size))
 		return -EFAULT;
 	buf[buf_size] = 0;

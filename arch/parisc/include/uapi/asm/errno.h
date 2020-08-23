@@ -37,7 +37,11 @@
 #define	EBADMSG		67	/* Not a data message */
 #define	EUSERS		68	/* Too many users */
 #define	EDQUOT		69	/* Quota exceeded */
+<<<<<<< HEAD
 #define	ESTALE		70	/* Stale NFS file handle */
+=======
+#define	ESTALE		70	/* Stale file handle */
+>>>>>>> v3.18
 #define	EREMOTE		71	/* Object is remote */
 #define	EOVERFLOW	72	/* Value too large for defined data type */
 
@@ -106,7 +110,11 @@
 
 #define	EALREADY	244	/* Operation already in progress */
 #define	EINPROGRESS	245	/* Operation now in progress */
+<<<<<<< HEAD
 #define	EWOULDBLOCK	246	/* Operation would block (Linux returns EAGAIN) */
+=======
+#define	EWOULDBLOCK	EAGAIN	/* Operation would block (Not HPUX compliant) */
+>>>>>>> v3.18
 #define	ENOTEMPTY	247	/* Directory not empty */
 #define	ENAMETOOLONG	248	/* File name too long */
 #define	ELOOP		249	/* Too many symbolic links encountered */

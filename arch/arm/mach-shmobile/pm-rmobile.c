@@ -17,7 +17,11 @@
 #include <linux/pm.h>
 #include <linux/pm_clock.h>
 #include <asm/io.h>
+<<<<<<< HEAD
 #include <mach/pm-rmobile.h>
+=======
+#include "pm-rmobile.h"
+>>>>>>> v3.18
 
 /* SYSC */
 #define SPDCR		IOMEM(0xe6180008)
@@ -27,7 +31,10 @@
 #define PSTR_RETRIES	100
 #define PSTR_DELAY_US	10
 
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+>>>>>>> v3.18
 static int rmobile_pd_power_down(struct generic_pm_domain *genpd)
 {
 	struct rmobile_pm_domain *rmobile_pd = to_rmobile_pd(genpd);
@@ -99,6 +106,7 @@ static int rmobile_pd_power_up(struct generic_pm_domain *genpd)
 
 static bool rmobile_pd_active_wakeup(struct device *dev)
 {
+<<<<<<< HEAD
 	bool (*active_wakeup)(struct device *dev);
 
 	active_wakeup = dev_gpd_data(dev)->ops.active_wakeup;
@@ -132,6 +140,9 @@ static int rmobile_pd_start_dev(struct device *dev)
 		ret = start(dev);
 
 	return ret;
+=======
+	return true;
+>>>>>>> v3.18
 }
 
 static void rmobile_init_pm_domain(struct rmobile_pm_domain *rmobile_pd)
@@ -140,10 +151,16 @@ static void rmobile_init_pm_domain(struct rmobile_pm_domain *rmobile_pd)
 	struct dev_power_governor *gov = rmobile_pd->gov;
 
 	pm_genpd_init(genpd, gov ? : &simple_qos_governor, false);
+<<<<<<< HEAD
 	genpd->dev_ops.stop		= rmobile_pd_stop_dev;
 	genpd->dev_ops.start		= rmobile_pd_start_dev;
 	genpd->dev_ops.active_wakeup	= rmobile_pd_active_wakeup;
 	genpd->dev_irq_safe		= true;
+=======
+	genpd->dev_ops.stop		= pm_clk_suspend;
+	genpd->dev_ops.start		= pm_clk_resume;
+	genpd->dev_ops.active_wakeup	= rmobile_pd_active_wakeup;
+>>>>>>> v3.18
 	genpd->power_off		= rmobile_pd_power_down;
 	genpd->power_on			= rmobile_pd_power_up;
 	__rmobile_pd_power_up(rmobile_pd, false);
@@ -183,4 +200,7 @@ void rmobile_add_devices_to_domains(struct pm_domain_device data[],
 		rmobile_add_device_to_domain_td(data[j].domain_name,
 						data[j].pdev, &latencies);
 }
+<<<<<<< HEAD
 #endif /* CONFIG_PM */
+=======
+>>>>>>> v3.18

@@ -24,8 +24,14 @@
 #include <linux/binfmts.h>
 #include <linux/in.h>
 #include <linux/spinlock.h>
+<<<<<<< HEAD
 #include <linux/in6.h>
 #include <net/net_namespace.h>
+=======
+#include <net/net_namespace.h>
+#include "flask.h"
+#include "avc.h"
+>>>>>>> v3.18
 
 struct task_security_struct {
 	u32 osid;		/* SID prior to last execve */
@@ -46,7 +52,10 @@ struct inode_security_struct {
 	u32 sid;		/* SID of this object */
 	u16 sclass;		/* security class of this object */
 	unsigned char initialized;	/* initialization flag */
+<<<<<<< HEAD
 	u32 tag;		/* Per-File-Encryption tag */
+=======
+>>>>>>> v3.18
 	struct mutex lock;
 };
 
@@ -62,8 +71,13 @@ struct superblock_security_struct {
 	u32 sid;			/* SID of file system superblock */
 	u32 def_sid;			/* default SID for labeling */
 	u32 mntpoint_sid;		/* SECURITY_FS_USE_MNTPOINT context for files */
+<<<<<<< HEAD
 	unsigned int behavior;		/* labeling behavior */
 	unsigned char flags;		/* which mount options were specified */
+=======
+	unsigned short behavior;	/* labeling behavior */
+	unsigned short flags;		/* which mount options were specified */
+>>>>>>> v3.18
 	struct mutex lock;
 	struct list_head isec_head;
 	spinlock_t isec_lock;

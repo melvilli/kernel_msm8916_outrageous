@@ -77,7 +77,10 @@ struct iio_channel_info {
 	uint64_t mask;
 	unsigned be;
 	unsigned is_signed;
+<<<<<<< HEAD
 	unsigned enabled;
+=======
+>>>>>>> v3.18
 	unsigned location;
 };
 
@@ -319,7 +322,11 @@ inline int build_channel_array(const char *device_dir,
 				free(filename);
 				goto error_close_dir;
 			}
+<<<<<<< HEAD
 			fscanf(sysfsfp, "%u", &ret);
+=======
+			fscanf(sysfsfp, "%i", &ret);
+>>>>>>> v3.18
 			if (ret == 1)
 				(*counter)++;
 			fclose(sysfsfp);
@@ -335,6 +342,10 @@ inline int build_channel_array(const char *device_dir,
 	while (ent = readdir(dp), ent != NULL) {
 		if (strcmp(ent->d_name + strlen(ent->d_name) - strlen("_en"),
 			   "_en") == 0) {
+<<<<<<< HEAD
+=======
+			int current_enabled = 0;
+>>>>>>> v3.18
 			current = &(*ci_array)[count++];
 			ret = asprintf(&filename,
 				       "%s/%s", scan_el_dir, ent->d_name);
@@ -350,10 +361,17 @@ inline int build_channel_array(const char *device_dir,
 				ret = -errno;
 				goto error_cleanup_array;
 			}
+<<<<<<< HEAD
 			fscanf(sysfsfp, "%u", &current->enabled);
 			fclose(sysfsfp);
 
 			if (!current->enabled) {
+=======
+			fscanf(sysfsfp, "%i", &current_enabled);
+			fclose(sysfsfp);
+
+			if (!current_enabled) {
+>>>>>>> v3.18
 				free(filename);
 				count--;
 				continue;
@@ -502,7 +520,11 @@ inline int find_type_by_name(const char *name, const char *type)
 
 inline int _write_sysfs_int(char *filename, char *basedir, int val, int verify)
 {
+<<<<<<< HEAD
 	int ret;
+=======
+	int ret = 0;
+>>>>>>> v3.18
 	FILE *sysfsfp;
 	int test;
 	char *temp = malloc(strlen(basedir) + strlen(filename) + 2);
@@ -633,7 +655,11 @@ error_free:
 
 int read_sysfs_float(char *filename, char *basedir, float *val)
 {
+<<<<<<< HEAD
 	float ret = 0;
+=======
+	int ret = 0;
+>>>>>>> v3.18
 	FILE  *sysfsfp;
 	char *temp = malloc(strlen(basedir) + strlen(filename) + 2);
 	if (temp == NULL) {
@@ -652,3 +678,28 @@ error_free:
 	free(temp);
 	return ret;
 }
+<<<<<<< HEAD
+=======
+
+int read_sysfs_string(const char *filename, const char *basedir, char *str)
+{
+	int ret = 0;
+	FILE  *sysfsfp;
+	char *temp = malloc(strlen(basedir) + strlen(filename) + 2);
+	if (temp == NULL) {
+		printf("Memory allocation failed");
+		return -ENOMEM;
+	}
+	sprintf(temp, "%s/%s", basedir, filename);
+	sysfsfp = fopen(temp, "r");
+	if (sysfsfp == NULL) {
+		ret = -errno;
+		goto error_free;
+	}
+	fscanf(sysfsfp, "%s\n", str);
+	fclose(sysfsfp);
+error_free:
+	free(temp);
+	return ret;
+}
+>>>>>>> v3.18

@@ -196,7 +196,11 @@ static int pm860x_backlight_dt_init(struct platform_device *pdev,
 static int pm860x_backlight_probe(struct platform_device *pdev)
 {
 	struct pm860x_chip *chip = dev_get_drvdata(pdev->dev.parent);
+<<<<<<< HEAD
 	struct pm860x_backlight_pdata *pdata = pdev->dev.platform_data;
+=======
+	struct pm860x_backlight_pdata *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	struct pm860x_backlight_data *data;
 	struct backlight_device *bl;
 	struct resource *res;
@@ -216,7 +220,11 @@ static int pm860x_backlight_probe(struct platform_device *pdev)
 	data->reg_duty_cycle = res->start;
 	res = platform_get_resource_byname(pdev, IORESOURCE_REG, "always on");
 	if (!res) {
+<<<<<<< HEAD
 		dev_err(&pdev->dev, "No REG resorce for always on\n");
+=======
+		dev_err(&pdev->dev, "No REG resource for always on\n");
+>>>>>>> v3.18
 		return -ENXIO;
 	}
 	data->reg_always_on = res->start;
@@ -243,7 +251,11 @@ static int pm860x_backlight_probe(struct platform_device *pdev)
 	memset(&props, 0, sizeof(struct backlight_properties));
 	props.type = BACKLIGHT_RAW;
 	props.max_brightness = MAX_BRIGHTNESS;
+<<<<<<< HEAD
 	bl = backlight_device_register(name, &pdev->dev, data,
+=======
+	bl = devm_backlight_device_register(&pdev->dev, name, &pdev->dev, data,
+>>>>>>> v3.18
 					&pm860x_backlight_ops, &props);
 	if (IS_ERR(bl)) {
 		dev_err(&pdev->dev, "failed to register backlight\n");
@@ -256,6 +268,7 @@ static int pm860x_backlight_probe(struct platform_device *pdev)
 	/* read current backlight */
 	ret = pm860x_backlight_get_brightness(bl);
 	if (ret < 0)
+<<<<<<< HEAD
 		goto out_brt;
 
 	backlight_update_status(bl);
@@ -271,15 +284,26 @@ static int pm860x_backlight_remove(struct platform_device *pdev)
 
 	backlight_device_unregister(bl);
 	return 0;
+=======
+		return ret;
+
+	backlight_update_status(bl);
+	return 0;
+>>>>>>> v3.18
 }
 
 static struct platform_driver pm860x_backlight_driver = {
 	.driver		= {
 		.name	= "88pm860x-backlight",
+<<<<<<< HEAD
 		.owner	= THIS_MODULE,
 	},
 	.probe		= pm860x_backlight_probe,
 	.remove		= pm860x_backlight_remove,
+=======
+	},
+	.probe		= pm860x_backlight_probe,
+>>>>>>> v3.18
 };
 
 module_platform_driver(pm860x_backlight_driver);

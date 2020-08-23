@@ -11,10 +11,13 @@
  * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
  * more details.
  *
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
+=======
+>>>>>>> v3.18
  * The full GNU General Public License is included in this distribution in the
  * file called LICENSE.
  *
@@ -40,7 +43,12 @@ void rtl88e_phy_rf6052_set_cck_txpower(struct ieee80211_hw *hw,
 void rtl88e_phy_rf6052_set_ofdm_txpower(struct ieee80211_hw *hw,
 					u8 *ppowerlevel_ofdm,
 					u8 *ppowerlevel_bw20,
+<<<<<<< HEAD
 					u8 *ppowerlevel_bw40, u8 channel);
+=======
+					u8 *ppowerlevel_bw40,
+					u8 channel);
+>>>>>>> v3.18
 bool rtl88e_phy_rf6052_config(struct ieee80211_hw *hw);
 
 #endif

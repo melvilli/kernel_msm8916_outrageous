@@ -16,6 +16,7 @@ struct pxa3xx_nand_timing {
 	unsigned int	tAR;  /* ND_ALE low to ND_nRE low delay */
 };
 
+<<<<<<< HEAD
 struct pxa3xx_nand_cmdset {
 	uint16_t	read1;
 	uint16_t	read2;
@@ -29,6 +30,8 @@ struct pxa3xx_nand_cmdset {
 	uint16_t	lock_status;
 };
 
+=======
+>>>>>>> v3.18
 struct pxa3xx_nand_flash {
 	char		*name;
 	uint32_t	chip_id;
@@ -68,6 +71,15 @@ struct pxa3xx_nand_platform_data {
 	/* indicate how many chip selects will be used */
 	int	num_cs;
 
+<<<<<<< HEAD
+=======
+	/* use an flash-based bad block table */
+	bool	flash_bbt;
+
+	/* requested ECC strength and ECC step size */
+	int ecc_strength, ecc_step_size;
+
+>>>>>>> v3.18
 	const struct mtd_partition		*parts[NUM_CHIP_SELECT];
 	unsigned int				nr_parts[NUM_CHIP_SELECT];
 

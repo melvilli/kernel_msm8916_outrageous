@@ -15,6 +15,11 @@
 #ifndef __ASM_ARCH_POODLE_H
 #define __ASM_ARCH_POODLE_H  1
 
+<<<<<<< HEAD
+=======
+#include "irqs.h" /* PXA_GPIO_TO_IRQ */
+
+>>>>>>> v3.18
 /*
  * GPIOs
  */

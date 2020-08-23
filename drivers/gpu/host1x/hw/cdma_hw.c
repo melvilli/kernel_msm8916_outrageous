@@ -20,10 +20,17 @@
 #include <linux/scatterlist.h>
 #include <linux/dma-mapping.h>
 
+<<<<<<< HEAD
 #include "cdma.h"
 #include "channel.h"
 #include "dev.h"
 #include "debug.h"
+=======
+#include "../cdma.h"
+#include "../channel.h"
+#include "../dev.h"
+#include "../debug.h"
+>>>>>>> v3.18
 
 /*
  * Put the restart at the end of pushbuffer memor
@@ -44,7 +51,11 @@ static void cdma_timeout_cpu_incr(struct host1x_cdma *cdma, u32 getptr,
 	u32 i;
 
 	for (i = 0; i < syncpt_incrs; i++)
+<<<<<<< HEAD
 		host1x_syncpt_cpu_incr(cdma->timeout.syncpt);
+=======
+		host1x_syncpt_incr(cdma->timeout.syncpt);
+>>>>>>> v3.18
 
 	/* after CPU incr, ensure shadow is up to date */
 	host1x_syncpt_load(cdma->timeout.syncpt);
@@ -54,8 +65,13 @@ static void cdma_timeout_cpu_incr(struct host1x_cdma *cdma, u32 getptr,
 		u32 *p = (u32 *)((u32)pb->mapped + getptr);
 		*(p++) = HOST1X_OPCODE_NOP;
 		*(p++) = HOST1X_OPCODE_NOP;
+<<<<<<< HEAD
 		dev_dbg(host1x->dev, "%s: NOP at 0x%x\n", __func__,
 			pb->phys + getptr);
+=======
+		dev_dbg(host1x->dev, "%s: NOP at %#llx\n", __func__,
+			(u64)pb->phys + getptr);
+>>>>>>> v3.18
 		getptr = (getptr + 8) & (pb->size_bytes - 1);
 	}
 	wmb();

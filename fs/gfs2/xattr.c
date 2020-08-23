@@ -13,6 +13,10 @@
 #include <linux/buffer_head.h>
 #include <linux/xattr.h>
 #include <linux/gfs2_ondisk.h>
+<<<<<<< HEAD
+=======
+#include <linux/posix_acl_xattr.h>
+>>>>>>> v3.18
 #include <asm/uaccess.h>
 
 #include "gfs2.h"
@@ -723,6 +727,10 @@ static int ea_alloc_skeleton(struct gfs2_inode *ip, struct gfs2_ea_request *er,
 			     unsigned int blks,
 			     ea_skeleton_call_t skeleton_call, void *private)
 {
+<<<<<<< HEAD
+=======
+	struct gfs2_alloc_parms ap = { .target = blks };
+>>>>>>> v3.18
 	struct buffer_head *dibh;
 	int error;
 
@@ -734,7 +742,11 @@ static int ea_alloc_skeleton(struct gfs2_inode *ip, struct gfs2_ea_request *er,
 	if (error)
 		return error;
 
+<<<<<<< HEAD
 	error = gfs2_inplace_reserve(ip, blks, 0);
+=======
+	error = gfs2_inplace_reserve(ip, &ap);
+>>>>>>> v3.18
 	if (error)
 		goto out_gunlock_q;
 
@@ -1499,7 +1511,12 @@ static const struct xattr_handler gfs2_xattr_security_handler = {
 const struct xattr_handler *gfs2_xattr_handlers[] = {
 	&gfs2_xattr_user_handler,
 	&gfs2_xattr_security_handler,
+<<<<<<< HEAD
 	&gfs2_xattr_system_handler,
+=======
+	&posix_acl_access_xattr_handler,
+	&posix_acl_default_xattr_handler,
+>>>>>>> v3.18
 	NULL,
 };
 

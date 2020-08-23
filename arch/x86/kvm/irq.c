@@ -113,6 +113,10 @@ int kvm_cpu_get_interrupt(struct kvm_vcpu *v)
 
 	return kvm_get_apic_interrupt(v);	/* APIC */
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(kvm_cpu_get_interrupt);
+>>>>>>> v3.18
 
 void kvm_inject_pending_timer_irqs(struct kvm_vcpu *vcpu)
 {

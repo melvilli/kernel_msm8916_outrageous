@@ -94,20 +94,32 @@ EXPORT_SYMBOL(tty_driver_flush_buffer);
  *	@tty: terminal
  *
  *	Indicate that a tty should stop transmitting data down the stack.
+<<<<<<< HEAD
  *	Takes the termios mutex to protect against parallel throttle/unthrottle
+=======
+ *	Takes the termios rwsem to protect against parallel throttle/unthrottle
+>>>>>>> v3.18
  *	and also to ensure the driver can consistently reference its own
  *	termios data at this point when implementing software flow control.
  */
 
 void tty_throttle(struct tty_struct *tty)
 {
+<<<<<<< HEAD
 	mutex_lock(&tty->termios_mutex);
+=======
+	down_write(&tty->termios_rwsem);
+>>>>>>> v3.18
 	/* check TTY_THROTTLED first so it indicates our state */
 	if (!test_and_set_bit(TTY_THROTTLED, &tty->flags) &&
 	    tty->ops->throttle)
 		tty->ops->throttle(tty);
 	tty->flow_change = 0;
+<<<<<<< HEAD
 	mutex_unlock(&tty->termios_mutex);
+=======
+	up_write(&tty->termios_rwsem);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(tty_throttle);
 
@@ -116,7 +128,11 @@ EXPORT_SYMBOL(tty_throttle);
  *	@tty: terminal
  *
  *	Indicate that a tty may continue transmitting data down the stack.
+<<<<<<< HEAD
  *	Takes the termios mutex to protect against parallel throttle/unthrottle
+=======
+ *	Takes the termios rwsem to protect against parallel throttle/unthrottle
+>>>>>>> v3.18
  *	and also to ensure the driver can consistently reference its own
  *	termios data at this point when implementing software flow control.
  *
@@ -126,12 +142,20 @@ EXPORT_SYMBOL(tty_throttle);
 
 void tty_unthrottle(struct tty_struct *tty)
 {
+<<<<<<< HEAD
 	mutex_lock(&tty->termios_mutex);
+=======
+	down_write(&tty->termios_rwsem);
+>>>>>>> v3.18
 	if (test_and_clear_bit(TTY_THROTTLED, &tty->flags) &&
 	    tty->ops->unthrottle)
 		tty->ops->unthrottle(tty);
 	tty->flow_change = 0;
+<<<<<<< HEAD
 	mutex_unlock(&tty->termios_mutex);
+=======
+	up_write(&tty->termios_rwsem);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(tty_unthrottle);
 
@@ -151,7 +175,11 @@ int tty_throttle_safe(struct tty_struct *tty)
 {
 	int ret = 0;
 
+<<<<<<< HEAD
 	mutex_lock(&tty->termios_mutex);
+=======
+	mutex_lock(&tty->throttle_mutex);
+>>>>>>> v3.18
 	if (!test_bit(TTY_THROTTLED, &tty->flags)) {
 		if (tty->flow_change != TTY_THROTTLE_SAFE)
 			ret = 1;
@@ -161,7 +189,11 @@ int tty_throttle_safe(struct tty_struct *tty)
 				tty->ops->throttle(tty);
 		}
 	}
+<<<<<<< HEAD
 	mutex_unlock(&tty->termios_mutex);
+=======
+	mutex_unlock(&tty->throttle_mutex);
+>>>>>>> v3.18
 
 	return ret;
 }
@@ -182,7 +214,11 @@ int tty_unthrottle_safe(struct tty_struct *tty)
 {
 	int ret = 0;
 
+<<<<<<< HEAD
 	mutex_lock(&tty->termios_mutex);
+=======
+	mutex_lock(&tty->throttle_mutex);
+>>>>>>> v3.18
 	if (test_bit(TTY_THROTTLED, &tty->flags)) {
 		if (tty->flow_change != TTY_UNTHROTTLE_SAFE)
 			ret = 1;
@@ -192,7 +228,11 @@ int tty_unthrottle_safe(struct tty_struct *tty)
 				tty->ops->unthrottle(tty);
 		}
 	}
+<<<<<<< HEAD
 	mutex_unlock(&tty->termios_mutex);
+=======
+	mutex_unlock(&tty->throttle_mutex);
+>>>>>>> v3.18
 
 	return ret;
 }
@@ -217,6 +257,7 @@ void tty_wait_until_sent(struct tty_struct *tty, long timeout)
 #endif
 	if (!timeout)
 		timeout = MAX_SCHEDULE_TIMEOUT;
+<<<<<<< HEAD
 
 	if (wait_event_interruptible_timeout(tty->write_wait,
 			!tty_chars_in_buffer(tty), timeout) < 0) {
@@ -228,6 +269,13 @@ void tty_wait_until_sent(struct tty_struct *tty, long timeout)
 
 	if (tty->ops->wait_until_sent)
 		tty->ops->wait_until_sent(tty, timeout);
+=======
+	if (wait_event_interruptible_timeout(tty->write_wait,
+			!tty_chars_in_buffer(tty), timeout) >= 0) {
+		if (tty->ops->wait_until_sent)
+			tty->ops->wait_until_sent(tty, timeout);
+	}
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(tty_wait_until_sent);
 
@@ -408,7 +456,11 @@ void tty_termios_encode_baud_rate(struct ktermios *termios,
 
 #ifdef BOTHER
 	/* If the user asked for a precise weird speed give a precise weird
+<<<<<<< HEAD
 	   answer. If they asked for a Bfoo speed they many have problems
+=======
+	   answer. If they asked for a Bfoo speed they may have problems
+>>>>>>> v3.18
 	   digesting non-exact replies so fuzz a bit */
 
 	if ((termios->c_cflag & CBAUD) == BOTHER)
@@ -474,7 +526,11 @@ EXPORT_SYMBOL_GPL(tty_termios_encode_baud_rate);
  *	@obad: output baud rate
  *
  *	Update the current termios data for the tty with the new speed
+<<<<<<< HEAD
  *	settings. The caller must hold the termios_mutex for the tty in
+=======
+ *	settings. The caller must hold the termios_rwsem for the tty in
+>>>>>>> v3.18
  *	question.
  */
 
@@ -534,7 +590,11 @@ EXPORT_SYMBOL(tty_termios_hw_change);
  *	is a bit of layering violation here with n_tty in terms of the
  *	internal knowledge of this function.
  *
+<<<<<<< HEAD
  *	Locking: termios_mutex
+=======
+ *	Locking: termios_rwsem
+>>>>>>> v3.18
  */
 
 int tty_set_termios(struct tty_struct *tty, struct ktermios *new_termios)
@@ -550,7 +610,11 @@ int tty_set_termios(struct tty_struct *tty, struct ktermios *new_termios)
 
 	/* FIXME: we need to decide on some locking/ordering semantics
 	   for the set_termios notification eventually */
+<<<<<<< HEAD
 	mutex_lock(&tty->termios_mutex);
+=======
+	down_write(&tty->termios_rwsem);
+>>>>>>> v3.18
 	old_termios = tty->termios;
 	tty->termios = *new_termios;
 	unset_locked_termios(&tty->termios, &old_termios, &tty->termios_locked);
@@ -592,7 +656,11 @@ int tty_set_termios(struct tty_struct *tty, struct ktermios *new_termios)
 			(ld->ops->set_termios)(tty, &old_termios);
 		tty_ldisc_deref(ld);
 	}
+<<<<<<< HEAD
 	mutex_unlock(&tty->termios_mutex);
+=======
+	up_write(&tty->termios_rwsem);
+>>>>>>> v3.18
 	return 0;
 }
 EXPORT_SYMBOL_GPL(tty_set_termios);
@@ -607,7 +675,11 @@ EXPORT_SYMBOL_GPL(tty_set_termios);
  *	functions before using tty_set_termios to do the actual changes.
  *
  *	Locking:
+<<<<<<< HEAD
  *		Called functions take ldisc and termios_mutex locks
+=======
+ *		Called functions take ldisc and termios_rwsem locks
+>>>>>>> v3.18
  */
 
 static int set_termios(struct tty_struct *tty, void __user *arg, int opt)
@@ -619,9 +691,15 @@ static int set_termios(struct tty_struct *tty, void __user *arg, int opt)
 	if (retval)
 		return retval;
 
+<<<<<<< HEAD
 	mutex_lock(&tty->termios_mutex);
 	tmp_termios = tty->termios;
 	mutex_unlock(&tty->termios_mutex);
+=======
+	down_read(&tty->termios_rwsem);
+	tmp_termios = tty->termios;
+	up_read(&tty->termios_rwsem);
+>>>>>>> v3.18
 
 	if (opt & TERMIOS_TERMIO) {
 		if (user_termio_to_kernel_termios(&tmp_termios,
@@ -673,16 +751,28 @@ static int set_termios(struct tty_struct *tty, void __user *arg, int opt)
 
 static void copy_termios(struct tty_struct *tty, struct ktermios *kterm)
 {
+<<<<<<< HEAD
 	mutex_lock(&tty->termios_mutex);
 	*kterm = tty->termios;
 	mutex_unlock(&tty->termios_mutex);
+=======
+	down_read(&tty->termios_rwsem);
+	*kterm = tty->termios;
+	up_read(&tty->termios_rwsem);
+>>>>>>> v3.18
 }
 
 static void copy_termios_locked(struct tty_struct *tty, struct ktermios *kterm)
 {
+<<<<<<< HEAD
 	mutex_lock(&tty->termios_mutex);
 	*kterm = tty->termios_locked;
 	mutex_unlock(&tty->termios_mutex);
+=======
+	down_read(&tty->termios_rwsem);
+	*kterm = tty->termios_locked;
+	up_read(&tty->termios_rwsem);
+>>>>>>> v3.18
 }
 
 static int get_termio(struct tty_struct *tty, struct termio __user *termio)
@@ -729,10 +819,17 @@ static int set_termiox(struct tty_struct *tty, void __user *arg, int opt)
 			return -ERESTARTSYS;
 	}
 
+<<<<<<< HEAD
 	mutex_lock(&tty->termios_mutex);
 	if (tty->ops->set_termiox)
 		tty->ops->set_termiox(tty, &tnew);
 	mutex_unlock(&tty->termios_mutex);
+=======
+	down_write(&tty->termios_rwsem);
+	if (tty->ops->set_termiox)
+		tty->ops->set_termiox(tty, &tnew);
+	up_write(&tty->termios_rwsem);
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -767,13 +864,21 @@ static int get_sgttyb(struct tty_struct *tty, struct sgttyb __user *sgttyb)
 {
 	struct sgttyb tmp;
 
+<<<<<<< HEAD
 	mutex_lock(&tty->termios_mutex);
+=======
+	down_read(&tty->termios_rwsem);
+>>>>>>> v3.18
 	tmp.sg_ispeed = tty->termios.c_ispeed;
 	tmp.sg_ospeed = tty->termios.c_ospeed;
 	tmp.sg_erase = tty->termios.c_cc[VERASE];
 	tmp.sg_kill = tty->termios.c_cc[VKILL];
 	tmp.sg_flags = get_sgflags(tty);
+<<<<<<< HEAD
 	mutex_unlock(&tty->termios_mutex);
+=======
+	up_read(&tty->termios_rwsem);
+>>>>>>> v3.18
 
 	return copy_to_user(sgttyb, &tmp, sizeof(tmp)) ? -EFAULT : 0;
 }
@@ -812,7 +917,11 @@ static void set_sgflags(struct ktermios *termios, int flags)
  *	Updates a terminal from the legacy BSD style terminal information
  *	structure.
  *
+<<<<<<< HEAD
  *	Locking: termios_mutex
+=======
+ *	Locking: termios_rwsem
+>>>>>>> v3.18
  */
 
 static int set_sgttyb(struct tty_struct *tty, struct sgttyb __user *sgttyb)
@@ -828,7 +937,11 @@ static int set_sgttyb(struct tty_struct *tty, struct sgttyb __user *sgttyb)
 	if (copy_from_user(&tmp, sgttyb, sizeof(tmp)))
 		return -EFAULT;
 
+<<<<<<< HEAD
 	mutex_lock(&tty->termios_mutex);
+=======
+	down_write(&tty->termios_rwsem);
+>>>>>>> v3.18
 	termios = tty->termios;
 	termios.c_cc[VERASE] = tmp.sg_erase;
 	termios.c_cc[VKILL] = tmp.sg_kill;
@@ -838,7 +951,11 @@ static int set_sgttyb(struct tty_struct *tty, struct sgttyb __user *sgttyb)
 	tty_termios_encode_baud_rate(&termios, termios.c_ispeed,
 						termios.c_ospeed);
 #endif
+<<<<<<< HEAD
 	mutex_unlock(&tty->termios_mutex);
+=======
+	up_write(&tty->termios_rwsem);
+>>>>>>> v3.18
 	tty_set_termios(tty, &termios);
 	return 0;
 }
@@ -849,14 +966,22 @@ static int get_tchars(struct tty_struct *tty, struct tchars __user *tchars)
 {
 	struct tchars tmp;
 
+<<<<<<< HEAD
 	mutex_lock(&tty->termios_mutex);
+=======
+	down_read(&tty->termios_rwsem);
+>>>>>>> v3.18
 	tmp.t_intrc = tty->termios.c_cc[VINTR];
 	tmp.t_quitc = tty->termios.c_cc[VQUIT];
 	tmp.t_startc = tty->termios.c_cc[VSTART];
 	tmp.t_stopc = tty->termios.c_cc[VSTOP];
 	tmp.t_eofc = tty->termios.c_cc[VEOF];
 	tmp.t_brkc = tty->termios.c_cc[VEOL2];	/* what is brkc anyway? */
+<<<<<<< HEAD
 	mutex_unlock(&tty->termios_mutex);
+=======
+	up_read(&tty->termios_rwsem);
+>>>>>>> v3.18
 	return copy_to_user(tchars, &tmp, sizeof(tmp)) ? -EFAULT : 0;
 }
 
@@ -866,14 +991,22 @@ static int set_tchars(struct tty_struct *tty, struct tchars __user *tchars)
 
 	if (copy_from_user(&tmp, tchars, sizeof(tmp)))
 		return -EFAULT;
+<<<<<<< HEAD
 	mutex_lock(&tty->termios_mutex);
+=======
+	down_write(&tty->termios_rwsem);
+>>>>>>> v3.18
 	tty->termios.c_cc[VINTR] = tmp.t_intrc;
 	tty->termios.c_cc[VQUIT] = tmp.t_quitc;
 	tty->termios.c_cc[VSTART] = tmp.t_startc;
 	tty->termios.c_cc[VSTOP] = tmp.t_stopc;
 	tty->termios.c_cc[VEOF] = tmp.t_eofc;
 	tty->termios.c_cc[VEOL2] = tmp.t_brkc;	/* what is brkc anyway? */
+<<<<<<< HEAD
 	mutex_unlock(&tty->termios_mutex);
+=======
+	up_write(&tty->termios_rwsem);
+>>>>>>> v3.18
 	return 0;
 }
 #endif
@@ -883,7 +1016,11 @@ static int get_ltchars(struct tty_struct *tty, struct ltchars __user *ltchars)
 {
 	struct ltchars tmp;
 
+<<<<<<< HEAD
 	mutex_lock(&tty->termios_mutex);
+=======
+	down_read(&tty->termios_rwsem);
+>>>>>>> v3.18
 	tmp.t_suspc = tty->termios.c_cc[VSUSP];
 	/* what is dsuspc anyway? */
 	tmp.t_dsuspc = tty->termios.c_cc[VSUSP];
@@ -892,7 +1029,11 @@ static int get_ltchars(struct tty_struct *tty, struct ltchars __user *ltchars)
 	tmp.t_flushc = tty->termios.c_cc[VEOL2];
 	tmp.t_werasc = tty->termios.c_cc[VWERASE];
 	tmp.t_lnextc = tty->termios.c_cc[VLNEXT];
+<<<<<<< HEAD
 	mutex_unlock(&tty->termios_mutex);
+=======
+	up_read(&tty->termios_rwsem);
+>>>>>>> v3.18
 	return copy_to_user(ltchars, &tmp, sizeof(tmp)) ? -EFAULT : 0;
 }
 
@@ -903,7 +1044,11 @@ static int set_ltchars(struct tty_struct *tty, struct ltchars __user *ltchars)
 	if (copy_from_user(&tmp, ltchars, sizeof(tmp)))
 		return -EFAULT;
 
+<<<<<<< HEAD
 	mutex_lock(&tty->termios_mutex);
+=======
+	down_write(&tty->termios_rwsem);
+>>>>>>> v3.18
 	tty->termios.c_cc[VSUSP] = tmp.t_suspc;
 	/* what is dsuspc anyway? */
 	tty->termios.c_cc[VEOL2] = tmp.t_dsuspc;
@@ -912,12 +1057,17 @@ static int set_ltchars(struct tty_struct *tty, struct ltchars __user *ltchars)
 	tty->termios.c_cc[VEOL2] = tmp.t_flushc;
 	tty->termios.c_cc[VWERASE] = tmp.t_werasc;
 	tty->termios.c_cc[VLNEXT] = tmp.t_lnextc;
+<<<<<<< HEAD
 	mutex_unlock(&tty->termios_mutex);
+=======
+	up_write(&tty->termios_rwsem);
+>>>>>>> v3.18
 	return 0;
 }
 #endif
 
 /**
+<<<<<<< HEAD
  *	send_prio_char		-	send priority character
  *
  *	Send a high priority character to the tty even if stopped
@@ -947,12 +1097,18 @@ static int send_prio_char(struct tty_struct *tty, char ch)
 }
 
 /**
+=======
+>>>>>>> v3.18
  *	tty_change_softcar	-	carrier change ioctl helper
  *	@tty: tty to update
  *	@arg: enable/disable CLOCAL
  *
  *	Perform a change to the CLOCAL state and call into the driver
+<<<<<<< HEAD
  *	layer to make it visible. All done with the termios mutex
+=======
+ *	layer to make it visible. All done with the termios rwsem
+>>>>>>> v3.18
  */
 
 static int tty_change_softcar(struct tty_struct *tty, int arg)
@@ -961,7 +1117,11 @@ static int tty_change_softcar(struct tty_struct *tty, int arg)
 	int bit = arg ? CLOCAL : 0;
 	struct ktermios old;
 
+<<<<<<< HEAD
 	mutex_lock(&tty->termios_mutex);
+=======
+	down_write(&tty->termios_rwsem);
+>>>>>>> v3.18
 	old = tty->termios;
 	tty->termios.c_cflag &= ~CLOCAL;
 	tty->termios.c_cflag |= bit;
@@ -969,7 +1129,11 @@ static int tty_change_softcar(struct tty_struct *tty, int arg)
 		tty->ops->set_termios(tty, &old);
 	if ((tty->termios.c_cflag & CLOCAL) != bit)
 		ret = -EINVAL;
+<<<<<<< HEAD
 	mutex_unlock(&tty->termios_mutex);
+=======
+	up_write(&tty->termios_rwsem);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -1072,9 +1236,15 @@ int tty_mode_ioctl(struct tty_struct *tty, struct file *file,
 		if (user_termios_to_kernel_termios(&kterm,
 					       (struct termios __user *) arg))
 			return -EFAULT;
+<<<<<<< HEAD
 		mutex_lock(&real_tty->termios_mutex);
 		real_tty->termios_locked = kterm;
 		mutex_unlock(&real_tty->termios_mutex);
+=======
+		down_write(&real_tty->termios_rwsem);
+		real_tty->termios_locked = kterm;
+		up_write(&real_tty->termios_rwsem);
+>>>>>>> v3.18
 		return 0;
 #else
 	case TIOCGLCKTRMIOS:
@@ -1089,9 +1259,15 @@ int tty_mode_ioctl(struct tty_struct *tty, struct file *file,
 		if (user_termios_to_kernel_termios_1(&kterm,
 					       (struct termios __user *) arg))
 			return -EFAULT;
+<<<<<<< HEAD
 		mutex_lock(&real_tty->termios_mutex);
 		real_tty->termios_locked = kterm;
 		mutex_unlock(&real_tty->termios_mutex);
+=======
+		down_write(&real_tty->termios_rwsem);
+		real_tty->termios_locked = kterm;
+		up_write(&real_tty->termios_rwsem);
+>>>>>>> v3.18
 		return ret;
 #endif
 #ifdef TCGETX
@@ -1099,9 +1275,15 @@ int tty_mode_ioctl(struct tty_struct *tty, struct file *file,
 		struct termiox ktermx;
 		if (real_tty->termiox == NULL)
 			return -EINVAL;
+<<<<<<< HEAD
 		mutex_lock(&real_tty->termios_mutex);
 		memcpy(&ktermx, real_tty->termiox, sizeof(struct termiox));
 		mutex_unlock(&real_tty->termios_mutex);
+=======
+		down_read(&real_tty->termios_rwsem);
+		memcpy(&ktermx, real_tty->termiox, sizeof(struct termiox));
+		up_read(&real_tty->termios_rwsem);
+>>>>>>> v3.18
 		if (copy_to_user(p, &ktermx, sizeof(struct termiox)))
 			ret = -EFAULT;
 		return ret;
@@ -1183,6 +1365,7 @@ int n_tty_ioctl_helper(struct tty_struct *tty, struct file *file,
 			return retval;
 		switch (arg) {
 		case TCOOFF:
+<<<<<<< HEAD
 			if (!tty->flow_stopped) {
 				tty->flow_stopped = 1;
 				stop_tty(tty);
@@ -1201,11 +1384,43 @@ int n_tty_ioctl_helper(struct tty_struct *tty, struct file *file,
 		case TCION:
 			if (START_CHAR(tty) != __DISABLED_CHAR)
 				return send_prio_char(tty, START_CHAR(tty));
+=======
+			spin_lock_irq(&tty->flow_lock);
+			if (!tty->flow_stopped) {
+				tty->flow_stopped = 1;
+				__stop_tty(tty);
+			}
+			spin_unlock_irq(&tty->flow_lock);
+			break;
+		case TCOON:
+			spin_lock_irq(&tty->flow_lock);
+			if (tty->flow_stopped) {
+				tty->flow_stopped = 0;
+				__start_tty(tty);
+			}
+			spin_unlock_irq(&tty->flow_lock);
+			break;
+		case TCIOFF:
+			down_read(&tty->termios_rwsem);
+			if (STOP_CHAR(tty) != __DISABLED_CHAR)
+				retval = tty_send_xchar(tty, STOP_CHAR(tty));
+			up_read(&tty->termios_rwsem);
+			break;
+		case TCION:
+			down_read(&tty->termios_rwsem);
+			if (START_CHAR(tty) != __DISABLED_CHAR)
+				retval = tty_send_xchar(tty, START_CHAR(tty));
+			up_read(&tty->termios_rwsem);
+>>>>>>> v3.18
 			break;
 		default:
 			return -EINVAL;
 		}
+<<<<<<< HEAD
 		return 0;
+=======
+		return retval;
+>>>>>>> v3.18
 	case TCFLSH:
 		retval = tty_check_change(tty);
 		if (retval)

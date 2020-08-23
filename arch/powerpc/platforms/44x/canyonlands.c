@@ -33,7 +33,11 @@
 
 #define BCSR_USB_EN	0x11
 
+<<<<<<< HEAD
 static __initdata struct of_device_id ppc460ex_of_bus[] = {
+=======
+static const struct of_device_id ppc460ex_of_bus[] __initconst = {
+>>>>>>> v3.18
 	{ .compatible = "ibm,plb4", },
 	{ .compatible = "ibm,opb", },
 	{ .compatible = "ibm,ebc", },

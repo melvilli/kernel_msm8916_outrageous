@@ -17,6 +17,10 @@
 #include <linux/export.h>
 #include <linux/ctype.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
+=======
+#include <linux/major.h>
+>>>>>>> v3.18
 
 /*
  * compare superblocks to see if they're equivalent

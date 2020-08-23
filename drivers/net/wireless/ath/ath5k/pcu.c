@@ -144,11 +144,19 @@ ath5k_hw_get_frame_duration(struct ath5k_hw *ah, enum ieee80211_band band,
 		sifs = AR5K_INIT_SIFS_HALF_RATE;
 		preamble *= 2;
 		sym_time *= 2;
+<<<<<<< HEAD
+=======
+		bitrate = DIV_ROUND_UP(bitrate, 2);
+>>>>>>> v3.18
 		break;
 	case AR5K_BWMODE_5MHZ:
 		sifs = AR5K_INIT_SIFS_QUARTER_RATE;
 		preamble *= 4;
 		sym_time *= 4;
+<<<<<<< HEAD
+=======
+		bitrate = DIV_ROUND_UP(bitrate, 4);
+>>>>>>> v3.18
 		break;
 	default:
 		sifs = AR5K_INIT_SIFS_DEFAULT_BG;

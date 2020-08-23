@@ -356,7 +356,11 @@ static int n2_hash_async_finup(struct ahash_request *req)
 
 static int n2_hash_cra_init(struct crypto_tfm *tfm)
 {
+<<<<<<< HEAD
 	const char *fallback_driver_name = tfm->__crt_alg->cra_name;
+=======
+	const char *fallback_driver_name = crypto_tfm_alg_name(tfm);
+>>>>>>> v3.18
 	struct crypto_ahash *ahash = __crypto_ahash_cast(tfm);
 	struct n2_hash_ctx *ctx = crypto_ahash_ctx(ahash);
 	struct crypto_ahash *fallback_tfm;
@@ -391,7 +395,11 @@ static void n2_hash_cra_exit(struct crypto_tfm *tfm)
 
 static int n2_hmac_cra_init(struct crypto_tfm *tfm)
 {
+<<<<<<< HEAD
 	const char *fallback_driver_name = tfm->__crt_alg->cra_name;
+=======
+	const char *fallback_driver_name = crypto_tfm_alg_name(tfm);
+>>>>>>> v3.18
 	struct crypto_ahash *ahash = __crypto_ahash_cast(tfm);
 	struct n2_hmac_ctx *ctx = crypto_ahash_ctx(ahash);
 	struct n2_hmac_alg *n2alg = n2_hmac_alg(tfm);
@@ -445,10 +453,14 @@ static int n2_hmac_async_setkey(struct crypto_ahash *tfm, const u8 *key,
 	struct n2_hmac_ctx *ctx = crypto_ahash_ctx(tfm);
 	struct crypto_shash *child_shash = ctx->child_shash;
 	struct crypto_ahash *fallback_tfm;
+<<<<<<< HEAD
 	struct {
 		struct shash_desc shash;
 		char ctx[crypto_shash_descsize(child_shash)];
 	} desc;
+=======
+	SHASH_DESC_ON_STACK(shash, child_shash);
+>>>>>>> v3.18
 	int err, bs, ds;
 
 	fallback_tfm = ctx->base.fallback_tfm;
@@ -456,15 +468,24 @@ static int n2_hmac_async_setkey(struct crypto_ahash *tfm, const u8 *key,
 	if (err)
 		return err;
 
+<<<<<<< HEAD
 	desc.shash.tfm = child_shash;
 	desc.shash.flags = crypto_ahash_get_flags(tfm) &
+=======
+	shash->tfm = child_shash;
+	shash->flags = crypto_ahash_get_flags(tfm) &
+>>>>>>> v3.18
 		CRYPTO_TFM_REQ_MAY_SLEEP;
 
 	bs = crypto_shash_blocksize(child_shash);
 	ds = crypto_shash_digestsize(child_shash);
 	BUG_ON(ds > N2_HASH_KEY_MAX);
 	if (keylen > bs) {
+<<<<<<< HEAD
 		err = crypto_shash_digest(&desc.shash, key, keylen,
+=======
+		err = crypto_shash_digest(shash, key, keylen,
+>>>>>>> v3.18
 					  ctx->hash_key);
 		if (err)
 			return err;

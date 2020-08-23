@@ -24,6 +24,7 @@ menuconfig STAGING
 
 if STAGING
 
+<<<<<<< HEAD
 source "drivers/staging/et131x/Kconfig"
 
 source "drivers/staging/slicoss/Kconfig"
@@ -36,38 +37,62 @@ source "drivers/staging/wlan-ng/Kconfig"
 
 source "drivers/staging/echo/Kconfig"
 
+=======
+source "drivers/staging/slicoss/Kconfig"
+
+source "drivers/staging/wlan-ng/Kconfig"
+
+>>>>>>> v3.18
 source "drivers/staging/comedi/Kconfig"
 
 source "drivers/staging/olpc_dcon/Kconfig"
 
+<<<<<<< HEAD
 source "drivers/staging/asus_oled/Kconfig"
 
 source "drivers/staging/panel/Kconfig"
 
 source "drivers/staging/rtl8187se/Kconfig"
 
+=======
+source "drivers/staging/panel/Kconfig"
+
+>>>>>>> v3.18
 source "drivers/staging/rtl8192u/Kconfig"
 
 source "drivers/staging/rtl8192e/Kconfig"
 
 source "drivers/staging/rtl8712/Kconfig"
 
+<<<<<<< HEAD
 source "drivers/staging/rts5139/Kconfig"
 
 source "drivers/staging/frontier/Kconfig"
 
 source "drivers/staging/phison/Kconfig"
+=======
+source "drivers/staging/rtl8188eu/Kconfig"
+
+source "drivers/staging/rtl8723au/Kconfig"
+
+source "drivers/staging/rts5208/Kconfig"
+>>>>>>> v3.18
 
 source "drivers/staging/line6/Kconfig"
 
 source "drivers/staging/octeon/Kconfig"
 
+<<<<<<< HEAD
 source "drivers/staging/serqt_usb2/Kconfig"
+=======
+source "drivers/staging/octeon-usb/Kconfig"
+>>>>>>> v3.18
 
 source "drivers/staging/vt6655/Kconfig"
 
 source "drivers/staging/vt6656/Kconfig"
 
+<<<<<<< HEAD
 source "drivers/staging/sep/Kconfig"
 
 source "drivers/staging/iio/Kconfig"
@@ -91,6 +116,13 @@ source "drivers/staging/quickstart/Kconfig"
 source "drivers/staging/sbe-2t3e3/Kconfig"
 
 source "drivers/staging/keucr/Kconfig"
+=======
+source "drivers/staging/iio/Kconfig"
+
+source "drivers/staging/xgifb/Kconfig"
+
+source "drivers/staging/emxx_udc/Kconfig"
+>>>>>>> v3.18
 
 source "drivers/staging/bcm/Kconfig"
 
@@ -108,10 +140,16 @@ source "drivers/staging/media/Kconfig"
 
 source "drivers/staging/android/Kconfig"
 
+<<<<<<< HEAD
+=======
+source "drivers/staging/board/Kconfig"
+
+>>>>>>> v3.18
 source "drivers/staging/ozwpan/Kconfig"
 
 source "drivers/staging/gdm72xx/Kconfig"
 
+<<<<<<< HEAD
 source "drivers/staging/csr/Kconfig"
 
 source "drivers/staging/ti-soc-thermal/Kconfig"
@@ -137,5 +175,30 @@ source "drivers/staging/netlogic/Kconfig"
 source "drivers/staging/dwc2/Kconfig"
 
 source "drivers/staging/prima/Kconfig"
+=======
+source "drivers/staging/gdm724x/Kconfig"
+
+source "drivers/staging/imx-drm/Kconfig"
+
+source "drivers/staging/fwserial/Kconfig"
+
+source "drivers/staging/goldfish/Kconfig"
+
+source "drivers/staging/netlogic/Kconfig"
+
+source "drivers/staging/mt29f_spinand/Kconfig"
+
+source "drivers/staging/lustre/Kconfig"
+
+source "drivers/staging/dgnc/Kconfig"
+
+source "drivers/staging/dgap/Kconfig"
+
+source "drivers/staging/gs_fpgaboot/Kconfig"
+
+source "drivers/staging/skein/Kconfig"
+
+source "drivers/staging/unisys/Kconfig"
+>>>>>>> v3.18
 
 endif # STAGING

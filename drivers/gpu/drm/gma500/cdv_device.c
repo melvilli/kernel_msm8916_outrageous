@@ -26,6 +26,10 @@
 #include "psb_intel_reg.h"
 #include "intel_bios.h"
 #include "cdv_device.h"
+<<<<<<< HEAD
+=======
+#include "gma_device.h"
+>>>>>>> v3.18
 
 #define VGA_SR_INDEX		0x3c4
 #define VGA_SR_DATA		0x3c5
@@ -426,6 +430,7 @@ static int cdv_power_up(struct drm_device *dev)
 	return 0;
 }
 
+<<<<<<< HEAD
 /* FIXME ? - shared with Poulsbo */
 static void cdv_get_core_freq(struct drm_device *dev)
 {
@@ -463,6 +468,8 @@ static void cdv_get_core_freq(struct drm_device *dev)
 	}
 }
 
+=======
+>>>>>>> v3.18
 static void cdv_hotplug_work_func(struct work_struct *work)
 {
         struct drm_psb_private *dev_priv = container_of(work, struct drm_psb_private,
@@ -618,7 +625,11 @@ static int cdv_chip_setup(struct drm_device *dev)
 	if (pci_enable_msi(dev->pdev))
 		dev_warn(dev->dev, "Enabling MSI failed!\n");
 	dev_priv->regmap = cdv_regmap;
+<<<<<<< HEAD
 	cdv_get_core_freq(dev);
+=======
+	gma_get_core_freq(dev);
+>>>>>>> v3.18
 	psb_intel_opregion_init(dev);
 	psb_intel_init_bios(dev);
 	cdv_hotplug_enable(dev, false);
@@ -634,6 +645,10 @@ const struct psb_ops cdv_chip_ops = {
 	.crtcs = 2,
 	.hdmi_mask = (1 << 0) | (1 << 1),
 	.lvds_mask = (1 << 1),
+<<<<<<< HEAD
+=======
+	.sdvo_mask = (1 << 0),
+>>>>>>> v3.18
 	.cursor_needs_phys = 0,
 	.sgx_offset = MRST_SGX_OFFSET,
 	.chip_setup = cdv_chip_setup,
@@ -641,6 +656,10 @@ const struct psb_ops cdv_chip_ops = {
 
 	.crtc_helper = &cdv_intel_helper_funcs,
 	.crtc_funcs = &cdv_intel_crtc_funcs,
+<<<<<<< HEAD
+=======
+	.clock_funcs = &cdv_clock_funcs,
+>>>>>>> v3.18
 
 	.output_init = cdv_output_init,
 	.hotplug = cdv_hotplug_event,
@@ -655,4 +674,9 @@ const struct psb_ops cdv_chip_ops = {
 	.restore_regs = cdv_restore_display_registers,
 	.power_down = cdv_power_down,
 	.power_up = cdv_power_up,
+<<<<<<< HEAD
+=======
+	.update_wm = cdv_update_wm,
+	.disable_sr = cdv_disable_sr,
+>>>>>>> v3.18
 };

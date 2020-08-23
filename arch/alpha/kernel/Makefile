@@ -16,6 +16,11 @@ obj-$(CONFIG_PCI)	+= pci.o pci_iommu.o pci-sysfs.o
 obj-$(CONFIG_SRM_ENV)	+= srm_env.o
 obj-$(CONFIG_MODULES)	+= module.o
 obj-$(CONFIG_PERF_EVENTS) += perf_event.o
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_RTC_DRV_ALPHA) += rtc.o
+obj-$(CONFIG_AUDIT)	+= audit.o
+>>>>>>> v3.18
 
 ifdef CONFIG_ALPHA_GENERIC
 

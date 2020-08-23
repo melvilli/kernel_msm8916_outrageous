@@ -157,7 +157,11 @@ static inline unsigned long __ipipe_ffnz(unsigned long ul)
 }
 
 #define __ipipe_do_root_xirq(ipd, irq)					\
+<<<<<<< HEAD
 	((ipd)->irqs[irq].handler(irq, &__raw_get_cpu_var(__ipipe_tick_regs)))
+=======
+	((ipd)->irqs[irq].handler(irq, raw_cpu_ptr(&__ipipe_tick_regs)))
+>>>>>>> v3.18
 
 #define __ipipe_run_irqtail(irq)  /* Must be a macro */			\
 	do {								\

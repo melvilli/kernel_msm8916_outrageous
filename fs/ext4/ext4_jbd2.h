@@ -102,9 +102,15 @@
 #define EXT4_QUOTA_INIT_BLOCKS(sb) 0
 #define EXT4_QUOTA_DEL_BLOCKS(sb) 0
 #endif
+<<<<<<< HEAD
 #define EXT4_MAXQUOTAS_TRANS_BLOCKS(sb) (MAXQUOTAS*EXT4_QUOTA_TRANS_BLOCKS(sb))
 #define EXT4_MAXQUOTAS_INIT_BLOCKS(sb) (MAXQUOTAS*EXT4_QUOTA_INIT_BLOCKS(sb))
 #define EXT4_MAXQUOTAS_DEL_BLOCKS(sb) (MAXQUOTAS*EXT4_QUOTA_DEL_BLOCKS(sb))
+=======
+#define EXT4_MAXQUOTAS_TRANS_BLOCKS(sb) (EXT4_MAXQUOTAS*EXT4_QUOTA_TRANS_BLOCKS(sb))
+#define EXT4_MAXQUOTAS_INIT_BLOCKS(sb) (EXT4_MAXQUOTAS*EXT4_QUOTA_INIT_BLOCKS(sb))
+#define EXT4_MAXQUOTAS_DEL_BLOCKS(sb) (EXT4_MAXQUOTAS*EXT4_QUOTA_DEL_BLOCKS(sb))
+>>>>>>> v3.18
 
 static inline int ext4_jbd2_credits_xattr(struct inode *inode)
 {
@@ -134,7 +140,12 @@ static inline int ext4_jbd2_credits_xattr(struct inode *inode)
 #define EXT4_HT_MIGRATE          8
 #define EXT4_HT_MOVE_EXTENTS     9
 #define EXT4_HT_XATTR           10
+<<<<<<< HEAD
 #define EXT4_HT_MAX             11
+=======
+#define EXT4_HT_EXT_CONVERT     11
+#define EXT4_HT_MAX             12
+>>>>>>> v3.18
 
 /**
  *   struct ext4_journal_cb_entry - Base structure for callback information.
@@ -196,7 +207,11 @@ static inline void ext4_journal_callback_add(handle_t *handle,
  * ext4_journal_callback_del: delete a registered callback
  * @handle: active journal transaction handle on which callback was registered
  * @jce: registered journal callback entry to unregister
+<<<<<<< HEAD
  * Return true if object was sucessfully removed
+=======
+ * Return true if object was successfully removed
+>>>>>>> v3.18
  */
 static inline bool ext4_journal_callback_try_del(handle_t *handle,
 					     struct ext4_journal_cb_entry *jce)
@@ -230,10 +245,13 @@ int ext4_mark_inode_dirty(handle_t *handle, struct inode *inode);
 /*
  * Wrapper functions with which ext4 calls into JBD.
  */
+<<<<<<< HEAD
 void ext4_journal_abort_handle(const char *caller, unsigned int line,
 			       const char *err_fn,
 		struct buffer_head *bh, handle_t *handle, int err);
 
+=======
+>>>>>>> v3.18
 int __ext4_journal_get_write_access(const char *where, unsigned int line,
 				    handle_t *handle, struct buffer_head *bh);
 
@@ -265,7 +283,11 @@ int __ext4_handle_dirty_super(const char *where, unsigned int line,
 	__ext4_handle_dirty_super(__func__, __LINE__, (handle), (sb))
 
 handle_t *__ext4_journal_start_sb(struct super_block *sb, unsigned int line,
+<<<<<<< HEAD
 				  int type, int nblocks);
+=======
+				  int type, int blocks, int rsv_blocks);
+>>>>>>> v3.18
 int __ext4_journal_stop(const char *where, unsigned int line, handle_t *handle);
 
 #define EXT4_NOJOURNAL_MAX_REF_COUNT ((unsigned long) 4096)
@@ -300,6 +322,7 @@ static inline int ext4_handle_has_enough_credits(handle_t *handle, int needed)
 }
 
 #define ext4_journal_start_sb(sb, type, nblocks)			\
+<<<<<<< HEAD
 	__ext4_journal_start_sb((sb), __LINE__, (type), (nblocks))
 
 #define ext4_journal_start(inode, type, nblocks)			\
@@ -310,11 +333,42 @@ static inline handle_t *__ext4_journal_start(struct inode *inode,
 					     int nblocks)
 {
 	return __ext4_journal_start_sb(inode->i_sb, line, type, nblocks);
+=======
+	__ext4_journal_start_sb((sb), __LINE__, (type), (nblocks), 0)
+
+#define ext4_journal_start(inode, type, nblocks)			\
+	__ext4_journal_start((inode), __LINE__, (type), (nblocks), 0)
+
+#define ext4_journal_start_with_reserve(inode, type, blocks, rsv_blocks) \
+	__ext4_journal_start((inode), __LINE__, (type), (blocks), (rsv_blocks))
+
+static inline handle_t *__ext4_journal_start(struct inode *inode,
+					     unsigned int line, int type,
+					     int blocks, int rsv_blocks)
+{
+	return __ext4_journal_start_sb(inode->i_sb, line, type, blocks,
+				       rsv_blocks);
+>>>>>>> v3.18
 }
 
 #define ext4_journal_stop(handle) \
 	__ext4_journal_stop(__func__, __LINE__, (handle))
 
+<<<<<<< HEAD
+=======
+#define ext4_journal_start_reserved(handle, type) \
+	__ext4_journal_start_reserved((handle), __LINE__, (type))
+
+handle_t *__ext4_journal_start_reserved(handle_t *handle, unsigned int line,
+					int type);
+
+static inline void ext4_journal_free_reserved(handle_t *handle)
+{
+	if (ext4_handle_valid(handle))
+		jbd2_journal_free_reserved(handle);
+}
+
+>>>>>>> v3.18
 static inline handle_t *ext4_journal_current_handle(void)
 {
 	return journal_current_handle();

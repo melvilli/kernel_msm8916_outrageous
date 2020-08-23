@@ -40,7 +40,10 @@
 #include <linux/kernel.h>
 #include <linux/errno.h>
 #include <linux/poll.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/spinlock.h>
 
 #include "sisusb.h"

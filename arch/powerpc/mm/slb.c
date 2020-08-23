@@ -46,9 +46,12 @@ static inline unsigned long mk_esid_data(unsigned long ea, int ssize,
 	return (ea & slb_esid_mask(ssize)) | SLB_ESID_V | slot;
 }
 
+<<<<<<< HEAD
 #define slb_vsid_shift(ssize)	\
 	((ssize) == MMU_SEGSIZE_256M? SLB_VSID_SHIFT: SLB_VSID_SHIFT_1T)
 
+=======
+>>>>>>> v3.18
 static inline unsigned long mk_vsid_data(unsigned long ea, int ssize,
 					 unsigned long flags)
 {
@@ -66,8 +69,15 @@ static inline void slb_shadow_update(unsigned long ea, int ssize,
 	 * we only update the current CPU's SLB shadow buffer.
 	 */
 	get_slb_shadow()->save_area[entry].esid = 0;
+<<<<<<< HEAD
 	get_slb_shadow()->save_area[entry].vsid = mk_vsid_data(ea, ssize, flags);
 	get_slb_shadow()->save_area[entry].esid = mk_esid_data(ea, ssize, entry);
+=======
+	get_slb_shadow()->save_area[entry].vsid =
+				cpu_to_be64(mk_vsid_data(ea, ssize, flags));
+	get_slb_shadow()->save_area[entry].esid =
+				cpu_to_be64(mk_esid_data(ea, ssize, entry));
+>>>>>>> v3.18
 }
 
 static inline void slb_shadow_clear(unsigned long entry)
@@ -95,7 +105,11 @@ static inline void create_shadowed_slbe(unsigned long ea, int ssize,
 static void __slb_flush_and_rebolt(void)
 {
 	/* If you change this make sure you change SLB_NUM_BOLTED
+<<<<<<< HEAD
 	 * appropriately too. */
+=======
+	 * and PR KVM appropriately too. */
+>>>>>>> v3.18
 	unsigned long linear_llp, vmalloc_llp, lflags, vflags;
 	unsigned long ksp_esid_data, ksp_vsid_data;
 
@@ -112,7 +126,12 @@ static void __slb_flush_and_rebolt(void)
 	} else {
 		/* Update stack entry; others don't change */
 		slb_shadow_update(get_paca()->kstack, mmu_kernel_ssize, lflags, 2);
+<<<<<<< HEAD
 		ksp_vsid_data = get_slb_shadow()->save_area[2].vsid;
+=======
+		ksp_vsid_data =
+			be64_to_cpu(get_slb_shadow()->save_area[2].vsid);
+>>>>>>> v3.18
 	}
 
 	/* We need to do this all in asm, so we're sure we don't touch
@@ -253,10 +272,21 @@ static inline void patch_slb_encoding(unsigned int *insn_addr,
 	patch_instruction(insn_addr, insn);
 }
 
+<<<<<<< HEAD
 void slb_set_size(u16 size)
 {
 	extern unsigned int *slb_compare_rr_to_size;
 
+=======
+extern u32 slb_compare_rr_to_size[];
+extern u32 slb_miss_kernel_load_linear[];
+extern u32 slb_miss_kernel_load_io[];
+extern u32 slb_compare_rr_to_size[];
+extern u32 slb_miss_kernel_load_vmemmap[];
+
+void slb_set_size(u16 size)
+{
+>>>>>>> v3.18
 	if (mmu_slb_size == size)
 		return;
 
@@ -269,11 +299,15 @@ void slb_initialize(void)
 	unsigned long linear_llp, vmalloc_llp, io_llp;
 	unsigned long lflags, vflags;
 	static int slb_encoding_inited;
+<<<<<<< HEAD
 	extern unsigned int *slb_miss_kernel_load_linear;
 	extern unsigned int *slb_miss_kernel_load_io;
 	extern unsigned int *slb_compare_rr_to_size;
 #ifdef CONFIG_SPARSEMEM_VMEMMAP
 	extern unsigned int *slb_miss_kernel_load_vmemmap;
+=======
+#ifdef CONFIG_SPARSEMEM_VMEMMAP
+>>>>>>> v3.18
 	unsigned long vmemmap_llp;
 #endif
 

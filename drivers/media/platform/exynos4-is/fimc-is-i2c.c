@@ -12,7 +12,11 @@
 
 #include <linux/clk.h>
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/of_i2c.h>
+=======
+#include <linux/i2c.h>
+>>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <linux/pm_runtime.h>
 #include <linux/slab.h>
@@ -67,8 +71,11 @@ static int fimc_is_i2c_probe(struct platform_device *pdev)
 	pm_runtime_enable(&pdev->dev);
 	pm_runtime_enable(&i2c_adap->dev);
 
+<<<<<<< HEAD
 	of_i2c_register_devices(i2c_adap);
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -83,13 +90,22 @@ static int fimc_is_i2c_remove(struct platform_device *pdev)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int fimc_is_i2c_suspend(struct device *dev)
 {
 	struct fimc_is_i2c *isp_i2c = dev_get_drvdata(dev);
+=======
+#if defined(CONFIG_PM_RUNTIME) || defined(CONFIG_PM_SLEEP)
+static int fimc_is_i2c_runtime_suspend(struct device *dev)
+{
+	struct fimc_is_i2c *isp_i2c = dev_get_drvdata(dev);
+
+>>>>>>> v3.18
 	clk_disable_unprepare(isp_i2c->clock);
 	return 0;
 }
 
+<<<<<<< HEAD
 static int fimc_is_i2c_resume(struct device *dev)
 {
 	struct fimc_is_i2c *isp_i2c = dev_get_drvdata(dev);
@@ -98,6 +114,39 @@ static int fimc_is_i2c_resume(struct device *dev)
 
 UNIVERSAL_DEV_PM_OPS(fimc_is_i2c_pm_ops, fimc_is_i2c_suspend,
 		     fimc_is_i2c_resume, NULL);
+=======
+static int fimc_is_i2c_runtime_resume(struct device *dev)
+{
+	struct fimc_is_i2c *isp_i2c = dev_get_drvdata(dev);
+
+	return clk_prepare_enable(isp_i2c->clock);
+}
+#endif
+
+#ifdef CONFIG_PM_SLEEP
+static int fimc_is_i2c_suspend(struct device *dev)
+{
+	if (pm_runtime_suspended(dev))
+		return 0;
+
+	return fimc_is_i2c_runtime_suspend(dev);
+}
+
+static int fimc_is_i2c_resume(struct device *dev)
+{
+	if (pm_runtime_suspended(dev))
+		return 0;
+
+	return fimc_is_i2c_runtime_resume(dev);
+}
+#endif
+
+static struct dev_pm_ops fimc_is_i2c_pm_ops = {
+	SET_RUNTIME_PM_OPS(fimc_is_i2c_runtime_suspend,
+					fimc_is_i2c_runtime_resume, NULL)
+	SET_SYSTEM_SLEEP_PM_OPS(fimc_is_i2c_suspend, fimc_is_i2c_resume)
+};
+>>>>>>> v3.18
 
 static const struct of_device_id fimc_is_i2c_of_match[] = {
 	{ .compatible = FIMC_IS_I2C_COMPATIBLE },

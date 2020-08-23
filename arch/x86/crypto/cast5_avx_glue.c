@@ -26,13 +26,20 @@
 #include <linux/types.h>
 #include <linux/crypto.h>
 #include <linux/err.h>
+<<<<<<< HEAD
+=======
+#include <crypto/ablk_helper.h>
+>>>>>>> v3.18
 #include <crypto/algapi.h>
 #include <crypto/cast5.h>
 #include <crypto/cryptd.h>
 #include <crypto/ctr.h>
 #include <asm/xcr.h>
 #include <asm/xsave.h>
+<<<<<<< HEAD
 #include <asm/crypto/ablk_helper.h>
+=======
+>>>>>>> v3.18
 #include <asm/crypto/glue_helper.h>
 
 #define CAST5_PARALLEL_BLOCKS 16
@@ -203,9 +210,12 @@ static unsigned int __cbc_decrypt(struct blkcipher_desc *desc,
 			src -= 1;
 			dst -= 1;
 		} while (nbytes >= bsize * CAST5_PARALLEL_BLOCKS);
+<<<<<<< HEAD
 
 		if (nbytes < bsize)
 			goto done;
+=======
+>>>>>>> v3.18
 	}
 
 	/* Handle leftovers */
@@ -494,4 +504,8 @@ module_exit(cast5_exit);
 
 MODULE_DESCRIPTION("Cast5 Cipher Algorithm, AVX optimized");
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("cast5");
+=======
+MODULE_ALIAS("cast5");
+>>>>>>> v3.18

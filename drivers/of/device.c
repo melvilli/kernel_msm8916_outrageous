@@ -85,6 +85,12 @@ ssize_t of_device_get_modalias(struct device *dev, char *str, ssize_t len)
 	int cplen, i;
 	ssize_t tsize, csize, repend;
 
+<<<<<<< HEAD
+=======
+	if ((!dev) || (!dev->of_node))
+		return -ENODEV;
+
+>>>>>>> v3.18
 	/* Name & Type */
 	csize = snprintf(str, len, "of:N%sT%s", dev->of_node->name,
 			 dev->of_node->type);
@@ -157,7 +163,11 @@ void of_device_uevent(struct device *dev, struct kobj_uevent_env *env)
 	add_uevent_var(env, "OF_COMPATIBLE_N=%d", seen);
 
 	seen = 0;
+<<<<<<< HEAD
 	mutex_lock(&of_aliases_mutex);
+=======
+	mutex_lock(&of_mutex);
+>>>>>>> v3.18
 	list_for_each_entry(app, &aliases_lookup, link) {
 		if (dev->of_node == app->np) {
 			add_uevent_var(env, "OF_ALIAS_%d=%s", seen,
@@ -165,7 +175,11 @@ void of_device_uevent(struct device *dev, struct kobj_uevent_env *env)
 			seen++;
 		}
 	}
+<<<<<<< HEAD
 	mutex_unlock(&of_aliases_mutex);
+=======
+	mutex_unlock(&of_mutex);
+>>>>>>> v3.18
 }
 
 int of_device_uevent_modalias(struct device *dev, struct kobj_uevent_env *env)

@@ -1,6 +1,10 @@
 Samsung S5P/EXYNOS4 FIMC driver
 
+<<<<<<< HEAD
 Copyright (C) 2012 Samsung Electronics Co., Ltd.
+=======
+Copyright (C) 2012 - 2013 Samsung Electronics Co., Ltd.
+>>>>>>> v3.18
 ---------------------------------------------------------------------------
 
 The FIMC (Fully Interactive Mobile Camera) device available in Samsung
@@ -10,7 +14,11 @@ data from LCD controller (FIMD) through the SoC internal writeback data
 path.  There are multiple FIMC instances in the SoCs (up to 4), having
 slightly different capabilities, like pixel alignment constraints, rotator
 availability, LCD writeback support, etc. The driver is located at
+<<<<<<< HEAD
 drivers/media/platform/s5p-fimc directory.
+=======
+drivers/media/platform/exynos4-is directory.
+>>>>>>> v3.18
 
 1. Supported SoCs
 =================
@@ -36,6 +44,7 @@ Not currently supported:
 =====================
 
 - media device driver
+<<<<<<< HEAD
   drivers/media/platform/s5p-fimc/fimc-mdevice.[ch]
 
  - camera capture video device driver
@@ -51,6 +60,23 @@ Not currently supported:
   drivers/media/platform/s5p-fimc/fimc-core.h
   drivers/media/platform/s5p-fimc/fimc-reg.h
   drivers/media/platform/s5p-fimc/regs-fimc.h
+=======
+  drivers/media/platform/exynos4-is/media-dev.[ch]
+
+ - camera capture video device driver
+  drivers/media/platform/exynos4-is/fimc-capture.c
+
+ - MIPI-CSI2 receiver subdev
+  drivers/media/platform/exynos4-is/mipi-csis.[ch]
+
+ - video post-processor (mem-to-mem)
+  drivers/media/platform/exynos4-is/fimc-core.c
+
+ - common files
+  drivers/media/platform/exynos4-is/fimc-core.h
+  drivers/media/platform/exynos4-is/fimc-reg.h
+  drivers/media/platform/exynos4-is/regs-fimc.h
+>>>>>>> v3.18
 
 4. User space interfaces
 ========================
@@ -140,6 +166,7 @@ You can either grep through the kernel log to find relevant information, i.e.
 or retrieve the information from /dev/media? with help of the media-ctl tool:
 # media-ctl -p
 
+<<<<<<< HEAD
 6. Platform support
 ===================
 
@@ -173,6 +200,11 @@ I2C,
 REGULATOR,
 VIDEO_V4L2_SUBDEV_API,
 
+=======
+7. Build
+========
+
+>>>>>>> v3.18
 If the driver is built as a loadable kernel module (CONFIG_VIDEO_SAMSUNG_S5P_FIMC=m)
 two modules are created (in addition to the core v4l2 modules): s5p-fimc.ko and
 optional s5p-csis.ko (MIPI-CSI receiver subdev).

@@ -90,6 +90,17 @@ void __init brcmfmac_init_pdata(void)
  * oob_irq_nr, oob_irq_flags: the OOB interrupt information. The values are
  * used for registering the irq using request_irq function.
  *
+<<<<<<< HEAD
+=======
+ * broken_sg_support: flag for broken sg list support of SDIO host controller.
+ * Set this to true if the SDIO host controller has higher align requirement
+ * than 32 bytes for each scatterlist item.
+ *
+ * sd_head_align: alignment requirement for start of data buffer
+ *
+ * sd_sgentry_align: length alignment requirement for each sg entry
+ *
+>>>>>>> v3.18
  * power_on: This function is called by the brcmfmac when the module gets
  * loaded. This can be particularly useful for low power devices. The platform
  * spcific routine may for example decide to power up the complete device.
@@ -116,6 +127,12 @@ struct brcmfmac_sdio_platform_data {
 	bool oob_irq_supported;
 	unsigned int oob_irq_nr;
 	unsigned long oob_irq_flags;
+<<<<<<< HEAD
+=======
+	bool broken_sg_support;
+	unsigned short sd_head_align;
+	unsigned short sd_sgentry_align;
+>>>>>>> v3.18
 	void (*power_on)(void);
 	void (*power_off)(void);
 	void (*reset)(void);

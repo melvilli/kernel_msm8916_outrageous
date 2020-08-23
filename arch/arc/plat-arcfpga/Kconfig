@@ -8,7 +8,11 @@
 
 menuconfig ARC_PLAT_FPGA_LEGACY
 	bool "\"Legacy\" ARC FPGA dev Boards"
+<<<<<<< HEAD
 	select ISS_SMP_EXTN if SMP
+=======
+	select ARC_HAS_COH_CACHES if SMP
+>>>>>>> v3.18
 	help
 	  Support for ARC development boards, provided by Synopsys.
 	  These are based on FPGA or ISS. e.g.
@@ -18,6 +22,7 @@ menuconfig ARC_PLAT_FPGA_LEGACY
 
 if ARC_PLAT_FPGA_LEGACY
 
+<<<<<<< HEAD
 config ARC_BOARD_ANGEL4
 	bool "ARC Angel4"
 	default y
@@ -29,11 +34,16 @@ config ARC_BOARD_ML509
 	help
 	  ARC ML509 FPGA Ref Platform (Xilinx Virtex-5 Based)
 
+=======
+>>>>>>> v3.18
 config ISS_SMP_EXTN
 	bool "ARC SMP Extensions (ISS Models only)"
 	default n
 	depends on SMP
+<<<<<<< HEAD
 	select ARC_HAS_COH_RTSC
+=======
+>>>>>>> v3.18
 	help
 	  SMP Extensions to ARC700, in a "simulation only" Model, supported in
 	  ARC ISS (Instruction Set Simulator).
@@ -42,6 +52,7 @@ config ISS_SMP_EXTN
 	  -XTL (To enable CPU start/stop/set-PC for another CPU)
 	  It doesn't provide coherent Caches and/or Atomic Ops (LLOCK/SCOND)
 
+<<<<<<< HEAD
 config ARC_SERIAL_BAUD
 	int "UART Baud rate"
 	default "115200"
@@ -81,4 +92,6 @@ config BVCI_LAT_CYCLES
 	default "30"
 	depends on ARC_HAS_BVCI_LAT_UNIT
 
+=======
+>>>>>>> v3.18
 endif

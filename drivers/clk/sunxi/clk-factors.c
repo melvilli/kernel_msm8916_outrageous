@@ -9,6 +9,7 @@
  */
 
 #include <linux/clk-provider.h>
+<<<<<<< HEAD
 #include <linux/module.h>
 #include <linux/slab.h>
 #include <linux/io.h>
@@ -21,6 +22,20 @@
 
 /*
  * DOC: basic adjustable factor-based clock that cannot gate
+=======
+#include <linux/delay.h>
+#include <linux/err.h>
+#include <linux/io.h>
+#include <linux/module.h>
+#include <linux/of_address.h>
+#include <linux/slab.h>
+#include <linux/string.h>
+
+#include "clk-factors.h"
+
+/*
+ * DOC: basic adjustable factor-based clock
+>>>>>>> v3.18
  *
  * Traits of this clock:
  * prepare - clk_prepare only ensures that parents are prepared
@@ -30,6 +45,7 @@
  * parent - fixed parent.  No clk_set_parent support
  */
 
+<<<<<<< HEAD
 struct clk_factors {
 	struct clk_hw hw;
 	void __iomem *reg;
@@ -41,6 +57,13 @@ struct clk_factors {
 #define to_clk_factors(_hw) container_of(_hw, struct clk_factors, hw)
 
 #define SETMASK(len, pos)		(((-1U) >> (31-len))  << (pos))
+=======
+#define to_clk_factors(_hw) container_of(_hw, struct clk_factors, hw)
+
+#define FACTORS_MAX_PARENTS		5
+
+#define SETMASK(len, pos)		(((1U << (len)) - 1) << (pos))
+>>>>>>> v3.18
 #define CLRMASK(len, pos)		(~(SETMASK(len, pos)))
 #define FACTOR_GET(bit, len, reg)	(((reg) & SETMASK(len, bit)) >> (bit))
 
@@ -85,10 +108,52 @@ static long clk_factors_round_rate(struct clk_hw *hw, unsigned long rate,
 	return rate;
 }
 
+<<<<<<< HEAD
 static int clk_factors_set_rate(struct clk_hw *hw, unsigned long rate,
 				unsigned long parent_rate)
 {
 	u8 n, k, m, p;
+=======
+static long clk_factors_determine_rate(struct clk_hw *hw, unsigned long rate,
+				       unsigned long *best_parent_rate,
+				       struct clk **best_parent_p)
+{
+	struct clk *clk = hw->clk, *parent, *best_parent = NULL;
+	int i, num_parents;
+	unsigned long parent_rate, best = 0, child_rate, best_child_rate = 0;
+
+	/* find the parent that can help provide the fastest rate <= rate */
+	num_parents = __clk_get_num_parents(clk);
+	for (i = 0; i < num_parents; i++) {
+		parent = clk_get_parent_by_index(clk, i);
+		if (!parent)
+			continue;
+		if (__clk_get_flags(clk) & CLK_SET_RATE_PARENT)
+			parent_rate = __clk_round_rate(parent, rate);
+		else
+			parent_rate = __clk_get_rate(parent);
+
+		child_rate = clk_factors_round_rate(hw, rate, &parent_rate);
+
+		if (child_rate <= rate && child_rate > best_child_rate) {
+			best_parent = parent;
+			best = parent_rate;
+			best_child_rate = child_rate;
+		}
+	}
+
+	if (best_parent)
+		*best_parent_p = best_parent;
+	*best_parent_rate = best;
+
+	return best_child_rate;
+}
+
+static int clk_factors_set_rate(struct clk_hw *hw, unsigned long rate,
+				unsigned long parent_rate)
+{
+	u8 n = 0, k = 0, m = 0, p = 0;
+>>>>>>> v3.18
 	u32 reg;
 	struct clk_factors *factors = to_clk_factors(hw);
 	struct clk_factors_config *config = factors->config;
@@ -121,11 +186,16 @@ static int clk_factors_set_rate(struct clk_hw *hw, unsigned long rate,
 }
 
 static const struct clk_ops clk_factors_ops = {
+<<<<<<< HEAD
+=======
+	.determine_rate = clk_factors_determine_rate,
+>>>>>>> v3.18
 	.recalc_rate = clk_factors_recalc_rate,
 	.round_rate = clk_factors_round_rate,
 	.set_rate = clk_factors_set_rate,
 };
 
+<<<<<<< HEAD
 /**
  * clk_register_factors - register a factors clock with
  * the clock framework
@@ -175,6 +245,91 @@ struct clk *clk_register_factors(struct device *dev, const char *name,
 
 	if (IS_ERR(clk))
 		kfree(factors);
+=======
+struct clk * __init sunxi_factors_register(struct device_node *node,
+					   const struct factors_data *data,
+					   spinlock_t *lock)
+{
+	struct clk *clk;
+	struct clk_factors *factors;
+	struct clk_gate *gate = NULL;
+	struct clk_mux *mux = NULL;
+	struct clk_hw *gate_hw = NULL;
+	struct clk_hw *mux_hw = NULL;
+	const char *clk_name = node->name;
+	const char *parents[FACTORS_MAX_PARENTS];
+	void __iomem *reg;
+	int i = 0;
+
+	reg = of_iomap(node, 0);
+
+	/* if we have a mux, we will have >1 parents */
+	while (i < FACTORS_MAX_PARENTS &&
+	       (parents[i] = of_clk_get_parent_name(node, i)) != NULL)
+		i++;
+
+	/*
+	 * some factor clocks, such as pll5 and pll6, may have multiple
+	 * outputs, and have their name designated in factors_data
+	 */
+	if (data->name)
+		clk_name = data->name;
+	else
+		of_property_read_string(node, "clock-output-names", &clk_name);
+
+	factors = kzalloc(sizeof(struct clk_factors), GFP_KERNEL);
+	if (!factors)
+		return NULL;
+
+	/* set up factors properties */
+	factors->reg = reg;
+	factors->config = data->table;
+	factors->get_factors = data->getter;
+	factors->lock = lock;
+
+	/* Add a gate if this factor clock can be gated */
+	if (data->enable) {
+		gate = kzalloc(sizeof(struct clk_gate), GFP_KERNEL);
+		if (!gate) {
+			kfree(factors);
+			return NULL;
+		}
+
+		/* set up gate properties */
+		gate->reg = reg;
+		gate->bit_idx = data->enable;
+		gate->lock = factors->lock;
+		gate_hw = &gate->hw;
+	}
+
+	/* Add a mux if this factor clock can be muxed */
+	if (data->mux) {
+		mux = kzalloc(sizeof(struct clk_mux), GFP_KERNEL);
+		if (!mux) {
+			kfree(factors);
+			kfree(gate);
+			return NULL;
+		}
+
+		/* set up gate properties */
+		mux->reg = reg;
+		mux->shift = data->mux;
+		mux->mask = SUNXI_FACTORS_MUX_MASK;
+		mux->lock = factors->lock;
+		mux_hw = &mux->hw;
+	}
+
+	clk = clk_register_composite(NULL, clk_name,
+			parents, i,
+			mux_hw, &clk_mux_ops,
+			&factors->hw, &clk_factors_ops,
+			gate_hw, &clk_gate_ops, 0);
+
+	if (!IS_ERR(clk)) {
+		of_clk_add_provider(node, of_clk_src_simple_get, clk);
+		clk_register_clkdev(clk, clk_name, NULL);
+	}
+>>>>>>> v3.18
 
 	return clk;
 }

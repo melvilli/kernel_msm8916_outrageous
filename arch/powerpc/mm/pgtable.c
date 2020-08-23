@@ -24,7 +24,10 @@
 #include <linux/kernel.h>
 #include <linux/gfp.h>
 #include <linux/mm.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/percpu.h>
 #include <linux/hardirq.h>
 #include <linux/hugetlb.h>
@@ -32,8 +35,11 @@
 #include <asm/tlbflush.h>
 #include <asm/tlb.h>
 
+<<<<<<< HEAD
 #include "mmu_decl.h"
 
+=======
+>>>>>>> v3.18
 static inline int is_exec_fault(void)
 {
 	return current->thread.regs && TRAP(current->thread.regs) == 0x400;
@@ -51,7 +57,11 @@ static inline int pte_looks_normal(pte_t pte)
 	    (_PAGE_PRESENT | _PAGE_USER);
 }
 
+<<<<<<< HEAD
 struct page * maybe_pte_to_page(pte_t pte)
+=======
+static struct page *maybe_pte_to_page(pte_t pte)
+>>>>>>> v3.18
 {
 	unsigned long pfn = pte_pfn(pte);
 	struct page *page;
@@ -72,7 +82,11 @@ struct page * maybe_pte_to_page(pte_t pte)
  * support falls into the same category.
  */
 
+<<<<<<< HEAD
 static pte_t set_pte_filter(pte_t pte, unsigned long addr)
+=======
+static pte_t set_pte_filter(pte_t pte)
+>>>>>>> v3.18
 {
 	pte = __pte(pte_val(pte) & ~_PAGE_HPTEFLAGS);
 	if (pte_looks_normal(pte) && !(cpu_has_feature(CPU_FTR_COHERENT_ICACHE) ||
@@ -81,6 +95,7 @@ static pte_t set_pte_filter(pte_t pte, unsigned long addr)
 		if (!pg)
 			return pte;
 		if (!test_bit(PG_arch_1, &pg->flags)) {
+<<<<<<< HEAD
 #ifdef CONFIG_8xx
 			/* On 8xx, cache control instructions (particularly
 			 * "dcbst" from flush_dcache_icache) fault as write
@@ -92,6 +107,8 @@ static pte_t set_pte_filter(pte_t pte, unsigned long addr)
 			/* 8xx doesn't care about PID, size or ind args */
 			_tlbil_va(addr, 0, 0, 0);
 #endif /* CONFIG_8xx */
+=======
+>>>>>>> v3.18
 			flush_dcache_icache_page(pg);
 			set_bit(PG_arch_1, &pg->flags);
 		}
@@ -111,7 +128,11 @@ static pte_t set_access_flags_filter(pte_t pte, struct vm_area_struct *vma,
  * as we don't have two bits to spare for _PAGE_EXEC and _PAGE_HWEXEC so
  * instead we "filter out" the exec permission for non clean pages.
  */
+<<<<<<< HEAD
 static pte_t set_pte_filter(pte_t pte, unsigned long addr)
+=======
+static pte_t set_pte_filter(pte_t pte)
+>>>>>>> v3.18
 {
 	struct page *pg;
 
@@ -187,13 +208,21 @@ void set_pte_at(struct mm_struct *mm, unsigned long addr, pte_t *ptep,
 		pte_t pte)
 {
 #ifdef CONFIG_DEBUG_VM
+<<<<<<< HEAD
 	WARN_ON(pte_present(*ptep));
+=======
+	WARN_ON(pte_val(*ptep) & _PAGE_PRESENT);
+>>>>>>> v3.18
 #endif
 	/* Note: mm->context.id might not yet have been assigned as
 	 * this context might not have been activated yet when this
 	 * is called.
 	 */
+<<<<<<< HEAD
 	pte = set_pte_filter(pte, addr);
+=======
+	pte = set_pte_filter(pte);
+>>>>>>> v3.18
 
 	/* Perform the setting of the PTE */
 	__set_pte_at(mm, addr, ptep, pte, 0);
@@ -235,6 +264,17 @@ void assert_pte_locked(struct mm_struct *mm, unsigned long addr)
 	pud = pud_offset(pgd, addr);
 	BUG_ON(pud_none(*pud));
 	pmd = pmd_offset(pud, addr);
+<<<<<<< HEAD
+=======
+	/*
+	 * khugepaged to collapse normal pages to hugepage, first set
+	 * pmd to none to force page fault/gup to take mmap_sem. After
+	 * pmd is set to none, we do a pte_clear which does this assertion
+	 * so if we find pmd none, return.
+	 */
+	if (pmd_none(*pmd))
+		return;
+>>>>>>> v3.18
 	BUG_ON(!pmd_present(*pmd));
 	assert_spin_locked(pte_lockptr(mm, pmd));
 }

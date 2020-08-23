@@ -20,7 +20,11 @@
 
 static struct dentry *uhci_debugfs_root;
 
+<<<<<<< HEAD
 #ifdef DEBUG
+=======
+#ifdef CONFIG_DYNAMIC_DEBUG
+>>>>>>> v3.18
 
 /* Handle REALLY large printks so we don't overflow buffers */
 static void lprintk(char *buf)
@@ -310,6 +314,7 @@ static int uhci_show_status(struct uhci_hcd *uhci, char *buf, int len)
 	unsigned short portsc1, portsc2;
 
 
+<<<<<<< HEAD
 	usbcmd    = uhci_readw(uhci, 0);
 	usbstat   = uhci_readw(uhci, 2);
 	usbint    = uhci_readw(uhci, 4);
@@ -318,6 +323,16 @@ static int uhci_show_status(struct uhci_hcd *uhci, char *buf, int len)
 	sof       = uhci_readb(uhci, 12);
 	portsc1   = uhci_readw(uhci, 16);
 	portsc2   = uhci_readw(uhci, 18);
+=======
+	usbcmd    = uhci_readw(uhci, USBCMD);
+	usbstat   = uhci_readw(uhci, USBSTS);
+	usbint    = uhci_readw(uhci, USBINTR);
+	usbfrnum  = uhci_readw(uhci, USBFRNUM);
+	flbaseadd = uhci_readl(uhci, USBFLBASEADD);
+	sof       = uhci_readb(uhci, USBSOF);
+	portsc1   = uhci_readw(uhci, USBPORTSC1);
+	portsc2   = uhci_readw(uhci, USBPORTSC2);
+>>>>>>> v3.18
 
 	out += sprintf(out, "  usbcmd    =     %04x   %s%s%s%s%s%s%s%s\n",
 		usbcmd,
@@ -635,7 +650,11 @@ static const struct file_operations uhci_debug_operations = {
 
 #endif	/* CONFIG_DEBUG_FS */
 
+<<<<<<< HEAD
 #else	/* DEBUG */
+=======
+#else	/* CONFIG_DYNAMIC_DEBUG*/
+>>>>>>> v3.18
 
 static inline void lprintk(char *buf)
 {}

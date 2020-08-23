@@ -6,6 +6,10 @@
 
 #include "util.h"
 #include "pstack.h"
+<<<<<<< HEAD
+=======
+#include "debug.h"
+>>>>>>> v3.18
 #include <linux/kernel.h>
 #include <stdlib.h>
 

@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -308,7 +312,13 @@ union acpi_parse_object *acpi_ps_get_child(union acpi_parse_object *op)
 		break;
 
 	default:
+<<<<<<< HEAD
 		/* All others have no children */
+=======
+
+		/* All others have no children */
+
+>>>>>>> v3.18
 		break;
 	}
 

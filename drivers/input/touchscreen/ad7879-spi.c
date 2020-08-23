@@ -142,7 +142,10 @@ static int ad7879_spi_remove(struct spi_device *spi)
 	struct ad7879 *ts = spi_get_drvdata(spi);
 
 	ad7879_remove(ts);
+<<<<<<< HEAD
 	spi_set_drvdata(spi, NULL);
+=======
+>>>>>>> v3.18
 
 	return 0;
 }

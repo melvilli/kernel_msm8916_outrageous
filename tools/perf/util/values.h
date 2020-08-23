@@ -1,7 +1,11 @@
 #ifndef __PERF_VALUES_H
 #define __PERF_VALUES_H
 
+<<<<<<< HEAD
 #include "types.h"
+=======
+#include <linux/types.h>
+>>>>>>> v3.18
 
 struct perf_read_values {
 	int threads;

@@ -11,8 +11,12 @@
  * more details.
  *
  * You should have received a copy of the GNU General Public License along with
+<<<<<<< HEAD
  * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place - Suite 330, Boston, MA 02111-1307 USA.
+=======
+ * this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
  *
  * Author: Alexander Duyck <alexander.h.duyck@intel.com>
  */
@@ -29,6 +33,7 @@
 #include <net/tc_act/tc_skbedit.h>
 
 #define SKBEDIT_TAB_MASK     15
+<<<<<<< HEAD
 static struct tcf_common *tcf_skbedit_ht[SKBEDIT_TAB_MASK + 1];
 static u32 skbedit_idx_gen;
 static DEFINE_RWLOCK(skbedit_lock);
@@ -38,6 +43,8 @@ static struct tcf_hashinfo skbedit_hash_info = {
 	.hmask	=	SKBEDIT_TAB_MASK,
 	.lock	=	&skbedit_lock,
 };
+=======
+>>>>>>> v3.18
 
 static int tcf_skbedit(struct sk_buff *skb, const struct tc_action *a,
 		       struct tcf_result *res)
@@ -74,7 +81,10 @@ static int tcf_skbedit_init(struct net *net, struct nlattr *nla,
 	struct nlattr *tb[TCA_SKBEDIT_MAX + 1];
 	struct tc_skbedit *parm;
 	struct tcf_skbedit *d;
+<<<<<<< HEAD
 	struct tcf_common *pc;
+=======
+>>>>>>> v3.18
 	u32 flags = 0, *priority = NULL, *mark = NULL;
 	u16 *queue_mapping = NULL;
 	int ret = 0, err;
@@ -109,6 +119,7 @@ static int tcf_skbedit_init(struct net *net, struct nlattr *nla,
 
 	parm = nla_data(tb[TCA_SKBEDIT_PARMS]);
 
+<<<<<<< HEAD
 	pc = tcf_hash_check(parm->index, a, bind, &skbedit_hash_info);
 	if (!pc) {
 		pc = tcf_hash_create(parm->index, est, a, sizeof(*d), bind,
@@ -124,6 +135,22 @@ static int tcf_skbedit_init(struct net *net, struct nlattr *nla,
 			tcf_hash_release(pc, bind, &skbedit_hash_info);
 			return -EEXIST;
 		}
+=======
+	if (!tcf_hash_check(parm->index, a, bind)) {
+		ret = tcf_hash_create(parm->index, est, a, sizeof(*d), bind);
+		if (ret)
+			return ret;
+
+		d = to_skbedit(a);
+		ret = ACT_P_CREATED;
+	} else {
+		d = to_skbedit(a);
+		if (bind)
+			return 0;
+		tcf_hash_release(a, bind);
+		if (!ovr)
+			return -EEXIST;
+>>>>>>> v3.18
 	}
 
 	spin_lock_bh(&d->tcf_lock);
@@ -141,6 +168,7 @@ static int tcf_skbedit_init(struct net *net, struct nlattr *nla,
 	spin_unlock_bh(&d->tcf_lock);
 
 	if (ret == ACT_P_CREATED)
+<<<<<<< HEAD
 		tcf_hash_insert(pc, &skbedit_hash_info);
 	return ret;
 }
@@ -154,6 +182,12 @@ static int tcf_skbedit_cleanup(struct tc_action *a, int bind)
 	return 0;
 }
 
+=======
+		tcf_hash_insert(a);
+	return ret;
+}
+
+>>>>>>> v3.18
 static int tcf_skbedit_dump(struct sk_buff *skb, struct tc_action *a,
 			    int bind, int ref)
 {
@@ -195,6 +229,7 @@ nla_put_failure:
 
 static struct tc_action_ops act_skbedit_ops = {
 	.kind		=	"skbedit",
+<<<<<<< HEAD
 	.hinfo		=	&skbedit_hash_info,
 	.type		=	TCA_ACT_SKBEDIT,
 	.capab		=	TCA_CAP_NONE,
@@ -204,6 +239,13 @@ static struct tc_action_ops act_skbedit_ops = {
 	.cleanup	=	tcf_skbedit_cleanup,
 	.init		=	tcf_skbedit_init,
 	.walk		=	tcf_generic_walker,
+=======
+	.type		=	TCA_ACT_SKBEDIT,
+	.owner		=	THIS_MODULE,
+	.act		=	tcf_skbedit,
+	.dump		=	tcf_skbedit_dump,
+	.init		=	tcf_skbedit_init,
+>>>>>>> v3.18
 };
 
 MODULE_AUTHOR("Alexander Duyck, <alexander.h.duyck@intel.com>");
@@ -212,7 +254,11 @@ MODULE_LICENSE("GPL");
 
 static int __init skbedit_init_module(void)
 {
+<<<<<<< HEAD
 	return tcf_register_action(&act_skbedit_ops);
+=======
+	return tcf_register_action(&act_skbedit_ops, SKBEDIT_TAB_MASK);
+>>>>>>> v3.18
 }
 
 static void __exit skbedit_cleanup_module(void)

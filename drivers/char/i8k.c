@@ -1,12 +1,20 @@
 /*
  * i8k.c -- Linux driver for accessing the SMM BIOS on Dell laptops.
+<<<<<<< HEAD
  *	    See http://www.debian.org/~dz/i8k/ for more information
  *	    and for latest version of this driver.
+=======
+>>>>>>> v3.18
  *
  * Copyright (C) 2001  Massimo Dal Zotto <dz@debian.org>
  *
  * Hwmon integration:
+<<<<<<< HEAD
  * Copyright (C) 2011  Jean Delvare <khali@linux-fr.org>
+=======
+ * Copyright (C) 2011  Jean Delvare <jdelvare@suse.de>
+ * Copyright (C) 2013  Guenter Roeck <linux@roeck-us.net>
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -19,6 +27,11 @@
  * General Public License for more details.
  */
 
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/types.h>
 #include <linux/init.h>
@@ -29,6 +42,7 @@
 #include <linux/mutex.h>
 #include <linux/hwmon.h>
 #include <linux/hwmon-sysfs.h>
+<<<<<<< HEAD
 #include <asm/uaccess.h>
 #include <asm/io.h>
 
@@ -36,6 +50,14 @@
 
 #define I8K_VERSION		"1.14 21/02/2005"
 
+=======
+#include <linux/uaccess.h>
+#include <linux/io.h>
+#include <linux/sched.h>
+
+#include <linux/i8k.h>
+
+>>>>>>> v3.18
 #define I8K_SMM_FN_STATUS	0x0025
 #define I8K_SMM_POWER_STATUS	0x0069
 #define I8K_SMM_SET_FAN		0x01a3
@@ -44,7 +66,10 @@
 #define I8K_SMM_GET_TEMP	0x10a3
 #define I8K_SMM_GET_DELL_SIG1	0xfea3
 #define I8K_SMM_GET_DELL_SIG2	0xffa3
+<<<<<<< HEAD
 #define I8K_SMM_BIOS_VERSION	0x00a6
+=======
+>>>>>>> v3.18
 
 #define I8K_FAN_MULT		30
 #define I8K_MAX_TEMP		127
@@ -64,6 +89,20 @@
 static DEFINE_MUTEX(i8k_mutex);
 static char bios_version[4];
 static struct device *i8k_hwmon_dev;
+<<<<<<< HEAD
+=======
+static u32 i8k_hwmon_flags;
+static int i8k_fan_mult;
+static int i8k_pwm_mult;
+static int i8k_fan_max = I8K_FAN_HIGH;
+
+#define I8K_HWMON_HAVE_TEMP1	(1 << 0)
+#define I8K_HWMON_HAVE_TEMP2	(1 << 1)
+#define I8K_HWMON_HAVE_TEMP3	(1 << 2)
+#define I8K_HWMON_HAVE_TEMP4	(1 << 3)
+#define I8K_HWMON_HAVE_FAN1	(1 << 4)
+#define I8K_HWMON_HAVE_FAN2	(1 << 5)
+>>>>>>> v3.18
 
 MODULE_AUTHOR("Massimo Dal Zotto (dz@debian.org)");
 MODULE_DESCRIPTION("Driver for accessing SMM BIOS on Dell laptops");
@@ -89,6 +128,13 @@ static int fan_mult = I8K_FAN_MULT;
 module_param(fan_mult, int, 0);
 MODULE_PARM_DESC(fan_mult, "Factor to multiply fan speed with");
 
+<<<<<<< HEAD
+=======
+static int fan_max = I8K_FAN_HIGH;
+module_param(fan_max, int, 0);
+MODULE_PARM_DESC(fan_max, "Maximum configurable fan speed");
+
+>>>>>>> v3.18
 static int i8k_open_fs(struct inode *inode, struct file *file);
 static long i8k_ioctl(struct file *, unsigned int, unsigned long);
 
@@ -103,11 +149,19 @@ static const struct file_operations i8k_fops = {
 
 struct smm_regs {
 	unsigned int eax;
+<<<<<<< HEAD
 	unsigned int ebx __attribute__ ((packed));
 	unsigned int ecx __attribute__ ((packed));
 	unsigned int edx __attribute__ ((packed));
 	unsigned int esi __attribute__ ((packed));
 	unsigned int edi __attribute__ ((packed));
+=======
+	unsigned int ebx __packed;
+	unsigned int ecx __packed;
+	unsigned int edx __packed;
+	unsigned int esi __packed;
+	unsigned int edi __packed;
+>>>>>>> v3.18
 };
 
 static inline const char *i8k_get_dmi_data(int field)
@@ -124,6 +178,22 @@ static int i8k_smm(struct smm_regs *regs)
 {
 	int rc;
 	int eax = regs->eax;
+<<<<<<< HEAD
+=======
+	cpumask_var_t old_mask;
+
+	/* SMM requires CPU 0 */
+	if (!alloc_cpumask_var(&old_mask, GFP_KERNEL))
+		return -ENOMEM;
+	cpumask_copy(old_mask, &current->cpus_allowed);
+	rc = set_cpus_allowed_ptr(current, cpumask_of(0));
+	if (rc)
+		goto out;
+	if (smp_processor_id() != 0) {
+		rc = -EBUSY;
+		goto out;
+	}
+>>>>>>> v3.18
 
 #if defined(CONFIG_X86_64)
 	asm volatile("pushq %%rax\n\t"
@@ -148,7 +218,11 @@ static int i8k_smm(struct smm_regs *regs)
 		"pushfq\n\t"
 		"popq %%rax\n\t"
 		"andl $1,%%eax\n"
+<<<<<<< HEAD
 		:"=a"(rc)
+=======
+		: "=a"(rc)
+>>>>>>> v3.18
 		:    "a"(regs)
 		:    "%ebx", "%ecx", "%edx", "%esi", "%edi", "memory");
 #else
@@ -174,11 +248,16 @@ static int i8k_smm(struct smm_regs *regs)
 	    "lahf\n\t"
 	    "shrl $8,%%eax\n\t"
 	    "andl $1,%%eax\n"
+<<<<<<< HEAD
 	    :"=a"(rc)
+=======
+	    : "=a"(rc)
+>>>>>>> v3.18
 	    :    "a"(regs)
 	    :    "%ebx", "%ecx", "%edx", "%esi", "%edi", "memory");
 #endif
 	if (rc != 0 || (regs->eax & 0xffff) == 0xffff || regs->eax == eax)
+<<<<<<< HEAD
 		return -EINVAL;
 
 	return 0;
@@ -193,6 +272,14 @@ static int i8k_get_bios_version(void)
 	struct smm_regs regs = { .eax = I8K_SMM_BIOS_VERSION, };
 
 	return i8k_smm(&regs) ? : regs.eax;
+=======
+		rc = -EINVAL;
+
+out:
+	set_cpus_allowed_ptr(current, old_mask);
+	free_cpumask_var(old_mask);
+	return rc;
+>>>>>>> v3.18
 }
 
 /*
@@ -203,7 +290,12 @@ static int i8k_get_fn_status(void)
 	struct smm_regs regs = { .eax = I8K_SMM_FN_STATUS, };
 	int rc;
 
+<<<<<<< HEAD
 	if ((rc = i8k_smm(&regs)) < 0)
+=======
+	rc = i8k_smm(&regs);
+	if (rc < 0)
+>>>>>>> v3.18
 		return rc;
 
 	switch ((regs.eax >> I8K_FN_SHIFT) & I8K_FN_MASK) {
@@ -226,7 +318,12 @@ static int i8k_get_power_status(void)
 	struct smm_regs regs = { .eax = I8K_SMM_POWER_STATUS, };
 	int rc;
 
+<<<<<<< HEAD
 	if ((rc = i8k_smm(&regs)) < 0)
+=======
+	rc = i8k_smm(&regs);
+	if (rc < 0)
+>>>>>>> v3.18
 		return rc;
 
 	return (regs.eax & 0xff) == I8K_POWER_AC ? I8K_AC : I8K_BATTERY;
@@ -251,7 +348,11 @@ static int i8k_get_fan_speed(int fan)
 	struct smm_regs regs = { .eax = I8K_SMM_GET_SPEED, };
 
 	regs.ebx = fan & 0xff;
+<<<<<<< HEAD
 	return i8k_smm(&regs) ? : (regs.eax & 0xffff) * fan_mult;
+=======
+	return i8k_smm(&regs) ? : (regs.eax & 0xffff) * i8k_fan_mult;
+>>>>>>> v3.18
 }
 
 /*
@@ -261,7 +362,11 @@ static int i8k_set_fan(int fan, int speed)
 {
 	struct smm_regs regs = { .eax = I8K_SMM_SET_FAN, };
 
+<<<<<<< HEAD
 	speed = (speed < 0) ? 0 : ((speed > I8K_FAN_MAX) ? I8K_FAN_MAX : speed);
+=======
+	speed = (speed < 0) ? 0 : ((speed > i8k_fan_max) ? i8k_fan_max : speed);
+>>>>>>> v3.18
 	regs.ebx = (fan & 0xff) | (speed << 8);
 
 	return i8k_smm(&regs) ? : i8k_get_fan_status(fan);
@@ -277,10 +382,18 @@ static int i8k_get_temp(int sensor)
 	int temp;
 
 #ifdef I8K_TEMPERATURE_BUG
+<<<<<<< HEAD
 	static int prev;
 #endif
 	regs.ebx = sensor & 0xff;
 	if ((rc = i8k_smm(&regs)) < 0)
+=======
+	static int prev[4];
+#endif
+	regs.ebx = sensor & 0xff;
+	rc = i8k_smm(&regs);
+	if (rc < 0)
+>>>>>>> v3.18
 		return rc;
 
 	temp = regs.eax & 0xff;
@@ -294,10 +407,17 @@ static int i8k_get_temp(int sensor)
 	 # 1003655139 00000054 00005c52
 	 */
 	if (temp > I8K_MAX_TEMP) {
+<<<<<<< HEAD
 		temp = prev;
 		prev = I8K_MAX_TEMP;
 	} else {
 		prev = temp;
+=======
+		temp = prev[sensor];
+		prev[sensor] = I8K_MAX_TEMP;
+	} else {
+		prev[sensor] = temp;
+>>>>>>> v3.18
 	}
 #endif
 
@@ -309,7 +429,12 @@ static int i8k_get_dell_signature(int req_fn)
 	struct smm_regs regs = { .eax = req_fn, };
 	int rc;
 
+<<<<<<< HEAD
 	if ((rc = i8k_smm(&regs)) < 0)
+=======
+	rc = i8k_smm(&regs);
+	if (rc < 0)
+>>>>>>> v3.18
 		return rc;
 
 	return regs.eax == 1145651527 && regs.edx == 1145392204 ? 0 : -1;
@@ -328,12 +453,22 @@ i8k_ioctl_unlocked(struct file *fp, unsigned int cmd, unsigned long arg)
 
 	switch (cmd) {
 	case I8K_BIOS_VERSION:
+<<<<<<< HEAD
 		val = i8k_get_bios_version();
+=======
+		val = (bios_version[0] << 16) |
+				(bios_version[1] << 8) | bios_version[2];
+>>>>>>> v3.18
 		break;
 
 	case I8K_MACHINE_ID:
 		memset(buff, 0, 16);
+<<<<<<< HEAD
 		strlcpy(buff, i8k_get_dmi_data(DMI_PRODUCT_SERIAL), sizeof(buff));
+=======
+		strlcpy(buff, i8k_get_dmi_data(DMI_PRODUCT_SERIAL),
+			sizeof(buff));
+>>>>>>> v3.18
 		break;
 
 	case I8K_FN_STATUS:
@@ -470,12 +605,22 @@ static ssize_t i8k_hwmon_show_temp(struct device *dev,
 				   struct device_attribute *devattr,
 				   char *buf)
 {
+<<<<<<< HEAD
 	int cpu_temp;
 
 	cpu_temp = i8k_get_temp(0);
 	if (cpu_temp < 0)
 		return cpu_temp;
 	return sprintf(buf, "%d\n", cpu_temp * 1000);
+=======
+	int index = to_sensor_dev_attr(devattr)->index;
+	int temp;
+
+	temp = i8k_get_temp(index);
+	if (temp < 0)
+		return temp;
+	return sprintf(buf, "%d\n", temp * 1000);
+>>>>>>> v3.18
 }
 
 static ssize_t i8k_hwmon_show_fan(struct device *dev,
@@ -491,6 +636,7 @@ static ssize_t i8k_hwmon_show_fan(struct device *dev,
 	return sprintf(buf, "%d\n", fan_speed);
 }
 
+<<<<<<< HEAD
 static ssize_t i8k_hwmon_show_label(struct device *dev,
 				    struct device_attribute *devattr,
 				    char *buf)
@@ -527,10 +673,98 @@ static void i8k_hwmon_remove_files(struct device *dev)
 	device_remove_file(dev, &sensor_dev_attr_name.dev_attr);
 }
 
+=======
+static ssize_t i8k_hwmon_show_pwm(struct device *dev,
+				  struct device_attribute *devattr,
+				  char *buf)
+{
+	int index = to_sensor_dev_attr(devattr)->index;
+	int status;
+
+	status = i8k_get_fan_status(index);
+	if (status < 0)
+		return -EIO;
+	return sprintf(buf, "%d\n", clamp_val(status * i8k_pwm_mult, 0, 255));
+}
+
+static ssize_t i8k_hwmon_set_pwm(struct device *dev,
+				 struct device_attribute *attr,
+				 const char *buf, size_t count)
+{
+	int index = to_sensor_dev_attr(attr)->index;
+	unsigned long val;
+	int err;
+
+	err = kstrtoul(buf, 10, &val);
+	if (err)
+		return err;
+	val = clamp_val(DIV_ROUND_CLOSEST(val, i8k_pwm_mult), 0, i8k_fan_max);
+
+	mutex_lock(&i8k_mutex);
+	err = i8k_set_fan(index, val);
+	mutex_unlock(&i8k_mutex);
+
+	return err < 0 ? -EIO : count;
+}
+
+static SENSOR_DEVICE_ATTR(temp1_input, S_IRUGO, i8k_hwmon_show_temp, NULL, 0);
+static SENSOR_DEVICE_ATTR(temp2_input, S_IRUGO, i8k_hwmon_show_temp, NULL, 1);
+static SENSOR_DEVICE_ATTR(temp3_input, S_IRUGO, i8k_hwmon_show_temp, NULL, 2);
+static SENSOR_DEVICE_ATTR(temp4_input, S_IRUGO, i8k_hwmon_show_temp, NULL, 3);
+static SENSOR_DEVICE_ATTR(fan1_input, S_IRUGO, i8k_hwmon_show_fan, NULL,
+			  I8K_FAN_LEFT);
+static SENSOR_DEVICE_ATTR(pwm1, S_IRUGO | S_IWUSR, i8k_hwmon_show_pwm,
+			  i8k_hwmon_set_pwm, I8K_FAN_LEFT);
+static SENSOR_DEVICE_ATTR(fan2_input, S_IRUGO, i8k_hwmon_show_fan, NULL,
+			  I8K_FAN_RIGHT);
+static SENSOR_DEVICE_ATTR(pwm2, S_IRUGO | S_IWUSR, i8k_hwmon_show_pwm,
+			  i8k_hwmon_set_pwm, I8K_FAN_RIGHT);
+
+static struct attribute *i8k_attrs[] = {
+	&sensor_dev_attr_temp1_input.dev_attr.attr,	/* 0 */
+	&sensor_dev_attr_temp2_input.dev_attr.attr,	/* 1 */
+	&sensor_dev_attr_temp3_input.dev_attr.attr,	/* 2 */
+	&sensor_dev_attr_temp4_input.dev_attr.attr,	/* 3 */
+	&sensor_dev_attr_fan1_input.dev_attr.attr,	/* 4 */
+	&sensor_dev_attr_pwm1.dev_attr.attr,		/* 5 */
+	&sensor_dev_attr_fan2_input.dev_attr.attr,	/* 6 */
+	&sensor_dev_attr_pwm2.dev_attr.attr,		/* 7 */
+	NULL
+};
+
+static umode_t i8k_is_visible(struct kobject *kobj, struct attribute *attr,
+			      int index)
+{
+	if (index == 0 && !(i8k_hwmon_flags & I8K_HWMON_HAVE_TEMP1))
+		return 0;
+	if (index == 1 && !(i8k_hwmon_flags & I8K_HWMON_HAVE_TEMP2))
+		return 0;
+	if (index == 2 && !(i8k_hwmon_flags & I8K_HWMON_HAVE_TEMP3))
+		return 0;
+	if (index == 3 && !(i8k_hwmon_flags & I8K_HWMON_HAVE_TEMP4))
+		return 0;
+	if (index >= 4 && index <= 5 &&
+	    !(i8k_hwmon_flags & I8K_HWMON_HAVE_FAN1))
+		return 0;
+	if (index >= 6 && index <= 7 &&
+	    !(i8k_hwmon_flags & I8K_HWMON_HAVE_FAN2))
+		return 0;
+
+	return attr->mode;
+}
+
+static const struct attribute_group i8k_group = {
+	.attrs = i8k_attrs,
+	.is_visible = i8k_is_visible,
+};
+__ATTRIBUTE_GROUPS(i8k);
+
+>>>>>>> v3.18
 static int __init i8k_init_hwmon(void)
 {
 	int err;
 
+<<<<<<< HEAD
 	i8k_hwmon_dev = hwmon_device_register(NULL);
 	if (IS_ERR(i8k_hwmon_dev)) {
 		err = PTR_ERR(i8k_hwmon_dev);
@@ -608,6 +842,83 @@ static void __exit i8k_exit_hwmon(void)
 }
 
 static struct dmi_system_id __initdata i8k_dmi_table[] = {
+=======
+	i8k_hwmon_flags = 0;
+
+	/* CPU temperature attributes, if temperature reading is OK */
+	err = i8k_get_temp(0);
+	if (err >= 0)
+		i8k_hwmon_flags |= I8K_HWMON_HAVE_TEMP1;
+	/* check for additional temperature sensors */
+	err = i8k_get_temp(1);
+	if (err >= 0)
+		i8k_hwmon_flags |= I8K_HWMON_HAVE_TEMP2;
+	err = i8k_get_temp(2);
+	if (err >= 0)
+		i8k_hwmon_flags |= I8K_HWMON_HAVE_TEMP3;
+	err = i8k_get_temp(3);
+	if (err >= 0)
+		i8k_hwmon_flags |= I8K_HWMON_HAVE_TEMP4;
+
+	/* Left fan attributes, if left fan is present */
+	err = i8k_get_fan_status(I8K_FAN_LEFT);
+	if (err >= 0)
+		i8k_hwmon_flags |= I8K_HWMON_HAVE_FAN1;
+
+	/* Right fan attributes, if right fan is present */
+	err = i8k_get_fan_status(I8K_FAN_RIGHT);
+	if (err >= 0)
+		i8k_hwmon_flags |= I8K_HWMON_HAVE_FAN2;
+
+	i8k_hwmon_dev = hwmon_device_register_with_groups(NULL, "i8k", NULL,
+							  i8k_groups);
+	if (IS_ERR(i8k_hwmon_dev)) {
+		err = PTR_ERR(i8k_hwmon_dev);
+		i8k_hwmon_dev = NULL;
+		pr_err("hwmon registration failed (%d)\n", err);
+		return err;
+	}
+	return 0;
+}
+
+struct i8k_config_data {
+	int fan_mult;
+	int fan_max;
+};
+
+enum i8k_configs {
+	DELL_LATITUDE_D520,
+	DELL_LATITUDE_E6540,
+	DELL_PRECISION_490,
+	DELL_STUDIO,
+	DELL_XPS_M140,
+};
+
+static const struct i8k_config_data i8k_config_data[] = {
+	[DELL_LATITUDE_D520] = {
+		.fan_mult = 1,
+		.fan_max = I8K_FAN_TURBO,
+	},
+	[DELL_LATITUDE_E6540] = {
+		.fan_mult = 1,
+		.fan_max = I8K_FAN_HIGH,
+	},
+	[DELL_PRECISION_490] = {
+		.fan_mult = 1,
+		.fan_max = I8K_FAN_TURBO,
+	},
+	[DELL_STUDIO] = {
+		.fan_mult = 1,
+		.fan_max = I8K_FAN_HIGH,
+	},
+	[DELL_XPS_M140] = {
+		.fan_mult = 1,
+		.fan_max = I8K_FAN_HIGH,
+	},
+};
+
+static struct dmi_system_id i8k_dmi_table[] __initdata = {
+>>>>>>> v3.18
 	{
 		.ident = "Dell Inspiron",
 		.matches = {
@@ -630,6 +941,25 @@ static struct dmi_system_id __initdata i8k_dmi_table[] = {
 		},
 	},
 	{
+<<<<<<< HEAD
+=======
+		.ident = "Dell Latitude D520",
+		.matches = {
+			DMI_MATCH(DMI_SYS_VENDOR, "Dell Inc."),
+			DMI_MATCH(DMI_PRODUCT_NAME, "Latitude D520"),
+		},
+		.driver_data = (void *)&i8k_config_data[DELL_LATITUDE_D520],
+	},
+	{
+		.ident = "Dell Latitude E6540",
+		.matches = {
+			DMI_MATCH(DMI_SYS_VENDOR, "Dell Inc."),
+			DMI_MATCH(DMI_PRODUCT_NAME, "Latitude E6540"),
+		},
+		.driver_data = (void *)&i8k_config_data[DELL_LATITUDE_E6540],
+	},
+	{
+>>>>>>> v3.18
 		.ident = "Dell Latitude 2",
 		.matches = {
 			DMI_MATCH(DMI_SYS_VENDOR, "Dell Inc."),
@@ -651,6 +981,18 @@ static struct dmi_system_id __initdata i8k_dmi_table[] = {
 		},
 	},
 	{
+<<<<<<< HEAD
+=======
+		.ident = "Dell Precision 490",
+		.matches = {
+			DMI_MATCH(DMI_SYS_VENDOR, "Dell Inc."),
+			DMI_MATCH(DMI_PRODUCT_NAME,
+				  "Precision WorkStation 490"),
+		},
+		.driver_data = (void *)&i8k_config_data[DELL_PRECISION_490],
+	},
+	{
+>>>>>>> v3.18
 		.ident = "Dell Precision",
 		.matches = {
 			DMI_MATCH(DMI_SYS_VENDOR, "Dell Inc."),
@@ -671,7 +1013,27 @@ static struct dmi_system_id __initdata i8k_dmi_table[] = {
 			DMI_MATCH(DMI_PRODUCT_NAME, "XPS L421X"),
 		},
 	},
+<<<<<<< HEAD
         { }
+=======
+	{
+		.ident = "Dell Studio",
+		.matches = {
+			DMI_MATCH(DMI_SYS_VENDOR, "Dell Inc."),
+			DMI_MATCH(DMI_PRODUCT_NAME, "Studio"),
+		},
+		.driver_data = (void *)&i8k_config_data[DELL_STUDIO],
+	},
+	{
+		.ident = "Dell XPS M140",
+		.matches = {
+			DMI_MATCH(DMI_SYS_VENDOR, "Dell Inc."),
+			DMI_MATCH(DMI_PRODUCT_NAME, "MXC051"),
+		},
+		.driver_data = (void *)&i8k_config_data[DELL_XPS_M140],
+	},
+	{ }
+>>>>>>> v3.18
 };
 
 /*
@@ -679,8 +1041,12 @@ static struct dmi_system_id __initdata i8k_dmi_table[] = {
  */
 static int __init i8k_probe(void)
 {
+<<<<<<< HEAD
 	char buff[4];
 	int version;
+=======
+	const struct dmi_system_id *id;
+>>>>>>> v3.18
 
 	/*
 	 * Get DMI information
@@ -689,25 +1055,40 @@ static int __init i8k_probe(void)
 		if (!ignore_dmi && !force)
 			return -ENODEV;
 
+<<<<<<< HEAD
 		printk(KERN_INFO "i8k: not running on a supported Dell system.\n");
 		printk(KERN_INFO "i8k: vendor=%s, model=%s, version=%s\n",
+=======
+		pr_info("not running on a supported Dell system.\n");
+		pr_info("vendor=%s, model=%s, version=%s\n",
+>>>>>>> v3.18
 			i8k_get_dmi_data(DMI_SYS_VENDOR),
 			i8k_get_dmi_data(DMI_PRODUCT_NAME),
 			i8k_get_dmi_data(DMI_BIOS_VERSION));
 	}
 
+<<<<<<< HEAD
 	strlcpy(bios_version, i8k_get_dmi_data(DMI_BIOS_VERSION), sizeof(bios_version));
+=======
+	strlcpy(bios_version, i8k_get_dmi_data(DMI_BIOS_VERSION),
+		sizeof(bios_version));
+>>>>>>> v3.18
 
 	/*
 	 * Get SMM Dell signature
 	 */
 	if (i8k_get_dell_signature(I8K_SMM_GET_DELL_SIG1) &&
 	    i8k_get_dell_signature(I8K_SMM_GET_DELL_SIG2)) {
+<<<<<<< HEAD
 		printk(KERN_ERR "i8k: unable to get SMM Dell signature\n");
+=======
+		pr_err("unable to get SMM Dell signature\n");
+>>>>>>> v3.18
 		if (!force)
 			return -ENODEV;
 	}
 
+<<<<<<< HEAD
 	/*
 	 * Get SMM BIOS version.
 	 */
@@ -732,6 +1113,20 @@ static int __init i8k_probe(void)
 			printk(KERN_WARNING "i8k: BIOS version mismatch: %s != %s\n",
 				buff, bios_version);
 	}
+=======
+	i8k_fan_mult = fan_mult;
+	i8k_fan_max = fan_max ? : I8K_FAN_HIGH;	/* Must not be 0 */
+	id = dmi_first_match(i8k_dmi_table);
+	if (id && id->driver_data) {
+		const struct i8k_config_data *conf = id->driver_data;
+
+		if (fan_mult == I8K_FAN_MULT && conf->fan_mult)
+			i8k_fan_mult = conf->fan_mult;
+		if (fan_max == I8K_FAN_HIGH && conf->fan_max)
+			i8k_fan_max = conf->fan_max;
+	}
+	i8k_pwm_mult = DIV_ROUND_UP(255, i8k_fan_max);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -754,10 +1149,13 @@ static int __init i8k_init(void)
 	if (err)
 		goto exit_remove_proc;
 
+<<<<<<< HEAD
 	printk(KERN_INFO
 	       "Dell laptop SMM driver v%s Massimo Dal Zotto (dz@debian.org)\n",
 	       I8K_VERSION);
 
+=======
+>>>>>>> v3.18
 	return 0;
 
  exit_remove_proc:
@@ -767,7 +1165,11 @@ static int __init i8k_init(void)
 
 static void __exit i8k_exit(void)
 {
+<<<<<<< HEAD
 	i8k_exit_hwmon();
+=======
+	hwmon_device_unregister(i8k_hwmon_dev);
+>>>>>>> v3.18
 	remove_proc_entry("i8k", NULL);
 }
 

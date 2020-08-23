@@ -714,12 +714,20 @@ fail:
 	return ret;
 }
 
+<<<<<<< HEAD
 int _tda_printk(struct tda18271_priv *state, const char *level,
 		const char *func, const char *fmt, ...)
 {
 	struct va_format vaf;
 	va_list args;
 	int rtn;
+=======
+void _tda_printk(struct tda18271_priv *state, const char *level,
+		 const char *func, const char *fmt, ...)
+{
+	struct va_format vaf;
+	va_list args;
+>>>>>>> v3.18
 
 	va_start(args, fmt);
 
@@ -727,6 +735,7 @@ int _tda_printk(struct tda18271_priv *state, const char *level,
 	vaf.va = &args;
 
 	if (state)
+<<<<<<< HEAD
 		rtn = printk("%s%s: [%d-%04x|%c] %pV",
 			     level, func, i2c_adapter_id(state->i2c_props.adap),
 			     state->i2c_props.addr,
@@ -738,4 +747,15 @@ int _tda_printk(struct tda18271_priv *state, const char *level,
 	va_end(args);
 
 	return rtn;
+=======
+		printk("%s%s: [%d-%04x|%c] %pV",
+		       level, func, i2c_adapter_id(state->i2c_props.adap),
+		       state->i2c_props.addr,
+		       (state->role == TDA18271_MASTER) ? 'M' : 'S',
+		       &vaf);
+	else
+		printk("%s%s: %pV", level, func, &vaf);
+
+	va_end(args);
+>>>>>>> v3.18
 }

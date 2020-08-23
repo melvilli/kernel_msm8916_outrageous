@@ -72,7 +72,10 @@ struct davinci_soc_info {
 	unsigned			gpio_unbanked;
 	struct davinci_gpio_controller	*gpio_ctlrs;
 	int				gpio_ctlrs_num;
+<<<<<<< HEAD
 	struct platform_device		*serial_dev;
+=======
+>>>>>>> v3.18
 	struct emac_platform_data	*emac_pdata;
 	dma_addr_t			sram_dma;
 	unsigned			sram_len;

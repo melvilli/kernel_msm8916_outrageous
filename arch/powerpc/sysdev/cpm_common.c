@@ -22,6 +22,10 @@
 #include <linux/spinlock.h>
 #include <linux/export.h>
 #include <linux/of.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+>>>>>>> v3.18
 #include <linux/slab.h>
 
 #include <asm/udbg.h>

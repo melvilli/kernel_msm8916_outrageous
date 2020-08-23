@@ -41,7 +41,10 @@
 
 #include "netport.h"
 #include "objsec.h"
+<<<<<<< HEAD
 #include "avc.h"
+=======
+>>>>>>> v3.18
 
 #define SEL_NETPORT_HASH_SIZE       256
 #define SEL_NETPORT_HASH_BKT_LIMIT   16
@@ -238,7 +241,10 @@ void sel_netport_flush(void)
 static __init int sel_netport_init(void)
 {
 	int iter;
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 
 	if (!selinux_enabled)
 		return 0;
@@ -248,7 +254,11 @@ static __init int sel_netport_init(void)
 		sel_netport_hash[iter].size = 0;
 	}
 
+<<<<<<< HEAD
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 }
 
 __initcall(sel_netport_init);

@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 /* include/linux/usb/msm_hsusb.h
  *
  * Copyright (C) 2008 Google, Inc.
  * Author: Brian Swetland <swetland@google.com>
  * Copyright (c) 2009-2015, The Linux Foundation. All rights reserved.
+=======
+/* linux/include/asm-arm/arch-msm/hsusb.h
+ *
+ * Copyright (C) 2008 Google, Inc.
+ * Author: Brian Swetland <swetland@google.com>
+ * Copyright (c) 2009-2011, Code Aurora Forum. All rights reserved.
+>>>>>>> v3.18
  *
  * This software is licensed under the terms of the GNU General Public
  * License version 2, as published by the Free Software Foundation, and
@@ -19,6 +27,7 @@
 #define __ASM_ARCH_MSM_HSUSB_H
 
 #include <linux/types.h>
+<<<<<<< HEAD
 #include <linux/usb/ch9.h>
 #include <linux/usb/gadget.h>
 #include <linux/usb/otg.h>
@@ -70,6 +79,10 @@ enum usb_mode_type {
 	USB_HOST,
 	USB_OTG,
 };
+=======
+#include <linux/usb/otg.h>
+#include <linux/clk.h>
+>>>>>>> v3.18
 
 /**
  * OTG control
@@ -92,13 +105,19 @@ enum otg_control_type {
  * PHY used in
  *
  * INVALID_PHY			Unsupported PHY
+<<<<<<< HEAD
  * CI_PHY			Chipidea PHY
  * SNPS_PICO_PHY		Synopsis Pico PHY
  * SNPS_FEMTO_PHY		Synopsis Femto PHY
+=======
+ * CI_45NM_INTEGRATED_PHY	Chipidea 45nm integrated PHY
+ * SNPS_28NM_INTEGRATED_PHY	Synopsis 28nm integrated PHY
+>>>>>>> v3.18
  *
  */
 enum msm_usb_phy_type {
 	INVALID_PHY = 0,
+<<<<<<< HEAD
 	CI_PHY,			/* not supported */
 	SNPS_PICO_PHY,
 	SNPS_FEMTO_PHY,
@@ -112,6 +131,15 @@ enum msm_usb_phy_type {
 #define IDEV_ACA_CHG_LIMIT	500
 #define IDEV_HVDCP_CHG_MAX	1800
 
+=======
+	CI_45NM_INTEGRATED_PHY,
+	SNPS_28NM_INTEGRATED_PHY,
+};
+
+#define IDEV_CHG_MAX	1500
+#define IUNIT		100
+
+>>>>>>> v3.18
 /**
  * Different states involved in USB charger detection.
  *
@@ -144,6 +172,7 @@ enum usb_chg_state {
  * USB_DCP_CHARGER	Dedicated charger port (AC charger/ Wall charger).
  * USB_CDP_CHARGER	Charging downstream port. Enumeration can happen and
  *                      IDEV_CHG_MAX can be drawn irrespective of USB state.
+<<<<<<< HEAD
  * USB_ACA_A_CHARGER	B-device is connected on accessory port with charger
  *                      connected on charging port. This configuration allows
  *                      charging in host mode.
@@ -157,6 +186,8 @@ enum usb_chg_state {
  *			accessory ports.
  * USB_PROPRIETARY_CHARGER A proprietary charger pull DP and DM to specific
  *			voltages between 2.0-3.3v for identification.
+=======
+>>>>>>> v3.18
  *
  */
 enum usb_chg_type {
@@ -164,6 +195,7 @@ enum usb_chg_type {
 	USB_SDP_CHARGER,
 	USB_DCP_CHARGER,
 	USB_CDP_CHARGER,
+<<<<<<< HEAD
 	USB_ACA_A_CHARGER,
 	USB_ACA_B_CHARGER,
 	USB_ACA_C_CHARGER,
@@ -222,11 +254,14 @@ enum usb_ctrl {
 enum usb_id_state {
 	USB_ID_GROUND = 0,
 	USB_ID_FLOAT,
+=======
+>>>>>>> v3.18
 };
 
 /**
  * struct msm_otg_platform_data - platform device data
  *              for msm_otg driver.
+<<<<<<< HEAD
  * @phy_init_seq: PHY configuration sequence. val, reg pairs
  *              terminated by -1.
  * @vbus_power: VBUS power on/off routine.It should return result
@@ -366,11 +401,35 @@ struct msm_otg_platform_data {
 
 #define USB_NUM_BUS_CLOCKS      3
 
+=======
+ * @phy_init_seq: PHY configuration sequence values. Value of -1 is reserved as
+ *              "do not overwrite default vaule at this address".
+ * @phy_init_sz: PHY configuration sequence size.
+ * @vbus_power: VBUS power on/off routine.
+ * @power_budget: VBUS power budget in mA (0 will be treated as 500mA).
+ * @mode: Supported mode (OTG/peripheral/host).
+ * @otg_control: OTG switch controlled by user/Id pin
+ */
+struct msm_otg_platform_data {
+	int *phy_init_seq;
+	int phy_init_sz;
+	void (*vbus_power)(bool on);
+	unsigned power_budget;
+	enum usb_dr_mode mode;
+	enum otg_control_type otg_control;
+	enum msm_usb_phy_type phy_type;
+	void (*setup_gpio)(enum usb_otg_state state);
+	int (*link_clk_reset)(struct clk *link_clk, bool assert);
+	int (*phy_clk_reset)(struct clk *phy_clk);
+};
+
+>>>>>>> v3.18
 /**
  * struct msm_otg: OTG driver data. Shared by HCD and DCD.
  * @otg: USB OTG Transceiver structure.
  * @pdata: otg device platform data.
  * @irq: IRQ number assigned for HSUSB controller.
+<<<<<<< HEAD
  * @async_irq: IRQ number used by some controllers during low power state
  * @phy_irq: IRQ number assigned for PHY to notify events like id and line
 		state changes.
@@ -398,11 +457,24 @@ struct msm_otg_platform_data {
  * @async_int: IRQ line on which ASYNC interrupt arrived in LPM.
  * @cur_power: The amount of mA available from downstream port.
  * @otg_wq: Strict order otg workqueue for OTG works (SM/ID/SUSPEND).
+=======
+ * @clk: clock struct of usb_hs_clk.
+ * @pclk: clock struct of usb_hs_pclk.
+ * @phy_reset_clk: clock struct of usb_phy_clk.
+ * @core_clk: clock struct of usb_hs_core_clk.
+ * @regs: ioremapped register base address.
+ * @inputs: OTG state machine inputs(Id, SessValid etc).
+ * @sm_work: OTG state machine work.
+ * @in_lpm: indicates low power mode (LPM) state.
+ * @async_int: Async interrupt arrived.
+ * @cur_power: The amount of mA available from downstream port.
+>>>>>>> v3.18
  * @chg_work: Charger detection work.
  * @chg_state: The state of charger detection process.
  * @chg_type: The type of charger attached.
  * @dcd_retires: The retry count used to track Data contact
  *               detection process.
+<<<<<<< HEAD
  * @wlock: Wake lock struct to prevent system suspend when
  *               USB is active.
  * @usbdev_nb: The notifier block used to know about the B-device
@@ -429,11 +501,14 @@ struct msm_otg_platform_data {
  * @dbg_lock: Dynamic debug buffer Lock.
  * @buf: Dynamic Debug Buffer.
  * @id_state: Indicates USBID line status.
+=======
+>>>>>>> v3.18
  */
 struct msm_otg {
 	struct usb_phy phy;
 	struct msm_otg_platform_data *pdata;
 	int irq;
+<<<<<<< HEAD
 	int async_irq;
 	int phy_irq;
 	struct clk *xo_clk;
@@ -792,4 +867,32 @@ extern atomic_t otg_id_state;
 extern atomic_t headset_status;
 #endif
 
+=======
+	struct clk *clk;
+	struct clk *pclk;
+	struct clk *phy_reset_clk;
+	struct clk *core_clk;
+	void __iomem *regs;
+#define ID		0
+#define B_SESS_VLD	1
+	unsigned long inputs;
+	struct work_struct sm_work;
+	atomic_t in_lpm;
+	int async_int;
+	unsigned cur_power;
+	int phy_number;
+	struct delayed_work chg_work;
+	enum usb_chg_state chg_state;
+	enum usb_chg_type chg_type;
+	u8 dcd_retries;
+	struct regulator *v3p3;
+	struct regulator *v1p8;
+	struct regulator *vddcx;
+
+	struct reset_control *phy_rst;
+	struct reset_control *link_rst;
+	int vdd_levels[3];
+};
+
+>>>>>>> v3.18
 #endif

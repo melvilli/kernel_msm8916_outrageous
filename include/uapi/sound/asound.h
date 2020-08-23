@@ -93,11 +93,20 @@ enum {
 	SNDRV_HWDEP_IFACE_SB_RC,	/* SB Extigy/Audigy2NX remote control */
 	SNDRV_HWDEP_IFACE_HDA,		/* HD-audio */
 	SNDRV_HWDEP_IFACE_USB_STREAM,	/* direct access to usb stream */
+<<<<<<< HEAD
 	SNDRV_HWDEP_IFACE_AUDIO_BE,	/* Backend Audio Control */
 	SNDRV_HWDEP_IFACE_AUDIO_CODEC,	/* codec Audio Control */
 
 	/* Don't forget to change the following: */
 	SNDRV_HWDEP_IFACE_LAST = SNDRV_HWDEP_IFACE_AUDIO_CODEC
+=======
+	SNDRV_HWDEP_IFACE_FW_DICE,	/* TC DICE FireWire device */
+	SNDRV_HWDEP_IFACE_FW_FIREWORKS,	/* Echo Audio Fireworks based device */
+	SNDRV_HWDEP_IFACE_FW_BEBOB,	/* BridgeCo BeBoB based device */
+
+	/* Don't forget to change the following: */
+	SNDRV_HWDEP_IFACE_LAST = SNDRV_HWDEP_IFACE_FW_BEBOB
+>>>>>>> v3.18
 };
 
 struct snd_hwdep_info {
@@ -138,7 +147,11 @@ struct snd_hwdep_dsp_image {
  *                                                                           *
  *****************************************************************************/
 
+<<<<<<< HEAD
 #define SNDRV_PCM_VERSION		SNDRV_PROTOCOL_VERSION(2, 0, 11)
+=======
+#define SNDRV_PCM_VERSION		SNDRV_PROTOCOL_VERSION(2, 0, 12)
+>>>>>>> v3.18
 
 typedef unsigned long snd_pcm_uframes_t;
 typedef signed long snd_pcm_sframes_t;
@@ -218,7 +231,14 @@ typedef int __bitwise snd_pcm_format_t;
 #define	SNDRV_PCM_FORMAT_G723_40_1B	((__force snd_pcm_format_t) 47) /* 1 sample in 1 byte */
 #define	SNDRV_PCM_FORMAT_DSD_U8		((__force snd_pcm_format_t) 48) /* DSD, 1-byte samples DSD (x8) */
 #define	SNDRV_PCM_FORMAT_DSD_U16_LE	((__force snd_pcm_format_t) 49) /* DSD, 2-byte samples DSD (x16), little endian */
+<<<<<<< HEAD
 #define	SNDRV_PCM_FORMAT_LAST		SNDRV_PCM_FORMAT_DSD_U16_LE
+=======
+#define	SNDRV_PCM_FORMAT_DSD_U32_LE	((__force snd_pcm_format_t) 50) /* DSD, 4-byte samples DSD (x32), little endian */
+#define	SNDRV_PCM_FORMAT_DSD_U16_BE	((__force snd_pcm_format_t) 51) /* DSD, 2-byte samples DSD (x16), big endian */
+#define	SNDRV_PCM_FORMAT_DSD_U32_BE	((__force snd_pcm_format_t) 52) /* DSD, 4-byte samples DSD (x32), big endian */
+#define	SNDRV_PCM_FORMAT_LAST		SNDRV_PCM_FORMAT_DSD_U32_BE
+>>>>>>> v3.18
 
 #ifdef SNDRV_LITTLE_ENDIAN
 #define	SNDRV_PCM_FORMAT_S16		SNDRV_PCM_FORMAT_S16_LE
@@ -390,7 +410,13 @@ struct snd_pcm_sw_params {
 	snd_pcm_uframes_t silence_threshold;	/* min distance from noise for silence filling */
 	snd_pcm_uframes_t silence_size;		/* silence block size */
 	snd_pcm_uframes_t boundary;		/* pointers wrap point */
+<<<<<<< HEAD
 	unsigned char reserved[64];		/* reserved for future */
+=======
+	unsigned int proto;			/* protocol version */
+	unsigned int tstamp_type;		/* timestamp type (req. proto >= 2.0.12) */
+	unsigned char reserved[56];		/* reserved for future */
+>>>>>>> v3.18
 };
 
 struct snd_pcm_channel_info {
@@ -461,7 +487,12 @@ struct snd_xfern {
 enum {
 	SNDRV_PCM_TSTAMP_TYPE_GETTIMEOFDAY = 0,	/* gettimeofday equivalent */
 	SNDRV_PCM_TSTAMP_TYPE_MONOTONIC,	/* posix_clock_monotonic equivalent */
+<<<<<<< HEAD
 	SNDRV_PCM_TSTAMP_TYPE_LAST = SNDRV_PCM_TSTAMP_TYPE_MONOTONIC,
+=======
+	SNDRV_PCM_TSTAMP_TYPE_MONOTONIC_RAW,    /* monotonic_raw (no NTP) */
+	SNDRV_PCM_TSTAMP_TYPE_LAST = SNDRV_PCM_TSTAMP_TYPE_MONOTONIC_RAW,
+>>>>>>> v3.18
 };
 
 /* channel positions */
@@ -819,6 +850,11 @@ typedef int __bitwise snd_ctl_elem_iface_t;
 #define SNDRV_CTL_POWER_D3hot		(SNDRV_CTL_POWER_D3|0x0000)	/* Off, with power */
 #define SNDRV_CTL_POWER_D3cold		(SNDRV_CTL_POWER_D3|0x0001)	/* Off, without power */
 
+<<<<<<< HEAD
+=======
+#define SNDRV_CTL_ELEM_ID_NAME_MAXLEN	44
+
+>>>>>>> v3.18
 struct snd_ctl_elem_id {
 	unsigned int numid;		/* numeric identifier, zero = invalid */
 	snd_ctl_elem_iface_t iface;	/* interface identifier */

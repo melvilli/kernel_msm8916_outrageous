@@ -16,6 +16,10 @@
 #include <linux/delay.h>
 #include <linux/module.h>
 #include <linux/interrupt.h>
+<<<<<<< HEAD
+=======
+#include <linux/bitops.h>
+>>>>>>> v3.18
 
 #include <linux/iio/iio.h>
 #include <linux/iio/sysfs.h>
@@ -25,6 +29,7 @@
 
 #include <linux/platform_data/ad7298.h>
 
+<<<<<<< HEAD
 #define AD7298_WRITE	(1 << 15) /* write to the control register */
 #define AD7298_REPEAT	(1 << 14) /* repeated conversion enable */
 #define AD7298_CH(x)	(1 << (13 - (x))) /* channel select */
@@ -36,12 +41,26 @@
 #define AD7298_MAX_CHAN		8
 #define AD7298_BITS		12
 #define AD7298_STORAGE_BITS	16
+=======
+#define AD7298_WRITE	BIT(15) /* write to the control register */
+#define AD7298_REPEAT	BIT(14) /* repeated conversion enable */
+#define AD7298_CH(x)	BIT(13 - (x)) /* channel select */
+#define AD7298_TSENSE	BIT(5) /* temperature conversion enable */
+#define AD7298_EXTREF	BIT(2) /* external reference enable */
+#define AD7298_TAVG	BIT(1) /* temperature sensor averaging enable */
+#define AD7298_PDD	BIT(0) /* partial power down enable */
+
+#define AD7298_MAX_CHAN		8
+>>>>>>> v3.18
 #define AD7298_INTREF_mV	2500
 
 #define AD7298_CH_TEMP		9
 
+<<<<<<< HEAD
 #define RES_MASK(bits)	((1 << (bits)) - 1)
 
+=======
+>>>>>>> v3.18
 struct ad7298_state {
 	struct spi_device		*spi;
 	struct regulator		*reg;
@@ -159,13 +178,17 @@ static irqreturn_t ad7298_trigger_handler(int irq, void *p)
 	struct iio_poll_func *pf = p;
 	struct iio_dev *indio_dev = pf->indio_dev;
 	struct ad7298_state *st = iio_priv(indio_dev);
+<<<<<<< HEAD
 	s64 time_ns = 0;
+=======
+>>>>>>> v3.18
 	int b_sent;
 
 	b_sent = spi_sync(st->spi, &st->ring_msg);
 	if (b_sent)
 		goto done;
 
+<<<<<<< HEAD
 	if (indio_dev->scan_timestamp) {
 		time_ns = iio_get_time_ns();
 		memcpy((u8 *)st->rx_buf + indio_dev->scan_bytes - sizeof(s64),
@@ -173,6 +196,10 @@ static irqreturn_t ad7298_trigger_handler(int irq, void *p)
 	}
 
 	iio_push_to_buffers(indio_dev, (u8 *)st->rx_buf);
+=======
+	iio_push_to_buffers_with_timestamp(indio_dev, st->rx_buf,
+		iio_get_time_ns());
+>>>>>>> v3.18
 
 done:
 	iio_trigger_notify_done(indio_dev->trig);
@@ -263,7 +290,11 @@ static int ad7298_read_raw(struct iio_dev *indio_dev,
 			return ret;
 
 		if (chan->address != AD7298_CH_TEMP)
+<<<<<<< HEAD
 			*val = ret & RES_MASK(AD7298_BITS);
+=======
+			*val = ret & GENMASK(chan->scan_type.realbits - 1, 0);
+>>>>>>> v3.18
 
 		return IIO_VAL_INT;
 	case IIO_CHAN_INFO_SCALE:
@@ -296,9 +327,16 @@ static int ad7298_probe(struct spi_device *spi)
 {
 	struct ad7298_platform_data *pdata = spi->dev.platform_data;
 	struct ad7298_state *st;
+<<<<<<< HEAD
 	struct iio_dev *indio_dev = iio_device_alloc(sizeof(*st));
 	int ret;
 
+=======
+	struct iio_dev *indio_dev;
+	int ret;
+
+	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
+>>>>>>> v3.18
 	if (indio_dev == NULL)
 		return -ENOMEM;
 
@@ -308,6 +346,7 @@ static int ad7298_probe(struct spi_device *spi)
 		st->ext_ref = AD7298_EXTREF;
 
 	if (st->ext_ref) {
+<<<<<<< HEAD
 		st->reg = regulator_get(&spi->dev, "vref");
 		if (IS_ERR(st->reg)) {
 			ret = PTR_ERR(st->reg);
@@ -316,6 +355,15 @@ static int ad7298_probe(struct spi_device *spi)
 		ret = regulator_enable(st->reg);
 		if (ret)
 			goto error_put_reg;
+=======
+		st->reg = devm_regulator_get(&spi->dev, "vref");
+		if (IS_ERR(st->reg))
+			return PTR_ERR(st->reg);
+
+		ret = regulator_enable(st->reg);
+		if (ret)
+			return ret;
+>>>>>>> v3.18
 	}
 
 	spi_set_drvdata(spi, indio_dev);
@@ -361,11 +409,14 @@ error_cleanup_ring:
 error_disable_reg:
 	if (st->ext_ref)
 		regulator_disable(st->reg);
+<<<<<<< HEAD
 error_put_reg:
 	if (st->ext_ref)
 		regulator_put(st->reg);
 error_free:
 	iio_device_free(indio_dev);
+=======
+>>>>>>> v3.18
 
 	return ret;
 }
@@ -377,11 +428,16 @@ static int ad7298_remove(struct spi_device *spi)
 
 	iio_device_unregister(indio_dev);
 	iio_triggered_buffer_cleanup(indio_dev);
+<<<<<<< HEAD
 	if (st->ext_ref) {
 		regulator_disable(st->reg);
 		regulator_put(st->reg);
 	}
 	iio_device_free(indio_dev);
+=======
+	if (st->ext_ref)
+		regulator_disable(st->reg);
+>>>>>>> v3.18
 
 	return 0;
 }

@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -156,7 +160,10 @@ acpi_ex_resolve_object_to_value(union acpi_operand_object **stack_ptr,
 		switch (ref_type) {
 		case ACPI_REFCLASS_LOCAL:
 		case ACPI_REFCLASS_ARG:
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 			/*
 			 * Get the local from the method's state info
 			 * Note: this increments the local's object reference count
@@ -309,6 +316,10 @@ acpi_ex_resolve_object_to_value(union acpi_operand_object **stack_ptr,
 		break;
 
 	default:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		break;
 	}
 
@@ -348,10 +359,18 @@ acpi_ex_resolve_multiple(struct acpi_walk_state *walk_state,
 
 	switch (ACPI_GET_DESCRIPTOR_TYPE(obj_desc)) {
 	case ACPI_DESC_TYPE_OPERAND:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		type = obj_desc->common.type;
 		break;
 
 	case ACPI_DESC_TYPE_NAMED:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		type = ((struct acpi_namespace_node *)obj_desc)->type;
 		obj_desc =
 		    acpi_ns_get_attached_object((struct acpi_namespace_node *)
@@ -519,7 +538,11 @@ acpi_ex_resolve_multiple(struct acpi_walk_state *walk_state,
 	 */
 	type = obj_desc->common.type;
 
+<<<<<<< HEAD
       exit:
+=======
+exit:
+>>>>>>> v3.18
 	/* Convert internal types to external types */
 
 	switch (type) {
@@ -538,7 +561,13 @@ acpi_ex_resolve_multiple(struct acpi_walk_state *walk_state,
 		break;
 
 	default:
+<<<<<<< HEAD
 		/* No change to Type required */
+=======
+
+		/* No change to Type required */
+
+>>>>>>> v3.18
 		break;
 	}
 

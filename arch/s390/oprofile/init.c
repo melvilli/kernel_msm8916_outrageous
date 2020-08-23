@@ -10,6 +10,10 @@
  */
 
 #include <linux/oprofile.h>
+<<<<<<< HEAD
+=======
+#include <linux/perf_event.h>
+>>>>>>> v3.18
 #include <linux/init.h>
 #include <linux/errno.h>
 #include <linux/fs.h>
@@ -67,6 +71,24 @@ module_param_call(cpu_type, set_cpu_type, NULL, NULL, 0);
 MODULE_PARM_DESC(cpu_type, "Force legacy basic mode sampling"
 		           "(report cpu_type \"timer\"");
 
+<<<<<<< HEAD
+=======
+static int __oprofile_hwsampler_start(void)
+{
+	int retval;
+
+	retval = hwsampler_allocate(oprofile_sdbt_blocks, oprofile_sdb_blocks);
+	if (retval)
+		return retval;
+
+	retval = hwsampler_start_all(oprofile_hw_interval);
+	if (retval)
+		hwsampler_deallocate();
+
+	return retval;
+}
+
+>>>>>>> v3.18
 static int oprofile_hwsampler_start(void)
 {
 	int retval;
@@ -76,6 +98,7 @@ static int oprofile_hwsampler_start(void)
 	if (!hwsampler_running)
 		return timer_ops.start();
 
+<<<<<<< HEAD
 	retval = hwsampler_allocate(oprofile_sdbt_blocks, oprofile_sdb_blocks);
 	if (retval)
 		return retval;
@@ -83,6 +106,15 @@ static int oprofile_hwsampler_start(void)
 	retval = hwsampler_start_all(oprofile_hw_interval);
 	if (retval)
 		hwsampler_deallocate();
+=======
+	retval = perf_reserve_sampling();
+	if (retval)
+		return retval;
+
+	retval = __oprofile_hwsampler_start();
+	if (retval)
+		perf_release_sampling();
+>>>>>>> v3.18
 
 	return retval;
 }
@@ -96,6 +128,10 @@ static void oprofile_hwsampler_stop(void)
 
 	hwsampler_stop_all();
 	hwsampler_deallocate();
+<<<<<<< HEAD
+=======
+	perf_release_sampling();
+>>>>>>> v3.18
 	return;
 }
 
@@ -346,6 +382,7 @@ static const struct file_operations timer_enabled_fops = {
 };
 
 
+<<<<<<< HEAD
 static int oprofile_create_hwsampling_files(struct super_block *sb,
 					    struct dentry *root)
 {
@@ -356,6 +393,17 @@ static int oprofile_create_hwsampling_files(struct super_block *sb,
 		return -EINVAL;
 
 	oprofilefs_create_file(sb, dir, "enabled", &timer_enabled_fops);
+=======
+static int oprofile_create_hwsampling_files(struct dentry *root)
+{
+	struct dentry *dir;
+
+	dir = oprofilefs_mkdir(root, "timer");
+	if (!dir)
+		return -EINVAL;
+
+	oprofilefs_create_file(dir, "enabled", &timer_enabled_fops);
+>>>>>>> v3.18
 
 	if (!hwsampler_available)
 		return 0;
@@ -376,6 +424,7 @@ static int oprofile_create_hwsampling_files(struct super_block *sb,
 		 * and can only be set to 0.
 		 */
 
+<<<<<<< HEAD
 		dir = oprofilefs_mkdir(sb, root, "0");
 		if (!dir)
 			return -EINVAL;
@@ -387,6 +436,19 @@ static int oprofile_create_hwsampling_files(struct super_block *sb,
 		oprofilefs_create_file(sb, dir, "kernel", &kernel_fops);
 		oprofilefs_create_file(sb, dir, "user", &user_fops);
 		oprofilefs_create_ulong(sb, dir, "hw_sdbt_blocks",
+=======
+		dir = oprofilefs_mkdir(root, "0");
+		if (!dir)
+			return -EINVAL;
+
+		oprofilefs_create_file(dir, "enabled", &hwsampler_fops);
+		oprofilefs_create_file(dir, "event", &zero_fops);
+		oprofilefs_create_file(dir, "count", &hw_interval_fops);
+		oprofilefs_create_file(dir, "unit_mask", &zero_fops);
+		oprofilefs_create_file(dir, "kernel", &kernel_fops);
+		oprofilefs_create_file(dir, "user", &user_fops);
+		oprofilefs_create_ulong(dir, "hw_sdbt_blocks",
+>>>>>>> v3.18
 					&oprofile_sdbt_blocks);
 
 	} else {
@@ -396,6 +458,7 @@ static int oprofile_create_hwsampling_files(struct super_block *sb,
 		 * space tools.  The /dev/oprofile/hwsampling fs is
 		 * provided in that case.
 		 */
+<<<<<<< HEAD
 		dir = oprofilefs_mkdir(sb, root, "hwsampling");
 		if (!dir)
 			return -EINVAL;
@@ -409,6 +472,21 @@ static int oprofile_create_hwsampling_files(struct super_block *sb,
 		oprofilefs_create_ro_ulong(sb, dir, "hw_max_interval",
 					   &oprofile_max_interval);
 		oprofilefs_create_ulong(sb, dir, "hw_sdbt_blocks",
+=======
+		dir = oprofilefs_mkdir(root, "hwsampling");
+		if (!dir)
+			return -EINVAL;
+
+		oprofilefs_create_file(dir, "hwsampler",
+				       &hwsampler_fops);
+		oprofilefs_create_file(dir, "hw_interval",
+				       &hw_interval_fops);
+		oprofilefs_create_ro_ulong(dir, "hw_min_interval",
+					   &oprofile_min_interval);
+		oprofilefs_create_ro_ulong(dir, "hw_max_interval",
+					   &oprofile_max_interval);
+		oprofilefs_create_ulong(dir, "hw_sdbt_blocks",
+>>>>>>> v3.18
 					&oprofile_sdbt_blocks);
 	}
 	return 0;

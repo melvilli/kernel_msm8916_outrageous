@@ -11,7 +11,10 @@
 #include <linux/sched.h>
 #include <linux/wait.h>
 #include <linux/delay.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/interrupt.h>
 #include <linux/of.h>
 #include <linux/of_device.h>

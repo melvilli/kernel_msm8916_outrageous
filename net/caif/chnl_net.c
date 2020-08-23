@@ -285,7 +285,11 @@ static int chnl_net_open(struct net_device *dev)
 				goto error;
 		}
 
+<<<<<<< HEAD
 		lldev = dev_get_by_index(dev_net(dev), llifindex);
+=======
+		lldev = __dev_get_by_index(dev_net(dev), llifindex);
+>>>>>>> v3.18
 
 		if (lldev == NULL) {
 			pr_debug("no interface?\n");
@@ -307,7 +311,10 @@ static int chnl_net_open(struct net_device *dev)
 		mtu = min_t(int, dev->mtu, lldev->mtu - (headroom + tailroom));
 		mtu = min_t(int, GPRS_PDP_MTU, mtu);
 		dev_set_mtu(dev, mtu);
+<<<<<<< HEAD
 		dev_put(lldev);
+=======
+>>>>>>> v3.18
 
 		if (mtu < 100) {
 			pr_warn("CAIF Interface MTU too small (%d)\n", mtu);

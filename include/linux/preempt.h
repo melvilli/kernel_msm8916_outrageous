@@ -6,6 +6,7 @@
  * preempt_count (used for kernel preemption, interrupt count, etc.)
  */
 
+<<<<<<< HEAD
 #include <linux/thread_info.h>
 #include <linux/linkage.h>
 #include <linux/list.h>
@@ -90,12 +91,84 @@ do { \
 #define preempt_disable_notrace() \
 do { \
 	inc_preempt_count_notrace(); \
+=======
+#include <linux/linkage.h>
+#include <linux/list.h>
+
+/*
+ * We use the MSB mostly because its available; see <linux/preempt_mask.h> for
+ * the other bits -- can't include that header due to inclusion hell.
+ */
+#define PREEMPT_NEED_RESCHED	0x80000000
+
+#include <asm/preempt.h>
+
+#if defined(CONFIG_DEBUG_PREEMPT) || defined(CONFIG_PREEMPT_TRACER)
+extern void preempt_count_add(int val);
+extern void preempt_count_sub(int val);
+#define preempt_count_dec_and_test() ({ preempt_count_sub(1); should_resched(); })
+#else
+#define preempt_count_add(val)	__preempt_count_add(val)
+#define preempt_count_sub(val)	__preempt_count_sub(val)
+#define preempt_count_dec_and_test() __preempt_count_dec_and_test()
+#endif
+
+#define __preempt_count_inc() __preempt_count_add(1)
+#define __preempt_count_dec() __preempt_count_sub(1)
+
+#define preempt_count_inc() preempt_count_add(1)
+#define preempt_count_dec() preempt_count_sub(1)
+
+#ifdef CONFIG_PREEMPT_COUNT
+
+#define preempt_disable() \
+do { \
+	preempt_count_inc(); \
+	barrier(); \
+} while (0)
+
+#define sched_preempt_enable_no_resched() \
+do { \
+	barrier(); \
+	preempt_count_dec(); \
+} while (0)
+
+#define preempt_enable_no_resched() sched_preempt_enable_no_resched()
+
+#ifdef CONFIG_PREEMPT
+#define preempt_enable() \
+do { \
+	barrier(); \
+	if (unlikely(preempt_count_dec_and_test())) \
+		__preempt_schedule(); \
+} while (0)
+
+#define preempt_check_resched() \
+do { \
+	if (should_resched()) \
+		__preempt_schedule(); \
+} while (0)
+
+#else
+#define preempt_enable() \
+do { \
+	barrier(); \
+	preempt_count_dec(); \
+} while (0)
+#define preempt_check_resched() do { } while (0)
+#endif
+
+#define preempt_disable_notrace() \
+do { \
+	__preempt_count_inc(); \
+>>>>>>> v3.18
 	barrier(); \
 } while (0)
 
 #define preempt_enable_no_resched_notrace() \
 do { \
 	barrier(); \
+<<<<<<< HEAD
 	dec_preempt_count_notrace(); \
 } while (0)
 
@@ -106,6 +179,30 @@ do { \
 	barrier(); \
 	preempt_check_resched_context(); \
 } while (0)
+=======
+	__preempt_count_dec(); \
+} while (0)
+
+#ifdef CONFIG_PREEMPT
+
+#ifndef CONFIG_CONTEXT_TRACKING
+#define __preempt_schedule_context() __preempt_schedule()
+#endif
+
+#define preempt_enable_notrace() \
+do { \
+	barrier(); \
+	if (unlikely(__preempt_count_dec_and_test())) \
+		__preempt_schedule_context(); \
+} while (0)
+#else
+#define preempt_enable_notrace() \
+do { \
+	barrier(); \
+	__preempt_count_dec(); \
+} while (0)
+#endif
+>>>>>>> v3.18
 
 #else /* !CONFIG_PREEMPT_COUNT */
 
@@ -115,10 +212,18 @@ do { \
  * that can cause faults and scheduling migrate into our preempt-protected
  * region.
  */
+<<<<<<< HEAD
 #define preempt_disable()		barrier()
 #define sched_preempt_enable_no_resched()	barrier()
 #define preempt_enable_no_resched()	barrier()
 #define preempt_enable()		barrier()
+=======
+#define preempt_disable()			barrier()
+#define sched_preempt_enable_no_resched()	barrier()
+#define preempt_enable_no_resched()		barrier()
+#define preempt_enable()			barrier()
+#define preempt_check_resched()			do { } while (0)
+>>>>>>> v3.18
 
 #define preempt_disable_notrace()		barrier()
 #define preempt_enable_no_resched_notrace()	barrier()
@@ -126,6 +231,29 @@ do { \
 
 #endif /* CONFIG_PREEMPT_COUNT */
 
+<<<<<<< HEAD
+=======
+#ifdef MODULE
+/*
+ * Modules have no business playing preemption tricks.
+ */
+#undef sched_preempt_enable_no_resched
+#undef preempt_enable_no_resched
+#undef preempt_enable_no_resched_notrace
+#undef preempt_check_resched
+#endif
+
+#define preempt_set_need_resched() \
+do { \
+	set_preempt_need_resched(); \
+} while (0)
+#define preempt_fold_need_resched() \
+do { \
+	if (tif_need_resched()) \
+		set_preempt_need_resched(); \
+} while (0)
+
+>>>>>>> v3.18
 #ifdef CONFIG_PREEMPT_NOTIFIERS
 
 struct preempt_notifier;

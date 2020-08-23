@@ -1,4 +1,8 @@
 #include "symbol.h"
+<<<<<<< HEAD
+=======
+#include "util.h"
+>>>>>>> v3.18
 
 #include <stdio.h>
 #include <fcntl.h>
@@ -253,6 +257,10 @@ int symsrc__init(struct symsrc *ss, struct dso *dso __maybe_unused,
 	if (!ss->name)
 		goto out_close;
 
+<<<<<<< HEAD
+=======
+	ss->fd = fd;
+>>>>>>> v3.18
 	ss->type = type;
 
 	return 0;
@@ -274,7 +282,11 @@ bool symsrc__has_symtab(struct symsrc *ss __maybe_unused)
 
 void symsrc__destroy(struct symsrc *ss)
 {
+<<<<<<< HEAD
 	free(ss->name);
+=======
+	zfree(&ss->name);
+>>>>>>> v3.18
 	close(ss->fd);
 }
 
@@ -286,6 +298,47 @@ int dso__synthesize_plt_symbols(struct dso *dso __maybe_unused,
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+static int fd__is_64_bit(int fd)
+{
+	u8 e_ident[EI_NIDENT];
+
+	if (lseek(fd, 0, SEEK_SET))
+		return -1;
+
+	if (readn(fd, e_ident, sizeof(e_ident)) != sizeof(e_ident))
+		return -1;
+
+	if (memcmp(e_ident, ELFMAG, SELFMAG) ||
+	    e_ident[EI_VERSION] != EV_CURRENT)
+		return -1;
+
+	return e_ident[EI_CLASS] == ELFCLASS64;
+}
+
+enum dso_type dso__type_fd(int fd)
+{
+	Elf64_Ehdr ehdr;
+	int ret;
+
+	ret = fd__is_64_bit(fd);
+	if (ret < 0)
+		return DSO__TYPE_UNKNOWN;
+
+	if (ret)
+		return DSO__TYPE_64BIT;
+
+	if (readn(fd, &ehdr, sizeof(ehdr)) != sizeof(ehdr))
+		return DSO__TYPE_UNKNOWN;
+
+	if (ehdr.e_machine == EM_X86_64)
+		return DSO__TYPE_X32BIT;
+
+	return DSO__TYPE_32BIT;
+}
+
+>>>>>>> v3.18
 int dso__load_sym(struct dso *dso, struct map *map __maybe_unused,
 		  struct symsrc *ss,
 		  struct symsrc *runtime_ss __maybe_unused,
@@ -293,6 +346,14 @@ int dso__load_sym(struct dso *dso, struct map *map __maybe_unused,
 		  int kmodule __maybe_unused)
 {
 	unsigned char *build_id[BUILD_ID_SIZE];
+<<<<<<< HEAD
+=======
+	int ret;
+
+	ret = fd__is_64_bit(ss->fd);
+	if (ret >= 0)
+		dso->is_64_bit = ret;
+>>>>>>> v3.18
 
 	if (filename__read_build_id(ss->name, build_id, BUILD_ID_SIZE) > 0) {
 		dso__set_build_id(dso, build_id);
@@ -301,6 +362,31 @@ int dso__load_sym(struct dso *dso, struct map *map __maybe_unused,
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+int file__read_maps(int fd __maybe_unused, bool exe __maybe_unused,
+		    mapfn_t mapfn __maybe_unused, void *data __maybe_unused,
+		    bool *is_64_bit __maybe_unused)
+{
+	return -1;
+}
+
+int kcore_extract__create(struct kcore_extract *kce __maybe_unused)
+{
+	return -1;
+}
+
+void kcore_extract__delete(struct kcore_extract *kce __maybe_unused)
+{
+}
+
+int kcore_copy(const char *from_dir __maybe_unused,
+	       const char *to_dir __maybe_unused)
+{
+	return -1;
+}
+
+>>>>>>> v3.18
 void symbol__elf_init(void)
 {
 }

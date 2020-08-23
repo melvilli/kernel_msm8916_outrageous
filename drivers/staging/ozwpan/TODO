@@ -10,5 +10,9 @@ TODO:
 	- testing with as many devices as possible.
 
 Please send any patches for this driver to
+<<<<<<< HEAD
 Rupesh Gujare <rupesh.gujare@atmel.com>
+=======
+Shigekatsu Tateno <shigekatsu.tateno@atmel.com>
+>>>>>>> v3.18
 and Greg Kroah-Hartman <gregkh@linuxfoundation.org>.

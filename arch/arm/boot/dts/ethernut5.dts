@@ -6,7 +6,11 @@
  * Licensed under GPLv2.
  */
 /dts-v1/;
+<<<<<<< HEAD
 /include/ "at91sam9260.dtsi"
+=======
+#include "at91sam9260.dtsi"
+>>>>>>> v3.18
 
 / {
 	model = "Ethernut 5";
@@ -20,6 +24,19 @@
 		reg = <0x20000000 0x08000000>;
 	};
 
+<<<<<<< HEAD
+=======
+	clocks {
+		slow_xtal {
+			clock-frequency = <32768>;
+		};
+
+		main_xtal {
+			clock-frequency = <18432000>;
+		};
+	};
+
+>>>>>>> v3.18
 	ahb {
 		apb {
 			dbgu: serial@fffff200 {
@@ -40,7 +57,11 @@
 			};
 
 			usb1: gadget@fffa4000 {
+<<<<<<< HEAD
 				atmel,vbus-gpio = <&pioC 5 0>;
+=======
+				atmel,vbus-gpio = <&pioC 5 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 				status = "okay";
 			};
 		};
@@ -52,7 +73,11 @@
 			status = "okay";
 
 			gpios = <0
+<<<<<<< HEAD
 				 &pioC 14 0
+=======
+				 &pioC 14 GPIO_ACTIVE_HIGH
+>>>>>>> v3.18
 				 0
 				>;
 

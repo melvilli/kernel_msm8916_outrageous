@@ -26,7 +26,10 @@
 
 #include <linux/kernel.h>
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/pci.h>
 #include <linux/dma-mapping.h>
@@ -331,6 +334,22 @@ il3945_hdl_tx(struct il_priv *il, struct il_rx_buf *rxb)
 		return;
 	}
 
+<<<<<<< HEAD
+=======
+	/*
+	 * Firmware will not transmit frame on passive channel, if it not yet
+	 * received some valid frame on that channel. When this error happen
+	 * we have to wait until firmware will unblock itself i.e. when we
+	 * note received beacon or other frame. We unblock queues in
+	 * il3945_pass_packet_to_mac80211 or in il_mac_bss_info_changed.
+	 */
+	if (unlikely((status & TX_STATUS_MSK) == TX_STATUS_FAIL_PASSIVE_NO_RX) &&
+	    il->iw_mode == NL80211_IFTYPE_STATION) {
+		il_stop_queues_by_reason(il, IL_STOP_REASON_PASSIVE);
+		D_INFO("Stopped queues - RX waiting on passive channel\n");
+	}
+
+>>>>>>> v3.18
 	txq->time_stamp = jiffies;
 	info = IEEE80211_SKB_CB(txq->skbs[txq->q.read_ptr]);
 	ieee80211_tx_info_clear_status(info);
@@ -453,10 +472,17 @@ il3945_is_network_packet(struct il_priv *il, struct ieee80211_hdr *header)
 	switch (il->iw_mode) {
 	case NL80211_IFTYPE_ADHOC:	/* Header: Dest. | Source    | BSSID */
 		/* packets to our IBSS update information */
+<<<<<<< HEAD
 		return ether_addr_equal(header->addr3, il->bssid);
 	case NL80211_IFTYPE_STATION:	/* Header: Dest. | AP{BSSID} | Source */
 		/* packets to our IBSS update information */
 		return ether_addr_equal(header->addr2, il->bssid);
+=======
+		return ether_addr_equal_64bits(header->addr3, il->bssid);
+	case NL80211_IFTYPE_STATION:	/* Header: Dest. | AP{BSSID} | Source */
+		/* packets to our IBSS update information */
+		return ether_addr_equal_64bits(header->addr2, il->bssid);
+>>>>>>> v3.18
 	default:
 		return 1;
 	}
@@ -489,6 +515,14 @@ il3945_pass_packet_to_mac80211(struct il_priv *il, struct il_rx_buf *rxb,
 		return;
 	}
 
+<<<<<<< HEAD
+=======
+	if (unlikely(test_bit(IL_STOP_REASON_PASSIVE, &il->stop_reason))) {
+		il_wake_queues_by_reason(il, IL_STOP_REASON_PASSIVE);
+		D_INFO("Woke queues - frame received on passive channel\n");
+	}
+
+>>>>>>> v3.18
 	skb = dev_alloc_skb(SMALL_PACKET_SIZE);
 	if (!skb) {
 		IL_ERR("dev_alloc_skb failed\n");
@@ -556,7 +590,11 @@ il3945_hdl_rx(struct il_priv *il, struct il_rx_buf *rxb)
 		rx_status.flag |= RX_FLAG_SHORTPRE;
 
 	if ((unlikely(rx_stats->phy_count > 20))) {
+<<<<<<< HEAD
 		D_DROP("dsp size out of range [0,20]: %d/n",
+=======
+		D_DROP("dsp size out of range [0,20]: %d\n",
+>>>>>>> v3.18
 		       rx_stats->phy_count);
 		return;
 	}
@@ -2711,7 +2749,11 @@ static struct il_cfg il3945_abg_cfg = {
 	},
 };
 
+<<<<<<< HEAD
 DEFINE_PCI_DEVICE_TABLE(il3945_hw_card_ids) = {
+=======
+const struct pci_device_id il3945_hw_card_ids[] = {
+>>>>>>> v3.18
 	{IL_PCI_DEVICE(0x4222, 0x1005, il3945_bg_cfg)},
 	{IL_PCI_DEVICE(0x4222, 0x1034, il3945_bg_cfg)},
 	{IL_PCI_DEVICE(0x4222, 0x1044, il3945_bg_cfg)},

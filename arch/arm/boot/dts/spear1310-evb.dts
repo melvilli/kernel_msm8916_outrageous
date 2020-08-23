@@ -106,6 +106,13 @@
 			status = "okay";
 		};
 
+<<<<<<< HEAD
+=======
+		miphy@eb800000 {
+			status = "okay";
+		};
+
+>>>>>>> v3.18
 		cf@b2800000 {
 			status = "okay";
 		};

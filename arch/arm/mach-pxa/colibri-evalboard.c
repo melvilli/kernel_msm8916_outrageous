@@ -20,6 +20,10 @@
 #include <asm/mach/arch.h>
 #include <linux/i2c.h>
 #include <linux/i2c/pxa-i2c.h>
+<<<<<<< HEAD
+=======
+#include <asm/io.h>
+>>>>>>> v3.18
 
 #include <mach/pxa27x.h>
 #include <mach/colibri.h>

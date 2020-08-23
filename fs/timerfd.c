@@ -35,11 +35,19 @@ struct timerfd_ctx {
 	ktime_t moffs;
 	wait_queue_head_t wqh;
 	u64 ticks;
+<<<<<<< HEAD
 	int expired;
 	int clockid;
 	struct rcu_head rcu;
 	struct list_head clist;
 	spinlock_t cancel_lock;
+=======
+	int clockid;
+	short unsigned expired;
+	short unsigned settime_flags;	/* to show in fdinfo */
+	struct rcu_head rcu;
+	struct list_head clist;
+>>>>>>> v3.18
 	bool might_cancel;
 };
 
@@ -93,7 +101,11 @@ static enum alarmtimer_restart timerfd_alarmproc(struct alarm *alarm,
  */
 void timerfd_clock_was_set(void)
 {
+<<<<<<< HEAD
 	ktime_t moffs = ktime_get_monotonic_offset();
+=======
+	ktime_t moffs = ktime_mono_to_real((ktime_t){ .tv64 = 0 });
+>>>>>>> v3.18
 	struct timerfd_ctx *ctx;
 	unsigned long flags;
 
@@ -112,7 +124,11 @@ void timerfd_clock_was_set(void)
 	rcu_read_unlock();
 }
 
+<<<<<<< HEAD
 static void __timerfd_remove_cancel(struct timerfd_ctx *ctx)
+=======
+static void timerfd_remove_cancel(struct timerfd_ctx *ctx)
+>>>>>>> v3.18
 {
 	if (ctx->might_cancel) {
 		ctx->might_cancel = false;
@@ -122,6 +138,7 @@ static void __timerfd_remove_cancel(struct timerfd_ctx *ctx)
 	}
 }
 
+<<<<<<< HEAD
 static void timerfd_remove_cancel(struct timerfd_ctx *ctx)
 {
 	spin_lock(&ctx->cancel_lock);
@@ -129,17 +146,26 @@ static void timerfd_remove_cancel(struct timerfd_ctx *ctx)
 	spin_unlock(&ctx->cancel_lock);
 }
 
+=======
+>>>>>>> v3.18
 static bool timerfd_canceled(struct timerfd_ctx *ctx)
 {
 	if (!ctx->might_cancel || ctx->moffs.tv64 != KTIME_MAX)
 		return false;
+<<<<<<< HEAD
 	ctx->moffs = ktime_get_monotonic_offset();
+=======
+	ctx->moffs = ktime_mono_to_real((ktime_t){ .tv64 = 0 });
+>>>>>>> v3.18
 	return true;
 }
 
 static void timerfd_setup_cancel(struct timerfd_ctx *ctx, int flags)
 {
+<<<<<<< HEAD
 	spin_lock(&ctx->cancel_lock);
+=======
+>>>>>>> v3.18
 	if ((ctx->clockid == CLOCK_REALTIME ||
 	     ctx->clockid == CLOCK_REALTIME_ALARM) &&
 	    (flags & TFD_TIMER_ABSTIME) && (flags & TFD_TIMER_CANCEL_ON_SET)) {
@@ -149,10 +175,16 @@ static void timerfd_setup_cancel(struct timerfd_ctx *ctx, int flags)
 			list_add_rcu(&ctx->clist, &cancel_list);
 			spin_unlock(&cancel_lock);
 		}
+<<<<<<< HEAD
 	} else {
 		__timerfd_remove_cancel(ctx);
 	}
 	spin_unlock(&ctx->cancel_lock);
+=======
+	} else if (ctx->might_cancel) {
+		timerfd_remove_cancel(ctx);
+	}
+>>>>>>> v3.18
 }
 
 static ktime_t timerfd_get_remaining(struct timerfd_ctx *ctx)
@@ -206,6 +238,11 @@ static int timerfd_setup(struct timerfd_ctx *ctx, int flags,
 		if (timerfd_canceled(ctx))
 			return -ECANCELED;
 	}
+<<<<<<< HEAD
+=======
+
+	ctx->settime_flags = flags & TFD_SETTIME_FLAGS;
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -294,11 +331,82 @@ static ssize_t timerfd_read(struct file *file, char __user *buf, size_t count,
 	return res;
 }
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PROC_FS
+static int timerfd_show(struct seq_file *m, struct file *file)
+{
+	struct timerfd_ctx *ctx = file->private_data;
+	struct itimerspec t;
+
+	spin_lock_irq(&ctx->wqh.lock);
+	t.it_value = ktime_to_timespec(timerfd_get_remaining(ctx));
+	t.it_interval = ktime_to_timespec(ctx->tintv);
+	spin_unlock_irq(&ctx->wqh.lock);
+
+	return seq_printf(m,
+			  "clockid: %d\n"
+			  "ticks: %llu\n"
+			  "settime flags: 0%o\n"
+			  "it_value: (%llu, %llu)\n"
+			  "it_interval: (%llu, %llu)\n",
+			  ctx->clockid, (unsigned long long)ctx->ticks,
+			  ctx->settime_flags,
+			  (unsigned long long)t.it_value.tv_sec,
+			  (unsigned long long)t.it_value.tv_nsec,
+			  (unsigned long long)t.it_interval.tv_sec,
+			  (unsigned long long)t.it_interval.tv_nsec);
+}
+#else
+#define timerfd_show NULL
+#endif
+
+#ifdef CONFIG_CHECKPOINT_RESTORE
+static long timerfd_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+{
+	struct timerfd_ctx *ctx = file->private_data;
+	int ret = 0;
+
+	switch (cmd) {
+	case TFD_IOC_SET_TICKS: {
+		u64 ticks;
+
+		if (copy_from_user(&ticks, (u64 __user *)arg, sizeof(ticks)))
+			return -EFAULT;
+		if (!ticks)
+			return -EINVAL;
+
+		spin_lock_irq(&ctx->wqh.lock);
+		if (!timerfd_canceled(ctx)) {
+			ctx->ticks = ticks;
+			wake_up_locked(&ctx->wqh);
+		} else
+			ret = -ECANCELED;
+		spin_unlock_irq(&ctx->wqh.lock);
+		break;
+	}
+	default:
+		ret = -ENOTTY;
+		break;
+	}
+
+	return ret;
+}
+#else
+#define timerfd_ioctl NULL
+#endif
+
+>>>>>>> v3.18
 static const struct file_operations timerfd_fops = {
 	.release	= timerfd_release,
 	.poll		= timerfd_poll,
 	.read		= timerfd_read,
 	.llseek		= noop_llseek,
+<<<<<<< HEAD
+=======
+	.show_fdinfo	= timerfd_show,
+	.unlocked_ioctl	= timerfd_ioctl,
+>>>>>>> v3.18
 };
 
 static int timerfd_fget(int fd, struct fd *p)
@@ -336,7 +444,10 @@ SYSCALL_DEFINE2(timerfd_create, int, clockid, int, flags)
 		return -ENOMEM;
 
 	init_waitqueue_head(&ctx->wqh);
+<<<<<<< HEAD
 	spin_lock_init(&ctx->cancel_lock);
+=======
+>>>>>>> v3.18
 	ctx->clockid = clockid;
 
 	if (isalarm(ctx))
@@ -347,7 +458,11 @@ SYSCALL_DEFINE2(timerfd_create, int, clockid, int, flags)
 	else
 		hrtimer_init(&ctx->t.tmr, clockid, HRTIMER_MODE_ABS);
 
+<<<<<<< HEAD
 	ctx->moffs = ktime_get_monotonic_offset();
+=======
+	ctx->moffs = ktime_mono_to_real((ktime_t){ .tv64 = 0 });
+>>>>>>> v3.18
 
 	ufd = anon_inode_getfd("[timerfd]", &timerfd_fops, ctx,
 			       O_RDWR | (flags & TFD_SHARED_FCNTL_FLAGS));

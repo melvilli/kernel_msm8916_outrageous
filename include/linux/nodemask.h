@@ -98,8 +98,22 @@
 typedef struct { DECLARE_BITMAP(bits, MAX_NUMNODES); } nodemask_t;
 extern nodemask_t _unused_nodemask_arg_;
 
+<<<<<<< HEAD
 #define node_set(node, dst) __node_set((node), &(dst))
 static inline void __node_set(int node, volatile nodemask_t *dstp)
+=======
+/*
+ * The inline keyword gives the compiler room to decide to inline, or
+ * not inline a function as it sees best.  However, as these functions
+ * are called in both __init and non-__init functions, if they are not
+ * inlined we will end up with a section mis-match error (of the type of
+ * freeable items not being freed).  So we must use __always_inline here
+ * to fix the problem.  If other functions in the future also end up in
+ * this situation they will also need to be annotated as __always_inline
+ */
+#define node_set(node, dst) __node_set((node), &(dst))
+static __always_inline void __node_set(int node, volatile nodemask_t *dstp)
+>>>>>>> v3.18
 {
 	set_bit(node, dstp->bits);
 }
@@ -421,7 +435,19 @@ static inline int num_node_state(enum node_states state)
 	for_each_node_mask((__node), node_states[__state])
 
 #define first_online_node	first_node(node_states[N_ONLINE])
+<<<<<<< HEAD
 #define next_online_node(nid)	next_node((nid), node_states[N_ONLINE])
+=======
+#define first_memory_node	first_node(node_states[N_MEMORY])
+static inline int next_online_node(int nid)
+{
+	return next_node(nid, node_states[N_ONLINE]);
+}
+static inline int next_memory_node(int nid)
+{
+	return next_node(nid, node_states[N_MEMORY]);
+}
+>>>>>>> v3.18
 
 extern int nr_node_ids;
 extern int nr_online_nodes;
@@ -462,6 +488,10 @@ static inline int num_node_state(enum node_states state)
 	for ( (node) = 0; (node) == 0; (node) = 1)
 
 #define first_online_node	0
+<<<<<<< HEAD
+=======
+#define first_memory_node	0
+>>>>>>> v3.18
 #define next_online_node(nid)	(MAX_NUMNODES)
 #define nr_node_ids		1
 #define nr_online_nodes		1

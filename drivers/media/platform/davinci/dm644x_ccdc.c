@@ -130,9 +130,15 @@ static void ccdc_enable_vport(int flag)
  * This function will configure the window size
  * to be capture in CCDC reg
  */
+<<<<<<< HEAD
 void ccdc_setwin(struct v4l2_rect *image_win,
 		enum ccdc_frmfmt frm_fmt,
 		int ppc)
+=======
+static void ccdc_setwin(struct v4l2_rect *image_win,
+			enum ccdc_frmfmt frm_fmt,
+			int ppc)
+>>>>>>> v3.18
 {
 	int horz_start, horz_nr_pixels;
 	int vert_start, vert_nr_lines;
@@ -291,7 +297,11 @@ static int ccdc_update_raw_params(struct ccdc_config_params_raw *raw_params)
 		dev_dbg(ccdc_cfg.dev, "\n copy_from_user failed");
 		return -EFAULT;
 	}
+<<<<<<< HEAD
 	config_params->fault_pxl.fpc_table_addr = (unsigned int)fpc_physaddr;
+=======
+	config_params->fault_pxl.fpc_table_addr = (unsigned long)fpc_physaddr;
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -370,7 +380,11 @@ static int ccdc_set_params(void __user *params)
  * ccdc_config_ycbcr()
  * This function will configure CCDC for YCbCr video capture
  */
+<<<<<<< HEAD
 void ccdc_config_ycbcr(void)
+=======
+static void ccdc_config_ycbcr(void)
+>>>>>>> v3.18
 {
 	struct ccdc_params_ycbcr *params = &ccdc_cfg.ycbcr;
 	u32 syn_mode;
@@ -506,7 +520,11 @@ static void ccdc_config_fpc(struct ccdc_fault_pixel *fpc)
 
 	/* Configure Fault pixel if needed */
 	regw(fpc->fpc_table_addr, CCDC_FPC_ADDR);
+<<<<<<< HEAD
 	dev_dbg(ccdc_cfg.dev, "\nWriting 0x%x to FPC_ADDR...\n",
+=======
+	dev_dbg(ccdc_cfg.dev, "\nWriting 0x%lx to FPC_ADDR...\n",
+>>>>>>> v3.18
 		       (fpc->fpc_table_addr));
 	/* Write the FPC params with FPC disable */
 	val = fpc->fp_num & CCDC_FPC_FPC_NUM_MASK;
@@ -523,7 +541,11 @@ static void ccdc_config_fpc(struct ccdc_fault_pixel *fpc)
  * ccdc_config_raw()
  * This function will configure CCDC for Raw capture mode
  */
+<<<<<<< HEAD
 void ccdc_config_raw(void)
+=======
+static void ccdc_config_raw(void)
+>>>>>>> v3.18
 {
 	struct ccdc_params_raw *params = &ccdc_cfg.bayer;
 	struct ccdc_config_params_raw *config_params =
@@ -581,6 +603,7 @@ void ccdc_config_raw(void)
 	     config_params->alaw.enable)
 		syn_mode |= CCDC_DATA_PACK_ENABLE;
 
+<<<<<<< HEAD
 #ifdef CONFIG_DM644X_VIDEO_PORT_ENABLE
 	/* enable video port */
 	val = CCDC_ENABLE_VIDEO_PORT;
@@ -588,6 +611,10 @@ void ccdc_config_raw(void)
 	/* disable video port */
 	val = CCDC_DISABLE_VIDEO_PORT;
 #endif
+=======
+	/* disable video port */
+	val = CCDC_DISABLE_VIDEO_PORT;
+>>>>>>> v3.18
 
 	if (config_params->data_sz == CCDC_DATA_8BITS)
 		val |= (CCDC_DATA_10BITS & CCDC_FMTCFG_VPIN_MASK)

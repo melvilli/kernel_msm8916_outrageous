@@ -36,7 +36,11 @@
  * - FIXUP_TOP_OF_STACK/RESTORE_TOP_OF_STACK - Fix up the hardware stack
  * frame that is otherwise undefined after a SYSCALL
  * - TRACE_IRQ_* - Trace hard interrupt state for lock debugging.
+<<<<<<< HEAD
  * - errorentry/paranoidentry/zeroentry - Define exception entry points.
+=======
+ * - idtentry - Define exception entry points.
+>>>>>>> v3.18
  */
 
 #include <linux/linkage.h>
@@ -53,7 +57,10 @@
 #include <asm/page_types.h>
 #include <asm/irqflags.h>
 #include <asm/paravirt.h>
+<<<<<<< HEAD
 #include <asm/ftrace.h>
+=======
+>>>>>>> v3.18
 #include <asm/percpu.h>
 #include <asm/asm.h>
 #include <asm/context_tracking.h>
@@ -70,6 +77,7 @@
 	.code64
 	.section .entry.text, "ax"
 
+<<<<<<< HEAD
 #ifdef CONFIG_FUNCTION_TRACER
 
 #ifdef CC_USING_FENTRY
@@ -274,6 +282,8 @@ GLOBAL(return_to_handler)
 	jmp *%rdi
 #endif
 
+=======
+>>>>>>> v3.18
 
 #ifndef CONFIG_PREEMPT
 #define retint_kernel retint_restore_args
@@ -412,7 +422,10 @@ ENDPROC(native_usergs_sysret64)
  */
 	.macro XCPT_FRAME start=1 offset=0
 	INTR_FRAME \start, RIP+\offset-ORIG_RAX
+<<<<<<< HEAD
 	/*CFI_REL_OFFSET orig_rax, ORIG_RAX-ORIG_RAX*/
+=======
+>>>>>>> v3.18
 	.endm
 
 /*
@@ -489,6 +502,7 @@ ENDPROC(native_usergs_sysret64)
 	TRACE_IRQS_OFF
 	.endm
 
+<<<<<<< HEAD
 ENTRY(save_rest)
 	PARTIAL_FRAME 1 (REST_SKIP+8)
 	movq 5*8+16(%rsp), %r11	/* save return address */
@@ -524,6 +538,26 @@ ENTRY(save_paranoid)
 	movq_cfi r13, R13+8
 	movq_cfi r14, R14+8
 	movq_cfi r15, R15+8
+=======
+ENTRY(save_paranoid)
+	XCPT_FRAME 1 RDI+8
+	cld
+	movq %rdi, RDI+8(%rsp)
+	movq %rsi, RSI+8(%rsp)
+	movq_cfi rdx, RDX+8
+	movq_cfi rcx, RCX+8
+	movq_cfi rax, RAX+8
+	movq %r8, R8+8(%rsp)
+	movq %r9, R9+8(%rsp)
+	movq %r10, R10+8(%rsp)
+	movq %r11, R11+8(%rsp)
+	movq_cfi rbx, RBX+8
+	movq %rbp, RBP+8(%rsp)
+	movq %r12, R12+8(%rsp)
+	movq %r13, R13+8(%rsp)
+	movq %r14, R14+8(%rsp)
+	movq %r15, R15+8(%rsp)
+>>>>>>> v3.18
 	movl $1,%ebx
 	movl $MSR_GS_BASE,%ecx
 	rdmsr
@@ -534,7 +568,10 @@ ENTRY(save_paranoid)
 1:	ret
 	CFI_ENDPROC
 END(save_paranoid)
+<<<<<<< HEAD
 	.popsection
+=======
+>>>>>>> v3.18
 
 /*
  * A newly forked process directly context switches into this address.
@@ -558,6 +595,7 @@ ENTRY(ret_from_fork)
 	testl $3, CS-ARGOFFSET(%rsp)		# from kernel_thread?
 	jz   1f
 
+<<<<<<< HEAD
 	/*
 	 * By the time we get here, we have no idea whether our pt_regs,
 	 * ti flags, and ti status came from the 64-bit SYSCALL fast path,
@@ -566,6 +604,13 @@ ENTRY(ret_from_fork)
 	 * all of the above.
 	 */
 	jmp  int_ret_from_sys_call
+=======
+	testl $_TIF_IA32, TI_flags(%rcx)	# 32-bit compat task needs IRET
+	jnz  int_ret_from_sys_call
+
+	RESTORE_TOP_OF_STACK %rdi, -ARGOFFSET
+	jmp ret_from_sys_call			# go to the SYSRET fastpath
+>>>>>>> v3.18
 
 1:
 	subq $REST_SKIP, %rsp	# leave space for volatiles
@@ -631,8 +676,13 @@ GLOBAL(system_call_after_swapgs)
 	 * and short:
 	 */
 	ENABLE_INTERRUPTS(CLBR_NONE)
+<<<<<<< HEAD
 	SAVE_ARGS 8,0
 	movq  %rax,ORIG_RAX-ARGOFFSET(%rsp)
+=======
+	SAVE_ARGS 8, 0, rax_enosys=1
+	movq_cfi rax,(ORIG_RAX-ARGOFFSET)
+>>>>>>> v3.18
 	movq  %rcx,RIP-ARGOFFSET(%rsp)
 	CFI_REL_OFFSET rip,RIP-ARGOFFSET
 	testl $_TIF_WORK_SYSCALL_ENTRY,TI_flags+THREAD_INFO(%rsp,RIP-ARGOFFSET)
@@ -644,7 +694,11 @@ system_call_fastpath:
 	andl $__SYSCALL_MASK,%eax
 	cmpl $__NR_syscall_max,%eax
 #endif
+<<<<<<< HEAD
 	ja badsys
+=======
+	ja ret_from_sys_call  /* and return regs->ax */
+>>>>>>> v3.18
 	movq %r10,%rcx
 	call *sys_call_table(,%rax,8)  # XXX:	 rip relative
 	movq %rax,RAX-ARGOFFSET(%rsp)
@@ -703,6 +757,7 @@ sysret_signal:
 	FIXUP_TOP_OF_STACK %r11, -ARGOFFSET
 	jmp int_check_syscall_exit_work
 
+<<<<<<< HEAD
 badsys:
 	movq $-ENOSYS,RAX-ARGOFFSET(%rsp)
 	jmp ret_from_sys_call
@@ -725,6 +780,10 @@ auditsys:
 	jmp system_call_fastpath
 
 	/*
+=======
+#ifdef CONFIG_AUDITSYSCALL
+	/*
+>>>>>>> v3.18
 	 * Return fast path for syscall audit.  Call __audit_syscall_exit()
 	 * directly and then jump back to the fast path with TIF_SYSCALL_AUDIT
 	 * masked off.
@@ -741,6 +800,7 @@ sysret_audit:
 
 	/* Do syscall tracing */
 tracesys:
+<<<<<<< HEAD
 #ifdef CONFIG_AUDITSYSCALL
 	testl $(_TIF_WORK_SYSCALL_ENTRY & ~_TIF_SYSCALL_AUDIT),TI_flags+THREAD_INFO(%rsp,RIP-ARGOFFSET)
 	jz auditsys
@@ -753,6 +813,27 @@ tracesys:
 	/*
 	 * Reload arg registers from stack in case ptrace changed them.
 	 * We don't reload %rax because syscall_trace_enter() returned
+=======
+	leaq -REST_SKIP(%rsp), %rdi
+	movq $AUDIT_ARCH_X86_64, %rsi
+	call syscall_trace_enter_phase1
+	test %rax, %rax
+	jnz tracesys_phase2		/* if needed, run the slow path */
+	LOAD_ARGS 0			/* else restore clobbered regs */
+	jmp system_call_fastpath	/*      and return to the fast path */
+
+tracesys_phase2:
+	SAVE_REST
+	FIXUP_TOP_OF_STACK %rdi
+	movq %rsp, %rdi
+	movq $AUDIT_ARCH_X86_64, %rsi
+	movq %rax,%rdx
+	call syscall_trace_enter_phase2
+
+	/*
+	 * Reload arg registers from stack in case ptrace changed them.
+	 * We don't reload %rax because syscall_trace_entry_phase2() returned
+>>>>>>> v3.18
 	 * the value it wants us to use in the table lookup.
 	 */
 	LOAD_ARGS ARGOFFSET, 1
@@ -763,7 +844,11 @@ tracesys:
 	andl $__SYSCALL_MASK,%eax
 	cmpl $__NR_syscall_max,%eax
 #endif
+<<<<<<< HEAD
 	ja   int_ret_from_sys_call	/* RAX(%rsp) set to -ENOSYS above */
+=======
+	ja   int_ret_from_sys_call	/* RAX(%rsp) is already set */
+>>>>>>> v3.18
 	movq %r10,%rcx	/* fixup for C */
 	call *sys_call_table(,%rax,8)
 	movq %rax,RAX-ARGOFFSET(%rsp)
@@ -995,10 +1080,13 @@ END(interrupt)
 	call \func
 	.endm
 
+<<<<<<< HEAD
 /*
  * Interrupt entry/exit should be protected against kprobes
  */
 	.pushsection .kprobes.text, "ax"
+=======
+>>>>>>> v3.18
 	/*
 	 * The interrupt stubs push (~vector+0x80) onto the stack and
 	 * then jump to common_interrupt.
@@ -1143,10 +1231,15 @@ retint_signal:
 	/* Returning to kernel space. Check if we need preemption */
 	/* rcx:	 threadinfo. interrupts off. */
 ENTRY(retint_kernel)
+<<<<<<< HEAD
 	cmpl $0,TI_preempt_count(%rcx)
 	jnz  retint_restore_args
 	bt  $TIF_NEED_RESCHED,TI_flags(%rcx)
 	jnc  retint_restore_args
+=======
+	cmpl $0,PER_CPU_VAR(__preempt_count)
+	jnz  retint_restore_args
+>>>>>>> v3.18
 	bt   $9,EFLAGS-ARGOFFSET(%rsp)	/* interrupts off? */
 	jnc  retint_restore_args
 	call preempt_schedule_irq
@@ -1156,6 +1249,7 @@ ENTRY(retint_kernel)
 END(common_interrupt)
 
 /*
+<<<<<<< HEAD
  * End of kprobes section
  */
        .popsection
@@ -1164,6 +1258,11 @@ END(common_interrupt)
  * APIC interrupts.
  */
 .macro apicinterrupt num sym do_sym
+=======
+ * APIC interrupts.
+ */
+.macro apicinterrupt3 num sym do_sym
+>>>>>>> v3.18
 ENTRY(\sym)
 	INTR_FRAME
 	ASM_CLAC
@@ -1175,15 +1274,43 @@ ENTRY(\sym)
 END(\sym)
 .endm
 
+<<<<<<< HEAD
 #ifdef CONFIG_SMP
 apicinterrupt IRQ_MOVE_CLEANUP_VECTOR \
 	irq_move_cleanup_interrupt smp_irq_move_cleanup_interrupt
 apicinterrupt REBOOT_VECTOR \
+=======
+#ifdef CONFIG_TRACING
+#define trace(sym) trace_##sym
+#define smp_trace(sym) smp_trace_##sym
+
+.macro trace_apicinterrupt num sym
+apicinterrupt3 \num trace(\sym) smp_trace(\sym)
+.endm
+#else
+.macro trace_apicinterrupt num sym do_sym
+.endm
+#endif
+
+.macro apicinterrupt num sym do_sym
+apicinterrupt3 \num \sym \do_sym
+trace_apicinterrupt \num \sym
+.endm
+
+#ifdef CONFIG_SMP
+apicinterrupt3 IRQ_MOVE_CLEANUP_VECTOR \
+	irq_move_cleanup_interrupt smp_irq_move_cleanup_interrupt
+apicinterrupt3 REBOOT_VECTOR \
+>>>>>>> v3.18
 	reboot_interrupt smp_reboot_interrupt
 #endif
 
 #ifdef CONFIG_X86_UV
+<<<<<<< HEAD
 apicinterrupt UV_BAU_MESSAGE \
+=======
+apicinterrupt3 UV_BAU_MESSAGE \
+>>>>>>> v3.18
 	uv_bau_message_intr1 uv_bau_message_interrupt
 #endif
 apicinterrupt LOCAL_TIMER_VECTOR \
@@ -1192,6 +1319,7 @@ apicinterrupt X86_PLATFORM_IPI_VECTOR \
 	x86_platform_ipi smp_x86_platform_ipi
 
 #ifdef CONFIG_HAVE_KVM
+<<<<<<< HEAD
 apicinterrupt POSTED_INTR_VECTOR \
 	kvm_posted_intr_ipi smp_kvm_posted_intr_ipi
 #endif
@@ -1200,6 +1328,21 @@ apicinterrupt THRESHOLD_APIC_VECTOR \
 	threshold_interrupt smp_threshold_interrupt
 apicinterrupt THERMAL_APIC_VECTOR \
 	thermal_interrupt smp_thermal_interrupt
+=======
+apicinterrupt3 POSTED_INTR_VECTOR \
+	kvm_posted_intr_ipi smp_kvm_posted_intr_ipi
+#endif
+
+#ifdef CONFIG_X86_MCE_THRESHOLD
+apicinterrupt THRESHOLD_APIC_VECTOR \
+	threshold_interrupt smp_threshold_interrupt
+#endif
+
+#ifdef CONFIG_X86_THERMAL_VECTOR
+apicinterrupt THERMAL_APIC_VECTOR \
+	thermal_interrupt smp_thermal_interrupt
+#endif
+>>>>>>> v3.18
 
 #ifdef CONFIG_SMP
 apicinterrupt CALL_FUNCTION_SINGLE_VECTOR \
@@ -1223,6 +1366,7 @@ apicinterrupt IRQ_WORK_VECTOR \
 /*
  * Exception entry points.
  */
+<<<<<<< HEAD
 .macro zeroentry sym do_sym
 ENTRY(\sym)
 	INTR_FRAME
@@ -1314,10 +1458,79 @@ ENTRY(\sym)
 	movq $-1,ORIG_RAX(%rsp)		/* no syscall to restart */
 	call \do_sym
 	jmp paranoid_exit		/* %ebx: no swapgs flag */
+=======
+#define INIT_TSS_IST(x) PER_CPU_VAR(init_tss) + (TSS_ist + ((x) - 1) * 8)
+
+.macro idtentry sym do_sym has_error_code:req paranoid=0 shift_ist=-1
+ENTRY(\sym)
+	/* Sanity check */
+	.if \shift_ist != -1 && \paranoid == 0
+	.error "using shift_ist requires paranoid=1"
+	.endif
+
+	.if \has_error_code
+	XCPT_FRAME
+	.else
+	INTR_FRAME
+	.endif
+
+	ASM_CLAC
+	PARAVIRT_ADJUST_EXCEPTION_FRAME
+
+	.ifeq \has_error_code
+	pushq_cfi $-1			/* ORIG_RAX: no syscall to restart */
+	.endif
+
+	subq $ORIG_RAX-R15, %rsp
+	CFI_ADJUST_CFA_OFFSET ORIG_RAX-R15
+
+	.if \paranoid
+	call save_paranoid
+	.else
+	call error_entry
+	.endif
+
+	DEFAULT_FRAME 0
+
+	.if \paranoid
+	.if \shift_ist != -1
+	TRACE_IRQS_OFF_DEBUG		/* reload IDT in case of recursion */
+	.else
+	TRACE_IRQS_OFF
+	.endif
+	.endif
+
+	movq %rsp,%rdi			/* pt_regs pointer */
+
+	.if \has_error_code
+	movq ORIG_RAX(%rsp),%rsi	/* get error code */
+	movq $-1,ORIG_RAX(%rsp)		/* no syscall to restart */
+	.else
+	xorl %esi,%esi			/* no error code */
+	.endif
+
+	.if \shift_ist != -1
+	subq $EXCEPTION_STKSZ, INIT_TSS_IST(\shift_ist)
+	.endif
+
+	call \do_sym
+
+	.if \shift_ist != -1
+	addq $EXCEPTION_STKSZ, INIT_TSS_IST(\shift_ist)
+	.endif
+
+	.if \paranoid
+	jmp paranoid_exit		/* %ebx: no swapgs flag */
+	.else
+	jmp error_exit			/* %ebx: no swapgs flag */
+	.endif
+
+>>>>>>> v3.18
 	CFI_ENDPROC
 END(\sym)
 .endm
 
+<<<<<<< HEAD
 zeroentry divide_error do_divide_error
 zeroentry overflow do_overflow
 zeroentry bounds do_bounds
@@ -1331,6 +1544,32 @@ zeroentry spurious_interrupt_bug do_spurious_interrupt_bug
 zeroentry coprocessor_error do_coprocessor_error
 errorentry alignment_check do_alignment_check
 zeroentry simd_coprocessor_error do_simd_coprocessor_error
+=======
+#ifdef CONFIG_TRACING
+.macro trace_idtentry sym do_sym has_error_code:req
+idtentry trace(\sym) trace(\do_sym) has_error_code=\has_error_code
+idtentry \sym \do_sym has_error_code=\has_error_code
+.endm
+#else
+.macro trace_idtentry sym do_sym has_error_code:req
+idtentry \sym \do_sym has_error_code=\has_error_code
+.endm
+#endif
+
+idtentry divide_error do_divide_error has_error_code=0
+idtentry overflow do_overflow has_error_code=0
+idtentry bounds do_bounds has_error_code=0
+idtentry invalid_op do_invalid_op has_error_code=0
+idtentry device_not_available do_device_not_available has_error_code=0
+idtentry double_fault do_double_fault has_error_code=1 paranoid=1
+idtentry coprocessor_segment_overrun do_coprocessor_segment_overrun has_error_code=0
+idtentry invalid_TSS do_invalid_TSS has_error_code=1
+idtentry segment_not_present do_segment_not_present has_error_code=1
+idtentry spurious_interrupt_bug do_spurious_interrupt_bug has_error_code=0
+idtentry coprocessor_error do_coprocessor_error has_error_code=0
+idtentry alignment_check do_alignment_check has_error_code=1
+idtentry simd_coprocessor_error do_simd_coprocessor_error has_error_code=0
+>>>>>>> v3.18
 
 
 	/* Reload gs selector with exception handling */
@@ -1360,7 +1599,11 @@ bad_gs:
 	.previous
 
 /* Call softirq on interrupt stack. Interrupts are off. */
+<<<<<<< HEAD
 ENTRY(call_softirq)
+=======
+ENTRY(do_softirq_own_stack)
+>>>>>>> v3.18
 	CFI_STARTPROC
 	pushq_cfi %rbp
 	CFI_REL_OFFSET rbp,0
@@ -1377,10 +1620,17 @@ ENTRY(call_softirq)
 	decl PER_CPU_VAR(irq_count)
 	ret
 	CFI_ENDPROC
+<<<<<<< HEAD
 END(call_softirq)
 
 #ifdef CONFIG_XEN
 zeroentry xen_hypervisor_callback xen_do_hypervisor_callback
+=======
+END(do_softirq_own_stack)
+
+#ifdef CONFIG_XEN
+idtentry xen_hypervisor_callback xen_do_hypervisor_callback has_error_code=0
+>>>>>>> v3.18
 
 /*
  * A note on the "critical region" in our callback handler.
@@ -1476,12 +1726,17 @@ ENTRY(xen_failsafe_callback)
 	CFI_ENDPROC
 END(xen_failsafe_callback)
 
+<<<<<<< HEAD
 apicinterrupt HYPERVISOR_CALLBACK_VECTOR \
+=======
+apicinterrupt3 HYPERVISOR_CALLBACK_VECTOR \
+>>>>>>> v3.18
 	xen_hvm_callback_vector xen_evtchn_do_upcall
 
 #endif /* CONFIG_XEN */
 
 #if IS_ENABLED(CONFIG_HYPERV)
+<<<<<<< HEAD
 apicinterrupt HYPERVISOR_CALLBACK_VECTOR \
 	hyperv_callback_vector hyperv_vector_handler
 #endif /* CONFIG_HYPERV */
@@ -1506,6 +1761,27 @@ errorentry async_page_fault do_async_page_fault
 #endif
 #ifdef CONFIG_X86_MCE
 paranoidzeroentry machine_check *machine_check_vector(%rip)
+=======
+apicinterrupt3 HYPERVISOR_CALLBACK_VECTOR \
+	hyperv_callback_vector hyperv_vector_handler
+#endif /* CONFIG_HYPERV */
+
+idtentry debug do_debug has_error_code=0 paranoid=1 shift_ist=DEBUG_STACK
+idtentry int3 do_int3 has_error_code=0 paranoid=1 shift_ist=DEBUG_STACK
+idtentry stack_segment do_stack_segment has_error_code=1
+#ifdef CONFIG_XEN
+idtentry xen_debug do_debug has_error_code=0
+idtentry xen_int3 do_int3 has_error_code=0
+idtentry xen_stack_segment do_stack_segment has_error_code=1
+#endif
+idtentry general_protection do_general_protection has_error_code=1
+trace_idtentry page_fault do_page_fault has_error_code=1
+#ifdef CONFIG_KVM_GUEST
+idtentry async_page_fault do_async_page_fault has_error_code=1
+#endif
+#ifdef CONFIG_X86_MCE
+idtentry machine_check has_error_code=0 paranoid=1 do_sym=*machine_check_vector(%rip)
+>>>>>>> v3.18
 #endif
 
 	/*
@@ -1577,6 +1853,7 @@ ENTRY(error_entry)
 	CFI_ADJUST_CFA_OFFSET 15*8
 	/* oldrax contains error code */
 	cld
+<<<<<<< HEAD
 	movq_cfi rdi, RDI+8
 	movq_cfi rsi, RSI+8
 	movq_cfi rdx, RDX+8
@@ -1592,6 +1869,23 @@ ENTRY(error_entry)
 	movq_cfi r13, R13+8
 	movq_cfi r14, R14+8
 	movq_cfi r15, R15+8
+=======
+	movq %rdi, RDI+8(%rsp)
+	movq %rsi, RSI+8(%rsp)
+	movq %rdx, RDX+8(%rsp)
+	movq %rcx, RCX+8(%rsp)
+	movq %rax, RAX+8(%rsp)
+	movq  %r8,  R8+8(%rsp)
+	movq  %r9,  R9+8(%rsp)
+	movq %r10, R10+8(%rsp)
+	movq %r11, R11+8(%rsp)
+	movq_cfi rbx, RBX+8
+	movq %rbp, RBP+8(%rsp)
+	movq %r12, R12+8(%rsp)
+	movq %r13, R13+8(%rsp)
+	movq %r14, R14+8(%rsp)
+	movq %r15, R15+8(%rsp)
+>>>>>>> v3.18
 	xorl %ebx,%ebx
 	testl $3,CS+8(%rsp)
 	je error_kernelspace
@@ -1608,6 +1902,10 @@ error_sti:
  * for these here too.
  */
 error_kernelspace:
+<<<<<<< HEAD
+=======
+	CFI_REL_OFFSET rcx, RCX+8
+>>>>>>> v3.18
 	incl %ebx
 	leaq native_irq_return_iret(%rip),%rcx
 	cmpq %rcx,RIP+8(%rsp)
@@ -1914,7 +2212,10 @@ ENTRY(ignore_sysret)
 	CFI_ENDPROC
 END(ignore_sysret)
 
+<<<<<<< HEAD
 /*
  * End of kprobes section
  */
 	.popsection
+=======
+>>>>>>> v3.18

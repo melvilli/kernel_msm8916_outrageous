@@ -23,7 +23,10 @@
  */
 
 #include <core/os.h>
+<<<<<<< HEAD
 #include <core/class.h>
+=======
+>>>>>>> v3.18
 #include <core/engctx.h>
 
 #include <engine/software.h>
@@ -117,8 +120,13 @@ nv10_software_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	return 0;
 }
 
+<<<<<<< HEAD
 struct nouveau_oclass
 nv10_software_oclass = {
+=======
+struct nouveau_oclass *
+nv10_software_oclass = &(struct nouveau_oclass) {
+>>>>>>> v3.18
 	.handle = NV_ENGINE(SW, 0x10),
 	.ofuncs = &(struct nouveau_ofuncs) {
 		.ctor = nv10_software_ctor,

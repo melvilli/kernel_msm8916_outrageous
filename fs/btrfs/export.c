@@ -5,7 +5,10 @@
 #include "btrfs_inode.h"
 #include "print-tree.h"
 #include "export.h"
+<<<<<<< HEAD
 #include "compat.h"
+=======
+>>>>>>> v3.18
 
 #define BTRFS_FID_SIZE_NON_CONNECTABLE (offsetof(struct btrfs_fid, \
 						 parent_objectid) / 4)
@@ -71,7 +74,11 @@ static struct dentry *btrfs_get_dentry(struct super_block *sb, u64 objectid,
 		return ERR_PTR(-ESTALE);
 
 	key.objectid = root_objectid;
+<<<<<<< HEAD
 	btrfs_set_key_type(&key, BTRFS_ROOT_ITEM_KEY);
+=======
+	key.type = BTRFS_ROOT_ITEM_KEY;
+>>>>>>> v3.18
 	key.offset = (u64)-1;
 
 	index = srcu_read_lock(&fs_info->subvol_srcu);
@@ -82,6 +89,7 @@ static struct dentry *btrfs_get_dentry(struct super_block *sb, u64 objectid,
 		goto fail;
 	}
 
+<<<<<<< HEAD
 	if (btrfs_root_refs(&root->root_item) == 0) {
 		err = -ENOENT;
 		goto fail;
@@ -89,6 +97,10 @@ static struct dentry *btrfs_get_dentry(struct super_block *sb, u64 objectid,
 
 	key.objectid = objectid;
 	btrfs_set_key_type(&key, BTRFS_INODE_ITEM_KEY);
+=======
+	key.objectid = objectid;
+	key.type = BTRFS_INODE_ITEM_KEY;
+>>>>>>> v3.18
 	key.offset = 0;
 
 	inode = btrfs_iget(sb, &key, root, NULL);

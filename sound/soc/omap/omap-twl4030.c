@@ -55,8 +55,12 @@ static int omap_twl4030_hw_params(struct snd_pcm_substream *substream,
 	struct snd_soc_pcm_runtime *rtd = substream->private_data;
 	struct snd_soc_dai *codec_dai = rtd->codec_dai;
 	struct snd_soc_dai *cpu_dai = rtd->cpu_dai;
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = rtd->codec;
 	struct snd_soc_card *card = codec->card;
+=======
+	struct snd_soc_card *card = rtd->card;
+>>>>>>> v3.18
 	unsigned int fmt;
 	int ret;
 
@@ -179,7 +183,11 @@ static inline void twl4030_disconnect_pin(struct snd_soc_dapm_context *dapm,
 static int omap_twl4030_init(struct snd_soc_pcm_runtime *rtd)
 {
 	struct snd_soc_codec *codec = rtd->codec;
+<<<<<<< HEAD
 	struct snd_soc_card *card = codec->card;
+=======
+	struct snd_soc_card *card = rtd->card;
+>>>>>>> v3.18
 	struct snd_soc_dapm_context *dapm = &codec->dapm;
 	struct omap_tw4030_pdata *pdata = dev_get_platdata(card->dev);
 	struct omap_twl4030 *priv = snd_soc_card_get_drvdata(card);
@@ -232,6 +240,21 @@ static int omap_twl4030_init(struct snd_soc_pcm_runtime *rtd)
 	return ret;
 }
 
+<<<<<<< HEAD
+=======
+static int omap_twl4030_card_remove(struct snd_soc_card *card)
+{
+	struct omap_twl4030 *priv = snd_soc_card_get_drvdata(card);
+
+	if (priv->jack_detect > 0)
+		snd_soc_jack_free_gpios(&priv->hs_jack,
+					ARRAY_SIZE(hs_jack_gpios),
+					hs_jack_gpios);
+
+	return 0;
+}
+
+>>>>>>> v3.18
 /* Digital audio interface glue - connects codec <--> CPU */
 static struct snd_soc_dai_link omap_twl4030_dai_links[] = {
 	{
@@ -239,7 +262,11 @@ static struct snd_soc_dai_link omap_twl4030_dai_links[] = {
 		.stream_name = "TWL4030 HiFi",
 		.cpu_dai_name = "omap-mcbsp.2",
 		.codec_dai_name = "twl4030-hifi",
+<<<<<<< HEAD
 		.platform_name = "omap-pcm-audio",
+=======
+		.platform_name = "omap-mcbsp.2",
+>>>>>>> v3.18
 		.codec_name = "twl4030-codec",
 		.init = omap_twl4030_init,
 		.ops = &omap_twl4030_ops,
@@ -249,7 +276,11 @@ static struct snd_soc_dai_link omap_twl4030_dai_links[] = {
 		.stream_name = "TWL4030 Voice",
 		.cpu_dai_name = "omap-mcbsp.3",
 		.codec_dai_name = "twl4030-voice",
+<<<<<<< HEAD
 		.platform_name = "omap-pcm-audio",
+=======
+		.platform_name = "omap-mcbsp.3",
+>>>>>>> v3.18
 		.codec_name = "twl4030-codec",
 		.dai_fmt = SND_SOC_DAIFMT_DSP_A | SND_SOC_DAIFMT_IB_NF |
 			   SND_SOC_DAIFMT_CBM_CFM,
@@ -259,6 +290,10 @@ static struct snd_soc_dai_link omap_twl4030_dai_links[] = {
 /* Audio machine driver */
 static struct snd_soc_card omap_twl4030_card = {
 	.owner = THIS_MODULE,
+<<<<<<< HEAD
+=======
+	.remove = omap_twl4030_card_remove,
+>>>>>>> v3.18
 	.dai_link = omap_twl4030_dai_links,
 	.num_links = ARRAY_SIZE(omap_twl4030_dai_links),
 
@@ -299,12 +334,24 @@ static int omap_twl4030_probe(struct platform_device *pdev)
 		omap_twl4030_dai_links[0].cpu_dai_name  = NULL;
 		omap_twl4030_dai_links[0].cpu_of_node = dai_node;
 
+<<<<<<< HEAD
+=======
+		omap_twl4030_dai_links[0].platform_name  = NULL;
+		omap_twl4030_dai_links[0].platform_of_node = dai_node;
+
+>>>>>>> v3.18
 		dai_node = of_parse_phandle(node, "ti,mcbsp-voice", 0);
 		if (!dai_node) {
 			card->num_links = 1;
 		} else {
 			omap_twl4030_dai_links[1].cpu_dai_name  = NULL;
 			omap_twl4030_dai_links[1].cpu_of_node = dai_node;
+<<<<<<< HEAD
+=======
+
+			omap_twl4030_dai_links[1].platform_name  = NULL;
+			omap_twl4030_dai_links[1].platform_of_node = dai_node;
+>>>>>>> v3.18
 		}
 
 		priv->jack_detect = of_get_named_gpio(node,
@@ -338,9 +385,15 @@ static int omap_twl4030_probe(struct platform_device *pdev)
 	}
 
 	snd_soc_card_set_drvdata(card, priv);
+<<<<<<< HEAD
 	ret = snd_soc_register_card(card);
 	if (ret) {
 		dev_err(&pdev->dev, "snd_soc_register_card() failed: %d\n",
+=======
+	ret = devm_snd_soc_register_card(&pdev->dev, card);
+	if (ret) {
+		dev_err(&pdev->dev, "devm_snd_soc_register_card() failed: %d\n",
+>>>>>>> v3.18
 			ret);
 		return ret;
 	}
@@ -348,6 +401,7 @@ static int omap_twl4030_probe(struct platform_device *pdev)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int omap_twl4030_remove(struct platform_device *pdev)
 {
 	struct snd_soc_card *card = platform_get_drvdata(pdev);
@@ -362,6 +416,8 @@ static int omap_twl4030_remove(struct platform_device *pdev)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 static const struct of_device_id omap_twl4030_of_match[] = {
 	{.compatible = "ti,omap-twl4030", },
 	{ },
@@ -376,7 +432,10 @@ static struct platform_driver omap_twl4030_driver = {
 		.of_match_table = omap_twl4030_of_match,
 	},
 	.probe = omap_twl4030_probe,
+<<<<<<< HEAD
 	.remove = omap_twl4030_remove,
+=======
+>>>>>>> v3.18
 };
 
 module_platform_driver(omap_twl4030_driver);

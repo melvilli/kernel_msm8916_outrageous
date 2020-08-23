@@ -260,11 +260,22 @@ static void c2_free_cq_buf(struct c2_dev *c2dev, struct c2_mq *mq)
 			  mq->msg_pool.host, dma_unmap_addr(mq, mapping));
 }
 
+<<<<<<< HEAD
 static int c2_alloc_cq_buf(struct c2_dev *c2dev, struct c2_mq *mq, int q_size,
 			   int msg_size)
 {
 	u8 *pool_start;
 
+=======
+static int c2_alloc_cq_buf(struct c2_dev *c2dev, struct c2_mq *mq,
+			   size_t q_size, size_t msg_size)
+{
+	u8 *pool_start;
+
+	if (q_size > SIZE_MAX / msg_size)
+		return -EINVAL;
+
+>>>>>>> v3.18
 	pool_start = dma_alloc_coherent(&c2dev->pcidev->dev, q_size * msg_size,
 					&mq->host_dma, GFP_KERNEL);
 	if (!pool_start)

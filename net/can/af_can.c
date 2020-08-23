@@ -262,9 +262,12 @@ int can_send(struct sk_buff *skb, int loop)
 		goto inval_skb;
 	}
 
+<<<<<<< HEAD
 	skb->ip_summed = CHECKSUM_UNNECESSARY;
 
 	skb_reset_mac_header(skb);
+=======
+>>>>>>> v3.18
 	skb_reset_network_header(skb);
 	skb_reset_transport_header(skb);
 
@@ -341,6 +344,32 @@ static struct dev_rcv_lists *find_dev_rcv_lists(struct net_device *dev)
 }
 
 /**
+<<<<<<< HEAD
+=======
+ * effhash - hash function for 29 bit CAN identifier reduction
+ * @can_id: 29 bit CAN identifier
+ *
+ * Description:
+ *  To reduce the linear traversal in one linked list of _single_ EFF CAN
+ *  frame subscriptions the 29 bit identifier is mapped to 10 bits.
+ *  (see CAN_EFF_RCV_HASH_BITS definition)
+ *
+ * Return:
+ *  Hash value from 0x000 - 0x3FF ( enforced by CAN_EFF_RCV_HASH_BITS mask )
+ */
+static unsigned int effhash(canid_t can_id)
+{
+	unsigned int hash;
+
+	hash = can_id;
+	hash ^= can_id >> CAN_EFF_RCV_HASH_BITS;
+	hash ^= can_id >> (2 * CAN_EFF_RCV_HASH_BITS);
+
+	return hash & ((1 << CAN_EFF_RCV_HASH_BITS) - 1);
+}
+
+/**
+>>>>>>> v3.18
  * find_rcv_list - determine optimal filterlist inside device filter struct
  * @can_id: pointer to CAN identifier of a given can_filter
  * @mask: pointer to CAN mask of a given can_filter
@@ -403,10 +432,15 @@ static struct hlist_head *find_rcv_list(canid_t *can_id, canid_t *mask,
 	    !(*can_id & CAN_RTR_FLAG)) {
 
 		if (*can_id & CAN_EFF_FLAG) {
+<<<<<<< HEAD
 			if (*mask == (CAN_EFF_MASK | CAN_EFF_RTR_FLAGS)) {
 				/* RFC: a future use-case for hash-tables? */
 				return &d->rx[RX_EFF];
 			}
+=======
+			if (*mask == (CAN_EFF_MASK | CAN_EFF_RTR_FLAGS))
+				return &d->rx_eff[effhash(*can_id)];
+>>>>>>> v3.18
 		} else {
 			if (*mask == (CAN_SFF_MASK | CAN_EFF_RTR_FLAGS))
 				return &d->rx_sff[*can_id];
@@ -424,8 +458,12 @@ static struct hlist_head *find_rcv_list(canid_t *can_id, canid_t *mask,
  * @mask: CAN mask (see description)
  * @func: callback function on filter match
  * @data: returned parameter for callback function
+<<<<<<< HEAD
  * @ident: string for calling module indentification
  * @sk: socket pointer (might be NULL)
+=======
+ * @ident: string for calling module identification
+>>>>>>> v3.18
  *
  * Description:
  *  Invokes the callback function with the received sk_buff and the given
@@ -449,7 +487,11 @@ static struct hlist_head *find_rcv_list(canid_t *can_id, canid_t *mask,
  */
 int can_rx_register(struct net_device *dev, canid_t can_id, canid_t mask,
 		    void (*func)(struct sk_buff *, void *), void *data,
+<<<<<<< HEAD
 		    char *ident, struct sock *sk)
+=======
+		    char *ident)
+>>>>>>> v3.18
 {
 	struct receiver *r;
 	struct hlist_head *rl;
@@ -477,7 +519,10 @@ int can_rx_register(struct net_device *dev, canid_t can_id, canid_t mask,
 		r->func    = func;
 		r->data    = data;
 		r->ident   = ident;
+<<<<<<< HEAD
 		r->sk      = sk;
+=======
+>>>>>>> v3.18
 
 		hlist_add_head_rcu(&r->list, rl);
 		d->entries++;
@@ -502,11 +547,16 @@ EXPORT_SYMBOL(can_rx_register);
 static void can_rx_delete_receiver(struct rcu_head *rp)
 {
 	struct receiver *r = container_of(rp, struct receiver, rcu);
+<<<<<<< HEAD
 	struct sock *sk = r->sk;
 
 	kmem_cache_free(rcv_cache, r);
 	if (sk)
 		sock_put(sk);
+=======
+
+	kmem_cache_free(rcv_cache, r);
+>>>>>>> v3.18
 }
 
 /**
@@ -581,11 +631,16 @@ void can_rx_unregister(struct net_device *dev, canid_t can_id, canid_t mask,
 	spin_unlock(&can_rcvlists_lock);
 
 	/* schedule the receiver item for deletion */
+<<<<<<< HEAD
 	if (r) {
 		if (r->sk)
 			sock_hold(r->sk);
 		call_rcu(&r->rcu, can_rx_delete_receiver);
 	}
+=======
+	if (r)
+		call_rcu(&r->rcu, can_rx_delete_receiver);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(can_rx_unregister);
 
@@ -643,7 +698,11 @@ static int can_rcv_filter(struct dev_rcv_lists *d, struct sk_buff *skb)
 		return matches;
 
 	if (can_id & CAN_EFF_FLAG) {
+<<<<<<< HEAD
 		hlist_for_each_entry_rcu(r, &d->rx[RX_EFF], list) {
+=======
+		hlist_for_each_entry_rcu(r, &d->rx_eff[effhash(can_id)], list) {
+>>>>>>> v3.18
 			if (r->can_id == can_id) {
 				deliver(skb, r);
 				matches++;
@@ -806,9 +865,15 @@ EXPORT_SYMBOL(can_proto_unregister);
  * af_can notifier to create/remove CAN netdevice specific structs
  */
 static int can_notifier(struct notifier_block *nb, unsigned long msg,
+<<<<<<< HEAD
 			void *data)
 {
 	struct net_device *dev = (struct net_device *)data;
+=======
+			void *ptr)
+{
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 	struct dev_rcv_lists *d;
 
 	if (!net_eq(dev_net(dev), &init_net))

@@ -13,7 +13,10 @@
  * option) any later version.
  */
 #include <linux/kernel.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/errno.h>
 #include <linux/slab.h>
 #include <linux/stddef.h>

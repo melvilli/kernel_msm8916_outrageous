@@ -22,8 +22,13 @@
  * Authors: Ben Skeggs <bskeggs@redhat.com>
  */
 
+<<<<<<< HEAD
 #include <core/object.h>
 #include <core/class.h>
+=======
+#include <nvif/os.h>
+#include <nvif/class.h>
+>>>>>>> v3.18
 
 #include "nouveau_drm.h"
 #include "nouveau_dma.h"
@@ -33,11 +38,21 @@ int
 nv17_fence_sync(struct nouveau_fence *fence,
 		struct nouveau_channel *prev, struct nouveau_channel *chan)
 {
+<<<<<<< HEAD
 	struct nv10_fence_priv *priv = chan->drm->fence;
 	u32 value;
 	int ret;
 
 	if (!mutex_trylock(&prev->cli->mutex))
+=======
+	struct nouveau_cli *cli = (void *)nvif_client(&prev->device->base);
+	struct nv10_fence_priv *priv = chan->drm->fence;
+	struct nv10_fence_chan *fctx = chan->fence;
+	u32 value;
+	int ret;
+
+	if (!mutex_trylock(&cli->mutex))
+>>>>>>> v3.18
 		return -EBUSY;
 
 	spin_lock(&priv->lock);
@@ -48,7 +63,11 @@ nv17_fence_sync(struct nouveau_fence *fence,
 	ret = RING_SPACE(prev, 5);
 	if (!ret) {
 		BEGIN_NV04(prev, 0, NV11_SUBCHAN_DMA_SEMAPHORE, 4);
+<<<<<<< HEAD
 		OUT_RING  (prev, NvSema);
+=======
+		OUT_RING  (prev, fctx->sema.handle);
+>>>>>>> v3.18
 		OUT_RING  (prev, 0);
 		OUT_RING  (prev, value + 0);
 		OUT_RING  (prev, value + 1);
@@ -57,14 +76,22 @@ nv17_fence_sync(struct nouveau_fence *fence,
 
 	if (!ret && !(ret = RING_SPACE(chan, 5))) {
 		BEGIN_NV04(chan, 0, NV11_SUBCHAN_DMA_SEMAPHORE, 4);
+<<<<<<< HEAD
 		OUT_RING  (chan, NvSema);
+=======
+		OUT_RING  (chan, fctx->sema.handle);
+>>>>>>> v3.18
 		OUT_RING  (chan, 0);
 		OUT_RING  (chan, value + 1);
 		OUT_RING  (chan, value + 2);
 		FIRE_RING (chan);
 	}
 
+<<<<<<< HEAD
 	mutex_unlock(&prev->cli->mutex);
+=======
+	mutex_unlock(&cli->mutex);
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -74,7 +101,10 @@ nv17_fence_context_new(struct nouveau_channel *chan)
 	struct nv10_fence_priv *priv = chan->drm->fence;
 	struct nv10_fence_chan *fctx;
 	struct ttm_mem_reg *mem = &priv->bo->bo.mem;
+<<<<<<< HEAD
 	struct nouveau_object *object;
+=======
+>>>>>>> v3.18
 	u32 start = mem->start * PAGE_SIZE;
 	u32 limit = start + mem->size - 1;
 	int ret = 0;
@@ -83,11 +113,16 @@ nv17_fence_context_new(struct nouveau_channel *chan)
 	if (!fctx)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 	nouveau_fence_context_new(&fctx->base);
+=======
+	nouveau_fence_context_new(chan, &fctx->base);
+>>>>>>> v3.18
 	fctx->base.emit = nv10_fence_emit;
 	fctx->base.read = nv10_fence_read;
 	fctx->base.sync = nv17_fence_sync;
 
+<<<<<<< HEAD
 	ret = nouveau_object_new(nv_object(chan->cli), chan->handle,
 				 NvSema, 0x0002,
 				 &(struct nv_dma_class) {
@@ -97,6 +132,16 @@ nv17_fence_context_new(struct nouveau_channel *chan)
 					.limit = limit,
 				 }, sizeof(struct nv_dma_class),
 				 &object);
+=======
+	ret = nvif_object_init(chan->object, NULL, NvSema, NV_DMA_FROM_MEMORY,
+			       &(struct nv_dma_v0) {
+					.target = NV_DMA_V0_TARGET_VRAM,
+					.access = NV_DMA_V0_ACCESS_RDWR,
+					.start = start,
+					.limit = limit,
+			       }, sizeof(struct nv_dma_v0),
+			       &fctx->sema);
+>>>>>>> v3.18
 	if (ret)
 		nv10_fence_context_del(chan);
 	return ret;
@@ -124,10 +169,19 @@ nv17_fence_create(struct nouveau_drm *drm)
 	priv->base.resume = nv17_fence_resume;
 	priv->base.context_new = nv17_fence_context_new;
 	priv->base.context_del = nv10_fence_context_del;
+<<<<<<< HEAD
 	spin_lock_init(&priv->lock);
 
 	ret = nouveau_bo_new(drm->dev, 4096, 0x1000, TTM_PL_FLAG_VRAM,
 			     0, 0x0000, NULL, &priv->bo);
+=======
+	priv->base.contexts = 31;
+	priv->base.context_base = fence_context_alloc(priv->base.contexts);
+	spin_lock_init(&priv->lock);
+
+	ret = nouveau_bo_new(drm->dev, 4096, 0x1000, TTM_PL_FLAG_VRAM,
+			     0, 0x0000, NULL, NULL, &priv->bo);
+>>>>>>> v3.18
 	if (!ret) {
 		ret = nouveau_bo_pin(priv->bo, TTM_PL_FLAG_VRAM);
 		if (!ret) {

@@ -23,6 +23,10 @@
 
 static int da9052_spi_probe(struct spi_device *spi)
 {
+<<<<<<< HEAD
+=======
+	struct regmap_config config;
+>>>>>>> v3.18
 	int ret;
 	const struct spi_device_id *id = spi_get_device_id(spi);
 	struct da9052 *da9052;
@@ -40,10 +44,17 @@ static int da9052_spi_probe(struct spi_device *spi)
 
 	spi_set_drvdata(spi, da9052);
 
+<<<<<<< HEAD
 	da9052_regmap_config.read_flag_mask = 1;
 	da9052_regmap_config.write_flag_mask = 0;
 
 	da9052->regmap = devm_regmap_init_spi(spi, &da9052_regmap_config);
+=======
+	config = da9052_regmap_config;
+	config.read_flag_mask = 1;
+
+	da9052->regmap = devm_regmap_init_spi(spi, &config);
+>>>>>>> v3.18
 	if (IS_ERR(da9052->regmap)) {
 		ret = PTR_ERR(da9052->regmap);
 		dev_err(&spi->dev, "Failed to allocate register map: %d\n",
@@ -71,6 +82,10 @@ static struct spi_device_id da9052_spi_id[] = {
 	{"da9053-aa", DA9053_AA},
 	{"da9053-ba", DA9053_BA},
 	{"da9053-bb", DA9053_BB},
+<<<<<<< HEAD
+=======
+	{"da9053-bc", DA9053_BC},
+>>>>>>> v3.18
 	{}
 };
 

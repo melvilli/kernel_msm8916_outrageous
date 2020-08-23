@@ -19,6 +19,11 @@
 
 static void __init imx25_dt_init(void)
 {
+<<<<<<< HEAD
+=======
+	mxc_arch_reset_init_dt();
+
+>>>>>>> v3.18
 	of_platform_populate(NULL, of_default_bus_match_table, NULL, NULL);
 }
 
@@ -27,17 +32,23 @@ static const char * const imx25_dt_board_compat[] __initconst = {
 	NULL
 };
 
+<<<<<<< HEAD
 static void __init imx25_timer_init(void)
 {
 	mx25_clocks_init_dt();
 }
 
+=======
+>>>>>>> v3.18
 DT_MACHINE_START(IMX25_DT, "Freescale i.MX25 (Device Tree Support)")
 	.map_io		= mx25_map_io,
 	.init_early	= imx25_init_early,
 	.init_irq	= mx25_init_irq,
+<<<<<<< HEAD
 	.handle_irq	= imx25_handle_irq,
 	.init_time	= imx25_timer_init,
+=======
+>>>>>>> v3.18
 	.init_machine	= imx25_dt_init,
 	.dt_compat	= imx25_dt_board_compat,
 	.restart	= mxc_restart,

@@ -72,18 +72,33 @@ MLX4_EN_PARM_INT(pfctx, 0, "Priority based Flow Control policy on TX[7:0]."
 MLX4_EN_PARM_INT(pfcrx, 0, "Priority based Flow Control policy on RX[7:0]."
 			   " Per priority bit mask");
 
+<<<<<<< HEAD
 int en_print(const char *level, const struct mlx4_en_priv *priv,
 	     const char *format, ...)
 {
 	va_list args;
 	struct va_format vaf;
 	int i;
+=======
+MLX4_EN_PARM_INT(inline_thold, MAX_INLINE,
+		 "Threshold for using inline data (range: 17-104, default: 104)");
+
+#define MAX_PFC_TX     0xff
+#define MAX_PFC_RX     0xff
+
+void en_print(const char *level, const struct mlx4_en_priv *priv,
+	      const char *format, ...)
+{
+	va_list args;
+	struct va_format vaf;
+>>>>>>> v3.18
 
 	va_start(args, format);
 
 	vaf.fmt = format;
 	vaf.va = &args;
 	if (priv->registered)
+<<<<<<< HEAD
 		i = printk("%s%s: %s: %pV",
 			   level, DRV_NAME, priv->dev->name, &vaf);
 	else
@@ -93,6 +108,15 @@ int en_print(const char *level, const struct mlx4_en_priv *priv,
 	va_end(args);
 
 	return i;
+=======
+		printk("%s%s: %s: %pV",
+		       level, DRV_NAME, priv->dev->name, &vaf);
+	else
+		printk("%s%s: %s: Port %d: %pV",
+		       level, DRV_NAME, dev_name(&priv->mdev->pdev->dev),
+		       priv->port, &vaf);
+	va_end(args);
+>>>>>>> v3.18
 }
 
 void mlx4_en_update_loopback_state(struct net_device *dev,
@@ -123,11 +147,21 @@ static int mlx4_en_get_profile(struct mlx4_en_dev *mdev)
 	int i;
 
 	params->udp_rss = udp_rss;
+<<<<<<< HEAD
 	params->num_tx_rings_p_up = min_t(int, num_online_cpus(),
 			MLX4_EN_MAX_TX_RING_P_UP);
 	if (params->udp_rss && !(mdev->dev->caps.flags
 					& MLX4_DEV_CAP_FLAG_UDP_RSS)) {
 		mlx4_warn(mdev, "UDP RSS is not supported on this device.\n");
+=======
+	params->num_tx_rings_p_up = mlx4_low_memory_profile() ?
+		MLX4_EN_MIN_TX_RING_P_UP :
+		min_t(int, num_online_cpus(), MLX4_EN_MAX_TX_RING_P_UP);
+
+	if (params->udp_rss && !(mdev->dev->caps.flags
+					& MLX4_DEV_CAP_FLAG_UDP_RSS)) {
+		mlx4_warn(mdev, "UDP RSS is not supported on this device\n");
+>>>>>>> v3.18
 		params->udp_rss = 0;
 	}
 	for (i = 1; i <= MLX4_MAX_PORTS; i++) {
@@ -140,6 +174,10 @@ static int mlx4_en_get_profile(struct mlx4_en_dev *mdev)
 		params->prof[i].tx_ring_num = params->num_tx_rings_p_up *
 			MLX4_EN_NUM_UP;
 		params->prof[i].rss_rings = 0;
+<<<<<<< HEAD
+=======
+		params->prof[i].inline_thold = inline_thold;
+>>>>>>> v3.18
 	}
 
 	return 0;
@@ -174,6 +212,12 @@ static void mlx4_en_event(struct mlx4_dev *dev, void *endev_ptr,
 		mlx4_err(mdev, "Internal error detected, restarting device\n");
 		break;
 
+<<<<<<< HEAD
+=======
+	case MLX4_DEV_EVENT_SLAVE_INIT:
+	case MLX4_DEV_EVENT_SLAVE_SHUTDOWN:
+		break;
+>>>>>>> v3.18
 	default:
 		if (port < 1 || port > dev->caps.num_ports ||
 		    !mdev->pndev[port])
@@ -196,6 +240,12 @@ static void mlx4_en_remove(struct mlx4_dev *dev, void *endev_ptr)
 		if (mdev->pndev[i])
 			mlx4_en_destroy_netdev(mdev->pndev[i]);
 
+<<<<<<< HEAD
+=======
+	if (mdev->dev->caps.flags2 & MLX4_DEV_CAP_FLAG2_TS)
+		mlx4_en_remove_timestamp(mdev);
+
+>>>>>>> v3.18
 	flush_workqueue(mdev->workqueue);
 	destroy_workqueue(mdev->workqueue);
 	(void) mlx4_mr_free(dev, &mdev->mr);
@@ -238,8 +288,12 @@ static void *mlx4_en_add(struct mlx4_dev *dev)
 
 	mdev->LSO_support = !!(dev->caps.flags & (1 << 15));
 	if (!mdev->LSO_support)
+<<<<<<< HEAD
 		mlx4_warn(mdev, "LSO not supported, please upgrade to later "
 				"FW version to enable LSO\n");
+=======
+		mlx4_warn(mdev, "LSO not supported, please upgrade to later FW version to enable LSO\n");
+>>>>>>> v3.18
 
 	if (mlx4_mr_alloc(mdev->dev, mdev->priv_pdn, 0, ~0ull,
 			 MLX4_PERM_LOCAL_WRITE |  MLX4_PERM_LOCAL_READ,
@@ -255,7 +309,11 @@ static void *mlx4_en_add(struct mlx4_dev *dev)
 	/* Build device profile according to supplied module parameters */
 	err = mlx4_en_get_profile(mdev);
 	if (err) {
+<<<<<<< HEAD
 		mlx4_err(mdev, "Bad module parameters, aborting.\n");
+=======
+		mlx4_err(mdev, "Bad module parameters, aborting\n");
+>>>>>>> v3.18
 		goto err_mr;
 	}
 
@@ -268,6 +326,7 @@ static void *mlx4_en_add(struct mlx4_dev *dev)
 	if (mdev->dev->caps.flags2 & MLX4_DEV_CAP_FLAG2_TS)
 		mlx4_en_init_timestamp(mdev);
 
+<<<<<<< HEAD
 	mlx4_foreach_port(i, dev, MLX4_PORT_TYPE_ETH) {
 		if (!dev->caps.comp_pool) {
 			mdev->profile.prof[i].rx_ring_num =
@@ -281,6 +340,10 @@ static void *mlx4_en_add(struct mlx4_dev *dev)
 				      dev->caps.num_ports - 1 , MAX_MSIX_P_PORT - 1));
 		}
 	}
+=======
+	/* Set default number of RX rings*/
+	mlx4_en_set_num_rx_rings(mdev);
+>>>>>>> v3.18
 
 	/* Create our own workqueue for reset/multicast tasks
 	 * Note: we cannot use the shared workqueue because of deadlocks caused
@@ -310,7 +373,11 @@ static void *mlx4_en_add(struct mlx4_dev *dev)
 err_mr:
 	(void) mlx4_mr_free(dev, &mdev->mr);
 err_map:
+<<<<<<< HEAD
 	if (!mdev->uar_map)
+=======
+	if (mdev->uar_map)
+>>>>>>> v3.18
 		iounmap(mdev->uar_map);
 err_uar:
 	mlx4_uar_free(dev, &mdev->priv_uar);
@@ -330,8 +397,36 @@ static struct mlx4_interface mlx4_en_interface = {
 	.protocol	= MLX4_PROT_ETH,
 };
 
+<<<<<<< HEAD
 static int __init mlx4_en_init(void)
 {
+=======
+static void mlx4_en_verify_params(void)
+{
+	if (pfctx > MAX_PFC_TX) {
+		pr_warn("mlx4_en: WARNING: illegal module parameter pfctx 0x%x - should be in range 0-0x%x, will be changed to default (0)\n",
+			pfctx, MAX_PFC_TX);
+		pfctx = 0;
+	}
+
+	if (pfcrx > MAX_PFC_RX) {
+		pr_warn("mlx4_en: WARNING: illegal module parameter pfcrx 0x%x - should be in range 0-0x%x, will be changed to default (0)\n",
+			pfcrx, MAX_PFC_RX);
+		pfcrx = 0;
+	}
+
+	if (inline_thold < MIN_PKT_LEN || inline_thold > MAX_INLINE) {
+		pr_warn("mlx4_en: WARNING: illegal module parameter inline_thold %d - should be in range %d-%d, will be changed to default (%d)\n",
+			inline_thold, MIN_PKT_LEN, MAX_INLINE, MAX_INLINE);
+		inline_thold = MAX_INLINE;
+	}
+}
+
+static int __init mlx4_en_init(void)
+{
+	mlx4_en_verify_params();
+
+>>>>>>> v3.18
 	return mlx4_register_interface(&mlx4_en_interface);
 }
 

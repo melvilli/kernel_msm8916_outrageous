@@ -35,7 +35,10 @@
 #include <linux/timer.h>
 #include <linux/errno.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/device.h>
 #include <linux/firmware.h>
 #include <linux/mutex.h>

@@ -10,6 +10,11 @@
 #ifndef MCP_H
 #define MCP_H
 
+<<<<<<< HEAD
+=======
+#include <linux/device.h>
+
+>>>>>>> v3.18
 struct mcp_ops;
 
 struct mcp {

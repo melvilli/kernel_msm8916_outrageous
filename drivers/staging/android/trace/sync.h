@@ -5,7 +5,11 @@
 #if !defined(_TRACE_SYNC_H) || defined(TRACE_HEADER_MULTI_READ)
 #define _TRACE_SYNC_H
 
+<<<<<<< HEAD
 #include <linux/sync.h>
+=======
+#include "../sync.h"
+>>>>>>> v3.18
 #include <linux/tracepoint.h>
 
 TRACE_EVENT(sync_timeline,
@@ -45,7 +49,11 @@ TRACE_EVENT(sync_wait,
 
 	TP_fast_assign(
 			__assign_str(name, fence->name);
+<<<<<<< HEAD
 			__entry->status = fence->status;
+=======
+			__entry->status = atomic_read(&fence->status);
+>>>>>>> v3.18
 			__entry->begin = begin;
 	),
 
@@ -54,19 +62,33 @@ TRACE_EVENT(sync_wait,
 );
 
 TRACE_EVENT(sync_pt,
+<<<<<<< HEAD
 	TP_PROTO(struct sync_pt *pt),
+=======
+	TP_PROTO(struct fence *pt),
+>>>>>>> v3.18
 
 	TP_ARGS(pt),
 
 	TP_STRUCT__entry(
+<<<<<<< HEAD
 		__string(timeline, pt->parent->name)
+=======
+		__string(timeline, pt->ops->get_timeline_name(pt))
+>>>>>>> v3.18
 		__array(char, value, 32)
 	),
 
 	TP_fast_assign(
+<<<<<<< HEAD
 		__assign_str(timeline, pt->parent->name);
 		if (pt->parent->ops->pt_value_str) {
 			pt->parent->ops->pt_value_str(pt, __entry->value,
+=======
+		__assign_str(timeline, pt->ops->get_timeline_name(pt));
+		if (pt->ops->fence_value_str) {
+			pt->ops->fence_value_str(pt, __entry->value,
+>>>>>>> v3.18
 							sizeof(__entry->value));
 		} else {
 			__entry->value[0] = '\0';

@@ -206,7 +206,31 @@ extern int _cond_resched(void);
 		(__x < 0) ? -__x : __x;		\
 	})
 
+<<<<<<< HEAD
 #if defined(CONFIG_PROVE_LOCKING) || defined(CONFIG_DEBUG_ATOMIC_SLEEP)
+=======
+/**
+ * reciprocal_scale - "scale" a value into range [0, ep_ro)
+ * @val: value
+ * @ep_ro: right open interval endpoint
+ *
+ * Perform a "reciprocal multiplication" in order to "scale" a value into
+ * range [0, ep_ro), where the upper interval endpoint is right-open.
+ * This is useful, e.g. for accessing a index of an array containing
+ * ep_ro elements, for example. Think of it as sort of modulus, only that
+ * the result isn't that of modulo. ;) Note that if initial input is a
+ * small value, then result will return 0.
+ *
+ * Return: a result based on val in interval [0, ep_ro).
+ */
+static inline u32 reciprocal_scale(u32 val, u32 ep_ro)
+{
+	return (u32)(((u64) val * ep_ro) >> 32);
+}
+
+#if defined(CONFIG_MMU) && \
+	(defined(CONFIG_PROVE_LOCKING) || defined(CONFIG_DEBUG_ATOMIC_SLEEP))
+>>>>>>> v3.18
 void might_fault(void);
 #else
 static inline void might_fault(void) { }
@@ -356,10 +380,13 @@ extern unsigned long simple_strtoul(const char *,char **,unsigned int);
 extern long simple_strtol(const char *,char **,unsigned int);
 extern unsigned long long simple_strtoull(const char *,char **,unsigned int);
 extern long long simple_strtoll(const char *,char **,unsigned int);
+<<<<<<< HEAD
 #define strict_strtoul	kstrtoul
 #define strict_strtol	kstrtol
 #define strict_strtoull	kstrtoull
 #define strict_strtoll	kstrtoll
+=======
+>>>>>>> v3.18
 
 extern int num_to_str(char *buf, int size, unsigned long long num);
 
@@ -387,6 +414,10 @@ int vsscanf(const char *, const char *, va_list);
 extern int get_option(char **str, int *pint);
 extern char *get_options(const char *str, int nints, int *ints);
 extern unsigned long long memparse(const char *ptr, char **retptr);
+<<<<<<< HEAD
+=======
+extern bool parse_option_str(const char *str, const char *option);
+>>>>>>> v3.18
 
 extern int core_kernel_text(unsigned long addr);
 extern int core_kernel_data(unsigned long addr);
@@ -406,6 +437,18 @@ extern int panic_on_oops;
 extern int panic_on_unrecovered_nmi;
 extern int panic_on_io_nmi;
 extern int sysctl_panic_on_stackoverflow;
+<<<<<<< HEAD
+=======
+/*
+ * Only to be used by arch init code. If the user over-wrote the default
+ * CONFIG_PANIC_TIMEOUT, honor it.
+ */
+static inline void set_arch_panic_timeout(int timeout, int arch_default_timeout)
+{
+	if (panic_timeout == arch_default_timeout)
+		panic_timeout = timeout;
+}
+>>>>>>> v3.18
 extern const char *print_tainted(void);
 enum lockdep_ok {
 	LOCKDEP_STILL_OK,
@@ -429,7 +472,11 @@ extern enum system_states {
 
 #define TAINT_PROPRIETARY_MODULE	0
 #define TAINT_FORCED_MODULE		1
+<<<<<<< HEAD
 #define TAINT_UNSAFE_SMP		2
+=======
+#define TAINT_CPU_OUT_OF_SPEC		2
+>>>>>>> v3.18
 #define TAINT_FORCED_RMMOD		3
 #define TAINT_MACHINE_CHECK		4
 #define TAINT_BAD_PAGE			5
@@ -440,6 +487,11 @@ extern enum system_states {
 #define TAINT_CRAP			10
 #define TAINT_FIRMWARE_WORKAROUND	11
 #define TAINT_OOT_MODULE		12
+<<<<<<< HEAD
+=======
+#define TAINT_UNSIGNED_MODULE		13
+#define TAINT_SOFTLOCKUP		14
+>>>>>>> v3.18
 
 extern const char hex_asc[];
 #define hex_asc_lo(x)	hex_asc[((x) & 0x0f)]
@@ -452,13 +504,31 @@ static inline char *hex_byte_pack(char *buf, u8 byte)
 	return buf;
 }
 
+<<<<<<< HEAD
 static inline char * __deprecated pack_hex_byte(char *buf, u8 byte)
 {
 	return hex_byte_pack(buf, byte);
+=======
+extern const char hex_asc_upper[];
+#define hex_asc_upper_lo(x)	hex_asc_upper[((x) & 0x0f)]
+#define hex_asc_upper_hi(x)	hex_asc_upper[((x) & 0xf0) >> 4]
+
+static inline char *hex_byte_pack_upper(char *buf, u8 byte)
+{
+	*buf++ = hex_asc_upper_hi(byte);
+	*buf++ = hex_asc_upper_lo(byte);
+	return buf;
+>>>>>>> v3.18
 }
 
 extern int hex_to_bin(char ch);
 extern int __must_check hex2bin(u8 *dst, const char *src, size_t count);
+<<<<<<< HEAD
+=======
+extern char *bin2hex(char *dst, const void *src, size_t count);
+
+bool mac_pton(const char *s, u8 *mac);
+>>>>>>> v3.18
 
 /*
  * General tracing related utility functions - trace_printk(),
@@ -501,7 +571,10 @@ void tracing_snapshot_alloc(void);
 
 extern void tracing_start(void);
 extern void tracing_stop(void);
+<<<<<<< HEAD
 extern void ftrace_off_permanent(void);
+=======
+>>>>>>> v3.18
 
 static inline __printf(1, 2)
 void ____trace_printk_check_format(const char *fmt, ...)
@@ -554,14 +627,22 @@ do {							\
 
 #define do_trace_printk(fmt, args...)					\
 do {									\
+<<<<<<< HEAD
 	static const char *trace_printk_fmt __used			\
+=======
+	static const char *trace_printk_fmt				\
+>>>>>>> v3.18
 		__attribute__((section("__trace_printk_fmt"))) =	\
 		__builtin_constant_p(fmt) ? fmt : NULL;			\
 									\
 	__trace_printk_check_format(fmt, ##args);			\
 									\
 	if (__builtin_constant_p(fmt))					\
+<<<<<<< HEAD
 		__trace_printk(_THIS_IP_, trace_printk_fmt, ##args);	\
+=======
+		__trace_bprintk(_THIS_IP_, trace_printk_fmt, ##args);	\
+>>>>>>> v3.18
 	else								\
 		__trace_printk(_THIS_IP_, fmt, ##args);			\
 } while (0)
@@ -572,9 +653,12 @@ int __trace_bprintk(unsigned long ip, const char *fmt, ...);
 extern __printf(2, 3)
 int __trace_printk(unsigned long ip, const char *fmt, ...);
 
+<<<<<<< HEAD
 extern int __trace_bputs(unsigned long ip, const char *str);
 extern int __trace_puts(unsigned long ip, const char *str, int size);
 
+=======
+>>>>>>> v3.18
 /**
  * trace_puts - write a string into the ftrace buffer
  * @str: the string to record
@@ -601,7 +685,11 @@ extern int __trace_puts(unsigned long ip, const char *str, int size);
  */
 
 #define trace_puts(str) ({						\
+<<<<<<< HEAD
 	static const char *trace_printk_fmt __used			\
+=======
+	static const char *trace_printk_fmt				\
+>>>>>>> v3.18
 		__attribute__((section("__trace_printk_fmt"))) =	\
 		__builtin_constant_p(str) ? str : NULL;			\
 									\
@@ -610,6 +698,11 @@ extern int __trace_puts(unsigned long ip, const char *str, int size);
 	else								\
 		__trace_puts(_THIS_IP_, str, strlen(str));		\
 })
+<<<<<<< HEAD
+=======
+extern int __trace_bputs(unsigned long ip, const char *str);
+extern int __trace_puts(unsigned long ip, const char *str, int size);
+>>>>>>> v3.18
 
 extern void trace_dump_stack(int skip);
 
@@ -621,7 +714,11 @@ extern void trace_dump_stack(int skip);
 #define ftrace_vprintk(fmt, vargs)					\
 do {									\
 	if (__builtin_constant_p(fmt)) {				\
+<<<<<<< HEAD
 		static const char *trace_printk_fmt __used		\
+=======
+		static const char *trace_printk_fmt			\
+>>>>>>> v3.18
 		  __attribute__((section("__trace_printk_fmt"))) =	\
 			__builtin_constant_p(fmt) ? fmt : NULL;		\
 									\
@@ -640,8 +737,12 @@ extern void ftrace_dump(enum ftrace_dump_mode oops_dump_mode);
 #else
 static inline void tracing_start(void) { }
 static inline void tracing_stop(void) { }
+<<<<<<< HEAD
 static inline void ftrace_off_permanent(void) { }
 static inline void trace_dump_stack(void) { }
+=======
+static inline void trace_dump_stack(int skip) { }
+>>>>>>> v3.18
 
 static inline void tracing_on(void) { }
 static inline void tracing_off(void) { }
@@ -679,6 +780,7 @@ static inline void ftrace_dump(enum ftrace_dump_mode oops_dump_mode) { }
 	(void) (&_max1 == &_max2);		\
 	_max1 > _max2 ? _max1 : _max2; })
 
+<<<<<<< HEAD
 #define min3(x, y, z) ({			\
 	typeof(x) _min1 = (x);			\
 	typeof(y) _min2 = (y);			\
@@ -696,6 +798,10 @@ static inline void ftrace_dump(enum ftrace_dump_mode oops_dump_mode) { }
 	(void) (&_max1 == &_max3);		\
 	_max1 > _max2 ? (_max1 > _max3 ? _max1 : _max3) : \
 		(_max2 > _max3 ? _max2 : _max3); })
+=======
+#define min3(x, y, z) min((typeof(x))min(x, y), z)
+#define max3(x, y, z) max((typeof(x))max(x, y), z)
+>>>>>>> v3.18
 
 /**
  * min_not_zero - return the minimum that is _not_ zero, unless both are zero
@@ -710,6 +816,7 @@ static inline void ftrace_dump(enum ftrace_dump_mode oops_dump_mode) { }
 /**
  * clamp - return a value clamped to a given range with strict typechecking
  * @val: current value
+<<<<<<< HEAD
  * @min: minimum allowable value
  * @max: maximum allowable value
  *
@@ -724,6 +831,15 @@ static inline void ftrace_dump(enum ftrace_dump_mode oops_dump_mode) { }
 	(void) (&__val == &__max);		\
 	__val = __val < __min ? __min: __val;	\
 	__val > __max ? __max: __val; })
+=======
+ * @lo: lowest allowable value
+ * @hi: highest allowable value
+ *
+ * This macro does strict typechecking of lo/hi to make sure they are of the
+ * same type as val.  See the unnecessary pointer comparisons.
+ */
+#define clamp(val, lo, hi) min((typeof(val))max(val, lo), hi)
+>>>>>>> v3.18
 
 /*
  * ..and if you can't take the strict
@@ -745,36 +861,54 @@ static inline void ftrace_dump(enum ftrace_dump_mode oops_dump_mode) { }
  * clamp_t - return a value clamped to a given range using a given type
  * @type: the type of variable to use
  * @val: current value
+<<<<<<< HEAD
  * @min: minimum allowable value
  * @max: maximum allowable value
+=======
+ * @lo: minimum allowable value
+ * @hi: maximum allowable value
+>>>>>>> v3.18
  *
  * This macro does no typechecking and uses temporary variables of type
  * 'type' to make all the comparisons.
  */
+<<<<<<< HEAD
 #define clamp_t(type, val, min, max) ({		\
 	type __val = (val);			\
 	type __min = (min);			\
 	type __max = (max);			\
 	__val = __val < __min ? __min: __val;	\
 	__val > __max ? __max: __val; })
+=======
+#define clamp_t(type, val, lo, hi) min_t(type, max_t(type, val, lo), hi)
+>>>>>>> v3.18
 
 /**
  * clamp_val - return a value clamped to a given range using val's type
  * @val: current value
+<<<<<<< HEAD
  * @min: minimum allowable value
  * @max: maximum allowable value
+=======
+ * @lo: minimum allowable value
+ * @hi: maximum allowable value
+>>>>>>> v3.18
  *
  * This macro does no typechecking and uses temporary variables of whatever
  * type the input argument 'val' is.  This is useful when val is an unsigned
  * type and min and max are literals that will otherwise be assigned a signed
  * integer type.
  */
+<<<<<<< HEAD
 #define clamp_val(val, min, max) ({		\
 	typeof(val) __val = (val);		\
 	typeof(val) __min = (min);		\
 	typeof(val) __max = (max);		\
 	__val = __val < __min ? __min: __val;	\
 	__val > __max ? __max: __val; })
+=======
+#define clamp_val(val, lo, hi) clamp_t(typeof(val), val, lo, hi)
+>>>>>>> v3.18
 
 
 /*
@@ -802,7 +936,20 @@ static inline void ftrace_dump(enum ftrace_dump_mode oops_dump_mode) { }
 # define REBUILD_DUE_TO_FTRACE_MCOUNT_RECORD
 #endif
 
+<<<<<<< HEAD
 /* To identify board information in panic logs, set this */
 extern char *mach_panic_string;
 
+=======
+/* Permissions on a sysfs file: you didn't miss the 0 prefix did you? */
+#define VERIFY_OCTAL_PERMISSIONS(perms)					\
+	(BUILD_BUG_ON_ZERO((perms) < 0) +				\
+	 BUILD_BUG_ON_ZERO((perms) > 0777) +				\
+	 /* User perms >= group perms >= other perms */			\
+	 BUILD_BUG_ON_ZERO(((perms) >> 6) < (((perms) >> 3) & 7)) +	\
+	 BUILD_BUG_ON_ZERO((((perms) >> 3) & 7) < ((perms) & 7)) +	\
+	 /* Other writable?  Generally considered a bad idea. */	\
+	 BUILD_BUG_ON_ZERO((perms) & 2) +				\
+	 (perms))
+>>>>>>> v3.18
 #endif

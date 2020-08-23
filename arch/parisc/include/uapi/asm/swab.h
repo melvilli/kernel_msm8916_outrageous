@@ -1,7 +1,10 @@
 #ifndef _PARISC_SWAB_H
 #define _PARISC_SWAB_H
 
+<<<<<<< HEAD
 #include <asm/bitsperlong.h>
+=======
+>>>>>>> v3.18
 #include <linux/types.h>
 #include <linux/compiler.h>
 
@@ -39,7 +42,11 @@ static inline __attribute_const__ __u32 __arch_swab32(__u32 x)
 }
 #define __arch_swab32 __arch_swab32
 
+<<<<<<< HEAD
 #if __BITS_PER_LONG > 32
+=======
+#if BITS_PER_LONG > 32
+>>>>>>> v3.18
 /*
 ** From "PA-RISC 2.0 Architecture", HP Professional Books.
 ** See Appendix I page 8 , "Endian Byte Swapping".
@@ -62,6 +69,10 @@ static inline __attribute_const__ __u64 __arch_swab64(__u64 x)
 	return x;
 }
 #define __arch_swab64 __arch_swab64
+<<<<<<< HEAD
 #endif /* __BITS_PER_LONG > 32 */
+=======
+#endif /* BITS_PER_LONG > 32 */
+>>>>>>> v3.18
 
 #endif /* _PARISC_SWAB_H */

@@ -15,11 +15,14 @@
 
 #include <mach/hardware.h>
 
+<<<<<<< HEAD
 /*
  * Physical SRAM offset.
  */
 #define PLAT_PHYS_OFFSET		KS8695_SDRAM_PA
 
+=======
+>>>>>>> v3.18
 #ifndef __ASSEMBLY__
 
 #ifdef CONFIG_PCI

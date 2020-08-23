@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -55,18 +59,28 @@
 #error ACPI_MACHINE_WIDTH not defined
 #endif
 
+<<<<<<< HEAD
 /*! [Begin] no source code translation */
 
+=======
+>>>>>>> v3.18
 /*
  * Data type ranges
  * Note: These macros are designed to be compiler independent as well as
  * working around problems that some 32-bit compilers have with 64-bit
  * constants.
  */
+<<<<<<< HEAD
 #define ACPI_UINT8_MAX                  (UINT8) (~((UINT8)  0))	/* 0xFF               */
 #define ACPI_UINT16_MAX                 (UINT16)(~((UINT16) 0))	/* 0xFFFF             */
 #define ACPI_UINT32_MAX                 (UINT32)(~((UINT32) 0))	/* 0xFFFFFFFF         */
 #define ACPI_UINT64_MAX                 (UINT64)(~((UINT64) 0))	/* 0xFFFFFFFFFFFFFFFF */
+=======
+#define ACPI_UINT8_MAX                  (u8) (~((u8)  0))	/* 0xFF               */
+#define ACPI_UINT16_MAX                 (u16)(~((u16) 0))	/* 0xFFFF             */
+#define ACPI_UINT32_MAX                 (u32)(~((u32) 0))	/* 0xFFFFFFFF         */
+#define ACPI_UINT64_MAX                 (u64)(~((u64) 0))	/* 0xFFFFFFFFFFFFFFFF */
+>>>>>>> v3.18
 #define ACPI_ASCII_MAX                  0x7F
 
 /*
@@ -77,6 +91,7 @@
  *
  * 1) The following types are of fixed size for all targets (16/32/64):
  *
+<<<<<<< HEAD
  * BOOLEAN      Logical boolean
  *
  * UINT8        8-bit  (1 byte) unsigned value
@@ -89,6 +104,20 @@
  * INT64        64-bit (8 byte) signed value
  *
  * COMPILER_DEPENDENT_UINT64/INT64 - These types are defined in the
+=======
+ * u8           Logical boolean
+ *
+ * u8           8-bit  (1 byte) unsigned value
+ * u16          16-bit (2 byte) unsigned value
+ * u32          32-bit (4 byte) unsigned value
+ * u64          64-bit (8 byte) unsigned value
+ *
+ * s16          16-bit (2 byte) signed value
+ * s32          32-bit (4 byte) signed value
+ * s64          64-bit (8 byte) signed value
+ *
+ * COMPILER_DEPENDENT_UINT64/s64 - These types are defined in the
+>>>>>>> v3.18
  * compiler-dependent header(s) and were introduced because there is no common
  * 64-bit integer type across the various compilation models, as shown in
  * the table below.
@@ -110,11 +139,19 @@
  * usually used for memory allocation, efficient loop counters, and array
  * indexes. The types are similar to the size_t type in the C library and are
  * required because there is no C type that consistently represents the native
+<<<<<<< HEAD
  * data width. ACPI_SIZE is needed because there is no guarantee that a
  * kernel-level C library is present.
  *
  * ACPI_SIZE        16/32/64-bit unsigned value
  * ACPI_NATIVE_INT  16/32/64-bit signed value
+=======
+ * data width. acpi_size is needed because there is no guarantee that a
+ * kernel-level C library is present.
+ *
+ * acpi_size        16/32/64-bit unsigned value
+ * acpi_native_int  16/32/64-bit signed value
+>>>>>>> v3.18
  */
 
 /*******************************************************************************
@@ -123,6 +160,7 @@
  *
  ******************************************************************************/
 
+<<<<<<< HEAD
 typedef unsigned char BOOLEAN;
 typedef unsigned char UINT8;
 typedef unsigned short UINT16;
@@ -130,6 +168,18 @@ typedef COMPILER_DEPENDENT_UINT64 UINT64;
 typedef COMPILER_DEPENDENT_INT64 INT64;
 
 /*! [End] no source code translation !*/
+=======
+#ifndef ACPI_USE_SYSTEM_INTTYPES
+
+typedef unsigned char u8;
+typedef unsigned char u8;
+typedef unsigned short u16;
+typedef short s16;
+typedef COMPILER_DEPENDENT_UINT64 u64;
+typedef COMPILER_DEPENDENT_INT64 s64;
+
+#endif				/* ACPI_USE_SYSTEM_INTTYPES */
+>>>>>>> v3.18
 
 /*
  * Value returned by acpi_os_get_thread_id. There is no standard "thread_id"
@@ -149,12 +199,21 @@ typedef COMPILER_DEPENDENT_INT64 INT64;
 
 #if ACPI_MACHINE_WIDTH == 64
 
+<<<<<<< HEAD
 /*! [Begin] no source code translation (keep the typedefs as-is) */
 
 typedef unsigned int UINT32;
 typedef int INT32;
 
 /*! [End] no source code translation !*/
+=======
+#ifndef ACPI_USE_SYSTEM_INTTYPES
+
+typedef unsigned int u32;
+typedef int s32;
+
+#endif				/* ACPI_USE_SYSTEM_INTTYPES */
+>>>>>>> v3.18
 
 typedef s64 acpi_native_int;
 
@@ -188,16 +247,26 @@ typedef u64 acpi_physical_address;
 
 #elif ACPI_MACHINE_WIDTH == 32
 
+<<<<<<< HEAD
 /*! [Begin] no source code translation (keep the typedefs as-is) */
 
 typedef unsigned int UINT32;
 typedef int INT32;
 
 /*! [End] no source code translation !*/
+=======
+#ifndef ACPI_USE_SYSTEM_INTTYPES
+
+typedef unsigned int u32;
+typedef int s32;
+
+#endif				/* ACPI_USE_SYSTEM_INTTYPES */
+>>>>>>> v3.18
 
 typedef s32 acpi_native_int;
 
 typedef u32 acpi_size;
+<<<<<<< HEAD
 
 #ifdef ACPI_32BIT_PHYSICAL_ADDRESS
 
@@ -221,6 +290,11 @@ typedef u64 acpi_physical_address;
 
 #endif				/* ACPI_32BIT_PHYSICAL_ADDRESS */
 
+=======
+typedef u32 acpi_io_address;
+typedef u32 acpi_physical_address;
+
+>>>>>>> v3.18
 #define ACPI_MAX_PTR                    ACPI_UINT32_MAX
 #define ACPI_SIZE_MAX                   ACPI_UINT32_MAX
 
@@ -319,13 +393,77 @@ typedef u64 acpi_physical_address;
 #endif
 
 /*
+<<<<<<< HEAD
  * All ACPICA functions that are available to the rest of the kernel are
  * tagged with this macro which can be defined as appropriate for the host.
  */
+=======
+ * All ACPICA external functions that are available to the rest of the kernel
+ * are tagged with thes macros which can be defined as appropriate for the host.
+ *
+ * Notes:
+ * ACPI_EXPORT_SYMBOL_INIT is used for initialization and termination
+ * interfaces that may need special processing.
+ * ACPI_EXPORT_SYMBOL is used for all other public external functions.
+ */
+#ifndef ACPI_EXPORT_SYMBOL_INIT
+#define ACPI_EXPORT_SYMBOL_INIT(symbol)
+#endif
+
+>>>>>>> v3.18
 #ifndef ACPI_EXPORT_SYMBOL
 #define ACPI_EXPORT_SYMBOL(symbol)
 #endif
 
+<<<<<<< HEAD
+=======
+/*
+ * Compiler/Clibrary-dependent debug initialization. Used for ACPICA
+ * utilities only.
+ */
+#ifndef ACPI_DEBUG_INITIALIZE
+#define ACPI_DEBUG_INITIALIZE()
+#endif
+
+/*******************************************************************************
+ *
+ * Configuration
+ *
+ ******************************************************************************/
+
+#ifdef ACPI_NO_MEM_ALLOCATIONS
+
+#define ACPI_ALLOCATE(a)                NULL
+#define ACPI_ALLOCATE_ZEROED(a)         NULL
+#define ACPI_FREE(a)
+#define ACPI_MEM_TRACKING(a)
+
+#else				/* ACPI_NO_MEM_ALLOCATIONS */
+
+#ifdef ACPI_DBG_TRACK_ALLOCATIONS
+/*
+ * Memory allocation tracking (used by acpi_exec to detect memory leaks)
+ */
+#define ACPI_MEM_PARAMETERS             _COMPONENT, _acpi_module_name, __LINE__
+#define ACPI_ALLOCATE(a)                acpi_ut_allocate_and_track ((acpi_size) (a), ACPI_MEM_PARAMETERS)
+#define ACPI_ALLOCATE_ZEROED(a)         acpi_ut_allocate_zeroed_and_track ((acpi_size) (a), ACPI_MEM_PARAMETERS)
+#define ACPI_FREE(a)                    acpi_ut_free_and_track (a, ACPI_MEM_PARAMETERS)
+#define ACPI_MEM_TRACKING(a)            a
+
+#else
+/*
+ * Normal memory allocation directly via the OS services layer
+ */
+#define ACPI_ALLOCATE(a)                acpi_os_allocate ((acpi_size) (a))
+#define ACPI_ALLOCATE_ZEROED(a)         acpi_os_allocate_zeroed ((acpi_size) (a))
+#define ACPI_FREE(a)                    acpi_os_free (a)
+#define ACPI_MEM_TRACKING(a)
+
+#endif				/* ACPI_DBG_TRACK_ALLOCATIONS */
+
+#endif				/* ACPI_NO_MEM_ALLOCATIONS */
+
+>>>>>>> v3.18
 /******************************************************************************
  *
  * ACPI Specification constants (Do not change unless the specification changes)
@@ -342,6 +480,10 @@ typedef u64 acpi_physical_address;
 #define ACPI_PM1_REGISTER_WIDTH         16
 #define ACPI_PM2_REGISTER_WIDTH         8
 #define ACPI_PM_TIMER_WIDTH             32
+<<<<<<< HEAD
+=======
+#define ACPI_RESET_REGISTER_WIDTH       8
+>>>>>>> v3.18
 
 /* Names within the namespace are 4 bytes long */
 
@@ -480,7 +622,11 @@ typedef u64 acpi_integer;
 
 #define ACPI_TO_POINTER(i)              ACPI_ADD_PTR (void, (void *) NULL,(acpi_size) i)
 #define ACPI_TO_INTEGER(p)              ACPI_PTR_DIFF (p, (void *) NULL)
+<<<<<<< HEAD
 #define ACPI_OFFSET(d, f)               (acpi_size) ACPI_PTR_DIFF (&(((d *)0)->f), (void *) NULL)
+=======
+#define ACPI_OFFSET(d, f)               ACPI_PTR_DIFF (&(((d *) 0)->f), (void *) NULL)
+>>>>>>> v3.18
 #define ACPI_PHYSADDR_TO_PTR(i)         ACPI_TO_POINTER(i)
 #define ACPI_PTR_TO_PHYSADDR(i)         ACPI_TO_INTEGER(i)
 
@@ -494,6 +640,14 @@ typedef u64 acpi_integer;
 #define ACPI_MOVE_NAME(dest,src)        (ACPI_STRNCPY (ACPI_CAST_PTR (char, (dest)), ACPI_CAST_PTR (char, (src)), ACPI_NAME_SIZE))
 #endif
 
+<<<<<<< HEAD
+=======
+/* Support for the special RSDP signature (8 characters) */
+
+#define ACPI_VALIDATE_RSDP_SIG(a)       (!ACPI_STRNCMP (ACPI_CAST_PTR (char, (a)), ACPI_SIG_RSDP, 8))
+#define ACPI_MAKE_RSDP_SIG(dest)        (ACPI_MEMCPY (ACPI_CAST_PTR (char, (dest)), ACPI_SIG_RSDP, 8))
+
+>>>>>>> v3.18
 /*******************************************************************************
  *
  * Miscellaneous constants
@@ -511,7 +665,10 @@ typedef u64 acpi_integer;
 #define ACPI_NO_ACPI_ENABLE             0x10
 #define ACPI_NO_DEVICE_INIT             0x20
 #define ACPI_NO_OBJECT_INIT             0x40
+<<<<<<< HEAD
 #define ACPI_NO_FACS_INIT               0x80
+=======
+>>>>>>> v3.18
 
 /*
  * Initialization state
@@ -571,8 +728,14 @@ typedef u64 acpi_integer;
 #define ACPI_NOTIFY_RESERVED            (u8) 0x0A
 #define ACPI_NOTIFY_LOCALITY_UPDATE     (u8) 0x0B
 #define ACPI_NOTIFY_SHUTDOWN_REQUEST    (u8) 0x0C
+<<<<<<< HEAD
 
 #define ACPI_NOTIFY_MAX                 0x0C
+=======
+#define ACPI_NOTIFY_AFFINITY_UPDATE     (u8) 0x0D
+
+#define ACPI_NOTIFY_MAX                 0x0D
+>>>>>>> v3.18
 
 /*
  * Types associated with ACPI names and objects. The first group of
@@ -679,7 +842,11 @@ typedef u32 acpi_event_type;
  *          |     | | +--- Enabled for wake?
  *          |     | +----- Set?
  *          |     +------- Has a handler?
+<<<<<<< HEAD
  *          +----------- <Reserved>
+=======
+ *          +------------- <Reserved>
+>>>>>>> v3.18
  */
 typedef u32 acpi_event_status;
 
@@ -687,6 +854,7 @@ typedef u32 acpi_event_status;
 #define ACPI_EVENT_FLAG_ENABLED         (acpi_event_status) 0x01
 #define ACPI_EVENT_FLAG_WAKE_ENABLED    (acpi_event_status) 0x02
 #define ACPI_EVENT_FLAG_SET             (acpi_event_status) 0x04
+<<<<<<< HEAD
 #define ACPI_EVENT_FLAG_HANDLE		(acpi_event_status) 0x08
 
 /*
@@ -695,6 +863,9 @@ typedef u32 acpi_event_status;
 #define ACPI_GPE_INVALID                0xFF
 #define ACPI_GPE_MAX                    0xFF
 #define ACPI_NUM_GPE                    256
+=======
+#define ACPI_EVENT_FLAG_HAS_HANDLER     (acpi_event_status) 0x08
+>>>>>>> v3.18
 
 /* Actions for acpi_set_gpe, acpi_gpe_wakeup, acpi_hw_low_set_gpe */
 
@@ -906,18 +1077,36 @@ struct acpi_object_list {
  * Miscellaneous common Data Structures used by the interfaces
  */
 #define ACPI_NO_BUFFER              0
+<<<<<<< HEAD
 #define ACPI_ALLOCATE_BUFFER        (acpi_size) (-1)
 #define ACPI_ALLOCATE_LOCAL_BUFFER  (acpi_size) (-2)
+=======
+
+#ifdef ACPI_NO_MEM_ALLOCATIONS
+
+#define ACPI_ALLOCATE_BUFFER        (acpi_size) (0)
+#define ACPI_ALLOCATE_LOCAL_BUFFER  (acpi_size) (0)
+
+#else				/* ACPI_NO_MEM_ALLOCATIONS */
+
+#define ACPI_ALLOCATE_BUFFER        (acpi_size) (-1)	/* Let ACPICA allocate buffer */
+#define ACPI_ALLOCATE_LOCAL_BUFFER  (acpi_size) (-2)	/* For internal use only (enables tracking) */
+
+#endif				/* ACPI_NO_MEM_ALLOCATIONS */
+>>>>>>> v3.18
 
 struct acpi_buffer {
 	acpi_size length;	/* Length in bytes of the buffer */
 	void *pointer;		/* pointer to buffer */
 };
 
+<<<<<<< HEAD
 /* Free a buffer created in an struct acpi_buffer via ACPI_ALLOCATE_LOCAL_BUFFER */
 
 #define ACPI_FREE_BUFFER(b)         ACPI_FREE(b.pointer)
 
+=======
+>>>>>>> v3.18
 /*
  * name_type for acpi_get_name
  */
@@ -955,6 +1144,19 @@ struct acpi_system_info {
 	u32 debug_layer;
 };
 
+<<<<<<< HEAD
+=======
+/*
+ * System statistics returned by acpi_get_statistics()
+ */
+struct acpi_statistics {
+	u32 sci_count;
+	u32 gpe_count;
+	u32 fixed_event_count[ACPI_NUM_FIXED_EVENTS];
+	u32 method_count;
+};
+
+>>>>>>> v3.18
 /* Table Event Types */
 
 #define ACPI_TABLE_EVENT_LOAD           0x0
@@ -974,6 +1176,12 @@ typedef void
  * Various handlers and callback procedures
  */
 typedef
+<<<<<<< HEAD
+=======
+u32 (*acpi_sci_handler) (void *context);
+
+typedef
+>>>>>>> v3.18
 void (*acpi_gbl_event_handler) (u32 event_type,
 			       acpi_handle device,
 			       u32 event_number, void *context);
@@ -1165,4 +1373,47 @@ struct acpi_memory_list {
 #endif
 };
 
+<<<<<<< HEAD
+=======
+/* Definitions of _OSI support */
+
+#define ACPI_VENDOR_STRINGS                 0x01
+#define ACPI_FEATURE_STRINGS                0x02
+#define ACPI_ENABLE_INTERFACES              0x00
+#define ACPI_DISABLE_INTERFACES             0x04
+
+#define ACPI_DISABLE_ALL_VENDOR_STRINGS     (ACPI_DISABLE_INTERFACES | ACPI_VENDOR_STRINGS)
+#define ACPI_DISABLE_ALL_FEATURE_STRINGS    (ACPI_DISABLE_INTERFACES | ACPI_FEATURE_STRINGS)
+#define ACPI_DISABLE_ALL_STRINGS            (ACPI_DISABLE_INTERFACES | ACPI_VENDOR_STRINGS | ACPI_FEATURE_STRINGS)
+#define ACPI_ENABLE_ALL_VENDOR_STRINGS      (ACPI_ENABLE_INTERFACES | ACPI_VENDOR_STRINGS)
+#define ACPI_ENABLE_ALL_FEATURE_STRINGS     (ACPI_ENABLE_INTERFACES | ACPI_FEATURE_STRINGS)
+#define ACPI_ENABLE_ALL_STRINGS             (ACPI_ENABLE_INTERFACES | ACPI_VENDOR_STRINGS | ACPI_FEATURE_STRINGS)
+
+#define ACPI_OSI_WIN_2000               0x01
+#define ACPI_OSI_WIN_XP                 0x02
+#define ACPI_OSI_WIN_XP_SP1             0x03
+#define ACPI_OSI_WINSRV_2003            0x04
+#define ACPI_OSI_WIN_XP_SP2             0x05
+#define ACPI_OSI_WINSRV_2003_SP1        0x06
+#define ACPI_OSI_WIN_VISTA              0x07
+#define ACPI_OSI_WINSRV_2008            0x08
+#define ACPI_OSI_WIN_VISTA_SP1          0x09
+#define ACPI_OSI_WIN_VISTA_SP2          0x0A
+#define ACPI_OSI_WIN_7                  0x0B
+#define ACPI_OSI_WIN_8                  0x0C
+
+/* Definitions of file IO */
+
+#define ACPI_FILE_READING               0x01
+#define ACPI_FILE_WRITING               0x02
+#define ACPI_FILE_BINARY                0x04
+
+#define ACPI_FILE_BEGIN                 0x01
+#define ACPI_FILE_END                   0x02
+
+/* Definitions of getopt */
+
+#define ACPI_OPT_END                    -1
+
+>>>>>>> v3.18
 #endif				/* __ACTYPES_H__ */

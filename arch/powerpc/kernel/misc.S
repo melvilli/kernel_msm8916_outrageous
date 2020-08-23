@@ -114,3 +114,10 @@ _GLOBAL(longjmp)
 	mtlr	r0
 	mr	r3,r4
 	blr
+<<<<<<< HEAD
+=======
+
+_GLOBAL(current_stack_pointer)
+	PPC_LL	r3,0(r1)
+	blr
+>>>>>>> v3.18

@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+ccflags-$(CONFIG_COMEDI_DEBUG)		:= -DDEBUG
+
+>>>>>>> v3.18
 comedi-y				:= comedi_fops.o range.o drivers.o \
 					   comedi_buf.o
 comedi-$(CONFIG_COMEDI_PCI_DRIVERS)	+= comedi_pci.o

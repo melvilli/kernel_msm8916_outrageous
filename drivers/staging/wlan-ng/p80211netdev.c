@@ -90,12 +90,17 @@
 
 #include "cfg80211.c"
 
+<<<<<<< HEAD
 /* Support functions */
 static void p80211netdev_rx_bh(unsigned long arg);
 
 /* netdevice method functions */
 static int p80211knetdev_init(netdevice_t *netdev);
 static struct net_device_stats *p80211knetdev_get_stats(netdevice_t *netdev);
+=======
+/* netdevice method functions */
+static int p80211knetdev_init(netdevice_t *netdev);
+>>>>>>> v3.18
 static int p80211knetdev_open(netdevice_t *netdev);
 static int p80211knetdev_stop(netdevice_t *netdev);
 static int p80211knetdev_hard_start_xmit(struct sk_buff *skb,
@@ -137,6 +142,7 @@ static int p80211knetdev_init(netdevice_t *netdev)
 }
 
 /*----------------------------------------------------------------
+<<<<<<< HEAD
 * p80211knetdev_get_stats
 *
 * Statistics retrieval for linux netdevices.  Here we're reporting
@@ -161,6 +167,8 @@ static struct net_device_stats *p80211knetdev_get_stats(netdevice_t *netdev)
 }
 
 /*----------------------------------------------------------------
+=======
+>>>>>>> v3.18
 * p80211knetdev_open
 *
 * Linux netdevice open method.  Following a successful call here,
@@ -243,6 +251,7 @@ void p80211netdev_rx(wlandevice_t *wlandev, struct sk_buff *skb)
 	tasklet_schedule(&wlandev->rx_bh);
 }
 
+<<<<<<< HEAD
 /*----------------------------------------------------------------
 * p80211netdev_rx_bh
 *
@@ -256,13 +265,66 @@ void p80211netdev_rx(wlandevice_t *wlandev, struct sk_buff *skb)
 * Side effects:
 *
 ----------------------------------------------------------------*/
+=======
+#define CONV_TO_ETHER_SKIPPED	0x01
+#define CONV_TO_ETHER_FAILED	0x02
+
+/**
+ * p80211_convert_to_ether - conversion from 802.11 frame to ethernet frame
+ * @wlandev: pointer to WLAN device
+ * @skb: pointer to socket buffer
+ *
+ * Returns: 0 if conversion succeeded
+ *	    CONV_TO_ETHER_FAILED if conversion failed
+ *	    CONV_TO_ETHER_SKIPPED if frame is ignored
+ */
+static int p80211_convert_to_ether(wlandevice_t *wlandev, struct sk_buff *skb)
+{
+	struct p80211_hdr_a3 *hdr;
+
+	hdr = (struct p80211_hdr_a3 *) skb->data;
+	if (p80211_rx_typedrop(wlandev, hdr->fc))
+		return CONV_TO_ETHER_SKIPPED;
+
+	/* perform mcast filtering: allow my local address through but reject
+	 * anything else that isn't multicast
+	 */
+	if (wlandev->netdev->flags & IFF_ALLMULTI) {
+		if (!ether_addr_equal_unaligned(wlandev->netdev->dev_addr,
+						hdr->a1)) {
+			if (!is_multicast_ether_addr(hdr->a1))
+				return CONV_TO_ETHER_SKIPPED;
+		}
+	}
+
+	if (skb_p80211_to_ether(wlandev, wlandev->ethconv, skb) == 0) {
+		skb->dev->last_rx = jiffies;
+		wlandev->netdev->stats.rx_packets++;
+		wlandev->netdev->stats.rx_bytes += skb->len;
+		netif_rx_ni(skb);
+		return 0;
+	}
+
+	netdev_dbg(wlandev->netdev, "p80211_convert_to_ether failed.\n");
+	return CONV_TO_ETHER_FAILED;
+}
+
+/**
+ * p80211netdev_rx_bh - deferred processing of all received frames
+ *
+ * @arg: pointer to WLAN network device structure (cast to unsigned long)
+ */
+>>>>>>> v3.18
 static void p80211netdev_rx_bh(unsigned long arg)
 {
 	wlandevice_t *wlandev = (wlandevice_t *) arg;
 	struct sk_buff *skb = NULL;
 	netdevice_t *dev = wlandev->netdev;
+<<<<<<< HEAD
 	struct p80211_hdr_a3 *hdr;
 	u16 fc;
+=======
+>>>>>>> v3.18
 
 	/* Let's empty our our queue */
 	while ((skb = skb_dequeue(&wlandev->nsd_rxq))) {
@@ -280,6 +342,7 @@ static void p80211netdev_rx_bh(unsigned long arg)
 				skb->protocol = htons(ETH_P_80211_RAW);
 				dev->last_rx = jiffies;
 
+<<<<<<< HEAD
 				wlandev->linux_stats.rx_packets++;
 				wlandev->linux_stats.rx_bytes += skb->len;
 				netif_rx_ni(skb);
@@ -317,6 +380,15 @@ static void p80211netdev_rx_bh(unsigned long arg)
 					continue;
 				}
 				pr_debug("p80211_to_ether failed.\n");
+=======
+				dev->stats.rx_packets++;
+				dev->stats.rx_bytes += skb->len;
+				netif_rx_ni(skb);
+				continue;
+			} else {
+				if (!p80211_convert_to_ether(wlandev, skb))
+					continue;
+>>>>>>> v3.18
 			}
 		}
 		dev_kfree_skb(skb);
@@ -365,7 +437,11 @@ static int p80211knetdev_hard_start_xmit(struct sk_buff *skb,
 	memset(&p80211_wep, 0, sizeof(struct p80211_metawep));
 
 	if (netif_queue_stopped(netdev)) {
+<<<<<<< HEAD
 		pr_debug("called when queue stopped.\n");
+=======
+		netdev_dbg(netdev, "called when queue stopped.\n");
+>>>>>>> v3.18
 		result = 1;
 		goto failed;
 	}
@@ -385,9 +461,14 @@ static int p80211knetdev_hard_start_xmit(struct sk_buff *skb,
 		 */
 		if (skb->protocol != ETH_P_80211_RAW) {
 			netif_start_queue(wlandev->netdev);
+<<<<<<< HEAD
 			printk(KERN_NOTICE
 			       "Tx attempt prior to association, frame dropped.\n");
 			wlandev->linux_stats.tx_dropped++;
+=======
+			netdev_notice(netdev, "Tx attempt prior to association, frame dropped.\n");
+			netdev->stats.tx_dropped++;
+>>>>>>> v3.18
 			result = 0;
 			goto failed;
 		}
@@ -408,8 +489,13 @@ static int p80211knetdev_hard_start_xmit(struct sk_buff *skb,
 		    (wlandev, wlandev->ethconv, skb, &p80211_hdr,
 		     &p80211_wep) != 0) {
 			/* convert failed */
+<<<<<<< HEAD
 			pr_debug("ether_to_80211(%d) failed.\n",
 				 wlandev->ethconv);
+=======
+			netdev_dbg(netdev, "ether_to_80211(%d) failed.\n",
+				   wlandev->ethconv);
+>>>>>>> v3.18
 			result = 1;
 			goto failed;
 		}
@@ -421,9 +507,15 @@ static int p80211knetdev_hard_start_xmit(struct sk_buff *skb,
 
 	netdev->trans_start = jiffies;
 
+<<<<<<< HEAD
 	wlandev->linux_stats.tx_packets++;
 	/* count only the packet payload */
 	wlandev->linux_stats.tx_bytes += skb->len;
+=======
+	netdev->stats.tx_packets++;
+	/* count only the packet payload */
+	netdev->stats.tx_bytes += skb->len;
+>>>>>>> v3.18
 
 	txresult = wlandev->txframe(wlandev, skb, &p80211_hdr, &p80211_wep);
 
@@ -434,17 +526,29 @@ static int p80211knetdev_hard_start_xmit(struct sk_buff *skb,
 		result = NETDEV_TX_OK;
 	} else if (txresult == 1) {
 		/* success, no more avail */
+<<<<<<< HEAD
 		pr_debug("txframe success, no more bufs\n");
+=======
+		netdev_dbg(netdev, "txframe success, no more bufs\n");
+>>>>>>> v3.18
 		/* netdev->tbusy = 1;  don't set here, irqhdlr */
 		/*   may have already cleared it */
 		result = NETDEV_TX_OK;
 	} else if (txresult == 2) {
 		/* alloc failure, drop frame */
+<<<<<<< HEAD
 		pr_debug("txframe returned alloc_fail\n");
 		result = NETDEV_TX_BUSY;
 	} else {
 		/* buffer full or queue busy, drop frame. */
 		pr_debug("txframe returned full or busy\n");
+=======
+		netdev_dbg(netdev, "txframe returned alloc_fail\n");
+		result = NETDEV_TX_BUSY;
+	} else {
+		/* buffer full or queue busy, drop frame. */
+		netdev_dbg(netdev, "txframe returned full or busy\n");
+>>>>>>> v3.18
 		result = NETDEV_TX_BUSY;
 	}
 
@@ -564,7 +668,11 @@ static int p80211knetdev_do_ioctl(netdevice_t *dev, struct ifreq *ifr, int cmd)
 	wlandevice_t *wlandev = dev->ml_priv;
 	u8 *msgbuf;
 
+<<<<<<< HEAD
 	pr_debug("rx'd ioctl, cmd=%d, len=%d\n", cmd, req->len);
+=======
+	netdev_dbg(dev, "rx'd ioctl, cmd=%d, len=%d\n", cmd, req->len);
+>>>>>>> v3.18
 
 #ifdef SIOCETHTOOL
 	if (cmd == SIOCETHTOOL) {
@@ -685,8 +793,12 @@ static int p80211knetdev_set_mac_address(netdevice_t *dev, void *addr)
 	 * change the netdev address
 	 */
 	if (result != 0 || resultcode->data != P80211ENUM_resultcode_success) {
+<<<<<<< HEAD
 		printk(KERN_ERR
 		       "Low-level driver failed dot11req_mibset(dot11MACAddress).\n");
+=======
+		netdev_err(dev, "Low-level driver failed dot11req_mibset(dot11MACAddress).\n");
+>>>>>>> v3.18
 		result = -EADDRNOTAVAIL;
 	} else {
 		/* everything's ok, change the addr in netdev */
@@ -712,7 +824,10 @@ static const struct net_device_ops p80211_netdev_ops = {
 	.ndo_init = p80211knetdev_init,
 	.ndo_open = p80211knetdev_open,
 	.ndo_stop = p80211knetdev_stop,
+<<<<<<< HEAD
 	.ndo_get_stats = p80211knetdev_get_stats,
+=======
+>>>>>>> v3.18
 	.ndo_start_xmit = p80211knetdev_hard_start_xmit,
 	.ndo_set_rx_mode = p80211knetdev_set_multicast_list,
 	.ndo_do_ioctl = p80211knetdev_do_ioctl,
@@ -765,15 +880,25 @@ int wlan_setup(wlandevice_t *wlandev, struct device *physdev)
 	/* Allocate and initialize the wiphy struct */
 	wiphy = wlan_create_wiphy(physdev, wlandev);
 	if (wiphy == NULL) {
+<<<<<<< HEAD
 		printk(KERN_ERR "Failed to alloc wiphy.\n");
+=======
+		dev_err(physdev, "Failed to alloc wiphy.\n");
+>>>>>>> v3.18
 		return 1;
 	}
 
 	/* Allocate and initialize the struct device */
 	netdev = alloc_netdev(sizeof(struct wireless_dev), "wlan%d",
+<<<<<<< HEAD
 				ether_setup);
 	if (netdev == NULL) {
 		printk(KERN_ERR "Failed to alloc netdev.\n");
+=======
+			      NET_NAME_UNKNOWN, ether_setup);
+	if (netdev == NULL) {
+		dev_err(physdev, "Failed to alloc netdev.\n");
+>>>>>>> v3.18
 		wlan_free_wiphy(wiphy);
 		result = 1;
 	} else {
@@ -949,7 +1074,12 @@ static int p80211_rx_typedrop(wlandevice_t *wlandev, u16 fc)
 	ftype = WLAN_GET_FC_FTYPE(fc);
 	fstype = WLAN_GET_FC_FSTYPE(fc);
 #if 0
+<<<<<<< HEAD
 	pr_debug("rx_typedrop : ftype=%d fstype=%d.\n", ftype, fstype);
+=======
+	netdev_dbg(wlandev->netdev, "rx_typedrop : ftype=%d fstype=%d.\n",
+		   ftype, fstype);
+>>>>>>> v3.18
 #endif
 	switch (ftype) {
 	case WLAN_FTYPE_MGMT:
@@ -958,7 +1088,11 @@ static int p80211_rx_typedrop(wlandevice_t *wlandev, u16 fc)
 			drop = 1;
 			break;
 		}
+<<<<<<< HEAD
 		pr_debug("rx'd mgmt:\n");
+=======
+		netdev_dbg(wlandev->netdev, "rx'd mgmt:\n");
+>>>>>>> v3.18
 		wlandev->rx.mgmt++;
 		switch (fstype) {
 		case WLAN_FSTYPE_ASSOCREQ:
@@ -1020,7 +1154,11 @@ static int p80211_rx_typedrop(wlandevice_t *wlandev, u16 fc)
 			drop = 1;
 			break;
 		}
+<<<<<<< HEAD
 		pr_debug("rx'd ctl:\n");
+=======
+		netdev_dbg(wlandev->netdev, "rx'd ctl:\n");
+>>>>>>> v3.18
 		wlandev->rx.ctl++;
 		switch (fstype) {
 		case WLAN_FSTYPE_PSPOLL:
@@ -1072,6 +1210,7 @@ static int p80211_rx_typedrop(wlandevice_t *wlandev, u16 fc)
 			wlandev->rx.data__cfack_cfpoll++;
 			break;
 		case WLAN_FSTYPE_NULL:
+<<<<<<< HEAD
 			pr_debug("rx'd data:null\n");
 			wlandev->rx.null++;
 			break;
@@ -1085,6 +1224,21 @@ static int p80211_rx_typedrop(wlandevice_t *wlandev, u16 fc)
 			break;
 		case WLAN_FSTYPE_CFACK_CFPOLL:
 			pr_debug("rx'd data:cfack_cfpoll\n");
+=======
+			netdev_dbg(wlandev->netdev, "rx'd data:null\n");
+			wlandev->rx.null++;
+			break;
+		case WLAN_FSTYPE_CFACK:
+			netdev_dbg(wlandev->netdev, "rx'd data:cfack\n");
+			wlandev->rx.cfack++;
+			break;
+		case WLAN_FSTYPE_CFPOLL:
+			netdev_dbg(wlandev->netdev, "rx'd data:cfpoll\n");
+			wlandev->rx.cfpoll++;
+			break;
+		case WLAN_FSTYPE_CFACK_CFPOLL:
+			netdev_dbg(wlandev->netdev, "rx'd data:cfack_cfpoll\n");
+>>>>>>> v3.18
 			wlandev->rx.cfack_cfpoll++;
 			break;
 		default:
@@ -1105,8 +1259,13 @@ static void p80211knetdev_tx_timeout(netdevice_t *netdev)
 	if (wlandev->tx_timeout) {
 		wlandev->tx_timeout(wlandev);
 	} else {
+<<<<<<< HEAD
 		printk(KERN_WARNING "Implement tx_timeout for %s\n",
 		       wlandev->nsdname);
+=======
+		netdev_warn(netdev, "Implement tx_timeout for %s\n",
+			    wlandev->nsdname);
+>>>>>>> v3.18
 		netif_wake_queue(wlandev->netdev);
 	}
 }

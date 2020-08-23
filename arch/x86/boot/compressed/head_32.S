@@ -30,6 +30,7 @@
 #include <asm/boot.h>
 #include <asm/asm-offsets.h>
 
+<<<<<<< HEAD
 /*
  * The 32-bit x86 assembler in binutils 2.26 will generate R_386_GOT32X
  * relocation to get the symbol address in PIC.  When the compressed x86
@@ -58,6 +59,8 @@
 	.hidden _got
 	.hidden _egot
 
+=======
+>>>>>>> v3.18
 	__HEAD
 ENTRY(startup_32)
 #ifdef CONFIG_EFI_STUB
@@ -70,6 +73,7 @@ ENTRY(startup_32)
 ENTRY(efi_pe_entry)
 	add	$0x4, %esp
 
+<<<<<<< HEAD
 	call	make_boot_params
 	cmpl	$0, %eax
 	je	1f
@@ -89,14 +93,63 @@ reloc:
 
 ENTRY(efi_stub_entry)
 	add	$0x4, %esp
+=======
+	call	1f
+1:	popl	%esi
+	subl	$1b, %esi
+
+	popl	%ecx
+	movl	%ecx, efi32_config(%esi)	/* Handle */
+	popl	%ecx
+	movl	%ecx, efi32_config+8(%esi)	/* EFI System table pointer */
+
+	/* Relocate efi_config->call() */
+	leal	efi32_config(%esi), %eax
+	add	%esi, 88(%eax)
+	pushl	%eax
+
+	call	make_boot_params
+	cmpl	$0, %eax
+	je	fail
+	movl	%esi, BP_code32_start(%eax)
+	popl	%ecx
+	pushl	%eax
+	pushl	%ecx
+	jmp	2f		/* Skip efi_config initialization */
+
+ENTRY(efi32_stub_entry)
+	add	$0x4, %esp
+	popl	%ecx
+	popl	%edx
+
+	call	1f
+1:	popl	%esi
+	subl	$1b, %esi
+
+	movl	%ecx, efi32_config(%esi)	/* Handle */
+	movl	%edx, efi32_config+8(%esi)	/* EFI System table pointer */
+
+	/* Relocate efi_config->call() */
+	leal	efi32_config(%esi), %eax
+	add	%esi, 88(%eax)
+	pushl	%eax
+2:
+>>>>>>> v3.18
 	call	efi_main
 	cmpl	$0, %eax
 	movl	%eax, %esi
 	jne	2f
+<<<<<<< HEAD
 1:
 	/* EFI init failed, so hang. */
 	hlt
 	jmp	1b
+=======
+fail:
+	/* EFI init failed, so hang. */
+	hlt
+	jmp	fail
+>>>>>>> v3.18
 2:
 	movl	BP_code32_start(%esi), %eax
 	leal	preferred_addr(%eax), %eax
@@ -147,9 +200,17 @@ preferred_addr:
 	addl    %eax, %ebx
 	notl	%eax
 	andl    %eax, %ebx
+<<<<<<< HEAD
 #else
 	movl	$LOAD_PHYSICAL_ADDR, %ebx
 #endif
+=======
+	cmpl	$LOAD_PHYSICAL_ADDR, %ebx
+	jge	1f
+#endif
+	movl	$LOAD_PHYSICAL_ADDR, %ebx
+1:
+>>>>>>> v3.18
 
 	/* Target address to relocate to for decompression */
 	addl	$z_extract_offset, %ebx
@@ -211,8 +272,15 @@ relocated:
 /*
  * Do the decompression, and jump to the new kernel..
  */
+<<<<<<< HEAD
 	leal	z_extract_offset_negative(%ebx), %ebp
 				/* push arguments for decompress_kernel: */
+=======
+				/* push arguments for decompress_kernel: */
+	pushl	$z_run_size	/* size of kernel with .bss and .brk */
+	pushl	$z_output_len	/* decompressed length, end of relocs */
+	leal	z_extract_offset_negative(%ebx), %ebp
+>>>>>>> v3.18
 	pushl	%ebp		/* output address */
 	pushl	$z_input_len	/* input_len */
 	leal	input_data(%ebx), %eax
@@ -220,6 +288,7 @@ relocated:
 	leal	boot_heap(%ebx), %eax
 	pushl	%eax		/* heap area */
 	pushl	%esi		/* real mode pointer */
+<<<<<<< HEAD
 	call	decompress_kernel
 	addl	$20, %esp
 
@@ -248,12 +317,29 @@ relocated:
 	jmp	1b
 2:
 #endif
+=======
+	call	decompress_kernel /* returns kernel location in %eax */
+	addl	$28, %esp
+>>>>>>> v3.18
 
 /*
  * Jump to the decompressed kernel.
  */
 	xorl	%ebx, %ebx
+<<<<<<< HEAD
 	jmp	*%ebp
+=======
+	jmp	*%eax
+
+#ifdef CONFIG_EFI_STUB
+	.data
+efi32_config:
+	.fill 11,8,0
+	.long efi_call_phys
+	.long 0
+	.byte 0
+#endif
+>>>>>>> v3.18
 
 /*
  * Stack and heap for uncompression

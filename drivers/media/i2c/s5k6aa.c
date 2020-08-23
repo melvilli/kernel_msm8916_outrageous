@@ -1003,7 +1003,11 @@ static int s5k6aa_enum_frame_interval(struct v4l2_subdev *sd,
 	const struct s5k6aa_interval *fi;
 	int ret = 0;
 
+<<<<<<< HEAD
 	if (fie->index > ARRAY_SIZE(s5k6aa_intervals))
+=======
+	if (fie->index >= ARRAY_SIZE(s5k6aa_intervals))
+>>>>>>> v3.18
 		return -EINVAL;
 
 	v4l_bound_align_image(&fie->width, S5K6AA_WIN_WIDTH_MIN,
@@ -1491,6 +1495,7 @@ static const struct v4l2_subdev_ops s5k6aa_subdev_ops = {
 /*
  * GPIO setup
  */
+<<<<<<< HEAD
 static int s5k6aa_configure_gpio(int nr, int val, const char *name)
 {
 	unsigned long flags = val ? GPIOF_OUT_INIT_HIGH : GPIOF_OUT_INIT_LOW;
@@ -1515,16 +1520,25 @@ static void s5k6aa_free_gpios(struct s5k6aa *s5k6aa)
 		s5k6aa->gpio[i].gpio = -EINVAL;
 	}
 }
+=======
+>>>>>>> v3.18
 
 static int s5k6aa_configure_gpios(struct s5k6aa *s5k6aa,
 				  const struct s5k6aa_platform_data *pdata)
 {
+<<<<<<< HEAD
 	const struct s5k6aa_gpio *gpio = &pdata->gpio_stby;
+=======
+	struct i2c_client *client = v4l2_get_subdevdata(&s5k6aa->sd);
+	const struct s5k6aa_gpio *gpio;
+	unsigned long flags;
+>>>>>>> v3.18
 	int ret;
 
 	s5k6aa->gpio[STBY].gpio = -EINVAL;
 	s5k6aa->gpio[RST].gpio  = -EINVAL;
 
+<<<<<<< HEAD
 	ret = s5k6aa_configure_gpio(gpio->gpio, gpio->level, "S5K6AA_STBY");
 	if (ret) {
 		s5k6aa_free_gpios(s5k6aa);
@@ -1543,6 +1557,31 @@ static int s5k6aa_configure_gpios(struct s5k6aa *s5k6aa,
 	s5k6aa->gpio[RST] = *gpio;
 	if (gpio_is_valid(gpio->gpio))
 		gpio_set_value(gpio->gpio, 0);
+=======
+	gpio = &pdata->gpio_stby;
+	if (gpio_is_valid(gpio->gpio)) {
+		flags = (gpio->level ? GPIOF_OUT_INIT_HIGH : GPIOF_OUT_INIT_LOW)
+		      | GPIOF_EXPORT;
+		ret = devm_gpio_request_one(&client->dev, gpio->gpio, flags,
+					    "S5K6AA_STBY");
+		if (ret < 0)
+			return ret;
+
+		s5k6aa->gpio[STBY] = *gpio;
+	}
+
+	gpio = &pdata->gpio_reset;
+	if (gpio_is_valid(gpio->gpio)) {
+		flags = (gpio->level ? GPIOF_OUT_INIT_HIGH : GPIOF_OUT_INIT_LOW)
+		      | GPIOF_EXPORT;
+		ret = devm_gpio_request_one(&client->dev, gpio->gpio, flags,
+					    "S5K6AA_RST");
+		if (ret < 0)
+			return ret;
+
+		s5k6aa->gpio[RST] = *gpio;
+	}
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -1593,7 +1632,11 @@ static int s5k6aa_probe(struct i2c_client *client,
 
 	ret = s5k6aa_configure_gpios(s5k6aa, pdata);
 	if (ret)
+<<<<<<< HEAD
 		goto out_err2;
+=======
+		goto out_err;
+>>>>>>> v3.18
 
 	for (i = 0; i < S5K6AA_NUM_SUPPLIES; i++)
 		s5k6aa->supplies[i].supply = s5k6aa_supply_names[i];
@@ -1602,12 +1645,20 @@ static int s5k6aa_probe(struct i2c_client *client,
 				 s5k6aa->supplies);
 	if (ret) {
 		dev_err(&client->dev, "Failed to get regulators\n");
+<<<<<<< HEAD
 		goto out_err3;
+=======
+		goto out_err;
+>>>>>>> v3.18
 	}
 
 	ret = s5k6aa_initialize_ctrls(s5k6aa);
 	if (ret)
+<<<<<<< HEAD
 		goto out_err3;
+=======
+		goto out_err;
+>>>>>>> v3.18
 
 	s5k6aa_presets_data_init(s5k6aa);
 
@@ -1618,9 +1669,13 @@ static int s5k6aa_probe(struct i2c_client *client,
 
 	return 0;
 
+<<<<<<< HEAD
 out_err3:
 	s5k6aa_free_gpios(s5k6aa);
 out_err2:
+=======
+out_err:
+>>>>>>> v3.18
 	media_entity_cleanup(&s5k6aa->sd.entity);
 	return ret;
 }
@@ -1628,12 +1683,18 @@ out_err2:
 static int s5k6aa_remove(struct i2c_client *client)
 {
 	struct v4l2_subdev *sd = i2c_get_clientdata(client);
+<<<<<<< HEAD
 	struct s5k6aa *s5k6aa = to_s5k6aa(sd);
+=======
+>>>>>>> v3.18
 
 	v4l2_device_unregister_subdev(sd);
 	v4l2_ctrl_handler_free(sd->ctrl_handler);
 	media_entity_cleanup(&sd->entity);
+<<<<<<< HEAD
 	s5k6aa_free_gpios(s5k6aa);
+=======
+>>>>>>> v3.18
 
 	return 0;
 }

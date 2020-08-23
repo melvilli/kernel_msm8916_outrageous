@@ -395,6 +395,15 @@ static int rv3029c2_probe(struct i2c_client *client,
 	if (!i2c_check_functionality(client->adapter, I2C_FUNC_SMBUS_EMUL))
 		return -ENODEV;
 
+<<<<<<< HEAD
+=======
+	rc = rv3029c2_i2c_get_sr(client, buf);
+	if (rc < 0) {
+		dev_err(&client->dev, "reading status failed\n");
+		return rc;
+	}
+
+>>>>>>> v3.18
 	rtc = devm_rtc_device_register(&client->dev, client->name,
 					&rv3029c2_rtc_ops, THIS_MODULE);
 
@@ -403,6 +412,7 @@ static int rv3029c2_probe(struct i2c_client *client,
 
 	i2c_set_clientdata(client, rtc);
 
+<<<<<<< HEAD
 	rc = rv3029c2_i2c_get_sr(client, buf);
 	if (rc < 0) {
 		dev_err(&client->dev, "reading status failed\n");
@@ -414,6 +424,8 @@ static int rv3029c2_probe(struct i2c_client *client,
 
 static int rv3029c2_remove(struct i2c_client *client)
 {
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -422,7 +434,10 @@ static struct i2c_driver rv3029c2_driver = {
 		.name = "rtc-rv3029c2",
 	},
 	.probe = rv3029c2_probe,
+<<<<<<< HEAD
 	.remove = rv3029c2_remove,
+=======
+>>>>>>> v3.18
 	.id_table = rv3029c2_id,
 };
 

@@ -9,8 +9,11 @@
 #ifndef _ASM_ARC_ATOMIC_H
 #define _ASM_ARC_ATOMIC_H
 
+<<<<<<< HEAD
 #ifdef __KERNEL__
 
+=======
+>>>>>>> v3.18
 #ifndef __ASSEMBLY__
 
 #include <linux/types.h>
@@ -25,6 +28,7 @@
 
 #define atomic_set(v, i) (((v)->counter) = (i))
 
+<<<<<<< HEAD
 static inline void atomic_add(int i, atomic_t *v)
 {
 	unsigned int temp;
@@ -98,6 +102,38 @@ static inline void atomic_clear_mask(unsigned long mask, unsigned long *addr)
 	: "=&r"(temp)
 	: "r"(addr), "ir"(mask)
 	: "cc");
+=======
+#define ATOMIC_OP(op, c_op, asm_op)					\
+static inline void atomic_##op(int i, atomic_t *v)			\
+{									\
+	unsigned int temp;						\
+									\
+	__asm__ __volatile__(						\
+	"1:	llock   %0, [%1]	\n"				\
+	"	" #asm_op " %0, %0, %2	\n"				\
+	"	scond   %0, [%1]	\n"				\
+	"	bnz     1b		\n"				\
+	: "=&r"(temp)	/* Early clobber, to prevent reg reuse */	\
+	: "r"(&v->counter), "ir"(i)					\
+	: "cc");							\
+}									\
+
+#define ATOMIC_OP_RETURN(op, c_op, asm_op)				\
+static inline int atomic_##op##_return(int i, atomic_t *v)		\
+{									\
+	unsigned int temp;						\
+									\
+	__asm__ __volatile__(						\
+	"1:	llock   %0, [%1]	\n"				\
+	"	" #asm_op " %0, %0, %2	\n"				\
+	"	scond   %0, [%1]	\n"				\
+	"	bnz     1b		\n"				\
+	: "=&r"(temp)							\
+	: "r"(&v->counter), "ir"(i)					\
+	: "cc");							\
+									\
+	return temp;							\
+>>>>>>> v3.18
 }
 
 #else	/* !CONFIG_ARC_HAS_LLSC */
@@ -126,6 +162,10 @@ static inline void atomic_set(atomic_t *v, int i)
 	v->counter = i;
 	atomic_ops_unlock(flags);
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 #endif
 
 /*
@@ -133,6 +173,7 @@ static inline void atomic_set(atomic_t *v, int i)
  * Locking would change to irq-disabling only (UP) and spinlocks (SMP)
  */
 
+<<<<<<< HEAD
 static inline void atomic_add(int i, atomic_t *v)
 {
 	unsigned long flags;
@@ -189,6 +230,48 @@ static inline void atomic_clear_mask(unsigned long mask, unsigned long *addr)
 }
 
 #endif /* !CONFIG_ARC_HAS_LLSC */
+=======
+#define ATOMIC_OP(op, c_op, asm_op)					\
+static inline void atomic_##op(int i, atomic_t *v)			\
+{									\
+	unsigned long flags;						\
+									\
+	atomic_ops_lock(flags);						\
+	v->counter c_op i;						\
+	atomic_ops_unlock(flags);					\
+}
+
+#define ATOMIC_OP_RETURN(op, c_op)					\
+static inline int atomic_##op##_return(int i, atomic_t *v)		\
+{									\
+	unsigned long flags;						\
+	unsigned long temp;						\
+									\
+	atomic_ops_lock(flags);						\
+	temp = v->counter;						\
+	temp c_op i;							\
+	v->counter = temp;						\
+	atomic_ops_unlock(flags);					\
+									\
+	return temp;							\
+}
+
+#endif /* !CONFIG_ARC_HAS_LLSC */
+
+#define ATOMIC_OPS(op, c_op, asm_op)					\
+	ATOMIC_OP(op, c_op, asm_op)					\
+	ATOMIC_OP_RETURN(op, c_op, asm_op)
+
+ATOMIC_OPS(add, +=, add)
+ATOMIC_OPS(sub, -=, sub)
+ATOMIC_OP(and, &=, and)
+
+#define atomic_clear_mask(mask, v) atomic_and(~(mask), (v))
+
+#undef ATOMIC_OPS
+#undef ATOMIC_OP_RETURN
+#undef ATOMIC_OP
+>>>>>>> v3.18
 
 /**
  * __atomic_add_unless - add unless the number is a given value
@@ -228,5 +311,8 @@ static inline void atomic_clear_mask(unsigned long mask, unsigned long *addr)
 #endif
 
 #endif
+<<<<<<< HEAD
 
 #endif
+=======
+>>>>>>> v3.18

@@ -127,8 +127,15 @@ extern int fixup_exception(struct pt_regs *regs);
 
 #ifdef __LP64__
 #define _ASM_PTR	".quad"
+<<<<<<< HEAD
 #else
 #define _ASM_PTR	".long"
+=======
+#define _ASM_ALIGN	".align 8"
+#else
+#define _ASM_PTR	".long"
+#define _ASM_ALIGN	".align 4"
+>>>>>>> v3.18
 #endif
 
 #define __get_user_asm(OP, x, ptr, ret)					\
@@ -137,6 +144,10 @@ extern int fixup_exception(struct pt_regs *regs);
 		     "0: { movei %1, 0; movei %0, %3 }\n"		\
 		     "j 9f\n"						\
 		     ".section __ex_table,\"a\"\n"			\
+<<<<<<< HEAD
+=======
+		     _ASM_ALIGN "\n"					\
+>>>>>>> v3.18
 		     _ASM_PTR " 1b, 0b\n"				\
 		     ".popsection\n"					\
 		     "9:"						\
@@ -168,6 +179,10 @@ extern int fixup_exception(struct pt_regs *regs);
 			     "0: { movei %1, 0; movei %2, 0 }\n"	\
 			     "{ movei %0, %4; j 9f }\n"			\
 			     ".section __ex_table,\"a\"\n"		\
+<<<<<<< HEAD
+=======
+			     ".align 4\n"				\
+>>>>>>> v3.18
 			     ".word 1b, 0b\n"				\
 			     ".word 2b, 0b\n"				\
 			     ".popsection\n"				\
@@ -224,6 +239,10 @@ extern int __get_user_bad(void)
 		     ".pushsection .fixup,\"ax\"\n"			\
 		     "0: { movei %0, %3; j 9f }\n"			\
 		     ".section __ex_table,\"a\"\n"			\
+<<<<<<< HEAD
+=======
+		     _ASM_ALIGN "\n"					\
+>>>>>>> v3.18
 		     _ASM_PTR " 1b, 0b\n"				\
 		     ".popsection\n"					\
 		     "9:"						\
@@ -248,6 +267,10 @@ extern int __get_user_bad(void)
 			     ".pushsection .fixup,\"ax\"\n"		\
 			     "0: { movei %0, %4; j 9f }\n"		\
 			     ".section __ex_table,\"a\"\n"		\
+<<<<<<< HEAD
+=======
+			     ".align 4\n"				\
+>>>>>>> v3.18
 			     ".word 1b, 0b\n"				\
 			     ".word 2b, 0b\n"				\
 			     ".popsection\n"				\
@@ -442,7 +465,11 @@ extern unsigned long __copy_in_user_inatomic(
 static inline unsigned long __must_check
 __copy_in_user(void __user *to, const void __user *from, unsigned long n)
 {
+<<<<<<< HEAD
 	might_sleep();
+=======
+	might_fault();
+>>>>>>> v3.18
 	return __copy_in_user_inatomic(to, from, n);
 }
 
@@ -567,6 +594,7 @@ static inline unsigned long __must_check flush_user(
 }
 
 /**
+<<<<<<< HEAD
  * inv_user: - Invalidate a block of memory in user space from cache.
  * @mem:   Destination address, in user space.
  * @len:   Number of bytes to invalidate.
@@ -598,6 +626,8 @@ static inline unsigned long __must_check inv_user(
 }
 
 /**
+=======
+>>>>>>> v3.18
  * finv_user: - Flush-inval a block of memory in user space from cache.
  * @mem:   Destination address, in user space.
  * @len:   Number of bytes to invalidate.

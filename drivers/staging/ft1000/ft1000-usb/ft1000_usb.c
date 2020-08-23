@@ -7,7 +7,10 @@
  * $Id:
  *====================================================
  */
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/usb.h>
@@ -36,12 +39,17 @@ static struct usb_device_id id_table[] = {
 
 MODULE_DEVICE_TABLE(usb, id_table);
 
+<<<<<<< HEAD
 static bool gPollingfailed = FALSE;
+=======
+static bool gPollingfailed;
+>>>>>>> v3.18
 static int ft1000_poll_thread(void *arg)
 {
 	int ret;
 
 	while (!kthread_should_stop()) {
+<<<<<<< HEAD
 		msleep(10);
 		if (!gPollingfailed) {
 			ret = ft1000_poll(arg);
@@ -52,6 +60,18 @@ static int ft1000_poll_thread(void *arg)
 		}
 	}
 	return STATUS_SUCCESS;
+=======
+		usleep_range(10000, 11000);
+		if (!gPollingfailed) {
+			ret = ft1000_poll(arg);
+			if (ret != 0) {
+				DEBUG("ft1000_poll_thread: polling failed\n");
+				gPollingfailed = true;
+			}
+		}
+	}
+	return 0;
+>>>>>>> v3.18
 }
 
 static int ft1000_probe(struct usb_interface *interface,
@@ -79,8 +99,17 @@ static int ft1000_probe(struct usb_interface *interface,
 	ft1000dev->dev = dev;
 	ft1000dev->status = 0;
 	ft1000dev->net = NULL;
+<<<<<<< HEAD
 	ft1000dev->tx_urb = usb_alloc_urb(0, GFP_ATOMIC);
 	ft1000dev->rx_urb = usb_alloc_urb(0, GFP_ATOMIC);
+=======
+	ft1000dev->tx_urb = usb_alloc_urb(0, GFP_KERNEL);
+	ft1000dev->rx_urb = usb_alloc_urb(0, GFP_KERNEL);
+	if (!ft1000dev->tx_urb || !ft1000dev->rx_urb) {
+		ret = -ENOMEM;
+		goto err_fw;
+	}
+>>>>>>> v3.18
 
 	DEBUG("ft1000_probe is called\n");
 	numaltsetting = interface->num_altsetting;
@@ -167,7 +196,11 @@ static int ft1000_probe(struct usb_interface *interface,
 		goto err_load;
 	}
 
+<<<<<<< HEAD
 	gPollingfailed = FALSE;
+=======
+	gPollingfailed = false;
+>>>>>>> v3.18
 	ft1000dev->pPollThread =
 	    kthread_run(ft1000_poll_thread, ft1000dev, "ft1000_poll");
 
@@ -193,22 +226,33 @@ static int ft1000_probe(struct usb_interface *interface,
 	if (ret)
 		goto err_thread;
 
+<<<<<<< HEAD
 	ret = ft1000_init_proc(ft1000dev->net);
 	if (ret)
 		goto err_proc;
 
+=======
+>>>>>>> v3.18
 	ft1000dev->NetDevRegDone = 1;
 
 	return 0;
 
+<<<<<<< HEAD
 err_proc:
 	unregister_netdev(ft1000dev->net);
 	free_netdev(ft1000dev->net);
+=======
+>>>>>>> v3.18
 err_thread:
 	kthread_stop(ft1000dev->pPollThread);
 err_load:
 	kfree(pFileStart);
 err_fw:
+<<<<<<< HEAD
+=======
+	usb_free_urb(ft1000dev->rx_urb);
+	usb_free_urb(ft1000dev->tx_urb);
+>>>>>>> v3.18
 	kfree(ft1000dev);
 	return ret;
 }
@@ -225,7 +269,10 @@ static void ft1000_disconnect(struct usb_interface *interface)
 
 	if (pft1000info) {
 		ft1000dev = pft1000info->priv;
+<<<<<<< HEAD
 		ft1000_cleanup_proc(pft1000info);
+=======
+>>>>>>> v3.18
 		if (ft1000dev->pPollThread)
 			kthread_stop(ft1000dev->pPollThread);
 
@@ -249,8 +296,11 @@ static void ft1000_disconnect(struct usb_interface *interface)
 		kfree(ft1000dev);
 	}
 	kfree(pFileStart);
+<<<<<<< HEAD
 
 	return;
+=======
+>>>>>>> v3.18
 }
 
 static struct usb_driver ft1000_usb_driver = {

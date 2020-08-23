@@ -9,6 +9,7 @@
 #ifndef _ASM_ARC_ARCREGS_H
 #define _ASM_ARC_ARCREGS_H
 
+<<<<<<< HEAD
 #ifdef __KERNEL__
 
 /* Build Configuration Registers */
@@ -23,6 +24,18 @@
 #define ARC_REG_MMU_BCR		0x6f
 #define ARC_REG_DCCM_BCR	0x74	/* DCCM Present + SZ */
 #define ARC_REG_TIMERS_BCR	0x75
+=======
+/* Build Configuration Registers */
+#define ARC_REG_DCCMBASE_BCR	0x61	/* DCCM Base Addr */
+#define ARC_REG_CRC_BCR		0x62
+#define ARC_REG_VECBASE_BCR	0x68
+#define ARC_REG_PERIBASE_BCR	0x69
+#define ARC_REG_FP_BCR		0x6B	/* ARCompact: Single-Precision FPU */
+#define ARC_REG_DPFP_BCR	0x6C	/* ARCompact: Dbl Precision FPU */
+#define ARC_REG_DCCM_BCR	0x74	/* DCCM Present + SZ */
+#define ARC_REG_TIMERS_BCR	0x75
+#define ARC_REG_AP_BCR		0x76
+>>>>>>> v3.18
 #define ARC_REG_ICCM_BCR	0x78
 #define ARC_REG_XY_MEM_BCR	0x79
 #define ARC_REG_MAC_BCR		0x7a
@@ -32,6 +45,7 @@
 #define ARC_REG_MIXMAX_BCR	0x7e
 #define ARC_REG_BARREL_BCR	0x7f
 #define ARC_REG_D_UNCACH_BCR	0x6A
+<<<<<<< HEAD
 
 /* status32 Bits Positions */
 #define STATUS_H_BIT		0	/* CPU Halted */
@@ -39,17 +53,27 @@
 #define STATUS_E2_BIT		2	/* Int 2 enable */
 #define STATUS_A1_BIT		3	/* Int 1 active */
 #define STATUS_A2_BIT		4	/* Int 2 active */
+=======
+#define ARC_REG_BPU_BCR		0xc0
+#define ARC_REG_ISA_CFG_BCR	0xc1
+#define ARC_REG_SMART_BCR	0xFF
+
+/* status32 Bits Positions */
+>>>>>>> v3.18
 #define STATUS_AE_BIT		5	/* Exception active */
 #define STATUS_DE_BIT		6	/* PC is in delay slot */
 #define STATUS_U_BIT		7	/* User/Kernel mode */
 #define STATUS_L_BIT		12	/* Loop inhibit */
 
 /* These masks correspond to the status word(STATUS_32) bits */
+<<<<<<< HEAD
 #define STATUS_H_MASK		(1<<STATUS_H_BIT)
 #define STATUS_E1_MASK		(1<<STATUS_E1_BIT)
 #define STATUS_E2_MASK		(1<<STATUS_E2_BIT)
 #define STATUS_A1_MASK		(1<<STATUS_A1_BIT)
 #define STATUS_A2_MASK		(1<<STATUS_A2_BIT)
+=======
+>>>>>>> v3.18
 #define STATUS_AE_MASK		(1<<STATUS_AE_BIT)
 #define STATUS_DE_MASK		(1<<STATUS_DE_BIT)
 #define STATUS_U_MASK		(1<<STATUS_U_BIT)
@@ -71,6 +95,10 @@
 #define ECR_V_ITLB_MISS			0x21
 #define ECR_V_DTLB_MISS			0x22
 #define ECR_V_PROTV			0x23
+<<<<<<< HEAD
+=======
+#define ECR_V_TRAP			0x25
+>>>>>>> v3.18
 
 /* Protection Violation Exception Cause Code Values */
 #define ECR_C_PROTV_INST_FETCH		0x00
@@ -79,14 +107,29 @@
 #define ECR_C_PROTV_XCHG		0x03
 #define ECR_C_PROTV_MISALIG_DATA	0x04
 
+<<<<<<< HEAD
+=======
+#define ECR_C_BIT_PROTV_MISALIG_DATA	10
+
+/* Machine Check Cause Code Values */
+#define ECR_C_MCHK_DUP_TLB		0x01
+
+>>>>>>> v3.18
 /* DTLB Miss Exception Cause Code Values */
 #define ECR_C_BIT_DTLB_LD_MISS		8
 #define ECR_C_BIT_DTLB_ST_MISS		9
 
+<<<<<<< HEAD
+=======
+/* Dummy ECR values for Interrupts */
+#define event_IRQ1		0x0031abcd
+#define event_IRQ2		0x0032abcd
+>>>>>>> v3.18
 
 /* Auxiliary registers */
 #define AUX_IDENTITY		4
 #define AUX_INTR_VEC_BASE	0x25
+<<<<<<< HEAD
 #define AUX_IRQ_LEV		0x200	/* IRQ Priority: L1 or L2 */
 #define AUX_IRQ_HINT		0x201	/* For generating Soft Interrupts */
 #define AUX_IRQ_LV12		0x43	/* interrupt level register */
@@ -167,6 +210,9 @@
 
 /* Bits in MMU PID register */
 #define MMU_ENABLE		(1 << 31)	/* Enable MMU for process */
+=======
+
+>>>>>>> v3.18
 
 /*
  * Floating Pt Registers
@@ -272,6 +318,7 @@
 #define PAGES_TO_KB(n_pages)	((n_pages) << (PAGE_SHIFT - 10))
 #define PAGES_TO_MB(n_pages)	(PAGES_TO_KB(n_pages) >> 10)
 
+<<<<<<< HEAD
 #ifdef CONFIG_ARC_FPU_SAVE_RESTORE
 /* These DPFP regs need to be saved/restored across ctx-sw */
 struct arc_fpu {
@@ -280,6 +327,8 @@ struct arc_fpu {
 	} aux_dpfp[2];
 };
 #endif
+=======
+>>>>>>> v3.18
 
 /*
  ***************************************************************
@@ -293,6 +342,7 @@ struct bcr_identity {
 #endif
 };
 
+<<<<<<< HEAD
 struct bcr_mmu_1_2 {
 #ifdef CONFIG_CPU_BIG_ENDIAN
 	unsigned int ver:8, ways:4, sets:4, u_itlb:8, u_dtlb:8;
@@ -332,6 +382,21 @@ struct bcr_extn_mac_mul {
 	unsigned int pad:16, type:8, ver:8;
 #else
 	unsigned int ver:8, type:8, pad:16;
+=======
+struct bcr_isa {
+#ifdef CONFIG_CPU_BIG_ENDIAN
+	unsigned int pad1:23, atomic1:1, ver:8;
+#else
+	unsigned int ver:8, atomic1:1, pad1:23;
+#endif
+};
+
+struct bcr_mpy {
+#ifdef CONFIG_CPU_BIG_ENDIAN
+	unsigned int pad:8, x1616:8, dsp:4, cycles:2, type:2, ver:8;
+#else
+	unsigned int ver:8, type:2, cycles:2, dsp:4, x1616:8, pad:8;
+>>>>>>> v3.18
 #endif
 };
 
@@ -343,6 +408,7 @@ struct bcr_extn_xymem {
 #endif
 };
 
+<<<<<<< HEAD
 struct bcr_cache {
 #ifdef CONFIG_CPU_BIG_ENDIAN
 	unsigned int pad:12, line_len:4, sz:4, config:4, ver:8;
@@ -351,6 +417,8 @@ struct bcr_cache {
 #endif
 };
 
+=======
+>>>>>>> v3.18
 struct bcr_perip {
 #ifdef CONFIG_CPU_BIG_ENDIAN
 	unsigned int start:8, pad2:8, sz:8, pad:8;
@@ -358,6 +426,10 @@ struct bcr_perip {
 	unsigned int pad:8, sz:8, pad2:8, start:8;
 #endif
 };
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 struct bcr_iccm {
 #ifdef CONFIG_CPU_BIG_ENDIAN
 	unsigned int base:16, pad:5, sz:3, ver:8;
@@ -384,8 +456,13 @@ struct bcr_dccm {
 #endif
 };
 
+<<<<<<< HEAD
 /* Both SP and DP FPU BCRs have same format */
 struct bcr_fp {
+=======
+/* ARCompact: Both SP and DP FPU BCRs have same format */
+struct bcr_fp_arcompact {
+>>>>>>> v3.18
 #ifdef CONFIG_CPU_BIG_ENDIAN
 	unsigned int fast:1, ver:8;
 #else
@@ -393,6 +470,33 @@ struct bcr_fp {
 #endif
 };
 
+<<<<<<< HEAD
+=======
+struct bcr_timer {
+#ifdef CONFIG_CPU_BIG_ENDIAN
+	unsigned int pad2:15, rtsc:1, pad1:6, t1:1, t0:1, ver:8;
+#else
+	unsigned int ver:8, t0:1, t1:1, pad1:6, rtsc:1, pad2:15;
+#endif
+};
+
+struct bcr_bpu_arcompact {
+#ifdef CONFIG_CPU_BIG_ENDIAN
+	unsigned int pad2:19, fam:1, pad:2, ent:2, ver:8;
+#else
+	unsigned int ver:8, ent:2, pad:2, fam:1, pad2:19;
+#endif
+};
+
+struct bcr_generic {
+#ifdef CONFIG_CPU_BIG_ENDIAN
+	unsigned int pad:24, ver:8;
+#else
+	unsigned int ver:8, pad:24;
+#endif
+};
+
+>>>>>>> v3.18
 /*
  *******************************************************************
  * Generic structures to hold build configuration used at runtime
@@ -403,7 +507,15 @@ struct cpuinfo_arc_mmu {
 };
 
 struct cpuinfo_arc_cache {
+<<<<<<< HEAD
 	unsigned int has_aliasing, sz, line_len, assoc, ver;
+=======
+	unsigned int sz_k:8, line_len:8, assoc:4, ver:4, alias:1, vipt:1, pad:6;
+};
+
+struct cpuinfo_arc_bpu {
+	unsigned int ver, full, num_cache, num_pred;
+>>>>>>> v3.18
 };
 
 struct cpuinfo_arc_ccm {
@@ -413,6 +525,7 @@ struct cpuinfo_arc_ccm {
 struct cpuinfo_arc {
 	struct cpuinfo_arc_cache icache, dcache;
 	struct cpuinfo_arc_mmu mmu;
+<<<<<<< HEAD
 	struct bcr_identity core;
 	unsigned int timers;
 	unsigned int vec_base;
@@ -422,12 +535,32 @@ struct cpuinfo_arc {
 	struct bcr_extn_xymem extn_xymem;
 	struct bcr_extn_mac_mul extn_mac_mul;
 	struct bcr_fp fp, dpfp;
+=======
+	struct cpuinfo_arc_bpu bpu;
+	struct bcr_identity core;
+	struct bcr_isa isa;
+	struct bcr_timer timers;
+	unsigned int vec_base;
+	unsigned int uncached_base;
+	struct cpuinfo_arc_ccm iccm, dccm;
+	struct {
+		unsigned int swap:1, norm:1, minmax:1, barrel:1, crc:1, pad1:3,
+			     fpu_sp:1, fpu_dp:1, pad2:6,
+			     debug:1, ap:1, smart:1, rtt:1, pad3:4,
+			     pad4:8;
+	} extn;
+	struct bcr_mpy extn_mpy;
+	struct bcr_extn_xymem extn_xymem;
+>>>>>>> v3.18
 };
 
 extern struct cpuinfo_arc cpuinfo_arc700[];
 
 #endif /* __ASEMBLY__ */
 
+<<<<<<< HEAD
 #endif /* __KERNEL__ */
 
+=======
+>>>>>>> v3.18
 #endif /* _ASM_ARC_ARCREGS_H */

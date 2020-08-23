@@ -14,11 +14,14 @@
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 */
 
 /*
@@ -1290,6 +1293,7 @@ static inline unsigned MSeries_PFI_Output_Select_Source(unsigned channel,
 	return (bits >> ((channel % 3) * 5)) & 0x1f;
 };
 
+<<<<<<< HEAD
 enum MSeries_Gi_DMA_Config_Bits {
 	Gi_DMA_BankSW_Error_Bit = 0x10,
 	Gi_DMA_Reset_Bit = 0x8,
@@ -1298,6 +1302,8 @@ enum MSeries_Gi_DMA_Config_Bits {
 	Gi_DMA_Enable_Bit = 0x1,
 };
 
+=======
+>>>>>>> v3.18
 static inline unsigned MSeries_PFI_Filter_Select_Mask(unsigned channel)
 {
 	return 0x3 << (channel * 2);
@@ -1393,12 +1399,21 @@ enum Interrupt_C_Status_Bits {
 #define M_SERIES_EEPROM_SIZE 1024
 
 struct ni_board_struct {
+<<<<<<< HEAD
 	int device_id;
 	int isapnp_id;
 	char *name;
 
 	int n_adchan;
 	int adbits;
+=======
+	const char *name;
+	int device_id;
+	int isapnp_id;
+
+	int n_adchan;
+	unsigned int ai_maxdata;
+>>>>>>> v3.18
 
 	int ai_fifo_depth;
 	unsigned int alwaysdither:1;
@@ -1406,21 +1421,32 @@ struct ni_board_struct {
 	int ai_speed;
 
 	int n_aochan;
+<<<<<<< HEAD
 	int aobits;
+=======
+	unsigned int ao_maxdata;
+>>>>>>> v3.18
 	int ao_fifo_depth;
 	const struct comedi_lrange *ao_range_table;
 	unsigned ao_speed;
 
+<<<<<<< HEAD
 	unsigned num_p0_dio_channels;
 
 	int reg_type;
 	unsigned int ao_unipolar:1;
 	unsigned int has_8255:1;
 	unsigned int has_analog_trig:1;
+=======
+	int reg_type;
+	unsigned int has_8255:1;
+	unsigned int has_32dio_chan:1;
+>>>>>>> v3.18
 
 	enum caldac_enum caldac[3];
 };
 
+<<<<<<< HEAD
 #define MAX_N_AO_CHAN 8
 #define NUM_GPCT 2
 
@@ -1509,4 +1535,89 @@ struct ni_board_struct {
 	struct mite_dma_descriptor_ring *cdo_mite_ring; \
 	struct mite_dma_descriptor_ring *gpct_mite_ring[NUM_GPCT];
 
+=======
+#define MAX_N_CALDACS	34
+#define MAX_N_AO_CHAN	8
+#define NUM_GPCT	2
+
+struct ni_private {
+	unsigned short dio_output;
+	unsigned short dio_control;
+	int aimode;
+	unsigned int ai_calib_source;
+	unsigned int ai_calib_source_enabled;
+	spinlock_t window_lock;
+	spinlock_t soft_reg_copy_lock;
+	spinlock_t mite_channel_lock;
+
+	int changain_state;
+	unsigned int changain_spec;
+
+	unsigned int caldac_maxdata_list[MAX_N_CALDACS];
+	unsigned short caldacs[MAX_N_CALDACS];
+
+	unsigned short ai_cmd2;
+
+	unsigned short ao_conf[MAX_N_AO_CHAN];
+	unsigned short ao_mode1;
+	unsigned short ao_mode2;
+	unsigned short ao_mode3;
+	unsigned short ao_cmd1;
+	unsigned short ao_cmd2;
+	unsigned short ao_trigger_select;
+
+	struct ni_gpct_device *counter_dev;
+	unsigned short an_trig_etc_reg;
+
+	unsigned ai_offset[512];
+
+	unsigned long serial_interval_ns;
+	unsigned char serial_hw_mode;
+	unsigned short clock_and_fout;
+	unsigned short clock_and_fout2;
+
+	unsigned short int_a_enable_reg;
+	unsigned short int_b_enable_reg;
+	unsigned short io_bidirection_pin_reg;
+	unsigned short rtsi_trig_direction_reg;
+	unsigned short rtsi_trig_a_output_reg;
+	unsigned short rtsi_trig_b_output_reg;
+	unsigned short pfi_output_select_reg[NUM_PFI_OUTPUT_SELECT_REGS];
+	unsigned short ai_ao_select_reg;
+	unsigned short g0_g1_select_reg;
+	unsigned short cdio_dma_select_reg;
+
+	unsigned clock_ns;
+	unsigned clock_source;
+
+	unsigned short pwm_up_count;
+	unsigned short pwm_down_count;
+
+	unsigned short ai_fifo_buffer[0x2000];
+	uint8_t eeprom_buffer[M_SERIES_EEPROM_SIZE];
+	uint32_t serial_number;
+
+	struct mite_struct *mite;
+	struct mite_channel *ai_mite_chan;
+	struct mite_channel *ao_mite_chan;
+	struct mite_channel *cdo_mite_chan;
+	struct mite_dma_descriptor_ring *ai_mite_ring;
+	struct mite_dma_descriptor_ring *ao_mite_ring;
+	struct mite_dma_descriptor_ring *cdo_mite_ring;
+	struct mite_dma_descriptor_ring *gpct_mite_ring[NUM_GPCT];
+
+	/* ni_pcimio board type flags (based on the boardinfo reg_type) */
+	unsigned int is_m_series:1;
+	unsigned int is_6xxx:1;
+	unsigned int is_611x:1;
+	unsigned int is_6143:1;
+	unsigned int is_622x:1;
+	unsigned int is_625x:1;
+	unsigned int is_628x:1;
+	unsigned int is_67xx:1;
+	unsigned int is_6711:1;
+	unsigned int is_6713:1;
+};
+
+>>>>>>> v3.18
 #endif /* _COMEDI_NI_STC_H */

@@ -156,10 +156,15 @@ static int __init pcap_rtc_probe(struct platform_device *pdev)
 
 	pcap_rtc->rtc = devm_rtc_device_register(&pdev->dev, "pcap",
 					&pcap_rtc_ops, THIS_MODULE);
+<<<<<<< HEAD
 	if (IS_ERR(pcap_rtc->rtc)) {
 		err = PTR_ERR(pcap_rtc->rtc);
 		goto fail;
 	}
+=======
+	if (IS_ERR(pcap_rtc->rtc))
+		return PTR_ERR(pcap_rtc->rtc);
+>>>>>>> v3.18
 
 	timer_irq = pcap_to_irq(pcap_rtc->pcap, PCAP_IRQ_1HZ);
 	alarm_irq = pcap_to_irq(pcap_rtc->pcap, PCAP_IRQ_TODA);
@@ -167,17 +172,27 @@ static int __init pcap_rtc_probe(struct platform_device *pdev)
 	err = devm_request_irq(&pdev->dev, timer_irq, pcap_rtc_irq, 0,
 				"RTC Timer", pcap_rtc);
 	if (err)
+<<<<<<< HEAD
 		goto fail;
+=======
+		return err;
+>>>>>>> v3.18
 
 	err = devm_request_irq(&pdev->dev, alarm_irq, pcap_rtc_irq, 0,
 				"RTC Alarm", pcap_rtc);
 	if (err)
+<<<<<<< HEAD
 		goto fail;
 
 	return 0;
 fail:
 	platform_set_drvdata(pdev, NULL);
 	return err;
+=======
+		return err;
+
+	return 0;
+>>>>>>> v3.18
 }
 
 static int __exit pcap_rtc_remove(struct platform_device *pdev)

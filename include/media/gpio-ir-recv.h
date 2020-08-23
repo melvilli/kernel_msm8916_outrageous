@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* Copyright (c) 2012, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2012, Code Aurora Forum. All rights reserved.
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -18,8 +22,11 @@ struct gpio_ir_recv_platform_data {
 	bool		active_low;
 	u64		allowed_protos;
 	const char	*map_name;
+<<<<<<< HEAD
 	bool		can_wakeup;
 	u32		swfi_latency;
+=======
+>>>>>>> v3.18
 };
 
 #endif /* __GPIO_IR_RECV_H__ */

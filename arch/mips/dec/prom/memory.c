@@ -22,7 +22,11 @@ volatile unsigned long mem_err;		/* So we know an error occurred */
 
 /*
  * Probe memory in 4MB chunks, waiting for an error to tell us we've fallen
+<<<<<<< HEAD
  * off the end of real memory.	Only suitable for the 2100/3100's (PMAX).
+=======
+ * off the end of real memory.  Only suitable for the 2100/3100's (PMAX).
+>>>>>>> v3.18
  */
 
 #define CHUNK_SIZE 0x400000

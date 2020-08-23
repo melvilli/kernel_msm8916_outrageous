@@ -56,8 +56,11 @@ static struct irq_chip mips_cpu_irq_controller = {
 	.irq_mask_ack	= mask_mips_irq,
 	.irq_unmask	= unmask_mips_irq,
 	.irq_eoi	= unmask_mips_irq,
+<<<<<<< HEAD
 	.irq_disable	= mask_mips_irq,
 	.irq_enable	= unmask_mips_irq,
+=======
+>>>>>>> v3.18
 };
 
 /*
@@ -94,8 +97,11 @@ static struct irq_chip mips_mt_cpu_irq_controller = {
 	.irq_mask_ack	= mips_mt_cpu_irq_ack,
 	.irq_unmask	= unmask_mips_irq,
 	.irq_eoi	= unmask_mips_irq,
+<<<<<<< HEAD
 	.irq_disable	= mask_mips_irq,
 	.irq_enable	= unmask_mips_irq,
+=======
+>>>>>>> v3.18
 };
 
 void __init mips_cpu_irq_init(void)
@@ -154,7 +160,11 @@ int __init mips_cpu_intc_init(struct device_node *of_node,
 	domain = irq_domain_add_legacy(of_node, 8, MIPS_CPU_IRQ_BASE, 0,
 				       &mips_cpu_intc_irq_domain_ops, NULL);
 	if (!domain)
+<<<<<<< HEAD
 		panic("Failed to add irqdomain for MIPS CPU\n");
+=======
+		panic("Failed to add irqdomain for MIPS CPU");
+>>>>>>> v3.18
 
 	return 0;
 }

@@ -14,6 +14,10 @@
 #include <linux/types.h>
 #include <linux/crypto.h>
 #include <linux/err.h>
+<<<<<<< HEAD
+=======
+#include <crypto/ablk_helper.h>
+>>>>>>> v3.18
 #include <crypto/algapi.h>
 #include <crypto/ctr.h>
 #include <crypto/lrw.h>
@@ -21,7 +25,10 @@
 #include <asm/xcr.h>
 #include <asm/xsave.h>
 #include <asm/crypto/camellia.h>
+<<<<<<< HEAD
 #include <asm/crypto/ablk_helper.h>
+=======
+>>>>>>> v3.18
 #include <asm/crypto/glue_helper.h>
 
 #define CAMELLIA_AESNI_PARALLEL_BLOCKS 16
@@ -574,5 +581,10 @@ module_exit(camellia_aesni_fini);
 
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("Camellia Cipher Algorithm, AES-NI/AVX optimized");
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("camellia");
 MODULE_ALIAS_CRYPTO("camellia-asm");
+=======
+MODULE_ALIAS("camellia");
+MODULE_ALIAS("camellia-asm");
+>>>>>>> v3.18

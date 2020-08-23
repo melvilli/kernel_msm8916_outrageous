@@ -16,8 +16,12 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
  */
 
 #include <linux/kernel.h>
@@ -573,10 +577,28 @@ static int mscan_open(struct net_device *dev)
 	struct mscan_priv *priv = netdev_priv(dev);
 	struct mscan_regs __iomem *regs = priv->reg_base;
 
+<<<<<<< HEAD
 	/* common open */
 	ret = open_candev(dev);
 	if (ret)
 		return ret;
+=======
+	if (priv->clk_ipg) {
+		ret = clk_prepare_enable(priv->clk_ipg);
+		if (ret)
+			goto exit_retcode;
+	}
+	if (priv->clk_can) {
+		ret = clk_prepare_enable(priv->clk_can);
+		if (ret)
+			goto exit_dis_ipg_clock;
+	}
+
+	/* common open */
+	ret = open_candev(dev);
+	if (ret)
+		goto exit_dis_can_clock;
+>>>>>>> v3.18
 
 	napi_enable(&priv->napi);
 
@@ -604,6 +626,16 @@ exit_free_irq:
 exit_napi_disable:
 	napi_disable(&priv->napi);
 	close_candev(dev);
+<<<<<<< HEAD
+=======
+exit_dis_can_clock:
+	if (priv->clk_can)
+		clk_disable_unprepare(priv->clk_can);
+exit_dis_ipg_clock:
+	if (priv->clk_ipg)
+		clk_disable_unprepare(priv->clk_ipg);
+exit_retcode:
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -621,13 +653,28 @@ static int mscan_close(struct net_device *dev)
 	close_candev(dev);
 	free_irq(dev->irq, dev);
 
+<<<<<<< HEAD
+=======
+	if (priv->clk_can)
+		clk_disable_unprepare(priv->clk_can);
+	if (priv->clk_ipg)
+		clk_disable_unprepare(priv->clk_ipg);
+
+>>>>>>> v3.18
 	return 0;
 }
 
 static const struct net_device_ops mscan_netdev_ops = {
+<<<<<<< HEAD
        .ndo_open               = mscan_open,
        .ndo_stop               = mscan_close,
        .ndo_start_xmit         = mscan_start_xmit,
+=======
+	.ndo_open	= mscan_open,
+	.ndo_stop	= mscan_close,
+	.ndo_start_xmit	= mscan_start_xmit,
+	.ndo_change_mtu	= can_change_mtu,
+>>>>>>> v3.18
 };
 
 int register_mscandev(struct net_device *dev, int mscan_clksrc)

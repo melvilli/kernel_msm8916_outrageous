@@ -21,6 +21,10 @@ struct reset_control_ops {
 
 struct module;
 struct device_node;
+<<<<<<< HEAD
+=======
+struct of_phandle_args;
+>>>>>>> v3.18
 
 /**
  * struct reset_controller_dev - reset controller entity that might

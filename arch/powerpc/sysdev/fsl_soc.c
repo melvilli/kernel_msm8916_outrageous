@@ -25,7 +25,10 @@
 #include <linux/of.h>
 #include <linux/of_platform.h>
 #include <linux/phy.h>
+<<<<<<< HEAD
 #include <linux/phy_fixed.h>
+=======
+>>>>>>> v3.18
 #include <linux/spi/spi.h>
 #include <linux/fsl_devices.h>
 #include <linux/fs_enet_pd.h>
@@ -178,6 +181,7 @@ u32 get_baudrate(void)
 EXPORT_SYMBOL(get_baudrate);
 #endif /* CONFIG_CPM2 */
 
+<<<<<<< HEAD
 #ifdef CONFIG_FIXED_PHY
 static int __init of_add_fixed_phys(void)
 {
@@ -209,6 +213,8 @@ static int __init of_add_fixed_phys(void)
 arch_initcall(of_add_fixed_phys);
 #endif /* CONFIG_FIXED_PHY */
 
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_FSL_SOC_BOOKE) || defined(CONFIG_PPC_86xx)
 static __be32 __iomem *rstcr;
 

@@ -4,6 +4,10 @@
  * This file is released under the GPL.
  */
 
+<<<<<<< HEAD
+=======
+#include "dm.h"
+>>>>>>> v3.18
 #include <linux/device-mapper.h>
 
 #include <linux/module.h>
@@ -158,8 +162,15 @@ static int stripe_ctr(struct dm_target *ti, unsigned int argc, char **argv)
 		sc->stripes_shift = __ffs(stripes);
 
 	r = dm_set_target_max_io_len(ti, chunk_size);
+<<<<<<< HEAD
 	if (r)
 		return r;
+=======
+	if (r) {
+		kfree(sc);
+		return r;
+	}
+>>>>>>> v3.18
 
 	ti->num_flush_bios = stripes;
 	ti->num_discard_bios = stripes;
@@ -258,13 +269,24 @@ static int stripe_map_range(struct stripe_c *sc, struct bio *bio,
 {
 	sector_t begin, end;
 
+<<<<<<< HEAD
 	stripe_map_range_sector(sc, bio->bi_sector, target_stripe, &begin);
+=======
+	stripe_map_range_sector(sc, bio->bi_iter.bi_sector,
+				target_stripe, &begin);
+>>>>>>> v3.18
 	stripe_map_range_sector(sc, bio_end_sector(bio),
 				target_stripe, &end);
 	if (begin < end) {
 		bio->bi_bdev = sc->stripe[target_stripe].dev->bdev;
+<<<<<<< HEAD
 		bio->bi_sector = begin + sc->stripe[target_stripe].physical_start;
 		bio->bi_size = to_bytes(end - begin);
+=======
+		bio->bi_iter.bi_sector = begin +
+			sc->stripe[target_stripe].physical_start;
+		bio->bi_iter.bi_size = to_bytes(end - begin);
+>>>>>>> v3.18
 		return DM_MAPIO_REMAPPED;
 	} else {
 		/* The range doesn't map to the target stripe */
@@ -292,9 +314,16 @@ static int stripe_map(struct dm_target *ti, struct bio *bio)
 		return stripe_map_range(sc, bio, target_bio_nr);
 	}
 
+<<<<<<< HEAD
 	stripe_map_sector(sc, bio->bi_sector, &stripe, &bio->bi_sector);
 
 	bio->bi_sector += sc->stripe[stripe].physical_start;
+=======
+	stripe_map_sector(sc, bio->bi_iter.bi_sector,
+			  &stripe, &bio->bi_iter.bi_sector);
+
+	bio->bi_iter.bi_sector += sc->stripe[stripe].physical_start;
+>>>>>>> v3.18
 	bio->bi_bdev = sc->stripe[stripe].dev->bdev;
 
 	return DM_MAPIO_REMAPPED;

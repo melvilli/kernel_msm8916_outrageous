@@ -9,6 +9,13 @@
 			Linus
 ----------
 
+<<<<<<< HEAD
+=======
+M: Matt Mackal
+E: mpm@selenic.com
+D: SLOB slab allocator
+
+>>>>>>> v3.18
 N: Matti Aarnio
 E: mea@nic.funet.fi
 D: Alpha systems hacking, IPv6 and other network related stuff
@@ -630,6 +637,16 @@ N: Michael Elizabeth Chastain
 E: mec@shout.net
 D: Configure, Menuconfig, xconfig
 
+<<<<<<< HEAD
+=======
+N: Mauro Carvalho Chehab
+E: m.chehab@samsung.org
+E: mchehab@infradead.org
+D: Media subsystem (V4L/DVB) drivers and core
+D: EDAC drivers and EDAC 3.0 core rework
+S: Brazil
+
+>>>>>>> v3.18
 N: Raymond Chen
 E: raymondc@microsoft.com
 D: Author of Configure script
@@ -637,6 +654,7 @@ S: 14509 NE 39th Street #1096
 S: Bellevue, Washington 98007
 S: USA
 
+<<<<<<< HEAD
 N: Christopher L. Cheney
 E: ccheney@debian.org
 E: ccheney@cheney.cx
@@ -645,6 +663,15 @@ P: 1024D/8E384AF2 2D31 1927 87D7 1F24 9FF9  1BC5 D106 5AB3 8E38 4AF2
 D: Vista Imaging usb webcam driver
 S: 314 Prince of Wales
 S: Conroe, TX 77304
+=======
+N: Chris Cheney
+E: chris.cheney@gmail.com
+E: ccheney@redhat.com
+P: 1024D/8E384AF2 2D31 1927 87D7 1F24 9FF9  1BC5 D106 5AB3 8E38 4AF2
+D: Vista Imaging usb webcam driver
+S: 2308 Therrell Way
+S: McKinney, TX 75070
+>>>>>>> v3.18
 S: USA
 
 N: Stuart Cheshire
@@ -656,6 +683,14 @@ S: Stanford University
 S: Stanford, California 94305
 S: USA
 
+<<<<<<< HEAD
+=======
+N: Carlos Chinea
+E: carlos.chinea@nokia.com
+E: cch.devel@gmail.com
+D: Author of HSI Subsystem
+
+>>>>>>> v3.18
 N: Randolph Chung
 E: tausq@debian.org
 D: Linux/PA-RISC hacker
@@ -819,8 +854,13 @@ S: D-69231 Rauenberg
 S: Germany
 
 N: Jean Delvare
+<<<<<<< HEAD
 E: khali@linux-fr.org
 W: http://khali.linux-fr.org/
+=======
+E: jdelvare@suse.de
+W: http://jdelvare.nerim.net/
+>>>>>>> v3.18
 D: Several hardware monitoring drivers
 S: France
 
@@ -1120,6 +1160,10 @@ D: author of userfs filesystem
 D: Improved mmap and munmap handling
 D: General mm minor tidyups
 D: autofs v4 maintainer
+<<<<<<< HEAD
+=======
+D: Xen subsystem
+>>>>>>> v3.18
 S: 987 Alabama St
 S: San Francisco
 S: CA, 94110
@@ -1224,7 +1268,11 @@ E: philip@gladstonefamily.net
 D: Kernel / timekeeping stuff
 S: Carlisle, MA 01741
 S: USA
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> v3.18
 N: Jan-Benedict Glaw
 E: jbglaw@lug-owl.de
 D: SRM environment driver (for Alpha systems)
@@ -1365,6 +1413,12 @@ S: 17 rue Danton
 S: F - 94270 Le Kremlin-Bicêtre
 S: France
 
+<<<<<<< HEAD
+=======
+N: Jack Hammer
+D: IBM ServeRAID RAID (ips) driver maintenance
+
+>>>>>>> v3.18
 N: Greg Hankins
 E: gregh@cc.gatech.edu
 D: fixed keyboard driver to separate LED and locking status
@@ -1675,6 +1729,13 @@ S: Reading
 S: RG6 2NU
 S: United Kingdom
 
+<<<<<<< HEAD
+=======
+N: Dave Jeffery
+E: dhjeffery@gmail.com
+D: SCSI hacks and IBM ServeRAID RAID driver maintenance
+
+>>>>>>> v3.18
 N: Jakub Jelinek
 E: jakub@redhat.com
 W: http://sunsite.mff.cuni.cz/~jj
@@ -2555,10 +2616,21 @@ S: 22 Seaview St
 S: Fullarton 5063
 S: South Australia
 
+<<<<<<< HEAD
 N. Wolfgang Muees
 E: wolfgang@iksw-muees.de
 D: Auerswald USB driver
 
+=======
+N: Wolfgang Muees
+E: wolfgang@iksw-muees.de
+D: Auerswald USB driver
+
+N: Paul Mundt
+E: paul.mundt@gmail.com
+D: SuperH maintainer
+
+>>>>>>> v3.18
 N: Ian A. Murdock
 E: imurdock@gnu.ai.mit.edu
 D: Creator of Debian distribution
@@ -2576,7 +2648,11 @@ S: Toronto, Ontario
 S: Canada
 
 N: Zwane Mwaikambo
+<<<<<<< HEAD
 E: zwane@arm.linux.org.uk
+=======
+E: zwanem@gmail.com
+>>>>>>> v3.18
 D: Various driver hacking
 D: Lowlevel x86 kernel hacking
 D: General debugging
@@ -2702,6 +2778,12 @@ N: Greg Page
 E: gpage@sovereign.org
 D: IPX development and support
 
+<<<<<<< HEAD
+=======
+N: Venkatesh Pallipadi (Venki)
+D: x86/HPET
+
+>>>>>>> v3.18
 N: David Parsons
 E: orc@pell.chi.il.us
 D: improved memory detection code.
@@ -2808,8 +2890,12 @@ S: Ottawa, Ontario
 S: Canada K2P 0X8
 
 N: Mikael Pettersson
+<<<<<<< HEAD
 E: mikpe@it.uu.se
 W: http://user.it.uu.se/~mikpe/linux/
+=======
+E: mikpelinux@gmail.com
+>>>>>>> v3.18
 D: Miscellaneous fixes
 
 N: Reed H. Petty
@@ -2896,6 +2982,14 @@ S: Framewood Road
 S: Wexham SL3 6PJ
 S: United Kingdom
 
+<<<<<<< HEAD
+=======
+N: Richard Purdie
+E: rpurdie@rpsys.net
+D: Backlight subsystem maintainer
+S: United Kingdom
+
+>>>>>>> v3.18
 N: Daniel Quinlan
 E: quinlan@pathname.com
 W: http://www.pathname.com/~quinlan/
@@ -3153,6 +3247,14 @@ N: Dipankar Sarma
 E: dipankar@in.ibm.com
 D: RCU
 
+<<<<<<< HEAD
+=======
+N: Yoshinori Sato
+E: ysato@users.sourceforge.jp
+D: uClinux for Renesas H8/300 (H8300)
+D: http://uclinux-h8.sourceforge.jp/
+
+>>>>>>> v3.18
 N: Hannu Savolainen
 E: hannu@opensound.com
 D: Maintainer of the sound drivers until 2.1.x days.
@@ -3479,10 +3581,18 @@ S: MacGregor A.C.T 2615
 S: Australia
 
 N: Josh Triplett
+<<<<<<< HEAD
 E: josh@freedesktop.org
 P: 1024D/D0FE7AFB B24A 65C9 1D71 2AC2 DE87  CA26 189B 9946 D0FE 7AFB
 D: rcutorture maintainer
 D: lock annotations, finding and fixing lock bugs
+=======
+E: josh@joshtriplett.org
+P: 4096R/8AFF873D 758E 5042 E397 4BA3 3A9C  1E67 0ED9 A3DF 8AFF 873D
+D: RCU and rcutorture
+D: lock annotations, finding and fixing lock bugs
+D: kernel tinification
+>>>>>>> v3.18
 
 N: Winfried Trümper
 E: winni@xpilot.org

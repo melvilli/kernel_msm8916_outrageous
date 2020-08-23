@@ -51,11 +51,20 @@
 #define MMC_CARD		0x1000
 #define MMC_WIDTH		0x0100
 
+<<<<<<< HEAD
 static void pxav2_set_private_registers(struct sdhci_host *host, u8 mask)
+=======
+static void pxav2_reset(struct sdhci_host *host, u8 mask)
+>>>>>>> v3.18
 {
 	struct platform_device *pdev = to_platform_device(mmc_dev(host->mmc));
 	struct sdhci_pxa_platdata *pdata = pdev->dev.platform_data;
 
+<<<<<<< HEAD
+=======
+	sdhci_reset(host, mask);
+
+>>>>>>> v3.18
 	if (mask == SDHCI_RESET_ALL) {
 		u16 tmp = 0;
 
@@ -88,7 +97,11 @@ static void pxav2_set_private_registers(struct sdhci_host *host, u8 mask)
 	}
 }
 
+<<<<<<< HEAD
 static int pxav2_mmc_set_width(struct sdhci_host *host, int width)
+=======
+static void pxav2_mmc_set_bus_width(struct sdhci_host *host, int width)
+>>>>>>> v3.18
 {
 	u8 ctrl;
 	u16 tmp;
@@ -107,6 +120,7 @@ static int pxav2_mmc_set_width(struct sdhci_host *host, int width)
 	}
 	writew(tmp, host->ioaddr + SD_CE_ATA_2);
 	writeb(ctrl, host->ioaddr + SDHCI_HOST_CONTROL);
+<<<<<<< HEAD
 
 	return 0;
 }
@@ -115,6 +129,16 @@ static const struct sdhci_ops pxav2_sdhci_ops = {
 	.get_max_clock = sdhci_pltfm_clk_get_max_clock,
 	.platform_reset_exit = pxav2_set_private_registers,
 	.platform_bus_width = pxav2_mmc_set_width,
+=======
+}
+
+static const struct sdhci_ops pxav2_sdhci_ops = {
+	.set_clock     = sdhci_set_clock,
+	.get_max_clock = sdhci_pltfm_clk_get_max_clock,
+	.set_bus_width = pxav2_mmc_set_bus_width,
+	.reset         = pxav2_reset,
+	.set_uhs_signaling = sdhci_set_uhs_signaling,
+>>>>>>> v3.18
 };
 
 #ifdef CONFIG_OF
@@ -175,7 +199,11 @@ static int sdhci_pxav2_probe(struct platform_device *pdev)
 	if (!pxa)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 	host = sdhci_pltfm_init(pdev, NULL);
+=======
+	host = sdhci_pltfm_init(pdev, NULL, 0);
+>>>>>>> v3.18
 	if (IS_ERR(host)) {
 		kfree(pxa);
 		return PTR_ERR(host);
@@ -253,15 +281,21 @@ static int sdhci_pxav2_remove(struct platform_device *pdev)
 	sdhci_pltfm_free(pdev);
 	kfree(pxa);
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
 static struct platform_driver sdhci_pxav2_driver = {
 	.driver		= {
 		.name	= "sdhci-pxav2",
+<<<<<<< HEAD
 		.owner	= THIS_MODULE,
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 		.of_match_table = sdhci_pxav2_of_match,
 #endif

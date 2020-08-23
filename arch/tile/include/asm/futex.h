@@ -43,6 +43,10 @@
 	    ".pushsection .fixup,\"ax\"\n"			\
 	    "0: { movei %0, %5; j 9f }\n"			\
 	    ".section __ex_table,\"a\"\n"			\
+<<<<<<< HEAD
+=======
+	    ".align 8\n"					\
+>>>>>>> v3.18
 	    ".quad 1b, 0b\n"					\
 	    ".popsection\n"					\
 	    "9:"						\

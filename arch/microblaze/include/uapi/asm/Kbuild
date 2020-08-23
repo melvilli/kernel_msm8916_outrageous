@@ -1,6 +1,11 @@
 # UAPI Header export list
 include include/uapi/asm-generic/Kbuild.asm
 
+<<<<<<< HEAD
+=======
+generic-y += types.h
+
+>>>>>>> v3.18
 header-y += auxvec.h
 header-y += bitsperlong.h
 header-y += byteorder.h
@@ -31,5 +36,8 @@ header-y += statfs.h
 header-y += swab.h
 header-y += termbits.h
 header-y += termios.h
+<<<<<<< HEAD
 header-y += types.h
+=======
+>>>>>>> v3.18
 header-y += unistd.h

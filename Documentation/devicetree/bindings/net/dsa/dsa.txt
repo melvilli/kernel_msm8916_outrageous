@@ -39,6 +39,25 @@ Optionnal property:
 			  This property is only used when switches are being
 			  chained/cascaded together.
 
+<<<<<<< HEAD
+=======
+- phy-handle		: Phandle to a PHY on an external MDIO bus, not the
+			  switch internal one. See
+			  Documentation/devicetree/bindings/net/ethernet.txt
+			  for details.
+
+- phy-mode		: String representing the connection to the designated
+			  PHY node specified by the 'phy-handle' property. See
+			  Documentation/devicetree/bindings/net/ethernet.txt
+			  for details.
+
+Optional subnodes:
+- fixed-link		: Fixed-link subnode describing a link to a non-MDIO
+			  managed entity. See
+			  Documentation/devicetree/bindings/net/fixed-link.txt
+			  for details.
+
+>>>>>>> v3.18
 Example:
 
 	dsa@0 {
@@ -58,6 +77,10 @@ Example:
 			port@0 {
 				reg = <0>;
 				label = "lan1";
+<<<<<<< HEAD
+=======
+				phy-handle = <&phy0>;
+>>>>>>> v3.18
 			};
 
 			port@1 {

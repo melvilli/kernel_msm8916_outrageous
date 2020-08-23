@@ -80,7 +80,11 @@ static int cirrus_ttm_global_init(struct cirrus_device *cirrus)
 	return 0;
 }
 
+<<<<<<< HEAD
 void
+=======
+static void
+>>>>>>> v3.18
 cirrus_ttm_global_release(struct cirrus_device *cirrus)
 {
 	if (cirrus->ttm.mem_global_ref.release == NULL)
@@ -102,7 +106,11 @@ static void cirrus_bo_ttm_destroy(struct ttm_buffer_object *tbo)
 	kfree(bo);
 }
 
+<<<<<<< HEAD
 bool cirrus_ttm_bo_is_cirrus_bo(struct ttm_buffer_object *bo)
+=======
+static bool cirrus_ttm_bo_is_cirrus_bo(struct ttm_buffer_object *bo)
+>>>>>>> v3.18
 {
 	if (bo->destroy == &cirrus_bo_ttm_destroy)
 		return true;
@@ -148,7 +156,13 @@ cirrus_bo_evict_flags(struct ttm_buffer_object *bo, struct ttm_placement *pl)
 
 static int cirrus_bo_verify_access(struct ttm_buffer_object *bo, struct file *filp)
 {
+<<<<<<< HEAD
 	return 0;
+=======
+	struct cirrus_bo *cirrusbo = cirrus_bo(bo);
+
+	return drm_vma_node_verify_access(&cirrusbo->gem.vma_node, filp);
+>>>>>>> v3.18
 }
 
 static int cirrus_ttm_io_mem_reserve(struct ttm_bo_device *bdev,
@@ -206,7 +220,11 @@ static struct ttm_backend_func cirrus_tt_backend_func = {
 };
 
 
+<<<<<<< HEAD
 struct ttm_tt *cirrus_ttm_tt_create(struct ttm_bo_device *bdev,
+=======
+static struct ttm_tt *cirrus_ttm_tt_create(struct ttm_bo_device *bdev,
+>>>>>>> v3.18
 				 unsigned long size, uint32_t page_flags,
 				 struct page *dummy_read_page)
 {
@@ -257,7 +275,13 @@ int cirrus_mm_init(struct cirrus_device *cirrus)
 
 	ret = ttm_bo_device_init(&cirrus->ttm.bdev,
 				 cirrus->ttm.bo_global_ref.ref.object,
+<<<<<<< HEAD
 				 &cirrus_bo_driver, DRM_FILE_PAGE_OFFSET,
+=======
+				 &cirrus_bo_driver,
+				 dev->anon_inode->i_mapping,
+				 DRM_FILE_PAGE_OFFSET,
+>>>>>>> v3.18
 				 true);
 	if (ret) {
 		DRM_ERROR("Error initialising bo driver; %d\n", ret);
@@ -271,9 +295,14 @@ int cirrus_mm_init(struct cirrus_device *cirrus)
 		return ret;
 	}
 
+<<<<<<< HEAD
 	cirrus->fb_mtrr = drm_mtrr_add(pci_resource_start(dev->pdev, 0),
 				    pci_resource_len(dev->pdev, 0),
 				    DRM_MTRR_WC);
+=======
+	cirrus->fb_mtrr = arch_phys_wc_add(pci_resource_start(dev->pdev, 0),
+					   pci_resource_len(dev->pdev, 0));
+>>>>>>> v3.18
 
 	cirrus->mm_inited = true;
 	return 0;
@@ -281,8 +310,11 @@ int cirrus_mm_init(struct cirrus_device *cirrus)
 
 void cirrus_mm_fini(struct cirrus_device *cirrus)
 {
+<<<<<<< HEAD
 	struct drm_device *dev = cirrus->dev;
 
+=======
+>>>>>>> v3.18
 	if (!cirrus->mm_inited)
 		return;
 
@@ -290,17 +322,23 @@ void cirrus_mm_fini(struct cirrus_device *cirrus)
 
 	cirrus_ttm_global_release(cirrus);
 
+<<<<<<< HEAD
 	if (cirrus->fb_mtrr >= 0) {
 		drm_mtrr_del(cirrus->fb_mtrr,
 			     pci_resource_start(dev->pdev, 0),
 			     pci_resource_len(dev->pdev, 0), DRM_MTRR_WC);
 		cirrus->fb_mtrr = -1;
 	}
+=======
+	arch_phys_wc_del(cirrus->fb_mtrr);
+	cirrus->fb_mtrr = 0;
+>>>>>>> v3.18
 }
 
 void cirrus_ttm_placement(struct cirrus_bo *bo, int domain)
 {
 	u32 c = 0;
+<<<<<<< HEAD
 	bo->placement.fpfn = 0;
 	bo->placement.lpfn = 0;
 	bo->placement.placement = bo->placements;
@@ -331,6 +369,23 @@ int cirrus_bo_reserve(struct cirrus_bo *bo, bool no_wait)
 void cirrus_bo_unreserve(struct cirrus_bo *bo)
 {
 	ttm_bo_unreserve(&bo->bo);
+=======
+	unsigned i;
+	bo->placement.placement = bo->placements;
+	bo->placement.busy_placement = bo->placements;
+	if (domain & TTM_PL_FLAG_VRAM)
+		bo->placements[c++].flags = TTM_PL_FLAG_WC | TTM_PL_FLAG_UNCACHED | TTM_PL_FLAG_VRAM;
+	if (domain & TTM_PL_FLAG_SYSTEM)
+		bo->placements[c++].flags = TTM_PL_MASK_CACHING | TTM_PL_FLAG_SYSTEM;
+	if (!c)
+		bo->placements[c++].flags = TTM_PL_MASK_CACHING | TTM_PL_FLAG_SYSTEM;
+	bo->placement.num_placement = c;
+	bo->placement.num_busy_placement = c;
+	for (i = 0; i < c; ++i) {
+		bo->placements[i].fpfn = 0;
+		bo->placements[i].lpfn = 0;
+	}
+>>>>>>> v3.18
 }
 
 int cirrus_bo_create(struct drm_device *dev, int size, int align,
@@ -351,9 +406,13 @@ int cirrus_bo_create(struct drm_device *dev, int size, int align,
 		return ret;
 	}
 
+<<<<<<< HEAD
 	cirrusbo->gem.driver_private = NULL;
 	cirrusbo->bo.bdev = &cirrus->ttm.bdev;
 	cirrusbo->bo.bdev->dev_mapping = dev->dev_mapping;
+=======
+	cirrusbo->bo.bdev = &cirrus->ttm.bdev;
+>>>>>>> v3.18
 
 	cirrus_ttm_placement(cirrusbo, TTM_PL_FLAG_VRAM | TTM_PL_FLAG_SYSTEM);
 
@@ -363,7 +422,11 @@ int cirrus_bo_create(struct drm_device *dev, int size, int align,
 	ret = ttm_bo_init(&cirrus->ttm.bdev, &cirrusbo->bo, size,
 			  ttm_bo_type_device, &cirrusbo->placement,
 			  align >> PAGE_SHIFT, false, NULL, acc_size,
+<<<<<<< HEAD
 			  NULL, cirrus_bo_ttm_destroy);
+=======
+			  NULL, NULL, cirrus_bo_ttm_destroy);
+>>>>>>> v3.18
 	if (ret)
 		return ret;
 
@@ -388,7 +451,11 @@ int cirrus_bo_pin(struct cirrus_bo *bo, u32 pl_flag, u64 *gpu_addr)
 
 	cirrus_ttm_placement(bo, pl_flag);
 	for (i = 0; i < bo->placement.num_placement; i++)
+<<<<<<< HEAD
 		bo->placements[i] |= TTM_PL_FLAG_NO_EVICT;
+=======
+		bo->placements[i].flags |= TTM_PL_FLAG_NO_EVICT;
+>>>>>>> v3.18
 	ret = ttm_bo_validate(&bo->bo, &bo->placement, false, false);
 	if (ret)
 		return ret;
@@ -399,6 +466,7 @@ int cirrus_bo_pin(struct cirrus_bo *bo, u32 pl_flag, u64 *gpu_addr)
 	return 0;
 }
 
+<<<<<<< HEAD
 int cirrus_bo_unpin(struct cirrus_bo *bo)
 {
 	int i, ret;
@@ -419,6 +487,8 @@ int cirrus_bo_unpin(struct cirrus_bo *bo)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 int cirrus_bo_push_sysram(struct cirrus_bo *bo)
 {
 	int i, ret;
@@ -435,7 +505,11 @@ int cirrus_bo_push_sysram(struct cirrus_bo *bo)
 
 	cirrus_ttm_placement(bo, TTM_PL_FLAG_SYSTEM);
 	for (i = 0; i < bo->placement.num_placement ; i++)
+<<<<<<< HEAD
 		bo->placements[i] |= TTM_PL_FLAG_NO_EVICT;
+=======
+		bo->placements[i].flags |= TTM_PL_FLAG_NO_EVICT;
+>>>>>>> v3.18
 
 	ret = ttm_bo_validate(&bo->bo, &bo->placement, false, false);
 	if (ret) {
@@ -451,7 +525,11 @@ int cirrus_mmap(struct file *filp, struct vm_area_struct *vma)
 	struct cirrus_device *cirrus;
 
 	if (unlikely(vma->vm_pgoff < DRM_FILE_PAGE_OFFSET))
+<<<<<<< HEAD
 		return drm_mmap(filp, vma);
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 
 	file_priv = filp->private_data;
 	cirrus = file_priv->minor->dev->dev_private;

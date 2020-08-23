@@ -1404,7 +1404,11 @@ static void display_tree(struct menu *menu)
 		    && (tree == tree2))
 			continue;
 /*
+<<<<<<< HEAD
                 if (((menu != &rootmenu) && !(menu->flags & MENU_ROOT))
+=======
+		if (((menu != &rootmenu) && !(menu->flags & MENU_ROOT))
+>>>>>>> v3.18
 		    || (view_mode == FULL_VIEW)
 		    || (view_mode == SPLIT_VIEW))*/
 

@@ -183,7 +183,11 @@ int omfs_sync_inode(struct inode *inode)
  */
 static void omfs_evict_inode(struct inode *inode)
 {
+<<<<<<< HEAD
 	truncate_inode_pages(&inode->i_data, 0);
+=======
+	truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 	clear_inode(inode);
 
 	if (inode->i_nlink)
@@ -306,9 +310,13 @@ static const struct super_operations omfs_sops = {
  */
 static int omfs_get_imap(struct super_block *sb)
 {
+<<<<<<< HEAD
 	int bitmap_size;
 	int array_size;
 	int count;
+=======
+	unsigned int bitmap_size, count, array_size;
+>>>>>>> v3.18
 	struct omfs_sb_info *sbi = OMFS_SB(sb);
 	struct buffer_head *bh;
 	unsigned long **ptr;
@@ -321,7 +329,11 @@ static int omfs_get_imap(struct super_block *sb)
 		goto out;
 
 	sbi->s_imap_size = array_size;
+<<<<<<< HEAD
 	sbi->s_imap = kzalloc(array_size * sizeof(unsigned long *), GFP_KERNEL);
+=======
+	sbi->s_imap = kcalloc(array_size, sizeof(unsigned long *), GFP_KERNEL);
+>>>>>>> v3.18
 	if (!sbi->s_imap)
 		goto nomem;
 
@@ -361,7 +373,11 @@ nomem:
 }
 
 enum {
+<<<<<<< HEAD
 	Opt_uid, Opt_gid, Opt_umask, Opt_dmask, Opt_fmask, Opt_err
+=======
+	Opt_uid, Opt_gid, Opt_umask, Opt_dmask, Opt_fmask
+>>>>>>> v3.18
 };
 
 static const match_table_t tokens = {
@@ -370,7 +386,10 @@ static const match_table_t tokens = {
 	{Opt_umask, "umask=%o"},
 	{Opt_dmask, "dmask=%o"},
 	{Opt_fmask, "fmask=%o"},
+<<<<<<< HEAD
 	{Opt_err, NULL},
+=======
+>>>>>>> v3.18
 };
 
 static int parse_options(char *options, struct omfs_sb_info *sbi)
@@ -474,6 +493,15 @@ static int omfs_fill_super(struct super_block *sb, void *data, int silent)
 	sbi->s_sys_blocksize = be32_to_cpu(omfs_sb->s_sys_blocksize);
 	mutex_init(&sbi->s_bitmap_lock);
 
+<<<<<<< HEAD
+=======
+	if (sbi->s_num_blocks > OMFS_MAX_BLOCKS) {
+		printk(KERN_ERR "omfs: sysblock number (%llx) is out of range\n",
+		       (unsigned long long)sbi->s_num_blocks);
+		goto out_brelse_bh;
+	}
+
+>>>>>>> v3.18
 	if (sbi->s_sys_blocksize > PAGE_SIZE) {
 		printk(KERN_ERR "omfs: sysblock size (%d) is out of range\n",
 			sbi->s_sys_blocksize);

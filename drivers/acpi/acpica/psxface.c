@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -125,7 +129,11 @@ static void acpi_ps_start_trace(struct acpi_evaluate_info *info)
 	}
 
 	if ((!acpi_gbl_trace_method_name) ||
+<<<<<<< HEAD
 	    (acpi_gbl_trace_method_name != info->resolved_node->name.integer)) {
+=======
+	    (acpi_gbl_trace_method_name != info->node->name.integer)) {
+>>>>>>> v3.18
 		goto exit;
 	}
 
@@ -142,7 +150,11 @@ static void acpi_ps_start_trace(struct acpi_evaluate_info *info)
 		acpi_dbg_layer = acpi_gbl_trace_dbg_layer;
 	}
 
+<<<<<<< HEAD
       exit:
+=======
+exit:
+>>>>>>> v3.18
 	(void)acpi_ut_release_mutex(ACPI_MTX_NAMESPACE);
 }
 
@@ -170,7 +182,11 @@ static void acpi_ps_stop_trace(struct acpi_evaluate_info *info)
 	}
 
 	if ((!acpi_gbl_trace_method_name) ||
+<<<<<<< HEAD
 	    (acpi_gbl_trace_method_name != info->resolved_node->name.integer)) {
+=======
+	    (acpi_gbl_trace_method_name != info->node->name.integer)) {
+>>>>>>> v3.18
 		goto exit;
 	}
 
@@ -185,7 +201,11 @@ static void acpi_ps_stop_trace(struct acpi_evaluate_info *info)
 	acpi_dbg_level = acpi_gbl_original_dbg_level;
 	acpi_dbg_layer = acpi_gbl_original_dbg_layer;
 
+<<<<<<< HEAD
       exit:
+=======
+exit:
+>>>>>>> v3.18
 	(void)acpi_ut_release_mutex(ACPI_MTX_NAMESPACE);
 }
 
@@ -226,15 +246,23 @@ acpi_status acpi_ps_execute_method(struct acpi_evaluate_info *info)
 
 	/* Validate the Info and method Node */
 
+<<<<<<< HEAD
 	if (!info || !info->resolved_node) {
+=======
+	if (!info || !info->node) {
+>>>>>>> v3.18
 		return_ACPI_STATUS(AE_NULL_ENTRY);
 	}
 
 	/* Init for new method, wait on concurrency semaphore */
 
 	status =
+<<<<<<< HEAD
 	    acpi_ds_begin_method_execution(info->resolved_node, info->obj_desc,
 					   NULL);
+=======
+	    acpi_ds_begin_method_execution(info->node, info->obj_desc, NULL);
+>>>>>>> v3.18
 	if (ACPI_FAILURE(status)) {
 		return_ACPI_STATUS(status);
 	}
@@ -253,8 +281,12 @@ acpi_status acpi_ps_execute_method(struct acpi_evaluate_info *info)
 	 */
 	ACPI_DEBUG_PRINT((ACPI_DB_PARSE,
 			  "**** Begin Method Parse/Execute [%4.4s] **** Node=%p Obj=%p\n",
+<<<<<<< HEAD
 			  info->resolved_node->name.ascii, info->resolved_node,
 			  info->obj_desc));
+=======
+			  info->node->name.ascii, info->node, info->obj_desc));
+>>>>>>> v3.18
 
 	/* Create and init a Root Node */
 
@@ -275,7 +307,11 @@ acpi_status acpi_ps_execute_method(struct acpi_evaluate_info *info)
 		goto cleanup;
 	}
 
+<<<<<<< HEAD
 	status = acpi_ds_init_aml_walk(walk_state, op, info->resolved_node,
+=======
+	status = acpi_ds_init_aml_walk(walk_state, op, info->node,
+>>>>>>> v3.18
 				       info->obj_desc->method.aml_start,
 				       info->obj_desc->method.aml_length, info,
 				       info->pass_number);
@@ -325,7 +361,11 @@ acpi_status acpi_ps_execute_method(struct acpi_evaluate_info *info)
 
 	/* walk_state was deleted by parse_aml */
 
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 	acpi_ps_delete_parse_tree(op);
 
 	/* End optional tracing */

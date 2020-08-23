@@ -6,6 +6,14 @@
 #include <linux/export.h>
 #include <asm/linkage.h>
 
+<<<<<<< HEAD
+=======
+/* Some toolchains use other characters (e.g. '`') to mark new line in macro */
+#ifndef ASM_NL
+#define ASM_NL		 ;
+#endif
+
+>>>>>>> v3.18
 #ifdef __cplusplus
 #define CPP_ASMLINKAGE extern "C"
 #else
@@ -75,21 +83,35 @@
 
 #ifndef ENTRY
 #define ENTRY(name) \
+<<<<<<< HEAD
   .globl name; \
   ALIGN; \
   name:
+=======
+	.globl name ASM_NL \
+	ALIGN ASM_NL \
+	name:
+>>>>>>> v3.18
 #endif
 #endif /* LINKER_SCRIPT */
 
 #ifndef WEAK
 #define WEAK(name)	   \
+<<<<<<< HEAD
 	.weak name;	   \
+=======
+	.weak name ASM_NL   \
+>>>>>>> v3.18
 	name:
 #endif
 
 #ifndef END
 #define END(name) \
+<<<<<<< HEAD
   .size name, .-name
+=======
+	.size name, .-name
+>>>>>>> v3.18
 #endif
 
 /* If symbol 'name' is treated as a subroutine (gets called, and returns)
@@ -98,8 +120,13 @@
  */
 #ifndef ENDPROC
 #define ENDPROC(name) \
+<<<<<<< HEAD
   .type name, @function; \
   END(name)
+=======
+	.type name, @function ASM_NL \
+	END(name)
+>>>>>>> v3.18
 #endif
 
 #endif

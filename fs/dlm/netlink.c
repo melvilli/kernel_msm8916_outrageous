@@ -74,14 +74,26 @@ static int user_cmd(struct sk_buff *skb, struct genl_info *info)
 	return 0;
 }
 
+<<<<<<< HEAD
 static struct genl_ops dlm_nl_ops = {
 	.cmd		= DLM_CMD_HELLO,
 	.doit		= user_cmd,
+=======
+static struct genl_ops dlm_nl_ops[] = {
+	{
+		.cmd	= DLM_CMD_HELLO,
+		.doit	= user_cmd,
+	},
+>>>>>>> v3.18
 };
 
 int __init dlm_netlink_init(void)
 {
+<<<<<<< HEAD
 	return genl_register_family_with_ops(&family, &dlm_nl_ops, 1);
+=======
+	return genl_register_family_with_ops(&family, dlm_nl_ops);
+>>>>>>> v3.18
 }
 
 void dlm_netlink_exit(void)

@@ -102,6 +102,7 @@ static int __init hvc_rtas_init(void)
 
 	return 0;
 }
+<<<<<<< HEAD
 module_init(hvc_rtas_init);
 
 /* This will tear down the tty portion of the driver */
@@ -113,6 +114,9 @@ static void __exit hvc_rtas_exit(void)
 		hvc_remove(hvc_rtas_dev);
 }
 module_exit(hvc_rtas_exit);
+=======
+device_initcall(hvc_rtas_init);
+>>>>>>> v3.18
 
 /* This will happen prior to module init.  There is no tty at this time? */
 static int __init hvc_rtas_console_init(void)

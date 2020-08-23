@@ -343,6 +343,7 @@ static inline int dccp_elapsed_time_len(const u32 elapsed_time)
 	return elapsed_time == 0 ? 0 : elapsed_time <= 0xFFFF ? 2 : 4;
 }
 
+<<<<<<< HEAD
 /* FIXME: This function is currently not used anywhere */
 int dccp_insert_option_elapsed_time(struct sk_buff *skb, u32 elapsed_time)
 {
@@ -375,6 +376,8 @@ int dccp_insert_option_elapsed_time(struct sk_buff *skb, u32 elapsed_time)
 
 EXPORT_SYMBOL_GPL(dccp_insert_option_elapsed_time);
 
+=======
+>>>>>>> v3.18
 static int dccp_insert_option_timestamp(struct sk_buff *skb)
 {
 	__be32 now = htonl(dccp_timestamp());

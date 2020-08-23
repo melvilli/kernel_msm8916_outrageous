@@ -24,10 +24,14 @@
 
 #include <mach/clps711x.h>
 
+<<<<<<< HEAD
 #define IO_ADDRESS(x)		(0xdc000000 + (((x) & 0x03ffffff) | \
 				(((x) >> 2) & 0x3c000000)))
 
 #define CLPS711X_VIRT_BASE	IOMEM(IO_ADDRESS(CLPS711X_PHYS_BASE))
+=======
+#define CLPS711X_VIRT_BASE	IOMEM(0xfeff0000)
+>>>>>>> v3.18
 
 #ifndef __ASSEMBLY__
 #define clps_readb(off)		readb(CLPS711X_VIRT_BASE + (off))
@@ -38,6 +42,7 @@
 #define clps_writel(val,off)	writel(val, CLPS711X_VIRT_BASE + (off))
 #endif
 
+<<<<<<< HEAD
 /*
  * The physical addresses that the external chip select signals map to is
  * dependent on the setting of the nMEDCHG signal on EP7211 and EP7212
@@ -45,6 +50,8 @@
  * processors are in use.
  */
 #ifndef CONFIG_EP72XX_ROM_BOOT
+=======
+>>>>>>> v3.18
 #define CS0_PHYS_BASE		(0x00000000)
 #define CS1_PHYS_BASE		(0x10000000)
 #define CS2_PHYS_BASE		(0x20000000)
@@ -53,6 +60,7 @@
 #define CS5_PHYS_BASE		(0x50000000)
 #define CS6_PHYS_BASE		(0x60000000)
 #define CS7_PHYS_BASE		(0x70000000)
+<<<<<<< HEAD
 #else
 #define CS0_PHYS_BASE		(0x70000000)
 #define CS1_PHYS_BASE		(0x60000000)
@@ -63,6 +71,8 @@
 #define CS6_PHYS_BASE		(0x10000000)
 #define CS7_PHYS_BASE		(0x00000000)
 #endif
+=======
+>>>>>>> v3.18
 
 #define CLPS711X_SRAM_BASE	CS6_PHYS_BASE
 #define CLPS711X_SRAM_SIZE	(48 * 1024)
@@ -70,6 +80,7 @@
 #define CLPS711X_SDRAM0_BASE	(0xc0000000)
 #define CLPS711X_SDRAM1_BASE	(0xd0000000)
 
+<<<<<<< HEAD
 #if defined (CONFIG_ARCH_EDB7211)
 
 /* The extra 8 lines of the keyboard matrix are wired to chip select 3 */
@@ -77,4 +88,6 @@
 
 #endif /* CONFIG_ARCH_EDB7211 */
 
+=======
+>>>>>>> v3.18
 #endif

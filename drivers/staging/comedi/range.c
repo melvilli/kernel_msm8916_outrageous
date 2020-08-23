@@ -14,11 +14,14 @@
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 */
 
 #include <linux/uaccess.h>
@@ -88,8 +91,15 @@ int do_rangeinfo_ioctl(struct comedi_device *dev,
 	}
 
 	if (RANGE_LENGTH(it.range_type) != lr->length) {
+<<<<<<< HEAD
 		DPRINTK("wrong length %d should be %d (0x%08x)\n",
 			RANGE_LENGTH(it.range_type), lr->length, it.range_type);
+=======
+		dev_dbg(dev->class_dev,
+			"wrong length %d should be %d (0x%08x)\n",
+			RANGE_LENGTH(it.range_type),
+			lr->length, it.range_type);
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
@@ -128,6 +138,7 @@ static int aref_invalid(struct comedi_subdevice *s, unsigned int chanspec)
 	default:
 		break;
 	}
+<<<<<<< HEAD
 	DPRINTK("subdevice does not support aref %i", aref);
 	return 1;
 }
@@ -135,11 +146,24 @@ static int aref_invalid(struct comedi_subdevice *s, unsigned int chanspec)
 /*
    This function checks each element in a channel/gain list to make
    make sure it is valid.
+=======
+	dev_dbg(s->device->class_dev, "subdevice does not support aref %i",
+		aref);
+	return 1;
+}
+
+/**
+ * comedi_check_chanlist() - Validate each element in a chanlist.
+ * @s: comedi_subdevice struct
+ * @n: number of elements in the chanlist
+ * @chanlist: the chanlist to validate
+>>>>>>> v3.18
 */
 int comedi_check_chanlist(struct comedi_subdevice *s, int n,
 			  unsigned int *chanlist)
 {
 	struct comedi_device *dev = s->device;
+<<<<<<< HEAD
 	int i;
 	int chan;
 
@@ -170,6 +194,28 @@ int comedi_check_chanlist(struct comedi_subdevice *s, int n,
 	} else {
 		dev_err(dev->class_dev, "(bug) no range type list!\n");
 		return -EINVAL;
+=======
+	unsigned int chanspec;
+	int chan, range_len, i;
+
+	for (i = 0; i < n; i++) {
+		chanspec = chanlist[i];
+		chan = CR_CHAN(chanspec);
+		if (s->range_table)
+			range_len = s->range_table->length;
+		else if (s->range_table_list && chan < s->n_chan)
+			range_len = s->range_table_list[chan]->length;
+		else
+			range_len = 0;
+		if (chan >= s->n_chan ||
+		    CR_RANGE(chanspec) >= range_len ||
+		    aref_invalid(s, chanspec)) {
+			dev_warn(dev->class_dev,
+				 "bad chanlist[%d]=0x%08x chan=%d range length=%d\n",
+				 i, chanspec, chan, range_len);
+			return -EINVAL;
+		}
+>>>>>>> v3.18
 	}
 	return 0;
 }

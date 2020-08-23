@@ -365,7 +365,11 @@ __setup("uvrtcevt", uv_enable_evt_rtc);
 
 static __init void uv_rtc_register_clockevents(struct work_struct *dummy)
 {
+<<<<<<< HEAD
 	struct clock_event_device *ced = &__get_cpu_var(cpu_ced);
+=======
+	struct clock_event_device *ced = this_cpu_ptr(&cpu_ced);
+>>>>>>> v3.18
 
 	*ced = clock_event_device_uv;
 	ced->cpumask = cpumask_of(smp_processor_id());

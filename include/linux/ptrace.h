@@ -56,6 +56,7 @@ extern void exit_ptrace(struct task_struct *tracer);
 #define PTRACE_MODE_READ	0x01
 #define PTRACE_MODE_ATTACH	0x02
 #define PTRACE_MODE_NOAUDIT	0x04
+<<<<<<< HEAD
 #define PTRACE_MODE_FSCREDS 0x08
 #define PTRACE_MODE_REALCREDS 0x10
 
@@ -79,6 +80,9 @@ extern void exit_ptrace(struct task_struct *tracer);
  * of the caller) or through an explicit syscall such as
  * process_vm_writev or ptrace (and should use the real credentials).
  */
+=======
+/* Returns true on success, false on denial. */
+>>>>>>> v3.18
 extern bool ptrace_may_access(struct task_struct *task, unsigned int mode);
 
 static inline int ptrace_reparented(struct task_struct *child)
@@ -196,9 +200,12 @@ static inline void ptrace_init_task(struct task_struct *child, bool ptrace)
 {
 	INIT_LIST_HEAD(&child->ptrace_entry);
 	INIT_LIST_HEAD(&child->ptraced);
+<<<<<<< HEAD
 #ifdef CONFIG_HAVE_HW_BREAKPOINT
 	atomic_set(&child->ptrace_bp_refcnt, 1);
 #endif
+=======
+>>>>>>> v3.18
 	child->jobctl = 0;
 	child->ptrace = 0;
 	child->parent = child->real_parent;
@@ -408,6 +415,7 @@ extern int task_current_syscall(struct task_struct *target, long *callno,
 				unsigned long args[6], unsigned int maxargs,
 				unsigned long *sp, unsigned long *pc);
 
+<<<<<<< HEAD
 #ifdef CONFIG_HAVE_HW_BREAKPOINT
 extern int ptrace_get_breakpoints(struct task_struct *tsk);
 extern void ptrace_put_breakpoints(struct task_struct *tsk);
@@ -415,4 +423,6 @@ extern void ptrace_put_breakpoints(struct task_struct *tsk);
 static inline void ptrace_put_breakpoints(struct task_struct *tsk) { }
 #endif /* CONFIG_HAVE_HW_BREAKPOINT */
 
+=======
+>>>>>>> v3.18
 #endif

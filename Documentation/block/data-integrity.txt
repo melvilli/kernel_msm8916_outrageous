@@ -129,11 +129,19 @@ interface for this is being worked on.
 4.1 BIO
 
 The data integrity patches add a new field to struct bio when
+<<<<<<< HEAD
 CONFIG_BLK_DEV_INTEGRITY is enabled.  bio->bi_integrity is a pointer
 to a struct bip which contains the bio integrity payload.  Essentially
 a bip is a trimmed down struct bio which holds a bio_vec containing
 the integrity metadata and the required housekeeping information (bvec
 pool, vector count, etc.)
+=======
+CONFIG_BLK_DEV_INTEGRITY is enabled.  bio_integrity(bio) returns a
+pointer to a struct bip which contains the bio integrity payload.
+Essentially a bip is a trimmed down struct bio which holds a bio_vec
+containing the integrity metadata and the required housekeeping
+information (bvec pool, vector count, etc.)
+>>>>>>> v3.18
 
 A kernel subsystem can enable data integrity protection on a bio by
 calling bio_integrity_alloc(bio).  This will allocate and attach the
@@ -192,6 +200,7 @@ will require extra work due to the application tag.
     supported by the block device.
 
 
+<<<<<<< HEAD
     int bdev_integrity_enabled(block_device, int rw);
 
       bdev_integrity_enabled() will return 1 if the block device
@@ -202,6 +211,8 @@ will require extra work due to the application tag.
       read_verify flags in sysfs and will respond accordingly.
 
 
+=======
+>>>>>>> v3.18
     int bio_integrity_prep(bio);
 
       To generate IMD for WRITE and to set up buffers for READ, the
@@ -216,6 +227,7 @@ will require extra work due to the application tag.
       bio_integrity_enabled() returned 1.
 
 
+<<<<<<< HEAD
     int bio_integrity_tag_size(bio);
 
       If the filesystem wants to use the application tag space it will
@@ -246,6 +258,8 @@ will require extra work due to the application tag.
       retrieve the tag buffer using bio_integrity_get_tag().
 
 
+=======
+>>>>>>> v3.18
 5.3 PASSING EXISTING INTEGRITY METADATA
 
     Filesystems that either generate their own integrity metadata or
@@ -298,8 +312,11 @@ will require extra work due to the application tag.
             .name                   = "STANDARDSBODY-TYPE-VARIANT-CSUM",
             .generate_fn            = my_generate_fn,
        	    .verify_fn              = my_verify_fn,
+<<<<<<< HEAD
        	    .get_tag_fn             = my_get_tag_fn,
        	    .set_tag_fn             = my_set_tag_fn,
+=======
+>>>>>>> v3.18
 	    .tuple_size             = sizeof(struct my_tuple_size),
 	    .tag_size               = <tag bytes per hw sector>,
         };
@@ -321,7 +338,10 @@ will require extra work due to the application tag.
       are available per hardware sector.  For DIF this is either 2 or
       0 depending on the value of the Control Mode Page ATO bit.
 
+<<<<<<< HEAD
       See 6.2 for a description of get_tag_fn and set_tag_fn.
 
+=======
+>>>>>>> v3.18
 ----------------------------------------------------------------------
 2007-12-24 Martin K. Petersen <martin.petersen@oracle.com>

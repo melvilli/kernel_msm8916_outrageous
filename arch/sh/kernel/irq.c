@@ -149,13 +149,19 @@ void irq_ctx_exit(int cpu)
 	hardirq_ctx[cpu] = NULL;
 }
 
+<<<<<<< HEAD
 asmlinkage void do_softirq(void)
 {
 	unsigned long flags;
+=======
+void do_softirq_own_stack(void)
+{
+>>>>>>> v3.18
 	struct thread_info *curctx;
 	union irq_ctx *irqctx;
 	u32 *isp;
 
+<<<<<<< HEAD
 	if (in_interrupt())
 		return;
 
@@ -190,6 +196,28 @@ asmlinkage void do_softirq(void)
 	}
 
 	local_irq_restore(flags);
+=======
+	curctx = current_thread_info();
+	irqctx = softirq_ctx[smp_processor_id()];
+	irqctx->tinfo.task = curctx->task;
+	irqctx->tinfo.previous_sp = current_stack_pointer;
+
+	/* build the stack frame on the softirq stack */
+	isp = (u32 *)((char *)irqctx + sizeof(*irqctx));
+
+	__asm__ __volatile__ (
+		"mov	r15, r9		\n"
+		"jsr	@%0		\n"
+		/* switch to the softirq stack */
+		" mov	%1, r15		\n"
+		/* restore the thread stack */
+		"mov	r9, r15		\n"
+		: /* no outputs */
+		: "r" (__do_softirq), "r" (isp)
+		: "memory", "r0", "r1", "r2", "r3", "r4",
+		  "r5", "r6", "r7", "r8", "r9", "r15", "t", "pr"
+	);
+>>>>>>> v3.18
 }
 #else
 static inline void handle_one_irq(unsigned int irq)
@@ -232,6 +260,7 @@ void __init init_IRQ(void)
 }
 
 #ifdef CONFIG_HOTPLUG_CPU
+<<<<<<< HEAD
 static void route_irq(struct irq_data *data, unsigned int irq, unsigned int cpu)
 {
 	struct irq_desc *desc = irq_to_desc(irq);
@@ -245,6 +274,8 @@ static void route_irq(struct irq_data *data, unsigned int irq, unsigned int cpu)
 	raw_spin_unlock_irq(&desc->lock);
 }
 
+=======
+>>>>>>> v3.18
 /*
  * The CPU has been marked offline.  Migrate IRQs off this CPU.  If
  * the affinity settings do not allow other CPUs, force them onto any
@@ -265,11 +296,16 @@ void migrate_irqs(void)
 						    irq, cpu);
 
 				cpumask_setall(data->affinity);
+<<<<<<< HEAD
 				newcpu = cpumask_any_and(data->affinity,
 							 cpu_online_mask);
 			}
 
 			route_irq(data, irq, newcpu);
+=======
+			}
+			irq_set_affinity(irq, data->affinity);
+>>>>>>> v3.18
 		}
 	}
 }

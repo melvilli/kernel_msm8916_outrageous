@@ -11,7 +11,13 @@
  */
 
 /dts-v1/;
+<<<<<<< HEAD
 /include/ "armada-xp-mv78260.dtsi"
+=======
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/input/input.h>
+#include "armada-xp-mv78260.dtsi"
+>>>>>>> v3.18
 
 / {
 	model = "PlatHome OpenBlocks AX3-4 board";
@@ -23,6 +29,7 @@
 
 	memory {
 		device_type = "memory";
+<<<<<<< HEAD
 		reg = <0 0x00000000 0 0xC0000000>; /* 3 GB */
 	};
 
@@ -42,6 +49,58 @@
 			};
 			serial@12100 {
 				clock-frequency = <250000000>;
+=======
+		reg = <0 0x00000000 0 0x40000000>; /* 1 GB soldered on */
+	};
+
+	soc {
+		ranges = <MBUS_ID(0xf0, 0x01) 0 0 0xd0000000 0x100000
+			  MBUS_ID(0x01, 0x1d) 0 0 0xfff00000 0x100000
+			  MBUS_ID(0x01, 0x2f) 0 0 0xf0000000 0x8000000>;
+
+		devbus-bootcs {
+			status = "okay";
+
+			/* Device Bus parameters are required */
+
+			/* Read parameters */
+			devbus,bus-width    = <16>;
+			devbus,turn-off-ps  = <60000>;
+			devbus,badr-skew-ps = <0>;
+			devbus,acc-first-ps = <124000>;
+			devbus,acc-next-ps  = <248000>;
+			devbus,rd-setup-ps  = <0>;
+			devbus,rd-hold-ps   = <0>;
+
+			/* Write parameters */
+			devbus,sync-enable = <0>;
+			devbus,wr-high-ps  = <60000>;
+			devbus,wr-low-ps   = <60000>;
+			devbus,ale-wr-ps   = <60000>;
+
+			/* NOR 128 MiB */
+			nor@0 {
+				compatible = "cfi-flash";
+				reg = <0 0x8000000>;
+				bank-width = <2>;
+			};
+		};
+
+		pcie-controller {
+			status = "okay";
+			/* Internal mini-PCIe connector */
+			pcie@1,0 {
+				/* Port 0, Lane 0 */
+				status = "okay";
+			};
+		};
+
+		internal-regs {
+			serial@12000 {
+				status = "okay";
+			};
+			serial@12100 {
+>>>>>>> v3.18
 				status = "okay";
 			};
 			pinctrl {
@@ -57,21 +116,34 @@
 
 				red_led {
 					label = "red_led";
+<<<<<<< HEAD
 					gpios = <&gpio1 17 1>;
+=======
+					gpios = <&gpio1 17 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 					default-state = "off";
 				};
 
 				yellow_led {
 					label = "yellow_led";
+<<<<<<< HEAD
 					gpios = <&gpio1 19 1>;
+=======
+					gpios = <&gpio1 19 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 					default-state = "off";
 				};
 
 				green_led {
 					label = "green_led";
+<<<<<<< HEAD
 					gpios = <&gpio1 21 1>;
 					default-state = "off";
 					linux,default-trigger = "heartbeat";
+=======
+					gpios = <&gpio1 21 GPIO_ACTIVE_LOW>;
+					default-state = "keep";
+>>>>>>> v3.18
 				};
 			};
 
@@ -82,8 +154,13 @@
 
 				button@1 {
 					label = "Init Button";
+<<<<<<< HEAD
 					linux,code = <116>;
 					gpios = <&gpio1 28 0>;
+=======
+					linux,code = <KEY_POWER>;
+					gpios = <&gpio1 28 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 				};
 			};
 
@@ -142,6 +219,7 @@
 				nr-ports = <2>;
 				status = "okay";
 			};
+<<<<<<< HEAD
 			usb@50000 {
 				status = "okay";
 			};
@@ -185,6 +263,17 @@
 					/* Port 0, Lane 0 */
 					status = "okay";
 				};
+=======
+
+			/* Front side USB 0 */
+			usb@50000 {
+				status = "okay";
+			};
+
+			/* Front side USB 1 */
+			usb@51000 {
+				status = "okay";
+>>>>>>> v3.18
 			};
 		};
 	};

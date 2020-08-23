@@ -1,6 +1,11 @@
 #
 # Magnetometer sensors
 #
+<<<<<<< HEAD
+=======
+# When adding new entries keep the list in alphabetical order
+
+>>>>>>> v3.18
 menu "Magnetometer sensors"
 
 config AK8975
@@ -9,11 +14,41 @@ config AK8975
 	depends on GPIOLIB
 	help
 	  Say yes here to build support for Asahi Kasei AK8975 3-Axis
+<<<<<<< HEAD
 	  Magnetometer.
+=======
+	  Magnetometer. This driver can also support AK8963, if i2c
+	  device name is identified as ak8963.
+>>>>>>> v3.18
 
 	  To compile this driver as a module, choose M here: the module
 	  will be called ak8975.
 
+<<<<<<< HEAD
+=======
+config AK09911
+	tristate "Asahi Kasei AK09911 3-axis Compass"
+	depends on I2C
+	help
+	  Say yes here to build support for Asahi Kasei AK09911 3-Axis
+	  Magnetometer.
+
+	  To compile this driver as a module, choose M here: the module
+	  will be called ak09911.
+
+config MAG3110
+	tristate "Freescale MAG3110 3-Axis Magnetometer"
+	depends on I2C
+	select IIO_BUFFER
+	select IIO_TRIGGERED_BUFFER
+	help
+	  Say yes here to build support for the Freescale MAG3110 3-Axis
+	  magnetometer.
+
+	  To compile this driver as a module, choose M here: the module
+	  will be called mag3110.
+
+>>>>>>> v3.18
 config HID_SENSOR_MAGNETOMETER_3D
 	depends on HID_SENSOR_HUB
 	select IIO_BUFFER
@@ -32,13 +67,21 @@ config IIO_ST_MAGN_3AXIS
 	select IIO_ST_MAGN_I2C_3AXIS if (I2C)
 	select IIO_ST_MAGN_SPI_3AXIS if (SPI_MASTER)
 	select IIO_TRIGGERED_BUFFER if (IIO_BUFFER)
+<<<<<<< HEAD
 	select IIO_ST_MAGN_BUFFER if (IIO_TRIGGERED_BUFFER)
+=======
+>>>>>>> v3.18
 	help
 	  Say yes here to build support for STMicroelectronics magnetometers:
 	  LSM303DLHC, LSM303DLM, LIS3MDL.
 
+<<<<<<< HEAD
 	  This driver can also be built as a module. If so, will be created
 	  these modules:
+=======
+	  This driver can also be built as a module. If so, these modules
+	  will be created:
+>>>>>>> v3.18
 	  - st_magn (core functions for the driver [it is mandatory]);
 	  - st_magn_i2c (necessary for the I2C devices [optional*]);
 	  - st_magn_spi (necessary for the SPI devices [optional*]);

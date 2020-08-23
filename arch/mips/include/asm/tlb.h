@@ -18,6 +18,13 @@
  */
 #define tlb_flush(tlb) flush_tlb_mm((tlb)->mm)
 
+<<<<<<< HEAD
+=======
+#define UNIQUE_ENTRYHI(idx)						\
+		((CKSEG0 + ((idx) << (PAGE_SHIFT + 1))) |		\
+		 (cpu_has_tlbinv ? MIPS_ENTRYHI_EHINV : 0))
+
+>>>>>>> v3.18
 #include <asm-generic/tlb.h>
 
 #endif /* __ASM_TLB_H */

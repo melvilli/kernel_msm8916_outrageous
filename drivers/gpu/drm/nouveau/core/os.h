@@ -5,6 +5,10 @@
 #include <linux/slab.h>
 #include <linux/mutex.h>
 #include <linux/pci.h>
+<<<<<<< HEAD
+=======
+#include <linux/platform_device.h>
+>>>>>>> v3.18
 #include <linux/printk.h>
 #include <linux/bitops.h>
 #include <linux/firmware.h>
@@ -13,6 +17,7 @@
 #include <linux/i2c-algo-bit.h>
 #include <linux/delay.h>
 #include <linux/io-mapping.h>
+<<<<<<< HEAD
 #include <linux/vmalloc.h>
 #include <linux/acpi.h>
 #include <linux/dmi.h>
@@ -32,6 +37,20 @@ ffsll(u64 mask)
 	return 0;
 }
 
+=======
+#include <linux/acpi.h>
+#include <linux/vmalloc.h>
+#include <linux/dmi.h>
+#include <linux/reboot.h>
+#include <linux/interrupt.h>
+#include <linux/log2.h>
+#include <linux/pm_runtime.h>
+#include <linux/power_supply.h>
+#include <linux/clk.h>
+
+#include <asm/unaligned.h>
+
+>>>>>>> v3.18
 #ifndef ioread32_native
 #ifdef __BIG_ENDIAN
 #define ioread16_native ioread16be

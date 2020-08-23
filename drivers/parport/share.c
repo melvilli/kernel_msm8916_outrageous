@@ -282,14 +282,21 @@ struct parport *parport_register_port(unsigned long base, int irq, int dma,
 	int device;
 	char *name;
 
+<<<<<<< HEAD
 	tmp = kmalloc(sizeof(struct parport), GFP_KERNEL);
+=======
+	tmp = kzalloc(sizeof(struct parport), GFP_KERNEL);
+>>>>>>> v3.18
 	if (!tmp) {
 		printk(KERN_WARNING "parport: memory squeeze\n");
 		return NULL;
 	}
 
 	/* Init our structure */
+<<<<<<< HEAD
  	memset(tmp, 0, sizeof(struct parport));
+=======
+>>>>>>> v3.18
 	tmp->base = base;
 	tmp->irq = irq;
 	tmp->dma = dma;
@@ -906,7 +913,12 @@ int parport_claim_or_block(struct pardevice *dev)
 		/* If dev->waiting is clear now, an interrupt
 		   gave us the port and we would deadlock if we slept.  */
 		if (dev->waiting) {
+<<<<<<< HEAD
 			interruptible_sleep_on (&dev->wait_q);
+=======
+			wait_event_interruptible(dev->wait_q,
+						 !dev->waiting);
+>>>>>>> v3.18
 			if (signal_pending (current)) {
 				return -EINTR;
 			}

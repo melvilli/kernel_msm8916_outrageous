@@ -13,6 +13,7 @@
 #include <linux/export.h>
 #include <linux/bug.h>
 
+<<<<<<< HEAD
 /*
  * Generic direct DMA implementation
  *
@@ -30,6 +31,8 @@ static unsigned long get_dma_direct_offset(struct device *dev)
 	return PCI_DRAM_OFFSET; /* FIXME Not sure if is correct */
 }
 
+=======
+>>>>>>> v3.18
 #define NOT_COHERENT_CACHE
 
 static void *dma_direct_alloc_coherent(struct device *dev, size_t size,
@@ -51,7 +54,11 @@ static void *dma_direct_alloc_coherent(struct device *dev, size_t size,
 		return NULL;
 	ret = page_address(page);
 	memset(ret, 0, size);
+<<<<<<< HEAD
 	*dma_handle = virt_to_phys(ret) + get_dma_direct_offset(dev);
+=======
+	*dma_handle = virt_to_phys(ret);
+>>>>>>> v3.18
 
 	return ret;
 #endif
@@ -77,7 +84,11 @@ static int dma_direct_map_sg(struct device *dev, struct scatterlist *sgl,
 
 	/* FIXME this part of code is untested */
 	for_each_sg(sgl, sg, nents, i) {
+<<<<<<< HEAD
 		sg->dma_address = sg_phys(sg) + get_dma_direct_offset(dev);
+=======
+		sg->dma_address = sg_phys(sg);
+>>>>>>> v3.18
 		__dma_sync(page_to_phys(sg_page(sg)) + sg->offset,
 							sg->length, direction);
 	}
@@ -85,12 +96,15 @@ static int dma_direct_map_sg(struct device *dev, struct scatterlist *sgl,
 	return nents;
 }
 
+<<<<<<< HEAD
 static void dma_direct_unmap_sg(struct device *dev, struct scatterlist *sg,
 				int nents, enum dma_data_direction direction,
 				struct dma_attrs *attrs)
 {
 }
 
+=======
+>>>>>>> v3.18
 static int dma_direct_dma_supported(struct device *dev, u64 mask)
 {
 	return 1;
@@ -104,7 +118,11 @@ static inline dma_addr_t dma_direct_map_page(struct device *dev,
 					     struct dma_attrs *attrs)
 {
 	__dma_sync(page_to_phys(page) + offset, size, direction);
+<<<<<<< HEAD
 	return page_to_phys(page) + offset + get_dma_direct_offset(dev);
+=======
+	return page_to_phys(page) + offset;
+>>>>>>> v3.18
 }
 
 static inline void dma_direct_unmap_page(struct device *dev,
@@ -181,7 +199,10 @@ struct dma_map_ops dma_direct_ops = {
 	.alloc		= dma_direct_alloc_coherent,
 	.free		= dma_direct_free_coherent,
 	.map_sg		= dma_direct_map_sg,
+<<<<<<< HEAD
 	.unmap_sg	= dma_direct_unmap_sg,
+=======
+>>>>>>> v3.18
 	.dma_supported	= dma_direct_dma_supported,
 	.map_page	= dma_direct_map_page,
 	.unmap_page	= dma_direct_unmap_page,

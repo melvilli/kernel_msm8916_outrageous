@@ -11,15 +11,23 @@
  * GNU General Public License for more details.
  */
 
+<<<<<<< HEAD
 #if !defined(GDM_QOS_H_20090403)
 #define GDM_QOS_H_20090403
+=======
+#ifndef __GDM72XX_GDM_QOS_H__
+#define __GDM72XX_GDM_QOS_H__
+>>>>>>> v3.18
 
 #include <linux/types.h>
 #include <linux/usb.h>
 #include <linux/list.h>
 
+<<<<<<< HEAD
 #define BOOLEAN	u8
 
+=======
+>>>>>>> v3.18
 #define QOS_MAX				16
 #define IPTYPEOFSERVICE			0x8000
 #define	PROTOCOL			0x4000
@@ -34,6 +42,7 @@
 #define	IEEE802_1QVLANID		0x10
 
 struct gdm_wimax_csr_s {
+<<<<<<< HEAD
 	/*	union{
 		U16 all;
 		struct _CS_CLASSIFIER_RULE_ENABLE{
@@ -53,6 +62,10 @@ struct gdm_wimax_csr_s {
 	} */
 	BOOLEAN		enabled;
 	u32		SFID;
+=======
+	bool		enabled;
+	u32		sfid;
+>>>>>>> v3.18
 	u8		qos_buf_count;
 	u16		classifier_rule_en;
 	u8		ip2s_lo;
@@ -78,11 +91,19 @@ struct qos_entry_s {
 
 struct qos_cb_s {
 	struct list_head	qos_list[QOS_MAX];
+<<<<<<< HEAD
 	u32			qos_list_cnt;
 	u32			qos_null_idx;
 	struct gdm_wimax_csr_s	csr[QOS_MAX];
 	spinlock_t		qos_lock;
 	u32			qos_limit_size;
+=======
+	int			qos_list_cnt;
+	int			qos_null_idx;
+	struct gdm_wimax_csr_s	csr[QOS_MAX];
+	spinlock_t		qos_lock;
+	int			qos_limit_size;
+>>>>>>> v3.18
 };
 
 void gdm_qos_init(void *nic_ptr);
@@ -90,4 +111,8 @@ void gdm_qos_release_list(void *nic_ptr);
 int gdm_qos_send_hci_pkt(struct sk_buff *skb, struct net_device *dev);
 void gdm_recv_qos_hci_packet(void *nic_ptr, u8 *buf, int size);
 
+<<<<<<< HEAD
 #endif
+=======
+#endif /* __GDM72XX_GDM_QOS_H__ */
+>>>>>>> v3.18

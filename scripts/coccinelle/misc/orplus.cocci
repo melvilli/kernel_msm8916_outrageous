@@ -7,7 +7,11 @@
 // Copyright: (C) 2013 Gilles Muller, INRIA/LIP6.  GPLv2.
 // URL: http://coccinelle.lip6.fr/
 // Comments:
+<<<<<<< HEAD
 // Options: -no_includes -include_headers
+=======
+// Options: --no-includes --include-headers
+>>>>>>> v3.18
 
 virtual org
 virtual report

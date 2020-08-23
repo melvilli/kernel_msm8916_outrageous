@@ -134,6 +134,10 @@ struct uvesafb_par {
 
 	int mode_idx;
 	struct vbe_crtc_ib crtc;
+<<<<<<< HEAD
+=======
+	int mtrr_handle;
+>>>>>>> v3.18
 };
 
 #endif /* _UVESAFB_H */

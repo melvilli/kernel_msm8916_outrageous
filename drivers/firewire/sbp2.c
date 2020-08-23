@@ -1137,11 +1137,18 @@ static void sbp2_init_workarounds(struct sbp2_target *tgt, u32 model,
 }
 
 static struct scsi_host_template scsi_driver_template;
+<<<<<<< HEAD
 static int sbp2_remove(struct device *dev);
 
 static int sbp2_probe(struct device *dev)
 {
 	struct fw_unit *unit = fw_unit(dev);
+=======
+static void sbp2_remove(struct fw_unit *unit);
+
+static int sbp2_probe(struct fw_unit *unit, const struct ieee1394_device_id *id)
+{
+>>>>>>> v3.18
 	struct fw_device *device = fw_parent_device(unit);
 	struct sbp2_target *tgt;
 	struct sbp2_logical_unit *lu;
@@ -1205,7 +1212,11 @@ static int sbp2_probe(struct device *dev)
 	return 0;
 
  fail_remove:
+<<<<<<< HEAD
 	sbp2_remove(dev);
+=======
+	sbp2_remove(unit);
+>>>>>>> v3.18
 	return -ENOMEM;
 
  fail_shost_put:
@@ -1231,9 +1242,14 @@ static void sbp2_update(struct fw_unit *unit)
 	}
 }
 
+<<<<<<< HEAD
 static int sbp2_remove(struct device *dev)
 {
 	struct fw_unit *unit = fw_unit(dev);
+=======
+static void sbp2_remove(struct fw_unit *unit)
+{
+>>>>>>> v3.18
 	struct fw_device *device = fw_parent_device(unit);
 	struct sbp2_target *tgt = dev_get_drvdata(&unit->device);
 	struct sbp2_logical_unit *lu, *next;
@@ -1270,10 +1286,16 @@ static int sbp2_remove(struct device *dev)
 		kfree(lu);
 	}
 	scsi_remove_host(shost);
+<<<<<<< HEAD
 	dev_notice(dev, "released target %d:0:0\n", shost->host_no);
 
 	scsi_host_put(shost);
 	return 0;
+=======
+	dev_notice(&unit->device, "released target %d:0:0\n", shost->host_no);
+
+	scsi_host_put(shost);
+>>>>>>> v3.18
 }
 
 #define SBP2_UNIT_SPEC_ID_ENTRY	0x0000609e
@@ -1294,10 +1316,17 @@ static struct fw_driver sbp2_driver = {
 		.owner  = THIS_MODULE,
 		.name   = KBUILD_MODNAME,
 		.bus    = &fw_bus_type,
+<<<<<<< HEAD
 		.probe  = sbp2_probe,
 		.remove = sbp2_remove,
 	},
 	.update   = sbp2_update,
+=======
+	},
+	.probe    = sbp2_probe,
+	.update   = sbp2_update,
+	.remove   = sbp2_remove,
+>>>>>>> v3.18
 	.id_table = sbp2_id_table,
 };
 

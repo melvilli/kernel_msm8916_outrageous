@@ -22,7 +22,11 @@
 /*
  * Determine which stack to use..
  */
+<<<<<<< HEAD
 extern void __user *get_sigframe(struct k_sigaction *ka, struct pt_regs *regs,
+=======
+extern void __user *get_sigframe(struct ksignal *ksig, struct pt_regs *regs,
+>>>>>>> v3.18
 				 size_t frame_size);
 /* Check and clear pending FPU exceptions in saved CSR */
 extern int fpcsr_pending(unsigned int __user *fpcsr);

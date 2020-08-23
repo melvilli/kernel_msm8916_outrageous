@@ -26,9 +26,12 @@
 #define MAX_NUM_SDB 511
 #define MIN_NUM_SDB 1
 
+<<<<<<< HEAD
 #define ALERT_REQ_MASK   0x4000000000000000ul
 #define BUFFER_FULL_MASK 0x8000000000000000ul
 
+=======
+>>>>>>> v3.18
 DECLARE_PER_CPU(struct hws_cpu_buffer, sampler_cpu_buffer);
 
 struct hws_execute_parms {
@@ -44,6 +47,10 @@ static DEFINE_MUTEX(hws_sem_oom);
 
 static unsigned char hws_flush_all;
 static unsigned int hws_oom;
+<<<<<<< HEAD
+=======
+static unsigned int hws_alert;
+>>>>>>> v3.18
 static struct workqueue_struct *hws_wq;
 
 static unsigned int hws_state;
@@ -65,6 +72,7 @@ static unsigned long interval;
 static unsigned long min_sampler_rate;
 static unsigned long max_sampler_rate;
 
+<<<<<<< HEAD
 static int ssctl(void *buffer)
 {
 	int cc;
@@ -102,6 +110,8 @@ static int qsi(void *buffer)
 	return cc ? -EINVAL : 0;
 }
 
+=======
+>>>>>>> v3.18
 static void execute_qsi(void *parms)
 {
 	struct hws_execute_parms *ep = parms;
@@ -113,7 +123,11 @@ static void execute_ssctl(void *parms)
 {
 	struct hws_execute_parms *ep = parms;
 
+<<<<<<< HEAD
 	ep->rc = ssctl(ep->buffer);
+=======
+	ep->rc = lsctl(ep->buffer);
+>>>>>>> v3.18
 }
 
 static int smp_ctl_ssctl_stop(int cpu)
@@ -214,6 +228,7 @@ static int smp_ctl_qsi(int cpu)
 	return ep.rc;
 }
 
+<<<<<<< HEAD
 static inline unsigned long *trailer_entry_ptr(unsigned long v)
 {
 	void *ret;
@@ -229,10 +244,22 @@ static void hws_ext_handler(struct ext_code ext_code,
 			    unsigned int param32, unsigned long param64)
 {
 	struct hws_cpu_buffer *cb = &__get_cpu_var(sampler_cpu_buffer);
+=======
+static void hws_ext_handler(struct ext_code ext_code,
+			    unsigned int param32, unsigned long param64)
+{
+	struct hws_cpu_buffer *cb = this_cpu_ptr(&sampler_cpu_buffer);
+>>>>>>> v3.18
 
 	if (!(param32 & CPU_MF_INT_SF_MASK))
 		return;
 
+<<<<<<< HEAD
+=======
+	if (!hws_alert)
+		return;
+
+>>>>>>> v3.18
 	inc_irq_stat(IRQEXT_CMS);
 	atomic_xchg(&cb->ext_params, atomic_read(&cb->ext_params) | param32);
 
@@ -256,6 +283,7 @@ static void init_all_cpu_buffers(void)
 	}
 }
 
+<<<<<<< HEAD
 static int is_link_entry(unsigned long *s)
 {
 	return *s & 0x1ul ? 1 : 0;
@@ -273,6 +301,13 @@ static int prepare_cpu_buffers(void)
 	struct hws_cpu_buffer *cb;
 
 	rc = 0;
+=======
+static void prepare_cpu_buffers(void)
+{
+	struct hws_cpu_buffer *cb;
+	int cpu;
+
+>>>>>>> v3.18
 	for_each_online_cpu(cpu) {
 		cb = &per_cpu(sampler_cpu_buffer, cpu);
 		atomic_set(&cb->ext_params, 0);
@@ -287,8 +322,11 @@ static int prepare_cpu_buffers(void)
 		cb->oom = 0;
 		cb->stop_mode = 0;
 	}
+<<<<<<< HEAD
 
 	return rc;
+=======
+>>>>>>> v3.18
 }
 
 /*
@@ -353,7 +391,11 @@ static int allocate_sdbt(int cpu)
 			}
 			*sdbt = sdb;
 			trailer = trailer_entry_ptr(*sdbt);
+<<<<<<< HEAD
 			*trailer = ALERT_REQ_MASK;
+=======
+			*trailer = SDB_TE_ALERT_REQ_MASK;
+>>>>>>> v3.18
 			sdbt++;
 			mutex_unlock(&hws_sem_oom);
 		}
@@ -829,7 +871,11 @@ static void worker_on_interrupt(unsigned int cpu)
 
 		trailer = trailer_entry_ptr(*sdbt);
 		/* leave loop if no more work to do */
+<<<<<<< HEAD
 		if (!(*trailer & BUFFER_FULL_MASK)) {
+=======
+		if (!(*trailer & SDB_TE_BUFFER_FULL_MASK)) {
+>>>>>>> v3.18
 			done = 1;
 			if (!hws_flush_all)
 				continue;
@@ -856,7 +902,11 @@ static void worker_on_interrupt(unsigned int cpu)
 static void add_samples_to_oprofile(unsigned int cpu, unsigned long *sdbt,
 		unsigned long *dear)
 {
+<<<<<<< HEAD
 	struct hws_data_entry *sample_data_ptr;
+=======
+	struct hws_basic_entry *sample_data_ptr;
+>>>>>>> v3.18
 	unsigned long *trailer;
 
 	trailer = trailer_entry_ptr(*sdbt);
@@ -866,7 +916,11 @@ static void add_samples_to_oprofile(unsigned int cpu, unsigned long *sdbt,
 		trailer = dear;
 	}
 
+<<<<<<< HEAD
 	sample_data_ptr = (struct hws_data_entry *)(*sdbt);
+=======
+	sample_data_ptr = (struct hws_basic_entry *)(*sdbt);
+>>>>>>> v3.18
 
 	while ((unsigned long *)sample_data_ptr < trailer) {
 		struct pt_regs *regs = NULL;
@@ -1001,7 +1055,12 @@ int hwsampler_deallocate(void)
 	if (hws_state != HWS_STOPPED)
 		goto deallocate_exit;
 
+<<<<<<< HEAD
 	measurement_alert_subclass_unregister();
+=======
+	irq_subclass_unregister(IRQ_SUBCLASS_MEASUREMENT_ALERT);
+	hws_alert = 0;
+>>>>>>> v3.18
 	deallocate_sdbt();
 
 	hws_state = HWS_DEALLOCATED;
@@ -1089,7 +1148,11 @@ int hwsampler_setup(void)
 				max_sampler_rate = cb->qsi.max_sampl_rate;
 		}
 	}
+<<<<<<< HEAD
 	register_external_interrupt(0x1407, hws_ext_handler);
+=======
+	register_external_irq(EXT_IRQ_MEASURE_ALERT, hws_ext_handler);
+>>>>>>> v3.18
 
 	hws_state = HWS_DEALLOCATED;
 	rc = 0;
@@ -1115,7 +1178,12 @@ int hwsampler_shutdown(void)
 		mutex_lock(&hws_sem);
 
 		if (hws_state == HWS_STOPPED) {
+<<<<<<< HEAD
 			measurement_alert_subclass_unregister();
+=======
+			irq_subclass_unregister(IRQ_SUBCLASS_MEASUREMENT_ALERT);
+			hws_alert = 0;
+>>>>>>> v3.18
 			deallocate_sdbt();
 		}
 		if (hws_wq) {
@@ -1123,7 +1191,11 @@ int hwsampler_shutdown(void)
 			hws_wq = NULL;
 		}
 
+<<<<<<< HEAD
 		unregister_external_interrupt(0x1407, hws_ext_handler);
+=======
+		unregister_external_irq(EXT_IRQ_MEASURE_ALERT, hws_ext_handler);
+>>>>>>> v3.18
 		hws_state = HWS_INIT;
 		rc = 0;
 	}
@@ -1162,9 +1234,13 @@ int hwsampler_start_all(unsigned long rate)
 	if (rc)
 		goto start_all_exit;
 
+<<<<<<< HEAD
 	rc = prepare_cpu_buffers();
 	if (rc)
 		goto start_all_exit;
+=======
+	prepare_cpu_buffers();
+>>>>>>> v3.18
 
 	for_each_online_cpu(cpu) {
 		rc = start_sampling(cpu);
@@ -1190,7 +1266,12 @@ start_all_exit:
 	hws_oom = 1;
 	hws_flush_all = 0;
 	/* now let them in, 1407 CPUMF external interrupts */
+<<<<<<< HEAD
 	measurement_alert_subclass_register();
+=======
+	hws_alert = 1;
+	irq_subclass_register(IRQ_SUBCLASS_MEASUREMENT_ALERT);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -1210,7 +1291,11 @@ int hwsampler_stop_all(void)
 	rc = 0;
 	if (hws_state == HWS_INIT) {
 		mutex_unlock(&hws_sem);
+<<<<<<< HEAD
 		return rc;
+=======
+		return 0;
+>>>>>>> v3.18
 	}
 	hws_state = HWS_STOPPING;
 	mutex_unlock(&hws_sem);

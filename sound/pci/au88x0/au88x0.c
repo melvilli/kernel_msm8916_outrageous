@@ -48,10 +48,17 @@ static void vortex_fix_latency(struct pci_dev *vortex)
 {
 	int rc;
 	if (!(rc = pci_write_config_byte(vortex, 0x40, 0xff))) {
+<<<<<<< HEAD
 			printk(KERN_INFO CARD_NAME
 			       ": vortex latency is 0xff\n");
 	} else {
 		printk(KERN_WARNING CARD_NAME
+=======
+			pr_info( CARD_NAME
+			       ": vortex latency is 0xff\n");
+	} else {
+		pr_warn( CARD_NAME
+>>>>>>> v3.18
 				": could not set vortex latency: pci error 0x%x\n", rc);
 	}
 }
@@ -70,10 +77,17 @@ static void vortex_fix_agp_bridge(struct pci_dev *via)
 	if (!(rc = pci_read_config_byte(via, 0x42, &value))
 			&& ((value & 0x10)
 				|| !(rc = pci_write_config_byte(via, 0x42, value | 0x10)))) {
+<<<<<<< HEAD
 		printk(KERN_INFO CARD_NAME
 				": bridge config is 0x%x\n", value | 0x10);
 	} else {
 		printk(KERN_WARNING CARD_NAME
+=======
+		pr_info( CARD_NAME
+				": bridge config is 0x%x\n", value | 0x10);
+	} else {
+		pr_warn( CARD_NAME
+>>>>>>> v3.18
 				": could not set vortex latency: pci error 0x%x\n", rc);
 	}
 }
@@ -97,7 +111,11 @@ static void snd_vortex_workaround(struct pci_dev *vortex, int fix)
 					PCI_DEVICE_ID_AMD_FE_GATE_7007, NULL);
 		}
 		if (via) {
+<<<<<<< HEAD
 			printk(KERN_INFO CARD_NAME ": Activating latency workaround...\n");
+=======
+			pr_info( CARD_NAME ": Activating latency workaround...\n");
+>>>>>>> v3.18
 			vortex_fix_latency(vortex);
 			vortex_fix_agp_bridge(via);
 		}
@@ -153,7 +171,11 @@ snd_vortex_create(struct snd_card *card, struct pci_dev *pci, vortex_t ** rchip)
 		return err;
 	if (pci_set_dma_mask(pci, DMA_BIT_MASK(32)) < 0 ||
 	    pci_set_consistent_dma_mask(pci, DMA_BIT_MASK(32)) < 0) {
+<<<<<<< HEAD
 		printk(KERN_ERR "error to set DMA mask\n");
+=======
+		pr_err( "error to set DMA mask\n");
+>>>>>>> v3.18
 		pci_disable_device(pci);
 		return -ENXIO;
 	}
@@ -182,7 +204,11 @@ snd_vortex_create(struct snd_card *card, struct pci_dev *pci, vortex_t ** rchip)
 
 	chip->mmio = pci_ioremap_bar(pci, 0);
 	if (!chip->mmio) {
+<<<<<<< HEAD
 		printk(KERN_ERR "MMIO area remap failed.\n");
+=======
+		pr_err( "MMIO area remap failed.\n");
+>>>>>>> v3.18
 		err = -ENOMEM;
 		goto ioremap_out;
 	}
@@ -191,14 +217,22 @@ snd_vortex_create(struct snd_card *card, struct pci_dev *pci, vortex_t ** rchip)
 	 * This must be done before we do request_irq otherwise we can get spurious
 	 * interrupts that we do not handle properly and make a mess of things */
 	if ((err = vortex_core_init(chip)) != 0) {
+<<<<<<< HEAD
 		printk(KERN_ERR "hw core init failed\n");
+=======
+		pr_err( "hw core init failed\n");
+>>>>>>> v3.18
 		goto core_out;
 	}
 
 	if ((err = request_irq(pci->irq, vortex_interrupt,
 			       IRQF_SHARED, KBUILD_MODNAME,
 	                       chip)) != 0) {
+<<<<<<< HEAD
 		printk(KERN_ERR "cannot grab irq\n");
+=======
+		pr_err( "cannot grab irq\n");
+>>>>>>> v3.18
 		goto irq_out;
 	}
 	chip->irq = pci->irq;
@@ -211,8 +245,11 @@ snd_vortex_create(struct snd_card *card, struct pci_dev *pci, vortex_t ** rchip)
 		goto alloc_out;
 	}
 
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pci->dev);
 
+=======
+>>>>>>> v3.18
 	*rchip = chip;
 
 	return 0;
@@ -250,7 +287,12 @@ snd_vortex_probe(struct pci_dev *pci, const struct pci_device_id *pci_id)
 		return -ENOENT;
 	}
 	// (2)
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE, 0, &card);
+=======
+	err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
+			   0, &card);
+>>>>>>> v3.18
 	if (err < 0)
 		return err;
 
@@ -343,10 +385,17 @@ snd_vortex_probe(struct pci_dev *pci, const struct pci_device_id *pci_id)
 	chip->rev = pci->revision;
 #ifdef CHIP_AU8830
 	if ((chip->rev) != 0xfe && (chip->rev) != 0xfa) {
+<<<<<<< HEAD
 		printk(KERN_ALERT
 		       "vortex: The revision (%x) of your card has not been seen before.\n",
 		       chip->rev);
 		printk(KERN_ALERT
+=======
+		pr_alert(
+		       "vortex: The revision (%x) of your card has not been seen before.\n",
+		       chip->rev);
+		pr_alert(
+>>>>>>> v3.18
 		       "vortex: Please email the results of 'lspci -vv' to openvortex-dev@nongnu.org.\n");
 		snd_card_free(card);
 		err = -ENODEV;
@@ -371,7 +420,10 @@ snd_vortex_probe(struct pci_dev *pci, const struct pci_device_id *pci_id)
 static void snd_vortex_remove(struct pci_dev *pci)
 {
 	snd_card_free(pci_get_drvdata(pci));
+<<<<<<< HEAD
 	pci_set_drvdata(pci, NULL);
+=======
+>>>>>>> v3.18
 }
 
 // pci_driver definition

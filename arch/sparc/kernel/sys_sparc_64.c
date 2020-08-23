@@ -24,12 +24,20 @@
 #include <linux/personality.h>
 #include <linux/random.h>
 #include <linux/export.h>
+<<<<<<< HEAD
+=======
+#include <linux/context_tracking.h>
+>>>>>>> v3.18
 
 #include <asm/uaccess.h>
 #include <asm/utrap.h>
 #include <asm/unistd.h>
 
 #include "entry.h"
+<<<<<<< HEAD
+=======
+#include "kernel.h"
+>>>>>>> v3.18
 #include "systbls.h"
 
 /* #define DEBUG_UNIMP_SYSCALL */
@@ -39,9 +47,12 @@ asmlinkage unsigned long sys_getpagesize(void)
 	return PAGE_SIZE;
 }
 
+<<<<<<< HEAD
 #define VA_EXCLUDE_START (0x0000080000000000UL - (1UL << 32UL))
 #define VA_EXCLUDE_END   (0xfffff80000000000UL + (1UL << 32UL))
 
+=======
+>>>>>>> v3.18
 /* Does addr --> addr+len fall within 4GB of the VA-space hole or
  * overflow past the end of the 64-bit address space?
  */
@@ -119,7 +130,11 @@ unsigned long arch_get_unmapped_area(struct file *filp, unsigned long addr, unsi
 
 		vma = find_vma(mm, addr);
 		if (task_size - len >= addr &&
+<<<<<<< HEAD
 		    (!vma || addr + len <= vm_start_gap(vma)))
+=======
+		    (!vma || addr + len <= vma->vm_start))
+>>>>>>> v3.18
 			return addr;
 	}
 
@@ -182,7 +197,11 @@ arch_get_unmapped_area_topdown(struct file *filp, const unsigned long addr0,
 
 		vma = find_vma(mm, addr);
 		if (task_size - len >= addr &&
+<<<<<<< HEAD
 		    (!vma || addr + len <= vm_start_gap(vma)))
+=======
+		    (!vma || addr + len <= vma->vm_start))
+>>>>>>> v3.18
 			return addr;
 	}
 
@@ -265,7 +284,11 @@ static unsigned long mmap_rnd(void)
 	unsigned long rnd = 0UL;
 
 	if (current->flags & PF_RANDOMIZE) {
+<<<<<<< HEAD
 		unsigned long val = get_random_long();
+=======
+		unsigned long val = get_random_int();
+>>>>>>> v3.18
 		if (test_thread_flag(TIF_32BIT))
 			rnd = (val % (1UL << (23UL-PAGE_SHIFT)));
 		else
@@ -334,7 +357,11 @@ SYSCALL_DEFINE6(sparc_ipc, unsigned int, call, int, first, unsigned long, second
 	long err;
 
 	/* No need for backward compatibility. We can start fresh... */
+<<<<<<< HEAD
 	if (call <= SEMTIMEDOP) {
+=======
+	if (call <= SEMCTL) {
+>>>>>>> v3.18
 		switch (call) {
 		case SEMOP:
 			err = sys_semtimedop(first, ptr,
@@ -414,7 +441,11 @@ out:
 
 SYSCALL_DEFINE1(sparc64_personality, unsigned long, personality)
 {
+<<<<<<< HEAD
 	long ret;
+=======
+	int ret;
+>>>>>>> v3.18
 
 	if (personality(current->personality) == PER_LINUX32 &&
 	    personality(personality) == PER_LINUX)
@@ -499,6 +530,10 @@ asmlinkage unsigned long c_sys_nis_syscall(struct pt_regs *regs)
 
 asmlinkage void sparc_breakpoint(struct pt_regs *regs)
 {
+<<<<<<< HEAD
+=======
+	enum ctx_state prev_state = exception_enter();
+>>>>>>> v3.18
 	siginfo_t info;
 
 	if (test_thread_flag(TIF_32BIT)) {
@@ -517,6 +552,10 @@ asmlinkage void sparc_breakpoint(struct pt_regs *regs)
 #ifdef DEBUG_SPARC_BREAKPOINT
 	printk ("TRAP: Returning to space: PC=%lx nPC=%lx\n", regs->tpc, regs->tnpc);
 #endif
+<<<<<<< HEAD
+=======
+	exception_exit(prev_state);
+>>>>>>> v3.18
 }
 
 extern void check_pending(int signum);

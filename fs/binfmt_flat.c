@@ -380,7 +380,11 @@ failed:
 
 /****************************************************************************/
 
+<<<<<<< HEAD
 void old_reloc(unsigned long rl)
+=======
+static void old_reloc(unsigned long rl)
+>>>>>>> v3.18
 {
 #ifdef DEBUG
 	char *segment[] = { "TEXT", "DATA", "BSS", "*UNKNOWN*" };

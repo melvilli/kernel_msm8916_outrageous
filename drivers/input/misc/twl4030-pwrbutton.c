@@ -52,15 +52,25 @@ static irqreturn_t powerbutton_irq(int irq, void *_pwr)
 	return IRQ_HANDLED;
 }
 
+<<<<<<< HEAD
 static int __init twl4030_pwrbutton_probe(struct platform_device *pdev)
+=======
+static int twl4030_pwrbutton_probe(struct platform_device *pdev)
+>>>>>>> v3.18
 {
 	struct input_dev *pwr;
 	int irq = platform_get_irq(pdev, 0);
 	int err;
 
+<<<<<<< HEAD
 	pwr = input_allocate_device();
 	if (!pwr) {
 		dev_dbg(&pdev->dev, "Can't allocate power button\n");
+=======
+	pwr = devm_input_allocate_device(&pdev->dev);
+	if (!pwr) {
+		dev_err(&pdev->dev, "Can't allocate power button\n");
+>>>>>>> v3.18
 		return -ENOMEM;
 	}
 
@@ -70,16 +80,26 @@ static int __init twl4030_pwrbutton_probe(struct platform_device *pdev)
 	pwr->phys = "twl4030_pwrbutton/input0";
 	pwr->dev.parent = &pdev->dev;
 
+<<<<<<< HEAD
 	err = request_threaded_irq(irq, NULL, powerbutton_irq,
 			IRQF_TRIGGER_FALLING | IRQF_TRIGGER_RISING,
 			"twl4030_pwrbutton", pwr);
 	if (err < 0) {
 		dev_dbg(&pdev->dev, "Can't get IRQ for pwrbutton: %d\n", err);
 		goto free_input_dev;
+=======
+	err = devm_request_threaded_irq(&pwr->dev, irq, NULL, powerbutton_irq,
+			IRQF_TRIGGER_FALLING | IRQF_TRIGGER_RISING,
+			"twl4030_pwrbutton", pwr);
+	if (err < 0) {
+		dev_err(&pdev->dev, "Can't get IRQ for pwrbutton: %d\n", err);
+		return err;
+>>>>>>> v3.18
 	}
 
 	err = input_register_device(pwr);
 	if (err) {
+<<<<<<< HEAD
 		dev_dbg(&pdev->dev, "Can't register power button: %d\n", err);
 		goto free_irq;
 	}
@@ -116,6 +136,35 @@ static struct platform_driver twl4030_pwrbutton_driver = {
 
 module_platform_driver_probe(twl4030_pwrbutton_driver,
 			twl4030_pwrbutton_probe);
+=======
+		dev_err(&pdev->dev, "Can't register power button: %d\n", err);
+		return err;
+	}
+
+	platform_set_drvdata(pdev, pwr);
+	device_init_wakeup(&pdev->dev, true);
+
+	return 0;
+}
+
+#ifdef CONFIG_OF
+static const struct of_device_id twl4030_pwrbutton_dt_match_table[] = {
+       { .compatible = "ti,twl4030-pwrbutton" },
+       {},
+};
+MODULE_DEVICE_TABLE(of, twl4030_pwrbutton_dt_match_table);
+#endif
+
+static struct platform_driver twl4030_pwrbutton_driver = {
+	.probe		= twl4030_pwrbutton_probe,
+	.driver		= {
+		.name	= "twl4030_pwrbutton",
+		.owner	= THIS_MODULE,
+		.of_match_table = of_match_ptr(twl4030_pwrbutton_dt_match_table),
+	},
+};
+module_platform_driver(twl4030_pwrbutton_driver);
+>>>>>>> v3.18
 
 MODULE_ALIAS("platform:twl4030_pwrbutton");
 MODULE_DESCRIPTION("Triton2 Power Button");

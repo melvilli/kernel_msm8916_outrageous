@@ -37,7 +37,11 @@
 #include "libata.h"
 #include "libata-transport.h"
 
+<<<<<<< HEAD
 #define ATA_PORT_ATTRS		2
+=======
+#define ATA_PORT_ATTRS		3
+>>>>>>> v3.18
 #define ATA_LINK_ATTRS		3
 #define ATA_DEV_ATTRS		9
 
@@ -216,6 +220,10 @@ static DEVICE_ATTR(name, S_IRUGO, show_ata_port_##name, NULL)
 
 ata_port_simple_attr(nr_pmp_links, nr_pmp_links, "%d\n", int);
 ata_port_simple_attr(stats.idle_irq, idle_irq, "%ld\n", unsigned long);
+<<<<<<< HEAD
+=======
+ata_port_simple_attr(local_port_no, port_no, "%u\n", unsigned int);
+>>>>>>> v3.18
 
 static DECLARE_TRANSPORT_CLASS(ata_port_class,
 			       "ata_port", NULL, NULL, NULL);
@@ -286,6 +294,10 @@ int ata_tport_add(struct device *parent,
 	dev->release = ata_tport_release;
 	dev_set_name(dev, "ata%d", ap->print_id);
 	transport_setup_device(dev);
+<<<<<<< HEAD
+=======
+	ata_acpi_bind_port(ap);
+>>>>>>> v3.18
 	error = device_add(dev);
 	if (error) {
 		goto tport_err;
@@ -643,6 +655,10 @@ static int ata_tdev_add(struct ata_device *ata_dev)
 		dev_set_name(dev, "dev%d.%d.0", ap->print_id, link->pmp);
 
 	transport_setup_device(dev);
+<<<<<<< HEAD
+=======
+	ata_acpi_bind_dev(ata_dev);
+>>>>>>> v3.18
 	error = device_add(dev);
 	if (error) {
 		ata_tdev_free(ata_dev);
@@ -709,6 +725,10 @@ struct scsi_transport_template *ata_attach_transport(void)
 	count = 0;
 	SETUP_PORT_ATTRIBUTE(nr_pmp_links);
 	SETUP_PORT_ATTRIBUTE(idle_irq);
+<<<<<<< HEAD
+=======
+	SETUP_PORT_ATTRIBUTE(port_no);
+>>>>>>> v3.18
 	BUG_ON(count > ATA_PORT_ATTRS);
 	i->port_attrs[count] = NULL;
 

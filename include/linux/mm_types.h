@@ -8,7 +8,10 @@
 #include <linux/spinlock.h>
 #include <linux/rbtree.h>
 #include <linux/rwsem.h>
+<<<<<<< HEAD
 #include <linux/stacktrace.h>
+=======
+>>>>>>> v3.18
 #include <linux/completion.h>
 #include <linux/cpumask.h>
 #include <linux/page-debug-flags.h>
@@ -24,7 +27,14 @@
 
 struct address_space;
 
+<<<<<<< HEAD
 #define USE_SPLIT_PTLOCKS	(NR_CPUS >= CONFIG_SPLIT_PTLOCK_CPUS)
+=======
+#define USE_SPLIT_PTE_PTLOCKS	(NR_CPUS >= CONFIG_SPLIT_PTLOCK_CPUS)
+#define USE_SPLIT_PMD_PTLOCKS	(USE_SPLIT_PTE_PTLOCKS && \
+		IS_ENABLED(CONFIG_ARCH_ENABLE_SPLIT_PMD_PTLOCK))
+#define ALLOC_SPLIT_PTLOCKS	(SPINLOCK_SIZE > BITS_PER_LONG/8)
+>>>>>>> v3.18
 
 /*
  * Each physical page in the system has a struct page associated with
@@ -43,6 +53,7 @@ struct page {
 	/* First double word block */
 	unsigned long flags;		/* Atomic flags, some possibly
 					 * updated asynchronously */
+<<<<<<< HEAD
 	struct address_space *mapping;	/* If low bit clear, points to
 					 * inode address_space, or NULL.
 					 * If page mapped as anonymous
@@ -50,11 +61,28 @@ struct page {
 					 * it points to anon_vma object:
 					 * see PAGE_MAPPING_ANON below.
 					 */
+=======
+	union {
+		struct address_space *mapping;	/* If low bit clear, points to
+						 * inode address_space, or NULL.
+						 * If page mapped as anonymous
+						 * memory, low bit is set, and
+						 * it points to anon_vma object:
+						 * see PAGE_MAPPING_ANON below.
+						 */
+		void *s_mem;			/* slab first object */
+	};
+
+>>>>>>> v3.18
 	/* Second double word */
 	struct {
 		union {
 			pgoff_t index;		/* Our offset within mapping. */
+<<<<<<< HEAD
 			void *freelist;		/* slub/slob first free object */
+=======
+			void *freelist;		/* sl[aou]b first free object */
+>>>>>>> v3.18
 			bool pfmemalloc;	/* If set by the page allocator,
 						 * ALLOC_NO_WATERMARKS was set
 						 * and the low watermark was not
@@ -110,6 +138,10 @@ struct page {
 				};
 				atomic_t _count;		/* Usage count, see below. */
 			};
+<<<<<<< HEAD
+=======
+			unsigned int active;	/* SLAB */
+>>>>>>> v3.18
 		};
 	};
 
@@ -117,6 +149,11 @@ struct page {
 	union {
 		struct list_head lru;	/* Pageout list, eg. active_list
 					 * protected by zone->lru_lock !
+<<<<<<< HEAD
+=======
+					 * Can be used as a generic list
+					 * by the page owner.
+>>>>>>> v3.18
 					 */
 		struct {		/* slub per cpu partial pages */
 			struct page *next;	/* Next partial slab */
@@ -129,8 +166,18 @@ struct page {
 #endif
 		};
 
+<<<<<<< HEAD
 		struct list_head list;	/* slobs list of pages */
 		struct slab *slab_page; /* slab fields */
+=======
+		struct slab *slab_page; /* slab fields */
+		struct rcu_head rcu_head;	/* Used by SLAB
+						 * when destroying via RCU
+						 */
+#if defined(CONFIG_TRANSPARENT_HUGEPAGE) && USE_SPLIT_PMD_PTLOCKS
+		pgtable_t pmd_huge_pte; /* protected by page->ptl */
+#endif
+>>>>>>> v3.18
 	};
 
 	/* Remainder is not double word aligned */
@@ -142,9 +189,19 @@ struct page {
 						 * indicates order in the buddy
 						 * system if PG_buddy is set.
 						 */
+<<<<<<< HEAD
 #if USE_SPLIT_PTLOCKS
 		spinlock_t ptl;
 #endif
+=======
+#if USE_SPLIT_PTE_PTLOCKS
+#if ALLOC_SPLIT_PTLOCKS
+		spinlock_t *ptl;
+#else
+		spinlock_t ptl;
+#endif
+#endif
+>>>>>>> v3.18
 		struct kmem_cache *slab_cache;	/* SL[AU]B: Pointer to slab */
 		struct page *first_page;	/* Compound tail pages */
 	};
@@ -166,7 +223,10 @@ struct page {
 #ifdef CONFIG_WANT_PAGE_DEBUG_FLAGS
 	unsigned long debug_flags;	/* Use atomic bitops on this */
 #endif
+<<<<<<< HEAD
 	struct task_struct *tsk_dirty;	/* task that sets this page dirty */
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_KMEMCHECK
 	/*
@@ -176,6 +236,7 @@ struct page {
 	void *shadow;
 #endif
 
+<<<<<<< HEAD
 #ifdef LAST_NID_NOT_IN_PAGE_FLAGS
 	int _last_nid;
 #endif
@@ -184,6 +245,10 @@ struct page {
 	gfp_t gfp_mask;
 	struct stack_trace trace;
 	unsigned long trace_entries[8];
+=======
+#ifdef LAST_CPUPID_NOT_IN_PAGE_FLAGS
+	int _last_cpupid;
+>>>>>>> v3.18
 #endif
 }
 /*
@@ -263,10 +328,13 @@ struct vm_area_struct {
 	 * For areas with an address space and backing store,
 	 * linkage into the address_space->i_mmap interval tree, or
 	 * linkage of vma in the address_space->i_mmap_nonlinear list.
+<<<<<<< HEAD
 	 *
 	 * For private anonymous mappings, a pointer to a null terminated string
 	 * in the user process containing the name given to the vma, or NULL
 	 * if unnamed.
+=======
+>>>>>>> v3.18
 	 */
 	union {
 		struct {
@@ -274,7 +342,10 @@ struct vm_area_struct {
 			unsigned long rb_subtree_last;
 		} linear;
 		struct list_head nonlinear;
+<<<<<<< HEAD
 		const char __user *anon_name;
+=======
+>>>>>>> v3.18
 	} shared;
 
 	/*
@@ -322,23 +393,39 @@ enum {
 	NR_MM_COUNTERS
 };
 
+<<<<<<< HEAD
 #if USE_SPLIT_PTLOCKS && defined(CONFIG_MMU)
+=======
+#if USE_SPLIT_PTE_PTLOCKS && defined(CONFIG_MMU)
+>>>>>>> v3.18
 #define SPLIT_RSS_COUNTING
 /* per-thread cached information, */
 struct task_rss_stat {
 	int events;	/* for synchronization threshold */
 	int count[NR_MM_COUNTERS];
 };
+<<<<<<< HEAD
 #endif /* USE_SPLIT_PTLOCKS */
+=======
+#endif /* USE_SPLIT_PTE_PTLOCKS */
+>>>>>>> v3.18
 
 struct mm_rss_stat {
 	atomic_long_t count[NR_MM_COUNTERS];
 };
 
+<<<<<<< HEAD
 struct mm_struct {
 	struct vm_area_struct * mmap;		/* list of VMAs */
 	struct rb_root mm_rb;
 	struct vm_area_struct * mmap_cache;	/* last find_vma result */
+=======
+struct kioctx_table;
+struct mm_struct {
+	struct vm_area_struct *mmap;		/* list of VMAs */
+	struct rb_root mm_rb;
+	u32 vmacache_seqnum;                   /* per-thread vmacache */
+>>>>>>> v3.18
 #ifdef CONFIG_MMU
 	unsigned long (*get_unmapped_area) (struct file *filp,
 				unsigned long addr, unsigned long len,
@@ -351,6 +438,10 @@ struct mm_struct {
 	pgd_t * pgd;
 	atomic_t mm_users;			/* How many users with user space? */
 	atomic_t mm_count;			/* How many references to "struct mm_struct" (users count as 1) */
+<<<<<<< HEAD
+=======
+	atomic_long_t nr_ptes;			/* Page table pages */
+>>>>>>> v3.18
 	int map_count;				/* number of VMAs */
 
 	spinlock_t page_table_lock;		/* Protects page tables and some counters */
@@ -372,7 +463,10 @@ struct mm_struct {
 	unsigned long exec_vm;		/* VM_EXEC & ~VM_WRITE */
 	unsigned long stack_vm;		/* VM_GROWSUP/DOWN */
 	unsigned long def_flags;
+<<<<<<< HEAD
 	unsigned long nr_ptes;		/* Page table pages */
+=======
+>>>>>>> v3.18
 	unsigned long start_code, end_code, start_data, end_data;
 	unsigned long start_brk, brk, start_stack;
 	unsigned long arg_start, arg_end, env_start, env_end;
@@ -396,10 +490,17 @@ struct mm_struct {
 
 	struct core_state *core_state; /* coredumping support */
 #ifdef CONFIG_AIO
+<<<<<<< HEAD
 	spinlock_t		ioctx_lock;
 	struct hlist_head	ioctx_list;
 #endif
 #ifdef CONFIG_MM_OWNER
+=======
+	spinlock_t			ioctx_lock;
+	struct kioctx_table __rcu	*ioctx_table;
+#endif
+#ifdef CONFIG_MEMCG
+>>>>>>> v3.18
 	/*
 	 * "owner" points to a task that is regarded as the canonical
 	 * user/owner of this mm. All of the following must be true in
@@ -418,7 +519,11 @@ struct mm_struct {
 #ifdef CONFIG_MMU_NOTIFIER
 	struct mmu_notifier_mm *mmu_notifier_mm;
 #endif
+<<<<<<< HEAD
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
+=======
+#if defined(CONFIG_TRANSPARENT_HUGEPAGE) && !USE_SPLIT_PMD_PTLOCKS
+>>>>>>> v3.18
 	pgtable_t pmd_huge_pte; /* protected by page_table_lock */
 #endif
 #ifdef CONFIG_CPUMASK_OFFSTACK
@@ -432,20 +537,26 @@ struct mm_struct {
 	 */
 	unsigned long numa_next_scan;
 
+<<<<<<< HEAD
 	/* numa_next_reset is when the PTE scanner period will be reset */
 	unsigned long numa_next_reset;
 
+=======
+>>>>>>> v3.18
 	/* Restart point for scanning and setting pte_numa */
 	unsigned long numa_scan_offset;
 
 	/* numa_scan_seq prevents two threads setting pte_numa */
 	int numa_scan_seq;
+<<<<<<< HEAD
 
 	/*
 	 * The first node a task was scheduled on. If a task runs on
 	 * a different node than Make PTE Scan Go Now.
 	 */
 	int first_nid;
+=======
+>>>>>>> v3.18
 #endif
 #if defined(CONFIG_NUMA_BALANCING) || defined(CONFIG_COMPACTION)
 	/*
@@ -458,15 +569,22 @@ struct mm_struct {
 	struct uprobes_state uprobes_state;
 };
 
+<<<<<<< HEAD
 /* first nid will either be a valid NID or one of these values */
 #define NUMA_PTE_SCAN_INIT	-1
 #define NUMA_PTE_SCAN_ACTIVE	-2
 
+=======
+>>>>>>> v3.18
 static inline void mm_init_cpumask(struct mm_struct *mm)
 {
 #ifdef CONFIG_CPUMASK_OFFSTACK
 	mm->cpu_vm_mask_var = &mm->cpumask_allocation;
 #endif
+<<<<<<< HEAD
+=======
+	cpumask_clear(mm->cpu_vm_mask_var);
+>>>>>>> v3.18
 }
 
 /* Future-safe accessor for struct mm_struct's cpu_vm_mask. */
@@ -516,6 +634,7 @@ static inline void clear_tlb_flush_pending(struct mm_struct *mm)
 }
 #endif
 
+<<<<<<< HEAD
 /* Return the name for an anonymous mapping or NULL for a file-backed mapping */
 static inline const char __user *vma_get_anon_name(struct vm_area_struct *vma)
 {
@@ -524,5 +643,20 @@ static inline const char __user *vma_get_anon_name(struct vm_area_struct *vma)
 
 	return vma->shared.anon_name;
 }
+=======
+struct vm_special_mapping
+{
+	const char *name;
+	struct page **pages;
+};
+
+enum tlb_flush_reason {
+	TLB_FLUSH_ON_TASK_SWITCH,
+	TLB_REMOTE_SHOOTDOWN,
+	TLB_LOCAL_SHOOTDOWN,
+	TLB_LOCAL_MM_SHOOTDOWN,
+	NR_TLB_FLUSH_REASONS,
+};
+>>>>>>> v3.18
 
 #endif /* _LINUX_MM_TYPES_H */

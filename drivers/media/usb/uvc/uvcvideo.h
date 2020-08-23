@@ -94,6 +94,21 @@
 #define UVC_GUID_FORMAT_BY8 \
 	{ 'B',  'Y',  '8',  ' ', 0x00, 0x00, 0x10, 0x00, \
 	 0x80, 0x00, 0x00, 0xaa, 0x00, 0x38, 0x9b, 0x71}
+<<<<<<< HEAD
+=======
+#define UVC_GUID_FORMAT_BA81 \
+	{ 'B',  'A',  '8',  '1', 0x00, 0x00, 0x10, 0x00, \
+	 0x80, 0x00, 0x00, 0xaa, 0x00, 0x38, 0x9b, 0x71}
+#define UVC_GUID_FORMAT_GBRG \
+	{ 'G',  'B',  'R',  'G', 0x00, 0x00, 0x10, 0x00, \
+	 0x80, 0x00, 0x00, 0xaa, 0x00, 0x38, 0x9b, 0x71}
+#define UVC_GUID_FORMAT_GRBG \
+	{ 'G',  'R',  'B',  'G', 0x00, 0x00, 0x10, 0x00, \
+	 0x80, 0x00, 0x00, 0xaa, 0x00, 0x38, 0x9b, 0x71}
+#define UVC_GUID_FORMAT_RGGB \
+	{ 'R',  'G',  'G',  'B', 0x00, 0x00, 0x10, 0x00, \
+	 0x80, 0x00, 0x00, 0xaa, 0x00, 0x38, 0x9b, 0x71}
+>>>>>>> v3.18
 #define UVC_GUID_FORMAT_RGBP \
 	{ 'R',  'G',  'B',  'P', 0x00, 0x00, 0x10, 0x00, \
 	 0x80, 0x00, 0x00, 0xaa, 0x00, 0x38, 0x9b, 0x71}
@@ -115,8 +130,11 @@
 #define UVC_URBS		5
 /* Maximum number of packets per URB. */
 #define UVC_MAX_PACKETS		32
+<<<<<<< HEAD
 /* Maximum number of video buffers. */
 #define UVC_MAX_VIDEO_BUFFERS	32
+=======
+>>>>>>> v3.18
 /* Maximum status buffer size in bytes of interrupt URB. */
 #define UVC_MAX_STATUS_SIZE	16
 
@@ -137,6 +155,10 @@
 #define UVC_QUIRK_FIX_BANDWIDTH		0x00000080
 #define UVC_QUIRK_PROBE_DEF		0x00000100
 #define UVC_QUIRK_RESTRICT_FRAME_RATE	0x00000200
+<<<<<<< HEAD
+=======
+#define UVC_QUIRK_RESTORE_CTRLS_ON_INIT	0x00000400
+>>>>>>> v3.18
 
 /* Format flags */
 #define UVC_FMT_FLAG_COMPRESSED		0x00000001
@@ -446,6 +468,10 @@ struct uvc_streaming {
 	struct uvc_format *def_format;
 	struct uvc_format *cur_format;
 	struct uvc_frame *cur_frame;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	/* Protect access to ctrl, cur_format, cur_frame and hardware video
 	 * probe control.
 	 */
@@ -514,7 +540,12 @@ struct uvc_device {
 	char name[32];
 
 	enum uvc_device_state state;
+<<<<<<< HEAD
 	atomic_t users;
+=======
+	struct mutex lock;		/* Protects users */
+	unsigned int users;
+>>>>>>> v3.18
 	atomic_t nmappings;
 
 	/* Video control interface */
@@ -615,6 +646,11 @@ extern int uvc_alloc_buffers(struct uvc_video_queue *queue,
 extern void uvc_free_buffers(struct uvc_video_queue *queue);
 extern int uvc_query_buffer(struct uvc_video_queue *queue,
 		struct v4l2_buffer *v4l2_buf);
+<<<<<<< HEAD
+=======
+extern int uvc_create_buffers(struct uvc_video_queue *queue,
+		struct v4l2_create_buffers *v4l2_cb);
+>>>>>>> v3.18
 extern int uvc_queue_buffer(struct uvc_video_queue *queue,
 		struct v4l2_buffer *v4l2_buf);
 extern int uvc_dequeue_buffer(struct uvc_video_queue *queue,
@@ -660,10 +696,15 @@ void uvc_video_clock_update(struct uvc_streaming *stream,
 /* Status */
 extern int uvc_status_init(struct uvc_device *dev);
 extern void uvc_status_cleanup(struct uvc_device *dev);
+<<<<<<< HEAD
 extern int uvc_status_start(struct uvc_device *dev);
 extern void uvc_status_stop(struct uvc_device *dev);
 extern int uvc_status_suspend(struct uvc_device *dev);
 extern int uvc_status_resume(struct uvc_device *dev);
+=======
+extern int uvc_status_start(struct uvc_device *dev, gfp_t flags);
+extern void uvc_status_stop(struct uvc_device *dev);
+>>>>>>> v3.18
 
 /* Controls */
 extern const struct v4l2_subscribed_event_ops uvc_ctrl_sub_ev_ops;
@@ -677,7 +718,11 @@ extern int uvc_ctrl_add_mapping(struct uvc_video_chain *chain,
 		const struct uvc_control_mapping *mapping);
 extern int uvc_ctrl_init_device(struct uvc_device *dev);
 extern void uvc_ctrl_cleanup_device(struct uvc_device *dev);
+<<<<<<< HEAD
 extern int uvc_ctrl_resume_device(struct uvc_device *dev);
+=======
+extern int uvc_ctrl_restore_values(struct uvc_device *dev);
+>>>>>>> v3.18
 
 extern int uvc_ctrl_begin(struct uvc_video_chain *chain);
 extern int __uvc_ctrl_commit(struct uvc_fh *handle, int rollback,

@@ -292,6 +292,10 @@ static void iommu_table_dart_setup(void)
 	iommu_table_dart.it_offset = 0;
 	/* it_size is in number of entries */
 	iommu_table_dart.it_size = dart_tablesize / sizeof(u32);
+<<<<<<< HEAD
+=======
+	iommu_table_dart.it_page_shift = IOMMU_PAGE_SHIFT_4K;
+>>>>>>> v3.18
 
 	/* Initialize the common IOMMU code */
 	iommu_table_dart.it_base = (unsigned long)dart_vbase;
@@ -475,6 +479,14 @@ void __init alloc_dart_table(void)
 	 */
 	dart_tablebase = (unsigned long)
 		__va(memblock_alloc_base(1UL<<24, 1UL<<24, 0x80000000L));
+<<<<<<< HEAD
+=======
+	/*
+	 * The DART space is later unmapped from the kernel linear mapping and
+	 * accessing dart_tablebase during kmemleak scanning will fault.
+	 */
+	kmemleak_no_scan((void *)dart_tablebase);
+>>>>>>> v3.18
 
 	printk(KERN_INFO "DART table allocated at: %lx\n", dart_tablebase);
 }

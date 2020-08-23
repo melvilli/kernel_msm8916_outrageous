@@ -108,15 +108,22 @@ static u32 wmi_addr_remap(u32 x)
 /**
  * Check address validity for WMI buffer; remap if needed
  * @ptr - internal (linker) fw/ucode address
+<<<<<<< HEAD
  * @size - if non zero, validate the block does not
  *  exceed the device memory (bar)
+=======
+>>>>>>> v3.18
  *
  * Valid buffer should be DWORD aligned
  *
  * return address for accessing buffer from the host;
  * if buffer is not valid, return NULL.
  */
+<<<<<<< HEAD
 void __iomem *wmi_buffer_block(struct wil6210_priv *wil, __le32 ptr_, u32 size)
+=======
+void __iomem *wmi_buffer(struct wil6210_priv *wil, __le32 ptr_)
+>>>>>>> v3.18
 {
 	u32 off;
 	u32 ptr = le32_to_cpu(ptr_);
@@ -131,17 +138,23 @@ void __iomem *wmi_buffer_block(struct wil6210_priv *wil, __le32 ptr_, u32 size)
 	off = HOSTADDR(ptr);
 	if (off > WIL6210_MEM_SIZE - 4)
 		return NULL;
+<<<<<<< HEAD
 	if (size && ((off + size > WIL6210_MEM_SIZE) || (off + size < off)))
 		return NULL;
+=======
+>>>>>>> v3.18
 
 	return wil->csr + off;
 }
 
+<<<<<<< HEAD
 void __iomem *wmi_buffer(struct wil6210_priv *wil, __le32 ptr_)
 {
 	return wmi_buffer_block(wil, ptr_, 0);
 }
 
+=======
+>>>>>>> v3.18
 /**
  * Check address validity
  */
@@ -308,6 +321,10 @@ static void wmi_evt_fw_ready(struct wil6210_priv *wil, int id, void *d,
 {
 	wil_dbg_wmi(wil, "WMI: got FW ready event\n");
 
+<<<<<<< HEAD
+=======
+	wil_set_recovery_state(wil, fw_recovery_idle);
+>>>>>>> v3.18
 	set_bit(wil_status_fwready, &wil->status);
 	/* let the reset sequence continue */
 	complete(&wil->wmi_ready);
@@ -362,11 +379,19 @@ static void wmi_evt_rx_mgmt(struct wil6210_priv *wil, int id, void *d, int len)
 				    rx_mgmt_frame->bssid);
 			cfg80211_put_bss(wiphy, bss);
 		} else {
+<<<<<<< HEAD
 			wil_err(wil, "cfg80211_inform_bss() failed\n");
 		}
 	} else {
 		cfg80211_rx_mgmt(wil->wdev, freq, signal,
 				 (void *)rx_mgmt_frame, d_len, GFP_ATOMIC);
+=======
+			wil_err(wil, "cfg80211_inform_bss_frame() failed\n");
+		}
+	} else {
+		cfg80211_rx_mgmt(wil->wdev, freq, signal,
+				 (void *)rx_mgmt_frame, d_len, 0);
+>>>>>>> v3.18
 	}
 }
 

@@ -29,6 +29,7 @@
 
 
 #define IPT_TAB_MASK     15
+<<<<<<< HEAD
 static struct tcf_common *tcf_ipt_ht[IPT_TAB_MASK + 1];
 static u32 ipt_idx_gen;
 static DEFINE_RWLOCK(ipt_lock);
@@ -38,6 +39,8 @@ static struct tcf_hashinfo ipt_hash_info = {
 	.hmask	=	IPT_TAB_MASK,
 	.lock	=	&ipt_lock,
 };
+=======
+>>>>>>> v3.18
 
 static int ipt_init_target(struct xt_entry_target *t, char *table, unsigned int hook)
 {
@@ -77,6 +80,7 @@ static void ipt_destroy_target(struct xt_entry_target *t)
 	module_put(par.target->me);
 }
 
+<<<<<<< HEAD
 static int tcf_ipt_release(struct tcf_ipt *ipt, int bind)
 {
 	int ret = 0;
@@ -93,6 +97,14 @@ static int tcf_ipt_release(struct tcf_ipt *ipt, int bind)
 		}
 	}
 	return ret;
+=======
+static void tcf_ipt_release(struct tc_action *a, int bind)
+{
+	struct tcf_ipt *ipt = to_ipt(a);
+	ipt_destroy_target(ipt->tcfi_t);
+	kfree(ipt->tcfi_tname);
+	kfree(ipt->tcfi_t);
+>>>>>>> v3.18
 }
 
 static const struct nla_policy ipt_policy[TCA_IPT_MAX + 1] = {
@@ -107,7 +119,10 @@ static int tcf_ipt_init(struct net *net, struct nlattr *nla, struct nlattr *est,
 {
 	struct nlattr *tb[TCA_IPT_MAX + 1];
 	struct tcf_ipt *ipt;
+<<<<<<< HEAD
 	struct tcf_common *pc;
+=======
+>>>>>>> v3.18
 	struct xt_entry_target *td, *t;
 	char *tname;
 	int ret = 0, err;
@@ -133,6 +148,7 @@ static int tcf_ipt_init(struct net *net, struct nlattr *nla, struct nlattr *est,
 	if (tb[TCA_IPT_INDEX] != NULL)
 		index = nla_get_u32(tb[TCA_IPT_INDEX]);
 
+<<<<<<< HEAD
 	pc = tcf_hash_check(index, a, bind, &ipt_hash_info);
 	if (!pc) {
 		pc = tcf_hash_create(index, est, a, sizeof(*ipt), bind,
@@ -147,6 +163,22 @@ static int tcf_ipt_init(struct net *net, struct nlattr *nla, struct nlattr *est,
 		}
 	}
 	ipt = to_ipt(pc);
+=======
+	if (!tcf_hash_check(index, a, bind) ) {
+		ret = tcf_hash_create(index, est, a, sizeof(*ipt), bind);
+		if (ret)
+			return ret;
+		ret = ACT_P_CREATED;
+	} else {
+		if (bind)/* dont override defaults */
+			return 0;
+		tcf_hash_release(a, bind);
+
+		if (!ovr)
+			return -EEXIST;
+	}
+	ipt = to_ipt(a);
+>>>>>>> v3.18
 
 	hook = nla_get_u32(tb[TCA_IPT_HOOK]);
 
@@ -177,7 +209,11 @@ static int tcf_ipt_init(struct net *net, struct nlattr *nla, struct nlattr *est,
 	ipt->tcfi_hook  = hook;
 	spin_unlock_bh(&ipt->tcf_lock);
 	if (ret == ACT_P_CREATED)
+<<<<<<< HEAD
 		tcf_hash_insert(pc, &ipt_hash_info);
+=======
+		tcf_hash_insert(a);
+>>>>>>> v3.18
 	return ret;
 
 err3:
@@ -185,6 +221,7 @@ err3:
 err2:
 	kfree(tname);
 err1:
+<<<<<<< HEAD
 	if (ret == ACT_P_CREATED) {
 		if (est)
 			gen_kill_estimator(&pc->tcfc_bstats,
@@ -200,6 +237,13 @@ static int tcf_ipt_cleanup(struct tc_action *a, int bind)
 	return tcf_ipt_release(ipt, bind);
 }
 
+=======
+	if (ret == ACT_P_CREATED)
+		tcf_hash_cleanup(a, est);
+	return err;
+}
+
+>>>>>>> v3.18
 static int tcf_ipt(struct sk_buff *skb, const struct tc_action *a,
 		   struct tcf_result *res)
 {
@@ -291,6 +335,7 @@ nla_put_failure:
 
 static struct tc_action_ops act_ipt_ops = {
 	.kind		=	"ipt",
+<<<<<<< HEAD
 	.hinfo		=	&ipt_hash_info,
 	.type		=	TCA_ACT_IPT,
 	.capab		=	TCA_CAP_NONE,
@@ -301,10 +346,19 @@ static struct tc_action_ops act_ipt_ops = {
 	.lookup		=	tcf_hash_search,
 	.init		=	tcf_ipt_init,
 	.walk		=	tcf_generic_walker
+=======
+	.type		=	TCA_ACT_IPT,
+	.owner		=	THIS_MODULE,
+	.act		=	tcf_ipt,
+	.dump		=	tcf_ipt_dump,
+	.cleanup	=	tcf_ipt_release,
+	.init		=	tcf_ipt_init,
+>>>>>>> v3.18
 };
 
 static struct tc_action_ops act_xt_ops = {
 	.kind		=	"xt",
+<<<<<<< HEAD
 	.hinfo		=	&ipt_hash_info,
 	.type		=	TCA_ACT_IPT,
 	.capab		=	TCA_CAP_NONE,
@@ -315,6 +369,14 @@ static struct tc_action_ops act_xt_ops = {
 	.lookup		=	tcf_hash_search,
 	.init		=	tcf_ipt_init,
 	.walk		=	tcf_generic_walker
+=======
+	.type		=	TCA_ACT_XT,
+	.owner		=	THIS_MODULE,
+	.act		=	tcf_ipt,
+	.dump		=	tcf_ipt_dump,
+	.cleanup	=	tcf_ipt_release,
+	.init		=	tcf_ipt_init,
+>>>>>>> v3.18
 };
 
 MODULE_AUTHOR("Jamal Hadi Salim(2002-13)");
@@ -325,6 +387,7 @@ MODULE_ALIAS("act_xt");
 static int __init ipt_init_module(void)
 {
 	int ret1, ret2;
+<<<<<<< HEAD
 	ret1 = tcf_register_action(&act_xt_ops);
 	if (ret1 < 0)
 		printk("Failed to load xt action\n");
@@ -335,6 +398,19 @@ static int __init ipt_init_module(void)
 	if (ret1 < 0 && ret2 < 0)
 		return ret1;
 	else
+=======
+
+	ret1 = tcf_register_action(&act_xt_ops, IPT_TAB_MASK);
+	if (ret1 < 0)
+		printk("Failed to load xt action\n");
+	ret2 = tcf_register_action(&act_ipt_ops, IPT_TAB_MASK);
+	if (ret2 < 0)
+		printk("Failed to load ipt action\n");
+
+	if (ret1 < 0 && ret2 < 0) {
+		return ret1;
+	} else
+>>>>>>> v3.18
 		return 0;
 }
 

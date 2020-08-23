@@ -11,6 +11,7 @@
 
 #include <linux/io.h>
 #include <linux/kernel.h>
+<<<<<<< HEAD
 #include <linux/bug.h>
 
 #include <mach/regs-clock.h>
@@ -21,6 +22,16 @@ static struct exynos_pmu_conf *exynos_pmu_config;
 
 static struct exynos_pmu_conf exynos4210_pmu_config[] = {
 	/* { .reg = address, .val = { AFTR, LPA, SLEEP } */
+=======
+
+#include "common.h"
+#include "regs-pmu.h"
+
+static const struct exynos_pmu_conf *exynos_pmu_config;
+
+static const struct exynos_pmu_conf exynos4210_pmu_config[] = {
+	/* { .offset = offset, .val = { AFTR, LPA, SLEEP } */
+>>>>>>> v3.18
 	{ S5P_ARM_CORE0_LOWPWR,			{ 0x0, 0x0, 0x2 } },
 	{ S5P_DIS_IRQ_CORE0,			{ 0x0, 0x0, 0x0 } },
 	{ S5P_DIS_IRQ_CENTRAL0,			{ 0x0, 0x0, 0x0 } },
@@ -95,7 +106,11 @@ static struct exynos_pmu_conf exynos4210_pmu_config[] = {
 	{ PMU_TABLE_END,},
 };
 
+<<<<<<< HEAD
 static struct exynos_pmu_conf exynos4x12_pmu_config[] = {
+=======
+static const struct exynos_pmu_conf exynos4x12_pmu_config[] = {
+>>>>>>> v3.18
 	{ S5P_ARM_CORE0_LOWPWR,			{ 0x0, 0x0, 0x2 } },
 	{ S5P_DIS_IRQ_CORE0,			{ 0x0, 0x0, 0x0 } },
 	{ S5P_DIS_IRQ_CENTRAL0,			{ 0x0, 0x0, 0x0 } },
@@ -203,7 +218,11 @@ static struct exynos_pmu_conf exynos4x12_pmu_config[] = {
 	{ PMU_TABLE_END,},
 };
 
+<<<<<<< HEAD
 static struct exynos_pmu_conf exynos4412_pmu_config[] = {
+=======
+static const struct exynos_pmu_conf exynos4412_pmu_config[] = {
+>>>>>>> v3.18
 	{ S5P_ARM_CORE2_LOWPWR,			{ 0x0, 0x0, 0x2 } },
 	{ S5P_DIS_IRQ_CORE2,			{ 0x0, 0x0, 0x0 } },
 	{ S5P_DIS_IRQ_CENTRAL2,			{ 0x0, 0x0, 0x0 } },
@@ -213,8 +232,13 @@ static struct exynos_pmu_conf exynos4412_pmu_config[] = {
 	{ PMU_TABLE_END,},
 };
 
+<<<<<<< HEAD
 static struct exynos_pmu_conf exynos5250_pmu_config[] = {
 	/* { .reg = address, .val = { AFTR, LPA, SLEEP } */
+=======
+static const struct exynos_pmu_conf exynos5250_pmu_config[] = {
+	/* { .offset = offset, .val = { AFTR, LPA, SLEEP } */
+>>>>>>> v3.18
 	{ EXYNOS5_ARM_CORE0_SYS_PWR_REG,		{ 0x0, 0x0, 0x2} },
 	{ EXYNOS5_DIS_IRQ_ARM_CORE0_LOCAL_SYS_PWR_REG,	{ 0x0, 0x0, 0x0} },
 	{ EXYNOS5_DIS_IRQ_ARM_CORE0_CENTRAL_SYS_PWR_REG,	{ 0x0, 0x0, 0x0} },
@@ -317,7 +341,11 @@ static struct exynos_pmu_conf exynos5250_pmu_config[] = {
 	{ PMU_TABLE_END,},
 };
 
+<<<<<<< HEAD
 static void __iomem *exynos5_list_both_cnt_feed[] = {
+=======
+static unsigned int const exynos5_list_both_cnt_feed[] = {
+>>>>>>> v3.18
 	EXYNOS5_ARM_CORE0_OPTION,
 	EXYNOS5_ARM_CORE1_OPTION,
 	EXYNOS5_ARM_COMMON_OPTION,
@@ -331,7 +359,11 @@ static void __iomem *exynos5_list_both_cnt_feed[] = {
 	EXYNOS5_TOP_PWR_SYSMEM_OPTION,
 };
 
+<<<<<<< HEAD
 static void __iomem *exynos5_list_diable_wfi_wfe[] = {
+=======
+static unsigned int const exynos5_list_diable_wfi_wfe[] = {
+>>>>>>> v3.18
 	EXYNOS5_ARM_CORE1_OPTION,
 	EXYNOS5_FSYS_ARM_OPTION,
 	EXYNOS5_ISP_ARM_OPTION,
@@ -346,27 +378,47 @@ static void exynos5_init_pmu(void)
 	 * Enable both SC_FEEDBACK and SC_COUNTER
 	 */
 	for (i = 0 ; i < ARRAY_SIZE(exynos5_list_both_cnt_feed) ; i++) {
+<<<<<<< HEAD
 		tmp = __raw_readl(exynos5_list_both_cnt_feed[i]);
 		tmp |= (EXYNOS5_USE_SC_FEEDBACK |
 			EXYNOS5_USE_SC_COUNTER);
 		__raw_writel(tmp, exynos5_list_both_cnt_feed[i]);
+=======
+		tmp = pmu_raw_readl(exynos5_list_both_cnt_feed[i]);
+		tmp |= (EXYNOS5_USE_SC_FEEDBACK |
+			EXYNOS5_USE_SC_COUNTER);
+		pmu_raw_writel(tmp, exynos5_list_both_cnt_feed[i]);
+>>>>>>> v3.18
 	}
 
 	/*
 	 * SKIP_DEACTIVATE_ACEACP_IN_PWDN_BITFIELD Enable
 	 */
+<<<<<<< HEAD
 	tmp = __raw_readl(EXYNOS5_ARM_COMMON_OPTION);
 	tmp |= EXYNOS5_SKIP_DEACTIVATE_ACEACP_IN_PWDN;
 	__raw_writel(tmp, EXYNOS5_ARM_COMMON_OPTION);
+=======
+	tmp = pmu_raw_readl(EXYNOS5_ARM_COMMON_OPTION);
+	tmp |= EXYNOS5_SKIP_DEACTIVATE_ACEACP_IN_PWDN;
+	pmu_raw_writel(tmp, EXYNOS5_ARM_COMMON_OPTION);
+>>>>>>> v3.18
 
 	/*
 	 * Disable WFI/WFE on XXX_OPTION
 	 */
 	for (i = 0 ; i < ARRAY_SIZE(exynos5_list_diable_wfi_wfe) ; i++) {
+<<<<<<< HEAD
 		tmp = __raw_readl(exynos5_list_diable_wfi_wfe[i]);
 		tmp &= ~(EXYNOS5_OPTION_USE_STANDBYWFE |
 			 EXYNOS5_OPTION_USE_STANDBYWFI);
 		__raw_writel(tmp, exynos5_list_diable_wfi_wfe[i]);
+=======
+		tmp = pmu_raw_readl(exynos5_list_diable_wfi_wfe[i]);
+		tmp &= ~(EXYNOS5_OPTION_USE_STANDBYWFE |
+			 EXYNOS5_OPTION_USE_STANDBYWFI);
+		pmu_raw_writel(tmp, exynos5_list_diable_wfi_wfe[i]);
+>>>>>>> v3.18
 	}
 }
 
@@ -377,6 +429,7 @@ void exynos_sys_powerdown_conf(enum sys_powerdown mode)
 	if (soc_is_exynos5250())
 		exynos5_init_pmu();
 
+<<<<<<< HEAD
 	for (i = 0; (exynos_pmu_config[i].reg != PMU_TABLE_END) ; i++)
 		__raw_writel(exynos_pmu_config[i].val[mode],
 				exynos_pmu_config[i].reg);
@@ -385,6 +438,16 @@ void exynos_sys_powerdown_conf(enum sys_powerdown mode)
 		for (i = 0; exynos4412_pmu_config[i].reg != PMU_TABLE_END ; i++)
 			__raw_writel(exynos4412_pmu_config[i].val[mode],
 				exynos4412_pmu_config[i].reg);
+=======
+	for (i = 0; (exynos_pmu_config[i].offset != PMU_TABLE_END) ; i++)
+		pmu_raw_writel(exynos_pmu_config[i].val[mode],
+				exynos_pmu_config[i].offset);
+
+	if (soc_is_exynos4412()) {
+		for (i = 0; exynos4412_pmu_config[i].offset != PMU_TABLE_END ; i++)
+			pmu_raw_writel(exynos4412_pmu_config[i].val[mode],
+					exynos4412_pmu_config[i].offset);
+>>>>>>> v3.18
 	}
 }
 
@@ -405,6 +468,7 @@ static int __init exynos_pmu_init(void)
 		 * When SYS_WDTRESET is set, watchdog timer reset request
 		 * is ignored by power management unit.
 		 */
+<<<<<<< HEAD
 		value = __raw_readl(EXYNOS5_AUTO_WDTRESET_DISABLE);
 		value &= ~EXYNOS5_SYS_WDTRESET;
 		__raw_writel(value, EXYNOS5_AUTO_WDTRESET_DISABLE);
@@ -412,6 +476,15 @@ static int __init exynos_pmu_init(void)
 		value = __raw_readl(EXYNOS5_MASK_WDTRESET_REQUEST);
 		value &= ~EXYNOS5_SYS_WDTRESET;
 		__raw_writel(value, EXYNOS5_MASK_WDTRESET_REQUEST);
+=======
+		value = pmu_raw_readl(EXYNOS5_AUTO_WDTRESET_DISABLE);
+		value &= ~EXYNOS5_SYS_WDTRESET;
+		pmu_raw_writel(value, EXYNOS5_AUTO_WDTRESET_DISABLE);
+
+		value = pmu_raw_readl(EXYNOS5_MASK_WDTRESET_REQUEST);
+		value &= ~EXYNOS5_SYS_WDTRESET;
+		pmu_raw_writel(value, EXYNOS5_MASK_WDTRESET_REQUEST);
+>>>>>>> v3.18
 
 		exynos_pmu_config = exynos5250_pmu_config;
 		pr_info("EXYNOS5250 PMU Initialize\n");

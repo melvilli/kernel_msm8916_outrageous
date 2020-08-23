@@ -3,14 +3,23 @@ NVIDIA Tegra audio complex
 Required properties:
 - compatible : "nvidia,tegra-audio-wm8903"
 - clocks : Must contain an entry for each entry in clock-names.
+<<<<<<< HEAD
 - clock-names : Must include the following entries:
   "pll_a" (The Tegra clock of that name),
   "pll_a_out0" (The Tegra clock of that name),
   "mclk" (The Tegra cdev1/extern1 clock, which feeds the CODEC's mclk)
+=======
+  See ../clocks/clock-bindings.txt for details.
+- clock-names : Must include the following entries:
+  - pll_a
+  - pll_a_out0
+  - mclk (The Tegra cdev1/extern1 clock, which feeds the CODEC's mclk)
+>>>>>>> v3.18
 - nvidia,model : The user-visible name of this sound complex.
 - nvidia,audio-routing : A list of the connections between audio components.
   Each entry is a pair of strings, the first being the connection's sink,
   the second being the connection's source. Valid names for sources and
+<<<<<<< HEAD
   sinks are the WM8903's pins, and the jacks on the board:
 
   WM8903 pins:
@@ -33,6 +42,10 @@ Required properties:
   * MICBIAS
 
   Board connectors:
+=======
+  sinks are the WM8903's pins (documented in the WM8903 binding document),
+  and the jacks on the board:
+>>>>>>> v3.18
 
   * Headphone Jack
   * Int Spk

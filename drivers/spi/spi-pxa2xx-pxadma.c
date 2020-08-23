@@ -18,7 +18,10 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/delay.h>
 #include <linux/device.h>
 #include <linux/dma-mapping.h>

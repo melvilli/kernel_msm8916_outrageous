@@ -1230,7 +1230,11 @@ static void handle_msgin(struct mesh_state *ms)
 				ms->msgphase = msg_out;
 			} else if (code != cmd->device->lun + IDENTIFY_BASE) {
 				printk(KERN_WARNING "mesh: lun mismatch "
+<<<<<<< HEAD
 				       "(%d != %d) on reselection from "
+=======
+				       "(%d != %llu) on reselection from "
+>>>>>>> v3.18
 				       "target %d\n", code - IDENTIFY_BASE,
 				       cmd->device->lun, ms->conn_tgt);
 			}
@@ -1915,14 +1919,22 @@ static int mesh_probe(struct macio_dev *mdev, const struct of_device_id *match)
 	/* We use the PCI APIs for now until the generic one gets fixed
 	 * enough or until we get some macio-specific versions
 	 */
+<<<<<<< HEAD
 	dma_cmd_space = pci_alloc_consistent(macio_get_pci_dev(mdev),
 					     ms->dma_cmd_size,
 					     &dma_cmd_bus);
+=======
+	dma_cmd_space = pci_zalloc_consistent(macio_get_pci_dev(mdev),
+					      ms->dma_cmd_size, &dma_cmd_bus);
+>>>>>>> v3.18
 	if (dma_cmd_space == NULL) {
 		printk(KERN_ERR "mesh: can't allocate DMA table\n");
 		goto out_unmap;
 	}
+<<<<<<< HEAD
 	memset(dma_cmd_space, 0, ms->dma_cmd_size);
+=======
+>>>>>>> v3.18
 
 	ms->dma_cmds = (struct dbdma_cmd *) DBDMA_ALIGN(dma_cmd_space);
        	ms->dma_cmd_space = dma_cmd_space;

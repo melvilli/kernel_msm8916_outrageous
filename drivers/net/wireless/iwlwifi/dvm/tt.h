@@ -1,6 +1,10 @@
 /******************************************************************************
  *
+<<<<<<< HEAD
  * Copyright(c) 2007 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2007 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
  *
  * Portions of this file are derived from the ipw3945 project, as well
  * as portions of the ieee80211 subsystem header files.

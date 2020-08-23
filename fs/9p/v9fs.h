@@ -64,6 +64,10 @@ enum p9_session_flags {
 
 enum p9_cache_modes {
 	CACHE_NONE,
+<<<<<<< HEAD
+=======
+	CACHE_MMAP,
+>>>>>>> v3.18
 	CACHE_LOOSE,
 	CACHE_FSCACHE,
 };

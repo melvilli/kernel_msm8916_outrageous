@@ -748,7 +748,11 @@ const struct seq_operations cpuinfo_op = {
 #define MAX_BRANDS	8
 static char brandname[MAX_BRANDS][128];
 
+<<<<<<< HEAD
 static char * __cpuinit
+=======
+static char *
+>>>>>>> v3.18
 get_model_name(__u8 family, __u8 model)
 {
 	static int overflow;
@@ -778,7 +782,11 @@ get_model_name(__u8 family, __u8 model)
 	return "Unknown";
 }
 
+<<<<<<< HEAD
 static void __cpuinit
+=======
+static void
+>>>>>>> v3.18
 identify_cpu (struct cpuinfo_ia64 *c)
 {
 	union {
@@ -850,7 +858,11 @@ identify_cpu (struct cpuinfo_ia64 *c)
  * 2. the minimum of the i-cache stride sizes for "flush_icache_range()".
  * 3. the minimum of the cache stride sizes for "clflush_cache_range()".
  */
+<<<<<<< HEAD
 static void __cpuinit
+=======
+static void
+>>>>>>> v3.18
 get_cache_info(void)
 {
 	unsigned long line_size, max = 1;
@@ -915,10 +927,17 @@ get_cache_info(void)
  * cpu_init() initializes state that is per-CPU.  This function acts
  * as a 'CPU state barrier', nothing should get across.
  */
+<<<<<<< HEAD
 void __cpuinit
 cpu_init (void)
 {
 	extern void __cpuinit ia64_mmu_init (void *);
+=======
+void
+cpu_init (void)
+{
+	extern void ia64_mmu_init(void *);
+>>>>>>> v3.18
 	static unsigned long max_num_phys_stacked = IA64_NUM_PHYS_STACK_REG;
 	unsigned long num_phys_stacked;
 	pal_vm_info_2_u_t vmi;
@@ -1063,6 +1082,10 @@ check_bugs (void)
 static int __init run_dmi_scan(void)
 {
 	dmi_scan_machine();
+<<<<<<< HEAD
+=======
+	dmi_memdev_walk();
+>>>>>>> v3.18
 	dmi_set_dump_stack_arch_desc();
 	return 0;
 }

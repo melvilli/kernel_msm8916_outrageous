@@ -1490,6 +1490,10 @@ static struct v4l2_ctrl *cx2341x_ctrl_new_custom(struct v4l2_ctrl_handler *hdl,
 {
 	struct v4l2_ctrl_config cfg;
 
+<<<<<<< HEAD
+=======
+	memset(&cfg, 0, sizeof(cfg));
+>>>>>>> v3.18
 	cx2341x_ctrl_fill(id, &cfg.name, &cfg.type, &min, &max, &step, &def, &cfg.flags);
 	cfg.ops = &cx2341x_ops;
 	cfg.id = id;

@@ -26,6 +26,10 @@
 #include <linux/interrupt.h>
 #include <linux/mfd/max8925.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
+=======
+#include <linux/device.h>
+>>>>>>> v3.18
 
 #define SW_INPUT		(1 << 7)	/* 0/1 -- up/down */
 #define HARDRESET_EN		(1 << 7)
@@ -81,12 +85,23 @@ static int max8925_onkey_probe(struct platform_device *pdev)
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 	info = kzalloc(sizeof(struct max8925_onkey_info), GFP_KERNEL);
 	input = input_allocate_device();
 	if (!info || !input) {
 		error = -ENOMEM;
 		goto err_free_mem;
 	}
+=======
+	info = devm_kzalloc(&pdev->dev, sizeof(struct max8925_onkey_info),
+			    GFP_KERNEL);
+	if (!info)
+		return -ENOMEM;
+
+	input = devm_input_allocate_device(&pdev->dev);
+	if (!input)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	info->idev = input;
 	info->i2c = chip->i2c;
@@ -100,6 +115,7 @@ static int max8925_onkey_probe(struct platform_device *pdev)
 	input->dev.parent = &pdev->dev;
 	input_set_capability(input, EV_KEY, KEY_POWER);
 
+<<<<<<< HEAD
 	error = request_threaded_irq(irq[0], NULL, max8925_onkey_handler,
 				     IRQF_ONESHOT, "onkey-down", info);
 	if (error < 0) {
@@ -114,18 +130,41 @@ static int max8925_onkey_probe(struct platform_device *pdev)
 		dev_err(chip->dev, "Failed to request IRQ: #%d: %d\n",
 			irq[1], error);
 		goto err_free_irq0;
+=======
+	error = devm_request_threaded_irq(&pdev->dev, irq[0], NULL,
+					  max8925_onkey_handler, IRQF_ONESHOT,
+					  "onkey-down", info);
+	if (error < 0) {
+		dev_err(chip->dev, "Failed to request IRQ: #%d: %d\n",
+			irq[0], error);
+		return error;
+	}
+
+	error = devm_request_threaded_irq(&pdev->dev, irq[1], NULL,
+					  max8925_onkey_handler, IRQF_ONESHOT,
+					  "onkey-up", info);
+	if (error < 0) {
+		dev_err(chip->dev, "Failed to request IRQ: #%d: %d\n",
+			irq[1], error);
+		return error;
+>>>>>>> v3.18
 	}
 
 	error = input_register_device(info->idev);
 	if (error) {
 		dev_err(chip->dev, "Can't register input device: %d\n", error);
+<<<<<<< HEAD
 		goto err_free_irq1;
+=======
+		return error;
+>>>>>>> v3.18
 	}
 
 	platform_set_drvdata(pdev, info);
 	device_init_wakeup(&pdev->dev, 1);
 
 	return 0;
+<<<<<<< HEAD
 
 err_free_irq1:
 	free_irq(irq[1], info);
@@ -151,6 +190,8 @@ static int max8925_onkey_remove(struct platform_device *pdev)
 	platform_set_drvdata(pdev, NULL);
 
 	return 0;
+=======
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_PM_SLEEP
@@ -192,7 +233,10 @@ static struct platform_driver max8925_onkey_driver = {
 		.pm	= &max8925_onkey_pm_ops,
 	},
 	.probe		= max8925_onkey_probe,
+<<<<<<< HEAD
 	.remove		= max8925_onkey_remove,
+=======
+>>>>>>> v3.18
 };
 module_platform_driver(max8925_onkey_driver);
 

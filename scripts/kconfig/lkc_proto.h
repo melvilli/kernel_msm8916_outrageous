@@ -14,6 +14,10 @@ P(conf_set_message_callback, void,(void (*fn)(const char *fmt, va_list ap)));
 /* menu.c */
 P(rootmenu,struct menu,);
 
+<<<<<<< HEAD
+=======
+P(menu_is_empty, bool, (struct menu *menu));
+>>>>>>> v3.18
 P(menu_is_visible, bool, (struct menu *menu));
 P(menu_has_prompt, bool, (struct menu *menu));
 P(menu_get_prompt,const char *,(struct menu *menu));

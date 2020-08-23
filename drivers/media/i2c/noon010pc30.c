@@ -19,7 +19,10 @@
 #include <linux/slab.h>
 #include <linux/regulator/consumer.h>
 #include <media/noon010pc30.h>
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 #include <linux/videodev2.h>
 #include <linux/module.h>
 #include <media/v4l2-ctrls.h>
@@ -555,6 +558,10 @@ static int noon010_set_fmt(struct v4l2_subdev *sd, struct v4l2_subdev_fh *fh,
 	nf = noon010_try_fmt(sd, &fmt->format);
 	noon010_try_frame_size(&fmt->format, &size);
 	fmt->format.colorspace = V4L2_COLORSPACE_JPEG;
+<<<<<<< HEAD
+=======
+	fmt->format.field = V4L2_FIELD_NONE;
+>>>>>>> v3.18
 
 	if (fmt->which == V4L2_SUBDEV_FORMAT_TRY) {
 		if (fh) {
@@ -712,7 +719,11 @@ static int noon010_probe(struct i2c_client *client,
 		return -EIO;
 	}
 
+<<<<<<< HEAD
 	info = kzalloc(sizeof(*info), GFP_KERNEL);
+=======
+	info = devm_kzalloc(&client->dev, sizeof(*info), GFP_KERNEL);
+>>>>>>> v3.18
 	if (!info)
 		return -ENOMEM;
 
@@ -746,17 +757,27 @@ static int noon010_probe(struct i2c_client *client,
 	info->curr_win		= &noon010_sizes[0];
 
 	if (gpio_is_valid(pdata->gpio_nreset)) {
+<<<<<<< HEAD
 		ret = gpio_request(pdata->gpio_nreset, "NOON010PC30 NRST");
+=======
+		ret = devm_gpio_request_one(&client->dev, pdata->gpio_nreset,
+					    GPIOF_OUT_INIT_LOW,
+					    "NOON010PC30 NRST");
+>>>>>>> v3.18
 		if (ret) {
 			dev_err(&client->dev, "GPIO request error: %d\n", ret);
 			goto np_err;
 		}
 		info->gpio_nreset = pdata->gpio_nreset;
+<<<<<<< HEAD
 		gpio_direction_output(info->gpio_nreset, 0);
+=======
+>>>>>>> v3.18
 		gpio_export(info->gpio_nreset, 0);
 	}
 
 	if (gpio_is_valid(pdata->gpio_nstby)) {
+<<<<<<< HEAD
 		ret = gpio_request(pdata->gpio_nstby, "NOON010PC30 NSTBY");
 		if (ret) {
 			dev_err(&client->dev, "GPIO request error: %d\n", ret);
@@ -764,27 +785,49 @@ static int noon010_probe(struct i2c_client *client,
 		}
 		info->gpio_nstby = pdata->gpio_nstby;
 		gpio_direction_output(info->gpio_nstby, 0);
+=======
+		ret = devm_gpio_request_one(&client->dev, pdata->gpio_nstby,
+					    GPIOF_OUT_INIT_LOW,
+					    "NOON010PC30 NSTBY");
+		if (ret) {
+			dev_err(&client->dev, "GPIO request error: %d\n", ret);
+			goto np_err;
+		}
+		info->gpio_nstby = pdata->gpio_nstby;
+>>>>>>> v3.18
 		gpio_export(info->gpio_nstby, 0);
 	}
 
 	for (i = 0; i < NOON010_NUM_SUPPLIES; i++)
 		info->supply[i].supply = noon010_supply_name[i];
 
+<<<<<<< HEAD
 	ret = regulator_bulk_get(&client->dev, NOON010_NUM_SUPPLIES,
 				 info->supply);
 	if (ret)
 		goto np_reg_err;
+=======
+	ret = devm_regulator_bulk_get(&client->dev, NOON010_NUM_SUPPLIES,
+				 info->supply);
+	if (ret)
+		goto np_err;
+>>>>>>> v3.18
 
 	info->pad.flags = MEDIA_PAD_FL_SOURCE;
 	sd->entity.type = MEDIA_ENT_T_V4L2_SUBDEV_SENSOR;
 	ret = media_entity_init(&sd->entity, 1, &info->pad, 0);
 	if (ret < 0)
+<<<<<<< HEAD
 		goto np_me_err;
+=======
+		goto np_err;
+>>>>>>> v3.18
 
 	ret = noon010_detect(client, info);
 	if (!ret)
 		return 0;
 
+<<<<<<< HEAD
 np_me_err:
 	regulator_bulk_free(NOON010_NUM_SUPPLIES, info->supply);
 np_reg_err:
@@ -797,6 +840,11 @@ np_err:
 	v4l2_ctrl_handler_free(&info->hdl);
 	v4l2_device_unregister_subdev(sd);
 	kfree(info);
+=======
+np_err:
+	v4l2_ctrl_handler_free(&info->hdl);
+	v4l2_device_unregister_subdev(sd);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -807,6 +855,7 @@ static int noon010_remove(struct i2c_client *client)
 
 	v4l2_device_unregister_subdev(sd);
 	v4l2_ctrl_handler_free(&info->hdl);
+<<<<<<< HEAD
 
 	regulator_bulk_free(NOON010_NUM_SUPPLIES, info->supply);
 
@@ -818,6 +867,10 @@ static int noon010_remove(struct i2c_client *client)
 
 	media_entity_cleanup(&sd->entity);
 	kfree(info);
+=======
+	media_entity_cleanup(&sd->entity);
+
+>>>>>>> v3.18
 	return 0;
 }
 

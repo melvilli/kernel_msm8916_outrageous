@@ -15,7 +15,10 @@
 #include <linux/kernel.h>
 #include <linux/errno.h>
 #include <linux/isapnp.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/interrupt.h>
 #include <linux/io.h>
 #include <linux/platform_device.h>
@@ -78,6 +81,11 @@ static unsigned char version[] = "ax88796.c: Copyright 2005,2007 Simtec Electron
 
 #define AX_GPOC_PPDSET	BIT(6)
 
+<<<<<<< HEAD
+=======
+static u32 ax_msg_enable;
+
+>>>>>>> v3.18
 /* device private data */
 
 struct ax_device {
@@ -147,8 +155,12 @@ static void ax_reset_8390(struct net_device *dev)
 	unsigned long reset_start_time = jiffies;
 	void __iomem *addr = (void __iomem *)dev->base_addr;
 
+<<<<<<< HEAD
 	if (ei_debug > 1)
 		netdev_dbg(dev, "resetting the 8390 t=%ld\n", jiffies);
+=======
+	netif_dbg(ei_local, hw, dev, "resetting the 8390 t=%ld...\n", jiffies);
+>>>>>>> v3.18
 
 	ei_outb(ei_inb(addr + NE_RESET), addr + NE_RESET);
 
@@ -157,7 +169,11 @@ static void ax_reset_8390(struct net_device *dev)
 
 	/* This check _should_not_ be necessary, omit eventually. */
 	while ((ei_inb(addr + EN0_ISR) & ENISR_RESET) == 0) {
+<<<<<<< HEAD
 		if (jiffies - reset_start_time > 2 * HZ / 100) {
+=======
+		if (time_after(jiffies, reset_start_time + 2 * HZ / 100)) {
+>>>>>>> v3.18
 			netdev_warn(dev, "%s: did not complete.\n", __func__);
 			break;
 		}
@@ -293,7 +309,11 @@ static void ax_block_output(struct net_device *dev, int count,
 	dma_start = jiffies;
 
 	while ((ei_inb(nic_base + EN0_ISR) & ENISR_RDC) == 0) {
+<<<<<<< HEAD
 		if (jiffies - dma_start > 2 * HZ / 100) {		/* 20ms */
+=======
+		if (time_after(jiffies, dma_start + 2 * HZ / 100)) { /* 20ms */
+>>>>>>> v3.18
 			netdev_warn(dev, "timeout waiting for Tx RDC.\n");
 			ax_reset_8390(dev);
 			ax_NS8390_init(dev, 1);
@@ -496,12 +516,34 @@ static int ax_set_settings(struct net_device *dev, struct ethtool_cmd *cmd)
 	return phy_ethtool_sset(phy_dev, cmd);
 }
 
+<<<<<<< HEAD
+=======
+static u32 ax_get_msglevel(struct net_device *dev)
+{
+	struct ei_device *ei_local = netdev_priv(dev);
+
+	return ei_local->msg_enable;
+}
+
+static void ax_set_msglevel(struct net_device *dev, u32 v)
+{
+	struct ei_device *ei_local = netdev_priv(dev);
+
+	ei_local->msg_enable = v;
+}
+
+>>>>>>> v3.18
 static const struct ethtool_ops ax_ethtool_ops = {
 	.get_drvinfo		= ax_get_drvinfo,
 	.get_settings		= ax_get_settings,
 	.set_settings		= ax_set_settings,
 	.get_link		= ethtool_op_get_link,
 	.get_ts_info		= ethtool_op_get_ts_info,
+<<<<<<< HEAD
+=======
+	.get_msglevel		= ax_get_msglevel,
+	.set_msglevel		= ax_set_msglevel,
+>>>>>>> v3.18
 };
 
 #ifdef CONFIG_AX88796_93CX6
@@ -702,12 +744,20 @@ static int ax_init_dev(struct net_device *dev)
 			for (i = 0; i < 16; i++)
 				SA_prom[i] = SA_prom[i+i];
 
+<<<<<<< HEAD
 		memcpy(dev->dev_addr, SA_prom, 6);
+=======
+		memcpy(dev->dev_addr, SA_prom, ETH_ALEN);
+>>>>>>> v3.18
 	}
 
 #ifdef CONFIG_AX88796_93CX6
 	if (ax->plat->flags & AXFLG_HAS_93CX6) {
+<<<<<<< HEAD
 		unsigned char mac_addr[6];
+=======
+		unsigned char mac_addr[ETH_ALEN];
+>>>>>>> v3.18
 		struct eeprom_93cx6 eeprom;
 
 		eeprom.data = ei_local;
@@ -719,7 +769,11 @@ static int ax_init_dev(struct net_device *dev)
 				       (__le16 __force *)mac_addr,
 				       sizeof(mac_addr) >> 1);
 
+<<<<<<< HEAD
 		memcpy(dev->dev_addr, mac_addr, 6);
+=======
+		memcpy(dev->dev_addr, mac_addr, ETH_ALEN);
+>>>>>>> v3.18
 	}
 #endif
 	if (ax->plat->wordlength == 2) {
@@ -763,6 +817,10 @@ static int ax_init_dev(struct net_device *dev)
 	ei_local->block_output = &ax_block_output;
 	ei_local->get_8390_hdr = &ax_get_8390_hdr;
 	ei_local->priv = 0;
+<<<<<<< HEAD
+=======
+	ei_local->msg_enable = ax_msg_enable;
+>>>>>>> v3.18
 
 	dev->netdev_ops = &ax_netdev_ops;
 	dev->ethtool_ops = &ax_ethtool_ops;
@@ -840,7 +898,11 @@ static int ax_probe(struct platform_device *pdev)
 	ei_local = netdev_priv(dev);
 	ax = to_ax_dev(dev);
 
+<<<<<<< HEAD
 	ax->plat = pdev->dev.platform_data;
+=======
+	ax->plat = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	platform_set_drvdata(pdev, dev);
 
 	ei_local->rxcr_base = ax->plat->rcr_val;

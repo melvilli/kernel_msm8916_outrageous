@@ -47,6 +47,7 @@ const struct x86_cpu_id *x86_match_cpu(const struct x86_cpu_id *match)
 	return NULL;
 }
 EXPORT_SYMBOL(x86_match_cpu);
+<<<<<<< HEAD
 
 ssize_t arch_print_cpu_modalias(struct device *dev,
 				struct device_attribute *attr,
@@ -89,3 +90,5 @@ int arch_cpu_uevent(struct device *dev, struct kobj_uevent_env *env)
 	}
 	return 0;
 }
+=======
+>>>>>>> v3.18

@@ -25,14 +25,21 @@
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/device.h>
+<<<<<<< HEAD
 #include <linux/irq.h>
+=======
+>>>>>>> v3.18
 #include <linux/interrupt.h>
 #include <linux/sysctl.h>
 #include <linux/slab.h>
 #include <linux/acpi.h>
+<<<<<<< HEAD
 #include <acpi/acpi_bus.h>
 #include <linux/completion.h>
 #include <linux/cpu.h>
+=======
+#include <linux/completion.h>
+>>>>>>> v3.18
 #include <linux/hyperv.h>
 #include <linux/kernel_stat.h>
 #include <asm/hyperv.h>
@@ -40,13 +47,17 @@
 #include <asm/mshyperv.h>
 #include "hyperv_vmbus.h"
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 static struct acpi_device  *hv_acpi_dev;
 
 static struct tasklet_struct msg_dpc;
 static struct completion probe_event;
 static int irq;
 
+<<<<<<< HEAD
 struct hv_device_info {
 	u32 chn_id;
 	u32 chn_state;
@@ -64,6 +75,13 @@ struct hv_device_info {
 	struct hv_dev_port_info inbound;
 	struct hv_dev_port_info outbound;
 };
+=======
+struct resource hyperv_mmio = {
+	.name  = "hyperv mmio",
+	.flags = IORESOURCE_MEM,
+};
+EXPORT_SYMBOL_GPL(hyperv_mmio);
+>>>>>>> v3.18
 
 static int vmbus_exists(void)
 {
@@ -73,6 +91,7 @@ static int vmbus_exists(void)
 	return 0;
 }
 
+<<<<<<< HEAD
 
 static void get_channel_info(struct hv_device *device,
 			     struct hv_device_info *info)
@@ -236,6 +255,363 @@ static struct device_attribute vmbus_device_attrs[] = {
 	__ATTR_NULL
 };
 
+=======
+#define VMBUS_ALIAS_LEN ((sizeof((struct hv_vmbus_device_id *)0)->guid) * 2)
+static void print_alias_name(struct hv_device *hv_dev, char *alias_name)
+{
+	int i;
+	for (i = 0; i < VMBUS_ALIAS_LEN; i += 2)
+		sprintf(&alias_name[i], "%02x", hv_dev->dev_type.b[i/2]);
+}
+
+static u8 channel_monitor_group(struct vmbus_channel *channel)
+{
+	return (u8)channel->offermsg.monitorid / 32;
+}
+
+static u8 channel_monitor_offset(struct vmbus_channel *channel)
+{
+	return (u8)channel->offermsg.monitorid % 32;
+}
+
+static u32 channel_pending(struct vmbus_channel *channel,
+			   struct hv_monitor_page *monitor_page)
+{
+	u8 monitor_group = channel_monitor_group(channel);
+	return monitor_page->trigger_group[monitor_group].pending;
+}
+
+static u32 channel_latency(struct vmbus_channel *channel,
+			   struct hv_monitor_page *monitor_page)
+{
+	u8 monitor_group = channel_monitor_group(channel);
+	u8 monitor_offset = channel_monitor_offset(channel);
+	return monitor_page->latency[monitor_group][monitor_offset];
+}
+
+static u32 channel_conn_id(struct vmbus_channel *channel,
+			   struct hv_monitor_page *monitor_page)
+{
+	u8 monitor_group = channel_monitor_group(channel);
+	u8 monitor_offset = channel_monitor_offset(channel);
+	return monitor_page->parameter[monitor_group][monitor_offset].connectionid.u.id;
+}
+
+static ssize_t id_show(struct device *dev, struct device_attribute *dev_attr,
+		       char *buf)
+{
+	struct hv_device *hv_dev = device_to_hv_device(dev);
+
+	if (!hv_dev->channel)
+		return -ENODEV;
+	return sprintf(buf, "%d\n", hv_dev->channel->offermsg.child_relid);
+}
+static DEVICE_ATTR_RO(id);
+
+static ssize_t state_show(struct device *dev, struct device_attribute *dev_attr,
+			  char *buf)
+{
+	struct hv_device *hv_dev = device_to_hv_device(dev);
+
+	if (!hv_dev->channel)
+		return -ENODEV;
+	return sprintf(buf, "%d\n", hv_dev->channel->state);
+}
+static DEVICE_ATTR_RO(state);
+
+static ssize_t monitor_id_show(struct device *dev,
+			       struct device_attribute *dev_attr, char *buf)
+{
+	struct hv_device *hv_dev = device_to_hv_device(dev);
+
+	if (!hv_dev->channel)
+		return -ENODEV;
+	return sprintf(buf, "%d\n", hv_dev->channel->offermsg.monitorid);
+}
+static DEVICE_ATTR_RO(monitor_id);
+
+static ssize_t class_id_show(struct device *dev,
+			       struct device_attribute *dev_attr, char *buf)
+{
+	struct hv_device *hv_dev = device_to_hv_device(dev);
+
+	if (!hv_dev->channel)
+		return -ENODEV;
+	return sprintf(buf, "{%pUl}\n",
+		       hv_dev->channel->offermsg.offer.if_type.b);
+}
+static DEVICE_ATTR_RO(class_id);
+
+static ssize_t device_id_show(struct device *dev,
+			      struct device_attribute *dev_attr, char *buf)
+{
+	struct hv_device *hv_dev = device_to_hv_device(dev);
+
+	if (!hv_dev->channel)
+		return -ENODEV;
+	return sprintf(buf, "{%pUl}\n",
+		       hv_dev->channel->offermsg.offer.if_instance.b);
+}
+static DEVICE_ATTR_RO(device_id);
+
+static ssize_t modalias_show(struct device *dev,
+			     struct device_attribute *dev_attr, char *buf)
+{
+	struct hv_device *hv_dev = device_to_hv_device(dev);
+	char alias_name[VMBUS_ALIAS_LEN + 1];
+
+	print_alias_name(hv_dev, alias_name);
+	return sprintf(buf, "vmbus:%s\n", alias_name);
+}
+static DEVICE_ATTR_RO(modalias);
+
+static ssize_t server_monitor_pending_show(struct device *dev,
+					   struct device_attribute *dev_attr,
+					   char *buf)
+{
+	struct hv_device *hv_dev = device_to_hv_device(dev);
+
+	if (!hv_dev->channel)
+		return -ENODEV;
+	return sprintf(buf, "%d\n",
+		       channel_pending(hv_dev->channel,
+				       vmbus_connection.monitor_pages[1]));
+}
+static DEVICE_ATTR_RO(server_monitor_pending);
+
+static ssize_t client_monitor_pending_show(struct device *dev,
+					   struct device_attribute *dev_attr,
+					   char *buf)
+{
+	struct hv_device *hv_dev = device_to_hv_device(dev);
+
+	if (!hv_dev->channel)
+		return -ENODEV;
+	return sprintf(buf, "%d\n",
+		       channel_pending(hv_dev->channel,
+				       vmbus_connection.monitor_pages[1]));
+}
+static DEVICE_ATTR_RO(client_monitor_pending);
+
+static ssize_t server_monitor_latency_show(struct device *dev,
+					   struct device_attribute *dev_attr,
+					   char *buf)
+{
+	struct hv_device *hv_dev = device_to_hv_device(dev);
+
+	if (!hv_dev->channel)
+		return -ENODEV;
+	return sprintf(buf, "%d\n",
+		       channel_latency(hv_dev->channel,
+				       vmbus_connection.monitor_pages[0]));
+}
+static DEVICE_ATTR_RO(server_monitor_latency);
+
+static ssize_t client_monitor_latency_show(struct device *dev,
+					   struct device_attribute *dev_attr,
+					   char *buf)
+{
+	struct hv_device *hv_dev = device_to_hv_device(dev);
+
+	if (!hv_dev->channel)
+		return -ENODEV;
+	return sprintf(buf, "%d\n",
+		       channel_latency(hv_dev->channel,
+				       vmbus_connection.monitor_pages[1]));
+}
+static DEVICE_ATTR_RO(client_monitor_latency);
+
+static ssize_t server_monitor_conn_id_show(struct device *dev,
+					   struct device_attribute *dev_attr,
+					   char *buf)
+{
+	struct hv_device *hv_dev = device_to_hv_device(dev);
+
+	if (!hv_dev->channel)
+		return -ENODEV;
+	return sprintf(buf, "%d\n",
+		       channel_conn_id(hv_dev->channel,
+				       vmbus_connection.monitor_pages[0]));
+}
+static DEVICE_ATTR_RO(server_monitor_conn_id);
+
+static ssize_t client_monitor_conn_id_show(struct device *dev,
+					   struct device_attribute *dev_attr,
+					   char *buf)
+{
+	struct hv_device *hv_dev = device_to_hv_device(dev);
+
+	if (!hv_dev->channel)
+		return -ENODEV;
+	return sprintf(buf, "%d\n",
+		       channel_conn_id(hv_dev->channel,
+				       vmbus_connection.monitor_pages[1]));
+}
+static DEVICE_ATTR_RO(client_monitor_conn_id);
+
+static ssize_t out_intr_mask_show(struct device *dev,
+				  struct device_attribute *dev_attr, char *buf)
+{
+	struct hv_device *hv_dev = device_to_hv_device(dev);
+	struct hv_ring_buffer_debug_info outbound;
+
+	if (!hv_dev->channel)
+		return -ENODEV;
+	hv_ringbuffer_get_debuginfo(&hv_dev->channel->outbound, &outbound);
+	return sprintf(buf, "%d\n", outbound.current_interrupt_mask);
+}
+static DEVICE_ATTR_RO(out_intr_mask);
+
+static ssize_t out_read_index_show(struct device *dev,
+				   struct device_attribute *dev_attr, char *buf)
+{
+	struct hv_device *hv_dev = device_to_hv_device(dev);
+	struct hv_ring_buffer_debug_info outbound;
+
+	if (!hv_dev->channel)
+		return -ENODEV;
+	hv_ringbuffer_get_debuginfo(&hv_dev->channel->outbound, &outbound);
+	return sprintf(buf, "%d\n", outbound.current_read_index);
+}
+static DEVICE_ATTR_RO(out_read_index);
+
+static ssize_t out_write_index_show(struct device *dev,
+				    struct device_attribute *dev_attr,
+				    char *buf)
+{
+	struct hv_device *hv_dev = device_to_hv_device(dev);
+	struct hv_ring_buffer_debug_info outbound;
+
+	if (!hv_dev->channel)
+		return -ENODEV;
+	hv_ringbuffer_get_debuginfo(&hv_dev->channel->outbound, &outbound);
+	return sprintf(buf, "%d\n", outbound.current_write_index);
+}
+static DEVICE_ATTR_RO(out_write_index);
+
+static ssize_t out_read_bytes_avail_show(struct device *dev,
+					 struct device_attribute *dev_attr,
+					 char *buf)
+{
+	struct hv_device *hv_dev = device_to_hv_device(dev);
+	struct hv_ring_buffer_debug_info outbound;
+
+	if (!hv_dev->channel)
+		return -ENODEV;
+	hv_ringbuffer_get_debuginfo(&hv_dev->channel->outbound, &outbound);
+	return sprintf(buf, "%d\n", outbound.bytes_avail_toread);
+}
+static DEVICE_ATTR_RO(out_read_bytes_avail);
+
+static ssize_t out_write_bytes_avail_show(struct device *dev,
+					  struct device_attribute *dev_attr,
+					  char *buf)
+{
+	struct hv_device *hv_dev = device_to_hv_device(dev);
+	struct hv_ring_buffer_debug_info outbound;
+
+	if (!hv_dev->channel)
+		return -ENODEV;
+	hv_ringbuffer_get_debuginfo(&hv_dev->channel->outbound, &outbound);
+	return sprintf(buf, "%d\n", outbound.bytes_avail_towrite);
+}
+static DEVICE_ATTR_RO(out_write_bytes_avail);
+
+static ssize_t in_intr_mask_show(struct device *dev,
+				 struct device_attribute *dev_attr, char *buf)
+{
+	struct hv_device *hv_dev = device_to_hv_device(dev);
+	struct hv_ring_buffer_debug_info inbound;
+
+	if (!hv_dev->channel)
+		return -ENODEV;
+	hv_ringbuffer_get_debuginfo(&hv_dev->channel->inbound, &inbound);
+	return sprintf(buf, "%d\n", inbound.current_interrupt_mask);
+}
+static DEVICE_ATTR_RO(in_intr_mask);
+
+static ssize_t in_read_index_show(struct device *dev,
+				  struct device_attribute *dev_attr, char *buf)
+{
+	struct hv_device *hv_dev = device_to_hv_device(dev);
+	struct hv_ring_buffer_debug_info inbound;
+
+	if (!hv_dev->channel)
+		return -ENODEV;
+	hv_ringbuffer_get_debuginfo(&hv_dev->channel->inbound, &inbound);
+	return sprintf(buf, "%d\n", inbound.current_read_index);
+}
+static DEVICE_ATTR_RO(in_read_index);
+
+static ssize_t in_write_index_show(struct device *dev,
+				   struct device_attribute *dev_attr, char *buf)
+{
+	struct hv_device *hv_dev = device_to_hv_device(dev);
+	struct hv_ring_buffer_debug_info inbound;
+
+	if (!hv_dev->channel)
+		return -ENODEV;
+	hv_ringbuffer_get_debuginfo(&hv_dev->channel->inbound, &inbound);
+	return sprintf(buf, "%d\n", inbound.current_write_index);
+}
+static DEVICE_ATTR_RO(in_write_index);
+
+static ssize_t in_read_bytes_avail_show(struct device *dev,
+					struct device_attribute *dev_attr,
+					char *buf)
+{
+	struct hv_device *hv_dev = device_to_hv_device(dev);
+	struct hv_ring_buffer_debug_info inbound;
+
+	if (!hv_dev->channel)
+		return -ENODEV;
+	hv_ringbuffer_get_debuginfo(&hv_dev->channel->inbound, &inbound);
+	return sprintf(buf, "%d\n", inbound.bytes_avail_toread);
+}
+static DEVICE_ATTR_RO(in_read_bytes_avail);
+
+static ssize_t in_write_bytes_avail_show(struct device *dev,
+					 struct device_attribute *dev_attr,
+					 char *buf)
+{
+	struct hv_device *hv_dev = device_to_hv_device(dev);
+	struct hv_ring_buffer_debug_info inbound;
+
+	if (!hv_dev->channel)
+		return -ENODEV;
+	hv_ringbuffer_get_debuginfo(&hv_dev->channel->inbound, &inbound);
+	return sprintf(buf, "%d\n", inbound.bytes_avail_towrite);
+}
+static DEVICE_ATTR_RO(in_write_bytes_avail);
+
+/* Set up per device attributes in /sys/bus/vmbus/devices/<bus device> */
+static struct attribute *vmbus_attrs[] = {
+	&dev_attr_id.attr,
+	&dev_attr_state.attr,
+	&dev_attr_monitor_id.attr,
+	&dev_attr_class_id.attr,
+	&dev_attr_device_id.attr,
+	&dev_attr_modalias.attr,
+	&dev_attr_server_monitor_pending.attr,
+	&dev_attr_client_monitor_pending.attr,
+	&dev_attr_server_monitor_latency.attr,
+	&dev_attr_client_monitor_latency.attr,
+	&dev_attr_server_monitor_conn_id.attr,
+	&dev_attr_client_monitor_conn_id.attr,
+	&dev_attr_out_intr_mask.attr,
+	&dev_attr_out_read_index.attr,
+	&dev_attr_out_write_index.attr,
+	&dev_attr_out_read_bytes_avail.attr,
+	&dev_attr_out_write_bytes_avail.attr,
+	&dev_attr_in_intr_mask.attr,
+	&dev_attr_in_read_index.attr,
+	&dev_attr_in_write_index.attr,
+	&dev_attr_in_read_bytes_avail.attr,
+	&dev_attr_in_write_bytes_avail.attr,
+	NULL,
+};
+ATTRIBUTE_GROUPS(vmbus);
+>>>>>>> v3.18
 
 /*
  * vmbus_uevent - add uevent for our device
@@ -259,7 +635,11 @@ static int vmbus_uevent(struct device *device, struct kobj_uevent_env *env)
 	return ret;
 }
 
+<<<<<<< HEAD
 static uuid_le null_guid;
+=======
+static const uuid_le null_guid;
+>>>>>>> v3.18
 
 static inline bool is_null_guid(const __u8 *guid)
 {
@@ -274,7 +654,11 @@ static inline bool is_null_guid(const __u8 *guid)
  */
 static const struct hv_vmbus_device_id *hv_vmbus_get_id(
 					const struct hv_vmbus_device_id *id,
+<<<<<<< HEAD
 					__u8 *guid)
+=======
+					const __u8 *guid)
+>>>>>>> v3.18
 {
 	for (; !is_null_guid(id->guid); id++)
 		if (!memcmp(&id->guid, guid, sizeof(uuid_le)))
@@ -384,12 +768,18 @@ static struct bus_type  hv_bus = {
 	.remove =		vmbus_remove,
 	.probe =		vmbus_probe,
 	.uevent =		vmbus_uevent,
+<<<<<<< HEAD
 	.dev_attrs =	vmbus_device_attrs,
 };
 
 static const char *driver_name = "hyperv";
 
 
+=======
+	.dev_groups =		vmbus_groups,
+};
+
+>>>>>>> v3.18
 struct onmessage_work_context {
 	struct work_struct work;
 	struct hv_message msg;
@@ -448,7 +838,11 @@ static void vmbus_on_msg_dpc(unsigned long data)
 	}
 }
 
+<<<<<<< HEAD
 static irqreturn_t vmbus_isr(int irq, void *dev_id)
+=======
+static void vmbus_isr(void)
+>>>>>>> v3.18
 {
 	int cpu = smp_processor_id();
 	void *page_addr;
@@ -458,7 +852,11 @@ static irqreturn_t vmbus_isr(int irq, void *dev_id)
 
 	page_addr = hv_context.synic_event_page[cpu];
 	if (page_addr == NULL)
+<<<<<<< HEAD
 		return IRQ_NONE;
+=======
+		return;
+>>>>>>> v3.18
 
 	event = (union hv_synic_event_flags *)page_addr +
 					 VMBUS_MESSAGE_SINT;
@@ -494,6 +892,7 @@ static irqreturn_t vmbus_isr(int irq, void *dev_id)
 	msg = (struct hv_message *)page_addr + VMBUS_MESSAGE_SINT;
 
 	/* Check if there are actual msgs to be processed */
+<<<<<<< HEAD
 	if (msg->header.message_type != HVMSG_NONE) {
 		handled = true;
 		tasklet_schedule(&msg_dpc);
@@ -552,6 +951,13 @@ static void hv_cpu_hotplug_quirk(bool vmbus_loaded)
 #endif
 
 /*
+=======
+	if (msg->header.message_type != HVMSG_NONE)
+		tasklet_schedule(&msg_dpc);
+}
+
+/*
+>>>>>>> v3.18
  * vmbus_bus_init -Main vmbus driver initialization routine.
  *
  * Here, we
@@ -577,6 +983,7 @@ static int vmbus_bus_init(int irq)
 	if (ret)
 		goto err_cleanup;
 
+<<<<<<< HEAD
 	ret = request_irq(irq, vmbus_isr, 0, driver_name, hv_acpi_dev);
 
 	if (ret != 0) {
@@ -597,6 +1004,13 @@ static int vmbus_bus_init(int irq)
 	 */
 	hv_register_vmbus_handler(irq, vmbus_isr);
 
+=======
+	hv_setup_vmbus_irq(vmbus_isr);
+
+	ret = hv_synic_alloc();
+	if (ret)
+		goto err_alloc;
+>>>>>>> v3.18
 	/*
 	 * Initialize the per-cpu interrupt state and
 	 * connect to the host.
@@ -604,13 +1018,19 @@ static int vmbus_bus_init(int irq)
 	on_each_cpu(hv_synic_init, NULL, 1);
 	ret = vmbus_connect();
 	if (ret)
+<<<<<<< HEAD
 		goto err_irq;
 
 	hv_cpu_hotplug_quirk(true);
+=======
+		goto err_alloc;
+
+>>>>>>> v3.18
 	vmbus_request_offers();
 
 	return 0;
 
+<<<<<<< HEAD
 err_irq:
 	free_irq(irq, hv_acpi_dev);
 
@@ -619,6 +1039,16 @@ err_unregister:
 
 err_cleanup:
 	hv_cleanup(false);
+=======
+err_alloc:
+	hv_synic_free();
+	hv_remove_vmbus_irq();
+
+	bus_unregister(&hv_bus);
+
+err_cleanup:
+	hv_cleanup();
+>>>>>>> v3.18
 
 	return ret;
 }
@@ -675,9 +1105,15 @@ EXPORT_SYMBOL_GPL(vmbus_driver_unregister);
  * vmbus_device_create - Creates and registers a new child device
  * on the vmbus.
  */
+<<<<<<< HEAD
 struct hv_device *vmbus_device_create(uuid_le *type,
 					    uuid_le *instance,
 					    struct vmbus_channel *channel)
+=======
+struct hv_device *vmbus_device_create(const uuid_le *type,
+				      const uuid_le *instance,
+				      struct vmbus_channel *channel)
+>>>>>>> v3.18
 {
 	struct hv_device *child_device_obj;
 
@@ -745,6 +1181,7 @@ void vmbus_device_unregister(struct hv_device *device_obj)
 
 
 /*
+<<<<<<< HEAD
  * VMBUS is an acpi enumerated device. Get the the IRQ information
  * from DSDT.
  */
@@ -757,6 +1194,23 @@ static acpi_status vmbus_walk_resources(struct acpi_resource *res, void *irq)
 		irqp = &res->data.irq;
 
 		*((unsigned int *)irq) = irqp->interrupts[0];
+=======
+ * VMBUS is an acpi enumerated device. Get the the information we
+ * need from DSDT.
+ */
+
+static acpi_status vmbus_walk_resources(struct acpi_resource *res, void *ctx)
+{
+	switch (res->type) {
+	case ACPI_RESOURCE_TYPE_IRQ:
+		irq = res->data.irq.interrupts[0];
+		break;
+
+	case ACPI_RESOURCE_TYPE_ADDRESS64:
+		hyperv_mmio.start = res->data.address64.minimum;
+		hyperv_mmio.end = res->data.address64.maximum;
+		break;
+>>>>>>> v3.18
 	}
 
 	return AE_OK;
@@ -765,10 +1219,15 @@ static acpi_status vmbus_walk_resources(struct acpi_resource *res, void *irq)
 static int vmbus_acpi_add(struct acpi_device *device)
 {
 	acpi_status result;
+<<<<<<< HEAD
+=======
+	int ret_val = -ENODEV;
+>>>>>>> v3.18
 
 	hv_acpi_dev = device;
 
 	result = acpi_walk_resources(device->handle, METHOD_NAME__CRS,
+<<<<<<< HEAD
 					vmbus_walk_resources, &irq);
 
 	if (ACPI_FAILURE(result)) {
@@ -777,6 +1236,31 @@ static int vmbus_acpi_add(struct acpi_device *device)
 	}
 	complete(&probe_event);
 	return 0;
+=======
+					vmbus_walk_resources, NULL);
+
+	if (ACPI_FAILURE(result))
+		goto acpi_walk_err;
+	/*
+	 * The parent of the vmbus acpi device (Gen2 firmware) is the VMOD that
+	 * has the mmio ranges. Get that.
+	 */
+	if (device->parent) {
+		result = acpi_walk_resources(device->parent->handle,
+					METHOD_NAME__CRS,
+					vmbus_walk_resources, NULL);
+
+		if (ACPI_FAILURE(result))
+			goto acpi_walk_err;
+		if (hyperv_mmio.start && hyperv_mmio.end)
+			request_resource(&iomem_resource, &hyperv_mmio);
+	}
+	ret_val = 0;
+
+acpi_walk_err:
+	complete(&probe_event);
+	return ret_val;
+>>>>>>> v3.18
 }
 
 static const struct acpi_device_id vmbus_acpi_device_ids[] = {
@@ -806,7 +1290,10 @@ static int __init hv_acpi_init(void)
 	/*
 	 * Get irq resources first.
 	 */
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 	ret = acpi_bus_register_driver(&vmbus_acpi_driver);
 
 	if (ret)
@@ -837,6 +1324,7 @@ cleanup:
 
 static void __exit vmbus_exit(void)
 {
+<<<<<<< HEAD
 
 	free_irq(irq, hv_acpi_dev);
 	vmbus_free_channels();
@@ -844,11 +1332,21 @@ static void __exit vmbus_exit(void)
 	hv_cleanup(false);
 	acpi_bus_unregister_driver(&vmbus_acpi_driver);
 	hv_cpu_hotplug_quirk(false);
+=======
+	hv_remove_vmbus_irq();
+	vmbus_free_channels();
+	bus_unregister(&hv_bus);
+	hv_cleanup();
+	acpi_bus_unregister_driver(&vmbus_acpi_driver);
+>>>>>>> v3.18
 }
 
 
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
 MODULE_VERSION(HV_DRV_VERSION);
+=======
+>>>>>>> v3.18
 
 subsys_initcall(hv_acpi_init);
 module_exit(vmbus_exit);

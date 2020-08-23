@@ -254,6 +254,11 @@
 extern volatile __u8 *via1,*via2;
 extern int rbv_present,via_alt_mapping;
 
+<<<<<<< HEAD
+=======
+struct irq_desc;
+
+>>>>>>> v3.18
 extern void via_register_interrupts(void);
 extern void via_irq_enable(int);
 extern void via_irq_disable(int);

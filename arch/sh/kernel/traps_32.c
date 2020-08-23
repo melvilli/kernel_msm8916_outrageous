@@ -594,9 +594,13 @@ int is_dsp_inst(struct pt_regs *regs)
 #endif /* CONFIG_SH_DSP */
 
 #ifdef CONFIG_CPU_SH2A
+<<<<<<< HEAD
 asmlinkage void do_divide_error(unsigned long r4, unsigned long r5,
 				unsigned long r6, unsigned long r7,
 				struct pt_regs __regs)
+=======
+asmlinkage void do_divide_error(unsigned long r4)
+>>>>>>> v3.18
 {
 	siginfo_t info;
 
@@ -613,11 +617,17 @@ asmlinkage void do_divide_error(unsigned long r4, unsigned long r5,
 }
 #endif
 
+<<<<<<< HEAD
 asmlinkage void do_reserved_inst(unsigned long r4, unsigned long r5,
 				unsigned long r6, unsigned long r7,
 				struct pt_regs __regs)
 {
 	struct pt_regs *regs = RELOC_HIDE(&__regs, 0);
+=======
+asmlinkage void do_reserved_inst(void)
+{
+	struct pt_regs *regs = current_pt_regs();
+>>>>>>> v3.18
 	unsigned long error_code;
 	struct task_struct *tsk = current;
 
@@ -701,11 +711,17 @@ static int emulate_branch(unsigned short inst, struct pt_regs *regs)
 }
 #endif
 
+<<<<<<< HEAD
 asmlinkage void do_illegal_slot_inst(unsigned long r4, unsigned long r5,
 				unsigned long r6, unsigned long r7,
 				struct pt_regs __regs)
 {
 	struct pt_regs *regs = RELOC_HIDE(&__regs, 0);
+=======
+asmlinkage void do_illegal_slot_inst(void)
+{
+	struct pt_regs *regs = current_pt_regs();
+>>>>>>> v3.18
 	unsigned long inst;
 	struct task_struct *tsk = current;
 
@@ -730,6 +746,7 @@ asmlinkage void do_illegal_slot_inst(unsigned long r4, unsigned long r5,
 	die_if_no_fixup("illegal slot instruction", regs, inst);
 }
 
+<<<<<<< HEAD
 asmlinkage void do_exception_error(unsigned long r4, unsigned long r5,
 				   unsigned long r6, unsigned long r7,
 				   struct pt_regs __regs)
@@ -742,6 +759,17 @@ asmlinkage void do_exception_error(unsigned long r4, unsigned long r5,
 }
 
 void __cpuinit per_cpu_trap_init(void)
+=======
+asmlinkage void do_exception_error(void)
+{
+	long ex;
+
+	ex = lookup_exception_vector();
+	die_if_kernel("exception", current_pt_regs(), ex);
+}
+
+void per_cpu_trap_init(void)
+>>>>>>> v3.18
 {
 	extern void *vbr_base;
 

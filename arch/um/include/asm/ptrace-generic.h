@@ -37,7 +37,11 @@ extern int putreg(struct task_struct *child, int regno, unsigned long value);
 
 extern int arch_copy_tls(struct task_struct *new);
 extern void clear_flushed_tls(struct task_struct *task);
+<<<<<<< HEAD
 extern int syscall_trace_enter(struct pt_regs *regs);
+=======
+extern void syscall_trace_enter(struct pt_regs *regs);
+>>>>>>> v3.18
 extern void syscall_trace_leave(struct pt_regs *regs);
 
 #endif

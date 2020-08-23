@@ -4,7 +4,12 @@
 #include <linux/types.h>
 #include <linux/irqflags.h>
 
+<<<<<<< HEAD
 extern unsigned long wrong_size_cmpxchg(volatile void *ptr);
+=======
+extern unsigned long wrong_size_cmpxchg(volatile void *ptr)
+	__noreturn;
+>>>>>>> v3.18
 
 /*
  * Generic version of __cmpxchg_local (disables interrupts). Takes an unsigned

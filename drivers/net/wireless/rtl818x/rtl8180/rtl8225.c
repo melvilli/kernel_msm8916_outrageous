@@ -3,10 +3,17 @@
  * Radio tuning for RTL8225 on RTL8180
  *
  * Copyright 2007 Michael Wu <flamingice@sourmilk.net>
+<<<<<<< HEAD
  * Copyright 2007 Andrea Merello <andreamrl@tiscali.it>
  *
  * Based on the r8180 driver, which is:
  * Copyright 2005 Andrea Merello <andreamrl@tiscali.it>, et al.
+=======
+ * Copyright 2007 Andrea Merello <andrea.merello@gmail.com>
+ *
+ * Based on the r8180 driver, which is:
+ * Copyright 2005 Andrea Merello <andrea.merello@gmail.com>, et al.
+>>>>>>> v3.18
  *
  * Thanks to Realtek for their support!
  *
@@ -15,7 +22,10 @@
  * published by the Free Software Foundation.
  */
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/pci.h>
 #include <linux/delay.h>
 #include <net/mac80211.h>
@@ -283,6 +293,10 @@ static void rtl8225_rf_set_tx_power(struct ieee80211_hw *dev, int channel)
 
 	msleep(1); /* FIXME: optional? */
 
+<<<<<<< HEAD
+=======
+	/* TODO: use set_anaparam2 dev.c_func*/
+>>>>>>> v3.18
 	/* anaparam2 on */
 	rtl818x_iowrite8(priv, &priv->map->EEPROM_CMD, RTL818X_EEPROM_CMD_CONFIG);
 	reg = rtl818x_ioread8(priv, &priv->map->CONFIG3);
@@ -731,6 +745,7 @@ static void rtl8225_rf_set_channel(struct ieee80211_hw *dev,
 	msleep(10);
 }
 
+<<<<<<< HEAD
 static void rtl8225_rf_conf_erp(struct ieee80211_hw *dev,
 				struct ieee80211_bss_conf *info)
 {
@@ -751,12 +766,17 @@ static void rtl8225_rf_conf_erp(struct ieee80211_hw *dev,
 	}
 }
 
+=======
+>>>>>>> v3.18
 static const struct rtl818x_rf_ops rtl8225_ops = {
 	.name		= "rtl8225",
 	.init		= rtl8225_rf_init,
 	.stop		= rtl8225_rf_stop,
 	.set_chan	= rtl8225_rf_set_channel,
+<<<<<<< HEAD
 	.conf_erp	= rtl8225_rf_conf_erp,
+=======
+>>>>>>> v3.18
 };
 
 static const struct rtl818x_rf_ops rtl8225z2_ops = {
@@ -764,7 +784,10 @@ static const struct rtl818x_rf_ops rtl8225z2_ops = {
 	.init		= rtl8225z2_rf_init,
 	.stop		= rtl8225_rf_stop,
 	.set_chan	= rtl8225_rf_set_channel,
+<<<<<<< HEAD
 	.conf_erp	= rtl8225_rf_conf_erp,
+=======
+>>>>>>> v3.18
 };
 
 const struct rtl818x_rf_ops * rtl8180_detect_rf(struct ieee80211_hw *dev)

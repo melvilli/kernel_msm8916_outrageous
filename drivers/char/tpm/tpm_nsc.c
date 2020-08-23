@@ -232,6 +232,7 @@ static bool tpm_nsc_req_canceled(struct tpm_chip *chip, u8 status)
 	return (status == NSC_STATUS_RDY);
 }
 
+<<<<<<< HEAD
 static const struct file_operations nsc_ops = {
 	.owner = THIS_MODULE,
 	.llseek = no_llseek,
@@ -257,6 +258,9 @@ static struct attribute * nsc_attrs[] = {
 static struct attribute_group nsc_attr_grp = { .attrs = nsc_attrs };
 
 static const struct tpm_vendor_specific tpm_nsc = {
+=======
+static const struct tpm_class_ops tpm_nsc = {
+>>>>>>> v3.18
 	.recv = tpm_nsc_recv,
 	.send = tpm_nsc_send,
 	.cancel = tpm_nsc_cancel,
@@ -264,8 +268,11 @@ static const struct tpm_vendor_specific tpm_nsc = {
 	.req_complete_mask = NSC_STATUS_OBF,
 	.req_complete_val = NSC_STATUS_OBF,
 	.req_canceled = tpm_nsc_req_canceled,
+<<<<<<< HEAD
 	.attr_group = &nsc_attr_grp,
 	.miscdev = { .fops = &nsc_ops, },
+=======
+>>>>>>> v3.18
 };
 
 static struct platform_device *pdev = NULL;

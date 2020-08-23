@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2007-2012 Nicira, Inc.
+=======
+ * Copyright (c) 2007-2014 Nicira, Inc.
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of version 2 of the GNU General Public
@@ -22,6 +26,10 @@
 #include <linux/in.h>
 #include <linux/ip.h>
 #include <linux/openvswitch.h>
+<<<<<<< HEAD
+=======
+#include <linux/sctp.h>
+>>>>>>> v3.18
 #include <linux/tcp.h>
 #include <linux/udp.h>
 #include <linux/in6.h>
@@ -31,12 +39,89 @@
 #include <net/ipv6.h>
 #include <net/checksum.h>
 #include <net/dsfield.h>
+<<<<<<< HEAD
 
 #include "datapath.h"
 #include "vport.h"
 
 static int do_execute_actions(struct datapath *dp, struct sk_buff *skb,
 			const struct nlattr *attr, int len, bool keep_skb);
+=======
+#include <net/sctp/checksum.h>
+
+#include "datapath.h"
+#include "flow.h"
+#include "vport.h"
+
+static int do_execute_actions(struct datapath *dp, struct sk_buff *skb,
+			      struct sw_flow_key *key,
+			      const struct nlattr *attr, int len);
+
+struct deferred_action {
+	struct sk_buff *skb;
+	const struct nlattr *actions;
+
+	/* Store pkt_key clone when creating deferred action. */
+	struct sw_flow_key pkt_key;
+};
+
+#define DEFERRED_ACTION_FIFO_SIZE 10
+struct action_fifo {
+	int head;
+	int tail;
+	/* Deferred action fifo queue storage. */
+	struct deferred_action fifo[DEFERRED_ACTION_FIFO_SIZE];
+};
+
+static struct action_fifo __percpu *action_fifos;
+static DEFINE_PER_CPU(int, exec_actions_level);
+
+static void action_fifo_init(struct action_fifo *fifo)
+{
+	fifo->head = 0;
+	fifo->tail = 0;
+}
+
+static bool action_fifo_is_empty(struct action_fifo *fifo)
+{
+	return (fifo->head == fifo->tail);
+}
+
+static struct deferred_action *action_fifo_get(struct action_fifo *fifo)
+{
+	if (action_fifo_is_empty(fifo))
+		return NULL;
+
+	return &fifo->fifo[fifo->tail++];
+}
+
+static struct deferred_action *action_fifo_put(struct action_fifo *fifo)
+{
+	if (fifo->head >= DEFERRED_ACTION_FIFO_SIZE - 1)
+		return NULL;
+
+	return &fifo->fifo[fifo->head++];
+}
+
+/* Return true if fifo is not full */
+static struct deferred_action *add_deferred_actions(struct sk_buff *skb,
+						    struct sw_flow_key *key,
+						    const struct nlattr *attr)
+{
+	struct action_fifo *fifo;
+	struct deferred_action *da;
+
+	fifo = this_cpu_ptr(action_fifos);
+	da = action_fifo_put(fifo);
+	if (da) {
+		da->skb = skb;
+		da->actions = attr;
+		da->pkt_key = *key;
+	}
+
+	return da;
+}
+>>>>>>> v3.18
 
 static int make_writable(struct sk_buff *skb, int write_len)
 {
@@ -135,8 +220,17 @@ static int set_eth_addr(struct sk_buff *skb,
 	if (unlikely(err))
 		return err;
 
+<<<<<<< HEAD
 	memcpy(eth_hdr(skb)->h_source, eth_key->eth_src, ETH_ALEN);
 	memcpy(eth_hdr(skb)->h_dest, eth_key->eth_dst, ETH_ALEN);
+=======
+	skb_postpull_rcsum(skb, eth_hdr(skb), ETH_ALEN * 2);
+
+	ether_addr_copy(eth_hdr(skb)->h_source, eth_key->eth_src);
+	ether_addr_copy(eth_hdr(skb)->h_dest, eth_key->eth_dst);
+
+	ovs_skb_postpush_rcsum(skb, eth_hdr(skb), ETH_ALEN * 2);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -164,7 +258,11 @@ static void set_ip_addr(struct sk_buff *skb, struct iphdr *nh,
 	}
 
 	csum_replace4(&nh->check, *addr, new_addr);
+<<<<<<< HEAD
 	skb->rxhash = 0;
+=======
+	skb_clear_hash(skb);
+>>>>>>> v3.18
 	*addr = new_addr;
 }
 
@@ -173,11 +271,19 @@ static void update_ipv6_checksum(struct sk_buff *skb, u8 l4_proto,
 {
 	int transport_len = skb->len - skb_transport_offset(skb);
 
+<<<<<<< HEAD
 	if (l4_proto == IPPROTO_TCP) {
 		if (likely(transport_len >= sizeof(struct tcphdr)))
 			inet_proto_csum_replace16(&tcp_hdr(skb)->check, skb,
 						  addr, new_addr, 1);
 	} else if (l4_proto == IPPROTO_UDP) {
+=======
+	if (l4_proto == NEXTHDR_TCP) {
+		if (likely(transport_len >= sizeof(struct tcphdr)))
+			inet_proto_csum_replace16(&tcp_hdr(skb)->check, skb,
+						  addr, new_addr, 1);
+	} else if (l4_proto == NEXTHDR_UDP) {
+>>>>>>> v3.18
 		if (likely(transport_len >= sizeof(struct udphdr))) {
 			struct udphdr *uh = udp_hdr(skb);
 
@@ -188,6 +294,13 @@ static void update_ipv6_checksum(struct sk_buff *skb, u8 l4_proto,
 					uh->check = CSUM_MANGLED_0;
 			}
 		}
+<<<<<<< HEAD
+=======
+	} else if (l4_proto == NEXTHDR_ICMP) {
+		if (likely(transport_len >= sizeof(struct icmp6hdr)))
+			inet_proto_csum_replace16(&icmp6_hdr(skb)->icmp6_cksum,
+						  skb, addr, new_addr, 1);
+>>>>>>> v3.18
 	}
 }
 
@@ -198,7 +311,11 @@ static void set_ipv6_addr(struct sk_buff *skb, u8 l4_proto,
 	if (recalculate_csum)
 		update_ipv6_checksum(skb, l4_proto, addr, new_addr);
 
+<<<<<<< HEAD
 	skb->rxhash = 0;
+=======
+	skb_clear_hash(skb);
+>>>>>>> v3.18
 	memcpy(addr, new_addr, sizeof(__be32[4]));
 }
 
@@ -295,7 +412,11 @@ static void set_tp_port(struct sk_buff *skb, __be16 *port,
 {
 	inet_proto_csum_replace2(check, skb, *port, new_port, 0);
 	*port = new_port;
+<<<<<<< HEAD
 	skb->rxhash = 0;
+=======
+	skb_clear_hash(skb);
+>>>>>>> v3.18
 }
 
 static void set_udp_port(struct sk_buff *skb, __be16 *port, __be16 new_port)
@@ -309,7 +430,11 @@ static void set_udp_port(struct sk_buff *skb, __be16 *port, __be16 new_port)
 			uh->check = CSUM_MANGLED_0;
 	} else {
 		*port = new_port;
+<<<<<<< HEAD
 		skb->rxhash = 0;
+=======
+		skb_clear_hash(skb);
+>>>>>>> v3.18
 	}
 }
 
@@ -353,6 +478,42 @@ static int set_tcp(struct sk_buff *skb, const struct ovs_key_tcp *tcp_port_key)
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+static int set_sctp(struct sk_buff *skb,
+		     const struct ovs_key_sctp *sctp_port_key)
+{
+	struct sctphdr *sh;
+	int err;
+	unsigned int sctphoff = skb_transport_offset(skb);
+
+	err = make_writable(skb, sctphoff + sizeof(struct sctphdr));
+	if (unlikely(err))
+		return err;
+
+	sh = sctp_hdr(skb);
+	if (sctp_port_key->sctp_src != sh->source ||
+	    sctp_port_key->sctp_dst != sh->dest) {
+		__le32 old_correct_csum, new_csum, old_csum;
+
+		old_csum = sh->checksum;
+		old_correct_csum = sctp_compute_cksum(skb, sctphoff);
+
+		sh->source = sctp_port_key->sctp_src;
+		sh->dest = sctp_port_key->sctp_dst;
+
+		new_csum = sctp_compute_cksum(skb, sctphoff);
+
+		/* Carry any checksum errors through. */
+		sh->checksum = old_csum ^ old_correct_csum ^ new_csum;
+
+		skb_clear_hash(skb);
+	}
+
+	return 0;
+}
+
+>>>>>>> v3.18
 static int do_output(struct datapath *dp, struct sk_buff *skb, int out_port)
 {
 	struct vport *vport;
@@ -371,14 +532,22 @@ static int do_output(struct datapath *dp, struct sk_buff *skb, int out_port)
 }
 
 static int output_userspace(struct datapath *dp, struct sk_buff *skb,
+<<<<<<< HEAD
 			    const struct nlattr *attr)
+=======
+			    struct sw_flow_key *key, const struct nlattr *attr)
+>>>>>>> v3.18
 {
 	struct dp_upcall_info upcall;
 	const struct nlattr *a;
 	int rem;
 
 	upcall.cmd = OVS_PACKET_CMD_ACTION;
+<<<<<<< HEAD
 	upcall.key = &OVS_CB(skb)->flow->key;
+=======
+	upcall.key = key;
+>>>>>>> v3.18
 	upcall.userdata = NULL;
 	upcall.portid = 0;
 
@@ -398,8 +567,18 @@ static int output_userspace(struct datapath *dp, struct sk_buff *skb,
 	return ovs_dp_upcall(dp, skb, &upcall);
 }
 
+<<<<<<< HEAD
 static int sample(struct datapath *dp, struct sk_buff *skb,
 		  const struct nlattr *attr)
+=======
+static bool last_action(const struct nlattr *a, int rem)
+{
+	return a->nla_len == rem;
+}
+
+static int sample(struct datapath *dp, struct sk_buff *skb,
+		  struct sw_flow_key *key, const struct nlattr *attr)
+>>>>>>> v3.18
 {
 	const struct nlattr *acts_list = NULL;
 	const struct nlattr *a;
@@ -409,7 +588,11 @@ static int sample(struct datapath *dp, struct sk_buff *skb,
 		 a = nla_next(a, &rem)) {
 		switch (nla_type(a)) {
 		case OVS_SAMPLE_ATTR_PROBABILITY:
+<<<<<<< HEAD
 			if (net_random() >= nla_get_u32(a))
+=======
+			if (prandom_u32() >= nla_get_u32(a))
+>>>>>>> v3.18
 				return 0;
 			break;
 
@@ -419,8 +602,55 @@ static int sample(struct datapath *dp, struct sk_buff *skb,
 		}
 	}
 
+<<<<<<< HEAD
 	return do_execute_actions(dp, skb, nla_data(acts_list),
 						 nla_len(acts_list), true);
+=======
+	rem = nla_len(acts_list);
+	a = nla_data(acts_list);
+
+	/* Actions list is empty, do nothing */
+	if (unlikely(!rem))
+		return 0;
+
+	/* The only known usage of sample action is having a single user-space
+	 * action. Treat this usage as a special case.
+	 * The output_userspace() should clone the skb to be sent to the
+	 * user space. This skb will be consumed by its caller.
+	 */
+	if (likely(nla_type(a) == OVS_ACTION_ATTR_USERSPACE &&
+		   last_action(a, rem)))
+		return output_userspace(dp, skb, key, a);
+
+	skb = skb_clone(skb, GFP_ATOMIC);
+	if (!skb)
+		/* Skip the sample action when out of memory. */
+		return 0;
+
+	if (!add_deferred_actions(skb, key, a)) {
+		if (net_ratelimit())
+			pr_warn("%s: deferred actions limit reached, dropping sample action\n",
+				ovs_dp_name(dp));
+
+		kfree_skb(skb);
+	}
+	return 0;
+}
+
+static void execute_hash(struct sk_buff *skb, struct sw_flow_key *key,
+			 const struct nlattr *attr)
+{
+	struct ovs_action_hash *hash_act = nla_data(attr);
+	u32 hash = 0;
+
+	/* OVS_HASH_ALG_L4 is the only possible hash algorithm.  */
+	hash = skb_get_hash(skb);
+	hash = jhash_1word(hash, hash_act->hash_basis);
+	if (!hash)
+		hash = 0x1;
+
+	key->ovs_flow_hash = hash;
+>>>>>>> v3.18
 }
 
 static int execute_set_action(struct sk_buff *skb,
@@ -437,6 +667,13 @@ static int execute_set_action(struct sk_buff *skb,
 		skb->mark = nla_get_u32(nested_attr);
 		break;
 
+<<<<<<< HEAD
+=======
+	case OVS_KEY_ATTR_TUNNEL_INFO:
+		OVS_CB(skb)->egress_tun_info = nla_data(nested_attr);
+		break;
+
+>>>>>>> v3.18
 	case OVS_KEY_ATTR_ETHERNET:
 		err = set_eth_addr(skb, nla_data(nested_attr));
 		break;
@@ -456,14 +693,66 @@ static int execute_set_action(struct sk_buff *skb,
 	case OVS_KEY_ATTR_UDP:
 		err = set_udp(skb, nla_data(nested_attr));
 		break;
+<<<<<<< HEAD
+=======
+
+	case OVS_KEY_ATTR_SCTP:
+		err = set_sctp(skb, nla_data(nested_attr));
+		break;
+>>>>>>> v3.18
 	}
 
 	return err;
 }
 
+<<<<<<< HEAD
 /* Execute a list of actions against 'skb'. */
 static int do_execute_actions(struct datapath *dp, struct sk_buff *skb,
 			const struct nlattr *attr, int len, bool keep_skb)
+=======
+static int execute_recirc(struct datapath *dp, struct sk_buff *skb,
+			  struct sw_flow_key *key,
+			  const struct nlattr *a, int rem)
+{
+	struct deferred_action *da;
+	int err;
+
+	err = ovs_flow_key_update(skb, key);
+	if (err)
+		return err;
+
+	if (!last_action(a, rem)) {
+		/* Recirc action is the not the last action
+		 * of the action list, need to clone the skb.
+		 */
+		skb = skb_clone(skb, GFP_ATOMIC);
+
+		/* Skip the recirc action when out of memory, but
+		 * continue on with the rest of the action list.
+		 */
+		if (!skb)
+			return 0;
+	}
+
+	da = add_deferred_actions(skb, key, NULL);
+	if (da) {
+		da->pkt_key.recirc_id = nla_get_u32(a);
+	} else {
+		kfree_skb(skb);
+
+		if (net_ratelimit())
+			pr_warn("%s: deferred action limit reached, drop recirc action\n",
+				ovs_dp_name(dp));
+	}
+
+	return 0;
+}
+
+/* Execute a list of actions against 'skb'. */
+static int do_execute_actions(struct datapath *dp, struct sk_buff *skb,
+			      struct sw_flow_key *key,
+			      const struct nlattr *attr, int len)
+>>>>>>> v3.18
 {
 	/* Every output action needs a separate clone of 'skb', but the common
 	 * case is just a single output action, so that doing a clone and
@@ -488,7 +777,15 @@ static int do_execute_actions(struct datapath *dp, struct sk_buff *skb,
 			break;
 
 		case OVS_ACTION_ATTR_USERSPACE:
+<<<<<<< HEAD
 			output_userspace(dp, skb, a);
+=======
+			output_userspace(dp, skb, key, a);
+			break;
+
+		case OVS_ACTION_ATTR_HASH:
+			execute_hash(skb, key, a);
+>>>>>>> v3.18
 			break;
 
 		case OVS_ACTION_ATTR_PUSH_VLAN:
@@ -501,12 +798,30 @@ static int do_execute_actions(struct datapath *dp, struct sk_buff *skb,
 			err = pop_vlan(skb);
 			break;
 
+<<<<<<< HEAD
+=======
+		case OVS_ACTION_ATTR_RECIRC:
+			err = execute_recirc(dp, skb, key, a, rem);
+			if (last_action(a, rem)) {
+				/* If this is the last action, the skb has
+				 * been consumed or freed.
+				 * Return immediately.
+				 */
+				return err;
+			}
+			break;
+
+>>>>>>> v3.18
 		case OVS_ACTION_ATTR_SET:
 			err = execute_set_action(skb, nla_data(a));
 			break;
 
 		case OVS_ACTION_ATTR_SAMPLE:
+<<<<<<< HEAD
 			err = sample(dp, skb, a);
+=======
+			err = sample(dp, skb, key, a);
+>>>>>>> v3.18
 			break;
 		}
 
@@ -516,17 +831,24 @@ static int do_execute_actions(struct datapath *dp, struct sk_buff *skb,
 		}
 	}
 
+<<<<<<< HEAD
 	if (prev_port != -1) {
 		if (keep_skb)
 			skb = skb_clone(skb, GFP_ATOMIC);
 
 		do_output(dp, skb, prev_port);
 	} else if (!keep_skb)
+=======
+	if (prev_port != -1)
+		do_output(dp, skb, prev_port);
+	else
+>>>>>>> v3.18
 		consume_skb(skb);
 
 	return 0;
 }
 
+<<<<<<< HEAD
 /* Execute a list of actions against 'skb'. */
 int ovs_execute_actions(struct datapath *dp, struct sk_buff *skb)
 {
@@ -534,4 +856,66 @@ int ovs_execute_actions(struct datapath *dp, struct sk_buff *skb)
 
 	return do_execute_actions(dp, skb, acts->actions,
 					 acts->actions_len, false);
+=======
+static void process_deferred_actions(struct datapath *dp)
+{
+	struct action_fifo *fifo = this_cpu_ptr(action_fifos);
+
+	/* Do not touch the FIFO in case there is no deferred actions. */
+	if (action_fifo_is_empty(fifo))
+		return;
+
+	/* Finishing executing all deferred actions. */
+	do {
+		struct deferred_action *da = action_fifo_get(fifo);
+		struct sk_buff *skb = da->skb;
+		struct sw_flow_key *key = &da->pkt_key;
+		const struct nlattr *actions = da->actions;
+
+		if (actions)
+			do_execute_actions(dp, skb, key, actions,
+					   nla_len(actions));
+		else
+			ovs_dp_process_packet(skb, key);
+	} while (!action_fifo_is_empty(fifo));
+
+	/* Reset FIFO for the next packet.  */
+	action_fifo_init(fifo);
+}
+
+/* Execute a list of actions against 'skb'. */
+int ovs_execute_actions(struct datapath *dp, struct sk_buff *skb,
+			struct sw_flow_key *key)
+{
+	int level = this_cpu_read(exec_actions_level);
+	struct sw_flow_actions *acts;
+	int err;
+
+	acts = rcu_dereference(OVS_CB(skb)->flow->sf_acts);
+
+	this_cpu_inc(exec_actions_level);
+	OVS_CB(skb)->egress_tun_info = NULL;
+	err = do_execute_actions(dp, skb, key,
+				 acts->actions, acts->actions_len);
+
+	if (!level)
+		process_deferred_actions(dp);
+
+	this_cpu_dec(exec_actions_level);
+	return err;
+}
+
+int action_fifos_init(void)
+{
+	action_fifos = alloc_percpu(struct action_fifo);
+	if (!action_fifos)
+		return -ENOMEM;
+
+	return 0;
+}
+
+void action_fifos_exit(void)
+{
+	free_percpu(action_fifos);
+>>>>>>> v3.18
 }

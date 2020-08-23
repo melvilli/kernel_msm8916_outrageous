@@ -49,14 +49,22 @@ static void rtl871x_load_fw_cb(const struct firmware *firmware, void *context)
 	if (!firmware) {
 		struct usb_device *udev = padapter->dvobjpriv.pusbdev;
 		struct usb_interface *pusb_intf = padapter->pusb_intf;
+<<<<<<< HEAD
 		dev_err(&udev->dev, "r8712u: Firmware request failed\n");
 		padapter->fw_found = false;
+=======
+
+		dev_err(&udev->dev, "r8712u: Firmware request failed\n");
+>>>>>>> v3.18
 		usb_put_dev(udev);
 		usb_set_intfdata(pusb_intf, NULL);
 		return;
 	}
 	padapter->fw = firmware;
+<<<<<<< HEAD
 	padapter->fw_found = true;
+=======
+>>>>>>> v3.18
 	/* firmware available - start netdev */
 	register_netdev(padapter->pnetdev);
 }
@@ -183,7 +191,11 @@ static u8 rtl8712_dl_fw(struct _adapter *padapter)
 		maxlen = (fwhdr.img_IMEM_size > fwhdr.img_SRAM_size) ?
 			  fwhdr.img_IMEM_size : fwhdr.img_SRAM_size;
 		maxlen += txdscp_sz;
+<<<<<<< HEAD
 		ptmpchar = _malloc(maxlen + FWBUFF_ALIGN_SZ);
+=======
+		ptmpchar = kmalloc(maxlen + FWBUFF_ALIGN_SZ, GFP_ATOMIC);
+>>>>>>> v3.18
 		if (ptmpchar == NULL)
 			return ret;
 
@@ -390,10 +402,15 @@ uint rtl871x_hal_init(struct _adapter *padapter)
 	padapter->hw_init_completed = false;
 	if (padapter->halpriv.hal_bus_init == NULL)
 		return _FAIL;
+<<<<<<< HEAD
 	else {
 		if (padapter->halpriv.hal_bus_init(padapter) != _SUCCESS)
 			return _FAIL;
 	}
+=======
+	if (padapter->halpriv.hal_bus_init(padapter) != _SUCCESS)
+		return _FAIL;
+>>>>>>> v3.18
 	if (rtl8712_hal_init(padapter) == _SUCCESS)
 		padapter->hw_init_completed = true;
 	else {

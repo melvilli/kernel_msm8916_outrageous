@@ -14,11 +14,14 @@
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 */
 
 #ifndef _COMEDI_H
@@ -128,6 +131,7 @@
 /* trigger flags */
 /* These flags are used in comedi_trig structures */
 
+<<<<<<< HEAD
 #define TRIG_BOGUS	0x0001	/* do the motions */
 #define TRIG_DITHER	0x0002	/* enable dithering */
 #define TRIG_DEGLITCH	0x0004	/* enable deglitching */
@@ -135,10 +139,16 @@
 #define TRIG_CONFIG	0x0010	/* perform configuration, not triggering */
 #define TRIG_WAKE_EOS	0x0020	/* wake up on end-of-scan events */
 	/*#define TRIG_WRITE    0x0040*//* write to bidirectional devices */
+=======
+#define TRIG_DITHER	0x0002	/* enable dithering */
+#define TRIG_DEGLITCH	0x0004	/* enable deglitching */
+#define TRIG_CONFIG	0x0010	/* perform configuration, not triggering */
+>>>>>>> v3.18
 
 /* command flags */
 /* These flags are used in comedi_cmd structures */
 
+<<<<<<< HEAD
 /* try to use a real-time interrupt while performing command */
 #define CMDF_PRIORITY		0x00000008
 
@@ -149,17 +159,51 @@
 
 #define CMDF_RAWDATA		0x00000080
 
+=======
+#define CMDF_BOGUS		0x00000001	/* do the motions */
+
+/* try to use a real-time interrupt while performing command */
+#define CMDF_PRIORITY		0x00000008
+
+/* wake up on end-of-scan events */
+#define CMDF_WAKE_EOS		0x00000020
+
+#define CMDF_WRITE		0x00000040
+
+#define CMDF_RAWDATA		0x00000080
+
+/* timer rounding definitions */
+#define CMDF_ROUND_MASK		0x00030000
+#define CMDF_ROUND_NEAREST	0x00000000
+#define CMDF_ROUND_DOWN		0x00010000
+#define CMDF_ROUND_UP		0x00020000
+#define CMDF_ROUND_UP_NEXT	0x00030000
+
+>>>>>>> v3.18
 #define COMEDI_EV_START		0x00040000
 #define COMEDI_EV_SCAN_BEGIN	0x00080000
 #define COMEDI_EV_CONVERT	0x00100000
 #define COMEDI_EV_SCAN_END	0x00200000
 #define COMEDI_EV_STOP		0x00400000
 
+<<<<<<< HEAD
 #define TRIG_ROUND_MASK		0x00030000
 #define TRIG_ROUND_NEAREST	0x00000000
 #define TRIG_ROUND_DOWN		0x00010000
 #define TRIG_ROUND_UP		0x00020000
 #define TRIG_ROUND_UP_NEXT	0x00030000
+=======
+/* compatibility definitions */
+#define TRIG_BOGUS		CMDF_BOGUS
+#define TRIG_RT			CMDF_PRIORITY
+#define TRIG_WAKE_EOS		CMDF_WAKE_EOS
+#define TRIG_WRITE		CMDF_WRITE
+#define TRIG_ROUND_MASK		CMDF_ROUND_MASK
+#define TRIG_ROUND_NEAREST	CMDF_ROUND_NEAREST
+#define TRIG_ROUND_DOWN		CMDF_ROUND_DOWN
+#define TRIG_ROUND_UP		CMDF_ROUND_UP
+#define TRIG_ROUND_UP_NEXT	CMDF_ROUND_UP_NEXT
+>>>>>>> v3.18
 
 /* trigger sources */
 
@@ -556,6 +600,7 @@ enum i8254_mode {
 	I8254_BINARY = 0
 };
 
+<<<<<<< HEAD
 static inline unsigned NI_USUAL_PFI_SELECT(unsigned pfi_channel)
 {
 	if (pfi_channel < 10)
@@ -571,6 +616,10 @@ static inline unsigned NI_USUAL_RTSI_SELECT(unsigned rtsi_channel)
 	else
 		return 0x1b;
 }
+=======
+#define NI_USUAL_PFI_SELECT(x)	(((x) < 10) ? (0x1 + (x)) : (0xb + (x)))
+#define NI_USUAL_RTSI_SELECT(x)	(((x) < 7) ? (0xb + (x)) : 0x1b)
+>>>>>>> v3.18
 
 /* mode bits for NI general-purpose counters, set with
  * INSN_CONFIG_SET_COUNTER_MODE */
@@ -664,6 +713,7 @@ enum ni_gpct_clock_source_bits {
 	NI_GPCT_PRESCALE_X8_CLOCK_SRC_BITS = 0x20000000,
 	NI_GPCT_INVERT_CLOCK_SRC_BIT = 0x80000000
 };
+<<<<<<< HEAD
 static inline unsigned NI_GPCT_SOURCE_PIN_CLOCK_SRC_BITS(unsigned n)
 {
 	/* NI 660x-specific */
@@ -678,6 +728,16 @@ static inline unsigned NI_GPCT_PFI_CLOCK_SRC_BITS(unsigned n)
 	/* no pfi on NI 660x */
 	return 0x20 + n;
 }
+=======
+
+/* NI 660x-specific */
+#define NI_GPCT_SOURCE_PIN_CLOCK_SRC_BITS(x)	(0x10 + (x))
+
+#define NI_GPCT_RTSI_CLOCK_SRC_BITS(x)		(0x18 + (x))
+
+/* no pfi on NI 660x */
+#define NI_GPCT_PFI_CLOCK_SRC_BITS(x)		(0x20 + (x))
+>>>>>>> v3.18
 
 /* Possibilities for setting a gate source with
 INSN_CONFIG_SET_GATE_SRC when using NI general-purpose counters.
@@ -703,6 +763,7 @@ enum ni_gpct_gate_select {
 	 * known. */
 	NI_GPCT_DISABLED_GATE_SELECT = 0x8000,
 };
+<<<<<<< HEAD
 static inline unsigned NI_GPCT_GATE_PIN_GATE_SELECT(unsigned n)
 {
 	return 0x102 + n;
@@ -719,6 +780,13 @@ static inline unsigned NI_GPCT_UP_DOWN_PIN_GATE_SELECT(unsigned n)
 {
 	return 0x202 + n;
 }
+=======
+
+#define NI_GPCT_GATE_PIN_GATE_SELECT(x)		(0x102 + (x))
+#define NI_GPCT_RTSI_GATE_SELECT(x)		NI_USUAL_RTSI_SELECT(x)
+#define NI_GPCT_PFI_GATE_SELECT(x)		NI_USUAL_PFI_SELECT(x)
+#define NI_GPCT_UP_DOWN_PIN_GATE_SELECT(x)	(0x202 + (x))
+>>>>>>> v3.18
 
 /* Possibilities for setting a source with
 INSN_CONFIG_SET_OTHER_SRC when using NI general-purpose counters. */
@@ -727,15 +795,24 @@ enum ni_gpct_other_index {
 	NI_GPCT_SOURCE_ENCODER_B,
 	NI_GPCT_SOURCE_ENCODER_Z
 };
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 enum ni_gpct_other_select {
 	/* m-series gates */
 	/* Still unknown, probably only need NI_GPCT_PFI_OTHER_SELECT */
 	NI_GPCT_DISABLED_OTHER_SELECT = 0x8000,
 };
+<<<<<<< HEAD
 static inline unsigned NI_GPCT_PFI_OTHER_SELECT(unsigned n)
 {
 	return NI_USUAL_PFI_SELECT(n);
 }
+=======
+
+#define NI_GPCT_PFI_OTHER_SELECT(x)	NI_USUAL_PFI_SELECT(x)
+>>>>>>> v3.18
 
 /* start sources for ni general-purpose counters for use with
 INSN_CONFIG_ARM */
@@ -782,10 +859,15 @@ enum ni_mio_clock_source {
 	NI_MIO_PLL_PXI10_CLOCK = 3,
 	NI_MIO_PLL_RTSI0_CLOCK = 4
 };
+<<<<<<< HEAD
 static inline unsigned NI_MIO_PLL_RTSI_CLOCK(unsigned rtsi_channel)
 {
 	return NI_MIO_PLL_RTSI0_CLOCK + rtsi_channel;
 }
+=======
+
+#define NI_MIO_PLL_RTSI_CLOCK(x)	(NI_MIO_PLL_RTSI0_CLOCK + (x))
+>>>>>>> v3.18
 
 /* Signals which can be routed to an NI RTSI pin with INSN_CONFIG_SET_ROUTING.
  The numbers assigned are not arbitrary, they correspond to the bits required
@@ -803,10 +885,15 @@ enum ni_rtsi_routing {
 	NI_RTSI_OUTPUT_RTSI_OSC = 12	/* pre-m-series always have RTSI
 					 * clock on line 7 */
 };
+<<<<<<< HEAD
 static inline unsigned NI_RTSI_OUTPUT_RTSI_BRD(unsigned n)
 {
 	return NI_RTSI_OUTPUT_RTSI_BRD_0 + n;
 }
+=======
+
+#define NI_RTSI_OUTPUT_RTSI_BRD(x)	(NI_RTSI_OUTPUT_RTSI_BRD_0 + (x))
+>>>>>>> v3.18
 
 /* Signals which can be routed to an NI PFI pin on an m-series board with
  * INSN_CONFIG_SET_ROUTING.  These numbers are also returned by
@@ -839,10 +926,15 @@ enum ni_pfi_routing {
 	NI_PFI_OUTPUT_CDI_SAMPLE = 29,
 	NI_PFI_OUTPUT_CDO_UPDATE = 30
 };
+<<<<<<< HEAD
 static inline unsigned NI_PFI_OUTPUT_RTSI(unsigned rtsi_channel)
 {
 	return NI_PFI_OUTPUT_RTSI0 + rtsi_channel;
 }
+=======
+
+#define NI_PFI_OUTPUT_RTSI(x)		(NI_PFI_OUTPUT_RTSI0 + (x))
+>>>>>>> v3.18
 
 /* Signals which can be routed to output on a NI PFI pin on a 660x board
  with INSN_CONFIG_SET_ROUTING.  The numbers assigned are
@@ -858,6 +950,7 @@ enum ni_660x_pfi_routing {
 /* NI External Trigger lines.  These values are not arbitrary, but are related
  * to the bits required to program the board (offset by 1 for historical
  * reasons). */
+<<<<<<< HEAD
 static inline unsigned NI_EXT_PFI(unsigned pfi_channel)
 {
 	return NI_USUAL_PFI_SELECT(pfi_channel) - 1;
@@ -866,6 +959,10 @@ static inline unsigned NI_EXT_RTSI(unsigned rtsi_channel)
 {
 	return NI_USUAL_RTSI_SELECT(rtsi_channel) - 1;
 }
+=======
+#define NI_EXT_PFI(x)			(NI_USUAL_PFI_SELECT(x) - 1)
+#define NI_EXT_RTSI(x)			(NI_USUAL_RTSI_SELECT(x) - 1)
+>>>>>>> v3.18
 
 /* status bits for INSN_CONFIG_GET_COUNTER_STATUS */
 enum comedi_counter_status_flags {
@@ -889,6 +986,7 @@ enum ni_m_series_cdio_scan_begin_src {
 	NI_CDIO_SCAN_BEGIN_SRC_FREQ_OUT = 32,
 	NI_CDIO_SCAN_BEGIN_SRC_DIO_CHANGE_DETECT_IRQ = 33
 };
+<<<<<<< HEAD
 static inline unsigned NI_CDIO_SCAN_BEGIN_SRC_PFI(unsigned pfi_channel)
 {
 	return NI_USUAL_PFI_SELECT(pfi_channel);
@@ -897,10 +995,16 @@ static inline unsigned NI_CDIO_SCAN_BEGIN_SRC_RTSI(unsigned rtsi_channel)
 {
 	return NI_USUAL_RTSI_SELECT(rtsi_channel);
 }
+=======
+
+#define NI_CDIO_SCAN_BEGIN_SRC_PFI(x)	NI_USUAL_PFI_SELECT(x)
+#define NI_CDIO_SCAN_BEGIN_SRC_RTSI(x)	NI_USUAL_RTSI_SELECT(x)
+>>>>>>> v3.18
 
 /* scan_begin_src for scan_begin_arg==TRIG_EXT with analog output command on NI
  * boards.  These scan begin sources can also be bitwise-or'd with CR_INVERT to
  * change polarity. */
+<<<<<<< HEAD
 static inline unsigned NI_AO_SCAN_BEGIN_SRC_PFI(unsigned pfi_channel)
 {
 	return NI_USUAL_PFI_SELECT(pfi_channel);
@@ -909,6 +1013,10 @@ static inline unsigned NI_AO_SCAN_BEGIN_SRC_RTSI(unsigned rtsi_channel)
 {
 	return NI_USUAL_RTSI_SELECT(rtsi_channel);
 }
+=======
+#define NI_AO_SCAN_BEGIN_SRC_PFI(x)	NI_USUAL_PFI_SELECT(x)
+#define NI_AO_SCAN_BEGIN_SRC_RTSI(x)	NI_USUAL_RTSI_SELECT(x)
+>>>>>>> v3.18
 
 /* Bits for setting a clock source with
  * INSN_CONFIG_SET_CLOCK_SRC when using NI frequency output subdevice. */
@@ -981,4 +1089,18 @@ enum amplc_dio_gate_source {
 	AMPLC_DIO_GAT_NPAT_GONE	/* negated "pattern gone away" */
 };
 
+<<<<<<< HEAD
+=======
+/*
+ * Values for setting a clock source with INSN_CONFIG_SET_CLOCK_SRC for
+ * the counter subdevice on the Kolter Electronic PCI-Counter board
+ * (ke_counter driver).
+ */
+enum ke_counter_clock_source {
+	KE_CLK_20MHZ,	/* internal 20MHz (default) */
+	KE_CLK_4MHZ,	/* internal 4MHz (option) */
+	KE_CLK_EXT	/* external clock on pin 21 of D-Sub */
+};
+
+>>>>>>> v3.18
 #endif /* _COMEDI_H */

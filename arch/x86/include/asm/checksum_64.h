@@ -133,7 +133,11 @@ extern __wsum csum_partial(const void *buff, int len, __wsum sum);
 
 
 /* Do not call this directly. Use the wrappers below */
+<<<<<<< HEAD
 extern __wsum csum_partial_copy_generic(const void *src, const void *dst,
+=======
+extern __visible __wsum csum_partial_copy_generic(const void *src, const void *dst,
+>>>>>>> v3.18
 					int len, __wsum sum,
 					int *src_err_ptr, int *dst_err_ptr);
 
@@ -184,8 +188,22 @@ static inline unsigned add32_with_carry(unsigned a, unsigned b)
 	asm("addl %2,%0\n\t"
 	    "adcl $0,%0"
 	    : "=r" (a)
+<<<<<<< HEAD
 	    : "0" (a), "r" (b));
 	return a;
 }
 
+=======
+	    : "0" (a), "rm" (b));
+	return a;
+}
+
+#define HAVE_ARCH_CSUM_ADD
+static inline __wsum csum_add(__wsum csum, __wsum addend)
+{
+	return (__force __wsum)add32_with_carry((__force unsigned)csum,
+						(__force unsigned)addend);
+}
+
+>>>>>>> v3.18
 #endif /* _ASM_X86_CHECKSUM_64_H */

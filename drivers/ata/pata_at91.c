@@ -18,7 +18,10 @@
 
 #include <linux/kernel.h>
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/blkdev.h>
 #include <linux/gfp.h>
 #include <scsi/scsi_host.h>
@@ -315,7 +318,11 @@ static struct ata_port_operations pata_at91_port_ops = {
 
 static int pata_at91_probe(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct at91_cf_data *board = pdev->dev.platform_data;
+=======
+	struct at91_cf_data *board = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	struct device *dev = &pdev->dev;
 	struct at91_ide_info *info;
 	struct resource *mem_res;
@@ -423,7 +430,11 @@ err_put:
 
 static int pata_at91_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct ata_host *host = dev_get_drvdata(&pdev->dev);
+=======
+	struct ata_host *host = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 	struct at91_ide_info *info;
 
 	if (!host)

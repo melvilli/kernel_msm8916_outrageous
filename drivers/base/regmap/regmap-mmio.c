@@ -18,7 +18,10 @@
 
 #include <linux/clk.h>
 #include <linux/err.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/io.h>
 #include <linux/module.h>
 #include <linux/regmap.h>
@@ -26,27 +29,103 @@
 
 struct regmap_mmio_context {
 	void __iomem *regs;
+<<<<<<< HEAD
 	unsigned val_bytes;
 	struct clk *clk;
 };
 
+=======
+	unsigned reg_bytes;
+	unsigned val_bytes;
+	unsigned pad_bytes;
+	struct clk *clk;
+};
+
+static inline void regmap_mmio_regsize_check(size_t reg_size)
+{
+	switch (reg_size) {
+	case 1:
+	case 2:
+	case 4:
+#ifdef CONFIG_64BIT
+	case 8:
+#endif
+		break;
+	default:
+		BUG();
+	}
+}
+
+static int regmap_mmio_regbits_check(size_t reg_bits)
+{
+	switch (reg_bits) {
+	case 8:
+	case 16:
+	case 32:
+#ifdef CONFIG_64BIT
+	case 64:
+#endif
+		return 0;
+	default:
+		return -EINVAL;
+	}
+}
+
+static inline void regmap_mmio_count_check(size_t count, u32 offset)
+{
+	BUG_ON(count <= offset);
+}
+
+static inline unsigned int
+regmap_mmio_get_offset(const void *reg, size_t reg_size)
+{
+	switch (reg_size) {
+	case 1:
+		return *(u8 *)reg;
+	case 2:
+		return *(u16 *)reg;
+	case 4:
+		return *(u32 *)reg;
+#ifdef CONFIG_64BIT
+	case 8:
+		return *(u64 *)reg;
+#endif
+	default:
+		BUG();
+	}
+}
+
+>>>>>>> v3.18
 static int regmap_mmio_gather_write(void *context,
 				    const void *reg, size_t reg_size,
 				    const void *val, size_t val_size)
 {
 	struct regmap_mmio_context *ctx = context;
+<<<<<<< HEAD
 	u32 offset;
 	int ret;
 
 	BUG_ON(reg_size != 4);
 
 	if (ctx->clk) {
+=======
+	unsigned int offset;
+	int ret;
+
+	regmap_mmio_regsize_check(reg_size);
+
+	if (!IS_ERR(ctx->clk)) {
+>>>>>>> v3.18
 		ret = clk_enable(ctx->clk);
 		if (ret < 0)
 			return ret;
 	}
 
+<<<<<<< HEAD
 	offset = *(u32 *)reg;
+=======
+	offset = regmap_mmio_get_offset(reg, reg_size);
+>>>>>>> v3.18
 
 	while (val_size) {
 		switch (ctx->val_bytes) {
@@ -73,7 +152,11 @@ static int regmap_mmio_gather_write(void *context,
 		offset += ctx->val_bytes;
 	}
 
+<<<<<<< HEAD
 	if (ctx->clk)
+=======
+	if (!IS_ERR(ctx->clk))
+>>>>>>> v3.18
 		clk_disable(ctx->clk);
 
 	return 0;
@@ -81,9 +164,19 @@ static int regmap_mmio_gather_write(void *context,
 
 static int regmap_mmio_write(void *context, const void *data, size_t count)
 {
+<<<<<<< HEAD
 	BUG_ON(count < 4);
 
 	return regmap_mmio_gather_write(context, data, 4, data + 4, count - 4);
+=======
+	struct regmap_mmio_context *ctx = context;
+	unsigned int offset = ctx->reg_bytes + ctx->pad_bytes;
+
+	regmap_mmio_count_check(count, offset);
+
+	return regmap_mmio_gather_write(context, data, ctx->reg_bytes,
+					data + offset, count - offset);
+>>>>>>> v3.18
 }
 
 static int regmap_mmio_read(void *context,
@@ -91,18 +184,31 @@ static int regmap_mmio_read(void *context,
 			    void *val, size_t val_size)
 {
 	struct regmap_mmio_context *ctx = context;
+<<<<<<< HEAD
 	u32 offset;
 	int ret;
 
 	BUG_ON(reg_size != 4);
 
 	if (ctx->clk) {
+=======
+	unsigned int offset;
+	int ret;
+
+	regmap_mmio_regsize_check(reg_size);
+
+	if (!IS_ERR(ctx->clk)) {
+>>>>>>> v3.18
 		ret = clk_enable(ctx->clk);
 		if (ret < 0)
 			return ret;
 	}
 
+<<<<<<< HEAD
 	offset = *(u32 *)reg;
+=======
+	offset = regmap_mmio_get_offset(reg, reg_size);
+>>>>>>> v3.18
 
 	while (val_size) {
 		switch (ctx->val_bytes) {
@@ -129,7 +235,11 @@ static int regmap_mmio_read(void *context,
 		offset += ctx->val_bytes;
 	}
 
+<<<<<<< HEAD
 	if (ctx->clk)
+=======
+	if (!IS_ERR(ctx->clk))
+>>>>>>> v3.18
 		clk_disable(ctx->clk);
 
 	return 0;
@@ -139,7 +249,11 @@ static void regmap_mmio_free_context(void *context)
 {
 	struct regmap_mmio_context *ctx = context;
 
+<<<<<<< HEAD
 	if (ctx->clk) {
+=======
+	if (!IS_ERR(ctx->clk)) {
+>>>>>>> v3.18
 		clk_unprepare(ctx->clk);
 		clk_put(ctx->clk);
 	}
@@ -165,8 +279,14 @@ static struct regmap_mmio_context *regmap_mmio_gen_context(struct device *dev,
 	int min_stride;
 	int ret;
 
+<<<<<<< HEAD
 	if (config->reg_bits != 32)
 		return ERR_PTR(-EINVAL);
+=======
+	ret = regmap_mmio_regbits_check(config->reg_bits);
+	if (ret)
+		return ERR_PTR(ret);
+>>>>>>> v3.18
 
 	if (config->pad_bits)
 		return ERR_PTR(-EINVAL);
@@ -209,6 +329,12 @@ static struct regmap_mmio_context *regmap_mmio_gen_context(struct device *dev,
 
 	ctx->regs = regs;
 	ctx->val_bytes = config->val_bits / 8;
+<<<<<<< HEAD
+=======
+	ctx->reg_bytes = config->reg_bits / 8;
+	ctx->pad_bytes = config->pad_bits / 8;
+	ctx->clk = ERR_PTR(-ENODEV);
+>>>>>>> v3.18
 
 	if (clk_id == NULL)
 		return ctx;

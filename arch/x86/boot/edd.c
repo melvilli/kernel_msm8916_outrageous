@@ -15,6 +15,10 @@
 
 #include "boot.h"
 #include <linux/edd.h>
+<<<<<<< HEAD
+=======
+#include "string.h"
+>>>>>>> v3.18
 
 #if defined(CONFIG_EDD) || defined(CONFIG_EDD_MODULE)
 

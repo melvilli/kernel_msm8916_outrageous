@@ -14,7 +14,11 @@
  * Copyright (c) 2004, Intel Corporation
  *
  * Modified for Realtek's wi-fi cards by Andrea Merello
+<<<<<<< HEAD
  * <andreamrl@tiscali.it>
+=======
+ * <andrea.merello@gmail.com>
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -1456,7 +1460,11 @@ enum eap_type {
 	EAPOL_ENCAP_ASF_ALERT
 };
 
+<<<<<<< HEAD
 static const char *eap_types[] = {
+=======
+static const char * const eap_types[] = {
+>>>>>>> v3.18
 	[EAP_PACKET]		= "EAP-Packet",
 	[EAPOL_START]		= "EAPOL-Start",
 	[EAPOL_LOGOFF]		= "EAPOL-Logoff",
@@ -1473,6 +1481,10 @@ static inline u8 Frame_QoSTID(u8 *buf)
 {
 	struct rtllib_hdr_3addr *hdr;
 	u16 fc;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	hdr = (struct rtllib_hdr_3addr *)buf;
 	fc = le16_to_cpu(hdr->frame_ctl);
 	return (u8)((union frameqos *)(buf + (((fc & RTLLIB_FCTL_TODS) &&
@@ -2513,7 +2525,11 @@ struct rtllib_device {
 	void (*AllowAllDestAddrHandler)(struct net_device *dev,
 					bool bAllowAllDA, bool WriteIntoReg);
 
+<<<<<<< HEAD
 	void (*rtllib_ips_leave_wq) (struct net_device *dev);
+=======
+	void (*rtllib_ips_leave_wq)(struct net_device *dev);
+>>>>>>> v3.18
 	void (*rtllib_ips_leave)(struct net_device *dev);
 	void (*LeisurePSLeave)(struct net_device *dev);
 	void (*rtllib_rfkill_poll)(struct net_device *dev);
@@ -2761,6 +2777,10 @@ extern void rtllib_stop_scan(struct rtllib_device *ieee);
 extern bool rtllib_act_scanning(struct rtllib_device *ieee, bool sync_scan);
 extern void rtllib_stop_scan_syncro(struct rtllib_device *ieee);
 extern void rtllib_start_scan_syncro(struct rtllib_device *ieee, u8 is_mesh);
+<<<<<<< HEAD
+=======
+extern inline struct sk_buff *rtllib_probe_req(struct rtllib_device *ieee);
+>>>>>>> v3.18
 extern u8 MgntQuery_MgntFrameTxRate(struct rtllib_device *ieee);
 extern void rtllib_sta_ps_send_null_frame(struct rtllib_device *ieee,
 					  short pwr);
@@ -2895,7 +2915,11 @@ extern void HTConstructCapabilityElement(struct rtllib_device *ieee,
 extern void HTConstructInfoElement(struct rtllib_device *ieee,
 				   u8 *posHTInfo, u8 *len, u8 isEncrypt);
 extern void HTConstructRT2RTAggElement(struct rtllib_device *ieee,
+<<<<<<< HEAD
 				       u8 *posRT2RTAgg, u8* len);
+=======
+				       u8 *posRT2RTAgg, u8 *len);
+>>>>>>> v3.18
 extern void HTOnAssocRsp(struct rtllib_device *ieee);
 extern void HTInitializeHTInfo(struct rtllib_device *ieee);
 extern void HTInitializeBssDesc(struct bss_ht *pBssHT);
@@ -2942,12 +2966,20 @@ void rtllib_softmac_scan_syncro(struct rtllib_device *ieee, u8 is_mesh);
 
 extern const long rtllib_wlan_frequencies[];
 
+<<<<<<< HEAD
 static inline void rtllib_increment_scans(struct rtllib_device *ieee)
+=======
+extern inline void rtllib_increment_scans(struct rtllib_device *ieee)
+>>>>>>> v3.18
 {
 	ieee->scans++;
 }
 
+<<<<<<< HEAD
 static inline int rtllib_get_scans(struct rtllib_device *ieee)
+=======
+extern inline int rtllib_get_scans(struct rtllib_device *ieee)
+>>>>>>> v3.18
 {
 	return ieee->scans;
 }
@@ -2955,14 +2987,18 @@ static inline int rtllib_get_scans(struct rtllib_device *ieee)
 static inline const char *escape_essid(const char *essid, u8 essid_len)
 {
 	static char escaped[IW_ESSID_MAX_SIZE * 2 + 1];
+<<<<<<< HEAD
 	const char *s = essid;
 	char *d = escaped;
+=======
+>>>>>>> v3.18
 
 	if (rtllib_is_empty_essid(essid, essid_len)) {
 		memcpy(escaped, "<hidden>", sizeof("<hidden>"));
 		return escaped;
 	}
 
+<<<<<<< HEAD
 	essid_len = min(essid_len, (u8)IW_ESSID_MAX_SIZE);
 	while (essid_len--) {
 		if (*s == '\0') {
@@ -2974,6 +3010,9 @@ static inline const char *escape_essid(const char *essid, u8 essid_len)
 		}
 	}
 	*d = '\0';
+=======
+	snprintf(escaped, sizeof(escaped), "%*pEn", essid_len, essid);
+>>>>>>> v3.18
 	return escaped;
 }
 

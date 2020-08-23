@@ -55,6 +55,7 @@ static inline int check_stack_overflow(void) { return 0; }
 static inline void print_stack_overflow(void) { }
 #endif
 
+<<<<<<< HEAD
 /*
  * per-CPU IRQ handling contexts (thread information and stack)
  */
@@ -65,6 +66,10 @@ union irq_ctx {
 
 static DEFINE_PER_CPU(union irq_ctx *, hardirq_ctx);
 static DEFINE_PER_CPU(union irq_ctx *, softirq_ctx);
+=======
+DEFINE_PER_CPU(struct irq_stack *, hardirq_stack);
+DEFINE_PER_CPU(struct irq_stack *, softirq_stack);
+>>>>>>> v3.18
 
 static void call_on_stack(void *func, void *stack)
 {
@@ -77,6 +82,7 @@ static void call_on_stack(void *func, void *stack)
 		     : "memory", "cc", "edx", "ecx", "eax");
 }
 
+<<<<<<< HEAD
 static inline int
 execute_on_irq_stack(int overflow, struct irq_desc *desc, int irq)
 {
@@ -85,6 +91,28 @@ execute_on_irq_stack(int overflow, struct irq_desc *desc, int irq)
 
 	curctx = (union irq_ctx *) current_thread_info();
 	irqctx = __this_cpu_read(hardirq_ctx);
+=======
+/* how to get the current stack pointer from C */
+#define current_stack_pointer ({		\
+	unsigned long sp;			\
+	asm("mov %%esp,%0" : "=g" (sp));	\
+	sp;					\
+})
+
+static inline void *current_stack(void)
+{
+	return (void *)(current_stack_pointer & ~(THREAD_SIZE - 1));
+}
+
+static inline int
+execute_on_irq_stack(int overflow, struct irq_desc *desc, int irq)
+{
+	struct irq_stack *curstk, *irqstk;
+	u32 *isp, *prev_esp, arg1, arg2;
+
+	curstk = (struct irq_stack *) current_stack();
+	irqstk = __this_cpu_read(hardirq_stack);
+>>>>>>> v3.18
 
 	/*
 	 * this is where we switch to the IRQ stack. However, if we are
@@ -92,6 +120,7 @@ execute_on_irq_stack(int overflow, struct irq_desc *desc, int irq)
 	 * handler) we can't do that and just have to keep using the
 	 * current stack (which is the irq stack already after all)
 	 */
+<<<<<<< HEAD
 	if (unlikely(curctx == irqctx))
 		return 0;
 
@@ -102,6 +131,16 @@ execute_on_irq_stack(int overflow, struct irq_desc *desc, int irq)
 
 	/* Copy the preempt_count so that the [soft]irq checks work. */
 	irqctx->tinfo.preempt_count = curctx->tinfo.preempt_count;
+=======
+	if (unlikely(curstk == irqstk))
+		return 0;
+
+	isp = (u32 *) ((char *)irqstk + sizeof(*irqstk));
+
+	/* Save the next esp at the bottom of the stack */
+	prev_esp = (u32 *)irqstk;
+	*prev_esp = current_stack_pointer;
+>>>>>>> v3.18
 
 	if (unlikely(overflow))
 		call_on_stack(print_stack_overflow, isp);
@@ -119,6 +158,7 @@ execute_on_irq_stack(int overflow, struct irq_desc *desc, int irq)
 /*
  * allocate per-cpu stacks for hardirq and for softirq processing
  */
+<<<<<<< HEAD
 void __cpuinit irq_ctx_init(int cpu)
 {
 	union irq_ctx *irqctx;
@@ -178,6 +218,46 @@ asmlinkage void do_softirq(void)
 	}
 
 	local_irq_restore(flags);
+=======
+void irq_ctx_init(int cpu)
+{
+	struct irq_stack *irqstk;
+
+	if (per_cpu(hardirq_stack, cpu))
+		return;
+
+	irqstk = page_address(alloc_pages_node(cpu_to_node(cpu),
+					       THREADINFO_GFP,
+					       THREAD_SIZE_ORDER));
+	per_cpu(hardirq_stack, cpu) = irqstk;
+
+	irqstk = page_address(alloc_pages_node(cpu_to_node(cpu),
+					       THREADINFO_GFP,
+					       THREAD_SIZE_ORDER));
+	per_cpu(softirq_stack, cpu) = irqstk;
+
+	printk(KERN_DEBUG "CPU %u irqstacks, hard=%p soft=%p\n",
+	       cpu, per_cpu(hardirq_stack, cpu),  per_cpu(softirq_stack, cpu));
+}
+
+void do_softirq_own_stack(void)
+{
+	struct thread_info *curstk;
+	struct irq_stack *irqstk;
+	u32 *isp, *prev_esp;
+
+	curstk = current_stack();
+	irqstk = __this_cpu_read(softirq_stack);
+
+	/* build the stack frame on the softirq stack */
+	isp = (u32 *) ((char *)irqstk + sizeof(*irqstk));
+
+	/* Push the previous esp onto the stack */
+	prev_esp = (u32 *)irqstk;
+	*prev_esp = current_stack_pointer;
+
+	call_on_stack(__do_softirq, isp);
+>>>>>>> v3.18
 }
 
 bool handle_irq(unsigned irq, struct pt_regs *regs)

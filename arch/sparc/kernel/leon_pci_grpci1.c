@@ -80,7 +80,11 @@ struct grpci1_regs {
 
 struct grpci1_priv {
 	struct leon_pci_info	info; /* must be on top of this structure */
+<<<<<<< HEAD
 	struct grpci1_regs	*regs;		/* GRPCI register map */
+=======
+	struct grpci1_regs __iomem *regs;		/* GRPCI register map */
+>>>>>>> v3.18
 	struct device		*dev;
 	int			pci_err_mask;	/* STATUS register error mask */
 	int			irq;		/* LEON irqctrl GRPCI IRQ */
@@ -101,7 +105,11 @@ static struct grpci1_priv *grpci1priv;
 static int grpci1_cfg_w32(struct grpci1_priv *priv, unsigned int bus,
 				unsigned int devfn, int where, u32 val);
 
+<<<<<<< HEAD
 int grpci1_map_irq(const struct pci_dev *dev, u8 slot, u8 pin)
+=======
+static int grpci1_map_irq(const struct pci_dev *dev, u8 slot, u8 pin)
+>>>>>>> v3.18
 {
 	struct grpci1_priv *priv = dev->bus->sysdata;
 	int irq_group;
@@ -144,7 +152,11 @@ static int grpci1_cfg_r32(struct grpci1_priv *priv, unsigned int bus,
 		grpci1_cfg_w32(priv, TGT, 0, PCI_COMMAND, tmp);
 	} else {
 		/* Bus always little endian (unaffected by byte-swapping) */
+<<<<<<< HEAD
 		*val = flip_dword(tmp);
+=======
+		*val = swab32(tmp);
+>>>>>>> v3.18
 	}
 
 	return 0;
@@ -197,7 +209,11 @@ static int grpci1_cfg_w32(struct grpci1_priv *priv, unsigned int bus,
 
 	pci_conf = (unsigned int *) (priv->pci_conf |
 						(devfn << 8) | (where & 0xfc));
+<<<<<<< HEAD
 	LEON3_BYPASS_STORE_PA(pci_conf, flip_dword(val));
+=======
+	LEON3_BYPASS_STORE_PA(pci_conf, swab32(val));
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -417,10 +433,17 @@ out:
  *  BAR1: peripheral DMA to host's memory (size at least 256MByte)
  *  BAR2..BAR5: not implemented in hardware
  */
+<<<<<<< HEAD
 void grpci1_hw_init(struct grpci1_priv *priv)
 {
 	u32 ahbadr, bar_sz, data, pciadr;
 	struct grpci1_regs *regs = priv->regs;
+=======
+static void grpci1_hw_init(struct grpci1_priv *priv)
+{
+	u32 ahbadr, bar_sz, data, pciadr;
+	struct grpci1_regs __iomem *regs = priv->regs;
+>>>>>>> v3.18
 
 	/* set 1:1 mapping between AHB -> PCI memory space */
 	REGSTORE(regs->cfg_stat, priv->pci_area & 0xf0000000);
@@ -509,7 +532,11 @@ static irqreturn_t grpci1_err_interrupt(int irq, void *arg)
 
 static int grpci1_of_probe(struct platform_device *ofdev)
 {
+<<<<<<< HEAD
 	struct grpci1_regs *regs;
+=======
+	struct grpci1_regs __iomem *regs;
+>>>>>>> v3.18
 	struct grpci1_priv *priv;
 	int err, len;
 	const int *tmp;
@@ -690,7 +717,11 @@ err3:
 err2:
 	release_resource(&priv->info.mem_space);
 err1:
+<<<<<<< HEAD
 	iounmap((void *)priv->pci_io_va);
+=======
+	iounmap((void __iomem *)priv->pci_io_va);
+>>>>>>> v3.18
 	grpci1priv = NULL;
 	return err;
 }

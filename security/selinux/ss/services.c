@@ -72,6 +72,10 @@
 
 int selinux_policycap_netpeer;
 int selinux_policycap_openperm;
+<<<<<<< HEAD
+=======
+int selinux_policycap_alwaysnetwork;
+>>>>>>> v3.18
 
 static DEFINE_RWLOCK(policy_rwlock);
 
@@ -92,10 +96,16 @@ static int context_struct_to_string(struct context *context, char **scontext,
 				    u32 *scontext_len);
 
 static void context_struct_compute_av(struct context *scontext,
+<<<<<<< HEAD
 					struct context *tcontext,
 					u16 tclass,
 					struct av_decision *avd,
 					struct extended_perms *xperms);
+=======
+				      struct context *tcontext,
+				      u16 tclass,
+				      struct av_decision *avd);
+>>>>>>> v3.18
 
 struct selinux_mapping {
 	u16 value; /* policy value */
@@ -565,8 +575,12 @@ static void type_attribute_bounds_av(struct context *scontext,
 		context_struct_compute_av(&lo_scontext,
 					  tcontext,
 					  tclass,
+<<<<<<< HEAD
 					  &lo_avd,
 					  NULL);
+=======
+					  &lo_avd);
+>>>>>>> v3.18
 		if ((lo_avd.allowed & avd->allowed) == avd->allowed)
 			return;		/* no masked permission */
 		masked = ~lo_avd.allowed & avd->allowed;
@@ -581,8 +595,12 @@ static void type_attribute_bounds_av(struct context *scontext,
 		context_struct_compute_av(scontext,
 					  &lo_tcontext,
 					  tclass,
+<<<<<<< HEAD
 					  &lo_avd,
 					  NULL);
+=======
+					  &lo_avd);
+>>>>>>> v3.18
 		if ((lo_avd.allowed & avd->allowed) == avd->allowed)
 			return;		/* no masked permission */
 		masked = ~lo_avd.allowed & avd->allowed;
@@ -598,8 +616,12 @@ static void type_attribute_bounds_av(struct context *scontext,
 		context_struct_compute_av(&lo_scontext,
 					  &lo_tcontext,
 					  tclass,
+<<<<<<< HEAD
 					  &lo_avd,
 					  NULL);
+=======
+					  &lo_avd);
+>>>>>>> v3.18
 		if ((lo_avd.allowed & avd->allowed) == avd->allowed)
 			return;		/* no masked permission */
 		masked = ~lo_avd.allowed & avd->allowed;
@@ -616,6 +638,7 @@ static void type_attribute_bounds_av(struct context *scontext,
 }
 
 /*
+<<<<<<< HEAD
  * flag which drivers have permissions
  * only looking for ioctl based extended permssions
  */
@@ -649,6 +672,15 @@ static void context_struct_compute_av(struct context *scontext,
 					u16 tclass,
 					struct av_decision *avd,
 					struct extended_perms *xperms)
+=======
+ * Compute access vectors based on a context structure pair for
+ * the permissions in a particular class.
+ */
+static void context_struct_compute_av(struct context *scontext,
+				      struct context *tcontext,
+				      u16 tclass,
+				      struct av_decision *avd)
+>>>>>>> v3.18
 {
 	struct constraint_node *constraint;
 	struct role_allow *ra;
@@ -662,10 +694,13 @@ static void context_struct_compute_av(struct context *scontext,
 	avd->allowed = 0;
 	avd->auditallow = 0;
 	avd->auditdeny = 0xffffffff;
+<<<<<<< HEAD
 	if (xperms) {
 		memset(&xperms->drivers, 0, sizeof(xperms->drivers));
 		xperms->len = 0;
 	}
+=======
+>>>>>>> v3.18
 
 	if (unlikely(!tclass || tclass > policydb.p_classes.nprim)) {
 		if (printk_ratelimit())
@@ -680,7 +715,11 @@ static void context_struct_compute_av(struct context *scontext,
 	 * this permission check, then use it.
 	 */
 	avkey.target_class = tclass;
+<<<<<<< HEAD
 	avkey.specified = AVTAB_AV | AVTAB_XPERMS;
+=======
+	avkey.specified = AVTAB_AV;
+>>>>>>> v3.18
 	sattr = flex_array_get(policydb.type_attr_map_array, scontext->type - 1);
 	BUG_ON(!sattr);
 	tattr = flex_array_get(policydb.type_attr_map_array, tcontext->type - 1);
@@ -693,6 +732,7 @@ static void context_struct_compute_av(struct context *scontext,
 			     node;
 			     node = avtab_search_node_next(node, avkey.specified)) {
 				if (node->key.specified == AVTAB_ALLOWED)
+<<<<<<< HEAD
 					avd->allowed |= node->datum.u.data;
 				else if (node->key.specified == AVTAB_AUDITALLOW)
 					avd->auditallow |= node->datum.u.data;
@@ -705,6 +745,17 @@ static void context_struct_compute_av(struct context *scontext,
 			/* Check conditional av table for additional permissions */
 			cond_compute_av(&policydb.te_cond_avtab, &avkey,
 					avd, xperms);
+=======
+					avd->allowed |= node->datum.data;
+				else if (node->key.specified == AVTAB_AUDITALLOW)
+					avd->auditallow |= node->datum.data;
+				else if (node->key.specified == AVTAB_AUDITDENY)
+					avd->auditdeny &= node->datum.data;
+			}
+
+			/* Check conditional av table for additional permissions */
+			cond_compute_av(&policydb.te_cond_avtab, &avkey, avd);
+>>>>>>> v3.18
 
 		}
 	}
@@ -764,7 +815,11 @@ static int security_validtrans_handle_fail(struct context *ocontext,
 	if (context_struct_to_string(tcontext, &t, &tlen))
 		goto out;
 	audit_log(current->audit_context, GFP_ATOMIC, AUDIT_SELINUX_ERR,
+<<<<<<< HEAD
 		  "security_validate_transition:  denied for"
+=======
+		  "op=security_validate_transition seresult=denied"
+>>>>>>> v3.18
 		  " oldcontext=%s newcontext=%s taskcontext=%s tclass=%s",
 		  o, n, t, sym_name(&policydb, SYM_CLASSES, tclass-1));
 out:
@@ -913,7 +968,11 @@ int security_bounded_transition(u32 old_sid, u32 new_sid)
 			audit_log(current->audit_context,
 				  GFP_ATOMIC, AUDIT_SELINUX_ERR,
 				  "op=security_bounded_transition "
+<<<<<<< HEAD
 				  "result=denied "
+=======
+				  "seresult=denied "
+>>>>>>> v3.18
 				  "oldcontext=%s newcontext=%s",
 				  old_name, new_name);
 		}
@@ -935,6 +994,7 @@ static void avd_init(struct av_decision *avd)
 	avd->flags = 0;
 }
 
+<<<<<<< HEAD
 void services_compute_xperms_decision(struct extended_perms_decision *xpermd,
 					struct avtab_node *node)
 {
@@ -1068,6 +1128,8 @@ allow:
 	memset(xpermd->allowed->p, 0xff, sizeof(xpermd->allowed->p));
 	goto out;
 }
+=======
+>>>>>>> v3.18
 
 /**
  * security_compute_av - Compute access vector decisions.
@@ -1075,7 +1137,10 @@ allow:
  * @tsid: target security identifier
  * @tclass: target security class
  * @avd: access vector decisions
+<<<<<<< HEAD
  * @xperms: extended permissions
+=======
+>>>>>>> v3.18
  *
  * Compute a set of access vector decisions based on the
  * SID pair (@ssid, @tsid) for the permissions in @tclass.
@@ -1083,15 +1148,22 @@ allow:
 void security_compute_av(u32 ssid,
 			 u32 tsid,
 			 u16 orig_tclass,
+<<<<<<< HEAD
 			 struct av_decision *avd,
 			 struct extended_perms *xperms)
+=======
+			 struct av_decision *avd)
+>>>>>>> v3.18
 {
 	u16 tclass;
 	struct context *scontext = NULL, *tcontext = NULL;
 
 	read_lock(&policy_rwlock);
 	avd_init(avd);
+<<<<<<< HEAD
 	xperms->len = 0;
+=======
+>>>>>>> v3.18
 	if (!ss_initialized)
 		goto allow;
 
@@ -1119,7 +1191,11 @@ void security_compute_av(u32 ssid,
 			goto allow;
 		goto out;
 	}
+<<<<<<< HEAD
 	context_struct_compute_av(scontext, tcontext, tclass, avd, xperms);
+=======
+	context_struct_compute_av(scontext, tcontext, tclass, avd);
+>>>>>>> v3.18
 	map_decision(orig_tclass, avd, policydb.allow_unknown);
 out:
 	read_unlock(&policy_rwlock);
@@ -1165,7 +1241,11 @@ void security_compute_av_user(u32 ssid,
 		goto out;
 	}
 
+<<<<<<< HEAD
 	context_struct_compute_av(scontext, tcontext, tclass, avd, NULL);
+=======
+	context_struct_compute_av(scontext, tcontext, tclass, avd);
+>>>>>>> v3.18
  out:
 	read_unlock(&policy_rwlock);
 	return;
@@ -1461,16 +1541,28 @@ out:
  * @scontext: security context
  * @scontext_len: length in bytes
  * @sid: security identifier, SID
+<<<<<<< HEAD
+=======
+ * @gfp: context for the allocation
+>>>>>>> v3.18
  *
  * Obtains a SID associated with the security context that
  * has the string representation specified by @scontext.
  * Returns -%EINVAL if the context is invalid, -%ENOMEM if insufficient
  * memory is available, or 0 on success.
  */
+<<<<<<< HEAD
 int security_context_to_sid(const char *scontext, u32 scontext_len, u32 *sid)
 {
 	return security_context_to_sid_core(scontext, scontext_len,
 					    sid, SECSID_NULL, GFP_KERNEL, 0);
+=======
+int security_context_to_sid(const char *scontext, u32 scontext_len, u32 *sid,
+			    gfp_t gfp)
+{
+	return security_context_to_sid_core(scontext, scontext_len,
+					    sid, SECSID_NULL, gfp, 0);
+>>>>>>> v3.18
 }
 
 /**
@@ -1521,8 +1613,13 @@ static int compute_sid_handle_invalid_context(
 	if (context_struct_to_string(newcontext, &n, &nlen))
 		goto out;
 	audit_log(current->audit_context, GFP_ATOMIC, AUDIT_SELINUX_ERR,
+<<<<<<< HEAD
 		  "security_compute_sid:  invalid context %s"
 		  " for scontext=%s"
+=======
+		  "op=security_compute_sid invalid_context=%s"
+		  " scontext=%s"
+>>>>>>> v3.18
 		  " tcontext=%s"
 		  " tclass=%s",
 		  n, s, t, sym_name(&policydb, SYM_CLASSES, tclass-1));
@@ -1685,7 +1782,11 @@ static int security_compute_sid(u32 ssid,
 
 	if (avdatum) {
 		/* Use the type from the type transition/member/change rule. */
+<<<<<<< HEAD
 		newcontext.type = avdatum->u.data;
+=======
+		newcontext.type = avdatum->data;
+>>>>>>> v3.18
 	}
 
 	/* if we have a objname this is a file trans check so check those rules */
@@ -1989,6 +2090,11 @@ static void security_load_policycaps(void)
 						  POLICYDB_CAPABILITY_NETPEER);
 	selinux_policycap_openperm = ebitmap_get_bit(&policydb.policycaps,
 						  POLICYDB_CAPABILITY_OPENPERM);
+<<<<<<< HEAD
+=======
+	selinux_policycap_alwaysnetwork = ebitmap_get_bit(&policydb.policycaps,
+						  POLICYDB_CAPABILITY_ALWAYSNETWORK);
+>>>>>>> v3.18
 }
 
 static int security_preserve_bools(struct policydb *p);
@@ -2005,7 +2111,11 @@ static int security_preserve_bools(struct policydb *p);
  */
 int security_load_policy(void *data, size_t len)
 {
+<<<<<<< HEAD
 	struct policydb oldpolicydb, newpolicydb;
+=======
+	struct policydb *oldpolicydb, *newpolicydb;
+>>>>>>> v3.18
 	struct sidtab oldsidtab, newsidtab;
 	struct selinux_mapping *oldmap, *map = NULL;
 	struct convert_context_args args;
@@ -2014,12 +2124,26 @@ int security_load_policy(void *data, size_t len)
 	int rc = 0;
 	struct policy_file file = { data, len }, *fp = &file;
 
+<<<<<<< HEAD
+=======
+	oldpolicydb = kzalloc(2 * sizeof(*oldpolicydb), GFP_KERNEL);
+	if (!oldpolicydb) {
+		rc = -ENOMEM;
+		goto out;
+	}
+	newpolicydb = oldpolicydb + 1;
+
+>>>>>>> v3.18
 	if (!ss_initialized) {
 		avtab_cache_init();
 		rc = policydb_read(&policydb, fp);
 		if (rc) {
 			avtab_cache_destroy();
+<<<<<<< HEAD
 			return rc;
+=======
+			goto out;
+>>>>>>> v3.18
 		}
 
 		policydb.len = len;
@@ -2029,14 +2153,22 @@ int security_load_policy(void *data, size_t len)
 		if (rc) {
 			policydb_destroy(&policydb);
 			avtab_cache_destroy();
+<<<<<<< HEAD
 			return rc;
+=======
+			goto out;
+>>>>>>> v3.18
 		}
 
 		rc = policydb_load_isids(&policydb, &sidtab);
 		if (rc) {
 			policydb_destroy(&policydb);
 			avtab_cache_destroy();
+<<<<<<< HEAD
 			return rc;
+=======
+			goto out;
+>>>>>>> v3.18
 		}
 
 		security_load_policycaps();
@@ -2048,13 +2180,18 @@ int security_load_policy(void *data, size_t len)
 		selinux_status_update_policyload(seqno);
 		selinux_netlbl_cache_invalidate();
 		selinux_xfrm_notify_policyload();
+<<<<<<< HEAD
 		return 0;
+=======
+		goto out;
+>>>>>>> v3.18
 	}
 
 #if 0
 	sidtab_hash_eval(&sidtab, "sids");
 #endif
 
+<<<<<<< HEAD
 	rc = policydb_read(&newpolicydb, fp);
 	if (rc)
 		return rc;
@@ -2078,6 +2215,31 @@ int security_load_policy(void *data, size_t len)
 		goto err;
 
 	rc = security_preserve_bools(&newpolicydb);
+=======
+	rc = policydb_read(newpolicydb, fp);
+	if (rc)
+		goto out;
+
+	newpolicydb->len = len;
+	/* If switching between different policy types, log MLS status */
+	if (policydb.mls_enabled && !newpolicydb->mls_enabled)
+		printk(KERN_INFO "SELinux: Disabling MLS support...\n");
+	else if (!policydb.mls_enabled && newpolicydb->mls_enabled)
+		printk(KERN_INFO "SELinux: Enabling MLS support...\n");
+
+	rc = policydb_load_isids(newpolicydb, &newsidtab);
+	if (rc) {
+		printk(KERN_ERR "SELinux:  unable to load the initial SIDs\n");
+		policydb_destroy(newpolicydb);
+		goto out;
+	}
+
+	rc = selinux_set_mapping(newpolicydb, secclass_map, &map, &map_size);
+	if (rc)
+		goto err;
+
+	rc = security_preserve_bools(newpolicydb);
+>>>>>>> v3.18
 	if (rc) {
 		printk(KERN_ERR "SELinux:  unable to preserve booleans\n");
 		goto err;
@@ -2095,7 +2257,11 @@ int security_load_policy(void *data, size_t len)
 	 * in the new SID table.
 	 */
 	args.oldp = &policydb;
+<<<<<<< HEAD
 	args.newp = &newpolicydb;
+=======
+	args.newp = newpolicydb;
+>>>>>>> v3.18
 	rc = sidtab_map(&newsidtab, convert_context, &args);
 	if (rc) {
 		printk(KERN_ERR "SELinux:  unable to convert the internal"
@@ -2105,12 +2271,20 @@ int security_load_policy(void *data, size_t len)
 	}
 
 	/* Save the old policydb and SID table to free later. */
+<<<<<<< HEAD
 	memcpy(&oldpolicydb, &policydb, sizeof policydb);
+=======
+	memcpy(oldpolicydb, &policydb, sizeof(policydb));
+>>>>>>> v3.18
 	sidtab_set(&oldsidtab, &sidtab);
 
 	/* Install the new policydb and SID table. */
 	write_lock_irq(&policy_rwlock);
+<<<<<<< HEAD
 	memcpy(&policydb, &newpolicydb, sizeof policydb);
+=======
+	memcpy(&policydb, newpolicydb, sizeof(policydb));
+>>>>>>> v3.18
 	sidtab_set(&sidtab, &newsidtab);
 	security_load_policycaps();
 	oldmap = current_mapping;
@@ -2120,7 +2294,11 @@ int security_load_policy(void *data, size_t len)
 	write_unlock_irq(&policy_rwlock);
 
 	/* Free the old policydb and SID table. */
+<<<<<<< HEAD
 	policydb_destroy(&oldpolicydb);
+=======
+	policydb_destroy(oldpolicydb);
+>>>>>>> v3.18
 	sidtab_destroy(&oldsidtab);
 	kfree(oldmap);
 
@@ -2130,14 +2308,27 @@ int security_load_policy(void *data, size_t len)
 	selinux_netlbl_cache_invalidate();
 	selinux_xfrm_notify_policyload();
 
+<<<<<<< HEAD
 	return 0;
+=======
+	rc = 0;
+	goto out;
+>>>>>>> v3.18
 
 err:
 	kfree(map);
 	sidtab_destroy(&newsidtab);
+<<<<<<< HEAD
 	policydb_destroy(&newpolicydb);
 	return rc;
 
+=======
+	policydb_destroy(newpolicydb);
+
+out:
+	kfree(oldpolicydb);
+	return rc;
+>>>>>>> v3.18
 }
 
 size_t security_policydb_len(void)
@@ -2435,7 +2626,11 @@ out:
 }
 
 /**
+<<<<<<< HEAD
  * security_genfs_sid - Obtain a SID for a file in a filesystem
+=======
+ * __security_genfs_sid - Helper to obtain a SID for a file in a filesystem
+>>>>>>> v3.18
  * @fstype: filesystem type
  * @path: path from root of mount
  * @sclass: file security class
@@ -2444,11 +2639,21 @@ out:
  * Obtain a SID to use for a file in a filesystem that
  * cannot support xattr or use a fixed labeling behavior like
  * transition SIDs or task SIDs.
+<<<<<<< HEAD
  */
 int security_genfs_sid(const char *fstype,
 		       char *path,
 		       u16 orig_sclass,
 		       u32 *sid)
+=======
+ *
+ * The caller must acquire the policy_rwlock before calling this function.
+ */
+static inline int __security_genfs_sid(const char *fstype,
+				       char *path,
+				       u16 orig_sclass,
+				       u32 *sid)
+>>>>>>> v3.18
 {
 	int len;
 	u16 sclass;
@@ -2459,8 +2664,11 @@ int security_genfs_sid(const char *fstype,
 	while (path[0] == '/' && path[1] == '/')
 		path++;
 
+<<<<<<< HEAD
 	read_lock(&policy_rwlock);
 
+=======
+>>>>>>> v3.18
 	sclass = unmap_class(orig_sclass);
 	*sid = SECINITSID_UNLABELED;
 
@@ -2494,11 +2702,15 @@ int security_genfs_sid(const char *fstype,
 	*sid = c->sid[0];
 	rc = 0;
 out:
+<<<<<<< HEAD
 	read_unlock(&policy_rwlock);
+=======
+>>>>>>> v3.18
 	return rc;
 }
 
 /**
+<<<<<<< HEAD
  * security_fs_use - Determine how to handle labeling for a filesystem.
  * @fstype: filesystem type
  * @behavior: labeling behavior
@@ -2511,6 +2723,40 @@ int security_fs_use(
 {
 	int rc = 0;
 	struct ocontext *c;
+=======
+ * security_genfs_sid - Obtain a SID for a file in a filesystem
+ * @fstype: filesystem type
+ * @path: path from root of mount
+ * @sclass: file security class
+ * @sid: SID for path
+ *
+ * Acquire policy_rwlock before calling __security_genfs_sid() and release
+ * it afterward.
+ */
+int security_genfs_sid(const char *fstype,
+		       char *path,
+		       u16 orig_sclass,
+		       u32 *sid)
+{
+	int retval;
+
+	read_lock(&policy_rwlock);
+	retval = __security_genfs_sid(fstype, path, orig_sclass, sid);
+	read_unlock(&policy_rwlock);
+	return retval;
+}
+
+/**
+ * security_fs_use - Determine how to handle labeling for a filesystem.
+ * @sb: superblock in question
+ */
+int security_fs_use(struct super_block *sb)
+{
+	int rc = 0;
+	struct ocontext *c;
+	struct superblock_security_struct *sbsec = sb->s_security;
+	const char *fstype = sb->s_type->name;
+>>>>>>> v3.18
 
 	read_lock(&policy_rwlock);
 
@@ -2522,13 +2768,18 @@ int security_fs_use(
 	}
 
 	if (c) {
+<<<<<<< HEAD
 		*behavior = c->v.behavior;
+=======
+		sbsec->behavior = c->v.behavior;
+>>>>>>> v3.18
 		if (!c->sid[0]) {
 			rc = sidtab_context_to_sid(&sidtab, &c->context[0],
 						   &c->sid[0]);
 			if (rc)
 				goto out;
 		}
+<<<<<<< HEAD
 		*sid = c->sid[0];
 	} else {
 		rc = security_genfs_sid(fstype, "/", SECCLASS_DIR, sid);
@@ -2537,6 +2788,17 @@ int security_fs_use(
 			rc = 0;
 		} else {
 			*behavior = SECURITY_FS_USE_GENFS;
+=======
+		sbsec->sid = c->sid[0];
+	} else {
+		rc = __security_genfs_sid(fstype, "/", SECCLASS_DIR,
+					  &sbsec->sid);
+		if (rc) {
+			sbsec->behavior = SECURITY_FS_USE_NONE;
+			rc = 0;
+		} else {
+			sbsec->behavior = SECURITY_FS_USE_GENFS;
+>>>>>>> v3.18
 		}
 	}
 
@@ -2745,8 +3007,15 @@ int security_sid_mls_copy(u32 sid, u32 mls_sid, u32 *new_sid)
 		rc = convert_context_handle_invalid_context(&newcon);
 		if (rc) {
 			if (!context_struct_to_string(&newcon, &s, &len)) {
+<<<<<<< HEAD
 				audit_log(current->audit_context, GFP_ATOMIC, AUDIT_SELINUX_ERR,
 					  "security_sid_mls_copy: invalid context %s", s);
+=======
+				audit_log(current->audit_context,
+					  GFP_ATOMIC, AUDIT_SELINUX_ERR,
+					  "op=security_sid_mls_copy "
+					  "invalid_context=%s", s);
+>>>>>>> v3.18
 				kfree(s);
 			}
 			goto out_unlock;
@@ -3115,25 +3384,38 @@ int selinux_audit_rule_match(u32 sid, u32 field, u32 op, void *vrule,
 	struct selinux_audit_rule *rule = vrule;
 	int match = 0;
 
+<<<<<<< HEAD
 	if (!rule) {
 		audit_log(actx, GFP_ATOMIC, AUDIT_SELINUX_ERR,
 			  "selinux_audit_rule_match: missing rule\n");
+=======
+	if (unlikely(!rule)) {
+		WARN_ONCE(1, "selinux_audit_rule_match: missing rule\n");
+>>>>>>> v3.18
 		return -ENOENT;
 	}
 
 	read_lock(&policy_rwlock);
 
 	if (rule->au_seqno < latest_granting) {
+<<<<<<< HEAD
 		audit_log(actx, GFP_ATOMIC, AUDIT_SELINUX_ERR,
 			  "selinux_audit_rule_match: stale rule\n");
+=======
+>>>>>>> v3.18
 		match = -ESTALE;
 		goto out;
 	}
 
 	ctxt = sidtab_search(&sidtab, sid);
+<<<<<<< HEAD
 	if (!ctxt) {
 		audit_log(actx, GFP_ATOMIC, AUDIT_SELINUX_ERR,
 			  "selinux_audit_rule_match: unrecognized SID %d\n",
+=======
+	if (unlikely(!ctxt)) {
+		WARN_ONCE(1, "selinux_audit_rule_match: unrecognized SID %d\n",
+>>>>>>> v3.18
 			  sid);
 		match = -ENOENT;
 		goto out;

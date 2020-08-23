@@ -23,7 +23,11 @@
 #define STACK_TOP	(TASK_SIZE - PAGE_SIZE)
 #define STACK_TOP_MAX	STACK_TOP
 /* Maximum virtual space for stack */
+<<<<<<< HEAD
 #define STACK_SIZE_MAX	(1 << 28)	/* 256 MB */
+=======
+#define STACK_SIZE_MAX	(CONFIG_MAX_STACK_SIZE_MB*1024*1024)
+>>>>>>> v3.18
 
 /* This decides where the kernel will search for a free chunk of vm
  * space during mmap's.
@@ -149,12 +153,21 @@ extern void exit_thread(void);
 
 unsigned long get_wchan(struct task_struct *p);
 
+<<<<<<< HEAD
 #define	KSTK_EIP(tsk)	(task_pt_regs(tsk)->ctx.CurrPC)
 #define	KSTK_ESP(tsk)	(task_pt_regs(tsk)->ctx.AX[0].U0)
+=======
+#define	KSTK_EIP(tsk)	((tsk)->thread.kernel_context->CurrPC)
+#define	KSTK_ESP(tsk)	((tsk)->thread.kernel_context->AX[0].U0)
+>>>>>>> v3.18
 
 #define user_stack_pointer(regs)        ((regs)->ctx.AX[0].U0)
 
 #define cpu_relax()     barrier()
+<<<<<<< HEAD
+=======
+#define cpu_relax_lowlatency()  cpu_relax()
+>>>>>>> v3.18
 
 extern void setup_priv(void);
 
@@ -201,4 +214,9 @@ extern void (*soc_halt)(void);
 extern void show_trace(struct task_struct *tsk, unsigned long *sp,
 		       struct pt_regs *regs);
 
+<<<<<<< HEAD
+=======
+extern const struct seq_operations cpuinfo_op;
+
+>>>>>>> v3.18
 #endif

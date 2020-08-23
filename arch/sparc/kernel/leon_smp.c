@@ -54,7 +54,11 @@ extern ctxd_t *srmmu_ctx_table_phys;
 static int smp_processors_ready;
 extern volatile unsigned long cpu_callin_map[NR_CPUS];
 extern cpumask_t smp_commenced_mask;
+<<<<<<< HEAD
 void __cpuinit leon_configure_cache_smp(void);
+=======
+void leon_configure_cache_smp(void);
+>>>>>>> v3.18
 static void leon_ipi_init(void);
 
 /* IRQ number of LEON IPIs */
@@ -69,12 +73,20 @@ static inline unsigned long do_swap(volatile unsigned long *ptr,
 	return val;
 }
 
+<<<<<<< HEAD
 void __cpuinit leon_cpu_pre_starting(void *arg)
+=======
+void leon_cpu_pre_starting(void *arg)
+>>>>>>> v3.18
 {
 	leon_configure_cache_smp();
 }
 
+<<<<<<< HEAD
 void __cpuinit leon_cpu_pre_online(void *arg)
+=======
+void leon_cpu_pre_online(void *arg)
+>>>>>>> v3.18
 {
 	int cpuid = hard_smp_processor_id();
 
@@ -106,7 +118,11 @@ void __cpuinit leon_cpu_pre_online(void *arg)
 
 extern struct linux_prom_registers smp_penguin_ctable;
 
+<<<<<<< HEAD
 void __cpuinit leon_configure_cache_smp(void)
+=======
+void leon_configure_cache_smp(void)
+>>>>>>> v3.18
 {
 	unsigned long cfg = sparc_leon3_get_dcachecfg();
 	int me = smp_processor_id();
@@ -130,7 +146,11 @@ void __cpuinit leon_configure_cache_smp(void)
 	local_ops->tlb_all();
 }
 
+<<<<<<< HEAD
 void leon_smp_setbroadcast(unsigned int mask)
+=======
+static void leon_smp_setbroadcast(unsigned int mask)
+>>>>>>> v3.18
 {
 	int broadcast =
 	    ((LEON3_BYPASS_LOAD_PA(&(leon3_irqctrl_regs->mpstatus)) >>
@@ -148,6 +168,7 @@ void leon_smp_setbroadcast(unsigned int mask)
 	LEON_BYPASS_STORE_PA(&(leon3_irqctrl_regs->mpbroadcast), mask);
 }
 
+<<<<<<< HEAD
 unsigned int leon_smp_getbroadcast(void)
 {
 	unsigned int mask;
@@ -155,6 +176,8 @@ unsigned int leon_smp_getbroadcast(void)
 	return mask;
 }
 
+=======
+>>>>>>> v3.18
 int leon_smp_nrcpus(void)
 {
 	int nrcpu =
@@ -186,7 +209,11 @@ void __init leon_boot_cpus(void)
 
 }
 
+<<<<<<< HEAD
 int __cpuinit leon_boot_one_cpu(int i, struct task_struct *idle)
+=======
+int leon_boot_one_cpu(int i, struct task_struct *idle)
+>>>>>>> v3.18
 {
 	int timeout;
 
@@ -254,6 +281,7 @@ void __init leon_smp_done(void)
 	/* Free unneeded trap tables */
 	if (!cpu_present(1)) {
 		free_reserved_page(virt_to_page(&trapbase_cpu1));
+<<<<<<< HEAD
 		num_physpages++;
 	}
 	if (!cpu_present(2)) {
@@ -263,16 +291,27 @@ void __init leon_smp_done(void)
 	if (!cpu_present(3)) {
 		free_reserved_page(virt_to_page(&trapbase_cpu3));
 		num_physpages++;
+=======
+	}
+	if (!cpu_present(2)) {
+		free_reserved_page(virt_to_page(&trapbase_cpu2));
+	}
+	if (!cpu_present(3)) {
+		free_reserved_page(virt_to_page(&trapbase_cpu3));
+>>>>>>> v3.18
 	}
 	/* Ok, they are spinning and ready to go. */
 	smp_processors_ready = 1;
 
 }
 
+<<<<<<< HEAD
 void leon_irq_rotate(int cpu)
 {
 }
 
+=======
+>>>>>>> v3.18
 struct leon_ipi_work {
 	int single;
 	int msk;
@@ -357,7 +396,11 @@ static void leon_ipi_resched(int cpu)
 
 void leonsmp_ipi_interrupt(void)
 {
+<<<<<<< HEAD
 	struct leon_ipi_work *work = &__get_cpu_var(leon_ipi_work);
+=======
+	struct leon_ipi_work *work = this_cpu_ptr(&leon_ipi_work);
+>>>>>>> v3.18
 
 	if (work->single) {
 		work->single = 0;

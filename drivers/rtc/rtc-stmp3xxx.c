@@ -23,6 +23,10 @@
 #include <linux/init.h>
 #include <linux/platform_device.h>
 #include <linux/interrupt.h>
+<<<<<<< HEAD
+=======
+#include <linux/delay.h>
+>>>>>>> v3.18
 #include <linux/rtc.h>
 #include <linux/slab.h>
 #include <linux/of_device.h>
@@ -119,6 +123,7 @@ static void stmp3xxx_wdt_register(struct platform_device *rtc_pdev)
 }
 #endif /* CONFIG_STMP3XXX_RTC_WATCHDOG */
 
+<<<<<<< HEAD
 static void stmp3xxx_wait_time(struct stmp3xxx_rtc_data *rtc_data)
 {
 	/*
@@ -129,14 +134,47 @@ static void stmp3xxx_wait_time(struct stmp3xxx_rtc_data *rtc_data)
 	while (readl(rtc_data->io + STMP3XXX_RTC_STAT) &
 			(0x80 << STMP3XXX_RTC_STAT_STALE_SHIFT))
 		cpu_relax();
+=======
+static int stmp3xxx_wait_time(struct stmp3xxx_rtc_data *rtc_data)
+{
+	int timeout = 5000; /* 3ms according to i.MX28 Ref Manual */
+	/*
+	 * The i.MX28 Applications Processor Reference Manual, Rev. 1, 2010
+	 * states:
+	 * | The order in which registers are updated is
+	 * | Persistent 0, 1, 2, 3, 4, 5, Alarm, Seconds.
+	 * | (This list is in bitfield order, from LSB to MSB, as they would
+	 * | appear in the STALE_REGS and NEW_REGS bitfields of the HW_RTC_STAT
+	 * | register. For example, the Seconds register corresponds to
+	 * | STALE_REGS or NEW_REGS containing 0x80.)
+	 */
+	do {
+		if (!(readl(rtc_data->io + STMP3XXX_RTC_STAT) &
+				(0x80 << STMP3XXX_RTC_STAT_STALE_SHIFT)))
+			return 0;
+		udelay(1);
+	} while (--timeout > 0);
+	return (readl(rtc_data->io + STMP3XXX_RTC_STAT) &
+		(0x80 << STMP3XXX_RTC_STAT_STALE_SHIFT)) ? -ETIME : 0;
+>>>>>>> v3.18
 }
 
 /* Time read/write */
 static int stmp3xxx_rtc_gettime(struct device *dev, struct rtc_time *rtc_tm)
 {
+<<<<<<< HEAD
 	struct stmp3xxx_rtc_data *rtc_data = dev_get_drvdata(dev);
 
 	stmp3xxx_wait_time(rtc_data);
+=======
+	int ret;
+	struct stmp3xxx_rtc_data *rtc_data = dev_get_drvdata(dev);
+
+	ret = stmp3xxx_wait_time(rtc_data);
+	if (ret)
+		return ret;
+
+>>>>>>> v3.18
 	rtc_time_to_tm(readl(rtc_data->io + STMP3XXX_RTC_SECONDS), rtc_tm);
 	return 0;
 }
@@ -146,8 +184,12 @@ static int stmp3xxx_rtc_set_mmss(struct device *dev, unsigned long t)
 	struct stmp3xxx_rtc_data *rtc_data = dev_get_drvdata(dev);
 
 	writel(t, rtc_data->io + STMP3XXX_RTC_SECONDS);
+<<<<<<< HEAD
 	stmp3xxx_wait_time(rtc_data);
 	return 0;
+=======
+	return stmp3xxx_wait_time(rtc_data);
+>>>>>>> v3.18
 }
 
 /* interrupt(s) handler */
@@ -225,7 +267,10 @@ static int stmp3xxx_rtc_remove(struct platform_device *pdev)
 
 	writel(STMP3XXX_RTC_CTRL_ALARM_IRQ_EN,
 			rtc_data->io + STMP3XXX_RTC_CTRL_CLR);
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -262,7 +307,16 @@ static int stmp3xxx_rtc_probe(struct platform_device *pdev)
 
 	platform_set_drvdata(pdev, rtc_data);
 
+<<<<<<< HEAD
 	stmp_reset_block(rtc_data->io);
+=======
+	err = stmp_reset_block(rtc_data->io);
+	if (err) {
+		dev_err(&pdev->dev, "stmp_reset_block failed: %d\n", err);
+		return err;
+	}
+
+>>>>>>> v3.18
 	writel(STMP3XXX_RTC_PERSISTENT0_ALARM_EN |
 			STMP3XXX_RTC_PERSISTENT0_ALARM_WAKE_EN |
 			STMP3XXX_RTC_PERSISTENT0_ALARM_WAKE,
@@ -274,25 +328,37 @@ static int stmp3xxx_rtc_probe(struct platform_device *pdev)
 
 	rtc_data->rtc = devm_rtc_device_register(&pdev->dev, pdev->name,
 				&stmp3xxx_rtc_ops, THIS_MODULE);
+<<<<<<< HEAD
 	if (IS_ERR(rtc_data->rtc)) {
 		err = PTR_ERR(rtc_data->rtc);
 		goto out;
 	}
+=======
+	if (IS_ERR(rtc_data->rtc))
+		return PTR_ERR(rtc_data->rtc);
+>>>>>>> v3.18
 
 	err = devm_request_irq(&pdev->dev, rtc_data->irq_alarm,
 			stmp3xxx_rtc_interrupt, 0, "RTC alarm", &pdev->dev);
 	if (err) {
 		dev_err(&pdev->dev, "Cannot claim IRQ%d\n",
 			rtc_data->irq_alarm);
+<<<<<<< HEAD
 		goto out;
+=======
+		return err;
+>>>>>>> v3.18
 	}
 
 	stmp3xxx_wdt_register(pdev);
 	return 0;
+<<<<<<< HEAD
 
 out:
 	platform_set_drvdata(pdev, NULL);
 	return err;
+=======
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_PM_SLEEP
@@ -330,7 +396,11 @@ static struct platform_driver stmp3xxx_rtcdrv = {
 		.name	= "stmp3xxx-rtc",
 		.owner	= THIS_MODULE,
 		.pm	= &stmp3xxx_rtc_pm_ops,
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(rtc_dt_ids),
+=======
+		.of_match_table = rtc_dt_ids,
+>>>>>>> v3.18
 	},
 };
 

@@ -177,11 +177,14 @@ static void jsm_tty_stop_rx(struct uart_port *port)
 	channel->ch_bd->bd_ops->disable_receiver(channel);
 }
 
+<<<<<<< HEAD
 static void jsm_tty_enable_ms(struct uart_port *port)
 {
 	/* Nothing needed */
 }
 
+=======
+>>>>>>> v3.18
 static void jsm_tty_break(struct uart_port *port, int break_state)
 {
 	unsigned long lock_flags;
@@ -354,7 +357,10 @@ static struct uart_ops jsm_ops = {
 	.start_tx	= jsm_tty_start_tx,
 	.send_xchar	= jsm_tty_send_xchar,
 	.stop_rx	= jsm_tty_stop_rx,
+<<<<<<< HEAD
 	.enable_ms	= jsm_tty_enable_ms,
+=======
+>>>>>>> v3.18
 	.break_ctl	= jsm_tty_break,
 	.startup	= jsm_tty_open,
 	.shutdown	= jsm_tty_close,

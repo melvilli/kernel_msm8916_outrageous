@@ -121,9 +121,25 @@ static int __init uwb_subsys_init(void)
 	result = class_register(&uwb_rc_class);
 	if (result < 0)
 		goto error_uwb_rc_class_register;
+<<<<<<< HEAD
 	uwb_dbg_init();
 	return 0;
 
+=======
+
+	/* Register the UWB bus */
+	result = bus_register(&uwb_bus_type);
+	if (result) {
+		pr_err("%s - registering bus driver failed\n", __func__);
+		goto exit_bus;
+	}
+
+	uwb_dbg_init();
+	return 0;
+
+exit_bus:
+	class_unregister(&uwb_rc_class);
+>>>>>>> v3.18
 error_uwb_rc_class_register:
 	uwb_est_destroy();
 error_est_init:
@@ -134,6 +150,10 @@ module_init(uwb_subsys_init);
 static void __exit uwb_subsys_exit(void)
 {
 	uwb_dbg_exit();
+<<<<<<< HEAD
+=======
+	bus_unregister(&uwb_bus_type);
+>>>>>>> v3.18
 	class_unregister(&uwb_rc_class);
 	uwb_est_destroy();
 	return;

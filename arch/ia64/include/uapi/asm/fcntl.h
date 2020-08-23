@@ -8,6 +8,10 @@
 #define force_o_largefile()	\
 		(personality(current->personality) != PER_LINUX32)
 
+<<<<<<< HEAD
+=======
+#include <linux/personality.h>
+>>>>>>> v3.18
 #include <asm-generic/fcntl.h>
 
 #endif /* _ASM_IA64_FCNTL_H */

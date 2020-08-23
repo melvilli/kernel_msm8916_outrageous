@@ -23,7 +23,10 @@
  */
 
 #include <core/os.h>
+<<<<<<< HEAD
 #include <core/class.h>
+=======
+>>>>>>> v3.18
 #include <core/engctx.h>
 #include <core/event.h>
 
@@ -32,6 +35,7 @@
 #include <engine/software.h>
 #include <engine/disp.h>
 
+<<<<<<< HEAD
 struct nvc0_software_priv {
 	struct nouveau_software base;
 };
@@ -39,6 +43,9 @@ struct nvc0_software_priv {
 struct nvc0_software_chan {
 	struct nouveau_software_chan base;
 };
+=======
+#include "nv50.h"
+>>>>>>> v3.18
 
 /*******************************************************************************
  * software object classes
@@ -48,6 +55,7 @@ static int
 nvc0_software_mthd_vblsem_offset(struct nouveau_object *object, u32 mthd,
 				 void *args, u32 size)
 {
+<<<<<<< HEAD
 	struct nvc0_software_chan *chan = (void *)nv_engctx(object->parent);
 	u64 data = *(u32 *)args;
 	if (mthd == 0x0400) {
@@ -56,11 +64,22 @@ nvc0_software_mthd_vblsem_offset(struct nouveau_object *object, u32 mthd,
 	} else {
 		chan->base.vblank.offset &= 0xff00000000ULL;
 		chan->base.vblank.offset |= data;
+=======
+	struct nv50_software_chan *chan = (void *)nv_engctx(object->parent);
+	u64 data = *(u32 *)args;
+	if (mthd == 0x0400) {
+		chan->vblank.offset &= 0x00ffffffffULL;
+		chan->vblank.offset |= data << 32;
+	} else {
+		chan->vblank.offset &= 0xff00000000ULL;
+		chan->vblank.offset |= data;
+>>>>>>> v3.18
 	}
 	return 0;
 }
 
 static int
+<<<<<<< HEAD
 nvc0_software_mthd_vblsem_value(struct nouveau_object *object, u32 mthd,
 				void *args, u32 size)
 {
@@ -100,6 +119,13 @@ nvc0_software_mthd_mp_control(struct nouveau_object *object, u32 mthd,
 {
 	struct nvc0_software_chan *chan = (void *)nv_engctx(object->parent);
 	struct nvc0_software_priv *priv = (void *)nv_object(chan)->engine;
+=======
+nvc0_software_mthd_mp_control(struct nouveau_object *object, u32 mthd,
+                              void *args, u32 size)
+{
+	struct nv50_software_chan *chan = (void *)nv_engctx(object->parent);
+	struct nv50_software_priv *priv = (void *)nv_object(chan)->engine;
+>>>>>>> v3.18
 	u32 data = *(u32 *)args;
 
 	switch (mthd) {
@@ -124,9 +150,15 @@ static struct nouveau_omthds
 nvc0_software_omthds[] = {
 	{ 0x0400, 0x0400, nvc0_software_mthd_vblsem_offset },
 	{ 0x0404, 0x0404, nvc0_software_mthd_vblsem_offset },
+<<<<<<< HEAD
 	{ 0x0408, 0x0408, nvc0_software_mthd_vblsem_value },
 	{ 0x040c, 0x040c, nvc0_software_mthd_vblsem_release },
 	{ 0x0500, 0x0500, nvc0_software_mthd_flip },
+=======
+	{ 0x0408, 0x0408, nv50_software_mthd_vblsem_value },
+	{ 0x040c, 0x040c, nv50_software_mthd_vblsem_release },
+	{ 0x0500, 0x0500, nv50_software_mthd_flip },
+>>>>>>> v3.18
 	{ 0x0600, 0x0600, nvc0_software_mthd_mp_control },
 	{ 0x0644, 0x0644, nvc0_software_mthd_mp_control },
 	{ 0x06ac, 0x06ac, nvc0_software_mthd_mp_control },
@@ -144,11 +176,19 @@ nvc0_software_sclass[] = {
  ******************************************************************************/
 
 static int
+<<<<<<< HEAD
 nvc0_software_vblsem_release(struct nouveau_eventh *event, int head)
 {
 	struct nouveau_software_chan *chan =
 		container_of(event, struct nouveau_software_chan, vblank.event);
 	struct nvc0_software_priv *priv = (void *)nv_object(chan)->engine;
+=======
+nvc0_software_vblsem_release(struct nvkm_notify *notify)
+{
+	struct nv50_software_chan *chan =
+		container_of(notify, typeof(*chan), vblank.notify[notify->index]);
+	struct nv50_software_priv *priv = (void *)nv_object(chan)->engine;
+>>>>>>> v3.18
 	struct nouveau_bar *bar = nouveau_bar(priv);
 
 	nv_wr32(priv, 0x001718, 0x80000000 | chan->vblank.channel);
@@ -157,6 +197,7 @@ nvc0_software_vblsem_release(struct nouveau_eventh *event, int head)
 	nv_wr32(priv, 0x060010, lower_32_bits(chan->vblank.offset));
 	nv_wr32(priv, 0x060014, chan->vblank.value);
 
+<<<<<<< HEAD
 	return NVKM_EVENT_DROP;
 }
 
@@ -188,12 +229,28 @@ nvc0_software_cclass = {
 		.init = _nouveau_software_context_init,
 		.fini = _nouveau_software_context_fini,
 	},
+=======
+	return NVKM_NOTIFY_DROP;
+}
+
+static struct nv50_software_cclass
+nvc0_software_cclass = {
+	.base.handle = NV_ENGCTX(SW, 0xc0),
+	.base.ofuncs = &(struct nouveau_ofuncs) {
+		.ctor = nv50_software_context_ctor,
+		.dtor = nv50_software_context_dtor,
+		.init = _nouveau_software_context_init,
+		.fini = _nouveau_software_context_fini,
+	},
+	.vblank = nvc0_software_vblsem_release,
+>>>>>>> v3.18
 };
 
 /*******************************************************************************
  * software engine/subdev functions
  ******************************************************************************/
 
+<<<<<<< HEAD
 static int
 nvc0_software_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		   struct nouveau_oclass *oclass, void *data, u32 size,
@@ -218,8 +275,21 @@ nvc0_software_oclass = {
 	.handle = NV_ENGINE(SW, 0xc0),
 	.ofuncs = &(struct nouveau_ofuncs) {
 		.ctor = nvc0_software_ctor,
+=======
+struct nouveau_oclass *
+nvc0_software_oclass = &(struct nv50_software_oclass) {
+	.base.handle = NV_ENGINE(SW, 0xc0),
+	.base.ofuncs = &(struct nouveau_ofuncs) {
+		.ctor = nv50_software_ctor,
+>>>>>>> v3.18
 		.dtor = _nouveau_software_dtor,
 		.init = _nouveau_software_init,
 		.fini = _nouveau_software_fini,
 	},
+<<<<<<< HEAD
 };
+=======
+	.cclass = &nvc0_software_cclass.base,
+	.sclass =  nvc0_software_sclass,
+}.base;
+>>>>>>> v3.18

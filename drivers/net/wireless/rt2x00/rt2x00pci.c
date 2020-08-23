@@ -13,9 +13,13 @@
 	GNU General Public License for more details.
 
 	You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
 	along with this program; if not, write to the
 	Free Software Foundation, Inc.,
 	59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+	along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
  */
 
 /*
@@ -119,7 +123,11 @@ int rt2x00pci_probe(struct pci_dev *pci_dev, const struct rt2x00_ops *ops)
 	rt2x00dev->ops = ops;
 	rt2x00dev->hw = hw;
 	rt2x00dev->irq = pci_dev->irq;
+<<<<<<< HEAD
 	rt2x00dev->name = pci_name(pci_dev);
+=======
+	rt2x00dev->name = ops->name;
+>>>>>>> v3.18
 
 	if (pci_is_pcie(pci_dev))
 		rt2x00_set_chip_intf(rt2x00dev, RT2X00_CHIP_INTF_PCIE);
@@ -156,8 +164,11 @@ exit_release_regions:
 exit_disable_device:
 	pci_disable_device(pci_dev);
 
+<<<<<<< HEAD
 	pci_set_drvdata(pci_dev, NULL);
 
+=======
+>>>>>>> v3.18
 	return retval;
 }
 EXPORT_SYMBOL_GPL(rt2x00pci_probe);
@@ -177,7 +188,10 @@ void rt2x00pci_remove(struct pci_dev *pci_dev)
 	/*
 	 * Free the PCI device data.
 	 */
+<<<<<<< HEAD
 	pci_set_drvdata(pci_dev, NULL);
+=======
+>>>>>>> v3.18
 	pci_disable_device(pci_dev);
 	pci_release_regions(pci_dev);
 }

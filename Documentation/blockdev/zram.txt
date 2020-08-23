@@ -98,6 +98,7 @@ size of the disk when not in use so a huge zram is wasteful.
 	mount /dev/zram1 /tmp
 
 7) Stats:
+<<<<<<< HEAD
 Per-device statistics are exported as various nodes under /sys/block/zram<id>/
 
 A brief description of exported device attritbutes. For more details please
@@ -171,6 +172,22 @@ line of text and contains the following stats separated by whitespace:
 	mem_used_max
 	zero_pages
 	num_migrated
+=======
+	Per-device statistics are exported as various nodes under
+	/sys/block/zram<id>/
+		disksize
+		num_reads
+		num_writes
+		failed_reads
+		failed_writes
+		invalid_io
+		notify_free
+		zero_pages
+		orig_data_size
+		compr_data_size
+		mem_used_total
+		mem_used_max
+>>>>>>> v3.18
 
 8) Deactivate:
 	swapoff /dev/zram0

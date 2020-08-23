@@ -41,11 +41,20 @@
 #include <linux/mtd/physmap.h>
 #include <linux/mtd/sh_flctl.h>
 #include <linux/pinctrl/machine.h>
+<<<<<<< HEAD
+=======
+#include <linux/pinctrl/pinconf-generic.h>
+#include <linux/platform_data/gpio_backlight.h>
+>>>>>>> v3.18
 #include <linux/pm_clock.h>
 #include <linux/regulator/fixed.h>
 #include <linux/regulator/machine.h>
 #include <linux/smsc911x.h>
+<<<<<<< HEAD
 #include <linux/sh_intc.h>
+=======
+#include <linux/sh_clk.h>
+>>>>>>> v3.18
 #include <linux/tca6416_keypad.h>
 #include <linux/usb/renesas_usbhs.h>
 #include <linux/dma-mapping.h>
@@ -57,6 +66,7 @@
 #include <media/soc_camera_platform.h>
 #include <sound/sh_fsi.h>
 #include <sound/simple_card.h>
+<<<<<<< HEAD
 
 #include <mach/common.h>
 #include <mach/irqs.h>
@@ -66,6 +76,17 @@
 #include <asm/mach-types.h>
 
 #include "sh-gpio.h"
+=======
+#include <asm/mach/arch.h>
+#include <asm/mach-types.h>
+
+#include "common.h"
+#include "intc.h"
+#include "irqs.h"
+#include "pm-rmobile.h"
+#include "sh-gpio.h"
+#include "sh7372.h"
+>>>>>>> v3.18
 
 /*
  * Address	Interface		BusWidth	note
@@ -346,7 +367,11 @@ static struct platform_device meram_device = {
 	},
 };
 
+<<<<<<< HEAD
 /* LCDC */
+=======
+/* LCDC and backlight */
+>>>>>>> v3.18
 static struct fb_videomode mackerel_lcdc_modes[] = {
 	{
 		.name		= "WVGA Panel",
@@ -362,6 +387,7 @@ static struct fb_videomode mackerel_lcdc_modes[] = {
 	},
 };
 
+<<<<<<< HEAD
 static int mackerel_set_brightness(int brightness)
 {
 	gpio_set_value(31, brightness);
@@ -369,6 +395,8 @@ static int mackerel_set_brightness(int brightness)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 static const struct sh_mobile_meram_cfg lcd_meram_cfg = {
 	.icb[0] = {
 		.meram_size     = 0x40,
@@ -393,11 +421,14 @@ static struct sh_mobile_lcdc_info lcdc_info = {
 			.width		= 152,
 			.height		= 91,
 		},
+<<<<<<< HEAD
 		.bl_info = {
 			.name = "sh_mobile_lcdc_bl",
 			.max_brightness = 1,
 			.set_brightness = mackerel_set_brightness,
 		},
+=======
+>>>>>>> v3.18
 		.meram_cfg = &lcd_meram_cfg,
 	}
 };
@@ -425,6 +456,23 @@ static struct platform_device lcdc_device = {
 	},
 };
 
+<<<<<<< HEAD
+=======
+static struct gpio_backlight_platform_data gpio_backlight_data = {
+	.fbdev = &lcdc_device.dev,
+	.gpio = 31,
+	.def_value = 1,
+	.name = "backlight",
+};
+
+static struct platform_device gpio_backlight_device = {
+	.name = "gpio-backlight",
+	.dev = {
+		.platform_data = &gpio_backlight_data,
+	},
+};
+
+>>>>>>> v3.18
 /* HDMI */
 static struct sh_mobile_hdmi_info hdmi_info = {
 	.flags		= HDMI_SND_SRC_SPDIF,
@@ -506,9 +554,15 @@ static struct asoc_simple_card_info fsi2_hdmi_info = {
 	.card		= "FSI2B-HDMI",
 	.codec		= "sh-mobile-hdmi",
 	.platform	= "sh_fsi2",
+<<<<<<< HEAD
 	.cpu_dai = {
 		.name	= "fsib-dai",
 		.fmt	= SND_SOC_DAIFMT_CBM_CFM | SND_SOC_DAIFMT_IB_NF,
+=======
+	.daifmt		= SND_SOC_DAIFMT_CBS_CFS,
+	.cpu_dai = {
+		.name	= "fsib-dai",
+>>>>>>> v3.18
 	},
 	.codec_dai = {
 		.name	= "sh_mobile_hdmi-hifi",
@@ -520,6 +574,11 @@ static struct platform_device fsi_hdmi_device = {
 	.id	= 1,
 	.dev	= {
 		.platform_data	= &fsi2_hdmi_info,
+<<<<<<< HEAD
+=======
+		.coherent_dma_mask = DMA_BIT_MASK(32),
+		.dma_mask = &fsi_hdmi_device.dev.coherent_dma_mask,
+>>>>>>> v3.18
 	},
 };
 
@@ -546,9 +605,15 @@ static void __init hdmi_init_pm_clock(void)
 		 clk_get_rate(&sh7372_pllc2_clk));
 
 	rate = clk_round_rate(&sh7372_pllc2_clk, 594000000);
+<<<<<<< HEAD
 	if (rate < 0) {
 		pr_err("Cannot get suitable rate: %ld\n", rate);
 		ret = rate;
+=======
+	if (rate <= 0) {
+		pr_err("Cannot get suitable rate: %ld\n", rate);
+		ret = -EINVAL;
+>>>>>>> v3.18
 		goto out;
 	}
 
@@ -902,6 +967,7 @@ static struct asoc_simple_card_info fsi2_ak4643_info = {
 	.card		= "FSI2A-AK4643",
 	.codec		= "ak4642-codec.0-0013",
 	.platform	= "sh_fsi2",
+<<<<<<< HEAD
 	.daifmt		= SND_SOC_DAIFMT_LEFT_J,
 	.cpu_dai = {
 		.name	= "fsia-dai",
@@ -910,6 +976,14 @@ static struct asoc_simple_card_info fsi2_ak4643_info = {
 	.codec_dai = {
 		.name	= "ak4642-hifi",
 		.fmt	= SND_SOC_DAIFMT_CBM_CFM,
+=======
+	.daifmt		= SND_SOC_DAIFMT_LEFT_J | SND_SOC_DAIFMT_CBM_CFM,
+	.cpu_dai = {
+		.name	= "fsia-dai",
+	},
+	.codec_dai = {
+		.name	= "ak4642-hifi",
+>>>>>>> v3.18
 		.sysclk	= 11289600,
 	},
 };
@@ -918,6 +992,11 @@ static struct platform_device fsi_ak4643_device = {
 	.name	= "asoc-simple-card",
 	.dev	= {
 		.platform_data	= &fsi2_ak4643_info,
+<<<<<<< HEAD
+=======
+		.coherent_dma_mask = DMA_BIT_MASK(32),
+		.dma_mask = &fsi_ak4643_device.dev.coherent_dma_mask,
+>>>>>>> v3.18
 	},
 };
 
@@ -1231,6 +1310,10 @@ static struct platform_device *mackerel_devices[] __initdata = {
 	&nor_flash_device,
 	&smc911x_device,
 	&lcdc_device,
+<<<<<<< HEAD
+=======
+	&gpio_backlight_device,
+>>>>>>> v3.18
 	&usbhs0_device,
 	&usbhs1_device,
 	&leds_device,
@@ -1308,7 +1391,58 @@ static struct i2c_board_info i2c1_devices[] = {
 	},
 };
 
+<<<<<<< HEAD
 static const struct pinctrl_map mackerel_pinctrl_map[] = {
+=======
+static unsigned long pin_pulldown_conf[] = {
+	PIN_CONF_PACKED(PIN_CONFIG_BIAS_PULL_DOWN, 0),
+};
+
+static const struct pinctrl_map mackerel_pinctrl_map[] = {
+	/* ADXL34X */
+	PIN_MAP_MUX_GROUP_DEFAULT("1-0053", "pfc-sh7372",
+				  "intc_irq21", "intc"),
+	/* CEU */
+	PIN_MAP_MUX_GROUP_DEFAULT("sh_mobile_ceu.0", "pfc-sh7372",
+				  "ceu_data_0_7", "ceu"),
+	PIN_MAP_MUX_GROUP_DEFAULT("sh_mobile_ceu.0", "pfc-sh7372",
+				  "ceu_clk_0", "ceu"),
+	PIN_MAP_MUX_GROUP_DEFAULT("sh_mobile_ceu.0", "pfc-sh7372",
+				  "ceu_sync", "ceu"),
+	PIN_MAP_MUX_GROUP_DEFAULT("sh_mobile_ceu.0", "pfc-sh7372",
+				  "ceu_field", "ceu"),
+	/* FLCTL */
+	PIN_MAP_MUX_GROUP_DEFAULT("sh_flctl.0", "pfc-sh7372",
+				  "flctl_data", "flctl"),
+	PIN_MAP_MUX_GROUP_DEFAULT("sh_flctl.0", "pfc-sh7372",
+				  "flctl_ce0", "flctl"),
+	PIN_MAP_MUX_GROUP_DEFAULT("sh_flctl.0", "pfc-sh7372",
+				  "flctl_ctrl", "flctl"),
+	/* FSIA (AK4643) */
+	PIN_MAP_MUX_GROUP_DEFAULT("asoc-simple-card.0", "pfc-sh7372",
+				  "fsia_sclk_in", "fsia"),
+	PIN_MAP_MUX_GROUP_DEFAULT("asoc-simple-card.0", "pfc-sh7372",
+				  "fsia_data_in", "fsia"),
+	PIN_MAP_MUX_GROUP_DEFAULT("asoc-simple-card.0", "pfc-sh7372",
+				  "fsia_data_out", "fsia"),
+	/* FSIB (HDMI) */
+	PIN_MAP_MUX_GROUP_DEFAULT("asoc-simple-card.1", "pfc-sh7372",
+				  "fsib_mclk_in", "fsib"),
+	/* HDMI */
+	PIN_MAP_MUX_GROUP_DEFAULT("sh-mobile-hdmi", "pfc-sh7372",
+				  "hdmi", "hdmi"),
+	/* LCDC */
+	PIN_MAP_MUX_GROUP_DEFAULT("sh_mobile_lcdc_fb.0", "pfc-sh7372",
+				  "lcd_data24", "lcd"),
+	PIN_MAP_MUX_GROUP_DEFAULT("sh_mobile_lcdc_fb.0", "pfc-sh7372",
+				  "lcd_sync", "lcd"),
+	/* SCIFA0 */
+	PIN_MAP_MUX_GROUP_DEFAULT("sh-sci.0", "pfc-sh7372",
+				  "scifa0_data", "scifa0"),
+	/* SCIFA2 (GT-720F GPS module) */
+	PIN_MAP_MUX_GROUP_DEFAULT("sh-sci.2", "pfc-sh7372",
+				  "scifa2_data", "scifa2"),
+>>>>>>> v3.18
 	/* SDHI0 */
 	PIN_MAP_MUX_GROUP_DEFAULT("sh_mobile_sdhi.0", "pfc-sh7372",
 				  "sdhi0_data4", "sdhi0"),
@@ -1316,6 +1450,11 @@ static const struct pinctrl_map mackerel_pinctrl_map[] = {
 				  "sdhi0_ctrl", "sdhi0"),
 	PIN_MAP_MUX_GROUP_DEFAULT("sh_mobile_sdhi.0", "pfc-sh7372",
 				  "sdhi0_wp", "sdhi0"),
+<<<<<<< HEAD
+=======
+	PIN_MAP_MUX_GROUP_DEFAULT("sh_mobile_sdhi.0", "pfc-sh7372",
+				  "intc_irq26_1", "intc"),
+>>>>>>> v3.18
 	/* SDHI1 */
 #if !IS_ENABLED(CONFIG_MMC_SH_MMCIF)
 	PIN_MAP_MUX_GROUP_DEFAULT("sh_mobile_sdhi.1", "pfc-sh7372",
@@ -1334,17 +1473,50 @@ static const struct pinctrl_map mackerel_pinctrl_map[] = {
 				  "sdhi2_data4", "sdhi2"),
 	PIN_MAP_MUX_GROUP_DEFAULT("sh_mobile_sdhi.2", "pfc-sh7372",
 				  "sdhi2_ctrl", "sdhi2"),
+<<<<<<< HEAD
+=======
+	/* SMSC911X */
+	PIN_MAP_MUX_GROUP_DEFAULT("smsc911x", "pfc-sh7372",
+				  "bsc_cs5a", "bsc"),
+	PIN_MAP_MUX_GROUP_DEFAULT("smsc911x", "pfc-sh7372",
+				  "intc_irq6_0", "intc"),
+	/* ST1232 */
+	PIN_MAP_MUX_GROUP_DEFAULT("0-0055", "pfc-sh7372",
+				  "intc_irq7_0", "intc"),
+	/* TCA6416 */
+	PIN_MAP_MUX_GROUP_DEFAULT("0-0020", "pfc-sh7372",
+				  "intc_irq9_0", "intc"),
+	/* USBHS0 */
+	PIN_MAP_MUX_GROUP_DEFAULT("renesas_usbhs.0", "pfc-sh7372",
+				  "usb0_vbus", "usb0"),
+	PIN_MAP_CONFIGS_GROUP_DEFAULT("renesas_usbhs.0", "pfc-sh7372",
+				      "usb0_vbus", pin_pulldown_conf),
+	/* USBHS1 */
+	PIN_MAP_MUX_GROUP_DEFAULT("renesas_usbhs.1", "pfc-sh7372",
+				  "usb1_vbus", "usb1"),
+	PIN_MAP_CONFIGS_GROUP_DEFAULT("renesas_usbhs.1", "pfc-sh7372",
+				      "usb1_vbus", pin_pulldown_conf),
+	PIN_MAP_MUX_GROUP_DEFAULT("renesas_usbhs.1", "pfc-sh7372",
+				  "usb1_otg_id_0", "usb1"),
+>>>>>>> v3.18
 };
 
 #define GPIO_PORT9CR	IOMEM(0xE6051009)
 #define GPIO_PORT10CR	IOMEM(0xE605100A)
+<<<<<<< HEAD
 #define GPIO_PORT167CR	IOMEM(0xE60520A7)
 #define GPIO_PORT168CR	IOMEM(0xE60520A8)
+=======
+>>>>>>> v3.18
 #define SRCR4		IOMEM(0xe61580bc)
 #define USCCR1		IOMEM(0xE6058144)
 static void __init mackerel_init(void)
 {
+<<<<<<< HEAD
 	struct pm_domain_device domain_devices[] = {
+=======
+	static struct pm_domain_device domain_devices[] __initdata = {
+>>>>>>> v3.18
 		{ "A4LC", &lcdc_device, },
 		{ "A4LC", &hdmi_lcdc_device, },
 		{ "A4LC", &meram_device, },
@@ -1377,6 +1549,7 @@ static void __init mackerel_init(void)
 				  ARRAY_SIZE(mackerel_pinctrl_map));
 	sh7372_pinmux_init();
 
+<<<<<<< HEAD
 	/* enable SCIFA0 */
 	gpio_request(GPIO_FN_SCIFA0_TXD, NULL);
 	gpio_request(GPIO_FN_SCIFA0_RXD, NULL);
@@ -1432,6 +1605,11 @@ static void __init mackerel_init(void)
 	gpio_request(GPIO_FN_FSIAILR,	NULL);
 	gpio_request(GPIO_FN_FSIAISLD,	NULL);
 	gpio_request(GPIO_FN_FSIAOSLD,	NULL);
+=======
+	gpio_request_one(151, GPIOF_OUT_INIT_HIGH, NULL); /* LCDDON */
+
+	/* FSI2 port A (ak4643) */
+>>>>>>> v3.18
 	gpio_request_one(161, GPIOF_OUT_INIT_LOW, NULL); /* slave */
 
 	gpio_request(9,  NULL);
@@ -1441,8 +1619,12 @@ static void __init mackerel_init(void)
 
 	intc_set_priority(IRQ_FSI, 3); /* irq priority FSI(3) > SMSC911X(2) */
 
+<<<<<<< HEAD
 	/* setup FSI2 port B (HDMI) */
 	gpio_request(GPIO_FN_FSIBCK, NULL);
+=======
+	/* FSI2 port B (HDMI) */
+>>>>>>> v3.18
 	__raw_writew(__raw_readw(USCCR1) & ~(1 << 6), USCCR1); /* use SPDIF */
 
 	/* set SPU2 clock to 119.6 MHz */
@@ -1452,6 +1634,7 @@ static void __init mackerel_init(void)
 		clk_put(clk);
 	}
 
+<<<<<<< HEAD
 	/* enable Keypad */
 	gpio_request(GPIO_FN_IRQ9_42,	NULL);
 	irq_set_irq_type(IRQ9, IRQ_TYPE_LEVEL_HIGH);
@@ -1514,6 +1697,17 @@ static void __init mackerel_init(void)
 	gpio_request(GPIO_FN_HDMI_HPD, NULL);
 	gpio_request(GPIO_FN_HDMI_CEC, NULL);
 
+=======
+	/* Keypad */
+	irq_set_irq_type(IRQ9, IRQ_TYPE_LEVEL_HIGH);
+
+	/* Touchscreen */
+	irq_set_irq_type(IRQ7, IRQ_TYPE_LEVEL_LOW);
+
+	/* Accelerometer */
+	irq_set_irq_type(IRQ21, IRQ_TYPE_LEVEL_HIGH);
+
+>>>>>>> v3.18
 	/* Reset HDMI, must be held at least one EXTALR (32768Hz) period */
 	srcr4 = __raw_readl(SRCR4);
 	__raw_writel(srcr4 | (1 << 13), SRCR4);

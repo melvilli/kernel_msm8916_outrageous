@@ -111,16 +111,25 @@
 #include <linux/init.h>
 #include <linux/interrupt.h>
 
+<<<<<<< HEAD
 #include <asm/bootinfo.h>
+=======
+>>>>>>> v3.18
 #include <asm/macintosh.h>
 #include <asm/macints.h>
 #include <asm/mac_iop.h>
 
 /*#define DEBUG_IOP*/
 
+<<<<<<< HEAD
 /* Set to non-zero if the IOPs are present. Set by iop_init() */
 
 int iop_scc_present,iop_ism_present;
+=======
+/* Non-zero if the IOPs are present */
+
+int iop_scc_present, iop_ism_present;
+>>>>>>> v3.18
 
 /* structure for tracking channel listeners */
 

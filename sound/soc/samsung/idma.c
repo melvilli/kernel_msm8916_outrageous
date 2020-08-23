@@ -35,6 +35,7 @@ static const struct snd_pcm_hardware idma_hardware = {
 		    SNDRV_PCM_INFO_MMAP_VALID |
 		    SNDRV_PCM_INFO_PAUSE |
 		    SNDRV_PCM_INFO_RESUME,
+<<<<<<< HEAD
 	.formats = SNDRV_PCM_FMTBIT_S16_LE |
 		    SNDRV_PCM_FMTBIT_U16_LE |
 		    SNDRV_PCM_FMTBIT_S24_LE |
@@ -43,6 +44,8 @@ static const struct snd_pcm_hardware idma_hardware = {
 		    SNDRV_PCM_FMTBIT_S8,
 	.channels_min = 2,
 	.channels_max = 2,
+=======
+>>>>>>> v3.18
 	.buffer_bytes_max = MAX_IDMA_BUFFER,
 	.period_bytes_min = 128,
 	.period_bytes_max = MAX_IDMA_PERIOD,
@@ -257,7 +260,10 @@ static int idma_mmap(struct snd_pcm_substream *substream,
 
 	/* From snd_pcm_lib_mmap_iomem */
 	vma->vm_page_prot = pgprot_noncached(vma->vm_page_prot);
+<<<<<<< HEAD
 	vma->vm_flags |= VM_IO;
+=======
+>>>>>>> v3.18
 	size = vma->vm_end - vma->vm_start;
 	offset = vma->vm_pgoff << PAGE_SHIFT;
 	ret = io_remap_pfn_range(vma, vma->vm_start,
@@ -270,10 +276,16 @@ static int idma_mmap(struct snd_pcm_substream *substream,
 static irqreturn_t iis_irq(int irqno, void *dev_id)
 {
 	struct idma_ctrl *prtd = (struct idma_ctrl *)dev_id;
+<<<<<<< HEAD
 	u32 iiscon, iisahb, val, addr;
 
 	iisahb  = readl(idma.regs + I2SAHB);
 	iiscon  = readl(idma.regs + I2SCON);
+=======
+	u32 iisahb, val, addr;
+
+	iisahb  = readl(idma.regs + I2SAHB);
+>>>>>>> v3.18
 
 	val = (iisahb & AHB_LVL0INT) ? AHB_CLRLVL0INT : 0;
 
@@ -283,7 +295,11 @@ static irqreturn_t iis_irq(int irqno, void *dev_id)
 
 		addr = readl(idma.regs + I2SLVL0ADDR) - idma.lp_tx_addr;
 		addr += prtd->periodsz;
+<<<<<<< HEAD
 		addr %= (prtd->end - prtd->start);
+=======
+		addr %= (u32)(prtd->end - prtd->start);
+>>>>>>> v3.18
 		addr += idma.lp_tx_addr;
 
 		writel(addr, idma.regs + I2SLVL0ADDR);
@@ -361,7 +377,11 @@ static void idma_free(struct snd_pcm *pcm)
 	if (!buf->area)
 		return;
 
+<<<<<<< HEAD
 	iounmap(buf->area);
+=======
+	iounmap((void __iomem *)buf->area);
+>>>>>>> v3.18
 
 	buf->area = NULL;
 	buf->addr = 0;
@@ -379,23 +399,38 @@ static int preallocate_idma_buffer(struct snd_pcm *pcm, int stream)
 	buf->dev.type = SNDRV_DMA_TYPE_CONTINUOUS;
 	buf->addr = idma.lp_tx_addr;
 	buf->bytes = idma_hardware.buffer_bytes_max;
+<<<<<<< HEAD
 	buf->area = (unsigned char *)ioremap(buf->addr, buf->bytes);
+=======
+	buf->area = (unsigned char * __force)ioremap(buf->addr, buf->bytes);
+>>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 static u64 idma_mask = DMA_BIT_MASK(32);
 
+=======
+>>>>>>> v3.18
 static int idma_new(struct snd_soc_pcm_runtime *rtd)
 {
 	struct snd_card *card = rtd->card->snd_card;
 	struct snd_pcm *pcm = rtd->pcm;
+<<<<<<< HEAD
 	int ret = 0;
 
 	if (!card->dev->dma_mask)
 		card->dev->dma_mask = &idma_mask;
 	if (!card->dev->coherent_dma_mask)
 		card->dev->coherent_dma_mask = DMA_BIT_MASK(32);
+=======
+	int ret;
+
+	ret = dma_coerce_mask_and_coherent(card->dev, DMA_BIT_MASK(32));
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 
 	if (pcm->streams[SNDRV_PCM_STREAM_PLAYBACK].substream) {
 		ret = preallocate_idma_buffer(pcm,
@@ -425,6 +460,7 @@ static int asoc_idma_platform_probe(struct platform_device *pdev)
 	if (idma_irq < 0)
 		return idma_irq;
 
+<<<<<<< HEAD
 	return snd_soc_register_platform(&pdev->dev, &asoc_idma_platform);
 }
 
@@ -432,6 +468,9 @@ static int asoc_idma_platform_remove(struct platform_device *pdev)
 {
 	snd_soc_unregister_platform(&pdev->dev);
 	return 0;
+=======
+	return devm_snd_soc_register_platform(&pdev->dev, &asoc_idma_platform);
+>>>>>>> v3.18
 }
 
 static struct platform_driver asoc_idma_driver = {
@@ -441,7 +480,10 @@ static struct platform_driver asoc_idma_driver = {
 	},
 
 	.probe = asoc_idma_platform_probe,
+<<<<<<< HEAD
 	.remove = asoc_idma_platform_remove,
+=======
+>>>>>>> v3.18
 };
 
 module_platform_driver(asoc_idma_driver);

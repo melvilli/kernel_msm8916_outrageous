@@ -32,24 +32,53 @@
 #define _TTM_BO_API_H_
 
 #include <drm/drm_hashtab.h>
+<<<<<<< HEAD
+=======
+#include <drm/drm_vma_manager.h>
+>>>>>>> v3.18
 #include <linux/kref.h>
 #include <linux/list.h>
 #include <linux/wait.h>
 #include <linux/mutex.h>
 #include <linux/mm.h>
+<<<<<<< HEAD
 #include <linux/rbtree.h>
 #include <linux/bitmap.h>
+=======
+#include <linux/bitmap.h>
+#include <linux/reservation.h>
+>>>>>>> v3.18
 
 struct ttm_bo_device;
 
 struct drm_mm_node;
 
+<<<<<<< HEAD
+=======
+/**
+ * struct ttm_place
+ *
+ * @fpfn:	first valid page frame number to put the object
+ * @lpfn:	last valid page frame number to put the object
+ * @flags:	memory domain and caching flags for the object
+ *
+ * Structure indicating a possible place to put an object.
+ */
+struct ttm_place {
+	unsigned	fpfn;
+	unsigned	lpfn;
+	uint32_t	flags;
+};
+>>>>>>> v3.18
 
 /**
  * struct ttm_placement
  *
+<<<<<<< HEAD
  * @fpfn:		first valid page frame number to put the object
  * @lpfn:		last valid page frame number to put the object
+=======
+>>>>>>> v3.18
  * @num_placement:	number of preferred placements
  * @placement:		preferred placements
  * @num_busy_placement:	number of preferred placements when need to evict buffer
@@ -58,12 +87,19 @@ struct drm_mm_node;
  * Structure indicating the placement you request for an object.
  */
 struct ttm_placement {
+<<<<<<< HEAD
 	unsigned	fpfn;
 	unsigned	lpfn;
 	unsigned	num_placement;
 	const uint32_t	*placement;
 	unsigned	num_busy_placement;
 	const uint32_t	*busy_placement;
+=======
+	unsigned		num_placement;
+	const struct ttm_place	*placement;
+	unsigned		num_busy_placement;
+	const struct ttm_place	*busy_placement;
+>>>>>>> v3.18
 };
 
 /**
@@ -144,7 +180,10 @@ struct ttm_tt;
  * @type: The bo type.
  * @destroy: Destruction function. If NULL, kfree is used.
  * @num_pages: Actual number of pages.
+<<<<<<< HEAD
  * @addr_space_offset: Address space offset.
+=======
+>>>>>>> v3.18
  * @acc_size: Accounted size for this object.
  * @kref: Reference count of this buffer object. When this refcount reaches
  * zero, the object is put on the delayed delete list.
@@ -153,7 +192,10 @@ struct ttm_tt;
  * Lru lists may keep one refcount, the delayed delete list, and kref != 0
  * keeps one refcount. When this refcount reaches zero,
  * the object is destroyed.
+<<<<<<< HEAD
  * @event_queue: Queue for processes waiting on buffer object status change.
+=======
+>>>>>>> v3.18
  * @mem: structure describing current placement.
  * @persistent_swap_storage: Usually the swap storage is deleted for buffers
  * pinned in physical memory. If this behaviour is not desired, this member
@@ -164,6 +206,7 @@ struct ttm_tt;
  * @lru: List head for the lru list.
  * @ddestroy: List head for the delayed destroy list.
  * @swap: List head for swap LRU list.
+<<<<<<< HEAD
  * @val_seq: Sequence of the validation holding the @reserved lock.
  * Used to avoid starvation when many processes compete to validate the
  * buffer. This member is protected by the bo_device::lru_lock.
@@ -177,6 +220,14 @@ struct ttm_tt;
  * @offset: The current GPU offset, which can have different meanings
  * depending on the memory type. For SYSTEM type memory, it should be 0.
  * @cur_placement: Hint of current placement.
+=======
+ * @priv_flags: Flags describing buffer object internal state.
+ * @vma_node: Address space manager node.
+ * @offset: The current GPU offset, which can have different meanings
+ * depending on the memory type. For SYSTEM type memory, it should be 0.
+ * @cur_placement: Hint of current placement.
+ * @wu_mutex: Wait unreserved mutex.
+>>>>>>> v3.18
  *
  * Base class for TTM buffer object, that deals with data placement and CPU
  * mappings. GPU mappings are really up to the driver, but for simpler GPUs
@@ -200,7 +251,10 @@ struct ttm_buffer_object {
 	enum ttm_bo_type type;
 	void (*destroy) (struct ttm_buffer_object *);
 	unsigned long num_pages;
+<<<<<<< HEAD
 	uint64_t addr_space_offset;
+=======
+>>>>>>> v3.18
 	size_t acc_size;
 
 	/**
@@ -209,10 +263,16 @@ struct ttm_buffer_object {
 
 	struct kref kref;
 	struct kref list_kref;
+<<<<<<< HEAD
 	wait_queue_head_t event_queue;
 
 	/**
 	 * Members protected by the bo::reserved lock.
+=======
+
+	/**
+	 * Members protected by the bo::resv::reserved lock.
+>>>>>>> v3.18
 	 */
 
 	struct ttm_mem_reg mem;
@@ -234,6 +294,7 @@ struct ttm_buffer_object {
 	struct list_head ddestroy;
 	struct list_head swap;
 	struct list_head io_reserve_lru;
+<<<<<<< HEAD
 	uint32_t val_seq;
 	bool seq_valid;
 
@@ -261,6 +322,16 @@ struct ttm_buffer_object {
 	struct rb_node vm_rb;
 	struct drm_mm_node *vm_node;
 
+=======
+
+	/**
+	 * Members protected by a bo reservation.
+	 */
+
+	unsigned long priv_flags;
+
+	struct drm_vma_offset_node vma_node;
+>>>>>>> v3.18
 
 	/**
 	 * Special members that are protected by the reserve lock
@@ -272,6 +343,13 @@ struct ttm_buffer_object {
 	uint32_t cur_placement;
 
 	struct sg_table *sg;
+<<<<<<< HEAD
+=======
+
+	struct reservation_object *resv;
+	struct reservation_object ttm_resv;
+	struct mutex wu_mutex;
+>>>>>>> v3.18
 };
 
 /**
@@ -475,6 +553,10 @@ size_t ttm_bo_dma_acc_size(struct ttm_bo_device *bdev,
  * point to the shmem object backing a GEM object if TTM is used to back a
  * GEM user interface.
  * @acc_size: Accounted size for this object.
+<<<<<<< HEAD
+=======
+ * @resv: Pointer to a reservation_object, or NULL to let ttm allocate one.
+>>>>>>> v3.18
  * @destroy: Destroy function. Use NULL for kfree().
  *
  * This function initializes a pre-allocated struct ttm_buffer_object.
@@ -502,6 +584,7 @@ extern int ttm_bo_init(struct ttm_bo_device *bdev,
 			struct file *persistent_swap_storage,
 			size_t acc_size,
 			struct sg_table *sg,
+<<<<<<< HEAD
 			void (*destroy) (struct ttm_buffer_object *));
 
 /**
@@ -512,6 +595,18 @@ extern int ttm_bo_init(struct ttm_bo_device *bdev,
  * @size: Requested size of buffer object.
  * @type: Requested type of buffer object.
  * @flags: Initial placement flags.
+=======
+			struct reservation_object *resv,
+			void (*destroy) (struct ttm_buffer_object *));
+
+/**
+ * ttm_bo_create
+ *
+ * @bdev: Pointer to a ttm_bo_device struct.
+ * @size: Requested size of buffer object.
+ * @type: Requested type of buffer object.
+ * @placement: Initial placement.
+>>>>>>> v3.18
  * @page_alignment: Data alignment in pages.
  * @interruptible: If needing to sleep while waiting for GPU resources,
  * sleep interruptible.
@@ -540,6 +635,7 @@ extern int ttm_bo_create(struct ttm_bo_device *bdev,
 				struct ttm_buffer_object **p_bo);
 
 /**
+<<<<<<< HEAD
  * ttm_bo_check_placement
  *
  * @bo:		the buffer object.
@@ -554,6 +650,8 @@ extern int ttm_bo_check_placement(struct ttm_buffer_object *bo,
 					struct ttm_placement *placement);
 
 /**
+=======
+>>>>>>> v3.18
  * ttm_bo_init_mm
  *
  * @bdev: Pointer to a ttm_bo_device struct.
@@ -724,6 +822,7 @@ extern ssize_t ttm_bo_io(struct ttm_bo_device *bdev, struct file *filp,
 			 size_t count, loff_t *f_pos, bool write);
 
 extern void ttm_bo_swapout_all(struct ttm_bo_device *bdev);
+<<<<<<< HEAD
 
 /**
  * ttm_bo_is_reserved - return an indication if a ttm buffer object is reserved
@@ -739,4 +838,7 @@ static inline bool ttm_bo_is_reserved(struct ttm_buffer_object *bo)
 	return atomic_read(&bo->reserved);
 }
 
+=======
+extern int ttm_bo_wait_unreserved(struct ttm_buffer_object *bo);
+>>>>>>> v3.18
 #endif

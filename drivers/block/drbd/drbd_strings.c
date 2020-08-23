@@ -24,6 +24,10 @@
 */
 
 #include <linux/drbd.h>
+<<<<<<< HEAD
+=======
+#include "drbd_strings.h"
+>>>>>>> v3.18
 
 static const char *drbd_conn_s_names[] = {
 	[C_STANDALONE]       = "StandAlone",

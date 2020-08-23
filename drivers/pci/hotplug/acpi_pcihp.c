@@ -46,6 +46,7 @@
 
 static bool debug_acpi;
 
+<<<<<<< HEAD
 static acpi_status
 decode_type0_hpx_record(union acpi_object *record, struct hotplug_params *hpx)
 {
@@ -255,6 +256,8 @@ exit:
 
 
 
+=======
+>>>>>>> v3.18
 /* acpi_run_oshp - get control of hotplug from the firmware
  *
  * @handle - the handle of the hotplug controller.
@@ -283,6 +286,7 @@ static acpi_status acpi_run_oshp(acpi_handle handle)
 	return status;
 }
 
+<<<<<<< HEAD
 /* pci_get_hp_params
  *
  * @dev - the pci_dev for which we want parameters
@@ -325,6 +329,8 @@ int pci_get_hp_params(struct pci_dev *dev, struct hotplug_params *hpp)
 }
 EXPORT_SYMBOL_GPL(pci_get_hp_params);
 
+=======
+>>>>>>> v3.18
 /**
  * acpi_get_hp_hw_control_from_firmware
  * @dev: the pci_dev of the bridge that has a hotplug controller
@@ -338,7 +344,11 @@ int acpi_get_hp_hw_control_from_firmware(struct pci_dev *pdev, u32 flags)
 	acpi_handle chandle, handle;
 	struct acpi_buffer string = { ACPI_ALLOCATE_BUFFER, NULL };
 
+<<<<<<< HEAD
 	flags &= OSC_SHPC_NATIVE_HP_CONTROL;
+=======
+	flags &= OSC_PCI_SHPC_NATIVE_HP_CONTROL;
+>>>>>>> v3.18
 	if (!flags) {
 		err("Invalid flags %u specified!\n", flags);
 		return -EINVAL;
@@ -367,7 +377,11 @@ int acpi_get_hp_hw_control_from_firmware(struct pci_dev *pdev, u32 flags)
 		string = (struct acpi_buffer){ ACPI_ALLOCATE_BUFFER, NULL };
 	}
 
+<<<<<<< HEAD
 	handle = DEVICE_ACPI_HANDLE(&pdev->dev);
+=======
+	handle = ACPI_HANDLE(&pdev->dev);
+>>>>>>> v3.18
 	if (!handle) {
 		/*
 		 * This hotplug controller was not listed in the ACPI name
@@ -411,6 +425,7 @@ EXPORT_SYMBOL(acpi_get_hp_hw_control_from_firmware);
 static int pcihp_is_ejectable(acpi_handle handle)
 {
 	acpi_status status;
+<<<<<<< HEAD
 	acpi_handle tmp;
 	unsigned long long removable;
 	status = acpi_get_handle(handle, "_ADR", &tmp);
@@ -418,6 +433,12 @@ static int pcihp_is_ejectable(acpi_handle handle)
 		return 0;
 	status = acpi_get_handle(handle, "_EJ0", &tmp);
 	if (ACPI_SUCCESS(status))
+=======
+	unsigned long long removable;
+	if (!acpi_has_method(handle, "_ADR"))
+		return 0;
+	if (acpi_has_method(handle, "_EJ0"))
+>>>>>>> v3.18
 		return 1;
 	status = acpi_evaluate_integer(handle, "_RMV", NULL, &removable);
 	if (ACPI_SUCCESS(status) && removable)
@@ -436,7 +457,12 @@ int acpi_pci_check_ejectable(struct pci_bus *pbus, acpi_handle handle)
 {
 	acpi_handle bridge_handle, parent_handle;
 
+<<<<<<< HEAD
 	if (!(bridge_handle = acpi_pci_get_bridge_handle(pbus)))
+=======
+	bridge_handle = acpi_pci_get_bridge_handle(pbus);
+	if (!bridge_handle)
+>>>>>>> v3.18
 		return 0;
 	if ((ACPI_FAILURE(acpi_get_parent(handle, &parent_handle))))
 		return 0;

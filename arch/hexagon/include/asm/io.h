@@ -189,6 +189,11 @@ static inline void writel(u32 data, volatile void __iomem *addr)
 #define writew_relaxed __raw_writew
 #define writel_relaxed __raw_writel
 
+<<<<<<< HEAD
+=======
+#define mmiowb()
+
+>>>>>>> v3.18
 /*
  * Need an mtype somewhere in here, for cache type deals?
  * This is probably too long for an inline.

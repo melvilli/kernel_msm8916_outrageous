@@ -1,6 +1,9 @@
 /*
+<<<<<<< HEAD
  * arch/arm/plat-omap/include/mach/mcbsp.h
  *
+=======
+>>>>>>> v3.18
  * Defines for Multi-Channel Buffered Serial Port
  *
  * Copyright (C) 2002 RidgeRun, Inc.
@@ -21,8 +24,13 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
  */
+<<<<<<< HEAD
 #ifndef __ASM_ARCH_OMAP_MCBSP_H
 #define __ASM_ARCH_OMAP_MCBSP_H
+=======
+#ifndef __ASOC_TI_MCBSP_H
+#define __ASOC_TI_MCBSP_H
+>>>>>>> v3.18
 
 #include <linux/spinlock.h>
 #include <linux/clk.h>

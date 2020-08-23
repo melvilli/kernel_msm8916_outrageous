@@ -43,7 +43,11 @@
 /*---------------------  Static Classes  ----------------------------*/
 
 /*---------------------  Static Variables  --------------------------*/
+<<<<<<< HEAD
 // static int          msglevel                =MSG_LEVEL_INFO;
+=======
+
+>>>>>>> v3.18
 /*---------------------  Static Functions  --------------------------*/
 
 /*---------------------  Export Variables  --------------------------*/
@@ -75,8 +79,13 @@ bool WCTLbIsDuplicate(PSCache pCache, PS802_11Header pMACHeader)
 		for (ii = 0; ii < DUPLICATE_RX_CACHE_LENGTH; ii++) {
 			pCacheEntry = &(pCache->asCacheEntry[uIndex]);
 			if ((pCacheEntry->wFmSequence == pMACHeader->wSeqCtl) &&
+<<<<<<< HEAD
 			    (!compare_ether_addr(&(pCacheEntry->abyAddr2[0]), &(pMACHeader->abyAddr2[0])))
 ) {
+=======
+			    ether_addr_equal(pCacheEntry->abyAddr2,
+					     pMACHeader->abyAddr2)) {
+>>>>>>> v3.18
 				/* Duplicate match */
 				return true;
 			}
@@ -105,15 +114,26 @@ bool WCTLbIsDuplicate(PSCache pCache, PS802_11Header pMACHeader)
  * Return Value: index number in Defragment Database
  *
  */
+<<<<<<< HEAD
 unsigned int WCTLuSearchDFCB(PSDevice pDevice, PS802_11Header pMACHeader)
+=======
+unsigned int WCTLuSearchDFCB(struct vnt_private *pDevice,
+			     PS802_11Header pMACHeader)
+>>>>>>> v3.18
 {
 	unsigned int ii;
 
 	for (ii = 0; ii < pDevice->cbDFCB; ii++) {
+<<<<<<< HEAD
 		if ((pDevice->sRxDFCB[ii].bInUse == true) &&
 		    (!compare_ether_addr(&(pDevice->sRxDFCB[ii].abyAddr2[0]), &(pMACHeader->abyAddr2[0])))
 ) {
 			//
+=======
+		if (pDevice->sRxDFCB[ii].bInUse &&
+		    ether_addr_equal(pDevice->sRxDFCB[ii].abyAddr2,
+				     pMACHeader->abyAddr2)) {
+>>>>>>> v3.18
 			return ii;
 		}
 	}
@@ -134,14 +154,22 @@ unsigned int WCTLuSearchDFCB(PSDevice pDevice, PS802_11Header pMACHeader)
  * Return Value: index number in Defragment Database
  *
  */
+<<<<<<< HEAD
 unsigned int WCTLuInsertDFCB(PSDevice pDevice, PS802_11Header pMACHeader)
+=======
+unsigned int WCTLuInsertDFCB(struct vnt_private *pDevice, PS802_11Header pMACHeader)
+>>>>>>> v3.18
 {
 	unsigned int ii;
 
 	if (pDevice->cbFreeDFCB == 0)
 		return pDevice->cbDFCB;
 	for (ii = 0; ii < pDevice->cbDFCB; ii++) {
+<<<<<<< HEAD
 		if (pDevice->sRxDFCB[ii].bInUse == false) {
+=======
+		if (!pDevice->sRxDFCB[ii].bInUse) {
+>>>>>>> v3.18
 			pDevice->cbFreeDFCB--;
 			pDevice->sRxDFCB[ii].uLifetime = pDevice->dwMaxReceiveLifetime;
 			pDevice->sRxDFCB[ii].bInUse = true;
@@ -170,11 +198,20 @@ unsigned int WCTLuInsertDFCB(PSDevice pDevice, PS802_11Header pMACHeader)
  * Return Value: true if it is valid fragment packet and we have resource to defragment; otherwise false
  *
  */
+<<<<<<< HEAD
 bool WCTLbHandleFragment(PSDevice pDevice, PS802_11Header pMACHeader, unsigned int cbFrameLength, bool bWEP, bool bExtIV)
 {
 	unsigned int uHeaderSize;
 
 	if (bWEP == true) {
+=======
+bool WCTLbHandleFragment(struct vnt_private *pDevice, PS802_11Header pMACHeader,
+			 unsigned int cbFrameLength, bool bWEP, bool bExtIV)
+{
+	unsigned int uHeaderSize;
+
+	if (bWEP) {
+>>>>>>> v3.18
 		uHeaderSize = 28;
 		if (bExtIV)
 			// ExtIV
@@ -192,9 +229,14 @@ bool WCTLbHandleFragment(PSDevice pDevice, PS802_11Header pMACHeader, unsigned i
 			pDevice->sRxDFCB[pDevice->uCurrentDFCBIdx].wFragNum = (pMACHeader->wSeqCtl & 0x000F);
 		} else {
 			pDevice->uCurrentDFCBIdx = WCTLuInsertDFCB(pDevice, pMACHeader);
+<<<<<<< HEAD
 			if (pDevice->uCurrentDFCBIdx == pDevice->cbDFCB) {
 				return false;
 			}
+=======
+			if (pDevice->uCurrentDFCBIdx == pDevice->cbDFCB)
+				return false;
+>>>>>>> v3.18
 		}
 		// reserve 4 byte to match MAC RX Buffer
 		pDevice->sRxDFCB[pDevice->uCurrentDFCBIdx].pbyRxBuffer = (unsigned char *)(pDevice->sRxDFCB[pDevice->uCurrentDFCBIdx].skb->data + 4);
@@ -202,7 +244,10 @@ bool WCTLbHandleFragment(PSDevice pDevice, PS802_11Header pMACHeader, unsigned i
 		pDevice->sRxDFCB[pDevice->uCurrentDFCBIdx].cbFrameLength = cbFrameLength;
 		pDevice->sRxDFCB[pDevice->uCurrentDFCBIdx].pbyRxBuffer += cbFrameLength;
 		pDevice->sRxDFCB[pDevice->uCurrentDFCBIdx].wFragNum++;
+<<<<<<< HEAD
 		//DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "First pDevice->uCurrentDFCBIdx= %d\n", pDevice->uCurrentDFCBIdx);
+=======
+>>>>>>> v3.18
 		return false;
 	} else {
 		pDevice->uCurrentDFCBIdx = WCTLuSearchDFCB(pDevice, pMACHeader);
@@ -214,7 +259,10 @@ bool WCTLbHandleFragment(PSDevice pDevice, PS802_11Header pMACHeader, unsigned i
 				pDevice->sRxDFCB[pDevice->uCurrentDFCBIdx].cbFrameLength += (cbFrameLength - uHeaderSize);
 				pDevice->sRxDFCB[pDevice->uCurrentDFCBIdx].pbyRxBuffer += (cbFrameLength - uHeaderSize);
 				pDevice->sRxDFCB[pDevice->uCurrentDFCBIdx].wFragNum++;
+<<<<<<< HEAD
 				//DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Second pDevice->uCurrentDFCBIdx= %d\n", pDevice->uCurrentDFCBIdx);
+=======
+>>>>>>> v3.18
 			} else {
 				// seq error or frag # error flush DFCB
 				pDevice->cbFreeDFCB++;
@@ -228,7 +276,10 @@ bool WCTLbHandleFragment(PSDevice pDevice, PS802_11Header pMACHeader, unsigned i
 			//enq defragcontrolblock
 			pDevice->cbFreeDFCB++;
 			pDevice->sRxDFCB[pDevice->uCurrentDFCBIdx].bInUse = false;
+<<<<<<< HEAD
 			//DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Last pDevice->uCurrentDFCBIdx= %d\n", pDevice->uCurrentDFCBIdx);
+=======
+>>>>>>> v3.18
 			return true;
 		}
 		return false;

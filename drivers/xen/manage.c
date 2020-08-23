@@ -1,6 +1,12 @@
 /*
  * Handle extern requests for shutdown, reboot and sysrq
  */
+<<<<<<< HEAD
+=======
+
+#define pr_fmt(fmt) "xen:" KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/err.h>
 #include <linux/slab.h>
@@ -38,6 +44,7 @@ static enum shutdown_state shutting_down = SHUTDOWN_INVALID;
 
 struct suspend_info {
 	int cancelled;
+<<<<<<< HEAD
 	unsigned long arg; /* extra hypercall argument */
 	void (*pre)(void);
 	void (*post)(int cancelled);
@@ -62,6 +69,23 @@ static void xen_post_suspend(int cancelled)
 	gnttab_resume();
 	xen_mm_unpin_all();
 }
+=======
+};
+
+static RAW_NOTIFIER_HEAD(xen_resume_notifier);
+
+void xen_resume_notifier_register(struct notifier_block *nb)
+{
+	raw_notifier_chain_register(&xen_resume_notifier, nb);
+}
+EXPORT_SYMBOL_GPL(xen_resume_notifier_register);
+
+void xen_resume_notifier_unregister(struct notifier_block *nb)
+{
+	raw_notifier_chain_unregister(&xen_resume_notifier, nb);
+}
+EXPORT_SYMBOL_GPL(xen_resume_notifier_unregister);
+>>>>>>> v3.18
 
 #ifdef CONFIG_HIBERNATE_CALLBACKS
 static int xen_suspend(void *data)
@@ -73,6 +97,7 @@ static int xen_suspend(void *data)
 
 	err = syscore_suspend();
 	if (err) {
+<<<<<<< HEAD
 		printk(KERN_ERR "xen_suspend: system core suspend failed: %d\n",
 			err);
 		return err;
@@ -80,12 +105,21 @@ static int xen_suspend(void *data)
 
 	if (si->pre)
 		si->pre();
+=======
+		pr_err("%s: system core suspend failed: %d\n", __func__, err);
+		return err;
+	}
+
+	gnttab_suspend();
+	xen_arch_pre_suspend();
+>>>>>>> v3.18
 
 	/*
 	 * This hypercall returns 1 if suspend was cancelled
 	 * or the domain was merely checkpointed, and 0 if it
 	 * is resuming in a new domain.
 	 */
+<<<<<<< HEAD
 	si->cancelled = HYPERVISOR_suspend(si->arg);
 
 	if (si->post)
@@ -94,6 +128,17 @@ static int xen_suspend(void *data)
 	if (!si->cancelled) {
 		xen_irq_resume();
 		xen_console_resume();
+=======
+	si->cancelled = HYPERVISOR_suspend(xen_pv_domain()
+                                           ? virt_to_mfn(xen_start_info)
+                                           : 0);
+
+	xen_arch_post_suspend(si->cancelled);
+	gnttab_resume();
+
+	if (!si->cancelled) {
+		xen_irq_resume();
+>>>>>>> v3.18
 		xen_timer_resume();
 	}
 
@@ -109,6 +154,7 @@ static void do_suspend(void)
 
 	shutting_down = SHUTDOWN_SUSPEND;
 
+<<<<<<< HEAD
 #ifdef CONFIG_PREEMPT
 	/* If the kernel is preemptible, we need to freeze all the processes
 	   to prevent them from being in the middle of a pagetable update
@@ -123,6 +169,17 @@ static void do_suspend(void)
 	err = dpm_suspend_start(PMSG_FREEZE);
 	if (err) {
 		printk(KERN_ERR "xen suspend: dpm_suspend_start %d\n", err);
+=======
+	err = freeze_processes();
+	if (err) {
+		pr_err("%s: freeze failed %d\n", __func__, err);
+		goto out;
+	}
+
+	err = dpm_suspend_start(PMSG_FREEZE);
+	if (err) {
+		pr_err("%s: dpm_suspend_start %d\n", __func__, err);
+>>>>>>> v3.18
 		goto out_thaw;
 	}
 
@@ -131,13 +188,18 @@ static void do_suspend(void)
 
 	err = dpm_suspend_end(PMSG_FREEZE);
 	if (err) {
+<<<<<<< HEAD
 		printk(KERN_ERR "dpm_suspend_end failed: %d\n", err);
+=======
+		pr_err("dpm_suspend_end failed: %d\n", err);
+>>>>>>> v3.18
 		si.cancelled = 0;
 		goto out_resume;
 	}
 
 	si.cancelled = 1;
 
+<<<<<<< HEAD
 	if (xen_hvm_domain()) {
 		si.arg = 0UL;
 		si.pre = NULL;
@@ -154,6 +216,20 @@ static void do_suspend(void)
 
 	if (err) {
 		printk(KERN_ERR "failed to start xen_suspend: %d\n", err);
+=======
+	err = stop_machine(xen_suspend, &si, cpumask_of(0));
+
+	/* Resume console as early as possible. */
+	if (!si.cancelled)
+		xen_console_resume();
+
+	raw_notifier_call_chain(&xen_resume_notifier, 0, NULL);
+
+	dpm_resume_start(si.cancelled ? PMSG_THAW : PMSG_RESTORE);
+
+	if (err) {
+		pr_err("failed to start xen_suspend: %d\n", err);
+>>>>>>> v3.18
 		si.cancelled = 1;
 	}
 
@@ -166,6 +242,7 @@ out_resume:
 
 	dpm_resume_end(si.cancelled ? PMSG_THAW : PMSG_RESTORE);
 
+<<<<<<< HEAD
 	/* Make sure timer events get retriggered on all CPUs */
 	clock_was_set();
 
@@ -174,6 +251,11 @@ out_thaw:
 	thaw_processes();
 out:
 #endif
+=======
+out_thaw:
+	thaw_processes();
+out:
+>>>>>>> v3.18
 	shutting_down = SHUTDOWN_INVALID;
 }
 #endif	/* CONFIG_HIBERNATE_CALLBACKS */
@@ -183,10 +265,39 @@ struct shutdown_handler {
 	void (*cb)(void);
 };
 
+<<<<<<< HEAD
 static void do_poweroff(void)
 {
 	shutting_down = SHUTDOWN_POWEROFF;
 	orderly_poweroff(false);
+=======
+static int poweroff_nb(struct notifier_block *cb, unsigned long code, void *unused)
+{
+	switch (code) {
+	case SYS_DOWN:
+	case SYS_HALT:
+	case SYS_POWER_OFF:
+		shutting_down = SHUTDOWN_POWEROFF;
+	default:
+		break;
+	}
+	return NOTIFY_DONE;
+}
+static void do_poweroff(void)
+{
+	switch (system_state) {
+	case SYSTEM_BOOTING:
+		orderly_poweroff(true);
+		break;
+	case SYSTEM_RUNNING:
+		orderly_poweroff(false);
+		break;
+	default:
+		/* Don't do it when we are halting/rebooting. */
+		pr_info("Ignoring Xen toolstack shutdown.\n");
+		break;
+	}
+>>>>>>> v3.18
 }
 
 static void do_reboot(void)
@@ -245,7 +356,11 @@ static void shutdown_handler(struct xenbus_watch *watch,
 	if (handler->cb) {
 		handler->cb();
 	} else {
+<<<<<<< HEAD
 		printk(KERN_INFO "Ignoring shutdown request: %s\n", str);
+=======
+		pr_info("Ignoring shutdown request: %s\n", str);
+>>>>>>> v3.18
 		shutting_down = SHUTDOWN_INVALID;
 	}
 
@@ -265,8 +380,12 @@ static void sysrq_handler(struct xenbus_watch *watch, const char **vec,
 	if (err)
 		return;
 	if (!xenbus_scanf(xbt, "control", "sysrq", "%c", &sysrq_key)) {
+<<<<<<< HEAD
 		printk(KERN_ERR "Unable to read sysrq code in "
 		       "control/sysrq\n");
+=======
+		pr_err("Unable to read sysrq code in control/sysrq\n");
+>>>>>>> v3.18
 		xenbus_transaction_end(xbt, 1);
 		return;
 	}
@@ -293,12 +412,20 @@ static struct xenbus_watch shutdown_watch = {
 	.callback = shutdown_handler
 };
 
+<<<<<<< HEAD
+=======
+static struct notifier_block xen_reboot_nb = {
+	.notifier_call = poweroff_nb,
+};
+
+>>>>>>> v3.18
 static int setup_shutdown_watcher(void)
 {
 	int err;
 
 	err = register_xenbus_watch(&shutdown_watch);
 	if (err) {
+<<<<<<< HEAD
 		printk(KERN_ERR "Failed to set shutdown watcher\n");
 		return err;
 	}
@@ -307,6 +434,17 @@ static int setup_shutdown_watcher(void)
 	err = register_xenbus_watch(&sysrq_watch);
 	if (err) {
 		printk(KERN_ERR "Failed to set sysrq watcher\n");
+=======
+		pr_err("Failed to set shutdown watcher\n");
+		return err;
+	}
+
+
+#ifdef CONFIG_MAGIC_SYSRQ
+	err = register_xenbus_watch(&sysrq_watch);
+	if (err) {
+		pr_err("Failed to set sysrq watcher\n");
+>>>>>>> v3.18
 		return err;
 	}
 #endif
@@ -331,6 +469,10 @@ int xen_setup_shutdown_event(void)
 	if (!xen_domain())
 		return -ENODEV;
 	register_xenstore_notifier(&xenstore_notifier);
+<<<<<<< HEAD
+=======
+	register_reboot_notifier(&xen_reboot_nb);
+>>>>>>> v3.18
 
 	return 0;
 }

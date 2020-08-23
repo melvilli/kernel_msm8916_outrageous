@@ -432,8 +432,12 @@ enum d40_lli_flags {
 
 void d40_phy_cfg(struct stedma40_chan_cfg *cfg,
 		 u32 *src_cfg,
+<<<<<<< HEAD
 		 u32 *dst_cfg,
 		 bool is_log);
+=======
+		 u32 *dst_cfg);
+>>>>>>> v3.18
 
 void d40_log_cfg(struct stedma40_chan_cfg *cfg,
 		 u32 *lcsp1,

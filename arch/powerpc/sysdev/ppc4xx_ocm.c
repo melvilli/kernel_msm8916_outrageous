@@ -26,6 +26,10 @@
 #include <linux/kernel.h>
 #include <linux/dma-mapping.h>
 #include <linux/of.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+>>>>>>> v3.18
 #include <asm/rheap.h>
 #include <asm/ppc4xx_ocm.h>
 #include <linux/slab.h>
@@ -338,7 +342,11 @@ void *ppc4xx_ocm_alloc(phys_addr_t *phys, int size, int align,
 		if (IS_ERR_VALUE(offset))
 			continue;
 
+<<<<<<< HEAD
 		ocm_blk = kzalloc(sizeof(struct ocm_block *), GFP_KERNEL);
+=======
+		ocm_blk = kzalloc(sizeof(struct ocm_block), GFP_KERNEL);
+>>>>>>> v3.18
 		if (!ocm_blk) {
 			printk(KERN_ERR "PPC4XX OCM: could not allocate ocm block");
 			rh_free(ocm_reg->rh, offset);

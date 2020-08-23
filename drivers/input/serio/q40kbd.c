@@ -30,7 +30,10 @@
  */
 
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/serio.h>
 #include <linux/interrupt.h>
 #include <linux/err.h>
@@ -181,7 +184,10 @@ static int q40kbd_remove(struct platform_device *pdev)
 	free_irq(Q40_IRQ_KEYBOARD, q40kbd);
 	kfree(q40kbd);
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

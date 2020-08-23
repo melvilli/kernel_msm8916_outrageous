@@ -20,6 +20,7 @@
 
 #include "parse-options.h"
 #include "parse-events.h"
+<<<<<<< HEAD
 
 #include "thread.h"
 #include "sort.h"
@@ -33,6 +34,23 @@ extern int sort__need_collapse;
 extern int sort__has_parent;
 extern int sort__has_sym;
 extern int sort__branch_mode;
+=======
+#include "hist.h"
+#include "thread.h"
+
+extern regex_t parent_regex;
+extern const char *sort_order;
+extern const char *field_order;
+extern const char default_parent_pattern[];
+extern const char *parent_pattern;
+extern const char default_sort_order[];
+extern regex_t ignore_callees_regex;
+extern int have_ignore_callees;
+extern int sort__need_collapse;
+extern int sort__has_parent;
+extern int sort__has_sym;
+extern enum sort_mode sort__mode;
+>>>>>>> v3.18
 extern struct sort_entry sort_comm;
 extern struct sort_entry sort_dso;
 extern struct sort_entry sort_sym;
@@ -80,6 +98,7 @@ struct hist_entry {
 		struct list_head head;
 	} pairs;
 	struct he_stat		stat;
+<<<<<<< HEAD
 	struct map_symbol	ms;
 	struct thread		*thread;
 	u64			ip;
@@ -87,6 +106,22 @@ struct hist_entry {
 
 	struct hist_entry_diff	diff;
 
+=======
+	struct he_stat		*stat_acc;
+	struct map_symbol	ms;
+	struct thread		*thread;
+	struct comm		*comm;
+	u64			ip;
+	u64			transaction;
+	s32			cpu;
+	u8			cpumode;
+
+	struct hist_entry_diff	diff;
+
+	/* We are added by hists__add_dummy_entry. */
+	bool			dummy;
+
+>>>>>>> v3.18
 	/* XXX These two should move to some tree widget lib */
 	u16			row_offset;
 	u16			nr_rows;
@@ -117,12 +152,44 @@ static inline struct hist_entry *hist_entry__next_pair(struct hist_entry *he)
 	return NULL;
 }
 
+<<<<<<< HEAD
 static inline void hist_entry__add_pair(struct hist_entry *he,
 					struct hist_entry *pair)
 {
 	list_add_tail(&he->pairs.head, &pair->pairs.node);
 }
 
+=======
+static inline void hist_entry__add_pair(struct hist_entry *pair,
+					struct hist_entry *he)
+{
+	list_add_tail(&pair->pairs.node, &he->pairs.head);
+}
+
+static inline float hist_entry__get_percent_limit(struct hist_entry *he)
+{
+	u64 period = he->stat.period;
+	u64 total_period = hists__total_period(he->hists);
+
+	if (unlikely(total_period == 0))
+		return 0;
+
+	if (symbol_conf.cumulate_callchain)
+		period = he->stat_acc->period;
+
+	return period * 100.0 / total_period;
+}
+
+
+enum sort_mode {
+	SORT_MODE__NORMAL,
+	SORT_MODE__BRANCH,
+	SORT_MODE__MEMORY,
+	SORT_MODE__TOP,
+	SORT_MODE__DIFF,
+};
+
+>>>>>>> v3.18
 enum sort_type {
 	/* common sort keys */
 	SORT_PID,
@@ -134,12 +201,16 @@ enum sort_type {
 	SORT_SRCLINE,
 	SORT_LOCAL_WEIGHT,
 	SORT_GLOBAL_WEIGHT,
+<<<<<<< HEAD
 	SORT_MEM_DADDR_SYMBOL,
 	SORT_MEM_DADDR_DSO,
 	SORT_MEM_LOCKED,
 	SORT_MEM_TLB,
 	SORT_MEM_LVL,
 	SORT_MEM_SNOOP,
+=======
+	SORT_TRANSACTION,
+>>>>>>> v3.18
 
 	/* branch stack specific sort keys */
 	__SORT_BRANCH_STACK,
@@ -148,6 +219,21 @@ enum sort_type {
 	SORT_SYM_FROM,
 	SORT_SYM_TO,
 	SORT_MISPREDICT,
+<<<<<<< HEAD
+=======
+	SORT_ABORT,
+	SORT_IN_TX,
+
+	/* memory mode specific sort keys */
+	__SORT_MEMORY_MODE,
+	SORT_MEM_DADDR_SYMBOL = __SORT_MEMORY_MODE,
+	SORT_MEM_DADDR_DSO,
+	SORT_MEM_LOCKED,
+	SORT_MEM_TLB,
+	SORT_MEM_LVL,
+	SORT_MEM_SNOOP,
+	SORT_MEM_DCACHELINE,
+>>>>>>> v3.18
 };
 
 /*
@@ -161,18 +247,37 @@ struct sort_entry {
 
 	int64_t (*se_cmp)(struct hist_entry *, struct hist_entry *);
 	int64_t (*se_collapse)(struct hist_entry *, struct hist_entry *);
+<<<<<<< HEAD
 	int	(*se_snprintf)(struct hist_entry *self, char *bf, size_t size,
 			       unsigned int width);
 	u8	se_width_idx;
 	bool	elide;
+=======
+	int64_t	(*se_sort)(struct hist_entry *, struct hist_entry *);
+	int	(*se_snprintf)(struct hist_entry *he, char *bf, size_t size,
+			       unsigned int width);
+	u8	se_width_idx;
+>>>>>>> v3.18
 };
 
 extern struct sort_entry sort_thread;
 extern struct list_head hist_entry__sort_list;
 
 int setup_sorting(void);
+<<<<<<< HEAD
 extern int sort_dimension__add(const char *);
 void sort_entry__setup_elide(struct sort_entry *self, struct strlist *list,
 			     const char *list_name, FILE *fp);
 
+=======
+int setup_output_field(void);
+void reset_output_field(void);
+extern int sort_dimension__add(const char *);
+void sort__setup_elide(FILE *fp);
+void perf_hpp__set_elide(int idx, bool elide);
+
+int report_parse_ignore_callees_opt(const struct option *opt, const char *arg, int unset);
+
+bool is_strict_order(const char *order);
+>>>>>>> v3.18
 #endif	/* __PERF_SORT_H */

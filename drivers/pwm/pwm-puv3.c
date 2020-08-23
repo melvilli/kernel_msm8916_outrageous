@@ -146,6 +146,10 @@ static int pwm_remove(struct platform_device *pdev)
 static struct platform_driver puv3_pwm_driver = {
 	.driver = {
 		.name = "PKUnity-v3-PWM",
+<<<<<<< HEAD
+=======
+		.owner = THIS_MODULE,
+>>>>>>> v3.18
 	},
 	.probe = pwm_probe,
 	.remove = pwm_remove,

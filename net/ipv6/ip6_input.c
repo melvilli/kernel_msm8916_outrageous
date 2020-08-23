@@ -15,8 +15,13 @@
  */
 /* Changes
  *
+<<<<<<< HEAD
  * 	Mitsuru KANDA @USAGI and
  * 	YOSHIFUJI Hideaki @USAGI: Remove ipv6_parse_exthdrs().
+=======
+ *	Mitsuru KANDA @USAGI and
+ *	YOSHIFUJI Hideaki @USAGI: Remove ipv6_parse_exthdrs().
+>>>>>>> v3.18
  */
 
 #include <linux/errno.h>
@@ -44,7 +49,11 @@
 #include <net/ip6_route.h>
 #include <net/addrconf.h>
 #include <net/xfrm.h>
+<<<<<<< HEAD
 
+=======
+#include <net/inet_ecn.h>
+>>>>>>> v3.18
 
 
 int ip6_rcv_finish(struct sk_buff *skb)
@@ -65,7 +74,11 @@ int ip6_rcv_finish(struct sk_buff *skb)
 int ipv6_rcv(struct sk_buff *skb, struct net_device *dev, struct packet_type *pt, struct net_device *orig_dev)
 {
 	const struct ipv6hdr *hdr;
+<<<<<<< HEAD
 	u32 		pkt_len;
+=======
+	u32 pkt_len;
+>>>>>>> v3.18
 	struct inet6_dev *idev;
 	struct net *net = dev_net(skb->dev);
 
@@ -109,6 +122,13 @@ int ipv6_rcv(struct sk_buff *skb, struct net_device *dev, struct packet_type *pt
 	if (hdr->version != 6)
 		goto err;
 
+<<<<<<< HEAD
+=======
+	IP6_ADD_STATS_BH(dev_net(dev), idev,
+			 IPSTATS_MIB_NOECTPKTS +
+				(ipv6_get_dsfield(hdr) & INET_ECN_MASK),
+			 max_t(unsigned short, 1, skb_shinfo(skb)->gso_segs));
+>>>>>>> v3.18
 	/*
 	 * RFC4291 2.5.3
 	 * A packet received on an interface with a destination address
@@ -325,10 +345,17 @@ int ip6_mc_input(struct sk_buff *skb)
 				if (offset < 0)
 					goto out;
 
+<<<<<<< HEAD
 				if (ipv6_is_mld(skb, nexthdr, offset))
 					deliver = true;
 
 				goto out;
+=======
+				if (!ipv6_is_mld(skb, nexthdr, offset))
+					goto out;
+
+				deliver = true;
+>>>>>>> v3.18
 			}
 			/* unknown RA - process it normally */
 		}

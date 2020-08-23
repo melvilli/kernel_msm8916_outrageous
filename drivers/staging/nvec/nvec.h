@@ -23,6 +23,10 @@
 #include <linux/list.h>
 #include <linux/mutex.h>
 #include <linux/notifier.h>
+<<<<<<< HEAD
+=======
+#include <linux/reset.h>
+>>>>>>> v3.18
 #include <linux/spinlock.h>
 #include <linux/workqueue.h>
 
@@ -103,6 +107,7 @@ struct nvec_msg {
 };
 
 /**
+<<<<<<< HEAD
  * struct nvec_subdev - A subdevice of nvec, such as nvec_kbd
  * @name: The name of the sub device
  * @platform_data: Platform data
@@ -128,13 +133,20 @@ struct nvec_platform_data {
 };
 
 /**
+=======
+>>>>>>> v3.18
  * struct nvec_chip - A single connection to an NVIDIA Embedded controller
  * @dev: The device
  * @gpio: The same as for &struct nvec_platform_data
  * @irq: The IRQ of the I2C device
  * @i2c_addr: The address of the I2C slave
  * @base: The base of the memory mapped region of the I2C device
+<<<<<<< HEAD
  * @clk: The clock of the I2C device
+=======
+ * @i2c_clk: The clock of the I2C device
+ * @rst: The reset of the I2C device
+>>>>>>> v3.18
  * @notifier_list: Notifiers to be called on received messages, see
  *                 nvec_register_notifier()
  * @rx_data: Received messages that have to be processed
@@ -164,6 +176,10 @@ struct nvec_chip {
 	int i2c_addr;
 	void __iomem *base;
 	struct clk *i2c_clk;
+<<<<<<< HEAD
+=======
+	struct reset_control *rst;
+>>>>>>> v3.18
 	struct atomic_notifier_head notifier_list;
 	struct list_head rx_data, tx_data;
 	struct notifier_block nvec_status_notifier;

@@ -1243,8 +1243,14 @@ static int ua101_probe(struct usb_interface *interface,
 		mutex_unlock(&devices_mutex);
 		return -ENOENT;
 	}
+<<<<<<< HEAD
 	err = snd_card_create(index[card_index], id[card_index], THIS_MODULE,
 			      sizeof(*ua), &card);
+=======
+	err = snd_card_new(&interface->dev,
+			   index[card_index], id[card_index], THIS_MODULE,
+			   sizeof(*ua), &card);
+>>>>>>> v3.18
 	if (err < 0) {
 		mutex_unlock(&devices_mutex);
 		return err;
@@ -1283,8 +1289,11 @@ static int ua101_probe(struct usb_interface *interface,
 		}
 	}
 
+<<<<<<< HEAD
 	snd_card_set_dev(card, &interface->dev);
 
+=======
+>>>>>>> v3.18
 	err = detect_usb_format(ua);
 	if (err < 0)
 		goto probe_error;
@@ -1359,7 +1368,11 @@ static void ua101_disconnect(struct usb_interface *interface)
 	snd_card_disconnect(ua->card);
 
 	/* make sure that there are no pending USB requests */
+<<<<<<< HEAD
 	__list_for_each(midi, &ua->midi_list)
+=======
+	list_for_each(midi, &ua->midi_list)
+>>>>>>> v3.18
 		snd_usbmidi_disconnect(midi);
 	abort_alsa_playback(ua);
 	abort_alsa_capture(ua);

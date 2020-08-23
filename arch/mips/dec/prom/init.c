@@ -13,6 +13,10 @@
 
 #include <asm/bootinfo.h>
 #include <asm/cpu.h>
+<<<<<<< HEAD
+=======
+#include <asm/cpu-type.h>
+>>>>>>> v3.18
 #include <asm/processor.h>
 
 #include <asm/dec/prom.h>
@@ -103,7 +107,11 @@ void __init prom_init(void)
 	if (prom_is_rex(magic))
 		rex_clear_cache();
 
+<<<<<<< HEAD
 	/* Register the early console.	*/
+=======
+	/* Register the early console.  */
+>>>>>>> v3.18
 	register_prom_console();
 
 	/* Were we compiled with the right CPU option? */

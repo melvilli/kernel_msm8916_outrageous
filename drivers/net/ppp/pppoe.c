@@ -131,12 +131,20 @@ static inline struct pppoe_net *pppoe_pernet(struct net *net)
 
 static inline int cmp_2_addr(struct pppoe_addr *a, struct pppoe_addr *b)
 {
+<<<<<<< HEAD
 	return a->sid == b->sid && !memcmp(a->remote, b->remote, ETH_ALEN);
+=======
+	return a->sid == b->sid && ether_addr_equal(a->remote, b->remote);
+>>>>>>> v3.18
 }
 
 static inline int cmp_addr(struct pppoe_addr *a, __be16 sid, char *addr)
 {
+<<<<<<< HEAD
 	return a->sid == sid && !memcmp(a->remote, addr, ETH_ALEN);
+=======
+	return a->sid == sid && ether_addr_equal(a->remote, addr);
+>>>>>>> v3.18
 }
 
 #if 8 % PPPOE_HASH_BITS
@@ -313,6 +321,10 @@ static void pppoe_flush_dev(struct net_device *dev)
 			if (po->pppoe_dev == dev &&
 			    sk->sk_state & (PPPOX_CONNECTED | PPPOX_BOUND | PPPOX_ZOMBIE)) {
 				pppox_unbind_sock(sk);
+<<<<<<< HEAD
+=======
+				sk->sk_state = PPPOX_ZOMBIE;
+>>>>>>> v3.18
 				sk->sk_state_change(sk);
 				po->pppoe_dev = NULL;
 				dev_put(dev);
@@ -337,7 +349,11 @@ static void pppoe_flush_dev(struct net_device *dev)
 static int pppoe_device_event(struct notifier_block *this,
 			      unsigned long event, void *ptr)
 {
+<<<<<<< HEAD
 	struct net_device *dev = (struct net_device *)ptr;
+=======
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 
 	/* Only look at sockets that are using this specific device. */
 	switch (event) {
@@ -569,7 +585,11 @@ static int pppoe_release(struct socket *sock)
 
 	po = pppox_sk(sk);
 
+<<<<<<< HEAD
 	if (po->pppoe_dev) {
+=======
+	if (sk->sk_state & (PPPOX_CONNECTED | PPPOX_BOUND | PPPOX_ZOMBIE)) {
+>>>>>>> v3.18
 		dev_put(po->pppoe_dev);
 		po->pppoe_dev = NULL;
 	}

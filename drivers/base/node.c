@@ -125,6 +125,7 @@ static ssize_t node_read_meminfo(struct device *dev,
 		       nid, K(node_page_state(nid, NR_WRITEBACK)),
 		       nid, K(node_page_state(nid, NR_FILE_PAGES)),
 		       nid, K(node_page_state(nid, NR_FILE_MAPPED)),
+<<<<<<< HEAD
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
 		       nid, K(node_page_state(nid, NR_ANON_PAGES)
 			+ node_page_state(nid, NR_ANON_TRANSPARENT_HUGEPAGES) *
@@ -133,6 +134,10 @@ static ssize_t node_read_meminfo(struct device *dev,
 		       nid, K(node_page_state(nid, NR_ANON_PAGES)),
 #endif
 		       nid, K(node_page_state(nid, NR_SHMEM)),
+=======
+		       nid, K(node_page_state(nid, NR_ANON_PAGES)),
+		       nid, K(i.sharedram),
+>>>>>>> v3.18
 		       nid, node_page_state(nid, NR_KERNEL_STACK) *
 				THREAD_SIZE / 1024,
 		       nid, K(node_page_state(nid, NR_PAGETABLE)),
@@ -295,8 +300,11 @@ static int register_node(struct node *node, int num, struct node *parent)
 		device_create_file(&node->dev, &dev_attr_distance);
 		device_create_file(&node->dev, &dev_attr_vmstat);
 
+<<<<<<< HEAD
 		scan_unevictable_register_node(node);
 
+=======
+>>>>>>> v3.18
 		hugetlb_register_node(node);
 
 		compaction_register_node(node);
@@ -320,7 +328,10 @@ void unregister_node(struct node *node)
 	device_remove_file(&node->dev, &dev_attr_distance);
 	device_remove_file(&node->dev, &dev_attr_vmstat);
 
+<<<<<<< HEAD
 	scan_unevictable_unregister_node(node);
+=======
+>>>>>>> v3.18
 	hugetlb_unregister_node(node);		/* no-op, if memoryless node */
 
 	device_unregister(&node->dev);
@@ -605,6 +616,12 @@ int register_one_node(int nid)
 
 void unregister_one_node(int nid)
 {
+<<<<<<< HEAD
+=======
+	if (!node_devices[nid])
+		return;
+
+>>>>>>> v3.18
 	unregister_node(node_devices[nid]);
 	node_devices[nid] = NULL;
 }

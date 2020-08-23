@@ -267,7 +267,11 @@ static inline struct rds_ib_mr *rds_ib_reuse_fmr(struct rds_ib_mr_pool *pool)
 	unsigned long *flag;
 
 	preempt_disable();
+<<<<<<< HEAD
 	flag = &__get_cpu_var(clean_list_grace);
+=======
+	flag = this_cpu_ptr(&clean_list_grace);
+>>>>>>> v3.18
 	set_bit(CLEAN_LIST_BUSY_BIT, flag);
 	ret = llist_del_first(&pool->clean_list);
 	if (ret)
@@ -759,10 +763,15 @@ void *rds_ib_get_mr(struct scatterlist *sg, unsigned long nents,
 	}
 
 	ibmr = rds_ib_alloc_fmr(rds_ibdev);
+<<<<<<< HEAD
 	if (IS_ERR(ibmr)) {
 		rds_ib_dev_put(rds_ibdev);
 		return ibmr;
 	}
+=======
+	if (IS_ERR(ibmr))
+		return ibmr;
+>>>>>>> v3.18
 
 	ret = rds_ib_map_fmr(rds_ibdev, ibmr, sg, nents);
 	if (ret == 0)

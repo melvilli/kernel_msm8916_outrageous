@@ -10,12 +10,17 @@
  *      UDPv6 GSO support
  */
 #include <linux/skbuff.h>
+<<<<<<< HEAD
+=======
+#include <linux/netdevice.h>
+>>>>>>> v3.18
 #include <net/protocol.h>
 #include <net/ipv6.h>
 #include <net/udp.h>
 #include <net/ip6_checksum.h>
 #include "ip6_offload.h"
 
+<<<<<<< HEAD
 static int udp6_ufo_send_check(struct sk_buff *skb)
 {
 	const struct ipv6hdr *ipv6h;
@@ -41,6 +46,10 @@ static int udp6_ufo_send_check(struct sk_buff *skb)
 
 static struct sk_buff *udp6_ufo_fragment(struct sk_buff *skb,
 	netdev_features_t features)
+=======
+static struct sk_buff *udp6_ufo_fragment(struct sk_buff *skb,
+					 netdev_features_t features)
+>>>>>>> v3.18
 {
 	struct sk_buff *segs = ERR_PTR(-EINVAL);
 	unsigned int mss;
@@ -49,7 +58,10 @@ static struct sk_buff *udp6_ufo_fragment(struct sk_buff *skb,
 	u8 *packet_start, *prevhdr;
 	u8 nexthdr;
 	u8 frag_hdr_sz = sizeof(struct frag_hdr);
+<<<<<<< HEAD
 	int offset;
+=======
+>>>>>>> v3.18
 	__wsum csum;
 	int tnl_hlen;
 
@@ -64,7 +76,16 @@ static struct sk_buff *udp6_ufo_fragment(struct sk_buff *skb,
 		if (unlikely(type & ~(SKB_GSO_UDP |
 				      SKB_GSO_DODGY |
 				      SKB_GSO_UDP_TUNNEL |
+<<<<<<< HEAD
 				      SKB_GSO_GRE) ||
+=======
+				      SKB_GSO_UDP_TUNNEL_CSUM |
+				      SKB_GSO_GRE |
+				      SKB_GSO_GRE_CSUM |
+				      SKB_GSO_IPIP |
+				      SKB_GSO_SIT |
+				      SKB_GSO_MPLS) ||
+>>>>>>> v3.18
 			     !(type & (SKB_GSO_UDP))))
 			goto out;
 
@@ -74,6 +95,7 @@ static struct sk_buff *udp6_ufo_fragment(struct sk_buff *skb,
 		goto out;
 	}
 
+<<<<<<< HEAD
 	/* Do software UFO. Complete and fill in the UDP checksum as HW cannot
 	 * do checksum of UDP packets sent as multiple IP fragments.
 	 */
@@ -116,14 +138,124 @@ static struct sk_buff *udp6_ufo_fragment(struct sk_buff *skb,
 	 * fragment header are updated in ipv6_gso_segment()
 	 */
 	segs = skb_segment(skb, features);
+=======
+	if (skb->encapsulation && skb_shinfo(skb)->gso_type &
+	    (SKB_GSO_UDP_TUNNEL|SKB_GSO_UDP_TUNNEL_CSUM))
+		segs = skb_udp_tunnel_segment(skb, features, true);
+	else {
+		const struct ipv6hdr *ipv6h;
+		struct udphdr *uh;
+
+		if (!pskb_may_pull(skb, sizeof(struct udphdr)))
+			goto out;
+
+		/* Do software UFO. Complete and fill in the UDP checksum as HW cannot
+		 * do checksum of UDP packets sent as multiple IP fragments.
+		 */
+
+		uh = udp_hdr(skb);
+		ipv6h = ipv6_hdr(skb);
+
+		uh->check = 0;
+		csum = skb_checksum(skb, 0, skb->len, 0);
+		uh->check = udp_v6_check(skb->len, &ipv6h->saddr,
+					  &ipv6h->daddr, csum);
+
+		if (uh->check == 0)
+			uh->check = CSUM_MANGLED_0;
+
+		skb->ip_summed = CHECKSUM_NONE;
+
+		/* Check if there is enough headroom to insert fragment header. */
+		tnl_hlen = skb_tnl_header_len(skb);
+		if (skb->mac_header < (tnl_hlen + frag_hdr_sz)) {
+			if (gso_pskb_expand_head(skb, tnl_hlen + frag_hdr_sz))
+				goto out;
+		}
+
+		/* Find the unfragmentable header and shift it left by frag_hdr_sz
+		 * bytes to insert fragment header.
+		 */
+		unfrag_ip6hlen = ip6_find_1stfragopt(skb, &prevhdr);
+		nexthdr = *prevhdr;
+		*prevhdr = NEXTHDR_FRAGMENT;
+		unfrag_len = (skb_network_header(skb) - skb_mac_header(skb)) +
+			     unfrag_ip6hlen + tnl_hlen;
+		packet_start = (u8 *) skb->head + SKB_GSO_CB(skb)->mac_offset;
+		memmove(packet_start-frag_hdr_sz, packet_start, unfrag_len);
+
+		SKB_GSO_CB(skb)->mac_offset -= frag_hdr_sz;
+		skb->mac_header -= frag_hdr_sz;
+		skb->network_header -= frag_hdr_sz;
+
+		fptr = (struct frag_hdr *)(skb_network_header(skb) + unfrag_ip6hlen);
+		fptr->nexthdr = nexthdr;
+		fptr->reserved = 0;
+		fptr->identification = skb_shinfo(skb)->ip6_frag_id;
+
+		/* Fragment the skb. ipv6 header and the remaining fields of the
+		 * fragment header are updated in ipv6_gso_segment()
+		 */
+		segs = skb_segment(skb, features);
+	}
+>>>>>>> v3.18
 
 out:
 	return segs;
 }
+<<<<<<< HEAD
 static const struct net_offload udpv6_offload = {
 	.callbacks = {
 		.gso_send_check =	udp6_ufo_send_check,
 		.gso_segment	=	udp6_ufo_fragment,
+=======
+
+static struct sk_buff **udp6_gro_receive(struct sk_buff **head,
+					 struct sk_buff *skb)
+{
+	struct udphdr *uh = udp_gro_udphdr(skb);
+
+	if (unlikely(!uh))
+		goto flush;
+
+	/* Don't bother verifying checksum if we're going to flush anyway. */
+	if (NAPI_GRO_CB(skb)->flush)
+		goto skip;
+
+	if (skb_gro_checksum_validate_zero_check(skb, IPPROTO_UDP, uh->check,
+						 ip6_gro_compute_pseudo))
+		goto flush;
+	else if (uh->check)
+		skb_gro_checksum_try_convert(skb, IPPROTO_UDP, uh->check,
+					     ip6_gro_compute_pseudo);
+
+skip:
+	NAPI_GRO_CB(skb)->is_ipv6 = 1;
+	return udp_gro_receive(head, skb, uh);
+
+flush:
+	NAPI_GRO_CB(skb)->flush = 1;
+	return NULL;
+}
+
+static int udp6_gro_complete(struct sk_buff *skb, int nhoff)
+{
+	const struct ipv6hdr *ipv6h = ipv6_hdr(skb);
+	struct udphdr *uh = (struct udphdr *)(skb->data + nhoff);
+
+	if (uh->check)
+		uh->check = ~udp_v6_check(skb->len - nhoff, &ipv6h->saddr,
+					  &ipv6h->daddr, 0);
+
+	return udp_gro_complete(skb, nhoff);
+}
+
+static const struct net_offload udpv6_offload = {
+	.callbacks = {
+		.gso_segment	=	udp6_ufo_fragment,
+		.gro_receive	=	udp6_gro_receive,
+		.gro_complete	=	udp6_gro_complete,
+>>>>>>> v3.18
 	},
 };
 

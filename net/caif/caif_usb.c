@@ -14,6 +14,10 @@
 #include <linux/mii.h>
 #include <linux/usb.h>
 #include <linux/usb/usbnet.h>
+<<<<<<< HEAD
+=======
+#include <linux/etherdevice.h>
+>>>>>>> v3.18
 #include <net/netns/generic.h>
 #include <net/caif/caif_dev.h>
 #include <net/caif/caif_layer.h>
@@ -86,6 +90,7 @@ static struct cflayer *cfusbl_create(int phyid, u8 ethaddr[ETH_ALEN],
 {
 	struct cfusbl *this = kmalloc(sizeof(struct cfusbl), GFP_ATOMIC);
 
+<<<<<<< HEAD
 	if (!this) {
 		pr_warn("Out of memory\n");
 		return NULL;
@@ -93,6 +98,14 @@ static struct cflayer *cfusbl_create(int phyid, u8 ethaddr[ETH_ALEN],
 	caif_assert(offsetof(struct cfusbl, layer) == 0);
 
 	memset(this, 0, sizeof(struct cflayer));
+=======
+	if (!this)
+		return NULL;
+
+	caif_assert(offsetof(struct cfusbl, layer) == 0);
+
+	memset(&this->layer, 0, sizeof(this->layer));
+>>>>>>> v3.18
 	this->layer.receive = cfusbl_receive;
 	this->layer.transmit = cfusbl_transmit;
 	this->layer.ctrlcmd = cfusbl_ctrlcmd;
@@ -105,8 +118,13 @@ static struct cflayer *cfusbl_create(int phyid, u8 ethaddr[ETH_ALEN],
 	 *	5-11	source address
 	 *	12-13	protocol type
 	 */
+<<<<<<< HEAD
 	memcpy(&this->tx_eth_hdr[ETH_ALEN], braddr, ETH_ALEN);
 	memcpy(&this->tx_eth_hdr[ETH_ALEN], ethaddr, ETH_ALEN);
+=======
+	ether_addr_copy(&this->tx_eth_hdr[ETH_ALEN], braddr);
+	ether_addr_copy(&this->tx_eth_hdr[ETH_ALEN], ethaddr);
+>>>>>>> v3.18
 	this->tx_eth_hdr[12] = cpu_to_be16(ETH_P_802_EX1) & 0xff;
 	this->tx_eth_hdr[13] = (cpu_to_be16(ETH_P_802_EX1) >> 8) & 0xff;
 	pr_debug("caif ethernet TX-header dst:%pM src:%pM type:%02x%02x\n",
@@ -121,9 +139,15 @@ static struct packet_type caif_usb_type __read_mostly = {
 };
 
 static int cfusbl_device_notify(struct notifier_block *me, unsigned long what,
+<<<<<<< HEAD
 				void *arg)
 {
 	struct net_device *dev = arg;
+=======
+				void *ptr)
+{
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 	struct caif_dev_common common;
 	struct cflayer *layer, *link_support;
 	struct usbnet *usbnet;

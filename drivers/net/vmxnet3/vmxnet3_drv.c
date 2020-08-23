@@ -36,7 +36,11 @@ char vmxnet3_driver_name[] = "vmxnet3";
  * PCI Device ID Table
  * Last entry must be all 0s
  */
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(vmxnet3_pciid_table) = {
+=======
+static const struct pci_device_id vmxnet3_pciid_table[] = {
+>>>>>>> v3.18
 	{PCI_VDEVICE(VMWARE, PCI_DEVICE_ID_VMWARE_VMXNET3)},
 	{0}
 };
@@ -313,10 +317,17 @@ vmxnet3_unmap_tx_buf(struct vmxnet3_tx_buf_info *tbi,
 		     struct pci_dev *pdev)
 {
 	if (tbi->map_type == VMXNET3_MAP_SINGLE)
+<<<<<<< HEAD
 		pci_unmap_single(pdev, tbi->dma_addr, tbi->len,
 				 PCI_DMA_TODEVICE);
 	else if (tbi->map_type == VMXNET3_MAP_PAGE)
 		pci_unmap_page(pdev, tbi->dma_addr, tbi->len,
+=======
+		dma_unmap_single(&pdev->dev, tbi->dma_addr, tbi->len,
+				 PCI_DMA_TODEVICE);
+	else if (tbi->map_type == VMXNET3_MAP_PAGE)
+		dma_unmap_page(&pdev->dev, tbi->dma_addr, tbi->len,
+>>>>>>> v3.18
 			       PCI_DMA_TODEVICE);
 	else
 		BUG_ON(tbi->map_type != VMXNET3_MAP_NONE);
@@ -429,6 +440,7 @@ vmxnet3_tq_destroy(struct vmxnet3_tx_queue *tq,
 		   struct vmxnet3_adapter *adapter)
 {
 	if (tq->tx_ring.base) {
+<<<<<<< HEAD
 		pci_free_consistent(adapter->pdev, tq->tx_ring.size *
 				    sizeof(struct Vmxnet3_TxDesc),
 				    tq->tx_ring.base, tq->tx_ring.basePA);
@@ -448,6 +460,31 @@ vmxnet3_tq_destroy(struct vmxnet3_tx_queue *tq,
 	}
 	kfree(tq->buf_info);
 	tq->buf_info = NULL;
+=======
+		dma_free_coherent(&adapter->pdev->dev, tq->tx_ring.size *
+				  sizeof(struct Vmxnet3_TxDesc),
+				  tq->tx_ring.base, tq->tx_ring.basePA);
+		tq->tx_ring.base = NULL;
+	}
+	if (tq->data_ring.base) {
+		dma_free_coherent(&adapter->pdev->dev, tq->data_ring.size *
+				  sizeof(struct Vmxnet3_TxDataDesc),
+				  tq->data_ring.base, tq->data_ring.basePA);
+		tq->data_ring.base = NULL;
+	}
+	if (tq->comp_ring.base) {
+		dma_free_coherent(&adapter->pdev->dev, tq->comp_ring.size *
+				  sizeof(struct Vmxnet3_TxCompDesc),
+				  tq->comp_ring.base, tq->comp_ring.basePA);
+		tq->comp_ring.base = NULL;
+	}
+	if (tq->buf_info) {
+		dma_free_coherent(&adapter->pdev->dev,
+				  tq->tx_ring.size * sizeof(tq->buf_info[0]),
+				  tq->buf_info, tq->buf_info_pa);
+		tq->buf_info = NULL;
+	}
+>>>>>>> v3.18
 }
 
 
@@ -496,37 +533,66 @@ static int
 vmxnet3_tq_create(struct vmxnet3_tx_queue *tq,
 		  struct vmxnet3_adapter *adapter)
 {
+<<<<<<< HEAD
 	BUG_ON(tq->tx_ring.base || tq->data_ring.base ||
 	       tq->comp_ring.base || tq->buf_info);
 
 	tq->tx_ring.base = pci_alloc_consistent(adapter->pdev, tq->tx_ring.size
 			   * sizeof(struct Vmxnet3_TxDesc),
 			   &tq->tx_ring.basePA);
+=======
+	size_t sz;
+
+	BUG_ON(tq->tx_ring.base || tq->data_ring.base ||
+	       tq->comp_ring.base || tq->buf_info);
+
+	tq->tx_ring.base = dma_alloc_coherent(&adapter->pdev->dev,
+			tq->tx_ring.size * sizeof(struct Vmxnet3_TxDesc),
+			&tq->tx_ring.basePA, GFP_KERNEL);
+>>>>>>> v3.18
 	if (!tq->tx_ring.base) {
 		netdev_err(adapter->netdev, "failed to allocate tx ring\n");
 		goto err;
 	}
 
+<<<<<<< HEAD
 	tq->data_ring.base = pci_alloc_consistent(adapter->pdev,
 			     tq->data_ring.size *
 			     sizeof(struct Vmxnet3_TxDataDesc),
 			     &tq->data_ring.basePA);
+=======
+	tq->data_ring.base = dma_alloc_coherent(&adapter->pdev->dev,
+			tq->data_ring.size * sizeof(struct Vmxnet3_TxDataDesc),
+			&tq->data_ring.basePA, GFP_KERNEL);
+>>>>>>> v3.18
 	if (!tq->data_ring.base) {
 		netdev_err(adapter->netdev, "failed to allocate data ring\n");
 		goto err;
 	}
 
+<<<<<<< HEAD
 	tq->comp_ring.base = pci_alloc_consistent(adapter->pdev,
 			     tq->comp_ring.size *
 			     sizeof(struct Vmxnet3_TxCompDesc),
 			     &tq->comp_ring.basePA);
+=======
+	tq->comp_ring.base = dma_alloc_coherent(&adapter->pdev->dev,
+			tq->comp_ring.size * sizeof(struct Vmxnet3_TxCompDesc),
+			&tq->comp_ring.basePA, GFP_KERNEL);
+>>>>>>> v3.18
 	if (!tq->comp_ring.base) {
 		netdev_err(adapter->netdev, "failed to allocate tx comp ring\n");
 		goto err;
 	}
 
+<<<<<<< HEAD
 	tq->buf_info = kcalloc(tq->tx_ring.size, sizeof(tq->buf_info[0]),
 			       GFP_KERNEL);
+=======
+	sz = tq->tx_ring.size * sizeof(tq->buf_info[0]);
+	tq->buf_info = dma_zalloc_coherent(&adapter->pdev->dev, sz,
+					   &tq->buf_info_pa, GFP_KERNEL);
+>>>>>>> v3.18
 	if (!tq->buf_info)
 		goto err;
 
@@ -578,7 +644,12 @@ vmxnet3_rq_alloc_rx_buf(struct vmxnet3_rx_queue *rq, u32 ring_idx,
 					break;
 				}
 
+<<<<<<< HEAD
 				rbi->dma_addr = pci_map_single(adapter->pdev,
+=======
+				rbi->dma_addr = dma_map_single(
+						&adapter->pdev->dev,
+>>>>>>> v3.18
 						rbi->skb->data, rbi->len,
 						PCI_DMA_FROMDEVICE);
 			} else {
@@ -595,7 +666,12 @@ vmxnet3_rq_alloc_rx_buf(struct vmxnet3_rx_queue *rq, u32 ring_idx,
 					rq->stats.rx_buf_alloc_failure++;
 					break;
 				}
+<<<<<<< HEAD
 				rbi->dma_addr = pci_map_page(adapter->pdev,
+=======
+				rbi->dma_addr = dma_map_page(
+						&adapter->pdev->dev,
+>>>>>>> v3.18
 						rbi->page, 0, PAGE_SIZE,
 						PCI_DMA_FROMDEVICE);
 			} else {
@@ -705,7 +781,11 @@ vmxnet3_map_pkt(struct sk_buff *skb, struct vmxnet3_tx_ctx *ctx,
 
 		tbi = tq->buf_info + tq->tx_ring.next2fill;
 		tbi->map_type = VMXNET3_MAP_SINGLE;
+<<<<<<< HEAD
 		tbi->dma_addr = pci_map_single(adapter->pdev,
+=======
+		tbi->dma_addr = dma_map_single(&adapter->pdev->dev,
+>>>>>>> v3.18
 				skb->data + buf_offset, buf_size,
 				PCI_DMA_TODEVICE);
 
@@ -759,7 +839,11 @@ vmxnet3_map_pkt(struct sk_buff *skb, struct vmxnet3_tx_ctx *ctx,
 			gdesc->dword[3] = 0;
 
 			netdev_dbg(adapter->netdev,
+<<<<<<< HEAD
 				"txd[%u]: 0x%llu %u %u\n",
+=======
+				"txd[%u]: 0x%llx %u %u\n",
+>>>>>>> v3.18
 				tq->tx_ring.next2fill, le64_to_cpu(gdesc->txd.addr),
 				le32_to_cpu(gdesc->dword[2]), gdesc->dword[3]);
 			vmxnet3_cmd_ring_adv_next2fill(&tq->tx_ring);
@@ -1071,7 +1155,11 @@ unlock_drop_pkt:
 	spin_unlock_irqrestore(&tq->tx_lock, flags);
 drop_pkt:
 	tq->stats.drop_total++;
+<<<<<<< HEAD
 	dev_kfree_skb(skb);
+=======
+	dev_kfree_skb_any(skb);
+>>>>>>> v3.18
 	return NETDEV_TX_OK;
 }
 
@@ -1221,19 +1309,34 @@ vmxnet3_rq_rx_complete(struct vmxnet3_rx_queue *rq,
 				goto rcd_done;
 			}
 
+<<<<<<< HEAD
 			pci_unmap_single(adapter->pdev, rbi->dma_addr, rbi->len,
+=======
+			dma_unmap_single(&adapter->pdev->dev, rbi->dma_addr,
+					 rbi->len,
+>>>>>>> v3.18
 					 PCI_DMA_FROMDEVICE);
 
 #ifdef VMXNET3_RSS
 			if (rcd->rssType != VMXNET3_RCD_RSS_TYPE_NONE &&
 			    (adapter->netdev->features & NETIF_F_RXHASH))
+<<<<<<< HEAD
 				ctx->skb->rxhash = le32_to_cpu(rcd->rssHash);
+=======
+				skb_set_hash(ctx->skb,
+					     le32_to_cpu(rcd->rssHash),
+					     PKT_HASH_TYPE_L3);
+>>>>>>> v3.18
 #endif
 			skb_put(ctx->skb, rcd->len);
 
 			/* Immediate refill */
 			rbi->skb = new_skb;
+<<<<<<< HEAD
 			rbi->dma_addr = pci_map_single(adapter->pdev,
+=======
+			rbi->dma_addr = dma_map_single(&adapter->pdev->dev,
+>>>>>>> v3.18
 						       rbi->skb->data, rbi->len,
 						       PCI_DMA_FROMDEVICE);
 			rxd->addr = cpu_to_le64(rbi->dma_addr);
@@ -1267,7 +1370,11 @@ vmxnet3_rq_rx_complete(struct vmxnet3_rx_queue *rq,
 			}
 
 			if (rcd->len) {
+<<<<<<< HEAD
 				pci_unmap_page(adapter->pdev,
+=======
+				dma_unmap_page(&adapter->pdev->dev,
+>>>>>>> v3.18
 					       rbi->dma_addr, rbi->len,
 					       PCI_DMA_FROMDEVICE);
 
@@ -1276,7 +1383,12 @@ vmxnet3_rq_rx_complete(struct vmxnet3_rx_queue *rq,
 
 			/* Immediate refill */
 			rbi->page = new_page;
+<<<<<<< HEAD
 			rbi->dma_addr = pci_map_page(adapter->pdev, rbi->page,
+=======
+			rbi->dma_addr = dma_map_page(&adapter->pdev->dev,
+						     rbi->page,
+>>>>>>> v3.18
 						     0, PAGE_SIZE,
 						     PCI_DMA_FROMDEVICE);
 			rxd->addr = cpu_to_le64(rbi->dma_addr);
@@ -1352,13 +1464,21 @@ vmxnet3_rq_cleanup(struct vmxnet3_rx_queue *rq,
 
 			if (rxd->btype == VMXNET3_RXD_BTYPE_HEAD &&
 					rq->buf_info[ring_idx][i].skb) {
+<<<<<<< HEAD
 				pci_unmap_single(adapter->pdev, rxd->addr,
+=======
+				dma_unmap_single(&adapter->pdev->dev, rxd->addr,
+>>>>>>> v3.18
 						 rxd->len, PCI_DMA_FROMDEVICE);
 				dev_kfree_skb(rq->buf_info[ring_idx][i].skb);
 				rq->buf_info[ring_idx][i].skb = NULL;
 			} else if (rxd->btype == VMXNET3_RXD_BTYPE_BODY &&
 					rq->buf_info[ring_idx][i].page) {
+<<<<<<< HEAD
 				pci_unmap_page(adapter->pdev, rxd->addr,
+=======
+				dma_unmap_page(&adapter->pdev->dev, rxd->addr,
+>>>>>>> v3.18
 					       rxd->len, PCI_DMA_FROMDEVICE);
 				put_page(rq->buf_info[ring_idx][i].page);
 				rq->buf_info[ring_idx][i].page = NULL;
@@ -1400,6 +1520,7 @@ static void vmxnet3_rq_destroy(struct vmxnet3_rx_queue *rq,
 	}
 
 
+<<<<<<< HEAD
 	kfree(rq->buf_info[0]);
 
 	for (i = 0; i < 2; i++) {
@@ -1408,17 +1529,41 @@ static void vmxnet3_rq_destroy(struct vmxnet3_rx_queue *rq,
 					    * sizeof(struct Vmxnet3_RxDesc),
 					    rq->rx_ring[i].base,
 					    rq->rx_ring[i].basePA);
+=======
+	for (i = 0; i < 2; i++) {
+		if (rq->rx_ring[i].base) {
+			dma_free_coherent(&adapter->pdev->dev,
+					  rq->rx_ring[i].size
+					  * sizeof(struct Vmxnet3_RxDesc),
+					  rq->rx_ring[i].base,
+					  rq->rx_ring[i].basePA);
+>>>>>>> v3.18
 			rq->rx_ring[i].base = NULL;
 		}
 		rq->buf_info[i] = NULL;
 	}
 
 	if (rq->comp_ring.base) {
+<<<<<<< HEAD
 		pci_free_consistent(adapter->pdev, rq->comp_ring.size *
 				    sizeof(struct Vmxnet3_RxCompDesc),
 				    rq->comp_ring.base, rq->comp_ring.basePA);
 		rq->comp_ring.base = NULL;
 	}
+=======
+		dma_free_coherent(&adapter->pdev->dev, rq->comp_ring.size
+				  * sizeof(struct Vmxnet3_RxCompDesc),
+				  rq->comp_ring.base, rq->comp_ring.basePA);
+		rq->comp_ring.base = NULL;
+	}
+
+	if (rq->buf_info[0]) {
+		size_t sz = sizeof(struct vmxnet3_rx_buf_info) *
+			(rq->rx_ring[0].size + rq->rx_ring[1].size);
+		dma_free_coherent(&adapter->pdev->dev, sz, rq->buf_info[0],
+				  rq->buf_info_pa);
+	}
+>>>>>>> v3.18
 }
 
 
@@ -1503,8 +1648,15 @@ vmxnet3_rq_create(struct vmxnet3_rx_queue *rq, struct vmxnet3_adapter *adapter)
 	for (i = 0; i < 2; i++) {
 
 		sz = rq->rx_ring[i].size * sizeof(struct Vmxnet3_RxDesc);
+<<<<<<< HEAD
 		rq->rx_ring[i].base = pci_alloc_consistent(adapter->pdev, sz,
 							&rq->rx_ring[i].basePA);
+=======
+		rq->rx_ring[i].base = dma_alloc_coherent(
+						&adapter->pdev->dev, sz,
+						&rq->rx_ring[i].basePA,
+						GFP_KERNEL);
+>>>>>>> v3.18
 		if (!rq->rx_ring[i].base) {
 			netdev_err(adapter->netdev,
 				   "failed to allocate rx ring %d\n", i);
@@ -1513,8 +1665,14 @@ vmxnet3_rq_create(struct vmxnet3_rx_queue *rq, struct vmxnet3_adapter *adapter)
 	}
 
 	sz = rq->comp_ring.size * sizeof(struct Vmxnet3_RxCompDesc);
+<<<<<<< HEAD
 	rq->comp_ring.base = pci_alloc_consistent(adapter->pdev, sz,
 						  &rq->comp_ring.basePA);
+=======
+	rq->comp_ring.base = dma_alloc_coherent(&adapter->pdev->dev, sz,
+						&rq->comp_ring.basePA,
+						GFP_KERNEL);
+>>>>>>> v3.18
 	if (!rq->comp_ring.base) {
 		netdev_err(adapter->netdev, "failed to allocate rx comp ring\n");
 		goto err;
@@ -1522,7 +1680,12 @@ vmxnet3_rq_create(struct vmxnet3_rx_queue *rq, struct vmxnet3_adapter *adapter)
 
 	sz = sizeof(struct vmxnet3_rx_buf_info) * (rq->rx_ring[0].size +
 						   rq->rx_ring[1].size);
+<<<<<<< HEAD
 	bi = kzalloc(sz, GFP_KERNEL);
+=======
+	bi = dma_zalloc_coherent(&adapter->pdev->dev, sz, &rq->buf_info_pa,
+				 GFP_KERNEL);
+>>>>>>> v3.18
 	if (!bi)
 		goto err;
 
@@ -2014,6 +2177,10 @@ vmxnet3_set_mc(struct net_device *netdev)
 	struct Vmxnet3_RxFilterConf *rxConf =
 					&adapter->shared->devRead.rxFilterConf;
 	u8 *new_table = NULL;
+<<<<<<< HEAD
+=======
+	dma_addr_t new_table_pa = 0;
+>>>>>>> v3.18
 	u32 new_mode = VMXNET3_RXM_UCAST;
 
 	if (netdev->flags & IFF_PROMISC) {
@@ -2034,6 +2201,7 @@ vmxnet3_set_mc(struct net_device *netdev)
 		if (!netdev_mc_empty(netdev)) {
 			new_table = vmxnet3_copy_mc(netdev);
 			if (new_table) {
+<<<<<<< HEAD
 				new_mode |= VMXNET3_RXM_MCAST;
 				rxConf->mfTableLen = cpu_to_le16(
 					netdev_mc_count(netdev) * ETH_ALEN);
@@ -2042,11 +2210,31 @@ vmxnet3_set_mc(struct net_device *netdev)
 			} else {
 				netdev_info(netdev, "failed to copy mcast list"
 					    ", setting ALL_MULTI\n");
+=======
+				rxConf->mfTableLen = cpu_to_le16(
+					netdev_mc_count(netdev) * ETH_ALEN);
+				new_table_pa = dma_map_single(
+							&adapter->pdev->dev,
+							new_table,
+							rxConf->mfTableLen,
+							PCI_DMA_TODEVICE);
+			}
+
+			if (new_table_pa) {
+				new_mode |= VMXNET3_RXM_MCAST;
+				rxConf->mfTablePA = cpu_to_le64(new_table_pa);
+			} else {
+				netdev_info(netdev,
+					    "failed to copy mcast list, setting ALL_MULTI\n");
+>>>>>>> v3.18
 				new_mode |= VMXNET3_RXM_ALL_MULTI;
 			}
 		}
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 	if (!(new_mode & VMXNET3_RXM_MCAST)) {
 		rxConf->mfTableLen = 0;
 		rxConf->mfTablePA = 0;
@@ -2065,6 +2253,12 @@ vmxnet3_set_mc(struct net_device *netdev)
 			       VMXNET3_CMD_UPDATE_MAC_FILTERS);
 	spin_unlock_irqrestore(&adapter->cmd_lock, flags);
 
+<<<<<<< HEAD
+=======
+	if (new_table_pa)
+		dma_unmap_single(&adapter->pdev->dev, new_table_pa,
+				 rxConf->mfTableLen, PCI_DMA_TODEVICE);
+>>>>>>> v3.18
 	kfree(new_table);
 }
 
@@ -2105,7 +2299,11 @@ vmxnet3_setup_driver_shared(struct vmxnet3_adapter *adapter)
 	devRead->misc.driverInfo.vmxnet3RevSpt = cpu_to_le32(1);
 	devRead->misc.driverInfo.uptVerSpt = cpu_to_le32(1);
 
+<<<<<<< HEAD
 	devRead->misc.ddPA = cpu_to_le64(virt_to_phys(adapter));
+=======
+	devRead->misc.ddPA = cpu_to_le64(adapter->adapter_pa);
+>>>>>>> v3.18
 	devRead->misc.ddLen = cpu_to_le32(sizeof(struct vmxnet3_adapter));
 
 	/* set up feature flags */
@@ -2134,7 +2332,11 @@ vmxnet3_setup_driver_shared(struct vmxnet3_adapter *adapter)
 		tqc->txRingBasePA   = cpu_to_le64(tq->tx_ring.basePA);
 		tqc->dataRingBasePA = cpu_to_le64(tq->data_ring.basePA);
 		tqc->compRingBasePA = cpu_to_le64(tq->comp_ring.basePA);
+<<<<<<< HEAD
 		tqc->ddPA           = cpu_to_le64(virt_to_phys(tq->buf_info));
+=======
+		tqc->ddPA           = cpu_to_le64(tq->buf_info_pa);
+>>>>>>> v3.18
 		tqc->txRingSize     = cpu_to_le32(tq->tx_ring.size);
 		tqc->dataRingSize   = cpu_to_le32(tq->data_ring.size);
 		tqc->compRingSize   = cpu_to_le32(tq->comp_ring.size);
@@ -2152,8 +2354,12 @@ vmxnet3_setup_driver_shared(struct vmxnet3_adapter *adapter)
 		rqc->rxRingBasePA[0] = cpu_to_le64(rq->rx_ring[0].basePA);
 		rqc->rxRingBasePA[1] = cpu_to_le64(rq->rx_ring[1].basePA);
 		rqc->compRingBasePA  = cpu_to_le64(rq->comp_ring.basePA);
+<<<<<<< HEAD
 		rqc->ddPA            = cpu_to_le64(virt_to_phys(
 							rq->buf_info));
+=======
+		rqc->ddPA            = cpu_to_le64(rq->buf_info_pa);
+>>>>>>> v3.18
 		rqc->rxRingSize[0]   = cpu_to_le32(rq->rx_ring[0].size);
 		rqc->rxRingSize[1]   = cpu_to_le32(rq->rx_ring[1].size);
 		rqc->compRingSize    = cpu_to_le32(rq->comp_ring.size);
@@ -2193,8 +2399,14 @@ vmxnet3_setup_driver_shared(struct vmxnet3_adapter *adapter)
 				i, adapter->num_rx_queues);
 
 		devRead->rssConfDesc.confVer = 1;
+<<<<<<< HEAD
 		devRead->rssConfDesc.confLen = sizeof(*rssConf);
 		devRead->rssConfDesc.confPA  = virt_to_phys(rssConf);
+=======
+		devRead->rssConfDesc.confLen = cpu_to_le32(sizeof(*rssConf));
+		devRead->rssConfDesc.confPA =
+			cpu_to_le64(adapter->rss_conf_pa);
+>>>>>>> v3.18
 	}
 
 #endif /* VMXNET3_RSS */
@@ -2559,8 +2771,13 @@ vmxnet3_open(struct net_device *netdev)
 	for (i = 0; i < adapter->num_tx_queues; i++)
 		spin_lock_init(&adapter->tx_queue[i].tx_lock);
 
+<<<<<<< HEAD
 	err = vmxnet3_create_queues(adapter, VMXNET3_DEF_TX_RING_SIZE,
 				    VMXNET3_DEF_RX_RING_SIZE,
+=======
+	err = vmxnet3_create_queues(adapter, adapter->tx_ring_size,
+				    adapter->rx_ring_size,
+>>>>>>> v3.18
 				    VMXNET3_DEF_RX_RING_SIZE);
 	if (err)
 		goto queue_err;
@@ -2708,14 +2925,21 @@ vmxnet3_read_mac_addr(struct vmxnet3_adapter *adapter, u8 *mac)
 /*
  * Enable MSIx vectors.
  * Returns :
+<<<<<<< HEAD
  *	0 on successful enabling of required vectors,
  *	VMXNET3_LINUX_MIN_MSIX_VECT when only minimum number of vectors required
  *	 could be enabled.
  *	number of vectors which can be enabled otherwise (this number is smaller
+=======
+ *	VMXNET3_LINUX_MIN_MSIX_VECT when only minimum number of vectors required
+ *	 were enabled.
+ *	number of vectors which were enabled otherwise (this number is greater
+>>>>>>> v3.18
  *	 than VMXNET3_LINUX_MIN_MSIX_VECT)
  */
 
 static int
+<<<<<<< HEAD
 vmxnet3_acquire_msix_vectors(struct vmxnet3_adapter *adapter,
 			     int vectors)
 {
@@ -2749,6 +2973,30 @@ vmxnet3_acquire_msix_vectors(struct vmxnet3_adapter *adapter,
 		 "Number of MSI-X interrupts which can be allocated "
 		 "is lower than min threshold required.\n");
 	return err;
+=======
+vmxnet3_acquire_msix_vectors(struct vmxnet3_adapter *adapter, int nvec)
+{
+	int ret = pci_enable_msix_range(adapter->pdev,
+					adapter->intr.msix_entries, nvec, nvec);
+
+	if (ret == -ENOSPC && nvec > VMXNET3_LINUX_MIN_MSIX_VECT) {
+		dev_err(&adapter->netdev->dev,
+			"Failed to enable %d MSI-X, trying %d\n",
+			nvec, VMXNET3_LINUX_MIN_MSIX_VECT);
+
+		ret = pci_enable_msix_range(adapter->pdev,
+					    adapter->intr.msix_entries,
+					    VMXNET3_LINUX_MIN_MSIX_VECT,
+					    VMXNET3_LINUX_MIN_MSIX_VECT);
+	}
+
+	if (ret < 0) {
+		dev_err(&adapter->netdev->dev,
+			"Failed to enable MSI-X, error: %d\n", ret);
+	}
+
+	return ret;
+>>>>>>> v3.18
 }
 
 
@@ -2775,6 +3023,7 @@ vmxnet3_alloc_intr_resources(struct vmxnet3_adapter *adapter)
 
 #ifdef CONFIG_PCI_MSI
 	if (adapter->intr.type == VMXNET3_IT_MSIX) {
+<<<<<<< HEAD
 		int vector, err = 0;
 
 		adapter->intr.num_intrs = (adapter->share_intr ==
@@ -2799,12 +3048,36 @@ vmxnet3_alloc_intr_resources(struct vmxnet3_adapter *adapter)
 		 * then limit the number of rx queues to 1
 		 */
 		if (err == VMXNET3_LINUX_MIN_MSIX_VECT) {
+=======
+		int i, nvec;
+
+		nvec  = adapter->share_intr == VMXNET3_INTR_TXSHARE ?
+			1 : adapter->num_tx_queues;
+		nvec += adapter->share_intr == VMXNET3_INTR_BUDDYSHARE ?
+			0 : adapter->num_rx_queues;
+		nvec += 1;	/* for link event */
+		nvec = nvec > VMXNET3_LINUX_MIN_MSIX_VECT ?
+		       nvec : VMXNET3_LINUX_MIN_MSIX_VECT;
+
+		for (i = 0; i < nvec; i++)
+			adapter->intr.msix_entries[i].entry = i;
+
+		nvec = vmxnet3_acquire_msix_vectors(adapter, nvec);
+		if (nvec < 0)
+			goto msix_err;
+
+		/* If we cannot allocate one MSIx vector per queue
+		 * then limit the number of rx queues to 1
+		 */
+		if (nvec == VMXNET3_LINUX_MIN_MSIX_VECT) {
+>>>>>>> v3.18
 			if (adapter->share_intr != VMXNET3_INTR_BUDDYSHARE
 			    || adapter->num_rx_queues != 1) {
 				adapter->share_intr = VMXNET3_INTR_TXSHARE;
 				netdev_err(adapter->netdev,
 					   "Number of rx queues : 1\n");
 				adapter->num_rx_queues = 1;
+<<<<<<< HEAD
 				adapter->intr.num_intrs =
 						VMXNET3_LINUX_MIN_MSIX_VECT;
 			}
@@ -2817,14 +3090,31 @@ vmxnet3_alloc_intr_resources(struct vmxnet3_adapter *adapter)
 		dev_info(&adapter->pdev->dev,
 			 "Failed to enable MSI-X, error %d. "
 			 "Limiting #rx queues to 1, try MSI.\n", err);
+=======
+			}
+		}
+
+		adapter->intr.num_intrs = nvec;
+		return;
+
+msix_err:
+		/* If we cannot allocate MSIx vectors use only one rx queue */
+		dev_info(&adapter->pdev->dev,
+			 "Failed to enable MSI-X, error %d. "
+			 "Limiting #rx queues to 1, try MSI.\n", nvec);
+>>>>>>> v3.18
 
 		adapter->intr.type = VMXNET3_IT_MSI;
 	}
 
 	if (adapter->intr.type == VMXNET3_IT_MSI) {
+<<<<<<< HEAD
 		int err;
 		err = pci_enable_msi(adapter->pdev);
 		if (!err) {
+=======
+		if (!pci_enable_msi(adapter->pdev)) {
+>>>>>>> v3.18
 			adapter->num_rx_queues = 1;
 			adapter->intr.num_intrs = 1;
 			return;
@@ -2862,6 +3152,10 @@ vmxnet3_tx_timeout(struct net_device *netdev)
 
 	netdev_err(adapter->netdev, "tx hang\n");
 	schedule_work(&adapter->work);
+<<<<<<< HEAD
+=======
+	netif_wake_queue(adapter->netdev);
+>>>>>>> v3.18
 }
 
 
@@ -2888,7 +3182,10 @@ vmxnet3_reset_work(struct work_struct *data)
 	}
 	rtnl_unlock();
 
+<<<<<<< HEAD
 	netif_wake_queue(adapter->netdev);
+=======
+>>>>>>> v3.18
 	clear_bit(VMXNET3_STATE_BIT_RESETTING, &adapter->state);
 }
 
@@ -2956,10 +3253,24 @@ vmxnet3_probe_device(struct pci_dev *pdev,
 	adapter->netdev = netdev;
 	adapter->pdev = pdev;
 
+<<<<<<< HEAD
 	spin_lock_init(&adapter->cmd_lock);
 	adapter->shared = pci_alloc_consistent(adapter->pdev,
 					       sizeof(struct Vmxnet3_DriverShared),
 					       &adapter->shared_pa);
+=======
+	adapter->tx_ring_size = VMXNET3_DEF_TX_RING_SIZE;
+	adapter->rx_ring_size = VMXNET3_DEF_RX_RING_SIZE;
+
+	spin_lock_init(&adapter->cmd_lock);
+	adapter->adapter_pa = dma_map_single(&adapter->pdev->dev, adapter,
+					     sizeof(struct vmxnet3_adapter),
+					     PCI_DMA_TODEVICE);
+	adapter->shared = dma_alloc_coherent(
+				&adapter->pdev->dev,
+				sizeof(struct Vmxnet3_DriverShared),
+				&adapter->shared_pa, GFP_KERNEL);
+>>>>>>> v3.18
 	if (!adapter->shared) {
 		dev_err(&pdev->dev, "Failed to allocate memory\n");
 		err = -ENOMEM;
@@ -2972,8 +3283,14 @@ vmxnet3_probe_device(struct pci_dev *pdev,
 
 	size = sizeof(struct Vmxnet3_TxQueueDesc) * adapter->num_tx_queues;
 	size += sizeof(struct Vmxnet3_RxQueueDesc) * adapter->num_rx_queues;
+<<<<<<< HEAD
 	adapter->tqd_start = pci_alloc_consistent(adapter->pdev, size,
 						  &adapter->queue_desc_pa);
+=======
+	adapter->tqd_start = dma_alloc_coherent(&adapter->pdev->dev, size,
+						&adapter->queue_desc_pa,
+						GFP_KERNEL);
+>>>>>>> v3.18
 
 	if (!adapter->tqd_start) {
 		dev_err(&pdev->dev, "Failed to allocate memory\n");
@@ -2983,7 +3300,14 @@ vmxnet3_probe_device(struct pci_dev *pdev,
 	adapter->rqd_start = (struct Vmxnet3_RxQueueDesc *)(adapter->tqd_start +
 							    adapter->num_tx_queues);
 
+<<<<<<< HEAD
 	adapter->pm_conf = kmalloc(sizeof(struct Vmxnet3_PMConf), GFP_KERNEL);
+=======
+	adapter->pm_conf = dma_alloc_coherent(&adapter->pdev->dev,
+					      sizeof(struct Vmxnet3_PMConf),
+					      &adapter->pm_conf_pa,
+					      GFP_KERNEL);
+>>>>>>> v3.18
 	if (adapter->pm_conf == NULL) {
 		err = -ENOMEM;
 		goto err_alloc_pm;
@@ -2991,7 +3315,14 @@ vmxnet3_probe_device(struct pci_dev *pdev,
 
 #ifdef VMXNET3_RSS
 
+<<<<<<< HEAD
 	adapter->rss_conf = kmalloc(sizeof(struct UPT1_RSSConf), GFP_KERNEL);
+=======
+	adapter->rss_conf = dma_alloc_coherent(&adapter->pdev->dev,
+					       sizeof(struct UPT1_RSSConf),
+					       &adapter->rss_conf_pa,
+					       GFP_KERNEL);
+>>>>>>> v3.18
 	if (adapter->rss_conf == NULL) {
 		err = -ENOMEM;
 		goto err_alloc_rss;
@@ -3086,6 +3417,7 @@ err_ver:
 	vmxnet3_free_pci_resources(adapter);
 err_alloc_pci:
 #ifdef VMXNET3_RSS
+<<<<<<< HEAD
 	kfree(adapter->rss_conf);
 err_alloc_rss:
 #endif
@@ -3098,6 +3430,24 @@ err_alloc_queue_desc:
 			    adapter->shared, adapter->shared_pa);
 err_alloc_shared:
 	pci_set_drvdata(pdev, NULL);
+=======
+	dma_free_coherent(&adapter->pdev->dev, sizeof(struct UPT1_RSSConf),
+			  adapter->rss_conf, adapter->rss_conf_pa);
+err_alloc_rss:
+#endif
+	dma_free_coherent(&adapter->pdev->dev, sizeof(struct Vmxnet3_PMConf),
+			  adapter->pm_conf, adapter->pm_conf_pa);
+err_alloc_pm:
+	dma_free_coherent(&adapter->pdev->dev, size, adapter->tqd_start,
+			  adapter->queue_desc_pa);
+err_alloc_queue_desc:
+	dma_free_coherent(&adapter->pdev->dev,
+			  sizeof(struct Vmxnet3_DriverShared),
+			  adapter->shared, adapter->shared_pa);
+err_alloc_shared:
+	dma_unmap_single(&adapter->pdev->dev, adapter->adapter_pa,
+			 sizeof(struct vmxnet3_adapter), PCI_DMA_TODEVICE);
+>>>>>>> v3.18
 	free_netdev(netdev);
 	return err;
 }
@@ -3127,6 +3477,7 @@ vmxnet3_remove_device(struct pci_dev *pdev)
 	vmxnet3_free_intr_resources(adapter);
 	vmxnet3_free_pci_resources(adapter);
 #ifdef VMXNET3_RSS
+<<<<<<< HEAD
 	kfree(adapter->rss_conf);
 #endif
 	kfree(adapter->pm_conf);
@@ -3137,6 +3488,23 @@ vmxnet3_remove_device(struct pci_dev *pdev)
 			    adapter->queue_desc_pa);
 	pci_free_consistent(adapter->pdev, sizeof(struct Vmxnet3_DriverShared),
 			    adapter->shared, adapter->shared_pa);
+=======
+	dma_free_coherent(&adapter->pdev->dev, sizeof(struct UPT1_RSSConf),
+			  adapter->rss_conf, adapter->rss_conf_pa);
+#endif
+	dma_free_coherent(&adapter->pdev->dev, sizeof(struct Vmxnet3_PMConf),
+			  adapter->pm_conf, adapter->pm_conf_pa);
+
+	size = sizeof(struct Vmxnet3_TxQueueDesc) * adapter->num_tx_queues;
+	size += sizeof(struct Vmxnet3_RxQueueDesc) * num_rx_queues;
+	dma_free_coherent(&adapter->pdev->dev, size, adapter->tqd_start,
+			  adapter->queue_desc_pa);
+	dma_free_coherent(&adapter->pdev->dev,
+			  sizeof(struct Vmxnet3_DriverShared),
+			  adapter->shared, adapter->shared_pa);
+	dma_unmap_single(&adapter->pdev->dev, adapter->adapter_pa,
+			 sizeof(struct vmxnet3_adapter), PCI_DMA_TODEVICE);
+>>>>>>> v3.18
 	free_netdev(netdev);
 }
 
@@ -3236,8 +3604,13 @@ skip_arp:
 	adapter->shared->devRead.pmConfDesc.confVer = cpu_to_le32(1);
 	adapter->shared->devRead.pmConfDesc.confLen = cpu_to_le32(sizeof(
 								  *pmConf));
+<<<<<<< HEAD
 	adapter->shared->devRead.pmConfDesc.confPA = cpu_to_le64(virt_to_phys(
 								 pmConf));
+=======
+	adapter->shared->devRead.pmConfDesc.confPA =
+		cpu_to_le64(adapter->pm_conf_pa);
+>>>>>>> v3.18
 
 	spin_lock_irqsave(&adapter->cmd_lock, flags);
 	VMXNET3_WRITE_BAR1_REG(adapter, VMXNET3_REG_CMD,
@@ -3274,8 +3647,13 @@ vmxnet3_resume(struct device *device)
 	adapter->shared->devRead.pmConfDesc.confVer = cpu_to_le32(1);
 	adapter->shared->devRead.pmConfDesc.confLen = cpu_to_le32(sizeof(
 								  *pmConf));
+<<<<<<< HEAD
 	adapter->shared->devRead.pmConfDesc.confPA = cpu_to_le64(virt_to_phys(
 								 pmConf));
+=======
+	adapter->shared->devRead.pmConfDesc.confPA =
+		cpu_to_le64(adapter->pm_conf_pa);
+>>>>>>> v3.18
 
 	netif_device_attach(netdev);
 	pci_set_power_state(pdev, PCI_D0);

@@ -387,8 +387,14 @@ static struct regulator_ops wm831x_buckv_ops = {
  * Set up DVS control.  We just log errors since we can still run
  * (with reduced performance) if we fail.
  */
+<<<<<<< HEAD
 static void wm831x_buckv_dvs_init(struct wm831x_dcdc *dcdc,
 					    struct wm831x_buckv_pdata *pdata)
+=======
+static void wm831x_buckv_dvs_init(struct platform_device *pdev,
+				  struct wm831x_dcdc *dcdc,
+				  struct wm831x_buckv_pdata *pdata)
+>>>>>>> v3.18
 {
 	struct wm831x *wm831x = dcdc->wm831x;
 	int ret;
@@ -402,9 +408,15 @@ static void wm831x_buckv_dvs_init(struct wm831x_dcdc *dcdc,
 	 */
 	dcdc->dvs_gpio_state = pdata->dvs_init_state;
 
+<<<<<<< HEAD
 	ret = gpio_request_one(pdata->dvs_gpio,
 			       dcdc->dvs_gpio_state ? GPIOF_INIT_HIGH : 0,
 			       "DCDC DVS");
+=======
+	ret = devm_gpio_request_one(&pdev->dev, pdata->dvs_gpio,
+				    dcdc->dvs_gpio_state ? GPIOF_INIT_HIGH : 0,
+				    "DCDC DVS");
+>>>>>>> v3.18
 	if (ret < 0) {
 		dev_err(wm831x->dev, "Failed to get %s DVS GPIO: %d\n",
 			dcdc->name, ret);
@@ -451,7 +463,11 @@ static void wm831x_buckv_dvs_init(struct wm831x_dcdc *dcdc,
 static int wm831x_buckv_probe(struct platform_device *pdev)
 {
 	struct wm831x *wm831x = dev_get_drvdata(pdev->dev.parent);
+<<<<<<< HEAD
 	struct wm831x_pdata *pdata = wm831x->dev->platform_data;
+=======
+	struct wm831x_pdata *pdata = dev_get_platdata(wm831x->dev);
+>>>>>>> v3.18
 	struct regulator_config config = { };
 	int id;
 	struct wm831x_dcdc *dcdc;
@@ -468,10 +484,15 @@ static int wm831x_buckv_probe(struct platform_device *pdev)
 
 	dcdc = devm_kzalloc(&pdev->dev,  sizeof(struct wm831x_dcdc),
 			    GFP_KERNEL);
+<<<<<<< HEAD
 	if (dcdc == NULL) {
 		dev_err(&pdev->dev, "Unable to allocate private data\n");
 		return -ENOMEM;
 	}
+=======
+	if (!dcdc)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	dcdc->wm831x = wm831x;
 
@@ -513,7 +534,12 @@ static int wm831x_buckv_probe(struct platform_device *pdev)
 	dcdc->dvs_vsel = ret & WM831X_DC1_DVS_VSEL_MASK;
 
 	if (pdata && pdata->dcdc[id])
+<<<<<<< HEAD
 		wm831x_buckv_dvs_init(dcdc, pdata->dcdc[id]->driver_data);
+=======
+		wm831x_buckv_dvs_init(pdev, dcdc,
+				      pdata->dcdc[id]->driver_data);
+>>>>>>> v3.18
 
 	config.dev = pdev->dev.parent;
 	if (pdata)
@@ -521,7 +547,12 @@ static int wm831x_buckv_probe(struct platform_device *pdev)
 	config.driver_data = dcdc;
 	config.regmap = wm831x->regmap;
 
+<<<<<<< HEAD
 	dcdc->regulator = regulator_register(&dcdc->desc, &config);
+=======
+	dcdc->regulator = devm_regulator_register(&pdev->dev, &dcdc->desc,
+						  &config);
+>>>>>>> v3.18
 	if (IS_ERR(dcdc->regulator)) {
 		ret = PTR_ERR(dcdc->regulator);
 		dev_err(wm831x->dev, "Failed to register DCDC%d: %d\n",
@@ -530,6 +561,7 @@ static int wm831x_buckv_probe(struct platform_device *pdev)
 	}
 
 	irq = wm831x_irq(wm831x, platform_get_irq_byname(pdev, "UV"));
+<<<<<<< HEAD
 	ret = request_threaded_irq(irq, NULL, wm831x_dcdc_uv_irq,
 				   IRQF_TRIGGER_RISING, dcdc->name, dcdc);
 	if (ret != 0) {
@@ -545,12 +577,32 @@ static int wm831x_buckv_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "Failed to request HC IRQ %d: %d\n",
 			irq, ret);
 		goto err_uv;
+=======
+	ret = devm_request_threaded_irq(&pdev->dev, irq, NULL,
+					wm831x_dcdc_uv_irq,
+					IRQF_TRIGGER_RISING, dcdc->name, dcdc);
+	if (ret != 0) {
+		dev_err(&pdev->dev, "Failed to request UV IRQ %d: %d\n",
+			irq, ret);
+		goto err;
+	}
+
+	irq = wm831x_irq(wm831x, platform_get_irq_byname(pdev, "HC"));
+	ret = devm_request_threaded_irq(&pdev->dev, irq, NULL,
+					wm831x_dcdc_oc_irq,
+					IRQF_TRIGGER_RISING, dcdc->name, dcdc);
+	if (ret != 0) {
+		dev_err(&pdev->dev, "Failed to request HC IRQ %d: %d\n",
+			irq, ret);
+		goto err;
+>>>>>>> v3.18
 	}
 
 	platform_set_drvdata(pdev, dcdc);
 
 	return 0;
 
+<<<<<<< HEAD
 err_uv:
 	free_irq(wm831x_irq(wm831x, platform_get_irq_byname(pdev, "UV")),
 		 dcdc);
@@ -583,6 +635,14 @@ static int wm831x_buckv_remove(struct platform_device *pdev)
 static struct platform_driver wm831x_buckv_driver = {
 	.probe = wm831x_buckv_probe,
 	.remove = wm831x_buckv_remove,
+=======
+err:
+	return ret;
+}
+
+static struct platform_driver wm831x_buckv_driver = {
+	.probe = wm831x_buckv_probe,
+>>>>>>> v3.18
 	.driver		= {
 		.name	= "wm831x-buckv",
 		.owner	= THIS_MODULE,
@@ -626,7 +686,11 @@ static struct regulator_ops wm831x_buckp_ops = {
 static int wm831x_buckp_probe(struct platform_device *pdev)
 {
 	struct wm831x *wm831x = dev_get_drvdata(pdev->dev.parent);
+<<<<<<< HEAD
 	struct wm831x_pdata *pdata = wm831x->dev->platform_data;
+=======
+	struct wm831x_pdata *pdata = dev_get_platdata(wm831x->dev);
+>>>>>>> v3.18
 	struct regulator_config config = { };
 	int id;
 	struct wm831x_dcdc *dcdc;
@@ -643,10 +707,15 @@ static int wm831x_buckp_probe(struct platform_device *pdev)
 
 	dcdc = devm_kzalloc(&pdev->dev, sizeof(struct wm831x_dcdc),
 			    GFP_KERNEL);
+<<<<<<< HEAD
 	if (dcdc == NULL) {
 		dev_err(&pdev->dev, "Unable to allocate private data\n");
 		return -ENOMEM;
 	}
+=======
+	if (!dcdc)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	dcdc->wm831x = wm831x;
 
@@ -683,7 +752,12 @@ static int wm831x_buckp_probe(struct platform_device *pdev)
 	config.driver_data = dcdc;
 	config.regmap = wm831x->regmap;
 
+<<<<<<< HEAD
 	dcdc->regulator = regulator_register(&dcdc->desc, &config);
+=======
+	dcdc->regulator = devm_regulator_register(&pdev->dev, &dcdc->desc,
+						  &config);
+>>>>>>> v3.18
 	if (IS_ERR(dcdc->regulator)) {
 		ret = PTR_ERR(dcdc->regulator);
 		dev_err(wm831x->dev, "Failed to register DCDC%d: %d\n",
@@ -692,24 +766,38 @@ static int wm831x_buckp_probe(struct platform_device *pdev)
 	}
 
 	irq = wm831x_irq(wm831x, platform_get_irq_byname(pdev, "UV"));
+<<<<<<< HEAD
 	ret = request_threaded_irq(irq, NULL, wm831x_dcdc_uv_irq,
 				   IRQF_TRIGGER_RISING,	dcdc->name, dcdc);
 	if (ret != 0) {
 		dev_err(&pdev->dev, "Failed to request UV IRQ %d: %d\n",
 			irq, ret);
 		goto err_regulator;
+=======
+	ret = devm_request_threaded_irq(&pdev->dev, irq, NULL,
+					wm831x_dcdc_uv_irq,
+					IRQF_TRIGGER_RISING, dcdc->name, dcdc);
+	if (ret != 0) {
+		dev_err(&pdev->dev, "Failed to request UV IRQ %d: %d\n",
+			irq, ret);
+		goto err;
+>>>>>>> v3.18
 	}
 
 	platform_set_drvdata(pdev, dcdc);
 
 	return 0;
 
+<<<<<<< HEAD
 err_regulator:
 	regulator_unregister(dcdc->regulator);
+=======
+>>>>>>> v3.18
 err:
 	return ret;
 }
 
+<<<<<<< HEAD
 static int wm831x_buckp_remove(struct platform_device *pdev)
 {
 	struct wm831x_dcdc *dcdc = platform_get_drvdata(pdev);
@@ -726,6 +814,10 @@ static int wm831x_buckp_remove(struct platform_device *pdev)
 static struct platform_driver wm831x_buckp_driver = {
 	.probe = wm831x_buckp_probe,
 	.remove = wm831x_buckp_remove,
+=======
+static struct platform_driver wm831x_buckp_driver = {
+	.probe = wm831x_buckp_probe,
+>>>>>>> v3.18
 	.driver		= {
 		.name	= "wm831x-buckp",
 		.owner	= THIS_MODULE,
@@ -774,7 +866,11 @@ static struct regulator_ops wm831x_boostp_ops = {
 static int wm831x_boostp_probe(struct platform_device *pdev)
 {
 	struct wm831x *wm831x = dev_get_drvdata(pdev->dev.parent);
+<<<<<<< HEAD
 	struct wm831x_pdata *pdata = wm831x->dev->platform_data;
+=======
+	struct wm831x_pdata *pdata = dev_get_platdata(wm831x->dev);
+>>>>>>> v3.18
 	struct regulator_config config = { };
 	int id = pdev->id % ARRAY_SIZE(pdata->dcdc);
 	struct wm831x_dcdc *dcdc;
@@ -787,18 +883,27 @@ static int wm831x_boostp_probe(struct platform_device *pdev)
 		return -ENODEV;
 
 	dcdc = devm_kzalloc(&pdev->dev, sizeof(struct wm831x_dcdc), GFP_KERNEL);
+<<<<<<< HEAD
 	if (dcdc == NULL) {
 		dev_err(&pdev->dev, "Unable to allocate private data\n");
 		return -ENOMEM;
 	}
+=======
+	if (!dcdc)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	dcdc->wm831x = wm831x;
 
 	res = platform_get_resource(pdev, IORESOURCE_REG, 0);
 	if (res == NULL) {
 		dev_err(&pdev->dev, "No REG resource\n");
+<<<<<<< HEAD
 		ret = -EINVAL;
 		goto err;
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 	}
 	dcdc->base = res->start;
 
@@ -817,11 +922,17 @@ static int wm831x_boostp_probe(struct platform_device *pdev)
 	config.driver_data = dcdc;
 	config.regmap = wm831x->regmap;
 
+<<<<<<< HEAD
 	dcdc->regulator = regulator_register(&dcdc->desc, &config);
+=======
+	dcdc->regulator = devm_regulator_register(&pdev->dev, &dcdc->desc,
+						  &config);
+>>>>>>> v3.18
 	if (IS_ERR(dcdc->regulator)) {
 		ret = PTR_ERR(dcdc->regulator);
 		dev_err(wm831x->dev, "Failed to register DCDC%d: %d\n",
 			id + 1, ret);
+<<<<<<< HEAD
 		goto err;
 	}
 
@@ -833,11 +944,26 @@ static int wm831x_boostp_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "Failed to request UV IRQ %d: %d\n",
 			irq, ret);
 		goto err_regulator;
+=======
+		return ret;
+	}
+
+	irq = wm831x_irq(wm831x, platform_get_irq_byname(pdev, "UV"));
+	ret = devm_request_threaded_irq(&pdev->dev, irq, NULL,
+					wm831x_dcdc_uv_irq,
+					IRQF_TRIGGER_RISING, dcdc->name,
+					dcdc);
+	if (ret != 0) {
+		dev_err(&pdev->dev, "Failed to request UV IRQ %d: %d\n",
+			irq, ret);
+		return ret;
+>>>>>>> v3.18
 	}
 
 	platform_set_drvdata(pdev, dcdc);
 
 	return 0;
+<<<<<<< HEAD
 
 err_regulator:
 	regulator_unregister(dcdc->regulator);
@@ -856,11 +982,16 @@ static int wm831x_boostp_remove(struct platform_device *pdev)
 	regulator_unregister(dcdc->regulator);
 
 	return 0;
+=======
+>>>>>>> v3.18
 }
 
 static struct platform_driver wm831x_boostp_driver = {
 	.probe = wm831x_boostp_probe,
+<<<<<<< HEAD
 	.remove = wm831x_boostp_remove,
+=======
+>>>>>>> v3.18
 	.driver		= {
 		.name	= "wm831x-boostp",
 		.owner	= THIS_MODULE,
@@ -886,7 +1017,11 @@ static struct regulator_ops wm831x_epe_ops = {
 static int wm831x_epe_probe(struct platform_device *pdev)
 {
 	struct wm831x *wm831x = dev_get_drvdata(pdev->dev.parent);
+<<<<<<< HEAD
 	struct wm831x_pdata *pdata = wm831x->dev->platform_data;
+=======
+	struct wm831x_pdata *pdata = dev_get_platdata(wm831x->dev);
+>>>>>>> v3.18
 	struct regulator_config config = { };
 	int id = pdev->id % ARRAY_SIZE(pdata->epe);
 	struct wm831x_dcdc *dcdc;
@@ -895,10 +1030,15 @@ static int wm831x_epe_probe(struct platform_device *pdev)
 	dev_dbg(&pdev->dev, "Probing EPE%d\n", id + 1);
 
 	dcdc = devm_kzalloc(&pdev->dev, sizeof(struct wm831x_dcdc), GFP_KERNEL);
+<<<<<<< HEAD
 	if (dcdc == NULL) {
 		dev_err(&pdev->dev, "Unable to allocate private data\n");
 		return -ENOMEM;
 	}
+=======
+	if (!dcdc)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	dcdc->wm831x = wm831x;
 
@@ -920,7 +1060,12 @@ static int wm831x_epe_probe(struct platform_device *pdev)
 	config.driver_data = dcdc;
 	config.regmap = wm831x->regmap;
 
+<<<<<<< HEAD
 	dcdc->regulator = regulator_register(&dcdc->desc, &config);
+=======
+	dcdc->regulator = devm_regulator_register(&pdev->dev, &dcdc->desc,
+						  &config);
+>>>>>>> v3.18
 	if (IS_ERR(dcdc->regulator)) {
 		ret = PTR_ERR(dcdc->regulator);
 		dev_err(wm831x->dev, "Failed to register EPE%d: %d\n",
@@ -936,6 +1081,7 @@ err:
 	return ret;
 }
 
+<<<<<<< HEAD
 static int wm831x_epe_remove(struct platform_device *pdev)
 {
 	struct wm831x_dcdc *dcdc = platform_get_drvdata(pdev);
@@ -949,6 +1095,10 @@ static int wm831x_epe_remove(struct platform_device *pdev)
 static struct platform_driver wm831x_epe_driver = {
 	.probe = wm831x_epe_probe,
 	.remove = wm831x_epe_remove,
+=======
+static struct platform_driver wm831x_epe_driver = {
+	.probe = wm831x_epe_probe,
+>>>>>>> v3.18
 	.driver		= {
 		.name	= "wm831x-epe",
 		.owner	= THIS_MODULE,

@@ -586,15 +586,26 @@ static int __init octeon_pci_setup(void)
 	else
 		octeon_dma_bar_type = OCTEON_DMA_BAR_TYPE_BIG;
 
+<<<<<<< HEAD
 	/* PCI I/O and PCI MEM values */
 	set_io_port_base(OCTEON_PCI_IOSPACE_BASE);
 	ioport_resource.start = 0;
 	ioport_resource.end = OCTEON_PCI_IOSPACE_SIZE - 1;
+=======
+>>>>>>> v3.18
 	if (!octeon_is_pci_host()) {
 		pr_notice("Not in host mode, PCI Controller not initialized\n");
 		return 0;
 	}
 
+<<<<<<< HEAD
+=======
+	/* PCI I/O and PCI MEM values */
+	set_io_port_base(OCTEON_PCI_IOSPACE_BASE);
+	ioport_resource.start = 0;
+	ioport_resource.end = OCTEON_PCI_IOSPACE_SIZE - 1;
+
+>>>>>>> v3.18
 	pr_notice("%s Octeon big bar support\n",
 		  (octeon_dma_bar_type ==
 		  OCTEON_DMA_BAR_TYPE_BIG) ? "Enabling" : "Disabling");

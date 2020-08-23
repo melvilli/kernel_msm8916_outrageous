@@ -21,6 +21,10 @@
  * Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
  */
 
+<<<<<<< HEAD
+=======
+#include <linux/capability.h>
+>>>>>>> v3.18
 #include <linux/net.h>
 #include <linux/module.h>
 #include <linux/if_arp.h>
@@ -45,7 +49,16 @@ struct dgram_sock {
 	struct ieee802154_addr dst_addr;
 
 	unsigned int bound:1;
+<<<<<<< HEAD
 	unsigned int want_ack:1;
+=======
+	unsigned int connected:1;
+	unsigned int want_ack:1;
+	unsigned int secen:1;
+	unsigned int secen_override:1;
+	unsigned int seclevel:3;
+	unsigned int seclevel_override:1;
+>>>>>>> v3.18
 };
 
 static inline struct dgram_sock *dgram_sk(const struct sock *sk)
@@ -73,10 +86,14 @@ static int dgram_init(struct sock *sk)
 {
 	struct dgram_sock *ro = dgram_sk(sk);
 
+<<<<<<< HEAD
 	ro->dst_addr.addr_type = IEEE802154_ADDR_LONG;
 	ro->dst_addr.pan_id = 0xffff;
 	ro->want_ack = 1;
 	memset(&ro->dst_addr.hwaddr, 0xff, sizeof(ro->dst_addr.hwaddr));
+=======
+	ro->want_ack = 1;
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -88,6 +105,10 @@ static void dgram_close(struct sock *sk, long timeout)
 static int dgram_bind(struct sock *sk, struct sockaddr *uaddr, int len)
 {
 	struct sockaddr_ieee802154 *addr = (struct sockaddr_ieee802154 *)uaddr;
+<<<<<<< HEAD
+=======
+	struct ieee802154_addr haddr;
+>>>>>>> v3.18
 	struct dgram_sock *ro = dgram_sk(sk);
 	int err = -EINVAL;
 	struct net_device *dev;
@@ -102,7 +123,12 @@ static int dgram_bind(struct sock *sk, struct sockaddr *uaddr, int len)
 	if (addr->family != AF_IEEE802154)
 		goto out;
 
+<<<<<<< HEAD
 	dev = ieee802154_get_dev(sock_net(sk), &addr->addr);
+=======
+	ieee802154_addr_from_sa(&haddr, &addr->addr);
+	dev = ieee802154_get_dev(sock_net(sk), &haddr);
+>>>>>>> v3.18
 	if (!dev) {
 		err = -ENODEV;
 		goto out;
@@ -113,7 +139,11 @@ static int dgram_bind(struct sock *sk, struct sockaddr *uaddr, int len)
 		goto out_put;
 	}
 
+<<<<<<< HEAD
 	memcpy(&ro->src_addr, &addr->addr, sizeof(struct ieee802154_addr));
+=======
+	ro->src_addr = haddr;
+>>>>>>> v3.18
 
 	ro->bound = 1;
 	err = 0;
@@ -144,6 +174,7 @@ static int dgram_ioctl(struct sock *sk, int cmd, unsigned long arg)
 		spin_lock_bh(&sk->sk_receive_queue.lock);
 		skb = skb_peek(&sk->sk_receive_queue);
 		if (skb != NULL) {
+<<<<<<< HEAD
 			/*
 			 * We will only return the amount
 			 * of this packet since that is all
@@ -151,18 +182,33 @@ static int dgram_ioctl(struct sock *sk, int cmd, unsigned long arg)
 			 */
 			/* FIXME: parse the header for more correct value */
 			amount = skb->len - (3+8+8);
+=======
+			/* We will only return the amount
+			 * of this packet since that is all
+			 * that will be read.
+			 */
+			amount = skb->len - ieee802154_hdr_length(skb);
+>>>>>>> v3.18
 		}
 		spin_unlock_bh(&sk->sk_receive_queue.lock);
 		return put_user(amount, (int __user *)arg);
 	}
 
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	return -ENOIOCTLCMD;
 }
 
 /* FIXME: autobind */
 static int dgram_connect(struct sock *sk, struct sockaddr *uaddr,
+<<<<<<< HEAD
 			int len)
+=======
+			 int len)
+>>>>>>> v3.18
 {
 	struct sockaddr_ieee802154 *addr = (struct sockaddr_ieee802154 *)uaddr;
 	struct dgram_sock *ro = dgram_sk(sk);
@@ -181,7 +227,12 @@ static int dgram_connect(struct sock *sk, struct sockaddr *uaddr,
 		goto out;
 	}
 
+<<<<<<< HEAD
 	memcpy(&ro->dst_addr, &addr->addr, sizeof(struct ieee802154_addr));
+=======
+	ieee802154_addr_from_sa(&ro->dst_addr, &addr->addr);
+	ro->connected = 1;
+>>>>>>> v3.18
 
 out:
 	release_sock(sk);
@@ -193,22 +244,36 @@ static int dgram_disconnect(struct sock *sk, int flags)
 	struct dgram_sock *ro = dgram_sk(sk);
 
 	lock_sock(sk);
+<<<<<<< HEAD
 
 	ro->dst_addr.addr_type = IEEE802154_ADDR_LONG;
 	memset(&ro->dst_addr.hwaddr, 0xff, sizeof(ro->dst_addr.hwaddr));
 
+=======
+	ro->connected = 0;
+>>>>>>> v3.18
 	release_sock(sk);
 
 	return 0;
 }
 
 static int dgram_sendmsg(struct kiocb *iocb, struct sock *sk,
+<<<<<<< HEAD
 		struct msghdr *msg, size_t size)
+=======
+			 struct msghdr *msg, size_t size)
+>>>>>>> v3.18
 {
 	struct net_device *dev;
 	unsigned int mtu;
 	struct sk_buff *skb;
+<<<<<<< HEAD
 	struct dgram_sock *ro = dgram_sk(sk);
+=======
+	struct ieee802154_mac_cb *cb;
+	struct dgram_sock *ro = dgram_sk(sk);
+	struct ieee802154_addr dst_addr;
+>>>>>>> v3.18
 	int hlen, tlen;
 	int err;
 
@@ -217,6 +282,14 @@ static int dgram_sendmsg(struct kiocb *iocb, struct sock *sk,
 		return -EOPNOTSUPP;
 	}
 
+<<<<<<< HEAD
+=======
+	if (!ro->connected && !msg->msg_name)
+		return -EDESTADDRREQ;
+	else if (ro->connected && msg->msg_name)
+		return -EISCONN;
+
+>>>>>>> v3.18
 	if (!ro->bound)
 		dev = dev_getfirstbyhwtype(sock_net(sk), ARPHRD_IEEE802154);
 	else
@@ -232,15 +305,24 @@ static int dgram_sendmsg(struct kiocb *iocb, struct sock *sk,
 
 	if (size > mtu) {
 		pr_debug("size = %Zu, mtu = %u\n", size, mtu);
+<<<<<<< HEAD
 		err = -EINVAL;
+=======
+		err = -EMSGSIZE;
+>>>>>>> v3.18
 		goto out_dev;
 	}
 
 	hlen = LL_RESERVED_SPACE(dev);
 	tlen = dev->needed_tailroom;
 	skb = sock_alloc_send_skb(sk, hlen + tlen + size,
+<<<<<<< HEAD
 			msg->msg_flags & MSG_DONTWAIT,
 			&err);
+=======
+				  msg->msg_flags & MSG_DONTWAIT,
+				  &err);
+>>>>>>> v3.18
 	if (!skb)
 		goto out_dev;
 
@@ -248,6 +330,7 @@ static int dgram_sendmsg(struct kiocb *iocb, struct sock *sk,
 
 	skb_reset_network_header(skb);
 
+<<<<<<< HEAD
 	mac_cb(skb)->flags = IEEE802154_FC_TYPE_DATA;
 	if (ro->want_ack)
 		mac_cb(skb)->flags |= MAC_CB_FLAG_ACKREQ;
@@ -260,6 +343,31 @@ static int dgram_sendmsg(struct kiocb *iocb, struct sock *sk,
 
 	skb_reset_mac_header(skb);
 
+=======
+	cb = mac_cb_init(skb);
+	cb->type = IEEE802154_FC_TYPE_DATA;
+	cb->ackreq = ro->want_ack;
+
+	if (msg->msg_name) {
+		DECLARE_SOCKADDR(struct sockaddr_ieee802154*,
+				 daddr, msg->msg_name);
+
+		ieee802154_addr_from_sa(&dst_addr, &daddr->addr);
+	} else {
+		dst_addr = ro->dst_addr;
+	}
+
+	cb->secen = ro->secen;
+	cb->secen_override = ro->secen_override;
+	cb->seclevel = ro->seclevel;
+	cb->seclevel_override = ro->seclevel_override;
+
+	err = dev_hard_header(skb, dev, ETH_P_IEEE802154, &dst_addr,
+			      ro->bound ? &ro->src_addr : NULL, size);
+	if (err < 0)
+		goto out_skb;
+
+>>>>>>> v3.18
 	err = memcpy_fromiovec(skb_put(skb, size), msg->msg_iov, size);
 	if (err < 0)
 		goto out_skb;
@@ -285,15 +393,24 @@ out:
 }
 
 static int dgram_recvmsg(struct kiocb *iocb, struct sock *sk,
+<<<<<<< HEAD
 		struct msghdr *msg, size_t len, int noblock, int flags,
 		int *addr_len)
+=======
+			 struct msghdr *msg, size_t len, int noblock,
+			 int flags, int *addr_len)
+>>>>>>> v3.18
 {
 	size_t copied = 0;
 	int err = -EOPNOTSUPP;
 	struct sk_buff *skb;
+<<<<<<< HEAD
 	struct sockaddr_ieee802154 *saddr;
 
 	saddr = (struct sockaddr_ieee802154 *)msg->msg_name;
+=======
+	DECLARE_SOCKADDR(struct sockaddr_ieee802154 *, saddr, msg->msg_name);
+>>>>>>> v3.18
 
 	skb = skb_recv_datagram(sk, flags, noblock, &err);
 	if (!skb)
@@ -314,7 +431,11 @@ static int dgram_recvmsg(struct kiocb *iocb, struct sock *sk,
 
 	if (saddr) {
 		saddr->family = AF_IEEE802154;
+<<<<<<< HEAD
 		saddr->addr = mac_cb(skb)->sa;
+=======
+		ieee802154_addr_to_sa(&saddr->addr, &mac_cb(skb)->source);
+>>>>>>> v3.18
 		*addr_len = sizeof(*saddr);
 	}
 
@@ -330,6 +451,13 @@ out:
 
 static int dgram_rcv_skb(struct sock *sk, struct sk_buff *skb)
 {
+<<<<<<< HEAD
+=======
+	skb = skb_share_check(skb, GFP_ATOMIC);
+	if (!skb)
+		return NET_RX_DROP;
+
+>>>>>>> v3.18
 	if (sock_queue_rcv_skb(sk, skb) < 0) {
 		kfree_skb(skb);
 		return NET_RX_DROP;
@@ -338,6 +466,7 @@ static int dgram_rcv_skb(struct sock *sk, struct sk_buff *skb)
 	return NET_RX_SUCCESS;
 }
 
+<<<<<<< HEAD
 static inline int ieee802154_match_sock(u8 *hw_addr, u16 pan_id,
 		u16 short_addr, struct dgram_sock *ro)
 {
@@ -354,19 +483,44 @@ static inline int ieee802154_match_sock(u8 *hw_addr, u16 pan_id,
 		return 1;
 
 	return 0;
+=======
+static inline bool
+ieee802154_match_sock(__le64 hw_addr, __le16 pan_id, __le16 short_addr,
+		      struct dgram_sock *ro)
+{
+	if (!ro->bound)
+		return true;
+
+	if (ro->src_addr.mode == IEEE802154_ADDR_LONG &&
+	    hw_addr == ro->src_addr.extended_addr)
+		return true;
+
+	if (ro->src_addr.mode == IEEE802154_ADDR_SHORT &&
+	    pan_id == ro->src_addr.pan_id &&
+	    short_addr == ro->src_addr.short_addr)
+		return true;
+
+	return false;
+>>>>>>> v3.18
 }
 
 int ieee802154_dgram_deliver(struct net_device *dev, struct sk_buff *skb)
 {
 	struct sock *sk, *prev = NULL;
 	int ret = NET_RX_SUCCESS;
+<<<<<<< HEAD
 	u16 pan_id, short_addr;
+=======
+	__le16 pan_id, short_addr;
+	__le64 hw_addr;
+>>>>>>> v3.18
 
 	/* Data frame processing */
 	BUG_ON(dev->type != ARPHRD_IEEE802154);
 
 	pan_id = ieee802154_mlme_ops(dev)->get_pan_id(dev);
 	short_addr = ieee802154_mlme_ops(dev)->get_short_addr(dev);
+<<<<<<< HEAD
 
 	read_lock(&dgram_lock);
 	sk_for_each(sk, &dgram_head) {
@@ -374,6 +528,17 @@ int ieee802154_dgram_deliver(struct net_device *dev, struct sk_buff *skb)
 					dgram_sk(sk))) {
 			if (prev) {
 				struct sk_buff *clone;
+=======
+	hw_addr = ieee802154_devaddr_from_raw(dev->dev_addr);
+
+	read_lock(&dgram_lock);
+	sk_for_each(sk, &dgram_head) {
+		if (ieee802154_match_sock(hw_addr, pan_id, short_addr,
+					  dgram_sk(sk))) {
+			if (prev) {
+				struct sk_buff *clone;
+
+>>>>>>> v3.18
 				clone = skb_clone(skb, GFP_ATOMIC);
 				if (clone)
 					dgram_rcv_skb(prev, clone);
@@ -383,9 +548,15 @@ int ieee802154_dgram_deliver(struct net_device *dev, struct sk_buff *skb)
 		}
 	}
 
+<<<<<<< HEAD
 	if (prev)
 		dgram_rcv_skb(prev, skb);
 	else {
+=======
+	if (prev) {
+		dgram_rcv_skb(prev, skb);
+	} else {
+>>>>>>> v3.18
 		kfree_skb(skb);
 		ret = NET_RX_DROP;
 	}
@@ -395,7 +566,11 @@ int ieee802154_dgram_deliver(struct net_device *dev, struct sk_buff *skb)
 }
 
 static int dgram_getsockopt(struct sock *sk, int level, int optname,
+<<<<<<< HEAD
 		    char __user *optval, int __user *optlen)
+=======
+			    char __user *optval, int __user *optlen)
+>>>>>>> v3.18
 {
 	struct dgram_sock *ro = dgram_sk(sk);
 
@@ -413,6 +588,23 @@ static int dgram_getsockopt(struct sock *sk, int level, int optname,
 	case WPAN_WANTACK:
 		val = ro->want_ack;
 		break;
+<<<<<<< HEAD
+=======
+	case WPAN_SECURITY:
+		if (!ro->secen_override)
+			val = WPAN_SECURITY_DEFAULT;
+		else if (ro->secen)
+			val = WPAN_SECURITY_ON;
+		else
+			val = WPAN_SECURITY_OFF;
+		break;
+	case WPAN_SECURITY_LEVEL:
+		if (!ro->seclevel_override)
+			val = WPAN_SECURITY_LEVEL_DEFAULT;
+		else
+			val = ro->seclevel;
+		break;
+>>>>>>> v3.18
 	default:
 		return -ENOPROTOOPT;
 	}
@@ -425,9 +617,16 @@ static int dgram_getsockopt(struct sock *sk, int level, int optname,
 }
 
 static int dgram_setsockopt(struct sock *sk, int level, int optname,
+<<<<<<< HEAD
 		    char __user *optval, unsigned int optlen)
 {
 	struct dgram_sock *ro = dgram_sk(sk);
+=======
+			    char __user *optval, unsigned int optlen)
+{
+	struct dgram_sock *ro = dgram_sk(sk);
+	struct net *net = sock_net(sk);
+>>>>>>> v3.18
 	int val;
 	int err = 0;
 
@@ -443,6 +642,50 @@ static int dgram_setsockopt(struct sock *sk, int level, int optname,
 	case WPAN_WANTACK:
 		ro->want_ack = !!val;
 		break;
+<<<<<<< HEAD
+=======
+	case WPAN_SECURITY:
+		if (!ns_capable(net->user_ns, CAP_NET_ADMIN) &&
+		    !ns_capable(net->user_ns, CAP_NET_RAW)) {
+			err = -EPERM;
+			break;
+		}
+
+		switch (val) {
+		case WPAN_SECURITY_DEFAULT:
+			ro->secen_override = 0;
+			break;
+		case WPAN_SECURITY_ON:
+			ro->secen_override = 1;
+			ro->secen = 1;
+			break;
+		case WPAN_SECURITY_OFF:
+			ro->secen_override = 1;
+			ro->secen = 0;
+			break;
+		default:
+			err = -EINVAL;
+			break;
+		}
+		break;
+	case WPAN_SECURITY_LEVEL:
+		if (!ns_capable(net->user_ns, CAP_NET_ADMIN) &&
+		    !ns_capable(net->user_ns, CAP_NET_RAW)) {
+			err = -EPERM;
+			break;
+		}
+
+		if (val < WPAN_SECURITY_LEVEL_DEFAULT ||
+		    val > IEEE802154_SCF_SECLEVEL_ENC_MIC128) {
+			err = -EINVAL;
+		} else if (val == WPAN_SECURITY_LEVEL_DEFAULT) {
+			ro->seclevel_override = 0;
+		} else {
+			ro->seclevel_override = 1;
+			ro->seclevel = val;
+		}
+		break;
+>>>>>>> v3.18
 	default:
 		err = -ENOPROTOOPT;
 		break;

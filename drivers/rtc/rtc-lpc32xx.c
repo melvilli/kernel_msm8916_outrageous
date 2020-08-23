@@ -201,6 +201,7 @@ static int lpc32xx_rtc_probe(struct platform_device *pdev)
 {
 	struct resource *res;
 	struct lpc32xx_rtc *rtc;
+<<<<<<< HEAD
 	resource_size_t size;
 	int rtcirq;
 	u32 tmp;
@@ -211,6 +212,11 @@ static int lpc32xx_rtc_probe(struct platform_device *pdev)
 		return -ENOENT;
 	}
 
+=======
+	int rtcirq;
+	u32 tmp;
+
+>>>>>>> v3.18
 	rtcirq = platform_get_irq(pdev, 0);
 	if (rtcirq < 0 || rtcirq >= NR_IRQS) {
 		dev_warn(&pdev->dev, "Can't get interrupt resource\n");
@@ -218,6 +224,7 @@ static int lpc32xx_rtc_probe(struct platform_device *pdev)
 	}
 
 	rtc = devm_kzalloc(&pdev->dev, sizeof(*rtc), GFP_KERNEL);
+<<<<<<< HEAD
 	if (unlikely(!rtc)) {
 		dev_err(&pdev->dev, "Can't allocate memory\n");
 		return -ENOMEM;
@@ -237,6 +244,17 @@ static int lpc32xx_rtc_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "Can't map memory\n");
 		return -ENOMEM;
 	}
+=======
+	if (unlikely(!rtc))
+		return -ENOMEM;
+
+	rtc->irq = rtcirq;
+
+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+	rtc->rtc_base = devm_ioremap_resource(&pdev->dev, res);
+	if (IS_ERR(rtc->rtc_base))
+		return PTR_ERR(rtc->rtc_base);
+>>>>>>> v3.18
 
 	spin_lock_init(&rtc->lock);
 
@@ -277,7 +295,10 @@ static int lpc32xx_rtc_probe(struct platform_device *pdev)
 					&lpc32xx_rtc_ops, THIS_MODULE);
 	if (IS_ERR(rtc->rtc)) {
 		dev_err(&pdev->dev, "Can't get RTC\n");
+<<<<<<< HEAD
 		platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 		return PTR_ERR(rtc->rtc);
 	}
 
@@ -306,8 +327,11 @@ static int lpc32xx_rtc_remove(struct platform_device *pdev)
 	if (rtc->irq >= 0)
 		device_init_wakeup(&pdev->dev, 0);
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

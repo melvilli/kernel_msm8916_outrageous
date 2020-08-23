@@ -27,7 +27,10 @@
 #include <linux/types.h>
 #include <linux/pci.h>
 #include <linux/kernel.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 
 #include <asm/mach-rc32434/rc32434.h>
 #include <asm/mach-rc32434/irq.h>

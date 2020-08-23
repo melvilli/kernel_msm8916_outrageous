@@ -27,6 +27,7 @@
 #include <linux/init.h>
 
 #include "em28xx.h"
+<<<<<<< HEAD
 
 static unsigned int vbibufs = 5;
 module_param(vbibufs, int, 0644);
@@ -38,6 +39,9 @@ MODULE_PARM_DESC(vbi_debug, "enable debug messages [vbi]");
 
 #define dprintk(level, fmt, arg...)	if (vbi_debug >= level) \
 	printk(KERN_DEBUG "%s: " fmt, dev->core->name , ## arg)
+=======
+#include "em28xx-v4l.h"
+>>>>>>> v3.18
 
 /* ------------------------------------------------------------------ */
 
@@ -46,12 +50,20 @@ static int vbi_queue_setup(struct vb2_queue *vq, const struct v4l2_format *fmt,
 			   unsigned int sizes[], void *alloc_ctxs[])
 {
 	struct em28xx *dev = vb2_get_drv_priv(vq);
+<<<<<<< HEAD
+=======
+	struct em28xx_v4l2 *v4l2 = dev->v4l2;
+>>>>>>> v3.18
 	unsigned long size;
 
 	if (fmt)
 		size = fmt->fmt.pix.sizeimage;
 	else
+<<<<<<< HEAD
 		size = dev->vbi_width * dev->vbi_height * 2;
+=======
+		size = v4l2->vbi_width * v4l2->vbi_height * 2;
+>>>>>>> v3.18
 
 	if (0 == *nbuffers)
 		*nbuffers = 32;
@@ -68,11 +80,20 @@ static int vbi_queue_setup(struct vb2_queue *vq, const struct v4l2_format *fmt,
 
 static int vbi_buffer_prepare(struct vb2_buffer *vb)
 {
+<<<<<<< HEAD
 	struct em28xx        *dev = vb2_get_drv_priv(vb->vb2_queue);
 	struct em28xx_buffer *buf = container_of(vb, struct em28xx_buffer, vb);
 	unsigned long        size;
 
 	size = dev->vbi_width * dev->vbi_height * 2;
+=======
+	struct em28xx        *dev  = vb2_get_drv_priv(vb->vb2_queue);
+	struct em28xx_v4l2   *v4l2 = dev->v4l2;
+	struct em28xx_buffer *buf  = container_of(vb, struct em28xx_buffer, vb);
+	unsigned long        size;
+
+	size = v4l2->vbi_width * v4l2->vbi_height * 2;
+>>>>>>> v3.18
 
 	if (vb2_plane_size(vb, 0) < size) {
 		printk(KERN_INFO "%s data will not fit into plane (%lu < %lu)\n",

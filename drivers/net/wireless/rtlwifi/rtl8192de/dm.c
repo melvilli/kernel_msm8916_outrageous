@@ -194,6 +194,7 @@ static void rtl92d_dm_false_alarm_counter_statistics(struct ieee80211_hw *hw)
 	rtl_set_bbreg(hw, ROFDM0_LSTF, BIT(31), 1); /* hold page C counter */
 	rtl_set_bbreg(hw, ROFDM1_LSTF, BIT(31), 1); /*hold page D counter */
 
+<<<<<<< HEAD
 	ret_value = rtl_get_bbreg(hw, ROFDM0_FRAMESYNC, BMASKDWORD);
 	falsealm_cnt->cnt_fast_fsync_fail = (ret_value & 0xffff);
 	falsealm_cnt->cnt_sb_search_fail = ((ret_value & 0xffff0000) >> 16);
@@ -203,6 +204,17 @@ static void rtl92d_dm_false_alarm_counter_statistics(struct ieee80211_hw *hw)
 	falsealm_cnt->cnt_rate_illegal = (ret_value & 0xffff);
 	falsealm_cnt->cnt_crc8_fail = ((ret_value & 0xffff0000) >> 16);
 	ret_value = rtl_get_bbreg(hw, ROFDM_PHYCOUNTER3, BMASKDWORD);
+=======
+	ret_value = rtl_get_bbreg(hw, ROFDM0_FRAMESYNC, MASKDWORD);
+	falsealm_cnt->cnt_fast_fsync_fail = (ret_value & 0xffff);
+	falsealm_cnt->cnt_sb_search_fail = ((ret_value & 0xffff0000) >> 16);
+	ret_value = rtl_get_bbreg(hw, ROFDM_PHYCOUNTER1, MASKDWORD);
+	falsealm_cnt->cnt_parity_fail = ((ret_value & 0xffff0000) >> 16);
+	ret_value = rtl_get_bbreg(hw, ROFDM_PHYCOUNTER2, MASKDWORD);
+	falsealm_cnt->cnt_rate_illegal = (ret_value & 0xffff);
+	falsealm_cnt->cnt_crc8_fail = ((ret_value & 0xffff0000) >> 16);
+	ret_value = rtl_get_bbreg(hw, ROFDM_PHYCOUNTER3, MASKDWORD);
+>>>>>>> v3.18
 	falsealm_cnt->cnt_mcs_fail = (ret_value & 0xffff);
 	falsealm_cnt->cnt_ofdm_fail = falsealm_cnt->cnt_parity_fail +
 				      falsealm_cnt->cnt_rate_illegal +
@@ -214,9 +226,15 @@ static void rtl92d_dm_false_alarm_counter_statistics(struct ieee80211_hw *hw)
 	if (rtlpriv->rtlhal.current_bandtype != BAND_ON_5G) {
 		/* hold cck counter */
 		rtl92d_acquire_cckandrw_pagea_ctl(hw, &flag);
+<<<<<<< HEAD
 		ret_value = rtl_get_bbreg(hw, RCCK0_FACOUNTERLOWER, BMASKBYTE0);
 		falsealm_cnt->cnt_cck_fail = ret_value;
 		ret_value = rtl_get_bbreg(hw, RCCK0_FACOUNTERUPPER, BMASKBYTE3);
+=======
+		ret_value = rtl_get_bbreg(hw, RCCK0_FACOUNTERLOWER, MASKBYTE0);
+		falsealm_cnt->cnt_cck_fail = ret_value;
+		ret_value = rtl_get_bbreg(hw, RCCK0_FACOUNTERUPPER, MASKBYTE3);
+>>>>>>> v3.18
 		falsealm_cnt->cnt_cck_fail += (ret_value & 0xff) << 8;
 		rtl92d_release_cckandrw_pagea_ctl(hw, &flag);
 	} else {
@@ -331,11 +349,19 @@ static void rtl92d_dm_cck_packet_detection_thresh(struct ieee80211_hw *hw)
 	if (de_digtable->pre_cck_pd_state != de_digtable->cur_cck_pd_state) {
 		if (de_digtable->cur_cck_pd_state == CCK_PD_STAGE_LOWRSSI) {
 			rtl92d_acquire_cckandrw_pagea_ctl(hw, &flag);
+<<<<<<< HEAD
 			rtl_set_bbreg(hw, RCCK0_CCA, BMASKBYTE2, 0x83);
 			rtl92d_release_cckandrw_pagea_ctl(hw, &flag);
 		} else {
 			rtl92d_acquire_cckandrw_pagea_ctl(hw, &flag);
 			rtl_set_bbreg(hw, RCCK0_CCA, BMASKBYTE2, 0xcd);
+=======
+			rtl_set_bbreg(hw, RCCK0_CCA, MASKBYTE2, 0x83);
+			rtl92d_release_cckandrw_pagea_ctl(hw, &flag);
+		} else {
+			rtl92d_acquire_cckandrw_pagea_ctl(hw, &flag);
+			rtl_set_bbreg(hw, RCCK0_CCA, MASKBYTE2, 0xcd);
+>>>>>>> v3.18
 			rtl92d_release_cckandrw_pagea_ctl(hw, &flag);
 		}
 		de_digtable->pre_cck_pd_state = de_digtable->cur_cck_pd_state;
@@ -416,7 +442,11 @@ static void rtl92d_dm_dig(struct ieee80211_hw *hw)
 
 	/* because we will send data pkt when scanning
 	 * this will cause some ap like gear-3700 wep TP
+<<<<<<< HEAD
 	 * lower if we retrun here, this is the diff of
+=======
+	 * lower if we return here, this is the diff of
+>>>>>>> v3.18
 	 * mac80211 driver vs ieee80211 driver */
 	/* if (rtlpriv->mac80211.act_scanning)
 	 *      return; */
@@ -722,7 +752,11 @@ static void rtl92d_dm_rxgain_tracking_thermalmeter(struct ieee80211_hw *hw)
 	RT_TRACE(rtlpriv, COMP_POWER_TRACKING, DBG_LOUD,
 		 "===> Rx Gain %x\n", u4tmp);
 	for (i = RF90_PATH_A; i < rtlpriv->phy.num_total_rfpath; i++)
+<<<<<<< HEAD
 		rtl_set_rfreg(hw, i, 0x3C, BRFREGOFFSETMASK,
+=======
+		rtl_set_rfreg(hw, i, 0x3C, RFREG_OFFSET_MASK,
+>>>>>>> v3.18
 			      (rtlpriv->phy.reg_rf3c[i] & (~(0xF000))) | u4tmp);
 }
 
@@ -737,7 +771,11 @@ static void rtl92d_bandtype_2_4G(struct ieee80211_hw *hw, long *temp_cckg,
 	/* Query CCK default setting From 0xa24 */
 	rtl92d_acquire_cckandrw_pagea_ctl(hw, &flag);
 	temp_cck = rtl_get_bbreg(hw, RCCK0_TXFILTER2,
+<<<<<<< HEAD
 				 BMASKDWORD) & BMASKCCK;
+=======
+				 MASKDWORD) & MASKCCK;
+>>>>>>> v3.18
 	rtl92d_release_cckandrw_pagea_ctl(hw, &flag);
 	for (i = 0; i < CCK_TABLE_LENGTH; i++) {
 		if (rtlpriv->dm.cck_inch14) {
@@ -840,9 +878,15 @@ static void rtl92d_dm_txpower_tracking_callback_thermalmeter(
 	bool internal_pa = false;
 	long ele_a = 0, ele_d, temp_cck, val_x, value32;
 	long val_y, ele_c = 0;
+<<<<<<< HEAD
 	u8 ofdm_index[2];
 	s8 cck_index = 0;
 	u8 ofdm_index_old[2];
+=======
+	u8 ofdm_index[3];
+	s8 cck_index = 0;
+	u8 ofdm_index_old[3] = {0, 0, 0};
+>>>>>>> v3.18
 	s8 cck_index_old = 0;
 	u8 index;
 	int i;
@@ -896,9 +940,15 @@ static void rtl92d_dm_txpower_tracking_callback_thermalmeter(
 		rf = 1;
 	if (thermalvalue) {
 		ele_d = rtl_get_bbreg(hw, ROFDM0_XATxIQIMBALANCE,
+<<<<<<< HEAD
 				      BMASKDWORD) & BMASKOFDM_D;
 		for (i = 0; i < OFDM_TABLE_SIZE_92D; i++) {
 			if (ele_d == (ofdmswing_table[i] & BMASKOFDM_D)) {
+=======
+				      MASKDWORD) & MASKOFDM_D;
+		for (i = 0; i < OFDM_TABLE_SIZE_92D; i++) {
+			if (ele_d == (ofdmswing_table[i] & MASKOFDM_D)) {
+>>>>>>> v3.18
 				ofdm_index_old[0] = (u8) i;
 
 				RT_TRACE(rtlpriv, COMP_POWER_TRACKING, DBG_LOUD,
@@ -910,10 +960,17 @@ static void rtl92d_dm_txpower_tracking_callback_thermalmeter(
 		}
 		if (is2t) {
 			ele_d = rtl_get_bbreg(hw, ROFDM0_XBTxIQIMBALANCE,
+<<<<<<< HEAD
 					      BMASKDWORD) & BMASKOFDM_D;
 			for (i = 0; i < OFDM_TABLE_SIZE_92D; i++) {
 				if (ele_d ==
 				    (ofdmswing_table[i] & BMASKOFDM_D)) {
+=======
+					      MASKDWORD) & MASKOFDM_D;
+			for (i = 0; i < OFDM_TABLE_SIZE_92D; i++) {
+				if (ele_d ==
+				    (ofdmswing_table[i] & MASKOFDM_D)) {
+>>>>>>> v3.18
 					ofdm_index_old[1] = (u8) i;
 					RT_TRACE(rtlpriv, COMP_POWER_TRACKING,
 						 DBG_LOUD,
@@ -1091,10 +1148,17 @@ static void rtl92d_dm_txpower_tracking_callback_thermalmeter(
 				value32 = (ele_d << 22) | ((ele_c & 0x3F) <<
 					  16) | ele_a;
 				rtl_set_bbreg(hw, ROFDM0_XATxIQIMBALANCE,
+<<<<<<< HEAD
 					      BMASKDWORD, value32);
 
 				value32 = (ele_c & 0x000003C0) >> 6;
 				rtl_set_bbreg(hw, ROFDM0_XCTxAFE, BMASKH4BITS,
+=======
+					      MASKDWORD, value32);
+
+				value32 = (ele_c & 0x000003C0) >> 6;
+				rtl_set_bbreg(hw, ROFDM0_XCTxAFE, MASKH4BITS,
+>>>>>>> v3.18
 					      value32);
 
 				value32 = ((val_x * ele_d) >> 7) & 0x01;
@@ -1103,10 +1167,17 @@ static void rtl92d_dm_txpower_tracking_callback_thermalmeter(
 
 			} else {
 				rtl_set_bbreg(hw, ROFDM0_XATxIQIMBALANCE,
+<<<<<<< HEAD
 					      BMASKDWORD,
 					      ofdmswing_table
 					      [(u8)ofdm_index[0]]);
 				rtl_set_bbreg(hw, ROFDM0_XCTxAFE, BMASKH4BITS,
+=======
+					      MASKDWORD,
+					      ofdmswing_table
+					      [(u8)ofdm_index[0]]);
+				rtl_set_bbreg(hw, ROFDM0_XCTxAFE, MASKH4BITS,
+>>>>>>> v3.18
 					      0x00);
 				rtl_set_bbreg(hw, ROFDM0_ECCATHRESHOLD,
 					      BIT(24), 0x00);
@@ -1118,6 +1189,13 @@ static void rtl92d_dm_txpower_tracking_callback_thermalmeter(
 				 val_x, val_y, ele_a, ele_c, ele_d,
 				 val_x, val_y);
 
+<<<<<<< HEAD
+=======
+			if (cck_index >= CCK_TABLE_SIZE)
+				cck_index = CCK_TABLE_SIZE - 1;
+			if (cck_index < 0)
+				cck_index = 0;
+>>>>>>> v3.18
 			if (rtlhal->current_bandtype == BAND_ON_2_4G) {
 				/* Adjust CCK according to IQK result */
 				if (!rtlpriv->dm.cck_inch14) {
@@ -1200,21 +1278,36 @@ static void rtl92d_dm_txpower_tracking_callback_thermalmeter(
 						  ele_a;
 					rtl_set_bbreg(hw,
 						      ROFDM0_XBTxIQIMBALANCE,
+<<<<<<< HEAD
 						      BMASKDWORD, value32);
 					value32 = (ele_c & 0x000003C0) >> 6;
 					rtl_set_bbreg(hw, ROFDM0_XDTxAFE,
 						      BMASKH4BITS, value32);
+=======
+						      MASKDWORD, value32);
+					value32 = (ele_c & 0x000003C0) >> 6;
+					rtl_set_bbreg(hw, ROFDM0_XDTxAFE,
+						      MASKH4BITS, value32);
+>>>>>>> v3.18
 					value32 = ((val_x * ele_d) >> 7) & 0x01;
 					rtl_set_bbreg(hw, ROFDM0_ECCATHRESHOLD,
 						      BIT(28), value32);
 				} else {
 					rtl_set_bbreg(hw,
 						      ROFDM0_XBTxIQIMBALANCE,
+<<<<<<< HEAD
 						      BMASKDWORD,
 						      ofdmswing_table
 						      [(u8) ofdm_index[1]]);
 					rtl_set_bbreg(hw, ROFDM0_XDTxAFE,
 						      BMASKH4BITS, 0x00);
+=======
+						      MASKDWORD,
+						      ofdmswing_table
+						      [(u8) ofdm_index[1]]);
+					rtl_set_bbreg(hw, ROFDM0_XDTxAFE,
+						      MASKH4BITS, 0x00);
+>>>>>>> v3.18
 					rtl_set_bbreg(hw, ROFDM0_ECCATHRESHOLD,
 						      BIT(28), 0x00);
 				}
@@ -1225,10 +1318,17 @@ static void rtl92d_dm_txpower_tracking_callback_thermalmeter(
 			}
 			RT_TRACE(rtlpriv, COMP_POWER_TRACKING, DBG_LOUD,
 				 "TxPwrTracking 0xc80 = 0x%x, 0xc94 = 0x%x RF 0x24 = 0x%x\n",
+<<<<<<< HEAD
 				 rtl_get_bbreg(hw, 0xc80, BMASKDWORD),
 				 rtl_get_bbreg(hw, 0xc94, BMASKDWORD),
 				 rtl_get_rfreg(hw, RF90_PATH_A, 0x24,
 					       BRFREGOFFSETMASK));
+=======
+				 rtl_get_bbreg(hw, 0xc80, MASKDWORD),
+				 rtl_get_bbreg(hw, 0xc94, MASKDWORD),
+				 rtl_get_rfreg(hw, RF90_PATH_A, 0x24,
+					       RFREG_OFFSET_MASK));
+>>>>>>> v3.18
 		}
 		if ((delta_iqk > rtlefuse->delta_iqk) &&
 		    (rtlefuse->delta_iqk != 0)) {

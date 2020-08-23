@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (C) 2005 - 2013 Emulex
+=======
+ * Copyright (C) 2005 - 2014 Emulex
+>>>>>>> v3.18
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or
@@ -35,6 +39,15 @@ static void _be_roce_dev_add(struct be_adapter *adapter)
 
 	if (!ocrdma_drv)
 		return;
+<<<<<<< HEAD
+=======
+
+	if (ocrdma_drv->be_abi_version != BE_ROCE_ABI_VERSION) {
+		dev_warn(&pdev->dev, "Cannot initialize RoCE due to ocrdma ABI mismatch\n");
+		return;
+	}
+
+>>>>>>> v3.18
 	if (pdev->device == OC_DEVICE_ID5) {
 		/* only msix is supported on these devices */
 		if (!msix_enabled(adapter))
@@ -60,7 +73,11 @@ static void _be_roce_dev_add(struct be_adapter *adapter)
 		 */
 		num_vec = adapter->num_msix_vec + adapter->num_msix_roce_vec;
 		dev_info.intr_mode = BE_INTERRUPT_MODE_MSIX;
+<<<<<<< HEAD
 		dev_info.msix.num_vectors = min(num_vec, MAX_ROCE_MSIX_VECTORS);
+=======
+		dev_info.msix.num_vectors = min(num_vec, MAX_MSIX_VECTORS);
+>>>>>>> v3.18
 		/* provide start index of the vector,
 		 * so in case of linear usage,
 		 * it can use the base as starting point.
@@ -93,7 +110,11 @@ void be_roce_dev_add(struct be_adapter *adapter)
 	}
 }
 
+<<<<<<< HEAD
 void _be_roce_dev_remove(struct be_adapter *adapter)
+=======
+static void _be_roce_dev_remove(struct be_adapter *adapter)
+>>>>>>> v3.18
 {
 	if (ocrdma_drv && ocrdma_drv->remove && adapter->ocrdma_dev)
 		ocrdma_drv->remove(adapter->ocrdma_dev);
@@ -110,11 +131,20 @@ void be_roce_dev_remove(struct be_adapter *adapter)
 	}
 }
 
+<<<<<<< HEAD
 void _be_roce_dev_open(struct be_adapter *adapter)
 {
 	if (ocrdma_drv && adapter->ocrdma_dev &&
 	    ocrdma_drv->state_change_handler)
 		ocrdma_drv->state_change_handler(adapter->ocrdma_dev, 0);
+=======
+static void _be_roce_dev_open(struct be_adapter *adapter)
+{
+	if (ocrdma_drv && adapter->ocrdma_dev &&
+	    ocrdma_drv->state_change_handler)
+		ocrdma_drv->state_change_handler(adapter->ocrdma_dev,
+						 BE_DEV_UP);
+>>>>>>> v3.18
 }
 
 void be_roce_dev_open(struct be_adapter *adapter)
@@ -126,11 +156,20 @@ void be_roce_dev_open(struct be_adapter *adapter)
 	}
 }
 
+<<<<<<< HEAD
 void _be_roce_dev_close(struct be_adapter *adapter)
 {
 	if (ocrdma_drv && adapter->ocrdma_dev &&
 	    ocrdma_drv->state_change_handler)
 		ocrdma_drv->state_change_handler(adapter->ocrdma_dev, 1);
+=======
+static void _be_roce_dev_close(struct be_adapter *adapter)
+{
+	if (ocrdma_drv && adapter->ocrdma_dev &&
+	    ocrdma_drv->state_change_handler)
+		ocrdma_drv->state_change_handler(adapter->ocrdma_dev,
+						 BE_DEV_DOWN);
+>>>>>>> v3.18
 }
 
 void be_roce_dev_close(struct be_adapter *adapter)
@@ -142,6 +181,21 @@ void be_roce_dev_close(struct be_adapter *adapter)
 	}
 }
 
+<<<<<<< HEAD
+=======
+void be_roce_dev_shutdown(struct be_adapter *adapter)
+{
+	if (be_roce_supported(adapter)) {
+		mutex_lock(&be_adapter_list_lock);
+		if (ocrdma_drv && adapter->ocrdma_dev &&
+		    ocrdma_drv->state_change_handler)
+			ocrdma_drv->state_change_handler(adapter->ocrdma_dev,
+							 BE_DEV_SHUTDOWN);
+		mutex_unlock(&be_adapter_list_lock);
+	}
+}
+
+>>>>>>> v3.18
 int be_roce_register_driver(struct ocrdma_driver *drv)
 {
 	struct be_adapter *dev;
@@ -154,6 +208,10 @@ int be_roce_register_driver(struct ocrdma_driver *drv)
 	ocrdma_drv = drv;
 	list_for_each_entry(dev, &be_adapter_list, entry) {
 		struct net_device *netdev;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		_be_roce_dev_add(dev);
 		netdev = dev->netdev;
 		if (netif_running(netdev) && netif_oper_up(netdev))

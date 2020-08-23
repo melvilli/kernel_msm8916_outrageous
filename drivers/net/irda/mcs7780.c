@@ -48,7 +48,10 @@
 #include <linux/kernel.h>
 #include <linux/types.h>
 #include <linux/errno.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/usb.h>
 #include <linux/device.h>
@@ -191,8 +194,13 @@ static inline int mcs_setup_transceiver_vishay(struct mcs_cb *mcs)
 		goto error;
 
 	ret = 0;
+<<<<<<< HEAD
 	error:
 		return ret;
+=======
+error:
+	return ret;
+>>>>>>> v3.18
 }
 
 /* Setup a communication between mcs7780 and agilent chip. */
@@ -501,8 +509,16 @@ static inline int mcs_setup_urbs(struct mcs_cb *mcs)
 		return 0;
 
 	mcs->rx_urb = usb_alloc_urb(0, GFP_KERNEL);
+<<<<<<< HEAD
 	if (!mcs->rx_urb)
 		return 0;
+=======
+	if (!mcs->rx_urb) {
+		usb_free_urb(mcs->tx_urb);
+		mcs->tx_urb = NULL;
+		return 0;
+	}
+>>>>>>> v3.18
 
 	return 1;
 }
@@ -643,9 +659,15 @@ static int mcs_speed_change(struct mcs_cb *mcs)
 	ret = mcs_set_reg(mcs, MCS_MODE_REG, rval);
 
 	mcs->speed = mcs->new_speed;
+<<<<<<< HEAD
 	error:
 		mcs->new_speed = 0;
 		return ret;
+=======
+error:
+	mcs->new_speed = 0;
+	return ret;
+>>>>>>> v3.18
 }
 
 /* Ioctl calls not supported at this time.  Can be an area of future work. */
@@ -738,17 +760,33 @@ static int mcs_net_open(struct net_device *netdev)
 
 	ret = mcs_receive_start(mcs);
 	if (ret)
+<<<<<<< HEAD
 		goto error3;
+=======
+		goto error4;
+>>>>>>> v3.18
 
 	netif_start_queue(netdev);
 	return 0;
 
+<<<<<<< HEAD
 	error3:
 		irlap_close(mcs->irlap);
 	error2:
 		kfree_skb(mcs->rx_buff.skb);
 	error1:
 		return ret;
+=======
+error4:
+	usb_free_urb(mcs->rx_urb);
+	usb_free_urb(mcs->tx_urb);
+error3:
+	irlap_close(mcs->irlap);
+error2:
+	kfree_skb(mcs->rx_buff.skb);
+error1:
+	return ret;
+>>>>>>> v3.18
 }
 
 /* Receive callback function.  */
@@ -946,11 +984,19 @@ static int mcs_probe(struct usb_interface *intf,
 	usb_set_intfdata(intf, mcs);
 	return 0;
 
+<<<<<<< HEAD
 	error2:
 		free_netdev(ndev);
 
 	error1:
 		return ret;
+=======
+error2:
+	free_netdev(ndev);
+
+error1:
+	return ret;
+>>>>>>> v3.18
 }
 
 /* The current device is removed, the USB layer tells us to shut down. */

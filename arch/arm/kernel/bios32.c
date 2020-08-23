@@ -19,7 +19,11 @@
 static int debug_pci;
 
 /*
+<<<<<<< HEAD
  * We can't use pci_find_device() here since we are
+=======
+ * We can't use pci_get_device() here since we are
+>>>>>>> v3.18
  * called from interrupt context.
  */
 static void pcibios_bus_report_status(struct pci_bus *bus, u_int status_mask, int warn)
@@ -57,6 +61,7 @@ static void pcibios_bus_report_status(struct pci_bus *bus, u_int status_mask, in
 
 void pcibios_report_status(u_int status_mask, int warn)
 {
+<<<<<<< HEAD
 	struct list_head *l;
 
 	list_for_each(l, &pci_root_buses) {
@@ -64,6 +69,12 @@ void pcibios_report_status(u_int status_mask, int warn)
 
 		pcibios_bus_report_status(bus, status_mask, warn);
 	}
+=======
+	struct pci_bus *bus;
+
+	list_for_each_entry(bus, &pci_root_buses, node)
+		pcibios_bus_report_status(bus, status_mask, warn);
+>>>>>>> v3.18
 }
 
 /*
@@ -363,6 +374,23 @@ void pcibios_fixup_bus(struct pci_bus *bus)
 }
 EXPORT_SYMBOL(pcibios_fixup_bus);
 
+<<<<<<< HEAD
+=======
+void pcibios_add_bus(struct pci_bus *bus)
+{
+	struct pci_sys_data *sys = bus->sysdata;
+	if (sys->add_bus)
+		sys->add_bus(bus);
+}
+
+void pcibios_remove_bus(struct pci_bus *bus)
+{
+	struct pci_sys_data *sys = bus->sysdata;
+	if (sys->remove_bus)
+		sys->remove_bus(bus);
+}
+
+>>>>>>> v3.18
 /*
  * Swizzle the device pin each time we cross a bridge.  If a platform does
  * not provide a swizzle function, we perform the standard PCI swizzling.
@@ -445,7 +473,12 @@ static int pcibios_init_resources(int busnr, struct pci_sys_data *sys)
 	return 0;
 }
 
+<<<<<<< HEAD
 static void pcibios_init_hw(struct hw_pci *hw, struct list_head *head)
+=======
+static void pcibios_init_hw(struct device *parent, struct hw_pci *hw,
+			    struct list_head *head)
+>>>>>>> v3.18
 {
 	struct pci_sys_data *sys = NULL;
 	int ret;
@@ -463,6 +496,11 @@ static void pcibios_init_hw(struct hw_pci *hw, struct list_head *head)
 		sys->swizzle = hw->swizzle;
 		sys->map_irq = hw->map_irq;
 		sys->align_resource = hw->align_resource;
+<<<<<<< HEAD
+=======
+		sys->add_bus = hw->add_bus;
+		sys->remove_bus = hw->remove_bus;
+>>>>>>> v3.18
 		INIT_LIST_HEAD(&sys->resources);
 
 		if (hw->private_data)
@@ -480,7 +518,11 @@ static void pcibios_init_hw(struct hw_pci *hw, struct list_head *head)
 			if (hw->scan)
 				sys->bus = hw->scan(nr, sys);
 			else
+<<<<<<< HEAD
 				sys->bus = pci_scan_root_bus(NULL, sys->busnr,
+=======
+				sys->bus = pci_scan_root_bus(parent, sys->busnr,
+>>>>>>> v3.18
 						hw->ops, sys, &sys->resources);
 
 			if (!sys->bus)
@@ -497,7 +539,11 @@ static void pcibios_init_hw(struct hw_pci *hw, struct list_head *head)
 	}
 }
 
+<<<<<<< HEAD
 void pci_common_init(struct hw_pci *hw)
+=======
+void pci_common_init_dev(struct device *parent, struct hw_pci *hw)
+>>>>>>> v3.18
 {
 	struct pci_sys_data *sys;
 	LIST_HEAD(head);
@@ -505,7 +551,11 @@ void pci_common_init(struct hw_pci *hw)
 	pci_add_flags(PCI_REASSIGN_ALL_RSRC);
 	if (hw->preinit)
 		hw->preinit();
+<<<<<<< HEAD
 	pcibios_init_hw(hw, &head);
+=======
+	pcibios_init_hw(parent, hw, &head);
+>>>>>>> v3.18
 	if (hw->postinit)
 		hw->postinit();
 
@@ -524,11 +574,14 @@ void pci_common_init(struct hw_pci *hw)
 			 * Assign resources.
 			 */
 			pci_bus_assign_resources(bus);
+<<<<<<< HEAD
 
 			/*
 			 * Enable bridges
 			 */
 			pci_enable_bridges(bus);
+=======
+>>>>>>> v3.18
 		}
 
 		/*
@@ -536,6 +589,21 @@ void pci_common_init(struct hw_pci *hw)
 		 */
 		pci_bus_add_devices(bus);
 	}
+<<<<<<< HEAD
+=======
+
+	list_for_each_entry(sys, &head, node) {
+		struct pci_bus *bus = sys->bus;
+
+		/* Configure PCI Express settings */
+		if (bus && !pci_has_flag(PCI_PROBE_ONLY)) {
+			struct pci_bus *child;
+
+			list_for_each_entry(child, &bus->children, node)
+				pcie_bus_configure_settings(child);
+		}
+	}
+>>>>>>> v3.18
 }
 
 #ifndef CONFIG_PCI_HOST_ITE8152
@@ -596,6 +664,7 @@ resource_size_t pcibios_align_resource(void *data, const struct resource *res,
  */
 int pcibios_enable_device(struct pci_dev *dev, int mask)
 {
+<<<<<<< HEAD
 	u16 cmd, old_cmd;
 	int idx;
 	struct resource *r;
@@ -631,6 +700,12 @@ int pcibios_enable_device(struct pci_dev *dev, int mask)
 		pci_write_config_word(dev, PCI_COMMAND, cmd);
 	}
 	return 0;
+=======
+	if (pci_has_flag(PCI_PROBE_ONLY))
+		return 0;
+
+	return pci_enable_resources(dev, mask);
+>>>>>>> v3.18
 }
 
 int pci_mmap_page_range(struct pci_dev *dev, struct vm_area_struct *vma,

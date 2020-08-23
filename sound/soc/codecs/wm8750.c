@@ -586,6 +586,7 @@ static int wm8750_pcm_hw_params(struct snd_pcm_substream *substream,
 	int coeff = get_coeff(wm8750->sysclk, params_rate(params));
 
 	/* bit size */
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		break;
@@ -596,6 +597,18 @@ static int wm8750_pcm_hw_params(struct snd_pcm_substream *substream,
 		iface |= 0x0008;
 		break;
 	case SNDRV_PCM_FORMAT_S32_LE:
+=======
+	switch (params_width(params)) {
+	case 16:
+		break;
+	case 20:
+		iface |= 0x0004;
+		break;
+	case 24:
+		iface |= 0x0008;
+		break;
+	case 32:
+>>>>>>> v3.18
 		iface |= 0x000c;
 		break;
 	}
@@ -702,12 +715,15 @@ static int wm8750_probe(struct snd_soc_codec *codec)
 {
 	int ret;
 
+<<<<<<< HEAD
 	ret = snd_soc_codec_set_cache_io(codec, 7, 9, SND_SOC_REGMAP);
 	if (ret < 0) {
 		printk(KERN_ERR "wm8750: failed to set cache I/O: %d\n", ret);
 		return ret;
 	}
 
+=======
+>>>>>>> v3.18
 	ret = wm8750_reset(codec);
 	if (ret < 0) {
 		printk(KERN_ERR "wm8750: failed to reset: %d\n", ret);
@@ -816,7 +832,11 @@ static struct spi_driver wm8750_spi_driver = {
 };
 #endif /* CONFIG_SPI_MASTER */
 
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 static int wm8750_i2c_probe(struct i2c_client *i2c,
 			    const struct i2c_device_id *id)
 {
@@ -868,7 +888,11 @@ static struct i2c_driver wm8750_i2c_driver = {
 static int __init wm8750_modinit(void)
 {
 	int ret = 0;
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 	ret = i2c_add_driver(&wm8750_i2c_driver);
 	if (ret != 0) {
 		printk(KERN_ERR "Failed to register wm8750 I2C driver: %d\n",
@@ -888,7 +912,11 @@ module_init(wm8750_modinit);
 
 static void __exit wm8750_exit(void)
 {
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 	i2c_del_driver(&wm8750_i2c_driver);
 #endif
 #if defined(CONFIG_SPI_MASTER)

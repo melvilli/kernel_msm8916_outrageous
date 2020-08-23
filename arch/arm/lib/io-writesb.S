@@ -45,7 +45,11 @@
 
 ENTRY(__raw_writesb)
 		teq	r2, #0		@ do we have to check for the zero len?
+<<<<<<< HEAD
 		moveq	pc, lr
+=======
+		reteq	lr
+>>>>>>> v3.18
 		ands	ip, r1, #3
 		bne	.Loutsb_align
 

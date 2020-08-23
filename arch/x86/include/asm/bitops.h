@@ -14,6 +14,19 @@
 
 #include <linux/compiler.h>
 #include <asm/alternative.h>
+<<<<<<< HEAD
+=======
+#include <asm/rmwcc.h>
+#include <asm/barrier.h>
+
+#if BITS_PER_LONG == 32
+# define _BITOPS_LONG_SHIFT 5
+#elif BITS_PER_LONG == 64
+# define _BITOPS_LONG_SHIFT 6
+#else
+# error "Unexpected BITS_PER_LONG"
+#endif
+>>>>>>> v3.18
 
 #define BIT_64(n)			(U64_C(1) << (n))
 
@@ -59,7 +72,11 @@
  * restricted to acting on a single-word quantity.
  */
 static __always_inline void
+<<<<<<< HEAD
 set_bit(unsigned int nr, volatile unsigned long *addr)
+=======
+set_bit(long nr, volatile unsigned long *addr)
+>>>>>>> v3.18
 {
 	if (IS_IMMEDIATE(nr)) {
 		asm volatile(LOCK_PREFIX "orb %1,%0"
@@ -81,7 +98,11 @@ set_bit(unsigned int nr, volatile unsigned long *addr)
  * If it's called on the same region of memory simultaneously, the effect
  * may be that only one operation succeeds.
  */
+<<<<<<< HEAD
 static inline void __set_bit(int nr, volatile unsigned long *addr)
+=======
+static inline void __set_bit(long nr, volatile unsigned long *addr)
+>>>>>>> v3.18
 {
 	asm volatile("bts %1,%0" : ADDR : "Ir" (nr) : "memory");
 }
@@ -93,11 +114,19 @@ static inline void __set_bit(int nr, volatile unsigned long *addr)
  *
  * clear_bit() is atomic and may not be reordered.  However, it does
  * not contain a memory barrier, so if it is used for locking purposes,
+<<<<<<< HEAD
  * you should call smp_mb__before_clear_bit() and/or smp_mb__after_clear_bit()
  * in order to ensure changes are visible on other processors.
  */
 static __always_inline void
 clear_bit(int nr, volatile unsigned long *addr)
+=======
+ * you should call smp_mb__before_atomic() and/or smp_mb__after_atomic()
+ * in order to ensure changes are visible on other processors.
+ */
+static __always_inline void
+clear_bit(long nr, volatile unsigned long *addr)
+>>>>>>> v3.18
 {
 	if (IS_IMMEDIATE(nr)) {
 		asm volatile(LOCK_PREFIX "andb %1,%0"
@@ -118,13 +147,21 @@ clear_bit(int nr, volatile unsigned long *addr)
  * clear_bit() is atomic and implies release semantics before the memory
  * operation. It can be used for an unlock.
  */
+<<<<<<< HEAD
 static inline void clear_bit_unlock(unsigned nr, volatile unsigned long *addr)
+=======
+static inline void clear_bit_unlock(long nr, volatile unsigned long *addr)
+>>>>>>> v3.18
 {
 	barrier();
 	clear_bit(nr, addr);
 }
 
+<<<<<<< HEAD
 static inline void __clear_bit(int nr, volatile unsigned long *addr)
+=======
+static inline void __clear_bit(long nr, volatile unsigned long *addr)
+>>>>>>> v3.18
 {
 	asm volatile("btr %1,%0" : ADDR : "Ir" (nr));
 }
@@ -141,15 +178,22 @@ static inline void __clear_bit(int nr, volatile unsigned long *addr)
  * No memory barrier is required here, because x86 cannot reorder stores past
  * older loads. Same principle as spin_unlock.
  */
+<<<<<<< HEAD
 static inline void __clear_bit_unlock(unsigned nr, volatile unsigned long *addr)
+=======
+static inline void __clear_bit_unlock(long nr, volatile unsigned long *addr)
+>>>>>>> v3.18
 {
 	barrier();
 	__clear_bit(nr, addr);
 }
 
+<<<<<<< HEAD
 #define smp_mb__before_clear_bit()	barrier()
 #define smp_mb__after_clear_bit()	barrier()
 
+=======
+>>>>>>> v3.18
 /**
  * __change_bit - Toggle a bit in memory
  * @nr: the bit to change
@@ -159,7 +203,11 @@ static inline void __clear_bit_unlock(unsigned nr, volatile unsigned long *addr)
  * If it's called on the same region of memory simultaneously, the effect
  * may be that only one operation succeeds.
  */
+<<<<<<< HEAD
 static inline void __change_bit(int nr, volatile unsigned long *addr)
+=======
+static inline void __change_bit(long nr, volatile unsigned long *addr)
+>>>>>>> v3.18
 {
 	asm volatile("btc %1,%0" : ADDR : "Ir" (nr));
 }
@@ -173,7 +221,11 @@ static inline void __change_bit(int nr, volatile unsigned long *addr)
  * Note that @nr may be almost arbitrarily large; this function is not
  * restricted to acting on a single-word quantity.
  */
+<<<<<<< HEAD
 static inline void change_bit(int nr, volatile unsigned long *addr)
+=======
+static inline void change_bit(long nr, volatile unsigned long *addr)
+>>>>>>> v3.18
 {
 	if (IS_IMMEDIATE(nr)) {
 		asm volatile(LOCK_PREFIX "xorb %1,%0"
@@ -194,6 +246,7 @@ static inline void change_bit(int nr, volatile unsigned long *addr)
  * This operation is atomic and cannot be reordered.
  * It also implies a memory barrier.
  */
+<<<<<<< HEAD
 static inline int test_and_set_bit(int nr, volatile unsigned long *addr)
 {
 	int oldbit;
@@ -202,6 +255,11 @@ static inline int test_and_set_bit(int nr, volatile unsigned long *addr)
 		     "sbb %0,%0" : "=r" (oldbit), ADDR : "Ir" (nr) : "memory");
 
 	return oldbit;
+=======
+static inline int test_and_set_bit(long nr, volatile unsigned long *addr)
+{
+	GEN_BINARY_RMWcc(LOCK_PREFIX "bts", *addr, "Ir", nr, "%0", "c");
+>>>>>>> v3.18
 }
 
 /**
@@ -212,7 +270,11 @@ static inline int test_and_set_bit(int nr, volatile unsigned long *addr)
  * This is the same as test_and_set_bit on x86.
  */
 static __always_inline int
+<<<<<<< HEAD
 test_and_set_bit_lock(int nr, volatile unsigned long *addr)
+=======
+test_and_set_bit_lock(long nr, volatile unsigned long *addr)
+>>>>>>> v3.18
 {
 	return test_and_set_bit(nr, addr);
 }
@@ -226,7 +288,11 @@ test_and_set_bit_lock(int nr, volatile unsigned long *addr)
  * If two examples of this operation race, one can appear to succeed
  * but actually fail.  You must protect multiple accesses with a lock.
  */
+<<<<<<< HEAD
 static inline int __test_and_set_bit(int nr, volatile unsigned long *addr)
+=======
+static inline int __test_and_set_bit(long nr, volatile unsigned long *addr)
+>>>>>>> v3.18
 {
 	int oldbit;
 
@@ -245,6 +311,7 @@ static inline int __test_and_set_bit(int nr, volatile unsigned long *addr)
  * This operation is atomic and cannot be reordered.
  * It also implies a memory barrier.
  */
+<<<<<<< HEAD
 static inline int test_and_clear_bit(int nr, volatile unsigned long *addr)
 {
 	int oldbit;
@@ -254,6 +321,11 @@ static inline int test_and_clear_bit(int nr, volatile unsigned long *addr)
 		     : "=r" (oldbit), ADDR : "Ir" (nr) : "memory");
 
 	return oldbit;
+=======
+static inline int test_and_clear_bit(long nr, volatile unsigned long *addr)
+{
+	GEN_BINARY_RMWcc(LOCK_PREFIX "btr", *addr, "Ir", nr, "%0", "c");
+>>>>>>> v3.18
 }
 
 /**
@@ -272,7 +344,11 @@ static inline int test_and_clear_bit(int nr, volatile unsigned long *addr)
  * accessed from a hypervisor on the same CPU if running in a VM: don't change
  * this without also updating arch/x86/kernel/kvm.c
  */
+<<<<<<< HEAD
 static inline int __test_and_clear_bit(int nr, volatile unsigned long *addr)
+=======
+static inline int __test_and_clear_bit(long nr, volatile unsigned long *addr)
+>>>>>>> v3.18
 {
 	int oldbit;
 
@@ -284,7 +360,11 @@ static inline int __test_and_clear_bit(int nr, volatile unsigned long *addr)
 }
 
 /* WARNING: non atomic and it can be reordered! */
+<<<<<<< HEAD
 static inline int __test_and_change_bit(int nr, volatile unsigned long *addr)
+=======
+static inline int __test_and_change_bit(long nr, volatile unsigned long *addr)
+>>>>>>> v3.18
 {
 	int oldbit;
 
@@ -304,6 +384,7 @@ static inline int __test_and_change_bit(int nr, volatile unsigned long *addr)
  * This operation is atomic and cannot be reordered.
  * It also implies a memory barrier.
  */
+<<<<<<< HEAD
 static inline int test_and_change_bit(int nr, volatile unsigned long *addr)
 {
 	int oldbit;
@@ -322,6 +403,20 @@ static __always_inline int constant_test_bit(unsigned int nr, const volatile uns
 }
 
 static inline int variable_test_bit(int nr, volatile const unsigned long *addr)
+=======
+static inline int test_and_change_bit(long nr, volatile unsigned long *addr)
+{
+	GEN_BINARY_RMWcc(LOCK_PREFIX "btc", *addr, "Ir", nr, "%0", "c");
+}
+
+static __always_inline int constant_test_bit(long nr, const volatile unsigned long *addr)
+{
+	return ((1UL << (nr & (BITS_PER_LONG-1))) &
+		(addr[nr >> _BITOPS_LONG_SHIFT])) != 0;
+}
+
+static inline int variable_test_bit(long nr, volatile const unsigned long *addr)
+>>>>>>> v3.18
 {
 	int oldbit;
 
@@ -507,8 +602,11 @@ static __always_inline int fls64(__u64 x)
 
 #include <asm-generic/bitops/sched.h>
 
+<<<<<<< HEAD
 #define ARCH_HAS_FAST_MULTIPLIER 1
 
+=======
+>>>>>>> v3.18
 #include <asm/arch_hweight.h>
 
 #include <asm-generic/bitops/const_hweight.h>

@@ -14,6 +14,11 @@
 #ifndef __DM9000_PLATFORM_DATA
 #define __DM9000_PLATFORM_DATA __FILE__
 
+<<<<<<< HEAD
+=======
+#include <linux/if_ether.h>
+
+>>>>>>> v3.18
 /* IO control flags */
 
 #define DM9000_PLATF_8BITONLY	(0x0001)
@@ -27,7 +32,11 @@
 
 struct dm9000_plat_data {
 	unsigned int	flags;
+<<<<<<< HEAD
 	unsigned char	dev_addr[6];
+=======
+	unsigned char	dev_addr[ETH_ALEN];
+>>>>>>> v3.18
 
 	/* allow replacement IO routines */
 

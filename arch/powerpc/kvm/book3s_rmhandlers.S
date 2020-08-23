@@ -36,6 +36,7 @@
 
 #if defined(CONFIG_PPC_BOOK3S_64)
 
+<<<<<<< HEAD
 #define FUNC(name) 		GLUE(.,name)
 
 	.globl	kvmppc_skip_interrupt
@@ -63,6 +64,13 @@ kvmppc_skip_Hinterrupt:
 	GET_SCRATCH0(r13)
 	hrfid
 	b	.
+=======
+#if defined(_CALL_ELF) && _CALL_ELF == 2
+#define FUNC(name) 		name
+#else
+#define FUNC(name) 		GLUE(.,name)
+#endif
+>>>>>>> v3.18
 
 #elif defined(CONFIG_PPC_BOOK3S_32)
 
@@ -172,7 +180,11 @@ kvmppc_handler_skip_ins:
  * On entry, r4 contains the guest shadow MSR
  * MSR.EE has to be 0 when calling this function
  */
+<<<<<<< HEAD
 _GLOBAL(kvmppc_entry_trampoline)
+=======
+_GLOBAL_TOC(kvmppc_entry_trampoline)
+>>>>>>> v3.18
 	mfmsr	r5
 	LOAD_REG_ADDR(r7, kvmppc_handler_trampoline_enter)
 	toreal(r7)
@@ -181,13 +193,18 @@ _GLOBAL(kvmppc_entry_trampoline)
 	andc	r6, r5, r6	/* Clear DR and IR in MSR value */
 	/*
 	 * Set EE in HOST_MSR so that it's enabled when we get into our
+<<<<<<< HEAD
 	 * C exit handler function
+=======
+	 * C exit handler function.
+>>>>>>> v3.18
 	 */
 	ori	r5, r5, MSR_EE
 	mtsrr0	r7
 	mtsrr1	r6
 	RFI
 
+<<<<<<< HEAD
 #if defined(CONFIG_PPC_BOOK3S_32)
 #define STACK_LR	INT_FRAME_SIZE+4
 
@@ -235,4 +252,6 @@ define_load_up(fpu)
 define_load_up(altivec)
 #endif
 
+=======
+>>>>>>> v3.18
 #include "book3s_segment.S"

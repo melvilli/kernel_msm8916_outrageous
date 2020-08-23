@@ -16,6 +16,10 @@
 #include <asm/cacheflush.h>
 #include <asm/fncpy.h>
 #include <asm/mach-types.h>
+<<<<<<< HEAD
+=======
+#include <asm/smp_plat.h>
+>>>>>>> v3.18
 #include <asm/system_misc.h>
 
 extern void relocate_new_kernel(void);
@@ -40,6 +44,17 @@ int machine_kexec_prepare(struct kimage *image)
 	int i, err;
 
 	/*
+<<<<<<< HEAD
+=======
+	 * Validate that if the current HW supports SMP, then the SW supports
+	 * and implements CPU hotplug for the current HW. If not, we won't be
+	 * able to kexec reliably, so fail the prepare operation.
+	 */
+	if (num_possible_cpus() > 1 && !platform_can_cpu_hotplug())
+		return -EINVAL;
+
+	/*
+>>>>>>> v3.18
 	 * No segment at default ATAGs address. try to locate
 	 * a dtb using magic.
 	 */
@@ -138,10 +153,20 @@ void machine_kexec(struct kimage *image)
 	unsigned long reboot_entry_phys;
 	void *reboot_code_buffer;
 
+<<<<<<< HEAD
 	if (num_online_cpus() > 1) {
 		pr_err("kexec: error: multiple CPUs still online\n");
 		return;
 	}
+=======
+	/*
+	 * This can only happen if machine_shutdown() failed to disable some
+	 * CPU, and that can only happen if the checks in
+	 * machine_kexec_prepare() were not correct. If this fails, we can't
+	 * reliably kexec anyway, so BUG_ON is appropriate.
+	 */
+	BUG_ON(num_online_cpus() > 1);
+>>>>>>> v3.18
 
 	page_list = image->head & PAGE_MASK;
 

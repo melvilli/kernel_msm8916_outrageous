@@ -25,8 +25,11 @@
 #include <linux/module.h>
 #include <linux/init.h>
 #include <linux/acpi.h>
+<<<<<<< HEAD
 #include <acpi/acpi_bus.h>
 #include <acpi/acpi_drivers.h>
+=======
+>>>>>>> v3.18
 #include <acpi/hed.h>
 
 static struct acpi_device_id acpi_hed_ids[] = {

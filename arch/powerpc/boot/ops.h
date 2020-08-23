@@ -15,7 +15,11 @@
 #include "types.h"
 #include "string.h"
 
+<<<<<<< HEAD
 #define	COMMAND_LINE_SIZE	512
+=======
+#define	BOOT_COMMAND_LINE_SIZE	2048
+>>>>>>> v3.18
 #define	MAX_PATH_LEN		256
 #define	MAX_PROP_LEN		256 /* What should this be? */
 

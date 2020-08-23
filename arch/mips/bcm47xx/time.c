@@ -27,10 +27,22 @@
 #include <linux/ssb/ssb.h>
 #include <asm/time.h>
 #include <bcm47xx.h>
+<<<<<<< HEAD
+=======
+#include <bcm47xx_nvram.h>
+#include <bcm47xx_board.h>
+>>>>>>> v3.18
 
 void __init plat_time_init(void)
 {
 	unsigned long hz = 0;
+<<<<<<< HEAD
+=======
+	u16 chip_id = 0;
+	char buf[10];
+	int len;
+	enum bcm47xx_board board = bcm47xx_board_get();
+>>>>>>> v3.18
 
 	/*
 	 * Use deterministic values for initial counter interrupt
@@ -43,15 +55,41 @@ void __init plat_time_init(void)
 #ifdef CONFIG_BCM47XX_SSB
 	case BCM47XX_BUS_TYPE_SSB:
 		hz = ssb_cpu_clock(&bcm47xx_bus.ssb.mipscore) / 2;
+<<<<<<< HEAD
+=======
+		chip_id = bcm47xx_bus.ssb.chip_id;
+>>>>>>> v3.18
 		break;
 #endif
 #ifdef CONFIG_BCM47XX_BCMA
 	case BCM47XX_BUS_TYPE_BCMA:
 		hz = bcma_cpu_clock(&bcm47xx_bus.bcma.bus.drv_mips) / 2;
+<<<<<<< HEAD
+=======
+		chip_id = bcm47xx_bus.bcma.bus.chipinfo.id;
+>>>>>>> v3.18
 		break;
 #endif
 	}
 
+<<<<<<< HEAD
+=======
+	if (chip_id == 0x5354) {
+		len = bcm47xx_nvram_getenv("clkfreq", buf, sizeof(buf));
+		if (len >= 0 && !strncmp(buf, "200", 4))
+			hz = 100000000;
+	}
+
+	switch (board) {
+	case BCM47XX_BOARD_ASUS_WL520GC:
+	case BCM47XX_BOARD_ASUS_WL520GU:
+		hz = 100000000;
+		break;
+	default:
+		break;
+	}
+
+>>>>>>> v3.18
 	if (!hz)
 		hz = 100000000;
 

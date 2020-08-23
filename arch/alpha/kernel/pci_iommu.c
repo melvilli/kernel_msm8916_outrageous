@@ -325,7 +325,11 @@ pci_map_single_1(struct pci_dev *pdev, void *cpu_addr, size_t size,
 /* Helper for generic DMA-mapping functions. */
 static struct pci_dev *alpha_gendev_to_pci(struct device *dev)
 {
+<<<<<<< HEAD
 	if (dev && dev->bus == &pci_bus_type)
+=======
+	if (dev && dev_is_pci(dev))
+>>>>>>> v3.18
 		return to_pci_dev(dev);
 
 	/* Assume that non-PCI devices asking for DMA are either ISA or EISA,

@@ -58,10 +58,20 @@ config NO_IOPORT_MAP
 config PCI_QUIRKS
 	def_bool n
 
+<<<<<<< HEAD
 config S390
 	def_bool y
 	select ARCH_DISCARD_MEMBLOCK
 	select ARCH_HAS_ATOMIC64_DEC_IF_POSITIVE
+=======
+config ARCH_SUPPORTS_UPROBES
+	def_bool 64BIT
+
+config S390
+	def_bool y
+	select ARCH_HAS_ATOMIC64_DEC_IF_POSITIVE
+	select ARCH_HAS_DEBUG_STRICT_USER_COPY_CHECKS
+>>>>>>> v3.18
 	select ARCH_HAVE_NMI_SAFE_CMPXCHG
 	select ARCH_INLINE_READ_LOCK
 	select ARCH_INLINE_READ_LOCK_BH
@@ -91,6 +101,7 @@ config S390
 	select ARCH_INLINE_WRITE_UNLOCK_BH
 	select ARCH_INLINE_WRITE_UNLOCK_IRQ
 	select ARCH_INLINE_WRITE_UNLOCK_IRQRESTORE
+<<<<<<< HEAD
 	select ARCH_HAS_DEBUG_STRICT_USER_COPY_CHECKS
 	select ARCH_SAVE_PAGE_KEYS if HIBERNATION
 	select ARCH_WANT_IPC_PARSE_VERSION
@@ -103,6 +114,23 @@ config S390
 	select HAVE_ALIGNED_STRUCT_PAGE if SLUB
 	select HAVE_ARCH_JUMP_LABEL if !MARCH_G5
 	select HAVE_ARCH_MUTEX_CPU_RELAX
+=======
+	select ARCH_SAVE_PAGE_KEYS if HIBERNATION
+	select ARCH_SUPPORTS_ATOMIC_RMW
+	select ARCH_USE_CMPXCHG_LOCKREF
+	select ARCH_WANT_IPC_PARSE_VERSION
+	select BUILDTIME_EXTABLE_SORT
+	select CLONE_BACKWARDS2
+	select DYNAMIC_FTRACE if FUNCTION_TRACER
+	select GENERIC_CLOCKEVENTS
+	select GENERIC_CPU_DEVICES if !SMP
+	select GENERIC_FIND_FIRST_BIT
+	select GENERIC_SMP_IDLE_THREAD
+	select GENERIC_TIME_VSYSCALL
+	select HAVE_ALIGNED_STRUCT_PAGE if SLUB
+	select HAVE_ARCH_AUDITSYSCALL
+	select HAVE_ARCH_JUMP_LABEL if !MARCH_G5
+>>>>>>> v3.18
 	select HAVE_ARCH_SECCOMP_FILTER
 	select HAVE_ARCH_TRACEHOOK
 	select HAVE_ARCH_TRANSPARENT_HUGEPAGE if 64BIT
@@ -111,6 +139,7 @@ config S390
 	select HAVE_CMPXCHG_LOCAL
 	select HAVE_C_RECORDMCOUNT
 	select HAVE_DEBUG_KMEMLEAK
+<<<<<<< HEAD
 	select HAVE_DYNAMIC_FTRACE
 	select HAVE_FTRACE_MCOUNT_RECORD
 	select HAVE_FUNCTION_GRAPH_TRACER
@@ -119,6 +148,17 @@ config S390
 	select HAVE_FUTEX_CMPXCHG if FUTEX
 	select HAVE_KERNEL_BZIP2
 	select HAVE_KERNEL_GZIP
+=======
+	select HAVE_DYNAMIC_FTRACE if 64BIT
+	select HAVE_DYNAMIC_FTRACE_WITH_REGS if 64BIT
+	select HAVE_FTRACE_MCOUNT_RECORD
+	select HAVE_FUNCTION_GRAPH_TRACER if 64BIT
+	select HAVE_FUNCTION_TRACER if 64BIT
+	select HAVE_FUTEX_CMPXCHG if FUTEX
+	select HAVE_KERNEL_BZIP2
+	select HAVE_KERNEL_GZIP
+	select HAVE_KERNEL_LZ4
+>>>>>>> v3.18
 	select HAVE_KERNEL_LZMA
 	select HAVE_KERNEL_LZO
 	select HAVE_KERNEL_XZ
@@ -127,6 +167,10 @@ config S390
 	select HAVE_KVM if 64BIT
 	select HAVE_MEMBLOCK
 	select HAVE_MEMBLOCK_NODE_MAP
+<<<<<<< HEAD
+=======
+	select HAVE_MEMBLOCK_PHYS_MAP
+>>>>>>> v3.18
 	select HAVE_MOD_ARCH_SPECIFIC
 	select HAVE_OPROFILE
 	select HAVE_PERF_EVENTS
@@ -134,6 +178,7 @@ config S390
 	select HAVE_SYSCALL_TRACEPOINTS
 	select HAVE_UID16 if 32BIT
 	select HAVE_VIRT_CPU_ACCOUNTING
+<<<<<<< HEAD
 	select VIRT_TO_BUS
 	select INIT_ALL_POSSIBLE
 	select KTIME_SCALAR if 32BIT
@@ -142,6 +187,17 @@ config S390
 	select OLD_SIGACTION
 	select SYSCTL_EXCEPTION_TRACE
 	select VIRT_CPU_ACCOUNTING
+=======
+	select MODULES_USE_ELF_RELA
+	select NO_BOOTMEM
+	select OLD_SIGACTION
+	select OLD_SIGSUSPEND3
+	select SYSCTL_EXCEPTION_TRACE
+	select TTY
+	select VIRT_CPU_ACCOUNTING
+	select VIRT_TO_BUS
+	select ARCH_HAS_SG_CHAIN
+>>>>>>> v3.18
 
 config SCHED_OMIT_FRAME_POINTER
 	def_bool y
@@ -236,6 +292,70 @@ config MARCH_ZEC12
 
 endchoice
 
+<<<<<<< HEAD
+=======
+config MARCH_G5_TUNE
+	def_bool TUNE_G5 || MARCH_G5 && TUNE_DEFAULT
+
+config MARCH_Z900_TUNE
+	def_bool TUNE_Z900 || MARCH_Z900 && TUNE_DEFAULT
+
+config MARCH_Z990_TUNE
+	def_bool TUNE_Z990 || MARCH_Z990 && TUNE_DEFAULT
+
+config MARCH_Z9_109_TUNE
+	def_bool TUNE_Z9_109 || MARCH_Z9_109 && TUNE_DEFAULT
+
+config MARCH_Z10_TUNE
+	def_bool TUNE_Z10 || MARCH_Z10 && TUNE_DEFAULT
+
+config MARCH_Z196_TUNE
+	def_bool TUNE_Z196 || MARCH_Z196 && TUNE_DEFAULT
+
+config MARCH_ZEC12_TUNE
+	def_bool TUNE_ZEC12 || MARCH_ZEC12 && TUNE_DEFAULT
+
+choice
+	prompt "Tune code generation"
+	default TUNE_DEFAULT
+	help
+	  Cause the compiler to tune (-mtune) the generated code for a machine.
+	  This will make the code run faster on the selected machine but
+	  somewhat slower on other machines.
+	  This option only changes how the compiler emits instructions, not the
+	  selection of instructions itself, so the resulting kernel will run on
+	  all other machines.
+
+config TUNE_DEFAULT
+	bool "Default"
+	help
+	  Tune the generated code for the target processor for which the kernel
+	  will be compiled.
+
+config TUNE_G5
+	bool "System/390 model G5 and G6"
+
+config TUNE_Z900
+	bool "IBM zSeries model z800 and z900"
+
+config TUNE_Z990
+	bool "IBM zSeries model z890 and z990"
+
+config TUNE_Z9_109
+	bool "IBM System z9"
+
+config TUNE_Z10
+	bool "IBM System z10"
+
+config TUNE_Z196
+	bool "IBM zEnterprise 114 and 196"
+
+config TUNE_ZEC12
+	bool "IBM zBC12 and zEC12"
+
+endchoice
+
+>>>>>>> v3.18
 config 64BIT
 	def_bool y
 	prompt "64 bit kernel"
@@ -273,10 +393,17 @@ config SMP
 	  a system with only one CPU, like most personal computers, say N. If
 	  you have a system with more than one CPU, say Y.
 
+<<<<<<< HEAD
 	  If you say N here, the kernel will run on single and multiprocessor
 	  machines, but will use only one CPU of a multiprocessor machine. If
 	  you say Y here, the kernel will run on many, but not all,
 	  singleprocessor machines. On a singleprocessor machine, the kernel
+=======
+	  If you say N here, the kernel will run on uni- and multiprocessor
+	  machines, but will use only one CPU of a multiprocessor machine. If
+	  you say Y here, the kernel will run on many, but not all,
+	  uniprocessor machines. On a uniprocessor machine, the kernel
+>>>>>>> v3.18
 	  will run faster if you say N here.
 
 	  See also the SMP-HOWTO available at
@@ -285,14 +412,23 @@ config SMP
 	  Even if you don't know what to do here, say Y.
 
 config NR_CPUS
+<<<<<<< HEAD
 	int "Maximum number of CPUs (2-64)"
 	range 2 64
+=======
+	int "Maximum number of CPUs (2-256)"
+	range 2 256
+>>>>>>> v3.18
 	depends on SMP
 	default "32" if !64BIT
 	default "64" if 64BIT
 	help
 	  This allows you to specify the maximum number of CPUs which this
+<<<<<<< HEAD
 	  kernel will support.  The maximum supported value is 64 and the
+=======
+	  kernel will support. The maximum supported value is 256 and the
+>>>>>>> v3.18
 	  minimum value which makes sense is 2.
 
 	  This is purely to save memory - each supported CPU adds
@@ -302,7 +438,10 @@ config HOTPLUG_CPU
 	def_bool y
 	prompt "Support for hot-pluggable CPUs"
 	depends on SMP
+<<<<<<< HEAD
 	select HOTPLUG
+=======
+>>>>>>> v3.18
 	help
 	  Say Y here to be able to turn CPUs off and on. CPUs
 	  can be controlled through /sys/devices/system/cpu/cpu#.
@@ -355,6 +494,13 @@ config ARCH_ENABLE_MEMORY_HOTPLUG
 config ARCH_ENABLE_MEMORY_HOTREMOVE
 	def_bool y
 
+<<<<<<< HEAD
+=======
+config ARCH_ENABLE_SPLIT_PMD_PTLOCK
+	def_bool y
+	depends on 64BIT
+
+>>>>>>> v3.18
 config FORCE_MAX_ZONEORDER
 	int
 	default "9"
@@ -428,9 +574,14 @@ config QDIO
 
 menuconfig PCI
 	bool "PCI support"
+<<<<<<< HEAD
 	default n
 	depends on 64BIT
 	select ARCH_SUPPORTS_MSI
+=======
+	depends on 64BIT
+	select HAVE_DMA_ATTRS
+>>>>>>> v3.18
 	select PCI_MSI
 	help
 	  Enable PCI support.
@@ -445,6 +596,19 @@ config PCI_NR_FUNCTIONS
 	  This allows you to specify the maximum number of PCI functions which
 	  this kernel will support.
 
+<<<<<<< HEAD
+=======
+config PCI_NR_MSI
+	int "Maximum number of MSI interrupts (64-32768)"
+	range 64 32768
+	default "256"
+	help
+	  This defines the number of virtual interrupts the kernel will
+	  provide for MSI interrupts. If you configure your system to have
+	  too few drivers will fail to allocate MSI interrupts for all
+	  PCI devices.
+
+>>>>>>> v3.18
 source "drivers/pci/Kconfig"
 source "drivers/pci/pcie/Kconfig"
 source "drivers/pci/hotplug/Kconfig"
@@ -467,9 +631,12 @@ config HAS_DMA
 config NEED_SG_DMA_LENGTH
 	def_bool PCI
 
+<<<<<<< HEAD
 config HAVE_DMA_ATTRS
 	def_bool PCI
 
+=======
+>>>>>>> v3.18
 config NEED_DMA_MAP_STATE
 	def_bool PCI
 
@@ -521,6 +688,7 @@ config CRASH_DUMP
 	  Crash dump kernels are loaded in the main kernel with kexec-tools
 	  into a specially reserved region and then later executed after
 	  a crash by kdump/kexec.
+<<<<<<< HEAD
 	  For more details see Documentation/kdump/kdump.txt
 
 config ZFCPDUMP
@@ -530,6 +698,11 @@ config ZFCPDUMP
 	help
 	  Select this option if you want to build an zfcpdump enabled kernel.
 	  Refer to <file:Documentation/s390/zfcpdump.txt> for more details on this.
+=======
+	  Refer to <file:Documentation/s390/zfcpdump.txt> for more details on this.
+	  This option also enables s390 zfcpdump.
+	  See also <file:Documentation/s390/zfcpdump.txt>
+>>>>>>> v3.18
 
 endmenu
 
@@ -711,6 +884,10 @@ config S390_GUEST
 	def_bool y
 	prompt "s390 support for virtio devices"
 	depends on 64BIT
+<<<<<<< HEAD
+=======
+	select TTY
+>>>>>>> v3.18
 	select VIRTUALIZATION
 	select VIRTIO
 	select VIRTIO_CONSOLE

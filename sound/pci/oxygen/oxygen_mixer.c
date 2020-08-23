@@ -88,7 +88,11 @@ static int dac_mute_put(struct snd_kcontrol *ctl,
 	int changed;
 
 	mutex_lock(&chip->mutex);
+<<<<<<< HEAD
 	changed = (!value->value.integer.value[0]) != chip->dac_mute;
+=======
+	changed = !value->value.integer.value[0] != chip->dac_mute;
+>>>>>>> v3.18
 	if (changed) {
 		chip->dac_mute = !value->value.integer.value[0];
 		chip->model.update_dac_mute(chip);
@@ -190,6 +194,10 @@ void oxygen_update_dac_routing(struct oxygen *chip)
 	if (chip->model.update_center_lfe_mix)
 		chip->model.update_center_lfe_mix(chip, chip->dac_routing > 2);
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(oxygen_update_dac_routing);
+>>>>>>> v3.18
 
 static int upmix_put(struct snd_kcontrol *ctl, struct snd_ctl_elem_value *value)
 {

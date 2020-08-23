@@ -20,6 +20,10 @@
   the file called "COPYING".
 
   Contact Information:
+<<<<<<< HEAD
+=======
+  Linux NICS <linux.nics@intel.com>
+>>>>>>> v3.18
   e1000-devel Mailing List <e1000-devel@lists.sourceforge.net>
   Intel Corporation, 5200 N.E. Elam Young Parkway, Hillsboro, OR 97124-6497
 
@@ -80,9 +84,13 @@ struct ixgbe_fcoe {
 	void *extra_ddp_buffer;
 	dma_addr_t extra_ddp_buffer_dma;
 	unsigned long mode;
+<<<<<<< HEAD
 #ifdef CONFIG_IXGBE_DCB
 	u8 up;
 #endif
+=======
+	u8 up;
+>>>>>>> v3.18
 };
 
 #endif /* _IXGBE_FCOE_H */

@@ -138,16 +138,22 @@ static const char * const task_state_array[] = {
 	"D (disk sleep)",	/*   2 */
 	"T (stopped)",		/*   4 */
 	"t (tracing stop)",	/*   8 */
+<<<<<<< HEAD
 	"Z (zombie)",		/*  16 */
 	"X (dead)",		/*  32 */
 	"x (dead)",		/*  64 */
 	"K (wakekill)",		/* 128 */
 	"W (waking)",		/* 256 */
 	"P (parked)",		/* 512 */
+=======
+	"X (dead)",		/*  16 */
+	"Z (zombie)",		/*  32 */
+>>>>>>> v3.18
 };
 
 static inline const char *get_task_state(struct task_struct *tsk)
 {
+<<<<<<< HEAD
 	unsigned int state = (tsk->state & TASK_REPORT) | tsk->exit_state;
 	const char * const *p = &task_state_array[0];
 
@@ -158,6 +164,13 @@ static inline const char *get_task_state(struct task_struct *tsk)
 		state >>= 1;
 	}
 	return *p;
+=======
+	unsigned int state = (tsk->state | tsk->exit_state) & TASK_REPORT;
+
+	BUILD_BUG_ON(1 + ilog2(TASK_REPORT) != ARRAY_SIZE(task_state_array)-1);
+
+	return task_state_array[fls(state)];
+>>>>>>> v3.18
 }
 
 static inline void task_state(struct seq_file *m, struct pid_namespace *ns,
@@ -168,28 +181,49 @@ static inline void task_state(struct seq_file *m, struct pid_namespace *ns,
 	int g;
 	struct fdtable *fdt = NULL;
 	const struct cred *cred;
+<<<<<<< HEAD
 	pid_t ppid = 0, tpid = 0;
 	struct task_struct *leader = NULL;
 
 	rcu_read_lock();
+=======
+	pid_t ppid, tpid;
+
+	rcu_read_lock();
+	ppid = pid_alive(p) ?
+		task_tgid_nr_ns(rcu_dereference(p->real_parent), ns) : 0;
+	tpid = 0;
+>>>>>>> v3.18
 	if (pid_alive(p)) {
 		struct task_struct *tracer = ptrace_parent(p);
 		if (tracer)
 			tpid = task_pid_nr_ns(tracer, ns);
+<<<<<<< HEAD
 		ppid = task_tgid_nr_ns(rcu_dereference(p->real_parent), ns);
 		leader = p->group_leader;
+=======
+>>>>>>> v3.18
 	}
 	cred = get_task_cred(p);
 	seq_printf(m,
 		"State:\t%s\n"
 		"Tgid:\t%d\n"
+<<<<<<< HEAD
+=======
+		"Ngid:\t%d\n"
+>>>>>>> v3.18
 		"Pid:\t%d\n"
 		"PPid:\t%d\n"
 		"TracerPid:\t%d\n"
 		"Uid:\t%d\t%d\t%d\t%d\n"
 		"Gid:\t%d\t%d\t%d\t%d\n",
 		get_task_state(p),
+<<<<<<< HEAD
 		leader ? task_pid_nr_ns(leader, ns) : 0,
+=======
+		task_tgid_nr_ns(p, ns),
+		task_numa_group_id(p),
+>>>>>>> v3.18
 		pid_nr_ns(pid, ns),
 		ppid, tpid,
 		from_kuid_munged(user_ns, cred->uid),
@@ -312,8 +346,12 @@ static void render_cap_t(struct seq_file *m, const char *header,
 static inline void task_cap(struct seq_file *m, struct task_struct *p)
 {
 	const struct cred *cred;
+<<<<<<< HEAD
 	kernel_cap_t cap_inheritable, cap_permitted, cap_effective,
 			cap_bset, cap_ambient;
+=======
+	kernel_cap_t cap_inheritable, cap_permitted, cap_effective, cap_bset;
+>>>>>>> v3.18
 
 	rcu_read_lock();
 	cred = __task_cred(p);
@@ -321,14 +359,20 @@ static inline void task_cap(struct seq_file *m, struct task_struct *p)
 	cap_permitted	= cred->cap_permitted;
 	cap_effective	= cred->cap_effective;
 	cap_bset	= cred->cap_bset;
+<<<<<<< HEAD
 	cap_ambient	= cred->cap_ambient;
+=======
+>>>>>>> v3.18
 	rcu_read_unlock();
 
 	render_cap_t(m, "CapInh:\t", &cap_inheritable);
 	render_cap_t(m, "CapPrm:\t", &cap_permitted);
 	render_cap_t(m, "CapEff:\t", &cap_effective);
 	render_cap_t(m, "CapBnd:\t", &cap_bset);
+<<<<<<< HEAD
 	render_cap_t(m, "CapAmb:\t", &cap_ambient);
+=======
+>>>>>>> v3.18
 }
 
 static inline void task_seccomp(struct seq_file *m, struct task_struct *p)
@@ -401,7 +445,11 @@ static int do_task_stat(struct seq_file *m, struct pid_namespace *ns,
 
 	state = *get_task_state(task);
 	vsize = eip = esp = 0;
+<<<<<<< HEAD
 	permitted = ptrace_may_access(task, PTRACE_MODE_READ_FSCREDS | PTRACE_MODE_NOAUDIT);
+=======
+	permitted = ptrace_may_access(task, PTRACE_MODE_READ | PTRACE_MODE_NOAUDIT);
+>>>>>>> v3.18
 	mm = get_task_mm(task);
 	if (mm) {
 		vsize = task_vsize(mm);
@@ -445,8 +493,12 @@ static int do_task_stat(struct seq_file *m, struct pid_namespace *ns,
 				min_flt += t->min_flt;
 				maj_flt += t->maj_flt;
 				gtime += task_gtime(t);
+<<<<<<< HEAD
 				t = next_thread(t);
 			} while (t != task);
+=======
+			} while_each_thread(task, t);
+>>>>>>> v3.18
 
 			min_flt += sig->min_flt;
 			maj_flt += sig->maj_flt;
@@ -475,6 +527,7 @@ static int do_task_stat(struct seq_file *m, struct pid_namespace *ns,
 	priority = task_prio(task);
 	nice = task_nice(task);
 
+<<<<<<< HEAD
 	/* Temporary variable needed for gcc-2.96 */
 	/* convert timespec -> nsec*/
 	start_time =
@@ -482,6 +535,10 @@ static int do_task_stat(struct seq_file *m, struct pid_namespace *ns,
 				+ task->real_start_time.tv_nsec;
 	/* convert nsec -> ticks */
 	start_time = nsec_to_clock_t(start_time);
+=======
+	/* convert nsec -> ticks */
+	start_time = nsec_to_clock_t(task->real_start_time);
+>>>>>>> v3.18
 
 	seq_printf(m, "%d (%s) %c", pid_nr_ns(pid, ns), tcomm, state);
 	seq_put_decimal_ll(m, ' ', ppid);

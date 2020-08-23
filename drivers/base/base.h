@@ -63,8 +63,11 @@ struct driver_private {
  *	binding of drivers which were unable to get all the resources needed by
  *	the device; typically because it depends on another driver getting
  *	probed first.
+<<<<<<< HEAD
  * @driver_data - private pointer for driver specific info.  Will turn into a
  * list soon.
+=======
+>>>>>>> v3.18
  * @device - pointer back to the struct class that this structure is
  * associated with.
  *
@@ -76,7 +79,10 @@ struct device_private {
 	struct klist_node knode_driver;
 	struct klist_node knode_bus;
 	struct list_head deferred_probe;
+<<<<<<< HEAD
 	void *driver_data;
+=======
+>>>>>>> v3.18
 	struct device *device;
 };
 #define to_device_private_parent(obj)	\
@@ -100,6 +106,10 @@ static inline int hypervisor_init(void) { return 0; }
 #endif
 extern int platform_bus_init(void);
 extern void cpu_dev_init(void);
+<<<<<<< HEAD
+=======
+extern void container_dev_init(void);
+>>>>>>> v3.18
 
 struct kobject *virtual_device_parent(struct device *dev);
 
@@ -119,6 +129,19 @@ static inline int driver_match_device(struct device_driver *drv,
 	return drv->bus->match ? drv->bus->match(dev, drv) : 1;
 }
 
+<<<<<<< HEAD
+=======
+extern int driver_add_groups(struct device_driver *drv,
+			     const struct attribute_group **groups);
+extern void driver_remove_groups(struct device_driver *drv,
+				 const struct attribute_group **groups);
+
+extern int device_add_groups(struct device *dev,
+			     const struct attribute_group **groups);
+extern void device_remove_groups(struct device *dev,
+				 const struct attribute_group **groups);
+
+>>>>>>> v3.18
 extern char *make_class_name(const char *name, struct kobject *kobj);
 
 extern int devres_release_all(struct device *dev);

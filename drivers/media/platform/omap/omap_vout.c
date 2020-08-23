@@ -165,7 +165,10 @@ static int omap_vout_try_format(struct v4l2_pix_format *pix)
 
 	pix->pixelformat = omap_formats[ifmt].pixelformat;
 	pix->field = V4L2_FIELD_ANY;
+<<<<<<< HEAD
 	pix->priv = 0;
+=======
+>>>>>>> v3.18
 
 	switch (pix->pixelformat) {
 	case V4L2_PIX_FMT_YUYV:
@@ -335,8 +338,11 @@ static int video_mode_to_dss_mode(struct omap_vout_device *vout)
 	ovl = ovid->overlays[0];
 
 	switch (pix->pixelformat) {
+<<<<<<< HEAD
 	case 0:
 		break;
+=======
+>>>>>>> v3.18
 	case V4L2_PIX_FMT_YUYV:
 		mode = OMAP_DSS_COLOR_YUV2;
 		break;
@@ -358,6 +364,10 @@ static int video_mode_to_dss_mode(struct omap_vout_device *vout)
 		break;
 	default:
 		mode = -EINVAL;
+<<<<<<< HEAD
+=======
+		break;
+>>>>>>> v3.18
 	}
 	return mode;
 }
@@ -371,7 +381,11 @@ static int omapvid_setup_overlay(struct omap_vout_device *vout,
 {
 	int ret = 0;
 	struct omap_overlay_info info;
+<<<<<<< HEAD
 	int cropheight, cropwidth, pixheight, pixwidth;
+=======
+	int cropheight, cropwidth, pixwidth;
+>>>>>>> v3.18
 
 	if ((ovl->caps & OMAP_DSS_OVL_CAP_SCALE) == 0 &&
 			(outw != vout->pix.width || outh != vout->pix.height)) {
@@ -391,12 +405,18 @@ static int omapvid_setup_overlay(struct omap_vout_device *vout,
 	if (is_rotation_90_or_270(vout)) {
 		cropheight = vout->crop.width;
 		cropwidth = vout->crop.height;
+<<<<<<< HEAD
 		pixheight = vout->pix.width;
+=======
+>>>>>>> v3.18
 		pixwidth = vout->pix.height;
 	} else {
 		cropheight = vout->crop.height;
 		cropwidth = vout->crop.width;
+<<<<<<< HEAD
 		pixheight = vout->pix.height;
+=======
+>>>>>>> v3.18
 		pixwidth = vout->pix.width;
 	}
 
@@ -602,6 +622,10 @@ static void omap_vout_isr(void *arg, unsigned int irqstatus)
 	switch (cur_display->type) {
 	case OMAP_DISPLAY_TYPE_DSI:
 	case OMAP_DISPLAY_TYPE_DPI:
+<<<<<<< HEAD
+=======
+	case OMAP_DISPLAY_TYPE_DVI:
+>>>>>>> v3.18
 		if (mgr_id == OMAP_DSS_CHANNEL_LCD)
 			irq = DISPC_IRQ_VSYNC;
 		else if (mgr_id == OMAP_DSS_CHANNEL_LCD2)
@@ -992,7 +1016,11 @@ static int omap_vout_release(struct file *file)
 		mask = DISPC_IRQ_VSYNC | DISPC_IRQ_EVSYNC_EVEN |
 			DISPC_IRQ_EVSYNC_ODD | DISPC_IRQ_VSYNC2;
 		omap_dispc_unregister_isr(omap_vout_isr, vout, mask);
+<<<<<<< HEAD
 		vout->streaming = 0;
+=======
+		vout->streaming = false;
+>>>>>>> v3.18
 
 		videobuf_streamoff(q);
 		videobuf_queue_cancel(q);
@@ -1452,12 +1480,18 @@ static int vidioc_s_ctrl(struct file *file, void *fh, struct v4l2_control *a)
 	}
 	case V4L2_CID_VFLIP:
 	{
+<<<<<<< HEAD
 		struct omap_overlay *ovl;
+=======
+>>>>>>> v3.18
 		struct omapvideo_info *ovid;
 		unsigned int  mirror = a->value;
 
 		ovid = &vout->vid_info;
+<<<<<<< HEAD
 		ovl = ovid->overlays[0];
+=======
+>>>>>>> v3.18
 
 		mutex_lock(&vout->lock);
 		if (mirror && ovid->rotation_type == VOUT_ROT_NONE) {
@@ -1490,7 +1524,11 @@ static int vidioc_reqbufs(struct file *file, void *fh,
 	struct omap_vout_device *vout = fh;
 	struct videobuf_queue *q = &vout->vbq;
 
+<<<<<<< HEAD
 	if ((req->type != V4L2_BUF_TYPE_VIDEO_OUTPUT) || (req->count < 0))
+=======
+	if (req->type != V4L2_BUF_TYPE_VIDEO_OUTPUT)
+>>>>>>> v3.18
 		return -EINVAL;
 	/* if memory is not mmp or userptr
 	   return error */
@@ -1649,7 +1687,11 @@ static int vidioc_streamon(struct file *file, void *fh, enum v4l2_buf_type i)
 	vout->field_id = 0;
 
 	/* set flag here. Next QBUF will start DMA */
+<<<<<<< HEAD
 	vout->streaming = 1;
+=======
+	vout->streaming = true;
+>>>>>>> v3.18
 
 	vout->first_int = 1;
 
@@ -1709,7 +1751,11 @@ static int vidioc_streamoff(struct file *file, void *fh, enum v4l2_buf_type i)
 	if (!vout->streaming)
 		return -EINVAL;
 
+<<<<<<< HEAD
 	vout->streaming = 0;
+=======
+	vout->streaming = false;
+>>>>>>> v3.18
 	mask = DISPC_IRQ_VSYNC | DISPC_IRQ_EVSYNC_EVEN | DISPC_IRQ_EVSYNC_ODD
 		| DISPC_IRQ_VSYNC2;
 
@@ -1896,7 +1942,10 @@ static int __init omap_vout_setup_video_data(struct omap_vout_device *vout)
 	pix->field = V4L2_FIELD_ANY;
 	pix->bytesperline = pix->width * 2;
 	pix->sizeimage = pix->bytesperline * pix->height;
+<<<<<<< HEAD
 	pix->priv = 0;
+=======
+>>>>>>> v3.18
 	pix->colorspace = V4L2_COLORSPACE_JPEG;
 
 	vout->bpp = RGB565_BPP;
@@ -1918,7 +1967,11 @@ static int __init omap_vout_setup_video_data(struct omap_vout_device *vout)
 	control[0].id = V4L2_CID_ROTATE;
 	control[0].value = 0;
 	vout->rotation = 0;
+<<<<<<< HEAD
 	vout->mirror = 0;
+=======
+	vout->mirror = false;
+>>>>>>> v3.18
 	vout->control[2].id = V4L2_CID_HFLIP;
 	vout->control[2].value = 0;
 	if (vout->vid_info.rotation_type == VOUT_ROT_VRFB)

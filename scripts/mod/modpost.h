@@ -127,7 +127,11 @@ struct elf_info {
 	Elf_Section  export_gpl_sec;
 	Elf_Section  export_unused_gpl_sec;
 	Elf_Section  export_gpl_future_sec;
+<<<<<<< HEAD
 	const char   *strtab;
+=======
+	char         *strtab;
+>>>>>>> v3.18
 	char	     *modinfo;
 	unsigned int modinfo_len;
 

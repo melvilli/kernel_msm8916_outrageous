@@ -13,7 +13,10 @@
 #include <linux/module.h>
 #include <linux/moduleparam.h>
 #include <linux/kernel.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/string.h>
 #include <linux/pm.h>
 #include <linux/input.h>

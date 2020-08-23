@@ -371,7 +371,11 @@ static struct spear_function *spear310_functions[] = {
 	&tdm_function,
 };
 
+<<<<<<< HEAD
 static struct of_device_id spear310_pinctrl_of_match[] = {
+=======
+static const struct of_device_id spear310_pinctrl_of_match[] = {
+>>>>>>> v3.18
 	{
 		.compatible = "st,spear310-pinmux",
 	},
@@ -430,4 +434,8 @@ module_exit(spear310_pinctrl_exit);
 MODULE_AUTHOR("Viresh Kumar <viresh.linux@gmail.com>");
 MODULE_DESCRIPTION("ST Microelectronics SPEAr310 pinctrl driver");
 MODULE_LICENSE("GPL v2");
+<<<<<<< HEAD
 MODULE_DEVICE_TABLE(of, SPEAr310_pinctrl_of_match);
+=======
+MODULE_DEVICE_TABLE(of, spear310_pinctrl_of_match);
+>>>>>>> v3.18

@@ -153,12 +153,18 @@ static ssize_t name##_show(struct device *dev, struct device_attribute *attr, \
 	struct memstick_dev *card = container_of(dev, struct memstick_dev,    \
 						 dev);                        \
 	return sprintf(buf, format, card->id.name);                           \
+<<<<<<< HEAD
 }
+=======
+}                                                                             \
+static DEVICE_ATTR_RO(name);
+>>>>>>> v3.18
 
 MEMSTICK_ATTR(type, "%02X");
 MEMSTICK_ATTR(category, "%02X");
 MEMSTICK_ATTR(class, "%02X");
 
+<<<<<<< HEAD
 #define MEMSTICK_ATTR_RO(name) __ATTR(name, S_IRUGO, name##_show, NULL)
 
 static struct device_attribute memstick_dev_attrs[] = {
@@ -171,6 +177,19 @@ static struct device_attribute memstick_dev_attrs[] = {
 static struct bus_type memstick_bus_type = {
 	.name           = "memstick",
 	.dev_attrs      = memstick_dev_attrs,
+=======
+static struct attribute *memstick_dev_attrs[] = {
+	&dev_attr_type.attr,
+	&dev_attr_category.attr,
+	&dev_attr_class.attr,
+	NULL,
+};
+ATTRIBUTE_GROUPS(memstick_dev);
+
+static struct bus_type memstick_bus_type = {
+	.name           = "memstick",
+	.dev_groups	= memstick_dev_groups,
+>>>>>>> v3.18
 	.match          = memstick_bus_match,
 	.uevent         = memstick_uevent,
 	.probe          = memstick_device_probe,
@@ -253,7 +272,11 @@ void memstick_new_req(struct memstick_host *host)
 {
 	if (host->card) {
 		host->retries = cmd_retries;
+<<<<<<< HEAD
 		INIT_COMPLETION(host->card->mrq_complete);
+=======
+		reinit_completion(&host->card->mrq_complete);
+>>>>>>> v3.18
 		host->request(host);
 	}
 }

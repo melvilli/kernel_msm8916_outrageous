@@ -208,7 +208,11 @@ static ssize_t qeth_l3_dev_sniffer_store(struct device *dev,
 		goto out;
 	}
 
+<<<<<<< HEAD
 	rc = strict_strtoul(buf, 16, &i);
+=======
+	rc = kstrtoul(buf, 16, &i);
+>>>>>>> v3.18
 	if (rc) {
 		rc = -EINVAL;
 		goto out;
@@ -315,10 +319,15 @@ static ssize_t qeth_l3_dev_hsuid_store(struct device *dev,
 	if (qeth_configure_cq(card, QETH_CQ_ENABLED))
 		return -EPERM;
 
+<<<<<<< HEAD
 	for (i = 0; i < 8; i++)
 		card->options.hsuid[i] = ' ';
 	card->options.hsuid[8] = '\0';
 	strncpy(card->options.hsuid, tmp, strlen(tmp));
+=======
+	snprintf(card->options.hsuid, sizeof(card->options.hsuid),
+		 "%-8s", tmp);
+>>>>>>> v3.18
 	ASCEBC(card->options.hsuid, 8);
 	if (card->dev)
 		memcpy(card->dev->perm_addr, card->options.hsuid, 9);

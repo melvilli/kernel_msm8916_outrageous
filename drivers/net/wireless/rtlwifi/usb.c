@@ -32,6 +32,16 @@
 #include "ps.h"
 #include "rtl8192c/fw_common.h"
 #include <linux/export.h>
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+
+MODULE_AUTHOR("lizhaoming	<chaoming_li@realsil.com.cn>");
+MODULE_AUTHOR("Realtek WlanFAE	<wlanfae@realtek.com>");
+MODULE_AUTHOR("Larry Finger	<Larry.FInger@lwfinger.net>");
+MODULE_LICENSE("GPL");
+MODULE_DESCRIPTION("USB basic driver for rtlwifi");
+>>>>>>> v3.18
 
 #define	REALTEK_USB_VENQT_READ			0xC0
 #define	REALTEK_USB_VENQT_WRITE			0x40
@@ -68,11 +78,19 @@ static int _usbctrl_vendorreq_async_write(struct usb_device *udev, u8 request,
 	pipe = usb_sndctrlpipe(udev, 0); /* write_out */
 	reqtype =  REALTEK_USB_VENQT_WRITE;
 
+<<<<<<< HEAD
 	dr = kmalloc(sizeof(*dr), GFP_ATOMIC);
 	if (!dr)
 		return -ENOMEM;
 
 	databuf = kmalloc(databuf_maxlen, GFP_ATOMIC);
+=======
+	dr = kzalloc(sizeof(*dr), GFP_ATOMIC);
+	if (!dr)
+		return -ENOMEM;
+
+	databuf = kzalloc(databuf_maxlen, GFP_ATOMIC);
+>>>>>>> v3.18
 	if (!databuf) {
 		kfree(dr);
 		return -ENOMEM;
@@ -119,7 +137,11 @@ static int _usbctrl_vendorreq_sync_read(struct usb_device *udev, u8 request,
 
 	do {
 		status = usb_control_msg(udev, pipe, request, reqtype, value,
+<<<<<<< HEAD
 					 index, pdata, len, 1000);
+=======
+					 index, pdata, len, 0); /*max. timeout*/
+>>>>>>> v3.18
 		if (status < 0) {
 			/* firmware download is checksumed, don't retry */
 			if ((value >= FW_8192C_START_ADDRESS &&
@@ -403,7 +425,11 @@ static void rtl_usb_init_sw(struct ieee80211_hw *hw)
 	mac->current_ampdu_factor = 3;
 
 	/* QOS */
+<<<<<<< HEAD
 	rtlusb->acm_method = eAcmWay2_SW;
+=======
+	rtlusb->acm_method = EACMWAY2_SW;
+>>>>>>> v3.18
 
 	/* IRQ */
 	/* HIMR - turn all on */
@@ -448,7 +474,10 @@ static void _rtl_usb_rx_process_agg(struct ieee80211_hw *hw,
 	struct ieee80211_rx_status rx_status = {0};
 	struct rtl_stats stats = {
 		.signal = 0,
+<<<<<<< HEAD
 		.noise = -98,
+=======
+>>>>>>> v3.18
 		.rate = 0,
 	};
 
@@ -469,8 +498,11 @@ static void _rtl_usb_rx_process_agg(struct ieee80211_hw *hw,
 			rtlpriv->stats.rxbytesunicast +=  skb->len;
 		}
 
+<<<<<<< HEAD
 		rtl_is_special_data(hw, skb, false);
 
+=======
+>>>>>>> v3.18
 		if (ieee80211_is_data(fc)) {
 			rtlpriv->cfg->ops->led_control(hw, LED_CTL_RX);
 
@@ -493,7 +525,10 @@ static void _rtl_usb_rx_process_noagg(struct ieee80211_hw *hw,
 	struct ieee80211_rx_status rx_status = {0};
 	struct rtl_stats stats = {
 		.signal = 0,
+<<<<<<< HEAD
 		.noise = -98,
+=======
+>>>>>>> v3.18
 		.rate = 0,
 	};
 
@@ -514,8 +549,11 @@ static void _rtl_usb_rx_process_noagg(struct ieee80211_hw *hw,
 			rtlpriv->stats.rxbytesunicast +=  skb->len;
 		}
 
+<<<<<<< HEAD
 		rtl_is_special_data(hw, skb, false);
 
+=======
+>>>>>>> v3.18
 		if (ieee80211_is_data(fc)) {
 			rtlpriv->cfg->ops->led_control(hw, LED_CTL_RX);
 
@@ -577,12 +615,22 @@ static void _rtl_rx_work(unsigned long param)
 static unsigned int _rtl_rx_get_padding(struct ieee80211_hdr *hdr,
 					unsigned int len)
 {
+<<<<<<< HEAD
 	unsigned int padding = 0;
+=======
+#if NET_IP_ALIGN != 0
+	unsigned int padding = 0;
+#endif
+>>>>>>> v3.18
 
 	/* make function no-op when possible */
 	if (NET_IP_ALIGN == 0 || len < sizeof(*hdr))
 		return 0;
 
+<<<<<<< HEAD
+=======
+#if NET_IP_ALIGN != 0
+>>>>>>> v3.18
 	/* alignment calculation as in lbtf_rx() / carl9170_rx_copy_data() */
 	/* TODO: deduplicate common code, define helper function instead? */
 
@@ -603,6 +651,10 @@ static unsigned int _rtl_rx_get_padding(struct ieee80211_hdr *hdr,
 		padding ^= NET_IP_ALIGN;
 
 	return padding;
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 }
 
 #define __RADIO_TAP_SIZE_RSV	32
@@ -823,7 +875,10 @@ static void rtl_usb_stop(struct ieee80211_hw *hw)
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	struct rtl_hal *rtlhal = rtl_hal(rtl_priv(hw));
 	struct rtl_usb *rtlusb = rtl_usbdev(rtl_usbpriv(hw));
+<<<<<<< HEAD
 	struct urb *urb;
+=======
+>>>>>>> v3.18
 
 	/* should after adapter start and interrupt enable. */
 	set_hal_stop(rtlhal);
@@ -831,6 +886,7 @@ static void rtl_usb_stop(struct ieee80211_hw *hw)
 	/* Enable software */
 	SET_USB_STOP(rtlusb);
 	rtl_usb_deinit(hw);
+<<<<<<< HEAD
 
 	/* free pre-allocated URBs from rtl_usb_start() */
 	usb_kill_anchored_urbs(&rtlusb->rx_submitted);
@@ -848,6 +904,8 @@ static void rtl_usb_stop(struct ieee80211_hw *hw)
 		usb_free_urb(urb);
 	}
 
+=======
+>>>>>>> v3.18
 	rtlpriv->cfg->ops->hw_disable(hw);
 }
 
@@ -1007,7 +1065,11 @@ static void _rtl_usb_tx_preprocess(struct ieee80211_hw *hw,
 		seq_number += 1;
 		seq_number <<= 4;
 	}
+<<<<<<< HEAD
 	rtlpriv->cfg->ops->fill_tx_desc(hw, hdr, (u8 *)pdesc, info, sta, skb,
+=======
+	rtlpriv->cfg->ops->fill_tx_desc(hw, hdr, (u8 *)pdesc, NULL, info, sta, skb,
+>>>>>>> v3.18
 					hw_queue, &tcb_desc);
 	if (!ieee80211_has_morefrags(hdr->frame_control)) {
 		if (qc)
@@ -1130,7 +1192,22 @@ int rtl_usb_probe(struct usb_interface *intf,
 	}
 	rtlpriv->cfg->ops->init_sw_leds(hw);
 
+<<<<<<< HEAD
 	return 0;
+=======
+	err = ieee80211_register_hw(hw);
+	if (err) {
+		RT_TRACE(rtlpriv, COMP_ERR, DBG_EMERG,
+			 "Can't register mac80211 hw.\n");
+		err = -ENODEV;
+		goto error_out;
+	}
+	rtlpriv->mac80211.mac80211_registered = 1;
+
+	set_bit(RTL_STATUS_INTERFACE_START, &rtlpriv->status);
+	return 0;
+
+>>>>>>> v3.18
 error_out:
 	rtl_deinit_core(hw);
 	_rtl_usb_io_handler_release(hw);

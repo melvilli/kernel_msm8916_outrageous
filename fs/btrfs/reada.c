@@ -189,8 +189,13 @@ static int __readahead_hook(struct btrfs_root *root, struct extent_buffer *eb,
 			 */
 #ifdef DEBUG
 			if (rec->generation != generation) {
+<<<<<<< HEAD
 				printk(KERN_DEBUG "generation mismatch for "
 						"(%llu,%d,%llu) %llu != %llu\n",
+=======
+				btrfs_debug(root->fs_info,
+					   "generation mismatch for (%llu,%d,%llu) %llu != %llu",
+>>>>>>> v3.18
 				       key.objectid, key.type, key.offset,
 				       rec->generation, generation);
 			}
@@ -347,7 +352,11 @@ static struct reada_extent *reada_find_extent(struct btrfs_root *root,
 	if (!re)
 		return NULL;
 
+<<<<<<< HEAD
 	blocksize = btrfs_level_size(root, level);
+=======
+	blocksize = root->nodesize;
+>>>>>>> v3.18
 	re->logical = logical;
 	re->blocksize = blocksize;
 	re->top = *top;
@@ -365,8 +374,14 @@ static struct reada_extent *reada_find_extent(struct btrfs_root *root,
 		goto error;
 
 	if (bbio->num_stripes > BTRFS_MAX_MIRRORS) {
+<<<<<<< HEAD
 		printk(KERN_ERR "btrfs readahead: more than %d copies not "
 				"supported", BTRFS_MAX_MIRRORS);
+=======
+		btrfs_err(root->fs_info,
+			   "readahead: more than %d copies not supported",
+			   BTRFS_MAX_MIRRORS);
+>>>>>>> v3.18
 		goto error;
 	}
 
@@ -427,8 +442,18 @@ static struct reada_extent *reada_find_extent(struct btrfs_root *root,
 			continue;
 		}
 		if (!dev->bdev) {
+<<<<<<< HEAD
 			/* cannot read ahead on missing device */
 			continue;
+=======
+			/*
+			 * cannot read ahead on missing device, but for RAID5/6,
+			 * REQ_GET_READ_MIRRORS return 1. So don't skip missing
+			 * device for such case.
+			 */
+			if (nzones > 1)
+				continue;
+>>>>>>> v3.18
 		}
 		if (dev_replace_is_ongoing &&
 		    dev == fs_info->dev_replace.tgtdev) {
@@ -792,10 +817,18 @@ static void reada_start_machine(struct btrfs_fs_info *fs_info)
 		/* FIXME we cannot handle this properly right now */
 		BUG();
 	}
+<<<<<<< HEAD
 	rmw->work.func = reada_start_machine_worker;
 	rmw->fs_info = fs_info;
 
 	btrfs_queue_worker(&fs_info->readahead_workers, &rmw->work);
+=======
+	btrfs_init_work(&rmw->work, btrfs_readahead_helper,
+			reada_start_machine_worker, NULL, NULL);
+	rmw->fs_info = fs_info;
+
+	btrfs_queue_work(fs_info->readahead_workers, &rmw->work);
+>>>>>>> v3.18
 }
 
 #ifdef DEBUG

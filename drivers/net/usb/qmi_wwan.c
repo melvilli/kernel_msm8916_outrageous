@@ -143,6 +143,7 @@ static const struct net_device_ops qmi_wwan_netdev_ops = {
 	.ndo_validate_addr	= eth_validate_addr,
 };
 
+<<<<<<< HEAD
 /* using a counter to merge subdriver requests with our own into a combined state */
 static int qmi_wwan_manage_power(struct usbnet *dev, int on)
 {
@@ -161,6 +162,30 @@ static int qmi_wwan_manage_power(struct usbnet *dev, int on)
 	}
 err:
 	return rv;
+=======
+/* using a counter to merge subdriver requests with our own into a
+ * combined state
+ */
+static int qmi_wwan_manage_power(struct usbnet *dev, int on)
+{
+	struct qmi_wwan_state *info = (void *)&dev->data;
+	int rv;
+
+	dev_dbg(&dev->intf->dev, "%s() pmcount=%d, on=%d\n", __func__,
+		atomic_read(&info->pmcount), on);
+
+	if ((on && atomic_add_return(1, &info->pmcount) == 1) ||
+	    (!on && atomic_dec_and_test(&info->pmcount))) {
+		/* need autopm_get/put here to ensure the usbcore sees
+		 * the new value
+		 */
+		rv = usb_autopm_get_interface(dev->intf);
+		dev->intf->needs_remote_wakeup = on;
+		if (!rv)
+			usb_autopm_put_interface(dev->intf);
+	}
+	return 0;
+>>>>>>> v3.18
 }
 
 static int qmi_wwan_cdc_wdm_manage_power(struct usb_interface *intf, int on)
@@ -199,7 +224,12 @@ static int qmi_wwan_register_subdriver(struct usbnet *dev)
 	atomic_set(&info->pmcount, 0);
 
 	/* register subdriver */
+<<<<<<< HEAD
 	subdriver = usb_cdc_wdm_register(info->control, &dev->status->desc, 4096, &qmi_wwan_cdc_wdm_manage_power);
+=======
+	subdriver = usb_cdc_wdm_register(info->control, &dev->status->desc,
+					 4096, &qmi_wwan_cdc_wdm_manage_power);
+>>>>>>> v3.18
 	if (IS_ERR(subdriver)) {
 		dev_err(&info->control->dev, "subdriver registration failed\n");
 		rv = PTR_ERR(subdriver);
@@ -228,7 +258,12 @@ static int qmi_wwan_bind(struct usbnet *dev, struct usb_interface *intf)
 	struct usb_driver *driver = driver_of(intf);
 	struct qmi_wwan_state *info = (void *)&dev->data;
 
+<<<<<<< HEAD
 	BUILD_BUG_ON((sizeof(((struct usbnet *)0)->data) < sizeof(struct qmi_wwan_state)));
+=======
+	BUILD_BUG_ON((sizeof(((struct usbnet *)0)->data) <
+		      sizeof(struct qmi_wwan_state)));
+>>>>>>> v3.18
 
 	/* set up initial state */
 	info->control = intf;
@@ -250,7 +285,12 @@ static int qmi_wwan_bind(struct usbnet *dev, struct usb_interface *intf)
 				goto err;
 			}
 			if (h->bLength != sizeof(struct usb_cdc_header_desc)) {
+<<<<<<< HEAD
 				dev_dbg(&intf->dev, "CDC header len %u\n", h->bLength);
+=======
+				dev_dbg(&intf->dev, "CDC header len %u\n",
+					h->bLength);
+>>>>>>> v3.18
 				goto err;
 			}
 			break;
@@ -260,7 +300,12 @@ static int qmi_wwan_bind(struct usbnet *dev, struct usb_interface *intf)
 				goto err;
 			}
 			if (h->bLength != sizeof(struct usb_cdc_union_desc)) {
+<<<<<<< HEAD
 				dev_dbg(&intf->dev, "CDC union len %u\n", h->bLength);
+=======
+				dev_dbg(&intf->dev, "CDC union len %u\n",
+					h->bLength);
+>>>>>>> v3.18
 				goto err;
 			}
 			cdc_union = (struct usb_cdc_union_desc *)buf;
@@ -271,15 +316,24 @@ static int qmi_wwan_bind(struct usbnet *dev, struct usb_interface *intf)
 				goto err;
 			}
 			if (h->bLength != sizeof(struct usb_cdc_ether_desc)) {
+<<<<<<< HEAD
 				dev_dbg(&intf->dev, "CDC ether len %u\n",  h->bLength);
+=======
+				dev_dbg(&intf->dev, "CDC ether len %u\n",
+					h->bLength);
+>>>>>>> v3.18
 				goto err;
 			}
 			cdc_ether = (struct usb_cdc_ether_desc *)buf;
 			break;
 		}
 
+<<<<<<< HEAD
 		/*
 		 * Remember which CDC functional descriptors we've seen.  Works
+=======
+		/* Remember which CDC functional descriptors we've seen.  Works
+>>>>>>> v3.18
 		 * for all types we care about, of which USB_CDC_ETHERNET_TYPE
 		 * (0x0f) is the highest numbered
 		 */
@@ -293,10 +347,21 @@ next_desc:
 
 	/* Use separate control and data interfaces if we found a CDC Union */
 	if (cdc_union) {
+<<<<<<< HEAD
 		info->data = usb_ifnum_to_if(dev->udev, cdc_union->bSlaveInterface0);
 		if (desc->bInterfaceNumber != cdc_union->bMasterInterface0 || !info->data) {
 			dev_err(&intf->dev, "bogus CDC Union: master=%u, slave=%u\n",
 				cdc_union->bMasterInterface0, cdc_union->bSlaveInterface0);
+=======
+		info->data = usb_ifnum_to_if(dev->udev,
+					     cdc_union->bSlaveInterface0);
+		if (desc->bInterfaceNumber != cdc_union->bMasterInterface0 ||
+		    !info->data) {
+			dev_err(&intf->dev,
+				"bogus CDC Union: master=%u, slave=%u\n",
+				cdc_union->bMasterInterface0,
+				cdc_union->bSlaveInterface0);
+>>>>>>> v3.18
 			goto err;
 		}
 	}
@@ -323,7 +388,11 @@ next_desc:
 	/* Never use the same address on both ends of the link, even
 	 * if the buggy firmware told us to.
 	 */
+<<<<<<< HEAD
 	if (!compare_ether_addr(dev->net->dev_addr, default_modem_addr))
+=======
+	if (ether_addr_equal(dev->net->dev_addr, default_modem_addr))
+>>>>>>> v3.18
 		eth_hw_addr_random(dev->net);
 
 	/* make MAC addr easily distinguishable from an IP header */
@@ -374,8 +443,12 @@ static int qmi_wwan_suspend(struct usb_interface *intf, pm_message_t message)
 	struct qmi_wwan_state *info = (void *)&dev->data;
 	int ret;
 
+<<<<<<< HEAD
 	/*
 	 * Both usbnet_suspend() and subdriver->suspend() MUST return 0
+=======
+	/* Both usbnet_suspend() and subdriver->suspend() MUST return 0
+>>>>>>> v3.18
 	 * in system sleep context, otherwise, the resume callback has
 	 * to recover device from previous suspend failure.
 	 */
@@ -383,7 +456,12 @@ static int qmi_wwan_suspend(struct usb_interface *intf, pm_message_t message)
 	if (ret < 0)
 		goto err;
 
+<<<<<<< HEAD
 	if (intf == info->control && info->subdriver && info->subdriver->suspend)
+=======
+	if (intf == info->control && info->subdriver &&
+	    info->subdriver->suspend)
+>>>>>>> v3.18
 		ret = info->subdriver->suspend(intf, message);
 	if (ret < 0)
 		usbnet_resume(intf);
@@ -396,14 +474,23 @@ static int qmi_wwan_resume(struct usb_interface *intf)
 	struct usbnet *dev = usb_get_intfdata(intf);
 	struct qmi_wwan_state *info = (void *)&dev->data;
 	int ret = 0;
+<<<<<<< HEAD
 	bool callsub = (intf == info->control && info->subdriver && info->subdriver->resume);
+=======
+	bool callsub = (intf == info->control && info->subdriver &&
+			info->subdriver->resume);
+>>>>>>> v3.18
 
 	if (callsub)
 		ret = info->subdriver->resume(intf);
 	if (ret < 0)
 		goto err;
 	ret = usbnet_resume(intf);
+<<<<<<< HEAD
 	if (ret < 0 && callsub && info->subdriver->suspend)
+=======
+	if (ret < 0 && callsub)
+>>>>>>> v3.18
 		info->subdriver->suspend(intf, PMSG_SUSPEND);
 err:
 	return ret;
@@ -487,6 +574,16 @@ static const struct usb_device_id products[] = {
 		                              USB_CDC_PROTO_NONE),
 		.driver_info        = (unsigned long)&qmi_wwan_info,
 	},
+<<<<<<< HEAD
+=======
+	{	/* Novatel Expedite E371 */
+		USB_DEVICE_AND_INTERFACE_INFO(0x1410, 0x9011,
+		                              USB_CLASS_COMM,
+		                              USB_CDC_SUBCLASS_ETHERNET,
+		                              USB_CDC_PROTO_NONE),
+		.driver_info        = (unsigned long)&qmi_wwan_info,
+	},
+>>>>>>> v3.18
 	{	/* Dell Wireless 5800 (Novatel E362) */
 		USB_DEVICE_AND_INTERFACE_INFO(0x413C, 0x8195,
 					      USB_CLASS_COMM,
@@ -724,26 +821,44 @@ static const struct usb_device_id products[] = {
 	{QMI_FIXED_INTF(0x19d2, 0x1426, 2)},	/* ZTE MF91 */
 	{QMI_FIXED_INTF(0x19d2, 0x1428, 2)},	/* Telewell TW-LTE 4G v2 */
 	{QMI_FIXED_INTF(0x19d2, 0x2002, 4)},	/* ZTE (Vodafone) K3765-Z */
+<<<<<<< HEAD
 	{QMI_FIXED_INTF(0x2001, 0x7e19, 4)},	/* D-Link DWM-221 B1 */
+=======
+>>>>>>> v3.18
 	{QMI_FIXED_INTF(0x0f3d, 0x68a2, 8)},    /* Sierra Wireless MC7700 */
 	{QMI_FIXED_INTF(0x114f, 0x68a2, 8)},    /* Sierra Wireless MC7750 */
 	{QMI_FIXED_INTF(0x1199, 0x68a2, 8)},	/* Sierra Wireless MC7710 in QMI mode */
 	{QMI_FIXED_INTF(0x1199, 0x68a2, 19)},	/* Sierra Wireless MC7710 in QMI mode */
 	{QMI_FIXED_INTF(0x1199, 0x68c0, 8)},	/* Sierra Wireless MC73xx */
 	{QMI_FIXED_INTF(0x1199, 0x68c0, 10)},	/* Sierra Wireless MC73xx */
+<<<<<<< HEAD
 	{QMI_FIXED_INTF(0x1199, 0x68c0, 11)},	/* Sierra Wireless MC73xx */
+=======
+>>>>>>> v3.18
 	{QMI_FIXED_INTF(0x1199, 0x901c, 8)},    /* Sierra Wireless EM7700 */
 	{QMI_FIXED_INTF(0x1199, 0x901f, 8)},    /* Sierra Wireless EM7355 */
 	{QMI_FIXED_INTF(0x1199, 0x9041, 8)},	/* Sierra Wireless MC7305/MC7355 */
 	{QMI_FIXED_INTF(0x1199, 0x9051, 8)},	/* Netgear AirCard 340U */
+<<<<<<< HEAD
 	{QMI_FIXED_INTF(0x1199, 0x9057, 8)},
+=======
+	{QMI_FIXED_INTF(0x1199, 0x9053, 8)},	/* Sierra Wireless Modem */
+	{QMI_FIXED_INTF(0x1199, 0x9054, 8)},	/* Sierra Wireless Modem */
+	{QMI_FIXED_INTF(0x1199, 0x9055, 8)},	/* Netgear AirCard 341U */
+	{QMI_FIXED_INTF(0x1199, 0x9056, 8)},	/* Sierra Wireless Modem */
+	{QMI_FIXED_INTF(0x1199, 0x9057, 8)},
+	{QMI_FIXED_INTF(0x1199, 0x9061, 8)},	/* Sierra Wireless Modem */
+>>>>>>> v3.18
 	{QMI_FIXED_INTF(0x1bbb, 0x011e, 4)},	/* Telekom Speedstick LTE II (Alcatel One Touch L100V LTE) */
 	{QMI_FIXED_INTF(0x1bbb, 0x0203, 2)},	/* Alcatel L800MA */
 	{QMI_FIXED_INTF(0x2357, 0x0201, 4)},	/* TP-LINK HSUPA Modem MA180 */
 	{QMI_FIXED_INTF(0x2357, 0x9000, 4)},	/* TP-LINK MA260 */
 	{QMI_FIXED_INTF(0x1bc7, 0x1200, 5)},	/* Telit LE920 */
 	{QMI_FIXED_INTF(0x1bc7, 0x1201, 2)},	/* Telit LE920 */
+<<<<<<< HEAD
 	{QMI_FIXED_INTF(0x1c9e, 0x9b01, 3)},	/* XS Stick W100-2 from 4G Systems */
+=======
+>>>>>>> v3.18
 	{QMI_FIXED_INTF(0x0b3c, 0xc000, 4)},	/* Olivetti Olicard 100 */
 	{QMI_FIXED_INTF(0x0b3c, 0xc001, 4)},	/* Olivetti Olicard 120 */
 	{QMI_FIXED_INTF(0x0b3c, 0xc002, 4)},	/* Olivetti Olicard 140 */
@@ -820,7 +935,12 @@ static const struct usb_device_id products[] = {
 };
 MODULE_DEVICE_TABLE(usb, products);
 
+<<<<<<< HEAD
 static int qmi_wwan_probe(struct usb_interface *intf, const struct usb_device_id *prod)
+=======
+static int qmi_wwan_probe(struct usb_interface *intf,
+			  const struct usb_device_id *prod)
+>>>>>>> v3.18
 {
 	struct usb_device_id *id = (struct usb_device_id *)prod;
 

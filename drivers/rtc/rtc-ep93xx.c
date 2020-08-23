@@ -42,7 +42,11 @@ struct ep93xx_rtc {
 static int ep93xx_rtc_get_swcomp(struct device *dev, unsigned short *preload,
 				unsigned short *delete)
 {
+<<<<<<< HEAD
 	struct ep93xx_rtc *ep93xx_rtc = dev->platform_data;
+=======
+	struct ep93xx_rtc *ep93xx_rtc = dev_get_platdata(dev);
+>>>>>>> v3.18
 	unsigned long comp;
 
 	comp = __raw_readl(ep93xx_rtc->mmio_base + EP93XX_RTC_SWCOMP);
@@ -60,7 +64,11 @@ static int ep93xx_rtc_get_swcomp(struct device *dev, unsigned short *preload,
 
 static int ep93xx_rtc_read_time(struct device *dev, struct rtc_time *tm)
 {
+<<<<<<< HEAD
 	struct ep93xx_rtc *ep93xx_rtc = dev->platform_data;
+=======
+	struct ep93xx_rtc *ep93xx_rtc = dev_get_platdata(dev);
+>>>>>>> v3.18
 	unsigned long time;
 
 	 time = __raw_readl(ep93xx_rtc->mmio_base + EP93XX_RTC_DATA);
@@ -71,7 +79,11 @@ static int ep93xx_rtc_read_time(struct device *dev, struct rtc_time *tm)
 
 static int ep93xx_rtc_set_mmss(struct device *dev, unsigned long secs)
 {
+<<<<<<< HEAD
 	struct ep93xx_rtc *ep93xx_rtc = dev->platform_data;
+=======
+	struct ep93xx_rtc *ep93xx_rtc = dev_get_platdata(dev);
+>>>>>>> v3.18
 
 	__raw_writel(secs + 1, ep93xx_rtc->mmio_base + EP93XX_RTC_LOAD);
 	return 0;
@@ -138,6 +150,7 @@ static int ep93xx_rtc_probe(struct platform_device *pdev)
 		return -ENOMEM;
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
 	if (!res)
 		return -ENXIO;
 
@@ -149,6 +162,11 @@ static int ep93xx_rtc_probe(struct platform_device *pdev)
 					     resource_size(res));
 	if (!ep93xx_rtc->mmio_base)
 		return -ENXIO;
+=======
+	ep93xx_rtc->mmio_base = devm_ioremap_resource(&pdev->dev, res);
+	if (IS_ERR(ep93xx_rtc->mmio_base))
+		return PTR_ERR(ep93xx_rtc->mmio_base);
+>>>>>>> v3.18
 
 	pdev->dev.platform_data = ep93xx_rtc;
 	platform_set_drvdata(pdev, ep93xx_rtc);
@@ -167,7 +185,10 @@ static int ep93xx_rtc_probe(struct platform_device *pdev)
 	return 0;
 
 exit:
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	pdev->dev.platform_data = NULL;
 	return err;
 }
@@ -175,7 +196,10 @@ exit:
 static int ep93xx_rtc_remove(struct platform_device *pdev)
 {
 	sysfs_remove_group(&pdev->dev.kobj, &ep93xx_rtc_sysfs_files);
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	pdev->dev.platform_data = NULL;
 
 	return 0;

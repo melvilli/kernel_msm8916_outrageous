@@ -25,8 +25,11 @@
 #include "cpsw_ale.h"
 
 #define BITMASK(bits)		(BIT(bits) - 1)
+<<<<<<< HEAD
 #define ALE_ENTRY_BITS		68
 #define ALE_ENTRY_WORDS	DIV_ROUND_UP(ALE_ENTRY_BITS, 32)
+=======
+>>>>>>> v3.18
 
 #define ALE_VERSION_MAJOR(rev)	((rev >> 8) & 0xff)
 #define ALE_VERSION_MINOR(rev)	(rev & 0xff)
@@ -163,7 +166,11 @@ int cpsw_ale_match_addr(struct cpsw_ale *ale, u8 *addr, u16 vid)
 		if (cpsw_ale_get_vlan_id(ale_entry) != vid)
 			continue;
 		cpsw_ale_get_addr(ale_entry, entry_addr);
+<<<<<<< HEAD
 		if (memcmp(entry_addr, addr, 6) == 0)
+=======
+		if (ether_addr_equal(entry_addr, addr))
+>>>>>>> v3.18
 			return idx;
 	}
 	return -ENOENT;
@@ -445,6 +452,38 @@ int cpsw_ale_del_vlan(struct cpsw_ale *ale, u16 vid, int port_mask)
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+void cpsw_ale_set_allmulti(struct cpsw_ale *ale, int allmulti)
+{
+	u32 ale_entry[ALE_ENTRY_WORDS];
+	int type, idx;
+	int unreg_mcast = 0;
+
+	/* Only bother doing the work if the setting is actually changing */
+	if (ale->allmulti == allmulti)
+		return;
+
+	/* Remember the new setting to check against next time */
+	ale->allmulti = allmulti;
+
+	for (idx = 0; idx < ale->params.ale_entries; idx++) {
+		cpsw_ale_read(ale, idx, ale_entry);
+		type = cpsw_ale_get_entry_type(ale_entry);
+		if (type != ALE_TYPE_VLAN)
+			continue;
+
+		unreg_mcast = cpsw_ale_get_vlan_unreg_mcast(ale_entry);
+		if (allmulti)
+			unreg_mcast |= 1;
+		else
+			unreg_mcast &= ~1;
+		cpsw_ale_set_vlan_unreg_mcast(ale_entry, unreg_mcast);
+		cpsw_ale_write(ale, idx, ale_entry);
+	}
+}
+
+>>>>>>> v3.18
 struct ale_control_info {
 	const char	*name;
 	int		offset, port_offset;
@@ -477,6 +516,17 @@ static const struct ale_control_info ale_controls[ALE_NUM_CONTROLS] = {
 		.port_shift	= 0,
 		.bits		= 1,
 	},
+<<<<<<< HEAD
+=======
+	[ALE_P0_UNI_FLOOD]	= {
+		.name		= "port0_unicast_flood",
+		.offset		= ALE_CONTROL,
+		.port_offset	= 0,
+		.shift		= 8,
+		.port_shift	= 0,
+		.bits		= 1,
+	},
+>>>>>>> v3.18
 	[ALE_VLAN_NOLEARN]	= {
 		.name		= "vlan_nolearn",
 		.offset		= ALE_CONTROL,
@@ -573,6 +623,17 @@ static const struct ale_control_info ale_controls[ALE_NUM_CONTROLS] = {
 		.port_shift	= 0,
 		.bits		= 1,
 	},
+<<<<<<< HEAD
+=======
+	[ALE_PORT_NO_SA_UPDATE]	= {
+		.name		= "no_source_update",
+		.offset		= ALE_PORTCTL,
+		.port_offset	= 4,
+		.shift		= 5,
+		.port_shift	= 0,
+		.bits		= 1,
+	},
+>>>>>>> v3.18
 	[ALE_PORT_MCAST_LIMIT]	= {
 		.name		= "mcast_limit",
 		.offset		= ALE_PORTCTL,
@@ -742,8 +803,24 @@ int cpsw_ale_destroy(struct cpsw_ale *ale)
 {
 	if (!ale)
 		return -EINVAL;
+<<<<<<< HEAD
 	cpsw_ale_stop(ale);
+=======
+>>>>>>> v3.18
 	cpsw_ale_control_set(ale, 0, ALE_ENABLE, 0);
 	kfree(ale);
 	return 0;
 }
+<<<<<<< HEAD
+=======
+
+void cpsw_ale_dump(struct cpsw_ale *ale, u32 *data)
+{
+	int i;
+
+	for (i = 0; i < ale->params.ale_entries; i++) {
+		cpsw_ale_read(ale, i, data);
+		data += ALE_ENTRY_WORDS;
+	}
+}
+>>>>>>> v3.18

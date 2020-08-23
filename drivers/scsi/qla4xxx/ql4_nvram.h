@@ -1,6 +1,10 @@
 /*
  * QLogic iSCSI HBA Driver
+<<<<<<< HEAD
  * Copyright (c)  2003-2012 QLogic Corporation
+=======
+ * Copyright (c)  2003-2013 QLogic Corporation
+>>>>>>> v3.18
  *
  * See LICENSE.qla4xxx for copyright and licensing details.
  */

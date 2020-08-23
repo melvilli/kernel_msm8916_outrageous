@@ -6,8 +6,14 @@
 #endif
 
 #include <linux/compiler.h>
+<<<<<<< HEAD
 #include <asm/types.h>
 #include <asm/byteorder.h>
+=======
+#include <asm/types.h>		/* for BITS_PER_LONG/SHIFT_PER_LONG */
+#include <asm/byteorder.h>
+#include <asm/barrier.h>
+>>>>>>> v3.18
 #include <linux/atomic.h>
 
 /*
@@ -16,6 +22,7 @@
  * to include/asm-i386/bitops.h or kerneldoc
  */
 
+<<<<<<< HEAD
 #if __BITS_PER_LONG == 64
 #define SHIFT_PER_LONG 6
 #else
@@ -28,6 +35,11 @@
 #define smp_mb__before_clear_bit()      smp_mb()
 #define smp_mb__after_clear_bit()       smp_mb()
 
+=======
+#define CHOP_SHIFTCOUNT(x) (((unsigned long) (x)) & (BITS_PER_LONG - 1))
+
+
+>>>>>>> v3.18
 /* See http://marc.theaimsgroup.com/?t=108826637900003 for discussion
  * on use of volatile and __*_bit() (set/clear/change):
  *	*_bit() want use of volatile.

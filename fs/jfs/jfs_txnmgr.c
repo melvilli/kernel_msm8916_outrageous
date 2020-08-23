@@ -136,7 +136,10 @@ static inline void TXN_SLEEP_DROP_LOCK(wait_queue_head_t * event)
 	set_current_state(TASK_UNINTERRUPTIBLE);
 	TXN_UNLOCK();
 	io_schedule();
+<<<<<<< HEAD
 	__set_current_state(TASK_RUNNING);
+=======
+>>>>>>> v3.18
 	remove_wait_queue(event, &wait);
 }
 
@@ -2684,7 +2687,11 @@ void txAbort(tid_t tid, int dirty)
 	 * mark filesystem dirty
 	 */
 	if (dirty)
+<<<<<<< HEAD
 		jfs_error(tblk->sb, "txAbort");
+=======
+		jfs_error(tblk->sb, "\n");
+>>>>>>> v3.18
 
 	return;
 }
@@ -2808,7 +2815,10 @@ int jfs_lazycommit(void *arg)
 			set_current_state(TASK_INTERRUPTIBLE);
 			LAZY_UNLOCK(flags);
 			schedule();
+<<<<<<< HEAD
 			__set_current_state(TASK_RUNNING);
+=======
+>>>>>>> v3.18
 			remove_wait_queue(&jfs_commit_thread_wait, &wq);
 		}
 	} while (!kthread_should_stop());
@@ -2996,7 +3006,10 @@ int jfs_sync(void *arg)
 			set_current_state(TASK_INTERRUPTIBLE);
 			TXN_UNLOCK();
 			schedule();
+<<<<<<< HEAD
 			__set_current_state(TASK_RUNNING);
+=======
+>>>>>>> v3.18
 		}
 	} while (!kthread_should_stop());
 

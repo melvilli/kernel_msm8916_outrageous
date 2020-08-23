@@ -382,7 +382,11 @@ static int ea_read(struct inode *ip, struct jfs_ea_list *ealist)
 
 	nbytes = sizeDXD(&ji->ea);
 	if (!nbytes) {
+<<<<<<< HEAD
 		jfs_error(sb, "ea_read: nbytes is 0");
+=======
+		jfs_error(sb, "nbytes is 0\n");
+>>>>>>> v3.18
 		return -EIO;
 	}
 
@@ -482,7 +486,11 @@ static int ea_get(struct inode *inode, struct ea_buffer *ea_buf, int min_size)
 		current_blocks = 0;
 	} else {
 		if (!(ji->ea.flag & DXD_EXTENT)) {
+<<<<<<< HEAD
 			jfs_error(sb, "ea_get: invalid ea.flag)");
+=======
+			jfs_error(sb, "invalid ea.flag\n");
+>>>>>>> v3.18
 			return -EIO;
 		}
 		current_blocks = (ea_size + sb->s_blocksize - 1) >>
@@ -666,6 +674,7 @@ static int ea_put(tid_t tid, struct inode *inode, struct ea_buffer *ea_buf,
 }
 
 /*
+<<<<<<< HEAD
  * can_set_system_xattr
  *
  * This code is specific to the system.* namespace.  It contains policy
@@ -735,14 +744,20 @@ static int can_set_system_xattr(struct inode *inode, const char *name,
 /*
  * Most of the permission checking is done by xattr_permission in the vfs.
  * The local file system is responsible for handling the system.* namespace.
+=======
+ * Most of the permission checking is done by xattr_permission in the vfs.
+>>>>>>> v3.18
  * We also need to verify that this is a namespace that we recognize.
  */
 static int can_set_xattr(struct inode *inode, const char *name,
 			 const void *value, size_t value_len)
 {
+<<<<<<< HEAD
 	if (!strncmp(name, XATTR_SYSTEM_PREFIX, XATTR_SYSTEM_PREFIX_LEN))
 		return can_set_system_xattr(inode, name, value, value_len);
 
+=======
+>>>>>>> v3.18
 	if (!strncmp(name, XATTR_OS2_PREFIX, XATTR_OS2_PREFIX_LEN)) {
 		/*
 		 * This makes sure that we aren't trying to set an
@@ -750,7 +765,11 @@ static int can_set_xattr(struct inode *inode, const char *name,
 		 * with "os2."
 		 */
 		if (is_known_namespace(name + XATTR_OS2_PREFIX_LEN))
+<<<<<<< HEAD
 				return -EOPNOTSUPP;
+=======
+			return -EOPNOTSUPP;
+>>>>>>> v3.18
 		return 0;
 	}
 
@@ -862,6 +881,22 @@ int __jfs_setxattr(tid_t tid, struct inode *inode, const char *name,
 			/* Completely new ea list */
 			xattr_size = sizeof (struct jfs_ea_list);
 
+<<<<<<< HEAD
+=======
+		/*
+		 * The size of EA value is limitted by on-disk format up to
+		 *  __le16, there would be an overflow if the size is equal
+		 * to XATTR_SIZE_MAX (65536).  In order to avoid this issue,
+		 * we can pre-checkup the value size against USHRT_MAX, and
+		 * return -E2BIG in this case, which is consistent with the
+		 * VFS setxattr interface.
+		 */
+		if (value_len >= USHRT_MAX) {
+			rc = -E2BIG;
+			goto release;
+		}
+
+>>>>>>> v3.18
 		ea = (struct jfs_ea *) ((char *) ealist + xattr_size);
 		ea->flag = 0;
 		ea->namelen = namelen;
@@ -876,7 +911,11 @@ int __jfs_setxattr(tid_t tid, struct inode *inode, const char *name,
 	/* DEBUG - If we did this right, these number match */
 	if (xattr_size != new_size) {
 		printk(KERN_ERR
+<<<<<<< HEAD
 		       "jfs_xsetattr: xattr_size = %d, new_size = %d\n",
+=======
+		       "__jfs_setxattr: xattr_size = %d, new_size = %d\n",
+>>>>>>> v3.18
 		       xattr_size, new_size);
 
 		rc = -EINVAL;
@@ -912,6 +951,17 @@ int jfs_setxattr(struct dentry *dentry, const char *name, const void *value,
 	int rc;
 	tid_t tid;
 
+<<<<<<< HEAD
+=======
+	/*
+	 * If this is a request for a synthetic attribute in the system.*
+	 * namespace use the generic infrastructure to resolve a handler
+	 * for it via sb->s_xattr.
+	 */
+	if (!strncmp(name, XATTR_SYSTEM_PREFIX, XATTR_SYSTEM_PREFIX_LEN))
+		return generic_setxattr(dentry, name, value, value_len, flags);
+
+>>>>>>> v3.18
 	if ((rc = can_set_xattr(inode, name, value, value_len)))
 		return rc;
 
@@ -988,6 +1038,17 @@ ssize_t jfs_getxattr(struct dentry *dentry, const char *name, void *data,
 {
 	int err;
 
+<<<<<<< HEAD
+=======
+	/*
+	 * If this is a request for a synthetic attribute in the system.*
+	 * namespace use the generic infrastructure to resolve a handler
+	 * for it via sb->s_xattr.
+	 */
+	if (!strncmp(name, XATTR_SYSTEM_PREFIX, XATTR_SYSTEM_PREFIX_LEN))
+		return generic_getxattr(dentry, name, data, buf_size);
+
+>>>>>>> v3.18
 	if (strncmp(name, XATTR_OS2_PREFIX, XATTR_OS2_PREFIX_LEN) == 0) {
 		/*
 		 * skip past "os2." prefix
@@ -1076,6 +1137,17 @@ int jfs_removexattr(struct dentry *dentry, const char *name)
 	int rc;
 	tid_t tid;
 
+<<<<<<< HEAD
+=======
+	/*
+	 * If this is a request for a synthetic attribute in the system.*
+	 * namespace use the generic infrastructure to resolve a handler
+	 * for it via sb->s_xattr.
+	 */
+	if (!strncmp(name, XATTR_SYSTEM_PREFIX, XATTR_SYSTEM_PREFIX_LEN))
+		return generic_removexattr(dentry, name);
+
+>>>>>>> v3.18
 	if ((rc = can_set_xattr(inode, name, NULL, 0)))
 		return rc;
 
@@ -1090,9 +1162,28 @@ int jfs_removexattr(struct dentry *dentry, const char *name)
 	return rc;
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_JFS_SECURITY
 int jfs_initxattrs(struct inode *inode, const struct xattr *xattr_array,
 		   void *fs_info)
+=======
+/*
+ * List of handlers for synthetic system.* attributes.  All real ondisk
+ * attributes are handled directly.
+ */
+const struct xattr_handler *jfs_xattr_handlers[] = {
+#ifdef CONFIG_JFS_POSIX_ACL
+	&posix_acl_access_xattr_handler,
+	&posix_acl_default_xattr_handler,
+#endif
+	NULL,
+};
+
+
+#ifdef CONFIG_JFS_SECURITY
+static int jfs_initxattrs(struct inode *inode, const struct xattr *xattr_array,
+			  void *fs_info)
+>>>>>>> v3.18
 {
 	const struct xattr *xattr;
 	tid_t *tid = fs_info;

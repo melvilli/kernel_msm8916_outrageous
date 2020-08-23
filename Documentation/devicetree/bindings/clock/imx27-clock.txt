@@ -7,6 +7,7 @@ Required properties:
 - #clock-cells: Should be <1>
 
 The clock consumer should specify the desired clock by having the clock
+<<<<<<< HEAD
 ID in its "clocks" phandle cell.  The following is a full list of i.MX27
 clocks and IDs.
 
@@ -115,3 +116,24 @@ uart1: serial@1000a000 {
 	clock-names = "ipg", "per";
 	status = "disabled";
 };
+=======
+ID in its "clocks" phandle cell. See include/dt-bindings/clock/imx27-clock.h
+for the full list of i.MX27 clock IDs.
+
+Examples:
+	clks: ccm@10027000{
+		compatible = "fsl,imx27-ccm";
+		reg = <0x10027000 0x1000>;
+		#clock-cells = <1>;
+	};
+
+	uart1: serial@1000a000 {
+		compatible = "fsl,imx27-uart", "fsl,imx21-uart";
+		reg = <0x1000a000 0x1000>;
+		interrupts = <20>;
+		clocks = <&clks IMX27_CLK_UART1_IPG_GATE>,
+			 <&clks IMX27_CLK_PER1_GATE>;
+		clock-names = "ipg", "per";
+		status = "disabled";
+	};
+>>>>>>> v3.18

@@ -106,6 +106,14 @@ struct audit_names {
 	bool			should_free;
 };
 
+<<<<<<< HEAD
+=======
+struct audit_proctitle {
+	int	len;	/* length of the cmdline field. */
+	char	*value;	/* the cmdline field */
+};
+
+>>>>>>> v3.18
 /* The per-task audit context. */
 struct audit_context {
 	int		    dummy;	/* must be the first element */
@@ -197,8 +205,17 @@ struct audit_context {
 			int			fd;
 			int			flags;
 		} mmap;
+<<<<<<< HEAD
 	};
 	int fds[2];
+=======
+		struct {
+			int			argc;
+		} execve;
+	};
+	int fds[2];
+	struct audit_proctitle proctitle;
+>>>>>>> v3.18
 
 #if AUDIT_DEBUG
 	int		    put_count;
@@ -206,14 +223,21 @@ struct audit_context {
 #endif
 };
 
+<<<<<<< HEAD
 extern int audit_ever_enabled;
+=======
+extern u32 audit_ever_enabled;
+>>>>>>> v3.18
 
 extern void audit_copy_inode(struct audit_names *name,
 			     const struct dentry *dentry,
 			     const struct inode *inode);
 extern void audit_log_cap(struct audit_buffer *ab, char *prefix,
 			  kernel_cap_t *cap);
+<<<<<<< HEAD
 extern void audit_log_fcaps(struct audit_buffer *ab, struct audit_names *name);
+=======
+>>>>>>> v3.18
 extern void audit_log_name(struct audit_context *context,
 			   struct audit_names *n, struct path *path,
 			   int record_num, int *call_panic);
@@ -237,6 +261,7 @@ extern int audit_uid_comparator(kuid_t left, u32 op, kuid_t right);
 extern int audit_gid_comparator(kgid_t left, u32 op, kgid_t right);
 extern int parent_len(const char *path);
 extern int audit_compare_dname_path(const char *dname, const char *path, int plen);
+<<<<<<< HEAD
 extern struct sk_buff *	    audit_make_reply(int pid, int seq, int type,
 					     int done, int multi,
 					     const void *payload, int size);
@@ -244,11 +269,28 @@ extern void		    audit_panic(const char *message);
 
 struct audit_netlink_list {
 	int pid;
+=======
+extern struct sk_buff *audit_make_reply(__u32 portid, int seq, int type,
+					int done, int multi,
+					const void *payload, int size);
+extern void		    audit_panic(const char *message);
+
+struct audit_netlink_list {
+	__u32 portid;
+	struct net *net;
+>>>>>>> v3.18
 	struct sk_buff_head q;
 };
 
 int audit_send_list(void *);
 
+<<<<<<< HEAD
+=======
+struct audit_net {
+	struct sock *nlsk;
+};
+
+>>>>>>> v3.18
 extern int selinux_audit_rule_update(void);
 
 extern struct mutex audit_filter_mutex;

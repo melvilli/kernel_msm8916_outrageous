@@ -16,6 +16,10 @@
 #define _MD_P_H
 
 #include <linux/types.h>
+<<<<<<< HEAD
+=======
+#include <asm/byteorder.h>
+>>>>>>> v3.18
 
 /*
  * RAID superblock.
@@ -291,6 +295,12 @@ struct mdp_superblock_1 {
 					    * backwards anyway.
 					    */
 #define	MD_FEATURE_NEW_OFFSET		64 /* new_offset must be honoured */
+<<<<<<< HEAD
+=======
+#define	MD_FEATURE_RECOVERY_BITMAP	128 /* recovery that is happening
+					     * is guided by bitmap.
+					     */
+>>>>>>> v3.18
 #define	MD_FEATURE_ALL			(MD_FEATURE_BITMAP_OFFSET	\
 					|MD_FEATURE_RECOVERY_OFFSET	\
 					|MD_FEATURE_RESHAPE_ACTIVE	\
@@ -298,6 +308,13 @@ struct mdp_superblock_1 {
 					|MD_FEATURE_REPLACEMENT		\
 					|MD_FEATURE_RESHAPE_BACKWARDS	\
 					|MD_FEATURE_NEW_OFFSET		\
+<<<<<<< HEAD
 					)
 
 #endif 
+=======
+					|MD_FEATURE_RECOVERY_BITMAP	\
+					)
+
+#endif
+>>>>>>> v3.18

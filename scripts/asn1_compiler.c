@@ -1457,8 +1457,12 @@ dont_render_tag:
 	case TYPE_REF:
 		render_element(out, e->type->type->element, tag);
 		if (e->action)
+<<<<<<< HEAD
 			render_opcode(out, "ASN1_OP_%sACT,\n",
 				      skippable ? "MAYBE_" : "");
+=======
+			render_opcode(out, "ASN1_OP_ACT,\n");
+>>>>>>> v3.18
 		break;
 
 	case SEQUENCE:

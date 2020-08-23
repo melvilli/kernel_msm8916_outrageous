@@ -270,7 +270,11 @@ static int nforce2_target(struct cpufreq_policy *policy,
 	pr_debug("Old CPU frequency %d kHz, new %d kHz\n",
 	       freqs.old, freqs.new);
 
+<<<<<<< HEAD
 	cpufreq_notify_transition(policy, &freqs, CPUFREQ_PRECHANGE);
+=======
+	cpufreq_freq_transition_begin(policy, &freqs);
+>>>>>>> v3.18
 
 	/* Disable IRQs */
 	/* local_irq_save(flags); */
@@ -285,7 +289,11 @@ static int nforce2_target(struct cpufreq_policy *policy,
 	/* Enable IRQs */
 	/* local_irq_restore(flags); */
 
+<<<<<<< HEAD
 	cpufreq_notify_transition(policy, &freqs, CPUFREQ_POSTCHANGE);
+=======
+	cpufreq_freq_transition_end(policy, &freqs, 0);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -360,7 +368,10 @@ static int nforce2_cpu_init(struct cpufreq_policy *policy)
 	policy->min = policy->cpuinfo.min_freq = min_fsb * fid * 100;
 	policy->max = policy->cpuinfo.max_freq = max_fsb * fid * 100;
 	policy->cpuinfo.transition_latency = CPUFREQ_ETERNAL;
+<<<<<<< HEAD
 	policy->cur = nforce2_get(policy->cpu);
+=======
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -380,7 +391,11 @@ static struct cpufreq_driver nforce2_driver = {
 };
 
 #ifdef MODULE
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(nforce2_ids) = {
+=======
+static const struct pci_device_id nforce2_ids[] = {
+>>>>>>> v3.18
 	{ PCI_VENDOR_ID_NVIDIA, PCI_DEVICE_ID_NVIDIA_NFORCE2 },
 	{}
 };

@@ -40,9 +40,12 @@
 
 /* called by the assembler IRQ entry functions defined in irq.h
  * to dispatch the interrupts to registered handlers
+<<<<<<< HEAD
  * interrupts are disabled upon entry - depending on if the
  * interrupt was registered with IRQF_DISABLED or not, interrupts
  * are re-enabled or not.
+=======
+>>>>>>> v3.18
  */
 
 asmlinkage void do_IRQ(int irq, struct pt_regs * regs)

@@ -95,6 +95,10 @@ static void variax_startup3(struct usb_line6_variax *variax)
 static void variax_startup4(unsigned long data)
 {
 	struct usb_line6_variax *variax = (struct usb_line6_variax *)data;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	CHECK_STARTUP_PROGRESS(variax->startup_progress,
 			       VARIAX_STARTUP_ACTIVATE);
 
@@ -107,6 +111,10 @@ static void variax_startup4(unsigned long data)
 static void variax_startup5(unsigned long data)
 {
 	struct usb_line6_variax *variax = (struct usb_line6_variax *)data;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	CHECK_STARTUP_PROGRESS(variax->startup_progress,
 			       VARIAX_STARTUP_WORKQUEUE);
 

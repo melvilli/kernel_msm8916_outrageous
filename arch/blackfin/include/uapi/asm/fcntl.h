@@ -4,8 +4,13 @@
  * Licensed under the GPL-2 or later.
  */
 
+<<<<<<< HEAD
 #ifndef _BFIN_FCNTL_H
 #define _BFIN_FCNTL_H
+=======
+#ifndef _UAPI_BFIN_FCNTL_H
+#define _UAPI_BFIN_FCNTL_H
+>>>>>>> v3.18
 
 #define O_DIRECTORY	 040000	/* must be a directory */
 #define O_NOFOLLOW	0100000	/* don't follow links */
@@ -14,4 +19,8 @@
 
 #include <asm-generic/fcntl.h>
 
+<<<<<<< HEAD
 #endif
+=======
+#endif /* _UAPI_BFIN_FCNTL_H */
+>>>>>>> v3.18

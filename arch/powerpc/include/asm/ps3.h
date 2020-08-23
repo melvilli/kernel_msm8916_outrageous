@@ -21,7 +21,10 @@
 #if !defined(_ASM_POWERPC_PS3_H)
 #define _ASM_POWERPC_PS3_H
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/types.h>
 #include <linux/device.h>
 #include <asm/cell-pmu.h>

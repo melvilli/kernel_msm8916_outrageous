@@ -7,7 +7,10 @@ struct inode;
 struct dentry;
 struct iattr;
 struct super_block;
+<<<<<<< HEAD
 struct nameidata;
+=======
+>>>>>>> v3.18
 
 int reiserfs_xattr_register_handlers(void) __init;
 void reiserfs_xattr_unregister_handlers(void);
@@ -61,7 +64,12 @@ static inline loff_t reiserfs_xattr_nblocks(struct inode *inode, loff_t size)
 	return ret;
 }
 
+<<<<<<< HEAD
 /* We may have to create up to 3 objects: xattr root, xattr dir, xattr file.
+=======
+/*
+ * We may have to create up to 3 objects: xattr root, xattr dir, xattr file.
+>>>>>>> v3.18
  * Let's try to be smart about it.
  * xattr root: We cache it. If it's not cached, we may need to create it.
  * xattr dir: If anything has been loaded for this inode, we can set a flag

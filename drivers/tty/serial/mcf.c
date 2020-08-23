@@ -24,6 +24,10 @@
 #include <linux/serial_core.h>
 #include <linux/io.h>
 #include <linux/uaccess.h>
+<<<<<<< HEAD
+=======
+#include <linux/platform_device.h>
+>>>>>>> v3.18
 #include <asm/coldfire.h>
 #include <asm/mcfsim.h>
 #include <asm/mcfuart.h>
@@ -149,12 +153,15 @@ static void mcf_break_ctl(struct uart_port *port, int break_state)
 
 /****************************************************************************/
 
+<<<<<<< HEAD
 static void mcf_enable_ms(struct uart_port *port)
 {
 }
 
 /****************************************************************************/
 
+=======
+>>>>>>> v3.18
 static int mcf_startup(struct uart_port *port)
 {
 	struct mcf_uart *pp = container_of(port, struct mcf_uart, port);
@@ -247,6 +254,15 @@ static void mcf_set_termios(struct uart_port *port, struct ktermios *termios,
 		mr1 |= MCFUART_MR1_PARITYNONE;
 	}
 
+<<<<<<< HEAD
+=======
+	/*
+	 * FIXME: port->read_status_mask and port->ignore_status_mask
+	 * need to be initialized based on termios settings for
+	 * INPCK, IGNBRK, IGNPAR, PARMRK, BRKINT
+	 */
+
+>>>>>>> v3.18
 	if (termios->c_cflag & CSTOPB)
 		mr2 |= MCFUART_MR2_STOP2;
 	else
@@ -324,7 +340,13 @@ static void mcf_rx_chars(struct mcf_uart *pp)
 		uart_insert_char(port, status, MCFUART_USR_RXOVERRUN, ch, flag);
 	}
 
+<<<<<<< HEAD
 	tty_flip_buffer_push(&port->state->port);
+=======
+	spin_unlock(&port->lock);
+	tty_flip_buffer_push(&port->state->port);
+	spin_lock(&port->lock);
+>>>>>>> v3.18
 }
 
 /****************************************************************************/
@@ -498,7 +520,10 @@ static const struct uart_ops mcf_uart_ops = {
 	.start_tx	= mcf_start_tx,
 	.stop_tx	= mcf_stop_tx,
 	.stop_rx	= mcf_stop_rx,
+<<<<<<< HEAD
 	.enable_ms	= mcf_enable_ms,
+=======
+>>>>>>> v3.18
 	.break_ctl	= mcf_break_ctl,
 	.startup	= mcf_startup,
 	.shutdown	= mcf_shutdown,
@@ -535,7 +560,11 @@ int __init early_mcf_setup(struct mcf_platform_uart *platp)
 		port->iotype = SERIAL_IO_MEM;
 		port->irq = platp[i].irq;
 		port->uartclk = MCF_BUSCLK;
+<<<<<<< HEAD
 		port->flags = ASYNC_BOOT_AUTOCONF;
+=======
+		port->flags = UPF_BOOT_AUTOCONF;
+>>>>>>> v3.18
 		port->ops = &mcf_uart_ops;
 	}
 
@@ -644,7 +673,11 @@ static struct uart_driver mcf_driver = {
 
 static int mcf_probe(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct mcf_platform_uart *platp = pdev->dev.platform_data;
+=======
+	struct mcf_platform_uart *platp = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	struct uart_port *port;
 	int i;
 
@@ -660,7 +693,11 @@ static int mcf_probe(struct platform_device *pdev)
 		port->irq = platp[i].irq;
 		port->uartclk = MCF_BUSCLK;
 		port->ops = &mcf_uart_ops;
+<<<<<<< HEAD
 		port->flags = ASYNC_BOOT_AUTOCONF;
+=======
+		port->flags = UPF_BOOT_AUTOCONF;
+>>>>>>> v3.18
 
 		uart_add_one_port(&mcf_driver, port);
 	}

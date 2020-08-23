@@ -12,6 +12,19 @@ enum {
 	LBR_FORMAT_LIP		= 0x01,
 	LBR_FORMAT_EIP		= 0x02,
 	LBR_FORMAT_EIP_FLAGS	= 0x03,
+<<<<<<< HEAD
+=======
+	LBR_FORMAT_EIP_FLAGS2	= 0x04,
+	LBR_FORMAT_MAX_KNOWN    = LBR_FORMAT_EIP_FLAGS2,
+};
+
+static enum {
+	LBR_EIP_FLAGS		= 1,
+	LBR_TSX			= 2,
+} lbr_desc[LBR_FORMAT_MAX_KNOWN + 1] = {
+	[LBR_FORMAT_EIP_FLAGS]  = LBR_EIP_FLAGS,
+	[LBR_FORMAT_EIP_FLAGS2] = LBR_EIP_FLAGS | LBR_TSX,
+>>>>>>> v3.18
 };
 
 /*
@@ -56,6 +69,11 @@ enum {
 	 LBR_FAR)
 
 #define LBR_FROM_FLAG_MISPRED  (1ULL << 63)
+<<<<<<< HEAD
+=======
+#define LBR_FROM_FLAG_IN_TX    (1ULL << 62)
+#define LBR_FROM_FLAG_ABORT    (1ULL << 61)
+>>>>>>> v3.18
 
 #define for_each_branch_sample_type(x) \
 	for ((x) = PERF_SAMPLE_BRANCH_USER; \
@@ -81,9 +99,19 @@ enum {
 	X86_BR_JMP      = 1 << 9, /* jump */
 	X86_BR_IRQ      = 1 << 10,/* hw interrupt or trap or fault */
 	X86_BR_IND_CALL = 1 << 11,/* indirect calls */
+<<<<<<< HEAD
 };
 
 #define X86_BR_PLM (X86_BR_USER | X86_BR_KERNEL)
+=======
+	X86_BR_ABORT    = 1 << 12,/* transaction abort */
+	X86_BR_IN_TX    = 1 << 13,/* in transaction */
+	X86_BR_NO_TX    = 1 << 14,/* not in transaction */
+};
+
+#define X86_BR_PLM (X86_BR_USER | X86_BR_KERNEL)
+#define X86_BR_ANYTX (X86_BR_NO_TX | X86_BR_IN_TX)
+>>>>>>> v3.18
 
 #define X86_BR_ANY       \
 	(X86_BR_CALL    |\
@@ -95,6 +123,10 @@ enum {
 	 X86_BR_JCC     |\
 	 X86_BR_JMP	 |\
 	 X86_BR_IRQ	 |\
+<<<<<<< HEAD
+=======
+	 X86_BR_ABORT	 |\
+>>>>>>> v3.18
 	 X86_BR_IND_CALL)
 
 #define X86_BR_ALL (X86_BR_PLM | X86_BR_ANY)
@@ -116,7 +148,11 @@ static void intel_pmu_lbr_filter(struct cpu_hw_events *cpuc);
 static void __intel_pmu_lbr_enable(void)
 {
 	u64 debugctl;
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 
 	if (cpuc->lbr_sel)
 		wrmsrl(MSR_LBR_SELECT, cpuc->lbr_sel->config);
@@ -166,7 +202,11 @@ void intel_pmu_lbr_reset(void)
 
 void intel_pmu_lbr_enable(struct perf_event *event)
 {
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 
 	if (!x86_pmu.lbr_nr)
 		return;
@@ -186,7 +226,11 @@ void intel_pmu_lbr_enable(struct perf_event *event)
 
 void intel_pmu_lbr_disable(struct perf_event *event)
 {
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 
 	if (!x86_pmu.lbr_nr)
 		return;
@@ -203,7 +247,11 @@ void intel_pmu_lbr_disable(struct perf_event *event)
 
 void intel_pmu_lbr_enable_all(void)
 {
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 
 	if (cpuc->lbr_users)
 		__intel_pmu_lbr_enable();
@@ -211,7 +259,11 @@ void intel_pmu_lbr_enable_all(void)
 
 void intel_pmu_lbr_disable_all(void)
 {
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 
 	if (cpuc->lbr_users)
 		__intel_pmu_lbr_disable();
@@ -267,14 +319,25 @@ static void intel_pmu_lbr_read_64(struct cpu_hw_events *cpuc)
 	int lbr_format = x86_pmu.intel_cap.lbr_format;
 	u64 tos = intel_pmu_lbr_tos();
 	int i;
+<<<<<<< HEAD
 
 	for (i = 0; i < x86_pmu.lbr_nr; i++) {
 		unsigned long lbr_idx = (tos - i) & mask;
 		u64 from, to, mis = 0, pred = 0;
+=======
+	int out = 0;
+
+	for (i = 0; i < x86_pmu.lbr_nr; i++) {
+		unsigned long lbr_idx = (tos - i) & mask;
+		u64 from, to, mis = 0, pred = 0, in_tx = 0, abort = 0;
+		int skip = 0;
+		int lbr_flags = lbr_desc[lbr_format];
+>>>>>>> v3.18
 
 		rdmsrl(x86_pmu.lbr_from + lbr_idx, from);
 		rdmsrl(x86_pmu.lbr_to   + lbr_idx, to);
 
+<<<<<<< HEAD
 		if (lbr_format == LBR_FORMAT_EIP_FLAGS) {
 			mis = !!(from & LBR_FROM_FLAG_MISPRED);
 			pred = !mis;
@@ -288,11 +351,50 @@ static void intel_pmu_lbr_read_64(struct cpu_hw_events *cpuc)
 		cpuc->lbr_entries[i].reserved	= 0;
 	}
 	cpuc->lbr_stack.nr = i;
+=======
+		if (lbr_flags & LBR_EIP_FLAGS) {
+			mis = !!(from & LBR_FROM_FLAG_MISPRED);
+			pred = !mis;
+			skip = 1;
+		}
+		if (lbr_flags & LBR_TSX) {
+			in_tx = !!(from & LBR_FROM_FLAG_IN_TX);
+			abort = !!(from & LBR_FROM_FLAG_ABORT);
+			skip = 3;
+		}
+		from = (u64)((((s64)from) << skip) >> skip);
+
+		/*
+		 * Some CPUs report duplicated abort records,
+		 * with the second entry not having an abort bit set.
+		 * Skip them here. This loop runs backwards,
+		 * so we need to undo the previous record.
+		 * If the abort just happened outside the window
+		 * the extra entry cannot be removed.
+		 */
+		if (abort && x86_pmu.lbr_double_abort && out > 0)
+			out--;
+
+		cpuc->lbr_entries[out].from	 = from;
+		cpuc->lbr_entries[out].to	 = to;
+		cpuc->lbr_entries[out].mispred	 = mis;
+		cpuc->lbr_entries[out].predicted = pred;
+		cpuc->lbr_entries[out].in_tx	 = in_tx;
+		cpuc->lbr_entries[out].abort	 = abort;
+		cpuc->lbr_entries[out].reserved	 = 0;
+		out++;
+	}
+	cpuc->lbr_stack.nr = out;
+>>>>>>> v3.18
 }
 
 void intel_pmu_lbr_read(void)
 {
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 
 	if (!cpuc->lbr_users)
 		return;
@@ -310,7 +412,11 @@ void intel_pmu_lbr_read(void)
  * - in case there is no HW filter
  * - in case the HW filter has errata or limitations
  */
+<<<<<<< HEAD
 static int intel_pmu_setup_sw_lbr_filter(struct perf_event *event)
+=======
+static void intel_pmu_setup_sw_lbr_filter(struct perf_event *event)
+>>>>>>> v3.18
 {
 	u64 br_type = event->attr.branch_sample_type;
 	int mask = 0;
@@ -318,11 +424,16 @@ static int intel_pmu_setup_sw_lbr_filter(struct perf_event *event)
 	if (br_type & PERF_SAMPLE_BRANCH_USER)
 		mask |= X86_BR_USER;
 
+<<<<<<< HEAD
 	if (br_type & PERF_SAMPLE_BRANCH_KERNEL) {
 		if (perf_paranoid_kernel() && !capable(CAP_SYS_ADMIN))
 			return -EACCES;
 		mask |= X86_BR_KERNEL;
 	}
+=======
+	if (br_type & PERF_SAMPLE_BRANCH_KERNEL)
+		mask |= X86_BR_KERNEL;
+>>>>>>> v3.18
 
 	/* we ignore BRANCH_HV here */
 
@@ -337,13 +448,32 @@ static int intel_pmu_setup_sw_lbr_filter(struct perf_event *event)
 
 	if (br_type & PERF_SAMPLE_BRANCH_IND_CALL)
 		mask |= X86_BR_IND_CALL;
+<<<<<<< HEAD
+=======
+
+	if (br_type & PERF_SAMPLE_BRANCH_ABORT_TX)
+		mask |= X86_BR_ABORT;
+
+	if (br_type & PERF_SAMPLE_BRANCH_IN_TX)
+		mask |= X86_BR_IN_TX;
+
+	if (br_type & PERF_SAMPLE_BRANCH_NO_TX)
+		mask |= X86_BR_NO_TX;
+
+	if (br_type & PERF_SAMPLE_BRANCH_COND)
+		mask |= X86_BR_JCC;
+
+>>>>>>> v3.18
 	/*
 	 * stash actual user request into reg, it may
 	 * be used by fixup code for some CPU
 	 */
 	event->hw.branch_reg.reg = mask;
+<<<<<<< HEAD
 
 	return 0;
+=======
+>>>>>>> v3.18
 }
 
 /*
@@ -391,9 +521,13 @@ int intel_pmu_setup_lbr_filter(struct perf_event *event)
 	/*
 	 * setup SW LBR filter
 	 */
+<<<<<<< HEAD
 	ret = intel_pmu_setup_sw_lbr_filter(event);
 	if (ret)
 		return ret;
+=======
+	intel_pmu_setup_sw_lbr_filter(event);
+>>>>>>> v3.18
 
 	/*
 	 * setup HW LBR filter, if any
@@ -415,7 +549,11 @@ int intel_pmu_setup_lbr_filter(struct perf_event *event)
  * decoded (e.g., text page not present), then X86_BR_NONE is
  * returned.
  */
+<<<<<<< HEAD
 static int branch_type(unsigned long from, unsigned long to)
+=======
+static int branch_type(unsigned long from, unsigned long to, int abort)
+>>>>>>> v3.18
 {
 	struct insn insn;
 	void *addr;
@@ -435,6 +573,12 @@ static int branch_type(unsigned long from, unsigned long to)
 	if (from == 0 || to == 0)
 		return X86_BR_NONE;
 
+<<<<<<< HEAD
+=======
+	if (abort)
+		return X86_BR_ABORT | to_plm;
+
+>>>>>>> v3.18
 	if (from_plm == X86_BR_USER) {
 		/*
 		 * can happen if measuring at the user level only
@@ -445,7 +589,11 @@ static int branch_type(unsigned long from, unsigned long to)
 
 		/* may fail if text not present */
 		bytes = copy_from_user_nmi(buf, (void __user *)from, size);
+<<<<<<< HEAD
 		if (bytes != size)
+=======
+		if (bytes != 0)
+>>>>>>> v3.18
 			return X86_BR_NONE;
 
 		addr = buf;
@@ -581,7 +729,17 @@ intel_pmu_lbr_filter(struct cpu_hw_events *cpuc)
 		from = cpuc->lbr_entries[i].from;
 		to = cpuc->lbr_entries[i].to;
 
+<<<<<<< HEAD
 		type = branch_type(from, to);
+=======
+		type = branch_type(from, to, cpuc->lbr_entries[i].abort);
+		if (type != X86_BR_NONE && (br_sel & X86_BR_ANYTX)) {
+			if (cpuc->lbr_entries[i].in_tx)
+				type |= X86_BR_IN_TX;
+			else
+				type |= X86_BR_NO_TX;
+		}
+>>>>>>> v3.18
 
 		/* if type does not correspond, then discard */
 		if (type == X86_BR_NONE || (br_sel & type) != type) {
@@ -626,6 +784,10 @@ static const int nhm_lbr_sel_map[PERF_SAMPLE_BRANCH_MAX] = {
 	 * NHM/WSM erratum: must include IND_JMP to capture IND_CALL
 	 */
 	[PERF_SAMPLE_BRANCH_IND_CALL] = LBR_IND_CALL | LBR_IND_JMP,
+<<<<<<< HEAD
+=======
+	[PERF_SAMPLE_BRANCH_COND]     = LBR_JCC,
+>>>>>>> v3.18
 };
 
 static const int snb_lbr_sel_map[PERF_SAMPLE_BRANCH_MAX] = {
@@ -637,10 +799,18 @@ static const int snb_lbr_sel_map[PERF_SAMPLE_BRANCH_MAX] = {
 	[PERF_SAMPLE_BRANCH_ANY_CALL]	= LBR_REL_CALL | LBR_IND_CALL
 					| LBR_FAR,
 	[PERF_SAMPLE_BRANCH_IND_CALL]	= LBR_IND_CALL,
+<<<<<<< HEAD
 };
 
 /* core */
 void intel_pmu_lbr_init_core(void)
+=======
+	[PERF_SAMPLE_BRANCH_COND]       = LBR_JCC,
+};
+
+/* core */
+void __init intel_pmu_lbr_init_core(void)
+>>>>>>> v3.18
 {
 	x86_pmu.lbr_nr     = 4;
 	x86_pmu.lbr_tos    = MSR_LBR_TOS;
@@ -655,7 +825,11 @@ void intel_pmu_lbr_init_core(void)
 }
 
 /* nehalem/westmere */
+<<<<<<< HEAD
 void intel_pmu_lbr_init_nhm(void)
+=======
+void __init intel_pmu_lbr_init_nhm(void)
+>>>>>>> v3.18
 {
 	x86_pmu.lbr_nr     = 16;
 	x86_pmu.lbr_tos    = MSR_LBR_TOS;
@@ -676,7 +850,11 @@ void intel_pmu_lbr_init_nhm(void)
 }
 
 /* sandy bridge */
+<<<<<<< HEAD
 void intel_pmu_lbr_init_snb(void)
+=======
+void __init intel_pmu_lbr_init_snb(void)
+>>>>>>> v3.18
 {
 	x86_pmu.lbr_nr	 = 16;
 	x86_pmu.lbr_tos	 = MSR_LBR_TOS;
@@ -696,7 +874,11 @@ void intel_pmu_lbr_init_snb(void)
 }
 
 /* atom */
+<<<<<<< HEAD
 void intel_pmu_lbr_init_atom(void)
+=======
+void __init intel_pmu_lbr_init_atom(void)
+>>>>>>> v3.18
 {
 	/*
 	 * only models starting at stepping 10 seems

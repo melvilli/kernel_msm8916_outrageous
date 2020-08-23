@@ -64,7 +64,11 @@ static irqreturn_t crisv32_ipi_interrupt(int irq, void *dev_id);
 static int send_ipi(int vector, int wait, cpumask_t cpu_mask);
 static struct irqaction irq_ipi  = {
 	.handler = crisv32_ipi_interrupt,
+<<<<<<< HEAD
 	.flags = IRQF_DISABLED,
+=======
+	.flags = 0,
+>>>>>>> v3.18
 	.name = "ipi",
 };
 
@@ -197,7 +201,11 @@ int setup_profiling_timer(unsigned int multiplier)
  */
 unsigned long cache_decay_ticks = 1;
 
+<<<<<<< HEAD
 int __cpuinit __cpu_up(unsigned int cpu, struct task_struct *tidle)
+=======
+int __cpu_up(unsigned int cpu, struct task_struct *tidle)
+>>>>>>> v3.18
 {
 	smp_boot_one_cpu(cpu, tidle);
 	return cpu_online(cpu) ? 0 : -ENOSYS;

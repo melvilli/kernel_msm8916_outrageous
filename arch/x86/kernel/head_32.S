@@ -292,7 +292,10 @@ ENDPROC(start_cpu0)
  * If cpu hotplug is not supported then this code can go in init section
  * which will be freed later
  */
+<<<<<<< HEAD
 __CPUINIT
+=======
+>>>>>>> v3.18
 ENTRY(startup_32_smp)
 	cld
 	movl $(__BOOT_DS),%eax
@@ -410,6 +413,10 @@ enable_paging:
 /*
  * Check if it is 486
  */
+<<<<<<< HEAD
+=======
+	movb $4,X86			# at least 486
+>>>>>>> v3.18
 	cmpl $-1,X86_CPUID
 	je is486
 
@@ -437,14 +444,20 @@ enable_paging:
 	movl %edx,X86_CAPABILITY
 
 is486:
+<<<<<<< HEAD
 	movb $4,X86
+=======
+>>>>>>> v3.18
 	movl $0x50022,%ecx	# set AM, WP, NE and MP
 	movl %cr0,%eax
 	andl $0x80000011,%eax	# Save PG,PE,ET
 	orl %ecx,%eax
 	movl %eax,%cr0
 
+<<<<<<< HEAD
 	call check_x87
+=======
+>>>>>>> v3.18
 	lgdt early_gdt_descr
 	lidt idt_descr
 	ljmp $(__KERNEL_CS),$1f
@@ -467,6 +480,7 @@ is486:
 	pushl $0		# fake return address for unwinder
 	jmp *(initial_code)
 
+<<<<<<< HEAD
 /*
  * We depend on ET to be correct. This checks for 287/387.
  */
@@ -487,6 +501,8 @@ check_x87:
 	ret
 
 	
+=======
+>>>>>>> v3.18
 #include "verify_cpu.S"
 
 /*
@@ -499,6 +515,7 @@ check_x87:
 __INIT
 setup_once:
 	/*
+<<<<<<< HEAD
 	 * Set up a idt with 256 interrupt gates that push zero if there
 	 * is no error code and then jump to early_idt_handler_common.
 	 * It doesn't actually load the idt - that needs to be done on
@@ -508,13 +525,27 @@ setup_once:
 
 	movl $idt_table,%edi
 	movl $early_idt_handler_array,%eax
+=======
+	 * Set up a idt with 256 entries pointing to ignore_int,
+	 * interrupt gates. It doesn't actually load idt - that needs
+	 * to be done on each CPU. Interrupts are enabled elsewhere,
+	 * when we can be relatively sure everything is ok.
+	 */
+
+	movl $idt_table,%edi
+	movl $early_idt_handlers,%eax
+>>>>>>> v3.18
 	movl $NUM_EXCEPTION_VECTORS,%ecx
 1:
 	movl %eax,(%edi)
 	movl %eax,4(%edi)
 	/* interrupt gate, dpl=0, present */
 	movl $(0x8E000000 + __KERNEL_CS),2(%edi)
+<<<<<<< HEAD
 	addl $EARLY_IDT_HANDLER_SIZE,%eax
+=======
+	addl $9,%eax
+>>>>>>> v3.18
 	addl $8,%edi
 	loop 1b
 
@@ -546,13 +577,18 @@ setup_once:
 	andl $0,setup_once_ref	/* Once is enough, thanks */
 	ret
 
+<<<<<<< HEAD
 ENTRY(early_idt_handler_array)
+=======
+ENTRY(early_idt_handlers)
+>>>>>>> v3.18
 	# 36(%esp) %eflags
 	# 32(%esp) %cs
 	# 28(%esp) %eip
 	# 24(%rsp) error code
 	i = 0
 	.rept NUM_EXCEPTION_VECTORS
+<<<<<<< HEAD
 	.ifeq (EXCEPTION_ERRCODE_MASK >> i) & 1
 	pushl $0		# Dummy error code, to make stack frame uniform
 	.endif
@@ -568,6 +604,21 @@ early_idt_handler_common:
 	 * The stack is the hardware frame, an error code or zero, and the
 	 * vector number.
 	 */
+=======
+	.if (EXCEPTION_ERRCODE_MASK >> i) & 1
+	ASM_NOP2
+	.else
+	pushl $0		# Dummy error code, to make stack frame uniform
+	.endif
+	pushl $i		# 20(%esp) Vector number
+	jmp early_idt_handler
+	i = i + 1
+	.endr
+ENDPROC(early_idt_handlers)
+	
+	/* This is global to keep gas from relaxing the jumps */
+ENTRY(early_idt_handler)
+>>>>>>> v3.18
 	cld
 
 	cmpl $2,(%esp)		# X86_TRAP_NMI
@@ -586,7 +637,11 @@ early_idt_handler_common:
 	movl %eax,%ds
 	movl %eax,%es
 
+<<<<<<< HEAD
 	cmpw $(__KERNEL_CS),32(%esp)
+=======
+	cmpl $(__KERNEL_CS),32(%esp)
+>>>>>>> v3.18
 	jne 10f
 
 	leal 28(%esp),%eax	# Pointer to %eip
@@ -627,7 +682,11 @@ ex_entry:
 is_nmi:
 	addl $8,%esp		/* drop vector number and error code */
 	iret
+<<<<<<< HEAD
 ENDPROC(early_idt_handler_common)
+=======
+ENDPROC(early_idt_handler)
+>>>>>>> v3.18
 
 /* This is the default interrupt "handler" :-) */
 	ALIGN

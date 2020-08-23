@@ -76,6 +76,7 @@ to work with it.
 	limit_fail_at parameter is set to the particular res_counter element
 	where the charging failed.
 
+<<<<<<< HEAD
  d. int res_counter_charge_locked
 			(struct res_counter *rc, unsigned long val, bool force)
 
@@ -85,6 +86,9 @@ to work with it.
 
  e. u64 res_counter_uncharge[_locked]
 			(struct res_counter *rc, unsigned long val)
+=======
+ d. u64 res_counter_uncharge(struct res_counter *rc, unsigned long val)
+>>>>>>> v3.18
 
 	When a resource is released (freed) it should be de-accounted
 	from the resource counter it was accounted to.  This is called
@@ -93,12 +97,21 @@ to work with it.
 
 	The _locked routines imply that the res_counter->lock is taken.
 
+<<<<<<< HEAD
  f. u64 res_counter_uncharge_until
 		(struct res_counter *rc, struct res_counter *top,
 		 unsinged long val)
 
 	Almost same as res_cunter_uncharge() but propagation of uncharge
 	stops when rc == top. This is useful when kill a res_coutner in
+=======
+ e. u64 res_counter_uncharge_until
+		(struct res_counter *rc, struct res_counter *top,
+		 unsigned long val)
+
+	Almost same as res_counter_uncharge() but propagation of uncharge
+	stops when rc == top. This is useful when kill a res_counter in
+>>>>>>> v3.18
 	child cgroup.
 
  2.1 Other accounting routines

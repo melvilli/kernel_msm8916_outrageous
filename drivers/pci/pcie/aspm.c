@@ -548,7 +548,11 @@ static struct pcie_link_state *alloc_pcie_link_state(struct pci_dev *pdev)
 
 /*
  * pcie_aspm_init_link_state: Initiate PCI express link state.
+<<<<<<< HEAD
  * It is called after the pcie and its children devices are scaned.
+=======
+ * It is called after the pcie and its children devices are scanned.
+>>>>>>> v3.18
  * @pdev: the root port or switch downstream port
  */
 void pcie_aspm_init_link_state(struct pci_dev *pdev)
@@ -714,19 +718,25 @@ void pcie_aspm_powersave_config_link(struct pci_dev *pdev)
 	up_read(&pci_bus_sem);
 }
 
+<<<<<<< HEAD
 /*
  * pci_disable_link_state - disable pci device's link state, so the link will
  * never enter specific states
  */
+=======
+>>>>>>> v3.18
 static void __pci_disable_link_state(struct pci_dev *pdev, int state, bool sem,
 				     bool force)
 {
 	struct pci_dev *parent = pdev->bus->self;
 	struct pcie_link_state *link;
 
+<<<<<<< HEAD
 	if (aspm_disabled && !force)
 		return;
 
+=======
+>>>>>>> v3.18
 	if (!pci_is_pcie(pdev))
 		return;
 
@@ -736,6 +746,22 @@ static void __pci_disable_link_state(struct pci_dev *pdev, int state, bool sem,
 	if (!parent || !parent->link_state)
 		return;
 
+<<<<<<< HEAD
+=======
+	/*
+	 * A driver requested that ASPM be disabled on this device, but
+	 * if we don't have permission to manage ASPM (e.g., on ACPI
+	 * systems we have to observe the FADT ACPI_FADT_NO_ASPM bit and
+	 * the _OSC method), we can't honor that request.  Windows has
+	 * a similar mechanism using "PciASPMOptOut", which is also
+	 * ignored in this situation.
+	 */
+	if (aspm_disabled && !force) {
+		dev_warn(&pdev->dev, "can't disable ASPM; OS doesn't have ASPM control\n");
+		return;
+	}
+
+>>>>>>> v3.18
 	if (sem)
 		down_read(&pci_bus_sem);
 	mutex_lock(&aspm_lock);
@@ -761,6 +787,18 @@ void pci_disable_link_state_locked(struct pci_dev *pdev, int state)
 }
 EXPORT_SYMBOL(pci_disable_link_state_locked);
 
+<<<<<<< HEAD
+=======
+/**
+ * pci_disable_link_state - Disable device's link state, so the link will
+ * never enter specific states.  Note that if the BIOS didn't grant ASPM
+ * control to the OS, this does nothing because we can't touch the LNKCTL
+ * register.
+ *
+ * @pdev: PCI device
+ * @state: ASPM link state to disable
+ */
+>>>>>>> v3.18
 void pci_disable_link_state(struct pci_dev *pdev, int state)
 {
 	__pci_disable_link_state(pdev, state, true, false);
@@ -969,6 +1007,7 @@ void pcie_no_aspm(void)
 	}
 }
 
+<<<<<<< HEAD
 /**
  * pcie_aspm_enabled - is PCIe ASPM enabled?
  *
@@ -981,6 +1020,8 @@ int pcie_aspm_enabled(void)
 }
 EXPORT_SYMBOL(pcie_aspm_enabled);
 
+=======
+>>>>>>> v3.18
 bool pcie_aspm_support_enabled(void)
 {
 	return aspm_support_enabled;

@@ -11,10 +11,15 @@
 #ifndef __ASM_ARCH_SETUP_H
 #define __ASM_ARCH_SETUP_H
 
+<<<<<<< HEAD
+=======
+#include <asm/mach/arch.h>
+>>>>>>> v3.18
 #include <asm/mach/time.h>
 #include <linux/init.h>
 #include <linux/mfd/abx500/ab8500.h>
 
+<<<<<<< HEAD
 void __init ux500_map_io(void);
 extern void __init u8500_map_io(void);
 
@@ -28,6 +33,16 @@ extern struct device *ux500_soc_device_init(const char *soc_id);
 struct amba_device;
 extern void __init amba_add_devices(struct amba_device *devs[], int num);
 
+=======
+void ux500_restart(enum reboot_mode mode, const char *cmd);
+
+void __init ux500_map_io(void);
+
+extern void __init ux500_init_irq(void);
+
+extern struct device *ux500_soc_device_init(const char *soc_id);
+
+>>>>>>> v3.18
 extern void ux500_timer_init(void);
 
 #define __IO_DEV_DESC(x, sz)	{		\
@@ -41,7 +56,11 @@ extern void ux500_timer_init(void);
 	.virtual	= IO_ADDRESS(x),	\
 	.pfn		= __phys_to_pfn(x),	\
 	.length		= sz,			\
+<<<<<<< HEAD
 	.type		= MT_MEMORY,		\
+=======
+	.type		= MT_MEMORY_RWX,		\
+>>>>>>> v3.18
 }
 
 extern struct smp_operations ux500_smp_ops;

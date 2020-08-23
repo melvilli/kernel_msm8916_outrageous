@@ -32,6 +32,10 @@
 #include "../usb.h"
 #include "../ps.h"
 #include "../cam.h"
+<<<<<<< HEAD
+=======
+#include "../stats.h"
+>>>>>>> v3.18
 #include "reg.h"
 #include "def.h"
 #include "phy.h"
@@ -39,6 +43,10 @@
 #include "dm.h"
 #include "mac.h"
 #include "trx.h"
+<<<<<<< HEAD
+=======
+#include "../rtl8192c/fw_common.h"
+>>>>>>> v3.18
 
 #include <linux/module.h>
 
@@ -738,6 +746,7 @@ static u8 _rtl92c_evm_db_to_percentage(char value)
 	return ret_val;
 }
 
+<<<<<<< HEAD
 static long _rtl92c_translate_todbm(struct ieee80211_hw *hw,
 				     u8 signal_strength_index)
 {
@@ -748,6 +757,8 @@ static long _rtl92c_translate_todbm(struct ieee80211_hw *hw,
 	return signal_power;
 }
 
+=======
+>>>>>>> v3.18
 static long _rtl92c_signal_scale_mapping(struct ieee80211_hw *hw,
 		long currsig)
 {
@@ -795,7 +806,11 @@ static void _rtl92c_query_rxphystatus(struct ieee80211_hw *hw,
 	bool is_cck_rate;
 	u8 *pdesc = (u8 *)p_desc;
 
+<<<<<<< HEAD
 	is_cck_rate = RX_HAL_IS_CCK_RATE(p_desc);
+=======
+	is_cck_rate = RX_HAL_IS_CCK_RATE(p_desc->rxmcs);
+>>>>>>> v3.18
 	pstats->packet_matchbssid = packet_match_bssid;
 	pstats->packet_toself = packet_toself;
 	pstats->packet_beacon = packet_beacon;
@@ -913,6 +928,7 @@ static void _rtl92c_query_rxphystatus(struct ieee80211_hw *hw,
 			  (hw, total_rssi /= rf_rx_num));
 }
 
+<<<<<<< HEAD
 static void _rtl92c_process_ui_rssi(struct ieee80211_hw *hw,
 		struct rtl_stats *pstats)
 {
@@ -1087,6 +1103,8 @@ static void _rtl92c_process_phyinfo(struct ieee80211_hw *hw,
 	_rtl92c_process_LINK_Q(hw, pcurrent_stats);
 }
 
+=======
+>>>>>>> v3.18
 void rtl92c_translate_rx_signal_stuff(struct ieee80211_hw *hw,
 					       struct sk_buff *skb,
 					       struct rtl_stats *pstats,
@@ -1123,5 +1141,9 @@ void rtl92c_translate_rx_signal_stuff(struct ieee80211_hw *hw,
 	_rtl92c_query_rxphystatus(hw, pstats, pdesc, p_drvinfo,
 				   packet_matchbssid, packet_toself,
 				   packet_beacon);
+<<<<<<< HEAD
 	_rtl92c_process_phyinfo(hw, tmp_buf, pstats);
+=======
+	rtl_process_phyinfo(hw, tmp_buf, pstats);
+>>>>>>> v3.18
 }

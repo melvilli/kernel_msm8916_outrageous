@@ -68,6 +68,7 @@ int qxl_mode_dumb_create(struct drm_file *file_priv,
 	return 0;
 }
 
+<<<<<<< HEAD
 int qxl_mode_dumb_destroy(struct drm_file *file_priv,
 			     struct drm_device *dev,
 			     uint32_t handle)
@@ -75,6 +76,8 @@ int qxl_mode_dumb_destroy(struct drm_file *file_priv,
 	return drm_gem_handle_delete(file_priv, handle);
 }
 
+=======
+>>>>>>> v3.18
 int qxl_mode_dumb_mmap(struct drm_file *file_priv,
 		       struct drm_device *dev,
 		       uint32_t handle, uint64_t *offset_p)

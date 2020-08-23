@@ -17,13 +17,20 @@
 #include <linux/fs.h>
 #include <linux/kref.h>
 #include <linux/utsname.h>
+<<<<<<< HEAD
 #include <linux/nfsd/nfsfh.h>
+=======
+>>>>>>> v3.18
 #include <linux/lockd/bind.h>
 #include <linux/lockd/xdr.h>
 #ifdef CONFIG_LOCKD_V4
 #include <linux/lockd/xdr4.h>
 #endif
 #include <linux/lockd/debug.h>
+<<<<<<< HEAD
+=======
+#include <linux/sunrpc/svc.h>
+>>>>>>> v3.18
 
 /*
  * Version string
@@ -178,7 +185,10 @@ struct nlm_block {
 	unsigned char		b_granted;	/* VFS granted lock */
 	struct nlm_file *	b_file;		/* file in question */
 	struct cache_req *	b_cache_req;	/* deferred request handling */
+<<<<<<< HEAD
 	struct file_lock *	b_fl;		/* set for GETLK */
+=======
+>>>>>>> v3.18
 	struct cache_deferred_req * b_deferred_req;
 	unsigned int		b_flags;	/* block flags */
 #define B_QUEUED		1	/* lock queued */
@@ -236,8 +246,12 @@ void		  nlm_rebind_host(struct nlm_host *);
 struct nlm_host * nlm_get_host(struct nlm_host *);
 void		  nlm_shutdown_hosts(void);
 void		  nlm_shutdown_hosts_net(struct net *net);
+<<<<<<< HEAD
 void		  nlm_host_rebooted(const struct net *net,
 					const struct nlm_reboot *);
+=======
+void		  nlm_host_rebooted(const struct nlm_reboot *);
+>>>>>>> v3.18
 
 /*
  * Host monitoring
@@ -245,6 +259,7 @@ void		  nlm_host_rebooted(const struct net *net,
 int		  nsm_monitor(const struct nlm_host *host);
 void		  nsm_unmonitor(const struct nlm_host *host);
 
+<<<<<<< HEAD
 struct nsm_handle *nsm_get_handle(const struct net *net,
 					const struct sockaddr *sap,
 					const size_t salen,
@@ -252,6 +267,13 @@ struct nsm_handle *nsm_get_handle(const struct net *net,
 					const size_t hostname_len);
 struct nsm_handle *nsm_reboot_lookup(const struct net *net,
 					const struct nlm_reboot *info);
+=======
+struct nsm_handle *nsm_get_handle(const struct sockaddr *sap,
+					const size_t salen,
+					const char *hostname,
+					const size_t hostname_len);
+struct nsm_handle *nsm_reboot_lookup(const struct nlm_reboot *info);
+>>>>>>> v3.18
 void		  nsm_release(struct nsm_handle *nsm);
 
 /*
@@ -355,8 +377,12 @@ static inline int nlm_privileged_requester(const struct svc_rqst *rqstp)
 static inline int nlm_compare_locks(const struct file_lock *fl1,
 				    const struct file_lock *fl2)
 {
+<<<<<<< HEAD
 	return file_inode(fl1->fl_file) == file_inode(fl2->fl_file)
 	     && fl1->fl_pid   == fl2->fl_pid
+=======
+	return	fl1->fl_pid   == fl2->fl_pid
+>>>>>>> v3.18
 	     && fl1->fl_owner == fl2->fl_owner
 	     && fl1->fl_start == fl2->fl_start
 	     && fl1->fl_end   == fl2->fl_end

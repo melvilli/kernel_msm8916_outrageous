@@ -21,6 +21,7 @@
  * See the GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
  * along with GNU CC; see the file COPYING.  If not, write to
  * the Free Software Foundation, 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
@@ -31,28 +32,49 @@
  *
  * Or submit a bug report through the following website:
  *    http://www.sf.net/projects/lksctp
+=======
+ * along with GNU CC; see the file COPYING.  If not, see
+ * <http://www.gnu.org/licenses/>.
+ *
+ * Please send any bug reports or fixes you make to the
+ * email address(es):
+ *    lksctp developers <linux-sctp@vger.kernel.org>
+>>>>>>> v3.18
  *
  * Written or modified by:
  *    Jon Grimm             <jgrimm@us.ibm.com>
  *    La Monte H.P. Yarroll <piggy@acm.org>
  *    Sridhar Samudrala     <sri@us.ibm.com>
+<<<<<<< HEAD
  *
  * Any bugs reported given to us we will try to fix... any fixes shared will
  * be incorporated into the next SCTP release.
+=======
+>>>>>>> v3.18
  */
 
 #include <linux/slab.h>
 #include <linux/types.h>
 #include <linux/skbuff.h>
 #include <net/sock.h>
+<<<<<<< HEAD
+=======
+#include <net/busy_poll.h>
+>>>>>>> v3.18
 #include <net/sctp/structs.h>
 #include <net/sctp/sctp.h>
 #include <net/sctp/sm.h>
 
 /* Forward declarations for internal helpers.  */
+<<<<<<< HEAD
 static struct sctp_ulpevent * sctp_ulpq_reasm(struct sctp_ulpq *ulpq,
 					      struct sctp_ulpevent *);
 static struct sctp_ulpevent * sctp_ulpq_order(struct sctp_ulpq *,
+=======
+static struct sctp_ulpevent *sctp_ulpq_reasm(struct sctp_ulpq *ulpq,
+					      struct sctp_ulpevent *);
+static struct sctp_ulpevent *sctp_ulpq_order(struct sctp_ulpq *,
+>>>>>>> v3.18
 					      struct sctp_ulpevent *);
 static void sctp_ulpq_reasm_drain(struct sctp_ulpq *ulpq);
 
@@ -114,7 +136,11 @@ int sctp_ulpq_tail_data(struct sctp_ulpq *ulpq, struct sctp_chunk *chunk,
 	event = sctp_ulpq_reasm(ulpq, event);
 
 	/* Do ordering if needed.  */
+<<<<<<< HEAD
 	if ((event) && (event->msg_flags & MSG_EOR)){
+=======
+	if ((event) && (event->msg_flags & MSG_EOR)) {
+>>>>>>> v3.18
 		/* Create a temporary list to collect chunks on.  */
 		skb_queue_head_init(&temp);
 		__skb_queue_tail(&temp, sctp_event2skb(event));
@@ -211,6 +237,12 @@ int sctp_ulpq_tail_event(struct sctp_ulpq *ulpq, struct sctp_ulpevent *event)
 	if (sock_flag(sk, SOCK_DEAD) || (sk->sk_shutdown & RCV_SHUTDOWN))
 		goto out_free;
 
+<<<<<<< HEAD
+=======
+	if (!sctp_ulpevent_is_notification(event))
+		sk_mark_napi_id(sk, skb);
+
+>>>>>>> v3.18
 	/* Check if the user wishes to receive this event.  */
 	if (!sctp_ulpevent_is_enabled(event, &sctp_sk(sk)->subscribe))
 		goto out_free;
@@ -266,7 +298,11 @@ int sctp_ulpq_tail_event(struct sctp_ulpq *ulpq, struct sctp_ulpevent *event)
 		sctp_ulpq_clear_pd(ulpq);
 
 	if (queue == &sk->sk_receive_queue)
+<<<<<<< HEAD
 		sk->sk_data_ready(sk, 0);
+=======
+		sk->sk_data_ready(sk);
+>>>>>>> v3.18
 	return 1;
 
 out_free:
@@ -343,7 +379,12 @@ static struct sctp_ulpevent *sctp_make_reassembled_event(struct net *net,
 		pos = f_frag->next;
 
 	/* Get the last skb in the f_frag's frag_list if present. */
+<<<<<<< HEAD
 	for (last = list; list; last = list, list = list->next);
+=======
+	for (last = list; list; last = list, list = list->next)
+		;
+>>>>>>> v3.18
 
 	/* Add the list of remaining fragments to the first fragments
 	 * frag_list.
@@ -733,7 +774,11 @@ static void sctp_ulpq_reasm_drain(struct sctp_ulpq *ulpq)
 
 	while ((event = sctp_ulpq_retrieve_reassembled(ulpq)) != NULL) {
 		/* Do ordering if needed.  */
+<<<<<<< HEAD
 		if ((event) && (event->msg_flags & MSG_EOR)){
+=======
+		if ((event) && (event->msg_flags & MSG_EOR)) {
+>>>>>>> v3.18
 			skb_queue_head_init(&temp);
 			__skb_queue_tail(&temp, sctp_event2skb(event));
 
@@ -1141,5 +1186,9 @@ void sctp_ulpq_abort_pd(struct sctp_ulpq *ulpq, gfp_t gfp)
 
 	/* If there is data waiting, send it up the socket now. */
 	if (sctp_ulpq_clear_pd(ulpq) || ev)
+<<<<<<< HEAD
 		sk->sk_data_ready(sk, 0);
+=======
+		sk->sk_data_ready(sk);
+>>>>>>> v3.18
 }

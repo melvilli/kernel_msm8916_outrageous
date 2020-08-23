@@ -19,8 +19,13 @@
 #include <linux/vmw_vmci_defs.h>
 #include <linux/vmw_vmci_api.h>
 
+<<<<<<< HEAD
 #include "vsock_addr.h"
 #include "af_vsock.h"
+=======
+#include <net/vsock_addr.h>
+#include <net/af_vsock.h>
+>>>>>>> v3.18
 
 /* If the packet format changes in a release then this should change too. */
 #define VMCI_TRANSPORT_PACKET_VERSION 1

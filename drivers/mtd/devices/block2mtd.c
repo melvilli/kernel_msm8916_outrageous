@@ -6,6 +6,12 @@
  *
  * Licence: GPL
  */
+<<<<<<< HEAD
+=======
+
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/fs.h>
 #include <linux/blkdev.h>
@@ -17,10 +23,14 @@
 #include <linux/mutex.h>
 #include <linux/mount.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
 
 #define ERROR(fmt, args...) printk(KERN_ERR "block2mtd: " fmt "\n" , ## args)
 #define INFO(fmt, args...) printk(KERN_INFO "block2mtd: " fmt "\n" , ## args)
 
+=======
+#include <linux/major.h>
+>>>>>>> v3.18
 
 /* Info for the block device */
 struct block2mtd_dev {
@@ -84,7 +94,11 @@ static int block2mtd_erase(struct mtd_info *mtd, struct erase_info *instr)
 	err = _block2mtd_erase(dev, from, len);
 	mutex_unlock(&dev->write_mutex);
 	if (err) {
+<<<<<<< HEAD
 		ERROR("erase failed err = %d", err);
+=======
+		pr_err("erase failed err = %d\n", err);
+>>>>>>> v3.18
 		instr->state = MTD_ERASE_FAILED;
 	} else
 		instr->state = MTD_ERASE_DONE;
@@ -209,7 +223,10 @@ static void block2mtd_free_device(struct block2mtd_dev *dev)
 }
 
 
+<<<<<<< HEAD
 /* FIXME: ensure that mtd->size % erase_size == 0 */
+=======
+>>>>>>> v3.18
 static struct block2mtd_dev *add_device(char *devname, int erase_size)
 {
 	const fmode_t mode = FMODE_READ | FMODE_WRITE | FMODE_EXCL;
@@ -239,14 +256,29 @@ static struct block2mtd_dev *add_device(char *devname, int erase_size)
 #endif
 
 	if (IS_ERR(bdev)) {
+<<<<<<< HEAD
 		ERROR("error: cannot open device %s", devname);
 		goto devinit_err;
+=======
+		pr_err("error: cannot open device %s\n", devname);
+		goto err_free_block2mtd;
+>>>>>>> v3.18
 	}
 	dev->blkdev = bdev;
 
 	if (MAJOR(bdev->bd_dev) == MTD_BLOCK_MAJOR) {
+<<<<<<< HEAD
 		ERROR("attempting to use an MTD device as a block device");
 		goto devinit_err;
+=======
+		pr_err("attempting to use an MTD device as a block device\n");
+		goto err_free_block2mtd;
+	}
+
+	if ((long)dev->blkdev->bd_inode->i_size % erase_size) {
+		pr_err("erasesize must be a divisor of device size\n");
+		goto err_free_block2mtd;
+>>>>>>> v3.18
 	}
 
 	mutex_init(&dev->write_mutex);
@@ -255,7 +287,11 @@ static struct block2mtd_dev *add_device(char *devname, int erase_size)
 	/* make the name contain the block device in */
 	name = kasprintf(GFP_KERNEL, "block2mtd: %s", devname);
 	if (!name)
+<<<<<<< HEAD
 		goto devinit_err;
+=======
+		goto err_destroy_mutex;
+>>>>>>> v3.18
 
 	dev->mtd.name = name;
 
@@ -274,6 +310,7 @@ static struct block2mtd_dev *add_device(char *devname, int erase_size)
 
 	if (mtd_device_register(&dev->mtd, NULL, 0)) {
 		/* Device didn't get added, so free the entry */
+<<<<<<< HEAD
 		goto devinit_err;
 	}
 	list_add(&dev->list, &blkmtd_device_list);
@@ -283,6 +320,20 @@ static struct block2mtd_dev *add_device(char *devname, int erase_size)
 	return dev;
 
 devinit_err:
+=======
+		goto err_destroy_mutex;
+	}
+	list_add(&dev->list, &blkmtd_device_list);
+	pr_info("mtd%d: [%s] erase_size = %dKiB [%d]\n",
+		dev->mtd.index,
+		dev->mtd.name + strlen("block2mtd: "),
+		dev->mtd.erasesize >> 10, dev->mtd.erasesize);
+	return dev;
+
+err_destroy_mutex:
+	mutex_destroy(&dev->write_mutex);
+err_free_block2mtd:
+>>>>>>> v3.18
 	block2mtd_free_device(dev);
 	return NULL;
 }
@@ -339,17 +390,23 @@ static inline void kill_final_newline(char *str)
 }
 
 
+<<<<<<< HEAD
 #define parse_err(fmt, args...) do {	\
 	ERROR(fmt, ## args);		\
 	return 0;			\
 } while (0)
 
+=======
+>>>>>>> v3.18
 #ifndef MODULE
 static int block2mtd_init_called = 0;
 static char block2mtd_paramline[80 + 12]; /* 80 for device, 12 for erase size */
 #endif
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 static int block2mtd_setup2(const char *val)
 {
 	char buf[80 + 12]; /* 80 for device, 12 for erase size */
@@ -359,8 +416,15 @@ static int block2mtd_setup2(const char *val)
 	size_t erase_size = PAGE_SIZE;
 	int i, ret;
 
+<<<<<<< HEAD
 	if (strnlen(val, sizeof(buf)) >= sizeof(buf))
 		parse_err("parameter too long");
+=======
+	if (strnlen(val, sizeof(buf)) >= sizeof(buf)) {
+		pr_err("parameter too long\n");
+		return 0;
+	}
+>>>>>>> v3.18
 
 	strcpy(str, val);
 	kill_final_newline(str);
@@ -368,6 +432,7 @@ static int block2mtd_setup2(const char *val)
 	for (i = 0; i < 2; i++)
 		token[i] = strsep(&str, ",");
 
+<<<<<<< HEAD
 	if (str)
 		parse_err("too many arguments");
 
@@ -377,11 +442,33 @@ static int block2mtd_setup2(const char *val)
 	name = token[0];
 	if (strlen(name) + 1 > 80)
 		parse_err("device name too long");
+=======
+	if (str) {
+		pr_err("too many arguments\n");
+		return 0;
+	}
+
+	if (!token[0]) {
+		pr_err("no argument\n");
+		return 0;
+	}
+
+	name = token[0];
+	if (strlen(name) + 1 > 80) {
+		pr_err("device name too long\n");
+		return 0;
+	}
+>>>>>>> v3.18
 
 	if (token[1]) {
 		ret = parse_num(&erase_size, token[1]);
 		if (ret) {
+<<<<<<< HEAD
 			parse_err("illegal erase size");
+=======
+			pr_err("illegal erase size\n");
+			return 0;
+>>>>>>> v3.18
 		}
 	}
 
@@ -444,8 +531,15 @@ static void block2mtd_exit(void)
 		struct block2mtd_dev *dev = list_entry(pos, typeof(*dev), list);
 		block2mtd_sync(&dev->mtd);
 		mtd_device_unregister(&dev->mtd);
+<<<<<<< HEAD
 		INFO("mtd%d: [%s] removed", dev->mtd.index,
 				dev->mtd.name + strlen("block2mtd: "));
+=======
+		mutex_destroy(&dev->write_mutex);
+		pr_info("mtd%d: [%s] removed\n",
+			dev->mtd.index,
+			dev->mtd.name + strlen("block2mtd: "));
+>>>>>>> v3.18
 		list_del(&dev->list);
 		block2mtd_free_device(dev);
 	}

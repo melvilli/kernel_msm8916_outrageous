@@ -3410,7 +3410,11 @@ static struct spear_function *spear320_functions[] = {
 	&i2c2_function,
 };
 
+<<<<<<< HEAD
 static struct of_device_id spear320_pinctrl_of_match[] = {
+=======
+static const struct of_device_id spear320_pinctrl_of_match[] = {
+>>>>>>> v3.18
 	{
 		.compatible = "st,spear320-pinmux",
 	},

@@ -1,12 +1,19 @@
 /*
  * Head of the kernel - alter with care
  *
+<<<<<<< HEAD
  * Copyright (C) 2000, 2001 Axis Communications AB
  *
  * Authors:	Bjorn Wesen (bjornw@axis.com)
  * 
  */
 	
+=======
+ * Copyright (C) 2000, 2001, 2010 Axis Communications AB
+ *
+ */
+
+>>>>>>> v3.18
 #define ASSEMBLER_MACROS_ONLY
 /* The IO_* macros use the ## token concatenation operator, so
    -traditional must not be used when assembling this file.  */
@@ -18,15 +25,25 @@
 
 #define START_ETHERNET_CLOCK IO_STATE(R_NETWORK_GEN_CONFIG, enable, on) |\
                              IO_STATE(R_NETWORK_GEN_CONFIG, phy, mii_clk)
+<<<<<<< HEAD
 				
 	;; exported symbols
 		
+=======
+
+	;; exported symbols
+
+>>>>>>> v3.18
 	.globl	etrax_irv
 	.globl	romfs_start
 	.globl	romfs_length
 	.globl	romfs_in_flash
 	.globl  swapper_pg_dir
+<<<<<<< HEAD
 					
+=======
+
+>>>>>>> v3.18
 	.text
 
 	;; This is the entry point of the kernel. We are in supervisor mode.
@@ -35,10 +52,17 @@
 	;; put a nop (2 bytes) here first so we dont accidentally skip the di
 	;;
 	;; NOTICE! The registers r8 and r9 are used as parameters carrying
+<<<<<<< HEAD
 	;; information from the decompressor (if the kernel was compressed). 
 	;; They should not be used in the code below until read.
 	
 	nop	
+=======
+	;; information from the decompressor (if the kernel was compressed).
+	;; They should not be used in the code below until read.
+
+	nop
+>>>>>>> v3.18
 	di
 
 	;; First setup the kseg_c mapping from where the kernel is linked
@@ -58,19 +82,32 @@
 
 #ifdef CONFIG_CRIS_LOW_MAP
 	; kseg mappings, temporary map of 0xc0->0x40
+<<<<<<< HEAD
  	move.d	  IO_FIELD (R_MMU_KBASE_HI, base_c, 4)		\
+=======
+	move.d	  IO_FIELD (R_MMU_KBASE_HI, base_c, 4)		\
+>>>>>>> v3.18
 		| IO_FIELD (R_MMU_KBASE_HI, base_b, 0xb)	\
 		| IO_FIELD (R_MMU_KBASE_HI, base_9, 9)		\
 		| IO_FIELD (R_MMU_KBASE_HI, base_8, 8), $r0
 	move.d	$r0, [R_MMU_KBASE_HI]
 
+<<<<<<< HEAD
 	; temporary map of 0x40->0x40 and 0x60->0x40 
  	move.d	  IO_FIELD (R_MMU_KBASE_LO, base_6, 4)		\
+=======
+	; temporary map of 0x40->0x40 and 0x60->0x40
+	move.d	  IO_FIELD (R_MMU_KBASE_LO, base_6, 4)		\
+>>>>>>> v3.18
 		| IO_FIELD (R_MMU_KBASE_LO, base_4, 4), $r0
 	move.d	$r0, [R_MMU_KBASE_LO]
 
 	; mmu enable, segs e,c,b,a,6,5,4,0 segment mapped
+<<<<<<< HEAD
  	move.d	  IO_STATE (R_MMU_CONFIG, mmu_enable, enable)	\
+=======
+	move.d	  IO_STATE (R_MMU_CONFIG, mmu_enable, enable)	\
+>>>>>>> v3.18
 		| IO_STATE (R_MMU_CONFIG, inv_excp, enable)	\
 		| IO_STATE (R_MMU_CONFIG, acc_excp, enable)	\
 		| IO_STATE (R_MMU_CONFIG, we_excp, enable)	\
@@ -93,17 +130,29 @@
 	move.d	$r0, [R_MMU_CONFIG]
 #else
 	; kseg mappings
+<<<<<<< HEAD
  	move.d	  IO_FIELD (R_MMU_KBASE_HI, base_e, 8)		\
+=======
+	move.d	  IO_FIELD (R_MMU_KBASE_HI, base_e, 8)		\
+>>>>>>> v3.18
 		| IO_FIELD (R_MMU_KBASE_HI, base_c, 4)		\
 		| IO_FIELD (R_MMU_KBASE_HI, base_b, 0xb), $r0
 	move.d	$r0, [R_MMU_KBASE_HI]
 
+<<<<<<< HEAD
 	; temporary map of 0x40->0x40 and 0x00->0x00 
+=======
+	; temporary map of 0x40->0x40 and 0x00->0x00
+>>>>>>> v3.18
 	move.d	  IO_FIELD (R_MMU_KBASE_LO, base_4, 4), $r0
 	move.d	$r0, [R_MMU_KBASE_LO]
 
 	; mmu enable, segs f,e,c,b,4,0 segment mapped
+<<<<<<< HEAD
  	move.d	  IO_STATE (R_MMU_CONFIG, mmu_enable, enable)	\
+=======
+	move.d	  IO_STATE (R_MMU_CONFIG, mmu_enable, enable)	\
+>>>>>>> v3.18
 		| IO_STATE (R_MMU_CONFIG, inv_excp, enable)	\
 		| IO_STATE (R_MMU_CONFIG, acc_excp, enable)	\
 		| IO_STATE (R_MMU_CONFIG, we_excp, enable)	\
@@ -141,12 +190,20 @@
 	;;
 	;; In both cases, we start in un-cached mode, and need to jump into a
 	;; cached PC after we're done fiddling around with the segments.
+<<<<<<< HEAD
 	;; 
+=======
+	;;
+>>>>>>> v3.18
 	;; arch/etrax100/etrax100.ld sets some symbols that define the start
 	;; and end of each segment.
 
 	;; Check if we start from DRAM or FLASH by testing PC
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 	move.d	$pc,$r0
 	and.d	0x7fffffff,$r0	; get rid of the non-cache bit
 	cmp.d	0x10000,$r0	; arbitrary... just something above this code
@@ -163,30 +220,47 @@ _inflash0:
 	;; after init.
 	.section ".init.text", "ax"
 _inflash:
+<<<<<<< HEAD
 #ifdef CONFIG_ETRAX_ETHERNET	
+=======
+#ifdef CONFIG_ETRAX_ETHERNET
+>>>>>>> v3.18
 	;; Start MII clock to make sure it is running when tranceiver is reset
 	move.d START_ETHERNET_CLOCK, $r0
 	move.d $r0, [R_NETWORK_GEN_CONFIG]
 #endif
 
 	;; Set up waitstates etc according to kernel configuration.
+<<<<<<< HEAD
 #ifndef CONFIG_SVINTO_SIM
+=======
+>>>>>>> v3.18
 	move.d   CONFIG_ETRAX_DEF_R_WAITSTATES, $r0
 	move.d   $r0, [R_WAITSTATES]
 
 	move.d   CONFIG_ETRAX_DEF_R_BUS_CONFIG, $r0
 	move.d   $r0, [R_BUS_CONFIG]
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 
 	;; We need to initialze DRAM registers before we start using the DRAM
 
 	cmp.d	RAM_INIT_MAGIC, $r8	; Already initialized?
 	beq	_dram_init_finished
 	nop
+<<<<<<< HEAD
 	
 #include "../lib/dram_init.S"
 
 _dram_init_finished:		
+=======
+
+#include "../lib/dram_init.S"
+
+_dram_init_finished:
+>>>>>>> v3.18
 	;; Copy text+data to DRAM
 	;; This is fragile - the calculation of r4 as the image size depends
 	;; on that the labels below actually are the first and last positions
@@ -198,7 +272,11 @@ _dram_init_finished:
 	;; between the physical start of the flash and the flash-image start,
 	;; and when run with compression, the kernel is actually unpacked to
 	;; DRAM and we never get here in the first place :))
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 	moveq	0, $r0			; source
 	move.d	text_start, $r1		; destination
 	move.d	__vmlinux_end, $r2	; end destination
@@ -229,10 +307,17 @@ _dram_init_finished:
 	add.d   0xf0000000, $r4	; add flash start in virtual memory (cached)
 #endif
 	move.d	$r4, [romfs_start]
+<<<<<<< HEAD
 1:	
 	moveq	1, $r0
 	move.d	$r0, [romfs_in_flash]
 		
+=======
+1:
+	moveq	1, $r0
+	move.d	$r0, [romfs_in_flash]
+
+>>>>>>> v3.18
 	jump	_start_it	; enter code, cached this time
 
 _inram:
@@ -241,7 +326,11 @@ _inram:
 
 	moveq	0, $r0
 	move.d	$r0, [romfs_length] ; default if there is no cramfs
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 	;; The kernel could have been unpacked to DRAM by the loader, but
 	;; the cramfs image could still be in the Flash directly after the
 	;; compressed kernel image. The loader passes the address of the
@@ -251,7 +340,11 @@ _inram:
 	;; (Notice that if this is not booted from the loader, r9 will be
 	;;  garbage but we do sanity checks on it, the chance that it points
 	;;  to a cramfs magic is small.. )
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 	cmp.d	0x0ffffff8, $r9
 	bhs	_no_romfs_in_flash	; r9 points outside the flash area
 	nop
@@ -274,7 +367,11 @@ _inram:
 	jump	_start_it	; enter code, cached this time
 
 _no_romfs_in_flash:
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 	;; Check if there is a cramfs (magic value).
 	;; Notice that we check for cramfs magic value - which is
 	;; the "rom fs" we'll possibly use in 2.4 if not JFFS (which does
@@ -286,8 +383,13 @@ _no_romfs_in_flash:
 	bne	2f
 	nop
 
+<<<<<<< HEAD
 	;; Ok. What is its size ? 
 	
+=======
+	;; Ok. What is its size ?
+
+>>>>>>> v3.18
 	move.d	[$r0 + 4], $r2	; cramfs_super.size (again, no need to swapwb)
 
 	;; We want to copy it to the end of the BSS
@@ -303,7 +405,11 @@ _no_romfs_in_flash:
 
 	add.d	$r2, $r0
 	add.d	$r2, $r1
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> v3.18
 	;; Go ahead. Make my loop.
 
 	lsrq	1, $r2		; size is in bytes, we copy words
@@ -314,14 +420,22 @@ _no_romfs_in_flash:
 	bne	1b
 	nop
 
+<<<<<<< HEAD
 2:		
+=======
+2:
+>>>>>>> v3.18
 	;; Dont worry that the BSS is tainted. It will be cleared later.
 
 	moveq	0, $r0
 	move.d	$r0, [romfs_in_flash]
 
 	jump	_start_it	; better skip the additional cramfs check below
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 _start_it:
 
 	;; Check if kernel command line is supplied
@@ -348,7 +462,11 @@ no_command_line:
 	move.d	ibr_start,$r0	; this symbol is set by the linker script 
 	move	$r0,$ibr
 	move.d	$r0,[etrax_irv]	; set the interrupt base register and pointer
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 	;; Clear BSS region, from _bss_start to _end
 
 	move.d	__bss_start, $r0
@@ -357,7 +475,11 @@ no_command_line:
 	cmp.d	$r1, $r0
 	blo	1b
 	nop
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 #ifdef CONFIG_BLK_DEV_ETRAXIDE
 	;; disable ATA before enabling it in genconfig below
 	moveq	0,$r0
@@ -380,7 +502,11 @@ no_command_line:
 
 #ifdef CONFIG_JULIETTE
 	;; configure external DMA channel 0 before enabling it in genconfig
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 	moveq	0,$r0
 	move.d	$r0,[R_EXT_DMA_0_ADDR]
 	; cnt enable, word size, output, stop, size 0
@@ -395,7 +521,11 @@ no_command_line:
 	move.d	$r0,[R_EXT_DMA_0_CMD]
 
 	;; reset dma4 and wait for completion
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 	moveq	IO_STATE (R_DMA_CH4_CMD, cmd, reset),$r0
 	move.b	$r0,[R_DMA_CH4_CMD]
 1:	move.b	[R_DMA_CH4_CMD],$r0
@@ -405,7 +535,11 @@ no_command_line:
 	nop
 
 	;; reset dma5 and wait for completion
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 	moveq	IO_STATE (R_DMA_CH5_CMD, cmd, reset),$r0
 	move.b	$r0,[R_DMA_CH5_CMD]
 1:	move.b	[R_DMA_CH5_CMD],$r0
@@ -413,8 +547,13 @@ no_command_line:
 	cmp.b	IO_STATE (R_DMA_CH5_CMD, cmd, reset),$r0
 	beq	1b
 	nop
+<<<<<<< HEAD
 #endif	
 			
+=======
+#endif
+
+>>>>>>> v3.18
 	;; Etrax product HW genconfig setup
 
 	moveq	0,$r0
@@ -468,7 +607,10 @@ no_command_line:
 
 	move.d	$r0,[genconfig_shadow] ; init a shadow register of R_GEN_CONFIG
 
+<<<<<<< HEAD
 #ifndef CONFIG_SVINTO_SIM
+=======
+>>>>>>> v3.18
 	move.d	$r0,[R_GEN_CONFIG]
 
 #if 0
@@ -486,7 +628,11 @@ no_command_line:
 	beq	1b
 	nop
 #endif
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 	moveq	IO_STATE (R_DMA_CH8_CMD, cmd, reset),$r0
 	move.b	$r0,[R_DMA_CH8_CMD]	; reset (ser1 dma out)
 	move.b	$r0,[R_DMA_CH9_CMD]	; reset (ser1 dma in)
@@ -503,7 +649,11 @@ no_command_line:
 
 	;; setup port PA and PB default initial directions and data
 	;; including their shadow registers
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> v3.18
 	move.b	CONFIG_ETRAX_DEF_R_PORT_PA_DIR,$r0
 #if defined(CONFIG_BLUETOOTH) && defined(CONFIG_BLUETOOTH_RESET_PA7)
 	or.b	IO_STATE (R_PORT_PA_DIR, dir7, output),$r0
@@ -520,7 +670,11 @@ no_command_line:
 #endif
 	move.b	$r0,[port_pa_data_shadow]
 	move.b	$r0,[R_PORT_PA_DATA]
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 	move.b	CONFIG_ETRAX_DEF_R_PORT_PB_CONFIG,$r0
 	move.b	$r0,[port_pb_config_shadow]
 	move.b	$r0,[R_PORT_PB_CONFIG]
@@ -562,6 +716,7 @@ no_command_line:
 #endif
 	move.d	$r0,[port_g_data_shadow]
 	move.d	$r0,[R_PORT_G_DATA]
+<<<<<<< HEAD
 	
 	;; setup the serial port 0 at 115200 baud for debug purposes
 	
@@ -569,6 +724,15 @@ no_command_line:
 		| IO_STATE (R_SERIAL0_XOFF, auto_xoff, disable)		\
 		| IO_FIELD (R_SERIAL0_XOFF, xoff_char, 0),$r0
 	move.d	$r0,[R_SERIAL0_XOFF] 
+=======
+
+	;; setup the serial port 0 at 115200 baud for debug purposes
+
+	moveq	  IO_STATE (R_SERIAL0_XOFF, tx_stop, enable)		\
+		| IO_STATE (R_SERIAL0_XOFF, auto_xoff, disable)		\
+		| IO_FIELD (R_SERIAL0_XOFF, xoff_char, 0),$r0
+	move.d	$r0,[R_SERIAL0_XOFF]
+>>>>>>> v3.18
 
 	; 115.2kbaud for both transmit and receive
 	move.b	  IO_STATE (R_SERIAL0_BAUD, tr_baud, c115k2Hz)		\
@@ -584,8 +748,13 @@ no_command_line:
 		| IO_STATE (R_SERIAL0_REC_CTRL, rec_par, even)		\
 		| IO_STATE (R_SERIAL0_REC_CTRL, rec_par_en, disable)	\
 		| IO_STATE (R_SERIAL0_REC_CTRL, rec_bitnr, rec_8bit),$r0
+<<<<<<< HEAD
 	move.b	$r0,[R_SERIAL0_REC_CTRL] 
 	
+=======
+	move.b	$r0,[R_SERIAL0_REC_CTRL]
+
+>>>>>>> v3.18
 	; Set up and enable the serial0 transmitter.
 	move.b	  IO_FIELD (R_SERIAL0_TR_CTRL, txd, 0)			\
 		| IO_STATE (R_SERIAL0_TR_CTRL, tr_enable, enable)	\
@@ -598,11 +767,19 @@ no_command_line:
 	move.b	$r0,[R_SERIAL0_TR_CTRL]
 
 	;; setup the serial port 1 at 115200 baud for debug purposes
+<<<<<<< HEAD
 	
 	moveq	  IO_STATE (R_SERIAL1_XOFF, tx_stop, enable)		\
 		| IO_STATE (R_SERIAL1_XOFF, auto_xoff, disable)		\
 		| IO_FIELD (R_SERIAL1_XOFF, xoff_char, 0),$r0
 	move.d	$r0,[R_SERIAL1_XOFF] 
+=======
+
+	moveq	  IO_STATE (R_SERIAL1_XOFF, tx_stop, enable)		\
+		| IO_STATE (R_SERIAL1_XOFF, auto_xoff, disable)		\
+		| IO_FIELD (R_SERIAL1_XOFF, xoff_char, 0),$r0
+	move.d	$r0,[R_SERIAL1_XOFF]
+>>>>>>> v3.18
 
 	; 115.2kbaud for both transmit and receive
 	move.b	  IO_STATE (R_SERIAL1_BAUD, tr_baud, c115k2Hz)		\
@@ -618,8 +795,13 @@ no_command_line:
 		| IO_STATE (R_SERIAL1_REC_CTRL, rec_par, even)		\
 		| IO_STATE (R_SERIAL1_REC_CTRL, rec_par_en, disable)	\
 		| IO_STATE (R_SERIAL1_REC_CTRL, rec_bitnr, rec_8bit),$r0
+<<<<<<< HEAD
 	move.b	$r0,[R_SERIAL1_REC_CTRL] 
 	
+=======
+	move.b	$r0,[R_SERIAL1_REC_CTRL]
+
+>>>>>>> v3.18
 	; Set up and enable the serial1 transmitter.
 	move.b	  IO_FIELD (R_SERIAL1_TR_CTRL, txd, 0)			\
 		| IO_STATE (R_SERIAL1_TR_CTRL, tr_enable, enable)	\
@@ -666,6 +848,7 @@ no_command_line:
 		| IO_STATE (R_SERIAL2_TR_CTRL, tr_bitnr, tr_8bit),$r0
 	move.b	$r0,[R_SERIAL2_TR_CTRL]
 #endif
+<<<<<<< HEAD
 	
 #ifdef CONFIG_ETRAX_SERIAL_PORT3	
 	;; setup the serial port 3 at 115200 baud for debug purposes
@@ -674,6 +857,16 @@ no_command_line:
 		| IO_STATE (R_SERIAL3_XOFF, auto_xoff, disable)		\
 		| IO_FIELD (R_SERIAL3_XOFF, xoff_char, 0),$r0
 	move.d	$r0,[R_SERIAL3_XOFF] 
+=======
+
+#ifdef CONFIG_ETRAX_SERIAL_PORT3
+	;; setup the serial port 3 at 115200 baud for debug purposes
+
+	moveq	  IO_STATE (R_SERIAL3_XOFF, tx_stop, enable)		\
+		| IO_STATE (R_SERIAL3_XOFF, auto_xoff, disable)		\
+		| IO_FIELD (R_SERIAL3_XOFF, xoff_char, 0),$r0
+	move.d	$r0,[R_SERIAL3_XOFF]
+>>>>>>> v3.18
 
 	; 115.2kbaud for both transmit and receive
 	move.b	  IO_STATE (R_SERIAL3_BAUD, tr_baud, c115k2Hz)		\
@@ -689,8 +882,13 @@ no_command_line:
 		| IO_STATE (R_SERIAL3_REC_CTRL, rec_par, even)		\
 		| IO_STATE (R_SERIAL3_REC_CTRL, rec_par_en, disable)	\
 		| IO_STATE (R_SERIAL3_REC_CTRL, rec_bitnr, rec_8bit),$r0
+<<<<<<< HEAD
 	move.b	$r0,[R_SERIAL3_REC_CTRL] 
 	
+=======
+	move.b	$r0,[R_SERIAL3_REC_CTRL]
+
+>>>>>>> v3.18
 	; Set up and enable the serial3 transmitter.
 	move.b	  IO_FIELD (R_SERIAL3_TR_CTRL, txd, 0)			\
 		| IO_STATE (R_SERIAL3_TR_CTRL, tr_enable, enable)	\
@@ -702,6 +900,7 @@ no_command_line:
 		| IO_STATE (R_SERIAL3_TR_CTRL, tr_bitnr, tr_8bit),$r0
 	move.b	$r0,[R_SERIAL3_TR_CTRL]
 #endif
+<<<<<<< HEAD
 	
 #endif /* CONFIG_SVINTO_SIM */
 
@@ -709,6 +908,13 @@ no_command_line:
 		
 	.data
 etrax_irv:	
+=======
+
+	jump	start_kernel	; jump into the C-function start_kernel in init/main.c
+
+	.data
+etrax_irv:
+>>>>>>> v3.18
 	.dword	0
 romfs_start:
 	.dword	0
@@ -716,13 +922,21 @@ romfs_length:
 	.dword	0
 romfs_in_flash:
 	.dword	0
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 	;; put some special pages at the beginning of the kernel aligned
 	;; to page boundaries - the kernel cannot start until after this
 
 #ifdef CONFIG_CRIS_LOW_MAP
 swapper_pg_dir = 0x60002000
+<<<<<<< HEAD
 #else	
+=======
+#else
+>>>>>>> v3.18
 swapper_pg_dir = 0xc0002000
 #endif
 

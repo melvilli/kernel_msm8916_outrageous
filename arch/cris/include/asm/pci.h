@@ -11,7 +11,10 @@
 
 #define pcibios_assign_all_busses(void) 1
 
+<<<<<<< HEAD
 extern unsigned long pci_mem_start;
+=======
+>>>>>>> v3.18
 #define PCIBIOS_MIN_IO		0x1000
 #define PCIBIOS_MIN_MEM		0x10000000
 
@@ -21,7 +24,10 @@ void pcibios_config_init(void);
 struct pci_bus * pcibios_scan_root(int bus);
 
 void pcibios_set_master(struct pci_dev *dev);
+<<<<<<< HEAD
 void pcibios_penalize_isa_irq(int irq);
+=======
+>>>>>>> v3.18
 struct irq_routing_table *pcibios_get_irq_routing_table(void);
 int pcibios_set_irq_routing(struct pci_dev *dev, int pin, int irq);
 

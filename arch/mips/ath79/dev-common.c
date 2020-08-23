@@ -20,7 +20,10 @@
 
 #include <asm/mach-ath79/ath79.h>
 #include <asm/mach-ath79/ar71xx_regs.h>
+<<<<<<< HEAD
 #include <asm/mach-ath79/ar933x_uart_platform.h>
+=======
+>>>>>>> v3.18
 #include "common.h"
 #include "dev-common.h"
 
@@ -68,34 +71,52 @@ static struct resource ar933x_uart_resources[] = {
 	},
 };
 
+<<<<<<< HEAD
 static struct ar933x_uart_platform_data ar933x_uart_data;
+=======
+>>>>>>> v3.18
 static struct platform_device ar933x_uart_device = {
 	.name		= "ar933x-uart",
 	.id		= -1,
 	.resource	= ar933x_uart_resources,
 	.num_resources	= ARRAY_SIZE(ar933x_uart_resources),
+<<<<<<< HEAD
 	.dev = {
 		.platform_data	= &ar933x_uart_data,
 	},
+=======
+>>>>>>> v3.18
 };
 
 void __init ath79_register_uart(void)
 {
+<<<<<<< HEAD
 	struct clk *clk;
 
 	clk = clk_get(NULL, "uart");
 	if (IS_ERR(clk))
 		panic("unable to get UART clock, err=%ld", PTR_ERR(clk));
+=======
+	unsigned long uart_clk_rate;
+
+	uart_clk_rate = ath79_get_sys_clk_rate("uart");
+>>>>>>> v3.18
 
 	if (soc_is_ar71xx() ||
 	    soc_is_ar724x() ||
 	    soc_is_ar913x() ||
 	    soc_is_ar934x() ||
 	    soc_is_qca955x()) {
+<<<<<<< HEAD
 		ath79_uart_data[0].uartclk = clk_get_rate(clk);
 		platform_device_register(&ath79_uart_device);
 	} else if (soc_is_ar933x()) {
 		ar933x_uart_data.uartclk = clk_get_rate(clk);
+=======
+		ath79_uart_data[0].uartclk = uart_clk_rate;
+		platform_device_register(&ath79_uart_device);
+	} else if (soc_is_ar933x()) {
+>>>>>>> v3.18
 		platform_device_register(&ar933x_uart_device);
 	} else {
 		BUG();

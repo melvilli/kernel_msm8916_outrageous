@@ -54,8 +54,14 @@ struct vfio_pci_device {
 	bool			extended_caps;
 	bool			bardirty;
 	bool			has_vga;
+<<<<<<< HEAD
 	struct pci_saved_state	*pci_saved_state;
 	atomic_t		refcnt;
+=======
+	bool			needs_reset;
+	struct pci_saved_state	*pci_saved_state;
+	int			refcnt;
+>>>>>>> v3.18
 	struct eventfd_ctx	*err_trigger;
 };
 

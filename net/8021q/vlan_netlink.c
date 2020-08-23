@@ -56,8 +56,13 @@ static int vlan_validate(struct nlattr *tb[], struct nlattr *data[])
 
 	if (data[IFLA_VLAN_PROTOCOL]) {
 		switch (nla_get_be16(data[IFLA_VLAN_PROTOCOL])) {
+<<<<<<< HEAD
 		case __constant_htons(ETH_P_8021Q):
 		case __constant_htons(ETH_P_8021AD):
+=======
+		case htons(ETH_P_8021Q):
+		case htons(ETH_P_8021AD):
+>>>>>>> v3.18
 			break;
 		default:
 			return -EPROTONOSUPPORT;

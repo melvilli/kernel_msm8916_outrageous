@@ -14,6 +14,10 @@
 #include <sound/jack.h>
 #include <sound/soc.h>
 #include <linux/gpio.h>
+<<<<<<< HEAD
+=======
+#include <linux/gpio/consumer.h>
+>>>>>>> v3.18
 #include <linux/interrupt.h>
 #include <linux/workqueue.h>
 #include <linux/delay.h>
@@ -42,7 +46,11 @@ int snd_soc_jack_new(struct snd_soc_codec *codec, const char *id, int type,
 	INIT_LIST_HEAD(&jack->jack_zones);
 	BLOCKING_INIT_NOTIFIER_HEAD(&jack->notifier);
 
+<<<<<<< HEAD
 	return snd_jack_new(codec->card->snd_card, id, type, &jack->jack);
+=======
+	return snd_jack_new(codec->component.card->snd_card, id, type, &jack->jack);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(snd_soc_jack_new);
 
@@ -65,6 +73,10 @@ void snd_soc_jack_report(struct snd_soc_jack *jack, int status, int mask)
 	struct snd_soc_codec *codec;
 	struct snd_soc_dapm_context *dapm;
 	struct snd_soc_jack_pin *pin;
+<<<<<<< HEAD
+=======
+	unsigned int sync = 0;
+>>>>>>> v3.18
 	int enable;
 
 	trace_snd_soc_jack_report(jack, mask, status);
@@ -92,12 +104,23 @@ void snd_soc_jack_report(struct snd_soc_jack *jack, int status, int mask)
 			snd_soc_dapm_enable_pin(dapm, pin->pin);
 		else
 			snd_soc_dapm_disable_pin(dapm, pin->pin);
+<<<<<<< HEAD
+=======
+
+		/* we need to sync for this case only */
+		sync = 1;
+>>>>>>> v3.18
 	}
 
 	/* Report before the DAPM sync to help users updating micbias status */
 	blocking_notifier_call_chain(&jack->notifier, jack->status, jack);
 
+<<<<<<< HEAD
 	snd_soc_dapm_sync(dapm);
+=======
+	if (sync)
+		snd_soc_dapm_sync(dapm);
+>>>>>>> v3.18
 
 	snd_jack_report(jack->jack, jack->status);
 
@@ -106,6 +129,7 @@ void snd_soc_jack_report(struct snd_soc_jack *jack, int status, int mask)
 EXPORT_SYMBOL_GPL(snd_soc_jack_report);
 
 /**
+<<<<<<< HEAD
  * snd_soc_jack_report_no_dapm - Report the current status for a jack
  *				 without DAPM sync
  * @jack:   the jack
@@ -123,6 +147,8 @@ void snd_soc_jack_report_no_dapm(struct snd_soc_jack *jack, int status,
 EXPORT_SYMBOL_GPL(snd_soc_jack_report_no_dapm);
 
 /**
+=======
+>>>>>>> v3.18
  * snd_soc_jack_add_zones - Associate voltage zones with jack
  *
  * @jack:  ASoC jack
@@ -200,8 +226,11 @@ int snd_soc_jack_add_pins(struct snd_soc_jack *jack, int count,
 		list_add(&(pins[i].list), &jack->pins);
 	}
 
+<<<<<<< HEAD
 	snd_soc_dapm_new_widgets(&jack->codec->card->dapm);
 
+=======
+>>>>>>> v3.18
 	/* Update to reflect the last reported status; canned jack
 	 * implementations are likely to set their state before the
 	 * card has an opportunity to associate pins.
@@ -254,7 +283,11 @@ static void snd_soc_jack_gpio_detect(struct snd_soc_jack_gpio *gpio)
 	int enable;
 	int report;
 
+<<<<<<< HEAD
 	enable = gpio_get_value_cansleep(gpio->gpio);
+=======
+	enable = gpiod_get_value_cansleep(gpio->desc);
+>>>>>>> v3.18
 	if (gpio->invert)
 		enable = !enable;
 
@@ -264,7 +297,11 @@ static void snd_soc_jack_gpio_detect(struct snd_soc_jack_gpio *gpio)
 		report = 0;
 
 	if (gpio->jack_status_check)
+<<<<<<< HEAD
 		report = gpio->jack_status_check();
+=======
+		report = gpio->jack_status_check(gpio->data);
+>>>>>>> v3.18
 
 	snd_soc_jack_report(jack, report, gpio->report);
 }
@@ -273,14 +310,22 @@ static void snd_soc_jack_gpio_detect(struct snd_soc_jack_gpio *gpio)
 static irqreturn_t gpio_handler(int irq, void *data)
 {
 	struct snd_soc_jack_gpio *gpio = data;
+<<<<<<< HEAD
 	struct device *dev = gpio->jack->codec->card->dev;
+=======
+	struct device *dev = gpio->jack->codec->component.card->dev;
+>>>>>>> v3.18
 
 	trace_snd_soc_jack_irq(gpio->name);
 
 	if (device_may_wakeup(dev))
 		pm_wakeup_event(dev, gpio->debounce_time + 50);
 
+<<<<<<< HEAD
 	schedule_delayed_work(&gpio->work,
+=======
+	queue_delayed_work(system_power_efficient_wq, &gpio->work,
+>>>>>>> v3.18
 			      msecs_to_jiffies(gpio->debounce_time));
 
 	return IRQ_HANDLED;
@@ -311,6 +356,7 @@ int snd_soc_jack_add_gpios(struct snd_soc_jack *jack, int count,
 	int i, ret;
 
 	for (i = 0; i < count; i++) {
+<<<<<<< HEAD
 		if (!gpio_is_valid(gpios[i].gpio)) {
 			dev_err(jack->codec->dev, "ASoC: Invalid gpio %d\n",
 				gpios[i].gpio);
@@ -320,22 +366,64 @@ int snd_soc_jack_add_gpios(struct snd_soc_jack *jack, int count,
 		if (!gpios[i].name) {
 			dev_err(jack->codec->dev, "ASoC: No name for gpio %d\n",
 				gpios[i].gpio);
+=======
+		if (!gpios[i].name) {
+			dev_err(jack->codec->dev,
+				"ASoC: No name for gpio at index %d\n", i);
+>>>>>>> v3.18
 			ret = -EINVAL;
 			goto undo;
 		}
 
+<<<<<<< HEAD
 		ret = gpio_request(gpios[i].gpio, gpios[i].name);
 		if (ret)
 			goto undo;
 
 		ret = gpio_direction_input(gpios[i].gpio);
+=======
+		if (gpios[i].gpiod_dev) {
+			/* GPIO descriptor */
+			gpios[i].desc = gpiod_get_index(gpios[i].gpiod_dev,
+							gpios[i].name,
+							gpios[i].idx);
+			if (IS_ERR(gpios[i].desc)) {
+				ret = PTR_ERR(gpios[i].desc);
+				dev_err(gpios[i].gpiod_dev,
+					"ASoC: Cannot get gpio at index %d: %d",
+					i, ret);
+				goto undo;
+			}
+		} else {
+			/* legacy GPIO number */
+			if (!gpio_is_valid(gpios[i].gpio)) {
+				dev_err(jack->codec->dev,
+					"ASoC: Invalid gpio %d\n",
+					gpios[i].gpio);
+				ret = -EINVAL;
+				goto undo;
+			}
+
+			ret = gpio_request(gpios[i].gpio, gpios[i].name);
+			if (ret)
+				goto undo;
+
+			gpios[i].desc = gpio_to_desc(gpios[i].gpio);
+		}
+
+		ret = gpiod_direction_input(gpios[i].desc);
+>>>>>>> v3.18
 		if (ret)
 			goto err;
 
 		INIT_DELAYED_WORK(&gpios[i].work, gpio_work);
 		gpios[i].jack = jack;
 
+<<<<<<< HEAD
 		ret = request_any_context_irq(gpio_to_irq(gpios[i].gpio),
+=======
+		ret = request_any_context_irq(gpiod_to_irq(gpios[i].desc),
+>>>>>>> v3.18
 					      gpio_handler,
 					      IRQF_TRIGGER_RISING |
 					      IRQF_TRIGGER_FALLING,
@@ -345,6 +433,7 @@ int snd_soc_jack_add_gpios(struct snd_soc_jack *jack, int count,
 			goto err;
 
 		if (gpios[i].wake) {
+<<<<<<< HEAD
 			ret = irq_set_irq_wake(gpio_to_irq(gpios[i].gpio), 1);
 			if (ret != 0)
 				dev_err(jack->codec->dev, "ASoC: "
@@ -357,6 +446,21 @@ int snd_soc_jack_add_gpios(struct snd_soc_jack *jack, int count,
 
 		/* Update initial jack status */
 		snd_soc_jack_gpio_detect(&gpios[i]);
+=======
+			ret = irq_set_irq_wake(gpiod_to_irq(gpios[i].desc), 1);
+			if (ret != 0)
+				dev_err(jack->codec->dev,
+					"ASoC: Failed to mark GPIO at index %d as wake source: %d\n",
+					i, ret);
+		}
+
+		/* Expose GPIO value over sysfs for diagnostic purposes */
+		gpiod_export(gpios[i].desc, false);
+
+		/* Update initial jack status */
+		schedule_delayed_work(&gpios[i].work,
+				      msecs_to_jiffies(gpios[i].debounce_time));
+>>>>>>> v3.18
 	}
 
 	return 0;
@@ -371,6 +475,33 @@ undo:
 EXPORT_SYMBOL_GPL(snd_soc_jack_add_gpios);
 
 /**
+<<<<<<< HEAD
+=======
+ * snd_soc_jack_add_gpiods - Associate GPIO descriptor pins with an ASoC jack
+ *
+ * @gpiod_dev: GPIO consumer device
+ * @jack:      ASoC jack
+ * @count:     number of pins
+ * @gpios:     array of gpio pins
+ *
+ * This function will request gpio, set data direction and request irq
+ * for each gpio in the array.
+ */
+int snd_soc_jack_add_gpiods(struct device *gpiod_dev,
+			    struct snd_soc_jack *jack,
+			    int count, struct snd_soc_jack_gpio *gpios)
+{
+	int i;
+
+	for (i = 0; i < count; i++)
+		gpios[i].gpiod_dev = gpiod_dev;
+
+	return snd_soc_jack_add_gpios(jack, count, gpios);
+}
+EXPORT_SYMBOL_GPL(snd_soc_jack_add_gpiods);
+
+/**
+>>>>>>> v3.18
  * snd_soc_jack_free_gpios - Release GPIO pins' resources of an ASoC jack
  *
  * @jack:  ASoC jack
@@ -385,10 +516,17 @@ void snd_soc_jack_free_gpios(struct snd_soc_jack *jack, int count,
 	int i;
 
 	for (i = 0; i < count; i++) {
+<<<<<<< HEAD
 		gpio_unexport(gpios[i].gpio);
 		free_irq(gpio_to_irq(gpios[i].gpio), &gpios[i]);
 		cancel_delayed_work_sync(&gpios[i].work);
 		gpio_free(gpios[i].gpio);
+=======
+		gpiod_unexport(gpios[i].desc);
+		free_irq(gpiod_to_irq(gpios[i].desc), &gpios[i]);
+		cancel_delayed_work_sync(&gpios[i].work);
+		gpiod_put(gpios[i].desc);
+>>>>>>> v3.18
 		gpios[i].jack = NULL;
 	}
 }

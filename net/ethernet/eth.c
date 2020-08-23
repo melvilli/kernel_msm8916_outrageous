@@ -58,7 +58,11 @@
 #include <net/ipv6.h>
 #include <net/ip.h>
 #include <net/dsa.h>
+<<<<<<< HEAD
 #include <asm/uaccess.h>
+=======
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 
 __setup("ether=", netdev_boot_setup);
 
@@ -133,7 +137,11 @@ int eth_rebuild_header(struct sk_buff *skb)
 		return arp_find(eth->h_dest, skb);
 #endif
 	default:
+<<<<<<< HEAD
 		printk(KERN_DEBUG
+=======
+		netdev_dbg(dev,
+>>>>>>> v3.18
 		       "%s: unable to resolve type %X addresses.\n",
 		       dev->name, ntohs(eth->h_proto));
 
@@ -146,6 +154,36 @@ int eth_rebuild_header(struct sk_buff *skb)
 EXPORT_SYMBOL(eth_rebuild_header);
 
 /**
+<<<<<<< HEAD
+=======
+ * eth_get_headlen - determine the the length of header for an ethernet frame
+ * @data: pointer to start of frame
+ * @len: total length of frame
+ *
+ * Make a best effort attempt to pull the length for all of the headers for
+ * a given frame in a linear buffer.
+ */
+u32 eth_get_headlen(void *data, unsigned int len)
+{
+	const struct ethhdr *eth = (const struct ethhdr *)data;
+	struct flow_keys keys;
+
+	/* this should never happen, but better safe than sorry */
+	if (len < sizeof(*eth))
+		return len;
+
+	/* parse any remaining L2/L3 headers, check for L4 */
+	if (!__skb_flow_dissect(NULL, &keys, data,
+				eth->h_proto, sizeof(*eth), len))
+		return max_t(u32, keys.thoff, sizeof(*eth));
+
+	/* parse for any L4 headers */
+	return min_t(u32, __skb_get_poff(NULL, data, &keys, len), len);
+}
+EXPORT_SYMBOL(eth_get_headlen);
+
+/**
+>>>>>>> v3.18
  * eth_type_trans - determine the packet's protocol ID.
  * @skb: received socket data
  * @dev: receiving network device
@@ -156,7 +194,13 @@ EXPORT_SYMBOL(eth_rebuild_header);
  */
 __be16 eth_type_trans(struct sk_buff *skb, struct net_device *dev)
 {
+<<<<<<< HEAD
 	struct ethhdr *eth;
+=======
+	unsigned short _service_access_point;
+	const unsigned short *sap;
+	const struct ethhdr *eth;
+>>>>>>> v3.18
 
 	skb->dev = dev;
 	skb_reset_mac_header(skb);
@@ -169,6 +213,7 @@ __be16 eth_type_trans(struct sk_buff *skb, struct net_device *dev)
 		else
 			skb->pkt_type = PACKET_MULTICAST;
 	}
+<<<<<<< HEAD
 
 	/*
 	 *      This ALLMULTI check should be redundant by 1.4
@@ -183,6 +228,11 @@ __be16 eth_type_trans(struct sk_buff *skb, struct net_device *dev)
 						      dev->dev_addr)))
 			skb->pkt_type = PACKET_OTHERHOST;
 	}
+=======
+	else if (unlikely(!ether_addr_equal_64bits(eth->h_dest,
+						   dev->dev_addr)))
+		skb->pkt_type = PACKET_OTHERHOST;
+>>>>>>> v3.18
 
 	/*
 	 * Some variants of DSA tagging don't have an ethertype field
@@ -190,12 +240,19 @@ __be16 eth_type_trans(struct sk_buff *skb, struct net_device *dev)
 	 * variants has been configured on the receiving interface,
 	 * and if so, set skb->protocol without looking at the packet.
 	 */
+<<<<<<< HEAD
 	if (netdev_uses_dsa_tags(dev))
 		return htons(ETH_P_DSA);
 	if (netdev_uses_trailer_tags(dev))
 		return htons(ETH_P_TRAILER);
 
 	if (ntohs(eth->h_proto) >= ETH_P_802_3_MIN)
+=======
+	if (unlikely(netdev_uses_dsa(dev)))
+		return htons(ETH_P_XDSA);
+
+	if (likely(ntohs(eth->h_proto) >= ETH_P_802_3_MIN))
+>>>>>>> v3.18
 		return eth->h_proto;
 
 	/*
@@ -204,7 +261,12 @@ __be16 eth_type_trans(struct sk_buff *skb, struct net_device *dev)
 	 *      layer. We look for FFFF which isn't a used 802.2 SSAP/DSAP. This
 	 *      won't work for fault tolerant netware but does for the rest.
 	 */
+<<<<<<< HEAD
 	if (skb->len >= 2 && *(unsigned short *)(skb->data) == 0xFFFF)
+=======
+	sap = skb_header_pointer(skb, 0, sizeof(*sap), &_service_access_point);
+	if (sap && *sap == 0xFFFF)
+>>>>>>> v3.18
 		return htons(ETH_P_802_3);
 
 	/*
@@ -397,6 +459,7 @@ EXPORT_SYMBOL(ether_setup);
 struct net_device *alloc_etherdev_mqs(int sizeof_priv, unsigned int txqs,
 				      unsigned int rxqs)
 {
+<<<<<<< HEAD
 	return alloc_netdev_mqs(sizeof_priv, "eth%d", ether_setup, txqs, rxqs);
 }
 EXPORT_SYMBOL(alloc_etherdev_mqs);
@@ -423,5 +486,15 @@ ssize_t sysfs_format_mac(char *buf, const unsigned char *addr, int len)
 	l = _format_mac_addr(buf, PAGE_SIZE, addr, len);
 	l += scnprintf(buf + l, PAGE_SIZE - l, "\n");
 	return (ssize_t)l;
+=======
+	return alloc_netdev_mqs(sizeof_priv, "eth%d", NET_NAME_UNKNOWN,
+				ether_setup, txqs, rxqs);
+}
+EXPORT_SYMBOL(alloc_etherdev_mqs);
+
+ssize_t sysfs_format_mac(char *buf, const unsigned char *addr, int len)
+{
+	return scnprintf(buf, PAGE_SIZE, "%*phC\n", len, addr);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(sysfs_format_mac);

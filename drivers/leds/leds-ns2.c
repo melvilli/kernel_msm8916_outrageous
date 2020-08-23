@@ -23,13 +23,20 @@
  */
 
 #include <linux/kernel.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <linux/slab.h>
 #include <linux/gpio.h>
 #include <linux/leds.h>
 #include <linux/module.h>
 #include <linux/platform_data/leds-kirkwood-ns2.h>
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 #include <linux/of_gpio.h>
 
 /*
@@ -185,6 +192,15 @@ static ssize_t ns2_led_sata_show(struct device *dev,
 
 static DEVICE_ATTR(sata, 0644, ns2_led_sata_show, ns2_led_sata_store);
 
+<<<<<<< HEAD
+=======
+static struct attribute *ns2_led_attrs[] = {
+	&dev_attr_sata.attr,
+	NULL
+};
+ATTRIBUTE_GROUPS(ns2_led);
+
+>>>>>>> v3.18
 static int
 create_ns2_led(struct platform_device *pdev, struct ns2_led_data *led_dat,
 	       const struct ns2_led *template)
@@ -219,6 +235,10 @@ create_ns2_led(struct platform_device *pdev, struct ns2_led_data *led_dat,
 	led_dat->cdev.blink_set = NULL;
 	led_dat->cdev.brightness_set = ns2_led_set;
 	led_dat->cdev.flags |= LED_CORE_SUSPENDRESUME;
+<<<<<<< HEAD
+=======
+	led_dat->cdev.groups = ns2_led_groups;
+>>>>>>> v3.18
 	led_dat->cmd = template->cmd;
 	led_dat->slow = template->slow;
 
@@ -235,6 +255,7 @@ create_ns2_led(struct platform_device *pdev, struct ns2_led_data *led_dat,
 	if (ret < 0)
 		return ret;
 
+<<<<<<< HEAD
 	ret = device_create_file(led_dat->cdev.dev, &dev_attr_sata);
 	if (ret < 0)
 		goto err_free_cdev;
@@ -244,11 +265,17 @@ create_ns2_led(struct platform_device *pdev, struct ns2_led_data *led_dat,
 err_free_cdev:
 	led_classdev_unregister(&led_dat->cdev);
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 }
 
 static void delete_ns2_led(struct ns2_led_data *led_dat)
 {
+<<<<<<< HEAD
 	device_remove_file(led_dat->cdev.dev, &dev_attr_sata);
+=======
+>>>>>>> v3.18
 	led_classdev_unregister(&led_dat->cdev);
 }
 
@@ -321,7 +348,11 @@ static inline int sizeof_ns2_led_priv(int num_leds)
 
 static int ns2_led_probe(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct ns2_led_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct ns2_led_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	struct ns2_led_priv *priv;
 	int i;
 	int ret;
@@ -374,8 +405,11 @@ static int ns2_led_remove(struct platform_device *pdev)
 	for (i = 0; i < priv->num_leds; i++)
 		delete_ns2_led(&priv->leds_data[i]);
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

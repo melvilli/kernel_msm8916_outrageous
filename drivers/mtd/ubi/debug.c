@@ -1,8 +1,11 @@
 /*
  * Copyright (c) International Business Machines Corp., 2006
+<<<<<<< HEAD
  * Copyright (c) 2014, Linux Foundation. All rights reserved.
  * Linux Foundation chooses to take subject only to the GPLv2
  * license terms, and distributes only under these terms.
+=======
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -46,6 +49,7 @@ void ubi_dump_flash(struct ubi_device *ubi, int pnum, int offset, int len)
 		return;
 	err = mtd_read(ubi->mtd, addr, len, &read, buf);
 	if (err && err != -EUCLEAN) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num,
 		"err %d while reading %d bytes from PEB %d:%d, read %zd bytes",
 			err, len, pnum, offset, read);
@@ -62,6 +66,14 @@ void ubi_dump_flash(struct ubi_device *ubi, int pnum, int offset, int len)
 		ubi_err(ubi->ubi_num, "Can't update RC. No lookuptbl");
 
 	ubi_msg(ubi->ubi_num, "dumping %d bytes of data from PEB %d, offset %d",
+=======
+		ubi_err("error %d while reading %d bytes from PEB %d:%d, read %zd bytes",
+			err, len, pnum, offset, read);
+		goto out;
+	}
+
+	ubi_msg("dumping %d bytes of data from PEB %d, offset %d",
+>>>>>>> v3.18
 		len, pnum, offset);
 	print_hex_dump(KERN_DEBUG, "", DUMP_PREFIX_OFFSET, 32, 1, buf, len, 1);
 out:
@@ -251,7 +263,11 @@ int ubi_debugfs_init(void)
 	if (IS_ERR_OR_NULL(dfs_rootdir)) {
 		int err = dfs_rootdir ? -ENODEV : PTR_ERR(dfs_rootdir);
 
+<<<<<<< HEAD
 		ubi_err(UBI_MAX_DEVICES, "cannot create \"ubi\" debugfs directory, error %d\n",
+=======
+		ubi_err("cannot create \"ubi\" debugfs directory, error %d\n",
+>>>>>>> v3.18
 			err);
 		return err;
 	}
@@ -446,7 +462,11 @@ out_remove:
 	debugfs_remove_recursive(d->dfs_dir);
 out:
 	err = dent ? PTR_ERR(dent) : -ENODEV;
+<<<<<<< HEAD
 	ubi_err(ubi->ubi_num, "cannot create \"%s\" debugfs file or directory, error %d\n",
+=======
+	ubi_err("cannot create \"%s\" debugfs file or directory, error %d\n",
+>>>>>>> v3.18
 		fname, err);
 	return err;
 }

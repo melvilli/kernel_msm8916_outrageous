@@ -42,7 +42,11 @@
 #include "at91_aic.h"
 #include "board.h"
 #include "generic.h"
+<<<<<<< HEAD
 
+=======
+#include "gpio.h"
+>>>>>>> v3.18
 
 static void __init csb337_init_early(void)
 {

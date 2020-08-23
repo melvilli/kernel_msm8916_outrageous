@@ -15,6 +15,10 @@
 #include <linux/slab.h>
 #include <linux/statfs.h>
 #include <linux/string.h>
+<<<<<<< HEAD
+=======
+#include <linux/vmalloc.h>
+>>>>>>> v3.18
 #include <linux/nsproxy.h>
 #include <net/net_namespace.h>
 
@@ -71,6 +75,11 @@ const char *ceph_msg_type_name(int type)
 	case CEPH_MSG_MON_SUBSCRIBE_ACK: return "mon_subscribe_ack";
 	case CEPH_MSG_STATFS: return "statfs";
 	case CEPH_MSG_STATFS_REPLY: return "statfs_reply";
+<<<<<<< HEAD
+=======
+	case CEPH_MSG_MON_GET_VERSION: return "mon_get_version";
+	case CEPH_MSG_MON_GET_VERSION_REPLY: return "mon_get_version_reply";
+>>>>>>> v3.18
 	case CEPH_MSG_MDS_MAP: return "mds_map";
 	case CEPH_MSG_CLIENT_SESSION: return "client_session";
 	case CEPH_MSG_CLIENT_RECONNECT: return "client_reconnect";
@@ -170,6 +179,28 @@ int ceph_compare_options(struct ceph_options *new_opt,
 }
 EXPORT_SYMBOL(ceph_compare_options);
 
+<<<<<<< HEAD
+=======
+void *ceph_kvmalloc(size_t size, gfp_t flags)
+{
+	if (size <= (PAGE_SIZE << PAGE_ALLOC_COSTLY_ORDER)) {
+		void *ptr = kmalloc(size, flags | __GFP_NOWARN);
+		if (ptr)
+			return ptr;
+	}
+
+	return __vmalloc(size, flags | __GFP_HIGHMEM, PAGE_KERNEL);
+}
+
+void ceph_kvfree(const void *ptr)
+{
+	if (is_vmalloc_addr(ptr))
+		vfree(ptr);
+	else
+		kfree(ptr);
+}
+
+>>>>>>> v3.18
 
 static int parse_fsid(const char *str, struct ceph_fsid *fsid)
 {
@@ -271,6 +302,7 @@ static int get_secret(struct ceph_crypto_key *dst, const char *name) {
 		key_err = PTR_ERR(ukey);
 		switch (key_err) {
 		case -ENOKEY:
+<<<<<<< HEAD
 			pr_warning("ceph: Mount failed due to key not found: %s\n", name);
 			break;
 		case -EKEYEXPIRED:
@@ -282,6 +314,22 @@ static int get_secret(struct ceph_crypto_key *dst, const char *name) {
 		default:
 			pr_warning("ceph: Mount failed due to unknown key error"
 			       " %d: %s\n", key_err, name);
+=======
+			pr_warn("ceph: Mount failed due to key not found: %s\n",
+				name);
+			break;
+		case -EKEYEXPIRED:
+			pr_warn("ceph: Mount failed due to expired key: %s\n",
+				name);
+			break;
+		case -EKEYREVOKED:
+			pr_warn("ceph: Mount failed due to revoked key: %s\n",
+				name);
+			break;
+		default:
+			pr_warn("ceph: Mount failed due to unknown key error %d: %s\n",
+				key_err, name);
+>>>>>>> v3.18
 		}
 		err = -EPERM;
 		goto out;
@@ -411,7 +459,11 @@ ceph_parse_options(char *options, const char *dev_name,
 
 			/* misc */
 		case Opt_osdtimeout:
+<<<<<<< HEAD
 			pr_warning("ignoring deprecated osdtimeout option\n");
+=======
+			pr_warn("ignoring deprecated osdtimeout option\n");
+>>>>>>> v3.18
 			break;
 		case Opt_osdkeepalivetimeout:
 			opt->osd_keepalive_timeout = intval;
@@ -461,8 +513,13 @@ EXPORT_SYMBOL(ceph_client_id);
  * create a fresh client instance
  */
 struct ceph_client *ceph_create_client(struct ceph_options *opt, void *private,
+<<<<<<< HEAD
 				       unsigned int supported_features,
 				       unsigned int required_features)
+=======
+				       u64 supported_features,
+				       u64 required_features)
+>>>>>>> v3.18
 {
 	struct ceph_client *client;
 	struct ceph_entity_addr *myaddr = NULL;

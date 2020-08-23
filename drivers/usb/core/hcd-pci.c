@@ -74,6 +74,7 @@ static void for_each_companion(struct pci_dev *pdev, struct usb_hcd *hcd,
 		if (companion->bus != pdev->bus ||
 				PCI_SLOT(companion->devfn) != slot)
 			continue;
+<<<<<<< HEAD
 
 		/*
 		 * Companion device should be either UHCI,OHCI or EHCI host
@@ -83,6 +84,8 @@ static void for_each_companion(struct pci_dev *pdev, struct usb_hcd *hcd,
 				companion->class != CL_EHCI)
 			continue;
 
+=======
+>>>>>>> v3.18
 		companion_hcd = pci_get_drvdata(companion);
 		if (!companion_hcd || !companion_hcd->self.root_hub)
 			continue;
@@ -180,6 +183,11 @@ static void ehci_wait_for_companions(struct pci_dev *pdev, struct usb_hcd *hcd,
  * through the hotplug entry's driver_data.
  *
  * Store this function in the HCD's struct pci_driver as probe().
+<<<<<<< HEAD
+=======
+ *
+ * Return: 0 if successful.
+>>>>>>> v3.18
  */
 int usb_hcd_pci_probe(struct pci_dev *dev, const struct pci_device_id *id)
 {
@@ -199,7 +207,10 @@ int usb_hcd_pci_probe(struct pci_dev *dev, const struct pci_device_id *id)
 
 	if (pci_enable_device(dev) < 0)
 		return -ENODEV;
+<<<<<<< HEAD
 	dev->current_state = PCI_D0;
+=======
+>>>>>>> v3.18
 
 	/*
 	 * The xHCI driver has its own irq management
@@ -222,6 +233,12 @@ int usb_hcd_pci_probe(struct pci_dev *dev, const struct pci_device_id *id)
 		goto disable_pci;
 	}
 
+<<<<<<< HEAD
+=======
+	hcd->amd_resume_bug = (usb_hcd_amd_remote_wakeup_quirk(dev) &&
+			driver->flags & (HCD_USB11 | HCD_USB3)) ? 1 : 0;
+
+>>>>>>> v3.18
 	if (driver->flags & HCD_MEMORY) {
 		/* EHCI, OHCI */
 		hcd->rsrc_start = pci_resource_start(dev, 0);
@@ -286,6 +303,10 @@ int usb_hcd_pci_probe(struct pci_dev *dev, const struct pci_device_id *id)
 
 	if (retval != 0)
 		goto unmap_registers;
+<<<<<<< HEAD
+=======
+	device_wakeup_enable(hcd->self.controller);
+>>>>>>> v3.18
 
 	if (pci_dev_run_wake(dev))
 		pm_runtime_put_noidle(&dev->dev);
@@ -384,6 +405,11 @@ void usb_hcd_pci_shutdown(struct pci_dev *dev)
 	if (test_bit(HCD_FLAG_HW_ACCESSIBLE, &hcd->flags) &&
 			hcd->driver->shutdown) {
 		hcd->driver->shutdown(hcd);
+<<<<<<< HEAD
+=======
+		if (usb_hcd_is_primary_hcd(hcd) && hcd->irq > 0)
+			free_irq(hcd->irq, hcd);
+>>>>>>> v3.18
 		pci_disable_device(dev);
 	}
 }

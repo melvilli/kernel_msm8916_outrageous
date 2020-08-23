@@ -17,7 +17,10 @@
 #include <linux/slab.h>
 #include <linux/vmalloc.h>
 #include <linux/export.h>
+<<<<<<< HEAD
 #include <linux/relay.h>
+=======
+>>>>>>> v3.18
 #include <asm/unaligned.h>
 
 #include "ath9k.h"
@@ -27,6 +30,50 @@
 #define REG_READ_D(_ah, _reg) \
 	ath9k_hw_common(_ah)->ops->read((_ah), (_reg))
 
+<<<<<<< HEAD
+=======
+void ath9k_debug_sync_cause(struct ath_softc *sc, u32 sync_cause)
+{
+	if (sync_cause)
+		sc->debug.stats.istats.sync_cause_all++;
+	if (sync_cause & AR_INTR_SYNC_RTC_IRQ)
+		sc->debug.stats.istats.sync_rtc_irq++;
+	if (sync_cause & AR_INTR_SYNC_MAC_IRQ)
+		sc->debug.stats.istats.sync_mac_irq++;
+	if (sync_cause & AR_INTR_SYNC_EEPROM_ILLEGAL_ACCESS)
+		sc->debug.stats.istats.eeprom_illegal_access++;
+	if (sync_cause & AR_INTR_SYNC_APB_TIMEOUT)
+		sc->debug.stats.istats.apb_timeout++;
+	if (sync_cause & AR_INTR_SYNC_PCI_MODE_CONFLICT)
+		sc->debug.stats.istats.pci_mode_conflict++;
+	if (sync_cause & AR_INTR_SYNC_HOST1_FATAL)
+		sc->debug.stats.istats.host1_fatal++;
+	if (sync_cause & AR_INTR_SYNC_HOST1_PERR)
+		sc->debug.stats.istats.host1_perr++;
+	if (sync_cause & AR_INTR_SYNC_TRCV_FIFO_PERR)
+		sc->debug.stats.istats.trcv_fifo_perr++;
+	if (sync_cause & AR_INTR_SYNC_RADM_CPL_EP)
+		sc->debug.stats.istats.radm_cpl_ep++;
+	if (sync_cause & AR_INTR_SYNC_RADM_CPL_DLLP_ABORT)
+		sc->debug.stats.istats.radm_cpl_dllp_abort++;
+	if (sync_cause & AR_INTR_SYNC_RADM_CPL_TLP_ABORT)
+		sc->debug.stats.istats.radm_cpl_tlp_abort++;
+	if (sync_cause & AR_INTR_SYNC_RADM_CPL_ECRC_ERR)
+		sc->debug.stats.istats.radm_cpl_ecrc_err++;
+	if (sync_cause & AR_INTR_SYNC_RADM_CPL_TIMEOUT)
+		sc->debug.stats.istats.radm_cpl_timeout++;
+	if (sync_cause & AR_INTR_SYNC_LOCAL_TIMEOUT)
+		sc->debug.stats.istats.local_timeout++;
+	if (sync_cause & AR_INTR_SYNC_PM_ACCESS)
+		sc->debug.stats.istats.pm_access++;
+	if (sync_cause & AR_INTR_SYNC_MAC_AWAKE)
+		sc->debug.stats.istats.mac_awake++;
+	if (sync_cause & AR_INTR_SYNC_MAC_ASLEEP)
+		sc->debug.stats.istats.mac_asleep++;
+	if (sync_cause & AR_INTR_SYNC_MAC_SLEEP_ACCESS)
+		sc->debug.stats.istats.mac_sleep_access++;
+}
+>>>>>>> v3.18
 
 static ssize_t ath9k_debugfs_read_buf(struct file *file, char __user *user_buf,
 				      size_t count, loff_t *ppos)
@@ -69,7 +116,11 @@ static ssize_t write_file_debug(struct file *file, const char __user *user_buf,
 		return -EFAULT;
 
 	buf[len] = '\0';
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &mask))
+=======
+	if (kstrtoul(buf, 0, &mask))
+>>>>>>> v3.18
 		return -EINVAL;
 
 	common->debug_mask = mask;
@@ -88,6 +139,7 @@ static const struct file_operations fops_debug = {
 
 #define DMA_BUF_LEN 1024
 
+<<<<<<< HEAD
 static ssize_t read_file_tx_chainmask(struct file *file, char __user *user_buf,
 			     size_t count, loff_t *ppos)
 {
@@ -149,6 +201,71 @@ static ssize_t write_file_rx_chainmask(struct file *file, const char __user *use
 	struct ath_softc *sc = file->private_data;
 	struct ath_hw *ah = sc->sc_ah;
 	unsigned long mask;
+=======
+
+static ssize_t read_file_ani(struct file *file, char __user *user_buf,
+			     size_t count, loff_t *ppos)
+{
+	struct ath_softc *sc = file->private_data;
+	struct ath_common *common = ath9k_hw_common(sc->sc_ah);
+	struct ath_hw *ah = sc->sc_ah;
+	unsigned int len = 0;
+	const unsigned int size = 1024;
+	ssize_t retval = 0;
+	char *buf;
+	int i;
+	struct {
+		const char *name;
+		unsigned int val;
+	} ani_info[] = {
+		{ "ANI RESET", ah->stats.ast_ani_reset },
+		{ "OFDM LEVEL", ah->ani.ofdmNoiseImmunityLevel },
+		{ "CCK LEVEL", ah->ani.cckNoiseImmunityLevel },
+		{ "SPUR UP", ah->stats.ast_ani_spurup },
+		{ "SPUR DOWN", ah->stats.ast_ani_spurup },
+		{ "OFDM WS-DET ON", ah->stats.ast_ani_ofdmon },
+		{ "OFDM WS-DET OFF", ah->stats.ast_ani_ofdmoff },
+		{ "MRC-CCK ON", ah->stats.ast_ani_ccklow },
+		{ "MRC-CCK OFF", ah->stats.ast_ani_cckhigh },
+		{ "FIR-STEP UP", ah->stats.ast_ani_stepup },
+		{ "FIR-STEP DOWN", ah->stats.ast_ani_stepdown },
+		{ "INV LISTENTIME", ah->stats.ast_ani_lneg_or_lzero },
+		{ "OFDM ERRORS", ah->stats.ast_ani_ofdmerrs },
+		{ "CCK ERRORS", ah->stats.ast_ani_cckerrs },
+	};
+
+	buf = kzalloc(size, GFP_KERNEL);
+	if (buf == NULL)
+		return -ENOMEM;
+
+	len += scnprintf(buf + len, size - len, "%15s: %s\n", "ANI",
+			 common->disable_ani ? "DISABLED" : "ENABLED");
+
+	if (common->disable_ani)
+		goto exit;
+
+	for (i = 0; i < ARRAY_SIZE(ani_info); i++)
+		len += scnprintf(buf + len, size - len, "%15s: %u\n",
+				 ani_info[i].name, ani_info[i].val);
+
+exit:
+	if (len > size)
+		len = size;
+
+	retval = simple_read_from_buffer(user_buf, count, ppos, buf, len);
+	kfree(buf);
+
+	return retval;
+}
+
+static ssize_t write_file_ani(struct file *file,
+			      const char __user *user_buf,
+			      size_t count, loff_t *ppos)
+{
+	struct ath_softc *sc = file->private_data;
+	struct ath_common *common = ath9k_hw_common(sc->sc_ah);
+	unsigned long ani;
+>>>>>>> v3.18
 	char buf[32];
 	ssize_t len;
 
@@ -157,6 +274,7 @@ static ssize_t write_file_rx_chainmask(struct file *file, const char __user *use
 		return -EFAULT;
 
 	buf[len] = '\0';
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &mask))
 		return -EINVAL;
 
@@ -168,19 +286,51 @@ static ssize_t write_file_rx_chainmask(struct file *file, const char __user *use
 static const struct file_operations fops_rx_chainmask = {
 	.read = read_file_rx_chainmask,
 	.write = write_file_rx_chainmask,
+=======
+	if (kstrtoul(buf, 0, &ani))
+		return -EINVAL;
+
+	if (ani > 1)
+		return -EINVAL;
+
+	common->disable_ani = !ani;
+
+	if (common->disable_ani) {
+		clear_bit(ATH_OP_ANI_RUN, &common->op_flags);
+		ath_stop_ani(sc);
+	} else {
+		ath_check_ani(sc);
+	}
+
+	return count;
+}
+
+static const struct file_operations fops_ani = {
+	.read = read_file_ani,
+	.write = write_file_ani,
+>>>>>>> v3.18
 	.open = simple_open,
 	.owner = THIS_MODULE,
 	.llseek = default_llseek,
 };
 
+<<<<<<< HEAD
 static ssize_t read_file_disable_ani(struct file *file, char __user *user_buf,
 			     size_t count, loff_t *ppos)
+=======
+#ifdef CONFIG_ATH9K_BTCOEX_SUPPORT
+
+static ssize_t read_file_bt_ant_diversity(struct file *file,
+					  char __user *user_buf,
+					  size_t count, loff_t *ppos)
+>>>>>>> v3.18
 {
 	struct ath_softc *sc = file->private_data;
 	struct ath_common *common = ath9k_hw_common(sc->sc_ah);
 	char buf[32];
 	unsigned int len;
 
+<<<<<<< HEAD
 	len = sprintf(buf, "%d\n", common->disable_ani);
 	return simple_read_from_buffer(user_buf, count, ppos, buf, len);
 }
@@ -192,6 +342,20 @@ static ssize_t write_file_disable_ani(struct file *file,
 	struct ath_softc *sc = file->private_data;
 	struct ath_common *common = ath9k_hw_common(sc->sc_ah);
 	unsigned long disable_ani;
+=======
+	len = sprintf(buf, "%d\n", common->bt_ant_diversity);
+	return simple_read_from_buffer(user_buf, count, ppos, buf, len);
+}
+
+static ssize_t write_file_bt_ant_diversity(struct file *file,
+					   const char __user *user_buf,
+					   size_t count, loff_t *ppos)
+{
+	struct ath_softc *sc = file->private_data;
+	struct ath_common *common = ath9k_hw_common(sc->sc_ah);
+	struct ath9k_hw_capabilities *pCap = &sc->sc_ah->caps;
+	unsigned long bt_ant_diversity;
+>>>>>>> v3.18
 	char buf[32];
 	ssize_t len;
 
@@ -199,6 +363,7 @@ static ssize_t write_file_disable_ani(struct file *file,
 	if (copy_from_user(buf, user_buf, len))
 		return -EFAULT;
 
+<<<<<<< HEAD
 	buf[len] = '\0';
 	if (strict_strtoul(buf, 0, &disable_ani))
 		return -EINVAL;
@@ -218,11 +383,34 @@ static ssize_t write_file_disable_ani(struct file *file,
 static const struct file_operations fops_disable_ani = {
 	.read = read_file_disable_ani,
 	.write = write_file_disable_ani,
+=======
+	if (!(pCap->hw_caps & ATH9K_HW_CAP_BT_ANT_DIV))
+		goto exit;
+
+	buf[len] = '\0';
+	if (kstrtoul(buf, 0, &bt_ant_diversity))
+		return -EINVAL;
+
+	common->bt_ant_diversity = !!bt_ant_diversity;
+	ath9k_ps_wakeup(sc);
+	ath9k_hw_set_bt_ant_diversity(sc->sc_ah, common->bt_ant_diversity);
+	ath_dbg(common, CONFIG, "Enable WLAN/BT RX Antenna diversity: %d\n",
+		common->bt_ant_diversity);
+	ath9k_ps_restore(sc);
+exit:
+	return count;
+}
+
+static const struct file_operations fops_bt_ant_diversity = {
+	.read = read_file_bt_ant_diversity,
+	.write = write_file_bt_ant_diversity,
+>>>>>>> v3.18
 	.open = simple_open,
 	.owner = THIS_MODULE,
 	.llseek = default_llseek,
 };
 
+<<<<<<< HEAD
 static ssize_t read_file_ant_diversity(struct file *file, char __user *user_buf,
 				       size_t count, loff_t *ppos)
 {
@@ -269,6 +457,124 @@ exit:
 static const struct file_operations fops_ant_diversity = {
 	.read = read_file_ant_diversity,
 	.write = write_file_ant_diversity,
+=======
+#endif
+
+void ath9k_debug_stat_ant(struct ath_softc *sc,
+			  struct ath_hw_antcomb_conf *div_ant_conf,
+			  int main_rssi_avg, int alt_rssi_avg)
+{
+	struct ath_antenna_stats *as_main = &sc->debug.stats.ant_stats[ANT_MAIN];
+	struct ath_antenna_stats *as_alt = &sc->debug.stats.ant_stats[ANT_ALT];
+
+	as_main->lna_attempt_cnt[div_ant_conf->main_lna_conf]++;
+	as_alt->lna_attempt_cnt[div_ant_conf->alt_lna_conf]++;
+
+	as_main->rssi_avg = main_rssi_avg;
+	as_alt->rssi_avg = alt_rssi_avg;
+}
+
+static ssize_t read_file_antenna_diversity(struct file *file,
+					   char __user *user_buf,
+					   size_t count, loff_t *ppos)
+{
+	struct ath_softc *sc = file->private_data;
+	struct ath_hw *ah = sc->sc_ah;
+	struct ath9k_hw_capabilities *pCap = &ah->caps;
+	struct ath_antenna_stats *as_main = &sc->debug.stats.ant_stats[ANT_MAIN];
+	struct ath_antenna_stats *as_alt = &sc->debug.stats.ant_stats[ANT_ALT];
+	struct ath_hw_antcomb_conf div_ant_conf;
+	unsigned int len = 0;
+	const unsigned int size = 1024;
+	ssize_t retval = 0;
+	char *buf;
+	static const char *lna_conf_str[4] = {
+		"LNA1_MINUS_LNA2", "LNA2", "LNA1", "LNA1_PLUS_LNA2"
+	};
+
+	buf = kzalloc(size, GFP_KERNEL);
+	if (buf == NULL)
+		return -ENOMEM;
+
+	if (!(pCap->hw_caps & ATH9K_HW_CAP_ANT_DIV_COMB)) {
+		len += scnprintf(buf + len, size - len, "%s\n",
+				 "Antenna Diversity Combining is disabled");
+		goto exit;
+	}
+
+	ath9k_ps_wakeup(sc);
+	ath9k_hw_antdiv_comb_conf_get(ah, &div_ant_conf);
+	len += scnprintf(buf + len, size - len, "Current MAIN config : %s\n",
+			 lna_conf_str[div_ant_conf.main_lna_conf]);
+	len += scnprintf(buf + len, size - len, "Current ALT config  : %s\n",
+			 lna_conf_str[div_ant_conf.alt_lna_conf]);
+	len += scnprintf(buf + len, size - len, "Average MAIN RSSI   : %d\n",
+			 as_main->rssi_avg);
+	len += scnprintf(buf + len, size - len, "Average ALT RSSI    : %d\n\n",
+			 as_alt->rssi_avg);
+	ath9k_ps_restore(sc);
+
+	len += scnprintf(buf + len, size - len, "Packet Receive Cnt:\n");
+	len += scnprintf(buf + len, size - len, "-------------------\n");
+
+	len += scnprintf(buf + len, size - len, "%30s%15s\n",
+			 "MAIN", "ALT");
+	len += scnprintf(buf + len, size - len, "%-14s:%15d%15d\n",
+			 "TOTAL COUNT",
+			 as_main->recv_cnt,
+			 as_alt->recv_cnt);
+	len += scnprintf(buf + len, size - len, "%-14s:%15d%15d\n",
+			 "LNA1",
+			 as_main->lna_recv_cnt[ATH_ANT_DIV_COMB_LNA1],
+			 as_alt->lna_recv_cnt[ATH_ANT_DIV_COMB_LNA1]);
+	len += scnprintf(buf + len, size - len, "%-14s:%15d%15d\n",
+			 "LNA2",
+			 as_main->lna_recv_cnt[ATH_ANT_DIV_COMB_LNA2],
+			 as_alt->lna_recv_cnt[ATH_ANT_DIV_COMB_LNA2]);
+	len += scnprintf(buf + len, size - len, "%-14s:%15d%15d\n",
+			 "LNA1 + LNA2",
+			 as_main->lna_recv_cnt[ATH_ANT_DIV_COMB_LNA1_PLUS_LNA2],
+			 as_alt->lna_recv_cnt[ATH_ANT_DIV_COMB_LNA1_PLUS_LNA2]);
+	len += scnprintf(buf + len, size - len, "%-14s:%15d%15d\n",
+			 "LNA1 - LNA2",
+			 as_main->lna_recv_cnt[ATH_ANT_DIV_COMB_LNA1_MINUS_LNA2],
+			 as_alt->lna_recv_cnt[ATH_ANT_DIV_COMB_LNA1_MINUS_LNA2]);
+
+	len += scnprintf(buf + len, size - len, "\nLNA Config Attempts:\n");
+	len += scnprintf(buf + len, size - len, "--------------------\n");
+
+	len += scnprintf(buf + len, size - len, "%30s%15s\n",
+			 "MAIN", "ALT");
+	len += scnprintf(buf + len, size - len, "%-14s:%15d%15d\n",
+			 "LNA1",
+			 as_main->lna_attempt_cnt[ATH_ANT_DIV_COMB_LNA1],
+			 as_alt->lna_attempt_cnt[ATH_ANT_DIV_COMB_LNA1]);
+	len += scnprintf(buf + len, size - len, "%-14s:%15d%15d\n",
+			 "LNA2",
+			 as_main->lna_attempt_cnt[ATH_ANT_DIV_COMB_LNA2],
+			 as_alt->lna_attempt_cnt[ATH_ANT_DIV_COMB_LNA2]);
+	len += scnprintf(buf + len, size - len, "%-14s:%15d%15d\n",
+			 "LNA1 + LNA2",
+			 as_main->lna_attempt_cnt[ATH_ANT_DIV_COMB_LNA1_PLUS_LNA2],
+			 as_alt->lna_attempt_cnt[ATH_ANT_DIV_COMB_LNA1_PLUS_LNA2]);
+	len += scnprintf(buf + len, size - len, "%-14s:%15d%15d\n",
+			 "LNA1 - LNA2",
+			 as_main->lna_attempt_cnt[ATH_ANT_DIV_COMB_LNA1_MINUS_LNA2],
+			 as_alt->lna_attempt_cnt[ATH_ANT_DIV_COMB_LNA1_MINUS_LNA2]);
+
+exit:
+	if (len > size)
+		len = size;
+
+	retval = simple_read_from_buffer(user_buf, count, ppos, buf, len);
+	kfree(buf);
+
+	return retval;
+}
+
+static const struct file_operations fops_antenna_diversity = {
+	.read = read_file_antenna_diversity,
+>>>>>>> v3.18
 	.open = simple_open,
 	.owner = THIS_MODULE,
 	.llseek = default_llseek,
@@ -297,6 +603,7 @@ static ssize_t read_file_dma(struct file *file, char __user *user_buf,
 		   (AR_MACMISC_MISC_OBS_BUS_1 <<
 		    AR_MACMISC_MISC_OBS_BUS_MSB_S)));
 
+<<<<<<< HEAD
 	len += snprintf(buf + len, DMA_BUF_LEN - len,
 			"Raw DMA Debug values:\n");
 
@@ -312,6 +619,23 @@ static ssize_t read_file_dma(struct file *file, char __user *user_buf,
 	len += snprintf(buf + len, DMA_BUF_LEN - len, "\n\n");
 	len += snprintf(buf + len, DMA_BUF_LEN - len,
 			"Num QCU: chain_st fsp_ok fsp_st DCU: chain_st\n");
+=======
+	len += scnprintf(buf + len, DMA_BUF_LEN - len,
+			 "Raw DMA Debug values:\n");
+
+	for (i = 0; i < ATH9K_NUM_DMA_DEBUG_REGS; i++) {
+		if (i % 4 == 0)
+			len += scnprintf(buf + len, DMA_BUF_LEN - len, "\n");
+
+		val[i] = REG_READ_D(ah, AR_DMADBG_0 + (i * sizeof(u32)));
+		len += scnprintf(buf + len, DMA_BUF_LEN - len, "%d: %08x ",
+				 i, val[i]);
+	}
+
+	len += scnprintf(buf + len, DMA_BUF_LEN - len, "\n\n");
+	len += scnprintf(buf + len, DMA_BUF_LEN - len,
+			 "Num QCU: chain_st fsp_ok fsp_st DCU: chain_st\n");
+>>>>>>> v3.18
 
 	for (i = 0; i < ATH9K_NUM_QUEUES; i++, qcuOffset += 4, dcuOffset += 5) {
 		if (i == 8) {
@@ -324,6 +648,7 @@ static ssize_t read_file_dma(struct file *file, char __user *user_buf,
 			dcuBase++;
 		}
 
+<<<<<<< HEAD
 		len += snprintf(buf + len, DMA_BUF_LEN - len,
 			"%2d          %2x      %1x     %2x           %2x\n",
 			i, (*qcuBase & (0x7 << qcuOffset)) >> qcuOffset,
@@ -357,6 +682,41 @@ static ssize_t read_file_dma(struct file *file, char __user *user_buf,
 			REG_READ_D(ah, AR_OBS_BUS_1));
 	len += snprintf(buf + len, DMA_BUF_LEN - len,
 			"AR_CR: 0x%x\n", REG_READ_D(ah, AR_CR));
+=======
+		len += scnprintf(buf + len, DMA_BUF_LEN - len,
+			 "%2d          %2x      %1x     %2x           %2x\n",
+			 i, (*qcuBase & (0x7 << qcuOffset)) >> qcuOffset,
+			 (*qcuBase & (0x8 << qcuOffset)) >> (qcuOffset + 3),
+			 (val[2] & (0x7 << (i * 3))) >> (i * 3),
+			 (*dcuBase & (0x1f << dcuOffset)) >> dcuOffset);
+	}
+
+	len += scnprintf(buf + len, DMA_BUF_LEN - len, "\n");
+
+	len += scnprintf(buf + len, DMA_BUF_LEN - len,
+		"qcu_stitch state:   %2x    qcu_fetch state:        %2x\n",
+		(val[3] & 0x003c0000) >> 18, (val[3] & 0x03c00000) >> 22);
+	len += scnprintf(buf + len, DMA_BUF_LEN - len,
+		"qcu_complete state: %2x    dcu_complete state:     %2x\n",
+		(val[3] & 0x1c000000) >> 26, (val[6] & 0x3));
+	len += scnprintf(buf + len, DMA_BUF_LEN - len,
+		"dcu_arb state:      %2x    dcu_fp state:           %2x\n",
+		(val[5] & 0x06000000) >> 25, (val[5] & 0x38000000) >> 27);
+	len += scnprintf(buf + len, DMA_BUF_LEN - len,
+		"chan_idle_dur:     %3d    chan_idle_dur_valid:     %1d\n",
+		(val[6] & 0x000003fc) >> 2, (val[6] & 0x00000400) >> 10);
+	len += scnprintf(buf + len, DMA_BUF_LEN - len,
+		"txfifo_valid_0:      %1d    txfifo_valid_1:          %1d\n",
+		(val[6] & 0x00000800) >> 11, (val[6] & 0x00001000) >> 12);
+	len += scnprintf(buf + len, DMA_BUF_LEN - len,
+		"txfifo_dcu_num_0:   %2d    txfifo_dcu_num_1:       %2d\n",
+		(val[6] & 0x0001e000) >> 13, (val[6] & 0x001e0000) >> 17);
+
+	len += scnprintf(buf + len, DMA_BUF_LEN - len, "pcu observe: 0x%x\n",
+			 REG_READ_D(ah, AR_OBS_BUS_1));
+	len += scnprintf(buf + len, DMA_BUF_LEN - len,
+			 "AR_CR: 0x%x\n", REG_READ_D(ah, AR_CR));
+>>>>>>> v3.18
 
 	ath9k_ps_restore(sc);
 
@@ -442,9 +802,15 @@ static ssize_t read_file_interrupt(struct file *file, char __user *user_buf,
 
 #define PR_IS(a, s)						\
 	do {							\
+<<<<<<< HEAD
 		len += snprintf(buf + len, mxlen - len,		\
 				"%21s: %10u\n", a,		\
 				sc->debug.stats.istats.s);	\
+=======
+		len += scnprintf(buf + len, mxlen - len,	\
+				 "%21s: %10u\n", a,		\
+				 sc->debug.stats.istats.s);	\
+>>>>>>> v3.18
 	} while (0)
 
 	if (sc->sc_ah->caps.hw_caps & ATH9K_HW_CAP_EDMA) {
@@ -475,8 +841,13 @@ static ssize_t read_file_interrupt(struct file *file, char __user *user_buf,
 	PR_IS("GENTIMER", gen_timer);
 	PR_IS("TOTAL", total);
 
+<<<<<<< HEAD
 	len += snprintf(buf + len, mxlen - len,
 			"SYNC_CAUSE stats:\n");
+=======
+	len += scnprintf(buf + len, mxlen - len,
+			 "SYNC_CAUSE stats:\n");
+>>>>>>> v3.18
 
 	PR_IS("Sync-All", sync_cause_all);
 	PR_IS("RTC-IRQ", sync_rtc_irq);
@@ -560,16 +931,51 @@ static ssize_t read_file_xmit(struct file *file, char __user *user_buf,
 	return retval;
 }
 
+<<<<<<< HEAD
+=======
+static ssize_t print_queue(struct ath_softc *sc, struct ath_txq *txq,
+			   char *buf, ssize_t size)
+{
+	ssize_t len = 0;
+
+	ath_txq_lock(sc, txq);
+
+	len += scnprintf(buf + len, size - len, "%s: %d ",
+			 "qnum", txq->axq_qnum);
+	len += scnprintf(buf + len, size - len, "%s: %2d ",
+			 "qdepth", txq->axq_depth);
+	len += scnprintf(buf + len, size - len, "%s: %2d ",
+			 "ampdu-depth", txq->axq_ampdu_depth);
+	len += scnprintf(buf + len, size - len, "%s: %3d ",
+			 "pending", txq->pending_frames);
+	len += scnprintf(buf + len, size - len, "%s: %d\n",
+			 "stopped", txq->stopped);
+
+	ath_txq_unlock(sc, txq);
+	return len;
+}
+
+>>>>>>> v3.18
 static ssize_t read_file_queues(struct file *file, char __user *user_buf,
 				size_t count, loff_t *ppos)
 {
 	struct ath_softc *sc = file->private_data;
 	struct ath_txq *txq;
 	char *buf;
+<<<<<<< HEAD
 	unsigned int len = 0, size = 1024;
 	ssize_t retval = 0;
 	int i;
 	char *qname[4] = {"VO", "VI", "BE", "BK"};
+=======
+	unsigned int len = 0;
+	const unsigned int size = 1024;
+	ssize_t retval = 0;
+	int i;
+	static const char *qname[4] = {
+		"VO", "VI", "BE", "BK"
+	};
+>>>>>>> v3.18
 
 	buf = kzalloc(size, GFP_KERNEL);
 	if (buf == NULL)
@@ -577,6 +983,7 @@ static ssize_t read_file_queues(struct file *file, char __user *user_buf,
 
 	for (i = 0; i < IEEE80211_NUM_ACS; i++) {
 		txq = sc->tx.txq_map[i];
+<<<<<<< HEAD
 		len += snprintf(buf + len, size - len, "(%s): ", qname[i]);
 
 		ath_txq_lock(sc, txq);
@@ -595,6 +1002,15 @@ static ssize_t read_file_queues(struct file *file, char __user *user_buf,
 		ath_txq_unlock(sc, txq);
 	}
 
+=======
+		len += scnprintf(buf + len, size - len, "(%s):  ", qname[i]);
+		len += print_queue(sc, txq, buf + len, size - len);
+	}
+
+	len += scnprintf(buf + len, size - len, "(CAB): ");
+	len += print_queue(sc, sc->beacon.cabq, buf + len, size - len);
+
+>>>>>>> v3.18
 	if (len > size)
 		len = size;
 
@@ -609,12 +1025,18 @@ static ssize_t read_file_misc(struct file *file, char __user *user_buf,
 {
 	struct ath_softc *sc = file->private_data;
 	struct ath_common *common = ath9k_hw_common(sc->sc_ah);
+<<<<<<< HEAD
 	struct ieee80211_hw *hw = sc->hw;
 	struct ath9k_vif_iter_data iter_data;
+=======
+	struct ath9k_vif_iter_data iter_data;
+	struct ath_chanctx *ctx;
+>>>>>>> v3.18
 	char buf[512];
 	unsigned int len = 0;
 	ssize_t retval = 0;
 	unsigned int reg;
+<<<<<<< HEAD
 	u32 rxfilter;
 
 	len += snprintf(buf + len, sizeof(buf) - len,
@@ -623,11 +1045,23 @@ static ssize_t read_file_misc(struct file *file, char __user *user_buf,
 			"BSSID-MASK: %pM\n", common->bssidmask);
 	len += snprintf(buf + len, sizeof(buf) - len,
 			"OPMODE: %s\n", ath_opmode_to_string(sc->sc_ah->opmode));
+=======
+	u32 rxfilter, i;
+
+	len += scnprintf(buf + len, sizeof(buf) - len,
+			 "BSSID: %pM\n", common->curbssid);
+	len += scnprintf(buf + len, sizeof(buf) - len,
+			 "BSSID-MASK: %pM\n", common->bssidmask);
+	len += scnprintf(buf + len, sizeof(buf) - len,
+			 "OPMODE: %s\n",
+			 ath_opmode_to_string(sc->sc_ah->opmode));
+>>>>>>> v3.18
 
 	ath9k_ps_wakeup(sc);
 	rxfilter = ath9k_hw_getrxfilter(sc->sc_ah);
 	ath9k_ps_restore(sc);
 
+<<<<<<< HEAD
 	len += snprintf(buf + len, sizeof(buf) - len,
 			"RXFILTER: 0x%x", rxfilter);
 
@@ -691,6 +1125,78 @@ static ssize_t read_file_misc(struct file *file, char __user *user_buf,
 			iter_data.naps, iter_data.nstations, iter_data.nmeshes,
 			iter_data.nwds, iter_data.nadhocs,
 			sc->nvifs, sc->nbcnvifs);
+=======
+	len += scnprintf(buf + len, sizeof(buf) - len,
+			 "RXFILTER: 0x%x", rxfilter);
+
+	if (rxfilter & ATH9K_RX_FILTER_UCAST)
+		len += scnprintf(buf + len, sizeof(buf) - len, " UCAST");
+	if (rxfilter & ATH9K_RX_FILTER_MCAST)
+		len += scnprintf(buf + len, sizeof(buf) - len, " MCAST");
+	if (rxfilter & ATH9K_RX_FILTER_BCAST)
+		len += scnprintf(buf + len, sizeof(buf) - len, " BCAST");
+	if (rxfilter & ATH9K_RX_FILTER_CONTROL)
+		len += scnprintf(buf + len, sizeof(buf) - len, " CONTROL");
+	if (rxfilter & ATH9K_RX_FILTER_BEACON)
+		len += scnprintf(buf + len, sizeof(buf) - len, " BEACON");
+	if (rxfilter & ATH9K_RX_FILTER_PROM)
+		len += scnprintf(buf + len, sizeof(buf) - len, " PROM");
+	if (rxfilter & ATH9K_RX_FILTER_PROBEREQ)
+		len += scnprintf(buf + len, sizeof(buf) - len, " PROBEREQ");
+	if (rxfilter & ATH9K_RX_FILTER_PHYERR)
+		len += scnprintf(buf + len, sizeof(buf) - len, " PHYERR");
+	if (rxfilter & ATH9K_RX_FILTER_MYBEACON)
+		len += scnprintf(buf + len, sizeof(buf) - len, " MYBEACON");
+	if (rxfilter & ATH9K_RX_FILTER_COMP_BAR)
+		len += scnprintf(buf + len, sizeof(buf) - len, " COMP_BAR");
+	if (rxfilter & ATH9K_RX_FILTER_PSPOLL)
+		len += scnprintf(buf + len, sizeof(buf) - len, " PSPOLL");
+	if (rxfilter & ATH9K_RX_FILTER_PHYRADAR)
+		len += scnprintf(buf + len, sizeof(buf) - len, " PHYRADAR");
+	if (rxfilter & ATH9K_RX_FILTER_MCAST_BCAST_ALL)
+		len += scnprintf(buf + len, sizeof(buf) - len, " MCAST_BCAST_ALL");
+	if (rxfilter & ATH9K_RX_FILTER_CONTROL_WRAPPER)
+		len += scnprintf(buf + len, sizeof(buf) - len, " CONTROL_WRAPPER");
+
+	len += scnprintf(buf + len, sizeof(buf) - len, "\n");
+
+	reg = sc->sc_ah->imask;
+
+	len += scnprintf(buf + len, sizeof(buf) - len,
+			 "INTERRUPT-MASK: 0x%x", reg);
+
+	if (reg & ATH9K_INT_SWBA)
+		len += scnprintf(buf + len, sizeof(buf) - len, " SWBA");
+	if (reg & ATH9K_INT_BMISS)
+		len += scnprintf(buf + len, sizeof(buf) - len, " BMISS");
+	if (reg & ATH9K_INT_CST)
+		len += scnprintf(buf + len, sizeof(buf) - len, " CST");
+	if (reg & ATH9K_INT_RX)
+		len += scnprintf(buf + len, sizeof(buf) - len, " RX");
+	if (reg & ATH9K_INT_RXHP)
+		len += scnprintf(buf + len, sizeof(buf) - len, " RXHP");
+	if (reg & ATH9K_INT_RXLP)
+		len += scnprintf(buf + len, sizeof(buf) - len, " RXLP");
+	if (reg & ATH9K_INT_BB_WATCHDOG)
+		len += scnprintf(buf + len, sizeof(buf) - len, " BB_WATCHDOG");
+
+	len += scnprintf(buf + len, sizeof(buf) - len, "\n");
+
+	i = 0;
+	ath_for_each_chanctx(sc, ctx) {
+		if (!ctx->assigned || list_empty(&ctx->vifs))
+			continue;
+		ath9k_calculate_iter_data(sc, ctx, &iter_data);
+
+		len += scnprintf(buf + len, sizeof(buf) - len,
+			"VIF-COUNTS: CTX %i AP: %i STA: %i MESH: %i WDS: %i",
+			i++, iter_data.naps, iter_data.nstations,
+			iter_data.nmeshes, iter_data.nwds);
+		len += scnprintf(buf + len, sizeof(buf) - len,
+			" ADHOC: %i TOTAL: %hi BEACON-VIF: %hi\n",
+			iter_data.nadhocs, sc->cur_chan->nvifs, sc->nbcnvifs);
+	}
+>>>>>>> v3.18
 
 	if (len > sizeof(buf))
 		len = sizeof(buf);
@@ -706,6 +1212,7 @@ static ssize_t read_file_reset(struct file *file, char __user *user_buf,
 	char buf[512];
 	unsigned int len = 0;
 
+<<<<<<< HEAD
 	len += snprintf(buf + len, sizeof(buf) - len,
 			"%17s: %2d\n", "Baseband Hang",
 			sc->debug.stats.reset[RESET_TYPE_BB_HANG]);
@@ -727,6 +1234,35 @@ static ssize_t read_file_reset(struct file *file, char __user *user_buf,
 	len += snprintf(buf + len, sizeof(buf) - len,
 			"%17s: %2d\n", "MCI Reset",
 			sc->debug.stats.reset[RESET_TYPE_MCI]);
+=======
+	len += scnprintf(buf + len, sizeof(buf) - len,
+			 "%17s: %2d\n", "Baseband Hang",
+			 sc->debug.stats.reset[RESET_TYPE_BB_HANG]);
+	len += scnprintf(buf + len, sizeof(buf) - len,
+			 "%17s: %2d\n", "Baseband Watchdog",
+			 sc->debug.stats.reset[RESET_TYPE_BB_WATCHDOG]);
+	len += scnprintf(buf + len, sizeof(buf) - len,
+			 "%17s: %2d\n", "Fatal HW Error",
+			 sc->debug.stats.reset[RESET_TYPE_FATAL_INT]);
+	len += scnprintf(buf + len, sizeof(buf) - len,
+			 "%17s: %2d\n", "TX HW error",
+			 sc->debug.stats.reset[RESET_TYPE_TX_ERROR]);
+	len += scnprintf(buf + len, sizeof(buf) - len,
+			 "%17s: %2d\n", "TX Path Hang",
+			 sc->debug.stats.reset[RESET_TYPE_TX_HANG]);
+	len += scnprintf(buf + len, sizeof(buf) - len,
+			 "%17s: %2d\n", "PLL RX Hang",
+			 sc->debug.stats.reset[RESET_TYPE_PLL_HANG]);
+	len += scnprintf(buf + len, sizeof(buf) - len,
+			 "%17s: %2d\n", "MAC Hang",
+			 sc->debug.stats.reset[RESET_TYPE_MAC_HANG]);
+	len += scnprintf(buf + len, sizeof(buf) - len,
+			 "%17s: %2d\n", "Stuck Beacon",
+			 sc->debug.stats.reset[RESET_TYPE_BEACON_STUCK]);
+	len += scnprintf(buf + len, sizeof(buf) - len,
+			 "%17s: %2d\n", "MCI Reset",
+			 sc->debug.stats.reset[RESET_TYPE_MCI]);
+>>>>>>> v3.18
 
 	if (len > sizeof(buf))
 		len = sizeof(buf);
@@ -738,8 +1274,11 @@ void ath_debug_stat_tx(struct ath_softc *sc, struct ath_buf *bf,
 		       struct ath_tx_status *ts, struct ath_txq *txq,
 		       unsigned int flags)
 {
+<<<<<<< HEAD
 #define TX_SAMP_DBG(c) (sc->debug.bb_mac_samp[sc->debug.sampidx].ts\
 			[sc->debug.tsidx].c)
+=======
+>>>>>>> v3.18
 	int qnum = txq->axq_qnum;
 
 	TX_STAT_INC(qnum, tx_pkts_all);
@@ -771,6 +1310,7 @@ void ath_debug_stat_tx(struct ath_softc *sc, struct ath_buf *bf,
 		TX_STAT_INC(qnum, data_underrun);
 	if (ts->ts_flags & ATH9K_TX_DELIM_UNDERRUN)
 		TX_STAT_INC(qnum, delim_underrun);
+<<<<<<< HEAD
 
 #ifdef CONFIG_ATH9K_MAC_DEBUG
 	spin_lock(&sc->debug.samp_lock);
@@ -802,6 +1342,8 @@ void ath_debug_stat_tx(struct ath_softc *sc, struct ath_buf *bf,
 #endif
 
 #undef TX_SAMP_DBG
+=======
+>>>>>>> v3.18
 }
 
 static const struct file_operations fops_xmit = {
@@ -832,6 +1374,7 @@ static const struct file_operations fops_reset = {
 	.llseek = default_llseek,
 };
 
+<<<<<<< HEAD
 static ssize_t read_file_recv(struct file *file, char __user *user_buf,
 			      size_t count, loff_t *ppos)
 {
@@ -1254,6 +1797,13 @@ static struct rchan_callbacks rfs_spec_scan_cb = {
 };
 
 
+=======
+void ath_debug_stat_rx(struct ath_softc *sc, struct ath_rx_status *rs)
+{
+	ath9k_cmn_debug_stat_rx(&sc->debug.stats.rxstats, rs);
+}
+
+>>>>>>> v3.18
 static ssize_t read_file_regidx(struct file *file, char __user *user_buf,
                                 size_t count, loff_t *ppos)
 {
@@ -1278,7 +1828,11 @@ static ssize_t write_file_regidx(struct file *file, const char __user *user_buf,
 		return -EFAULT;
 
 	buf[len] = '\0';
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &regidx))
+=======
+	if (kstrtoul(buf, 0, &regidx))
+>>>>>>> v3.18
 		return -EINVAL;
 
 	sc->debug.regidx = regidx;
@@ -1323,7 +1877,11 @@ static ssize_t write_file_regval(struct file *file, const char __user *user_buf,
 		return -EFAULT;
 
 	buf[len] = '\0';
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &regval))
+=======
+	if (kstrtoul(buf, 0, &regval))
+>>>>>>> v3.18
 		return -EINVAL;
 
 	ath9k_ps_wakeup(sc);
@@ -1381,7 +1939,11 @@ static ssize_t read_file_dump_nfcal(struct file *file, char __user *user_buf,
 {
 	struct ath_softc *sc = file->private_data;
 	struct ath_hw *ah = sc->sc_ah;
+<<<<<<< HEAD
 	struct ath9k_nfcal_hist *h = sc->caldata.nfCalHist;
+=======
+	struct ath9k_nfcal_hist *h = sc->cur_chan->caldata.nfCalHist;
+>>>>>>> v3.18
 	struct ath_common *common = ath9k_hw_common(ah);
 	struct ieee80211_conf *conf = &common->hw->conf;
 	u32 len = 0, size = 1500;
@@ -1395,22 +1957,38 @@ static ssize_t read_file_dump_nfcal(struct file *file, char __user *user_buf,
 	if (!buf)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 	len += snprintf(buf + len, size - len,
 			"Channel Noise Floor : %d\n", ah->noise);
 	len += snprintf(buf + len, size - len,
 			"Chain | privNF | # Readings | NF Readings\n");
+=======
+	len += scnprintf(buf + len, size - len,
+			 "Channel Noise Floor : %d\n", ah->noise);
+	len += scnprintf(buf + len, size - len,
+			 "Chain | privNF | # Readings | NF Readings\n");
+>>>>>>> v3.18
 	for (i = 0; i < NUM_NF_READINGS; i++) {
 		if (!(chainmask & (1 << i)) ||
 		    ((i >= AR5416_MAX_CHAINS) && !conf_is_ht40(conf)))
 			continue;
 
 		nread = AR_PHY_CCA_FILTERWINDOW_LENGTH - h[i].invalidNFcount;
+<<<<<<< HEAD
 		len += snprintf(buf + len, size - len, " %d\t %d\t %d\t\t",
 				i, h[i].privNF, nread);
 		for (j = 0; j < nread; j++)
 			len += snprintf(buf + len, size - len,
 					" %d", h[i].nfCalBuffer[j]);
 		len += snprintf(buf + len, size - len, "\n");
+=======
+		len += scnprintf(buf + len, size - len, " %d\t %d\t %d\t\t",
+				 i, h[i].privNF, nread);
+		for (j = 0; j < nread; j++)
+			len += scnprintf(buf + len, size - len,
+					 " %d", h[i].nfCalBuffer[j]);
+		len += scnprintf(buf + len, size - len, "\n");
+>>>>>>> v3.18
 	}
 
 	if (len > size)
@@ -1429,6 +2007,7 @@ static const struct file_operations fops_dump_nfcal = {
 	.llseek = default_llseek,
 };
 
+<<<<<<< HEAD
 static ssize_t read_file_base_eeprom(struct file *file, char __user *user_buf,
 				     size_t count, loff_t *ppos)
 {
@@ -1762,6 +2341,8 @@ static const struct file_operations fops_samps = {
 
 #endif
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_ATH9K_BTCOEX_SUPPORT
 static ssize_t read_file_btcoex(struct file *file, char __user *user_buf,
 				size_t count, loff_t *ppos)
@@ -1776,8 +2357,13 @@ static ssize_t read_file_btcoex(struct file *file, char __user *user_buf,
 		return -ENOMEM;
 
 	if (!sc->sc_ah->common.btcoex_enabled) {
+<<<<<<< HEAD
 		len = snprintf(buf, size, "%s\n",
 			       "BTCOEX is disabled");
+=======
+		len = scnprintf(buf, size, "%s\n",
+				"BTCOEX is disabled");
+>>>>>>> v3.18
 		goto exit;
 	}
 
@@ -1797,6 +2383,7 @@ static const struct file_operations fops_btcoex = {
 };
 #endif
 
+<<<<<<< HEAD
 static ssize_t read_file_node_stat(struct file *file, char __user *user_buf,
 				   size_t count, loff_t *ppos)
 {
@@ -1863,10 +2450,30 @@ exit:
 
 static const struct file_operations fops_node_stat = {
 	.read = read_file_node_stat,
+=======
+#ifdef CONFIG_ATH9K_DYNACK
+static ssize_t read_file_ackto(struct file *file, char __user *user_buf,
+			       size_t count, loff_t *ppos)
+{
+	struct ath_softc *sc = file->private_data;
+	struct ath_hw *ah = sc->sc_ah;
+	char buf[32];
+	unsigned int len;
+
+	len = sprintf(buf, "%u %c\n", ah->dynack.ackto,
+		      (ah->dynack.enabled) ? 'A' : 'S');
+
+	return simple_read_from_buffer(user_buf, count, ppos, buf, len);
+}
+
+static const struct file_operations fops_ackto = {
+	.read = read_file_ackto,
+>>>>>>> v3.18
 	.open = simple_open,
 	.owner = THIS_MODULE,
 	.llseek = default_llseek,
 };
+<<<<<<< HEAD
 
 void ath9k_sta_add_debugfs(struct ieee80211_hw *hw,
 			   struct ieee80211_vif *vif,
@@ -1886,6 +2493,9 @@ void ath9k_sta_remove_debugfs(struct ieee80211_hw *hw,
 	struct ath_node *an = (struct ath_node *)sta->drv_priv;
 	debugfs_remove(an->node_stat);
 }
+=======
+#endif
+>>>>>>> v3.18
 
 /* Ethtool support for get-stats */
 
@@ -2010,10 +2620,14 @@ void ath9k_get_et_stats(struct ieee80211_hw *hw,
 
 void ath9k_deinit_debug(struct ath_softc *sc)
 {
+<<<<<<< HEAD
 	if (config_enabled(CONFIG_ATH9K_DEBUGFS) && sc->rfs_chan_spec_scan) {
 		relay_close(sc->rfs_chan_spec_scan);
 		sc->rfs_chan_spec_scan = NULL;
 	}
+=======
+	ath9k_spectral_deinit_debug(sc);
+>>>>>>> v3.18
 }
 
 int ath9k_init_debug(struct ath_hw *ah)
@@ -2032,6 +2646,11 @@ int ath9k_init_debug(struct ath_hw *ah)
 #endif
 
 	ath9k_dfs_init_debug(sc);
+<<<<<<< HEAD
+=======
+	ath9k_tx99_init_debug(sc);
+	ath9k_spectral_init_debug(sc);
+>>>>>>> v3.18
 
 	debugfs_create_file("dma", S_IRUSR, sc->debug.debugfs_phy, sc,
 			    &fops_dma);
@@ -2053,6 +2672,7 @@ int ath9k_init_debug(struct ath_hw *ah)
 			    &fops_misc);
 	debugfs_create_file("reset", S_IRUSR, sc->debug.debugfs_phy, sc,
 			    &fops_reset);
+<<<<<<< HEAD
 	debugfs_create_file("recv", S_IRUSR, sc->debug.debugfs_phy, sc,
 			    &fops_recv);
 	debugfs_create_file("rx_chainmask", S_IRUSR | S_IWUSR,
@@ -2061,6 +2681,18 @@ int ath9k_init_debug(struct ath_hw *ah)
 			    sc->debug.debugfs_phy, sc, &fops_tx_chainmask);
 	debugfs_create_file("disable_ani", S_IRUSR | S_IWUSR,
 			    sc->debug.debugfs_phy, sc, &fops_disable_ani);
+=======
+
+	ath9k_cmn_debug_recv(sc->debug.debugfs_phy, &sc->debug.stats.rxstats);
+	ath9k_cmn_debug_phy_err(sc->debug.debugfs_phy, &sc->debug.stats.rxstats);
+
+	debugfs_create_u8("rx_chainmask", S_IRUSR, sc->debug.debugfs_phy,
+			  &ah->rxchainmask);
+	debugfs_create_u8("tx_chainmask", S_IRUSR, sc->debug.debugfs_phy,
+			  &ah->txchainmask);
+	debugfs_create_file("ani", S_IRUSR | S_IWUSR,
+			    sc->debug.debugfs_phy, sc, &fops_ani);
+>>>>>>> v3.18
 	debugfs_create_bool("paprd", S_IRUSR | S_IWUSR, sc->debug.debugfs_phy,
 			    &sc->sc_ah->config.enable_paprd);
 	debugfs_create_file("regidx", S_IRUSR | S_IWUSR, sc->debug.debugfs_phy,
@@ -2074,6 +2706,7 @@ int ath9k_init_debug(struct ath_hw *ah)
 			    &fops_regdump);
 	debugfs_create_file("dump_nfcal", S_IRUSR, sc->debug.debugfs_phy, sc,
 			    &fops_dump_nfcal);
+<<<<<<< HEAD
 	debugfs_create_file("base_eeprom", S_IRUSR, sc->debug.debugfs_phy, sc,
 			    &fops_base_eeprom);
 	debugfs_create_file("modal_eeprom", S_IRUSR, sc->debug.debugfs_phy, sc,
@@ -2100,15 +2733,38 @@ int ath9k_init_debug(struct ath_hw *ah)
 	debugfs_create_file("samples", S_IRUSR, sc->debug.debugfs_phy, sc,
 			    &fops_samps);
 #endif
+=======
+
+	ath9k_cmn_debug_base_eeprom(sc->debug.debugfs_phy, sc->sc_ah);
+	ath9k_cmn_debug_modal_eeprom(sc->debug.debugfs_phy, sc->sc_ah);
+
+>>>>>>> v3.18
 	debugfs_create_u32("gpio_mask", S_IRUSR | S_IWUSR,
 			   sc->debug.debugfs_phy, &sc->sc_ah->gpio_mask);
 	debugfs_create_u32("gpio_val", S_IRUSR | S_IWUSR,
 			   sc->debug.debugfs_phy, &sc->sc_ah->gpio_val);
+<<<<<<< HEAD
 	debugfs_create_file("diversity", S_IRUSR | S_IWUSR,
 			    sc->debug.debugfs_phy, sc, &fops_ant_diversity);
 #ifdef CONFIG_ATH9K_BTCOEX_SUPPORT
 	debugfs_create_file("btcoex", S_IRUSR, sc->debug.debugfs_phy, sc,
 			    &fops_btcoex);
 #endif
+=======
+	debugfs_create_file("antenna_diversity", S_IRUSR,
+			    sc->debug.debugfs_phy, sc, &fops_antenna_diversity);
+#ifdef CONFIG_ATH9K_BTCOEX_SUPPORT
+	debugfs_create_file("bt_ant_diversity", S_IRUSR | S_IWUSR,
+			    sc->debug.debugfs_phy, sc, &fops_bt_ant_diversity);
+	debugfs_create_file("btcoex", S_IRUSR, sc->debug.debugfs_phy, sc,
+			    &fops_btcoex);
+#endif
+
+#ifdef CONFIG_ATH9K_DYNACK
+	debugfs_create_file("ack_to", S_IRUSR | S_IWUSR, sc->debug.debugfs_phy,
+			    sc, &fops_ackto);
+#endif
+
+>>>>>>> v3.18
 	return 0;
 }

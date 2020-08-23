@@ -158,14 +158,23 @@ struct config *prepare_default_config()
 int prepare_config(const char *path, struct config *config)
 {
 	size_t len = 0;
+<<<<<<< HEAD
 	char *opt, *val, *line = NULL;
 	FILE *configfile = fopen(path, "r");
+=======
+	char opt[16], val[32], *line = NULL;
+	FILE *configfile;
+>>>>>>> v3.18
 
 	if (config == NULL) {
 		fprintf(stderr, "error: config is NULL\n");
 		return 1;
 	}
 
+<<<<<<< HEAD
+=======
+	configfile = fopen(path, "r");
+>>>>>>> v3.18
 	if (configfile == NULL) {
 		perror("fopen");
 		fprintf(stderr, "error: unable to read configfile\n");
@@ -174,6 +183,7 @@ int prepare_config(const char *path, struct config *config)
 	}
 
 	while (getline(&line, &len, configfile) != -1) {
+<<<<<<< HEAD
 		if (line[0] == '#' || line[0] == ' ')
 			continue;
 
@@ -212,14 +222,61 @@ int prepare_config(const char *path, struct config *config)
 			strncpy(config->governor, val, 14);
 
 		else if (strncmp("priority", opt, strlen(opt)) == 0) {
+=======
+		if (line[0] == '#' || line[0] == ' ' || line[0] == '\n')
+			continue;
+
+		if (sscanf(line, "%14s = %30s", opt, val) < 2)
+			continue;
+
+		dprintf("parsing: %s -> %s\n", opt, val);
+
+		if (strcmp("sleep", opt) == 0)
+			sscanf(val, "%li", &config->sleep);
+
+		else if (strcmp("load", opt) == 0)
+			sscanf(val, "%li", &config->load);
+
+		else if (strcmp("load_step", opt) == 0)
+			sscanf(val, "%li", &config->load_step);
+
+		else if (strcmp("sleep_step", opt) == 0)
+			sscanf(val, "%li", &config->sleep_step);
+
+		else if (strcmp("cycles", opt) == 0)
+			sscanf(val, "%u", &config->cycles);
+
+		else if (strcmp("rounds", opt) == 0)
+			sscanf(val, "%u", &config->rounds);
+
+		else if (strcmp("verbose", opt) == 0)
+			sscanf(val, "%u", &config->verbose);
+
+		else if (strcmp("output", opt) == 0)
+			config->output = prepare_output(val); 
+
+		else if (strcmp("cpu", opt) == 0)
+			sscanf(val, "%u", &config->cpu);
+
+		else if (strcmp("governor", opt) == 0) {
+			strncpy(config->governor, val,
+					sizeof(config->governor));
+			config->governor[sizeof(config->governor) - 1] = '\0';
+		}
+
+		else if (strcmp("priority", opt) == 0) {
+>>>>>>> v3.18
 			if (string_to_prio(val) != SCHED_ERR)
 				config->prio = string_to_prio(val);
 		}
 	}
 
 	free(line);
+<<<<<<< HEAD
 	free(opt);
 	free(val);
+=======
+>>>>>>> v3.18
 
 	return 0;
 }

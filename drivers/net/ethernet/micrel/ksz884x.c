@@ -4128,10 +4128,17 @@ static int hw_add_addr(struct ksz_hw *hw, u8 *mac_addr)
 	int i;
 	int j = ADDITIONAL_ENTRIES;
 
+<<<<<<< HEAD
 	if (!memcmp(hw->override_addr, mac_addr, ETH_ALEN))
 		return 0;
 	for (i = 0; i < hw->addr_list_size; i++) {
 		if (!memcmp(hw->address[i], mac_addr, ETH_ALEN))
+=======
+	if (ether_addr_equal(hw->override_addr, mac_addr))
+		return 0;
+	for (i = 0; i < hw->addr_list_size; i++) {
+		if (ether_addr_equal(hw->address[i], mac_addr))
+>>>>>>> v3.18
 			return 0;
 		if (ADDITIONAL_ENTRIES == j && empty_addr(hw->address[i]))
 			j = i;
@@ -4149,7 +4156,11 @@ static int hw_del_addr(struct ksz_hw *hw, u8 *mac_addr)
 	int i;
 
 	for (i = 0; i < hw->addr_list_size; i++) {
+<<<<<<< HEAD
 		if (!memcmp(hw->address[i], mac_addr, ETH_ALEN)) {
+=======
+		if (ether_addr_equal(hw->address[i], mac_addr)) {
+>>>>>>> v3.18
 			memset(hw->address[i], 0, ETH_ALEN);
 			writel(0, hw->io + ADD_ADDR_INCR * i +
 				KS_ADD_ADDR_0_HI);
@@ -4409,14 +4420,23 @@ static int ksz_alloc_desc(struct dev_info *adapter)
 		DESC_ALIGNMENT;
 
 	adapter->desc_pool.alloc_virt =
+<<<<<<< HEAD
 		pci_alloc_consistent(
 			adapter->pdev, adapter->desc_pool.alloc_size,
 			&adapter->desc_pool.dma_addr);
+=======
+		pci_zalloc_consistent(adapter->pdev,
+				      adapter->desc_pool.alloc_size,
+				      &adapter->desc_pool.dma_addr);
+>>>>>>> v3.18
 	if (adapter->desc_pool.alloc_virt == NULL) {
 		adapter->desc_pool.alloc_size = 0;
 		return 1;
 	}
+<<<<<<< HEAD
 	memset(adapter->desc_pool.alloc_virt, 0, adapter->desc_pool.alloc_size);
+=======
+>>>>>>> v3.18
 
 	/* Align to the next cache line boundary. */
 	offset = (((ulong) adapter->desc_pool.alloc_virt % DESC_ALIGNMENT) ?
@@ -4832,7 +4852,11 @@ static inline void copy_old_skb(struct sk_buff *old, struct sk_buff *skb)
 	skb->csum = old->csum;
 	skb_set_network_header(skb, ETH_HLEN);
 
+<<<<<<< HEAD
 	dev_kfree_skb(old);
+=======
+	dev_consume_skb_any(old);
+>>>>>>> v3.18
 }
 
 /**
@@ -4930,7 +4954,11 @@ static void netdev_tx_timeout(struct net_device *dev)
 		 * Only reset the hardware if time between calls is long
 		 * enough.
 		 */
+<<<<<<< HEAD
 		if (jiffies - last_reset <= dev->watchdog_timeo)
+=======
+		if (time_before_eq(jiffies, last_reset + dev->watchdog_timeo))
+>>>>>>> v3.18
 			hw_priv = NULL;
 	}
 
@@ -5853,15 +5881,21 @@ static int netdev_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
 	struct dev_info *hw_priv = priv->adapter;
 	struct ksz_hw *hw = &hw_priv->hw;
 	struct ksz_port *port = &priv->port;
+<<<<<<< HEAD
 	int rc;
+=======
+>>>>>>> v3.18
 	int result = 0;
 	struct mii_ioctl_data *data = if_mii(ifr);
 
 	if (down_interruptible(&priv->proc_sem))
 		return -ERESTARTSYS;
 
+<<<<<<< HEAD
 	/* assume success */
 	rc = 0;
+=======
+>>>>>>> v3.18
 	switch (cmd) {
 	/* Get address of MII PHY in use. */
 	case SIOCGMIIPHY:
@@ -7075,6 +7109,10 @@ static int pcidev_init(struct pci_dev *pdev, const struct pci_device_id *id)
 		dev = alloc_etherdev(sizeof(struct dev_priv));
 		if (!dev)
 			goto pcidev_init_reg_err;
+<<<<<<< HEAD
+=======
+		SET_NETDEV_DEV(dev, &pdev->dev);
+>>>>>>> v3.18
 		info->netdev[i] = dev;
 
 		priv = netdev_priv(dev);
@@ -7104,13 +7142,21 @@ static int pcidev_init(struct pci_dev *pdev, const struct pci_device_id *id)
 			       ETH_ALEN);
 		else {
 			memcpy(dev->dev_addr, sw->other_addr, ETH_ALEN);
+<<<<<<< HEAD
 			if (!memcmp(sw->other_addr, hw->override_addr,
 				    ETH_ALEN))
+=======
+			if (ether_addr_equal(sw->other_addr, hw->override_addr))
+>>>>>>> v3.18
 				dev->dev_addr[5] += port->first_port;
 		}
 
 		dev->netdev_ops = &netdev_ops;
+<<<<<<< HEAD
 		SET_ETHTOOL_OPS(dev, &netdev_ethtool_ops);
+=======
+		dev->ethtool_ops = &netdev_ethtool_ops;
+>>>>>>> v3.18
 		if (register_netdev(dev))
 			goto pcidev_init_reg_err;
 		port_set_power_saving(port, true);
@@ -7150,8 +7196,11 @@ static void pcidev_exit(struct pci_dev *pdev)
 	struct platform_info *info = pci_get_drvdata(pdev);
 	struct dev_info *hw_priv = &info->dev_info;
 
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 	release_mem_region(pci_resource_start(pdev, 0),
 		pci_resource_len(pdev, 0));
 	for (i = 0; i < hw_priv->hw.dev_count; i++) {
@@ -7227,7 +7276,11 @@ static int pcidev_suspend(struct pci_dev *pdev, pm_message_t state)
 
 static char pcidev_name[] = "ksz884xp";
 
+<<<<<<< HEAD
 static struct pci_device_id pcidev_table[] = {
+=======
+static const struct pci_device_id pcidev_table[] = {
+>>>>>>> v3.18
 	{ PCI_VENDOR_ID_MICREL_KS, 0x8841,
 		PCI_ANY_ID, PCI_ANY_ID, 0, 0, 0 },
 	{ PCI_VENDOR_ID_MICREL_KS, 0x8842,

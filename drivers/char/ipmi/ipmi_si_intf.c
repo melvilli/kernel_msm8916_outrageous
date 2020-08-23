@@ -61,7 +61,10 @@
 #include <linux/ipmi_smi.h>
 #include <asm/io.h>
 #include "ipmi_si_sm.h"
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/dmi.h>
 #include <linux/string.h>
 #include <linux/ctype.h>
@@ -71,6 +74,14 @@
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PARISC
+#include <asm/hardware.h>	/* for register_parisc_driver() stuff */
+#include <asm/parisc-device.h>
+#endif
+
+>>>>>>> v3.18
 #define PFX "ipmi_si: "
 
 /* Measure times between events in the driver. */
@@ -213,7 +224,11 @@ struct smi_info {
 	unsigned char       msg_flags;
 
 	/* Does the BMC have an event buffer? */
+<<<<<<< HEAD
 	char		    has_event_buffer;
+=======
+	bool		    has_event_buffer;
+>>>>>>> v3.18
 
 	/*
 	 * If set to true, this will request events the next time the
@@ -226,7 +241,11 @@ struct smi_info {
 	 * call.  Generally used after a panic to make sure stuff goes
 	 * out.
 	 */
+<<<<<<< HEAD
 	int                 run_to_completion;
+=======
+	bool                run_to_completion;
+>>>>>>> v3.18
 
 	/* The I/O port of an SI interface. */
 	int                 port;
@@ -253,13 +272,23 @@ struct smi_info {
 	/* Used to gracefully stop the timer without race conditions. */
 	atomic_t            stop_operation;
 
+<<<<<<< HEAD
+=======
+	/* Are we waiting for the events, pretimeouts, received msgs? */
+	atomic_t            need_watch;
+
+>>>>>>> v3.18
 	/*
 	 * The driver will disable interrupts when it gets into a
 	 * situation where it cannot handle messages due to lack of
 	 * memory.  Once that situation clears up, it will re-enable
 	 * interrupts.
 	 */
+<<<<<<< HEAD
 	int interrupt_disabled;
+=======
+	bool interrupt_disabled;
+>>>>>>> v3.18
 
 	/* From the get device id response... */
 	struct ipmi_device_id device_id;
@@ -272,7 +301,11 @@ struct smi_info {
 	 * True if we allocated the device, false if it came from
 	 * someplace else (like PCI).
 	 */
+<<<<<<< HEAD
 	int dev_registered;
+=======
+	bool dev_registered;
+>>>>>>> v3.18
 
 	/* Slave address, could be reported from DMI. */
 	unsigned char slave_addr;
@@ -296,16 +329,30 @@ struct smi_info {
 static int force_kipmid[SI_MAX_PARMS];
 static int num_force_kipmid;
 #ifdef CONFIG_PCI
+<<<<<<< HEAD
 static int pci_registered;
 #endif
 #ifdef CONFIG_ACPI
 static int pnp_registered;
+=======
+static bool pci_registered;
+#endif
+#ifdef CONFIG_ACPI
+static bool pnp_registered;
+#endif
+#ifdef CONFIG_PARISC
+static bool parisc_registered;
+>>>>>>> v3.18
 #endif
 
 static unsigned int kipmid_max_busy_us[SI_MAX_PARMS];
 static int num_max_busy_us;
 
+<<<<<<< HEAD
 static int unload_when_empty = 1;
+=======
+static bool unload_when_empty = true;
+>>>>>>> v3.18
 
 static int add_smi(struct smi_info *smi);
 static int try_smi_init(struct smi_info *smi);
@@ -447,7 +494,11 @@ static inline void disable_si_irq(struct smi_info *smi_info)
 {
 	if ((smi_info->irq) && (!smi_info->interrupt_disabled)) {
 		start_disable_irq(smi_info);
+<<<<<<< HEAD
 		smi_info->interrupt_disabled = 1;
+=======
+		smi_info->interrupt_disabled = true;
+>>>>>>> v3.18
 		if (!atomic_read(&smi_info->stop_operation))
 			smi_mod_timer(smi_info, jiffies + SI_TIMEOUT_JIFFIES);
 	}
@@ -457,7 +508,11 @@ static inline void enable_si_irq(struct smi_info *smi_info)
 {
 	if ((smi_info->irq) && (smi_info->interrupt_disabled)) {
 		start_enable_irq(smi_info);
+<<<<<<< HEAD
 		smi_info->interrupt_disabled = 0;
+=======
+		smi_info->interrupt_disabled = false;
+>>>>>>> v3.18
 	}
 }
 
@@ -702,7 +757,11 @@ static void handle_transaction_done(struct smi_info *smi_info)
 			dev_warn(smi_info->dev,
 				 "Maybe ok, but ipmi might run very slowly.\n");
 		} else
+<<<<<<< HEAD
 			smi_info->interrupt_disabled = 0;
+=======
+			smi_info->interrupt_disabled = false;
+>>>>>>> v3.18
 		smi_info->si_state = SI_NORMAL;
 		break;
 	}
@@ -855,6 +914,22 @@ static enum si_sm_result smi_event_handler(struct smi_info *smi_info,
 	return si_sm_result;
 }
 
+<<<<<<< HEAD
+=======
+static void check_start_timer_thread(struct smi_info *smi_info)
+{
+	if (smi_info->si_state == SI_NORMAL && smi_info->curr_msg == NULL) {
+		smi_mod_timer(smi_info, jiffies + SI_TIMEOUT_JIFFIES);
+
+		if (smi_info->thread)
+			wake_up_process(smi_info->thread);
+
+		start_next_msg(smi_info);
+		smi_event_handler(smi_info, 0);
+	}
+}
+
+>>>>>>> v3.18
 static void sender(void                *send_info,
 		   struct ipmi_smi_msg *msg,
 		   int                 priority)
@@ -908,6 +983,7 @@ static void sender(void                *send_info,
 	else
 		list_add_tail(&msg->link, &smi_info->xmit_msgs);
 
+<<<<<<< HEAD
 	if (smi_info->si_state == SI_NORMAL && smi_info->curr_msg == NULL) {
 		smi_mod_timer(smi_info, jiffies + SI_TIMEOUT_JIFFIES);
 
@@ -921,6 +997,13 @@ static void sender(void                *send_info,
 }
 
 static void set_run_to_completion(void *send_info, int i_run_to_completion)
+=======
+	check_start_timer_thread(smi_info);
+	spin_unlock_irqrestore(&smi_info->si_lock, flags);
+}
+
+static void set_run_to_completion(void *send_info, bool i_run_to_completion)
+>>>>>>> v3.18
 {
 	struct smi_info   *smi_info = send_info;
 	enum si_sm_result result;
@@ -950,9 +1033,15 @@ static inline int ipmi_si_is_busy(struct timespec *ts)
 	return ts->tv_nsec != -1;
 }
 
+<<<<<<< HEAD
 static int ipmi_thread_busy_wait(enum si_sm_result smi_result,
 				 const struct smi_info *smi_info,
 				 struct timespec *busy_until)
+=======
+static inline int ipmi_thread_busy_wait(enum si_sm_result smi_result,
+					const struct smi_info *smi_info,
+					struct timespec *busy_until)
+>>>>>>> v3.18
 {
 	unsigned int max_busy_us = 0;
 
@@ -992,7 +1081,11 @@ static int ipmi_thread(void *data)
 	struct timespec busy_until;
 
 	ipmi_si_set_not_busy(&busy_until);
+<<<<<<< HEAD
 	set_user_nice(current, 19);
+=======
+	set_user_nice(current, MAX_NICE);
+>>>>>>> v3.18
 	while (!kthread_should_stop()) {
 		int busy_wait;
 
@@ -1016,9 +1109,21 @@ static int ipmi_thread(void *data)
 			; /* do nothing */
 		else if (smi_result == SI_SM_CALL_WITH_DELAY && busy_wait)
 			schedule();
+<<<<<<< HEAD
 		else if (smi_result == SI_SM_IDLE)
 			schedule_timeout_interruptible(100);
 		else
+=======
+		else if (smi_result == SI_SM_IDLE) {
+			if (atomic_read(&smi_info->need_watch)) {
+				schedule_timeout_interruptible(100);
+			} else {
+				/* Wait to be woken up when we are needed. */
+				__set_current_state(TASK_INTERRUPTIBLE);
+				schedule();
+			}
+		} else
+>>>>>>> v3.18
 			schedule_timeout_interruptible(1);
 	}
 	return 0;
@@ -1029,7 +1134,11 @@ static void poll(void *send_info)
 {
 	struct smi_info *smi_info = send_info;
 	unsigned long flags = 0;
+<<<<<<< HEAD
 	int run_to_completion = smi_info->run_to_completion;
+=======
+	bool run_to_completion = smi_info->run_to_completion;
+>>>>>>> v3.18
 
 	/*
 	 * Make sure there is some delay in the poll loop so we can
@@ -1054,6 +1163,20 @@ static void request_events(void *send_info)
 	atomic_set(&smi_info->req_events, 1);
 }
 
+<<<<<<< HEAD
+=======
+static void set_need_watch(void *send_info, bool enable)
+{
+	struct smi_info *smi_info = send_info;
+	unsigned long flags;
+
+	atomic_set(&smi_info->need_watch, enable);
+	spin_lock_irqsave(&smi_info->si_lock, flags);
+	check_start_timer_thread(smi_info);
+	spin_unlock_irqrestore(&smi_info->si_lock, flags);
+}
+
+>>>>>>> v3.18
 static int initialized;
 
 static void smi_timeout(unsigned long data)
@@ -1144,14 +1267,24 @@ static int smi_start_processing(void       *send_info,
 
 	new_smi->intf = intf;
 
+<<<<<<< HEAD
 	/* Set up the timer that drives the interface. */
 	setup_timer(&new_smi->si_timer, smi_timeout, (long)new_smi);
 	smi_mod_timer(new_smi, jiffies + SI_TIMEOUT_JIFFIES);
 
+=======
+>>>>>>> v3.18
 	/* Try to claim any interrupts. */
 	if (new_smi->irq_setup)
 		new_smi->irq_setup(new_smi);
 
+<<<<<<< HEAD
+=======
+	/* Set up the timer that drives the interface. */
+	setup_timer(&new_smi->si_timer, smi_timeout, (long)new_smi);
+	smi_mod_timer(new_smi, jiffies + SI_TIMEOUT_JIFFIES);
+
+>>>>>>> v3.18
 	/*
 	 * Check if the user forcefully enabled the daemon.
 	 */
@@ -1191,7 +1324,11 @@ static int get_smi_info(void *send_info, struct ipmi_smi_info *data)
 	return 0;
 }
 
+<<<<<<< HEAD
 static void set_maintenance_mode(void *send_info, int enable)
+=======
+static void set_maintenance_mode(void *send_info, bool enable)
+>>>>>>> v3.18
 {
 	struct smi_info   *smi_info = send_info;
 
@@ -1205,6 +1342,10 @@ static struct ipmi_smi_handlers handlers = {
 	.get_smi_info		= get_smi_info,
 	.sender			= sender,
 	.request_events		= request_events,
+<<<<<<< HEAD
+=======
+	.set_need_watch		= set_need_watch,
+>>>>>>> v3.18
 	.set_maintenance_mode   = set_maintenance_mode,
 	.set_run_to_completion  = set_run_to_completion,
 	.poll			= poll,
@@ -1232,7 +1373,11 @@ static bool          si_tryplatform = 1;
 #ifdef CONFIG_PCI
 static bool          si_trypci = 1;
 #endif
+<<<<<<< HEAD
 static bool          si_trydefaults = 1;
+=======
+static bool          si_trydefaults = IS_ENABLED(CONFIG_IPMI_SI_PROBE_DEFAULTS);
+>>>>>>> v3.18
 static char          *si_type[SI_MAX_PARMS];
 #define MAX_SI_TYPE_STR 30
 static char          si_type_str[MAX_SI_TYPE_STR];
@@ -1331,7 +1476,11 @@ module_param_array(force_kipmid, int, &num_force_kipmid, 0);
 MODULE_PARM_DESC(force_kipmid, "Force the kipmi daemon to be enabled (1) or"
 		 " disabled(0).  Normally the IPMI driver auto-detects"
 		 " this, but the value may be overridden by this parm.");
+<<<<<<< HEAD
 module_param(unload_when_empty, int, 0);
+=======
+module_param(unload_when_empty, bool, 0);
+>>>>>>> v3.18
 MODULE_PARM_DESC(unload_when_empty, "Unload the module if no interfaces are"
 		 " specified or found, default is 1.  Setting to 0"
 		 " is useful for hot add of devices using hotmod.");
@@ -1360,7 +1509,11 @@ static int std_irq_setup(struct smi_info *info)
 	if (info->si_type == SI_BT) {
 		rv = request_irq(info->irq,
 				 si_bt_irq_handler,
+<<<<<<< HEAD
 				 IRQF_SHARED | IRQF_DISABLED,
+=======
+				 IRQF_SHARED,
+>>>>>>> v3.18
 				 DEVICE_NAME,
 				 info);
 		if (!rv)
@@ -1370,7 +1523,11 @@ static int std_irq_setup(struct smi_info *info)
 	} else
 		rv = request_irq(info->irq,
 				 si_irq_handler,
+<<<<<<< HEAD
 				 IRQF_SHARED | IRQF_DISABLED,
+=======
+				 IRQF_SHARED,
+>>>>>>> v3.18
 				 DEVICE_NAME,
 				 info);
 	if (rv) {
@@ -1851,11 +2008,23 @@ static int hotmod_handler(const char *val, struct kernel_param *kp)
 				info->irq_setup = std_irq_setup;
 			info->slave_addr = ipmb;
 
+<<<<<<< HEAD
 			if (!add_smi(info)) {
 				if (try_smi_init(info))
 					cleanup_one_si(info);
 			} else {
 				kfree(info);
+=======
+			rv = add_smi(info);
+			if (rv) {
+				kfree(info);
+				goto out;
+			}
+			rv = try_smi_init(info);
+			if (rv) {
+				cleanup_one_si(info);
+				goto out;
+>>>>>>> v3.18
 			}
 		} else {
 			/* remove */
@@ -2069,6 +2238,10 @@ struct SPMITable {
 static int try_init_spmi(struct SPMITable *spmi)
 {
 	struct smi_info  *info;
+<<<<<<< HEAD
+=======
+	int rv;
+>>>>>>> v3.18
 
 	if (spmi->IPMIlegacy != 1) {
 		printk(KERN_INFO PFX "Bad SPMI legacy %d\n", spmi->IPMIlegacy);
@@ -2143,10 +2316,18 @@ static int try_init_spmi(struct SPMITable *spmi)
 		 info->io.addr_data, info->io.regsize, info->io.regspacing,
 		 info->irq);
 
+<<<<<<< HEAD
 	if (add_smi(info))
 		kfree(info);
 
 	return 0;
+=======
+	rv = add_smi(info);
+	if (rv)
+		kfree(info);
+
+	return rv;
+>>>>>>> v3.18
 }
 
 static void spmi_find_bmc(void)
@@ -2180,6 +2361,10 @@ static int ipmi_pnp_probe(struct pnp_dev *dev,
 	acpi_handle handle;
 	acpi_status status;
 	unsigned long long tmp;
+<<<<<<< HEAD
+=======
+	int rv;
+>>>>>>> v3.18
 
 	acpi_dev = pnp_acpi_device(dev);
 	if (!acpi_dev)
@@ -2261,10 +2446,18 @@ static int ipmi_pnp_probe(struct pnp_dev *dev,
 		 res, info->io.regsize, info->io.regspacing,
 		 info->irq);
 
+<<<<<<< HEAD
 	if (add_smi(info))
 		goto err_free;
 
 	return 0;
+=======
+	rv = add_smi(info);
+	if (rv)
+		kfree(info);
+
+	return rv;
+>>>>>>> v3.18
 
 err_free:
 	kfree(info);
@@ -2289,6 +2482,11 @@ static struct pnp_driver ipmi_pnp_driver = {
 	.remove		= ipmi_pnp_remove,
 	.id_table	= pnp_dev_table,
 };
+<<<<<<< HEAD
+=======
+
+MODULE_DEVICE_TABLE(pnp, pnp_dev_table);
+>>>>>>> v3.18
 #endif
 
 #ifdef CONFIG_DMI
@@ -2566,16 +2764,30 @@ static int ipmi_pci_probe(struct pci_dev *pdev,
 		&pdev->resource[0], info->io.regsize, info->io.regspacing,
 		info->irq);
 
+<<<<<<< HEAD
 	if (add_smi(info))
 		kfree(info);
 
 	return 0;
+=======
+	rv = add_smi(info);
+	if (rv) {
+		kfree(info);
+		pci_disable_device(pdev);
+	}
+
+	return rv;
+>>>>>>> v3.18
 }
 
 static void ipmi_pci_remove(struct pci_dev *pdev)
 {
 	struct smi_info *info = pci_get_drvdata(pdev);
 	cleanup_one_si(info);
+<<<<<<< HEAD
+=======
+	pci_disable_device(pdev);
+>>>>>>> v3.18
 }
 
 static struct pci_device_id ipmi_pci_devices[] = {
@@ -2611,6 +2823,12 @@ static int ipmi_probe(struct platform_device *dev)
 	if (!match)
 		return -EINVAL;
 
+<<<<<<< HEAD
+=======
+	if (!of_device_is_available(np))
+		return -EINVAL;
+
+>>>>>>> v3.18
 	ret = of_address_to_resource(np, 0, &resource);
 	if (ret) {
 		dev_warn(&dev->dev, PFX "invalid address from OF\n");
@@ -2670,9 +2888,16 @@ static int ipmi_probe(struct platform_device *dev)
 
 	dev_set_drvdata(&dev->dev, info);
 
+<<<<<<< HEAD
 	if (add_smi(info)) {
 		kfree(info);
 		return -EBUSY;
+=======
+	ret = add_smi(info);
+	if (ret) {
+		kfree(info);
+		return ret;
+>>>>>>> v3.18
 	}
 #endif
 	return 0;
@@ -2707,6 +2932,67 @@ static struct platform_driver ipmi_driver = {
 	.remove		= ipmi_remove,
 };
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PARISC
+static int ipmi_parisc_probe(struct parisc_device *dev)
+{
+	struct smi_info *info;
+	int rv;
+
+	info = smi_info_alloc();
+
+	if (!info) {
+		dev_err(&dev->dev,
+			"could not allocate memory for PARISC probe\n");
+		return -ENOMEM;
+	}
+
+	info->si_type		= SI_KCS;
+	info->addr_source	= SI_DEVICETREE;
+	info->io_setup		= mem_setup;
+	info->io.addr_type	= IPMI_MEM_ADDR_SPACE;
+	info->io.addr_data	= dev->hpa.start;
+	info->io.regsize	= 1;
+	info->io.regspacing	= 1;
+	info->io.regshift	= 0;
+	info->irq		= 0; /* no interrupt */
+	info->irq_setup		= NULL;
+	info->dev		= &dev->dev;
+
+	dev_dbg(&dev->dev, "addr 0x%lx\n", info->io.addr_data);
+
+	dev_set_drvdata(&dev->dev, info);
+
+	rv = add_smi(info);
+	if (rv) {
+		kfree(info);
+		return rv;
+	}
+
+	return 0;
+}
+
+static int ipmi_parisc_remove(struct parisc_device *dev)
+{
+	cleanup_one_si(dev_get_drvdata(&dev->dev));
+	return 0;
+}
+
+static struct parisc_device_id ipmi_parisc_tbl[] = {
+	{ HPHW_MC, HVERSION_REV_ANY_ID, 0x004, 0xC0 },
+	{ 0, }
+};
+
+static struct parisc_driver ipmi_parisc_driver = {
+	.name =		"ipmi",
+	.id_table =	ipmi_parisc_tbl,
+	.probe =	ipmi_parisc_probe,
+	.remove =	ipmi_parisc_remove,
+};
+#endif /* CONFIG_PARISC */
+
+>>>>>>> v3.18
 static int wait_for_msg_done(struct smi_info *smi_info)
 {
 	enum si_sm_result     smi_result;
@@ -3266,18 +3552,32 @@ static int try_smi_init(struct smi_info *new_smi)
 	INIT_LIST_HEAD(&(new_smi->hp_xmit_msgs));
 	new_smi->curr_msg = NULL;
 	atomic_set(&new_smi->req_events, 0);
+<<<<<<< HEAD
 	new_smi->run_to_completion = 0;
 	for (i = 0; i < SI_NUM_STATS; i++)
 		atomic_set(&new_smi->stats[i], 0);
 
 	new_smi->interrupt_disabled = 1;
 	atomic_set(&new_smi->stop_operation, 0);
+=======
+	new_smi->run_to_completion = false;
+	for (i = 0; i < SI_NUM_STATS; i++)
+		atomic_set(&new_smi->stats[i], 0);
+
+	new_smi->interrupt_disabled = true;
+	atomic_set(&new_smi->stop_operation, 0);
+	atomic_set(&new_smi->need_watch, 0);
+>>>>>>> v3.18
 	new_smi->intf_num = smi_num;
 	smi_num++;
 
 	rv = try_enable_event_buffer(new_smi);
 	if (rv == 0)
+<<<<<<< HEAD
 		new_smi->has_event_buffer = 1;
+=======
+		new_smi->has_event_buffer = true;
+>>>>>>> v3.18
 
 	/*
 	 * Start clearing the flags before we enable interrupts or the
@@ -3311,7 +3611,11 @@ static int try_smi_init(struct smi_info *new_smi)
 			       rv);
 			goto out_err;
 		}
+<<<<<<< HEAD
 		new_smi->dev_registered = 1;
+=======
+		new_smi->dev_registered = true;
+>>>>>>> v3.18
 	}
 
 	rv = ipmi_register_smi(&handlers,
@@ -3360,7 +3664,11 @@ static int try_smi_init(struct smi_info *new_smi)
 	wait_for_timer_and_thread(new_smi);
 
  out_err:
+<<<<<<< HEAD
 	new_smi->interrupt_disabled = 1;
+=======
+	new_smi->interrupt_disabled = true;
+>>>>>>> v3.18
 
 	if (new_smi->intf) {
 		ipmi_unregister_smi(new_smi->intf);
@@ -3396,7 +3704,11 @@ static int try_smi_init(struct smi_info *new_smi)
 
 	if (new_smi->dev_registered) {
 		platform_device_unregister(new_smi->pdev);
+<<<<<<< HEAD
 		new_smi->dev_registered = 0;
+=======
+		new_smi->dev_registered = false;
+>>>>>>> v3.18
 	}
 
 	return rv;
@@ -3451,14 +3763,22 @@ static int init_ipmi_si(void)
 			printk(KERN_ERR PFX "Unable to register "
 			       "PCI driver: %d\n", rv);
 		else
+<<<<<<< HEAD
 			pci_registered = 1;
+=======
+			pci_registered = true;
+>>>>>>> v3.18
 	}
 #endif
 
 #ifdef CONFIG_ACPI
 	if (si_tryacpi) {
 		pnp_register_driver(&ipmi_pnp_driver);
+<<<<<<< HEAD
 		pnp_registered = 1;
+=======
+		pnp_registered = true;
+>>>>>>> v3.18
 	}
 #endif
 
@@ -3472,6 +3792,16 @@ static int init_ipmi_si(void)
 		spmi_find_bmc();
 #endif
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PARISC
+	register_parisc_driver(&ipmi_parisc_driver);
+	parisc_registered = true;
+	/* poking PC IO addresses will crash machine, don't do it */
+	si_trydefaults = 0;
+#endif
+
+>>>>>>> v3.18
 	/* We prefer devices with interrupts, but in the case of a machine
 	   with multiple BMCs we assume that there will be several instances
 	   of a given type so if we succeed in registering a type then also
@@ -3541,6 +3871,12 @@ static void cleanup_one_si(struct smi_info *to_clean)
 	if (!to_clean)
 		return;
 
+<<<<<<< HEAD
+=======
+	if (to_clean->dev)
+		dev_set_drvdata(to_clean->dev, NULL);
+
+>>>>>>> v3.18
 	list_del(&to_clean->link);
 
 	/* Tell the driver that we are shutting down. */
@@ -3618,6 +3954,13 @@ static void cleanup_ipmi_si(void)
 	if (pnp_registered)
 		pnp_unregister_driver(&ipmi_pnp_driver);
 #endif
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PARISC
+	if (parisc_registered)
+		unregister_parisc_driver(&ipmi_parisc_driver);
+#endif
+>>>>>>> v3.18
 
 	platform_driver_unregister(&ipmi_driver);
 

@@ -67,9 +67,26 @@ static int adp5588_gpio_get_value(struct gpio_chip *chip, unsigned off)
 {
 	struct adp5588_gpio *dev =
 	    container_of(chip, struct adp5588_gpio, gpio_chip);
+<<<<<<< HEAD
 
 	return !!(adp5588_gpio_read(dev->client,
 		  GPIO_DAT_STAT1 + ADP5588_BANK(off)) & ADP5588_BIT(off));
+=======
+	unsigned bank = ADP5588_BANK(off);
+	unsigned bit = ADP5588_BIT(off);
+	int val;
+
+	mutex_lock(&dev->lock);
+
+	if (dev->dir[bank] & bit)
+		val = dev->dat_out[bank];
+	else
+		val = adp5588_gpio_read(dev->client, GPIO_DAT_STAT1 + bank);
+
+	mutex_unlock(&dev->lock);
+
+	return !!(val & bit);
+>>>>>>> v3.18
 }
 
 static void adp5588_gpio_set_value(struct gpio_chip *chip,
@@ -276,7 +293,12 @@ static irqreturn_t adp5588_irq_handler(int irq, void *devid)
 static int adp5588_irq_setup(struct adp5588_gpio *dev)
 {
 	struct i2c_client *client = dev->client;
+<<<<<<< HEAD
 	struct adp5588_gpio_platform_data *pdata = client->dev.platform_data;
+=======
+	struct adp5588_gpio_platform_data *pdata =
+			dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 	unsigned gpio;
 	int ret;
 
@@ -349,7 +371,12 @@ static void adp5588_irq_teardown(struct adp5588_gpio *dev)
 static int adp5588_gpio_probe(struct i2c_client *client,
 					const struct i2c_device_id *id)
 {
+<<<<<<< HEAD
 	struct adp5588_gpio_platform_data *pdata = client->dev.platform_data;
+=======
+	struct adp5588_gpio_platform_data *pdata =
+			dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 	struct adp5588_gpio *dev;
 	struct gpio_chip *gc;
 	int ret, i, revid;
@@ -366,10 +393,15 @@ static int adp5588_gpio_probe(struct i2c_client *client,
 	}
 
 	dev = kzalloc(sizeof(*dev), GFP_KERNEL);
+<<<<<<< HEAD
 	if (dev == NULL) {
 		dev_err(&client->dev, "failed to alloc memory\n");
 		return -ENOMEM;
 	}
+=======
+	if (dev == NULL)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	dev->client = client;
 
@@ -378,12 +410,20 @@ static int adp5588_gpio_probe(struct i2c_client *client,
 	gc->direction_output = adp5588_gpio_direction_output;
 	gc->get = adp5588_gpio_get_value;
 	gc->set = adp5588_gpio_set_value;
+<<<<<<< HEAD
 	gc->can_sleep = 1;
+=======
+	gc->can_sleep = true;
+>>>>>>> v3.18
 
 	gc->base = pdata->gpio_start;
 	gc->ngpio = ADP5588_MAXGPIO;
 	gc->label = client->name;
 	gc->owner = THIS_MODULE;
+<<<<<<< HEAD
+=======
+	gc->names = pdata->names;
+>>>>>>> v3.18
 
 	mutex_init(&dev->lock);
 
@@ -440,7 +480,12 @@ err:
 
 static int adp5588_gpio_remove(struct i2c_client *client)
 {
+<<<<<<< HEAD
 	struct adp5588_gpio_platform_data *pdata = client->dev.platform_data;
+=======
+	struct adp5588_gpio_platform_data *pdata =
+			dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 	struct adp5588_gpio *dev = i2c_get_clientdata(client);
 	int ret;
 
@@ -457,11 +502,15 @@ static int adp5588_gpio_remove(struct i2c_client *client)
 	if (dev->irq_base)
 		free_irq(dev->client->irq, dev);
 
+<<<<<<< HEAD
 	ret = gpiochip_remove(&dev->gpio_chip);
 	if (ret) {
 		dev_err(&client->dev, "gpiochip_remove failed %d\n", ret);
 		return ret;
 	}
+=======
+	gpiochip_remove(&dev->gpio_chip);
+>>>>>>> v3.18
 
 	kfree(dev);
 	return 0;

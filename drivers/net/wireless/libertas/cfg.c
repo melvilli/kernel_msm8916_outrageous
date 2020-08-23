@@ -590,7 +590,10 @@ static int lbs_ret_scan(struct lbs_private *priv, unsigned long dummy,
 		int chan_no = -1;
 		const u8 *ssid = NULL;
 		u8 ssid_len = 0;
+<<<<<<< HEAD
 		DECLARE_SSID_BUF(ssid_buf);
+=======
+>>>>>>> v3.18
 
 		int len = get_unaligned_le16(pos);
 		pos += 2;
@@ -621,7 +624,11 @@ static int lbs_ret_scan(struct lbs_private *priv, unsigned long dummy,
 			id = *pos++;
 			elen = *pos++;
 			left -= 2;
+<<<<<<< HEAD
 			if (elen > left || elen == 0) {
+=======
+			if (elen > left) {
+>>>>>>> v3.18
 				lbs_deb_scan("scan response: invalid IE fmt\n");
 				goto done;
 			}
@@ -644,15 +651,24 @@ static int lbs_ret_scan(struct lbs_private *priv, unsigned long dummy,
 			struct ieee80211_channel *channel =
 				ieee80211_get_channel(wiphy, freq);
 
+<<<<<<< HEAD
 			lbs_deb_scan("scan: %pM, capa %04x, chan %2d, %s, "
 				     "%d dBm\n",
 				     bssid, capa, chan_no,
 				     print_ssid(ssid_buf, ssid, ssid_len),
+=======
+			lbs_deb_scan("scan: %pM, capa %04x, chan %2d, %*pE, %d dBm\n",
+				     bssid, capa, chan_no, ssid_len, ssid,
+>>>>>>> v3.18
 				     LBS_SCAN_RSSI_TO_MBM(rssi)/100);
 
 			if (channel &&
 			    !(channel->flags & IEEE80211_CHAN_DISABLED)) {
 				bss = cfg80211_inform_bss(wiphy, channel,
+<<<<<<< HEAD
+=======
+					CFG80211_BSS_FTYPE_UNKNOWN,
+>>>>>>> v3.18
 					bssid, get_unaligned_le64(tsfdesc),
 					capa, intvl, ie, ielen,
 					LBS_SCAN_RSSI_TO_MBM(rssi),
@@ -1006,9 +1022,14 @@ struct cmd_key_material {
 } __packed;
 
 static int lbs_set_key_material(struct lbs_private *priv,
+<<<<<<< HEAD
 				int key_type,
 				int key_info,
 				u8 *key, u16 key_len)
+=======
+				int key_type, int key_info,
+				const u8 *key, u16 key_len)
+>>>>>>> v3.18
 {
 	struct cmd_key_material cmd;
 	int ret;
@@ -1268,6 +1289,7 @@ static struct cfg80211_scan_request *
 _new_connect_scan_req(struct wiphy *wiphy, struct cfg80211_connect_params *sme)
 {
 	struct cfg80211_scan_request *creq = NULL;
+<<<<<<< HEAD
 	int i, n_channels = 0;
 	enum ieee80211_band band;
 
@@ -1276,6 +1298,11 @@ _new_connect_scan_req(struct wiphy *wiphy, struct cfg80211_connect_params *sme)
 			n_channels += wiphy->bands[band]->n_channels;
 	}
 
+=======
+	int i, n_channels = ieee80211_get_num_supported_channels(wiphy);
+	enum ieee80211_band band;
+
+>>>>>>> v3.18
 	creq = kzalloc(sizeof(*creq) + sizeof(struct cfg80211_ssid) +
 		       n_channels * sizeof(void *),
 		       GFP_ATOMIC);
@@ -1359,7 +1386,11 @@ static int lbs_cfg_connect(struct wiphy *wiphy, struct net_device *dev,
 		wait_event_interruptible_timeout(priv->scan_q,
 						 (priv->scan_req == NULL),
 						 (15 * HZ));
+<<<<<<< HEAD
 		lbs_deb_assoc("assoc: scanning competed\n");
+=======
+		lbs_deb_assoc("assoc: scanning completed\n");
+>>>>>>> v3.18
 	}
 
 	/* Find the BSS we want using available scan results */
@@ -1615,7 +1646,11 @@ static int lbs_cfg_del_key(struct wiphy *wiphy, struct net_device *netdev,
  */
 
 static int lbs_cfg_get_station(struct wiphy *wiphy, struct net_device *dev,
+<<<<<<< HEAD
 			      u8 *mac, struct station_info *sinfo)
+=======
+			       const u8 *mac, struct station_info *sinfo)
+>>>>>>> v3.18
 {
 	struct lbs_private *priv = wiphy_priv(wiphy);
 	s8 signal, noise;
@@ -1760,6 +1795,10 @@ static void lbs_join_post(struct lbs_private *priv,
 
 	bss = cfg80211_inform_bss(priv->wdev->wiphy,
 				  params->chandef.chan,
+<<<<<<< HEAD
+=======
+				  CFG80211_BSS_FTYPE_UNKNOWN,
+>>>>>>> v3.18
 				  bssid,
 				  0,
 				  capability,
@@ -1771,7 +1810,12 @@ static void lbs_join_post(struct lbs_private *priv,
 	memcpy(priv->wdev->ssid, params->ssid, params->ssid_len);
 	priv->wdev->ssid_len = params->ssid_len;
 
+<<<<<<< HEAD
 	cfg80211_ibss_joined(priv->dev, bssid, GFP_KERNEL);
+=======
+	cfg80211_ibss_joined(priv->dev, bssid, params->chandef.chan,
+			     GFP_KERNEL);
+>>>>>>> v3.18
 
 	/* TODO: consider doing this at MACREG_INT_CODE_LINK_SENSED time */
 	priv->connect_status = LBS_CONNECTED;
@@ -1987,7 +2031,10 @@ static int lbs_join_ibss(struct wiphy *wiphy, struct net_device *dev,
 	struct lbs_private *priv = wiphy_priv(wiphy);
 	int ret = 0;
 	struct cfg80211_bss *bss;
+<<<<<<< HEAD
 	DECLARE_SSID_BUF(ssid_buf);
+=======
+>>>>>>> v3.18
 
 	if (dev == priv->mesh_dev)
 		return -EOPNOTSUPP;

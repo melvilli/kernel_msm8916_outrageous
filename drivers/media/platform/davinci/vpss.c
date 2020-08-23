@@ -21,6 +21,10 @@
 #include <linux/platform_device.h>
 #include <linux/io.h>
 #include <linux/pm_runtime.h>
+<<<<<<< HEAD
+=======
+#include <linux/err.h>
+>>>>>>> v3.18
 
 #include <media/davinci/vpss.h>
 
@@ -404,9 +408,14 @@ EXPORT_SYMBOL(dm365_vpss_set_pg_frame_size);
 
 static int vpss_probe(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct resource		*r1, *r2;
 	char *platform_name;
 	int status;
+=======
+	struct resource *res;
+	char *platform_name;
+>>>>>>> v3.18
 
 	if (!pdev->dev.platform_data) {
 		dev_err(&pdev->dev, "no platform data\n");
@@ -427,6 +436,7 @@ static int vpss_probe(struct platform_device *pdev)
 	}
 
 	dev_info(&pdev->dev, "%s vpss probed\n", platform_name);
+<<<<<<< HEAD
 	r1 = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!r1)
 		return -ENOENT;
@@ -459,6 +469,21 @@ static int vpss_probe(struct platform_device *pdev)
 			status = -EBUSY;
 			goto fail3;
 		}
+=======
+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+
+	oper_cfg.vpss_regs_base0 = devm_ioremap_resource(&pdev->dev, res);
+	if (IS_ERR(oper_cfg.vpss_regs_base0))
+		return PTR_ERR(oper_cfg.vpss_regs_base0);
+
+	if (oper_cfg.platform == DM355 || oper_cfg.platform == DM365) {
+		res = platform_get_resource(pdev, IORESOURCE_MEM, 1);
+
+		oper_cfg.vpss_regs_base1 = devm_ioremap_resource(&pdev->dev,
+								 res);
+		if (IS_ERR(oper_cfg.vpss_regs_base1))
+			return PTR_ERR(oper_cfg.vpss_regs_base1);
+>>>>>>> v3.18
 	}
 
 	if (oper_cfg.platform == DM355) {
@@ -493,6 +518,7 @@ static int vpss_probe(struct platform_device *pdev)
 
 	spin_lock_init(&oper_cfg.vpss_lock);
 	dev_info(&pdev->dev, "%s vpss probe success\n", platform_name);
+<<<<<<< HEAD
 	return 0;
 
 fail3:
@@ -502,10 +528,15 @@ fail2:
 fail1:
 	release_mem_region(r1->start, resource_size(r1));
 	return status;
+=======
+
+	return 0;
+>>>>>>> v3.18
 }
 
 static int vpss_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct resource		*res;
 
 	pm_runtime_disable(&pdev->dev);
@@ -517,6 +548,9 @@ static int vpss_remove(struct platform_device *pdev)
 		res = platform_get_resource(pdev, IORESOURCE_MEM, 1);
 		release_mem_region(res->start, resource_size(res));
 	}
+=======
+	pm_runtime_disable(&pdev->dev);
+>>>>>>> v3.18
 	return 0;
 }
 

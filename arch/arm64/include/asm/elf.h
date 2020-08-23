@@ -126,7 +126,11 @@ typedef struct user_fpsimd_state elf_fpregset_t;
  * that it will "exec", and that there is sufficient room for the brk.
  */
 extern unsigned long randomize_et_dyn(unsigned long base);
+<<<<<<< HEAD
 #define ELF_ET_DYN_BASE	(randomize_et_dyn(2 * TASK_SIZE_64 / 3))
+=======
+#define ELF_ET_DYN_BASE	(2 * TASK_SIZE_64 / 3)
+>>>>>>> v3.18
 
 /*
  * When the program starts, a1 contains a pointer to a function to be
@@ -137,7 +141,10 @@ extern unsigned long randomize_et_dyn(unsigned long base);
 
 #define SET_PERSONALITY(ex)		clear_thread_flag(TIF_32BIT);
 
+<<<<<<< HEAD
 /* update AT_VECTOR_SIZE_ARCH if the number of NEW_AUX_ENT entries changes */
+=======
+>>>>>>> v3.18
 #define ARCH_DLINFO							\
 do {									\
 	NEW_AUX_ENT(AT_SYSINFO_EHDR,					\
@@ -170,7 +177,11 @@ extern unsigned long arch_randomize_brk(struct mm_struct *mm);
 #define COMPAT_ELF_PLATFORM		("v8l")
 #endif
 
+<<<<<<< HEAD
 #define COMPAT_ELF_ET_DYN_BASE		(randomize_et_dyn(2 * TASK_SIZE_32 / 3))
+=======
+#define COMPAT_ELF_ET_DYN_BASE		(2 * TASK_SIZE_32 / 3)
+>>>>>>> v3.18
 
 /* AArch32 registers. */
 #define COMPAT_ELF_NGREG		18

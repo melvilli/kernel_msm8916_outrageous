@@ -27,12 +27,19 @@
 #include "radeon.h"
 #include "atom.h"
 
+<<<<<<< HEAD
 extern void radeon_atom_copy_swap(u8 *dst, u8 *src, u8 num_bytes, bool to_le);
 
 #define TARGET_HW_I2C_CLOCK 50
 
 /* these are a limitation of ProcessI2cChannelTransaction not the hw */
 #define ATOM_MAX_HW_I2C_WRITE 2
+=======
+#define TARGET_HW_I2C_CLOCK 50
+
+/* these are a limitation of ProcessI2cChannelTransaction not the hw */
+#define ATOM_MAX_HW_I2C_WRITE 3
+>>>>>>> v3.18
 #define ATOM_MAX_HW_I2C_READ  255
 
 static int radeon_process_i2c_ch(struct radeon_i2c_chan *chan,
@@ -44,44 +51,99 @@ static int radeon_process_i2c_ch(struct radeon_i2c_chan *chan,
 	PROCESS_I2C_CHANNEL_TRANSACTION_PS_ALLOCATION args;
 	int index = GetIndexIntoMasterTable(COMMAND, ProcessI2cChannelTransaction);
 	unsigned char *base;
+<<<<<<< HEAD
 	u16 out;
 
 	memset(&args, 0, sizeof(args));
 
+=======
+	u16 out = cpu_to_le16(0);
+	int r = 0;
+
+	memset(&args, 0, sizeof(args));
+
+	mutex_lock(&chan->mutex);
+	mutex_lock(&rdev->mode_info.atom_context->scratch_mutex);
+
+>>>>>>> v3.18
 	base = (unsigned char *)rdev->mode_info.atom_context->scratch;
 
 	if (flags & HW_I2C_WRITE) {
 		if (num > ATOM_MAX_HW_I2C_WRITE) {
+<<<<<<< HEAD
 			DRM_ERROR("hw i2c: tried to write too many bytes (%d vs 2)\n", num);
 			return -EINVAL;
 		}
 		memcpy(&out, buf, num);
+=======
+			DRM_ERROR("hw i2c: tried to write too many bytes (%d vs 3)\n", num);
+			r = -EINVAL;
+			goto done;
+		}
+		if (buf == NULL)
+			args.ucRegIndex = 0;
+		else
+			args.ucRegIndex = buf[0];
+		if (num)
+			num--;
+		if (num)
+			memcpy(&out, &buf[1], num);
+>>>>>>> v3.18
 		args.lpI2CDataOut = cpu_to_le16(out);
 	} else {
 		if (num > ATOM_MAX_HW_I2C_READ) {
 			DRM_ERROR("hw i2c: tried to read too many bytes (%d vs 255)\n", num);
+<<<<<<< HEAD
 			return -EINVAL;
 		}
 	}
 
 	args.ucI2CSpeed = TARGET_HW_I2C_CLOCK;
 	args.ucRegIndex = 0;
+=======
+			r = -EINVAL;
+			goto done;
+		}
+		args.ucRegIndex = 0;
+		args.lpI2CDataOut = 0;
+	}
+
+	args.ucFlag = flags;
+	args.ucI2CSpeed = TARGET_HW_I2C_CLOCK;
+>>>>>>> v3.18
 	args.ucTransBytes = num;
 	args.ucSlaveAddr = slave_addr << 1;
 	args.ucLineNumber = chan->rec.i2c_id;
 
+<<<<<<< HEAD
 	atom_execute_table(rdev->mode_info.atom_context, index, (uint32_t *)&args);
+=======
+	atom_execute_table_scratch_unlocked(rdev->mode_info.atom_context, index, (uint32_t *)&args);
+>>>>>>> v3.18
 
 	/* error */
 	if (args.ucStatus != HW_ASSISTED_I2C_STATUS_SUCCESS) {
 		DRM_DEBUG_KMS("hw_i2c error\n");
+<<<<<<< HEAD
 		return -EIO;
+=======
+		r = -EIO;
+		goto done;
+>>>>>>> v3.18
 	}
 
 	if (!(flags & HW_I2C_WRITE))
 		radeon_atom_copy_swap(buf, base, num, false);
 
+<<<<<<< HEAD
 	return 0;
+=======
+done:
+	mutex_unlock(&rdev->mode_info.atom_context->scratch_mutex);
+	mutex_unlock(&chan->mutex);
+
+	return r;
+>>>>>>> v3.18
 }
 
 int radeon_atom_hw_i2c_xfer(struct i2c_adapter *i2c_adap,
@@ -90,14 +152,22 @@ int radeon_atom_hw_i2c_xfer(struct i2c_adapter *i2c_adap,
 	struct radeon_i2c_chan *i2c = i2c_get_adapdata(i2c_adap);
 	struct i2c_msg *p;
 	int i, remaining, current_count, buffer_offset, max_bytes, ret;
+<<<<<<< HEAD
 	u8 buf = 0, flags;
+=======
+	u8 flags;
+>>>>>>> v3.18
 
 	/* check for bus probe */
 	p = &msgs[0];
 	if ((num == 1) && (p->len == 0)) {
 		ret = radeon_process_i2c_ch(i2c,
 					    p->addr, HW_I2C_WRITE,
+<<<<<<< HEAD
 					    &buf, 1);
+=======
+					    NULL, 0);
+>>>>>>> v3.18
 		if (ret)
 			return ret;
 		else

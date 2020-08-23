@@ -247,14 +247,21 @@ int ecryptfs_process_response(struct ecryptfs_daemon *daemon,
 		goto unlock;
 	}
 	msg_size = (sizeof(*msg) + msg->data_len);
+<<<<<<< HEAD
 	msg_ctx->msg = kmalloc(msg_size, GFP_KERNEL);
+=======
+	msg_ctx->msg = kmemdup(msg, msg_size, GFP_KERNEL);
+>>>>>>> v3.18
 	if (!msg_ctx->msg) {
 		rc = -ENOMEM;
 		printk(KERN_ERR "%s: Failed to allocate [%zd] bytes of "
 		       "GFP_KERNEL memory\n", __func__, msg_size);
 		goto unlock;
 	}
+<<<<<<< HEAD
 	memcpy(msg_ctx->msg, msg, msg_size);
+=======
+>>>>>>> v3.18
 	msg_ctx->state = ECRYPTFS_MSG_CTX_STATE_DONE;
 	wake_up_process(msg_ctx->task);
 	rc = 0;
@@ -435,8 +442,12 @@ void ecryptfs_release_messaging(void)
 		mutex_lock(&ecryptfs_msg_ctx_lists_mux);
 		for (i = 0; i < ecryptfs_message_buf_len; i++) {
 			mutex_lock(&ecryptfs_msg_ctx_arr[i].mux);
+<<<<<<< HEAD
 			if (ecryptfs_msg_ctx_arr[i].msg)
 				kfree(ecryptfs_msg_ctx_arr[i].msg);
+=======
+			kfree(ecryptfs_msg_ctx_arr[i].msg);
+>>>>>>> v3.18
 			mutex_unlock(&ecryptfs_msg_ctx_arr[i].mux);
 		}
 		kfree(ecryptfs_msg_ctx_arr);

@@ -9,7 +9,11 @@
 #include <net/pkt_sched.h>
 
 struct tcf_common {
+<<<<<<< HEAD
 	struct tcf_common		*tcfc_next;
+=======
+	struct hlist_node		tcfc_head;
+>>>>>>> v3.18
 	u32				tcfc_index;
 	int				tcfc_refcnt;
 	int				tcfc_bindcnt;
@@ -18,11 +22,19 @@ struct tcf_common {
 	struct tcf_t			tcfc_tm;
 	struct gnet_stats_basic_packed	tcfc_bstats;
 	struct gnet_stats_queue		tcfc_qstats;
+<<<<<<< HEAD
 	struct gnet_stats_rate_est	tcfc_rate_est;
 	spinlock_t			tcfc_lock;
 	struct rcu_head			tcfc_rcu;
 };
 #define tcf_next	common.tcfc_next
+=======
+	struct gnet_stats_rate_est64	tcfc_rate_est;
+	spinlock_t			tcfc_lock;
+	struct rcu_head			tcfc_rcu;
+};
+#define tcf_head	common.tcfc_head
+>>>>>>> v3.18
 #define tcf_index	common.tcfc_index
 #define tcf_refcnt	common.tcfc_refcnt
 #define tcf_bindcnt	common.tcfc_bindcnt
@@ -36,9 +48,16 @@ struct tcf_common {
 #define tcf_rcu		common.tcfc_rcu
 
 struct tcf_hashinfo {
+<<<<<<< HEAD
 	struct tcf_common	**htab;
 	unsigned int		hmask;
 	rwlock_t		*lock;
+=======
+	struct hlist_head	*htab;
+	unsigned int		hmask;
+	spinlock_t		lock;
+	u32			index;
+>>>>>>> v3.18
 };
 
 static inline unsigned int tcf_hash(u32 index, unsigned int hmask)
@@ -46,20 +65,48 @@ static inline unsigned int tcf_hash(u32 index, unsigned int hmask)
 	return index & hmask;
 }
 
+<<<<<<< HEAD
+=======
+static inline int tcf_hashinfo_init(struct tcf_hashinfo *hf, unsigned int mask)
+{
+	int i;
+
+	spin_lock_init(&hf->lock);
+	hf->index = 0;
+	hf->hmask = mask;
+	hf->htab = kzalloc((mask + 1) * sizeof(struct hlist_head),
+			   GFP_KERNEL);
+	if (!hf->htab)
+		return -ENOMEM;
+	for (i = 0; i < mask + 1; i++)
+		INIT_HLIST_HEAD(&hf->htab[i]);
+	return 0;
+}
+
+static inline void tcf_hashinfo_destroy(struct tcf_hashinfo *hf)
+{
+	kfree(hf->htab);
+}
+
+>>>>>>> v3.18
 #ifdef CONFIG_NET_CLS_ACT
 
 #define ACT_P_CREATED 1
 #define ACT_P_DELETED 1
 
+<<<<<<< HEAD
 struct tcf_act_hdr {
 	struct tcf_common	common;
 };
 
+=======
+>>>>>>> v3.18
 struct tc_action {
 	void			*priv;
 	const struct tc_action_ops	*ops;
 	__u32			type; /* for backward compat(TCA_OLD_COMPAT) */
 	__u32			order;
+<<<<<<< HEAD
 	struct tc_action	*next;
 };
 
@@ -75,6 +122,20 @@ struct tc_action_ops {
 	int     (*get_stats)(struct sk_buff *, struct tc_action *);
 	int     (*dump)(struct sk_buff *, struct tc_action *, int, int);
 	int     (*cleanup)(struct tc_action *, int bind);
+=======
+	struct list_head	list;
+};
+
+struct tc_action_ops {
+	struct list_head head;
+	struct tcf_hashinfo *hinfo;
+	char    kind[IFNAMSIZ];
+	__u32   type; /* TBD to match kind */
+	struct module		*owner;
+	int     (*act)(struct sk_buff *, const struct tc_action *, struct tcf_result *);
+	int     (*dump)(struct sk_buff *, struct tc_action *, int, int);
+	void	(*cleanup)(struct tc_action *, int bind);
+>>>>>>> v3.18
 	int     (*lookup)(struct tc_action *, u32);
 	int     (*init)(struct net *net, struct nlattr *nla,
 			struct nlattr *est, struct tc_action *act, int ovr,
@@ -82,6 +143,7 @@ struct tc_action_ops {
 	int     (*walk)(struct sk_buff *, struct netlink_callback *, int, struct tc_action *);
 };
 
+<<<<<<< HEAD
 extern struct tcf_common *tcf_hash_lookup(u32 index,
 					  struct tcf_hashinfo *hinfo);
 extern void tcf_hash_destroy(struct tcf_common *p, struct tcf_hashinfo *hinfo);
@@ -113,5 +175,32 @@ extern int tcf_action_dump(struct sk_buff *skb, struct tc_action *a, int, int);
 extern int tcf_action_dump_old(struct sk_buff *skb, struct tc_action *a, int, int);
 extern int tcf_action_dump_1(struct sk_buff *skb, struct tc_action *a, int, int);
 extern int tcf_action_copy_stats (struct sk_buff *,struct tc_action *, int);
+=======
+int tcf_hash_search(struct tc_action *a, u32 index);
+void tcf_hash_destroy(struct tc_action *a);
+int tcf_hash_release(struct tc_action *a, int bind);
+u32 tcf_hash_new_index(struct tcf_hashinfo *hinfo);
+int tcf_hash_check(u32 index, struct tc_action *a, int bind);
+int tcf_hash_create(u32 index, struct nlattr *est, struct tc_action *a,
+		    int size, int bind);
+void tcf_hash_cleanup(struct tc_action *a, struct nlattr *est);
+void tcf_hash_insert(struct tc_action *a);
+
+int tcf_register_action(struct tc_action_ops *a, unsigned int mask);
+int tcf_unregister_action(struct tc_action_ops *a);
+int tcf_action_destroy(struct list_head *actions, int bind);
+int tcf_action_exec(struct sk_buff *skb, const struct list_head *actions,
+		    struct tcf_result *res);
+int tcf_action_init(struct net *net, struct nlattr *nla,
+				  struct nlattr *est, char *n, int ovr,
+				  int bind, struct list_head *);
+struct tc_action *tcf_action_init_1(struct net *net, struct nlattr *nla,
+				    struct nlattr *est, char *n, int ovr,
+				    int bind);
+int tcf_action_dump(struct sk_buff *skb, struct list_head *, int, int);
+int tcf_action_dump_old(struct sk_buff *skb, struct tc_action *a, int, int);
+int tcf_action_dump_1(struct sk_buff *skb, struct tc_action *a, int, int);
+int tcf_action_copy_stats(struct sk_buff *, struct tc_action *, int);
+>>>>>>> v3.18
 #endif /* CONFIG_NET_CLS_ACT */
 #endif

@@ -25,18 +25,25 @@
 #include <linux/slab.h>
 #include <linux/irq.h>
 #include <linux/dma-mapping.h>
+<<<<<<< HEAD
 #include <linux/irqchip.h>
 #include <linux/platform_data/clk-nomadik.h>
 #include <linux/platform_data/pinctrl-nomadik.h>
 #include <linux/pinctrl/machine.h>
 #include <linux/platform_data/clocksource-nomadik-mtu.h>
+=======
+>>>>>>> v3.18
 #include <linux/of_irq.h>
 #include <linux/of_gpio.h>
 #include <linux/of_address.h>
 #include <linux/of_platform.h>
+<<<<<<< HEAD
 #include <linux/mtd/fsmc.h>
 #include <linux/gpio.h>
 #include <linux/amba/mmci.h>
+=======
+#include <linux/gpio.h>
+>>>>>>> v3.18
 
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
@@ -91,6 +98,7 @@
 #define NOMADIK_L2CC_BASE	0x10210000	/* L2 Cache controller */
 #define NOMADIK_UART1_VBASE	0xF01FB000
 
+<<<<<<< HEAD
 static unsigned long out_low[] = { PIN_OUTPUT_LOW };
 static unsigned long out_high[] = { PIN_OUTPUT_HIGH };
 static unsigned long in_nopull[] = { PIN_INPUT_NOPULL };
@@ -133,6 +141,8 @@ static struct pinctrl_map __initdata nhk8815_pinmap[] = {
 	PIN_MAP_CONFIGS_PIN_HOG_DEFAULT("pinctrl-stn8815", "GPIO74_C20", in_pullup),
 };
 
+=======
+>>>>>>> v3.18
 /* This is needed for LL-debug/earlyprintk/debug-macro.S */
 static struct map_desc cpu8815_io_desc[] __initdata = {
 	{
@@ -158,6 +168,7 @@ static void cpu8815_restart(enum reboot_mode mode, const char *cmd)
 	writel(1, srcbase + 0x18);
 }
 
+<<<<<<< HEAD
 /* Initial value for SRC control register: all timers use MXTAL/8 source */
 #define SRC_CR_INIT_MASK	0x00007fff
 #define SRC_CR_INIT_VAL		0x2aaa8000
@@ -243,6 +254,8 @@ static struct mmci_platform_data mmcsd_plat_data = {
 	.ocr_mask = MMC_VDD_29_30,
 };
 
+=======
+>>>>>>> v3.18
 /*
  * This GPIO pin turns on a line that is used to detect card insertion
  * on this board.
@@ -277,6 +290,7 @@ static int __init cpu8815_mmcsd_init(void)
 }
 device_initcall(cpu8815_mmcsd_init);
 
+<<<<<<< HEAD
 
 /* These are mostly to get the right device names for the clock lookups */
 static struct of_dev_auxdata cpu8815_auxdata_lookup[] __initdata = {
@@ -316,16 +330,25 @@ static void __init cpu8815_init_of(void)
 			cpu8815_auxdata_lookup, NULL);
 }
 
+=======
+>>>>>>> v3.18
 static const char * cpu8815_board_compat[] = {
 	"calaosystems,usb-s8815",
 	NULL,
 };
 
 DT_MACHINE_START(NOMADIK_DT, "Nomadik STn8815")
+<<<<<<< HEAD
 	.map_io		= cpu8815_map_io,
 	.init_irq	= irqchip_init,
 	.init_time	= cpu8815_timer_init_of,
 	.init_machine	= cpu8815_init_of,
+=======
+	/* At full speed latency must be >=2, so 0x249 in low bits */
+	.l2c_aux_val	= 0x00700249,
+	.l2c_aux_mask	= 0xfe0fefff,
+	.map_io		= cpu8815_map_io,
+>>>>>>> v3.18
 	.restart	= cpu8815_restart,
 	.dt_compat      = cpu8815_board_compat,
 MACHINE_END

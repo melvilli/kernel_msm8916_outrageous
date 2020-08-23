@@ -19,12 +19,70 @@
 #include <net/af_rxrpc.h>
 #include "ar-internal.h"
 
+<<<<<<< HEAD
 static unsigned int rxrpc_ack_defer = 1;
 
 static const char *const rxrpc_acks[] = {
 	"---", "REQ", "DUP", "OOS", "WIN", "MEM", "PNG", "PNR", "DLY", "IDL",
 	"-?-"
 };
+=======
+/*
+ * How long to wait before scheduling ACK generation after seeing a
+ * packet with RXRPC_REQUEST_ACK set (in jiffies).
+ */
+unsigned rxrpc_requested_ack_delay = 1;
+
+/*
+ * How long to wait before scheduling an ACK with subtype DELAY (in jiffies).
+ *
+ * We use this when we've received new data packets.  If those packets aren't
+ * all consumed within this time we will send a DELAY ACK if an ACK was not
+ * requested to let the sender know it doesn't need to resend.
+ */
+unsigned rxrpc_soft_ack_delay = 1 * HZ;
+
+/*
+ * How long to wait before scheduling an ACK with subtype IDLE (in jiffies).
+ *
+ * We use this when we've consumed some previously soft-ACK'd packets when
+ * further packets aren't immediately received to decide when to send an IDLE
+ * ACK let the other end know that it can free up its Tx buffer space.
+ */
+unsigned rxrpc_idle_ack_delay = 0.5 * HZ;
+
+/*
+ * Receive window size in packets.  This indicates the maximum number of
+ * unconsumed received packets we're willing to retain in memory.  Once this
+ * limit is hit, we should generate an EXCEEDS_WINDOW ACK and discard further
+ * packets.
+ */
+unsigned rxrpc_rx_window_size = 32;
+
+/*
+ * Maximum Rx MTU size.  This indicates to the sender the size of jumbo packet
+ * made by gluing normal packets together that we're willing to handle.
+ */
+unsigned rxrpc_rx_mtu = 5692;
+
+/*
+ * The maximum number of fragments in a received jumbo packet that we tell the
+ * sender that we're willing to handle.
+ */
+unsigned rxrpc_rx_jumbo_max = 4;
+
+static const char *rxrpc_acks(u8 reason)
+{
+	static const char *const str[] = {
+		"---", "REQ", "DUP", "OOS", "WIN", "MEM", "PNG", "PNR", "DLY",
+		"IDL", "-?-"
+	};
+
+	if (reason >= ARRAY_SIZE(str))
+		reason = ARRAY_SIZE(str) - 1;
+	return str[reason];
+}
+>>>>>>> v3.18
 
 static const s8 rxrpc_ack_priority[] = {
 	[0]				= 0,
@@ -50,7 +108,11 @@ void __rxrpc_propose_ACK(struct rxrpc_call *call, u8 ack_reason,
 	ASSERTCMP(prior, >, 0);
 
 	_enter("{%d},%s,%%%x,%u",
+<<<<<<< HEAD
 	       call->debug_id, rxrpc_acks[ack_reason], ntohl(serial),
+=======
+	       call->debug_id, rxrpc_acks(ack_reason), ntohl(serial),
+>>>>>>> v3.18
 	       immediate);
 
 	if (prior < rxrpc_ack_priority[call->ackr_reason]) {
@@ -75,24 +137,41 @@ void __rxrpc_propose_ACK(struct rxrpc_call *call, u8 ack_reason,
 	switch (ack_reason) {
 	case RXRPC_ACK_DELAY:
 		_debug("run delay timer");
+<<<<<<< HEAD
 		call->ack_timer.expires = jiffies + rxrpc_ack_timeout * HZ;
 		add_timer(&call->ack_timer);
 		return;
+=======
+		expiry = rxrpc_soft_ack_delay;
+		goto run_timer;
+>>>>>>> v3.18
 
 	case RXRPC_ACK_IDLE:
 		if (!immediate) {
 			_debug("run defer timer");
+<<<<<<< HEAD
 			expiry = 1;
+=======
+			expiry = rxrpc_idle_ack_delay;
+>>>>>>> v3.18
 			goto run_timer;
 		}
 		goto cancel_timer;
 
 	case RXRPC_ACK_REQUESTED:
+<<<<<<< HEAD
 		if (!rxrpc_ack_defer)
 			goto cancel_timer;
 		if (!immediate || serial == cpu_to_be32(1)) {
 			_debug("run defer timer");
 			expiry = rxrpc_ack_defer;
+=======
+		expiry = rxrpc_requested_ack_delay;
+		if (!expiry)
+			goto cancel_timer;
+		if (!immediate || serial == cpu_to_be32(1)) {
+			_debug("run defer timer");
+>>>>>>> v3.18
 			goto run_timer;
 		}
 
@@ -637,7 +716,11 @@ process_further:
 		       hard,
 		       ntohl(ack.previousPacket),
 		       ntohl(ack.serial),
+<<<<<<< HEAD
 		       rxrpc_acks[ack.reason],
+=======
+		       rxrpc_acks(ack.reason),
+>>>>>>> v3.18
 		       ack.nAcks);
 
 		rxrpc_extract_ackinfo(call, skb, latest, ack.nAcks);
@@ -1167,11 +1250,19 @@ send_ACK:
 	mtu = call->conn->trans->peer->if_mtu;
 	mtu -= call->conn->trans->peer->hdrsize;
 	ackinfo.maxMTU	= htonl(mtu);
+<<<<<<< HEAD
 	ackinfo.rwind	= htonl(32);
 
 	/* permit the peer to send us jumbo packets if it wants to */
 	ackinfo.rxMTU	= htonl(5692);
 	ackinfo.jumbo_max = htonl(4);
+=======
+	ackinfo.rwind	= htonl(rxrpc_rx_window_size);
+
+	/* permit the peer to send us jumbo packets if it wants to */
+	ackinfo.rxMTU	= htonl(rxrpc_rx_mtu);
+	ackinfo.jumbo_max = htonl(rxrpc_rx_jumbo_max);
+>>>>>>> v3.18
 
 	hdr.serial = htonl(atomic_inc_return(&call->conn->serial));
 	_proto("Tx ACK %%%u { m=%hu f=#%u p=#%u s=%%%u r=%s n=%u }",
@@ -1180,7 +1271,11 @@ send_ACK:
 	       ntohl(ack.firstPacket),
 	       ntohl(ack.previousPacket),
 	       ntohl(ack.serial),
+<<<<<<< HEAD
 	       rxrpc_acks[ack.reason],
+=======
+	       rxrpc_acks(ack.reason),
+>>>>>>> v3.18
 	       ack.nAcks);
 
 	del_timer_sync(&call->ack_timer);

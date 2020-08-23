@@ -10,7 +10,10 @@
  */
 
 #include <linux/kernel.h>
+<<<<<<< HEAD
 #include <linux/module.h>
+=======
+>>>>>>> v3.18
 #include <linux/err.h>
 #include <linux/interrupt.h>
 #include <linux/io.h>
@@ -22,6 +25,10 @@
 #include <drm/exynos_drm.h>
 #include "regs-rotator.h"
 #include "exynos_drm.h"
+<<<<<<< HEAD
+=======
+#include "exynos_drm_drv.h"
+>>>>>>> v3.18
 #include "exynos_drm_ipp.h"
 
 /*
@@ -156,10 +163,17 @@ static irqreturn_t rotator_irq_handler(int irq, void *arg)
 		event_work->ippdrv = ippdrv;
 		event_work->buf_id[EXYNOS_DRM_OPS_DST] =
 			rot->cur_buf_id[EXYNOS_DRM_OPS_DST];
+<<<<<<< HEAD
 		queue_work(ippdrv->event_workq,
 			(struct work_struct *)event_work);
 	} else
 		DRM_ERROR("the SFR is set illegally\n");
+=======
+		queue_work(ippdrv->event_workq, &event_work->work);
+	} else {
+		DRM_ERROR("the SFR is set illegally\n");
+	}
+>>>>>>> v3.18
 
 	return IRQ_HANDLED;
 }
@@ -244,7 +258,11 @@ static int rotator_src_set_size(struct device *dev, int swap,
 	/* Get format */
 	fmt = rotator_reg_get_fmt(rot);
 	if (!rotator_check_reg_fmt(fmt)) {
+<<<<<<< HEAD
 		DRM_ERROR("%s:invalid format.\n", __func__);
+=======
+		DRM_ERROR("invalid format.\n");
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
@@ -287,7 +305,11 @@ static int rotator_src_set_addr(struct device *dev,
 		/* Get format */
 		fmt = rotator_reg_get_fmt(rot);
 		if (!rotator_check_reg_fmt(fmt)) {
+<<<<<<< HEAD
 			DRM_ERROR("%s:invalid format.\n", __func__);
+=======
+			DRM_ERROR("invalid format.\n");
+>>>>>>> v3.18
 			return -EINVAL;
 		}
 
@@ -381,7 +403,11 @@ static int rotator_dst_set_size(struct device *dev, int swap,
 	/* Get format */
 	fmt = rotator_reg_get_fmt(rot);
 	if (!rotator_check_reg_fmt(fmt)) {
+<<<<<<< HEAD
 		DRM_ERROR("%s:invalid format.\n", __func__);
+=======
+		DRM_ERROR("invalid format.\n");
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
@@ -422,7 +448,11 @@ static int rotator_dst_set_addr(struct device *dev,
 		/* Get format */
 		fmt = rotator_reg_get_fmt(rot);
 		if (!rotator_check_reg_fmt(fmt)) {
+<<<<<<< HEAD
 			DRM_ERROR("%s:invalid format.\n", __func__);
+=======
+			DRM_ERROR("invalid format.\n");
+>>>>>>> v3.18
 			return -EINVAL;
 		}
 
@@ -469,6 +499,7 @@ static struct exynos_drm_ipp_ops rot_dst_ops = {
 
 static int rotator_init_prop_list(struct exynos_drm_ippdrv *ippdrv)
 {
+<<<<<<< HEAD
 	struct drm_exynos_ipp_prop_list *prop_list;
 
 	DRM_DEBUG_KMS("%s\n", __func__);
@@ -478,6 +509,9 @@ static int rotator_init_prop_list(struct exynos_drm_ippdrv *ippdrv)
 		DRM_ERROR("failed to alloc property list.\n");
 		return -ENOMEM;
 	}
+=======
+	struct drm_exynos_ipp_prop_list *prop_list = &ippdrv->prop_list;
+>>>>>>> v3.18
 
 	prop_list->version = 1;
 	prop_list->flip = (1 << EXYNOS_DRM_FLIP_VERTICAL) |
@@ -490,8 +524,11 @@ static int rotator_init_prop_list(struct exynos_drm_ippdrv *ippdrv)
 	prop_list->crop = 0;
 	prop_list->scale = 0;
 
+<<<<<<< HEAD
 	ippdrv->prop_list = prop_list;
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -502,7 +539,11 @@ static inline bool rotator_check_drm_fmt(u32 fmt)
 	case DRM_FORMAT_NV12:
 		return true;
 	default:
+<<<<<<< HEAD
 		DRM_DEBUG_KMS("%s:not support format\n", __func__);
+=======
+		DRM_DEBUG_KMS("not support format\n");
+>>>>>>> v3.18
 		return false;
 	}
 }
@@ -516,7 +557,11 @@ static inline bool rotator_check_drm_flip(enum drm_exynos_flip flip)
 	case EXYNOS_DRM_FLIP_BOTH:
 		return true;
 	default:
+<<<<<<< HEAD
 		DRM_DEBUG_KMS("%s:invalid flip\n", __func__);
+=======
+		DRM_DEBUG_KMS("invalid flip\n");
+>>>>>>> v3.18
 		return false;
 	}
 }
@@ -536,19 +581,31 @@ static int rotator_ippdrv_check_property(struct device *dev,
 
 	/* Check format configuration */
 	if (src_config->fmt != dst_config->fmt) {
+<<<<<<< HEAD
 		DRM_DEBUG_KMS("%s:not support csc feature\n", __func__);
+=======
+		DRM_DEBUG_KMS("not support csc feature\n");
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
 	if (!rotator_check_drm_fmt(dst_config->fmt)) {
+<<<<<<< HEAD
 		DRM_DEBUG_KMS("%s:invalid format\n", __func__);
+=======
+		DRM_DEBUG_KMS("invalid format\n");
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
 	/* Check transform configuration */
 	if (src_config->degree != EXYNOS_DRM_DEGREE_0) {
+<<<<<<< HEAD
 		DRM_DEBUG_KMS("%s:not support source-side rotation\n",
 			__func__);
+=======
+		DRM_DEBUG_KMS("not support source-side rotation\n");
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
@@ -561,51 +618,83 @@ static int rotator_ippdrv_check_property(struct device *dev,
 		/* No problem */
 		break;
 	default:
+<<<<<<< HEAD
 		DRM_DEBUG_KMS("%s:invalid degree\n", __func__);
+=======
+		DRM_DEBUG_KMS("invalid degree\n");
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
 	if (src_config->flip != EXYNOS_DRM_FLIP_NONE) {
+<<<<<<< HEAD
 		DRM_DEBUG_KMS("%s:not support source-side flip\n", __func__);
+=======
+		DRM_DEBUG_KMS("not support source-side flip\n");
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
 	if (!rotator_check_drm_flip(dst_config->flip)) {
+<<<<<<< HEAD
 		DRM_DEBUG_KMS("%s:invalid flip\n", __func__);
+=======
+		DRM_DEBUG_KMS("invalid flip\n");
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
 	/* Check size configuration */
 	if ((src_pos->x + src_pos->w > src_sz->hsize) ||
 		(src_pos->y + src_pos->h > src_sz->vsize)) {
+<<<<<<< HEAD
 		DRM_DEBUG_KMS("%s:out of source buffer bound\n", __func__);
+=======
+		DRM_DEBUG_KMS("out of source buffer bound\n");
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
 	if (swap) {
 		if ((dst_pos->x + dst_pos->h > dst_sz->vsize) ||
 			(dst_pos->y + dst_pos->w > dst_sz->hsize)) {
+<<<<<<< HEAD
 			DRM_DEBUG_KMS("%s:out of destination buffer bound\n",
 				__func__);
+=======
+			DRM_DEBUG_KMS("out of destination buffer bound\n");
+>>>>>>> v3.18
 			return -EINVAL;
 		}
 
 		if ((src_pos->w != dst_pos->h) || (src_pos->h != dst_pos->w)) {
+<<<<<<< HEAD
 			DRM_DEBUG_KMS("%s:not support scale feature\n",
 				__func__);
+=======
+			DRM_DEBUG_KMS("not support scale feature\n");
+>>>>>>> v3.18
 			return -EINVAL;
 		}
 	} else {
 		if ((dst_pos->x + dst_pos->w > dst_sz->hsize) ||
 			(dst_pos->y + dst_pos->h > dst_sz->vsize)) {
+<<<<<<< HEAD
 			DRM_DEBUG_KMS("%s:out of destination buffer bound\n",
 				__func__);
+=======
+			DRM_DEBUG_KMS("out of destination buffer bound\n");
+>>>>>>> v3.18
 			return -EINVAL;
 		}
 
 		if ((src_pos->w != dst_pos->w) || (src_pos->h != dst_pos->h)) {
+<<<<<<< HEAD
 			DRM_DEBUG_KMS("%s:not support scale feature\n",
 				__func__);
+=======
+			DRM_DEBUG_KMS("not support scale feature\n");
+>>>>>>> v3.18
 			return -EINVAL;
 		}
 	}
@@ -639,11 +728,83 @@ static int rotator_ippdrv_start(struct device *dev, enum drm_exynos_ipp_cmd cmd)
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+static struct rot_limit_table rot_limit_tbl_4210 = {
+	.ycbcr420_2p = {
+		.min_w = 32,
+		.min_h = 32,
+		.max_w = SZ_64K,
+		.max_h = SZ_64K,
+		.align = 3,
+	},
+	.rgb888 = {
+		.min_w = 8,
+		.min_h = 8,
+		.max_w = SZ_16K,
+		.max_h = SZ_16K,
+		.align = 2,
+	},
+};
+
+static struct rot_limit_table rot_limit_tbl_4x12 = {
+	.ycbcr420_2p = {
+		.min_w = 32,
+		.min_h = 32,
+		.max_w = SZ_32K,
+		.max_h = SZ_32K,
+		.align = 3,
+	},
+	.rgb888 = {
+		.min_w = 8,
+		.min_h = 8,
+		.max_w = SZ_8K,
+		.max_h = SZ_8K,
+		.align = 2,
+	},
+};
+
+static struct rot_limit_table rot_limit_tbl_5250 = {
+	.ycbcr420_2p = {
+		.min_w = 32,
+		.min_h = 32,
+		.max_w = SZ_32K,
+		.max_h = SZ_32K,
+		.align = 3,
+	},
+	.rgb888 = {
+		.min_w = 8,
+		.min_h = 8,
+		.max_w = SZ_8K,
+		.max_h = SZ_8K,
+		.align = 1,
+	},
+};
+
+static const struct of_device_id exynos_rotator_match[] = {
+	{
+		.compatible = "samsung,exynos4210-rotator",
+		.data = &rot_limit_tbl_4210,
+	},
+	{
+		.compatible = "samsung,exynos4212-rotator",
+		.data = &rot_limit_tbl_4x12,
+	},
+	{
+		.compatible = "samsung,exynos5250-rotator",
+		.data = &rot_limit_tbl_5250,
+	},
+	{},
+};
+MODULE_DEVICE_TABLE(of, exynos_rotator_match);
+
+>>>>>>> v3.18
 static int rotator_probe(struct platform_device *pdev)
 {
 	struct device *dev = &pdev->dev;
 	struct rot_context *rot;
 	struct exynos_drm_ippdrv *ippdrv;
+<<<<<<< HEAD
 	int ret;
 
 	rot = devm_kzalloc(dev, sizeof(*rot), GFP_KERNEL);
@@ -654,6 +815,26 @@ static int rotator_probe(struct platform_device *pdev)
 
 	rot->limit_tbl = (struct rot_limit_table *)
 				platform_get_device_id(pdev)->driver_data;
+=======
+	const struct of_device_id *match;
+	int ret;
+
+	if (!dev->of_node) {
+		dev_err(dev, "cannot find of_node.\n");
+		return -ENODEV;
+	}
+
+	rot = devm_kzalloc(dev, sizeof(*rot), GFP_KERNEL);
+	if (!rot)
+		return -ENOMEM;
+
+	match = of_match_node(exynos_rotator_match, dev->of_node);
+	if (!match) {
+		dev_err(dev, "failed to match node\n");
+		return -ENODEV;
+	}
+	rot->limit_tbl = (struct rot_limit_table *)match->data;
+>>>>>>> v3.18
 
 	rot->regs_res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	rot->regs = devm_ioremap_resource(dev, rot->regs_res);
@@ -693,7 +874,11 @@ static int rotator_probe(struct platform_device *pdev)
 		goto err_ippdrv_register;
 	}
 
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s:ippdrv[0x%x]\n", __func__, (int)ippdrv);
+=======
+	DRM_DEBUG_KMS("ippdrv[0x%x]\n", (int)ippdrv);
+>>>>>>> v3.18
 
 	platform_set_drvdata(pdev, rot);
 
@@ -725,6 +910,7 @@ static int rotator_remove(struct platform_device *pdev)
 	return 0;
 }
 
+<<<<<<< HEAD
 static struct rot_limit_table rot_limit_tbl = {
 	.ycbcr420_2p = {
 		.min_w = 32,
@@ -754,6 +940,10 @@ static int rotator_clk_crtl(struct rot_context *rot, bool enable)
 {
 	DRM_DEBUG_KMS("%s\n", __func__);
 
+=======
+static int rotator_clk_crtl(struct rot_context *rot, bool enable)
+{
+>>>>>>> v3.18
 	if (enable) {
 		clk_enable(rot->clock);
 		rot->suspended = false;
@@ -771,8 +961,11 @@ static int rotator_suspend(struct device *dev)
 {
 	struct rot_context *rot = dev_get_drvdata(dev);
 
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __func__);
 
+=======
+>>>>>>> v3.18
 	if (pm_runtime_suspended(dev))
 		return 0;
 
@@ -783,8 +976,11 @@ static int rotator_resume(struct device *dev)
 {
 	struct rot_context *rot = dev_get_drvdata(dev);
 
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __func__);
 
+=======
+>>>>>>> v3.18
 	if (!pm_runtime_suspended(dev))
 		return rotator_clk_crtl(rot, true);
 
@@ -797,8 +993,11 @@ static int rotator_runtime_suspend(struct device *dev)
 {
 	struct rot_context *rot = dev_get_drvdata(dev);
 
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __func__);
 
+=======
+>>>>>>> v3.18
 	return  rotator_clk_crtl(rot, false);
 }
 
@@ -806,8 +1005,11 @@ static int rotator_runtime_resume(struct device *dev)
 {
 	struct rot_context *rot = dev_get_drvdata(dev);
 
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __func__);
 
+=======
+>>>>>>> v3.18
 	return  rotator_clk_crtl(rot, true);
 }
 #endif
@@ -821,10 +1023,17 @@ static const struct dev_pm_ops rotator_pm_ops = {
 struct platform_driver rotator_driver = {
 	.probe		= rotator_probe,
 	.remove		= rotator_remove,
+<<<<<<< HEAD
 	.id_table	= rotator_driver_ids,
+=======
+>>>>>>> v3.18
 	.driver		= {
 		.name	= "exynos-rot",
 		.owner	= THIS_MODULE,
 		.pm	= &rotator_pm_ops,
+<<<<<<< HEAD
+=======
+		.of_match_table = exynos_rotator_match,
+>>>>>>> v3.18
 	},
 };

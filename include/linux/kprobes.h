@@ -205,10 +205,17 @@ struct kretprobe_blackpoint {
 	void *addr;
 };
 
+<<<<<<< HEAD
 struct kprobe_blackpoint {
 	const char *name;
 	unsigned long start_addr;
 	unsigned long range;
+=======
+struct kprobe_blacklist_entry {
+	struct list_head list;
+	unsigned long start_addr;
+	unsigned long end_addr;
+>>>>>>> v3.18
 };
 
 #ifdef CONFIG_KPROBES
@@ -264,9 +271,42 @@ extern void arch_arm_kprobe(struct kprobe *p);
 extern void arch_disarm_kprobe(struct kprobe *p);
 extern int arch_init_kprobes(void);
 extern void show_registers(struct pt_regs *regs);
+<<<<<<< HEAD
 extern kprobe_opcode_t *get_insn_slot(void);
 extern void free_insn_slot(kprobe_opcode_t *slot, int dirty);
 extern void kprobes_inc_nmissed_count(struct kprobe *p);
+=======
+extern void kprobes_inc_nmissed_count(struct kprobe *p);
+extern bool arch_within_kprobe_blacklist(unsigned long addr);
+
+struct kprobe_insn_cache {
+	struct mutex mutex;
+	void *(*alloc)(void);	/* allocate insn page */
+	void (*free)(void *);	/* free insn page */
+	struct list_head pages; /* list of kprobe_insn_page */
+	size_t insn_size;	/* size of instruction slot */
+	int nr_garbage;
+};
+
+extern kprobe_opcode_t *__get_insn_slot(struct kprobe_insn_cache *c);
+extern void __free_insn_slot(struct kprobe_insn_cache *c,
+			     kprobe_opcode_t *slot, int dirty);
+
+#define DEFINE_INSN_CACHE_OPS(__name)					\
+extern struct kprobe_insn_cache kprobe_##__name##_slots;		\
+									\
+static inline kprobe_opcode_t *get_##__name##_slot(void)		\
+{									\
+	return __get_insn_slot(&kprobe_##__name##_slots);		\
+}									\
+									\
+static inline void free_##__name##_slot(kprobe_opcode_t *slot, int dirty)\
+{									\
+	__free_insn_slot(&kprobe_##__name##_slots, slot, dirty);	\
+}									\
+
+DEFINE_INSN_CACHE_OPS(insn);
+>>>>>>> v3.18
 
 #ifdef CONFIG_OPTPROBES
 /*
@@ -287,13 +327,21 @@ extern void arch_optimize_kprobes(struct list_head *oplist);
 extern void arch_unoptimize_kprobes(struct list_head *oplist,
 				    struct list_head *done_list);
 extern void arch_unoptimize_kprobe(struct optimized_kprobe *op);
+<<<<<<< HEAD
 extern kprobe_opcode_t *get_optinsn_slot(void);
 extern void free_optinsn_slot(kprobe_opcode_t *slot, int dirty);
+=======
+>>>>>>> v3.18
 extern int arch_within_optimized_kprobe(struct optimized_kprobe *op,
 					unsigned long addr);
 
 extern void opt_pre_handler(struct kprobe *p, struct pt_regs *regs);
 
+<<<<<<< HEAD
+=======
+DEFINE_INSN_CACHE_OPS(optinsn);
+
+>>>>>>> v3.18
 #ifdef CONFIG_SYSCTL
 extern int sysctl_kprobes_optimization;
 extern int proc_kprobes_optimization_handler(struct ctl_table *table,
@@ -329,7 +377,11 @@ static inline void reset_current_kprobe(void)
 
 static inline struct kprobe_ctlblk *get_kprobe_ctlblk(void)
 {
+<<<<<<< HEAD
 	return (&__get_cpu_var(kprobe_ctlblk));
+=======
+	return this_cpu_ptr(&kprobe_ctlblk);
+>>>>>>> v3.18
 }
 
 int register_kprobe(struct kprobe *p);
@@ -450,4 +502,21 @@ static inline int enable_jprobe(struct jprobe *jp)
 	return enable_kprobe(&jp->kp);
 }
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_KPROBES
+/*
+ * Blacklist ganerating macro. Specify functions which is not probed
+ * by using this macro.
+ */
+#define __NOKPROBE_SYMBOL(fname)			\
+static unsigned long __used				\
+	__attribute__((section("_kprobe_blacklist")))	\
+	_kbl_addr_##fname = (unsigned long)fname;
+#define NOKPROBE_SYMBOL(fname)	__NOKPROBE_SYMBOL(fname)
+#else
+#define NOKPROBE_SYMBOL(fname)
+#endif
+
+>>>>>>> v3.18
 #endif /* _LINUX_KPROBES_H */

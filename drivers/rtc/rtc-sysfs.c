@@ -25,6 +25,7 @@
  */
 
 static ssize_t
+<<<<<<< HEAD
 rtc_sysfs_show_name(struct device *dev, struct device_attribute *attr,
 		char *buf)
 {
@@ -34,6 +35,16 @@ rtc_sysfs_show_name(struct device *dev, struct device_attribute *attr,
 static ssize_t
 rtc_sysfs_show_date(struct device *dev, struct device_attribute *attr,
 		char *buf)
+=======
+name_show(struct device *dev, struct device_attribute *attr, char *buf)
+{
+	return sprintf(buf, "%s\n", to_rtc_device(dev)->name);
+}
+static DEVICE_ATTR_RO(name);
+
+static ssize_t
+date_show(struct device *dev, struct device_attribute *attr, char *buf)
+>>>>>>> v3.18
 {
 	ssize_t retval;
 	struct rtc_time tm;
@@ -46,10 +57,17 @@ rtc_sysfs_show_date(struct device *dev, struct device_attribute *attr,
 
 	return retval;
 }
+<<<<<<< HEAD
 
 static ssize_t
 rtc_sysfs_show_time(struct device *dev, struct device_attribute *attr,
 		char *buf)
+=======
+static DEVICE_ATTR_RO(date);
+
+static ssize_t
+time_show(struct device *dev, struct device_attribute *attr, char *buf)
+>>>>>>> v3.18
 {
 	ssize_t retval;
 	struct rtc_time tm;
@@ -62,10 +80,17 @@ rtc_sysfs_show_time(struct device *dev, struct device_attribute *attr,
 
 	return retval;
 }
+<<<<<<< HEAD
 
 static ssize_t
 rtc_sysfs_show_since_epoch(struct device *dev, struct device_attribute *attr,
 		char *buf)
+=======
+static DEVICE_ATTR_RO(time);
+
+static ssize_t
+since_epoch_show(struct device *dev, struct device_attribute *attr, char *buf)
+>>>>>>> v3.18
 {
 	ssize_t retval;
 	struct rtc_time tm;
@@ -79,16 +104,27 @@ rtc_sysfs_show_since_epoch(struct device *dev, struct device_attribute *attr,
 
 	return retval;
 }
+<<<<<<< HEAD
 
 static ssize_t
 rtc_sysfs_show_max_user_freq(struct device *dev, struct device_attribute *attr,
 		char *buf)
+=======
+static DEVICE_ATTR_RO(since_epoch);
+
+static ssize_t
+max_user_freq_show(struct device *dev, struct device_attribute *attr, char *buf)
+>>>>>>> v3.18
 {
 	return sprintf(buf, "%d\n", to_rtc_device(dev)->max_user_freq);
 }
 
 static ssize_t
+<<<<<<< HEAD
 rtc_sysfs_set_max_user_freq(struct device *dev, struct device_attribute *attr,
+=======
+max_user_freq_store(struct device *dev, struct device_attribute *attr,
+>>>>>>> v3.18
 		const char *buf, size_t n)
 {
 	struct rtc_device *rtc = to_rtc_device(dev);
@@ -101,6 +137,10 @@ rtc_sysfs_set_max_user_freq(struct device *dev, struct device_attribute *attr,
 
 	return n;
 }
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR_RW(max_user_freq);
+>>>>>>> v3.18
 
 /**
  * rtc_sysfs_show_hctosys - indicate if the given RTC set the system time
@@ -109,8 +149,12 @@ rtc_sysfs_set_max_user_freq(struct device *dev, struct device_attribute *attr,
  * boot or resume event.
  */
 static ssize_t
+<<<<<<< HEAD
 rtc_sysfs_show_hctosys(struct device *dev, struct device_attribute *attr,
 		char *buf)
+=======
+hctosys_show(struct device *dev, struct device_attribute *attr, char *buf)
+>>>>>>> v3.18
 {
 #ifdef CONFIG_RTC_HCTOSYS_DEVICE
 	if (rtc_hctosys_ret == 0 &&
@@ -121,6 +165,7 @@ rtc_sysfs_show_hctosys(struct device *dev, struct device_attribute *attr,
 #endif
 		return sprintf(buf, "0\n");
 }
+<<<<<<< HEAD
 
 static struct device_attribute rtc_attrs[] = {
 	__ATTR(name, S_IRUGO, rtc_sysfs_show_name, NULL),
@@ -132,6 +177,20 @@ static struct device_attribute rtc_attrs[] = {
 	__ATTR(hctosys, S_IRUGO, rtc_sysfs_show_hctosys, NULL),
 	{ },
 };
+=======
+static DEVICE_ATTR_RO(hctosys);
+
+static struct attribute *rtc_attrs[] = {
+	&dev_attr_name.attr,
+	&dev_attr_date.attr,
+	&dev_attr_time.attr,
+	&dev_attr_since_epoch.attr,
+	&dev_attr_max_user_freq.attr,
+	&dev_attr_hctosys.attr,
+	NULL,
+};
+ATTRIBUTE_GROUPS(rtc);
+>>>>>>> v3.18
 
 static ssize_t
 rtc_sysfs_show_wakealarm(struct device *dev, struct device_attribute *attr,
@@ -164,6 +223,10 @@ rtc_sysfs_set_wakealarm(struct device *dev, struct device_attribute *attr,
 {
 	ssize_t retval;
 	unsigned long now, alarm;
+<<<<<<< HEAD
+=======
+	unsigned long push = 0;
+>>>>>>> v3.18
 	struct rtc_wkalrm alm;
 	struct rtc_device *rtc = to_rtc_device(dev);
 	char *buf_ptr;
@@ -180,13 +243,25 @@ rtc_sysfs_set_wakealarm(struct device *dev, struct device_attribute *attr,
 	buf_ptr = (char *)buf;
 	if (*buf_ptr == '+') {
 		buf_ptr++;
+<<<<<<< HEAD
 		adjust = 1;
+=======
+		if (*buf_ptr == '=') {
+			buf_ptr++;
+			push = 1;
+		} else
+			adjust = 1;
+>>>>>>> v3.18
 	}
 	alarm = simple_strtoul(buf_ptr, NULL, 0);
 	if (adjust) {
 		alarm += now;
 	}
+<<<<<<< HEAD
 	if (alarm > now) {
+=======
+	if (alarm > now || push) {
+>>>>>>> v3.18
 		/* Avoid accidentally clobbering active alarms; we can't
 		 * entirely prevent that here, without even the minimal
 		 * locking from the /dev/rtcN api.
@@ -194,9 +269,20 @@ rtc_sysfs_set_wakealarm(struct device *dev, struct device_attribute *attr,
 		retval = rtc_read_alarm(rtc, &alm);
 		if (retval < 0)
 			return retval;
+<<<<<<< HEAD
 		if (alm.enabled)
 			return -EBUSY;
 
+=======
+		if (alm.enabled) {
+			if (push) {
+				rtc_tm_to_time(&alm.time, &push);
+				alarm += push;
+			} else
+				return -EBUSY;
+		} else if (push)
+			return -EINVAL;
+>>>>>>> v3.18
 		alm.enabled = 1;
 	} else {
 		alm.enabled = 0;
@@ -251,5 +337,9 @@ void rtc_sysfs_del_device(struct rtc_device *rtc)
 
 void __init rtc_sysfs_init(struct class *rtc_class)
 {
+<<<<<<< HEAD
 	rtc_class->dev_attrs = rtc_attrs;
+=======
+	rtc_class->dev_groups = rtc_groups;
+>>>>>>> v3.18
 }

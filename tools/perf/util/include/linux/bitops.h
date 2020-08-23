@@ -87,13 +87,22 @@ static __always_inline unsigned long __ffs(unsigned long word)
 	return num;
 }
 
+<<<<<<< HEAD
+=======
+typedef const unsigned long __attribute__((__may_alias__)) long_alias_t;
+
+>>>>>>> v3.18
 /*
  * Find the first set bit in a memory region.
  */
 static inline unsigned long
 find_first_bit(const unsigned long *addr, unsigned long size)
 {
+<<<<<<< HEAD
 	const unsigned long *p = addr;
+=======
+	long_alias_t *p = (long_alias_t *) addr;
+>>>>>>> v3.18
 	unsigned long result = 0;
 	unsigned long tmp;
 

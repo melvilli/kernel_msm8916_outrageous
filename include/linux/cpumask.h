@@ -142,6 +142,16 @@ static inline unsigned int cpumask_any_but(const struct cpumask *mask,
 	return 1;
 }
 
+<<<<<<< HEAD
+=======
+static inline int cpumask_set_cpu_local_first(int i, int numa_node, cpumask_t *dstp)
+{
+	set_bit(0, cpumask_bits(dstp));
+
+	return 0;
+}
+
+>>>>>>> v3.18
 #define for_each_cpu(cpu, mask)			\
 	for ((cpu) = 0; (cpu) < 1; (cpu)++, (void)mask)
 #define for_each_cpu_not(cpu, mask)		\
@@ -192,6 +202,10 @@ static inline unsigned int cpumask_next_zero(int n, const struct cpumask *srcp)
 
 int cpumask_next_and(int n, const struct cpumask *, const struct cpumask *);
 int cpumask_any_but(const struct cpumask *mask, unsigned int cpu);
+<<<<<<< HEAD
+=======
+int cpumask_set_cpu_local_first(int i, int numa_node, cpumask_t *dstp);
+>>>>>>> v3.18
 
 /**
  * for_each_cpu - iterate over every cpu in a mask
@@ -600,7 +614,11 @@ static inline int cpulist_scnprintf(char *buf, int len,
 static inline int cpumask_parse(const char *buf, struct cpumask *dstp)
 {
 	char *nl = strchr(buf, '\n');
+<<<<<<< HEAD
 	int len = nl ? nl - buf : strlen(buf);
+=======
+	unsigned int len = nl ? (unsigned int)(nl - buf) : strlen(buf);
+>>>>>>> v3.18
 
 	return bitmap_parse(buf, len, cpumask_bits(dstp), nr_cpumask_bits);
 }
@@ -658,10 +676,25 @@ static inline size_t cpumask_size(void)
  *
  * This code makes NR_CPUS length memcopy and brings to a memory corruption.
  * cpumask_copy() provide safe copy functionality.
+<<<<<<< HEAD
+=======
+ *
+ * Note that there is another evil here: If you define a cpumask_var_t
+ * as a percpu variable then the way to obtain the address of the cpumask
+ * structure differently influences what this_cpu_* operation needs to be
+ * used. Please use this_cpu_cpumask_var_t in those cases. The direct use
+ * of this_cpu_ptr() or this_cpu_read() will lead to failures when the
+ * other type of cpumask_var_t implementation is configured.
+>>>>>>> v3.18
  */
 #ifdef CONFIG_CPUMASK_OFFSTACK
 typedef struct cpumask *cpumask_var_t;
 
+<<<<<<< HEAD
+=======
+#define this_cpu_cpumask_var_ptr(x) this_cpu_read(x)
+
+>>>>>>> v3.18
 bool alloc_cpumask_var_node(cpumask_var_t *mask, gfp_t flags, int node);
 bool alloc_cpumask_var(cpumask_var_t *mask, gfp_t flags);
 bool zalloc_cpumask_var_node(cpumask_var_t *mask, gfp_t flags, int node);
@@ -673,6 +706,11 @@ void free_bootmem_cpumask_var(cpumask_var_t mask);
 #else
 typedef struct cpumask cpumask_var_t[1];
 
+<<<<<<< HEAD
+=======
+#define this_cpu_cpumask_var_ptr(x) this_cpu_ptr(x)
+
+>>>>>>> v3.18
 static inline bool alloc_cpumask_var(cpumask_var_t *mask, gfp_t flags)
 {
 	return true;

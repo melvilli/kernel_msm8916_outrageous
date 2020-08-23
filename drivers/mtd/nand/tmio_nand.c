@@ -357,7 +357,11 @@ static void tmio_hw_stop(struct platform_device *dev, struct tmio_nand *tmio)
 
 static int tmio_probe(struct platform_device *dev)
 {
+<<<<<<< HEAD
 	struct tmio_nand_data *data = dev->dev.platform_data;
+=======
+	struct tmio_nand_data *data = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 	struct resource *fcr = platform_get_resource(dev,
 			IORESOURCE_MEM, 0);
 	struct resource *ccr = platform_get_resource(dev,
@@ -371,11 +375,17 @@ static int tmio_probe(struct platform_device *dev)
 	if (data == NULL)
 		dev_warn(&dev->dev, "NULL platform data!\n");
 
+<<<<<<< HEAD
 	tmio = kzalloc(sizeof *tmio, GFP_KERNEL);
 	if (!tmio) {
 		retval = -ENOMEM;
 		goto err_kzalloc;
 	}
+=======
+	tmio = devm_kzalloc(&dev->dev, sizeof(*tmio), GFP_KERNEL);
+	if (!tmio)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	tmio->dev = dev;
 
@@ -385,6 +395,7 @@ static int tmio_probe(struct platform_device *dev)
 	mtd->priv = nand_chip;
 	mtd->name = "tmio-nand";
 
+<<<<<<< HEAD
 	tmio->ccr = ioremap(ccr->start, resource_size(ccr));
 	if (!tmio->ccr) {
 		retval = -EIO;
@@ -401,6 +412,20 @@ static int tmio_probe(struct platform_device *dev)
 	retval = tmio_hw_init(dev, tmio);
 	if (retval)
 		goto err_hwinit;
+=======
+	tmio->ccr = devm_ioremap(&dev->dev, ccr->start, resource_size(ccr));
+	if (!tmio->ccr)
+		return -EIO;
+
+	tmio->fcr_base = fcr->start & 0xfffff;
+	tmio->fcr = devm_ioremap(&dev->dev, fcr->start, resource_size(fcr));
+	if (!tmio->fcr)
+		return -EIO;
+
+	retval = tmio_hw_init(dev, tmio);
+	if (retval)
+		return retval;
+>>>>>>> v3.18
 
 	/* Set address of NAND IO lines */
 	nand_chip->IO_ADDR_R = tmio->fcr;
@@ -428,8 +453,13 @@ static int tmio_probe(struct platform_device *dev)
 	/* 15 us command delay time */
 	nand_chip->chip_delay = 15;
 
+<<<<<<< HEAD
 	retval = request_irq(irq, &tmio_irq,
 				IRQF_DISABLED, dev_name(&dev->dev), tmio);
+=======
+	retval = devm_request_irq(&dev->dev, irq, &tmio_irq, 0,
+				  dev_name(&dev->dev), tmio);
+>>>>>>> v3.18
 	if (retval) {
 		dev_err(&dev->dev, "request_irq error %d\n", retval);
 		goto err_irq;
@@ -441,7 +471,11 @@ static int tmio_probe(struct platform_device *dev)
 	/* Scan to find existence of the device */
 	if (nand_scan(mtd, 1)) {
 		retval = -ENODEV;
+<<<<<<< HEAD
 		goto err_scan;
+=======
+		goto err_irq;
+>>>>>>> v3.18
 	}
 	/* Register the partitions */
 	retval = mtd_device_parse_register(mtd, NULL, NULL,
@@ -452,6 +486,7 @@ static int tmio_probe(struct platform_device *dev)
 
 	nand_release(mtd);
 
+<<<<<<< HEAD
 err_scan:
 	if (tmio->irq)
 		free_irq(tmio->irq, tmio);
@@ -464,6 +499,10 @@ err_iomap_fcr:
 err_iomap_ccr:
 	kfree(tmio);
 err_kzalloc:
+=======
+err_irq:
+	tmio_hw_stop(dev, tmio);
+>>>>>>> v3.18
 	return retval;
 }
 
@@ -472,12 +511,16 @@ static int tmio_remove(struct platform_device *dev)
 	struct tmio_nand *tmio = platform_get_drvdata(dev);
 
 	nand_release(&tmio->mtd);
+<<<<<<< HEAD
 	if (tmio->irq)
 		free_irq(tmio->irq, tmio);
 	tmio_hw_stop(dev, tmio);
 	iounmap(tmio->fcr);
 	iounmap(tmio->ccr);
 	kfree(tmio);
+=======
+	tmio_hw_stop(dev, tmio);
+>>>>>>> v3.18
 	return 0;
 }
 

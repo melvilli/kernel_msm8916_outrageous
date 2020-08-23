@@ -89,6 +89,10 @@ nvbios_dpout_parse(struct nouveau_bios *bios, u8 idx,
 		   struct nvbios_dpout *info)
 {
 	u16 data = nvbios_dpout_entry(bios, idx, ver, hdr, cnt, len);
+<<<<<<< HEAD
+=======
+	memset(info, 0x00, sizeof(*info));
+>>>>>>> v3.18
 	if (data && *ver) {
 		info->type = nv_ro16(bios, data + 0x00);
 		info->mask = nv_ro16(bios, data + 0x02);
@@ -99,9 +103,18 @@ nvbios_dpout_parse(struct nouveau_bios *bios, u8 idx,
 			info->script[0] = nv_ro16(bios, data + 0x06);
 			info->script[1] = nv_ro16(bios, data + 0x08);
 			info->lnkcmp    = nv_ro16(bios, data + 0x0a);
+<<<<<<< HEAD
 			info->script[2] = nv_ro16(bios, data + 0x0c);
 			info->script[3] = nv_ro16(bios, data + 0x0e);
 			info->script[4] = nv_ro16(bios, data + 0x10);
+=======
+			if (*len >= 0x0f) {
+				info->script[2] = nv_ro16(bios, data + 0x0c);
+				info->script[3] = nv_ro16(bios, data + 0x0e);
+			}
+			if (*len >= 0x11)
+				info->script[4] = nv_ro16(bios, data + 0x10);
+>>>>>>> v3.18
 			break;
 		case 0x40:
 			info->flags     = nv_ro08(bios, data + 0x04);
@@ -158,6 +171,7 @@ nvbios_dpcfg_parse(struct nouveau_bios *bios, u16 outp, u8 idx,
 		   struct nvbios_dpcfg *info)
 {
 	u16 data = nvbios_dpcfg_entry(bios, outp, idx, ver, hdr, cnt, len);
+<<<<<<< HEAD
 	if (data) {
 		switch (*ver) {
 		case 0x21:
@@ -170,6 +184,22 @@ nvbios_dpcfg_parse(struct nouveau_bios *bios, u16 outp, u8 idx,
 			info->drv = nv_ro08(bios, data + 0x01);
 			info->pre = nv_ro08(bios, data + 0x02);
 			info->unk = nv_ro08(bios, data + 0x03);
+=======
+	memset(info, 0x00, sizeof(*info));
+	if (data) {
+		switch (*ver) {
+		case 0x21:
+			info->dc    = nv_ro08(bios, data + 0x02);
+			info->pe    = nv_ro08(bios, data + 0x03);
+			info->tx_pu = nv_ro08(bios, data + 0x04);
+			break;
+		case 0x30:
+		case 0x40:
+			info->pc    = nv_ro08(bios, data + 0x00);
+			info->dc    = nv_ro08(bios, data + 0x01);
+			info->pe    = nv_ro08(bios, data + 0x02);
+			info->tx_pu = nv_ro08(bios, data + 0x03);
+>>>>>>> v3.18
 			break;
 		default:
 			data = 0x0000;
@@ -180,7 +210,11 @@ nvbios_dpcfg_parse(struct nouveau_bios *bios, u16 outp, u8 idx,
 }
 
 u16
+<<<<<<< HEAD
 nvbios_dpcfg_match(struct nouveau_bios *bios, u16 outp, u8 un, u8 vs, u8 pe,
+=======
+nvbios_dpcfg_match(struct nouveau_bios *bios, u16 outp, u8 pc, u8 vs, u8 pe,
+>>>>>>> v3.18
 		   u8 *ver, u8 *hdr, u8 *cnt, u8 *len,
 		   struct nvbios_dpcfg *info)
 {
@@ -189,16 +223,29 @@ nvbios_dpcfg_match(struct nouveau_bios *bios, u16 outp, u8 un, u8 vs, u8 pe,
 
 	if (*ver >= 0x30) {
 		const u8 vsoff[] = { 0, 4, 7, 9 };
+<<<<<<< HEAD
 		idx = (un * 10) + vsoff[vs] + pe;
 	} else {
 		while ((data = nvbios_dpcfg_entry(bios, outp, idx,
+=======
+		idx = (pc * 10) + vsoff[vs] + pe;
+	} else {
+		while ((data = nvbios_dpcfg_entry(bios, outp, ++idx,
+>>>>>>> v3.18
 						  ver, hdr, cnt, len))) {
 			if (nv_ro08(bios, data + 0x00) == vs &&
 			    nv_ro08(bios, data + 0x01) == pe)
 				break;
+<<<<<<< HEAD
 			idx++;
 		}
 	}
 
 	return nvbios_dpcfg_parse(bios, outp, pe, ver, hdr, cnt, len, info);
+=======
+		}
+	}
+
+	return nvbios_dpcfg_parse(bios, outp, idx, ver, hdr, cnt, len, info);
+>>>>>>> v3.18
 }

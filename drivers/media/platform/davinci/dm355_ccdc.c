@@ -460,7 +460,11 @@ static void ccdc_config_black_compense(struct ccdc_black_compensation *bcomp)
  * ccdc_write_dfc_entry()
  * write an entry in the dfc table.
  */
+<<<<<<< HEAD
 int ccdc_write_dfc_entry(int index, struct ccdc_vertical_dft *dfc)
+=======
+static int ccdc_write_dfc_entry(int index, struct ccdc_vertical_dft *dfc)
+>>>>>>> v3.18
 {
 /* TODO This is to be re-visited and adjusted */
 #define DFC_WRITE_WAIT_COUNT	1000

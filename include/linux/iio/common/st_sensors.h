@@ -16,6 +16,12 @@
 #include <linux/irqreturn.h>
 #include <linux/iio/trigger.h>
 #include <linux/bitops.h>
+<<<<<<< HEAD
+=======
+#include <linux/regulator/consumer.h>
+
+#include <linux/platform_data/st_sensors_pdata.h>
+>>>>>>> v3.18
 
 #define ST_SENSORS_TX_MAX_LENGTH		2
 #define ST_SENSORS_RX_MAX_LENGTH		6
@@ -24,6 +30,7 @@
 #define ST_SENSORS_FULLSCALE_AVL_MAX		10
 
 #define ST_SENSORS_NUMBER_ALL_CHANNELS		4
+<<<<<<< HEAD
 #define ST_SENSORS_NUMBER_DATA_CHANNELS		3
 #define ST_SENSORS_ENABLE_ALL_AXIS		0x07
 #define ST_SENSORS_BYTE_FOR_CHANNEL		2
@@ -32,6 +39,12 @@
 #define ST_SENSORS_SCAN_Z			2
 #define ST_SENSORS_DEFAULT_12_REALBITS		12
 #define ST_SENSORS_DEFAULT_16_REALBITS		16
+=======
+#define ST_SENSORS_ENABLE_ALL_AXIS		0x07
+#define ST_SENSORS_SCAN_X			0
+#define ST_SENSORS_SCAN_Y			1
+#define ST_SENSORS_SCAN_Z			2
+>>>>>>> v3.18
 #define ST_SENSORS_DEFAULT_POWER_ON_VALUE	0x01
 #define ST_SENSORS_DEFAULT_POWER_OFF_VALUE	0x00
 #define ST_SENSORS_DEFAULT_WAI_ADDRESS		0x0f
@@ -42,6 +55,7 @@
 #define ST_SENSORS_MAX_NAME			17
 #define ST_SENSORS_MAX_4WAI			7
 
+<<<<<<< HEAD
 #define ST_SENSORS_LSM_CHANNELS(device_type, index, mod, endian, bits, addr) \
 { \
 	.type = device_type, \
@@ -56,15 +70,35 @@
 		.realbits = bits, \
 		.shift = 16 - bits, \
 		.storagebits = 16, \
+=======
+#define ST_SENSORS_LSM_CHANNELS(device_type, mask, index, mod, \
+					ch2, s, endian, rbits, sbits, addr) \
+{ \
+	.type = device_type, \
+	.modified = mod, \
+	.info_mask_separate = mask, \
+	.info_mask_shared_by_all = BIT(IIO_CHAN_INFO_SAMP_FREQ), \
+	.scan_index = index, \
+	.channel2 = ch2, \
+	.address = addr, \
+	.scan_type = { \
+		.sign = s, \
+		.realbits = rbits, \
+		.shift = sbits - rbits, \
+		.storagebits = sbits, \
+>>>>>>> v3.18
 		.endianness = endian, \
 	}, \
 }
 
+<<<<<<< HEAD
 #define ST_SENSOR_DEV_ATTR_SAMP_FREQ() \
 		IIO_DEV_ATTR_SAMP_FREQ(S_IWUSR | S_IRUGO, \
 			st_sensors_sysfs_get_sampling_frequency, \
 			st_sensors_sysfs_set_sampling_frequency)
 
+=======
+>>>>>>> v3.18
 #define ST_SENSORS_DEV_ATTR_SAMP_FREQ_AVAIL() \
 		IIO_DEV_ATTR_SAMP_FREQ_AVAIL( \
 			st_sensors_sysfs_sampling_frequency_avail)
@@ -122,14 +156,24 @@ struct st_sensor_bdu {
 /**
  * struct st_sensor_data_ready_irq - ST sensor device data-ready interrupt
  * @addr: address of the register.
+<<<<<<< HEAD
  * @mask: mask to write the on/off value.
+=======
+ * @mask_int1: mask to enable/disable IRQ on INT1 pin.
+ * @mask_int2: mask to enable/disable IRQ on INT2 pin.
+>>>>>>> v3.18
  * struct ig1 - represents the Interrupt Generator 1 of sensors.
  * @en_addr: address of the enable ig1 register.
  * @en_mask: mask to write the on/off value for enable.
  */
 struct st_sensor_data_ready_irq {
 	u8 addr;
+<<<<<<< HEAD
 	u8 mask;
+=======
+	u8 mask_int1;
+	u8 mask_int2;
+>>>>>>> v3.18
 	struct {
 		u8 en_addr;
 		u8 en_mask;
@@ -184,6 +228,10 @@ struct st_sensors {
 	u8 wai;
 	char sensors_supported[ST_SENSORS_MAX_4WAI][ST_SENSORS_MAX_NAME];
 	struct iio_chan_spec *ch;
+<<<<<<< HEAD
+=======
+	int num_ch;
+>>>>>>> v3.18
 	struct st_sensor_odr odr;
 	struct st_sensor_power pw;
 	struct st_sensor_axis enable_axis;
@@ -200,10 +248,20 @@ struct st_sensors {
  * @trig: The trigger in use by the core driver.
  * @sensor: Pointer to the current sensor struct in use.
  * @current_fullscale: Maximum range of measure by the sensor.
+<<<<<<< HEAD
+=======
+ * @vdd: Pointer to sensor's Vdd power supply
+ * @vdd_io: Pointer to sensor's Vdd-IO power supply
+>>>>>>> v3.18
  * @enabled: Status of the sensor (false->off, true->on).
  * @multiread_bit: Use or not particular bit for [I2C/SPI] multiread.
  * @buffer_data: Data used by buffer part.
  * @odr: Output data rate of the sensor [Hz].
+<<<<<<< HEAD
+=======
+ * num_data_channels: Number of data channels used in buffer.
+ * @drdy_int_pin: Redirect DRDY on pin 1 (1) or pin 2 (2).
+>>>>>>> v3.18
  * @get_irq_data_ready: Function to get the IRQ used for data ready signal.
  * @tf: Transfer function structure used by I/O operations.
  * @tb: Transfer buffers and mutex used by I/O operations.
@@ -213,6 +271,11 @@ struct st_sensor_data {
 	struct iio_trigger *trig;
 	struct st_sensors *sensor;
 	struct st_sensor_fullscale_avl *current_fullscale;
+<<<<<<< HEAD
+=======
+	struct regulator *vdd;
+	struct regulator *vdd_io;
+>>>>>>> v3.18
 
 	bool enabled;
 	bool multiread_bit;
@@ -220,6 +283,12 @@ struct st_sensor_data {
 	char *buffer_data;
 
 	unsigned int odr;
+<<<<<<< HEAD
+=======
+	unsigned int num_data_channels;
+
+	u8 drdy_int_pin;
+>>>>>>> v3.18
 
 	unsigned int (*get_irq_data_ready) (struct iio_dev *indio_dev);
 
@@ -251,12 +320,24 @@ static inline void st_sensors_deallocate_trigger(struct iio_dev *indio_dev)
 }
 #endif
 
+<<<<<<< HEAD
 int st_sensors_init_sensor(struct iio_dev *indio_dev);
+=======
+int st_sensors_init_sensor(struct iio_dev *indio_dev,
+					struct st_sensors_platform_data *pdata);
+>>>>>>> v3.18
 
 int st_sensors_set_enable(struct iio_dev *indio_dev, bool enable);
 
 int st_sensors_set_axis_enable(struct iio_dev *indio_dev, u8 axis_enable);
 
+<<<<<<< HEAD
+=======
+void st_sensors_power_enable(struct iio_dev *indio_dev);
+
+void st_sensors_power_disable(struct iio_dev *indio_dev);
+
+>>>>>>> v3.18
 int st_sensors_set_odr(struct iio_dev *indio_dev, unsigned int odr);
 
 int st_sensors_set_dataready_irq(struct iio_dev *indio_dev, bool enable);
@@ -269,12 +350,15 @@ int st_sensors_read_info_raw(struct iio_dev *indio_dev,
 int st_sensors_check_device_support(struct iio_dev *indio_dev,
 			int num_sensors_list, const struct st_sensors *sensors);
 
+<<<<<<< HEAD
 ssize_t st_sensors_sysfs_get_sampling_frequency(struct device *dev,
 				struct device_attribute *attr, char *buf);
 
 ssize_t st_sensors_sysfs_set_sampling_frequency(struct device *dev,
 		struct device_attribute *attr, const char *buf, size_t size);
 
+=======
+>>>>>>> v3.18
 ssize_t st_sensors_sysfs_sampling_frequency_avail(struct device *dev,
 				struct device_attribute *attr, char *buf);
 

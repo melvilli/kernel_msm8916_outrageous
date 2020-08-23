@@ -59,7 +59,11 @@ extern int ibmphp_debug;
 
 
 /************************************************************
+<<<<<<< HEAD
 *  RESOURE TYPE                                             *
+=======
+*  RESOURCE TYPE                                             *
+>>>>>>> v3.18
 ************************************************************/
 
 #define EBDA_RSRC_TYPE_MASK		0x03
@@ -103,7 +107,11 @@ extern int ibmphp_debug;
 //--------------------------------------------------------------
 
 struct rio_table_hdr {
+<<<<<<< HEAD
 	u8 ver_num; 
+=======
+	u8 ver_num;
+>>>>>>> v3.18
 	u8 scal_count;
 	u8 riodev_count;
 	u16 offset;
@@ -127,7 +135,11 @@ struct scal_detail {
 };
 
 //--------------------------------------------------------------
+<<<<<<< HEAD
 // RIO DETAIL 
+=======
+// RIO DETAIL
+>>>>>>> v3.18
 //--------------------------------------------------------------
 
 struct rio_detail {
@@ -152,7 +164,11 @@ struct opt_rio {
 	u8 first_slot_num;
 	u8 middle_num;
 	struct list_head opt_rio_list;
+<<<<<<< HEAD
 };	
+=======
+};
+>>>>>>> v3.18
 
 struct opt_rio_lo {
 	u8 rio_type;
@@ -161,7 +177,11 @@ struct opt_rio_lo {
 	u8 middle_num;
 	u8 pack_count;
 	struct list_head opt_rio_lo_list;
+<<<<<<< HEAD
 };	
+=======
+};
+>>>>>>> v3.18
 
 /****************************************************************
 *  HPC DESCRIPTOR NODE                                          *
@@ -574,7 +594,11 @@ void ibmphp_hpc_stop_poll_thread(void);
 #define HPC_CTLR_IRQ_PENDG	0x80
 
 //----------------------------------------------------------------------------
+<<<<<<< HEAD
 // HPC_CTLR_WROKING status return codes
+=======
+// HPC_CTLR_WORKING status return codes
+>>>>>>> v3.18
 //----------------------------------------------------------------------------
 #define HPC_CTLR_WORKING_NO	0x00
 #define HPC_CTLR_WORKING_YES	0x01

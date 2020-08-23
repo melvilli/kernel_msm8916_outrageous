@@ -12,6 +12,12 @@ config NET_DSA
 if NET_DSA
 
 # tagging formats
+<<<<<<< HEAD
+=======
+config NET_DSA_TAG_BRCM
+	bool
+
+>>>>>>> v3.18
 config NET_DSA_TAG_DSA
 	bool
 

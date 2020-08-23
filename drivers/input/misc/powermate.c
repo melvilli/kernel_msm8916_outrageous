@@ -31,7 +31,10 @@
 #include <linux/kernel.h>
 #include <linux/slab.h>
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/spinlock.h>
 #include <linux/usb/input.h>
 
@@ -308,9 +311,12 @@ static int powermate_probe(struct usb_interface *intf, const struct usb_device_i
 	int error = -ENOMEM;
 
 	interface = intf->cur_altsetting;
+<<<<<<< HEAD
 	if (interface->desc.bNumEndpoints < 1)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 	endpoint = &interface->endpoint[0].desc;
 	if (!usb_endpoint_is_int_in(endpoint))
 		return -EIO;

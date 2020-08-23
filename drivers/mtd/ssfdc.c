@@ -290,7 +290,11 @@ static void ssfdcr_add_mtd(struct mtd_blktrans_ops *tr, struct mtd_info *mtd)
 	int cis_sector;
 
 	/* Check for small page NAND flash */
+<<<<<<< HEAD
 	if (mtd->type != MTD_NANDFLASH || mtd->oobsize != OOB_SIZE ||
+=======
+	if (!mtd_type_is_nand(mtd) || mtd->oobsize != OOB_SIZE ||
+>>>>>>> v3.18
 	    mtd->size > UINT_MAX)
 		return;
 

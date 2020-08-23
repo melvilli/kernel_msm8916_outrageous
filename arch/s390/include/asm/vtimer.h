@@ -28,6 +28,9 @@ extern int del_virt_timer(struct vtimer_list *timer);
 extern void init_cpu_vtimer(void);
 extern void vtime_init(void);
 
+<<<<<<< HEAD
 extern void vtime_stop_cpu(void);
 
+=======
+>>>>>>> v3.18
 #endif /* _ASM_S390_TIMER_H */

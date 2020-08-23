@@ -25,7 +25,12 @@ static inline void rep_nop(void)
 	__asm__ __volatile__("rep;nop": : :"memory");
 }
 
+<<<<<<< HEAD
 #define cpu_relax()	rep_nop()
+=======
+#define cpu_relax()		rep_nop()
+#define cpu_relax_lowlatency()	cpu_relax()
+>>>>>>> v3.18
 
 #include <asm/processor-generic.h>
 

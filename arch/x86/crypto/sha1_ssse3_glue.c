@@ -10,6 +10,10 @@
  * Copyright (c) Andrew McDonald <andrew@mcdonald.org.uk>
  * Copyright (c) Jean-Francois Dive <jef@linuxbe.org>
  * Copyright (c) Mathias Krause <minipli@googlemail.com>
+<<<<<<< HEAD
+=======
+ * Copyright (c) Chandramouli Narayanan <mouli@linux.intel.com>
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -39,6 +43,15 @@ asmlinkage void sha1_transform_ssse3(u32 *digest, const char *data,
 asmlinkage void sha1_transform_avx(u32 *digest, const char *data,
 				   unsigned int rounds);
 #endif
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_AS_AVX2
+#define SHA1_AVX2_BLOCK_OPTSIZE	4	/* optimal 4*64 bytes of SHA1 blocks */
+
+asmlinkage void sha1_transform_avx2(u32 *digest, const char *data,
+				unsigned int rounds);
+#endif
+>>>>>>> v3.18
 
 static asmlinkage void (*sha1_transform_asm)(u32 *, const char *, unsigned int);
 
@@ -165,6 +178,21 @@ static int sha1_ssse3_import(struct shash_desc *desc, const void *in)
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_AS_AVX2
+static void sha1_apply_transform_avx2(u32 *digest, const char *data,
+				unsigned int rounds)
+{
+	/* Select the optimal transform based on data block size */
+	if (rounds >= SHA1_AVX2_BLOCK_OPTSIZE)
+		sha1_transform_avx2(digest, data, rounds);
+	else
+		sha1_transform_avx(digest, data, rounds);
+}
+#endif
+
+>>>>>>> v3.18
 static struct shash_alg alg = {
 	.digestsize	=	SHA1_DIGEST_SIZE,
 	.init		=	sha1_ssse3_init,
@@ -201,10 +229,25 @@ static bool __init avx_usable(void)
 
 	return true;
 }
+<<<<<<< HEAD
+=======
+
+#ifdef CONFIG_AS_AVX2
+static bool __init avx2_usable(void)
+{
+	if (avx_usable() && cpu_has_avx2 && boot_cpu_has(X86_FEATURE_BMI1) &&
+	    boot_cpu_has(X86_FEATURE_BMI2))
+		return true;
+
+	return false;
+}
+#endif
+>>>>>>> v3.18
 #endif
 
 static int __init sha1_ssse3_mod_init(void)
 {
+<<<<<<< HEAD
 	/* test for SSSE3 first */
 	if (cpu_has_ssse3)
 		sha1_transform_asm = sha1_transform_ssse3;
@@ -222,6 +265,36 @@ static int __init sha1_ssse3_mod_init(void)
 		return crypto_register_shash(&alg);
 	}
 	pr_info("Neither AVX nor SSSE3 is available/usable.\n");
+=======
+	char *algo_name;
+
+	/* test for SSSE3 first */
+	if (cpu_has_ssse3) {
+		sha1_transform_asm = sha1_transform_ssse3;
+		algo_name = "SSSE3";
+	}
+
+#ifdef CONFIG_AS_AVX
+	/* allow AVX to override SSSE3, it's a little faster */
+	if (avx_usable()) {
+		sha1_transform_asm = sha1_transform_avx;
+		algo_name = "AVX";
+#ifdef CONFIG_AS_AVX2
+		/* allow AVX2 to override AVX, it's a little faster */
+		if (avx2_usable()) {
+			sha1_transform_asm = sha1_apply_transform_avx2;
+			algo_name = "AVX2";
+		}
+#endif
+	}
+#endif
+
+	if (sha1_transform_asm) {
+		pr_info("Using %s optimized SHA-1 implementation\n", algo_name);
+		return crypto_register_shash(&alg);
+	}
+	pr_info("Neither AVX nor AVX2 nor SSSE3 is available/usable.\n");
+>>>>>>> v3.18
 
 	return -ENODEV;
 }
@@ -237,4 +310,8 @@ module_exit(sha1_ssse3_mod_fini);
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("SHA1 Secure Hash Algorithm, Supplemental SSE3 accelerated");
 
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("sha1");
+=======
+MODULE_ALIAS("sha1");
+>>>>>>> v3.18

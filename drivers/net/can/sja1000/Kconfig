@@ -17,6 +17,7 @@ config CAN_SJA1000_PLATFORM
 	  the "platform bus" (Linux abstraction for directly to the
 	  processor attached devices).  Which can be found on various
 	  boards from Phytec (http://www.phytec.de) like the PCM027,
+<<<<<<< HEAD
 	  PCM038.
 
 config CAN_SJA1000_OF_PLATFORM
@@ -27,6 +28,11 @@ config CAN_SJA1000_OF_PLATFORM
 	  the OpenFirmware "platform bus" found on embedded systems with
 	  OpenFirmware bindings, e.g. if you have a PowerPC based system
 	  you may want to enable this option.
+=======
+	  PCM038. It also provides the OpenFirmware "platform bus" found
+	  on embedded systems with OpenFirmware bindings, e.g. if you
+	  have a PowerPC based system you may want to enable this option.
+>>>>>>> v3.18
 
 config CAN_EMS_PCMCIA
 	tristate "EMS CPC-CARD Card"

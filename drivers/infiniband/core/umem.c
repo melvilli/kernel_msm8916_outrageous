@@ -42,6 +42,7 @@
 
 #include "uverbs.h"
 
+<<<<<<< HEAD
 #define IB_UMEM_MAX_PAGE_CHUNK						\
 	((PAGE_SIZE - offsetof(struct ib_umem_chunk, page_list)) /	\
 	 ((void *) &((struct ib_umem_chunk *) 0)->page_list[1] -	\
@@ -65,6 +66,31 @@ static void __ib_umem_release(struct ib_device *dev, struct ib_umem *umem, int d
 
 		kfree(chunk);
 	}
+=======
+
+static void __ib_umem_release(struct ib_device *dev, struct ib_umem *umem, int dirty)
+{
+	struct scatterlist *sg;
+	struct page *page;
+	int i;
+
+	if (umem->nmap > 0)
+		ib_dma_unmap_sg(dev, umem->sg_head.sgl,
+				umem->nmap,
+				DMA_BIDIRECTIONAL);
+
+	for_each_sg(umem->sg_head.sgl, sg, umem->npages, i) {
+
+		page = sg_page(sg);
+		if (umem->writable && dirty)
+			set_page_dirty_lock(page);
+		put_page(page);
+	}
+
+	sg_free_table(&umem->sg_head);
+	return;
+
+>>>>>>> v3.18
 }
 
 /**
@@ -81,19 +107,30 @@ struct ib_umem *ib_umem_get(struct ib_ucontext *context, unsigned long addr,
 	struct ib_umem *umem;
 	struct page **page_list;
 	struct vm_area_struct **vma_list;
+<<<<<<< HEAD
 	struct ib_umem_chunk *chunk;
+=======
+>>>>>>> v3.18
 	unsigned long locked;
 	unsigned long lock_limit;
 	unsigned long cur_base;
 	unsigned long npages;
 	int ret;
+<<<<<<< HEAD
 	int off;
 	int i;
 	DEFINE_DMA_ATTRS(attrs);
+=======
+	int i;
+	DEFINE_DMA_ATTRS(attrs);
+	struct scatterlist *sg, *sg_list_start;
+	int need_release = 0;
+>>>>>>> v3.18
 
 	if (dmasync)
 		dma_set_attr(DMA_ATTR_WRITE_BARRIER, &attrs);
 
+<<<<<<< HEAD
 	if (!size)
 		return ERR_PTR(-EINVAL);
 
@@ -109,6 +146,12 @@ struct ib_umem *ib_umem_get(struct ib_ucontext *context, unsigned long addr,
 		return ERR_PTR(-EPERM);
 
 	umem = kmalloc(sizeof *umem, GFP_KERNEL);
+=======
+	if (!can_do_mlock())
+		return ERR_PTR(-EPERM);
+
+	umem = kzalloc(sizeof *umem, GFP_KERNEL);
+>>>>>>> v3.18
 	if (!umem)
 		return ERR_PTR(-ENOMEM);
 
@@ -116,6 +159,10 @@ struct ib_umem *ib_umem_get(struct ib_ucontext *context, unsigned long addr,
 	umem->length    = size;
 	umem->offset    = addr & ~PAGE_MASK;
 	umem->page_size = PAGE_SIZE;
+<<<<<<< HEAD
+=======
+	umem->pid       = get_task_pid(current, PIDTYPE_PID);
+>>>>>>> v3.18
 	/*
 	 * We ask for writable memory if any access flags other than
 	 * "remote read" are set.  "Local write" and "remote write"
@@ -128,8 +175,11 @@ struct ib_umem *ib_umem_get(struct ib_ucontext *context, unsigned long addr,
 	/* We assume the memory is from hugetlb until proved otherwise */
 	umem->hugetlb   = 1;
 
+<<<<<<< HEAD
 	INIT_LIST_HEAD(&umem->chunk_list);
 
+=======
+>>>>>>> v3.18
 	page_list = (struct page **) __get_free_page(GFP_KERNEL);
 	if (!page_list) {
 		kfree(umem);
@@ -158,7 +208,22 @@ struct ib_umem *ib_umem_get(struct ib_ucontext *context, unsigned long addr,
 
 	cur_base = addr & PAGE_MASK;
 
+<<<<<<< HEAD
 	ret = 0;
+=======
+	if (npages == 0) {
+		ret = -EINVAL;
+		goto out;
+	}
+
+	ret = sg_alloc_table(&umem->sg_head, npages, GFP_KERNEL);
+	if (ret)
+		goto out;
+
+	need_release = 1;
+	sg_list_start = umem->sg_head.sgl;
+
+>>>>>>> v3.18
 	while (npages) {
 		ret = get_user_pages(current, current->mm, cur_base,
 				     min_t(unsigned long, npages,
@@ -168,6 +233,7 @@ struct ib_umem *ib_umem_get(struct ib_ucontext *context, unsigned long addr,
 		if (ret < 0)
 			goto out;
 
+<<<<<<< HEAD
 		cur_base += ret * PAGE_SIZE;
 		npages   -= ret;
 
@@ -216,6 +282,41 @@ struct ib_umem *ib_umem_get(struct ib_ucontext *context, unsigned long addr,
 out:
 	if (ret < 0) {
 		__ib_umem_release(context->device, umem, 0);
+=======
+		umem->npages += ret;
+		cur_base += ret * PAGE_SIZE;
+		npages   -= ret;
+
+		for_each_sg(sg_list_start, sg, ret, i) {
+			if (vma_list && !is_vm_hugetlb_page(vma_list[i]))
+				umem->hugetlb = 0;
+
+			sg_set_page(sg, page_list[i], PAGE_SIZE, 0);
+		}
+
+		/* preparing for next loop */
+		sg_list_start = sg;
+	}
+
+	umem->nmap = ib_dma_map_sg_attrs(context->device,
+				  umem->sg_head.sgl,
+				  umem->npages,
+				  DMA_BIDIRECTIONAL,
+				  &attrs);
+
+	if (umem->nmap <= 0) {
+		ret = -ENOMEM;
+		goto out;
+	}
+
+	ret = 0;
+
+out:
+	if (ret < 0) {
+		if (need_release)
+			__ib_umem_release(context->device, umem, 0);
+		put_pid(umem->pid);
+>>>>>>> v3.18
 		kfree(umem);
 	} else
 		current->mm->pinned_vm = locked;
@@ -248,15 +349,30 @@ void ib_umem_release(struct ib_umem *umem)
 {
 	struct ib_ucontext *context = umem->context;
 	struct mm_struct *mm;
+<<<<<<< HEAD
+=======
+	struct task_struct *task;
+>>>>>>> v3.18
 	unsigned long diff;
 
 	__ib_umem_release(umem->context->device, umem, 1);
 
+<<<<<<< HEAD
 	mm = get_task_mm(current);
 	if (!mm) {
 		kfree(umem);
 		return;
 	}
+=======
+	task = get_pid_task(umem->pid, PIDTYPE_PID);
+	put_pid(umem->pid);
+	if (!task)
+		goto out;
+	mm = get_task_mm(task);
+	put_task_struct(task);
+	if (!mm)
+		goto out;
+>>>>>>> v3.18
 
 	diff = PAGE_ALIGN(umem->length + umem->offset) >> PAGE_SHIFT;
 
@@ -280,26 +396,45 @@ void ib_umem_release(struct ib_umem *umem)
 	} else
 		down_write(&mm->mmap_sem);
 
+<<<<<<< HEAD
 	current->mm->pinned_vm -= diff;
 	up_write(&mm->mmap_sem);
 	mmput(mm);
+=======
+	mm->pinned_vm -= diff;
+	up_write(&mm->mmap_sem);
+	mmput(mm);
+out:
+>>>>>>> v3.18
 	kfree(umem);
 }
 EXPORT_SYMBOL(ib_umem_release);
 
 int ib_umem_page_count(struct ib_umem *umem)
 {
+<<<<<<< HEAD
 	struct ib_umem_chunk *chunk;
 	int shift;
 	int i;
 	int n;
+=======
+	int shift;
+	int i;
+	int n;
+	struct scatterlist *sg;
+>>>>>>> v3.18
 
 	shift = ilog2(umem->page_size);
 
 	n = 0;
+<<<<<<< HEAD
 	list_for_each_entry(chunk, &umem->chunk_list, list)
 		for (i = 0; i < chunk->nmap; ++i)
 			n += sg_dma_len(&chunk->page_list[i]) >> shift;
+=======
+	for_each_sg(umem->sg_head.sgl, sg, umem->nmap, i)
+		n += sg_dma_len(sg) >> shift;
+>>>>>>> v3.18
 
 	return n;
 }

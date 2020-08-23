@@ -19,16 +19,31 @@ struct acpi_device;
 #if (defined CONFIG_ACPI_VIDEO || defined CONFIG_ACPI_VIDEO_MODULE)
 extern int acpi_video_register(void);
 extern void acpi_video_unregister(void);
+<<<<<<< HEAD
 extern int acpi_video_get_edid(struct acpi_device *device, int type,
 			       int device_id, void **edid);
 #else
 static inline int acpi_video_register(void) { return 0; }
 static inline void acpi_video_unregister(void) { return; }
+=======
+extern void acpi_video_unregister_backlight(void);
+extern int acpi_video_get_edid(struct acpi_device *device, int type,
+			       int device_id, void **edid);
+extern bool acpi_video_verify_backlight_support(void);
+#else
+static inline int acpi_video_register(void) { return 0; }
+static inline void acpi_video_unregister(void) { return; }
+static inline void acpi_video_unregister_backlight(void) { return; }
+>>>>>>> v3.18
 static inline int acpi_video_get_edid(struct acpi_device *device, int type,
 				      int device_id, void **edid)
 {
 	return -ENODEV;
 }
+<<<<<<< HEAD
+=======
+static inline bool acpi_video_verify_backlight_support(void) { return false; }
+>>>>>>> v3.18
 #endif
 
 #endif

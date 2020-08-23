@@ -21,6 +21,7 @@
 #include <asm/mach/time.h>
 
 #include "common.h"
+<<<<<<< HEAD
 #include "mx53.h"
 
 static void __init imx53_qsb_init(void)
@@ -34,10 +35,18 @@ static void __init imx53_qsb_init(void)
 	}
 
 	clk_register_clkdev(clk, NULL, "0-000a");
+=======
+#include "hardware.h"
+
+static void __init imx53_init_early(void)
+{
+	mxc_set_cpu_type(MXC_CPU_MX53);
+>>>>>>> v3.18
 }
 
 static void __init imx53_dt_init(void)
 {
+<<<<<<< HEAD
 	if (of_machine_is_compatible("fsl,imx53-qsb"))
 		imx53_qsb_init();
 
@@ -45,10 +54,27 @@ static void __init imx53_dt_init(void)
 }
 
 static const char *imx53_dt_board_compat[] __initdata = {
+=======
+	mxc_arch_reset_init_dt();
+	imx_src_init();
+
+	of_platform_populate(NULL, of_default_bus_match_table, NULL, NULL);
+
+	imx_aips_allow_unprivileged_access("fsl,imx53-aipstz");
+}
+
+static void __init imx53_init_late(void)
+{
+	imx53_pm_init();
+}
+
+static const char * const imx53_dt_board_compat[] __initconst = {
+>>>>>>> v3.18
 	"fsl,imx53",
 	NULL
 };
 
+<<<<<<< HEAD
 static void __init imx53_timer_init(void)
 {
 	mx53_clocks_init_dt();
@@ -60,6 +86,11 @@ DT_MACHINE_START(IMX53_DT, "Freescale i.MX53 (Device Tree Support)")
 	.init_irq	= mx53_init_irq,
 	.handle_irq	= imx53_handle_irq,
 	.init_time	= imx53_timer_init,
+=======
+DT_MACHINE_START(IMX53_DT, "Freescale i.MX53 (Device Tree Support)")
+	.init_early	= imx53_init_early,
+	.init_irq	= tzic_init_irq,
+>>>>>>> v3.18
 	.init_machine	= imx53_dt_init,
 	.init_late	= imx53_init_late,
 	.dt_compat	= imx53_dt_board_compat,

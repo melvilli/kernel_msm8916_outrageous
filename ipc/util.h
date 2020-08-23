@@ -15,9 +15,15 @@
 
 #define SEQ_MULTIPLIER	(IPCMNI)
 
+<<<<<<< HEAD
 void sem_init (void);
 void msg_init (void);
 void shm_init (void);
+=======
+void sem_init(void);
+void msg_init(void);
+void shm_init(void);
+>>>>>>> v3.18
 
 struct ipc_namespace;
 
@@ -78,9 +84,15 @@ struct ipc_params {
  *      . routine to call for an extra check if needed
  */
 struct ipc_ops {
+<<<<<<< HEAD
 	int (*getnew) (struct ipc_namespace *, struct ipc_params *);
 	int (*associate) (struct kern_ipc_perm *, int);
 	int (*more_checks) (struct kern_ipc_perm *, struct ipc_params *);
+=======
+	int (*getnew)(struct ipc_namespace *, struct ipc_params *);
+	int (*associate)(struct kern_ipc_perm *, int);
+	int (*more_checks)(struct kern_ipc_perm *, struct ipc_params *);
+>>>>>>> v3.18
 };
 
 struct seq_file;
@@ -100,6 +112,10 @@ void __init ipc_init_proc_interface(const char *path, const char *header,
 
 #define ipcid_to_idx(id) ((id) % SEQ_MULTIPLIER)
 #define ipcid_to_seqx(id) ((id) / SEQ_MULTIPLIER)
+<<<<<<< HEAD
+=======
+#define IPCID_SEQ_MAX min_t(int, INT_MAX/SEQ_MULTIPLIER, USHRT_MAX)
+>>>>>>> v3.18
 
 /* must be called with ids->rwsem acquired for writing */
 int ipc_addid(struct ipc_ids *, struct kern_ipc_perm *, int);
@@ -116,8 +132,13 @@ int ipcperms(struct ipc_namespace *ns, struct kern_ipc_perm *ipcp, short flg);
 /* for rare, potentially huge allocations.
  * both function can sleep
  */
+<<<<<<< HEAD
 void* ipc_alloc(int size);
 void ipc_free(void* ptr, int size);
+=======
+void *ipc_alloc(int size);
+void ipc_free(void *ptr, int size);
+>>>>>>> v3.18
 
 /*
  * For allocation that need to be freed by RCU.
@@ -125,7 +146,11 @@ void ipc_free(void* ptr, int size);
  * getref increases the refcount, the putref call that reduces the recount
  * to 0 schedules the rcu destruction. Caller must guarantee locking.
  */
+<<<<<<< HEAD
 void* ipc_rcu_alloc(int size);
+=======
+void *ipc_rcu_alloc(int size);
+>>>>>>> v3.18
 int ipc_rcu_getref(void *ptr);
 void ipc_rcu_putref(void *ptr, void (*func)(struct rcu_head *head));
 void ipc_rcu_free(struct rcu_head *head);
@@ -141,10 +166,17 @@ struct kern_ipc_perm *ipcctl_pre_down_nolock(struct ipc_namespace *ns,
 					     struct ipc64_perm *perm, int extra_perm);
 
 #ifndef CONFIG_ARCH_WANT_IPC_PARSE_VERSION
+<<<<<<< HEAD
   /* On IA-64, we always use the "64-bit version" of the IPC structures.  */ 
 # define ipc_parse_version(cmd)	IPC_64
 #else
 int ipc_parse_version (int *cmd);
+=======
+/* On IA-64, we always use the "64-bit version" of the IPC structures.  */
+# define ipc_parse_version(cmd)	IPC_64
+#else
+int ipc_parse_version(int *cmd);
+>>>>>>> v3.18
 #endif
 
 extern void free_msg(struct msg_msg *msg);
@@ -185,9 +217,28 @@ static inline void ipc_unlock(struct kern_ipc_perm *perm)
 	rcu_read_unlock();
 }
 
+<<<<<<< HEAD
 struct kern_ipc_perm *ipc_obtain_object_check(struct ipc_ids *ids, int id);
 int ipcget(struct ipc_namespace *ns, struct ipc_ids *ids,
 			struct ipc_ops *ops, struct ipc_params *params);
+=======
+/*
+ * ipc_valid_object() - helper to sort out IPC_RMID races for codepaths
+ * where the respective ipc_ids.rwsem is not being held down.
+ * Checks whether the ipc object is still around or if it's gone already, as
+ * ipc_rmid() may have already freed the ID while the ipc lock was spinning.
+ * Needs to be called with kern_ipc_perm.lock held -- exception made for one
+ * checkpoint case at sys_semtimedop() as noted in code commentary.
+ */
+static inline bool ipc_valid_object(struct kern_ipc_perm *perm)
+{
+	return !perm->deleted;
+}
+
+struct kern_ipc_perm *ipc_obtain_object_check(struct ipc_ids *ids, int id);
+int ipcget(struct ipc_namespace *ns, struct ipc_ids *ids,
+			const struct ipc_ops *ops, struct ipc_params *params);
+>>>>>>> v3.18
 void free_ipcs(struct ipc_namespace *ns, struct ipc_ids *ids,
 		void (*free)(struct ipc_namespace *, struct kern_ipc_perm *));
 #endif

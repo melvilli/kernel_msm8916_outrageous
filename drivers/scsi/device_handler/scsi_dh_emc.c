@@ -275,7 +275,11 @@ static struct request *get_req(struct scsi_device *sdev, int cmd,
 
 	rq = blk_get_request(sdev->request_queue,
 			(cmd != INQUIRY) ? WRITE : READ, GFP_NOIO);
+<<<<<<< HEAD
 	if (!rq) {
+=======
+	if (IS_ERR(rq)) {
+>>>>>>> v3.18
 		sdev_printk(KERN_INFO, sdev, "get_req: blk_get_request failed");
 		return NULL;
 	}
@@ -464,7 +468,11 @@ static int clariion_prep_fn(struct scsi_device *sdev, struct request *req)
 static int clariion_std_inquiry(struct scsi_device *sdev,
 				struct clariion_dh_data *csdev)
 {
+<<<<<<< HEAD
 	int err = SCSI_DH_OK;
+=======
+	int err;
+>>>>>>> v3.18
 	char *sp_model;
 
 	err = send_inquiry_cmd(sdev, 0, csdev);

@@ -15,11 +15,20 @@
 
 #include <linux/io.h>
 #include <linux/of.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/bitops.h>
 #include <linux/clkdev.h>
 #include <linux/clk-provider.h>
 
+<<<<<<< HEAD
+=======
+#define LEGACY_PMC_BASE		0xD8130000
+
+>>>>>>> v3.18
 /* All clocks share the same lock as none can be changed concurrently */
 static DEFINE_SPINLOCK(_lock);
 
@@ -42,6 +51,10 @@ struct clk_device {
 #define PLL_TYPE_VT8500		0
 #define PLL_TYPE_WM8650		1
 #define PLL_TYPE_WM8750		2
+<<<<<<< HEAD
+=======
+#define PLL_TYPE_WM8850		3
+>>>>>>> v3.18
 
 struct clk_pll {
 	struct clk_hw	hw;
@@ -52,6 +65,24 @@ struct clk_pll {
 
 static void __iomem *pmc_base;
 
+<<<<<<< HEAD
+=======
+static __init void vtwm_set_pmc_base(void)
+{
+	struct device_node *np =
+		of_find_compatible_node(NULL, NULL, "via,vt8500-pmc");
+
+	if (np)
+		pmc_base = of_iomap(np, 0);
+	else
+		pmc_base = ioremap(LEGACY_PMC_BASE, 0x1000);
+	of_node_put(np);
+
+	if (!pmc_base)
+		pr_err("%s:of_iomap(pmc) failed\n", __func__);
+}
+
+>>>>>>> v3.18
 #define to_clk_device(_hw) container_of(_hw, struct clk_device, hw)
 
 #define VT8500_PMC_BUSY_MASK		0x18
@@ -156,10 +187,13 @@ static int vt8500_dclk_set_rate(struct clk_hw *hw, unsigned long rate,
 
 	divisor =  parent_rate / rate;
 
+<<<<<<< HEAD
 	/* If prate / rate would be decimal, incr the divisor */
 	if (rate * divisor < parent_rate)
 		divisor++;
 
+=======
+>>>>>>> v3.18
 	if (divisor == cdev->div_mask + 1)
 		divisor = 0;
 
@@ -225,6 +259,12 @@ static __init void vtwm_device_clk_init(struct device_node *node)
 	int rc;
 	int clk_init_flags = 0;
 
+<<<<<<< HEAD
+=======
+	if (!pmc_base)
+		vtwm_set_pmc_base();
+
+>>>>>>> v3.18
 	dev_clk = kzalloc(sizeof(*dev_clk), GFP_KERNEL);
 	if (WARN_ON(!dev_clk))
 		return;
@@ -327,6 +367,18 @@ CLK_OF_DECLARE(vt8500_device, "via,vt8500-device-clock", vtwm_device_clk_init);
 #define WM8750_BITS_TO_VAL(f, m, d1, d2)				\
 		((f << 24) | ((m - 1) << 16) | ((d1 - 1) << 8) | d2)
 
+<<<<<<< HEAD
+=======
+/* Helper macros for PLL_WM8850 */
+#define WM8850_PLL_MUL(x)	((((x >> 16) & 0x7F) + 1) * 2)
+#define WM8850_PLL_DIV(x)	((((x >> 8) & 1) + 1) * (1 << (x & 3)))
+
+#define WM8850_BITS_TO_FREQ(r, m, d1, d2)				\
+				(r * ((m + 1) * 2) / ((d1+1) * (1 << d2)))
+
+#define WM8850_BITS_TO_VAL(m, d1, d2)					\
+		((((m / 2) - 1) << 16) | ((d1 - 1) << 8) | d2)
+>>>>>>> v3.18
 
 static void vt8500_find_pll_bits(unsigned long rate, unsigned long parent_rate,
 				u32 *multiplier, u32 *prediv)
@@ -466,6 +518,52 @@ static void wm8750_find_pll_bits(unsigned long rate, unsigned long parent_rate,
 	*divisor2 = best_div2;
 }
 
+<<<<<<< HEAD
+=======
+static void wm8850_find_pll_bits(unsigned long rate, unsigned long parent_rate,
+				u32 *multiplier, u32 *divisor1, u32 *divisor2)
+{
+	u32 mul, div1, div2;
+	u32 best_mul, best_div1, best_div2;
+	unsigned long tclk, rate_err, best_err;
+
+	best_err = (unsigned long)-1;
+
+	/* Find the closest match (lower or equal to requested) */
+	for (div1 = 1; div1 >= 0; div1--)
+		for (div2 = 3; div2 >= 0; div2--)
+			for (mul = 0; mul <= 127; mul++) {
+				tclk = parent_rate * ((mul + 1) * 2) /
+						((div1 + 1) * (1 << div2));
+				if (tclk > rate)
+					continue;
+				/* error will always be +ve */
+				rate_err = rate - tclk;
+				if (rate_err == 0) {
+					*multiplier = mul;
+					*divisor1 = div1;
+					*divisor2 = div2;
+					return;
+				}
+
+				if (rate_err < best_err) {
+					best_err = rate_err;
+					best_mul = mul;
+					best_div1 = div1;
+					best_div2 = div2;
+				}
+			}
+
+	/* if we got here, it wasn't an exact match */
+	pr_warn("%s: requested rate %lu, found rate %lu\n", __func__, rate,
+							rate - best_err);
+
+	*multiplier = best_mul;
+	*divisor1 = best_div1;
+	*divisor2 = best_div2;
+}
+
+>>>>>>> v3.18
 static int vtwm_pll_set_rate(struct clk_hw *hw, unsigned long rate,
 				unsigned long parent_rate)
 {
@@ -489,6 +587,13 @@ static int vtwm_pll_set_rate(struct clk_hw *hw, unsigned long rate,
 		wm8750_find_pll_bits(rate, parent_rate, &filter, &mul, &div1, &div2);
 		pll_val = WM8750_BITS_TO_VAL(filter, mul, div1, div2);
 		break;
+<<<<<<< HEAD
+=======
+	case PLL_TYPE_WM8850:
+		wm8850_find_pll_bits(rate, parent_rate, &mul, &div1, &div2);
+		pll_val = WM8850_BITS_TO_VAL(mul, div1, div2);
+		break;
+>>>>>>> v3.18
 	default:
 		pr_err("%s: invalid pll type\n", __func__);
 		return 0;
@@ -525,6 +630,13 @@ static long vtwm_pll_round_rate(struct clk_hw *hw, unsigned long rate,
 		wm8750_find_pll_bits(rate, *prate, &filter, &mul, &div1, &div2);
 		round_rate = WM8750_BITS_TO_FREQ(*prate, mul, div1, div2);
 		break;
+<<<<<<< HEAD
+=======
+	case PLL_TYPE_WM8850:
+		wm8850_find_pll_bits(rate, *prate, &mul, &div1, &div2);
+		round_rate = WM8850_BITS_TO_FREQ(*prate, mul, div1, div2);
+		break;
+>>>>>>> v3.18
 	default:
 		round_rate = 0;
 	}
@@ -552,6 +664,13 @@ static unsigned long vtwm_pll_recalc_rate(struct clk_hw *hw,
 		pll_freq = parent_rate * WM8750_PLL_MUL(pll_val);
 		pll_freq /= WM8750_PLL_DIV(pll_val);
 		break;
+<<<<<<< HEAD
+=======
+	case PLL_TYPE_WM8850:
+		pll_freq = parent_rate * WM8850_PLL_MUL(pll_val);
+		pll_freq /= WM8850_PLL_DIV(pll_val);
+		break;
+>>>>>>> v3.18
 	default:
 		pll_freq = 0;
 	}
@@ -559,7 +678,11 @@ static unsigned long vtwm_pll_recalc_rate(struct clk_hw *hw,
 	return pll_freq;
 }
 
+<<<<<<< HEAD
 const struct clk_ops vtwm_pll_ops = {
+=======
+static const struct clk_ops vtwm_pll_ops = {
+>>>>>>> v3.18
 	.round_rate = vtwm_pll_round_rate,
 	.set_rate = vtwm_pll_set_rate,
 	.recalc_rate = vtwm_pll_recalc_rate,
@@ -575,6 +698,12 @@ static __init void vtwm_pll_clk_init(struct device_node *node, int pll_type)
 	struct clk_init_data init;
 	int rc;
 
+<<<<<<< HEAD
+=======
+	if (!pmc_base)
+		vtwm_set_pmc_base();
+
+>>>>>>> v3.18
 	rc = of_property_read_u32(node, "reg", &reg);
 	if (WARN_ON(rc))
 		return;
@@ -628,6 +757,7 @@ static void __init wm8750_pll_init(struct device_node *node)
 }
 CLK_OF_DECLARE(wm8750_pll, "wm,wm8750-pll-clock", wm8750_pll_init);
 
+<<<<<<< HEAD
 void __init vtwm_clk_init(void __iomem *base)
 {
 	if (!base)
@@ -637,3 +767,10 @@ void __init vtwm_clk_init(void __iomem *base)
 
 	of_clk_init(NULL);
 }
+=======
+static void __init wm8850_pll_init(struct device_node *node)
+{
+	vtwm_pll_clk_init(node, PLL_TYPE_WM8850);
+}
+CLK_OF_DECLARE(wm8850_pll, "wm,wm8850-pll-clock", wm8850_pll_init);
+>>>>>>> v3.18

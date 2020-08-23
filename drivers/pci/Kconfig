@@ -1,6 +1,7 @@
 #
 # PCI configuration
 #
+<<<<<<< HEAD
 config ARCH_SUPPORTS_MSI
 	bool
 
@@ -8,6 +9,11 @@ config PCI_MSI
 	bool "Message Signaled Interrupts (MSI and MSI-X)"
 	depends on PCI
 	depends on ARCH_SUPPORTS_MSI
+=======
+config PCI_MSI
+	bool "Message Signaled Interrupts (MSI and MSI-X)"
+	depends on PCI
+>>>>>>> v3.18
 	help
 	   This allows device drivers to enable MSI (Message Signaled
 	   Interrupts).  Message Signaled Interrupts enable a device to
@@ -55,7 +61,10 @@ config PCI_STUB
 config XEN_PCIDEV_FRONTEND
         tristate "Xen PCI Frontend"
         depends on PCI && X86 && XEN
+<<<<<<< HEAD
         select HOTPLUG
+=======
+>>>>>>> v3.18
         select PCI_XEN
 	select XEN_XENBUS_FRONTEND
         default y
@@ -110,16 +119,24 @@ config PCI_PASID
 	  If unsure, say N.
 
 config PCI_IOAPIC
+<<<<<<< HEAD
 	tristate "PCI IO-APIC hotplug support" if X86
 	depends on PCI
 	depends on ACPI
 	depends on HOTPLUG
+=======
+	bool "PCI IO-APIC hotplug support" if X86
+	depends on PCI
+	depends on ACPI
+	depends on X86_IO_APIC
+>>>>>>> v3.18
 	default !X86
 
 config PCI_LABEL
 	def_bool y if (DMI || ACPI)
 	select NLS
 
+<<<<<<< HEAD
 config PCI_MSM
 	bool "MSM PCIe Controller driver"
 	depends on ARCH_MSM && PCI
@@ -128,3 +145,6 @@ config PCI_MSM
 	help
 	  Enables the PCIe functionality by configures PCIe core on
 	  MSM chipset and by enabling the ARM PCI framework extension.
+=======
+source "drivers/pci/host/Kconfig"
+>>>>>>> v3.18

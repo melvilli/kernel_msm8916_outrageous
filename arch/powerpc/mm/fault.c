@@ -30,9 +30,15 @@
 #include <linux/kprobes.h>
 #include <linux/kdebug.h>
 #include <linux/perf_event.h>
+<<<<<<< HEAD
 #include <linux/magic.h>
 #include <linux/ratelimit.h>
 #include <linux/context_tracking.h>
+=======
+#include <linux/ratelimit.h>
+#include <linux/context_tracking.h>
+#include <linux/hugetlb.h>
+>>>>>>> v3.18
 
 #include <asm/firmware.h>
 #include <asm/page.h>
@@ -114,6 +120,7 @@ static int store_updates_sp(struct pt_regs *regs)
 #define MM_FAULT_CONTINUE	-1
 #define MM_FAULT_ERR(sig)	(sig)
 
+<<<<<<< HEAD
 static int do_sigbus(struct pt_regs *regs, unsigned long address)
 {
 	siginfo_t info;
@@ -130,6 +137,39 @@ static int do_sigbus(struct pt_regs *regs, unsigned long address)
 		return MM_FAULT_RETURN;
 	}
 	return MM_FAULT_ERR(SIGBUS);
+=======
+static int do_sigbus(struct pt_regs *regs, unsigned long address,
+		     unsigned int fault)
+{
+	siginfo_t info;
+	unsigned int lsb = 0;
+
+	up_read(&current->mm->mmap_sem);
+
+	if (!user_mode(regs))
+		return MM_FAULT_ERR(SIGBUS);
+
+	current->thread.trap_nr = BUS_ADRERR;
+	info.si_signo = SIGBUS;
+	info.si_errno = 0;
+	info.si_code = BUS_ADRERR;
+	info.si_addr = (void __user *)address;
+#ifdef CONFIG_MEMORY_FAILURE
+	if (fault & (VM_FAULT_HWPOISON|VM_FAULT_HWPOISON_LARGE)) {
+		pr_err("MCE: Killing %s:%d due to hardware memory corruption fault at %lx\n",
+			current->comm, current->pid, address);
+		info.si_code = BUS_MCEERR_AR;
+	}
+
+	if (fault & VM_FAULT_HWPOISON_LARGE)
+		lsb = hstate_index_to_shift(VM_FAULT_GET_HINDEX(fault));
+	if (fault & VM_FAULT_HWPOISON)
+		lsb = PAGE_SHIFT;
+#endif
+	info.si_addr_lsb = lsb;
+	force_sig_info(SIGBUS, &info, current);
+	return MM_FAULT_RETURN;
+>>>>>>> v3.18
 }
 
 static int mm_fault_error(struct pt_regs *regs, unsigned long addr, int fault)
@@ -170,11 +210,16 @@ static int mm_fault_error(struct pt_regs *regs, unsigned long addr, int fault)
 		return MM_FAULT_RETURN;
 	}
 
+<<<<<<< HEAD
 	/* Bus error. x86 handles HWPOISON here, we'll add this if/when
 	 * we support the feature in HW
 	 */
 	if (fault & VM_FAULT_SIGBUS)
 		return do_sigbus(regs, addr);
+=======
+	if (fault & (VM_FAULT_SIGBUS|VM_FAULT_HWPOISON|VM_FAULT_HWPOISON_LARGE))
+		return do_sigbus(regs, addr, fault);
+>>>>>>> v3.18
 
 	/* We don't understand the fault code, this is fatal */
 	BUG();
@@ -206,7 +251,11 @@ int __kprobes do_page_fault(struct pt_regs *regs, unsigned long address,
 	int trap = TRAP(regs);
  	int is_exec = trap == 0x400;
 	int fault;
+<<<<<<< HEAD
 	int rc = 0;
+=======
+	int rc = 0, store_update_sp = 0;
+>>>>>>> v3.18
 
 #if !(defined(CONFIG_4xx) || defined(CONFIG_BOOKE))
 	/*
@@ -277,6 +326,17 @@ int __kprobes do_page_fault(struct pt_regs *regs, unsigned long address,
 
 	perf_sw_event(PERF_COUNT_SW_PAGE_FAULTS, 1, regs, address);
 
+<<<<<<< HEAD
+=======
+	/*
+	 * We want to do this outside mmap_sem, because reading code around nip
+	 * can result in fault, which will cause a deadlock when called with
+	 * mmap_sem held
+	 */
+	if (user_mode(regs))
+		store_update_sp = store_updates_sp(regs);
+
+>>>>>>> v3.18
 	if (user_mode(regs))
 		flags |= FAULT_FLAG_USER;
 
@@ -345,8 +405,12 @@ retry:
 		 * between the last mapped region and the stack will
 		 * expand the stack rather than segfaulting.
 		 */
+<<<<<<< HEAD
 		if (address + 2048 < uregs->gpr[1]
 		    && (!user_mode(regs) || !store_updates_sp(regs)))
+=======
+		if (address + 2048 < uregs->gpr[1] && !store_update_sp)
+>>>>>>> v3.18
 			goto bad_area;
 	}
 	if (expand_stack(vma, address))
@@ -425,8 +489,11 @@ good_area:
 	 */
 	fault = handle_mm_fault(mm, vma, address, flags);
 	if (unlikely(fault & (VM_FAULT_RETRY|VM_FAULT_ERROR))) {
+<<<<<<< HEAD
 		if (fault & VM_FAULT_SIGSEGV)
 			goto bad_area;
+=======
+>>>>>>> v3.18
 		rc = mm_fault_error(regs, address, fault);
 		if (rc >= MM_FAULT_RETURN)
 			goto bail;
@@ -446,8 +513,17 @@ good_area:
 				      regs, address);
 #ifdef CONFIG_PPC_SMLPAR
 			if (firmware_has_feature(FW_FEATURE_CMO)) {
+<<<<<<< HEAD
 				preempt_disable();
 				get_lppaca()->page_ins += (1 << PAGE_FACTOR);
+=======
+				u32 page_ins;
+
+				preempt_disable();
+				page_ins = be32_to_cpu(get_lppaca()->page_ins);
+				page_ins += 1 << PAGE_FACTOR;
+				get_lppaca()->page_ins = cpu_to_be32(page_ins);
+>>>>>>> v3.18
 				preempt_enable();
 			}
 #endif /* CONFIG_PPC_SMLPAR */
@@ -499,7 +575,10 @@ bail:
 void bad_page_fault(struct pt_regs *regs, unsigned long address, int sig)
 {
 	const struct exception_table_entry *entry;
+<<<<<<< HEAD
 	unsigned long *stackend;
+=======
+>>>>>>> v3.18
 
 	/* Are we prepared to handle this fault?  */
 	if ((entry = search_exception_tables(regs->nip)) != NULL) {
@@ -528,8 +607,12 @@ void bad_page_fault(struct pt_regs *regs, unsigned long address, int sig)
 	printk(KERN_ALERT "Faulting instruction address: 0x%08lx\n",
 		regs->nip);
 
+<<<<<<< HEAD
 	stackend = end_of_stack(current);
 	if (current != &init_task && *stackend != STACK_END_MAGIC)
+=======
+	if (task_stack_end_corrupted(current))
+>>>>>>> v3.18
 		printk(KERN_ALERT "Thread overran stack, or stack corrupted\n");
 
 	die("Kernel access of bad area", regs, sig);

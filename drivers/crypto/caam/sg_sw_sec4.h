@@ -116,6 +116,7 @@ static int dma_unmap_sg_chained(struct device *dev, struct scatterlist *sg,
 	}
 	return nents;
 }
+<<<<<<< HEAD
 
 /* Copy from len bytes of sg to dest, starting from beginning */
 static inline void sg_copy(u8 *dest, struct scatterlist *sg, unsigned int len)
@@ -154,3 +155,5 @@ static inline void sg_copy_part(u8 *dest, struct scatterlist *sg,
 	if (end - sg_index)
 		sg_copy(dest + cpy_index, current_sg, end - sg_index);
 }
+=======
+>>>>>>> v3.18

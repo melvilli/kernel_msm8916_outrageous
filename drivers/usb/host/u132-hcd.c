@@ -1809,9 +1809,15 @@ static int u132_hcd_start(struct usb_hcd *hcd)
 		struct platform_device *pdev =
 			to_platform_device(hcd->self.controller);
 		u16 vendor = ((struct u132_platform_data *)
+<<<<<<< HEAD
 			(pdev->dev.platform_data))->vendor;
 		u16 device = ((struct u132_platform_data *)
 			(pdev->dev.platform_data))->device;
+=======
+			dev_get_platdata(&pdev->dev))->vendor;
+		u16 device = ((struct u132_platform_data *)
+			dev_get_platdata(&pdev->dev))->device;
+>>>>>>> v3.18
 		mutex_lock(&u132->sw_lock);
 		msleep(10);
 		if (vendor == PCI_VENDOR_ID_AMD && device == 0x740c) {
@@ -3034,7 +3040,11 @@ static void u132_initialise(struct u132 *u132, struct platform_device *pdev)
 	int addrs = MAX_U132_ADDRS;
 	int udevs = MAX_U132_UDEVS;
 	int endps = MAX_U132_ENDPS;
+<<<<<<< HEAD
 	u132->board = pdev->dev.platform_data;
+=======
+	u132->board = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	u132->platform_dev = pdev;
 	u132->power = 0;
 	u132->reset = 0;
@@ -3133,6 +3143,10 @@ static int u132_probe(struct platform_device *pdev)
 			u132_u132_put_kref(u132);
 			return retval;
 		} else {
+<<<<<<< HEAD
+=======
+			device_wakeup_enable(hcd->self.controller);
+>>>>>>> v3.18
 			u132_monitor_queue_work(u132, 100);
 			return 0;
 		}
@@ -3217,7 +3231,11 @@ static struct platform_driver u132_platform_driver = {
 	.suspend = u132_suspend,
 	.resume = u132_resume,
 	.driver = {
+<<<<<<< HEAD
 		   .name = (char *)hcd_name,
+=======
+		   .name = hcd_name,
+>>>>>>> v3.18
 		   .owner = THIS_MODULE,
 		   },
 };

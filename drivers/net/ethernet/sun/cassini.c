@@ -14,9 +14,13 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
  *
  * This driver uses the sungem driver (c) David Miller
  * (davem@redhat.com) as its basis.
@@ -231,7 +235,11 @@ static u16 link_modes[] = {
 	CAS_BMCR_SPEED1000|BMCR_FULLDPLX /* 5 : 1000bt full duplex */
 };
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(cas_pci_tbl) = {
+=======
+static const struct pci_device_id cas_pci_tbl[] = {
+>>>>>>> v3.18
 	{ PCI_VENDOR_ID_SUN, PCI_DEVICE_ID_SUN_CASSINI,
 	  PCI_ANY_ID, PCI_ANY_ID, 0, 0, 0UL },
 	{ PCI_VENDOR_ID_NS, PCI_DEVICE_ID_NS_SATURN,
@@ -248,7 +256,11 @@ static inline void cas_lock_tx(struct cas *cp)
 	int i;
 
 	for (i = 0; i < N_TX_RINGS; i++)
+<<<<<<< HEAD
 		spin_lock(&cp->tx_lock[i]);
+=======
+		spin_lock_nested(&cp->tx_lock[i], i);
+>>>>>>> v3.18
 }
 
 static inline void cas_lock_all(struct cas *cp)
@@ -808,30 +820,46 @@ static int cas_reset_mii_phy(struct cas *cp)
 	return limit <= 0;
 }
 
+<<<<<<< HEAD
 static int cas_saturn_firmware_init(struct cas *cp)
+=======
+static void cas_saturn_firmware_init(struct cas *cp)
+>>>>>>> v3.18
 {
 	const struct firmware *fw;
 	const char fw_name[] = "sun/cassini.bin";
 	int err;
 
 	if (PHY_NS_DP83065 != cp->phy_id)
+<<<<<<< HEAD
 		return 0;
+=======
+		return;
+>>>>>>> v3.18
 
 	err = request_firmware(&fw, fw_name, &cp->pdev->dev);
 	if (err) {
 		pr_err("Failed to load firmware \"%s\"\n",
 		       fw_name);
+<<<<<<< HEAD
 		return err;
+=======
+		return;
+>>>>>>> v3.18
 	}
 	if (fw->size < 2) {
 		pr_err("bogus length %zu in \"%s\"\n",
 		       fw->size, fw_name);
+<<<<<<< HEAD
 		err = -EINVAL;
+=======
+>>>>>>> v3.18
 		goto out;
 	}
 	cp->fw_load_addr= fw->data[1] << 8 | fw->data[0];
 	cp->fw_size = fw->size - 2;
 	cp->fw_data = vmalloc(cp->fw_size);
+<<<<<<< HEAD
 	if (!cp->fw_data) {
 		err = -ENOMEM;
 		goto out;
@@ -840,12 +868,25 @@ static int cas_saturn_firmware_init(struct cas *cp)
 out:
 	release_firmware(fw);
 	return err;
+=======
+	if (!cp->fw_data)
+		goto out;
+	memcpy(cp->fw_data, &fw->data[2], cp->fw_size);
+out:
+	release_firmware(fw);
+>>>>>>> v3.18
 }
 
 static void cas_saturn_firmware_load(struct cas *cp)
 {
 	int i;
 
+<<<<<<< HEAD
+=======
+	if (!cp->fw_data)
+		return;
+
+>>>>>>> v3.18
 	cas_phy_powerdown(cp);
 
 	/* expanded memory access mode */
@@ -3355,7 +3396,11 @@ use_random_mac_addr:
 #if defined(CONFIG_SPARC)
 	addr = of_get_property(cp->of_node, "local-mac-address", NULL);
 	if (addr != NULL) {
+<<<<<<< HEAD
 		memcpy(dev_addr, addr, 6);
+=======
+		memcpy(dev_addr, addr, ETH_ALEN);
+>>>>>>> v3.18
 		goto done;
 	}
 #endif
@@ -4965,7 +5010,11 @@ static int cas_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 	pci_cmd |= PCI_COMMAND_PARITY;
 	pci_write_config_word(pdev, PCI_COMMAND, pci_cmd);
 	if (pci_try_set_mwi(pdev))
+<<<<<<< HEAD
 		pr_warning("Could not enable MWI for %s\n", pci_name(pdev));
+=======
+		pr_warn("Could not enable MWI for %s\n", pci_name(pdev));
+>>>>>>> v3.18
 
 	cas_program_bridge(pdev);
 
@@ -5083,8 +5132,12 @@ static int cas_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 	if (cas_check_invariants(cp))
 		goto err_out_iounmap;
 	if (cp->cas_flags & CAS_FLAG_SATURN)
+<<<<<<< HEAD
 		if (cas_saturn_firmware_init(cp))
 			goto err_out_iounmap;
+=======
+		cas_saturn_firmware_init(cp);
+>>>>>>> v3.18
 
 	cp->init_block = (struct cas_init_block *)
 		pci_alloc_consistent(pdev, sizeof(struct cas_init_block),
@@ -5170,7 +5223,10 @@ err_out_free_netdev:
 
 err_out_disable_pdev:
 	pci_disable_device(pdev);
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	return -ENODEV;
 }
 
@@ -5208,7 +5264,10 @@ static void cas_remove_one(struct pci_dev *pdev)
 	free_netdev(dev);
 	pci_release_regions(pdev);
 	pci_disable_device(pdev);
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_PM

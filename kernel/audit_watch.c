@@ -314,7 +314,11 @@ static void audit_update_watch(struct audit_parent *parent,
 					     &nentry->rule.list);
 			}
 
+<<<<<<< HEAD
 			audit_watch_log_rule_change(r, owatch, "updated rules");
+=======
+			audit_watch_log_rule_change(r, owatch, "updated_rules");
+>>>>>>> v3.18
 
 			call_rcu(&oentry->rcu, audit_free_rule_rcu);
 		}
@@ -342,7 +346,11 @@ static void audit_remove_parent_watches(struct audit_parent *parent)
 	list_for_each_entry_safe(w, nextw, &parent->watches, wlist) {
 		list_for_each_entry_safe(r, nextr, &w->rules, rlist) {
 			e = container_of(r, struct audit_entry, rule);
+<<<<<<< HEAD
 			audit_watch_log_rule_change(r, w, "remove rule");
+=======
+			audit_watch_log_rule_change(r, w, "remove_rule");
+>>>>>>> v3.18
 			list_del(&r->rlist);
 			list_del(&r->list);
 			list_del_rcu(&e->list);
@@ -465,6 +473,7 @@ void audit_remove_watch_rule(struct audit_krule *krule)
 	}
 }
 
+<<<<<<< HEAD
 static bool audit_watch_should_send_event(struct fsnotify_group *group, struct inode *inode,
 					  struct fsnotify_mark *inode_mark,
 					  struct fsnotify_mark *vfsmount_mark,
@@ -482,18 +491,38 @@ static int audit_watch_handle_event(struct fsnotify_group *group,
 	struct inode *inode;
 	__u32 mask = event->mask;
 	const char *dname = event->file_name;
+=======
+/* Update watch data in audit rules based on fsnotify events. */
+static int audit_watch_handle_event(struct fsnotify_group *group,
+				    struct inode *to_tell,
+				    struct fsnotify_mark *inode_mark,
+				    struct fsnotify_mark *vfsmount_mark,
+				    u32 mask, void *data, int data_type,
+				    const unsigned char *dname, u32 cookie)
+{
+	struct inode *inode;
+>>>>>>> v3.18
 	struct audit_parent *parent;
 
 	parent = container_of(inode_mark, struct audit_parent, mark);
 
 	BUG_ON(group != audit_watch_group);
 
+<<<<<<< HEAD
 	switch (event->data_type) {
 	case (FSNOTIFY_EVENT_PATH):
 		inode = event->path.dentry->d_inode;
 		break;
 	case (FSNOTIFY_EVENT_INODE):
 		inode = event->inode;
+=======
+	switch (data_type) {
+	case (FSNOTIFY_EVENT_PATH):
+		inode = ((struct path *)data)->dentry->d_inode;
+		break;
+	case (FSNOTIFY_EVENT_INODE):
+		inode = (struct inode *)data;
+>>>>>>> v3.18
 		break;
 	default:
 		BUG();
@@ -512,11 +541,15 @@ static int audit_watch_handle_event(struct fsnotify_group *group,
 }
 
 static const struct fsnotify_ops audit_watch_fsnotify_ops = {
+<<<<<<< HEAD
 	.should_send_event = 	audit_watch_should_send_event,
 	.handle_event = 	audit_watch_handle_event,
 	.free_group_priv = 	NULL,
 	.freeing_mark = 	NULL,
 	.free_event_priv = 	NULL,
+=======
+	.handle_event = 	audit_watch_handle_event,
+>>>>>>> v3.18
 };
 
 static int __init audit_watch_init(void)

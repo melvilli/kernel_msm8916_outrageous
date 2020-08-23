@@ -836,30 +836,48 @@ static int hfa384x_get_rid(struct net_device *dev, u16 rid, void *buf, int len,
 	spin_lock_bh(&local->baplock);
 
 	res = hfa384x_setup_bap(dev, BAP0, rid, 0);
+<<<<<<< HEAD
 	if (res)
 		goto unlock;
 
 	res = hfa384x_from_bap(dev, BAP0, &rec, sizeof(rec));
 	if (res)
 		goto unlock;
+=======
+	if (!res)
+		res = hfa384x_from_bap(dev, BAP0, &rec, sizeof(rec));
+>>>>>>> v3.18
 
 	if (le16_to_cpu(rec.len) == 0) {
 		/* RID not available */
 		res = -ENODATA;
+<<<<<<< HEAD
 		goto unlock;
 	}
 
 	rlen = (le16_to_cpu(rec.len) - 1) * 2;
 	if (exact_len && rlen != len) {
+=======
+	}
+
+	rlen = (le16_to_cpu(rec.len) - 1) * 2;
+	if (!res && exact_len && rlen != len) {
+>>>>>>> v3.18
 		printk(KERN_DEBUG "%s: hfa384x_get_rid - RID len mismatch: "
 		       "rid=0x%04x, len=%d (expected %d)\n",
 		       dev->name, rid, rlen, len);
 		res = -ENODATA;
 	}
 
+<<<<<<< HEAD
 	res = hfa384x_from_bap(dev, BAP0, buf, len);
 
 unlock:
+=======
+	if (!res)
+		res = hfa384x_from_bap(dev, BAP0, buf, len);
+
+>>>>>>> v3.18
 	spin_unlock_bh(&local->baplock);
 	mutex_unlock(&local->rid_bap_mtx);
 
@@ -1430,7 +1448,11 @@ static int prism2_hw_init2(struct net_device *dev, int initial)
 		}
 		list_for_each(ptr, &local->hostap_interfaces) {
 			iface = list_entry(ptr, struct hostap_interface, list);
+<<<<<<< HEAD
 			memcpy(iface->dev->dev_addr, dev->dev_addr, ETH_ALEN);
+=======
+			eth_hw_addr_inherit(iface->dev, dev);
+>>>>>>> v3.18
 		}
 	} else if (local->fw_ap)
 		prism2_check_sta_fw_version(local);
@@ -2180,7 +2202,11 @@ static void hostap_tx_callback(local_info_t *local,
 	struct hostap_tx_callback_info *cb;
 
 	/* Make sure that frame was from us. */
+<<<<<<< HEAD
 	if (memcmp(txdesc->addr2, local->dev->dev_addr, ETH_ALEN)) {
+=======
+	if (!ether_addr_equal(txdesc->addr2, local->dev->dev_addr)) {
+>>>>>>> v3.18
 		printk(KERN_DEBUG "%s: TX callback - foreign frame\n",
 		       local->dev->name);
 		return;

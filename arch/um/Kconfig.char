@@ -6,10 +6,13 @@ config STDERR_CONSOLE
 	help
 	  console driver which dumps all printk messages to stderr.
 
+<<<<<<< HEAD
 config STDIO_CONSOLE
 	bool
 	default y
 
+=======
+>>>>>>> v3.18
 config SSL
 	bool "Virtual serial line"
 	help

@@ -40,7 +40,11 @@
 
 #include <asm/fixmap.h>
 #include <asm/apb_timer.h>
+<<<<<<< HEAD
 #include <asm/mrst.h>
+=======
+#include <asm/intel-mid.h>
+>>>>>>> v3.18
 #include <asm/time.h>
 
 #define APBT_CLOCKEVENT_RATING		110
@@ -146,7 +150,11 @@ static inline int is_apbt_capable(void)
 static int __init apbt_clockevent_register(void)
 {
 	struct sfi_timer_table_entry *mtmr;
+<<<<<<< HEAD
 	struct apbt_dev *adev = &__get_cpu_var(cpu_apbt_dev);
+=======
+	struct apbt_dev *adev = this_cpu_ptr(&cpu_apbt_dev);
+>>>>>>> v3.18
 
 	mtmr = sfi_get_mtmr(APBT_CLOCKEVENT0_NUM);
 	if (mtmr == NULL) {
@@ -157,13 +165,21 @@ static int __init apbt_clockevent_register(void)
 
 	adev->num = smp_processor_id();
 	adev->timer = dw_apb_clockevent_init(smp_processor_id(), "apbt0",
+<<<<<<< HEAD
 		mrst_timer_options == MRST_TIMER_LAPIC_APBT ?
+=======
+		intel_mid_timer_options == INTEL_MID_TIMER_LAPIC_APBT ?
+>>>>>>> v3.18
 		APBT_CLOCKEVENT_RATING - 100 : APBT_CLOCKEVENT_RATING,
 		adev_virt_addr(adev), 0, apbt_freq);
 	/* Firmware does EOI handling for us. */
 	adev->timer->eoi = NULL;
 
+<<<<<<< HEAD
 	if (mrst_timer_options == MRST_TIMER_LAPIC_APBT) {
+=======
+	if (intel_mid_timer_options == INTEL_MID_TIMER_LAPIC_APBT) {
+>>>>>>> v3.18
 		global_clock_event = &adev->timer->ced;
 		printk(KERN_DEBUG "%s clockevent registered as global\n",
 		       global_clock_event->name);
@@ -185,8 +201,11 @@ static void apbt_setup_irq(struct apbt_dev *adev)
 
 	irq_modify_status(adev->irq, 0, IRQ_MOVE_PCNTXT);
 	irq_set_affinity(adev->irq, cpumask_of(adev->cpu));
+<<<<<<< HEAD
 	/* APB timer irqs are set up as mp_irqs, timer is edge type */
 	__irq_set_handler(adev->irq, handle_edge_irq, 0, "edge");
+=======
+>>>>>>> v3.18
 }
 
 /* Should be called with per cpu */
@@ -200,7 +219,11 @@ void apbt_setup_secondary_clock(void)
 	if (!cpu)
 		return;
 
+<<<<<<< HEAD
 	adev = &__get_cpu_var(cpu_apbt_dev);
+=======
+	adev = this_cpu_ptr(&cpu_apbt_dev);
+>>>>>>> v3.18
 	if (!adev->timer) {
 		adev->timer = dw_apb_clockevent_init(cpu, adev->name,
 			APBT_CLOCKEVENT_RATING, adev_virt_addr(adev),
@@ -253,7 +276,11 @@ static int apbt_cpuhp_notify(struct notifier_block *n,
 
 static __init int apbt_late_init(void)
 {
+<<<<<<< HEAD
 	if (mrst_timer_options == MRST_TIMER_LAPIC_APBT ||
+=======
+	if (intel_mid_timer_options == INTEL_MID_TIMER_LAPIC_APBT ||
+>>>>>>> v3.18
 		!apb_timer_block_enabled)
 		return 0;
 	/* This notifier should be called after workqueue is ready */
@@ -340,7 +367,11 @@ void __init apbt_time_init(void)
 	}
 #ifdef CONFIG_SMP
 	/* kernel cmdline disable apb timer, so we will use lapic timers */
+<<<<<<< HEAD
 	if (mrst_timer_options == MRST_TIMER_LAPIC_APBT) {
+=======
+	if (intel_mid_timer_options == INTEL_MID_TIMER_LAPIC_APBT) {
+>>>>>>> v3.18
 		printk(KERN_INFO "apbt: disabled per cpu timer\n");
 		return;
 	}

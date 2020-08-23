@@ -2,6 +2,10 @@ obj-$(CONFIG_USB_GSPCA)          += gspca_main.o
 obj-$(CONFIG_USB_GSPCA_BENQ)     += gspca_benq.o
 obj-$(CONFIG_USB_GSPCA_CONEX)    += gspca_conex.o
 obj-$(CONFIG_USB_GSPCA_CPIA1)    += gspca_cpia1.o
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_USB_GSPCA_DTCS033)  += gspca_dtcs033.o
+>>>>>>> v3.18
 obj-$(CONFIG_USB_GSPCA_ETOMS)    += gspca_etoms.o
 obj-$(CONFIG_USB_GSPCA_FINEPIX)  += gspca_finepix.o
 obj-$(CONFIG_USB_GSPCA_JEILINJ)  += gspca_jeilinj.o
@@ -34,6 +38,10 @@ obj-$(CONFIG_USB_GSPCA_SQ905C)   += gspca_sq905c.o
 obj-$(CONFIG_USB_GSPCA_SQ930X)   += gspca_sq930x.o
 obj-$(CONFIG_USB_GSPCA_SUNPLUS)  += gspca_sunplus.o
 obj-$(CONFIG_USB_GSPCA_STK014)   += gspca_stk014.o
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_USB_GSPCA_STK1135)  += gspca_stk1135.o
+>>>>>>> v3.18
 obj-$(CONFIG_USB_GSPCA_STV0680)  += gspca_stv0680.o
 obj-$(CONFIG_USB_GSPCA_T613)     += gspca_t613.o
 obj-$(CONFIG_USB_GSPCA_TOPRO)    += gspca_topro.o
@@ -47,6 +55,10 @@ gspca_main-objs     := gspca.o autogain_functions.o
 gspca_benq-objs     := benq.o
 gspca_conex-objs    := conex.o
 gspca_cpia1-objs    := cpia1.o
+<<<<<<< HEAD
+=======
+gspca_dtcs033-objs  := dtcs033.o
+>>>>>>> v3.18
 gspca_etoms-objs    := etoms.o
 gspca_finepix-objs  := finepix.o
 gspca_jeilinj-objs  := jeilinj.o
@@ -78,6 +90,10 @@ gspca_sq905-objs    := sq905.o
 gspca_sq905c-objs   := sq905c.o
 gspca_sq930x-objs   := sq930x.o
 gspca_stk014-objs   := stk014.o
+<<<<<<< HEAD
+=======
+gspca_stk1135-objs  := stk1135.o
+>>>>>>> v3.18
 gspca_stv0680-objs  := stv0680.o
 gspca_sunplus-objs  := sunplus.o
 gspca_t613-objs     := t613.o

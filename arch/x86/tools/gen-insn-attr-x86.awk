@@ -68,7 +68,11 @@ BEGIN {
 
 	lprefix1_expr = "\\((66|!F3)\\)"
 	lprefix2_expr = "\\(F3\\)"
+<<<<<<< HEAD
 	lprefix3_expr = "\\((F2|!F3)\\)"
+=======
+	lprefix3_expr = "\\((F2|!F3|66\\&F2)\\)"
+>>>>>>> v3.18
 	lprefix_expr = "\\((66|F2|F3)\\)"
 	max_lprefix = 4
 
@@ -83,6 +87,11 @@ BEGIN {
 	prefix_num["Operand-Size"] = "INAT_PFX_OPNDSZ"
 	prefix_num["REPNE"] = "INAT_PFX_REPNE"
 	prefix_num["REP/REPE"] = "INAT_PFX_REPE"
+<<<<<<< HEAD
+=======
+	prefix_num["XACQUIRE"] = "INAT_PFX_REPNE"
+	prefix_num["XRELEASE"] = "INAT_PFX_REPE"
+>>>>>>> v3.18
 	prefix_num["LOCK"] = "INAT_PFX_LOCK"
 	prefix_num["SEG=CS"] = "INAT_PFX_CS"
 	prefix_num["SEG=DS"] = "INAT_PFX_DS"

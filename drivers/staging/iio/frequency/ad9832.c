@@ -57,7 +57,11 @@ static int ad9832_write_frequency(struct ad9832_state *st,
 }
 
 static int ad9832_write_phase(struct ad9832_state *st,
+<<<<<<< HEAD
 				  unsigned long addr, unsigned long phase)
+=======
+			      unsigned long addr, unsigned long phase)
+>>>>>>> v3.18
 {
 	if (phase > (1 << AD9832_PHASE_BITS))
 		return -EINVAL;
@@ -72,18 +76,29 @@ static int ad9832_write_phase(struct ad9832_state *st,
 	return spi_sync(st->spi, &st->phase_msg);
 }
 
+<<<<<<< HEAD
 static ssize_t ad9832_write(struct device *dev,
 		struct device_attribute *attr,
 		const char *buf,
 		size_t len)
+=======
+static ssize_t ad9832_write(struct device *dev, struct device_attribute *attr,
+			    const char *buf, size_t len)
+>>>>>>> v3.18
 {
 	struct iio_dev *indio_dev = dev_to_iio_dev(dev);
 	struct ad9832_state *st = iio_priv(indio_dev);
 	struct iio_dev_attr *this_attr = to_iio_dev_attr(attr);
 	int ret;
+<<<<<<< HEAD
 	long val;
 
 	ret = strict_strtoul(buf, 10, &val);
+=======
+	unsigned long val;
+
+	ret = kstrtoul(buf, 10, &val);
+>>>>>>> v3.18
 	if (ret)
 		goto error_ret;
 
@@ -109,11 +124,19 @@ static ssize_t ad9832_write(struct device *dev,
 		ret = spi_sync(st->spi, &st->msg);
 		break;
 	case AD9832_FREQ_SYM:
+<<<<<<< HEAD
 		if (val == 1)
 			st->ctrl_fp |= AD9832_FREQ;
 		else if (val == 0)
 			st->ctrl_fp &= ~AD9832_FREQ;
 		else {
+=======
+		if (val == 1) {
+			st->ctrl_fp |= AD9832_FREQ;
+		} else if (val == 0) {
+			st->ctrl_fp &= ~AD9832_FREQ;
+		} else {
+>>>>>>> v3.18
 			ret = -EINVAL;
 			break;
 		}
@@ -122,7 +145,11 @@ static ssize_t ad9832_write(struct device *dev,
 		ret = spi_sync(st->spi, &st->msg);
 		break;
 	case AD9832_PHASE_SYM:
+<<<<<<< HEAD
 		if (val < 0 || val > 3) {
+=======
+		if (val > 3) {
+>>>>>>> v3.18
 			ret = -EINVAL;
 			break;
 		}
@@ -214,6 +241,7 @@ static int ad9832_probe(struct spi_device *spi)
 		return -ENODEV;
 	}
 
+<<<<<<< HEAD
 	reg = regulator_get(&spi->dev, "vcc");
 	if (!IS_ERR(reg)) {
 		ret = regulator_enable(reg);
@@ -222,6 +250,16 @@ static int ad9832_probe(struct spi_device *spi)
 	}
 
 	indio_dev = iio_device_alloc(sizeof(*st));
+=======
+	reg = devm_regulator_get(&spi->dev, "vcc");
+	if (!IS_ERR(reg)) {
+		ret = regulator_enable(reg);
+		if (ret)
+			return ret;
+	}
+
+	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
+>>>>>>> v3.18
 	if (indio_dev == NULL) {
 		ret = -ENOMEM;
 		goto error_disable_reg;
@@ -279,11 +317,16 @@ static int ad9832_probe(struct spi_device *spi)
 	ret = spi_sync(st->spi, &st->msg);
 	if (ret) {
 		dev_err(&spi->dev, "device init failed\n");
+<<<<<<< HEAD
 		goto error_free_device;
+=======
+		goto error_disable_reg;
+>>>>>>> v3.18
 	}
 
 	ret = ad9832_write_frequency(st, AD9832_FREQ0HM, pdata->freq0);
 	if (ret)
+<<<<<<< HEAD
 		goto error_free_device;
 
 	ret = ad9832_write_frequency(st, AD9832_FREQ1HM, pdata->freq1);
@@ -320,6 +363,39 @@ error_disable_reg:
 error_put_reg:
 	if (!IS_ERR(reg))
 		regulator_put(reg);
+=======
+		goto error_disable_reg;
+
+	ret = ad9832_write_frequency(st, AD9832_FREQ1HM, pdata->freq1);
+	if (ret)
+		goto error_disable_reg;
+
+	ret = ad9832_write_phase(st, AD9832_PHASE0H, pdata->phase0);
+	if (ret)
+		goto error_disable_reg;
+
+	ret = ad9832_write_phase(st, AD9832_PHASE1H, pdata->phase1);
+	if (ret)
+		goto error_disable_reg;
+
+	ret = ad9832_write_phase(st, AD9832_PHASE2H, pdata->phase2);
+	if (ret)
+		goto error_disable_reg;
+
+	ret = ad9832_write_phase(st, AD9832_PHASE3H, pdata->phase3);
+	if (ret)
+		goto error_disable_reg;
+
+	ret = iio_device_register(indio_dev);
+	if (ret)
+		goto error_disable_reg;
+
+	return 0;
+
+error_disable_reg:
+	if (!IS_ERR(reg))
+		regulator_disable(reg);
+>>>>>>> v3.18
 
 	return ret;
 }
@@ -330,11 +406,16 @@ static int ad9832_remove(struct spi_device *spi)
 	struct ad9832_state *st = iio_priv(indio_dev);
 
 	iio_device_unregister(indio_dev);
+<<<<<<< HEAD
 	if (!IS_ERR(st->reg)) {
 		regulator_disable(st->reg);
 		regulator_put(st->reg);
 	}
 	iio_device_free(indio_dev);
+=======
+	if (!IS_ERR(st->reg))
+		regulator_disable(st->reg);
+>>>>>>> v3.18
 
 	return 0;
 }

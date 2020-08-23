@@ -161,7 +161,11 @@ static struct kmem_cache * ext2_inode_cachep;
 static struct inode *ext2_alloc_inode(struct super_block *sb)
 {
 	struct ext2_inode_info *ei;
+<<<<<<< HEAD
 	ei = (struct ext2_inode_info *)kmem_cache_alloc(ext2_inode_cachep, GFP_KERNEL);
+=======
+	ei = kmem_cache_alloc(ext2_inode_cachep, GFP_KERNEL);
+>>>>>>> v3.18
 	if (!ei)
 		return NULL;
 	ei->i_block_alloc_info = NULL;
@@ -192,7 +196,11 @@ static void init_once(void *foo)
 	inode_init_once(&ei->vfs_inode);
 }
 
+<<<<<<< HEAD
 static int init_inodecache(void)
+=======
+static int __init init_inodecache(void)
+>>>>>>> v3.18
 {
 	ext2_inode_cachep = kmem_cache_create("ext2_inode_cache",
 					     sizeof(struct ext2_inode_info),
@@ -1067,6 +1075,7 @@ static int ext2_fill_super(struct super_block *sb, void *data, int silent)
 	ext2_rsv_window_add(sb, &sbi->s_rsv_window_head);
 
 	err = percpu_counter_init(&sbi->s_freeblocks_counter,
+<<<<<<< HEAD
 				ext2_count_free_blocks(sb));
 	if (!err) {
 		err = percpu_counter_init(&sbi->s_freeinodes_counter,
@@ -1075,6 +1084,16 @@ static int ext2_fill_super(struct super_block *sb, void *data, int silent)
 	if (!err) {
 		err = percpu_counter_init(&sbi->s_dirs_counter,
 				ext2_count_dirs(sb));
+=======
+				ext2_count_free_blocks(sb), GFP_KERNEL);
+	if (!err) {
+		err = percpu_counter_init(&sbi->s_freeinodes_counter,
+				ext2_count_free_inodes(sb), GFP_KERNEL);
+	}
+	if (!err) {
+		err = percpu_counter_init(&sbi->s_dirs_counter,
+				ext2_count_dirs(sb), GFP_KERNEL);
+>>>>>>> v3.18
 	}
 	if (err) {
 		ext2_msg(sb, KERN_ERR, "error: insufficient memory");
@@ -1254,6 +1273,10 @@ static int ext2_remount (struct super_block * sb, int * flags, char * data)
 	unsigned long old_sb_flags;
 	int err;
 
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+>>>>>>> v3.18
 	spin_lock(&sbi->s_lock);
 
 	/* Store the old options */

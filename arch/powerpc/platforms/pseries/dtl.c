@@ -20,7 +20,10 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/debugfs.h>
 #include <linux/spinlock.h>
@@ -29,8 +32,13 @@
 #include <asm/firmware.h>
 #include <asm/lppaca.h>
 #include <asm/debug.h>
+<<<<<<< HEAD
 
 #include "plpar_wrappers.h"
+=======
+#include <asm/plpar_wrappers.h>
+#include <asm/machdep.h>
+>>>>>>> v3.18
 
 struct dtl {
 	struct dtl_entry	*buf;
@@ -87,7 +95,11 @@ static void consume_dtle(struct dtl_entry *dtle, u64 index)
 	barrier();
 
 	/* check for hypervisor ring buffer overflow, ignore this entry if so */
+<<<<<<< HEAD
 	if (index + N_DISPATCH_LOG < vpa->dtl_idx)
+=======
+	if (index + N_DISPATCH_LOG < be64_to_cpu(vpa->dtl_idx))
+>>>>>>> v3.18
 		return;
 
 	++wp;
@@ -393,4 +405,8 @@ err_remove_dir:
 err:
 	return rc;
 }
+<<<<<<< HEAD
 arch_initcall(dtl_init);
+=======
+machine_arch_initcall(pseries, dtl_init);
+>>>>>>> v3.18

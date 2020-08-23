@@ -93,12 +93,15 @@ invalid_gunlock:
 	if (!had_lock)
 		gfs2_glock_dq_uninit(&d_gh);
 invalid:
+<<<<<<< HEAD
 	if (inode && S_ISDIR(inode->i_mode)) {
 		if (have_submounts(dentry))
 			goto valid;
 		shrink_dcache_parent(dentry);
 	}
 	d_drop(dentry);
+=======
+>>>>>>> v3.18
 	dput(parent);
 	return 0;
 
@@ -109,8 +112,12 @@ fail:
 	return 0;
 }
 
+<<<<<<< HEAD
 static int gfs2_dhash(const struct dentry *dentry, const struct inode *inode,
 		struct qstr *str)
+=======
+static int gfs2_dhash(const struct dentry *dentry, struct qstr *str)
+>>>>>>> v3.18
 {
 	str->hash = gfs2_disk_hash(str->name, str->len);
 	return 0;

@@ -15,11 +15,17 @@
 #include <linux/slab.h>
 #include <linux/stat.h>
 #include <linux/fault-inject.h>
+<<<<<<< HEAD
 #include <linux/uaccess.h>
 
 #include <linux/mmc/card.h>
 #include <linux/mmc/host.h>
 #include <linux/mmc/mmc.h>
+=======
+
+#include <linux/mmc/card.h>
+#include <linux/mmc/host.h>
+>>>>>>> v3.18
 
 #include "core.h"
 #include "mmc_ops.h"
@@ -137,8 +143,19 @@ static int mmc_ios_show(struct seq_file *s, void *data)
 	case MMC_TIMING_UHS_DDR50:
 		str = "sd uhs DDR50";
 		break;
+<<<<<<< HEAD
 	case MMC_TIMING_MMC_HS200:
 		str = "mmc high-speed SDR200";
+=======
+	case MMC_TIMING_MMC_DDR52:
+		str = "mmc DDR52";
+		break;
+	case MMC_TIMING_MMC_HS200:
+		str = "mmc HS200";
+		break;
+	case MMC_TIMING_MMC_HS400:
+		str = "mmc HS400";
+>>>>>>> v3.18
 		break;
 	default:
 		str = "invalid";
@@ -194,11 +211,17 @@ static int mmc_clock_opt_set(void *data, u64 val)
 	if (val > host->f_max)
 		return -EINVAL;
 
+<<<<<<< HEAD
 	mmc_rpm_hold(host, &host->class_dev);
 	mmc_claim_host(host);
 	mmc_set_clock(host, (unsigned int) val);
 	mmc_release_host(host);
 	mmc_rpm_release(host, &host->class_dev);
+=======
+	mmc_claim_host(host);
+	mmc_set_clock(host, (unsigned int) val);
+	mmc_release_host(host);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -206,6 +229,7 @@ static int mmc_clock_opt_set(void *data, u64 val)
 DEFINE_SIMPLE_ATTRIBUTE(mmc_clock_fops, mmc_clock_opt_get, mmc_clock_opt_set,
 	"%llu\n");
 
+<<<<<<< HEAD
 static int mmc_max_clock_get(void *data, u64 *val)
 {
 	struct mmc_host *host = data;
@@ -275,6 +299,8 @@ static int mmc_err_state_clear(void *data, u64 val)
 DEFINE_SIMPLE_ATTRIBUTE(mmc_err_state, mmc_err_state_get,
 		mmc_err_state_clear, "%llu\n");
 
+=======
+>>>>>>> v3.18
 void mmc_add_host_debugfs(struct mmc_host *host)
 {
 	struct dentry *root;
@@ -297,6 +323,7 @@ void mmc_add_host_debugfs(struct mmc_host *host)
 			&mmc_clock_fops))
 		goto err_node;
 
+<<<<<<< HEAD
 	if (!debugfs_create_file("max_clock", S_IRUSR | S_IWUSR, root, host,
 		&mmc_max_clock_fops))
 		goto err_node;
@@ -305,6 +332,8 @@ void mmc_add_host_debugfs(struct mmc_host *host)
 		&mmc_err_state))
 		goto err_node;
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_MMC_CLKGATE
 	if (!debugfs_create_u32("clk_delay", (S_IRUSR | S_IWUSR),
 				root, &host->clk_delay))
@@ -339,15 +368,23 @@ static int mmc_dbg_card_status_get(void *data, u64 *val)
 	u32		status;
 	int		ret;
 
+<<<<<<< HEAD
 	mmc_rpm_hold(card->host, &card->dev);
 	mmc_claim_host(card->host);
+=======
+	mmc_get_card(card);
+>>>>>>> v3.18
 
 	ret = mmc_send_status(data, &status);
 	if (!ret)
 		*val = status;
 
+<<<<<<< HEAD
 	mmc_release_host(card->host);
 	mmc_rpm_release(card->host, &card->dev);
+=======
+	mmc_put_card(card);
+>>>>>>> v3.18
 
 	return ret;
 }
@@ -374,11 +411,17 @@ static int mmc_ext_csd_open(struct inode *inode, struct file *filp)
 		goto out_free;
 	}
 
+<<<<<<< HEAD
 	mmc_rpm_hold(card->host, &card->dev);
 	mmc_claim_host(card->host);
 	err = mmc_send_ext_csd(card, ext_csd);
 	mmc_release_host(card->host);
 	mmc_rpm_release(card->host, &card->dev);
+=======
+	mmc_get_card(card);
+	err = mmc_send_ext_csd(card, ext_csd);
+	mmc_put_card(card);
+>>>>>>> v3.18
 	if (err)
 		goto out_free;
 
@@ -419,6 +462,7 @@ static const struct file_operations mmc_dbg_ext_csd_fops = {
 	.llseek		= default_llseek,
 };
 
+<<<<<<< HEAD
 static int mmc_wr_pack_stats_open(struct inode *inode, struct file *filp)
 {
 	struct mmc_card *card = inode->i_private;
@@ -739,6 +783,8 @@ static const struct file_operations mmc_dbg_bkops_stats_fops = {
 	.write		= mmc_bkops_stats_write,
 };
 
+=======
+>>>>>>> v3.18
 void mmc_add_card_debugfs(struct mmc_card *card)
 {
 	struct mmc_host	*host = card->host;
@@ -771,6 +817,7 @@ void mmc_add_card_debugfs(struct mmc_card *card)
 					&mmc_dbg_ext_csd_fops))
 			goto err;
 
+<<<<<<< HEAD
 	if (mmc_card_mmc(card) && (card->ext_csd.rev >= 6) &&
 	    (card->host->caps2 & MMC_CAP2_PACKED_WR))
 		if (!debugfs_create_file("wr_pack_stats", S_IRUSR, root, card,
@@ -783,6 +830,8 @@ void mmc_add_card_debugfs(struct mmc_card *card)
 					 &mmc_dbg_bkops_stats_fops))
 			goto err;
 
+=======
+>>>>>>> v3.18
 	return;
 
 err:

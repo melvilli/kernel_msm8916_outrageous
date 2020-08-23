@@ -15,6 +15,10 @@
 #include <linux/io.h>
 #include <linux/pm.h>
 #include <linux/pm_runtime.h>
+<<<<<<< HEAD
+=======
+#include <linux/pm_domain.h>
+>>>>>>> v3.18
 #include <linux/amba/bus.h>
 #include <linux/sizes.h>
 
@@ -83,6 +87,7 @@ static struct device_attribute amba_dev_attrs[] = {
 	__ATTR_NULL,
 };
 
+<<<<<<< HEAD
 #ifdef CONFIG_PM_SLEEP
 
 static int amba_legacy_suspend(struct device *dev, pm_message_t mesg)
@@ -240,6 +245,9 @@ static int amba_pm_restore(struct device *dev)
 #endif /* !CONFIG_HIBERNATE_CALLBACKS */
 
 #ifdef CONFIG_PM_RUNTIME
+=======
+#ifdef CONFIG_PM
+>>>>>>> v3.18
 /*
  * Hooks to provide runtime PM of the pclk (bus clock).  It is safe to
  * enable/disable the bus clock at runtime PM suspend/resume as this
@@ -251,7 +259,11 @@ static int amba_pm_runtime_suspend(struct device *dev)
 	int ret = pm_generic_runtime_suspend(dev);
 
 	if (ret == 0 && dev->driver)
+<<<<<<< HEAD
 		clk_disable(pcdev->pclk);
+=======
+		clk_disable_unprepare(pcdev->pclk);
+>>>>>>> v3.18
 
 	return ret;
 }
@@ -262,7 +274,11 @@ static int amba_pm_runtime_resume(struct device *dev)
 	int ret;
 
 	if (dev->driver) {
+<<<<<<< HEAD
 		ret = clk_enable(pcdev->pclk);
+=======
+		ret = clk_prepare_enable(pcdev->pclk);
+>>>>>>> v3.18
 		/* Failure is probably fatal to the system, but... */
 		if (ret)
 			return ret;
@@ -272,6 +288,7 @@ static int amba_pm_runtime_resume(struct device *dev)
 }
 #endif
 
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 
 static const struct dev_pm_ops amba_pm = {
@@ -296,6 +313,22 @@ static const struct dev_pm_ops amba_pm = {
 
 #endif /* !CONFIG_PM */
 
+=======
+static const struct dev_pm_ops amba_pm = {
+	.suspend	= pm_generic_suspend,
+	.resume		= pm_generic_resume,
+	.freeze		= pm_generic_freeze,
+	.thaw		= pm_generic_thaw,
+	.poweroff	= pm_generic_poweroff,
+	.restore	= pm_generic_restore,
+	SET_PM_RUNTIME_PM_OPS(
+		amba_pm_runtime_suspend,
+		amba_pm_runtime_resume,
+		NULL
+	)
+};
+
+>>>>>>> v3.18
 /*
  * Primecells are part of the Advanced Microcontroller Bus Architecture,
  * so we call the bus "amba".
@@ -305,7 +338,11 @@ struct bus_type amba_bustype = {
 	.dev_attrs	= amba_dev_attrs,
 	.match		= amba_match,
 	.uevent		= amba_uevent,
+<<<<<<< HEAD
 	.pm		= AMBA_PM,
+=======
+	.pm		= &amba_pm,
+>>>>>>> v3.18
 };
 
 static int __init amba_init(void)
@@ -317,6 +354,7 @@ postcore_initcall(amba_init);
 
 static int amba_get_enable_pclk(struct amba_device *pcdev)
 {
+<<<<<<< HEAD
 	struct clk *pclk = clk_get(&pcdev->dev, "apb_pclk");
 	int ret;
 
@@ -336,17 +374,33 @@ static int amba_get_enable_pclk(struct amba_device *pcdev)
 		clk_unprepare(pclk);
 		clk_put(pclk);
 	}
+=======
+	int ret;
+
+	pcdev->pclk = clk_get(&pcdev->dev, "apb_pclk");
+	if (IS_ERR(pcdev->pclk))
+		return PTR_ERR(pcdev->pclk);
+
+	ret = clk_prepare_enable(pcdev->pclk);
+	if (ret)
+		clk_put(pcdev->pclk);
+>>>>>>> v3.18
 
 	return ret;
 }
 
 static void amba_put_disable_pclk(struct amba_device *pcdev)
 {
+<<<<<<< HEAD
 	struct clk *pclk = pcdev->pclk;
 
 	clk_disable(pclk);
 	clk_unprepare(pclk);
 	clk_put(pclk);
+=======
+	clk_disable_unprepare(pcdev->pclk);
+	clk_put(pcdev->pclk);
+>>>>>>> v3.18
 }
 
 /*
@@ -361,9 +415,21 @@ static int amba_probe(struct device *dev)
 	int ret;
 
 	do {
+<<<<<<< HEAD
 		ret = amba_get_enable_pclk(pcdev);
 		if (ret)
 			break;
+=======
+		ret = dev_pm_domain_attach(dev, true);
+		if (ret == -EPROBE_DEFER)
+			break;
+
+		ret = amba_get_enable_pclk(pcdev);
+		if (ret) {
+			dev_pm_domain_detach(dev, true);
+			break;
+		}
+>>>>>>> v3.18
 
 		pm_runtime_get_noresume(dev);
 		pm_runtime_set_active(dev);
@@ -378,6 +444,10 @@ static int amba_probe(struct device *dev)
 		pm_runtime_put_noidle(dev);
 
 		amba_put_disable_pclk(pcdev);
+<<<<<<< HEAD
+=======
+		dev_pm_domain_detach(dev, true);
+>>>>>>> v3.18
 	} while (0);
 
 	return ret;
@@ -399,6 +469,10 @@ static int amba_remove(struct device *dev)
 	pm_runtime_put_noidle(dev);
 
 	amba_put_disable_pclk(pcdev);
+<<<<<<< HEAD
+=======
+	dev_pm_domain_detach(dev, true);
+>>>>>>> v3.18
 
 	return ret;
 }
@@ -552,7 +626,10 @@ amba_aphb_device_add(struct device *parent, const char *name,
 	if (!dev)
 		return ERR_PTR(-ENOMEM);
 
+<<<<<<< HEAD
 	dev->dma_mask = dma_mask;
+=======
+>>>>>>> v3.18
 	dev->dev.coherent_dma_mask = dma_mask;
 	dev->irq[0] = irq1;
 	dev->irq[1] = irq2;
@@ -619,7 +696,11 @@ static void amba_device_initialize(struct amba_device *dev, const char *name)
 		dev_set_name(&dev->dev, "%s", name);
 	dev->dev.release = amba_device_release;
 	dev->dev.bus = &amba_bustype;
+<<<<<<< HEAD
 	dev->dev.dma_mask = &dev->dma_mask;
+=======
+	dev->dev.dma_mask = &dev->dev.coherent_dma_mask;
+>>>>>>> v3.18
 	dev->res.name = dev_name(&dev->dev);
 }
 
@@ -663,9 +744,12 @@ int amba_device_register(struct amba_device *dev, struct resource *parent)
 	amba_device_initialize(dev, dev->dev.init_name);
 	dev->dev.init_name = NULL;
 
+<<<<<<< HEAD
 	if (!dev->dev.coherent_dma_mask && dev->dma_mask)
 		dev_warn(&dev->dev, "coherent dma mask is unset\n");
 
+=======
+>>>>>>> v3.18
 	return amba_device_add(dev, parent);
 }
 

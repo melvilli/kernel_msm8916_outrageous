@@ -149,6 +149,10 @@ static int wf_smu_all_controls_ok, wf_smu_all_sensors_ok, wf_smu_started;
 
 static unsigned int wf_smu_failure_state;
 static int wf_smu_readjust, wf_smu_skipping;
+<<<<<<< HEAD
+=======
+static bool wf_smu_overtemp;
+>>>>>>> v3.18
 
 /*
  * ****** System Fans Control Loop ******
@@ -593,6 +597,10 @@ static void wf_smu_tick(void)
 	if (new_failure & FAILURE_OVERTEMP) {
 		wf_set_overtemp();
 		wf_smu_skipping = 2;
+<<<<<<< HEAD
+=======
+		wf_smu_overtemp = true;
+>>>>>>> v3.18
 	}
 
 	/* We only clear the overtemp condition if overtemp is cleared
@@ -601,8 +609,15 @@ static void wf_smu_tick(void)
 	 * the control loop levels, but we don't want to keep it clear
 	 * here in this case
 	 */
+<<<<<<< HEAD
 	if (new_failure == 0 && last_failure & FAILURE_OVERTEMP)
 		wf_clear_overtemp();
+=======
+	if (!wf_smu_failure_state && wf_smu_overtemp) {
+		wf_clear_overtemp();
+		wf_smu_overtemp = false;
+	}
+>>>>>>> v3.18
 }
 
 static void wf_smu_new_control(struct wf_control *ct)

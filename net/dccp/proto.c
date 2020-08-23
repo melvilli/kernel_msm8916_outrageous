@@ -336,7 +336,11 @@ unsigned int dccp_poll(struct file *file, struct socket *sock,
 			mask |= POLLIN | POLLRDNORM;
 
 		if (!(sk->sk_shutdown & SEND_SHUTDOWN)) {
+<<<<<<< HEAD
 			if (sk_stream_wspace(sk) >= sk_stream_min_wspace(sk)) {
+=======
+			if (sk_stream_is_writeable(sk)) {
+>>>>>>> v3.18
 				mask |= POLLOUT | POLLWRNORM;
 			} else {  /* send SIGIO later */
 				set_bit(SOCK_ASYNC_NOSPACE,
@@ -347,7 +351,11 @@ unsigned int dccp_poll(struct file *file, struct socket *sock,
 				 * wspace test but before the flags are set,
 				 * IO signal will be lost.
 				 */
+<<<<<<< HEAD
 				if (sk_stream_wspace(sk) >= sk_stream_min_wspace(sk))
+=======
+				if (sk_stream_is_writeable(sk))
+>>>>>>> v3.18
 					mask |= POLLOUT | POLLWRNORM;
 			}
 		}
@@ -848,7 +856,11 @@ int dccp_recvmsg(struct kiocb *iocb, struct sock *sk, struct msghdr *msg,
 		default:
 			dccp_pr_debug("packet_type=%s\n",
 				      dccp_packet_name(dh->dccph_type));
+<<<<<<< HEAD
 			sk_eat_skb(sk, skb, false);
+=======
+			sk_eat_skb(sk, skb);
+>>>>>>> v3.18
 		}
 verify_sock_status:
 		if (sock_flag(sk, SOCK_DONE)) {
@@ -905,7 +917,11 @@ verify_sock_status:
 			len = skb->len;
 	found_fin_ok:
 		if (!(flags & MSG_PEEK))
+<<<<<<< HEAD
 			sk_eat_skb(sk, skb, false);
+=======
+			sk_eat_skb(sk, skb);
+>>>>>>> v3.18
 		break;
 	} while (1);
 out:
@@ -1012,10 +1028,13 @@ void dccp_close(struct sock *sk, long timeout)
 		__kfree_skb(skb);
 	}
 
+<<<<<<< HEAD
 	/* If socket has been already reset kill it. */
 	if (sk->sk_state == DCCP_CLOSED)
 		goto adjudge_to_death;
 
+=======
+>>>>>>> v3.18
 	if (data_was_unread) {
 		/* Unread data was tossed, send an appropriate Reset Code */
 		DCCP_WARN("ABORT with %u bytes unread\n", data_was_unread);
@@ -1086,16 +1105,29 @@ void dccp_shutdown(struct sock *sk, int how)
 
 EXPORT_SYMBOL_GPL(dccp_shutdown);
 
+<<<<<<< HEAD
 static inline int dccp_mib_init(void)
 {
 	return snmp_mib_init((void __percpu **)dccp_statistics,
 			     sizeof(struct dccp_mib),
 			     __alignof__(struct dccp_mib));
+=======
+static inline int __init dccp_mib_init(void)
+{
+	dccp_statistics = alloc_percpu(struct dccp_mib);
+	if (!dccp_statistics)
+		return -ENOMEM;
+	return 0;
+>>>>>>> v3.18
 }
 
 static inline void dccp_mib_exit(void)
 {
+<<<<<<< HEAD
 	snmp_mib_free((void __percpu **)dccp_statistics);
+=======
+	free_percpu(dccp_statistics);
+>>>>>>> v3.18
 }
 
 static int thash_entries;
@@ -1118,7 +1150,11 @@ static int __init dccp_init(void)
 
 	BUILD_BUG_ON(sizeof(struct dccp_skb_cb) >
 		     FIELD_SIZEOF(struct sk_buff, cb));
+<<<<<<< HEAD
 	rc = percpu_counter_init(&dccp_orphan_count, 0);
+=======
+	rc = percpu_counter_init(&dccp_orphan_count, 0, GFP_KERNEL);
+>>>>>>> v3.18
 	if (rc)
 		goto out_fail;
 	rc = -ENOBUFS;
@@ -1162,10 +1198,15 @@ static int __init dccp_init(void)
 		goto out_free_bind_bucket_cachep;
 	}
 
+<<<<<<< HEAD
 	for (i = 0; i <= dccp_hashinfo.ehash_mask; i++) {
 		INIT_HLIST_NULLS_HEAD(&dccp_hashinfo.ehash[i].chain, i);
 		INIT_HLIST_NULLS_HEAD(&dccp_hashinfo.ehash[i].twchain, i);
 	}
+=======
+	for (i = 0; i <= dccp_hashinfo.ehash_mask; i++)
+		INIT_HLIST_NULLS_HEAD(&dccp_hashinfo.ehash[i].chain, i);
+>>>>>>> v3.18
 
 	if (inet_ehash_locks_alloc(&dccp_hashinfo))
 			goto out_free_dccp_ehash;

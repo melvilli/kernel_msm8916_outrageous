@@ -18,6 +18,11 @@
  * 02110-1301, USA.
  */
 
+<<<<<<< HEAD
+=======
+#include <linux/irq.h>
+#include <linux/sched.h>
+>>>>>>> v3.18
 #include <linux/kdebug.h>
 #include <linux/kgdb.h>
 

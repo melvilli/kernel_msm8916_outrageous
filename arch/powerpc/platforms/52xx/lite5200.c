@@ -34,13 +34,21 @@
  */
 
 /* mpc5200 device tree match tables */
+<<<<<<< HEAD
 static struct of_device_id mpc5200_cdm_ids[] __initdata = {
+=======
+static const struct of_device_id mpc5200_cdm_ids[] __initconst = {
+>>>>>>> v3.18
 	{ .compatible = "fsl,mpc5200-cdm", },
 	{ .compatible = "mpc5200-cdm", },
 	{}
 };
 
+<<<<<<< HEAD
 static struct of_device_id mpc5200_gpio_ids[] __initdata = {
+=======
+static const struct of_device_id mpc5200_gpio_ids[] __initconst = {
+>>>>>>> v3.18
 	{ .compatible = "fsl,mpc5200-gpio", },
 	{ .compatible = "mpc5200-gpio", },
 	{}

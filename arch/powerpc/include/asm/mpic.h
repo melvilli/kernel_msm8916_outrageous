@@ -339,6 +339,11 @@ struct mpic
 #endif
 };
 
+<<<<<<< HEAD
+=======
+extern struct bus_type mpic_subsys;
+
+>>>>>>> v3.18
 /*
  * MPIC flags (passed to mpic_alloc)
  *
@@ -393,6 +398,19 @@ struct mpic
 #define	MPIC_REGSET_STANDARD		MPIC_REGSET(0)	/* Original MPIC */
 #define	MPIC_REGSET_TSI108		MPIC_REGSET(1)	/* Tsi108/109 PIC */
 
+<<<<<<< HEAD
+=======
+/* Get the version of primary MPIC */
+#ifdef CONFIG_MPIC
+extern u32 fsl_mpic_primary_get_version(void);
+#else
+static inline u32 fsl_mpic_primary_get_version(void)
+{
+	return 0;
+}
+#endif
+
+>>>>>>> v3.18
 /* Allocate the controller structure and setup the linux irq descs
  * for the range if interrupts passed in. No HW initialization is
  * actually performed.

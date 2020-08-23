@@ -119,4 +119,12 @@ extern unsigned long uml_physmem;
 #include <asm-generic/getorder.h>
 
 #endif	/* __ASSEMBLY__ */
+<<<<<<< HEAD
+=======
+
+#ifdef CONFIG_X86_32
+#define __HAVE_ARCH_GATE_AREA 1
+#endif
+
+>>>>>>> v3.18
 #endif	/* __UM_PAGE_H */

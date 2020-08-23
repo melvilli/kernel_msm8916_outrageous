@@ -80,7 +80,10 @@ static int xfrm4_fill_dst(struct xfrm_dst *xdst, struct net_device *dev,
 	const struct flowi4 *fl4 = &fl->u.ip4;
 
 	xdst->u.rt.rt_iif = fl4->flowi4_iif;
+<<<<<<< HEAD
 	xdst->u.rt.rt_uid = fl4->flowi4_uid;
+=======
+>>>>>>> v3.18
 
 	xdst->u.dst.dev = dev;
 	dev_hold(dev);
@@ -105,9 +108,20 @@ _decode_session4(struct sk_buff *skb, struct flowi *fl, int reverse)
 	const struct iphdr *iph = ip_hdr(skb);
 	u8 *xprth = skb_network_header(skb) + iph->ihl * 4;
 	struct flowi4 *fl4 = &fl->u.ip4;
+<<<<<<< HEAD
 
 	memset(fl4, 0, sizeof(struct flowi4));
 	fl4->flowi4_mark = skb->mark;
+=======
+	int oif = 0;
+
+	if (skb_dst(skb))
+		oif = skb_dst(skb)->dev->ifindex;
+
+	memset(fl4, 0, sizeof(struct flowi4));
+	fl4->flowi4_mark = skb->mark;
+	fl4->flowi4_oif = reverse ? skb->skb_iif : oif;
+>>>>>>> v3.18
 
 	if (!ip_is_fragment(iph)) {
 		switch (iph->protocol) {
@@ -321,6 +335,10 @@ void __init xfrm4_init(void)
 
 	xfrm4_state_init();
 	xfrm4_policy_init();
+<<<<<<< HEAD
+=======
+	xfrm4_protocol_init();
+>>>>>>> v3.18
 #ifdef CONFIG_SYSCTL
 	register_pernet_subsys(&xfrm4_net_ops);
 #endif

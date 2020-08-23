@@ -28,41 +28,92 @@ struct outer_cache_fns {
 	void (*clean_range)(unsigned long, unsigned long);
 	void (*flush_range)(unsigned long, unsigned long);
 	void (*flush_all)(void);
+<<<<<<< HEAD
 	void (*inv_all)(void);
+=======
+>>>>>>> v3.18
 	void (*disable)(void);
 #ifdef CONFIG_OUTER_CACHE_SYNC
 	void (*sync)(void);
 #endif
+<<<<<<< HEAD
 	void (*set_debug)(unsigned long);
 	void (*resume)(void);
+=======
+	void (*resume)(void);
+
+	/* This is an ARM L2C thing */
+	void (*write_sec)(unsigned long, unsigned);
+>>>>>>> v3.18
 };
 
 extern struct outer_cache_fns outer_cache;
 
 #ifdef CONFIG_OUTER_CACHE
+<<<<<<< HEAD
 
+=======
+/**
+ * outer_inv_range - invalidate range of outer cache lines
+ * @start: starting physical address, inclusive
+ * @end: end physical address, exclusive
+ */
+>>>>>>> v3.18
 static inline void outer_inv_range(phys_addr_t start, phys_addr_t end)
 {
 	if (outer_cache.inv_range)
 		outer_cache.inv_range(start, end);
 }
+<<<<<<< HEAD
+=======
+
+/**
+ * outer_clean_range - clean dirty outer cache lines
+ * @start: starting physical address, inclusive
+ * @end: end physical address, exclusive
+ */
+>>>>>>> v3.18
 static inline void outer_clean_range(phys_addr_t start, phys_addr_t end)
 {
 	if (outer_cache.clean_range)
 		outer_cache.clean_range(start, end);
 }
+<<<<<<< HEAD
+=======
+
+/**
+ * outer_flush_range - clean and invalidate outer cache lines
+ * @start: starting physical address, inclusive
+ * @end: end physical address, exclusive
+ */
+>>>>>>> v3.18
 static inline void outer_flush_range(phys_addr_t start, phys_addr_t end)
 {
 	if (outer_cache.flush_range)
 		outer_cache.flush_range(start, end);
 }
 
+<<<<<<< HEAD
+=======
+/**
+ * outer_flush_all - clean and invalidate all cache lines in the outer cache
+ *
+ * Note: depending on implementation, this may not be atomic - it must
+ * only be called with interrupts disabled and no other active outer
+ * cache masters.
+ *
+ * It is intended that this function is only used by implementations
+ * needing to override the outer_cache.disable() method due to security.
+ * (Some implementations perform this as a clean followed by an invalidate.)
+ */
+>>>>>>> v3.18
 static inline void outer_flush_all(void)
 {
 	if (outer_cache.flush_all)
 		outer_cache.flush_all();
 }
 
+<<<<<<< HEAD
 static inline void outer_inv_all(void)
 {
 	if (outer_cache.inv_all)
@@ -75,6 +126,23 @@ static inline void outer_disable(void)
 		outer_cache.disable();
 }
 
+=======
+/**
+ * outer_disable - clean, invalidate and disable the outer cache
+ *
+ * Disable the outer cache, ensuring that any data contained in the outer
+ * cache is pushed out to lower levels of system memory.  The note and
+ * conditions above concerning outer_flush_all() applies here.
+ */
+extern void outer_disable(void);
+
+/**
+ * outer_resume - restore the cache configuration and re-enable outer cache
+ *
+ * Restore any configuration that the cache had when previously enabled,
+ * and re-enable the outer cache.
+ */
+>>>>>>> v3.18
 static inline void outer_resume(void)
 {
 	if (outer_cache.resume)
@@ -90,13 +158,25 @@ static inline void outer_clean_range(phys_addr_t start, phys_addr_t end)
 static inline void outer_flush_range(phys_addr_t start, phys_addr_t end)
 { }
 static inline void outer_flush_all(void) { }
+<<<<<<< HEAD
 static inline void outer_inv_all(void) { }
+=======
+>>>>>>> v3.18
 static inline void outer_disable(void) { }
 static inline void outer_resume(void) { }
 
 #endif
 
 #ifdef CONFIG_OUTER_CACHE_SYNC
+<<<<<<< HEAD
+=======
+/**
+ * outer_sync - perform a sync point for outer cache
+ *
+ * Ensure that all outer cache operations are complete and any store
+ * buffers are drained.
+ */
+>>>>>>> v3.18
 static inline void outer_sync(void)
 {
 	if (outer_cache.sync)

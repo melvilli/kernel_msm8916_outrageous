@@ -32,18 +32,41 @@ static LIST_HEAD(nfnl_acct_list);
 struct nf_acct {
 	atomic64_t		pkts;
 	atomic64_t		bytes;
+<<<<<<< HEAD
+=======
+	unsigned long		flags;
+>>>>>>> v3.18
 	struct list_head	head;
 	atomic_t		refcnt;
 	char			name[NFACCT_NAME_MAX];
 	struct rcu_head		rcu_head;
+<<<<<<< HEAD
 };
 
+=======
+	char			data[0];
+};
+
+struct nfacct_filter {
+	u32 value;
+	u32 mask;
+};
+
+#define NFACCT_F_QUOTA (NFACCT_F_QUOTA_PKTS | NFACCT_F_QUOTA_BYTES)
+#define NFACCT_OVERQUOTA_BIT	2	/* NFACCT_F_OVERQUOTA */
+
+>>>>>>> v3.18
 static int
 nfnl_acct_new(struct sock *nfnl, struct sk_buff *skb,
 	     const struct nlmsghdr *nlh, const struct nlattr * const tb[])
 {
 	struct nf_acct *nfacct, *matching = NULL;
 	char *acct_name;
+<<<<<<< HEAD
+=======
+	unsigned int size = 0;
+	u32 flags = 0;
+>>>>>>> v3.18
 
 	if (!tb[NFACCT_NAME])
 		return -EINVAL;
@@ -68,15 +91,49 @@ nfnl_acct_new(struct sock *nfnl, struct sk_buff *skb,
 			/* reset counters if you request a replacement. */
 			atomic64_set(&matching->pkts, 0);
 			atomic64_set(&matching->bytes, 0);
+<<<<<<< HEAD
+=======
+			smp_mb__before_atomic();
+			/* reset overquota flag if quota is enabled. */
+			if ((matching->flags & NFACCT_F_QUOTA))
+				clear_bit(NFACCT_OVERQUOTA_BIT,
+					  &matching->flags);
+>>>>>>> v3.18
 			return 0;
 		}
 		return -EBUSY;
 	}
 
+<<<<<<< HEAD
 	nfacct = kzalloc(sizeof(struct nf_acct), GFP_KERNEL);
 	if (nfacct == NULL)
 		return -ENOMEM;
 
+=======
+	if (tb[NFACCT_FLAGS]) {
+		flags = ntohl(nla_get_be32(tb[NFACCT_FLAGS]));
+		if (flags & ~NFACCT_F_QUOTA)
+			return -EOPNOTSUPP;
+		if ((flags & NFACCT_F_QUOTA) == NFACCT_F_QUOTA)
+			return -EINVAL;
+		if (flags & NFACCT_F_OVERQUOTA)
+			return -EINVAL;
+
+		size += sizeof(u64);
+	}
+
+	nfacct = kzalloc(sizeof(struct nf_acct) + size, GFP_KERNEL);
+	if (nfacct == NULL)
+		return -ENOMEM;
+
+	if (flags & NFACCT_F_QUOTA) {
+		u64 *quota = (u64 *)nfacct->data;
+
+		*quota = be64_to_cpu(nla_get_be64(tb[NFACCT_QUOTA]));
+		nfacct->flags = flags;
+	}
+
+>>>>>>> v3.18
 	strncpy(nfacct->name, nla_data(tb[NFACCT_NAME]), NFACCT_NAME_MAX);
 
 	if (tb[NFACCT_BYTES]) {
@@ -100,6 +157,10 @@ nfnl_acct_fill_info(struct sk_buff *skb, u32 portid, u32 seq, u32 type,
 	struct nfgenmsg *nfmsg;
 	unsigned int flags = portid ? NLM_F_MULTI : 0;
 	u64 pkts, bytes;
+<<<<<<< HEAD
+=======
+	u32 old_flags;
+>>>>>>> v3.18
 
 	event |= NFNL_SUBSYS_ACCT << 8;
 	nlh = nlmsg_put(skb, portid, seq, event, sizeof(*nfmsg), flags);
@@ -114,9 +175,19 @@ nfnl_acct_fill_info(struct sk_buff *skb, u32 portid, u32 seq, u32 type,
 	if (nla_put_string(skb, NFACCT_NAME, acct->name))
 		goto nla_put_failure;
 
+<<<<<<< HEAD
 	if (type == NFNL_MSG_ACCT_GET_CTRZERO) {
 		pkts = atomic64_xchg(&acct->pkts, 0);
 		bytes = atomic64_xchg(&acct->bytes, 0);
+=======
+	old_flags = acct->flags;
+	if (type == NFNL_MSG_ACCT_GET_CTRZERO) {
+		pkts = atomic64_xchg(&acct->pkts, 0);
+		bytes = atomic64_xchg(&acct->bytes, 0);
+		smp_mb__before_atomic();
+		if (acct->flags & NFACCT_F_QUOTA)
+			clear_bit(NFACCT_OVERQUOTA_BIT, &acct->flags);
+>>>>>>> v3.18
 	} else {
 		pkts = atomic64_read(&acct->pkts);
 		bytes = atomic64_read(&acct->bytes);
@@ -125,7 +196,17 @@ nfnl_acct_fill_info(struct sk_buff *skb, u32 portid, u32 seq, u32 type,
 	    nla_put_be64(skb, NFACCT_BYTES, cpu_to_be64(bytes)) ||
 	    nla_put_be32(skb, NFACCT_USE, htonl(atomic_read(&acct->refcnt))))
 		goto nla_put_failure;
+<<<<<<< HEAD
 
+=======
+	if (acct->flags & NFACCT_F_QUOTA) {
+		u64 *quota = (u64 *)acct->data;
+
+		if (nla_put_be32(skb, NFACCT_FLAGS, htonl(old_flags)) ||
+		    nla_put_be64(skb, NFACCT_QUOTA, cpu_to_be64(*quota)))
+			goto nla_put_failure;
+	}
+>>>>>>> v3.18
 	nlmsg_end(skb, nlh);
 	return skb->len;
 
@@ -139,6 +220,10 @@ static int
 nfnl_acct_dump(struct sk_buff *skb, struct netlink_callback *cb)
 {
 	struct nf_acct *cur, *last;
+<<<<<<< HEAD
+=======
+	const struct nfacct_filter *filter = cb->data;
+>>>>>>> v3.18
 
 	if (cb->args[2])
 		return 0;
@@ -155,6 +240,13 @@ nfnl_acct_dump(struct sk_buff *skb, struct netlink_callback *cb)
 
 			last = NULL;
 		}
+<<<<<<< HEAD
+=======
+
+		if (filter && (cur->flags & filter->mask) != filter->value)
+			continue;
+
+>>>>>>> v3.18
 		if (nfnl_acct_fill_info(skb, NETLINK_CB(cb->skb).portid,
 				       cb->nlh->nlmsg_seq,
 				       NFNL_MSG_TYPE(cb->nlh->nlmsg_type),
@@ -169,6 +261,41 @@ nfnl_acct_dump(struct sk_buff *skb, struct netlink_callback *cb)
 	return skb->len;
 }
 
+<<<<<<< HEAD
+=======
+static int nfnl_acct_done(struct netlink_callback *cb)
+{
+	kfree(cb->data);
+	return 0;
+}
+
+static const struct nla_policy filter_policy[NFACCT_FILTER_MAX + 1] = {
+	[NFACCT_FILTER_MASK]	= { .type = NLA_U32 },
+	[NFACCT_FILTER_VALUE]	= { .type = NLA_U32 },
+};
+
+static struct nfacct_filter *
+nfacct_filter_alloc(const struct nlattr * const attr)
+{
+	struct nfacct_filter *filter;
+	struct nlattr *tb[NFACCT_FILTER_MAX + 1];
+	int err;
+
+	err = nla_parse_nested(tb, NFACCT_FILTER_MAX, attr, filter_policy);
+	if (err < 0)
+		return ERR_PTR(err);
+
+	filter = kzalloc(sizeof(struct nfacct_filter), GFP_KERNEL);
+	if (!filter)
+		return ERR_PTR(-ENOMEM);
+
+	filter->mask = ntohl(nla_get_be32(tb[NFACCT_FILTER_MASK]));
+	filter->value = ntohl(nla_get_be32(tb[NFACCT_FILTER_VALUE]));
+
+	return filter;
+}
+
+>>>>>>> v3.18
 static int
 nfnl_acct_get(struct sock *nfnl, struct sk_buff *skb,
 	     const struct nlmsghdr *nlh, const struct nlattr * const tb[])
@@ -180,7 +307,22 @@ nfnl_acct_get(struct sock *nfnl, struct sk_buff *skb,
 	if (nlh->nlmsg_flags & NLM_F_DUMP) {
 		struct netlink_dump_control c = {
 			.dump = nfnl_acct_dump,
+<<<<<<< HEAD
 		};
+=======
+			.done = nfnl_acct_done,
+		};
+
+		if (tb[NFACCT_FILTER]) {
+			struct nfacct_filter *filter;
+
+			filter = nfacct_filter_alloc(tb[NFACCT_FILTER]);
+			if (IS_ERR(filter))
+				return PTR_ERR(filter);
+
+			c.data = filter;
+		}
+>>>>>>> v3.18
 		return netlink_dump_start(nfnl, skb, nlh, &c);
 	}
 
@@ -270,6 +412,12 @@ static const struct nla_policy nfnl_acct_policy[NFACCT_MAX+1] = {
 	[NFACCT_NAME] = { .type = NLA_NUL_STRING, .len = NFACCT_NAME_MAX-1 },
 	[NFACCT_BYTES] = { .type = NLA_U64 },
 	[NFACCT_PKTS] = { .type = NLA_U64 },
+<<<<<<< HEAD
+=======
+	[NFACCT_FLAGS] = { .type = NLA_U32 },
+	[NFACCT_QUOTA] = { .type = NLA_U64 },
+	[NFACCT_FILTER] = {.type = NLA_NESTED },
+>>>>>>> v3.18
 };
 
 static const struct nfnl_callback nfnl_acct_cb[NFNL_MSG_ACCT_MAX] = {
@@ -336,6 +484,53 @@ void nfnl_acct_update(const struct sk_buff *skb, struct nf_acct *nfacct)
 }
 EXPORT_SYMBOL_GPL(nfnl_acct_update);
 
+<<<<<<< HEAD
+=======
+static void nfnl_overquota_report(struct nf_acct *nfacct)
+{
+	int ret;
+	struct sk_buff *skb;
+
+	skb = nlmsg_new(NLMSG_DEFAULT_SIZE, GFP_ATOMIC);
+	if (skb == NULL)
+		return;
+
+	ret = nfnl_acct_fill_info(skb, 0, 0, NFNL_MSG_ACCT_OVERQUOTA, 0,
+				  nfacct);
+	if (ret <= 0) {
+		kfree_skb(skb);
+		return;
+	}
+	netlink_broadcast(init_net.nfnl, skb, 0, NFNLGRP_ACCT_QUOTA,
+			  GFP_ATOMIC);
+}
+
+int nfnl_acct_overquota(const struct sk_buff *skb, struct nf_acct *nfacct)
+{
+	u64 now;
+	u64 *quota;
+	int ret = NFACCT_UNDERQUOTA;
+
+	/* no place here if we don't have a quota */
+	if (!(nfacct->flags & NFACCT_F_QUOTA))
+		return NFACCT_NO_QUOTA;
+
+	quota = (u64 *)nfacct->data;
+	now = (nfacct->flags & NFACCT_F_QUOTA_PKTS) ?
+	       atomic64_read(&nfacct->pkts) : atomic64_read(&nfacct->bytes);
+
+	ret = now > *quota;
+
+	if (now >= *quota &&
+	    !test_and_set_bit(NFACCT_OVERQUOTA_BIT, &nfacct->flags)) {
+		nfnl_overquota_report(nfacct);
+	}
+
+	return ret;
+}
+EXPORT_SYMBOL_GPL(nfnl_acct_overquota);
+
+>>>>>>> v3.18
 static int __init nfnl_acct_init(void)
 {
 	int ret;

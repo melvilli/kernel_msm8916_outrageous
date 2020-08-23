@@ -725,6 +725,7 @@ static int __init init_pmc551(void)
 		}
 
 		mtd = kzalloc(sizeof(struct mtd_info), GFP_KERNEL);
+<<<<<<< HEAD
 		if (!mtd) {
 			printk(KERN_NOTICE "pmc551: Cannot allocate new MTD "
 				"device.\n");
@@ -735,6 +736,13 @@ static int __init init_pmc551(void)
 		if (!priv) {
 			printk(KERN_NOTICE "pmc551: Cannot allocate new MTD "
 				"device.\n");
+=======
+		if (!mtd)
+			break;
+
+		priv = kzalloc(sizeof(struct mypriv), GFP_KERNEL);
+		if (!priv) {
+>>>>>>> v3.18
 			kfree(mtd);
 			break;
 		}

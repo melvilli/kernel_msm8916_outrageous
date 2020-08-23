@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * include/linux/tipc_config.h: Include file for TIPC configuration interface
+=======
+ * include/uapi/linux/tipc_config.h: Header for TIPC configuration interface
+>>>>>>> v3.18
  *
  * Copyright (c) 2003-2006, Ericsson AB
  * Copyright (c) 2005-2007, 2010-2011, Wind River Systems
@@ -39,6 +43,10 @@
 
 #include <linux/types.h>
 #include <linux/string.h>
+<<<<<<< HEAD
+=======
+#include <linux/tipc.h>
+>>>>>>> v3.18
 #include <asm/byteorder.h>
 
 #ifndef __KERNEL__
@@ -155,6 +163,7 @@
 #define TIPC_TLV_PORT_REF	26	/* 32-bit port reference */
 
 /*
+<<<<<<< HEAD
  * Maximum sizes of TIPC bearer-related names (including terminating NUL)
  */
 
@@ -164,6 +173,8 @@
 #define TIPC_MAX_LINK_NAME	60	/* format = Z.C.N:interface-Z.C.N:interface */
 
 /*
+=======
+>>>>>>> v3.18
  * Link priority limits (min, default, max, media default)
  */
 
@@ -190,7 +201,11 @@
 
 #define TIPC_MIN_LINK_WIN 16
 #define TIPC_DEF_LINK_WIN 50
+<<<<<<< HEAD
 #define TIPC_MAX_LINK_WIN 150
+=======
+#define TIPC_MAX_LINK_WIN 8191
+>>>>>>> v3.18
 
 
 struct tipc_node_info {

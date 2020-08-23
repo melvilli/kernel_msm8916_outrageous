@@ -9,7 +9,10 @@
 #include <linux/types.h>
 #include <linux/pci.h>
 #include <linux/kernel.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/delay.h>
 #include <linux/mm.h>
 #include <asm/addrspace.h>

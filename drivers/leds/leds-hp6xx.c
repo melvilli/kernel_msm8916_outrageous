@@ -12,7 +12,10 @@
 
 #include <linux/module.h>
 #include <linux/kernel.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <linux/leds.h>
 #include <asm/hd64461.h>

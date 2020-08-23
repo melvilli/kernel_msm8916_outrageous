@@ -54,7 +54,11 @@ static LIST_HEAD(deferred_probe_active_list);
 static struct workqueue_struct *deferred_wq;
 static atomic_t deferred_trigger_count = ATOMIC_INIT(0);
 
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> v3.18
  * deferred_probe_work_func() - Retry probing devices in the active list.
  */
 static void deferred_probe_work_func(struct work_struct *work)
@@ -171,6 +175,7 @@ static void driver_deferred_probe_trigger(void)
 	queue_work(deferred_wq, &deferred_probe_work);
 }
 
+<<<<<<< HEAD
 static void enable_trigger_defer_cycle(void)
 {
 	driver_deferred_probe_enable = true;
@@ -182,11 +187,14 @@ static void enable_trigger_defer_cycle(void)
 	flush_workqueue(deferred_wq);
 }
 
+=======
+>>>>>>> v3.18
 /**
  * deferred_probe_initcall() - Enable probing of deferred devices
  *
  * We don't want to get in the way when the bulk of drivers are getting probed.
  * Instead, this initcall makes sure that deferred probing is delayed until
+<<<<<<< HEAD
  * all the registered initcall functions at a particular level are completed.
  * This function is invoked at every *_initcall_sync level.
  */
@@ -214,6 +222,23 @@ static int deferred_probe_enable_fn(void)
 	return 0;
 }
 late_initcall(deferred_probe_enable_fn);
+=======
+ * late_initcall time.
+ */
+static int deferred_probe_initcall(void)
+{
+	deferred_wq = create_singlethread_workqueue("deferwq");
+	if (WARN_ON(!deferred_wq))
+		return -ENOMEM;
+
+	driver_deferred_probe_enable = true;
+	driver_deferred_probe_trigger();
+	/* Sort as many dependencies as possible before exiting initcalls */
+	flush_workqueue(deferred_wq);
+	return 0;
+}
+late_initcall(deferred_probe_initcall);
+>>>>>>> v3.18
 
 static void driver_bound(struct device *dev)
 {
@@ -223,8 +248,13 @@ static void driver_bound(struct device *dev)
 		return;
 	}
 
+<<<<<<< HEAD
 	pr_debug("driver: '%s': %s: bound to device '%s'\n", dev_name(dev),
 		 __func__, dev->driver->name);
+=======
+	pr_debug("driver: '%s': %s: bound to device '%s'\n", dev->driver->name,
+		 __func__, dev_name(dev));
+>>>>>>> v3.18
 
 	klist_add_tail(&dev->p->knode_driver, &dev->driver->p->klist_devices);
 
@@ -610,6 +640,7 @@ void driver_detach(struct device_driver *drv)
 		put_device(dev);
 	}
 }
+<<<<<<< HEAD
 
 /*
  * These exports can't be _GPL due to .h files using this within them, and it
@@ -636,3 +667,5 @@ int dev_set_drvdata(struct device *dev, void *data)
 	return 0;
 }
 EXPORT_SYMBOL(dev_set_drvdata);
+=======
+>>>>>>> v3.18

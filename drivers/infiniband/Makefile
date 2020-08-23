@@ -1,4 +1,5 @@
 obj-$(CONFIG_INFINIBAND)		+= core/
+<<<<<<< HEAD
 obj-$(CONFIG_INFINIBAND_MTHCA)		+= hw/mthca/
 obj-$(CONFIG_INFINIBAND_IPATH)		+= hw/ipath/
 obj-$(CONFIG_INFINIBAND_QIB)		+= hw/qib/
@@ -14,3 +15,7 @@ obj-$(CONFIG_INFINIBAND_SRP)		+= ulp/srp/
 obj-$(CONFIG_INFINIBAND_SRPT)		+= ulp/srpt/
 obj-$(CONFIG_INFINIBAND_ISER)		+= ulp/iser/
 obj-$(CONFIG_INFINIBAND_ISERT)		+= ulp/isert/
+=======
+obj-$(CONFIG_INFINIBAND)		+= hw/
+obj-$(CONFIG_INFINIBAND)		+= ulp/
+>>>>>>> v3.18

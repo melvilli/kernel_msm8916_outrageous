@@ -32,7 +32,11 @@
 
 static int numachip_system __read_mostly;
 
+<<<<<<< HEAD
 static const struct apic apic_numachip __read_mostly;
+=======
+static const struct apic apic_numachip;
+>>>>>>> v3.18
 
 static unsigned int get_apic_id(unsigned long x)
 {
@@ -74,7 +78,11 @@ static int numachip_phys_pkg_id(int initial_apic_id, int index_msb)
 	return initial_apic_id >> index_msb;
 }
 
+<<<<<<< HEAD
 static int __cpuinit numachip_wakeup_secondary(int phys_apicid, unsigned long start_rip)
+=======
+static int numachip_wakeup_secondary(int phys_apicid, unsigned long start_rip)
+>>>>>>> v3.18
 {
 	union numachip_csr_g3_ext_irq_gen int_gen;
 
@@ -217,13 +225,17 @@ static const struct apic apic_numachip __refconst = {
 	.disable_esr			= 0,
 	.dest_logical			= 0,
 	.check_apicid_used		= NULL,
+<<<<<<< HEAD
 	.check_apicid_present		= NULL,
+=======
+>>>>>>> v3.18
 
 	.vector_allocation_domain	= default_vector_allocation_domain,
 	.init_apic_ldr			= flat_init_apic_ldr,
 
 	.ioapic_phys_id_map		= NULL,
 	.setup_apic_routing		= NULL,
+<<<<<<< HEAD
 	.multi_timer_check		= NULL,
 	.cpu_present_to_apicid		= default_cpu_present_to_apicid,
 	.apicid_to_cpu_present		= NULL,
@@ -232,6 +244,12 @@ static const struct apic apic_numachip __refconst = {
 	.enable_apic_mode		= NULL,
 	.phys_pkg_id			= numachip_phys_pkg_id,
 	.mps_oem_check			= NULL,
+=======
+	.cpu_present_to_apicid		= default_cpu_present_to_apicid,
+	.apicid_to_cpu_present		= NULL,
+	.check_phys_apicid_present	= default_check_phys_apicid_present,
+	.phys_pkg_id			= numachip_phys_pkg_id,
+>>>>>>> v3.18
 
 	.get_apic_id			= get_apic_id,
 	.set_apic_id			= set_apic_id,
@@ -246,10 +264,14 @@ static const struct apic apic_numachip __refconst = {
 	.send_IPI_self			= numachip_send_IPI_self,
 
 	.wakeup_secondary_cpu		= numachip_wakeup_secondary,
+<<<<<<< HEAD
 	.trampoline_phys_low		= DEFAULT_TRAMPOLINE_PHYS_LOW,
 	.trampoline_phys_high		= DEFAULT_TRAMPOLINE_PHYS_HIGH,
 	.wait_for_init_deassert		= NULL,
 	.smp_callin_clear_local_apic	= NULL,
+=======
+	.wait_for_init_deassert		= false,
+>>>>>>> v3.18
 	.inquire_remote_apic		= NULL, /* REMRD not supported */
 
 	.read				= native_apic_mem_read,

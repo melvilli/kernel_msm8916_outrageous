@@ -1,9 +1,16 @@
+<<<<<<< HEAD
+=======
+#include <linux/ceph/ceph_debug.h>
+>>>>>>> v3.18
 #include <linux/in.h>
 
 #include "super.h"
 #include "mds_client.h"
+<<<<<<< HEAD
 #include <linux/ceph/ceph_debug.h>
 
+=======
+>>>>>>> v3.18
 #include "ioctl.h"
 
 
@@ -20,7 +27,11 @@ static long ceph_ioctl_get_layout(struct file *file, void __user *arg)
 	struct ceph_ioctl_layout l;
 	int err;
 
+<<<<<<< HEAD
 	err = ceph_do_getattr(file_inode(file), CEPH_STAT_CAP_LAYOUT);
+=======
+	err = ceph_do_getattr(file_inode(file), CEPH_STAT_CAP_LAYOUT, false);
+>>>>>>> v3.18
 	if (!err) {
 		l.stripe_unit = ceph_file_layout_su(ci->i_layout);
 		l.stripe_count = ceph_file_layout_stripe_count(ci->i_layout);
@@ -42,7 +53,11 @@ static long __validate_layout(struct ceph_mds_client *mdsc,
 	/* validate striping parameters */
 	if ((l->object_size & ~PAGE_MASK) ||
 	    (l->stripe_unit & ~PAGE_MASK) ||
+<<<<<<< HEAD
 	    (l->stripe_unit != 0 &&
+=======
+	    ((unsigned)l->stripe_unit != 0 &&
+>>>>>>> v3.18
 	     ((unsigned)l->object_size % (unsigned)l->stripe_unit)))
 		return -EINVAL;
 
@@ -64,7 +79,10 @@ static long __validate_layout(struct ceph_mds_client *mdsc,
 static long ceph_ioctl_set_layout(struct file *file, void __user *arg)
 {
 	struct inode *inode = file_inode(file);
+<<<<<<< HEAD
 	struct inode *parent_inode;
+=======
+>>>>>>> v3.18
 	struct ceph_mds_client *mdsc = ceph_sb_to_client(inode->i_sb)->mdsc;
 	struct ceph_mds_request *req;
 	struct ceph_ioctl_layout l;
@@ -76,7 +94,11 @@ static long ceph_ioctl_set_layout(struct file *file, void __user *arg)
 		return -EFAULT;
 
 	/* validate changed params against current layout */
+<<<<<<< HEAD
 	err = ceph_do_getattr(file_inode(file), CEPH_STAT_CAP_LAYOUT);
+=======
+	err = ceph_do_getattr(file_inode(file), CEPH_STAT_CAP_LAYOUT, false);
+>>>>>>> v3.18
 	if (err)
 		return err;
 
@@ -111,6 +133,11 @@ static long ceph_ioctl_set_layout(struct file *file, void __user *arg)
 		return PTR_ERR(req);
 	req->r_inode = inode;
 	ihold(inode);
+<<<<<<< HEAD
+=======
+	req->r_num_caps = 1;
+
+>>>>>>> v3.18
 	req->r_inode_drop = CEPH_CAP_FILE_SHARED | CEPH_CAP_FILE_EXCL;
 
 	req->r_args.setlayout.layout.fl_stripe_unit =
@@ -121,9 +148,13 @@ static long ceph_ioctl_set_layout(struct file *file, void __user *arg)
 		cpu_to_le32(l.object_size);
 	req->r_args.setlayout.layout.fl_pg_pool = cpu_to_le32(l.data_pool);
 
+<<<<<<< HEAD
 	parent_inode = ceph_get_dentry_parent_inode(file->f_dentry);
 	err = ceph_mdsc_do_request(mdsc, parent_inode, req);
 	iput(parent_inode);
+=======
+	err = ceph_mdsc_do_request(mdsc, NULL, req);
+>>>>>>> v3.18
 	ceph_mdsc_put_request(req);
 	return err;
 }
@@ -157,6 +188,10 @@ static long ceph_ioctl_set_layout_policy (struct file *file, void __user *arg)
 		return PTR_ERR(req);
 	req->r_inode = inode;
 	ihold(inode);
+<<<<<<< HEAD
+=======
+	req->r_num_caps = 1;
+>>>>>>> v3.18
 
 	req->r_args.setlayout.layout.fl_stripe_unit =
 			cpu_to_le32(l.stripe_unit);
@@ -183,6 +218,11 @@ static long ceph_ioctl_get_dataloc(struct file *file, void __user *arg)
 	struct ceph_inode_info *ci = ceph_inode(inode);
 	struct ceph_osd_client *osdc =
 		&ceph_sb_to_client(inode->i_sb)->client->osdc;
+<<<<<<< HEAD
+=======
+	struct ceph_object_locator oloc;
+	struct ceph_object_id oid;
+>>>>>>> v3.18
 	u64 len = 1, olen;
 	u64 tmp;
 	struct ceph_pg pgid;
@@ -211,8 +251,15 @@ static long ceph_ioctl_get_dataloc(struct file *file, void __user *arg)
 	snprintf(dl.object_name, sizeof(dl.object_name), "%llx.%08llx",
 		 ceph_ino(inode), dl.object_no);
 
+<<<<<<< HEAD
 	r = ceph_calc_ceph_pg(&pgid, dl.object_name, osdc->osdmap,
 				ceph_file_layout_pg_pool(ci->i_layout));
+=======
+	oloc.pool = ceph_file_layout_pg_pool(ci->i_layout);
+	ceph_oid_set_name(&oid, dl.object_name);
+
+	r = ceph_oloc_oid_to_pg(osdc->osdmap, &oloc, &oid, &pgid);
+>>>>>>> v3.18
 	if (r < 0) {
 		up_read(&osdc->map_sem);
 		return r;

@@ -10,7 +10,11 @@
 
 #include "numa_internal.h"
 
+<<<<<<< HEAD
 static int emu_nid_to_phys[MAX_NUMNODES] __cpuinitdata;
+=======
+static int emu_nid_to_phys[MAX_NUMNODES];
+>>>>>>> v3.18
 static char *emu_cmdline __initdata;
 
 void __init numa_emu_cmdline(char *str)
@@ -444,7 +448,11 @@ no_emu:
 }
 
 #ifndef CONFIG_DEBUG_PER_CPU_MAPS
+<<<<<<< HEAD
 void __cpuinit numa_add_cpu(int cpu)
+=======
+void numa_add_cpu(int cpu)
+>>>>>>> v3.18
 {
 	int physnid, nid;
 
@@ -462,7 +470,11 @@ void __cpuinit numa_add_cpu(int cpu)
 			cpumask_set_cpu(cpu, node_to_cpumask_map[nid]);
 }
 
+<<<<<<< HEAD
 void __cpuinit numa_remove_cpu(int cpu)
+=======
+void numa_remove_cpu(int cpu)
+>>>>>>> v3.18
 {
 	int i;
 
@@ -470,7 +482,11 @@ void __cpuinit numa_remove_cpu(int cpu)
 		cpumask_clear_cpu(cpu, node_to_cpumask_map[i]);
 }
 #else	/* !CONFIG_DEBUG_PER_CPU_MAPS */
+<<<<<<< HEAD
 static void __cpuinit numa_set_cpumask(int cpu, bool enable)
+=======
+static void numa_set_cpumask(int cpu, bool enable)
+>>>>>>> v3.18
 {
 	int nid, physnid;
 
@@ -490,12 +506,20 @@ static void __cpuinit numa_set_cpumask(int cpu, bool enable)
 	}
 }
 
+<<<<<<< HEAD
 void __cpuinit numa_add_cpu(int cpu)
+=======
+void numa_add_cpu(int cpu)
+>>>>>>> v3.18
 {
 	numa_set_cpumask(cpu, true);
 }
 
+<<<<<<< HEAD
 void __cpuinit numa_remove_cpu(int cpu)
+=======
+void numa_remove_cpu(int cpu)
+>>>>>>> v3.18
 {
 	numa_set_cpumask(cpu, false);
 }

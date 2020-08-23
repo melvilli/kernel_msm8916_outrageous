@@ -5,7 +5,11 @@
  *
  * GPL LICENSE SUMMARY
  *
+<<<<<<< HEAD
  * Copyright(c) 2008 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of version 2 of the GNU General Public License as
@@ -30,7 +34,11 @@
  *
  * BSD LICENSE
  *
+<<<<<<< HEAD
  * Copyright(c) 2005 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -75,6 +83,11 @@
 struct iwl_nvm_data *
 iwl_parse_nvm_data(struct device *dev, const struct iwl_cfg *cfg,
 		   const __le16 *nvm_hw, const __le16 *nvm_sw,
+<<<<<<< HEAD
 		   const __le16 *nvm_calib);
+=======
+		   const __le16 *nvm_calib, const __le16 *regulatory,
+		   const __le16 *mac_override, u8 tx_chains, u8 rx_chains);
+>>>>>>> v3.18
 
 #endif /* __iwl_nvm_parse_h__ */

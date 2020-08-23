@@ -122,7 +122,11 @@ static irqreturn_t ks8695_timer_interrupt(int irq, void *dev_id)
 
 static struct irqaction ks8695_timer_irq = {
 	.name		= "ks8695_tick",
+<<<<<<< HEAD
 	.flags		= IRQF_DISABLED | IRQF_TIMER,
+=======
+	.flags		= IRQF_TIMER,
+>>>>>>> v3.18
 	.handler	= ks8695_timer_interrupt,
 };
 

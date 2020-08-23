@@ -29,6 +29,12 @@ int alloc_xenballooned_pages(int nr_pages, struct page **pages,
 		bool highmem);
 void free_xenballooned_pages(int nr_pages, struct page **pages);
 
+<<<<<<< HEAD
+=======
+struct page *get_balloon_scratch_page(void);
+void put_balloon_scratch_page(void);
+
+>>>>>>> v3.18
 struct device;
 #ifdef CONFIG_XEN_SELFBALLOONING
 extern int register_xen_selfballooning(struct device *dev);

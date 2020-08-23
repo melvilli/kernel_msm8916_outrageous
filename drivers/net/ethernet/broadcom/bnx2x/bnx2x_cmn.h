@@ -6,7 +6,11 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation.
  *
+<<<<<<< HEAD
  * Maintained by: Eilon Greenstein <eilong@broadcom.com>
+=======
+ * Maintained by: Ariel Elior <ariel.elior@qlogic.com>
+>>>>>>> v3.18
  * Written by: Eliezer Tamir
  * Based on code from Michael Chan's bnx2 driver
  * UDP CSUM errata workaround by Arik Gendelman
@@ -21,16 +25,25 @@
 #include <linux/pci.h>
 #include <linux/netdevice.h>
 #include <linux/etherdevice.h>
+<<<<<<< HEAD
 
+=======
+#include <linux/irq.h>
+>>>>>>> v3.18
 
 #include "bnx2x.h"
 #include "bnx2x_sriov.h"
 
 /* This is used as a replacement for an MCP if it's not present */
+<<<<<<< HEAD
 extern int load_count[2][3]; /* per-path: 0-common, 1-port0, 2-port1 */
 
 extern int num_queues;
 extern int int_mode;
+=======
+extern int bnx2x_load_count[2][3]; /* per-path: 0-common, 1-port0, 2-port1 */
+extern int bnx2x_num_queues;
+>>>>>>> v3.18
 
 /************************ Macros ********************************/
 #define BNX2X_PCI_FREE(x, y, size) \
@@ -50,6 +63,7 @@ extern int int_mode;
 		} \
 	} while (0)
 
+<<<<<<< HEAD
 #define BNX2X_PCI_ALLOC(x, y, size)				\
 do {								\
 	x = dma_alloc_coherent(&bp->pdev->dev, size, y,		\
@@ -64,6 +78,28 @@ do {								\
 		if (x == NULL) \
 			goto alloc_mem_err; \
 	} while (0)
+=======
+#define BNX2X_PCI_ALLOC(y, size)					\
+({									\
+	void *x = dma_zalloc_coherent(&bp->pdev->dev, size, y, GFP_KERNEL); \
+	if (x)								\
+		DP(NETIF_MSG_HW,					\
+		   "BNX2X_PCI_ALLOC: Physical %Lx Virtual %p\n",	\
+		   (unsigned long long)(*y), x);			\
+	x;								\
+})
+#define BNX2X_PCI_FALLOC(y, size)					\
+({									\
+	void *x = dma_alloc_coherent(&bp->pdev->dev, size, y, GFP_KERNEL); \
+	if (x) {							\
+		memset(x, 0xff, size);					\
+		DP(NETIF_MSG_HW,					\
+		   "BNX2X_PCI_FALLOC: Physical %Lx Virtual %p\n",	\
+		   (unsigned long long)(*y), x);			\
+	}								\
+	x;								\
+})
+>>>>>>> v3.18
 
 /*********************** Interfaces ****************************
  *  Functions that need to be implemented by each driver version
@@ -95,9 +131,16 @@ void bnx2x_send_unload_done(struct bnx2x *bp, bool keep_link);
  * @rss_obj:		RSS object to use
  * @ind_table:		indirection table to configure
  * @config_hash:	re-configure RSS hash keys configuration
+<<<<<<< HEAD
  */
 int bnx2x_config_rss_pf(struct bnx2x *bp, struct bnx2x_rss_config_obj *rss_obj,
 			bool config_hash);
+=======
+ * @enable:		enabled or disabled configuration
+ */
+int bnx2x_rss(struct bnx2x *bp, struct bnx2x_rss_config_obj *rss_obj,
+	      bool config_hash, bool enable);
+>>>>>>> v3.18
 
 /**
  * bnx2x__init_func_obj - init function object
@@ -406,6 +449,7 @@ int bnx2x_set_eth_mac(struct bnx2x *bp, bool set);
  * If bp->state is OPEN, should be called with
  * netif_addr_lock_bh()
  */
+<<<<<<< HEAD
 void bnx2x_set_rx_mode(struct net_device *dev);
 
 /**
@@ -433,6 +477,9 @@ int bnx2x_set_q_rx_mode(struct bnx2x *bp, u8 cl_id,
 			unsigned long rx_accept_flags,
 			unsigned long tx_accept_flags,
 			unsigned long ramrod_flags);
+=======
+void bnx2x_set_rx_mode_inner(struct bnx2x *bp);
+>>>>>>> v3.18
 
 /* Parity errors related */
 void bnx2x_set_pf_load(struct bnx2x *bp);
@@ -494,9 +541,12 @@ void bnx2x_update_max_mf_config(struct bnx2x *bp, u32 value);
 /* Error handling */
 void bnx2x_fw_dump_lvl(struct bnx2x *bp, const char *lvl);
 
+<<<<<<< HEAD
 /* validate currect fw is loaded */
 bool bnx2x_test_firmware_version(struct bnx2x *bp, bool is_err);
 
+=======
+>>>>>>> v3.18
 /* dev_close main block */
 int bnx2x_nic_unload(struct bnx2x *bp, int unload_mode, bool keep_link);
 
@@ -515,7 +565,12 @@ int bnx2x_set_vf_mac(struct net_device *dev, int queue, u8 *mac);
 int bnx2x_set_vf_vlan(struct net_device *netdev, int vf, u16 vlan, u8 qos);
 
 /* select_queue callback */
+<<<<<<< HEAD
 u16 bnx2x_select_queue(struct net_device *dev, struct sk_buff *skb);
+=======
+u16 bnx2x_select_queue(struct net_device *dev, struct sk_buff *skb,
+		       void *accel_priv, select_queue_fallback_t fallback);
+>>>>>>> v3.18
 
 static inline void bnx2x_update_rx_prod(struct bnx2x *bp,
 					struct bnx2x_fastpath *fp,
@@ -555,9 +610,12 @@ int bnx2x_reload_if_running(struct net_device *dev);
 
 int bnx2x_change_mac_addr(struct net_device *dev, void *p);
 
+<<<<<<< HEAD
 /* NAPI poll Rx part */
 int bnx2x_rx_int(struct bnx2x_fastpath *fp, int budget);
 
+=======
+>>>>>>> v3.18
 /* NAPI poll Tx part */
 int bnx2x_tx_int(struct bnx2x *bp, struct bnx2x_fp_txdata *txdata);
 
@@ -568,6 +626,7 @@ int bnx2x_resume(struct pci_dev *pdev);
 /* Release IRQ vectors */
 void bnx2x_free_irq(struct bnx2x *bp);
 
+<<<<<<< HEAD
 void bnx2x_free_fp_mem_cnic(struct bnx2x *bp);
 void bnx2x_free_fp_mem(struct bnx2x *bp);
 int bnx2x_alloc_fp_mem_cnic(struct bnx2x *bp);
@@ -575,6 +634,11 @@ int bnx2x_alloc_fp_mem(struct bnx2x *bp);
 void bnx2x_init_rx_rings(struct bnx2x *bp);
 void bnx2x_init_rx_rings_cnic(struct bnx2x *bp);
 void bnx2x_free_skbs_cnic(struct bnx2x *bp);
+=======
+void bnx2x_free_fp_mem(struct bnx2x *bp);
+void bnx2x_init_rx_rings(struct bnx2x *bp);
+void bnx2x_init_rx_rings_cnic(struct bnx2x *bp);
+>>>>>>> v3.18
 void bnx2x_free_skbs(struct bnx2x *bp);
 void bnx2x_netif_stop(struct bnx2x *bp, int disable_hw);
 void bnx2x_netif_start(struct bnx2x *bp);
@@ -598,6 +662,7 @@ int bnx2x_enable_msix(struct bnx2x *bp);
 int bnx2x_enable_msi(struct bnx2x *bp);
 
 /**
+<<<<<<< HEAD
  * bnx2x_poll - NAPI callback
  *
  * @napi:	napi structure
@@ -605,6 +670,13 @@ int bnx2x_enable_msi(struct bnx2x *bp);
  *
  */
 int bnx2x_poll(struct napi_struct *napi, int budget);
+=======
+ * bnx2x_low_latency_recv - LL callback
+ *
+ * @napi:	napi structure
+ */
+int bnx2x_low_latency_recv(struct napi_struct *napi);
+>>>>>>> v3.18
 
 /**
  * bnx2x_alloc_mem_bp - allocate memories outsize main driver structure
@@ -800,6 +872,7 @@ static inline bool bnx2x_has_tx_work(struct bnx2x_fastpath *fp)
 	return false;
 }
 
+<<<<<<< HEAD
 static inline int bnx2x_has_rx_work(struct bnx2x_fastpath *fp)
 {
 	u16 rx_cons_sb;
@@ -810,6 +883,20 @@ static inline int bnx2x_has_rx_work(struct bnx2x_fastpath *fp)
 	if ((rx_cons_sb & MAX_RCQ_DESC_CNT) == MAX_RCQ_DESC_CNT)
 		rx_cons_sb++;
 	return (fp->rx_comp_cons != rx_cons_sb);
+=======
+#define BNX2X_IS_CQE_COMPLETED(cqe_fp) (cqe_fp->marker == 0x0)
+#define BNX2X_SEED_CQE(cqe_fp) (cqe_fp->marker = 0xFFFFFFFF)
+static inline int bnx2x_has_rx_work(struct bnx2x_fastpath *fp)
+{
+	u16 cons;
+	union eth_rx_cqe *cqe;
+	struct eth_fast_path_rx_cqe *cqe_fp;
+
+	cons = RCQ_BD(fp->rx_comp_cons);
+	cqe = &fp->rx_comp_ring[cons];
+	cqe_fp = &cqe->fast_path_cqe;
+	return BNX2X_IS_CQE_COMPLETED(cqe_fp);
+>>>>>>> v3.18
 }
 
 /**
@@ -843,6 +930,7 @@ static inline void bnx2x_free_rx_sge(struct bnx2x *bp,
 	sge->addr_lo = 0;
 }
 
+<<<<<<< HEAD
 static inline void bnx2x_add_all_napi_cnic(struct bnx2x *bp)
 {
 	int i;
@@ -863,20 +951,36 @@ static inline void bnx2x_add_all_napi(struct bnx2x *bp)
 			       bnx2x_poll, NAPI_POLL_WEIGHT);
 }
 
+=======
+>>>>>>> v3.18
 static inline void bnx2x_del_all_napi_cnic(struct bnx2x *bp)
 {
 	int i;
 
+<<<<<<< HEAD
 	for_each_rx_queue_cnic(bp, i)
 		netif_napi_del(&bnx2x_fp(bp, i, napi));
+=======
+	for_each_rx_queue_cnic(bp, i) {
+		napi_hash_del(&bnx2x_fp(bp, i, napi));
+		netif_napi_del(&bnx2x_fp(bp, i, napi));
+	}
+>>>>>>> v3.18
 }
 
 static inline void bnx2x_del_all_napi(struct bnx2x *bp)
 {
 	int i;
 
+<<<<<<< HEAD
 	for_each_eth_queue(bp, i)
 		netif_napi_del(&bnx2x_fp(bp, i, napi));
+=======
+	for_each_eth_queue(bp, i) {
+		napi_hash_del(&bnx2x_fp(bp, i, napi));
+		netif_napi_del(&bnx2x_fp(bp, i, napi));
+	}
+>>>>>>> v3.18
 }
 
 int bnx2x_set_int_mode(struct bnx2x *bp);
@@ -892,6 +996,7 @@ static inline void bnx2x_disable_msi(struct bnx2x *bp)
 	}
 }
 
+<<<<<<< HEAD
 static inline int bnx2x_calc_num_queues(struct bnx2x *bp)
 {
 	return  num_queues ?
@@ -900,6 +1005,8 @@ static inline int bnx2x_calc_num_queues(struct bnx2x *bp)
 		       BNX2X_MAX_QUEUES(bp));
 }
 
+=======
+>>>>>>> v3.18
 static inline void bnx2x_clear_sge_mask_next_elems(struct bnx2x_fastpath *fp)
 {
 	int i, j;
@@ -955,7 +1062,11 @@ static inline int func_by_vn(struct bnx2x *bp, int vn)
 
 static inline int bnx2x_config_rss_eth(struct bnx2x *bp, bool config_hash)
 {
+<<<<<<< HEAD
 	return bnx2x_config_rss_pf(bp, &bp->rss_conf_obj, config_hash);
+=======
+	return bnx2x_rss(bp, &bp->rss_conf_obj, config_hash, true);
+>>>>>>> v3.18
 }
 
 /**
@@ -986,8 +1097,20 @@ static inline int bnx2x_func_start(struct bnx2x *bp)
 	else /* CHIP_IS_E1X */
 		start_params->network_cos_mode = FW_WRR;
 
+<<<<<<< HEAD
 	start_params->gre_tunnel_mode = IPGRE_TUNNEL;
 	start_params->gre_tunnel_rss = GRE_INNER_HEADERS_RSS;
+=======
+	start_params->tunnel_mode	= TUNN_MODE_GRE;
+	start_params->gre_tunnel_type	= IPGRE_TUNNEL;
+	start_params->inner_gre_rss_en	= 1;
+
+	if (IS_MF_UFP(bp) && BNX2X_IS_MF_SD_PROTOCOL_FCOE(bp)) {
+		start_params->class_fail_ethtype = ETH_P_FIP;
+		start_params->class_fail = 1;
+		start_params->no_added_tags = 1;
+	}
+>>>>>>> v3.18
 
 	return bnx2x_func_state_change(bp, &func_params);
 }
@@ -1146,8 +1269,11 @@ static inline u8 bnx2x_fp_qzone_id(struct bnx2x_fastpath *fp)
 		return fp->cl_id;
 }
 
+<<<<<<< HEAD
 u32 bnx2x_rx_ustorm_prods_offset(struct bnx2x_fastpath *fp);
 
+=======
+>>>>>>> v3.18
 static inline void bnx2x_init_txdata(struct bnx2x *bp,
 				     struct bnx2x_fp_txdata *txdata, u32 cid,
 				     int txq_index, __le16 *tx_cons_sb,
@@ -1171,7 +1297,10 @@ static inline u8 bnx2x_cnic_eth_cl_id(struct bnx2x *bp, u8 cl_idx)
 
 static inline u8 bnx2x_cnic_fw_sb_id(struct bnx2x *bp)
 {
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 	/* the 'first' id is allocated for the cnic */
 	return bp->base_fw_ndsb;
 }
@@ -1181,6 +1310,7 @@ static inline u8 bnx2x_cnic_igu_sb_id(struct bnx2x *bp)
 	return bp->igu_base_sb;
 }
 
+<<<<<<< HEAD
 
 static inline void bnx2x_init_fcoe_fp(struct bnx2x *bp)
 {
@@ -1223,6 +1353,8 @@ static inline void bnx2x_init_fcoe_fp(struct bnx2x *bp)
 	   fp->igu_sb_id);
 }
 
+=======
+>>>>>>> v3.18
 static inline int bnx2x_clean_tx_queue(struct bnx2x *bp,
 				       struct bnx2x_fp_txdata *txdata)
 {
@@ -1334,8 +1466,13 @@ static inline bool bnx2x_mtu_allows_gro(int mtu)
 	int fpp = SGE_PAGE_SIZE / (mtu - ETH_MAX_TPA_HEADER_SIZE);
 
 	/*
+<<<<<<< HEAD
 	 * 1. number of frags should not grow above MAX_SKB_FRAGS
 	 * 2. frag must fit the page
+=======
+	 * 1. Number of frags should not grow above MAX_SKB_FRAGS
+	 * 2. Frag must fit the page
+>>>>>>> v3.18
 	 */
 	return mtu <= SGE_PAGE_SIZE && (U_ETH_SGL_SIZE * fpp) <= MAX_SKB_FRAGS;
 }
@@ -1396,6 +1533,7 @@ static inline void bnx2x_update_drv_flags(struct bnx2x *bp, u32 flags, u32 set)
 	}
 }
 
+<<<<<<< HEAD
 static inline bool bnx2x_is_valid_ether_addr(struct bnx2x *bp, u8 *addr)
 {
 	if (is_valid_ether_addr(addr) ||
@@ -1405,6 +1543,9 @@ static inline bool bnx2x_is_valid_ether_addr(struct bnx2x *bp, u8 *addr)
 
 	return false;
 }
+=======
+
+>>>>>>> v3.18
 
 /**
  * bnx2x_fill_fw_str - Fill buffer with FW version string
@@ -1419,4 +1560,10 @@ void bnx2x_fill_fw_str(struct bnx2x *bp, char *buf, size_t buf_len);
 int bnx2x_drain_tx_queues(struct bnx2x *bp);
 void bnx2x_squeeze_objects(struct bnx2x *bp);
 
+<<<<<<< HEAD
+=======
+void bnx2x_schedule_sp_rtnl(struct bnx2x*, enum sp_rtnl_flag,
+			    u32 verbose);
+
+>>>>>>> v3.18
 #endif /* BNX2X_CMN_H */

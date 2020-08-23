@@ -19,8 +19,14 @@ config PPC_PSERIES
 	select ZLIB_DEFLATE
 	select PPC_DOORBELL
 	select HAVE_CONTEXT_TRACKING
+<<<<<<< HEAD
 	select HOTPLUG if SMP
 	select HOTPLUG_CPU if SMP
+=======
+	select HOTPLUG_CPU if SMP
+	select ARCH_RANDOM
+	select PPC_DOORBELL
+>>>>>>> v3.18
 	default y
 
 config PPC_SPLPAR
@@ -33,6 +39,7 @@ config PPC_SPLPAR
 	  processors, that is, which share physical processors between
 	  two or more partitions.
 
+<<<<<<< HEAD
 config EEH
 	bool
 	depends on PPC_PSERIES && PCI
@@ -41,6 +48,11 @@ config EEH
 config PSERIES_MSI
        bool
        depends on PCI_MSI && EEH
+=======
+config PSERIES_MSI
+       bool
+       depends on PCI_MSI && PPC_PSERIES && EEH
+>>>>>>> v3.18
        default y
 
 config PSERIES_ENERGY
@@ -116,6 +128,21 @@ config CMM
 	  will be reused for other LPARs. The interface allows firmware to
 	  balance memory across many LPARs.
 
+<<<<<<< HEAD
+=======
+config HV_PERF_CTRS
+       bool "Hypervisor supplied PMU events (24x7 & GPCI)"
+       default y
+       depends on PERF_EVENTS && PPC_PSERIES
+       help
+	  Enable access to hypervisor supplied counters in perf. Currently,
+	  this enables code that uses the hcall GetPerfCounterInfo and 24x7
+	  interfaces to retrieve counters. GPCI exists on Power 6 and later
+	  systems. 24x7 is available on Power 8 systems.
+
+          If unsure, select Y.
+
+>>>>>>> v3.18
 config DTL
 	bool "Dispatch Trace Log"
 	depends on PPC_SPLPAR && DEBUG_FS
@@ -125,6 +152,7 @@ config DTL
 	  which are accessible through a debugfs file.
 
 	  Say N if you are unsure.
+<<<<<<< HEAD
 
 config PSERIES_IDLE
 	bool "Cpuidle driver for pSeries platforms"
@@ -134,3 +162,5 @@ config PSERIES_IDLE
 	help
 	  Select this option to enable processor idle state management
 	  through cpuidle subsystem.
+=======
+>>>>>>> v3.18

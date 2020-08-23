@@ -17,5 +17,10 @@ util/xyarray.c
 util/cgroup.c
 util/rblist.c
 util/strlist.c
+<<<<<<< HEAD
 util/sysfs.c
+=======
+../lib/api/fs/fs.c
+util/trace-event.c
+>>>>>>> v3.18
 ../../lib/rbtree.c

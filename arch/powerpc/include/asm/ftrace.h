@@ -61,6 +61,10 @@ struct dyn_arch_ftrace {
 #endif
 
 #if defined(CONFIG_FTRACE_SYSCALLS) && defined(CONFIG_PPC64) && !defined(__ASSEMBLY__)
+<<<<<<< HEAD
+=======
+#if !defined(_CALL_ELF) || _CALL_ELF != 2
+>>>>>>> v3.18
 #define ARCH_HAS_SYSCALL_MATCH_SYM_NAME
 static inline bool arch_syscall_match_sym_name(const char *sym, const char *name)
 {
@@ -72,6 +76,10 @@ static inline bool arch_syscall_match_sym_name(const char *sym, const char *name
 	 */
 	return !strcmp(sym + 4, name + 3);
 }
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 #endif /* CONFIG_FTRACE_SYSCALLS && CONFIG_PPC64 && !__ASSEMBLY__ */
 
 #endif /* _ASM_POWERPC_FTRACE */

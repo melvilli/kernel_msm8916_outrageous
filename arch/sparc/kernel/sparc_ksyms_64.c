@@ -7,7 +7,10 @@
 
 #include <linux/export.h>
 #include <linux/pci.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/bitops.h>
 
 #include <asm/cpudata.h>

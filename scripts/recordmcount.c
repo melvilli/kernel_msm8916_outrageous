@@ -33,6 +33,7 @@
 #include <string.h>
 #include <unistd.h>
 
+<<<<<<< HEAD
 /*
  * glibc synced up and added the metag number but didn't add the relocations.
  * Work around this in a crude manner for now.
@@ -44,13 +45,22 @@
 #define R_METAG_ADDR32                   2
 #endif
 #ifndef R_METAG_NONE
+=======
+#ifndef EM_METAG
+/* Remove this when these make it to the standard system elf.h. */
+#define EM_METAG      174
+#define R_METAG_ADDR32                   2
+>>>>>>> v3.18
 #define R_METAG_NONE                     3
 #endif
 
 #ifndef EM_AARCH64
 #define EM_AARCH64	183
+<<<<<<< HEAD
 #endif
 #ifndef R_AARCH64_ABS64
+=======
+>>>>>>> v3.18
 #define R_AARCH64_ABS64	257
 #endif
 
@@ -203,6 +213,7 @@ static void *mmap_file(char const *fname)
 		addr = umalloc(sb.st_size);
 		uread(fd_map, addr, sb.st_size);
 	}
+<<<<<<< HEAD
 	if (sb.st_nlink != 1) {
 		/* file is hard-linked, break the hard link */
 		close(fd_map);
@@ -217,6 +228,8 @@ static void *mmap_file(char const *fname)
 		}
 		uwrite(fd_map, addr, sb.st_size);
 	}
+=======
+>>>>>>> v3.18
 	return addr;
 }
 
@@ -411,10 +424,13 @@ do_file(char const *const fname)
 				"unrecognized ET_REL file: %s\n", fname);
 			fail_file();
 		}
+<<<<<<< HEAD
 		if (w2(ehdr->e_machine) == EM_S390) {
 			reltype = R_390_32;
 			mcount_adjust_32 = -4;
 		}
+=======
+>>>>>>> v3.18
 		if (w2(ehdr->e_machine) == EM_MIPS) {
 			reltype = R_MIPS_32;
 			is_fake_mcount32 = MIPS32_is_fake_mcount;
@@ -510,5 +526,8 @@ main(int argc, char *argv[])
 	}
 	return !!n_error;
 }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> v3.18

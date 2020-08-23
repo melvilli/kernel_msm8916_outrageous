@@ -30,7 +30,11 @@
 #include <asm/machdep.h>
 #include <asm/mpc52xx.h>
 
+<<<<<<< HEAD
 static struct of_device_id mpc5200_gpio_ids[] __initdata = {
+=======
+static const struct of_device_id mpc5200_gpio_ids[] __initconst = {
+>>>>>>> v3.18
 	{ .compatible = "fsl,mpc5200-gpio", },
 	{ .compatible = "mpc5200-gpio", },
 	{}

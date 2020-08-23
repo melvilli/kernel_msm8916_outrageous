@@ -15,11 +15,22 @@
 
 static int midibuf_message_length(unsigned char code)
 {
+<<<<<<< HEAD
 	if (code < 0x80)
 		return -1;
 	else if (code < 0xf0) {
 		static const int length[] = { 3, 3, 3, 3, 2, 2, 3 };
 		return length[(code >> 4) - 8];
+=======
+	int message_length;
+
+	if (code < 0x80)
+		message_length = -1;
+	else if (code < 0xf0) {
+		static const int length[] = { 3, 3, 3, 3, 2, 2, 3 };
+
+		message_length = length[(code >> 4) - 8];
+>>>>>>> v3.18
 	} else {
 		/*
 		   Note that according to the MIDI specification 0xf2 is
@@ -29,8 +40,15 @@ static int midibuf_message_length(unsigned char code)
 		static const int length[] = { -1, 2, -1, 2, -1, -1, 1, 1, 1, 1,
 			1, 1, 1, -1, 1, 1
 		};
+<<<<<<< HEAD
 		return length[code & 0x0f];
 	}
+=======
+		message_length = length[code & 0x0f];
+	}
+
+	return message_length;
+>>>>>>> v3.18
 }
 
 static int midibuf_is_empty(struct midi_buffer *this)

@@ -13,7 +13,10 @@
 #include <linux/list.h>
 #include <linux/string.h>
 #include <linux/device.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/nls.h>
 
 #include <linux/usb/ch9.h>

@@ -6,7 +6,11 @@
  *
  * Licensed under GPLv2 or later.
  */
+<<<<<<< HEAD
 /include/ "sama5d3xcm.dtsi"
+=======
+#include "sama5d3xcm.dtsi"
+>>>>>>> v3.18
 
 / {
 	compatible = "atmel,sama5d3xmb", "atmel,sama5d3xcm", "atmel,sama5d3", "atmel,sama5";
@@ -20,11 +24,20 @@
 				slot@0 {
 					reg = <0>;
 					bus-width = <4>;
+<<<<<<< HEAD
 					cd-gpios = <&pioD 17 0>;
+=======
+					cd-gpios = <&pioD 17 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 				};
 			};
 
 			spi0: spi@f0004000 {
+<<<<<<< HEAD
+=======
+				dmas = <0>, <0>;	/*  Do not use DMA for spi0 */
+
+>>>>>>> v3.18
 				m25p80@0 {
 					compatible = "atmel,at25df321a";
 					spi-max-frequency = <50000000>;
@@ -32,6 +45,13 @@
 				};
 			};
 
+<<<<<<< HEAD
+=======
+			ssc0: ssc@f0008000 {
+				atmel,clk-from-rk-pin;
+			};
+
+>>>>>>> v3.18
 			/*
 			 * i2c0 conflicts with ISI:
 			 * disable it to allow the use of ISI
@@ -41,10 +61,19 @@
 				wm8904: wm8904@1a {
 					compatible = "wm8904";
 					reg = <0x1a>;
+<<<<<<< HEAD
+=======
+					clocks = <&pck0>;
+					clock-names = "mclk";
+>>>>>>> v3.18
 				};
 			};
 
 			usart1: serial@f0020000 {
+<<<<<<< HEAD
+=======
+				dmas = <0>, <0>;	/*  Do not use DMA for usart1 */
+>>>>>>> v3.18
 				pinctrl-names = "default";
 				pinctrl-0 = <&pinctrl_usart1 &pinctrl_usart1_rts_cts>;
 				status = "okay";
@@ -62,7 +91,11 @@
 				slot@0 {
 					reg = <0>;
 					bus-width = <4>;
+<<<<<<< HEAD
 					cd-gpios = <&pioD 18 0>;
+=======
+					cd-gpios = <&pioD 18 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 				};
 			};
 
@@ -81,43 +114,82 @@
 
 			macb1: ethernet@f802c000 {
 				phy-mode = "rmii";
+<<<<<<< HEAD
+=======
+
+				#address-cells = <1>;
+				#size-cells = <0>;
+				phy0: ethernet-phy@1 {
+					interrupt-parent = <&pioE>;
+					interrupts = <30 IRQ_TYPE_EDGE_FALLING>;
+					reg = <1>;
+				};
+>>>>>>> v3.18
 			};
 
 			pinctrl@fffff200 {
 				board {
 					pinctrl_mmc0_cd: mmc0_cd {
 						atmel,pins =
+<<<<<<< HEAD
 							<3 17 0x0 0x5>; /* PD17 GPIO with pullup deglitch */
+=======
+							<AT91_PIOD 17 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP_DEGLITCH>; /* PD17 GPIO with pullup deglitch */
+>>>>>>> v3.18
 					};
 
 					pinctrl_mmc1_cd: mmc1_cd {
 						atmel,pins =
+<<<<<<< HEAD
 							<3 18 0x0 0x5>; /* PD18 GPIO with pullup deglitch */
+=======
+							<AT91_PIOD 18 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP_DEGLITCH>; /* PD18 GPIO with pullup deglitch */
+>>>>>>> v3.18
 					};
 
 					pinctrl_pck0_as_audio_mck: pck0_as_audio_mck {
 						atmel,pins =
+<<<<<<< HEAD
 							<3 30 0x2 0x0>;	/* PD30 periph B */
+=======
+							<AT91_PIOD 30 AT91_PERIPH_B AT91_PINCTRL_NONE>;	/* PD30 periph B */
+>>>>>>> v3.18
 					};
 
 					pinctrl_isi_reset: isi_reset-0 {
 						atmel,pins =
+<<<<<<< HEAD
 							<4 24 0x0 0x0>;   /* PE24 gpio */
+=======
+							<AT91_PIOE 24 AT91_PERIPH_GPIO AT91_PINCTRL_NONE>;   /* PE24 gpio */
+>>>>>>> v3.18
 					};
 
 					pinctrl_isi_power: isi_power-0 {
 						atmel,pins =
+<<<<<<< HEAD
 							<4 29 0x0 0x0>; /* PE29 gpio */
+=======
+							<AT91_PIOE 29 AT91_PERIPH_GPIO AT91_PINCTRL_NONE>; /* PE29 gpio */
+>>>>>>> v3.18
 					};
 
 					pinctrl_usba_vbus: usba_vbus {
 						atmel,pins =
+<<<<<<< HEAD
 							<3 29 0x0 0x4>; /* PD29 GPIO with deglitch */
+=======
+							<AT91_PIOD 29 AT91_PERIPH_GPIO AT91_PINCTRL_DEGLITCH>; /* PD29 GPIO with deglitch */
+>>>>>>> v3.18
 					};
 				};
 			};
 
 			dbgu: serial@ffffee00 {
+<<<<<<< HEAD
+=======
+				dmas = <0>, <0>;	/*  Do not use DMA for dbgu */
+>>>>>>> v3.18
 				status = "okay";
 			};
 
@@ -127,7 +199,11 @@
 		};
 
 		usb0: gadget@00500000 {
+<<<<<<< HEAD
 			atmel,vbus-gpio = <&pioD 29 0>;
+=======
+			atmel,vbus-gpio = <&pioD 29 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 			pinctrl-names = "default";
 			pinctrl-0 = <&pinctrl_usba_vbus>;
 			status = "okay";
@@ -135,9 +211,15 @@
 
 		usb1: ohci@00600000 {
 			num-ports = <3>;
+<<<<<<< HEAD
 			atmel,vbus-gpio = <&pioD 25 0
 					   &pioD 26 1
 					   &pioD 27 1
+=======
+			atmel,vbus-gpio = <&pioD 25 GPIO_ACTIVE_HIGH
+					   &pioD 26 GPIO_ACTIVE_LOW
+					   &pioD 27 GPIO_ACTIVE_LOW
+>>>>>>> v3.18
 					  >;
 			status = "okay";
 		};
@@ -148,7 +230,11 @@
 	};
 
 	sound {
+<<<<<<< HEAD
 		compatible = "atmel,sama5d3ek-wm8904";
+=======
+		compatible = "atmel,asoc-wm8904";
+>>>>>>> v3.18
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_pck0_as_audio_mck>;
 
@@ -158,9 +244,18 @@
 			"Headphone Jack", "HPOUTR",
 			"IN2L", "Line In Jack",
 			"IN2R", "Line In Jack",
+<<<<<<< HEAD
+=======
+			"MICBIAS", "IN1L",
+>>>>>>> v3.18
 			"IN1L", "Mic";
 
 		atmel,ssc-controller = <&ssc0>;
 		atmel,audio-codec = <&wm8904>;
+<<<<<<< HEAD
+=======
+
+		status = "disabled";
+>>>>>>> v3.18
 	};
 };

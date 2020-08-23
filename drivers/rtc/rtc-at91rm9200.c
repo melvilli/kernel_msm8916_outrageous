@@ -31,8 +31,12 @@
 #include <linux/io.h>
 #include <linux/of.h>
 #include <linux/of_device.h>
+<<<<<<< HEAD
 
 #include <asm/uaccess.h>
+=======
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 
 #include "rtc-at91rm9200.h"
 
@@ -386,7 +390,12 @@ static int __init at91_rtc_probe(struct platform_device *pdev)
 		return -ENXIO;
 	}
 
+<<<<<<< HEAD
 	at91_rtc_regs = ioremap(regs->start, resource_size(regs));
+=======
+	at91_rtc_regs = devm_ioremap(&pdev->dev, regs->start,
+				     resource_size(regs));
+>>>>>>> v3.18
 	if (!at91_rtc_regs) {
 		dev_err(&pdev->dev, "failed to map registers, aborting.\n");
 		return -ENOMEM;
@@ -400,12 +409,20 @@ static int __init at91_rtc_probe(struct platform_device *pdev)
 					AT91_RTC_SECEV | AT91_RTC_TIMEV |
 					AT91_RTC_CALEV);
 
+<<<<<<< HEAD
 	ret = request_irq(irq, at91_rtc_interrupt,
+=======
+	ret = devm_request_irq(&pdev->dev, irq, at91_rtc_interrupt,
+>>>>>>> v3.18
 				IRQF_SHARED,
 				"at91_rtc", pdev);
 	if (ret) {
 		dev_err(&pdev->dev, "IRQ %d already in use.\n", irq);
+<<<<<<< HEAD
 		goto err_unmap;
+=======
+		return ret;
+>>>>>>> v3.18
 	}
 
 	/* cpu init code should really have flagged this device as
@@ -414,12 +431,19 @@ static int __init at91_rtc_probe(struct platform_device *pdev)
 	if (!device_can_wakeup(&pdev->dev))
 		device_init_wakeup(&pdev->dev, 1);
 
+<<<<<<< HEAD
 	rtc = rtc_device_register(pdev->name, &pdev->dev,
 				&at91_rtc_ops, THIS_MODULE);
 	if (IS_ERR(rtc)) {
 		ret = PTR_ERR(rtc);
 		goto err_free_irq;
 	}
+=======
+	rtc = devm_rtc_device_register(&pdev->dev, pdev->name,
+				&at91_rtc_ops, THIS_MODULE);
+	if (IS_ERR(rtc))
+		return PTR_ERR(rtc);
+>>>>>>> v3.18
 	platform_set_drvdata(pdev, rtc);
 
 	/* enable SECEV interrupt in order to initialize at91_rtc_upd_rdy
@@ -429,6 +453,7 @@ static int __init at91_rtc_probe(struct platform_device *pdev)
 
 	dev_info(&pdev->dev, "AT91 Real Time Clock driver.\n");
 	return 0;
+<<<<<<< HEAD
 
 err_free_irq:
 	free_irq(irq, pdev);
@@ -436,6 +461,8 @@ err_unmap:
 	iounmap(at91_rtc_regs);
 
 	return ret;
+=======
+>>>>>>> v3.18
 }
 
 /*
@@ -443,21 +470,38 @@ err_unmap:
  */
 static int __exit at91_rtc_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct rtc_device *rtc = platform_get_drvdata(pdev);
 
+=======
+>>>>>>> v3.18
 	/* Disable all interrupts */
 	at91_rtc_write_idr(AT91_RTC_ACKUPD | AT91_RTC_ALARM |
 					AT91_RTC_SECEV | AT91_RTC_TIMEV |
 					AT91_RTC_CALEV);
+<<<<<<< HEAD
 	free_irq(irq, pdev);
 
 	rtc_device_unregister(rtc);
 	iounmap(at91_rtc_regs);
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+static void at91_rtc_shutdown(struct platform_device *pdev)
+{
+	/* Disable all interrupts */
+	at91_rtc_write(AT91_RTC_IDR, AT91_RTC_ACKUPD | AT91_RTC_ALARM |
+					AT91_RTC_SECEV | AT91_RTC_TIMEV |
+					AT91_RTC_CALEV);
+}
+
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 
 /* AT91RM9200 RTC Power management control */
@@ -496,6 +540,10 @@ static SIMPLE_DEV_PM_OPS(at91_rtc_pm_ops, at91_rtc_suspend, at91_rtc_resume);
 
 static struct platform_driver at91_rtc_driver = {
 	.remove		= __exit_p(at91_rtc_remove),
+<<<<<<< HEAD
+=======
+	.shutdown	= at91_rtc_shutdown,
+>>>>>>> v3.18
 	.driver		= {
 		.name	= "at91_rtc",
 		.owner	= THIS_MODULE,

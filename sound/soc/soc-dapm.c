@@ -47,6 +47,7 @@
 
 #define DAPM_UPDATE_STAT(widget, val) widget->dapm->card->dapm_stats.val++;
 
+<<<<<<< HEAD
 /* dapm power sequences - make this per codec in the future */
 static int dapm_up_seq[] = {
 	[snd_soc_dapm_pre] = 0,
@@ -73,10 +74,48 @@ static int dapm_up_seq[] = {
 	[snd_soc_dapm_spk] = 10,
 	[snd_soc_dapm_line] = 10,
 	[snd_soc_dapm_post] = 11,
+=======
+static int snd_soc_dapm_add_path(struct snd_soc_dapm_context *dapm,
+	struct snd_soc_dapm_widget *wsource, struct snd_soc_dapm_widget *wsink,
+	const char *control,
+	int (*connected)(struct snd_soc_dapm_widget *source,
+			 struct snd_soc_dapm_widget *sink));
+static struct snd_soc_dapm_widget *
+snd_soc_dapm_new_control(struct snd_soc_dapm_context *dapm,
+			 const struct snd_soc_dapm_widget *widget);
+
+/* dapm power sequences - make this per codec in the future */
+static int dapm_up_seq[] = {
+	[snd_soc_dapm_pre] = 0,
+	[snd_soc_dapm_regulator_supply] = 1,
+	[snd_soc_dapm_clock_supply] = 1,
+	[snd_soc_dapm_supply] = 2,
+	[snd_soc_dapm_micbias] = 3,
+	[snd_soc_dapm_dai_link] = 2,
+	[snd_soc_dapm_dai_in] = 4,
+	[snd_soc_dapm_dai_out] = 4,
+	[snd_soc_dapm_aif_in] = 4,
+	[snd_soc_dapm_aif_out] = 4,
+	[snd_soc_dapm_mic] = 5,
+	[snd_soc_dapm_mux] = 6,
+	[snd_soc_dapm_dac] = 7,
+	[snd_soc_dapm_switch] = 8,
+	[snd_soc_dapm_mixer] = 8,
+	[snd_soc_dapm_mixer_named_ctl] = 8,
+	[snd_soc_dapm_pga] = 9,
+	[snd_soc_dapm_adc] = 10,
+	[snd_soc_dapm_out_drv] = 11,
+	[snd_soc_dapm_hp] = 11,
+	[snd_soc_dapm_spk] = 11,
+	[snd_soc_dapm_line] = 11,
+	[snd_soc_dapm_kcontrol] = 12,
+	[snd_soc_dapm_post] = 13,
+>>>>>>> v3.18
 };
 
 static int dapm_down_seq[] = {
 	[snd_soc_dapm_pre] = 0,
+<<<<<<< HEAD
 	[snd_soc_dapm_aif_in] = 1,
 	[snd_soc_dapm_aif_out] = 1,
 	[snd_soc_dapm_adc] = 5,
@@ -85,12 +124,23 @@ static int dapm_down_seq[] = {
 	[snd_soc_dapm_line] = 2,
 	[snd_soc_dapm_out_drv] = 2,
 	[snd_soc_dapm_pga] = 4,
+=======
+	[snd_soc_dapm_kcontrol] = 1,
+	[snd_soc_dapm_adc] = 2,
+	[snd_soc_dapm_hp] = 3,
+	[snd_soc_dapm_spk] = 3,
+	[snd_soc_dapm_line] = 3,
+	[snd_soc_dapm_out_drv] = 3,
+	[snd_soc_dapm_pga] = 4,
+	[snd_soc_dapm_switch] = 5,
+>>>>>>> v3.18
 	[snd_soc_dapm_mixer_named_ctl] = 5,
 	[snd_soc_dapm_mixer] = 5,
 	[snd_soc_dapm_dac] = 6,
 	[snd_soc_dapm_mic] = 7,
 	[snd_soc_dapm_micbias] = 8,
 	[snd_soc_dapm_mux] = 9,
+<<<<<<< HEAD
 	[snd_soc_dapm_virt_mux] = 9,
 	[snd_soc_dapm_value_mux] = 9,
 	[snd_soc_dapm_dai_in] = 10,
@@ -102,6 +152,25 @@ static int dapm_down_seq[] = {
 	[snd_soc_dapm_post] = 13,
 };
 
+=======
+	[snd_soc_dapm_aif_in] = 10,
+	[snd_soc_dapm_aif_out] = 10,
+	[snd_soc_dapm_dai_in] = 10,
+	[snd_soc_dapm_dai_out] = 10,
+	[snd_soc_dapm_dai_link] = 11,
+	[snd_soc_dapm_supply] = 12,
+	[snd_soc_dapm_clock_supply] = 13,
+	[snd_soc_dapm_regulator_supply] = 13,
+	[snd_soc_dapm_post] = 14,
+};
+
+static void dapm_assert_locked(struct snd_soc_dapm_context *dapm)
+{
+	if (dapm->card && dapm->card->instantiated)
+		lockdep_assert_held(&dapm->card->dapm_mutex);
+}
+
+>>>>>>> v3.18
 static void pop_wait(u32 pop_time)
 {
 	if (pop_time)
@@ -133,15 +202,25 @@ static bool dapm_dirty_widget(struct snd_soc_dapm_widget *w)
 	return !list_empty(&w->dirty);
 }
 
+<<<<<<< HEAD
 void dapm_mark_dirty(struct snd_soc_dapm_widget *w, const char *reason)
 {
+=======
+static void dapm_mark_dirty(struct snd_soc_dapm_widget *w, const char *reason)
+{
+	dapm_assert_locked(w->dapm);
+
+>>>>>>> v3.18
 	if (!dapm_dirty_widget(w)) {
 		dev_vdbg(w->dapm->dev, "Marking %s dirty due to %s\n",
 			 w->name, reason);
 		list_add_tail(&w->dirty, &w->dapm->card->dapm_dirty);
 	}
 }
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(dapm_mark_dirty);
+=======
+>>>>>>> v3.18
 
 void dapm_mark_io_dirty(struct snd_soc_dapm_context *dapm)
 {
@@ -151,8 +230,11 @@ void dapm_mark_io_dirty(struct snd_soc_dapm_context *dapm)
 	mutex_lock(&card->dapm_mutex);
 
 	list_for_each_entry(w, &card->widgets, list) {
+<<<<<<< HEAD
 		if (w->ignore_suspend)
 			continue;
+=======
+>>>>>>> v3.18
 		switch (w->id) {
 		case snd_soc_dapm_input:
 		case snd_soc_dapm_output:
@@ -174,6 +256,7 @@ static inline struct snd_soc_dapm_widget *dapm_cnew_widget(
 	return kmemdup(_widget, sizeof(*_widget), GFP_KERNEL);
 }
 
+<<<<<<< HEAD
 /* get snd_card from DAPM context */
 static inline struct snd_card *dapm_get_snd_card(
 	struct snd_soc_dapm_context *dapm)
@@ -203,20 +286,218 @@ static inline struct snd_soc_card *dapm_get_soc_card(
 	/* unreachable */
 	return NULL;
 }
+=======
+struct dapm_kcontrol_data {
+	unsigned int value;
+	struct snd_soc_dapm_widget *widget;
+	struct list_head paths;
+	struct snd_soc_dapm_widget_list *wlist;
+};
+
+static int dapm_kcontrol_data_alloc(struct snd_soc_dapm_widget *widget,
+	struct snd_kcontrol *kcontrol)
+{
+	struct dapm_kcontrol_data *data;
+	struct soc_mixer_control *mc;
+
+	data = kzalloc(sizeof(*data), GFP_KERNEL);
+	if (!data) {
+		dev_err(widget->dapm->dev,
+				"ASoC: can't allocate kcontrol data for %s\n",
+				widget->name);
+		return -ENOMEM;
+	}
+
+	INIT_LIST_HEAD(&data->paths);
+
+	switch (widget->id) {
+	case snd_soc_dapm_switch:
+	case snd_soc_dapm_mixer:
+	case snd_soc_dapm_mixer_named_ctl:
+		mc = (struct soc_mixer_control *)kcontrol->private_value;
+
+		if (mc->autodisable) {
+			struct snd_soc_dapm_widget template;
+
+			memset(&template, 0, sizeof(template));
+			template.reg = mc->reg;
+			template.mask = (1 << fls(mc->max)) - 1;
+			template.shift = mc->shift;
+			if (mc->invert)
+				template.off_val = mc->max;
+			else
+				template.off_val = 0;
+			template.on_val = template.off_val;
+			template.id = snd_soc_dapm_kcontrol;
+			template.name = kcontrol->id.name;
+
+			data->value = template.on_val;
+
+			data->widget = snd_soc_dapm_new_control(widget->dapm,
+				&template);
+			if (!data->widget) {
+				kfree(data);
+				return -ENOMEM;
+			}
+		}
+		break;
+	default:
+		break;
+	}
+
+	kcontrol->private_data = data;
+
+	return 0;
+}
+
+static void dapm_kcontrol_free(struct snd_kcontrol *kctl)
+{
+	struct dapm_kcontrol_data *data = snd_kcontrol_chip(kctl);
+	kfree(data->wlist);
+	kfree(data);
+}
+
+static struct snd_soc_dapm_widget_list *dapm_kcontrol_get_wlist(
+	const struct snd_kcontrol *kcontrol)
+{
+	struct dapm_kcontrol_data *data = snd_kcontrol_chip(kcontrol);
+
+	return data->wlist;
+}
+
+static int dapm_kcontrol_add_widget(struct snd_kcontrol *kcontrol,
+	struct snd_soc_dapm_widget *widget)
+{
+	struct dapm_kcontrol_data *data = snd_kcontrol_chip(kcontrol);
+	struct snd_soc_dapm_widget_list *new_wlist;
+	unsigned int n;
+
+	if (data->wlist)
+		n = data->wlist->num_widgets + 1;
+	else
+		n = 1;
+
+	new_wlist = krealloc(data->wlist,
+			sizeof(*new_wlist) + sizeof(widget) * n, GFP_KERNEL);
+	if (!new_wlist)
+		return -ENOMEM;
+
+	new_wlist->widgets[n - 1] = widget;
+	new_wlist->num_widgets = n;
+
+	data->wlist = new_wlist;
+
+	return 0;
+}
+
+static void dapm_kcontrol_add_path(const struct snd_kcontrol *kcontrol,
+	struct snd_soc_dapm_path *path)
+{
+	struct dapm_kcontrol_data *data = snd_kcontrol_chip(kcontrol);
+
+	list_add_tail(&path->list_kcontrol, &data->paths);
+
+	if (data->widget) {
+		snd_soc_dapm_add_path(data->widget->dapm, data->widget,
+		    path->source, NULL, NULL);
+	}
+}
+
+static bool dapm_kcontrol_is_powered(const struct snd_kcontrol *kcontrol)
+{
+	struct dapm_kcontrol_data *data = snd_kcontrol_chip(kcontrol);
+
+	if (!data->widget)
+		return true;
+
+	return data->widget->power;
+}
+
+static struct list_head *dapm_kcontrol_get_path_list(
+	const struct snd_kcontrol *kcontrol)
+{
+	struct dapm_kcontrol_data *data = snd_kcontrol_chip(kcontrol);
+
+	return &data->paths;
+}
+
+#define dapm_kcontrol_for_each_path(path, kcontrol) \
+	list_for_each_entry(path, dapm_kcontrol_get_path_list(kcontrol), \
+		list_kcontrol)
+
+unsigned int dapm_kcontrol_get_value(const struct snd_kcontrol *kcontrol)
+{
+	struct dapm_kcontrol_data *data = snd_kcontrol_chip(kcontrol);
+
+	return data->value;
+}
+EXPORT_SYMBOL_GPL(dapm_kcontrol_get_value);
+
+static bool dapm_kcontrol_set_value(const struct snd_kcontrol *kcontrol,
+	unsigned int value)
+{
+	struct dapm_kcontrol_data *data = snd_kcontrol_chip(kcontrol);
+
+	if (data->value == value)
+		return false;
+
+	if (data->widget)
+		data->widget->on_val = value;
+
+	data->value = value;
+
+	return true;
+}
+
+/**
+ * snd_soc_dapm_kcontrol_dapm() - Returns the dapm context associated to a
+ *  kcontrol
+ * @kcontrol: The kcontrol
+ *
+ * Note: This function must only be used on kcontrols that are known to have
+ * been registered for a CODEC. Otherwise the behaviour is undefined.
+ */
+struct snd_soc_dapm_context *snd_soc_dapm_kcontrol_dapm(
+	struct snd_kcontrol *kcontrol)
+{
+	return dapm_kcontrol_get_wlist(kcontrol)->widgets[0]->dapm;
+}
+EXPORT_SYMBOL_GPL(snd_soc_dapm_kcontrol_dapm);
+
+/**
+ * snd_soc_dapm_kcontrol_codec() - Returns the codec associated to a kcontrol
+ * @kcontrol: The kcontrol
+ */
+struct snd_soc_codec *snd_soc_dapm_kcontrol_codec(struct snd_kcontrol *kcontrol)
+{
+	return snd_soc_dapm_to_codec(snd_soc_dapm_kcontrol_dapm(kcontrol));
+}
+EXPORT_SYMBOL_GPL(snd_soc_dapm_kcontrol_codec);
+>>>>>>> v3.18
 
 static void dapm_reset(struct snd_soc_card *card)
 {
 	struct snd_soc_dapm_widget *w;
 
+<<<<<<< HEAD
 	memset(&card->dapm_stats, 0, sizeof(card->dapm_stats));
 
 	list_for_each_entry(w, &card->widgets, list) {
+=======
+	lockdep_assert_held(&card->dapm_mutex);
+
+	memset(&card->dapm_stats, 0, sizeof(card->dapm_stats));
+
+	list_for_each_entry(w, &card->widgets, list) {
+		w->new_power = w->power;
+>>>>>>> v3.18
 		w->power_checked = false;
 		w->inputs = -1;
 		w->outputs = -1;
 	}
 }
 
+<<<<<<< HEAD
 static int soc_widget_read(struct snd_soc_dapm_widget *w, int reg)
 {
 	if (w->codec)
@@ -293,6 +574,44 @@ static int soc_widget_update_bits_locked(struct snd_soc_dapm_widget *w,
 	}
 
 	return change;
+=======
+static const char *soc_dapm_prefix(struct snd_soc_dapm_context *dapm)
+{
+	if (!dapm->component)
+		return NULL;
+	return dapm->component->name_prefix;
+}
+
+static int soc_dapm_read(struct snd_soc_dapm_context *dapm, int reg,
+	unsigned int *value)
+{
+	if (!dapm->component)
+		return -EIO;
+	return snd_soc_component_read(dapm->component, reg, value);
+}
+
+static int soc_dapm_update_bits(struct snd_soc_dapm_context *dapm,
+	int reg, unsigned int mask, unsigned int value)
+{
+	if (!dapm->component)
+		return -EIO;
+	return snd_soc_component_update_bits_async(dapm->component, reg,
+		mask, value);
+}
+
+static int soc_dapm_test_bits(struct snd_soc_dapm_context *dapm,
+	int reg, unsigned int mask, unsigned int value)
+{
+	if (!dapm->component)
+		return -EIO;
+	return snd_soc_component_test_bits(dapm->component, reg, mask, value);
+}
+
+static void soc_dapm_async_complete(struct snd_soc_dapm_context *dapm)
+{
+	if (dapm->component)
+		snd_soc_component_async_complete(dapm->component);
+>>>>>>> v3.18
 }
 
 /**
@@ -317,6 +636,7 @@ static int snd_soc_dapm_set_bias_level(struct snd_soc_dapm_context *dapm,
 	if (ret != 0)
 		goto out;
 
+<<<<<<< HEAD
 	if (dapm->codec) {
 		if (dapm->codec->driver->set_bias_level)
 			ret = dapm->codec->driver->set_bias_level(dapm->codec,
@@ -326,6 +646,12 @@ static int snd_soc_dapm_set_bias_level(struct snd_soc_dapm_context *dapm,
 	} else if (!card || dapm != &card->dapm) {
 		dapm->bias_level = level;
 	}
+=======
+	if (dapm->set_bias_level)
+		ret = dapm->set_bias_level(dapm, level);
+	else if (!card || dapm != &card->dapm)
+		dapm->bias_level = level;
+>>>>>>> v3.18
 
 	if (ret != 0)
 		goto out;
@@ -338,6 +664,7 @@ out:
 	return ret;
 }
 
+<<<<<<< HEAD
 /* set up initial codec paths */
 static void dapm_set_path_status(struct snd_soc_dapm_widget *w,
 	struct snd_soc_dapm_path *p, int i)
@@ -386,12 +713,30 @@ static void dapm_set_path_status(struct snd_soc_dapm_widget *w,
 			w->kcontrol_news[i].private_value;
 
 		p->connect = 0;
+=======
+/* connect mux widget to its interconnecting audio paths */
+static int dapm_connect_mux(struct snd_soc_dapm_context *dapm,
+	struct snd_soc_dapm_widget *src, struct snd_soc_dapm_widget *dest,
+	struct snd_soc_dapm_path *path, const char *control_name,
+	const struct snd_kcontrol_new *kcontrol)
+{
+	struct soc_enum *e = (struct soc_enum *)kcontrol->private_value;
+	unsigned int val, item;
+	int i;
+
+	if (e->reg != SND_SOC_NOPM) {
+		soc_dapm_read(dapm, e->reg, &val);
+		val = (val >> e->shift_l) & e->mask;
+		item = snd_soc_enum_val_to_item(e, val);
+	} else {
+>>>>>>> v3.18
 		/* since a virtual mux has no backing registers to
 		 * decide which path to connect, it will try to match
 		 * with the first enumeration.  This is to ensure
 		 * that the default mux choice (the first) will be
 		 * correctly powered up during initialization.
 		 */
+<<<<<<< HEAD
 		if (!strcmp(p->name, e->texts[0]))
 			p->connect = 1;
 	}
@@ -457,12 +802,25 @@ static int dapm_connect_mux(struct snd_soc_dapm_context *dapm,
 	int i;
 
 	for (i = 0; i < e->max; i++) {
+=======
+		item = 0;
+	}
+
+	for (i = 0; i < e->items; i++) {
+>>>>>>> v3.18
 		if (!(strcmp(control_name, e->texts[i]))) {
 			list_add(&path->list, &dapm->card->paths);
 			list_add(&path->list_sink, &dest->sources);
 			list_add(&path->list_source, &src->sinks);
 			path->name = (char*)e->texts[i];
+<<<<<<< HEAD
 			dapm_set_path_status(dest, path, 0);
+=======
+			if (i == item)
+				path->connect = 1;
+			else
+				path->connect = 0;
+>>>>>>> v3.18
 			return 0;
 		}
 	}
@@ -470,6 +828,33 @@ static int dapm_connect_mux(struct snd_soc_dapm_context *dapm,
 	return -ENODEV;
 }
 
+<<<<<<< HEAD
+=======
+/* set up initial codec paths */
+static void dapm_set_mixer_path_status(struct snd_soc_dapm_widget *w,
+	struct snd_soc_dapm_path *p, int i)
+{
+	struct soc_mixer_control *mc = (struct soc_mixer_control *)
+		w->kcontrol_news[i].private_value;
+	unsigned int reg = mc->reg;
+	unsigned int shift = mc->shift;
+	unsigned int max = mc->max;
+	unsigned int mask = (1 << fls(max)) - 1;
+	unsigned int invert = mc->invert;
+	unsigned int val;
+
+	if (reg != SND_SOC_NOPM) {
+		soc_dapm_read(w->dapm, reg, &val);
+		val = (val >> shift) & mask;
+		if (invert)
+			val = max - val;
+		p->connect = !!val;
+	} else {
+		p->connect = 0;
+	}
+}
+
+>>>>>>> v3.18
 /* connect mixer widget to its interconnecting audio paths */
 static int dapm_connect_mixer(struct snd_soc_dapm_context *dapm,
 	struct snd_soc_dapm_widget *src, struct snd_soc_dapm_widget *dest,
@@ -484,7 +869,11 @@ static int dapm_connect_mixer(struct snd_soc_dapm_context *dapm,
 			list_add(&path->list_sink, &dest->sources);
 			list_add(&path->list_source, &src->sinks);
 			path->name = dest->kcontrol_news[i].name;
+<<<<<<< HEAD
 			dapm_set_path_status(dest, path, i);
+=======
+			dapm_set_mixer_path_status(dest, path, i);
+>>>>>>> v3.18
 			return 0;
 		}
 	}
@@ -521,7 +910,11 @@ static int dapm_is_shared_kcontrol(struct snd_soc_dapm_context *dapm,
  * create it. Either way, add the widget into the control's widget list
  */
 static int dapm_create_or_share_mixmux_kcontrol(struct snd_soc_dapm_widget *w,
+<<<<<<< HEAD
 	int kci, struct snd_soc_dapm_path *path)
+=======
+	int kci)
+>>>>>>> v3.18
 {
 	struct snd_soc_dapm_context *dapm = w->dapm;
 	struct snd_card *card = dapm->card->snd_card;
@@ -529,6 +922,7 @@ static int dapm_create_or_share_mixmux_kcontrol(struct snd_soc_dapm_widget *w,
 	size_t prefix_len;
 	int shared;
 	struct snd_kcontrol *kcontrol;
+<<<<<<< HEAD
 	struct snd_soc_dapm_widget_list *wlist;
 	int wlistentries;
 	size_t wlistsize;
@@ -543,6 +937,14 @@ static int dapm_create_or_share_mixmux_kcontrol(struct snd_soc_dapm_widget *w,
 	else
 		prefix = NULL;
 
+=======
+	bool wname_in_long_name, kcname_in_long_name;
+	char *long_name = NULL;
+	const char *name;
+	int ret = 0;
+
+	prefix = soc_dapm_prefix(dapm);
+>>>>>>> v3.18
 	if (prefix)
 		prefix_len = strlen(prefix) + 1;
 	else
@@ -551,6 +953,7 @@ static int dapm_create_or_share_mixmux_kcontrol(struct snd_soc_dapm_widget *w,
 	shared = dapm_is_shared_kcontrol(dapm, w, &w->kcontrol_news[kci],
 					 &kcontrol);
 
+<<<<<<< HEAD
 	if (kcontrol) {
 		wlist = kcontrol->private_data;
 		wlistentries = wlist->num_widgets + 1;
@@ -570,6 +973,8 @@ static int dapm_create_or_share_mixmux_kcontrol(struct snd_soc_dapm_widget *w,
 	wlist->num_widgets = wlistentries;
 	wlist->widgets[wlistentries - 1] = w;
 
+=======
+>>>>>>> v3.18
 	if (!kcontrol) {
 		if (shared) {
 			wname_in_long_name = false;
@@ -586,18 +991,25 @@ static int dapm_create_or_share_mixmux_kcontrol(struct snd_soc_dapm_widget *w,
 				kcname_in_long_name = true;
 				break;
 			case snd_soc_dapm_mux:
+<<<<<<< HEAD
 			case snd_soc_dapm_virt_mux:
 			case snd_soc_dapm_value_mux:
+=======
+>>>>>>> v3.18
 				wname_in_long_name = true;
 				kcname_in_long_name = false;
 				break;
 			default:
+<<<<<<< HEAD
 				kfree(wlist);
+=======
+>>>>>>> v3.18
 				return -EINVAL;
 			}
 		}
 
 		if (wname_in_long_name && kcname_in_long_name) {
+<<<<<<< HEAD
 			name_len = strlen(w->name) - prefix_len + 1 +
 				   strlen(w->kcontrol_news[kci].name) + 1;
 
@@ -607,16 +1019,26 @@ static int dapm_create_or_share_mixmux_kcontrol(struct snd_soc_dapm_widget *w,
 				return -ENOMEM;
 			}
 
+=======
+>>>>>>> v3.18
 			/*
 			 * The control will get a prefix from the control
 			 * creation process but we're also using the same
 			 * prefix for widgets so cut the prefix off the
 			 * front of the widget name.
 			 */
+<<<<<<< HEAD
 			snprintf(long_name, name_len, "%s %s",
 				 w->name + prefix_len,
 				 w->kcontrol_news[kci].name);
 			long_name[name_len - 1] = '\0';
+=======
+			long_name = kasprintf(GFP_KERNEL, "%s %s",
+				 w->name + prefix_len,
+				 w->kcontrol_news[kci].name);
+			if (long_name == NULL)
+				return -ENOMEM;
+>>>>>>> v3.18
 
 			name = long_name;
 		} else if (wname_in_long_name) {
@@ -627,13 +1049,32 @@ static int dapm_create_or_share_mixmux_kcontrol(struct snd_soc_dapm_widget *w,
 			name = w->kcontrol_news[kci].name;
 		}
 
+<<<<<<< HEAD
 		kcontrol = snd_soc_cnew(&w->kcontrol_news[kci], wlist, name,
 					prefix);
+=======
+		kcontrol = snd_soc_cnew(&w->kcontrol_news[kci], NULL, name,
+					prefix);
+		if (!kcontrol) {
+			ret = -ENOMEM;
+			goto exit_free;
+		}
+
+		kcontrol->private_free = dapm_kcontrol_free;
+
+		ret = dapm_kcontrol_data_alloc(w, kcontrol);
+		if (ret) {
+			snd_ctl_free_one(kcontrol);
+			goto exit_free;
+		}
+
+>>>>>>> v3.18
 		ret = snd_ctl_add(card, kcontrol);
 		if (ret < 0) {
 			dev_err(dapm->dev,
 				"ASoC: failed to add widget %s dapm kcontrol %s: %d\n",
 				w->name, name, ret);
+<<<<<<< HEAD
 			kfree(wlist);
 			kfree(long_name);
 			return ret;
@@ -647,6 +1088,20 @@ static int dapm_create_or_share_mixmux_kcontrol(struct snd_soc_dapm_widget *w,
 	path->kcontrol = kcontrol;
 
 	return 0;
+=======
+			goto exit_free;
+		}
+	}
+
+	ret = dapm_kcontrol_add_widget(kcontrol, w);
+	if (ret == 0)
+		w->kcontrols[kci] = kcontrol;
+
+exit_free:
+	kfree(long_name);
+
+	return ret;
+>>>>>>> v3.18
 }
 
 /* create new dapm mixer control */
@@ -664,6 +1119,7 @@ static int dapm_new_mixer(struct snd_soc_dapm_widget *w)
 				continue;
 
 			if (w->kcontrols[i]) {
+<<<<<<< HEAD
 				path->kcontrol = w->kcontrols[i];
 				continue;
 			}
@@ -671,6 +1127,17 @@ static int dapm_new_mixer(struct snd_soc_dapm_widget *w)
 			ret = dapm_create_or_share_mixmux_kcontrol(w, i, path);
 			if (ret < 0)
 				return ret;
+=======
+				dapm_kcontrol_add_path(w->kcontrols[i], path);
+				continue;
+			}
+
+			ret = dapm_create_or_share_mixmux_kcontrol(w, i);
+			if (ret < 0)
+				return ret;
+
+			dapm_kcontrol_add_path(w->kcontrols[i], path);
+>>>>>>> v3.18
 		}
 	}
 
@@ -696,15 +1163,23 @@ static int dapm_new_mux(struct snd_soc_dapm_widget *w)
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 	path = list_first_entry(&w->sources, struct snd_soc_dapm_path,
 				list_sink);
 
 	ret = dapm_create_or_share_mixmux_kcontrol(w, 0, path);
+=======
+	ret = dapm_create_or_share_mixmux_kcontrol(w, 0);
+>>>>>>> v3.18
 	if (ret < 0)
 		return ret;
 
 	list_for_each_entry(path, &w->sources, list_sink)
+<<<<<<< HEAD
 		path->kcontrol = w->kcontrols[0];
+=======
+		dapm_kcontrol_add_path(w->kcontrols[0], path);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -825,6 +1300,10 @@ static int is_connected_output_ep(struct snd_soc_dapm_widget *widget,
 	case snd_soc_dapm_supply:
 	case snd_soc_dapm_regulator_supply:
 	case snd_soc_dapm_clock_supply:
+<<<<<<< HEAD
+=======
+	case snd_soc_dapm_kcontrol:
+>>>>>>> v3.18
 		return 0;
 	default:
 		break;
@@ -920,6 +1399,10 @@ static int is_connected_input_ep(struct snd_soc_dapm_widget *widget,
 	case snd_soc_dapm_supply:
 	case snd_soc_dapm_regulator_supply:
 	case snd_soc_dapm_clock_supply:
+<<<<<<< HEAD
+=======
+	case snd_soc_dapm_kcontrol:
+>>>>>>> v3.18
 		return 0;
 	default:
 		break;
@@ -1046,6 +1529,7 @@ int snd_soc_dapm_dai_get_connected_widgets(struct snd_soc_dai *dai, int stream,
 }
 
 /*
+<<<<<<< HEAD
  * Handler for generic register modifier widget.
  */
 int dapm_reg_event(struct snd_soc_dapm_widget *w,
@@ -1066,6 +1550,8 @@ int dapm_reg_event(struct snd_soc_dapm_widget *w,
 EXPORT_SYMBOL_GPL(dapm_reg_event);
 
 /*
+=======
+>>>>>>> v3.18
  * Handler for regulator supply widget.
  */
 int dapm_regulator_event(struct snd_soc_dapm_widget *w,
@@ -1073,22 +1559,41 @@ int dapm_regulator_event(struct snd_soc_dapm_widget *w,
 {
 	int ret;
 
+<<<<<<< HEAD
 	if (SND_SOC_DAPM_EVENT_ON(event)) {
 		if (w->invert & SND_SOC_DAPM_REGULATOR_BYPASS) {
 			ret = regulator_allow_bypass(w->regulator, false);
 			if (ret != 0)
 				dev_warn(w->dapm->dev,
 					 "ASoC: Failed to bypass %s: %d\n",
+=======
+	soc_dapm_async_complete(w->dapm);
+
+	if (SND_SOC_DAPM_EVENT_ON(event)) {
+		if (w->on_val & SND_SOC_DAPM_REGULATOR_BYPASS) {
+			ret = regulator_allow_bypass(w->regulator, false);
+			if (ret != 0)
+				dev_warn(w->dapm->dev,
+					 "ASoC: Failed to unbypass %s: %d\n",
+>>>>>>> v3.18
 					 w->name, ret);
 		}
 
 		return regulator_enable(w->regulator);
 	} else {
+<<<<<<< HEAD
 		if (w->invert & SND_SOC_DAPM_REGULATOR_BYPASS) {
 			ret = regulator_allow_bypass(w->regulator, true);
 			if (ret != 0)
 				dev_warn(w->dapm->dev,
 					 "ASoC: Failed to unbypass %s: %d\n",
+=======
+		if (w->on_val & SND_SOC_DAPM_REGULATOR_BYPASS) {
+			ret = regulator_allow_bypass(w->regulator, true);
+			if (ret != 0)
+				dev_warn(w->dapm->dev,
+					 "ASoC: Failed to bypass %s: %d\n",
+>>>>>>> v3.18
 					 w->name, ret);
 		}
 
@@ -1106,6 +1611,11 @@ int dapm_clock_event(struct snd_soc_dapm_widget *w,
 	if (!w->clk)
 		return -EIO;
 
+<<<<<<< HEAD
+=======
+	soc_dapm_async_complete(w->dapm);
+
+>>>>>>> v3.18
 #ifdef CONFIG_HAVE_CLK
 	if (SND_SOC_DAPM_EVENT_ON(event)) {
 		return clk_prepare_enable(w->clk);
@@ -1256,10 +1766,16 @@ static void dapm_seq_insert(struct snd_soc_dapm_widget *new_widget,
 	list_add_tail(&new_widget->power_list, list);
 }
 
+<<<<<<< HEAD
 static void dapm_seq_check_event(struct snd_soc_dapm_context *dapm,
 				 struct snd_soc_dapm_widget *w, int event)
 {
 	struct snd_soc_card *card = dapm->card;
+=======
+static void dapm_seq_check_event(struct snd_soc_card *card,
+				 struct snd_soc_dapm_widget *w, int event)
+{
+>>>>>>> v3.18
 	const char *ev_name;
 	int power, ret;
 
@@ -1280,6 +1796,7 @@ static void dapm_seq_check_event(struct snd_soc_dapm_context *dapm,
 		ev_name = "POST_PMD";
 		power = 0;
 		break;
+<<<<<<< HEAD
 	default:
 		BUG();
 		return;
@@ -1291,16 +1808,43 @@ static void dapm_seq_check_event(struct snd_soc_dapm_context *dapm,
 	if (w->event && (w->event_flags & event)) {
 		pop_dbg(dapm->dev, card->pop_time, "pop test : %s %s\n",
 			w->name, ev_name);
+=======
+	case SND_SOC_DAPM_WILL_PMU:
+		ev_name = "WILL_PMU";
+		power = 1;
+		break;
+	case SND_SOC_DAPM_WILL_PMD:
+		ev_name = "WILL_PMD";
+		power = 0;
+		break;
+	default:
+		WARN(1, "Unknown event %d\n", event);
+		return;
+	}
+
+	if (w->new_power != power)
+		return;
+
+	if (w->event && (w->event_flags & event)) {
+		pop_dbg(w->dapm->dev, card->pop_time, "pop test : %s %s\n",
+			w->name, ev_name);
+		soc_dapm_async_complete(w->dapm);
+>>>>>>> v3.18
 		trace_snd_soc_dapm_widget_event_start(w, event);
 		ret = w->event(w, NULL, event);
 		trace_snd_soc_dapm_widget_event_done(w, event);
 		if (ret < 0)
+<<<<<<< HEAD
 			dev_err(dapm->dev, "ASoC: %s: %s event failed: %d\n",
+=======
+			dev_err(w->dapm->dev, "ASoC: %s: %s event failed: %d\n",
+>>>>>>> v3.18
 			       ev_name, w->name, ret);
 	}
 }
 
 /* Apply the coalesced changes from a DAPM sequence */
+<<<<<<< HEAD
 static void dapm_seq_run_coalesced(struct snd_soc_dapm_context *dapm,
 				   struct list_head *pending)
 {
@@ -1326,33 +1870,74 @@ static void dapm_seq_run_coalesced(struct snd_soc_dapm_context *dapm,
 		mask |= cur_mask;
 		if (power)
 			value |= cur_mask;
+=======
+static void dapm_seq_run_coalesced(struct snd_soc_card *card,
+				   struct list_head *pending)
+{
+	struct snd_soc_dapm_context *dapm;
+	struct snd_soc_dapm_widget *w;
+	int reg;
+	unsigned int value = 0;
+	unsigned int mask = 0;
+
+	w = list_first_entry(pending, struct snd_soc_dapm_widget, power_list);
+	reg = w->reg;
+	dapm = w->dapm;
+
+	list_for_each_entry(w, pending, power_list) {
+		WARN_ON(reg != w->reg || dapm != w->dapm);
+		w->power = w->new_power;
+
+		mask |= w->mask << w->shift;
+		if (w->power)
+			value |= w->on_val << w->shift;
+		else
+			value |= w->off_val << w->shift;
+>>>>>>> v3.18
 
 		pop_dbg(dapm->dev, card->pop_time,
 			"pop test : Queue %s: reg=0x%x, 0x%x/0x%x\n",
 			w->name, reg, value, mask);
 
 		/* Check for events */
+<<<<<<< HEAD
 		dapm_seq_check_event(dapm, w, SND_SOC_DAPM_PRE_PMU);
 		dapm_seq_check_event(dapm, w, SND_SOC_DAPM_PRE_PMD);
+=======
+		dapm_seq_check_event(card, w, SND_SOC_DAPM_PRE_PMU);
+		dapm_seq_check_event(card, w, SND_SOC_DAPM_PRE_PMD);
+>>>>>>> v3.18
 	}
 
 	if (reg >= 0) {
 		/* Any widget will do, they should all be updating the
 		 * same register.
 		 */
+<<<<<<< HEAD
 		w = list_first_entry(pending, struct snd_soc_dapm_widget,
 				     power_list);
+=======
+>>>>>>> v3.18
 
 		pop_dbg(dapm->dev, card->pop_time,
 			"pop test : Applying 0x%x/0x%x to %x in %dms\n",
 			value, mask, reg, card->pop_time);
 		pop_wait(card->pop_time);
+<<<<<<< HEAD
 		soc_widget_update_bits_locked(w, reg, mask, value);
 	}
 
 	list_for_each_entry(w, pending, power_list) {
 		dapm_seq_check_event(dapm, w, SND_SOC_DAPM_POST_PMU);
 		dapm_seq_check_event(dapm, w, SND_SOC_DAPM_POST_PMD);
+=======
+		soc_dapm_update_bits(dapm, reg, mask, value);
+	}
+
+	list_for_each_entry(w, pending, power_list) {
+		dapm_seq_check_event(card, w, SND_SOC_DAPM_POST_PMU);
+		dapm_seq_check_event(card, w, SND_SOC_DAPM_POST_PMD);
+>>>>>>> v3.18
 	}
 }
 
@@ -1364,10 +1949,18 @@ static void dapm_seq_run_coalesced(struct snd_soc_dapm_context *dapm,
  * Currently anything that requires more than a single write is not
  * handled.
  */
+<<<<<<< HEAD
 static void dapm_seq_run(struct snd_soc_dapm_context *dapm,
 			 struct list_head *list, int event, bool power_up)
 {
 	struct snd_soc_dapm_widget *w, *n;
+=======
+static void dapm_seq_run(struct snd_soc_card *card,
+	struct list_head *list, int event, bool power_up)
+{
+	struct snd_soc_dapm_widget *w, *n;
+	struct snd_soc_dapm_context *d;
+>>>>>>> v3.18
 	LIST_HEAD(pending);
 	int cur_sort = -1;
 	int cur_subseq = -1;
@@ -1387,8 +1980,13 @@ static void dapm_seq_run(struct snd_soc_dapm_context *dapm,
 		/* Do we need to apply any queued changes? */
 		if (sort[w->id] != cur_sort || w->reg != cur_reg ||
 		    w->dapm != cur_dapm || w->subseq != cur_subseq) {
+<<<<<<< HEAD
 			if (cur_dapm && !list_empty(&pending))
 				dapm_seq_run_coalesced(cur_dapm, &pending);
+=======
+			if (!list_empty(&pending))
+				dapm_seq_run_coalesced(card, &pending);
+>>>>>>> v3.18
 
 			if (cur_dapm && cur_dapm->seq_notifier) {
 				for (i = 0; i < ARRAY_SIZE(dapm_up_seq); i++)
@@ -1398,6 +1996,12 @@ static void dapm_seq_run(struct snd_soc_dapm_context *dapm,
 								       cur_subseq);
 			}
 
+<<<<<<< HEAD
+=======
+			if (cur_dapm && w->dapm != cur_dapm)
+				soc_dapm_async_complete(cur_dapm);
+
+>>>>>>> v3.18
 			INIT_LIST_HEAD(&pending);
 			cur_sort = -1;
 			cur_subseq = INT_MIN;
@@ -1442,18 +2046,26 @@ static void dapm_seq_run(struct snd_soc_dapm_context *dapm,
 			break;
 		}
 
+<<<<<<< HEAD
 		/* Add this debug log to keep track of widgets being
 		 * powered-up and powered-down */
 		dev_dbg(w->dapm->dev, "dapm: powering %s widget %s\n",
 			power_up ? "up" : "down", w->name);
 
+=======
+>>>>>>> v3.18
 		if (ret < 0)
 			dev_err(w->dapm->dev,
 				"ASoC: Failed to apply widget power: %d\n", ret);
 	}
 
+<<<<<<< HEAD
 	if (cur_dapm && !list_empty(&pending))
 		dapm_seq_run_coalesced(cur_dapm, &pending);
+=======
+	if (!list_empty(&pending))
+		dapm_seq_run_coalesced(card, &pending);
+>>>>>>> v3.18
 
 	if (cur_dapm && cur_dapm->seq_notifier) {
 		for (i = 0; i < ARRAY_SIZE(dapm_up_seq); i++)
@@ -1461,6 +2073,7 @@ static void dapm_seq_run(struct snd_soc_dapm_context *dapm,
 				cur_dapm->seq_notifier(cur_dapm,
 						       i, cur_subseq);
 	}
+<<<<<<< HEAD
 }
 
 static void dapm_widget_update(struct snd_soc_dapm_context *dapm)
@@ -1494,6 +2107,56 @@ static void dapm_widget_update(struct snd_soc_dapm_context *dapm)
 		if (ret != 0)
 			dev_err(dapm->dev, "ASoC: %s DAPM post-event failed: %d\n",
 			       w->name, ret);
+=======
+
+	list_for_each_entry(d, &card->dapm_list, list) {
+		soc_dapm_async_complete(d);
+	}
+}
+
+static void dapm_widget_update(struct snd_soc_card *card)
+{
+	struct snd_soc_dapm_update *update = card->update;
+	struct snd_soc_dapm_widget_list *wlist;
+	struct snd_soc_dapm_widget *w = NULL;
+	unsigned int wi;
+	int ret;
+
+	if (!update || !dapm_kcontrol_is_powered(update->kcontrol))
+		return;
+
+	wlist = dapm_kcontrol_get_wlist(update->kcontrol);
+
+	for (wi = 0; wi < wlist->num_widgets; wi++) {
+		w = wlist->widgets[wi];
+
+		if (w->event && (w->event_flags & SND_SOC_DAPM_PRE_REG)) {
+			ret = w->event(w, update->kcontrol, SND_SOC_DAPM_PRE_REG);
+			if (ret != 0)
+				dev_err(w->dapm->dev, "ASoC: %s DAPM pre-event failed: %d\n",
+					   w->name, ret);
+		}
+	}
+
+	if (!w)
+		return;
+
+	ret = soc_dapm_update_bits(w->dapm, update->reg, update->mask,
+		update->val);
+	if (ret < 0)
+		dev_err(w->dapm->dev, "ASoC: %s DAPM update failed: %d\n",
+			w->name, ret);
+
+	for (wi = 0; wi < wlist->num_widgets; wi++) {
+		w = wlist->widgets[wi];
+
+		if (w->event && (w->event_flags & SND_SOC_DAPM_POST_REG)) {
+			ret = w->event(w, update->kcontrol, SND_SOC_DAPM_POST_REG);
+			if (ret != 0)
+				dev_err(w->dapm->dev, "ASoC: %s DAPM post-event failed: %d\n",
+					   w->name, ret);
+		}
+>>>>>>> v3.18
 	}
 }
 
@@ -1517,8 +2180,16 @@ static void dapm_pre_sequence_async(void *data, async_cookie_t cookie)
 				"ASoC: Failed to turn on bias: %d\n", ret);
 	}
 
+<<<<<<< HEAD
 	/* Prepare for a STADDBY->ON or ON->STANDBY transition */
 	if (d->bias_level != d->target_bias_level) {
+=======
+	/* Prepare for a transition to ON or away from ON */
+	if ((d->target_bias_level == SND_SOC_BIAS_ON &&
+	     d->bias_level != SND_SOC_BIAS_ON) ||
+	    (d->target_bias_level != SND_SOC_BIAS_ON &&
+	     d->bias_level == SND_SOC_BIAS_ON)) {
+>>>>>>> v3.18
 		ret = snd_soc_dapm_set_bias_level(d, SND_SOC_BIAS_PREPARE);
 		if (ret != 0)
 			dev_err(d->dev,
@@ -1605,6 +2276,10 @@ static void dapm_widget_set_power(struct snd_soc_dapm_widget *w, bool power,
 	case snd_soc_dapm_supply:
 	case snd_soc_dapm_regulator_supply:
 	case snd_soc_dapm_clock_supply:
+<<<<<<< HEAD
+=======
+	case snd_soc_dapm_kcontrol:
+>>>>>>> v3.18
 		/* Supplies can't affect their outputs, only their inputs */
 		break;
 	default:
@@ -1621,8 +2296,11 @@ static void dapm_widget_set_power(struct snd_soc_dapm_widget *w, bool power,
 		dapm_seq_insert(w, up_list, true);
 	else
 		dapm_seq_insert(w, down_list, false);
+<<<<<<< HEAD
 
 	w->power = power;
+=======
+>>>>>>> v3.18
 }
 
 static void dapm_power_one_widget(struct snd_soc_dapm_widget *w,
@@ -1647,6 +2325,25 @@ static void dapm_power_one_widget(struct snd_soc_dapm_widget *w,
 	}
 }
 
+<<<<<<< HEAD
+=======
+static bool dapm_idle_bias_off(struct snd_soc_dapm_context *dapm)
+{
+	if (dapm->idle_bias_off)
+		return true;
+
+	switch (snd_power_get_state(dapm->card->snd_card)) {
+	case SNDRV_CTL_POWER_D3hot:
+	case SNDRV_CTL_POWER_D3cold:
+		return dapm->suspend_bias_off;
+	default:
+		break;
+	}
+
+	return false;
+}
+
+>>>>>>> v3.18
 /*
  * Scan each dapm widget for complete audio path.
  * A complete path is a route that has valid endpoints i.e.:-
@@ -1656,9 +2353,14 @@ static void dapm_power_one_widget(struct snd_soc_dapm_widget *w,
  *  o Input pin to Output pin (bypass, sidetone)
  *  o DAC to ADC (loopback).
  */
+<<<<<<< HEAD
 static int dapm_power_widgets(struct snd_soc_dapm_context *dapm, int event)
 {
 	struct snd_soc_card *card = dapm->card;
+=======
+static int dapm_power_widgets(struct snd_soc_card *card, int event)
+{
+>>>>>>> v3.18
 	struct snd_soc_dapm_widget *w;
 	struct snd_soc_dapm_context *d;
 	LIST_HEAD(up_list);
@@ -1666,10 +2368,19 @@ static int dapm_power_widgets(struct snd_soc_dapm_context *dapm, int event)
 	ASYNC_DOMAIN_EXCLUSIVE(async_domain);
 	enum snd_soc_bias_level bias;
 
+<<<<<<< HEAD
 	trace_snd_soc_dapm_start(card);
 	mutex_lock(&dapm->card->dapm_power_mutex);
 	list_for_each_entry(d, &card->dapm_list, list) {
 		if (d->idle_bias_off)
+=======
+	lockdep_assert_held(&card->dapm_mutex);
+
+	trace_snd_soc_dapm_start(card);
+
+	list_for_each_entry(d, &card->dapm_list, list) {
+		if (dapm_idle_bias_off(d))
+>>>>>>> v3.18
 			d->target_bias_level = SND_SOC_BIAS_OFF;
 		else
 			d->target_bias_level = SND_SOC_BIAS_STANDBY;
@@ -1698,7 +2409,11 @@ static int dapm_power_widgets(struct snd_soc_dapm_context *dapm, int event)
 			break;
 		}
 
+<<<<<<< HEAD
 		if (w->power) {
+=======
+		if (w->new_power) {
+>>>>>>> v3.18
 			d = w->dapm;
 
 			/* Supplies and micbiases only bring the
@@ -1710,6 +2425,10 @@ static int dapm_power_widgets(struct snd_soc_dapm_context *dapm, int event)
 			 */
 			switch (w->id) {
 			case snd_soc_dapm_siggen:
+<<<<<<< HEAD
+=======
+			case snd_soc_dapm_vmid:
+>>>>>>> v3.18
 				break;
 			case snd_soc_dapm_supply:
 			case snd_soc_dapm_regulator_supply:
@@ -1734,19 +2453,32 @@ static int dapm_power_widgets(struct snd_soc_dapm_context *dapm, int event)
 		if (d->target_bias_level > bias)
 			bias = d->target_bias_level;
 	list_for_each_entry(d, &card->dapm_list, list)
+<<<<<<< HEAD
 		if (!d->idle_bias_off)
+=======
+		if (!dapm_idle_bias_off(d))
+>>>>>>> v3.18
 			d->target_bias_level = bias;
 
 	trace_snd_soc_dapm_walk_done(card);
 
+<<<<<<< HEAD
 	/* Run all the bias changes in parallel */
 	list_for_each_entry(d, &dapm->card->dapm_list, list) {
 		if (d->codec || d->platform)
+=======
+	/* Run card bias changes at first */
+	dapm_pre_sequence_async(&card->dapm, 0);
+	/* Run other bias changes in parallel */
+	list_for_each_entry(d, &card->dapm_list, list) {
+		if (d != &card->dapm)
+>>>>>>> v3.18
 			async_schedule_domain(dapm_pre_sequence_async, d,
 						&async_domain);
 	}
 	async_synchronize_full_domain(&async_domain);
 
+<<<<<<< HEAD
 	/* Power down widgets first; try to avoid amplifying pops. */
 	dapm_seq_run(dapm, &down_list, event, false);
 
@@ -1758,10 +2490,36 @@ static int dapm_power_widgets(struct snd_soc_dapm_context *dapm, int event)
 	/* Run all the bias changes in parallel */
 	list_for_each_entry(d, &dapm->card->dapm_list, list) {
 		if (d->codec || d->platform)
+=======
+	list_for_each_entry(w, &down_list, power_list) {
+		dapm_seq_check_event(card, w, SND_SOC_DAPM_WILL_PMD);
+	}
+
+	list_for_each_entry(w, &up_list, power_list) {
+		dapm_seq_check_event(card, w, SND_SOC_DAPM_WILL_PMU);
+	}
+
+	/* Power down widgets first; try to avoid amplifying pops. */
+	dapm_seq_run(card, &down_list, event, false);
+
+	dapm_widget_update(card);
+
+	/* Now power up. */
+	dapm_seq_run(card, &up_list, event, true);
+
+	/* Run all the bias changes in parallel */
+	list_for_each_entry(d, &card->dapm_list, list) {
+		if (d != &card->dapm)
+>>>>>>> v3.18
 			async_schedule_domain(dapm_post_sequence_async, d,
 						&async_domain);
 	}
 	async_synchronize_full_domain(&async_domain);
+<<<<<<< HEAD
+=======
+	/* Run card bias changes at last */
+	dapm_post_sequence_async(&card->dapm, 0);
+>>>>>>> v3.18
 
 	/* do we need to notify any clients that DAPM event is complete */
 	list_for_each_entry(d, &card->dapm_list, list) {
@@ -1769,10 +2527,17 @@ static int dapm_power_widgets(struct snd_soc_dapm_context *dapm, int event)
 			d->stream_event(d, event);
 	}
 
+<<<<<<< HEAD
 	pop_dbg(dapm->dev, card->pop_time,
 		"DAPM sequencing finished, waiting %dms\n", card->pop_time);
 	pop_wait(card->pop_time);
 	mutex_unlock(&dapm->card->dapm_power_mutex);
+=======
+	pop_dbg(card->dev, card->pop_time,
+		"DAPM sequencing finished, waiting %dms\n", card->pop_time);
+	pop_wait(card->pop_time);
+
+>>>>>>> v3.18
 	trace_snd_soc_dapm_done(card);
 
 	return 0;
@@ -1804,8 +2569,13 @@ static ssize_t dapm_widget_power_read_file(struct file *file,
 
 	if (w->reg >= 0)
 		ret += snprintf(buf + ret, PAGE_SIZE - ret,
+<<<<<<< HEAD
 				" - R%d(0x%x) bit %d",
 				w->reg, w->reg, w->shift);
+=======
+				" - R%d(0x%x) mask 0x%x",
+				w->reg, w->reg, w->mask << w->shift);
+>>>>>>> v3.18
 
 	ret += snprintf(buf + ret, PAGE_SIZE - ret, "\n");
 
@@ -1867,7 +2637,11 @@ static ssize_t dapm_bias_read_file(struct file *file, char __user *user_buf,
 		level = "Off\n";
 		break;
 	default:
+<<<<<<< HEAD
 		BUG();
+=======
+		WARN(1, "Unknown bias_level %d\n", dapm->bias_level);
+>>>>>>> v3.18
 		level = "Unknown\n";
 		break;
 	}
@@ -1942,12 +2716,17 @@ static inline void dapm_debugfs_cleanup(struct snd_soc_dapm_context *dapm)
 #endif
 
 /* test and update the power status of a mux widget */
+<<<<<<< HEAD
 static int soc_dapm_mux_update_power(struct snd_soc_dapm_widget *widget,
+=======
+static int soc_dapm_mux_update_power(struct snd_soc_card *card,
+>>>>>>> v3.18
 				 struct snd_kcontrol *kcontrol, int mux, struct soc_enum *e)
 {
 	struct snd_soc_dapm_path *path;
 	int found = 0;
 
+<<<<<<< HEAD
 	if (widget->id != snd_soc_dapm_mux &&
 	    widget->id != snd_soc_dapm_virt_mux &&
 	    widget->id != snd_soc_dapm_value_mux)
@@ -1958,6 +2737,12 @@ static int soc_dapm_mux_update_power(struct snd_soc_dapm_widget *widget,
 		if (path->kcontrol != kcontrol)
 			continue;
 
+=======
+	lockdep_assert_held(&card->dapm_mutex);
+
+	/* find dapm widget path assoc with kcontrol */
+	dapm_kcontrol_for_each_path(path, kcontrol) {
+>>>>>>> v3.18
 		if (!path->name || !e->texts[mux])
 			continue;
 
@@ -1972,16 +2757,25 @@ static int soc_dapm_mux_update_power(struct snd_soc_dapm_widget *widget,
 						"mux disconnection");
 			path->connect = 0; /* old connection must be powered down */
 		}
+<<<<<<< HEAD
 	}
 
 	if (found) {
 		dapm_mark_dirty(widget, "mux change");
 		dapm_power_widgets(widget->dapm, SND_SOC_DAPM_STREAM_NOP);
 	}
+=======
+		dapm_mark_dirty(path->sink, "mux change");
+	}
+
+	if (found)
+		dapm_power_widgets(card, SND_SOC_DAPM_STREAM_NOP);
+>>>>>>> v3.18
 
 	return found;
 }
 
+<<<<<<< HEAD
 int snd_soc_dapm_mux_update_power(struct snd_soc_dapm_widget *widget,
 		struct snd_kcontrol *kcontrol, int mux, struct soc_enum *e)
 {
@@ -1993,17 +2787,38 @@ int snd_soc_dapm_mux_update_power(struct snd_soc_dapm_widget *widget,
 	mutex_unlock(&card->dapm_mutex);
 	if (ret > 0)
 		soc_dpcm_runtime_update(widget);
+=======
+int snd_soc_dapm_mux_update_power(struct snd_soc_dapm_context *dapm,
+	struct snd_kcontrol *kcontrol, int mux, struct soc_enum *e,
+	struct snd_soc_dapm_update *update)
+{
+	struct snd_soc_card *card = dapm->card;
+	int ret;
+
+	mutex_lock_nested(&card->dapm_mutex, SND_SOC_DAPM_CLASS_RUNTIME);
+	card->update = update;
+	ret = soc_dapm_mux_update_power(card, kcontrol, mux, e);
+	card->update = NULL;
+	mutex_unlock(&card->dapm_mutex);
+	if (ret > 0)
+		soc_dpcm_runtime_update(card);
+>>>>>>> v3.18
 	return ret;
 }
 EXPORT_SYMBOL_GPL(snd_soc_dapm_mux_update_power);
 
 /* test and update the power status of a mixer or switch widget */
+<<<<<<< HEAD
 static int soc_dapm_mixer_update_power(struct snd_soc_dapm_widget *widget,
+=======
+static int soc_dapm_mixer_update_power(struct snd_soc_card *card,
+>>>>>>> v3.18
 				   struct snd_kcontrol *kcontrol, int connect)
 {
 	struct snd_soc_dapm_path *path;
 	int found = 0;
 
+<<<<<<< HEAD
 	if (widget->id != snd_soc_dapm_mixer &&
 	    widget->id != snd_soc_dapm_mixer_named_ctl &&
 	    widget->id != snd_soc_dapm_switch)
@@ -2024,10 +2839,25 @@ static int soc_dapm_mixer_update_power(struct snd_soc_dapm_widget *widget,
 		dapm_mark_dirty(widget, "mixer update");
 		dapm_power_widgets(widget->dapm, SND_SOC_DAPM_STREAM_NOP);
 	}
+=======
+	lockdep_assert_held(&card->dapm_mutex);
+
+	/* find dapm widget path assoc with kcontrol */
+	dapm_kcontrol_for_each_path(path, kcontrol) {
+		found = 1;
+		path->connect = connect;
+		dapm_mark_dirty(path->source, "mixer connection");
+		dapm_mark_dirty(path->sink, "mixer update");
+	}
+
+	if (found)
+		dapm_power_widgets(card, SND_SOC_DAPM_STREAM_NOP);
+>>>>>>> v3.18
 
 	return found;
 }
 
+<<<<<<< HEAD
 int snd_soc_dapm_mixer_update_power(struct snd_soc_dapm_widget *widget,
 				struct snd_kcontrol *kcontrol, int connect)
 {
@@ -2039,21 +2869,46 @@ int snd_soc_dapm_mixer_update_power(struct snd_soc_dapm_widget *widget,
 	mutex_unlock(&card->dapm_mutex);
 	if (ret > 0)
 		soc_dpcm_runtime_update(widget);
+=======
+int snd_soc_dapm_mixer_update_power(struct snd_soc_dapm_context *dapm,
+	struct snd_kcontrol *kcontrol, int connect,
+	struct snd_soc_dapm_update *update)
+{
+	struct snd_soc_card *card = dapm->card;
+	int ret;
+
+	mutex_lock_nested(&card->dapm_mutex, SND_SOC_DAPM_CLASS_RUNTIME);
+	card->update = update;
+	ret = soc_dapm_mixer_update_power(card, kcontrol, connect);
+	card->update = NULL;
+	mutex_unlock(&card->dapm_mutex);
+	if (ret > 0)
+		soc_dpcm_runtime_update(card);
+>>>>>>> v3.18
 	return ret;
 }
 EXPORT_SYMBOL_GPL(snd_soc_dapm_mixer_update_power);
 
+<<<<<<< HEAD
 /* show dapm widget status in sys fs */
 static ssize_t dapm_widget_show(struct device *dev,
 	struct device_attribute *attr, char *buf)
 {
 	struct snd_soc_pcm_runtime *rtd = dev_get_drvdata(dev);
 	struct snd_soc_codec *codec =rtd->codec;
+=======
+static ssize_t dapm_widget_show_codec(struct snd_soc_codec *codec, char *buf)
+{
+>>>>>>> v3.18
 	struct snd_soc_dapm_widget *w;
 	int count = 0;
 	char *state = "not set";
 
+<<<<<<< HEAD
 	list_for_each_entry(w, &codec->card->widgets, list) {
+=======
+	list_for_each_entry(w, &codec->component.card->widgets, list) {
+>>>>>>> v3.18
 		if (w->dapm != &codec->dapm)
 			continue;
 
@@ -2101,6 +2956,24 @@ static ssize_t dapm_widget_show(struct device *dev,
 	return count;
 }
 
+<<<<<<< HEAD
+=======
+/* show dapm widget status in sys fs */
+static ssize_t dapm_widget_show(struct device *dev,
+	struct device_attribute *attr, char *buf)
+{
+	struct snd_soc_pcm_runtime *rtd = dev_get_drvdata(dev);
+	int i, count = 0;
+
+	for (i = 0; i < rtd->num_codecs; i++) {
+		struct snd_soc_codec *codec = rtd->codec_dais[i]->codec;
+		count += dapm_widget_show_codec(codec, buf + count);
+	}
+
+	return count;
+}
+
+>>>>>>> v3.18
 static DEVICE_ATTR(dapm_widget, 0444, dapm_widget_show, NULL);
 
 int snd_soc_dapm_sys_add(struct device *dev)
@@ -2113,6 +2986,18 @@ static void snd_soc_dapm_sys_remove(struct device *dev)
 	device_remove_file(dev, &dev_attr_dapm_widget);
 }
 
+<<<<<<< HEAD
+=======
+static void dapm_free_path(struct snd_soc_dapm_path *path)
+{
+	list_del(&path->list_sink);
+	list_del(&path->list_source);
+	list_del(&path->list_kcontrol);
+	list_del(&path->list);
+	kfree(path);
+}
+
+>>>>>>> v3.18
 /* free all dapm widgets and resources */
 static void dapm_free_widgets(struct snd_soc_dapm_context *dapm)
 {
@@ -2128,6 +3013,7 @@ static void dapm_free_widgets(struct snd_soc_dapm_context *dapm)
 		 * While removing the path, remove reference to it from both
 		 * source and sink widgets so that path is removed only once.
 		 */
+<<<<<<< HEAD
 		list_for_each_entry_safe(p, next_p, &w->sources, list_sink) {
 			list_del(&p->list_sink);
 			list_del(&p->list_source);
@@ -2142,6 +3028,14 @@ static void dapm_free_widgets(struct snd_soc_dapm_context *dapm)
 			kfree(p->long_name);
 			kfree(p);
 		}
+=======
+		list_for_each_entry_safe(p, next_p, &w->sources, list_sink)
+			dapm_free_path(p);
+
+		list_for_each_entry_safe(p, next_p, &w->sinks, list_source)
+			dapm_free_path(p);
+
+>>>>>>> v3.18
 		kfree(w->kcontrols);
 		kfree(w->name);
 		kfree(w);
@@ -2175,10 +3069,17 @@ static int snd_soc_dapm_set_pin(struct snd_soc_dapm_context *dapm,
 {
 	struct snd_soc_dapm_widget *w = dapm_find_widget(dapm, pin, true);
 
+<<<<<<< HEAD
 	mutex_lock_nested(&dapm->card->dapm_mutex, SND_SOC_DAPM_CLASS_PCM);
 	if (!w) {
 		dev_err(dapm->dev, "ASoC: DAPM unknown pin %s\n", pin);
 		mutex_unlock(&dapm->card->dapm_mutex);
+=======
+	dapm_assert_locked(dapm);
+
+	if (!w) {
+		dev_err(dapm->dev, "ASoC: DAPM unknown pin %s\n", pin);
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
@@ -2189,9 +3090,53 @@ static int snd_soc_dapm_set_pin(struct snd_soc_dapm_context *dapm,
 	if (status == 0)
 		w->force = 0;
 
+<<<<<<< HEAD
 	mutex_unlock(&dapm->card->dapm_mutex);
+=======
+>>>>>>> v3.18
 	return 0;
 }
+
+/**
+<<<<<<< HEAD
+ * snd_soc_dapm_sync - scan and power dapm paths
+=======
+ * snd_soc_dapm_sync_unlocked - scan and power dapm paths
+>>>>>>> v3.18
+ * @dapm: DAPM context
+ *
+ * Walks all dapm audio paths and powers widgets according to their
+ * stream or path usage.
+ *
+<<<<<<< HEAD
+ * Returns 0 for success.
+ */
+int snd_soc_dapm_sync(struct snd_soc_dapm_context *dapm)
+{
+	int ret;
+
+=======
+ * Requires external locking.
+ *
+ * Returns 0 for success.
+ */
+int snd_soc_dapm_sync_unlocked(struct snd_soc_dapm_context *dapm)
+{
+>>>>>>> v3.18
+	/*
+	 * Suppress early reports (eg, jacks syncing their state) to avoid
+	 * silly DAPM runs during card startup.
+	 */
+	if (!dapm->card || !dapm->card->instantiated)
+		return 0;
+
+<<<<<<< HEAD
+	mutex_lock_nested(&dapm->card->dapm_mutex, SND_SOC_DAPM_CLASS_RUNTIME);
+	ret = dapm_power_widgets(dapm, SND_SOC_DAPM_STREAM_NOP);
+=======
+	return dapm_power_widgets(dapm->card, SND_SOC_DAPM_STREAM_NOP);
+}
+EXPORT_SYMBOL_GPL(snd_soc_dapm_sync_unlocked);
 
 /**
  * snd_soc_dapm_sync - scan and power dapm paths
@@ -2206,20 +3151,15 @@ int snd_soc_dapm_sync(struct snd_soc_dapm_context *dapm)
 {
 	int ret;
 
-	/*
-	 * Suppress early reports (eg, jacks syncing their state) to avoid
-	 * silly DAPM runs during card startup.
-	 */
-	if (!dapm->card || !dapm->card->instantiated)
-		return 0;
-
 	mutex_lock_nested(&dapm->card->dapm_mutex, SND_SOC_DAPM_CLASS_RUNTIME);
-	ret = dapm_power_widgets(dapm, SND_SOC_DAPM_STREAM_NOP);
+	ret = snd_soc_dapm_sync_unlocked(dapm);
+>>>>>>> v3.18
 	mutex_unlock(&dapm->card->dapm_mutex);
 	return ret;
 }
 EXPORT_SYMBOL_GPL(snd_soc_dapm_sync);
 
+<<<<<<< HEAD
 static int snd_soc_dapm_add_route(struct snd_soc_dapm_context *dapm,
 				  const struct snd_soc_dapm_route *route)
 {
@@ -2278,6 +3218,16 @@ static int snd_soc_dapm_add_route(struct snd_soc_dapm_context *dapm,
 			route->sink);
 		return -ENODEV;
 	}
+=======
+static int snd_soc_dapm_add_path(struct snd_soc_dapm_context *dapm,
+	struct snd_soc_dapm_widget *wsource, struct snd_soc_dapm_widget *wsink,
+	const char *control,
+	int (*connected)(struct snd_soc_dapm_widget *source,
+			 struct snd_soc_dapm_widget *sink))
+{
+	struct snd_soc_dapm_path *path;
+	int ret;
+>>>>>>> v3.18
 
 	path = kzalloc(sizeof(struct snd_soc_dapm_path), GFP_KERNEL);
 	if (!path)
@@ -2285,8 +3235,14 @@ static int snd_soc_dapm_add_route(struct snd_soc_dapm_context *dapm,
 
 	path->source = wsource;
 	path->sink = wsink;
+<<<<<<< HEAD
 	path->connected = route->connected;
 	INIT_LIST_HEAD(&path->list);
+=======
+	path->connected = connected;
+	INIT_LIST_HEAD(&path->list);
+	INIT_LIST_HEAD(&path->list_kcontrol);
+>>>>>>> v3.18
 	INIT_LIST_HEAD(&path->list_source);
 	INIT_LIST_HEAD(&path->list_sink);
 
@@ -2306,6 +3262,12 @@ static int snd_soc_dapm_add_route(struct snd_soc_dapm_context *dapm,
 			wsource->ext = 1;
 	}
 
+<<<<<<< HEAD
+=======
+	dapm_mark_dirty(wsource, "Route added");
+	dapm_mark_dirty(wsink, "Route added");
+
+>>>>>>> v3.18
 	/* connect static paths */
 	if (control == NULL) {
 		list_add(&path->list, &dapm->card->paths);
@@ -2336,14 +3298,21 @@ static int snd_soc_dapm_add_route(struct snd_soc_dapm_context *dapm,
 	case snd_soc_dapm_dai_in:
 	case snd_soc_dapm_dai_out:
 	case snd_soc_dapm_dai_link:
+<<<<<<< HEAD
+=======
+	case snd_soc_dapm_kcontrol:
+>>>>>>> v3.18
 		list_add(&path->list, &dapm->card->paths);
 		list_add(&path->list_sink, &wsink->sources);
 		list_add(&path->list_source, &wsource->sinks);
 		path->connect = 1;
 		return 0;
 	case snd_soc_dapm_mux:
+<<<<<<< HEAD
 	case snd_soc_dapm_virt_mux:
 	case snd_soc_dapm_value_mux:
+=======
+>>>>>>> v3.18
 		ret = dapm_connect_mux(dapm, wsource, wsink, path, control,
 			&wsink->kcontrol_news[0]);
 		if (ret != 0)
@@ -2367,6 +3336,7 @@ static int snd_soc_dapm_add_route(struct snd_soc_dapm_context *dapm,
 		return 0;
 	}
 
+<<<<<<< HEAD
 	dapm_mark_dirty(wsource, "Route added");
 	dapm_mark_dirty(wsink, "Route added");
 
@@ -2376,6 +3346,82 @@ err:
 	dev_warn(dapm->dev, "ASoC: no dapm match for %s --> %s --> %s\n",
 		 source, control, sink);
 	kfree(path);
+=======
+	return 0;
+err:
+	kfree(path);
+	return ret;
+}
+
+static int snd_soc_dapm_add_route(struct snd_soc_dapm_context *dapm,
+				  const struct snd_soc_dapm_route *route)
+{
+	struct snd_soc_dapm_widget *wsource = NULL, *wsink = NULL, *w;
+	struct snd_soc_dapm_widget *wtsource = NULL, *wtsink = NULL;
+	const char *sink;
+	const char *source;
+	char prefixed_sink[80];
+	char prefixed_source[80];
+	const char *prefix;
+	int ret;
+
+	prefix = soc_dapm_prefix(dapm);
+	if (prefix) {
+		snprintf(prefixed_sink, sizeof(prefixed_sink), "%s %s",
+			 prefix, route->sink);
+		sink = prefixed_sink;
+		snprintf(prefixed_source, sizeof(prefixed_source), "%s %s",
+			 prefix, route->source);
+		source = prefixed_source;
+	} else {
+		sink = route->sink;
+		source = route->source;
+	}
+
+	/*
+	 * find src and dest widgets over all widgets but favor a widget from
+	 * current DAPM context
+	 */
+	list_for_each_entry(w, &dapm->card->widgets, list) {
+		if (!wsink && !(strcmp(w->name, sink))) {
+			wtsink = w;
+			if (w->dapm == dapm)
+				wsink = w;
+			continue;
+		}
+		if (!wsource && !(strcmp(w->name, source))) {
+			wtsource = w;
+			if (w->dapm == dapm)
+				wsource = w;
+		}
+	}
+	/* use widget from another DAPM context if not found from this */
+	if (!wsink)
+		wsink = wtsink;
+	if (!wsource)
+		wsource = wtsource;
+
+	if (wsource == NULL) {
+		dev_err(dapm->dev, "ASoC: no source widget found for %s\n",
+			route->source);
+		return -ENODEV;
+	}
+	if (wsink == NULL) {
+		dev_err(dapm->dev, "ASoC: no sink widget found for %s\n",
+			route->sink);
+		return -ENODEV;
+	}
+
+	ret = snd_soc_dapm_add_path(dapm, wsource, wsink, route->control,
+		route->connected);
+	if (ret)
+		goto err;
+
+	return 0;
+err:
+	dev_warn(dapm->dev, "ASoC: no dapm match for %s --> %s --> %s\n",
+		 source, route->control, sink);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -2387,6 +3433,10 @@ static int snd_soc_dapm_del_route(struct snd_soc_dapm_context *dapm,
 	const char *source;
 	char prefixed_sink[80];
 	char prefixed_source[80];
+<<<<<<< HEAD
+=======
+	const char *prefix;
+>>>>>>> v3.18
 
 	if (route->control) {
 		dev_err(dapm->dev,
@@ -2394,12 +3444,22 @@ static int snd_soc_dapm_del_route(struct snd_soc_dapm_context *dapm,
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 	if (dapm->codec && dapm->codec->name_prefix) {
 		snprintf(prefixed_sink, sizeof(prefixed_sink), "%s %s",
 			 dapm->codec->name_prefix, route->sink);
 		sink = prefixed_sink;
 		snprintf(prefixed_source, sizeof(prefixed_source), "%s %s",
 			 dapm->codec->name_prefix, route->source);
+=======
+	prefix = soc_dapm_prefix(dapm);
+	if (prefix) {
+		snprintf(prefixed_sink, sizeof(prefixed_sink), "%s %s",
+			 prefix, route->sink);
+		sink = prefixed_sink;
+		snprintf(prefixed_source, sizeof(prefixed_source), "%s %s",
+			 prefix, route->source);
+>>>>>>> v3.18
 		source = prefixed_source;
 	} else {
 		sink = route->sink;
@@ -2420,10 +3480,14 @@ static int snd_soc_dapm_del_route(struct snd_soc_dapm_context *dapm,
 		dapm_mark_dirty(path->source, "Route removed");
 		dapm_mark_dirty(path->sink, "Route removed");
 
+<<<<<<< HEAD
 		list_del(&path->list);
 		list_del(&path->list_sink);
 		list_del(&path->list_source);
 		kfree(path);
+=======
+		dapm_free_path(path);
+>>>>>>> v3.18
 	} else {
 		dev_warn(dapm->dev, "ASoC: Route %s->%s does not exist\n",
 			 source, sink);
@@ -2580,14 +3644,24 @@ EXPORT_SYMBOL_GPL(snd_soc_dapm_weak_routes);
  *
  * Returns 0 for success.
  */
+<<<<<<< HEAD
 int snd_soc_dapm_new_widgets(struct snd_soc_dapm_context *dapm)
+=======
+int snd_soc_dapm_new_widgets(struct snd_soc_card *card)
+>>>>>>> v3.18
 {
 	struct snd_soc_dapm_widget *w;
 	unsigned int val;
 
+<<<<<<< HEAD
 	mutex_lock_nested(&dapm->card->dapm_mutex, SND_SOC_DAPM_CLASS_INIT);
 
 	list_for_each_entry(w, &dapm->card->widgets, list)
+=======
+	mutex_lock_nested(&card->dapm_mutex, SND_SOC_DAPM_CLASS_INIT);
+
+	list_for_each_entry(w, &card->widgets, list)
+>>>>>>> v3.18
 	{
 		if (w->new)
 			continue;
@@ -2597,7 +3671,11 @@ int snd_soc_dapm_new_widgets(struct snd_soc_dapm_context *dapm)
 						sizeof(struct snd_kcontrol *),
 						GFP_KERNEL);
 			if (!w->kcontrols) {
+<<<<<<< HEAD
 				mutex_unlock(&dapm->card->dapm_mutex);
+=======
+				mutex_unlock(&card->dapm_mutex);
+>>>>>>> v3.18
 				return -ENOMEM;
 			}
 		}
@@ -2609,8 +3687,11 @@ int snd_soc_dapm_new_widgets(struct snd_soc_dapm_context *dapm)
 			dapm_new_mixer(w);
 			break;
 		case snd_soc_dapm_mux:
+<<<<<<< HEAD
 		case snd_soc_dapm_virt_mux:
 		case snd_soc_dapm_value_mux:
+=======
+>>>>>>> v3.18
 			dapm_new_mux(w);
 			break;
 		case snd_soc_dapm_pga:
@@ -2623,12 +3704,19 @@ int snd_soc_dapm_new_widgets(struct snd_soc_dapm_context *dapm)
 
 		/* Read the initial power state from the device */
 		if (w->reg >= 0) {
+<<<<<<< HEAD
 			val = soc_widget_read(w, w->reg);
 			val &= 1 << w->shift;
 			if (w->invert)
 				val = !val;
 
 			if (val)
+=======
+			soc_dapm_read(w->dapm, w->reg, &val);
+			val = val >> w->shift;
+			val &= w->mask;
+			if (val == w->on_val)
+>>>>>>> v3.18
 				w->power = 1;
 		}
 
@@ -2638,8 +3726,13 @@ int snd_soc_dapm_new_widgets(struct snd_soc_dapm_context *dapm)
 		dapm_debugfs_add_widget(w);
 	}
 
+<<<<<<< HEAD
 	dapm_power_widgets(dapm, SND_SOC_DAPM_STREAM_NOP);
 	mutex_unlock(&dapm->card->dapm_mutex);
+=======
+	dapm_power_widgets(card, SND_SOC_DAPM_STREAM_NOP);
+	mutex_unlock(&card->dapm_mutex);
+>>>>>>> v3.18
 	return 0;
 }
 EXPORT_SYMBOL_GPL(snd_soc_dapm_new_widgets);
@@ -2656,15 +3749,24 @@ EXPORT_SYMBOL_GPL(snd_soc_dapm_new_widgets);
 int snd_soc_dapm_get_volsw(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_value *ucontrol)
 {
+<<<<<<< HEAD
 	struct snd_soc_dapm_widget_list *wlist = snd_kcontrol_chip(kcontrol);
 	struct snd_soc_dapm_widget *widget = wlist->widgets[0];
 	struct soc_mixer_control *mc =
 		(struct soc_mixer_control *)kcontrol->private_value;
 	unsigned int reg = mc->reg;
+=======
+	struct snd_soc_dapm_context *dapm = snd_soc_dapm_kcontrol_dapm(kcontrol);
+	struct snd_soc_card *card = dapm->card;
+	struct soc_mixer_control *mc =
+		(struct soc_mixer_control *)kcontrol->private_value;
+	int reg = mc->reg;
+>>>>>>> v3.18
 	unsigned int shift = mc->shift;
 	int max = mc->max;
 	unsigned int mask = (1 << fls(max)) - 1;
 	unsigned int invert = mc->invert;
+<<<<<<< HEAD
 
 	if (snd_soc_volsw_is_stereo(mc))
 		dev_warn(widget->dapm->dev,
@@ -2679,6 +3781,31 @@ int snd_soc_dapm_get_volsw(struct snd_kcontrol *kcontrol,
 			max - ucontrol->value.integer.value[0];
 
 	return 0;
+=======
+	unsigned int val;
+	int ret = 0;
+
+	if (snd_soc_volsw_is_stereo(mc))
+		dev_warn(dapm->dev,
+			 "ASoC: Control '%s' is stereo, which is not supported\n",
+			 kcontrol->id.name);
+
+	mutex_lock_nested(&card->dapm_mutex, SND_SOC_DAPM_CLASS_RUNTIME);
+	if (dapm_kcontrol_is_powered(kcontrol) && reg != SND_SOC_NOPM) {
+		ret = soc_dapm_read(dapm, reg, &val);
+		val = (val >> shift) & mask;
+	} else {
+		val = dapm_kcontrol_get_value(kcontrol);
+	}
+	mutex_unlock(&card->dapm_mutex);
+
+	if (invert)
+		ucontrol->value.integer.value[0] = max - val;
+	else
+		ucontrol->value.integer.value[0] = val;
+
+	return ret;
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(snd_soc_dapm_get_volsw);
 
@@ -2694,6 +3821,7 @@ EXPORT_SYMBOL_GPL(snd_soc_dapm_get_volsw);
 int snd_soc_dapm_put_volsw(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_value *ucontrol)
 {
+<<<<<<< HEAD
 	struct snd_soc_dapm_widget_list *wlist = snd_kcontrol_chip(kcontrol);
 	struct snd_soc_dapm_widget *widget = wlist->widgets[0];
 	struct snd_soc_codec *codec = widget->codec;
@@ -2701,17 +3829,33 @@ int snd_soc_dapm_put_volsw(struct snd_kcontrol *kcontrol,
 	struct soc_mixer_control *mc =
 		(struct soc_mixer_control *)kcontrol->private_value;
 	unsigned int reg = mc->reg;
+=======
+	struct snd_soc_dapm_context *dapm = snd_soc_dapm_kcontrol_dapm(kcontrol);
+	struct snd_soc_card *card = dapm->card;
+	struct soc_mixer_control *mc =
+		(struct soc_mixer_control *)kcontrol->private_value;
+	int reg = mc->reg;
+>>>>>>> v3.18
 	unsigned int shift = mc->shift;
 	int max = mc->max;
 	unsigned int mask = (1 << fls(max)) - 1;
 	unsigned int invert = mc->invert;
 	unsigned int val;
+<<<<<<< HEAD
 	int connect, change;
 	struct snd_soc_dapm_update update;
 	int wi;
 
 	if (snd_soc_volsw_is_stereo(mc))
 		dev_warn(widget->dapm->dev,
+=======
+	int connect, change, reg_change = 0;
+	struct snd_soc_dapm_update update;
+	int ret = 0;
+
+	if (snd_soc_volsw_is_stereo(mc))
+		dev_warn(dapm->dev,
+>>>>>>> v3.18
 			 "ASoC: Control '%s' is stereo, which is not supported\n",
 			 kcontrol->id.name);
 
@@ -2720,6 +3864,7 @@ int snd_soc_dapm_put_volsw(struct snd_kcontrol *kcontrol,
 
 	if (invert)
 		val = max - val;
+<<<<<<< HEAD
 	mask = mask << shift;
 	val = val << shift;
 
@@ -2750,6 +3895,41 @@ int snd_soc_dapm_put_volsw(struct snd_kcontrol *kcontrol,
 
 	mutex_unlock(&card->dapm_mutex);
 	return 0;
+=======
+
+	mutex_lock_nested(&card->dapm_mutex, SND_SOC_DAPM_CLASS_RUNTIME);
+
+	change = dapm_kcontrol_set_value(kcontrol, val);
+
+	if (reg != SND_SOC_NOPM) {
+		mask = mask << shift;
+		val = val << shift;
+
+		reg_change = soc_dapm_test_bits(dapm, reg, mask, val);
+	}
+
+	if (change || reg_change) {
+		if (reg_change) {
+			update.kcontrol = kcontrol;
+			update.reg = reg;
+			update.mask = mask;
+			update.val = val;
+			card->update = &update;
+		}
+		change |= reg_change;
+
+		ret = soc_dapm_mixer_update_power(card, kcontrol, connect);
+
+		card->update = NULL;
+	}
+
+	mutex_unlock(&card->dapm_mutex);
+
+	if (ret > 0)
+		soc_dpcm_runtime_update(card);
+
+	return change;
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(snd_soc_dapm_put_volsw);
 
@@ -2765,6 +3945,7 @@ EXPORT_SYMBOL_GPL(snd_soc_dapm_put_volsw);
 int snd_soc_dapm_get_enum_double(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_value *ucontrol)
 {
+<<<<<<< HEAD
 	struct snd_soc_dapm_widget_list *wlist = snd_kcontrol_chip(kcontrol);
 	struct snd_soc_dapm_widget *widget = wlist->widgets[0];
 	struct soc_enum *e = (struct soc_enum *)kcontrol->private_value;
@@ -2936,10 +4117,31 @@ int snd_soc_dapm_get_value_enum_double(struct snd_kcontrol *kcontrol,
 				break;
 		}
 		ucontrol->value.enumerated.item[1] = mux;
+=======
+	struct snd_soc_dapm_context *dapm = snd_soc_dapm_kcontrol_dapm(kcontrol);
+	struct soc_enum *e = (struct soc_enum *)kcontrol->private_value;
+	unsigned int reg_val, val;
+
+	if (e->reg != SND_SOC_NOPM) {
+		int ret = soc_dapm_read(dapm, e->reg, &reg_val);
+		if (ret)
+			return ret;
+	} else {
+		reg_val = dapm_kcontrol_get_value(kcontrol);
+	}
+
+	val = (reg_val >> e->shift_l) & e->mask;
+	ucontrol->value.enumerated.item[0] = snd_soc_enum_val_to_item(e, val);
+	if (e->shift_l != e->shift_r) {
+		val = (reg_val >> e->shift_r) & e->mask;
+		val = snd_soc_enum_val_to_item(e, val);
+		ucontrol->value.enumerated.item[1] = val;
+>>>>>>> v3.18
 	}
 
 	return 0;
 }
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(snd_soc_dapm_get_value_enum_double);
 
 /**
@@ -2977,11 +4179,46 @@ int snd_soc_dapm_put_value_enum_double(struct snd_kcontrol *kcontrol,
 		if (ucontrol->value.enumerated.item[1] > e->max - 1)
 			return -EINVAL;
 		val |= e->values[ucontrol->value.enumerated.item[1]] << e->shift_r;
+=======
+EXPORT_SYMBOL_GPL(snd_soc_dapm_get_enum_double);
+
+/**
+ * snd_soc_dapm_put_enum_double - dapm enumerated double mixer set callback
+ * @kcontrol: mixer control
+ * @ucontrol: control element information
+ *
+ * Callback to set the value of a dapm enumerated double mixer control.
+ *
+ * Returns 0 for success.
+ */
+int snd_soc_dapm_put_enum_double(struct snd_kcontrol *kcontrol,
+	struct snd_ctl_elem_value *ucontrol)
+{
+	struct snd_soc_dapm_context *dapm = snd_soc_dapm_kcontrol_dapm(kcontrol);
+	struct snd_soc_card *card = dapm->card;
+	struct soc_enum *e = (struct soc_enum *)kcontrol->private_value;
+	unsigned int *item = ucontrol->value.enumerated.item;
+	unsigned int val, change;
+	unsigned int mask;
+	struct snd_soc_dapm_update update;
+	int ret = 0;
+
+	if (item[0] >= e->items)
+		return -EINVAL;
+
+	val = snd_soc_enum_item_to_val(e, item[0]) << e->shift_l;
+	mask = e->mask << e->shift_l;
+	if (e->shift_l != e->shift_r) {
+		if (item[1] > e->items)
+			return -EINVAL;
+		val |= snd_soc_enum_item_to_val(e, item[1]) << e->shift_l;
+>>>>>>> v3.18
 		mask |= e->mask << e->shift_r;
 	}
 
 	mutex_lock_nested(&card->dapm_mutex, SND_SOC_DAPM_CLASS_RUNTIME);
 
+<<<<<<< HEAD
 	change = snd_soc_test_bits(widget->codec, e->reg, mask, val);
 	if (change) {
 		for (wi = 0; wi < wlist->num_widgets; wi++) {
@@ -3006,6 +4243,35 @@ int snd_soc_dapm_put_value_enum_double(struct snd_kcontrol *kcontrol,
 	return change;
 }
 EXPORT_SYMBOL_GPL(snd_soc_dapm_put_value_enum_double);
+=======
+	if (e->reg != SND_SOC_NOPM)
+		change = soc_dapm_test_bits(dapm, e->reg, mask, val);
+	else
+		change = dapm_kcontrol_set_value(kcontrol, val);
+
+	if (change) {
+		if (e->reg != SND_SOC_NOPM) {
+			update.kcontrol = kcontrol;
+			update.reg = e->reg;
+			update.mask = mask;
+			update.val = val;
+			card->update = &update;
+		}
+
+		ret = soc_dapm_mux_update_power(card, kcontrol, item[0], e);
+
+		card->update = NULL;
+	}
+
+	mutex_unlock(&card->dapm_mutex);
+
+	if (ret > 0)
+		soc_dpcm_runtime_update(card);
+
+	return change;
+}
+EXPORT_SYMBOL_GPL(snd_soc_dapm_put_enum_double);
+>>>>>>> v3.18
 
 /**
  * snd_soc_dapm_info_pin_switch - Info for a pin switch
@@ -3062,15 +4328,21 @@ int snd_soc_dapm_put_pin_switch(struct snd_kcontrol *kcontrol,
 	struct snd_soc_card *card = snd_kcontrol_chip(kcontrol);
 	const char *pin = (const char *)kcontrol->private_value;
 
+<<<<<<< HEAD
 	mutex_lock_nested(&card->dapm_mutex, SND_SOC_DAPM_CLASS_RUNTIME);
 
+=======
+>>>>>>> v3.18
 	if (ucontrol->value.integer.value[0])
 		snd_soc_dapm_enable_pin(&card->dapm, pin);
 	else
 		snd_soc_dapm_disable_pin(&card->dapm, pin);
 
+<<<<<<< HEAD
 	mutex_unlock(&card->dapm_mutex);
 
+=======
+>>>>>>> v3.18
 	snd_soc_dapm_sync(&card->dapm);
 	return 0;
 }
@@ -3081,7 +4353,11 @@ snd_soc_dapm_new_control(struct snd_soc_dapm_context *dapm,
 			 const struct snd_soc_dapm_widget *widget)
 {
 	struct snd_soc_dapm_widget *w;
+<<<<<<< HEAD
 	size_t name_len;
+=======
+	const char *prefix;
+>>>>>>> v3.18
 	int ret;
 
 	if ((w = dapm_cnew_widget(widget)) == NULL)
@@ -3097,11 +4373,19 @@ snd_soc_dapm_new_control(struct snd_soc_dapm_context *dapm,
 			return NULL;
 		}
 
+<<<<<<< HEAD
 		if (w->invert & SND_SOC_DAPM_REGULATOR_BYPASS) {
 			ret = regulator_allow_bypass(w->regulator, true);
 			if (ret != 0)
 				dev_warn(w->dapm->dev,
 					 "ASoC: Failed to unbypass %s: %d\n",
+=======
+		if (w->on_val & SND_SOC_DAPM_REGULATOR_BYPASS) {
+			ret = regulator_allow_bypass(w->regulator, true);
+			if (ret != 0)
+				dev_warn(w->dapm->dev,
+					 "ASoC: Failed to bypass %s: %d\n",
+>>>>>>> v3.18
 					 w->name, ret);
 		}
 		break;
@@ -3122,19 +4406,31 @@ snd_soc_dapm_new_control(struct snd_soc_dapm_context *dapm,
 		break;
 	}
 
+<<<<<<< HEAD
 	name_len = strlen(widget->name) + 1;
 	if (dapm->codec && dapm->codec->name_prefix)
 		name_len += 1 + strlen(dapm->codec->name_prefix);
 	w->name = kmalloc(name_len, GFP_KERNEL);
+=======
+	prefix = soc_dapm_prefix(dapm);
+	if (prefix)
+		w->name = kasprintf(GFP_KERNEL, "%s %s", prefix, widget->name);
+	else
+		w->name = kasprintf(GFP_KERNEL, "%s", widget->name);
+
+>>>>>>> v3.18
 	if (w->name == NULL) {
 		kfree(w);
 		return NULL;
 	}
+<<<<<<< HEAD
 	if (dapm->codec && dapm->codec->name_prefix)
 		snprintf((char *)w->name, name_len, "%s %s",
 			dapm->codec->name_prefix, widget->name);
 	else
 		snprintf((char *)w->name, name_len, "%s", widget->name);
+=======
+>>>>>>> v3.18
 
 	switch (w->id) {
 	case snd_soc_dapm_switch:
@@ -3143,6 +4439,7 @@ snd_soc_dapm_new_control(struct snd_soc_dapm_context *dapm,
 		w->power_check = dapm_generic_check_power;
 		break;
 	case snd_soc_dapm_mux:
+<<<<<<< HEAD
 	case snd_soc_dapm_virt_mux:
 	case snd_soc_dapm_value_mux:
 		w->power_check = dapm_generic_check_power;
@@ -3157,6 +4454,20 @@ snd_soc_dapm_new_control(struct snd_soc_dapm_context *dapm,
 	case snd_soc_dapm_dai_in:
 		w->power_check = dapm_dac_check_power;
 		break;
+=======
+		w->power_check = dapm_generic_check_power;
+		break;
+	case snd_soc_dapm_dai_out:
+		w->power_check = dapm_adc_check_power;
+		break;
+	case snd_soc_dapm_dai_in:
+		w->power_check = dapm_dac_check_power;
+		break;
+	case snd_soc_dapm_adc:
+	case snd_soc_dapm_aif_out:
+	case snd_soc_dapm_dac:
+	case snd_soc_dapm_aif_in:
+>>>>>>> v3.18
 	case snd_soc_dapm_pga:
 	case snd_soc_dapm_out_drv:
 	case snd_soc_dapm_input:
@@ -3172,6 +4483,10 @@ snd_soc_dapm_new_control(struct snd_soc_dapm_context *dapm,
 	case snd_soc_dapm_supply:
 	case snd_soc_dapm_regulator_supply:
 	case snd_soc_dapm_clock_supply:
+<<<<<<< HEAD
+=======
+	case snd_soc_dapm_kcontrol:
+>>>>>>> v3.18
 		w->power_check = dapm_supply_check_power;
 		break;
 	default:
@@ -3180,8 +4495,13 @@ snd_soc_dapm_new_control(struct snd_soc_dapm_context *dapm,
 	}
 
 	w->dapm = dapm;
+<<<<<<< HEAD
 	w->codec = dapm->codec;
 	w->platform = dapm->platform;
+=======
+	if (dapm->component)
+		w->codec = dapm->component->codec;
+>>>>>>> v3.18
 	INIT_LIST_HEAD(&w->sources);
 	INIT_LIST_HEAD(&w->sinks);
 	INIT_LIST_HEAD(&w->list);
@@ -3239,8 +4559,14 @@ static int snd_soc_dai_link_event(struct snd_soc_dapm_widget *w,
 	u64 fmt;
 	int ret;
 
+<<<<<<< HEAD
 	BUG_ON(!config);
 	BUG_ON(list_empty(&w->sources) || list_empty(&w->sinks));
+=======
+	if (WARN_ON(!config) ||
+	    WARN_ON(list_empty(&w->sources) || list_empty(&w->sinks)))
+		return -EINVAL;
+>>>>>>> v3.18
 
 	/* We only support a single source and sink, pick the first */
 	source_p = list_first_entry(&w->sources, struct snd_soc_dapm_path,
@@ -3248,9 +4574,16 @@ static int snd_soc_dai_link_event(struct snd_soc_dapm_widget *w,
 	sink_p = list_first_entry(&w->sinks, struct snd_soc_dapm_path,
 				  list_source);
 
+<<<<<<< HEAD
 	BUG_ON(!source_p || !sink_p);
 	BUG_ON(!sink_p->source || !source_p->sink);
 	BUG_ON(!source_p->source || !sink_p->sink);
+=======
+	if (WARN_ON(!source_p || !sink_p) ||
+	    WARN_ON(!sink_p->source || !source_p->sink) ||
+	    WARN_ON(!source_p->source || !sink_p->sink))
+		return -EINVAL;
+>>>>>>> v3.18
 
 	source = source_p->source->priv;
 	sink = sink_p->sink->priv;
@@ -3286,6 +4619,7 @@ static int snd_soc_dai_link_event(struct snd_soc_dapm_widget *w,
 
 	switch (event) {
 	case SND_SOC_DAPM_PRE_PMU:
+<<<<<<< HEAD
 		if (source->driver->ops && source->driver->ops->hw_params) {
 			substream.stream = SNDRV_PCM_STREAM_CAPTURE;
 			ret = source->driver->ops->hw_params(&substream,
@@ -3307,6 +4641,17 @@ static int snd_soc_dai_link_event(struct snd_soc_dapm_widget *w,
 				goto out;
 			}
 		}
+=======
+		substream.stream = SNDRV_PCM_STREAM_CAPTURE;
+		ret = soc_dai_hw_params(&substream, params, source);
+		if (ret < 0)
+			goto out;
+
+		substream.stream = SNDRV_PCM_STREAM_PLAYBACK;
+		ret = soc_dai_hw_params(&substream, params, sink);
+		if (ret < 0)
+			goto out;
+>>>>>>> v3.18
 		break;
 
 	case SND_SOC_DAPM_POST_PMU:
@@ -3326,7 +4671,11 @@ static int snd_soc_dai_link_event(struct snd_soc_dapm_widget *w,
 		break;
 
 	default:
+<<<<<<< HEAD
 		BUG();
+=======
+		WARN(1, "Unknown event %d\n", event);
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
@@ -3340,11 +4689,18 @@ int snd_soc_dapm_new_pcm(struct snd_soc_card *card,
 			 struct snd_soc_dapm_widget *source,
 			 struct snd_soc_dapm_widget *sink)
 {
+<<<<<<< HEAD
 	struct snd_soc_dapm_route routes[2];
+=======
+>>>>>>> v3.18
 	struct snd_soc_dapm_widget template;
 	struct snd_soc_dapm_widget *w;
 	size_t len;
 	char *link_name;
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 
 	len = strlen(source->name) + strlen(sink->name) + 2;
 	link_name = devm_kzalloc(card->dev, len, GFP_KERNEL);
@@ -3371,6 +4727,7 @@ int snd_soc_dapm_new_pcm(struct snd_soc_card *card,
 
 	w->params = params;
 
+<<<<<<< HEAD
 	memset(&routes, 0, sizeof(routes));
 
 	routes[0].source = source->name;
@@ -3380,6 +4737,12 @@ int snd_soc_dapm_new_pcm(struct snd_soc_card *card,
 
 	return snd_soc_dapm_add_routes(&card->dapm, routes,
 				       ARRAY_SIZE(routes));
+=======
+	ret = snd_soc_dapm_add_path(&card->dapm, source, w, NULL, NULL);
+	if (ret)
+		return ret;
+	return snd_soc_dapm_add_path(&card->dapm, w, sink, NULL, NULL);
+>>>>>>> v3.18
 }
 
 int snd_soc_dapm_new_dai_widgets(struct snd_soc_dapm_context *dapm,
@@ -3405,6 +4768,10 @@ int snd_soc_dapm_new_dai_widgets(struct snd_soc_dapm_context *dapm,
 		if (!w) {
 			dev_err(dapm->dev, "ASoC: Failed to create %s widget\n",
 				dai->driver->playback.stream_name);
+<<<<<<< HEAD
+=======
+			return -ENOMEM;
+>>>>>>> v3.18
 		}
 
 		w->priv = dai;
@@ -3423,6 +4790,10 @@ int snd_soc_dapm_new_dai_widgets(struct snd_soc_dapm_context *dapm,
 		if (!w) {
 			dev_err(dapm->dev, "ASoC: Failed to create %s widget\n",
 				dai->driver->capture.stream_name);
+<<<<<<< HEAD
+=======
+			return -ENOMEM;
+>>>>>>> v3.18
 		}
 
 		w->priv = dai;
@@ -3435,10 +4806,15 @@ int snd_soc_dapm_new_dai_widgets(struct snd_soc_dapm_context *dapm,
 int snd_soc_dapm_link_dai_widgets(struct snd_soc_card *card)
 {
 	struct snd_soc_dapm_widget *dai_w, *w;
+<<<<<<< HEAD
 	struct snd_soc_dai *dai;
 	struct snd_soc_dapm_route r;
 
 	memset(&r, 0, sizeof(r));
+=======
+	struct snd_soc_dapm_widget *src, *sink;
+	struct snd_soc_dai *dai;
+>>>>>>> v3.18
 
 	/* For each DAI widget... */
 	list_for_each_entry(dai_w, &card->widgets, list) {
@@ -3465,6 +4841,7 @@ int snd_soc_dapm_link_dai_widgets(struct snd_soc_card *card)
 				break;
 			}
 
+<<<<<<< HEAD
 			if (!w->sname)
 				continue;
 
@@ -3489,12 +4866,27 @@ int snd_soc_dapm_link_dai_widgets(struct snd_soc_card *card)
 
 				snd_soc_dapm_add_route(w->dapm, &r);
 			}
+=======
+			if (!w->sname || !strstr(w->sname, dai_w->name))
+				continue;
+
+			if (dai_w->id == snd_soc_dapm_dai_in) {
+				src = dai_w;
+				sink = w;
+			} else {
+				src = w;
+				sink = dai_w;
+			}
+			dev_dbg(dai->dev, "%s -> %s\n", src->name, sink->name);
+			snd_soc_dapm_add_path(w->dapm, src, sink, NULL, NULL);
+>>>>>>> v3.18
 		}
 	}
 
 	return 0;
 }
 
+<<<<<<< HEAD
 static void soc_dapm_stream_event(struct snd_soc_pcm_runtime *rtd, int stream,
 	int event)
 {
@@ -3540,6 +4932,68 @@ static void soc_dapm_stream_event(struct snd_soc_pcm_runtime *rtd, int stream,
 			break;
 		case SND_SOC_DAPM_STREAM_STOP:
 			w_codec->active = 0;
+=======
+static void dapm_connect_dai_link_widgets(struct snd_soc_card *card,
+					  struct snd_soc_pcm_runtime *rtd)
+{
+	struct snd_soc_dai *cpu_dai = rtd->cpu_dai;
+	struct snd_soc_dapm_widget *sink, *source;
+	int i;
+
+	for (i = 0; i < rtd->num_codecs; i++) {
+		struct snd_soc_dai *codec_dai = rtd->codec_dais[i];
+
+		/* there is no point in connecting BE DAI links with dummies */
+		if (snd_soc_dai_is_dummy(codec_dai) ||
+			snd_soc_dai_is_dummy(cpu_dai))
+			continue;
+
+		/* connect BE DAI playback if widgets are valid */
+		if (codec_dai->playback_widget && cpu_dai->playback_widget) {
+			source = cpu_dai->playback_widget;
+			sink = codec_dai->playback_widget;
+			dev_dbg(rtd->dev, "connected DAI link %s:%s -> %s:%s\n",
+				cpu_dai->component->name, source->name,
+				codec_dai->component->name, sink->name);
+
+			snd_soc_dapm_add_path(&card->dapm, source, sink,
+				NULL, NULL);
+		}
+
+		/* connect BE DAI capture if widgets are valid */
+		if (codec_dai->capture_widget && cpu_dai->capture_widget) {
+			source = codec_dai->capture_widget;
+			sink = cpu_dai->capture_widget;
+			dev_dbg(rtd->dev, "connected DAI link %s:%s -> %s:%s\n",
+				codec_dai->component->name, source->name,
+				cpu_dai->component->name, sink->name);
+
+			snd_soc_dapm_add_path(&card->dapm, source, sink,
+				NULL, NULL);
+		}
+	}
+}
+
+static void soc_dapm_dai_stream_event(struct snd_soc_dai *dai, int stream,
+	int event)
+{
+	struct snd_soc_dapm_widget *w;
+
+	if (stream == SNDRV_PCM_STREAM_PLAYBACK)
+		w = dai->playback_widget;
+	else
+		w = dai->capture_widget;
+
+	if (w) {
+		dapm_mark_dirty(w, "stream event");
+
+		switch (event) {
+		case SND_SOC_DAPM_STREAM_START:
+			w->active = 1;
+			break;
+		case SND_SOC_DAPM_STREAM_STOP:
+			w->active = 0;
+>>>>>>> v3.18
 			break;
 		case SND_SOC_DAPM_STREAM_SUSPEND:
 		case SND_SOC_DAPM_STREAM_RESUME:
@@ -3548,8 +5002,43 @@ static void soc_dapm_stream_event(struct snd_soc_pcm_runtime *rtd, int stream,
 			break;
 		}
 	}
+<<<<<<< HEAD
 
 	dapm_power_widgets(&rtd->card->dapm, event);
+=======
+}
+
+void snd_soc_dapm_connect_dai_link_widgets(struct snd_soc_card *card)
+{
+	struct snd_soc_pcm_runtime *rtd = card->rtd;
+	int i;
+
+	/* for each BE DAI link... */
+	for (i = 0; i < card->num_rtd; i++) {
+		rtd = &card->rtd[i];
+
+		/*
+		 * dynamic FE links have no fixed DAI mapping.
+		 * CODEC<->CODEC links have no direct connection.
+		 */
+		if (rtd->dai_link->dynamic || rtd->dai_link->params)
+			continue;
+
+		dapm_connect_dai_link_widgets(card, rtd);
+	}
+}
+
+static void soc_dapm_stream_event(struct snd_soc_pcm_runtime *rtd, int stream,
+	int event)
+{
+	int i;
+
+	soc_dapm_dai_stream_event(rtd->cpu_dai, stream, event);
+	for (i = 0; i < rtd->num_codecs; i++)
+		soc_dapm_dai_stream_event(rtd->codec_dais[i], stream, event);
+
+	dapm_power_widgets(rtd->card, event);
+>>>>>>> v3.18
 }
 
 /**
@@ -3574,20 +5063,120 @@ void snd_soc_dapm_stream_event(struct snd_soc_pcm_runtime *rtd, int stream,
 }
 
 /**
+<<<<<<< HEAD
+=======
+ * snd_soc_dapm_enable_pin_unlocked - enable pin.
+ * @dapm: DAPM context
+ * @pin: pin name
+ *
+ * Enables input/output pin and its parents or children widgets iff there is
+ * a valid audio route and active audio stream.
+ *
+ * Requires external locking.
+ *
+ * NOTE: snd_soc_dapm_sync() needs to be called after this for DAPM to
+ * do any widget power switching.
+ */
+int snd_soc_dapm_enable_pin_unlocked(struct snd_soc_dapm_context *dapm,
+				   const char *pin)
+{
+	return snd_soc_dapm_set_pin(dapm, pin, 1);
+}
+EXPORT_SYMBOL_GPL(snd_soc_dapm_enable_pin_unlocked);
+
+/**
+>>>>>>> v3.18
  * snd_soc_dapm_enable_pin - enable pin.
  * @dapm: DAPM context
  * @pin: pin name
  *
  * Enables input/output pin and its parents or children widgets iff there is
  * a valid audio route and active audio stream.
+<<<<<<< HEAD
+=======
+ *
+>>>>>>> v3.18
  * NOTE: snd_soc_dapm_sync() needs to be called after this for DAPM to
  * do any widget power switching.
  */
 int snd_soc_dapm_enable_pin(struct snd_soc_dapm_context *dapm, const char *pin)
 {
+<<<<<<< HEAD
 	return snd_soc_dapm_set_pin(dapm, pin, 1);
+=======
+	int ret;
+
+	mutex_lock_nested(&dapm->card->dapm_mutex, SND_SOC_DAPM_CLASS_RUNTIME);
+
+	ret = snd_soc_dapm_set_pin(dapm, pin, 1);
+
+	mutex_unlock(&dapm->card->dapm_mutex);
+
+	return ret;
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(snd_soc_dapm_enable_pin);
+
+/**
+<<<<<<< HEAD
+ * snd_soc_dapm_force_enable_pin - force a pin to be enabled
+=======
+ * snd_soc_dapm_force_enable_pin_unlocked - force a pin to be enabled
+>>>>>>> v3.18
+ * @dapm: DAPM context
+ * @pin: pin name
+ *
+ * Enables input/output pin regardless of any other state.  This is
+ * intended for use with microphone bias supplies used in microphone
+ * jack detection.
+ *
+<<<<<<< HEAD
+ * NOTE: snd_soc_dapm_sync() needs to be called after this for DAPM to
+ * do any widget power switching.
+ */
+int snd_soc_dapm_force_enable_pin(struct snd_soc_dapm_context *dapm,
+				  const char *pin)
+{
+	struct snd_soc_dapm_widget *w = dapm_find_widget(dapm, pin, true);
+
+	mutex_lock_nested(&dapm->card->dapm_mutex, SND_SOC_DAPM_CLASS_PCM);
+	if (!w) {
+		dev_err(dapm->dev, "ASoC: unknown pin %s\n", pin);
+		mutex_unlock(&dapm->card->dapm_mutex);
+=======
+ * Requires external locking.
+ *
+ * NOTE: snd_soc_dapm_sync() needs to be called after this for DAPM to
+ * do any widget power switching.
+ */
+int snd_soc_dapm_force_enable_pin_unlocked(struct snd_soc_dapm_context *dapm,
+					 const char *pin)
+{
+	struct snd_soc_dapm_widget *w = dapm_find_widget(dapm, pin, true);
+
+	if (!w) {
+		dev_err(dapm->dev, "ASoC: unknown pin %s\n", pin);
+>>>>>>> v3.18
+		return -EINVAL;
+	}
+
+	dev_dbg(w->dapm->dev, "ASoC: force enable pin %s\n", pin);
+	w->connected = 1;
+	w->force = 1;
+	dapm_mark_dirty(w, "force enable");
+<<<<<<< HEAD
+	mutex_unlock(&dapm->card->dapm_mutex);
+
+	return 0;
+}
+EXPORT_SYMBOL_GPL(snd_soc_dapm_force_enable_pin);
+
+/**
+=======
+
+	return 0;
+}
+EXPORT_SYMBOL_GPL(snd_soc_dapm_force_enable_pin_unlocked);
 
 /**
  * snd_soc_dapm_force_enable_pin - force a pin to be enabled
@@ -3604,42 +5193,97 @@ EXPORT_SYMBOL_GPL(snd_soc_dapm_enable_pin);
 int snd_soc_dapm_force_enable_pin(struct snd_soc_dapm_context *dapm,
 				  const char *pin)
 {
-	struct snd_soc_dapm_widget *w = dapm_find_widget(dapm, pin, true);
+	int ret;
 
-	mutex_lock_nested(&dapm->card->dapm_mutex, SND_SOC_DAPM_CLASS_PCM);
-	if (!w) {
-		dev_err(dapm->dev, "ASoC: unknown pin %s\n", pin);
-		mutex_unlock(&dapm->card->dapm_mutex);
-		return -EINVAL;
-	}
+	mutex_lock_nested(&dapm->card->dapm_mutex, SND_SOC_DAPM_CLASS_RUNTIME);
 
-	dev_dbg(w->dapm->dev, "ASoC: force enable pin %s\n", pin);
-	w->connected = 1;
-	w->force = 1;
-	dapm_mark_dirty(w, "force enable");
+	ret = snd_soc_dapm_force_enable_pin_unlocked(dapm, pin);
+
 	mutex_unlock(&dapm->card->dapm_mutex);
 
-	return 0;
+	return ret;
 }
 EXPORT_SYMBOL_GPL(snd_soc_dapm_force_enable_pin);
 
 /**
+ * snd_soc_dapm_disable_pin_unlocked - disable pin.
+ * @dapm: DAPM context
+ * @pin: pin name
+ *
+ * Disables input/output pin and its parents or children widgets.
+ *
+ * Requires external locking.
+ *
+ * NOTE: snd_soc_dapm_sync() needs to be called after this for DAPM to
+ * do any widget power switching.
+ */
+int snd_soc_dapm_disable_pin_unlocked(struct snd_soc_dapm_context *dapm,
+				    const char *pin)
+{
+	return snd_soc_dapm_set_pin(dapm, pin, 0);
+}
+EXPORT_SYMBOL_GPL(snd_soc_dapm_disable_pin_unlocked);
+
+/**
+>>>>>>> v3.18
  * snd_soc_dapm_disable_pin - disable pin.
  * @dapm: DAPM context
  * @pin: pin name
  *
  * Disables input/output pin and its parents or children widgets.
+<<<<<<< HEAD
+=======
+ *
+>>>>>>> v3.18
  * NOTE: snd_soc_dapm_sync() needs to be called after this for DAPM to
  * do any widget power switching.
  */
 int snd_soc_dapm_disable_pin(struct snd_soc_dapm_context *dapm,
 			     const char *pin)
 {
+<<<<<<< HEAD
 	return snd_soc_dapm_set_pin(dapm, pin, 0);
+=======
+	int ret;
+
+	mutex_lock_nested(&dapm->card->dapm_mutex, SND_SOC_DAPM_CLASS_RUNTIME);
+
+	ret = snd_soc_dapm_set_pin(dapm, pin, 0);
+
+	mutex_unlock(&dapm->card->dapm_mutex);
+
+	return ret;
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(snd_soc_dapm_disable_pin);
 
 /**
+<<<<<<< HEAD
+=======
+ * snd_soc_dapm_nc_pin_unlocked - permanently disable pin.
+ * @dapm: DAPM context
+ * @pin: pin name
+ *
+ * Marks the specified pin as being not connected, disabling it along
+ * any parent or child widgets.  At present this is identical to
+ * snd_soc_dapm_disable_pin() but in future it will be extended to do
+ * additional things such as disabling controls which only affect
+ * paths through the pin.
+ *
+ * Requires external locking.
+ *
+ * NOTE: snd_soc_dapm_sync() needs to be called after this for DAPM to
+ * do any widget power switching.
+ */
+int snd_soc_dapm_nc_pin_unlocked(struct snd_soc_dapm_context *dapm,
+			       const char *pin)
+{
+	return snd_soc_dapm_set_pin(dapm, pin, 0);
+}
+EXPORT_SYMBOL_GPL(snd_soc_dapm_nc_pin_unlocked);
+
+/**
+>>>>>>> v3.18
  * snd_soc_dapm_nc_pin - permanently disable pin.
  * @dapm: DAPM context
  * @pin: pin name
@@ -3655,7 +5299,19 @@ EXPORT_SYMBOL_GPL(snd_soc_dapm_disable_pin);
  */
 int snd_soc_dapm_nc_pin(struct snd_soc_dapm_context *dapm, const char *pin)
 {
+<<<<<<< HEAD
 	return snd_soc_dapm_set_pin(dapm, pin, 0);
+=======
+	int ret;
+
+	mutex_lock_nested(&dapm->card->dapm_mutex, SND_SOC_DAPM_CLASS_RUNTIME);
+
+	ret = snd_soc_dapm_set_pin(dapm, pin, 0);
+
+	mutex_unlock(&dapm->card->dapm_mutex);
+
+	return ret;
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(snd_soc_dapm_nc_pin);
 
@@ -3742,6 +5398,7 @@ static bool snd_soc_dapm_widget_in_card_paths(struct snd_soc_card *card,
 }
 
 /**
+<<<<<<< HEAD
  * snd_soc_dapm_auto_nc_codec_pins - call snd_soc_dapm_nc_pin for unused pins
  * @codec: The codec whose pins should be processed
  *
@@ -3762,16 +5419,42 @@ void snd_soc_dapm_auto_nc_codec_pins(struct snd_soc_codec *codec)
 	list_for_each_entry(w, &card->widgets, list) {
 		if (w->dapm != dapm)
 			continue;
+=======
+ * snd_soc_dapm_auto_nc_pins - call snd_soc_dapm_nc_pin for unused pins
+ * @card: The card whose pins should be processed
+ *
+ * Automatically call snd_soc_dapm_nc_pin() for any external pins in the card
+ * which are unused. Pins are used if they are connected externally to a
+ * component, whether that be to some other device, or a loop-back connection to
+ * the component itself.
+ */
+void snd_soc_dapm_auto_nc_pins(struct snd_soc_card *card)
+{
+	struct snd_soc_dapm_widget *w;
+
+	dev_dbg(card->dev, "ASoC: Auto NC: DAPMs: card:%p\n", &card->dapm);
+
+	list_for_each_entry(w, &card->widgets, list) {
+>>>>>>> v3.18
 		switch (w->id) {
 		case snd_soc_dapm_input:
 		case snd_soc_dapm_output:
 		case snd_soc_dapm_micbias:
+<<<<<<< HEAD
 			dev_dbg(codec->dev, "ASoC: Auto NC: Checking widget %s\n",
 				w->name);
 			if (!snd_soc_dapm_widget_in_card_paths(card, w)) {
 				dev_dbg(codec->dev,
 					"... Not in map; disabling\n");
 				snd_soc_dapm_nc_pin(dapm, w->name);
+=======
+			dev_dbg(card->dev, "ASoC: Auto NC: Checking widget %s\n",
+				w->name);
+			if (!snd_soc_dapm_widget_in_card_paths(card, w)) {
+				dev_dbg(card->dev,
+					"... Not in map; disabling\n");
+				snd_soc_dapm_nc_pin(w->dapm, w->name);
+>>>>>>> v3.18
 			}
 			break;
 		default:
@@ -3795,7 +5478,11 @@ void snd_soc_dapm_free(struct snd_soc_dapm_context *dapm)
 }
 EXPORT_SYMBOL_GPL(snd_soc_dapm_free);
 
+<<<<<<< HEAD
 static void soc_dapm_shutdown_codec(struct snd_soc_dapm_context *dapm)
+=======
+static void soc_dapm_shutdown_dapm(struct snd_soc_dapm_context *dapm)
+>>>>>>> v3.18
 {
 	struct snd_soc_card *card = dapm->card;
 	struct snd_soc_dapm_widget *w;
@@ -3821,7 +5508,11 @@ static void soc_dapm_shutdown_codec(struct snd_soc_dapm_context *dapm)
 		if (dapm->bias_level == SND_SOC_BIAS_ON)
 			snd_soc_dapm_set_bias_level(dapm,
 						    SND_SOC_BIAS_PREPARE);
+<<<<<<< HEAD
 		dapm_seq_run(dapm, &down_list, 0, false);
+=======
+		dapm_seq_run(card, &down_list, 0, false);
+>>>>>>> v3.18
 		if (dapm->bias_level == SND_SOC_BIAS_PREPARE)
 			snd_soc_dapm_set_bias_level(dapm,
 						    SND_SOC_BIAS_STANDBY);
@@ -3835,6 +5526,7 @@ static void soc_dapm_shutdown_codec(struct snd_soc_dapm_context *dapm)
  */
 void snd_soc_dapm_shutdown(struct snd_soc_card *card)
 {
+<<<<<<< HEAD
 	struct snd_soc_codec *codec;
 
 	list_for_each_entry(codec, &card->codec_dev_list, card_list) {
@@ -3843,6 +5535,23 @@ void snd_soc_dapm_shutdown(struct snd_soc_card *card)
 			snd_soc_dapm_set_bias_level(&codec->dapm,
 						    SND_SOC_BIAS_OFF);
 	}
+=======
+	struct snd_soc_dapm_context *dapm;
+
+	list_for_each_entry(dapm, &card->dapm_list, list) {
+		if (dapm != &card->dapm) {
+			soc_dapm_shutdown_dapm(dapm);
+			if (dapm->bias_level == SND_SOC_BIAS_STANDBY)
+				snd_soc_dapm_set_bias_level(dapm,
+							    SND_SOC_BIAS_OFF);
+		}
+	}
+
+	soc_dapm_shutdown_dapm(&card->dapm);
+	if (card->dapm.bias_level == SND_SOC_BIAS_STANDBY)
+		snd_soc_dapm_set_bias_level(&card->dapm,
+					    SND_SOC_BIAS_OFF);
+>>>>>>> v3.18
 }
 
 /* Module information */

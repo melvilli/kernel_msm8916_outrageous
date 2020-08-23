@@ -137,7 +137,11 @@ static int tps6105x_regulator_probe(struct platform_device *pdev)
 	/* This instance is not set for regulator mode so bail out */
 	if (pdata->mode != TPS6105X_MODE_VOLTAGE) {
 		dev_info(&pdev->dev,
+<<<<<<< HEAD
 			 "chip not in voltage mode mode, exit probe \n");
+=======
+			"chip not in voltage mode mode, exit probe\n");
+>>>>>>> v3.18
 		return 0;
 	}
 
@@ -146,8 +150,14 @@ static int tps6105x_regulator_probe(struct platform_device *pdev)
 	config.driver_data = tps6105x;
 
 	/* Register regulator with framework */
+<<<<<<< HEAD
 	tps6105x->regulator = regulator_register(&tps6105x_regulator_desc,
 						 &config);
+=======
+	tps6105x->regulator = devm_regulator_register(&pdev->dev,
+						      &tps6105x_regulator_desc,
+						      &config);
+>>>>>>> v3.18
 	if (IS_ERR(tps6105x->regulator)) {
 		ret = PTR_ERR(tps6105x->regulator);
 		dev_err(&tps6105x->client->dev,
@@ -159,6 +169,7 @@ static int tps6105x_regulator_probe(struct platform_device *pdev)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int tps6105x_regulator_remove(struct platform_device *pdev)
 {
 	struct tps6105x *tps6105x = dev_get_platdata(&pdev->dev);
@@ -166,13 +177,18 @@ static int tps6105x_regulator_remove(struct platform_device *pdev)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 static struct platform_driver tps6105x_regulator_driver = {
 	.driver = {
 		.name  = "tps6105x-regulator",
 		.owner = THIS_MODULE,
 	},
 	.probe = tps6105x_regulator_probe,
+<<<<<<< HEAD
 	.remove = tps6105x_regulator_remove,
+=======
+>>>>>>> v3.18
 };
 
 static __init int tps6105x_regulator_init(void)

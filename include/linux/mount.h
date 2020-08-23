@@ -45,11 +45,18 @@ struct mnt_namespace;
 #define MNT_USER_SETTABLE_MASK  (MNT_NOSUID | MNT_NODEV | MNT_NOEXEC \
 				 | MNT_NOATIME | MNT_NODIRATIME | MNT_RELATIME \
 				 | MNT_READONLY)
+<<<<<<< HEAD
 
 #define MNT_ATIME_MASK (MNT_NOATIME | MNT_NODIRATIME | MNT_RELATIME )
 
 #define MNT_INTERNAL_FLAGS (MNT_SHARED | MNT_WRITE_HOLD | MNT_INTERNAL | \
 			    MNT_MARKED)
+=======
+#define MNT_ATIME_MASK (MNT_NOATIME | MNT_NODIRATIME | MNT_RELATIME )
+
+#define MNT_INTERNAL_FLAGS (MNT_SHARED | MNT_WRITE_HOLD | MNT_INTERNAL | \
+			    MNT_DOOMED | MNT_SYNC_UMOUNT | MNT_MARKED)
+>>>>>>> v3.18
 
 #define MNT_INTERNAL	0x4000
 
@@ -58,16 +65,29 @@ struct mnt_namespace;
 #define MNT_LOCK_NOSUID		0x100000
 #define MNT_LOCK_NODEV		0x200000
 #define MNT_LOCK_READONLY	0x400000
+<<<<<<< HEAD
+=======
+#define MNT_LOCKED		0x800000
+#define MNT_DOOMED		0x1000000
+#define MNT_SYNC_UMOUNT		0x2000000
+>>>>>>> v3.18
 #define MNT_MARKED		0x4000000
 
 struct vfsmount {
 	struct dentry *mnt_root;	/* root of the mounted tree */
 	struct super_block *mnt_sb;	/* pointer to superblock */
 	int mnt_flags;
+<<<<<<< HEAD
 	void *data;
 };
 
 struct file; /* forward dec */
+=======
+};
+
+struct file; /* forward dec */
+struct path;
+>>>>>>> v3.18
 
 extern int mnt_want_write(struct vfsmount *mnt);
 extern int mnt_want_write_file(struct file *file);
@@ -76,10 +96,19 @@ extern void mnt_drop_write(struct vfsmount *mnt);
 extern void mnt_drop_write_file(struct file *file);
 extern void mntput(struct vfsmount *mnt);
 extern struct vfsmount *mntget(struct vfsmount *mnt);
+<<<<<<< HEAD
 extern void mnt_pin(struct vfsmount *mnt);
 extern void mnt_unpin(struct vfsmount *mnt);
 extern int __mnt_is_readonly(struct vfsmount *mnt);
 
+=======
+extern struct vfsmount *mnt_clone_internal(struct path *path);
+extern int __mnt_is_readonly(struct vfsmount *mnt);
+
+struct path;
+extern struct vfsmount *clone_private_mount(struct path *path);
+
+>>>>>>> v3.18
 struct file_system_type;
 extern struct vfsmount *vfs_kern_mount(struct file_system_type *type,
 				      int flags, const char *name,

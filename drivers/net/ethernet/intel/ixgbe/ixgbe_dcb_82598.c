@@ -208,7 +208,10 @@ s32 ixgbe_dcb_config_pfc_82598(struct ixgbe_hw *hw, u8 pfc_en)
 
 	IXGBE_WRITE_REG(hw, IXGBE_FCTRL, reg);
 
+<<<<<<< HEAD
 	fcrtl = (hw->fc.low_water << 10) | IXGBE_FCRTL_XONE;
+=======
+>>>>>>> v3.18
 	/* Configure PFC Tx thresholds per TC */
 	for (i = 0; i < MAX_TRAFFIC_CLASS; i++) {
 		if (!(pfc_en & (1 << i))) {
@@ -217,6 +220,10 @@ s32 ixgbe_dcb_config_pfc_82598(struct ixgbe_hw *hw, u8 pfc_en)
 			continue;
 		}
 
+<<<<<<< HEAD
+=======
+		fcrtl = (hw->fc.low_water[i] << 10) | IXGBE_FCRTL_XONE;
+>>>>>>> v3.18
 		reg = (hw->fc.high_water[i] << 10) | IXGBE_FCRTH_FCEN;
 		IXGBE_WRITE_REG(hw, IXGBE_FCRTL(i), fcrtl);
 		IXGBE_WRITE_REG(hw, IXGBE_FCRTH(i), reg);

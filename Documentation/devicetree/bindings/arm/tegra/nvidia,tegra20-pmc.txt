@@ -9,6 +9,10 @@ Required properties:
 - compatible : Should contain "nvidia,tegra<chip>-pmc".
 - reg : Offset and length of the register set for the device
 - clocks : Must contain an entry for each entry in clock-names.
+<<<<<<< HEAD
+=======
+  See ../clocks/clock-bindings.txt for details.
+>>>>>>> v3.18
 - clock-names : Must include the following entries:
   "pclk" (The Tegra clock of that name),
   "clk32k_in" (The 32KHz clock input to Tegra).

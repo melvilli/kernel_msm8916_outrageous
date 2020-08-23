@@ -401,6 +401,10 @@ static struct platform_pwm_backlight_data viper_backlight_data = {
 	.max_brightness	= 100,
 	.dft_brightness	= 100,
 	.pwm_period_ns	= 1000000,
+<<<<<<< HEAD
+=======
+	.enable_gpio	= -1,
+>>>>>>> v3.18
 	.init		= viper_backlight_init,
 	.notify		= viper_backlight_notify,
 	.exit		= viper_backlight_exit,
@@ -768,7 +772,11 @@ static unsigned long viper_tpm;
 
 static int __init viper_tpm_setup(char *str)
 {
+<<<<<<< HEAD
 	return strict_strtoul(str, 10, &viper_tpm) >= 0;
+=======
+	return kstrtoul(str, 10, &viper_tpm) >= 0;
+>>>>>>> v3.18
 }
 
 __setup("tpm=", viper_tpm_setup);
@@ -884,9 +892,12 @@ static int viper_cpufreq_notifier(struct notifier_block *nb,
 			viper_set_core_cpu_voltage(freq->new, 0);
 		}
 		break;
+<<<<<<< HEAD
 	case CPUFREQ_RESUMECHANGE:
 		viper_set_core_cpu_voltage(freq->new, 0);
 		break;
+=======
+>>>>>>> v3.18
 	default:
 		/* ignore */
 		break;

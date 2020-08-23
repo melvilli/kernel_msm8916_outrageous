@@ -297,7 +297,11 @@ static void newport_exit(void)
 		newport_set_def_font(i, NULL);
 }
 
+<<<<<<< HEAD
 /* Can't be __init, take_over_console may call it later */
+=======
+/* Can't be __init, do_take_over_console may call it later */
+>>>>>>> v3.18
 static const char *newport_startup(void)
 {
 	int i;
@@ -746,6 +750,10 @@ static int newport_probe(struct gio_device *dev,
 			 const struct gio_device_id *id)
 {
 	unsigned long newport_addr;
+<<<<<<< HEAD
+=======
+	int err;
+>>>>>>> v3.18
 
 	if (!dev->resource.start)
 		return -EINVAL;
@@ -759,8 +767,15 @@ static int newport_probe(struct gio_device *dev,
 
 	npregs = (struct newport_regs *)/* ioremap cannot fail */
 		ioremap(newport_addr, sizeof(struct newport_regs));
+<<<<<<< HEAD
 
 	return take_over_console(&newport_con, 0, MAX_NR_CONSOLES - 1, 1);
+=======
+	console_lock();
+	err = do_take_over_console(&newport_con, 0, MAX_NR_CONSOLES - 1, 1);
+	console_unlock();
+	return err;
+>>>>>>> v3.18
 }
 
 static void newport_remove(struct gio_device *dev)

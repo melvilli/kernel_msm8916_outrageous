@@ -38,6 +38,11 @@
 #ifdef __ASSEMBLY__
 #define W(instr)	instr.w
 #define BSYM(sym)	sym + 1
+<<<<<<< HEAD
+=======
+#else
+#define WASM(instr)	#instr ".w"
+>>>>>>> v3.18
 #endif
 
 #else	/* !CONFIG_THUMB2_KERNEL */
@@ -50,6 +55,11 @@
 #ifdef __ASSEMBLY__
 #define W(instr)	instr
 #define BSYM(sym)	sym
+<<<<<<< HEAD
+=======
+#else
+#define WASM(instr)	#instr
+>>>>>>> v3.18
 #endif
 
 #endif	/* CONFIG_THUMB2_KERNEL */

@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -63,6 +67,7 @@
 #define ACPI_SET64(ptr, val)            (*ACPI_CAST64 (ptr) = (u64) (val))
 
 /*
+<<<<<<< HEAD
  * printf() format helper. This macros is a workaround for the difficulties
  * with emitting 64-bit integers and 64-bit pointers with the same code
  * for both 32-bit and 64-bit hosts.
@@ -71,6 +76,24 @@
 /* Split 64-bit integer into two 32-bit values. Use with %8.8X%8.8X */
 
 #define ACPI_FORMAT_UINT64(i)           ACPI_HIDWORD(i), ACPI_LODWORD(i)
+=======
+ * printf() format helpers. These macros are workarounds for the difficulties
+ * with emitting 64-bit integers and 64-bit pointers with the same code
+ * for both 32-bit and 64-bit hosts.
+ */
+#define ACPI_FORMAT_UINT64(i)           ACPI_HIDWORD(i), ACPI_LODWORD(i)
+
+#if ACPI_MACHINE_WIDTH == 64
+#define ACPI_FORMAT_NATIVE_UINT(i)      ACPI_FORMAT_UINT64(i)
+#define ACPI_FORMAT_TO_UINT(i)          ACPI_FORMAT_UINT64(i)
+#define ACPI_PRINTF_UINT                 "0x%8.8X%8.8X"
+
+#else
+#define ACPI_FORMAT_NATIVE_UINT(i)      0, (u32) (i)
+#define ACPI_FORMAT_TO_UINT(i)          (u32) (i)
+#define ACPI_PRINTF_UINT                 "0x%8.8X"
+#endif
+>>>>>>> v3.18
 
 /*
  * Macros for moving data around to/from buffers that are possibly unaligned.
@@ -370,10 +393,18 @@
  * the plist contains a set of parens to allow variable-length lists.
  * These macros are used for both the debug and non-debug versions of the code.
  */
+<<<<<<< HEAD
 #define ACPI_ERROR_NAMESPACE(s, e)      acpi_ut_namespace_error (AE_INFO, s, e);
 #define ACPI_ERROR_METHOD(s, n, p, e)   acpi_ut_method_error (AE_INFO, s, n, p, e);
 #define ACPI_WARN_PREDEFINED(plist)     acpi_ut_predefined_warning plist
 #define ACPI_INFO_PREDEFINED(plist)     acpi_ut_predefined_info plist
+=======
+#define ACPI_ERROR_NAMESPACE(s, e)          acpi_ut_namespace_error (AE_INFO, s, e);
+#define ACPI_ERROR_METHOD(s, n, p, e)       acpi_ut_method_error (AE_INFO, s, n, p, e);
+#define ACPI_WARN_PREDEFINED(plist)         acpi_ut_predefined_warning plist
+#define ACPI_INFO_PREDEFINED(plist)         acpi_ut_predefined_info plist
+#define ACPI_BIOS_ERROR_PREDEFINED(plist)   acpi_ut_predefined_bios_error plist
+>>>>>>> v3.18
 
 #else
 
@@ -383,6 +414,10 @@
 #define ACPI_ERROR_METHOD(s, n, p, e)
 #define ACPI_WARN_PREDEFINED(plist)
 #define ACPI_INFO_PREDEFINED(plist)
+<<<<<<< HEAD
+=======
+#define ACPI_BIOS_ERROR_PREDEFINED(plist)
+>>>>>>> v3.18
 
 #endif				/* ACPI_NO_ERROR_MESSAGES */
 
@@ -404,6 +439,7 @@
 #endif
 
 /*
+<<<<<<< HEAD
  * Memory allocation tracking (DEBUG ONLY)
  */
 #define ACPI_MEM_PARAMETERS         _COMPONENT, _acpi_module_name, __LINE__
@@ -435,6 +471,8 @@
 #endif				/* ACPI_DBG_TRACK_ALLOCATIONS */
 
 /*
+=======
+>>>>>>> v3.18
  * Macros used for ACPICA utilities only
  */
 

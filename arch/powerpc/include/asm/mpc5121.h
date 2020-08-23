@@ -32,6 +32,7 @@ struct mpc512x_ccm {
 	u32	scfr2;	/* System Clock Frequency Register 2 */
 	u32	scfr2s;	/* System Clock Frequency Shadow Register 2 */
 	u32	bcr;	/* Bread Crumb Register */
+<<<<<<< HEAD
 	u32	p0ccr;	/* PSC0 Clock Control Register */
 	u32	p1ccr;	/* PSC1 CCR */
 	u32	p2ccr;	/* PSC2 CCR */
@@ -52,6 +53,19 @@ struct mpc512x_ccm {
 	u32	m3ccr;	/* MSCAN3 CCR */
 	u32	m4ccr;	/* MSCAN4 CCR */
 	u8	res[0x98]; /* Reserved */
+=======
+	u32	psc_ccr[12];	/* PSC Clock Control Registers */
+	u32	spccr;	/* SPDIF Clock Control Register */
+	u32	cccr;	/* CFM Clock Control Register */
+	u32	dccr;	/* DIU Clock Control Register */
+	u32	mscan_ccr[4];	/* MSCAN Clock Control Registers */
+	u32	out_ccr[4];	/* OUT CLK Configure Registers */
+	u32	rsv0[2];	/* Reserved */
+	u32	scfr3;		/* System Clock Frequency Register 3 */
+	u32	rsv1[3];	/* Reserved */
+	u32	spll_lock_cnt;	/* System PLL Lock Counter */
+	u8	res[0x6c];	/* Reserved */
+>>>>>>> v3.18
 };
 
 /*
@@ -68,6 +82,9 @@ struct mpc512x_lpc {
 };
 
 int mpc512x_cs_config(unsigned int cs, u32 val);
+<<<<<<< HEAD
 int __init mpc5121_clk_init(void);
+=======
+>>>>>>> v3.18
 
 #endif /* __ASM_POWERPC_MPC5121_H__ */

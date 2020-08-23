@@ -37,5 +37,10 @@
 #define _PMD_PRESENT_MASK (PAGE_MASK)
 #define _PMD_BAD	(~PAGE_MASK)
 
+<<<<<<< HEAD
+=======
+#define PTE_WIMGE_SHIFT (6)
+
+>>>>>>> v3.18
 #endif /* __KERNEL__ */
 #endif /*  _ASM_POWERPC_PTE_FSL_BOOKE_H */

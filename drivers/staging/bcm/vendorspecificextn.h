@@ -11,7 +11,11 @@ INT vendorextnIoctl(struct bcm_mini_adapter *Adapter, UINT cmd, ULONG arg);
 INT vendorextnReadSection(PVOID  pContext, PUCHAR pBuffer, enum bcm_flash2x_section_val SectionVal,
 			UINT offset, UINT numOfBytes);
 INT vendorextnWriteSection(PVOID  pContext, PUCHAR pBuffer, enum bcm_flash2x_section_val SectionVal,
+<<<<<<< HEAD
 			UINT offset, UINT numOfBytes, BOOLEAN bVerify);
+=======
+			UINT offset, UINT numOfBytes, bool bVerify);
+>>>>>>> v3.18
 INT vendorextnWriteSectionWithoutErase(PVOID  pContext, PUCHAR pBuffer, enum bcm_flash2x_section_val SectionVal,
 			UINT offset, UINT numOfBytes);
 

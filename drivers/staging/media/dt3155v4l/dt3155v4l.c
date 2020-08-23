@@ -31,7 +31,10 @@
 
 #include "dt3155v4l.h"
 
+<<<<<<< HEAD
 #define DT3155_VENDOR_ID 0x8086
+=======
+>>>>>>> v3.18
 #define DT3155_DEVICE_ID 0x1223
 
 /* DT3155_CHUNK_SIZE is 4M (2^22) 8 full size buffers */
@@ -263,7 +266,11 @@ dt3155_buf_prepare(struct vb2_buffer *vb)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int
+=======
+static void
+>>>>>>> v3.18
 dt3155_stop_streaming(struct vb2_queue *q)
 {
 	struct dt3155_priv *pd = vb2_get_drv_priv(q);
@@ -277,7 +284,10 @@ dt3155_stop_streaming(struct vb2_queue *q)
 	}
 	spin_unlock_irq(&pd->lock);
 	msleep(45); /* irq hendler will stop the hardware */
+<<<<<<< HEAD
 	return 0;
+=======
+>>>>>>> v3.18
 }
 
 static void
@@ -299,7 +309,11 @@ dt3155_buf_queue(struct vb2_buffer *vb)
  *	end driver-specific callbacks
  */
 
+<<<<<<< HEAD
 const struct vb2_ops q_ops = {
+=======
+static const struct vb2_ops q_ops = {
+>>>>>>> v3.18
 	.queue_setup = dt3155_queue_setup,
 	.wait_prepare = dt3155_wait_prepare,
 	.wait_finish = dt3155_wait_finish,
@@ -391,7 +405,11 @@ dt3155_open(struct file *filp)
 			goto err_alloc_queue;
 		}
 		pd->q->type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
+<<<<<<< HEAD
 		pd->q->timestamp_type = V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC;
+=======
+		pd->q->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC;
+>>>>>>> v3.18
 		pd->q->io_modes = VB2_READ | VB2_MMAP;
 		pd->q->ops = &q_ops;
 		pd->q->mem_ops = &vb2_dma_contig_memops;
@@ -829,7 +847,10 @@ static struct video_device dt3155_vdev = {
 	.minor = -1,
 	.release = video_device_release,
 	.tvnorms = DT3155_CURRENT_NORM,
+<<<<<<< HEAD
 	.current_norm = DT3155_CURRENT_NORM,
+=======
+>>>>>>> v3.18
 };
 
 /* same as in drivers/base/dma-coherent.c */
@@ -902,18 +923,29 @@ dt3155_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 	int err;
 	struct dt3155_priv *pd;
 
+<<<<<<< HEAD
 	err = dma_set_mask(&pdev->dev, DMA_BIT_MASK(32));
 	if (err)
 		return -ENODEV;
 	err = dma_set_coherent_mask(&pdev->dev, DMA_BIT_MASK(32));
+=======
+	err = dma_set_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(32));
+>>>>>>> v3.18
 	if (err)
 		return -ENODEV;
 	pd = kzalloc(sizeof(*pd), GFP_KERNEL);
 	if (!pd)
 		return -ENOMEM;
 	pd->vdev = video_device_alloc();
+<<<<<<< HEAD
 	if (!pd->vdev)
 		goto err_video_device_alloc;
+=======
+	if (!pd->vdev) {
+		err = -ENOMEM;
+		goto err_video_device_alloc;
+	}
+>>>>>>> v3.18
 	*pd->vdev = dt3155_vdev;
 	pci_set_drvdata(pdev, pd);    /* for use in dt3155_remove() */
 	video_set_drvdata(pd->vdev, pd);  /* for use in video_fops */
@@ -978,8 +1010,13 @@ dt3155_remove(struct pci_dev *pdev)
 	kfree(pd);
 }
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(pci_ids) = {
 	{ PCI_DEVICE(DT3155_VENDOR_ID, DT3155_DEVICE_ID) },
+=======
+static const struct pci_device_id pci_ids[] = {
+	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, DT3155_DEVICE_ID) },
+>>>>>>> v3.18
 	{ 0, /* zero marks the end */ },
 };
 MODULE_DEVICE_TABLE(pci, pci_ids);

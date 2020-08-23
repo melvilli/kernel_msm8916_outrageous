@@ -27,7 +27,10 @@
 #include <linux/kernel.h>
 #include <linux/sched.h>
 #include <linux/errno.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/timer.h>
 #include <linux/delay.h>
 #include <linux/list.h>
@@ -95,7 +98,11 @@ static int r8a66597_clock_enable(struct r8a66597 *r8a66597)
 	int i = 0;
 
 	if (r8a66597->pdata->on_chip) {
+<<<<<<< HEAD
 		clk_enable(r8a66597->clk);
+=======
+		clk_prepare_enable(r8a66597->clk);
+>>>>>>> v3.18
 		do {
 			r8a66597_write(r8a66597, SCKE, SYSCFG0);
 			tmp = r8a66597_read(r8a66597, SYSCFG0);
@@ -139,7 +146,11 @@ static void r8a66597_clock_disable(struct r8a66597 *r8a66597)
 	udelay(1);
 
 	if (r8a66597->pdata->on_chip) {
+<<<<<<< HEAD
 		clk_disable(r8a66597->clk);
+=======
+		clk_disable_unprepare(r8a66597->clk);
+>>>>>>> v3.18
 	} else {
 		r8a66597_bclr(r8a66597, PLLC, SYSCFG0);
 		r8a66597_bclr(r8a66597, XCKE, SYSCFG0);
@@ -1270,7 +1281,11 @@ static void set_td_timer(struct r8a66597 *r8a66597, struct r8a66597_td *td)
 			time = 30;
 			break;
 		default:
+<<<<<<< HEAD
 			time = 50;
+=======
+			time = 300;
+>>>>>>> v3.18
 			break;
 		}
 
@@ -1786,7 +1801,10 @@ static void r8a66597_td_timer(unsigned long _r8a66597)
 		pipe = td->pipe;
 		pipe_stop(r8a66597, pipe);
 
+<<<<<<< HEAD
 		/* Select a different address or endpoint */
+=======
+>>>>>>> v3.18
 		new_td = td;
 		do {
 			list_move_tail(&new_td->queue,
@@ -1796,8 +1814,12 @@ static void r8a66597_td_timer(unsigned long _r8a66597)
 				new_td = td;
 				break;
 			}
+<<<<<<< HEAD
 		} while (td != new_td && td->address == new_td->address &&
 			td->pipe->info.epnum == new_td->pipe->info.epnum);
+=======
+		} while (td != new_td && td->address == new_td->address);
+>>>>>>> v3.18
 
 		start_transfer(r8a66597, new_td);
 
@@ -2303,7 +2325,11 @@ static int r8a66597_bus_resume(struct usb_hcd *hcd)
 		rh->port &= ~USB_PORT_STAT_SUSPEND;
 		rh->port |= USB_PORT_STAT_C_SUSPEND << 16;
 		r8a66597_mdfy(r8a66597, RESUME, RESUME | UACT, dvstctr_reg);
+<<<<<<< HEAD
 		msleep(USB_RESUME_TIMEOUT);
+=======
+		msleep(50);
+>>>>>>> v3.18
 		r8a66597_mdfy(r8a66597, UACT, RESUME | UACT, dvstctr_reg);
 	}
 
@@ -2395,7 +2421,11 @@ static const struct dev_pm_ops r8a66597_dev_pm_ops = {
 
 static int r8a66597_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct r8a66597		*r8a66597 = dev_get_drvdata(&pdev->dev);
+=======
+	struct r8a66597		*r8a66597 = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 	struct usb_hcd		*hcd = r8a66597_to_hcd(r8a66597);
 
 	del_timer_sync(&r8a66597->rh_timer);
@@ -2468,8 +2498,13 @@ static int r8a66597_probe(struct platform_device *pdev)
 	}
 	r8a66597 = hcd_to_r8a66597(hcd);
 	memset(r8a66597, 0, sizeof(struct r8a66597));
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, r8a66597);
 	r8a66597->pdata = pdev->dev.platform_data;
+=======
+	platform_set_drvdata(pdev, r8a66597);
+	r8a66597->pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	r8a66597->irq_sense_low = irq_trigger == IRQF_TRIGGER_LOW;
 
 	if (r8a66597->pdata->on_chip) {
@@ -2516,6 +2551,10 @@ static int r8a66597_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "Failed to add hcd\n");
 		goto clean_up3;
 	}
+<<<<<<< HEAD
+=======
+	device_wakeup_enable(hcd->self.controller);
+>>>>>>> v3.18
 
 	return 0;
 
@@ -2536,7 +2575,11 @@ static struct platform_driver r8a66597_driver = {
 	.probe =	r8a66597_probe,
 	.remove =	r8a66597_remove,
 	.driver		= {
+<<<<<<< HEAD
 		.name = (char *) hcd_name,
+=======
+		.name = hcd_name,
+>>>>>>> v3.18
 		.owner	= THIS_MODULE,
 		.pm	= R8A66597_DEV_PM_OPS,
 	},

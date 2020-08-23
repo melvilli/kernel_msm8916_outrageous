@@ -24,8 +24,11 @@
 #include <linux/mtd/mtdram.h>
 #include <linux/mtd/partitions.h>
 
+<<<<<<< HEAD
 #include <linux/cramfs_fs.h>
 
+=======
+>>>>>>> v3.18
 #include <asm/axisflashmap.h>
 #include <asm/mmu.h>
 

@@ -34,10 +34,14 @@
 #include <linux/io.h>
 #include <linux/can/dev.h>
 #include <linux/spinlock.h>
+<<<<<<< HEAD
 
 #include <linux/of_platform.h>
 #include <asm/prom.h>
 
+=======
+#include <linux/of_platform.h>
+>>>>>>> v3.18
 #include <linux/of_irq.h>
 
 #include <linux/dma-mapping.h>
@@ -1581,6 +1585,10 @@ static const struct net_device_ops grcan_netdev_ops = {
 	.ndo_open	= grcan_open,
 	.ndo_stop	= grcan_close,
 	.ndo_start_xmit	= grcan_start_xmit,
+<<<<<<< HEAD
+=======
+	.ndo_change_mtu = can_change_mtu,
+>>>>>>> v3.18
 };
 
 static int grcan_setup_netdev(struct platform_device *ofdev,
@@ -1646,7 +1654,11 @@ static int grcan_setup_netdev(struct platform_device *ofdev,
 	if (err)
 		goto exit_free_candev;
 
+<<<<<<< HEAD
 	dev_set_drvdata(&ofdev->dev, dev);
+=======
+	platform_set_drvdata(ofdev, dev);
+>>>>>>> v3.18
 
 	/* Reset device to allow bit-timing to be set. No need to call
 	 * grcan_reset at this stage. That is done in grcan_open.
@@ -1683,10 +1695,16 @@ static int grcan_probe(struct platform_device *ofdev)
 	}
 
 	res = platform_get_resource(ofdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
 	base = devm_request_and_ioremap(&ofdev->dev, res);
 	if (!base) {
 		dev_err(&ofdev->dev, "couldn't map IO resource\n");
 		err = -EADDRNOTAVAIL;
+=======
+	base = devm_ioremap_resource(&ofdev->dev, res);
+	if (IS_ERR(base)) {
+		err = PTR_ERR(base);
+>>>>>>> v3.18
 		goto exit_error;
 	}
 
@@ -1716,13 +1734,20 @@ exit_error:
 
 static int grcan_remove(struct platform_device *ofdev)
 {
+<<<<<<< HEAD
 	struct net_device *dev = dev_get_drvdata(&ofdev->dev);
+=======
+	struct net_device *dev = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 	struct grcan_priv *priv = netdev_priv(dev);
 
 	unregister_candev(dev); /* Will in turn call grcan_close */
 
 	irq_dispose_mapping(dev->irq);
+<<<<<<< HEAD
 	dev_set_drvdata(&ofdev->dev, NULL);
+=======
+>>>>>>> v3.18
 	netif_napi_del(&priv->napi);
 	free_candev(dev);
 

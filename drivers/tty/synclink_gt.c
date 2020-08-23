@@ -673,9 +673,15 @@ static int open(struct tty_struct *tty, struct file *filp)
 	DBGINFO(("%s open, old ref count = %d\n", info->device_name, info->port.count));
 
 	/* If port is closing, signal caller to try again */
+<<<<<<< HEAD
 	if (tty_hung_up_p(filp) || info->port.flags & ASYNC_CLOSING){
 		if (info->port.flags & ASYNC_CLOSING)
 			interruptible_sleep_on(&info->port.close_wait);
+=======
+	if (info->port.flags & ASYNC_CLOSING){
+		wait_event_interruptible_tty(tty, info->port.close_wait,
+					     !(info->port.flags & ASYNC_CLOSING));
+>>>>>>> v3.18
 		retval = ((info->port.flags & ASYNC_HUP_NOTIFY) ?
 			-EAGAIN : -ERESTARTSYS);
 		goto cleanup;
@@ -3273,7 +3279,10 @@ static int block_til_ready(struct tty_struct *tty, struct file *filp,
 	DECLARE_WAITQUEUE(wait, current);
 	int		retval;
 	bool		do_clocal = false;
+<<<<<<< HEAD
 	bool		extra_count = false;
+=======
+>>>>>>> v3.18
 	unsigned long	flags;
 	int		cd;
 	struct tty_port *port = &info->port;
@@ -3300,10 +3309,14 @@ static int block_til_ready(struct tty_struct *tty, struct file *filp,
 	add_wait_queue(&port->open_wait, &wait);
 
 	spin_lock_irqsave(&info->lock, flags);
+<<<<<<< HEAD
 	if (!tty_hung_up_p(filp)) {
 		extra_count = true;
 		port->count--;
 	}
+=======
+	port->count--;
+>>>>>>> v3.18
 	spin_unlock_irqrestore(&info->lock, flags);
 	port->blocked_open++;
 
@@ -3338,7 +3351,11 @@ static int block_til_ready(struct tty_struct *tty, struct file *filp,
 	set_current_state(TASK_RUNNING);
 	remove_wait_queue(&port->open_wait, &wait);
 
+<<<<<<< HEAD
 	if (extra_count)
+=======
+	if (!tty_hung_up_p(filp))
+>>>>>>> v3.18
 		port->count++;
 	port->blocked_open--;
 
@@ -3387,12 +3404,20 @@ static int alloc_desc(struct slgt_info *info)
 	unsigned int pbufs;
 
 	/* allocate memory to hold descriptor lists */
+<<<<<<< HEAD
 	info->bufs = pci_alloc_consistent(info->pdev, DESC_LIST_SIZE, &info->bufs_dma_addr);
 	if (info->bufs == NULL)
 		return -ENOMEM;
 
 	memset(info->bufs, 0, DESC_LIST_SIZE);
 
+=======
+	info->bufs = pci_zalloc_consistent(info->pdev, DESC_LIST_SIZE,
+					   &info->bufs_dma_addr);
+	if (info->bufs == NULL)
+		return -ENOMEM;
+
+>>>>>>> v3.18
 	info->rbufs = (struct slgt_desc*)info->bufs;
 	info->tbufs = ((struct slgt_desc*)info->bufs) + info->rbuf_count;
 

@@ -30,7 +30,10 @@
 #include <linux/kernel.h>
 #include <linux/init.h>
 #include <linux/acpi.h>
+<<<<<<< HEAD
 #include <acpi/acpi_bus.h>
+=======
+>>>>>>> v3.18
 #include <linux/dmi.h>
 
 #include "internal.h"
@@ -75,6 +78,7 @@ static struct acpi_blacklist_item acpi_blacklist[] __initdata = {
 	{""}
 };
 
+<<<<<<< HEAD
 #if	CONFIG_ACPI_BLACKLIST_YEAR
 
 static int __init blacklist_by_year(void)
@@ -108,6 +112,8 @@ static inline int blacklist_by_year(void)
 }
 #endif
 
+=======
+>>>>>>> v3.18
 int __init acpi_blacklisted(void)
 {
 	int i = 0;
@@ -166,8 +172,11 @@ int __init acpi_blacklisted(void)
 		}
 	}
 
+<<<<<<< HEAD
 	blacklisted += blacklist_by_year();
 
+=======
+>>>>>>> v3.18
 	dmi_check_system(acpi_osi_dmi_table);
 
 	return blacklisted;
@@ -192,6 +201,15 @@ static int __init dmi_disable_osi_win7(const struct dmi_system_id *d)
 	acpi_osi_setup("!Windows 2009");
 	return 0;
 }
+<<<<<<< HEAD
+=======
+static int __init dmi_disable_osi_win8(const struct dmi_system_id *d)
+{
+	printk(KERN_NOTICE PREFIX "DMI detected: %s\n", d->ident);
+	acpi_osi_setup("!Windows 2012");
+	return 0;
+}
+>>>>>>> v3.18
 
 static struct dmi_system_id acpi_osi_dmi_table[] __initdata = {
 	{
@@ -267,6 +285,70 @@ static struct dmi_system_id acpi_osi_dmi_table[] __initdata = {
 		     DMI_MATCH(DMI_PRODUCT_NAME, "Satellite P305D"),
 		},
 	},
+<<<<<<< HEAD
+=======
+	{
+	.callback = dmi_disable_osi_vista,
+	.ident = "Toshiba NB100",
+	.matches = {
+		     DMI_MATCH(DMI_SYS_VENDOR, "TOSHIBA"),
+		     DMI_MATCH(DMI_PRODUCT_NAME, "NB100"),
+		},
+	},
+
+	/*
+	 * The wireless hotkey does not work on those machines when
+	 * returning true for _OSI("Windows 2012")
+	 */
+	{
+	.callback = dmi_disable_osi_win8,
+	.ident = "Dell Inspiron 7737",
+	.matches = {
+		    DMI_MATCH(DMI_SYS_VENDOR, "Dell Inc."),
+		    DMI_MATCH(DMI_PRODUCT_NAME, "Inspiron 7737"),
+		},
+	},
+	{
+	.callback = dmi_disable_osi_win8,
+	.ident = "Dell Inspiron 7537",
+	.matches = {
+		    DMI_MATCH(DMI_SYS_VENDOR, "Dell Inc."),
+		    DMI_MATCH(DMI_PRODUCT_NAME, "Inspiron 7537"),
+		},
+	},
+	{
+	.callback = dmi_disable_osi_win8,
+	.ident = "Dell Inspiron 5437",
+	.matches = {
+		    DMI_MATCH(DMI_SYS_VENDOR, "Dell Inc."),
+		    DMI_MATCH(DMI_PRODUCT_NAME, "Inspiron 5437"),
+		},
+	},
+	{
+	.callback = dmi_disable_osi_win8,
+	.ident = "Dell Inspiron 3437",
+	.matches = {
+		    DMI_MATCH(DMI_SYS_VENDOR, "Dell Inc."),
+		    DMI_MATCH(DMI_PRODUCT_NAME, "Inspiron 3437"),
+		},
+	},
+	{
+	.callback = dmi_disable_osi_win8,
+	.ident = "Dell Vostro 3446",
+	.matches = {
+		    DMI_MATCH(DMI_SYS_VENDOR, "Dell Inc."),
+		    DMI_MATCH(DMI_PRODUCT_NAME, "Vostro 3446"),
+		},
+	},
+	{
+	.callback = dmi_disable_osi_win8,
+	.ident = "Dell Vostro 3546",
+	.matches = {
+		    DMI_MATCH(DMI_SYS_VENDOR, "Dell Inc."),
+		    DMI_MATCH(DMI_PRODUCT_NAME, "Vostro 3546"),
+		},
+	},
+>>>>>>> v3.18
 
 	/*
 	 * BIOS invocation of _OSI(Linux) is almost always a BIOS bug.

@@ -30,6 +30,14 @@
 
 struct scripting_context *scripting_context;
 
+<<<<<<< HEAD
+=======
+static int flush_script_unsupported(void)
+{
+	return 0;
+}
+
+>>>>>>> v3.18
 static int stop_script_unsupported(void)
 {
 	return 0;
@@ -38,7 +46,11 @@ static int stop_script_unsupported(void)
 static void process_event_unsupported(union perf_event *event __maybe_unused,
 				      struct perf_sample *sample __maybe_unused,
 				      struct perf_evsel *evsel __maybe_unused,
+<<<<<<< HEAD
 				      struct machine *machine __maybe_unused,
+=======
+				      struct thread *thread __maybe_unused,
+>>>>>>> v3.18
 				      struct addr_location *al __maybe_unused)
 {
 }
@@ -74,6 +86,10 @@ static int python_generate_script_unsupported(struct pevent *pevent
 struct scripting_ops python_scripting_unsupported_ops = {
 	.name = "Python",
 	.start_script = python_start_script_unsupported,
+<<<<<<< HEAD
+=======
+	.flush_script = flush_script_unsupported,
+>>>>>>> v3.18
 	.stop_script = stop_script_unsupported,
 	.process_event = process_event_unsupported,
 	.generate_script = python_generate_script_unsupported,
@@ -90,8 +106,12 @@ static void register_python_scripting(struct scripting_ops *scripting_ops)
 	if (err)
 		die("error registering py script extension");
 
+<<<<<<< HEAD
 	if (scripting_context == NULL)
 		scripting_context = malloc(sizeof(*scripting_context));
+=======
+	scripting_context = malloc(sizeof(struct scripting_context));
+>>>>>>> v3.18
 }
 
 #ifdef NO_LIBPYTHON
@@ -138,6 +158,10 @@ static int perl_generate_script_unsupported(struct pevent *pevent
 struct scripting_ops perl_scripting_unsupported_ops = {
 	.name = "Perl",
 	.start_script = perl_start_script_unsupported,
+<<<<<<< HEAD
+=======
+	.flush_script = flush_script_unsupported,
+>>>>>>> v3.18
 	.stop_script = stop_script_unsupported,
 	.process_event = process_event_unsupported,
 	.generate_script = perl_generate_script_unsupported,
@@ -154,8 +178,12 @@ static void register_perl_scripting(struct scripting_ops *scripting_ops)
 	if (err)
 		die("error registering pl script extension");
 
+<<<<<<< HEAD
 	if (scripting_context == NULL)
 		scripting_context = malloc(sizeof(*scripting_context));
+=======
+	scripting_context = malloc(sizeof(struct scripting_context));
+>>>>>>> v3.18
 }
 
 #ifdef NO_LIBPERL

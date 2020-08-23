@@ -27,7 +27,12 @@
 #include <linux/pm_runtime.h>
 #include <linux/power/smartreflex.h>
 
+<<<<<<< HEAD
 #define SMARTREFLEX_NAME_LEN	16
+=======
+#define DRIVER_NAME	"smartreflex"
+#define SMARTREFLEX_NAME_LEN	32
+>>>>>>> v3.18
 #define NVALUE_NAME_LEN		40
 #define SR_DISABLE_TIMEOUT	200
 
@@ -207,12 +212,20 @@ static void sr_stop_vddautocomp(struct omap_sr *sr)
 static int sr_late_init(struct omap_sr *sr_info)
 {
 	struct omap_sr_data *pdata = sr_info->pdev->dev.platform_data;
+<<<<<<< HEAD
 	struct resource *mem;
 	int ret = 0;
 
 	if (sr_class->notify && sr_class->notify_flags && sr_info->irq) {
 		ret = request_irq(sr_info->irq, sr_interrupt,
 				  0, sr_info->name, sr_info);
+=======
+	int ret = 0;
+
+	if (sr_class->notify && sr_class->notify_flags && sr_info->irq) {
+		ret = devm_request_irq(&sr_info->pdev->dev, sr_info->irq,
+				       sr_interrupt, 0, sr_info->name, sr_info);
+>>>>>>> v3.18
 		if (ret)
 			goto error;
 		disable_irq(sr_info->irq);
@@ -224,14 +237,20 @@ static int sr_late_init(struct omap_sr *sr_info)
 	return ret;
 
 error:
+<<<<<<< HEAD
 	iounmap(sr_info->base);
 	mem = platform_get_resource(sr_info->pdev, IORESOURCE_MEM, 0);
 	release_mem_region(mem->start, resource_size(mem));
+=======
+>>>>>>> v3.18
 	list_del(&sr_info->node);
 	dev_err(&sr_info->pdev->dev, "%s: ERROR in registering"
 		"interrupt handler. Smartreflex will"
 		"not function as desired\n", __func__);
+<<<<<<< HEAD
 	kfree(sr_info);
+=======
+>>>>>>> v3.18
 
 	return ret;
 }
@@ -341,9 +360,15 @@ static struct omap_sr_nvalue_table *sr_retrieve_nvalue_row(
 /* Public Functions */
 
 /**
+<<<<<<< HEAD
  * sr_configure_errgen() - Configures the smrtreflex to perform AVS using the
  *			 error generator module.
  * @voltdm:	VDD pointer to which the SR module to be configured belongs to.
+=======
+ * sr_configure_errgen() - Configures the SmartReflex to perform AVS using the
+ *			 error generator module.
+ * @sr:			SR module to be configured.
+>>>>>>> v3.18
  *
  * This API is to be called from the smartreflex class driver to
  * configure the error generator module inside the smartreflex module.
@@ -352,17 +377,29 @@ static struct omap_sr_nvalue_table *sr_retrieve_nvalue_row(
  * SR CLASS 2 can choose between ERROR module and MINMAXAVG
  * module. Returns 0 on success and error value in case of failure.
  */
+<<<<<<< HEAD
 int sr_configure_errgen(struct voltagedomain *voltdm)
+=======
+int sr_configure_errgen(struct omap_sr *sr)
+>>>>>>> v3.18
 {
 	u32 sr_config, sr_errconfig, errconfig_offs;
 	u32 vpboundint_en, vpboundint_st;
 	u32 senp_en = 0, senn_en = 0;
 	u8 senp_shift, senn_shift;
+<<<<<<< HEAD
 	struct omap_sr *sr = _sr_lookup(voltdm);
 
 	if (IS_ERR(sr)) {
 		pr_warning("%s: omap_sr struct for voltdm not found\n",	__func__);
 		return PTR_ERR(sr);
+=======
+
+	if (!sr) {
+		pr_warn("%s: NULL omap_sr from %pF\n", __func__,
+			(void *)_RET_IP_);
+		return -EINVAL;
+>>>>>>> v3.18
 	}
 
 	if (!sr->clk_length)
@@ -414,13 +451,18 @@ int sr_configure_errgen(struct voltagedomain *voltdm)
 
 /**
  * sr_disable_errgen() - Disables SmartReflex AVS module's errgen component
+<<<<<<< HEAD
  * @voltdm:	VDD pointer to which the SR module to be configured belongs to.
+=======
+ * @sr:			SR module to be configured.
+>>>>>>> v3.18
  *
  * This API is to be called from the smartreflex class driver to
  * disable the error generator module inside the smartreflex module.
  *
  * Returns 0 on success and error value in case of failure.
  */
+<<<<<<< HEAD
 int sr_disable_errgen(struct voltagedomain *voltdm)
 {
 	u32 errconfig_offs;
@@ -430,6 +472,17 @@ int sr_disable_errgen(struct voltagedomain *voltdm)
 	if (IS_ERR(sr)) {
 		pr_warning("%s: omap_sr struct for voltdm not found\n",	__func__);
 		return PTR_ERR(sr);
+=======
+int sr_disable_errgen(struct omap_sr *sr)
+{
+	u32 errconfig_offs;
+	u32 vpboundint_en, vpboundint_st;
+
+	if (!sr) {
+		pr_warn("%s: NULL omap_sr from %pF\n", __func__,
+			(void *)_RET_IP_);
+		return -EINVAL;
+>>>>>>> v3.18
 	}
 
 	switch (sr->ip_type) {
@@ -449,19 +502,39 @@ int sr_disable_errgen(struct voltagedomain *voltdm)
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 	/* Disable the interrupts of ERROR module */
 	sr_modify_reg(sr, errconfig_offs, vpboundint_en | vpboundint_st, 0);
 
 	/* Disable the Sensor and errorgen */
 	sr_modify_reg(sr, SRCONFIG, SRCONFIG_SENENABLE | SRCONFIG_ERRGEN_EN, 0);
 
+=======
+	/* Disable the Sensor and errorgen */
+	sr_modify_reg(sr, SRCONFIG, SRCONFIG_SENENABLE | SRCONFIG_ERRGEN_EN, 0);
+
+	/*
+	 * Disable the interrupts of ERROR module
+	 * NOTE: modify is a read, modify,write - an implicit OCP barrier
+	 * which is required is present here - sequencing is critical
+	 * at this point (after errgen is disabled, vpboundint disable)
+	 */
+	sr_modify_reg(sr, errconfig_offs, vpboundint_en | vpboundint_st, 0);
+
+>>>>>>> v3.18
 	return 0;
 }
 
 /**
+<<<<<<< HEAD
  * sr_configure_minmax() - Configures the smrtreflex to perform AVS using the
  *			 minmaxavg module.
  * @voltdm:	VDD pointer to which the SR module to be configured belongs to.
+=======
+ * sr_configure_minmax() - Configures the SmartReflex to perform AVS using the
+ *			 minmaxavg module.
+ * @sr:			SR module to be configured.
+>>>>>>> v3.18
  *
  * This API is to be called from the smartreflex class driver to
  * configure the minmaxavg module inside the smartreflex module.
@@ -470,16 +543,28 @@ int sr_disable_errgen(struct voltagedomain *voltdm)
  * SR CLASS 2 can choose between ERROR module and MINMAXAVG
  * module. Returns 0 on success and error value in case of failure.
  */
+<<<<<<< HEAD
 int sr_configure_minmax(struct voltagedomain *voltdm)
+=======
+int sr_configure_minmax(struct omap_sr *sr)
+>>>>>>> v3.18
 {
 	u32 sr_config, sr_avgwt;
 	u32 senp_en = 0, senn_en = 0;
 	u8 senp_shift, senn_shift;
+<<<<<<< HEAD
 	struct omap_sr *sr = _sr_lookup(voltdm);
 
 	if (IS_ERR(sr)) {
 		pr_warning("%s: omap_sr struct for voltdm not found\n",	__func__);
 		return PTR_ERR(sr);
+=======
+
+	if (!sr) {
+		pr_warn("%s: NULL omap_sr from %pF\n", __func__,
+			(void *)_RET_IP_);
+		return -EINVAL;
+>>>>>>> v3.18
 	}
 
 	if (!sr->clk_length)
@@ -546,7 +631,11 @@ int sr_configure_minmax(struct voltagedomain *voltdm)
 
 /**
  * sr_enable() - Enables the smartreflex module.
+<<<<<<< HEAD
  * @voltdm:	VDD pointer to which the SR module to be configured belongs to.
+=======
+ * @sr:		pointer to which the SR module to be configured belongs to.
+>>>>>>> v3.18
  * @volt:	The voltage at which the Voltage domain associated with
  *		the smartreflex module is operating at.
  *		This is required only to program the correct Ntarget value.
@@ -555,6 +644,7 @@ int sr_configure_minmax(struct voltagedomain *voltdm)
  * enable a smartreflex module. Returns 0 on success. Returns error
  * value if the voltage passed is wrong or if ntarget value is wrong.
  */
+<<<<<<< HEAD
 int sr_enable(struct voltagedomain *voltdm, unsigned long volt)
 {
 	struct omap_volt_data *volt_data;
@@ -565,6 +655,18 @@ int sr_enable(struct voltagedomain *voltdm, unsigned long volt)
 	if (IS_ERR(sr)) {
 		pr_warning("%s: omap_sr struct for voltdm not found\n",	__func__);
 		return PTR_ERR(sr);
+=======
+int sr_enable(struct omap_sr *sr, unsigned long volt)
+{
+	struct omap_volt_data *volt_data;
+	struct omap_sr_nvalue_table *nvalue_row;
+	int ret;
+
+	if (!sr) {
+		pr_warn("%s: NULL omap_sr from %pF\n", __func__,
+			(void *)_RET_IP_);
+		return -EINVAL;
+>>>>>>> v3.18
 	}
 
 	volt_data = omap_voltage_get_voltdata(sr->voltdm, volt);
@@ -606,17 +708,29 @@ int sr_enable(struct voltagedomain *voltdm, unsigned long volt)
 
 /**
  * sr_disable() - Disables the smartreflex module.
+<<<<<<< HEAD
  * @voltdm:	VDD pointer to which the SR module to be configured belongs to.
+=======
+ * @sr:		pointer to which the SR module to be configured belongs to.
+>>>>>>> v3.18
  *
  * This API is to be called from the smartreflex class driver to
  * disable a smartreflex module.
  */
+<<<<<<< HEAD
 void sr_disable(struct voltagedomain *voltdm)
 {
 	struct omap_sr *sr = _sr_lookup(voltdm);
 
 	if (IS_ERR(sr)) {
 		pr_warning("%s: omap_sr struct for voltdm not found\n",	__func__);
+=======
+void sr_disable(struct omap_sr *sr)
+{
+	if (!sr) {
+		pr_warn("%s: NULL omap_sr from %pF\n", __func__,
+			(void *)_RET_IP_);
+>>>>>>> v3.18
 		return;
 	}
 
@@ -847,17 +961,33 @@ static int __init omap_sr_probe(struct platform_device *pdev)
 	struct dentry *nvalue_dir;
 	int i, ret = 0;
 
+<<<<<<< HEAD
 	sr_info = kzalloc(sizeof(struct omap_sr), GFP_KERNEL);
+=======
+	sr_info = devm_kzalloc(&pdev->dev, sizeof(struct omap_sr), GFP_KERNEL);
+>>>>>>> v3.18
 	if (!sr_info) {
 		dev_err(&pdev->dev, "%s: unable to allocate sr_info\n",
 			__func__);
 		return -ENOMEM;
 	}
 
+<<<<<<< HEAD
+=======
+	sr_info->name = devm_kzalloc(&pdev->dev,
+				     SMARTREFLEX_NAME_LEN, GFP_KERNEL);
+	if (!sr_info->name) {
+		dev_err(&pdev->dev, "%s: unable to allocate SR instance name\n",
+			__func__);
+		return -ENOMEM;
+	}
+
+>>>>>>> v3.18
 	platform_set_drvdata(pdev, sr_info);
 
 	if (!pdata) {
 		dev_err(&pdev->dev, "%s: platform data missing\n", __func__);
+<<<<<<< HEAD
 		ret = -EINVAL;
 		goto err_free_devinfo;
 	}
@@ -875,6 +1005,16 @@ static int __init omap_sr_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "%s: no mem region\n", __func__);
 		ret = -EBUSY;
 		goto err_free_devinfo;
+=======
+		return -EINVAL;
+	}
+
+	mem = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+	sr_info->base = devm_ioremap_resource(&pdev->dev, mem);
+	if (IS_ERR(sr_info->base)) {
+		dev_err(&pdev->dev, "%s: ioremap fail\n", __func__);
+		return PTR_ERR(sr_info->base);
+>>>>>>> v3.18
 	}
 
 	irq = platform_get_resource(pdev, IORESOURCE_IRQ, 0);
@@ -882,6 +1022,7 @@ static int __init omap_sr_probe(struct platform_device *pdev)
 	pm_runtime_enable(&pdev->dev);
 	pm_runtime_irq_safe(&pdev->dev);
 
+<<<<<<< HEAD
 	sr_info->name = kasprintf(GFP_KERNEL, "%s", pdata->name);
 	if (!sr_info->name) {
 		dev_err(&pdev->dev, "%s: Unable to alloc SR instance name\n",
@@ -889,6 +1030,9 @@ static int __init omap_sr_probe(struct platform_device *pdev)
 		ret = -ENOMEM;
 		goto err_release_region;
 	}
+=======
+	snprintf(sr_info->name, SMARTREFLEX_NAME_LEN, "%s", pdata->name);
+>>>>>>> v3.18
 
 	sr_info->pdev = pdev;
 	sr_info->srid = pdev->id;
@@ -905,6 +1049,7 @@ static int __init omap_sr_probe(struct platform_device *pdev)
 	sr_info->autocomp_active = false;
 	sr_info->ip_type = pdata->ip_type;
 
+<<<<<<< HEAD
 	sr_info->base = ioremap(mem->start, resource_size(mem));
 	if (!sr_info->base) {
 		dev_err(&pdev->dev, "%s: ioremap fail\n", __func__);
@@ -912,6 +1057,8 @@ static int __init omap_sr_probe(struct platform_device *pdev)
 		goto err_free_name;
 	}
 
+=======
+>>>>>>> v3.18
 	if (irq)
 		sr_info->irq = irq->start;
 
@@ -927,7 +1074,11 @@ static int __init omap_sr_probe(struct platform_device *pdev)
 		ret = sr_late_init(sr_info);
 		if (ret) {
 			pr_warning("%s: Error in SR late init\n", __func__);
+<<<<<<< HEAD
 			goto err_iounmap;
+=======
+			goto err_list_del;
+>>>>>>> v3.18
 		}
 	}
 
@@ -938,7 +1089,11 @@ static int __init omap_sr_probe(struct platform_device *pdev)
 			ret = PTR_ERR(sr_dbg_dir);
 			pr_err("%s:sr debugfs dir creation failed(%d)\n",
 				__func__, ret);
+<<<<<<< HEAD
 			goto err_iounmap;
+=======
+			goto err_list_del;
+>>>>>>> v3.18
 		}
 	}
 
@@ -991,6 +1146,7 @@ static int __init omap_sr_probe(struct platform_device *pdev)
 
 err_debugfs:
 	debugfs_remove_recursive(sr_info->dbg_dir);
+<<<<<<< HEAD
 err_iounmap:
 	list_del(&sr_info->node);
 	iounmap(sr_info->base);
@@ -1001,6 +1157,10 @@ err_release_region:
 err_free_devinfo:
 	kfree(sr_info);
 
+=======
+err_list_del:
+	list_del(&sr_info->node);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -1008,7 +1168,10 @@ static int omap_sr_remove(struct platform_device *pdev)
 {
 	struct omap_sr_data *pdata = pdev->dev.platform_data;
 	struct omap_sr *sr_info;
+<<<<<<< HEAD
 	struct resource *mem;
+=======
+>>>>>>> v3.18
 
 	if (!pdata) {
 		dev_err(&pdev->dev, "%s: platform data missing\n", __func__);
@@ -1027,6 +1190,7 @@ static int omap_sr_remove(struct platform_device *pdev)
 	if (sr_info->dbg_dir)
 		debugfs_remove_recursive(sr_info->dbg_dir);
 
+<<<<<<< HEAD
 	list_del(&sr_info->node);
 	iounmap(sr_info->base);
 	kfree(sr_info->name);
@@ -1034,6 +1198,10 @@ static int omap_sr_remove(struct platform_device *pdev)
 	mem = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	release_mem_region(mem->start, resource_size(mem));
 
+=======
+	pm_runtime_disable(&pdev->dev);
+	list_del(&sr_info->node);
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -1064,7 +1232,11 @@ static struct platform_driver smartreflex_driver = {
 	.remove         = omap_sr_remove,
 	.shutdown	= omap_sr_shutdown,
 	.driver		= {
+<<<<<<< HEAD
 		.name	= "smartreflex",
+=======
+		.name	= DRIVER_NAME,
+>>>>>>> v3.18
 	},
 };
 

@@ -173,6 +173,10 @@ static int ps3_ohci_probe(struct ps3_system_bus_device *dev)
 		goto fail_add_hcd;
 	}
 
+<<<<<<< HEAD
+=======
+	device_wakeup_enable(hcd->self.controller);
+>>>>>>> v3.18
 	return result;
 
 fail_add_hcd:

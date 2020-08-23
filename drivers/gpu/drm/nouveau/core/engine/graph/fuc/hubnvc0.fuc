@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 /* fuc microcode for nvc0 PGRAPH/HUB
  *
  * Copyright 2011 Red Hat Inc.
+=======
+/*
+ * Copyright 2013 Red Hat Inc.
+>>>>>>> v3.18
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -20,6 +25,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  *
+<<<<<<< HEAD
  * Authors: Ben Skeggs
  */
 
@@ -867,3 +873,24 @@ ctx_xfer:
 	ret
 
 .align 256
+=======
+ * Authors: Ben Skeggs <bskeggs@redhat.com>
+ */
+
+#define CHIPSET GF100
+#include "macros.fuc"
+
+.section #nvc0_grhub_data
+#define INCLUDE_DATA
+#include "com.fuc"
+#include "hub.fuc"
+#undef INCLUDE_DATA
+
+.section #nvc0_grhub_code
+#define INCLUDE_CODE
+bra #init
+#include "com.fuc"
+#include "hub.fuc"
+.align 256
+#undef INCLUDE_CODE
+>>>>>>> v3.18

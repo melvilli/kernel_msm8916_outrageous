@@ -11,11 +11,14 @@
 #ifndef _MAX98090_H
 #define _MAX98090_H
 
+<<<<<<< HEAD
 #include <linux/version.h>
 
 /* One can override the Linux version here with an explicit version number */
 #define M98090_LINUX_VERSION LINUX_VERSION_CODE
 
+=======
+>>>>>>> v3.18
 /*
  * MAX98090 Register Definitions
  */
@@ -1502,9 +1505,12 @@
 #define M98090_REVID_WIDTH		8
 #define M98090_REVID_NUM		(1<<M98090_REVID_WIDTH)
 
+<<<<<<< HEAD
 #define M98090_BYTE1(w) ((w >> 8) & 0xff)
 #define M98090_BYTE0(w) (w & 0xff)
 
+=======
+>>>>>>> v3.18
 /* Silicon revision number */
 #define M98090_REVA			0x40
 #define M98091_REVA			0x50
@@ -1523,15 +1529,28 @@ struct max98090_priv {
 	struct regmap *regmap;
 	struct snd_soc_codec *codec;
 	enum max98090_type devtype;
+<<<<<<< HEAD
 	void *control_data;
 	struct max98090_pdata *pdata;
+=======
+	struct max98090_pdata *pdata;
+	struct clk *mclk;
+>>>>>>> v3.18
 	unsigned int sysclk;
 	unsigned int bclk;
 	unsigned int lrclk;
 	struct max98090_cdata dai[1];
+<<<<<<< HEAD
 	int irq;
 	int jack_state;
 	struct delayed_work jack_work;
+=======
+	int jack_state;
+	struct delayed_work jack_work;
+	struct delayed_work pll_det_enable_work;
+	struct work_struct pll_det_disable_work;
+	struct work_struct pll_work;
+>>>>>>> v3.18
 	struct snd_soc_jack *jack;
 	unsigned int dai_fmt;
 	int tdm_slots;
@@ -1539,8 +1558,13 @@ struct max98090_priv {
 	u8 lin_state;
 	unsigned int pa1en;
 	unsigned int pa2en;
+<<<<<<< HEAD
 	unsigned int extmic_mux;
 	unsigned int sidetone;
+=======
+	unsigned int sidetone;
+	bool master;
+>>>>>>> v3.18
 };
 
 int max98090_mic_detect(struct snd_soc_codec *codec,

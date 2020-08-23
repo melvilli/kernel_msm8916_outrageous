@@ -24,6 +24,7 @@
  *
  */
 
+<<<<<<< HEAD
 #include <subdev/fb.h>
 
 struct nv49_fb_priv {
@@ -77,8 +78,28 @@ nv49_fb_oclass = {
 	.handle = NV_SUBDEV(FB, 0x49),
 	.ofuncs = &(struct nouveau_ofuncs) {
 		.ctor = nv49_fb_ctor,
+=======
+#include "nv04.h"
+
+struct nouveau_oclass *
+nv49_fb_oclass = &(struct nv04_fb_impl) {
+	.base.base.handle = NV_SUBDEV(FB, 0x49),
+	.base.base.ofuncs = &(struct nouveau_ofuncs) {
+		.ctor = nv04_fb_ctor,
+>>>>>>> v3.18
 		.dtor = _nouveau_fb_dtor,
 		.init = nv41_fb_init,
 		.fini = _nouveau_fb_fini,
 	},
+<<<<<<< HEAD
 };
+=======
+	.base.memtype = nv04_fb_memtype_valid,
+	.base.ram = &nv49_ram_oclass,
+	.tile.regions = 15,
+	.tile.init = nv30_fb_tile_init,
+	.tile.comp = nv40_fb_tile_comp,
+	.tile.fini = nv20_fb_tile_fini,
+	.tile.prog = nv41_fb_tile_prog,
+}.base.base;
+>>>>>>> v3.18

@@ -105,6 +105,11 @@ static noinline int gup_pte_range(pmd_t pmd, unsigned long addr,
 		VM_BUG_ON(!pfn_valid(pte_pfn(pte)));
 		page = pte_page(pte);
 		get_page(page);
+<<<<<<< HEAD
+=======
+		__flush_anon_page(page, addr);
+		flush_dcache_page(page);
+>>>>>>> v3.18
 		pages[*nr] = page;
 		(*nr)++;
 

@@ -155,6 +155,10 @@ int usb_choose_configuration(struct usb_device *udev)
 	}
 	return i;
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(usb_choose_configuration);
+>>>>>>> v3.18
 
 static int generic_probe(struct usb_device *udev)
 {

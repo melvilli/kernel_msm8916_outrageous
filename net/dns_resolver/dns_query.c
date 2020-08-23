@@ -32,8 +32,12 @@
  *   the GNU Lesser General Public License for more details.
  *
  *   You should have received a copy of the GNU Lesser General Public License
+<<<<<<< HEAD
  *   along with this library; if not, write to the Free Software
  *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+=======
+ *   along with this library; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
  */
 
 #include <linux/module.h>
@@ -94,8 +98,13 @@ int dns_query(const char *type, const char *name, size_t namelen,
 	}
 
 	if (!namelen)
+<<<<<<< HEAD
 		namelen = strlen(name);
 	if (namelen < 3)
+=======
+		namelen = strnlen(name, 256);
+	if (namelen < 3 || namelen > 255)
+>>>>>>> v3.18
 		return -EINVAL;
 	desclen += namelen + 1;
 
@@ -130,6 +139,10 @@ int dns_query(const char *type, const char *name, size_t namelen,
 	}
 
 	down_read(&rkey->sem);
+<<<<<<< HEAD
+=======
+	set_bit(KEY_FLAG_ROOT_CAN_INVAL, &rkey->flags);
+>>>>>>> v3.18
 	rkey->perm |= KEY_USR_VIEW;
 
 	ret = key_validate(rkey);

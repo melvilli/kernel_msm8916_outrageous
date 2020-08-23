@@ -12,7 +12,10 @@
 #include <linux/seq_file.h>
 #include <linux/interrupt.h>
 #include <linux/kernel_stat.h>
+<<<<<<< HEAD
 #include <linux/mutex.h>
+=======
+>>>>>>> v3.18
 
 #include "internals.h"
 
@@ -267,6 +270,7 @@ static const struct file_operations irq_spurious_proc_fops = {
 	.release	= single_release,
 };
 
+<<<<<<< HEAD
 static int irq_wake_depth_proc_show(struct seq_file *m, void *v)
 {
 	struct irq_desc *desc = irq_to_desc((long) m->private);
@@ -306,6 +310,8 @@ static const struct file_operations irq_disable_depth_proc_fops = {
 	.llseek		= seq_lseek,
 	.release	= single_release,
 };
+=======
+>>>>>>> v3.18
 #define MAX_NAMELEN 128
 
 static int name_unique(unsigned int irq, struct irqaction *new_action)
@@ -349,6 +355,7 @@ void register_handler_proc(unsigned int irq, struct irqaction *action)
 
 void register_irq_proc(unsigned int irq, struct irq_desc *desc)
 {
+<<<<<<< HEAD
 	static DEFINE_MUTEX(register_lock);
 	char name [MAX_NAMELEN];
 
@@ -365,12 +372,20 @@ void register_irq_proc(unsigned int irq, struct irq_desc *desc)
 	if (desc->dir)
 		goto out_unlock;
 
+=======
+	char name [MAX_NAMELEN];
+
+	if (!root_irq_dir || (desc->irq_data.chip == &no_irq_chip) || desc->dir)
+		return;
+
+>>>>>>> v3.18
 	memset(name, 0, MAX_NAMELEN);
 	sprintf(name, "%d", irq);
 
 	/* create /proc/irq/1234 */
 	desc->dir = proc_mkdir(name, root_irq_dir);
 	if (!desc->dir)
+<<<<<<< HEAD
 		goto out_unlock;
 
 #ifdef CONFIG_SMP
@@ -384,6 +399,21 @@ void register_irq_proc(unsigned int irq, struct irq_desc *desc)
 
 	/* create /proc/irq/<irq>/smp_affinity_list */
 	proc_create_data("smp_affinity_list", 0600, desc->dir,
+=======
+		return;
+
+#ifdef CONFIG_SMP
+	/* create /proc/irq/<irq>/smp_affinity */
+	proc_create_data("smp_affinity", 0644, desc->dir,
+			 &irq_affinity_proc_fops, (void *)(long)irq);
+
+	/* create /proc/irq/<irq>/affinity_hint */
+	proc_create_data("affinity_hint", 0444, desc->dir,
+			 &irq_affinity_hint_proc_fops, (void *)(long)irq);
+
+	/* create /proc/irq/<irq>/smp_affinity_list */
+	proc_create_data("smp_affinity_list", 0644, desc->dir,
+>>>>>>> v3.18
 			 &irq_affinity_list_proc_fops, (void *)(long)irq);
 
 	proc_create_data("node", 0444, desc->dir,
@@ -392,6 +422,7 @@ void register_irq_proc(unsigned int irq, struct irq_desc *desc)
 
 	proc_create_data("spurious", 0444, desc->dir,
 			 &irq_spurious_proc_fops, (void *)(long)irq);
+<<<<<<< HEAD
 	proc_create_data("disable_depth", 0444, desc->dir,
 			 &irq_disable_depth_proc_fops, (void *)(long)irq);
 	proc_create_data("wake_depth", 0444, desc->dir,
@@ -399,6 +430,8 @@ void register_irq_proc(unsigned int irq, struct irq_desc *desc)
 
 out_unlock:
 	mutex_unlock(&register_lock);
+=======
+>>>>>>> v3.18
 }
 
 void unregister_irq_proc(unsigned int irq, struct irq_desc *desc)
@@ -430,7 +463,11 @@ void unregister_handler_proc(unsigned int irq, struct irqaction *action)
 static void register_default_affinity_proc(void)
 {
 #ifdef CONFIG_SMP
+<<<<<<< HEAD
 	proc_create("irq/default_smp_affinity", 0600, NULL,
+=======
+	proc_create("irq/default_smp_affinity", 0644, NULL,
+>>>>>>> v3.18
 		    &default_affinity_proc_fops);
 #endif
 }
@@ -520,6 +557,11 @@ int show_interrupts(struct seq_file *p, void *v)
 	} else {
 		seq_printf(p, " %8s", "None");
 	}
+<<<<<<< HEAD
+=======
+	if (desc->irq_data.domain)
+		seq_printf(p, " %*d", prec, (int) desc->irq_data.hwirq);
+>>>>>>> v3.18
 #ifdef CONFIG_GENERIC_IRQ_SHOW_LEVEL
 	seq_printf(p, " %-8s", irqd_is_level_type(&desc->irq_data) ? "Level" : "Edge");
 #endif

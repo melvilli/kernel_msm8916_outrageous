@@ -92,7 +92,10 @@ static int _kstrtoull(const char *s, unsigned int base, unsigned long long *res)
 	rv = _parse_integer(s, base, &_res);
 	if (rv & KSTRTOX_OVERFLOW)
 		return -ERANGE;
+<<<<<<< HEAD
 	rv &= ~KSTRTOX_OVERFLOW;
+=======
+>>>>>>> v3.18
 	if (rv == 0)
 		return -EINVAL;
 	s += rv;

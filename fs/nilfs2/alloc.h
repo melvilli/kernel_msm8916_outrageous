@@ -48,6 +48,11 @@ int nilfs_palloc_get_entry_block(struct inode *, __u64, int,
 void *nilfs_palloc_block_get_entry(const struct inode *, __u64,
 				   const struct buffer_head *, void *);
 
+<<<<<<< HEAD
+=======
+int nilfs_palloc_count_max_entries(struct inode *, u64, u64 *);
+
+>>>>>>> v3.18
 /**
  * nilfs_palloc_req - persistent allocator request and reply
  * @pr_entry_nr: entry number (vblocknr or inode number)

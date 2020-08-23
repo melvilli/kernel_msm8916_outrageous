@@ -58,8 +58,14 @@ struct strbuf {
 	volatile unsigned long	__flushflag_buf[(64+(64-1)) / sizeof(long)];
 };
 
+<<<<<<< HEAD
 extern int iommu_table_init(struct iommu *iommu, int tsbsize,
 			    u32 dma_offset, u32 dma_addr_mask,
 			    int numa_node);
+=======
+int iommu_table_init(struct iommu *iommu, int tsbsize,
+		     u32 dma_offset, u32 dma_addr_mask,
+		     int numa_node);
+>>>>>>> v3.18
 
 #endif /* !(_SPARC64_IOMMU_H) */

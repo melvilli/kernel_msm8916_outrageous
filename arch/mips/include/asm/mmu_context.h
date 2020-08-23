@@ -18,6 +18,7 @@
 #include <asm/cacheflush.h>
 #include <asm/hazards.h>
 #include <asm/tlbflush.h>
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 #include <asm/mipsmtregs.h>
 #include <asm/smtc.h>
@@ -43,6 +44,39 @@ do {									\
 	} while (0)
 
 #else /* CONFIG_MIPS_PGD_C0_CONTEXT: using  pgd_current*/
+=======
+#include <asm-generic/mm_hooks.h>
+
+#define htw_set_pwbase(pgd)						\
+do {									\
+	if (cpu_has_htw) {						\
+		write_c0_pwbase(pgd);					\
+		back_to_back_c0_hazard();				\
+		htw_reset();						\
+	}								\
+} while (0)
+
+#define TLBMISS_HANDLER_SETUP_PGD(pgd)					\
+do {									\
+	extern void tlbmiss_handler_setup_pgd(unsigned long);		\
+	tlbmiss_handler_setup_pgd((unsigned long)(pgd));		\
+	htw_set_pwbase((unsigned long)pgd);				\
+} while (0)
+
+#ifdef CONFIG_MIPS_PGD_C0_CONTEXT
+
+#define TLBMISS_HANDLER_RESTORE()					\
+	write_c0_xcontext((unsigned long) smp_processor_id() <<		\
+			  SMP_CPUID_REGSHIFT)
+
+#define TLBMISS_HANDLER_SETUP()						\
+	do {								\
+		TLBMISS_HANDLER_SETUP_PGD(swapper_pg_dir);		\
+		TLBMISS_HANDLER_RESTORE();				\
+	} while (0)
+
+#else /* !CONFIG_MIPS_PGD_C0_CONTEXT: using  pgd_current*/
+>>>>>>> v3.18
 
 /*
  * For the fast tlb miss handlers, we keep a per cpu array of pointers
@@ -51,6 +85,7 @@ do {									\
  */
 extern unsigned long pgd_current[];
 
+<<<<<<< HEAD
 #define TLBMISS_HANDLER_SETUP_PGD(pgd) \
 	pgd_current[smp_processor_id()] = (unsigned long)(pgd)
 
@@ -66,6 +101,16 @@ extern unsigned long pgd_current[];
 	back_to_back_c0_hazard();					\
 	TLBMISS_HANDLER_SETUP_PGD(swapper_pg_dir)
 #endif
+=======
+#define TLBMISS_HANDLER_RESTORE()					\
+	write_c0_context((unsigned long) smp_processor_id() <<		\
+			 SMP_CPUID_REGSHIFT)
+
+#define TLBMISS_HANDLER_SETUP()						\
+	TLBMISS_HANDLER_RESTORE();					\
+	back_to_back_c0_hazard();					\
+	TLBMISS_HANDLER_SETUP_PGD(swapper_pg_dir)
+>>>>>>> v3.18
 #endif /* CONFIG_MIPS_PGD_C0_CONTEXT*/
 #if defined(CONFIG_CPU_R3000) || defined(CONFIG_CPU_TX39XX)
 
@@ -77,6 +122,7 @@ extern unsigned long pgd_current[];
 #define ASID_INC	0x10
 #define ASID_MASK	0xff0
 
+<<<<<<< HEAD
 #elif defined(CONFIG_MIPS_MT_SMTC)
 
 #define ASID_INC	0x1
@@ -84,6 +130,8 @@ extern unsigned long smtc_asid_mask;
 #define ASID_MASK	(smtc_asid_mask)
 #define HW_ASID_MASK	0xff
 /* End SMTC/34K debug hack */
+=======
+>>>>>>> v3.18
 #else /* FIXME: not correct for R6000 */
 
 #define ASID_INC	0x1
@@ -106,7 +154,10 @@ static inline void enter_lazy_tlb(struct mm_struct *mm, struct task_struct *tsk)
 #define ASID_VERSION_MASK  ((unsigned long)~(ASID_MASK|(ASID_MASK-1)))
 #define ASID_FIRST_VERSION ((unsigned long)(~ASID_VERSION_MASK) + 1)
 
+<<<<<<< HEAD
 #ifndef CONFIG_MIPS_MT_SMTC
+=======
+>>>>>>> v3.18
 /* Normal, classic MIPS get_new_mmu_context */
 static inline void
 get_new_mmu_context(struct mm_struct *mm, unsigned long cpu)
@@ -129,12 +180,15 @@ get_new_mmu_context(struct mm_struct *mm, unsigned long cpu)
 	cpu_context(cpu, mm) = asid_cache(cpu) = asid;
 }
 
+<<<<<<< HEAD
 #else /* CONFIG_MIPS_MT_SMTC */
 
 #define get_new_mmu_context(mm, cpu) smtc_get_new_mmu_context((mm), (cpu))
 
 #endif /* CONFIG_MIPS_MT_SMTC */
 
+=======
+>>>>>>> v3.18
 /*
  * Initialize the context related info for a new mm_struct
  * instance.
@@ -155,6 +209,7 @@ static inline void switch_mm(struct mm_struct *prev, struct mm_struct *next,
 {
 	unsigned int cpu = smp_processor_id();
 	unsigned long flags;
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	unsigned long oldasid;
 	unsigned long mtflags;
@@ -164,10 +219,14 @@ static inline void switch_mm(struct mm_struct *prev, struct mm_struct *next,
 #else /* Not SMTC */
 	local_irq_save(flags);
 #endif /* CONFIG_MIPS_MT_SMTC */
+=======
+	local_irq_save(flags);
+>>>>>>> v3.18
 
 	/* Check if our ASID is of an older version and thus invalid */
 	if ((cpu_context(cpu, next) ^ asid_cache(cpu)) & ASID_VERSION_MASK)
 		get_new_mmu_context(next, cpu);
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	/*
 	 * If the EntryHi ASID being replaced happens to be
@@ -195,6 +254,9 @@ static inline void switch_mm(struct mm_struct *prev, struct mm_struct *next,
 #else
 	write_c0_entryhi(cpu_asid(cpu, next));
 #endif /* CONFIG_MIPS_MT_SMTC */
+=======
+	write_c0_entryhi(cpu_asid(cpu, next));
+>>>>>>> v3.18
 	TLBMISS_HANDLER_SETUP_PGD(next->pgd);
 
 	/*
@@ -227,17 +289,21 @@ activate_mm(struct mm_struct *prev, struct mm_struct *next)
 	unsigned long flags;
 	unsigned int cpu = smp_processor_id();
 
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	unsigned long oldasid;
 	unsigned long mtflags;
 	int mytlb = (smtc_status & SMTC_TLB_SHARED) ? 0 : cpu_data[cpu].vpe_id;
 #endif /* CONFIG_MIPS_MT_SMTC */
 
+=======
+>>>>>>> v3.18
 	local_irq_save(flags);
 
 	/* Unconditionally get a new ASID.  */
 	get_new_mmu_context(next, cpu);
 
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	/* See comments for similar code above */
 	mtflags = dvpe();
@@ -255,6 +321,9 @@ activate_mm(struct mm_struct *prev, struct mm_struct *next)
 #else
 	write_c0_entryhi(cpu_asid(cpu, next));
 #endif /* CONFIG_MIPS_MT_SMTC */
+=======
+	write_c0_entryhi(cpu_asid(cpu, next));
+>>>>>>> v3.18
 	TLBMISS_HANDLER_SETUP_PGD(next->pgd);
 
 	/* mark mmu ownership change */
@@ -272,17 +341,21 @@ static inline void
 drop_mmu_context(struct mm_struct *mm, unsigned cpu)
 {
 	unsigned long flags;
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	unsigned long oldasid;
 	/* Can't use spinlock because called from TLB flush within DVPE */
 	unsigned int prevvpe;
 	int mytlb = (smtc_status & SMTC_TLB_SHARED) ? 0 : cpu_data[cpu].vpe_id;
 #endif /* CONFIG_MIPS_MT_SMTC */
+=======
+>>>>>>> v3.18
 
 	local_irq_save(flags);
 
 	if (cpumask_test_cpu(cpu, mm_cpumask(mm)))  {
 		get_new_mmu_context(mm, cpu);
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 		/* See comments for similar code above */
 		prevvpe = dvpe();
@@ -314,6 +387,12 @@ drop_mmu_context(struct mm_struct *mm, unsigned cpu)
 			cpu_context(i, mm) = 0;
 		}
 #endif /* CONFIG_MIPS_MT_SMTC */
+=======
+		write_c0_entryhi(cpu_asid(cpu, mm));
+	} else {
+		/* will get a new context next time */
+		cpu_context(cpu, mm) = 0;
+>>>>>>> v3.18
 	}
 	local_irq_restore(flags);
 }

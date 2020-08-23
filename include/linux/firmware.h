@@ -45,6 +45,7 @@ int request_firmware_nowait(
 	struct module *module, bool uevent,
 	const char *name, struct device *device, gfp_t gfp, void *context,
 	void (*cont)(const struct firmware *fw, void *context));
+<<<<<<< HEAD
 int request_firmware_direct(const char *name, struct device *device,
 			    phys_addr_t dest_addr, size_t dest_size,
 			    void * (*map_fw_mem)(phys_addr_t phys,
@@ -62,6 +63,12 @@ int request_firmware_nowait_direct(
 void release_firmware(const struct firmware *fw);
 int cache_firmware(const char *name);
 int uncache_firmware(const char *name);
+=======
+int request_firmware_direct(const struct firmware **fw, const char *name,
+			    struct device *device);
+
+void release_firmware(const struct firmware *fw);
+>>>>>>> v3.18
 #else
 static inline int request_firmware(const struct firmware **fw,
 				   const char *name,
@@ -69,6 +76,7 @@ static inline int request_firmware(const struct firmware **fw,
 {
 	return -EINVAL;
 }
+<<<<<<< HEAD
 static inline int request_firmware_direct(const char *name,
 					  struct device *device,
 					  phys_addr_t dest_addr,
@@ -80,6 +88,8 @@ static inline int request_firmware_direct(const char *name,
 {
 	return -EINVAL;
 }
+=======
+>>>>>>> v3.18
 static inline int request_firmware_nowait(
 	struct module *module, bool uevent,
 	const char *name, struct device *device, gfp_t gfp, void *context,
@@ -87,6 +97,7 @@ static inline int request_firmware_nowait(
 {
 	return -EINVAL;
 }
+<<<<<<< HEAD
 static inline int request_firmware_nowait_direct(
 	struct module *module, bool uevent,
 	const char *name, struct device *device, gfp_t gfp, void *context,
@@ -113,3 +124,19 @@ static inline int uncache_firmware(const char *name)
 #endif
 
 #endif
+=======
+
+static inline void release_firmware(const struct firmware *fw)
+{
+}
+
+static inline int request_firmware_direct(const struct firmware **fw,
+					  const char *name,
+					  struct device *device)
+{
+	return -EINVAL;
+}
+
+#endif
+#endif
+>>>>>>> v3.18

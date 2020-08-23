@@ -37,6 +37,14 @@
  */
 #define TRAMPOLINE_VA		UL(CONFIG_VECTORS_BASE)
 
+<<<<<<< HEAD
+=======
+/*
+ * KVM_MMU_CACHE_MIN_PAGES is the number of stage2 page table translation levels.
+ */
+#define KVM_MMU_CACHE_MIN_PAGES	2
+
+>>>>>>> v3.18
 #ifndef __ASSEMBLY__
 
 #include <asm/cacheflush.h>
@@ -50,7 +58,11 @@ void free_hyp_pgds(void);
 int kvm_alloc_stage2_pgd(struct kvm *kvm);
 void kvm_free_stage2_pgd(struct kvm *kvm);
 int kvm_phys_addr_ioremap(struct kvm *kvm, phys_addr_t guest_ipa,
+<<<<<<< HEAD
 			  phys_addr_t pa, unsigned long size);
+=======
+			  phys_addr_t pa, unsigned long size, bool writable);
+>>>>>>> v3.18
 
 int kvm_handle_guest_abort(struct kvm_vcpu *vcpu, struct kvm_run *run);
 
@@ -70,7 +82,11 @@ static inline void kvm_set_pmd(pmd_t *pmd, pmd_t new_pmd)
 
 static inline void kvm_set_pte(pte_t *pte, pte_t new_pte)
 {
+<<<<<<< HEAD
 	pte_val(*pte) = new_pte;
+=======
+	*pte = new_pte;
+>>>>>>> v3.18
 	/*
 	 * flush_pmd_entry just takes a void pointer and cleans the necessary
 	 * cache entries, so we can reuse the function for ptes.
@@ -78,6 +94,7 @@ static inline void kvm_set_pte(pte_t *pte, pte_t new_pte)
 	flush_pmd_entry(pte);
 }
 
+<<<<<<< HEAD
 static inline bool kvm_is_write_fault(unsigned long hsr)
 {
 	unsigned long hsr_ec = hsr >> HSR_EC_SHIFT;
@@ -92,6 +109,16 @@ static inline bool kvm_is_write_fault(unsigned long hsr)
 static inline void kvm_clean_pgd(pgd_t *pgd)
 {
 	clean_dcache_area(pgd, PTRS_PER_S2_PGD * sizeof(pgd_t));
+=======
+static inline void kvm_clean_pgd(pgd_t *pgd)
+{
+	clean_dcache_area(pgd, PTRS_PER_S2_PGD * sizeof(pgd_t));
+}
+
+static inline void kvm_clean_pmd(pmd_t *pmd)
+{
+	clean_dcache_area(pmd, PTRS_PER_PMD * sizeof(pmd_t));
+>>>>>>> v3.18
 }
 
 static inline void kvm_clean_pmd_entry(pmd_t *pmd)
@@ -127,11 +154,54 @@ static inline void kvm_set_s2pmd_writable(pmd_t *pmd)
 	(__boundary - 1 < (end) - 1)? __boundary: (end);		\
 })
 
+<<<<<<< HEAD
 struct kvm;
 
 static inline void coherent_cache_guest_page(struct kvm_vcpu *vcpu, hva_t hva,
 					     unsigned long size)
 {
+=======
+static inline bool kvm_page_empty(void *ptr)
+{
+	struct page *ptr_page = virt_to_page(ptr);
+	return page_count(ptr_page) == 1;
+}
+
+
+#define kvm_pte_table_empty(kvm, ptep) kvm_page_empty(ptep)
+#define kvm_pmd_table_empty(kvm, pmdp) kvm_page_empty(pmdp)
+#define kvm_pud_table_empty(kvm, pudp) (0)
+
+#define KVM_PREALLOC_LEVEL	0
+
+static inline int kvm_prealloc_hwpgd(struct kvm *kvm, pgd_t *pgd)
+{
+	return 0;
+}
+
+static inline void kvm_free_hwpgd(struct kvm *kvm) { }
+
+static inline void *kvm_get_hwpgd(struct kvm *kvm)
+{
+	return kvm->arch.pgd;
+}
+
+struct kvm;
+
+#define kvm_flush_dcache_to_poc(a,l)	__cpuc_flush_dcache_area((a), (l))
+
+static inline bool vcpu_has_cache_enabled(struct kvm_vcpu *vcpu)
+{
+	return (vcpu->arch.cp15[c1_SCTLR] & 0b101) == 0b101;
+}
+
+static inline void coherent_cache_guest_page(struct kvm_vcpu *vcpu, hva_t hva,
+					     unsigned long size)
+{
+	if (!vcpu_has_cache_enabled(vcpu))
+		kvm_flush_dcache_to_poc((void *)hva, size);
+	
+>>>>>>> v3.18
 	/*
 	 * If we are going to insert an instruction page and the icache is
 	 * either VIPT or PIPT, there is a potential problem where the host
@@ -152,7 +222,10 @@ static inline void coherent_cache_guest_page(struct kvm_vcpu *vcpu, hva_t hva,
 	}
 }
 
+<<<<<<< HEAD
 #define kvm_flush_dcache_to_poc(a,l)	__cpuc_flush_dcache_area((a), (l))
+=======
+>>>>>>> v3.18
 #define kvm_virt_to_phys(x)		virt_to_idmap((unsigned long)(x))
 
 void stage2_flush_vm(struct kvm *kvm);

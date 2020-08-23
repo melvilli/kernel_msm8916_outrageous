@@ -1,4 +1,8 @@
 Image
+<<<<<<< HEAD
 Image-dtb
 Image.gz
 Image.gz-dtb
+=======
+Image.gz
+>>>>>>> v3.18

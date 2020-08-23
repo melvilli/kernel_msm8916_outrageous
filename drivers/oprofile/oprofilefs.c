@@ -132,9 +132,14 @@ static const struct file_operations ulong_ro_fops = {
 };
 
 
+<<<<<<< HEAD
 static int __oprofilefs_create_file(struct super_block *sb,
 	struct dentry *root, char const *name, const struct file_operations *fops,
 	int perm, void *priv)
+=======
+static int __oprofilefs_create_file(struct dentry *root, char const *name,
+	const struct file_operations *fops, int perm, void *priv)
+>>>>>>> v3.18
 {
 	struct dentry *dentry;
 	struct inode *inode;
@@ -145,7 +150,11 @@ static int __oprofilefs_create_file(struct super_block *sb,
 		mutex_unlock(&root->d_inode->i_mutex);
 		return -ENOMEM;
 	}
+<<<<<<< HEAD
 	inode = oprofilefs_get_inode(sb, S_IFREG | perm);
+=======
+	inode = oprofilefs_get_inode(root->d_sb, S_IFREG | perm);
+>>>>>>> v3.18
 	if (!inode) {
 		dput(dentry);
 		mutex_unlock(&root->d_inode->i_mutex);
@@ -159,18 +168,32 @@ static int __oprofilefs_create_file(struct super_block *sb,
 }
 
 
+<<<<<<< HEAD
 int oprofilefs_create_ulong(struct super_block *sb, struct dentry *root,
 	char const *name, unsigned long *val)
 {
 	return __oprofilefs_create_file(sb, root, name,
+=======
+int oprofilefs_create_ulong(struct dentry *root,
+	char const *name, unsigned long *val)
+{
+	return __oprofilefs_create_file(root, name,
+>>>>>>> v3.18
 					&ulong_fops, 0644, val);
 }
 
 
+<<<<<<< HEAD
 int oprofilefs_create_ro_ulong(struct super_block *sb, struct dentry *root,
 	char const *name, unsigned long *val)
 {
 	return __oprofilefs_create_file(sb, root, name,
+=======
+int oprofilefs_create_ro_ulong(struct dentry *root,
+	char const *name, unsigned long *val)
+{
+	return __oprofilefs_create_file(root, name,
+>>>>>>> v3.18
 					&ulong_ro_fops, 0444, val);
 }
 
@@ -189,14 +212,22 @@ static const struct file_operations atomic_ro_fops = {
 };
 
 
+<<<<<<< HEAD
 int oprofilefs_create_ro_atomic(struct super_block *sb, struct dentry *root,
 	char const *name, atomic_t *val)
 {
 	return __oprofilefs_create_file(sb, root, name,
+=======
+int oprofilefs_create_ro_atomic(struct dentry *root,
+	char const *name, atomic_t *val)
+{
+	return __oprofilefs_create_file(root, name,
+>>>>>>> v3.18
 					&atomic_ro_fops, 0444, val);
 }
 
 
+<<<<<<< HEAD
 int oprofilefs_create_file(struct super_block *sb, struct dentry *root,
 	char const *name, const struct file_operations *fops)
 {
@@ -213,10 +244,28 @@ int oprofilefs_create_file_perm(struct super_block *sb, struct dentry *root,
 
 struct dentry *oprofilefs_mkdir(struct super_block *sb,
 	struct dentry *root, char const *name)
+=======
+int oprofilefs_create_file(struct dentry *root,
+	char const *name, const struct file_operations *fops)
+{
+	return __oprofilefs_create_file(root, name, fops, 0644, NULL);
+}
+
+
+int oprofilefs_create_file_perm(struct dentry *root,
+	char const *name, const struct file_operations *fops, int perm)
+{
+	return __oprofilefs_create_file(root, name, fops, perm, NULL);
+}
+
+
+struct dentry *oprofilefs_mkdir(struct dentry *parent, char const *name)
+>>>>>>> v3.18
 {
 	struct dentry *dentry;
 	struct inode *inode;
 
+<<<<<<< HEAD
 	mutex_lock(&root->d_inode->i_mutex);
 	dentry = d_alloc_name(root, name);
 	if (!dentry) {
@@ -227,12 +276,28 @@ struct dentry *oprofilefs_mkdir(struct super_block *sb,
 	if (!inode) {
 		dput(dentry);
 		mutex_unlock(&root->d_inode->i_mutex);
+=======
+	mutex_lock(&parent->d_inode->i_mutex);
+	dentry = d_alloc_name(parent, name);
+	if (!dentry) {
+		mutex_unlock(&parent->d_inode->i_mutex);
+		return NULL;
+	}
+	inode = oprofilefs_get_inode(parent->d_sb, S_IFDIR | 0755);
+	if (!inode) {
+		dput(dentry);
+		mutex_unlock(&parent->d_inode->i_mutex);
+>>>>>>> v3.18
 		return NULL;
 	}
 	inode->i_op = &simple_dir_inode_operations;
 	inode->i_fop = &simple_dir_operations;
 	d_add(dentry, inode);
+<<<<<<< HEAD
 	mutex_unlock(&root->d_inode->i_mutex);
+=======
+	mutex_unlock(&parent->d_inode->i_mutex);
+>>>>>>> v3.18
 	return dentry;
 }
 
@@ -256,7 +321,11 @@ static int oprofilefs_fill_super(struct super_block *sb, void *data, int silent)
 	if (!sb->s_root)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 	oprofile_create_files(sb, sb->s_root);
+=======
+	oprofile_create_files(sb->s_root);
+>>>>>>> v3.18
 
 	// FIXME: verify kill_litter_super removes our dentries
 	return 0;

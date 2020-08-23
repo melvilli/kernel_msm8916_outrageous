@@ -20,7 +20,10 @@
  */
 
 #include <linux/linkage.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <asm/segment.h>
 #include <asm/page_types.h>
 #include "realmode.h"

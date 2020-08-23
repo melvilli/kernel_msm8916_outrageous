@@ -24,6 +24,10 @@
 #include <linux/usb.h>
 #include <linux/usb/hcd.h>
 #include <linux/usb/chipidea.h>
+<<<<<<< HEAD
+=======
+#include <linux/regulator/consumer.h>
+>>>>>>> v3.18
 
 #include "../host/ehci.h"
 
@@ -33,12 +37,20 @@
 
 static struct hc_driver __read_mostly ci_ehci_hc_driver;
 
+<<<<<<< HEAD
 static irqreturn_t host_irq(struct ci13xxx *ci)
+=======
+static irqreturn_t host_irq(struct ci_hdrc *ci)
+>>>>>>> v3.18
 {
 	return usb_hcd_irq(ci->irq, ci->hcd);
 }
 
+<<<<<<< HEAD
 static int host_start(struct ci13xxx *ci)
+=======
+static int host_start(struct ci_hdrc *ci)
+>>>>>>> v3.18
 {
 	struct usb_hcd *hcd;
 	struct ehci_hcd *ehci;
@@ -58,11 +70,17 @@ static int host_start(struct ci13xxx *ci)
 	hcd->has_tt = 1;
 
 	hcd->power_budget = ci->platdata->power_budget;
+<<<<<<< HEAD
 	hcd->phy = ci->transceiver;
+=======
+	hcd->usb_phy = ci->transceiver;
+	hcd->tpl_support = ci->platdata->tpl_support;
+>>>>>>> v3.18
 
 	ehci = hcd_to_ehci(hcd);
 	ehci->caps = ci->hw_bank.cap;
 	ehci->has_hostpc = ci->hw_bank.lpm;
+<<<<<<< HEAD
 
 	ret = usb_add_hcd(hcd, 0, 0);
 	if (ret)
@@ -85,6 +103,73 @@ static void host_stop(struct ci13xxx *ci)
 }
 
 int ci_hdrc_host_init(struct ci13xxx *ci)
+=======
+	ehci->has_tdi_phy_lpm = ci->hw_bank.lpm;
+	ehci->imx28_write_fix = ci->imx28_write_fix;
+
+	/*
+	 * vbus is always on if host is not in OTG FSM mode,
+	 * otherwise should be controlled by OTG FSM
+	 */
+	if (ci->platdata->reg_vbus && !ci_otg_is_fsm_mode(ci)) {
+		ret = regulator_enable(ci->platdata->reg_vbus);
+		if (ret) {
+			dev_err(ci->dev,
+				"Failed to enable vbus regulator, ret=%d\n",
+				ret);
+			goto put_hcd;
+		}
+	}
+
+	ret = usb_add_hcd(hcd, 0, 0);
+	if (ret) {
+		goto disable_reg;
+	} else {
+		struct usb_otg *otg = ci->transceiver->otg;
+
+		ci->hcd = hcd;
+		if (otg) {
+			otg->host = &hcd->self;
+			hcd->self.otg_port = 1;
+		}
+	}
+
+	if (ci->platdata->flags & CI_HDRC_DISABLE_STREAMING)
+		hw_write(ci, OP_USBMODE, USBMODE_CI_SDIS, USBMODE_CI_SDIS);
+
+	return ret;
+
+disable_reg:
+	if (ci->platdata->reg_vbus && !ci_otg_is_fsm_mode(ci))
+		regulator_disable(ci->platdata->reg_vbus);
+
+put_hcd:
+	usb_put_hcd(hcd);
+
+	return ret;
+}
+
+static void host_stop(struct ci_hdrc *ci)
+{
+	struct usb_hcd *hcd = ci->hcd;
+
+	if (hcd) {
+		usb_remove_hcd(hcd);
+		usb_put_hcd(hcd);
+		if (ci->platdata->reg_vbus && !ci_otg_is_fsm_mode(ci))
+			regulator_disable(ci->platdata->reg_vbus);
+	}
+}
+
+
+void ci_hdrc_host_destroy(struct ci_hdrc *ci)
+{
+	if (ci->role == CI_ROLE_HOST && ci->hcd)
+		host_stop(ci);
+}
+
+int ci_hdrc_host_init(struct ci_hdrc *ci)
+>>>>>>> v3.18
 {
 	struct ci_role_driver *rdrv;
 

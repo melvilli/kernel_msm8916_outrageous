@@ -12,11 +12,14 @@
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
+<<<<<<< HEAD
 
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
  */
 /*
 Driver: ni_atmio16d
@@ -35,11 +38,18 @@ Devices: [National Instruments] AT-MIO-16 (atmio16), AT-MIO-16D (atmio16d)
  *
  */
 
+<<<<<<< HEAD
 #include <linux/interrupt.h>
 #include "../comedidev.h"
 
 #include <linux/ioport.h>
 
+=======
+#include <linux/module.h>
+#include <linux/interrupt.h>
+#include "../comedidev.h"
+
+>>>>>>> v3.18
 #include "comedi_fc.h"
 #include "8255.h"
 
@@ -100,9 +110,12 @@ Devices: [National Instruments] AT-MIO-16 (atmio16), AT-MIO-16D (atmio16d)
 #define CLOCK_10_KHZ	0x8D25
 #define CLOCK_1_KHZ		0x8E25
 #define CLOCK_100_HZ	0x8F25
+<<<<<<< HEAD
 /* Other miscellaneous defines */
 #define ATMIO16D_SIZE	32	/* bus address range */
 #define ATMIO16D_TIMEOUT 10
+=======
+>>>>>>> v3.18
 
 struct atmio16_board_t {
 
@@ -111,6 +124,7 @@ struct atmio16_board_t {
 };
 
 /* range structs */
+<<<<<<< HEAD
 static const struct comedi_lrange range_atmio16d_ai_10_bipolar = { 4, {
 								       BIP_RANGE
 								       (10),
@@ -145,6 +159,33 @@ static const struct comedi_lrange range_atmio16d_ai_unipolar = { 4, {
 								     UNI_RANGE
 								     (0.02)
 								     }
+=======
+static const struct comedi_lrange range_atmio16d_ai_10_bipolar = {
+	4, {
+		BIP_RANGE(10),
+		BIP_RANGE(1),
+		BIP_RANGE(0.1),
+		BIP_RANGE(0.02)
+	}
+};
+
+static const struct comedi_lrange range_atmio16d_ai_5_bipolar = {
+	4, {
+		BIP_RANGE(5),
+		BIP_RANGE(0.5),
+		BIP_RANGE(0.05),
+		BIP_RANGE(0.01)
+	}
+};
+
+static const struct comedi_lrange range_atmio16d_ai_unipolar = {
+	4, {
+		UNI_RANGE(10),
+		UNI_RANGE(1),
+		UNI_RANGE(0.1),
+		UNI_RANGE(0.02)
+	}
+>>>>>>> v3.18
 };
 
 /* private data struct */
@@ -156,7 +197,10 @@ struct atmio16d_private {
 	enum { dac_internal, dac_external } dac0_reference, dac1_reference;
 	enum { dac_2comp, dac_straight } dac0_coding, dac1_coding;
 	const struct comedi_lrange *ao_range_type_list[2];
+<<<<<<< HEAD
 	unsigned int ao_readback[2];
+=======
+>>>>>>> v3.18
 	unsigned int com_reg_1_state; /* current state of command register 1 */
 	unsigned int com_reg_2_state; /* current state of command register 2 */
 };
@@ -235,9 +279,15 @@ static void reset_atmio16d(struct comedi_device *dev)
 static irqreturn_t atmio16d_interrupt(int irq, void *d)
 {
 	struct comedi_device *dev = d;
+<<<<<<< HEAD
 	struct comedi_subdevice *s = &dev->subdevices[0];
 
 	comedi_buf_put(s->async, inw(dev->iobase + AD_FIFO_REG));
+=======
+	struct comedi_subdevice *s = dev->read_subdev;
+
+	comedi_buf_put(s, inw(dev->iobase + AD_FIFO_REG));
+>>>>>>> v3.18
 
 	comedi_event(dev, s);
 	return IRQ_HANDLED;
@@ -293,11 +343,18 @@ static int atmio16d_ai_cmdtest(struct comedi_device *dev,
 
 	err |= cfc_check_trigger_arg_is(&cmd->scan_end_arg, cmd->chanlist_len);
 
+<<<<<<< HEAD
 	if (cmd->stop_src == TRIG_COUNT) {
 		/* any count is allowed */
 	} else {	/* TRIG_NONE */
 		err |= cfc_check_trigger_arg_is(&cmd->stop_arg, 0);
 	}
+=======
+	if (cmd->stop_src == TRIG_COUNT)
+		err |= cfc_check_trigger_arg_min(&cmd->stop_arg, 1);
+	else	/* TRIG_NONE */
+		err |= cfc_check_trigger_arg_is(&cmd->stop_arg, 0);
+>>>>>>> v3.18
 
 	if (err)
 		return 3;
@@ -351,12 +408,18 @@ static int atmio16d_ai_cmd(struct comedi_device *dev,
 	} else if (cmd->convert_arg < 655360000) {
 		base_clock = CLOCK_100_KHZ;
 		timer = cmd->convert_arg / 10000;
+<<<<<<< HEAD
 	} else if (cmd->convert_arg <= 0xffffffff /* 6553600000 */) {
 		base_clock = CLOCK_10_KHZ;
 		timer = cmd->convert_arg / 100000;
 	} else if (cmd->convert_arg <= 0xffffffff /* 65536000000 */) {
 		base_clock = CLOCK_1_KHZ;
 		timer = cmd->convert_arg / 1000000;
+=======
+	} else /* cmd->convert_arg < 6553600000 */ {
+		base_clock = CLOCK_10_KHZ;
+		timer = cmd->convert_arg / 100000;
+>>>>>>> v3.18
 	}
 	outw(0xFF03, dev->iobase + AM9513A_COM_REG);
 	outw(base_clock, dev->iobase + AM9513A_DATA_REG);
@@ -419,12 +482,18 @@ static int atmio16d_ai_cmd(struct comedi_device *dev,
 		} else if (cmd->scan_begin_arg < 655360000) {
 			base_clock = CLOCK_100_KHZ;
 			timer = cmd->scan_begin_arg / 10000;
+<<<<<<< HEAD
 		} else if (cmd->scan_begin_arg < 0xffffffff /* 6553600000 */) {
 			base_clock = CLOCK_10_KHZ;
 			timer = cmd->scan_begin_arg / 100000;
 		} else if (cmd->scan_begin_arg < 0xffffffff /* 65536000000 */) {
 			base_clock = CLOCK_1_KHZ;
 			timer = cmd->scan_begin_arg / 1000000;
+=======
+		} else /* cmd->scan_begin_arg < 6553600000 */ {
+			base_clock = CLOCK_10_KHZ;
+			timer = cmd->scan_begin_arg / 100000;
+>>>>>>> v3.18
 		}
 		outw(0xFF02, dev->iobase + AM9513A_COM_REG);
 		outw(base_clock, dev->iobase + AM9513A_DATA_REG);
@@ -463,16 +532,43 @@ static int atmio16d_ai_cancel(struct comedi_device *dev,
 	return 0;
 }
 
+<<<<<<< HEAD
 /* Mode 0 is used to get a single conversion on demand */
+=======
+static int atmio16d_ai_eoc(struct comedi_device *dev,
+			   struct comedi_subdevice *s,
+			   struct comedi_insn *insn,
+			   unsigned long context)
+{
+	unsigned int status;
+
+	status = inw(dev->iobase + STAT_REG);
+	if (status & STAT_AD_CONVAVAIL)
+		return 0;
+	if (status & STAT_AD_OVERFLOW) {
+		outw(0, dev->iobase + AD_CLEAR_REG);
+		return -EOVERFLOW;
+	}
+	return -EBUSY;
+}
+
+>>>>>>> v3.18
 static int atmio16d_ai_insn_read(struct comedi_device *dev,
 				 struct comedi_subdevice *s,
 				 struct comedi_insn *insn, unsigned int *data)
 {
 	struct atmio16d_private *devpriv = dev->private;
+<<<<<<< HEAD
 	int i, t;
 	int chan;
 	int gain;
 	int status;
+=======
+	int i;
+	int chan;
+	int gain;
+	int ret;
+>>>>>>> v3.18
 
 	chan = CR_CHAN(insn->chanspec);
 	gain = CR_RANGE(insn->chanspec);
@@ -488,6 +584,7 @@ static int atmio16d_ai_insn_read(struct comedi_device *dev,
 	for (i = 0; i < insn->n; i++) {
 		/* start the conversion */
 		outw(0, dev->iobase + START_CONVERT_REG);
+<<<<<<< HEAD
 		/* wait for it to finish */
 		for (t = 0; t < ATMIO16D_TIMEOUT; t++) {
 			/* check conversion status */
@@ -513,11 +610,25 @@ static int atmio16d_ai_insn_read(struct comedi_device *dev,
 
 			return -ETIME;
 		}
+=======
+
+		/* wait for it to finish */
+		ret = comedi_timeout(dev, s, insn, atmio16d_ai_eoc, 0);
+		if (ret)
+			return ret;
+
+		/* read the data now */
+		data[i] = inw(dev->iobase + AD_FIFO_REG);
+		/* change to two's complement if need be */
+		if (devpriv->adc_coding == adc_2comp)
+			data[i] ^= 0x800;
+>>>>>>> v3.18
 	}
 
 	return i;
 }
 
+<<<<<<< HEAD
 static int atmio16d_ao_insn_read(struct comedi_device *dev,
 				 struct comedi_subdevice *s,
 				 struct comedi_insn *insn, unsigned int *data)
@@ -560,10 +671,41 @@ static int atmio16d_ao_insn_write(struct comedi_device *dev,
 		devpriv->ao_readback[chan] = data[i];
 	}
 	return i;
+=======
+static int atmio16d_ao_insn_write(struct comedi_device *dev,
+				  struct comedi_subdevice *s,
+				  struct comedi_insn *insn,
+				  unsigned int *data)
+{
+	struct atmio16d_private *devpriv = dev->private;
+	unsigned int chan = CR_CHAN(insn->chanspec);
+	unsigned int reg = (chan) ? DAC1_REG : DAC0_REG;
+	bool munge = false;
+	int i;
+
+	if (chan == 0 && devpriv->dac0_coding == dac_2comp)
+		munge = true;
+	if (chan == 1 && devpriv->dac1_coding == dac_2comp)
+		munge = true;
+
+	for (i = 0; i < insn->n; i++) {
+		unsigned int val = data[i];
+
+		s->readback[chan] = val;
+
+		if (munge)
+			val ^= 0x800;
+
+		outw(val, dev->iobase + reg);
+	}
+
+	return insn->n;
+>>>>>>> v3.18
 }
 
 static int atmio16d_dio_insn_bits(struct comedi_device *dev,
 				  struct comedi_subdevice *s,
+<<<<<<< HEAD
 				  struct comedi_insn *insn, unsigned int *data)
 {
 	if (data[0]) {
@@ -571,6 +713,14 @@ static int atmio16d_dio_insn_bits(struct comedi_device *dev,
 		s->state |= (data[0] | data[1]);
 		outw(s->state, dev->iobase + MIO_16_DIG_OUT_REG);
 	}
+=======
+				  struct comedi_insn *insn,
+				  unsigned int *data)
+{
+	if (comedi_dio_update_state(s, data))
+		outw(s->state, dev->iobase + MIO_16_DIG_OUT_REG);
+
+>>>>>>> v3.18
 	data[1] = inw(dev->iobase + MIO_16_DIG_IN_REG);
 
 	return insn->n;
@@ -582,6 +732,7 @@ static int atmio16d_dio_insn_config(struct comedi_device *dev,
 				    unsigned int *data)
 {
 	struct atmio16d_private *devpriv = dev->private;
+<<<<<<< HEAD
 	int i;
 	int mask;
 
@@ -591,6 +742,21 @@ static int atmio16d_dio_insn_config(struct comedi_device *dev,
 		if (data[i])
 			s->io_bits |= mask;
 	}
+=======
+	unsigned int chan = CR_CHAN(insn->chanspec);
+	unsigned int mask;
+	int ret;
+
+	if (chan < 4)
+		mask = 0x0f;
+	else
+		mask = 0xf0;
+
+	ret = comedi_dio_insn_config(dev, s, insn, data, mask);
+	if (ret)
+		return ret;
+
+>>>>>>> v3.18
 	devpriv->com_reg_2_state &= ~(COMREG2_DOUTEN0 | COMREG2_DOUTEN1);
 	if (s->io_bits & 0x0f)
 		devpriv->com_reg_2_state |= COMREG2_DOUTEN0;
@@ -598,7 +764,11 @@ static int atmio16d_dio_insn_config(struct comedi_device *dev,
 		devpriv->com_reg_2_state |= COMREG2_DOUTEN1;
 	outw(devpriv->com_reg_2_state, dev->iobase + COM_REG_2);
 
+<<<<<<< HEAD
 	return i;
+=======
+	return insn->n;
+>>>>>>> v3.18
 }
 
 /*
@@ -636,6 +806,7 @@ static int atmio16d_dio_insn_config(struct comedi_device *dev,
 static int atmio16d_attach(struct comedi_device *dev,
 			   struct comedi_devconfig *it)
 {
+<<<<<<< HEAD
 	const struct atmio16_board_t *board = comedi_board(dev);
 	struct atmio16d_private *devpriv;
 	struct comedi_subdevice *s;
@@ -643,6 +814,14 @@ static int atmio16d_attach(struct comedi_device *dev,
 	int ret;
 
 	ret = comedi_request_region(dev, it->options[0], ATMIO16D_SIZE);
+=======
+	const struct atmio16_board_t *board = dev->board_ptr;
+	struct atmio16d_private *devpriv;
+	struct comedi_subdevice *s;
+	int ret;
+
+	ret = comedi_request_region(dev, it->options[0], 0x20);
+>>>>>>> v3.18
 	if (ret)
 		return ret;
 
@@ -650,14 +829,21 @@ static int atmio16d_attach(struct comedi_device *dev,
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
+=======
+	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
+	if (!devpriv)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	/* reset the atmio16d hardware */
 	reset_atmio16d(dev);
 
+<<<<<<< HEAD
 	/* check if our interrupt is available and get it */
 	irq = it->options[1];
 	if (irq) {
@@ -671,6 +857,13 @@ static int atmio16d_attach(struct comedi_device *dev,
 		printk(KERN_INFO "( irq = %u )\n", irq);
 	} else {
 		printk(KERN_INFO "( no irq )");
+=======
+	if (it->options[1]) {
+		ret = request_irq(it->options[1], atmio16d_interrupt, 0,
+				  dev->board_name, dev);
+		if (ret == 0)
+			dev->irq = it->options[1];
+>>>>>>> v3.18
 	}
 
 	/* set device options */
@@ -686,6 +879,7 @@ static int atmio16d_attach(struct comedi_device *dev,
 
 	/* setup sub-devices */
 	s = &dev->subdevices[0];
+<<<<<<< HEAD
 	dev->read_subdev = s;
 	/* ai subdevice */
 	s->type = COMEDI_SUBD_AI;
@@ -696,6 +890,13 @@ static int atmio16d_attach(struct comedi_device *dev,
 	s->do_cmdtest = atmio16d_ai_cmdtest;
 	s->do_cmd = atmio16d_ai_cmd;
 	s->cancel = atmio16d_ai_cancel;
+=======
+	/* ai subdevice */
+	s->type = COMEDI_SUBD_AI;
+	s->subdev_flags = SDF_READABLE | SDF_GROUND;
+	s->n_chan = (devpriv->adc_mux ? 16 : 8);
+	s->insn_read = atmio16d_ai_insn_read;
+>>>>>>> v3.18
 	s->maxdata = 0xfff;	/* 4095 decimal */
 	switch (devpriv->adc_range) {
 	case adc_bipolar10:
@@ -708,14 +909,28 @@ static int atmio16d_attach(struct comedi_device *dev,
 		s->range_table = &range_atmio16d_ai_unipolar;
 		break;
 	}
+<<<<<<< HEAD
+=======
+	if (dev->irq) {
+		dev->read_subdev = s;
+		s->subdev_flags |= SDF_CMD_READ;
+		s->len_chanlist = 16;
+		s->do_cmdtest = atmio16d_ai_cmdtest;
+		s->do_cmd = atmio16d_ai_cmd;
+		s->cancel = atmio16d_ai_cancel;
+	}
+>>>>>>> v3.18
 
 	/* ao subdevice */
 	s = &dev->subdevices[1];
 	s->type = COMEDI_SUBD_AO;
 	s->subdev_flags = SDF_WRITABLE;
 	s->n_chan = 2;
+<<<<<<< HEAD
 	s->insn_read = atmio16d_ao_insn_read;
 	s->insn_write = atmio16d_ao_insn_write;
+=======
+>>>>>>> v3.18
 	s->maxdata = 0xfff;	/* 4095 decimal */
 	s->range_table_list = devpriv->ao_range_type_list;
 	switch (devpriv->dac0_range) {
@@ -734,6 +949,15 @@ static int atmio16d_attach(struct comedi_device *dev,
 		devpriv->ao_range_type_list[1] = &range_unipolar10;
 		break;
 	}
+<<<<<<< HEAD
+=======
+	s->insn_write = atmio16d_ao_insn_write;
+	s->insn_read = comedi_readback_insn_read;
+
+	ret = comedi_alloc_subdev_readback(s);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 
 	/* Digital I/O */
 	s = &dev->subdevices[2];
@@ -747,10 +971,20 @@ static int atmio16d_attach(struct comedi_device *dev,
 
 	/* 8255 subdevice */
 	s = &dev->subdevices[3];
+<<<<<<< HEAD
 	if (board->has_8255)
 		subdev_8255_init(dev, s, NULL, dev->iobase);
 	else
 		s->type = COMEDI_SUBD_UNUSED;
+=======
+	if (board->has_8255) {
+		ret = subdev_8255_init(dev, s, NULL, 0x00);
+		if (ret)
+			return ret;
+	} else {
+		s->type = COMEDI_SUBD_UNUSED;
+	}
+>>>>>>> v3.18
 
 /* don't yet know how to deal with counter/timers */
 #if 0
@@ -760,14 +994,20 @@ static int atmio16d_attach(struct comedi_device *dev,
 	s->n_chan = 0;
 	s->maxdata = 0
 #endif
+<<<<<<< HEAD
 	    printk("\n");
+=======
+>>>>>>> v3.18
 
 	return 0;
 }
 
 static void atmio16d_detach(struct comedi_device *dev)
 {
+<<<<<<< HEAD
 	comedi_spriv_free(dev, 3);
+=======
+>>>>>>> v3.18
 	reset_atmio16d(dev);
 	comedi_legacy_detach(dev);
 }

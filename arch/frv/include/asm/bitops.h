@@ -25,12 +25,15 @@
 
 #include <asm-generic/bitops/ffz.h>
 
+<<<<<<< HEAD
 /*
  * clear_bit() doesn't provide any barrier for the compiler.
  */
 #define smp_mb__before_clear_bit()	barrier()
 #define smp_mb__after_clear_bit()	barrier()
 
+=======
+>>>>>>> v3.18
 #ifndef CONFIG_FRV_OUTOFLINE_ATOMIC_OPS
 static inline
 unsigned long atomic_test_and_ANDNOT_mask(unsigned long mask, volatile unsigned long *v)

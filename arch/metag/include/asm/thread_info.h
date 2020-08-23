@@ -46,8 +46,11 @@ struct thread_info {
 
 #endif
 
+<<<<<<< HEAD
 #define PREEMPT_ACTIVE		0x10000000
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_4KSTACKS
 #define THREAD_SHIFT		12
 #else
@@ -119,10 +122,15 @@ static inline int kstack_end(void *addr)
 #define TIF_SECCOMP		5	/* secure computing */
 #define TIF_RESTORE_SIGMASK	6	/* restore signal mask in do_signal() */
 #define TIF_NOTIFY_RESUME	7	/* callback before returning to user */
+<<<<<<< HEAD
 #define TIF_POLLING_NRFLAG      8	/* true if poll_idle() is polling
 					   TIF_NEED_RESCHED */
 #define TIF_MEMDIE		9	/* is terminating due to OOM killer */
 #define TIF_SYSCALL_TRACEPOINT  10	/* syscall tracepoint instrumentation */
+=======
+#define TIF_MEMDIE		8	/* is terminating due to OOM killer */
+#define TIF_SYSCALL_TRACEPOINT	9	/* syscall tracepoint instrumentation */
+>>>>>>> v3.18
 
 
 #define _TIF_SYSCALL_TRACE	(1<<TIF_SYSCALL_TRACE)

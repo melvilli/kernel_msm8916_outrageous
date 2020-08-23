@@ -39,6 +39,7 @@ extern Elf64_Dyn _DYNAMIC [];
 
 /* Optional callbacks to write extra ELF notes. */
 struct file;
+<<<<<<< HEAD
 
 #ifndef ARCH_HAVE_EXTRA_ELF_NOTES
 static inline int elf_coredump_extra_notes_size(void) { return 0; }
@@ -47,5 +48,15 @@ static inline int elf_coredump_extra_notes_write(struct file *file,
 #else
 extern int elf_coredump_extra_notes_size(void);
 extern int elf_coredump_extra_notes_write(struct file *file, loff_t *foffset);
+=======
+struct coredump_params;
+
+#ifndef ARCH_HAVE_EXTRA_ELF_NOTES
+static inline int elf_coredump_extra_notes_size(void) { return 0; }
+static inline int elf_coredump_extra_notes_write(struct coredump_params *cprm) { return 0; }
+#else
+extern int elf_coredump_extra_notes_size(void);
+extern int elf_coredump_extra_notes_write(struct coredump_params *cprm);
+>>>>>>> v3.18
 #endif
 #endif /* _LINUX_ELF_H */

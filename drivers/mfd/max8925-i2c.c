@@ -37,7 +37,11 @@ static inline int max8925_read_device(struct i2c_client *i2c,
 static inline int max8925_write_device(struct i2c_client *i2c,
 				       int reg, int bytes, void *src)
 {
+<<<<<<< HEAD
 	unsigned char buf[bytes + 1];
+=======
+	unsigned char buf[9];
+>>>>>>> v3.18
 	int ret;
 
 	buf[0] = (unsigned char)reg;
@@ -151,7 +155,11 @@ static int max8925_dt_init(struct device_node *np, struct device *dev,
 static int max8925_probe(struct i2c_client *client,
 				   const struct i2c_device_id *id)
 {
+<<<<<<< HEAD
 	struct max8925_platform_data *pdata = client->dev.platform_data;
+=======
+	struct max8925_platform_data *pdata = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 	static struct max8925_chip *chip;
 	struct device_node *node = client->dev.of_node;
 
@@ -170,7 +178,12 @@ static int max8925_probe(struct i2c_client *client,
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 	chip = kzalloc(sizeof(struct max8925_chip), GFP_KERNEL);
+=======
+	chip = devm_kzalloc(&client->dev,
+			    sizeof(struct max8925_chip), GFP_KERNEL);
+>>>>>>> v3.18
 	if (chip == NULL)
 		return -ENOMEM;
 	chip->i2c = client;
@@ -208,7 +221,10 @@ static int max8925_remove(struct i2c_client *client)
 	max8925_device_exit(chip);
 	i2c_unregister_device(chip->adc);
 	i2c_unregister_device(chip->rtc);
+<<<<<<< HEAD
 	kfree(chip);
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -247,7 +263,11 @@ static struct i2c_driver max8925_driver = {
 		.name	= "max8925",
 		.owner	= THIS_MODULE,
 		.pm     = &max8925_pm_ops,
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(max8925_dt_ids),
+=======
+		.of_match_table = max8925_dt_ids,
+>>>>>>> v3.18
 	},
 	.probe		= max8925_probe,
 	.remove		= max8925_remove,
@@ -257,9 +277,17 @@ static struct i2c_driver max8925_driver = {
 static int __init max8925_i2c_init(void)
 {
 	int ret;
+<<<<<<< HEAD
 	ret = i2c_add_driver(&max8925_driver);
 	if (ret != 0)
 		pr_err("Failed to register MAX8925 I2C driver: %d\n", ret);
+=======
+
+	ret = i2c_add_driver(&max8925_driver);
+	if (ret != 0)
+		pr_err("Failed to register MAX8925 I2C driver: %d\n", ret);
+
+>>>>>>> v3.18
 	return ret;
 }
 subsys_initcall(max8925_i2c_init);

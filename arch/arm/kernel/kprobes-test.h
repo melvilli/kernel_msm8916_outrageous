@@ -111,11 +111,21 @@ struct test_arg_end {
 #define TESTCASE_START(title)					\
 	__asm__ __volatile__ (					\
 	"bl	__kprobes_test_case_start		\n\t"	\
+<<<<<<< HEAD
+=======
+	".pushsection .rodata				\n\t"	\
+	"10:						\n\t"	\
+>>>>>>> v3.18
 	/* don't use .asciz here as 'title' may be */		\
 	/* multiple strings to be concatenated.  */		\
 	".ascii "#title"				\n\t"	\
 	".byte	0					\n\t"	\
+<<<<<<< HEAD
 	".align	2					\n\t"
+=======
+	".popsection					\n\t"	\
+	".word	10b					\n\t"
+>>>>>>> v3.18
 
 #define	TEST_ARG_REG(reg, val)					\
 	".byte	"__stringify(ARG_TYPE_REG)"		\n\t"	\

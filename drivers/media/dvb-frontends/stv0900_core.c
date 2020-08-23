@@ -1270,7 +1270,10 @@ enum fe_stv0900_error stv0900_st_dvbs2_single(struct stv0900_internal *intp,
 					enum fe_stv0900_demod_mode LDPC_Mode,
 					enum fe_stv0900_demod_num demod)
 {
+<<<<<<< HEAD
 	enum fe_stv0900_error error = STV0900_NO_ERROR;
+=======
+>>>>>>> v3.18
 	s32 reg_ind;
 
 	dprintk("%s\n", __func__);
@@ -1337,7 +1340,11 @@ enum fe_stv0900_error stv0900_st_dvbs2_single(struct stv0900_internal *intp,
 		break;
 	}
 
+<<<<<<< HEAD
 	return error;
+=======
+	return STV0900_NO_ERROR;
+>>>>>>> v3.18
 }
 
 static enum fe_stv0900_error stv0900_init_internal(struct dvb_frontend *fe,
@@ -1555,8 +1562,11 @@ static int stv0900_status(struct stv0900_internal *intp,
 static int stv0900_set_mis(struct stv0900_internal *intp,
 				enum fe_stv0900_demod_num demod, int mis)
 {
+<<<<<<< HEAD
 	enum fe_stv0900_error error = STV0900_NO_ERROR;
 
+=======
+>>>>>>> v3.18
 	dprintk("%s\n", __func__);
 
 	if (mis < 0 || mis > 255) {
@@ -1569,7 +1579,11 @@ static int stv0900_set_mis(struct stv0900_internal *intp,
 		stv0900_write_reg(intp, ISIBITENA, 0xff);
 	}
 
+<<<<<<< HEAD
 	return error;
+=======
+	return STV0900_NO_ERROR;
+>>>>>>> v3.18
 }
 
 

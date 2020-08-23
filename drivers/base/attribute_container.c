@@ -12,7 +12,10 @@
  */
 
 #include <linux/attribute_container.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/device.h>
 #include <linux/kernel.h>
 #include <linux/slab.h>
@@ -75,9 +78,15 @@ int
 attribute_container_register(struct attribute_container *cont)
 {
 	INIT_LIST_HEAD(&cont->node);
+<<<<<<< HEAD
 	klist_init(&cont->containers,internal_container_klist_get,
 		   internal_container_klist_put);
 		
+=======
+	klist_init(&cont->containers, internal_container_klist_get,
+		   internal_container_klist_put);
+
+>>>>>>> v3.18
 	mutex_lock(&attribute_container_mutex);
 	list_add_tail(&cont->node, &attribute_container_list);
 	mutex_unlock(&attribute_container_mutex);
@@ -105,14 +114,22 @@ attribute_container_unregister(struct attribute_container *cont)
 	spin_unlock(&cont->containers.k_lock);
 	mutex_unlock(&attribute_container_mutex);
 	return retval;
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(attribute_container_unregister);
 
 /* private function used as class release */
 static void attribute_container_release(struct device *classdev)
 {
+<<<<<<< HEAD
 	struct internal_container *ic 
+=======
+	struct internal_container *ic
+>>>>>>> v3.18
 		= container_of(classdev, struct internal_container, classdev);
 	struct device *dev = classdev->parent;
 
@@ -167,7 +184,11 @@ attribute_container_add_device(struct device *dev,
 		ic->classdev.parent = get_device(dev);
 		ic->classdev.class = cont->class;
 		cont->class->dev_release = attribute_container_release;
+<<<<<<< HEAD
 		dev_set_name(&ic->classdev, dev_name(dev));
+=======
+		dev_set_name(&ic->classdev, "%s", dev_name(dev));
+>>>>>>> v3.18
 		if (fn)
 			fn(cont, dev, &ic->classdev);
 		else
@@ -185,8 +206,13 @@ attribute_container_add_device(struct device *dev,
 		struct klist_node *n = klist_next(iter); \
 		n ? container_of(n, typeof(*pos), member) : \
 			({ klist_iter_exit(iter) ; NULL; }); \
+<<<<<<< HEAD
 	}) ) != NULL; )
 			
+=======
+	})) != NULL;)
+
+>>>>>>> v3.18
 
 /**
  * attribute_container_remove_device - make device eligible for removal.
@@ -248,7 +274,11 @@ attribute_container_remove_device(struct device *dev,
  * container, then use attribute_container_trigger() instead.
  */
 void
+<<<<<<< HEAD
 attribute_container_device_trigger(struct device *dev, 
+=======
+attribute_container_device_trigger(struct device *dev,
+>>>>>>> v3.18
 				   int (*fn)(struct attribute_container *,
 					     struct device *,
 					     struct device *))

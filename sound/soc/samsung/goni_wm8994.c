@@ -16,7 +16,11 @@
 #include <sound/jack.h>
 
 #include <asm/mach-types.h>
+<<<<<<< HEAD
 #include <mach/gpio.h>
+=======
+#include <mach/gpio-samsung.h>
+>>>>>>> v3.18
 
 #include "../codecs/wm8994.h"
 
@@ -274,8 +278,13 @@ static int __init goni_init(void)
 		return -ENOMEM;
 
 	/* register voice DAI here */
+<<<<<<< HEAD
 	ret = snd_soc_register_component(&goni_snd_device->dev, &voice_component,
 					 &voice_dai, 1);
+=======
+	ret = devm_snd_soc_register_component(&goni_snd_device->dev,
+			&voice_component, &voice_dai, 1);
+>>>>>>> v3.18
 	if (ret) {
 		platform_device_put(goni_snd_device);
 		return ret;
@@ -284,17 +293,25 @@ static int __init goni_init(void)
 	platform_set_drvdata(goni_snd_device, &goni);
 	ret = platform_device_add(goni_snd_device);
 
+<<<<<<< HEAD
 	if (ret) {
 		snd_soc_unregister_component(&goni_snd_device->dev);
 		platform_device_put(goni_snd_device);
 	}
+=======
+	if (ret)
+		platform_device_put(goni_snd_device);
+>>>>>>> v3.18
 
 	return ret;
 }
 
 static void __exit goni_exit(void)
 {
+<<<<<<< HEAD
 	snd_soc_unregister_component(&goni_snd_device->dev);
+=======
+>>>>>>> v3.18
 	platform_device_unregister(goni_snd_device);
 }
 

@@ -22,7 +22,11 @@
 
 #include <linux/i2c.h>
 #include <drm/drmP.h>
+<<<<<<< HEAD
 #include <asm/mrst.h>
+=======
+#include <asm/intel-mid.h>
+>>>>>>> v3.18
 
 #include "intel_bios.h"
 #include "psb_drv.h"
@@ -43,7 +47,11 @@
  * Sets the power state for the panel.
  */
 static void oaktrail_lvds_set_power(struct drm_device *dev,
+<<<<<<< HEAD
 				struct psb_intel_encoder *psb_intel_encoder,
+=======
+				struct gma_encoder *gma_encoder,
+>>>>>>> v3.18
 				bool on)
 {
 	u32 pp_status;
@@ -78,6 +86,7 @@ static void oaktrail_lvds_set_power(struct drm_device *dev,
 static void oaktrail_lvds_dpms(struct drm_encoder *encoder, int mode)
 {
 	struct drm_device *dev = encoder->dev;
+<<<<<<< HEAD
 	struct psb_intel_encoder *psb_intel_encoder =
 						to_psb_intel_encoder(encoder);
 
@@ -85,6 +94,14 @@ static void oaktrail_lvds_dpms(struct drm_encoder *encoder, int mode)
 		oaktrail_lvds_set_power(dev, psb_intel_encoder, true);
 	else
 		oaktrail_lvds_set_power(dev, psb_intel_encoder, false);
+=======
+	struct gma_encoder *gma_encoder = to_gma_encoder(encoder);
+
+	if (mode == DRM_MODE_DPMS_ON)
+		oaktrail_lvds_set_power(dev, gma_encoder, true);
+	else
+		oaktrail_lvds_set_power(dev, gma_encoder, false);
+>>>>>>> v3.18
 
 	/* XXX: We never power down the LVDS pairs. */
 }
@@ -166,8 +183,12 @@ static void oaktrail_lvds_prepare(struct drm_encoder *encoder)
 {
 	struct drm_device *dev = encoder->dev;
 	struct drm_psb_private *dev_priv = dev->dev_private;
+<<<<<<< HEAD
 	struct psb_intel_encoder *psb_intel_encoder =
 						to_psb_intel_encoder(encoder);
+=======
+	struct gma_encoder *gma_encoder = to_gma_encoder(encoder);
+>>>>>>> v3.18
 	struct psb_intel_mode_device *mode_dev = &dev_priv->mode_dev;
 
 	if (!gma_power_begin(dev, true))
@@ -176,7 +197,11 @@ static void oaktrail_lvds_prepare(struct drm_encoder *encoder)
 	mode_dev->saveBLC_PWM_CTL = REG_READ(BLC_PWM_CTL);
 	mode_dev->backlight_duty_cycle = (mode_dev->saveBLC_PWM_CTL &
 					  BACKLIGHT_DUTY_CYCLE_MASK);
+<<<<<<< HEAD
 	oaktrail_lvds_set_power(dev, psb_intel_encoder, false);
+=======
+	oaktrail_lvds_set_power(dev, gma_encoder, false);
+>>>>>>> v3.18
 	gma_power_end(dev);
 }
 
@@ -203,14 +228,22 @@ static void oaktrail_lvds_commit(struct drm_encoder *encoder)
 {
 	struct drm_device *dev = encoder->dev;
 	struct drm_psb_private *dev_priv = dev->dev_private;
+<<<<<<< HEAD
 	struct psb_intel_encoder *psb_intel_encoder =
 						to_psb_intel_encoder(encoder);
+=======
+	struct gma_encoder *gma_encoder = to_gma_encoder(encoder);
+>>>>>>> v3.18
 	struct psb_intel_mode_device *mode_dev = &dev_priv->mode_dev;
 
 	if (mode_dev->backlight_duty_cycle == 0)
 		mode_dev->backlight_duty_cycle =
 					oaktrail_lvds_get_max_backlight(dev);
+<<<<<<< HEAD
 	oaktrail_lvds_set_power(dev, psb_intel_encoder, true);
+=======
+	oaktrail_lvds_set_power(dev, gma_encoder, true);
+>>>>>>> v3.18
 }
 
 static const struct drm_encoder_helper_funcs oaktrail_lvds_helper_funcs = {
@@ -221,6 +254,7 @@ static const struct drm_encoder_helper_funcs oaktrail_lvds_helper_funcs = {
 	.commit = oaktrail_lvds_commit,
 };
 
+<<<<<<< HEAD
 static struct drm_display_mode lvds_configuration_modes[] = {
 	/* hard coded fixed mode for TPO LTPS LPJ040K001A */
 	{ DRM_MODE("800x480",  DRM_MODE_TYPE_DRIVER, 33264, 800, 836,
@@ -245,6 +279,8 @@ static struct drm_display_mode lvds_configuration_modes[] = {
 		   1558, 1664, 0, 768, 769, 770, 776, 0, 0) },
 };
 
+=======
+>>>>>>> v3.18
 /* Returns the panel fixed mode from configuration. */
 
 static void oaktrail_lvds_get_configuration_mode(struct drm_device *dev,
@@ -306,10 +342,17 @@ static void oaktrail_lvds_get_configuration_mode(struct drm_device *dev,
 			mode_dev->panel_fixed_mode =
 				drm_mode_duplicate(dev,
 					dev_priv->lfp_lvds_vbt_mode);
+<<<<<<< HEAD
 	/* Then guess */
 	if (mode_dev->panel_fixed_mode == NULL)
 		mode_dev->panel_fixed_mode
 			= drm_mode_duplicate(dev, &lvds_configuration_modes[2]);
+=======
+
+	/* If we still got no mode then bail */
+	if (mode_dev->panel_fixed_mode == NULL)
+		return;
+>>>>>>> v3.18
 
 	drm_mode_set_name(mode_dev->panel_fixed_mode);
 	drm_mode_set_crtcinfo(mode_dev->panel_fixed_mode, 0);
@@ -325,8 +368,13 @@ static void oaktrail_lvds_get_configuration_mode(struct drm_device *dev,
 void oaktrail_lvds_init(struct drm_device *dev,
 		    struct psb_intel_mode_device *mode_dev)
 {
+<<<<<<< HEAD
 	struct psb_intel_encoder *psb_intel_encoder;
 	struct psb_intel_connector *psb_intel_connector;
+=======
+	struct gma_encoder *gma_encoder;
+	struct gma_connector *gma_connector;
+>>>>>>> v3.18
 	struct drm_connector *connector;
 	struct drm_encoder *encoder;
 	struct drm_psb_private *dev_priv = dev->dev_private;
@@ -334,6 +382,7 @@ void oaktrail_lvds_init(struct drm_device *dev,
 	struct i2c_adapter *i2c_adap;
 	struct drm_display_mode *scan;	/* *modes, *bios_mode; */
 
+<<<<<<< HEAD
 	psb_intel_encoder = kzalloc(sizeof(struct psb_intel_encoder), GFP_KERNEL);
 	if (!psb_intel_encoder)
 		return;
@@ -344,6 +393,18 @@ void oaktrail_lvds_init(struct drm_device *dev,
 
 	connector = &psb_intel_connector->base;
 	encoder = &psb_intel_encoder->base;
+=======
+	gma_encoder = kzalloc(sizeof(struct gma_encoder), GFP_KERNEL);
+	if (!gma_encoder)
+		return;
+
+	gma_connector = kzalloc(sizeof(struct gma_connector), GFP_KERNEL);
+	if (!gma_connector)
+		goto failed_connector;
+
+	connector = &gma_connector->base;
+	encoder = &gma_encoder->base;
+>>>>>>> v3.18
 	dev_priv->is_lvds_on = true;
 	drm_connector_init(dev, connector,
 			   &psb_intel_lvds_connector_funcs,
@@ -352,9 +413,14 @@ void oaktrail_lvds_init(struct drm_device *dev,
 	drm_encoder_init(dev, encoder, &psb_intel_lvds_enc_funcs,
 			 DRM_MODE_ENCODER_LVDS);
 
+<<<<<<< HEAD
 	psb_intel_connector_attach_encoder(psb_intel_connector,
 					   psb_intel_encoder);
 	psb_intel_encoder->type = INTEL_OUTPUT_LVDS;
+=======
+	gma_connector_attach_encoder(gma_connector, gma_encoder);
+	gma_encoder->type = INTEL_OUTPUT_LVDS;
+>>>>>>> v3.18
 
 	drm_encoder_helper_add(encoder, &oaktrail_lvds_helper_funcs);
 	drm_connector_helper_add(connector,
@@ -387,6 +453,10 @@ void oaktrail_lvds_init(struct drm_device *dev,
 	 *    if closed, act like it's not there for now
 	 */
 
+<<<<<<< HEAD
+=======
+	mutex_lock(&dev->mode_config.mutex);
+>>>>>>> v3.18
 	i2c_adap = i2c_get_adapter(dev_priv->ops->i2c_bus);
 	if (i2c_adap == NULL)
 		dev_err(dev->dev, "No ddc adapter available!\n");
@@ -429,6 +499,7 @@ void oaktrail_lvds_init(struct drm_device *dev,
 	}
 
 out:
+<<<<<<< HEAD
 	drm_sysfs_connector_add(connector);
 	return;
 
@@ -436,13 +507,32 @@ failed_find:
 	dev_dbg(dev->dev, "No LVDS modes found, disabling.\n");
 	if (psb_intel_encoder->ddc_bus)
 		psb_intel_i2c_destroy(psb_intel_encoder->ddc_bus);
+=======
+	mutex_unlock(&dev->mode_config.mutex);
+
+	drm_connector_register(connector);
+	return;
+
+failed_find:
+	mutex_unlock(&dev->mode_config.mutex);
+
+	dev_dbg(dev->dev, "No LVDS modes found, disabling.\n");
+	if (gma_encoder->ddc_bus)
+		psb_intel_i2c_destroy(gma_encoder->ddc_bus);
+>>>>>>> v3.18
 
 /* failed_ddc: */
 
 	drm_encoder_cleanup(encoder);
 	drm_connector_cleanup(connector);
+<<<<<<< HEAD
 	kfree(psb_intel_connector);
 failed_connector:
 	kfree(psb_intel_encoder);
+=======
+	kfree(gma_connector);
+failed_connector:
+	kfree(gma_encoder);
+>>>>>>> v3.18
 }
 

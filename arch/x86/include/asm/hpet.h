@@ -63,6 +63,10 @@
 /* hpet memory map physical address */
 extern unsigned long hpet_address;
 extern unsigned long force_hpet_address;
+<<<<<<< HEAD
+=======
+extern int boot_hpet_disable;
+>>>>>>> v3.18
 extern u8 hpet_blockid;
 extern int hpet_force_user;
 extern u8 hpet_msi_disable;

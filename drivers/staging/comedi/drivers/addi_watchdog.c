@@ -16,12 +16,18 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+=======
+ */
+
+#include <linux/module.h>
+>>>>>>> v3.18
 #include "../comedidev.h"
 #include "addi_watchdog.h"
 
@@ -130,14 +136,21 @@ int addi_watchdog_init(struct comedi_subdevice *s, unsigned long iobase)
 {
 	struct addi_watchdog_private *spriv;
 
+<<<<<<< HEAD
 	spriv = kzalloc(sizeof(*spriv), GFP_KERNEL);
+=======
+	spriv = comedi_alloc_spriv(s, sizeof(*spriv));
+>>>>>>> v3.18
 	if (!spriv)
 		return -ENOMEM;
 
 	spriv->iobase = iobase;
 
+<<<<<<< HEAD
 	s->private	= spriv;
 
+=======
+>>>>>>> v3.18
 	s->type		= COMEDI_SUBD_TIMER;
 	s->subdev_flags	= SDF_WRITEABLE;
 	s->n_chan	= 1;

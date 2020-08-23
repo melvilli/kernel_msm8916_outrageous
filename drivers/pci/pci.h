@@ -1,11 +1,21 @@
 #ifndef DRIVERS_PCI_H
 #define DRIVERS_PCI_H
 
+<<<<<<< HEAD
 #include <linux/workqueue.h>
 
 #define PCI_CFG_SPACE_SIZE	256
 #define PCI_CFG_SPACE_EXP_SIZE	4096
 
+=======
+#define PCI_CFG_SPACE_SIZE	256
+#define PCI_CFG_SPACE_EXP_SIZE	4096
+
+extern const unsigned char pcie_link_speed[];
+
+bool pcie_cap_has_lnkctl(const struct pci_dev *dev);
+
+>>>>>>> v3.18
 /* Functions internal to the PCI core code */
 
 int pci_create_sysfs_dev_files(struct pci_dev *pdev);
@@ -65,7 +75,10 @@ void pci_power_up(struct pci_dev *dev);
 void pci_disable_enabled_device(struct pci_dev *dev);
 int pci_finish_runtime_suspend(struct pci_dev *dev);
 int __pci_pme_wakeup(struct pci_dev *dev, void *ign);
+<<<<<<< HEAD
 void pci_wakeup_bus(struct pci_bus *bus);
+=======
+>>>>>>> v3.18
 void pci_config_pm_runtime_get(struct pci_dev *dev);
 void pci_config_pm_runtime_put(struct pci_dev *dev);
 void pci_pm_init(struct pci_dev *dev);
@@ -78,7 +91,11 @@ static inline void pci_wakeup_event(struct pci_dev *dev)
 	pm_wakeup_event(&dev->dev, 100);
 }
 
+<<<<<<< HEAD
 static inline bool pci_is_bridge(struct pci_dev *pci_dev)
+=======
+static inline bool pci_has_subordinate(struct pci_dev *pci_dev)
+>>>>>>> v3.18
 {
 	return !!(pci_dev->subordinate);
 }
@@ -150,10 +167,17 @@ static inline int pci_no_d1d2(struct pci_dev *dev)
 	return (dev->no_d1d2 || parent_dstates);
 
 }
+<<<<<<< HEAD
 extern struct device_attribute pci_dev_attrs[];
 extern struct device_attribute pcibus_dev_attrs[];
 extern struct device_type pci_dev_type;
 extern struct bus_attribute pci_bus_attrs[];
+=======
+extern const struct attribute_group *pci_dev_groups[];
+extern const struct attribute_group *pcibus_groups[];
+extern struct device_type pci_dev_type;
+extern const struct attribute_group *pci_bus_groups[];
+>>>>>>> v3.18
 
 
 /**
@@ -202,11 +226,19 @@ int __pci_read_base(struct pci_dev *dev, enum pci_bar_type type,
 		    struct resource *res, unsigned int reg);
 int pci_resource_bar(struct pci_dev *dev, int resno, enum pci_bar_type *type);
 void pci_configure_ari(struct pci_dev *dev);
+<<<<<<< HEAD
 void __ref __pci_bus_size_bridges(struct pci_bus *bus,
 			struct list_head *realloc_head);
 void __ref __pci_bus_assign_resources(const struct pci_bus *bus,
 				      struct list_head *realloc_head,
 				      struct list_head *fail_head);
+=======
+void __pci_bus_size_bridges(struct pci_bus *bus,
+			struct list_head *realloc_head);
+void __pci_bus_assign_resources(const struct pci_bus *bus,
+				struct list_head *realloc_head,
+				struct list_head *fail_head);
+>>>>>>> v3.18
 
 /**
  * pci_ari_enabled - query ARI forwarding status
@@ -239,8 +271,11 @@ struct pci_sriov {
 	struct pci_dev *dev;	/* lowest numbered PF */
 	struct pci_dev *self;	/* this PF */
 	struct mutex lock;	/* lock for VF bus */
+<<<<<<< HEAD
 	struct work_struct mtask; /* VF Migration task */
 	u8 __iomem *mstate;	/* VF Migration State Array */
+=======
+>>>>>>> v3.18
 };
 
 #ifdef CONFIG_PCI_ATS

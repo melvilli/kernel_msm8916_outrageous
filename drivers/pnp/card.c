@@ -239,6 +239,10 @@ int pnp_add_card(struct pnp_card *card)
 	error = device_register(&card->dev);
 	if (error) {
 		dev_err(&card->dev, "could not register (err=%d)\n", error);
+<<<<<<< HEAD
+=======
+		put_device(&card->dev);
+>>>>>>> v3.18
 		return error;
 	}
 

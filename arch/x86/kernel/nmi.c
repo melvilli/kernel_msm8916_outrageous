@@ -14,6 +14,10 @@
 #include <linux/kprobes.h>
 #include <linux/kdebug.h>
 #include <linux/nmi.h>
+<<<<<<< HEAD
+=======
+#include <linux/debugfs.h>
+>>>>>>> v3.18
 #include <linux/delay.h>
 #include <linux/hardirq.h>
 #include <linux/slab.h>
@@ -29,6 +33,12 @@
 #include <asm/nmi.h>
 #include <asm/x86_init.h>
 
+<<<<<<< HEAD
+=======
+#define CREATE_TRACE_POINTS
+#include <trace/events/nmi.h>
+
+>>>>>>> v3.18
 struct nmi_desc {
 	spinlock_t lock;
 	struct list_head head;
@@ -82,7 +92,35 @@ __setup("unknown_nmi_panic", setup_unknown_nmi_panic);
 
 #define nmi_to_desc(type) (&nmi_desc[type])
 
+<<<<<<< HEAD
 static int __kprobes nmi_handle(unsigned int type, struct pt_regs *regs, bool b2b)
+=======
+static u64 nmi_longest_ns = 1 * NSEC_PER_MSEC;
+
+static int __init nmi_warning_debugfs(void)
+{
+	debugfs_create_u64("nmi_longest_ns", 0644,
+			arch_debugfs_dir, &nmi_longest_ns);
+	return 0;
+}
+fs_initcall(nmi_warning_debugfs);
+
+static void nmi_max_handler(struct irq_work *w)
+{
+	struct nmiaction *a = container_of(w, struct nmiaction, irq_work);
+	int remainder_ns, decimal_msecs;
+	u64 whole_msecs = ACCESS_ONCE(a->max_duration);
+
+	remainder_ns = do_div(whole_msecs, (1000 * 1000));
+	decimal_msecs = remainder_ns / 1000;
+
+	printk_ratelimited(KERN_INFO
+		"INFO: NMI handler (%ps) took too long to run: %lld.%03d msecs\n",
+		a->handler, whole_msecs, decimal_msecs);
+}
+
+static int nmi_handle(unsigned int type, struct pt_regs *regs, bool b2b)
+>>>>>>> v3.18
 {
 	struct nmi_desc *desc = nmi_to_desc(type);
 	struct nmiaction *a;
@@ -96,14 +134,37 @@ static int __kprobes nmi_handle(unsigned int type, struct pt_regs *regs, bool b2
 	 * can be latched at any given time.  Walk the whole list
 	 * to handle those situations.
 	 */
+<<<<<<< HEAD
 	list_for_each_entry_rcu(a, &desc->head, list)
 		handled += a->handler(type, regs);
+=======
+	list_for_each_entry_rcu(a, &desc->head, list) {
+		int thishandled;
+		u64 delta;
+
+		delta = sched_clock();
+		thishandled = a->handler(type, regs);
+		handled += thishandled;
+		delta = sched_clock() - delta;
+		trace_nmi_handler(a->handler, (int)delta, thishandled);
+
+		if (delta < nmi_longest_ns || delta < a->max_duration)
+			continue;
+
+		a->max_duration = delta;
+		irq_work_queue(&a->irq_work);
+	}
+>>>>>>> v3.18
 
 	rcu_read_unlock();
 
 	/* return total number of NMI events handled */
 	return handled;
 }
+<<<<<<< HEAD
+=======
+NOKPROBE_SYMBOL(nmi_handle);
+>>>>>>> v3.18
 
 int __register_nmi_handler(unsigned int type, struct nmiaction *action)
 {
@@ -113,6 +174,11 @@ int __register_nmi_handler(unsigned int type, struct nmiaction *action)
 	if (!action->handler)
 		return -EINVAL;
 
+<<<<<<< HEAD
+=======
+	init_irq_work(&action->irq_work, nmi_max_handler);
+
+>>>>>>> v3.18
 	spin_lock_irqsave(&desc->lock, flags);
 
 	/*
@@ -164,7 +230,11 @@ void unregister_nmi_handler(unsigned int type, const char *name)
 }
 EXPORT_SYMBOL_GPL(unregister_nmi_handler);
 
+<<<<<<< HEAD
 static __kprobes void
+=======
+static void
+>>>>>>> v3.18
 pci_serr_error(unsigned char reason, struct pt_regs *regs)
 {
 	/* check to see if anyone registered against these types of errors */
@@ -194,8 +264,14 @@ pci_serr_error(unsigned char reason, struct pt_regs *regs)
 	reason = (reason & NMI_REASON_CLEAR_MASK) | NMI_REASON_CLEAR_SERR;
 	outb(reason, NMI_REASON_PORT);
 }
+<<<<<<< HEAD
 
 static __kprobes void
+=======
+NOKPROBE_SYMBOL(pci_serr_error);
+
+static void
+>>>>>>> v3.18
 io_check_error(unsigned char reason, struct pt_regs *regs)
 {
 	unsigned long i;
@@ -225,8 +301,14 @@ io_check_error(unsigned char reason, struct pt_regs *regs)
 	reason &= ~NMI_REASON_CLEAR_IOCHK;
 	outb(reason, NMI_REASON_PORT);
 }
+<<<<<<< HEAD
 
 static __kprobes void
+=======
+NOKPROBE_SYMBOL(io_check_error);
+
+static void
+>>>>>>> v3.18
 unknown_nmi_error(unsigned char reason, struct pt_regs *regs)
 {
 	int handled;
@@ -254,11 +336,19 @@ unknown_nmi_error(unsigned char reason, struct pt_regs *regs)
 
 	pr_emerg("Dazed and confused, but trying to continue\n");
 }
+<<<<<<< HEAD
+=======
+NOKPROBE_SYMBOL(unknown_nmi_error);
+>>>>>>> v3.18
 
 static DEFINE_PER_CPU(bool, swallow_nmi);
 static DEFINE_PER_CPU(unsigned long, last_nmi_rip);
 
+<<<<<<< HEAD
 static __kprobes void default_do_nmi(struct pt_regs *regs)
+=======
+static void default_do_nmi(struct pt_regs *regs)
+>>>>>>> v3.18
 {
 	unsigned char reason = 0;
 	int handled;
@@ -357,6 +447,10 @@ static __kprobes void default_do_nmi(struct pt_regs *regs)
 	else
 		unknown_nmi_error(reason, regs);
 }
+<<<<<<< HEAD
+=======
+NOKPROBE_SYMBOL(default_do_nmi);
+>>>>>>> v3.18
 
 /*
  * NMIs can hit breakpoints which will cause it to lose its
@@ -476,7 +570,11 @@ static inline void nmi_nesting_postprocess(void)
 }
 #endif
 
+<<<<<<< HEAD
 dotraplinkage notrace __kprobes void
+=======
+dotraplinkage notrace void
+>>>>>>> v3.18
 do_nmi(struct pt_regs *regs, long error_code)
 {
 	nmi_nesting_preprocess(regs);
@@ -493,6 +591,10 @@ do_nmi(struct pt_regs *regs, long error_code)
 	/* On i386, may loop back to preprocess */
 	nmi_nesting_postprocess();
 }
+<<<<<<< HEAD
+=======
+NOKPROBE_SYMBOL(do_nmi);
+>>>>>>> v3.18
 
 void stop_nmi(void)
 {

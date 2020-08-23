@@ -32,6 +32,7 @@
 
 #include "ttype.h"
 
+<<<<<<< HEAD
 /*---------------------  Export Definitions -------------------------*/
 
 /*---------------------  Export Types  ------------------------------*/
@@ -44,3 +45,8 @@
 bool AESbGenCCMP(unsigned char *pbyRxKey, unsigned char *pbyFrame, unsigned short wFrameSize);
 
 #endif //__AES_H__
+=======
+bool AESbGenCCMP(unsigned char *pbyRxKey, unsigned char *pbyFrame, unsigned short wFrameSize);
+
+#endif /* __AES_H__ */
+>>>>>>> v3.18

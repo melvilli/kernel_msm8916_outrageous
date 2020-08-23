@@ -14,9 +14,13 @@
 #include <linux/kernel.h>
 #include <linux/errno.h>
 #include <linux/err.h>
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/slab.h>
 #include <linux/cpufreq.h>
+=======
+#include <linux/slab.h>
+>>>>>>> v3.18
 #include <linux/device.h>
 #include <linux/list.h>
 #include <linux/rculist.h>
@@ -42,7 +46,11 @@
  */
 
 /**
+<<<<<<< HEAD
  * struct opp - Generic OPP description structure
+=======
+ * struct dev_pm_opp - Generic OPP description structure
+>>>>>>> v3.18
  * @node:	opp list node. The nodes are maintained throughout the lifetime
  *		of boot. It is expected only an optimal set of OPPs are
  *		added to the library by the SoC framework.
@@ -59,7 +67,11 @@
  *
  * This structure stores the OPP information for a given device.
  */
+<<<<<<< HEAD
 struct opp {
+=======
+struct dev_pm_opp {
+>>>>>>> v3.18
 	struct list_head node;
 
 	bool available;
@@ -150,9 +162,15 @@ static struct device_opp *find_device_opp(struct device *dev)
  * prior to unlocking with rcu_read_unlock() to maintain the integrity of the
  * pointer.
  */
+<<<<<<< HEAD
 unsigned long dev_pm_opp_get_voltage(struct opp *opp)
 {
 	struct opp *tmp_opp;
+=======
+unsigned long dev_pm_opp_get_voltage(struct dev_pm_opp *opp)
+{
+	struct dev_pm_opp *tmp_opp;
+>>>>>>> v3.18
 	unsigned long v = 0;
 
 	tmp_opp = rcu_dereference(opp);
@@ -180,9 +198,15 @@ EXPORT_SYMBOL_GPL(dev_pm_opp_get_voltage);
  * prior to unlocking with rcu_read_unlock() to maintain the integrity of the
  * pointer.
  */
+<<<<<<< HEAD
 unsigned long dev_pm_opp_get_freq(struct opp *opp)
 {
 	struct opp *tmp_opp;
+=======
+unsigned long dev_pm_opp_get_freq(struct dev_pm_opp *opp)
+{
+	struct dev_pm_opp *tmp_opp;
+>>>>>>> v3.18
 	unsigned long f = 0;
 
 	tmp_opp = rcu_dereference(opp);
@@ -209,7 +233,11 @@ EXPORT_SYMBOL_GPL(dev_pm_opp_get_freq);
 int dev_pm_opp_get_opp_count(struct device *dev)
 {
 	struct device_opp *dev_opp;
+<<<<<<< HEAD
 	struct opp *temp_opp;
+=======
+	struct dev_pm_opp *temp_opp;
+>>>>>>> v3.18
 	int count = 0;
 
 	dev_opp = find_device_opp(dev);
@@ -254,11 +282,20 @@ EXPORT_SYMBOL_GPL(dev_pm_opp_get_opp_count);
  * under the locked area. The pointer returned must be used prior to unlocking
  * with rcu_read_unlock() to maintain the integrity of the pointer.
  */
+<<<<<<< HEAD
 struct opp *dev_pm_opp_find_freq_exact(struct device *dev, unsigned long freq,
 				bool available)
 {
 	struct device_opp *dev_opp;
 	struct opp *temp_opp, *opp = ERR_PTR(-ERANGE);
+=======
+struct dev_pm_opp *dev_pm_opp_find_freq_exact(struct device *dev,
+					      unsigned long freq,
+					      bool available)
+{
+	struct device_opp *dev_opp;
+	struct dev_pm_opp *temp_opp, *opp = ERR_PTR(-ERANGE);
+>>>>>>> v3.18
 
 	dev_opp = find_device_opp(dev);
 	if (IS_ERR(dev_opp)) {
@@ -300,10 +337,18 @@ EXPORT_SYMBOL_GPL(dev_pm_opp_find_freq_exact);
  * under the locked area. The pointer returned must be used prior to unlocking
  * with rcu_read_unlock() to maintain the integrity of the pointer.
  */
+<<<<<<< HEAD
 struct opp *dev_pm_opp_find_freq_ceil(struct device *dev, unsigned long *freq)
 {
 	struct device_opp *dev_opp;
 	struct opp *temp_opp, *opp = ERR_PTR(-ERANGE);
+=======
+struct dev_pm_opp *dev_pm_opp_find_freq_ceil(struct device *dev,
+					     unsigned long *freq)
+{
+	struct device_opp *dev_opp;
+	struct dev_pm_opp *temp_opp, *opp = ERR_PTR(-ERANGE);
+>>>>>>> v3.18
 
 	if (!dev || !freq) {
 		dev_err(dev, "%s: Invalid argument freq=%p\n", __func__, freq);
@@ -347,10 +392,18 @@ EXPORT_SYMBOL_GPL(dev_pm_opp_find_freq_ceil);
  * under the locked area. The pointer returned must be used prior to unlocking
  * with rcu_read_unlock() to maintain the integrity of the pointer.
  */
+<<<<<<< HEAD
 struct opp *dev_pm_opp_find_freq_floor(struct device *dev, unsigned long *freq)
 {
 	struct device_opp *dev_opp;
 	struct opp *temp_opp, *opp = ERR_PTR(-ERANGE);
+=======
+struct dev_pm_opp *dev_pm_opp_find_freq_floor(struct device *dev,
+					      unsigned long *freq)
+{
+	struct device_opp *dev_opp;
+	struct dev_pm_opp *temp_opp, *opp = ERR_PTR(-ERANGE);
+>>>>>>> v3.18
 
 	if (!dev || !freq) {
 		dev_err(dev, "%s: Invalid argument freq=%p\n", __func__, freq);
@@ -392,15 +445,33 @@ EXPORT_SYMBOL_GPL(dev_pm_opp_find_freq_floor);
  * to keep the integrity of the internal data structures. Callers should ensure
  * that this function is *NOT* called under RCU protection or in contexts where
  * mutex cannot be locked.
+<<<<<<< HEAD
+=======
+ *
+ * Return:
+ * 0:		On success OR
+ *		Duplicate OPPs (both freq and volt are same) and opp->available
+ * -EEXIST:	Freq are same and volt are different OR
+ *		Duplicate OPPs (both freq and volt are same) and !opp->available
+ * -ENOMEM:	Memory allocation failure
+>>>>>>> v3.18
  */
 int dev_pm_opp_add(struct device *dev, unsigned long freq, unsigned long u_volt)
 {
 	struct device_opp *dev_opp = NULL;
+<<<<<<< HEAD
 	struct opp *opp, *new_opp;
 	struct list_head *head;
 
 	/* allocate new OPP node */
 	new_opp = kzalloc(sizeof(struct opp), GFP_KERNEL);
+=======
+	struct dev_pm_opp *opp, *new_opp;
+	struct list_head *head;
+
+	/* allocate new OPP node */
+	new_opp = kzalloc(sizeof(*new_opp), GFP_KERNEL);
+>>>>>>> v3.18
 	if (!new_opp) {
 		dev_warn(dev, "%s: Unable to create new OPP node\n", __func__);
 		return -ENOMEM;
@@ -441,15 +512,41 @@ int dev_pm_opp_add(struct device *dev, unsigned long freq, unsigned long u_volt)
 	new_opp->u_volt = u_volt;
 	new_opp->available = true;
 
+<<<<<<< HEAD
 	/* Insert new OPP in order of increasing frequency */
 	head = &dev_opp->opp_list;
 	list_for_each_entry_rcu(opp, &dev_opp->opp_list, node) {
 		if (new_opp->rate < opp->rate)
+=======
+	/*
+	 * Insert new OPP in order of increasing frequency
+	 * and discard if already present
+	 */
+	head = &dev_opp->opp_list;
+	list_for_each_entry_rcu(opp, &dev_opp->opp_list, node) {
+		if (new_opp->rate <= opp->rate)
+>>>>>>> v3.18
 			break;
 		else
 			head = &opp->node;
 	}
 
+<<<<<<< HEAD
+=======
+	/* Duplicate OPPs ? */
+	if (new_opp->rate == opp->rate) {
+		int ret = opp->available && new_opp->u_volt == opp->u_volt ?
+			0 : -EEXIST;
+
+		dev_warn(dev, "%s: duplicate OPPs detected. Existing: freq: %lu, volt: %lu, enabled: %d. New: freq: %lu, volt: %lu, enabled: %d\n",
+			 __func__, opp->rate, opp->u_volt, opp->available,
+			 new_opp->rate, new_opp->u_volt, new_opp->available);
+		mutex_unlock(&dev_opp_list_lock);
+		kfree(new_opp);
+		return ret;
+	}
+
+>>>>>>> v3.18
 	list_add_rcu(&new_opp->node, head);
 	mutex_unlock(&dev_opp_list_lock);
 
@@ -485,11 +582,19 @@ static int opp_set_availability(struct device *dev, unsigned long freq,
 		bool availability_req)
 {
 	struct device_opp *tmp_dev_opp, *dev_opp = ERR_PTR(-ENODEV);
+<<<<<<< HEAD
 	struct opp *new_opp, *tmp_opp, *opp = ERR_PTR(-ENODEV);
 	int r = 0;
 
 	/* keep the node allocated */
 	new_opp = kmalloc(sizeof(struct opp), GFP_KERNEL);
+=======
+	struct dev_pm_opp *new_opp, *tmp_opp, *opp = ERR_PTR(-ENODEV);
+	int r = 0;
+
+	/* keep the node allocated */
+	new_opp = kmalloc(sizeof(*new_opp), GFP_KERNEL);
+>>>>>>> v3.18
 	if (!new_opp) {
 		dev_warn(dev, "%s: Unable to create OPP\n", __func__);
 		return -ENOMEM;
@@ -594,6 +699,7 @@ int dev_pm_opp_disable(struct device *dev, unsigned long freq)
 }
 EXPORT_SYMBOL_GPL(dev_pm_opp_disable);
 
+<<<<<<< HEAD
 #ifdef CONFIG_CPU_FREQ
 /**
  * dev_pm_opp_init_cpufreq_table() - create a cpufreq table for a device
@@ -684,6 +790,8 @@ void dev_pm_opp_free_cpufreq_table(struct device *dev,
 EXPORT_SYMBOL_GPL(dev_pm_opp_free_cpufreq_table);
 #endif		/* CONFIG_CPU_FREQ */
 
+=======
+>>>>>>> v3.18
 /**
  * dev_pm_opp_get_notifier() - find notifier_head of the device with opp
  * @dev:	device pointer used to lookup device OPPs.
@@ -732,11 +840,17 @@ int of_init_opp_table(struct device *dev)
 		unsigned long freq = be32_to_cpup(val++) * 1000;
 		unsigned long volt = be32_to_cpup(val++);
 
+<<<<<<< HEAD
 		if (dev_pm_opp_add(dev, freq, volt)) {
 			dev_warn(dev, "%s: Failed to add OPP %ld\n",
 				 __func__, freq);
 			continue;
 		}
+=======
+		if (dev_pm_opp_add(dev, freq, volt))
+			dev_warn(dev, "%s: Failed to add OPP %ld\n",
+				 __func__, freq);
+>>>>>>> v3.18
 		nr -= 2;
 	}
 

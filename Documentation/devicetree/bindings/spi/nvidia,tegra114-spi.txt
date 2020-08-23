@@ -4,10 +4,26 @@ Required properties:
 - compatible : should be "nvidia,tegra114-spi".
 - reg: Should contain SPI registers location and length.
 - interrupts: Should contain SPI interrupts.
+<<<<<<< HEAD
 - nvidia,dma-request-selector : The Tegra DMA controller's phandle and
   request selector for this SPI controller.
 - This is also require clock named "spi" as per binding document
   Documentation/devicetree/bindings/clock/clock-bindings.txt
+=======
+- clock-names : Must include the following entries:
+  - spi
+- resets : Must contain an entry for each entry in reset-names.
+  See ../reset/reset.txt for details.
+- reset-names : Must include the following entries:
+  - spi
+- dmas : Must contain an entry for each entry in clock-names.
+  See ../dma/dma.txt for details.
+- dma-names : Must include the following entries:
+  - rx
+  - tx
+- clocks : Must contain an entry for each entry in clock-names.
+  See ../clocks/clock-bindings.txt for details.
+>>>>>>> v3.18
 
 Recommended properties:
 - spi-max-frequency: Definition as per
@@ -18,9 +34,21 @@ spi@7000d600 {
 	compatible = "nvidia,tegra114-spi";
 	reg = <0x7000d600 0x200>;
 	interrupts = <0 82 0x04>;
+<<<<<<< HEAD
 	nvidia,dma-request-selector = <&apbdma 16>;
 	spi-max-frequency = <25000000>;
 	#address-cells = <1>;
 	#size-cells = <0>;
+=======
+	spi-max-frequency = <25000000>;
+	#address-cells = <1>;
+	#size-cells = <0>;
+	clocks = <&tegra_car 44>;
+	clock-names = "spi";
+	resets = <&tegra_car 44>;
+	reset-names = "spi";
+	dmas = <&apbdma 16>, <&apbdma 16>;
+	dma-names = "rx", "tx";
+>>>>>>> v3.18
 	status = "disabled";
 };

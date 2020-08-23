@@ -31,6 +31,7 @@ TRACE_EVENT(kvm_ppc_instr,
 		  __entry->inst, __entry->pc, __entry->emulate)
 );
 
+<<<<<<< HEAD
 #ifdef CONFIG_PPC_BOOK3S
 #define kvm_trace_symbol_exit \
 	{0x100, "SYSTEM_RESET"}, \
@@ -151,6 +152,8 @@ TRACE_EVENT(kvm_unmap_hva,
 	TP_printk("unmap hva 0x%lx\n", __entry->hva)
 );
 
+=======
+>>>>>>> v3.18
 TRACE_EVENT(kvm_stlb_inval,
 	TP_PROTO(unsigned int stlb_index),
 	TP_ARGS(stlb_index),
@@ -236,6 +239,7 @@ TRACE_EVENT(kvm_check_requests,
 		__entry->cpu_nr, __entry->requests)
 );
 
+<<<<<<< HEAD
 
 /*************************************************************************
  *                         Book3S trace points                           *
@@ -545,6 +549,8 @@ TRACE_EVENT(kvm_booke_queue_irqprio,
 
 #endif
 
+=======
+>>>>>>> v3.18
 #endif /* _TRACE_KVM_H */
 
 /* This part must be outside protection */

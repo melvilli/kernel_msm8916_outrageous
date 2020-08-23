@@ -242,6 +242,7 @@ static int saa7164_dvb_start_feed(struct dvb_demux_feed *feed)
 	if (!demux->dmx.frontend)
 		return -EINVAL;
 
+<<<<<<< HEAD
 	if (dvb) {
 		mutex_lock(&dvb->lock);
 		if (dvb->feeding++ == 0) {
@@ -252,6 +253,16 @@ static int saa7164_dvb_start_feed(struct dvb_demux_feed *feed)
 		dprintk(DBGLVL_DVB, "%s(port=%d) now feeding = %d\n",
 			__func__, port->nr, dvb->feeding);
 	}
+=======
+	mutex_lock(&dvb->lock);
+	if (dvb->feeding++ == 0) {
+		/* Start transport */
+		ret = saa7164_dvb_start_port(port);
+	}
+	mutex_unlock(&dvb->lock);
+	dprintk(DBGLVL_DVB, "%s(port=%d) now feeding = %d\n",
+		__func__, port->nr, dvb->feeding);
+>>>>>>> v3.18
 
 	return ret;
 }
@@ -266,6 +277,7 @@ static int saa7164_dvb_stop_feed(struct dvb_demux_feed *feed)
 
 	dprintk(DBGLVL_DVB, "%s(port=%d)\n", __func__, port->nr);
 
+<<<<<<< HEAD
 	if (dvb) {
 		mutex_lock(&dvb->lock);
 		if (--dvb->feeding == 0) {
@@ -276,6 +288,16 @@ static int saa7164_dvb_stop_feed(struct dvb_demux_feed *feed)
 		dprintk(DBGLVL_DVB, "%s(port=%d) now feeding = %d\n",
 			__func__, port->nr, dvb->feeding);
 	}
+=======
+	mutex_lock(&dvb->lock);
+	if (--dvb->feeding == 0) {
+		/* Stop transport */
+		ret = saa7164_dvb_stop_streaming(port);
+	}
+	mutex_unlock(&dvb->lock);
+	dprintk(DBGLVL_DVB, "%s(port=%d) now feeding = %d\n",
+		__func__, port->nr, dvb->feeding);
+>>>>>>> v3.18
 
 	return ret;
 }

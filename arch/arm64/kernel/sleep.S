@@ -49,6 +49,7 @@
 	orr	\dst, \dst, \mask		// dst|=(aff3>>rs3)
 	.endm
 /*
+<<<<<<< HEAD
  * Save CPU state for a suspend.  This saves callee registers, and allocates
  * space on the kernel stack to save the CPU specific registers + some
  * other data for resume.
@@ -56,12 +57,28 @@
  *  x0 = suspend finisher argument
  */
 ENTRY(__cpu_suspend)
+=======
+ * Save CPU state for a suspend and execute the suspend finisher.
+ * On success it will return 0 through cpu_resume - ie through a CPU
+ * soft/hard reboot from the reset vector.
+ * On failure it returns the suspend finisher return value or force
+ * -EOPNOTSUPP if the finisher erroneously returns 0 (the suspend finisher
+ * is not allowed to return, if it does this must be considered failure).
+ * It saves callee registers, and allocates space on the kernel stack
+ * to save the CPU specific registers + some other data for resume.
+ *
+ *  x0 = suspend finisher argument
+ *  x1 = suspend finisher function pointer
+ */
+ENTRY(__cpu_suspend_enter)
+>>>>>>> v3.18
 	stp	x29, lr, [sp, #-96]!
 	stp	x19, x20, [sp,#16]
 	stp	x21, x22, [sp,#32]
 	stp	x23, x24, [sp,#48]
 	stp	x25, x26, [sp,#64]
 	stp	x27, x28, [sp,#80]
+<<<<<<< HEAD
 	mov	x2, sp
 	sub	sp, sp, #CPU_SUSPEND_SZ	// allocate cpu_suspend_ctx
 	mov	x1, sp
@@ -71,6 +88,22 @@ ENTRY(__cpu_suspend)
 	str	x2, [x1, #CPU_CTX_SP]
 	ldr	x2, =sleep_save_sp
 	ldr	x2, [x2, #SLEEP_SAVE_SP_VIRT]
+=======
+	/*
+	 * Stash suspend finisher and its argument in x20 and x19
+	 */
+	mov	x19, x0
+	mov	x20, x1
+	mov	x2, sp
+	sub	sp, sp, #CPU_SUSPEND_SZ	// allocate cpu_suspend_ctx
+	mov	x0, sp
+	/*
+	 * x0 now points to struct cpu_suspend_ctx allocated on the stack
+	 */
+	str	x2, [x0, #CPU_CTX_SP]
+	ldr	x1, =sleep_save_sp
+	ldr	x1, [x1, #SLEEP_SAVE_SP_VIRT]
+>>>>>>> v3.18
 #ifdef CONFIG_SMP
 	mrs	x7, mpidr_el1
 	ldr	x9, =mpidr_hash
@@ -82,11 +115,29 @@ ENTRY(__cpu_suspend)
 	ldp	w3, w4, [x9, #MPIDR_HASH_SHIFTS]
 	ldp	w5, w6, [x9, #(MPIDR_HASH_SHIFTS + 8)]
 	compute_mpidr_hash x8, x3, x4, x5, x6, x7, x10
+<<<<<<< HEAD
 	add	x2, x2, x8, lsl #3
 #endif
 	bl	__cpu_suspend_finisher
         /*
 	 * Never gets here, unless suspend fails.
+=======
+	add	x1, x1, x8, lsl #3
+#endif
+	bl	__cpu_suspend_save
+	/*
+	 * Grab suspend finisher in x20 and its argument in x19
+	 */
+	mov	x0, x19
+	mov	x1, x20
+	/*
+	 * We are ready for power down, fire off the suspend finisher
+	 * in x1, with argument in x0
+	 */
+	blr	x1
+        /*
+	 * Never gets here, unless suspend finisher fails.
+>>>>>>> v3.18
 	 * Successful cpu_suspend should return from cpu_resume, returning
 	 * through this code path is considered an error
 	 * If the return value is set to 0 force x0 = -EOPNOTSUPP
@@ -103,15 +154,46 @@ ENTRY(__cpu_suspend)
 	ldp	x27, x28, [sp, #80]
 	ldp	x29, lr, [sp], #96
 	ret
+<<<<<<< HEAD
 ENDPROC(__cpu_suspend)
 	.ltorg
 
+=======
+ENDPROC(__cpu_suspend_enter)
+	.ltorg
+
+/*
+ * x0 must contain the sctlr value retrieved from restored context
+ */
+ENTRY(cpu_resume_mmu)
+	ldr	x3, =cpu_resume_after_mmu
+	msr	sctlr_el1, x0		// restore sctlr_el1
+	isb
+	br	x3			// global jump to virtual address
+ENDPROC(cpu_resume_mmu)
+cpu_resume_after_mmu:
+	mov	x0, #0			// return zero on success
+	ldp	x19, x20, [sp, #16]
+	ldp	x21, x22, [sp, #32]
+	ldp	x23, x24, [sp, #48]
+	ldp	x25, x26, [sp, #64]
+	ldp	x27, x28, [sp, #80]
+	ldp	x29, lr, [sp], #96
+	ret
+ENDPROC(cpu_resume_after_mmu)
+
+	.data
+>>>>>>> v3.18
 ENTRY(cpu_resume)
 	bl	el2_setup		// if in EL2 drop to EL1 cleanly
 #ifdef CONFIG_SMP
 	mrs	x1, mpidr_el1
+<<<<<<< HEAD
 	adrp	x4, mpidr_hash_ptr
 	add	x4, x4, #:lo12:mpidr_hash_ptr
+=======
+	adr	x4, mpidr_hash_ptr
+>>>>>>> v3.18
 	ldr	x5, [x4]
 	add	x8, x4, x5		// x8 = struct mpidr_hash phys address
         /* retrieve mpidr_hash members to compute the hash */
@@ -123,15 +205,25 @@ ENTRY(cpu_resume)
 #else
 	mov	x7, xzr
 #endif
+<<<<<<< HEAD
 	adrp	x0, sleep_save_sp
 	add	x0, x0, #:lo12:sleep_save_sp
+=======
+	adr	x0, sleep_save_sp
+>>>>>>> v3.18
 	ldr	x0, [x0, #SLEEP_SAVE_SP_PHYS]
 	ldr	x0, [x0, x7, lsl #3]
 	/* load sp from context */
 	ldr	x2, [x0, #CPU_CTX_SP]
+<<<<<<< HEAD
 	adrp	x1, sleep_idmap_phys
 	/* load physical address of identity map page table in x1 */
 	ldr	x1, [x1, #:lo12:sleep_idmap_phys]
+=======
+	adr	x1, sleep_idmap_phys
+	/* load physical address of identity map page table in x1 */
+	ldr	x1, [x1]
+>>>>>>> v3.18
 	mov	sp, x2
 	/*
 	 * cpu_do_resume expects x0 to contain context physical address
@@ -141,7 +233,10 @@ ENTRY(cpu_resume)
 	b	cpu_resume_mmu		// Resume MMU, never returns
 ENDPROC(cpu_resume)
 
+<<<<<<< HEAD
 	.data
+=======
+>>>>>>> v3.18
 	.align 3
 mpidr_hash_ptr:
 	/*

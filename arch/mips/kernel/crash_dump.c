@@ -4,6 +4,7 @@
 #include <asm/uaccess.h>
 #include <linux/slab.h>
 
+<<<<<<< HEAD
 static int __init parse_savemaxmem(char *p)
 {
 	if (p)
@@ -14,6 +15,8 @@ static int __init parse_savemaxmem(char *p)
 __setup("savemaxmem=", parse_savemaxmem);
 
 
+=======
+>>>>>>> v3.18
 static void *kdump_buf_page;
 
 /**

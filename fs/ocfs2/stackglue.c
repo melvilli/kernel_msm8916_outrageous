@@ -48,12 +48,15 @@ static char ocfs2_hb_ctl_path[OCFS2_MAX_HB_CTL_PATH] = "/sbin/ocfs2_hb_ctl";
  */
 static struct ocfs2_stack_plugin *active_stack;
 
+<<<<<<< HEAD
 inline int ocfs2_is_o2cb_active(void)
 {
 	return !strcmp(active_stack->sp_name, OCFS2_STACK_PLUGIN_O2CB);
 }
 EXPORT_SYMBOL_GPL(ocfs2_is_o2cb_active);
 
+=======
+>>>>>>> v3.18
 static struct ocfs2_stack_plugin *ocfs2_stack_lookup(const char *name)
 {
 	struct ocfs2_stack_plugin *p;
@@ -315,6 +318,11 @@ int ocfs2_plock(struct ocfs2_cluster_connection *conn, u64 ino,
 EXPORT_SYMBOL_GPL(ocfs2_plock);
 
 int ocfs2_cluster_connect(const char *stack_name,
+<<<<<<< HEAD
+=======
+			  const char *cluster_name,
+			  int cluster_name_len,
+>>>>>>> v3.18
 			  const char *group,
 			  int grouplen,
 			  struct ocfs2_locking_protocol *lproto,
@@ -348,8 +356,17 @@ int ocfs2_cluster_connect(const char *stack_name,
 		goto out;
 	}
 
+<<<<<<< HEAD
 	memcpy(new_conn->cc_name, group, grouplen);
 	new_conn->cc_namelen = grouplen;
+=======
+	strlcpy(new_conn->cc_name, group, GROUP_NAME_MAX + 1);
+	new_conn->cc_namelen = grouplen;
+	if (cluster_name_len)
+		strlcpy(new_conn->cc_cluster_name, cluster_name,
+			CLUSTER_NAME_MAX + 1);
+	new_conn->cc_cluster_name_len = cluster_name_len;
+>>>>>>> v3.18
 	new_conn->cc_recovery_handler = recovery_handler;
 	new_conn->cc_recovery_data = recovery_data;
 
@@ -392,8 +409,14 @@ int ocfs2_cluster_connect_agnostic(const char *group,
 
 	if (cluster_stack_name[0])
 		stack_name = cluster_stack_name;
+<<<<<<< HEAD
 	return ocfs2_cluster_connect(stack_name, group, grouplen, lproto,
 				     recovery_handler, recovery_data, conn);
+=======
+	return ocfs2_cluster_connect(stack_name, NULL, 0, group, grouplen,
+				     lproto, recovery_handler, recovery_data,
+				     conn);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(ocfs2_cluster_connect_agnostic);
 
@@ -466,9 +489,16 @@ void ocfs2_cluster_hangup(const char *group, int grouplen)
 }
 EXPORT_SYMBOL_GPL(ocfs2_cluster_hangup);
 
+<<<<<<< HEAD
 int ocfs2_cluster_this_node(unsigned int *node)
 {
 	return active_stack->sp_ops->this_node(node);
+=======
+int ocfs2_cluster_this_node(struct ocfs2_cluster_connection *conn,
+			    unsigned int *node)
+{
+	return active_stack->sp_ops->this_node(conn, node);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(ocfs2_cluster_this_node);
 
@@ -494,7 +524,11 @@ static ssize_t ocfs2_max_locking_protocol_show(struct kobject *kobj,
 }
 
 static struct kobj_attribute ocfs2_attr_max_locking_protocol =
+<<<<<<< HEAD
 	__ATTR(max_locking_protocol, S_IFREG | S_IRUGO,
+=======
+	__ATTR(max_locking_protocol, S_IRUGO,
+>>>>>>> v3.18
 	       ocfs2_max_locking_protocol_show, NULL);
 
 static ssize_t ocfs2_loaded_cluster_plugins_show(struct kobject *kobj,
@@ -526,7 +560,11 @@ static ssize_t ocfs2_loaded_cluster_plugins_show(struct kobject *kobj,
 }
 
 static struct kobj_attribute ocfs2_attr_loaded_cluster_plugins =
+<<<<<<< HEAD
 	__ATTR(loaded_cluster_plugins, S_IFREG | S_IRUGO,
+=======
+	__ATTR(loaded_cluster_plugins, S_IRUGO,
+>>>>>>> v3.18
 	       ocfs2_loaded_cluster_plugins_show, NULL);
 
 static ssize_t ocfs2_active_cluster_plugin_show(struct kobject *kobj,
@@ -548,7 +586,11 @@ static ssize_t ocfs2_active_cluster_plugin_show(struct kobject *kobj,
 }
 
 static struct kobj_attribute ocfs2_attr_active_cluster_plugin =
+<<<<<<< HEAD
 	__ATTR(active_cluster_plugin, S_IFREG | S_IRUGO,
+=======
+	__ATTR(active_cluster_plugin, S_IRUGO,
+>>>>>>> v3.18
 	       ocfs2_active_cluster_plugin_show, NULL);
 
 static ssize_t ocfs2_cluster_stack_show(struct kobject *kobj,
@@ -597,15 +639,39 @@ static ssize_t ocfs2_cluster_stack_store(struct kobject *kobj,
 
 
 static struct kobj_attribute ocfs2_attr_cluster_stack =
+<<<<<<< HEAD
 	__ATTR(cluster_stack, S_IFREG | S_IRUGO | S_IWUSR,
 	       ocfs2_cluster_stack_show,
 	       ocfs2_cluster_stack_store);
 
+=======
+	__ATTR(cluster_stack, S_IRUGO | S_IWUSR,
+	       ocfs2_cluster_stack_show,
+	       ocfs2_cluster_stack_store);
+
+
+
+static ssize_t ocfs2_dlm_recover_show(struct kobject *kobj,
+					struct kobj_attribute *attr,
+					char *buf)
+{
+	return snprintf(buf, PAGE_SIZE, "1\n");
+}
+
+static struct kobj_attribute ocfs2_attr_dlm_recover_support =
+	__ATTR(dlm_recover_callback_support, S_IRUGO,
+	       ocfs2_dlm_recover_show, NULL);
+
+>>>>>>> v3.18
 static struct attribute *ocfs2_attrs[] = {
 	&ocfs2_attr_max_locking_protocol.attr,
 	&ocfs2_attr_loaded_cluster_plugins.attr,
 	&ocfs2_attr_active_cluster_plugin.attr,
 	&ocfs2_attr_cluster_stack.attr,
+<<<<<<< HEAD
+=======
+	&ocfs2_attr_dlm_recover_support.attr,
+>>>>>>> v3.18
 	NULL,
 };
 
@@ -649,7 +715,11 @@ error:
 
 #define FS_OCFS2_NM		1
 
+<<<<<<< HEAD
 static ctl_table ocfs2_nm_table[] = {
+=======
+static struct ctl_table ocfs2_nm_table[] = {
+>>>>>>> v3.18
 	{
 		.procname	= "hb_ctl_path",
 		.data		= ocfs2_hb_ctl_path,
@@ -660,7 +730,11 @@ static ctl_table ocfs2_nm_table[] = {
 	{ }
 };
 
+<<<<<<< HEAD
 static ctl_table ocfs2_mod_table[] = {
+=======
+static struct ctl_table ocfs2_mod_table[] = {
+>>>>>>> v3.18
 	{
 		.procname	= "nm",
 		.data		= NULL,
@@ -671,7 +745,11 @@ static ctl_table ocfs2_mod_table[] = {
 	{ }
 };
 
+<<<<<<< HEAD
 static ctl_table ocfs2_kern_table[] = {
+=======
+static struct ctl_table ocfs2_kern_table[] = {
+>>>>>>> v3.18
 	{
 		.procname	= "ocfs2",
 		.data		= NULL,
@@ -682,7 +760,11 @@ static ctl_table ocfs2_kern_table[] = {
 	{ }
 };
 
+<<<<<<< HEAD
 static ctl_table ocfs2_root_table[] = {
+=======
+static struct ctl_table ocfs2_root_table[] = {
+>>>>>>> v3.18
 	{
 		.procname	= "fs",
 		.data		= NULL,
@@ -693,7 +775,11 @@ static ctl_table ocfs2_root_table[] = {
 	{ }
 };
 
+<<<<<<< HEAD
 static struct ctl_table_header *ocfs2_table_header = NULL;
+=======
+static struct ctl_table_header *ocfs2_table_header;
+>>>>>>> v3.18
 
 
 /*

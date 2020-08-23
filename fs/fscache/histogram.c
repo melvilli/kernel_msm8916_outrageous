@@ -31,12 +31,19 @@ static int fscache_histogram_show(struct seq_file *m, void *v)
 
 	switch ((unsigned long) v) {
 	case 1:
+<<<<<<< HEAD
 		seq_puts(m, "JIFS  SECS  OBJ INST  OP RUNS   OBJ RUNS "
 			 " RETRV DLY RETRIEVLS\n");
 		return 0;
 	case 2:
 		seq_puts(m, "===== ===== ========= ========= ========="
 			 " ========= =========\n");
+=======
+		seq_puts(m, "JIFS  SECS  OBJ INST  OP RUNS   OBJ RUNS  RETRV DLY RETRIEVLS\n");
+		return 0;
+	case 2:
+		seq_puts(m, "===== ===== ========= ========= ========= ========= =========\n");
+>>>>>>> v3.18
 		return 0;
 	default:
 		index = (unsigned long) v - 3;

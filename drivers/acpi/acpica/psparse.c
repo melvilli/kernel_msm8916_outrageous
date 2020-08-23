@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -176,10 +180,17 @@ acpi_ps_complete_this_op(struct acpi_walk_state * walk_state,
 
 		switch (parent_info->class) {
 		case AML_CLASS_CONTROL:
+<<<<<<< HEAD
 			break;
 
 		case AML_CLASS_CREATE:
 
+=======
+
+			break;
+
+		case AML_CLASS_CREATE:
+>>>>>>> v3.18
 			/*
 			 * These opcodes contain term_arg operands. The current
 			 * op must be replaced by a placeholder return op
@@ -192,7 +203,10 @@ acpi_ps_complete_this_op(struct acpi_walk_state * walk_state,
 			break;
 
 		case AML_CLASS_NAMED_OBJECT:
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 			/*
 			 * These opcodes contain term_arg operands. The current
 			 * op must be replaced by a placeholder return op
@@ -298,7 +312,11 @@ acpi_ps_complete_this_op(struct acpi_walk_state * walk_state,
 			}
 	}
 
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 
 	/* Now we can actually delete the subtree rooted at Op */
 

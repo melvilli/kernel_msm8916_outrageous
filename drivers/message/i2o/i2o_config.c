@@ -754,19 +754,31 @@ static long i2o_cfg_compat_ioctl(struct file *file, unsigned cmd,
 				 unsigned long arg)
 {
 	int ret;
+<<<<<<< HEAD
 	mutex_lock(&i2o_cfg_mutex);
+=======
+>>>>>>> v3.18
 	switch (cmd) {
 	case I2OGETIOPS:
 		ret = i2o_cfg_ioctl(file, cmd, arg);
 		break;
 	case I2OPASSTHRU32:
+<<<<<<< HEAD
 		ret = i2o_cfg_passthru32(file, cmd, arg);
+=======
+		mutex_lock(&i2o_cfg_mutex);
+		ret = i2o_cfg_passthru32(file, cmd, arg);
+		mutex_unlock(&i2o_cfg_mutex);
+>>>>>>> v3.18
 		break;
 	default:
 		ret = -ENOIOCTLCMD;
 		break;
 	}
+<<<<<<< HEAD
 	mutex_unlock(&i2o_cfg_mutex);
+=======
+>>>>>>> v3.18
 	return ret;
 }
 

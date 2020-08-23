@@ -12,7 +12,10 @@ typedef struct filehdr {
 } FILHDR;
 #define FILHSZ	sizeof(FILHDR)
 
+<<<<<<< HEAD
 #define OMAGIC		0407
+=======
+>>>>>>> v3.18
 #define MIPSEBMAGIC	0x160
 #define MIPSELMAGIC	0x162
 

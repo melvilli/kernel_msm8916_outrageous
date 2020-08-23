@@ -8,7 +8,11 @@
  * 2 of the License, or (at your option) any later version.
  *
  * This file implements a driver for the Synopsys DesignWare watchdog device
+<<<<<<< HEAD
  * in the many ARM subsystems. The watchdog has 16 different timeout periods
+=======
+ * in the many subsystems. The watchdog has 16 different timeout periods
+>>>>>>> v3.18
  * and these are a function of the input clock frequency.
  *
  * The DesignWare watchdog cannot be stopped once it has been started so we
@@ -21,6 +25,10 @@
 
 #include <linux/bitops.h>
 #include <linux/clk.h>
+<<<<<<< HEAD
+=======
+#include <linux/delay.h>
+>>>>>>> v3.18
 #include <linux/device.h>
 #include <linux/err.h>
 #include <linux/fs.h>
@@ -29,8 +37,16 @@
 #include <linux/miscdevice.h>
 #include <linux/module.h>
 #include <linux/moduleparam.h>
+<<<<<<< HEAD
 #include <linux/pm.h>
 #include <linux/platform_device.h>
+=======
+#include <linux/notifier.h>
+#include <linux/of.h>
+#include <linux/pm.h>
+#include <linux/platform_device.h>
+#include <linux/reboot.h>
+>>>>>>> v3.18
 #include <linux/spinlock.h>
 #include <linux/timer.h>
 #include <linux/uaccess.h>
@@ -39,6 +55,10 @@
 #define WDOG_CONTROL_REG_OFFSET		    0x00
 #define WDOG_CONTROL_REG_WDT_EN_MASK	    0x01
 #define WDOG_TIMEOUT_RANGE_REG_OFFSET	    0x04
+<<<<<<< HEAD
+=======
+#define WDOG_TIMEOUT_RANGE_TOPINIT_SHIFT    4
+>>>>>>> v3.18
 #define WDOG_CURRENT_COUNT_REG_OFFSET	    0x08
 #define WDOG_COUNTER_RESTART_REG_OFFSET     0x0c
 #define WDOG_COUNTER_RESTART_KICK_VALUE	    0x76
@@ -61,6 +81,10 @@ static struct {
 	unsigned long		next_heartbeat;
 	struct timer_list	timer;
 	int			expect_close;
+<<<<<<< HEAD
+=======
+	struct notifier_block	restart_handler;
+>>>>>>> v3.18
 } dw_wdt;
 
 static inline int dw_wdt_is_enabled(void)
@@ -105,7 +129,12 @@ static int dw_wdt_set_top(unsigned top_s)
 		}
 
 	/* Set the new value in the watchdog. */
+<<<<<<< HEAD
 	writel(top_val, dw_wdt.regs + WDOG_TIMEOUT_RANGE_REG_OFFSET);
+=======
+	writel(top_val | top_val << WDOG_TIMEOUT_RANGE_TOPINIT_SHIFT,
+		dw_wdt.regs + WDOG_TIMEOUT_RANGE_REG_OFFSET);
+>>>>>>> v3.18
 
 	dw_wdt_set_next_heartbeat();
 
@@ -118,6 +147,29 @@ static void dw_wdt_keepalive(void)
 	       WDOG_COUNTER_RESTART_REG_OFFSET);
 }
 
+<<<<<<< HEAD
+=======
+static int dw_wdt_restart_handle(struct notifier_block *this,
+				unsigned long mode, void *cmd)
+{
+	u32 val;
+
+	writel(0, dw_wdt.regs + WDOG_TIMEOUT_RANGE_REG_OFFSET);
+	val = readl(dw_wdt.regs + WDOG_CONTROL_REG_OFFSET);
+	if (val & WDOG_CONTROL_REG_WDT_EN_MASK)
+		writel(WDOG_COUNTER_RESTART_KICK_VALUE, dw_wdt.regs +
+			WDOG_COUNTER_RESTART_REG_OFFSET);
+	else
+		writel(WDOG_CONTROL_REG_WDT_EN_MASK,
+		       dw_wdt.regs + WDOG_CONTROL_REG_OFFSET);
+
+	/* wait for reset to assert... */
+	mdelay(500);
+
+	return NOTIFY_DONE;
+}
+
+>>>>>>> v3.18
 static void dw_wdt_ping(unsigned long data)
 {
 	if (time_before(jiffies, dw_wdt.next_heartbeat) ||
@@ -154,8 +206,13 @@ static int dw_wdt_open(struct inode *inode, struct file *filp)
 	return nonseekable_open(inode, filp);
 }
 
+<<<<<<< HEAD
 ssize_t dw_wdt_write(struct file *filp, const char __user *buf, size_t len,
 		     loff_t *offset)
+=======
+static ssize_t dw_wdt_write(struct file *filp, const char __user *buf,
+			    size_t len, loff_t *offset)
+>>>>>>> v3.18
 {
 	if (!len)
 		return 0;
@@ -203,12 +260,20 @@ static long dw_wdt_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 
 	switch (cmd) {
 	case WDIOC_GETSUPPORT:
+<<<<<<< HEAD
 		return copy_to_user((struct watchdog_info *)arg, &dw_wdt_ident,
+=======
+		return copy_to_user((void __user *)arg, &dw_wdt_ident,
+>>>>>>> v3.18
 				    sizeof(dw_wdt_ident)) ? -EFAULT : 0;
 
 	case WDIOC_GETSTATUS:
 	case WDIOC_GETBOOTSTATUS:
+<<<<<<< HEAD
 		return put_user(0, (int *)arg);
+=======
+		return put_user(0, (int __user *)arg);
+>>>>>>> v3.18
 
 	case WDIOC_KEEPALIVE:
 		dw_wdt_set_next_heartbeat();
@@ -252,17 +317,28 @@ static int dw_wdt_release(struct inode *inode, struct file *filp)
 	return 0;
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 static int dw_wdt_suspend(struct device *dev)
 {
 	clk_disable(dw_wdt.clk);
+=======
+#ifdef CONFIG_PM_SLEEP
+static int dw_wdt_suspend(struct device *dev)
+{
+	clk_disable_unprepare(dw_wdt.clk);
+>>>>>>> v3.18
 
 	return 0;
 }
 
 static int dw_wdt_resume(struct device *dev)
 {
+<<<<<<< HEAD
 	int err = clk_enable(dw_wdt.clk);
+=======
+	int err = clk_prepare_enable(dw_wdt.clk);
+>>>>>>> v3.18
 
 	if (err)
 		return err;
@@ -271,12 +347,18 @@ static int dw_wdt_resume(struct device *dev)
 
 	return 0;
 }
+<<<<<<< HEAD
 
 static const struct dev_pm_ops dw_wdt_pm_ops = {
 	.suspend	= dw_wdt_suspend,
 	.resume		= dw_wdt_resume,
 };
 #endif /* CONFIG_PM */
+=======
+#endif /* CONFIG_PM_SLEEP */
+
+static SIMPLE_DEV_PM_OPS(dw_wdt_pm_ops, dw_wdt_suspend, dw_wdt_resume);
+>>>>>>> v3.18
 
 static const struct file_operations wdt_fops = {
 	.owner		= THIS_MODULE,
@@ -298,13 +380,17 @@ static int dw_wdt_drv_probe(struct platform_device *pdev)
 	int ret;
 	struct resource *mem = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 
+<<<<<<< HEAD
 	if (!mem)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 	dw_wdt.regs = devm_ioremap_resource(&pdev->dev, mem);
 	if (IS_ERR(dw_wdt.regs))
 		return PTR_ERR(dw_wdt.regs);
 
+<<<<<<< HEAD
 	dw_wdt.clk = clk_get(&pdev->dev, NULL);
 	if (IS_ERR(dw_wdt.clk))
 		return PTR_ERR(dw_wdt.clk);
@@ -312,6 +398,15 @@ static int dw_wdt_drv_probe(struct platform_device *pdev)
 	ret = clk_enable(dw_wdt.clk);
 	if (ret)
 		goto out_put_clk;
+=======
+	dw_wdt.clk = devm_clk_get(&pdev->dev, NULL);
+	if (IS_ERR(dw_wdt.clk))
+		return PTR_ERR(dw_wdt.clk);
+
+	ret = clk_prepare_enable(dw_wdt.clk);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 
 	spin_lock_init(&dw_wdt.lock);
 
@@ -319,6 +414,15 @@ static int dw_wdt_drv_probe(struct platform_device *pdev)
 	if (ret)
 		goto out_disable_clk;
 
+<<<<<<< HEAD
+=======
+	dw_wdt.restart_handler.notifier_call = dw_wdt_restart_handle;
+	dw_wdt.restart_handler.priority = 128;
+	ret = register_restart_handler(&dw_wdt.restart_handler);
+	if (ret)
+		pr_warn("cannot register restart handler\n");
+
+>>>>>>> v3.18
 	dw_wdt_set_next_heartbeat();
 	setup_timer(&dw_wdt.timer, dw_wdt_ping, 0);
 	mod_timer(&dw_wdt.timer, jiffies + WDT_TIMEOUT);
@@ -326,32 +430,60 @@ static int dw_wdt_drv_probe(struct platform_device *pdev)
 	return 0;
 
 out_disable_clk:
+<<<<<<< HEAD
 	clk_disable(dw_wdt.clk);
 out_put_clk:
 	clk_put(dw_wdt.clk);
+=======
+	clk_disable_unprepare(dw_wdt.clk);
+>>>>>>> v3.18
 
 	return ret;
 }
 
 static int dw_wdt_drv_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	misc_deregister(&dw_wdt_miscdev);
 
 	clk_disable(dw_wdt.clk);
 	clk_put(dw_wdt.clk);
+=======
+	unregister_restart_handler(&dw_wdt.restart_handler);
+
+	misc_deregister(&dw_wdt_miscdev);
+
+	clk_disable_unprepare(dw_wdt.clk);
+>>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_OF
+static const struct of_device_id dw_wdt_of_match[] = {
+	{ .compatible = "snps,dw-wdt", },
+	{ /* sentinel */ }
+};
+MODULE_DEVICE_TABLE(of, dw_wdt_of_match);
+#endif
+
+>>>>>>> v3.18
 static struct platform_driver dw_wdt_driver = {
 	.probe		= dw_wdt_drv_probe,
 	.remove		= dw_wdt_drv_remove,
 	.driver		= {
 		.name	= "dw_wdt",
 		.owner	= THIS_MODULE,
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 		.pm	= &dw_wdt_pm_ops,
 #endif /* CONFIG_PM */
+=======
+		.of_match_table = of_match_ptr(dw_wdt_of_match),
+		.pm	= &dw_wdt_pm_ops,
+>>>>>>> v3.18
 	},
 };
 
@@ -360,4 +492,7 @@ module_platform_driver(dw_wdt_driver);
 MODULE_AUTHOR("Jamie Iles");
 MODULE_DESCRIPTION("Synopsys DesignWare Watchdog Driver");
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18

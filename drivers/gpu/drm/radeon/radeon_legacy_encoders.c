@@ -392,7 +392,11 @@ void radeon_legacy_backlight_init(struct radeon_encoder *radeon_encoder,
 	props.type = BACKLIGHT_RAW;
 	snprintf(bl_name, sizeof(bl_name),
 		 "radeon_bl%d", dev->primary->index);
+<<<<<<< HEAD
 	bd = backlight_device_register(bl_name, &drm_connector->kdev,
+=======
+	bd = backlight_device_register(bl_name, drm_connector->kdev,
+>>>>>>> v3.18
 				       pdata, &radeon_backlight_ops, &props);
 	if (IS_ERR(bd)) {
 		DRM_ERROR("Backlight registration failed\n");

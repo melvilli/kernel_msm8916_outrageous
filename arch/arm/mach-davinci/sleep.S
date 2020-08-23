@@ -213,7 +213,11 @@ ddr2clk_stop_done:
 	cmp	ip, r0
 	bne	ddr2clk_stop_done
 
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 ENDPROC(davinci_ddr_psc_config)
 
 CACHE_FLUSH:

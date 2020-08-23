@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 config ARCH_TEGRA
 	bool "NVIDIA Tegra" if ARCH_MULTI_V7
 	select ARCH_HAS_CPUFREQ
@@ -20,6 +21,26 @@ config ARCH_TEGRA
 
 menu "NVIDIA Tegra options"
 	depends on ARCH_TEGRA
+=======
+menuconfig ARCH_TEGRA
+	bool "NVIDIA Tegra" if ARCH_MULTI_V7
+	select ARCH_REQUIRE_GPIOLIB
+	select ARCH_SUPPORTS_TRUSTED_FOUNDATIONS
+	select ARM_GIC
+	select CLKSRC_MMIO
+	select HAVE_ARM_SCU if SMP
+	select HAVE_ARM_TWD if SMP
+	select PINCTRL
+	select ARCH_HAS_RESET_CONTROLLER
+	select RESET_CONTROLLER
+	select SOC_BUS
+	select USB_ULPI if USB_PHY
+	select USB_ULPI_VIEWPORT if USB_PHY
+	help
+	  This enables support for NVIDIA Tegra based systems.
+
+if ARCH_TEGRA
+>>>>>>> v3.18
 
 config ARCH_TEGRA_2x_SOC
 	bool "Enable support for Tegra20 family"
@@ -27,6 +48,7 @@ config ARCH_TEGRA_2x_SOC
 	select ARM_ERRATA_720789
 	select ARM_ERRATA_754327 if SMP
 	select ARM_ERRATA_764369 if SMP
+<<<<<<< HEAD
 	select ARM_GIC
 	select CPU_V7
 	select PINCTRL
@@ -36,6 +58,11 @@ config ARCH_TEGRA_2x_SOC
 	select USB_ARCH_HAS_EHCI if USB_SUPPORT
 	select USB_ULPI if USB_PHY
 	select USB_ULPI_VIEWPORT if USB_PHY
+=======
+	select PINCTRL_TEGRA20
+	select PL310_ERRATA_727915 if CACHE_L2X0
+	select PL310_ERRATA_769419 if CACHE_L2X0
+>>>>>>> v3.18
 	help
 	  Support for NVIDIA Tegra AP20 and T20 processors, based on the
 	  ARM CortexA9MP CPU and the ARM PL310 L2 cache controller
@@ -44,6 +71,7 @@ config ARCH_TEGRA_3x_SOC
 	bool "Enable support for Tegra30 family"
 	select ARM_ERRATA_754322
 	select ARM_ERRATA_764369 if SMP
+<<<<<<< HEAD
 	select ARM_GIC
 	select CPU_V7
 	select PINCTRL
@@ -52,26 +80,47 @@ config ARCH_TEGRA_3x_SOC
 	select USB_ARCH_HAS_EHCI if USB_SUPPORT
 	select USB_ULPI if USB_PHY
 	select USB_ULPI_VIEWPORT if USB_PHY
+=======
+	select PINCTRL_TEGRA30
+	select PL310_ERRATA_769419 if CACHE_L2X0
+>>>>>>> v3.18
 	help
 	  Support for NVIDIA Tegra T30 processor family, based on the
 	  ARM CortexA9MP CPU and the ARM PL310 L2 cache controller
 
 config ARCH_TEGRA_114_SOC
 	bool "Enable support for Tegra114 family"
+<<<<<<< HEAD
 	select ARM_ARCH_TIMER
 	select ARM_GIC
 	select ARM_L1_CACHE_SHIFT_6
 	select CPU_V7
 	select PINCTRL
+=======
+	select ARM_ERRATA_798181 if SMP
+	select ARM_L1_CACHE_SHIFT_6
+	select HAVE_ARM_ARCH_TIMER
+>>>>>>> v3.18
 	select PINCTRL_TEGRA114
 	help
 	  Support for NVIDIA Tegra T114 processor family, based on the
 	  ARM CortexA15MP CPU
 
+<<<<<<< HEAD
 config TEGRA_PCI
 	bool "PCI Express support"
 	depends on ARCH_TEGRA_2x_SOC
 	select PCI
+=======
+config ARCH_TEGRA_124_SOC
+	bool "Enable support for Tegra124 family"
+	select ARM_L1_CACHE_SHIFT_6
+	select HAVE_ARM_ARCH_TIMER
+	select PINCTRL_TEGRA124
+	help
+	  Support for NVIDIA Tegra T124 processor family, based on the
+	  ARM CortexA15MP CPU
+>>>>>>> v3.18
 
 config TEGRA_AHB
 	bool "Enable AHB driver for NVIDIA Tegra SoCs"
@@ -81,7 +130,11 @@ config TEGRA_AHB
 	  which controls AHB bus master arbitration and some
 	  performance parameters(priority, prefech size).
 
+<<<<<<< HEAD
 config TEGRA_EMC_SCALING_ENABLE
 	bool "Enable scaling the memory frequency"
 
 endmenu
+=======
+endif
+>>>>>>> v3.18

@@ -29,6 +29,93 @@
 
 static DEFINE_MUTEX(nf_ct_ecache_mutex);
 
+<<<<<<< HEAD
+=======
+#define ECACHE_RETRY_WAIT (HZ/10)
+
+enum retry_state {
+	STATE_CONGESTED,
+	STATE_RESTART,
+	STATE_DONE,
+};
+
+static enum retry_state ecache_work_evict_list(struct ct_pcpu *pcpu)
+{
+	struct nf_conn *refs[16];
+	struct nf_conntrack_tuple_hash *h;
+	struct hlist_nulls_node *n;
+	unsigned int evicted = 0;
+	enum retry_state ret = STATE_DONE;
+
+	spin_lock(&pcpu->lock);
+
+	hlist_nulls_for_each_entry(h, n, &pcpu->dying, hnnode) {
+		struct nf_conn *ct = nf_ct_tuplehash_to_ctrack(h);
+
+		if (nf_ct_is_dying(ct))
+			continue;
+
+		if (nf_conntrack_event(IPCT_DESTROY, ct)) {
+			ret = STATE_CONGESTED;
+			break;
+		}
+
+		/* we've got the event delivered, now it's dying */
+		set_bit(IPS_DYING_BIT, &ct->status);
+		refs[evicted] = ct;
+
+		if (++evicted >= ARRAY_SIZE(refs)) {
+			ret = STATE_RESTART;
+			break;
+		}
+	}
+
+	spin_unlock(&pcpu->lock);
+
+	/* can't _put while holding lock */
+	while (evicted)
+		nf_ct_put(refs[--evicted]);
+
+	return ret;
+}
+
+static void ecache_work(struct work_struct *work)
+{
+	struct netns_ct *ctnet =
+		container_of(work, struct netns_ct, ecache_dwork.work);
+	int cpu, delay = -1;
+	struct ct_pcpu *pcpu;
+
+	local_bh_disable();
+
+	for_each_possible_cpu(cpu) {
+		enum retry_state ret;
+
+		pcpu = per_cpu_ptr(ctnet->pcpu_lists, cpu);
+
+		ret = ecache_work_evict_list(pcpu);
+
+		switch (ret) {
+		case STATE_CONGESTED:
+			delay = ECACHE_RETRY_WAIT;
+			goto out;
+		case STATE_RESTART:
+			delay = 0;
+			break;
+		case STATE_DONE:
+			break;
+		}
+	}
+
+ out:
+	local_bh_enable();
+
+	ctnet->ecache_dwork_pending = delay > 0;
+	if (delay >= 0)
+		schedule_delayed_work(&ctnet->ecache_dwork, delay);
+}
+
+>>>>>>> v3.18
 /* deliver cached events and clear cache entry - must be called with locally
  * disabled softirqs */
 void nf_ct_deliver_cached_events(struct nf_conn *ct)
@@ -116,7 +203,10 @@ void nf_conntrack_unregister_notifier(struct net *net,
 	BUG_ON(notify != new);
 	RCU_INIT_POINTER(net->ct.nf_conntrack_event_cb, NULL);
 	mutex_unlock(&nf_ct_ecache_mutex);
+<<<<<<< HEAD
 	/* synchronize_rcu() is called from ctnetlink_exit. */
+=======
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(nf_conntrack_unregister_notifier);
 
@@ -153,13 +243,19 @@ void nf_ct_expect_unregister_notifier(struct net *net,
 	BUG_ON(notify != new);
 	RCU_INIT_POINTER(net->ct.nf_expect_event_cb, NULL);
 	mutex_unlock(&nf_ct_ecache_mutex);
+<<<<<<< HEAD
 	/* synchronize_rcu() is called from ctnetlink_exit. */
+=======
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(nf_ct_expect_unregister_notifier);
 
 #define NF_CT_EVENTS_DEFAULT 1
 static int nf_ct_events __read_mostly = NF_CT_EVENTS_DEFAULT;
+<<<<<<< HEAD
 static int nf_ct_events_retry_timeout __read_mostly = 15*HZ;
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_SYSCTL
 static struct ctl_table event_sysctl_table[] = {
@@ -170,6 +266,7 @@ static struct ctl_table event_sysctl_table[] = {
 		.mode		= 0644,
 		.proc_handler	= proc_dointvec,
 	},
+<<<<<<< HEAD
 	{
 		.procname	= "nf_conntrack_events_retry_timeout",
 		.data		= &init_net.ct.sysctl_events_retry_timeout,
@@ -177,6 +274,8 @@ static struct ctl_table event_sysctl_table[] = {
 		.mode		= 0644,
 		.proc_handler	= proc_dointvec_jiffies,
 	},
+=======
+>>>>>>> v3.18
 	{}
 };
 #endif /* CONFIG_SYSCTL */
@@ -198,7 +297,10 @@ static int nf_conntrack_event_init_sysctl(struct net *net)
 		goto out;
 
 	table[0].data = &net->ct.sysctl_events;
+<<<<<<< HEAD
 	table[1].data = &net->ct.sysctl_events_retry_timeout;
+=======
+>>>>>>> v3.18
 
 	/* Don't export sysctls to unprivileged users */
 	if (net->user_ns != &init_user_ns)
@@ -240,12 +342,20 @@ static void nf_conntrack_event_fini_sysctl(struct net *net)
 int nf_conntrack_ecache_pernet_init(struct net *net)
 {
 	net->ct.sysctl_events = nf_ct_events;
+<<<<<<< HEAD
 	net->ct.sysctl_events_retry_timeout = nf_ct_events_retry_timeout;
+=======
+	INIT_DELAYED_WORK(&net->ct.ecache_dwork, ecache_work);
+>>>>>>> v3.18
 	return nf_conntrack_event_init_sysctl(net);
 }
 
 void nf_conntrack_ecache_pernet_fini(struct net *net)
 {
+<<<<<<< HEAD
+=======
+	cancel_delayed_work_sync(&net->ct.ecache_dwork);
+>>>>>>> v3.18
 	nf_conntrack_event_fini_sysctl(net);
 }
 

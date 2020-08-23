@@ -1,7 +1,11 @@
 /*
  * Secondary CPU startup routine source file.
  *
+<<<<<<< HEAD
  * Copyright (C) 2009 Texas Instruments, Inc.
+=======
+ * Copyright (C) 2009-2014 Texas Instruments, Inc.
+>>>>>>> v3.18
  *
  * Author:
  *      Santosh Shilimkar <santosh.shilimkar@ti.com>
@@ -20,8 +24,11 @@
 
 #include "omap44xx.h"
 
+<<<<<<< HEAD
 	__CPUINIT
 
+=======
+>>>>>>> v3.18
 /* Physical address needed since MMU not enabled yet on secondary core */
 #define AUX_CORE_BOOT0_PA			0x48281800
 
@@ -30,7 +37,11 @@
  * code.  This routine also provides a holding flag into which
  * secondary core is held until we're ready for it to initialise.
  * The primary core will update this flag using a hardware
+<<<<<<< HEAD
 + * register AuxCoreBoot0.
+=======
+ * register AuxCoreBoot0.
+>>>>>>> v3.18
  */
 ENTRY(omap5_secondary_startup)
 wait:	ldr	r2, =AUX_CORE_BOOT0_PA	@ read from AuxCoreBoot0
@@ -41,7 +52,11 @@ wait:	ldr	r2, =AUX_CORE_BOOT0_PA	@ read from AuxCoreBoot0
 	cmp	r0, r4
 	bne	wait
 	b	secondary_startup
+<<<<<<< HEAD
 END(omap5_secondary_startup)
+=======
+ENDPROC(omap5_secondary_startup)
+>>>>>>> v3.18
 /*
  * OMAP4 specific entry point for secondary CPU to jump from ROM
  * code.  This routine also provides a holding flag into which
@@ -49,7 +64,11 @@ END(omap5_secondary_startup)
  * The primary core will update this flag using a hardware
  * register AuxCoreBoot0.
  */
+<<<<<<< HEAD
 ENTRY(omap_secondary_startup)
+=======
+ENTRY(omap4_secondary_startup)
+>>>>>>> v3.18
 hold:	ldr	r12,=0x103
 	dsb
 	smc	#0			@ read from AuxCoreBoot0
@@ -64,9 +83,15 @@ hold:	ldr	r12,=0x103
 	 * should now contain the SVC stack for this core
 	 */
 	b	secondary_startup
+<<<<<<< HEAD
 ENDPROC(omap_secondary_startup)
 
 ENTRY(omap_secondary_startup_4460)
+=======
+ENDPROC(omap4_secondary_startup)
+
+ENTRY(omap4460_secondary_startup)
+>>>>>>> v3.18
 hold_2:	ldr	r12,=0x103
 	dsb
 	smc	#0			@ read from AuxCoreBoot0
@@ -101,4 +126,8 @@ hold_2:	ldr	r12,=0x103
 	 * should now contain the SVC stack for this core
 	 */
 	b	secondary_startup
+<<<<<<< HEAD
 ENDPROC(omap_secondary_startup_4460)
+=======
+ENDPROC(omap4460_secondary_startup)
+>>>>>>> v3.18

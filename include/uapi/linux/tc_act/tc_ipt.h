@@ -4,6 +4,10 @@
 #include <linux/pkt_cls.h>
 
 #define TCA_ACT_IPT 6
+<<<<<<< HEAD
+=======
+#define TCA_ACT_XT 10
+>>>>>>> v3.18
 
 enum {
 	TCA_IPT_UNSPEC,

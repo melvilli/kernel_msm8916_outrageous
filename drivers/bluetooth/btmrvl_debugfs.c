@@ -43,7 +43,11 @@ static ssize_t btmrvl_hscfgcmd_write(struct file *file,
 	if (copy_from_user(&buf, ubuf, min_t(size_t, sizeof(buf) - 1, count)))
 		return -EFAULT;
 
+<<<<<<< HEAD
 	ret = strict_strtol(buf, 10, &result);
+=======
+	ret = kstrtol(buf, 10, &result);
+>>>>>>> v3.18
 	if (ret)
 		return ret;
 
@@ -89,7 +93,11 @@ static ssize_t btmrvl_pscmd_write(struct file *file, const char __user *ubuf,
 	if (copy_from_user(&buf, ubuf, min_t(size_t, sizeof(buf) - 1, count)))
 		return -EFAULT;
 
+<<<<<<< HEAD
 	ret = strict_strtol(buf, 10, &result);
+=======
+	ret = kstrtol(buf, 10, &result);
+>>>>>>> v3.18
 	if (ret)
 		return ret;
 
@@ -135,7 +143,11 @@ static ssize_t btmrvl_hscmd_write(struct file *file, const char __user *ubuf,
 	if (copy_from_user(&buf, ubuf, min_t(size_t, sizeof(buf) - 1, count)))
 		return -EFAULT;
 
+<<<<<<< HEAD
 	ret = strict_strtol(buf, 10, &result);
+=======
+	ret = kstrtol(buf, 10, &result);
+>>>>>>> v3.18
 	if (ret)
 		return ret;
 

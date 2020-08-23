@@ -19,6 +19,11 @@
 #include <linux/list.h>
 #include <linux/io.h>
 #include <linux/of.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 #include <linux/spinlock.h>
 #include <linux/bitops.h>
 #include <linux/slab.h>
@@ -401,16 +406,27 @@ static int __init fsl_gtm_init(void)
 		gtm->clock = *clock;
 
 		for (i = 0; i < ARRAY_SIZE(gtm->timers); i++) {
+<<<<<<< HEAD
 			int ret;
 			struct resource irq;
 
 			ret = of_irq_to_resource(np, i, &irq);
 			if (ret == NO_IRQ) {
+=======
+			unsigned int irq;
+
+			irq = irq_of_parse_and_map(np, i);
+			if (irq == NO_IRQ) {
+>>>>>>> v3.18
 				pr_err("%s: not enough interrupts specified\n",
 				       np->full_name);
 				goto err;
 			}
+<<<<<<< HEAD
 			gtm->timers[i].irq = irq.start;
+=======
+			gtm->timers[i].irq = irq;
+>>>>>>> v3.18
 			gtm->timers[i].gtm = gtm;
 		}
 

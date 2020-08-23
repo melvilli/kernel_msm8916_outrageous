@@ -16,7 +16,10 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/signal.h>
 #include <linux/slab.h>
 #include <linux/module.h>
@@ -335,7 +338,11 @@ static void esd_usb2_rx_can_msg(struct esd_usb2_net_priv *priv,
 		}
 
 		cf->can_id = id & ESD_IDMASK;
+<<<<<<< HEAD
 		cf->can_dlc = get_can_dlc(msg->msg.rx.dlc & ~ESD_RTR);
+=======
+		cf->can_dlc = get_can_dlc(msg->msg.rx.dlc);
+>>>>>>> v3.18
 
 		if (id & ESD_EXTID)
 			cf->can_id |= CAN_EFF_FLAG;
@@ -412,10 +419,26 @@ static void esd_usb2_read_bulk_callback(struct urb *urb)
 
 		switch (msg->msg.hdr.cmd) {
 		case CMD_CAN_RX:
+<<<<<<< HEAD
+=======
+			if (msg->msg.rx.net >= dev->net_count) {
+				dev_err(dev->udev->dev.parent, "format error\n");
+				break;
+			}
+
+>>>>>>> v3.18
 			esd_usb2_rx_can_msg(dev->nets[msg->msg.rx.net], msg);
 			break;
 
 		case CMD_CAN_TX:
+<<<<<<< HEAD
+=======
+			if (msg->msg.txdone.net >= dev->net_count) {
+				dev_err(dev->udev->dev.parent, "format error\n");
+				break;
+			}
+
+>>>>>>> v3.18
 			esd_usb2_tx_done_msg(dev->nets[msg->msg.txdone.net],
 					     msg);
 			break;
@@ -455,7 +478,10 @@ static void esd_usb2_write_bulk_callback(struct urb *urb)
 {
 	struct esd_tx_urb_context *context = urb->context;
 	struct esd_usb2_net_priv *priv;
+<<<<<<< HEAD
 	struct esd_usb2 *dev;
+=======
+>>>>>>> v3.18
 	struct net_device *netdev;
 	size_t size = sizeof(struct esd_usb2_msg);
 
@@ -463,7 +489,10 @@ static void esd_usb2_write_bulk_callback(struct urb *urb)
 
 	priv = context->priv;
 	netdev = priv->netdev;
+<<<<<<< HEAD
 	dev = priv->usb2;
+=======
+>>>>>>> v3.18
 
 	/* free up our allocated buffer */
 	usb_free_coherent(urb->dev, size,
@@ -879,6 +908,10 @@ static const struct net_device_ops esd_usb2_netdev_ops = {
 	.ndo_open = esd_usb2_open,
 	.ndo_stop = esd_usb2_close,
 	.ndo_start_xmit = esd_usb2_start_xmit,
+<<<<<<< HEAD
+=======
+	.ndo_change_mtu = can_change_mtu,
+>>>>>>> v3.18
 };
 
 static const struct can_bittiming_const esd_usb2_bittiming_const = {
@@ -1015,6 +1048,10 @@ static int esd_usb2_probe_one_net(struct usb_interface *intf, int index)
 	netdev->netdev_ops = &esd_usb2_netdev_ops;
 
 	SET_NETDEV_DEV(netdev, &intf->dev);
+<<<<<<< HEAD
+=======
+	netdev->dev_id = index;
+>>>>>>> v3.18
 
 	err = register_candev(netdev);
 	if (err) {

@@ -20,6 +20,7 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY
 WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
+<<<<<<< HEAD
 You should have received a copy of the GNU General Public License along with
 this program; if not, write to the Free Software Foundation, Inc.,
 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
@@ -27,6 +28,8 @@ this program; if not, write to the Free Software Foundation, Inc.,
 You should also find the complete GPL in the COPYING file accompanying this
 source code.
 
+=======
+>>>>>>> v3.18
 @endverbatim
 */
 /*
@@ -46,16 +49,23 @@ source code.
   +-----------------------------------------------------------------------+
 */
 
+<<<<<<< HEAD
 #ifndef COMEDI_SUBD_TTLIO
 #define COMEDI_SUBD_TTLIO   11	/* Digital Input Output But TTL */
 #endif
 
+=======
+>>>>>>> v3.18
 static int i_ADDIDATA_InsnReadEeprom(struct comedi_device *dev,
 				     struct comedi_subdevice *s,
 				     struct comedi_insn *insn,
 				     unsigned int *data)
 {
+<<<<<<< HEAD
 	const struct addi_board *this_board = comedi_board(dev);
+=======
+	const struct addi_board *this_board = dev->board_ptr;
+>>>>>>> v3.18
 	struct addi_private *devpriv = dev->private;
 	unsigned short w_Address = CR_CHAN(insn->chanspec);
 	unsigned short w_Data;
@@ -70,7 +80,11 @@ static int i_ADDIDATA_InsnReadEeprom(struct comedi_device *dev,
 static irqreturn_t v_ADDI_Interrupt(int irq, void *d)
 {
 	struct comedi_device *dev = d;
+<<<<<<< HEAD
 	const struct addi_board *this_board = comedi_board(dev);
+=======
+	const struct addi_board *this_board = dev->board_ptr;
+>>>>>>> v3.18
 
 	this_board->interrupt(irq, d);
 	return IRQ_RETVAL(1);
@@ -78,7 +92,11 @@ static irqreturn_t v_ADDI_Interrupt(int irq, void *d)
 
 static int i_ADDI_Reset(struct comedi_device *dev)
 {
+<<<<<<< HEAD
 	const struct addi_board *this_board = comedi_board(dev);
+=======
+	const struct addi_board *this_board = dev->board_ptr;
+>>>>>>> v3.18
 
 	this_board->reset(dev);
 	return 0;
@@ -88,7 +106,11 @@ static int addi_auto_attach(struct comedi_device *dev,
 				      unsigned long context_unused)
 {
 	struct pci_dev *pcidev = comedi_to_pci_dev(dev);
+<<<<<<< HEAD
 	const struct addi_board *this_board = comedi_board(dev);
+=======
+	const struct addi_board *this_board = dev->board_ptr;
+>>>>>>> v3.18
 	struct addi_private *devpriv;
 	struct comedi_subdevice *s;
 	int ret, n_subdevices;
@@ -96,15 +118,22 @@ static int addi_auto_attach(struct comedi_device *dev,
 
 	dev->board_name = this_board->pc_DriverName;
 
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
+=======
+	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
+	if (!devpriv)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	ret = comedi_pci_enable(dev);
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 	if (!this_board->pc_EepromChip ||
 	    strcmp(this_board->pc_EepromChip, ADDIDATA_9054)) {
 		/* board does not have an eeprom or is not ADDIDATA_9054 */
@@ -122,6 +151,16 @@ static int addi_auto_attach(struct comedi_device *dev,
 		devpriv->iobase = pci_resource_start(pcidev, 2);
 		devpriv->dw_AiBase = pci_ioremap_bar(pcidev, 3);
 	}
+=======
+	if (this_board->i_IorangeBase1)
+		dev->iobase = pci_resource_start(pcidev, 1);
+	else
+		dev->iobase = pci_resource_start(pcidev, 0);
+
+	devpriv->iobase = dev->iobase;
+	devpriv->i_IobaseAmcc = pci_resource_start(pcidev, 0);
+	devpriv->i_IobaseAddon = pci_resource_start(pcidev, 2);
+>>>>>>> v3.18
 	devpriv->i_IobaseReserved = pci_resource_start(pcidev, 3);
 
 	/* Initialize parameters that can be overridden in EEPROM */
@@ -132,7 +171,10 @@ static int addi_auto_attach(struct comedi_device *dev,
 	devpriv->s_EeParameters.i_NbrDiChannel = this_board->i_NbrDiChannel;
 	devpriv->s_EeParameters.i_NbrDoChannel = this_board->i_NbrDoChannel;
 	devpriv->s_EeParameters.i_DoMaxdata = this_board->i_DoMaxdata;
+<<<<<<< HEAD
 	devpriv->s_EeParameters.i_Dma = this_board->i_Dma;
+=======
+>>>>>>> v3.18
 	devpriv->s_EeParameters.i_Timer = this_board->i_Timer;
 	devpriv->s_EeParameters.ui_MinAcquisitiontimeNs =
 		this_board->ui_MinAcquisitiontimeNs;
@@ -179,6 +221,7 @@ static int addi_auto_attach(struct comedi_device *dev,
 		s->subdev_flags =
 			SDF_READABLE | SDF_COMMON | SDF_GROUND
 			| SDF_DIFF;
+<<<<<<< HEAD
 		if (devpriv->s_EeParameters.i_NbrAiChannel) {
 			s->n_chan =
 				devpriv->s_EeParameters.i_NbrAiChannel;
@@ -187,13 +230,22 @@ static int addi_auto_attach(struct comedi_device *dev,
 			s->n_chan = this_board->i_NbrAiChannelDiff;
 			devpriv->b_SingelDiff = 1;
 		}
+=======
+		if (devpriv->s_EeParameters.i_NbrAiChannel)
+			s->n_chan = devpriv->s_EeParameters.i_NbrAiChannel;
+		else
+			s->n_chan = this_board->i_NbrAiChannelDiff;
+>>>>>>> v3.18
 		s->maxdata = devpriv->s_EeParameters.i_AiMaxdata;
 		s->len_chanlist = this_board->i_AiChannelList;
 		s->range_table = this_board->pr_AiRangelist;
 
+<<<<<<< HEAD
 		/* Set the initialisation flag */
 		devpriv->b_AiInitialisation = 1;
 
+=======
+>>>>>>> v3.18
 		s->insn_config = this_board->ai_config;
 		s->insn_read = this_board->ai_read;
 		s->insn_write = this_board->ai_write;
@@ -215,8 +267,11 @@ static int addi_auto_attach(struct comedi_device *dev,
 		s->maxdata = devpriv->s_EeParameters.i_AoMaxdata;
 		s->len_chanlist =
 			devpriv->s_EeParameters.i_NbrAoChannel;
+<<<<<<< HEAD
 		s->range_table = this_board->pr_AoRangelist;
 		s->insn_config = this_board->ao_config;
+=======
+>>>>>>> v3.18
 		s->insn_write = this_board->ao_write;
 	} else {
 		s->type = COMEDI_SUBD_UNUSED;
@@ -231,7 +286,10 @@ static int addi_auto_attach(struct comedi_device *dev,
 		s->len_chanlist =
 			devpriv->s_EeParameters.i_NbrDiChannel;
 		s->range_table = &range_digital;
+<<<<<<< HEAD
 		s->io_bits = 0;	/* all bits input */
+=======
+>>>>>>> v3.18
 		s->insn_config = this_board->di_config;
 		s->insn_read = this_board->di_read;
 		s->insn_write = this_board->di_write;
@@ -250,7 +308,10 @@ static int addi_auto_attach(struct comedi_device *dev,
 		s->len_chanlist =
 			devpriv->s_EeParameters.i_NbrDoChannel;
 		s->range_table = &range_digital;
+<<<<<<< HEAD
 		s->io_bits = 0xf;	/* all bits output */
+=======
+>>>>>>> v3.18
 
 		/* insn_config - for digital output memory */
 		s->insn_config = this_board->do_config;
@@ -281,6 +342,7 @@ static int addi_auto_attach(struct comedi_device *dev,
 
 	/*  Allocate and Initialise TTL */
 	s = &dev->subdevices[5];
+<<<<<<< HEAD
 	if (this_board->i_NbrTTLChannel) {
 		s->type = COMEDI_SUBD_TTLIO;
 		s->subdev_flags =
@@ -297,6 +359,9 @@ static int addi_auto_attach(struct comedi_device *dev,
 	} else {
 		s->type = COMEDI_SUBD_UNUSED;
 	}
+=======
+	s->type = COMEDI_SUBD_UNUSED;
+>>>>>>> v3.18
 
 	/* EEPROM */
 	s = &dev->subdevices[6];
@@ -316,6 +381,7 @@ static int addi_auto_attach(struct comedi_device *dev,
 
 static void i_ADDI_Detach(struct comedi_device *dev)
 {
+<<<<<<< HEAD
 	struct addi_private *devpriv = dev->private;
 
 	if (devpriv) {
@@ -327,4 +393,9 @@ static void i_ADDI_Detach(struct comedi_device *dev)
 			iounmap(devpriv->dw_AiBase);
 	}
 	comedi_pci_disable(dev);
+=======
+	if (dev->iobase)
+		i_ADDI_Reset(dev);
+	comedi_pci_detach(dev);
+>>>>>>> v3.18
 }

@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -129,6 +133,10 @@ union acpi_operand_object *acpi_ut_create_internal_object_dbg(const char
 		break;
 
 	default:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		/* All others have no secondary object */
 		break;
 	}
@@ -179,7 +187,11 @@ union acpi_operand_object *acpi_ut_create_package_object(u32 count)
 	package_elements = ACPI_ALLOCATE_ZEROED(((acpi_size) count +
 						 1) * sizeof(void *));
 	if (!package_elements) {
+<<<<<<< HEAD
 		acpi_ut_remove_reference(package_desc);
+=======
+		ACPI_FREE(package_desc);
+>>>>>>> v3.18
 		return_PTR(NULL);
 	}
 
@@ -353,8 +365,14 @@ u8 acpi_ut_valid_internal_object(void *object)
 		return (TRUE);
 
 	default:
+<<<<<<< HEAD
 		ACPI_DEBUG_PRINT((ACPI_DB_EXEC,
 				  "%p is not not an ACPI operand obj [%s]\n",
+=======
+
+		ACPI_DEBUG_PRINT((ACPI_DB_EXEC,
+				  "%p is not an ACPI operand obj [%s]\n",
+>>>>>>> v3.18
 				  object, acpi_ut_get_descriptor_name(object)));
 		break;
 	}
@@ -394,7 +412,10 @@ void *acpi_ut_allocate_object_desc_dbg(const char *module_name,
 
 	/* Mark the descriptor type */
 
+<<<<<<< HEAD
 	memset(object, 0, sizeof(union acpi_operand_object));
+=======
+>>>>>>> v3.18
 	ACPI_SET_DESCRIPTOR_TYPE(object, ACPI_DESC_TYPE_OPERAND);
 
 	ACPI_DEBUG_PRINT((ACPI_DB_ALLOCATIONS, "%p Size %X\n",
@@ -459,6 +480,7 @@ acpi_ut_get_simple_object_size(union acpi_operand_object *internal_object,
 
 	ACPI_FUNCTION_TRACE_PTR(ut_get_simple_object_size, internal_object);
 
+<<<<<<< HEAD
 	/*
 	 * Handle a null object (Could be a uninitialized package
 	 * element -- which is legal)
@@ -478,6 +500,30 @@ acpi_ut_get_simple_object_size(union acpi_operand_object *internal_object,
 
 		*obj_length = ACPI_ROUND_UP_TO_NATIVE_WORD(length);
 		return_ACPI_STATUS(status);
+=======
+	/* Start with the length of the (external) Acpi object */
+
+	length = sizeof(union acpi_object);
+
+	/* A NULL object is allowed, can be a legal uninitialized package element */
+
+	if (!internal_object) {
+	/*
+		 * Object is NULL, just return the length of union acpi_object
+		 * (A NULL union acpi_object is an object of all zeroes.)
+	 */
+		*obj_length = ACPI_ROUND_UP_TO_NATIVE_WORD(length);
+		return_ACPI_STATUS(AE_OK);
+	}
+
+	/* A Namespace Node should never appear here */
+
+	if (ACPI_GET_DESCRIPTOR_TYPE(internal_object) == ACPI_DESC_TYPE_NAMED) {
+
+		/* A namespace node should never get here */
+
+		return_ACPI_STATUS(AE_AML_INTERNAL);
+>>>>>>> v3.18
 	}
 
 	/*
@@ -509,7 +555,10 @@ acpi_ut_get_simple_object_size(union acpi_operand_object *internal_object,
 
 		switch (internal_object->reference.class) {
 		case ACPI_REFCLASS_NAME:
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 			/*
 			 * Get the actual length of the full pathname to this object.
 			 * The reference will be converted to the pathname to the object
@@ -525,7 +574,10 @@ acpi_ut_get_simple_object_size(union acpi_operand_object *internal_object,
 			break;
 
 		default:
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 			/*
 			 * No other reference opcodes are supported.
 			 * Notably, Locals and Args are not supported, but this may be
@@ -585,7 +637,10 @@ acpi_ut_get_element_length(u8 object_type,
 
 	switch (object_type) {
 	case ACPI_COPY_TYPE_SIMPLE:
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 		/*
 		 * Simple object - just get the size (Null object/entry is handled
 		 * here also) and sum it into the running package length

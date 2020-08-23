@@ -6,7 +6,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -170,7 +174,11 @@ acpi_ds_get_predicate_value(struct acpi_walk_state *walk_state,
 
 	(void)acpi_ds_do_implicit_return(local_obj_desc, walk_state, TRUE);
 
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 
 	ACPI_DEBUG_PRINT((ACPI_DB_EXEC, "Completed a predicate eval=%X Op=%p\n",
 			  walk_state->control_state->common.value,
@@ -327,6 +335,10 @@ acpi_ds_exec_begin_op(struct acpi_walk_state *walk_state,
 		break;
 
 	default:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		break;
 	}
 
@@ -334,7 +346,11 @@ acpi_ds_exec_begin_op(struct acpi_walk_state *walk_state,
 
 	return_ACPI_STATUS(status);
 
+<<<<<<< HEAD
       error_exit:
+=======
+error_exit:
+>>>>>>> v3.18
 	status = acpi_ds_method_error(status, walk_state);
 	return_ACPI_STATUS(status);
 }
@@ -488,7 +504,10 @@ acpi_status acpi_ds_exec_end_op(struct acpi_walk_state *walk_state)
 			break;
 
 		case AML_TYPE_METHOD_CALL:
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 			/*
 			 * If the method is referenced from within a package
 			 * declaration, it is not a invocation of the method, just
@@ -582,7 +601,10 @@ acpi_status acpi_ds_exec_end_op(struct acpi_walk_state *walk_state)
 
 			switch (op->common.parent->common.aml_opcode) {
 			case AML_NAME_OP:
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 				/*
 				 * Put the Node on the object stack (Contains the ACPI Name
 				 * of this object)
@@ -723,7 +745,11 @@ acpi_status acpi_ds_exec_end_op(struct acpi_walk_state *walk_state)
 		walk_state->result_obj = NULL;
 	}
 
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 
 	if (walk_state->result_obj) {
 

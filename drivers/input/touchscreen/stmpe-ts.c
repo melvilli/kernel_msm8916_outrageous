@@ -15,7 +15,10 @@
 #include <linux/module.h>
 #include <linux/sched.h>
 #include <linux/interrupt.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/device.h>
 #include <linux/of.h>
 #include <linux/platform_device.h>

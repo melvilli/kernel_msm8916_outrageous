@@ -59,10 +59,16 @@ TRACE_EVENT(kvm_guest_fault,
 		__entry->ipa			= ipa;
 	),
 
+<<<<<<< HEAD
 	TP_printk("guest fault at PC %#08lx (hxfar %#08lx, "
 		  "ipa %#16llx, hsr %#08lx",
 		  __entry->vcpu_pc, __entry->hxfar,
 		  __entry->ipa, __entry->hsr)
+=======
+	TP_printk("ipa %#llx, hsr %#08lx, hxfar %#08lx, pc %#08lx",
+		  __entry->ipa, __entry->hsr,
+		  __entry->hxfar, __entry->vcpu_pc)
+>>>>>>> v3.18
 );
 
 TRACE_EVENT(kvm_irq_line,

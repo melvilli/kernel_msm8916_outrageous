@@ -31,11 +31,14 @@ static unsigned long bigsmp_check_apicid_used(physid_mask_t *map, int apicid)
 	return 0;
 }
 
+<<<<<<< HEAD
 static unsigned long bigsmp_check_apicid_present(int bit)
 {
 	return 1;
 }
 
+=======
+>>>>>>> v3.18
 static int bigsmp_early_logical_apicid(int cpu)
 {
 	/* on bigsmp, logical apicid is the same as physical */
@@ -168,13 +171,17 @@ static struct apic apic_bigsmp = {
 	.disable_esr			= 1,
 	.dest_logical			= 0,
 	.check_apicid_used		= bigsmp_check_apicid_used,
+<<<<<<< HEAD
 	.check_apicid_present		= bigsmp_check_apicid_present,
+=======
+>>>>>>> v3.18
 
 	.vector_allocation_domain	= default_vector_allocation_domain,
 	.init_apic_ldr			= bigsmp_init_apic_ldr,
 
 	.ioapic_phys_id_map		= bigsmp_ioapic_phys_id_map,
 	.setup_apic_routing		= bigsmp_setup_apic_routing,
+<<<<<<< HEAD
 	.multi_timer_check		= NULL,
 	.cpu_present_to_apicid		= bigsmp_cpu_present_to_apicid,
 	.apicid_to_cpu_present		= physid_set_mask_of_physid,
@@ -183,6 +190,12 @@ static struct apic apic_bigsmp = {
 	.enable_apic_mode		= NULL,
 	.phys_pkg_id			= bigsmp_phys_pkg_id,
 	.mps_oem_check			= NULL,
+=======
+	.cpu_present_to_apicid		= bigsmp_cpu_present_to_apicid,
+	.apicid_to_cpu_present		= physid_set_mask_of_physid,
+	.check_phys_apicid_present	= bigsmp_check_phys_apicid_present,
+	.phys_pkg_id			= bigsmp_phys_pkg_id,
+>>>>>>> v3.18
 
 	.get_apic_id			= bigsmp_get_apic_id,
 	.set_apic_id			= NULL,
@@ -196,12 +209,16 @@ static struct apic apic_bigsmp = {
 	.send_IPI_all			= bigsmp_send_IPI_all,
 	.send_IPI_self			= default_send_IPI_self,
 
+<<<<<<< HEAD
 	.trampoline_phys_low		= DEFAULT_TRAMPOLINE_PHYS_LOW,
 	.trampoline_phys_high		= DEFAULT_TRAMPOLINE_PHYS_HIGH,
 
 	.wait_for_init_deassert		= default_wait_for_init_deassert,
 
 	.smp_callin_clear_local_apic	= NULL,
+=======
+	.wait_for_init_deassert		= true,
+>>>>>>> v3.18
 	.inquire_remote_apic		= default_inquire_remote_apic,
 
 	.read				= native_apic_mem_read,

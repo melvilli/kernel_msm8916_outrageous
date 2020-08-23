@@ -19,6 +19,7 @@ const char *ceph_entity_type_name(int type)
 const char *ceph_osd_op_name(int op)
 {
 	switch (op) {
+<<<<<<< HEAD
 	case CEPH_OSD_OP_READ: return "read";
 	case CEPH_OSD_OP_STAT: return "stat";
 	case CEPH_OSD_OP_MAPEXT: return "mapext";
@@ -90,6 +91,14 @@ const char *ceph_osd_op_name(int op)
 	case CEPH_OSD_OP_OMAPRMKEYS: return "omap-rm-keys";
 	}
 	return "???";
+=======
+#define GENERATE_CASE(op, opcode, str)	case CEPH_OSD_OP_##op: return (str);
+__CEPH_FORALL_OSD_OPS(GENERATE_CASE)
+#undef GENERATE_CASE
+	default:
+		return "???";
+	}
+>>>>>>> v3.18
 }
 
 const char *ceph_osd_state_name(int s)

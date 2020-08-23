@@ -14,6 +14,10 @@
 
 #include <asm/bootinfo.h>
 #include <asm/time.h>
+<<<<<<< HEAD
+=======
+#include <asm/prom.h>
+>>>>>>> v3.18
 
 #include <lantiq.h>
 
@@ -70,11 +74,16 @@ void __init plat_mem_setup(void)
 	 * Load the builtin devicetree. This causes the chosen node to be
 	 * parsed resulting in our memory appearing
 	 */
+<<<<<<< HEAD
 	__dt_setup_arch(&__dtb_start);
+=======
+	__dt_setup_arch(__dtb_start);
+>>>>>>> v3.18
 }
 
 void __init device_tree_init(void)
 {
+<<<<<<< HEAD
 	unsigned long base, size;
 
 	if (!initial_boot_params)
@@ -87,6 +96,9 @@ void __init device_tree_init(void)
 	reserve_bootmem(base, size, BOOTMEM_DEFAULT);
 
 	unflatten_device_tree();
+=======
+	unflatten_and_copy_device_tree();
+>>>>>>> v3.18
 }
 
 void __init prom_init(void)
@@ -112,7 +124,11 @@ int __init plat_of_setup(void)
 	if (!of_have_populated_dt())
 		panic("device tree not present");
 
+<<<<<<< HEAD
 	strncpy(of_ids[0].compatible, soc_info.compatible,
+=======
+	strlcpy(of_ids[0].compatible, soc_info.compatible,
+>>>>>>> v3.18
 		sizeof(of_ids[0].compatible));
 	strncpy(of_ids[1].compatible, "simple-bus",
 		sizeof(of_ids[1].compatible));

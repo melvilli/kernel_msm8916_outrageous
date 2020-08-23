@@ -16,16 +16,34 @@
 #define NF_LOG_PREFIXLEN		128
 #define NFLOGGER_NAME_LEN		64
 
+<<<<<<< HEAD
 static struct list_head nf_loggers_l[NFPROTO_NUMPROTO] __read_mostly;
+=======
+static struct nf_logger __rcu *loggers[NFPROTO_NUMPROTO][NF_LOG_TYPE_MAX] __read_mostly;
+>>>>>>> v3.18
 static DEFINE_MUTEX(nf_log_mutex);
 
 static struct nf_logger *__find_logger(int pf, const char *str_logger)
 {
+<<<<<<< HEAD
 	struct nf_logger *t;
 
 	list_for_each_entry(t, &nf_loggers_l[pf], list[pf]) {
 		if (!strnicmp(str_logger, t->name, strlen(t->name)))
 			return t;
+=======
+	struct nf_logger *log;
+	int i;
+
+	for (i = 0; i < NF_LOG_TYPE_MAX; i++) {
+		if (loggers[pf][i] == NULL)
+			continue;
+
+		log = rcu_dereference_protected(loggers[pf][i],
+						lockdep_is_held(&nf_log_mutex));
+		if (!strncasecmp(str_logger, log->name, strlen(log->name)))
+			return log;
+>>>>>>> v3.18
 	}
 
 	return NULL;
@@ -73,17 +91,27 @@ int nf_log_register(u_int8_t pf, struct nf_logger *logger)
 	if (pf >= ARRAY_SIZE(init_net.nf.nf_loggers))
 		return -EINVAL;
 
+<<<<<<< HEAD
 	for (i = 0; i < ARRAY_SIZE(logger->list); i++)
 		INIT_LIST_HEAD(&logger->list[i]);
 
+=======
+>>>>>>> v3.18
 	mutex_lock(&nf_log_mutex);
 
 	if (pf == NFPROTO_UNSPEC) {
 		for (i = NFPROTO_UNSPEC; i < NFPROTO_NUMPROTO; i++)
+<<<<<<< HEAD
 			list_add_tail(&(logger->list[i]), &(nf_loggers_l[i]));
 	} else {
 		/* register at end of list to honor first register win */
 		list_add_tail(&logger->list[pf], &nf_loggers_l[pf]);
+=======
+			rcu_assign_pointer(loggers[i][logger->type], logger);
+	} else {
+		/* register at end of list to honor first register win */
+		rcu_assign_pointer(loggers[pf][logger->type], logger);
+>>>>>>> v3.18
 	}
 
 	mutex_unlock(&nf_log_mutex);
@@ -98,7 +126,11 @@ void nf_log_unregister(struct nf_logger *logger)
 
 	mutex_lock(&nf_log_mutex);
 	for (i = 0; i < NFPROTO_NUMPROTO; i++)
+<<<<<<< HEAD
 		list_del(&logger->list[i]);
+=======
+		RCU_INIT_POINTER(loggers[i][logger->type], NULL);
+>>>>>>> v3.18
 	mutex_unlock(&nf_log_mutex);
 }
 EXPORT_SYMBOL(nf_log_unregister);
@@ -129,6 +161,51 @@ void nf_log_unbind_pf(struct net *net, u_int8_t pf)
 }
 EXPORT_SYMBOL(nf_log_unbind_pf);
 
+<<<<<<< HEAD
+=======
+void nf_logger_request_module(int pf, enum nf_log_type type)
+{
+	if (loggers[pf][type] == NULL)
+		request_module("nf-logger-%u-%u", pf, type);
+}
+EXPORT_SYMBOL_GPL(nf_logger_request_module);
+
+int nf_logger_find_get(int pf, enum nf_log_type type)
+{
+	struct nf_logger *logger;
+	int ret = -ENOENT;
+
+	logger = loggers[pf][type];
+	if (logger == NULL)
+		request_module("nf-logger-%u-%u", pf, type);
+
+	rcu_read_lock();
+	logger = rcu_dereference(loggers[pf][type]);
+	if (logger == NULL)
+		goto out;
+
+	if (logger && try_module_get(logger->me))
+		ret = 0;
+out:
+	rcu_read_unlock();
+	return ret;
+}
+EXPORT_SYMBOL_GPL(nf_logger_find_get);
+
+void nf_logger_put(int pf, enum nf_log_type type)
+{
+	struct nf_logger *logger;
+
+	BUG_ON(loggers[pf][type] == NULL);
+
+	rcu_read_lock();
+	logger = rcu_dereference(loggers[pf][type]);
+	module_put(logger->me);
+	rcu_read_unlock();
+}
+EXPORT_SYMBOL_GPL(nf_logger_put);
+
+>>>>>>> v3.18
 void nf_log_packet(struct net *net,
 		   u_int8_t pf,
 		   unsigned int hooknum,
@@ -143,7 +220,15 @@ void nf_log_packet(struct net *net,
 	const struct nf_logger *logger;
 
 	rcu_read_lock();
+<<<<<<< HEAD
 	logger = rcu_dereference(net->nf.nf_loggers[pf]);
+=======
+	if (loginfo != NULL)
+		logger = rcu_dereference(loggers[pf][loginfo->type]);
+	else
+		logger = rcu_dereference(net->nf.nf_loggers[pf]);
+
+>>>>>>> v3.18
 	if (logger) {
 		va_start(args, fmt);
 		vsnprintf(prefix, sizeof(prefix), fmt, args);
@@ -154,6 +239,66 @@ void nf_log_packet(struct net *net,
 }
 EXPORT_SYMBOL(nf_log_packet);
 
+<<<<<<< HEAD
+=======
+#define S_SIZE (1024 - (sizeof(unsigned int) + 1))
+
+struct nf_log_buf {
+	unsigned int	count;
+	char		buf[S_SIZE + 1];
+};
+static struct nf_log_buf emergency, *emergency_ptr = &emergency;
+
+__printf(2, 3) int nf_log_buf_add(struct nf_log_buf *m, const char *f, ...)
+{
+	va_list args;
+	int len;
+
+	if (likely(m->count < S_SIZE)) {
+		va_start(args, f);
+		len = vsnprintf(m->buf + m->count, S_SIZE - m->count, f, args);
+		va_end(args);
+		if (likely(m->count + len < S_SIZE)) {
+			m->count += len;
+			return 0;
+		}
+	}
+	m->count = S_SIZE;
+	printk_once(KERN_ERR KBUILD_MODNAME " please increase S_SIZE\n");
+	return -1;
+}
+EXPORT_SYMBOL_GPL(nf_log_buf_add);
+
+struct nf_log_buf *nf_log_buf_open(void)
+{
+	struct nf_log_buf *m = kmalloc(sizeof(*m), GFP_ATOMIC);
+
+	if (unlikely(!m)) {
+		local_bh_disable();
+		do {
+			m = xchg(&emergency_ptr, NULL);
+		} while (!m);
+	}
+	m->count = 0;
+	return m;
+}
+EXPORT_SYMBOL_GPL(nf_log_buf_open);
+
+void nf_log_buf_close(struct nf_log_buf *m)
+{
+	m->buf[m->count] = 0;
+	printk("%s\n", m->buf);
+
+	if (likely(m != &emergency))
+		kfree(m);
+	else {
+		emergency_ptr = m;
+		local_bh_enable();
+	}
+}
+EXPORT_SYMBOL_GPL(nf_log_buf_close);
+
+>>>>>>> v3.18
 #ifdef CONFIG_PROC_FS
 static void *seq_start(struct seq_file *seq, loff_t *pos)
 {
@@ -188,8 +333,12 @@ static int seq_show(struct seq_file *s, void *v)
 {
 	loff_t *pos = v;
 	const struct nf_logger *logger;
+<<<<<<< HEAD
 	struct nf_logger *t;
 	int ret;
+=======
+	int i, ret;
+>>>>>>> v3.18
 	struct net *net = seq_file_net(s);
 
 	logger = rcu_dereference_protected(net->nf.nf_loggers[*pos],
@@ -203,11 +352,24 @@ static int seq_show(struct seq_file *s, void *v)
 	if (ret < 0)
 		return ret;
 
+<<<<<<< HEAD
 	list_for_each_entry(t, &nf_loggers_l[*pos], list[*pos]) {
 		ret = seq_printf(s, "%s", t->name);
 		if (ret < 0)
 			return ret;
 		if (&t->list[*pos] != nf_loggers_l[*pos].prev) {
+=======
+	for (i = 0; i < NF_LOG_TYPE_MAX; i++) {
+		if (loggers[*pos][i] == NULL)
+			continue;
+
+		logger = rcu_dereference_protected(loggers[*pos][i],
+					   lockdep_is_held(&nf_log_mutex));
+		ret = seq_printf(s, "%s", logger->name);
+		if (ret < 0)
+			return ret;
+		if (i == 0 && loggers[*pos][i + 1] != NULL) {
+>>>>>>> v3.18
 			ret = seq_printf(s, ",");
 			if (ret < 0)
 				return ret;
@@ -245,7 +407,11 @@ static const struct file_operations nflog_file_ops = {
 static char nf_log_sysctl_fnames[NFPROTO_NUMPROTO-NFPROTO_UNSPEC][3];
 static struct ctl_table nf_log_sysctl_table[NFPROTO_NUMPROTO+1];
 
+<<<<<<< HEAD
 static int nf_log_proc_dostring(ctl_table *table, int write,
+=======
+static int nf_log_proc_dostring(struct ctl_table *table, int write,
+>>>>>>> v3.18
 			 void __user *buffer, size_t *lenp, loff_t *ppos)
 {
 	const struct nf_logger *logger;
@@ -253,7 +419,11 @@ static int nf_log_proc_dostring(ctl_table *table, int write,
 	size_t size = *lenp;
 	int r = 0;
 	int tindex = (unsigned long)table->extra1;
+<<<<<<< HEAD
 	struct net *net = table->extra2;
+=======
+	struct net *net = current->nsproxy->net_ns;
+>>>>>>> v3.18
 
 	if (write) {
 		if (size > sizeof(buf))
@@ -306,6 +476,10 @@ static int netfilter_log_sysctl_init(struct net *net)
 				 3, "%d", i);
 			nf_log_sysctl_table[i].procname	=
 				nf_log_sysctl_fnames[i];
+<<<<<<< HEAD
+=======
+			nf_log_sysctl_table[i].data = NULL;
+>>>>>>> v3.18
 			nf_log_sysctl_table[i].maxlen =
 				NFLOGGER_NAME_LEN * sizeof(char);
 			nf_log_sysctl_table[i].mode = 0644;
@@ -316,9 +490,12 @@ static int netfilter_log_sysctl_init(struct net *net)
 		}
 	}
 
+<<<<<<< HEAD
 	for (i = NFPROTO_UNSPEC; i < NFPROTO_NUMPROTO; i++)
 		table[i].extra2 = net;
 
+=======
+>>>>>>> v3.18
 	net->nf.nf_log_dir_header = register_net_sysctl(net,
 						"net/netfilter/nf_log",
 						table);
@@ -371,9 +548,13 @@ static int __net_init nf_log_net_init(struct net *net)
 
 out_sysctl:
 #ifdef CONFIG_PROC_FS
+<<<<<<< HEAD
 	/* For init_net: errors will trigger panic, don't unroll on error. */
 	if (!net_eq(net, &init_net))
 		remove_proc_entry("nf_log", net->nf.proc_netfilter);
+=======
+	remove_proc_entry("nf_log", net->nf.proc_netfilter);
+>>>>>>> v3.18
 #endif
 	return ret;
 }
@@ -393,6 +574,7 @@ static struct pernet_operations nf_log_net_ops = {
 
 int __init netfilter_log_init(void)
 {
+<<<<<<< HEAD
 	int i, ret;
 
 	ret = register_pernet_subsys(&nf_log_net_ops);
@@ -403,4 +585,7 @@ int __init netfilter_log_init(void)
 		INIT_LIST_HEAD(&(nf_loggers_l[i]));
 
 	return 0;
+=======
+	return register_pernet_subsys(&nf_log_net_ops);
+>>>>>>> v3.18
 }

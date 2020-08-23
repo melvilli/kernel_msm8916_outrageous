@@ -53,11 +53,19 @@
  *	document number TBD : Wellsburg
  *	document number TBD : Avoton SoC
  *	document number TBD : Coleto Creek
+<<<<<<< HEAD
+=======
+ *	document number TBD : Wildcat Point-LP
+ *	document number TBD : 9 Series
+>>>>>>> v3.18
  */
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/errno.h>
@@ -71,9 +79,17 @@
 #define ACPIBASE_GPE_END	0x2f
 #define ACPIBASE_SMI_OFF	0x30
 #define ACPIBASE_SMI_END	0x33
+<<<<<<< HEAD
 #define ACPIBASE_TCO_OFF	0x60
 #define ACPIBASE_TCO_END	0x7f
 #define ACPICTRL		0x44
+=======
+#define ACPIBASE_PMC_OFF	0x08
+#define ACPIBASE_PMC_END	0x0c
+#define ACPIBASE_TCO_OFF	0x60
+#define ACPIBASE_TCO_END	0x7f
+#define ACPICTRL_PMCBASE	0x44
+>>>>>>> v3.18
 
 #define ACPIBASE_GCS_OFF	0x3410
 #define ACPIBASE_GCS_END	0x3414
@@ -89,6 +105,7 @@
 #define wdt_mem_res(i) wdt_res(ICH_RES_MEM_OFF, i)
 #define wdt_res(b, i) (&wdt_ich_res[(b) + (i)])
 
+<<<<<<< HEAD
 struct lpc_ich_cfg {
 	int base;
 	int ctrl;
@@ -99,6 +116,19 @@ struct lpc_ich_priv {
 	int chipset;
 	struct lpc_ich_cfg acpi;
 	struct lpc_ich_cfg gpio;
+=======
+struct lpc_ich_priv {
+	int chipset;
+
+	int abase;		/* ACPI base */
+	int actrl_pbase;	/* ACPI control or PMC base */
+	int gbase;		/* GPIO base */
+	int gctrl;		/* GPIO control */
+
+	int abase_save;		/* Cached ACPI base value */
+	int actrl_pbase_save;		/* Cached ACPI control or PMC base value */
+	int gctrl_save;		/* Cached GPIO control value */
+>>>>>>> v3.18
 };
 
 static struct resource wdt_ich_res[] = {
@@ -110,7 +140,11 @@ static struct resource wdt_ich_res[] = {
 	{
 		.flags = IORESOURCE_IO,
 	},
+<<<<<<< HEAD
 	/* GCS */
+=======
+	/* GCS or PMC */
+>>>>>>> v3.18
 	{
 		.flags = IORESOURCE_MEM,
 	},
@@ -210,10 +244,21 @@ enum lpc_chipsets {
 	LPC_LPT_LP,	/* Lynx Point-LP */
 	LPC_WBG,	/* Wellsburg */
 	LPC_AVN,	/* Avoton SoC */
+<<<<<<< HEAD
 	LPC_COLETO,	/* Coleto Creek */
 };
 
 struct lpc_ich_info lpc_chipset_info[] = {
+=======
+	LPC_BAYTRAIL,   /* Bay Trail SoC */
+	LPC_COLETO,	/* Coleto Creek */
+	LPC_WPT_LP,	/* Wildcat Point-LP */
+	LPC_BRASWELL,	/* Braswell SoC */
+	LPC_9S,		/* 9 Series */
+};
+
+static struct lpc_ich_info lpc_chipset_info[] = {
+>>>>>>> v3.18
 	[LPC_ICH] = {
 		.name = "ICH",
 		.iTCO_version = 1,
@@ -301,6 +346,10 @@ struct lpc_ich_info lpc_chipset_info[] = {
 	[LPC_NM10] = {
 		.name = "NM10",
 		.iTCO_version = 2,
+<<<<<<< HEAD
+=======
+		.gpio_version = ICH_V7_GPIO,
+>>>>>>> v3.18
 	},
 	[LPC_ICH8] = {
 		.name = "ICH8 or ICH8R",
@@ -482,6 +531,10 @@ struct lpc_ich_info lpc_chipset_info[] = {
 	[LPC_PPT] = {
 		.name = "Panther Point",
 		.iTCO_version = 2,
+<<<<<<< HEAD
+=======
+		.gpio_version = ICH_V5_GPIO,
+>>>>>>> v3.18
 	},
 	[LPC_LPT] = {
 		.name = "Lynx Point",
@@ -497,12 +550,36 @@ struct lpc_ich_info lpc_chipset_info[] = {
 	},
 	[LPC_AVN] = {
 		.name = "Avoton SoC",
+<<<<<<< HEAD
 		.iTCO_version = 1,
+=======
+		.iTCO_version = 3,
+		.gpio_version = AVOTON_GPIO,
+	},
+	[LPC_BAYTRAIL] = {
+		.name = "Bay Trail SoC",
+		.iTCO_version = 3,
+>>>>>>> v3.18
 	},
 	[LPC_COLETO] = {
 		.name = "Coleto Creek",
 		.iTCO_version = 2,
 	},
+<<<<<<< HEAD
+=======
+	[LPC_WPT_LP] = {
+		.name = "Wildcat Point_LP",
+		.iTCO_version = 2,
+	},
+	[LPC_BRASWELL] = {
+		.name = "Braswell SoC",
+		.iTCO_version = 3,
+	},
+	[LPC_9S] = {
+		.name = "9 Series",
+		.iTCO_version = 2,
+	},
+>>>>>>> v3.18
 };
 
 /*
@@ -511,7 +588,11 @@ struct lpc_ich_info lpc_chipset_info[] = {
  * pci_driver, because the I/O Controller Hub has also other
  * functions that probably will be registered by other drivers.
  */
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(lpc_ich_ids) = {
+=======
+static const struct pci_device_id lpc_ich_ids[] = {
+>>>>>>> v3.18
 	{ PCI_VDEVICE(INTEL, 0x2410), LPC_ICH},
 	{ PCI_VDEVICE(INTEL, 0x2420), LPC_ICH0},
 	{ PCI_VDEVICE(INTEL, 0x2440), LPC_ICH2},
@@ -720,7 +801,25 @@ static DEFINE_PCI_DEVICE_TABLE(lpc_ich_ids) = {
 	{ PCI_VDEVICE(INTEL, 0x1f39), LPC_AVN},
 	{ PCI_VDEVICE(INTEL, 0x1f3a), LPC_AVN},
 	{ PCI_VDEVICE(INTEL, 0x1f3b), LPC_AVN},
+<<<<<<< HEAD
 	{ PCI_VDEVICE(INTEL, 0x2390), LPC_COLETO},
+=======
+	{ PCI_VDEVICE(INTEL, 0x0f1c), LPC_BAYTRAIL},
+	{ PCI_VDEVICE(INTEL, 0x2390), LPC_COLETO},
+	{ PCI_VDEVICE(INTEL, 0x9cc1), LPC_WPT_LP},
+	{ PCI_VDEVICE(INTEL, 0x9cc2), LPC_WPT_LP},
+	{ PCI_VDEVICE(INTEL, 0x9cc3), LPC_WPT_LP},
+	{ PCI_VDEVICE(INTEL, 0x9cc5), LPC_WPT_LP},
+	{ PCI_VDEVICE(INTEL, 0x9cc6), LPC_WPT_LP},
+	{ PCI_VDEVICE(INTEL, 0x9cc7), LPC_WPT_LP},
+	{ PCI_VDEVICE(INTEL, 0x9cc9), LPC_WPT_LP},
+	{ PCI_VDEVICE(INTEL, 0x229c), LPC_BRASWELL},
+	{ PCI_VDEVICE(INTEL, 0x8cc1), LPC_9S},
+	{ PCI_VDEVICE(INTEL, 0x8cc2), LPC_9S},
+	{ PCI_VDEVICE(INTEL, 0x8cc3), LPC_9S},
+	{ PCI_VDEVICE(INTEL, 0x8cc4), LPC_9S},
+	{ PCI_VDEVICE(INTEL, 0x8cc6), LPC_9S},
+>>>>>>> v3.18
 	{ 0, },			/* End of list */
 };
 MODULE_DEVICE_TABLE(pci, lpc_ich_ids);
@@ -729,6 +828,7 @@ static void lpc_ich_restore_config_space(struct pci_dev *dev)
 {
 	struct lpc_ich_priv *priv = pci_get_drvdata(dev);
 
+<<<<<<< HEAD
 	if (priv->acpi.save >= 0) {
 		pci_write_config_byte(dev, priv->acpi.ctrl, priv->acpi.save);
 		priv->acpi.save = -1;
@@ -737,6 +837,22 @@ static void lpc_ich_restore_config_space(struct pci_dev *dev)
 	if (priv->gpio.save >= 0) {
 		pci_write_config_byte(dev, priv->gpio.ctrl, priv->gpio.save);
 		priv->gpio.save = -1;
+=======
+	if (priv->abase_save >= 0) {
+		pci_write_config_byte(dev, priv->abase, priv->abase_save);
+		priv->abase_save = -1;
+	}
+
+	if (priv->actrl_pbase_save >= 0) {
+		pci_write_config_byte(dev, priv->actrl_pbase,
+			priv->actrl_pbase_save);
+		priv->actrl_pbase_save = -1;
+	}
+
+	if (priv->gctrl_save >= 0) {
+		pci_write_config_byte(dev, priv->gctrl, priv->gctrl_save);
+		priv->gctrl_save = -1;
+>>>>>>> v3.18
 	}
 }
 
@@ -745,9 +861,32 @@ static void lpc_ich_enable_acpi_space(struct pci_dev *dev)
 	struct lpc_ich_priv *priv = pci_get_drvdata(dev);
 	u8 reg_save;
 
+<<<<<<< HEAD
 	pci_read_config_byte(dev, priv->acpi.ctrl, &reg_save);
 	pci_write_config_byte(dev, priv->acpi.ctrl, reg_save | 0x10);
 	priv->acpi.save = reg_save;
+=======
+	switch (lpc_chipset_info[priv->chipset].iTCO_version) {
+	case 3:
+		/*
+		 * Some chipsets (eg Avoton) enable the ACPI space in the
+		 * ACPI BASE register.
+		 */
+		pci_read_config_byte(dev, priv->abase, &reg_save);
+		pci_write_config_byte(dev, priv->abase, reg_save | 0x2);
+		priv->abase_save = reg_save;
+		break;
+	default:
+		/*
+		 * Most chipsets enable the ACPI space in the ACPI control
+		 * register.
+		 */
+		pci_read_config_byte(dev, priv->actrl_pbase, &reg_save);
+		pci_write_config_byte(dev, priv->actrl_pbase, reg_save | 0x80);
+		priv->actrl_pbase_save = reg_save;
+		break;
+	}
+>>>>>>> v3.18
 }
 
 static void lpc_ich_enable_gpio_space(struct pci_dev *dev)
@@ -755,9 +894,26 @@ static void lpc_ich_enable_gpio_space(struct pci_dev *dev)
 	struct lpc_ich_priv *priv = pci_get_drvdata(dev);
 	u8 reg_save;
 
+<<<<<<< HEAD
 	pci_read_config_byte(dev, priv->gpio.ctrl, &reg_save);
 	pci_write_config_byte(dev, priv->gpio.ctrl, reg_save | 0x10);
 	priv->gpio.save = reg_save;
+=======
+	pci_read_config_byte(dev, priv->gctrl, &reg_save);
+	pci_write_config_byte(dev, priv->gctrl, reg_save | 0x10);
+	priv->gctrl_save = reg_save;
+}
+
+static void lpc_ich_enable_pmc_space(struct pci_dev *dev)
+{
+	struct lpc_ich_priv *priv = pci_get_drvdata(dev);
+	u8 reg_save;
+
+	pci_read_config_byte(dev, priv->actrl_pbase, &reg_save);
+	pci_write_config_byte(dev, priv->actrl_pbase, reg_save | 0x2);
+
+	priv->actrl_pbase_save = reg_save;
+>>>>>>> v3.18
 }
 
 static void lpc_ich_finalize_cell(struct pci_dev *dev, struct mfd_cell *cell)
@@ -802,7 +958,11 @@ static int lpc_ich_init_gpio(struct pci_dev *dev)
 	struct resource *res;
 
 	/* Setup power management base register */
+<<<<<<< HEAD
 	pci_read_config_dword(dev, priv->acpi.base, &base_addr_cfg);
+=======
+	pci_read_config_dword(dev, priv->abase, &base_addr_cfg);
+>>>>>>> v3.18
 	base_addr = base_addr_cfg & 0x0000ff80;
 	if (!base_addr) {
 		dev_notice(&dev->dev, "I/O space for ACPI uninitialized\n");
@@ -828,7 +988,11 @@ static int lpc_ich_init_gpio(struct pci_dev *dev)
 
 gpe0_done:
 	/* Setup GPIO base register */
+<<<<<<< HEAD
 	pci_read_config_dword(dev, priv->gpio.base, &base_addr_cfg);
+=======
+	pci_read_config_dword(dev, priv->gbase, &base_addr_cfg);
+>>>>>>> v3.18
 	base_addr = base_addr_cfg & 0x0000ff80;
 	if (!base_addr) {
 		dev_notice(&dev->dev, "I/O space for GPIO uninitialized\n");
@@ -878,7 +1042,11 @@ static int lpc_ich_init_wdt(struct pci_dev *dev)
 	struct resource *res;
 
 	/* Setup power management base register */
+<<<<<<< HEAD
 	pci_read_config_dword(dev, priv->acpi.base, &base_addr_cfg);
+=======
+	pci_read_config_dword(dev, priv->abase, &base_addr_cfg);
+>>>>>>> v3.18
 	base_addr = base_addr_cfg & 0x0000ff80;
 	if (!base_addr) {
 		dev_notice(&dev->dev, "I/O space for ACPI uninitialized\n");
@@ -897,14 +1065,30 @@ static int lpc_ich_init_wdt(struct pci_dev *dev)
 	lpc_ich_enable_acpi_space(dev);
 
 	/*
+<<<<<<< HEAD
 	 * Get the Memory-Mapped GCS register. To get access to it
 	 * we have to read RCBA from PCI Config space 0xf0 and use
 	 * it as base. GCS = RCBA + ICH6_GCS(0x3410).
+=======
+	 * iTCO v2:
+	 * Get the Memory-Mapped GCS register. To get access to it
+	 * we have to read RCBA from PCI Config space 0xf0 and use
+	 * it as base. GCS = RCBA + ICH6_GCS(0x3410).
+	 *
+	 * iTCO v3:
+	 * Get the Power Management Configuration register.  To get access
+	 * to it we have to read the PMC BASE from config space and address
+	 * the register at offset 0x8.
+>>>>>>> v3.18
 	 */
 	if (lpc_chipset_info[priv->chipset].iTCO_version == 1) {
 		/* Don't register iomem for TCO ver 1 */
 		lpc_ich_cells[LPC_WDT].num_resources--;
+<<<<<<< HEAD
 	} else {
+=======
+	} else if (lpc_chipset_info[priv->chipset].iTCO_version == 2) {
+>>>>>>> v3.18
 		pci_read_config_dword(dev, RCBABASE, &base_addr_cfg);
 		base_addr = base_addr_cfg & 0xffffc000;
 		if (!(base_addr_cfg & 1)) {
@@ -913,9 +1097,23 @@ static int lpc_ich_init_wdt(struct pci_dev *dev)
 			ret = -ENODEV;
 			goto wdt_done;
 		}
+<<<<<<< HEAD
 		res = wdt_mem_res(ICH_RES_MEM_GCS);
 		res->start = base_addr + ACPIBASE_GCS_OFF;
 		res->end = base_addr + ACPIBASE_GCS_END;
+=======
+		res = wdt_mem_res(ICH_RES_MEM_GCS_PMC);
+		res->start = base_addr + ACPIBASE_GCS_OFF;
+		res->end = base_addr + ACPIBASE_GCS_END;
+	} else if (lpc_chipset_info[priv->chipset].iTCO_version == 3) {
+		lpc_ich_enable_pmc_space(dev);
+		pci_read_config_dword(dev, ACPICTRL_PMCBASE, &base_addr_cfg);
+		base_addr = base_addr_cfg & 0xfffffe00;
+
+		res = wdt_mem_res(ICH_RES_MEM_GCS_PMC);
+		res->start = base_addr + ACPIBASE_PMC_OFF;
+		res->end = base_addr + ACPIBASE_PMC_END;
+>>>>>>> v3.18
 	}
 
 	lpc_ich_finalize_cell(dev, &lpc_ich_cells[LPC_WDT]);
@@ -939,6 +1137,7 @@ static int lpc_ich_probe(struct pci_dev *dev,
 		return -ENOMEM;
 
 	priv->chipset = id->driver_data;
+<<<<<<< HEAD
 	priv->acpi.save = -1;
 	priv->acpi.base = ACPIBASE;
 	priv->acpi.ctrl = ACPICTRL;
@@ -950,10 +1149,27 @@ static int lpc_ich_probe(struct pci_dev *dev,
 	} else {
 		priv->gpio.base = GPIOBASE_ICH6;
 		priv->gpio.ctrl = GPIOCTRL_ICH6;
+=======
+
+	priv->actrl_pbase_save = -1;
+	priv->abase_save = -1;
+
+	priv->abase = ACPIBASE;
+	priv->actrl_pbase = ACPICTRL_PMCBASE;
+
+	priv->gctrl_save = -1;
+	if (priv->chipset <= LPC_ICH5) {
+		priv->gbase = GPIOBASE_ICH0;
+		priv->gctrl = GPIOCTRL_ICH0;
+	} else {
+		priv->gbase = GPIOBASE_ICH6;
+		priv->gctrl = GPIOCTRL_ICH6;
+>>>>>>> v3.18
 	}
 
 	pci_set_drvdata(dev, priv);
 
+<<<<<<< HEAD
 	ret = lpc_ich_init_wdt(dev);
 	if (!ret)
 		cell_added = true;
@@ -961,6 +1177,19 @@ static int lpc_ich_probe(struct pci_dev *dev,
 	ret = lpc_ich_init_gpio(dev);
 	if (!ret)
 		cell_added = true;
+=======
+	if (lpc_chipset_info[priv->chipset].iTCO_version) {
+		ret = lpc_ich_init_wdt(dev);
+		if (!ret)
+			cell_added = true;
+	}
+
+	if (lpc_chipset_info[priv->chipset].gpio_version) {
+		ret = lpc_ich_init_gpio(dev);
+		if (!ret)
+			cell_added = true;
+	}
+>>>>>>> v3.18
 
 	/*
 	 * We only care if at least one or none of the cells registered
@@ -969,7 +1198,10 @@ static int lpc_ich_probe(struct pci_dev *dev,
 	if (!cell_added) {
 		dev_warn(&dev->dev, "No MFD cells added\n");
 		lpc_ich_restore_config_space(dev);
+<<<<<<< HEAD
 		pci_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 		return -ENODEV;
 	}
 
@@ -980,7 +1212,10 @@ static void lpc_ich_remove(struct pci_dev *dev)
 {
 	mfd_remove_devices(&dev->dev);
 	lpc_ich_restore_config_space(dev);
+<<<<<<< HEAD
 	pci_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 }
 
 static struct pci_driver lpc_ich_driver = {
@@ -990,6 +1225,7 @@ static struct pci_driver lpc_ich_driver = {
 	.remove		= lpc_ich_remove,
 };
 
+<<<<<<< HEAD
 static int __init lpc_ich_init(void)
 {
 	return pci_register_driver(&lpc_ich_driver);
@@ -1002,6 +1238,9 @@ static void __exit lpc_ich_exit(void)
 
 module_init(lpc_ich_init);
 module_exit(lpc_ich_exit);
+=======
+module_pci_driver(lpc_ich_driver);
+>>>>>>> v3.18
 
 MODULE_AUTHOR("Aaron Sierra <asierra@xes-inc.com>");
 MODULE_DESCRIPTION("LPC interface for Intel ICH");

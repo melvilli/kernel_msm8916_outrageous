@@ -955,7 +955,11 @@ struct sms_rx_stats {
 	u32 modem_state;		/* from SMSHOSTLIB_DVB_MODEM_STATE_ET */
 	s32 SNR;		/* dB */
 	u32 ber;		/* Post Viterbi ber [1E-5] */
+<<<<<<< HEAD
 	u32 ber_error_count;	/* Number of erronous SYNC bits. */
+=======
+	u32 ber_error_count;	/* Number of erroneous SYNC bits. */
+>>>>>>> v3.18
 	u32 ber_bit_count;	/* Total number of SYNC bits. */
 	u32 ts_per;		/* Transport stream PER,
 	0xFFFFFFFF indicate N/A */
@@ -981,7 +985,11 @@ struct sms_rx_stats_ex {
 	u32 modem_state;		/* from SMSHOSTLIB_DVB_MODEM_STATE_ET */
 	s32 SNR;		/* dB */
 	u32 ber;		/* Post Viterbi ber [1E-5] */
+<<<<<<< HEAD
 	u32 ber_error_count;	/* Number of erronous SYNC bits. */
+=======
+	u32 ber_error_count;	/* Number of erroneous SYNC bits. */
+>>>>>>> v3.18
 	u32 ber_bit_count;	/* Total number of SYNC bits. */
 	u32 ts_per;		/* Transport stream PER,
 	0xFFFFFFFF indicate N/A */

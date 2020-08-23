@@ -16,7 +16,10 @@
  */
 
 #include <linux/i2c.h>
+<<<<<<< HEAD
 #include <linux/of_i2c.h>
+=======
+>>>>>>> v3.18
 #include <linux/pinctrl/pinmux.h>
 #include <linux/pinctrl/consumer.h>
 #include <drm/drm_encoder_slave.h>
@@ -73,13 +76,45 @@ static void slave_encoder_prepare(struct drm_encoder *encoder)
 	tilcdc_crtc_set_panel_info(encoder->crtc, &slave_info);
 }
 
+<<<<<<< HEAD
+=======
+static bool slave_encoder_fixup(struct drm_encoder *encoder,
+		const struct drm_display_mode *mode,
+		struct drm_display_mode *adjusted_mode)
+{
+	/*
+	 * tilcdc does not generate VESA-complient sync but aligns
+	 * VS on the second edge of HS instead of first edge.
+	 * We use adjusted_mode, to fixup sync by aligning both rising
+	 * edges and add HSKEW offset to let the slave encoder fix it up.
+	 */
+	adjusted_mode->hskew = mode->hsync_end - mode->hsync_start;
+	adjusted_mode->flags |= DRM_MODE_FLAG_HSKEW;
+
+	if (mode->flags & DRM_MODE_FLAG_NHSYNC) {
+		adjusted_mode->flags |= DRM_MODE_FLAG_PHSYNC;
+		adjusted_mode->flags &= ~DRM_MODE_FLAG_NHSYNC;
+	} else {
+		adjusted_mode->flags |= DRM_MODE_FLAG_NHSYNC;
+		adjusted_mode->flags &= ~DRM_MODE_FLAG_PHSYNC;
+	}
+
+	return drm_i2c_encoder_mode_fixup(encoder, mode, adjusted_mode);
+}
+
+
+>>>>>>> v3.18
 static const struct drm_encoder_funcs slave_encoder_funcs = {
 		.destroy        = slave_encoder_destroy,
 };
 
 static const struct drm_encoder_helper_funcs slave_encoder_helper_funcs = {
 		.dpms           = drm_i2c_encoder_dpms,
+<<<<<<< HEAD
 		.mode_fixup     = drm_i2c_encoder_mode_fixup,
+=======
+		.mode_fixup     = slave_encoder_fixup,
+>>>>>>> v3.18
 		.prepare        = slave_encoder_prepare,
 		.commit         = drm_i2c_encoder_commit,
 		.mode_set       = drm_i2c_encoder_mode_set,
@@ -142,7 +177,11 @@ struct slave_connector {
 static void slave_connector_destroy(struct drm_connector *connector)
 {
 	struct slave_connector *slave_connector = to_slave_connector(connector);
+<<<<<<< HEAD
 	drm_sysfs_connector_remove(connector);
+=======
+	drm_connector_unregister(connector);
+>>>>>>> v3.18
 	drm_connector_cleanup(connector);
 	kfree(slave_connector);
 }
@@ -238,7 +277,11 @@ static struct drm_connector *slave_connector_create(struct drm_device *dev,
 	if (ret)
 		goto fail;
 
+<<<<<<< HEAD
 	drm_sysfs_connector_add(connector);
+=======
+	drm_connector_register(connector);
+>>>>>>> v3.18
 
 	return connector;
 
@@ -272,6 +315,7 @@ static int slave_modeset_init(struct tilcdc_module *mod, struct drm_device *dev)
 	return 0;
 }
 
+<<<<<<< HEAD
 static void slave_destroy(struct tilcdc_module *mod)
 {
 	struct slave_module *slave_mod = to_slave_module(mod);
@@ -283,6 +327,10 @@ static void slave_destroy(struct tilcdc_module *mod)
 static const struct tilcdc_module_ops slave_module_ops = {
 		.modeset_init = slave_modeset_init,
 		.destroy = slave_destroy,
+=======
+static const struct tilcdc_module_ops slave_module_ops = {
+		.modeset_init = slave_modeset_init,
+>>>>>>> v3.18
 };
 
 /*
@@ -299,6 +347,10 @@ static int slave_probe(struct platform_device *pdev)
 	struct tilcdc_module *mod;
 	struct pinctrl *pinctrl;
 	uint32_t i2c_phandle;
+<<<<<<< HEAD
+=======
+	struct i2c_adapter *slavei2c;
+>>>>>>> v3.18
 	int ret = -EINVAL;
 
 	/* bail out early if no DT data: */
@@ -307,6 +359,7 @@ static int slave_probe(struct platform_device *pdev)
 		return -ENXIO;
 	}
 
+<<<<<<< HEAD
 	slave_mod = kzalloc(sizeof(*slave_mod), GFP_KERNEL);
 	if (!slave_mod)
 		return -ENOMEM;
@@ -322,11 +375,18 @@ static int slave_probe(struct platform_device *pdev)
 	if (of_property_read_u32(node, "i2c", &i2c_phandle)) {
 		dev_err(&pdev->dev, "could not get i2c bus phandle\n");
 		goto fail;
+=======
+	/* Bail out early if i2c not specified */
+	if (of_property_read_u32(node, "i2c", &i2c_phandle)) {
+		dev_err(&pdev->dev, "could not get i2c bus phandle\n");
+		return ret;
+>>>>>>> v3.18
 	}
 
 	i2c_node = of_find_node_by_phandle(i2c_phandle);
 	if (!i2c_node) {
 		dev_err(&pdev->dev, "could not get i2c bus node\n");
+<<<<<<< HEAD
 		goto fail;
 	}
 
@@ -342,11 +402,61 @@ static int slave_probe(struct platform_device *pdev)
 
 fail:
 	slave_destroy(mod);
+=======
+		return ret;
+	}
+
+	/* but defer the probe if it can't be initialized it might come later */
+	slavei2c = of_find_i2c_adapter_by_node(i2c_node);
+	of_node_put(i2c_node);
+
+	if (!slavei2c) {
+		ret = -EPROBE_DEFER;
+		tilcdc_slave_probedefer(true);
+		dev_err(&pdev->dev, "could not get i2c\n");
+		return ret;
+	}
+
+	slave_mod = kzalloc(sizeof(*slave_mod), GFP_KERNEL);
+	if (!slave_mod) {
+		ret = -ENOMEM;
+		goto fail_adapter;
+	}
+
+	mod = &slave_mod->base;
+	pdev->dev.platform_data = mod;
+
+	mod->preferred_bpp = slave_info.bpp;
+
+	slave_mod->i2c = slavei2c;
+
+	tilcdc_module_init(mod, "slave", &slave_module_ops);
+
+	pinctrl = devm_pinctrl_get_select_default(&pdev->dev);
+	if (IS_ERR(pinctrl))
+		dev_warn(&pdev->dev, "pins are not configured\n");
+
+	tilcdc_slave_probedefer(false);
+
+	return 0;
+
+fail_adapter:
+	i2c_put_adapter(slavei2c);
+>>>>>>> v3.18
 	return ret;
 }
 
 static int slave_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
+=======
+	struct tilcdc_module *mod = dev_get_platdata(&pdev->dev);
+	struct slave_module *slave_mod = to_slave_module(mod);
+
+	tilcdc_module_cleanup(mod);
+	kfree(slave_mod);
+
+>>>>>>> v3.18
 	return 0;
 }
 

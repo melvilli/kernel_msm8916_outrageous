@@ -52,9 +52,15 @@ int gfs2_replay_read_block(struct gfs2_jdesc *jd, unsigned int blk,
 	return error;
 }
 
+<<<<<<< HEAD
 int gfs2_revoke_add(struct gfs2_sbd *sdp, u64 blkno, unsigned int where)
 {
 	struct list_head *head = &sdp->sd_revoke_list;
+=======
+int gfs2_revoke_add(struct gfs2_jdesc *jd, u64 blkno, unsigned int where)
+{
+	struct list_head *head = &jd->jd_revoke_list;
+>>>>>>> v3.18
 	struct gfs2_revoke_replay *rr;
 	int found = 0;
 
@@ -81,13 +87,21 @@ int gfs2_revoke_add(struct gfs2_sbd *sdp, u64 blkno, unsigned int where)
 	return 1;
 }
 
+<<<<<<< HEAD
 int gfs2_revoke_check(struct gfs2_sbd *sdp, u64 blkno, unsigned int where)
+=======
+int gfs2_revoke_check(struct gfs2_jdesc *jd, u64 blkno, unsigned int where)
+>>>>>>> v3.18
 {
 	struct gfs2_revoke_replay *rr;
 	int wrap, a, b, revoke;
 	int found = 0;
 
+<<<<<<< HEAD
 	list_for_each_entry(rr, &sdp->sd_revoke_list, rr_list) {
+=======
+	list_for_each_entry(rr, &jd->jd_revoke_list, rr_list) {
+>>>>>>> v3.18
 		if (rr->rr_blkno == blkno) {
 			found = 1;
 			break;
@@ -97,17 +111,28 @@ int gfs2_revoke_check(struct gfs2_sbd *sdp, u64 blkno, unsigned int where)
 	if (!found)
 		return 0;
 
+<<<<<<< HEAD
 	wrap = (rr->rr_where < sdp->sd_replay_tail);
 	a = (sdp->sd_replay_tail < where);
+=======
+	wrap = (rr->rr_where < jd->jd_replay_tail);
+	a = (jd->jd_replay_tail < where);
+>>>>>>> v3.18
 	b = (where < rr->rr_where);
 	revoke = (wrap) ? (a || b) : (a && b);
 
 	return revoke;
 }
 
+<<<<<<< HEAD
 void gfs2_revoke_clean(struct gfs2_sbd *sdp)
 {
 	struct list_head *head = &sdp->sd_revoke_list;
+=======
+void gfs2_revoke_clean(struct gfs2_jdesc *jd)
+{
+	struct list_head *head = &jd->jd_revoke_list;
+>>>>>>> v3.18
 	struct gfs2_revoke_replay *rr;
 
 	while (!list_empty(head)) {
@@ -454,7 +479,11 @@ void gfs2_recover_func(struct work_struct *work)
 	struct gfs2_inode *ip = GFS2_I(jd->jd_inode);
 	struct gfs2_sbd *sdp = GFS2_SB(jd->jd_inode);
 	struct gfs2_log_header_host head;
+<<<<<<< HEAD
 	struct gfs2_holder j_gh, ji_gh, t_gh;
+=======
+	struct gfs2_holder j_gh, ji_gh, thaw_gh;
+>>>>>>> v3.18
 	unsigned long t;
 	int ro = 0;
 	unsigned int pass;
@@ -508,11 +537,19 @@ void gfs2_recover_func(struct work_struct *work)
 
 		t = jiffies;
 
+<<<<<<< HEAD
 		/* Acquire a shared hold on the transaction lock */
 
 		error = gfs2_glock_nq_init(sdp->sd_trans_gl, LM_ST_SHARED,
 					   LM_FLAG_NOEXP | LM_FLAG_PRIORITY |
 					   GL_NOCACHE, &t_gh);
+=======
+		/* Acquire a shared hold on the freeze lock */
+
+		error = gfs2_glock_nq_init(sdp->sd_freeze_gl, LM_ST_SHARED,
+					   LM_FLAG_NOEXP | LM_FLAG_PRIORITY,
+					   &thaw_gh);
+>>>>>>> v3.18
 		if (error)
 			goto fail_gunlock_ji;
 
@@ -538,7 +575,11 @@ void gfs2_recover_func(struct work_struct *work)
 			fs_warn(sdp, "jid=%u: Can't replay: read-only block "
 				"device\n", jd->jd_jid);
 			error = -EROFS;
+<<<<<<< HEAD
 			goto fail_gunlock_tr;
+=======
+			goto fail_gunlock_thaw;
+>>>>>>> v3.18
 		}
 
 		fs_info(sdp, "jid=%u: Replaying journal...\n", jd->jd_jid);
@@ -549,14 +590,24 @@ void gfs2_recover_func(struct work_struct *work)
 						   head.lh_blkno, pass);
 			lops_after_scan(jd, error, pass);
 			if (error)
+<<<<<<< HEAD
 				goto fail_gunlock_tr;
+=======
+				goto fail_gunlock_thaw;
+>>>>>>> v3.18
 		}
 
 		error = clean_journal(jd, &head);
 		if (error)
+<<<<<<< HEAD
 			goto fail_gunlock_tr;
 
 		gfs2_glock_dq_uninit(&t_gh);
+=======
+			goto fail_gunlock_thaw;
+
+		gfs2_glock_dq_uninit(&thaw_gh);
+>>>>>>> v3.18
 		t = DIV_ROUND_UP(jiffies - t, HZ);
 		fs_info(sdp, "jid=%u: Journal replayed in %lus\n",
 			jd->jd_jid, t);
@@ -572,8 +623,13 @@ void gfs2_recover_func(struct work_struct *work)
 	fs_info(sdp, "jid=%u: Done\n", jd->jd_jid);
 	goto done;
 
+<<<<<<< HEAD
 fail_gunlock_tr:
 	gfs2_glock_dq_uninit(&t_gh);
+=======
+fail_gunlock_thaw:
+	gfs2_glock_dq_uninit(&thaw_gh);
+>>>>>>> v3.18
 fail_gunlock_ji:
 	if (jlocked) {
 		gfs2_glock_dq_uninit(&ji_gh);
@@ -591,12 +647,15 @@ done:
 	wake_up_bit(&jd->jd_flags, JDF_RECOVERY);
 }
 
+<<<<<<< HEAD
 static int gfs2_recovery_wait(void *word)
 {
 	schedule();
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 int gfs2_recover_journal(struct gfs2_jdesc *jd, bool wait)
 {
 	int rv;
@@ -609,7 +668,11 @@ int gfs2_recover_journal(struct gfs2_jdesc *jd, bool wait)
 	BUG_ON(!rv);
 
 	if (wait)
+<<<<<<< HEAD
 		wait_on_bit(&jd->jd_flags, JDF_RECOVERY, gfs2_recovery_wait,
+=======
+		wait_on_bit(&jd->jd_flags, JDF_RECOVERY,
+>>>>>>> v3.18
 			    TASK_UNINTERRUPTIBLE);
 
 	return wait ? jd->jd_recover_error : 0;

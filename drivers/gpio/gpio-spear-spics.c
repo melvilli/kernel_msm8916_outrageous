@@ -2,7 +2,11 @@
  * SPEAr platform SPI chipselect abstraction over gpiolib
  *
  * Copyright (C) 2012 ST Microelectronics
+<<<<<<< HEAD
  * Shiraz Hashim <shiraz.hashim@st.com>
+=======
+ * Shiraz Hashim <shiraz.linux.kernel@gmail.com>
+>>>>>>> v3.18
  *
  * This file is licensed under the terms of the GNU General Public
  * License version 2. This program is licensed "as is" without any
@@ -128,6 +132,7 @@ static int spics_gpio_probe(struct platform_device *pdev)
 	struct resource *res;
 	int ret;
 
+<<<<<<< HEAD
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!res) {
 		dev_err(&pdev->dev, "invalid IORESOURCE_MEM\n");
@@ -140,6 +145,13 @@ static int spics_gpio_probe(struct platform_device *pdev)
 		return -ENOMEM;
 	}
 
+=======
+	spics = devm_kzalloc(&pdev->dev, sizeof(*spics), GFP_KERNEL);
+	if (!spics)
+		return -ENOMEM;
+
+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+>>>>>>> v3.18
 	spics->base = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(spics->base))
 		return PTR_ERR(spics->base);
@@ -210,6 +222,10 @@ static int __init spics_gpio_init(void)
 }
 subsys_initcall(spics_gpio_init);
 
+<<<<<<< HEAD
 MODULE_AUTHOR("Shiraz Hashim <shiraz.hashim@st.com>");
+=======
+MODULE_AUTHOR("Shiraz Hashim <shiraz.linux.kernel@gmail.com>");
+>>>>>>> v3.18
 MODULE_DESCRIPTION("ST Microlectronics SPEAr SPI Chip Select Abstraction");
 MODULE_LICENSE("GPL");

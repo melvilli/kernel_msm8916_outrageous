@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -125,15 +129,25 @@ acpi_status acpi_ev_gpe_initialize(void)
 		/* GPE block 0 exists (has both length and address > 0) */
 
 		register_count0 = (u16)(acpi_gbl_FADT.gpe0_block_length / 2);
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 		gpe_number_max =
 		    (register_count0 * ACPI_GPE_REGISTER_WIDTH) - 1;
 
 		/* Install GPE Block 0 */
 
 		status = acpi_ev_create_gpe_block(acpi_gbl_fadt_gpe_device,
+<<<<<<< HEAD
 						  &acpi_gbl_FADT.xgpe0_block,
 						  register_count0, 0,
+=======
+						  acpi_gbl_FADT.xgpe0_block.
+						  address,
+						  acpi_gbl_FADT.xgpe0_block.
+						  space_id, register_count0, 0,
+>>>>>>> v3.18
 						  acpi_gbl_FADT.sci_interrupt,
 						  &acpi_gbl_gpe_fadt_blocks[0]);
 
@@ -170,8 +184,15 @@ acpi_status acpi_ev_gpe_initialize(void)
 
 			status =
 			    acpi_ev_create_gpe_block(acpi_gbl_fadt_gpe_device,
+<<<<<<< HEAD
 						     &acpi_gbl_FADT.xgpe1_block,
 						     register_count1,
+=======
+						     acpi_gbl_FADT.xgpe1_block.
+						     address,
+						     acpi_gbl_FADT.xgpe1_block.
+						     space_id, register_count1,
+>>>>>>> v3.18
 						     acpi_gbl_FADT.gpe1_base,
 						     acpi_gbl_FADT.
 						     sci_interrupt,
@@ -204,6 +225,7 @@ acpi_status acpi_ev_gpe_initialize(void)
 		goto cleanup;
 	}
 
+<<<<<<< HEAD
 	/* Check for Max GPE number out-of-range */
 
 	if (gpe_number_max > ACPI_GPE_MAX) {
@@ -215,6 +237,9 @@ acpi_status acpi_ev_gpe_initialize(void)
 	}
 
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 	(void)acpi_ut_release_mutex(ACPI_MTX_NAMESPACE);
 	return_ACPI_STATUS(AE_OK);
 }
@@ -363,14 +388,26 @@ acpi_ev_match_gpe_method(acpi_handle obj_handle,
 	 */
 	switch (name[1]) {
 	case 'L':
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		type = ACPI_GPE_LEVEL_TRIGGERED;
 		break;
 
 	case 'E':
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		type = ACPI_GPE_EDGE_TRIGGERED;
 		break;
 
 	default:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		/* Unknown method type, just ignore it */
 
 		ACPI_DEBUG_PRINT((ACPI_DB_LOAD,
@@ -428,6 +465,10 @@ acpi_ev_match_gpe_method(acpi_handle obj_handle,
 	}
 
 	/* Disable the GPE in case it's been enabled already. */
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	(void)acpi_hw_low_set_gpe(gpe_event_info, ACPI_GPE_DISABLE);
 
 	/*

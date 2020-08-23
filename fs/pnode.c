@@ -200,7 +200,11 @@ static struct mount *next_group(struct mount *m, struct mount *origin)
 static struct user_namespace *user_ns;
 static struct mount *last_dest, *last_source, *dest_master;
 static struct mountpoint *mp;
+<<<<<<< HEAD
 static struct list_head *list;
+=======
+static struct hlist_head *list;
+>>>>>>> v3.18
 
 static int propagate_one(struct mount *m)
 {
@@ -246,11 +250,19 @@ static int propagate_one(struct mount *m)
 	last_dest = m;
 	last_source = child;
 	if (m->mnt_master != dest_master) {
+<<<<<<< HEAD
 		br_write_lock(&vfsmount_lock);
 		SET_MNT_MARK(m->mnt_master);
 		br_write_unlock(&vfsmount_lock);
 	}
 	list_add_tail(&child->mnt_hash, list);
+=======
+		read_seqlock_excl(&mount_lock);
+		SET_MNT_MARK(m->mnt_master);
+		read_sequnlock_excl(&mount_lock);
+	}
+	hlist_add_head(&child->mnt_hash, list);
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -268,7 +280,11 @@ static int propagate_one(struct mount *m)
  * @tree_list : list of heads of trees to be attached.
  */
 int propagate_mnt(struct mount *dest_mnt, struct mountpoint *dest_mp,
+<<<<<<< HEAD
 		    struct mount *source_mnt, struct list_head *tree_list)
+=======
+		    struct mount *source_mnt, struct hlist_head *tree_list)
+>>>>>>> v3.18
 {
 	struct mount *m, *n;
 	int ret = 0;
@@ -305,13 +321,22 @@ int propagate_mnt(struct mount *dest_mnt, struct mountpoint *dest_mp,
 		} while (n != m);
 	}
 out:
+<<<<<<< HEAD
 	br_write_lock(&vfsmount_lock);
 	list_for_each_entry(n, tree_list, mnt_hash) {
+=======
+	read_seqlock_excl(&mount_lock);
+	hlist_for_each_entry(n, tree_list, mnt_hash) {
+>>>>>>> v3.18
 		m = n->mnt_parent;
 		if (m->mnt_master != dest_mnt->mnt_master)
 			CLEAR_MNT_MARK(m->mnt_master);
 	}
+<<<<<<< HEAD
 	br_write_unlock(&vfsmount_lock);
+=======
+	read_sequnlock_excl(&mount_lock);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -320,8 +345,12 @@ out:
  */
 static inline int do_refcount_check(struct mount *mnt, int count)
 {
+<<<<<<< HEAD
 	int mycount = mnt_get_count(mnt) - mnt->mnt_ghosts;
 	return (mycount > count);
+=======
+	return mnt_get_count(mnt) > count;
+>>>>>>> v3.18
 }
 
 /*
@@ -353,7 +382,11 @@ int propagate_mount_busy(struct mount *mnt, int refcnt)
 
 	for (m = propagation_next(parent, parent); m;
 	     		m = propagation_next(m, parent)) {
+<<<<<<< HEAD
 		child = __lookup_mnt(&m->mnt, mnt->mnt_mountpoint, 0);
+=======
+		child = __lookup_mnt_last(&m->mnt, mnt->mnt_mountpoint);
+>>>>>>> v3.18
 		if (child && list_empty(&child->mnt_mounts) &&
 		    (ret = do_refcount_check(child, 1)))
 			break;
@@ -375,14 +408,27 @@ static void __propagate_umount(struct mount *mnt)
 	for (m = propagation_next(parent, parent); m;
 			m = propagation_next(m, parent)) {
 
+<<<<<<< HEAD
 		struct mount *child = __lookup_mnt(&m->mnt,
 					mnt->mnt_mountpoint, 0);
+=======
+		struct mount *child = __lookup_mnt_last(&m->mnt,
+						mnt->mnt_mountpoint);
+>>>>>>> v3.18
 		/*
 		 * umount the child only if the child has no
 		 * other children
 		 */
+<<<<<<< HEAD
 		if (child && list_empty(&child->mnt_mounts))
 			list_move_tail(&child->mnt_hash, &mnt->mnt_hash);
+=======
+		if (child && list_empty(&child->mnt_mounts)) {
+			list_del_init(&child->mnt_child);
+			hlist_del_init_rcu(&child->mnt_hash);
+			hlist_add_before_rcu(&child->mnt_hash, &mnt->mnt_hash);
+		}
+>>>>>>> v3.18
 	}
 }
 
@@ -393,6 +439,7 @@ static void __propagate_umount(struct mount *mnt)
  *
  * vfsmount lock must be held for write
  */
+<<<<<<< HEAD
 int propagate_umount(struct list_head *list)
 {
 	struct mount *mnt;
@@ -435,3 +482,13 @@ void propagate_remount(struct mount *mnt)
 		}
 	}
 }
+=======
+int propagate_umount(struct hlist_head *list)
+{
+	struct mount *mnt;
+
+	hlist_for_each_entry(mnt, list, mnt_hash)
+		__propagate_umount(mnt);
+	return 0;
+}
+>>>>>>> v3.18

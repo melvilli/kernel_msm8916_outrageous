@@ -295,6 +295,11 @@ extern void __iounmap(void __iomem *addr);
 #define iounmap(addr)				\
 	__iounmap(addr)
 
+<<<<<<< HEAD
+=======
+#define ioremap_wc ioremap_nocache
+
+>>>>>>> v3.18
 #define cached(addr) P1SEGADDR(addr)
 #define uncached(addr) P2SEGADDR(addr)
 

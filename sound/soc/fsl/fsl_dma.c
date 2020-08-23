@@ -21,6 +21,11 @@
 #include <linux/interrupt.h>
 #include <linux/delay.h>
 #include <linux/gfp.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 #include <linux/of_platform.h>
 #include <linux/list.h>
 #include <linux/slab.h>
@@ -53,10 +58,13 @@
 			    SNDRV_PCM_FMTBIT_S32_BE     | \
 			    SNDRV_PCM_FMTBIT_U32_LE     | \
 			    SNDRV_PCM_FMTBIT_U32_BE)
+<<<<<<< HEAD
 
 #define FSLDMA_PCM_RATES (SNDRV_PCM_RATE_5512 | SNDRV_PCM_RATE_8000_192000 | \
 			  SNDRV_PCM_RATE_CONTINUOUS)
 
+=======
+>>>>>>> v3.18
 struct dma_object {
 	struct snd_soc_platform_driver dai;
 	dma_addr_t ssi_stx_phys;
@@ -138,9 +146,12 @@ static const struct snd_pcm_hardware fsl_dma_hardware = {
 				  SNDRV_PCM_INFO_JOINT_DUPLEX |
 				  SNDRV_PCM_INFO_PAUSE,
 	.formats		= FSLDMA_PCM_FORMATS,
+<<<<<<< HEAD
 	.rates  		= FSLDMA_PCM_RATES,
 	.rate_min       	= 5512,
 	.rate_max       	= 192000,
+=======
+>>>>>>> v3.18
 	.period_bytes_min       = 512,  	/* A reasonable limit */
 	.period_bytes_max       = (u32) -1,
 	.periods_min    	= NUM_DMA_LINKS,
@@ -298,6 +309,7 @@ static int fsl_dma_new(struct snd_soc_pcm_runtime *rtd)
 {
 	struct snd_card *card = rtd->card->snd_card;
 	struct snd_pcm *pcm = rtd->pcm;
+<<<<<<< HEAD
 	static u64 fsl_dma_dmamask = DMA_BIT_MASK(36);
 	int ret;
 
@@ -306,6 +318,13 @@ static int fsl_dma_new(struct snd_soc_pcm_runtime *rtd)
 
 	if (!card->dev->coherent_dma_mask)
 		card->dev->coherent_dma_mask = fsl_dma_dmamask;
+=======
+	int ret;
+
+	ret = dma_coerce_mask_and_coherent(card->dev, DMA_BIT_MASK(36));
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 
 	/* Some codecs have separate DAIs for playback and capture, so we
 	 * should allocate a DMA buffer only for the streams that are valid.
@@ -853,7 +872,11 @@ static void fsl_dma_free_dma_buffers(struct snd_pcm *pcm)
 }
 
 /**
+<<<<<<< HEAD
  * find_ssi_node -- returns the SSI node that points to his DMA channel node
+=======
+ * find_ssi_node -- returns the SSI node that points to its DMA channel node
+>>>>>>> v3.18
  *
  * Although this DMA driver attempts to operate independently of the other
  * devices, it still needs to determine some information about the SSI device
@@ -931,8 +954,13 @@ static int fsl_soc_dma_probe(struct platform_device *pdev)
 	dma->dai.pcm_free = fsl_dma_free_dma_buffers;
 
 	/* Store the SSI-specific information that we need */
+<<<<<<< HEAD
 	dma->ssi_stx_phys = res.start + offsetof(struct ccsr_ssi, stx0);
 	dma->ssi_srx_phys = res.start + offsetof(struct ccsr_ssi, srx0);
+=======
+	dma->ssi_stx_phys = res.start + CCSR_SSI_STX0;
+	dma->ssi_srx_phys = res.start + CCSR_SSI_SRX0;
+>>>>>>> v3.18
 
 	iprop = of_get_property(ssi_np, "fsl,fifo-depth", NULL);
 	if (iprop)

@@ -132,6 +132,25 @@
 #define F_GETOWNER_UIDS	17
 #endif
 
+<<<<<<< HEAD
+=======
+/*
+ * Open File Description Locks
+ *
+ * Usually record locks held by a process are released on *any* close and are
+ * not inherited across a fork().
+ *
+ * These cmd values will set locks that conflict with process-associated
+ * record  locks, but are "owned" by the open file description, not the
+ * process. This means that they are inherited across fork() like BSD (flock)
+ * locks, and they are only released automatically when the last reference to
+ * the the open file against which they were acquired is put.
+ */
+#define F_OFD_GETLK	36
+#define F_OFD_SETLK	37
+#define F_OFD_SETLKW	38
+
+>>>>>>> v3.18
 #define F_OWNER_TID	0
 #define F_OWNER_PID	1
 #define F_OWNER_PGRP	2
@@ -186,8 +205,11 @@ struct flock {
 };
 #endif
 
+<<<<<<< HEAD
 #ifndef CONFIG_64BIT
 
+=======
+>>>>>>> v3.18
 #ifndef HAVE_ARCH_STRUCT_FLOCK64
 #ifndef __ARCH_FLOCK64_PAD
 #define __ARCH_FLOCK64_PAD
@@ -202,6 +224,9 @@ struct flock64 {
 	__ARCH_FLOCK64_PAD
 };
 #endif
+<<<<<<< HEAD
 #endif /* !CONFIG_64BIT */
+=======
+>>>>>>> v3.18
 
 #endif /* _ASM_GENERIC_FCNTL_H */

@@ -9,7 +9,11 @@
  */
 
 /dts-v1/;
+<<<<<<< HEAD
 /include/ "sh7372.dtsi"
+=======
+#include "sh7372.dtsi"
+>>>>>>> v3.18
 
 / {
 	model = "Mackerel (AP4 EVM 2nd)";

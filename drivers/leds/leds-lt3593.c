@@ -17,7 +17,10 @@
  */
 
 #include <linux/kernel.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <linux/leds.h>
 #include <linux/workqueue.h>
@@ -135,7 +138,11 @@ static void delete_lt3593_led(struct lt3593_led_data *led)
 
 static int lt3593_led_probe(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct gpio_led_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct gpio_led_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	struct lt3593_led_data *leds_data;
 	int i, ret = 0;
 
@@ -169,7 +176,11 @@ err:
 static int lt3593_led_remove(struct platform_device *pdev)
 {
 	int i;
+<<<<<<< HEAD
 	struct gpio_led_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct gpio_led_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	struct lt3593_led_data *leds_data;
 
 	leds_data = platform_get_drvdata(pdev);

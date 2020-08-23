@@ -27,6 +27,12 @@ void prepare_ftrace_return(unsigned long *parent, unsigned long self_addr)
 	unsigned long return_hooker = (unsigned long)
 				&return_to_handler;
 
+<<<<<<< HEAD
+=======
+	if (unlikely(ftrace_graph_is_dead()))
+		return;
+
+>>>>>>> v3.18
 	if (unlikely(atomic_read(&current->tracing_graph_pause)))
 		return;
 
@@ -171,11 +177,16 @@ int ftrace_make_call(struct dyn_ftrace *rec, unsigned long addr)
 	return ret;
 }
 
+<<<<<<< HEAD
 int __init ftrace_dyn_arch_init(void *data)
 {
 	/* The return code is retured via data */
 	*(unsigned long *)data = 0;
 
+=======
+int __init ftrace_dyn_arch_init(void)
+{
+>>>>>>> v3.18
 	return 0;
 }
 

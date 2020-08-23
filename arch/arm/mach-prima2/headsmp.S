@@ -9,8 +9,11 @@
 #include <linux/linkage.h>
 #include <linux/init.h>
 
+<<<<<<< HEAD
 	__CPUINIT
 
+=======
+>>>>>>> v3.18
 /*
  * SIRFSOC specific entry point for secondary CPUs.  This provides
  * a "holding pen" into which all secondary cores are held until we're

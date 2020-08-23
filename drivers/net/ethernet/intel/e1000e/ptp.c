@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*******************************************************************************
 
   Intel PRO/1000 Linux driver
@@ -25,6 +26,28 @@
   Intel Corporation, 5200 N.E. Elam Young Parkway, Hillsboro, OR 97124-6497
 
 *******************************************************************************/
+=======
+/* Intel PRO/1000 Linux driver
+ * Copyright(c) 1999 - 2014 Intel Corporation.
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms and conditions of the GNU General Public License,
+ * version 2, as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ * more details.
+ *
+ * The full GNU General Public License is included in this distribution in
+ * the file called "COPYING".
+ *
+ * Contact Information:
+ * Linux NICS <linux.nics@intel.com>
+ * e1000-devel Mailing List <e1000-devel@lists.sourceforge.net>
+ * Intel Corporation, 5200 N.E. Elam Young Parkway, Hillsboro, OR 97124-6497
+ */
+>>>>>>> v3.18
 
 /* PTP 1588 Hardware Clock (PHC)
  * Derived from PTP Hardware Clock driver for Intel 82576 and 82580 (igb)
@@ -47,6 +70,10 @@ static int e1000e_phc_adjfreq(struct ptp_clock_info *ptp, s32 delta)
 						     ptp_clock_info);
 	struct e1000_hw *hw = &adapter->hw;
 	bool neg_adj = false;
+<<<<<<< HEAD
+=======
+	unsigned long flags;
+>>>>>>> v3.18
 	u64 adjustment;
 	u32 timinca, incvalue;
 	s32 ret_val;
@@ -64,6 +91,11 @@ static int e1000e_phc_adjfreq(struct ptp_clock_info *ptp, s32 delta)
 	if (ret_val)
 		return ret_val;
 
+<<<<<<< HEAD
+=======
+	spin_lock_irqsave(&adapter->systim_lock, flags);
+
+>>>>>>> v3.18
 	incvalue = timinca & E1000_TIMINCA_INCVALUE_MASK;
 
 	adjustment = incvalue;
@@ -77,6 +109,11 @@ static int e1000e_phc_adjfreq(struct ptp_clock_info *ptp, s32 delta)
 
 	ew32(TIMINCA, timinca);
 
+<<<<<<< HEAD
+=======
+	spin_unlock_irqrestore(&adapter->systim_lock, flags);
+
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -191,6 +228,10 @@ static const struct ptp_clock_info e1000e_ptp_clock_info = {
 	.n_alarm	= 0,
 	.n_ext_ts	= 0,
 	.n_per_out	= 0,
+<<<<<<< HEAD
+=======
+	.n_pins		= 0,
+>>>>>>> v3.18
 	.pps		= 0,
 	.adjfreq	= e1000e_phc_adjfreq,
 	.adjtime	= e1000e_phc_adjtime,

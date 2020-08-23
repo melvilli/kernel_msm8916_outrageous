@@ -37,6 +37,10 @@
 #include <linux/i2c/pxa-i2c.h>
 #include <linux/usb/gpio_vbus.h>
 #include <linux/reboot.h>
+<<<<<<< HEAD
+=======
+#include <linux/memblock.h>
+>>>>>>> v3.18
 
 #include <asm/setup.h>
 #include <asm/mach-types.h>
@@ -960,6 +964,7 @@ static void __init tosa_init(void)
 	platform_add_devices(devices, ARRAY_SIZE(devices));
 }
 
+<<<<<<< HEAD
 static void __init fixup_tosa(struct tag *tags, char **cmdline,
 			      struct meminfo *mi)
 {
@@ -971,6 +976,15 @@ static void __init fixup_tosa(struct tag *tags, char **cmdline,
 
 MACHINE_START(TOSA, "SHARP Tosa")
 	.restart_mode	= 'g',
+=======
+static void __init fixup_tosa(struct tag *tags, char **cmdline)
+{
+	sharpsl_save_param();
+	memblock_add(0xa0000000, SZ_64M);
+}
+
+MACHINE_START(TOSA, "SHARP Tosa")
+>>>>>>> v3.18
 	.fixup          = fixup_tosa,
 	.map_io         = pxa25x_map_io,
 	.nr_irqs	= TOSA_NR_IRQS,

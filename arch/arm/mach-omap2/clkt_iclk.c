@@ -14,17 +14,26 @@
 #include <linux/clk-provider.h>
 #include <linux/io.h>
 
+<<<<<<< HEAD
 
 #include "clock.h"
 #include "clock2xxx.h"
 #include "cm2xxx_3xxx.h"
 #include "cm-regbits-24xx.h"
+=======
+#include "clock.h"
+
+/* Register offsets */
+#define CM_AUTOIDLE			0x30
+#define CM_ICLKEN			0x10
+>>>>>>> v3.18
 
 /* Private functions */
 
 /* XXX */
 void omap2_clkt_iclk_allow_idle(struct clk_hw_omap *clk)
 {
+<<<<<<< HEAD
 	u32 v, r;
 
 	r = ((__force u32)clk->enable_reg ^ (CM_AUTOIDLE ^ CM_ICLKEN));
@@ -32,11 +41,23 @@ void omap2_clkt_iclk_allow_idle(struct clk_hw_omap *clk)
 	v = __raw_readl((__force void __iomem *)r);
 	v |= (1 << clk->enable_bit);
 	__raw_writel(v, (__force void __iomem *)r);
+=======
+	u32 v;
+	void __iomem *r;
+
+	r = (__force void __iomem *)
+		((__force u32)clk->enable_reg ^ (CM_AUTOIDLE ^ CM_ICLKEN));
+
+	v = omap2_clk_readl(clk, r);
+	v |= (1 << clk->enable_bit);
+	omap2_clk_writel(v, clk, r);
+>>>>>>> v3.18
 }
 
 /* XXX */
 void omap2_clkt_iclk_deny_idle(struct clk_hw_omap *clk)
 {
+<<<<<<< HEAD
 	u32 v, r;
 
 	r = ((__force u32)clk->enable_reg ^ (CM_AUTOIDLE ^ CM_ICLKEN));
@@ -44,6 +65,17 @@ void omap2_clkt_iclk_deny_idle(struct clk_hw_omap *clk)
 	v = __raw_readl((__force void __iomem *)r);
 	v &= ~(1 << clk->enable_bit);
 	__raw_writel(v, (__force void __iomem *)r);
+=======
+	u32 v;
+	void __iomem *r;
+
+	r = (__force void __iomem *)
+		((__force u32)clk->enable_reg ^ (CM_AUTOIDLE ^ CM_ICLKEN));
+
+	v = omap2_clk_readl(clk, r);
+	v &= ~(1 << clk->enable_bit);
+	omap2_clk_writel(v, clk, r);
+>>>>>>> v3.18
 }
 
 /* Public data */

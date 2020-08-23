@@ -32,9 +32,13 @@
 #include <linux/slab.h>
 #include <linux/init.h>
 #include <linux/types.h>
+<<<<<<< HEAD
 #include <acpi/acpi.h>
 #include <acpi/acpi_bus.h>
 #include <acpi/acpi_drivers.h>
+=======
+#include <linux/acpi.h>
+>>>>>>> v3.18
 #include <linux/platform_device.h>
 
 #define GUID "C364AC71-36DB-495A-8494-B439D472A505"

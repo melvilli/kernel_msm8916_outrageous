@@ -323,13 +323,23 @@ static void snd_sb16_free(struct snd_card *card)
 #define is_isapnp_selected(dev)		0
 #endif
 
+<<<<<<< HEAD
 static int snd_sb16_card_new(int dev, struct snd_card **cardp)
+=======
+static int snd_sb16_card_new(struct device *devptr, int dev,
+			     struct snd_card **cardp)
+>>>>>>> v3.18
 {
 	struct snd_card *card;
 	int err;
 
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE,
 			      sizeof(struct snd_card_sb16), &card);
+=======
+	err = snd_card_new(devptr, index[dev], id[dev], THIS_MODULE,
+			   sizeof(struct snd_card_sb16), &card);
+>>>>>>> v3.18
 	if (err < 0)
 		return err;
 	card->private_free = snd_sb16_free;
@@ -493,7 +503,11 @@ static int snd_sb16_isa_probe1(int dev, struct device *pdev)
 	struct snd_card *card;
 	int err;
 
+<<<<<<< HEAD
 	err = snd_sb16_card_new(dev, &card);
+=======
+	err = snd_sb16_card_new(pdev, dev, &card);
+>>>>>>> v3.18
 	if (err < 0)
 		return err;
 
@@ -507,7 +521,10 @@ static int snd_sb16_isa_probe1(int dev, struct device *pdev)
 	awe_port[dev] = port[dev] + 0x400;
 #endif
 
+<<<<<<< HEAD
 	snd_card_set_dev(card, pdev);
+=======
+>>>>>>> v3.18
 	if ((err = snd_sb16_probe(card, dev)) < 0) {
 		snd_card_free(card);
 		return err;
@@ -566,7 +583,10 @@ static int snd_sb16_isa_probe(struct device *pdev, unsigned int dev)
 static int snd_sb16_isa_remove(struct device *pdev, unsigned int dev)
 {
 	snd_card_free(dev_get_drvdata(pdev));
+<<<<<<< HEAD
 	dev_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -614,10 +634,16 @@ static int snd_sb16_pnp_detect(struct pnp_card_link *pcard,
 	for ( ; dev < SNDRV_CARDS; dev++) {
 		if (!enable[dev] || !isapnp[dev])
 			continue;
+<<<<<<< HEAD
 		res = snd_sb16_card_new(dev, &card);
 		if (res < 0)
 			return res;
 		snd_card_set_dev(card, &pcard->card->dev);
+=======
+		res = snd_sb16_card_new(&pcard->card->dev, dev, &card);
+		if (res < 0)
+			return res;
+>>>>>>> v3.18
 		if ((res = snd_card_sb16_pnp(dev, card->private_data, pcard, pid)) < 0 ||
 		    (res = snd_sb16_probe(card, dev)) < 0) {
 			snd_card_free(card);

@@ -245,7 +245,11 @@ static irqreturn_t mpc52xx_lpbfifo_irq(int irq, void *dev_id)
 
 	if (dma && !write) {
 		spin_unlock_irqrestore(&lpbfifo.lock, flags);
+<<<<<<< HEAD
 		pr_err("bogus LPBFIFO IRQ (dma and not writting)\n");
+=======
+		pr_err("bogus LPBFIFO IRQ (dma and not writing)\n");
+>>>>>>> v3.18
 		return IRQ_HANDLED;
 	}
 
@@ -564,7 +568,11 @@ static int mpc52xx_lpbfifo_remove(struct platform_device *op)
 	return 0;
 }
 
+<<<<<<< HEAD
 static struct of_device_id mpc52xx_lpbfifo_match[] = {
+=======
+static const struct of_device_id mpc52xx_lpbfifo_match[] = {
+>>>>>>> v3.18
 	{ .compatible = "fsl,mpc5200-lpbfifo", },
 	{},
 };

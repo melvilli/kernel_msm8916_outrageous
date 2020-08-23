@@ -23,6 +23,12 @@
 #include <arch/mpipe_constants.h>
 
 
+<<<<<<< HEAD
+=======
+/** Number of mPIPE instances supported */
+#define HV_MPIPE_INSTANCE_MAX   (2)
+
+>>>>>>> v3.18
 /** Number of buffer stacks (32). */
 #define HV_MPIPE_NUM_BUFFER_STACKS \
   (MPIPE_MMIO_INIT_DAT_GX36_1__BUFFER_STACK_MASK_WIDTH)

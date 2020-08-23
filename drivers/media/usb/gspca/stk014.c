@@ -250,7 +250,12 @@ static int sd_start(struct gspca_dev *gspca_dev)
 	int ret, value;
 
 	/* create the JPEG header */
+<<<<<<< HEAD
 	jpeg_define(sd->jpeg_hdr, gspca_dev->height, gspca_dev->width,
+=======
+	jpeg_define(sd->jpeg_hdr, gspca_dev->pixfmt.height,
+			gspca_dev->pixfmt.width,
+>>>>>>> v3.18
 			0x22);		/* JPEG 411 */
 	jpeg_set_qual(sd->jpeg_hdr, QUALITY);
 
@@ -261,7 +266,11 @@ static int sd_start(struct gspca_dev *gspca_dev)
 	set_par(gspca_dev, 0x00000000);
 	set_par(gspca_dev, 0x8002e001);
 	set_par(gspca_dev, 0x14000000);
+<<<<<<< HEAD
 	if (gspca_dev->width > 320)
+=======
+	if (gspca_dev->pixfmt.width > 320)
+>>>>>>> v3.18
 		value = 0x8002e001;		/* 640x480 */
 	else
 		value = 0x4001f000;		/* 320x240 */

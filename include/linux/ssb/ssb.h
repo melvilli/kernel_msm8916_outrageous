@@ -33,6 +33,10 @@ struct ssb_sprom {
 	u8 et1phyaddr;		/* MII address for enet1 */
 	u8 et0mdcport;		/* MDIO for enet0 */
 	u8 et1mdcport;		/* MDIO for enet1 */
+<<<<<<< HEAD
+=======
+	u16 dev_id;		/* Device ID overriding e.g. PCI ID */
+>>>>>>> v3.18
 	u16 board_rev;		/* Board revision number from SPROM. */
 	u16 board_num;		/* Board number from SPROM. */
 	u16 board_type;		/* Board type from SPROM. */
@@ -486,6 +490,10 @@ struct ssb_bus {
 #endif /* EMBEDDED */
 #ifdef CONFIG_SSB_DRIVER_GPIO
 	struct gpio_chip gpio;
+<<<<<<< HEAD
+=======
+	struct irq_domain *irq_domain;
+>>>>>>> v3.18
 #endif /* DRIVER_GPIO */
 
 	/* Internal-only stuff follows. Do not touch. */

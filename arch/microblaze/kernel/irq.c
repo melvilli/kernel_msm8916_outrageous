@@ -17,10 +17,15 @@
 #include <linux/seq_file.h>
 #include <linux/kernel_stat.h>
 #include <linux/irq.h>
+<<<<<<< HEAD
 #include <linux/of_irq.h>
 #include <linux/export.h>
 
 #include <asm/prom.h>
+=======
+#include <linux/irqchip.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 
 static u32 concurrent_irq;
 
@@ -47,3 +52,12 @@ next_irq:
 	set_irq_regs(old_regs);
 	trace_hardirqs_on();
 }
+<<<<<<< HEAD
+=======
+
+void __init init_IRQ(void)
+{
+	/* process the entire interrupt tree in one go */
+	irqchip_init();
+}
+>>>>>>> v3.18

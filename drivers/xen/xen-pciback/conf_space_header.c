@@ -4,15 +4,23 @@
  * Author: Ryan Wilson <hap9@epoch.ncsc.mil>
  */
 
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/pci.h>
 #include "pciback.h"
 #include "conf_space.h"
 
+<<<<<<< HEAD
 struct pci_cmd_info {
 	u16 val;
 };
 
+=======
+>>>>>>> v3.18
 struct pci_bar_info {
 	u32 val;
 	u32 len_val;
@@ -22,6 +30,7 @@ struct pci_bar_info {
 #define is_enable_cmd(value) ((value)&(PCI_COMMAND_MEMORY|PCI_COMMAND_IO))
 #define is_master_cmd(value) ((value)&PCI_COMMAND_MASTER)
 
+<<<<<<< HEAD
 /* Bits guests are allowed to control in permissive mode. */
 #define PCI_COMMAND_GUEST (PCI_COMMAND_MASTER|PCI_COMMAND_SPECIAL| \
 			   PCI_COMMAND_INVALIDATE|PCI_COMMAND_VGA_PALETTE| \
@@ -51,6 +60,23 @@ static int command_read(struct pci_dev *dev, int offset, u16 *value, void *data)
 
 	*value &= PCI_COMMAND_GUEST;
 	*value |= cmd->val & ~PCI_COMMAND_GUEST;
+=======
+static int command_read(struct pci_dev *dev, int offset, u16 *value, void *data)
+{
+	int i;
+	int ret;
+
+	ret = xen_pcibk_read_config_word(dev, offset, value, data);
+	if (!pci_is_enabled(dev))
+		return ret;
+
+	for (i = 0; i < PCI_ROM_RESOURCE; i++) {
+		if (dev->resource[i].flags & IORESOURCE_IO)
+			*value |= PCI_COMMAND_IO;
+		if (dev->resource[i].flags & IORESOURCE_MEM)
+			*value |= PCI_COMMAND_MEMORY;
+	}
+>>>>>>> v3.18
 
 	return ret;
 }
@@ -59,8 +85,11 @@ static int command_write(struct pci_dev *dev, int offset, u16 value, void *data)
 {
 	struct xen_pcibk_dev_data *dev_data;
 	int err;
+<<<<<<< HEAD
 	u16 val;
 	struct pci_cmd_info *cmd = data;
+=======
+>>>>>>> v3.18
 
 	dev_data = pci_get_drvdata(dev);
 	if (!pci_is_enabled(dev) && is_enable_cmd(value)) {
@@ -95,14 +124,20 @@ static int command_write(struct pci_dev *dev, int offset, u16 value, void *data)
 			       pci_name(dev));
 		err = pci_set_mwi(dev);
 		if (err) {
+<<<<<<< HEAD
 			printk(KERN_WARNING
 			       DRV_NAME ": %s: cannot enable "
 			       "memory-write-invalidate (%d)\n",
 			       pci_name(dev), err);
+=======
+			pr_warn("%s: cannot enable memory-write-invalidate (%d)\n",
+				pci_name(dev), err);
+>>>>>>> v3.18
 			value &= ~PCI_COMMAND_INVALIDATE;
 		}
 	}
 
+<<<<<<< HEAD
 	cmd->val = value;
 
 	if (!xen_pcibk_permissive && (!dev_data || !dev_data->permissive))
@@ -116,6 +151,8 @@ static int command_write(struct pci_dev *dev, int offset, u16 value, void *data)
 	value &= PCI_COMMAND_GUEST;
 	value |= val & ~PCI_COMMAND_GUEST;
 
+=======
+>>>>>>> v3.18
 	return pci_write_config_word(dev, offset, value);
 }
 
@@ -124,7 +161,11 @@ static int rom_write(struct pci_dev *dev, int offset, u32 value, void *data)
 	struct pci_bar_info *bar = data;
 
 	if (unlikely(!bar)) {
+<<<<<<< HEAD
 		printk(KERN_WARNING DRV_NAME ": driver data not found for %s\n",
+=======
+		pr_warn(DRV_NAME ": driver data not found for %s\n",
+>>>>>>> v3.18
 		       pci_name(dev));
 		return XEN_PCI_ERR_op_failed;
 	}
@@ -158,7 +199,11 @@ static int bar_write(struct pci_dev *dev, int offset, u32 value, void *data)
 	struct pci_bar_info *bar = data;
 
 	if (unlikely(!bar)) {
+<<<<<<< HEAD
 		printk(KERN_WARNING DRV_NAME ": driver data not found for %s\n",
+=======
+		pr_warn(DRV_NAME ": driver data not found for %s\n",
+>>>>>>> v3.18
 		       pci_name(dev));
 		return XEN_PCI_ERR_op_failed;
 	}
@@ -186,7 +231,11 @@ static int bar_read(struct pci_dev *dev, int offset, u32 * value, void *data)
 	struct pci_bar_info *bar = data;
 
 	if (unlikely(!bar)) {
+<<<<<<< HEAD
 		printk(KERN_WARNING DRV_NAME ": driver data not found for %s\n",
+=======
+		pr_warn(DRV_NAME ": driver data not found for %s\n",
+>>>>>>> v3.18
 		       pci_name(dev));
 		return XEN_PCI_ERR_op_failed;
 	}
@@ -315,8 +364,11 @@ static const struct config_field header_common[] = {
 	{
 	 .offset    = PCI_COMMAND,
 	 .size      = 2,
+<<<<<<< HEAD
 	 .init      = command_init,
 	 .release   = bar_release,
+=======
+>>>>>>> v3.18
 	 .u.w.read  = command_read,
 	 .u.w.write = command_write,
 	},
@@ -410,7 +462,11 @@ int xen_pcibk_config_header_add_fields(struct pci_dev *dev)
 
 	default:
 		err = -EINVAL;
+<<<<<<< HEAD
 		printk(KERN_ERR DRV_NAME ": %s: Unsupported header type %d!\n",
+=======
+		pr_err("%s: Unsupported header type %d!\n",
+>>>>>>> v3.18
 		       pci_name(dev), dev->hdr_type);
 		break;
 	}

@@ -1,7 +1,11 @@
 /*
  * This file contains definitions for mwifiex USB interface driver.
  *
+<<<<<<< HEAD
  * Copyright (C) 2012, Marvell International Ltd.
+=======
+ * Copyright (C) 2012-2014, Marvell International Ltd.
+>>>>>>> v3.18
  *
  * This software file (the "File") is distributed by Marvell International
  * Ltd. under the terms of the GNU General Public License Version 2, June 1991
@@ -22,6 +26,7 @@
 
 #include <linux/usb.h>
 
+<<<<<<< HEAD
 #define USB8797_VID		0x1286
 #define USB8797_PID_1		0x2043
 #define USB8797_PID_2		0x2044
@@ -29,12 +34,28 @@
 #define USB8797_FW_DNLD		1
 #define USB8797_FW_READY	2
 #define USB8797_FW_MAX_RETRY	3
+=======
+#define USB8XXX_VID		0x1286
+
+#define USB8797_PID_1		0x2043
+#define USB8797_PID_2		0x2044
+#define USB8897_PID_1		0x2045
+#define USB8897_PID_2		0x2046
+
+#define USB8XXX_FW_DNLD		1
+#define USB8XXX_FW_READY	2
+#define USB8XXX_FW_MAX_RETRY	3
+>>>>>>> v3.18
 
 #define MWIFIEX_TX_DATA_URB	6
 #define MWIFIEX_RX_DATA_URB	6
 #define MWIFIEX_USB_TIMEOUT	100
 
 #define USB8797_DEFAULT_FW_NAME	"mrvl/usb8797_uapsta.bin"
+<<<<<<< HEAD
+=======
+#define USB8897_DEFAULT_FW_NAME	"mrvl/usb8897_uapsta.bin"
+>>>>>>> v3.18
 
 #define FW_DNLD_TX_BUF_SIZE	620
 #define FW_DNLD_RX_BUF_SIZE	2048

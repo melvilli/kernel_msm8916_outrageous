@@ -36,7 +36,11 @@ static int clk_prcmu_prepare(struct clk_hw *hw)
 	if (!ret)
 		clk->is_prepared = 1;
 
+<<<<<<< HEAD
 	return ret;;
+=======
+	return ret;
+>>>>>>> v3.18
 }
 
 static void clk_prcmu_unprepare(struct clk_hw *hw)

@@ -17,6 +17,7 @@
 void res_counter_init(struct res_counter *counter, struct res_counter *parent)
 {
 	spin_lock_init(&counter->lock);
+<<<<<<< HEAD
 	counter->limit = RESOURCE_MAX;
 	counter->soft_limit = RESOURCE_MAX;
 	counter->parent = parent;
@@ -24,6 +25,25 @@ void res_counter_init(struct res_counter *counter, struct res_counter *parent)
 
 int res_counter_charge_locked(struct res_counter *counter, unsigned long val,
 			      bool force)
+=======
+	counter->limit = RES_COUNTER_MAX;
+	counter->soft_limit = RES_COUNTER_MAX;
+	counter->parent = parent;
+}
+
+static u64 res_counter_uncharge_locked(struct res_counter *counter,
+				       unsigned long val)
+{
+	if (WARN_ON(counter->usage < val))
+		val = counter->usage;
+
+	counter->usage -= val;
+	return counter->usage;
+}
+
+static int res_counter_charge_locked(struct res_counter *counter,
+				     unsigned long val, bool force)
+>>>>>>> v3.18
 {
 	int ret = 0;
 
@@ -86,6 +106,7 @@ int res_counter_charge_nofail(struct res_counter *counter, unsigned long val,
 	return __res_counter_charge(counter, val, limit_fail_at, true);
 }
 
+<<<<<<< HEAD
 u64 res_counter_uncharge_locked(struct res_counter *counter, unsigned long val)
 {
 	if (WARN_ON(counter->usage < val))
@@ -95,6 +116,8 @@ u64 res_counter_uncharge_locked(struct res_counter *counter, unsigned long val)
 	return counter->usage;
 }
 
+=======
+>>>>>>> v3.18
 u64 res_counter_uncharge_until(struct res_counter *counter,
 			       struct res_counter *top,
 			       unsigned long val)
@@ -178,6 +201,7 @@ u64 res_counter_read_u64(struct res_counter *counter, int member)
 #endif
 
 int res_counter_memparse_write_strategy(const char *buf,
+<<<<<<< HEAD
 					unsigned long long *res)
 {
 	char *end;
@@ -196,5 +220,35 @@ int res_counter_memparse_write_strategy(const char *buf,
 		return -EINVAL;
 
 	*res = PAGE_ALIGN(*res);
+=======
+					unsigned long long *resp)
+{
+	char *end;
+	unsigned long long res;
+
+	/* return RES_COUNTER_MAX(unlimited) if "-1" is specified */
+	if (*buf == '-') {
+		int rc = kstrtoull(buf + 1, 10, &res);
+
+		if (rc)
+			return rc;
+		if (res != 1)
+			return -EINVAL;
+		*resp = RES_COUNTER_MAX;
+		return 0;
+	}
+
+	res = memparse(buf, &end);
+	if (*end != '\0')
+		return -EINVAL;
+
+	if (PAGE_ALIGN(res) >= res)
+		res = PAGE_ALIGN(res);
+	else
+		res = RES_COUNTER_MAX;
+
+	*resp = res;
+
+>>>>>>> v3.18
 	return 0;
 }

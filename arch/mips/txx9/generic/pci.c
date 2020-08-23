@@ -268,7 +268,11 @@ static int txx9_i8259_irq_setup(int irq)
 	return err;
 }
 
+<<<<<<< HEAD
 static void quirk_slc90e66_bridge(struct pci_dev *dev)
+=======
+static void __init_refok quirk_slc90e66_bridge(struct pci_dev *dev)
+>>>>>>> v3.18
 {
 	int irq;	/* PCI/ISA Bridge interrupt */
 	u8 reg_64;
@@ -331,7 +335,11 @@ static void quirk_slc90e66_ide(struct pci_dev *dev)
 	 * !!! DO NOT REMOVE THIS COMMENT IT IS REQUIRED BY SMSC !!!
 	 */
 	dat |= 0x01;
+<<<<<<< HEAD
 	pci_write_config_byte(dev, regs[i], dat);
+=======
+	pci_write_config_byte(dev, 0x5c, dat);
+>>>>>>> v3.18
 	pci_read_config_byte(dev, 0x5c, &dat);
 	printk(KERN_CONT " REG5C %02x", dat);
 	printk(KERN_CONT "\n");

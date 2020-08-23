@@ -104,7 +104,11 @@ static int spear_thermal_probe(struct platform_device *pdev)
 	struct thermal_zone_device *spear_thermal = NULL;
 	struct spear_thermal_dev *stdev;
 	struct device_node *np = pdev->dev.of_node;
+<<<<<<< HEAD
 	struct resource *stres = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+=======
+	struct resource *res;
+>>>>>>> v3.18
 	int ret = 0, val;
 
 	if (!np || !of_property_read_u32(np, "st,thermal-flags", &val)) {
@@ -112,6 +116,7 @@ static int spear_thermal_probe(struct platform_device *pdev)
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 	if (!stres) {
 		dev_err(&pdev->dev, "memory resource missing\n");
 		return -ENODEV;
@@ -130,6 +135,17 @@ static int spear_thermal_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "ioremap failed\n");
 		return -ENOMEM;
 	}
+=======
+	stdev = devm_kzalloc(&pdev->dev, sizeof(*stdev), GFP_KERNEL);
+	if (!stdev)
+		return -ENOMEM;
+
+	/* Enable thermal sensor */
+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+	stdev->thermal_base = devm_ioremap_resource(&pdev->dev, res);
+	if (IS_ERR(stdev->thermal_base))
+		return PTR_ERR(stdev->thermal_base);
+>>>>>>> v3.18
 
 	stdev->clk = devm_clk_get(&pdev->dev, NULL);
 	if (IS_ERR(stdev->clk)) {
@@ -174,7 +190,10 @@ static int spear_thermal_exit(struct platform_device *pdev)
 	struct spear_thermal_dev *stdev = spear_thermal->devdata;
 
 	thermal_zone_device_unregister(spear_thermal);
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 
 	/* Disable SPEAr Thermal Sensor */
 	actual_mask = readl_relaxed(stdev->thermal_base);
@@ -198,7 +217,11 @@ static struct platform_driver spear_thermal_driver = {
 		.name = "spear_thermal",
 		.owner = THIS_MODULE,
 		.pm = &spear_thermal_pm_ops,
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(spear_thermal_id_table),
+=======
+		.of_match_table = spear_thermal_id_table,
+>>>>>>> v3.18
 	},
 };
 

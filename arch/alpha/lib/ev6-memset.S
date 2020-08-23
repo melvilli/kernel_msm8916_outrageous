@@ -30,6 +30,7 @@
 	.set noat
 	.set noreorder
 .text
+<<<<<<< HEAD
 	.globl __memset
 	.globl __memsetw
 	.globl __constant_c_memset
@@ -38,6 +39,17 @@
 	.ent __memset
 .align 5
 __memset:
+=======
+	.globl memset
+	.globl __memset
+	.globl ___memset
+	.globl __memsetw
+	.globl __constant_c_memset
+
+	.ent ___memset
+.align 5
+___memset:
+>>>>>>> v3.18
 	.frame $30,0,$26,0
 	.prologue 0
 
@@ -227,7 +239,11 @@ end_b:
 	nop
 	nop
 	ret $31,($26),1		# L0 :
+<<<<<<< HEAD
 	.end __memset
+=======
+	.end ___memset
+>>>>>>> v3.18
 
 	/*
 	 * This is the original body of code, prior to replication and
@@ -594,4 +610,9 @@ end_w:
 
 	.end __memsetw
 
+<<<<<<< HEAD
 memset = __memset
+=======
+memset = ___memset
+__memset = ___memset
+>>>>>>> v3.18

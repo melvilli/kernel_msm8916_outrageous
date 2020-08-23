@@ -1,3 +1,7 @@
+<<<<<<< HEAD
 obj-y := prom.o sysctrl.o clk.o reset.o dma.o gptu.o
+=======
+obj-y := prom.o sysctrl.o clk.o reset.o dma.o gptu.o dcdc.o
+>>>>>>> v3.18
 
 obj-$(CONFIG_XRX200_PHY_FW) += xrx200_phy_fw.o

@@ -37,6 +37,7 @@ drop:
 	return NET_RX_DROP;
 }
 
+<<<<<<< HEAD
 int xfrm4_rcv_encap(struct sk_buff *skb, int nexthdr, __be32 spi,
 		    int encap_type)
 {
@@ -46,6 +47,8 @@ int xfrm4_rcv_encap(struct sk_buff *skb, int nexthdr, __be32 spi,
 }
 EXPORT_SYMBOL(xfrm4_rcv_encap);
 
+=======
+>>>>>>> v3.18
 int xfrm4_transport_finish(struct sk_buff *skb, int async)
 {
 	struct iphdr *iph = ip_hdr(skb);

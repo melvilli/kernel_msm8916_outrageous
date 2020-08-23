@@ -14,8 +14,15 @@
 
 #include <linux/slab.h>
 
+<<<<<<< HEAD
 #define __clk_get(clk)	({ 1; })
 #define __clk_put(clk)	do { } while (0)
+=======
+#ifndef CONFIG_COMMON_CLK
+#define __clk_get(clk)	({ 1; })
+#define __clk_put(clk)	do { } while (0)
+#endif
+>>>>>>> v3.18
 
 static inline struct clk_lookup_alloc *__clkdev_alloc(size_t size)
 {

@@ -12,7 +12,11 @@
 #include <uapi/asm/unistd.h>
 
 
+<<<<<<< HEAD
 #define __NR_syscalls		355
+=======
+#define __NR_syscalls		362
+>>>>>>> v3.18
 
 #define __NR__exit __NR_exit
 #define NR_syscalls	__NR_syscalls
@@ -29,7 +33,10 @@
 #define __ARCH_WANT_SYS_GETHOSTNAME
 #define __ARCH_WANT_SYS_IPC
 #define __ARCH_WANT_SYS_PAUSE
+<<<<<<< HEAD
 #define __ARCH_WANT_SYS_SGETMASK
+=======
+>>>>>>> v3.18
 #define __ARCH_WANT_SYS_SIGNAL
 #define __ARCH_WANT_SYS_TIME
 #define __ARCH_WANT_SYS_UTIME

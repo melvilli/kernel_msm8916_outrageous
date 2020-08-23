@@ -11,6 +11,11 @@
 
 #include <spaces.h>
 #include <linux/const.h>
+<<<<<<< HEAD
+=======
+#include <linux/kernel.h>
+#include <asm/mipsregs.h>
+>>>>>>> v3.18
 
 /*
  * PAGE_SHIFT determines the page size
@@ -33,6 +38,32 @@
 #define PAGE_SIZE	(_AC(1,UL) << PAGE_SHIFT)
 #define PAGE_MASK	(~((1 << PAGE_SHIFT) - 1))
 
+<<<<<<< HEAD
+=======
+/*
+ * This is used for calculating the real page sizes
+ * for FTLB or VTLB + FTLB configurations.
+ */
+static inline unsigned int page_size_ftlb(unsigned int mmuextdef)
+{
+	switch (mmuextdef) {
+	case MIPS_CONF4_MMUEXTDEF_FTLBSIZEEXT:
+		if (PAGE_SIZE == (1 << 30))
+			return 5;
+		if (PAGE_SIZE == (1llu << 32))
+			return 6;
+		if (PAGE_SIZE > (256 << 10))
+			return 7; /* reserved */
+			/* fall through */
+	case MIPS_CONF4_MMUEXTDEF_VTLBSIZEEXT:
+		return (PAGE_SHIFT - 10) / 2;
+	default:
+		panic("Invalid FTLB configuration with Conf4_mmuextdef=%d value\n",
+		      mmuextdef >> 14);
+	}
+}
+
+>>>>>>> v3.18
 #ifdef CONFIG_MIPS_HUGE_TLB_SUPPORT
 #define HPAGE_SHIFT	(PAGE_SHIFT + PAGE_SHIFT - 3)
 #define HPAGE_SIZE	(_AC(1,UL) << HPAGE_SHIFT)
@@ -165,7 +196,13 @@ typedef struct { unsigned long pgprot; } pgprot_t;
  * https://patchwork.linux-mips.org/patch/1541/
  */
 
+<<<<<<< HEAD
 #define __pa_symbol(x)	__pa(RELOC_HIDE((unsigned long)(x), 0))
+=======
+#ifndef __pa_symbol
+#define __pa_symbol(x)	__pa(RELOC_HIDE((unsigned long)(x), 0))
+#endif
+>>>>>>> v3.18
 
 #define pfn_to_kaddr(pfn)	__va((pfn) << PAGE_SHIFT)
 
@@ -196,7 +233,12 @@ static inline int pfn_valid(unsigned long pfn)
 
 #endif
 
+<<<<<<< HEAD
 #define virt_to_page(kaddr)	pfn_to_page(PFN_DOWN(virt_to_phys(kaddr)))
+=======
+#define virt_to_page(kaddr)	pfn_to_page(PFN_DOWN(virt_to_phys((void *)     \
+								  (kaddr))))
+>>>>>>> v3.18
 
 extern int __virt_addr_valid(const volatile void *kaddr);
 #define virt_addr_valid(kaddr)						\
@@ -205,10 +247,15 @@ extern int __virt_addr_valid(const volatile void *kaddr);
 #define VM_DATA_DEFAULT_FLAGS	(VM_READ | VM_WRITE | VM_EXEC | \
 				 VM_MAYREAD | VM_MAYWRITE | VM_MAYEXEC)
 
+<<<<<<< HEAD
 #define UNCAC_ADDR(addr)	((addr) - PAGE_OFFSET + UNCAC_BASE +	\
 								PHYS_OFFSET)
 #define CAC_ADDR(addr)		((addr) - UNCAC_BASE + PAGE_OFFSET -	\
 								PHYS_OFFSET)
+=======
+#define UNCAC_ADDR(addr)	((addr) - PAGE_OFFSET + UNCAC_BASE)
+#define CAC_ADDR(addr)		((addr) - UNCAC_BASE + PAGE_OFFSET)
+>>>>>>> v3.18
 
 #include <asm-generic/memory_model.h>
 #include <asm-generic/getorder.h>

@@ -47,9 +47,12 @@
 #define ARCH_LOW_ADDRESS_LIMIT	PHYS_MASK
 #endif /* __KERNEL__ */
 
+<<<<<<< HEAD
 extern unsigned int boot_reason;
 extern unsigned int cold_boot;
 
+=======
+>>>>>>> v3.18
 struct debug_info {
 	/* Have we suspended stepping by a debugger? */
 	int			suspended_step;
@@ -132,6 +135,10 @@ extern void release_thread(struct task_struct *);
 unsigned long get_wchan(struct task_struct *p);
 
 #define cpu_relax()			barrier()
+<<<<<<< HEAD
+=======
+#define cpu_relax_lowlatency()                cpu_relax()
+>>>>>>> v3.18
 
 /* Thread switching */
 extern struct task_struct *cpu_switch_to(struct task_struct *prev,
@@ -140,6 +147,7 @@ extern struct task_struct *cpu_switch_to(struct task_struct *prev,
 #define task_pt_regs(p) \
 	((struct pt_regs *)(THREAD_START_SP + task_stack_page(p)) - 1)
 
+<<<<<<< HEAD
 #define KSTK_EIP(tsk)	task_pt_regs(tsk)->pc
 #ifndef CONFIG_COMPAT
 #define KSTK_ESP(tsk)	task_pt_regs(tsk)->sp
@@ -154,6 +162,10 @@ extern struct task_struct *cpu_switch_to(struct task_struct *prev,
 	ptr;						\
 })
 #endif
+=======
+#define KSTK_EIP(tsk)	((unsigned long)task_pt_regs(tsk)->pc)
+#define KSTK_ESP(tsk)	user_stack_pointer(task_pt_regs(tsk))
+>>>>>>> v3.18
 
 /*
  * Prefetching support

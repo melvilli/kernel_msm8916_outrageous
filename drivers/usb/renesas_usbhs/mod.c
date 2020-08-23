@@ -213,7 +213,14 @@ static int usbhs_status_get_each_irq(struct usbhs_priv *priv,
 {
 	struct usbhs_mod *mod = usbhs_mod_get_current(priv);
 	u16 intenb0, intenb1;
+<<<<<<< HEAD
 
+=======
+	unsigned long flags;
+
+	/********************  spin lock ********************/
+	usbhs_lock(priv, flags);
+>>>>>>> v3.18
 	state->intsts0 = usbhs_read(priv, INTSTS0);
 	state->intsts1 = usbhs_read(priv, INTSTS1);
 
@@ -229,6 +236,11 @@ static int usbhs_status_get_each_irq(struct usbhs_priv *priv,
 		state->bempsts &= mod->irq_bempsts;
 		state->brdysts &= mod->irq_brdysts;
 	}
+<<<<<<< HEAD
+=======
+	usbhs_unlock(priv, flags);
+	/********************  spin unlock ******************/
+>>>>>>> v3.18
 
 	/*
 	 * Check whether the irq enable registers and the irq status are set
@@ -272,6 +284,7 @@ static irqreturn_t usbhs_interrupt(int irq, void *data)
 	usbhs_write(priv, INTSTS0, ~irq_state.intsts0 & INTSTS0_MAGIC);
 	usbhs_write(priv, INTSTS1, ~irq_state.intsts1 & INTSTS1_MAGIC);
 
+<<<<<<< HEAD
 	/*
 	 * The driver should not clear the xxxSTS after the line of
 	 * "call irq callback functions" because each "if" statement is
@@ -282,6 +295,11 @@ static irqreturn_t usbhs_interrupt(int irq, void *data)
 	usbhs_write(priv, NRDYSTS, ~irq_state.nrdysts);
 	if (irq_state.intsts0 & BEMP)
 		usbhs_write(priv, BEMPSTS, ~irq_state.bempsts);
+=======
+	usbhs_write(priv, BRDYSTS, ~irq_state.brdysts);
+	usbhs_write(priv, NRDYSTS, ~irq_state.nrdysts);
+	usbhs_write(priv, BEMPSTS, ~irq_state.bempsts);
+>>>>>>> v3.18
 
 	/*
 	 * call irq callback functions

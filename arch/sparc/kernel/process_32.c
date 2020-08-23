@@ -10,6 +10,10 @@
 
 #include <stdarg.h>
 
+<<<<<<< HEAD
+=======
+#include <linux/elfcore.h>
+>>>>>>> v3.18
 #include <linux/errno.h>
 #include <linux/module.h>
 #include <linux/sched.h>
@@ -22,8 +26,13 @@
 #include <linux/reboot.h>
 #include <linux/delay.h>
 #include <linux/pm.h>
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/slab.h>
+=======
+#include <linux/slab.h>
+#include <linux/cpu.h>
+>>>>>>> v3.18
 
 #include <asm/auxio.h>
 #include <asm/oplib.h>
@@ -39,6 +48,11 @@
 #include <asm/unistd.h>
 #include <asm/setup.h>
 
+<<<<<<< HEAD
+=======
+#include "kernel.h"
+
+>>>>>>> v3.18
 /* 
  * Power management idle function 
  * Set in pm platform drivers (apc.c and pmc.c)
@@ -103,8 +117,17 @@ void machine_restart(char * cmd)
 void machine_power_off(void)
 {
 	if (auxio_power_register &&
+<<<<<<< HEAD
 	    (strcmp(of_console_device->type, "serial") || scons_pwroff))
 		*auxio_power_register |= AUXIO_POWER_OFF;
+=======
+	    (strcmp(of_console_device->type, "serial") || scons_pwroff)) {
+		u8 power_register = sbus_readb(auxio_power_register);
+		power_register |= AUXIO_POWER_OFF;
+		sbus_writeb(power_register, auxio_power_register);
+	}
+
+>>>>>>> v3.18
 	machine_halt();
 }
 

@@ -5,7 +5,11 @@
  ******************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -240,7 +244,10 @@ acpi_ds_is_result_used(union acpi_parse_object * op,
 
 		case AML_IF_OP:
 		case AML_WHILE_OP:
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 			/*
 			 * If we are executing the predicate AND this is the predicate op,
 			 * we will use the return value
@@ -254,7 +261,13 @@ acpi_ds_is_result_used(union acpi_parse_object * op,
 			break;
 
 		default:
+<<<<<<< HEAD
 			/* Ignore other control opcodes */
+=======
+
+			/* Ignore other control opcodes */
+
+>>>>>>> v3.18
 			break;
 		}
 
@@ -263,7 +276,10 @@ acpi_ds_is_result_used(union acpi_parse_object * op,
 		goto result_not_used;
 
 	case AML_CLASS_CREATE:
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 		/*
 		 * These opcodes allow term_arg(s) as operands and therefore
 		 * the operands can be method calls. The result is used.
@@ -292,7 +308,10 @@ acpi_ds_is_result_used(union acpi_parse_object * op,
 		goto result_not_used;
 
 	default:
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 		/*
 		 * In all other cases. the parent will actually use the return
 		 * object, so keep it.
@@ -300,7 +319,11 @@ acpi_ds_is_result_used(union acpi_parse_object * op,
 		goto result_used;
 	}
 
+<<<<<<< HEAD
       result_used:
+=======
+result_used:
+>>>>>>> v3.18
 	ACPI_DEBUG_PRINT((ACPI_DB_DISPATCH,
 			  "Result of [%s] used by Parent [%s] Op=%p\n",
 			  acpi_ps_get_opcode_name(op->common.aml_opcode),
@@ -309,7 +332,11 @@ acpi_ds_is_result_used(union acpi_parse_object * op,
 
 	return_UINT8(TRUE);
 
+<<<<<<< HEAD
       result_not_used:
+=======
+result_not_used:
+>>>>>>> v3.18
 	ACPI_DEBUG_PRINT((ACPI_DB_DISPATCH,
 			  "Result of [%s] not used by Parent [%s] Op=%p\n",
 			  acpi_ps_get_opcode_name(op->common.aml_opcode),
@@ -728,6 +755,7 @@ acpi_ds_create_operands(struct acpi_walk_state *walk_state,
 		index++;
 	}
 
+<<<<<<< HEAD
 	index--;
 
 	/* It is the appropriate order to get objects from the Result stack */
@@ -738,22 +766,45 @@ acpi_ds_create_operands(struct acpi_walk_state *walk_state,
 		/* Force the filling of the operand stack in inverse order */
 
 		walk_state->operand_index = (u8) index;
+=======
+	ACPI_DEBUG_PRINT((ACPI_DB_DISPATCH,
+			  "NumOperands %d, ArgCount %d, Index %d\n",
+			  walk_state->num_operands, arg_count, index));
+
+	/* Create the interpreter arguments, in reverse order */
+
+	index--;
+	for (i = 0; i < arg_count; i++) {
+		arg = arguments[index];
+		walk_state->operand_index = (u8)index;
+>>>>>>> v3.18
 
 		status = acpi_ds_create_operand(walk_state, arg, index);
 		if (ACPI_FAILURE(status)) {
 			goto cleanup;
 		}
 
+<<<<<<< HEAD
 		index--;
 
 		ACPI_DEBUG_PRINT((ACPI_DB_DISPATCH,
 				  "Arg #%u (%p) done, Arg1=%p\n", index, arg,
 				  first_arg));
+=======
+		ACPI_DEBUG_PRINT((ACPI_DB_DISPATCH,
+				  "Created Arg #%u (%p) %u args total\n",
+				  index, arg, arg_count));
+		index--;
+>>>>>>> v3.18
 	}
 
 	return_ACPI_STATUS(status);
 
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 	/*
 	 * We must undo everything done above; meaning that we must
 	 * pop everything off of the operand stack and delete those
@@ -852,7 +903,11 @@ acpi_status acpi_ds_evaluate_name_path(struct acpi_walk_state *walk_state)
 		goto exit;
 	}
 
+<<<<<<< HEAD
       push_result:
+=======
+push_result:
+>>>>>>> v3.18
 
 	walk_state->result_obj = new_obj_desc;
 
@@ -864,7 +919,11 @@ acpi_status acpi_ds_evaluate_name_path(struct acpi_walk_state *walk_state)
 		op->common.flags |= ACPI_PARSEOP_IN_STACK;
 	}
 
+<<<<<<< HEAD
       exit:
+=======
+exit:
+>>>>>>> v3.18
 
 	return_ACPI_STATUS(status);
 }

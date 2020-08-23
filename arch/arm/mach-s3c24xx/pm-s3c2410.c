@@ -33,7 +33,13 @@
 
 #include <mach/hardware.h>
 #include <mach/regs-gpio.h>
+<<<<<<< HEAD
 
+=======
+#include <mach/gpio-samsung.h>
+
+#include <plat/gpio-cfg.h>
+>>>>>>> v3.18
 #include <plat/cpu.h>
 #include <plat/pm.h>
 

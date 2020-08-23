@@ -3,9 +3,16 @@
 
 #include <uapi/asm/setup.h>
 
+<<<<<<< HEAD
 
 #define COMMAND_LINE_SIZE 2048
 
+=======
+#define COMMAND_LINE_SIZE 2048
+
+#include <linux/linkage.h>
+
+>>>>>>> v3.18
 #ifdef __i386__
 
 #include <linux/pfn.h>
@@ -27,6 +34,11 @@
 #include <asm/bootparam.h>
 #include <asm/x86_init.h>
 
+<<<<<<< HEAD
+=======
+extern u64 relocated_ramdisk;
+
+>>>>>>> v3.18
 /* Interrupt control for vSMPowered x86_64 systems */
 #ifdef CONFIG_X86_64
 void vsmp_init(void);
@@ -36,12 +48,15 @@ static inline void vsmp_init(void) { }
 
 void setup_bios_corruption_check(void);
 
+<<<<<<< HEAD
 #ifdef CONFIG_X86_VISWS
 extern void visws_early_detect(void);
 #else
 static inline void visws_early_detect(void) { }
 #endif
 
+=======
+>>>>>>> v3.18
 extern unsigned long saved_video_mode;
 
 extern void reserve_standard_io_resources(void);
@@ -49,9 +64,15 @@ extern void i386_reserve_resources(void);
 extern void setup_default_timer_irq(void);
 
 #ifdef CONFIG_X86_INTEL_MID
+<<<<<<< HEAD
 extern void x86_mrst_early_setup(void);
 #else
 static inline void x86_mrst_early_setup(void) { }
+=======
+extern void x86_intel_mid_early_setup(void);
+#else
+static inline void x86_intel_mid_early_setup(void) { }
+>>>>>>> v3.18
 #endif
 
 #ifdef CONFIG_X86_INTEL_CE
@@ -110,11 +131,19 @@ void *extend_brk(size_t size, size_t align);
 extern void probe_roms(void);
 #ifdef __i386__
 
+<<<<<<< HEAD
 void __init i386_start_kernel(void);
 
 #else
 void __init x86_64_start_kernel(char *real_mode);
 void __init x86_64_start_reservations(char *real_mode_data);
+=======
+asmlinkage void __init i386_start_kernel(void);
+
+#else
+asmlinkage void __init x86_64_start_kernel(char *real_mode);
+asmlinkage void __init x86_64_start_reservations(char *real_mode_data);
+>>>>>>> v3.18
 
 #endif /* __i386__ */
 #endif /* _SETUP */

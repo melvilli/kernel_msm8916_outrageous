@@ -15,11 +15,18 @@
 #include <linux/ata_platform.h>
 #include <linux/clk-provider.h>
 #include <linux/ethtool.h>
+<<<<<<< HEAD
+=======
+#include <asm/hardware/cache-feroceon-l2.h>
+>>>>>>> v3.18
 #include <asm/mach/map.h>
 #include <asm/mach/time.h>
 #include <mach/mv78xx0.h>
 #include <mach/bridge-regs.h>
+<<<<<<< HEAD
 #include <plat/cache-feroceon-l2.h>
+=======
+>>>>>>> v3.18
 #include <linux/platform_data/usb-ehci-orion.h>
 #include <linux/platform_data/mtd-orion_nand.h>
 #include <plat/time.h>
@@ -337,11 +344,19 @@ void __init mv78xx0_init_early(void)
 	if (mv78xx0_core_index() == 0)
 		mvebu_mbus_init("marvell,mv78xx0-mbus",
 				BRIDGE_WINS_CPU0_BASE, BRIDGE_WINS_SZ,
+<<<<<<< HEAD
 				DDR_WINDOW_CPU0_BASE, DDR_WINDOW_CPU_SZ, 0);
 	else
 		mvebu_mbus_init("marvell,mv78xx0-mbus",
 				BRIDGE_WINS_CPU1_BASE, BRIDGE_WINS_SZ,
 				DDR_WINDOW_CPU1_BASE, DDR_WINDOW_CPU_SZ, 0);
+=======
+				DDR_WINDOW_CPU0_BASE, DDR_WINDOW_CPU_SZ);
+	else
+		mvebu_mbus_init("marvell,mv78xx0-mbus",
+				BRIDGE_WINS_CPU1_BASE, BRIDGE_WINS_SZ,
+				DDR_WINDOW_CPU1_BASE, DDR_WINDOW_CPU_SZ);
+>>>>>>> v3.18
 }
 
 void __init_refok mv78xx0_timer_init(void)

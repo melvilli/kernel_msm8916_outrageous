@@ -38,7 +38,11 @@ maps are more efficient:
 
 	void io_mapping_unmap_atomic(void *vaddr)
 
+<<<<<<< HEAD
 		'vaddr' must be the the value returned by the last
+=======
+		'vaddr' must be the value returned by the last
+>>>>>>> v3.18
 		io_mapping_map_atomic_wc call. This unmaps the specified
 		page and allows the task to sleep once again.
 

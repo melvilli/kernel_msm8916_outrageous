@@ -5,6 +5,10 @@
  *
  * Copyright (C) 1995 - 2000 by Ralf Baechle
  */
+<<<<<<< HEAD
+=======
+#include <linux/context_tracking.h>
+>>>>>>> v3.18
 #include <linux/signal.h>
 #include <linux/sched.h>
 #include <linux/interrupt.h>
@@ -32,8 +36,13 @@
  * and the problem, and then passes it off to one of the appropriate
  * routines.
  */
+<<<<<<< HEAD
 asmlinkage void __kprobes do_page_fault(struct pt_regs *regs, unsigned long write,
 			      unsigned long address)
+=======
+static void __kprobes __do_page_fault(struct pt_regs *regs, unsigned long write,
+	unsigned long address)
+>>>>>>> v3.18
 {
 	struct vm_area_struct * vma = NULL;
 	struct task_struct *tsk = current;
@@ -157,8 +166,11 @@ good_area:
 	if (unlikely(fault & VM_FAULT_ERROR)) {
 		if (fault & VM_FAULT_OOM)
 			goto out_of_memory;
+<<<<<<< HEAD
 		else if (fault & VM_FAULT_SIGSEGV)
 			goto bad_area;
+=======
+>>>>>>> v3.18
 		else if (fault & VM_FAULT_SIGBUS)
 			goto do_sigbus;
 		BUG();
@@ -318,3 +330,16 @@ vmalloc_fault:
 	}
 #endif
 }
+<<<<<<< HEAD
+=======
+
+asmlinkage void __kprobes do_page_fault(struct pt_regs *regs,
+	unsigned long write, unsigned long address)
+{
+	enum ctx_state prev_state;
+
+	prev_state = exception_enter();
+	__do_page_fault(regs, write, address);
+	exception_exit(prev_state);
+}
+>>>>>>> v3.18

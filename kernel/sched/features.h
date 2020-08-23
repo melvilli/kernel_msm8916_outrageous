@@ -37,18 +37,30 @@ SCHED_FEAT(CACHE_HOT_BUDDY, true)
 SCHED_FEAT(WAKEUP_PREEMPTION, true)
 
 /*
+<<<<<<< HEAD
  * Use arch dependent cpu power functions
  */
 SCHED_FEAT(ARCH_POWER, false)
+=======
+ * Use arch dependent cpu capacity functions
+ */
+SCHED_FEAT(ARCH_CAPACITY, true)
+>>>>>>> v3.18
 
 SCHED_FEAT(HRTICK, false)
 SCHED_FEAT(DOUBLE_TICK, false)
 SCHED_FEAT(LB_BIAS, true)
 
 /*
+<<<<<<< HEAD
  * Decrement CPU power based on time not spent running tasks
  */
 SCHED_FEAT(NONTASK_POWER, true)
+=======
+ * Decrement CPU capacity based on time not spent running tasks
+ */
+SCHED_FEAT(NONTASK_CAPACITY, true)
+>>>>>>> v3.18
 
 /*
  * Queue remote wakeups on the target CPU and process them
@@ -63,10 +75,32 @@ SCHED_FEAT(LB_MIN, false)
 /*
  * Apply the automatic NUMA scheduling policy. Enabled automatically
  * at runtime if running on a NUMA machine. Can be controlled via
+<<<<<<< HEAD
  * numa_balancing=. Allow PTE scanning to be forced on UMA machines
  * for debugging the core machinery.
  */
 #ifdef CONFIG_NUMA_BALANCING
 SCHED_FEAT(NUMA,	false)
 SCHED_FEAT(NUMA_FORCE,	false)
+=======
+ * numa_balancing=
+ */
+#ifdef CONFIG_NUMA_BALANCING
+SCHED_FEAT(NUMA,	false)
+
+/*
+ * NUMA_FAVOUR_HIGHER will favor moving tasks towards nodes where a
+ * higher number of hinting faults are recorded during active load
+ * balancing.
+ */
+SCHED_FEAT(NUMA_FAVOUR_HIGHER, true)
+
+/*
+ * NUMA_RESIST_LOWER will resist moving tasks towards nodes where a
+ * lower number of hinting faults have been recorded. As this has
+ * the potential to prevent a task ever migrating to a new node
+ * due to CPU overload it is disabled by default.
+ */
+SCHED_FEAT(NUMA_RESIST_LOWER, false)
+>>>>>>> v3.18
 #endif

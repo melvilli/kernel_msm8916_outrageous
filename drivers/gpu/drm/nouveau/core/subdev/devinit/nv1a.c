@@ -22,6 +22,7 @@
  * Authors: Ben Skeggs
  */
 
+<<<<<<< HEAD
 #include <subdev/devinit.h>
 #include <subdev/vga.h>
 
@@ -51,8 +52,22 @@ nv1a_devinit_oclass = {
 	.handle = NV_SUBDEV(DEVINIT, 0x1a),
 	.ofuncs = &(struct nouveau_ofuncs) {
 		.ctor = nv1a_devinit_ctor,
+=======
+#include "nv04.h"
+
+struct nouveau_oclass *
+nv1a_devinit_oclass = &(struct nouveau_devinit_impl) {
+	.base.handle = NV_SUBDEV(DEVINIT, 0x1a),
+	.base.ofuncs = &(struct nouveau_ofuncs) {
+		.ctor = nv04_devinit_ctor,
+>>>>>>> v3.18
 		.dtor = nv04_devinit_dtor,
 		.init = nv04_devinit_init,
 		.fini = nv04_devinit_fini,
 	},
+<<<<<<< HEAD
 };
+=======
+	.pll_set = nv04_devinit_pll_set,
+}.base;
+>>>>>>> v3.18

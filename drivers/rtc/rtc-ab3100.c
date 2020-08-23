@@ -240,18 +240,24 @@ static int __init ab3100_rtc_probe(struct platform_device *pdev)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int __exit ab3100_rtc_remove(struct platform_device *pdev)
 {
 	platform_set_drvdata(pdev, NULL);
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 static struct platform_driver ab3100_rtc_driver = {
 	.driver = {
 		.name = "ab3100-rtc",
 		.owner = THIS_MODULE,
 	},
+<<<<<<< HEAD
 	.remove	 = __exit_p(ab3100_rtc_remove),
+=======
+>>>>>>> v3.18
 };
 
 module_platform_driver_probe(ab3100_rtc_driver, ab3100_rtc_probe);

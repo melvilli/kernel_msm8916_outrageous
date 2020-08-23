@@ -4,11 +4,20 @@ config BRCMUTIL
 config BRCMSMAC
 	tristate "Broadcom IEEE802.11n PCIe SoftMAC WLAN driver"
 	depends on MAC80211
+<<<<<<< HEAD
 	depends on BCMA
 	select BRCMUTIL
 	select FW_LOADER
 	select CRC_CCITT
 	select CRC8
+=======
+	depends on BCMA_POSSIBLE
+	select BCMA
+	select NEW_LEDS if BCMA_DRIVER_GPIO
+	select LEDS_CLASS if BCMA_DRIVER_GPIO
+	select BRCMUTIL
+	select FW_LOADER
+>>>>>>> v3.18
 	select CORDIC
 	---help---
 	  This module adds support for PCIe wireless adapters based on Broadcom
@@ -26,10 +35,24 @@ config BRCMFMAC
 	  one of the bus interface support. If you choose to build a module,
 	  it'll be called brcmfmac.ko.
 
+<<<<<<< HEAD
 config BRCMFMAC_SDIO
 	bool "SDIO bus interface support for FullMAC driver"
 	depends on MMC
 	depends on BRCMFMAC
+=======
+config BRCMFMAC_PROTO_BCDC
+	bool
+
+config BRCMFMAC_PROTO_MSGBUF
+	bool
+
+config BRCMFMAC_SDIO
+	bool "SDIO bus interface support for FullMAC driver"
+	depends on (MMC = y || MMC = BRCMFMAC)
+	depends on BRCMFMAC
+	select BRCMFMAC_PROTO_BCDC
+>>>>>>> v3.18
 	select FW_LOADER
 	default y
 	---help---
@@ -39,14 +62,35 @@ config BRCMFMAC_SDIO
 
 config BRCMFMAC_USB
 	bool "USB bus interface support for FullMAC driver"
+<<<<<<< HEAD
 	depends on USB
 	depends on BRCMFMAC
+=======
+	depends on (USB = y || USB = BRCMFMAC)
+	depends on BRCMFMAC
+	select BRCMFMAC_PROTO_BCDC
+>>>>>>> v3.18
 	select FW_LOADER
 	---help---
 	  This option enables the USB bus interface support for Broadcom
 	  IEEE802.11n embedded FullMAC WLAN driver. Say Y if you want to
 	  use the driver for an USB wireless card.
 
+<<<<<<< HEAD
+=======
+config BRCMFMAC_PCIE
+	bool "PCIE bus interface support for FullMAC driver"
+	depends on BRCMFMAC
+	depends on PCI
+	depends on HAS_DMA
+	select BRCMFMAC_PROTO_MSGBUF
+	select FW_LOADER
+	---help---
+	  This option enables the PCIE bus interface support for Broadcom
+	  IEEE802.11ac embedded FullMAC WLAN driver. Say Y if you want to
+	  use the driver for an PCIE wireless card.
+
+>>>>>>> v3.18
 config BRCM_TRACING
 	bool "Broadcom device tracing"
 	depends on BRCMSMAC || BRCMFMAC

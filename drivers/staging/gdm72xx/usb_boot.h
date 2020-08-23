@@ -11,6 +11,7 @@
  * GNU General Public License for more details.
  */
 
+<<<<<<< HEAD
 #ifndef __USB_BOOT_H__
 #define __USB_BOOT_H__
 
@@ -20,3 +21,14 @@ extern int usb_boot(struct usb_device *usbdev, u16 pid);
 extern int usb_emergency(struct usb_device *usbdev);
 
 #endif /* __USB_BOOT_H__ */
+=======
+#ifndef __GDM72XX_USB_BOOT_H__
+#define __GDM72XX_USB_BOOT_H__
+
+struct usb_device;
+
+int usb_boot(struct usb_device *usbdev, u16 pid);
+int usb_emergency(struct usb_device *usbdev);
+
+#endif /* __GDM72XX_USB_BOOT_H__ */
+>>>>>>> v3.18

@@ -8,6 +8,10 @@ obj-y += clk-prcmu.o
 obj-y += clk-sysctrl.o
 
 # Clock definitions
+<<<<<<< HEAD
+=======
+obj-y += u8500_of_clk.o
+>>>>>>> v3.18
 obj-y += u8500_clk.o
 obj-y += u9540_clk.o
 obj-y += u8540_clk.o

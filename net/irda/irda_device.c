@@ -23,9 +23,13 @@
  *     GNU General Public License for more details.
  *
  *     You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
  *     along with this program; if not, write to the Free Software
  *     Foundation, Inc., 59 Temple Place, Suite 330, Boston,
  *     MA 02111-1307 USA
+=======
+ *     along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
  *
  ********************************************************************/
 
@@ -295,7 +299,12 @@ static void irda_device_setup(struct net_device *dev)
  */
 struct net_device *alloc_irdadev(int sizeof_priv)
 {
+<<<<<<< HEAD
 	return alloc_netdev(sizeof_priv, "irda%d", irda_device_setup);
+=======
+	return alloc_netdev(sizeof_priv, "irda%d", NET_NAME_UNKNOWN,
+			    irda_device_setup);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(alloc_irdadev);
 

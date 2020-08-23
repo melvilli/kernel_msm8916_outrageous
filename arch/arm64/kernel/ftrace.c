@@ -58,7 +58,12 @@ int ftrace_update_ftrace_func(ftrace_func_t func)
 	u32 new;
 
 	pc = (unsigned long)&ftrace_call;
+<<<<<<< HEAD
 	new = aarch64_insn_gen_branch_imm(pc, (unsigned long)func, true);
+=======
+	new = aarch64_insn_gen_branch_imm(pc, (unsigned long)func,
+					  AARCH64_INSN_BRANCH_LINK);
+>>>>>>> v3.18
 
 	return ftrace_modify_code(pc, 0, new, false);
 }
@@ -72,7 +77,11 @@ int ftrace_make_call(struct dyn_ftrace *rec, unsigned long addr)
 	u32 old, new;
 
 	old = aarch64_insn_gen_nop();
+<<<<<<< HEAD
 	new = aarch64_insn_gen_branch_imm(pc, addr, true);
+=======
+	new = aarch64_insn_gen_branch_imm(pc, addr, AARCH64_INSN_BRANCH_LINK);
+>>>>>>> v3.18
 
 	return ftrace_modify_code(pc, old, new, true);
 }
@@ -86,15 +95,24 @@ int ftrace_make_nop(struct module *mod, struct dyn_ftrace *rec,
 	unsigned long pc = rec->ip;
 	u32 old, new;
 
+<<<<<<< HEAD
 	old = aarch64_insn_gen_branch_imm(pc, addr, true);
+=======
+	old = aarch64_insn_gen_branch_imm(pc, addr, AARCH64_INSN_BRANCH_LINK);
+>>>>>>> v3.18
 	new = aarch64_insn_gen_nop();
 
 	return ftrace_modify_code(pc, old, new, true);
 }
 
+<<<<<<< HEAD
 int __init ftrace_dyn_arch_init(void *data)
 {
 	*(unsigned long *)data = 0;
+=======
+int __init ftrace_dyn_arch_init(void)
+{
+>>>>>>> v3.18
 	return 0;
 }
 #endif /* CONFIG_DYNAMIC_FTRACE */
@@ -155,7 +173,12 @@ static int ftrace_modify_graph_caller(bool enable)
 	u32 branch, nop;
 
 	branch = aarch64_insn_gen_branch_imm(pc,
+<<<<<<< HEAD
 			(unsigned long)ftrace_graph_caller, false);
+=======
+					     (unsigned long)ftrace_graph_caller,
+					     AARCH64_INSN_BRANCH_LINK);
+>>>>>>> v3.18
 	nop = aarch64_insn_gen_nop();
 
 	if (enable)

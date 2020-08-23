@@ -14,6 +14,10 @@
  */
 
 #include "boot.h"
+<<<<<<< HEAD
+=======
+#include "string.h"
+>>>>>>> v3.18
 
 struct boot_params boot_params __attribute__((aligned(16)));
 

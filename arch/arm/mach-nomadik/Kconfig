@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 config ARCH_NOMADIK
+=======
+menuconfig ARCH_NOMADIK
+>>>>>>> v3.18
 	bool "ST-Ericsson Nomadik"
 	depends on ARCH_MULTI_V5
 	select ARCH_REQUIRE_GPIOLIB
@@ -6,28 +10,43 @@ config ARCH_NOMADIK
 	select ARM_VIC
 	select CLKSRC_NOMADIK_MTU
 	select CLKSRC_NOMADIK_MTU_SCHED_CLOCK
+<<<<<<< HEAD
 	select COMMON_CLK
 	select CPU_ARM926T
 	select GENERIC_CLOCKEVENTS
+=======
+	select CPU_ARM926T
+>>>>>>> v3.18
 	select MIGHT_HAVE_CACHE_L2X0
 	select PINCTRL
 	select PINCTRL_NOMADIK
 	select PINCTRL_STN8815
+<<<<<<< HEAD
 	select SPARSE_IRQ
 	select USE_OF
+=======
+>>>>>>> v3.18
 	help
 	  Support for the Nomadik platform by ST-Ericsson
 
 if ARCH_NOMADIK
+<<<<<<< HEAD
 menu "Nomadik boards"
+=======
+>>>>>>> v3.18
 
 config MACH_NOMADIK_8815NHK
 	bool "ST 8815 Nomadik Hardware Kit (evaluation board)"
 	select NOMADIK_8815
 	select I2C
 	select I2C_ALGOBIT
+<<<<<<< HEAD
 
 endmenu
+=======
+	select I2C_NOMADIK
+
+>>>>>>> v3.18
 endif
 
 config NOMADIK_8815

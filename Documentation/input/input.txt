@@ -226,7 +226,11 @@ And so on up to js31.
 ~~~~~~~~~~~
   evdev is the generic input event interface. It passes the events
 generated in the kernel straight to the program, with timestamps. The
+<<<<<<< HEAD
 API is still evolving, but should be useable now. It's described in
+=======
+API is still evolving, but should be usable now. It's described in
+>>>>>>> v3.18
 section 5. 
 
   This should be the way for GPM and X to get keyboard and mouse

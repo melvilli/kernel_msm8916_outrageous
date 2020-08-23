@@ -42,6 +42,10 @@
 #include <linux/timex.h>
 #include <linux/kernel_stat.h>
 #include <linux/time.h>
+<<<<<<< HEAD
+=======
+#include <linux/clockchips.h>
+>>>>>>> v3.18
 #include <linux/init.h>
 #include <linux/profile.h>
 #include <linux/cpu.h>
@@ -106,7 +110,11 @@ struct clock_event_device decrementer_clockevent = {
 	.irq            = 0,
 	.set_next_event = decrementer_set_next_event,
 	.set_mode       = decrementer_set_mode,
+<<<<<<< HEAD
 	.features       = CLOCK_EVT_FEAT_ONESHOT,
+=======
+	.features       = CLOCK_EVT_FEAT_ONESHOT | CLOCK_EVT_FEAT_C3STOP,
+>>>>>>> v3.18
 };
 EXPORT_SYMBOL(decrementer_clockevent);
 
@@ -210,6 +218,7 @@ static u64 scan_dispatch_log(u64 stop_tb)
 	if (!dtl)
 		return 0;
 
+<<<<<<< HEAD
 	if (i == vpa->dtl_idx)
 		return 0;
 	while (i < vpa->dtl_idx) {
@@ -222,11 +231,28 @@ static u64 scan_dispatch_log(u64 stop_tb)
 		if (i + N_DISPATCH_LOG < vpa->dtl_idx) {
 			/* buffer has overflowed */
 			i = vpa->dtl_idx - N_DISPATCH_LOG;
+=======
+	if (i == be64_to_cpu(vpa->dtl_idx))
+		return 0;
+	while (i < be64_to_cpu(vpa->dtl_idx)) {
+		dtb = be64_to_cpu(dtl->timebase);
+		tb_delta = be32_to_cpu(dtl->enqueue_to_dispatch_time) +
+			be32_to_cpu(dtl->ready_to_enqueue_time);
+		barrier();
+		if (i + N_DISPATCH_LOG < be64_to_cpu(vpa->dtl_idx)) {
+			/* buffer has overflowed */
+			i = be64_to_cpu(vpa->dtl_idx) - N_DISPATCH_LOG;
+>>>>>>> v3.18
 			dtl = local_paca->dispatch_log + (i % N_DISPATCH_LOG);
 			continue;
 		}
 		if (dtb > stop_tb)
 			break;
+<<<<<<< HEAD
+=======
+		if (dtl_consumer)
+			dtl_consumer(dtl, i);
+>>>>>>> v3.18
 		stolen += tb_delta;
 		++i;
 		++dtl;
@@ -269,7 +295,11 @@ static inline u64 calculate_stolen_time(u64 stop_tb)
 {
 	u64 stolen = 0;
 
+<<<<<<< HEAD
 	if (get_paca()->dtl_ridx != get_paca()->lppaca_ptr->dtl_idx) {
+=======
+	if (get_paca()->dtl_ridx != be64_to_cpu(get_lppaca()->dtl_idx)) {
+>>>>>>> v3.18
 		stolen = scan_dispatch_log(stop_tb);
 		get_paca()->system_time -= stolen;
 	}
@@ -478,6 +508,50 @@ void arch_irq_work_raise(void)
 
 #endif /* CONFIG_IRQ_WORK */
 
+<<<<<<< HEAD
+=======
+static void __timer_interrupt(void)
+{
+	struct pt_regs *regs = get_irq_regs();
+	u64 *next_tb = &__get_cpu_var(decrementers_next_tb);
+	struct clock_event_device *evt = &__get_cpu_var(decrementers);
+	u64 now;
+
+	trace_timer_interrupt_entry(regs);
+
+	if (test_irq_work_pending()) {
+		clear_irq_work_pending();
+		irq_work_run();
+	}
+
+	now = get_tb_or_rtc();
+	if (now >= *next_tb) {
+		*next_tb = ~(u64)0;
+		if (evt->event_handler)
+			evt->event_handler(evt);
+		__get_cpu_var(irq_stat).timer_irqs_event++;
+	} else {
+		now = *next_tb - now;
+		if (now <= DECREMENTER_MAX)
+			set_dec((int)now);
+		/* We may have raced with new irq work */
+		if (test_irq_work_pending())
+			set_dec(1);
+		__get_cpu_var(irq_stat).timer_irqs_others++;
+	}
+
+#ifdef CONFIG_PPC64
+	/* collect purr register values often, for accurate calculations */
+	if (firmware_has_feature(FW_FEATURE_SPLPAR)) {
+		struct cpu_usage *cu = &__get_cpu_var(cpu_usage_array);
+		cu->current_tb = mfspr(SPRN_PURR);
+	}
+#endif
+
+	trace_timer_interrupt_exit(regs);
+}
+
+>>>>>>> v3.18
 /*
  * timer_interrupt - gets called when the decrementer overflows,
  * with interrupts disabled.
@@ -486,8 +560,11 @@ void timer_interrupt(struct pt_regs * regs)
 {
 	struct pt_regs *old_regs;
 	u64 *next_tb = &__get_cpu_var(decrementers_next_tb);
+<<<<<<< HEAD
 	struct clock_event_device *evt = &__get_cpu_var(decrementers);
 	u64 now;
+=======
+>>>>>>> v3.18
 
 	/* Ensure a positive value is written to the decrementer, or else
 	 * some CPUs will continue to take decrementer exceptions.
@@ -510,7 +587,10 @@ void timer_interrupt(struct pt_regs * regs)
 	 */
 	may_hard_irq_enable();
 
+<<<<<<< HEAD
 	__get_cpu_var(irq_stat).timer_irqs++;
+=======
+>>>>>>> v3.18
 
 #if defined(CONFIG_PPC32) && defined(CONFIG_PPC_PMAC)
 	if (atomic_read(&ppc_n_lost_interrupts) != 0)
@@ -520,6 +600,7 @@ void timer_interrupt(struct pt_regs * regs)
 	old_regs = set_irq_regs(regs);
 	irq_enter();
 
+<<<<<<< HEAD
 	trace_timer_interrupt_entry(regs);
 
 	if (test_irq_work_pending()) {
@@ -548,6 +629,9 @@ void timer_interrupt(struct pt_regs * regs)
 
 	trace_timer_interrupt_exit(regs);
 
+=======
+	__timer_interrupt();
+>>>>>>> v3.18
 	irq_exit();
 	set_irq_regs(old_regs);
 }
@@ -612,7 +696,11 @@ unsigned long long sched_clock(void)
 static int __init get_freq(char *name, int cells, unsigned long *val)
 {
 	struct device_node *cpu;
+<<<<<<< HEAD
 	const unsigned int *fp;
+=======
+	const __be32 *fp;
+>>>>>>> v3.18
 	int found = 0;
 
 	/* The cpu node should have timebase and clock frequency properties */
@@ -631,8 +719,12 @@ static int __init get_freq(char *name, int cells, unsigned long *val)
 	return found;
 }
 
+<<<<<<< HEAD
 /* should become __cpuinit when secondary_cpu_time_init also is */
 void start_cpu_decrementer(void)
+=======
+static void start_cpu_decrementer(void)
+>>>>>>> v3.18
 {
 #if defined(CONFIG_BOOKE) || defined(CONFIG_40x)
 	/* Clear any pending timer interrupts */
@@ -730,7 +822,11 @@ static cycle_t timebase_read(struct clocksource *cs)
 }
 
 void update_vsyscall_old(struct timespec *wall_time, struct timespec *wtm,
+<<<<<<< HEAD
 			struct clocksource *clock, u32 mult)
+=======
+			 struct clocksource *clock, u32 mult, cycle_t cycle_last)
+>>>>>>> v3.18
 {
 	u64 new_tb_to_xs, new_stamp_xsec;
 	u32 frac_sec;
@@ -763,7 +859,11 @@ void update_vsyscall_old(struct timespec *wall_time, struct timespec *wtm,
 	 * We expect the caller to have done the first increment of
 	 * vdso_data->tb_update_count already.
 	 */
+<<<<<<< HEAD
 	vdso_data->tb_orig_stamp = clock->cycle_last;
+=======
+	vdso_data->tb_orig_stamp = cycle_last;
+>>>>>>> v3.18
 	vdso_data->stamp_xsec = new_stamp_xsec;
 	vdso_data->tb_to_xs = new_tb_to_xs;
 	vdso_data->wtom_clock_sec = wtm->tv_sec;
@@ -804,6 +904,14 @@ static int decrementer_set_next_event(unsigned long evt,
 {
 	__get_cpu_var(decrementers_next_tb) = get_tb_or_rtc() + evt;
 	set_dec(evt);
+<<<<<<< HEAD
+=======
+
+	/* We may have raced with new irq work */
+	if (test_irq_work_pending())
+		set_dec(1);
+
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -814,6 +922,18 @@ static void decrementer_set_mode(enum clock_event_mode mode,
 		decrementer_set_next_event(DECREMENTER_MAX, dev);
 }
 
+<<<<<<< HEAD
+=======
+/* Interrupt handler for the timer broadcast IPI */
+void tick_broadcast_ipi_handler(void)
+{
+	u64 *next_tb = &__get_cpu_var(decrementers_next_tb);
+
+	*next_tb = get_tb_or_rtc();
+	__timer_interrupt();
+}
+
+>>>>>>> v3.18
 static void register_decrementer_clockevent(int cpu)
 {
 	struct clock_event_device *dec = &per_cpu(decrementers, cpu);
@@ -917,6 +1037,10 @@ void __init time_init(void)
 	clocksource_init();
 
 	init_decrementer_clockevent();
+<<<<<<< HEAD
+=======
+	tick_setup_hrtimer_broadcast();
+>>>>>>> v3.18
 }
 
 
@@ -998,6 +1122,10 @@ void to_tm(int tim, struct rtc_time * tm)
 	 */
 	GregorianDay(tm);
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(to_tm);
+>>>>>>> v3.18
 
 /*
  * Divide a 128-bit dividend by a 32-bit divisor, leaving a 128 bit
@@ -1050,7 +1178,11 @@ static int __init rtc_init(void)
 
 	pdev = platform_device_register_simple("rtc-generic", -1, NULL, 0);
 
+<<<<<<< HEAD
 	return PTR_RET(pdev);
+=======
+	return PTR_ERR_OR_ZERO(pdev);
+>>>>>>> v3.18
 }
 
 module_init(rtc_init);

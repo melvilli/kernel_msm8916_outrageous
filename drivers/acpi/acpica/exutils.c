@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -100,6 +104,7 @@ void acpi_ex_enter_interpreter(void)
 
 /*******************************************************************************
  *
+<<<<<<< HEAD
  * FUNCTION:    acpi_ex_reacquire_interpreter
  *
  * PARAMETERS:  None
@@ -131,6 +136,8 @@ void acpi_ex_reacquire_interpreter(void)
 
 /*******************************************************************************
  *
+=======
+>>>>>>> v3.18
  * FUNCTION:    acpi_ex_exit_interpreter
  *
  * PARAMETERS:  None
@@ -139,7 +146,20 @@ void acpi_ex_reacquire_interpreter(void)
  *
  * DESCRIPTION: Exit the interpreter execution region. This is the top level
  *              routine used to exit the interpreter when all processing has
+<<<<<<< HEAD
  *              been completed.
+=======
+ *              been completed, or when the method blocks.
+ *
+ * Cases where the interpreter is unlocked internally:
+ *      1) Method will be blocked on a Sleep() AML opcode
+ *      2) Method will be blocked on an Acquire() AML opcode
+ *      3) Method will be blocked on a Wait() AML opcode
+ *      4) Method will be blocked to acquire the global lock
+ *      5) Method will be blocked waiting to execute a serialized control
+ *          method that is currently executing
+ *      6) About to invoke a user-installed opregion handler
+>>>>>>> v3.18
  *
  ******************************************************************************/
 
@@ -160,6 +180,7 @@ void acpi_ex_exit_interpreter(void)
 
 /*******************************************************************************
  *
+<<<<<<< HEAD
  * FUNCTION:    acpi_ex_relinquish_interpreter
  *
  * PARAMETERS:  None
@@ -198,6 +219,8 @@ void acpi_ex_relinquish_interpreter(void)
 
 /*******************************************************************************
  *
+=======
+>>>>>>> v3.18
  * FUNCTION:    acpi_ex_truncate_for32bit_table
  *
  * PARAMETERS:  obj_desc        - Object to be truncated

@@ -75,7 +75,10 @@ void *paravirt_get_gate_section(void);
 #ifdef CONFIG_PARAVIRT_GUEST
 
 #define PARAVIRT_HYPERVISOR_TYPE_DEFAULT	0
+<<<<<<< HEAD
 #define PARAVIRT_HYPERVISOR_TYPE_XEN		1
+=======
+>>>>>>> v3.18
 
 #ifndef __ASSEMBLY__
 

@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -76,7 +80,10 @@
 #define ACPI_LARGE_NAMESPACE_NODE
 #define ACPI_DATA_TABLE_DISASSEMBLY
 #define ACPI_SINGLE_THREADED
+<<<<<<< HEAD
 #define ACPI_32BIT_PHYSICAL_ADDRESS
+=======
+>>>>>>> v3.18
 #endif
 
 /* acpi_exec configuration. Multithreaded with full AML debugger */
@@ -88,6 +95,7 @@
 #define ACPI_DBG_TRACK_ALLOCATIONS
 #endif
 
+<<<<<<< HEAD
 /* acpi_names configuration. Single threaded with debugger output enabled. */
 
 #ifdef ACPI_NAMES_APP
@@ -103,16 +111,66 @@
 #if (defined ACPI_BIN_APP)   || \
 	(defined ACPI_SRC_APP)   || \
 	(defined ACPI_XTRACT_APP)
+=======
+/*
+ * acpi_bin/acpi_dump/acpi_help/acpi_names/acpi_src/acpi_xtract/Example configuration.
+ * All single threaded.
+ */
+#if (defined ACPI_BIN_APP)      || \
+	(defined ACPI_DUMP_APP)     || \
+	(defined ACPI_HELP_APP)     || \
+	(defined ACPI_NAMES_APP)    || \
+	(defined ACPI_SRC_APP)      || \
+	(defined ACPI_XTRACT_APP)   || \
+	(defined ACPI_EXAMPLE_APP)
+>>>>>>> v3.18
 #define ACPI_APPLICATION
 #define ACPI_SINGLE_THREADED
 #endif
 
+<<<<<<< HEAD
 #ifdef ACPI_HELP_APP
 #define ACPI_APPLICATION
 #define ACPI_SINGLE_THREADED
 #define ACPI_NO_ERROR_MESSAGES
 #endif
 
+=======
+/* acpi_help configuration. Error messages disabled. */
+
+#ifdef ACPI_HELP_APP
+#define ACPI_NO_ERROR_MESSAGES
+#endif
+
+/* acpi_names configuration. Debug output enabled. */
+
+#ifdef ACPI_NAMES_APP
+#define ACPI_DEBUG_OUTPUT
+#endif
+
+/* acpi_exec/acpi_names/Example configuration. Native RSDP used. */
+
+#if (defined ACPI_EXEC_APP)     || \
+	(defined ACPI_EXAMPLE_APP)  || \
+	(defined ACPI_NAMES_APP)
+#define ACPI_USE_NATIVE_RSDP_POINTER
+#endif
+
+/* acpi_dump configuration. Native mapping used if provied by OSPMs */
+
+#ifdef ACPI_DUMP_APP
+#define ACPI_USE_NATIVE_MEMORY_MAPPING
+#define USE_NATIVE_ALLOCATE_ZEROED
+#endif
+
+/* acpi_names/Example configuration. Hardware disabled */
+
+#if (defined ACPI_EXAMPLE_APP)  || \
+	(defined ACPI_NAMES_APP)
+#define ACPI_REDUCED_HARDWARE 1
+#endif
+
+>>>>>>> v3.18
 /* Linkable ACPICA library */
 
 #ifdef ACPI_LIBRARY
@@ -148,6 +206,12 @@
 #if defined(_LINUX) || defined(__linux__)
 #include <acpi/platform/aclinux.h>
 
+<<<<<<< HEAD
+=======
+#elif defined(_APPLE) || defined(__APPLE__)
+#include "acmacosx.h"
+
+>>>>>>> v3.18
 #elif defined(__FreeBSD__) || defined(__FreeBSD_kernel__)
 #include "acfreebsd.h"
 
@@ -181,6 +245,12 @@
 #elif defined(_AED_EFI)
 #include "acefi.h"
 
+<<<<<<< HEAD
+=======
+#elif defined(_GNU_EFI)
+#include "acefi.h"
+
+>>>>>>> v3.18
 #elif defined(__HAIKU__)
 #include "achaiku.h"
 
@@ -391,4 +461,20 @@ typedef char *va_list;
 
 #endif				/* ACPI_USE_SYSTEM_CLIBRARY */
 
+<<<<<<< HEAD
+=======
+#ifndef ACPI_FILE
+#ifdef ACPI_APPLICATION
+#include <stdio.h>
+#define ACPI_FILE              FILE *
+#define ACPI_FILE_OUT          stdout
+#define ACPI_FILE_ERR          stderr
+#else
+#define ACPI_FILE              void *
+#define ACPI_FILE_OUT          NULL
+#define ACPI_FILE_ERR          NULL
+#endif				/* ACPI_APPLICATION */
+#endif				/* ACPI_FILE */
+
+>>>>>>> v3.18
 #endif				/* __ACENV_H__ */

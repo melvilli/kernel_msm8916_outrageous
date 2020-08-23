@@ -26,11 +26,19 @@
 #include <asm/mach/arch.h>
 
 #include <mach/at91sam9_smc.h>
+<<<<<<< HEAD
+=======
+#include <mach/hardware.h>
+>>>>>>> v3.18
 
 #include "at91_aic.h"
 #include "board.h"
 #include "sam9_smc.h"
 #include "generic.h"
+<<<<<<< HEAD
+=======
+#include "gpio.h"
+>>>>>>> v3.18
 
 
 void __init stamp9g20_init_early(void)
@@ -273,7 +281,11 @@ static void __init stamp9g20evb_board_init(void)
 
 MACHINE_START(PORTUXG20, "taskit PortuxG20")
 	/* Maintainer: taskit GmbH */
+<<<<<<< HEAD
 	.init_time	= at91sam926x_pit_init,
+=======
+	.init_time	= at91_init_time,
+>>>>>>> v3.18
 	.map_io		= at91_map_io,
 	.handle_irq	= at91_aic_handle_irq,
 	.init_early	= stamp9g20_init_early,
@@ -283,7 +295,11 @@ MACHINE_END
 
 MACHINE_START(STAMP9G20, "taskit Stamp9G20")
 	/* Maintainer: taskit GmbH */
+<<<<<<< HEAD
 	.init_time	= at91sam926x_pit_init,
+=======
+	.init_time	= at91_init_time,
+>>>>>>> v3.18
 	.map_io		= at91_map_io,
 	.handle_irq	= at91_aic_handle_irq,
 	.init_early	= stamp9g20_init_early,

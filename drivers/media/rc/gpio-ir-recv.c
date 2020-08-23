@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* Copyright (c) 2012, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2012, Code Aurora Forum. All rights reserved.
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -16,17 +20,25 @@
 #include <linux/interrupt.h>
 #include <linux/gpio.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
 #include <linux/of_gpio.h>
 #include <linux/platform_device.h>
 #include <linux/irq.h>
 #include <linux/pm_qos.h>
 #include <linux/timer.h>
+=======
+#include <linux/of.h>
+#include <linux/of_gpio.h>
+#include <linux/platform_device.h>
+#include <linux/irq.h>
+>>>>>>> v3.18
 #include <media/rc-core.h>
 #include <media/gpio-ir-recv.h>
 
 #define GPIO_IR_DRIVER_NAME	"gpio-rc-recv"
 #define GPIO_IR_DEVICE_NAME	"gpio_ir_recv"
 
+<<<<<<< HEAD
 static int gpio_ir_timeout = 200;
 module_param_named(gpio_ir_timeout, gpio_ir_timeout, int, 0664);
 
@@ -48,6 +60,12 @@ struct gpio_rc_dev {
 	bool can_wakeup;
 	bool pm_qos_vote;
 	int gpio_irq_latency;
+=======
+struct gpio_rc_dev {
+	struct rc_dev *rcdev;
+	int gpio_nr;
+	bool active_low;
+>>>>>>> v3.18
 };
 
 #ifdef CONFIG_OF
@@ -96,6 +114,7 @@ static irqreturn_t gpio_ir_recv_irq(int irq, void *dev_id)
 	int rc = 0;
 	enum raw_event_type type = IR_SPACE;
 
+<<<<<<< HEAD
 	if (!gpio_dev->pm_qos_vote && gpio_dev->can_wakeup) {
 		gpio_dev->pm_qos_vote = 1;
 		pm_qos_update_request(&gpio_dev->pm_qos_req,
@@ -106,6 +125,9 @@ static irqreturn_t gpio_ir_recv_irq(int irq, void *dev_id)
 		gval = gpio_get_value_cansleep(gpio_dev->gpio_nr);
 	else
 		gval = gpio_get_value(gpio_dev->gpio_nr);
+=======
+	gval = gpio_get_value_cansleep(gpio_dev->gpio_nr);
+>>>>>>> v3.18
 
 	if (gval < 0)
 		goto err_get_value;
@@ -122,13 +144,17 @@ static irqreturn_t gpio_ir_recv_irq(int irq, void *dev_id)
 
 	ir_raw_event_handle(gpio_dev->rcdev);
 
+<<<<<<< HEAD
 	if (gpio_dev->can_wakeup)
 		mod_timer(&gpio_dev->gpio_ir_timer,
 				jiffies + msecs_to_jiffies(gpio_ir_timeout));
+=======
+>>>>>>> v3.18
 err_get_value:
 	return IRQ_HANDLED;
 }
 
+<<<<<<< HEAD
 static void gpio_ir_timer(unsigned long data)
 {
 	struct gpio_rc_dev *gpio_dev = (struct gpio_rc_dev *)data;
@@ -138,6 +164,8 @@ static void gpio_ir_timer(unsigned long data)
 	gpio_dev->pm_qos_vote = 0;
 }
 
+=======
+>>>>>>> v3.18
 static int gpio_ir_recv_probe(struct platform_device *pdev)
 {
 	struct gpio_rc_dev *gpio_dev;
@@ -184,24 +212,36 @@ static int gpio_ir_recv_probe(struct platform_device *pdev)
 	rcdev->dev.parent = &pdev->dev;
 	rcdev->driver_name = GPIO_IR_DRIVER_NAME;
 	if (pdata->allowed_protos)
+<<<<<<< HEAD
 		rcdev->allowed_protos = pdata->allowed_protos;
 	else
 		rcdev->allowed_protos = RC_BIT_ALL;
+=======
+		rcdev->allowed_protocols = pdata->allowed_protos;
+	else
+		rcdev->allowed_protocols = RC_BIT_ALL;
+>>>>>>> v3.18
 	rcdev->map_name = pdata->map_name ?: RC_MAP_EMPTY;
 
 	gpio_dev->rcdev = rcdev;
 	gpio_dev->gpio_nr = pdata->gpio_nr;
 	gpio_dev->active_low = pdata->active_low;
+<<<<<<< HEAD
 	gpio_dev->can_wakeup = pdata->can_wakeup;
 	gpio_dev->gpio_irq_latency = pdata->swfi_latency + 1;
 	gpio_dev->pm_qos_vote = 0;
+=======
+>>>>>>> v3.18
 
 	rc = gpio_request(pdata->gpio_nr, "gpio-ir-recv");
 	if (rc < 0)
 		goto err_gpio_request;
+<<<<<<< HEAD
 
 	gpio_dev->can_sleep = gpio_cansleep(pdata->gpio_nr);
 
+=======
+>>>>>>> v3.18
 	rc  = gpio_direction_input(pdata->gpio_nr);
 	if (rc < 0)
 		goto err_gpio_direction_input;
@@ -221,6 +261,7 @@ static int gpio_ir_recv_probe(struct platform_device *pdev)
 	if (rc < 0)
 		goto err_request_irq;
 
+<<<<<<< HEAD
 	if (gpio_dev->can_wakeup) {
 		pm_qos_add_request(&gpio_dev->pm_qos_req,
 					PM_QOS_CPU_DMA_LATENCY,
@@ -234,6 +275,11 @@ static int gpio_ir_recv_probe(struct platform_device *pdev)
 
 err_request_irq:
 	platform_set_drvdata(pdev, NULL);
+=======
+	return 0;
+
+err_request_irq:
+>>>>>>> v3.18
 	rc_unregister_device(rcdev);
 	rcdev = NULL;
 err_register_rc_device:
@@ -250,12 +296,16 @@ static int gpio_ir_recv_remove(struct platform_device *pdev)
 {
 	struct gpio_rc_dev *gpio_dev = platform_get_drvdata(pdev);
 
+<<<<<<< HEAD
 	if (gpio_dev->can_wakeup) {
 		del_timer_sync(&gpio_dev->gpio_ir_timer);
 		pm_qos_remove_request(&gpio_dev->pm_qos_req);
 	}
 	free_irq(gpio_to_irq(gpio_dev->gpio_nr), gpio_dev);
 	platform_set_drvdata(pdev, NULL);
+=======
+	free_irq(gpio_to_irq(gpio_dev->gpio_nr), gpio_dev);
+>>>>>>> v3.18
 	rc_unregister_device(gpio_dev->rcdev);
 	gpio_free(gpio_dev->gpio_nr);
 	kfree(gpio_dev);

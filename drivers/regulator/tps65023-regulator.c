@@ -211,14 +211,21 @@ static int tps_65023_probe(struct i2c_client *client,
 	int i;
 	int error;
 
+<<<<<<< HEAD
 	if (!i2c_check_functionality(client->adapter, I2C_FUNC_SMBUS_BYTE_DATA))
 		return -EIO;
 
+=======
+>>>>>>> v3.18
 	/**
 	 * init_data points to array of regulator_init structures
 	 * coming from the board-evm file.
 	 */
+<<<<<<< HEAD
 	init_data = client->dev.platform_data;
+=======
+	init_data = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 	if (!init_data)
 		return -EIO;
 
@@ -277,12 +284,21 @@ static int tps_65023_probe(struct i2c_client *client,
 		config.regmap = tps->regmap;
 
 		/* Register the regulators */
+<<<<<<< HEAD
 		rdev = regulator_register(&tps->desc[i], &config);
 		if (IS_ERR(rdev)) {
 			dev_err(&client->dev, "failed to register %s\n",
 				id->name);
 			error = PTR_ERR(rdev);
 			goto fail;
+=======
+		rdev = devm_regulator_register(&client->dev, &tps->desc[i],
+					       &config);
+		if (IS_ERR(rdev)) {
+			dev_err(&client->dev, "failed to register %s\n",
+				id->name);
+			return PTR_ERR(rdev);
+>>>>>>> v3.18
 		}
 
 		/* Save regulator for cleanup */
@@ -293,6 +309,7 @@ static int tps_65023_probe(struct i2c_client *client,
 
 	/* Enable setting output voltage by I2C */
 	regmap_update_bits(tps->regmap, TPS65023_REG_CON_CTRL2,
+<<<<<<< HEAD
 			TPS65023_REG_CTRL2_CORE_ADJ, TPS65023_REG_CTRL2_CORE_ADJ);
 
 	return 0;
@@ -310,6 +327,11 @@ static int tps_65023_remove(struct i2c_client *client)
 
 	for (i = 0; i < TPS65023_NUM_REGULATOR; i++)
 		regulator_unregister(tps->rdev[i]);
+=======
+					TPS65023_REG_CTRL2_CORE_ADJ,
+					TPS65023_REG_CTRL2_CORE_ADJ);
+
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -430,7 +452,10 @@ static struct i2c_driver tps_65023_i2c_driver = {
 		.owner = THIS_MODULE,
 	},
 	.probe = tps_65023_probe,
+<<<<<<< HEAD
 	.remove = tps_65023_remove,
+=======
+>>>>>>> v3.18
 	.id_table = tps_65023_id,
 };
 

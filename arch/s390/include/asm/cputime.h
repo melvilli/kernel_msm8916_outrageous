@@ -8,6 +8,7 @@
 #define _S390_CPUTIME_H
 
 #include <linux/types.h>
+<<<<<<< HEAD
 #include <linux/percpu.h>
 #include <linux/spinlock.h>
 #include <asm/div64.h>
@@ -16,11 +17,21 @@
 #define __ARCH_HAS_VTIME_ACCOUNT
 #define __ARCH_HAS_VTIME_TASK_SWITCH
 
+=======
+#include <asm/div64.h>
+
+
+>>>>>>> v3.18
 /* We want to use full resolution of the CPU timer: 2**-12 micro-seconds. */
 
 typedef unsigned long long __nocast cputime_t;
 typedef unsigned long long __nocast cputime64_t;
 
+<<<<<<< HEAD
+=======
+#define cmpxchg_cputime(ptr, old, new) cmpxchg64(ptr, old, new)
+
+>>>>>>> v3.18
 static inline unsigned long __div(unsigned long long n, unsigned long base)
 {
 #ifndef CONFIG_64BIT
@@ -168,6 +179,7 @@ static inline clock_t cputime64_to_clock_t(cputime64_t cputime)
 	return clock;
 }
 
+<<<<<<< HEAD
 struct s390_idle_data {
 	int nohz_delay;
 	unsigned int sequence;
@@ -191,5 +203,10 @@ static inline int s390_nohz_delay(int cpu)
 }
 
 #define arch_needs_cpu(cpu) s390_nohz_delay(cpu)
+=======
+cputime64_t arch_cpu_idle_time(int cpu);
+
+#define arch_idle_time(cpu) arch_cpu_idle_time(cpu)
+>>>>>>> v3.18
 
 #endif /* _S390_CPUTIME_H */

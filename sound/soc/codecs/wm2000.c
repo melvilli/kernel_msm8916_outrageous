@@ -137,7 +137,12 @@ static int wm2000_power_up(struct i2c_client *i2c, int analogue)
 	unsigned long rate;
 	int ret;
 
+<<<<<<< HEAD
 	BUG_ON(wm2000->anc_mode != ANC_OFF);
+=======
+	if (WARN_ON(wm2000->anc_mode != ANC_OFF))
+		return -EINVAL;
+>>>>>>> v3.18
 
 	dev_dbg(&i2c->dev, "Beginning power up\n");
 
@@ -277,7 +282,12 @@ static int wm2000_enter_bypass(struct i2c_client *i2c, int analogue)
 {
 	struct wm2000_priv *wm2000 = dev_get_drvdata(&i2c->dev);
 
+<<<<<<< HEAD
 	BUG_ON(wm2000->anc_mode != ANC_ACTIVE);
+=======
+	if (WARN_ON(wm2000->anc_mode != ANC_ACTIVE))
+		return -EINVAL;
+>>>>>>> v3.18
 
 	if (analogue) {
 		wm2000_write(i2c, WM2000_REG_SYS_MODE_CNTRL,
@@ -315,7 +325,12 @@ static int wm2000_exit_bypass(struct i2c_client *i2c, int analogue)
 {
 	struct wm2000_priv *wm2000 = dev_get_drvdata(&i2c->dev);
 
+<<<<<<< HEAD
 	BUG_ON(wm2000->anc_mode != ANC_BYPASS);
+=======
+	if (WARN_ON(wm2000->anc_mode != ANC_BYPASS))
+		return -EINVAL;
+>>>>>>> v3.18
 	
 	wm2000_write(i2c, WM2000_REG_SYS_CTL1, 0);
 
@@ -349,7 +364,12 @@ static int wm2000_enter_standby(struct i2c_client *i2c, int analogue)
 {
 	struct wm2000_priv *wm2000 = dev_get_drvdata(&i2c->dev);
 
+<<<<<<< HEAD
 	BUG_ON(wm2000->anc_mode != ANC_ACTIVE);
+=======
+	if (WARN_ON(wm2000->anc_mode != ANC_ACTIVE))
+		return -EINVAL;
+>>>>>>> v3.18
 
 	if (analogue) {
 		wm2000_write(i2c, WM2000_REG_ANA_VMID_PD_TIME, 248 / 4);
@@ -392,7 +412,12 @@ static int wm2000_exit_standby(struct i2c_client *i2c, int analogue)
 {
 	struct wm2000_priv *wm2000 = dev_get_drvdata(&i2c->dev);
 
+<<<<<<< HEAD
 	BUG_ON(wm2000->anc_mode != ANC_STANDBY);
+=======
+	if (WARN_ON(wm2000->anc_mode != ANC_STANDBY))
+		return -EINVAL;
+>>>>>>> v3.18
 
 	wm2000_write(i2c, WM2000_REG_SYS_CTL1, 0);
 
@@ -602,10 +627,17 @@ static int wm2000_anc_set_mode(struct wm2000_priv *wm2000)
 static int wm2000_anc_mode_get(struct snd_kcontrol *kcontrol,
 			       struct snd_ctl_elem_value *ucontrol)
 {
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
 	struct wm2000_priv *wm2000 = dev_get_drvdata(codec->dev);
 
 	ucontrol->value.integer.value[0] = wm2000->anc_active;
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+	struct wm2000_priv *wm2000 = dev_get_drvdata(codec->dev);
+
+	ucontrol->value.enumerated.item[0] = wm2000->anc_active;
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -613,9 +645,15 @@ static int wm2000_anc_mode_get(struct snd_kcontrol *kcontrol,
 static int wm2000_anc_mode_put(struct snd_kcontrol *kcontrol,
 			       struct snd_ctl_elem_value *ucontrol)
 {
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
 	struct wm2000_priv *wm2000 = dev_get_drvdata(codec->dev);
 	int anc_active = ucontrol->value.integer.value[0];
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+	struct wm2000_priv *wm2000 = dev_get_drvdata(codec->dev);
+	int anc_active = ucontrol->value.enumerated.item[0];
+>>>>>>> v3.18
 	int ret;
 
 	if (anc_active > 1)
@@ -635,10 +673,17 @@ static int wm2000_anc_mode_put(struct snd_kcontrol *kcontrol,
 static int wm2000_speaker_get(struct snd_kcontrol *kcontrol,
 			      struct snd_ctl_elem_value *ucontrol)
 {
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
 	struct wm2000_priv *wm2000 = dev_get_drvdata(codec->dev);
 
 	ucontrol->value.integer.value[0] = wm2000->spk_ena;
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+	struct wm2000_priv *wm2000 = dev_get_drvdata(codec->dev);
+
+	ucontrol->value.enumerated.item[0] = wm2000->spk_ena;
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -646,9 +691,15 @@ static int wm2000_speaker_get(struct snd_kcontrol *kcontrol,
 static int wm2000_speaker_put(struct snd_kcontrol *kcontrol,
 			      struct snd_ctl_elem_value *ucontrol)
 {
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
 	struct wm2000_priv *wm2000 = dev_get_drvdata(codec->dev);
 	int val = ucontrol->value.integer.value[0];
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+	struct wm2000_priv *wm2000 = dev_get_drvdata(codec->dev);
+	int val = ucontrol->value.enumerated.item[0];
+>>>>>>> v3.18
 	int ret;
 
 	if (val > 1)
@@ -781,8 +832,11 @@ static int wm2000_probe(struct snd_soc_codec *codec)
 {
 	struct wm2000_priv *wm2000 = dev_get_drvdata(codec->dev);
 
+<<<<<<< HEAD
 	snd_soc_codec_set_cache_io(codec, 16, 8, SND_SOC_REGMAP);
 
+=======
+>>>>>>> v3.18
 	/* This will trigger a transition to standby mode by default */
 	wm2000_anc_set_mode(wm2000);
 
@@ -823,10 +877,15 @@ static int wm2000_i2c_probe(struct i2c_client *i2c,
 
 	wm2000 = devm_kzalloc(&i2c->dev, sizeof(struct wm2000_priv),
 			      GFP_KERNEL);
+<<<<<<< HEAD
 	if (wm2000 == NULL) {
 		dev_err(&i2c->dev, "Unable to allocate private data\n");
 		return -ENOMEM;
 	}
+=======
+	if (!wm2000)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	mutex_init(&wm2000->lock);
 

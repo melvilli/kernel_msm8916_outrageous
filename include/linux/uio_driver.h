@@ -63,7 +63,21 @@ struct uio_port {
 
 #define MAX_UIO_PORT_REGIONS	5
 
+<<<<<<< HEAD
 struct uio_device;
+=======
+struct uio_device {
+        struct module           *owner;
+        struct device           *dev;
+        int                     minor;
+        atomic_t                event;
+        struct fasync_struct    *async_queue;
+        wait_queue_head_t       wait;
+        struct uio_info         *info;
+        struct kobject          *map_dir;
+        struct kobject          *portio_dir;
+};
+>>>>>>> v3.18
 
 /**
  * struct uio_info - UIO device capabilities

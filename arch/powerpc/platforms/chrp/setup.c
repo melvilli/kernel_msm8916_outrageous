@@ -258,7 +258,11 @@ static void chrp_init_early(void)
 	struct device_node *node;
 	const char *property;
 
+<<<<<<< HEAD
 	if (strstr(cmd_line, "console="))
+=======
+	if (strstr(boot_command_line, "console="))
+>>>>>>> v3.18
 		return;
 	/* find the boot console from /chosen/stdout */
 	if (!of_chosen)

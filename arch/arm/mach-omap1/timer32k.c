@@ -156,7 +156,11 @@ static irqreturn_t omap_32k_timer_interrupt(int irq, void *dev_id)
 
 static struct irqaction omap_32k_timer_irq = {
 	.name		= "32KHz timer",
+<<<<<<< HEAD
 	.flags		= IRQF_DISABLED | IRQF_TIMER | IRQF_IRQPOLL,
+=======
+	.flags		= IRQF_TIMER | IRQF_IRQPOLL,
+>>>>>>> v3.18
 	.handler	= omap_32k_timer_interrupt,
 };
 

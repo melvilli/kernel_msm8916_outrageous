@@ -12,10 +12,18 @@
  */
 
 #include <linux/kernel.h>
+<<<<<<< HEAD
 #include <linux/list.h>
 #include <linux/module.h>
 #include <linux/rwsem.h>
 #include <linux/leds.h>
+=======
+#include <linux/leds.h>
+#include <linux/list.h>
+#include <linux/module.h>
+#include <linux/mutex.h>
+#include <linux/rwsem.h>
+>>>>>>> v3.18
 #include "leds.h"
 
 DECLARE_RWSEM(leds_list_lock);
@@ -39,9 +47,17 @@ static void led_set_software_blink(struct led_classdev *led_cdev,
 	led_cdev->blink_delay_on = delay_on;
 	led_cdev->blink_delay_off = delay_off;
 
+<<<<<<< HEAD
 	/* never on - don't blink */
 	if (!delay_on)
 		return;
+=======
+	/* never on - just set to off */
+	if (!delay_on) {
+		__led_set_brightness(led_cdev, LED_OFF);
+		return;
+	}
+>>>>>>> v3.18
 
 	/* never off - just set to brightness */
 	if (!delay_off) {
@@ -124,3 +140,22 @@ void led_set_brightness(struct led_classdev *led_cdev,
 	__led_set_brightness(led_cdev, brightness);
 }
 EXPORT_SYMBOL(led_set_brightness);
+<<<<<<< HEAD
+=======
+
+int led_update_brightness(struct led_classdev *led_cdev)
+{
+	int ret = 0;
+
+	if (led_cdev->brightness_get) {
+		ret = led_cdev->brightness_get(led_cdev);
+		if (ret >= 0) {
+			led_cdev->brightness = ret;
+			return 0;
+		}
+	}
+
+	return ret;
+}
+EXPORT_SYMBOL(led_update_brightness);
+>>>>>>> v3.18

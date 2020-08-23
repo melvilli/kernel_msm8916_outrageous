@@ -35,9 +35,12 @@
 
 struct mn10300_cpuinfo boot_cpu_data;
 
+<<<<<<< HEAD
 /* For PCI or other memory-mapped resources */
 unsigned long pci_mem_start = 0x18000000;
 
+=======
+>>>>>>> v3.18
 static char __initdata cmd_line[COMMAND_LINE_SIZE];
 char redboot_command_line[COMMAND_LINE_SIZE] =
 	"console=ttyS0,115200 root=/dev/mtdblock3 rw";

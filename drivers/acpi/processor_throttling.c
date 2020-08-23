@@ -32,6 +32,7 @@
 #include <linux/init.h>
 #include <linux/sched.h>
 #include <linux/cpufreq.h>
+<<<<<<< HEAD
 
 #include <asm/io.h>
 #include <asm/uaccess.h>
@@ -40,6 +41,13 @@
 #include <acpi/acpi_drivers.h>
 #include <acpi/processor.h>
 
+=======
+#include <linux/acpi.h>
+#include <acpi/processor.h>
+#include <asm/io.h>
+#include <asm/uaccess.h>
+
+>>>>>>> v3.18
 #define PREFIX "ACPI: "
 
 #define ACPI_PROCESSOR_CLASS            "processor"

@@ -28,6 +28,7 @@
 
 #define UIO_MAX_DEVICES		(1U << MINORBITS)
 
+<<<<<<< HEAD
 struct uio_device {
 	struct module		*owner;
 	struct device		*dev;
@@ -41,6 +42,8 @@ struct uio_device {
 	struct kobject		*portio_dir;
 };
 
+=======
+>>>>>>> v3.18
 static int uio_major;
 static struct cdev *uio_cdev;
 static DEFINE_IDR(uio_idr);
@@ -224,26 +227,43 @@ static struct kobj_type portio_attr_type = {
 	.default_attrs	= portio_attrs,
 };
 
+<<<<<<< HEAD
 static ssize_t show_name(struct device *dev,
+=======
+static ssize_t name_show(struct device *dev,
+>>>>>>> v3.18
 			 struct device_attribute *attr, char *buf)
 {
 	struct uio_device *idev = dev_get_drvdata(dev);
 	return sprintf(buf, "%s\n", idev->info->name);
 }
+<<<<<<< HEAD
 
 static ssize_t show_version(struct device *dev,
+=======
+static DEVICE_ATTR_RO(name);
+
+static ssize_t version_show(struct device *dev,
+>>>>>>> v3.18
 			    struct device_attribute *attr, char *buf)
 {
 	struct uio_device *idev = dev_get_drvdata(dev);
 	return sprintf(buf, "%s\n", idev->info->version);
 }
+<<<<<<< HEAD
 
 static ssize_t show_event(struct device *dev,
+=======
+static DEVICE_ATTR_RO(version);
+
+static ssize_t event_show(struct device *dev,
+>>>>>>> v3.18
 			  struct device_attribute *attr, char *buf)
 {
 	struct uio_device *idev = dev_get_drvdata(dev);
 	return sprintf(buf, "%u\n", (unsigned int)atomic_read(&idev->event));
 }
+<<<<<<< HEAD
 
 static struct device_attribute uio_class_attributes[] = {
 	__ATTR(name, S_IRUGO, show_name, NULL),
@@ -251,11 +271,26 @@ static struct device_attribute uio_class_attributes[] = {
 	__ATTR(event, S_IRUGO, show_event, NULL),
 	{}
 };
+=======
+static DEVICE_ATTR_RO(event);
+
+static struct attribute *uio_attrs[] = {
+	&dev_attr_name.attr,
+	&dev_attr_version.attr,
+	&dev_attr_event.attr,
+	NULL,
+};
+ATTRIBUTE_GROUPS(uio);
+>>>>>>> v3.18
 
 /* UIO class infrastructure */
 static struct class uio_class = {
 	.name = "uio",
+<<<<<<< HEAD
 	.dev_attrs = uio_class_attributes,
+=======
+	.dev_groups = uio_groups,
+>>>>>>> v3.18
 };
 
 /*
@@ -285,13 +320,21 @@ static int uio_dev_add_attributes(struct uio_device *idev)
 		}
 		map = kzalloc(sizeof(*map), GFP_KERNEL);
 		if (!map)
+<<<<<<< HEAD
 			goto err_map;
+=======
+			goto err_map_kobj;
+>>>>>>> v3.18
 		kobject_init(&map->kobj, &map_attr_type);
 		map->mem = mem;
 		mem->map = map;
 		ret = kobject_add(&map->kobj, idev->map_dir, "map%d", mi);
 		if (ret)
+<<<<<<< HEAD
 			goto err_map;
+=======
+			goto err_map_kobj;
+>>>>>>> v3.18
 		ret = kobject_uevent(&map->kobj, KOBJ_ADD);
 		if (ret)
 			goto err_map;
@@ -310,14 +353,22 @@ static int uio_dev_add_attributes(struct uio_device *idev)
 		}
 		portio = kzalloc(sizeof(*portio), GFP_KERNEL);
 		if (!portio)
+<<<<<<< HEAD
 			goto err_portio;
+=======
+			goto err_portio_kobj;
+>>>>>>> v3.18
 		kobject_init(&portio->kobj, &portio_attr_type);
 		portio->port = port;
 		port->portio = portio;
 		ret = kobject_add(&portio->kobj, idev->portio_dir,
 							"port%d", pi);
 		if (ret)
+<<<<<<< HEAD
 			goto err_portio;
+=======
+			goto err_portio_kobj;
+>>>>>>> v3.18
 		ret = kobject_uevent(&portio->kobj, KOBJ_ADD);
 		if (ret)
 			goto err_portio;
@@ -326,14 +377,26 @@ static int uio_dev_add_attributes(struct uio_device *idev)
 	return 0;
 
 err_portio:
+<<<<<<< HEAD
 	for (pi--; pi >= 0; pi--) {
+=======
+	pi--;
+err_portio_kobj:
+	for (; pi >= 0; pi--) {
+>>>>>>> v3.18
 		port = &idev->info->port[pi];
 		portio = port->portio;
 		kobject_put(&portio->kobj);
 	}
 	kobject_put(idev->portio_dir);
 err_map:
+<<<<<<< HEAD
 	for (mi--; mi>=0; mi--) {
+=======
+	mi--;
+err_map_kobj:
+	for (; mi >= 0; mi--) {
+>>>>>>> v3.18
 		mem = &idev->info->mem[mi];
 		map = mem->map;
 		kobject_put(&map->kobj);
@@ -593,6 +656,7 @@ static int uio_find_mem_index(struct vm_area_struct *vma)
 	return -1;
 }
 
+<<<<<<< HEAD
 static void uio_vma_open(struct vm_area_struct *vma)
 {
 	struct uio_device *idev = vma->vm_private_data;
@@ -605,11 +669,17 @@ static void uio_vma_close(struct vm_area_struct *vma)
 	idev->vma_count--;
 }
 
+=======
+>>>>>>> v3.18
 static int uio_vma_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 {
 	struct uio_device *idev = vma->vm_private_data;
 	struct page *page;
 	unsigned long offset;
+<<<<<<< HEAD
+=======
+	void *addr;
+>>>>>>> v3.18
 
 	int mi = uio_find_mem_index(vma);
 	if (mi < 0)
@@ -621,18 +691,29 @@ static int uio_vma_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 	 */
 	offset = (vmf->pgoff - mi) << PAGE_SHIFT;
 
+<<<<<<< HEAD
 	if (idev->info->mem[mi].memtype == UIO_MEM_LOGICAL)
 		page = virt_to_page(idev->info->mem[mi].addr + offset);
 	else
 		page = vmalloc_to_page((void *)(unsigned long)idev->info->mem[mi].addr + offset);
+=======
+	addr = (void *)(unsigned long)idev->info->mem[mi].addr + offset;
+	if (idev->info->mem[mi].memtype == UIO_MEM_LOGICAL)
+		page = virt_to_page(addr);
+	else
+		page = vmalloc_to_page(addr);
+>>>>>>> v3.18
 	get_page(page);
 	vmf->page = page;
 	return 0;
 }
 
 static const struct vm_operations_struct uio_logical_vm_ops = {
+<<<<<<< HEAD
 	.open = uio_vma_open,
 	.close = uio_vma_close,
+=======
+>>>>>>> v3.18
 	.fault = uio_vma_fault,
 };
 
@@ -640,7 +721,10 @@ static int uio_mmap_logical(struct vm_area_struct *vma)
 {
 	vma->vm_flags |= VM_DONTEXPAND | VM_DONTDUMP;
 	vma->vm_ops = &uio_logical_vm_ops;
+<<<<<<< HEAD
 	uio_vma_open(vma);
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -659,6 +743,11 @@ static int uio_mmap_physical(struct vm_area_struct *vma)
 		return -EINVAL;
 	mem = idev->info->mem + mi;
 
+<<<<<<< HEAD
+=======
+	if (mem->addr & ~PAGE_MASK)
+		return -ENODEV;
+>>>>>>> v3.18
 	if (vma->vm_end - vma->vm_start > mem->size)
 		return -EINVAL;
 
@@ -698,7 +787,11 @@ static int uio_mmap(struct file *filep, struct vm_area_struct *vma)
 	if (mi < 0)
 		return -EINVAL;
 
+<<<<<<< HEAD
 	requested_pages = (vma->vm_end - vma->vm_start) >> PAGE_SHIFT;
+=======
+	requested_pages = vma_pages(vma);
+>>>>>>> v3.18
 	actual_pages = ((idev->info->mem[mi].addr & ~PAGE_MASK)
 			+ idev->info->mem[mi].size + PAGE_SIZE -1) >> PAGE_SHIFT;
 	if (requested_pages > actual_pages)
@@ -821,10 +914,16 @@ int __uio_register_device(struct module *owner,
 
 	info->uio_dev = NULL;
 
+<<<<<<< HEAD
 	idev = kzalloc(sizeof(*idev), GFP_KERNEL);
 	if (!idev) {
 		ret = -ENOMEM;
 		goto err_kzalloc;
+=======
+	idev = devm_kzalloc(parent, sizeof(*idev), GFP_KERNEL);
+	if (!idev) {
+		return -ENOMEM;
+>>>>>>> v3.18
 	}
 
 	idev->owner = owner;
@@ -834,7 +933,11 @@ int __uio_register_device(struct module *owner,
 
 	ret = uio_get_minor(idev);
 	if (ret)
+<<<<<<< HEAD
 		goto err_get_minor;
+=======
+		return ret;
+>>>>>>> v3.18
 
 	idev->dev = device_create(&uio_class, parent,
 				  MKDEV(uio_major, idev->minor), idev,
@@ -852,7 +955,11 @@ int __uio_register_device(struct module *owner,
 	info->uio_dev = idev;
 
 	if (info->irq && (info->irq != UIO_IRQ_CUSTOM)) {
+<<<<<<< HEAD
 		ret = request_irq(info->irq, uio_interrupt,
+=======
+		ret = devm_request_irq(idev->dev, info->irq, uio_interrupt,
+>>>>>>> v3.18
 				  info->irq_flags, info->name, idev);
 		if (ret)
 			goto err_request_irq;
@@ -866,9 +973,12 @@ err_uio_dev_add_attributes:
 	device_destroy(&uio_class, MKDEV(uio_major, idev->minor));
 err_device_create:
 	uio_free_minor(idev);
+<<<<<<< HEAD
 err_get_minor:
 	kfree(idev);
 err_kzalloc:
+=======
+>>>>>>> v3.18
 	return ret;
 }
 EXPORT_SYMBOL_GPL(__uio_register_device);
@@ -889,6 +999,7 @@ void uio_unregister_device(struct uio_info *info)
 
 	uio_free_minor(idev);
 
+<<<<<<< HEAD
 	if (info->irq && (info->irq != UIO_IRQ_CUSTOM))
 		free_irq(info->irq, idev);
 
@@ -896,6 +1007,11 @@ void uio_unregister_device(struct uio_info *info)
 
 	device_destroy(&uio_class, MKDEV(uio_major, idev->minor));
 	kfree(idev);
+=======
+	uio_dev_del_attributes(idev);
+
+	device_destroy(&uio_class, MKDEV(uio_major, idev->minor));
+>>>>>>> v3.18
 
 	return;
 }

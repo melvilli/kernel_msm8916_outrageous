@@ -92,7 +92,11 @@ static int dt_remember_or_free_map(struct pinctrl *p, const char *statename,
 	dt_map->num_maps = num_maps;
 	list_add_tail(&dt_map->node, &p->dt_maps);
 
+<<<<<<< HEAD
 	return pinctrl_register_map(map, num_maps, false);
+=======
+	return pinctrl_register_map(map, num_maps, false, true);
+>>>>>>> v3.18
 }
 
 struct pinctrl_dev *of_pinctrl_get(struct device_node *np)
@@ -186,7 +190,13 @@ int pinctrl_dt_to_map(struct pinctrl *p)
 
 	/* CONFIG_OF enabled, p->dev not instantiated from DT */
 	if (!np) {
+<<<<<<< HEAD
 		dev_dbg(p->dev, "no of_node; not parsing pinctrl DT\n");
+=======
+		if (of_have_populated_dt())
+			dev_dbg(p->dev,
+				"no of_node; not parsing pinctrl DT\n");
+>>>>>>> v3.18
 		return 0;
 	}
 
@@ -199,6 +209,7 @@ int pinctrl_dt_to_map(struct pinctrl *p)
 		propname = kasprintf(GFP_KERNEL, "pinctrl-%d", state);
 		prop = of_find_property(np, propname, &size);
 		kfree(propname);
+<<<<<<< HEAD
 		if (!prop) {
 			if (!state) {
 				ret = -EINVAL;
@@ -206,6 +217,10 @@ int pinctrl_dt_to_map(struct pinctrl *p)
 			}
 			break;
 		}
+=======
+		if (!prop)
+			break;
+>>>>>>> v3.18
 		list = prop->value;
 		size /= sizeof(*list);
 

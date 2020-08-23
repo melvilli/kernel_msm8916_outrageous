@@ -98,6 +98,7 @@ resource_size_t pcibios_align_resource(void *data, const struct resource *res,
 {
 	return res->start;
 }
+<<<<<<< HEAD
 
 int pcibios_enable_device(struct pci_dev *dev, int mask)
 {
@@ -182,3 +183,5 @@ void insl(unsigned long addr, void *dst, unsigned long count)
 	}
 }
 EXPORT_SYMBOL(insl);
+=======
+>>>>>>> v3.18

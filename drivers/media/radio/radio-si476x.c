@@ -268,8 +268,13 @@ struct si476x_radio;
  *
  * @tune_freq: Tune chip to a specific frequency
  * @seek_start: Star station seeking
+<<<<<<< HEAD
  * @rsq_status: Get Recieved Signal Quality(RSQ) status
  * @rds_blckcnt: Get recived RDS blocks count
+=======
+ * @rsq_status: Get Received Signal Quality(RSQ) status
+ * @rds_blckcnt: Get received RDS blocks count
+>>>>>>> v3.18
  * @phase_diversity: Change phase diversity mode of the tuner
  * @phase_div_status: Get phase diversity mode status
  * @acf_status: Get the status of Automatically Controlled
@@ -1018,6 +1023,7 @@ static int si476x_radio_s_ctrl(struct v4l2_ctrl *ctrl)
 	return retval;
 }
 
+<<<<<<< HEAD
 static int si476x_radio_g_chip_ident(struct file *file, void *fh,
 				     struct v4l2_dbg_chip_ident *chip)
 {
@@ -1028,6 +1034,8 @@ static int si476x_radio_g_chip_ident(struct file *file, void *fh,
 }
 
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 static int si476x_radio_g_register(struct file *file, void *fh,
 				   struct v4l2_dbg_register *reg)
@@ -1203,7 +1211,10 @@ static const struct v4l2_ioctl_ops si4761_ioctl_ops = {
 	.vidioc_subscribe_event		= v4l2_ctrl_subscribe_event,
 	.vidioc_unsubscribe_event	= v4l2_event_unsubscribe,
 
+<<<<<<< HEAD
 	.vidioc_g_chip_ident		= si476x_radio_g_chip_ident,
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 	.vidioc_g_register		= si476x_radio_g_register,
 	.vidioc_s_register		= si476x_radio_s_register,
@@ -1481,7 +1492,10 @@ static int si476x_radio_probe(struct platform_device *pdev)
 	video_set_drvdata(&radio->videodev, radio);
 	platform_set_drvdata(pdev, radio);
 
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &radio->videodev.flags);
+=======
+>>>>>>> v3.18
 
 	radio->v4l2dev.ctrl_handler = &radio->ctrl_handler;
 	v4l2_ctrl_handler_init(&radio->ctrl_handler,

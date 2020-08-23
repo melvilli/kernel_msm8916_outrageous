@@ -134,8 +134,13 @@ sn2_ipi_flush_all_tlb(struct mm_struct *mm)
 	itc = ia64_get_itc();
 	smp_flush_tlb_cpumask(*mm_cpumask(mm));
 	itc = ia64_get_itc() - itc;
+<<<<<<< HEAD
 	__get_cpu_var(ptcstats).shub_ipi_flushes_itc_clocks += itc;
 	__get_cpu_var(ptcstats).shub_ipi_flushes++;
+=======
+	__this_cpu_add(ptcstats.shub_ipi_flushes_itc_clocks, itc);
+	__this_cpu_inc(ptcstats.shub_ipi_flushes);
+>>>>>>> v3.18
 }
 
 /**
@@ -199,14 +204,22 @@ sn2_global_tlb_purge(struct mm_struct *mm, unsigned long start,
 			start += (1UL << nbits);
 		} while (start < end);
 		ia64_srlz_i();
+<<<<<<< HEAD
 		__get_cpu_var(ptcstats).ptc_l++;
+=======
+		__this_cpu_inc(ptcstats.ptc_l);
+>>>>>>> v3.18
 		preempt_enable();
 		return;
 	}
 
 	if (atomic_read(&mm->mm_users) == 1 && mymm) {
 		flush_tlb_mm(mm);
+<<<<<<< HEAD
 		__get_cpu_var(ptcstats).change_rid++;
+=======
+		__this_cpu_inc(ptcstats.change_rid);
+>>>>>>> v3.18
 		preempt_enable();
 		return;
 	}
@@ -250,11 +263,19 @@ sn2_global_tlb_purge(struct mm_struct *mm, unsigned long start,
 	spin_lock_irqsave(PTC_LOCK(shub1), flags);
 	itc2 = ia64_get_itc();
 
+<<<<<<< HEAD
 	__get_cpu_var(ptcstats).lock_itc_clocks += itc2 - itc;
 	__get_cpu_var(ptcstats).shub_ptc_flushes++;
 	__get_cpu_var(ptcstats).nodes_flushed += nix;
 	if (!mymm)
 		 __get_cpu_var(ptcstats).shub_ptc_flushes_not_my_mm++;
+=======
+	__this_cpu_add(ptcstats.lock_itc_clocks, itc2 - itc);
+	__this_cpu_inc(ptcstats.shub_ptc_flushes);
+	__this_cpu_add(ptcstats.nodes_flushed, nix);
+	if (!mymm)
+		 __this_cpu_inc(ptcstats.shub_ptc_flushes_not_my_mm);
+>>>>>>> v3.18
 
 	if (use_cpu_ptcga && !mymm) {
 		old_rr = ia64_get_rr(start);
@@ -299,9 +320,15 @@ sn2_global_tlb_purge(struct mm_struct *mm, unsigned long start,
 
 done:
 	itc2 = ia64_get_itc() - itc2;
+<<<<<<< HEAD
 	__get_cpu_var(ptcstats).shub_itc_clocks += itc2;
 	if (itc2 > __get_cpu_var(ptcstats).shub_itc_clocks_max)
 		__get_cpu_var(ptcstats).shub_itc_clocks_max = itc2;
+=======
+	__this_cpu_add(ptcstats.shub_itc_clocks, itc2);
+	if (itc2 > __this_cpu_read(ptcstats.shub_itc_clocks_max))
+		__this_cpu_write(ptcstats.shub_itc_clocks_max, itc2);
+>>>>>>> v3.18
 
 	if (old_rr) {
 		ia64_set_rr(start, old_rr);
@@ -311,7 +338,11 @@ done:
 	spin_unlock_irqrestore(PTC_LOCK(shub1), flags);
 
 	if (flush_opt == 1 && deadlock) {
+<<<<<<< HEAD
 		__get_cpu_var(ptcstats).deadlocks++;
+=======
+		__this_cpu_inc(ptcstats.deadlocks);
+>>>>>>> v3.18
 		sn2_ipi_flush_all_tlb(mm);
 	}
 
@@ -334,7 +365,11 @@ sn2_ptc_deadlock_recovery(short *nasids, short ib, short ie, int mynasid,
 	short nasid, i;
 	unsigned long *piows, zeroval, n;
 
+<<<<<<< HEAD
 	__get_cpu_var(ptcstats).deadlocks++;
+=======
+	__this_cpu_inc(ptcstats.deadlocks);
+>>>>>>> v3.18
 
 	piows = (unsigned long *) pda->pio_write_status_addr;
 	zeroval = pda->pio_write_status_val;
@@ -349,7 +384,11 @@ sn2_ptc_deadlock_recovery(short *nasids, short ib, short ie, int mynasid,
 			ptc1 = CHANGE_NASID(nasid, ptc1);
 
 		n = sn2_ptc_deadlock_recovery_core(ptc0, data0, ptc1, data1, piows, zeroval);
+<<<<<<< HEAD
 		__get_cpu_var(ptcstats).deadlocks2 += n;
+=======
+		__this_cpu_add(ptcstats.deadlocks2, n);
+>>>>>>> v3.18
 	}
 
 }

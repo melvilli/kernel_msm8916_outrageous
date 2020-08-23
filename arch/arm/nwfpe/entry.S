@@ -19,7 +19,11 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 */
+<<<<<<< HEAD
 
+=======
+#include <asm/assembler.h>
+>>>>>>> v3.18
 #include <asm/opcodes.h>
 
 /* This is the kernel's entry point into the floating point emulator.
@@ -92,7 +96,11 @@ emulate:
 	mov	r0, r6			@ prepare for EmulateAll()
 	bl	EmulateAll		@ emulate the instruction
 	cmp	r0, #0			@ was emulation successful
+<<<<<<< HEAD
 	moveq	pc, r4			@ no, return failure
+=======
+	reteq	r4			@ no, return failure
+>>>>>>> v3.18
 
 next:
 .Lx1:	ldrt	r6, [r5], #4		@ get the next instruction and
@@ -102,7 +110,11 @@ next:
 	teq	r2, #0x0C000000
 	teqne	r2, #0x0D000000
 	teqne	r2, #0x0E000000
+<<<<<<< HEAD
 	movne	pc, r9			@ return ok if not a fp insn
+=======
+	retne	r9			@ return ok if not a fp insn
+>>>>>>> v3.18
 
 	str	r5, [sp, #S_PC]		@ update PC copy in regs
 
@@ -115,7 +127,11 @@ next:
 	@ plain LDR instruction.  Weird, but it seems harmless.
 	.pushsection .fixup,"ax"
 	.align	2
+<<<<<<< HEAD
 .Lfix:	mov	pc, r9			@ let the user eat segfaults
+=======
+.Lfix:	ret	r9			@ let the user eat segfaults
+>>>>>>> v3.18
 	.popsection
 
 	.pushsection __ex_table,"a"

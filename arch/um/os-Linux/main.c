@@ -123,6 +123,11 @@ int __init main(int argc, char **argv, char **envp)
 
 	setup_env_path();
 
+<<<<<<< HEAD
+=======
+	setsid();
+
+>>>>>>> v3.18
 	new_argv = malloc((argc + 1) * sizeof(char *));
 	if (new_argv == NULL) {
 		perror("Mallocing argv");
@@ -149,6 +154,10 @@ int __init main(int argc, char **argv, char **envp)
 #endif
 
 	do_uml_initcalls();
+<<<<<<< HEAD
+=======
+	change_sig(SIGPIPE, 0);
+>>>>>>> v3.18
 	ret = linux_main(argc, argv);
 
 	/*

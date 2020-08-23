@@ -233,6 +233,11 @@
 
 #ifndef __ASSEMBLY__
 
+<<<<<<< HEAD
+=======
+#include <linux/serial_core.h>
+
+>>>>>>> v3.18
 /* configuration structure for per-machine configurations for the
  * serial port
  *

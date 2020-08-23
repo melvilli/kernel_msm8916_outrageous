@@ -18,6 +18,10 @@
 #include <linux/seq_file.h>
 #include <linux/radix-tree.h>
 #include <linux/blkdev.h>
+<<<<<<< HEAD
+=======
+#include <linux/atomic.h>
+>>>>>>> v3.18
 
 /* Max limits for throttle policy */
 #define THROTL_IOPS_MAX		UINT_MAX
@@ -49,9 +53,12 @@ struct blkcg {
 	struct blkcg_gq			*blkg_hint;
 	struct hlist_head		blkg_list;
 
+<<<<<<< HEAD
 	/* for policies to test whether associated blkcg has changed */
 	uint64_t			id;
 
+=======
+>>>>>>> v3.18
 	/* TODO: per-policy storage in blkcg */
 	unsigned int			cfq_weight;	/* belongs to cfq */
 	unsigned int			cfq_leaf_weight;
@@ -104,7 +111,11 @@ struct blkcg_gq {
 	struct request_list		rl;
 
 	/* reference count */
+<<<<<<< HEAD
 	int				refcnt;
+=======
+	atomic_t			refcnt;
+>>>>>>> v3.18
 
 	/* is this blkg online? protected by both blkcg and q locks */
 	bool				online;
@@ -179,22 +190,36 @@ int blkg_conf_prep(struct blkcg *blkcg, const struct blkcg_policy *pol,
 void blkg_conf_finish(struct blkg_conf_ctx *ctx);
 
 
+<<<<<<< HEAD
 static inline struct blkcg *cgroup_to_blkcg(struct cgroup *cgroup)
 {
 	return container_of(cgroup_subsys_state(cgroup, blkio_subsys_id),
 			    struct blkcg, css);
+=======
+static inline struct blkcg *css_to_blkcg(struct cgroup_subsys_state *css)
+{
+	return css ? container_of(css, struct blkcg, css) : NULL;
+>>>>>>> v3.18
 }
 
 static inline struct blkcg *task_blkcg(struct task_struct *tsk)
 {
+<<<<<<< HEAD
 	return container_of(task_subsys_state(tsk, blkio_subsys_id),
 			    struct blkcg, css);
+=======
+	return css_to_blkcg(task_css(tsk, blkio_cgrp_id));
+>>>>>>> v3.18
 }
 
 static inline struct blkcg *bio_blkcg(struct bio *bio)
 {
 	if (bio && bio->bi_css)
+<<<<<<< HEAD
 		return container_of(bio->bi_css, struct blkcg, css);
+=======
+		return css_to_blkcg(bio->bi_css);
+>>>>>>> v3.18
 	return task_blkcg(current);
 }
 
@@ -206,9 +231,13 @@ static inline struct blkcg *bio_blkcg(struct bio *bio)
  */
 static inline struct blkcg *blkcg_parent(struct blkcg *blkcg)
 {
+<<<<<<< HEAD
 	struct cgroup *pcg = blkcg->css.cgroup->parent;
 
 	return pcg ? cgroup_to_blkcg(pcg) : NULL;
+=======
+	return css_to_blkcg(blkcg->css.parent);
+>>>>>>> v3.18
 }
 
 /**
@@ -245,18 +274,32 @@ static inline struct blkcg_gq *pd_to_blkg(struct blkg_policy_data *pd)
  */
 static inline int blkg_path(struct blkcg_gq *blkg, char *buf, int buflen)
 {
+<<<<<<< HEAD
 	int ret;
 
 	ret = cgroup_path(blkg->blkcg->css.cgroup, buf, buflen);
 	if (ret)
 		strncpy(buf, "<unavailable>", buflen);
 	return ret;
+=======
+	char *p;
+
+	p = cgroup_path(blkg->blkcg->css.cgroup, buf, buflen);
+	if (!p) {
+		strncpy(buf, "<unavailable>", buflen);
+		return -ENAMETOOLONG;
+	}
+
+	memmove(buf, p, buf + buflen - p);
+	return 0;
+>>>>>>> v3.18
 }
 
 /**
  * blkg_get - get a blkg reference
  * @blkg: blkg to get
  *
+<<<<<<< HEAD
  * The caller should be holding queue_lock and an existing reference.
  */
 static inline void blkg_get(struct blkcg_gq *blkg)
@@ -267,10 +310,22 @@ static inline void blkg_get(struct blkcg_gq *blkg)
 }
 
 void __blkg_release(struct blkcg_gq *blkg);
+=======
+ * The caller should be holding an existing reference.
+ */
+static inline void blkg_get(struct blkcg_gq *blkg)
+{
+	WARN_ON_ONCE(atomic_read(&blkg->refcnt) <= 0);
+	atomic_inc(&blkg->refcnt);
+}
+
+void __blkg_release_rcu(struct rcu_head *rcu);
+>>>>>>> v3.18
 
 /**
  * blkg_put - put a blkg reference
  * @blkg: blkg to put
+<<<<<<< HEAD
  *
  * The caller should be holding queue_lock.
  */
@@ -282,6 +337,51 @@ static inline void blkg_put(struct blkcg_gq *blkg)
 		__blkg_release(blkg);
 }
 
+=======
+ */
+static inline void blkg_put(struct blkcg_gq *blkg)
+{
+	WARN_ON_ONCE(atomic_read(&blkg->refcnt) <= 0);
+	if (atomic_dec_and_test(&blkg->refcnt))
+		call_rcu(&blkg->rcu_head, __blkg_release_rcu);
+}
+
+struct blkcg_gq *__blkg_lookup(struct blkcg *blkcg, struct request_queue *q,
+			       bool update_hint);
+
+/**
+ * blkg_for_each_descendant_pre - pre-order walk of a blkg's descendants
+ * @d_blkg: loop cursor pointing to the current descendant
+ * @pos_css: used for iteration
+ * @p_blkg: target blkg to walk descendants of
+ *
+ * Walk @c_blkg through the descendants of @p_blkg.  Must be used with RCU
+ * read locked.  If called under either blkcg or queue lock, the iteration
+ * is guaranteed to include all and only online blkgs.  The caller may
+ * update @pos_css by calling css_rightmost_descendant() to skip subtree.
+ * @p_blkg is included in the iteration and the first node to be visited.
+ */
+#define blkg_for_each_descendant_pre(d_blkg, pos_css, p_blkg)		\
+	css_for_each_descendant_pre((pos_css), &(p_blkg)->blkcg->css)	\
+		if (((d_blkg) = __blkg_lookup(css_to_blkcg(pos_css),	\
+					      (p_blkg)->q, false)))
+
+/**
+ * blkg_for_each_descendant_post - post-order walk of a blkg's descendants
+ * @d_blkg: loop cursor pointing to the current descendant
+ * @pos_css: used for iteration
+ * @p_blkg: target blkg to walk descendants of
+ *
+ * Similar to blkg_for_each_descendant_pre() but performs post-order
+ * traversal instead.  Synchronization rules are the same.  @p_blkg is
+ * included in the iteration and the last node to be visited.
+ */
+#define blkg_for_each_descendant_post(d_blkg, pos_css, p_blkg)		\
+	css_for_each_descendant_post((pos_css), &(p_blkg)->blkcg->css)	\
+		if (((d_blkg) = __blkg_lookup(css_to_blkcg(pos_css),	\
+					      (p_blkg)->q, false)))
+
+>>>>>>> v3.18
 /**
  * blk_get_rl - get request_list to use
  * @q: request_queue of interest
@@ -371,6 +471,14 @@ struct request_list *__blk_queue_next_rl(struct request_list *rl,
 #define blk_queue_for_each_rl(rl, q)	\
 	for ((rl) = &(q)->root_rl; (rl); (rl) = __blk_queue_next_rl((rl), (q)))
 
+<<<<<<< HEAD
+=======
+static inline void blkg_stat_init(struct blkg_stat *stat)
+{
+	u64_stats_init(&stat->syncp);
+}
+
+>>>>>>> v3.18
 /**
  * blkg_stat_add - add a value to a blkg_stat
  * @stat: target blkg_stat
@@ -399,9 +507,15 @@ static inline uint64_t blkg_stat_read(struct blkg_stat *stat)
 	uint64_t v;
 
 	do {
+<<<<<<< HEAD
 		start = u64_stats_fetch_begin_bh(&stat->syncp);
 		v = stat->cnt;
 	} while (u64_stats_fetch_retry_bh(&stat->syncp, start));
+=======
+		start = u64_stats_fetch_begin_irq(&stat->syncp);
+		v = stat->cnt;
+	} while (u64_stats_fetch_retry_irq(&stat->syncp, start));
+>>>>>>> v3.18
 
 	return v;
 }
@@ -427,6 +541,14 @@ static inline void blkg_stat_merge(struct blkg_stat *to, struct blkg_stat *from)
 	blkg_stat_add(to, blkg_stat_read(from));
 }
 
+<<<<<<< HEAD
+=======
+static inline void blkg_rwstat_init(struct blkg_rwstat *rwstat)
+{
+	u64_stats_init(&rwstat->syncp);
+}
+
+>>>>>>> v3.18
 /**
  * blkg_rwstat_add - add a value to a blkg_rwstat
  * @rwstat: target blkg_rwstat
@@ -467,9 +589,15 @@ static inline struct blkg_rwstat blkg_rwstat_read(struct blkg_rwstat *rwstat)
 	struct blkg_rwstat tmp;
 
 	do {
+<<<<<<< HEAD
 		start = u64_stats_fetch_begin_bh(&rwstat->syncp);
 		tmp = *rwstat;
 	} while (u64_stats_fetch_retry_bh(&rwstat->syncp, start));
+=======
+		start = u64_stats_fetch_begin_irq(&rwstat->syncp);
+		tmp = *rwstat;
+	} while (u64_stats_fetch_retry_irq(&rwstat->syncp, start));
+>>>>>>> v3.18
 
 	return tmp;
 }
@@ -542,7 +670,10 @@ static inline int blkcg_activate_policy(struct request_queue *q,
 static inline void blkcg_deactivate_policy(struct request_queue *q,
 					   const struct blkcg_policy *pol) { }
 
+<<<<<<< HEAD
 static inline struct blkcg *cgroup_to_blkcg(struct cgroup *cgroup) { return NULL; }
+=======
+>>>>>>> v3.18
 static inline struct blkcg *bio_blkcg(struct bio *bio) { return NULL; }
 
 static inline struct blkg_policy_data *blkg_to_pd(struct blkcg_gq *blkg,

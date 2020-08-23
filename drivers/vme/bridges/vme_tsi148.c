@@ -45,7 +45,11 @@ static int geoid;
 
 static const char driver_name[] = "vme_tsi148";
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(tsi148_ids) = {
+=======
+static const struct pci_device_id tsi148_ids[] = {
+>>>>>>> v3.18
 	{ PCI_DEVICE(PCI_VENDOR_ID_TUNDRA, PCI_DEVICE_ID_TUNDRA_TSI148) },
 	{ },
 };
@@ -169,7 +173,11 @@ static u32 tsi148_VERR_irqhandler(struct vme_bridge *tsi148_bridge)
 	unsigned int error_addr_high, error_addr_low;
 	unsigned long long error_addr;
 	u32 error_attrib;
+<<<<<<< HEAD
 	struct vme_bus_error *error;
+=======
+	struct vme_bus_error *error = NULL;
+>>>>>>> v3.18
 	struct tsi148_driver *bridge;
 
 	bridge = tsi148_bridge->driver_priv;
@@ -186,6 +194,7 @@ static u32 tsi148_VERR_irqhandler(struct vme_bridge *tsi148_bridge)
 			"Occurred\n");
 	}
 
+<<<<<<< HEAD
 	error = kmalloc(sizeof(struct vme_bus_error), GFP_ATOMIC);
 	if (error) {
 		error->address = error_addr;
@@ -196,6 +205,24 @@ static u32 tsi148_VERR_irqhandler(struct vme_bridge *tsi148_bridge)
 			"VMEbus Error reporting\n");
 		dev_err(tsi148_bridge->parent, "VME Bus Error at address: "
 			"0x%llx, attributes: %08x\n", error_addr, error_attrib);
+=======
+	if (err_chk) {
+		error = kmalloc(sizeof(struct vme_bus_error), GFP_ATOMIC);
+		if (error) {
+			error->address = error_addr;
+			error->attributes = error_attrib;
+			list_add_tail(&error->list, &tsi148_bridge->vme_errors);
+		} else {
+			dev_err(tsi148_bridge->parent,
+				"Unable to alloc memory for VMEbus Error reporting\n");
+		}
+	}
+
+	if (!error) {
+		dev_err(tsi148_bridge->parent,
+			"VME Bus Error at address: 0x%llx, attributes: %08x\n",
+			error_addr, error_attrib);
+>>>>>>> v3.18
 	}
 
 	/* Clear Status */
@@ -314,7 +341,11 @@ static int tsi148_irq_init(struct vme_bridge *tsi148_bridge)
 	struct pci_dev *pdev;
 	struct tsi148_driver *bridge;
 
+<<<<<<< HEAD
 	pdev = container_of(tsi148_bridge->parent, struct pci_dev, dev);
+=======
+	pdev = to_pci_dev(tsi148_bridge->parent);
+>>>>>>> v3.18
 
 	bridge = tsi148_bridge->driver_priv;
 
@@ -427,9 +458,13 @@ static void tsi148_irq_set(struct vme_bridge *tsi148_bridge, int level,
 		iowrite32be(tmp, bridge->base + TSI148_LCSR_INTEO);
 
 		if (sync != 0) {
+<<<<<<< HEAD
 			pdev = container_of(tsi148_bridge->parent,
 				struct pci_dev, dev);
 
+=======
+			pdev = to_pci_dev(tsi148_bridge->parent);
+>>>>>>> v3.18
 			synchronize_irq(pdev->irq);
 		}
 	} else {
@@ -735,7 +770,11 @@ static int tsi148_slave_get(struct vme_slave_resource *image, int *enabled,
 	reg_join(vme_bound_high, vme_bound_low, &vme_bound);
 	reg_join(pci_offset_high, pci_offset_low, &pci_offset);
 
+<<<<<<< HEAD
 	*pci_base = (dma_addr_t)vme_base + pci_offset;
+=======
+	*pci_base = (dma_addr_t)(*vme_base + pci_offset);
+>>>>>>> v3.18
 
 	*enabled = 0;
 	*aspace = 0;
@@ -808,7 +847,11 @@ static int tsi148_alloc_resource(struct vme_master_resource *image,
 
 	tsi148_bridge = image->parent;
 
+<<<<<<< HEAD
 	pdev = container_of(tsi148_bridge->parent, struct pci_dev, dev);
+=======
+	pdev = to_pci_dev(tsi148_bridge->parent);
+>>>>>>> v3.18
 
 	existing_size = (unsigned long long)(image->bus_resource.end -
 		image->bus_resource.start);
@@ -904,11 +947,21 @@ static int tsi148_master_set(struct vme_master_resource *image, int enabled,
 	unsigned long long pci_bound, vme_offset, pci_base;
 	struct vme_bridge *tsi148_bridge;
 	struct tsi148_driver *bridge;
+<<<<<<< HEAD
+=======
+	struct pci_bus_region region;
+	struct pci_dev *pdev;
+>>>>>>> v3.18
 
 	tsi148_bridge = image->parent;
 
 	bridge = tsi148_bridge->driver_priv;
 
+<<<<<<< HEAD
+=======
+	pdev = to_pci_dev(tsi148_bridge->parent);
+
+>>>>>>> v3.18
 	/* Verify input data */
 	if (vme_base & 0xFFFF) {
 		dev_err(tsi148_bridge->parent, "Invalid VME Window "
@@ -943,7 +996,13 @@ static int tsi148_master_set(struct vme_master_resource *image, int enabled,
 		pci_bound = 0;
 		vme_offset = 0;
 	} else {
+<<<<<<< HEAD
 		pci_base = (unsigned long long)image->bus_resource.start;
+=======
+		pcibios_resource_to_bus(pdev->bus, &region,
+					&image->bus_resource);
+		pci_base = region.start;
+>>>>>>> v3.18
 
 		/*
 		 * Bound address is a valid address for the window, adjust
@@ -1261,7 +1320,11 @@ static ssize_t tsi148_master_read(struct vme_master_resource *image, void *buf,
 	u32 aspace, cycle, dwidth;
 	struct vme_bus_error *vme_err = NULL;
 	struct vme_bridge *tsi148_bridge;
+<<<<<<< HEAD
 	void *addr = image->kern_base + offset;
+=======
+	void __iomem *addr = image->kern_base + offset;
+>>>>>>> v3.18
 	unsigned int done = 0;
 	unsigned int count32;
 
@@ -1270,8 +1333,13 @@ static ssize_t tsi148_master_read(struct vme_master_resource *image, void *buf,
 	spin_lock(&image->lock);
 
 	/* The following code handles VME address alignment. We cannot use
+<<<<<<< HEAD
 	 * memcpy_xxx directly here because it may cut small data transfers in
 	 * to 8-bit cycles, thus making D16 cycle impossible.
+=======
+	 * memcpy_xxx here because it may cut data transfers in to 8-bit
+	 * cycles when D16 or D32 cycles are required on the VME bus.
+>>>>>>> v3.18
 	 * On the other hand, the bridge itself assures that the maximum data
 	 * cycle configured for the transfer is used and splits it
 	 * automatically for non-aligned addresses, so we don't want the
@@ -1295,9 +1363,15 @@ static ssize_t tsi148_master_read(struct vme_master_resource *image, void *buf,
 	}
 
 	count32 = (count - done) & ~0x3;
+<<<<<<< HEAD
 	if (count32 > 0) {
 		memcpy_fromio(buf + done, addr + done, count32);
 		done += count32;
+=======
+	while (done < count32) {
+		*(u32 *)(buf + done) = ioread32(addr + done);
+		done += 4;
+>>>>>>> v3.18
 	}
 
 	if ((count - done) & 0x2) {
@@ -1342,7 +1416,11 @@ static ssize_t tsi148_master_write(struct vme_master_resource *image, void *buf,
 	int retval = 0, enabled;
 	unsigned long long vme_base, size;
 	u32 aspace, cycle, dwidth;
+<<<<<<< HEAD
 	void *addr = image->kern_base + offset;
+=======
+	void __iomem *addr = image->kern_base + offset;
+>>>>>>> v3.18
 	unsigned int done = 0;
 	unsigned int count32;
 
@@ -1357,7 +1435,11 @@ static ssize_t tsi148_master_write(struct vme_master_resource *image, void *buf,
 	spin_lock(&image->lock);
 
 	/* Here we apply for the same strategy we do in master_read
+<<<<<<< HEAD
 	 * function in order to assure D16 cycle when required.
+=======
+	 * function in order to assure the correct cycles.
+>>>>>>> v3.18
 	 */
 	if ((uintptr_t)addr & 0x1) {
 		iowrite8(*(u8 *)buf, addr);
@@ -1377,9 +1459,15 @@ static ssize_t tsi148_master_write(struct vme_master_resource *image, void *buf,
 	}
 
 	count32 = (count - done) & ~0x3;
+<<<<<<< HEAD
 	if (count32 > 0) {
 		memcpy_toio(addr + done, buf + done, count32);
 		done += count32;
+=======
+	while (done < count32) {
+		iowrite32(*(u32 *)(buf + done), addr + done);
+		done += 4;
+>>>>>>> v3.18
 	}
 
 	if ((count - done) & 0x2) {
@@ -2226,7 +2314,11 @@ static void *tsi148_alloc_consistent(struct device *parent, size_t size,
 	struct pci_dev *pdev;
 
 	/* Find pci_dev container of dev */
+<<<<<<< HEAD
 	pdev = container_of(parent, struct pci_dev, dev);
+=======
+	pdev = to_pci_dev(parent);
+>>>>>>> v3.18
 
 	return pci_alloc_consistent(pdev, size, dma);
 }
@@ -2237,7 +2329,11 @@ static void tsi148_free_consistent(struct device *parent, size_t size,
 	struct pci_dev *pdev;
 
 	/* Find pci_dev container of dev */
+<<<<<<< HEAD
 	pdev = container_of(parent, struct pci_dev, dev);
+=======
+	pdev = to_pci_dev(parent);
+>>>>>>> v3.18
 
 	pci_free_consistent(pdev, size, vaddr, dma);
 }
@@ -2265,16 +2361,24 @@ static int tsi148_crcsr_init(struct vme_bridge *tsi148_bridge,
 	bridge = tsi148_bridge->driver_priv;
 
 	/* Allocate mem for CR/CSR image */
+<<<<<<< HEAD
 	bridge->crcsr_kernel = pci_alloc_consistent(pdev, VME_CRCSR_BUF_SIZE,
 		&bridge->crcsr_bus);
+=======
+	bridge->crcsr_kernel = pci_zalloc_consistent(pdev, VME_CRCSR_BUF_SIZE,
+						     &bridge->crcsr_bus);
+>>>>>>> v3.18
 	if (bridge->crcsr_kernel == NULL) {
 		dev_err(tsi148_bridge->parent, "Failed to allocate memory for "
 			"CR/CSR image\n");
 		return -ENOMEM;
 	}
 
+<<<<<<< HEAD
 	memset(bridge->crcsr_kernel, 0, VME_CRCSR_BUF_SIZE);
 
+=======
+>>>>>>> v3.18
 	reg_split(bridge->crcsr_bus, &crcsr_bus_high, &crcsr_bus_low);
 
 	iowrite32be(crcsr_bus_high, bridge->base + TSI148_LCSR_CROU);
@@ -2294,12 +2398,22 @@ static int tsi148_crcsr_init(struct vme_bridge *tsi148_bridge,
 	dev_info(tsi148_bridge->parent, "CR/CSR Offset: %d\n", cbar);
 
 	crat = ioread32be(bridge->base + TSI148_LCSR_CRAT);
+<<<<<<< HEAD
 	if (crat & TSI148_LCSR_CRAT_EN) {
 		dev_info(tsi148_bridge->parent, "Enabling CR/CSR space\n");
 		iowrite32be(crat | TSI148_LCSR_CRAT_EN,
 			bridge->base + TSI148_LCSR_CRAT);
 	} else
 		dev_info(tsi148_bridge->parent, "CR/CSR already enabled\n");
+=======
+	if (crat & TSI148_LCSR_CRAT_EN)
+		dev_info(tsi148_bridge->parent, "CR/CSR already enabled\n");
+	else {
+		dev_info(tsi148_bridge->parent, "Enabling CR/CSR space\n");
+		iowrite32be(crat | TSI148_LCSR_CRAT_EN,
+			bridge->base + TSI148_LCSR_CRAT);
+	}
+>>>>>>> v3.18
 
 	/* If we want flushed, error-checked writes, set up a window
 	 * over the CR/CSR registers. We read from here to safely flush
@@ -2441,6 +2555,7 @@ static int tsi148_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 		spin_lock_init(&tsi148_device->flush_image->lock);
 		tsi148_device->flush_image->locked = 1;
 		tsi148_device->flush_image->number = master_num;
+<<<<<<< HEAD
 		tsi148_device->flush_image->address_attr = VME_A16 | VME_A24 |
 			VME_A32 | VME_A64;
 		tsi148_device->flush_image->cycle_attr = VME_SCT | VME_BLT |
@@ -2448,6 +2563,8 @@ static int tsi148_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 			VME_2eSST160 | VME_2eSST267 | VME_2eSST320 | VME_SUPER |
 			VME_USER | VME_PROG | VME_DATA;
 		tsi148_device->flush_image->width_attr = VME_D16 | VME_D32;
+=======
+>>>>>>> v3.18
 		memset(&tsi148_device->flush_image->bus_resource, 0,
 			sizeof(struct resource));
 		tsi148_device->flush_image->kern_base  = NULL;
@@ -2582,7 +2699,12 @@ static int tsi148_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 	dev_info(&pdev->dev, "VME Write and flush and error check is %s\n",
 		err_chk ? "enabled" : "disabled");
 
+<<<<<<< HEAD
 	if (tsi148_crcsr_init(tsi148_bridge, pdev)) {
+=======
+	retval = tsi148_crcsr_init(tsi148_bridge, pdev);
+	if (retval) {
+>>>>>>> v3.18
 		dev_err(&pdev->dev, "CR/CSR configuration failed.\n");
 		goto err_crcsr;
 	}

@@ -15,9 +15,13 @@
 	GNU General Public License for more details.
 
 	You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
 	along with this program; if not, write to the
 	Free Software Foundation, Inc.,
 	59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+	along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
  */
 
 /*
@@ -61,7 +65,11 @@ struct sk_buff *rt2x00queue_alloc_rxskb(struct queue_entry *entry, gfp_t gfp)
 	 * at least 8 bytes bytes available in headroom for IV/EIV
 	 * and 8 bytes for ICV data as tailroon.
 	 */
+<<<<<<< HEAD
 	if (test_bit(CAPABILITY_HW_CRYPTO, &rt2x00dev->cap_flags)) {
+=======
+	if (rt2x00_has_cap_hw_crypto(rt2x00dev)) {
+>>>>>>> v3.18
 		head_size += 8;
 		tail_size += 8;
 	}
@@ -516,8 +524,13 @@ static int rt2x00queue_write_tx_data(struct queue_entry *entry,
 	/*
 	 * Add the requested extra tx headroom in front of the skb.
 	 */
+<<<<<<< HEAD
 	skb_push(entry->skb, rt2x00dev->ops->extra_tx_headroom);
 	memset(entry->skb->data, 0, rt2x00dev->ops->extra_tx_headroom);
+=======
+	skb_push(entry->skb, rt2x00dev->extra_tx_headroom);
+	memset(entry->skb->data, 0, rt2x00dev->extra_tx_headroom);
+>>>>>>> v3.18
 
 	/*
 	 * Call the driver's write_tx_data function, if it exists.
@@ -570,7 +583,11 @@ static void rt2x00queue_bar_check(struct queue_entry *entry)
 {
 	struct rt2x00_dev *rt2x00dev = entry->queue->rt2x00dev;
 	struct ieee80211_bar *bar = (void *) (entry->skb->data +
+<<<<<<< HEAD
 				    rt2x00dev->ops->extra_tx_headroom);
+=======
+				    rt2x00dev->extra_tx_headroom);
+>>>>>>> v3.18
 	struct rt2x00_bar_list_entry *bar_entry;
 
 	if (likely(!ieee80211_is_back_req(bar->frame_control)))
@@ -730,8 +747,11 @@ int rt2x00queue_clear_beacon(struct rt2x00_dev *rt2x00dev,
 	if (unlikely(!intf->beacon))
 		return -ENOBUFS;
 
+<<<<<<< HEAD
 	mutex_lock(&intf->beacon_skb_mutex);
 
+=======
+>>>>>>> v3.18
 	/*
 	 * Clean up the beacon skb.
 	 */
@@ -744,6 +764,7 @@ int rt2x00queue_clear_beacon(struct rt2x00_dev *rt2x00dev,
 	if (rt2x00dev->ops->lib->clear_beacon)
 		rt2x00dev->ops->lib->clear_beacon(intf->beacon);
 
+<<<<<<< HEAD
 	mutex_unlock(&intf->beacon_skb_mutex);
 
 	return 0;
@@ -751,6 +772,13 @@ int rt2x00queue_clear_beacon(struct rt2x00_dev *rt2x00dev,
 
 int rt2x00queue_update_beacon_locked(struct rt2x00_dev *rt2x00dev,
 				     struct ieee80211_vif *vif)
+=======
+	return 0;
+}
+
+int rt2x00queue_update_beacon(struct rt2x00_dev *rt2x00dev,
+			      struct ieee80211_vif *vif)
+>>>>>>> v3.18
 {
 	struct rt2x00_intf *intf = vif_to_intf(vif);
 	struct skb_frame_desc *skbdesc;
@@ -791,6 +819,7 @@ int rt2x00queue_update_beacon_locked(struct rt2x00_dev *rt2x00dev,
 
 }
 
+<<<<<<< HEAD
 int rt2x00queue_update_beacon(struct rt2x00_dev *rt2x00dev,
 			      struct ieee80211_vif *vif)
 {
@@ -804,6 +833,8 @@ int rt2x00queue_update_beacon(struct rt2x00_dev *rt2x00dev,
 	return ret;
 }
 
+=======
+>>>>>>> v3.18
 bool rt2x00queue_for_each_entry(struct data_queue *queue,
 				enum queue_index start,
 				enum queue_index end,
@@ -910,7 +941,11 @@ void rt2x00queue_index_inc(struct queue_entry *entry, enum queue_index index)
 	spin_unlock_irqrestore(&queue->index_lock, irqflags);
 }
 
+<<<<<<< HEAD
 void rt2x00queue_pause_queue_nocheck(struct data_queue *queue)
+=======
+static void rt2x00queue_pause_queue_nocheck(struct data_queue *queue)
+>>>>>>> v3.18
 {
 	switch (queue->qid) {
 	case QID_AC_VO:
@@ -1007,13 +1042,17 @@ EXPORT_SYMBOL_GPL(rt2x00queue_stop_queue);
 
 void rt2x00queue_flush_queue(struct data_queue *queue, bool drop)
 {
+<<<<<<< HEAD
 	bool started;
+=======
+>>>>>>> v3.18
 	bool tx_queue =
 		(queue->qid == QID_AC_VO) ||
 		(queue->qid == QID_AC_VI) ||
 		(queue->qid == QID_AC_BE) ||
 		(queue->qid == QID_AC_BK);
 
+<<<<<<< HEAD
 	mutex_lock(&queue->status_lock);
 
 	/*
@@ -1039,6 +1078,17 @@ void rt2x00queue_flush_queue(struct data_queue *queue, bool drop)
 		if (!drop && tx_queue)
 			queue->rt2x00dev->ops->lib->kick_queue(queue);
 	}
+=======
+
+	/*
+	 * If we are not supposed to drop any pending
+	 * frames, this means we must force a start (=kick)
+	 * to the queue to make sure the hardware will
+	 * start transmitting.
+	 */
+	if (!drop && tx_queue)
+		queue->rt2x00dev->ops->lib->kick_queue(queue);
+>>>>>>> v3.18
 
 	/*
 	 * Check if driver supports flushing, if that is the case we can
@@ -1054,6 +1104,7 @@ void rt2x00queue_flush_queue(struct data_queue *queue, bool drop)
 	if (unlikely(!rt2x00queue_empty(queue)))
 		rt2x00_warn(queue->rt2x00dev, "Queue %d failed to flush\n",
 			    queue->qid);
+<<<<<<< HEAD
 
 	/*
 	 * Restore the queue to the previous status
@@ -1062,6 +1113,8 @@ void rt2x00queue_flush_queue(struct data_queue *queue, bool drop)
 		rt2x00queue_unpause_queue(queue);
 
 	mutex_unlock(&queue->status_lock);
+=======
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(rt2x00queue_flush_queue);
 
@@ -1139,8 +1192,12 @@ void rt2x00queue_init_queues(struct rt2x00_dev *rt2x00dev)
 	}
 }
 
+<<<<<<< HEAD
 static int rt2x00queue_alloc_entries(struct data_queue *queue,
 				     const struct data_queue_desc *qdesc)
+=======
+static int rt2x00queue_alloc_entries(struct data_queue *queue)
+>>>>>>> v3.18
 {
 	struct queue_entry *entries;
 	unsigned int entry_size;
@@ -1148,6 +1205,7 @@ static int rt2x00queue_alloc_entries(struct data_queue *queue,
 
 	rt2x00queue_reset(queue);
 
+<<<<<<< HEAD
 	queue->limit = qdesc->entry_num;
 	queue->threshold = DIV_ROUND_UP(qdesc->entry_num, 10);
 	queue->data_size = qdesc->data_size;
@@ -1158,6 +1216,12 @@ static int rt2x00queue_alloc_entries(struct data_queue *queue,
 	 * Allocate all queue entries.
 	 */
 	entry_size = sizeof(*entries) + qdesc->priv_size;
+=======
+	/*
+	 * Allocate all queue entries.
+	 */
+	entry_size = sizeof(*entries) + queue->priv_size;
+>>>>>>> v3.18
 	entries = kcalloc(queue->limit, entry_size, GFP_KERNEL);
 	if (!entries)
 		return -ENOMEM;
@@ -1173,7 +1237,11 @@ static int rt2x00queue_alloc_entries(struct data_queue *queue,
 		entries[i].entry_idx = i;
 		entries[i].priv_data =
 		    QUEUE_ENTRY_PRIV_OFFSET(entries, i, queue->limit,
+<<<<<<< HEAD
 					    sizeof(*entries), qdesc->priv_size);
+=======
+					    sizeof(*entries), queue->priv_size);
+>>>>>>> v3.18
 	}
 
 #undef QUEUE_ENTRY_PRIV_OFFSET
@@ -1215,23 +1283,39 @@ int rt2x00queue_initialize(struct rt2x00_dev *rt2x00dev)
 	struct data_queue *queue;
 	int status;
 
+<<<<<<< HEAD
 	status = rt2x00queue_alloc_entries(rt2x00dev->rx, rt2x00dev->ops->rx);
+=======
+	status = rt2x00queue_alloc_entries(rt2x00dev->rx);
+>>>>>>> v3.18
 	if (status)
 		goto exit;
 
 	tx_queue_for_each(rt2x00dev, queue) {
+<<<<<<< HEAD
 		status = rt2x00queue_alloc_entries(queue, rt2x00dev->ops->tx);
+=======
+		status = rt2x00queue_alloc_entries(queue);
+>>>>>>> v3.18
 		if (status)
 			goto exit;
 	}
 
+<<<<<<< HEAD
 	status = rt2x00queue_alloc_entries(rt2x00dev->bcn, rt2x00dev->ops->bcn);
+=======
+	status = rt2x00queue_alloc_entries(rt2x00dev->bcn);
+>>>>>>> v3.18
 	if (status)
 		goto exit;
 
 	if (test_bit(REQUIRE_ATIM_QUEUE, &rt2x00dev->cap_flags)) {
+<<<<<<< HEAD
 		status = rt2x00queue_alloc_entries(rt2x00dev->atim,
 						   rt2x00dev->ops->atim);
+=======
+		status = rt2x00queue_alloc_entries(rt2x00dev->atim);
+>>>>>>> v3.18
 		if (status)
 			goto exit;
 	}
@@ -1275,6 +1359,13 @@ static void rt2x00queue_init(struct rt2x00_dev *rt2x00dev,
 	queue->aifs = 2;
 	queue->cw_min = 5;
 	queue->cw_max = 10;
+<<<<<<< HEAD
+=======
+
+	rt2x00dev->ops->queue_init(queue);
+
+	queue->threshold = DIV_ROUND_UP(queue->limit, 10);
+>>>>>>> v3.18
 }
 
 int rt2x00queue_allocate(struct rt2x00_dev *rt2x00dev)

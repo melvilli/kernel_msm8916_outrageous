@@ -11,6 +11,10 @@
  * 2 of the Licence, or (at your option) any later version.
  */
 
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) "SIG: "fmt
+>>>>>>> v3.18
 #include <keys/asymmetric-subtype.h>
 #include <linux/module.h>
 #include <linux/err.h>

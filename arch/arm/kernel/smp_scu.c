@@ -17,6 +17,11 @@
 #include <asm/cputype.h>
 
 #define SCU_CTRL		0x00
+<<<<<<< HEAD
+=======
+#define SCU_ENABLE		(1 << 0)
+#define SCU_STANDBY_ENABLE	(1 << 5)
+>>>>>>> v3.18
 #define SCU_CONFIG		0x04
 #define SCU_CPU_STATUS		0x08
 #define SCU_INVALIDATE		0x0c
@@ -28,7 +33,11 @@
  */
 unsigned int __init scu_get_core_count(void __iomem *scu_base)
 {
+<<<<<<< HEAD
 	unsigned int ncores = __raw_readl(scu_base + SCU_CONFIG);
+=======
+	unsigned int ncores = readl_relaxed(scu_base + SCU_CONFIG);
+>>>>>>> v3.18
 	return (ncores & 0x03) + 1;
 }
 
@@ -42,6 +51,7 @@ void scu_enable(void __iomem *scu_base)
 #ifdef CONFIG_ARM_ERRATA_764369
 	/* Cortex-A9 only */
 	if ((read_cpuid_id() & 0xff0ffff0) == 0x410fc090) {
+<<<<<<< HEAD
 		scu_ctrl = __raw_readl(scu_base + 0x30);
 		if (!(scu_ctrl & 1))
 			__raw_writel(scu_ctrl | 0x1, scu_base + 0x30);
@@ -55,6 +65,27 @@ void scu_enable(void __iomem *scu_base)
 
 	scu_ctrl |= 1;
 	__raw_writel(scu_ctrl, scu_base + SCU_CTRL);
+=======
+		scu_ctrl = readl_relaxed(scu_base + 0x30);
+		if (!(scu_ctrl & 1))
+			writel_relaxed(scu_ctrl | 0x1, scu_base + 0x30);
+	}
+#endif
+
+	scu_ctrl = readl_relaxed(scu_base + SCU_CTRL);
+	/* already enabled? */
+	if (scu_ctrl & SCU_ENABLE)
+		return;
+
+	scu_ctrl |= SCU_ENABLE;
+
+	/* Cortex-A9 earlier than r2p0 has no standby bit in SCU */
+	if ((read_cpuid_id() & 0xff0ffff0) == 0x410fc090 &&
+	    (read_cpuid_id() & 0x00f0000f) >= 0x00200000)
+		scu_ctrl |= SCU_STANDBY_ENABLE;
+
+	writel_relaxed(scu_ctrl, scu_base + SCU_CTRL);
+>>>>>>> v3.18
 
 	/*
 	 * Ensure that the data accessed by CPU0 before the SCU was
@@ -80,9 +111,15 @@ int scu_power_mode(void __iomem *scu_base, unsigned int mode)
 	if (mode > 3 || mode == 1 || cpu > 3)
 		return -EINVAL;
 
+<<<<<<< HEAD
 	val = __raw_readb(scu_base + SCU_CPU_STATUS + cpu) & ~0x03;
 	val |= mode;
 	__raw_writeb(val, scu_base + SCU_CPU_STATUS + cpu);
+=======
+	val = readb_relaxed(scu_base + SCU_CPU_STATUS + cpu) & ~0x03;
+	val |= mode;
+	writeb_relaxed(val, scu_base + SCU_CPU_STATUS + cpu);
+>>>>>>> v3.18
 
 	return 0;
 }

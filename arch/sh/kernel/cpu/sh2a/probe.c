@@ -13,7 +13,11 @@
 #include <asm/processor.h>
 #include <asm/cache.h>
 
+<<<<<<< HEAD
 void __cpuinit cpu_probe(void)
+=======
+void cpu_probe(void)
+>>>>>>> v3.18
 {
 	boot_cpu_data.family			= CPU_FAMILY_SH2A;
 

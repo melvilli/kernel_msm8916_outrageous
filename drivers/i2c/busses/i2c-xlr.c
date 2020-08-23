@@ -11,7 +11,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/ioport.h>
 #include <linux/delay.h>
 #include <linux/errno.h>

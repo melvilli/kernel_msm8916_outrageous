@@ -17,7 +17,11 @@ config MOUSE_PS2
 	default y
 	select SERIO
 	select SERIO_LIBPS2
+<<<<<<< HEAD
 	select SERIO_I8042 if X86
+=======
+	select SERIO_I8042 if ARCH_MIGHT_HAVE_PC_SERIO
+>>>>>>> v3.18
 	select SERIO_GSCPS2 if GSC
 	help
 	  Say Y here if you have a PS/2 mouse connected to your system. This
@@ -53,7 +57,11 @@ config MOUSE_PS2_LOGIPS2PP
 	default y
 	depends on MOUSE_PS2
 	help
+<<<<<<< HEAD
 	  Say Y here if you have a Logictech PS/2++ mouse connected to
+=======
+	  Say Y here if you have a Logitech PS/2++ mouse connected to
+>>>>>>> v3.18
 	  your system.
 
 	  If unsure, say Y.
@@ -344,6 +352,7 @@ config MOUSE_SYNAPTICS_I2C
 	  To compile this driver as a module, choose M here: the
 	  module will be called synaptics_i2c.
 
+<<<<<<< HEAD
 config MOUSE_QCITP
 	tristate "Quanta Computer Inc. Touchpad"
 	depends on I2C
@@ -352,6 +361,8 @@ config MOUSE_QCITP
 	  Say Y here if you want to use the Quanta touchpad driver for Quanta
 	  smartbook platforms.
 
+=======
+>>>>>>> v3.18
 config MOUSE_SYNAPTICS_USB
 	tristate "Synaptics USB device support"
 	depends on USB_ARCH_HAS_HCD

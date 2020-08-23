@@ -9,8 +9,11 @@
  * 2 of the License, or (at your option) any later version.
  */
 
+<<<<<<< HEAD
 #include <linux/lglock.h>
 
+=======
+>>>>>>> v3.18
 struct super_block;
 struct file_system_type;
 struct linux_binprm;
@@ -37,6 +40,14 @@ static inline int __sync_blockdev(struct block_device *bdev, int wait)
 #endif
 
 /*
+<<<<<<< HEAD
+=======
+ * buffer.c
+ */
+extern void guard_bio_eod(int rw, struct bio *bio);
+
+/*
+>>>>>>> v3.18
  * char_dev.c
  */
 extern void __init chrdev_init(void);
@@ -44,13 +55,23 @@ extern void __init chrdev_init(void);
 /*
  * namei.c
  */
+<<<<<<< HEAD
 extern int __inode_permission(struct inode *, int);
+=======
+extern int user_path_mountpoint_at(int, const char __user *, unsigned int, struct path *);
+extern int vfs_path_lookup(struct dentry *, struct vfsmount *,
+			   const char *, unsigned int, struct path *);
+>>>>>>> v3.18
 
 /*
  * namespace.c
  */
 extern int copy_mount_options(const void __user *, unsigned long *);
+<<<<<<< HEAD
 extern int copy_mount_string(const void __user *, char **);
+=======
+extern char *copy_mount_string(const void __user *);
+>>>>>>> v3.18
 
 extern struct vfsmount *lookup_mnt(struct path *);
 extern int finish_automount(struct vfsmount *, struct path *);
@@ -59,8 +80,11 @@ extern int sb_prepare_remount_readonly(struct super_block *);
 
 extern void __init mnt_init(void);
 
+<<<<<<< HEAD
 extern struct lglock vfsmount_lock;
 
+=======
+>>>>>>> v3.18
 extern int __mnt_want_write(struct vfsmount *);
 extern int __mnt_want_write_file(struct file *);
 extern void __mnt_drop_write(struct vfsmount *);
@@ -80,11 +104,17 @@ extern struct file *get_empty_filp(void);
  * super.c
  */
 extern int do_remount_sb(struct super_block *, int, void *, int);
+<<<<<<< HEAD
 extern int do_remount_sb2(struct vfsmount *, struct super_block *, int,
 								void *, int);
 extern bool grab_super_passive(struct super_block *sb);
 extern struct dentry *mount_fs(struct file_system_type *,
 			       int, const char *, struct vfsmount *, void *);
+=======
+extern bool grab_super_passive(struct super_block *sb);
+extern struct dentry *mount_fs(struct file_system_type *,
+			       int, const char *, void *);
+>>>>>>> v3.18
 extern struct super_block *user_get_super(dev_t);
 
 /*
@@ -110,6 +140,11 @@ extern int open_check_o_direct(struct file *f);
  * inode.c
  */
 extern spinlock_t inode_sb_list_lock;
+<<<<<<< HEAD
+=======
+extern long prune_icache_sb(struct super_block *sb, unsigned long nr_to_scan,
+			    int nid);
+>>>>>>> v3.18
 extern void inode_add_lru(struct inode *inode);
 
 /*
@@ -117,7 +152,11 @@ extern void inode_add_lru(struct inode *inode);
  */
 extern void inode_wb_list_del(struct inode *inode);
 
+<<<<<<< HEAD
 extern int get_nr_dirty_inodes(void);
+=======
+extern long get_nr_dirty_inodes(void);
+>>>>>>> v3.18
 extern void evict_inodes(struct super_block *);
 extern int invalidate_inodes(struct super_block *, bool);
 
@@ -125,10 +164,17 @@ extern int invalidate_inodes(struct super_block *, bool);
  * dcache.c
  */
 extern struct dentry *__d_alloc(struct super_block *, const struct qstr *);
+<<<<<<< HEAD
+=======
+extern int d_set_mounted(struct dentry *dentry);
+extern long prune_dcache_sb(struct super_block *sb, unsigned long nr_to_scan,
+			    int nid);
+>>>>>>> v3.18
 
 /*
  * read_write.c
  */
+<<<<<<< HEAD
 extern ssize_t __kernel_write(struct file *, const char *, size_t, loff_t *);
 
 /*
@@ -141,3 +187,17 @@ extern long do_splice_direct(struct file *in, loff_t *ppos, struct file *out,
  * pipe.c
  */
 extern const struct file_operations pipefifo_fops;
+=======
+extern int rw_verify_area(int, struct file *, const loff_t *, size_t);
+
+/*
+ * pipe.c
+ */
+extern const struct file_operations pipefifo_fops;
+
+/*
+ * fs_pin.c
+ */
+extern void sb_pin_kill(struct super_block *sb);
+extern void mnt_pin_kill(struct mount *m);
+>>>>>>> v3.18

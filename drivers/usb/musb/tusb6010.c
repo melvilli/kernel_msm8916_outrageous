@@ -18,20 +18,34 @@
 #include <linux/kernel.h>
 #include <linux/errno.h>
 #include <linux/err.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/prefetch.h>
 #include <linux/usb.h>
 #include <linux/irq.h>
 #include <linux/io.h>
+<<<<<<< HEAD
 #include <linux/platform_device.h>
 #include <linux/dma-mapping.h>
 #include <linux/usb/nop-usb-xceiv.h>
+=======
+#include <linux/device.h>
+#include <linux/platform_device.h>
+#include <linux/dma-mapping.h>
+#include <linux/usb/usb_phy_generic.h>
+>>>>>>> v3.18
 
 #include "musb_core.h"
 
 struct tusb6010_glue {
 	struct device		*dev;
 	struct platform_device	*musb;
+<<<<<<< HEAD
+=======
+	struct platform_device	*phy;
+>>>>>>> v3.18
 };
 
 static void tusb_musb_set_vbus(struct musb *musb, int is_on);
@@ -43,7 +57,11 @@ static void tusb_musb_set_vbus(struct musb *musb, int is_on);
  * Checks the revision. We need to use the DMA register as 3.0 does not
  * have correct versions for TUSB_PRCM_REV or TUSB_INT_CTRL_REV.
  */
+<<<<<<< HEAD
 u8 tusb_get_revision(struct musb *musb)
+=======
+static u8 tusb_get_revision(struct musb *musb)
+>>>>>>> v3.18
 {
 	void __iomem	*tbase = musb->ctrl_base;
 	u32		die_id;
@@ -59,14 +77,23 @@ u8 tusb_get_revision(struct musb *musb)
 
 	return rev;
 }
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(tusb_get_revision);
 
 static int tusb_print_revision(struct musb *musb)
+=======
+
+static void tusb_print_revision(struct musb *musb)
+>>>>>>> v3.18
 {
 	void __iomem	*tbase = musb->ctrl_base;
 	u8		rev;
 
+<<<<<<< HEAD
 	rev = tusb_get_revision(musb);
+=======
+	rev = musb->tusb_revision;
+>>>>>>> v3.18
 
 	pr_info("tusb: %s%i.%i %s%i.%i %s%i.%i %s%i.%i %s%i %s%i.%i\n",
 		"prcm",
@@ -85,8 +112,11 @@ static int tusb_print_revision(struct musb *musb)
 		TUSB_DIDR1_HI_CHIP_REV(musb_readl(tbase, TUSB_DIDR1_HI)),
 		"rev",
 		TUSB_REV_MAJOR(rev), TUSB_REV_MINOR(rev));
+<<<<<<< HEAD
 
 	return tusb_get_revision(musb);
+=======
+>>>>>>> v3.18
 }
 
 #define WBUS_QUIRK_MASK	(TUSB_PHY_OTG_CTRL_TESTM2 | TUSB_PHY_OTG_CTRL_TESTM1 \
@@ -350,7 +380,11 @@ static void tusb_allow_idle(struct musb *musb, u32 wakeup_enables)
 	u32		reg;
 
 	if ((wakeup_enables & TUSB_PRCM_WBUS)
+<<<<<<< HEAD
 			&& (tusb_get_revision(musb) == TUSB_REV_30))
+=======
+			&& (musb->tusb_revision == TUSB_REV_30))
+>>>>>>> v3.18
 		tusb_wbus_quirk(musb, 1);
 
 	tusb_set_clock_source(musb, 0);
@@ -435,7 +469,11 @@ static void musb_do_idle(unsigned long _musb)
 	if (!musb->is_active) {
 		u32	wakeups;
 
+<<<<<<< HEAD
 		/* wait until khubd handles port change status */
+=======
+		/* wait until hub_wq handles port change status */
+>>>>>>> v3.18
 		if (is_host_active(musb) && (musb->port1_status >> 16))
 			goto done;
 
@@ -798,7 +836,11 @@ static irqreturn_t tusb_musb_interrupt(int irq, void *__hci)
 		u32	reg;
 		u32	i;
 
+<<<<<<< HEAD
 		if (tusb_get_revision(musb) == TUSB_REV_30)
+=======
+		if (musb->tusb_revision == TUSB_REV_30)
+>>>>>>> v3.18
 			tusb_wbus_quirk(musb, 0);
 
 		/* there are issues re-locking the PLL on wakeup ... */
@@ -1012,10 +1054,18 @@ static int tusb_musb_start(struct musb *musb)
 		goto err;
 	}
 
+<<<<<<< HEAD
 	ret = tusb_print_revision(musb);
 	if (ret < 2) {
 		printk(KERN_ERR "tusb: Unsupported TUSB6010 revision %i\n",
 				ret);
+=======
+	musb->tusb_revision = tusb_get_revision(musb);
+	tusb_print_revision(musb);
+	if (musb->tusb_revision < 2) {
+		printk(KERN_ERR "tusb: Unsupported TUSB6010 revision %i\n",
+				musb->tusb_revision);
+>>>>>>> v3.18
 		goto err;
 	}
 
@@ -1066,7 +1116,10 @@ static int tusb_musb_init(struct musb *musb)
 	void __iomem		*sync = NULL;
 	int			ret;
 
+<<<<<<< HEAD
 	usb_nop_xceiv_register();
+=======
+>>>>>>> v3.18
 	musb->xceiv = usb_get_phy(USB_PHY_TYPE_USB2);
 	if (IS_ERR_OR_NULL(musb->xceiv))
 		return -EPROBE_DEFER;
@@ -1118,7 +1171,10 @@ done:
 			iounmap(sync);
 
 		usb_put_phy(musb->xceiv);
+<<<<<<< HEAD
 		usb_nop_xceiv_unregister();
+=======
+>>>>>>> v3.18
 	}
 	return ret;
 }
@@ -1134,7 +1190,10 @@ static int tusb_musb_exit(struct musb *musb)
 	iounmap(musb->sync_va);
 
 	usb_put_phy(musb->xceiv);
+<<<<<<< HEAD
 	usb_nop_xceiv_unregister();
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -1152,6 +1211,7 @@ static const struct musb_platform_ops tusb_ops = {
 	.set_vbus	= tusb_musb_set_vbus,
 };
 
+<<<<<<< HEAD
 static u64 tusb_dmamask = DMA_BIT_MASK(32);
 
 static int tusb_probe(struct platform_device *pdev)
@@ -1214,6 +1274,69 @@ err1:
 
 err0:
 	return ret;
+=======
+static const struct platform_device_info tusb_dev_info = {
+	.name		= "musb-hdrc",
+	.id		= PLATFORM_DEVID_AUTO,
+	.dma_mask	= DMA_BIT_MASK(32),
+};
+
+static int tusb_probe(struct platform_device *pdev)
+{
+	struct resource musb_resources[3];
+	struct musb_hdrc_platform_data	*pdata = dev_get_platdata(&pdev->dev);
+	struct platform_device		*musb;
+	struct tusb6010_glue		*glue;
+	struct platform_device_info	pinfo;
+	int				ret;
+
+	glue = devm_kzalloc(&pdev->dev, sizeof(*glue), GFP_KERNEL);
+	if (!glue) {
+		dev_err(&pdev->dev, "failed to allocate glue context\n");
+		return -ENOMEM;
+	}
+
+	glue->dev			= &pdev->dev;
+
+	pdata->platform_ops		= &tusb_ops;
+
+	usb_phy_generic_register();
+	platform_set_drvdata(pdev, glue);
+
+	memset(musb_resources, 0x00, sizeof(*musb_resources) *
+			ARRAY_SIZE(musb_resources));
+
+	musb_resources[0].name = pdev->resource[0].name;
+	musb_resources[0].start = pdev->resource[0].start;
+	musb_resources[0].end = pdev->resource[0].end;
+	musb_resources[0].flags = pdev->resource[0].flags;
+
+	musb_resources[1].name = pdev->resource[1].name;
+	musb_resources[1].start = pdev->resource[1].start;
+	musb_resources[1].end = pdev->resource[1].end;
+	musb_resources[1].flags = pdev->resource[1].flags;
+
+	musb_resources[2].name = pdev->resource[2].name;
+	musb_resources[2].start = pdev->resource[2].start;
+	musb_resources[2].end = pdev->resource[2].end;
+	musb_resources[2].flags = pdev->resource[2].flags;
+
+	pinfo = tusb_dev_info;
+	pinfo.parent = &pdev->dev;
+	pinfo.res = musb_resources;
+	pinfo.num_res = ARRAY_SIZE(musb_resources);
+	pinfo.data = pdata;
+	pinfo.size_data = sizeof(*pdata);
+
+	glue->musb = musb = platform_device_register_full(&pinfo);
+	if (IS_ERR(musb)) {
+		ret = PTR_ERR(musb);
+		dev_err(&pdev->dev, "failed to register musb device: %d\n", ret);
+		return ret;
+	}
+
+	return 0;
+>>>>>>> v3.18
 }
 
 static int tusb_remove(struct platform_device *pdev)
@@ -1221,7 +1344,11 @@ static int tusb_remove(struct platform_device *pdev)
 	struct tusb6010_glue		*glue = platform_get_drvdata(pdev);
 
 	platform_device_unregister(glue->musb);
+<<<<<<< HEAD
 	kfree(glue);
+=======
+	usb_phy_generic_unregister(glue->phy);
+>>>>>>> v3.18
 
 	return 0;
 }

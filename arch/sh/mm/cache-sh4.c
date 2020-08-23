@@ -133,9 +133,15 @@ static void flush_icache_all(void)
 	jump_to_uncached();
 
 	/* Flush I-cache */
+<<<<<<< HEAD
 	ccr = __raw_readl(CCR);
 	ccr |= CCR_CACHE_ICI;
 	__raw_writel(ccr, CCR);
+=======
+	ccr = __raw_readl(SH_CCR);
+	ccr |= CCR_CACHE_ICI;
+	__raw_writel(ccr, SH_CCR);
+>>>>>>> v3.18
 
 	/*
 	 * back_to_cached() will take care of the barrier for us, don't add

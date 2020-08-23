@@ -17,9 +17,24 @@
 
 # ifndef __ASSEMBLER__
 extern void __iomem *prm_base;
+<<<<<<< HEAD
 extern void omap2_set_globals_prm(void __iomem *prm);
 # endif
 
+=======
+extern u16 prm_features;
+extern void omap2_set_globals_prm(void __iomem *prm);
+int of_prcm_init(void);
+# endif
+
+/*
+ * prm_features flag values
+ *
+ * PRM_HAS_IO_WAKEUP: has IO wakeup capability
+ * PRM_HAS_VOLTAGE: has voltage domains
+ */
+#define PRM_HAS_IO_WAKEUP	(1 << 0)
+>>>>>>> v3.18
 
 /*
  * MAX_MODULE_SOFTRESET_WAIT: Maximum microseconds to wait for OMAP
@@ -117,6 +132,10 @@ struct prm_reset_src_map {
  * @read_reset_sources: ptr to the SoC PRM-specific get_reset_source impl
  * @was_any_context_lost_old: ptr to the SoC PRM context loss test fn
  * @clear_context_loss_flags_old: ptr to the SoC PRM context loss flag clear fn
+<<<<<<< HEAD
+=======
+ * @late_init: ptr to the late init function
+>>>>>>> v3.18
  *
  * XXX @was_any_context_lost_old and @clear_context_loss_flags_old are
  * deprecated.
@@ -125,6 +144,10 @@ struct prm_ll_data {
 	u32 (*read_reset_sources)(void);
 	bool (*was_any_context_lost_old)(u8 part, s16 inst, u16 idx);
 	void (*clear_context_loss_flags_old)(u8 part, s16 inst, u16 idx);
+<<<<<<< HEAD
+=======
+	int (*late_init)(void);
+>>>>>>> v3.18
 };
 
 extern int prm_register(struct prm_ll_data *pld);

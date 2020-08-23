@@ -35,6 +35,7 @@ static int pata_of_platform_probe(struct platform_device *ofdev)
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 	if (of_device_is_compatible(dn, "electra-ide")) {
 		/* Altstatus is really at offset 0x3f6 from the primary window
 		 * on electra-ide. Adjust ctl_res and io_res accordingly.
@@ -54,6 +55,16 @@ static int pata_of_platform_probe(struct platform_device *ofdev)
 	irq_res = platform_get_resource(ofdev, IORESOURCE_IRQ, 0);
 	if (irq_res)
 		irq_res->flags = 0;
+=======
+	ret = of_address_to_resource(dn, 1, &ctl_res);
+	if (ret) {
+		dev_err(&ofdev->dev, "can't get CTL address from "
+			"device tree\n");
+		return -EINVAL;
+	}
+
+	irq_res = platform_get_resource(ofdev, IORESOURCE_IRQ, 0);
+>>>>>>> v3.18
 
 	prop = of_get_property(dn, "reg-shift", NULL);
 	if (prop)
@@ -79,8 +90,12 @@ static int pata_of_platform_probe(struct platform_device *ofdev)
 
 static struct of_device_id pata_of_platform_match[] = {
 	{ .compatible = "ata-generic", },
+<<<<<<< HEAD
 	{ .compatible = "electra-ide", },
 	{},
+=======
+	{ },
+>>>>>>> v3.18
 };
 MODULE_DEVICE_TABLE(of, pata_of_platform_match);
 

@@ -47,9 +47,14 @@ static const struct file_operations i810_driver_fops = {
 	.open = drm_open,
 	.release = drm_release,
 	.unlocked_ioctl = drm_ioctl,
+<<<<<<< HEAD
 	.mmap = drm_mmap,
 	.poll = drm_poll,
 	.fasync = drm_fasync,
+=======
+	.mmap = drm_legacy_mmap,
+	.poll = drm_poll,
+>>>>>>> v3.18
 #ifdef CONFIG_COMPAT
 	.compat_ioctl = drm_compat_ioctl,
 #endif
@@ -58,12 +63,20 @@ static const struct file_operations i810_driver_fops = {
 
 static struct drm_driver driver = {
 	.driver_features =
+<<<<<<< HEAD
 	    DRIVER_USE_AGP | DRIVER_REQUIRE_AGP | DRIVER_USE_MTRR |
+=======
+	    DRIVER_USE_AGP |
+>>>>>>> v3.18
 	    DRIVER_HAVE_DMA,
 	.dev_priv_size = sizeof(drm_i810_buf_priv_t),
 	.load = i810_driver_load,
 	.lastclose = i810_driver_lastclose,
 	.preclose = i810_driver_preclose,
+<<<<<<< HEAD
+=======
+	.set_busid = drm_pci_set_busid,
+>>>>>>> v3.18
 	.device_is_agp = i810_driver_device_is_agp,
 	.dma_quiescent = i810_driver_dma_quiescent,
 	.ioctls = i810_ioctls,

@@ -1,6 +1,11 @@
 /*
  * Freescale MPC85xx Memory Controller kenel module
  *
+<<<<<<< HEAD
+=======
+ * Parts Copyrighted (c) 2013 by Freescale Semiconductor, Inc.
+ *
+>>>>>>> v3.18
  * Author: Dave Jiang <djiang@mvista.com>
  *
  * 2006-2007 (c) MontaVista Software, Inc. This file is licensed under
@@ -196,6 +201,45 @@ static void mpc85xx_pci_check(struct edac_pci_ctl_info *pci)
 		edac_pci_handle_npe(pci, pci->ctl_name);
 }
 
+<<<<<<< HEAD
+=======
+static void mpc85xx_pcie_check(struct edac_pci_ctl_info *pci)
+{
+	struct mpc85xx_pci_pdata *pdata = pci->pvt_info;
+	u32 err_detect;
+
+	err_detect = in_be32(pdata->pci_vbase + MPC85XX_PCI_ERR_DR);
+
+	pr_err("PCIe error(s) detected\n");
+	pr_err("PCIe ERR_DR register: 0x%08x\n", err_detect);
+	pr_err("PCIe ERR_CAP_STAT register: 0x%08x\n",
+			in_be32(pdata->pci_vbase + MPC85XX_PCI_GAS_TIMR));
+	pr_err("PCIe ERR_CAP_R0 register: 0x%08x\n",
+			in_be32(pdata->pci_vbase + MPC85XX_PCIE_ERR_CAP_R0));
+	pr_err("PCIe ERR_CAP_R1 register: 0x%08x\n",
+			in_be32(pdata->pci_vbase + MPC85XX_PCIE_ERR_CAP_R1));
+	pr_err("PCIe ERR_CAP_R2 register: 0x%08x\n",
+			in_be32(pdata->pci_vbase + MPC85XX_PCIE_ERR_CAP_R2));
+	pr_err("PCIe ERR_CAP_R3 register: 0x%08x\n",
+			in_be32(pdata->pci_vbase + MPC85XX_PCIE_ERR_CAP_R3));
+
+	/* clear error bits */
+	out_be32(pdata->pci_vbase + MPC85XX_PCI_ERR_DR, err_detect);
+}
+
+static int mpc85xx_pcie_find_capability(struct device_node *np)
+{
+	struct pci_controller *hose;
+
+	if (!np)
+		return -EINVAL;
+
+	hose = pci_find_hose_for_OF_device(np);
+
+	return early_find_capability(hose, 0, 0, PCI_CAP_ID_EXP);
+}
+
+>>>>>>> v3.18
 static irqreturn_t mpc85xx_pci_isr(int irq, void *dev_id)
 {
 	struct edac_pci_ctl_info *pci = dev_id;
@@ -207,7 +251,14 @@ static irqreturn_t mpc85xx_pci_isr(int irq, void *dev_id)
 	if (!err_detect)
 		return IRQ_NONE;
 
+<<<<<<< HEAD
 	mpc85xx_pci_check(pci);
+=======
+	if (pdata->is_pcie)
+		mpc85xx_pcie_check(pci);
+	else
+		mpc85xx_pci_check(pci);
+>>>>>>> v3.18
 
 	return IRQ_HANDLED;
 }
@@ -239,14 +290,30 @@ int mpc85xx_pci_err_probe(struct platform_device *op)
 	pdata = pci->pvt_info;
 	pdata->name = "mpc85xx_pci_err";
 	pdata->irq = NO_IRQ;
+<<<<<<< HEAD
+=======
+
+	if (mpc85xx_pcie_find_capability(op->dev.of_node) > 0)
+		pdata->is_pcie = true;
+
+>>>>>>> v3.18
 	dev_set_drvdata(&op->dev, pci);
 	pci->dev = &op->dev;
 	pci->mod_name = EDAC_MOD_STR;
 	pci->ctl_name = pdata->name;
 	pci->dev_name = dev_name(&op->dev);
 
+<<<<<<< HEAD
 	if (edac_op_state == EDAC_OPSTATE_POLL)
 		pci->edac_check = mpc85xx_pci_check;
+=======
+	if (edac_op_state == EDAC_OPSTATE_POLL) {
+		if (pdata->is_pcie)
+			pci->edac_check = mpc85xx_pcie_check;
+		else
+			pci->edac_check = mpc85xx_pci_check;
+	}
+>>>>>>> v3.18
 
 	pdata->edac_idx = edac_pci_idx++;
 
@@ -275,6 +342,7 @@ int mpc85xx_pci_err_probe(struct platform_device *op)
 		goto err;
 	}
 
+<<<<<<< HEAD
 	orig_pci_err_cap_dr =
 	    in_be32(pdata->pci_vbase + MPC85XX_PCI_ERR_CAP_DR);
 
@@ -285,6 +353,28 @@ int mpc85xx_pci_err_probe(struct platform_device *op)
 
 	/* disable master abort reporting */
 	out_be32(pdata->pci_vbase + MPC85XX_PCI_ERR_EN, ~0x40);
+=======
+	if (pdata->is_pcie) {
+		orig_pci_err_cap_dr =
+		    in_be32(pdata->pci_vbase + MPC85XX_PCI_ERR_ADDR);
+		out_be32(pdata->pci_vbase + MPC85XX_PCI_ERR_ADDR, ~0);
+		orig_pci_err_en =
+		    in_be32(pdata->pci_vbase + MPC85XX_PCI_ERR_EN);
+		out_be32(pdata->pci_vbase + MPC85XX_PCI_ERR_EN, 0);
+	} else {
+		orig_pci_err_cap_dr =
+		    in_be32(pdata->pci_vbase + MPC85XX_PCI_ERR_CAP_DR);
+
+		/* PCI master abort is expected during config cycles */
+		out_be32(pdata->pci_vbase + MPC85XX_PCI_ERR_CAP_DR, 0x40);
+
+		orig_pci_err_en =
+		    in_be32(pdata->pci_vbase + MPC85XX_PCI_ERR_EN);
+
+		/* disable master abort reporting */
+		out_be32(pdata->pci_vbase + MPC85XX_PCI_ERR_EN, ~0x40);
+	}
+>>>>>>> v3.18
 
 	/* clear error bits */
 	out_be32(pdata->pci_vbase + MPC85XX_PCI_ERR_DR, ~0);
@@ -297,7 +387,12 @@ int mpc85xx_pci_err_probe(struct platform_device *op)
 	if (edac_op_state == EDAC_OPSTATE_INT) {
 		pdata->irq = irq_of_parse_and_map(op->dev.of_node, 0);
 		res = devm_request_irq(&op->dev, pdata->irq,
+<<<<<<< HEAD
 				       mpc85xx_pci_isr, IRQF_DISABLED,
+=======
+				       mpc85xx_pci_isr,
+				       IRQF_SHARED,
+>>>>>>> v3.18
 				       "[EDAC] PCI err", pci);
 		if (res < 0) {
 			printk(KERN_ERR
@@ -312,6 +407,25 @@ int mpc85xx_pci_err_probe(struct platform_device *op)
 		       pdata->irq);
 	}
 
+<<<<<<< HEAD
+=======
+	if (pdata->is_pcie) {
+		/*
+		 * Enable all PCIe error interrupt & error detect except invalid
+		 * PEX_CONFIG_ADDR/PEX_CONFIG_DATA access interrupt generation
+		 * enable bit and invalid PEX_CONFIG_ADDR/PEX_CONFIG_DATA access
+		 * detection enable bit. Because PCIe bus code to initialize and
+		 * configure these PCIe devices on booting will use some invalid
+		 * PEX_CONFIG_ADDR/PEX_CONFIG_DATA, edac driver prints the much
+		 * notice information. So disable this detect to fix ugly print.
+		 */
+		out_be32(pdata->pci_vbase + MPC85XX_PCI_ERR_EN, ~0
+			 & ~PEX_ERR_ICCAIE_EN_BIT);
+		out_be32(pdata->pci_vbase + MPC85XX_PCI_ERR_ADDR, 0
+			 | PEX_ERR_ICCAD_DISR_BIT);
+	}
+
+>>>>>>> v3.18
 	devres_remove_group(&op->dev, mpc85xx_pci_err_probe);
 	edac_dbg(3, "success\n");
 	printk(KERN_INFO EDAC_MOD_STR " PCI err registered\n");
@@ -327,6 +441,7 @@ err:
 }
 EXPORT_SYMBOL(mpc85xx_pci_err_probe);
 
+<<<<<<< HEAD
 static int mpc85xx_pci_err_remove(struct platform_device *op)
 {
 	struct edac_pci_ctl_info *pci = dev_get_drvdata(&op->dev);
@@ -349,6 +464,8 @@ static int mpc85xx_pci_err_remove(struct platform_device *op)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 #endif				/* CONFIG_PCI */
 
 /**************************** L2 Err device ***************************/
@@ -579,7 +696,11 @@ static int mpc85xx_l2_err_probe(struct platform_device *op)
 	if (edac_op_state == EDAC_OPSTATE_INT) {
 		pdata->irq = irq_of_parse_and_map(op->dev.of_node, 0);
 		res = devm_request_irq(&op->dev, pdata->irq,
+<<<<<<< HEAD
 				       mpc85xx_l2_isr, IRQF_DISABLED,
+=======
+				       mpc85xx_l2_isr, IRQF_SHARED,
+>>>>>>> v3.18
 				       "[EDAC] L2 err", edac_dev);
 		if (res < 0) {
 			printk(KERN_ERR
@@ -1079,7 +1200,11 @@ static int mpc85xx_mc_err_probe(struct platform_device *op)
 		pdata->irq = irq_of_parse_and_map(op->dev.of_node, 0);
 		res = devm_request_irq(&op->dev, pdata->irq,
 				       mpc85xx_mc_isr,
+<<<<<<< HEAD
 					IRQF_DISABLED | IRQF_SHARED,
+=======
+				       IRQF_SHARED,
+>>>>>>> v3.18
 				       "[EDAC] MC err", mci);
 		if (res < 0) {
 			printk(KERN_ERR "%s: Unable to request irq %d for "

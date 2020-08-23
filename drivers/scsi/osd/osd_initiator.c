@@ -7,7 +7,11 @@
  * Copyright (C) 2008 Panasas Inc.  All rights reserved.
  *
  * Authors:
+<<<<<<< HEAD
  *   Boaz Harrosh <bharrosh@panasas.com>
+=======
+ *   Boaz Harrosh <ooo@electrozaur.com>
+>>>>>>> v3.18
  *   Benny Halevy <bhalevy@panasas.com>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -57,7 +61,11 @@
 
 enum { OSD_REQ_RETRIES = 1 };
 
+<<<<<<< HEAD
 MODULE_AUTHOR("Boaz Harrosh <bharrosh@panasas.com>");
+=======
+MODULE_AUTHOR("Boaz Harrosh <ooo@electrozaur.com>");
+>>>>>>> v3.18
 MODULE_DESCRIPTION("open-osd initiator library libosd.ko");
 MODULE_LICENSE("GPL");
 
@@ -731,7 +739,11 @@ static int _osd_req_list_objects(struct osd_request *or,
 
 	bio->bi_rw &= ~REQ_WRITE;
 	or->in.bio = bio;
+<<<<<<< HEAD
 	or->in.total_bytes = bio->bi_size;
+=======
+	or->in.total_bytes = bio->bi_iter.bi_size;
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -1567,8 +1579,13 @@ static struct request *_make_request(struct request_queue *q, bool has_write,
 		struct request *req;
 
 		req = blk_get_request(q, has_write ? WRITE : READ, flags);
+<<<<<<< HEAD
 		if (unlikely(!req))
 			return ERR_PTR(-ENOMEM);
+=======
+		if (IS_ERR(req))
+			return req;
+>>>>>>> v3.18
 
 		blk_rq_set_block_pc(req);
 		return req;

@@ -205,12 +205,21 @@ static u32 ath9k_hw_def_dump_eeprom(struct ath_hw *ah, bool dump_base_hdr,
 	struct base_eep_header *pBase = &eep->baseEepHeader;
 
 	if (!dump_base_hdr) {
+<<<<<<< HEAD
 		len += snprintf(buf + len, size - len,
 				"%20s :\n", "2GHz modal Header");
 		len = ath9k_def_dump_modal_eeprom(buf, len, size,
 						   &eep->modalHeader[0]);
 		len += snprintf(buf + len, size - len,
 				"%20s :\n", "5GHz modal Header");
+=======
+		len += scnprintf(buf + len, size - len,
+				 "%20s :\n", "2GHz modal Header");
+		len = ath9k_def_dump_modal_eeprom(buf, len, size,
+						   &eep->modalHeader[0]);
+		len += scnprintf(buf + len, size - len,
+				 "%20s :\n", "5GHz modal Header");
+>>>>>>> v3.18
 		len = ath9k_def_dump_modal_eeprom(buf, len, size,
 						   &eep->modalHeader[1]);
 		goto out;
@@ -240,8 +249,13 @@ static u32 ath9k_hw_def_dump_eeprom(struct ath_hw *ah, bool dump_base_hdr,
 	PR_EEP("Cal Bin Build", (pBase->binBuildNumber >> 8) & 0xFF);
 	PR_EEP("OpenLoop Power Ctrl", pBase->openLoopPwrCntl);
 
+<<<<<<< HEAD
 	len += snprintf(buf + len, size - len, "%20s : %pM\n", "MacAddress",
 			pBase->macAddr);
+=======
+	len += scnprintf(buf + len, size - len, "%20s : %pM\n", "MacAddress",
+			 pBase->macAddr);
+>>>>>>> v3.18
 
 out:
 	if (len > size)
@@ -1348,6 +1362,7 @@ static void ath9k_hw_def_set_txpower(struct ath_hw *ah,
 
 static u16 ath9k_hw_def_get_spur_channel(struct ath_hw *ah, u16 i, bool is2GHz)
 {
+<<<<<<< HEAD
 #define EEP_DEF_SPURCHAN \
 	(ah->eeprom.def.modalHeader[is2GHz].spurChans[i].spurChan)
 	struct ath_common *common = ath9k_hw_common(ah);
@@ -1373,6 +1388,9 @@ static u16 ath9k_hw_def_get_spur_channel(struct ath_hw *ah, u16 i, bool is2GHz)
 	return spur_val;
 
 #undef EEP_DEF_SPURCHAN
+=======
+	return ah->eeprom.def.modalHeader[is2GHz].spurChans[i].spurChan;
+>>>>>>> v3.18
 }
 
 const struct eeprom_ops eep_def_ops = {

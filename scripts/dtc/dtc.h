@@ -66,7 +66,10 @@ typedef uint32_t cell_t;
 #define strneq(a, b, n)	(strncmp((a), (b), (n)) == 0)
 
 #define ALIGN(x, a)	(((x) + (a) - 1) & ~((a) - 1))
+<<<<<<< HEAD
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
+=======
+>>>>>>> v3.18
 
 /* Data blobs */
 enum markertype {

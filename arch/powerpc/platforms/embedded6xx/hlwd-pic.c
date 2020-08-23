@@ -15,9 +15,16 @@
 #define pr_fmt(fmt) DRV_MODULE_NAME ": " fmt
 
 #include <linux/kernel.h>
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/irq.h>
 #include <linux/of.h>
+=======
+#include <linux/irq.h>
+#include <linux/of.h>
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 #include <asm/io.h>
 
 #include "hlwd-pic.h"
@@ -181,6 +188,10 @@ struct irq_domain *hlwd_pic_init(struct device_node *np)
 					   &hlwd_irq_domain_ops, io_base);
 	if (!irq_domain) {
 		pr_err("failed to allocate irq_domain\n");
+<<<<<<< HEAD
+=======
+		iounmap(io_base);
+>>>>>>> v3.18
 		return NULL;
 	}
 

@@ -15,6 +15,10 @@
 #include <linux/kernel.h>
 #include <linux/init.h>
 #include <linux/gpio.h>
+<<<<<<< HEAD
+=======
+#include <linux/gpio/machine.h>
+>>>>>>> v3.18
 
 #include <linux/input.h>
 #include <linux/gpio_keys.h>
@@ -425,8 +429,23 @@ static struct platform_device qi_lb60_audio_device = {
 	.id = -1,
 };
 
+<<<<<<< HEAD
 static struct platform_device *jz_platform_devices[] __initdata = {
 	&jz4740_udc_device,
+=======
+static struct gpiod_lookup_table qi_lb60_audio_gpio_table = {
+	.dev_id = "qi-lb60-audio",
+	.table = {
+		GPIO_LOOKUP("Bank B", 29, "snd", 0),
+		GPIO_LOOKUP("Bank D", 4, "amp", 0),
+		{ },
+	},
+};
+
+static struct platform_device *jz_platform_devices[] __initdata = {
+	&jz4740_udc_device,
+	&jz4740_udc_xceiv_device,
+>>>>>>> v3.18
 	&jz4740_mmc_device,
 	&jz4740_nand_device,
 	&qi_lb60_keypad,
@@ -438,6 +457,10 @@ static struct platform_device *jz_platform_devices[] __initdata = {
 	&jz4740_rtc_device,
 	&jz4740_adc_device,
 	&jz4740_pwm_device,
+<<<<<<< HEAD
+=======
+	&jz4740_dma_device,
+>>>>>>> v3.18
 	&qi_lb60_gpio_keys,
 	&qi_lb60_pwm_beeper,
 	&qi_lb60_charger_device,
@@ -459,6 +482,11 @@ static int __init qi_lb60_init_platform_devices(void)
 	jz4740_adc_device.dev.platform_data = &qi_lb60_battery_pdata;
 	jz4740_mmc_device.dev.platform_data = &qi_lb60_mmc_pdata;
 
+<<<<<<< HEAD
+=======
+	gpiod_add_lookup_table(&qi_lb60_audio_gpio_table);
+
+>>>>>>> v3.18
 	jz4740_serial_device_register();
 
 	spi_register_board_info(qi_lb60_spi_board_info,

@@ -1,7 +1,10 @@
 /* Copyright (C) 1995, 1996 Olaf Kirch <okir@monad.swb.de> */
 
 #include <linux/sched.h>
+<<<<<<< HEAD
 #include <linux/user_namespace.h>
+=======
+>>>>>>> v3.18
 #include "nfsd.h"
 #include "auth.h"
 
@@ -25,12 +28,19 @@ int nfsd_setuser(struct svc_rqst *rqstp, struct svc_export *exp)
 	struct cred *new;
 	int i;
 	int flags = nfsexp_flags(rqstp, exp);
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 
 	validate_process_creds();
 
 	/* discard any old override before preparing the new set */
+<<<<<<< HEAD
 	revert_creds(get_cred(current->real_cred));
+=======
+	revert_creds(get_cred(current_real_cred()));
+>>>>>>> v3.18
 	new = prepare_creds();
 	if (!new)
 		return -ENOMEM;
@@ -71,10 +81,15 @@ int nfsd_setuser(struct svc_rqst *rqstp, struct svc_export *exp)
 	if (gid_eq(new->fsgid, INVALID_GID))
 		new->fsgid = exp->ex_anon_gid;
 
+<<<<<<< HEAD
 	ret = set_groups(new, gi);
 	put_group_info(gi);
 	if (ret < 0)
 		goto error;
+=======
+	set_groups(new, gi);
+	put_group_info(gi);
+>>>>>>> v3.18
 
 	if (!uid_eq(new->fsuid, GLOBAL_ROOT_UID))
 		new->cap_effective = cap_drop_nfsd_set(new->cap_effective);
@@ -88,9 +103,14 @@ int nfsd_setuser(struct svc_rqst *rqstp, struct svc_export *exp)
 	return 0;
 
 oom:
+<<<<<<< HEAD
 	ret = -ENOMEM;
 error:
 	abort_creds(new);
 	return ret;
+=======
+	abort_creds(new);
+	return -ENOMEM;
+>>>>>>> v3.18
 }
 

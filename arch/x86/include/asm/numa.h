@@ -9,7 +9,10 @@
 #ifdef CONFIG_NUMA
 
 #define NR_NODE_MEMBLKS		(MAX_NUMNODES*2)
+<<<<<<< HEAD
 #define ZONE_ALIGN (1UL << (MAX_ORDER+PAGE_SHIFT))
+=======
+>>>>>>> v3.18
 
 /*
  * Too small node sizes may confuse the VM badly. Usually they
@@ -39,7 +42,11 @@ static inline void set_apicid_to_node(int apicid, s16 node)
 	__apicid_to_node[apicid] = node;
 }
 
+<<<<<<< HEAD
 extern int __cpuinit numa_cpu_node(int cpu);
+=======
+extern int numa_cpu_node(int cpu);
+>>>>>>> v3.18
 
 #else	/* CONFIG_NUMA */
 static inline void set_apicid_to_node(int apicid, s16 node)
@@ -60,8 +67,13 @@ static inline int numa_cpu_node(int cpu)
 extern void numa_set_node(int cpu, int node);
 extern void numa_clear_node(int cpu);
 extern void __init init_cpu_to_node(void);
+<<<<<<< HEAD
 extern void __cpuinit numa_add_cpu(int cpu);
 extern void __cpuinit numa_remove_cpu(int cpu);
+=======
+extern void numa_add_cpu(int cpu);
+extern void numa_remove_cpu(int cpu);
+>>>>>>> v3.18
 #else	/* CONFIG_NUMA */
 static inline void numa_set_node(int cpu, int node)	{ }
 static inline void numa_clear_node(int cpu)		{ }

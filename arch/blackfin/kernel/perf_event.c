@@ -300,7 +300,11 @@ again:
 
 static void bfin_pmu_stop(struct perf_event *event, int flags)
 {
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 	struct hw_perf_event *hwc = &event->hw;
 	int idx = hwc->idx;
 
@@ -318,7 +322,11 @@ static void bfin_pmu_stop(struct perf_event *event, int flags)
 
 static void bfin_pmu_start(struct perf_event *event, int flags)
 {
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 	struct hw_perf_event *hwc = &event->hw;
 	int idx = hwc->idx;
 
@@ -335,7 +343,11 @@ static void bfin_pmu_start(struct perf_event *event, int flags)
 
 static void bfin_pmu_del(struct perf_event *event, int flags)
 {
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 
 	bfin_pmu_stop(event, PERF_EF_UPDATE);
 	__clear_bit(event->hw.idx, cpuc->used_mask);
@@ -345,7 +357,11 @@ static void bfin_pmu_del(struct perf_event *event, int flags)
 
 static int bfin_pmu_add(struct perf_event *event, int flags)
 {
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 	struct hw_perf_event *hwc = &event->hw;
 	int idx = hwc->idx;
 	int ret = -EAGAIN;
@@ -389,6 +405,7 @@ static int bfin_pmu_event_init(struct perf_event *event)
 	if (attr->exclude_hv || attr->exclude_idle)
 		return -EPERM;
 
+<<<<<<< HEAD
 	/*
 	 * All of the on-chip counters are "limited", in that they have
 	 * no interrupts, and are therefore unable to do sampling without
@@ -397,6 +414,8 @@ static int bfin_pmu_event_init(struct perf_event *event)
 	if (hwc->sample_period)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 	ret = 0;
 	switch (attr->type) {
 	case PERF_TYPE_RAW:
@@ -429,7 +448,11 @@ static int bfin_pmu_event_init(struct perf_event *event)
 
 static void bfin_pmu_enable(struct pmu *pmu)
 {
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 	struct perf_event *event;
 	struct hw_perf_event *hwc;
 	int i;
@@ -468,7 +491,11 @@ static void bfin_pmu_setup(int cpu)
 	memset(cpuhw, 0, sizeof(struct cpu_hw_events));
 }
 
+<<<<<<< HEAD
 static int __cpuinit
+=======
+static int
+>>>>>>> v3.18
 bfin_pmu_notifier(struct notifier_block *self, unsigned long action, void *hcpu)
 {
 	unsigned int cpu = (long)hcpu;
@@ -490,6 +517,16 @@ static int __init bfin_pmu_init(void)
 {
 	int ret;
 
+<<<<<<< HEAD
+=======
+	/*
+	 * All of the on-chip counters are "limited", in that they have
+	 * no interrupts, and are therefore unable to do sampling without
+	 * further work and timer assistance.
+	 */
+	pmu.capabilities |= PERF_PMU_CAP_NO_INTERRUPT;
+
+>>>>>>> v3.18
 	ret = perf_pmu_register(&pmu, "cpu", PERF_TYPE_RAW);
 	if (!ret)
 		perf_cpu_notifier(bfin_pmu_notifier);

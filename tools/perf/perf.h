@@ -1,6 +1,7 @@
 #ifndef _PERF_PERF_H
 #define _PERF_PERF_H
 
+<<<<<<< HEAD
 #include <asm/unistd.h>
 
 #if defined(__i386__)
@@ -121,10 +122,30 @@
  */
 #define PR_TASK_PERF_EVENTS_DISABLE   31
 #define PR_TASK_PERF_EVENTS_ENABLE    32
+=======
+#include <time.h>
+#include <stdbool.h>
+#include <linux/types.h>
+#include <linux/perf_event.h>
+
+extern bool test_attr__enabled;
+void test_attr__init(void);
+void test_attr__open(struct perf_event_attr *attr, pid_t pid, int cpu,
+		     int fd, int group_fd, unsigned long flags);
+
+#define HAVE_ATTR_TEST
+#include "perf-sys.h"
+>>>>>>> v3.18
 
 #ifndef NSEC_PER_SEC
 # define NSEC_PER_SEC			1000000000ULL
 #endif
+<<<<<<< HEAD
+=======
+#ifndef NSEC_PER_USEC
+# define NSEC_PER_USEC			1000ULL
+#endif
+>>>>>>> v3.18
 
 static inline unsigned long long rdclock(void)
 {
@@ -134,6 +155,7 @@ static inline unsigned long long rdclock(void)
 	return ts.tv_sec * 1000000000ULL + ts.tv_nsec;
 }
 
+<<<<<<< HEAD
 /*
  * Pick up some kernel type conventions:
  */
@@ -193,6 +215,10 @@ struct branch_stack {
 	struct branch_entry	entries[0];
 };
 
+=======
+#define MAX_NR_CPUS			256
+
+>>>>>>> v3.18
 extern const char *input_name;
 extern bool perf_host, perf_guest;
 extern const char perf_version_string[];
@@ -201,6 +227,7 @@ void pthread__unblock_sigwinch(void);
 
 #include "util/target.h"
 
+<<<<<<< HEAD
 enum perf_call_graph_mode {
 	CALLCHAIN_NONE,
 	CALLCHAIN_FP,
@@ -216,6 +243,16 @@ struct perf_record_opts {
 	bool	     no_inherit;
 	bool	     no_samples;
 	bool	     pipe_output;
+=======
+struct record_opts {
+	struct target target;
+	bool	     group;
+	bool	     inherit_stat;
+	bool	     no_buffering;
+	bool	     no_inherit;
+	bool	     no_inherit_set;
+	bool	     no_samples;
+>>>>>>> v3.18
 	bool	     raw_samples;
 	bool	     sample_address;
 	bool	     sample_weight;
@@ -227,7 +264,12 @@ struct perf_record_opts {
 	u64          branch_stack;
 	u64	     default_interval;
 	u64	     user_interval;
+<<<<<<< HEAD
 	u16	     stack_dump_size;
+=======
+	bool	     sample_transaction;
+	unsigned     initial_delay;
+>>>>>>> v3.18
 };
 
 #endif

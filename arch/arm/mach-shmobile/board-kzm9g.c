@@ -29,6 +29,10 @@
 #include <linux/mmc/host.h>
 #include <linux/mmc/sh_mmcif.h>
 #include <linux/mmc/sh_mobile_sdhi.h>
+<<<<<<< HEAD
+=======
+#include <linux/mfd/as3711.h>
+>>>>>>> v3.18
 #include <linux/mfd/tmio.h>
 #include <linux/pinctrl/machine.h>
 #include <linux/pinctrl/pinconf-generic.h>
@@ -40,16 +44,23 @@
 #include <linux/usb/r8a66597.h>
 #include <linux/usb/renesas_usbhs.h>
 #include <linux/videodev2.h>
+<<<<<<< HEAD
 #include <sound/sh_fsi.h>
 #include <sound/simple_card.h>
 #include <mach/irqs.h>
 #include <mach/sh73a0.h>
 #include <mach/common.h>
+=======
+
+#include <sound/sh_fsi.h>
+#include <sound/simple_card.h>
+>>>>>>> v3.18
 #include <asm/hardware/cache-l2x0.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 #include <video/sh_mobile_lcdc.h>
 
+<<<<<<< HEAD
 /*
  * external GPIO
  */
@@ -61,6 +72,24 @@
 #define GPIO_PCF8575_PORT14	(GPIO_NR + 12)
 #define GPIO_PCF8575_PORT15	(GPIO_NR + 13)
 #define GPIO_PCF8575_PORT16	(GPIO_NR + 14)
+=======
+#include "common.h"
+#include "intc.h"
+#include "irqs.h"
+#include "sh73a0.h"
+
+/*
+ * external GPIO
+ */
+#define GPIO_PCF8575_BASE	(310)
+#define GPIO_PCF8575_PORT10	(GPIO_PCF8575_BASE + 8)
+#define GPIO_PCF8575_PORT11	(GPIO_PCF8575_BASE + 9)
+#define GPIO_PCF8575_PORT12	(GPIO_PCF8575_BASE + 10)
+#define GPIO_PCF8575_PORT13	(GPIO_PCF8575_BASE + 11)
+#define GPIO_PCF8575_PORT14	(GPIO_PCF8575_BASE + 12)
+#define GPIO_PCF8575_PORT15	(GPIO_PCF8575_BASE + 13)
+#define GPIO_PCF8575_PORT16	(GPIO_PCF8575_BASE + 14)
+>>>>>>> v3.18
 
 /* Dummy supplies, where voltage doesn't matter */
 static struct regulator_consumer_supply dummy_supplies[] = {
@@ -365,6 +394,10 @@ static struct resource sh_mmcif_resources[] = {
 static struct sh_mmcif_plat_data sh_mmcif_platdata = {
 	.ocr		= MMC_VDD_165_195,
 	.caps		= MMC_CAP_8_BIT_DATA | MMC_CAP_NONREMOVABLE,
+<<<<<<< HEAD
+=======
+	.ccs_unsupported = true,
+>>>>>>> v3.18
 	.slave_id_tx	= SHDMA_SLAVE_MMCIF_TX,
 	.slave_id_rx	= SHDMA_SLAVE_MMCIF_RX,
 };
@@ -587,6 +620,7 @@ static struct asoc_simple_card_info fsi2_ak4648_info = {
 	.card		= "FSI2A-AK4648",
 	.codec		= "ak4642-codec.0-0012",
 	.platform	= "sh_fsi2",
+<<<<<<< HEAD
 	.daifmt		= SND_SOC_DAIFMT_LEFT_J,
 	.cpu_dai = {
 		.name	= "fsia-dai",
@@ -595,6 +629,14 @@ static struct asoc_simple_card_info fsi2_ak4648_info = {
 	.codec_dai = {
 		.name	= "ak4642-hifi",
 		.fmt	= SND_SOC_DAIFMT_CBM_CFM,
+=======
+	.daifmt		= SND_SOC_DAIFMT_LEFT_J | SND_SOC_DAIFMT_CBM_CFM,
+	.cpu_dai = {
+		.name	= "fsia-dai",
+	},
+	.codec_dai = {
+		.name	= "ak4642-hifi",
+>>>>>>> v3.18
 		.sysclk	= 11289600,
 	},
 };
@@ -603,10 +645,152 @@ static struct platform_device fsi_ak4648_device = {
 	.name	= "asoc-simple-card",
 	.dev	= {
 		.platform_data	= &fsi2_ak4648_info,
+<<<<<<< HEAD
+=======
+		.coherent_dma_mask = DMA_BIT_MASK(32),
+		.dma_mask = &fsi_ak4648_device.dev.coherent_dma_mask,
+>>>>>>> v3.18
 	},
 };
 
 /* I2C */
+<<<<<<< HEAD
+=======
+
+/* StepDown1 is used to supply 1.315V to the CPU */
+static struct regulator_init_data as3711_sd1 = {
+	.constraints = {
+		.name = "1.315V CPU",
+		.boot_on = 1,
+		.always_on = 1,
+		.min_uV = 1315000,
+		.max_uV = 1335000,
+	},
+};
+
+/* StepDown2 is used to supply 1.8V to the CPU and to the board */
+static struct regulator_init_data as3711_sd2 = {
+	.constraints = {
+		.name = "1.8V",
+		.boot_on = 1,
+		.always_on = 1,
+		.min_uV = 1800000,
+		.max_uV = 1800000,
+	},
+};
+
+/*
+ * StepDown3 is switched in parallel with StepDown2, seems to be off,
+ * according to read-back pre-set register values
+ */
+
+/* StepDown4 is used to supply 1.215V to the CPU and to the board */
+static struct regulator_init_data as3711_sd4 = {
+	.constraints = {
+		.name = "1.215V",
+		.boot_on = 1,
+		.always_on = 1,
+		.min_uV = 1215000,
+		.max_uV = 1235000,
+	},
+};
+
+/* LDO1 is unused and unconnected */
+
+/* LDO2 is used to supply 2.8V to the CPU */
+static struct regulator_init_data as3711_ldo2 = {
+	.constraints = {
+		.name = "2.8V CPU",
+		.boot_on = 1,
+		.always_on = 1,
+		.min_uV = 2800000,
+		.max_uV = 2800000,
+	},
+};
+
+/* LDO3 is used to supply 3.0V to the CPU */
+static struct regulator_init_data as3711_ldo3 = {
+	.constraints = {
+		.name = "3.0V CPU",
+		.boot_on = 1,
+		.always_on = 1,
+		.min_uV = 3000000,
+		.max_uV = 3000000,
+	},
+};
+
+/* LDO4 is used to supply 2.8V to the board */
+static struct regulator_init_data as3711_ldo4 = {
+	.constraints = {
+		.name = "2.8V",
+		.boot_on = 1,
+		.always_on = 1,
+		.min_uV = 2800000,
+		.max_uV = 2800000,
+	},
+};
+
+/* LDO5 is switched parallel to LDO4, also set to 2.8V */
+static struct regulator_init_data as3711_ldo5 = {
+	.constraints = {
+		.name = "2.8V #2",
+		.boot_on = 1,
+		.always_on = 1,
+		.min_uV = 2800000,
+		.max_uV = 2800000,
+	},
+};
+
+/* LDO6 is unused and unconnected */
+
+/* LDO7 is used to supply 1.15V to the CPU */
+static struct regulator_init_data as3711_ldo7 = {
+	.constraints = {
+		.name = "1.15V CPU",
+		.boot_on = 1,
+		.always_on = 1,
+		.min_uV = 1150000,
+		.max_uV = 1150000,
+	},
+};
+
+/* LDO8 is switched parallel to LDO7, also set to 1.15V */
+static struct regulator_init_data as3711_ldo8 = {
+	.constraints = {
+		.name = "1.15V CPU #2",
+		.boot_on = 1,
+		.always_on = 1,
+		.min_uV = 1150000,
+		.max_uV = 1150000,
+	},
+};
+
+static struct as3711_platform_data as3711_pdata = {
+	.regulator	= {
+		.init_data	= {
+			[AS3711_REGULATOR_SD_1] = &as3711_sd1,
+			[AS3711_REGULATOR_SD_2] = &as3711_sd2,
+			[AS3711_REGULATOR_SD_4] = &as3711_sd4,
+			[AS3711_REGULATOR_LDO_2] = &as3711_ldo2,
+			[AS3711_REGULATOR_LDO_3] = &as3711_ldo3,
+			[AS3711_REGULATOR_LDO_4] = &as3711_ldo4,
+			[AS3711_REGULATOR_LDO_5] = &as3711_ldo5,
+			[AS3711_REGULATOR_LDO_7] = &as3711_ldo7,
+			[AS3711_REGULATOR_LDO_8] = &as3711_ldo8,
+		},
+	},
+	.backlight	= {
+		.su2_fb = "sh_mobile_lcdc_fb.0",
+		.su2_max_uA = 36000,
+		.su2_feedback = AS3711_SU2_CURR_AUTO,
+		.su2_fbprot = AS3711_SU2_GPIO4,
+		.su2_auto_curr1 = true,
+		.su2_auto_curr2 = true,
+		.su2_auto_curr3 = true,
+	},
+};
+
+>>>>>>> v3.18
 static struct pcf857x_platform_data pcf8575_pdata = {
 	.gpio_base	= GPIO_PCF8575_BASE,
 };
@@ -626,6 +810,14 @@ static struct i2c_board_info i2c0_devices[] = {
 		I2C_BOARD_INFO("adxl34x", 0x1d),
 		.irq = irq_pin(26), /* IRQ26 */
 	},
+<<<<<<< HEAD
+=======
+	{
+		I2C_BOARD_INFO("as3711", 0x40),
+		.irq = intcs_evt2irq(0x3300), /* IRQ24 */
+		.platform_data = &as3711_pdata,
+	},
+>>>>>>> v3.18
 };
 
 static struct i2c_board_info i2c1_devices[] = {
@@ -664,6 +856,7 @@ static unsigned long pin_pullup_conf[] = {
 
 static const struct pinctrl_map kzm_pinctrl_map[] = {
 	/* FSIA (AK4648) */
+<<<<<<< HEAD
 	PIN_MAP_MUX_GROUP_DEFAULT("sh_fsi2.0", "pfc-sh73a0",
 				  "fsia_mclk_in", "fsia"),
 	PIN_MAP_MUX_GROUP_DEFAULT("sh_fsi2.0", "pfc-sh73a0",
@@ -671,6 +864,15 @@ static const struct pinctrl_map kzm_pinctrl_map[] = {
 	PIN_MAP_MUX_GROUP_DEFAULT("sh_fsi2.0", "pfc-sh73a0",
 				  "fsia_data_in", "fsia"),
 	PIN_MAP_MUX_GROUP_DEFAULT("sh_fsi2.0", "pfc-sh73a0",
+=======
+	PIN_MAP_MUX_GROUP_DEFAULT("sh_fsi2", "pfc-sh73a0",
+				  "fsia_mclk_in", "fsia"),
+	PIN_MAP_MUX_GROUP_DEFAULT("sh_fsi2", "pfc-sh73a0",
+				  "fsia_sclk_in", "fsia"),
+	PIN_MAP_MUX_GROUP_DEFAULT("sh_fsi2", "pfc-sh73a0",
+				  "fsia_data_in", "fsia"),
+	PIN_MAP_MUX_GROUP_DEFAULT("sh_fsi2", "pfc-sh73a0",
+>>>>>>> v3.18
 				  "fsia_data_out", "fsia"),
 	/* I2C3 */
 	PIN_MAP_MUX_GROUP_DEFAULT("i2c-sh_mobile.3", "pfc-sh73a0",
@@ -716,6 +918,7 @@ static const struct pinctrl_map kzm_pinctrl_map[] = {
 				  "usb_vbus", "usb"),
 };
 
+<<<<<<< HEAD
 /*
  * FIXME
  *
@@ -769,6 +972,8 @@ static int __init as3711_enable_lcdc_backlight(void)
 }
 device_initcall(as3711_enable_lcdc_backlight);
 
+=======
+>>>>>>> v3.18
 static void __init kzm_init(void)
 {
 	regulator_register_always_on(2, "fixed-1.8V", fixed1v8_power_consumers,
@@ -789,12 +994,18 @@ static void __init kzm_init(void)
 	/* Touchscreen */
 	gpio_request_one(223, GPIOF_IN, NULL); /* IRQ8 */
 
+<<<<<<< HEAD
 	/* enable SD */
 	gpio_request(GPIO_FN_SDHI0_VCCQ_MC0_ON,	NULL);
 
 #ifdef CONFIG_CACHE_L2X0
 	/* Early BRESP enable, Shared attribute override enable, 64K*8way */
 	l2x0_init(IOMEM(0xf0100000), 0x40460000, 0x82000fff);
+=======
+#ifdef CONFIG_CACHE_L2X0
+	/* Shared attribute override enable, 64K*8way */
+	l2x0_init(IOMEM(0xf0100000), 0x00400000, 0xc20f0fff);
+>>>>>>> v3.18
 #endif
 
 	i2c_register_board_info(0, i2c0_devices, ARRAY_SIZE(i2c0_devices));
@@ -823,7 +1034,10 @@ DT_MACHINE_START(KZM9G_DT, "kzm9g")
 	.smp		= smp_ops(sh73a0_smp_ops),
 	.map_io		= sh73a0_map_io,
 	.init_early	= sh73a0_add_early_devices,
+<<<<<<< HEAD
 	.nr_irqs	= NR_IRQS_LEGACY,
+=======
+>>>>>>> v3.18
 	.init_irq	= sh73a0_init_irq,
 	.init_machine	= kzm_init,
 	.init_late	= shmobile_init_late,

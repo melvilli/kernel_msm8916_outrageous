@@ -13,6 +13,7 @@
 #include <linux/module.h>
 #include <linux/slab.h>
 #include <linux/of.h>
+<<<<<<< HEAD
 #include <linux/string.h>
 #include <linux/regulator/machine.h>
 #include <linux/regulator/of_regulator.h>
@@ -23,6 +24,21 @@ static void of_get_regulation_constraints(struct device_node *np,
 	const __be32 *min_uV, *max_uV, *uV_offset;
 	const __be32 *min_uA, *max_uA, *ramp_delay;
 	struct regulation_constraints *constraints = &(*init_data)->constraints;
+=======
+#include <linux/regulator/machine.h>
+#include <linux/regulator/driver.h>
+#include <linux/regulator/of_regulator.h>
+
+#include "internal.h"
+
+static void of_get_regulation_constraints(struct device_node *np,
+					struct regulator_init_data **init_data)
+{
+	const __be32 *min_uV, *max_uV;
+	struct regulation_constraints *constraints = &(*init_data)->constraints;
+	int ret;
+	u32 pval;
+>>>>>>> v3.18
 
 	constraints->name = of_get_property(np, "regulator-name", NULL);
 
@@ -40,6 +56,7 @@ static void of_get_regulation_constraints(struct device_node *np,
 	if (min_uV && max_uV && constraints->min_uV == constraints->max_uV)
 		constraints->apply_uV = true;
 
+<<<<<<< HEAD
 	uV_offset = of_get_property(np, "regulator-microvolt-offset", NULL);
 	if (uV_offset)
 		constraints->uV_offset = be32_to_cpu(*uV_offset);
@@ -49,11 +66,20 @@ static void of_get_regulation_constraints(struct device_node *np,
 	max_uA = of_get_property(np, "regulator-max-microamp", NULL);
 	if (max_uA)
 		constraints->max_uA = be32_to_cpu(*max_uA);
+=======
+	if (!of_property_read_u32(np, "regulator-microvolt-offset", &pval))
+		constraints->uV_offset = pval;
+	if (!of_property_read_u32(np, "regulator-min-microamp", &pval))
+		constraints->min_uA = pval;
+	if (!of_property_read_u32(np, "regulator-max-microamp", &pval))
+		constraints->max_uA = pval;
+>>>>>>> v3.18
 
 	/* Current change possible? */
 	if (constraints->min_uA != constraints->max_uA)
 		constraints->valid_ops_mask |= REGULATOR_CHANGE_CURRENT;
 
+<<<<<<< HEAD
 	if (of_find_property(np, "regulator-boot-on", NULL))
 		constraints->boot_on = true;
 
@@ -130,6 +156,27 @@ static int of_get_qcom_regulator_init_data(struct device *dev,
 	}
 
 	return 0;
+=======
+	constraints->boot_on = of_property_read_bool(np, "regulator-boot-on");
+	constraints->always_on = of_property_read_bool(np, "regulator-always-on");
+	if (!constraints->always_on) /* status change should be possible. */
+		constraints->valid_ops_mask |= REGULATOR_CHANGE_STATUS;
+
+	if (of_property_read_bool(np, "regulator-allow-bypass"))
+		constraints->valid_ops_mask |= REGULATOR_CHANGE_BYPASS;
+
+	ret = of_property_read_u32(np, "regulator-ramp-delay", &pval);
+	if (!ret) {
+		if (pval)
+			constraints->ramp_delay = pval;
+		else
+			constraints->ramp_disable = true;
+	}
+
+	ret = of_property_read_u32(np, "regulator-enable-ramp-delay", &pval);
+	if (!ret)
+		constraints->enable_time = pval;
+>>>>>>> v3.18
 }
 
 /**
@@ -144,7 +191,10 @@ struct regulator_init_data *of_get_regulator_init_data(struct device *dev,
 						struct device_node *node)
 {
 	struct regulator_init_data *init_data;
+<<<<<<< HEAD
 	int rc;
+=======
+>>>>>>> v3.18
 
 	if (!node)
 		return NULL;
@@ -154,16 +204,36 @@ struct regulator_init_data *of_get_regulator_init_data(struct device *dev,
 		return NULL; /* Out of memory? */
 
 	of_get_regulation_constraints(node, &init_data);
+<<<<<<< HEAD
 	rc = of_get_qcom_regulator_init_data(dev, &init_data);
 	if (rc) {
 		devm_kfree(dev, init_data);
 		return NULL;
 	}
 
+=======
+>>>>>>> v3.18
 	return init_data;
 }
 EXPORT_SYMBOL_GPL(of_get_regulator_init_data);
 
+<<<<<<< HEAD
+=======
+struct devm_of_regulator_matches {
+	struct of_regulator_match *matches;
+	unsigned int num_matches;
+};
+
+static void devm_of_regulator_put_matches(struct device *dev, void *res)
+{
+	struct devm_of_regulator_matches *devm_matches = res;
+	int i;
+
+	for (i = 0; i < devm_matches->num_matches; i++)
+		of_node_put(devm_matches->matches[i].of_node);
+}
+
+>>>>>>> v3.18
 /**
  * of_regulator_match - extract multiple regulator init data from device tree.
  * @dev: device requesting the data
@@ -177,7 +247,12 @@ EXPORT_SYMBOL_GPL(of_get_regulator_init_data);
  * regulator. The data parsed from a child node will be matched to a regulator
  * based on either the deprecated property regulator-compatible if present,
  * or otherwise the child node's name. Note that the match table is modified
+<<<<<<< HEAD
  * in place.
+=======
+ * in place and an additional of_node reference is taken for each matched
+ * regulator.
+>>>>>>> v3.18
  *
  * Returns the number of matches found or a negative error code on failure.
  */
@@ -189,10 +264,28 @@ int of_regulator_match(struct device *dev, struct device_node *node,
 	unsigned int i;
 	const char *name;
 	struct device_node *child;
+<<<<<<< HEAD
+=======
+	struct devm_of_regulator_matches *devm_matches;
+>>>>>>> v3.18
 
 	if (!dev || !node)
 		return -EINVAL;
 
+<<<<<<< HEAD
+=======
+	devm_matches = devres_alloc(devm_of_regulator_put_matches,
+				    sizeof(struct devm_of_regulator_matches),
+				    GFP_KERNEL);
+	if (!devm_matches)
+		return -ENOMEM;
+
+	devm_matches->matches = matches;
+	devm_matches->num_matches = num_matches;
+
+	devres_add(dev, devm_matches);
+
+>>>>>>> v3.18
 	for (i = 0; i < num_matches; i++) {
 		struct of_regulator_match *match = &matches[i];
 		match->init_data = NULL;
@@ -220,7 +313,11 @@ int of_regulator_match(struct device *dev, struct device_node *node,
 					child->name);
 				return -EINVAL;
 			}
+<<<<<<< HEAD
 			match->of_node = child;
+=======
+			match->of_node = of_node_get(child);
+>>>>>>> v3.18
 			count++;
 			break;
 		}
@@ -229,3 +326,55 @@ int of_regulator_match(struct device *dev, struct device_node *node,
 	return count;
 }
 EXPORT_SYMBOL_GPL(of_regulator_match);
+<<<<<<< HEAD
+=======
+
+struct regulator_init_data *regulator_of_get_init_data(struct device *dev,
+					    const struct regulator_desc *desc,
+					    struct device_node **node)
+{
+	struct device_node *search, *child;
+	struct regulator_init_data *init_data = NULL;
+	const char *name;
+
+	if (!dev->of_node || !desc->of_match)
+		return NULL;
+
+	if (desc->regulators_node)
+		search = of_get_child_by_name(dev->of_node,
+					      desc->regulators_node);
+	else
+		search = dev->of_node;
+
+	if (!search) {
+		dev_dbg(dev, "Failed to find regulator container node '%s'\n",
+			desc->regulators_node);
+		return NULL;
+	}
+
+	for_each_child_of_node(search, child) {
+		name = of_get_property(child, "regulator-compatible", NULL);
+		if (!name)
+			name = child->name;
+
+		if (strcmp(desc->of_match, name))
+			continue;
+
+		init_data = of_get_regulator_init_data(dev, child);
+		if (!init_data) {
+			dev_err(dev,
+				"failed to parse DT for regulator %s\n",
+				child->name);
+			break;
+		}
+
+		of_node_get(child);
+		*node = child;
+		break;
+	}
+
+	of_node_put(search);
+
+	return init_data;
+}
+>>>>>>> v3.18

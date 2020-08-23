@@ -1,5 +1,9 @@
 #include <linux/kernel.h>
+<<<<<<< HEAD
 #include <linux/prefetch.h>
+=======
+#include <linux/types.h>
+>>>>>>> v3.18
 
 #include "../../../../include/linux/list.h"
 

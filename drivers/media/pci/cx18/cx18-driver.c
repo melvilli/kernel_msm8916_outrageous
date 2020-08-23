@@ -702,7 +702,11 @@ static int cx18_create_in_workq(struct cx18 *cx)
 {
 	snprintf(cx->in_workq_name, sizeof(cx->in_workq_name), "%s-in",
 		 cx->v4l2_dev.name);
+<<<<<<< HEAD
 	cx->in_work_queue = alloc_ordered_workqueue(cx->in_workq_name, 0);
+=======
+	cx->in_work_queue = alloc_ordered_workqueue("%s", 0, cx->in_workq_name);
+>>>>>>> v3.18
 	if (cx->in_work_queue == NULL) {
 		CX18_ERR("Unable to create incoming mailbox handler thread\n");
 		return -ENOMEM;
@@ -1038,8 +1042,12 @@ static int cx18_probe(struct pci_dev *pci_dev,
 
 	/* Register IRQ */
 	retval = request_irq(cx->pci_dev->irq, cx18_irq_handler,
+<<<<<<< HEAD
 			     IRQF_SHARED | IRQF_DISABLED,
 			     cx->v4l2_dev.name, (void *)cx);
+=======
+			     IRQF_SHARED, cx->v4l2_dev.name, (void *)cx);
+>>>>>>> v3.18
 	if (retval) {
 		CX18_ERR("Failed to register irq %d\n", retval);
 		goto free_i2c;

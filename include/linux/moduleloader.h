@@ -26,7 +26,11 @@ unsigned int arch_mod_section_prepend(struct module *mod, unsigned int section);
 void *module_alloc(unsigned long size);
 
 /* Free memory returned from module_alloc. */
+<<<<<<< HEAD
 void module_memfree(void *module_region);
+=======
+void module_free(struct module *mod, void *module_region);
+>>>>>>> v3.18
 
 /*
  * Apply the given relocation to the (simplified) ELF.  Return -error
@@ -45,7 +49,12 @@ static inline int apply_relocate(Elf_Shdr *sechdrs,
 				 unsigned int relsec,
 				 struct module *me)
 {
+<<<<<<< HEAD
 	printk(KERN_ERR "module %s: REL relocation unsupported\n", me->name);
+=======
+	printk(KERN_ERR "module %s: REL relocation unsupported\n",
+	       module_name(me));
+>>>>>>> v3.18
 	return -ENOEXEC;
 }
 #endif
@@ -67,7 +76,12 @@ static inline int apply_relocate_add(Elf_Shdr *sechdrs,
 				     unsigned int relsec,
 				     struct module *me)
 {
+<<<<<<< HEAD
 	printk(KERN_ERR "module %s: REL relocation unsupported\n", me->name);
+=======
+	printk(KERN_ERR "module %s: REL relocation unsupported\n",
+	       module_name(me));
+>>>>>>> v3.18
 	return -ENOEXEC;
 }
 #endif

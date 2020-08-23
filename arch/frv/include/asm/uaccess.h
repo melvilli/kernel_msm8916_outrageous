@@ -263,18 +263,27 @@ do {							\
 extern long __memset_user(void *dst, unsigned long count);
 extern long __memcpy_user(void *dst, const void *src, unsigned long count);
 
+<<<<<<< HEAD
 #define __clear_user(dst,count)			__memset_user(____force(dst), (count))
+=======
+#define clear_user(dst,count)			__memset_user(____force(dst), (count))
+>>>>>>> v3.18
 #define __copy_from_user_inatomic(to, from, n)	__memcpy_user((to), ____force(from), (n))
 #define __copy_to_user_inatomic(to, from, n)	__memcpy_user(____force(to), (from), (n))
 
 #else
 
+<<<<<<< HEAD
 #define __clear_user(dst,count)			(memset(____force(dst), 0, (count)), 0)
+=======
+#define clear_user(dst,count)			(memset(____force(dst), 0, (count)), 0)
+>>>>>>> v3.18
 #define __copy_from_user_inatomic(to, from, n)	(memcpy((to), ____force(from), (n)), 0)
 #define __copy_to_user_inatomic(to, from, n)	(memcpy(____force(to), (from), (n)), 0)
 
 #endif
 
+<<<<<<< HEAD
 static inline unsigned long __must_check
 clear_user(void __user *to, unsigned long n)
 {
@@ -282,18 +291,29 @@ clear_user(void __user *to, unsigned long n)
 		n = __clear_user(to, n);
 	return n;
 }
+=======
+#define __clear_user clear_user
+>>>>>>> v3.18
 
 static inline unsigned long __must_check
 __copy_to_user(void __user *to, const void *from, unsigned long n)
 {
+<<<<<<< HEAD
        might_sleep();
+=======
+       might_fault();
+>>>>>>> v3.18
        return __copy_to_user_inatomic(to, from, n);
 }
 
 static inline unsigned long
 __copy_from_user(void *to, const void __user *from, unsigned long n)
 {
+<<<<<<< HEAD
        might_sleep();
+=======
+       might_fault();
+>>>>>>> v3.18
        return __copy_from_user_inatomic(to, from, n);
 }
 

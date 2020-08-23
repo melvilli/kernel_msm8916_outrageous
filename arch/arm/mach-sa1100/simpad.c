@@ -19,6 +19,10 @@
 
 #include <mach/hardware.h>
 #include <asm/setup.h>
+<<<<<<< HEAD
+=======
+#include <asm/irq.h>
+>>>>>>> v3.18
 
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>

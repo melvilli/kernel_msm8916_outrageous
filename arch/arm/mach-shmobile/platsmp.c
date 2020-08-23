@@ -11,6 +11,7 @@
  * published by the Free Software Foundation.
  */
 #include <linux/init.h>
+<<<<<<< HEAD
 #include <linux/smp.h>
 
 void __init shmobile_smp_init_cpus(unsigned int ncores)
@@ -26,3 +27,30 @@ void __init shmobile_smp_init_cpus(unsigned int ncores)
 	for (i = 0; i < ncores; i++)
 		set_cpu_possible(i, true);
 }
+=======
+#include <asm/cacheflush.h>
+#include <asm/smp_plat.h>
+#include "common.h"
+
+extern unsigned long shmobile_smp_fn[];
+extern unsigned long shmobile_smp_arg[];
+extern unsigned long shmobile_smp_mpidr[];
+
+void shmobile_smp_hook(unsigned int cpu, unsigned long fn, unsigned long arg)
+{
+	shmobile_smp_fn[cpu] = 0;
+	flush_cache_all();
+
+	shmobile_smp_mpidr[cpu] = cpu_logical_map(cpu);
+	shmobile_smp_fn[cpu] = fn;
+	shmobile_smp_arg[cpu] = arg;
+	flush_cache_all();
+}
+
+#ifdef CONFIG_HOTPLUG_CPU
+int shmobile_smp_cpu_disable(unsigned int cpu)
+{
+	return 0; /* Hotplug of any CPU is supported */
+}
+#endif
+>>>>>>> v3.18

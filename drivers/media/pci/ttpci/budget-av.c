@@ -1128,7 +1128,11 @@ static struct stb0899_config knc1_dvbs2_config = {
 //	.ts_pfbit_toggle	= STB0899_MPEG_NORMAL,	/* DirecTV, MPEG toggling seq	*/
 
 	.xtal_freq		= 27000000,
+<<<<<<< HEAD
 	.inversion		= IQ_SWAP_OFF, /* 1 */
+=======
+	.inversion		= IQ_SWAP_OFF,
+>>>>>>> v3.18
 
 	.lo_clk			= 76500000,
 	.hi_clk			= 90000000,

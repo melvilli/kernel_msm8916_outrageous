@@ -6,12 +6,22 @@ capability.txt
 	- Generic Block Device Capability (/sys/block/<device>/capability)
 cfq-iosched.txt
 	- CFQ IO scheduler tunables
+<<<<<<< HEAD
+=======
+cmdline-partition.txt
+	- how to specify block device partitions on kernel command line
+>>>>>>> v3.18
 data-integrity.txt
 	- Block data integrity
 deadline-iosched.txt
 	- Deadline IO scheduler tunables
 ioprio.txt
 	- Block io priorities (in CFQ scheduler)
+<<<<<<< HEAD
+=======
+null_blk.txt
+	- Null block for block-layer benchmarking.
+>>>>>>> v3.18
 queue-sysfs.txt
 	- Queue's sysfs entries
 request.txt

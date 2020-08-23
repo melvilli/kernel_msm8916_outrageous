@@ -5,7 +5,11 @@
  *
  * GPL LICENSE SUMMARY
  *
+<<<<<<< HEAD
  * Copyright(c) 2008 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of version 2 of the GNU General Public License as
@@ -30,7 +34,11 @@
  *
  * BSD LICENSE
  *
+<<<<<<< HEAD
  * Copyright(c) 2005 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -94,7 +102,10 @@ int iwl_send_calib_results(struct iwl_priv *priv)
 {
 	struct iwl_host_cmd hcmd = {
 		.id = REPLY_PHY_CALIBRATION_CMD,
+<<<<<<< HEAD
 		.flags = CMD_SYNC,
+=======
+>>>>>>> v3.18
 	};
 	struct iwl_calib_result *res;
 
@@ -521,7 +532,11 @@ static int iwl_enhance_sensitivity_write(struct iwl_priv *priv)
 
 	iwl_prepare_legacy_sensitivity_tbl(priv, data, &cmd.enhance_table[0]);
 
+<<<<<<< HEAD
 	if (priv->cfg->base_params->hd_v2) {
+=======
+	if (priv->lib->hd_v2) {
+>>>>>>> v3.18
 		cmd.enhance_table[HD_INA_NON_SQUARE_DET_OFDM_INDEX] =
 			HD_INA_NON_SQUARE_DET_OFDM_DATA_V2;
 		cmd.enhance_table[HD_INA_NON_SQUARE_DET_CCK_INDEX] =
@@ -895,7 +910,11 @@ static void iwlagn_gain_computation(struct iwl_priv *priv,
 			continue;
 		}
 
+<<<<<<< HEAD
 		delta_g = (priv->cfg->base_params->chain_noise_scale *
+=======
+		delta_g = (priv->lib->chain_noise_scale *
+>>>>>>> v3.18
 			((s32)average_noise[default_chain] -
 			(s32)average_noise[i])) / 1500;
 
@@ -1051,8 +1070,13 @@ void iwl_chain_noise_calibration(struct iwl_priv *priv)
 		return;
 
 	/* Analyze signal for disconnected antenna */
+<<<<<<< HEAD
 	if (priv->cfg->bt_params &&
 	    priv->cfg->bt_params->advanced_bt_coexist) {
+=======
+	if (priv->lib->bt_params &&
+	    priv->lib->bt_params->advanced_bt_coexist) {
+>>>>>>> v3.18
 		/* Disable disconnected antenna algorithm for advanced
 		   bt coex, assuming valid antennas are connected */
 		data->active_chains = priv->nvm_data->valid_rx_ant;

@@ -45,6 +45,7 @@ MODULE_AUTHOR("Sebastian Witt <se.witt@gmx.net>");
 
 static const unsigned short normal_i2c[] = { 0x37, 0x4e, I2C_CLIENT_END };
 
+<<<<<<< HEAD
 static int atxp1_probe(struct i2c_client *client,
 		       const struct i2c_device_id *id);
 static int atxp1_remove(struct i2c_client *client);
@@ -71,6 +72,10 @@ static struct i2c_driver atxp1_driver = {
 
 struct atxp1_data {
 	struct device *hwmon_dev;
+=======
+struct atxp1_data {
+	struct i2c_client *client;
+>>>>>>> v3.18
 	struct mutex update_lock;
 	unsigned long last_updated;
 	u8 valid;
@@ -85,11 +90,16 @@ struct atxp1_data {
 
 static struct atxp1_data *atxp1_update_device(struct device *dev)
 {
+<<<<<<< HEAD
 	struct i2c_client *client;
 	struct atxp1_data *data;
 
 	client = to_i2c_client(dev);
 	data = i2c_get_clientdata(client);
+=======
+	struct atxp1_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 
 	mutex_lock(&data->update_lock);
 
@@ -129,15 +139,23 @@ static ssize_t atxp1_storevcore(struct device *dev,
 				struct device_attribute *attr,
 				const char *buf, size_t count)
 {
+<<<<<<< HEAD
 	struct atxp1_data *data;
 	struct i2c_client *client;
+=======
+	struct atxp1_data *data = atxp1_update_device(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 	int vid, cvid;
 	unsigned long vcore;
 	int err;
 
+<<<<<<< HEAD
 	client = to_i2c_client(dev);
 	data = atxp1_update_device(dev);
 
+=======
+>>>>>>> v3.18
 	err = kstrtoul(buf, 10, &vcore);
 	if (err)
 		return err;
@@ -147,10 +165,16 @@ static ssize_t atxp1_storevcore(struct device *dev,
 
 	/* Calculate VID */
 	vid = vid_to_reg(vcore, data->vrm);
+<<<<<<< HEAD
 
 	if (vid < 0) {
 		dev_err(dev, "VID calculation failed.\n");
 		return -1;
+=======
+	if (vid < 0) {
+		dev_err(dev, "VID calculation failed.\n");
+		return vid;
+>>>>>>> v3.18
 	}
 
 	/*
@@ -209,6 +233,7 @@ static ssize_t atxp1_storegpio1(struct device *dev,
 				struct device_attribute *attr, const char *buf,
 				size_t count)
 {
+<<<<<<< HEAD
 	struct atxp1_data *data;
 	struct i2c_client *client;
 	unsigned long value;
@@ -217,6 +242,13 @@ static ssize_t atxp1_storegpio1(struct device *dev,
 	client = to_i2c_client(dev);
 	data = atxp1_update_device(dev);
 
+=======
+	struct atxp1_data *data = atxp1_update_device(dev);
+	struct i2c_client *client = data->client;
+	unsigned long value;
+	int err;
+
+>>>>>>> v3.18
 	err = kstrtoul(buf, 16, &value);
 	if (err)
 		return err;
@@ -259,7 +291,11 @@ static ssize_t atxp1_storegpio2(struct device *dev,
 				const char *buf, size_t count)
 {
 	struct atxp1_data *data = atxp1_update_device(dev);
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
+=======
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 	unsigned long value;
 	int err;
 
@@ -285,17 +321,25 @@ static ssize_t atxp1_storegpio2(struct device *dev,
  */
 static DEVICE_ATTR(gpio2, S_IRUGO | S_IWUSR, atxp1_showgpio2, atxp1_storegpio2);
 
+<<<<<<< HEAD
 static struct attribute *atxp1_attributes[] = {
+=======
+static struct attribute *atxp1_attrs[] = {
+>>>>>>> v3.18
 	&dev_attr_gpio1.attr,
 	&dev_attr_gpio2.attr,
 	&dev_attr_cpu0_vid.attr,
 	NULL
 };
+<<<<<<< HEAD
 
 static const struct attribute_group atxp1_group = {
 	.attrs = atxp1_attributes,
 };
 
+=======
+ATTRIBUTE_GROUPS(atxp1);
+>>>>>>> v3.18
 
 /* Return 0 if detection is successful, -ENODEV otherwise */
 static int atxp1_detect(struct i2c_client *new_client,
@@ -339,6 +383,7 @@ static int atxp1_detect(struct i2c_client *new_client,
 	return 0;
 }
 
+<<<<<<< HEAD
 static int atxp1_probe(struct i2c_client *new_client,
 		       const struct i2c_device_id *id)
 {
@@ -347,12 +392,23 @@ static int atxp1_probe(struct i2c_client *new_client,
 
 	data = devm_kzalloc(&new_client->dev, sizeof(struct atxp1_data),
 			    GFP_KERNEL);
+=======
+static int atxp1_probe(struct i2c_client *client,
+		       const struct i2c_device_id *id)
+{
+	struct device *dev = &client->dev;
+	struct atxp1_data *data;
+	struct device *hwmon_dev;
+
+	data = devm_kzalloc(dev, sizeof(struct atxp1_data), GFP_KERNEL);
+>>>>>>> v3.18
 	if (!data)
 		return -ENOMEM;
 
 	/* Get VRM */
 	data->vrm = vid_which_vrm();
 
+<<<<<<< HEAD
 	i2c_set_clientdata(new_client, data);
 	data->valid = 0;
 
@@ -387,6 +443,37 @@ static int atxp1_remove(struct i2c_client *client)
 	sysfs_remove_group(&client->dev.kobj, &atxp1_group);
 
 	return 0;
+=======
+	data->client = client;
+	mutex_init(&data->update_lock);
+
+	hwmon_dev = devm_hwmon_device_register_with_groups(dev, client->name,
+							   data,
+							   atxp1_groups);
+	if (IS_ERR(hwmon_dev))
+		return PTR_ERR(hwmon_dev);
+
+	dev_info(dev, "Using VRM: %d.%d\n", data->vrm / 10, data->vrm % 10);
+
+	return 0;
+};
+
+static const struct i2c_device_id atxp1_id[] = {
+	{ "atxp1", 0 },
+	{ }
+};
+MODULE_DEVICE_TABLE(i2c, atxp1_id);
+
+static struct i2c_driver atxp1_driver = {
+	.class		= I2C_CLASS_HWMON,
+	.driver = {
+		.name	= "atxp1",
+	},
+	.probe		= atxp1_probe,
+	.id_table	= atxp1_id,
+	.detect		= atxp1_detect,
+	.address_list	= normal_i2c,
+>>>>>>> v3.18
 };
 
 module_i2c_driver(atxp1_driver);

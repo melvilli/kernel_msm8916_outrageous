@@ -25,6 +25,7 @@
  * See the GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
  * along with GNU CC; see the file COPYING.  If not, write to
  * the Free Software Foundation, 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
@@ -35,15 +36,26 @@
  *
  * Or submit a bug report through the following website:
  *    http://www.sf.net/projects/lksctp
+=======
+ * along with GNU CC; see the file COPYING.  If not, see
+ * <http://www.gnu.org/licenses/>.
+ *
+ * Please send any bug reports or fixes you make to the
+ * email address(es):
+ *    lksctp developers <linux-sctp@vger.kernel.org>
+>>>>>>> v3.18
  *
  * Written or modified by:
  *   Jon Grimm             <jgrimm@us.ibm.com>
  *   La Monte H.P. Yarroll <piggy@acm.org>
  *   Karl Knutson          <karl@athena.chicago.il.us>
  *   Sridhar Samudrala     <sri@us.ibm.com>
+<<<<<<< HEAD
  *
  * Any bugs reported given to us we will try to fix... any fixes shared will
  * be incorporated into the next SCTP release.
+=======
+>>>>>>> v3.18
  */
 
 #ifndef __sctp_ulpevent_h__
@@ -136,19 +148,33 @@ struct sctp_ulpevent *sctp_ulpevent_make_sender_dry_event(
 	const struct sctp_association *asoc, gfp_t gfp);
 
 void sctp_ulpevent_read_sndrcvinfo(const struct sctp_ulpevent *event,
+<<<<<<< HEAD
 	struct msghdr *);
+=======
+				   struct msghdr *);
+void sctp_ulpevent_read_rcvinfo(const struct sctp_ulpevent *event,
+				struct msghdr *);
+void sctp_ulpevent_read_nxtinfo(const struct sctp_ulpevent *event,
+				struct msghdr *, struct sock *sk);
+
+>>>>>>> v3.18
 __u16 sctp_ulpevent_get_notification_type(const struct sctp_ulpevent *event);
 
 /* Is this event type enabled? */
 static inline int sctp_ulpevent_type_enabled(__u16 sn_type,
 					     struct sctp_event_subscribe *mask)
 {
+<<<<<<< HEAD
 	int offset = sn_type - SCTP_SN_TYPE_BASE;
 	char *amask = (char *) mask;
 
 	if (offset >= sizeof(struct sctp_event_subscribe))
 		return 0;
 	return amask[offset];
+=======
+	char *amask = (char *) mask;
+	return amask[sn_type - SCTP_SN_TYPE_BASE];
+>>>>>>> v3.18
 }
 
 /* Given an event subscription, is this event enabled? */
@@ -166,6 +192,7 @@ static inline int sctp_ulpevent_is_enabled(const struct sctp_ulpevent *event,
 }
 
 #endif /* __sctp_ulpevent_h__ */
+<<<<<<< HEAD
 
 
 
@@ -173,3 +200,5 @@ static inline int sctp_ulpevent_is_enabled(const struct sctp_ulpevent *event,
 
 
 
+=======
+>>>>>>> v3.18

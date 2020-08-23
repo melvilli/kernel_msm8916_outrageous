@@ -57,5 +57,9 @@ void _nouveau_parent_dtor(struct nouveau_object *);
 int nouveau_parent_sclass(struct nouveau_object *, u16 handle,
 			  struct nouveau_object **pengine,
 			  struct nouveau_oclass **poclass);
+<<<<<<< HEAD
+=======
+int nouveau_parent_lclass(struct nouveau_object *, u32 *, int);
+>>>>>>> v3.18
 
 #endif

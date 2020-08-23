@@ -23,7 +23,11 @@
 #include "perl.h"
 #include "XSUB.h"
 #include "../../../perf.h"
+<<<<<<< HEAD
 #include "../../../util/script-event.h"
+=======
+#include "../../../util/trace-event.h"
+>>>>>>> v3.18
 
 MODULE = Perf::Trace::Context		PACKAGE = Perf::Trace::Context
 PROTOTYPES: ENABLE

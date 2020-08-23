@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -87,6 +91,13 @@ typedef const struct acpi_exdump_info {
 #define ACPI_EXD_PACKAGE                11
 #define ACPI_EXD_FIELD                  12
 #define ACPI_EXD_REFERENCE              13
+<<<<<<< HEAD
+=======
+#define ACPI_EXD_LIST                   14	/* Operand object list */
+#define ACPI_EXD_HDLR_LIST              15	/* Address Handler list */
+#define ACPI_EXD_RGN_LIST               16	/* Region list */
+#define ACPI_EXD_NODE                   17	/* Namespace Node */
+>>>>>>> v3.18
 
 /* restore default alignment */
 
@@ -454,10 +465,13 @@ void acpi_ex_enter_interpreter(void);
 
 void acpi_ex_exit_interpreter(void);
 
+<<<<<<< HEAD
 void acpi_ex_reacquire_interpreter(void);
 
 void acpi_ex_relinquish_interpreter(void);
 
+=======
+>>>>>>> v3.18
 u8 acpi_ex_truncate_for32bit_table(union acpi_operand_object *obj_desc);
 
 void acpi_ex_acquire_global_lock(u32 rule);

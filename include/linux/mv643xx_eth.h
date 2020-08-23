@@ -6,6 +6,10 @@
 #define __LINUX_MV643XX_ETH_H
 
 #include <linux/mbus.h>
+<<<<<<< HEAD
+=======
+#include <linux/if_ether.h>
+>>>>>>> v3.18
 
 #define MV643XX_ETH_SHARED_NAME		"mv643xx_eth"
 #define MV643XX_ETH_NAME		"mv643xx_eth_port"
@@ -30,6 +34,10 @@ struct mv643xx_eth_shared_platform_data {
 #define MV643XX_ETH_PHY_ADDR(x)		(0x80 | (x))
 #define MV643XX_ETH_PHY_NONE		0xff
 
+<<<<<<< HEAD
+=======
+struct device_node;
+>>>>>>> v3.18
 struct mv643xx_eth_platform_data {
 	/*
 	 * Pointer back to our parent instance, and our port number.
@@ -41,12 +49,20 @@ struct mv643xx_eth_platform_data {
 	 * Whether a PHY is present, and if yes, at which address.
 	 */
 	int			phy_addr;
+<<<<<<< HEAD
+=======
+	struct device_node	*phy_node;
+>>>>>>> v3.18
 
 	/*
 	 * Use this MAC address if it is valid, overriding the
 	 * address that is already in the hardware.
 	 */
+<<<<<<< HEAD
 	u8			mac_addr[6];
+=======
+	u8			mac_addr[ETH_ALEN];
+>>>>>>> v3.18
 
 	/*
 	 * If speed is 0, autonegotiation is enabled.

@@ -1,7 +1,13 @@
 /****************************************************************************
+<<<<<<< HEAD
  * Driver for Solarflare Solarstorm network controllers and boards
  * Copyright 2005-2006 Fen Systems Ltd.
  * Copyright 2006-2010 Solarflare Communications Inc.
+=======
+ * Driver for Solarflare network controllers and boards
+ * Copyright 2005-2006 Fen Systems Ltd.
+ * Copyright 2006-2012 Solarflare Communications Inc.
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 2 as published
@@ -50,7 +56,11 @@ struct efx_loopback_payload {
 } __packed;
 
 /* Loopback test source MAC address */
+<<<<<<< HEAD
 static const unsigned char payload_source[ETH_ALEN] = {
+=======
+static const u8 payload_source[ETH_ALEN] __aligned(2) = {
+>>>>>>> v3.18
 	0x00, 0x0f, 0x53, 0x1b, 0x1b, 0x1b,
 };
 
@@ -188,7 +198,11 @@ static int efx_test_eventq_irq(struct efx_nic *efx,
 		schedule_timeout_uninterruptible(wait);
 
 		efx_for_each_channel(channel, efx) {
+<<<<<<< HEAD
 			napi_disable(&channel->napi_str);
+=======
+			efx_stop_eventq(channel);
+>>>>>>> v3.18
 			if (channel->eventq_read_ptr !=
 			    read_ptr[channel->channel]) {
 				set_bit(channel->channel, &napi_ran);
@@ -200,8 +214,12 @@ static int efx_test_eventq_irq(struct efx_nic *efx,
 				if (efx_nic_event_test_irq_cpu(channel) >= 0)
 					clear_bit(channel->channel, &int_pend);
 			}
+<<<<<<< HEAD
 			napi_enable(&channel->napi_str);
 			efx_nic_eventq_read_ack(channel);
+=======
+			efx_start_eventq(channel);
+>>>>>>> v3.18
 		}
 
 		wait *= 2;
@@ -366,8 +384,13 @@ static void efx_iterate_state(struct efx_nic *efx)
 	struct efx_loopback_payload *payload = &state->payload;
 
 	/* Initialise the layerII header */
+<<<<<<< HEAD
 	memcpy(&payload->header.h_dest, net_dev->dev_addr, ETH_ALEN);
 	memcpy(&payload->header.h_source, &payload_source, ETH_ALEN);
+=======
+	ether_addr_copy((u8 *)&payload->header.h_dest, net_dev->dev_addr);
+	ether_addr_copy((u8 *)&payload->header.h_source, payload_source);
+>>>>>>> v3.18
 	payload->header.h_proto = htons(ETH_P_IP);
 
 	/* saddr set later and used as incrementing count */
@@ -447,6 +470,7 @@ static int efx_begin_loopback(struct efx_tx_queue *tx_queue)
 static int efx_poll_loopback(struct efx_nic *efx)
 {
 	struct efx_loopback_state *state = efx->loopback_selftest;
+<<<<<<< HEAD
 	struct efx_channel *channel;
 
 	/* NAPI polling is not enabled, so process channels
@@ -455,6 +479,9 @@ static int efx_poll_loopback(struct efx_nic *efx)
 		if (channel->work_pending)
 			efx_process_channel_now(channel);
 	}
+=======
+
+>>>>>>> v3.18
 	return atomic_read(&state->rx_good) == state->packet_count;
 }
 
@@ -586,10 +613,13 @@ static int efx_wait_for_link(struct efx_nic *efx)
 			mutex_lock(&efx->mac_lock);
 			efx->type->monitor(efx);
 			mutex_unlock(&efx->mac_lock);
+<<<<<<< HEAD
 		} else {
 			struct efx_channel *channel = efx_get_channel(efx, 0);
 			if (channel->work_pending)
 				efx_process_channel_now(channel);
+=======
+>>>>>>> v3.18
 		}
 
 		mutex_lock(&efx->mac_lock);
@@ -733,7 +763,11 @@ int efx_selftest(struct efx_nic *efx, struct efx_self_tests *tests,
 			return rc_reset;
 		}
 
+<<<<<<< HEAD
 		if ((tests->registers < 0) && !rc_test)
+=======
+		if ((tests->memory < 0 || tests->registers < 0) && !rc_test)
+>>>>>>> v3.18
 			rc_test = -EIO;
 	}
 

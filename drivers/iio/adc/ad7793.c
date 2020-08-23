@@ -101,7 +101,11 @@
 #define AD7795_CH_AIN1M_AIN1M	8 /* AIN1(-) - AIN1(-) */
 
 /* ID Register Bit Designations (AD7793_REG_ID) */
+<<<<<<< HEAD
 #define AD7785_ID		0x3
+=======
+#define AD7785_ID		0xB
+>>>>>>> v3.18
 #define AD7792_ID		0xA
 #define AD7793_ID		0xB
 #define AD7794_ID		0xF
@@ -757,7 +761,11 @@ static int ad7793_probe(struct spi_device *spi)
 		return -ENODEV;
 	}
 
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*st));
+=======
+	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
+>>>>>>> v3.18
 	if (indio_dev == NULL)
 		return -ENOMEM;
 
@@ -766,6 +774,7 @@ static int ad7793_probe(struct spi_device *spi)
 	ad_sd_init(&st->sd, indio_dev, spi, &ad7793_sigma_delta_info);
 
 	if (pdata->refsel != AD7793_REFSEL_INTERNAL) {
+<<<<<<< HEAD
 		st->reg = regulator_get(&spi->dev, "refin");
 		if (IS_ERR(st->reg)) {
 			ret = PTR_ERR(st->reg);
@@ -775,6 +784,15 @@ static int ad7793_probe(struct spi_device *spi)
 		ret = regulator_enable(st->reg);
 		if (ret)
 			goto error_put_reg;
+=======
+		st->reg = devm_regulator_get(&spi->dev, "refin");
+		if (IS_ERR(st->reg))
+			return PTR_ERR(st->reg);
+
+		ret = regulator_enable(st->reg);
+		if (ret)
+			return ret;
+>>>>>>> v3.18
 
 		vref_mv = regulator_get_voltage(st->reg);
 		if (vref_mv < 0) {
@@ -818,11 +836,14 @@ error_remove_trigger:
 error_disable_reg:
 	if (pdata->refsel != AD7793_REFSEL_INTERNAL)
 		regulator_disable(st->reg);
+<<<<<<< HEAD
 error_put_reg:
 	if (pdata->refsel != AD7793_REFSEL_INTERNAL)
 		regulator_put(st->reg);
 error_device_free:
 	iio_device_free(indio_dev);
+=======
+>>>>>>> v3.18
 
 	return ret;
 }
@@ -836,12 +857,17 @@ static int ad7793_remove(struct spi_device *spi)
 	iio_device_unregister(indio_dev);
 	ad_sd_cleanup_buffer_and_trigger(indio_dev);
 
+<<<<<<< HEAD
 	if (pdata->refsel != AD7793_REFSEL_INTERNAL) {
 		regulator_disable(st->reg);
 		regulator_put(st->reg);
 	}
 
 	iio_device_free(indio_dev);
+=======
+	if (pdata->refsel != AD7793_REFSEL_INTERNAL)
+		regulator_disable(st->reg);
+>>>>>>> v3.18
 
 	return 0;
 }

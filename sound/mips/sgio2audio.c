@@ -920,7 +920,11 @@ static int snd_sgio2audio_probe(struct platform_device *pdev)
 	struct snd_sgio2audio *chip;
 	int err;
 
+<<<<<<< HEAD
 	err = snd_card_create(index, id, THIS_MODULE, 0, &card);
+=======
+	err = snd_card_new(&pdev->dev, index, id, THIS_MODULE, 0, &card);
+>>>>>>> v3.18
 	if (err < 0)
 		return err;
 
@@ -929,7 +933,10 @@ static int snd_sgio2audio_probe(struct platform_device *pdev)
 		snd_card_free(card);
 		return err;
 	}
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pdev->dev);
+=======
+>>>>>>> v3.18
 
 	err = snd_sgio2audio_new_pcm(chip);
 	if (err < 0) {

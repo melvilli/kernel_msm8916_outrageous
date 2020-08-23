@@ -22,7 +22,10 @@
  */
 #include <linux/interrupt.h>
 #include <linux/irq.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/i2c.h>
 #include <linux/mfd/rc5t583.h>
 

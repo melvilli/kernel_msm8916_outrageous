@@ -2,7 +2,11 @@
 /*
  * Radio tuning for Philips SA2400 on RTL8180
  *
+<<<<<<< HEAD
  * Copyright 2007 Andrea Merello <andreamrl@tiscali.it>
+=======
+ * Copyright 2007 Andrea Merello <andrea.merello@gmail.com>
+>>>>>>> v3.18
  *
  * Code from the BSD driver and the rtl8181 project have been
  * very useful to understand certain things
@@ -19,7 +23,10 @@
  * published by the Free Software Foundation.
  */
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/pci.h>
 #include <linux/delay.h>
 #include <net/mac80211.h>

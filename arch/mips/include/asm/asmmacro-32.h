@@ -12,6 +12,7 @@
 #include <asm/fpregdef.h>
 #include <asm/mipsregs.h>
 
+<<<<<<< HEAD
 	.macro	fpu_save_double thread status tmp1=t0
 	cfc1	\tmp1,  fcr31
 	sdc1	$f0,  THREAD_FPR0(\thread)
@@ -126,6 +127,86 @@
 	lwc1	$f30, THREAD_FPR30(\thread)
 	lwc1	$f31, THREAD_FPR31(\thread)
 	ctc1	\tmp, fcr31
+=======
+	.macro	fpu_save_single thread tmp=t0
+	.set push
+	SET_HARDFLOAT
+	cfc1	\tmp,  fcr31
+	swc1	$f0,  THREAD_FPR0_LS64(\thread)
+	swc1	$f1,  THREAD_FPR1_LS64(\thread)
+	swc1	$f2,  THREAD_FPR2_LS64(\thread)
+	swc1	$f3,  THREAD_FPR3_LS64(\thread)
+	swc1	$f4,  THREAD_FPR4_LS64(\thread)
+	swc1	$f5,  THREAD_FPR5_LS64(\thread)
+	swc1	$f6,  THREAD_FPR6_LS64(\thread)
+	swc1	$f7,  THREAD_FPR7_LS64(\thread)
+	swc1	$f8,  THREAD_FPR8_LS64(\thread)
+	swc1	$f9,  THREAD_FPR9_LS64(\thread)
+	swc1	$f10, THREAD_FPR10_LS64(\thread)
+	swc1	$f11, THREAD_FPR11_LS64(\thread)
+	swc1	$f12, THREAD_FPR12_LS64(\thread)
+	swc1	$f13, THREAD_FPR13_LS64(\thread)
+	swc1	$f14, THREAD_FPR14_LS64(\thread)
+	swc1	$f15, THREAD_FPR15_LS64(\thread)
+	swc1	$f16, THREAD_FPR16_LS64(\thread)
+	swc1	$f17, THREAD_FPR17_LS64(\thread)
+	swc1	$f18, THREAD_FPR18_LS64(\thread)
+	swc1	$f19, THREAD_FPR19_LS64(\thread)
+	swc1	$f20, THREAD_FPR20_LS64(\thread)
+	swc1	$f21, THREAD_FPR21_LS64(\thread)
+	swc1	$f22, THREAD_FPR22_LS64(\thread)
+	swc1	$f23, THREAD_FPR23_LS64(\thread)
+	swc1	$f24, THREAD_FPR24_LS64(\thread)
+	swc1	$f25, THREAD_FPR25_LS64(\thread)
+	swc1	$f26, THREAD_FPR26_LS64(\thread)
+	swc1	$f27, THREAD_FPR27_LS64(\thread)
+	swc1	$f28, THREAD_FPR28_LS64(\thread)
+	swc1	$f29, THREAD_FPR29_LS64(\thread)
+	swc1	$f30, THREAD_FPR30_LS64(\thread)
+	swc1	$f31, THREAD_FPR31_LS64(\thread)
+	sw	\tmp, THREAD_FCR31(\thread)
+	.set pop
+	.endm
+
+	.macro	fpu_restore_single thread tmp=t0
+	.set push
+	SET_HARDFLOAT
+	lw	\tmp, THREAD_FCR31(\thread)
+	lwc1	$f0,  THREAD_FPR0_LS64(\thread)
+	lwc1	$f1,  THREAD_FPR1_LS64(\thread)
+	lwc1	$f2,  THREAD_FPR2_LS64(\thread)
+	lwc1	$f3,  THREAD_FPR3_LS64(\thread)
+	lwc1	$f4,  THREAD_FPR4_LS64(\thread)
+	lwc1	$f5,  THREAD_FPR5_LS64(\thread)
+	lwc1	$f6,  THREAD_FPR6_LS64(\thread)
+	lwc1	$f7,  THREAD_FPR7_LS64(\thread)
+	lwc1	$f8,  THREAD_FPR8_LS64(\thread)
+	lwc1	$f9,  THREAD_FPR9_LS64(\thread)
+	lwc1	$f10, THREAD_FPR10_LS64(\thread)
+	lwc1	$f11, THREAD_FPR11_LS64(\thread)
+	lwc1	$f12, THREAD_FPR12_LS64(\thread)
+	lwc1	$f13, THREAD_FPR13_LS64(\thread)
+	lwc1	$f14, THREAD_FPR14_LS64(\thread)
+	lwc1	$f15, THREAD_FPR15_LS64(\thread)
+	lwc1	$f16, THREAD_FPR16_LS64(\thread)
+	lwc1	$f17, THREAD_FPR17_LS64(\thread)
+	lwc1	$f18, THREAD_FPR18_LS64(\thread)
+	lwc1	$f19, THREAD_FPR19_LS64(\thread)
+	lwc1	$f20, THREAD_FPR20_LS64(\thread)
+	lwc1	$f21, THREAD_FPR21_LS64(\thread)
+	lwc1	$f22, THREAD_FPR22_LS64(\thread)
+	lwc1	$f23, THREAD_FPR23_LS64(\thread)
+	lwc1	$f24, THREAD_FPR24_LS64(\thread)
+	lwc1	$f25, THREAD_FPR25_LS64(\thread)
+	lwc1	$f26, THREAD_FPR26_LS64(\thread)
+	lwc1	$f27, THREAD_FPR27_LS64(\thread)
+	lwc1	$f28, THREAD_FPR28_LS64(\thread)
+	lwc1	$f29, THREAD_FPR29_LS64(\thread)
+	lwc1	$f30, THREAD_FPR30_LS64(\thread)
+	lwc1	$f31, THREAD_FPR31_LS64(\thread)
+	ctc1	\tmp, fcr31
+	.set pop
+>>>>>>> v3.18
 	.endm
 
 	.macro	cpu_save_nonscratch thread

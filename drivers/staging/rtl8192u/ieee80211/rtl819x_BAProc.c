@@ -13,7 +13,11 @@
  *	     u16			Time //indicate time delay.
  *  output:  none
 ********************************************************************************************************************/
+<<<<<<< HEAD
 void ActivateBAEntry(struct ieee80211_device* ieee, PBA_RECORD pBA, u16 Time)
+=======
+static void ActivateBAEntry(struct ieee80211_device *ieee, PBA_RECORD pBA, u16 Time)
+>>>>>>> v3.18
 {
 	pBA->bValid = true;
 	if(Time != 0)
@@ -25,7 +29,11 @@ void ActivateBAEntry(struct ieee80211_device* ieee, PBA_RECORD pBA, u16 Time)
  *   input:  PBA_RECORD			pBA  //BA entry to be disabled
  *  output:  none
 ********************************************************************************************************************/
+<<<<<<< HEAD
 void DeActivateBAEntry( struct ieee80211_device* ieee, PBA_RECORD pBA)
+=======
+static void DeActivateBAEntry(struct ieee80211_device *ieee, PBA_RECORD pBA)
+>>>>>>> v3.18
 {
 	pBA->bValid = false;
 	del_timer_sync(&pBA->Timer);
@@ -37,7 +45,11 @@ void DeActivateBAEntry( struct ieee80211_device* ieee, PBA_RECORD pBA)
  *  output:  none
  *  notice:  As PTX_TS_RECORD structure will be defined in QOS, so wait to be merged. //FIXME
 ********************************************************************************************************************/
+<<<<<<< HEAD
 u8 TxTsDeleteBA( struct ieee80211_device* ieee, PTX_TS_RECORD	pTxTs)
+=======
+static u8 TxTsDeleteBA(struct ieee80211_device *ieee, PTX_TS_RECORD pTxTs)
+>>>>>>> v3.18
 {
 	PBA_RECORD		pAdmittedBa = &pTxTs->TxAdmittedBARecord;  //These two BA entries must exist in TS structure
 	PBA_RECORD		pPendingBa = &pTxTs->TxPendingBARecord;
@@ -67,7 +79,11 @@ u8 TxTsDeleteBA( struct ieee80211_device* ieee, PTX_TS_RECORD	pTxTs)
  *  output:  none
  *  notice:  As PRX_TS_RECORD structure will be defined in QOS, so wait to be merged. //FIXME, same with above
 ********************************************************************************************************************/
+<<<<<<< HEAD
 u8 RxTsDeleteBA( struct ieee80211_device* ieee, PRX_TS_RECORD	pRxTs)
+=======
+static u8 RxTsDeleteBA(struct ieee80211_device *ieee, PRX_TS_RECORD pRxTs)
+>>>>>>> v3.18
 {
 	PBA_RECORD		pBa = &pRxTs->RxAdmittedBARecord;
 	u8			bSendDELBA = false;
@@ -87,7 +103,11 @@ u8 RxTsDeleteBA( struct ieee80211_device* ieee, PRX_TS_RECORD	pRxTs)
  *	     PBA_RECORD		pBA //entry to be reset
  *  output:  none
 ********************************************************************************************************************/
+<<<<<<< HEAD
 void ResetBaEntry( PBA_RECORD pBA)
+=======
+void ResetBaEntry(PBA_RECORD pBA)
+>>>>>>> v3.18
 {
 	pBA->bValid			= false;
 	pBA->BaParamSet.shortData	= 0;
@@ -105,6 +125,7 @@ void ResetBaEntry( PBA_RECORD pBA)
  *  output:  none
  *  return:  sk_buff*		skb     //return constructed skb to xmit
 *******************************************************************************************************************************/
+<<<<<<< HEAD
 static struct sk_buff* ieee80211_ADDBA(struct ieee80211_device* ieee, u8* Dst, PBA_RECORD pBA, u16 StatusCode, u8 type)
 {
 	struct sk_buff *skb = NULL;
@@ -114,6 +135,17 @@ static struct sk_buff* ieee80211_ADDBA(struct ieee80211_device* ieee, u8* Dst, P
 	u16 len = ieee->tx_headroom + 9;
 	//category(1) + action field(1) + Dialog Token(1) + BA Parameter Set(2) +  BA Timeout Value(2) +  BA Start SeqCtrl(2)(or StatusCode(2))
 	IEEE80211_DEBUG(IEEE80211_DL_TRACE | IEEE80211_DL_BA, "========>%s(), frame(%d) sentd to:%pM, ieee->dev:%p\n", __FUNCTION__, type, Dst, ieee->dev);
+=======
+static struct sk_buff *ieee80211_ADDBA(struct ieee80211_device *ieee, u8 *Dst, PBA_RECORD pBA, u16 StatusCode, u8 type)
+{
+	struct sk_buff *skb = NULL;
+	 struct ieee80211_hdr_3addr *BAReq = NULL;
+	u8 *tag = NULL;
+	u16 tmp = 0;
+	u16 len = ieee->tx_headroom + 9;
+	//category(1) + action field(1) + Dialog Token(1) + BA Parameter Set(2) +  BA Timeout Value(2) +  BA Start SeqCtrl(2)(or StatusCode(2))
+	IEEE80211_DEBUG(IEEE80211_DL_TRACE | IEEE80211_DL_BA, "========>%s(), frame(%d) sentd to:%pM, ieee->dev:%p\n", __func__, type, Dst, ieee->dev);
+>>>>>>> v3.18
 	if (pBA == NULL||ieee == NULL)
 	{
 		IEEE80211_DEBUG(IEEE80211_DL_ERR, "pBA(%p) is NULL or ieee(%p) is NULL\n", pBA, ieee);
@@ -139,7 +171,11 @@ static struct sk_buff* ieee80211_ADDBA(struct ieee80211_device* ieee, u8* Dst, P
 	BAReq->frame_ctl = cpu_to_le16(IEEE80211_STYPE_MANAGE_ACT); //action frame
 
 	//tag += sizeof( struct ieee80211_hdr_3addr); //move to action field
+<<<<<<< HEAD
 	tag = (u8*)skb_put(skb, 9);
+=======
+	tag = (u8 *)skb_put(skb, 9);
+>>>>>>> v3.18
 	*tag ++= ACT_CAT_BA;
 	*tag ++= type;
 	// Dialog Token
@@ -150,22 +186,38 @@ static struct sk_buff* ieee80211_ADDBA(struct ieee80211_device* ieee, u8* Dst, P
 		// Status Code
 		printk("=====>to send ADDBARSP\n");
 		tmp = cpu_to_le16(StatusCode);
+<<<<<<< HEAD
 		memcpy(tag, (u8*)&tmp, 2);
+=======
+		memcpy(tag, (u8 *)&tmp, 2);
+>>>>>>> v3.18
 		tag += 2;
 	}
 	// BA Parameter Set
 	tmp = cpu_to_le16(pBA->BaParamSet.shortData);
+<<<<<<< HEAD
 	memcpy(tag, (u8*)&tmp, 2);
 	tag += 2;
 	// BA Timeout Value
 	tmp = cpu_to_le16(pBA->BaTimeoutValue);
 	memcpy(tag, (u8*)&tmp, 2);
+=======
+	memcpy(tag, (u8 *)&tmp, 2);
+	tag += 2;
+	// BA Timeout Value
+	tmp = cpu_to_le16(pBA->BaTimeoutValue);
+	memcpy(tag, (u8 *)&tmp, 2);
+>>>>>>> v3.18
 	tag += 2;
 
 	if (ACT_ADDBAREQ == type)
 	{
 	// BA Start SeqCtrl
+<<<<<<< HEAD
 		memcpy(tag,(u8*)&(pBA->BaStartSeqCtrl), 2);
+=======
+		memcpy(tag, (u8 *)&(pBA->BaStartSeqCtrl), 2);
+>>>>>>> v3.18
 		tag += 2;
 	}
 
@@ -184,9 +236,15 @@ static struct sk_buff* ieee80211_ADDBA(struct ieee80211_device* ieee, u8* Dst, P
  *  output:  none
  *  return:  sk_buff*		skb     //return constructed skb to xmit
 ********************************************************************************************************************/
+<<<<<<< HEAD
 static struct sk_buff* ieee80211_DELBA(
 	struct ieee80211_device* ieee,
 	u8*		         dst,
+=======
+static struct sk_buff *ieee80211_DELBA(
+	struct ieee80211_device  *ieee,
+	u8		         *dst,
+>>>>>>> v3.18
 	PBA_RECORD		 pBA,
 	TR_SELECT		 TxRxSelect,
 	u16			 ReasonCode
@@ -194,14 +252,23 @@ static struct sk_buff* ieee80211_DELBA(
 {
 	DELBA_PARAM_SET	DelbaParamSet;
 	struct sk_buff *skb = NULL;
+<<<<<<< HEAD
 	 struct ieee80211_hdr_3addr* Delba = NULL;
 	u8* tag = NULL;
+=======
+	 struct ieee80211_hdr_3addr *Delba = NULL;
+	u8 *tag = NULL;
+>>>>>>> v3.18
 	u16 tmp = 0;
 	//len = head len + DELBA Parameter Set(2) + Reason Code(2)
 	u16 len = 6 + ieee->tx_headroom;
 
 	if (net_ratelimit())
+<<<<<<< HEAD
 	IEEE80211_DEBUG(IEEE80211_DL_TRACE | IEEE80211_DL_BA, "========>%s(), ReasonCode(%d) sentd to:%pM\n", __FUNCTION__, ReasonCode, dst);
+=======
+	IEEE80211_DEBUG(IEEE80211_DL_TRACE | IEEE80211_DL_BA, "========>%s(), ReasonCode(%d) sentd to:%pM\n", __func__, ReasonCode, dst);
+>>>>>>> v3.18
 
 	memset(&DelbaParamSet, 0, 2);
 
@@ -224,23 +291,39 @@ static struct sk_buff* ieee80211_DELBA(
 	memcpy(Delba->addr3, ieee->current_network.bssid, ETH_ALEN);
 	Delba->frame_ctl = cpu_to_le16(IEEE80211_STYPE_MANAGE_ACT); //action frame
 
+<<<<<<< HEAD
 	tag = (u8*)skb_put(skb, 6);
+=======
+	tag = (u8 *)skb_put(skb, 6);
+>>>>>>> v3.18
 
 	*tag ++= ACT_CAT_BA;
 	*tag ++= ACT_DELBA;
 
 	// DELBA Parameter Set
 	tmp = cpu_to_le16(DelbaParamSet.shortData);
+<<<<<<< HEAD
 	memcpy(tag, (u8*)&tmp, 2);
 	tag += 2;
 	// Reason Code
 	tmp = cpu_to_le16(ReasonCode);
 	memcpy(tag, (u8*)&tmp, 2);
+=======
+	memcpy(tag, (u8 *)&tmp, 2);
+	tag += 2;
+	// Reason Code
+	tmp = cpu_to_le16(ReasonCode);
+	memcpy(tag, (u8 *)&tmp, 2);
+>>>>>>> v3.18
 	tag += 2;
 
 	IEEE80211_DEBUG_DATA(IEEE80211_DL_DATA|IEEE80211_DL_BA, skb->data, skb->len);
 	if (net_ratelimit())
+<<<<<<< HEAD
 	IEEE80211_DEBUG(IEEE80211_DL_TRACE | IEEE80211_DL_BA, "<=====%s()\n", __FUNCTION__);
+=======
+	IEEE80211_DEBUG(IEEE80211_DL_TRACE | IEEE80211_DL_BA, "<=====%s()\n", __func__);
+>>>>>>> v3.18
 	return skb;
 }
 
@@ -251,7 +334,12 @@ static struct sk_buff* ieee80211_DELBA(
  *  output:  none
  *  notice: If any possible, please hide pBA in ieee. And temporarily use Manage Queue as softmac_mgmt_xmit() usually does
 ********************************************************************************************************************/
+<<<<<<< HEAD
 void ieee80211_send_ADDBAReq(struct ieee80211_device* ieee, u8*	dst, PBA_RECORD	pBA)
+=======
+static void ieee80211_send_ADDBAReq(struct ieee80211_device *ieee,
+				    u8 *dst, PBA_RECORD pBA)
+>>>>>>> v3.18
 {
 	struct sk_buff *skb = NULL;
 	skb = ieee80211_ADDBA(ieee, dst, pBA, 0, ACT_ADDBAREQ); //construct ACT_ADDBAREQ frames so set statuscode zero.
@@ -265,7 +353,11 @@ void ieee80211_send_ADDBAReq(struct ieee80211_device* ieee, u8*	dst, PBA_RECORD	
 	}
 	else
 	{
+<<<<<<< HEAD
 		IEEE80211_DEBUG(IEEE80211_DL_ERR, "alloc skb error in function %s()\n", __FUNCTION__);
+=======
+		IEEE80211_DEBUG(IEEE80211_DL_ERR, "alloc skb error in function %s()\n", __func__);
+>>>>>>> v3.18
 	}
 	return;
 }
@@ -278,7 +370,12 @@ void ieee80211_send_ADDBAReq(struct ieee80211_device* ieee, u8*	dst, PBA_RECORD	
  *  output:  none
  *  notice: If any possible, please hide pBA in ieee. And temporarily use Manage Queue as softmac_mgmt_xmit() usually does
 ********************************************************************************************************************/
+<<<<<<< HEAD
 void ieee80211_send_ADDBARsp(struct ieee80211_device* ieee, u8* dst, PBA_RECORD pBA, u16 StatusCode)
+=======
+static void ieee80211_send_ADDBARsp(struct ieee80211_device *ieee, u8 *dst,
+				    PBA_RECORD pBA, u16 StatusCode)
+>>>>>>> v3.18
 {
 	struct sk_buff *skb = NULL;
 	skb = ieee80211_ADDBA(ieee, dst, pBA, StatusCode, ACT_ADDBARSP); //construct ACT_ADDBARSP frames
@@ -289,7 +386,11 @@ void ieee80211_send_ADDBARsp(struct ieee80211_device* ieee, u8* dst, PBA_RECORD 
 	}
 	else
 	{
+<<<<<<< HEAD
 		IEEE80211_DEBUG(IEEE80211_DL_ERR, "alloc skb error in function %s()\n", __FUNCTION__);
+=======
+		IEEE80211_DEBUG(IEEE80211_DL_ERR, "alloc skb error in function %s()\n", __func__);
+>>>>>>> v3.18
 	}
 
 	return;
@@ -305,7 +406,13 @@ void ieee80211_send_ADDBARsp(struct ieee80211_device* ieee, u8* dst, PBA_RECORD 
  *  notice: If any possible, please hide pBA in ieee. And temporarily use Manage Queue as softmac_mgmt_xmit() usually does
 ********************************************************************************************************************/
 
+<<<<<<< HEAD
 void ieee80211_send_DELBA(struct ieee80211_device* ieee, u8* dst, PBA_RECORD pBA, TR_SELECT TxRxSelect, u16 ReasonCode)
+=======
+static void ieee80211_send_DELBA(struct ieee80211_device *ieee, u8 *dst,
+				 PBA_RECORD pBA, TR_SELECT TxRxSelect,
+				 u16 ReasonCode)
+>>>>>>> v3.18
 {
 	struct sk_buff *skb = NULL;
 	skb = ieee80211_DELBA(ieee, dst, pBA, TxRxSelect, ReasonCode); //construct ACT_ADDBARSP frames
@@ -316,7 +423,11 @@ void ieee80211_send_DELBA(struct ieee80211_device* ieee, u8* dst, PBA_RECORD pBA
 	}
 	else
 	{
+<<<<<<< HEAD
 		IEEE80211_DEBUG(IEEE80211_DL_ERR, "alloc skb error in function %s()\n", __FUNCTION__);
+=======
+		IEEE80211_DEBUG(IEEE80211_DL_ERR, "alloc skb error in function %s()\n", __func__);
+>>>>>>> v3.18
 	}
 	return ;
 }
@@ -327,6 +438,7 @@ void ieee80211_send_DELBA(struct ieee80211_device* ieee, u8* dst, PBA_RECORD pBA
  *  return:  0(pass), other(fail)
  *  notice:  As this function need support of QOS, I comment some code out. And when qos is ready, this code need to be support.
 ********************************************************************************************************************/
+<<<<<<< HEAD
 int ieee80211_rx_ADDBAReq( struct ieee80211_device* ieee, struct sk_buff *skb)
 {
 	 struct ieee80211_hdr_3addr* req = NULL;
@@ -335,17 +447,35 @@ int ieee80211_rx_ADDBAReq( struct ieee80211_device* ieee, struct sk_buff *skb)
 	PBA_RECORD pBA = NULL;
 	PBA_PARAM_SET	pBaParamSet = NULL;
 	u16* pBaTimeoutVal = NULL;
+=======
+int ieee80211_rx_ADDBAReq(struct ieee80211_device *ieee, struct sk_buff *skb)
+{
+	 struct ieee80211_hdr_3addr *req = NULL;
+	u16 rc = 0;
+	u8 *dst = NULL, *pDialogToken = NULL, *tag = NULL;
+	PBA_RECORD pBA = NULL;
+	PBA_PARAM_SET	pBaParamSet = NULL;
+	u16 *pBaTimeoutVal = NULL;
+>>>>>>> v3.18
 	PSEQUENCE_CONTROL pBaStartSeqCtrl = NULL;
 	PRX_TS_RECORD	pTS = NULL;
 
 	if (skb->len < sizeof( struct ieee80211_hdr_3addr) + 9)
 	{
+<<<<<<< HEAD
 		IEEE80211_DEBUG(IEEE80211_DL_ERR, " Invalid skb len in BAREQ(%d / %zu)\n", skb->len,	(sizeof( struct ieee80211_hdr_3addr) + 9));
+=======
+		IEEE80211_DEBUG(IEEE80211_DL_ERR,
+				" Invalid skb len in BAREQ(%d / %zu)\n",
+				skb->len,
+				(sizeof(struct ieee80211_hdr_3addr) + 9));
+>>>>>>> v3.18
 		return -1;
 	}
 
 	IEEE80211_DEBUG_DATA(IEEE80211_DL_DATA|IEEE80211_DL_BA, skb->data, skb->len);
 
+<<<<<<< HEAD
 	req = ( struct ieee80211_hdr_3addr*) skb->data;
 	tag = (u8*)req;
 	dst = (u8*)(&req->addr2[0]);
@@ -353,6 +483,15 @@ int ieee80211_rx_ADDBAReq( struct ieee80211_device* ieee, struct sk_buff *skb)
 	pDialogToken = tag + 2;  //category+action
 	pBaParamSet = (PBA_PARAM_SET)(tag + 3);   //+DialogToken
 	pBaTimeoutVal = (u16*)(tag + 5);
+=======
+	req = (struct ieee80211_hdr_3addr *) skb->data;
+	tag = (u8 *)req;
+	dst = (u8 *)(&req->addr2[0]);
+	tag += sizeof(struct ieee80211_hdr_3addr);
+	pDialogToken = tag + 2;  //category+action
+	pBaParamSet = (PBA_PARAM_SET)(tag + 3);   //+DialogToken
+	pBaTimeoutVal = (u16 *)(tag + 5);
+>>>>>>> v3.18
 	pBaStartSeqCtrl = (PSEQUENCE_CONTROL)(req + 7);
 
 	printk("====================>rx ADDBAREQ from :%pM\n", dst);
@@ -369,14 +508,22 @@ int ieee80211_rx_ADDBAReq( struct ieee80211_device* ieee, struct sk_buff *skb)
 	// If there is no matched TS, reject the ADDBA request.
 	if(	!GetTs(
 			ieee,
+<<<<<<< HEAD
 			(PTS_COMMON_INFO*)(&pTS),
+=======
+			(PTS_COMMON_INFO *)(&pTS),
+>>>>>>> v3.18
 			dst,
 			(u8)(pBaParamSet->field.TID),
 			RX_DIR,
 			true)	)
 	{
 		rc = ADDBA_STATUS_REFUSED;
+<<<<<<< HEAD
 		IEEE80211_DEBUG(IEEE80211_DL_ERR, "can't get TS in %s()\n", __FUNCTION__);
+=======
+		IEEE80211_DEBUG(IEEE80211_DL_ERR, "can't get TS in %s()\n", __func__);
+>>>>>>> v3.18
 		goto OnADDBAReq_Fail;
 	}
 	pBA = &pTS->RxAdmittedBARecord;
@@ -387,7 +534,11 @@ int ieee80211_rx_ADDBAReq( struct ieee80211_device* ieee, struct sk_buff *skb)
 	if(pBaParamSet->field.BAPolicy == BA_POLICY_DELAYED)
 	{
 		rc = ADDBA_STATUS_INVALID_PARAM;
+<<<<<<< HEAD
 		IEEE80211_DEBUG(IEEE80211_DL_ERR, "BA Policy is not correct in %s()\n", __FUNCTION__);
+=======
+		IEEE80211_DEBUG(IEEE80211_DL_ERR, "BA Policy is not correct in %s()\n", __func__);
+>>>>>>> v3.18
 		goto OnADDBAReq_Fail;
 	}
 		// Admit the ADDBA Request
@@ -427,6 +578,7 @@ OnADDBAReq_Fail:
  *  return:  0(pass), other(fail)
  *  notice:  As this function need support of QOS, I comment some code out. And when qos is ready, this code need to be support.
 ********************************************************************************************************************/
+<<<<<<< HEAD
 int ieee80211_rx_ADDBARsp( struct ieee80211_device* ieee, struct sk_buff *skb)
 {
 	 struct ieee80211_hdr_3addr* rsp = NULL;
@@ -434,11 +586,21 @@ int ieee80211_rx_ADDBARsp( struct ieee80211_device* ieee, struct sk_buff *skb)
 	PTX_TS_RECORD		pTS = NULL;
 	u8* dst = NULL, *pDialogToken = NULL, *tag = NULL;
 	u16* pStatusCode = NULL, *pBaTimeoutVal = NULL;
+=======
+int ieee80211_rx_ADDBARsp(struct ieee80211_device *ieee, struct sk_buff *skb)
+{
+	 struct ieee80211_hdr_3addr *rsp = NULL;
+	PBA_RECORD		pPendingBA, pAdmittedBA;
+	PTX_TS_RECORD		pTS = NULL;
+	u8 *dst = NULL, *pDialogToken = NULL, *tag = NULL;
+	u16 *pStatusCode = NULL, *pBaTimeoutVal = NULL;
+>>>>>>> v3.18
 	PBA_PARAM_SET		pBaParamSet = NULL;
 	u16			ReasonCode;
 
 	if (skb->len < sizeof( struct ieee80211_hdr_3addr) + 9)
 	{
+<<<<<<< HEAD
 		IEEE80211_DEBUG(IEEE80211_DL_ERR, " Invalid skb len in BARSP(%d / %zu)\n", skb->len,	(sizeof( struct ieee80211_hdr_3addr) + 9));
 		return -1;
 	}
@@ -450,6 +612,22 @@ int ieee80211_rx_ADDBARsp( struct ieee80211_device* ieee, struct sk_buff *skb)
 	pStatusCode = (u16*)(tag + 3);
 	pBaParamSet = (PBA_PARAM_SET)(tag + 5);
 	pBaTimeoutVal = (u16*)(tag + 7);
+=======
+		IEEE80211_DEBUG(IEEE80211_DL_ERR,
+				" Invalid skb len in BARSP(%d / %zu)\n",
+				skb->len,
+				(sizeof(struct ieee80211_hdr_3addr) + 9));
+		return -1;
+	}
+	rsp = (struct ieee80211_hdr_3addr *)skb->data;
+	tag = (u8 *)rsp;
+	dst = (u8 *)(&rsp->addr2[0]);
+	tag += sizeof(struct ieee80211_hdr_3addr);
+	pDialogToken = tag + 2;
+	pStatusCode = (u16 *)(tag + 3);
+	pBaParamSet = (PBA_PARAM_SET)(tag + 5);
+	pBaTimeoutVal = (u16 *)(tag + 7);
+>>>>>>> v3.18
 
 	// Check the capability
 	// Since we can always receive A-MPDU, we just check if it is under HT mode.
@@ -469,13 +647,21 @@ int ieee80211_rx_ADDBARsp( struct ieee80211_device* ieee, struct sk_buff *skb)
 	//
 	if (!GetTs(
 			ieee,
+<<<<<<< HEAD
 			(PTS_COMMON_INFO*)(&pTS),
+=======
+			(PTS_COMMON_INFO *)(&pTS),
+>>>>>>> v3.18
 			dst,
 			(u8)(pBaParamSet->field.TID),
 			TX_DIR,
 			false)	)
 	{
+<<<<<<< HEAD
 		IEEE80211_DEBUG(IEEE80211_DL_ERR, "can't get TS in %s()\n", __FUNCTION__);
+=======
+		IEEE80211_DEBUG(IEEE80211_DL_ERR, "can't get TS in %s()\n", __func__);
+>>>>>>> v3.18
 		ReasonCode = DELBA_REASON_UNKNOWN_BA;
 		goto OnADDBARsp_Reject;
 	}
@@ -560,6 +746,7 @@ OnADDBARsp_Reject:
  *  return:  0(pass), other(fail)
  *  notice:  As this function need support of QOS, I comment some code out. And when qos is ready, this code need to be support.
 ********************************************************************************************************************/
+<<<<<<< HEAD
 int ieee80211_rx_DELBA(struct ieee80211_device* ieee,struct sk_buff *skb)
 {
 	 struct ieee80211_hdr_3addr* delba = NULL;
@@ -570,6 +757,21 @@ int ieee80211_rx_DELBA(struct ieee80211_device* ieee,struct sk_buff *skb)
 	if (skb->len < sizeof( struct ieee80211_hdr_3addr) + 6)
 	{
 		IEEE80211_DEBUG(IEEE80211_DL_ERR, " Invalid skb len in DELBA(%d / %zu)\n", skb->len,	(sizeof( struct ieee80211_hdr_3addr) + 6));
+=======
+int ieee80211_rx_DELBA(struct ieee80211_device *ieee, struct sk_buff *skb)
+{
+	 struct ieee80211_hdr_3addr *delba = NULL;
+	PDELBA_PARAM_SET	pDelBaParamSet = NULL;
+	u16			*pReasonCode = NULL;
+	u8			*dst = NULL;
+
+	if (skb->len < sizeof( struct ieee80211_hdr_3addr) + 6)
+	{
+		IEEE80211_DEBUG(IEEE80211_DL_ERR,
+				" Invalid skb len in DELBA(%d / %zu)\n",
+				skb->len,
+				(sizeof(struct ieee80211_hdr_3addr) + 6));
+>>>>>>> v3.18
 		return -1;
 	}
 
@@ -581,11 +783,19 @@ int ieee80211_rx_DELBA(struct ieee80211_device* ieee,struct sk_buff *skb)
 	}
 
 	IEEE80211_DEBUG_DATA(IEEE80211_DL_DATA|IEEE80211_DL_BA, skb->data, skb->len);
+<<<<<<< HEAD
 	delba = ( struct ieee80211_hdr_3addr*)skb->data;
 	dst = (u8*)(&delba->addr2[0]);
 	delba += sizeof( struct ieee80211_hdr_3addr);
 	pDelBaParamSet = (PDELBA_PARAM_SET)(delba+2);
 	pReasonCode = (u16*)(delba+4);
+=======
+	delba = (struct ieee80211_hdr_3addr *)skb->data;
+	dst = (u8 *)(&delba->addr2[0]);
+	delba += sizeof(struct ieee80211_hdr_3addr);
+	pDelBaParamSet = (PDELBA_PARAM_SET)(delba+2);
+	pReasonCode = (u16 *)(delba+4);
+>>>>>>> v3.18
 
 	if(pDelBaParamSet->field.Initiator == 1)
 	{
@@ -593,13 +803,21 @@ int ieee80211_rx_DELBA(struct ieee80211_device* ieee,struct sk_buff *skb)
 
 		if( !GetTs(
 				ieee,
+<<<<<<< HEAD
 				(PTS_COMMON_INFO*)&pRxTs,
+=======
+				(PTS_COMMON_INFO *)&pRxTs,
+>>>>>>> v3.18
 				dst,
 				(u8)pDelBaParamSet->field.TID,
 				RX_DIR,
 				false)	)
 		{
+<<<<<<< HEAD
 			IEEE80211_DEBUG(IEEE80211_DL_ERR,  "can't get TS for RXTS in %s()\n", __FUNCTION__);
+=======
+			IEEE80211_DEBUG(IEEE80211_DL_ERR,  "can't get TS for RXTS in %s()\n", __func__);
+>>>>>>> v3.18
 			return -1;
 		}
 
@@ -611,13 +829,21 @@ int ieee80211_rx_DELBA(struct ieee80211_device* ieee,struct sk_buff *skb)
 
 		if(!GetTs(
 			ieee,
+<<<<<<< HEAD
 			(PTS_COMMON_INFO*)&pTxTs,
+=======
+			(PTS_COMMON_INFO *)&pTxTs,
+>>>>>>> v3.18
 			dst,
 			(u8)pDelBaParamSet->field.TID,
 			TX_DIR,
 			false)	)
 		{
+<<<<<<< HEAD
 			IEEE80211_DEBUG(IEEE80211_DL_ERR,  "can't get TS for TXTS in %s()\n", __FUNCTION__);
+=======
+			IEEE80211_DEBUG(IEEE80211_DL_ERR,  "can't get TS for TXTS in %s()\n", __func__);
+>>>>>>> v3.18
 			return -1;
 		}
 
@@ -636,7 +862,11 @@ int ieee80211_rx_DELBA(struct ieee80211_device* ieee,struct sk_buff *skb)
 //
 void
 TsInitAddBA(
+<<<<<<< HEAD
 	struct ieee80211_device* ieee,
+=======
+	struct ieee80211_device *ieee,
+>>>>>>> v3.18
 	PTX_TS_RECORD	pTS,
 	u8		Policy,
 	u8		bOverwritePending
@@ -665,7 +895,11 @@ TsInitAddBA(
 }
 
 void
+<<<<<<< HEAD
 TsInitDelBA( struct ieee80211_device* ieee, PTS_COMMON_INFO pTsCommonInfo, TR_SELECT TxRxSelect)
+=======
+TsInitDelBA( struct ieee80211_device *ieee, PTS_COMMON_INFO pTsCommonInfo, TR_SELECT TxRxSelect)
+>>>>>>> v3.18
 {
 
 	if(TxRxSelect == TX_DIR)

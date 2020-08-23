@@ -1,7 +1,11 @@
 /*******************************************************************
  * This file is part of the Emulex Linux Device Driver for         *
  * Fibre Channel Host Bus Adapters.                                *
+<<<<<<< HEAD
  * Copyright (C) 2007-2012 Emulex.  All rights reserved.           *
+=======
+ * Copyright (C) 2007-2014 Emulex.  All rights reserved.           *
+>>>>>>> v3.18
  * EMULEX and SLI are trademarks of Emulex.                        *
  * www.emulex.com                                                  *
  *                                                                 *
@@ -269,7 +273,11 @@ static int
 lpfc_debugfs_hbqinfo_data(struct lpfc_hba *phba, char *buf, int size)
 {
 	int len = 0;
+<<<<<<< HEAD
 	int cnt, i, j, found, posted, low;
+=======
+	int i, j, found, posted, low;
+>>>>>>> v3.18
 	uint32_t phys, raw_index, getidx;
 	struct lpfc_hbq_init *hip;
 	struct hbq_s *hbqs;
@@ -279,7 +287,11 @@ lpfc_debugfs_hbqinfo_data(struct lpfc_hba *phba, char *buf, int size)
 
 	if (phba->sli_rev != 3)
 		return 0;
+<<<<<<< HEAD
 	cnt = LPFC_HBQINFO_SIZE;
+=======
+
+>>>>>>> v3.18
 	spin_lock_irq(&phba->hbalock);
 
 	/* toggle between multiple hbqs, if any */
@@ -1165,6 +1177,7 @@ out:
 static loff_t
 lpfc_debugfs_lseek(struct file *file, loff_t off, int whence)
 {
+<<<<<<< HEAD
 	struct lpfc_debug *debug;
 	loff_t pos = -1;
 
@@ -1181,6 +1194,10 @@ lpfc_debugfs_lseek(struct file *file, loff_t off, int whence)
 		pos = debug->len + off;
 	}
 	return (pos < 0 || pos > debug->len) ? -EINVAL : (file->f_pos = pos);
+=======
+	struct lpfc_debug *debug = file->private_data;
+	return fixed_size_llseek(file, off, whence, debug->len);
+>>>>>>> v3.18
 }
 
 /**
@@ -2294,6 +2311,107 @@ proc_cq:
 		}
 	}
 
+<<<<<<< HEAD
+=======
+	if (phba->cfg_fof) {
+		/* FOF EQ */
+		qp = phba->sli4_hba.fof_eq;
+		if (!qp)
+			goto out;
+
+		len += snprintf(pbuffer+len,
+			LPFC_QUE_INFO_GET_BUF_SIZE-len,
+			"\nFOF EQ info: "
+			"EQ-STAT[max:x%x noE:x%x "
+			"bs:x%x proc:x%llx]\n",
+			qp->q_cnt_1, qp->q_cnt_2,
+			qp->q_cnt_3, (unsigned long long)qp->q_cnt_4);
+
+		len += snprintf(pbuffer+len,
+			LPFC_QUE_INFO_GET_BUF_SIZE-len,
+			"EQID[%02d], "
+			"QE-CNT[%04d], QE-SIZE[%04d], "
+			"HOST-IDX[%04d], PORT-IDX[%04d]",
+			qp->queue_id,
+			qp->entry_count,
+			qp->entry_size,
+			qp->host_index,
+			qp->hba_index);
+
+		/* Reset max counter */
+		qp->EQ_max_eqe = 0;
+
+		len +=  snprintf(pbuffer+len,
+			LPFC_QUE_INFO_GET_BUF_SIZE-len, "\n");
+		if (len >= max_cnt)
+			goto too_big;
+	}
+
+	if (phba->cfg_fof) {
+
+		/* OAS CQ */
+		qp = phba->sli4_hba.oas_cq;
+		if (qp) {
+			len += snprintf(pbuffer+len,
+				LPFC_QUE_INFO_GET_BUF_SIZE-len,
+				"\tOAS CQ info: ");
+			len += snprintf(pbuffer+len,
+				LPFC_QUE_INFO_GET_BUF_SIZE-len,
+				"AssocEQID[%02d]: "
+				"CQ STAT[max:x%x relw:x%x "
+				"xabt:x%x wq:x%llx]\n",
+				qp->assoc_qid,
+				qp->q_cnt_1, qp->q_cnt_2,
+				qp->q_cnt_3, (unsigned long long)qp->q_cnt_4);
+			len += snprintf(pbuffer+len,
+				LPFC_QUE_INFO_GET_BUF_SIZE-len,
+				"\tCQID[%02d], "
+				"QE-CNT[%04d], QE-SIZE[%04d], "
+				"HOST-IDX[%04d], PORT-IDX[%04d]",
+				qp->queue_id, qp->entry_count,
+				qp->entry_size, qp->host_index,
+				qp->hba_index);
+
+			/* Reset max counter */
+			qp->CQ_max_cqe = 0;
+
+			len +=  snprintf(pbuffer+len,
+				LPFC_QUE_INFO_GET_BUF_SIZE-len, "\n");
+			if (len >= max_cnt)
+				goto too_big;
+		}
+
+		/* OAS WQ */
+		qp = phba->sli4_hba.oas_wq;
+		if (qp) {
+			len += snprintf(pbuffer+len,
+				LPFC_QUE_INFO_GET_BUF_SIZE-len,
+				"\t\tOAS WQ info: ");
+			len += snprintf(pbuffer+len,
+				LPFC_QUE_INFO_GET_BUF_SIZE-len,
+				"AssocCQID[%02d]: "
+				"WQ-STAT[oflow:x%x posted:x%llx]\n",
+				qp->assoc_qid,
+				qp->q_cnt_1, (unsigned long long)qp->q_cnt_4);
+			len += snprintf(pbuffer+len,
+				LPFC_QUE_INFO_GET_BUF_SIZE-len,
+				"\t\tWQID[%02d], "
+				"QE-CNT[%04d], QE-SIZE[%04d], "
+				"HOST-IDX[%04d], PORT-IDX[%04d]",
+				qp->queue_id,
+				qp->entry_count,
+				qp->entry_size,
+				qp->host_index,
+				qp->hba_index);
+
+			len +=  snprintf(pbuffer+len,
+				LPFC_QUE_INFO_GET_BUF_SIZE-len, "\n");
+			if (len >= max_cnt)
+				goto too_big;
+		}
+	}
+out:
+>>>>>>> v3.18
 	spin_unlock_irq(&phba->hbalock);
 	return simple_read_from_buffer(buf, nbytes, ppos, pbuffer, len);
 
@@ -3941,6 +4059,10 @@ lpfc_debugfs_initialize(struct lpfc_vport *vport)
 	struct lpfc_hba   *phba = vport->phba;
 	char name[64];
 	uint32_t num, i;
+<<<<<<< HEAD
+=======
+	bool pport_setup = false;
+>>>>>>> v3.18
 
 	if (!lpfc_debugfs_enable)
 		return;
@@ -3961,6 +4083,10 @@ lpfc_debugfs_initialize(struct lpfc_vport *vport)
 	/* Setup funcX directory for specific HBA PCI function */
 	snprintf(name, sizeof(name), "fn%d", phba->brd_no);
 	if (!phba->hba_debugfs_root) {
+<<<<<<< HEAD
+=======
+		pport_setup = true;
+>>>>>>> v3.18
 		phba->hba_debugfs_root =
 			debugfs_create_dir(name, lpfc_debugfs_root);
 		if (!phba->hba_debugfs_root) {
@@ -4015,7 +4141,11 @@ lpfc_debugfs_initialize(struct lpfc_vport *vport)
 				goto debug_failed;
 			}
 		} else
+<<<<<<< HEAD
 			phba->debug_dumpHBASlim = NULL;
+=======
+			phba->debug_dumpHostSlim = NULL;
+>>>>>>> v3.18
 
 		/* Setup dumpData */
 		snprintf(name, sizeof(name), "dumpData");
@@ -4253,6 +4383,17 @@ lpfc_debugfs_initialize(struct lpfc_vport *vport)
 	}
 
 	/*
+<<<<<<< HEAD
+=======
+	 * The following section is for additional directories/files for the
+	 * physical port.
+	 */
+
+	if (!pport_setup)
+		goto debug_failed;
+
+	/*
+>>>>>>> v3.18
 	 * iDiag debugfs root entry points for SLI4 device only
 	 */
 	if (phba->sli_rev < LPFC_SLI_REV4)

@@ -193,6 +193,14 @@ int main(int argc, char **argv)
 	int msg, pid, err;
 	struct msgque_data msgque;
 
+<<<<<<< HEAD
+=======
+	if (getuid() != 0) {
+		printf("Please run the test as root - Exiting.\n");
+		exit(1);
+	}
+
+>>>>>>> v3.18
 	msgque.key = ftok(argv[0], 822155650);
 	if (msgque.key == -1) {
 		printf("Can't make key\n");
@@ -201,6 +209,10 @@ int main(int argc, char **argv)
 
 	msgque.msq_id = msgget(msgque.key, IPC_CREAT | IPC_EXCL | 0666);
 	if (msgque.msq_id == -1) {
+<<<<<<< HEAD
+=======
+		err = -errno;
+>>>>>>> v3.18
 		printf("Can't create queue\n");
 		goto err_out;
 	}

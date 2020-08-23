@@ -17,6 +17,7 @@
  */
 #include "xfs.h"
 #include "xfs_fs.h"
+<<<<<<< HEAD
 #include "xfs_types.h"
 #include "xfs_log.h"
 #include "xfs_trans.h"
@@ -28,6 +29,17 @@
 #include "xfs_ialloc_btree.h"
 #include "xfs_dinode.h"
 #include "xfs_inode.h"
+=======
+#include "xfs_shared.h"
+#include "xfs_format.h"
+#include "xfs_log_format.h"
+#include "xfs_trans_resv.h"
+#include "xfs_sb.h"
+#include "xfs_ag.h"
+#include "xfs_mount.h"
+#include "xfs_inode.h"
+#include "xfs_trans.h"
+>>>>>>> v3.18
 #include "xfs_buf_item.h"
 #include "xfs_trans_priv.h"
 #include "xfs_error.h"
@@ -168,7 +180,11 @@ xfs_trans_get_buf_map(
 		ASSERT(atomic_read(&bip->bli_refcount) > 0);
 		bip->bli_recur++;
 		trace_xfs_trans_get_buf_recur(bip);
+<<<<<<< HEAD
 		return (bp);
+=======
+		return bp;
+>>>>>>> v3.18
 	}
 
 	bp = xfs_buf_get_map(target, map, nmaps, flags);
@@ -180,7 +196,11 @@ xfs_trans_get_buf_map(
 
 	_xfs_trans_bjoin(tp, bp, 1);
 	trace_xfs_trans_get_buf(bp->b_fspriv);
+<<<<<<< HEAD
 	return (bp);
+=======
+	return bp;
+>>>>>>> v3.18
 }
 
 /*
@@ -203,9 +223,14 @@ xfs_trans_getsb(xfs_trans_t	*tp,
 	 * Default to just trying to lock the superblock buffer
 	 * if tp is NULL.
 	 */
+<<<<<<< HEAD
 	if (tp == NULL) {
 		return (xfs_getsb(mp, flags));
 	}
+=======
+	if (tp == NULL)
+		return xfs_getsb(mp, flags);
+>>>>>>> v3.18
 
 	/*
 	 * If the superblock buffer already has this transaction
@@ -220,7 +245,11 @@ xfs_trans_getsb(xfs_trans_t	*tp,
 		ASSERT(atomic_read(&bip->bli_refcount) > 0);
 		bip->bli_recur++;
 		trace_xfs_trans_getsb_recur(bip);
+<<<<<<< HEAD
 		return (bp);
+=======
+		return bp;
+>>>>>>> v3.18
 	}
 
 	bp = xfs_getsb(mp, flags);
@@ -229,7 +258,11 @@ xfs_trans_getsb(xfs_trans_t	*tp,
 
 	_xfs_trans_bjoin(tp, bp, 1);
 	trace_xfs_trans_getsb(bp->b_fspriv);
+<<<<<<< HEAD
 	return (bp);
+=======
+	return bp;
+>>>>>>> v3.18
 }
 
 #ifdef DEBUG
@@ -269,7 +302,11 @@ xfs_trans_read_buf_map(
 		bp = xfs_buf_read_map(target, map, nmaps, flags, ops);
 		if (!bp)
 			return (flags & XBF_TRYLOCK) ?
+<<<<<<< HEAD
 					EAGAIN : XFS_ERROR(ENOMEM);
+=======
+					-EAGAIN : -ENOMEM;
+>>>>>>> v3.18
 
 		if (bp->b_error) {
 			error = bp->b_error;
@@ -277,6 +314,13 @@ xfs_trans_read_buf_map(
 			XFS_BUF_UNDONE(bp);
 			xfs_buf_stale(bp);
 			xfs_buf_relse(bp);
+<<<<<<< HEAD
+=======
+
+			/* bad CRC means corrupted metadata */
+			if (error == -EFSBADCRC)
+				error = -EFSCORRUPTED;
+>>>>>>> v3.18
 			return error;
 		}
 #ifdef DEBUG
@@ -285,7 +329,11 @@ xfs_trans_read_buf_map(
 				if (((xfs_req_num++) % xfs_error_mod) == 0) {
 					xfs_buf_relse(bp);
 					xfs_debug(mp, "Returning error!");
+<<<<<<< HEAD
 					return XFS_ERROR(EIO);
+=======
+					return -EIO;
+>>>>>>> v3.18
 				}
 			}
 		}
@@ -316,10 +364,18 @@ xfs_trans_read_buf_map(
 			ASSERT(bp->b_iodone == NULL);
 			XFS_BUF_READ(bp);
 			bp->b_ops = ops;
+<<<<<<< HEAD
 			xfsbdstrat(tp->t_mountp, bp);
 			error = xfs_buf_iowait(bp);
 			if (error) {
 				xfs_buf_ioerror_alert(bp, __func__);
+=======
+
+			error = xfs_buf_submit_wait(bp);
+			if (error) {
+				if (!XFS_FORCED_SHUTDOWN(mp))
+					xfs_buf_ioerror_alert(bp, __func__);
+>>>>>>> v3.18
 				xfs_buf_relse(bp);
 				/*
 				 * We can gracefully recover from most read
@@ -329,6 +385,12 @@ xfs_trans_read_buf_map(
 				if (tp->t_flags & XFS_TRANS_DIRTY)
 					xfs_force_shutdown(tp->t_mountp,
 							SHUTDOWN_META_IO_ERROR);
+<<<<<<< HEAD
+=======
+				/* bad CRC means corrupted metadata */
+				if (error == -EFSBADCRC)
+					error = -EFSCORRUPTED;
+>>>>>>> v3.18
 				return error;
 			}
 		}
@@ -339,7 +401,11 @@ xfs_trans_read_buf_map(
 		if (XFS_FORCED_SHUTDOWN(mp)) {
 			trace_xfs_trans_read_buf_shut(bp, _RET_IP_);
 			*bpp = NULL;
+<<<<<<< HEAD
 			return XFS_ERROR(EIO);
+=======
+			return -EIO;
+>>>>>>> v3.18
 		}
 
 
@@ -356,7 +422,11 @@ xfs_trans_read_buf_map(
 	if (bp == NULL) {
 		*bpp = NULL;
 		return (flags & XBF_TRYLOCK) ?
+<<<<<<< HEAD
 					0 : XFS_ERROR(ENOMEM);
+=======
+					0 : -ENOMEM;
+>>>>>>> v3.18
 	}
 	if (bp->b_error) {
 		error = bp->b_error;
@@ -366,6 +436,13 @@ xfs_trans_read_buf_map(
 		if (tp->t_flags & XFS_TRANS_DIRTY)
 			xfs_force_shutdown(tp->t_mountp, SHUTDOWN_META_IO_ERROR);
 		xfs_buf_relse(bp);
+<<<<<<< HEAD
+=======
+
+		/* bad CRC means corrupted metadata */
+		if (error == -EFSBADCRC)
+			error = -EFSCORRUPTED;
+>>>>>>> v3.18
 		return error;
 	}
 #ifdef DEBUG
@@ -376,7 +453,11 @@ xfs_trans_read_buf_map(
 						   SHUTDOWN_META_IO_ERROR);
 				xfs_buf_relse(bp);
 				xfs_debug(mp, "Returning trans error!");
+<<<<<<< HEAD
 				return XFS_ERROR(EIO);
+=======
+				return -EIO;
+>>>>>>> v3.18
 			}
 		}
 	}
@@ -394,10 +475,16 @@ shutdown_abort:
 	trace_xfs_trans_read_buf_shut(bp, _RET_IP_);
 	xfs_buf_relse(bp);
 	*bpp = NULL;
+<<<<<<< HEAD
 	return XFS_ERROR(EIO);
 }
 
 
+=======
+	return -EIO;
+}
+
+>>>>>>> v3.18
 /*
  * Release the buffer bp which was previously acquired with one of the
  * xfs_trans_... buffer allocation routines if the buffer has not
@@ -506,7 +593,11 @@ xfs_trans_brelse(xfs_trans_t	*tp,
 
 /*
  * Mark the buffer as not needing to be unlocked when the buf item's
+<<<<<<< HEAD
  * IOP_UNLOCK() routine is called.  The buffer must already be locked
+=======
+ * iop_unlock() routine is called.  The buffer must already be locked
+>>>>>>> v3.18
  * and associated with the given transaction.
  */
 /* ARGSUSED */
@@ -603,8 +694,19 @@ xfs_trans_log_buf(xfs_trans_t	*tp,
 
 	tp->t_flags |= XFS_TRANS_DIRTY;
 	bip->bli_item.li_desc->lid_flags |= XFS_LID_DIRTY;
+<<<<<<< HEAD
 	bip->bli_flags |= XFS_BLI_LOGGED;
 	xfs_buf_item_log(bip, first, last);
+=======
+
+	/*
+	 * If we have an ordered buffer we are not logging any dirty range but
+	 * it still needs to be marked dirty and that it has been logged.
+	 */
+	bip->bli_flags |= XFS_BLI_DIRTY | XFS_BLI_LOGGED;
+	if (!(bip->bli_flags & XFS_BLI_ORDERED))
+		xfs_buf_item_log(bip, first, last);
+>>>>>>> v3.18
 }
 
 
@@ -757,6 +859,32 @@ xfs_trans_inode_alloc_buf(
 }
 
 /*
+<<<<<<< HEAD
+=======
+ * Mark the buffer as ordered for this transaction. This means
+ * that the contents of the buffer are not recorded in the transaction
+ * but it is tracked in the AIL as though it was. This allows us
+ * to record logical changes in transactions rather than the physical
+ * changes we make to the buffer without changing writeback ordering
+ * constraints of metadata buffers.
+ */
+void
+xfs_trans_ordered_buf(
+	struct xfs_trans	*tp,
+	struct xfs_buf		*bp)
+{
+	struct xfs_buf_log_item	*bip = bp->b_fspriv;
+
+	ASSERT(bp->b_transp == tp);
+	ASSERT(bip != NULL);
+	ASSERT(atomic_read(&bip->bli_refcount) > 0);
+
+	bip->bli_flags |= XFS_BLI_ORDERED;
+	trace_xfs_buf_item_ordered(bip);
+}
+
+/*
+>>>>>>> v3.18
  * Set the type of the buffer for log recovery so that it can correctly identify
  * and hence attach the correct buffer ops to the buffer after replay.
  */

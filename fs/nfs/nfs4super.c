@@ -9,6 +9,10 @@
 #include "delegation.h"
 #include "internal.h"
 #include "nfs4_fs.h"
+<<<<<<< HEAD
+=======
+#include "dns_resolve.h"
+>>>>>>> v3.18
 #include "pnfs.h"
 #include "nfs.h"
 
@@ -76,6 +80,7 @@ static int nfs4_write_inode(struct inode *inode, struct writeback_control *wbc)
 {
 	int ret = nfs_write_inode(inode, wbc);
 
+<<<<<<< HEAD
 	if (ret >= 0 && test_bit(NFS_INO_LAYOUTCOMMIT, &NFS_I(inode)->flags)) {
 		int status;
 		bool sync = true;
@@ -87,6 +92,11 @@ static int nfs4_write_inode(struct inode *inode, struct writeback_control *wbc)
 		if (status < 0)
 			return status;
 	}
+=======
+	if (ret == 0)
+		ret = pnfs_layoutcommit_inode(inode,
+				wbc->sync_mode == WB_SYNC_ALL);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -97,7 +107,11 @@ static int nfs4_write_inode(struct inode *inode, struct writeback_control *wbc)
  */
 static void nfs4_evict_inode(struct inode *inode)
 {
+<<<<<<< HEAD
 	truncate_inode_pages(&inode->i_data, 0);
+=======
+	truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 	clear_inode(inode);
 	pnfs_return_layout(inode);
 	pnfs_destroy_layout(NFS_I(inode));
@@ -252,8 +266,11 @@ struct dentry *nfs4_try_mount(int flags, const char *dev_name,
 
 	dfprintk(MOUNT, "--> nfs4_try_mount()\n");
 
+<<<<<<< HEAD
 	if (data->auth_flavors[0] == RPC_AUTH_MAXFLAVOR)
 		data->auth_flavors[0] = RPC_AUTH_UNIX;
+=======
+>>>>>>> v3.18
 	export_path = data->nfs_server.export_path;
 	data->nfs_server.export_path = "/";
 	root_mnt = nfs_do_root_mount(&nfs4_remote_fs_type, flags, mount_info,
@@ -262,9 +279,15 @@ struct dentry *nfs4_try_mount(int flags, const char *dev_name,
 
 	res = nfs_follow_remote_path(root_mnt, export_path);
 
+<<<<<<< HEAD
 	dfprintk(MOUNT, "<-- nfs4_try_mount() = %ld%s\n",
 			IS_ERR(res) ? PTR_ERR(res) : 0,
 			IS_ERR(res) ? " [error]" : "");
+=======
+	dfprintk(MOUNT, "<-- nfs4_try_mount() = %d%s\n",
+		 PTR_ERR_OR_ZERO(res),
+		 IS_ERR(res) ? " [error]" : "");
+>>>>>>> v3.18
 	return res;
 }
 
@@ -320,9 +343,15 @@ static struct dentry *nfs4_referral_mount(struct file_system_type *fs_type,
 	data->mnt_path = export_path;
 
 	res = nfs_follow_remote_path(root_mnt, export_path);
+<<<<<<< HEAD
 	dprintk("<-- nfs4_referral_mount() = %ld%s\n",
 			IS_ERR(res) ? PTR_ERR(res) : 0,
 			IS_ERR(res) ? " [error]" : "");
+=======
+	dprintk("<-- nfs4_referral_mount() = %d%s\n",
+		PTR_ERR_OR_ZERO(res),
+		IS_ERR(res) ? " [error]" : "");
+>>>>>>> v3.18
 	return res;
 }
 
@@ -331,6 +360,7 @@ static int __init init_nfs_v4(void)
 {
 	int err;
 
+<<<<<<< HEAD
 	err = nfs_idmap_init();
 	if (err)
 		goto out;
@@ -343,6 +373,26 @@ static int __init init_nfs_v4(void)
 	return 0;
 out1:
 	nfs_idmap_quit();
+=======
+	err = nfs_dns_resolver_init();
+	if (err)
+		goto out;
+
+	err = nfs_idmap_init();
+	if (err)
+		goto out1;
+
+	err = nfs4_register_sysctl();
+	if (err)
+		goto out2;
+
+	register_nfs_version(&nfs_v4);
+	return 0;
+out2:
+	nfs_idmap_quit();
+out1:
+	nfs_dns_resolver_destroy();
+>>>>>>> v3.18
 out:
 	return err;
 }
@@ -352,6 +402,10 @@ static void __exit exit_nfs_v4(void)
 	unregister_nfs_version(&nfs_v4);
 	nfs4_unregister_sysctl();
 	nfs_idmap_quit();
+<<<<<<< HEAD
+=======
+	nfs_dns_resolver_destroy();
+>>>>>>> v3.18
 }
 
 MODULE_LICENSE("GPL");

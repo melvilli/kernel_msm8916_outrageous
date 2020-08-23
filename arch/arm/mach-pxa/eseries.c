@@ -21,6 +21,10 @@
 #include <linux/mtd/nand.h>
 #include <linux/mtd/partitions.h>
 #include <linux/usb/gpio_vbus.h>
+<<<<<<< HEAD
+=======
+#include <linux/memblock.h>
+>>>>>>> v3.18
 
 #include <video/w100fb.h>
 
@@ -41,6 +45,7 @@
 #include "clock.h"
 
 /* Only e800 has 128MB RAM */
+<<<<<<< HEAD
 void __init eseries_fixup(struct tag *tags, char **cmdline, struct meminfo *mi)
 {
 	mi->nr_banks=1;
@@ -49,6 +54,14 @@ void __init eseries_fixup(struct tag *tags, char **cmdline, struct meminfo *mi)
 		mi->bank[0].size = (128*1024*1024);
 	else
 		mi->bank[0].size = (64*1024*1024);
+=======
+void __init eseries_fixup(struct tag *tags, char **cmdline)
+{
+	if (machine_is_e800())
+		memblock_add(0xa0000000, SZ_128M);
+	else
+		memblock_add(0xa0000000, SZ_64M);
+>>>>>>> v3.18
 }
 
 struct gpio_vbus_mach_info e7xx_udc_info = {

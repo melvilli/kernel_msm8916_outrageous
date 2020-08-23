@@ -89,7 +89,11 @@ static caddr_t remap_window(struct map_info *map, unsigned long to)
 
 	if (!pcmcia_dev_present(dev->p_dev)) {
 		pr_debug("device removed\n");
+<<<<<<< HEAD
 		return 0;
+=======
+		return NULL;
+>>>>>>> v3.18
 	}
 
 	offset = to & ~(dev->win_size-1);

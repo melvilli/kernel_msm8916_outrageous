@@ -94,6 +94,7 @@ static int wm8728_hw_params(struct snd_pcm_substream *substream,
 
 	dac &= ~0x18;
 
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		break;
@@ -101,6 +102,15 @@ static int wm8728_hw_params(struct snd_pcm_substream *substream,
 		dac |= 0x10;
 		break;
 	case SNDRV_PCM_FORMAT_S24_LE:
+=======
+	switch (params_width(params)) {
+	case 16:
+		break;
+	case 20:
+		dac |= 0x10;
+		break;
+	case 24:
+>>>>>>> v3.18
 		dac |= 0x08;
 		break;
 	default:
@@ -228,6 +238,7 @@ static int wm8728_resume(struct snd_soc_codec *codec)
 
 static int wm8728_probe(struct snd_soc_codec *codec)
 {
+<<<<<<< HEAD
 	int ret;
 
 	ret = snd_soc_codec_set_cache_io(codec, 7, 9, SND_SOC_REGMAP);
@@ -241,6 +252,12 @@ static int wm8728_probe(struct snd_soc_codec *codec)
 	wm8728_set_bias_level(codec, SND_SOC_BIAS_STANDBY);
 
 	return ret;
+=======
+	/* power on device */
+	wm8728_set_bias_level(codec, SND_SOC_BIAS_STANDBY);
+
+	return 0;
+>>>>>>> v3.18
 }
 
 static int wm8728_remove(struct snd_soc_codec *codec)
@@ -320,7 +337,11 @@ static struct spi_driver wm8728_spi_driver = {
 };
 #endif /* CONFIG_SPI_MASTER */
 
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 static int wm8728_i2c_probe(struct i2c_client *i2c,
 			    const struct i2c_device_id *id)
 {
@@ -371,7 +392,11 @@ static struct i2c_driver wm8728_i2c_driver = {
 static int __init wm8728_modinit(void)
 {
 	int ret = 0;
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 	ret = i2c_add_driver(&wm8728_i2c_driver);
 	if (ret != 0) {
 		printk(KERN_ERR "Failed to register wm8728 I2C driver: %d\n",
@@ -391,7 +416,11 @@ module_init(wm8728_modinit);
 
 static void __exit wm8728_exit(void)
 {
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 	i2c_del_driver(&wm8728_i2c_driver);
 #endif
 #if defined(CONFIG_SPI_MASTER)

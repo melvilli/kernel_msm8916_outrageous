@@ -44,13 +44,21 @@
 static int tosa_jack_func;
 static int tosa_spk_func;
 
+<<<<<<< HEAD
 static void tosa_ext_control(struct snd_soc_codec *codec)
 {
 	struct snd_soc_dapm_context *dapm = &codec->dapm;
+=======
+static void tosa_ext_control(struct snd_soc_dapm_context *dapm)
+{
+
+	snd_soc_dapm_mutex_lock(dapm);
+>>>>>>> v3.18
 
 	/* set up jack connection */
 	switch (tosa_jack_func) {
 	case TOSA_HP:
+<<<<<<< HEAD
 		snd_soc_dapm_disable_pin(dapm, "Mic (Internal)");
 		snd_soc_dapm_enable_pin(dapm, "Headphone Jack");
 		snd_soc_dapm_disable_pin(dapm, "Headset Jack");
@@ -64,20 +72,46 @@ static void tosa_ext_control(struct snd_soc_codec *codec)
 		snd_soc_dapm_disable_pin(dapm, "Mic (Internal)");
 		snd_soc_dapm_disable_pin(dapm, "Headphone Jack");
 		snd_soc_dapm_enable_pin(dapm, "Headset Jack");
+=======
+		snd_soc_dapm_disable_pin_unlocked(dapm, "Mic (Internal)");
+		snd_soc_dapm_enable_pin_unlocked(dapm, "Headphone Jack");
+		snd_soc_dapm_disable_pin_unlocked(dapm, "Headset Jack");
+		break;
+	case TOSA_MIC_INT:
+		snd_soc_dapm_enable_pin_unlocked(dapm, "Mic (Internal)");
+		snd_soc_dapm_disable_pin_unlocked(dapm, "Headphone Jack");
+		snd_soc_dapm_disable_pin_unlocked(dapm, "Headset Jack");
+		break;
+	case TOSA_HEADSET:
+		snd_soc_dapm_disable_pin_unlocked(dapm, "Mic (Internal)");
+		snd_soc_dapm_disable_pin_unlocked(dapm, "Headphone Jack");
+		snd_soc_dapm_enable_pin_unlocked(dapm, "Headset Jack");
+>>>>>>> v3.18
 		break;
 	}
 
 	if (tosa_spk_func == TOSA_SPK_ON)
+<<<<<<< HEAD
 		snd_soc_dapm_enable_pin(dapm, "Speaker");
 	else
 		snd_soc_dapm_disable_pin(dapm, "Speaker");
 
 	snd_soc_dapm_sync(dapm);
+=======
+		snd_soc_dapm_enable_pin_unlocked(dapm, "Speaker");
+	else
+		snd_soc_dapm_disable_pin_unlocked(dapm, "Speaker");
+
+	snd_soc_dapm_sync_unlocked(dapm);
+
+	snd_soc_dapm_mutex_unlock(dapm);
+>>>>>>> v3.18
 }
 
 static int tosa_startup(struct snd_pcm_substream *substream)
 {
 	struct snd_soc_pcm_runtime *rtd = substream->private_data;
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = rtd->codec;
 
 	mutex_lock(&codec->mutex);
@@ -86,6 +120,11 @@ static int tosa_startup(struct snd_pcm_substream *substream)
 	tosa_ext_control(codec);
 
 	mutex_unlock(&codec->mutex);
+=======
+
+	/* check the jack status at stream startup */
+	tosa_ext_control(&rtd->card->dapm);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -104,13 +143,21 @@ static int tosa_get_jack(struct snd_kcontrol *kcontrol,
 static int tosa_set_jack(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_value *ucontrol)
 {
+<<<<<<< HEAD
 	struct snd_soc_codec *codec =  snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_card *card = snd_kcontrol_chip(kcontrol);
+>>>>>>> v3.18
 
 	if (tosa_jack_func == ucontrol->value.integer.value[0])
 		return 0;
 
 	tosa_jack_func = ucontrol->value.integer.value[0];
+<<<<<<< HEAD
 	tosa_ext_control(codec);
+=======
+	tosa_ext_control(&card->dapm);
+>>>>>>> v3.18
 	return 1;
 }
 
@@ -124,13 +171,21 @@ static int tosa_get_spk(struct snd_kcontrol *kcontrol,
 static int tosa_set_spk(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_value *ucontrol)
 {
+<<<<<<< HEAD
 	struct snd_soc_codec *codec =  snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_card *card = snd_kcontrol_chip(kcontrol);
+>>>>>>> v3.18
 
 	if (tosa_spk_func == ucontrol->value.integer.value[0])
 		return 0;
 
 	tosa_spk_func = ucontrol->value.integer.value[0];
+<<<<<<< HEAD
 	tosa_ext_control(codec);
+=======
+	tosa_ext_control(&card->dapm);
+>>>>>>> v3.18
 	return 1;
 }
 
@@ -191,11 +246,15 @@ static int tosa_ac97_init(struct snd_soc_pcm_runtime *rtd)
 {
 	struct snd_soc_codec *codec = rtd->codec;
 	struct snd_soc_dapm_context *dapm = &codec->dapm;
+<<<<<<< HEAD
 	int err;
+=======
+>>>>>>> v3.18
 
 	snd_soc_dapm_nc_pin(dapm, "OUT3");
 	snd_soc_dapm_nc_pin(dapm, "MONOOUT");
 
+<<<<<<< HEAD
 	/* add tosa specific controls */
 	err = snd_soc_add_codec_controls(codec, tosa_controls,
 				ARRAY_SIZE(tosa_controls));
@@ -209,6 +268,8 @@ static int tosa_ac97_init(struct snd_soc_pcm_runtime *rtd)
 	/* set up tosa specific audio path audio_map */
 	snd_soc_dapm_add_routes(dapm, audio_map, ARRAY_SIZE(audio_map));
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -239,6 +300,16 @@ static struct snd_soc_card tosa = {
 	.owner = THIS_MODULE,
 	.dai_link = tosa_dai,
 	.num_links = ARRAY_SIZE(tosa_dai),
+<<<<<<< HEAD
+=======
+
+	.controls = tosa_controls,
+	.num_controls = ARRAY_SIZE(tosa_controls),
+	.dapm_widgets = tosa_dapm_widgets,
+	.num_dapm_widgets = ARRAY_SIZE(tosa_dapm_widgets),
+	.dapm_routes = audio_map,
+	.num_dapm_routes = ARRAY_SIZE(audio_map),
+>>>>>>> v3.18
 };
 
 static int tosa_probe(struct platform_device *pdev)
@@ -275,6 +346,10 @@ static struct platform_driver tosa_driver = {
 	.driver		= {
 		.name	= "tosa-audio",
 		.owner	= THIS_MODULE,
+<<<<<<< HEAD
+=======
+		.pm     = &snd_soc_pm_ops,
+>>>>>>> v3.18
 	},
 	.probe		= tosa_probe,
 	.remove		= tosa_remove,

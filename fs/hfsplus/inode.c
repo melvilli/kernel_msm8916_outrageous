@@ -19,6 +19,10 @@
 #include "hfsplus_fs.h"
 #include "hfsplus_raw.h"
 #include "xattr.h"
+<<<<<<< HEAD
+=======
+#include "acl.h"
+>>>>>>> v3.18
 
 static int hfsplus_readpage(struct file *file, struct page *page)
 {
@@ -35,7 +39,11 @@ static void hfsplus_write_failed(struct address_space *mapping, loff_t to)
 	struct inode *inode = mapping->host;
 
 	if (to > inode->i_size) {
+<<<<<<< HEAD
 		truncate_pagecache(inode, to, inode->i_size);
+=======
+		truncate_pagecache(inode, inode->i_size);
+>>>>>>> v3.18
 		hfsplus_file_truncate(inode);
 	}
 }
@@ -122,14 +130,25 @@ static int hfsplus_releasepage(struct page *page, gfp_t mask)
 }
 
 static ssize_t hfsplus_direct_IO(int rw, struct kiocb *iocb,
+<<<<<<< HEAD
 		const struct iovec *iov, loff_t offset, unsigned long nr_segs)
+=======
+		struct iov_iter *iter, loff_t offset)
+>>>>>>> v3.18
 {
 	struct file *file = iocb->ki_filp;
 	struct address_space *mapping = file->f_mapping;
 	struct inode *inode = file_inode(file)->i_mapping->host;
+<<<<<<< HEAD
 	ssize_t ret;
 
 	ret = blockdev_direct_IO(rw, iocb, inode, iov, offset, nr_segs,
+=======
+	size_t count = iov_iter_count(iter);
+	ssize_t ret;
+
+	ret = blockdev_direct_IO(rw, iocb, inode, iter, offset, 
+>>>>>>> v3.18
 				 hfsplus_get_block);
 
 	/*
@@ -138,7 +157,11 @@ static ssize_t hfsplus_direct_IO(int rw, struct kiocb *iocb,
 	 */
 	if (unlikely((rw & WRITE) && ret < 0)) {
 		loff_t isize = i_size_read(inode);
+<<<<<<< HEAD
 		loff_t end = offset + iov_length(iov, nr_segs);
+=======
+		loff_t end = offset + count;
+>>>>>>> v3.18
 
 		if (end > isize)
 			hfsplus_write_failed(mapping, end);
@@ -177,6 +200,7 @@ const struct dentry_operations hfsplus_dentry_operations = {
 	.d_compare    = hfsplus_compare_dentry,
 };
 
+<<<<<<< HEAD
 static struct dentry *hfsplus_file_lookup(struct inode *dir,
 		struct dentry *dentry, unsigned int flags)
 {
@@ -235,6 +259,8 @@ out:
 	return NULL;
 }
 
+=======
+>>>>>>> v3.18
 static void hfsplus_get_perms(struct inode *inode,
 		struct hfsplus_perm *perms, int dir)
 {
@@ -316,6 +342,16 @@ static int hfsplus_setattr(struct dentry *dentry, struct iattr *attr)
 
 	setattr_copy(inode, attr);
 	mark_inode_dirty(inode);
+<<<<<<< HEAD
+=======
+
+	if (attr->ia_valid & ATTR_MODE) {
+		error = posix_acl_chmod(inode, inode->i_mode);
+		if (unlikely(error))
+			return error;
+	}
+
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -377,20 +413,38 @@ int hfsplus_file_fsync(struct file *file, loff_t start, loff_t end,
 }
 
 static const struct inode_operations hfsplus_file_inode_operations = {
+<<<<<<< HEAD
 	.lookup		= hfsplus_file_lookup,
+=======
+>>>>>>> v3.18
 	.setattr	= hfsplus_setattr,
 	.setxattr	= generic_setxattr,
 	.getxattr	= generic_getxattr,
 	.listxattr	= hfsplus_listxattr,
+<<<<<<< HEAD
 	.removexattr	= hfsplus_removexattr,
+=======
+	.removexattr	= generic_removexattr,
+#ifdef CONFIG_HFSPLUS_FS_POSIX_ACL
+	.get_acl	= hfsplus_get_posix_acl,
+	.set_acl	= hfsplus_set_posix_acl,
+#endif
+>>>>>>> v3.18
 };
 
 static const struct file_operations hfsplus_file_operations = {
 	.llseek		= generic_file_llseek,
+<<<<<<< HEAD
 	.read		= do_sync_read,
 	.aio_read	= generic_file_aio_read,
 	.write		= do_sync_write,
 	.aio_write	= generic_file_aio_write,
+=======
+	.read		= new_sync_read,
+	.read_iter	= generic_file_read_iter,
+	.write		= new_sync_write,
+	.write_iter	= generic_file_write_iter,
+>>>>>>> v3.18
 	.mmap		= generic_file_mmap,
 	.splice_read	= generic_file_splice_read,
 	.fsync		= hfsplus_file_fsync,
@@ -422,6 +476,10 @@ struct inode *hfsplus_new_inode(struct super_block *sb, umode_t mode)
 	hip->extent_state = 0;
 	hip->flags = 0;
 	hip->userflags = 0;
+<<<<<<< HEAD
+=======
+	hip->subfolders = 0;
+>>>>>>> v3.18
 	memset(hip->first_extents, 0, sizeof(hfsplus_extent_rec));
 	memset(hip->cached_extents, 0, sizeof(hfsplus_extent_rec));
 	hip->alloc_blocks = 0;
@@ -541,6 +599,13 @@ int hfsplus_cat_read_inode(struct inode *inode, struct hfs_find_data *fd)
 		inode->i_ctime = hfsp_mt2ut(folder->attribute_mod_date);
 		HFSPLUS_I(inode)->create_date = folder->create_date;
 		HFSPLUS_I(inode)->fs_blocks = 0;
+<<<<<<< HEAD
+=======
+		if (folder->flags & cpu_to_be16(HFSPLUS_HAS_FOLDER_COUNT)) {
+			HFSPLUS_I(inode)->subfolders =
+				be32_to_cpu(folder->subfolders);
+		}
+>>>>>>> v3.18
 		inode->i_op = &hfsplus_dir_inode_operations;
 		inode->i_fop = &hfsplus_dir_operations;
 	} else if (type == HFSPLUS_FILE) {
@@ -613,6 +678,13 @@ int hfsplus_cat_write_inode(struct inode *inode)
 		folder->content_mod_date = hfsp_ut2mt(inode->i_mtime);
 		folder->attribute_mod_date = hfsp_ut2mt(inode->i_ctime);
 		folder->valence = cpu_to_be32(inode->i_size - 2);
+<<<<<<< HEAD
+=======
+		if (folder->flags & cpu_to_be16(HFSPLUS_HAS_FOLDER_COUNT)) {
+			folder->subfolders =
+				cpu_to_be32(HFSPLUS_I(inode)->subfolders);
+		}
+>>>>>>> v3.18
 		hfs_bnode_write(fd.bnode, &entry, fd.entryoffset,
 					 sizeof(struct hfsplus_cat_folder));
 	} else if (HFSPLUS_IS_RSRC(inode)) {

@@ -158,6 +158,10 @@ static inline char *rtl819x_translate_scan(struct rtllib_device *ieee,
 		struct ht_capab_ele *ht_cap = NULL;
 		bool is40M = false, isShortGI = false;
 		u8 max_mcs = 0;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		if (!memcmp(network->bssht.bdHTCapBuf, EWC11NHTCap, 4))
 			ht_cap = (struct ht_capab_ele *)
 				 &network->bssht.bdHTCapBuf[4];
@@ -212,6 +216,10 @@ static inline char *rtl819x_translate_scan(struct rtllib_device *ieee,
 	memset(&iwe, 0, sizeof(iwe));
 	if (network->wpa_ie_len) {
 		char buf[MAX_WPA_IE_LEN];
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		memcpy(buf, network->wpa_ie, network->wpa_ie_len);
 		iwe.cmd = IWEVGENIE;
 		iwe.u.data.length = network->wpa_ie_len;
@@ -220,6 +228,10 @@ static inline char *rtl819x_translate_scan(struct rtllib_device *ieee,
 	memset(&iwe, 0, sizeof(iwe));
 	if (network->rsn_ie_len) {
 		char buf[MAX_WPA_IE_LEN];
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		memcpy(buf, network->rsn_ie, network->rsn_ie_len);
 		iwe.cmd = IWEVGENIE;
 		iwe.u.data.length = network->rsn_ie_len;
@@ -230,6 +242,10 @@ static inline char *rtl819x_translate_scan(struct rtllib_device *ieee,
 	memset(&iwe, 0, sizeof(iwe));
 	if (network->wzc_ie_len) {
 		char buf[MAX_WZC_IE_LEN];
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		memcpy(buf, network->wzc_ie, network->wzc_ie_len);
 		iwe.cmd = IWEVGENIE;
 		iwe.u.data.length = network->wzc_ie_len;
@@ -262,6 +278,10 @@ int rtllib_wx_get_scan(struct rtllib_device *ieee,
 	char *stop = ev + wrqu->data.length;
 	int i = 0;
 	int err = 0;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	RTLLIB_DEBUG_WX("Getting scan\n");
 	down(&ieee->wx_sem);
 	spin_lock_irqsave(&ieee->lock, flags);
@@ -753,7 +773,11 @@ int rtllib_wx_set_mlme(struct rtllib_device *ieee,
 		/* leave break out intentionly */
 
 	case IW_MLME_DISASSOC:
+<<<<<<< HEAD
 		if (deauth == true)
+=======
+		if (deauth)
+>>>>>>> v3.18
 			printk(KERN_INFO "disauth packet !\n");
 		else
 			printk(KERN_INFO "dis associate packet!\n");

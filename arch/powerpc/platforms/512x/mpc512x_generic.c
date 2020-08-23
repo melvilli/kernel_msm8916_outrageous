@@ -45,8 +45,13 @@ define_machine(mpc512x_generic) {
 	.name			= "MPC512x generic",
 	.probe			= mpc512x_generic_probe,
 	.init			= mpc512x_init,
+<<<<<<< HEAD
 	.init_early		= mpc512x_init_diu,
 	.setup_arch		= mpc512x_setup_diu,
+=======
+	.init_early		= mpc512x_init_early,
+	.setup_arch		= mpc512x_setup_arch,
+>>>>>>> v3.18
 	.init_IRQ		= mpc512x_init_IRQ,
 	.get_irq		= ipic_get_irq,
 	.calibrate_decr		= generic_calibrate_decr,

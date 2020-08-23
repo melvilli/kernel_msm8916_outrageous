@@ -33,13 +33,22 @@
 
 #define FIMC_IS_DRV_NAME		"exynos4-fimc-is"
 
+<<<<<<< HEAD
 #define FIMC_IS_FW_FILENAME		"fimc_is_fw.bin"
 #define FIMC_IS_SETFILE_6A3		"setfile.bin"
+=======
+#define FIMC_IS_FW_FILENAME		"exynos4_fimc_is_fw.bin"
+#define FIMC_IS_SETFILE_6A3		"exynos4_s5k6a3_setfile.bin"
+>>>>>>> v3.18
 
 #define FIMC_IS_FW_LOAD_TIMEOUT		1000 /* ms */
 #define FIMC_IS_POWER_ON_TIMEOUT	1000 /* us */
 
+<<<<<<< HEAD
 #define FIMC_IS_SENSOR_NUM		2
+=======
+#define FIMC_IS_SENSORS_NUM		2
+>>>>>>> v3.18
 
 /* Memory definitions */
 #define FIMC_IS_CPU_MEM_SIZE		(0xa00000)
@@ -225,8 +234,12 @@ struct chain_config {
 	struct drc_param	drc;
 	struct fd_param		fd;
 
+<<<<<<< HEAD
 	unsigned long		p_region_index1;
 	unsigned long		p_region_index2;
+=======
+	unsigned long		p_region_index[2];
+>>>>>>> v3.18
 };
 
 /**
@@ -254,7 +267,11 @@ struct fimc_is {
 	struct firmware			*f_w;
 
 	struct fimc_isp			isp;
+<<<<<<< HEAD
 	struct fimc_is_sensor		*sensor;
+=======
+	struct fimc_is_sensor		sensor[FIMC_IS_SENSORS_NUM];
+>>>>>>> v3.18
 	struct fimc_is_setfile		setfile;
 
 	struct vb2_alloc_ctx		*alloc_ctx;
@@ -293,6 +310,14 @@ static inline struct fimc_is *fimc_isp_to_is(struct fimc_isp *isp)
 	return container_of(isp, struct fimc_is, isp);
 }
 
+<<<<<<< HEAD
+=======
+static inline struct chain_config *__get_curr_is_config(struct fimc_is *is)
+{
+	return &is->config[is->config_index];
+}
+
+>>>>>>> v3.18
 static inline void fimc_is_mem_barrier(void)
 {
 	mb();
@@ -302,10 +327,14 @@ static inline void fimc_is_set_param_bit(struct fimc_is *is, int num)
 {
 	struct chain_config *cfg = &is->config[is->config_index];
 
+<<<<<<< HEAD
 	if (num >= 32)
 		set_bit(num - 32, &cfg->p_region_index2);
 	else
 		set_bit(num, &cfg->p_region_index1);
+=======
+	set_bit(num, &cfg->p_region_index[0]);
+>>>>>>> v3.18
 }
 
 static inline void fimc_is_set_param_ctrl_cmd(struct fimc_is *is, int cmd)

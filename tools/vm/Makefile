@@ -2,6 +2,7 @@
 #
 TARGETS=page-types slabinfo
 
+<<<<<<< HEAD
 LK_DIR = ../lib/lk
 LIBLK = $(LK_DIR)/liblk.a
 
@@ -13,10 +14,27 @@ $(TARGETS): liblk
 
 liblk:
 	make -C $(LK_DIR)
+=======
+LIB_DIR = ../lib/api
+LIBS = $(LIB_DIR)/libapikfs.a
+
+CC = $(CROSS_COMPILE)gcc
+CFLAGS = -Wall -Wextra -I../lib/
+LDFLAGS = $(LIBS)
+
+$(TARGETS): $(LIBS)
+
+$(LIBS):
+	make -C $(LIB_DIR)
+>>>>>>> v3.18
 
 %: %.c
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
 clean:
 	$(RM) page-types slabinfo
+<<<<<<< HEAD
 	make -C ../lib/lk clean
+=======
+	make -C $(LIB_DIR) clean
+>>>>>>> v3.18

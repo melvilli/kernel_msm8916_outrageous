@@ -160,8 +160,11 @@ void mls_sid_to_context(struct context *context,
 int mls_level_isvalid(struct policydb *p, struct mls_level *l)
 {
 	struct level_datum *levdatum;
+<<<<<<< HEAD
 	struct ebitmap_node *node;
 	int i;
+=======
+>>>>>>> v3.18
 
 	if (!l->sens || l->sens > p->p_levels.nprim)
 		return 0;
@@ -170,6 +173,7 @@ int mls_level_isvalid(struct policydb *p, struct mls_level *l)
 	if (!levdatum)
 		return 0;
 
+<<<<<<< HEAD
 	ebitmap_for_each_positive_bit(&l->cat, node, i) {
 		if (i > p->p_cats.nprim)
 			return 0;
@@ -183,6 +187,15 @@ int mls_level_isvalid(struct policydb *p, struct mls_level *l)
 	}
 
 	return 1;
+=======
+	/*
+	 * Return 1 iff all the bits set in l->cat are also be set in
+	 * levdatum->level->cat and no bit in l->cat is larger than
+	 * p->p_cats.nprim.
+	 */
+	return ebitmap_contains(&levdatum->level->cat, &l->cat,
+				p->p_cats.nprim);
+>>>>>>> v3.18
 }
 
 int mls_range_isvalid(struct policydb *p, struct mls_range *r)
@@ -500,6 +513,11 @@ int mls_convert_context(struct policydb *oldp,
 			rc = ebitmap_set_bit(&bitmap, catdatum->value - 1, 1);
 			if (rc)
 				return rc;
+<<<<<<< HEAD
+=======
+
+			cond_resched();
+>>>>>>> v3.18
 		}
 		ebitmap_destroy(&c->range.level[l].cat);
 		c->range.level[l].cat = bitmap;

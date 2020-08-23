@@ -18,8 +18,11 @@
 
 #include "internal.h"
 
+<<<<<<< HEAD
 #define PREFIX "ACPI: "
 
+=======
+>>>>>>> v3.18
 ACPI_MODULE_NAME("cmos rtc");
 
 static const struct acpi_device_id acpi_cmos_rtc_ids[] = {
@@ -35,7 +38,11 @@ acpi_cmos_rtc_space_handler(u32 function, acpi_physical_address address,
 		      void *handler_context, void *region_context)
 {
 	int i;
+<<<<<<< HEAD
 	u8 *value = (u8 *)&value64;
+=======
+	u8 *value = (u8 *)value64;
+>>>>>>> v3.18
 
 	if (address > 0xff || !value64)
 		return AE_BAD_PARAMETER;
@@ -70,7 +77,11 @@ static int acpi_install_cmos_rtc_space_handler(struct acpi_device *adev,
 		return -ENODEV;
 	}
 
+<<<<<<< HEAD
 	return 0;
+=======
+	return 1;
+>>>>>>> v3.18
 }
 
 static void acpi_remove_cmos_rtc_space_handler(struct acpi_device *adev)

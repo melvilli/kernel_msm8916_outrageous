@@ -8,6 +8,7 @@
 
 #include <linux/init.h>
 #include <linux/smp.h>
+<<<<<<< HEAD
 #include <linux/thread_info.h>
 #include <linux/sched.h>
 #include <linux/gfp.h>
@@ -59,6 +60,33 @@ unsigned int __read_mostly vdso_enabled = VDSO_DEFAULT;
 static int __init vdso_setup(char *s)
 {
 	vdso_enabled = simple_strtoul(s, NULL, 0);
+=======
+#include <linux/kernel.h>
+#include <linux/mm_types.h>
+
+#include <asm/cpufeature.h>
+#include <asm/processor.h>
+#include <asm/vdso.h>
+
+#ifdef CONFIG_COMPAT_VDSO
+#define VDSO_DEFAULT	0
+#else
+#define VDSO_DEFAULT	1
+#endif
+
+/*
+ * Should the kernel map a VDSO page into processes and pass its
+ * address down to glibc upon exec()?
+ */
+unsigned int __read_mostly vdso32_enabled = VDSO_DEFAULT;
+
+static int __init vdso32_setup(char *s)
+{
+	vdso32_enabled = simple_strtoul(s, NULL, 0);
+
+	if (vdso32_enabled > 1)
+		pr_warn("vdso32 values other than 0 and 1 are no longer allowed; vdso disabled\n");
+>>>>>>> v3.18
 
 	return 1;
 }
@@ -68,6 +96,7 @@ static int __init vdso_setup(char *s)
  * behavior on both 64-bit and 32-bit kernels.
  * On 32-bit kernels, vdso=[012] means the same thing.
  */
+<<<<<<< HEAD
 __setup("vdso32=", vdso_setup);
 
 #ifdef CONFIG_X86_32
@@ -195,11 +224,20 @@ static __init void relocate_vdso(Elf32_Ehdr *ehdr)
 
 static struct page *vdso32_pages[1];
 
+=======
+__setup("vdso32=", vdso32_setup);
+
+#ifdef CONFIG_X86_32
+__setup_param("vdso=", vdso_setup, vdso32_setup, 0);
+#endif
+
+>>>>>>> v3.18
 #ifdef CONFIG_X86_64
 
 #define	vdso32_sysenter()	(boot_cpu_has(X86_FEATURE_SYSENTER32))
 #define	vdso32_syscall()	(boot_cpu_has(X86_FEATURE_SYSCALL32))
 
+<<<<<<< HEAD
 /* May not be __init: called during resume */
 void syscall32_cpu_init(void)
 {
@@ -218,11 +256,14 @@ static inline void map_compat_vdso(int map)
 {
 }
 
+=======
+>>>>>>> v3.18
 #else  /* CONFIG_X86_32 */
 
 #define vdso32_sysenter()	(boot_cpu_has(X86_FEATURE_SEP))
 #define vdso32_syscall()	(0)
 
+<<<<<<< HEAD
 void enable_sep_cpu(void)
 {
 	int cpu = get_cpu();
@@ -362,6 +403,29 @@ int arch_setup_additional_pages(struct linux_binprm *bprm, int uses_interp)
 	up_write(&mm->mmap_sem);
 
 	return ret;
+=======
+#endif	/* CONFIG_X86_64 */
+
+#if defined(CONFIG_X86_32) || defined(CONFIG_COMPAT)
+const struct vdso_image *selected_vdso32;
+#endif
+
+int __init sysenter_setup(void)
+{
+#ifdef CONFIG_COMPAT
+	if (vdso32_syscall())
+		selected_vdso32 = &vdso_image_32_syscall;
+	else
+#endif
+	if (vdso32_sysenter())
+		selected_vdso32 = &vdso_image_32_sysenter;
+	else
+		selected_vdso32 = &vdso_image_32_int80;
+
+	init_vdso_image(selected_vdso32);
+
+	return 0;
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_X86_64
@@ -372,10 +436,17 @@ subsys_initcall(sysenter_setup);
 /* Register vsyscall32 into the ABI table */
 #include <linux/sysctl.h>
 
+<<<<<<< HEAD
 static ctl_table abi_table2[] = {
 	{
 		.procname	= "vsyscall32",
 		.data		= &sysctl_vsyscall32,
+=======
+static struct ctl_table abi_table2[] = {
+	{
+		.procname	= "vsyscall32",
+		.data		= &vdso32_enabled,
+>>>>>>> v3.18
 		.maxlen		= sizeof(int),
 		.mode		= 0644,
 		.proc_handler	= proc_dointvec
@@ -383,7 +454,11 @@ static ctl_table abi_table2[] = {
 	{}
 };
 
+<<<<<<< HEAD
 static ctl_table abi_root_table2[] = {
+=======
+static struct ctl_table abi_root_table2[] = {
+>>>>>>> v3.18
 	{
 		.procname = "abi",
 		.mode = 0555,
@@ -398,6 +473,7 @@ static __init int ia32_binfmt_init(void)
 	return 0;
 }
 __initcall(ia32_binfmt_init);
+<<<<<<< HEAD
 #endif
 
 #else  /* CONFIG_X86_32 */
@@ -431,5 +507,8 @@ int in_gate_area_no_mm(unsigned long addr)
 {
 	return 0;
 }
+=======
+#endif /* CONFIG_SYSCTL */
+>>>>>>> v3.18
 
 #endif	/* CONFIG_X86_64 */

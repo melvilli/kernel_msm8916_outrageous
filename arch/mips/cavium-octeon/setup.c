@@ -8,6 +8,10 @@
  *   written by Ralf Baechle <ralf@linux-mips.org>
  */
 #include <linux/compiler.h>
+<<<<<<< HEAD
+=======
+#include <linux/vmalloc.h>
+>>>>>>> v3.18
 #include <linux/init.h>
 #include <linux/kernel.h>
 #include <linux/console.h>
@@ -41,12 +45,15 @@
 #include <asm/octeon/pci-octeon.h>
 #include <asm/octeon/cvmx-mio-defs.h>
 
+<<<<<<< HEAD
 #ifdef CONFIG_CAVIUM_DECODE_RSL
 extern void cvmx_interrupt_rsl_decode(void);
 extern int __cvmx_interrupt_ecc_report_single_bit_errors;
 extern void cvmx_interrupt_rsl_enable(void);
 #endif
 
+=======
+>>>>>>> v3.18
 extern struct plat_smp_ops octeon_smp_ops;
 
 #ifdef CONFIG_PCI
@@ -268,7 +275,10 @@ static uint64_t crashk_size, crashk_base;
 static int octeon_uart;
 
 extern asmlinkage void handle_int(void);
+<<<<<<< HEAD
 extern asmlinkage void plat_irq_dispatch(void);
+=======
+>>>>>>> v3.18
 
 /**
  * Return non zero if we are currently running in the Octeon simulator
@@ -476,6 +486,7 @@ static int __init init_octeon_system_type(void)
 early_initcall(init_octeon_system_type);
 
 /**
+<<<<<<< HEAD
  * Handle all the error condition interrupts that might occur.
  *
  */
@@ -488,6 +499,8 @@ static irqreturn_t octeon_rlm_interrupt(int cpl, void *dev_id)
 #endif
 
 /**
+=======
+>>>>>>> v3.18
  * Return a string representing the system type
  *
  * Returns
@@ -754,6 +767,7 @@ void __init prom_init(void)
 	octeon_write_lcd("Linux");
 #endif
 
+<<<<<<< HEAD
 #ifdef CONFIG_CAVIUM_GDB
 	/*
 	 * When debugging the linux kernel, force the cores to enter
@@ -765,6 +779,8 @@ void __init prom_init(void)
 	}
 #endif
 
+=======
+>>>>>>> v3.18
 	octeon_setup_delays();
 
 	/*
@@ -804,12 +820,15 @@ void __init prom_init(void)
 				MAX_MEMORY = 32ull << 30;
 			if (*p == '@')
 				RESERVE_LOW_MEM = memparse(p + 1, &p);
+<<<<<<< HEAD
 		} else if (strcmp(arg, "ecc_verbose") == 0) {
 #ifdef CONFIG_CAVIUM_REPORT_SINGLE_BIT_ECC
 			__cvmx_interrupt_ecc_report_single_bit_errors = 1;
 			pr_notice("Reporting of single bit ECC errors is "
 				  "turned on\n");
 #endif
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_KEXEC
 		} else if (strncmp(arg, "crashkernel=", 12) == 0) {
 			crashk_size = memparse(arg+12, &p);
@@ -841,6 +860,7 @@ void __init prom_init(void)
 #endif
 	}
 
+<<<<<<< HEAD
 	if (octeon_is_simulation()) {
 		/*
 		 * The simulator uses a mtdram device pre filled with
@@ -850,6 +870,8 @@ void __init prom_init(void)
 		strcat(arcs_cmdline, " rw root=1f00 slram=root,0x40000000,+1073741824");
 	}
 
+=======
+>>>>>>> v3.18
 	mips_hpt_frequency = octeon_get_clock_rate();
 
 	octeon_init_cvmcount();
@@ -1024,7 +1046,11 @@ void __init plat_mem_setup(void)
 
 	if (total == 0)
 		panic("Unable to allocate memory from "
+<<<<<<< HEAD
 		      "cvmx_bootmem_phy_alloc\n");
+=======
+		      "cvmx_bootmem_phy_alloc");
+>>>>>>> v3.18
 }
 
 /*
@@ -1073,6 +1099,7 @@ void prom_free_prom_memory(void)
 			panic("Core-14449 WAR not in place (%04x).\n"
 			      "Please build kernel with proper options (CONFIG_CAVIUM_CN63XXP1).", insn);
 	}
+<<<<<<< HEAD
 #ifdef CONFIG_CAVIUM_DECODE_RSL
 	cvmx_interrupt_rsl_enable();
 
@@ -1082,11 +1109,14 @@ void prom_free_prom_memory(void)
 		panic("Unable to request_irq(OCTEON_IRQ_RML)");
 	}
 #endif
+=======
+>>>>>>> v3.18
 }
 
 int octeon_prune_device_tree(void);
 
 extern const char __dtb_octeon_3xxx_begin;
+<<<<<<< HEAD
 extern const char __dtb_octeon_3xxx_end;
 extern const char __dtb_octeon_68xx_begin;
 extern const char __dtb_octeon_68xx_end;
@@ -1094,12 +1124,19 @@ void __init device_tree_init(void)
 {
 	int dt_size;
 	struct boot_param_header *fdt;
+=======
+extern const char __dtb_octeon_68xx_begin;
+void __init device_tree_init(void)
+{
+	const void *fdt;
+>>>>>>> v3.18
 	bool do_prune;
 
 	if (octeon_bootinfo->minor_version >= 3 && octeon_bootinfo->fdt_addr) {
 		fdt = phys_to_virt(octeon_bootinfo->fdt_addr);
 		if (fdt_check_header(fdt))
 			panic("Corrupt Device Tree passed to kernel.");
+<<<<<<< HEAD
 		dt_size = be32_to_cpu(fdt->totalsize);
 		do_prune = false;
 	} else if (OCTEON_IS_MODEL(OCTEON_CN68XX)) {
@@ -1117,6 +1154,18 @@ void __init device_tree_init(void)
 	if (initial_boot_params == NULL)
 		panic("Could not allocate initial_boot_params\n");
 	memcpy(initial_boot_params, fdt, dt_size);
+=======
+		do_prune = false;
+	} else if (OCTEON_IS_MODEL(OCTEON_CN68XX)) {
+		fdt = &__dtb_octeon_68xx_begin;
+		do_prune = true;
+	} else {
+		fdt = &__dtb_octeon_3xxx_begin;
+		do_prune = true;
+	}
+
+	initial_boot_params = (void *)fdt;
+>>>>>>> v3.18
 
 	if (do_prune) {
 		octeon_prune_device_tree();
@@ -1124,7 +1173,11 @@ void __init device_tree_init(void)
 	} else {
 		pr_info("Using passed Device Tree.\n");
 	}
+<<<<<<< HEAD
 	unflatten_device_tree();
+=======
+	unflatten_and_copy_device_tree();
+>>>>>>> v3.18
 }
 
 static int __initdata disable_octeon_edac_p;
@@ -1174,3 +1227,33 @@ static int __init edac_devinit(void)
 	return err;
 }
 device_initcall(edac_devinit);
+<<<<<<< HEAD
+=======
+
+static void __initdata *octeon_dummy_iospace;
+
+static int __init octeon_no_pci_init(void)
+{
+	/*
+	 * Initially assume there is no PCI. The PCI/PCIe platform code will
+	 * later re-initialize these to correct values if they are present.
+	 */
+	octeon_dummy_iospace = vzalloc(IO_SPACE_LIMIT);
+	set_io_port_base((unsigned long)octeon_dummy_iospace);
+	ioport_resource.start = MAX_RESOURCE;
+	ioport_resource.end = 0;
+	return 0;
+}
+core_initcall(octeon_no_pci_init);
+
+static int __init octeon_no_pci_release(void)
+{
+	/*
+	 * Release the allocated memory if a real IO space is there.
+	 */
+	if ((unsigned long)octeon_dummy_iospace != mips_io_port_base)
+		vfree(octeon_dummy_iospace);
+	return 0;
+}
+late_initcall(octeon_no_pci_release);
+>>>>>>> v3.18

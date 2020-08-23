@@ -55,7 +55,11 @@ static inline int ext2_acl_count(size_t size)
 
 /* acl.c */
 extern struct posix_acl *ext2_get_acl(struct inode *inode, int type);
+<<<<<<< HEAD
 extern int ext2_acl_chmod (struct inode *);
+=======
+extern int ext2_set_acl(struct inode *inode, struct posix_acl *acl, int type);
+>>>>>>> v3.18
 extern int ext2_init_acl (struct inode *, struct inode *);
 
 #else
@@ -63,12 +67,15 @@ extern int ext2_init_acl (struct inode *, struct inode *);
 #define ext2_get_acl	NULL
 #define ext2_set_acl	NULL
 
+<<<<<<< HEAD
 static inline int
 ext2_acl_chmod (struct inode *inode)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 static inline int ext2_init_acl (struct inode *inode, struct inode *dir)
 {
 	return 0;

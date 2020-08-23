@@ -20,18 +20,38 @@
 #include <asm/ppc_asm.h>
 
 _GLOBAL(memcpy_power7)
+<<<<<<< HEAD
+=======
+
+#ifdef __BIG_ENDIAN__
+#define LVS(VRT,RA,RB)		lvsl	VRT,RA,RB
+#define VPERM(VRT,VRA,VRB,VRC)	vperm	VRT,VRA,VRB,VRC
+#else
+#define LVS(VRT,RA,RB)		lvsr	VRT,RA,RB
+#define VPERM(VRT,VRA,VRB,VRC)	vperm	VRT,VRB,VRA,VRC
+#endif
+
+>>>>>>> v3.18
 #ifdef CONFIG_ALTIVEC
 	cmpldi	r5,16
 	cmpldi	cr1,r5,4096
 
+<<<<<<< HEAD
 	std	r3,48(r1)
+=======
+	std	r3,-STACKFRAMESIZE+STK_REG(R31)(r1)
+>>>>>>> v3.18
 
 	blt	.Lshort_copy
 	bgt	cr1,.Lvmx_copy
 #else
 	cmpldi	r5,16
 
+<<<<<<< HEAD
 	std	r3,48(r1)
+=======
+	std	r3,-STACKFRAMESIZE+STK_REG(R31)(r1)
+>>>>>>> v3.18
 
 	blt	.Lshort_copy
 #endif
@@ -207,7 +227,11 @@ _GLOBAL(memcpy_power7)
 	lbz	r0,0(r4)
 	stb	r0,0(r3)
 
+<<<<<<< HEAD
 15:	ld	r3,48(r1)
+=======
+15:	ld	r3,-STACKFRAMESIZE+STK_REG(R31)(r1)
+>>>>>>> v3.18
 	blr
 
 .Lunwind_stack_nonvmx_copy:
@@ -217,6 +241,7 @@ _GLOBAL(memcpy_power7)
 #ifdef CONFIG_ALTIVEC
 .Lvmx_copy:
 	mflr	r0
+<<<<<<< HEAD
 	std	r4,56(r1)
 	std	r5,64(r1)
 	std	r0,16(r1)
@@ -227,6 +252,18 @@ _GLOBAL(memcpy_power7)
 	ld	r3,STACKFRAMESIZE+48(r1)
 	ld	r4,STACKFRAMESIZE+56(r1)
 	ld	r5,STACKFRAMESIZE+64(r1)
+=======
+	std	r4,-STACKFRAMESIZE+STK_REG(R30)(r1)
+	std	r5,-STACKFRAMESIZE+STK_REG(R29)(r1)
+	std	r0,16(r1)
+	stdu	r1,-STACKFRAMESIZE(r1)
+	bl	enter_vmx_copy
+	cmpwi	cr1,r3,0
+	ld	r0,STACKFRAMESIZE+16(r1)
+	ld	r3,STK_REG(R31)(r1)
+	ld	r4,STK_REG(R30)(r1)
+	ld	r5,STK_REG(R29)(r1)
+>>>>>>> v3.18
 	mtlr	r0
 
 	/*
@@ -438,8 +475,13 @@ _GLOBAL(memcpy_power7)
 	stb	r0,0(r3)
 
 15:	addi	r1,r1,STACKFRAMESIZE
+<<<<<<< HEAD
 	ld	r3,48(r1)
 	b	.exit_vmx_copy		/* tail call optimise */
+=======
+	ld	r3,-STACKFRAMESIZE+STK_REG(R31)(r1)
+	b	exit_vmx_copy		/* tail call optimise */
+>>>>>>> v3.18
 
 .Lvmx_unaligned_copy:
 	/* Get the destination 16B aligned */
@@ -485,13 +527,21 @@ _GLOBAL(memcpy_power7)
 	li	r10,32
 	li	r11,48
 
+<<<<<<< HEAD
 	lvsl	vr16,0,r4	/* Setup permute control vector */
+=======
+	LVS(vr16,0,r4)		/* Setup permute control vector */
+>>>>>>> v3.18
 	lvx	vr0,0,r4
 	addi	r4,r4,16
 
 	bf	cr7*4+3,5f
 	lvx	vr1,r0,r4
+<<<<<<< HEAD
 	vperm	vr8,vr0,vr1,vr16
+=======
+	VPERM(vr8,vr0,vr1,vr16)
+>>>>>>> v3.18
 	addi	r4,r4,16
 	stvx	vr8,r0,r3
 	addi	r3,r3,16
@@ -499,9 +549,15 @@ _GLOBAL(memcpy_power7)
 
 5:	bf	cr7*4+2,6f
 	lvx	vr1,r0,r4
+<<<<<<< HEAD
 	vperm	vr8,vr0,vr1,vr16
 	lvx	vr0,r4,r9
 	vperm	vr9,vr1,vr0,vr16
+=======
+	VPERM(vr8,vr0,vr1,vr16)
+	lvx	vr0,r4,r9
+	VPERM(vr9,vr1,vr0,vr16)
+>>>>>>> v3.18
 	addi	r4,r4,32
 	stvx	vr8,r0,r3
 	stvx	vr9,r3,r9
@@ -509,6 +565,7 @@ _GLOBAL(memcpy_power7)
 
 6:	bf	cr7*4+1,7f
 	lvx	vr3,r0,r4
+<<<<<<< HEAD
 	vperm	vr8,vr0,vr3,vr16
 	lvx	vr2,r4,r9
 	vperm	vr9,vr3,vr2,vr16
@@ -516,6 +573,15 @@ _GLOBAL(memcpy_power7)
 	vperm	vr10,vr2,vr1,vr16
 	lvx	vr0,r4,r11
 	vperm	vr11,vr1,vr0,vr16
+=======
+	VPERM(vr8,vr0,vr3,vr16)
+	lvx	vr2,r4,r9
+	VPERM(vr9,vr3,vr2,vr16)
+	lvx	vr1,r4,r10
+	VPERM(vr10,vr2,vr1,vr16)
+	lvx	vr0,r4,r11
+	VPERM(vr11,vr1,vr0,vr16)
+>>>>>>> v3.18
 	addi	r4,r4,64
 	stvx	vr8,r0,r3
 	stvx	vr9,r3,r9
@@ -544,6 +610,7 @@ _GLOBAL(memcpy_power7)
 	.align	5
 8:
 	lvx	vr7,r0,r4
+<<<<<<< HEAD
 	vperm	vr8,vr0,vr7,vr16
 	lvx	vr6,r4,r9
 	vperm	vr9,vr7,vr6,vr16
@@ -559,6 +626,23 @@ _GLOBAL(memcpy_power7)
 	vperm	vr14,vr2,vr1,vr16
 	lvx	vr0,r4,r16
 	vperm	vr15,vr1,vr0,vr16
+=======
+	VPERM(vr8,vr0,vr7,vr16)
+	lvx	vr6,r4,r9
+	VPERM(vr9,vr7,vr6,vr16)
+	lvx	vr5,r4,r10
+	VPERM(vr10,vr6,vr5,vr16)
+	lvx	vr4,r4,r11
+	VPERM(vr11,vr5,vr4,vr16)
+	lvx	vr3,r4,r12
+	VPERM(vr12,vr4,vr3,vr16)
+	lvx	vr2,r4,r14
+	VPERM(vr13,vr3,vr2,vr16)
+	lvx	vr1,r4,r15
+	VPERM(vr14,vr2,vr1,vr16)
+	lvx	vr0,r4,r16
+	VPERM(vr15,vr1,vr0,vr16)
+>>>>>>> v3.18
 	addi	r4,r4,128
 	stvx	vr8,r0,r3
 	stvx	vr9,r3,r9
@@ -582,6 +666,7 @@ _GLOBAL(memcpy_power7)
 
 	bf	cr7*4+1,9f
 	lvx	vr3,r0,r4
+<<<<<<< HEAD
 	vperm	vr8,vr0,vr3,vr16
 	lvx	vr2,r4,r9
 	vperm	vr9,vr3,vr2,vr16
@@ -589,6 +674,15 @@ _GLOBAL(memcpy_power7)
 	vperm	vr10,vr2,vr1,vr16
 	lvx	vr0,r4,r11
 	vperm	vr11,vr1,vr0,vr16
+=======
+	VPERM(vr8,vr0,vr3,vr16)
+	lvx	vr2,r4,r9
+	VPERM(vr9,vr3,vr2,vr16)
+	lvx	vr1,r4,r10
+	VPERM(vr10,vr2,vr1,vr16)
+	lvx	vr0,r4,r11
+	VPERM(vr11,vr1,vr0,vr16)
+>>>>>>> v3.18
 	addi	r4,r4,64
 	stvx	vr8,r0,r3
 	stvx	vr9,r3,r9
@@ -598,9 +692,15 @@ _GLOBAL(memcpy_power7)
 
 9:	bf	cr7*4+2,10f
 	lvx	vr1,r0,r4
+<<<<<<< HEAD
 	vperm	vr8,vr0,vr1,vr16
 	lvx	vr0,r4,r9
 	vperm	vr9,vr1,vr0,vr16
+=======
+	VPERM(vr8,vr0,vr1,vr16)
+	lvx	vr0,r4,r9
+	VPERM(vr9,vr1,vr0,vr16)
+>>>>>>> v3.18
 	addi	r4,r4,32
 	stvx	vr8,r0,r3
 	stvx	vr9,r3,r9
@@ -608,7 +708,11 @@ _GLOBAL(memcpy_power7)
 
 10:	bf	cr7*4+3,11f
 	lvx	vr1,r0,r4
+<<<<<<< HEAD
 	vperm	vr8,vr0,vr1,vr16
+=======
+	VPERM(vr8,vr0,vr1,vr16)
+>>>>>>> v3.18
 	addi	r4,r4,16
 	stvx	vr8,r0,r3
 	addi	r3,r3,16
@@ -642,6 +746,11 @@ _GLOBAL(memcpy_power7)
 	stb	r0,0(r3)
 
 15:	addi	r1,r1,STACKFRAMESIZE
+<<<<<<< HEAD
 	ld	r3,48(r1)
 	b	.exit_vmx_copy		/* tail call optimise */
+=======
+	ld	r3,-STACKFRAMESIZE+STK_REG(R31)(r1)
+	b	exit_vmx_copy		/* tail call optimise */
+>>>>>>> v3.18
 #endif /* CONFiG_ALTIVEC */

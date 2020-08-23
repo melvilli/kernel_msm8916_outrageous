@@ -58,6 +58,7 @@ static int pio2_gpio_get(struct gpio_chip *chip, unsigned int offset)
 	if (reg & PIO2_CHANNEL_BIT[offset]) {
 		if (card->bank[PIO2_CHANNEL_BANK[offset]].config != BOTH)
 			return 0;
+<<<<<<< HEAD
 		else
 			return 1;
 	} else {
@@ -66,6 +67,16 @@ static int pio2_gpio_get(struct gpio_chip *chip, unsigned int offset)
 		else
 			return 0;
 	}
+=======
+
+		return 1;
+	}
+
+	if (card->bank[PIO2_CHANNEL_BANK[offset]].config != BOTH)
+		return 1;
+
+	return 0;
+>>>>>>> v3.18
 }
 
 static void pio2_gpio_set(struct gpio_chip *chip, unsigned int offset,
@@ -108,7 +119,11 @@ static int pio2_gpio_dir_in(struct gpio_chip *chip, unsigned offset)
 	if ((card->bank[PIO2_CHANNEL_BANK[offset]].config == OUTPUT) |
 		(card->bank[PIO2_CHANNEL_BANK[offset]].config == NOFIT)) {
 		dev_err(&card->vdev->dev,
+<<<<<<< HEAD
 			"Channel directionality not configurable at runtine\n");
+=======
+			"Channel directionality not configurable at runtime\n");
+>>>>>>> v3.18
 
 		data = -EINVAL;
 	} else {
@@ -127,7 +142,11 @@ static int pio2_gpio_dir_out(struct gpio_chip *chip, unsigned offset, int value)
 	if ((card->bank[PIO2_CHANNEL_BANK[offset]].config == INPUT) |
 		(card->bank[PIO2_CHANNEL_BANK[offset]].config == NOFIT)) {
 		dev_err(&card->vdev->dev,
+<<<<<<< HEAD
 			"Channel directionality not configurable at runtine\n");
+=======
+			"Channel directionality not configurable at runtime\n");
+>>>>>>> v3.18
 
 		data = -EINVAL;
 	} else {
@@ -221,9 +240,13 @@ void pio2_gpio_exit(struct pio2_card *card)
 {
 	const char *label = card->gc.label;
 
+<<<<<<< HEAD
 	if (gpiochip_remove(&(card->gc)))
 		dev_err(&card->vdev->dev, "Failed to remove GPIO");
 
+=======
+	gpiochip_remove(&(card->gc));
+>>>>>>> v3.18
 	kfree(label);
 }
 

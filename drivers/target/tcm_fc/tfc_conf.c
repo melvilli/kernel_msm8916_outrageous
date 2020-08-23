@@ -50,7 +50,11 @@
 
 struct target_fabric_configfs *ft_configfs;
 
+<<<<<<< HEAD
 LIST_HEAD(ft_lport_list);
+=======
+static LIST_HEAD(ft_wwn_list);
+>>>>>>> v3.18
 DEFINE_MUTEX(ft_lport_lock);
 
 unsigned int ft_debug_logging;
@@ -267,7 +271,11 @@ struct ft_node_acl *ft_acl_get(struct ft_tpg *tpg, struct fc_rport_priv *rdata)
 	return found;
 }
 
+<<<<<<< HEAD
 struct se_node_acl *ft_tpg_alloc_fabric_acl(struct se_portal_group *se_tpg)
+=======
+static struct se_node_acl *ft_tpg_alloc_fabric_acl(struct se_portal_group *se_tpg)
+>>>>>>> v3.18
 {
 	struct ft_node_acl *acl;
 
@@ -298,7 +306,11 @@ static struct se_portal_group *ft_add_tpg(
 	struct config_group *group,
 	const char *name)
 {
+<<<<<<< HEAD
 	struct ft_lport_acl *lacl;
+=======
+	struct ft_lport_wwn *ft_wwn;
+>>>>>>> v3.18
 	struct ft_tpg *tpg;
 	struct workqueue_struct *wq;
 	unsigned long index;
@@ -311,15 +323,35 @@ static struct se_portal_group *ft_add_tpg(
 	 */
 	if (strstr(name, "tpgt_") != name)
 		return NULL;
+<<<<<<< HEAD
 	if (strict_strtoul(name + 5, 10, &index) || index > UINT_MAX)
 		return NULL;
 
 	lacl = container_of(wwn, struct ft_lport_acl, fc_lport_wwn);
+=======
+
+	ret = kstrtoul(name + 5, 10, &index);
+	if (ret)
+		return NULL;
+	if (index > UINT_MAX)
+		return NULL;
+
+	if ((index != 1)) {
+		pr_err("Error, a single TPG=1 is used for HW port mappings\n");
+		return ERR_PTR(-ENOSYS);
+	}
+
+	ft_wwn = container_of(wwn, struct ft_lport_wwn, se_wwn);
+>>>>>>> v3.18
 	tpg = kzalloc(sizeof(*tpg), GFP_KERNEL);
 	if (!tpg)
 		return NULL;
 	tpg->index = index;
+<<<<<<< HEAD
 	tpg->lport_acl = lacl;
+=======
+	tpg->lport_wwn = ft_wwn;
+>>>>>>> v3.18
 	INIT_LIST_HEAD(&tpg->lun_list);
 
 	wq = alloc_workqueue("tcm_fc", 0, 1);
@@ -338,7 +370,11 @@ static struct se_portal_group *ft_add_tpg(
 	tpg->workqueue = wq;
 
 	mutex_lock(&ft_lport_lock);
+<<<<<<< HEAD
 	list_add_tail(&tpg->list, &lacl->tpg_list);
+=======
+	ft_wwn->tpg = tpg;
+>>>>>>> v3.18
 	mutex_unlock(&ft_lport_lock);
 
 	return &tpg->se_tpg;
@@ -347,6 +383,10 @@ static struct se_portal_group *ft_add_tpg(
 static void ft_del_tpg(struct se_portal_group *se_tpg)
 {
 	struct ft_tpg *tpg = container_of(se_tpg, struct ft_tpg, se_tpg);
+<<<<<<< HEAD
+=======
+	struct ft_lport_wwn *ft_wwn = tpg->lport_wwn;
+>>>>>>> v3.18
 
 	pr_debug("del tpg %s\n",
 		    config_item_name(&tpg->se_tpg.tpg_group.cg_item));
@@ -357,7 +397,11 @@ static void ft_del_tpg(struct se_portal_group *se_tpg)
 	synchronize_rcu();
 
 	mutex_lock(&ft_lport_lock);
+<<<<<<< HEAD
 	list_del(&tpg->list);
+=======
+	ft_wwn->tpg = NULL;
+>>>>>>> v3.18
 	if (tpg->tport) {
 		tpg->tport->tpg = NULL;
 		tpg->tport = NULL;
@@ -376,6 +420,7 @@ static void ft_del_tpg(struct se_portal_group *se_tpg)
  */
 struct ft_tpg *ft_lport_find_tpg(struct fc_lport *lport)
 {
+<<<<<<< HEAD
 	struct ft_lport_acl *lacl;
 	struct ft_tpg *tpg;
 
@@ -385,6 +430,13 @@ struct ft_tpg *ft_lport_find_tpg(struct fc_lport *lport)
 				return tpg; /* XXX for now return first entry */
 			return NULL;
 		}
+=======
+	struct ft_lport_wwn *ft_wwn;
+
+	list_for_each_entry(ft_wwn, &ft_wwn_list, ft_wwn_node) {
+		if (ft_wwn->wwpn == lport->wwpn)
+			return ft_wwn->tpg;
+>>>>>>> v3.18
 	}
 	return NULL;
 }
@@ -397,11 +449,16 @@ struct ft_tpg *ft_lport_find_tpg(struct fc_lport *lport)
  * Add lport to allowed config.
  * The name is the WWPN in lower-case ASCII, colon-separated bytes.
  */
+<<<<<<< HEAD
 static struct se_wwn *ft_add_lport(
+=======
+static struct se_wwn *ft_add_wwn(
+>>>>>>> v3.18
 	struct target_fabric_configfs *tf,
 	struct config_group *group,
 	const char *name)
 {
+<<<<<<< HEAD
 	struct ft_lport_acl *lacl;
 	struct ft_lport_acl *old_lacl;
 	u64 wwpn;
@@ -441,6 +498,46 @@ static void ft_del_lport(struct se_wwn *wwn)
 	mutex_unlock(&ft_lport_lock);
 
 	kfree(lacl);
+=======
+	struct ft_lport_wwn *ft_wwn;
+	struct ft_lport_wwn *old_ft_wwn;
+	u64 wwpn;
+
+	pr_debug("add wwn %s\n", name);
+	if (ft_parse_wwn(name, &wwpn, 1) < 0)
+		return NULL;
+	ft_wwn = kzalloc(sizeof(*ft_wwn), GFP_KERNEL);
+	if (!ft_wwn)
+		return NULL;
+	ft_wwn->wwpn = wwpn;
+
+	mutex_lock(&ft_lport_lock);
+	list_for_each_entry(old_ft_wwn, &ft_wwn_list, ft_wwn_node) {
+		if (old_ft_wwn->wwpn == wwpn) {
+			mutex_unlock(&ft_lport_lock);
+			kfree(ft_wwn);
+			return NULL;
+		}
+	}
+	list_add_tail(&ft_wwn->ft_wwn_node, &ft_wwn_list);
+	ft_format_wwn(ft_wwn->name, sizeof(ft_wwn->name), wwpn);
+	mutex_unlock(&ft_lport_lock);
+
+	return &ft_wwn->se_wwn;
+}
+
+static void ft_del_wwn(struct se_wwn *wwn)
+{
+	struct ft_lport_wwn *ft_wwn = container_of(wwn,
+				struct ft_lport_wwn, se_wwn);
+
+	pr_debug("del wwn %s\n", ft_wwn->name);
+	mutex_lock(&ft_lport_lock);
+	list_del(&ft_wwn->ft_wwn_node);
+	mutex_unlock(&ft_lport_lock);
+
+	kfree(ft_wwn);
+>>>>>>> v3.18
 }
 
 static ssize_t ft_wwn_show_attr_version(
@@ -467,7 +564,11 @@ static char *ft_get_fabric_wwn(struct se_portal_group *se_tpg)
 {
 	struct ft_tpg *tpg = se_tpg->se_tpg_fabric_ptr;
 
+<<<<<<< HEAD
 	return tpg->lport_acl->name;
+=======
+	return tpg->lport_wwn->name;
+>>>>>>> v3.18
 }
 
 static u16 ft_get_tag(struct se_portal_group *se_tpg)
@@ -532,12 +633,21 @@ static struct target_core_fabric_ops ft_fabric_ops = {
 	.queue_data_in =		ft_queue_data_in,
 	.queue_status =			ft_queue_status,
 	.queue_tm_rsp =			ft_queue_tm_resp,
+<<<<<<< HEAD
+=======
+	.aborted_task =			ft_aborted_task,
+>>>>>>> v3.18
 	/*
 	 * Setup function pointers for generic logic in
 	 * target_core_fabric_configfs.c
 	 */
+<<<<<<< HEAD
 	.fabric_make_wwn =		&ft_add_lport,
 	.fabric_drop_wwn =		&ft_del_lport,
+=======
+	.fabric_make_wwn =		&ft_add_wwn,
+	.fabric_drop_wwn =		&ft_del_wwn,
+>>>>>>> v3.18
 	.fabric_make_tpg =		&ft_add_tpg,
 	.fabric_drop_tpg =		&ft_del_tpg,
 	.fabric_post_link =		NULL,
@@ -548,7 +658,11 @@ static struct target_core_fabric_ops ft_fabric_ops = {
 	.fabric_drop_nodeacl =		&ft_del_acl,
 };
 
+<<<<<<< HEAD
 int ft_register_configfs(void)
+=======
+static int ft_register_configfs(void)
+>>>>>>> v3.18
 {
 	struct target_fabric_configfs *fabric;
 	int ret;
@@ -567,6 +681,7 @@ int ft_register_configfs(void)
 	/*
 	 * Setup default attribute lists for various fabric->tf_cit_tmpl
 	 */
+<<<<<<< HEAD
 	TF_CIT_TMPL(fabric)->tfc_wwn_cit.ct_attrs = ft_wwn_attrs;
 	TF_CIT_TMPL(fabric)->tfc_tpg_base_cit.ct_attrs = NULL;
 	TF_CIT_TMPL(fabric)->tfc_tpg_attrib_cit.ct_attrs = NULL;
@@ -577,6 +692,18 @@ int ft_register_configfs(void)
 	TF_CIT_TMPL(fabric)->tfc_tpg_nacl_attrib_cit.ct_attrs = NULL;
 	TF_CIT_TMPL(fabric)->tfc_tpg_nacl_auth_cit.ct_attrs = NULL;
 	TF_CIT_TMPL(fabric)->tfc_tpg_nacl_param_cit.ct_attrs = NULL;
+=======
+	fabric->tf_cit_tmpl.tfc_wwn_cit.ct_attrs = ft_wwn_attrs;
+	fabric->tf_cit_tmpl.tfc_tpg_base_cit.ct_attrs = NULL;
+	fabric->tf_cit_tmpl.tfc_tpg_attrib_cit.ct_attrs = NULL;
+	fabric->tf_cit_tmpl.tfc_tpg_param_cit.ct_attrs = NULL;
+	fabric->tf_cit_tmpl.tfc_tpg_np_base_cit.ct_attrs = NULL;
+	fabric->tf_cit_tmpl.tfc_tpg_nacl_base_cit.ct_attrs =
+						    ft_nacl_base_attrs;
+	fabric->tf_cit_tmpl.tfc_tpg_nacl_attrib_cit.ct_attrs = NULL;
+	fabric->tf_cit_tmpl.tfc_tpg_nacl_auth_cit.ct_attrs = NULL;
+	fabric->tf_cit_tmpl.tfc_tpg_nacl_param_cit.ct_attrs = NULL;
+>>>>>>> v3.18
 	/*
 	 * register the fabric for use within TCM
 	 */
@@ -595,7 +722,11 @@ int ft_register_configfs(void)
 	return 0;
 }
 
+<<<<<<< HEAD
 void ft_deregister_configfs(void)
+=======
+static void ft_deregister_configfs(void)
+>>>>>>> v3.18
 {
 	if (!ft_configfs)
 		return;

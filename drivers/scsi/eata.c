@@ -837,7 +837,10 @@ struct hostdata {
 static struct Scsi_Host *sh[MAX_BOARDS];
 static const char *driver_name = "EATA";
 static char sha[MAX_BOARDS];
+<<<<<<< HEAD
 static DEFINE_SPINLOCK(driver_lock);
+=======
+>>>>>>> v3.18
 
 /* Initialize num_boards so that ihdlr can work while detect is in progress */
 static unsigned int num_boards = MAX_BOARDS;
@@ -1097,8 +1100,11 @@ static int port_detect(unsigned long port_base, unsigned int j,
 		goto fail;
 	}
 
+<<<<<<< HEAD
 	spin_lock_irq(&driver_lock);
 
+=======
+>>>>>>> v3.18
 	if (do_dma(port_base, 0, READ_CONFIG_PIO)) {
 #if defined(DEBUG_DETECT)
 		printk("%s: detect, do_dma failed at 0x%03lx.\n", name,
@@ -1221,7 +1227,11 @@ static int port_detect(unsigned long port_base, unsigned int j,
 
 	/* Board detected, allocate its IRQ */
 	if (request_irq(irq, do_interrupt_handler,
+<<<<<<< HEAD
 			IRQF_DISABLED | ((subversion == ESA) ? IRQF_SHARED : 0),
+=======
+			(subversion == ESA) ? IRQF_SHARED : 0,
+>>>>>>> v3.18
 			driver_name, (void *)&sha[j])) {
 		printk("%s: unable to allocate IRQ %u, detaching.\n", name,
 		       irq);
@@ -1238,8 +1248,13 @@ static int port_detect(unsigned long port_base, unsigned int j,
 		struct eata_config *cf;
 		dma_addr_t cf_dma_addr;
 
+<<<<<<< HEAD
 		cf = pci_alloc_consistent(pdev, sizeof(struct eata_config),
 					  &cf_dma_addr);
+=======
+		cf = pci_zalloc_consistent(pdev, sizeof(struct eata_config),
+					   &cf_dma_addr);
+>>>>>>> v3.18
 
 		if (!cf) {
 			printk
@@ -1249,7 +1264,10 @@ static int port_detect(unsigned long port_base, unsigned int j,
 		}
 
 		/* Set board configuration */
+<<<<<<< HEAD
 		memset((char *)cf, 0, sizeof(struct eata_config));
+=======
+>>>>>>> v3.18
 		cf->len = (ushort) H2DEV16((ushort) 510);
 		cf->ocena = 1;
 
@@ -1265,10 +1283,14 @@ static int port_detect(unsigned long port_base, unsigned int j,
 	}
 #endif
 
+<<<<<<< HEAD
 	spin_unlock_irq(&driver_lock);
 	sh[j] = shost = scsi_register(tpnt, sizeof(struct hostdata));
 	spin_lock_irq(&driver_lock);
 
+=======
+	sh[j] = shost = scsi_register(tpnt, sizeof(struct hostdata));
+>>>>>>> v3.18
 	if (shost == NULL) {
 		printk("%s: unable to register host, detaching.\n", name);
 		goto freedma;
@@ -1345,8 +1367,11 @@ static int port_detect(unsigned long port_base, unsigned int j,
 	else
 		sprintf(dma_name, "DMA %u", dma_channel);
 
+<<<<<<< HEAD
 	spin_unlock_irq(&driver_lock);
 
+=======
+>>>>>>> v3.18
 	for (i = 0; i < shost->can_queue; i++)
 		ha->cp[i].cp_dma_addr = pci_map_single(ha->pdev,
 							  &ha->cp[i],
@@ -1399,7 +1424,11 @@ static int port_detect(unsigned long port_base, unsigned int j,
 
 	if (shost->max_id > 8 || shost->max_lun > 8)
 		printk
+<<<<<<< HEAD
 		    ("%s: wide SCSI support enabled, max_id %u, max_lun %u.\n",
+=======
+		    ("%s: wide SCSI support enabled, max_id %u, max_lun %llu.\n",
+>>>>>>> v3.18
 		     ha->board_name, shost->max_id, shost->max_lun);
 
 	for (i = 0; i <= shost->max_channel; i++)
@@ -1439,7 +1468,10 @@ static int port_detect(unsigned long port_base, unsigned int j,
       freeirq:
 	free_irq(irq, &sha[j]);
       freelock:
+<<<<<<< HEAD
 	spin_unlock_irq(&driver_lock);
+=======
+>>>>>>> v3.18
 	release_region(port_base, REGION_SIZE);
       fail:
 	return 0;
@@ -2449,7 +2481,11 @@ static irqreturn_t ihdlr(struct Scsi_Host *shost)
 			       "target_status 0x%x, sense key 0x%x.\n",
 			       ha->board_name,
 			       SCpnt->device->channel, SCpnt->device->id,
+<<<<<<< HEAD
 			       SCpnt->device->lun,
+=======
+			       (u8)SCpnt->device->lun,
+>>>>>>> v3.18
 			       spp->target_status, SCpnt->sense_buffer[2]);
 
 		ha->target_to[SCpnt->device->id][SCpnt->device->channel] = 0;

@@ -28,7 +28,11 @@
 #include <linux/videodev2.h>
 
 #include <media/soc_camera.h>
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+#include <media/v4l2-clk.h>
+>>>>>>> v3.18
 #include <media/v4l2-common.h>
 #include <media/v4l2-ctrls.h>
 
@@ -61,7 +65,11 @@ static const struct ov9640_reg ov9640_regs_dflt[] = {
 
 /* Configurations
  * NOTE: for YUV, alter the following registers:
+<<<<<<< HEAD
  * 		COM12 |= OV9640_COM12_YUV_AVG
+=======
+ *		COM12 |= OV9640_COM12_YUV_AVG
+>>>>>>> v3.18
  *
  *	 for RGB, alter the following registers:
  *		COM7  |= OV9640_COM7_RGB
@@ -287,6 +295,7 @@ static int ov9640_s_ctrl(struct v4l2_ctrl *ctrl)
 	return -EINVAL;
 }
 
+<<<<<<< HEAD
 /* Get chip identification */
 static int ov9640_g_chip_ident(struct v4l2_subdev *sd,
 				struct v4l2_dbg_chip_ident *id)
@@ -299,6 +308,8 @@ static int ov9640_g_chip_ident(struct v4l2_subdev *sd,
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 static int ov9640_get_register(struct v4l2_subdev *sd,
 				struct v4l2_dbg_register *reg)
@@ -337,8 +348,14 @@ static int ov9640_s_power(struct v4l2_subdev *sd, int on)
 {
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 	struct soc_camera_subdev_desc *ssdd = soc_camera_i2c_to_desc(client);
+<<<<<<< HEAD
 
 	return soc_camera_set_power(&client->dev, ssdd, on);
+=======
+	struct ov9640_priv *priv = to_ov9640_sensor(sd);
+
+	return soc_camera_set_power(&client->dev, ssdd, priv->clk, on);
+>>>>>>> v3.18
 }
 
 /* select nearest higher resolution for capture */
@@ -382,7 +399,11 @@ static void ov9640_alter_regs(enum v4l2_mbus_pixelcode code,
 		alt->com13	= OV9640_COM13_RGB_AVG;
 		alt->com15	= OV9640_COM15_RGB_565;
 		break;
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 }
 
 /* Setup registers according to resolution and color encoding */
@@ -615,12 +636,18 @@ static int ov9640_video_probe(struct i2c_client *client)
 	switch (VERSION(pid, ver)) {
 	case OV9640_V2:
 		devname		= "ov9640";
+<<<<<<< HEAD
 		priv->model	= V4L2_IDENT_OV9640;
+=======
+>>>>>>> v3.18
 		priv->revision	= 2;
 		break;
 	case OV9640_V3:
 		devname		= "ov9640";
+<<<<<<< HEAD
 		priv->model	= V4L2_IDENT_OV9640;
+=======
+>>>>>>> v3.18
 		priv->revision	= 3;
 		break;
 	default:
@@ -644,7 +671,10 @@ static const struct v4l2_ctrl_ops ov9640_ctrl_ops = {
 };
 
 static struct v4l2_subdev_core_ops ov9640_core_ops = {
+<<<<<<< HEAD
 	.g_chip_ident		= ov9640_g_chip_ident,
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 	.g_register		= ov9640_get_register,
 	.s_register		= ov9640_set_register,
@@ -716,10 +746,25 @@ static int ov9640_probe(struct i2c_client *client,
 	if (priv->hdl.error)
 		return priv->hdl.error;
 
+<<<<<<< HEAD
 	ret = ov9640_video_probe(client);
 
 	if (ret)
 		v4l2_ctrl_handler_free(&priv->hdl);
+=======
+	priv->clk = v4l2_clk_get(&client->dev, "mclk");
+	if (IS_ERR(priv->clk)) {
+		ret = PTR_ERR(priv->clk);
+		goto eclkget;
+	}
+
+	ret = ov9640_video_probe(client);
+	if (ret) {
+		v4l2_clk_put(priv->clk);
+eclkget:
+		v4l2_ctrl_handler_free(&priv->hdl);
+	}
+>>>>>>> v3.18
 
 	return ret;
 }
@@ -729,6 +774,10 @@ static int ov9640_remove(struct i2c_client *client)
 	struct v4l2_subdev *sd = i2c_get_clientdata(client);
 	struct ov9640_priv *priv = to_ov9640_sensor(sd);
 
+<<<<<<< HEAD
+=======
+	v4l2_clk_put(priv->clk);
+>>>>>>> v3.18
 	v4l2_device_unregister_subdev(&priv->subdev);
 	v4l2_ctrl_handler_free(&priv->hdl);
 	return 0;

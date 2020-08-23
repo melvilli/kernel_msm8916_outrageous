@@ -24,7 +24,10 @@
 #include <linux/types.h>
 #include <linux/pci.h>
 #include <linux/kernel.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 
 #include <asm/mips-boards/msc01_pci.h>
 

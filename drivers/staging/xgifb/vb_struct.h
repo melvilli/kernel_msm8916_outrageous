@@ -1,6 +1,10 @@
 #ifndef _VB_STRUCT_
 #define _VB_STRUCT_
+<<<<<<< HEAD
 #include "../../video/sis/vstruct.h"
+=======
+#include "../../video/fbdev/sis/vstruct.h"
+>>>>>>> v3.18
 
 struct XGI_LVDSCRT1HDataStruct {
 	unsigned char Reg[8];

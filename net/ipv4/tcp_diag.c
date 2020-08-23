@@ -9,10 +9,14 @@
  *      2 of the License, or (at your option) any later version.
  */
 
+<<<<<<< HEAD
 
 #include <linux/module.h>
 #include <linux/net.h>
 #include <linux/sock_diag.h>
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 #include <linux/inet_diag.h>
 
 #include <linux/tcp.h>
@@ -37,17 +41,26 @@ static void tcp_diag_get_info(struct sock *sk, struct inet_diag_msg *r,
 }
 
 static void tcp_diag_dump(struct sk_buff *skb, struct netlink_callback *cb,
+<<<<<<< HEAD
 		struct inet_diag_req_v2 *r, struct nlattr *bc)
+=======
+			  struct inet_diag_req_v2 *r, struct nlattr *bc)
+>>>>>>> v3.18
 {
 	inet_diag_dump_icsk(&tcp_hashinfo, skb, cb, r, bc);
 }
 
 static int tcp_diag_dump_one(struct sk_buff *in_skb, const struct nlmsghdr *nlh,
+<<<<<<< HEAD
 		struct inet_diag_req_v2 *req)
+=======
+			     struct inet_diag_req_v2 *req)
+>>>>>>> v3.18
 {
 	return inet_diag_dump_one_icsk(&tcp_hashinfo, in_skb, nlh, req);
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_INET_DIAG_DESTROY
 static int tcp_diag_destroy(struct sk_buff *in_skb,
 			    struct inet_diag_req_v2 *req)
@@ -62,14 +75,19 @@ static int tcp_diag_destroy(struct sk_buff *in_skb,
 }
 #endif
 
+=======
+>>>>>>> v3.18
 static const struct inet_diag_handler tcp_diag_handler = {
 	.dump		 = tcp_diag_dump,
 	.dump_one	 = tcp_diag_dump_one,
 	.idiag_get_info	 = tcp_diag_get_info,
 	.idiag_type	 = IPPROTO_TCP,
+<<<<<<< HEAD
 #ifdef CONFIG_INET_DIAG_DESTROY
 	.destroy	 = tcp_diag_destroy,
 #endif
+=======
+>>>>>>> v3.18
 };
 
 static int __init tcp_diag_init(void)

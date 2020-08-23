@@ -82,6 +82,7 @@ void *__switch_to(struct task_struct *from, struct task_struct *to)
 	to->thread.prev_sched = from;
 	set_current(to);
 
+<<<<<<< HEAD
 	do {
 		current->thread.saved_task = NULL;
 
@@ -95,6 +96,10 @@ void *__switch_to(struct task_struct *from, struct task_struct *to)
 		to = current->thread.saved_task;
 		from = current;
 	} while (current->thread.saved_task);
+=======
+	switch_threads(&from->thread.switch_buf, &to->thread.switch_buf);
+	arch_switch_to(current);
+>>>>>>> v3.18
 
 	return current->thread.prev_sched;
 }
@@ -370,7 +375,11 @@ int singlestepping(void * t)
 /*
  * Only x86 and x86_64 have an arch_align_stack().
  * All other arches have "#define arch_align_stack(x) (x)"
+<<<<<<< HEAD
  * in their asm/system.h
+=======
+ * in their asm/exec.h
+>>>>>>> v3.18
  * As this is included in UML from asm-um/system-generic.h,
  * we can use it to behave as the subarch does.
  */

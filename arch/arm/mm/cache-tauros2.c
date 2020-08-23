@@ -33,7 +33,11 @@
  * outer cache operations into the kernel image if the kernel has been
  * configured to support a pre-v7 CPU.
  */
+<<<<<<< HEAD
 #if __LINUX_ARM_ARCH__ < 7
+=======
+#ifdef CONFIG_CPU_32v5
+>>>>>>> v3.18
 /*
  * Low-level cache maintenance operations.
  */
@@ -229,6 +233,7 @@ static void __init tauros2_internal_init(unsigned int features)
 	}
 #endif
 
+<<<<<<< HEAD
 #ifdef CONFIG_CPU_32v6
 	/*
 	 * Check whether this CPU lacks support for the v7 hierarchical
@@ -256,6 +261,8 @@ static void __init tauros2_internal_init(unsigned int features)
 	}
 #endif
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_CPU_32v7
 	/*
 	 * Check whether this CPU has support for the v7 hierarchical

@@ -30,6 +30,7 @@
 
 
 #define NAT_TAB_MASK	15
+<<<<<<< HEAD
 static struct tcf_common *tcf_nat_ht[NAT_TAB_MASK + 1];
 static u32 nat_idx_gen;
 static DEFINE_RWLOCK(nat_lock);
@@ -39,6 +40,8 @@ static struct tcf_hashinfo nat_hash_info = {
 	.hmask	=	NAT_TAB_MASK,
 	.lock	=	&nat_lock,
 };
+=======
+>>>>>>> v3.18
 
 static const struct nla_policy nat_policy[TCA_NAT_MAX + 1] = {
 	[TCA_NAT_PARMS]	= { .len = sizeof(struct tc_nat) },
@@ -51,7 +54,10 @@ static int tcf_nat_init(struct net *net, struct nlattr *nla, struct nlattr *est,
 	struct tc_nat *parm;
 	int ret = 0, err;
 	struct tcf_nat *p;
+<<<<<<< HEAD
 	struct tcf_common *pc;
+=======
+>>>>>>> v3.18
 
 	if (nla == NULL)
 		return -EINVAL;
@@ -64,6 +70,7 @@ static int tcf_nat_init(struct net *net, struct nlattr *nla, struct nlattr *est,
 		return -EINVAL;
 	parm = nla_data(tb[TCA_NAT_PARMS]);
 
+<<<<<<< HEAD
 	pc = tcf_hash_check(parm->index, a, bind, &nat_hash_info);
 	if (!pc) {
 		pc = tcf_hash_create(parm->index, est, a, sizeof(*p), bind,
@@ -79,6 +86,21 @@ static int tcf_nat_init(struct net *net, struct nlattr *nla, struct nlattr *est,
 			return -EEXIST;
 		}
 	}
+=======
+	if (!tcf_hash_check(parm->index, a, bind)) {
+		ret = tcf_hash_create(parm->index, est, a, sizeof(*p), bind);
+		if (ret)
+			return ret;
+		ret = ACT_P_CREATED;
+	} else {
+		if (bind)
+			return 0;
+		tcf_hash_release(a, bind);
+		if (!ovr)
+			return -EEXIST;
+	}
+	p = to_tcf_nat(a);
+>>>>>>> v3.18
 
 	spin_lock_bh(&p->tcf_lock);
 	p->old_addr = parm->old_addr;
@@ -90,11 +112,16 @@ static int tcf_nat_init(struct net *net, struct nlattr *nla, struct nlattr *est,
 	spin_unlock_bh(&p->tcf_lock);
 
 	if (ret == ACT_P_CREATED)
+<<<<<<< HEAD
 		tcf_hash_insert(pc, &nat_hash_info);
+=======
+		tcf_hash_insert(a);
+>>>>>>> v3.18
 
 	return ret;
 }
 
+<<<<<<< HEAD
 static int tcf_nat_cleanup(struct tc_action *a, int bind)
 {
 	struct tcf_nat *p = a->priv;
@@ -102,6 +129,8 @@ static int tcf_nat_cleanup(struct tc_action *a, int bind)
 	return tcf_hash_release(&p->common, bind, &nat_hash_info);
 }
 
+=======
+>>>>>>> v3.18
 static int tcf_nat(struct sk_buff *skb, const struct tc_action *a,
 		   struct tcf_result *res)
 {
@@ -301,6 +330,7 @@ nla_put_failure:
 
 static struct tc_action_ops act_nat_ops = {
 	.kind		=	"nat",
+<<<<<<< HEAD
 	.hinfo		=	&nat_hash_info,
 	.type		=	TCA_ACT_NAT,
 	.capab		=	TCA_CAP_NONE,
@@ -311,6 +341,13 @@ static struct tc_action_ops act_nat_ops = {
 	.lookup		=	tcf_hash_search,
 	.init		=	tcf_nat_init,
 	.walk		=	tcf_generic_walker
+=======
+	.type		=	TCA_ACT_NAT,
+	.owner		=	THIS_MODULE,
+	.act		=	tcf_nat,
+	.dump		=	tcf_nat_dump,
+	.init		=	tcf_nat_init,
+>>>>>>> v3.18
 };
 
 MODULE_DESCRIPTION("Stateless NAT actions");
@@ -318,7 +355,11 @@ MODULE_LICENSE("GPL");
 
 static int __init nat_init_module(void)
 {
+<<<<<<< HEAD
 	return tcf_register_action(&act_nat_ops);
+=======
+	return tcf_register_action(&act_nat_ops, NAT_TAB_MASK);
+>>>>>>> v3.18
 }
 
 static void __exit nat_cleanup_module(void)

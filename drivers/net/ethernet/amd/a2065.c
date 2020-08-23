@@ -57,6 +57,10 @@
 #include <linux/zorro.h>
 #include <linux/bitops.h>
 
+<<<<<<< HEAD
+=======
+#include <asm/byteorder.h>
+>>>>>>> v3.18
 #include <asm/irq.h>
 #include <asm/amigaints.h>
 #include <asm/amigahw.h>
@@ -678,6 +682,10 @@ static int a2065_init_one(struct zorro_dev *z,
 	unsigned long base_addr = board + A2065_LANCE;
 	unsigned long mem_start = board + A2065_RAM;
 	struct resource *r1, *r2;
+<<<<<<< HEAD
+=======
+	u32 serial;
+>>>>>>> v3.18
 	int err;
 
 	r1 = request_mem_region(base_addr, sizeof(struct lance_regs),
@@ -702,6 +710,10 @@ static int a2065_init_one(struct zorro_dev *z,
 	r1->name = dev->name;
 	r2->name = dev->name;
 
+<<<<<<< HEAD
+=======
+	serial = be32_to_cpu(z->rom.er_SerialNumber);
+>>>>>>> v3.18
 	dev->dev_addr[0] = 0x00;
 	if (z->id != ZORRO_PROD_AMERISTAR_A2065) {	/* Commodore */
 		dev->dev_addr[1] = 0x80;
@@ -710,11 +722,19 @@ static int a2065_init_one(struct zorro_dev *z,
 		dev->dev_addr[1] = 0x00;
 		dev->dev_addr[2] = 0x9f;
 	}
+<<<<<<< HEAD
 	dev->dev_addr[3] = (z->rom.er_SerialNumber >> 16) & 0xff;
 	dev->dev_addr[4] = (z->rom.er_SerialNumber >> 8) & 0xff;
 	dev->dev_addr[5] = z->rom.er_SerialNumber & 0xff;
 	dev->base_addr = ZTWO_VADDR(base_addr);
 	dev->mem_start = ZTWO_VADDR(mem_start);
+=======
+	dev->dev_addr[3] = (serial >> 16) & 0xff;
+	dev->dev_addr[4] = (serial >> 8) & 0xff;
+	dev->dev_addr[5] = serial & 0xff;
+	dev->base_addr = (unsigned long)ZTWO_VADDR(base_addr);
+	dev->mem_start = (unsigned long)ZTWO_VADDR(mem_start);
+>>>>>>> v3.18
 	dev->mem_end = dev->mem_start + A2065_RAM_SIZE;
 
 	priv->ll = (volatile struct lance_regs *)dev->base_addr;

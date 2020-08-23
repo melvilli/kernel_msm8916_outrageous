@@ -40,6 +40,10 @@
 #include <asm/firmware.h>
 #include <asm/rtas.h>
 #include <asm/cputhreads.h>
+<<<<<<< HEAD
+=======
+#include <asm/code-patching.h>
+>>>>>>> v3.18
 
 #include "interrupt.h"
 #include <asm/udbg.h>
@@ -70,8 +74,13 @@ static cpumask_t of_spin_map;
 static inline int smp_startup_cpu(unsigned int lcpu)
 {
 	int status;
+<<<<<<< HEAD
 	unsigned long start_here = __pa((u32)*((unsigned long *)
 					       generic_secondary_smp_init));
+=======
+	unsigned long start_here =
+			__pa(ppc_function_entry(generic_secondary_smp_init));
+>>>>>>> v3.18
 	unsigned int pcpu;
 	int start_cpu;
 
@@ -136,6 +145,7 @@ static int smp_cell_kick_cpu(int nr)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int smp_cell_cpu_bootable(unsigned int nr)
 {
 	/* Special case - we inhibit secondary thread startup
@@ -149,12 +159,18 @@ static int smp_cell_cpu_bootable(unsigned int nr)
 
 	return 1;
 }
+=======
+>>>>>>> v3.18
 static struct smp_ops_t bpa_iic_smp_ops = {
 	.message_pass	= iic_message_pass,
 	.probe		= smp_iic_probe,
 	.kick_cpu	= smp_cell_kick_cpu,
 	.setup_cpu	= smp_cell_setup_cpu,
+<<<<<<< HEAD
 	.cpu_bootable	= smp_cell_cpu_bootable,
+=======
+	.cpu_bootable	= smp_generic_cpu_bootable,
+>>>>>>> v3.18
 };
 
 /* This is called very early */

@@ -7,6 +7,11 @@
  * 30 May 2002:	Cleanup, Robert M. Love <rml@tech9.net>
  */
 
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 #include <linux/audit.h>
 #include <linux/capability.h>
 #include <linux/mm.h>
@@ -22,7 +27,10 @@
  */
 
 const kernel_cap_t __cap_empty_set = CAP_EMPTY_SET;
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(__cap_empty_set);
 
 int file_caps_enabled = 1;
@@ -42,6 +50,7 @@ __setup("no_file_caps", file_caps_disable);
 
 static void warn_legacy_capability_use(void)
 {
+<<<<<<< HEAD
 	static int warned;
 	if (!warned) {
 		char name[sizeof(current->comm)];
@@ -51,6 +60,12 @@ static void warn_legacy_capability_use(void)
 		       get_task_comm(name, current));
 		warned = 1;
 	}
+=======
+	char name[sizeof(current->comm)];
+
+	pr_info_once("warning: `%s' uses 32-bit capabilities (legacy support in use)\n",
+		     get_task_comm(name, current));
+>>>>>>> v3.18
 }
 
 /*
@@ -71,6 +86,7 @@ static void warn_legacy_capability_use(void)
 
 static void warn_deprecated_v2(void)
 {
+<<<<<<< HEAD
 	static int warned;
 
 	if (!warned) {
@@ -81,6 +97,12 @@ static void warn_deprecated_v2(void)
 		       get_task_comm(name, current));
 		warned = 1;
 	}
+=======
+	char name[sizeof(current->comm)];
+
+	pr_info_once("warning: `%s' uses deprecated v2 capabilities in a way that may be insecure\n",
+		     get_task_comm(name, current));
+>>>>>>> v3.18
 }
 
 /*
@@ -198,7 +220,11 @@ SYSCALL_DEFINE2(capget, cap_user_header_t, header, cap_user_data_t, dataptr)
 		 *
 		 * An alternative would be to return an error here
 		 * (-ERANGE), but that causes legacy applications to
+<<<<<<< HEAD
 		 * unexpectidly fail; the capget/modify/capset aborts
+=======
+		 * unexpectedly fail; the capget/modify/capset aborts
+>>>>>>> v3.18
 		 * before modification is attempted and the application
 		 * fails.
 		 */
@@ -281,7 +307,11 @@ SYSCALL_DEFINE2(capset, cap_user_header_t, header, const cap_user_data_t, data)
 	if (ret < 0)
 		goto error;
 
+<<<<<<< HEAD
 	audit_log_capset(pid, new, current_cred());
+=======
+	audit_log_capset(new, current_cred());
+>>>>>>> v3.18
 
 	return commit_creds(new);
 
@@ -384,7 +414,11 @@ bool has_capability_noaudit(struct task_struct *t, int cap)
 bool ns_capable(struct user_namespace *ns, int cap)
 {
 	if (unlikely(!cap_valid(cap))) {
+<<<<<<< HEAD
 		printk(KERN_CRIT "capable() called with invalid cap=%u\n", cap);
+=======
+		pr_crit("capable() called with invalid cap=%u\n", cap);
+>>>>>>> v3.18
 		BUG();
 	}
 
@@ -408,7 +442,12 @@ EXPORT_SYMBOL(ns_capable);
  * This does not set PF_SUPERPRIV because the caller may not
  * actually be privileged.
  */
+<<<<<<< HEAD
 bool file_ns_capable(const struct file *file, struct user_namespace *ns, int cap)
+=======
+bool file_ns_capable(const struct file *file, struct user_namespace *ns,
+		     int cap)
+>>>>>>> v3.18
 {
 	if (WARN_ON_ONCE(!cap_valid(cap)))
 		return false;
@@ -437,6 +476,7 @@ bool capable(int cap)
 EXPORT_SYMBOL(capable);
 
 /**
+<<<<<<< HEAD
  * nsown_capable - Check superior capability to one's own user_ns
  * @cap: The capability in question
  *
@@ -449,6 +489,8 @@ bool nsown_capable(int cap)
 }
 
 /**
+=======
+>>>>>>> v3.18
  * capable_wrt_inode_uidgid - Check nsown_capable and uid and gid mapped
  * @inode: The inode in question
  * @cap: The capability in question
@@ -464,3 +506,7 @@ bool capable_wrt_inode_uidgid(const struct inode *inode, int cap)
 	return ns_capable(ns, cap) && kuid_has_mapping(ns, inode->i_uid) &&
 		kgid_has_mapping(ns, inode->i_gid);
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(capable_wrt_inode_uidgid);
+>>>>>>> v3.18

@@ -23,6 +23,7 @@
 #include <linux/netfilter/ipset/ip_set.h>
 #include <linux/netfilter/ipset/ip_set_hash.h>
 
+<<<<<<< HEAD
 #define REVISION_MIN	0
 /*			1    nomatch flag support added */
 /*			2    /0 support added */
@@ -31,6 +32,19 @@
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Jozsef Kadlecsik <kadlec@blackhole.kfki.hu>");
 IP_SET_MODULE_DESC("hash:net,iface", REVISION_MIN, REVISION_MAX);
+=======
+#define IPSET_TYPE_REV_MIN	0
+/*				1    nomatch flag support added */
+/*				2    /0 support added */
+/*				3    Counters support added */
+/*				4    Comments support added */
+/*				5    Forceadd support added */
+#define IPSET_TYPE_REV_MAX	6 /* skbinfo support added */
+
+MODULE_LICENSE("GPL");
+MODULE_AUTHOR("Jozsef Kadlecsik <kadlec@blackhole.kfki.hu>");
+IP_SET_MODULE_DESC("hash:net,iface", IPSET_TYPE_REV_MIN, IPSET_TYPE_REV_MAX);
+>>>>>>> v3.18
 MODULE_ALIAS("ip_set_hash:net,iface");
 
 /* Interface name rbtree */
@@ -45,6 +59,7 @@ struct iface_node {
 static void
 rbtree_destroy(struct rb_root *root)
 {
+<<<<<<< HEAD
 	struct rb_node *p, *n = root->rb_node;
 	struct iface_node *node;
 
@@ -70,6 +85,14 @@ rbtree_destroy(struct rb_root *root)
 		kfree(node);
 		n = p;
 	}
+=======
+	struct iface_node *node, *next;
+
+	rbtree_postorder_for_each_entry_safe(node, next, root, node)
+		kfree(node);
+
+	*root = RB_ROOT;
+>>>>>>> v3.18
 }
 
 static int
@@ -134,7 +157,11 @@ iface_add(struct rb_root *root, const char **iface)
 
 #define STREQ(a, b)	(strcmp(a, b) == 0)
 
+<<<<<<< HEAD
 /* IPv4 variants */
+=======
+/* IPv4 variant */
+>>>>>>> v3.18
 
 struct hash_netiface4_elem_hashed {
 	__be32 ip;
@@ -144,7 +171,11 @@ struct hash_netiface4_elem_hashed {
 	u8 elem;
 };
 
+<<<<<<< HEAD
 /* Member elements without timeout */
+=======
+/* Member elements */
+>>>>>>> v3.18
 struct hash_netiface4_elem {
 	__be32 ip;
 	u8 physdev;
@@ -154,6 +185,7 @@ struct hash_netiface4_elem {
 	const char *iface;
 };
 
+<<<<<<< HEAD
 struct hash_netiface4t_elem {
 	__be32 ip;
 	u8 physdev;
@@ -185,6 +217,8 @@ struct hash_netiface4ct_elem {
 	unsigned long timeout;
 };
 
+=======
+>>>>>>> v3.18
 /* Common functions */
 
 static inline bool
@@ -265,10 +299,17 @@ hash_netiface4_kadt(struct ip_set *set, const struct sk_buff *skb,
 	struct hash_netiface *h = set->data;
 	ipset_adtfn adtfn = set->variant->adt[adt];
 	struct hash_netiface4_elem e = {
+<<<<<<< HEAD
 		.cidr = h->nets[0].cidr ? h->nets[0].cidr : HOST_MASK,
 		.elem = 1,
 	};
 	struct ip_set_ext ext = IP_SET_INIT_KEXT(skb, opt, h);
+=======
+		.cidr = IP_SET_INIT_CIDR(h->nets[0].cidr[0], HOST_MASK),
+		.elem = 1,
+	};
+	struct ip_set_ext ext = IP_SET_INIT_KEXT(skb, opt, set);
+>>>>>>> v3.18
 	int ret;
 
 	if (e.cidr == 0)
@@ -284,7 +325,11 @@ hash_netiface4_kadt(struct ip_set *set, const struct sk_buff *skb,
 #define SRCDIR		(opt->flags & IPSET_DIM_TWO_SRC)
 
 	if (opt->cmdflags & IPSET_FLAG_PHYSDEV) {
+<<<<<<< HEAD
 #ifdef CONFIG_BRIDGE_NETFILTER
+=======
+#if IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
+>>>>>>> v3.18
 		const struct nf_bridge_info *nf_bridge = skb->nf_bridge;
 
 		if (!nf_bridge)
@@ -319,8 +364,13 @@ hash_netiface4_uadt(struct ip_set *set, struct nlattr *tb[],
 	struct hash_netiface *h = set->data;
 	ipset_adtfn adtfn = set->variant->adt[adt];
 	struct hash_netiface4_elem e = { .cidr = HOST_MASK, .elem = 1 };
+<<<<<<< HEAD
 	struct ip_set_ext ext = IP_SET_INIT_UEXT(h);
 	u32 ip = 0, ip_to, last;
+=======
+	struct ip_set_ext ext = IP_SET_INIT_UEXT(set);
+	u32 ip = 0, ip_to = 0, last;
+>>>>>>> v3.18
 	char iface[IFNAMSIZ];
 	int ret;
 
@@ -329,7 +379,14 @@ hash_netiface4_uadt(struct ip_set *set, struct nlattr *tb[],
 		     !ip_set_optattr_netorder(tb, IPSET_ATTR_TIMEOUT) ||
 		     !ip_set_optattr_netorder(tb, IPSET_ATTR_CADT_FLAGS) ||
 		     !ip_set_optattr_netorder(tb, IPSET_ATTR_PACKETS) ||
+<<<<<<< HEAD
 		     !ip_set_optattr_netorder(tb, IPSET_ATTR_BYTES)))
+=======
+		     !ip_set_optattr_netorder(tb, IPSET_ATTR_BYTES) ||
+		     !ip_set_optattr_netorder(tb, IPSET_ATTR_SKBMARK) ||
+		     !ip_set_optattr_netorder(tb, IPSET_ATTR_SKBPRIO) ||
+		     !ip_set_optattr_netorder(tb, IPSET_ATTR_SKBQUEUE)))
+>>>>>>> v3.18
 		return -IPSET_ERR_PROTOCOL;
 
 	if (tb[IPSET_ATTR_LINENO])
@@ -368,7 +425,11 @@ hash_netiface4_uadt(struct ip_set *set, struct nlattr *tb[],
 	if (adt == IPSET_TEST || !tb[IPSET_ATTR_IP_TO]) {
 		e.ip = htonl(ip & ip_set_hostmask(e.cidr));
 		ret = adtfn(set, &e, &ext, &ext, flags);
+<<<<<<< HEAD
 		return ip_set_enomatch(ret, flags, adt) ? 1 :
+=======
+		return ip_set_enomatch(ret, flags, adt, set) ? -ret :
+>>>>>>> v3.18
 		       ip_set_eexist(ret, flags) ? 0 : ret;
 	}
 
@@ -399,7 +460,11 @@ hash_netiface4_uadt(struct ip_set *set, struct nlattr *tb[],
 	return ret;
 }
 
+<<<<<<< HEAD
 /* IPv6 variants */
+=======
+/* IPv6 variant */
+>>>>>>> v3.18
 
 struct hash_netiface6_elem_hashed {
 	union nf_inet_addr ip;
@@ -418,6 +483,7 @@ struct hash_netiface6_elem {
 	const char *iface;
 };
 
+<<<<<<< HEAD
 struct hash_netiface6t_elem {
 	union nf_inet_addr ip;
 	u8 physdev;
@@ -449,6 +515,8 @@ struct hash_netiface6ct_elem {
 	unsigned long timeout;
 };
 
+=======
+>>>>>>> v3.18
 /* Common functions */
 
 static inline bool
@@ -534,10 +602,17 @@ hash_netiface6_kadt(struct ip_set *set, const struct sk_buff *skb,
 	struct hash_netiface *h = set->data;
 	ipset_adtfn adtfn = set->variant->adt[adt];
 	struct hash_netiface6_elem e = {
+<<<<<<< HEAD
 		.cidr = h->nets[0].cidr ? h->nets[0].cidr : HOST_MASK,
 		.elem = 1,
 	};
 	struct ip_set_ext ext = IP_SET_INIT_KEXT(skb, opt, h);
+=======
+		.cidr = IP_SET_INIT_CIDR(h->nets[0].cidr[0], HOST_MASK),
+		.elem = 1,
+	};
+	struct ip_set_ext ext = IP_SET_INIT_KEXT(skb, opt, set);
+>>>>>>> v3.18
 	int ret;
 
 	if (e.cidr == 0)
@@ -549,7 +624,11 @@ hash_netiface6_kadt(struct ip_set *set, const struct sk_buff *skb,
 	ip6_netmask(&e.ip, e.cidr);
 
 	if (opt->cmdflags & IPSET_FLAG_PHYSDEV) {
+<<<<<<< HEAD
 #ifdef CONFIG_BRIDGE_NETFILTER
+=======
+#if IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
+>>>>>>> v3.18
 		const struct nf_bridge_info *nf_bridge = skb->nf_bridge;
 
 		if (!nf_bridge)
@@ -584,7 +663,11 @@ hash_netiface6_uadt(struct ip_set *set, struct nlattr *tb[],
 	struct hash_netiface *h = set->data;
 	ipset_adtfn adtfn = set->variant->adt[adt];
 	struct hash_netiface6_elem e = { .cidr = HOST_MASK, .elem = 1 };
+<<<<<<< HEAD
 	struct ip_set_ext ext = IP_SET_INIT_UEXT(h);
+=======
+	struct ip_set_ext ext = IP_SET_INIT_UEXT(set);
+>>>>>>> v3.18
 	char iface[IFNAMSIZ];
 	int ret;
 
@@ -593,7 +676,14 @@ hash_netiface6_uadt(struct ip_set *set, struct nlattr *tb[],
 		     !ip_set_optattr_netorder(tb, IPSET_ATTR_TIMEOUT) ||
 		     !ip_set_optattr_netorder(tb, IPSET_ATTR_CADT_FLAGS) ||
 		     !ip_set_optattr_netorder(tb, IPSET_ATTR_PACKETS) ||
+<<<<<<< HEAD
 		     !ip_set_optattr_netorder(tb, IPSET_ATTR_BYTES)))
+=======
+		     !ip_set_optattr_netorder(tb, IPSET_ATTR_BYTES) ||
+		     !ip_set_optattr_netorder(tb, IPSET_ATTR_SKBMARK) ||
+		     !ip_set_optattr_netorder(tb, IPSET_ATTR_SKBPRIO) ||
+		     !ip_set_optattr_netorder(tb, IPSET_ATTR_SKBQUEUE)))
+>>>>>>> v3.18
 		return -IPSET_ERR_PROTOCOL;
 	if (unlikely(tb[IPSET_ATTR_IP_TO]))
 		return -IPSET_ERR_HASH_RANGE_UNSUPPORTED;
@@ -634,7 +724,11 @@ hash_netiface6_uadt(struct ip_set *set, struct nlattr *tb[],
 
 	ret = adtfn(set, &e, &ext, &ext, flags);
 
+<<<<<<< HEAD
 	return ip_set_enomatch(ret, flags, adt) ? 1 :
+=======
+	return ip_set_enomatch(ret, flags, adt, set) ? -ret :
+>>>>>>> v3.18
 	       ip_set_eexist(ret, flags) ? 0 : ret;
 }
 
@@ -645,8 +739,13 @@ static struct ip_set_type hash_netiface_type __read_mostly = {
 			  IPSET_TYPE_NOMATCH,
 	.dimension	= IPSET_DIM_TWO,
 	.family		= NFPROTO_UNSPEC,
+<<<<<<< HEAD
 	.revision_min	= REVISION_MIN,
 	.revision_max	= REVISION_MAX,
+=======
+	.revision_min	= IPSET_TYPE_REV_MIN,
+	.revision_max	= IPSET_TYPE_REV_MAX,
+>>>>>>> v3.18
 	.create		= hash_netiface_create,
 	.create_policy	= {
 		[IPSET_ATTR_HASHSIZE]	= { .type = NLA_U32 },
@@ -668,6 +767,13 @@ static struct ip_set_type hash_netiface_type __read_mostly = {
 		[IPSET_ATTR_LINENO]	= { .type = NLA_U32 },
 		[IPSET_ATTR_BYTES]	= { .type = NLA_U64 },
 		[IPSET_ATTR_PACKETS]	= { .type = NLA_U64 },
+<<<<<<< HEAD
+=======
+		[IPSET_ATTR_COMMENT]	= { .type = NLA_NUL_STRING },
+		[IPSET_ATTR_SKBMARK]	= { .type = NLA_U64 },
+		[IPSET_ATTR_SKBPRIO]	= { .type = NLA_U32 },
+		[IPSET_ATTR_SKBQUEUE]	= { .type = NLA_U16 },
+>>>>>>> v3.18
 	},
 	.me		= THIS_MODULE,
 };

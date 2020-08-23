@@ -20,9 +20,13 @@
 	GNU General Public License for more details.
 
 	You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
 	along with this program; if not, write to the
 	Free Software Foundation, Inc.,
 	59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+	along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
  */
 
 /*
@@ -35,6 +39,7 @@
 #define RT2800PCI_H
 
 /*
+<<<<<<< HEAD
  * Queue register offset macros
  */
 #define TX_QUEUE_REG_OFFSET		0x10
@@ -44,12 +49,15 @@
 #define TX_DTX_IDX(__x)			(TX_DTX_IDX0 + ((__x) * TX_QUEUE_REG_OFFSET))
 
 /*
+=======
+>>>>>>> v3.18
  * 8051 firmware image.
  */
 #define FIRMWARE_RT2860			"rt2860.bin"
 #define FIRMWARE_RT3290			"rt3290.bin"
 #define FIRMWARE_IMAGE_BASE		0x2000
 
+<<<<<<< HEAD
 /*
  * DMA descriptor defines.
  */
@@ -138,4 +146,6 @@
 #define RXD_W3_PLCP_SIGNAL		FIELD32(0x00020000)
 #define RXD_W3_PLCP_RSSI		FIELD32(0x00040000)
 
+=======
+>>>>>>> v3.18
 #endif /* RT2800PCI_H */

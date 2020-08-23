@@ -9,6 +9,10 @@ struct thread_map {
 	pid_t map[];
 };
 
+<<<<<<< HEAD
+=======
+struct thread_map *thread_map__new_dummy(void);
+>>>>>>> v3.18
 struct thread_map *thread_map__new_by_pid(pid_t pid);
 struct thread_map *thread_map__new_by_tid(pid_t tid);
 struct thread_map *thread_map__new_by_uid(uid_t uid);

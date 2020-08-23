@@ -1217,7 +1217,11 @@ free:
 	return ret;
 }
 
+<<<<<<< HEAD
 int atom_execute_table(struct atom_context *ctx, int index, uint32_t * params)
+=======
+int atom_execute_table_scratch_unlocked(struct atom_context *ctx, int index, uint32_t * params)
+>>>>>>> v3.18
 {
 	int r;
 
@@ -1238,6 +1242,18 @@ int atom_execute_table(struct atom_context *ctx, int index, uint32_t * params)
 	return r;
 }
 
+<<<<<<< HEAD
+=======
+int atom_execute_table(struct atom_context *ctx, int index, uint32_t * params)
+{
+	int r;
+	mutex_lock(&ctx->scratch_mutex);
+	r = atom_execute_table_scratch_unlocked(ctx, index, params);
+	mutex_unlock(&ctx->scratch_mutex);
+	return r;
+}
+
+>>>>>>> v3.18
 static int atom_iio_len[] = { 1, 2, 3, 3, 3, 3, 4, 4, 4, 3 };
 
 static void atom_index_iio(struct atom_context *ctx, int base)

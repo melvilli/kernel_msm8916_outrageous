@@ -20,12 +20,22 @@
 #include <linux/init.h>
 #include <linux/of.h>
 #include <linux/smp.h>
+<<<<<<< HEAD
+=======
+#include <linux/types.h>
+>>>>>>> v3.18
 
 #include <asm/cacheflush.h>
 #include <asm/cpu_ops.h>
 #include <asm/cputype.h>
 #include <asm/smp_plat.h>
 
+<<<<<<< HEAD
+=======
+extern void secondary_holding_pen(void);
+volatile unsigned long secondary_holding_pen_release = INVALID_HWID;
+
+>>>>>>> v3.18
 static phys_addr_t cpu_release_addr[NR_CPUS];
 
 /*
@@ -62,12 +72,29 @@ static int smp_spin_table_cpu_init(struct device_node *dn, unsigned int cpu)
 
 static int smp_spin_table_cpu_prepare(unsigned int cpu)
 {
+<<<<<<< HEAD
 	void **release_addr;
+=======
+	__le64 __iomem *release_addr;
+>>>>>>> v3.18
 
 	if (!cpu_release_addr[cpu])
 		return -ENODEV;
 
+<<<<<<< HEAD
 	release_addr = __va(cpu_release_addr[cpu]);
+=======
+	/*
+	 * The cpu-release-addr may or may not be inside the linear mapping.
+	 * As ioremap_cache will either give us a new mapping or reuse the
+	 * existing linear mapping, we can use it to cover both cases. In
+	 * either case the memory will be MT_NORMAL.
+	 */
+	release_addr = ioremap_cache(cpu_release_addr[cpu],
+				     sizeof(*release_addr));
+	if (!release_addr)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	/*
 	 * We write the release address as LE regardless of the native
@@ -76,15 +103,26 @@ static int smp_spin_table_cpu_prepare(unsigned int cpu)
 	 * boot-loader's endianess before jumping. This is mandated by
 	 * the boot protocol.
 	 */
+<<<<<<< HEAD
 	release_addr[0] = (void *) cpu_to_le64(__pa(secondary_holding_pen));
 
 	__flush_dcache_area(release_addr, sizeof(release_addr[0]));
+=======
+	writeq_relaxed(__pa(secondary_holding_pen), release_addr);
+	__flush_dcache_area((__force void *)release_addr,
+			    sizeof(*release_addr));
+>>>>>>> v3.18
 
 	/*
 	 * Send an event to wake up the secondary CPU.
 	 */
 	sev();
 
+<<<<<<< HEAD
+=======
+	iounmap(release_addr);
+
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -103,10 +141,17 @@ static int smp_spin_table_cpu_boot(unsigned int cpu)
 	return 0;
 }
 
+<<<<<<< HEAD
 static const struct cpu_operations smp_spin_table_ops = {
+=======
+const struct cpu_operations smp_spin_table_ops = {
+>>>>>>> v3.18
 	.name		= "spin-table",
 	.cpu_init	= smp_spin_table_cpu_init,
 	.cpu_prepare	= smp_spin_table_cpu_prepare,
 	.cpu_boot	= smp_spin_table_cpu_boot,
 };
+<<<<<<< HEAD
 CPU_METHOD_OF_DECLARE(spin_table, &smp_spin_table_ops);
+=======
+>>>>>>> v3.18

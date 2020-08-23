@@ -100,6 +100,13 @@ static void v4l2_of_parse_parallel_bus(const struct device_node *node,
 	if (!of_property_read_u32(node, "data-shift", &v))
 		bus->data_shift = v;
 
+<<<<<<< HEAD
+=======
+	if (!of_property_read_u32(node, "sync-on-green-active", &v))
+		flags |= v ? V4L2_MBUS_VIDEO_SOG_ACTIVE_HIGH :
+			V4L2_MBUS_VIDEO_SOG_ACTIVE_LOW;
+
+>>>>>>> v3.18
 	bus->flags = flags;
 
 }
@@ -117,6 +124,7 @@ static void v4l2_of_parse_parallel_bus(const struct device_node *node,
  * the bus as serial CSI-2 and clock-noncontinuous isn't set, we set the
  * V4L2_MBUS_CSI2_CONTINUOUS_CLOCK flag.
  * The caller should hold a reference to @node.
+<<<<<<< HEAD
  */
 void v4l2_of_parse_endpoint(const struct device_node *node,
 			    struct v4l2_of_endpoint *endpoint)
@@ -132,6 +140,17 @@ void v4l2_of_parse_endpoint(const struct device_node *node,
 	 */
 	of_property_read_u32(port_node, "reg", &endpoint->port);
 	of_property_read_u32(node, "reg", &endpoint->id);
+=======
+ *
+ * Return: 0.
+ */
+int v4l2_of_parse_endpoint(const struct device_node *node,
+			   struct v4l2_of_endpoint *endpoint)
+{
+	of_graph_parse_endpoint(node, &endpoint->base);
+	endpoint->bus_type = 0;
+	memset(&endpoint->bus, 0, sizeof(endpoint->bus));
+>>>>>>> v3.18
 
 	v4l2_of_parse_csi_bus(node, endpoint);
 	/*
@@ -141,6 +160,7 @@ void v4l2_of_parse_endpoint(const struct device_node *node,
 	if (endpoint->bus.mipi_csi2.flags == 0)
 		v4l2_of_parse_parallel_bus(node, endpoint);
 
+<<<<<<< HEAD
 	of_node_put(port_node);
 }
 EXPORT_SYMBOL(v4l2_of_parse_endpoint);
@@ -264,3 +284,8 @@ struct device_node *v4l2_of_get_remote_port(const struct device_node *node)
 	return of_get_parent(np);
 }
 EXPORT_SYMBOL(v4l2_of_get_remote_port);
+=======
+	return 0;
+}
+EXPORT_SYMBOL(v4l2_of_parse_endpoint);
+>>>>>>> v3.18

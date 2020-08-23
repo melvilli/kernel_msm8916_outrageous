@@ -202,7 +202,11 @@ static int addrtype_mt_checkentry_v1(const struct xt_mtchk_param *par)
 			return -EINVAL;
 		}
 		if ((info->source | info->dest) >= XT_ADDRTYPE_PROHIBIT) {
+<<<<<<< HEAD
 			pr_err("ipv6 PROHIBT (THROW, NAT ..) matching not supported\n");
+=======
+			pr_err("ipv6 PROHIBIT (THROW, NAT ..) matching not supported\n");
+>>>>>>> v3.18
 			return -EINVAL;
 		}
 		if ((info->source | info->dest) & XT_ADDRTYPE_BROADCAST) {

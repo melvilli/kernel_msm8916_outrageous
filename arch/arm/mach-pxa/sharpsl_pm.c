@@ -860,18 +860,30 @@ static int sharpsl_pm_probe(struct platform_device *pdev)
 
 	/* Register interrupt handlers */
 	irq = gpio_to_irq(sharpsl_pm.machinfo->gpio_acin);
+<<<<<<< HEAD
 	if (request_irq(irq, sharpsl_ac_isr, IRQF_DISABLED | IRQF_TRIGGER_RISING | IRQF_TRIGGER_FALLING, "AC Input Detect", sharpsl_ac_isr)) {
+=======
+	if (request_irq(irq, sharpsl_ac_isr, IRQF_TRIGGER_RISING | IRQF_TRIGGER_FALLING, "AC Input Detect", sharpsl_ac_isr)) {
+>>>>>>> v3.18
 		dev_err(sharpsl_pm.dev, "Could not get irq %d.\n", irq);
 	}
 
 	irq = gpio_to_irq(sharpsl_pm.machinfo->gpio_batlock);
+<<<<<<< HEAD
 	if (request_irq(irq, sharpsl_fatal_isr, IRQF_DISABLED | IRQF_TRIGGER_FALLING, "Battery Cover", sharpsl_fatal_isr)) {
+=======
+	if (request_irq(irq, sharpsl_fatal_isr, IRQF_TRIGGER_FALLING, "Battery Cover", sharpsl_fatal_isr)) {
+>>>>>>> v3.18
 		dev_err(sharpsl_pm.dev, "Could not get irq %d.\n", irq);
 	}
 
 	if (sharpsl_pm.machinfo->gpio_fatal) {
 		irq = gpio_to_irq(sharpsl_pm.machinfo->gpio_fatal);
+<<<<<<< HEAD
 		if (request_irq(irq, sharpsl_fatal_isr, IRQF_DISABLED | IRQF_TRIGGER_FALLING, "Fatal Battery", sharpsl_fatal_isr)) {
+=======
+		if (request_irq(irq, sharpsl_fatal_isr, IRQF_TRIGGER_FALLING, "Fatal Battery", sharpsl_fatal_isr)) {
+>>>>>>> v3.18
 			dev_err(sharpsl_pm.dev, "Could not get irq %d.\n", irq);
 		}
 	}
@@ -879,7 +891,11 @@ static int sharpsl_pm_probe(struct platform_device *pdev)
 	if (sharpsl_pm.machinfo->batfull_irq) {
 		/* Register interrupt handler. */
 		irq = gpio_to_irq(sharpsl_pm.machinfo->gpio_batfull);
+<<<<<<< HEAD
 		if (request_irq(irq, sharpsl_chrg_full_isr, IRQF_DISABLED | IRQF_TRIGGER_RISING, "CO", sharpsl_chrg_full_isr)) {
+=======
+		if (request_irq(irq, sharpsl_chrg_full_isr, IRQF_TRIGGER_RISING, "CO", sharpsl_chrg_full_isr)) {
+>>>>>>> v3.18
 			dev_err(sharpsl_pm.dev, "Could not get irq %d.\n", irq);
 		}
 	}

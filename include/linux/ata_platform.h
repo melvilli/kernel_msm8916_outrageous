@@ -8,11 +8,14 @@ struct pata_platform_info {
 	 * spacing used by ata_std_ports().
 	 */
 	unsigned int ioport_shift;
+<<<<<<< HEAD
 	/* 
 	 * Indicate platform specific irq types and initial
 	 * IRQ flags when call request_irq()
 	 */
 	unsigned int irq_flags;
+=======
+>>>>>>> v3.18
 };
 
 extern int __pata_platform_probe(struct device *dev,

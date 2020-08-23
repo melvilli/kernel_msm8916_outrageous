@@ -135,6 +135,10 @@ define_machine(sbc8548) {
 	.restart	= fsl_rstcr_restart,
 #ifdef CONFIG_PCI
 	.pcibios_fixup_bus	= fsl_pcibios_fixup_bus,
+<<<<<<< HEAD
+=======
+	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
+>>>>>>> v3.18
 #endif
 	.calibrate_decr = generic_calibrate_decr,
 	.progress	= udbg_progress,

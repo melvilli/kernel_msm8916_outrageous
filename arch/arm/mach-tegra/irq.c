@@ -17,12 +17,23 @@
  *
  */
 
+<<<<<<< HEAD
 #include <linux/kernel.h>
 #include <linux/interrupt.h>
 #include <linux/irq.h>
 #include <linux/io.h>
 #include <linux/of.h>
 #include <linux/irqchip/arm-gic.h>
+=======
+#include <linux/cpu_pm.h>
+#include <linux/interrupt.h>
+#include <linux/io.h>
+#include <linux/irqchip/arm-gic.h>
+#include <linux/irq.h>
+#include <linux/kernel.h>
+#include <linux/of_address.h>
+#include <linux/of.h>
+>>>>>>> v3.18
 #include <linux/syscore_ops.h>
 
 #include "board.h"
@@ -65,6 +76,10 @@ static u32 cpu_ier[TEGRA_MAX_NUM_ICTLRS];
 static u32 cpu_iep[TEGRA_MAX_NUM_ICTLRS];
 
 static u32 ictlr_wake_mask[TEGRA_MAX_NUM_ICTLRS];
+<<<<<<< HEAD
+=======
+static void __iomem *tegra_gic_cpu_base;
+>>>>>>> v3.18
 #endif
 
 bool tegra_pending_sgi(void)
@@ -96,42 +111,77 @@ static inline void tegra_irq_write_mask(unsigned int irq, unsigned long reg)
 
 static void tegra_mask(struct irq_data *d)
 {
+<<<<<<< HEAD
 	if (d->irq < FIRST_LEGACY_IRQ)
 		return;
 
 	tegra_irq_write_mask(d->irq, ICTLR_CPU_IER_CLR);
+=======
+	if (d->hwirq < FIRST_LEGACY_IRQ)
+		return;
+
+	tegra_irq_write_mask(d->hwirq, ICTLR_CPU_IER_CLR);
+>>>>>>> v3.18
 }
 
 static void tegra_unmask(struct irq_data *d)
 {
+<<<<<<< HEAD
 	if (d->irq < FIRST_LEGACY_IRQ)
 		return;
 
 	tegra_irq_write_mask(d->irq, ICTLR_CPU_IER_SET);
+=======
+	if (d->hwirq < FIRST_LEGACY_IRQ)
+		return;
+
+	tegra_irq_write_mask(d->hwirq, ICTLR_CPU_IER_SET);
+>>>>>>> v3.18
 }
 
 static void tegra_ack(struct irq_data *d)
 {
+<<<<<<< HEAD
 	if (d->irq < FIRST_LEGACY_IRQ)
 		return;
 
 	tegra_irq_write_mask(d->irq, ICTLR_CPU_IEP_FIR_CLR);
+=======
+	if (d->hwirq < FIRST_LEGACY_IRQ)
+		return;
+
+	tegra_irq_write_mask(d->hwirq, ICTLR_CPU_IEP_FIR_CLR);
+>>>>>>> v3.18
 }
 
 static void tegra_eoi(struct irq_data *d)
 {
+<<<<<<< HEAD
 	if (d->irq < FIRST_LEGACY_IRQ)
 		return;
 
 	tegra_irq_write_mask(d->irq, ICTLR_CPU_IEP_FIR_CLR);
+=======
+	if (d->hwirq < FIRST_LEGACY_IRQ)
+		return;
+
+	tegra_irq_write_mask(d->hwirq, ICTLR_CPU_IEP_FIR_CLR);
+>>>>>>> v3.18
 }
 
 static int tegra_retrigger(struct irq_data *d)
 {
+<<<<<<< HEAD
 	if (d->irq < FIRST_LEGACY_IRQ)
 		return 0;
 
 	tegra_irq_write_mask(d->irq, ICTLR_CPU_IEP_FIR_SET);
+=======
+	if (d->hwirq < FIRST_LEGACY_IRQ)
+		return 0;
+
+	tegra_irq_write_mask(d->hwirq, ICTLR_CPU_IEP_FIR_SET);
+>>>>>>> v3.18
 
 	return 1;
 }
@@ -139,7 +189,11 @@ static int tegra_retrigger(struct irq_data *d)
 #ifdef CONFIG_PM_SLEEP
 static int tegra_set_wake(struct irq_data *d, unsigned int enable)
 {
+<<<<<<< HEAD
 	u32 irq = d->irq;
+=======
+	u32 irq = d->hwirq;
+>>>>>>> v3.18
 	u32 index, mask;
 
 	if (irq < FIRST_LEGACY_IRQ ||
@@ -213,8 +267,48 @@ int tegra_legacy_irq_syscore_init(void)
 
 	return 0;
 }
+<<<<<<< HEAD
 #else
 #define tegra_set_wake NULL
+=======
+
+static int tegra_gic_notifier(struct notifier_block *self,
+			      unsigned long cmd, void *v)
+{
+	switch (cmd) {
+	case CPU_PM_ENTER:
+		writel_relaxed(0x1E0, tegra_gic_cpu_base + GIC_CPU_CTRL);
+		break;
+	}
+
+	return NOTIFY_OK;
+}
+
+static struct notifier_block tegra_gic_notifier_block = {
+	.notifier_call = tegra_gic_notifier,
+};
+
+static const struct of_device_id tegra114_dt_gic_match[] __initconst = {
+	{ .compatible = "arm,cortex-a15-gic" },
+	{ }
+};
+
+static void tegra114_gic_cpu_pm_registration(void)
+{
+	struct device_node *dn;
+
+	dn = of_find_matching_node(NULL, tegra114_dt_gic_match);
+	if (!dn)
+		return;
+
+	tegra_gic_cpu_base = of_iomap(dn, 1);
+
+	cpu_pm_register_notifier(&tegra_gic_notifier_block);
+}
+#else
+#define tegra_set_wake NULL
+static void tegra114_gic_cpu_pm_registration(void) { }
+>>>>>>> v3.18
 #endif
 
 void __init tegra_init_irq(void)
@@ -252,4 +346,9 @@ void __init tegra_init_irq(void)
 	if (!of_have_populated_dt())
 		gic_init(0, 29, distbase,
 			IO_ADDRESS(TEGRA_ARM_PERIF_BASE + 0x100));
+<<<<<<< HEAD
+=======
+
+	tegra114_gic_cpu_pm_registration();
+>>>>>>> v3.18
 }

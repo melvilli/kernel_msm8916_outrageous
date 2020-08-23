@@ -5,9 +5,15 @@
 # Object files in subdirectories
 
 obj-$(CONFIG_USB)		+= core/
+<<<<<<< HEAD
 obj-$(CONFIG_USB_PHY)		+= phy/
 
 obj-$(CONFIG_USB_DWC3)		+= dwc3/
+=======
+
+obj-$(CONFIG_USB_DWC3)		+= dwc3/
+obj-$(CONFIG_USB_DWC2)		+= dwc2/
+>>>>>>> v3.18
 
 obj-$(CONFIG_USB_MON)		+= mon/
 
@@ -26,7 +32,13 @@ obj-$(CONFIG_USB_HWA_HCD)	+= host/
 obj-$(CONFIG_USB_ISP1760_HCD)	+= host/
 obj-$(CONFIG_USB_IMX21_HCD)	+= host/
 obj-$(CONFIG_USB_FSL_MPH_DR_OF)	+= host/
+<<<<<<< HEAD
 obj-$(CONFIG_USB_ICE40_HCD)	+= host/
+=======
+obj-$(CONFIG_USB_FUSBH200_HCD)	+= host/
+obj-$(CONFIG_USB_FOTG210_HCD)	+= host/
+obj-$(CONFIG_USB_MAX3421_HCD)	+= host/
+>>>>>>> v3.18
 
 obj-$(CONFIG_USB_C67X00_HCD)	+= c67x00/
 
@@ -36,7 +48,10 @@ obj-$(CONFIG_USB_ACM)		+= class/
 obj-$(CONFIG_USB_PRINTER)	+= class/
 obj-$(CONFIG_USB_WDM)		+= class/
 obj-$(CONFIG_USB_TMC)		+= class/
+<<<<<<< HEAD
 obj-$(CONFIG_USB_CCID_BRIDGE)	+= class/
+=======
+>>>>>>> v3.18
 
 obj-$(CONFIG_USB_STORAGE)	+= storage/
 obj-$(CONFIG_USB)		+= storage/
@@ -47,6 +62,10 @@ obj-$(CONFIG_USB_MICROTEK)	+= image/
 obj-$(CONFIG_USB_SERIAL)	+= serial/
 
 obj-$(CONFIG_USB)		+= misc/
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_USB_SUPPORT)	+= phy/
+>>>>>>> v3.18
 obj-$(CONFIG_EARLY_PRINTK_DBGP)	+= early/
 
 obj-$(CONFIG_USB_ATM)		+= atm/
@@ -57,4 +76,10 @@ obj-$(CONFIG_USB_CHIPIDEA)	+= chipidea/
 obj-$(CONFIG_USB_RENESAS_USBHS)	+= renesas_usbhs/
 obj-$(CONFIG_USB_GADGET)	+= gadget/
 
+<<<<<<< HEAD
 obj-$(CONFIG_USB_COMMON)	+= usb-common.o
+=======
+obj-$(CONFIG_USB_COMMON)	+= common/
+
+obj-$(CONFIG_USBIP_CORE)	+= usbip/
+>>>>>>> v3.18

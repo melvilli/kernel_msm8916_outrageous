@@ -1,7 +1,11 @@
 /*
  * Glue Code for assembler optimized version of Blowfish
  *
+<<<<<<< HEAD
  * Copyright © 2011-2013 Jussi Kivilinna <jussi.kivilinna@iki.fi>
+=======
+ * Copyright (c) 2011 Jussi Kivilinna <jussi.kivilinna@mbnet.fi>
+>>>>>>> v3.18
  *
  * CBC & ECB parts based on code (crypto/cbc.c,ecb.c) by:
  *   Copyright (c) 2006 Herbert Xu <herbert@gondor.apana.org.au>
@@ -32,24 +36,59 @@
 #include <linux/module.h>
 #include <linux/types.h>
 #include <crypto/algapi.h>
+<<<<<<< HEAD
 #include <asm/crypto/blowfish.h>
+=======
+>>>>>>> v3.18
 
 /* regular block cipher functions */
 asmlinkage void __blowfish_enc_blk(struct bf_ctx *ctx, u8 *dst, const u8 *src,
 				   bool xor);
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(__blowfish_enc_blk);
 
 asmlinkage void blowfish_dec_blk(struct bf_ctx *ctx, u8 *dst, const u8 *src);
 EXPORT_SYMBOL_GPL(blowfish_dec_blk);
+=======
+asmlinkage void blowfish_dec_blk(struct bf_ctx *ctx, u8 *dst, const u8 *src);
+>>>>>>> v3.18
 
 /* 4-way parallel cipher functions */
 asmlinkage void __blowfish_enc_blk_4way(struct bf_ctx *ctx, u8 *dst,
 					const u8 *src, bool xor);
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(__blowfish_enc_blk_4way);
 
 asmlinkage void blowfish_dec_blk_4way(struct bf_ctx *ctx, u8 *dst,
 				      const u8 *src);
 EXPORT_SYMBOL_GPL(blowfish_dec_blk_4way);
+=======
+asmlinkage void blowfish_dec_blk_4way(struct bf_ctx *ctx, u8 *dst,
+				      const u8 *src);
+
+static inline void blowfish_enc_blk(struct bf_ctx *ctx, u8 *dst, const u8 *src)
+{
+	__blowfish_enc_blk(ctx, dst, src, false);
+}
+
+static inline void blowfish_enc_blk_xor(struct bf_ctx *ctx, u8 *dst,
+					const u8 *src)
+{
+	__blowfish_enc_blk(ctx, dst, src, true);
+}
+
+static inline void blowfish_enc_blk_4way(struct bf_ctx *ctx, u8 *dst,
+					 const u8 *src)
+{
+	__blowfish_enc_blk_4way(ctx, dst, src, false);
+}
+
+static inline void blowfish_enc_blk_xor_4way(struct bf_ctx *ctx, u8 *dst,
+				      const u8 *src)
+{
+	__blowfish_enc_blk_4way(ctx, dst, src, true);
+}
+>>>>>>> v3.18
 
 static void blowfish_encrypt(struct crypto_tfm *tfm, u8 *dst, const u8 *src)
 {
@@ -207,9 +246,12 @@ static unsigned int __cbc_decrypt(struct blkcipher_desc *desc,
 			src -= 1;
 			dst -= 1;
 		} while (nbytes >= bsize * 4);
+<<<<<<< HEAD
 
 		if (nbytes < bsize)
 			goto done;
+=======
+>>>>>>> v3.18
 	}
 
 	/* Handle leftovers */
@@ -465,5 +507,10 @@ module_exit(fini);
 
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("Blowfish Cipher Algorithm, asm optimized");
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("blowfish");
 MODULE_ALIAS_CRYPTO("blowfish-asm");
+=======
+MODULE_ALIAS("blowfish");
+MODULE_ALIAS("blowfish-asm");
+>>>>>>> v3.18

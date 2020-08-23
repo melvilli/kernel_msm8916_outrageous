@@ -6,6 +6,7 @@
  * Authors: Felipe Balbi <balbi@ti.com>,
  *	    Sebastian Andrzej Siewior <bigeasy@linutronix.de>
  *
+<<<<<<< HEAD
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -34,6 +35,16 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+=======
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2  of
+ * the License as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+>>>>>>> v3.18
  */
 
 #include <linux/kernel.h>
@@ -43,13 +54,21 @@
 #include <linux/platform_device.h>
 
 #include <linux/usb/otg.h>
+<<<<<<< HEAD
 #include <linux/usb/nop-usb-xceiv.h>
+=======
+#include <linux/usb/usb_phy_generic.h>
+>>>>>>> v3.18
 
 /* FIXME define these in <linux/pci_ids.h> */
 #define PCI_VENDOR_ID_SYNOPSYS		0x16c3
 #define PCI_DEVICE_ID_SYNOPSYS_HAPSUSB3	0xabcd
 #define PCI_DEVICE_ID_INTEL_BYT		0x0f37
 #define PCI_DEVICE_ID_INTEL_MRFLD	0x119e
+<<<<<<< HEAD
+=======
+#define PCI_DEVICE_ID_INTEL_BSW		0x22B7
+>>>>>>> v3.18
 
 struct dwc3_pci {
 	struct device		*dev;
@@ -60,24 +79,40 @@ struct dwc3_pci {
 
 static int dwc3_pci_register_phys(struct dwc3_pci *glue)
 {
+<<<<<<< HEAD
 	struct nop_usb_xceiv_platform_data pdata;
+=======
+	struct usb_phy_generic_platform_data pdata;
+>>>>>>> v3.18
 	struct platform_device	*pdev;
 	int			ret;
 
 	memset(&pdata, 0x00, sizeof(pdata));
 
+<<<<<<< HEAD
 	pdev = platform_device_alloc("nop_usb_xceiv", 0);
+=======
+	pdev = platform_device_alloc("usb_phy_generic", 0);
+>>>>>>> v3.18
 	if (!pdev)
 		return -ENOMEM;
 
 	glue->usb2_phy = pdev;
 	pdata.type = USB_PHY_TYPE_USB2;
+<<<<<<< HEAD
+=======
+	pdata.gpio_reset = -1;
+>>>>>>> v3.18
 
 	ret = platform_device_add_data(glue->usb2_phy, &pdata, sizeof(pdata));
 	if (ret)
 		goto err1;
 
+<<<<<<< HEAD
 	pdev = platform_device_alloc("nop_usb_xceiv", 1);
+=======
+	pdev = platform_device_alloc("usb_phy_generic", 1);
+>>>>>>> v3.18
 	if (!pdev) {
 		ret = -ENOMEM;
 		goto err1;
@@ -118,6 +153,7 @@ static int dwc3_pci_probe(struct pci_dev *pci,
 	struct resource		res[2];
 	struct platform_device	*dwc3;
 	struct dwc3_pci		*glue;
+<<<<<<< HEAD
 	int			ret = -ENOMEM;
 	struct device		*dev = &pci->dev;
 
@@ -130,12 +166,27 @@ static int dwc3_pci_probe(struct pci_dev *pci,
 	glue->dev = dev;
 
 	ret = pci_enable_device(pci);
+=======
+	int			ret;
+	struct device		*dev = &pci->dev;
+
+	glue = devm_kzalloc(dev, sizeof(*glue), GFP_KERNEL);
+	if (!glue)
+		return -ENOMEM;
+
+	glue->dev = dev;
+
+	ret = pcim_enable_device(pci);
+>>>>>>> v3.18
 	if (ret) {
 		dev_err(dev, "failed to enable pci device\n");
 		return -ENODEV;
 	}
 
+<<<<<<< HEAD
 	pci_set_power_state(pci, PCI_D0);
+=======
+>>>>>>> v3.18
 	pci_set_master(pci);
 
 	ret = dwc3_pci_register_phys(glue);
@@ -147,8 +198,12 @@ static int dwc3_pci_probe(struct pci_dev *pci,
 	dwc3 = platform_device_alloc("dwc3", PLATFORM_DEVID_AUTO);
 	if (!dwc3) {
 		dev_err(dev, "couldn't allocate dwc3 device\n");
+<<<<<<< HEAD
 		ret = -ENOMEM;
 		goto err1;
+=======
+		return -ENOMEM;
+>>>>>>> v3.18
 	}
 
 	memset(res, 0x00, sizeof(struct resource) * ARRAY_SIZE(res));
@@ -165,7 +220,11 @@ static int dwc3_pci_probe(struct pci_dev *pci,
 	ret = platform_device_add_resources(dwc3, res, ARRAY_SIZE(res));
 	if (ret) {
 		dev_err(dev, "couldn't add resources to dwc3 device\n");
+<<<<<<< HEAD
 		goto err1;
+=======
+		return ret;
+>>>>>>> v3.18
 	}
 
 	pci_set_drvdata(pci, glue);
@@ -186,11 +245,15 @@ static int dwc3_pci_probe(struct pci_dev *pci,
 	return 0;
 
 err3:
+<<<<<<< HEAD
 	pci_set_drvdata(pci, NULL);
 	platform_device_put(dwc3);
 err1:
 	pci_disable_device(pci);
 
+=======
+	platform_device_put(dwc3);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -201,22 +264,36 @@ static void dwc3_pci_remove(struct pci_dev *pci)
 	platform_device_unregister(glue->dwc3);
 	platform_device_unregister(glue->usb2_phy);
 	platform_device_unregister(glue->usb3_phy);
+<<<<<<< HEAD
 	pci_set_drvdata(pci, NULL);
 	pci_disable_device(pci);
 }
 
 static DEFINE_PCI_DEVICE_TABLE(dwc3_pci_id_table) = {
+=======
+}
+
+static const struct pci_device_id dwc3_pci_id_table[] = {
+>>>>>>> v3.18
 	{
 		PCI_DEVICE(PCI_VENDOR_ID_SYNOPSYS,
 				PCI_DEVICE_ID_SYNOPSYS_HAPSUSB3),
 	},
+<<<<<<< HEAD
+=======
+	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_BSW), },
+>>>>>>> v3.18
 	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_BYT), },
 	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_MRFLD), },
 	{  }	/* Terminating Entry */
 };
 MODULE_DEVICE_TABLE(pci, dwc3_pci_id_table);
 
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 static int dwc3_pci_suspend(struct device *dev)
 {
 	struct pci_dev	*pci = to_pci_dev(dev);
@@ -241,28 +318,43 @@ static int dwc3_pci_resume(struct device *dev)
 
 	return 0;
 }
+<<<<<<< HEAD
+=======
+#endif /* CONFIG_PM_SLEEP */
+>>>>>>> v3.18
 
 static const struct dev_pm_ops dwc3_pci_dev_pm_ops = {
 	SET_SYSTEM_SLEEP_PM_OPS(dwc3_pci_suspend, dwc3_pci_resume)
 };
 
+<<<<<<< HEAD
 #define DEV_PM_OPS	(&dwc3_pci_dev_pm_ops)
 #else
 #define DEV_PM_OPS	NULL
 #endif /* CONFIG_PM */
 
+=======
+>>>>>>> v3.18
 static struct pci_driver dwc3_pci_driver = {
 	.name		= "dwc3-pci",
 	.id_table	= dwc3_pci_id_table,
 	.probe		= dwc3_pci_probe,
 	.remove		= dwc3_pci_remove,
 	.driver		= {
+<<<<<<< HEAD
 		.pm	= DEV_PM_OPS,
+=======
+		.pm	= &dwc3_pci_dev_pm_ops,
+>>>>>>> v3.18
 	},
 };
 
 MODULE_AUTHOR("Felipe Balbi <balbi@ti.com>");
+<<<<<<< HEAD
 MODULE_LICENSE("Dual BSD/GPL");
+=======
+MODULE_LICENSE("GPL v2");
+>>>>>>> v3.18
 MODULE_DESCRIPTION("DesignWare USB3 PCI Glue Layer");
 
 module_pci_driver(dwc3_pci_driver);

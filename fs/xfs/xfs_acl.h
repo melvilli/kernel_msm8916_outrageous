@@ -60,6 +60,7 @@ struct xfs_acl {
 
 #ifdef CONFIG_XFS_POSIX_ACL
 extern struct posix_acl *xfs_get_acl(struct inode *inode, int type);
+<<<<<<< HEAD
 extern int xfs_inherit_acl(struct inode *inode, struct posix_acl *default_acl);
 extern int xfs_acl_chmod(struct inode *inode);
 extern int posix_acl_access_exists(struct inode *inode);
@@ -67,13 +68,22 @@ extern int posix_acl_default_exists(struct inode *inode);
 
 extern const struct xattr_handler xfs_xattr_acl_access_handler;
 extern const struct xattr_handler xfs_xattr_acl_default_handler;
+=======
+extern int xfs_set_acl(struct inode *inode, struct posix_acl *acl, int type);
+extern int posix_acl_access_exists(struct inode *inode);
+extern int posix_acl_default_exists(struct inode *inode);
+>>>>>>> v3.18
 #else
 static inline struct posix_acl *xfs_get_acl(struct inode *inode, int type)
 {
 	return NULL;
 }
+<<<<<<< HEAD
 # define xfs_inherit_acl(inode, default_acl)		0
 # define xfs_acl_chmod(inode)				0
+=======
+# define xfs_set_acl					NULL
+>>>>>>> v3.18
 # define posix_acl_access_exists(inode)			0
 # define posix_acl_default_exists(inode)		0
 #endif /* CONFIG_XFS_POSIX_ACL */

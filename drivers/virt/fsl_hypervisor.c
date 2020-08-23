@@ -34,6 +34,10 @@
 #include <linux/slab.h>
 #include <linux/poll.h>
 #include <linux/of.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 #include <linux/reboot.h>
 #include <linux/uaccess.h>
 #include <linux/notifier.h>

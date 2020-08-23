@@ -16,11 +16,14 @@
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 */
 /*
 Driver: amplc_pc263
@@ -38,12 +41,19 @@ connected to a reed-relay. Relay contacts are closed when output is 1.
 The state of the outputs can be read.
 */
 
+<<<<<<< HEAD
 #include "../comedidev.h"
 
 #define PC263_DRIVER_NAME	"amplc_pc263"
 
 /* PC263 registers */
 #define PC263_IO_SIZE	2
+=======
+#include <linux/module.h>
+#include "../comedidev.h"
+
+/* PC263 registers */
+>>>>>>> v3.18
 
 /*
  * Board descriptions for Amplicon PC263.
@@ -61,6 +71,7 @@ static const struct pc263_board pc263_boards[] = {
 
 static int pc263_do_insn_bits(struct comedi_device *dev,
 			      struct comedi_subdevice *s,
+<<<<<<< HEAD
 			      struct comedi_insn *insn, unsigned int *data)
 {
 	/* The insn data is a mask in data[0] and the new data
@@ -71,6 +82,14 @@ static int pc263_do_insn_bits(struct comedi_device *dev,
 		/* Write out the new digital output lines */
 		outb(s->state & 0xFF, dev->iobase);
 		outb(s->state >> 8, dev->iobase + 1);
+=======
+			      struct comedi_insn *insn,
+			      unsigned int *data)
+{
+	if (comedi_dio_update_state(s, data)) {
+		outb(s->state & 0xff, dev->iobase);
+		outb((s->state >> 8) & 0xff, dev->iobase + 1);
+>>>>>>> v3.18
 	}
 
 	data[1] = s->state;
@@ -83,7 +102,11 @@ static int pc263_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	struct comedi_subdevice *s;
 	int ret;
 
+<<<<<<< HEAD
 	ret = comedi_request_region(dev, it->options[0], PC263_IO_SIZE);
+=======
+	ret = comedi_request_region(dev, it->options[0], 0x2);
+>>>>>>> v3.18
 	if (ret)
 		return ret;
 
@@ -102,13 +125,20 @@ static int pc263_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	/* read initial relay state */
 	s->state = inb(dev->iobase) | (inb(dev->iobase + 1) << 8);
 
+<<<<<<< HEAD
 	dev_info(dev->class_dev, "%s (base %#lx) attached\n", dev->board_name,
 		 dev->iobase);
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
 static struct comedi_driver amplc_pc263_driver = {
+<<<<<<< HEAD
 	.driver_name = PC263_DRIVER_NAME,
+=======
+	.driver_name = "amplc_pc263",
+>>>>>>> v3.18
 	.module = THIS_MODULE,
 	.attach = pc263_attach,
 	.detach = comedi_legacy_detach,

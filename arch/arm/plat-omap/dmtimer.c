@@ -103,7 +103,11 @@ static void omap_timer_restore_context(struct omap_dm_timer *timer)
 				timer->context.tmar);
 	omap_dm_timer_write_reg(timer, OMAP_TIMER_IF_CTRL_REG,
 				timer->context.tsicr);
+<<<<<<< HEAD
 	__raw_writel(timer->context.tier, timer->irq_ena);
+=======
+	writel_relaxed(timer->context.tier, timer->irq_ena);
+>>>>>>> v3.18
 	omap_dm_timer_write_reg(timer, OMAP_TIMER_CTRL_REG,
 				timer->context.tclr);
 }
@@ -699,9 +703,15 @@ int omap_dm_timer_set_int_disable(struct omap_dm_timer *timer, u32 mask)
 	omap_dm_timer_enable(timer);
 
 	if (timer->revision == 1)
+<<<<<<< HEAD
 		l = __raw_readl(timer->irq_ena) & ~mask;
 
 	__raw_writel(l, timer->irq_dis);
+=======
+		l = readl_relaxed(timer->irq_ena) & ~mask;
+
+	writel_relaxed(l, timer->irq_dis);
+>>>>>>> v3.18
 	l = omap_dm_timer_read_reg(timer, OMAP_TIMER_WAKEUP_EN_REG) & ~mask;
 	omap_dm_timer_write_reg(timer, OMAP_TIMER_WAKEUP_EN_REG, l);
 
@@ -722,7 +732,11 @@ unsigned int omap_dm_timer_read_status(struct omap_dm_timer *timer)
 		return 0;
 	}
 
+<<<<<<< HEAD
 	l = __raw_readl(timer->irq_stat);
+=======
+	l = readl_relaxed(timer->irq_stat);
+>>>>>>> v3.18
 
 	return l;
 }

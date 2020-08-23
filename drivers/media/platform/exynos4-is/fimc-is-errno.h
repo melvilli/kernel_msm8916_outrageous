@@ -242,7 +242,12 @@ enum fimc_is_error {
 	ERROR_SCALER_FLIP				= 521,
 };
 
+<<<<<<< HEAD
 const char * const fimc_is_strerr(unsigned int error);
 const char * const fimc_is_param_strerr(unsigned int error);
+=======
+const char *fimc_is_strerr(unsigned int error);
+const char *fimc_is_param_strerr(unsigned int error);
+>>>>>>> v3.18
 
 #endif /* FIMC_IS_ERR_H_ */

@@ -29,7 +29,10 @@
 #include <linux/tty.h>
 #include <linux/ioport.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/serial.h>
 #include <linux/console.h>
 #include <linux/sysrq.h>

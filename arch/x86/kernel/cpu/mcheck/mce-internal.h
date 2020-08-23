@@ -25,15 +25,27 @@ int mce_severity(struct mce *a, int tolerant, char **msg);
 struct dentry *mce_get_debugfs_dir(void);
 
 extern struct mce_bank *mce_banks;
+<<<<<<< HEAD
+=======
+extern mce_banks_t mce_banks_ce_disabled;
+>>>>>>> v3.18
 
 #ifdef CONFIG_X86_MCE_INTEL
 unsigned long mce_intel_adjust_timer(unsigned long interval);
 void mce_intel_cmci_poll(void);
 void mce_intel_hcpu_update(unsigned long cpu);
+<<<<<<< HEAD
+=======
+void cmci_disable_bank(int bank);
+>>>>>>> v3.18
 #else
 # define mce_intel_adjust_timer mce_adjust_timer_default
 static inline void mce_intel_cmci_poll(void) { }
 static inline void mce_intel_hcpu_update(unsigned long cpu) { }
+<<<<<<< HEAD
+=======
+static inline void cmci_disable_bank(int bank) { }
+>>>>>>> v3.18
 #endif
 
 void mce_timer_kick(unsigned long interval);

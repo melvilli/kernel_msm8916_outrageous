@@ -5,6 +5,11 @@
 # architecture-specific flags and dependencies.
 #
 
+<<<<<<< HEAD
+=======
+GCOV_PROFILE	:= n
+
+>>>>>>> v3.18
 LDFLAGS_bootp	:=-p --no-undefined -X \
 		 --defsym initrd_phys=$(INITRD_PHYS) \
 		 --defsym params_phys=$(PARAMS_PHYS) -T

@@ -52,8 +52,11 @@ struct thread_info {
 
 #endif
 
+<<<<<<< HEAD
 #define PREEMPT_ACTIVE		0x10000000
 
+=======
+>>>>>>> v3.18
 /*
  * macros/functions for gaining access to the thread information structure
  */

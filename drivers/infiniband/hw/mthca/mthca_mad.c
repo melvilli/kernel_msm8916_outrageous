@@ -294,7 +294,11 @@ int mthca_create_agents(struct mthca_dev *dev)
 			agent = ib_register_mad_agent(&dev->ib_dev, p + 1,
 						      q ? IB_QPT_GSI : IB_QPT_SMI,
 						      NULL, 0, send_handler,
+<<<<<<< HEAD
 						      NULL, NULL);
+=======
+						      NULL, NULL, 0);
+>>>>>>> v3.18
 			if (IS_ERR(agent)) {
 				ret = PTR_ERR(agent);
 				goto err;

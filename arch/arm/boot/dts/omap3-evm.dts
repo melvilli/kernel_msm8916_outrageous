@@ -7,6 +7,7 @@
  */
 /dts-v1/;
 
+<<<<<<< HEAD
 /include/ "omap34xx.dtsi"
 
 / {
@@ -19,10 +20,20 @@
 		};
 	};
 
+=======
+#include "omap34xx.dtsi"
+#include "omap3-evm-common.dtsi"
+
+/ {
+	model = "TI OMAP35XX EVM (TMDSEVM3530)";
+	compatible = "ti,omap3-evm", "ti,omap3";
+
+>>>>>>> v3.18
 	memory {
 		device_type = "memory";
 		reg = <0x80000000 0x10000000>; /* 256 MB */
 	};
+<<<<<<< HEAD
 
 	leds {
 		compatible = "gpio-leds";
@@ -71,4 +82,6 @@
 	usb-phy = <&usb2_phy>;
 	mode = <3>;
 	power = <50>;
+=======
+>>>>>>> v3.18
 };

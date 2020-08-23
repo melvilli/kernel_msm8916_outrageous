@@ -154,6 +154,7 @@ static bool __td_dma_done_ack(struct timb_dma_chan *td_chan)
 	return done;
 }
 
+<<<<<<< HEAD
 static void __td_unmap_desc(struct timb_dma_chan *td_chan, const u8 *dma_desc,
 	bool single)
 {
@@ -186,6 +187,8 @@ static void __td_unmap_descs(struct timb_dma_desc *td_desc, bool single)
 	}
 }
 
+=======
+>>>>>>> v3.18
 static int td_fill_desc(struct timb_dma_chan *td_chan, u8 *dma_desc,
 	struct scatterlist *sg, bool last)
 {
@@ -293,10 +296,14 @@ static void __td_finish(struct timb_dma_chan *td_chan)
 
 	list_move(&td_desc->desc_node, &td_chan->free_list);
 
+<<<<<<< HEAD
 	if (!(txd->flags & DMA_COMPL_SKIP_SRC_UNMAP))
 		__td_unmap_descs(td_desc,
 			txd->flags & DMA_COMPL_SRC_UNMAP_SINGLE);
 
+=======
+	dma_descriptor_unmap(txd);
+>>>>>>> v3.18
 	/*
 	 * The API requires that no submissions are done from a
 	 * callback, so we don't need to drop the lock here
@@ -669,7 +676,11 @@ static irqreturn_t td_irq(int irq, void *devid)
 
 static int td_probe(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct timb_dma_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct timb_dma_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	struct timb_dma *td;
 	struct resource *iomem;
 	int irq;
@@ -811,8 +822,11 @@ static int td_remove(struct platform_device *pdev)
 	kfree(td);
 	release_mem_region(iomem->start, resource_size(iomem));
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 	dev_dbg(&pdev->dev, "Removed...\n");
 	return 0;
 }

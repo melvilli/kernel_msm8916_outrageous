@@ -82,6 +82,7 @@ extern void synthesize_reljump(void *from, void *to);
 extern void synthesize_relcall(void *from, void *to);
 
 #ifdef	CONFIG_OPTPROBES
+<<<<<<< HEAD
 extern int arch_init_optprobes(void);
 extern int setup_detour_execution(struct kprobe *p, struct pt_regs *regs, int reenter);
 extern unsigned long __recover_optprobed_insn(kprobe_opcode_t *buf, unsigned long addr);
@@ -90,6 +91,11 @@ static inline int arch_init_optprobes(void)
 {
 	return 0;
 }
+=======
+extern int setup_detour_execution(struct kprobe *p, struct pt_regs *regs, int reenter);
+extern unsigned long __recover_optprobed_insn(kprobe_opcode_t *buf, unsigned long addr);
+#else	/* !CONFIG_OPTPROBES */
+>>>>>>> v3.18
 static inline int setup_detour_execution(struct kprobe *p, struct pt_regs *regs, int reenter)
 {
 	return 0;

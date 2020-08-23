@@ -2,9 +2,12 @@
 # Makefile for the rest of the USB drivers
 # (the ones that don't fit into any other categories)
 #
+<<<<<<< HEAD
 
 ccflags-$(CONFIG_USB_DEBUG) := -DDEBUG
 
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_USB_ADUTUX)		+= adutux.o
 obj-$(CONFIG_USB_APPLEDISPLAY)		+= appledisplay.o
 obj-$(CONFIG_USB_CYPRESS_CY7C63)	+= cypress_cy7c63.o
@@ -22,7 +25,11 @@ obj-$(CONFIG_USB_LED)			+= usbled.o
 obj-$(CONFIG_USB_LEGOTOWER)		+= legousbtower.o
 obj-$(CONFIG_USB_RIO500)		+= rio500.o
 obj-$(CONFIG_USB_TEST)			+= usbtest.o
+<<<<<<< HEAD
 obj-$(CONFIG_USB_EHSET_TEST_FIXTURE)	+= ehset.o
+=======
+obj-$(CONFIG_USB_EHSET_TEST_FIXTURE)    += ehset.o
+>>>>>>> v3.18
 obj-$(CONFIG_USB_TRANCEVIBRATOR)	+= trancevibrator.o
 obj-$(CONFIG_USB_USS720)		+= uss720.o
 obj-$(CONFIG_USB_SEVSEG)		+= usbsevseg.o
@@ -30,9 +37,13 @@ obj-$(CONFIG_USB_YUREX)			+= yurex.o
 obj-$(CONFIG_USB_HSIC_USB3503)		+= usb3503.o
 
 obj-$(CONFIG_USB_SISUSBVGA)		+= sisusbvga/
+<<<<<<< HEAD
 
 obj-$(CONFIG_USB_QCOM_DIAG_BRIDGE)	+= diag_bridge.o
 mdm_bridge-y				:= mdm_ctrl_bridge.o mdm_data_bridge.o
 obj-$(CONFIG_USB_QCOM_MDM_BRIDGE) 	+= mdm_bridge.o
 obj-$(CONFIG_USB_QCOM_KS_BRIDGE)	+= ks_bridge.o
 obj-$(CONFIG_USB_QCOM_IPC_BRIDGE)	+= ipc_bridge.o
+=======
+obj-$(CONFIG_USB_LINK_LAYER_TEST)	+= lvstest.o
+>>>>>>> v3.18

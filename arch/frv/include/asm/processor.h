@@ -35,6 +35,7 @@
 struct task_struct;
 
 /*
+<<<<<<< HEAD
  *  CPU type and hardware bug flags. Kept separately for each CPU.
  */
 struct cpuinfo_frv {
@@ -51,6 +52,8 @@ extern struct cpuinfo_frv __nongprelbss boot_cpu_data;
 #define current_cpu_data	boot_cpu_data
 
 /*
+=======
+>>>>>>> v3.18
  * Bus types
  */
 #define EISA_bus 0
@@ -129,7 +132,12 @@ unsigned long get_wchan(struct task_struct *p);
 #define	KSTK_EIP(tsk)	((tsk)->thread.frame0->pc)
 #define	KSTK_ESP(tsk)	((tsk)->thread.frame0->sp)
 
+<<<<<<< HEAD
 #define cpu_relax()    barrier()
+=======
+#define cpu_relax() barrier()
+#define cpu_relax_lowlatency() cpu_relax()
+>>>>>>> v3.18
 
 /* data cache prefetch */
 #define ARCH_HAS_PREFETCH

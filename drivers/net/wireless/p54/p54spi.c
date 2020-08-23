@@ -42,8 +42,12 @@
 
 MODULE_FIRMWARE("3826.arm");
 
+<<<<<<< HEAD
 /*
  * gpios should be handled in board files and provided via platform data,
+=======
+/* gpios should be handled in board files and provided via platform data,
+>>>>>>> v3.18
  * but because it's currently impossible for p54spi to have a header file
  * in include/linux, let's use module paramaters for now
  */
@@ -191,11 +195,18 @@ static int p54spi_request_eeprom(struct ieee80211_hw *dev)
 	const struct firmware *eeprom;
 	int ret;
 
+<<<<<<< HEAD
 	/*
 	 * allow users to customize their eeprom.
 	 */
 
 	ret = request_firmware(&eeprom, "3826.eeprom", &priv->spi->dev);
+=======
+	/* allow users to customize their eeprom.
+	 */
+
+	ret = request_firmware_direct(&eeprom, "3826.eeprom", &priv->spi->dev);
+>>>>>>> v3.18
 	if (ret < 0) {
 #ifdef CONFIG_P54_SPI_DEFAULT_EEPROM
 		dev_info(&priv->spi->dev, "loading default eeprom...\n");
@@ -285,8 +296,12 @@ static void p54spi_power_on(struct p54s_priv *priv)
 	gpio_set_value(p54spi_gpio_power, 1);
 	enable_irq(gpio_to_irq(p54spi_gpio_irq));
 
+<<<<<<< HEAD
 	/*
 	 * need to wait a while before device can be accessed, the length
+=======
+	/* need to wait a while before device can be accessed, the length
+>>>>>>> v3.18
 	 * is just a guess
 	 */
 	msleep(10);
@@ -365,7 +380,12 @@ static int p54spi_rx(struct p54s_priv *priv)
 	/* Firmware may insert up to 4 padding bytes after the lmac header,
 	 * but it does not amend the size of SPI data transfer.
 	 * Such packets has correct data size in header, thus referencing
+<<<<<<< HEAD
 	 * past the end of allocated skb. Reserve extra 4 bytes for this case */
+=======
+	 * past the end of allocated skb. Reserve extra 4 bytes for this case
+	 */
+>>>>>>> v3.18
 	skb = dev_alloc_skb(len + 4);
 	if (!skb) {
 		p54spi_sleep(priv);
@@ -383,7 +403,12 @@ static int p54spi_rx(struct p54s_priv *priv)
 	}
 	p54spi_sleep(priv);
 	/* Put additional bytes to compensate for the possible
+<<<<<<< HEAD
 	 * alignment-caused truncation */
+=======
+	 * alignment-caused truncation
+	 */
+>>>>>>> v3.18
 	skb_put(skb, 4);
 
 	if (p54_rx(priv->hw, skb) == 0)
@@ -637,7 +662,11 @@ static int p54spi_probe(struct spi_device *spi)
 	gpio_direction_input(p54spi_gpio_irq);
 
 	ret = request_irq(gpio_to_irq(p54spi_gpio_irq),
+<<<<<<< HEAD
 			  p54spi_interrupt, IRQF_DISABLED, "p54spi",
+=======
+			  p54spi_interrupt, 0, "p54spi",
+>>>>>>> v3.18
 			  priv->spi);
 	if (ret < 0) {
 		dev_err(&priv->spi->dev, "request_irq() failed");
@@ -713,6 +742,7 @@ static struct spi_driver p54spi_driver = {
 	.remove		= p54spi_remove,
 };
 
+<<<<<<< HEAD
 static int __init p54spi_init(void)
 {
 	int ret;
@@ -734,6 +764,9 @@ static void __exit p54spi_exit(void)
 
 module_init(p54spi_init);
 module_exit(p54spi_exit);
+=======
+module_spi_driver(p54spi_driver);
+>>>>>>> v3.18
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Christian Lamparter <chunkeey@web.de>");

@@ -87,11 +87,26 @@
 void
 i915_gem_detect_bit_6_swizzle(struct drm_device *dev)
 {
+<<<<<<< HEAD
 	drm_i915_private_t *dev_priv = dev->dev_private;
 	uint32_t swizzle_x = I915_BIT_6_SWIZZLE_UNKNOWN;
 	uint32_t swizzle_y = I915_BIT_6_SWIZZLE_UNKNOWN;
 
 	if (IS_VALLEYVIEW(dev)) {
+=======
+	struct drm_i915_private *dev_priv = dev->dev_private;
+	uint32_t swizzle_x = I915_BIT_6_SWIZZLE_UNKNOWN;
+	uint32_t swizzle_y = I915_BIT_6_SWIZZLE_UNKNOWN;
+
+	if (INTEL_INFO(dev)->gen >= 8 || IS_VALLEYVIEW(dev)) {
+		/*
+		 * On BDW+, swizzling is not used. We leave the CPU memory
+		 * controller in charge of optimizing memory accesses without
+		 * the extra address manipulation GPU side.
+		 *
+		 * VLV and CHV don't have GPU swizzling.
+		 */
+>>>>>>> v3.18
 		swizzle_x = I915_BIT_6_SWIZZLE_NONE;
 		swizzle_y = I915_BIT_6_SWIZZLE_NONE;
 	} else if (INTEL_INFO(dev)->gen >= 6) {
@@ -268,18 +283,32 @@ i915_gem_object_fence_ok(struct drm_i915_gem_object *obj, int tiling_mode)
 		return true;
 
 	if (INTEL_INFO(obj->base.dev)->gen == 3) {
+<<<<<<< HEAD
 		if (obj->gtt_offset & ~I915_FENCE_START_MASK)
 			return false;
 	} else {
 		if (obj->gtt_offset & ~I830_FENCE_START_MASK)
+=======
+		if (i915_gem_obj_ggtt_offset(obj) & ~I915_FENCE_START_MASK)
+			return false;
+	} else {
+		if (i915_gem_obj_ggtt_offset(obj) & ~I830_FENCE_START_MASK)
+>>>>>>> v3.18
 			return false;
 	}
 
 	size = i915_gem_get_gtt_size(obj->base.dev, obj->base.size, tiling_mode);
+<<<<<<< HEAD
 	if (obj->gtt_space->size != size)
 		return false;
 
 	if (obj->gtt_offset & (size - 1))
+=======
+	if (i915_gem_obj_ggtt_size(obj) != size)
+		return false;
+
+	if (i915_gem_obj_ggtt_offset(obj) & (size - 1))
+>>>>>>> v3.18
 		return false;
 
 	return true;
@@ -294,7 +323,11 @@ i915_gem_set_tiling(struct drm_device *dev, void *data,
 		   struct drm_file *file)
 {
 	struct drm_i915_gem_set_tiling *args = data;
+<<<<<<< HEAD
 	drm_i915_private_t *dev_priv = dev->dev_private;
+=======
+	struct drm_i915_private *dev_priv = dev->dev_private;
+>>>>>>> v3.18
 	struct drm_i915_gem_object *obj;
 	int ret = 0;
 
@@ -308,7 +341,11 @@ i915_gem_set_tiling(struct drm_device *dev, void *data,
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 	if (obj->pin_count) {
+=======
+	if (i915_gem_obj_is_pinned(obj) || obj->framebuffer_references) {
+>>>>>>> v3.18
 		drm_gem_object_unreference_unlocked(&obj->base);
 		return -EBUSY;
 	}
@@ -357,6 +394,7 @@ i915_gem_set_tiling(struct drm_device *dev, void *data,
 		 * has to also include the unfenced register the GPU uses
 		 * whilst executing a fenced command for an untiled object.
 		 */
+<<<<<<< HEAD
 
 		obj->map_and_fenceable =
 			obj->gtt_space == NULL ||
@@ -376,6 +414,15 @@ i915_gem_set_tiling(struct drm_device *dev, void *data,
 		if (ret == 0) {
 			obj->fence_dirty =
 				obj->fenced_gpu_access ||
+=======
+		if (obj->map_and_fenceable &&
+		    !i915_gem_object_fence_ok(obj, args->tiling_mode))
+			ret = i915_gem_object_ggtt_unbind(obj);
+
+		if (ret == 0) {
+			obj->fence_dirty =
+				obj->last_fenced_seqno ||
+>>>>>>> v3.18
 				obj->fence_reg != I915_FENCE_REG_NONE;
 
 			obj->tiling_mode = args->tiling_mode;
@@ -392,7 +439,11 @@ i915_gem_set_tiling(struct drm_device *dev, void *data,
 	/* Try to preallocate memory required to save swizzling on put-pages */
 	if (i915_gem_object_needs_bit17_swizzle(obj)) {
 		if (obj->bit_17 == NULL) {
+<<<<<<< HEAD
 			obj->bit_17 = kmalloc(BITS_TO_LONGS(obj->base.size >> PAGE_SHIFT) *
+=======
+			obj->bit_17 = kcalloc(BITS_TO_LONGS(obj->base.size >> PAGE_SHIFT),
+>>>>>>> v3.18
 					      sizeof(long), GFP_KERNEL);
 		}
 	} else {
@@ -414,7 +465,11 @@ i915_gem_get_tiling(struct drm_device *dev, void *data,
 		   struct drm_file *file)
 {
 	struct drm_i915_gem_get_tiling *args = data;
+<<<<<<< HEAD
 	drm_i915_private_t *dev_priv = dev->dev_private;
+=======
+	struct drm_i915_private *dev_priv = dev->dev_private;
+>>>>>>> v3.18
 	struct drm_i915_gem_object *obj;
 
 	obj = to_intel_bo(drm_gem_object_lookup(dev, file, args->handle));
@@ -503,8 +558,13 @@ i915_gem_object_save_bit_17_swizzle(struct drm_i915_gem_object *obj)
 	int i;
 
 	if (obj->bit_17 == NULL) {
+<<<<<<< HEAD
 		obj->bit_17 = kmalloc(BITS_TO_LONGS(page_count) *
 					   sizeof(long), GFP_KERNEL);
+=======
+		obj->bit_17 = kcalloc(BITS_TO_LONGS(page_count),
+				      sizeof(long), GFP_KERNEL);
+>>>>>>> v3.18
 		if (obj->bit_17 == NULL) {
 			DRM_ERROR("Failed to allocate memory for bit 17 "
 				  "record\n");

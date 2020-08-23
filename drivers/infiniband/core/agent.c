@@ -94,14 +94,22 @@ void agent_send_response(struct ib_mad *mad, struct ib_grh *grh,
 		port_priv = ib_get_agent_port(device, port_num);
 
 	if (!port_priv) {
+<<<<<<< HEAD
 		printk(KERN_ERR SPFX "Unable to find port agent\n");
+=======
+		dev_err(&device->dev, "Unable to find port agent\n");
+>>>>>>> v3.18
 		return;
 	}
 
 	agent = port_priv->agent[qpn];
 	ah = ib_create_ah_from_wc(agent->qp->pd, wc, grh, port_num);
 	if (IS_ERR(ah)) {
+<<<<<<< HEAD
 		printk(KERN_ERR SPFX "ib_create_ah_from_wc error %ld\n",
+=======
+		dev_err(&device->dev, "ib_create_ah_from_wc error %ld\n",
+>>>>>>> v3.18
 			PTR_ERR(ah));
 		return;
 	}
@@ -110,7 +118,11 @@ void agent_send_response(struct ib_mad *mad, struct ib_grh *grh,
 				      IB_MGMT_MAD_HDR, IB_MGMT_MAD_DATA,
 				      GFP_KERNEL);
 	if (IS_ERR(send_buf)) {
+<<<<<<< HEAD
 		printk(KERN_ERR SPFX "ib_create_send_mad error\n");
+=======
+		dev_err(&device->dev, "ib_create_send_mad error\n");
+>>>>>>> v3.18
 		goto err1;
 	}
 
@@ -125,7 +137,11 @@ void agent_send_response(struct ib_mad *mad, struct ib_grh *grh,
 	}
 
 	if (ib_post_send_mad(send_buf, NULL)) {
+<<<<<<< HEAD
 		printk(KERN_ERR SPFX "ib_post_send_mad error\n");
+=======
+		dev_err(&device->dev, "ib_post_send_mad error\n");
+>>>>>>> v3.18
 		goto err2;
 	}
 	return;
@@ -151,7 +167,11 @@ int ib_agent_port_open(struct ib_device *device, int port_num)
 	/* Create new device info */
 	port_priv = kzalloc(sizeof *port_priv, GFP_KERNEL);
 	if (!port_priv) {
+<<<<<<< HEAD
 		printk(KERN_ERR SPFX "No memory for ib_agent_port_private\n");
+=======
+		dev_err(&device->dev, "No memory for ib_agent_port_private\n");
+>>>>>>> v3.18
 		ret = -ENOMEM;
 		goto error1;
 	}
@@ -161,7 +181,11 @@ int ib_agent_port_open(struct ib_device *device, int port_num)
 		port_priv->agent[0] = ib_register_mad_agent(device, port_num,
 							    IB_QPT_SMI, NULL, 0,
 							    &agent_send_handler,
+<<<<<<< HEAD
 							    NULL, NULL);
+=======
+							    NULL, NULL, 0);
+>>>>>>> v3.18
 		if (IS_ERR(port_priv->agent[0])) {
 			ret = PTR_ERR(port_priv->agent[0]);
 			goto error2;
@@ -172,7 +196,11 @@ int ib_agent_port_open(struct ib_device *device, int port_num)
 	port_priv->agent[1] = ib_register_mad_agent(device, port_num,
 						    IB_QPT_GSI, NULL, 0,
 						    &agent_send_handler,
+<<<<<<< HEAD
 						    NULL, NULL);
+=======
+						    NULL, NULL, 0);
+>>>>>>> v3.18
 	if (IS_ERR(port_priv->agent[1])) {
 		ret = PTR_ERR(port_priv->agent[1]);
 		goto error3;
@@ -202,7 +230,11 @@ int ib_agent_port_close(struct ib_device *device, int port_num)
 	port_priv = __ib_get_agent_port(device, port_num);
 	if (port_priv == NULL) {
 		spin_unlock_irqrestore(&ib_agent_port_list_lock, flags);
+<<<<<<< HEAD
 		printk(KERN_ERR SPFX "Port %d not found\n", port_num);
+=======
+		dev_err(&device->dev, "Port %d not found\n", port_num);
+>>>>>>> v3.18
 		return -ENODEV;
 	}
 	list_del(&port_priv->port_list);

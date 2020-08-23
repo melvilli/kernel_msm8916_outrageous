@@ -583,14 +583,22 @@
 		tlu@2f000 {
 			compatible = "fsl,mpc8572-tlu", "fsl_tlu";
 			reg = <0x2f000 0x1000>;
+<<<<<<< HEAD
 			interupts = <61 2 >;
+=======
+			interrupts = <61 2>;
+>>>>>>> v3.18
 			interrupt-parent = <&mpic>;
 		};
 
 		tlu@15000 {
 			compatible = "fsl,mpc8572-tlu", "fsl_tlu";
 			reg = <0x15000 0x1000>;
+<<<<<<< HEAD
 			interupts = <75 2>;
+=======
+			interrupts = <75 2>;
+>>>>>>> v3.18
 			interrupt-parent = <&mpic>;
 		};
 	};

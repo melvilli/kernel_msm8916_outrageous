@@ -153,7 +153,11 @@ uint oid_rt_get_rx_icv_err_hdl(struct oid_par_priv *poid_par_priv)
 					 padapter->recvpriv.rx_icv_err;
 		*poid_par_priv->bytes_rw = poid_par_priv->information_buf_len;
 	} else
+<<<<<<< HEAD
 		return RNDIS_STATUS_INVALID_LENGTH ;
+=======
+		return RNDIS_STATUS_INVALID_LENGTH;
+>>>>>>> v3.18
 	return RNDIS_STATUS_SUCCESS;
 }
 
@@ -169,7 +173,11 @@ uint oid_rt_get_preamble_mode_hdl(struct oid_par_priv *poid_par_priv)
 {
 	struct _adapter *padapter = (struct _adapter *)
 				    (poid_par_priv->adapter_context);
+<<<<<<< HEAD
 	u32 preamblemode = 0 ;
+=======
+	u32 preamblemode = 0;
+>>>>>>> v3.18
 
 	if (poid_par_priv->type_of_oid != QUERY_OID)
 		return RNDIS_STATUS_NOT_ACCEPTED;
@@ -522,7 +530,11 @@ uint oid_rt_get_connect_state_hdl(struct oid_par_priv *poid_par_priv)
 	else if (check_fwstate(pmlmepriv, WIFI_ADHOC_STATE) == true)
 		ulInfo = ADHOCMODE;
 	else
+<<<<<<< HEAD
 		ulInfo = NOTASSOCIATED ;
+=======
+		ulInfo = NOTASSOCIATED;
+>>>>>>> v3.18
 	*(u32 *)poid_par_priv->information_buf = ulInfo;
 	*poid_par_priv->bytes_rw =  poid_par_priv->information_buf_len;
 	return RNDIS_STATUS_SUCCESS;

@@ -83,8 +83,11 @@ static int ehci_pci_setup(struct usb_hcd *hcd)
 {
 	struct ehci_hcd		*ehci = hcd_to_ehci(hcd);
 	struct pci_dev		*pdev = to_pci_dev(hcd->self.controller);
+<<<<<<< HEAD
 	struct pci_dev		*p_smbus;
 	u8			rev;
+=======
+>>>>>>> v3.18
 	u32			temp;
 	int			retval;
 
@@ -200,6 +203,7 @@ static int ehci_pci_setup(struct usb_hcd *hcd)
 		/* SB600 and old version of SB700 have a bug in EHCI controller,
 		 * which causes usb devices lose response in some cases.
 		 */
+<<<<<<< HEAD
 		if ((pdev->device == 0x4386) || (pdev->device == 0x4396)) {
 			p_smbus = pci_get_device(PCI_VENDOR_ID_ATI,
 						 PCI_DEVICE_ID_ATI_SBX00_SMBUS,
@@ -216,6 +220,14 @@ static int ehci_pci_setup(struct usb_hcd *hcd)
 				pci_write_config_byte(pdev, 0x53, tmp | (1<<3));
 			}
 			pci_dev_put(p_smbus);
+=======
+		if ((pdev->device == 0x4386 || pdev->device == 0x4396) &&
+				usb_amd_hang_symptom_quirk()) {
+			u8 tmp;
+			ehci_info(ehci, "applying AMD SB600/SB700 USB freeze workaround\n");
+			pci_read_config_byte(pdev, 0x53, &tmp);
+			pci_write_config_byte(pdev, 0x53, tmp | (1<<3));
+>>>>>>> v3.18
 		}
 		break;
 	case PCI_VENDOR_ID_NETMOS:
@@ -340,6 +352,7 @@ done:
  * Also they depend on separate root hub suspend/resume.
  */
 
+<<<<<<< HEAD
 static bool usb_is_intel_switchable_ehci(struct pci_dev *pdev)
 {
 	return pdev->class == PCI_CLASS_SERIAL_USB_EHCI &&
@@ -363,11 +376,14 @@ static void ehci_enable_xhci_companion(void)
 	}
 }
 
+=======
+>>>>>>> v3.18
 static int ehci_pci_resume(struct usb_hcd *hcd, bool hibernated)
 {
 	struct ehci_hcd		*ehci = hcd_to_ehci(hcd);
 	struct pci_dev		*pdev = to_pci_dev(hcd->self.controller);
 
+<<<<<<< HEAD
 	/* The BIOS on systems with the Intel Panther Point chipset may or may
 	 * not support xHCI natively.  That means that during system resume, it
 	 * may switch the ports back to EHCI so that users can use their
@@ -387,6 +403,8 @@ static int ehci_pci_resume(struct usb_hcd *hcd, bool hibernated)
 	if (usb_is_intel_switchable_ehci(pdev))
 		ehci_enable_xhci_companion();
 
+=======
+>>>>>>> v3.18
 	if (ehci_resume(hcd, hibernated) != 0)
 		(void) ehci_pci_reinit(ehci, pdev);
 	return 0;

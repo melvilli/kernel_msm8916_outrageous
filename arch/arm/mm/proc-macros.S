@@ -30,8 +30,13 @@
  * act_mm - get current->active_mm
  */
 	.macro	act_mm, rd
+<<<<<<< HEAD
 	mov	\rd, sp, lsr #12 + THREAD_SIZE_ORDER
 	mov	\rd, \rd, lsl #12 + THREAD_SIZE_ORDER
+=======
+	bic	\rd, sp, #8128
+	bic	\rd, \rd, #63
+>>>>>>> v3.18
 	ldr	\rd, [\rd, #TI_TASK]
 	ldr	\rd, [\rd, #TSK_ACTIVE_MM]
 	.endm
@@ -279,7 +284,11 @@ ENTRY(\name\()_processor_functions)
 
 	.if \suspend
 	.word	cpu_\name\()_suspend_size
+<<<<<<< HEAD
 #ifdef CONFIG_PM_SLEEP
+=======
+#ifdef CONFIG_ARM_CPU_SUSPEND
+>>>>>>> v3.18
 	.word	cpu_\name\()_do_suspend
 	.word	cpu_\name\()_do_resume
 #else
@@ -309,8 +318,11 @@ ENTRY(\name\()_cache_fns)
 	.long	\name\()_flush_kern_dcache_area
 	.long	\name\()_dma_map_area
 	.long	\name\()_dma_unmap_area
+<<<<<<< HEAD
 	.long   \name\()_dma_inv_range
 	.long   \name\()_dma_clean_range
+=======
+>>>>>>> v3.18
 	.long	\name\()_dma_flush_range
 	.size	\name\()_cache_fns, . - \name\()_cache_fns
 .endm

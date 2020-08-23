@@ -1,7 +1,11 @@
 /*
  * PCI interface driver for DW SPI Core
  *
+<<<<<<< HEAD
  * Copyright (c) 2009, Intel Corporation.
+=======
+ * Copyright (c) 2009, 2014 Intel Corporation.
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms and conditions of the GNU General Public License,
@@ -11,10 +15,13 @@
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
  * more details.
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin St - Fifth Floor, Boston, MA 02110-1301 USA.
+=======
+>>>>>>> v3.18
  */
 
 #include <linux/interrupt.h>
@@ -32,6 +39,7 @@ struct dw_spi_pci {
 	struct dw_spi	dws;
 };
 
+<<<<<<< HEAD
 static int spi_pci_probe(struct pci_dev *pdev,
 	const struct pci_device_id *ent)
 {
@@ -52,12 +60,39 @@ static int spi_pci_probe(struct pci_dev *pdev,
 		ret = -ENOMEM;
 		goto err_disable;
 	}
+=======
+struct spi_pci_desc {
+	int	(*setup)(struct dw_spi *);
+};
+
+static struct spi_pci_desc spi_pci_mid_desc = {
+	.setup = dw_spi_mid_init,
+};
+
+static int spi_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
+{
+	struct dw_spi_pci *dwpci;
+	struct dw_spi *dws;
+	struct spi_pci_desc *desc = (struct spi_pci_desc *)ent->driver_data;
+	int pci_bar = 0;
+	int ret;
+
+	ret = pcim_enable_device(pdev);
+	if (ret)
+		return ret;
+
+	dwpci = devm_kzalloc(&pdev->dev, sizeof(struct dw_spi_pci),
+			GFP_KERNEL);
+	if (!dwpci)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	dwpci->pdev = pdev;
 	dws = &dwpci->dws;
 
 	/* Get basic io resource and map it */
 	dws->paddr = pci_resource_start(pdev, pci_bar);
+<<<<<<< HEAD
 	dws->iolen = pci_resource_len(pdev, pci_bar);
 
 	ret = pci_request_region(pdev, pci_bar, dev_name(&pdev->dev));
@@ -72,11 +107,21 @@ static int spi_pci_probe(struct pci_dev *pdev,
 	}
 
 	dws->parent_dev = &pdev->dev;
+=======
+
+	ret = pcim_iomap_regions(pdev, 1 << pci_bar, pci_name(pdev));
+	if (ret)
+		return ret;
+
+	dws->regs = pcim_iomap_table(pdev)[pci_bar];
+
+>>>>>>> v3.18
 	dws->bus_num = 0;
 	dws->num_cs = 4;
 	dws->irq = pdev->irq;
 
 	/*
+<<<<<<< HEAD
 	 * Specific handling for Intel MID paltforms, like dma setup,
 	 * clock rate, FIFO depth.
 	 */
@@ -103,12 +148,35 @@ err_kfree:
 err_disable:
 	pci_disable_device(pdev);
 	return ret;
+=======
+	 * Specific handling for paltforms, like dma setup,
+	 * clock rate, FIFO depth.
+	 */
+	if (desc && desc->setup) {
+		ret = desc->setup(dws);
+		if (ret)
+			return ret;
+	}
+
+	ret = dw_spi_add_host(&pdev->dev, dws);
+	if (ret)
+		return ret;
+
+	/* PCI hook and SPI hook use the same drv data */
+	pci_set_drvdata(pdev, dwpci);
+
+	dev_info(&pdev->dev, "found PCI SPI controller(ID: %04x:%04x)\n",
+		pdev->vendor, pdev->device);
+
+	return 0;
+>>>>>>> v3.18
 }
 
 static void spi_pci_remove(struct pci_dev *pdev)
 {
 	struct dw_spi_pci *dwpci = pci_get_drvdata(pdev);
 
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
 	dw_spi_remove_host(&dwpci->dws);
 	iounmap(dwpci->dws.regs);
@@ -152,6 +220,34 @@ static int spi_resume(struct pci_dev *pdev)
 static DEFINE_PCI_DEVICE_TABLE(pci_ids) = {
 	/* Intel MID platform SPI controller 0 */
 	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, 0x0800) },
+=======
+	dw_spi_remove_host(&dwpci->dws);
+}
+
+#ifdef CONFIG_PM_SLEEP
+static int spi_suspend(struct device *dev)
+{
+	struct pci_dev *pdev = to_pci_dev(dev);
+	struct dw_spi_pci *dwpci = pci_get_drvdata(pdev);
+
+	return dw_spi_suspend_host(&dwpci->dws);
+}
+
+static int spi_resume(struct device *dev)
+{
+	struct pci_dev *pdev = to_pci_dev(dev);
+	struct dw_spi_pci *dwpci = pci_get_drvdata(pdev);
+
+	return dw_spi_resume_host(&dwpci->dws);
+}
+#endif
+
+static SIMPLE_DEV_PM_OPS(dw_spi_pm_ops, spi_suspend, spi_resume);
+
+static const struct pci_device_id pci_ids[] = {
+	/* Intel MID platform SPI controller 0 */
+	{ PCI_VDEVICE(INTEL, 0x0800), (kernel_ulong_t)&spi_pci_mid_desc},
+>>>>>>> v3.18
 	{},
 };
 
@@ -160,8 +256,14 @@ static struct pci_driver dw_spi_driver = {
 	.id_table =	pci_ids,
 	.probe =	spi_pci_probe,
 	.remove =	spi_pci_remove,
+<<<<<<< HEAD
 	.suspend =	spi_suspend,
 	.resume	=	spi_resume,
+=======
+	.driver         = {
+		.pm     = &dw_spi_pm_ops,
+	},
+>>>>>>> v3.18
 };
 
 module_pci_driver(dw_spi_driver);

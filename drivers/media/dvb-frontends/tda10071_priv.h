@@ -55,6 +55,10 @@ static struct tda10071_modcod {
 	{ SYS_DVBS2, QPSK,  FEC_8_9,  0x0a },
 	{ SYS_DVBS2, QPSK,  FEC_9_10, 0x0b },
 	/* 8PSK */
+<<<<<<< HEAD
+=======
+	{ SYS_DVBS2, PSK_8, FEC_AUTO, 0x00 },
+>>>>>>> v3.18
 	{ SYS_DVBS2, PSK_8, FEC_3_5,  0x0c },
 	{ SYS_DVBS2, PSK_8, FEC_2_3,  0x0d },
 	{ SYS_DVBS2, PSK_8, FEC_3_4,  0x0e },

@@ -73,7 +73,11 @@ MODULE_PARM_DESC(tx_descriptors, "number of descriptors used " \
 
 char spider_net_driver_name[] = "spidernet";
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(spider_net_pci_tbl) = {
+=======
+static const struct pci_device_id spider_net_pci_tbl[] = {
+>>>>>>> v3.18
 	{ PCI_VENDOR_ID_TOSHIBA_2, PCI_DEVICE_ID_TOSHIBA_SPIDER_NET,
 	  PCI_ANY_ID, PCI_ANY_ID, 0, 0, 0UL },
 	{ 0, }
@@ -267,6 +271,7 @@ spider_net_set_promisc(struct spider_net_card *card)
 }
 
 /**
+<<<<<<< HEAD
  * spider_net_get_mac_address - read mac address from spider card
  * @card: device structure
  *
@@ -295,6 +300,8 @@ spider_net_get_mac_address(struct net_device *netdev)
 }
 
 /**
+=======
+>>>>>>> v3.18
  * spider_net_get_descr_status -- returns the status of a descriptor
  * @descr: descriptor to look at
  *
@@ -860,7 +867,11 @@ spider_net_release_tx_chain(struct spider_net_card *card, int brutal)
 		if (skb) {
 			pci_unmap_single(card->pdev, buf_addr, skb->len,
 					PCI_DMA_TODEVICE);
+<<<<<<< HEAD
 			dev_kfree_skb(skb);
+=======
+			dev_consume_skb_any(skb);
+>>>>>>> v3.18
 		}
 	}
 	return 0;
@@ -1345,15 +1356,26 @@ spider_net_set_mac(struct net_device *netdev, void *p)
 	if (!is_valid_ether_addr(addr->sa_data))
 		return -EADDRNOTAVAIL;
 
+<<<<<<< HEAD
+=======
+	memcpy(netdev->dev_addr, addr->sa_data, ETH_ALEN);
+
+>>>>>>> v3.18
 	/* switch off GMACTPE and GMACRPE */
 	regvalue = spider_net_read_reg(card, SPIDER_NET_GMACOPEMD);
 	regvalue &= ~((1 << 5) | (1 << 6));
 	spider_net_write_reg(card, SPIDER_NET_GMACOPEMD, regvalue);
 
 	/* write mac */
+<<<<<<< HEAD
 	macu = (addr->sa_data[0]<<24) + (addr->sa_data[1]<<16) +
 		(addr->sa_data[2]<<8) + (addr->sa_data[3]);
 	macl = (addr->sa_data[4]<<8) + (addr->sa_data[5]);
+=======
+	macu = (netdev->dev_addr[0]<<24) + (netdev->dev_addr[1]<<16) +
+		(netdev->dev_addr[2]<<8) + (netdev->dev_addr[3]);
+	macl = (netdev->dev_addr[4]<<8) + (netdev->dev_addr[5]);
+>>>>>>> v3.18
 	spider_net_write_reg(card, SPIDER_NET_GMACUNIMACU, macu);
 	spider_net_write_reg(card, SPIDER_NET_GMACUNIMACL, macl);
 
@@ -1364,12 +1386,15 @@ spider_net_set_mac(struct net_device *netdev, void *p)
 
 	spider_net_set_promisc(card);
 
+<<<<<<< HEAD
 	/* look up, whether we have been successful */
 	if (spider_net_get_mac_address(netdev))
 		return -EADDRNOTAVAIL;
 	if (memcmp(netdev->dev_addr,addr->sa_data,netdev->addr_len))
 		return -EADDRNOTAVAIL;
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -2478,7 +2503,10 @@ out_release_regions:
 	pci_release_regions(pdev);
 out_disable_dev:
 	pci_disable_device(pdev);
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	return NULL;
 }
 

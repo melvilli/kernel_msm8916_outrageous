@@ -564,7 +564,11 @@ static u16 uvc_video_clock_host_sof(const struct uvc_clock_sample *sample)
  *
  * SOF = ((SOF2 - SOF1) * PTS + SOF1 * STC2 - SOF2 * STC1) / (STC2 - STC1)   (1)
  *
+<<<<<<< HEAD
  * to avoid loosing precision in the division. Similarly, the host timestamp is
+=======
+ * to avoid losing precision in the division. Similarly, the host timestamp is
+>>>>>>> v3.18
  * computed with
  *
  * TS = ((TS2 - TS1) * PTS + TS1 * SOF2 - TS2 * SOF1) / (SOF2 - SOF1)	     (2)
@@ -688,7 +692,12 @@ void uvc_video_clock_update(struct uvc_streaming *stream,
 		  stream->dev->name,
 		  sof >> 16, div_u64(((u64)sof & 0xffff) * 1000000LLU, 65536),
 		  y, ts.tv_sec, ts.tv_nsec / NSEC_PER_USEC,
+<<<<<<< HEAD
 		  v4l2_buf->timestamp.tv_sec, v4l2_buf->timestamp.tv_usec,
+=======
+		  v4l2_buf->timestamp.tv_sec,
+		  (unsigned long)v4l2_buf->timestamp.tv_usec,
+>>>>>>> v3.18
 		  x1, first->host_sof, first->dev_sof,
 		  x2, last->host_sof, last->dev_sof, y1, y2);
 
@@ -1137,6 +1146,20 @@ static int uvc_video_encode_data(struct uvc_streaming *stream,
  */
 
 /*
+<<<<<<< HEAD
+=======
+ * Set error flag for incomplete buffer.
+ */
+static void uvc_video_validate_buffer(const struct uvc_streaming *stream,
+				      struct uvc_buffer *buf)
+{
+	if (stream->ctrl.dwMaxVideoFrameSize != buf->bytesused &&
+	    !(stream->cur_format->flags & UVC_FMT_FLAG_COMPRESSED))
+		buf->error = 1;
+}
+
+/*
+>>>>>>> v3.18
  * Completion handler for video URBs.
  */
 static void uvc_video_decode_isoc(struct urb *urb, struct uvc_streaming *stream,
@@ -1160,9 +1183,17 @@ static void uvc_video_decode_isoc(struct urb *urb, struct uvc_streaming *stream,
 		do {
 			ret = uvc_video_decode_start(stream, buf, mem,
 				urb->iso_frame_desc[i].actual_length);
+<<<<<<< HEAD
 			if (ret == -EAGAIN)
 				buf = uvc_queue_next_buffer(&stream->queue,
 							    buf);
+=======
+			if (ret == -EAGAIN) {
+				uvc_video_validate_buffer(stream, buf);
+				buf = uvc_queue_next_buffer(&stream->queue,
+							    buf);
+			}
+>>>>>>> v3.18
 		} while (ret == -EAGAIN);
 
 		if (ret < 0)
@@ -1177,11 +1208,15 @@ static void uvc_video_decode_isoc(struct urb *urb, struct uvc_streaming *stream,
 			urb->iso_frame_desc[i].actual_length);
 
 		if (buf->state == UVC_BUF_STATE_READY) {
+<<<<<<< HEAD
 			if (buf->length != buf->bytesused &&
 			    !(stream->cur_format->flags &
 			      UVC_FMT_FLAG_COMPRESSED))
 				buf->error = 1;
 
+=======
+			uvc_video_validate_buffer(stream, buf);
+>>>>>>> v3.18
 			buf = uvc_queue_next_buffer(&stream->queue, buf);
 		}
 	}
@@ -1453,10 +1488,20 @@ static unsigned int uvc_endpoint_max_bpi(struct usb_device *dev,
 
 	switch (dev->speed) {
 	case USB_SPEED_SUPER:
+<<<<<<< HEAD
 		return ep->ss_ep_comp.wBytesPerInterval;
 	case USB_SPEED_HIGH:
 		psize = usb_endpoint_maxp(&ep->desc);
 		return (psize & 0x07ff) * (1 + ((psize >> 11) & 3));
+=======
+		return le16_to_cpu(ep->ss_ep_comp.wBytesPerInterval);
+	case USB_SPEED_HIGH:
+		psize = usb_endpoint_maxp(&ep->desc);
+		return (psize & 0x07ff) * (1 + ((psize >> 11) & 3));
+	case USB_SPEED_WIRELESS:
+		psize = usb_endpoint_maxp(&ep->desc);
+		return psize;
+>>>>>>> v3.18
 	default:
 		psize = usb_endpoint_maxp(&ep->desc);
 		return psize & 0x07ff;
@@ -1665,6 +1710,15 @@ static int uvc_init_video(struct uvc_streaming *stream, gfp_t gfp_flags)
 		}
 	}
 
+<<<<<<< HEAD
+=======
+	/* The Logitech C920 temporarily forgets that it should not be adjusting
+	 * Exposure Absolute during init so restore controls to stored values.
+	 */
+	if (stream->dev->quirks & UVC_QUIRK_RESTORE_CTRLS_ON_INIT)
+		uvc_ctrl_restore_values(stream->dev);
+
+>>>>>>> v3.18
 	return 0;
 }
 

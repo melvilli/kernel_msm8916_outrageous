@@ -18,12 +18,17 @@
 #include <linux/init.h>
 #include <linux/types.h>
 #include <linux/string.h>
+<<<<<<< HEAD
+=======
+#include <linux/memblock.h>
+>>>>>>> v3.18
 
 #include <asm/setup.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 
 #include "common.h"
+<<<<<<< HEAD
 
 static void __init
 fixup_clep7312(struct tag *tags, char **cmdline, struct meminfo *mi)
@@ -31,16 +36,31 @@ fixup_clep7312(struct tag *tags, char **cmdline, struct meminfo *mi)
 	mi->nr_banks=1;
 	mi->bank[0].start = 0xc0000000;
 	mi->bank[0].size = 0x01000000;
+=======
+#include "devices.h"
+
+static void __init
+fixup_clep7312(struct tag *tags, char **cmdline)
+{
+	memblock_add(0xc0000000, 0x01000000);
+>>>>>>> v3.18
 }
 
 MACHINE_START(CLEP7212, "Cirrus Logic 7212/7312")
 	/* Maintainer: Nobody */
 	.atag_offset	= 0x0100,
+<<<<<<< HEAD
 	.nr_irqs	= CLPS711X_NR_IRQS,
+=======
+>>>>>>> v3.18
 	.fixup		= fixup_clep7312,
 	.map_io		= clps711x_map_io,
 	.init_irq	= clps711x_init_irq,
 	.init_time	= clps711x_timer_init,
+<<<<<<< HEAD
 	.handle_irq	= clps711x_handle_irq,
+=======
+	.init_machine	= clps711x_devices_init,
+>>>>>>> v3.18
 	.restart	= clps711x_restart,
 MACHINE_END

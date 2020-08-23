@@ -13,6 +13,11 @@
  *	- Get the key and enable EVM
  */
 
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 #include <linux/uaccess.h>
 #include <linux/module.h>
 #include "evm.h"
@@ -79,9 +84,15 @@ static ssize_t evm_write_key(struct file *file, const char __user *buf,
 	error = evm_init_key();
 	if (!error) {
 		evm_initialized = 1;
+<<<<<<< HEAD
 		pr_info("EVM: initialized\n");
 	} else
 		pr_err("EVM: initialization failed\n");
+=======
+		pr_info("initialized\n");
+	} else
+		pr_err("initialization failed\n");
+>>>>>>> v3.18
 	return count;
 }
 

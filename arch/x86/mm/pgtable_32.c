@@ -59,6 +59,7 @@ void set_pte_vaddr(unsigned long vaddr, pte_t pteval)
 	__flush_tlb_one(vaddr);
 }
 
+<<<<<<< HEAD
 /*
  * Associate a large virtual page frame with a given physical page frame 
  * and protection flags for that frame. pfn is for the base of the page,
@@ -94,6 +95,8 @@ void set_pmd_pfn(unsigned long vaddr, unsigned long pfn, pgprot_t flags)
 	__flush_tlb_one(vaddr);
 }
 
+=======
+>>>>>>> v3.18
 unsigned long __FIXADDR_TOP = 0xfffff000;
 EXPORT_SYMBOL(__FIXADDR_TOP);
 
@@ -127,7 +130,11 @@ static int __init parse_reservetop(char *arg)
 
 	address = memparse(arg, &arg);
 	reserve_top_address(address);
+<<<<<<< HEAD
 	fixup_early_ioremap();
+=======
+	early_ioremap_init();
+>>>>>>> v3.18
 	return 0;
 }
 early_param("reservetop", parse_reservetop);

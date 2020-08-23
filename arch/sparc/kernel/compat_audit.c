@@ -1,5 +1,9 @@
 #define __32bit_syscall_numbers__
 #include <asm/unistd.h>
+<<<<<<< HEAD
+=======
+#include "kernel.h"
+>>>>>>> v3.18
 
 unsigned sparc32_dir_class[] = {
 #include <asm-generic/audit_dir_write.h>

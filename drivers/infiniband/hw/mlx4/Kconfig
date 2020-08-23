@@ -1,6 +1,10 @@
 config MLX4_INFINIBAND
 	tristate "Mellanox ConnectX HCA support"
+<<<<<<< HEAD
 	depends on NETDEVICES && ETHERNET && PCI
+=======
+	depends on NETDEVICES && ETHERNET && PCI && INET
+>>>>>>> v3.18
 	select NET_VENDOR_MELLANOX
 	select MLX4_CORE
 	---help---

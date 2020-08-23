@@ -17,6 +17,10 @@
  */
 
 #include <linux/linkage.h>
+<<<<<<< HEAD
+=======
+#include <asm/assembler.h>
+>>>>>>> v3.18
 #include <asm/unified.h>
 #include <asm/asm-offsets.h>
 #include <asm/kvm_asm.h>
@@ -71,7 +75,11 @@ __do_hyp_init:
 	bne	phase2			@ Yes, second stage init
 
 	@ Set the HTTBR to point to the hypervisor PGD pointer passed
+<<<<<<< HEAD
 	mcrr	p15, 4, r2, r3, c2
+=======
+	mcrr	p15, 4, rr_lo_hi(r2, r3), c2
+>>>>>>> v3.18
 
 	@ Set the HTCR and VTCR to the same shareability and cacheability
 	@ settings as the non-secure TTBCR and with T0SZ == 0.
@@ -98,6 +106,13 @@ __do_hyp_init:
 	mrc	p15, 0, r0, c10, c2, 1
 	mcr	p15, 4, r0, c10, c2, 1
 
+<<<<<<< HEAD
+=======
+	@ Invalidate the stale TLBs from Bootloader
+	mcr	p15, 4, r0, c8, c7, 0	@ TLBIALLH
+	dsb	ish
+
+>>>>>>> v3.18
 	@ Set the HSCTLR to:
 	@  - ARM/THUMB exceptions: Kernel config (Thumb-2 kernel)
 	@  - Endianness: Kernel config
@@ -134,15 +149,26 @@ phase2:
 	ldr	r0, =TRAMPOLINE_VA
 	adr	r1, target
 	bfi	r0, r1, #0, #PAGE_SHIFT
+<<<<<<< HEAD
 	mov	pc, r0
 
 target:	@ We're now in the trampoline code, switch page tables
 	mcrr	p15, 4, r2, r3, c2
+=======
+	ret	r0
+
+target:	@ We're now in the trampoline code, switch page tables
+	mcrr	p15, 4, rr_lo_hi(r2, r3), c2
+>>>>>>> v3.18
 	isb
 
 	@ Invalidate the old TLBs
 	mcr	p15, 4, r0, c8, c7, 0	@ TLBIALLH
+<<<<<<< HEAD
 	dsb
+=======
+	dsb	ish
+>>>>>>> v3.18
 
 	eret
 

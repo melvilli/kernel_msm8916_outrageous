@@ -36,14 +36,21 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
  */
 
 #include <linux/crc32.h>
 #include <linux/etherdevice.h>
 #include <linux/ethtool.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/mii.h>
 #include <linux/module.h>
 #include <linux/netdevice.h>
@@ -117,7 +124,10 @@ enum {
 struct mcs7830_data {
 	u8 multi_filter[8];
 	u8 config;
+<<<<<<< HEAD
 	u8 link_counter;
+=======
+>>>>>>> v3.18
 };
 
 static const char driver_name[] = "MOSCHIP usb-ethernet driver";
@@ -562,11 +572,15 @@ static void mcs7830_status(struct usbnet *dev, struct urb *urb)
 {
 	u8 *buf = urb->transfer_buffer;
 	bool link, link_changed;
+<<<<<<< HEAD
 	struct mcs7830_data *data = mcs7830_get_data(dev);
+=======
+>>>>>>> v3.18
 
 	if (urb->actual_length < 16)
 		return;
 
+<<<<<<< HEAD
 	link = !(buf[1] & 0x20);
 	link_changed = netif_carrier_ok(dev->net) != link;
 	if (link_changed) {
@@ -582,6 +596,14 @@ static void mcs7830_status(struct usbnet *dev, struct urb *urb)
 		}
 	} else
 		data->link_counter = 0;
+=======
+	link = !(buf[1] == 0x20);
+	link_changed = netif_carrier_ok(dev->net) != link;
+	if (link_changed) {
+		usbnet_link_change(dev, link, 0);
+		netdev_dbg(dev->net, "Link Status is: %d\n", link);
+	}
+>>>>>>> v3.18
 }
 
 static const struct driver_info moschip_info = {

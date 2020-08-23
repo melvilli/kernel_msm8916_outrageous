@@ -21,6 +21,7 @@
  */
 
 #include <linux/cpuidle.h>
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/io.h>
 #include <linux/of.h>
@@ -74,14 +75,37 @@ static int calxeda_idle_finish(unsigned long val)
 	/* Restore things if we didn't enter power-gating */
 	calxeda_idle_restore();
 	return 1;
+=======
+#include <linux/cpu_pm.h>
+#include <linux/init.h>
+#include <linux/mm.h>
+#include <linux/platform_device.h>
+#include <asm/cpuidle.h>
+#include <asm/suspend.h>
+#include <asm/psci.h>
+
+static int calxeda_idle_finish(unsigned long val)
+{
+	const struct psci_power_state ps = {
+		.type = PSCI_POWER_STATE_TYPE_POWER_DOWN,
+	};
+	return psci_ops.cpu_suspend(ps, __pa(cpu_resume));
+>>>>>>> v3.18
 }
 
 static int calxeda_pwrdown_idle(struct cpuidle_device *dev,
 				struct cpuidle_driver *drv,
 				int index)
 {
+<<<<<<< HEAD
 	highbank_set_cpu_jump(smp_processor_id(), cpu_resume);
 	cpu_suspend(0, calxeda_idle_finish);
+=======
+	cpu_pm_enter();
+	cpu_suspend(0, calxeda_idle_finish);
+	cpu_pm_exit();
+
+>>>>>>> v3.18
 	return index;
 }
 
@@ -102,6 +126,7 @@ static struct cpuidle_driver calxeda_idle_driver = {
 	.state_count = 2,
 };
 
+<<<<<<< HEAD
 static int __init calxeda_cpuidle_init(void)
 {
 	if (!of_machine_is_compatible("calxeda,highbank"))
@@ -110,3 +135,19 @@ static int __init calxeda_cpuidle_init(void)
 	return cpuidle_register(&calxeda_idle_driver, NULL);
 }
 module_init(calxeda_cpuidle_init);
+=======
+static int calxeda_cpuidle_probe(struct platform_device *pdev)
+{
+	return cpuidle_register(&calxeda_idle_driver, NULL);
+}
+
+static struct platform_driver calxeda_cpuidle_plat_driver = {
+        .driver = {
+                .name = "cpuidle-calxeda",
+                .owner = THIS_MODULE,
+        },
+        .probe = calxeda_cpuidle_probe,
+};
+
+module_platform_driver(calxeda_cpuidle_plat_driver);
+>>>>>>> v3.18

@@ -14,11 +14,14 @@
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 */
 /*
 Driver: ni_pcidio
@@ -52,6 +55,7 @@ comedi_nonfree_firmware tarball available from http://www.comedi.org
 */
 
 #define USE_DMA
+<<<<<<< HEAD
 /* #define DEBUG 1 */
 /* #define DEBUG_FLAGS */
 
@@ -59,12 +63,20 @@ comedi_nonfree_firmware tarball available from http://www.comedi.org
 #include <linux/interrupt.h>
 #include <linux/sched.h>
 #include <linux/firmware.h>
+=======
+
+#include <linux/module.h>
+#include <linux/delay.h>
+#include <linux/interrupt.h>
+#include <linux/sched.h>
+>>>>>>> v3.18
 
 #include "../comedidev.h"
 
 #include "comedi_fc.h"
 #include "mite.h"
 
+<<<<<<< HEAD
 #undef DPRINTK
 #ifdef DEBUG
 #define DPRINTK(format, args...) pr_debug(format, ## args)
@@ -75,6 +87,8 @@ comedi_nonfree_firmware tarball available from http://www.comedi.org
 #define PCI_DIO_SIZE 4096
 #define PCI_MITE_SIZE 4096
 
+=======
+>>>>>>> v3.18
 /* defines for the PCI-DIO-32HS */
 
 #define Window_Address			4	/* W */
@@ -277,9 +291,12 @@ enum FPGA_Control_Bits {
 #define IntEn (TransferReady|CountExpired|Waited|PrimaryTC|SecondaryTC)
 #endif
 
+<<<<<<< HEAD
 static int ni_pcidio_cancel(struct comedi_device *dev,
 			    struct comedi_subdevice *s);
 
+=======
+>>>>>>> v3.18
 enum nidio_boardid {
 	BOARD_PCIDIO_32HS,
 	BOARD_PXI6533,
@@ -314,6 +331,7 @@ struct nidio96_private {
 	spinlock_t mite_channel_lock;
 };
 
+<<<<<<< HEAD
 static int ni_pcidio_cmdtest(struct comedi_device *dev,
 			     struct comedi_subdevice *s,
 			     struct comedi_cmd *cmd);
@@ -332,6 +350,8 @@ static void ni_pcidio_print_status(unsigned int status);
 #define ni_pcidio_print_status(x)
 #endif
 
+=======
+>>>>>>> v3.18
 static int ni_pcidio_request_di_mite_channel(struct comedi_device *dev)
 {
 	struct nidio96_private *devpriv = dev->private;
@@ -344,13 +364,21 @@ static int ni_pcidio_request_di_mite_channel(struct comedi_device *dev)
 					  devpriv->di_mite_ring, 1, 2);
 	if (devpriv->di_mite_chan == NULL) {
 		spin_unlock_irqrestore(&devpriv->mite_channel_lock, flags);
+<<<<<<< HEAD
 		comedi_error(dev, "failed to reserve mite dma channel.");
+=======
+		dev_err(dev->class_dev, "failed to reserve mite dma channel\n");
+>>>>>>> v3.18
 		return -EBUSY;
 	}
 	devpriv->di_mite_chan->dir = COMEDI_INPUT;
 	writeb(primary_DMAChannel_bits(devpriv->di_mite_chan->channel) |
 	       secondary_DMAChannel_bits(devpriv->di_mite_chan->channel),
+<<<<<<< HEAD
 	       devpriv->mite->daq_io_addr + DMA_Line_Control_Group1);
+=======
+	       dev->mmio + DMA_Line_Control_Group1);
+>>>>>>> v3.18
 	mmiowb();
 	spin_unlock_irqrestore(&devpriv->mite_channel_lock, flags);
 	return 0;
@@ -369,12 +397,17 @@ static void ni_pcidio_release_di_mite_channel(struct comedi_device *dev)
 		devpriv->di_mite_chan = NULL;
 		writeb(primary_DMAChannel_bits(0) |
 		       secondary_DMAChannel_bits(0),
+<<<<<<< HEAD
 		       devpriv->mite->daq_io_addr + DMA_Line_Control_Group1);
+=======
+		       dev->mmio + DMA_Line_Control_Group1);
+>>>>>>> v3.18
 		mmiowb();
 	}
 	spin_unlock_irqrestore(&devpriv->mite_channel_lock, flags);
 }
 
+<<<<<<< HEAD
 static void ni_pcidio_event(struct comedi_device *dev,
 			    struct comedi_subdevice *s)
 {
@@ -384,6 +417,30 @@ static void ni_pcidio_event(struct comedi_device *dev,
 		ni_pcidio_cancel(dev, s);
 	}
 	comedi_event(dev, s);
+=======
+static int setup_mite_dma(struct comedi_device *dev, struct comedi_subdevice *s)
+{
+	struct nidio96_private *devpriv = dev->private;
+	int retval;
+	unsigned long flags;
+
+	retval = ni_pcidio_request_di_mite_channel(dev);
+	if (retval)
+		return retval;
+
+	/* write alloc the entire buffer */
+	comedi_buf_write_alloc(s, s->async->prealloc_bufsz);
+
+	spin_lock_irqsave(&devpriv->mite_channel_lock, flags);
+	if (devpriv->di_mite_chan) {
+		mite_prep_dma(devpriv->di_mite_chan, 32, 32);
+		mite_dma_arm(devpriv->di_mite_chan);
+	} else
+		retval = -EIO;
+	spin_unlock_irqrestore(&devpriv->mite_channel_lock, flags);
+
+	return retval;
+>>>>>>> v3.18
 }
 
 static int ni_pcidio_poll(struct comedi_device *dev, struct comedi_subdevice *s)
@@ -395,9 +452,15 @@ static int ni_pcidio_poll(struct comedi_device *dev, struct comedi_subdevice *s)
 	spin_lock_irqsave(&dev->spinlock, irq_flags);
 	spin_lock(&devpriv->mite_channel_lock);
 	if (devpriv->di_mite_chan)
+<<<<<<< HEAD
 		mite_sync_input_dma(devpriv->di_mite_chan, s->async);
 	spin_unlock(&devpriv->mite_channel_lock);
 	count = s->async->buf_write_count - s->async->buf_read_count;
+=======
+		mite_sync_input_dma(devpriv->di_mite_chan, s);
+	spin_unlock(&devpriv->mite_channel_lock);
+	count = comedi_buf_n_bytes_ready(s);
+>>>>>>> v3.18
 	spin_unlock_irqrestore(&dev->spinlock, irq_flags);
 	return count;
 }
@@ -406,14 +469,24 @@ static irqreturn_t nidio_interrupt(int irq, void *d)
 {
 	struct comedi_device *dev = d;
 	struct nidio96_private *devpriv = dev->private;
+<<<<<<< HEAD
 	struct comedi_subdevice *s = &dev->subdevices[0];
+=======
+	struct comedi_subdevice *s = dev->read_subdev;
+>>>>>>> v3.18
 	struct comedi_async *async = s->async;
 	struct mite_struct *mite = devpriv->mite;
 
 	/* int i, j; */
+<<<<<<< HEAD
 	long int AuxData = 0;
 	short data1 = 0;
 	short data2 = 0;
+=======
+	unsigned int auxdata = 0;
+	unsigned short data1 = 0;
+	unsigned short data2 = 0;
+>>>>>>> v3.18
 	int flags;
 	int status;
 	int work = 0;
@@ -428,6 +501,7 @@ static irqreturn_t nidio_interrupt(int irq, void *d)
 	/* Lock to avoid race with comedi_poll */
 	spin_lock(&dev->spinlock);
 
+<<<<<<< HEAD
 	status = readb(devpriv->mite->daq_io_addr +
 		       Interrupt_And_Window_Status);
 	flags = readb(devpriv->mite->daq_io_addr + Group_1_Flags);
@@ -436,26 +510,43 @@ static irqreturn_t nidio_interrupt(int irq, void *d)
 		status, flags);
 	ni_pcidio_print_flags(flags);
 	ni_pcidio_print_status(status);
+=======
+	status = readb(dev->mmio + Interrupt_And_Window_Status);
+	flags = readb(dev->mmio + Group_1_Flags);
+>>>>>>> v3.18
 
 	spin_lock(&devpriv->mite_channel_lock);
 	if (devpriv->di_mite_chan)
 		m_status = mite_get_status(devpriv->di_mite_chan);
+<<<<<<< HEAD
 #ifdef MITE_DEBUG
 	mite_print_chsr(m_status);
 #endif
 
 	/* mite_dump_regs(mite); */
+=======
+
+>>>>>>> v3.18
 	if (m_status & CHSR_INT) {
 		if (m_status & CHSR_LINKC) {
 			writel(CHOR_CLRLC,
 			       mite->mite_io_addr +
 			       MITE_CHOR(devpriv->di_mite_chan->channel));
+<<<<<<< HEAD
 			mite_sync_input_dma(devpriv->di_mite_chan, s->async);
+=======
+			mite_sync_input_dma(devpriv->di_mite_chan, s);
+>>>>>>> v3.18
 			/* XXX need to byteswap */
 		}
 		if (m_status & ~(CHSR_INT | CHSR_LINKC | CHSR_DONE | CHSR_DRDY |
 				 CHSR_DRQ1 | CHSR_MRDY)) {
+<<<<<<< HEAD
 			DPRINTK("unknown mite interrupt, disabling IRQ\n");
+=======
+			dev_dbg(dev->class_dev,
+				"unknown mite interrupt, disabling IRQ\n");
+>>>>>>> v3.18
 			async->events |= COMEDI_CB_EOA | COMEDI_CB_ERROR;
 			disable_irq(dev->irq);
 		}
@@ -465,16 +556,23 @@ static irqreturn_t nidio_interrupt(int irq, void *d)
 	while (status & DataLeft) {
 		work++;
 		if (work > 20) {
+<<<<<<< HEAD
 			DPRINTK("too much work in interrupt\n");
 			writeb(0x00,
 			       devpriv->mite->daq_io_addr +
 			       Master_DMA_And_Interrupt_Control);
+=======
+			dev_dbg(dev->class_dev, "too much work in interrupt\n");
+			writeb(0x00,
+			       dev->mmio + Master_DMA_And_Interrupt_Control);
+>>>>>>> v3.18
 			break;
 		}
 
 		flags &= IntEn;
 
 		if (flags & TransferReady) {
+<<<<<<< HEAD
 			/* DPRINTK("TransferReady\n"); */
 			while (flags & TransferReady) {
 				work++;
@@ -482,10 +580,19 @@ static irqreturn_t nidio_interrupt(int irq, void *d)
 					DPRINTK("too much work in interrupt\n");
 					writeb(0x00,
 					       devpriv->mite->daq_io_addr +
+=======
+			while (flags & TransferReady) {
+				work++;
+				if (work > 100) {
+					dev_dbg(dev->class_dev,
+						"too much work in interrupt\n");
+					writeb(0x00, dev->mmio +
+>>>>>>> v3.18
 					       Master_DMA_And_Interrupt_Control
 					      );
 					goto out;
 				}
+<<<<<<< HEAD
 				AuxData =
 				    readl(devpriv->mite->daq_io_addr +
 					  Group_1_FIFO);
@@ -503,10 +610,20 @@ static irqreturn_t nidio_interrupt(int irq, void *d)
 				IntEn,flags,status); */
 			/* ni_pcidio_print_flags(flags); */
 			/* ni_pcidio_print_status(status); */
+=======
+				auxdata = readl(dev->mmio + Group_1_FIFO);
+				data1 = auxdata & 0xffff;
+				data2 = (auxdata & 0xffff0000) >> 16;
+				comedi_buf_put(s, data1);
+				comedi_buf_put(s, data2);
+				flags = readb(dev->mmio + Group_1_Flags);
+			}
+>>>>>>> v3.18
 			async->events |= COMEDI_CB_BLOCK;
 		}
 
 		if (flags & CountExpired) {
+<<<<<<< HEAD
 			DPRINTK("CountExpired\n");
 			writeb(ClearExpired,
 			       devpriv->mite->daq_io_addr +
@@ -561,12 +678,43 @@ out:
 		       devpriv->mite->daq_io_addr +
 		       Master_DMA_And_Interrupt_Control);
 	}
+=======
+			writeb(ClearExpired, dev->mmio + Group_1_Second_Clear);
+			async->events |= COMEDI_CB_EOA;
+
+			writeb(0x00, dev->mmio + OpMode);
+			break;
+		} else if (flags & Waited) {
+			writeb(ClearWaited, dev->mmio + Group_1_First_Clear);
+			async->events |= COMEDI_CB_EOA | COMEDI_CB_ERROR;
+			break;
+		} else if (flags & PrimaryTC) {
+			writeb(ClearPrimaryTC,
+			       dev->mmio + Group_1_First_Clear);
+			async->events |= COMEDI_CB_EOA;
+		} else if (flags & SecondaryTC) {
+			writeb(ClearSecondaryTC,
+			       dev->mmio + Group_1_First_Clear);
+			async->events |= COMEDI_CB_EOA;
+		}
+
+		flags = readb(dev->mmio + Group_1_Flags);
+		status = readb(dev->mmio + Interrupt_And_Window_Status);
+	}
+
+out:
+	cfc_handle_events(dev, s);
+#if 0
+	if (!tag)
+		writeb(0x03, dev->mmio + Master_DMA_And_Interrupt_Control);
+>>>>>>> v3.18
 #endif
 
 	spin_unlock(&dev->spinlock);
 	return IRQ_HANDLED;
 }
 
+<<<<<<< HEAD
 #ifdef DEBUG_FLAGS
 static const char *bit_set_string(unsigned int bits, unsigned int bit,
 				  const char *const strings[])
@@ -687,13 +835,69 @@ static int ni_pcidio_insn_bits(struct comedi_device *dev,
 	data[1] = readl(devpriv->mite->daq_io_addr + Port_IO(0));
 
 	return insn->n;
+=======
+static int ni_pcidio_insn_config(struct comedi_device *dev,
+				 struct comedi_subdevice *s,
+				 struct comedi_insn *insn,
+				 unsigned int *data)
+{
+	int ret;
+
+	ret = comedi_dio_insn_config(dev, s, insn, data, 0);
+	if (ret)
+		return ret;
+
+	writel(s->io_bits, dev->mmio + Port_Pin_Directions(0));
+
+	return insn->n;
+}
+
+static int ni_pcidio_insn_bits(struct comedi_device *dev,
+			       struct comedi_subdevice *s,
+			       struct comedi_insn *insn,
+			       unsigned int *data)
+{
+	if (comedi_dio_update_state(s, data))
+		writel(s->state, dev->mmio + Port_IO(0));
+
+	data[1] = readl(dev->mmio + Port_IO(0));
+
+	return insn->n;
+}
+
+static int ni_pcidio_ns_to_timer(int *nanosec, unsigned int flags)
+{
+	int divider, base;
+
+	base = TIMER_BASE;
+
+	switch (flags & CMDF_ROUND_MASK) {
+	case CMDF_ROUND_NEAREST:
+	default:
+		divider = (*nanosec + base / 2) / base;
+		break;
+	case CMDF_ROUND_DOWN:
+		divider = (*nanosec) / base;
+		break;
+	case CMDF_ROUND_UP:
+		divider = (*nanosec + base - 1) / base;
+		break;
+	}
+
+	*nanosec = base * divider;
+	return divider;
+>>>>>>> v3.18
 }
 
 static int ni_pcidio_cmdtest(struct comedi_device *dev,
 			     struct comedi_subdevice *s, struct comedi_cmd *cmd)
 {
 	int err = 0;
+<<<<<<< HEAD
 	int tmp;
+=======
+	unsigned int arg;
+>>>>>>> v3.18
 
 	/* Step 1 : check if triggers are trivially valid */
 
@@ -740,11 +944,18 @@ static int ni_pcidio_cmdtest(struct comedi_device *dev,
 	err |= cfc_check_trigger_arg_is(&cmd->convert_arg, 0);
 	err |= cfc_check_trigger_arg_is(&cmd->scan_end_arg, cmd->chanlist_len);
 
+<<<<<<< HEAD
 	if (cmd->stop_src == TRIG_COUNT) {
 		/* no limit */
 	} else {	/* TRIG_NONE */
 		err |= cfc_check_trigger_arg_is(&cmd->stop_arg, 0);
 	}
+=======
+	if (cmd->stop_src == TRIG_COUNT)
+		err |= cfc_check_trigger_arg_min(&cmd->stop_arg, 1);
+	else	/* TRIG_NONE */
+		err |= cfc_check_trigger_arg_is(&cmd->stop_arg, 0);
+>>>>>>> v3.18
 
 	if (err)
 		return 3;
@@ -752,11 +963,17 @@ static int ni_pcidio_cmdtest(struct comedi_device *dev,
 	/* step 4: fix up any arguments */
 
 	if (cmd->scan_begin_src == TRIG_TIMER) {
+<<<<<<< HEAD
 		tmp = cmd->scan_begin_arg;
 		ni_pcidio_ns_to_timer(&cmd->scan_begin_arg,
 				      cmd->flags & TRIG_ROUND_MASK);
 		if (tmp != cmd->scan_begin_arg)
 			err++;
+=======
+		arg = cmd->scan_begin_arg;
+		ni_pcidio_ns_to_timer(&arg, cmd->flags);
+		err |= cfc_check_trigger_arg_is(&cmd->scan_begin_arg, arg);
+>>>>>>> v3.18
 	}
 
 	if (err)
@@ -765,6 +982,7 @@ static int ni_pcidio_cmdtest(struct comedi_device *dev,
 	return 0;
 }
 
+<<<<<<< HEAD
 static int ni_pcidio_ns_to_timer(int *nanosec, int round_mode)
 {
 	int divider, base;
@@ -786,6 +1004,22 @@ static int ni_pcidio_ns_to_timer(int *nanosec, int round_mode)
 
 	*nanosec = base * divider;
 	return divider;
+=======
+static int ni_pcidio_inttrig(struct comedi_device *dev,
+			     struct comedi_subdevice *s,
+			     unsigned int trig_num)
+{
+	struct nidio96_private *devpriv = dev->private;
+	struct comedi_cmd *cmd = &s->async->cmd;
+
+	if (trig_num != cmd->start_arg)
+		return -EINVAL;
+
+	writeb(devpriv->OpModeBits, dev->mmio + OpMode);
+	s->async->inttrig = NULL;
+
+	return 1;
+>>>>>>> v3.18
 }
 
 static int ni_pcidio_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
@@ -794,6 +1028,7 @@ static int ni_pcidio_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 	struct comedi_cmd *cmd = &s->async->cmd;
 
 	/* XXX configure ports for input */
+<<<<<<< HEAD
 	writel(0x0000, devpriv->mite->daq_io_addr + Port_Pin_Directions(0));
 
 	if (1) {
@@ -807,11 +1042,27 @@ static int ni_pcidio_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 		writeb(0x03, devpriv->mite->daq_io_addr + Data_Path);
 		writeb(TransferWidth(3) | TransferLength(0),
 		       devpriv->mite->daq_io_addr + Transfer_Size_Control);
+=======
+	writel(0x0000, dev->mmio + Port_Pin_Directions(0));
+
+	if (1) {
+		/* enable fifos A B C D */
+		writeb(0x0f, dev->mmio + Data_Path);
+
+		/* set transfer width a 32 bits */
+		writeb(TransferWidth(0) | TransferLength(0),
+		       dev->mmio + Transfer_Size_Control);
+	} else {
+		writeb(0x03, dev->mmio + Data_Path);
+		writeb(TransferWidth(3) | TransferLength(0),
+		       dev->mmio + Transfer_Size_Control);
+>>>>>>> v3.18
 	}
 
 	/* protocol configuration */
 	if (cmd->scan_begin_src == TRIG_TIMER) {
 		/* page 4-5, "input with internal REQs" */
+<<<<<<< HEAD
 		writeb(0, devpriv->mite->daq_io_addr + OpMode);
 		writeb(0x00, devpriv->mite->daq_io_addr + ClockReg);
 		writeb(1, devpriv->mite->daq_io_addr + Sequence);
@@ -855,25 +1106,80 @@ static int ni_pcidio_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 		writeb(0x10, devpriv->mite->daq_io_addr + Data1Delay);
 		writew(0, devpriv->mite->daq_io_addr + ClockSpeed);
 		writeb(0x60, devpriv->mite->daq_io_addr + DAQOptions);
+=======
+		writeb(0, dev->mmio + OpMode);
+		writeb(0x00, dev->mmio + ClockReg);
+		writeb(1, dev->mmio + Sequence);
+		writeb(0x04, dev->mmio + ReqReg);
+		writeb(4, dev->mmio + BlockMode);
+		writeb(3, dev->mmio + LinePolarities);
+		writeb(0xc0, dev->mmio + AckSer);
+		writel(ni_pcidio_ns_to_timer(&cmd->scan_begin_arg,
+					     CMDF_ROUND_NEAREST),
+		       dev->mmio + StartDelay);
+		writeb(1, dev->mmio + ReqDelay);
+		writeb(1, dev->mmio + ReqNotDelay);
+		writeb(1, dev->mmio + AckDelay);
+		writeb(0x0b, dev->mmio + AckNotDelay);
+		writeb(0x01, dev->mmio + Data1Delay);
+		/* manual, page 4-5: ClockSpeed comment is incorrectly listed
+		 * on DAQOptions */
+		writew(0, dev->mmio + ClockSpeed);
+		writeb(0, dev->mmio + DAQOptions);
+	} else {
+		/* TRIG_EXT */
+		/* page 4-5, "input with external REQs" */
+		writeb(0, dev->mmio + OpMode);
+		writeb(0x00, dev->mmio + ClockReg);
+		writeb(0, dev->mmio + Sequence);
+		writeb(0x00, dev->mmio + ReqReg);
+		writeb(4, dev->mmio + BlockMode);
+		if (!(cmd->scan_begin_arg & CR_INVERT))	/* Leading Edge */
+			writeb(0, dev->mmio + LinePolarities);
+		else					/* Trailing Edge */
+			writeb(2, dev->mmio + LinePolarities);
+		writeb(0x00, dev->mmio + AckSer);
+		writel(1, dev->mmio + StartDelay);
+		writeb(1, dev->mmio + ReqDelay);
+		writeb(1, dev->mmio + ReqNotDelay);
+		writeb(1, dev->mmio + AckDelay);
+		writeb(0x0C, dev->mmio + AckNotDelay);
+		writeb(0x10, dev->mmio + Data1Delay);
+		writew(0, dev->mmio + ClockSpeed);
+		writeb(0x60, dev->mmio + DAQOptions);
+>>>>>>> v3.18
 	}
 
 	if (cmd->stop_src == TRIG_COUNT) {
 		writel(cmd->stop_arg,
+<<<<<<< HEAD
 		       devpriv->mite->daq_io_addr + Transfer_Count);
+=======
+		       dev->mmio + Transfer_Count);
+>>>>>>> v3.18
 	} else {
 		/* XXX */
 	}
 
 #ifdef USE_DMA
 	writeb(ClearPrimaryTC | ClearSecondaryTC,
+<<<<<<< HEAD
 	       devpriv->mite->daq_io_addr + Group_1_First_Clear);
 
 	{
 		int retval = setup_mite_dma(dev, s);
+=======
+	       dev->mmio + Group_1_First_Clear);
+
+	{
+		int retval = setup_mite_dma(dev, s);
+
+>>>>>>> v3.18
 		if (retval)
 			return retval;
 	}
 #else
+<<<<<<< HEAD
 	writeb(0x00, devpriv->mite->daq_io_addr + DMA_Line_Control_Group1);
 #endif
 	writeb(0x00, devpriv->mite->daq_io_addr + DMA_Line_Control_Group2);
@@ -886,6 +1192,18 @@ static int ni_pcidio_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 	writeb(IntEn, devpriv->mite->daq_io_addr + Interrupt_Control);
 	writeb(0x03,
 	       devpriv->mite->daq_io_addr + Master_DMA_And_Interrupt_Control);
+=======
+	writeb(0x00, dev->mmio + DMA_Line_Control_Group1);
+#endif
+	writeb(0x00, dev->mmio + DMA_Line_Control_Group2);
+
+	/* clear and enable interrupts */
+	writeb(0xff, dev->mmio + Group_1_First_Clear);
+	/* writeb(ClearExpired, dev->mmio+Group_1_Second_Clear); */
+
+	writeb(IntEn, dev->mmio + Interrupt_Control);
+	writeb(0x03, dev->mmio + Master_DMA_And_Interrupt_Control);
+>>>>>>> v3.18
 
 	if (cmd->stop_src == TRIG_NONE) {
 		devpriv->OpModeBits = DataLatching(0) | RunMode(7);
@@ -894,14 +1212,19 @@ static int ni_pcidio_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 	}
 	if (cmd->start_src == TRIG_NOW) {
 		/* start */
+<<<<<<< HEAD
 		writeb(devpriv->OpModeBits,
 		       devpriv->mite->daq_io_addr + OpMode);
+=======
+		writeb(devpriv->OpModeBits, dev->mmio + OpMode);
+>>>>>>> v3.18
 		s->async->inttrig = NULL;
 	} else {
 		/* TRIG_INT */
 		s->async->inttrig = ni_pcidio_inttrig;
 	}
 
+<<<<<<< HEAD
 	DPRINTK("ni_pcidio: command started\n");
 	return 0;
 }
@@ -951,18 +1274,35 @@ static int ni_pcidio_cancel(struct comedi_device *dev,
 
 	writeb(0x00,
 	       devpriv->mite->daq_io_addr + Master_DMA_And_Interrupt_Control);
+=======
+	return 0;
+}
+
+static int ni_pcidio_cancel(struct comedi_device *dev,
+			    struct comedi_subdevice *s)
+{
+	writeb(0x00, dev->mmio + Master_DMA_And_Interrupt_Control);
+>>>>>>> v3.18
 	ni_pcidio_release_di_mite_channel(dev);
 
 	return 0;
 }
 
 static int ni_pcidio_change(struct comedi_device *dev,
+<<<<<<< HEAD
 			    struct comedi_subdevice *s, unsigned long new_size)
+=======
+			    struct comedi_subdevice *s)
+>>>>>>> v3.18
 {
 	struct nidio96_private *devpriv = dev->private;
 	int ret;
 
+<<<<<<< HEAD
 	ret = mite_buf_change(devpriv->di_mite_ring, s->async);
+=======
+	ret = mite_buf_change(devpriv->di_mite_ring, s);
+>>>>>>> v3.18
 	if (ret < 0)
 		return ret;
 
@@ -971,6 +1311,7 @@ static int ni_pcidio_change(struct comedi_device *dev,
 	return 0;
 }
 
+<<<<<<< HEAD
 static int pci_6534_load_fpga(struct comedi_device *dev, int fpga_index,
 			      const u8 *data, size_t data_len)
 {
@@ -986,6 +1327,22 @@ static int pci_6534_load_fpga(struct comedi_device *dev, int fpga_index,
 	for (i = 0;
 	     (readw(devpriv->mite->daq_io_addr +
 		    Firmware_Status_Register) & 0x2) == 0 && i < timeout; ++i) {
+=======
+static int pci_6534_load_fpga(struct comedi_device *dev,
+			      const u8 *data, size_t data_len,
+			      unsigned long context)
+{
+	static const int timeout = 1000;
+	int fpga_index = context;
+	int i;
+	size_t j;
+
+	writew(0x80 | fpga_index, dev->mmio + Firmware_Control_Register);
+	writew(0xc0 | fpga_index, dev->mmio + Firmware_Control_Register);
+	for (i = 0;
+	     (readw(dev->mmio + Firmware_Status_Register) & 0x2) == 0 &&
+	     i < timeout; ++i) {
+>>>>>>> v3.18
 		udelay(1);
 	}
 	if (i == timeout) {
@@ -994,11 +1351,18 @@ static int pci_6534_load_fpga(struct comedi_device *dev, int fpga_index,
 			 fpga_index);
 		return -EIO;
 	}
+<<<<<<< HEAD
 	writew(0x80 | fpga_index,
 	       devpriv->mite->daq_io_addr + Firmware_Control_Register);
 	for (i = 0;
 	     readw(devpriv->mite->daq_io_addr + Firmware_Status_Register) !=
 	     0x3 && i < timeout; ++i) {
+=======
+	writew(0x80 | fpga_index, dev->mmio + Firmware_Control_Register);
+	for (i = 0;
+	     readw(dev->mmio + Firmware_Status_Register) != 0x3 &&
+	     i < timeout; ++i) {
+>>>>>>> v3.18
 		udelay(1);
 	}
 	if (i == timeout) {
@@ -1009,12 +1373,20 @@ static int pci_6534_load_fpga(struct comedi_device *dev, int fpga_index,
 	}
 	for (j = 0; j + 1 < data_len;) {
 		unsigned int value = data[j++];
+<<<<<<< HEAD
 		value |= data[j++] << 8;
 		writew(value,
 		       devpriv->mite->daq_io_addr + Firmware_Data_Register);
 		for (i = 0;
 		     (readw(devpriv->mite->daq_io_addr +
 			    Firmware_Status_Register) & 0x2) == 0
+=======
+
+		value |= data[j++] << 8;
+		writew(value, dev->mmio + Firmware_Data_Register);
+		for (i = 0;
+		     (readw(dev->mmio + Firmware_Status_Register) & 0x2) == 0
+>>>>>>> v3.18
 		     && i < timeout; ++i) {
 			udelay(1);
 		}
@@ -1027,33 +1399,53 @@ static int pci_6534_load_fpga(struct comedi_device *dev, int fpga_index,
 		if (need_resched())
 			schedule();
 	}
+<<<<<<< HEAD
 	writew(0x0, devpriv->mite->daq_io_addr + Firmware_Control_Register);
+=======
+	writew(0x0, dev->mmio + Firmware_Control_Register);
+>>>>>>> v3.18
 	return 0;
 }
 
 static int pci_6534_reset_fpga(struct comedi_device *dev, int fpga_index)
 {
+<<<<<<< HEAD
 	return pci_6534_load_fpga(dev, fpga_index, NULL, 0);
+=======
+	return pci_6534_load_fpga(dev, NULL, 0, fpga_index);
+>>>>>>> v3.18
 }
 
 static int pci_6534_reset_fpgas(struct comedi_device *dev)
 {
+<<<<<<< HEAD
 	struct nidio96_private *devpriv = dev->private;
 	int ret;
 	int i;
 
 	writew(0x0, devpriv->mite->daq_io_addr + Firmware_Control_Register);
+=======
+	int ret;
+	int i;
+
+	writew(0x0, dev->mmio + Firmware_Control_Register);
+>>>>>>> v3.18
 	for (i = 0; i < 3; ++i) {
 		ret = pci_6534_reset_fpga(dev, i);
 		if (ret < 0)
 			break;
 	}
+<<<<<<< HEAD
 	writew(0x0, devpriv->mite->daq_io_addr + Firmware_Mask_Register);
+=======
+	writew(0x0, dev->mmio + Firmware_Mask_Register);
+>>>>>>> v3.18
 	return ret;
 }
 
 static void pci_6534_init_main_fpga(struct comedi_device *dev)
 {
+<<<<<<< HEAD
 	struct nidio96_private *devpriv = dev->private;
 
 	writel(0, devpriv->mite->daq_io_addr + FPGA_Control1_Register);
@@ -1062,18 +1454,33 @@ static void pci_6534_init_main_fpga(struct comedi_device *dev)
 	writel(0, devpriv->mite->daq_io_addr + FPGA_SCAMS_Counter_Register);
 	writel(0, devpriv->mite->daq_io_addr + FPGA_SCBLS_Counter_Register);
 	writel(0, devpriv->mite->daq_io_addr + FPGA_SCBMS_Counter_Register);
+=======
+	writel(0, dev->mmio + FPGA_Control1_Register);
+	writel(0, dev->mmio + FPGA_Control2_Register);
+	writel(0, dev->mmio + FPGA_SCALS_Counter_Register);
+	writel(0, dev->mmio + FPGA_SCAMS_Counter_Register);
+	writel(0, dev->mmio + FPGA_SCBLS_Counter_Register);
+	writel(0, dev->mmio + FPGA_SCBMS_Counter_Register);
+>>>>>>> v3.18
 }
 
 static int pci_6534_upload_firmware(struct comedi_device *dev)
 {
 	struct nidio96_private *devpriv = dev->private;
+<<<<<<< HEAD
 	int ret;
 	const struct firmware *fw;
+=======
+>>>>>>> v3.18
 	static const char *const fw_file[3] = {
 		FW_PCI_6534_SCARAB_DI,	/* loaded into scarab A for DI */
 		FW_PCI_6534_SCARAB_DO,	/* loaded into scarab B for DO */
 		FW_PCI_6534_MAIN,	/* loaded into main FPGA */
 	};
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 	int n;
 
 	ret = pci_6534_reset_fpgas(dev);
@@ -1081,6 +1488,7 @@ static int pci_6534_upload_firmware(struct comedi_device *dev)
 		return ret;
 	/* load main FPGA first, then the two scarabs */
 	for (n = 2; n >= 0; n--) {
+<<<<<<< HEAD
 		ret = request_firmware(&fw, fw_file[n],
 				       &devpriv->mite->pcidev->dev);
 		if (ret == 0) {
@@ -1089,12 +1497,32 @@ static int pci_6534_upload_firmware(struct comedi_device *dev)
 				pci_6534_init_main_fpga(dev);
 			release_firmware(fw);
 		}
+=======
+		ret = comedi_load_firmware(dev, &devpriv->mite->pcidev->dev,
+					   fw_file[n],
+					   pci_6534_load_fpga, n);
+		if (ret == 0 && n == 2)
+			pci_6534_init_main_fpga(dev);
+>>>>>>> v3.18
 		if (ret < 0)
 			break;
 	}
 	return ret;
 }
 
+<<<<<<< HEAD
+=======
+static void nidio_reset_board(struct comedi_device *dev)
+{
+	writel(0, dev->mmio + Port_IO(0));
+	writel(0, dev->mmio + Port_Pin_Directions(0));
+	writel(0, dev->mmio + Port_Pin_Mask(0));
+
+	/* disable interrupts on board */
+	writeb(0, dev->mmio + Master_DMA_And_Interrupt_Control);
+}
+
+>>>>>>> v3.18
 static int nidio_auto_attach(struct comedi_device *dev,
 			     unsigned long context)
 {
@@ -1116,10 +1544,16 @@ static int nidio_auto_attach(struct comedi_device *dev,
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
+=======
+	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
+	if (!devpriv)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	spin_lock_init(&devpriv->mite_channel_lock);
 
@@ -1127,29 +1561,47 @@ static int nidio_auto_attach(struct comedi_device *dev,
 	if (!devpriv->mite)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 	ret = mite_setup(devpriv->mite);
 	if (ret < 0) {
 		dev_warn(dev->class_dev, "error setting up mite\n");
 		return ret;
 	}
+=======
+	ret = mite_setup(dev, devpriv->mite);
+	if (ret < 0)
+		return ret;
+>>>>>>> v3.18
 
 	devpriv->di_mite_ring = mite_alloc_ring(devpriv->mite);
 	if (devpriv->di_mite_ring == NULL)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 	irq = mite_irq(devpriv->mite);
+=======
+>>>>>>> v3.18
 	if (board->uses_firmware) {
 		ret = pci_6534_upload_firmware(dev);
 		if (ret < 0)
 			return ret;
 	}
 
+<<<<<<< HEAD
+=======
+	nidio_reset_board(dev);
+
+>>>>>>> v3.18
 	ret = comedi_alloc_subdevices(dev, 1);
 	if (ret)
 		return ret;
 
 	dev_info(dev->class_dev, "%s rev=%d\n", dev->board_name,
+<<<<<<< HEAD
 		 readb(devpriv->mite->daq_io_addr + Chip_Version));
+=======
+		 readb(dev->mmio + Chip_Version));
+>>>>>>> v3.18
 
 	s = &dev->subdevices[0];
 
@@ -1171,6 +1623,7 @@ static int nidio_auto_attach(struct comedi_device *dev,
 	s->async_dma_dir = DMA_BIDIRECTIONAL;
 	s->poll = &ni_pcidio_poll;
 
+<<<<<<< HEAD
 	writel(0, devpriv->mite->daq_io_addr + Port_IO(0));
 	writel(0, devpriv->mite->daq_io_addr + Port_Pin_Directions(0));
 	writel(0, devpriv->mite->daq_io_addr + Port_Pin_Mask(0));
@@ -1186,6 +1639,15 @@ static int nidio_auto_attach(struct comedi_device *dev,
 		dev_warn(dev->class_dev, "irq not available\n");
 
 	dev->irq = irq;
+=======
+	irq = pcidev->irq;
+	if (irq) {
+		ret = request_irq(irq, nidio_interrupt, IRQF_SHARED,
+				  dev->board_name, dev);
+		if (ret == 0)
+			dev->irq = irq;
+	}
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -1201,11 +1663,18 @@ static void nidio_detach(struct comedi_device *dev)
 			mite_free_ring(devpriv->di_mite_ring);
 			devpriv->di_mite_ring = NULL;
 		}
+<<<<<<< HEAD
 		if (devpriv->mite) {
 			mite_unsetup(devpriv->mite);
 			mite_free(devpriv->mite);
 		}
 	}
+=======
+		mite_detach(devpriv->mite);
+	}
+	if (dev->mmio)
+		iounmap(dev->mmio);
+>>>>>>> v3.18
 	comedi_pci_disable(dev);
 }
 
@@ -1222,7 +1691,11 @@ static int ni_pcidio_pci_probe(struct pci_dev *dev,
 	return comedi_pci_auto_config(dev, &ni_pcidio_driver, id->driver_data);
 }
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(ni_pcidio_pci_table) = {
+=======
+static const struct pci_device_id ni_pcidio_pci_table[] = {
+>>>>>>> v3.18
 	{ PCI_VDEVICE(NI, 0x1150), BOARD_PCIDIO_32HS },
 	{ PCI_VDEVICE(NI, 0x12b0), BOARD_PCI6534 },
 	{ PCI_VDEVICE(NI, 0x1320), BOARD_PXI6533 },

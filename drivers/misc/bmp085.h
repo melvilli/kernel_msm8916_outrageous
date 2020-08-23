@@ -26,7 +26,11 @@
 
 extern struct regmap_config bmp085_regmap_config;
 
+<<<<<<< HEAD
 int bmp085_probe(struct device *dev, struct regmap *regmap);
+=======
+int bmp085_probe(struct device *dev, struct regmap *regmap, int irq);
+>>>>>>> v3.18
 int bmp085_remove(struct device *dev);
 int bmp085_detect(struct device *dev);
 

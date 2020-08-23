@@ -411,15 +411,24 @@ static int jz_nand_probe(struct platform_device *pdev)
 	struct jz_nand *nand;
 	struct nand_chip *chip;
 	struct mtd_info *mtd;
+<<<<<<< HEAD
 	struct jz_nand_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct jz_nand_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	size_t chipnr, bank_idx;
 	uint8_t nand_maf_id = 0, nand_dev_id = 0;
 
 	nand = kzalloc(sizeof(*nand), GFP_KERNEL);
+<<<<<<< HEAD
 	if (!nand) {
 		dev_err(&pdev->dev, "Failed to allocate device structure.\n");
 		return -ENOMEM;
 	}
+=======
+	if (!nand)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	ret = jz_nand_ioremap_resource(pdev, "mmio", &nand->mem, &nand->base);
 	if (ret)
@@ -538,7 +547,10 @@ err_unclaim_banks:
 err_gpio_busy:
 	if (pdata && gpio_is_valid(pdata->busy_gpio))
 		gpio_free(pdata->busy_gpio);
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 err_iounmap_mmio:
 	jz_nand_iounmap_resource(nand->mem, nand->base);
 err_free:
@@ -549,7 +561,11 @@ err_free:
 static int jz_nand_remove(struct platform_device *pdev)
 {
 	struct jz_nand *nand = platform_get_drvdata(pdev);
+<<<<<<< HEAD
 	struct jz_nand_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct jz_nand_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	size_t i;
 
 	nand_release(&nand->mtd);
@@ -570,7 +586,10 @@ static int jz_nand_remove(struct platform_device *pdev)
 
 	jz_nand_iounmap_resource(nand->mem, nand->base);
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	kfree(nand);
 
 	return 0;

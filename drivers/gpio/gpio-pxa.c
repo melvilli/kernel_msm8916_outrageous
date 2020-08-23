@@ -263,7 +263,12 @@ static int pxa_gpio_direction_output(struct gpio_chip *chip,
 
 static int pxa_gpio_get(struct gpio_chip *chip, unsigned offset)
 {
+<<<<<<< HEAD
 	return readl_relaxed(gpio_chip_base(chip) + GPLR_OFFSET) & (1 << offset);
+=======
+	u32 gplr = readl_relaxed(gpio_chip_base(chip) + GPLR_OFFSET);
+	return !!(gplr & (1 << offset));
+>>>>>>> v3.18
 }
 
 static void pxa_gpio_set(struct gpio_chip *chip, unsigned offset, int value)
@@ -497,7 +502,11 @@ static int pxa_gpio_nums(struct platform_device *pdev)
 }
 
 #ifdef CONFIG_OF
+<<<<<<< HEAD
 static struct of_device_id pxa_gpio_dt_ids[] = {
+=======
+static const struct of_device_id pxa_gpio_dt_ids[] = {
+>>>>>>> v3.18
 	{ .compatible = "intel,pxa25x-gpio",	.data = &pxa25x_id, },
 	{ .compatible = "intel,pxa26x-gpio",	.data = &pxa26x_id, },
 	{ .compatible = "intel,pxa27x-gpio",	.data = &pxa27x_id, },
@@ -524,8 +533,13 @@ const struct irq_domain_ops pxa_irq_domain_ops = {
 
 static int pxa_gpio_probe_dt(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	int ret, nr_gpios;
 	struct device_node *prev, *next, *np = pdev->dev.of_node;
+=======
+	int ret = 0, nr_gpios;
+	struct device_node *np = pdev->dev.of_node;
+>>>>>>> v3.18
 	const struct of_device_id *of_id =
 				of_match_device(pxa_gpio_dt_ids, &pdev->dev);
 	const struct pxa_gpio_id *gpio_id;
@@ -537,6 +551,7 @@ static int pxa_gpio_probe_dt(struct platform_device *pdev)
 	gpio_id = of_id->data;
 	gpio_type = gpio_id->type;
 
+<<<<<<< HEAD
 	next = of_get_next_child(np, NULL);
 	prev = next;
 	if (!next) {
@@ -545,12 +560,18 @@ static int pxa_gpio_probe_dt(struct platform_device *pdev)
 		goto err;
 	}
 	of_node_put(prev);
+=======
+>>>>>>> v3.18
 	nr_gpios = gpio_id->gpio_nums;
 	pxa_last_gpio = nr_gpios - 1;
 
 	irq_base = irq_alloc_descs(-1, 0, nr_gpios, 0);
 	if (irq_base < 0) {
 		dev_err(&pdev->dev, "Failed to allocate IRQ numbers\n");
+<<<<<<< HEAD
+=======
+		ret = irq_base;
+>>>>>>> v3.18
 		goto err;
 	}
 	domain = irq_domain_add_legacy(np, nr_gpios, irq_base, 0,
@@ -655,6 +676,14 @@ static int pxa_gpio_probe(struct platform_device *pdev)
 						 handle_edge_irq);
 			set_irq_flags(irq, IRQF_VALID | IRQF_PROBE);
 		}
+<<<<<<< HEAD
+=======
+	} else {
+		if (irq0 > 0)
+			irq_set_chained_handler(irq0, pxa_gpio_demux_handler);
+		if (irq1 > 0)
+			irq_set_chained_handler(irq1, pxa_gpio_demux_handler);
+>>>>>>> v3.18
 	}
 
 	irq_set_chained_handler(irq_mux, pxa_gpio_demux_handler);

@@ -15,7 +15,10 @@
 #include <linux/module.h>
 #include <linux/pci.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/agp_backend.h>
 #include <asm/sn/addrs.h>
 #include <asm/sn/io.h>

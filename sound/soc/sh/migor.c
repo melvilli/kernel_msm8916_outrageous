@@ -136,6 +136,7 @@ static const struct snd_soc_dapm_route audio_map[] = {
 	{ "Mic Bias", NULL, "External Microphone" },
 };
 
+<<<<<<< HEAD
 static int migor_dai_init(struct snd_soc_pcm_runtime *rtd)
 {
 	struct snd_soc_codec *codec = rtd->codec;
@@ -149,6 +150,8 @@ static int migor_dai_init(struct snd_soc_pcm_runtime *rtd)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 /* migor digital audio interface glue - connects codec <--> CPU */
 static struct snd_soc_dai_link migor_dai = {
 	.name = "wm8978",
@@ -158,7 +161,10 @@ static struct snd_soc_dai_link migor_dai = {
 	.platform_name = "siu-pcm-audio",
 	.codec_name = "wm8978.0-001a",
 	.ops = &migor_dai_ops,
+<<<<<<< HEAD
 	.init = migor_dai_init,
+=======
+>>>>>>> v3.18
 };
 
 /* migor audio machine driver */
@@ -167,6 +173,14 @@ static struct snd_soc_card snd_soc_migor = {
 	.owner = THIS_MODULE,
 	.dai_link = &migor_dai,
 	.num_links = 1,
+<<<<<<< HEAD
+=======
+
+	.dapm_widgets = migor_dapm_widgets,
+	.num_dapm_widgets = ARRAY_SIZE(migor_dapm_widgets),
+	.dapm_routes = audio_map,
+	.num_dapm_routes = ARRAY_SIZE(audio_map),
+>>>>>>> v3.18
 };
 
 static struct platform_device *migor_snd_device;

@@ -20,6 +20,7 @@
 #include <linux/clk-provider.h>
 #include <linux/clkdev.h>
 #include <linux/clk/bcm2835.h>
+<<<<<<< HEAD
 #include <linux/clk-provider.h>
 #include <linux/of.h>
 
@@ -28,6 +29,10 @@ static const __initconst struct of_device_id clk_match[] = {
 	{ }
 };
 
+=======
+#include <linux/of.h>
+
+>>>>>>> v3.18
 /*
  * These are fixed clocks. They're probably not all root clocks and it may
  * be possible to turn them on and off but until this is mapped out better
@@ -63,6 +68,9 @@ void __init bcm2835_init_clocks(void)
 	ret = clk_register_clkdev(clk, NULL, "20215000.uart");
 	if (ret)
 		pr_err("uart1_pclk alias not registered\n");
+<<<<<<< HEAD
 
 	of_clk_init(clk_match);
+=======
+>>>>>>> v3.18
 }

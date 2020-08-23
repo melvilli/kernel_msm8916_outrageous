@@ -334,14 +334,24 @@ snd_wavefront_free(struct snd_card *card)
 	}
 }
 
+<<<<<<< HEAD
 static int snd_wavefront_card_new(int dev, struct snd_card **cardp)
+=======
+static int snd_wavefront_card_new(struct device *pdev, int dev,
+				  struct snd_card **cardp)
+>>>>>>> v3.18
 {
 	struct snd_card *card;
 	snd_wavefront_card_t *acard;
 	int err;
 
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE,
 			      sizeof(snd_wavefront_card_t), &card);
+=======
+	err = snd_card_new(pdev, index[dev], id[dev], THIS_MODULE,
+			   sizeof(snd_wavefront_card_t), &card);
+>>>>>>> v3.18
 	if (err < 0)
 		return err;
 
@@ -564,10 +574,16 @@ static int snd_wavefront_isa_probe(struct device *pdev,
 	struct snd_card *card;
 	int err;
 
+<<<<<<< HEAD
 	err = snd_wavefront_card_new(dev, &card);
 	if (err < 0)
 		return err;
 	snd_card_set_dev(card, pdev);
+=======
+	err = snd_wavefront_card_new(pdev, dev, &card);
+	if (err < 0)
+		return err;
+>>>>>>> v3.18
 	if ((err = snd_wavefront_probe(card, dev)) < 0) {
 		snd_card_free(card);
 		return err;
@@ -581,7 +597,10 @@ static int snd_wavefront_isa_remove(struct device *devptr,
 				    unsigned int dev)
 {
 	snd_card_free(dev_get_drvdata(devptr));
+<<<<<<< HEAD
 	dev_set_drvdata(devptr, NULL);
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -613,7 +632,11 @@ static int snd_wavefront_pnp_detect(struct pnp_card_link *pcard,
 	if (dev >= SNDRV_CARDS)
 		return -ENODEV;
 
+<<<<<<< HEAD
 	res = snd_wavefront_card_new(dev, &card);
+=======
+	res = snd_wavefront_card_new(&pcard->card->dev, dev, &card);
+>>>>>>> v3.18
 	if (res < 0)
 		return res;
 
@@ -624,7 +647,10 @@ static int snd_wavefront_pnp_detect(struct pnp_card_link *pcard,
 			return -ENODEV;
 		}
 	}
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pcard->card->dev);
+=======
+>>>>>>> v3.18
 
 	if ((res = snd_wavefront_probe(card, dev)) < 0)
 		return res;

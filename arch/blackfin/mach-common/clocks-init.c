@@ -7,7 +7,10 @@
  */
 
 #include <linux/linkage.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <asm/blackfin.h>
 
 #include <asm/dma.h>

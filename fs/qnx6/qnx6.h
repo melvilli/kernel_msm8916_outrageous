@@ -10,6 +10,15 @@
  *
  */
 
+<<<<<<< HEAD
+=======
+#ifdef pr_fmt
+#undef pr_fmt
+#endif
+
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 #include <linux/fs.h>
 #include <linux/pagemap.h>
 
@@ -19,12 +28,15 @@ typedef __u64 __bitwise __fs64;
 
 #include <linux/qnx6_fs.h>
 
+<<<<<<< HEAD
 #ifdef CONFIG_QNX6FS_DEBUG
 #define QNX6DEBUG(X) printk X
 #else
 #define QNX6DEBUG(X) (void) 0
 #endif
 
+=======
+>>>>>>> v3.18
 struct qnx6_sb_info {
 	struct buffer_head	*sb_buf;	/* superblock buffer */
 	struct qnx6_super_block	*sb;		/* our superblock */

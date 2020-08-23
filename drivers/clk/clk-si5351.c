@@ -851,6 +851,44 @@ static int _si5351_clkout_set_drive_strength(
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+static int _si5351_clkout_set_disable_state(
+	struct si5351_driver_data *drvdata, int num,
+	enum si5351_disable_state state)
+{
+	u8 reg = (num < 4) ? SI5351_CLK3_0_DISABLE_STATE :
+		SI5351_CLK7_4_DISABLE_STATE;
+	u8 shift = (num < 4) ? (2 * num) : (2 * (num-4));
+	u8 mask = SI5351_CLK_DISABLE_STATE_MASK << shift;
+	u8 val;
+
+	if (num > 8)
+		return -EINVAL;
+
+	switch (state) {
+	case SI5351_DISABLE_LOW:
+		val = SI5351_CLK_DISABLE_STATE_LOW;
+		break;
+	case SI5351_DISABLE_HIGH:
+		val = SI5351_CLK_DISABLE_STATE_HIGH;
+		break;
+	case SI5351_DISABLE_FLOATING:
+		val = SI5351_CLK_DISABLE_STATE_FLOAT;
+		break;
+	case SI5351_DISABLE_NEVER:
+		val = SI5351_CLK_DISABLE_STATE_NEVER;
+		break;
+	default:
+		return 0;
+	}
+
+	si5351_set_bits(drvdata, reg, mask, val << shift);
+
+	return 0;
+}
+
+>>>>>>> v3.18
 static int si5351_clkout_prepare(struct clk_hw *hw)
 {
 	struct si5351_hw_data *hwdata =
@@ -1076,11 +1114,19 @@ static const struct of_device_id si5351_dt_ids[] = {
 };
 MODULE_DEVICE_TABLE(of, si5351_dt_ids);
 
+<<<<<<< HEAD
 static int si5351_dt_parse(struct i2c_client *client)
 {
 	struct device_node *child, *np = client->dev.of_node;
 	struct si5351_platform_data *pdata;
 	const struct of_device_id *match;
+=======
+static int si5351_dt_parse(struct i2c_client *client,
+			   enum si5351_variant variant)
+{
+	struct device_node *child, *np = client->dev.of_node;
+	struct si5351_platform_data *pdata;
+>>>>>>> v3.18
 	struct property *prop;
 	const __be32 *p;
 	int num = 0;
@@ -1089,15 +1135,21 @@ static int si5351_dt_parse(struct i2c_client *client)
 	if (np == NULL)
 		return 0;
 
+<<<<<<< HEAD
 	match = of_match_node(si5351_dt_ids, np);
 	if (match == NULL)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 	pdata = devm_kzalloc(&client->dev, sizeof(*pdata), GFP_KERNEL);
 	if (!pdata)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 	pdata->variant = (enum si5351_variant)match->data;
+=======
+>>>>>>> v3.18
 	pdata->clk_xtal = of_clk_get(np, 0);
 	if (!IS_ERR(pdata->clk_xtal))
 		clk_put(pdata->clk_xtal);
@@ -1128,7 +1180,11 @@ static int si5351_dt_parse(struct i2c_client *client)
 			pdata->pll_src[num] = SI5351_PLL_SRC_XTAL;
 			break;
 		case 1:
+<<<<<<< HEAD
 			if (pdata->variant != SI5351_VARIANT_C) {
+=======
+			if (variant != SI5351_VARIANT_C) {
+>>>>>>> v3.18
 				dev_err(&client->dev,
 					"invalid parent %d for pll %d\n",
 					val, num);
@@ -1152,7 +1208,11 @@ static int si5351_dt_parse(struct i2c_client *client)
 		}
 
 		if (num >= 8 ||
+<<<<<<< HEAD
 		    (pdata->variant == SI5351_VARIANT_A3 && num >= 3)) {
+=======
+		    (variant == SI5351_VARIANT_A3 && num >= 3)) {
+>>>>>>> v3.18
 			dev_err(&client->dev, "invalid clkout %d\n", num);
 			return -EINVAL;
 		}
@@ -1191,7 +1251,11 @@ static int si5351_dt_parse(struct i2c_client *client)
 					SI5351_CLKOUT_SRC_XTAL;
 				break;
 			case 3:
+<<<<<<< HEAD
 				if (pdata->variant != SI5351_VARIANT_C) {
+=======
+				if (variant != SI5351_VARIANT_C) {
+>>>>>>> v3.18
 					dev_err(&client->dev,
 						"invalid parent %d for clkout %d\n",
 						val, num);
@@ -1225,6 +1289,36 @@ static int si5351_dt_parse(struct i2c_client *client)
 			}
 		}
 
+<<<<<<< HEAD
+=======
+		if (!of_property_read_u32(child, "silabs,disable-state",
+					  &val)) {
+			switch (val) {
+			case 0:
+				pdata->clkout[num].disable_state =
+					SI5351_DISABLE_LOW;
+				break;
+			case 1:
+				pdata->clkout[num].disable_state =
+					SI5351_DISABLE_HIGH;
+				break;
+			case 2:
+				pdata->clkout[num].disable_state =
+					SI5351_DISABLE_FLOATING;
+				break;
+			case 3:
+				pdata->clkout[num].disable_state =
+					SI5351_DISABLE_NEVER;
+				break;
+			default:
+				dev_err(&client->dev,
+					"invalid disable state %d for clkout %d\n",
+					val, num);
+				return -EINVAL;
+			}
+		}
+
+>>>>>>> v3.18
 		if (!of_property_read_u32(child, "clock-frequency", &val))
 			pdata->clkout[num].rate = val;
 
@@ -1236,7 +1330,11 @@ static int si5351_dt_parse(struct i2c_client *client)
 	return 0;
 }
 #else
+<<<<<<< HEAD
 static int si5351_dt_parse(struct i2c_client *client)
+=======
+static int si5351_dt_parse(struct i2c_client *client, enum si5351_variant variant)
+>>>>>>> v3.18
 {
 	return 0;
 }
@@ -1245,6 +1343,10 @@ static int si5351_dt_parse(struct i2c_client *client)
 static int si5351_i2c_probe(struct i2c_client *client,
 			    const struct i2c_device_id *id)
 {
+<<<<<<< HEAD
+=======
+	enum si5351_variant variant = (enum si5351_variant)id->driver_data;
+>>>>>>> v3.18
 	struct si5351_platform_data *pdata;
 	struct si5351_driver_data *drvdata;
 	struct clk_init_data init;
@@ -1253,7 +1355,11 @@ static int si5351_i2c_probe(struct i2c_client *client,
 	u8 num_parents, num_clocks;
 	int ret, n;
 
+<<<<<<< HEAD
 	ret = si5351_dt_parse(client);
+=======
+	ret = si5351_dt_parse(client, variant);
+>>>>>>> v3.18
 	if (ret)
 		return ret;
 
@@ -1269,7 +1375,11 @@ static int si5351_i2c_probe(struct i2c_client *client,
 
 	i2c_set_clientdata(client, drvdata);
 	drvdata->client = client;
+<<<<<<< HEAD
 	drvdata->variant = pdata->variant;
+=======
+	drvdata->variant = variant;
+>>>>>>> v3.18
 	drvdata->pxtal = pdata->clk_xtal;
 	drvdata->pclkin = pdata->clk_clkin;
 
@@ -1281,9 +1391,12 @@ static int si5351_i2c_probe(struct i2c_client *client,
 
 	/* Disable interrupts */
 	si5351_reg_write(drvdata, SI5351_INTERRUPT_MASK, 0xf0);
+<<<<<<< HEAD
 	/* Set disabled output drivers to drive low */
 	si5351_reg_write(drvdata, SI5351_CLK3_0_DISABLE_STATE, 0x00);
 	si5351_reg_write(drvdata, SI5351_CLK7_4_DISABLE_STATE, 0x00);
+=======
+>>>>>>> v3.18
 	/* Ensure pll select is on XTAL for Si5351A/B */
 	if (drvdata->variant != SI5351_VARIANT_C)
 		si5351_set_bits(drvdata, SI5351_PLL_INPUT_SOURCE,
@@ -1327,6 +1440,18 @@ static int si5351_i2c_probe(struct i2c_client *client,
 				n, pdata->clkout[n].drive);
 			return ret;
 		}
+<<<<<<< HEAD
+=======
+
+		ret = _si5351_clkout_set_disable_state(drvdata, n,
+						pdata->clkout[n].disable_state);
+		if (ret) {
+			dev_err(&client->dev,
+				"failed set disable state of clkout%d to %d\n",
+				n, pdata->clkout[n].disable_state);
+			return ret;
+		}
+>>>>>>> v3.18
 	}
 
 	/* register xtal input clock gate */
@@ -1500,7 +1625,14 @@ static int si5351_i2c_probe(struct i2c_client *client,
 }
 
 static const struct i2c_device_id si5351_i2c_ids[] = {
+<<<<<<< HEAD
 	{ "silabs,si5351", 0 },
+=======
+	{ "si5351a", SI5351_VARIANT_A },
+	{ "si5351a-msop", SI5351_VARIANT_A3 },
+	{ "si5351b", SI5351_VARIANT_B },
+	{ "si5351c", SI5351_VARIANT_C },
+>>>>>>> v3.18
 	{ }
 };
 MODULE_DEVICE_TABLE(i2c, si5351_i2c_ids);

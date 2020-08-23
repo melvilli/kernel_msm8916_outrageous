@@ -55,8 +55,15 @@
  * The bits we set in HCR:
  * TAC:		Trap ACTLR
  * TSC:		Trap SMC
+<<<<<<< HEAD
  * TSW:		Trap cache operations by set/way
  * TWI:		Trap WFI
+=======
+ * TVM:		Trap VM ops (until MMU and caches are on)
+ * TSW:		Trap cache operations by set/way
+ * TWI:		Trap WFI
+ * TWE:		Trap WFE
+>>>>>>> v3.18
  * TIDCP:	Trap L2CTLR/L2ECTLR
  * BSU_IS:	Upgrade barriers to the inner shareable domain
  * FB:		Force broadcast of all maintainance operations
@@ -67,8 +74,12 @@
  */
 #define HCR_GUEST_MASK (HCR_TSC | HCR_TSW | HCR_TWI | HCR_VM | HCR_BSU_IS | \
 			HCR_FB | HCR_TAC | HCR_AMO | HCR_IMO | HCR_FMO | \
+<<<<<<< HEAD
 			HCR_SWIO | HCR_TIDCP)
 #define HCR_VIRT_EXCP_MASK (HCR_VA | HCR_VI | HCR_VF)
+=======
+			HCR_TVM | HCR_TWE | HCR_SWIO | HCR_TIDCP)
+>>>>>>> v3.18
 
 /* System Control Register (SCTLR) bits */
 #define SCTLR_TE	(1 << 30)
@@ -95,12 +106,20 @@
 #define TTBCR_IRGN1	(3 << 24)
 #define TTBCR_EPD1	(1 << 23)
 #define TTBCR_A1	(1 << 22)
+<<<<<<< HEAD
 #define TTBCR_T1SZ	(3 << 16)
+=======
+#define TTBCR_T1SZ	(7 << 16)
+>>>>>>> v3.18
 #define TTBCR_SH0	(3 << 12)
 #define TTBCR_ORGN0	(3 << 10)
 #define TTBCR_IRGN0	(3 << 8)
 #define TTBCR_EPD0	(1 << 7)
+<<<<<<< HEAD
 #define TTBCR_T0SZ	3
+=======
+#define TTBCR_T0SZ	(7 << 0)
+>>>>>>> v3.18
 #define HTCR_MASK	(TTBCR_T0SZ | TTBCR_IRGN0 | TTBCR_ORGN0 | TTBCR_SH0)
 
 /* Hyp System Trap Register */
@@ -135,7 +154,10 @@
 #define KVM_PHYS_MASK	(KVM_PHYS_SIZE - 1ULL)
 #define PTRS_PER_S2_PGD	(1ULL << (KVM_PHYS_SHIFT - 30))
 #define S2_PGD_ORDER	get_order(PTRS_PER_S2_PGD * sizeof(pgd_t))
+<<<<<<< HEAD
 #define S2_PGD_SIZE	(1 << S2_PGD_ORDER)
+=======
+>>>>>>> v3.18
 
 /* Virtualization Translation Control Register (VTCR) bits */
 #define VTCR_SH0	(3 << 12)
@@ -209,6 +231,11 @@
 #define HSR_EC_DABT	(0x24)
 #define HSR_EC_DABT_HYP	(0x25)
 
+<<<<<<< HEAD
+=======
+#define HSR_WFI_IS_WFE		(1U << 0)
+
+>>>>>>> v3.18
 #define HSR_HVC_IMM_MASK	((1UL << 16) - 1)
 
 #define HSR_DABT_S1PTW		(1U << 7)

@@ -43,7 +43,11 @@ _GLOBAL(\name)
 	 */
 #ifdef CONFIG_TRACE_IRQFLAGS
 	stdu    r1,-128(r1)
+<<<<<<< HEAD
 	bl	.trace_hardirqs_on
+=======
+	bl	trace_hardirqs_on
+>>>>>>> v3.18
 	addi    r1,r1,128
 #endif
 	li	r0,1

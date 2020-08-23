@@ -83,7 +83,11 @@ static DEFINE_MUTEX(mce_inject_mutex);
 static int mce_raise_notify(unsigned int cmd, struct pt_regs *regs)
 {
 	int cpu = smp_processor_id();
+<<<<<<< HEAD
 	struct mce *m = &__get_cpu_var(injectm);
+=======
+	struct mce *m = this_cpu_ptr(&injectm);
+>>>>>>> v3.18
 	if (!cpumask_test_cpu(cpu, mce_inject_cpumask))
 		return NMI_DONE;
 	cpumask_clear_cpu(cpu, mce_inject_cpumask);
@@ -97,7 +101,11 @@ static int mce_raise_notify(unsigned int cmd, struct pt_regs *regs)
 static void mce_irq_ipi(void *info)
 {
 	int cpu = smp_processor_id();
+<<<<<<< HEAD
 	struct mce *m = &__get_cpu_var(injectm);
+=======
+	struct mce *m = this_cpu_ptr(&injectm);
+>>>>>>> v3.18
 
 	if (cpumask_test_cpu(cpu, mce_inject_cpumask) &&
 			m->inject_flags & MCJ_EXCEPTION) {
@@ -109,7 +117,11 @@ static void mce_irq_ipi(void *info)
 /* Inject mce on current CPU */
 static int raise_local(void)
 {
+<<<<<<< HEAD
 	struct mce *m = &__get_cpu_var(injectm);
+=======
+	struct mce *m = this_cpu_ptr(&injectm);
+>>>>>>> v3.18
 	int context = MCJ_CTX(m->inject_flags);
 	int ret = 0;
 	int cpu = m->extcpu;
@@ -153,7 +165,11 @@ static void raise_mce(struct mce *m)
 		return;
 
 #ifdef CONFIG_X86_LOCAL_APIC
+<<<<<<< HEAD
 	if (m->inject_flags & (MCJ_IRQ_BRAODCAST | MCJ_NMI_BROADCAST)) {
+=======
+	if (m->inject_flags & (MCJ_IRQ_BROADCAST | MCJ_NMI_BROADCAST)) {
+>>>>>>> v3.18
 		unsigned long start;
 		int cpu;
 
@@ -167,7 +183,11 @@ static void raise_mce(struct mce *m)
 				cpumask_clear_cpu(cpu, mce_inject_cpumask);
 		}
 		if (!cpumask_empty(mce_inject_cpumask)) {
+<<<<<<< HEAD
 			if (m->inject_flags & MCJ_IRQ_BRAODCAST) {
+=======
+			if (m->inject_flags & MCJ_IRQ_BROADCAST) {
+>>>>>>> v3.18
 				/*
 				 * don't wait because mce_irq_ipi is necessary
 				 * to be sync with following raise_local

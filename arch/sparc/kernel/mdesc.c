@@ -571,9 +571,13 @@ static void __init report_platform_properties(void)
 	mdesc_release(hp);
 }
 
+<<<<<<< HEAD
 static void __cpuinit fill_in_one_cache(cpuinfo_sparc *c,
 					struct mdesc_handle *hp,
 					u64 mp)
+=======
+static void fill_in_one_cache(cpuinfo_sparc *c, struct mdesc_handle *hp, u64 mp)
+>>>>>>> v3.18
 {
 	const u64 *level = mdesc_get_property(hp, mp, "level", NULL);
 	const u64 *size = mdesc_get_property(hp, mp, "size", NULL);
@@ -616,7 +620,11 @@ static void __cpuinit fill_in_one_cache(cpuinfo_sparc *c,
 	}
 }
 
+<<<<<<< HEAD
 static void __cpuinit mark_core_ids(struct mdesc_handle *hp, u64 mp, int core_id)
+=======
+static void mark_core_ids(struct mdesc_handle *hp, u64 mp, int core_id)
+>>>>>>> v3.18
 {
 	u64 a;
 
@@ -649,7 +657,11 @@ static void __cpuinit mark_core_ids(struct mdesc_handle *hp, u64 mp, int core_id
 	}
 }
 
+<<<<<<< HEAD
 static void __cpuinit set_core_ids(struct mdesc_handle *hp)
+=======
+static void set_core_ids(struct mdesc_handle *hp)
+>>>>>>> v3.18
 {
 	int idx;
 	u64 mp;
@@ -674,7 +686,11 @@ static void __cpuinit set_core_ids(struct mdesc_handle *hp)
 	}
 }
 
+<<<<<<< HEAD
 static void __cpuinit mark_proc_ids(struct mdesc_handle *hp, u64 mp, int proc_id)
+=======
+static void mark_proc_ids(struct mdesc_handle *hp, u64 mp, int proc_id)
+>>>>>>> v3.18
 {
 	u64 a;
 
@@ -693,7 +709,11 @@ static void __cpuinit mark_proc_ids(struct mdesc_handle *hp, u64 mp, int proc_id
 	}
 }
 
+<<<<<<< HEAD
 static void __cpuinit __set_proc_ids(struct mdesc_handle *hp, const char *exec_unit_name)
+=======
+static void __set_proc_ids(struct mdesc_handle *hp, const char *exec_unit_name)
+>>>>>>> v3.18
 {
 	int idx;
 	u64 mp;
@@ -714,14 +734,23 @@ static void __cpuinit __set_proc_ids(struct mdesc_handle *hp, const char *exec_u
 	}
 }
 
+<<<<<<< HEAD
 static void __cpuinit set_proc_ids(struct mdesc_handle *hp)
+=======
+static void set_proc_ids(struct mdesc_handle *hp)
+>>>>>>> v3.18
 {
 	__set_proc_ids(hp, "exec_unit");
 	__set_proc_ids(hp, "exec-unit");
 }
 
+<<<<<<< HEAD
 static void __cpuinit get_one_mondo_bits(const u64 *p, unsigned int *mask,
 					 unsigned long def, unsigned long max)
+=======
+static void get_one_mondo_bits(const u64 *p, unsigned int *mask,
+			       unsigned long def, unsigned long max)
+>>>>>>> v3.18
 {
 	u64 val;
 
@@ -742,8 +771,13 @@ use_default:
 	*mask = ((1U << def) * 64U) - 1U;
 }
 
+<<<<<<< HEAD
 static void __cpuinit get_mondo_data(struct mdesc_handle *hp, u64 mp,
 				     struct trap_per_cpu *tb)
+=======
+static void get_mondo_data(struct mdesc_handle *hp, u64 mp,
+			   struct trap_per_cpu *tb)
+>>>>>>> v3.18
 {
 	static int printed;
 	const u64 *val;
@@ -769,7 +803,11 @@ static void __cpuinit get_mondo_data(struct mdesc_handle *hp, u64 mp,
 	}
 }
 
+<<<<<<< HEAD
 static void * __cpuinit mdesc_iterate_over_cpus(void *(*func)(struct mdesc_handle *, u64, int, void *), void *arg, cpumask_t *mask)
+=======
+static void *mdesc_iterate_over_cpus(void *(*func)(struct mdesc_handle *, u64, int, void *), void *arg, cpumask_t *mask)
+>>>>>>> v3.18
 {
 	struct mdesc_handle *hp = mdesc_grab();
 	void *ret = NULL;
@@ -799,7 +837,12 @@ out:
 	return ret;
 }
 
+<<<<<<< HEAD
 static void * __cpuinit record_one_cpu(struct mdesc_handle *hp, u64 mp, int cpuid, void *arg)
+=======
+static void *record_one_cpu(struct mdesc_handle *hp, u64 mp, int cpuid,
+			    void *arg)
+>>>>>>> v3.18
 {
 	ncpus_probed++;
 #ifdef CONFIG_SMP
@@ -808,7 +851,11 @@ static void * __cpuinit record_one_cpu(struct mdesc_handle *hp, u64 mp, int cpui
 	return NULL;
 }
 
+<<<<<<< HEAD
 void __cpuinit mdesc_populate_present_mask(cpumask_t *mask)
+=======
+void mdesc_populate_present_mask(cpumask_t *mask)
+>>>>>>> v3.18
 {
 	if (tlb_type != hypervisor)
 		return;
@@ -841,7 +888,12 @@ void __init mdesc_get_page_sizes(cpumask_t *mask, unsigned long *pgsz_mask)
 	mdesc_iterate_over_cpus(check_one_pgsz, pgsz_mask, mask);
 }
 
+<<<<<<< HEAD
 static void * __cpuinit fill_in_one_cpu(struct mdesc_handle *hp, u64 mp, int cpuid, void *arg)
+=======
+static void *fill_in_one_cpu(struct mdesc_handle *hp, u64 mp, int cpuid,
+			     void *arg)
+>>>>>>> v3.18
 {
 	const u64 *cfreq = mdesc_get_property(hp, mp, "clock-frequency", NULL);
 	struct trap_per_cpu *tb;
@@ -890,16 +942,23 @@ static void * __cpuinit fill_in_one_cpu(struct mdesc_handle *hp, u64 mp, int cpu
 	return NULL;
 }
 
+<<<<<<< HEAD
 void __cpuinit mdesc_fill_in_cpu_data(cpumask_t *mask)
+=======
+void mdesc_fill_in_cpu_data(cpumask_t *mask)
+>>>>>>> v3.18
 {
 	struct mdesc_handle *hp;
 
 	mdesc_iterate_over_cpus(fill_in_one_cpu, NULL, mask);
 
+<<<<<<< HEAD
 #ifdef CONFIG_SMP
 	sparc64_multi_core = 1;
 #endif
 
+=======
+>>>>>>> v3.18
 	hp = mdesc_grab();
 
 	set_core_ids(hp);
@@ -910,15 +969,27 @@ void __cpuinit mdesc_fill_in_cpu_data(cpumask_t *mask)
 	smp_fill_in_sib_core_maps();
 }
 
+<<<<<<< HEAD
 static ssize_t mdesc_read(struct file *file, char __user *buf,
 			  size_t len, loff_t *offp)
 {
 	struct mdesc_handle *hp = mdesc_grab();
 	int err;
+=======
+/* mdesc_open() - Grab a reference to mdesc_handle when /dev/mdesc is
+ * opened. Hold this reference until /dev/mdesc is closed to ensure
+ * mdesc data structure is not released underneath us. Store the
+ * pointer to mdesc structure in private_data for read and seek to use
+ */
+static int mdesc_open(struct inode *inode, struct file *file)
+{
+	struct mdesc_handle *hp = mdesc_grab();
+>>>>>>> v3.18
 
 	if (!hp)
 		return -ENODEV;
 
+<<<<<<< HEAD
 	err = hp->handle_size;
 	if (len < hp->handle_size)
 		err = -EMSGSIZE;
@@ -933,6 +1004,75 @@ static const struct file_operations mdesc_fops = {
 	.read	= mdesc_read,
 	.owner	= THIS_MODULE,
 	.llseek = noop_llseek,
+=======
+	file->private_data = hp;
+
+	return 0;
+}
+
+static ssize_t mdesc_read(struct file *file, char __user *buf,
+			  size_t len, loff_t *offp)
+{
+	struct mdesc_handle *hp = file->private_data;
+	unsigned char *mdesc;
+	int bytes_left, count = len;
+
+	if (*offp >= hp->handle_size)
+		return 0;
+
+	bytes_left = hp->handle_size - *offp;
+	if (count > bytes_left)
+		count = bytes_left;
+
+	mdesc = (unsigned char *)&hp->mdesc;
+	mdesc += *offp;
+	if (!copy_to_user(buf, mdesc, count)) {
+		*offp += count;
+		return count;
+	} else {
+		return -EFAULT;
+	}
+}
+
+static loff_t mdesc_llseek(struct file *file, loff_t offset, int whence)
+{
+	struct mdesc_handle *hp;
+
+	switch (whence) {
+	case SEEK_CUR:
+		offset += file->f_pos;
+		break;
+	case SEEK_SET:
+		break;
+	default:
+		return -EINVAL;
+	}
+
+	hp = file->private_data;
+	if (offset > hp->handle_size)
+		return -EINVAL;
+	else
+		file->f_pos = offset;
+
+	return offset;
+}
+
+/* mdesc_close() - /dev/mdesc is being closed, release the reference to
+ * mdesc structure.
+ */
+static int mdesc_close(struct inode *inode, struct file *file)
+{
+	mdesc_release(file->private_data);
+	return 0;
+}
+
+static const struct file_operations mdesc_fops = {
+	.open    = mdesc_open,
+	.read	 = mdesc_read,
+	.llseek  = mdesc_llseek,
+	.release = mdesc_close,
+	.owner	 = THIS_MODULE,
+>>>>>>> v3.18
 };
 
 static struct miscdevice mdesc_misc = {

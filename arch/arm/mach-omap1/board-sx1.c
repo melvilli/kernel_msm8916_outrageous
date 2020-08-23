@@ -37,7 +37,10 @@
 #include <mach/flash.h>
 #include <mach/mux.h>
 #include <linux/omap-dma.h>
+<<<<<<< HEAD
 #include <mach/irda.h>
+=======
+>>>>>>> v3.18
 #include <mach/tc.h>
 #include <mach/board-sx1.h>
 
@@ -45,7 +48,10 @@
 #include <mach/usb.h>
 
 #include "common.h"
+<<<<<<< HEAD
 #include "dma.h"
+=======
+>>>>>>> v3.18
 
 /* Write to I2C device */
 int sx1_i2c_write_byte(u8 devaddr, u8 regoffset, u8 value)
@@ -228,6 +234,7 @@ static struct platform_device sx1_kp_device = {
 	.resource	= sx1_kp_resources,
 };
 
+<<<<<<< HEAD
 /*----------- IRDA -------------------------*/
 
 static struct omap_irda_config sx1_irda_data = {
@@ -261,6 +268,8 @@ static struct platform_device sx1_irda_device = {
 	.resource	= sx1_irda_resources,
 };
 
+=======
+>>>>>>> v3.18
 /*----------- MTD -------------------------*/
 
 static struct mtd_partition sx1_partitions[] = {
@@ -301,6 +310,7 @@ static struct physmap_flash_data sx1_flash_data = {
 	.nr_parts	= ARRAY_SIZE(sx1_partitions),
 };
 
+<<<<<<< HEAD
 #ifdef CONFIG_SX1_OLD_FLASH
 /* MTD Intel StrataFlash - old flashes */
 static struct resource sx1_old_flash_resource[] = {
@@ -326,6 +336,8 @@ static struct platform_device sx1_flash_device = {
 	.resource	= &sx1_old_flash_resource,
 };
 #else
+=======
+>>>>>>> v3.18
 /* MTD Intel 4000 flash - new flashes */
 static struct resource sx1_new_flash_resource = {
 	.start		= OMAP_CS0_PHYS,
@@ -342,7 +354,10 @@ static struct platform_device sx1_flash_device = {
 	.num_resources	= 1,
 	.resource	= &sx1_new_flash_resource,
 };
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 
 /*----------- USB -------------------------*/
 
@@ -366,7 +381,10 @@ static struct omap_lcd_config sx1_lcd_config __initdata = {
 static struct platform_device *sx1_devices[] __initdata = {
 	&sx1_flash_device,
 	&sx1_kp_device,
+<<<<<<< HEAD
 	&sx1_irda_device,
+=======
+>>>>>>> v3.18
 };
 
 /*-----------------------------------------*/

@@ -14,7 +14,11 @@ Supported chips:
                http://www.national.com/
 
 Authors: Frodo Looijaard <frodol@dds.nl>
+<<<<<<< HEAD
          Jean Delvare <khali@linux-fr.org>
+=======
+         Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 
 Description
 -----------

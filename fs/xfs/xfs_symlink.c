@@ -17,6 +17,7 @@
  * Inc.,  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 #include "xfs.h"
+<<<<<<< HEAD
 #include "xfs_fs.h"
 #include "xfs_types.h"
 #include "xfs_bit.h"
@@ -212,6 +213,34 @@ xfs_symlink_local_to_remote(
 	buf += xfs_symlink_hdr_set(mp, ip->i_ino, 0, ifp->if_bytes, bp);
 	memcpy(buf, ifp->if_u1.if_data, ifp->if_bytes);
 }
+=======
+#include "xfs_shared.h"
+#include "xfs_fs.h"
+#include "xfs_format.h"
+#include "xfs_log_format.h"
+#include "xfs_trans_resv.h"
+#include "xfs_bit.h"
+#include "xfs_sb.h"
+#include "xfs_ag.h"
+#include "xfs_mount.h"
+#include "xfs_da_format.h"
+#include "xfs_da_btree.h"
+#include "xfs_dir2.h"
+#include "xfs_inode.h"
+#include "xfs_ialloc.h"
+#include "xfs_alloc.h"
+#include "xfs_bmap.h"
+#include "xfs_bmap_btree.h"
+#include "xfs_bmap_util.h"
+#include "xfs_error.h"
+#include "xfs_quota.h"
+#include "xfs_trans_space.h"
+#include "xfs_trace.h"
+#include "xfs_symlink.h"
+#include "xfs_trans.h"
+#include "xfs_log.h"
+#include "xfs_dinode.h"
+>>>>>>> v3.18
 
 /* ----- Kernel only functions below ----- */
 STATIC int
@@ -245,11 +274,22 @@ xfs_readlink_bmap(
 		bp = xfs_buf_read(mp->m_ddev_targp, d, BTOBB(byte_cnt), 0,
 				  &xfs_symlink_buf_ops);
 		if (!bp)
+<<<<<<< HEAD
 			return XFS_ERROR(ENOMEM);
+=======
+			return -ENOMEM;
+>>>>>>> v3.18
 		error = bp->b_error;
 		if (error) {
 			xfs_buf_ioerror_alert(bp, __func__);
 			xfs_buf_relse(bp);
+<<<<<<< HEAD
+=======
+
+			/* bad CRC means corrupted metadata */
+			if (error == -EFSBADCRC)
+				error = -EFSCORRUPTED;
+>>>>>>> v3.18
 			goto out;
 		}
 		byte_cnt = XFS_SYMLINK_BUF_SPACE(mp, byte_cnt);
@@ -258,9 +298,15 @@ xfs_readlink_bmap(
 
 		cur_chunk = bp->b_addr;
 		if (xfs_sb_version_hascrc(&mp->m_sb)) {
+<<<<<<< HEAD
 			if (!xfs_symlink_hdr_ok(mp, ip->i_ino, offset,
 							byte_cnt, bp)) {
 				error = EFSCORRUPTED;
+=======
+			if (!xfs_symlink_hdr_ok(ip->i_ino, offset,
+							byte_cnt, bp)) {
+				error = -EFSCORRUPTED;
+>>>>>>> v3.18
 				xfs_alert(mp,
 "symlink header does not match required off/len/owner (0x%x/Ox%x,0x%llx)",
 					offset, byte_cnt, ip->i_ino);
@@ -272,7 +318,11 @@ xfs_readlink_bmap(
 			cur_chunk += sizeof(struct xfs_dsymlink_hdr);
 		}
 
+<<<<<<< HEAD
 		memcpy(link + offset, cur_chunk, byte_cnt);
+=======
+		memcpy(link + offset, bp->b_addr, byte_cnt);
+>>>>>>> v3.18
 
 		pathlen -= byte_cnt;
 		offset += byte_cnt;
@@ -300,7 +350,11 @@ xfs_readlink(
 	trace_xfs_readlink(ip);
 
 	if (XFS_FORCED_SHUTDOWN(mp))
+<<<<<<< HEAD
 		return XFS_ERROR(EIO);
+=======
+		return -EIO;
+>>>>>>> v3.18
 
 	xfs_ilock(ip, XFS_ILOCK_SHARED);
 
@@ -313,7 +367,11 @@ xfs_readlink(
 			 __func__, (unsigned long long) ip->i_ino,
 			 (long long) pathlen);
 		ASSERT(0);
+<<<<<<< HEAD
 		error = XFS_ERROR(EFSCORRUPTED);
+=======
+		error = -EFSCORRUPTED;
+>>>>>>> v3.18
 		goto out;
 	}
 
@@ -358,7 +416,13 @@ xfs_symlink(
 	int			n;
 	xfs_buf_t		*bp;
 	prid_t			prid;
+<<<<<<< HEAD
 	struct xfs_dquot	*udqp, *gdqp;
+=======
+	struct xfs_dquot	*udqp = NULL;
+	struct xfs_dquot	*gdqp = NULL;
+	struct xfs_dquot	*pdqp = NULL;
+>>>>>>> v3.18
 	uint			resblks;
 
 	*ipp = NULL;
@@ -366,13 +430,18 @@ xfs_symlink(
 	trace_xfs_symlink(dp, link_name);
 
 	if (XFS_FORCED_SHUTDOWN(mp))
+<<<<<<< HEAD
 		return XFS_ERROR(EIO);
+=======
+		return -EIO;
+>>>>>>> v3.18
 
 	/*
 	 * Check component lengths of the target path name.
 	 */
 	pathlen = strlen(target_path);
 	if (pathlen >= MAXPATHLEN)      /* total string too long */
+<<<<<<< HEAD
 		return XFS_ERROR(ENAMETOOLONG);
 
 	udqp = gdqp = NULL;
@@ -380,12 +449,26 @@ xfs_symlink(
 		prid = xfs_get_projid(dp);
 	else
 		prid = XFS_PROJID_DEFAULT;
+=======
+		return -ENAMETOOLONG;
+
+	udqp = gdqp = NULL;
+	prid = xfs_get_initial_prid(dp);
+>>>>>>> v3.18
 
 	/*
 	 * Make sure that we have allocated dquot(s) on disk.
 	 */
+<<<<<<< HEAD
 	error = xfs_qm_vop_dqalloc(dp, current_fsuid(), current_fsgid(), prid,
 			XFS_QMOPT_QUOTALL | XFS_QMOPT_INHERIT, &udqp, &gdqp);
+=======
+	error = xfs_qm_vop_dqalloc(dp,
+			xfs_kuid_to_uid(current_fsuid()),
+			xfs_kgid_to_gid(current_fsgid()), prid,
+			XFS_QMOPT_QUOTALL | XFS_QMOPT_INHERIT,
+			&udqp, &gdqp, &pdqp);
+>>>>>>> v3.18
 	if (error)
 		goto std_return;
 
@@ -400,12 +483,19 @@ xfs_symlink(
 	else
 		fs_blocks = xfs_symlink_blocks(mp, pathlen);
 	resblks = XFS_SYMLINK_SPACE_RES(mp, link_name->len, fs_blocks);
+<<<<<<< HEAD
 	error = xfs_trans_reserve(tp, resblks, XFS_SYMLINK_LOG_RES(mp), 0,
 			XFS_TRANS_PERM_LOG_RES, XFS_SYMLINK_LOG_COUNT);
 	if (error == ENOSPC && fs_blocks == 0) {
 		resblks = 0;
 		error = xfs_trans_reserve(tp, 0, XFS_SYMLINK_LOG_RES(mp), 0,
 				XFS_TRANS_PERM_LOG_RES, XFS_SYMLINK_LOG_COUNT);
+=======
+	error = xfs_trans_reserve(tp, &M_RES(mp)->tr_symlink, resblks, 0);
+	if (error == -ENOSPC && fs_blocks == 0) {
+		resblks = 0;
+		error = xfs_trans_reserve(tp, &M_RES(mp)->tr_symlink, 0, 0);
+>>>>>>> v3.18
 	}
 	if (error) {
 		cancel_flags = 0;
@@ -419,23 +509,40 @@ xfs_symlink(
 	 * Check whether the directory allows new symlinks or not.
 	 */
 	if (dp->i_d.di_flags & XFS_DIFLAG_NOSYMLINKS) {
+<<<<<<< HEAD
 		error = XFS_ERROR(EPERM);
+=======
+		error = -EPERM;
+>>>>>>> v3.18
 		goto error_return;
 	}
 
 	/*
 	 * Reserve disk quota : blocks and inode.
 	 */
+<<<<<<< HEAD
 	error = xfs_trans_reserve_quota(tp, mp, udqp, gdqp, resblks, 1, 0);
+=======
+	error = xfs_trans_reserve_quota(tp, mp, udqp, gdqp,
+						pdqp, resblks, 1, 0);
+>>>>>>> v3.18
 	if (error)
 		goto error_return;
 
 	/*
 	 * Check for ability to enter directory entry, if no space reserved.
 	 */
+<<<<<<< HEAD
 	error = xfs_dir_canenter(tp, dp, link_name, resblks);
 	if (error)
 		goto error_return;
+=======
+	if (!resblks) {
+		error = xfs_dir_canenter(tp, dp, link_name);
+		if (error)
+			goto error_return;
+	}
+>>>>>>> v3.18
 	/*
 	 * Initialize the bmap freelist prior to calling either
 	 * bmapi or the directory create code.
@@ -448,7 +555,11 @@ xfs_symlink(
 	error = xfs_dir_ialloc(&tp, dp, S_IFLNK | (mode & ~S_IFMT), 1, 0,
 			       prid, resblks > 0, &ip, NULL);
 	if (error) {
+<<<<<<< HEAD
 		if (error == ENOSPC)
+=======
+		if (error == -ENOSPC)
+>>>>>>> v3.18
 			goto error_return;
 		goto error1;
 	}
@@ -464,7 +575,11 @@ xfs_symlink(
 	/*
 	 * Also attach the dquot(s) to it, if applicable.
 	 */
+<<<<<<< HEAD
 	xfs_qm_vop_create_dqattach(tp, ip, udqp, gdqp);
+=======
+	xfs_qm_vop_create_dqattach(tp, ip, udqp, gdqp, pdqp);
+>>>>>>> v3.18
 
 	if (resblks)
 		resblks -= XFS_IALLOC_SPACE_RES(mp);
@@ -512,7 +627,11 @@ xfs_symlink(
 			bp = xfs_trans_get_buf(tp, mp->m_ddev_targp, d,
 					       BTOBB(byte_cnt), 0);
 			if (!bp) {
+<<<<<<< HEAD
 				error = ENOMEM;
+=======
+				error = -ENOMEM;
+>>>>>>> v3.18
 				goto error2;
 			}
 			bp->b_ops = &xfs_symlink_buf_ops;
@@ -530,6 +649,10 @@ xfs_symlink(
 			pathlen -= byte_cnt;
 			offset += byte_cnt;
 
+<<<<<<< HEAD
+=======
+			xfs_trans_buf_set_type(tp, bp, XFS_BLFT_SYMLINK_BUF);
+>>>>>>> v3.18
 			xfs_trans_log_buf(tp, bp, 0, (buf + byte_cnt - 1) -
 							(char *)bp->b_addr);
 		}
@@ -562,6 +685,10 @@ xfs_symlink(
 	error = xfs_trans_commit(tp, XFS_TRANS_RELEASE_LOG_RES);
 	xfs_qm_dqrele(udqp);
 	xfs_qm_dqrele(gdqp);
+<<<<<<< HEAD
+=======
+	xfs_qm_dqrele(pdqp);
+>>>>>>> v3.18
 
 	*ipp = ip;
 	return 0;
@@ -575,6 +702,10 @@ xfs_symlink(
 	xfs_trans_cancel(tp, cancel_flags);
 	xfs_qm_dqrele(udqp);
 	xfs_qm_dqrele(gdqp);
+<<<<<<< HEAD
+=======
+	xfs_qm_dqrele(pdqp);
+>>>>>>> v3.18
 
 	if (unlock_dp_on_error)
 		xfs_iunlock(dp, XFS_ILOCK_EXCL);
@@ -585,10 +716,16 @@ xfs_symlink(
 /*
  * Free a symlink that has blocks associated with it.
  */
+<<<<<<< HEAD
 int
 xfs_inactive_symlink_rmt(
 	xfs_inode_t	*ip,
 	xfs_trans_t	**tpp)
+=======
+STATIC int
+xfs_inactive_symlink_rmt(
+	struct xfs_inode *ip)
+>>>>>>> v3.18
 {
 	xfs_buf_t	*bp;
 	int		committed;
@@ -600,6 +737,7 @@ xfs_inactive_symlink_rmt(
 	xfs_mount_t	*mp;
 	xfs_bmbt_irec_t	mval[XFS_SYMLINK_MAPS];
 	int		nmaps;
+<<<<<<< HEAD
 	xfs_trans_t	*ntp;
 	int		size;
 	xfs_trans_t	*tp;
@@ -607,6 +745,13 @@ xfs_inactive_symlink_rmt(
 	tp = *tpp;
 	mp = ip->i_mount;
 	ASSERT(ip->i_d.di_size > XFS_IFORK_DSIZE(ip));
+=======
+	int		size;
+	xfs_trans_t	*tp;
+
+	mp = ip->i_mount;
+	ASSERT(ip->i_df.if_flags & XFS_IFEXTENTS);
+>>>>>>> v3.18
 	/*
 	 * We're freeing a symlink that has some
 	 * blocks allocated to it.  Free the
@@ -616,6 +761,19 @@ xfs_inactive_symlink_rmt(
 	 */
 	ASSERT(ip->i_d.di_nextents > 0 && ip->i_d.di_nextents <= 2);
 
+<<<<<<< HEAD
+=======
+	tp = xfs_trans_alloc(mp, XFS_TRANS_INACTIVE);
+	error = xfs_trans_reserve(tp, &M_RES(mp)->tr_itruncate, 0, 0);
+	if (error) {
+		xfs_trans_cancel(tp, 0);
+		return error;
+	}
+
+	xfs_ilock(ip, XFS_ILOCK_EXCL);
+	xfs_trans_ijoin(tp, ip, 0);
+
+>>>>>>> v3.18
 	/*
 	 * Lock the inode, fix the size, and join it to the transaction.
 	 * Hold it so in the normal path, we still have it locked for
@@ -634,7 +792,11 @@ xfs_inactive_symlink_rmt(
 	error = xfs_bmapi_read(ip, 0, xfs_symlink_blocks(mp, size),
 				mval, &nmaps, 0);
 	if (error)
+<<<<<<< HEAD
 		goto error0;
+=======
+		goto error_trans_cancel;
+>>>>>>> v3.18
 	/*
 	 * Invalidate the block(s). No validation is done.
 	 */
@@ -643,23 +805,41 @@ xfs_inactive_symlink_rmt(
 			XFS_FSB_TO_DADDR(mp, mval[i].br_startblock),
 			XFS_FSB_TO_BB(mp, mval[i].br_blockcount), 0);
 		if (!bp) {
+<<<<<<< HEAD
 			error = ENOMEM;
 			goto error1;
+=======
+			error = -ENOMEM;
+			goto error_bmap_cancel;
+>>>>>>> v3.18
 		}
 		xfs_trans_binval(tp, bp);
 	}
 	/*
 	 * Unmap the dead block(s) to the free_list.
 	 */
+<<<<<<< HEAD
 	if ((error = xfs_bunmapi(tp, ip, 0, size, XFS_BMAPI_METADATA, nmaps,
 			&first_block, &free_list, &done)))
 		goto error1;
+=======
+	error = xfs_bunmapi(tp, ip, 0, size, XFS_BMAPI_METADATA, nmaps,
+			    &first_block, &free_list, &done);
+	if (error)
+		goto error_bmap_cancel;
+>>>>>>> v3.18
 	ASSERT(done);
 	/*
 	 * Commit the first transaction.  This logs the EFI and the inode.
 	 */
+<<<<<<< HEAD
 	if ((error = xfs_bmap_finish(&tp, &free_list, &committed)))
 		goto error1;
+=======
+	error = xfs_bmap_finish(&tp, &free_list, &committed);
+	if (error)
+		goto error_bmap_cancel;
+>>>>>>> v3.18
 	/*
 	 * The transaction must have been committed, since there were
 	 * actually extents freed by xfs_bunmapi.  See xfs_bmap_finish.
@@ -674,6 +854,7 @@ xfs_inactive_symlink_rmt(
 	xfs_trans_ijoin(tp, ip, 0);
 	xfs_trans_log_inode(tp, ip, XFS_ILOG_CORE);
 	/*
+<<<<<<< HEAD
 	 * Get a new, empty transaction to return to our caller.
 	 */
 	ntp = xfs_trans_dup(tp);
@@ -694,6 +875,15 @@ xfs_inactive_symlink_rmt(
 	 * reference that we gained in xfs_trans_dup()
 	 */
 	xfs_log_ticket_put(tp->t_ticket);
+=======
+	 * Commit the transaction containing extent freeing and EFDs.
+	 */
+	error = xfs_trans_commit(tp, XFS_TRANS_RELEASE_LOG_RES);
+	if (error) {
+		ASSERT(XFS_FORCED_SHUTDOWN(mp));
+		goto error_unlock;
+	}
+>>>>>>> v3.18
 
 	/*
 	 * Remove the memory for extent descriptions (just bookkeeping).
@@ -701,6 +891,7 @@ xfs_inactive_symlink_rmt(
 	if (ip->i_df.if_bytes)
 		xfs_idata_realloc(ip, -ip->i_df.if_bytes, XFS_DATA_FORK);
 	ASSERT(ip->i_df.if_bytes == 0);
+<<<<<<< HEAD
 	/*
 	 * Put an itruncate log reservation in the new transaction
 	 * for our caller.
@@ -720,3 +911,66 @@ xfs_inactive_symlink_rmt(
  error0:
 	return error;
 }
+=======
+
+	xfs_iunlock(ip, XFS_ILOCK_EXCL);
+	return 0;
+
+error_bmap_cancel:
+	xfs_bmap_cancel(&free_list);
+error_trans_cancel:
+	xfs_trans_cancel(tp, XFS_TRANS_RELEASE_LOG_RES | XFS_TRANS_ABORT);
+error_unlock:
+	xfs_iunlock(ip, XFS_ILOCK_EXCL);
+	return error;
+}
+
+/*
+ * xfs_inactive_symlink - free a symlink
+ */
+int
+xfs_inactive_symlink(
+	struct xfs_inode	*ip)
+{
+	struct xfs_mount	*mp = ip->i_mount;
+	int			pathlen;
+
+	trace_xfs_inactive_symlink(ip);
+
+	if (XFS_FORCED_SHUTDOWN(mp))
+		return -EIO;
+
+	xfs_ilock(ip, XFS_ILOCK_EXCL);
+
+	/*
+	 * Zero length symlinks _can_ exist.
+	 */
+	pathlen = (int)ip->i_d.di_size;
+	if (!pathlen) {
+		xfs_iunlock(ip, XFS_ILOCK_EXCL);
+		return 0;
+	}
+
+	if (pathlen < 0 || pathlen > MAXPATHLEN) {
+		xfs_alert(mp, "%s: inode (0x%llx) bad symlink length (%d)",
+			 __func__, (unsigned long long)ip->i_ino, pathlen);
+		xfs_iunlock(ip, XFS_ILOCK_EXCL);
+		ASSERT(0);
+		return -EFSCORRUPTED;
+	}
+
+	if (ip->i_df.if_flags & XFS_IFINLINE) {
+		if (ip->i_df.if_bytes > 0) 
+			xfs_idata_realloc(ip, -(ip->i_df.if_bytes),
+					  XFS_DATA_FORK);
+		xfs_iunlock(ip, XFS_ILOCK_EXCL);
+		ASSERT(ip->i_df.if_bytes == 0);
+		return 0;
+	}
+
+	xfs_iunlock(ip, XFS_ILOCK_EXCL);
+
+	/* remove the remote symlink */
+	return xfs_inactive_symlink_rmt(ip);
+}
+>>>>>>> v3.18

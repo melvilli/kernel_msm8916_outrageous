@@ -23,8 +23,11 @@
 #include <linux/platform_device.h>
 #include <linux/slab.h>
 #include <linux/spinlock.h>
+<<<<<<< HEAD
 #include <linux/interrupt.h>
 #include <linux/perf_event.h>
+=======
+>>>>>>> v3.18
 
 #include <asm/cacheflush.h>
 #include <asm/irq_regs.h>
@@ -65,9 +68,12 @@ static unsigned int nb_cci_ports;
 static void __iomem *cci_ctrl_base;
 static unsigned long cci_ctrl_phys;
 
+<<<<<<< HEAD
 static u32 from_idle;
 static u32 cci_version;
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_HW_PERF_EVENTS
 
 #define CCI_PMCR		0x0100
@@ -202,6 +208,7 @@ static bool is_duplicate_irq(int irq, int *irqs, int nr_irqs)
 static int probe_cci_revision(void)
 {
 	int rev;
+<<<<<<< HEAD
 
 	if (cci_version == 0) {
 		rev = readl_relaxed(cci_ctrl_base + CCI_PID2) &
@@ -210,6 +217,10 @@ static int probe_cci_revision(void)
 	} else {
 		rev = cci_version;
 	}
+=======
+	rev = readl_relaxed(cci_ctrl_base + CCI_PID2) & CCI_PID2_REV_MASK;
+	rev >>= CCI_PID2_REV_SHIFT;
+>>>>>>> v3.18
 
 	if (rev < CCI_REV_R1_PX)
 		return CCI_REV_R0;
@@ -309,10 +320,17 @@ static struct pmu_hw_events *pmu_get_hw_events(void)
 	return &pmu->hw_events;
 }
 
+<<<<<<< HEAD
 static int __pmu_get_event_idx(struct pmu_hw_events *hw,
 			       struct arm_pmu *cci_pmu,
 			       struct hw_perf_event *hw_event)
 {
+=======
+static int pmu_get_event_idx(struct pmu_hw_events *hw, struct perf_event *event)
+{
+	struct arm_pmu *cci_pmu = to_arm_pmu(event->pmu);
+	struct hw_perf_event *hw_event = &event->hw;
+>>>>>>> v3.18
 	unsigned long cci_event = hw_event->config_base & CCI_PMU_EVENT_MASK;
 	int idx;
 
@@ -382,6 +400,7 @@ static int pmu_request_irq(struct arm_pmu *cci_pmu, irq_handler_t handler)
 	return 0;
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_ARM64
 static inline u64 cci_armpmu_event_update(struct perf_event *event)
 {
@@ -424,6 +443,8 @@ static inline void cci_pmu_disable(struct arm_pmu *cci_pmu,
 
 #endif
 
+=======
+>>>>>>> v3.18
 static irqreturn_t pmu_handle_irq(int irq_num, void *dev)
 {
 	unsigned long flags;
@@ -458,6 +479,7 @@ static irqreturn_t pmu_handle_irq(int irq_num, void *dev)
 
 		handled = IRQ_HANDLED;
 
+<<<<<<< HEAD
 		cci_armpmu_event_update(event);
 		perf_sample_data_init(&data, 0, hw_counter->last_period);
 		if (!cci_armpmu_event_set_period(event))
@@ -465,6 +487,15 @@ static irqreturn_t pmu_handle_irq(int irq_num, void *dev)
 
 		if (perf_event_overflow(event, &data, regs))
 			cci_pmu_disable(cci_pmu, event);
+=======
+		armpmu_event_update(event);
+		perf_sample_data_init(&data, 0, hw_counter->last_period);
+		if (!armpmu_event_set_period(event))
+			continue;
+
+		if (perf_event_overflow(event, &data, regs))
+			cci_pmu->disable(event);
+>>>>>>> v3.18
 	}
 	raw_spin_unlock_irqrestore(&events->pmu_lock, flags);
 
@@ -483,11 +514,21 @@ static void pmu_free_irq(struct arm_pmu *cci_pmu)
 	}
 }
 
+<<<<<<< HEAD
 static inline void __pmu_enable_event(struct arm_pmu *cci_pmu,
 			       struct hw_perf_event *hw_counter, int idx)
 {
 	unsigned long flags;
 	struct pmu_hw_events *events = cci_pmu->get_hw_events();
+=======
+static void pmu_enable_event(struct perf_event *event)
+{
+	unsigned long flags;
+	struct arm_pmu *cci_pmu = to_arm_pmu(event->pmu);
+	struct pmu_hw_events *events = cci_pmu->get_hw_events();
+	struct hw_perf_event *hw_counter = &event->hw;
+	int idx = hw_counter->idx;
+>>>>>>> v3.18
 
 	if (unlikely(!pmu_is_valid_counter(cci_pmu, idx))) {
 		dev_err(&cci_pmu->plat_device->dev, "Invalid CCI PMU counter %d\n", idx);
@@ -505,9 +546,18 @@ static inline void __pmu_enable_event(struct arm_pmu *cci_pmu,
 	raw_spin_unlock_irqrestore(&events->pmu_lock, flags);
 }
 
+<<<<<<< HEAD
 static inline void __pmu_disable_event(struct arm_pmu *cci_pmu,
 				struct hw_perf_event *hw_counter, int idx)
 {
+=======
+static void pmu_disable_event(struct perf_event *event)
+{
+	struct arm_pmu *cci_pmu = to_arm_pmu(event->pmu);
+	struct hw_perf_event *hw_counter = &event->hw;
+	int idx = hw_counter->idx;
+
+>>>>>>> v3.18
 	if (unlikely(!pmu_is_valid_counter(cci_pmu, idx))) {
 		dev_err(&cci_pmu->plat_device->dev, "Invalid CCI PMU counter %d\n", idx);
 		return;
@@ -546,8 +596,16 @@ static void pmu_stop(struct arm_pmu *cci_pmu)
 	raw_spin_unlock_irqrestore(&events->pmu_lock, flags);
 }
 
+<<<<<<< HEAD
 static inline u32 __pmu_read_counter(struct arm_pmu *cci_pmu, int idx)
 {
+=======
+static u32 pmu_read_counter(struct perf_event *event)
+{
+	struct arm_pmu *cci_pmu = to_arm_pmu(event->pmu);
+	struct hw_perf_event *hw_counter = &event->hw;
+	int idx = hw_counter->idx;
+>>>>>>> v3.18
 	u32 value;
 
 	if (unlikely(!pmu_is_valid_counter(cci_pmu, idx))) {
@@ -559,6 +617,7 @@ static inline u32 __pmu_read_counter(struct arm_pmu *cci_pmu, int idx)
 	return value;
 }
 
+<<<<<<< HEAD
 static inline void __pmu_write_counter(struct arm_pmu *cci_pmu, int idx,
 				       u32 value)
 {
@@ -668,12 +727,22 @@ static u32 pmu_read_counter(struct perf_event *event)
 }
 
 static inline void pmu_write_counter(struct perf_event *event, u32 value)
+=======
+static void pmu_write_counter(struct perf_event *event, u32 value)
+>>>>>>> v3.18
 {
 	struct arm_pmu *cci_pmu = to_arm_pmu(event->pmu);
 	struct hw_perf_event *hw_counter = &event->hw;
 	int idx = hw_counter->idx;
 
+<<<<<<< HEAD
 	__pmu_write_counter(cci_pmu, idx, value);
+=======
+	if (unlikely(!pmu_is_valid_counter(cci_pmu, idx)))
+		dev_err(&cci_pmu->plat_device->dev, "Invalid CCI PMU counter %d\n", idx);
+	else
+		pmu_write_register(value, idx, CCI_PMU_CNTR);
+>>>>>>> v3.18
 }
 
 static int cci_pmu_init(struct arm_pmu *cci_pmu, struct platform_device *pdev)
@@ -701,8 +770,11 @@ static int cci_pmu_init(struct arm_pmu *cci_pmu, struct platform_device *pdev)
 	return armpmu_register(cci_pmu, -1);
 }
 
+<<<<<<< HEAD
 #endif
 
+=======
+>>>>>>> v3.18
 static const struct of_device_id arm_cci_pmu_matches[] = {
 	{
 		.compatible = "arm,cci-400-pmu",
@@ -710,7 +782,11 @@ static const struct of_device_id arm_cci_pmu_matches[] = {
 	{},
 };
 
+<<<<<<< HEAD
 static int __ref cci_pmu_probe(struct platform_device *pdev)
+=======
+static int cci_pmu_probe(struct platform_device *pdev)
+>>>>>>> v3.18
 {
 	struct resource *res;
 	int i, ret, irq;
@@ -762,7 +838,10 @@ static int __ref cci_pmu_probe(struct platform_device *pdev)
 
 	pmu->hw_events.events = pmu->events;
 	pmu->hw_events.used_mask = pmu->used_mask;
+<<<<<<< HEAD
 	pmu->hw_events.from_idle = &from_idle;
+=======
+>>>>>>> v3.18
 	raw_spin_lock_init(&pmu->hw_events.pmu_lock);
 
 	ret = cci_pmu_init(pmu->cci_pmu, pdev);
@@ -798,13 +877,19 @@ struct cpu_port {
 #define PORT_VALID_SHIFT	31
 #define PORT_VALID		(0x1 << PORT_VALID_SHIFT)
 
+<<<<<<< HEAD
 #ifdef CONFIG_ARM
+=======
+>>>>>>> v3.18
 static inline void init_cpu_port(struct cpu_port *port, u32 index, u64 mpidr)
 {
 	port->port = PORT_VALID | index;
 	port->mpidr = mpidr;
 }
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 
 static inline bool cpu_port_is_valid(struct cpu_port *port)
 {
@@ -850,7 +935,10 @@ int cci_ace_get_port(struct device_node *dn)
 }
 EXPORT_SYMBOL_GPL(cci_ace_get_port);
 
+<<<<<<< HEAD
 #ifdef CONFIG_ARM
+=======
+>>>>>>> v3.18
 static void cci_ace_init_ports(void)
 {
 	int port, cpu;
@@ -883,7 +971,10 @@ static void cci_ace_init_ports(void)
 			cpu);
 	}
 }
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 /*
  * Functions to enable/disable a CCI interconnect slave port
  *
@@ -950,7 +1041,10 @@ int notrace cci_disable_port_by_cpu(u64 mpidr)
 }
 EXPORT_SYMBOL_GPL(cci_disable_port_by_cpu);
 
+<<<<<<< HEAD
 #ifdef CONFIG_ARM
+=======
+>>>>>>> v3.18
 /**
  * cci_enable_port_for_self() - enable a CCI port for calling CPU
  *
@@ -1048,7 +1142,10 @@ asmlinkage void __naked cci_enable_port_for_self(void)
 
 	unreachable();
 }
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 
 /**
  * __cci_control_port_by_device() - function to control a CCI port by device
@@ -1122,6 +1219,7 @@ static const struct of_device_id arm_cci_ctrl_if_matches[] = {
 	{},
 };
 
+<<<<<<< HEAD
 #ifdef CONFIG_ARM64
 static int cci_probe(void)
 {
@@ -1150,6 +1248,8 @@ static int cci_probe(void)
 }
 
 #else
+=======
+>>>>>>> v3.18
 static int cci_probe(void)
 {
 	struct cci_nb_ports const *cci_config;
@@ -1250,7 +1350,10 @@ memalloc_err:
 	kfree(ports);
 	return ret;
 }
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 
 static int cci_init_status = -EAGAIN;
 static DEFINE_MUTEX(cci_probing);

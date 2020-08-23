@@ -39,6 +39,12 @@ obj-$(CONFIG_NET_SCH_CHOKE)	+= sch_choke.o
 obj-$(CONFIG_NET_SCH_QFQ)	+= sch_qfq.o
 obj-$(CONFIG_NET_SCH_CODEL)	+= sch_codel.o
 obj-$(CONFIG_NET_SCH_FQ_CODEL)	+= sch_fq_codel.o
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_NET_SCH_FQ)	+= sch_fq.o
+obj-$(CONFIG_NET_SCH_HHF)	+= sch_hhf.o
+obj-$(CONFIG_NET_SCH_PIE)	+= sch_pie.o
+>>>>>>> v3.18
 
 obj-$(CONFIG_NET_CLS_U32)	+= cls_u32.o
 obj-$(CONFIG_NET_CLS_ROUTE4)	+= cls_route.o
@@ -49,6 +55,10 @@ obj-$(CONFIG_NET_CLS_RSVP6)	+= cls_rsvp6.o
 obj-$(CONFIG_NET_CLS_BASIC)	+= cls_basic.o
 obj-$(CONFIG_NET_CLS_FLOW)	+= cls_flow.o
 obj-$(CONFIG_NET_CLS_CGROUP)	+= cls_cgroup.o
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_NET_CLS_BPF)	+= cls_bpf.o
+>>>>>>> v3.18
 obj-$(CONFIG_NET_EMATCH)	+= ematch.o
 obj-$(CONFIG_NET_EMATCH_CMP)	+= em_cmp.o
 obj-$(CONFIG_NET_EMATCH_NBYTE)	+= em_nbyte.o

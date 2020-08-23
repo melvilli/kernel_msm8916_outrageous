@@ -5,6 +5,7 @@
 #define AMBA_MMCI_H
 
 #include <linux/mmc/host.h>
+<<<<<<< HEAD
 #include <linux/mmc/card.h>
 #include <linux/mmc/sdio_func.h>
 
@@ -30,13 +31,18 @@ struct embedded_sdio_data {
 
 /* Just some dummy forwarding */
 struct dma_chan;
+=======
+>>>>>>> v3.18
 
 /**
  * struct mmci_platform_data - platform configuration for the MMCI
  * (also known as PL180) block.
+<<<<<<< HEAD
  * @f_max: the maximum operational frequency for this host in this
  * platform configuration. When this is specified it takes precedence
  * over the module parameter for the same frequency.
+=======
+>>>>>>> v3.18
  * @ocr_mask: available voltages on the 4 pins from the block, this
  * is ignored if a regulator is used, see the MMC_VDD_* masks in
  * mmc/host.h
@@ -51,6 +57,7 @@ struct dma_chan;
  * @gpio_wp: read this GPIO pin to see if the card is write protected
  * @gpio_cd: read this GPIO pin to detect card insertion
  * @cd_invert: true if the gpio_cd pin value is active low
+<<<<<<< HEAD
  * @capabilities: the capabilities of the block as implemented in
  * this platform, signify anything MMC_CAP_* from mmc/host.h
  * @capabilities2: more capabilities, MMC_CAP2_* from mmc/host.h
@@ -70,12 +77,17 @@ struct dma_chan;
  */
 struct mmci_platform_data {
 	unsigned int f_max;
+=======
+ */
+struct mmci_platform_data {
+>>>>>>> v3.18
 	unsigned int ocr_mask;
 	int (*ios_handler)(struct device *, struct mmc_ios *);
 	unsigned int (*status)(struct device *);
 	int	gpio_wp;
 	int	gpio_cd;
 	bool	cd_invert;
+<<<<<<< HEAD
 	unsigned long capabilities;
 	unsigned long capabilities2;
 	u32 sigdir;
@@ -85,6 +97,8 @@ struct mmci_platform_data {
 	unsigned int status_irq;
 	struct embedded_sdio_data *embedded_sdio;
 	int (*register_status_notify)(void (*callback)(int card_present, void *dev_id), void *dev_id);
+=======
+>>>>>>> v3.18
 };
 
 #endif

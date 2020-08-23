@@ -59,6 +59,7 @@ static void authenc_esn_request_complete(struct aead_request *req, int err)
 static int crypto_authenc_esn_setkey(struct crypto_aead *authenc_esn, const u8 *key,
 				     unsigned int keylen)
 {
+<<<<<<< HEAD
 	unsigned int authkeylen;
 	unsigned int enckeylen;
 	struct crypto_authenc_esn_ctx *ctx = crypto_aead_ctx(authenc_esn);
@@ -85,11 +86,25 @@ static int crypto_authenc_esn_setkey(struct crypto_aead *authenc_esn, const u8 *
 		goto badkey;
 
 	authkeylen = keylen - enckeylen;
+=======
+	struct crypto_authenc_esn_ctx *ctx = crypto_aead_ctx(authenc_esn);
+	struct crypto_ahash *auth = ctx->auth;
+	struct crypto_ablkcipher *enc = ctx->enc;
+	struct crypto_authenc_keys keys;
+	int err = -EINVAL;
+
+	if (crypto_authenc_extractkeys(&keys, key, keylen) != 0)
+		goto badkey;
+>>>>>>> v3.18
 
 	crypto_ahash_clear_flags(auth, CRYPTO_TFM_REQ_MASK);
 	crypto_ahash_set_flags(auth, crypto_aead_get_flags(authenc_esn) &
 				     CRYPTO_TFM_REQ_MASK);
+<<<<<<< HEAD
 	err = crypto_ahash_setkey(auth, key, authkeylen);
+=======
+	err = crypto_ahash_setkey(auth, keys.authkey, keys.authkeylen);
+>>>>>>> v3.18
 	crypto_aead_set_flags(authenc_esn, crypto_ahash_get_flags(auth) &
 					   CRYPTO_TFM_RES_MASK);
 
@@ -99,7 +114,11 @@ static int crypto_authenc_esn_setkey(struct crypto_aead *authenc_esn, const u8 *
 	crypto_ablkcipher_clear_flags(enc, CRYPTO_TFM_REQ_MASK);
 	crypto_ablkcipher_set_flags(enc, crypto_aead_get_flags(authenc_esn) &
 					 CRYPTO_TFM_REQ_MASK);
+<<<<<<< HEAD
 	err = crypto_ablkcipher_setkey(enc, key + authkeylen, enckeylen);
+=======
+	err = crypto_ablkcipher_setkey(enc, keys.enckey, keys.enckeylen);
+>>>>>>> v3.18
 	crypto_aead_set_flags(authenc_esn, crypto_ablkcipher_get_flags(enc) &
 					   CRYPTO_TFM_RES_MASK);
 
@@ -832,4 +851,7 @@ module_exit(crypto_authenc_esn_module_exit);
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Steffen Klassert <steffen.klassert@secunet.com>");
 MODULE_DESCRIPTION("AEAD wrapper for IPsec with extended sequence numbers");
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("authencesn");
+=======
+>>>>>>> v3.18

@@ -18,6 +18,7 @@
 #ifndef __ASM_TRAP_H
 #define __ASM_TRAP_H
 
+<<<<<<< HEAD
 #include <linux/list.h>
 
 struct undef_hook {
@@ -31,6 +32,8 @@ struct undef_hook {
 
 void register_undef_hook(struct undef_hook *hook);
 
+=======
+>>>>>>> v3.18
 static inline int in_exception_text(unsigned long ptr)
 {
 	extern char __exception_text_start[];

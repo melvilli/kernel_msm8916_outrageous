@@ -7,6 +7,10 @@ header-y += hwcap.h
 header-y += ioctls.h
 header-y += kvm_para.h
 header-y += mman.h
+<<<<<<< HEAD
+=======
+header-y += perf_regs.h
+>>>>>>> v3.18
 header-y += posix_types.h
 header-y += ptrace.h
 header-y += setup.h

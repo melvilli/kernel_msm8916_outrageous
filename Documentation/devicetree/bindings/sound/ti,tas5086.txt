@@ -20,6 +20,23 @@ Optional properties:
 			When not specified, the hardware default of 1300ms
 			is retained.
 
+<<<<<<< HEAD
+=======
+ - ti,mid-z-channel-X:	Boolean properties, X being a number from 1 to 6.
+			If given, channel X will start with the Mid-Z start
+			sequence, otherwise the default Low-Z scheme is used.
+
+			The correct configuration depends on how the power
+			stages connected to the PWM output pins work. Not all
+			power stages are compatible to Mid-Z - please refer
+			to the datasheets for more details.
+
+			Most systems should not set any of these properties.
+
+ - avdd-supply:         Power supply for AVDD, providing 3.3V
+ - dvdd-supply:         Power supply for DVDD, providing 3.3V
+
+>>>>>>> v3.18
 Examples:
 
 	i2c_bus {
@@ -28,5 +45,10 @@ Examples:
 			reg = <0x1b>;
 			reset-gpio = <&gpio 23 0>;
 			ti,charge-period = <156000>;
+<<<<<<< HEAD
+=======
+			avdd-supply = <&vdd_3v3_reg>;
+			dvdd-supply = <&vdd_3v3_reg>;
+>>>>>>> v3.18
 		};
 	};

@@ -102,6 +102,10 @@
 #define HWCAP_S390_ETF3EH	256
 #define HWCAP_S390_HIGH_GPRS	512
 #define HWCAP_S390_TE		1024
+<<<<<<< HEAD
+=======
+#define HWCAP_S390_VXRS		2048
+>>>>>>> v3.18
 
 /*
  * These are used to set parameters in the core dumps.
@@ -225,6 +229,10 @@ int arch_setup_additional_pages(struct linux_binprm *, int);
 extern unsigned long arch_randomize_brk(struct mm_struct *mm);
 #define arch_randomize_brk arch_randomize_brk
 
+<<<<<<< HEAD
 void *fill_cpu_elf_notes(void *ptr, struct save_area *sa);
+=======
+void *fill_cpu_elf_notes(void *ptr, struct save_area *sa, __vector128 *vxrs);
+>>>>>>> v3.18
 
 #endif

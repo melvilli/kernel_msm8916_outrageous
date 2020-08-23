@@ -1,6 +1,10 @@
 config XFS_FS
 	tristate "XFS filesystem support"
 	depends on BLOCK
+<<<<<<< HEAD
+=======
+	depends on (64BIT || LBDAF)
+>>>>>>> v3.18
 	select EXPORTFS
 	select LIBCRC32C
 	help

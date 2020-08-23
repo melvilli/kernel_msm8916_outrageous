@@ -8,6 +8,7 @@
 #include "machine.h"
 #include "thread.h"
 #include "parse-events.h"
+<<<<<<< HEAD
 
 static struct {
 	u32 pid;
@@ -145,6 +146,9 @@ out:
 	machine__delete(machine);
 	return NULL;
 }
+=======
+#include "hists_common.h"
+>>>>>>> v3.18
 
 struct sample {
 	u32 pid;
@@ -154,6 +158,7 @@ struct sample {
 	struct symbol *sym;
 };
 
+<<<<<<< HEAD
 static struct sample fake_common_samples[] = {
 	/* perf [kernel] schedule() */
 	{ .pid = 100, .ip = 0xf0000 + 700, },
@@ -165,11 +170,26 @@ static struct sample fake_common_samples[] = {
 	{ .pid = 300, .ip = 0x40000 + 800, },
 	/* bash [libc]   malloc() */
 	{ .pid = 300, .ip = 0x50000 + 700, },
+=======
+/* For the numbers, see hists_common.c */
+static struct sample fake_common_samples[] = {
+	/* perf [kernel] schedule() */
+	{ .pid = FAKE_PID_PERF1, .ip = FAKE_IP_KERNEL_SCHEDULE, },
+	/* perf [perf]   main() */
+	{ .pid = FAKE_PID_PERF2, .ip = FAKE_IP_PERF_MAIN, },
+	/* perf [perf]   cmd_record() */
+	{ .pid = FAKE_PID_PERF2, .ip = FAKE_IP_PERF_CMD_RECORD, },
+	/* bash [bash]   xmalloc() */
+	{ .pid = FAKE_PID_BASH,  .ip = FAKE_IP_BASH_XMALLOC, },
+	/* bash [libc]   malloc() */
+	{ .pid = FAKE_PID_BASH,  .ip = FAKE_IP_LIBC_MALLOC, },
+>>>>>>> v3.18
 };
 
 static struct sample fake_samples[][5] = {
 	{
 		/* perf [perf]   run_command() */
+<<<<<<< HEAD
 		{ .pid = 100, .ip = 0x40000 + 800, },
 		/* perf [libc]   malloc() */
 		{ .pid = 100, .ip = 0x50000 + 700, },
@@ -191,6 +211,29 @@ static struct sample fake_samples[][5] = {
 		{ .pid = 300, .ip = 0x50000 + 900, },
 		/* bash [kernel] page_fault() */
 		{ .pid = 300, .ip = 0xf0000 + 800, },
+=======
+		{ .pid = FAKE_PID_PERF1, .ip = FAKE_IP_PERF_RUN_COMMAND, },
+		/* perf [libc]   malloc() */
+		{ .pid = FAKE_PID_PERF1, .ip = FAKE_IP_LIBC_MALLOC, },
+		/* perf [kernel] page_fault() */
+		{ .pid = FAKE_PID_PERF1, .ip = FAKE_IP_KERNEL_PAGE_FAULT, },
+		/* perf [kernel] sys_perf_event_open() */
+		{ .pid = FAKE_PID_PERF2, .ip = FAKE_IP_KERNEL_SYS_PERF_EVENT_OPEN, },
+		/* bash [libc]   free() */
+		{ .pid = FAKE_PID_BASH,  .ip = FAKE_IP_LIBC_FREE, },
+	},
+	{
+		/* perf [libc]   free() */
+		{ .pid = FAKE_PID_PERF2, .ip = FAKE_IP_LIBC_FREE, },
+		/* bash [libc]   malloc() */
+		{ .pid = FAKE_PID_BASH,  .ip = FAKE_IP_LIBC_MALLOC, }, /* will be merged */
+		/* bash [bash]   xfee() */
+		{ .pid = FAKE_PID_BASH,  .ip = FAKE_IP_BASH_XFREE, },
+		/* bash [libc]   realloc() */
+		{ .pid = FAKE_PID_BASH,  .ip = FAKE_IP_LIBC_REALLOC, },
+		/* bash [kernel] page_fault() */
+		{ .pid = FAKE_PID_BASH,  .ip = FAKE_IP_KERNEL_PAGE_FAULT, },
+>>>>>>> v3.18
 	},
 };
 
@@ -199,7 +242,11 @@ static int add_hist_entries(struct perf_evlist *evlist, struct machine *machine)
 	struct perf_evsel *evsel;
 	struct addr_location al;
 	struct hist_entry *he;
+<<<<<<< HEAD
 	struct perf_sample sample = { .cpu = 0, };
+=======
+	struct perf_sample sample = { .period = 1, };
+>>>>>>> v3.18
 	size_t i = 0, k;
 
 	/*
@@ -207,6 +254,7 @@ static int add_hist_entries(struct perf_evlist *evlist, struct machine *machine)
 	 * However the second evsel also has a collapsed entry for
 	 * "bash [libc] malloc" so total 9 entries will be in the tree.
 	 */
+<<<<<<< HEAD
 	list_for_each_entry(evsel, &evlist->entries, node) {
 		for (k = 0; k < ARRAY_SIZE(fake_common_samples); k++) {
 			const union perf_event event = {
@@ -224,6 +272,27 @@ static int add_hist_entries(struct perf_evlist *evlist, struct machine *machine)
 				goto out;
 
 			he = __hists__add_entry(&evsel->hists, &al, NULL, 1, 1);
+=======
+	evlist__for_each(evlist, evsel) {
+		struct hists *hists = evsel__hists(evsel);
+
+		for (k = 0; k < ARRAY_SIZE(fake_common_samples); k++) {
+			const union perf_event event = {
+				.header = {
+					.misc = PERF_RECORD_MISC_USER,
+				},
+			};
+
+			sample.pid = fake_common_samples[k].pid;
+			sample.tid = fake_common_samples[k].pid;
+			sample.ip = fake_common_samples[k].ip;
+			if (perf_event__preprocess_sample(&event, machine, &al,
+							  &sample) < 0)
+				goto out;
+
+			he = __hists__add_entry(hists, &al, NULL,
+						NULL, NULL, 1, 1, 0, true);
+>>>>>>> v3.18
 			if (he == NULL)
 				goto out;
 
@@ -234,6 +303,7 @@ static int add_hist_entries(struct perf_evlist *evlist, struct machine *machine)
 
 		for (k = 0; k < ARRAY_SIZE(fake_samples[i]); k++) {
 			const union perf_event event = {
+<<<<<<< HEAD
 				.ip = {
 					.header = {
 						.misc = PERF_RECORD_MISC_USER,
@@ -248,6 +318,22 @@ static int add_hist_entries(struct perf_evlist *evlist, struct machine *machine)
 				goto out;
 
 			he = __hists__add_entry(&evsel->hists, &al, NULL, 1, 1);
+=======
+				.header = {
+					.misc = PERF_RECORD_MISC_USER,
+				},
+			};
+
+			sample.pid = fake_samples[i][k].pid;
+			sample.tid = fake_samples[i][k].pid;
+			sample.ip = fake_samples[i][k].ip;
+			if (perf_event__preprocess_sample(&event, machine, &al,
+							  &sample) < 0)
+				goto out;
+
+			he = __hists__add_entry(hists, &al, NULL,
+						NULL, NULL, 1, 1, 0, true);
+>>>>>>> v3.18
 			if (he == NULL)
 				goto out;
 
@@ -403,6 +489,7 @@ static int validate_link(struct hists *leader, struct hists *other)
 	return __validate_link(leader, 0) || __validate_link(other, 1);
 }
 
+<<<<<<< HEAD
 static void print_hists(struct hists *hists)
 {
 	int i = 0;
@@ -433,6 +520,12 @@ static void print_hists(struct hists *hists)
 int test__hists_link(void)
 {
 	int err = -1;
+=======
+int test__hists_link(void)
+{
+	int err = -1;
+	struct hists *hists, *first_hists;
+>>>>>>> v3.18
 	struct machines machines;
 	struct machine *machine = NULL;
 	struct perf_evsel *evsel, *first;
@@ -467,25 +560,48 @@ int test__hists_link(void)
 	if (err < 0)
 		goto out;
 
+<<<<<<< HEAD
 	list_for_each_entry(evsel, &evlist->entries, node) {
 		hists__collapse_resort(&evsel->hists);
 
 		if (verbose > 2)
 			print_hists(&evsel->hists);
+=======
+	evlist__for_each(evlist, evsel) {
+		hists = evsel__hists(evsel);
+		hists__collapse_resort(hists, NULL);
+
+		if (verbose > 2)
+			print_hists_in(hists);
+>>>>>>> v3.18
 	}
 
 	first = perf_evlist__first(evlist);
 	evsel = perf_evlist__last(evlist);
 
+<<<<<<< HEAD
 	/* match common entries */
 	hists__match(&first->hists, &evsel->hists);
 	err = validate_match(&first->hists, &evsel->hists);
+=======
+	first_hists = evsel__hists(first);
+	hists = evsel__hists(evsel);
+
+	/* match common entries */
+	hists__match(first_hists, hists);
+	err = validate_match(first_hists, hists);
+>>>>>>> v3.18
 	if (err)
 		goto out;
 
 	/* link common and/or dummy entries */
+<<<<<<< HEAD
 	hists__link(&first->hists, &evsel->hists);
 	err = validate_link(&first->hists, &evsel->hists);
+=======
+	hists__link(first_hists, hists);
+	err = validate_link(first_hists, hists);
+>>>>>>> v3.18
 	if (err)
 		goto out;
 
@@ -494,6 +610,10 @@ int test__hists_link(void)
 out:
 	/* tear down everything */
 	perf_evlist__delete(evlist);
+<<<<<<< HEAD
+=======
+	reset_output_field();
+>>>>>>> v3.18
 	machines__exit(&machines);
 
 	return err;

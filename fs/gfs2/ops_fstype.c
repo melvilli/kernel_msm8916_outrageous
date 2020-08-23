@@ -7,6 +7,11 @@
  * of the GNU General Public License version 2.
  */
 
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 #include <linux/sched.h>
 #include <linux/slab.h>
 #include <linux/spinlock.h>
@@ -36,6 +41,10 @@
 #include "log.h"
 #include "quota.h"
 #include "dir.h"
+<<<<<<< HEAD
+=======
+#include "meta_io.h"
+>>>>>>> v3.18
 #include "trace_gfs2.h"
 
 #define DO 0
@@ -51,7 +60,10 @@ static void gfs2_tune_init(struct gfs2_tune *gt)
 {
 	spin_lock_init(&gt->gt_spin);
 
+<<<<<<< HEAD
 	gt->gt_quota_simul_sync = 64;
+=======
+>>>>>>> v3.18
 	gt->gt_quota_warn_period = 10;
 	gt->gt_quota_scale_num = 1;
 	gt->gt_quota_scale_den = 1;
@@ -63,6 +75,10 @@ static void gfs2_tune_init(struct gfs2_tune *gt)
 static struct gfs2_sbd *init_sbd(struct super_block *sb)
 {
 	struct gfs2_sbd *sdp;
+<<<<<<< HEAD
+=======
+	struct address_space *mapping;
+>>>>>>> v3.18
 
 	sdp = kzalloc(sizeof(struct gfs2_sbd), GFP_KERNEL);
 	if (!sdp)
@@ -91,6 +107,7 @@ static struct gfs2_sbd *init_sbd(struct super_block *sb)
 	INIT_LIST_HEAD(&sdp->sd_jindex_list);
 	spin_lock_init(&sdp->sd_jindex_spin);
 	mutex_init(&sdp->sd_jindex_mutex);
+<<<<<<< HEAD
 
 	INIT_LIST_HEAD(&sdp->sd_quota_list);
 	mutex_init(&sdp->sd_quota_mutex);
@@ -103,6 +120,32 @@ static struct gfs2_sbd *init_sbd(struct super_block *sb)
 	INIT_LIST_HEAD(&sdp->sd_log_le_buf);
 	INIT_LIST_HEAD(&sdp->sd_log_le_revoke);
 	INIT_LIST_HEAD(&sdp->sd_log_le_databuf);
+=======
+	init_completion(&sdp->sd_journal_ready);
+
+	INIT_LIST_HEAD(&sdp->sd_quota_list);
+	mutex_init(&sdp->sd_quota_mutex);
+	mutex_init(&sdp->sd_quota_sync_mutex);
+	init_waitqueue_head(&sdp->sd_quota_wait);
+	INIT_LIST_HEAD(&sdp->sd_trunc_list);
+	spin_lock_init(&sdp->sd_trunc_lock);
+	spin_lock_init(&sdp->sd_bitmap_lock);
+
+	mapping = &sdp->sd_aspace;
+
+	address_space_init_once(mapping);
+	mapping->a_ops = &gfs2_rgrp_aops;
+	mapping->host = sb->s_bdev->bd_inode;
+	mapping->flags = 0;
+	mapping_set_gfp_mask(mapping, GFP_NOFS);
+	mapping->private_data = NULL;
+	mapping->backing_dev_info = sb->s_bdi;
+	mapping->writeback_index = 0;
+
+	spin_lock_init(&sdp->sd_log_lock);
+	atomic_set(&sdp->sd_log_pinned, 0);
+	INIT_LIST_HEAD(&sdp->sd_log_le_revoke);
+>>>>>>> v3.18
 	INIT_LIST_HEAD(&sdp->sd_log_le_ordered);
 	spin_lock_init(&sdp->sd_ordered_lock);
 
@@ -115,8 +158,15 @@ static struct gfs2_sbd *init_sbd(struct super_block *sb)
 	init_rwsem(&sdp->sd_log_flush_lock);
 	atomic_set(&sdp->sd_log_in_flight, 0);
 	init_waitqueue_head(&sdp->sd_log_flush_wait);
+<<<<<<< HEAD
 
 	INIT_LIST_HEAD(&sdp->sd_revoke_list);
+=======
+	init_waitqueue_head(&sdp->sd_log_frozen_wait);
+	atomic_set(&sdp->sd_log_freeze, 0);
+	atomic_set(&sdp->sd_frozen_root, 0);
+	init_waitqueue_head(&sdp->sd_frozen_root_wait);
+>>>>>>> v3.18
 
 	return sdp;
 }
@@ -140,7 +190,11 @@ static int gfs2_check_sb(struct gfs2_sbd *sdp, int silent)
 	if (sb->sb_magic != GFS2_MAGIC ||
 	    sb->sb_type != GFS2_METATYPE_SB) {
 		if (!silent)
+<<<<<<< HEAD
 			printk(KERN_WARNING "GFS2: not a GFS2 filesystem\n");
+=======
+			pr_warn("not a GFS2 filesystem\n");
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
@@ -162,7 +216,11 @@ static void end_bio_io_page(struct bio *bio, int error)
 	if (!error)
 		SetPageUptodate(page);
 	else
+<<<<<<< HEAD
 		printk(KERN_WARNING "gfs2: error %d reading superblock\n", error);
+=======
+		pr_warn("error %d reading superblock\n", error);
+>>>>>>> v3.18
 	unlock_page(page);
 }
 
@@ -217,14 +275,22 @@ static int gfs2_read_super(struct gfs2_sbd *sdp, sector_t sector, int silent)
 
 	page = alloc_page(GFP_NOFS);
 	if (unlikely(!page))
+<<<<<<< HEAD
 		return -ENOBUFS;
+=======
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	ClearPageUptodate(page);
 	ClearPageDirty(page);
 	lock_page(page);
 
 	bio = bio_alloc(GFP_NOFS, 1);
+<<<<<<< HEAD
 	bio->bi_sector = sector * (sb->s_blocksize >> 9);
+=======
+	bio->bi_iter.bi_sector = sector * (sb->s_blocksize >> 9);
+>>>>>>> v3.18
 	bio->bi_bdev = sb->s_bdev;
 	bio_add_page(bio, page, PAGE_SIZE, 0);
 
@@ -407,8 +473,13 @@ static int init_locking(struct gfs2_sbd *sdp, struct gfs2_holder *mount_gh,
 		goto fail_live;
 	}
 
+<<<<<<< HEAD
 	error = gfs2_glock_get(sdp, GFS2_TRANS_LOCK, &gfs2_trans_glops,
 			       CREATE, &sdp->sd_trans_gl);
+=======
+	error = gfs2_glock_get(sdp, GFS2_FREEZE_LOCK, &gfs2_freeze_glops,
+			       CREATE, &sdp->sd_freeze_gl);
+>>>>>>> v3.18
 	if (error) {
 		fs_err(sdp, "can't create transaction glock: %d\n", error);
 		goto fail_rename;
@@ -417,7 +488,11 @@ static int init_locking(struct gfs2_sbd *sdp, struct gfs2_holder *mount_gh,
 	return 0;
 
 fail_trans:
+<<<<<<< HEAD
 	gfs2_glock_put(sdp->sd_trans_gl);
+=======
+	gfs2_glock_put(sdp->sd_freeze_gl);
+>>>>>>> v3.18
 fail_rename:
 	gfs2_glock_put(sdp->sd_rename_gl);
 fail_live:
@@ -505,6 +580,7 @@ out:
 	return ret;
 }
 
+<<<<<<< HEAD
 /**
  * map_journal_extents - create a reusable "extent" mapping from all logical
  * blocks to all physical blocks for the given journal.  This will save
@@ -566,6 +642,8 @@ static int map_journal_extents(struct gfs2_sbd *sdp)
 	return rc;
 }
 
+=======
+>>>>>>> v3.18
 static void gfs2_others_may_mount(struct gfs2_sbd *sdp)
 {
 	char *message = "FIRSTMOUNT=Done";
@@ -624,6 +702,11 @@ static int gfs2_jindex_hold(struct gfs2_sbd *sdp, struct gfs2_holder *ji_gh)
 			break;
 
 		INIT_LIST_HEAD(&jd->extent_list);
+<<<<<<< HEAD
+=======
+		INIT_LIST_HEAD(&jd->jd_revoke_list);
+
+>>>>>>> v3.18
 		INIT_WORK(&jd->jd_work, gfs2_recover_func);
 		jd->jd_inode = gfs2_lookupi(sdp->sd_jindex, &name, 1);
 		if (!jd->jd_inode || IS_ERR(jd->jd_inode)) {
@@ -646,6 +729,51 @@ static int gfs2_jindex_hold(struct gfs2_sbd *sdp, struct gfs2_holder *ji_gh)
 	return error;
 }
 
+<<<<<<< HEAD
+=======
+/**
+ * check_journal_clean - Make sure a journal is clean for a spectator mount
+ * @sdp: The GFS2 superblock
+ * @jd: The journal descriptor
+ *
+ * Returns: 0 if the journal is clean or locked, else an error
+ */
+static int check_journal_clean(struct gfs2_sbd *sdp, struct gfs2_jdesc *jd)
+{
+	int error;
+	struct gfs2_holder j_gh;
+	struct gfs2_log_header_host head;
+	struct gfs2_inode *ip;
+
+	ip = GFS2_I(jd->jd_inode);
+	error = gfs2_glock_nq_init(ip->i_gl, LM_ST_SHARED, LM_FLAG_NOEXP |
+				   GL_EXACT | GL_NOCACHE, &j_gh);
+	if (error) {
+		fs_err(sdp, "Error locking journal for spectator mount.\n");
+		return -EPERM;
+	}
+	error = gfs2_jdesc_check(jd);
+	if (error) {
+		fs_err(sdp, "Error checking journal for spectator mount.\n");
+		goto out_unlock;
+	}
+	error = gfs2_find_jhead(jd, &head);
+	if (error) {
+		fs_err(sdp, "Error parsing journal for spectator mount.\n");
+		goto out_unlock;
+	}
+	if (!(head.lh_flags & GFS2_LOG_HEAD_UNMOUNT)) {
+		error = -EPERM;
+		fs_err(sdp, "jid=%u: Journal is dirty, so the first mounter "
+		       "must not be a spectator.\n", jd->jd_jid);
+	}
+
+out_unlock:
+	gfs2_glock_dq_uninit(&j_gh);
+	return error;
+}
+
+>>>>>>> v3.18
 static int init_journal(struct gfs2_sbd *sdp, int undo)
 {
 	struct inode *master = sdp->sd_master_dir->d_inode;
@@ -725,15 +853,31 @@ static int init_journal(struct gfs2_sbd *sdp, int undo)
 		atomic_set(&sdp->sd_log_thresh2, 4*sdp->sd_jdesc->jd_blocks/5);
 
 		/* Map the extents for this journal's blocks */
+<<<<<<< HEAD
 		map_journal_extents(sdp);
+=======
+		gfs2_map_journal_extents(sdp, sdp->sd_jdesc);
+>>>>>>> v3.18
 	}
 	trace_gfs2_log_blocks(sdp, atomic_read(&sdp->sd_log_blks_free));
 
 	if (sdp->sd_lockstruct.ls_first) {
 		unsigned int x;
 		for (x = 0; x < sdp->sd_journals; x++) {
+<<<<<<< HEAD
 			error = gfs2_recover_journal(gfs2_jdesc_find(sdp, x),
 						     true);
+=======
+			struct gfs2_jdesc *jd = gfs2_jdesc_find(sdp, x);
+
+			if (sdp->sd_args.ar_spectator) {
+				error = check_journal_clean(sdp, jd);
+				if (error)
+					goto fail_jinode_gh;
+				continue;
+			}
+			error = gfs2_recover_journal(jd, true);
+>>>>>>> v3.18
 			if (error) {
 				fs_err(sdp, "error recovering journal %u: %d\n",
 				       x, error);
@@ -753,7 +897,19 @@ static int init_journal(struct gfs2_sbd *sdp, int undo)
 	set_bit(SDF_JOURNAL_CHECKED, &sdp->sd_flags);
 	gfs2_glock_dq_uninit(&ji_gh);
 	jindex = 0;
+<<<<<<< HEAD
 
+=======
+	if (!sdp->sd_args.ar_spectator) {
+		error = gfs2_glock_nq_init(sdp->sd_freeze_gl, LM_ST_SHARED, 0,
+					   &sdp->sd_thaw_gh);
+		if (error) {
+			fs_err(sdp, "can't acquire freeze glock: %d\n", error);
+			goto fail_jinode_gh;
+		}
+	}
+	gfs2_glock_dq_uninit(&sdp->sd_thaw_gh);
+>>>>>>> v3.18
 	return 0;
 
 fail_jinode_gh:
@@ -782,6 +938,10 @@ static int init_inodes(struct gfs2_sbd *sdp, int undo)
 		goto fail_qinode;
 
 	error = init_journal(sdp, undo);
+<<<<<<< HEAD
+=======
+	complete_all(&sdp->sd_journal_ready);
+>>>>>>> v3.18
 	if (error)
 		goto fail;
 
@@ -907,6 +1067,7 @@ fail:
 	return error;
 }
 
+<<<<<<< HEAD
 static int init_threads(struct gfs2_sbd *sdp, int undo)
 {
 	struct task_struct *p;
@@ -941,6 +1102,8 @@ fail:
 	return error;
 }
 
+=======
+>>>>>>> v3.18
 static const match_table_t nolock_tokens = {
 	{ Opt_jid, "jid=%d\n", },
 	{ Opt_err, NULL },
@@ -979,7 +1142,11 @@ static int gfs2_lm_mount(struct gfs2_sbd *sdp, int silent)
 		lm = &gfs2_dlm_ops;
 #endif
 	} else {
+<<<<<<< HEAD
 		printk(KERN_INFO "GFS2: can't find protocol %s\n", proto);
+=======
+		pr_info("can't find protocol %s\n", proto);
+>>>>>>> v3.18
 		return -ENOENT;
 	}
 
@@ -1042,6 +1209,7 @@ void gfs2_lm_unmount(struct gfs2_sbd *sdp)
 		lm->lm_unmount(sdp);
 }
 
+<<<<<<< HEAD
 static int gfs2_journalid_wait(void *word)
 {
 	if (signal_pending(current))
@@ -1050,12 +1218,19 @@ static int gfs2_journalid_wait(void *word)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 static int wait_on_journal(struct gfs2_sbd *sdp)
 {
 	if (sdp->sd_lockstruct.ls_ops->lm_mount == NULL)
 		return 0;
 
+<<<<<<< HEAD
 	return wait_on_bit(&sdp->sd_flags, SDF_NOJOURNALID, gfs2_journalid_wait, TASK_INTERRUPTIBLE);
+=======
+	return wait_on_bit(&sdp->sd_flags, SDF_NOJOURNALID, TASK_INTERRUPTIBLE)
+		? -EINTR : 0;
+>>>>>>> v3.18
 }
 
 void gfs2_online_uevent(struct gfs2_sbd *sdp)
@@ -1086,7 +1261,11 @@ static int fill_super(struct super_block *sb, struct gfs2_args *args, int silent
 
 	sdp = init_sbd(sb);
 	if (!sdp) {
+<<<<<<< HEAD
 		printk(KERN_WARNING "GFS2: can't alloc struct gfs2_sbd\n");
+=======
+		pr_warn("can't alloc struct gfs2_sbd\n");
+>>>>>>> v3.18
 		return -ENOMEM;
 	}
 	sdp->sd_args = *args;
@@ -1205,15 +1384,22 @@ static int fill_super(struct super_block *sb, struct gfs2_args *args, int silent
 		goto fail_per_node;
 	}
 
+<<<<<<< HEAD
 	error = init_threads(sdp, DO);
 	if (error)
 		goto fail_per_node;
 
+=======
+>>>>>>> v3.18
 	if (!(sb->s_flags & MS_RDONLY)) {
 		error = gfs2_make_fs_rw(sdp);
 		if (error) {
 			fs_err(sdp, "can't make FS RW: %d\n", error);
+<<<<<<< HEAD
 			goto fail_threads;
+=======
+			goto fail_per_node;
+>>>>>>> v3.18
 		}
 	}
 
@@ -1221,8 +1407,11 @@ static int fill_super(struct super_block *sb, struct gfs2_args *args, int silent
 	gfs2_online_uevent(sdp);
 	return 0;
 
+<<<<<<< HEAD
 fail_threads:
 	init_threads(sdp, UNDO);
+=======
+>>>>>>> v3.18
 fail_per_node:
 	init_per_node(sdp, UNDO);
 fail_inodes:
@@ -1238,6 +1427,10 @@ fail_sb:
 fail_locking:
 	init_locking(sdp, &mount_gh, UNDO);
 fail_lm:
+<<<<<<< HEAD
+=======
+	complete_all(&sdp->sd_journal_ready);
+>>>>>>> v3.18
 	gfs2_gl_hash_clear(sdp);
 	gfs2_lm_unmount(sdp);
 fail_debug:
@@ -1340,7 +1533,11 @@ static struct dentry *gfs2_mount(struct file_system_type *fs_type, int flags,
 
 	error = gfs2_mount_args(&args, data);
 	if (error) {
+<<<<<<< HEAD
 		printk(KERN_WARNING "GFS2: can't parse mount arguments\n");
+=======
+		pr_warn("can't parse mount arguments\n");
+>>>>>>> v3.18
 		goto error_super;
 	}
 
@@ -1390,15 +1587,24 @@ static struct dentry *gfs2_mount_meta(struct file_system_type *fs_type,
 
 	error = kern_path(dev_name, LOOKUP_FOLLOW, &path);
 	if (error) {
+<<<<<<< HEAD
 		printk(KERN_WARNING "GFS2: path_lookup on %s returned error %d\n",
 		       dev_name, error);
+=======
+		pr_warn("path_lookup on %s returned error %d\n",
+			dev_name, error);
+>>>>>>> v3.18
 		return ERR_PTR(error);
 	}
 	s = sget(&gfs2_fs_type, test_gfs2_super, set_meta_super, flags,
 		 path.dentry->d_inode->i_sb->s_bdev);
 	path_put(&path);
 	if (IS_ERR(s)) {
+<<<<<<< HEAD
 		printk(KERN_WARNING "GFS2: gfs2 mount does not exist\n");
+=======
+		pr_warn("gfs2 mount does not exist\n");
+>>>>>>> v3.18
 		return ERR_CAST(s);
 	}
 	if ((flags ^ s->s_flags) & MS_RDONLY) {
@@ -1418,7 +1624,11 @@ static void gfs2_kill_sb(struct super_block *sb)
 		return;
 	}
 
+<<<<<<< HEAD
 	gfs2_meta_syncfs(sdp);
+=======
+	gfs2_log_flush(sdp, NULL, SYNC_FLUSH);
+>>>>>>> v3.18
 	dput(sdp->sd_root_dir);
 	dput(sdp->sd_master_dir);
 	sdp->sd_root_dir = NULL;

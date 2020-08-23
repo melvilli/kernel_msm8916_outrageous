@@ -11,6 +11,11 @@ obj-y := align.o coprocessor.o entry.o irq.o pci-dma.o platform.o process.o \
 obj-$(CONFIG_KGDB) += xtensa-stub.o
 obj-$(CONFIG_PCI) += pci.o
 obj-$(CONFIG_MODULES) += xtensa_ksyms.o module.o
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_FUNCTION_TRACER) += mcount.o
+obj-$(CONFIG_SMP) += smp.o mxhead.o
+>>>>>>> v3.18
 
 AFLAGS_head.o += -mtext-section-literals
 

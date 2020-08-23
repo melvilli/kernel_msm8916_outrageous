@@ -443,7 +443,11 @@ max8925_power_dt_init(struct platform_device *pdev)
 	if (!nproot)
 		return pdev->dev.platform_data;
 
+<<<<<<< HEAD
 	np = of_find_node_by_name(nproot, "charger");
+=======
+	np = of_get_child_by_name(nproot, "charger");
+>>>>>>> v3.18
 	if (!np) {
 		dev_err(&pdev->dev, "failed to find charger node\n");
 		return NULL;
@@ -452,6 +456,11 @@ max8925_power_dt_init(struct platform_device *pdev)
 	pdata = devm_kzalloc(&pdev->dev,
 			sizeof(struct max8925_power_pdata),
 			GFP_KERNEL);
+<<<<<<< HEAD
+=======
+	if (!pdata)
+		goto ret;
+>>>>>>> v3.18
 
 	of_property_read_u32(np, "topoff-threshold", &topoff_threshold);
 	of_property_read_u32(np, "batt-detect", &batt_detect);
@@ -465,6 +474,11 @@ max8925_power_dt_init(struct platform_device *pdev)
 	pdata->no_insert_detect = no_insert_detect;
 	pdata->no_temp_support = no_temp_support;
 
+<<<<<<< HEAD
+=======
+ret:
+	of_node_put(np);
+>>>>>>> v3.18
 	return pdata;
 }
 #else

@@ -310,8 +310,11 @@ struct sliccard {
 	u32           loadtimerset;
 	uint              config_set;
 	struct slic_config  config;
+<<<<<<< HEAD
 	struct dentry      *debugfs_dir;
 	struct dentry      *debugfs_cardinfo;
+=======
+>>>>>>> v3.18
 	struct adapter  *master;
 	struct adapter  *adapter[SLIC_MAX_PORTS];
 	struct sliccard *next;
@@ -364,12 +367,15 @@ struct slic_shmem {
 	volatile struct slic_stats     inicstats;
 };
 
+<<<<<<< HEAD
 struct slic_reg_params {
 	u32       linkspeed;
 	u32       linkduplex;
 	u32       fail_on_bad_eeprom;
 };
 
+=======
+>>>>>>> v3.18
 struct slic_upr {
 	uint               adapter;
 	u32            upr_request;
@@ -409,7 +415,10 @@ struct adapter {
 	uint                card_size;
 	uint                chipid;
 	struct net_device  *netdev;
+<<<<<<< HEAD
 	struct net_device  *next_netdevice;
+=======
+>>>>>>> v3.18
 	struct slic_spinlock     adapter_lock;
 	struct slic_spinlock     reset_lock;
 	struct pci_dev     *pcidev;
@@ -420,8 +429,11 @@ struct adapter {
 	ushort              devid;
 	ushort              subsysid;
 	u32             irq;
+<<<<<<< HEAD
 	void __iomem *memorybase;
 	u32             memorylength;
+=======
+>>>>>>> v3.18
 	u32             drambase;
 	u32             dramlength;
 	uint                queues_initialized;
@@ -452,7 +464,10 @@ struct adapter {
 	u32             pingtimerset;
 	struct timer_list   loadtimer;
 	u32             loadtimerset;
+<<<<<<< HEAD
 	struct dentry      *debugfs_entry;
+=======
+>>>>>>> v3.18
 	struct slic_spinlock     upr_lock;
 	struct slic_spinlock     bit64reglock;
 	struct slic_rspqueue     rspqueue;
@@ -464,9 +479,18 @@ struct adapter {
 	/*
 	*  SLIC Handles
 	*/
+<<<<<<< HEAD
 	struct slic_handle slic_handles[SLIC_CMDQ_MAXCMDS+1]; /* Object handles*/
 	struct slic_handle *pfree_slic_handles;          /* Free object handles*/
 	struct slic_spinlock     handle_lock;           /* Object handle list lock*/
+=======
+	/* Object handles*/
+	struct slic_handle slic_handles[SLIC_CMDQ_MAXCMDS+1];
+	/* Free object handles*/
+	struct slic_handle *pfree_slic_handles;
+	/* Object handle list lock*/
+	struct slic_spinlock     handle_lock;
+>>>>>>> v3.18
 	ushort              slic_handle_ix;
 
 	u32             xmitq_full;
@@ -495,7 +519,10 @@ struct adapter {
 	u32             intagg_period;
 	struct inicpm_state    *inicpm_info;
 	void *pinicpm_info;
+<<<<<<< HEAD
 	struct slic_reg_params   reg_params;
+=======
+>>>>>>> v3.18
 	struct slic_ifevents  if_events;
 	struct slic_stats        inicstats_prev;
 	struct slicnet_stats     slic_stats;

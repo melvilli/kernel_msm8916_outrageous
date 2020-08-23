@@ -371,6 +371,7 @@ static u8 tpm_inf_status(struct tpm_chip *chip)
 	return tpm_data_in(STAT);
 }
 
+<<<<<<< HEAD
 static DEVICE_ATTR(pubek, S_IRUGO, tpm_show_pubek, NULL);
 static DEVICE_ATTR(pcrs, S_IRUGO, tpm_show_pcrs, NULL);
 static DEVICE_ATTR(caps, S_IRUGO, tpm_show_caps, NULL);
@@ -396,14 +397,20 @@ static const struct file_operations inf_ops = {
 };
 
 static const struct tpm_vendor_specific tpm_inf = {
+=======
+static const struct tpm_class_ops tpm_inf = {
+>>>>>>> v3.18
 	.recv = tpm_inf_recv,
 	.send = tpm_inf_send,
 	.cancel = tpm_inf_cancel,
 	.status = tpm_inf_status,
 	.req_complete_mask = 0,
 	.req_complete_val = 0,
+<<<<<<< HEAD
 	.attr_group = &inf_attr_grp,
 	.miscdev = {.fops = &inf_ops,},
+=======
+>>>>>>> v3.18
 };
 
 static const struct pnp_device_id tpm_inf_pnp_tbl[] = {

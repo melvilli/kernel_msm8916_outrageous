@@ -50,6 +50,10 @@
 #include <linux/platform_data/asoc-imx-ssi.h>
 
 #include "imx-ssi.h"
+<<<<<<< HEAD
+=======
+#include "fsl_utils.h"
+>>>>>>> v3.18
 
 #define SSI_SACNT_DEFAULT (SSI_SACNT_AC97EN | SSI_SACNT_FV)
 
@@ -304,8 +308,12 @@ static int imx_ssi_trigger(struct snd_pcm_substream *substream, int cmd,
 			scr |= SSI_SCR_RE;
 		sier |= sier_bits;
 
+<<<<<<< HEAD
 		if (++ssi->enabled == 1)
 			scr |= SSI_SCR_SSIEN;
+=======
+		scr |= SSI_SCR_SSIEN;
+>>>>>>> v3.18
 
 		break;
 
@@ -318,7 +326,11 @@ static int imx_ssi_trigger(struct snd_pcm_substream *substream, int cmd,
 			scr &= ~SSI_SCR_RE;
 		sier &= ~sier_bits;
 
+<<<<<<< HEAD
 		if (--ssi->enabled == 0)
+=======
+		if (!(scr & (SSI_SCR_TE | SSI_SCR_RE)))
+>>>>>>> v3.18
 			scr &= ~SSI_SCR_SSIEN;
 
 		break;
@@ -340,6 +352,10 @@ static const struct snd_soc_dai_ops imx_ssi_pcm_dai_ops = {
 	.set_fmt	= imx_ssi_set_dai_fmt,
 	.set_clkdiv	= imx_ssi_set_dai_clkdiv,
 	.set_sysclk	= imx_ssi_set_dai_sysclk,
+<<<<<<< HEAD
+=======
+	.xlate_tdm_slot_mask = fsl_asoc_xlate_tdm_slot_mask,
+>>>>>>> v3.18
 	.set_tdm_slot	= imx_ssi_set_dai_tdm_slot,
 	.trigger	= imx_ssi_trigger,
 };
@@ -501,13 +517,20 @@ static void imx_ssi_ac97_warm_reset(struct snd_ac97 *ac97)
 	imx_ssi_ac97_read(ac97, 0);
 }
 
+<<<<<<< HEAD
 struct snd_ac97_bus_ops soc_ac97_ops = {
+=======
+static struct snd_ac97_bus_ops imx_ssi_ac97_ops = {
+>>>>>>> v3.18
 	.read		= imx_ssi_ac97_read,
 	.write		= imx_ssi_ac97_write,
 	.reset		= imx_ssi_ac97_reset,
 	.warm_reset	= imx_ssi_ac97_warm_reset
 };
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(soc_ac97_ops);
+=======
+>>>>>>> v3.18
 
 static int imx_ssi_probe(struct platform_device *pdev)
 {
@@ -537,7 +560,13 @@ static int imx_ssi_probe(struct platform_device *pdev)
 			ret);
 		goto failed_clk;
 	}
+<<<<<<< HEAD
 	clk_prepare_enable(ssi->clk);
+=======
+	ret = clk_prepare_enable(ssi->clk);
+	if (ret)
+		goto failed_clk;
+>>>>>>> v3.18
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	ssi->base = devm_ioremap_resource(&pdev->dev, res);
@@ -572,17 +601,34 @@ static int imx_ssi_probe(struct platform_device *pdev)
 	res = platform_get_resource_byname(pdev, IORESOURCE_DMA, "tx0");
 	if (res) {
 		imx_pcm_dma_params_init_data(&ssi->filter_data_tx, res->start,
+<<<<<<< HEAD
 			false);
+=======
+			IMX_DMATYPE_SSI);
+>>>>>>> v3.18
 	}
 
 	res = platform_get_resource_byname(pdev, IORESOURCE_DMA, "rx0");
 	if (res) {
 		imx_pcm_dma_params_init_data(&ssi->filter_data_rx, res->start,
+<<<<<<< HEAD
 			false);
+=======
+			IMX_DMATYPE_SSI);
+>>>>>>> v3.18
 	}
 
 	platform_set_drvdata(pdev, ssi);
 
+<<<<<<< HEAD
+=======
+	ret = snd_soc_set_ac97_ops(&imx_ssi_ac97_ops);
+	if (ret != 0) {
+		dev_err(&pdev->dev, "Failed to set AC'97 ops: %d\n", ret);
+		goto failed_register;
+	}
+
+>>>>>>> v3.18
 	ret = snd_soc_register_component(&pdev->dev, &imx_component,
 					 dai, 1);
 	if (ret) {
@@ -590,6 +636,7 @@ static int imx_ssi_probe(struct platform_device *pdev)
 		goto failed_register;
 	}
 
+<<<<<<< HEAD
 	ssi->soc_platform_pdev_fiq = platform_device_alloc("imx-fiq-pcm-audio", pdev->id);
 	if (!ssi->soc_platform_pdev_fiq) {
 		ret = -ENOMEM;
@@ -614,10 +661,24 @@ static int imx_ssi_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(&pdev->dev, "failed to add platform device\n");
 		goto failed_pdev_add;
+=======
+	ssi->fiq_params.irq = ssi->irq;
+	ssi->fiq_params.base = ssi->base;
+	ssi->fiq_params.dma_params_rx = &ssi->dma_params_rx;
+	ssi->fiq_params.dma_params_tx = &ssi->dma_params_tx;
+
+	ssi->fiq_init = imx_pcm_fiq_init(pdev, &ssi->fiq_params);
+	ssi->dma_init = imx_pcm_dma_init(pdev);
+
+	if (ssi->fiq_init && ssi->dma_init) {
+		ret = ssi->fiq_init;
+		goto failed_pcm;
+>>>>>>> v3.18
 	}
 
 	return 0;
 
+<<<<<<< HEAD
 failed_pdev_add:
 	platform_device_put(ssi->soc_platform_pdev);
 failed_pdev_alloc:
@@ -630,25 +691,45 @@ failed_register:
 	release_mem_region(res->start, resource_size(res));
 	clk_disable_unprepare(ssi->clk);
 failed_clk:
+=======
+failed_pcm:
+	snd_soc_unregister_component(&pdev->dev);
+failed_register:
+	clk_disable_unprepare(ssi->clk);
+failed_clk:
+	snd_soc_set_ac97_ops(NULL);
+>>>>>>> v3.18
 
 	return ret;
 }
 
 static int imx_ssi_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct resource *res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	struct imx_ssi *ssi = platform_get_drvdata(pdev);
 
 	platform_device_unregister(ssi->soc_platform_pdev);
 	platform_device_unregister(ssi->soc_platform_pdev_fiq);
+=======
+	struct imx_ssi *ssi = platform_get_drvdata(pdev);
+
+	if (!ssi->fiq_init)
+		imx_pcm_fiq_exit(pdev);
+>>>>>>> v3.18
 
 	snd_soc_unregister_component(&pdev->dev);
 
 	if (ssi->flags & IMX_SSI_USE_AC97)
 		ac97_ssi = NULL;
 
+<<<<<<< HEAD
 	release_mem_region(res->start, resource_size(res));
 	clk_disable_unprepare(ssi->clk);
+=======
+	clk_disable_unprepare(ssi->clk);
+	snd_soc_set_ac97_ops(NULL);
+>>>>>>> v3.18
 
 	return 0;
 }

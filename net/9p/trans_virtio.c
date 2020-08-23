@@ -164,8 +164,12 @@ static void req_done(struct virtqueue *vq)
 		p9_debug(P9_DEBUG_TRANS, ": rc %p\n", rc);
 		p9_debug(P9_DEBUG_TRANS, ": lookup tag %d\n", rc->tag);
 		req = p9_tag_lookup(chan->client, rc->tag);
+<<<<<<< HEAD
 		req->status = REQ_STATUS_RCVD;
 		p9_client_cb(chan->client, req);
+=======
+		p9_client_cb(chan->client, req, REQ_STATUS_RCVD);
+>>>>>>> v3.18
 	}
 }
 
@@ -547,9 +551,13 @@ static int p9_virtio_probe(struct virtio_device *vdev)
 
 	chan->inuse = false;
 	if (virtio_has_feature(vdev, VIRTIO_9P_MOUNT_TAG)) {
+<<<<<<< HEAD
 		vdev->config->get(vdev,
 				offsetof(struct virtio_9p_config, tag_len),
 				&tag_len, sizeof(tag_len));
+=======
+		virtio_cread(vdev, struct virtio_9p_config, tag_len, &tag_len);
+>>>>>>> v3.18
 	} else {
 		err = -EINVAL;
 		goto out_free_vq;
@@ -559,8 +567,14 @@ static int p9_virtio_probe(struct virtio_device *vdev)
 		err = -ENOMEM;
 		goto out_free_vq;
 	}
+<<<<<<< HEAD
 	vdev->config->get(vdev, offsetof(struct virtio_9p_config, tag),
 			tag, tag_len);
+=======
+
+	virtio_cread_bytes(vdev, offsetof(struct virtio_9p_config, tag),
+			   tag, tag_len);
+>>>>>>> v3.18
 	chan->tag = tag;
 	chan->tag_len = tag_len;
 	err = sysfs_create_file(&(vdev->dev.kobj), &dev_attr_mount_tag.attr);
@@ -577,6 +591,11 @@ static int p9_virtio_probe(struct virtio_device *vdev)
 	/* Ceiling limit to avoid denial of service attacks */
 	chan->p9_max_pages = nr_free_buffer_pages()/4;
 
+<<<<<<< HEAD
+=======
+	virtio_device_ready(vdev);
+
+>>>>>>> v3.18
 	mutex_lock(&virtio_9p_lock);
 	list_add_tail(&chan->chan_list, &virtio_chan_list);
 	mutex_unlock(&virtio_9p_lock);
@@ -702,7 +721,11 @@ static struct p9_trans_module p9_virtio_trans = {
 	 * page in zero copy.
 	 */
 	.maxsize = PAGE_SIZE * (VIRTQUEUE_NUM - 3),
+<<<<<<< HEAD
 	.def = 0,
+=======
+	.def = 1,
+>>>>>>> v3.18
 	.owner = THIS_MODULE,
 };
 

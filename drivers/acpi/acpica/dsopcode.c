@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -257,7 +261,11 @@ acpi_ds_init_buffer_field(u16 aml_opcode,
 	    (buffer_desc->common.reference_count +
 	     obj_desc->common.reference_count);
 
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 
 	/* Always delete the operands */
 
@@ -446,7 +454,11 @@ acpi_ds_eval_region_operands(struct acpi_walk_state *walk_state,
 
 	ACPI_DEBUG_PRINT((ACPI_DB_EXEC, "RgnObj %p Addr %8.8X%8.8X Len %X\n",
 			  obj_desc,
+<<<<<<< HEAD
 			  ACPI_FORMAT_UINT64(obj_desc->region.address),
+=======
+			  ACPI_FORMAT_NATIVE_UINT(obj_desc->region.address),
+>>>>>>> v3.18
 			  obj_desc->region.length));
 
 	/* Now the address and length are valid for this opregion */
@@ -539,12 +551,21 @@ acpi_ds_eval_table_region_operands(struct acpi_walk_state *walk_state,
 		return_ACPI_STATUS(AE_NOT_EXIST);
 	}
 
+<<<<<<< HEAD
 	obj_desc->region.address = ACPI_PTR_TO_PHYSADDR(table);
+=======
+	obj_desc->region.address =
+	    (acpi_physical_address) ACPI_TO_INTEGER(table);
+>>>>>>> v3.18
 	obj_desc->region.length = table->length;
 
 	ACPI_DEBUG_PRINT((ACPI_DB_EXEC, "RgnObj %p Addr %8.8X%8.8X Len %X\n",
 			  obj_desc,
+<<<<<<< HEAD
 			  ACPI_FORMAT_UINT64(obj_desc->region.address),
+=======
+			  ACPI_FORMAT_NATIVE_UINT(obj_desc->region.address),
+>>>>>>> v3.18
 			  obj_desc->region.length));
 
 	/* Now the address and length are valid for this opregion */
@@ -635,6 +656,10 @@ acpi_ds_eval_data_object_operands(struct acpi_walk_state *walk_state,
 		break;
 
 	default:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		return_ACPI_STATUS(AE_AML_BAD_OPCODE);
 	}
 

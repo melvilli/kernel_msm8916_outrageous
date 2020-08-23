@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -41,7 +45,12 @@
  * POSSIBILITY OF SUCH DAMAGES.
  */
 
+<<<<<<< HEAD
 #include <linux/export.h>
+=======
+#define EXPORT_ACPI_INTERFACES
+
+>>>>>>> v3.18
 #include <acpi/acpi.h>
 #include "accommon.h"
 #include "actables.h"
@@ -323,8 +332,14 @@ ACPI_EXPORT_SYMBOL(acpi_clear_event)
  ******************************************************************************/
 acpi_status acpi_get_event_status(u32 event, acpi_event_status * event_status)
 {
+<<<<<<< HEAD
 	acpi_status status = AE_OK;
 	u32 value;
+=======
+	acpi_status status;
+	acpi_event_status local_event_status = 0;
+	u32 in_byte;
+>>>>>>> v3.18
 
 	ACPI_FUNCTION_TRACE(acpi_get_event_status);
 
@@ -338,6 +353,7 @@ acpi_status acpi_get_event_status(u32 event, acpi_event_status * event_status)
 		return_ACPI_STATUS(AE_BAD_PARAMETER);
 	}
 
+<<<<<<< HEAD
 	/* Get the status of the requested fixed event */
 
 	status =
@@ -361,6 +377,42 @@ acpi_status acpi_get_event_status(u32 event, acpi_event_status * event_status)
 		*event_status |= ACPI_EVENT_FLAG_HANDLE;
 
 	return_ACPI_STATUS(status);
+=======
+	/* Fixed event currently can be dispatched? */
+
+	if (acpi_gbl_fixed_event_handlers[event].handler) {
+		local_event_status |= ACPI_EVENT_FLAG_HAS_HANDLER;
+	}
+
+	/* Fixed event currently enabled? */
+
+	status =
+	    acpi_read_bit_register(acpi_gbl_fixed_event_info[event].
+				   enable_register_id, &in_byte);
+	if (ACPI_FAILURE(status)) {
+		return_ACPI_STATUS(status);
+	}
+
+	if (in_byte) {
+		local_event_status |= ACPI_EVENT_FLAG_ENABLED;
+	}
+
+	/* Fixed event currently active? */
+
+	status =
+	    acpi_read_bit_register(acpi_gbl_fixed_event_info[event].
+				   status_register_id, &in_byte);
+	if (ACPI_FAILURE(status)) {
+		return_ACPI_STATUS(status);
+	}
+
+	if (in_byte) {
+		local_event_status |= ACPI_EVENT_FLAG_SET;
+	}
+
+	(*event_status) = local_event_status;
+	return_ACPI_STATUS(AE_OK);
+>>>>>>> v3.18
 }
 
 ACPI_EXPORT_SYMBOL(acpi_get_event_status)

@@ -34,8 +34,13 @@
 #include <linux/wait.h>
 #include <linux/workqueue.h>
 #include <net/sock.h>
+<<<<<<< HEAD
 
 #include "af_vsock.h"
+=======
+#include <net/af_vsock.h>
+
+>>>>>>> v3.18
 #include "vmci_transport_notify.h"
 
 static int vmci_transport_recv_dgram_cb(void *data, struct vmci_datagram *dg);
@@ -625,6 +630,7 @@ static int vmci_transport_recv_dgram_cb(void *data, struct vmci_datagram *dg)
 
 	/* Attach the packet to the socket's receive queue as an sk_buff. */
 	skb = alloc_skb(size, GFP_ATOMIC);
+<<<<<<< HEAD
 	if (skb) {
 		/* sk_receive_skb() will do a sock_put(), so hold here. */
 		sock_hold(sk);
@@ -632,6 +638,16 @@ static int vmci_transport_recv_dgram_cb(void *data, struct vmci_datagram *dg)
 		memcpy(skb->data, dg, size);
 		sk_receive_skb(sk, skb, 0);
 	}
+=======
+	if (!skb)
+		return VMCI_ERROR_NO_MEM;
+
+	/* sk_receive_skb() will do a sock_put(), so hold here. */
+	sock_hold(sk);
+	skb_put(skb, size);
+	memcpy(skb->data, dg, size);
+	sk_receive_skb(sk, skb, 0);
+>>>>>>> v3.18
 
 	return VMCI_SUCCESS;
 }
@@ -939,10 +955,16 @@ static void vmci_transport_recv_pkt_work(struct work_struct *work)
 		 * reset to prevent that.
 		 */
 		vmci_transport_send_reset(sk, pkt);
+<<<<<<< HEAD
 		goto out;
 	}
 
 out:
+=======
+		break;
+	}
+
+>>>>>>> v3.18
 	release_sock(sk);
 	kfree(recv_pkt_info);
 	/* Release reference obtained in the stream callback when we fetched
@@ -1779,10 +1801,15 @@ static int vmci_transport_dgram_dequeue(struct kiocb *kiocb,
 		goto out;
 
 	if (msg->msg_name) {
+<<<<<<< HEAD
 		struct sockaddr_vm *vm_addr;
 
 		/* Provide the address of the sender. */
 		vm_addr = (struct sockaddr_vm *)msg->msg_name;
+=======
+		/* Provide the address of the sender. */
+		DECLARE_SOCKADDR(struct sockaddr_vm *, vm_addr, msg->msg_name);
+>>>>>>> v3.18
 		vsock_addr_init(vm_addr, dg->src.context, dg->src.resource);
 		msg->msg_namelen = sizeof(*vm_addr);
 	}

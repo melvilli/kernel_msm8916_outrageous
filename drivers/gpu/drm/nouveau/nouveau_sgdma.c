@@ -1,8 +1,11 @@
 #include <linux/pagemap.h>
 #include <linux/slab.h>
 
+<<<<<<< HEAD
 #include <subdev/fb.h>
 
+=======
+>>>>>>> v3.18
 #include "nouveau_drm.h"
 #include "nouveau_ttm.h"
 
@@ -31,6 +34,7 @@ nv04_sgdma_bind(struct ttm_tt *ttm, struct ttm_mem_reg *mem)
 {
 	struct nouveau_sgdma_be *nvbe = (struct nouveau_sgdma_be *)ttm;
 	struct nouveau_mem *node = mem->mm_node;
+<<<<<<< HEAD
 	u64 size = mem->num_pages << 12;
 
 	if (ttm->sg) {
@@ -41,6 +45,19 @@ nv04_sgdma_bind(struct ttm_tt *ttm, struct ttm_mem_reg *mem)
 		nouveau_vm_map_sg(&node->vma[0], 0, size, node);
 	}
 
+=======
+
+	if (ttm->sg) {
+		node->sg    = ttm->sg;
+		node->pages = NULL;
+	} else {
+		node->sg    = NULL;
+		node->pages = nvbe->ttm.dma_address;
+	}
+	node->size = (mem->num_pages << PAGE_SHIFT) >> 12;
+
+	nouveau_vm_map(&node->vma[0], node);
+>>>>>>> v3.18
 	nvbe->node = node;
 	return 0;
 }
@@ -67,9 +84,19 @@ nv50_sgdma_bind(struct ttm_tt *ttm, struct ttm_mem_reg *mem)
 
 	/* noop: bound in move_notify() */
 	if (ttm->sg) {
+<<<<<<< HEAD
 		node->sg = ttm->sg;
 	} else
 		node->pages = nvbe->ttm.dma_address;
+=======
+		node->sg    = ttm->sg;
+		node->pages = NULL;
+	} else {
+		node->sg    = NULL;
+		node->pages = nvbe->ttm.dma_address;
+	}
+	node->size = (mem->num_pages << PAGE_SHIFT) >> 12;
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -99,14 +126,23 @@ nouveau_sgdma_create_ttm(struct ttm_bo_device *bdev,
 		return NULL;
 
 	nvbe->dev = drm->dev;
+<<<<<<< HEAD
 	if (nv_device(drm->device)->card_type < NV_50)
+=======
+	if (drm->device.info.family < NV_DEVICE_INFO_V0_TESLA)
+>>>>>>> v3.18
 		nvbe->ttm.ttm.func = &nv04_sgdma_backend;
 	else
 		nvbe->ttm.ttm.func = &nv50_sgdma_backend;
 
+<<<<<<< HEAD
 	if (ttm_dma_tt_init(&nvbe->ttm, bdev, size, page_flags, dummy_read_page)) {
 		kfree(nvbe);
 		return NULL;
 	}
+=======
+	if (ttm_dma_tt_init(&nvbe->ttm, bdev, size, page_flags, dummy_read_page))
+		return NULL;
+>>>>>>> v3.18
 	return &nvbe->ttm.ttm;
 }

@@ -16,8 +16,16 @@
 
 #if defined(CONFIG_AT91_DEBUG_LL_DBGU0)
 #define AT91_DBGU AT91_BASE_DBGU0
+<<<<<<< HEAD
 #else
 #define AT91_DBGU AT91_BASE_DBGU1
+=======
+#elif defined(CONFIG_AT91_DEBUG_LL_DBGU1)
+#define AT91_DBGU AT91_BASE_DBGU1
+#else
+/* On sama5d4, use USART3 as low level serial console */
+#define AT91_DBGU SAMA5D4_BASE_USART3
+>>>>>>> v3.18
 #endif
 
 	.macro	addruart, rp, rv, tmp

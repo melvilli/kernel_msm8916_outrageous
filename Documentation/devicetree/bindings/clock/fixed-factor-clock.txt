@@ -19,6 +19,11 @@ Example:
 		compatible = "fixed-factor-clock";
 		clocks = <&parentclk>;
 		#clock-cells = <0>;
+<<<<<<< HEAD
 		div = <2>;
 		mult = <1>;
+=======
+		clock-div = <2>;
+		clock-mult = <1>;
+>>>>>>> v3.18
 	};

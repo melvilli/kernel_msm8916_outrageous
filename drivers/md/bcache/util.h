@@ -2,6 +2,10 @@
 #ifndef _BCACHE_UTIL_H
 #define _BCACHE_UTIL_H
 
+<<<<<<< HEAD
+=======
+#include <linux/blkdev.h>
+>>>>>>> v3.18
 #include <linux/errno.h>
 #include <linux/kernel.h>
 #include <linux/llist.h>
@@ -15,6 +19,7 @@
 
 struct closure;
 
+<<<<<<< HEAD
 #include <trace/events/bcache.h>
 
 #ifdef CONFIG_BCACHE_EDEBUG
@@ -24,11 +29,23 @@ struct closure;
 
 #else /* EDEBUG */
 
+=======
+#ifdef CONFIG_BCACHE_DEBUG
+
+#define EBUG_ON(cond)			BUG_ON(cond)
+#define atomic_dec_bug(v)	BUG_ON(atomic_dec_return(v) < 0)
+#define atomic_inc_bug(v, i)	BUG_ON(atomic_inc_return(v) <= i)
+
+#else /* DEBUG */
+
+#define EBUG_ON(cond)			do { if (cond); } while (0)
+>>>>>>> v3.18
 #define atomic_dec_bug(v)	atomic_dec(v)
 #define atomic_inc_bug(v, i)	atomic_inc(v)
 
 #endif
 
+<<<<<<< HEAD
 #define BITMASK(name, type, field, offset, size)		\
 static inline uint64_t name(const type *k)			\
 { return (k->field >> offset) & ~(((uint64_t) ~0) << size); }	\
@@ -39,6 +56,8 @@ static inline void SET_##name(type *k, uint64_t v)		\
 	k->field |= v << offset;				\
 }
 
+=======
+>>>>>>> v3.18
 #define DECLARE_HEAP(type, name)					\
 	struct {							\
 		size_t size, used;					\
@@ -122,7 +141,11 @@ do {									\
 	_r;								\
 })
 
+<<<<<<< HEAD
 #define heap_peek(h)	((h)->size ? (h)->data[0] : NULL)
+=======
+#define heap_peek(h)	((h)->used ? (h)->data[0] : NULL)
+>>>>>>> v3.18
 
 #define heap_full(h)	((h)->used == (h)->size)
 
@@ -390,6 +413,10 @@ ssize_t bch_snprint_string_list(char *buf, size_t size, const char * const list[
 ssize_t bch_read_string_list(const char *buf, const char * const list[]);
 
 struct time_stats {
+<<<<<<< HEAD
+=======
+	spinlock_t	lock;
+>>>>>>> v3.18
 	/*
 	 * all fields are in nanoseconds, averages are ewmas stored left shifted
 	 * by 8
@@ -402,6 +429,14 @@ struct time_stats {
 
 void bch_time_stats_update(struct time_stats *stats, uint64_t time);
 
+<<<<<<< HEAD
+=======
+static inline unsigned local_clock_us(void)
+{
+	return local_clock() >> 10;
+}
+
+>>>>>>> v3.18
 #define NSEC_PER_ns			1L
 #define NSEC_PER_us			NSEC_PER_USEC
 #define NSEC_PER_ms			NSEC_PER_MSEC
@@ -419,8 +454,13 @@ do {									\
 			  average_frequency,	frequency_units);	\
 	__print_time_stat(stats, name,					\
 			  average_duration,	duration_units);	\
+<<<<<<< HEAD
 	__print_time_stat(stats, name,					\
 			  max_duration,		duration_units);	\
+=======
+	sysfs_print(name ## _ ##max_duration ## _ ## duration_units,	\
+			div_u64((stats)->max_duration, NSEC_PER_ ## duration_units));\
+>>>>>>> v3.18
 									\
 	sysfs_print(name ## _last_ ## frequency_units, (stats)->last	\
 		    ? div_s64(local_clock() - (stats)->last,		\
@@ -572,12 +612,17 @@ static inline unsigned fract_exp_two(unsigned x, unsigned fract_bits)
 	return x;
 }
 
+<<<<<<< HEAD
 #define bio_end(bio)	((bio)->bi_sector + bio_sectors(bio))
 
 void bch_bio_map(struct bio *bio, void *base);
 
 int bch_bio_alloc_pages(struct bio *bio, gfp_t gfp);
 
+=======
+void bch_bio_map(struct bio *bio, void *base);
+
+>>>>>>> v3.18
 static inline sector_t bdev_sectors(struct block_device *bdev)
 {
 	return bdev->bd_inode->i_size >> 9;

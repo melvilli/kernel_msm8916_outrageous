@@ -115,7 +115,11 @@ EXPORT_SYMBOL(ipv6_skip_exthdr);
 int ipv6_find_tlv(struct sk_buff *skb, int offset, int type)
 {
 	const unsigned char *nh = skb_network_header(skb);
+<<<<<<< HEAD
 	int packet_len = skb->tail - skb->network_header;
+=======
+	int packet_len = skb_tail_pointer(skb) - skb_network_header(skb);
+>>>>>>> v3.18
 	struct ipv6_opt_hdr *hdr;
 	int len;
 
@@ -166,15 +170,24 @@ EXPORT_SYMBOL_GPL(ipv6_find_tlv);
  * to explore inner IPv6 header, eg. ICMPv6 error messages.
  *
  * If target header is found, its offset is set in *offset and return protocol
+<<<<<<< HEAD
  * number. Otherwise, return -ENOENT or -EBADMSG.
+=======
+ * number. Otherwise, return -1.
+>>>>>>> v3.18
  *
  * If the first fragment doesn't contain the final protocol header or
  * NEXTHDR_NONE it is considered invalid.
  *
  * Note that non-1st fragment is special case that "the protocol number
  * of last header" is "next header" field in Fragment header. In this case,
+<<<<<<< HEAD
  * *offset is meaningless. If fragoff is not NULL, the fragment offset is
  * stored in *fragoff; if it is NULL, return -EINVAL.
+=======
+ * *offset is meaningless and fragment offset is stored in *fragoff if fragoff
+ * isn't NULL.
+>>>>>>> v3.18
  *
  * if flags is not NULL and it's a fragment, then the frag flag
  * IP6_FH_F_FRAG will be set. If it's an AH header, the
@@ -253,6 +266,7 @@ int ipv6_find_hdr(const struct sk_buff *skb, unsigned int *offset,
 				if (target < 0 &&
 				    ((!ipv6_ext_hdr(hp->nexthdr)) ||
 				     hp->nexthdr == NEXTHDR_NONE)) {
+<<<<<<< HEAD
 					if (fragoff) {
 						*fragoff = _frag_off;
 						return hp->nexthdr;
@@ -265,6 +279,13 @@ int ipv6_find_hdr(const struct sk_buff *skb, unsigned int *offset,
 				if (fragoff)
 					*fragoff = _frag_off;
 				break;
+=======
+					if (fragoff)
+						*fragoff = _frag_off;
+					return hp->nexthdr;
+				}
+				return -ENOENT;
+>>>>>>> v3.18
 			}
 			hdrlen = 8;
 		} else if (nexthdr == NEXTHDR_AUTH) {

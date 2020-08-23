@@ -7,6 +7,16 @@
 #include "event.h"
 #include "symbol.h"
 
+<<<<<<< HEAD
+=======
+enum perf_call_graph_mode {
+	CALLCHAIN_NONE,
+	CALLCHAIN_FP,
+	CALLCHAIN_DWARF,
+	CALLCHAIN_MAX
+};
+
+>>>>>>> v3.18
 enum chain_mode {
 	CHAIN_NONE,
 	CHAIN_FLAT,
@@ -21,11 +31,19 @@ enum chain_order {
 
 struct callchain_node {
 	struct callchain_node	*parent;
+<<<<<<< HEAD
 	struct list_head	siblings;
 	struct list_head	children;
 	struct list_head	val;
 	struct rb_node		rb_node; /* to sort nodes in an rbtree */
 	struct rb_root		rb_root; /* sorted tree of children */
+=======
+	struct list_head	val;
+	struct rb_node		rb_node_in; /* to insert nodes in an rbtree */
+	struct rb_node		rb_node;    /* to sort nodes in an output tree */
+	struct rb_root		rb_root_in; /* input tree of children */
+	struct rb_root		rb_root;    /* sorted output tree of children */
+>>>>>>> v3.18
 	unsigned int		val_nr;
 	u64			hit;
 	u64			children_hit;
@@ -41,14 +59,34 @@ struct callchain_param;
 typedef void (*sort_chain_func_t)(struct rb_root *, struct callchain_root *,
 				 u64, struct callchain_param *);
 
+<<<<<<< HEAD
 struct callchain_param {
+=======
+enum chain_key {
+	CCKEY_FUNCTION,
+	CCKEY_ADDRESS
+};
+
+struct callchain_param {
+	bool			enabled;
+	enum perf_call_graph_mode record_mode;
+	u32			dump_size;
+>>>>>>> v3.18
 	enum chain_mode 	mode;
 	u32			print_limit;
 	double			min_percent;
 	sort_chain_func_t	sort;
 	enum chain_order	order;
+<<<<<<< HEAD
 };
 
+=======
+	enum chain_key		key;
+};
+
+extern struct callchain_param callchain_param;
+
+>>>>>>> v3.18
 struct callchain_list {
 	u64			ip;
 	struct map_symbol	ms;
@@ -80,13 +118,20 @@ extern __thread struct callchain_cursor callchain_cursor;
 
 static inline void callchain_init(struct callchain_root *root)
 {
+<<<<<<< HEAD
 	INIT_LIST_HEAD(&root->node.siblings);
 	INIT_LIST_HEAD(&root->node.children);
+=======
+>>>>>>> v3.18
 	INIT_LIST_HEAD(&root->node.val);
 
 	root->node.parent = NULL;
 	root->node.hit = 0;
 	root->node.children_hit = 0;
+<<<<<<< HEAD
+=======
+	root->node.rb_root_in = RB_ROOT;
+>>>>>>> v3.18
 	root->max_depth = 0;
 }
 
@@ -103,11 +148,14 @@ int callchain_append(struct callchain_root *root,
 int callchain_merge(struct callchain_cursor *cursor,
 		    struct callchain_root *dst, struct callchain_root *src);
 
+<<<<<<< HEAD
 struct ip_callchain;
 union perf_event;
 
 bool ip_callchain__valid(struct ip_callchain *chain,
 			 const union perf_event *event);
+=======
+>>>>>>> v3.18
 /*
  * Initialize a cursor before adding entries inside, but keep
  * the previously allocated entries as a cache.
@@ -145,7 +193,48 @@ static inline void callchain_cursor_advance(struct callchain_cursor *cursor)
 }
 
 struct option;
+<<<<<<< HEAD
 
 int record_parse_callchain_opt(const struct option *opt, const char *arg, int unset);
 extern const char record_callchain_help[];
+=======
+struct hist_entry;
+
+int record_parse_callchain_opt(const struct option *opt, const char *arg, int unset);
+int record_callchain_opt(const struct option *opt, const char *arg, int unset);
+
+int sample__resolve_callchain(struct perf_sample *sample, struct symbol **parent,
+			      struct perf_evsel *evsel, struct addr_location *al,
+			      int max_stack);
+int hist_entry__append_callchain(struct hist_entry *he, struct perf_sample *sample);
+int fill_callchain_info(struct addr_location *al, struct callchain_cursor_node *node,
+			bool hide_unresolved);
+
+extern const char record_callchain_help[];
+int parse_callchain_record_opt(const char *arg);
+int parse_callchain_report_opt(const char *arg);
+int perf_callchain_config(const char *var, const char *value);
+
+static inline void callchain_cursor_snapshot(struct callchain_cursor *dest,
+					     struct callchain_cursor *src)
+{
+	*dest = *src;
+
+	dest->first = src->curr;
+	dest->nr -= src->pos;
+}
+
+#ifdef HAVE_SKIP_CALLCHAIN_IDX
+extern int arch_skip_callchain_idx(struct machine *machine,
+			struct thread *thread, struct ip_callchain *chain);
+#else
+static inline int arch_skip_callchain_idx(struct machine *machine __maybe_unused,
+			struct thread *thread __maybe_unused,
+			struct ip_callchain *chain __maybe_unused)
+{
+	return -1;
+}
+#endif
+
+>>>>>>> v3.18
 #endif	/* __PERF_CALLCHAIN_H */

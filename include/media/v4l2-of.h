@@ -17,6 +17,10 @@
 #include <linux/list.h>
 #include <linux/types.h>
 #include <linux/errno.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_graph.h>
+>>>>>>> v3.18
 
 #include <media/v4l2-mediabus.h>
 
@@ -50,19 +54,27 @@ struct v4l2_of_bus_parallel {
 
 /**
  * struct v4l2_of_endpoint - the endpoint data structure
+<<<<<<< HEAD
  * @port: identifier (value of reg property) of a port this endpoint belongs to
  * @id: identifier (value of reg property) of this endpoint
  * @local_node: pointer to device_node of this endpoint
  * @remote: phandle to remote endpoint node
+=======
+ * @base: struct of_endpoint containing port, id, and local of_node
+>>>>>>> v3.18
  * @bus_type: bus type
  * @bus: bus configuration data structure
  * @head: list head for this structure
  */
 struct v4l2_of_endpoint {
+<<<<<<< HEAD
 	unsigned int port;
 	unsigned int id;
 	const struct device_node *local_node;
 	const __be32 *remote;
+=======
+	struct of_endpoint base;
+>>>>>>> v3.18
 	enum v4l2_mbus_type bus_type;
 	union {
 		struct v4l2_of_bus_parallel parallel;
@@ -72,6 +84,7 @@ struct v4l2_of_endpoint {
 };
 
 #ifdef CONFIG_OF
+<<<<<<< HEAD
 void v4l2_of_parse_endpoint(const struct device_node *node,
 				struct v4l2_of_endpoint *link);
 struct device_node *v4l2_of_get_next_endpoint(const struct device_node *parent,
@@ -79,6 +92,10 @@ struct device_node *v4l2_of_get_next_endpoint(const struct device_node *parent,
 struct device_node *v4l2_of_get_remote_port_parent(
 					const struct device_node *node);
 struct device_node *v4l2_of_get_remote_port(const struct device_node *node);
+=======
+int v4l2_of_parse_endpoint(const struct device_node *node,
+			   struct v4l2_of_endpoint *endpoint);
+>>>>>>> v3.18
 #else /* CONFIG_OF */
 
 static inline int v4l2_of_parse_endpoint(const struct device_node *node,
@@ -87,6 +104,7 @@ static inline int v4l2_of_parse_endpoint(const struct device_node *node,
 	return -ENOSYS;
 }
 
+<<<<<<< HEAD
 static inline struct device_node *v4l2_of_get_next_endpoint(
 					const struct device_node *parent,
 					struct device_node *previous)
@@ -106,6 +124,8 @@ static inline struct device_node *v4l2_of_get_remote_port(
 	return NULL;
 }
 
+=======
+>>>>>>> v3.18
 #endif /* CONFIG_OF */
 
 #endif /* _V4L2_OF_H */

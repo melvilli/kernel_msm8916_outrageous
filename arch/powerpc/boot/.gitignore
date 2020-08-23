@@ -16,12 +16,20 @@ mktree
 uImage
 cuImage.*
 dtbImage.*
+<<<<<<< HEAD
+=======
+*.dtb
+>>>>>>> v3.18
 treeImage.*
 zImage
 zImage.initrd
 zImage.bin.*
 zImage.chrp
 zImage.coff
+<<<<<<< HEAD
+=======
+zImage.epapr
+>>>>>>> v3.18
 zImage.holly
 zImage.*lds
 zImage.miboot

@@ -19,6 +19,11 @@ Required properties:
 
 Optional properties, nodes:
 - enable-active-high: To power on the twl6040 during boot.
+<<<<<<< HEAD
+=======
+- clocks: phandle to the clk32k clock provider
+- clock-names: Must be "clk32k"
+>>>>>>> v3.18
 
 Vibra functionality
 Required properties:

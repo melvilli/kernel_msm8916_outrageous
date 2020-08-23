@@ -97,11 +97,19 @@ extern void hw_breakpoint_restore(void);
 DECLARE_PER_CPU(int, debug_stack_usage);
 static inline void debug_stack_usage_inc(void)
 {
+<<<<<<< HEAD
 	__get_cpu_var(debug_stack_usage)++;
 }
 static inline void debug_stack_usage_dec(void)
 {
 	__get_cpu_var(debug_stack_usage)--;
+=======
+	__this_cpu_inc(debug_stack_usage);
+}
+static inline void debug_stack_usage_dec(void)
+{
+	__this_cpu_dec(debug_stack_usage);
+>>>>>>> v3.18
 }
 int is_debug_stack(unsigned long addr);
 void debug_stack_set_zero(void);

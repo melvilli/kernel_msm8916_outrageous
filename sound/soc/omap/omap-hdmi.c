@@ -34,6 +34,10 @@
 #include <sound/asoundef.h>
 #include <sound/dmaengine_pcm.h>
 #include <video/omapdss.h>
+<<<<<<< HEAD
+=======
+#include <sound/omap-pcm.h>
+>>>>>>> v3.18
 
 #include "omap-hdmi.h"
 
@@ -324,7 +328,14 @@ static int omap_hdmi_probe(struct platform_device *pdev)
 	ret = snd_soc_register_component(&pdev->dev, &omap_hdmi_component,
 					 &omap_hdmi_dai, 1);
 
+<<<<<<< HEAD
 	return ret;
+=======
+	if (ret)
+		return ret;
+
+	return omap_pcm_platform_register(&pdev->dev);
+>>>>>>> v3.18
 }
 
 static int omap_hdmi_remove(struct platform_device *pdev)

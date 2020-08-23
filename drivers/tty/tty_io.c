@@ -157,6 +157,7 @@ static void __proc_set_tty(struct task_struct *tsk, struct tty_struct *tty);
 static void proc_set_tty(struct task_struct *tsk, struct tty_struct *tty);
 
 /**
+<<<<<<< HEAD
  *	alloc_tty_struct	-	allocate a tty object
  *
  *	Return a new empty tty structure. The data fields have not
@@ -171,6 +172,8 @@ struct tty_struct *alloc_tty_struct(void)
 }
 
 /**
+=======
+>>>>>>> v3.18
  *	free_tty_struct		-	free a disused tty
  *	@tty: tty struct to free
  *
@@ -604,7 +607,11 @@ static int tty_signal_session_leader(struct tty_struct *tty, int exit_session)
  *		  redirect lock for undoing redirection
  *		  file list lock for manipulating list of ttys
  *		  tty_ldiscs_lock from called functions
+<<<<<<< HEAD
  *		  termios_mutex resetting termios data
+=======
+ *		  termios_rwsem resetting termios data
+>>>>>>> v3.18
  *		  tasklist_lock to walk task list for hangup event
  *		    ->siglock to protect ->signal/->sighand
  */
@@ -629,6 +636,14 @@ static void __tty_hangup(struct tty_struct *tty, int exit_session)
 
 	tty_lock(tty);
 
+<<<<<<< HEAD
+=======
+	if (test_bit(TTY_HUPPED, &tty->flags)) {
+		tty_unlock(tty);
+		return;
+	}
+
+>>>>>>> v3.18
 	/* some functions below drop BTM, so we need this bit */
 	set_bit(TTY_HUPPING, &tty->flags);
 
@@ -664,7 +679,10 @@ static void __tty_hangup(struct tty_struct *tty, int exit_session)
 
 	spin_lock_irq(&tty->ctrl_lock);
 	clear_bit(TTY_THROTTLED, &tty->flags);
+<<<<<<< HEAD
 	clear_bit(TTY_PUSH, &tty->flags);
+=======
+>>>>>>> v3.18
 	clear_bit(TTY_DO_WRITE_WAKEUP, &tty->flags);
 	put_pid(tty->session);
 	put_pid(tty->pgrp);
@@ -684,7 +702,11 @@ static void __tty_hangup(struct tty_struct *tty, int exit_session)
 			for (n = 0; n < closecount; n++)
 				tty->ops->close(tty, cons_filp);
 	} else if (tty->ops->hangup)
+<<<<<<< HEAD
 		(tty->ops->hangup)(tty);
+=======
+		tty->ops->hangup(tty);
+>>>>>>> v3.18
 	/*
 	 * We don't want to have driver/ldisc interactions beyond
 	 * the ones we did here. The driver layer expects no
@@ -874,9 +896,14 @@ void disassociate_ctty(int on_exit)
 	spin_lock_irq(&current->sighand->siglock);
 	put_pid(current->signal->tty_old_pgrp);
 	current->signal->tty_old_pgrp = NULL;
+<<<<<<< HEAD
 	spin_unlock_irq(&current->sighand->siglock);
 
 	tty = get_current_tty();
+=======
+
+	tty = tty_kref_get(current->signal->tty);
+>>>>>>> v3.18
 	if (tty) {
 		unsigned long flags;
 		spin_lock_irqsave(&tty->ctrl_lock, flags);
@@ -893,6 +920,10 @@ void disassociate_ctty(int on_exit)
 #endif
 	}
 
+<<<<<<< HEAD
+=======
+	spin_unlock_irq(&current->sighand->siglock);
+>>>>>>> v3.18
 	/* Now clear signal->tty under the lock */
 	read_lock(&tasklist_lock);
 	session_clear_tty(task_session(current));
@@ -918,8 +949,12 @@ void no_tty(void)
  *	stop_tty	-	propagate flow control
  *	@tty: tty to stop
  *
+<<<<<<< HEAD
  *	Perform flow control to the driver. For PTY/TTY pairs we
  *	must also propagate the TIOCKPKT status. May be called
+=======
+ *	Perform flow control to the driver. May be called
+>>>>>>> v3.18
  *	on an already stopped device and will not re-call the driver
  *	method.
  *
@@ -929,6 +964,7 @@ void no_tty(void)
  *	but not always.
  *
  *	Locking:
+<<<<<<< HEAD
  *		Uses the tty control lock internally
  */
 
@@ -947,16 +983,38 @@ void stop_tty(struct tty_struct *tty)
 		wake_up_interruptible_poll(&tty->link->read_wait, POLLIN);
 	}
 	spin_unlock_irqrestore(&tty->ctrl_lock, flags);
+=======
+ *		flow_lock
+ */
+
+void __stop_tty(struct tty_struct *tty)
+{
+	if (tty->stopped)
+		return;
+	tty->stopped = 1;
+>>>>>>> v3.18
 	if (tty->ops->stop)
 		(tty->ops->stop)(tty);
 }
 
+<<<<<<< HEAD
+=======
+void stop_tty(struct tty_struct *tty)
+{
+	unsigned long flags;
+
+	spin_lock_irqsave(&tty->flow_lock, flags);
+	__stop_tty(tty);
+	spin_unlock_irqrestore(&tty->flow_lock, flags);
+}
+>>>>>>> v3.18
 EXPORT_SYMBOL(stop_tty);
 
 /**
  *	start_tty	-	propagate flow control
  *	@tty: tty to start
  *
+<<<<<<< HEAD
  *	Start a tty that has been stopped if at all possible. Perform
  *	any necessary wakeups and propagate the TIOCPKT status. If this
  *	is the tty was previous stopped and is being started then the
@@ -987,13 +1045,46 @@ void start_tty(struct tty_struct *tty)
 	tty_wakeup(tty);
 }
 
+=======
+ *	Start a tty that has been stopped if at all possible. If this
+ *	tty was previous stopped and is now being started, the driver
+ *	start method is invoked and the line discipline woken.
+ *
+ *	Locking:
+ *		flow_lock
+ */
+
+void __start_tty(struct tty_struct *tty)
+{
+	if (!tty->stopped || tty->flow_stopped)
+		return;
+	tty->stopped = 0;
+	if (tty->ops->start)
+		(tty->ops->start)(tty);
+	tty_wakeup(tty);
+}
+
+void start_tty(struct tty_struct *tty)
+{
+	unsigned long flags;
+
+	spin_lock_irqsave(&tty->flow_lock, flags);
+	__start_tty(tty);
+	spin_unlock_irqrestore(&tty->flow_lock, flags);
+}
+>>>>>>> v3.18
 EXPORT_SYMBOL(start_tty);
 
 /* We limit tty time update visibility to every 8 seconds or so. */
 static void tty_update_time(struct timespec *time)
 {
+<<<<<<< HEAD
 	unsigned long sec = get_seconds();
 	if (abs(sec - time->tv_sec) & ~7)
+=======
+	unsigned long sec = get_seconds() & ~7;
+	if ((long)(sec - time->tv_sec) > 0)
+>>>>>>> v3.18
 		time->tv_sec = sec;
 }
 
@@ -1040,14 +1131,22 @@ static ssize_t tty_read(struct file *file, char __user *buf, size_t count,
 	return i;
 }
 
+<<<<<<< HEAD
 void tty_write_unlock(struct tty_struct *tty)
+=======
+static void tty_write_unlock(struct tty_struct *tty)
+>>>>>>> v3.18
 	__releases(&tty->atomic_write_lock)
 {
 	mutex_unlock(&tty->atomic_write_lock);
 	wake_up_interruptible_poll(&tty->write_wait, POLLOUT);
 }
 
+<<<<<<< HEAD
 int tty_write_lock(struct tty_struct *tty, int ndelay)
+=======
+static int tty_write_lock(struct tty_struct *tty, int ndelay)
+>>>>>>> v3.18
 	__acquires(&tty->atomic_write_lock)
 {
 	if (!mutex_trylock(&tty->atomic_write_lock)) {
@@ -1234,6 +1333,38 @@ ssize_t redirected_tty_write(struct file *file, const char __user *buf,
 	return tty_write(file, buf, count, ppos);
 }
 
+<<<<<<< HEAD
+=======
+/**
+ *	tty_send_xchar	-	send priority character
+ *
+ *	Send a high priority character to the tty even if stopped
+ *
+ *	Locking: none for xchar method, write ordering for write method.
+ */
+
+int tty_send_xchar(struct tty_struct *tty, char ch)
+{
+	int	was_stopped = tty->stopped;
+
+	if (tty->ops->send_xchar) {
+		tty->ops->send_xchar(tty, ch);
+		return 0;
+	}
+
+	if (tty_write_lock(tty, 0) < 0)
+		return -ERESTARTSYS;
+
+	if (was_stopped)
+		start_tty(tty);
+	tty->ops->write(tty, &ch, 1);
+	if (was_stopped)
+		stop_tty(tty);
+	tty_write_unlock(tty);
+	return 0;
+}
+
+>>>>>>> v3.18
 static char ptychar[] = "pqrstuvwxyzabcde";
 
 /**
@@ -1451,12 +1582,19 @@ struct tty_struct *tty_init_dev(struct tty_driver *driver, int idx)
 	if (!try_module_get(driver->owner))
 		return ERR_PTR(-ENODEV);
 
+<<<<<<< HEAD
 	tty = alloc_tty_struct();
+=======
+	tty = alloc_tty_struct(driver, idx);
+>>>>>>> v3.18
 	if (!tty) {
 		retval = -ENOMEM;
 		goto err_module_put;
 	}
+<<<<<<< HEAD
 	initialize_tty_struct(tty, driver, idx);
+=======
+>>>>>>> v3.18
 
 	tty_lock(tty);
 	retval = tty_driver_install_tty(driver, tty);
@@ -1555,13 +1693,21 @@ static void release_one_tty(struct work_struct *work)
 	struct tty_struct *tty =
 		container_of(work, struct tty_struct, hangup_work);
 	struct tty_driver *driver = tty->driver;
+<<<<<<< HEAD
+=======
+	struct module *owner = driver->owner;
+>>>>>>> v3.18
 
 	if (tty->ops->cleanup)
 		tty->ops->cleanup(tty);
 
 	tty->magic = 0;
 	tty_driver_kref_put(driver);
+<<<<<<< HEAD
 	module_put(driver->owner);
+=======
+	module_put(owner);
+>>>>>>> v3.18
 
 	spin_lock(&tty_files_lock);
 	list_del_init(&tty->tty_files);
@@ -1698,6 +1844,10 @@ int tty_release(struct inode *inode, struct file *filp)
 	int	idx;
 	char	buf[64];
 	long	timeout = 0;
+<<<<<<< HEAD
+=======
+	int	once = 1;
+>>>>>>> v3.18
 
 	if (tty_paranoia_check(tty, inode, __func__))
 		return 0;
@@ -1778,8 +1928,16 @@ int tty_release(struct inode *inode, struct file *filp)
 		if (!do_sleep)
 			break;
 
+<<<<<<< HEAD
 		printk(KERN_WARNING "%s: %s: read/write wait queue active!\n",
 				__func__, tty_name(tty, buf));
+=======
+		if (once) {
+			once = 0;
+			printk(KERN_WARNING "%s: %s: read/write wait queue active!\n",
+			       __func__, tty_name(tty, buf));
+		}
+>>>>>>> v3.18
 		tty_unlock_pair(tty, o_tty);
 		mutex_unlock(&tty_mutex);
 		schedule_timeout_killable(timeout);
@@ -2088,6 +2246,10 @@ retry_open:
 			filp->f_op = &tty_fops;
 		goto retry_open;
 	}
+<<<<<<< HEAD
+=======
+	clear_bit(TTY_HUPPED, &tty->flags);
+>>>>>>> v3.18
 	tty_unlock(tty);
 
 
@@ -2146,6 +2308,10 @@ static unsigned int tty_poll(struct file *filp, poll_table *wait)
 static int __tty_fasync(int fd, struct file *filp, int on)
 {
 	struct tty_struct *tty = file_tty(filp);
+<<<<<<< HEAD
+=======
+	struct tty_ldisc *ldisc;
+>>>>>>> v3.18
 	unsigned long flags;
 	int retval = 0;
 
@@ -2156,11 +2322,25 @@ static int __tty_fasync(int fd, struct file *filp, int on)
 	if (retval <= 0)
 		goto out;
 
+<<<<<<< HEAD
 	if (on) {
 		enum pid_type type;
 		struct pid *pid;
 		if (!waitqueue_active(&tty->read_wait))
 			tty->minimum_to_wake = 1;
+=======
+	ldisc = tty_ldisc_ref(tty);
+	if (ldisc) {
+		if (ldisc->ops->fasync)
+			ldisc->ops->fasync(tty, on);
+		tty_ldisc_deref(ldisc);
+	}
+
+	if (on) {
+		enum pid_type type;
+		struct pid *pid;
+
+>>>>>>> v3.18
 		spin_lock_irqsave(&tty->ctrl_lock, flags);
 		if (tty->pgrp) {
 			pid = tty->pgrp;
@@ -2171,6 +2351,7 @@ static int __tty_fasync(int fd, struct file *filp, int on)
 		}
 		get_pid(pid);
 		spin_unlock_irqrestore(&tty->ctrl_lock, flags);
+<<<<<<< HEAD
 		retval = __f_setown(filp, pid, type, 0);
 		put_pid(pid);
 		if (retval)
@@ -2180,6 +2361,12 @@ static int __tty_fasync(int fd, struct file *filp, int on)
 			tty->minimum_to_wake = N_TTY_BUF_SIZE;
 	}
 	retval = 0;
+=======
+		__f_setown(filp, pid, type, 0);
+		put_pid(pid);
+		retval = 0;
+	}
+>>>>>>> v3.18
 out:
 	return retval;
 }
@@ -2236,7 +2423,11 @@ static int tiocsti(struct tty_struct *tty, char __user *p)
  *
  *	Copies the kernel idea of the window size into the user buffer.
  *
+<<<<<<< HEAD
  *	Locking: tty->termios_mutex is taken to ensure the winsize data
+=======
+ *	Locking: tty->winsize_mutex is taken to ensure the winsize data
+>>>>>>> v3.18
  *		is consistent.
  */
 
@@ -2244,9 +2435,15 @@ static int tiocgwinsz(struct tty_struct *tty, struct winsize __user *arg)
 {
 	int err;
 
+<<<<<<< HEAD
 	mutex_lock(&tty->termios_mutex);
 	err = copy_to_user(arg, &tty->winsize, sizeof(*arg));
 	mutex_unlock(&tty->termios_mutex);
+=======
+	mutex_lock(&tty->winsize_mutex);
+	err = copy_to_user(arg, &tty->winsize, sizeof(*arg));
+	mutex_unlock(&tty->winsize_mutex);
+>>>>>>> v3.18
 
 	return err ? -EFAULT: 0;
 }
@@ -2267,7 +2464,11 @@ int tty_do_resize(struct tty_struct *tty, struct winsize *ws)
 	unsigned long flags;
 
 	/* Lock the tty */
+<<<<<<< HEAD
 	mutex_lock(&tty->termios_mutex);
+=======
+	mutex_lock(&tty->winsize_mutex);
+>>>>>>> v3.18
 	if (!memcmp(ws, &tty->winsize, sizeof(*ws)))
 		goto done;
 	/* Get the PID values and reference them so we can
@@ -2282,7 +2483,11 @@ int tty_do_resize(struct tty_struct *tty, struct winsize *ws)
 
 	tty->winsize = *ws;
 done:
+<<<<<<< HEAD
 	mutex_unlock(&tty->termios_mutex);
+=======
+	mutex_unlock(&tty->winsize_mutex);
+>>>>>>> v3.18
 	return 0;
 }
 EXPORT_SYMBOL(tty_do_resize);
@@ -2575,6 +2780,7 @@ static int tiocsetd(struct tty_struct *tty, int __user *p)
 }
 
 /**
+<<<<<<< HEAD
  *	tiocgetd	-	get line discipline
  *	@tty: tty device
  *	@p: pointer to user data
@@ -2597,6 +2803,8 @@ static int tiocgetd(struct tty_struct *tty, int __user *p)
 }
 
 /**
+=======
+>>>>>>> v3.18
  *	send_break	-	performed time break
  *	@tty: device to break on
  *	@duration: timeout in mS
@@ -2698,11 +2906,16 @@ static int tty_tiocmset(struct tty_struct *tty, unsigned int cmd,
 		clear = ~val;
 		break;
 	}
+<<<<<<< HEAD
 
 	set &= TIOCM_DTR|TIOCM_RTS|TIOCM_OUT1|TIOCM_OUT2|TIOCM_LOOP|TIOCM_CD|
 		TIOCM_RI|TIOCM_DSR|TIOCM_CTS;
 	clear &= TIOCM_DTR|TIOCM_RTS|TIOCM_OUT1|TIOCM_OUT2|TIOCM_LOOP|TIOCM_CD|
 		TIOCM_RI|TIOCM_DSR|TIOCM_CTS;
+=======
+	set &= TIOCM_DTR|TIOCM_RTS|TIOCM_OUT1|TIOCM_OUT2|TIOCM_LOOP;
+	clear &= TIOCM_DTR|TIOCM_RTS|TIOCM_OUT1|TIOCM_OUT2|TIOCM_LOOP;
+>>>>>>> v3.18
 	return tty->ops->tiocmset(tty, set, clear);
 }
 
@@ -2813,7 +3026,11 @@ long tty_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 	case TIOCGSID:
 		return tiocgsid(tty, real_tty, p);
 	case TIOCGETD:
+<<<<<<< HEAD
 		return tiocgetd(tty, p);
+=======
+		return put_user(tty->ldisc->ops->num, (int __user *)p);
+>>>>>>> v3.18
 	case TIOCSETD:
 		return tiocsetd(tty, p);
 	case TIOCVHANGUP:
@@ -3027,6 +3244,7 @@ static struct device *tty_get_device(struct tty_struct *tty)
 
 
 /**
+<<<<<<< HEAD
  *	initialize_tty_struct
  *	@tty: tty to initialize
  *
@@ -3040,19 +3258,46 @@ void initialize_tty_struct(struct tty_struct *tty,
 		struct tty_driver *driver, int idx)
 {
 	memset(tty, 0, sizeof(struct tty_struct));
+=======
+ *	alloc_tty_struct
+ *
+ *	This subroutine allocates and initializes a tty structure.
+ *
+ *	Locking: none - tty in question is not exposed at this point
+ */
+
+struct tty_struct *alloc_tty_struct(struct tty_driver *driver, int idx)
+{
+	struct tty_struct *tty;
+
+	tty = kzalloc(sizeof(*tty), GFP_KERNEL);
+	if (!tty)
+		return NULL;
+
+>>>>>>> v3.18
 	kref_init(&tty->kref);
 	tty->magic = TTY_MAGIC;
 	tty_ldisc_init(tty);
 	tty->session = NULL;
 	tty->pgrp = NULL;
 	mutex_init(&tty->legacy_mutex);
+<<<<<<< HEAD
 	mutex_init(&tty->termios_mutex);
+=======
+	mutex_init(&tty->throttle_mutex);
+	init_rwsem(&tty->termios_rwsem);
+	mutex_init(&tty->winsize_mutex);
+>>>>>>> v3.18
 	init_ldsem(&tty->ldisc_sem);
 	init_waitqueue_head(&tty->write_wait);
 	init_waitqueue_head(&tty->read_wait);
 	INIT_WORK(&tty->hangup_work, do_tty_hangup);
 	mutex_init(&tty->atomic_write_lock);
 	spin_lock_init(&tty->ctrl_lock);
+<<<<<<< HEAD
+=======
+	spin_lock_init(&tty->flow_lock);
+>>>>>>> v3.18
 	INIT_LIST_HEAD(&tty->tty_files);
 	INIT_WORK(&tty->SAK_work, do_SAK_work);
 
@@ -3061,6 +3306,11 @@ void initialize_tty_struct(struct tty_struct *tty,
 	tty->index = idx;
 	tty_line_name(driver, idx, tty->name);
 	tty->dev = tty_get_device(tty);
+<<<<<<< HEAD
+=======
+
+	return tty;
+>>>>>>> v3.18
 }
 
 /**

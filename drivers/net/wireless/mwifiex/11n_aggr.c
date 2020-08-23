@@ -1,7 +1,11 @@
 /*
  * Marvell Wireless LAN device driver: 802.11n Aggregation
  *
+<<<<<<< HEAD
  * Copyright (C) 2011, Marvell International Ltd.
+=======
+ * Copyright (C) 2011-2014, Marvell International Ltd.
+>>>>>>> v3.18
  *
  * This software file (the "File") is distributed by Marvell International
  * Ltd. under the terms of the GNU General Public License Version 2, June 1991
@@ -69,8 +73,14 @@ mwifiex_11n_form_amsdu_pkt(struct sk_buff *skb_aggr,
 	memcpy(&tx_header->eth803_hdr, skb_src->data, dt_offset);
 
 	/* Copy SNAP header */
+<<<<<<< HEAD
 	snap.snap_type = *(u16 *) ((u8 *)skb_src->data + dt_offset);
 	dt_offset += sizeof(u16);
+=======
+	snap.snap_type = ((struct ethhdr *)skb_src->data)->h_proto;
+
+	dt_offset += sizeof(__be16);
+>>>>>>> v3.18
 
 	memcpy(&tx_header->rfc1042_hdr, &snap, sizeof(struct rfc_1042_hdr));
 
@@ -99,6 +109,10 @@ mwifiex_11n_form_amsdu_txpd(struct mwifiex_private *priv,
 			    struct sk_buff *skb)
 {
 	struct txpd *local_tx_pd;
+<<<<<<< HEAD
+=======
+	struct mwifiex_txinfo *tx_info = MWIFIEX_SKB_TXCB(skb);
+>>>>>>> v3.18
 
 	skb_push(skb, sizeof(*local_tx_pd));
 
@@ -117,6 +131,12 @@ mwifiex_11n_form_amsdu_txpd(struct mwifiex_private *priv,
 	local_tx_pd->tx_pkt_length = cpu_to_le16(skb->len -
 						 sizeof(*local_tx_pd));
 
+<<<<<<< HEAD
+=======
+	if (tx_info->flags & MWIFIEX_BUF_FLAG_TDLS_PKT)
+		local_tx_pd->flags |= MWIFIEX_TXPD_FLAGS_TDLS_PACKET;
+
+>>>>>>> v3.18
 	if (local_tx_pd->tx_control == 0)
 		/* TxCtrl set by user or default */
 		local_tx_pd->tx_control = cpu_to_le32(priv->pkt_tx_ctrl);
@@ -159,6 +179,10 @@ mwifiex_11n_aggregate_pkt(struct mwifiex_private *priv,
 	int pad = 0, ret;
 	struct mwifiex_tx_param tx_param;
 	struct txpd *ptx_pd = NULL;
+<<<<<<< HEAD
+=======
+	struct timeval tv;
+>>>>>>> v3.18
 	int headroom = adapter->iface_type == MWIFIEX_USB ? 0 : INTF_HEADER_LEN;
 
 	skb_src = skb_peek(&pra_list->skb_head);
@@ -179,10 +203,24 @@ mwifiex_11n_aggregate_pkt(struct mwifiex_private *priv,
 	skb_reserve(skb_aggr, headroom + sizeof(struct txpd));
 	tx_info_aggr =  MWIFIEX_SKB_TXCB(skb_aggr);
 
+<<<<<<< HEAD
 	tx_info_aggr->bss_type = tx_info_src->bss_type;
 	tx_info_aggr->bss_num = tx_info_src->bss_num;
 	skb_aggr->priority = skb_src->priority;
 
+=======
+	memset(tx_info_aggr, 0, sizeof(*tx_info_aggr));
+	tx_info_aggr->bss_type = tx_info_src->bss_type;
+	tx_info_aggr->bss_num = tx_info_src->bss_num;
+
+	if (tx_info_src->flags & MWIFIEX_BUF_FLAG_TDLS_PKT)
+		tx_info_aggr->flags |= MWIFIEX_BUF_FLAG_TDLS_PKT;
+	skb_aggr->priority = skb_src->priority;
+
+	do_gettimeofday(&tv);
+	skb_aggr->tstamp = timeval_to_ktime(tv);
+
+>>>>>>> v3.18
 	do {
 		/* Check if AMSDU can accommodate this MSDU */
 		if (skb_tailroom(skb_aggr) < (skb_src->len + LLC_SNAP_LEN))
@@ -190,7 +228,11 @@ mwifiex_11n_aggregate_pkt(struct mwifiex_private *priv,
 
 		skb_src = skb_dequeue(&pra_list->skb_head);
 
+<<<<<<< HEAD
 		pra_list->total_pkts_size -= skb_src->len;
+=======
+		pra_list->total_pkt_count--;
+>>>>>>> v3.18
 
 		atomic_dec(&priv->wmm.tx_pkts_queued);
 
@@ -235,6 +277,7 @@ mwifiex_11n_aggregate_pkt(struct mwifiex_private *priv,
 		ret = adapter->if_ops.host_to_card(adapter, MWIFIEX_USB_EP_DATA,
 						   skb_aggr, NULL);
 	} else {
+<<<<<<< HEAD
 		/*
 		 * Padding per MSDU will affect the length of next
 		 * packet and hence the exact length of next packet
@@ -247,6 +290,13 @@ mwifiex_11n_aggregate_pkt(struct mwifiex_private *priv,
 		 * (adapter->tx_buf_size).
 		 */
 		tx_param.next_pkt_len = 0;
+=======
+		if (skb_src)
+			tx_param.next_pkt_len =
+					skb_src->len + sizeof(struct txpd);
+		else
+			tx_param.next_pkt_len = 0;
+>>>>>>> v3.18
 
 		ret = adapter->if_ops.host_to_card(adapter, MWIFIEX_TYPE_DATA,
 						   skb_aggr, &tx_param);
@@ -269,7 +319,11 @@ mwifiex_11n_aggregate_pkt(struct mwifiex_private *priv,
 
 		skb_queue_tail(&pra_list->skb_head, skb_aggr);
 
+<<<<<<< HEAD
 		pra_list->total_pkts_size += skb_aggr->len;
+=======
+		pra_list->total_pkt_count++;
+>>>>>>> v3.18
 
 		atomic_inc(&priv->wmm.tx_pkts_queued);
 

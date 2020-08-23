@@ -331,17 +331,29 @@ gen_return_code(unsigned char *codemem)
 }
 
 
+<<<<<<< HEAD
 static int setup_frame(int sig, struct k_sigaction *ka, siginfo_t *info,
 		       sigset_t *set, struct pt_regs *regs)
 {
 	struct rt_sigframe *frame;
 	int err = 0;
+=======
+static int setup_frame(struct ksignal *ksig, sigset_t *set,
+		       struct pt_regs *regs)
+{
+	struct rt_sigframe *frame;
+	int err = 0, sig = ksig->sig;
+>>>>>>> v3.18
 	int signal;
 	unsigned long sp, ra, tp;
 
 	sp = regs->areg[1];
 
+<<<<<<< HEAD
 	if ((ka->sa.sa_flags & SA_ONSTACK) != 0 && sas_ss_flags(sp) == 0) {
+=======
+	if ((ksig->ka.sa.sa_flags & SA_ONSTACK) != 0 && sas_ss_flags(sp) == 0) {
+>>>>>>> v3.18
 		sp = current->sas_ss_sp + current->sas_ss_size;
 	}
 
@@ -351,7 +363,11 @@ static int setup_frame(int sig, struct k_sigaction *ka, siginfo_t *info,
 		panic ("Double exception sys_sigreturn\n");
 
 	if (!access_ok(VERIFY_WRITE, frame, sizeof(*frame))) {
+<<<<<<< HEAD
 		goto give_sigsegv;
+=======
+		return -EFAULT;
+>>>>>>> v3.18
 	}
 
 	signal = current_thread_info()->exec_domain
@@ -360,8 +376,13 @@ static int setup_frame(int sig, struct k_sigaction *ka, siginfo_t *info,
 		? current_thread_info()->exec_domain->signal_invmap[sig]
 		: sig;
 
+<<<<<<< HEAD
 	if (ka->sa.sa_flags & SA_SIGINFO) {
 		err |= copy_siginfo_to_user(&frame->info, info);
+=======
+	if (ksig->ka.sa.sa_flags & SA_SIGINFO) {
+		err |= copy_siginfo_to_user(&frame->info, &ksig->info);
+>>>>>>> v3.18
 	}
 
 	/* Create the user context.  */
@@ -372,8 +393,13 @@ static int setup_frame(int sig, struct k_sigaction *ka, siginfo_t *info,
 	err |= setup_sigcontext(frame, regs);
 	err |= __copy_to_user(&frame->uc.uc_sigmask, set, sizeof(*set));
 
+<<<<<<< HEAD
 	if (ka->sa.sa_flags & SA_RESTORER) {
 		ra = (unsigned long)ka->sa.sa_restorer;
+=======
+	if (ksig->ka.sa.sa_flags & SA_RESTORER) {
+		ra = (unsigned long)ksig->ka.sa.sa_restorer;
+>>>>>>> v3.18
 	} else {
 
 		/* Create sys_rt_sigreturn syscall in stack frame */
@@ -381,7 +407,11 @@ static int setup_frame(int sig, struct k_sigaction *ka, siginfo_t *info,
 		err |= gen_return_code(frame->retcode);
 
 		if (err) {
+<<<<<<< HEAD
 			goto give_sigsegv;
+=======
+			return -EFAULT;
+>>>>>>> v3.18
 		}
 		ra = (unsigned long) frame->retcode;
 	}
@@ -393,7 +423,11 @@ static int setup_frame(int sig, struct k_sigaction *ka, siginfo_t *info,
 
 	/* Set up registers for signal handler; preserve the threadptr */
 	tp = regs->threadptr;
+<<<<<<< HEAD
 	start_thread(regs, (unsigned long) ka->sa.sa_handler,
+=======
+	start_thread(regs, (unsigned long) ksig->ka.sa.sa_handler,
+>>>>>>> v3.18
 		     (unsigned long) frame);
 
 	/* Set up a stack frame for a call4
@@ -416,10 +450,13 @@ static int setup_frame(int sig, struct k_sigaction *ka, siginfo_t *info,
 #endif
 
 	return 0;
+<<<<<<< HEAD
 
 give_sigsegv:
 	force_sigsegv(sig, current);
 	return -EFAULT;
+=======
+>>>>>>> v3.18
 }
 
 /*
@@ -433,6 +470,7 @@ give_sigsegv:
  */
 static void do_signal(struct pt_regs *regs)
 {
+<<<<<<< HEAD
 	siginfo_t info;
 	int signr;
 	struct k_sigaction ka;
@@ -442,6 +480,13 @@ static void do_signal(struct pt_regs *regs)
 	signr = get_signal_to_deliver(&info, &ka, regs, NULL);
 
 	if (signr > 0) {
+=======
+	struct ksignal ksig;
+
+	task_pt_regs(current)->icountlevel = 0;
+
+	if (get_signal(&ksig)) {
+>>>>>>> v3.18
 		int ret;
 
 		/* Are we from a system call? */
@@ -457,7 +502,11 @@ static void do_signal(struct pt_regs *regs)
 					break;
 
 				case -ERESTARTSYS:
+<<<<<<< HEAD
 					if (!(ka.sa.sa_flags & SA_RESTART)) {
+=======
+					if (!(ksig.ka.sa.sa_flags & SA_RESTART)) {
+>>>>>>> v3.18
 						regs->areg[2] = -EINTR;
 						break;
 					}
@@ -476,11 +525,16 @@ static void do_signal(struct pt_regs *regs)
 
 		/* Whee!  Actually deliver the signal.  */
 		/* Set up the stack frame */
+<<<<<<< HEAD
 		ret = setup_frame(signr, &ka, &info, sigmask_to_save(), regs);
 		if (ret)
 			return;
 
 		signal_delivered(signr, &info, &ka, regs, 0);
+=======
+		ret = setup_frame(&ksig, sigmask_to_save(), regs);
+		signal_setup_done(ret, &ksig, 0);
+>>>>>>> v3.18
 		if (current->ptrace & PT_SINGLESTEP)
 			task_pt_regs(current)->icountlevel = 1;
 

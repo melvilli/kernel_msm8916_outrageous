@@ -23,6 +23,10 @@ obj-$(CONFIG_CDROM_PKTCDVD)	+= pktcdvd.o
 obj-$(CONFIG_MG_DISK)		+= mg_disk.o
 obj-$(CONFIG_SUNVDC)		+= sunvdc.o
 obj-$(CONFIG_BLK_DEV_NVME)	+= nvme.o
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_BLK_DEV_SKD)	+= skd.o
+>>>>>>> v3.18
 obj-$(CONFIG_BLK_DEV_OSD)	+= osdblk.o
 
 obj-$(CONFIG_BLK_DEV_UMEM)	+= umem.o
@@ -30,7 +34,10 @@ obj-$(CONFIG_BLK_DEV_NBD)	+= nbd.o
 obj-$(CONFIG_BLK_DEV_CRYPTOLOOP) += cryptoloop.o
 obj-$(CONFIG_VIRTIO_BLK)	+= virtio_blk.o
 
+<<<<<<< HEAD
 obj-$(CONFIG_VIODASD)		+= viodasd.o
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_BLK_DEV_SX8)	+= sx8.o
 obj-$(CONFIG_BLK_DEV_HD)	+= hd.o
 
@@ -41,7 +48,15 @@ obj-$(CONFIG_BLK_DEV_RBD)     += rbd.o
 obj-$(CONFIG_BLK_DEV_PCIESSD_MTIP32XX)	+= mtip32xx/
 
 obj-$(CONFIG_BLK_DEV_RSXX) += rsxx/
+<<<<<<< HEAD
 obj-$(CONFIG_ZRAM) += zram/
 
 nvme-y		:= nvme-core.o nvme-scsi.o
+=======
+obj-$(CONFIG_BLK_DEV_NULL_BLK)	+= null_blk.o
+obj-$(CONFIG_ZRAM) += zram/
+
+nvme-y		:= nvme-core.o nvme-scsi.o
+skd-y		:= skd_main.o
+>>>>>>> v3.18
 swim_mod-y	:= swim.o swim_asm.o

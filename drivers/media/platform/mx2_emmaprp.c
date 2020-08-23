@@ -27,7 +27,11 @@
 #include <media/v4l2-device.h>
 #include <media/v4l2-ioctl.h>
 #include <media/videobuf2-dma-contig.h>
+<<<<<<< HEAD
 #include <asm/sizes.h>
+=======
+#include <linux/sizes.h>
+>>>>>>> v3.18
 
 #define EMMAPRP_MODULE_NAME "mem2mem-emmaprp"
 
@@ -207,10 +211,15 @@ struct emmaprp_dev {
 	struct mutex		dev_mutex;
 	spinlock_t		irqlock;
 
+<<<<<<< HEAD
 	int			irq_emma;
 	void __iomem		*base_emma;
 	struct clk		*clk_emma_ahb, *clk_emma_ipg;
 	struct resource		*res_emma;
+=======
+	void __iomem		*base_emma;
+	struct clk		*clk_emma_ahb, *clk_emma_ipg;
+>>>>>>> v3.18
 
 	struct v4l2_m2m_dev	*m2m_dev;
 	struct vb2_alloc_ctx	*alloc_ctx;
@@ -377,8 +386,18 @@ static irqreturn_t emmaprp_irq(int irq_emma, void *data)
 			src_vb = v4l2_m2m_src_buf_remove(curr_ctx->m2m_ctx);
 			dst_vb = v4l2_m2m_dst_buf_remove(curr_ctx->m2m_ctx);
 
+<<<<<<< HEAD
 			src_vb->v4l2_buf.timestamp = dst_vb->v4l2_buf.timestamp;
 			src_vb->v4l2_buf.timecode = dst_vb->v4l2_buf.timecode;
+=======
+			dst_vb->v4l2_buf.timestamp = src_vb->v4l2_buf.timestamp;
+			dst_vb->v4l2_buf.flags &=
+				~V4L2_BUF_FLAG_TSTAMP_SRC_MASK;
+			dst_vb->v4l2_buf.flags |=
+				src_vb->v4l2_buf.flags
+				& V4L2_BUF_FLAG_TSTAMP_SRC_MASK;
+			dst_vb->v4l2_buf.timecode = src_vb->v4l2_buf.timecode;
+>>>>>>> v3.18
 
 			spin_lock_irqsave(&pcdev->irqlock, flags);
 			v4l2_m2m_buf_done(src_vb, VB2_BUF_STATE_DONE);
@@ -766,7 +785,11 @@ static int queue_init(void *priv, struct vb2_queue *src_vq,
 	src_vq->buf_struct_size = sizeof(struct v4l2_m2m_buffer);
 	src_vq->ops = &emmaprp_qops;
 	src_vq->mem_ops = &vb2_dma_contig_memops;
+<<<<<<< HEAD
 	src_vq->timestamp_type = V4L2_BUF_FLAG_TIMESTAMP_COPY;
+=======
+	src_vq->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_COPY;
+>>>>>>> v3.18
 
 	ret = vb2_queue_init(src_vq);
 	if (ret)
@@ -778,7 +801,11 @@ static int queue_init(void *priv, struct vb2_queue *src_vq,
 	dst_vq->buf_struct_size = sizeof(struct v4l2_m2m_buffer);
 	dst_vq->ops = &emmaprp_qops;
 	dst_vq->mem_ops = &vb2_dma_contig_memops;
+<<<<<<< HEAD
 	dst_vq->timestamp_type = V4L2_BUF_FLAG_TIMESTAMP_COPY;
+=======
+	dst_vq->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_COPY;
+>>>>>>> v3.18
 
 	return vb2_queue_init(dst_vq);
 }
@@ -896,9 +923,14 @@ static int emmaprp_probe(struct platform_device *pdev)
 {
 	struct emmaprp_dev *pcdev;
 	struct video_device *vfd;
+<<<<<<< HEAD
 	struct resource *res_emma;
 	int irq_emma;
 	int ret;
+=======
+	struct resource *res;
+	int irq, ret;
+>>>>>>> v3.18
 
 	pcdev = devm_kzalloc(&pdev->dev, sizeof(*pcdev), GFP_KERNEL);
 	if (!pcdev)
@@ -915,12 +947,19 @@ static int emmaprp_probe(struct platform_device *pdev)
 	if (IS_ERR(pcdev->clk_emma_ahb))
 		return PTR_ERR(pcdev->clk_emma_ahb);
 
+<<<<<<< HEAD
 	irq_emma = platform_get_irq(pdev, 0);
 	res_emma = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (irq_emma < 0 || res_emma == NULL) {
 		dev_err(&pdev->dev, "Missing platform resources data\n");
 		return -ENODEV;
 	}
+=======
+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+	pcdev->base_emma = devm_ioremap_resource(&pdev->dev, res);
+	if (IS_ERR(pcdev->base_emma))
+		return PTR_ERR(pcdev->base_emma);
+>>>>>>> v3.18
 
 	ret = v4l2_device_register(&pdev->dev, &pcdev->v4l2_dev);
 	if (ret)
@@ -937,6 +976,10 @@ static int emmaprp_probe(struct platform_device *pdev)
 
 	*vfd = emmaprp_videodev;
 	vfd->lock = &pcdev->dev_mutex;
+<<<<<<< HEAD
+=======
+	vfd->v4l2_dev = &pcdev->v4l2_dev;
+>>>>>>> v3.18
 
 	video_set_drvdata(vfd, pcdev);
 	snprintf(vfd->name, sizeof(vfd->name), "%s", emmaprp_videodev.name);
@@ -946,6 +989,7 @@ static int emmaprp_probe(struct platform_device *pdev)
 
 	platform_set_drvdata(pdev, pcdev);
 
+<<<<<<< HEAD
 	pcdev->base_emma = devm_ioremap_resource(&pdev->dev, res_emma);
 	if (IS_ERR(pcdev->base_emma)) {
 		ret = PTR_ERR(pcdev->base_emma);
@@ -960,6 +1004,13 @@ static int emmaprp_probe(struct platform_device *pdev)
 		ret = -ENODEV;
 		goto rel_vdev;
 	}
+=======
+	irq = platform_get_irq(pdev, 0);
+	ret = devm_request_irq(&pdev->dev, irq, emmaprp_irq, 0,
+			       dev_name(&pdev->dev), pcdev);
+	if (ret)
+		goto rel_vdev;
+>>>>>>> v3.18
 
 	pcdev->alloc_ctx = vb2_dma_contig_init_ctx(&pdev->dev);
 	if (IS_ERR(pcdev->alloc_ctx)) {
@@ -993,6 +1044,11 @@ rel_vdev:
 unreg_dev:
 	v4l2_device_unregister(&pcdev->v4l2_dev);
 
+<<<<<<< HEAD
+=======
+	mutex_destroy(&pcdev->dev_mutex);
+
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -1006,6 +1062,10 @@ static int emmaprp_remove(struct platform_device *pdev)
 	v4l2_m2m_release(pcdev->m2m_dev);
 	vb2_dma_contig_cleanup_ctx(pcdev->alloc_ctx);
 	v4l2_device_unregister(&pcdev->v4l2_dev);
+<<<<<<< HEAD
+=======
+	mutex_destroy(&pcdev->dev_mutex);
+>>>>>>> v3.18
 
 	return 0;
 }

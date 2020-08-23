@@ -109,13 +109,19 @@ static const struct vm_operations_struct *ttm_vm_ops;
 static int qxl_ttm_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 {
 	struct ttm_buffer_object *bo;
+<<<<<<< HEAD
 	struct qxl_device *qdev;
+=======
+>>>>>>> v3.18
 	int r;
 
 	bo = (struct ttm_buffer_object *)vma->vm_private_data;
 	if (bo == NULL)
 		return VM_FAULT_NOPAGE;
+<<<<<<< HEAD
 	qdev = qxl_get_qdev(bo->bdev);
+=======
+>>>>>>> v3.18
 	r = ttm_vm_ops->fault(vma, vmf);
 	return r;
 }
@@ -129,7 +135,11 @@ int qxl_mmap(struct file *filp, struct vm_area_struct *vma)
 	if (unlikely(vma->vm_pgoff < DRM_FILE_PAGE_OFFSET)) {
 		pr_info("%s: vma->vm_pgoff (%ld) < DRM_FILE_PAGE_OFFSET\n",
 			__func__, vma->vm_pgoff);
+<<<<<<< HEAD
 		return drm_mmap(filp, vma);
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 	}
 
 	file_priv = filp->private_data;
@@ -162,10 +172,13 @@ static int qxl_invalidate_caches(struct ttm_bo_device *bdev, uint32_t flags)
 static int qxl_init_mem_type(struct ttm_bo_device *bdev, uint32_t type,
 			     struct ttm_mem_type_manager *man)
 {
+<<<<<<< HEAD
 	struct qxl_device *qdev;
 
 	qdev = qxl_get_qdev(bdev);
 
+=======
+>>>>>>> v3.18
 	switch (type) {
 	case TTM_PL_SYSTEM:
 		/* System memory */
@@ -194,11 +207,21 @@ static void qxl_evict_flags(struct ttm_buffer_object *bo,
 				struct ttm_placement *placement)
 {
 	struct qxl_bo *qbo;
+<<<<<<< HEAD
 	static u32 placements = TTM_PL_MASK_CACHING | TTM_PL_FLAG_SYSTEM;
 
 	if (!qxl_ttm_bo_is_qxl_bo(bo)) {
 		placement->fpfn = 0;
 		placement->lpfn = 0;
+=======
+	static struct ttm_place placements = {
+		.fpfn = 0,
+		.lpfn = 0,
+		.flags = TTM_PL_MASK_CACHING | TTM_PL_FLAG_SYSTEM
+	};
+
+	if (!qxl_ttm_bo_is_qxl_bo(bo)) {
+>>>>>>> v3.18
 		placement->placement = &placements;
 		placement->busy_placement = &placements;
 		placement->num_placement = 1;
@@ -206,13 +229,23 @@ static void qxl_evict_flags(struct ttm_buffer_object *bo,
 		return;
 	}
 	qbo = container_of(bo, struct qxl_bo, tbo);
+<<<<<<< HEAD
 	qxl_ttm_placement_from_domain(qbo, QXL_GEM_DOMAIN_CPU);
+=======
+	qxl_ttm_placement_from_domain(qbo, QXL_GEM_DOMAIN_CPU, false);
+>>>>>>> v3.18
 	*placement = qbo->placement;
 }
 
 static int qxl_verify_access(struct ttm_buffer_object *bo, struct file *filp)
 {
+<<<<<<< HEAD
 	return 0;
+=======
+	struct qxl_bo *qbo = to_qxl_bo(bo);
+
+	return drm_vma_node_verify_access(&qbo->gem_base.vma_node, filp);
+>>>>>>> v3.18
 }
 
 static int qxl_ttm_io_mem_reserve(struct ttm_bo_device *bdev,
@@ -359,6 +392,7 @@ static int qxl_bo_move(struct ttm_buffer_object *bo,
 	return ttm_bo_move_memcpy(bo, evict, no_wait_gpu, new_mem);
 }
 
+<<<<<<< HEAD
 
 static int qxl_sync_obj_wait(void *sync_obj,
 			     bool lazy, bool interruptible)
@@ -445,6 +479,8 @@ static bool qxl_sync_obj_signaled(void *sync_obj)
 	return (qfence->num_active_releases == 0);
 }
 
+=======
+>>>>>>> v3.18
 static void qxl_bo_move_notify(struct ttm_buffer_object *bo,
 			       struct ttm_mem_reg *new_mem)
 {
@@ -471,6 +507,7 @@ static struct ttm_bo_driver qxl_bo_driver = {
 	.verify_access = &qxl_verify_access,
 	.io_mem_reserve = &qxl_ttm_io_mem_reserve,
 	.io_mem_free = &qxl_ttm_io_mem_free,
+<<<<<<< HEAD
 	.sync_obj_signaled = &qxl_sync_obj_signaled,
 	.sync_obj_wait = &qxl_sync_obj_wait,
 	.sync_obj_flush = &qxl_sync_obj_flush,
@@ -481,6 +518,11 @@ static struct ttm_bo_driver qxl_bo_driver = {
 
 
 
+=======
+	.move_notify = &qxl_bo_move_notify,
+};
+
+>>>>>>> v3.18
 int qxl_ttm_init(struct qxl_device *qdev)
 {
 	int r;
@@ -492,7 +534,13 @@ int qxl_ttm_init(struct qxl_device *qdev)
 	/* No others user of address space so set it to 0 */
 	r = ttm_bo_device_init(&qdev->mman.bdev,
 			       qdev->mman.bo_global_ref.ref.object,
+<<<<<<< HEAD
 			       &qxl_bo_driver, DRM_FILE_PAGE_OFFSET, 0);
+=======
+			       &qxl_bo_driver,
+			       qdev->ddev->anon_inode->i_mapping,
+			       DRM_FILE_PAGE_OFFSET, 0);
+>>>>>>> v3.18
 	if (r) {
 		DRM_ERROR("failed initializing buffer object driver(%d).\n", r);
 		return r;
@@ -515,8 +563,13 @@ int qxl_ttm_init(struct qxl_device *qdev)
 		 (unsigned)qdev->vram_size / (1024 * 1024));
 	DRM_INFO("qxl: %luM of IO pages memory ready (VRAM domain)\n",
 		 ((unsigned)num_io_pages * PAGE_SIZE) / (1024 * 1024));
+<<<<<<< HEAD
 	if (unlikely(qdev->mman.bdev.dev_mapping == NULL))
 		qdev->mman.bdev.dev_mapping = qdev->ddev->dev_mapping;
+=======
+	DRM_INFO("qxl: %uM of Surface memory size\n",
+		 (unsigned)qdev->surfaceram_size / (1024 * 1024));
+>>>>>>> v3.18
 	r = qxl_ttm_debugfs_init(qdev);
 	if (r) {
 		DRM_ERROR("Failed to init debugfs\n");

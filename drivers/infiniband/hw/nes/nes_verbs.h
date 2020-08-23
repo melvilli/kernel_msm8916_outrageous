@@ -184,5 +184,9 @@ struct nes_qp {
 	u8                    pau_busy;
 	u8                    pau_pending;
 	u8                    pau_state;
+<<<<<<< HEAD
+=======
+	__u64                 nesuqp_addr;
+>>>>>>> v3.18
 };
 #endif			/* NES_VERBS_H */

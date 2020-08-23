@@ -40,7 +40,12 @@ static void * __init_refok __earlyonly_bootmem_alloc(int node,
 				unsigned long align,
 				unsigned long goal)
 {
+<<<<<<< HEAD
 	return __alloc_bootmem_node_high(NODE_DATA(node), size, align, goal);
+=======
+	return memblock_virt_alloc_try_nid(size, align, goal,
+					    BOOTMEM_ALLOC_ACCESSIBLE, node);
+>>>>>>> v3.18
 }
 
 static void *vmemmap_buf;
@@ -226,7 +231,12 @@ void __init sparse_mem_maps_populate_node(struct page **map_map,
 
 	if (vmemmap_buf_start) {
 		/* need to free left buf */
+<<<<<<< HEAD
 		free_bootmem(__pa(vmemmap_buf), vmemmap_buf_end - vmemmap_buf);
+=======
+		memblock_free_early(__pa(vmemmap_buf),
+				    vmemmap_buf_end - vmemmap_buf);
+>>>>>>> v3.18
 		vmemmap_buf = NULL;
 		vmemmap_buf_end = NULL;
 	}

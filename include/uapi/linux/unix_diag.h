@@ -31,6 +31,10 @@ struct unix_diag_msg {
 };
 
 enum {
+<<<<<<< HEAD
+=======
+	/* UNIX_DIAG_NONE, standard nl API requires this attribute!  */
+>>>>>>> v3.18
 	UNIX_DIAG_NAME,
 	UNIX_DIAG_VFS,
 	UNIX_DIAG_PEER,

@@ -72,11 +72,15 @@ void inet_peer_base_init(struct inet_peer_base *bp)
 {
 	bp->root = peer_avl_empty_rcu;
 	seqlock_init(&bp->lock);
+<<<<<<< HEAD
 	bp->flush_seq = ~0U;
+=======
+>>>>>>> v3.18
 	bp->total = 0;
 }
 EXPORT_SYMBOL_GPL(inet_peer_base_init);
 
+<<<<<<< HEAD
 static atomic_t v4_seq = ATOMIC_INIT(0);
 static atomic_t v6_seq = ATOMIC_INIT(0);
 
@@ -102,6 +106,8 @@ void inetpeer_invalidate_family(int family)
 	atomic_inc(fp);
 }
 
+=======
+>>>>>>> v3.18
 #define PEER_MAXDEPTH 40 /* sufficient for about 2^27 nodes */
 
 /* Exported for sysctl_net_ipv4.  */
@@ -113,7 +119,11 @@ int inet_peer_maxttl __read_mostly = 10 * 60 * HZ;	/* usual time to live: 10 min
 static void inetpeer_gc_worker(struct work_struct *work)
 {
 	struct inet_peer *p, *n, *c;
+<<<<<<< HEAD
 	LIST_HEAD(list);
+=======
+	struct list_head list;
+>>>>>>> v3.18
 
 	spin_lock_bh(&gc_lock);
 	list_replace_init(&gc_list, &list);
@@ -213,7 +223,11 @@ static int addr_compare(const struct inetpeer_addr *a,
 	stackptr = _stack;					\
 	*stackptr++ = &_base->root;				\
 	for (u = rcu_deref_locked(_base->root, _base);		\
+<<<<<<< HEAD
 	     u != peer_avl_empty; ) {				\
+=======
+	     u != peer_avl_empty;) {				\
+>>>>>>> v3.18
 		int cmp = addr_compare(_daddr, &u->daddr);	\
 		if (cmp == 0)					\
 			break;					\
@@ -268,7 +282,11 @@ static struct inet_peer *lookup_rcu(const struct inetpeer_addr *daddr,
 	*stackptr++ = &start->avl_left;				\
 	v = &start->avl_left;					\
 	for (u = rcu_deref_locked(*v, base);			\
+<<<<<<< HEAD
 	     u->avl_right != peer_avl_empty_rcu; ) {		\
+=======
+	     u->avl_right != peer_avl_empty_rcu;) {		\
+>>>>>>> v3.18
 		v = &u->avl_right;				\
 		*stackptr++ = v;				\
 		u = rcu_deref_locked(*v, base);			\
@@ -451,8 +469,11 @@ struct inet_peer *inet_getpeer(struct inet_peer_base *base,
 	unsigned int sequence;
 	int invalidated, gccnt = 0;
 
+<<<<<<< HEAD
 	flush_check(base, daddr->family);
 
+=======
+>>>>>>> v3.18
 	/* Attempt a lockless lookup first.
 	 * Because of a concurrent writer, we might not find an existing entry.
 	 */

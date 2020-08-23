@@ -162,6 +162,7 @@ setup_sigcontext(struct sigcontext __user *sc, struct pt_regs *regs,
  * Determine which stack to use..
  */
 static inline void __user *
+<<<<<<< HEAD
 get_sigframe(struct k_sigaction *ka, unsigned long sp, size_t frame_size)
 {
 	/* This is the X/Open sanctioned signal stack switching.  */
@@ -184,6 +185,24 @@ static int setup_rt_frame(int sig, struct k_sigaction *ka, siginfo_t *info,
 
 	if (!access_ok(VERIFY_WRITE, frame, sizeof(*frame)))
 		goto give_sigsegv;
+=======
+get_sigframe(struct ksignal *ksig, unsigned long sp, size_t frame_size)
+{
+	return (void __user *)((sigsp(sp, ksig) - frame_size) & -8ul);
+}
+
+static int setup_rt_frame(struct ksignal *ksig, sigset_t *set,
+			  struct pt_regs *regs)
+{
+	struct rt_sigframe __user *frame;
+	int err = 0;
+	int signal, sig = ksig->sig;
+
+	frame = get_sigframe(ksig, regs->spu, sizeof(*frame));
+
+	if (!access_ok(VERIFY_WRITE, frame, sizeof(*frame)))
+		return -EFAULT;
+>>>>>>> v3.18
 
 	signal = current_thread_info()->exec_domain
 		&& current_thread_info()->exec_domain->signal_invmap
@@ -193,6 +212,7 @@ static int setup_rt_frame(int sig, struct k_sigaction *ka, siginfo_t *info,
 
 	err |= __put_user(signal, &frame->sig);
 	if (err)
+<<<<<<< HEAD
 		goto give_sigsegv;
 
 	err |= __put_user(&frame->info, &frame->pinfo);
@@ -200,6 +220,15 @@ static int setup_rt_frame(int sig, struct k_sigaction *ka, siginfo_t *info,
 	err |= copy_siginfo_to_user(&frame->info, info);
 	if (err)
 		goto give_sigsegv;
+=======
+		return -EFAULT;
+
+	err |= __put_user(&frame->info, &frame->pinfo);
+	err |= __put_user(&frame->uc, &frame->puc);
+	err |= copy_siginfo_to_user(&frame->info, &ksig->info);
+	if (err)
+		return -EFAULT;
+>>>>>>> v3.18
 
 	/* Create the ucontext.  */
 	err |= __put_user(0, &frame->uc.uc_flags);
@@ -208,17 +237,28 @@ static int setup_rt_frame(int sig, struct k_sigaction *ka, siginfo_t *info,
 	err |= setup_sigcontext(&frame->uc.uc_mcontext, regs, set->sig[0]);
 	err |= __copy_to_user(&frame->uc.uc_sigmask, set, sizeof(*set));
 	if (err)
+<<<<<<< HEAD
 		goto give_sigsegv;
 
 	/* Set up to return from userspace.  */
 	regs->lr = (unsigned long)ka->sa.sa_restorer;
+=======
+		return -EFAULT;
+
+	/* Set up to return from userspace.  */
+	regs->lr = (unsigned long)ksig->ka.sa.sa_restorer;
+>>>>>>> v3.18
 
 	/* Set up registers for signal handler */
 	regs->spu = (unsigned long)frame;
 	regs->r0 = signal;	/* Arg for signal handler */
 	regs->r1 = (unsigned long)&frame->info;
 	regs->r2 = (unsigned long)&frame->uc;
+<<<<<<< HEAD
 	regs->bpc = (unsigned long)ka->sa.sa_handler;
+=======
+	regs->bpc = (unsigned long)ksig->ka.sa.sa_handler;
+>>>>>>> v3.18
 
 	set_fs(USER_DS);
 
@@ -228,10 +268,13 @@ static int setup_rt_frame(int sig, struct k_sigaction *ka, siginfo_t *info,
 #endif
 
 	return 0;
+<<<<<<< HEAD
 
 give_sigsegv:
 	force_sigsegv(sig, current);
 	return -EFAULT;
+=======
+>>>>>>> v3.18
 }
 
 static int prev_insn(struct pt_regs *regs)
@@ -252,9 +295,16 @@ static int prev_insn(struct pt_regs *regs)
  */
 
 static void
+<<<<<<< HEAD
 handle_signal(unsigned long sig, struct k_sigaction *ka, siginfo_t *info,
 	      struct pt_regs *regs)
 {
+=======
+handle_signal(struct ksignal *ksig, struct pt_regs *regs)
+{
+	int ret;
+
+>>>>>>> v3.18
 	/* Are we from a system call? */
 	if (regs->syscall_nr >= 0) {
 		/* If so, check system call restarting.. */
@@ -265,7 +315,11 @@ handle_signal(unsigned long sig, struct k_sigaction *ka, siginfo_t *info,
 				break;
 
 			case -ERESTARTSYS:
+<<<<<<< HEAD
 				if (!(ka->sa.sa_flags & SA_RESTART)) {
+=======
+				if (!(ksig->ka.sa.sa_flags & SA_RESTART)) {
+>>>>>>> v3.18
 					regs->r0 = -EINTR;
 					break;
 				}
@@ -278,10 +332,16 @@ handle_signal(unsigned long sig, struct k_sigaction *ka, siginfo_t *info,
 	}
 
 	/* Set up the stack frame */
+<<<<<<< HEAD
 	if (setup_rt_frame(sig, ka, info, sigmask_to_save(), regs))
 		return;
 
 	signal_delivered(sig, info, ka, regs, 0);
+=======
+	ret = setup_rt_frame(ksig, sigmask_to_save(), regs);
+
+	signal_setup_done(ret, ksig, 0);
+>>>>>>> v3.18
 }
 
 /*
@@ -291,9 +351,13 @@ handle_signal(unsigned long sig, struct k_sigaction *ka, siginfo_t *info,
  */
 static void do_signal(struct pt_regs *regs)
 {
+<<<<<<< HEAD
 	siginfo_t info;
 	int signr;
 	struct k_sigaction ka;
+=======
+	struct ksignal ksig;
+>>>>>>> v3.18
 
 	/*
 	 * We want the common case to go fast, which
@@ -304,8 +368,12 @@ static void do_signal(struct pt_regs *regs)
 	if (!user_mode(regs))
 		return;
 
+<<<<<<< HEAD
 	signr = get_signal_to_deliver(&info, &ka, regs, NULL);
 	if (signr > 0) {
+=======
+	if (get_signal(&ksig)) {
+>>>>>>> v3.18
 		/* Re-enable any watchpoints before delivering the
 		 * signal to user space. The processor register will
 		 * have been cleared if the watchpoint triggered
@@ -313,7 +381,11 @@ static void do_signal(struct pt_regs *regs)
 		 */
 
 		/* Whee!  Actually deliver the signal.  */
+<<<<<<< HEAD
 		handle_signal(signr, &ka, &info, regs);
+=======
+		handle_signal(&ksig, regs);
+>>>>>>> v3.18
 
 		return;
 	}

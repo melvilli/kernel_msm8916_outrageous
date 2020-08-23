@@ -584,10 +584,13 @@ static int snd_hammerfall_get_buffer(struct pci_dev *pci, struct snd_dma_buffer 
 {
 	dmab->dev.type = SNDRV_DMA_TYPE_DEV;
 	dmab->dev.dev = snd_dma_pci_data(pci);
+<<<<<<< HEAD
 	if (snd_dma_get_reserved_buf(dmab, snd_dma_pci_buf_id(pci))) {
 		if (dmab->bytes >= size)
 			return 0;
 	}
+=======
+>>>>>>> v3.18
 	if (snd_dma_alloc_pages(SNDRV_DMA_TYPE_DEV, snd_dma_pci_data(pci),
 				size, dmab) < 0)
 		return -ENOMEM;
@@ -596,6 +599,7 @@ static int snd_hammerfall_get_buffer(struct pci_dev *pci, struct snd_dma_buffer 
 
 static void snd_hammerfall_free_buffer(struct snd_dma_buffer *dmab, struct pci_dev *pci)
 {
+<<<<<<< HEAD
 	if (dmab->area) {
 		dmab->dev.dev = NULL; /* make it anonymous */
 		snd_dma_reserve_buf(dmab, snd_dma_pci_buf_id(pci));
@@ -604,6 +608,14 @@ static void snd_hammerfall_free_buffer(struct snd_dma_buffer *dmab, struct pci_d
 
 
 static DEFINE_PCI_DEVICE_TABLE(snd_hdsp_ids) = {
+=======
+	if (dmab->area)
+		snd_dma_free_pages(dmab);
+}
+
+
+static const struct pci_device_id snd_hdsp_ids[] = {
+>>>>>>> v3.18
 	{
 		.vendor = PCI_VENDOR_ID_XILINX,
 		.device = PCI_DEVICE_ID_XILINX_HAMMERFALL_DSP,
@@ -681,14 +693,23 @@ static int hdsp_check_for_iobox (struct hdsp *hdsp)
 		if (0 == (hdsp_read(hdsp, HDSP_statusRegister) &
 					HDSP_ConfigError)) {
 			if (i) {
+<<<<<<< HEAD
 				snd_printd("Hammerfall-DSP: IO box found after %d ms\n",
+=======
+				dev_dbg(hdsp->card->dev,
+					"IO box found after %d ms\n",
+>>>>>>> v3.18
 						(20 * i));
 			}
 			return 0;
 		}
 		msleep(20);
 	}
+<<<<<<< HEAD
 	snd_printk(KERN_ERR "Hammerfall-DSP: no IO box connected!\n");
+=======
+	dev_err(hdsp->card->dev, "no IO box connected!\n");
+>>>>>>> v3.18
 	hdsp->state &= ~HDSP_FirmwareLoaded;
 	return -EIO;
 }
@@ -705,13 +726,21 @@ static int hdsp_wait_for_iobox(struct hdsp *hdsp, unsigned int loops,
 		if (hdsp_read(hdsp, HDSP_statusRegister) & HDSP_ConfigError)
 			msleep(delay);
 		else {
+<<<<<<< HEAD
 			snd_printd("Hammerfall-DSP: iobox found after %ums!\n",
+=======
+			dev_dbg(hdsp->card->dev, "iobox found after %ums!\n",
+>>>>>>> v3.18
 				   i * delay);
 			return 0;
 		}
 	}
 
+<<<<<<< HEAD
 	snd_printk("Hammerfall-DSP: no IO box connected!\n");
+=======
+	dev_info(hdsp->card->dev, "no IO box connected!\n");
+>>>>>>> v3.18
 	hdsp->state &= ~HDSP_FirmwareLoaded;
 	return -EIO;
 }
@@ -734,13 +763,22 @@ static int snd_hdsp_load_firmware_from_cache(struct hdsp *hdsp) {
 
 	if ((hdsp_read (hdsp, HDSP_statusRegister) & HDSP_DllError) != 0) {
 
+<<<<<<< HEAD
 		snd_printk ("Hammerfall-DSP: loading firmware\n");
+=======
+		dev_info(hdsp->card->dev, "loading firmware\n");
+>>>>>>> v3.18
 
 		hdsp_write (hdsp, HDSP_control2Reg, HDSP_S_PROGRAM);
 		hdsp_write (hdsp, HDSP_fifoData, 0);
 
 		if (hdsp_fifo_wait (hdsp, 0, HDSP_LONG_WAIT)) {
+<<<<<<< HEAD
 			snd_printk ("Hammerfall-DSP: timeout waiting for download preparation\n");
+=======
+			dev_info(hdsp->card->dev,
+				 "timeout waiting for download preparation\n");
+>>>>>>> v3.18
 			hdsp_write(hdsp, HDSP_control2Reg, HDSP_S200);
 			return -EIO;
 		}
@@ -750,7 +788,12 @@ static int snd_hdsp_load_firmware_from_cache(struct hdsp *hdsp) {
 		for (i = 0; i < HDSP_FIRMWARE_SIZE / 4; ++i) {
 			hdsp_write(hdsp, HDSP_fifoData, cache[i]);
 			if (hdsp_fifo_wait (hdsp, 127, HDSP_LONG_WAIT)) {
+<<<<<<< HEAD
 				snd_printk ("Hammerfall-DSP: timeout during firmware loading\n");
+=======
+				dev_info(hdsp->card->dev,
+					 "timeout during firmware loading\n");
+>>>>>>> v3.18
 				hdsp_write(hdsp, HDSP_control2Reg, HDSP_S200);
 				return -EIO;
 			}
@@ -766,11 +809,20 @@ static int snd_hdsp_load_firmware_from_cache(struct hdsp *hdsp) {
 		hdsp->control2_register = 0;
 #endif
 		hdsp_write (hdsp, HDSP_control2Reg, hdsp->control2_register);
+<<<<<<< HEAD
 		snd_printk ("Hammerfall-DSP: finished firmware loading\n");
 
 	}
 	if (hdsp->state & HDSP_InitializationComplete) {
 		snd_printk(KERN_INFO "Hammerfall-DSP: firmware loaded from cache, restoring defaults\n");
+=======
+		dev_info(hdsp->card->dev, "finished firmware loading\n");
+
+	}
+	if (hdsp->state & HDSP_InitializationComplete) {
+		dev_info(hdsp->card->dev,
+			 "firmware loaded from cache, restoring defaults\n");
+>>>>>>> v3.18
 		spin_lock_irqsave(&hdsp->lock, flags);
 		snd_hdsp_set_defaults(hdsp);
 		spin_unlock_irqrestore(&hdsp->lock, flags);
@@ -797,7 +849,11 @@ static int hdsp_get_iobox_version (struct hdsp *hdsp)
 		hdsp_write (hdsp, HDSP_fifoData, 0);
 		if (hdsp_fifo_wait(hdsp, 0, HDSP_SHORT_WAIT) < 0) {
 			hdsp->io_type = Multiface;
+<<<<<<< HEAD
 			snd_printk("Hammerfall-DSP: Multiface found\n");
+=======
+			dev_info(hdsp->card->dev, "Multiface found\n");
+>>>>>>> v3.18
 			return 0;
 		}
 
@@ -805,7 +861,11 @@ static int hdsp_get_iobox_version (struct hdsp *hdsp)
 		hdsp_write(hdsp, HDSP_fifoData, 0);
 		if (hdsp_fifo_wait(hdsp, 0, HDSP_SHORT_WAIT) == 0) {
 			hdsp->io_type = Digiface;
+<<<<<<< HEAD
 			snd_printk("Hammerfall-DSP: Digiface found\n");
+=======
+			dev_info(hdsp->card->dev, "Digiface found\n");
+>>>>>>> v3.18
 			return 0;
 		}
 
@@ -814,7 +874,11 @@ static int hdsp_get_iobox_version (struct hdsp *hdsp)
 		hdsp_write(hdsp, HDSP_fifoData, 0);
 		if (hdsp_fifo_wait(hdsp, 0, HDSP_SHORT_WAIT) == 0) {
 			hdsp->io_type = Multiface;
+<<<<<<< HEAD
 			snd_printk("Hammerfall-DSP: Multiface found\n");
+=======
+			dev_info(hdsp->card->dev, "Multiface found\n");
+>>>>>>> v3.18
 			return 0;
 		}
 
@@ -823,12 +887,20 @@ static int hdsp_get_iobox_version (struct hdsp *hdsp)
 		hdsp_write(hdsp, HDSP_fifoData, 0);
 		if (hdsp_fifo_wait(hdsp, 0, HDSP_SHORT_WAIT) < 0) {
 			hdsp->io_type = Multiface;
+<<<<<<< HEAD
 			snd_printk("Hammerfall-DSP: Multiface found\n");
+=======
+			dev_info(hdsp->card->dev, "Multiface found\n");
+>>>>>>> v3.18
 			return 0;
 		}
 
 		hdsp->io_type = RPM;
+<<<<<<< HEAD
 		snd_printk("Hammerfall-DSP: RPM found\n");
+=======
+		dev_info(hdsp->card->dev, "RPM found\n");
+>>>>>>> v3.18
 		return 0;
 	} else {
 		/* firmware was already loaded, get iobox type */
@@ -853,11 +925,16 @@ static int hdsp_check_for_firmware (struct hdsp *hdsp, int load_on_demand)
 		hdsp->state &= ~HDSP_FirmwareLoaded;
 		if (! load_on_demand)
 			return -EIO;
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "Hammerfall-DSP: firmware not present.\n");
+=======
+		dev_err(hdsp->card->dev, "firmware not present.\n");
+>>>>>>> v3.18
 		/* try to load firmware */
 		if (! (hdsp->state & HDSP_FirmwareCached)) {
 			if (! hdsp_request_fw_loader(hdsp))
 				return 0;
+<<<<<<< HEAD
 			snd_printk(KERN_ERR
 				   "Hammerfall-DSP: No firmware loaded nor "
 				   "cached, please upload firmware.\n");
@@ -867,6 +944,15 @@ static int hdsp_check_for_firmware (struct hdsp *hdsp, int load_on_demand)
 			snd_printk(KERN_ERR
 				   "Hammerfall-DSP: Firmware loading from "
 				   "cache failed, please upload manually.\n");
+=======
+			dev_err(hdsp->card->dev,
+				   "No firmware loaded nor cached, please upload firmware.\n");
+			return -EIO;
+		}
+		if (snd_hdsp_load_firmware_from_cache(hdsp) != 0) {
+			dev_err(hdsp->card->dev,
+				   "Firmware loading from cache failed, please upload manually.\n");
+>>>>>>> v3.18
 			return -EIO;
 		}
 	}
@@ -894,7 +980,12 @@ static int hdsp_fifo_wait(struct hdsp *hdsp, int count, int timeout)
 		udelay (100);
 	}
 
+<<<<<<< HEAD
 	snd_printk ("Hammerfall-DSP: wait for FIFO status <= %d failed after %d iterations\n",
+=======
+	dev_warn(hdsp->card->dev,
+		 "wait for FIFO status <= %d failed after %d iterations\n",
+>>>>>>> v3.18
 		    count, timeout);
 	return -1;
 }
@@ -1011,7 +1102,13 @@ static int hdsp_spdif_sample_rate(struct hdsp *hdsp)
 	default:
 		break;
 	}
+<<<<<<< HEAD
 	snd_printk ("Hammerfall-DSP: unknown spdif frequency status; bits = 0x%x, status = 0x%x\n", rate_bits, status);
+=======
+	dev_warn(hdsp->card->dev,
+		 "unknown spdif frequency status; bits = 0x%x, status = 0x%x\n",
+		 rate_bits, status);
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -1145,7 +1242,12 @@ static int hdsp_set_rate(struct hdsp *hdsp, int rate, int called_internally)
 	if (!(hdsp->control_register & HDSP_ClockModeMaster)) {
 		if (called_internally) {
 			/* request from ctl or card initialization */
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "Hammerfall-DSP: device is not running as a clock master: cannot set sample rate.\n");
+=======
+			dev_err(hdsp->card->dev,
+				"device is not running as a clock master: cannot set sample rate.\n");
+>>>>>>> v3.18
 			return -1;
 		} else {
 			/* hw_param request while in AutoSync mode */
@@ -1153,11 +1255,22 @@ static int hdsp_set_rate(struct hdsp *hdsp, int rate, int called_internally)
 			int spdif_freq = hdsp_spdif_sample_rate(hdsp);
 
 			if ((spdif_freq == external_freq*2) && (hdsp_autosync_ref(hdsp) >= HDSP_AUTOSYNC_FROM_ADAT1))
+<<<<<<< HEAD
 				snd_printk(KERN_INFO "Hammerfall-DSP: Detected ADAT in double speed mode\n");
 			else if (hdsp->io_type == H9632 && (spdif_freq == external_freq*4) && (hdsp_autosync_ref(hdsp) >= HDSP_AUTOSYNC_FROM_ADAT1))
 				snd_printk(KERN_INFO "Hammerfall-DSP: Detected ADAT in quad speed mode\n");
 			else if (rate != external_freq) {
 				snd_printk(KERN_INFO "Hammerfall-DSP: No AutoSync source for requested rate\n");
+=======
+				dev_info(hdsp->card->dev,
+					 "Detected ADAT in double speed mode\n");
+			else if (hdsp->io_type == H9632 && (spdif_freq == external_freq*4) && (hdsp_autosync_ref(hdsp) >= HDSP_AUTOSYNC_FROM_ADAT1))
+				dev_info(hdsp->card->dev,
+					 "Detected ADAT in quad speed mode\n");
+			else if (rate != external_freq) {
+				dev_info(hdsp->card->dev,
+					 "No AutoSync source for requested rate\n");
+>>>>>>> v3.18
 				return -1;
 			}
 		}
@@ -1229,7 +1342,12 @@ static int hdsp_set_rate(struct hdsp *hdsp, int rate, int called_internally)
 	}
 
 	if (reject_if_open && (hdsp->capture_pid >= 0 || hdsp->playback_pid >= 0)) {
+<<<<<<< HEAD
 		snd_printk ("Hammerfall-DSP: cannot change speed mode (capture PID = %d, playback PID = %d)\n",
+=======
+		dev_warn(hdsp->card->dev,
+			 "cannot change speed mode (capture PID = %d, playback PID = %d)\n",
+>>>>>>> v3.18
 			    hdsp->capture_pid,
 			    hdsp->playback_pid);
 		return -EBUSY;
@@ -2923,7 +3041,11 @@ static int snd_hdsp_get_dds_offset(struct snd_kcontrol *kcontrol, struct snd_ctl
 {
 	struct hdsp *hdsp = snd_kcontrol_chip(kcontrol);
 
+<<<<<<< HEAD
 	ucontrol->value.integer.value[0] = hdsp_dds_offset(hdsp);
+=======
+	ucontrol->value.enumerated.item[0] = hdsp_dds_offset(hdsp);
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -2935,7 +3057,11 @@ static int snd_hdsp_put_dds_offset(struct snd_kcontrol *kcontrol, struct snd_ctl
 
 	if (!snd_hdsp_use_is_exclusive(hdsp))
 		return -EBUSY;
+<<<<<<< HEAD
 	val = ucontrol->value.integer.value[0];
+=======
+	val = ucontrol->value.enumerated.item[0];
+>>>>>>> v3.18
 	spin_lock_irq(&hdsp->lock);
 	if (val != hdsp_dds_offset(hdsp))
 		change = (hdsp_set_dds_offset(hdsp, val) == 0) ? 1 : 0;
@@ -3791,7 +3917,12 @@ static int snd_hdsp_initialize_memory(struct hdsp *hdsp)
 	    snd_hammerfall_get_buffer(hdsp->pci, &hdsp->playback_dma_buf, HDSP_DMA_AREA_BYTES) < 0) {
 		if (hdsp->capture_dma_buf.area)
 			snd_dma_free_pages(&hdsp->capture_dma_buf);
+<<<<<<< HEAD
 		printk(KERN_ERR "%s: no buffers available\n", hdsp->card_name);
+=======
+		dev_err(hdsp->card->dev,
+			"%s: no buffers available\n", hdsp->card_name);
+>>>>>>> v3.18
 		return -ENOMEM;
 	}
 
@@ -4753,7 +4884,12 @@ static int snd_hdsp_hwdep_ioctl(struct snd_hwdep *hw, struct file *file, unsigne
 			return err;
 
 		if (!(hdsp->state & HDSP_FirmwareLoaded)) {
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "Hammerfall-DSP: firmware needs to be uploaded to the card.\n");
+=======
+			dev_err(hdsp->card->dev,
+				"firmware needs to be uploaded to the card.\n");
+>>>>>>> v3.18
 			return -EINVAL;
 		}
 
@@ -4845,6 +4981,10 @@ static int snd_hdsp_hwdep_ioctl(struct snd_hwdep *hw, struct file *file, unsigne
 			if ((err = hdsp_get_iobox_version(hdsp)) < 0)
 				return err;
 		}
+<<<<<<< HEAD
+=======
+		memset(&hdsp_version, 0, sizeof(hdsp_version));
+>>>>>>> v3.18
 		hdsp_version.io_type = hdsp->io_type;
 		hdsp_version.firmware_rev = hdsp->firmware_rev;
 		if ((err = copy_to_user(argp, &hdsp_version, sizeof(hdsp_version))))
@@ -4863,7 +5003,12 @@ static int snd_hdsp_hwdep_ioctl(struct snd_hwdep *hw, struct file *file, unsigne
 		if (hdsp->state & (HDSP_FirmwareCached | HDSP_FirmwareLoaded))
 			return -EBUSY;
 
+<<<<<<< HEAD
 		snd_printk(KERN_INFO "Hammerfall-DSP: initializing firmware upload\n");
+=======
+		dev_info(hdsp->card->dev,
+			 "initializing firmware upload\n");
+>>>>>>> v3.18
 		firmware = (struct hdsp_firmware __user *)argp;
 
 		if (get_user(firmware_data, &firmware->firmware_data))
@@ -4898,7 +5043,12 @@ static int snd_hdsp_hwdep_ioctl(struct snd_hwdep *hw, struct file *file, unsigne
 			snd_hdsp_initialize_midi_flush(hdsp);
 
 			if ((err = snd_hdsp_create_alsa_devices(hdsp->card, hdsp)) < 0) {
+<<<<<<< HEAD
 				snd_printk(KERN_ERR "Hammerfall-DSP: error creating alsa devices\n");
+=======
+				dev_err(hdsp->card->dev,
+					"error creating alsa devices\n");
+>>>>>>> v3.18
 				return err;
 			}
 		}
@@ -4988,7 +5138,12 @@ static int snd_hdsp_enable_io (struct hdsp *hdsp)
 	int i;
 
 	if (hdsp_fifo_wait (hdsp, 0, 100)) {
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "Hammerfall-DSP: enable_io fifo_wait failed\n");
+=======
+		dev_err(hdsp->card->dev,
+			"enable_io fifo_wait failed\n");
+>>>>>>> v3.18
 		return -EIO;
 	}
 
@@ -5062,25 +5217,45 @@ static int snd_hdsp_create_alsa_devices(struct snd_card *card, struct hdsp *hdsp
 	int err;
 
 	if ((err = snd_hdsp_create_pcm(card, hdsp)) < 0) {
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "Hammerfall-DSP: Error creating pcm interface\n");
+=======
+		dev_err(card->dev,
+			"Error creating pcm interface\n");
+>>>>>>> v3.18
 		return err;
 	}
 
 
 	if ((err = snd_hdsp_create_midi(card, hdsp, 0)) < 0) {
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "Hammerfall-DSP: Error creating first midi interface\n");
+=======
+		dev_err(card->dev,
+			"Error creating first midi interface\n");
+>>>>>>> v3.18
 		return err;
 	}
 
 	if (hdsp->io_type == Digiface || hdsp->io_type == H9652) {
 		if ((err = snd_hdsp_create_midi(card, hdsp, 1)) < 0) {
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "Hammerfall-DSP: Error creating second midi interface\n");
+=======
+			dev_err(card->dev,
+				"Error creating second midi interface\n");
+>>>>>>> v3.18
 			return err;
 		}
 	}
 
 	if ((err = snd_hdsp_create_controls(card, hdsp)) < 0) {
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "Hammerfall-DSP: Error creating ctl interface\n");
+=======
+		dev_err(card->dev,
+			"Error creating ctl interface\n");
+>>>>>>> v3.18
 		return err;
 	}
 
@@ -5093,7 +5268,12 @@ static int snd_hdsp_create_alsa_devices(struct snd_card *card, struct hdsp *hdsp
 	hdsp->playback_substream = NULL;
 
 	if ((err = snd_hdsp_set_defaults(hdsp)) < 0) {
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "Hammerfall-DSP: Error setting default values\n");
+=======
+		dev_err(card->dev,
+			"Error setting default values\n");
+>>>>>>> v3.18
 		return err;
 	}
 
@@ -5103,7 +5283,12 @@ static int snd_hdsp_create_alsa_devices(struct snd_card *card, struct hdsp *hdsp
 			hdsp->port, hdsp->irq);
 
 		if ((err = snd_card_register(card)) < 0) {
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "Hammerfall-DSP: error registering card\n");
+=======
+			dev_err(card->dev,
+				"error registering card\n");
+>>>>>>> v3.18
 			return err;
 		}
 		hdsp->state |= HDSP_InitializationComplete;
@@ -5146,16 +5331,31 @@ static int hdsp_request_fw_loader(struct hdsp *hdsp)
 			fwfile = "digiface_firmware_rev11.bin";
 		break;
 	default:
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "Hammerfall-DSP: invalid io_type %d\n", hdsp->io_type);
+=======
+		dev_err(hdsp->card->dev,
+			"invalid io_type %d\n", hdsp->io_type);
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
 	if (request_firmware(&fw, fwfile, &hdsp->pci->dev)) {
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "Hammerfall-DSP: cannot load firmware %s\n", fwfile);
 		return -ENOENT;
 	}
 	if (fw->size < HDSP_FIRMWARE_SIZE) {
 		snd_printk(KERN_ERR "Hammerfall-DSP: too short firmware size %d (expected %d)\n",
+=======
+		dev_err(hdsp->card->dev,
+			"cannot load firmware %s\n", fwfile);
+		return -ENOENT;
+	}
+	if (fw->size < HDSP_FIRMWARE_SIZE) {
+		dev_err(hdsp->card->dev,
+			"too short firmware size %d (expected %d)\n",
+>>>>>>> v3.18
 			   (int)fw->size, HDSP_FIRMWARE_SIZE);
 		return -EINVAL;
 	}
@@ -5172,13 +5372,23 @@ static int hdsp_request_fw_loader(struct hdsp *hdsp)
 			return err;
 
 		if ((err = snd_hdsp_create_hwdep(hdsp->card, hdsp)) < 0) {
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "Hammerfall-DSP: error creating hwdep device\n");
+=======
+			dev_err(hdsp->card->dev,
+				"error creating hwdep device\n");
+>>>>>>> v3.18
 			return err;
 		}
 		snd_hdsp_initialize_channels(hdsp);
 		snd_hdsp_initialize_midi_flush(hdsp);
 		if ((err = snd_hdsp_create_alsa_devices(hdsp->card, hdsp)) < 0) {
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "Hammerfall-DSP: error creating alsa devices\n");
+=======
+			dev_err(hdsp->card->dev,
+				"error creating alsa devices\n");
+>>>>>>> v3.18
 			return err;
 		}
 	}
@@ -5254,13 +5464,22 @@ static int snd_hdsp_create(struct snd_card *card,
 		return err;
 	hdsp->port = pci_resource_start(pci, 0);
 	if ((hdsp->iobase = ioremap_nocache(hdsp->port, HDSP_IO_EXTENT)) == NULL) {
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "Hammerfall-DSP: unable to remap region 0x%lx-0x%lx\n", hdsp->port, hdsp->port + HDSP_IO_EXTENT - 1);
+=======
+		dev_err(hdsp->card->dev, "unable to remap region 0x%lx-0x%lx\n",
+			hdsp->port, hdsp->port + HDSP_IO_EXTENT - 1);
+>>>>>>> v3.18
 		return -EBUSY;
 	}
 
 	if (request_irq(pci->irq, snd_hdsp_interrupt, IRQF_SHARED,
 			KBUILD_MODNAME, hdsp)) {
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "Hammerfall-DSP: unable to use IRQ %d\n", pci->irq);
+=======
+		dev_err(hdsp->card->dev, "unable to use IRQ %d\n", pci->irq);
+>>>>>>> v3.18
 		return -EBUSY;
 	}
 
@@ -5286,17 +5505,32 @@ static int snd_hdsp_create(struct snd_card *card,
 				   if userspace is not ready for
 				   firmware upload
 				*/
+<<<<<<< HEAD
 				snd_printk(KERN_ERR "Hammerfall-DSP: couldn't get firmware from userspace. try using hdsploader\n");
+=======
+				dev_err(hdsp->card->dev,
+					"couldn't get firmware from userspace. try using hdsploader\n");
+>>>>>>> v3.18
 			else
 				/* init is complete, we return */
 				return 0;
 			/* we defer initialization */
+<<<<<<< HEAD
 			snd_printk(KERN_INFO "Hammerfall-DSP: card initialization pending : waiting for firmware\n");
+=======
+			dev_info(hdsp->card->dev,
+				 "card initialization pending : waiting for firmware\n");
+>>>>>>> v3.18
 			if ((err = snd_hdsp_create_hwdep(card, hdsp)) < 0)
 				return err;
 			return 0;
 		} else {
+<<<<<<< HEAD
 			snd_printk(KERN_INFO "Hammerfall-DSP: Firmware already present, initializing card.\n");
+=======
+			dev_info(hdsp->card->dev,
+				 "Firmware already present, initializing card.\n");
+>>>>>>> v3.18
 			if (hdsp_read(hdsp, HDSP_status2Register) & HDSP_version2)
 				hdsp->io_type = RPM;
 			else if (hdsp_read(hdsp, HDSP_status2Register) & HDSP_version1)
@@ -5380,8 +5614,13 @@ static int snd_hdsp_probe(struct pci_dev *pci,
 		return -ENOENT;
 	}
 
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE,
 			      sizeof(struct hdsp), &card);
+=======
+	err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
+			   sizeof(struct hdsp), &card);
+>>>>>>> v3.18
 	if (err < 0)
 		return err;
 
@@ -5389,7 +5628,10 @@ static int snd_hdsp_probe(struct pci_dev *pci,
 	card->private_free = snd_hdsp_card_free;
 	hdsp->dev = dev;
 	hdsp->pci = pci;
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pci->dev);
+=======
+>>>>>>> v3.18
 
 	if ((err = snd_hdsp_create(card, hdsp)) < 0) {
 		snd_card_free(card);
@@ -5412,7 +5654,10 @@ static int snd_hdsp_probe(struct pci_dev *pci,
 static void snd_hdsp_remove(struct pci_dev *pci)
 {
 	snd_card_free(pci_get_drvdata(pci));
+<<<<<<< HEAD
 	pci_set_drvdata(pci, NULL);
+=======
+>>>>>>> v3.18
 }
 
 static struct pci_driver hdsp_driver = {

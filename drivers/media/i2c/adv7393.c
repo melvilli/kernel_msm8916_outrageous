@@ -33,7 +33,10 @@
 
 #include <media/adv7393.h>
 #include <media/v4l2-device.h>
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 #include <media/v4l2-ctrls.h>
 
 #include "adv7393_regs.h"
@@ -301,6 +304,7 @@ static int adv7393_s_ctrl(struct v4l2_ctrl *ctrl)
 	return -EINVAL;
 }
 
+<<<<<<< HEAD
 static int adv7393_g_chip_ident(struct v4l2_subdev *sd,
 				struct v4l2_dbg_chip_ident *chip)
 {
@@ -309,13 +313,18 @@ static int adv7393_g_chip_ident(struct v4l2_subdev *sd,
 	return v4l2_chip_ident_i2c_client(client, chip, V4L2_IDENT_ADV7393, 0);
 }
 
+=======
+>>>>>>> v3.18
 static const struct v4l2_ctrl_ops adv7393_ctrl_ops = {
 	.s_ctrl = adv7393_s_ctrl,
 };
 
 static const struct v4l2_subdev_core_ops adv7393_core_ops = {
 	.log_status = adv7393_log_status,
+<<<<<<< HEAD
 	.g_chip_ident = adv7393_g_chip_ident,
+=======
+>>>>>>> v3.18
 	.g_ext_ctrls = v4l2_subdev_g_ext_ctrls,
 	.try_ext_ctrls = v4l2_subdev_try_ext_ctrls,
 	.s_ext_ctrls = v4l2_subdev_s_ext_ctrls,
@@ -410,7 +419,11 @@ static int adv7393_probe(struct i2c_client *client,
 	v4l_info(client, "chip found @ 0x%x (%s)\n",
 			client->addr << 1, client->adapter->name);
 
+<<<<<<< HEAD
 	state = kzalloc(sizeof(struct adv7393_state), GFP_KERNEL);
+=======
+	state = devm_kzalloc(&client->dev, sizeof(*state), GFP_KERNEL);
+>>>>>>> v3.18
 	if (state == NULL)
 		return -ENOMEM;
 
@@ -444,16 +457,24 @@ static int adv7393_probe(struct i2c_client *client,
 		int err = state->hdl.error;
 
 		v4l2_ctrl_handler_free(&state->hdl);
+<<<<<<< HEAD
 		kfree(state);
+=======
+>>>>>>> v3.18
 		return err;
 	}
 	v4l2_ctrl_handler_setup(&state->hdl);
 
 	err = adv7393_initialize(&state->sd);
+<<<<<<< HEAD
 	if (err) {
 		v4l2_ctrl_handler_free(&state->hdl);
 		kfree(state);
 	}
+=======
+	if (err)
+		v4l2_ctrl_handler_free(&state->hdl);
+>>>>>>> v3.18
 	return err;
 }
 
@@ -464,7 +485,10 @@ static int adv7393_remove(struct i2c_client *client)
 
 	v4l2_device_unregister_subdev(sd);
 	v4l2_ctrl_handler_free(&state->hdl);
+<<<<<<< HEAD
 	kfree(state);
+=======
+>>>>>>> v3.18
 
 	return 0;
 }

@@ -24,7 +24,11 @@ static ssize_t amd64_inject_section_store(struct device *dev,
 	unsigned long value;
 	int ret;
 
+<<<<<<< HEAD
 	ret = strict_strtoul(data, 10, &value);
+=======
+	ret = kstrtoul(data, 10, &value);
+>>>>>>> v3.18
 	if (ret < 0)
 		return ret;
 
@@ -61,7 +65,11 @@ static ssize_t amd64_inject_word_store(struct device *dev,
 	unsigned long value;
 	int ret;
 
+<<<<<<< HEAD
 	ret = strict_strtoul(data, 10, &value);
+=======
+	ret = kstrtoul(data, 10, &value);
+>>>>>>> v3.18
 	if (ret < 0)
 		return ret;
 
@@ -97,7 +105,11 @@ static ssize_t amd64_inject_ecc_vector_store(struct device *dev,
 	unsigned long value;
 	int ret;
 
+<<<<<<< HEAD
 	ret = strict_strtoul(data, 16, &value);
+=======
+	ret = kstrtoul(data, 16, &value);
+>>>>>>> v3.18
 	if (ret < 0)
 		return ret;
 
@@ -124,7 +136,11 @@ static ssize_t amd64_inject_read_store(struct device *dev,
 	u32 section, word_bits;
 	int ret;
 
+<<<<<<< HEAD
 	ret = strict_strtoul(data, 10, &value);
+=======
+	ret = kstrtoul(data, 10, &value);
+>>>>>>> v3.18
 	if (ret < 0)
 		return ret;
 
@@ -157,7 +173,11 @@ static ssize_t amd64_inject_write_store(struct device *dev,
 	unsigned long value;
 	int ret;
 
+<<<<<<< HEAD
 	ret = strict_strtoul(data, 10, &value);
+=======
+	ret = kstrtoul(data, 10, &value);
+>>>>>>> v3.18
 	if (ret < 0)
 		return ret;
 

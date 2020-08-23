@@ -673,7 +673,11 @@ static bool pfn_covered(unsigned long start_pfn, unsigned long pfn_cnt)
 		 * If the pfn range we are dealing with is not in the current
 		 * "hot add block", move on.
 		 */
+<<<<<<< HEAD
 		if (start_pfn < has->start_pfn || start_pfn >= has->end_pfn)
+=======
+		if ((start_pfn >= has->end_pfn))
+>>>>>>> v3.18
 			continue;
 		/*
 		 * If the current hot add-request extends beyond
@@ -728,7 +732,11 @@ static unsigned long handle_pg_range(unsigned long pg_start,
 		 * If the pfn range we are dealing with is not in the current
 		 * "hot add block", move on.
 		 */
+<<<<<<< HEAD
 		if (start_pfn < has->start_pfn || start_pfn >= has->end_pfn)
+=======
+		if ((start_pfn >= has->end_pfn))
+>>>>>>> v3.18
 			continue;
 
 		old_covered_state = has->covered_end_pfn;
@@ -832,7 +840,10 @@ static void hot_add_req(struct work_struct *dummy)
 	memset(&resp, 0, sizeof(struct dm_hot_add_response));
 	resp.hdr.type = DM_MEM_HOT_ADD_RESPONSE;
 	resp.hdr.size = sizeof(struct dm_hot_add_response);
+<<<<<<< HEAD
 	resp.hdr.trans_id = atomic_inc_return(&trans_id);
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_MEMORY_HOTPLUG
 	pg_start = dm->ha_wrk.ha_page_range.finfo.start_page;
@@ -894,6 +905,10 @@ static void hot_add_req(struct work_struct *dummy)
 		pr_info("Memory hot add failed\n");
 
 	dm->state = DM_INITIALIZED;
+<<<<<<< HEAD
+=======
+	resp.hdr.trans_id = atomic_inc_return(&trans_id);
+>>>>>>> v3.18
 	vmbus_sendpacket(dm->dev->channel, &resp,
 			sizeof(struct dm_hot_add_response),
 			(unsigned long)NULL,
@@ -1102,7 +1117,10 @@ static void balloon_up(struct work_struct *dummy)
 		bl_resp = (struct dm_balloon_response *)send_buffer;
 		memset(send_buffer, 0, PAGE_SIZE);
 		bl_resp->hdr.type = DM_BALLOON_RESPONSE;
+<<<<<<< HEAD
 		bl_resp->hdr.trans_id = atomic_inc_return(&trans_id);
+=======
+>>>>>>> v3.18
 		bl_resp->hdr.size = sizeof(struct dm_balloon_response);
 		bl_resp->more_pages = 1;
 
@@ -1130,6 +1148,10 @@ static void balloon_up(struct work_struct *dummy)
 		 */
 
 		do {
+<<<<<<< HEAD
+=======
+			bl_resp->hdr.trans_id = atomic_inc_return(&trans_id);
+>>>>>>> v3.18
 			ret = vmbus_sendpacket(dm_device.dev->channel,
 						bl_resp,
 						bl_resp->hdr.size,
@@ -1194,7 +1216,12 @@ static int dm_thread_func(void *dm_dev)
 	int t;
 
 	while (!kthread_should_stop()) {
+<<<<<<< HEAD
 		t = wait_for_completion_timeout(&dm_device.config_event, 1*HZ);
+=======
+		t = wait_for_completion_interruptible_timeout(
+						&dm_device.config_event, 1*HZ);
+>>>>>>> v3.18
 		/*
 		 * The host expects us to post information on the memory
 		 * pressure every second.
@@ -1549,5 +1576,8 @@ static int __init init_balloon_drv(void)
 module_init(init_balloon_drv);
 
 MODULE_DESCRIPTION("Hyper-V Balloon");
+<<<<<<< HEAD
 MODULE_VERSION(HV_DRV_VERSION);
+=======
+>>>>>>> v3.18
 MODULE_LICENSE("GPL");

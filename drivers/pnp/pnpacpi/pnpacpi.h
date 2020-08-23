@@ -1,7 +1,10 @@
 #ifndef ACPI_PNP_H
 #define ACPI_PNP_H
 
+<<<<<<< HEAD
 #include <acpi/acpi_bus.h>
+=======
+>>>>>>> v3.18
 #include <linux/acpi.h>
 #include <linux/pnp.h>
 

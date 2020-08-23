@@ -40,6 +40,10 @@
 #include <sound/pcm_params.h>
 #include <sound/soc.h>
 #include <sound/dmaengine_pcm.h>
+<<<<<<< HEAD
+=======
+#include <sound/omap-pcm.h>
+>>>>>>> v3.18
 
 #include "omap-mcpdm.h"
 
@@ -66,7 +70,10 @@ struct omap_mcpdm {
 	bool restart;
 
 	struct snd_dmaengine_dai_dma_data dma_data[2];
+<<<<<<< HEAD
 	unsigned int dma_req[2];
+=======
+>>>>>>> v3.18
 };
 
 /*
@@ -75,12 +82,20 @@ struct omap_mcpdm {
 
 static inline void omap_mcpdm_write(struct omap_mcpdm *mcpdm, u16 reg, u32 val)
 {
+<<<<<<< HEAD
 	__raw_writel(val, mcpdm->io_base + reg);
+=======
+	writel_relaxed(val, mcpdm->io_base + reg);
+>>>>>>> v3.18
 }
 
 static inline int omap_mcpdm_read(struct omap_mcpdm *mcpdm, u16 reg)
 {
+<<<<<<< HEAD
 	return __raw_readl(mcpdm->io_base + reg);
+=======
+	return readl_relaxed(mcpdm->io_base + reg);
+>>>>>>> v3.18
 }
 
 #ifdef DEBUG
@@ -266,9 +281,12 @@ static int omap_mcpdm_dai_startup(struct snd_pcm_substream *substream,
 	}
 	mutex_unlock(&mcpdm->mutex);
 
+<<<<<<< HEAD
 	snd_soc_dai_set_dma_data(dai, substream,
 				 &mcpdm->dma_data[substream->stream]);
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -393,8 +411,13 @@ static int omap_mcpdm_probe(struct snd_soc_dai *dai)
 	pm_runtime_get_sync(mcpdm->dev);
 	omap_mcpdm_write(mcpdm, MCPDM_REG_CTRL, 0x00);
 
+<<<<<<< HEAD
 	ret = request_irq(mcpdm->irq, omap_mcpdm_irq_handler, 0, "McPDM",
 			  (void *)mcpdm);
+=======
+	ret = devm_request_irq(mcpdm->dev, mcpdm->irq, omap_mcpdm_irq_handler,
+				0, "McPDM", (void *)mcpdm);
+>>>>>>> v3.18
 
 	pm_runtime_put_sync(mcpdm->dev);
 
@@ -407,6 +430,14 @@ static int omap_mcpdm_probe(struct snd_soc_dai *dai)
 	mcpdm->config[SNDRV_PCM_STREAM_PLAYBACK].threshold = 2;
 	mcpdm->config[SNDRV_PCM_STREAM_CAPTURE].threshold =
 							MCPDM_UP_THRES_MAX - 3;
+<<<<<<< HEAD
+=======
+
+	snd_soc_dai_init_dma_data(dai,
+				  &mcpdm->dma_data[SNDRV_PCM_STREAM_PLAYBACK],
+				  &mcpdm->dma_data[SNDRV_PCM_STREAM_CAPTURE]);
+
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -414,7 +445,10 @@ static int omap_mcpdm_remove(struct snd_soc_dai *dai)
 {
 	struct omap_mcpdm *mcpdm = snd_soc_dai_get_drvdata(dai);
 
+<<<<<<< HEAD
 	free_irq(mcpdm->irq, (void *)mcpdm);
+=======
+>>>>>>> v3.18
 	pm_runtime_disable(mcpdm->dev);
 
 	return 0;
@@ -462,6 +496,10 @@ static int asoc_mcpdm_probe(struct platform_device *pdev)
 {
 	struct omap_mcpdm *mcpdm;
 	struct resource *res;
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 
 	mcpdm = devm_kzalloc(&pdev->dev, sizeof(struct omap_mcpdm), GFP_KERNEL);
 	if (!mcpdm)
@@ -478,6 +516,7 @@ static int asoc_mcpdm_probe(struct platform_device *pdev)
 	mcpdm->dma_data[0].addr = res->start + MCPDM_REG_DN_DATA;
 	mcpdm->dma_data[1].addr = res->start + MCPDM_REG_UP_DATA;
 
+<<<<<<< HEAD
 	res = platform_get_resource_byname(pdev, IORESOURCE_DMA, "dn_link");
 	if (!res)
 		return -ENODEV;
@@ -496,6 +535,12 @@ static int asoc_mcpdm_probe(struct platform_device *pdev)
 	if (res == NULL)
 		return -ENOMEM;
 
+=======
+	mcpdm->dma_data[0].filter_data = "dn_link";
+	mcpdm->dma_data[1].filter_data = "up_link";
+
+	res = platform_get_resource_byname(pdev, IORESOURCE_MEM, "mpu");
+>>>>>>> v3.18
 	mcpdm->io_base = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(mcpdm->io_base))
 		return PTR_ERR(mcpdm->io_base);
@@ -506,6 +551,7 @@ static int asoc_mcpdm_probe(struct platform_device *pdev)
 
 	mcpdm->dev = &pdev->dev;
 
+<<<<<<< HEAD
 	return snd_soc_register_component(&pdev->dev, &omap_mcpdm_component,
 					  &omap_mcpdm_dai, 1);
 }
@@ -514,6 +560,15 @@ static int asoc_mcpdm_remove(struct platform_device *pdev)
 {
 	snd_soc_unregister_component(&pdev->dev);
 	return 0;
+=======
+	ret =  devm_snd_soc_register_component(&pdev->dev,
+					       &omap_mcpdm_component,
+					       &omap_mcpdm_dai, 1);
+	if (ret)
+		return ret;
+
+	return omap_pcm_platform_register(&pdev->dev);
+>>>>>>> v3.18
 }
 
 static const struct of_device_id omap_mcpdm_of_match[] = {
@@ -530,7 +585,10 @@ static struct platform_driver asoc_mcpdm_driver = {
 	},
 
 	.probe	= asoc_mcpdm_probe,
+<<<<<<< HEAD
 	.remove	= asoc_mcpdm_remove,
+=======
+>>>>>>> v3.18
 };
 
 module_platform_driver(asoc_mcpdm_driver);

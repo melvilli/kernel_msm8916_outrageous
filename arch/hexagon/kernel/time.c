@@ -191,9 +191,12 @@ void __init time_init_deferred(void)
 {
 	struct resource *resource = NULL;
 	struct clock_event_device *ce_dev = &hexagon_clockevent_dev;
+<<<<<<< HEAD
 	struct device_node *dn;
 	struct resource r;
 	int err;
+=======
+>>>>>>> v3.18
 
 	ce_dev->cpumask = cpu_all_mask;
 
@@ -232,6 +235,18 @@ void __init time_init(void)
 	late_time_init = time_init_deferred;
 }
 
+<<<<<<< HEAD
+=======
+void __delay(unsigned long cycles)
+{
+	unsigned long long start = __vmgettime();
+
+	while ((__vmgettime() - start) < cycles)
+		cpu_relax();
+}
+EXPORT_SYMBOL(__delay);
+
+>>>>>>> v3.18
 /*
  * This could become parametric or perhaps even computed at run-time,
  * but for now we take the observed simulator jitter.

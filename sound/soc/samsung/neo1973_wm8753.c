@@ -20,6 +20,10 @@
 
 #include <sound/soc.h>
 
+<<<<<<< HEAD
+=======
+#include <mach/gpio-samsung.h>
+>>>>>>> v3.18
 #include <asm/mach-types.h>
 #include "regs-iis.h"
 
@@ -191,6 +195,7 @@ static struct snd_soc_ops neo1973_voice_ops = {
 	.hw_free = neo1973_voice_hw_free,
 };
 
+<<<<<<< HEAD
 /* Shared routes and controls */
 
 static const struct snd_soc_dapm_widget neo1973_wm8753_dapm_widgets[] = {
@@ -229,6 +234,8 @@ static const struct snd_kcontrol_new neo1973_wm8753_controls[] = {
 
 /* GTA02 specific routes and controls */
 
+=======
+>>>>>>> v3.18
 static int gta02_speaker_enabled;
 
 static int lm4853_set_spk(struct snd_kcontrol *kcontrol,
@@ -256,7 +263,38 @@ static int lm4853_event(struct snd_soc_dapm_widget *w,
 	return 0;
 }
 
+<<<<<<< HEAD
 static const struct snd_soc_dapm_route neo1973_gta02_routes[] = {
+=======
+static const struct snd_soc_dapm_widget neo1973_wm8753_dapm_widgets[] = {
+	SND_SOC_DAPM_LINE("GSM Line Out", NULL),
+	SND_SOC_DAPM_LINE("GSM Line In", NULL),
+	SND_SOC_DAPM_MIC("Headset Mic", NULL),
+	SND_SOC_DAPM_MIC("Handset Mic", NULL),
+	SND_SOC_DAPM_SPK("Handset Spk", NULL),
+	SND_SOC_DAPM_SPK("Stereo Out", lm4853_event),
+};
+
+static const struct snd_soc_dapm_route neo1973_wm8753_routes[] = {
+	/* Connections to the GSM Module */
+	{"GSM Line Out", NULL, "MONO1"},
+	{"GSM Line Out", NULL, "MONO2"},
+	{"RXP", NULL, "GSM Line In"},
+	{"RXN", NULL, "GSM Line In"},
+
+	/* Connections to Headset */
+	{"MIC1", NULL, "Mic Bias"},
+	{"Mic Bias", NULL, "Headset Mic"},
+
+	/* Call Mic */
+	{"MIC2", NULL, "Mic Bias"},
+	{"MIC2N", NULL, "Mic Bias"},
+	{"Mic Bias", NULL, "Handset Mic"},
+
+	/* Connect the ALC pins */
+	{"ACIN", NULL, "ACOP"},
+
+>>>>>>> v3.18
 	/* Connections to the amp */
 	{"Stereo Out", NULL, "LOUT1"},
 	{"Stereo Out", NULL, "ROUT1"},
@@ -266,7 +304,15 @@ static const struct snd_soc_dapm_route neo1973_gta02_routes[] = {
 	{"Handset Spk", NULL, "ROUT2"},
 };
 
+<<<<<<< HEAD
 static const struct snd_kcontrol_new neo1973_gta02_wm8753_controls[] = {
+=======
+static const struct snd_kcontrol_new neo1973_wm8753_controls[] = {
+	SOC_DAPM_PIN_SWITCH("GSM Line Out"),
+	SOC_DAPM_PIN_SWITCH("GSM Line In"),
+	SOC_DAPM_PIN_SWITCH("Headset Mic"),
+	SOC_DAPM_PIN_SWITCH("Handset Mic"),
+>>>>>>> v3.18
 	SOC_DAPM_PIN_SWITCH("Handset Spk"),
 	SOC_DAPM_PIN_SWITCH("Stereo Out"),
 
@@ -275,6 +321,7 @@ static const struct snd_kcontrol_new neo1973_gta02_wm8753_controls[] = {
 		lm4853_set_spk),
 };
 
+<<<<<<< HEAD
 static const struct snd_soc_dapm_widget neo1973_gta02_wm8753_dapm_widgets[] = {
 	SND_SOC_DAPM_SPK("Handset Spk", NULL),
 	SND_SOC_DAPM_SPK("Stereo Out", lm4853_event),
@@ -355,6 +402,27 @@ static int neo1973_wm8753_init(struct snd_soc_pcm_runtime *rtd)
 		if (ret)
 			return ret;
 	}
+=======
+static int neo1973_wm8753_init(struct snd_soc_pcm_runtime *rtd)
+{
+	struct snd_soc_card *card = rtd->card;
+
+	/* set endpoints to default off mode */
+	snd_soc_dapm_disable_pin(&card->dapm, "GSM Line Out");
+	snd_soc_dapm_disable_pin(&card->dapm, "GSM Line In");
+	snd_soc_dapm_disable_pin(&card->dapm, "Headset Mic");
+	snd_soc_dapm_disable_pin(&card->dapm, "Handset Mic");
+	snd_soc_dapm_disable_pin(&card->dapm, "Stereo Out");
+	snd_soc_dapm_disable_pin(&card->dapm, "Handset Spk");
+
+	/* allow audio paths from the GSM modem to run during suspend */
+	snd_soc_dapm_ignore_suspend(&card->dapm, "GSM Line Out");
+	snd_soc_dapm_ignore_suspend(&card->dapm, "GSM Line In");
+	snd_soc_dapm_ignore_suspend(&card->dapm, "Headset Mic");
+	snd_soc_dapm_ignore_suspend(&card->dapm, "Handset Mic");
+	snd_soc_dapm_ignore_suspend(&card->dapm, "Stereo Out");
+	snd_soc_dapm_ignore_suspend(&card->dapm, "Handset Spk");
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -373,7 +441,11 @@ static struct snd_soc_dai_link neo1973_dai[] = {
 { /* Voice via BT */
 	.name = "Bluetooth",
 	.stream_name = "Voice",
+<<<<<<< HEAD
 	.cpu_dai_name = "dfbmcs320-pcm",
+=======
+	.cpu_dai_name = "bt-sco-pcm",
+>>>>>>> v3.18
 	.codec_dai_name = "wm8753-voice",
 	.codec_name = "wm8753.0-001a",
 	.ops = &neo1973_voice_ops,
@@ -408,6 +480,17 @@ static struct snd_soc_card neo1973 = {
 	.num_aux_devs = ARRAY_SIZE(neo1973_aux_devs),
 	.codec_conf = neo1973_codec_conf,
 	.num_configs = ARRAY_SIZE(neo1973_codec_conf),
+<<<<<<< HEAD
+=======
+
+	.controls = neo1973_wm8753_controls,
+	.num_controls = ARRAY_SIZE(neo1973_wm8753_controls),
+	.dapm_widgets = neo1973_wm8753_dapm_widgets,
+	.num_dapm_widgets = ARRAY_SIZE(neo1973_wm8753_dapm_widgets),
+	.dapm_routes = neo1973_wm8753_routes,
+	.num_dapm_routes = ARRAY_SIZE(neo1973_wm8753_routes),
+	.fully_routed = true,
+>>>>>>> v3.18
 };
 
 static struct platform_device *neo1973_snd_device;

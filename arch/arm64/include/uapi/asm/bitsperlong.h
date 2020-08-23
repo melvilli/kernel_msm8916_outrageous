@@ -16,11 +16,15 @@
 #ifndef __ASM_BITSPERLONG_H
 #define __ASM_BITSPERLONG_H
 
+<<<<<<< HEAD
 #ifdef __aarch64__
 #define __BITS_PER_LONG 64
 #else
 #define __BITS_PER_LONG 32
 #endif
+=======
+#define __BITS_PER_LONG 64
+>>>>>>> v3.18
 
 #include <asm-generic/bitsperlong.h>
 

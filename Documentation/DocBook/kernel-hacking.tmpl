@@ -671,7 +671,11 @@ printk(KERN_INFO "my ip: %pI4\n", &amp;ipaddress);
 
   <sect1 id="routines-local-irqs">
    <title><function>local_irq_save()</function>/<function>local_irq_restore()</function>
+<<<<<<< HEAD
     <filename class="headerfile">include/asm/system.h</filename>
+=======
+    <filename class="headerfile">include/linux/irqflags.h</filename>
+>>>>>>> v3.18
    </title>
 
    <para>
@@ -850,6 +854,7 @@ printk(KERN_INFO "my ip: %pI4\n", &amp;ipaddress);
     <returnvalue>-ERESTARTSYS</returnvalue> if a signal is received.
     The <function>wait_event()</function> version ignores signals.
    </para>
+<<<<<<< HEAD
    <para>
    Do not use the <function>sleep_on()</function> function family -
    it is very easy to accidentally introduce races; almost certainly
@@ -860,6 +865,8 @@ printk(KERN_INFO "my ip: %pI4\n", &amp;ipaddress);
    <function>set_current_state()</function>) on each iteration to avoid
    busy-looping.
    </para>
+=======
+>>>>>>> v3.18
  
   </sect1>
 

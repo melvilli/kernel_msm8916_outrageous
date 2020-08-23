@@ -10,6 +10,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
@@ -32,10 +33,24 @@
 /* According to the mx27 Datasheet the reset procedure should take up to about
  * 1350us. We set the timeout to 500*100us = 50ms for sure */
 #define MXC_W1_RESET_TIMEOUT 500
+=======
+ */
+
+#include <linux/clk.h>
+#include <linux/delay.h>
+#include <linux/io.h>
+#include <linux/jiffies.h>
+#include <linux/module.h>
+#include <linux/platform_device.h>
+
+#include "../w1.h"
+#include "../w1_int.h"
+>>>>>>> v3.18
 
 /*
  * MXC W1 Register offsets
  */
+<<<<<<< HEAD
 #define MXC_W1_CONTROL          0x00
 #define MXC_W1_TIME_DIVIDER     0x02
 #define MXC_W1_RESET            0x04
@@ -47,6 +62,19 @@
 struct mxc_w1_device {
 	void __iomem *regs;
 	unsigned int clkdiv;
+=======
+#define MXC_W1_CONTROL		0x00
+# define MXC_W1_CONTROL_RDST	BIT(3)
+# define MXC_W1_CONTROL_WR(x)	BIT(5 - (x))
+# define MXC_W1_CONTROL_PST	BIT(6)
+# define MXC_W1_CONTROL_RPP	BIT(7)
+#define MXC_W1_TIME_DIVIDER	0x02
+#define MXC_W1_RESET		0x04
+# define MXC_W1_RESET_RST	BIT(0)
+
+struct mxc_w1_device {
+	void __iomem *regs;
+>>>>>>> v3.18
 	struct clk *clk;
 	struct w1_bus_master bus_master;
 };
@@ -58,6 +86,7 @@ struct mxc_w1_device {
  */
 static u8 mxc_w1_ds2_reset_bus(void *data)
 {
+<<<<<<< HEAD
 	u8 reg_val;
 	unsigned int timeout_cnt = 0;
 	struct mxc_w1_device *dev = data;
@@ -76,6 +105,27 @@ static u8 mxc_w1_ds2_reset_bus(void *data)
 		udelay(100);
 	}
 	return (reg_val >> 7) & 0x1;
+=======
+	struct mxc_w1_device *dev = data;
+	unsigned long timeout;
+
+	writeb(MXC_W1_CONTROL_RPP, dev->regs + MXC_W1_CONTROL);
+
+	/* Wait for reset sequence 511+512us, use 1500us for sure */
+	timeout = jiffies + usecs_to_jiffies(1500);
+
+	udelay(511 + 512);
+
+	do {
+		u8 ctrl = readb(dev->regs + MXC_W1_CONTROL);
+
+		/* PST bit is valid after the RPP bit is self-cleared */
+		if (!(ctrl & MXC_W1_CONTROL_RPP))
+			return !(ctrl & MXC_W1_CONTROL_PST);
+	} while (time_is_after_jiffies(timeout));
+
+	return 1;
+>>>>>>> v3.18
 }
 
 /*
@@ -85,6 +135,7 @@ static u8 mxc_w1_ds2_reset_bus(void *data)
  */
 static u8 mxc_w1_ds2_touch_bit(void *data, u8 bit)
 {
+<<<<<<< HEAD
 	struct mxc_w1_device *mdev = data;
 	void __iomem *ctrl_addr = mdev->regs + MXC_W1_CONTROL;
 	unsigned int timeout_cnt = 400; /* Takes max. 120us according to
@@ -101,13 +152,41 @@ static u8 mxc_w1_ds2_touch_bit(void *data, u8 bit)
 	}
 
 	return ((__raw_readb(ctrl_addr)) >> 3) & 0x1;
+=======
+	struct mxc_w1_device *dev = data;
+	unsigned long timeout;
+
+	writeb(MXC_W1_CONTROL_WR(bit), dev->regs + MXC_W1_CONTROL);
+
+	/* Wait for read/write bit (60us, Max 120us), use 200us for sure */
+	timeout = jiffies + usecs_to_jiffies(200);
+
+	udelay(60);
+
+	do {
+		u8 ctrl = readb(dev->regs + MXC_W1_CONTROL);
+
+		/* RDST bit is valid after the WR1/RD bit is self-cleared */
+		if (!(ctrl & MXC_W1_CONTROL_WR(bit)))
+			return !!(ctrl & MXC_W1_CONTROL_RDST);
+	} while (time_is_after_jiffies(timeout));
+
+	return 0;
+>>>>>>> v3.18
 }
 
 static int mxc_w1_probe(struct platform_device *pdev)
 {
 	struct mxc_w1_device *mdev;
+<<<<<<< HEAD
 	struct resource *res;
 	int err = 0;
+=======
+	unsigned long clkrate;
+	struct resource *res;
+	unsigned int clkdiv;
+	int err;
+>>>>>>> v3.18
 
 	mdev = devm_kzalloc(&pdev->dev, sizeof(struct mxc_w1_device),
 			    GFP_KERNEL);
@@ -118,20 +197,46 @@ static int mxc_w1_probe(struct platform_device *pdev)
 	if (IS_ERR(mdev->clk))
 		return PTR_ERR(mdev->clk);
 
+<<<<<<< HEAD
 	mdev->clkdiv = (clk_get_rate(mdev->clk) / 1000000) - 1;
+=======
+	clkrate = clk_get_rate(mdev->clk);
+	if (clkrate < 10000000)
+		dev_warn(&pdev->dev,
+			 "Low clock frequency causes improper function\n");
+
+	clkdiv = DIV_ROUND_CLOSEST(clkrate, 1000000);
+	clkrate /= clkdiv;
+	if ((clkrate < 980000) || (clkrate > 1020000))
+		dev_warn(&pdev->dev,
+			 "Incorrect time base frequency %lu Hz\n", clkrate);
+>>>>>>> v3.18
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	mdev->regs = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(mdev->regs))
 		return PTR_ERR(mdev->regs);
 
+<<<<<<< HEAD
 	clk_prepare_enable(mdev->clk);
 	__raw_writeb(mdev->clkdiv, mdev->regs + MXC_W1_TIME_DIVIDER);
+=======
+	err = clk_prepare_enable(mdev->clk);
+	if (err)
+		return err;
+
+	/* Software reset 1-Wire module */
+	writeb(MXC_W1_RESET_RST, mdev->regs + MXC_W1_RESET);
+	writeb(0, mdev->regs + MXC_W1_RESET);
+
+	writeb(clkdiv - 1, mdev->regs + MXC_W1_TIME_DIVIDER);
+>>>>>>> v3.18
 
 	mdev->bus_master.data = mdev;
 	mdev->bus_master.reset_bus = mxc_w1_ds2_reset_bus;
 	mdev->bus_master.touch_bit = mxc_w1_ds2_touch_bit;
 
+<<<<<<< HEAD
 	err = w1_add_master_device(&mdev->bus_master);
 
 	if (err)
@@ -139,6 +244,15 @@ static int mxc_w1_probe(struct platform_device *pdev)
 
 	platform_set_drvdata(pdev, mdev);
 	return 0;
+=======
+	platform_set_drvdata(pdev, mdev);
+
+	err = w1_add_master_device(&mdev->bus_master);
+	if (err)
+		clk_disable_unprepare(mdev->clk);
+
+	return err;
+>>>>>>> v3.18
 }
 
 /*
@@ -152,8 +266,11 @@ static int mxc_w1_remove(struct platform_device *pdev)
 
 	clk_disable_unprepare(mdev->clk);
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -166,6 +283,10 @@ MODULE_DEVICE_TABLE(of, mxc_w1_dt_ids);
 static struct platform_driver mxc_w1_driver = {
 	.driver = {
 		.name = "mxc_w1",
+<<<<<<< HEAD
+=======
+		.owner = THIS_MODULE,
+>>>>>>> v3.18
 		.of_match_table = mxc_w1_dt_ids,
 	},
 	.probe = mxc_w1_probe,

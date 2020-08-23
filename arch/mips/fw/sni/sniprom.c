@@ -40,7 +40,12 @@
 
 #ifdef CONFIG_64BIT
 
+<<<<<<< HEAD
 static u8 o32_stk[16384];
+=======
+/* O32 stack has to be 8-byte aligned. */
+static u64 o32_stk[4096];
+>>>>>>> v3.18
 #define O32_STK	  &o32_stk[sizeof(o32_stk)]
 
 #define __PROM_O32(fun, arg) fun arg __asm__(#fun); \

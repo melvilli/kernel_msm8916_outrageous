@@ -182,6 +182,10 @@ struct at_lli {
  * @txd: support for the async_tx api
  * @desc_node: node on the channed descriptors list
  * @len: total transaction bytecount
+<<<<<<< HEAD
+=======
+ * @tx_width: transfer width
+>>>>>>> v3.18
  */
 struct at_desc {
 	/* FIRST values the hardware uses */
@@ -192,6 +196,10 @@ struct at_desc {
 	struct dma_async_tx_descriptor	txd;
 	struct list_head		desc_node;
 	size_t				len;
+<<<<<<< HEAD
+=======
+	u32				tx_width;
+>>>>>>> v3.18
 };
 
 static inline struct at_desc *
@@ -211,6 +219,10 @@ txd_to_at_desc(struct dma_async_tx_descriptor *txd)
 enum atc_status {
 	ATC_IS_ERROR = 0,
 	ATC_IS_PAUSED = 1,
+<<<<<<< HEAD
+=======
+	ATC_IS_BTC = 2,
+>>>>>>> v3.18
 	ATC_IS_CYCLIC = 24,
 };
 
@@ -228,6 +240,10 @@ enum atc_status {
  * @save_cfg: configuration register that is saved on suspend/resume cycle
  * @save_dscr: for cyclic operations, preserve next descriptor address in
  *             the cyclic list on suspend/resume cycle
+<<<<<<< HEAD
+=======
+ * @remain_desc: to save remain desc length
+>>>>>>> v3.18
  * @dma_sconfig: configuration for slave transfers, passed via DMA_SLAVE_CONFIG
  * @lock: serializes enqueue/dequeue operations to descriptors lists
  * @active_list: list of descriptors dmaengine is being running on
@@ -246,6 +262,10 @@ struct at_dma_chan {
 	struct tasklet_struct	tasklet;
 	u32			save_cfg;
 	u32			save_dscr;
+<<<<<<< HEAD
+=======
+	u32			remain_desc;
+>>>>>>> v3.18
 	struct dma_slave_config dma_sconfig;
 
 	spinlock_t		lock;
@@ -342,10 +362,13 @@ static struct device *chan2dev(struct dma_chan *chan)
 {
 	return &chan->dev->device;
 }
+<<<<<<< HEAD
 static struct device *chan2parent(struct dma_chan *chan)
 {
 	return chan->dev->device.parent;
 }
+=======
+>>>>>>> v3.18
 
 #if defined(VERBOSE_DEBUG)
 static void vdbg_dump_regs(struct at_dma_chan *atchan)

@@ -674,7 +674,11 @@ receive_emsg(struct IsdnCardState *cs)
 					ptr--;
 					*ptr++ = '\n';
 					*ptr = 0;
+<<<<<<< HEAD
 					HiSax_putstatus(cs, NULL, cs->dlog);
+=======
+					HiSax_putstatus(cs, NULL, "%s", cs->dlog);
+>>>>>>> v3.18
 				} else
 					HiSax_putstatus(cs, "LogEcho: ", "warning Frame too big (%d)", skb->len);
 			}

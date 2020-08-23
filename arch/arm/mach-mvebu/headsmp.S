@@ -21,6 +21,7 @@
 #include <linux/linkage.h>
 #include <linux/init.h>
 
+<<<<<<< HEAD
 /*
  * At this stage the secondary CPUs don't have acces yet to the MMU, so
  * we have to provide physical addresses
@@ -28,6 +29,9 @@
 #define ARMADA_XP_CFB_BASE	     0xD0020200
 
 	__CPUINIT
+=======
+#include <asm/assembler.h>
+>>>>>>> v3.18
 
 /*
  * Armada XP specific entry point for secondary CPUs.
@@ -35,6 +39,7 @@
  * startup
  */
 ENTRY(armada_xp_secondary_startup)
+<<<<<<< HEAD
 
 	/* Read CPU id */
 	mrc     p15, 0, r1, c0, c0, 5
@@ -44,6 +49,14 @@ ENTRY(armada_xp_secondary_startup)
 	ldr     r0, =ARMADA_XP_CFB_BASE
 
 	bl	ll_set_cpu_coherent
+=======
+ ARM_BE8(setend	be )			@ go BE8 if entered LE
+
+	bl	ll_add_cpu_to_smp_group
+
+	bl	ll_enable_coherency
+
+>>>>>>> v3.18
 	b	secondary_startup
 
 ENDPROC(armada_xp_secondary_startup)

@@ -39,6 +39,7 @@ Example:
 		#gpio-cells = <4>;
 		gpio-controller;
 	};
+<<<<<<< HEAD
 
 
 Samsung S3C24XX GPIO Controller
@@ -82,3 +83,5 @@ Example:
 		#gpio-cells = <3>;
 		gpio-controller;
 	};
+=======
+>>>>>>> v3.18

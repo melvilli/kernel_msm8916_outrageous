@@ -42,6 +42,11 @@
 #include <linux/uaccess.h>
 #include <linux/proc_fs.h>
 #include <linux/of.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 #include <linux/of_platform.h>
 #include <asm/dcr.h>
 #include <asm/dcr-regs.h>
@@ -531,6 +536,7 @@ static void ppc440spe_desc_init_memcpy(struct ppc440spe_adma_desc_slot *desc,
 }
 
 /**
+<<<<<<< HEAD
  * ppc440spe_desc_init_memset - initialize the descriptor for MEMSET operation
  */
 static void ppc440spe_desc_init_memset(struct ppc440spe_adma_desc_slot *desc,
@@ -554,6 +560,8 @@ static void ppc440spe_desc_init_memset(struct ppc440spe_adma_desc_slot *desc,
 }
 
 /**
+=======
+>>>>>>> v3.18
  * ppc440spe_desc_set_src_addr - set source address into the descriptor
  */
 static void ppc440spe_desc_set_src_addr(struct ppc440spe_adma_desc_slot *desc,
@@ -802,6 +810,7 @@ static void ppc440spe_desc_set_link(struct ppc440spe_adma_chan *chan,
 }
 
 /**
+<<<<<<< HEAD
  * ppc440spe_desc_get_src_addr - extract the source address from the descriptor
  */
 static u32 ppc440spe_desc_get_src_addr(struct ppc440spe_adma_desc_slot *desc,
@@ -1014,6 +1023,8 @@ static u32 ppc440spe_desc_get_dst_num(struct ppc440spe_adma_desc_slot *desc,
 }
 
 /**
+=======
+>>>>>>> v3.18
  * ppc440spe_desc_get_link - get the address of the descriptor that
  * follows this one
  */
@@ -1705,6 +1716,7 @@ static void ppc440spe_adma_free_slots(struct ppc440spe_adma_desc_slot *slot,
 	}
 }
 
+<<<<<<< HEAD
 static void ppc440spe_adma_unmap(struct ppc440spe_adma_chan *chan,
 				 struct ppc440spe_adma_desc_slot *desc)
 {
@@ -1742,6 +1754,8 @@ static void ppc440spe_adma_unmap(struct ppc440spe_adma_chan *chan,
 	}
 }
 
+=======
+>>>>>>> v3.18
 /**
  * ppc440spe_adma_run_tx_complete_actions - call functions to be called
  * upon completion
@@ -1751,8 +1765,11 @@ static dma_cookie_t ppc440spe_adma_run_tx_complete_actions(
 		struct ppc440spe_adma_chan *chan,
 		dma_cookie_t cookie)
 {
+<<<<<<< HEAD
 	int i;
 
+=======
+>>>>>>> v3.18
 	BUG_ON(desc->async_tx.cookie < 0);
 	if (desc->async_tx.cookie > 0) {
 		cookie = desc->async_tx.cookie;
@@ -1765,6 +1782,7 @@ static dma_cookie_t ppc440spe_adma_run_tx_complete_actions(
 			desc->async_tx.callback(
 				desc->async_tx.callback_param);
 
+<<<<<<< HEAD
 		/* unmap dma addresses
 		 * (unmap_single vs unmap_page?)
 		 *
@@ -1785,6 +1803,9 @@ static dma_cookie_t ppc440spe_adma_run_tx_complete_actions(
 				unmap = unmap->hw_next;
 			}
 		}
+=======
+		dma_descriptor_unmap(&desc->async_tx);
+>>>>>>> v3.18
 	}
 
 	/* run dependent operations */
@@ -2323,6 +2344,7 @@ static struct dma_async_tx_descriptor *ppc440spe_adma_prep_dma_memcpy(
 }
 
 /**
+<<<<<<< HEAD
  * ppc440spe_adma_prep_dma_memset - prepare CDB for a MEMSET operation
  */
 static struct dma_async_tx_descriptor *ppc440spe_adma_prep_dma_memset(
@@ -2364,6 +2386,8 @@ static struct dma_async_tx_descriptor *ppc440spe_adma_prep_dma_memset(
 }
 
 /**
+=======
+>>>>>>> v3.18
  * ppc440spe_adma_prep_dma_xor - prepare CDB for a XOR operation
  */
 static struct dma_async_tx_descriptor *ppc440spe_adma_prep_dma_xor(
@@ -3932,7 +3956,11 @@ static enum dma_status ppc440spe_adma_tx_status(struct dma_chan *chan,
 
 	ppc440spe_chan = to_ppc440spe_adma_chan(chan);
 	ret = dma_cookie_status(chan, cookie, txstate);
+<<<<<<< HEAD
 	if (ret == DMA_SUCCESS)
+=======
+	if (ret == DMA_COMPLETE)
+>>>>>>> v3.18
 		return ret;
 
 	ppc440spe_adma_slot_cleanup(ppc440spe_chan);
@@ -4125,7 +4153,10 @@ static void ppc440spe_adma_init_capabilities(struct ppc440spe_adma_device *adev)
 	case PPC440SPE_DMA1_ID:
 		dma_cap_set(DMA_MEMCPY, adev->common.cap_mask);
 		dma_cap_set(DMA_INTERRUPT, adev->common.cap_mask);
+<<<<<<< HEAD
 		dma_cap_set(DMA_MEMSET, adev->common.cap_mask);
+=======
+>>>>>>> v3.18
 		dma_cap_set(DMA_PQ, adev->common.cap_mask);
 		dma_cap_set(DMA_PQ_VAL, adev->common.cap_mask);
 		dma_cap_set(DMA_XOR_VAL, adev->common.cap_mask);
@@ -4151,10 +4182,13 @@ static void ppc440spe_adma_init_capabilities(struct ppc440spe_adma_device *adev)
 		adev->common.device_prep_dma_memcpy =
 			ppc440spe_adma_prep_dma_memcpy;
 	}
+<<<<<<< HEAD
 	if (dma_has_cap(DMA_MEMSET, adev->common.cap_mask)) {
 		adev->common.device_prep_dma_memset =
 			ppc440spe_adma_prep_dma_memset;
 	}
+=======
+>>>>>>> v3.18
 	if (dma_has_cap(DMA_XOR, adev->common.cap_mask)) {
 		adev->common.max_xor = XOR_MAX_OPS;
 		adev->common.device_prep_dma_xor =
@@ -4210,14 +4244,21 @@ static void ppc440spe_adma_init_capabilities(struct ppc440spe_adma_device *adev)
 			ppc440spe_adma_prep_dma_interrupt;
 	}
 	pr_info("%s: AMCC(R) PPC440SP(E) ADMA Engine: "
+<<<<<<< HEAD
 	  "( %s%s%s%s%s%s%s)\n",
+=======
+	  "( %s%s%s%s%s%s)\n",
+>>>>>>> v3.18
 	  dev_name(adev->dev),
 	  dma_has_cap(DMA_PQ, adev->common.cap_mask) ? "pq " : "",
 	  dma_has_cap(DMA_PQ_VAL, adev->common.cap_mask) ? "pq_val " : "",
 	  dma_has_cap(DMA_XOR, adev->common.cap_mask) ? "xor " : "",
 	  dma_has_cap(DMA_XOR_VAL, adev->common.cap_mask) ? "xor_val " : "",
 	  dma_has_cap(DMA_MEMCPY, adev->common.cap_mask) ? "memcpy " : "",
+<<<<<<< HEAD
 	  dma_has_cap(DMA_MEMSET, adev->common.cap_mask)  ? "memset " : "",
+=======
+>>>>>>> v3.18
 	  dma_has_cap(DMA_INTERRUPT, adev->common.cap_mask) ? "intr " : "");
 }
 
@@ -4452,6 +4493,10 @@ static int ppc440spe_adma_probe(struct platform_device *ofdev)
 	regs = ioremap(res.start, resource_size(&res));
 	if (!regs) {
 		dev_err(&ofdev->dev, "failed to ioremap regs!\n");
+<<<<<<< HEAD
+=======
+		ret = -ENOMEM;
+>>>>>>> v3.18
 		goto err_regs_alloc;
 	}
 
@@ -4481,7 +4526,11 @@ static int ppc440spe_adma_probe(struct platform_device *ofdev)
 	adev->dev = &ofdev->dev;
 	adev->common.dev = &ofdev->dev;
 	INIT_LIST_HEAD(&adev->common.channels);
+<<<<<<< HEAD
 	dev_set_drvdata(&ofdev->dev, adev);
+=======
+	platform_set_drvdata(ofdev, adev);
+>>>>>>> v3.18
 
 	/* create a channel */
 	chan = kzalloc(sizeof(*chan), GFP_KERNEL);
@@ -4594,14 +4643,21 @@ out:
  */
 static int ppc440spe_adma_remove(struct platform_device *ofdev)
 {
+<<<<<<< HEAD
 	struct ppc440spe_adma_device *adev = dev_get_drvdata(&ofdev->dev);
+=======
+	struct ppc440spe_adma_device *adev = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 	struct device_node *np = ofdev->dev.of_node;
 	struct resource res;
 	struct dma_chan *chan, *_chan;
 	struct ppc_dma_chan_ref *ref, *_ref;
 	struct ppc440spe_adma_chan *ppc440spe_chan;
 
+<<<<<<< HEAD
 	dev_set_drvdata(&ofdev->dev, NULL);
+=======
+>>>>>>> v3.18
 	if (adev->id < PPC440SPE_ADMA_ENGINES_NUM)
 		ppc440spe_adma_devices[adev->id] = -1;
 

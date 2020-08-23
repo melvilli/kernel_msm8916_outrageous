@@ -19,7 +19,10 @@
  */
 
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/jiffies.h>
 #include <linux/i2c.h>
@@ -82,15 +85,24 @@ static int max517_read_raw(struct iio_dev *indio_dev,
 			   long m)
 {
 	struct max517_data *data = iio_priv(indio_dev);
+<<<<<<< HEAD
 	unsigned int scale_uv;
+=======
+>>>>>>> v3.18
 
 	switch (m) {
 	case IIO_CHAN_INFO_SCALE:
 		/* Corresponds to Vref / 2^(bits) */
+<<<<<<< HEAD
 		scale_uv = (data->vref_mv[chan->channel] * 1000) >> 8;
 		*val =  scale_uv / 1000000;
 		*val2 = scale_uv % 1000000;
 		return IIO_VAL_INT_PLUS_MICRO;
+=======
+		*val = data->vref_mv[chan->channel];
+		*val2 = 8;
+		return IIO_VAL_FRACTIONAL_LOG2;
+>>>>>>> v3.18
 	default:
 		break;
 	}
@@ -148,7 +160,10 @@ static const struct iio_info max517_info = {
 	.channel = (chan),				\
 	.info_mask_separate = BIT(IIO_CHAN_INFO_RAW) |	\
 	BIT(IIO_CHAN_INFO_SCALE),			\
+<<<<<<< HEAD
 	.scan_type = IIO_ST('u', 8, 8, 0),		\
+=======
+>>>>>>> v3.18
 }
 
 static const struct iio_chan_spec max517_channels[] = {
@@ -162,6 +177,7 @@ static int max517_probe(struct i2c_client *client,
 	struct max517_data *data;
 	struct iio_dev *indio_dev;
 	struct max517_platform_data *platform_data = client->dev.platform_data;
+<<<<<<< HEAD
 	int err;
 
 	indio_dev = iio_device_alloc(sizeof(*data));
@@ -169,6 +185,12 @@ static int max517_probe(struct i2c_client *client,
 		err = -ENOMEM;
 		goto exit;
 	}
+=======
+
+	indio_dev = devm_iio_device_alloc(&client->dev, sizeof(*data));
+	if (!indio_dev)
+		return -ENOMEM;
+>>>>>>> v3.18
 	data = iio_priv(indio_dev);
 	i2c_set_clientdata(client, indio_dev);
 	data->client = client;
@@ -196,6 +218,7 @@ static int max517_probe(struct i2c_client *client,
 		data->vref_mv[1] = platform_data->vref_mv[1];
 	}
 
+<<<<<<< HEAD
 	err = iio_device_register(indio_dev);
 	if (err)
 		goto exit_free_device;
@@ -208,13 +231,19 @@ exit_free_device:
 	iio_device_free(indio_dev);
 exit:
 	return err;
+=======
+	return iio_device_register(indio_dev);
+>>>>>>> v3.18
 }
 
 static int max517_remove(struct i2c_client *client)
 {
 	iio_device_unregister(i2c_get_clientdata(client));
+<<<<<<< HEAD
 	iio_device_free(i2c_get_clientdata(client));
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

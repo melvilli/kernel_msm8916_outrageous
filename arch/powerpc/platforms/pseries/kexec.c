@@ -17,9 +17,15 @@
 #include <asm/mpic.h>
 #include <asm/xics.h>
 #include <asm/smp.h>
+<<<<<<< HEAD
 
 #include "pseries.h"
 #include "plpar_wrappers.h"
+=======
+#include <asm/plpar_wrappers.h>
+
+#include "pseries.h"
+>>>>>>> v3.18
 
 static void pseries_kexec_cpu_down(int crash_shutdown, int secondary)
 {

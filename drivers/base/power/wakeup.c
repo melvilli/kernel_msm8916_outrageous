@@ -24,6 +24,12 @@
  */
 bool events_check_enabled __read_mostly;
 
+<<<<<<< HEAD
+=======
+/* If set and the system is suspending, terminate the suspend. */
+static bool pm_abort_suspend __read_mostly;
+
+>>>>>>> v3.18
 /*
  * Combined counters of registered wakeup events and wakeup events in progress.
  * They need to be modified together atomically, so it's better to use one
@@ -82,8 +88,11 @@ struct wakeup_source *wakeup_source_create(const char *name)
 	if (!ws)
 		return NULL;
 
+<<<<<<< HEAD
 	ws->inserted = false;
 
+=======
+>>>>>>> v3.18
 	wakeup_source_prepare(ws, name ? kstrdup(name, GFP_KERNEL) : NULL);
 	return ws;
 }
@@ -124,6 +133,7 @@ void wakeup_source_destroy(struct wakeup_source *ws)
 EXPORT_SYMBOL_GPL(wakeup_source_destroy);
 
 /**
+<<<<<<< HEAD
  * wakeup_source_destroy_cb
  * defer processing until all rcu references have expired
  */
@@ -133,6 +143,8 @@ static void wakeup_source_destroy_cb(struct rcu_head *head)
 }
 
 /**
+=======
+>>>>>>> v3.18
  * wakeup_source_add - Add given object to the list of wakeup sources.
  * @ws: Wakeup source object to add to the list.
  */
@@ -149,10 +161,14 @@ void wakeup_source_add(struct wakeup_source *ws)
 	ws->last_time = ktime_get();
 
 	spin_lock_irqsave(&events_lock, flags);
+<<<<<<< HEAD
 	if (!ws->inserted) {
 		list_add_rcu(&ws->entry, &wakeup_sources);
 		ws->inserted = true;
 	}
+=======
+	list_add_rcu(&ws->entry, &wakeup_sources);
+>>>>>>> v3.18
 	spin_unlock_irqrestore(&events_lock, flags);
 }
 EXPORT_SYMBOL_GPL(wakeup_source_add);
@@ -169,16 +185,21 @@ void wakeup_source_remove(struct wakeup_source *ws)
 		return;
 
 	spin_lock_irqsave(&events_lock, flags);
+<<<<<<< HEAD
 	if (ws->inserted) {
 		list_del_rcu(&ws->entry);
 		ws->inserted = false;
 	}
+=======
+	list_del_rcu(&ws->entry);
+>>>>>>> v3.18
 	spin_unlock_irqrestore(&events_lock, flags);
 	synchronize_rcu();
 }
 EXPORT_SYMBOL_GPL(wakeup_source_remove);
 
 /**
+<<<<<<< HEAD
  * wakeup_source_remove_async - Remove given object from the wakeup sources
  * list.
  * @ws: Wakeup source object to remove from the list.
@@ -199,6 +220,8 @@ static void wakeup_source_remove_async(struct wakeup_source *ws)
 }
 
 /**
+=======
+>>>>>>> v3.18
  * wakeup_source_register - Create wakeup source and add it to the list.
  * @name: Name of the wakeup source to register.
  */
@@ -221,8 +244,13 @@ EXPORT_SYMBOL_GPL(wakeup_source_register);
 void wakeup_source_unregister(struct wakeup_source *ws)
 {
 	if (ws) {
+<<<<<<< HEAD
 		wakeup_source_remove_async(ws);
 		call_rcu(&ws->rcu, wakeup_source_destroy_cb);
+=======
+		wakeup_source_remove(ws);
+		wakeup_source_destroy(ws);
+>>>>>>> v3.18
 	}
 }
 EXPORT_SYMBOL_GPL(wakeup_source_unregister);
@@ -355,10 +383,22 @@ int device_init_wakeup(struct device *dev, bool enable)
 {
 	int ret = 0;
 
+<<<<<<< HEAD
+=======
+	if (!dev)
+		return -EINVAL;
+
+>>>>>>> v3.18
 	if (enable) {
 		device_set_wakeup_capable(dev, true);
 		ret = device_wakeup_enable(dev);
 	} else {
+<<<<<<< HEAD
+=======
+		if (dev->power.can_wakeup)
+			device_wakeup_disable(dev);
+
+>>>>>>> v3.18
 		device_set_wakeup_capable(dev, false);
 	}
 
@@ -696,7 +736,11 @@ void pm_wakeup_event(struct device *dev, unsigned int msec)
 }
 EXPORT_SYMBOL_GPL(pm_wakeup_event);
 
+<<<<<<< HEAD
 static void print_active_wakeup_sources(void)
+=======
+void pm_print_active_wakeup_sources(void)
+>>>>>>> v3.18
 {
 	struct wakeup_source *ws;
 	int active = 0;
@@ -720,6 +764,10 @@ static void print_active_wakeup_sources(void)
 			last_activity_ws->name);
 	rcu_read_unlock();
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(pm_print_active_wakeup_sources);
+>>>>>>> v3.18
 
 /**
  * pm_wakeup_pending - Check if power transition in progress should be aborted.
@@ -744,10 +792,30 @@ bool pm_wakeup_pending(void)
 	}
 	spin_unlock_irqrestore(&events_lock, flags);
 
+<<<<<<< HEAD
 	if (ret)
 		print_active_wakeup_sources();
 
 	return ret;
+=======
+	if (ret) {
+		pr_info("PM: Wakeup pending, aborting suspend\n");
+		pm_print_active_wakeup_sources();
+	}
+
+	return ret || pm_abort_suspend;
+}
+
+void pm_system_wakeup(void)
+{
+	pm_abort_suspend = true;
+	freeze_wake();
+}
+
+void pm_wakeup_clear(void)
+{
+	pm_abort_suspend = false;
+>>>>>>> v3.18
 }
 
 /**

@@ -55,6 +55,7 @@ struct h4_struct {
 	struct sk_buff_head txq;
 };
 
+<<<<<<< HEAD
 /* H4 receiver States */
 #define H4_W4_PACKET_TYPE	0
 #define H4_W4_EVENT_HDR		1
@@ -62,12 +63,18 @@ struct h4_struct {
 #define H4_W4_SCO_HDR		3
 #define H4_W4_DATA		4
 
+=======
+>>>>>>> v3.18
 /* Initialize protocol */
 static int h4_open(struct hci_uart *hu)
 {
 	struct h4_struct *h4;
 
+<<<<<<< HEAD
 	BT_DBG("hu %pK", hu);
+=======
+	BT_DBG("hu %p", hu);
+>>>>>>> v3.18
 
 	h4 = kzalloc(sizeof(*h4), GFP_KERNEL);
 	if (!h4)
@@ -84,7 +91,11 @@ static int h4_flush(struct hci_uart *hu)
 {
 	struct h4_struct *h4 = hu->priv;
 
+<<<<<<< HEAD
 	BT_DBG("hu %pK", hu);
+=======
+	BT_DBG("hu %p", hu);
+>>>>>>> v3.18
 
 	skb_queue_purge(&h4->txq);
 
@@ -98,7 +109,11 @@ static int h4_close(struct hci_uart *hu)
 
 	hu->priv = NULL;
 
+<<<<<<< HEAD
 	BT_DBG("hu %pK", hu);
+=======
+	BT_DBG("hu %p", hu);
+>>>>>>> v3.18
 
 	skb_queue_purge(&h4->txq);
 
@@ -115,7 +130,11 @@ static int h4_enqueue(struct hci_uart *hu, struct sk_buff *skb)
 {
 	struct h4_struct *h4 = hu->priv;
 
+<<<<<<< HEAD
 	BT_DBG("hu %pK skb %pK", hu, skb);
+=======
+	BT_DBG("hu %p skb %p", hu, skb);
+>>>>>>> v3.18
 
 	/* Prepend skb with frame type */
 	memcpy(skb_push(skb, 1), &bt_cb(skb)->pkt_type, 1);
@@ -124,6 +143,7 @@ static int h4_enqueue(struct hci_uart *hu, struct sk_buff *skb)
 	return 0;
 }
 
+<<<<<<< HEAD
 static inline int h4_check_data_len(struct h4_struct *h4, int len)
 {
 	int room = skb_tailroom(h4->rx_skb);
@@ -148,6 +168,8 @@ static inline int h4_check_data_len(struct h4_struct *h4, int len)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 /* Recv data */
 static int h4_recv(struct hci_uart *hu, void *data, int count)
 {

@@ -66,7 +66,11 @@ sleep_common:
 	std	r3, 48(r1)
 
 	/* Only do power savings when in astate 0 */
+<<<<<<< HEAD
 	bl	.check_astate
+=======
+	bl	check_astate
+>>>>>>> v3.18
 	cmpwi	r3,0
 	bne	1f
 

@@ -10,6 +10,10 @@
  */
 
 #include "misc.h"
+<<<<<<< HEAD
+=======
+#include "../string.h"
+>>>>>>> v3.18
 
 /* WARNING!!
  * This code is compiled with -fPIC and it is relocated dynamically
@@ -97,8 +101,19 @@
  */
 #define STATIC		static
 
+<<<<<<< HEAD
 #undef memset
 #undef memcpy
+=======
+#undef memcpy
+
+/*
+ * Use a normal definition of memset() from string.c. There are already
+ * included header files which expect a definition of memset() and by
+ * the time we define memset macro, it is too late.
+ */
+#undef memset
+>>>>>>> v3.18
 #define memzero(s, n)	memset((s), 0, (n))
 
 
@@ -109,6 +124,7 @@ static void error(char *m);
  */
 struct boot_params *real_mode;		/* Pointer to real-mode data */
 
+<<<<<<< HEAD
 void *memset(void *s, int c, size_t n);
 void *memcpy(void *dest, const void *src, size_t n);
 
@@ -120,6 +136,10 @@ void *memcpy(void *dest, const void *src, size_t n);
 
 static memptr free_mem_ptr;
 static memptr free_mem_end_ptr;
+=======
+memptr free_mem_ptr;
+memptr free_mem_end_ptr;
+>>>>>>> v3.18
 
 static char *vidmem;
 static int vidport;
@@ -145,6 +165,13 @@ static int lines, cols;
 #include "../../../../lib/decompress_unlzo.c"
 #endif
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_KERNEL_LZ4
+#include "../../../../lib/decompress_unlz4.c"
+#endif
+
+>>>>>>> v3.18
 static void scroll(void)
 {
 	int i;
@@ -218,6 +245,7 @@ void __putstr(const char *s)
 	outb(0xff & (pos >> 1), vidport+1);
 }
 
+<<<<<<< HEAD
 void *memset(void *s, int c, size_t n)
 {
 	int i;
@@ -257,6 +285,8 @@ void *memcpy(void *dest, const void *src, size_t n)
 }
 #endif
 
+=======
+>>>>>>> v3.18
 static void error(char *x)
 {
 	error_putstr("\n\n");
@@ -267,6 +297,82 @@ static void error(char *x)
 		asm("hlt");
 }
 
+<<<<<<< HEAD
+=======
+#if CONFIG_X86_NEED_RELOCS
+static void handle_relocations(void *output, unsigned long output_len)
+{
+	int *reloc;
+	unsigned long delta, map, ptr;
+	unsigned long min_addr = (unsigned long)output;
+	unsigned long max_addr = min_addr + output_len;
+
+	/*
+	 * Calculate the delta between where vmlinux was linked to load
+	 * and where it was actually loaded.
+	 */
+	delta = min_addr - LOAD_PHYSICAL_ADDR;
+	if (!delta) {
+		debug_putstr("No relocation needed... ");
+		return;
+	}
+	debug_putstr("Performing relocations... ");
+
+	/*
+	 * The kernel contains a table of relocation addresses. Those
+	 * addresses have the final load address of the kernel in virtual
+	 * memory. We are currently working in the self map. So we need to
+	 * create an adjustment for kernel memory addresses to the self map.
+	 * This will involve subtracting out the base address of the kernel.
+	 */
+	map = delta - __START_KERNEL_map;
+
+	/*
+	 * Process relocations: 32 bit relocations first then 64 bit after.
+	 * Two sets of binary relocations are added to the end of the kernel
+	 * before compression. Each relocation table entry is the kernel
+	 * address of the location which needs to be updated stored as a
+	 * 32-bit value which is sign extended to 64 bits.
+	 *
+	 * Format is:
+	 *
+	 * kernel bits...
+	 * 0 - zero terminator for 64 bit relocations
+	 * 64 bit relocation repeated
+	 * 0 - zero terminator for 32 bit relocations
+	 * 32 bit relocation repeated
+	 *
+	 * So we work backwards from the end of the decompressed image.
+	 */
+	for (reloc = output + output_len - sizeof(*reloc); *reloc; reloc--) {
+		int extended = *reloc;
+		extended += map;
+
+		ptr = (unsigned long)extended;
+		if (ptr < min_addr || ptr > max_addr)
+			error("32-bit relocation outside of kernel!\n");
+
+		*(uint32_t *)ptr += delta;
+	}
+#ifdef CONFIG_X86_64
+	for (reloc--; *reloc; reloc--) {
+		long extended = *reloc;
+		extended += map;
+
+		ptr = (unsigned long)extended;
+		if (ptr < min_addr || ptr > max_addr)
+			error("64-bit relocation outside of kernel!\n");
+
+		*(uint64_t *)ptr += delta;
+	}
+#endif
+}
+#else
+static inline void handle_relocations(void *output, unsigned long output_len)
+{ }
+#endif
+
+>>>>>>> v3.18
 static void parse_elf(void *output)
 {
 #ifdef CONFIG_X86_64
@@ -318,10 +424,19 @@ static void parse_elf(void *output)
 	free(phdrs);
 }
 
+<<<<<<< HEAD
 asmlinkage void decompress_kernel(void *rmode, memptr heap,
 				  unsigned char *input_data,
 				  unsigned long input_len,
 				  unsigned char *output)
+=======
+asmlinkage __visible void *decompress_kernel(void *rmode, memptr heap,
+				  unsigned char *input_data,
+				  unsigned long input_len,
+				  unsigned char *output,
+				  unsigned long output_len,
+				  unsigned long run_size)
+>>>>>>> v3.18
 {
 	real_mode = rmode;
 
@@ -344,6 +459,19 @@ asmlinkage void decompress_kernel(void *rmode, memptr heap,
 	free_mem_ptr     = heap;	/* Heap */
 	free_mem_end_ptr = heap + BOOT_HEAP_SIZE;
 
+<<<<<<< HEAD
+=======
+	/*
+	 * The memory hole needed for the kernel is the larger of either
+	 * the entire decompressed kernel plus relocation table, or the
+	 * entire decompressed kernel plus .bss and .brk sections.
+	 */
+	output = choose_kernel_location(input_data, input_len, output,
+					output_len > run_size ? output_len
+							      : run_size);
+
+	/* Validate memory location choices. */
+>>>>>>> v3.18
 	if ((unsigned long)output & (MIN_KERNEL_ALIGN - 1))
 		error("Destination address inappropriately aligned");
 #ifdef CONFIG_X86_64
@@ -361,6 +489,12 @@ asmlinkage void decompress_kernel(void *rmode, memptr heap,
 	debug_putstr("\nDecompressing Linux... ");
 	decompress(input_data, input_len, NULL, NULL, output, NULL, error);
 	parse_elf(output);
+<<<<<<< HEAD
 	debug_putstr("done.\nBooting the kernel.\n");
 	return;
+=======
+	handle_relocations(output, output_len);
+	debug_putstr("done.\nBooting the kernel.\n");
+	return output;
+>>>>>>> v3.18
 }

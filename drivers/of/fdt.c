@@ -26,6 +26,57 @@
 #include <asm/setup.h>  /* for COMMAND_LINE_SIZE */
 #include <asm/page.h>
 
+<<<<<<< HEAD
+=======
+/*
+ * of_fdt_limit_memory - limit the number of regions in the /memory node
+ * @limit: maximum entries
+ *
+ * Adjust the flattened device tree to have at most 'limit' number of
+ * memory entries in the /memory node. This function may be called
+ * any time after initial_boot_param is set.
+ */
+void of_fdt_limit_memory(int limit)
+{
+	int memory;
+	int len;
+	const void *val;
+	int nr_address_cells = OF_ROOT_NODE_ADDR_CELLS_DEFAULT;
+	int nr_size_cells = OF_ROOT_NODE_SIZE_CELLS_DEFAULT;
+	const uint32_t *addr_prop;
+	const uint32_t *size_prop;
+	int root_offset;
+	int cell_size;
+
+	root_offset = fdt_path_offset(initial_boot_params, "/");
+	if (root_offset < 0)
+		return;
+
+	addr_prop = fdt_getprop(initial_boot_params, root_offset,
+				"#address-cells", NULL);
+	if (addr_prop)
+		nr_address_cells = fdt32_to_cpu(*addr_prop);
+
+	size_prop = fdt_getprop(initial_boot_params, root_offset,
+				"#size-cells", NULL);
+	if (size_prop)
+		nr_size_cells = fdt32_to_cpu(*size_prop);
+
+	cell_size = sizeof(uint32_t)*(nr_address_cells + nr_size_cells);
+
+	memory = fdt_path_offset(initial_boot_params, "/memory");
+	if (memory > 0) {
+		val = fdt_getprop(initial_boot_params, memory, "reg", &len);
+		if (len > limit*cell_size) {
+			len = limit*cell_size;
+			pr_debug("Limiting number of entries to %d\n", limit);
+			fdt_setprop(initial_boot_params, memory, "reg", val,
+					len);
+		}
+	}
+}
+
+>>>>>>> v3.18
 /**
  * of_fdt_is_compatible - Return true if given node from the given blob has
  * compat in its compatible list
@@ -154,7 +205,11 @@ static void * unflatten_dt_node(void *blob,
 				__alignof__(struct device_node));
 	if (allnextpp) {
 		char *fn;
+<<<<<<< HEAD
 		memset(np, 0, sizeof(*np));
+=======
+		of_node_init(np);
+>>>>>>> v3.18
 		np->full_name = fn = ((char *)np) + sizeof(*np);
 		if (new_format) {
 			/* rebuild full path for new format */
@@ -185,7 +240,10 @@ static void * unflatten_dt_node(void *blob,
 				dad->next->sibling = np;
 			dad->next = np;
 		}
+<<<<<<< HEAD
 		kref_init(&np->kref);
+=======
+>>>>>>> v3.18
 	}
 	/* process properties */
 	for (offset = fdt_first_property_offset(blob, *poffset);
@@ -406,7 +464,11 @@ static int __init __reserved_mem_reserve_reg(unsigned long node,
 		base = dt_mem_next_cell(dt_root_addr_cells, &prop);
 		size = dt_mem_next_cell(dt_root_size_cells, &prop);
 
+<<<<<<< HEAD
 		if (base && size &&
+=======
+		if (size &&
+>>>>>>> v3.18
 		    early_init_dt_reserve_memory_arch(base, size, nomap) == 0)
 			pr_debug("Reserved memory: reserved region for node '%s': base %pa, size %ld MiB\n",
 				uname, &base, (unsigned long)size / SZ_1M);
@@ -428,7 +490,11 @@ static int __init __reserved_mem_reserve_reg(unsigned long node,
  * in /reserved-memory matches the values supported by the current implementation,
  * also check if ranges property has been provided
  */
+<<<<<<< HEAD
 static int __reserved_mem_check_root(unsigned long node)
+=======
+static int __init __reserved_mem_check_root(unsigned long node)
+>>>>>>> v3.18
 {
 	const __be32 *prop;
 
@@ -593,6 +659,18 @@ int __init of_flat_dt_match(unsigned long node, const char *const *compat)
 	return of_fdt_match(initial_boot_params, node, compat);
 }
 
+<<<<<<< HEAD
+=======
+struct fdt_scan_status {
+	const char *name;
+	int namelen;
+	int depth;
+	int found;
+	int (*iterator)(unsigned long node, const char *uname, int depth, void *data);
+	void *data;
+};
+
+>>>>>>> v3.18
 const char * __init of_flat_dt_get_machine_name(void)
 {
 	const char *name;
@@ -658,7 +736,11 @@ const void * __init of_flat_dt_match_machine(const void *default_match,
  * early_init_dt_check_for_initrd - Decode initrd location from flat tree
  * @node: reference to node containing initrd location ('chosen')
  */
+<<<<<<< HEAD
 void __init early_init_dt_check_for_initrd(unsigned long node)
+=======
+static void __init early_init_dt_check_for_initrd(unsigned long node)
+>>>>>>> v3.18
 {
 	u64 start, end;
 	int len;
@@ -676,12 +758,23 @@ void __init early_init_dt_check_for_initrd(unsigned long node)
 		return;
 	end = of_read_number(prop, len/4);
 
+<<<<<<< HEAD
 	early_init_dt_setup_initrd_arch(start, end);
+=======
+	initrd_start = (unsigned long)__va(start);
+	initrd_end = (unsigned long)__va(end);
+	initrd_below_start_ok = 1;
+
+>>>>>>> v3.18
 	pr_debug("initrd_start=0x%llx  initrd_end=0x%llx\n",
 		 (unsigned long long)start, (unsigned long long)end);
 }
 #else
+<<<<<<< HEAD
 inline void early_init_dt_check_for_initrd(unsigned long node)
+=======
+static inline void early_init_dt_check_for_initrd(unsigned long node)
+>>>>>>> v3.18
 {
 }
 #endif /* CONFIG_BLK_DEV_INITRD */
@@ -714,7 +807,11 @@ int __init early_init_dt_scan_chosen_serial(void)
 	if (offset < 0)
 		return -ENODEV;
 
+<<<<<<< HEAD
 	while (match->compatible) {
+=======
+	while (match->compatible[0]) {
+>>>>>>> v3.18
 		unsigned long addr;
 		if (fdt_node_check_compatible(fdt, offset, match->compatible)) {
 			match++;
@@ -826,6 +923,7 @@ int __init early_init_dt_scan_memory(unsigned long node, const char *uname,
 	return 0;
 }
 
+<<<<<<< HEAD
 /*
  * Convert configs to something easy to use in C code
  */
@@ -849,21 +947,32 @@ static const char *config_cmdline = CONFIG_CMDLINE;
 static const char *config_cmdline = "";
 #endif
 
+=======
+>>>>>>> v3.18
 int __init early_init_dt_scan_chosen(unsigned long node, const char *uname,
 				     int depth, void *data)
 {
 	int l;
+<<<<<<< HEAD
 	const char *p = NULL;
 	char *cmdline = data;
 
 	pr_debug("search \"chosen\", depth: %d, uname: %s\n", depth, uname);
 
 	if (depth != 1 || !cmdline ||
+=======
+	const char *p;
+
+	pr_debug("search \"chosen\", depth: %d, uname: %s\n", depth, uname);
+
+	if (depth != 1 || !data ||
+>>>>>>> v3.18
 	    (strcmp(uname, "chosen") != 0 && strcmp(uname, "chosen@0") != 0))
 		return 0;
 
 	early_init_dt_check_for_initrd(node);
 
+<<<<<<< HEAD
 	/* Put CONFIG_CMDLINE in if forced or if data had nothing in it to start */
 	if (overwrite_incoming_cmdline || !cmdline[0])
 		strlcpy(cmdline, config_cmdline, COMMAND_LINE_SIZE);
@@ -886,6 +995,24 @@ int __init early_init_dt_scan_chosen(unsigned long node, const char *uname,
 			strlcpy(cmdline, p, min((int)l, COMMAND_LINE_SIZE));
 		}
 	}
+=======
+	/* Retrieve command line */
+	p = of_get_flat_dt_prop(node, "bootargs", &l);
+	if (p != NULL && l > 0)
+		strlcpy(data, p, min((int)l, COMMAND_LINE_SIZE));
+
+	/*
+	 * CONFIG_CMDLINE is meant to be a default in case nothing else
+	 * managed to set the command line, unless CONFIG_CMDLINE_FORCE
+	 * is set in which case we override whatever was found earlier.
+	 */
+#ifdef CONFIG_CMDLINE
+#ifndef CONFIG_CMDLINE_FORCE
+	if (!((char *)data)[0])
+#endif
+		strlcpy(data, CONFIG_CMDLINE, COMMAND_LINE_SIZE);
+#endif /* CONFIG_CMDLINE */
+>>>>>>> v3.18
 
 	pr_debug("Command line is: %s\n", (char*)data);
 
@@ -894,11 +1021,38 @@ int __init early_init_dt_scan_chosen(unsigned long node, const char *uname,
 }
 
 #ifdef CONFIG_HAVE_MEMBLOCK
+<<<<<<< HEAD
 void __init __weak early_init_dt_add_memory_arch(u64 base, u64 size)
 {
 	const u64 phys_offset = __pa(PAGE_OFFSET);
 	base &= PAGE_MASK;
 	size &= PAGE_MASK;
+=======
+#define MAX_PHYS_ADDR	((phys_addr_t)~0)
+
+void __init __weak early_init_dt_add_memory_arch(u64 base, u64 size)
+{
+	const u64 phys_offset = __pa(PAGE_OFFSET);
+
+	if (!PAGE_ALIGNED(base)) {
+		size -= PAGE_SIZE - (base & ~PAGE_MASK);
+		base = PAGE_ALIGN(base);
+	}
+	size &= PAGE_MASK;
+
+	if (base > MAX_PHYS_ADDR) {
+		pr_warning("Ignoring memory block 0x%llx - 0x%llx\n",
+				base, base + size);
+		return;
+	}
+
+	if (base + size - 1 > MAX_PHYS_ADDR) {
+		pr_warning("Ignoring memory range 0x%llx - 0x%llx\n",
+				((u64)MAX_PHYS_ADDR) + 1, base + size);
+		size = MAX_PHYS_ADDR - base + 1;
+	}
+
+>>>>>>> v3.18
 	if (base + size < phys_offset) {
 		pr_warning("Ignoring memory block 0x%llx - 0x%llx\n",
 			   base, base + size);
@@ -916,8 +1070,11 @@ void __init __weak early_init_dt_add_memory_arch(u64 base, u64 size)
 int __init __weak early_init_dt_reserve_memory_arch(phys_addr_t base,
 					phys_addr_t size, bool nomap)
 {
+<<<<<<< HEAD
 	if (memblock_is_region_reserved(base, size))
 		return -EBUSY;
+=======
+>>>>>>> v3.18
 	if (nomap)
 		return memblock_remove(base, size);
 	return memblock_reserve(base, size);
@@ -941,7 +1098,11 @@ int __init __weak early_init_dt_reserve_memory_arch(phys_addr_t base,
 }
 #endif
 
+<<<<<<< HEAD
 bool __init early_init_dt_scan(void *params)
+=======
+bool __init early_init_dt_verify(void *params)
+>>>>>>> v3.18
 {
 	if (!params)
 		return false;
@@ -955,6 +1116,15 @@ bool __init early_init_dt_scan(void *params)
 		return false;
 	}
 
+<<<<<<< HEAD
+=======
+	return true;
+}
+
+
+void __init early_init_dt_scan_nodes(void)
+{
+>>>>>>> v3.18
 	/* Retrieve various information from the /chosen node */
 	of_scan_flat_dt(early_init_dt_scan_chosen, boot_command_line);
 
@@ -963,7 +1133,21 @@ bool __init early_init_dt_scan(void *params)
 
 	/* Setup memory, calling early_init_dt_add_memory_arch */
 	of_scan_flat_dt(early_init_dt_scan_memory, NULL);
+<<<<<<< HEAD
 
+=======
+}
+
+bool __init early_init_dt_scan(void *params)
+{
+	bool status;
+
+	status = early_init_dt_verify(params);
+	if (!status)
+		return false;
+
+	early_init_dt_scan_nodes();
+>>>>>>> v3.18
 	return true;
 }
 
@@ -980,7 +1164,11 @@ void __init unflatten_device_tree(void)
 	__unflatten_device_tree(initial_boot_params, &of_allnodes,
 				early_init_dt_alloc_memory_arch);
 
+<<<<<<< HEAD
 	/* Get pointer to "/chosen" and "/aliasas" nodes for use everywhere */
+=======
+	/* Get pointer to "/chosen" and "/aliases" nodes for use everywhere */
+>>>>>>> v3.18
 	of_alias_scan(early_init_dt_alloc_memory_arch);
 }
 

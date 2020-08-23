@@ -18,6 +18,10 @@
 #include <linux/of.h>
 #include <linux/device.h>
 #include <linux/pm_runtime.h>
+<<<<<<< HEAD
+=======
+#include <linux/regulator/consumer.h>
+>>>>>>> v3.18
 
 struct phy;
 
@@ -65,6 +69,10 @@ struct phy {
 	int			init_count;
 	int			power_count;
 	struct phy_attrs	attrs;
+<<<<<<< HEAD
+=======
+	struct regulator	*pwr;
+>>>>>>> v3.18
 };
 
 /**

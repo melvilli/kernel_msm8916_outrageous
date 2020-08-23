@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -119,6 +123,10 @@ acpi_ex_store(union acpi_operand_object *source_desc,
 
 	switch (dest_desc->common.type) {
 	case ACPI_TYPE_LOCAL_REFERENCE:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		break;
 
 	case ACPI_TYPE_INTEGER:
@@ -183,7 +191,10 @@ acpi_ex_store(union acpi_operand_object *source_desc,
 		break;
 
 	case ACPI_REFCLASS_DEBUG:
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 		/*
 		 * Storing to the Debug object causes the value stored to be
 		 * displayed and otherwise has no effect -- see ACPI Specification
@@ -296,7 +307,10 @@ acpi_ex_store_object_to_index(union acpi_operand_object *source_desc,
 		break;
 
 	case ACPI_TYPE_BUFFER_FIELD:
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 		/*
 		 * Store into a Buffer or String (not actually a real buffer_field)
 		 * at a location defined by an Index.
@@ -429,7 +443,10 @@ acpi_ex_store_object_to_node(union acpi_operand_object *source_desc,
 	case ACPI_TYPE_INTEGER:
 	case ACPI_TYPE_STRING:
 	case ACPI_TYPE_BUFFER:
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 		/*
 		 * The simple data types all support implicit source operand
 		 * conversion before the store.

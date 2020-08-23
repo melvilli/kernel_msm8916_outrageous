@@ -1,6 +1,10 @@
 menuconfig ION
 	bool "Ion Memory Manager"
+<<<<<<< HEAD
 	depends on HAVE_MEMBLOCK
+=======
+	depends on HAVE_MEMBLOCK && HAS_DMA && MMU
+>>>>>>> v3.18
 	select GENERIC_ALLOCATOR
 	select DMA_SHARED_BUFFER
 	---help---
@@ -17,12 +21,26 @@ config ION_TEST
 	  Choose this option to create a device that can be used to test the
 	  kernel and device side ION functions.
 
+<<<<<<< HEAD
+=======
+config ION_DUMMY
+	bool "Dummy Ion driver"
+	depends on ION
+	help
+	  Provides a dummy ION driver that registers the
+	  /dev/ion device and some basic heaps. This can
+	  be used for testing the ION infrastructure if
+	  one doesn't have access to hardware drivers that
+	  use ION.
+
+>>>>>>> v3.18
 config ION_TEGRA
 	tristate "Ion for Tegra"
 	depends on ARCH_TEGRA && ION
 	help
 	  Choose this option if you wish to use ion on an nVidia Tegra.
 
+<<<<<<< HEAD
 config ION_MSM
 	tristate "Ion for MSM"
 	depends on ARCH_MSM && ION
@@ -35,3 +53,5 @@ config ALLOC_BUFFERS_IN_4K_CHUNKS
 	help
           Choose this option if you want ION to allocate buffers in
           only 4KB chunks.
+=======
+>>>>>>> v3.18

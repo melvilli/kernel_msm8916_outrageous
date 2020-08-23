@@ -7,7 +7,10 @@
  */
 
 #include <linux/device.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/input.h>
 #include <linux/interrupt.h>
 #include <linux/slab.h>
@@ -969,7 +972,11 @@ struct ad714x_chip *ad714x_probe(struct device *dev, u16 bus_type, int irq,
 	int error;
 	struct input_dev *input[MAX_DEVICE_NUM];
 
+<<<<<<< HEAD
 	struct ad714x_platform_data *plat_data = dev->platform_data;
+=======
+	struct ad714x_platform_data *plat_data = dev_get_platdata(dev);
+>>>>>>> v3.18
 	struct ad714x_chip *ad714x;
 	void *drv_mem;
 	unsigned long irqflags;
@@ -986,7 +993,11 @@ struct ad714x_chip *ad714x_probe(struct device *dev, u16 bus_type, int irq,
 		goto err_out;
 	}
 
+<<<<<<< HEAD
 	if (dev->platform_data == NULL) {
+=======
+	if (dev_get_platdata(dev) == NULL) {
+>>>>>>> v3.18
 		dev_err(dev, "platform data for ad714x doesn't exist\n");
 		error = -EINVAL;
 		goto err_out;

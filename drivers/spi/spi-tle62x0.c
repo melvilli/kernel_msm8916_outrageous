@@ -52,8 +52,12 @@ static inline int tle62x0_write(struct tle62x0_state *st)
 		buff[1] = gpio_state;
 	}
 
+<<<<<<< HEAD
 	dev_dbg(&st->us->dev, "buff %02x,%02x,%02x\n",
 		buff[0], buff[1], buff[2]);
+=======
+	dev_dbg(&st->us->dev, "buff %3ph\n", buff);
+>>>>>>> v3.18
 
 	return spi_write(st->us, buff, (st->nr_gpio == 16) ? 3 : 2);
 }
@@ -247,17 +251,26 @@ static int tle62x0_probe(struct spi_device *spi)
 	int ptr;
 	int ret;
 
+<<<<<<< HEAD
 	pdata = spi->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&spi->dev);
+>>>>>>> v3.18
 	if (pdata == NULL) {
 		dev_err(&spi->dev, "no device data specified\n");
 		return -EINVAL;
 	}
 
 	st = kzalloc(sizeof(struct tle62x0_state), GFP_KERNEL);
+<<<<<<< HEAD
 	if (st == NULL) {
 		dev_err(&spi->dev, "no memory for device state\n");
 		return -ENOMEM;
 	}
+=======
+	if (st == NULL)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	st->us = spi;
 	st->nr_gpio = pdata->gpio_count;

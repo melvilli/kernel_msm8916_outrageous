@@ -43,12 +43,15 @@
 
 #include <asm/sigframe.h>
 
+<<<<<<< HEAD
 #ifdef CONFIG_X86_32
 # define FIX_EFLAGS	(__FIX_EFLAGS | X86_EFLAGS_RF)
 #else
 # define FIX_EFLAGS	__FIX_EFLAGS
 #endif
 
+=======
+>>>>>>> v3.18
 #define COPY(x)			do {			\
 	get_user_ex(regs->x, &sc->x);			\
 } while (0)
@@ -304,7 +307,12 @@ __setup_frame(int sig, struct ksignal *ksig, sigset_t *set,
 	}
 
 	if (current->mm->context.vdso)
+<<<<<<< HEAD
 		restorer = VDSO32_SYMBOL(current->mm->context.vdso, sigreturn);
+=======
+		restorer = current->mm->context.vdso +
+			selected_vdso32->sym___kernel_sigreturn;
+>>>>>>> v3.18
 	else
 		restorer = &frame->retcode;
 	if (ksig->ka.sa.sa_flags & SA_RESTORER)
@@ -367,7 +375,12 @@ static int __setup_rt_frame(int sig, struct ksignal *ksig,
 		save_altstack_ex(&frame->uc.uc_stack, regs->sp);
 
 		/* Set up to return from userspace.  */
+<<<<<<< HEAD
 		restorer = VDSO32_SYMBOL(current->mm->context.vdso, rt_sigreturn);
+=======
+		restorer = current->mm->context.vdso +
+			selected_vdso32->sym___kernel_rt_sigreturn;
+>>>>>>> v3.18
 		if (ksig->ka.sa.sa_flags & SA_RESTORER)
 			restorer = ksig->ka.sa.sa_restorer;
 		put_user_ex(restorer, &frame->pretcode);
@@ -539,7 +552,11 @@ static int x32_setup_rt_frame(struct ksignal *ksig,
  * Do a signal return; undo the signal stack.
  */
 #ifdef CONFIG_X86_32
+<<<<<<< HEAD
 unsigned long sys_sigreturn(void)
+=======
+asmlinkage unsigned long sys_sigreturn(void)
+>>>>>>> v3.18
 {
 	struct pt_regs *regs = current_pt_regs();
 	struct sigframe __user *frame;
@@ -568,7 +585,11 @@ badframe:
 }
 #endif /* CONFIG_X86_32 */
 
+<<<<<<< HEAD
 long sys_rt_sigreturn(void)
+=======
+asmlinkage long sys_rt_sigreturn(void)
+>>>>>>> v3.18
 {
 	struct pt_regs *regs = current_pt_regs();
 	struct rt_sigframe __user *frame;
@@ -668,15 +689,27 @@ handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 	if (!failed) {
 		/*
 		 * Clear the direction flag as per the ABI for function entry.
+<<<<<<< HEAD
 		 */
 		regs->flags &= ~X86_EFLAGS_DF;
 		/*
+=======
+		 *
+		 * Clear RF when entering the signal handler, because
+		 * it might disable possible debug exception from the
+		 * signal handler.
+		 *
+>>>>>>> v3.18
 		 * Clear TF when entering the signal handler, but
 		 * notify any tracer that was single-stepping it.
 		 * The tracer may want to single-step inside the
 		 * handler too.
 		 */
+<<<<<<< HEAD
 		regs->flags &= ~X86_EFLAGS_TF;
+=======
+		regs->flags &= ~(X86_EFLAGS_DF|X86_EFLAGS_RF|X86_EFLAGS_TF);
+>>>>>>> v3.18
 		/*
 		 * Ensure the signal handler starts with the new fpu state.
 		 */
@@ -686,6 +719,7 @@ handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 	signal_setup_done(failed, ksig, test_thread_flag(TIF_SINGLESTEP));
 }
 
+<<<<<<< HEAD
 static inline unsigned long get_nr_restart_syscall(const struct pt_regs *regs)
 {
 #if defined(CONFIG_X86_32) || !defined(CONFIG_X86_64)
@@ -695,6 +729,14 @@ static inline unsigned long get_nr_restart_syscall(const struct pt_regs *regs)
 		__NR_restart_syscall | (regs->orig_ax & __X32_SYSCALL_BIT);
 #endif /* CONFIG_X86_32 || !CONFIG_X86_64 */
 }
+=======
+#ifdef CONFIG_X86_32
+#define NR_restart_syscall	__NR_restart_syscall
+#else /* !CONFIG_X86_32 */
+#define NR_restart_syscall	\
+	test_thread_flag(TIF_IA32) ? __NR_ia32_restart_syscall : __NR_restart_syscall
+#endif /* CONFIG_X86_32 */
+>>>>>>> v3.18
 
 /*
  * Note that 'init' is a special process: it doesn't get signals it doesn't
@@ -723,7 +765,11 @@ static void do_signal(struct pt_regs *regs)
 			break;
 
 		case -ERESTART_RESTARTBLOCK:
+<<<<<<< HEAD
 			regs->ax = get_nr_restart_syscall(regs);
+=======
+			regs->ax = NR_restart_syscall;
+>>>>>>> v3.18
 			regs->ip -= 2;
 			break;
 		}
@@ -740,7 +786,11 @@ static void do_signal(struct pt_regs *regs)
  * notification of userspace execution resumption
  * - triggered by the TIF_WORK_MASK flags
  */
+<<<<<<< HEAD
 void
+=======
+__visible void
+>>>>>>> v3.18
 do_notify_resume(struct pt_regs *regs, void *unused, __u32 thread_info_flags)
 {
 	user_exit();

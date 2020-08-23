@@ -24,7 +24,10 @@
 #include <linux/types.h>
 #include <linux/input.h>
 #include <linux/input/sparse-keymap.h>
+<<<<<<< HEAD
 #include <acpi/acpi_drivers.h>
+=======
+>>>>>>> v3.18
 #include <linux/acpi.h>
 #include <linux/string.h>
 

@@ -459,6 +459,7 @@ static int mt9m032_set_pad_crop(struct v4l2_subdev *subdev,
 			  MT9M032_COLUMN_START_MAX);
 	rect.top = clamp(ALIGN(crop->rect.top, 2), MT9M032_ROW_START_MIN,
 			 MT9M032_ROW_START_MAX);
+<<<<<<< HEAD
 	rect.width = clamp(ALIGN(crop->rect.width, 2), MT9M032_COLUMN_SIZE_MIN,
 			   MT9M032_COLUMN_SIZE_MAX);
 	rect.height = clamp(ALIGN(crop->rect.height, 2), MT9M032_ROW_SIZE_MIN,
@@ -466,6 +467,17 @@ static int mt9m032_set_pad_crop(struct v4l2_subdev *subdev,
 
 	rect.width = min(rect.width, MT9M032_PIXEL_ARRAY_WIDTH - rect.left);
 	rect.height = min(rect.height, MT9M032_PIXEL_ARRAY_HEIGHT - rect.top);
+=======
+	rect.width = clamp_t(unsigned int, ALIGN(crop->rect.width, 2),
+			     MT9M032_COLUMN_SIZE_MIN, MT9M032_COLUMN_SIZE_MAX);
+	rect.height = clamp_t(unsigned int, ALIGN(crop->rect.height, 2),
+			      MT9M032_ROW_SIZE_MIN, MT9M032_ROW_SIZE_MAX);
+
+	rect.width = min_t(unsigned int, rect.width,
+			   MT9M032_PIXEL_ARRAY_WIDTH - rect.left);
+	rect.height = min_t(unsigned int, rect.height,
+			    MT9M032_PIXEL_ARRAY_HEIGHT - rect.top);
+>>>>>>> v3.18
 
 	__crop = __mt9m032_get_pad_crop(sensor, fh, crop->which);
 
@@ -554,10 +566,15 @@ static int mt9m032_g_register(struct v4l2_subdev *sd,
 	struct i2c_client *client = v4l2_get_subdevdata(&sensor->subdev);
 	int val;
 
+<<<<<<< HEAD
 	if (reg->match.type != V4L2_CHIP_MATCH_I2C_ADDR || reg->reg > 0xff)
 		return -EINVAL;
 	if (reg->match.addr != client->addr)
 		return -ENODEV;
+=======
+	if (reg->reg > 0xff)
+		return -EINVAL;
+>>>>>>> v3.18
 
 	val = mt9m032_read(client, reg->reg);
 	if (val < 0)
@@ -575,12 +592,18 @@ static int mt9m032_s_register(struct v4l2_subdev *sd,
 	struct mt9m032 *sensor = to_mt9m032(sd);
 	struct i2c_client *client = v4l2_get_subdevdata(&sensor->subdev);
 
+<<<<<<< HEAD
 	if (reg->match.type != V4L2_CHIP_MATCH_I2C_ADDR || reg->reg > 0xff)
 		return -EINVAL;
 
 	if (reg->match.addr != client->addr)
 		return -ENODEV;
 
+=======
+	if (reg->reg > 0xff)
+		return -EINVAL;
+
+>>>>>>> v3.18
 	return mt9m032_write(client, reg->reg, reg->val);
 }
 #endif
@@ -730,7 +753,11 @@ static int mt9m032_probe(struct i2c_client *client,
 	if (!client->dev.platform_data)
 		return -ENODEV;
 
+<<<<<<< HEAD
 	sensor = kzalloc(sizeof(*sensor), GFP_KERNEL);
+=======
+	sensor = devm_kzalloc(&client->dev, sizeof(*sensor), GFP_KERNEL);
+>>>>>>> v3.18
 	if (sensor == NULL)
 		return -ENOMEM;
 
@@ -860,7 +887,10 @@ error_ctrl:
 	v4l2_ctrl_handler_free(&sensor->ctrls);
 error_sensor:
 	mutex_destroy(&sensor->lock);
+<<<<<<< HEAD
 	kfree(sensor);
+=======
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -873,7 +903,10 @@ static int mt9m032_remove(struct i2c_client *client)
 	v4l2_ctrl_handler_free(&sensor->ctrls);
 	media_entity_cleanup(&subdev->entity);
 	mutex_destroy(&sensor->lock);
+<<<<<<< HEAD
 	kfree(sensor);
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

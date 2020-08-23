@@ -75,8 +75,13 @@ static const char *wm8523_zd_count_text[] = {
 	"2048",
 };
 
+<<<<<<< HEAD
 static const struct soc_enum wm8523_zc_count =
 	SOC_ENUM_SINGLE(WM8523_ZERO_DETECT, 0, 2, wm8523_zd_count_text);
+=======
+static SOC_ENUM_SINGLE_DECL(wm8523_zc_count, WM8523_ZERO_DETECT, 0,
+			    wm8523_zd_count_text);
+>>>>>>> v3.18
 
 static const struct snd_kcontrol_new wm8523_controls[] = {
 SOC_DOUBLE_R_TLV("Playback Volume", WM8523_DAC_GAINL, WM8523_DAC_GAINR,
@@ -163,6 +168,7 @@ static int wm8523_hw_params(struct snd_pcm_substream *substream,
 	aifctrl2 |= lrclk_ratios[i].value;
 
 	aifctrl1 &= ~WM8523_WL_MASK;
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		break;
@@ -173,6 +179,18 @@ static int wm8523_hw_params(struct snd_pcm_substream *substream,
 		aifctrl1 |= 0x10;
 		break;
 	case SNDRV_PCM_FORMAT_S32_LE:
+=======
+	switch (params_width(params)) {
+	case 16:
+		break;
+	case 20:
+		aifctrl1 |= 0x8;
+		break;
+	case 24:
+		aifctrl1 |= 0x10;
+		break;
+	case 32:
+>>>>>>> v3.18
 		aifctrl1 |= 0x18;
 		break;
 	}
@@ -392,18 +410,24 @@ static int wm8523_resume(struct snd_soc_codec *codec)
 static int wm8523_probe(struct snd_soc_codec *codec)
 {
 	struct wm8523_priv *wm8523 = snd_soc_codec_get_drvdata(codec);
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 
 	wm8523->rate_constraint.list = &wm8523->rate_constraint_list[0];
 	wm8523->rate_constraint.count =
 		ARRAY_SIZE(wm8523->rate_constraint_list);
 
+<<<<<<< HEAD
 	ret = snd_soc_codec_set_cache_io(codec, 8, 16, SND_SOC_REGMAP);
 	if (ret != 0) {
 		dev_err(codec->dev, "Failed to set cache I/O: %d\n", ret);
 		return ret;
 	}
 
+=======
+>>>>>>> v3.18
 	/* Change some default settings - latch VU and enable ZC */
 	snd_soc_update_bits(codec, WM8523_DAC_GAINR,
 			    WM8523_DACR_VU, WM8523_DACR_VU);
@@ -452,7 +476,11 @@ static const struct regmap_config wm8523_regmap = {
 	.volatile_reg = wm8523_volatile_register,
 };
 
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 static int wm8523_i2c_probe(struct i2c_client *i2c,
 			    const struct i2c_device_id *id)
 {
@@ -555,7 +583,11 @@ static struct i2c_driver wm8523_i2c_driver = {
 static int __init wm8523_modinit(void)
 {
 	int ret;
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 	ret = i2c_add_driver(&wm8523_i2c_driver);
 	if (ret != 0) {
 		printk(KERN_ERR "Failed to register WM8523 I2C driver: %d\n",
@@ -568,7 +600,11 @@ module_init(wm8523_modinit);
 
 static void __exit wm8523_exit(void)
 {
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 	i2c_del_driver(&wm8523_i2c_driver);
 #endif
 }

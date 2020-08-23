@@ -21,7 +21,11 @@
 #define _LINUX_ATARIHW_H_
 
 #include <linux/types.h>
+<<<<<<< HEAD
 #include <asm/bootinfo.h>
+=======
+#include <asm/bootinfo-atari.h>
+>>>>>>> v3.18
 #include <asm/raw_io.h>
 
 extern u_long atari_mch_cookie;

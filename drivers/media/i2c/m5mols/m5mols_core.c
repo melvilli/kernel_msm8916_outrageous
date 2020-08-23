@@ -930,6 +930,10 @@ static int m5mols_probe(struct i2c_client *client,
 			const struct i2c_device_id *id)
 {
 	const struct m5mols_platform_data *pdata = client->dev.platform_data;
+<<<<<<< HEAD
+=======
+	unsigned long gpio_flags;
+>>>>>>> v3.18
 	struct m5mols_info *info;
 	struct v4l2_subdev *sd;
 	int ret;
@@ -949,13 +953,18 @@ static int m5mols_probe(struct i2c_client *client,
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 	info = kzalloc(sizeof(struct m5mols_info), GFP_KERNEL);
+=======
+	info = devm_kzalloc(&client->dev, sizeof(*info), GFP_KERNEL);
+>>>>>>> v3.18
 	if (!info)
 		return -ENOMEM;
 
 	info->pdata = pdata;
 	info->set_power	= pdata->set_power;
 
+<<<<<<< HEAD
 	ret = gpio_request(pdata->gpio_reset, "M5MOLS_NRST");
 	if (ret) {
 		dev_err(&client->dev, "Failed to request gpio: %d\n", ret);
@@ -967,6 +976,22 @@ static int m5mols_probe(struct i2c_client *client,
 	if (ret) {
 		dev_err(&client->dev, "Failed to get regulators: %d\n", ret);
 		goto out_gpio;
+=======
+	gpio_flags = pdata->reset_polarity
+		   ? GPIOF_OUT_INIT_HIGH : GPIOF_OUT_INIT_LOW;
+	ret = devm_gpio_request_one(&client->dev, pdata->gpio_reset, gpio_flags,
+				    "M5MOLS_NRST");
+	if (ret) {
+		dev_err(&client->dev, "Failed to request gpio: %d\n", ret);
+		return ret;
+	}
+
+	ret = devm_regulator_bulk_get(&client->dev, ARRAY_SIZE(supplies),
+				      supplies);
+	if (ret) {
+		dev_err(&client->dev, "Failed to get regulators: %d\n", ret);
+		return ret;
+>>>>>>> v3.18
 	}
 
 	sd = &info->sd;
@@ -978,17 +1003,29 @@ static int m5mols_probe(struct i2c_client *client,
 	info->pad.flags = MEDIA_PAD_FL_SOURCE;
 	ret = media_entity_init(&sd->entity, 1, &info->pad, 0);
 	if (ret < 0)
+<<<<<<< HEAD
 		goto out_reg;
+=======
+		return ret;
+>>>>>>> v3.18
 	sd->entity.type = MEDIA_ENT_T_V4L2_SUBDEV_SENSOR;
 
 	init_waitqueue_head(&info->irq_waitq);
 	mutex_init(&info->lock);
 
+<<<<<<< HEAD
 	ret = request_irq(client->irq, m5mols_irq_handler,
 			  IRQF_TRIGGER_RISING, MODULE_NAME, sd);
 	if (ret) {
 		dev_err(&client->dev, "Interrupt request failed: %d\n", ret);
 		goto out_me;
+=======
+	ret = devm_request_irq(&client->dev, client->irq, m5mols_irq_handler,
+			       IRQF_TRIGGER_RISING, MODULE_NAME, sd);
+	if (ret) {
+		dev_err(&client->dev, "Interrupt request failed: %d\n", ret);
+		goto error;
+>>>>>>> v3.18
 	}
 	info->res_type = M5MOLS_RESTYPE_MONITOR;
 	info->ffmt[0] = m5mols_default_ffmt[0];
@@ -996,7 +1033,11 @@ static int m5mols_probe(struct i2c_client *client,
 
 	ret = m5mols_sensor_power(info, true);
 	if (ret)
+<<<<<<< HEAD
 		goto out_irq;
+=======
+		goto error;
+>>>>>>> v3.18
 
 	ret = m5mols_fw_start(sd);
 	if (!ret)
@@ -1005,6 +1046,7 @@ static int m5mols_probe(struct i2c_client *client,
 	ret = m5mols_sensor_power(info, false);
 	if (!ret)
 		return 0;
+<<<<<<< HEAD
 out_irq:
 	free_irq(client->irq, sd);
 out_me:
@@ -1015,12 +1057,17 @@ out_gpio:
 	gpio_free(pdata->gpio_reset);
 out_free:
 	kfree(info);
+=======
+error:
+	media_entity_cleanup(&sd->entity);
+>>>>>>> v3.18
 	return ret;
 }
 
 static int m5mols_remove(struct i2c_client *client)
 {
 	struct v4l2_subdev *sd = i2c_get_clientdata(client);
+<<<<<<< HEAD
 	struct m5mols_info *info = to_m5mols(sd);
 
 	v4l2_device_unregister_subdev(sd);
@@ -1031,6 +1078,13 @@ static int m5mols_remove(struct i2c_client *client)
 	gpio_free(info->pdata->gpio_reset);
 	media_entity_cleanup(&sd->entity);
 	kfree(info);
+=======
+
+	v4l2_device_unregister_subdev(sd);
+	v4l2_ctrl_handler_free(sd->ctrl_handler);
+	media_entity_cleanup(&sd->entity);
+
+>>>>>>> v3.18
 	return 0;
 }
 

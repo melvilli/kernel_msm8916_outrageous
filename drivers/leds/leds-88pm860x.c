@@ -11,7 +11,10 @@
  */
 
 #include <linux/kernel.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/of.h>
 #include <linux/platform_device.h>
 #include <linux/i2c.h>
@@ -131,10 +134,16 @@ static int pm860x_led_dt_init(struct platform_device *pdev,
 	struct device_node *nproot, *np;
 	int iset = 0;
 
+<<<<<<< HEAD
 	nproot = of_node_get(pdev->dev.parent->of_node);
 	if (!nproot)
 		return -ENODEV;
 	nproot = of_find_node_by_name(nproot, "leds");
+=======
+	if (!pdev->dev.parent->of_node)
+		return -ENODEV;
+	nproot = of_get_child_by_name(pdev->dev.parent->of_node, "leds");
+>>>>>>> v3.18
 	if (!nproot) {
 		dev_err(&pdev->dev, "failed to find leds node\n");
 		return -ENODEV;
@@ -157,7 +166,11 @@ static int pm860x_led_dt_init(struct platform_device *pdev,
 static int pm860x_led_probe(struct platform_device *pdev)
 {
 	struct pm860x_chip *chip = dev_get_drvdata(pdev->dev.parent);
+<<<<<<< HEAD
 	struct pm860x_led_pdata *pdata = pdev->dev.platform_data;
+=======
+	struct pm860x_led_pdata *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	struct pm860x_led *data;
 	struct resource *res;
 	int ret = 0;
@@ -204,7 +217,11 @@ static int pm860x_led_probe(struct platform_device *pdev)
 		sprintf(data->name, "led1-blue");
 		break;
 	}
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, data);
+=======
+	platform_set_drvdata(pdev, data);
+>>>>>>> v3.18
 	data->chip = chip;
 	data->i2c = (chip->id == CHIP_PM8606) ? chip->client : chip->companion;
 	data->port = pdev->id;

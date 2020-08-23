@@ -44,7 +44,11 @@ SYSCALL_DEFINE5(pciconfig_read, unsigned long, bus, unsigned long, dfn,
 	default:
 		err = -EINVAL;
 		goto error;
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 
 	err = -EIO;
 	if (cfg_ret != PCIBIOS_SUCCESSFUL)
@@ -99,7 +103,11 @@ SYSCALL_DEFINE5(pciconfig_write, unsigned long, bus, unsigned long, dfn,
 	if (!dev)
 		return -ENODEV;
 
+<<<<<<< HEAD
 	switch(len) {
+=======
+	switch (len) {
+>>>>>>> v3.18
 	case 1:
 		err = get_user(byte, (u8 __user *)buf);
 		if (err)

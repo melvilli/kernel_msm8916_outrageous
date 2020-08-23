@@ -22,11 +22,19 @@
  * Authors: Ben Skeggs
  */
 
+<<<<<<< HEAD
 #include <subdev/instmem.h>
 #include <subdev/fb.h>
 
 #include <core/mm.h>
 
+=======
+#include <subdev/fb.h>
+#include <core/mm.h>
+
+#include "priv.h"
+
+>>>>>>> v3.18
 struct nv50_instmem_priv {
 	struct nouveau_instmem base;
 	spinlock_t lock;
@@ -38,6 +46,7 @@ struct nv50_instobj_priv {
 	struct nouveau_mem *mem;
 };
 
+<<<<<<< HEAD
 static int
 nv50_instobj_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		  struct nouveau_oclass *oclass, void *data, u32 size,
@@ -74,6 +83,11 @@ nv50_instobj_dtor(struct nouveau_object *object)
 	pfb->ram.put(pfb, &node->mem);
 	nouveau_instobj_destroy(&node->base);
 }
+=======
+/******************************************************************************
+ * instmem object implementation
+ *****************************************************************************/
+>>>>>>> v3.18
 
 static u32
 nv50_instobj_rd32(struct nouveau_object *object, u64 offset)
@@ -113,9 +127,52 @@ nv50_instobj_wr32(struct nouveau_object *object, u64 offset, u32 data)
 	spin_unlock_irqrestore(&priv->lock, flags);
 }
 
+<<<<<<< HEAD
 static struct nouveau_oclass
 nv50_instobj_oclass = {
 	.ofuncs = &(struct nouveau_ofuncs) {
+=======
+static void
+nv50_instobj_dtor(struct nouveau_object *object)
+{
+	struct nv50_instobj_priv *node = (void *)object;
+	struct nouveau_fb *pfb = nouveau_fb(object);
+	pfb->ram->put(pfb, &node->mem);
+	nouveau_instobj_destroy(&node->base);
+}
+
+static int
+nv50_instobj_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
+		  struct nouveau_oclass *oclass, void *data, u32 size,
+		  struct nouveau_object **pobject)
+{
+	struct nouveau_fb *pfb = nouveau_fb(parent);
+	struct nouveau_instobj_args *args = data;
+	struct nv50_instobj_priv *node;
+	int ret;
+
+	args->size  = max((args->size  + 4095) & ~4095, (u32)4096);
+	args->align = max((args->align + 4095) & ~4095, (u32)4096);
+
+	ret = nouveau_instobj_create(parent, engine, oclass, &node);
+	*pobject = nv_object(node);
+	if (ret)
+		return ret;
+
+	ret = pfb->ram->get(pfb, args->size, args->align, 0, 0x800, &node->mem);
+	if (ret)
+		return ret;
+
+	node->base.addr = node->mem->offset;
+	node->base.size = node->mem->size << 12;
+	node->mem->page_shift = 12;
+	return 0;
+}
+
+static struct nouveau_instobj_impl
+nv50_instobj_oclass = {
+	.base.ofuncs = &(struct nouveau_ofuncs) {
+>>>>>>> v3.18
 		.ctor = nv50_instobj_ctor,
 		.dtor = nv50_instobj_dtor,
 		.init = _nouveau_instobj_init,
@@ -125,6 +182,7 @@ nv50_instobj_oclass = {
 	},
 };
 
+<<<<<<< HEAD
 static int
 nv50_instmem_alloc(struct nouveau_instmem *imem, struct nouveau_object *parent,
 		   u32 size, u32 align, struct nouveau_object **pobject)
@@ -132,6 +190,18 @@ nv50_instmem_alloc(struct nouveau_instmem *imem, struct nouveau_object *parent,
 	struct nouveau_object *engine = nv_object(imem);
 	return nouveau_object_ctor(parent, engine, &nv50_instobj_oclass,
 				   (void *)(unsigned long)align, size, pobject);
+=======
+/******************************************************************************
+ * instmem subdev implementation
+ *****************************************************************************/
+
+static int
+nv50_instmem_fini(struct nouveau_object *object, bool suspend)
+{
+	struct nv50_instmem_priv *priv = (void *)object;
+	priv->addr = ~0ULL;
+	return nouveau_instmem_fini(&priv->base, suspend);
+>>>>>>> v3.18
 }
 
 static int
@@ -148,6 +218,7 @@ nv50_instmem_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		return ret;
 
 	spin_lock_init(&priv->lock);
+<<<<<<< HEAD
 	priv->base.alloc = nv50_instmem_alloc;
 	return 0;
 }
@@ -164,9 +235,23 @@ struct nouveau_oclass
 nv50_instmem_oclass = {
 	.handle = NV_SUBDEV(INSTMEM, 0x50),
 	.ofuncs = &(struct nouveau_ofuncs) {
+=======
+	return 0;
+}
+
+struct nouveau_oclass *
+nv50_instmem_oclass = &(struct nouveau_instmem_impl) {
+	.base.handle = NV_SUBDEV(INSTMEM, 0x50),
+	.base.ofuncs = &(struct nouveau_ofuncs) {
+>>>>>>> v3.18
 		.ctor = nv50_instmem_ctor,
 		.dtor = _nouveau_instmem_dtor,
 		.init = _nouveau_instmem_init,
 		.fini = nv50_instmem_fini,
 	},
+<<<<<<< HEAD
 };
+=======
+	.instobj = &nv50_instobj_oclass.base,
+}.base;
+>>>>>>> v3.18

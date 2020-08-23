@@ -106,7 +106,11 @@ static int pl030_probe(struct amba_device *dev, const struct amba_id *id)
 	if (ret)
 		goto err_req;
 
+<<<<<<< HEAD
 	rtc = kmalloc(sizeof(*rtc), GFP_KERNEL);
+=======
+	rtc = devm_kzalloc(&dev->dev, sizeof(*rtc), GFP_KERNEL);
+>>>>>>> v3.18
 	if (!rtc) {
 		ret = -ENOMEM;
 		goto err_rtc;
@@ -115,7 +119,11 @@ static int pl030_probe(struct amba_device *dev, const struct amba_id *id)
 	rtc->base = ioremap(dev->res.start, resource_size(&dev->res));
 	if (!rtc->base) {
 		ret = -ENOMEM;
+<<<<<<< HEAD
 		goto err_map;
+=======
+		goto err_rtc;
+>>>>>>> v3.18
 	}
 
 	__raw_writel(0, rtc->base + RTC_CR);
@@ -141,8 +149,11 @@ static int pl030_probe(struct amba_device *dev, const struct amba_id *id)
 	free_irq(dev->irq[0], rtc);
  err_irq:
 	iounmap(rtc->base);
+<<<<<<< HEAD
  err_map:
 	kfree(rtc);
+=======
+>>>>>>> v3.18
  err_rtc:
 	amba_release_regions(dev);
  err_req:
@@ -153,14 +164,20 @@ static int pl030_remove(struct amba_device *dev)
 {
 	struct pl030_rtc *rtc = amba_get_drvdata(dev);
 
+<<<<<<< HEAD
 	amba_set_drvdata(dev, NULL);
 
+=======
+>>>>>>> v3.18
 	writel(0, rtc->base + RTC_CR);
 
 	free_irq(dev->irq[0], rtc);
 	rtc_device_unregister(rtc->rtc);
 	iounmap(rtc->base);
+<<<<<<< HEAD
 	kfree(rtc);
+=======
+>>>>>>> v3.18
 	amba_release_regions(dev);
 
 	return 0;

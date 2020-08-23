@@ -1196,7 +1196,11 @@ wavefront_send_multisample (snd_wavefront_t *dev, wavefront_patch_info *header)
 	int num_samples;
 	unsigned char *msample_hdr;
 
+<<<<<<< HEAD
 	msample_hdr = kmalloc(sizeof(WF_MSAMPLE_BYTES), GFP_KERNEL);
+=======
+	msample_hdr = kmalloc(WF_MSAMPLE_BYTES, GFP_KERNEL);
+>>>>>>> v3.18
 	if (! msample_hdr)
 		return -ENOMEM;
 

@@ -17,6 +17,7 @@
 #include <linux/of_fdt.h>
 #include <linux/of.h>
 
+<<<<<<< HEAD
 #include <mach/map.h>
 #include <mach/irqs.h>
 #include <plat/devs.h>
@@ -60,6 +61,17 @@ struct platform_device s5p_device_mfc_r = {
 		.dma_mask		= &s5p_device_mfc_r.dev.coherent_dma_mask,
 		.coherent_dma_mask	= DMA_BIT_MASK(32),
 	},
+=======
+static struct platform_device s5p_device_mfc_l;
+static struct platform_device s5p_device_mfc_r;
+
+struct s5p_mfc_dt_meminfo {
+	unsigned long	loff;
+	unsigned long	lsize;
+	unsigned long	roff;
+	unsigned long	rsize;
+	char		*compatible;
+>>>>>>> v3.18
 };
 
 struct s5p_mfc_reserved_mem {
@@ -70,7 +82,12 @@ struct s5p_mfc_reserved_mem {
 
 static struct s5p_mfc_reserved_mem s5p_mfc_mem[2] __initdata;
 
+<<<<<<< HEAD
 void __init s5p_mfc_reserve_mem(phys_addr_t rbase, unsigned int rsize,
+=======
+
+static void __init s5p_mfc_reserve_mem(phys_addr_t rbase, unsigned int rsize,
+>>>>>>> v3.18
 				phys_addr_t lbase, unsigned int lsize)
 {
 	int i;
@@ -93,6 +110,7 @@ void __init s5p_mfc_reserve_mem(phys_addr_t rbase, unsigned int rsize,
 	}
 }
 
+<<<<<<< HEAD
 static int __init s5p_mfc_memory_init(void)
 {
 	int i;
@@ -119,27 +137,55 @@ int __init s5p_fdt_find_mfc_mem(unsigned long node, const char *uname,
 	__be32 *prop;
 	unsigned long len;
 	struct s5p_mfc_dt_meminfo *mfc_mem = data;
+=======
+int __init s5p_fdt_alloc_mfc_mem(unsigned long node, const char *uname,
+				int depth, void *data)
+{
+	const __be32 *prop;
+	int len;
+	struct s5p_mfc_dt_meminfo mfc_mem;
+>>>>>>> v3.18
 
 	if (!data)
 		return 0;
 
+<<<<<<< HEAD
 	if (!of_flat_dt_is_compatible(node, mfc_mem->compatible))
+=======
+	if (!of_flat_dt_is_compatible(node, data))
+>>>>>>> v3.18
 		return 0;
 
 	prop = of_get_flat_dt_prop(node, "samsung,mfc-l", &len);
 	if (!prop || (len != 2 * sizeof(unsigned long)))
 		return 0;
 
+<<<<<<< HEAD
 	mfc_mem->loff = be32_to_cpu(prop[0]);
 	mfc_mem->lsize = be32_to_cpu(prop[1]);
+=======
+	mfc_mem.loff = be32_to_cpu(prop[0]);
+	mfc_mem.lsize = be32_to_cpu(prop[1]);
+>>>>>>> v3.18
 
 	prop = of_get_flat_dt_prop(node, "samsung,mfc-r", &len);
 	if (!prop || (len != 2 * sizeof(unsigned long)))
 		return 0;
 
+<<<<<<< HEAD
 	mfc_mem->roff = be32_to_cpu(prop[0]);
 	mfc_mem->rsize = be32_to_cpu(prop[1]);
 
 	return 1;
 }
 #endif
+=======
+	mfc_mem.roff = be32_to_cpu(prop[0]);
+	mfc_mem.rsize = be32_to_cpu(prop[1]);
+
+	s5p_mfc_reserve_mem(mfc_mem.roff, mfc_mem.rsize,
+			mfc_mem.loff, mfc_mem.lsize);
+
+	return 1;
+}
+>>>>>>> v3.18

@@ -13,6 +13,7 @@
 
 #define pr_fmt(fmt) "SPEAr1340: " fmt
 
+<<<<<<< HEAD
 #include <linux/ahci_platform.h>
 #include <linux/amba/serial.h>
 #include <linux/delay.h>
@@ -144,6 +145,16 @@ static void __init spear1340_dt_init(void)
 {
 	of_platform_populate(NULL, of_default_bus_match_table,
 			spear1340_auxdata_lookup, NULL);
+=======
+#include <linux/of_platform.h>
+#include <asm/mach/arch.h>
+#include "generic.h"
+
+static void __init spear1340_dt_init(void)
+{
+	of_platform_populate(NULL, of_default_bus_match_table, NULL, NULL);
+	platform_device_register_simple("spear-cpufreq", -1, NULL, 0);
+>>>>>>> v3.18
 }
 
 static const char * const spear1340_dt_board_compat[] = {
@@ -155,7 +166,10 @@ static const char * const spear1340_dt_board_compat[] = {
 DT_MACHINE_START(SPEAR1340_DT, "ST SPEAr1340 SoC with Flattened Device Tree")
 	.smp		=	smp_ops(spear13xx_smp_ops),
 	.map_io		=	spear13xx_map_io,
+<<<<<<< HEAD
 	.init_irq	=	irqchip_init,
+=======
+>>>>>>> v3.18
 	.init_time	=	spear13xx_timer_init,
 	.init_machine	=	spear1340_dt_init,
 	.restart	=	spear_restart,

@@ -14,7 +14,10 @@
 #include <linux/clk.h>
 #include <linux/delay.h>
 #include <linux/err.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/input.h>
 #include <linux/interrupt.h>
 #include <linux/io.h>
@@ -24,7 +27,10 @@
 #include <linux/pm_runtime.h>
 #include <linux/slab.h>
 #include <linux/of.h>
+<<<<<<< HEAD
 #include <linux/of_gpio.h>
+=======
+>>>>>>> v3.18
 #include <linux/sched.h>
 #include <linux/input/samsung-keypad.h>
 
@@ -79,10 +85,13 @@ struct samsung_keypad {
 	unsigned int rows;
 	unsigned int cols;
 	unsigned int row_state[SAMSUNG_MAX_COLS];
+<<<<<<< HEAD
 #ifdef CONFIG_OF
 	int row_gpios[SAMSUNG_MAX_ROWS];
 	int col_gpios[SAMSUNG_MAX_COLS];
 #endif
+=======
+>>>>>>> v3.18
 	unsigned short keycodes[];
 };
 
@@ -249,8 +258,13 @@ static void samsung_keypad_close(struct input_dev *input_dev)
 }
 
 #ifdef CONFIG_OF
+<<<<<<< HEAD
 static struct samsung_keypad_platdata *samsung_keypad_parse_dt(
 				struct device *dev)
+=======
+static struct samsung_keypad_platdata *
+samsung_keypad_parse_dt(struct device *dev)
+>>>>>>> v3.18
 {
 	struct samsung_keypad_platdata *pdata;
 	struct matrix_keymap_data *keymap_data;
@@ -258,17 +272,33 @@ static struct samsung_keypad_platdata *samsung_keypad_parse_dt(
 	struct device_node *np = dev->of_node, *key_np;
 	unsigned int key_count;
 
+<<<<<<< HEAD
 	pdata = devm_kzalloc(dev, sizeof(*pdata), GFP_KERNEL);
 	if (!pdata) {
 		dev_err(dev, "could not allocate memory for platform data\n");
 		return NULL;
+=======
+	if (!np) {
+		dev_err(dev, "missing device tree data\n");
+		return ERR_PTR(-EINVAL);
+	}
+
+	pdata = devm_kzalloc(dev, sizeof(*pdata), GFP_KERNEL);
+	if (!pdata) {
+		dev_err(dev, "could not allocate memory for platform data\n");
+		return ERR_PTR(-ENOMEM);
+>>>>>>> v3.18
 	}
 
 	of_property_read_u32(np, "samsung,keypad-num-rows", &num_rows);
 	of_property_read_u32(np, "samsung,keypad-num-columns", &num_cols);
 	if (!num_rows || !num_cols) {
 		dev_err(dev, "number of keypad rows/columns not specified\n");
+<<<<<<< HEAD
 		return NULL;
+=======
+		return ERR_PTR(-EINVAL);
+>>>>>>> v3.18
 	}
 	pdata->rows = num_rows;
 	pdata->cols = num_cols;
@@ -276,7 +306,11 @@ static struct samsung_keypad_platdata *samsung_keypad_parse_dt(
 	keymap_data = devm_kzalloc(dev, sizeof(*keymap_data), GFP_KERNEL);
 	if (!keymap_data) {
 		dev_err(dev, "could not allocate memory for keymap data\n");
+<<<<<<< HEAD
 		return NULL;
+=======
+		return ERR_PTR(-ENOMEM);
+>>>>>>> v3.18
 	}
 	pdata->keymap_data = keymap_data;
 
@@ -285,7 +319,11 @@ static struct samsung_keypad_platdata *samsung_keypad_parse_dt(
 	keymap = devm_kzalloc(dev, sizeof(uint32_t) * key_count, GFP_KERNEL);
 	if (!keymap) {
 		dev_err(dev, "could not allocate memory for keymap\n");
+<<<<<<< HEAD
 		return NULL;
+=======
+		return ERR_PTR(-ENOMEM);
+>>>>>>> v3.18
 	}
 	keymap_data->keymap = keymap;
 
@@ -299,11 +337,16 @@ static struct samsung_keypad_platdata *samsung_keypad_parse_dt(
 
 	if (of_get_property(np, "linux,input-no-autorepeat", NULL))
 		pdata->no_autorepeat = true;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	if (of_get_property(np, "linux,input-wakeup", NULL))
 		pdata->wakeup = true;
 
 	return pdata;
 }
+<<<<<<< HEAD
 
 static void samsung_keypad_parse_dt_gpio(struct device *dev,
 				struct samsung_keypad *keypad)
@@ -348,6 +391,15 @@ static
 struct samsung_keypad_platdata *samsung_keypad_parse_dt(struct device *dev)
 {
 	return NULL;
+=======
+#else
+static struct samsung_keypad_platdata *
+samsung_keypad_parse_dt(struct device *dev)
+{
+	dev_err(dev, "no platform data defined\n");
+
+	return ERR_PTR(-EINVAL);
+>>>>>>> v3.18
 }
 #endif
 
@@ -362,6 +414,7 @@ static int samsung_keypad_probe(struct platform_device *pdev)
 	unsigned int keymap_size;
 	int error;
 
+<<<<<<< HEAD
 	if (pdev->dev.of_node)
 		pdata = samsung_keypad_parse_dt(&pdev->dev);
 	else
@@ -369,6 +422,13 @@ static int samsung_keypad_probe(struct platform_device *pdev)
 	if (!pdata) {
 		dev_err(&pdev->dev, "no platform data defined\n");
 		return -EINVAL;
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+	if (!pdata) {
+		pdata = samsung_keypad_parse_dt(&pdev->dev);
+		if (IS_ERR(pdata))
+			return PTR_ERR(pdata);
+>>>>>>> v3.18
 	}
 
 	keymap_data = pdata->keymap_data;
@@ -424,6 +484,7 @@ static int samsung_keypad_probe(struct platform_device *pdev)
 	keypad->stopped = true;
 	init_waitqueue_head(&keypad->wait);
 
+<<<<<<< HEAD
 	if (pdev->dev.of_node) {
 #ifdef CONFIG_OF
 		samsung_keypad_parse_dt_gpio(&pdev->dev, keypad);
@@ -433,6 +494,13 @@ static int samsung_keypad_probe(struct platform_device *pdev)
 	} else {
 		keypad->type = platform_get_device_id(pdev)->driver_data;
 	}
+=======
+	if (pdev->dev.of_node)
+		keypad->type = of_device_is_compatible(pdev->dev.of_node,
+					"samsung,s5pv210-keypad");
+	else
+		keypad->type = platform_get_device_id(pdev)->driver_data;
+>>>>>>> v3.18
 
 	input_dev->name = pdev->name;
 	input_dev->id.bustype = BUS_HOST;
@@ -487,7 +555,10 @@ static int samsung_keypad_probe(struct platform_device *pdev)
 err_disable_runtime_pm:
 	pm_runtime_disable(&pdev->dev);
 	device_init_wakeup(&pdev->dev, 0);
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 err_unprepare_clk:
 	clk_unprepare(keypad->clk);
 	return error;
@@ -499,7 +570,10 @@ static int samsung_keypad_remove(struct platform_device *pdev)
 
 	pm_runtime_disable(&pdev->dev);
 	device_init_wakeup(&pdev->dev, 0);
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 
 	input_unregister_device(keypad->input_dev);
 

@@ -18,7 +18,10 @@ config BLACKFIN
 	select HAVE_FTRACE_MCOUNT_RECORD
 	select HAVE_FUNCTION_GRAPH_TRACER
 	select HAVE_FUNCTION_TRACER
+<<<<<<< HEAD
 	select HAVE_FUNCTION_TRACE_MCOUNT_TEST
+=======
+>>>>>>> v3.18
 	select HAVE_IDE
 	select HAVE_KERNEL_GZIP if RAMKERNEL
 	select HAVE_KERNEL_BZIP2 if RAMKERNEL
@@ -34,11 +37,19 @@ config BLACKFIN
 	select ARCH_WANT_IPC_PARSE_VERSION
 	select GENERIC_ATOMIC64
 	select GENERIC_IRQ_PROBE
+<<<<<<< HEAD
+=======
+	select GENERIC_IRQ_SHOW
+>>>>>>> v3.18
 	select HAVE_NMI_WATCHDOG if NMI_WATCHDOG
 	select GENERIC_SMP_IDLE_THREAD
 	select ARCH_USES_GETTIMEOFFSET if !GENERIC_CLOCKEVENTS
 	select HAVE_MOD_ARCH_SPECIFIC
 	select MODULES_USE_ELF_RELA
+<<<<<<< HEAD
+=======
+	select HAVE_DEBUG_STACKOVERFLOW
+>>>>>>> v3.18
 
 config GENERIC_CSUM
 	def_bool y
@@ -251,7 +262,11 @@ config NR_CPUS
 
 config HOTPLUG_CPU
 	bool "Support for hot-pluggable CPUs"
+<<<<<<< HEAD
 	depends on SMP && HOTPLUG
+=======
+	depends on SMP
+>>>>>>> v3.18
 	default y
 
 config BF_REV_MIN
@@ -280,7 +295,11 @@ config BF_REV_0_0
 
 config BF_REV_0_1
 	bool "0.1"
+<<<<<<< HEAD
 	depends on (BF51x || BF52x || (BF54x && !BF54xM))
+=======
+	depends on (BF51x || BF52x || (BF54x && !BF54xM) || BF60x)
+>>>>>>> v3.18
 
 config BF_REV_0_2
 	bool "0.2"
@@ -315,6 +334,17 @@ config BF53x
 	depends on (BF531 || BF532 || BF533 || BF534 || BF536 || BF537)
 	default y
 
+<<<<<<< HEAD
+=======
+config GPIO_ADI
+	def_bool y
+	depends on (BF51x || BF52x || BF53x || BF538 || BF539 || BF561)
+
+config PINCTRL
+	def_bool y
+	depends on BF54x || BF60x
+
+>>>>>>> v3.18
 config MEM_MT48LC64M4A2FB_7E
 	bool
 	depends on (BFIN533_STAMP)
@@ -662,7 +692,11 @@ config TICKSOURCE_CORETMR
 	default y
 endmenu
 
+<<<<<<< HEAD
 menu "Clock souce"
+=======
+menu "Clock source"
+>>>>>>> v3.18
 	depends on GENERIC_CLOCKEVENTS
 config CYCLES_CLOCKSOURCE
 	bool "CYCLES"
@@ -858,6 +892,7 @@ config SYS_BFIN_SPINLOCK_L1
 	  If enabled, sys_bfin_spinlock function is linked
 	  into L1 instruction memory. (less latency)
 
+<<<<<<< HEAD
 config IP_CHECKSUM_L1
 	bool "Locate IP Checksum function in L1 Memory"
 	default n
@@ -866,6 +901,8 @@ config IP_CHECKSUM_L1
 	  If enabled, the IP Checksum function is linked
 	  into L1 instruction memory. (less latency)
 
+=======
+>>>>>>> v3.18
 config CACHELINE_ALIGNED_L1
 	bool "Locate cacheline_aligned data to L1 Data Memory"
 	default y if !BF54x

@@ -26,3 +26,11 @@ config TILE_GXIO_TRIO
 config TILE_GXIO_USB_HOST
 	bool
 	select TILE_GXIO
+<<<<<<< HEAD
+=======
+
+# Support direct access to the TILE-Gx UART hardware from kernel space.
+config TILE_GXIO_UART
+	bool
+	select TILE_GXIO
+>>>>>>> v3.18

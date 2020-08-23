@@ -85,16 +85,26 @@ struct alx_priv {
 	struct {
 		dma_addr_t dma;
 		void *virt;
+<<<<<<< HEAD
 		int size;
+=======
+		unsigned int size;
+>>>>>>> v3.18
 	} descmem;
 
 	/* protect int_mask updates */
 	spinlock_t irq_lock;
 	u32 int_mask;
 
+<<<<<<< HEAD
 	int tx_ringsz;
 	int rx_ringsz;
 	int rxbuf_size;
+=======
+	unsigned int tx_ringsz;
+	unsigned int rx_ringsz;
+	unsigned int rxbuf_size;
+>>>>>>> v3.18
 
 	struct napi_struct napi;
 	struct alx_tx_queue txq;
@@ -106,6 +116,12 @@ struct alx_priv {
 	u16 msg_enable;
 
 	bool msi;
+<<<<<<< HEAD
+=======
+
+	/* protects hw.stats */
+	spinlock_t stats_lock;
+>>>>>>> v3.18
 };
 
 extern const struct ethtool_ops alx_ethtool_ops;

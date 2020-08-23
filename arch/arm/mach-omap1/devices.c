@@ -30,7 +30,10 @@
 
 #include "common.h"
 #include "clock.h"
+<<<<<<< HEAD
 #include "dma.h"
+=======
+>>>>>>> v3.18
 #include "mmc.h"
 #include "sram.h"
 
@@ -223,16 +226,26 @@ void __init omap1_init_mmc(struct omap_mmc_platform_data **mmc_data,
 		case 0:
 			base = OMAP1_MMC1_BASE;
 			irq = INT_MMC;
+<<<<<<< HEAD
 			rx_req = OMAP_DMA_MMC_RX;
 			tx_req = OMAP_DMA_MMC_TX;
+=======
+			rx_req = 22;
+			tx_req = 21;
+>>>>>>> v3.18
 			break;
 		case 1:
 			if (!cpu_is_omap16xx())
 				return;
 			base = OMAP1_MMC2_BASE;
 			irq = INT_1610_MMC2;
+<<<<<<< HEAD
 			rx_req = OMAP_DMA_MMC2_RX;
 			tx_req = OMAP_DMA_MMC2_TX;
+=======
+			rx_req = 55;
+			tx_req = 54;
+>>>>>>> v3.18
 			break;
 		default:
 			continue;

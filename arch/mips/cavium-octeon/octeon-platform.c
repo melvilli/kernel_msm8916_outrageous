@@ -171,6 +171,10 @@ device_initcall(octeon_ohci_device_init);
 static struct of_device_id __initdata octeon_ids[] = {
 	{ .compatible = "simple-bus", },
 	{ .compatible = "cavium,octeon-6335-uctl", },
+<<<<<<< HEAD
+=======
+	{ .compatible = "cavium,octeon-5750-usbn", },
+>>>>>>> v3.18
 	{ .compatible = "cavium,octeon-3860-bootbus", },
 	{ .compatible = "cavium,mdio-mux", },
 	{ .compatible = "gpio-leds", },
@@ -334,15 +338,25 @@ static void __init octeon_fdt_pip_iface(int pip, int idx, u64 *pmac)
 	char name_buffer[20];
 	int iface;
 	int p;
+<<<<<<< HEAD
 	int count;
 
 	count = cvmx_helper_interface_enumerate(idx);
+=======
+	int count = 0;
+>>>>>>> v3.18
 
 	snprintf(name_buffer, sizeof(name_buffer), "interface@%d", idx);
 	iface = fdt_subnode_offset(initial_boot_params, pip, name_buffer);
 	if (iface < 0)
 		return;
 
+<<<<<<< HEAD
+=======
+	if (cvmx_helper_interface_enumerate(idx) == 0)
+		count = cvmx_helper_ports_on_interface(idx);
+
+>>>>>>> v3.18
 	for (p = 0; p < 16; p++)
 		octeon_fdt_pip_port(iface, idx, p, count - 1, pmac);
 }
@@ -490,8 +504,20 @@ int __init octeon_prune_device_tree(void)
 
 		if (alias_prop) {
 			uart = fdt_path_offset(initial_boot_params, alias_prop);
+<<<<<<< HEAD
 			if (uart_mask & (1 << i))
 				continue;
+=======
+			if (uart_mask & (1 << i)) {
+				__be32 f;
+
+				f = cpu_to_be32(octeon_get_io_clock_rate());
+				fdt_setprop_inplace(initial_boot_params,
+						    uart, "clock-frequency",
+						    &f, sizeof(f));
+				continue;
+			}
+>>>>>>> v3.18
 			pr_debug("Deleting uart%d\n", i);
 			fdt_nop_node(initial_boot_params, uart);
 			fdt_nop_property(initial_boot_params, aliases,
@@ -674,6 +700,40 @@ end_led:
 		}
 	}
 
+<<<<<<< HEAD
+=======
+	/* DWC2 USB */
+	alias_prop = fdt_getprop(initial_boot_params, aliases,
+				 "usbn", NULL);
+	if (alias_prop) {
+		int usbn = fdt_path_offset(initial_boot_params, alias_prop);
+
+		if (usbn >= 0 && (current_cpu_type() == CPU_CAVIUM_OCTEON2 ||
+				  !octeon_has_feature(OCTEON_FEATURE_USB))) {
+			pr_debug("Deleting usbn\n");
+			fdt_nop_node(initial_boot_params, usbn);
+			fdt_nop_property(initial_boot_params, aliases, "usbn");
+		} else  {
+			__be32 new_f[1];
+			enum cvmx_helper_board_usb_clock_types c;
+			c = __cvmx_helper_board_usb_get_clock_type();
+			switch (c) {
+			case USB_CLOCK_TYPE_REF_48:
+				new_f[0] = cpu_to_be32(48000000);
+				fdt_setprop_inplace(initial_boot_params, usbn,
+						    "refclk-frequency",  new_f, sizeof(new_f));
+				/* Fall through ...*/
+			case USB_CLOCK_TYPE_REF_12:
+				/* Missing "refclk-type" defaults to external. */
+				fdt_nop_property(initial_boot_params, usbn, "refclk-type");
+				break;
+			default:
+				break;
+			}
+		}
+	}
+
+>>>>>>> v3.18
 	return 0;
 }
 

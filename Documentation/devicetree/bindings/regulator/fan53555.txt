@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Fairchild Semiconductor FAN53555 regulator
 
 The FAN53555 is a step-down switching voltage regulator that delivers a
@@ -54,4 +55,28 @@ Example:
 			fairchild,restore-reg;
 			fairchild,disable-suspend;
 		};
+=======
+Binding for Fairchild FAN53555 regulators
+
+Required properties:
+  - compatible: one of "fcs,fan53555", "silergy,syr827", "silergy,syr828"
+  - reg: I2C address
+
+Optional properties:
+  - fcs,suspend-voltage-selector: declare which of the two available
+		voltage selector registers should be used for the suspend
+		voltage. The other one is used for the runtime voltage setting
+		Possible values are either <0> or <1>
+  - vin-supply: regulator supplying the vin pin
+
+Example:
+
+	regulator@40 {
+		compatible = "fcs,fan53555";
+		regulator-name = "fan53555";
+		regulator-min-microvolt = <1000000>;
+		regulator-max-microvolt = <1800000>;
+		vin-supply = <&parent_reg>;
+		fcs,suspend-voltage-selector = <1>;
+>>>>>>> v3.18
 	};

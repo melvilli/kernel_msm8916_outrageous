@@ -23,6 +23,10 @@
 #include <linux/spinlock.h>
 #include <net/sock.h>
 #include <linux/atomic.h>
+<<<<<<< HEAD
+=======
+#include <linux/jiffies.h>
+>>>>>>> v3.18
 #include <net/flow.h>
 #include <net/dn.h>
 
@@ -91,7 +95,11 @@ static void dn_slow_timer(unsigned long arg)
 	 * since the last successful transmission.
 	 */
 	if (scp->keepalive && scp->keepalive_fxn && (scp->state == DN_RUN)) {
+<<<<<<< HEAD
 		if ((jiffies - scp->stamp) >= scp->keepalive)
+=======
+		if (time_after_eq(jiffies, scp->stamp + scp->keepalive))
+>>>>>>> v3.18
 			scp->keepalive_fxn(sk);
 	}
 

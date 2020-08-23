@@ -111,6 +111,7 @@ static inline __be16 pppoe_proto(const struct sk_buff *skb)
 	 pppoe_proto(skb) == htons(PPP_IPV6) && \
 	 brnf_filter_pppoe_tagged)
 
+<<<<<<< HEAD
 static void fake_update_pmtu(struct dst_entry *dst, struct sock *sk,
 			     struct sk_buff *skb, u32 mtu)
 {
@@ -171,6 +172,8 @@ void br_netfilter_rtable_init(struct net_bridge *br)
 	rt->dst.ops = &fake_dst_ops;
 }
 
+=======
+>>>>>>> v3.18
 static inline struct rtable *bridge_parent_rtable(const struct net_device *dev)
 {
 	struct net_bridge_port *port;
@@ -245,6 +248,7 @@ static inline void nf_bridge_save_header(struct sk_buff *skb)
 					 skb->nf_bridge->data, header_size);
 }
 
+<<<<<<< HEAD
 static inline void nf_bridge_update_protocol(struct sk_buff *skb)
 {
 	if (skb->nf_bridge->mask & BRNF_8021Q)
@@ -253,6 +257,8 @@ static inline void nf_bridge_update_protocol(struct sk_buff *skb)
 		skb->protocol = htons(ETH_P_PPP_SES);
 }
 
+=======
+>>>>>>> v3.18
 /* When handing a packet over to the IP layer
  * check whether we have a skb that is in the
  * expected format
@@ -260,7 +266,10 @@ static inline void nf_bridge_update_protocol(struct sk_buff *skb)
 
 static int br_parse_ip_options(struct sk_buff *skb)
 {
+<<<<<<< HEAD
 	struct ip_options *opt;
+=======
+>>>>>>> v3.18
 	const struct iphdr *iph;
 	struct net_device *dev = skb->dev;
 	u32 len;
@@ -269,7 +278,10 @@ static int br_parse_ip_options(struct sk_buff *skb)
 		goto inhdr_error;
 
 	iph = ip_hdr(skb);
+<<<<<<< HEAD
 	opt = &(IPCB(skb)->opt);
+=======
+>>>>>>> v3.18
 
 	/* Basic sanity checks */
 	if (iph->ihl < 5 || iph->version != 4)
@@ -295,6 +307,7 @@ static int br_parse_ip_options(struct sk_buff *skb)
 	}
 
 	memset(IPCB(skb), 0, sizeof(struct inet_skb_parm));
+<<<<<<< HEAD
 	if (iph->ihl == 5)
 		return 0;
 
@@ -312,6 +325,13 @@ static int br_parse_ip_options(struct sk_buff *skb)
 			goto drop;
 	}
 
+=======
+	/* We should really parse IP options here but until
+	 * somebody who actually uses IP options complains to
+	 * us we'll just silently ignore the options because
+	 * we're lazy!
+	 */
+>>>>>>> v3.18
 	return 0;
 
 inhdr_error:
@@ -320,6 +340,7 @@ drop:
 	return -1;
 }
 
+<<<<<<< HEAD
 /* Fill in the header for fragmented IP packets handled by
  * the IPv4 connection tracking code.
  */
@@ -340,6 +361,8 @@ int nf_bridge_copy_header(struct sk_buff *skb)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 /* PF_BRIDGE/PRE_ROUTING *********************************************/
 /* Undo the changes made for ip6tables PREROUTING and continue the
  * bridge PRE_ROUTING hook. */
@@ -404,6 +427,10 @@ static int br_nf_pre_routing_finish_bridge(struct sk_buff *skb)
 							 ETH_HLEN-ETH_ALEN);
 			/* tell br_dev_xmit to continue with forwarding */
 			nf_bridge->mask |= BRNF_BRIDGED_DNAT;
+<<<<<<< HEAD
+=======
+			/* FIXME Need to refragment */
+>>>>>>> v3.18
 			ret = neigh->output(neigh, skb);
 		}
 		neigh_release(neigh);
@@ -459,6 +486,13 @@ static int br_nf_pre_routing_finish(struct sk_buff *skb)
 	struct nf_bridge_info *nf_bridge = skb->nf_bridge;
 	struct rtable *rt;
 	int err;
+<<<<<<< HEAD
+=======
+	int frag_max_size;
+
+	frag_max_size = IPCB(skb)->frag_max_size;
+	BR_INPUT_SKB_CB(skb)->frag_max_size = frag_max_size;
+>>>>>>> v3.18
 
 	if (nf_bridge->mask & BRNF_PKT_TYPE) {
 		skb->pkt_type = PACKET_OTHERHOST;
@@ -506,7 +540,11 @@ bridged_dnat:
 					       1);
 				return 0;
 			}
+<<<<<<< HEAD
 			memcpy(eth_hdr(skb)->h_dest, dev->dev_addr, ETH_ALEN);
+=======
+			ether_addr_copy(eth_hdr(skb)->h_dest, dev->dev_addr);
+>>>>>>> v3.18
 			skb->pkt_type = PACKET_HOST;
 		}
 	} else {
@@ -535,7 +573,11 @@ static struct net_device *brnf_get_logical_dev(struct sk_buff *skb, const struct
 	if (brnf_pass_vlan_indev == 0 || !vlan_tx_tag_present(skb))
 		return br;
 
+<<<<<<< HEAD
 	vlan = __vlan_find_dev_deep(br, skb->vlan_proto,
+=======
+	vlan = __vlan_find_dev_deep_rcu(br, skb->vlan_proto,
+>>>>>>> v3.18
 				    vlan_tx_tag_get(skb) & VLAN_VID_MASK);
 
 	return vlan ? vlan : br;
@@ -559,6 +601,11 @@ static struct net_device *setup_pre_routing(struct sk_buff *skb)
 	else if (skb->protocol == htons(ETH_P_PPP_SES))
 		nf_bridge->mask |= BRNF_PPPoE;
 
+<<<<<<< HEAD
+=======
+	/* Must drop socket now because of tproxy. */
+	skb_orphan(skb);
+>>>>>>> v3.18
 	return skb->dev;
 }
 
@@ -619,7 +666,11 @@ bad:
 
 /* Replicate the checks that IPv6 does on packet reception and pass the packet
  * to ip6tables, which doesn't support NAT, so things are fairly simple. */
+<<<<<<< HEAD
 static unsigned int br_nf_pre_routing_ipv6(unsigned int hook,
+=======
+static unsigned int br_nf_pre_routing_ipv6(const struct nf_hook_ops *ops,
+>>>>>>> v3.18
 					   struct sk_buff *skb,
 					   const struct net_device *in,
 					   const struct net_device *out,
@@ -669,7 +720,12 @@ static unsigned int br_nf_pre_routing_ipv6(unsigned int hook,
  * receiving device) to make netfilter happy, the REDIRECT
  * target in particular.  Save the original destination IP
  * address to be able to detect DNAT afterwards. */
+<<<<<<< HEAD
 static unsigned int br_nf_pre_routing(unsigned int hook, struct sk_buff *skb,
+=======
+static unsigned int br_nf_pre_routing(const struct nf_hook_ops *ops,
+				      struct sk_buff *skb,
+>>>>>>> v3.18
 				      const struct net_device *in,
 				      const struct net_device *out,
 				      int (*okfn)(struct sk_buff *))
@@ -691,7 +747,11 @@ static unsigned int br_nf_pre_routing(unsigned int hook, struct sk_buff *skb,
 			return NF_ACCEPT;
 
 		nf_bridge_pull_encap_header_rcsum(skb);
+<<<<<<< HEAD
 		return br_nf_pre_routing_ipv6(hook, skb, in, out, okfn);
+=======
+		return br_nf_pre_routing_ipv6(ops, skb, in, out, okfn);
+>>>>>>> v3.18
 	}
 
 	if (!brnf_call_iptables && !br->nf_call_iptables)
@@ -727,7 +787,12 @@ static unsigned int br_nf_pre_routing(unsigned int hook, struct sk_buff *skb,
  * took place when the packet entered the bridge), but we
  * register an IPv4 PRE_ROUTING 'sabotage' hook that will
  * prevent this from happening. */
+<<<<<<< HEAD
 static unsigned int br_nf_local_in(unsigned int hook, struct sk_buff *skb,
+=======
+static unsigned int br_nf_local_in(const struct nf_hook_ops *ops,
+				   struct sk_buff *skb,
+>>>>>>> v3.18
 				   const struct net_device *in,
 				   const struct net_device *out,
 				   int (*okfn)(struct sk_buff *))
@@ -765,7 +830,12 @@ static int br_nf_forward_finish(struct sk_buff *skb)
  * but we are still able to filter on the 'real' indev/outdev
  * because of the physdev module. For ARP, indev and outdev are the
  * bridge ports. */
+<<<<<<< HEAD
 static unsigned int br_nf_forward_ip(unsigned int hook, struct sk_buff *skb,
+=======
+static unsigned int br_nf_forward_ip(const struct nf_hook_ops *ops,
+				     struct sk_buff *skb,
+>>>>>>> v3.18
 				     const struct net_device *in,
 				     const struct net_device *out,
 				     int (*okfn)(struct sk_buff *))
@@ -818,7 +888,12 @@ static unsigned int br_nf_forward_ip(unsigned int hook, struct sk_buff *skb,
 	return NF_STOLEN;
 }
 
+<<<<<<< HEAD
 static unsigned int br_nf_forward_arp(unsigned int hook, struct sk_buff *skb,
+=======
+static unsigned int br_nf_forward_arp(const struct nf_hook_ops *ops,
+				      struct sk_buff *skb,
+>>>>>>> v3.18
 				      const struct net_device *in,
 				      const struct net_device *out,
 				      int (*okfn)(struct sk_buff *))
@@ -853,6 +928,7 @@ static unsigned int br_nf_forward_arp(unsigned int hook, struct sk_buff *skb,
 	return NF_STOLEN;
 }
 
+<<<<<<< HEAD
 #if IS_ENABLED(CONFIG_NF_CONNTRACK_IPV4)
 static int br_nf_dev_queue_xmit(struct sk_buff *skb)
 {
@@ -864,6 +940,25 @@ static int br_nf_dev_queue_xmit(struct sk_buff *skb)
 		if (br_parse_ip_options(skb))
 			/* Drop invalid packet */
 			return NF_DROP;
+=======
+#if IS_ENABLED(CONFIG_NF_DEFRAG_IPV4)
+static int br_nf_dev_queue_xmit(struct sk_buff *skb)
+{
+	int ret;
+	int frag_max_size;
+
+	/* This is wrong! We should preserve the original fragment
+	 * boundaries by preserving frag_list rather than refragmenting.
+	 */
+	if (skb->protocol == htons(ETH_P_IP) &&
+	    skb->len + nf_bridge_mtu_reduction(skb) > skb->dev->mtu &&
+	    !skb_is_gso(skb)) {
+		frag_max_size = BR_INPUT_SKB_CB(skb)->frag_max_size;
+		if (br_parse_ip_options(skb))
+			/* Drop invalid packet */
+			return NF_DROP;
+		IPCB(skb)->frag_max_size = frag_max_size;
+>>>>>>> v3.18
 		ret = ip_fragment(skb, br_dev_queue_push_xmit);
 	} else
 		ret = br_dev_queue_push_xmit(skb);
@@ -878,7 +973,12 @@ static int br_nf_dev_queue_xmit(struct sk_buff *skb)
 #endif
 
 /* PF_BRIDGE/POST_ROUTING ********************************************/
+<<<<<<< HEAD
 static unsigned int br_nf_post_routing(unsigned int hook, struct sk_buff *skb,
+=======
+static unsigned int br_nf_post_routing(const struct nf_hook_ops *ops,
+				       struct sk_buff *skb,
+>>>>>>> v3.18
 				       const struct net_device *in,
 				       const struct net_device *out,
 				       int (*okfn)(struct sk_buff *))
@@ -923,7 +1023,12 @@ static unsigned int br_nf_post_routing(unsigned int hook, struct sk_buff *skb,
 /* IP/SABOTAGE *****************************************************/
 /* Don't hand locally destined packets to PF_INET(6)/PRE_ROUTING
  * for the second time. */
+<<<<<<< HEAD
 static unsigned int ip_sabotage_in(unsigned int hook, struct sk_buff *skb,
+=======
+static unsigned int ip_sabotage_in(const struct nf_hook_ops *ops,
+				   struct sk_buff *skb,
+>>>>>>> v3.18
 				   const struct net_device *in,
 				   const struct net_device *out,
 				   int (*okfn)(struct sk_buff *))
@@ -936,6 +1041,14 @@ static unsigned int ip_sabotage_in(unsigned int hook, struct sk_buff *skb,
 	return NF_ACCEPT;
 }
 
+<<<<<<< HEAD
+=======
+void br_netfilter_enable(void)
+{
+}
+EXPORT_SYMBOL_GPL(br_netfilter_enable);
+
+>>>>>>> v3.18
 /* For br_nf_post_routing, we need (prio = NF_BR_PRI_LAST), because
  * br_dev_queue_push_xmit is called afterwards */
 static struct nf_hook_ops br_nf_ops[] __read_mostly = {
@@ -992,8 +1105,13 @@ static struct nf_hook_ops br_nf_ops[] __read_mostly = {
 
 #ifdef CONFIG_SYSCTL
 static
+<<<<<<< HEAD
 int brnf_sysctl_call_tables(ctl_table * ctl, int write,
 			    void __user * buffer, size_t * lenp, loff_t * ppos)
+=======
+int brnf_sysctl_call_tables(struct ctl_table *ctl, int write,
+			    void __user *buffer, size_t *lenp, loff_t *ppos)
+>>>>>>> v3.18
 {
 	int ret;
 
@@ -1004,7 +1122,11 @@ int brnf_sysctl_call_tables(ctl_table * ctl, int write,
 	return ret;
 }
 
+<<<<<<< HEAD
 static ctl_table brnf_table[] = {
+=======
+static struct ctl_table brnf_table[] = {
+>>>>>>> v3.18
 	{
 		.procname	= "bridge-nf-call-arptables",
 		.data		= &brnf_call_arptables,
@@ -1051,6 +1173,7 @@ static ctl_table brnf_table[] = {
 };
 #endif
 
+<<<<<<< HEAD
 int __init br_netfilter_init(void)
 {
 	int ret;
@@ -1064,25 +1187,61 @@ int __init br_netfilter_init(void)
 		dst_entries_destroy(&fake_dst_ops);
 		return ret;
 	}
+=======
+static int __init br_netfilter_init(void)
+{
+	int ret;
+
+	ret = nf_register_hooks(br_nf_ops, ARRAY_SIZE(br_nf_ops));
+	if (ret < 0)
+		return ret;
+
+>>>>>>> v3.18
 #ifdef CONFIG_SYSCTL
 	brnf_sysctl_header = register_net_sysctl(&init_net, "net/bridge", brnf_table);
 	if (brnf_sysctl_header == NULL) {
 		printk(KERN_WARNING
 		       "br_netfilter: can't register to sysctl.\n");
+<<<<<<< HEAD
 		nf_unregister_hooks(br_nf_ops, ARRAY_SIZE(br_nf_ops));
 		dst_entries_destroy(&fake_dst_ops);
 		return -ENOMEM;
+=======
+		ret = -ENOMEM;
+		goto err1;
+>>>>>>> v3.18
 	}
 #endif
 	printk(KERN_NOTICE "Bridge firewalling registered\n");
 	return 0;
+<<<<<<< HEAD
 }
 
 void br_netfilter_fini(void)
+=======
+err1:
+	nf_unregister_hooks(br_nf_ops, ARRAY_SIZE(br_nf_ops));
+	return ret;
+}
+
+static void __exit br_netfilter_fini(void)
+>>>>>>> v3.18
 {
 	nf_unregister_hooks(br_nf_ops, ARRAY_SIZE(br_nf_ops));
 #ifdef CONFIG_SYSCTL
 	unregister_net_sysctl_table(brnf_sysctl_header);
 #endif
+<<<<<<< HEAD
 	dst_entries_destroy(&fake_dst_ops);
 }
+=======
+}
+
+module_init(br_netfilter_init);
+module_exit(br_netfilter_fini);
+
+MODULE_LICENSE("GPL");
+MODULE_AUTHOR("Lennert Buytenhek <buytenh@gnu.org>");
+MODULE_AUTHOR("Bart De Schuymer <bdschuym@pandora.be>");
+MODULE_DESCRIPTION("Linux ethernet netfilter firewall bridge");
+>>>>>>> v3.18

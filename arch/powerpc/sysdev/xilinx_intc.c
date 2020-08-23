@@ -23,6 +23,11 @@
 #include <linux/kernel.h>
 #include <linux/irq.h>
 #include <linux/of.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 #include <asm/io.h>
 #include <asm/processor.h>
 #include <asm/i8259.h>
@@ -263,7 +268,11 @@ static void __init xilinx_i8259_setup_cascade(void)
 static inline void xilinx_i8259_setup_cascade(void) { return; }
 #endif /* defined(CONFIG_PPC_I8259) */
 
+<<<<<<< HEAD
 static struct of_device_id xilinx_intc_match[] __initconst = {
+=======
+static const struct of_device_id xilinx_intc_match[] __initconst = {
+>>>>>>> v3.18
 	{ .compatible = "xlnx,opb-intc-1.00.c", },
 	{ .compatible = "xlnx,xps-intc-1.00.a", },
 	{}

@@ -237,7 +237,11 @@ static void shark_unregister_leds(struct shark_device *shark)
 	cancel_work_sync(&shark->led_work);
 }
 
+<<<<<<< HEAD
 static void shark_resume_leds(struct shark_device *shark)
+=======
+static inline void shark_resume_leds(struct shark_device *shark)
+>>>>>>> v3.18
 {
 	int i;
 

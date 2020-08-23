@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * max8997.h - Voltage regulator driver for the Maxim 8997
+=======
+ * max8997-private.h - Voltage regulator driver for the Maxim 8997
+>>>>>>> v3.18
  *
  *  Copyright (C) 2010 Samsung Electrnoics
  *  MyungJoo Ham <myungjoo.ham@samsung.com>
@@ -387,7 +391,11 @@ struct max8997_dev {
 	struct i2c_client *muic; /* slave addr 0x4a */
 	struct mutex iolock;
 
+<<<<<<< HEAD
 	int type;
+=======
+	unsigned long type;
+>>>>>>> v3.18
 	struct platform_device *battery; /* battery control (not fuel gauge) */
 
 	int irq;

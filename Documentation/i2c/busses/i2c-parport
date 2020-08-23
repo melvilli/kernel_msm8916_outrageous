@@ -1,6 +1,10 @@
 Kernel driver i2c-parport
 
+<<<<<<< HEAD
 Author: Jean Delvare <khali@linux-fr.org> 
+=======
+Author: Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 
 This is a unified driver for several i2c-over-parallel-port adapters,
 such as the ones made by Philips, Velleman or ELV. This driver is

@@ -29,12 +29,17 @@
  * 1+ (800) 334-5454
  */
 
+<<<<<<< HEAD
 /*
  * $Log: cumana_NCR5380.h,v $
  */
 
 #ifndef SUN3_NCR5380_H
 #define SUN3_NCR5380_H
+=======
+#ifndef SUN3_SCSI_H
+#define SUN3_SCSI_H
+>>>>>>> v3.18
 
 #define SUN3SCSI_PUBLIC_RELEASE 1
 
@@ -82,8 +87,11 @@ static int sun3scsi_release (struct Scsi_Host *);
 #define SUN3_SCSI_NAME "Sun3 NCR5380 SCSI"
 #endif
 
+<<<<<<< HEAD
 #ifndef HOSTS_C
 
+=======
+>>>>>>> v3.18
 #define NCR5380_implementation_fields \
     int port, ctrl
 
@@ -108,9 +116,12 @@ static int sun3scsi_release (struct Scsi_Host *);
 #define NCR5380_dma_read_setup(instance, data, count) sun3scsi_dma_setup(data, count, 0)
 #define NCR5380_dma_residual sun3scsi_dma_residual
 
+<<<<<<< HEAD
 #define BOARD_NORMAL	0
 #define BOARD_NCR53C400	1
 
+=======
+>>>>>>> v3.18
 /* additional registers - mainly DMA control regs */
 /* these start at regbase + 8 -- directly after the NCR regs */
 struct sun3_dma_regs {
@@ -191,6 +202,7 @@ struct sun3_udc_regs {
 
 #define VME_DATA24 0x3d00
 
+<<<<<<< HEAD
 // debugging printk's, taken from atari_scsi.h 
 /* Debugging printk definitions:
  *
@@ -376,4 +388,7 @@ struct sun3_udc_regs {
 
 #endif /* ndef HOSTS_C */
 #endif /* SUN3_NCR5380_H */
+=======
+#endif /* SUN3_SCSI_H */
+>>>>>>> v3.18
 

@@ -97,8 +97,11 @@ static int sch_gpio_core_direction_out(struct gpio_chip *gc,
 	u8 curr_dirs;
 	unsigned short offset, bit;
 
+<<<<<<< HEAD
 	sch_gpio_core_set(gc, gpio_num, val);
 
+=======
+>>>>>>> v3.18
 	spin_lock(&gpio_lock);
 
 	offset = CGIO + gpio_num / 8;
@@ -109,6 +112,20 @@ static int sch_gpio_core_direction_out(struct gpio_chip *gc,
 		outb(curr_dirs & ~(1 << bit), gpio_ba + offset);
 
 	spin_unlock(&gpio_lock);
+<<<<<<< HEAD
+=======
+
+	/*
+	 * according to the datasheet, writing to the level register has no
+	 * effect when GPIO is programmed as input.
+	 * Actually the the level register is read-only when configured as input.
+	 * Thus presetting the output level before switching to output is _NOT_ possible.
+	 * Hence we set the level after configuring the GPIO as output.
+	 * But we cannot prevent a short low pulse if direction is set to high
+	 * and an external pull-up is connected.
+	 */
+	sch_gpio_core_set(gc, gpio_num, val);
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -178,8 +195,11 @@ static int sch_gpio_resume_direction_out(struct gpio_chip *gc,
 	u8 curr_dirs;
 	unsigned short offset, bit;
 
+<<<<<<< HEAD
 	sch_gpio_resume_set(gc, gpio_num, val);
 
+=======
+>>>>>>> v3.18
 	offset = RGIO + gpio_num / 8;
 	bit = gpio_num % 8;
 
@@ -190,6 +210,20 @@ static int sch_gpio_resume_direction_out(struct gpio_chip *gc,
 		outb(curr_dirs & ~(1 << bit), gpio_ba + offset);
 
 	spin_unlock(&gpio_lock);
+<<<<<<< HEAD
+=======
+
+	/*
+	* according to the datasheet, writing to the level register has no
+	* effect when GPIO is programmed as input.
+	* Actually the the level register is read-only when configured as input.
+	* Thus presetting the output level before switching to output is _NOT_ possible.
+	* Hence we set the level after configuring the GPIO as output.
+	* But we cannot prevent a short low pulse if direction is set to high
+	* and an external pull-up is connected.
+	*/
+	sch_gpio_resume_set(gc, gpio_num, val);
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -272,8 +306,12 @@ static int sch_gpio_probe(struct platform_device *pdev)
 	return 0;
 
 err_sch_gpio_resume:
+<<<<<<< HEAD
 	if (gpiochip_remove(&sch_gpio_core))
 		dev_err(&pdev->dev, "%s gpiochip_remove failed\n", __func__);
+=======
+	gpiochip_remove(&sch_gpio_core);
+>>>>>>> v3.18
 
 err_sch_gpio_core:
 	release_region(res->start, resource_size(res));
@@ -286,6 +324,7 @@ static int sch_gpio_remove(struct platform_device *pdev)
 {
 	struct resource *res;
 	if (gpio_ba) {
+<<<<<<< HEAD
 		int err;
 
 		err  = gpiochip_remove(&sch_gpio_core);
@@ -296,13 +335,21 @@ static int sch_gpio_remove(struct platform_device *pdev)
 		if (err)
 			dev_err(&pdev->dev, "%s failed, %d\n",
 				"gpiochip_remove()", err);
+=======
+
+		gpiochip_remove(&sch_gpio_core);
+		gpiochip_remove(&sch_gpio_resume);
+>>>>>>> v3.18
 
 		res = platform_get_resource(pdev, IORESOURCE_IO, 0);
 
 		release_region(res->start, resource_size(res));
 		gpio_ba = 0;
+<<<<<<< HEAD
 
 		return err;
+=======
+>>>>>>> v3.18
 	}
 
 	return 0;

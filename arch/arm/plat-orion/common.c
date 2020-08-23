@@ -22,6 +22,10 @@
 #include <linux/platform_data/dma-mv_xor.h>
 #include <linux/platform_data/usb-ehci-orion.h>
 #include <mach/bridge-regs.h>
+<<<<<<< HEAD
+=======
+#include <plat/common.h>
+>>>>>>> v3.18
 
 /* Create a clkdev entry for a given device/clk */
 void __init orion_clkdev_add(const char *con_id, const char *dev_id,
@@ -256,7 +260,11 @@ static __init void ge_complete(
 /*****************************************************************************
  * GE00
  ****************************************************************************/
+<<<<<<< HEAD
 struct mv643xx_eth_shared_platform_data orion_ge00_shared_data;
+=======
+static struct mv643xx_eth_shared_platform_data orion_ge00_shared_data;
+>>>>>>> v3.18
 
 static struct resource orion_ge00_shared_resources[] = {
 	{
@@ -322,7 +330,11 @@ void __init orion_ge00_init(struct mv643xx_eth_platform_data *eth_data,
 /*****************************************************************************
  * GE01
  ****************************************************************************/
+<<<<<<< HEAD
 struct mv643xx_eth_shared_platform_data orion_ge01_shared_data;
+=======
+static struct mv643xx_eth_shared_platform_data orion_ge01_shared_data;
+>>>>>>> v3.18
 
 static struct resource orion_ge01_shared_resources[] = {
 	{
@@ -373,7 +385,11 @@ void __init orion_ge01_init(struct mv643xx_eth_platform_data *eth_data,
 /*****************************************************************************
  * GE10
  ****************************************************************************/
+<<<<<<< HEAD
 struct mv643xx_eth_shared_platform_data orion_ge10_shared_data;
+=======
+static struct mv643xx_eth_shared_platform_data orion_ge10_shared_data;
+>>>>>>> v3.18
 
 static struct resource orion_ge10_shared_resources[] = {
 	{
@@ -422,7 +438,11 @@ void __init orion_ge10_init(struct mv643xx_eth_platform_data *eth_data,
 /*****************************************************************************
  * GE11
  ****************************************************************************/
+<<<<<<< HEAD
 struct mv643xx_eth_shared_platform_data orion_ge11_shared_data;
+=======
+static struct mv643xx_eth_shared_platform_data orion_ge11_shared_data;
+>>>>>>> v3.18
 
 static struct resource orion_ge11_shared_resources[] = {
 	{
@@ -498,7 +518,11 @@ void __init orion_ge00_switch_init(struct dsa_platform_data *d, int irq)
 
 	d->netdev = &orion_ge00.dev;
 	for (i = 0; i < d->nr_chips; i++)
+<<<<<<< HEAD
 		d->chip[i].mii_bus = &orion_ge_mvmdio.dev;
+=======
+		d->chip[i].host_dev = &orion_ge00_shared.dev;
+>>>>>>> v3.18
 	orion_switch_device.dev.platform_data = d;
 
 	platform_device_register(&orion_switch_device);
@@ -594,14 +618,26 @@ void __init orion_spi_1_init(unsigned long mapbase)
 /*****************************************************************************
  * Watchdog
  ****************************************************************************/
+<<<<<<< HEAD
 static struct resource orion_wdt_resource =
 		DEFINE_RES_MEM(TIMER_PHYS_BASE, 0x28);
+=======
+static struct resource orion_wdt_resource[] = {
+		DEFINE_RES_MEM(TIMER_PHYS_BASE, 0x04),
+		DEFINE_RES_MEM(RSTOUTn_MASK_PHYS, 0x04),
+};
+>>>>>>> v3.18
 
 static struct platform_device orion_wdt_device = {
 	.name		= "orion_wdt",
 	.id		= -1,
+<<<<<<< HEAD
 	.num_resources	= 1,
 	.resource	= &orion_wdt_resource,
+=======
+	.num_resources	= ARRAY_SIZE(orion_wdt_resource),
+	.resource	= orion_wdt_resource,
+>>>>>>> v3.18
 };
 
 void __init orion_wdt_init(void)
@@ -666,6 +702,7 @@ void __init orion_xor0_init(unsigned long mapbase_low,
 	orion_xor0_shared_resources[3].start = irq_1;
 	orion_xor0_shared_resources[3].end = irq_1;
 
+<<<<<<< HEAD
 	/*
 	 * two engines can't do memset simultaneously, this limitation
 	 * satisfied by removing memset support from one of the engines.
@@ -674,6 +711,11 @@ void __init orion_xor0_init(unsigned long mapbase_low,
 	dma_cap_set(DMA_XOR, orion_xor0_channels_data[0].cap_mask);
 
 	dma_cap_set(DMA_MEMSET, orion_xor0_channels_data[1].cap_mask);
+=======
+	dma_cap_set(DMA_MEMCPY, orion_xor0_channels_data[0].cap_mask);
+	dma_cap_set(DMA_XOR, orion_xor0_channels_data[0].cap_mask);
+
+>>>>>>> v3.18
 	dma_cap_set(DMA_MEMCPY, orion_xor0_channels_data[1].cap_mask);
 	dma_cap_set(DMA_XOR, orion_xor0_channels_data[1].cap_mask);
 
@@ -732,6 +774,7 @@ void __init orion_xor1_init(unsigned long mapbase_low,
 	orion_xor1_shared_resources[3].start = irq_1;
 	orion_xor1_shared_resources[3].end = irq_1;
 
+<<<<<<< HEAD
 	/*
 	 * two engines can't do memset simultaneously, this limitation
 	 * satisfied by removing memset support from one of the engines.
@@ -740,6 +783,11 @@ void __init orion_xor1_init(unsigned long mapbase_low,
 	dma_cap_set(DMA_XOR, orion_xor1_channels_data[0].cap_mask);
 
 	dma_cap_set(DMA_MEMSET, orion_xor1_channels_data[1].cap_mask);
+=======
+	dma_cap_set(DMA_MEMCPY, orion_xor1_channels_data[0].cap_mask);
+	dma_cap_set(DMA_XOR, orion_xor1_channels_data[0].cap_mask);
+
+>>>>>>> v3.18
 	dma_cap_set(DMA_MEMCPY, orion_xor1_channels_data[1].cap_mask);
 	dma_cap_set(DMA_XOR, orion_xor1_channels_data[1].cap_mask);
 

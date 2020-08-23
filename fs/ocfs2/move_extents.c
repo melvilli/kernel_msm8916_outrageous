@@ -69,7 +69,11 @@ static int __ocfs2_move_extent(handle_t *handle,
 	u64 ino = ocfs2_metadata_cache_owner(context->et.et_ci);
 	u64 old_blkno = ocfs2_clusters_to_blocks(inode->i_sb, p_cpos);
 
+<<<<<<< HEAD
 	ret = ocfs2_duplicate_clusters_by_page(handle, context->file, cpos,
+=======
+	ret = ocfs2_duplicate_clusters_by_page(handle, inode, cpos,
+>>>>>>> v3.18
 					       p_cpos, new_p_cpos, len);
 	if (ret) {
 		mlog_errno(ret);
@@ -98,7 +102,11 @@ static int __ocfs2_move_extent(handle_t *handle,
 	el = path_leaf_el(path);
 
 	index = ocfs2_search_extent_list(el, cpos);
+<<<<<<< HEAD
 	if (index == -1 || index >= le16_to_cpu(el->l_next_free_rec)) {
+=======
+	if (index == -1) {
+>>>>>>> v3.18
 		ocfs2_error(inode->i_sb,
 			    "Inode %llu has an extent at cpos %u which can no "
 			    "longer be found.\n",
@@ -151,7 +159,13 @@ static int __ocfs2_move_extent(handle_t *handle,
 							old_blkno, len);
 	}
 
+<<<<<<< HEAD
 out:
+=======
+	ocfs2_update_inode_fsync_trans(handle, inode, 0);
+out:
+	ocfs2_free_path(path);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -200,8 +214,12 @@ static int ocfs2_lock_allocators_move_extents(struct inode *inode,
 		}
 	}
 
+<<<<<<< HEAD
 	*credits += ocfs2_calc_extend_credits(osb->sb, et->et_root_el,
 					      clusters_to_move + 2);
+=======
+	*credits += ocfs2_calc_extend_credits(osb->sb, et->et_root_el);
+>>>>>>> v3.18
 
 	mlog(0, "reserve metadata_blocks: %d, data_clusters: %u, credits: %d\n",
 	     extra_blocks, clusters_to_move, *credits);
@@ -403,7 +421,11 @@ static int ocfs2_find_victim_alloc_group(struct inode *inode,
 	 * 'vict_blkno' was out of the valid range.
 	 */
 	if ((vict_blkno < le64_to_cpu(rec->c_blkno)) ||
+<<<<<<< HEAD
 	    (vict_blkno >= (le32_to_cpu(ac_dinode->id1.bitmap1.i_total) <<
+=======
+	    (vict_blkno >= ((u64)le32_to_cpu(ac_dinode->id1.bitmap1.i_total) <<
+>>>>>>> v3.18
 				bits_per_unit))) {
 		ret = -EINVAL;
 		goto out;
@@ -561,6 +583,7 @@ static void ocfs2_probe_alloc_group(struct inode *inode, struct buffer_head *bh,
 	mlog(0, "found phys_cpos: %u to fit the wanted moving.\n", *phys_cpos);
 }
 
+<<<<<<< HEAD
 static int ocfs2_alloc_dinode_update_counts(struct inode *inode,
 				       handle_t *handle,
 				       struct buffer_head *di_bh,
@@ -638,6 +661,8 @@ bail:
 	return status;
 }
 
+=======
+>>>>>>> v3.18
 static int ocfs2_move_extent(struct ocfs2_move_extents_context *context,
 			     u32 cpos, u32 phys_cpos, u32 *new_phys_cpos,
 			     u32 len, int ext_flags)
@@ -767,8 +792,16 @@ static int ocfs2_move_extent(struct ocfs2_move_extents_context *context,
 
 	ret = ocfs2_block_group_set_bits(handle, gb_inode, gd, gd_bh,
 					 goal_bit, len);
+<<<<<<< HEAD
 	if (ret)
 		mlog_errno(ret);
+=======
+	if (ret) {
+		ocfs2_rollback_alloc_dinode_counts(gb_inode, gb_bh, len,
+					       le16_to_cpu(gd->bg_chain));
+		mlog_errno(ret);
+	}
+>>>>>>> v3.18
 
 	/*
 	 * Here we should write the new page out first if we are
@@ -845,7 +878,11 @@ static int __ocfs2_move_extents_range(struct buffer_head *di_bh,
 	struct ocfs2_move_extents *range = context->range;
 	struct ocfs2_super *osb = OCFS2_SB(inode->i_sb);
 
+<<<<<<< HEAD
 	if ((inode->i_size == 0) || (range->me_len == 0))
+=======
+	if ((i_size_read(inode) == 0) || (range->me_len == 0))
+>>>>>>> v3.18
 		return 0;
 
 	if (OCFS2_I(inode)->ip_dyn_features & OCFS2_INLINE_DATA_FL)
@@ -1034,6 +1071,10 @@ static int ocfs2_move_extents(struct ocfs2_move_extents_context *context)
 	inode->i_ctime = CURRENT_TIME;
 	di->i_ctime = cpu_to_le64(inode->i_ctime.tv_sec);
 	di->i_ctime_nsec = cpu_to_le32(inode->i_ctime.tv_nsec);
+<<<<<<< HEAD
+=======
+	ocfs2_update_inode_fsync_trans(handle, inode, 0);
+>>>>>>> v3.18
 
 	ocfs2_journal_dirty(handle, di_bh);
 
@@ -1066,8 +1107,15 @@ int ocfs2_ioctl_move_extents(struct file *filp, void __user *argp)
 	if (status)
 		return status;
 
+<<<<<<< HEAD
 	if ((!S_ISREG(inode->i_mode)) || !(filp->f_mode & FMODE_WRITE))
 		goto out_drop;
+=======
+	if ((!S_ISREG(inode->i_mode)) || !(filp->f_mode & FMODE_WRITE)) {
+		status = -EPERM;
+		goto out_drop;
+	}
+>>>>>>> v3.18
 
 	if (inode->i_flags & (S_IMMUTABLE|S_APPEND)) {
 		status = -EPERM;
@@ -1089,8 +1137,15 @@ int ocfs2_ioctl_move_extents(struct file *filp, void __user *argp)
 		goto out_free;
 	}
 
+<<<<<<< HEAD
 	if (range.me_start > i_size_read(inode))
 		goto out_free;
+=======
+	if (range.me_start > i_size_read(inode)) {
+		status = -EINVAL;
+		goto out_free;
+	}
+>>>>>>> v3.18
 
 	if (range.me_start + range.me_len > i_size_read(inode))
 			range.me_len = i_size_read(inode) - range.me_start;

@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -99,8 +103,13 @@ acpi_tb_find_table(char *signature,
 			/* Table is not currently mapped, map it */
 
 			status =
+<<<<<<< HEAD
 			    acpi_tb_verify_table(&acpi_gbl_root_table_list.
 						 tables[i]);
+=======
+			    acpi_tb_validate_table(&acpi_gbl_root_table_list.
+						   tables[i]);
+>>>>>>> v3.18
 			if (ACPI_FAILURE(status)) {
 				return_ACPI_STATUS(status);
 			}

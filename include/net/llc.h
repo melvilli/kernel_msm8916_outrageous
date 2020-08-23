@@ -93,6 +93,7 @@ struct hlist_nulls_head *llc_sk_laddr_hash(struct llc_sap *sap,
 #define LLC_DEST_CONN            2      /* Type 2 goes here */
 
 extern struct list_head llc_sap_list;
+<<<<<<< HEAD
 extern spinlock_t llc_sap_list_lock;
 
 extern int llc_rcv(struct sk_buff *skb, struct net_device *dev,
@@ -112,12 +113,36 @@ extern struct llc_sap *llc_sap_open(unsigned char lsap,
 					       struct net_device *dev,
 					       struct packet_type *pt,
 					       struct net_device *orig_dev));
+=======
+
+int llc_rcv(struct sk_buff *skb, struct net_device *dev, struct packet_type *pt,
+	    struct net_device *orig_dev);
+
+int llc_mac_hdr_init(struct sk_buff *skb, const unsigned char *sa,
+		     const unsigned char *da);
+
+void llc_add_pack(int type,
+		  void (*handler)(struct llc_sap *sap, struct sk_buff *skb));
+void llc_remove_pack(int type);
+
+void llc_set_station_handler(void (*handler)(struct sk_buff *skb));
+
+struct llc_sap *llc_sap_open(unsigned char lsap,
+			     int (*rcv)(struct sk_buff *skb,
+					struct net_device *dev,
+					struct packet_type *pt,
+					struct net_device *orig_dev));
+>>>>>>> v3.18
 static inline void llc_sap_hold(struct llc_sap *sap)
 {
 	atomic_inc(&sap->refcnt);
 }
 
+<<<<<<< HEAD
 extern void llc_sap_close(struct llc_sap *sap);
+=======
+void llc_sap_close(struct llc_sap *sap);
+>>>>>>> v3.18
 
 static inline void llc_sap_put(struct llc_sap *sap)
 {
@@ -125,6 +150,7 @@ static inline void llc_sap_put(struct llc_sap *sap)
 		llc_sap_close(sap);
 }
 
+<<<<<<< HEAD
 extern struct llc_sap *llc_sap_find(unsigned char sap_value);
 
 extern int llc_build_and_send_ui_pkt(struct llc_sap *sap, struct sk_buff *skb,
@@ -139,13 +165,34 @@ extern void llc_station_exit(void);
 #ifdef CONFIG_PROC_FS
 extern int llc_proc_init(void);
 extern void llc_proc_exit(void);
+=======
+struct llc_sap *llc_sap_find(unsigned char sap_value);
+
+int llc_build_and_send_ui_pkt(struct llc_sap *sap, struct sk_buff *skb,
+			      unsigned char *dmac, unsigned char dsap);
+
+void llc_sap_handler(struct llc_sap *sap, struct sk_buff *skb);
+void llc_conn_handler(struct llc_sap *sap, struct sk_buff *skb);
+
+void llc_station_init(void);
+void llc_station_exit(void);
+
+#ifdef CONFIG_PROC_FS
+int llc_proc_init(void);
+void llc_proc_exit(void);
+>>>>>>> v3.18
 #else
 #define llc_proc_init()	(0)
 #define llc_proc_exit()	do { } while(0)
 #endif /* CONFIG_PROC_FS */
 #ifdef CONFIG_SYSCTL
+<<<<<<< HEAD
 extern int llc_sysctl_init(void);
 extern void llc_sysctl_exit(void);
+=======
+int llc_sysctl_init(void);
+void llc_sysctl_exit(void);
+>>>>>>> v3.18
 
 extern int sysctl_llc2_ack_timeout;
 extern int sysctl_llc2_busy_timeout;

@@ -47,6 +47,10 @@
 #include "board-mx31moboard.h"
 #include "common.h"
 #include "devices-imx31.h"
+<<<<<<< HEAD
+=======
+#include "ehci.h"
+>>>>>>> v3.18
 #include "hardware.h"
 #include "iomux-mx3.h"
 #include "ulpi.h"
@@ -128,6 +132,7 @@ static struct platform_device mx31moboard_flash = {
 	.num_resources = 1,
 };
 
+<<<<<<< HEAD
 static int moboard_uart0_init(struct platform_device *pdev)
 {
 	int ret = gpio_request(IOMUX_TO_GPIO(MX31_PIN_CTS1), "uart0-cts-hack");
@@ -149,6 +154,17 @@ static void moboard_uart0_exit(struct platform_device *pdev)
 static const struct imxuart_platform_data uart0_pdata __initconst = {
 	.init = moboard_uart0_init,
 	.exit = moboard_uart0_exit,
+=======
+static void __init moboard_uart0_init(void)
+{
+	if (!gpio_request(IOMUX_TO_GPIO(MX31_PIN_CTS1), "uart0-cts-hack")) {
+		gpio_direction_output(IOMUX_TO_GPIO(MX31_PIN_CTS1), 0);
+		gpio_free(IOMUX_TO_GPIO(MX31_PIN_CTS1));
+	}
+}
+
+static const struct imxuart_platform_data uart0_pdata __initconst = {
+>>>>>>> v3.18
 };
 
 static const struct imxuart_platform_data uart4_pdata __initconst = {
@@ -236,42 +252,74 @@ static struct mc13xxx_led_platform_data moboard_led[] = {
 	{
 		.id = MC13783_LED_R1,
 		.name = "coreboard-led-4:red",
+<<<<<<< HEAD
 		.max_current = 2,
+=======
+>>>>>>> v3.18
 	},
 	{
 		.id = MC13783_LED_G1,
 		.name = "coreboard-led-4:green",
+<<<<<<< HEAD
 		.max_current = 2,
+=======
+>>>>>>> v3.18
 	},
 	{
 		.id = MC13783_LED_B1,
 		.name = "coreboard-led-4:blue",
+<<<<<<< HEAD
 		.max_current = 2,
+=======
+>>>>>>> v3.18
 	},
 	{
 		.id = MC13783_LED_R2,
 		.name = "coreboard-led-5:red",
+<<<<<<< HEAD
 		.max_current = 3,
+=======
+>>>>>>> v3.18
 	},
 	{
 		.id = MC13783_LED_G2,
 		.name = "coreboard-led-5:green",
+<<<<<<< HEAD
 		.max_current = 3,
+=======
+>>>>>>> v3.18
 	},
 	{
 		.id = MC13783_LED_B2,
 		.name = "coreboard-led-5:blue",
+<<<<<<< HEAD
 		.max_current = 3,
+=======
+>>>>>>> v3.18
 	},
 };
 
 static struct mc13xxx_leds_platform_data moboard_leds = {
 	.num_leds = ARRAY_SIZE(moboard_led),
 	.led = moboard_led,
+<<<<<<< HEAD
 	.flags = MC13783_LED_SLEWLIMTC,
 	.abmode = MC13783_LED_AB_DISABLED,
 	.tc1_period = MC13783_LED_PERIOD_10MS,
 	.tc2_period = MC13783_LED_PERIOD_10MS,
+=======
+	.led_control[0]	= MC13783_LED_C0_ENABLE | MC13783_LED_C0_ABMODE(0),
+	.led_control[1]	= MC13783_LED_C1_SLEWLIM,
+	.led_control[2]	= MC13783_LED_C2_SLEWLIM,
+	.led_control[3]	= MC13783_LED_C3_PERIOD(0) |
+			  MC13783_LED_C3_CURRENT_R1(2) |
+			  MC13783_LED_C3_CURRENT_G1(2) |
+			  MC13783_LED_C3_CURRENT_B1(2),
+	.led_control[4]	= MC13783_LED_C4_PERIOD(0) |
+			  MC13783_LED_C4_CURRENT_R2(3) |
+			  MC13783_LED_C4_CURRENT_G2(3) |
+			  MC13783_LED_C4_CURRENT_B2(3),
+>>>>>>> v3.18
 };
 
 static struct mc13xxx_buttons_platform_data moboard_buttons = {
@@ -445,10 +493,15 @@ static int __init moboard_usbh2_init(void)
 		return -ENODEV;
 
 	pdev = imx31_add_mxc_ehci_hs(2, &usbh2_pdata);
+<<<<<<< HEAD
 	if (IS_ERR(pdev))
 		return PTR_ERR(pdev);
 
 	return 0;
+=======
+
+	return PTR_ERR_OR_ZERO(pdev);
+>>>>>>> v3.18
 }
 
 static const struct gpio_led mx31moboard_leds[] __initconst = {
@@ -542,6 +595,10 @@ static void __init mx31moboard_init(void)
 
 	imx31_add_imx2_wdt();
 
+<<<<<<< HEAD
+=======
+	moboard_uart0_init();
+>>>>>>> v3.18
 	imx31_add_imx_uart0(&uart0_pdata);
 	imx31_add_imx_uart4(&uart4_pdata);
 
@@ -610,7 +667,10 @@ MACHINE_START(MX31MOBOARD, "EPFL Mobots mx31moboard")
 	.map_io = mx31_map_io,
 	.init_early = imx31_init_early,
 	.init_irq = mx31_init_irq,
+<<<<<<< HEAD
 	.handle_irq = imx31_handle_irq,
+=======
+>>>>>>> v3.18
 	.init_time	= mx31moboard_timer_init,
 	.init_machine = mx31moboard_init,
 	.restart	= mxc_restart,

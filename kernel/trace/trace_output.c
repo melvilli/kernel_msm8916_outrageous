@@ -20,6 +20,7 @@ static struct hlist_head event_hash[EVENT_HASHSIZE] __read_mostly;
 
 static int next_event_type = __TRACE_LAST_TYPE + 1;
 
+<<<<<<< HEAD
 int trace_print_seq(struct seq_file *m, struct trace_seq *s)
 {
 	int len = s->len >= PAGE_SIZE ? PAGE_SIZE - 1 : s->len;
@@ -37,6 +38,8 @@ int trace_print_seq(struct seq_file *m, struct trace_seq *s)
 	return ret;
 }
 
+=======
+>>>>>>> v3.18
 enum print_line_t trace_print_bputs_msg_only(struct trace_iterator *iter)
 {
 	struct trace_seq *s = &iter->seq;
@@ -78,13 +81,18 @@ enum print_line_t trace_print_printk_msg_only(struct trace_iterator *iter)
 
 	trace_assign_type(field, entry);
 
+<<<<<<< HEAD
 	ret = trace_seq_printf(s, "%s", field->buf);
+=======
+	ret = trace_seq_puts(s, field->buf);
+>>>>>>> v3.18
 	if (!ret)
 		return TRACE_TYPE_PARTIAL_LINE;
 
 	return TRACE_TYPE_HANDLED;
 }
 
+<<<<<<< HEAD
 /**
  * trace_seq_printf - sequence printing of trace information
  * @s: trace sequence descriptor
@@ -308,6 +316,8 @@ int trace_seq_path(struct trace_seq *s, const struct path *path)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 const char *
 ftrace_print_flags_seq(struct trace_seq *p, const char *delim,
 		       unsigned long flags,
@@ -315,7 +325,11 @@ ftrace_print_flags_seq(struct trace_seq *p, const char *delim,
 {
 	unsigned long mask;
 	const char *str;
+<<<<<<< HEAD
 	const char *ret = p->buffer + p->len;
+=======
+	const char *ret = trace_seq_buffer_ptr(p);
+>>>>>>> v3.18
 	int i, first = 1;
 
 	for (i = 0;  flag_array[i].name && flags; i++) {
@@ -351,7 +365,11 @@ ftrace_print_symbols_seq(struct trace_seq *p, unsigned long val,
 			 const struct trace_print_flags *symbol_array)
 {
 	int i;
+<<<<<<< HEAD
 	const char *ret = p->buffer + p->len;
+=======
+	const char *ret = trace_seq_buffer_ptr(p);
+>>>>>>> v3.18
 
 	for (i = 0;  symbol_array[i].name; i++) {
 
@@ -362,7 +380,11 @@ ftrace_print_symbols_seq(struct trace_seq *p, unsigned long val,
 		break;
 	}
 
+<<<<<<< HEAD
 	if (ret == (const char *)(p->buffer + p->len))
+=======
+	if (ret == (const char *)(trace_seq_buffer_ptr(p)))
+>>>>>>> v3.18
 		trace_seq_printf(p, "0x%lx", val);
 		
 	trace_seq_putc(p, 0);
@@ -377,7 +399,11 @@ ftrace_print_symbols_seq_u64(struct trace_seq *p, unsigned long long val,
 			 const struct trace_print_flags_u64 *symbol_array)
 {
 	int i;
+<<<<<<< HEAD
 	const char *ret = p->buffer + p->len;
+=======
+	const char *ret = trace_seq_buffer_ptr(p);
+>>>>>>> v3.18
 
 	for (i = 0;  symbol_array[i].name; i++) {
 
@@ -388,7 +414,11 @@ ftrace_print_symbols_seq_u64(struct trace_seq *p, unsigned long long val,
 		break;
 	}
 
+<<<<<<< HEAD
 	if (ret == (const char *)(p->buffer + p->len))
+=======
+	if (ret == (const char *)(trace_seq_buffer_ptr(p)))
+>>>>>>> v3.18
 		trace_seq_printf(p, "0x%llx", val);
 
 	trace_seq_putc(p, 0);
@@ -399,10 +429,30 @@ EXPORT_SYMBOL(ftrace_print_symbols_seq_u64);
 #endif
 
 const char *
+<<<<<<< HEAD
 ftrace_print_hex_seq(struct trace_seq *p, const unsigned char *buf, int buf_len)
 {
 	int i;
 	const char *ret = p->buffer + p->len;
+=======
+ftrace_print_bitmask_seq(struct trace_seq *p, void *bitmask_ptr,
+			 unsigned int bitmask_size)
+{
+	const char *ret = trace_seq_buffer_ptr(p);
+
+	trace_seq_bitmask(p, bitmask_ptr, bitmask_size * 8);
+	trace_seq_putc(p, 0);
+
+	return ret;
+}
+EXPORT_SYMBOL_GPL(ftrace_print_bitmask_seq);
+
+const char *
+ftrace_print_hex_seq(struct trace_seq *p, const unsigned char *buf, int buf_len)
+{
+	int i;
+	const char *ret = trace_seq_buffer_ptr(p);
+>>>>>>> v3.18
 
 	for (i = 0; i < buf_len; i++)
 		trace_seq_printf(p, "%s%2.2x", i == 0 ? "" : " ", buf[i]);
@@ -431,7 +481,11 @@ int ftrace_raw_output_prep(struct trace_iterator *iter,
 	}
 
 	trace_seq_init(p);
+<<<<<<< HEAD
 	ret = trace_seq_printf(s, "%s: ", event->name);
+=======
+	ret = trace_seq_printf(s, "%s: ", ftrace_event_name(event));
+>>>>>>> v3.18
 	if (!ret)
 		return TRACE_TYPE_PARTIAL_LINE;
 
@@ -439,6 +493,40 @@ int ftrace_raw_output_prep(struct trace_iterator *iter,
 }
 EXPORT_SYMBOL(ftrace_raw_output_prep);
 
+<<<<<<< HEAD
+=======
+static int ftrace_output_raw(struct trace_iterator *iter, char *name,
+			     char *fmt, va_list ap)
+{
+	struct trace_seq *s = &iter->seq;
+	int ret;
+
+	ret = trace_seq_printf(s, "%s: ", name);
+	if (!ret)
+		return TRACE_TYPE_PARTIAL_LINE;
+
+	ret = trace_seq_vprintf(s, fmt, ap);
+
+	if (!ret)
+		return TRACE_TYPE_PARTIAL_LINE;
+
+	return TRACE_TYPE_HANDLED;
+}
+
+int ftrace_output_call(struct trace_iterator *iter, char *name, char *fmt, ...)
+{
+	va_list ap;
+	int ret;
+
+	va_start(ap, fmt);
+	ret = ftrace_output_raw(iter, name, fmt, ap);
+	va_end(ap);
+
+	return ret;
+}
+EXPORT_SYMBOL_GPL(ftrace_output_call);
+
+>>>>>>> v3.18
 #ifdef CONFIG_KRETPROBES
 static inline const char *kretprobed(const char *name)
 {
@@ -558,14 +646,22 @@ seq_print_userip_objs(const struct userstack_entry *entry, struct trace_seq *s,
 			if (ret)
 				ret = trace_seq_puts(s, "??");
 			if (ret)
+<<<<<<< HEAD
 				ret = trace_seq_puts(s, "\n");
+=======
+				ret = trace_seq_putc(s, '\n');
+>>>>>>> v3.18
 			continue;
 		}
 		if (!ret)
 			break;
 		if (ret)
 			ret = seq_print_user_ip(s, mm, ip, sym_flags);
+<<<<<<< HEAD
 		ret = trace_seq_puts(s, "\n");
+=======
+		ret = trace_seq_putc(s, '\n');
+>>>>>>> v3.18
 	}
 
 	if (mm)
@@ -579,7 +675,11 @@ seq_print_ip_sym(struct trace_seq *s, unsigned long ip, unsigned long sym_flags)
 	int ret;
 
 	if (!ip)
+<<<<<<< HEAD
 		return trace_seq_printf(s, "0");
+=======
+		return trace_seq_putc(s, '0');
+>>>>>>> v3.18
 
 	if (sym_flags & TRACE_ITER_SYM_OFFSET)
 		ret = seq_print_sym_offset(s, "%s", ip);
@@ -618,8 +718,28 @@ int trace_print_lat_fmt(struct trace_seq *s, struct trace_entry *entry)
 		(entry->flags & TRACE_FLAG_IRQS_OFF) ? 'd' :
 		(entry->flags & TRACE_FLAG_IRQS_NOSUPPORT) ? 'X' :
 		'.';
+<<<<<<< HEAD
 	need_resched =
 		(entry->flags & TRACE_FLAG_NEED_RESCHED) ? 'N' : '.';
+=======
+
+	switch (entry->flags & (TRACE_FLAG_NEED_RESCHED |
+				TRACE_FLAG_PREEMPT_RESCHED)) {
+	case TRACE_FLAG_NEED_RESCHED | TRACE_FLAG_PREEMPT_RESCHED:
+		need_resched = 'N';
+		break;
+	case TRACE_FLAG_NEED_RESCHED:
+		need_resched = 'n';
+		break;
+	case TRACE_FLAG_PREEMPT_RESCHED:
+		need_resched = 'p';
+		break;
+	default:
+		need_resched = '.';
+		break;
+	}
+
+>>>>>>> v3.18
 	hardsoft_irq =
 		(hardirq && softirq) ? 'H' :
 		hardirq ? 'h' :
@@ -964,14 +1084,22 @@ static enum print_line_t trace_fn_trace(struct trace_iterator *iter, int flags,
 		goto partial;
 
 	if ((flags & TRACE_ITER_PRINT_PARENT) && field->parent_ip) {
+<<<<<<< HEAD
 		if (!trace_seq_printf(s, " <-"))
+=======
+		if (!trace_seq_puts(s, " <-"))
+>>>>>>> v3.18
 			goto partial;
 		if (!seq_print_ip_sym(s,
 				      field->parent_ip,
 				      flags))
 			goto partial;
 	}
+<<<<<<< HEAD
 	if (!trace_seq_printf(s, "\n"))
+=======
+	if (!trace_seq_putc(s, '\n'))
+>>>>>>> v3.18
 		goto partial;
 
 	return TRACE_TYPE_HANDLED;
@@ -1035,6 +1163,7 @@ static struct trace_event trace_fn_event = {
 	.funcs		= &trace_fn_funcs,
 };
 
+<<<<<<< HEAD
 /* TRACE_GRAPH_ENT */
 static enum print_line_t trace_graph_ent_trace(struct trace_iterator *iter, int flags,
 					struct trace_event *event)
@@ -1197,6 +1326,8 @@ static struct trace_event trace_graph_ret_event = {
 	.funcs		= &trace_graph_ret_funcs,
 };
 
+=======
+>>>>>>> v3.18
 /* TRACE_CTX an TRACE_WAKE */
 static enum print_line_t trace_ctxwake_print(struct trace_iterator *iter,
 					     char *delim)
@@ -1372,7 +1503,11 @@ static enum print_line_t trace_stack_print(struct trace_iterator *iter,
 
 		if (!seq_print_ip_sym(s, *p, flags))
 			goto partial;
+<<<<<<< HEAD
 		if (!trace_seq_puts(s, "\n"))
+=======
+		if (!trace_seq_putc(s, '\n'))
+>>>>>>> v3.18
 			goto partial;
 	}
 
@@ -1587,8 +1722,11 @@ static struct trace_event trace_print_event = {
 
 static struct trace_event *events[] __initdata = {
 	&trace_fn_event,
+<<<<<<< HEAD
 	&trace_graph_ent_event,
 	&trace_graph_ret_event,
+=======
+>>>>>>> v3.18
 	&trace_ctx_event,
 	&trace_wake_event,
 	&trace_stack_event,

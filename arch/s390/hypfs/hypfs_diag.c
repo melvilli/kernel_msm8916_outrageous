@@ -623,8 +623,12 @@ void hypfs_diag_exit(void)
  * *******************************************
  */
 
+<<<<<<< HEAD
 static int hypfs_create_cpu_files(struct super_block *sb,
 				  struct dentry *cpus_dir, void *cpu_info)
+=======
+static int hypfs_create_cpu_files(struct dentry *cpus_dir, void *cpu_info)
+>>>>>>> v3.18
 {
 	struct dentry *cpu_dir;
 	char buffer[TMP_SIZE];
@@ -632,24 +636,38 @@ static int hypfs_create_cpu_files(struct super_block *sb,
 
 	snprintf(buffer, TMP_SIZE, "%d", cpu_info__cpu_addr(diag204_info_type,
 							    cpu_info));
+<<<<<<< HEAD
 	cpu_dir = hypfs_mkdir(sb, cpus_dir, buffer);
 	rc = hypfs_create_u64(sb, cpu_dir, "mgmtime",
+=======
+	cpu_dir = hypfs_mkdir(cpus_dir, buffer);
+	rc = hypfs_create_u64(cpu_dir, "mgmtime",
+>>>>>>> v3.18
 			      cpu_info__acc_time(diag204_info_type, cpu_info) -
 			      cpu_info__lp_time(diag204_info_type, cpu_info));
 	if (IS_ERR(rc))
 		return PTR_ERR(rc);
+<<<<<<< HEAD
 	rc = hypfs_create_u64(sb, cpu_dir, "cputime",
+=======
+	rc = hypfs_create_u64(cpu_dir, "cputime",
+>>>>>>> v3.18
 			      cpu_info__lp_time(diag204_info_type, cpu_info));
 	if (IS_ERR(rc))
 		return PTR_ERR(rc);
 	if (diag204_info_type == INFO_EXT) {
+<<<<<<< HEAD
 		rc = hypfs_create_u64(sb, cpu_dir, "onlinetime",
+=======
+		rc = hypfs_create_u64(cpu_dir, "onlinetime",
+>>>>>>> v3.18
 				      cpu_info__online_time(diag204_info_type,
 							    cpu_info));
 		if (IS_ERR(rc))
 			return PTR_ERR(rc);
 	}
 	diag224_idx2name(cpu_info__ctidx(diag204_info_type, cpu_info), buffer);
+<<<<<<< HEAD
 	rc = hypfs_create_str(sb, cpu_dir, "type", buffer);
 	if (IS_ERR(rc))
 		return PTR_ERR(rc);
@@ -658,6 +676,13 @@ static int hypfs_create_cpu_files(struct super_block *sb,
 
 static void *hypfs_create_lpar_files(struct super_block *sb,
 				     struct dentry *systems_dir, void *part_hdr)
+=======
+	rc = hypfs_create_str(cpu_dir, "type", buffer);
+	return PTR_RET(rc);
+}
+
+static void *hypfs_create_lpar_files(struct dentry *systems_dir, void *part_hdr)
+>>>>>>> v3.18
 {
 	struct dentry *cpus_dir;
 	struct dentry *lpar_dir;
@@ -667,16 +692,27 @@ static void *hypfs_create_lpar_files(struct super_block *sb,
 
 	part_hdr__part_name(diag204_info_type, part_hdr, lpar_name);
 	lpar_name[LPAR_NAME_LEN] = 0;
+<<<<<<< HEAD
 	lpar_dir = hypfs_mkdir(sb, systems_dir, lpar_name);
 	if (IS_ERR(lpar_dir))
 		return lpar_dir;
 	cpus_dir = hypfs_mkdir(sb, lpar_dir, "cpus");
+=======
+	lpar_dir = hypfs_mkdir(systems_dir, lpar_name);
+	if (IS_ERR(lpar_dir))
+		return lpar_dir;
+	cpus_dir = hypfs_mkdir(lpar_dir, "cpus");
+>>>>>>> v3.18
 	if (IS_ERR(cpus_dir))
 		return cpus_dir;
 	cpu_info = part_hdr + part_hdr__size(diag204_info_type);
 	for (i = 0; i < part_hdr__rcpus(diag204_info_type, part_hdr); i++) {
 		int rc;
+<<<<<<< HEAD
 		rc = hypfs_create_cpu_files(sb, cpus_dir, cpu_info);
+=======
+		rc = hypfs_create_cpu_files(cpus_dir, cpu_info);
+>>>>>>> v3.18
 		if (rc)
 			return ERR_PTR(rc);
 		cpu_info += cpu_info__size(diag204_info_type);
@@ -684,8 +720,12 @@ static void *hypfs_create_lpar_files(struct super_block *sb,
 	return cpu_info;
 }
 
+<<<<<<< HEAD
 static int hypfs_create_phys_cpu_files(struct super_block *sb,
 				       struct dentry *cpus_dir, void *cpu_info)
+=======
+static int hypfs_create_phys_cpu_files(struct dentry *cpus_dir, void *cpu_info)
+>>>>>>> v3.18
 {
 	struct dentry *cpu_dir;
 	char buffer[TMP_SIZE];
@@ -693,14 +733,22 @@ static int hypfs_create_phys_cpu_files(struct super_block *sb,
 
 	snprintf(buffer, TMP_SIZE, "%i", phys_cpu__cpu_addr(diag204_info_type,
 							    cpu_info));
+<<<<<<< HEAD
 	cpu_dir = hypfs_mkdir(sb, cpus_dir, buffer);
 	if (IS_ERR(cpu_dir))
 		return PTR_ERR(cpu_dir);
 	rc = hypfs_create_u64(sb, cpu_dir, "mgmtime",
+=======
+	cpu_dir = hypfs_mkdir(cpus_dir, buffer);
+	if (IS_ERR(cpu_dir))
+		return PTR_ERR(cpu_dir);
+	rc = hypfs_create_u64(cpu_dir, "mgmtime",
+>>>>>>> v3.18
 			      phys_cpu__mgm_time(diag204_info_type, cpu_info));
 	if (IS_ERR(rc))
 		return PTR_ERR(rc);
 	diag224_idx2name(phys_cpu__ctidx(diag204_info_type, cpu_info), buffer);
+<<<<<<< HEAD
 	rc = hypfs_create_str(sb, cpu_dir, "type", buffer);
 	if (IS_ERR(rc))
 		return PTR_ERR(rc);
@@ -709,18 +757,33 @@ static int hypfs_create_phys_cpu_files(struct super_block *sb,
 
 static void *hypfs_create_phys_files(struct super_block *sb,
 				     struct dentry *parent_dir, void *phys_hdr)
+=======
+	rc = hypfs_create_str(cpu_dir, "type", buffer);
+	return PTR_RET(rc);
+}
+
+static void *hypfs_create_phys_files(struct dentry *parent_dir, void *phys_hdr)
+>>>>>>> v3.18
 {
 	int i;
 	void *cpu_info;
 	struct dentry *cpus_dir;
 
+<<<<<<< HEAD
 	cpus_dir = hypfs_mkdir(sb, parent_dir, "cpus");
+=======
+	cpus_dir = hypfs_mkdir(parent_dir, "cpus");
+>>>>>>> v3.18
 	if (IS_ERR(cpus_dir))
 		return cpus_dir;
 	cpu_info = phys_hdr + phys_hdr__size(diag204_info_type);
 	for (i = 0; i < phys_hdr__cpus(diag204_info_type, phys_hdr); i++) {
 		int rc;
+<<<<<<< HEAD
 		rc = hypfs_create_phys_cpu_files(sb, cpus_dir, cpu_info);
+=======
+		rc = hypfs_create_phys_cpu_files(cpus_dir, cpu_info);
+>>>>>>> v3.18
 		if (rc)
 			return ERR_PTR(rc);
 		cpu_info += phys_cpu__size(diag204_info_type);
@@ -728,7 +791,11 @@ static void *hypfs_create_phys_files(struct super_block *sb,
 	return cpu_info;
 }
 
+<<<<<<< HEAD
 int hypfs_diag_create_files(struct super_block *sb, struct dentry *root)
+=======
+int hypfs_diag_create_files(struct dentry *root)
+>>>>>>> v3.18
 {
 	struct dentry *systems_dir, *hyp_dir;
 	void *time_hdr, *part_hdr;
@@ -739,7 +806,11 @@ int hypfs_diag_create_files(struct super_block *sb, struct dentry *root)
 	if (IS_ERR(buffer))
 		return PTR_ERR(buffer);
 
+<<<<<<< HEAD
 	systems_dir = hypfs_mkdir(sb, root, "systems");
+=======
+	systems_dir = hypfs_mkdir(root, "systems");
+>>>>>>> v3.18
 	if (IS_ERR(systems_dir)) {
 		rc = PTR_ERR(systems_dir);
 		goto err_out;
@@ -747,25 +818,41 @@ int hypfs_diag_create_files(struct super_block *sb, struct dentry *root)
 	time_hdr = (struct x_info_blk_hdr *)buffer;
 	part_hdr = time_hdr + info_blk_hdr__size(diag204_info_type);
 	for (i = 0; i < info_blk_hdr__npar(diag204_info_type, time_hdr); i++) {
+<<<<<<< HEAD
 		part_hdr = hypfs_create_lpar_files(sb, systems_dir, part_hdr);
+=======
+		part_hdr = hypfs_create_lpar_files(systems_dir, part_hdr);
+>>>>>>> v3.18
 		if (IS_ERR(part_hdr)) {
 			rc = PTR_ERR(part_hdr);
 			goto err_out;
 		}
 	}
 	if (info_blk_hdr__flags(diag204_info_type, time_hdr) & LPAR_PHYS_FLG) {
+<<<<<<< HEAD
 		ptr = hypfs_create_phys_files(sb, root, part_hdr);
+=======
+		ptr = hypfs_create_phys_files(root, part_hdr);
+>>>>>>> v3.18
 		if (IS_ERR(ptr)) {
 			rc = PTR_ERR(ptr);
 			goto err_out;
 		}
 	}
+<<<<<<< HEAD
 	hyp_dir = hypfs_mkdir(sb, root, "hyp");
+=======
+	hyp_dir = hypfs_mkdir(root, "hyp");
+>>>>>>> v3.18
 	if (IS_ERR(hyp_dir)) {
 		rc = PTR_ERR(hyp_dir);
 		goto err_out;
 	}
+<<<<<<< HEAD
 	ptr = hypfs_create_str(sb, hyp_dir, "type", "LPAR Hypervisor");
+=======
+	ptr = hypfs_create_str(hyp_dir, "type", "LPAR Hypervisor");
+>>>>>>> v3.18
 	if (IS_ERR(ptr)) {
 		rc = PTR_ERR(ptr);
 		goto err_out;

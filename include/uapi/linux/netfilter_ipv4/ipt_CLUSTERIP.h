@@ -2,6 +2,10 @@
 #define _IPT_CLUSTERIP_H_target
 
 #include <linux/types.h>
+<<<<<<< HEAD
+=======
+#include <linux/if_ether.h>
+>>>>>>> v3.18
 
 enum clusterip_hashmode {
     CLUSTERIP_HASHMODE_SIP = 0,
@@ -22,7 +26,11 @@ struct ipt_clusterip_tgt_info {
 	__u32 flags;
 
 	/* only relevant for new ones */
+<<<<<<< HEAD
 	__u8 clustermac[6];
+=======
+	__u8 clustermac[ETH_ALEN];
+>>>>>>> v3.18
 	__u16 num_total_nodes;
 	__u16 num_local_nodes;
 	__u16 local_nodes[CLUSTERIP_MAX_NODES];

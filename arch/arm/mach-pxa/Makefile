@@ -4,7 +4,11 @@
 
 # Common support (must be linked before board specific support)
 obj-y				+= clock.o devices.o generic.o irq.o \
+<<<<<<< HEAD
 				   time.o reset.o
+=======
+				   reset.o
+>>>>>>> v3.18
 obj-$(CONFIG_PM)		+= pm.o sleep.o standby.o
 
 # Generic drivers that other drivers may depend upon

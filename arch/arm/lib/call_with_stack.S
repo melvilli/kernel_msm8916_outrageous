@@ -36,9 +36,17 @@ ENTRY(call_with_stack)
 	mov	r0, r1
 
 	adr	lr, BSYM(1f)
+<<<<<<< HEAD
 	mov	pc, r2
 
 1:	ldr	lr, [sp]
 	ldr	sp, [sp, #4]
 	mov	pc, lr
+=======
+	ret	r2
+
+1:	ldr	lr, [sp]
+	ldr	sp, [sp, #4]
+	ret	lr
+>>>>>>> v3.18
 ENDPROC(call_with_stack)

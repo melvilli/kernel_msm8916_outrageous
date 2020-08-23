@@ -10,7 +10,11 @@
  * option) any later version.
  */
 /dts-v1/;
+<<<<<<< HEAD
 /include/ "da850.dtsi"
+=======
+#include "da850.dtsi"
+>>>>>>> v3.18
 
 / {
 	compatible = "enbw,cmc", "ti,da850";

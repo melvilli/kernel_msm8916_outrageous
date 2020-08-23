@@ -184,7 +184,10 @@ static int orinoco_pci_init_one(struct pci_dev *pdev,
 	free_irq(pdev->irq, priv);
 
  fail_irq:
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	free_orinocodev(priv);
 
  fail_alloc:
@@ -205,14 +208,21 @@ static void orinoco_pci_remove_one(struct pci_dev *pdev)
 
 	orinoco_if_del(priv);
 	free_irq(pdev->irq, priv);
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	free_orinocodev(priv);
 	pci_iounmap(pdev, priv->hw.iobase);
 	pci_release_regions(pdev);
 	pci_disable_device(pdev);
 }
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(orinoco_pci_id_table) = {
+=======
+static const struct pci_device_id orinoco_pci_id_table[] = {
+>>>>>>> v3.18
 	/* Intersil Prism 3 */
 	{0x1260, 0x3872, PCI_ANY_ID, PCI_ANY_ID,},
 	/* Intersil Prism 2.5 */

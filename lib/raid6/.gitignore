@@ -2,3 +2,7 @@ mktables
 altivec*.c
 int*.c
 tables.c
+<<<<<<< HEAD
+=======
+neon?.c
+>>>>>>> v3.18

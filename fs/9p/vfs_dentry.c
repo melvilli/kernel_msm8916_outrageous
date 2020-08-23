@@ -43,6 +43,7 @@
 #include "fid.h"
 
 /**
+<<<<<<< HEAD
  * v9fs_dentry_delete - called when dentry refcount equals 0
  * @dentry:  dentry in question
  *
@@ -60,14 +61,21 @@ static int v9fs_dentry_delete(const struct dentry *dentry)
 }
 
 /**
+=======
+>>>>>>> v3.18
  * v9fs_cached_dentry_delete - called when dentry refcount equals 0
  * @dentry:  dentry in question
  *
  */
 static int v9fs_cached_dentry_delete(const struct dentry *dentry)
 {
+<<<<<<< HEAD
 	p9_debug(P9_DEBUG_VFS, " dentry: %s (%p)\n",
 		 dentry->d_name.name, dentry);
+=======
+	p9_debug(P9_DEBUG_VFS, " dentry: %pd (%p)\n",
+		 dentry, dentry);
+>>>>>>> v3.18
 
 	/* Don't cache negative dentries */
 	if (!dentry->d_inode)
@@ -84,8 +92,13 @@ static int v9fs_cached_dentry_delete(const struct dentry *dentry)
 static void v9fs_dentry_release(struct dentry *dentry)
 {
 	struct hlist_node *p, *n;
+<<<<<<< HEAD
 	p9_debug(P9_DEBUG_VFS, " dentry: %s (%p)\n",
 		 dentry->d_name.name, dentry);
+=======
+	p9_debug(P9_DEBUG_VFS, " dentry: %pd (%p)\n",
+		 dentry, dentry);
+>>>>>>> v3.18
 	hlist_for_each_safe(p, n, (struct hlist_head *)&dentry->d_fsdata)
 		p9_client_clunk(hlist_entry(p, struct p9_fid, dlist));
 	dentry->d_fsdata = NULL;
@@ -134,6 +147,10 @@ const struct dentry_operations v9fs_cached_dentry_operations = {
 };
 
 const struct dentry_operations v9fs_dentry_operations = {
+<<<<<<< HEAD
 	.d_delete = v9fs_dentry_delete,
+=======
+	.d_delete = always_delete_dentry,
+>>>>>>> v3.18
 	.d_release = v9fs_dentry_release,
 };

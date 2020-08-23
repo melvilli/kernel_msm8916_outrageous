@@ -27,6 +27,7 @@ struct kiocb;
  */
 #define KIOCB_CANCELLED		((void *) (~0ULL))
 
+<<<<<<< HEAD
 typedef int (kiocb_cancel_fn)(struct kiocb *, struct io_event *);
 
 struct kiocb {
@@ -36,6 +37,15 @@ struct kiocb {
 	struct kioctx		*ki_ctx;	/* NULL for sync ops */
 	kiocb_cancel_fn		*ki_cancel;
 	void			(*ki_dtor)(struct kiocb *);
+=======
+typedef int (kiocb_cancel_fn)(struct kiocb *);
+
+struct kiocb {
+	struct file		*ki_filp;
+	struct kioctx		*ki_ctx;	/* NULL for sync ops */
+	kiocb_cancel_fn		*ki_cancel;
+	void			*private;
+>>>>>>> v3.18
 
 	union {
 		void __user		*user;
@@ -44,6 +54,7 @@ struct kiocb {
 
 	__u64			ki_user_data;	/* user's data for completion */
 	loff_t			ki_pos;
+<<<<<<< HEAD
 
 	void			*private;
 	/* State that we remember to be able to restart/retry  */
@@ -55,6 +66,9 @@ struct kiocb {
  	struct iovec		*ki_iovec;
  	unsigned long		ki_nr_segs;
  	unsigned long		ki_cur_seg;
+=======
+	size_t			ki_nbytes;	/* copy of iocb->aio_nbytes */
+>>>>>>> v3.18
 
 	struct list_head	ki_list;	/* the aio core uses this
 						 * for cancellation */
@@ -74,7 +88,10 @@ static inline bool is_sync_kiocb(struct kiocb *kiocb)
 static inline void init_sync_kiocb(struct kiocb *kiocb, struct file *filp)
 {
 	*kiocb = (struct kiocb) {
+<<<<<<< HEAD
 			.ki_users = ATOMIC_INIT(1),
+=======
+>>>>>>> v3.18
 			.ki_ctx = NULL,
 			.ki_filp = filp,
 			.ki_obj.tsk = current,
@@ -84,7 +101,10 @@ static inline void init_sync_kiocb(struct kiocb *kiocb, struct file *filp)
 /* prototypes */
 #ifdef CONFIG_AIO
 extern ssize_t wait_on_sync_kiocb(struct kiocb *iocb);
+<<<<<<< HEAD
 extern void aio_put_req(struct kiocb *iocb);
+=======
+>>>>>>> v3.18
 extern void aio_complete(struct kiocb *iocb, long res, long res2);
 struct mm_struct;
 extern void exit_aio(struct mm_struct *mm);
@@ -93,7 +113,10 @@ extern long do_io_submit(aio_context_t ctx_id, long nr,
 void kiocb_set_cancel_fn(struct kiocb *req, kiocb_cancel_fn *cancel);
 #else
 static inline ssize_t wait_on_sync_kiocb(struct kiocb *iocb) { return 0; }
+<<<<<<< HEAD
 static inline void aio_put_req(struct kiocb *iocb) { }
+=======
+>>>>>>> v3.18
 static inline void aio_complete(struct kiocb *iocb, long res, long res2) { }
 struct mm_struct;
 static inline void exit_aio(struct mm_struct *mm) { }

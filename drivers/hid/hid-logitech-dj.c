@@ -44,6 +44,7 @@ static const char kbd_descriptor[] = {
 	0x19, 0xE0,		/*   USAGE_MINIMUM (Left Control)   */
 	0x29, 0xE7,		/*   USAGE_MAXIMUM (Right GUI)      */
 	0x81, 0x02,		/*   INPUT (Data,Var,Abs)       */
+<<<<<<< HEAD
 	0x95, 0x05,		/*   REPORT COUNT (5)           */
 	0x05, 0x08,		/*   USAGE PAGE (LED page)      */
 	0x19, 0x01,		/*   USAGE MINIMUM (1)          */
@@ -52,6 +53,8 @@ static const char kbd_descriptor[] = {
 	0x95, 0x01,		/*   REPORT COUNT (1)           */
 	0x75, 0x03,		/*   REPORT SIZE (3)            */
 	0x91, 0x01,		/*   OUTPUT (Constant)          */
+=======
+>>>>>>> v3.18
 	0x95, 0x06,		/*   REPORT_COUNT (6)           */
 	0x75, 0x08,		/*   REPORT_SIZE (8)            */
 	0x15, 0x00,		/*   LOGICAL_MINIMUM (0)        */
@@ -60,6 +63,21 @@ static const char kbd_descriptor[] = {
 	0x19, 0x00,		/*   USAGE_MINIMUM (no event)       */
 	0x2A, 0xFF, 0x00,	/*   USAGE_MAXIMUM (reserved)       */
 	0x81, 0x00,		/*   INPUT (Data,Ary,Abs)       */
+<<<<<<< HEAD
+=======
+	0x85, 0x0e,		/* REPORT_ID (14)               */
+	0x05, 0x08,		/*   USAGE PAGE (LED page)      */
+	0x95, 0x05,		/*   REPORT COUNT (5)           */
+	0x75, 0x01,		/*   REPORT SIZE (1)            */
+	0x15, 0x00,		/*   LOGICAL_MINIMUM (0)        */
+	0x25, 0x01,		/*   LOGICAL_MAXIMUM (1)        */
+	0x19, 0x01,		/*   USAGE MINIMUM (1)          */
+	0x29, 0x05,		/*   USAGE MAXIMUM (5)          */
+	0x91, 0x02,		/*   OUTPUT (Data, Variable, Absolute)  */
+	0x95, 0x01,		/*   REPORT COUNT (1)           */
+	0x75, 0x03,		/*   REPORT SIZE (3)            */
+	0x91, 0x01,		/*   OUTPUT (Constant)          */
+>>>>>>> v3.18
 	0xC0
 };
 
@@ -189,9 +207,12 @@ static const u8 hid_reportid_size_map[NUMBER_OF_HID_REPORTS] = {
 
 static struct hid_ll_driver logi_dj_ll_driver;
 
+<<<<<<< HEAD
 static int logi_dj_output_hidraw_report(struct hid_device *hid, u8 * buf,
 					size_t count,
 					unsigned char report_type);
+=======
+>>>>>>> v3.18
 static int logi_dj_recv_query_paired_devices(struct dj_receiver_dev *djrcv_dev);
 
 static void logi_dj_recv_destroy_djhid_device(struct dj_receiver_dev *djrcv_dev,
@@ -251,7 +272,10 @@ static void logi_dj_recv_add_djhid_device(struct dj_receiver_dev *djrcv_dev,
 	}
 
 	dj_hiddev->ll_driver = &logi_dj_ll_driver;
+<<<<<<< HEAD
 	dj_hiddev->hid_output_raw_report = logi_dj_output_hidraw_report;
+=======
+>>>>>>> v3.18
 
 	dj_hiddev->dev.parent = &djrcv_hdev->dev;
 	dj_hiddev->bus = BUS_USB;
@@ -385,6 +409,7 @@ static void logi_dj_recv_forward_null_report(struct dj_receiver_dev *djrcv_dev,
 
 	djdev = djrcv_dev->paired_dj_devices[dj_report->device_index];
 
+<<<<<<< HEAD
 	if (!djdev) {
 		dbg_hid("djrcv_dev->paired_dj_devices[dj_report->device_index]"
 			" is NULL, index %d\n", dj_report->device_index);
@@ -397,6 +422,8 @@ static void logi_dj_recv_forward_null_report(struct dj_receiver_dev *djrcv_dev,
 		return;
 	}
 
+=======
+>>>>>>> v3.18
 	memset(reportbuffer, 0, sizeof(reportbuffer));
 
 	for (i = 0; i < NUMBER_OF_HID_REPORTS; i++) {
@@ -421,6 +448,7 @@ static void logi_dj_recv_forward_report(struct dj_receiver_dev *djrcv_dev,
 
 	dj_device = djrcv_dev->paired_dj_devices[dj_report->device_index];
 
+<<<<<<< HEAD
 	if (dj_device == NULL) {
 		dbg_hid("djrcv_dev->paired_dj_devices[dj_report->device_index]"
 			" is NULL, index %d\n", dj_report->device_index);
@@ -433,6 +461,8 @@ static void logi_dj_recv_forward_report(struct dj_receiver_dev *djrcv_dev,
 		return;
 	}
 
+=======
+>>>>>>> v3.18
 	if ((dj_report->report_type > ARRAY_SIZE(hid_reportid_size_map) - 1) ||
 	    (hid_reportid_size_map[dj_report->report_type] == 0)) {
 		dbg_hid("invalid report type:%x\n", dj_report->report_type);
@@ -509,6 +539,17 @@ static int logi_dj_recv_switch_to_dj_mode(struct dj_receiver_dev *djrcv_dev,
 	dj_report->report_params[CMD_SWITCH_PARAM_TIMEOUT_SECONDS] = (u8)timeout;
 	retval = logi_dj_recv_send_report(djrcv_dev, dj_report);
 	kfree(dj_report);
+<<<<<<< HEAD
+=======
+
+	/*
+	 * Ugly sleep to work around a USB 3.0 bug when the receiver is still
+	 * processing the "switch-to-dj" command while we send an other command.
+	 * 50 msec should gives enough time to the receiver to be ready.
+	 */
+	msleep(50);
+
+>>>>>>> v3.18
 	return retval;
 }
 
@@ -525,6 +566,7 @@ static void logi_dj_ll_close(struct hid_device *hid)
 	dbg_hid("%s:%s\n", __func__, hid->phys);
 }
 
+<<<<<<< HEAD
 static int logi_dj_output_hidraw_report(struct hid_device *hid, u8 * buf,
 					size_t count,
 					unsigned char report_type)
@@ -538,6 +580,42 @@ static int logi_dj_output_hidraw_report(struct hid_device *hid, u8 * buf,
 static void rdcat(char **rdesc, unsigned int *rsize, const char *data, unsigned int size)
 {
 	memcpy(*rdesc + *rsize, data, size);
+=======
+static int logi_dj_ll_raw_request(struct hid_device *hid,
+				  unsigned char reportnum, __u8 *buf,
+				  size_t count, unsigned char report_type,
+				  int reqtype)
+{
+	struct dj_device *djdev = hid->driver_data;
+	struct dj_receiver_dev *djrcv_dev = djdev->dj_receiver_dev;
+	u8 *out_buf;
+	int ret;
+
+	if (buf[0] != REPORT_TYPE_LEDS)
+		return -EINVAL;
+
+	out_buf = kzalloc(DJREPORT_SHORT_LENGTH, GFP_ATOMIC);
+	if (!out_buf)
+		return -ENOMEM;
+
+	if (count > DJREPORT_SHORT_LENGTH - 2)
+		count = DJREPORT_SHORT_LENGTH - 2;
+
+	out_buf[0] = REPORT_ID_DJ_SHORT;
+	out_buf[1] = djdev->device_index;
+	memcpy(out_buf + 2, buf, count);
+
+	ret = hid_hw_raw_request(djrcv_dev->hdev, out_buf[0], out_buf,
+		DJREPORT_SHORT_LENGTH, report_type, reqtype);
+
+	kfree(out_buf);
+	return ret;
+}
+
+static void rdcat(char *rdesc, unsigned int *rsize, const char *data, unsigned int size)
+{
+	memcpy(rdesc + *rsize, data, size);
+>>>>>>> v3.18
 	*rsize += size;
 }
 
@@ -560,31 +638,51 @@ static int logi_dj_ll_parse(struct hid_device *hid)
 	if (djdev->reports_supported & STD_KEYBOARD) {
 		dbg_hid("%s: sending a kbd descriptor, reports_supported: %x\n",
 			__func__, djdev->reports_supported);
+<<<<<<< HEAD
 		rdcat(&rdesc, &rsize, kbd_descriptor, sizeof(kbd_descriptor));
+=======
+		rdcat(rdesc, &rsize, kbd_descriptor, sizeof(kbd_descriptor));
+>>>>>>> v3.18
 	}
 
 	if (djdev->reports_supported & STD_MOUSE) {
 		dbg_hid("%s: sending a mouse descriptor, reports_supported: "
 			"%x\n", __func__, djdev->reports_supported);
+<<<<<<< HEAD
 		rdcat(&rdesc, &rsize, mse_descriptor, sizeof(mse_descriptor));
+=======
+		rdcat(rdesc, &rsize, mse_descriptor, sizeof(mse_descriptor));
+>>>>>>> v3.18
 	}
 
 	if (djdev->reports_supported & MULTIMEDIA) {
 		dbg_hid("%s: sending a multimedia report descriptor: %x\n",
 			__func__, djdev->reports_supported);
+<<<<<<< HEAD
 		rdcat(&rdesc, &rsize, consumer_descriptor, sizeof(consumer_descriptor));
+=======
+		rdcat(rdesc, &rsize, consumer_descriptor, sizeof(consumer_descriptor));
+>>>>>>> v3.18
 	}
 
 	if (djdev->reports_supported & POWER_KEYS) {
 		dbg_hid("%s: sending a power keys report descriptor: %x\n",
 			__func__, djdev->reports_supported);
+<<<<<<< HEAD
 		rdcat(&rdesc, &rsize, syscontrol_descriptor, sizeof(syscontrol_descriptor));
+=======
+		rdcat(rdesc, &rsize, syscontrol_descriptor, sizeof(syscontrol_descriptor));
+>>>>>>> v3.18
 	}
 
 	if (djdev->reports_supported & MEDIA_CENTER) {
 		dbg_hid("%s: sending a media center report descriptor: %x\n",
 			__func__, djdev->reports_supported);
+<<<<<<< HEAD
 		rdcat(&rdesc, &rsize, media_descriptor, sizeof(media_descriptor));
+=======
+		rdcat(rdesc, &rsize, media_descriptor, sizeof(media_descriptor));
+>>>>>>> v3.18
 	}
 
 	if (djdev->reports_supported & KBD_LEDS) {
@@ -598,6 +696,7 @@ static int logi_dj_ll_parse(struct hid_device *hid)
 	return retval;
 }
 
+<<<<<<< HEAD
 static int logi_dj_ll_input_event(struct input_dev *dev, unsigned int type,
 				  unsigned int code, int value)
 {
@@ -650,6 +749,8 @@ static int logi_dj_ll_input_event(struct input_dev *dev, unsigned int type,
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 static int logi_dj_ll_start(struct hid_device *hid)
 {
 	dbg_hid("%s\n", __func__);
@@ -668,7 +769,11 @@ static struct hid_ll_driver logi_dj_ll_driver = {
 	.stop = logi_dj_ll_stop,
 	.open = logi_dj_ll_open,
 	.close = logi_dj_ll_close,
+<<<<<<< HEAD
 	.hidinput_input_event = logi_dj_ll_input_event,
+=======
+	.raw_request = logi_dj_ll_raw_request,
+>>>>>>> v3.18
 };
 
 
@@ -724,8 +829,22 @@ static int logi_dj_raw_event(struct hid_device *hdev,
 	}
 
 	spin_lock_irqsave(&djrcv_dev->lock, flags);
+<<<<<<< HEAD
 	switch (dj_report->report_type) {
 	case REPORT_TYPE_NOTIF_DEVICE_PAIRED:
+=======
+
+	if (!djrcv_dev->paired_dj_devices[dj_report->device_index]) {
+		/* received an event for an unknown device, bail out */
+		logi_dj_recv_queue_notification(djrcv_dev, dj_report);
+		goto out;
+	}
+
+	switch (dj_report->report_type) {
+	case REPORT_TYPE_NOTIF_DEVICE_PAIRED:
+		/* pairing notifications are handled above the switch */
+		break;
+>>>>>>> v3.18
 	case REPORT_TYPE_NOTIF_DEVICE_UNPAIRED:
 		logi_dj_recv_queue_notification(djrcv_dev, dj_report);
 		break;
@@ -738,6 +857,11 @@ static int logi_dj_raw_event(struct hid_device *hdev,
 	default:
 		logi_dj_recv_forward_report(djrcv_dev, dj_report);
 	}
+<<<<<<< HEAD
+=======
+
+out:
+>>>>>>> v3.18
 	spin_unlock_irqrestore(&djrcv_dev->lock, flags);
 
 	return true;
@@ -821,10 +945,17 @@ static int logi_dj_probe(struct hid_device *hdev,
 	}
 
 	/* This is enabling the polling urb on the IN endpoint */
+<<<<<<< HEAD
 	retval = hdev->ll_driver->open(hdev);
 	if (retval < 0) {
 		dev_err(&hdev->dev, "%s:hdev->ll_driver->open returned "
 			"error:%d\n", __func__, retval);
+=======
+	retval = hid_hw_open(hdev);
+	if (retval < 0) {
+		dev_err(&hdev->dev, "%s:hid_hw_open returned error:%d\n",
+			__func__, retval);
+>>>>>>> v3.18
 		goto llopen_failed;
 	}
 
@@ -841,7 +972,11 @@ static int logi_dj_probe(struct hid_device *hdev,
 	return retval;
 
 logi_dj_recv_query_paired_devices_failed:
+<<<<<<< HEAD
 	hdev->ll_driver->close(hdev);
+=======
+	hid_hw_close(hdev);
+>>>>>>> v3.18
 
 llopen_failed:
 switch_to_dj_mode_fail:
@@ -883,7 +1018,11 @@ static void logi_dj_remove(struct hid_device *hdev)
 
 	cancel_work_sync(&djrcv_dev->work);
 
+<<<<<<< HEAD
 	hdev->ll_driver->close(hdev);
+=======
+	hid_hw_close(hdev);
+>>>>>>> v3.18
 	hid_hw_stop(hdev);
 
 	/* I suppose that at this point the only context that can access

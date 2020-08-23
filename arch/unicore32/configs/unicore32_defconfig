@@ -149,7 +149,10 @@ CONFIG_SND_PCM_OSS=m
 #	USB support
 CONFIG_USB_ARCH_HAS_HCD=n
 CONFIG_USB=n
+<<<<<<< HEAD
 CONFIG_USB_DEVICEFS=n
+=======
+>>>>>>> v3.18
 CONFIG_USB_PRINTER=n
 CONFIG_USB_STORAGE=n
 #	Inventra Highspeed Dual Role Controller

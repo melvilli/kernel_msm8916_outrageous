@@ -1544,7 +1544,11 @@ static int dst_send_burst(struct dvb_frontend *fe, fe_sec_mini_cmd_t minicmd)
 }
 
 
+<<<<<<< HEAD
 static int dst_init(struct dvb_frontend *fe)
+=======
+static int bt8xx_dst_init(struct dvb_frontend *fe)
+>>>>>>> v3.18
 {
 	struct dst_state *state = fe->demodulator_priv;
 
@@ -1707,7 +1711,11 @@ static int dst_get_frontend(struct dvb_frontend *fe)
 	return 0;
 }
 
+<<<<<<< HEAD
 static void dst_release(struct dvb_frontend *fe)
+=======
+static void bt8xx_dst_release(struct dvb_frontend *fe)
+>>>>>>> v3.18
 {
 	struct dst_state *state = fe->demodulator_priv;
 	if (state->dst_ca) {
@@ -1776,8 +1784,13 @@ static struct dvb_frontend_ops dst_dvbt_ops = {
 			FE_CAN_GUARD_INTERVAL_AUTO
 	},
 
+<<<<<<< HEAD
 	.release = dst_release,
 	.init = dst_init,
+=======
+	.release = bt8xx_dst_release,
+	.init = bt8xx_dst_init,
+>>>>>>> v3.18
 	.tune = dst_tune_frontend,
 	.set_frontend = dst_set_frontend,
 	.get_frontend = dst_get_frontend,
@@ -1801,8 +1814,13 @@ static struct dvb_frontend_ops dst_dvbs_ops = {
 		.caps = FE_CAN_FEC_AUTO | FE_CAN_QPSK
 	},
 
+<<<<<<< HEAD
 	.release = dst_release,
 	.init = dst_init,
+=======
+	.release = bt8xx_dst_release,
+	.init = bt8xx_dst_init,
+>>>>>>> v3.18
 	.tune = dst_tune_frontend,
 	.set_frontend = dst_set_frontend,
 	.get_frontend = dst_get_frontend,
@@ -1834,8 +1852,13 @@ static struct dvb_frontend_ops dst_dvbc_ops = {
 			FE_CAN_QAM_256
 	},
 
+<<<<<<< HEAD
 	.release = dst_release,
 	.init = dst_init,
+=======
+	.release = bt8xx_dst_release,
+	.init = bt8xx_dst_init,
+>>>>>>> v3.18
 	.tune = dst_tune_frontend,
 	.set_frontend = dst_set_frontend,
 	.get_frontend = dst_get_frontend,
@@ -1857,8 +1880,13 @@ static struct dvb_frontend_ops dst_atsc_ops = {
 		.caps = FE_CAN_FEC_AUTO | FE_CAN_QAM_AUTO | FE_CAN_QAM_64 | FE_CAN_QAM_256 | FE_CAN_8VSB
 	},
 
+<<<<<<< HEAD
 	.release = dst_release,
 	.init = dst_init,
+=======
+	.release = bt8xx_dst_release,
+	.init = bt8xx_dst_init,
+>>>>>>> v3.18
 	.tune = dst_tune_frontend,
 	.set_frontend = dst_set_frontend,
 	.get_frontend = dst_get_frontend,

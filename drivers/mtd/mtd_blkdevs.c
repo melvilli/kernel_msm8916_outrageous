@@ -30,7 +30,10 @@
 #include <linux/blkpg.h>
 #include <linux/spinlock.h>
 #include <linux/hdreg.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/mutex.h>
 #include <asm/uaccess.h>
 
@@ -83,12 +86,22 @@ static int do_blktrans_request(struct mtd_blktrans_ops *tr,
 
 	block = blk_rq_pos(req) << 9 >> tr->blkshift;
 	nsect = blk_rq_cur_bytes(req) >> tr->blkshift;
+<<<<<<< HEAD
 
 	buf = req->buffer;
+=======
+	buf = bio_data(req->bio);
+>>>>>>> v3.18
 
 	if (req->cmd_type != REQ_TYPE_FS)
 		return -EIO;
 
+<<<<<<< HEAD
+=======
+	if (req->cmd_flags & REQ_FLUSH)
+		return tr->flush(dev);
+
+>>>>>>> v3.18
 	if (blk_rq_pos(req) + blk_rq_cur_sectors(req) >
 	    get_capacity(req->rq_disk))
 		return -EIO;
@@ -198,7 +211,10 @@ static int blktrans_open(struct block_device *bdev, fmode_t mode)
 	if (!dev)
 		return -ERESTARTSYS; /* FIXME: busy loop! -arnd*/
 
+<<<<<<< HEAD
 	mutex_lock(&mtd_table_mutex);
+=======
+>>>>>>> v3.18
 	mutex_lock(&dev->lock);
 
 	if (dev->open)
@@ -224,7 +240,10 @@ static int blktrans_open(struct block_device *bdev, fmode_t mode)
 unlock:
 	dev->open++;
 	mutex_unlock(&dev->lock);
+<<<<<<< HEAD
 	mutex_unlock(&mtd_table_mutex);
+=======
+>>>>>>> v3.18
 	blktrans_dev_put(dev);
 	return ret;
 
@@ -235,7 +254,10 @@ error_put:
 	module_put(dev->tr->owner);
 	kref_put(&dev->ref, blktrans_dev_release);
 	mutex_unlock(&dev->lock);
+<<<<<<< HEAD
 	mutex_unlock(&mtd_table_mutex);
+=======
+>>>>>>> v3.18
 	blktrans_dev_put(dev);
 	return ret;
 }
@@ -247,7 +269,10 @@ static void blktrans_release(struct gendisk *disk, fmode_t mode)
 	if (!dev)
 		return;
 
+<<<<<<< HEAD
 	mutex_lock(&mtd_table_mutex);
+=======
+>>>>>>> v3.18
 	mutex_lock(&dev->lock);
 
 	if (--dev->open)
@@ -263,7 +288,10 @@ static void blktrans_release(struct gendisk *disk, fmode_t mode)
 	}
 unlock:
 	mutex_unlock(&dev->lock);
+<<<<<<< HEAD
 	mutex_unlock(&mtd_table_mutex);
+=======
+>>>>>>> v3.18
 	blktrans_dev_put(dev);
 }
 
@@ -414,6 +442,7 @@ int add_mtd_blktrans_dev(struct mtd_blktrans_dev *new)
 	if (!new->rq)
 		goto error3;
 
+<<<<<<< HEAD
 	new->rq->queuedata = new;
 
 	/*
@@ -425,6 +454,16 @@ int add_mtd_blktrans_dev(struct mtd_blktrans_dev *new)
 	blk_queue_logical_block_size(new->rq, tr->blksize);
 
 	queue_flag_set_unlocked(QUEUE_FLAG_NONROT, new->rq);
+=======
+	if (tr->flush)
+		blk_queue_flush(new->rq, REQ_FLUSH);
+
+	new->rq->queuedata = new;
+	blk_queue_logical_block_size(new->rq, tr->blksize);
+
+	queue_flag_set_unlocked(QUEUE_FLAG_NONROT, new->rq);
+	queue_flag_clear_unlocked(QUEUE_FLAG_ADD_RANDOM, new->rq);
+>>>>>>> v3.18
 
 	if (tr->discard) {
 		queue_flag_set_unlocked(QUEUE_FLAG_DISCARD, new->rq);

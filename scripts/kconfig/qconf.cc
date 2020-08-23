@@ -69,6 +69,14 @@ static inline QString qgettext(const QString& str)
 	return QString::fromLocal8Bit(gettext(str.latin1()));
 }
 
+<<<<<<< HEAD
+=======
+ConfigSettings::ConfigSettings()
+	: QSettings("kernel.org", "qconf")
+{
+}
+
+>>>>>>> v3.18
 /**
  * Reads a list of integer values from the application settings.
  */

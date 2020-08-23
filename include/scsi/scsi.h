@@ -10,10 +10,21 @@
 
 #include <linux/types.h>
 #include <linux/scatterlist.h>
+<<<<<<< HEAD
 #include <linux/device.h>
 
 struct scsi_cmnd;
 
+=======
+#include <linux/kernel.h>
+
+struct scsi_cmnd;
+
+enum scsi_timeouts {
+	SCSI_DEFAULT_EH_TIMEOUT		= 10 * HZ,
+};
+
+>>>>>>> v3.18
 /*
  * The maximum number of SG segments that we will put inside a
  * scatterlist (unless chaining is used). Should ideally fit inside a
@@ -27,7 +38,11 @@ struct scsi_cmnd;
  * Like SCSI_MAX_SG_SEGMENTS, but for archs that have sg chaining. This limit
  * is totally arbitrary, a setting of 2048 will get you at least 8mb ios.
  */
+<<<<<<< HEAD
 #ifdef ARCH_HAS_SG_CHAIN
+=======
+#ifdef CONFIG_ARCH_HAS_SG_CHAIN
+>>>>>>> v3.18
 #define SCSI_MAX_SG_CHAIN_SEGMENTS	2048
 #else
 #define SCSI_MAX_SG_CHAIN_SEGMENTS	SCSI_MAX_SG_SEGMENTS
@@ -140,6 +155,10 @@ struct scsi_cmnd;
 #define ACCESS_CONTROL_IN     0x86
 #define ACCESS_CONTROL_OUT    0x87
 #define READ_16               0x88
+<<<<<<< HEAD
+=======
+#define COMPARE_AND_WRITE     0x89
+>>>>>>> v3.18
 #define WRITE_16              0x8a
 #define READ_ATTRIBUTE        0x8c
 #define WRITE_ATTRIBUTE	      0x8d
@@ -150,6 +169,10 @@ struct scsi_cmnd;
 /* values for service action in */
 #define	SAI_READ_CAPACITY_16  0x10
 #define SAI_GET_LBA_STATUS    0x12
+<<<<<<< HEAD
+=======
+#define SAI_REPORT_REFERRALS  0x13
+>>>>>>> v3.18
 /* values for VARIABLE_LENGTH_CMD service action codes
  * see spc4r17 Section D.3.5, table D.7 and D.8 */
 #define VLC_SA_RECEIVE_CREDENTIAL 0x1800
@@ -326,6 +349,10 @@ static inline int scsi_status_is_good(int status)
 #define TYPE_ENCLOSURE      0x0d    /* Enclosure Services Device */
 #define TYPE_RBC	    0x0e
 #define TYPE_OSD            0x11
+<<<<<<< HEAD
+=======
+#define TYPE_ZBC            0x14
+>>>>>>> v3.18
 #define TYPE_WLUN           0x1e    /* well-known logical unit */
 #define TYPE_NO_LUN         0x7f
 
@@ -380,7 +407,11 @@ struct scsi_lun {
 #define SCSI_W_LUN_ACCESS_CONTROL (SCSI_W_LUN_BASE + 2)
 #define SCSI_W_LUN_TARGET_LOG_PAGE (SCSI_W_LUN_BASE + 3)
 
+<<<<<<< HEAD
 static inline int scsi_is_wlun(unsigned int lun)
+=======
+static inline int scsi_is_wlun(u64 lun)
+>>>>>>> v3.18
 {
 	return (lun & 0xff00) == SCSI_W_LUN_BASE;
 }
@@ -454,6 +485,11 @@ static inline int scsi_is_wlun(unsigned int lun)
 				 * other paths */
 #define DID_NEXUS_FAILURE 0x11  /* Permanent nexus failure, retry on other
 				 * paths might yield different results */
+<<<<<<< HEAD
+=======
+#define DID_ALLOC_FAILURE 0x12  /* Space allocation on the device failed */
+#define DID_MEDIUM_ERROR  0x13  /* Medium error */
+>>>>>>> v3.18
 #define DRIVER_OK       0x00	/* Driver status                           */
 
 /*
@@ -483,7 +519,10 @@ static inline int scsi_is_wlun(unsigned int lun)
 #define TIMEOUT_ERROR   0x2007
 #define SCSI_RETURN_NOT_HANDLED   0x2008
 #define FAST_IO_FAIL	0x2009
+<<<<<<< HEAD
 #define TARGET_ERROR    0x200A
+=======
+>>>>>>> v3.18
 
 /*
  * Midlevel queue return values.
@@ -549,15 +588,42 @@ static inline int scsi_is_wlun(unsigned int lun)
 #define SCSI_INQ_PQ_NOT_CON     0x01
 #define SCSI_INQ_PQ_NOT_CAP     0x03
 
+<<<<<<< HEAD
+=======
+
+/*
+ * Here are some scsi specific ioctl commands which are sometimes useful.
+ *
+ * Note that include/linux/cdrom.h also defines IOCTL 0x5300 - 0x5395
+ */
+
+/* Used to obtain PUN and LUN info.  Conflicts with CDROMAUDIOBUFSIZ */
+#define SCSI_IOCTL_GET_IDLUN		0x5382
+
+/* 0x5383 and 0x5384 were used for SCSI_IOCTL_TAGGED_{ENABLE,DISABLE} */
+
+/* Used to obtain the host number of a device. */
+#define SCSI_IOCTL_PROBE_HOST		0x5385
+
+/* Used to obtain the bus number for a device */
+#define SCSI_IOCTL_GET_BUS_NUMBER	0x5386
+
+/* Used to obtain the PCI location of a device */
+#define SCSI_IOCTL_GET_PCI		0x5387
+
+>>>>>>> v3.18
 /* Pull a u32 out of a SCSI message (using BE SCSI conventions) */
 static inline __u32 scsi_to_u32(__u8 *ptr)
 {
 	return (ptr[0]<<24) + (ptr[1]<<16) + (ptr[2]<<8) + ptr[3];
 }
 
+<<<<<<< HEAD
 struct scsi_disk *scsi_disk_get_from_dev(struct device *dev);
 
 struct gendisk *scsi_gendisk_get_from_dev(struct device *dev);
 void scsi_gendisk_put(struct device *dev);
 
+=======
+>>>>>>> v3.18
 #endif /* _SCSI_SCSI_H */

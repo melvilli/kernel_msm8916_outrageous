@@ -27,6 +27,10 @@
 #include <linux/slab.h>
 #include <linux/mmc/host.h>
 #include <linux/mmc/sdhci-spear.h>
+<<<<<<< HEAD
+=======
+#include <linux/mmc/slot-gpio.h>
+>>>>>>> v3.18
 #include <linux/io.h>
 #include "sdhci.h"
 
@@ -37,6 +41,7 @@ struct spear_sdhci {
 
 /* sdhci ops */
 static const struct sdhci_ops sdhci_pltfm_ops = {
+<<<<<<< HEAD
 	/* Nothing to do for now. */
 };
 
@@ -70,6 +75,14 @@ static irqreturn_t sdhci_gpio_irq(int irq, void *dev_id)
 	return IRQ_HANDLED;
 }
 
+=======
+	.set_clock = sdhci_set_clock,
+	.set_bus_width = sdhci_set_bus_width,
+	.reset = sdhci_reset,
+	.set_uhs_signaling = sdhci_set_uhs_signaling,
+};
+
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static struct sdhci_plat_data *sdhci_probe_config_dt(struct platform_device *pdev)
 {
@@ -84,6 +97,7 @@ static struct sdhci_plat_data *sdhci_probe_config_dt(struct platform_device *pde
 	/* If pdata is required */
 	if (cd_gpio != -1) {
 		pdata = devm_kzalloc(&pdev->dev, sizeof(*pdata), GFP_KERNEL);
+<<<<<<< HEAD
 		if (!pdata) {
 			dev_err(&pdev->dev, "DT: kzalloc failed\n");
 			return ERR_PTR(-ENOMEM);
@@ -92,6 +106,14 @@ static struct sdhci_plat_data *sdhci_probe_config_dt(struct platform_device *pde
 
 	pdata->card_int_gpio = cd_gpio;
 
+=======
+		if (!pdata)
+			dev_err(&pdev->dev, "DT: kzalloc failed\n");
+		else
+			pdata->card_int_gpio = cd_gpio;
+	}
+
+>>>>>>> v3.18
 	return pdata;
 }
 #else
@@ -107,6 +129,7 @@ static int sdhci_probe(struct platform_device *pdev)
 	struct sdhci_host *host;
 	struct resource *iomem;
 	struct spear_sdhci *sdhci;
+<<<<<<< HEAD
 	int ret;
 
 	iomem = platform_get_resource(pdev, IORESOURCE_MEM, 0);
@@ -136,12 +159,50 @@ static int sdhci_probe(struct platform_device *pdev)
 		ret = PTR_ERR(sdhci->clk);
 		dev_dbg(&pdev->dev, "Error getting clock\n");
 		goto err;
+=======
+	struct device *dev;
+	int ret;
+
+	dev = pdev->dev.parent ? pdev->dev.parent : &pdev->dev;
+	host = sdhci_alloc_host(dev, sizeof(*sdhci));
+	if (IS_ERR(host)) {
+		ret = PTR_ERR(host);
+		dev_dbg(&pdev->dev, "cannot allocate memory for sdhci\n");
+		goto err;
+	}
+
+	iomem = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+	host->ioaddr = devm_ioremap_resource(&pdev->dev, iomem);
+	if (IS_ERR(host->ioaddr)) {
+		ret = PTR_ERR(host->ioaddr);
+		dev_dbg(&pdev->dev, "unable to map iomem: %d\n", ret);
+		goto err_host;
+	}
+
+	host->hw_name = "sdhci";
+	host->ops = &sdhci_pltfm_ops;
+	host->irq = platform_get_irq(pdev, 0);
+	host->quirks = SDHCI_QUIRK_BROKEN_ADMA;
+
+	sdhci = sdhci_priv(host);
+
+	/* clk enable */
+	sdhci->clk = devm_clk_get(&pdev->dev, NULL);
+	if (IS_ERR(sdhci->clk)) {
+		ret = PTR_ERR(sdhci->clk);
+		dev_dbg(&pdev->dev, "Error getting clock\n");
+		goto err_host;
+>>>>>>> v3.18
 	}
 
 	ret = clk_prepare_enable(sdhci->clk);
 	if (ret) {
 		dev_dbg(&pdev->dev, "Error enabling clock\n");
+<<<<<<< HEAD
 		goto put_clk;
+=======
+		goto err_host;
+>>>>>>> v3.18
 	}
 
 	ret = clk_set_rate(sdhci->clk, 50000000);
@@ -153,12 +214,17 @@ static int sdhci_probe(struct platform_device *pdev)
 		sdhci->data = sdhci_probe_config_dt(pdev);
 		if (IS_ERR(sdhci->data)) {
 			dev_err(&pdev->dev, "DT: Failed to get pdata\n");
+<<<<<<< HEAD
 			return -ENODEV;
+=======
+			goto disable_clk;
+>>>>>>> v3.18
 		}
 	} else {
 		sdhci->data = dev_get_platdata(&pdev->dev);
 	}
 
+<<<<<<< HEAD
 	pdev->dev.platform_data = sdhci;
 
 	if (pdev->dev.parent)
@@ -183,16 +249,37 @@ static int sdhci_probe(struct platform_device *pdev)
 		ret = -ENOMEM;
 		dev_dbg(&pdev->dev, "failed to remap registers\n");
 		goto free_host;
+=======
+	/*
+	 * It is optional to use GPIOs for sdhci card detection. If
+	 * sdhci->data is NULL, then use original sdhci lines otherwise
+	 * GPIO lines. We use the built-in GPIO support for this.
+	 */
+	if (sdhci->data && sdhci->data->card_int_gpio >= 0) {
+		ret = mmc_gpio_request_cd(host->mmc,
+					  sdhci->data->card_int_gpio, 0);
+		if (ret < 0) {
+			dev_dbg(&pdev->dev,
+				"failed to request card-detect gpio%d\n",
+				sdhci->data->card_int_gpio);
+			goto disable_clk;
+		}
+>>>>>>> v3.18
 	}
 
 	ret = sdhci_add_host(host);
 	if (ret) {
 		dev_dbg(&pdev->dev, "error adding host\n");
+<<<<<<< HEAD
 		goto free_host;
+=======
+		goto disable_clk;
+>>>>>>> v3.18
 	}
 
 	platform_set_drvdata(pdev, host);
 
+<<<<<<< HEAD
 	/*
 	 * It is optional to use GPIOs for sdhci Power control & sdhci card
 	 * interrupt detection. If sdhci->data is NULL, then use original sdhci
@@ -266,6 +353,14 @@ disable_clk:
 	clk_disable_unprepare(sdhci->clk);
 put_clk:
 	clk_put(sdhci->clk);
+=======
+	return 0;
+
+disable_clk:
+	clk_disable_unprepare(sdhci->clk);
+err_host:
+	sdhci_free_host(host);
+>>>>>>> v3.18
 err:
 	dev_err(&pdev->dev, "spear-sdhci probe failed: %d\n", ret);
 	return ret;
@@ -274,19 +369,31 @@ err:
 static int sdhci_remove(struct platform_device *pdev)
 {
 	struct sdhci_host *host = platform_get_drvdata(pdev);
+<<<<<<< HEAD
 	struct spear_sdhci *sdhci = dev_get_platdata(&pdev->dev);
 	int dead = 0;
 	u32 scratch;
 
 	platform_set_drvdata(pdev, NULL);
+=======
+	struct spear_sdhci *sdhci = sdhci_priv(host);
+	int dead = 0;
+	u32 scratch;
+
+>>>>>>> v3.18
 	scratch = readl(host->ioaddr + SDHCI_INT_STATUS);
 	if (scratch == (u32)-1)
 		dead = 1;
 
 	sdhci_remove_host(host, dead);
+<<<<<<< HEAD
 	sdhci_free_host(host);
 	clk_disable_unprepare(sdhci->clk);
 	clk_put(sdhci->clk);
+=======
+	clk_disable_unprepare(sdhci->clk);
+	sdhci_free_host(host);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -295,7 +402,11 @@ static int sdhci_remove(struct platform_device *pdev)
 static int sdhci_suspend(struct device *dev)
 {
 	struct sdhci_host *host = dev_get_drvdata(dev);
+<<<<<<< HEAD
 	struct spear_sdhci *sdhci = dev_get_platdata(dev);
+=======
+	struct spear_sdhci *sdhci = sdhci_priv(host);
+>>>>>>> v3.18
 	int ret;
 
 	ret = sdhci_suspend_host(host);
@@ -308,7 +419,11 @@ static int sdhci_suspend(struct device *dev)
 static int sdhci_resume(struct device *dev)
 {
 	struct sdhci_host *host = dev_get_drvdata(dev);
+<<<<<<< HEAD
 	struct spear_sdhci *sdhci = dev_get_platdata(dev);
+=======
+	struct spear_sdhci *sdhci = sdhci_priv(host);
+>>>>>>> v3.18
 	int ret;
 
 	ret = clk_enable(sdhci->clk);
@@ -334,7 +449,10 @@ MODULE_DEVICE_TABLE(of, sdhci_spear_id_table);
 static struct platform_driver sdhci_driver = {
 	.driver = {
 		.name	= "sdhci",
+<<<<<<< HEAD
 		.owner	= THIS_MODULE,
+=======
+>>>>>>> v3.18
 		.pm	= &sdhci_pm_ops,
 		.of_match_table = of_match_ptr(sdhci_spear_id_table),
 	},

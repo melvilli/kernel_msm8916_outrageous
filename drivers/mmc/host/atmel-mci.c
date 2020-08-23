@@ -17,6 +17,10 @@
 #include <linux/gpio.h>
 #include <linux/init.h>
 #include <linux/interrupt.h>
+<<<<<<< HEAD
+=======
+#include <linux/io.h>
+>>>>>>> v3.18
 #include <linux/ioport.h>
 #include <linux/module.h>
 #include <linux/of.h>
@@ -37,11 +41,18 @@
 #include <linux/atmel-mci.h>
 #include <linux/atmel_pdc.h>
 
+<<<<<<< HEAD
 #include <asm/io.h>
 #include <asm/unaligned.h>
 
 #include <mach/cpu.h>
 
+=======
+#include <asm/cacheflush.h>
+#include <asm/io.h>
+#include <asm/unaligned.h>
+
+>>>>>>> v3.18
 #include "atmel-mci-regs.h"
 
 #define ATMCI_DATA_ERROR_FLAGS	(ATMCI_DCRCE | ATMCI_DTOE | ATMCI_OVRE | ATMCI_UNRE)
@@ -257,7 +268,10 @@ struct atmel_mci_slot {
 #define ATMCI_CARD_PRESENT	0
 #define ATMCI_CARD_NEED_INIT	1
 #define ATMCI_SHUTDOWN		2
+<<<<<<< HEAD
 #define ATMCI_SUSPENDED		3
+=======
+>>>>>>> v3.18
 
 	int			detect_pin;
 	int			wp_pin;
@@ -380,6 +394,11 @@ static int atmci_regs_show(struct seq_file *s, void *v)
 {
 	struct atmel_mci	*host = s->private;
 	u32			*buf;
+<<<<<<< HEAD
+=======
+	int			ret = 0;
+
+>>>>>>> v3.18
 
 	buf = kmalloc(ATMCI_REGS_SIZE, GFP_KERNEL);
 	if (!buf)
@@ -390,12 +409,25 @@ static int atmci_regs_show(struct seq_file *s, void *v)
 	 * not disabling interrupts, so IMR and SR may not be
 	 * consistent.
 	 */
+<<<<<<< HEAD
 	spin_lock_bh(&host->lock);
 	clk_enable(host->mck);
 	memcpy_fromio(buf, host->regs, ATMCI_REGS_SIZE);
 	clk_disable(host->mck);
 	spin_unlock_bh(&host->lock);
 
+=======
+	ret = clk_prepare_enable(host->mck);
+	if (ret)
+		goto out;
+
+	spin_lock_bh(&host->lock);
+	memcpy_fromio(buf, host->regs, ATMCI_REGS_SIZE);
+	spin_unlock_bh(&host->lock);
+
+	clk_disable_unprepare(host->mck);
+
+>>>>>>> v3.18
 	seq_printf(s, "MR:\t0x%08x%s%s ",
 			buf[ATMCI_MR / 4],
 			buf[ATMCI_MR / 4] & ATMCI_MR_RDPROOF ? " RDPROOF" : "",
@@ -444,9 +476,16 @@ static int atmci_regs_show(struct seq_file *s, void *v)
 				val & ATMCI_CFG_LSYNC ? " LSYNC" : "");
 	}
 
+<<<<<<< HEAD
 	kfree(buf);
 
 	return 0;
+=======
+out:
+	kfree(buf);
+
+	return ret;
+>>>>>>> v3.18
 }
 
 static int atmci_regs_open(struct inode *inode, struct file *file)
@@ -816,6 +855,7 @@ static void atmci_pdc_complete(struct atmel_mci *host)
 
 	atmci_pdc_cleanup(host);
 
+<<<<<<< HEAD
 	/*
 	 * If the card was removed, data will be NULL. No point trying
 	 * to send the stop command or waiting for NBUSY in this case.
@@ -826,6 +866,11 @@ static void atmci_pdc_complete(struct atmel_mci *host)
 		atmci_set_pending(host, EVENT_XFER_COMPLETE);
 		tasklet_schedule(&host->tasklet);
 	}
+=======
+	dev_dbg(&host->pdev->dev, "(%s) set pending xfer complete\n", __func__);
+	atmci_set_pending(host, EVENT_XFER_COMPLETE);
+	tasklet_schedule(&host->tasklet);
+>>>>>>> v3.18
 }
 
 static void atmci_dma_cleanup(struct atmel_mci *host)
@@ -1282,6 +1327,10 @@ static void atmci_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 	struct atmel_mci_slot	*slot = mmc_priv(mmc);
 	struct atmel_mci	*host = slot->host;
 	unsigned int		i;
+<<<<<<< HEAD
+=======
+	bool			unprepare_clk;
+>>>>>>> v3.18
 
 	slot->sdc_reg &= ~ATMCI_SDCBUS_MASK;
 	switch (ios->bus_width) {
@@ -1295,11 +1344,22 @@ static void atmci_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 
 	if (ios->clock) {
 		unsigned int clock_min = ~0U;
+<<<<<<< HEAD
 		int clkdiv;
+=======
+		u32 clkdiv;
+
+		clk_prepare(host->mck);
+		unprepare_clk = true;
+>>>>>>> v3.18
 
 		spin_lock_bh(&host->lock);
 		if (!host->mode_reg) {
 			clk_enable(host->mck);
+<<<<<<< HEAD
+=======
+			unprepare_clk = false;
+>>>>>>> v3.18
 			atmci_writel(host, ATMCI_CR, ATMCI_CR_SWRST);
 			atmci_writel(host, ATMCI_CR, ATMCI_CR_MCIEN);
 			if (host->caps.has_cfg_reg)
@@ -1320,12 +1380,16 @@ static void atmci_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 		/* Calculate clock divider */
 		if (host->caps.has_odd_clk_div) {
 			clkdiv = DIV_ROUND_UP(host->bus_hz, clock_min) - 2;
+<<<<<<< HEAD
 			if (clkdiv < 0) {
 				dev_warn(&mmc->class_dev,
 					 "clock %u too fast; using %lu\n",
 					 clock_min, host->bus_hz / 2);
 				clkdiv = 0;
 			} else if (clkdiv > 511) {
+=======
+			if (clkdiv > 511) {
+>>>>>>> v3.18
 				dev_warn(&mmc->class_dev,
 				         "clock %u too slow; using %lu\n",
 				         clock_min, host->bus_hz / (511 + 2));
@@ -1372,6 +1436,11 @@ static void atmci_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 	} else {
 		bool any_slot_active = false;
 
+<<<<<<< HEAD
+=======
+		unprepare_clk = false;
+
+>>>>>>> v3.18
 		spin_lock_bh(&host->lock);
 		slot->clock = 0;
 		for (i = 0; i < ATMCI_MAX_NR_SLOTS; i++) {
@@ -1385,15 +1454,34 @@ static void atmci_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 			if (host->mode_reg) {
 				atmci_readl(host, ATMCI_MR);
 				clk_disable(host->mck);
+<<<<<<< HEAD
+=======
+				unprepare_clk = true;
+>>>>>>> v3.18
 			}
 			host->mode_reg = 0;
 		}
 		spin_unlock_bh(&host->lock);
 	}
 
+<<<<<<< HEAD
 	switch (ios->power_mode) {
 	case MMC_POWER_UP:
 		set_bit(ATMCI_CARD_NEED_INIT, &slot->flags);
+=======
+	if (unprepare_clk)
+		clk_unprepare(host->mck);
+
+	switch (ios->power_mode) {
+	case MMC_POWER_OFF:
+		if (!IS_ERR(mmc->supply.vmmc))
+			mmc_regulator_set_ocr(mmc, mmc->supply.vmmc, 0);
+		break;
+	case MMC_POWER_UP:
+		set_bit(ATMCI_CARD_NEED_INIT, &slot->flags);
+		if (!IS_ERR(mmc->supply.vmmc))
+			mmc_regulator_set_ocr(mmc, mmc->supply.vmmc, ios->vdd);
+>>>>>>> v3.18
 		break;
 	default:
 		/*
@@ -2185,7 +2273,12 @@ static int __init atmci_init_slot(struct atmel_mci *host,
 	/* Assume card is present initially */
 	set_bit(ATMCI_CARD_PRESENT, &slot->flags);
 	if (gpio_is_valid(slot->detect_pin)) {
+<<<<<<< HEAD
 		if (gpio_request(slot->detect_pin, "mmc_detect")) {
+=======
+		if (devm_gpio_request(&host->pdev->dev, slot->detect_pin,
+				      "mmc_detect")) {
+>>>>>>> v3.18
 			dev_dbg(&mmc->class_dev, "no detect pin available\n");
 			slot->detect_pin = -EBUSY;
 		} else if (gpio_get_value(slot->detect_pin) ^
@@ -2198,13 +2291,22 @@ static int __init atmci_init_slot(struct atmel_mci *host,
 		mmc->caps |= MMC_CAP_NEEDS_POLL;
 
 	if (gpio_is_valid(slot->wp_pin)) {
+<<<<<<< HEAD
 		if (gpio_request(slot->wp_pin, "mmc_wp")) {
+=======
+		if (devm_gpio_request(&host->pdev->dev, slot->wp_pin,
+				      "mmc_wp")) {
+>>>>>>> v3.18
 			dev_dbg(&mmc->class_dev, "no WP pin available\n");
 			slot->wp_pin = -EBUSY;
 		}
 	}
 
 	host->slot[id] = slot;
+<<<<<<< HEAD
+=======
+	mmc_regulator_get_supply(mmc);
+>>>>>>> v3.18
 	mmc_add_host(mmc);
 
 	if (gpio_is_valid(slot->detect_pin)) {
@@ -2221,7 +2323,10 @@ static int __init atmci_init_slot(struct atmel_mci *host,
 			dev_dbg(&mmc->class_dev,
 				"could not request IRQ %d for detect pin\n",
 				gpio_to_irq(slot->detect_pin));
+<<<<<<< HEAD
 			gpio_free(slot->detect_pin);
+=======
+>>>>>>> v3.18
 			slot->detect_pin = -EBUSY;
 		}
 	}
@@ -2231,7 +2336,11 @@ static int __init atmci_init_slot(struct atmel_mci *host,
 	return 0;
 }
 
+<<<<<<< HEAD
 static void __exit atmci_cleanup_slot(struct atmel_mci_slot *slot,
+=======
+static void atmci_cleanup_slot(struct atmel_mci_slot *slot,
+>>>>>>> v3.18
 		unsigned int id)
 {
 	/* Debugfs stuff is cleaned up by mmc core */
@@ -2246,10 +2355,14 @@ static void __exit atmci_cleanup_slot(struct atmel_mci_slot *slot,
 
 		free_irq(gpio_to_irq(pin), slot);
 		del_timer_sync(&slot->detect_timer);
+<<<<<<< HEAD
 		gpio_free(pin);
 	}
 	if (gpio_is_valid(slot->wp_pin))
 		gpio_free(slot->wp_pin);
+=======
+	}
+>>>>>>> v3.18
 
 	slot->host->slot[id] = NULL;
 	mmc_free_host(slot->mmc);
@@ -2333,6 +2446,10 @@ static void __init atmci_get_cap(struct atmel_mci *host)
 
 	/* keep only major version number */
 	switch (version & 0xf00) {
+<<<<<<< HEAD
+=======
+	case 0x600:
+>>>>>>> v3.18
 	case 0x500:
 		host->caps.has_odd_clk_div = 1;
 	case 0x400:
@@ -2366,7 +2483,11 @@ static int __init atmci_probe(struct platform_device *pdev)
 	struct resource			*regs;
 	unsigned int			nr_slots;
 	int				irq;
+<<<<<<< HEAD
 	int				ret;
+=======
+	int				ret, i;
+>>>>>>> v3.18
 
 	regs = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!regs)
@@ -2384,7 +2505,11 @@ static int __init atmci_probe(struct platform_device *pdev)
 	if (irq < 0)
 		return irq;
 
+<<<<<<< HEAD
 	host = kzalloc(sizeof(struct atmel_mci), GFP_KERNEL);
+=======
+	host = devm_kzalloc(&pdev->dev, sizeof(*host), GFP_KERNEL);
+>>>>>>> v3.18
 	if (!host)
 		return -ENOMEM;
 
@@ -2392,6 +2517,7 @@ static int __init atmci_probe(struct platform_device *pdev)
 	spin_lock_init(&host->lock);
 	INIT_LIST_HEAD(&host->queue);
 
+<<<<<<< HEAD
 	host->mck = clk_get(&pdev->dev, "mci_clk");
 	if (IS_ERR(host->mck)) {
 		ret = PTR_ERR(host->mck);
@@ -2407,6 +2533,23 @@ static int __init atmci_probe(struct platform_device *pdev)
 	atmci_writel(host, ATMCI_CR, ATMCI_CR_SWRST);
 	host->bus_hz = clk_get_rate(host->mck);
 	clk_disable(host->mck);
+=======
+	host->mck = devm_clk_get(&pdev->dev, "mci_clk");
+	if (IS_ERR(host->mck))
+		return PTR_ERR(host->mck);
+
+	host->regs = devm_ioremap(&pdev->dev, regs->start, resource_size(regs));
+	if (!host->regs)
+		return -ENOMEM;
+
+	ret = clk_prepare_enable(host->mck);
+	if (ret)
+		return ret;
+
+	atmci_writel(host, ATMCI_CR, ATMCI_CR_SWRST);
+	host->bus_hz = clk_get_rate(host->mck);
+	clk_disable_unprepare(host->mck);
+>>>>>>> v3.18
 
 	host->mapbase = regs->start;
 
@@ -2414,7 +2557,11 @@ static int __init atmci_probe(struct platform_device *pdev)
 
 	ret = request_irq(irq, atmci_interrupt, 0, dev_name(&pdev->dev), host);
 	if (ret)
+<<<<<<< HEAD
 		goto err_request_irq;
+=======
+		return ret;
+>>>>>>> v3.18
 
 	/* Get MCI capabilities and set operations according to it */
 	atmci_get_cap(host);
@@ -2472,7 +2619,11 @@ static int __init atmci_probe(struct platform_device *pdev)
 		if (!host->buffer) {
 			ret = -ENOMEM;
 			dev_err(&pdev->dev, "buffer allocation failed\n");
+<<<<<<< HEAD
 			goto err_init_slot;
+=======
+			goto err_dma_alloc;
+>>>>>>> v3.18
 		}
 	}
 
@@ -2482,6 +2633,7 @@ static int __init atmci_probe(struct platform_device *pdev)
 
 	return 0;
 
+<<<<<<< HEAD
 err_init_slot:
 	if (host->dma.chan)
 		dma_release_channel(host->dma.chan);
@@ -2492,6 +2644,18 @@ err_ioremap:
 	clk_put(host->mck);
 err_clk_get:
 	kfree(host);
+=======
+err_dma_alloc:
+	for (i = 0; i < ATMCI_MAX_NR_SLOTS; i++) {
+		if (host->slot[i])
+			atmci_cleanup_slot(host->slot[i], i);
+	}
+err_init_slot:
+	del_timer_sync(&host->timer);
+	if (host->dma.chan)
+		dma_release_channel(host->dma.chan);
+	free_irq(irq, host);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -2500,8 +2664,11 @@ static int __exit atmci_remove(struct platform_device *pdev)
 	struct atmel_mci	*host = platform_get_drvdata(pdev);
 	unsigned int		i;
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 	if (host->buffer)
 		dma_free_coherent(&pdev->dev, host->buf_size,
 		                  host->buffer, host->buf_phys_addr);
@@ -2511,16 +2678,27 @@ static int __exit atmci_remove(struct platform_device *pdev)
 			atmci_cleanup_slot(host->slot[i], i);
 	}
 
+<<<<<<< HEAD
 	clk_enable(host->mck);
 	atmci_writel(host, ATMCI_IDR, ~0UL);
 	atmci_writel(host, ATMCI_CR, ATMCI_CR_MCIDIS);
 	atmci_readl(host, ATMCI_SR);
 	clk_disable(host->mck);
 
+=======
+	clk_prepare_enable(host->mck);
+	atmci_writel(host, ATMCI_IDR, ~0UL);
+	atmci_writel(host, ATMCI_CR, ATMCI_CR_MCIDIS);
+	atmci_readl(host, ATMCI_SR);
+	clk_disable_unprepare(host->mck);
+
+	del_timer_sync(&host->timer);
+>>>>>>> v3.18
 	if (host->dma.chan)
 		dma_release_channel(host->dma.chan);
 
 	free_irq(platform_get_irq(pdev, 0), host);
+<<<<<<< HEAD
 	iounmap(host->regs);
 
 	clk_put(host->mck);
@@ -2556,10 +2734,13 @@ static int atmci_suspend(struct device *dev)
 			set_bit(ATMCI_SUSPENDED, &slot->flags);
 		}
 	}
+=======
+>>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 static int atmci_resume(struct device *dev)
 {
 	struct atmel_mci *host = dev_get_drvdata(dev);
@@ -2590,11 +2771,16 @@ static SIMPLE_DEV_PM_OPS(atmci_pm, atmci_suspend, atmci_resume);
 #define ATMCI_PM_OPS	NULL
 #endif
 
+=======
+>>>>>>> v3.18
 static struct platform_driver atmci_driver = {
 	.remove		= __exit_p(atmci_remove),
 	.driver		= {
 		.name		= "atmel_mci",
+<<<<<<< HEAD
 		.pm		= ATMCI_PM_OPS,
+=======
+>>>>>>> v3.18
 		.of_match_table	= of_match_ptr(atmci_dt_ids),
 	},
 };

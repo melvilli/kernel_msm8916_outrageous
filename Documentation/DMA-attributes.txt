@@ -13,7 +13,11 @@ all pending DMA writes to complete, and thus provides a mechanism to
 strictly order DMA from a device across all intervening busses and
 bridges.  This barrier is not specific to a particular type of
 interconnect, it applies to the system as a whole, and so its
+<<<<<<< HEAD
 implementation must account for the idiosyncracies of the system all
+=======
+implementation must account for the idiosyncrasies of the system all
+>>>>>>> v3.18
 the way from the DMA device to memory.
 
 As an example of a situation where DMA_ATTR_WRITE_BARRIER would be
@@ -60,7 +64,11 @@ such mapping is non-trivial task and consumes very limited resources
 Buffers allocated with this attribute can be only passed to user space
 by calling dma_mmap_attrs(). By using this API, you are guaranteeing
 that you won't dereference the pointer returned by dma_alloc_attr(). You
+<<<<<<< HEAD
 can threat it as a cookie that must be passed to dma_mmap_attrs() and
+=======
+can treat it as a cookie that must be passed to dma_mmap_attrs() and
+>>>>>>> v3.18
 dma_free_attrs(). Make sure that both of these also get this attribute
 set on each call.
 
@@ -82,7 +90,11 @@ to 'device' domain, what synchronizes CPU caches for the given region
 (usually it means that the cache has been flushed or invalidated
 depending on the dma direction). However, next calls to
 dma_map_{single,page,sg}() for other devices will perform exactly the
+<<<<<<< HEAD
 same sychronization operation on the CPU cache. CPU cache sychronization
+=======
+same synchronization operation on the CPU cache. CPU cache synchronization
+>>>>>>> v3.18
 might be a time consuming operation, especially if the buffers are
 large, so it is highly recommended to avoid it if possible.
 DMA_ATTR_SKIP_CPU_SYNC allows platform code to skip synchronization of
@@ -98,6 +110,7 @@ DMA_ATTR_FORCE_CONTIGUOUS
 By default DMA-mapping subsystem is allowed to assemble the buffer
 allocated by dma_alloc_attrs() function from individual pages if it can
 be mapped as contiguous chunk into device dma address space. By
+<<<<<<< HEAD
 specifing this attribute the allocated buffer is forced to be contiguous
 also in physical memory.
 
@@ -109,3 +122,7 @@ of mapping (no unaligned accesses, no re-ordering, no write merging, no
 buffering, no pre-fetching). This has severe performance penalties and
 should not be used for general purpose DMA allocations. It should only
 be used if one of the restrictions on strongly ordered memory is required.
+=======
+specifying this attribute the allocated buffer is forced to be contiguous
+also in physical memory.
+>>>>>>> v3.18

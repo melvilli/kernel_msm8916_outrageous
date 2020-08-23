@@ -23,7 +23,10 @@
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
 #include <linux/kernel.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/dmi.h>
 #include <linux/module.h>
 #include <linux/types.h>
@@ -831,9 +834,17 @@ static ssize_t lis3lv02d_rate_set(struct device *dev,
 {
 	struct lis3lv02d *lis3 = dev_get_drvdata(dev);
 	unsigned long rate;
+<<<<<<< HEAD
 
 	if (strict_strtoul(buf, 0, &rate))
 		return -EINVAL;
+=======
+	int ret;
+
+	ret = kstrtoul(buf, 0, &rate);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 
 	lis3lv02d_sysfs_poweron(lis3);
 	if (lis3lv02d_set_odr(lis3, rate))

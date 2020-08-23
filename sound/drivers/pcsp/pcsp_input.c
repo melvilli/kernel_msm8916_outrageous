@@ -16,6 +16,10 @@
 #include <linux/input.h>
 #include <asm/io.h>
 #include "pcsp.h"
+<<<<<<< HEAD
+=======
+#include "pcsp_input.h"
+>>>>>>> v3.18
 
 static void pcspkr_do_sound(unsigned int count)
 {

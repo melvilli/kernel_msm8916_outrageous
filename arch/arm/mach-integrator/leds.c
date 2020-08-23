@@ -11,9 +11,14 @@
 #include <linux/slab.h>
 #include <linux/leds.h>
 
+<<<<<<< HEAD
 #include <mach/cm.h>
 #include <mach/hardware.h>
 #include <mach/platform.h>
+=======
+#include "hardware.h"
+#include "cm.h"
+>>>>>>> v3.18
 
 #if defined(CONFIG_NEW_LEDS) && defined(CONFIG_LEDS_CLASS)
 
@@ -78,7 +83,11 @@ static void cm_led_set(struct led_classdev *cdev,
 
 static enum led_brightness cm_led_get(struct led_classdev *cdev)
 {
+<<<<<<< HEAD
 	u32 reg = readl(CM_CTRL);
+=======
+	u32 reg = cm_get();
+>>>>>>> v3.18
 
 	return (reg & CM_CTRL_LED) ? LED_FULL : LED_OFF;
 }

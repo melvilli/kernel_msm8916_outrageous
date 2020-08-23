@@ -9,7 +9,10 @@
  */
 #include <linux/clk.h>
 #include <linux/bitmap.h>
+<<<<<<< HEAD
 #include <linux/dw_dmac.h>
+=======
+>>>>>>> v3.18
 #include <linux/dmaengine.h>
 #include <linux/dma-mapping.h>
 #include <linux/init.h>
@@ -25,6 +28,12 @@
 #include <sound/pcm_params.h>
 #include <sound/atmel-abdac.h>
 
+<<<<<<< HEAD
+=======
+#include <linux/platform_data/dma-dw.h>
+#include <linux/dma/dw.h>
+
+>>>>>>> v3.18
 /* DAC register offsets */
 #define DAC_DATA                                0x0000
 #define DAC_CTRL                                0x0008
@@ -354,10 +363,18 @@ static int set_sample_rates(struct atmel_abdac *dac)
 	/* we start at 192 kHz and work our way down to 5112 Hz */
 	while (new_rate >= RATE_MIN && index < (MAX_NUM_RATES + 1)) {
 		new_rate = clk_round_rate(dac->sample_clk, 256 * new_rate);
+<<<<<<< HEAD
 		if (new_rate < 0)
 			break;
 		/* make sure we are below the ABDAC clock */
 		if (new_rate <= clk_get_rate(dac->pclk)) {
+=======
+		if (new_rate <= 0)
+			break;
+		/* make sure we are below the ABDAC clock */
+		if (index < MAX_NUM_RATES &&
+		    new_rate <= clk_get_rate(dac->pclk)) {
+>>>>>>> v3.18
 			dac->rates[index] = new_rate / 256;
 			index++;
 		}
@@ -428,8 +445,14 @@ static int atmel_abdac_probe(struct platform_device *pdev)
 	}
 	clk_enable(pclk);
 
+<<<<<<< HEAD
 	retval = snd_card_create(SNDRV_DEFAULT_IDX1, SNDRV_DEFAULT_STR1,
 			THIS_MODULE, sizeof(struct atmel_abdac), &card);
+=======
+	retval = snd_card_new(&pdev->dev, SNDRV_DEFAULT_IDX1,
+			      SNDRV_DEFAULT_STR1, THIS_MODULE,
+			      sizeof(struct atmel_abdac), &card);
+>>>>>>> v3.18
 	if (retval) {
 		dev_dbg(&pdev->dev, "could not create sound card device\n");
 		goto out_put_sample_clk;
@@ -466,8 +489,11 @@ static int atmel_abdac_probe(struct platform_device *pdev)
 		goto out_unmap_regs;
 	}
 
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pdev->dev);
 
+=======
+>>>>>>> v3.18
 	if (pdata->dws.dma_dev) {
 		dma_cap_mask_t mask;
 
@@ -491,7 +517,11 @@ static int atmel_abdac_probe(struct platform_device *pdev)
 	if (!pdata->dws.dma_dev || !dac->dma.chan) {
 		dev_dbg(&pdev->dev, "DMA not available\n");
 		retval = -ENODEV;
+<<<<<<< HEAD
 		goto out_unset_card_dev;
+=======
+		goto out_unmap_regs;
+>>>>>>> v3.18
 	}
 
 	strcpy(card->driver, "Atmel ABDAC");
@@ -520,9 +550,12 @@ static int atmel_abdac_probe(struct platform_device *pdev)
 out_release_dma:
 	dma_release_channel(dac->dma.chan);
 	dac->dma.chan = NULL;
+<<<<<<< HEAD
 out_unset_card_dev:
 	snd_card_set_dev(card, NULL);
 	free_irq(irq, dac);
+=======
+>>>>>>> v3.18
 out_unmap_regs:
 	iounmap(dac->regs);
 out_free_card:
@@ -578,7 +611,10 @@ static int atmel_abdac_remove(struct platform_device *pdev)
 
 	dma_release_channel(dac->dma.chan);
 	dac->dma.chan = NULL;
+<<<<<<< HEAD
 	snd_card_set_dev(card, NULL);
+=======
+>>>>>>> v3.18
 	iounmap(dac->regs);
 	free_irq(dac->irq, dac);
 	snd_card_free(card);

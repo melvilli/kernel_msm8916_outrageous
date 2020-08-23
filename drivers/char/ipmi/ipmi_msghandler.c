@@ -55,6 +55,10 @@ static struct ipmi_recv_msg *ipmi_alloc_recv_msg(void);
 static int ipmi_init_msghandler(void);
 static void smi_recv_tasklet(unsigned long);
 static void handle_new_recv_msgs(ipmi_smi_t intf);
+<<<<<<< HEAD
+=======
+static void need_waiter(ipmi_smi_t intf);
+>>>>>>> v3.18
 
 static int initialized;
 
@@ -73,14 +77,36 @@ static struct proc_dir_entry *proc_ipmi_root;
  */
 #define MAX_MSG_TIMEOUT		60000
 
+<<<<<<< HEAD
+=======
+/* Call every ~1000 ms. */
+#define IPMI_TIMEOUT_TIME	1000
+
+/* How many jiffies does it take to get to the timeout time. */
+#define IPMI_TIMEOUT_JIFFIES	((IPMI_TIMEOUT_TIME * HZ) / 1000)
+
+/*
+ * Request events from the queue every second (this is the number of
+ * IPMI_TIMEOUT_TIMES between event requests).  Hopefully, in the
+ * future, IPMI will add a way to know immediately if an event is in
+ * the queue and this silliness can go away.
+ */
+#define IPMI_REQUEST_EV_TIME	(1000 / (IPMI_TIMEOUT_TIME))
+
+>>>>>>> v3.18
 /*
  * The main "user" data structure.
  */
 struct ipmi_user {
 	struct list_head link;
 
+<<<<<<< HEAD
 	/* Set to "0" when the user is destroyed. */
 	int valid;
+=======
+	/* Set to false when the user is destroyed. */
+	bool valid;
+>>>>>>> v3.18
 
 	struct kref refcount;
 
@@ -92,7 +118,11 @@ struct ipmi_user {
 	ipmi_smi_t intf;
 
 	/* Does this interface receive IPMI events? */
+<<<<<<< HEAD
 	int gets_events;
+=======
+	bool gets_events;
+>>>>>>> v3.18
 };
 
 struct cmd_rcvr {
@@ -383,6 +413,12 @@ struct ipmi_smi {
 	unsigned int     waiting_events_count; /* How many events in queue? */
 	char             delivering_events;
 	char             event_msg_printed;
+<<<<<<< HEAD
+=======
+	atomic_t         event_waiters;
+	unsigned int     ticks_to_req_ev;
+	int              last_needs_timer;
+>>>>>>> v3.18
 
 	/*
 	 * The event receiver for my BMC, only really used at panic
@@ -395,7 +431,11 @@ struct ipmi_smi {
 
 	/* For handling of maintenance mode. */
 	int maintenance_mode;
+<<<<<<< HEAD
 	int maintenance_mode_enable;
+=======
+	bool maintenance_mode_enable;
+>>>>>>> v3.18
 	int auto_maintenance_timeout;
 	spinlock_t maintenance_mode_lock; /* Used in a timer... */
 
@@ -451,7 +491,10 @@ static DEFINE_MUTEX(ipmi_interfaces_mutex);
 static LIST_HEAD(smi_watchers);
 static DEFINE_MUTEX(smi_watchers_mutex);
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 #define ipmi_inc_stat(intf, stat) \
 	atomic_inc(&(intf)->stats[IPMI_STAT_ ## stat])
 #define ipmi_get_stat(intf, stat) \
@@ -772,6 +815,10 @@ static int intf_next_seq(ipmi_smi_t           intf,
 		*seq = i;
 		*seqid = intf->seq_table[i].seqid;
 		intf->curr_seq = (i+1)%IPMI_IPMB_NUM_SEQ;
+<<<<<<< HEAD
+=======
+		need_waiter(intf);
+>>>>>>> v3.18
 	} else {
 		rv = -EAGAIN;
 	}
@@ -941,7 +988,11 @@ int ipmi_create_user(unsigned int          if_num,
 	new_user->handler = handler;
 	new_user->handler_data = handler_data;
 	new_user->intf = intf;
+<<<<<<< HEAD
 	new_user->gets_events = 0;
+=======
+	new_user->gets_events = false;
+>>>>>>> v3.18
 
 	if (!try_module_get(intf->handlers->owner)) {
 		rv = -ENODEV;
@@ -962,10 +1013,22 @@ int ipmi_create_user(unsigned int          if_num,
 	 */
 	mutex_unlock(&ipmi_interfaces_mutex);
 
+<<<<<<< HEAD
 	new_user->valid = 1;
 	spin_lock_irqsave(&intf->seq_lock, flags);
 	list_add_rcu(&new_user->link, &intf->users);
 	spin_unlock_irqrestore(&intf->seq_lock, flags);
+=======
+	new_user->valid = true;
+	spin_lock_irqsave(&intf->seq_lock, flags);
+	list_add_rcu(&new_user->link, &intf->users);
+	spin_unlock_irqrestore(&intf->seq_lock, flags);
+	if (handler->ipmi_watchdog_pretimeout) {
+		/* User wants pretimeouts, so make sure to watch for them. */
+		if (atomic_inc_return(&intf->event_waiters) == 1)
+			need_waiter(intf);
+	}
+>>>>>>> v3.18
 	*user = new_user;
 	return 0;
 
@@ -1019,7 +1082,17 @@ int ipmi_destroy_user(ipmi_user_t user)
 	struct cmd_rcvr  *rcvr;
 	struct cmd_rcvr  *rcvrs = NULL;
 
+<<<<<<< HEAD
 	user->valid = 0;
+=======
+	user->valid = false;
+
+	if (user->handler->ipmi_watchdog_pretimeout)
+		atomic_dec(&intf->event_waiters);
+
+	if (user->gets_events)
+		atomic_dec(&intf->event_waiters);
+>>>>>>> v3.18
 
 	/* Remove the user from the interface's sequence table. */
 	spin_lock_irqsave(&intf->seq_lock, flags);
@@ -1155,12 +1228,16 @@ int ipmi_set_maintenance_mode(ipmi_user_t user, int mode)
 	if (intf->maintenance_mode != mode) {
 		switch (mode) {
 		case IPMI_MAINTENANCE_MODE_AUTO:
+<<<<<<< HEAD
 			intf->maintenance_mode = mode;
+=======
+>>>>>>> v3.18
 			intf->maintenance_mode_enable
 				= (intf->auto_maintenance_timeout > 0);
 			break;
 
 		case IPMI_MAINTENANCE_MODE_OFF:
+<<<<<<< HEAD
 			intf->maintenance_mode = mode;
 			intf->maintenance_mode_enable = 0;
 			break;
@@ -1168,12 +1245,23 @@ int ipmi_set_maintenance_mode(ipmi_user_t user, int mode)
 		case IPMI_MAINTENANCE_MODE_ON:
 			intf->maintenance_mode = mode;
 			intf->maintenance_mode_enable = 1;
+=======
+			intf->maintenance_mode_enable = false;
+			break;
+
+		case IPMI_MAINTENANCE_MODE_ON:
+			intf->maintenance_mode_enable = true;
+>>>>>>> v3.18
 			break;
 
 		default:
 			rv = -EINVAL;
 			goto out_unlock;
 		}
+<<<<<<< HEAD
+=======
+		intf->maintenance_mode = mode;
+>>>>>>> v3.18
 
 		maintenance_mode_update(intf);
 	}
@@ -1184,7 +1272,11 @@ int ipmi_set_maintenance_mode(ipmi_user_t user, int mode)
 }
 EXPORT_SYMBOL(ipmi_set_maintenance_mode);
 
+<<<<<<< HEAD
 int ipmi_set_gets_events(ipmi_user_t user, int val)
+=======
+int ipmi_set_gets_events(ipmi_user_t user, bool val)
+>>>>>>> v3.18
 {
 	unsigned long        flags;
 	ipmi_smi_t           intf = user->intf;
@@ -1194,8 +1286,23 @@ int ipmi_set_gets_events(ipmi_user_t user, int val)
 	INIT_LIST_HEAD(&msgs);
 
 	spin_lock_irqsave(&intf->events_lock, flags);
+<<<<<<< HEAD
 	user->gets_events = val;
 
+=======
+	if (user->gets_events == val)
+		goto out;
+
+	user->gets_events = val;
+
+	if (val) {
+		if (atomic_inc_return(&intf->event_waiters) == 1)
+			need_waiter(intf);
+	} else {
+		atomic_dec(&intf->event_waiters);
+	}
+
+>>>>>>> v3.18
 	if (intf->delivering_events)
 		/*
 		 * Another thread is delivering events for this, so
@@ -1289,6 +1396,12 @@ int ipmi_register_for_cmd(ipmi_user_t   user,
 		goto out_unlock;
 	}
 
+<<<<<<< HEAD
+=======
+	if (atomic_inc_return(&intf->event_waiters) == 1)
+		need_waiter(intf);
+
+>>>>>>> v3.18
 	list_add_rcu(&rcvr->link, &intf->cmd_rcvrs);
 
  out_unlock:
@@ -1330,6 +1443,10 @@ int ipmi_unregister_for_cmd(ipmi_user_t   user,
 	mutex_unlock(&intf->cmd_rcvrs_mutex);
 	synchronize_rcu();
 	while (rcvrs) {
+<<<<<<< HEAD
+=======
+		atomic_dec(&intf->event_waiters);
+>>>>>>> v3.18
 		rcvr = rcvrs;
 		rcvrs = rcvr->next;
 		kfree(rcvr);
@@ -1535,7 +1652,11 @@ static int i_ipmi_request(ipmi_user_t          user,
 				= IPMI_MAINTENANCE_MODE_TIMEOUT;
 			if (!intf->maintenance_mode
 			    && !intf->maintenance_mode_enable) {
+<<<<<<< HEAD
 				intf->maintenance_mode_enable = 1;
+=======
+				intf->maintenance_mode_enable = true;
+>>>>>>> v3.18
 				maintenance_mode_update(intf);
 			}
 			spin_unlock_irqrestore(&intf->maintenance_mode_lock,
@@ -1848,7 +1969,11 @@ int ipmi_request_settime(ipmi_user_t      user,
 			 int              retries,
 			 unsigned int     retry_time_ms)
 {
+<<<<<<< HEAD
 	unsigned char saddr, lun;
+=======
+	unsigned char saddr = 0, lun = 0;
+>>>>>>> v3.18
 	int           rv;
 
 	if (!user)
@@ -2755,7 +2880,10 @@ channel_handler(ipmi_smi_t intf, struct ipmi_recv_msg *msg)
 					= IPMI_CHANNEL_MEDIUM_IPMB;
 				intf->channels[0].protocol
 					= IPMI_CHANNEL_PROTOCOL_IPMB;
+<<<<<<< HEAD
 				rv = -ENOSYS;
+=======
+>>>>>>> v3.18
 
 				intf->curr_channel = IPMI_MAX_CHANNELS;
 				wake_up(&intf->waitq);
@@ -2780,12 +2908,21 @@ channel_handler(ipmi_smi_t intf, struct ipmi_recv_msg *msg)
 
 		if (rv) {
 			/* Got an error somehow, just give up. */
+<<<<<<< HEAD
 			intf->curr_channel = IPMI_MAX_CHANNELS;
 			wake_up(&intf->waitq);
 
 			printk(KERN_WARNING PFX
 			       "Error sending channel information: %d\n",
 			       rv);
+=======
+			printk(KERN_WARNING PFX
+			       "Error sending channel information for channel"
+			       " %d: %d\n", intf->curr_channel, rv);
+
+			intf->curr_channel = IPMI_MAX_CHANNELS;
+			wake_up(&intf->waitq);
+>>>>>>> v3.18
 		}
 	}
  out:
@@ -2876,6 +3013,11 @@ int ipmi_register_smi(struct ipmi_smi_handlers *handlers,
 		     (unsigned long) intf);
 	atomic_set(&intf->watchdog_pretimeouts_to_deliver, 0);
 	spin_lock_init(&intf->events_lock);
+<<<<<<< HEAD
+=======
+	atomic_set(&intf->event_waiters, 0);
+	intf->ticks_to_req_ev = IPMI_REQUEST_EV_TIME;
+>>>>>>> v3.18
 	INIT_LIST_HEAD(&intf->waiting_events);
 	intf->waiting_events_count = 0;
 	mutex_init(&intf->cmd_rcvrs_mutex);
@@ -2921,8 +3063,17 @@ int ipmi_register_smi(struct ipmi_smi_handlers *handlers,
 		intf->null_user_handler = channel_handler;
 		intf->curr_channel = 0;
 		rv = send_channel_info_cmd(intf, 0);
+<<<<<<< HEAD
 		if (rv)
 			goto out;
+=======
+		if (rv) {
+			printk(KERN_WARNING PFX
+			       "Error sending channel information for channel"
+			       " 0, %d\n", rv);
+			goto out;
+		}
+>>>>>>> v3.18
 
 		/* Wait for the channel info to be read. */
 		wait_event(intf->waitq,
@@ -3965,7 +4116,12 @@ smi_from_recv_msg(ipmi_smi_t intf, struct ipmi_recv_msg *recv_msg,
 
 static void check_msg_timeout(ipmi_smi_t intf, struct seq_table *ent,
 			      struct list_head *timeouts, long timeout_period,
+<<<<<<< HEAD
 			      int slot, unsigned long *flags)
+=======
+			      int slot, unsigned long *flags,
+			      unsigned int *waiting_msgs)
+>>>>>>> v3.18
 {
 	struct ipmi_recv_msg     *msg;
 	struct ipmi_smi_handlers *handlers;
@@ -3977,8 +4133,15 @@ static void check_msg_timeout(ipmi_smi_t intf, struct seq_table *ent,
 		return;
 
 	ent->timeout -= timeout_period;
+<<<<<<< HEAD
 	if (ent->timeout > 0)
 		return;
+=======
+	if (ent->timeout > 0) {
+		(*waiting_msgs)++;
+		return;
+	}
+>>>>>>> v3.18
 
 	if (ent->retries_left == 0) {
 		/* The message has used all its retries. */
@@ -3995,6 +4158,11 @@ static void check_msg_timeout(ipmi_smi_t intf, struct seq_table *ent,
 		struct ipmi_smi_msg *smi_msg;
 		/* More retries, send again. */
 
+<<<<<<< HEAD
+=======
+		(*waiting_msgs)++;
+
+>>>>>>> v3.18
 		/*
 		 * Start with the max timer, set to normal timer after
 		 * the message is sent.
@@ -4040,13 +4208,19 @@ static void check_msg_timeout(ipmi_smi_t intf, struct seq_table *ent,
 	}
 }
 
+<<<<<<< HEAD
 static void ipmi_timeout_handler(long timeout_period)
 {
 	ipmi_smi_t           intf;
+=======
+static unsigned int ipmi_timeout_handler(ipmi_smi_t intf, long timeout_period)
+{
+>>>>>>> v3.18
 	struct list_head     timeouts;
 	struct ipmi_recv_msg *msg, *msg2;
 	unsigned long        flags;
 	int                  i;
+<<<<<<< HEAD
 
 	rcu_read_lock();
 	list_for_each_entry_rcu(intf, &ipmi_interfaces, link) {
@@ -4114,10 +4288,70 @@ static void ipmi_request_event(void)
 			handlers->request_events(intf->send_info);
 	}
 	rcu_read_unlock();
+=======
+	unsigned int         waiting_msgs = 0;
+
+	/*
+	 * Go through the seq table and find any messages that
+	 * have timed out, putting them in the timeouts
+	 * list.
+	 */
+	INIT_LIST_HEAD(&timeouts);
+	spin_lock_irqsave(&intf->seq_lock, flags);
+	for (i = 0; i < IPMI_IPMB_NUM_SEQ; i++)
+		check_msg_timeout(intf, &(intf->seq_table[i]),
+				  &timeouts, timeout_period, i,
+				  &flags, &waiting_msgs);
+	spin_unlock_irqrestore(&intf->seq_lock, flags);
+
+	list_for_each_entry_safe(msg, msg2, &timeouts, link)
+		deliver_err_response(msg, IPMI_TIMEOUT_COMPLETION_CODE);
+
+	/*
+	 * Maintenance mode handling.  Check the timeout
+	 * optimistically before we claim the lock.  It may
+	 * mean a timeout gets missed occasionally, but that
+	 * only means the timeout gets extended by one period
+	 * in that case.  No big deal, and it avoids the lock
+	 * most of the time.
+	 */
+	if (intf->auto_maintenance_timeout > 0) {
+		spin_lock_irqsave(&intf->maintenance_mode_lock, flags);
+		if (intf->auto_maintenance_timeout > 0) {
+			intf->auto_maintenance_timeout
+				-= timeout_period;
+			if (!intf->maintenance_mode
+			    && (intf->auto_maintenance_timeout <= 0)) {
+				intf->maintenance_mode_enable = false;
+				maintenance_mode_update(intf);
+			}
+		}
+		spin_unlock_irqrestore(&intf->maintenance_mode_lock,
+				       flags);
+	}
+
+	tasklet_schedule(&intf->recv_tasklet);
+
+	return waiting_msgs;
+}
+
+static void ipmi_request_event(ipmi_smi_t intf)
+{
+	struct ipmi_smi_handlers *handlers;
+
+	/* No event requests when in maintenance mode. */
+	if (intf->maintenance_mode_enable)
+		return;
+
+	handlers = intf->handlers;
+	if (handlers)
+		handlers->request_events(intf->send_info);
+>>>>>>> v3.18
 }
 
 static struct timer_list ipmi_timer;
 
+<<<<<<< HEAD
 /* Call every ~1000 ms. */
 #define IPMI_TIMEOUT_TIME	1000
 
@@ -4151,6 +4385,53 @@ static void ipmi_timeout(unsigned long data)
 	mod_timer(&ipmi_timer, jiffies + IPMI_TIMEOUT_JIFFIES);
 }
 
+=======
+static atomic_t stop_operation;
+
+static void ipmi_timeout(unsigned long data)
+{
+	ipmi_smi_t intf;
+	int nt = 0;
+
+	if (atomic_read(&stop_operation))
+		return;
+
+	rcu_read_lock();
+	list_for_each_entry_rcu(intf, &ipmi_interfaces, link) {
+		int lnt = 0;
+
+		if (atomic_read(&intf->event_waiters)) {
+			intf->ticks_to_req_ev--;
+			if (intf->ticks_to_req_ev == 0) {
+				ipmi_request_event(intf);
+				intf->ticks_to_req_ev = IPMI_REQUEST_EV_TIME;
+			}
+			lnt++;
+		}
+
+		lnt += ipmi_timeout_handler(intf, IPMI_TIMEOUT_TIME);
+
+		lnt = !!lnt;
+		if (lnt != intf->last_needs_timer &&
+					intf->handlers->set_need_watch)
+			intf->handlers->set_need_watch(intf->send_info, lnt);
+		intf->last_needs_timer = lnt;
+
+		nt += lnt;
+	}
+	rcu_read_unlock();
+
+	if (nt)
+		mod_timer(&ipmi_timer, jiffies + IPMI_TIMEOUT_JIFFIES);
+}
+
+static void need_waiter(ipmi_smi_t intf)
+{
+	/* Racy, but worst case we start the timer twice. */
+	if (!timer_pending(&ipmi_timer))
+		mod_timer(&ipmi_timer, jiffies + IPMI_TIMEOUT_JIFFIES);
+}
+>>>>>>> v3.18
 
 static atomic_t smi_msg_inuse_count = ATOMIC_INIT(0);
 static atomic_t recv_msg_inuse_count = ATOMIC_INIT(0);

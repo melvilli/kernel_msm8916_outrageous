@@ -17,7 +17,10 @@
 #include <linux/regmap.h>
 #include <linux/atomic.h>
 
+<<<<<<< HEAD
 #define PM80X_VERSION_MASK		(0xFF)	/* 80X chip ID mask */
+=======
+>>>>>>> v3.18
 enum {
 	CHIP_INVALID = 0,
 	CHIP_PM800,
@@ -299,8 +302,12 @@ struct pm80x_chip {
 	struct regmap *regmap;
 	struct regmap_irq_chip *regmap_irq_chip;
 	struct regmap_irq_chip_data *irq_data;
+<<<<<<< HEAD
 	unsigned char version;
 	int id;
+=======
+	int type;
+>>>>>>> v3.18
 	int irq;
 	int irq_mode;
 	unsigned long wu_flag;
@@ -309,8 +316,19 @@ struct pm80x_chip {
 
 struct pm80x_platform_data {
 	struct pm80x_rtc_pdata *rtc;
+<<<<<<< HEAD
 	unsigned short power_page_addr;	/* power page I2C address */
 	unsigned short gpadc_page_addr;	/* gpadc page I2C address */
+=======
+	/*
+	 * For the regulator not defined, set regulators[not_defined] to be
+	 * NULL. num_regulators are the number of regulators supposed to be
+	 * initialized. If all regulators are not defined, set num_regulators
+	 * to be 0.
+	 */
+	struct regulator_init_data *regulators[PM800_ID_RG_MAX];
+	unsigned int num_regulators;
+>>>>>>> v3.18
 	int irq_mode;		/* Clear interrupt by read/write(0/1) */
 	int batt_det;		/* enable/disable */
 	int (*plat_config)(struct pm80x_chip *chip,
@@ -345,7 +363,11 @@ static inline int pm80x_dev_suspend(struct device *dev)
 	int irq = platform_get_irq(pdev, 0);
 
 	if (device_may_wakeup(dev))
+<<<<<<< HEAD
 		set_bit(irq, &chip->wu_flag);
+=======
+		set_bit((1 << irq), &chip->wu_flag);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -357,13 +379,21 @@ static inline int pm80x_dev_resume(struct device *dev)
 	int irq = platform_get_irq(pdev, 0);
 
 	if (device_may_wakeup(dev))
+<<<<<<< HEAD
 		clear_bit(irq, &chip->wu_flag);
+=======
+		clear_bit((1 << irq), &chip->wu_flag);
+>>>>>>> v3.18
 
 	return 0;
 }
 #endif
 
+<<<<<<< HEAD
 extern int pm80x_init(struct i2c_client *client,
 		      const struct i2c_device_id *id);
+=======
+extern int pm80x_init(struct i2c_client *client);
+>>>>>>> v3.18
 extern int pm80x_deinit(void);
 #endif /* __LINUX_MFD_88PM80X_H */

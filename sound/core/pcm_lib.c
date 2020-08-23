@@ -32,9 +32,12 @@
 #include <sound/pcm_params.h>
 #include <sound/timer.h>
 
+<<<<<<< HEAD
 #define STRING_LENGTH_OF_INT 12
 #define MAX_USR_CTRL_CNT 128
 
+=======
+>>>>>>> v3.18
 /*
  * fill ring buffer with silence
  * runtime->silence_start: starting pointer to silence area
@@ -177,7 +180,11 @@ static void xrun(struct snd_pcm_substream *substream)
 	if (xrun_debug(substream, XRUN_DEBUG_BASIC)) {
 		char name[16];
 		snd_pcm_debug_name(substream, name, sizeof(name));
+<<<<<<< HEAD
 		snd_printd(KERN_DEBUG "XRUN: %s\n", name);
+=======
+		pcm_warn(substream->pcm, "XRUN: %s\n", name);
+>>>>>>> v3.18
 		dump_stack_on_xrun(substream);
 	}
 }
@@ -187,9 +194,13 @@ static void xrun(struct snd_pcm_substream *substream)
 	do {								\
 		if (xrun_debug(substream, XRUN_DEBUG_BASIC)) {		\
 			xrun_log_show(substream);			\
+<<<<<<< HEAD
 			if (printk_ratelimit()) {			\
 				snd_printd("PCM: " fmt, ##args);	\
 			}						\
+=======
+			pr_err_ratelimited("ALSA: PCM: " fmt, ##args);	\
+>>>>>>> v3.18
 			dump_stack_on_xrun(substream);			\
 		}							\
 	} while (0)
@@ -256,7 +267,11 @@ static void xrun_log_show(struct snd_pcm_substream *substream)
 		entry = &log->entries[idx];
 		if (entry->period_size == 0)
 			break;
+<<<<<<< HEAD
 		snd_printd("hwptr log: %s: %sj=%lu, pos=%ld/%ld/%ld, "
+=======
+		pr_info("hwptr log: %s: %sj=%lu, pos=%ld/%ld/%ld, "
+>>>>>>> v3.18
 			   "hwptr=%ld/%ld\n",
 			   name, entry->in_interrupt ? "[Q] " : "",
 			   entry->jiffies,
@@ -349,10 +364,17 @@ static int snd_pcm_update_hw_ptr0(struct snd_pcm_substream *substream,
 			char name[16];
 			snd_pcm_debug_name(substream, name, sizeof(name));
 			xrun_log_show(substream);
+<<<<<<< HEAD
 			snd_printd(KERN_ERR  "BUG: %s, pos = %ld, "
 				   "buffer size = %ld, period size = %ld\n",
 				   name, pos, runtime->buffer_size,
 				   runtime->period_size);
+=======
+			pcm_err(substream->pcm,
+				"XRUN: %s, pos = %ld, buffer size = %ld, period size = %ld\n",
+				name, pos, runtime->buffer_size,
+				runtime->period_size);
+>>>>>>> v3.18
 		}
 		pos = 0;
 	}
@@ -397,8 +419,13 @@ static int snd_pcm_update_hw_ptr0(struct snd_pcm_substream *substream,
 			XRUN_DEBUG_PERIODUPDATE : XRUN_DEBUG_HWPTRUPDATE)) {
 		char name[16];
 		snd_pcm_debug_name(substream, name, sizeof(name));
+<<<<<<< HEAD
 		snd_printd("%s_update: %s: pos=%u/%u/%u, "
 			   "hwptr=%ld/%ld/%ld/%ld\n",
+=======
+		pcm_dbg(substream->pcm,
+			"%s_update: %s: pos=%u/%u/%u, hwptr=%ld/%ld/%ld/%ld\n",
+>>>>>>> v3.18
 			   in_interrupt ? "period" : "hwptr",
 			   name,
 			   (unsigned int)pos,
@@ -571,7 +598,12 @@ int snd_pcm_update_hw_ptr(struct snd_pcm_substream *substream)
  *
  * Sets the given PCM operators to the pcm instance.
  */
+<<<<<<< HEAD
 void snd_pcm_set_ops(struct snd_pcm *pcm, int direction, struct snd_pcm_ops *ops)
+=======
+void snd_pcm_set_ops(struct snd_pcm *pcm, int direction,
+		     const struct snd_pcm_ops *ops)
+>>>>>>> v3.18
 {
 	struct snd_pcm_str *stream = &pcm->streams[direction];
 	struct snd_pcm_substream *substream;
@@ -1117,6 +1149,7 @@ int snd_interval_list(struct snd_interval *i, unsigned int count,
 
 EXPORT_SYMBOL(snd_interval_list);
 
+<<<<<<< HEAD
 static int snd_interval_step(struct snd_interval *i, unsigned int min, unsigned int step)
 {
 	unsigned int n;
@@ -1129,6 +1162,22 @@ static int snd_interval_step(struct snd_interval *i, unsigned int min, unsigned 
 	n = (i->max - min) % step;
 	if (n != 0 || i->openmax) {
 		i->max -= n;
+=======
+static int snd_interval_step(struct snd_interval *i, unsigned int step)
+{
+	unsigned int n;
+	int changed = 0;
+	n = i->min % step;
+	if (n != 0 || i->openmin) {
+		i->min += step - n;
+		i->openmin = 0;
+		changed = 1;
+	}
+	n = i->max % step;
+	if (n != 0 || i->openmax) {
+		i->max -= n;
+		i->openmax = 0;
+>>>>>>> v3.18
 		changed = 1;
 	}
 	if (snd_interval_checkempty(i)) {
@@ -1244,6 +1293,10 @@ int snd_pcm_hw_constraint_mask64(struct snd_pcm_runtime *runtime, snd_pcm_hw_par
 		return -EINVAL;
 	return 0;
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(snd_pcm_hw_constraint_mask64);
+>>>>>>> v3.18
 
 /**
  * snd_pcm_hw_constraint_integer - apply an integer constraint to an interval
@@ -1430,7 +1483,11 @@ static int snd_pcm_hw_rule_step(struct snd_pcm_hw_params *params,
 				struct snd_pcm_hw_rule *rule)
 {
 	unsigned long step = (unsigned long) rule->private;
+<<<<<<< HEAD
 	return snd_interval_step(hw_param_interval(params, rule->var), 0, step);
+=======
+	return snd_interval_step(hw_param_interval(params, rule->var), step);
+>>>>>>> v3.18
 }
 
 /**
@@ -1762,11 +1819,14 @@ static int snd_pcm_lib_ioctl_channel_info(struct snd_pcm_substream *substream,
 	switch (runtime->access) {
 	case SNDRV_PCM_ACCESS_MMAP_INTERLEAVED:
 	case SNDRV_PCM_ACCESS_RW_INTERLEAVED:
+<<<<<<< HEAD
 		if ((UINT_MAX/width) < info->channel) {
 			snd_printd("%s: integer overflow while multiply\n",
 				   __func__);
 			return -EINVAL;
 		}
+=======
+>>>>>>> v3.18
 		info->first = info->channel * width;
 		info->step = runtime->channels * width;
 		break;
@@ -1774,12 +1834,15 @@ static int snd_pcm_lib_ioctl_channel_info(struct snd_pcm_substream *substream,
 	case SNDRV_PCM_ACCESS_RW_NONINTERLEAVED:
 	{
 		size_t size = runtime->dma_bytes / runtime->channels;
+<<<<<<< HEAD
 
 		if ((size > 0) && ((UINT_MAX/(size * 8)) < info->channel)) {
 			snd_printd("%s: integer overflow while multiply\n",
 				   __func__);
 			return -EINVAL;
 		}
+=======
+>>>>>>> v3.18
 		info->first = info->channel * size * 8;
 		info->step = width;
 		break;
@@ -1825,6 +1888,11 @@ int snd_pcm_lib_ioctl(struct snd_pcm_substream *substream,
 		      unsigned int cmd, void *arg)
 {
 	switch (cmd) {
+<<<<<<< HEAD
+=======
+	case SNDRV_PCM_IOCTL1_INFO:
+		return 0;
+>>>>>>> v3.18
 	case SNDRV_PCM_IOCTL1_RESET:
 		return snd_pcm_lib_ioctl_reset(substream, arg);
 	case SNDRV_PCM_IOCTL1_CHANNEL_INFO:
@@ -1868,10 +1936,17 @@ void snd_pcm_period_elapsed(struct snd_pcm_substream *substream)
 	if (substream->timer_running)
 		snd_timer_interrupt(substream->timer, 1);
  _end:
+<<<<<<< HEAD
 	kill_fasync(&runtime->fasync, SIGIO, POLL_IN);
 	snd_pcm_stream_unlock_irqrestore(substream, flags);
 	if (runtime->transfer_ack_end)
 		runtime->transfer_ack_end(substream);
+=======
+	snd_pcm_stream_unlock_irqrestore(substream, flags);
+	if (runtime->transfer_ack_end)
+		runtime->transfer_ack_end(substream);
+	kill_fasync(&runtime->fasync, SIGIO, POLL_IN);
+>>>>>>> v3.18
 }
 
 EXPORT_SYMBOL(snd_pcm_period_elapsed);
@@ -1954,8 +2029,14 @@ static int wait_for_avail(struct snd_pcm_substream *substream,
 			continue;
 		}
 		if (!tout) {
+<<<<<<< HEAD
 			snd_printd("%s write error (DMA or IRQ trouble?)\n",
 				   is_playback ? "playback" : "capture");
+=======
+			pcm_dbg(substream->pcm,
+				"%s write error (DMA or IRQ trouble?)\n",
+				is_playback ? "playback" : "capture");
+>>>>>>> v3.18
 			err = -EIO;
 			break;
 		}
@@ -2098,9 +2179,12 @@ static int pcm_sanity_check(struct snd_pcm_substream *substream)
 	struct snd_pcm_runtime *runtime;
 	if (PCM_RUNTIME_CHECK(substream))
 		return -ENXIO;
+<<<<<<< HEAD
 	/* TODO: consider and -EINVAL here */
 	if (substream->hw_no_buffer)
 		snd_printd("%s: warning this PCM is host less\n", __func__);
+=======
+>>>>>>> v3.18
 	runtime = substream->runtime;
 	if (snd_BUG_ON(!substream->ops->copy && !runtime->dma_area))
 		return -EINVAL;
@@ -2551,6 +2635,7 @@ static void pcm_chmap_ctl_private_free(struct snd_kcontrol *kcontrol)
 	kfree(info);
 }
 
+<<<<<<< HEAD
 static int pcm_volume_ctl_info(struct snd_kcontrol *kcontrol,
 				struct snd_ctl_elem_info *uinfo)
 {
@@ -2568,6 +2653,8 @@ static void pcm_volume_ctl_private_free(struct snd_kcontrol *kcontrol)
 	kfree(info);
 }
 
+=======
+>>>>>>> v3.18
 /**
  * snd_pcm_add_chmap_ctls - create channel-mapping control elements
  * @pcm: the assigned PCM instance
@@ -2627,6 +2714,7 @@ int snd_pcm_add_chmap_ctls(struct snd_pcm *pcm, int stream,
 	return 0;
 }
 EXPORT_SYMBOL_GPL(snd_pcm_add_chmap_ctls);
+<<<<<<< HEAD
 
 /**
  * snd_pcm_add_volume_ctls - create volume control elements
@@ -2792,3 +2880,5 @@ int snd_pcm_add_usr_ctls(struct snd_pcm *pcm, int stream,
 	return 0;
 }
 EXPORT_SYMBOL(snd_pcm_add_usr_ctls);
+=======
+>>>>>>> v3.18

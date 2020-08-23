@@ -60,6 +60,10 @@
 #include <linux/dma-mapping.h>
 #include <linux/device.h>
 #include <linux/clk.h>
+<<<<<<< HEAD
+=======
+#include <linux/phy/phy.h>
+>>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <linux/ata_platform.h>
 #include <linux/mbus.h>
@@ -555,10 +559,28 @@ struct mv_host_priv {
 	u32			irq_mask_offset;
 	u32			unmask_all_irqs;
 
+<<<<<<< HEAD
 #if defined(CONFIG_HAVE_CLK)
 	struct clk		*clk;
 	struct clk              **port_clks;
 #endif
+=======
+	/*
+	 * Needed on some devices that require their clocks to be enabled.
+	 * These are optional: if the platform device does not have any
+	 * clocks, they won't be used.  Also, if the underlying hardware
+	 * does not support the common clock framework (CONFIG_HAVE_CLK=n),
+	 * all the clock operations become no-ops (see clk.h).
+	 */
+	struct clk		*clk;
+	struct clk              **port_clks;
+	/*
+	 * Some devices have a SATA PHY which can be enabled/disabled
+	 * in order to save power. These are optional: if the platform
+	 * devices does not have any phy, they won't be used.
+	 */
+	struct phy		**port_phys;
+>>>>>>> v3.18
 	/*
 	 * These consistent DMA memory pools give us guaranteed
 	 * alignment for hardware-accessed data structures,
@@ -4047,9 +4069,13 @@ static int mv_platform_probe(struct platform_device *pdev)
 	struct resource *res;
 	int n_ports = 0, irq = 0;
 	int rc;
+<<<<<<< HEAD
 #if defined(CONFIG_HAVE_CLK)
 	int port;
 #endif
+=======
+	int port;
+>>>>>>> v3.18
 
 	ata_print_version_once(&pdev->dev, DRV_VERSION);
 
@@ -4073,7 +4099,11 @@ static int mv_platform_probe(struct platform_device *pdev)
 		of_property_read_u32(pdev->dev.of_node, "nr-ports", &n_ports);
 		irq = irq_of_parse_and_map(pdev->dev.of_node, 0);
 	} else {
+<<<<<<< HEAD
 		mv_platform_data = pdev->dev.platform_data;
+=======
+		mv_platform_data = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 		n_ports = mv_platform_data->n_ports;
 		irq = platform_get_irq(pdev, 0);
 	}
@@ -4083,26 +4113,43 @@ static int mv_platform_probe(struct platform_device *pdev)
 
 	if (!host || !hpriv)
 		return -ENOMEM;
+<<<<<<< HEAD
 #if defined(CONFIG_HAVE_CLK)
+=======
+>>>>>>> v3.18
 	hpriv->port_clks = devm_kzalloc(&pdev->dev,
 					sizeof(struct clk *) * n_ports,
 					GFP_KERNEL);
 	if (!hpriv->port_clks)
 		return -ENOMEM;
+<<<<<<< HEAD
 #endif
 	host->private_data = hpriv;
 	hpriv->n_ports = n_ports;
+=======
+	hpriv->port_phys = devm_kzalloc(&pdev->dev,
+					sizeof(struct phy *) * n_ports,
+					GFP_KERNEL);
+	if (!hpriv->port_phys)
+		return -ENOMEM;
+	host->private_data = hpriv;
+>>>>>>> v3.18
 	hpriv->board_idx = chip_soc;
 
 	host->iomap = NULL;
 	hpriv->base = devm_ioremap(&pdev->dev, res->start,
 				   resource_size(res));
+<<<<<<< HEAD
 	if (!hpriv->base)
 		return -ENOMEM;
 
 	hpriv->base -= SATAHC0_REG_BASE;
 
 #if defined(CONFIG_HAVE_CLK)
+=======
+	hpriv->base -= SATAHC0_REG_BASE;
+
+>>>>>>> v3.18
 	hpriv->clk = clk_get(&pdev->dev, NULL);
 	if (IS_ERR(hpriv->clk))
 		dev_notice(&pdev->dev, "cannot get optional clkdev\n");
@@ -4115,8 +4162,30 @@ static int mv_platform_probe(struct platform_device *pdev)
 		hpriv->port_clks[port] = clk_get(&pdev->dev, port_number);
 		if (!IS_ERR(hpriv->port_clks[port]))
 			clk_prepare_enable(hpriv->port_clks[port]);
+<<<<<<< HEAD
 	}
 #endif
+=======
+
+		sprintf(port_number, "port%d", port);
+		hpriv->port_phys[port] = devm_phy_optional_get(&pdev->dev,
+							       port_number);
+		if (IS_ERR(hpriv->port_phys[port])) {
+			rc = PTR_ERR(hpriv->port_phys[port]);
+			hpriv->port_phys[port] = NULL;
+			if (rc != -EPROBE_DEFER)
+				dev_warn(&pdev->dev, "error getting phy %d", rc);
+
+			/* Cleanup only the initialized ports */
+			hpriv->n_ports = port;
+			goto err;
+		} else
+			phy_power_on(hpriv->port_phys[port]);
+	}
+
+	/* All the ports have been initialized */
+	hpriv->n_ports = n_ports;
+>>>>>>> v3.18
 
 	/*
 	 * (Re-)program MBUS remapping windows if we are asked to.
@@ -4151,18 +4220,31 @@ static int mv_platform_probe(struct platform_device *pdev)
 		return 0;
 
 err:
+<<<<<<< HEAD
 #if defined(CONFIG_HAVE_CLK)
+=======
+>>>>>>> v3.18
 	if (!IS_ERR(hpriv->clk)) {
 		clk_disable_unprepare(hpriv->clk);
 		clk_put(hpriv->clk);
 	}
+<<<<<<< HEAD
 	for (port = 0; port < n_ports; port++) {
+=======
+	for (port = 0; port < hpriv->n_ports; port++) {
+>>>>>>> v3.18
 		if (!IS_ERR(hpriv->port_clks[port])) {
 			clk_disable_unprepare(hpriv->port_clks[port]);
 			clk_put(hpriv->port_clks[port]);
 		}
+<<<<<<< HEAD
 	}
 #endif
+=======
+		if (hpriv->port_phys[port])
+			phy_power_off(hpriv->port_phys[port]);
+	}
+>>>>>>> v3.18
 
 	return rc;
 }
@@ -4178,6 +4260,7 @@ err:
 static int mv_platform_remove(struct platform_device *pdev)
 {
 	struct ata_host *host = platform_get_drvdata(pdev);
+<<<<<<< HEAD
 #if defined(CONFIG_HAVE_CLK)
 	struct mv_host_priv *hpriv = host->private_data;
 	int port;
@@ -4185,6 +4268,12 @@ static int mv_platform_remove(struct platform_device *pdev)
 	ata_host_detach(host);
 
 #if defined(CONFIG_HAVE_CLK)
+=======
+	struct mv_host_priv *hpriv = host->private_data;
+	int port;
+	ata_host_detach(host);
+
+>>>>>>> v3.18
 	if (!IS_ERR(hpriv->clk)) {
 		clk_disable_unprepare(hpriv->clk);
 		clk_put(hpriv->clk);
@@ -4194,12 +4283,22 @@ static int mv_platform_remove(struct platform_device *pdev)
 			clk_disable_unprepare(hpriv->port_clks[port]);
 			clk_put(hpriv->port_clks[port]);
 		}
+<<<<<<< HEAD
 	}
 #endif
 	return 0;
 }
 
 #ifdef CONFIG_PM
+=======
+		if (hpriv->port_phys[port])
+			phy_power_off(hpriv->port_phys[port]);
+	}
+	return 0;
+}
+
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 static int mv_platform_suspend(struct platform_device *pdev, pm_message_t state)
 {
 	struct ata_host *host = platform_get_drvdata(pdev);
@@ -4266,7 +4365,11 @@ static struct platform_driver mv_platform_driver = {
 #ifdef CONFIG_PCI
 static int mv_pci_init_one(struct pci_dev *pdev,
 			   const struct pci_device_id *ent);
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 static int mv_pci_device_resume(struct pci_dev *pdev);
 #endif
 
@@ -4276,7 +4379,11 @@ static struct pci_driver mv_pci_driver = {
 	.id_table		= mv_pci_tbl,
 	.probe			= mv_pci_init_one,
 	.remove			= ata_pci_remove_one,
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 	.suspend		= ata_pci_device_suspend,
 	.resume			= mv_pci_device_resume,
 #endif
@@ -4434,7 +4541,11 @@ static int mv_pci_init_one(struct pci_dev *pdev,
 				 IS_GEN_I(hpriv) ? &mv5_sht : &mv6_sht);
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 static int mv_pci_device_resume(struct pci_dev *pdev)
 {
 	struct ata_host *host = pci_get_drvdata(pdev);
@@ -4456,9 +4567,12 @@ static int mv_pci_device_resume(struct pci_dev *pdev)
 #endif
 #endif
 
+<<<<<<< HEAD
 static int mv_platform_probe(struct platform_device *pdev);
 static int mv_platform_remove(struct platform_device *pdev);
 
+=======
+>>>>>>> v3.18
 static int __init mv_init(void)
 {
 	int rc = -ENODEV;

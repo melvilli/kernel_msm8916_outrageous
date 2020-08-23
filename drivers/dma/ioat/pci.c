@@ -123,6 +123,10 @@ module_param(ioat_dca_enabled, int, 0644);
 MODULE_PARM_DESC(ioat_dca_enabled, "control support of dca service (default: 1)");
 
 struct kmem_cache *ioat2_cache;
+<<<<<<< HEAD
+=======
+struct kmem_cache *ioat3_sed_cache;
+>>>>>>> v3.18
 
 #define DRV_NAME "ioatdma"
 
@@ -207,9 +211,12 @@ static void ioat_remove(struct pci_dev *pdev)
 	if (!device)
 		return;
 
+<<<<<<< HEAD
 	if (device->version >= IOAT_VER_3_0)
 		ioat3_dma_remove(device);
 
+=======
+>>>>>>> v3.18
 	dev_err(&pdev->dev, "Removing dma and dca services\n");
 	if (device->dca) {
 		unregister_dca_provider(device->dca, &pdev->dev);
@@ -221,7 +228,11 @@ static void ioat_remove(struct pci_dev *pdev)
 
 static int __init ioat_init_module(void)
 {
+<<<<<<< HEAD
 	int err;
+=======
+	int err = -ENOMEM;
+>>>>>>> v3.18
 
 	pr_info("%s: Intel(R) QuickData Technology Driver %s\n",
 		DRV_NAME, IOAT_DMA_VERSION);
@@ -231,9 +242,27 @@ static int __init ioat_init_module(void)
 	if (!ioat2_cache)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 	err = pci_register_driver(&ioat_pci_driver);
 	if (err)
 		kmem_cache_destroy(ioat2_cache);
+=======
+	ioat3_sed_cache = KMEM_CACHE(ioat_sed_ent, 0);
+	if (!ioat3_sed_cache)
+		goto err_ioat2_cache;
+
+	err = pci_register_driver(&ioat_pci_driver);
+	if (err)
+		goto err_ioat3_cache;
+
+	return 0;
+
+ err_ioat3_cache:
+	kmem_cache_destroy(ioat3_sed_cache);
+
+ err_ioat2_cache:
+	kmem_cache_destroy(ioat2_cache);
+>>>>>>> v3.18
 
 	return err;
 }

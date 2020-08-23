@@ -36,6 +36,10 @@
 #define PDEV_BUS_IO_SIZE        (0x14)
 #define PDEV_BUS_IRQ            (0x18)
 #define PDEV_BUS_IRQ_COUNT      (0x1c)
+<<<<<<< HEAD
+=======
+#define PDEV_BUS_GET_NAME_HIGH  (0x20)
+>>>>>>> v3.18
 
 struct pdev_bus_dev {
 	struct list_head list;
@@ -129,7 +133,14 @@ static int goldfish_new_pdev(void)
 	dev->pdev.dev.dma_mask = (void *)(dev->pdev.name + name_len + 1);
 	*dev->pdev.dev.dma_mask = ~0;
 
+<<<<<<< HEAD
 	writel((unsigned long)name, pdev_bus_base + PDEV_BUS_GET_NAME);
+=======
+#ifdef CONFIG_64BIT
+	writel((u32)((u64)name>>32), pdev_bus_base + PDEV_BUS_GET_NAME_HIGH);
+#endif
+	writel((u32)(unsigned long)name, pdev_bus_base + PDEV_BUS_GET_NAME);
+>>>>>>> v3.18
 	name[name_len] = '\0';
 	dev->pdev.id = readl(pdev_bus_base + PDEV_BUS_ID);
 	dev->pdev.resource[0].start = base;
@@ -153,6 +164,7 @@ static int goldfish_new_pdev(void)
 static irqreturn_t goldfish_pdev_bus_interrupt(int irq, void *dev_id)
 {
 	irqreturn_t ret = IRQ_NONE;
+<<<<<<< HEAD
 
 	while (1) {
 		u32 op = readl(pdev_bus_base + PDEV_BUS_OP);
@@ -161,10 +173,21 @@ static irqreturn_t goldfish_pdev_bus_interrupt(int irq, void *dev_id)
 		case PDEV_BUS_OP_REMOVE_DEV:
 			goldfish_pdev_remove();
 			ret = IRQ_HANDLED;
+=======
+	while (1) {
+		u32 op = readl(pdev_bus_base + PDEV_BUS_OP);
+		switch (op) {
+		case PDEV_BUS_OP_DONE:
+			return IRQ_NONE;
+
+		case PDEV_BUS_OP_REMOVE_DEV:
+			goldfish_pdev_remove();
+>>>>>>> v3.18
 			break;
 
 		case PDEV_BUS_OP_ADD_DEV:
 			goldfish_new_pdev();
+<<<<<<< HEAD
 			ret = IRQ_HANDLED;
 			break;
 
@@ -173,6 +196,13 @@ static irqreturn_t goldfish_pdev_bus_interrupt(int irq, void *dev_id)
 			return ret;
 		}
 	}
+=======
+			break;
+		}
+		ret = IRQ_HANDLED;
+	}
+	return ret;
+>>>>>>> v3.18
 }
 
 static int goldfish_pdev_bus_probe(struct platform_device *pdev)
@@ -187,11 +217,14 @@ static int goldfish_pdev_bus_probe(struct platform_device *pdev)
 	pdev_bus_addr = r->start;
 	pdev_bus_len = resource_size(r);
 
+<<<<<<< HEAD
 	if (request_mem_region(pdev_bus_addr, pdev_bus_len, "goldfish")) {
 		dev_err(&pdev->dev, "unable to reserve Goldfish MMIO.\n");
 		return -EBUSY;
 	}
 
+=======
+>>>>>>> v3.18
 	pdev_bus_base = ioremap(pdev_bus_addr, pdev_bus_len);
 	if (pdev_bus_base == NULL) {
 		ret = -ENOMEM;

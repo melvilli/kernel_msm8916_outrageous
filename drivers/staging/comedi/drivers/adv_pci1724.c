@@ -17,12 +17,16 @@
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ************************************************************************/
+=======
+*/
+>>>>>>> v3.18
 
 /*
 
@@ -57,6 +61,11 @@ supported PCI devices are configured as comedi devices automatically.
 
 */
 
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+#include <linux/delay.h>
+>>>>>>> v3.18
 #include <linux/pci.h>
 
 #include "../comedidev.h"
@@ -119,8 +128,13 @@ enum board_id_contents {
 	BOARD_ID_MASK = 0xf
 };
 
+<<<<<<< HEAD
 static const struct comedi_lrange ao_ranges_1724 = { 4,
 	{
+=======
+static const struct comedi_lrange ao_ranges_1724 = {
+	4, {
+>>>>>>> v3.18
 		BIP_RANGE(10),
 		RANGE_mA(0, 20),
 		RANGE_mA(4, 20),
@@ -128,10 +142,13 @@ static const struct comedi_lrange ao_ranges_1724 = { 4,
 	}
 };
 
+<<<<<<< HEAD
 static const struct comedi_lrange *const ao_range_list_1724[NUM_AO_CHANNELS] = {
 	[0 ... NUM_AO_CHANNELS - 1] = &ao_ranges_1724,
 };
 
+=======
+>>>>>>> v3.18
 /* this structure is for data unique to this hardware driver. */
 struct adv_pci1724_private {
 	int ao_value[NUM_AO_CHANNELS];
@@ -150,7 +167,12 @@ static int wait_for_dac_idle(struct comedi_device *dev)
 		udelay(1);
 	}
 	if (i == timeout) {
+<<<<<<< HEAD
 		comedi_error(dev, "Timed out waiting for dac to become idle.");
+=======
+		dev_err(dev->class_dev,
+			"Timed out waiting for dac to become idle\n");
+>>>>>>> v3.18
 		return -EIO;
 	}
 	return 0;
@@ -202,8 +224,13 @@ static int ao_readback_insn(struct comedi_device *dev,
 	int i;
 
 	if (devpriv->ao_value[channel] < 0) {
+<<<<<<< HEAD
 		comedi_error(dev,
 			     "Cannot read back channels which have not yet been written to.");
+=======
+		dev_err(dev->class_dev,
+			"Cannot read back channels which have not yet been written to\n");
+>>>>>>> v3.18
 		return -EIO;
 	}
 	for (i = 0; i < insn->n; i++)
@@ -243,8 +270,13 @@ static int offset_read_insn(struct comedi_device *dev,
 	int i;
 
 	if (devpriv->offset_value[channel] < 0) {
+<<<<<<< HEAD
 		comedi_error(dev,
 			     "Cannot read back channels which have not yet been written to.");
+=======
+		dev_err(dev->class_dev,
+			"Cannot read back channels which have not yet been written to\n");
+>>>>>>> v3.18
 		return -EIO;
 	}
 	for (i = 0; i < insn->n; i++)
@@ -284,8 +316,13 @@ static int gain_read_insn(struct comedi_device *dev,
 	int i;
 
 	if (devpriv->gain_value[channel] < 0) {
+<<<<<<< HEAD
 		comedi_error(dev,
 			     "Cannot read back channels which have not yet been written to.");
+=======
+		dev_err(dev->class_dev,
+			"Cannot read back channels which have not yet been written to\n");
+>>>>>>> v3.18
 		return -EIO;
 	}
 	for (i = 0; i < insn->n; i++)
@@ -311,7 +348,11 @@ static int setup_subdevices(struct comedi_device *dev)
 	s->subdev_flags = SDF_READABLE | SDF_WRITABLE | SDF_GROUND;
 	s->n_chan = NUM_AO_CHANNELS;
 	s->maxdata = 0x3fff;
+<<<<<<< HEAD
 	s->range_table_list = ao_range_list_1724;
+=======
+	s->range_table = &ao_ranges_1724;
+>>>>>>> v3.18
 	s->insn_read = ao_readback_insn;
 	s->insn_write = ao_winsn;
 
@@ -345,10 +386,16 @@ static int adv_pci1724_auto_attach(struct comedi_device *dev,
 	int retval;
 	unsigned int board_id;
 
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
+=======
+	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
+	if (!devpriv)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	/* init software copies of output values to indicate we don't know
 	 * what the output value is since it has never been written. */
@@ -379,7 +426,11 @@ static struct comedi_driver adv_pci1724_driver = {
 	.driver_name = "adv_pci1724",
 	.module = THIS_MODULE,
 	.auto_attach = adv_pci1724_auto_attach,
+<<<<<<< HEAD
 	.detach = comedi_pci_disable,
+=======
+	.detach = comedi_pci_detach,
+>>>>>>> v3.18
 };
 
 static int adv_pci1724_pci_probe(struct pci_dev *dev,
@@ -389,7 +440,11 @@ static int adv_pci1724_pci_probe(struct pci_dev *dev,
 				      id->driver_data);
 }
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(adv_pci1724_pci_table) = {
+=======
+static const struct pci_device_id adv_pci1724_pci_table[] = {
+>>>>>>> v3.18
 	{ PCI_DEVICE(PCI_VENDOR_ID_ADVANTECH, 0x1724) },
 	{ 0 }
 };

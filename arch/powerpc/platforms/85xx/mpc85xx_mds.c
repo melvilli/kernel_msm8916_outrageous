@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (C) 2006-2010, 2012 Freescale Semiconductor, Inc.
+=======
+ * Copyright (C) 2006-2010, 2012-2013 Freescale Semiconductor, Inc.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Author: Andy Fleming <afleming@freescale.com>
@@ -238,6 +242,7 @@ static void __init mpc85xx_mds_qe_init(void)
 {
 	struct device_node *np;
 
+<<<<<<< HEAD
 	np = of_find_compatible_node(NULL, NULL, "fsl,qe");
 	if (!np) {
 		np = of_find_node_by_name(NULL, "qe");
@@ -264,6 +269,10 @@ static void __init mpc85xx_mds_qe_init(void)
 			par_io_of_config(ucc);
 	}
 
+=======
+	mpc85xx_qe_init();
+	mpc85xx_qe_par_io_init();
+>>>>>>> v3.18
 	mpc85xx_mds_reset_ucc_phys();
 
 	if (machine_is(p1021_mds)) {
@@ -416,6 +425,10 @@ define_machine(mpc8568_mds) {
 	.progress	= udbg_progress,
 #ifdef CONFIG_PCI
 	.pcibios_fixup_bus	= fsl_pcibios_fixup_bus,
+<<<<<<< HEAD
+=======
+	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
+>>>>>>> v3.18
 #endif
 };
 
@@ -437,6 +450,10 @@ define_machine(mpc8569_mds) {
 	.progress	= udbg_progress,
 #ifdef CONFIG_PCI
 	.pcibios_fixup_bus	= fsl_pcibios_fixup_bus,
+<<<<<<< HEAD
+=======
+	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
+>>>>>>> v3.18
 #endif
 };
 
@@ -459,6 +476,10 @@ define_machine(p1021_mds) {
 	.progress	= udbg_progress,
 #ifdef CONFIG_PCI
 	.pcibios_fixup_bus	= fsl_pcibios_fixup_bus,
+<<<<<<< HEAD
+=======
+	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
+>>>>>>> v3.18
 #endif
 };
 

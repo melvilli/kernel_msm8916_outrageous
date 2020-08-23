@@ -33,12 +33,32 @@
 #include <linux/slab.h>
 #include <asm/syscalls.h>
 
+<<<<<<< HEAD
 asmlinkage long sys_mmap(unsigned long addr, unsigned long len,
 			unsigned long prot, unsigned long flags,
 			unsigned long fd, off_t pgoff)
+=======
+SYSCALL_DEFINE6(mmap, unsigned long, addr, unsigned long, len,
+		unsigned long, prot, unsigned long, flags, unsigned long, fd,
+		off_t, pgoff)
+>>>>>>> v3.18
 {
 	if (pgoff & ~PAGE_MASK)
 		return -EINVAL;
 
 	return sys_mmap_pgoff(addr, len, prot, flags, fd, pgoff >> PAGE_SHIFT);
 }
+<<<<<<< HEAD
+=======
+
+SYSCALL_DEFINE6(mmap2, unsigned long, addr, unsigned long, len,
+		unsigned long, prot, unsigned long, flags, unsigned long, fd,
+		unsigned long, pgoff)
+{
+	if (pgoff & (~PAGE_MASK >> 12))
+		return -EINVAL;
+
+	return sys_mmap_pgoff(addr, len, prot, flags, fd,
+			      pgoff >> (PAGE_SHIFT - 12));
+}
+>>>>>>> v3.18

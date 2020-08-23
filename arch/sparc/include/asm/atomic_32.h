@@ -14,11 +14,16 @@
 #include <linux/types.h>
 
 #include <asm/cmpxchg.h>
+<<<<<<< HEAD
+=======
+#include <asm/barrier.h>
+>>>>>>> v3.18
 #include <asm-generic/atomic64.h>
 
 
 #define ATOMIC_INIT(i)  { (i) }
 
+<<<<<<< HEAD
 extern int __atomic_add_return(int, atomic_t *);
 extern int atomic_cmpxchg(atomic_t *, int, int);
 extern int atomic_xchg(atomic_t *, int);
@@ -36,6 +41,24 @@ extern void atomic_set(atomic_t *, int);
 #define atomic_sub_return(i, v)	(__atomic_add_return(-(int)(i), (v)))
 #define atomic_inc_return(v)	(__atomic_add_return(        1, (v)))
 #define atomic_dec_return(v)	(__atomic_add_return(       -1, (v)))
+=======
+int atomic_add_return(int, atomic_t *);
+int atomic_cmpxchg(atomic_t *, int, int);
+int atomic_xchg(atomic_t *, int);
+int __atomic_add_unless(atomic_t *, int, int);
+void atomic_set(atomic_t *, int);
+
+#define atomic_read(v)          ACCESS_ONCE((v)->counter)
+
+#define atomic_add(i, v)	((void)atomic_add_return( (int)(i), (v)))
+#define atomic_sub(i, v)	((void)atomic_add_return(-(int)(i), (v)))
+#define atomic_inc(v)		((void)atomic_add_return(        1, (v)))
+#define atomic_dec(v)		((void)atomic_add_return(       -1, (v)))
+
+#define atomic_sub_return(i, v)	(atomic_add_return(-(int)(i), (v)))
+#define atomic_inc_return(v)	(atomic_add_return(        1, (v)))
+#define atomic_dec_return(v)	(atomic_add_return(       -1, (v)))
+>>>>>>> v3.18
 
 #define atomic_add_negative(a, v)	(atomic_add_return((a), (v)) < 0)
 
@@ -52,10 +75,13 @@ extern void atomic_set(atomic_t *, int);
 #define atomic_dec_and_test(v) (atomic_dec_return(v) == 0)
 #define atomic_sub_and_test(i, v) (atomic_sub_return(i, v) == 0)
 
+<<<<<<< HEAD
 /* Atomic operations are already serializing */
 #define smp_mb__before_atomic_dec()	barrier()
 #define smp_mb__after_atomic_dec()	barrier()
 #define smp_mb__before_atomic_inc()	barrier()
 #define smp_mb__after_atomic_inc()	barrier()
 
+=======
+>>>>>>> v3.18
 #endif /* !(__ARCH_SPARC_ATOMIC__) */

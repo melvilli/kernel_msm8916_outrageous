@@ -28,7 +28,10 @@
 #include <linux/module.h>
 #include <linux/gfp.h>
 #include <linux/pci.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/blkdev.h>
 #include <linux/delay.h>
 #include <linux/interrupt.h>

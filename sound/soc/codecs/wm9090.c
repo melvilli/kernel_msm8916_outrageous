@@ -522,6 +522,7 @@ static int wm9090_set_bias_level(struct snd_soc_codec *codec,
 
 static int wm9090_probe(struct snd_soc_codec *codec)
 {
+<<<<<<< HEAD
 	struct wm9090_priv *wm9090 = dev_get_drvdata(codec->dev);
 	int ret;
 
@@ -532,6 +533,8 @@ static int wm9090_probe(struct snd_soc_codec *codec)
 		return ret;
 	}
 
+=======
+>>>>>>> v3.18
 	/* Configure some defaults; they will be written out when we
 	 * bring the bias up.
 	 */
@@ -623,10 +626,15 @@ static int wm9090_i2c_probe(struct i2c_client *i2c,
 	int ret;
 
 	wm9090 = devm_kzalloc(&i2c->dev, sizeof(*wm9090), GFP_KERNEL);
+<<<<<<< HEAD
 	if (wm9090 == NULL) {
 		dev_err(&i2c->dev, "Can not allocate memory\n");
 		return -ENOMEM;
 	}
+=======
+	if (!wm9090)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	wm9090->regmap = devm_regmap_init_i2c(i2c, &wm9090_regmap);
 	if (IS_ERR(wm9090->regmap)) {

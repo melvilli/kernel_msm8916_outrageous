@@ -27,11 +27,16 @@
 #include <linux/delay.h>
 #include <linux/io.h>
 #include <linux/clk.h>
+<<<<<<< HEAD
+=======
+#include <linux/regmap.h>
+>>>>>>> v3.18
 
 #include <sound/pcm.h>
 
 #include <linux/mfd/davinci_voicecodec.h>
 
+<<<<<<< HEAD
 u32 davinci_vc_read(struct davinci_vc *davinci_vc, int reg)
 {
 	return __raw_readl(davinci_vc->base + reg);
@@ -42,31 +47,55 @@ void davinci_vc_write(struct davinci_vc *davinci_vc,
 {
 	__raw_writel(val, davinci_vc->base + reg);
 }
+=======
+static struct regmap_config davinci_vc_regmap = {
+	.reg_bits = 32,
+	.val_bits = 32,
+};
+>>>>>>> v3.18
 
 static int __init davinci_vc_probe(struct platform_device *pdev)
 {
 	struct davinci_vc *davinci_vc;
+<<<<<<< HEAD
 	struct resource *res, *mem;
 	struct mfd_cell *cell = NULL;
 	int ret;
 
 	davinci_vc = kzalloc(sizeof(struct davinci_vc), GFP_KERNEL);
+=======
+	struct resource *res;
+	struct mfd_cell *cell = NULL;
+	int ret;
+
+	davinci_vc = devm_kzalloc(&pdev->dev,
+				  sizeof(struct davinci_vc), GFP_KERNEL);
+>>>>>>> v3.18
 	if (!davinci_vc) {
 		dev_dbg(&pdev->dev,
 			    "could not allocate memory for private data\n");
 		return -ENOMEM;
 	}
 
+<<<<<<< HEAD
 	davinci_vc->clk = clk_get(&pdev->dev, NULL);
 	if (IS_ERR(davinci_vc->clk)) {
 		dev_dbg(&pdev->dev,
 			    "could not get the clock for voice codec\n");
 		ret = -ENODEV;
 		goto fail1;
+=======
+	davinci_vc->clk = devm_clk_get(&pdev->dev, NULL);
+	if (IS_ERR(davinci_vc->clk)) {
+		dev_dbg(&pdev->dev,
+			    "could not get the clock for voice codec\n");
+		return -ENODEV;
+>>>>>>> v3.18
 	}
 	clk_enable(davinci_vc->clk);
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
 	if (!res) {
 		dev_err(&pdev->dev, "no mem resource\n");
 		ret = -ENODEV;
@@ -89,13 +118,32 @@ static int __init davinci_vc_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "can't ioremap mem resource.\n");
 		ret = -ENOMEM;
 		goto fail3;
+=======
+
+	davinci_vc->base = devm_ioremap_resource(&pdev->dev, res);
+	if (IS_ERR(davinci_vc->base)) {
+		ret = PTR_ERR(davinci_vc->base);
+		goto fail;
+	}
+
+	davinci_vc->regmap = devm_regmap_init_mmio(&pdev->dev,
+						   davinci_vc->base,
+						   &davinci_vc_regmap);
+	if (IS_ERR(davinci_vc->regmap)) {
+		ret = PTR_ERR(davinci_vc->regmap);
+		goto fail;
+>>>>>>> v3.18
 	}
 
 	res = platform_get_resource(pdev, IORESOURCE_DMA, 0);
 	if (!res) {
 		dev_err(&pdev->dev, "no DMA resource\n");
 		ret = -ENXIO;
+<<<<<<< HEAD
 		goto fail4;
+=======
+		goto fail;
+>>>>>>> v3.18
 	}
 
 	davinci_vc->davinci_vcif.dma_tx_channel = res->start;
@@ -106,7 +154,11 @@ static int __init davinci_vc_probe(struct platform_device *pdev)
 	if (!res) {
 		dev_err(&pdev->dev, "no DMA resource\n");
 		ret = -ENXIO;
+<<<<<<< HEAD
 		goto fail4;
+=======
+		goto fail;
+>>>>>>> v3.18
 	}
 
 	davinci_vc->davinci_vcif.dma_rx_channel = res->start;
@@ -132,11 +184,16 @@ static int __init davinci_vc_probe(struct platform_device *pdev)
 			      DAVINCI_VC_CELLS, NULL, 0, NULL);
 	if (ret != 0) {
 		dev_err(&pdev->dev, "fail to register client devices\n");
+<<<<<<< HEAD
 		goto fail4;
+=======
+		goto fail;
+>>>>>>> v3.18
 	}
 
 	return 0;
 
+<<<<<<< HEAD
 fail4:
 	iounmap(davinci_vc->base);
 fail3:
@@ -147,6 +204,10 @@ fail2:
 	davinci_vc->clk = NULL;
 fail1:
 	kfree(davinci_vc);
+=======
+fail:
+	clk_disable(davinci_vc->clk);
+>>>>>>> v3.18
 
 	return ret;
 }
@@ -157,6 +218,7 @@ static int davinci_vc_remove(struct platform_device *pdev)
 
 	mfd_remove_devices(&pdev->dev);
 
+<<<<<<< HEAD
 	iounmap(davinci_vc->base);
 	release_mem_region(davinci_vc->pbase, davinci_vc->base_size);
 
@@ -165,6 +227,9 @@ static int davinci_vc_remove(struct platform_device *pdev)
 	davinci_vc->clk = NULL;
 
 	kfree(davinci_vc);
+=======
+	clk_disable(davinci_vc->clk);
+>>>>>>> v3.18
 
 	return 0;
 }

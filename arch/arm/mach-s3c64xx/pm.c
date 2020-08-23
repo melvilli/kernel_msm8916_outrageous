@@ -28,6 +28,10 @@
 
 #include <mach/regs-gpio.h>
 #include <mach/regs-clock.h>
+<<<<<<< HEAD
+=======
+#include <mach/gpio-samsung.h>
+>>>>>>> v3.18
 
 #include "regs-gpio-memport.h"
 #include "regs-modem.h"
@@ -194,6 +198,7 @@ void s3c_pm_debug_smdkled(u32 set, u32 clear)
 #endif
 
 static struct sleep_save core_save[] = {
+<<<<<<< HEAD
 	SAVE_ITEM(S3C_APLL_LOCK),
 	SAVE_ITEM(S3C_MPLL_LOCK),
 	SAVE_ITEM(S3C_EPLL_LOCK),
@@ -217,6 +222,10 @@ static struct sleep_save core_save[] = {
 	SAVE_ITEM(S3C_APLL_CON),
 	SAVE_ITEM(S3C_MPLL_CON),
 #endif
+=======
+	SAVE_ITEM(S3C64XX_MEM0DRVCON),
+	SAVE_ITEM(S3C64XX_MEM1DRVCON),
+>>>>>>> v3.18
 };
 
 static struct sleep_save misc_save[] = {
@@ -352,7 +361,10 @@ static __init int s3c64xx_pm_initcall(void)
 {
 	pm_cpu_prep = s3c64xx_pm_prepare;
 	pm_cpu_sleep = s3c64xx_cpu_suspend;
+<<<<<<< HEAD
 	pm_uart_udivslot = 1;
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_S3C_PM_DEBUG_LED_SMDK
 	gpio_request(S3C64XX_GPN(12), "DEBUG_LED0");
@@ -368,6 +380,7 @@ static __init int s3c64xx_pm_initcall(void)
 	return 0;
 }
 arch_initcall(s3c64xx_pm_initcall);
+<<<<<<< HEAD
 
 int __init s3c64xx_pm_late_initcall(void)
 {
@@ -375,3 +388,5 @@ int __init s3c64xx_pm_late_initcall(void)
 
 	return 0;
 }
+=======
+>>>>>>> v3.18

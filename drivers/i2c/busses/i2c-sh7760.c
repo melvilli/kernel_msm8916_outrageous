@@ -11,7 +11,10 @@
 #include <linux/delay.h>
 #include <linux/err.h>
 #include <linux/i2c.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/interrupt.h>
 #include <linux/ioport.h>
 #include <linux/platform_device.h>
@@ -437,7 +440,11 @@ static int sh7760_i2c_probe(struct platform_device *pdev)
 	struct cami2c *id;
 	int ret;
 
+<<<<<<< HEAD
 	pd = pdev->dev.platform_data;
+=======
+	pd = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	if (!pd) {
 		dev_err(&pdev->dev, "no platform_data!\n");
 		ret = -ENODEV;

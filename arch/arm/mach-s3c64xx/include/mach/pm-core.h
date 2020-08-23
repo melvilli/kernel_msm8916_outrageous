@@ -15,6 +15,11 @@
 #ifndef __MACH_S3C64XX_PM_CORE_H
 #define __MACH_S3C64XX_PM_CORE_H __FILE__
 
+<<<<<<< HEAD
+=======
+#include <linux/serial_s3c.h>
+
+>>>>>>> v3.18
 #include <mach/regs-gpio.h>
 
 static inline void s3c_pm_debug_init_uart(void)

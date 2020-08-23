@@ -1,6 +1,9 @@
 /*
+<<<<<<< HEAD
  * arch/arm/mach-kirkwood/include/mach/leds-netxbig.h
  *
+=======
+>>>>>>> v3.18
  * Platform data structure for netxbig LED driver
  *
  * This file is licensed under the terms of the GNU General Public
@@ -8,8 +11,13 @@
  * warranty of any kind, whether express or implied.
  */
 
+<<<<<<< HEAD
 #ifndef __MACH_LEDS_NETXBIG_H
 #define __MACH_LEDS_NETXBIG_H
+=======
+#ifndef __LEDS_KIRKWOOD_NETXBIG_H
+#define __LEDS_KIRKWOOD_NETXBIG_H
+>>>>>>> v3.18
 
 struct netxbig_gpio_ext {
 	unsigned	*addr;
@@ -52,4 +60,8 @@ struct netxbig_led_platform_data {
 	int			num_leds;
 };
 
+<<<<<<< HEAD
 #endif /* __MACH_LEDS_NETXBIG_H */
+=======
+#endif /* __LEDS_KIRKWOOD_NETXBIG_H */
+>>>>>>> v3.18

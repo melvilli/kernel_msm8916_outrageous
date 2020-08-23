@@ -20,6 +20,10 @@
 #include <asm/cacheflush.h>
 #include <linux/device.h>
 #include <linux/dma-mapping.h>
+<<<<<<< HEAD
+=======
+#include <linux/host1x.h>
+>>>>>>> v3.18
 #include <linux/interrupt.h>
 #include <linux/kernel.h>
 #include <linux/kfifo.h>
@@ -30,7 +34,10 @@
 #include "channel.h"
 #include "dev.h"
 #include "debug.h"
+<<<<<<< HEAD
 #include "host1x_bo.h"
+=======
+>>>>>>> v3.18
 #include "job.h"
 
 /*

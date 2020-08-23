@@ -17,6 +17,11 @@
 #include "qdio.h"
 #include "qdio_debug.h"
 
+<<<<<<< HEAD
+=======
+#define QBUFF_PER_PAGE (PAGE_SIZE / sizeof(struct qdio_buffer))
+
+>>>>>>> v3.18
 static struct kmem_cache *qdio_q_cache;
 static struct kmem_cache *qdio_aob_cache;
 
@@ -32,6 +37,60 @@ void qdio_release_aob(struct qaob *aob)
 }
 EXPORT_SYMBOL_GPL(qdio_release_aob);
 
+<<<<<<< HEAD
+=======
+/**
+ * qdio_free_buffers() - free qdio buffers
+ * @buf: array of pointers to qdio buffers
+ * @count: number of qdio buffers to free
+ */
+void qdio_free_buffers(struct qdio_buffer **buf, unsigned int count)
+{
+	int pos;
+
+	for (pos = 0; pos < count; pos += QBUFF_PER_PAGE)
+		free_page((unsigned long) buf[pos]);
+}
+EXPORT_SYMBOL_GPL(qdio_free_buffers);
+
+/**
+ * qdio_alloc_buffers() - allocate qdio buffers
+ * @buf: array of pointers to qdio buffers
+ * @count: number of qdio buffers to allocate
+ */
+int qdio_alloc_buffers(struct qdio_buffer **buf, unsigned int count)
+{
+	int pos;
+
+	for (pos = 0; pos < count; pos += QBUFF_PER_PAGE) {
+		buf[pos] = (void *) get_zeroed_page(GFP_KERNEL);
+		if (!buf[pos]) {
+			qdio_free_buffers(buf, count);
+			return -ENOMEM;
+		}
+	}
+	for (pos = 0; pos < count; pos++)
+		if (pos % QBUFF_PER_PAGE)
+			buf[pos] = buf[pos - 1] + 1;
+	return 0;
+}
+EXPORT_SYMBOL_GPL(qdio_alloc_buffers);
+
+/**
+ * qdio_reset_buffers() - reset qdio buffers
+ * @buf: array of pointers to qdio buffers
+ * @count: number of qdio buffers that will be zeroed
+ */
+void qdio_reset_buffers(struct qdio_buffer **buf, unsigned int count)
+{
+	int pos;
+
+	for (pos = 0; pos < count; pos++)
+		memset(buf[pos], 0, sizeof(struct qdio_buffer));
+}
+EXPORT_SYMBOL_GPL(qdio_reset_buffers);
+
+>>>>>>> v3.18
 /*
  * qebsm is only available under 64bit but the adapter sets the feature
  * flag anyway, so we manually override it.
@@ -254,6 +313,7 @@ int qdio_setup_get_ssqd(struct qdio_irq *irq_ptr,
 	int rc;
 
 	DBF_EVENT("getssqd:%4x", schid->sch_no);
+<<<<<<< HEAD
 	if (irq_ptr != NULL)
 		ssqd = (struct chsc_ssqd_area *)irq_ptr->chsc_page;
 	else
@@ -273,10 +333,24 @@ int qdio_setup_get_ssqd(struct qdio_irq *irq_ptr,
 	rc = chsc_error_from_response(ssqd->response.code);
 	if (rc)
 		return rc;
+=======
+	if (!irq_ptr) {
+		ssqd = (struct chsc_ssqd_area *)__get_free_page(GFP_KERNEL);
+		if (!ssqd)
+			return -ENOMEM;
+	} else {
+		ssqd = (struct chsc_ssqd_area *)irq_ptr->chsc_page;
+	}
+
+	rc = chsc_ssqd(*schid, ssqd);
+	if (rc)
+		goto out;
+>>>>>>> v3.18
 
 	if (!(ssqd->qdio_ssqd.flags & CHSC_FLAG_QDIO_CAPABILITY) ||
 	    !(ssqd->qdio_ssqd.flags & CHSC_FLAG_VALIDITY) ||
 	    (ssqd->qdio_ssqd.sch != schid->sch_no))
+<<<<<<< HEAD
 		return -EINVAL;
 
 	if (irq_ptr != NULL)
@@ -288,6 +362,18 @@ int qdio_setup_get_ssqd(struct qdio_irq *irq_ptr,
 		free_page((unsigned long)ssqd);
 	}
 	return 0;
+=======
+		rc = -EINVAL;
+
+	if (!rc)
+		memcpy(data, &ssqd->qdio_ssqd, sizeof(*data));
+
+out:
+	if (!irq_ptr)
+		free_page((unsigned long)ssqd);
+
+	return rc;
+>>>>>>> v3.18
 }
 
 void qdio_setup_ssqd_info(struct qdio_irq *irq_ptr)
@@ -295,7 +381,11 @@ void qdio_setup_ssqd_info(struct qdio_irq *irq_ptr)
 	unsigned char qdioac;
 	int rc;
 
+<<<<<<< HEAD
 	rc = qdio_setup_get_ssqd(irq_ptr, &irq_ptr->schid, NULL);
+=======
+	rc = qdio_setup_get_ssqd(irq_ptr, &irq_ptr->schid, &irq_ptr->ssqd_desc);
+>>>>>>> v3.18
 	if (rc) {
 		DBF_ERROR("%4x ssqd ERR", irq_ptr->schid.sch_no);
 		DBF_ERROR("rc:%x", rc);

@@ -59,6 +59,10 @@ static int xfs_stat_proc_show(struct seq_file *m, void *v)
 		{ "abtc2",		XFSSTAT_END_ABTC_V2		},
 		{ "bmbt2",		XFSSTAT_END_BMBT_V2		},
 		{ "ibt2",		XFSSTAT_END_IBT_V2		},
+<<<<<<< HEAD
+=======
+		{ "fibt2",		XFSSTAT_END_FIBT_V2		},
+>>>>>>> v3.18
 		/* we print both series of quota information together */
 		{ "qm",			XFSSTAT_END_QM			},
 	};

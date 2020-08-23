@@ -111,7 +111,11 @@ static long beat_lpar_hpte_insert(unsigned long hpte_group,
 		DBG_LOW(" hpte_v=%016lx, hpte_r=%016lx\n", hpte_v, hpte_r);
 
 	if (rflags & _PAGE_NO_CACHE)
+<<<<<<< HEAD
 		hpte_r &= ~_PAGE_COHERENT;
+=======
+		hpte_r &= ~HPTE_R_M;
+>>>>>>> v3.18
 
 	raw_spin_lock(&beat_htab_lock);
 	lpar_rc = beat_read_mask(hpte_group);
@@ -185,7 +189,12 @@ static void beat_lpar_hptab_clear(void)
 static long beat_lpar_hpte_updatepp(unsigned long slot,
 				    unsigned long newpp,
 				    unsigned long vpn,
+<<<<<<< HEAD
 				    int psize, int ssize, int local)
+=======
+				    int psize, int apsize,
+				    int ssize, int local)
+>>>>>>> v3.18
 {
 	unsigned long lpar_rc;
 	u64 dummy0, dummy1;
@@ -274,7 +283,12 @@ static void beat_lpar_hpte_updateboltedpp(unsigned long newpp,
 }
 
 static void beat_lpar_hpte_invalidate(unsigned long slot, unsigned long vpn,
+<<<<<<< HEAD
 					 int psize, int ssize, int local)
+=======
+				      int psize, int apsize,
+				      int ssize, int local)
+>>>>>>> v3.18
 {
 	unsigned long want_v;
 	unsigned long lpar_rc;
@@ -335,7 +349,11 @@ static long beat_lpar_hpte_insert_v3(unsigned long hpte_group,
 		DBG_LOW(" hpte_v=%016lx, hpte_r=%016lx\n", hpte_v, hpte_r);
 
 	if (rflags & _PAGE_NO_CACHE)
+<<<<<<< HEAD
 		hpte_r &= ~_PAGE_COHERENT;
+=======
+		hpte_r &= ~HPTE_R_M;
+>>>>>>> v3.18
 
 	/* insert into not-volted entry */
 	lpar_rc = beat_insert_htab_entry3(0, hpte_group, hpte_v, hpte_r,
@@ -364,9 +382,16 @@ static long beat_lpar_hpte_insert_v3(unsigned long hpte_group,
  * already zero.  For now I am paranoid.
  */
 static long beat_lpar_hpte_updatepp_v3(unsigned long slot,
+<<<<<<< HEAD
 				    unsigned long newpp,
 				    unsigned long vpn,
 				    int psize, int ssize, int local)
+=======
+				       unsigned long newpp,
+				       unsigned long vpn,
+				       int psize, int apsize,
+				       int ssize, int local)
+>>>>>>> v3.18
 {
 	unsigned long lpar_rc;
 	unsigned long want_v;
@@ -394,7 +419,12 @@ static long beat_lpar_hpte_updatepp_v3(unsigned long slot,
 }
 
 static void beat_lpar_hpte_invalidate_v3(unsigned long slot, unsigned long vpn,
+<<<<<<< HEAD
 					 int psize, int ssize, int local)
+=======
+					 int psize, int apsize,
+					 int ssize, int local)
+>>>>>>> v3.18
 {
 	unsigned long want_v;
 	unsigned long lpar_rc;

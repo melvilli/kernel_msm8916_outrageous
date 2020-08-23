@@ -2,7 +2,11 @@
  * w83792d.c - Part of lm_sensors, Linux kernel modules for hardware
  *	       monitoring
  * Copyright (C) 2004, 2005 Winbond Electronics Corp.
+<<<<<<< HEAD
  *			    Chunhao Huang <DZShen@Winbond.com.tw>,
+=======
+ *			    Shane Huang,
+>>>>>>> v3.18
  *			    Rudolf Marek <r.marek@assembler.cz>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -579,7 +583,11 @@ static ssize_t store_temp23(struct device *dev, struct device_attribute *attr,
 	return count;
 }
 
+<<<<<<< HEAD
 /* get reatime status of all sensors items: voltage, temp, fan */
+=======
+/* get realtime status of all sensors items: voltage, temp, fan */
+>>>>>>> v3.18
 static ssize_t
 show_alarms_reg(struct device *dev, struct device_attribute *attr, char *buf)
 {
@@ -1376,7 +1384,10 @@ w83792d_probe(struct i2c_client *client, const struct i2c_device_id *id)
 		return -ENOMEM;
 
 	i2c_set_clientdata(client, data);
+<<<<<<< HEAD
 	data->valid = 0;
+=======
+>>>>>>> v3.18
 	mutex_init(&data->update_lock);
 
 	err = w83792d_detect_subclients(client);
@@ -1665,6 +1676,10 @@ static void w83792d_print_debug(struct w83792d_data *data, struct device *dev)
 
 module_i2c_driver(w83792d_driver);
 
+<<<<<<< HEAD
 MODULE_AUTHOR("Chunhao Huang @ Winbond <DZShen@Winbond.com.tw>");
+=======
+MODULE_AUTHOR("Shane Huang (Winbond)");
+>>>>>>> v3.18
 MODULE_DESCRIPTION("W83792AD/D driver for linux-2.6");
 MODULE_LICENSE("GPL");

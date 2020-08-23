@@ -1004,13 +1004,20 @@ dir_err_out:
 /**
  * ntfs_filldir - ntfs specific filldir method
  * @vol:	current ntfs volume
+<<<<<<< HEAD
  * @fpos:	position in the directory
+=======
+>>>>>>> v3.18
  * @ndir:	ntfs inode of current directory
  * @ia_page:	page in which the index allocation buffer @ie is in resides
  * @ie:		current index entry
  * @name:	buffer to use for the converted name
+<<<<<<< HEAD
  * @dirent:	vfs filldir callback context
  * @filldir:	vfs filldir callback
+=======
+ * @actor:	what to feed the entries to
+>>>>>>> v3.18
  *
  * Convert the Unicode @name to the loaded NLS and pass it to the @filldir
  * callback.
@@ -1024,12 +1031,21 @@ dir_err_out:
  * retake the lock if we are returning a non-zero value as ntfs_readdir()
  * would need to drop the lock immediately anyway.
  */
+<<<<<<< HEAD
 static inline int ntfs_filldir(ntfs_volume *vol, loff_t fpos,
 		ntfs_inode *ndir, struct page *ia_page, INDEX_ENTRY *ie,
 		u8 *name, void *dirent, filldir_t filldir)
 {
 	unsigned long mref;
 	int name_len, rc;
+=======
+static inline int ntfs_filldir(ntfs_volume *vol,
+		ntfs_inode *ndir, struct page *ia_page, INDEX_ENTRY *ie,
+		u8 *name, struct dir_context *actor)
+{
+	unsigned long mref;
+	int name_len;
+>>>>>>> v3.18
 	unsigned dt_type;
 	FILE_NAME_TYPE_FLAGS name_type;
 
@@ -1068,6 +1084,7 @@ static inline int ntfs_filldir(ntfs_volume *vol, loff_t fpos,
 	if (ia_page)
 		unlock_page(ia_page);
 	ntfs_debug("Calling filldir for %s with len %i, fpos 0x%llx, inode "
+<<<<<<< HEAD
 			"0x%lx, DT_%s.", name, name_len, fpos, mref,
 			dt_type == DT_DIR ? "DIR" : "REG");
 	rc = filldir(dirent, name, name_len, fpos, mref, dt_type);
@@ -1075,6 +1092,16 @@ static inline int ntfs_filldir(ntfs_volume *vol, loff_t fpos,
 	if (!rc && ia_page)
 		lock_page(ia_page);
 	return rc;
+=======
+			"0x%lx, DT_%s.", name, name_len, actor->pos, mref,
+			dt_type == DT_DIR ? "DIR" : "REG");
+	if (!dir_emit(actor, name, name_len, mref, dt_type))
+		return 1;
+	/* Relock the page but not if we are aborting ->readdir. */
+	if (ia_page)
+		lock_page(ia_page);
+	return 0;
+>>>>>>> v3.18
 }
 
 /*
@@ -1097,11 +1124,19 @@ static inline int ntfs_filldir(ntfs_volume *vol, loff_t fpos,
  *	       removes them again after the write is complete after which it 
  *	       unlocks the page.
  */
+<<<<<<< HEAD
 static int ntfs_readdir(struct file *filp, void *dirent, filldir_t filldir)
 {
 	s64 ia_pos, ia_start, prev_ia_pos, bmp_pos;
 	loff_t fpos, i_size;
 	struct inode *bmp_vi, *vdir = file_inode(filp);
+=======
+static int ntfs_readdir(struct file *file, struct dir_context *actor)
+{
+	s64 ia_pos, ia_start, prev_ia_pos, bmp_pos;
+	loff_t i_size;
+	struct inode *bmp_vi, *vdir = file_inode(file);
+>>>>>>> v3.18
 	struct super_block *sb = vdir->i_sb;
 	ntfs_inode *ndir = NTFS_I(vdir);
 	ntfs_volume *vol = NTFS_SB(sb);
@@ -1116,6 +1151,7 @@ static int ntfs_readdir(struct file *filp, void *dirent, filldir_t filldir)
 	u8 *kaddr, *bmp, *index_end;
 	ntfs_attr_search_ctx *ctx;
 
+<<<<<<< HEAD
 	fpos = filp->f_pos;
 	ntfs_debug("Entering for inode 0x%lx, fpos 0x%llx.",
 			vdir->i_ino, fpos);
@@ -1143,6 +1179,18 @@ static int ntfs_readdir(struct file *filp, void *dirent, filldir_t filldir)
 			goto done;
 		fpos++;
 	}
+=======
+	ntfs_debug("Entering for inode 0x%lx, fpos 0x%llx.",
+			vdir->i_ino, actor->pos);
+	rc = err = 0;
+	/* Are we at end of dir yet? */
+	i_size = i_size_read(vdir);
+	if (actor->pos >= i_size + vol->mft_record_size)
+		return 0;
+	/* Emulate . and .. for all directories. */
+	if (!dir_emit_dots(file, actor))
+		return 0;
+>>>>>>> v3.18
 	m = NULL;
 	ctx = NULL;
 	/*
@@ -1155,7 +1203,11 @@ static int ntfs_readdir(struct file *filp, void *dirent, filldir_t filldir)
 		goto err_out;
 	}
 	/* Are we jumping straight into the index allocation attribute? */
+<<<<<<< HEAD
 	if (fpos >= vol->mft_record_size)
+=======
+	if (actor->pos >= vol->mft_record_size)
+>>>>>>> v3.18
 		goto skip_index_root;
 	/* Get hold of the mft record for the directory. */
 	m = map_mft_record(ndir);
@@ -1170,7 +1222,11 @@ static int ntfs_readdir(struct file *filp, void *dirent, filldir_t filldir)
 		goto err_out;
 	}
 	/* Get the offset into the index root attribute. */
+<<<<<<< HEAD
 	ir_pos = (s64)fpos;
+=======
+	ir_pos = (s64)actor->pos;
+>>>>>>> v3.18
 	/* Find the index root attribute in the mft record. */
 	err = ntfs_attr_lookup(AT_INDEX_ROOT, I30, 4, CASE_SENSITIVE, 0, NULL,
 			0, ctx);
@@ -1226,10 +1282,16 @@ static int ntfs_readdir(struct file *filp, void *dirent, filldir_t filldir)
 		if (ir_pos > (u8*)ie - (u8*)ir)
 			continue;
 		/* Advance the position even if going to skip the entry. */
+<<<<<<< HEAD
 		fpos = (u8*)ie - (u8*)ir;
 		/* Submit the name to the filldir callback. */
 		rc = ntfs_filldir(vol, fpos, ndir, NULL, ie, name, dirent,
 				filldir);
+=======
+		actor->pos = (u8*)ie - (u8*)ir;
+		/* Submit the name to the filldir callback. */
+		rc = ntfs_filldir(vol, ndir, NULL, ie, name, actor);
+>>>>>>> v3.18
 		if (rc) {
 			kfree(ir);
 			goto abort;
@@ -1242,12 +1304,20 @@ static int ntfs_readdir(struct file *filp, void *dirent, filldir_t filldir)
 	if (!NInoIndexAllocPresent(ndir))
 		goto EOD;
 	/* Advance fpos to the beginning of the index allocation. */
+<<<<<<< HEAD
 	fpos = vol->mft_record_size;
+=======
+	actor->pos = vol->mft_record_size;
+>>>>>>> v3.18
 skip_index_root:
 	kaddr = NULL;
 	prev_ia_pos = -1LL;
 	/* Get the offset into the index allocation attribute. */
+<<<<<<< HEAD
 	ia_pos = (s64)fpos - vol->mft_record_size;
+=======
+	ia_pos = (s64)actor->pos - vol->mft_record_size;
+>>>>>>> v3.18
 	ia_mapping = vdir->i_mapping;
 	ntfs_debug("Inode 0x%lx, getting index bitmap.", vdir->i_ino);
 	bmp_vi = ntfs_attr_iget(vdir, AT_BITMAP, I30, 4);
@@ -1409,7 +1479,11 @@ find_next_index_buffer:
 		if (ia_pos - ia_start > (u8*)ie - (u8*)ia)
 			continue;
 		/* Advance the position even if going to skip the entry. */
+<<<<<<< HEAD
 		fpos = (u8*)ie - (u8*)ia +
+=======
+		actor->pos = (u8*)ie - (u8*)ia +
+>>>>>>> v3.18
 				(sle64_to_cpu(ia->index_block_vcn) <<
 				ndir->itype.index.vcn_size_bits) +
 				vol->mft_record_size;
@@ -1419,8 +1493,12 @@ find_next_index_buffer:
 		 * before returning, unless a non-zero value is returned in
 		 * which case the page is left unlocked.
 		 */
+<<<<<<< HEAD
 		rc = ntfs_filldir(vol, fpos, ndir, ia_page, ie, name, dirent,
 				filldir);
+=======
+		rc = ntfs_filldir(vol, ndir, ia_page, ie, name, actor);
+>>>>>>> v3.18
 		if (rc) {
 			/* @ia_page is already unlocked in this case. */
 			ntfs_unmap_page(ia_page);
@@ -1439,6 +1517,7 @@ unm_EOD:
 	iput(bmp_vi);
 EOD:
 	/* We are finished, set fpos to EOD. */
+<<<<<<< HEAD
 	fpos = i_size + vol->mft_record_size;
 abort:
 	kfree(name);
@@ -1451,6 +1530,11 @@ done:
 				rc, fpos);
 #endif
 	filp->f_pos = fpos;
+=======
+	actor->pos = i_size + vol->mft_record_size;
+abort:
+	kfree(name);
+>>>>>>> v3.18
 	return 0;
 err_out:
 	if (bmp_page) {
@@ -1471,7 +1555,10 @@ iput_err_out:
 	if (!err)
 		err = -EIO;
 	ntfs_debug("Failed. Returning error code %i.", -err);
+<<<<<<< HEAD
 	filp->f_pos = fpos;
+=======
+>>>>>>> v3.18
 	return err;
 }
 
@@ -1571,7 +1658,11 @@ static int ntfs_dir_fsync(struct file *filp, loff_t start, loff_t end,
 const struct file_operations ntfs_dir_ops = {
 	.llseek		= generic_file_llseek,	/* Seek inside directory. */
 	.read		= generic_read_dir,	/* Return -EISDIR. */
+<<<<<<< HEAD
 	.readdir	= ntfs_readdir,		/* Read directory contents. */
+=======
+	.iterate	= ntfs_readdir,		/* Read directory contents. */
+>>>>>>> v3.18
 #ifdef NTFS_RW
 	.fsync		= ntfs_dir_fsync,	/* Sync a directory to disk. */
 	/*.aio_fsync	= ,*/			/* Sync all outstanding async

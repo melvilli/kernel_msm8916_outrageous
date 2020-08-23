@@ -29,7 +29,10 @@
 #include <linux/slab.h>
 #include <linux/input.h>
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/spinlock.h>
 #include <linux/usb.h>
 #include <linux/serio.h>

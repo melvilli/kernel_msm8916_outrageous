@@ -71,6 +71,10 @@ int enic_get_vnic_config(struct enic *enic)
 	GET_CONFIG(intr_mode);
 	GET_CONFIG(intr_timer_usec);
 	GET_CONFIG(loop_tag);
+<<<<<<< HEAD
+=======
+	GET_CONFIG(num_arfs);
+>>>>>>> v3.18
 
 	c->wq_desc_count =
 		min_t(u32, ENIC_MAX_WQ_DESCS,

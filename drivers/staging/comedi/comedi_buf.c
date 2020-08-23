@@ -3,6 +3,10 @@
  *
  * COMEDI - Linux Control and Measurement Device Interface
  * Copyright (C) 1997-2000 David A. Schleef <ds@schleef.org>
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2002 Frank Mori Hess <fmhess@users.sourceforge.net>
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,12 +17,20 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+=======
+ */
+
+#include <linux/vmalloc.h>
+#include <linux/slab.h>
+
+>>>>>>> v3.18
 #include "comedidev.h"
 #include "comedi_internal.h"
 
@@ -28,6 +40,7 @@
 #define COMEDI_PAGE_PROTECTION		PAGE_KERNEL
 #endif
 
+<<<<<<< HEAD
 static void __comedi_buf_free(struct comedi_device *dev,
 			      struct comedi_subdevice *s,
 			      unsigned n_pages)
@@ -53,6 +66,23 @@ static void __comedi_buf_free(struct comedi_device *dev,
 			if (s->async_dma_dir != DMA_NONE) {
 #ifdef CONFIG_HAS_DMA
 				dma_free_coherent(dev->hw_dev,
+=======
+static void comedi_buf_map_kref_release(struct kref *kref)
+{
+	struct comedi_buf_map *bm =
+		container_of(kref, struct comedi_buf_map, refcount);
+	struct comedi_buf_page *buf;
+	unsigned int i;
+
+	if (bm->page_list) {
+		for (i = 0; i < bm->n_pages; i++) {
+			buf = &bm->page_list[i];
+			clear_bit(PG_reserved,
+				  &(virt_to_page(buf->virt_addr)->flags));
+			if (bm->dma_dir != DMA_NONE) {
+#ifdef CONFIG_HAS_DMA
+				dma_free_coherent(bm->dma_hw_dev,
+>>>>>>> v3.18
 						  PAGE_SIZE,
 						  buf->virt_addr,
 						  buf->dma_addr);
@@ -61,10 +91,38 @@ static void __comedi_buf_free(struct comedi_device *dev,
 				free_page((unsigned long)buf->virt_addr);
 			}
 		}
+<<<<<<< HEAD
 	}
 	vfree(async->buf_page_list);
 	async->buf_page_list = NULL;
 	async->n_buf_pages = 0;
+=======
+		vfree(bm->page_list);
+	}
+	if (bm->dma_dir != DMA_NONE)
+		put_device(bm->dma_hw_dev);
+	kfree(bm);
+}
+
+static void __comedi_buf_free(struct comedi_device *dev,
+			      struct comedi_subdevice *s)
+{
+	struct comedi_async *async = s->async;
+	struct comedi_buf_map *bm;
+	unsigned long flags;
+
+	if (async->prealloc_buf) {
+		vunmap(async->prealloc_buf);
+		async->prealloc_buf = NULL;
+		async->prealloc_bufsz = 0;
+	}
+
+	spin_lock_irqsave(&s->spin_lock, flags);
+	bm = async->buf_map;
+	async->buf_map = NULL;
+	spin_unlock_irqrestore(&s->spin_lock, flags);
+	comedi_buf_map_put(bm);
+>>>>>>> v3.18
 }
 
 static void __comedi_buf_alloc(struct comedi_device *dev,
@@ -73,7 +131,13 @@ static void __comedi_buf_alloc(struct comedi_device *dev,
 {
 	struct comedi_async *async = s->async;
 	struct page **pages = NULL;
+<<<<<<< HEAD
 	struct comedi_buf_page *buf;
+=======
+	struct comedi_buf_map *bm;
+	struct comedi_buf_page *buf;
+	unsigned long flags;
+>>>>>>> v3.18
 	unsigned i;
 
 	if (!IS_ENABLED(CONFIG_HAS_DMA) && s->async_dma_dir != DMA_NONE) {
@@ -82,18 +146,43 @@ static void __comedi_buf_alloc(struct comedi_device *dev,
 		return;
 	}
 
+<<<<<<< HEAD
 	async->buf_page_list = vzalloc(sizeof(*buf) * n_pages);
 	if (async->buf_page_list)
+=======
+	bm = kzalloc(sizeof(*async->buf_map), GFP_KERNEL);
+	if (!bm)
+		return;
+
+	kref_init(&bm->refcount);
+	spin_lock_irqsave(&s->spin_lock, flags);
+	async->buf_map = bm;
+	spin_unlock_irqrestore(&s->spin_lock, flags);
+	bm->dma_dir = s->async_dma_dir;
+	if (bm->dma_dir != DMA_NONE)
+		/* Need ref to hardware device to free buffer later. */
+		bm->dma_hw_dev = get_device(dev->hw_dev);
+
+	bm->page_list = vzalloc(sizeof(*buf) * n_pages);
+	if (bm->page_list)
+>>>>>>> v3.18
 		pages = vmalloc(sizeof(struct page *) * n_pages);
 
 	if (!pages)
 		return;
 
 	for (i = 0; i < n_pages; i++) {
+<<<<<<< HEAD
 		buf = &async->buf_page_list[i];
 		if (s->async_dma_dir != DMA_NONE)
 #ifdef CONFIG_HAS_DMA
 			buf->virt_addr = dma_alloc_coherent(dev->hw_dev,
+=======
+		buf = &bm->page_list[i];
+		if (bm->dma_dir != DMA_NONE)
+#ifdef CONFIG_HAS_DMA
+			buf->virt_addr = dma_alloc_coherent(bm->dma_hw_dev,
+>>>>>>> v3.18
 							    PAGE_SIZE,
 							    &buf->dma_addr,
 							    GFP_KERNEL |
@@ -110,6 +199,12 @@ static void __comedi_buf_alloc(struct comedi_device *dev,
 
 		pages[i] = virt_to_page(buf->virt_addr);
 	}
+<<<<<<< HEAD
+=======
+	spin_lock_irqsave(&s->spin_lock, flags);
+	bm->n_pages = i;
+	spin_unlock_irqrestore(&s->spin_lock, flags);
+>>>>>>> v3.18
 
 	/* vmap the prealloc_buf if all the pages were allocated */
 	if (i == n_pages)
@@ -119,6 +214,52 @@ static void __comedi_buf_alloc(struct comedi_device *dev,
 	vfree(pages);
 }
 
+<<<<<<< HEAD
+=======
+void comedi_buf_map_get(struct comedi_buf_map *bm)
+{
+	if (bm)
+		kref_get(&bm->refcount);
+}
+
+int comedi_buf_map_put(struct comedi_buf_map *bm)
+{
+	if (bm)
+		return kref_put(&bm->refcount, comedi_buf_map_kref_release);
+	return 1;
+}
+
+/* returns s->async->buf_map and increments its kref refcount */
+struct comedi_buf_map *
+comedi_buf_map_from_subdev_get(struct comedi_subdevice *s)
+{
+	struct comedi_async *async = s->async;
+	struct comedi_buf_map *bm = NULL;
+	unsigned long flags;
+
+	if (!async)
+		return NULL;
+
+	spin_lock_irqsave(&s->spin_lock, flags);
+	bm = async->buf_map;
+	/* only want it if buffer pages allocated */
+	if (bm && bm->n_pages)
+		comedi_buf_map_get(bm);
+	else
+		bm = NULL;
+	spin_unlock_irqrestore(&s->spin_lock, flags);
+
+	return bm;
+}
+
+bool comedi_buf_is_mmapped(struct comedi_subdevice *s)
+{
+	struct comedi_buf_map *bm = s->async->buf_map;
+
+	return bm && (atomic_read(&bm->refcount.refcount) > 1);
+}
+
+>>>>>>> v3.18
 int comedi_buf_alloc(struct comedi_device *dev, struct comedi_subdevice *s,
 		     unsigned long new_size)
 {
@@ -132,7 +273,11 @@ int comedi_buf_alloc(struct comedi_device *dev, struct comedi_subdevice *s,
 		return 0;
 
 	/* deallocate old buffer */
+<<<<<<< HEAD
 	__comedi_buf_free(dev, s, async->n_buf_pages);
+=======
+	__comedi_buf_free(dev, s);
+>>>>>>> v3.18
 
 	/* allocate new buffer */
 	if (new_size) {
@@ -142,18 +287,31 @@ int comedi_buf_alloc(struct comedi_device *dev, struct comedi_subdevice *s,
 
 		if (!async->prealloc_buf) {
 			/* allocation failed */
+<<<<<<< HEAD
 			__comedi_buf_free(dev, s, n_pages);
 			return -ENOMEM;
 		}
 		async->n_buf_pages = n_pages;
+=======
+			__comedi_buf_free(dev, s);
+			return -ENOMEM;
+		}
+>>>>>>> v3.18
 	}
 	async->prealloc_bufsz = new_size;
 
 	return 0;
 }
 
+<<<<<<< HEAD
 void comedi_buf_reset(struct comedi_async *async)
 {
+=======
+void comedi_buf_reset(struct comedi_subdevice *s)
+{
+	struct comedi_async *async = s->async;
+
+>>>>>>> v3.18
 	async->buf_write_alloc_count = 0;
 	async->buf_write_count = 0;
 	async->buf_read_alloc_count = 0;
@@ -171,18 +329,33 @@ void comedi_buf_reset(struct comedi_async *async)
 	async->events = 0;
 }
 
+<<<<<<< HEAD
 static unsigned int comedi_buf_write_n_available(struct comedi_async *async)
 {
+=======
+static unsigned int comedi_buf_write_n_available(struct comedi_subdevice *s)
+{
+	struct comedi_async *async = s->async;
+>>>>>>> v3.18
 	unsigned int free_end = async->buf_read_count + async->prealloc_bufsz;
 
 	return free_end - async->buf_write_alloc_count;
 }
 
+<<<<<<< HEAD
 static unsigned int __comedi_buf_write_alloc(struct comedi_async *async,
 					     unsigned int nbytes,
 					     int strict)
 {
 	unsigned int available = comedi_buf_write_n_available(async);
+=======
+static unsigned int __comedi_buf_write_alloc(struct comedi_subdevice *s,
+					     unsigned int nbytes,
+					     int strict)
+{
+	struct comedi_async *async = s->async;
+	unsigned int available = comedi_buf_write_n_available(s);
+>>>>>>> v3.18
 
 	if (nbytes > available)
 		nbytes = strict ? 0 : available;
@@ -199,10 +372,17 @@ static unsigned int __comedi_buf_write_alloc(struct comedi_async *async,
 }
 
 /* allocates chunk for the writer from free buffer space */
+<<<<<<< HEAD
 unsigned int comedi_buf_write_alloc(struct comedi_async *async,
 				    unsigned int nbytes)
 {
 	return __comedi_buf_write_alloc(async, nbytes, 0);
+=======
+unsigned int comedi_buf_write_alloc(struct comedi_subdevice *s,
+				    unsigned int nbytes)
+{
+	return __comedi_buf_write_alloc(s, nbytes, 0);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(comedi_buf_write_alloc);
 
@@ -210,10 +390,17 @@ EXPORT_SYMBOL_GPL(comedi_buf_write_alloc);
  * munging is applied to data by core as it passes between user
  * and kernel space
  */
+<<<<<<< HEAD
 static unsigned int comedi_buf_munge(struct comedi_async *async,
 				     unsigned int num_bytes)
 {
 	struct comedi_subdevice *s = async->subdevice;
+=======
+static unsigned int comedi_buf_munge(struct comedi_subdevice *s,
+				     unsigned int num_bytes)
+{
+	struct comedi_async *async = s->async;
+>>>>>>> v3.18
 	unsigned int count = 0;
 	const unsigned num_sample_bytes = bytes_per_sample(s);
 
@@ -253,23 +440,42 @@ static unsigned int comedi_buf_munge(struct comedi_async *async,
 	return count;
 }
 
+<<<<<<< HEAD
 unsigned int comedi_buf_write_n_allocated(struct comedi_async *async)
 {
+=======
+unsigned int comedi_buf_write_n_allocated(struct comedi_subdevice *s)
+{
+	struct comedi_async *async = s->async;
+
+>>>>>>> v3.18
 	return async->buf_write_alloc_count - async->buf_write_count;
 }
 
 /* transfers a chunk from writer to filled buffer space */
+<<<<<<< HEAD
 unsigned int comedi_buf_write_free(struct comedi_async *async,
 				   unsigned int nbytes)
 {
 	unsigned int allocated = comedi_buf_write_n_allocated(async);
+=======
+unsigned int comedi_buf_write_free(struct comedi_subdevice *s,
+				   unsigned int nbytes)
+{
+	struct comedi_async *async = s->async;
+	unsigned int allocated = comedi_buf_write_n_allocated(s);
+>>>>>>> v3.18
 
 	if (nbytes > allocated)
 		nbytes = allocated;
 
 	async->buf_write_count += nbytes;
 	async->buf_write_ptr += nbytes;
+<<<<<<< HEAD
 	comedi_buf_munge(async, async->buf_write_count - async->munge_count);
+=======
+	comedi_buf_munge(s, async->buf_write_count - async->munge_count);
+>>>>>>> v3.18
 	if (async->buf_write_ptr >= async->prealloc_bufsz)
 		async->buf_write_ptr %= async->prealloc_bufsz;
 
@@ -277,8 +483,14 @@ unsigned int comedi_buf_write_free(struct comedi_async *async,
 }
 EXPORT_SYMBOL_GPL(comedi_buf_write_free);
 
+<<<<<<< HEAD
 unsigned int comedi_buf_read_n_available(struct comedi_async *async)
 {
+=======
+unsigned int comedi_buf_read_n_available(struct comedi_subdevice *s)
+{
+	struct comedi_async *async = s->async;
+>>>>>>> v3.18
 	unsigned num_bytes;
 
 	if (!async)
@@ -297,9 +509,16 @@ unsigned int comedi_buf_read_n_available(struct comedi_async *async)
 EXPORT_SYMBOL_GPL(comedi_buf_read_n_available);
 
 /* allocates a chunk for the reader from filled (and munged) buffer space */
+<<<<<<< HEAD
 unsigned int comedi_buf_read_alloc(struct comedi_async *async,
 				   unsigned int nbytes)
 {
+=======
+unsigned int comedi_buf_read_alloc(struct comedi_subdevice *s,
+				   unsigned int nbytes)
+{
+	struct comedi_async *async = s->async;
+>>>>>>> v3.18
 	unsigned int available;
 
 	available = async->munge_count - async->buf_read_alloc_count;
@@ -324,9 +543,16 @@ static unsigned int comedi_buf_read_n_allocated(struct comedi_async *async)
 }
 
 /* transfers control of a chunk from reader to free buffer space */
+<<<<<<< HEAD
 unsigned int comedi_buf_read_free(struct comedi_async *async,
 				  unsigned int nbytes)
 {
+=======
+unsigned int comedi_buf_read_free(struct comedi_subdevice *s,
+				  unsigned int nbytes)
+{
+	struct comedi_async *async = s->async;
+>>>>>>> v3.18
 	unsigned int allocated;
 
 	/*
@@ -346,20 +572,33 @@ unsigned int comedi_buf_read_free(struct comedi_async *async,
 }
 EXPORT_SYMBOL_GPL(comedi_buf_read_free);
 
+<<<<<<< HEAD
 int comedi_buf_put(struct comedi_async *async, short x)
 {
 	unsigned int n = __comedi_buf_write_alloc(async, sizeof(short), 1);
+=======
+int comedi_buf_put(struct comedi_subdevice *s, unsigned short x)
+{
+	struct comedi_async *async = s->async;
+	unsigned int n = __comedi_buf_write_alloc(s, sizeof(short), 1);
+>>>>>>> v3.18
 
 	if (n < sizeof(short)) {
 		async->events |= COMEDI_CB_ERROR;
 		return 0;
 	}
+<<<<<<< HEAD
 	*(short *)(async->prealloc_buf + async->buf_write_ptr) = x;
 	comedi_buf_write_free(async, sizeof(short));
+=======
+	*(unsigned short *)(async->prealloc_buf + async->buf_write_ptr) = x;
+	comedi_buf_write_free(s, sizeof(short));
+>>>>>>> v3.18
 	return 1;
 }
 EXPORT_SYMBOL_GPL(comedi_buf_put);
 
+<<<<<<< HEAD
 int comedi_buf_get(struct comedi_async *async, short *x)
 {
 	unsigned int n = comedi_buf_read_n_available(async);
@@ -369,13 +608,32 @@ int comedi_buf_get(struct comedi_async *async, short *x)
 	comedi_buf_read_alloc(async, sizeof(short));
 	*x = *(short *)(async->prealloc_buf + async->buf_read_ptr);
 	comedi_buf_read_free(async, sizeof(short));
+=======
+int comedi_buf_get(struct comedi_subdevice *s, unsigned short *x)
+{
+	struct comedi_async *async = s->async;
+	unsigned int n = comedi_buf_read_n_available(s);
+
+	if (n < sizeof(short))
+		return 0;
+	comedi_buf_read_alloc(s, sizeof(short));
+	*x = *(unsigned short *)(async->prealloc_buf + async->buf_read_ptr);
+	comedi_buf_read_free(s, sizeof(short));
+>>>>>>> v3.18
 	return 1;
 }
 EXPORT_SYMBOL_GPL(comedi_buf_get);
 
+<<<<<<< HEAD
 void comedi_buf_memcpy_to(struct comedi_async *async, unsigned int offset,
 			  const void *data, unsigned int num_bytes)
 {
+=======
+void comedi_buf_memcpy_to(struct comedi_subdevice *s, unsigned int offset,
+			  const void *data, unsigned int num_bytes)
+{
+	struct comedi_async *async = s->async;
+>>>>>>> v3.18
 	unsigned int write_ptr = async->buf_write_ptr + offset;
 
 	if (write_ptr >= async->prealloc_bufsz)
@@ -399,10 +657,18 @@ void comedi_buf_memcpy_to(struct comedi_async *async, unsigned int offset,
 }
 EXPORT_SYMBOL_GPL(comedi_buf_memcpy_to);
 
+<<<<<<< HEAD
 void comedi_buf_memcpy_from(struct comedi_async *async, unsigned int offset,
 			    void *dest, unsigned int nbytes)
 {
 	void *src;
+=======
+void comedi_buf_memcpy_from(struct comedi_subdevice *s, unsigned int offset,
+			    void *dest, unsigned int nbytes)
+{
+	void *src;
+	struct comedi_async *async = s->async;
+>>>>>>> v3.18
 	unsigned int read_ptr = async->buf_read_ptr + offset;
 
 	if (read_ptr >= async->prealloc_bufsz)
@@ -425,3 +691,71 @@ void comedi_buf_memcpy_from(struct comedi_async *async, unsigned int offset,
 	}
 }
 EXPORT_SYMBOL_GPL(comedi_buf_memcpy_from);
+<<<<<<< HEAD
+=======
+
+/**
+ * comedi_write_array_to_buffer - write data to comedi buffer
+ * @s: comedi_subdevice struct
+ * @data: destination
+ * @num_bytes: number of bytes to write
+ *
+ * Writes up to num_bytes bytes of data to the comedi buffer associated with
+ * the subdevice, marks it as written and updates the acquisition scan
+ * progress.
+ *
+ * Returns the amount of data written in bytes.
+ */
+unsigned int comedi_write_array_to_buffer(struct comedi_subdevice *s,
+					  const void *data,
+					  unsigned int num_bytes)
+{
+	struct comedi_async *async = s->async;
+	unsigned int retval;
+
+	if (num_bytes == 0)
+		return 0;
+
+	retval = comedi_buf_write_alloc(s, num_bytes);
+	if (retval != num_bytes) {
+		dev_warn(s->device->class_dev, "buffer overrun\n");
+		async->events |= COMEDI_CB_OVERFLOW;
+		return 0;
+	}
+
+	comedi_buf_memcpy_to(s, 0, data, num_bytes);
+	comedi_buf_write_free(s, num_bytes);
+	comedi_inc_scan_progress(s, num_bytes);
+	async->events |= COMEDI_CB_BLOCK;
+
+	return num_bytes;
+}
+EXPORT_SYMBOL_GPL(comedi_write_array_to_buffer);
+
+/**
+ * comedi_read_array_from_buffer - read data from comedi buffer
+ * @s: comedi_subdevice struct
+ * @data: destination
+ * @num_bytes: number of bytes to read
+ *
+ * Reads up to num_bytes bytes of data from the comedi buffer associated with
+ * the subdevice, marks it as read and updates the acquisition scan progress.
+ *
+ * Returns the amount of data read in bytes.
+ */
+unsigned int comedi_read_array_from_buffer(struct comedi_subdevice *s,
+					   void *data, unsigned int num_bytes)
+{
+	if (num_bytes == 0)
+		return 0;
+
+	num_bytes = comedi_buf_read_alloc(s, num_bytes);
+	comedi_buf_memcpy_from(s, 0, data, num_bytes);
+	comedi_buf_read_free(s, num_bytes);
+	comedi_inc_scan_progress(s, num_bytes);
+	s->async->events |= COMEDI_CB_BLOCK;
+
+	return num_bytes;
+}
+EXPORT_SYMBOL_GPL(comedi_read_array_from_buffer);
+>>>>>>> v3.18

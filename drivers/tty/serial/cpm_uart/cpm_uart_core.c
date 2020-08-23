@@ -41,6 +41,11 @@
 #include <linux/bootmem.h>
 #include <linux/dma-mapping.h>
 #include <linux/fs_uart_pd.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 #include <linux/of_platform.h>
 #include <linux/gpio.h>
 #include <linux/of_gpio.h>
@@ -200,6 +205,7 @@ static void cpm_uart_stop_rx(struct uart_port *port)
 }
 
 /*
+<<<<<<< HEAD
  * Enable Modem status interrupts
  */
 static void cpm_uart_enable_ms(struct uart_port *port)
@@ -208,6 +214,8 @@ static void cpm_uart_enable_ms(struct uart_port *port)
 }
 
 /*
+=======
+>>>>>>> v3.18
  * Generate a break.
  */
 static void cpm_uart_break_ctl(struct uart_port *port, int break_state)
@@ -969,7 +977,11 @@ static void cpm_uart_config_port(struct uart_port *port, int flags)
  * Note that this is called with interrupts already disabled
  */
 static void cpm_uart_early_write(struct uart_cpm_port *pinfo,
+<<<<<<< HEAD
 		const char *string, u_int count)
+=======
+		const char *string, u_int count, bool handle_linefeed)
+>>>>>>> v3.18
 {
 	unsigned int i;
 	cbd_t __iomem *bdp, *bdbase;
@@ -1011,7 +1023,11 @@ static void cpm_uart_early_write(struct uart_cpm_port *pinfo,
 			bdp++;
 
 		/* if a LF, also do CR... */
+<<<<<<< HEAD
 		if (*string == 10) {
+=======
+		if (handle_linefeed && *string == 10) {
+>>>>>>> v3.18
 			while ((in_be16(&bdp->cbd_sc) & BD_SC_READY) != 0)
 				;
 
@@ -1109,7 +1125,11 @@ static void cpm_put_poll_char(struct uart_port *port,
 	static char ch[2];
 
 	ch[0] = (char)c;
+<<<<<<< HEAD
 	cpm_uart_early_write(pinfo, ch, 1);
+=======
+	cpm_uart_early_write(pinfo, ch, 1, false);
+>>>>>>> v3.18
 }
 #endif /* CONFIG_CONSOLE_POLL */
 
@@ -1120,7 +1140,10 @@ static struct uart_ops cpm_uart_pops = {
 	.stop_tx	= cpm_uart_stop_tx,
 	.start_tx	= cpm_uart_start_tx,
 	.stop_rx	= cpm_uart_stop_rx,
+<<<<<<< HEAD
 	.enable_ms	= cpm_uart_enable_ms,
+=======
+>>>>>>> v3.18
 	.break_ctl	= cpm_uart_break_ctl,
 	.startup	= cpm_uart_startup,
 	.shutdown	= cpm_uart_shutdown,
@@ -1207,14 +1230,47 @@ static int cpm_uart_init_port(struct device_node *np,
 	pinfo->port.fifosize = pinfo->tx_nrfifos * pinfo->tx_fifosize;
 	spin_lock_init(&pinfo->port.lock);
 
+<<<<<<< HEAD
 	pinfo->port.irq = of_irq_to_resource(np, 0, NULL);
+=======
+	pinfo->port.irq = irq_of_parse_and_map(np, 0);
+>>>>>>> v3.18
 	if (pinfo->port.irq == NO_IRQ) {
 		ret = -EINVAL;
 		goto out_pram;
 	}
 
+<<<<<<< HEAD
 	for (i = 0; i < NUM_GPIOS; i++)
 		pinfo->gpios[i] = of_get_gpio(np, i);
+=======
+	for (i = 0; i < NUM_GPIOS; i++) {
+		int gpio;
+
+		pinfo->gpios[i] = -1;
+
+		gpio = of_get_gpio(np, i);
+
+		if (gpio_is_valid(gpio)) {
+			ret = gpio_request(gpio, "cpm_uart");
+			if (ret) {
+				pr_err("can't request gpio #%d: %d\n", i, ret);
+				continue;
+			}
+			if (i == GPIO_RTS || i == GPIO_DTR)
+				ret = gpio_direction_output(gpio, 0);
+			else
+				ret = gpio_direction_input(gpio);
+			if (ret) {
+				pr_err("can't set direction for gpio #%d: %d\n",
+					i, ret);
+				gpio_free(gpio);
+				continue;
+			}
+			pinfo->gpios[i] = gpio;
+		}
+	}
+>>>>>>> v3.18
 
 #ifdef CONFIG_PPC_EARLY_DEBUG_CPM
 	udbg_putc = NULL;
@@ -1249,7 +1305,11 @@ static void cpm_uart_console_write(struct console *co, const char *s,
 		spin_lock_irqsave(&pinfo->port.lock, flags);
 	}
 
+<<<<<<< HEAD
 	cpm_uart_early_write(pinfo, s, count);
+=======
+	cpm_uart_early_write(pinfo, s, count, true);
+>>>>>>> v3.18
 
 	if (unlikely(nolock)) {
 		local_irq_restore(flags);
@@ -1384,7 +1444,11 @@ static int cpm_uart_probe(struct platform_device *ofdev)
 	if (index >= UART_NR)
 		return -ENODEV;
 
+<<<<<<< HEAD
 	dev_set_drvdata(&ofdev->dev, pinfo);
+=======
+	platform_set_drvdata(ofdev, pinfo);
+>>>>>>> v3.18
 
 	/* initialize the device pointer for the port */
 	pinfo->port.dev = &ofdev->dev;
@@ -1398,7 +1462,11 @@ static int cpm_uart_probe(struct platform_device *ofdev)
 
 static int cpm_uart_remove(struct platform_device *ofdev)
 {
+<<<<<<< HEAD
 	struct uart_cpm_port *pinfo = dev_get_drvdata(&ofdev->dev);
+=======
+	struct uart_cpm_port *pinfo = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 	return uart_remove_one_port(&cpm_reg, &pinfo->port);
 }
 

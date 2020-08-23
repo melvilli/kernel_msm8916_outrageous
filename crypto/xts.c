@@ -362,4 +362,7 @@ module_exit(crypto_module_exit);
 
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("XTS block cipher mode");
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("xts");
+=======
+>>>>>>> v3.18

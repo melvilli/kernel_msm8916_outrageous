@@ -4,7 +4,11 @@
 //
 // Confidence: Moderate
 // URL: http://coccinelle.lip6.fr/
+<<<<<<< HEAD
 // Options: -include_headers
+=======
+// Options: --include-headers
+>>>>>>> v3.18
 
 virtual context
 virtual org

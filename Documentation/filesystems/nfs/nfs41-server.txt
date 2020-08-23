@@ -5,11 +5,19 @@ Server support for minorversion 1 can be controlled using the
 by reading this file will contain either "+4.1" or "-4.1"
 correspondingly.
 
+<<<<<<< HEAD
 Currently, server support for minorversion 1 is disabled by default.
 It can be enabled at run time by writing the string "+4.1" to
 the /proc/fs/nfsd/versions control file.  Note that to write this
 control file, the nfsd service must be taken down.  Use your user-mode
 nfs-utils to set this up; see rpc.nfsd(8)
+=======
+Currently, server support for minorversion 1 is enabled by default.
+It can be disabled at run time by writing the string "-4.1" to
+the /proc/fs/nfsd/versions control file.  Note that to write this
+control file, the nfsd service must be taken down.  You can use rpc.nfsd
+for this; see rpc.nfsd(8).
+>>>>>>> v3.18
 
 (Warning: older servers will interpret "+4.1" and "-4.1" as "+4" and
 "-4", respectively.  Therefore, code meant to work on both new and old
@@ -29,6 +37,7 @@ are still under development out of tree.
 See http://wiki.linux-nfs.org/wiki/index.php/PNFS_prototype_design
 for more information.
 
+<<<<<<< HEAD
 The current implementation is intended for developers only: while it
 does support ordinary file operations on clients we have tested against
 (including the linux client), it is incomplete in ways which may limit
@@ -52,6 +61,8 @@ implementation:
 	  continue to indefinitely allow opens of the file under the old
 	  name.
 
+=======
+>>>>>>> v3.18
 The table below, taken from the NFSv4.1 document, lists
 the operations that are mandatory to implement (REQ), optional
 (OPT), and NFSv4.0 operations that are required not to implement (MNI)
@@ -169,6 +180,19 @@ NS*| CB_WANTS_CANCELLED      | OPT       | FDELG,      | Section 20.10 |
 
 Implementation notes:
 
+<<<<<<< HEAD
+=======
+SSV:
+* The spec claims this is mandatory, but we don't actually know of any
+  implementations, so we're ignoring it for now.  The server returns
+  NFS4ERR_ENCR_ALG_UNSUPP on EXCHANGE_ID, which should be future-proof.
+
+GSS on the backchannel:
+* Again, theoretically required but not widely implemented (in
+  particular, the current Linux client doesn't request it).  We return
+  NFS4ERR_ENCR_ALG_UNSUPP on CREATE_SESSION.
+
+>>>>>>> v3.18
 DELEGPURGE:
 * mandatory only for servers that support CLAIM_DELEGATE_PREV and/or
   CLAIM_DELEG_PREV_FH (which allows clients to keep delegations that
@@ -176,7 +200,10 @@ DELEGPURGE:
   now.
 
 EXCHANGE_ID:
+<<<<<<< HEAD
 * only SP4_NONE state protection supported
+=======
+>>>>>>> v3.18
 * implementation ids are ignored
 
 CREATE_SESSION:
@@ -190,7 +217,10 @@ Nonstandard compound limitations:
   ca_maxrequestsize request and a ca_maxresponsesize reply, so we may
   fail to live up to the promise we made in CREATE_SESSION fore channel
   negotiation.
+<<<<<<< HEAD
 * No more than one read-like operation allowed per compound; encoding
   replies that cross page boundaries (except for read data) not handled.
+=======
+>>>>>>> v3.18
 
 See also http://wiki.linux-nfs.org/wiki/index.php/Server_4.0_and_4.1_issues.

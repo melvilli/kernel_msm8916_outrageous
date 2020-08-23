@@ -58,6 +58,7 @@ void (*mach_halt)(void);
 void (*mach_power_off)(void);
 
 #ifdef CONFIG_M68000
+<<<<<<< HEAD
 #define CPU_NAME	"MC68000"
 #endif
 #ifdef CONFIG_M68328
@@ -69,6 +70,18 @@ void (*mach_power_off)(void);
 #ifdef CONFIG_M68VZ328
 #define CPU_NAME	"MC68VZ328"
 #endif
+=======
+#if defined(CONFIG_M68328)
+#define CPU_NAME	"MC68328"
+#elif defined(CONFIG_M68EZ328)
+#define CPU_NAME	"MC68EZ328"
+#elif defined(CONFIG_M68VZ328)
+#define CPU_NAME	"MC68VZ328"
+#else
+#define CPU_NAME	"MC68000"
+#endif
+#endif /* CONFIG_M68000 */
+>>>>>>> v3.18
 #ifdef CONFIG_M68360
 #define CPU_NAME	"MC68360"
 #endif
@@ -118,7 +131,11 @@ void (*mach_power_off)(void);
  *
  * Returns:
  */
+<<<<<<< HEAD
 void parse_uboot_commandline(char *commandp, int size)
+=======
+static void __init parse_uboot_commandline(char *commandp, int size)
+>>>>>>> v3.18
 {
 	extern unsigned long _init_sp;
 	unsigned long *sp;

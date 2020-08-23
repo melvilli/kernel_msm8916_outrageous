@@ -97,6 +97,7 @@ const struct address_space_operations gfs2_meta_aops = {
 	.releasepage = gfs2_releasepage,
 };
 
+<<<<<<< HEAD
 /**
  * gfs2_meta_sync - Sync all buffers associated with a glock
  * @gl: The glock
@@ -114,6 +115,12 @@ void gfs2_meta_sync(struct gfs2_glock *gl)
 	if (error)
 		gfs2_io_error(gl->gl_sbd);
 }
+=======
+const struct address_space_operations gfs2_rgrp_aops = {
+	.writepage = gfs2_aspace_writepage,
+	.releasepage = gfs2_releasepage,
+};
+>>>>>>> v3.18
 
 /**
  * gfs2_getbuf - Get a buffer with a given address space
@@ -134,6 +141,12 @@ struct buffer_head *gfs2_getbuf(struct gfs2_glock *gl, u64 blkno, int create)
 	unsigned long index;
 	unsigned int bufnum;
 
+<<<<<<< HEAD
+=======
+	if (mapping == NULL)
+		mapping = &sdp->sd_aspace;
+
+>>>>>>> v3.18
 	shift = PAGE_CACHE_SHIFT - sdp->sd_sb.sb_bsize_shift;
 	index = blkno >> shift;             /* convert block to page */
 	bufnum = blkno - (index << shift);  /* block buf index within page */
@@ -146,7 +159,12 @@ struct buffer_head *gfs2_getbuf(struct gfs2_glock *gl, u64 blkno, int create)
 			yield();
 		}
 	} else {
+<<<<<<< HEAD
 		page = find_lock_page(mapping, index);
+=======
+		page = find_get_page_flags(mapping, index,
+						FGP_LOCK|FGP_ACCESSED);
+>>>>>>> v3.18
 		if (!page)
 			return NULL;
 	}
@@ -163,7 +181,10 @@ struct buffer_head *gfs2_getbuf(struct gfs2_glock *gl, u64 blkno, int create)
 		map_bh(bh, sdp->sd_vfs, blkno);
 
 	unlock_page(page);
+<<<<<<< HEAD
 	mark_page_accessed(page);
+=======
+>>>>>>> v3.18
 	page_cache_release(page);
 
 	return bh;
@@ -276,11 +297,16 @@ void gfs2_remove_from_journal(struct buffer_head *bh, struct gfs2_trans *tr, int
 	struct address_space *mapping = bh->b_page->mapping;
 	struct gfs2_sbd *sdp = gfs2_mapping2sbd(mapping);
 	struct gfs2_bufdata *bd = bh->b_private;
+<<<<<<< HEAD
+=======
+	int was_pinned = 0;
+>>>>>>> v3.18
 
 	if (test_clear_buffer_pinned(bh)) {
 		trace_gfs2_pin(bd, 0);
 		atomic_dec(&sdp->sd_log_pinned);
 		list_del_init(&bd->bd_list);
+<<<<<<< HEAD
 		if (meta) {
 			gfs2_assert_warn(sdp, sdp->sd_log_num_buf);
 			sdp->sd_log_num_buf--;
@@ -291,16 +317,31 @@ void gfs2_remove_from_journal(struct buffer_head *bh, struct gfs2_trans *tr, int
 			tr->tr_num_databuf_rm++;
 		}
 		tr->tr_touched = 1;
+=======
+		if (meta)
+			tr->tr_num_buf_rm++;
+		else
+			tr->tr_num_databuf_rm++;
+		tr->tr_touched = 1;
+		was_pinned = 1;
+>>>>>>> v3.18
 		brelse(bh);
 	}
 	if (bd) {
 		spin_lock(&sdp->sd_ail_lock);
 		if (bd->bd_tr) {
+<<<<<<< HEAD
 			gfs2_remove_from_ail(bd);
 			bh->b_private = NULL;
 			bd->bd_bh = NULL;
 			bd->bd_blkno = bh->b_blocknr;
 			gfs2_trans_add_revoke(sdp, bd);
+=======
+			gfs2_trans_add_revoke(sdp, bd);
+		} else if (was_pinned) {
+			bh->b_private = NULL;
+			kmem_cache_free(gfs2_bufdata_cachep, bd);
+>>>>>>> v3.18
 		}
 		spin_unlock(&sdp->sd_ail_lock);
 	}

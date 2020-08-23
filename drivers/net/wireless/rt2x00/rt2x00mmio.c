@@ -13,9 +13,13 @@
 	GNU General Public License for more details.
 
 	You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
 	along with this program; if not, write to the
 	Free Software Foundation, Inc.,
 	59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+	along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
  */
 
 /*
@@ -121,6 +125,7 @@ static int rt2x00mmio_alloc_queue_dma(struct rt2x00_dev *rt2x00dev,
 	/*
 	 * Allocate DMA memory for descriptor and buffer.
 	 */
+<<<<<<< HEAD
 	addr = dma_alloc_coherent(rt2x00dev->dev,
 				  queue->limit * queue->desc_size,
 				  &dma, GFP_KERNEL);
@@ -129,6 +134,14 @@ static int rt2x00mmio_alloc_queue_dma(struct rt2x00_dev *rt2x00dev,
 
 	memset(addr, 0, queue->limit * queue->desc_size);
 
+=======
+	addr = dma_zalloc_coherent(rt2x00dev->dev,
+				   queue->limit * queue->desc_size, &dma,
+				   GFP_KERNEL);
+	if (!addr)
+		return -ENOMEM;
+
+>>>>>>> v3.18
 	/*
 	 * Initialize all queue entries to contain valid addresses.
 	 */

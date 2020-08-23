@@ -11,12 +11,26 @@
 #include <linux/acpi.h>
 
 #ifdef CONFIG_ACPI
+<<<<<<< HEAD
 extern acpi_status pci_acpi_add_bus_pm_notifier(struct acpi_device *dev,
 						 struct pci_bus *pci_bus);
 extern acpi_status pci_acpi_remove_bus_pm_notifier(struct acpi_device *dev);
 extern acpi_status pci_acpi_add_pm_notifier(struct acpi_device *dev,
 					     struct pci_dev *pci_dev);
 extern acpi_status pci_acpi_remove_pm_notifier(struct acpi_device *dev);
+=======
+extern acpi_status pci_acpi_add_bus_pm_notifier(struct acpi_device *dev);
+static inline acpi_status pci_acpi_remove_bus_pm_notifier(struct acpi_device *dev)
+{
+	return acpi_remove_pm_notifier(dev);
+}
+extern acpi_status pci_acpi_add_pm_notifier(struct acpi_device *dev,
+					     struct pci_dev *pci_dev);
+static inline acpi_status pci_acpi_remove_pm_notifier(struct acpi_device *dev)
+{
+	return acpi_remove_pm_notifier(dev);
+}
+>>>>>>> v3.18
 extern phys_addr_t acpi_pci_root_get_mcfg_addr(acpi_handle handle);
 
 static inline acpi_handle acpi_find_root_bridge_handle(struct pci_dev *pdev)
@@ -27,7 +41,11 @@ static inline acpi_handle acpi_find_root_bridge_handle(struct pci_dev *pdev)
 	while (!pci_is_root_bus(pbus))
 		pbus = pbus->parent;
 
+<<<<<<< HEAD
 	return DEVICE_ACPI_HANDLE(pbus->bridge);
+=======
+	return ACPI_HANDLE(pbus->bridge);
+>>>>>>> v3.18
 }
 
 static inline acpi_handle acpi_pci_get_bridge_handle(struct pci_bus *pbus)
@@ -36,10 +54,22 @@ static inline acpi_handle acpi_pci_get_bridge_handle(struct pci_bus *pbus)
 
 	if (pci_is_root_bus(pbus))
 		dev = pbus->bridge;
+<<<<<<< HEAD
 	else
 		dev = &pbus->self->dev;
 
 	return DEVICE_ACPI_HANDLE(dev);
+=======
+	else {
+		/* If pbus is a virtual bus, there is no bridge to it */
+		if (!pbus->self)
+			return NULL;
+
+		dev = &pbus->self->dev;
+	}
+
+	return ACPI_HANDLE(dev);
+>>>>>>> v3.18
 }
 
 void acpi_pci_add_bus(struct pci_bus *bus);
@@ -47,17 +77,26 @@ void acpi_pci_remove_bus(struct pci_bus *bus);
 
 #ifdef	CONFIG_ACPI_PCI_SLOT
 void acpi_pci_slot_init(void);
+<<<<<<< HEAD
 void acpi_pci_slot_enumerate(struct pci_bus *bus, acpi_handle handle);
 void acpi_pci_slot_remove(struct pci_bus *bus);
 #else
 static inline void acpi_pci_slot_init(void) { }
 static inline void acpi_pci_slot_enumerate(struct pci_bus *bus,
 					   acpi_handle handle) { }
+=======
+void acpi_pci_slot_enumerate(struct pci_bus *bus);
+void acpi_pci_slot_remove(struct pci_bus *bus);
+#else
+static inline void acpi_pci_slot_init(void) { }
+static inline void acpi_pci_slot_enumerate(struct pci_bus *bus) { }
+>>>>>>> v3.18
 static inline void acpi_pci_slot_remove(struct pci_bus *bus) { }
 #endif
 
 #ifdef	CONFIG_HOTPLUG_PCI_ACPI
 void acpiphp_init(void);
+<<<<<<< HEAD
 void acpiphp_enumerate_slots(struct pci_bus *bus, acpi_handle handle);
 void acpiphp_remove_slots(struct pci_bus *bus);
 void acpiphp_check_host_bridge(acpi_handle handle);
@@ -67,6 +106,16 @@ static inline void acpiphp_enumerate_slots(struct pci_bus *bus,
 					   acpi_handle handle) { }
 static inline void acpiphp_remove_slots(struct pci_bus *bus) { }
 static inline void acpiphp_check_host_bridge(acpi_handle handle) { }
+=======
+void acpiphp_enumerate_slots(struct pci_bus *bus);
+void acpiphp_remove_slots(struct pci_bus *bus);
+void acpiphp_check_host_bridge(struct acpi_device *adev);
+#else
+static inline void acpiphp_init(void) { }
+static inline void acpiphp_enumerate_slots(struct pci_bus *bus) { }
+static inline void acpiphp_remove_slots(struct pci_bus *bus) { }
+static inline void acpiphp_check_host_bridge(struct acpi_device *adev) { }
+>>>>>>> v3.18
 #endif
 
 #else	/* CONFIG_ACPI */

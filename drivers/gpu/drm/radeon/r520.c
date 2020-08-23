@@ -312,6 +312,12 @@ int r520_init(struct radeon_device *rdev)
 		return r;
 	rv515_set_safe_registers(rdev);
 
+<<<<<<< HEAD
+=======
+	/* Initialize power management */
+	radeon_pm_init(rdev);
+
+>>>>>>> v3.18
 	rdev->accel_working = true;
 	r = r520_startup(rdev);
 	if (r) {

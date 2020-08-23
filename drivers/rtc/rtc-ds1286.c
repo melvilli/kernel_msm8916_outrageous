@@ -353,18 +353,24 @@ static int ds1286_probe(struct platform_device *pdev)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int ds1286_remove(struct platform_device *pdev)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 static struct platform_driver ds1286_platform_driver = {
 	.driver		= {
 		.name	= "rtc-ds1286",
 		.owner	= THIS_MODULE,
 	},
 	.probe		= ds1286_probe,
+<<<<<<< HEAD
 	.remove		= ds1286_remove,
+=======
+>>>>>>> v3.18
 };
 
 module_platform_driver(ds1286_platform_driver);

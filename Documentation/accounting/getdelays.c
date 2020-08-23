@@ -272,7 +272,11 @@ int main(int argc, char *argv[])
 	char *logfile = NULL;
 	int loop = 0;
 	int containerset = 0;
+<<<<<<< HEAD
 	char containerpath[1024];
+=======
+	char *containerpath = NULL;
+>>>>>>> v3.18
 	int cfd = 0;
 	int forking = 0;
 	sigset_t sigset;
@@ -299,7 +303,11 @@ int main(int argc, char *argv[])
 			break;
 		case 'C':
 			containerset = 1;
+<<<<<<< HEAD
 			strncpy(containerpath, optarg, strlen(optarg) + 1);
+=======
+			containerpath = optarg;
+>>>>>>> v3.18
 			break;
 		case 'w':
 			logfile = strdup(optarg);
@@ -314,6 +322,10 @@ int main(int argc, char *argv[])
 			break;
 		case 'm':
 			strncpy(cpumask, optarg, sizeof(cpumask));
+<<<<<<< HEAD
+=======
+			cpumask[sizeof(cpumask) - 1] = '\0';
+>>>>>>> v3.18
 			maskset = 1;
 			printf("cpumask %s maskset %d\n", cpumask, maskset);
 			break;

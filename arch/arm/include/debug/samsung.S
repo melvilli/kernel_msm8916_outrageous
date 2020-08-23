@@ -9,7 +9,11 @@
  * published by the Free Software Foundation.
 */
 
+<<<<<<< HEAD
 #include <plat/regs-serial.h>
+=======
+#include <linux/serial_s3c.h>
+>>>>>>> v3.18
 
 /* The S5PV210/S5PC110 implementations are as belows. */
 

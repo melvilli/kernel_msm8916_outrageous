@@ -25,6 +25,7 @@
 #include <asm/system_misc.h>
 #include <asm/system_info.h>
 #include <asm/tlbflush.h>
+<<<<<<< HEAD
 #if defined(CONFIG_ARCH_MSM_SCORPION) && !defined(CONFIG_MSM_SMP)
 #include <asm/io.h>
 #include <mach/msm_iomap.h>
@@ -34,6 +35,11 @@
 
 #include <trace/events/exception.h>
 
+=======
+
+#include "fault.h"
+
+>>>>>>> v3.18
 #ifdef CONFIG_MMU
 
 #ifdef CONFIG_KPROBES
@@ -170,8 +176,11 @@ __do_user_fault(struct task_struct *tsk, unsigned long addr,
 {
 	struct siginfo si;
 
+<<<<<<< HEAD
 	trace_user_fault(tsk, addr, fsr);
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DEBUG_USER
 	if (((user_debug & UDBG_SEGV) && (sig == SIGSEGV)) ||
 	    ((user_debug & UDBG_BUS)  && (sig == SIGBUS))) {
@@ -282,10 +291,17 @@ do_page_fault(unsigned long addr, unsigned int fsr, struct pt_regs *regs)
 		local_irq_enable();
 
 	/*
+<<<<<<< HEAD
 	 * If we're in an interrupt, or have no irqs, or have no user
 	 * context, we must not take the fault..
 	 */
 	if (in_atomic() || irqs_disabled() || !mm)
+=======
+	 * If we're in an interrupt or have no user
+	 * context, we must not take the fault..
+	 */
+	if (in_atomic() || !mm)
+>>>>>>> v3.18
 		goto no_context;
 
 	if (user_mode(regs))
@@ -502,12 +518,20 @@ do_translation_fault(unsigned long addr, unsigned int fsr,
  * Some section permission faults need to be handled gracefully.
  * They can happen due to a __{get,put}_user during an oops.
  */
+<<<<<<< HEAD
+=======
+#ifndef CONFIG_ARM_LPAE
+>>>>>>> v3.18
 static int
 do_sect_fault(unsigned long addr, unsigned int fsr, struct pt_regs *regs)
 {
 	do_bad_area(addr, fsr, regs);
 	return 0;
 }
+<<<<<<< HEAD
+=======
+#endif /* CONFIG_ARM_LPAE */
+>>>>>>> v3.18
 
 /*
  * This abort handler always returns "fault".
@@ -518,6 +542,7 @@ do_bad(unsigned long addr, unsigned int fsr, struct pt_regs *regs)
 	return 1;
 }
 
+<<<<<<< HEAD
 #if defined(CONFIG_ARCH_MSM_SCORPION) && !defined(CONFIG_MSM_SMP)
 #define __str(x) #x
 #define MRC(x, v1, v2, v4, v5, v6) do {					\
@@ -561,6 +586,8 @@ do_imprecise_ext(unsigned long addr, unsigned int fsr, struct pt_regs *regs)
 	return 1;
 }
 
+=======
+>>>>>>> v3.18
 struct fsr_info {
 	int	(*fn)(unsigned long addr, unsigned int fsr, struct pt_regs *regs);
 	int	sig;
@@ -600,8 +627,11 @@ do_DataAbort(unsigned long addr, unsigned int fsr, struct pt_regs *regs)
 	if (!inf->fn(addr, fsr & ~FSR_LNX_PF, regs))
 		return;
 
+<<<<<<< HEAD
 	trace_unhandled_abort(regs, addr, fsr);
 
+=======
+>>>>>>> v3.18
 	printk(KERN_ALERT "Unhandled fault: %s (0x%03x) at 0x%08lx\n",
 		inf->name, fsr, addr);
 
@@ -634,8 +664,11 @@ do_PrefetchAbort(unsigned long addr, unsigned int ifsr, struct pt_regs *regs)
 	if (!inf->fn(addr, ifsr | FSR_LNX_PF, regs))
 		return;
 
+<<<<<<< HEAD
 	trace_unhandled_abort(regs, addr, ifsr);
 
+=======
+>>>>>>> v3.18
 	printk(KERN_ALERT "Unhandled prefetch abort: %s (0x%03x) at 0x%08lx\n",
 		inf->name, ifsr, addr);
 

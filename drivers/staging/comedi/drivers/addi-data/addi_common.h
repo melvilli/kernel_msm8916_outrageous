@@ -18,6 +18,7 @@
 #include <linux/sched.h>
 #include <linux/interrupt.h>
 
+<<<<<<< HEAD
 #define LOBYTE(W)	(unsigned char)((W) & 0xFF)
 #define HIBYTE(W)	(unsigned char)(((W) >> 8) & 0xFF)
 #define MAKEWORD(H, L)	(unsigned short)((L) | ((H) << 8))
@@ -43,6 +44,8 @@
 /* Structures */
 
 /* structure for the boardtype */
+=======
+>>>>>>> v3.18
 struct addi_board {
 	const char *pc_DriverName;	/*  driver name */
 	int i_IorangeBase1;
@@ -55,17 +58,24 @@ struct addi_board {
 	int i_AiMaxdata;	/*  resolution of A/D */
 	int i_AoMaxdata;	/*  resolution of D/A */
 	const struct comedi_lrange *pr_AiRangelist;	/* rangelist for A/D */
+<<<<<<< HEAD
 	const struct comedi_lrange *pr_AoRangelist;	/* rangelist for D/A */
+=======
+>>>>>>> v3.18
 
 	int i_NbrDiChannel;	/*  Number of DI channels */
 	int i_NbrDoChannel;	/*  Number of DO channels */
 	int i_DoMaxdata;	/*  data to set all channels high */
 
+<<<<<<< HEAD
 	int i_NbrTTLChannel;	/*  Number of TTL channels */
 
 	int i_Dma;		/*  dma present or not */
 	int i_Timer;		/*    timer subdevice present or not */
 	unsigned char b_AvailableConvertUnit;
+=======
+	int i_Timer;		/*    timer subdevice present or not */
+>>>>>>> v3.18
 	unsigned int ui_MinAcquisitiontimeNs;	/*  Minimum Acquisition in Nano secs */
 	unsigned int ui_MinDelaytimeNs;	/*  Minimum Delay in Nano secs */
 
@@ -90,12 +100,17 @@ struct addi_board {
 	int (*ai_cancel)(struct comedi_device *, struct comedi_subdevice *);
 
 	/* Analog Output */
+<<<<<<< HEAD
 	int (*ao_config)(struct comedi_device *, struct comedi_subdevice *,
 			 struct comedi_insn *, unsigned int *);
 	int (*ao_write)(struct comedi_device *, struct comedi_subdevice *,
 			struct comedi_insn *, unsigned int *);
 	int (*ao_bits)(struct comedi_device *, struct comedi_subdevice *,
 		       struct comedi_insn *, unsigned int *);
+=======
+	int (*ao_write)(struct comedi_device *, struct comedi_subdevice *,
+			struct comedi_insn *, unsigned int *);
+>>>>>>> v3.18
 
 	/* Digital Input */
 	int (*di_config)(struct comedi_device *, struct comedi_subdevice *,
@@ -126,6 +141,7 @@ struct addi_board {
 			  struct comedi_insn *, unsigned int *);
 	int (*timer_bits)(struct comedi_device *, struct comedi_subdevice *,
 			  struct comedi_insn *, unsigned int *);
+<<<<<<< HEAD
 
 	/* TTL IO */
 	int (*ttl_config)(struct comedi_device *, struct comedi_subdevice *,
@@ -284,10 +300,16 @@ union str_ModuleInfo {
 /* Private structure for the addi_apci3120 driver */
 struct addi_private {
 
+=======
+};
+
+struct addi_private {
+>>>>>>> v3.18
 	int iobase;
 	int i_IobaseAmcc;	/*  base+size for AMCC chip */
 	int i_IobaseAddon;	/* addon base address */
 	int i_IobaseReserved;
+<<<<<<< HEAD
 	void __iomem *dw_AiBase;
 	unsigned char b_AiContinuous;	/*  we do unlimited AI */
 	unsigned char b_AiInitialisation;
@@ -336,11 +358,36 @@ struct addi_private {
 	unsigned int ui_EocEosConversionTime;
 	unsigned char b_EocEosConversionTimeBase;
 	unsigned char b_SingelDiff;
+=======
+	unsigned int ui_AiActualScan;	/* how many scans we finished */
+	unsigned int ui_AiNbrofChannels;	/*  how many channels is measured */
+	unsigned int ui_AiChannelList[32];	/*  actual chanlist */
+	unsigned int ui_AiReadData[32];
+	unsigned short us_UseDma;	/*  To use Dma or not */
+	unsigned char b_DmaDoubleBuffer;	/*  we can use double buffering */
+	unsigned int ui_DmaActualBuffer;	/*  which buffer is used now */
+	unsigned short *ul_DmaBufferVirtual[2];	/*  pointers to DMA buffer */
+	dma_addr_t ul_DmaBufferHw[2];		/*  hw address of DMA buff */
+	unsigned int ui_DmaBufferSize[2];	/*  size of dma buffer in bytes */
+	unsigned int ui_DmaBufferUsesize[2];	/*  which size we may now used for transfer */
+	unsigned char b_DigitalOutputRegister;	/*  Digital Output Register */
+	unsigned char b_OutputMemoryStatus;
+	unsigned char b_TimerSelectMode;	/*  Contain data written at iobase + 0C */
+	unsigned char b_ModeSelectRegister;	/*  Contain data written at iobase + 0E */
+	unsigned short us_OutputRegister;	/*  Contain data written at iobase + 0 */
+	unsigned char b_Timer2Mode;	/*  Specify the timer 2 mode */
+	unsigned char b_Timer2Interrupt;	/* Timer2  interrupt enable or disable */
+	unsigned int ai_running:1;
+	unsigned char b_InterruptMode;	/*  eoc eos or dma */
+	unsigned char b_EocEosInterrupt;	/*  Enable disable eoc eos interrupt */
+	unsigned int ui_EocEosConversionTime;
+>>>>>>> v3.18
 	unsigned char b_ExttrigEnable;	/* To enable or disable external trigger */
 
 	/* Pointer to the current process */
 	struct task_struct *tsk_Current;
 
+<<<<<<< HEAD
 	/* Hardware board infos for 1710 */
 	struct {
 		unsigned int ui_Address;	/* Board address */
@@ -367,6 +414,8 @@ struct addi_private {
 	union str_ModuleInfo s_ModuleInfo[4];
 	unsigned int ul_TTLPortConfiguration[10];
 
+=======
+>>>>>>> v3.18
 	/* Parameters read from EEPROM overriding static board info */
 	struct {
 		int i_NbrAiChannel;	/*  num of A/D chans */
@@ -376,7 +425,10 @@ struct addi_private {
 		int i_NbrDiChannel;	/*  Number of DI channels */
 		int i_NbrDoChannel;	/*  Number of DO channels */
 		int i_DoMaxdata;	/*  data to set all channels high */
+<<<<<<< HEAD
 		int i_Dma;		/*  dma present or not */
+=======
+>>>>>>> v3.18
 		int i_Timer;		/*  timer subdevice present or not */
 		unsigned int ui_MinAcquisitiontimeNs;
 					/*  Minimum Acquisition in Nano secs */

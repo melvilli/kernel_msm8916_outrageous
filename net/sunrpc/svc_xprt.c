@@ -23,6 +23,10 @@ static int svc_deferred_recv(struct svc_rqst *rqstp);
 static struct cache_deferred_req *svc_defer(struct cache_req *req);
 static void svc_age_temp_xprts(unsigned long closure);
 static void svc_delete_xprt(struct svc_xprt *xprt);
+<<<<<<< HEAD
+=======
+static void svc_xprt_do_enqueue(struct svc_xprt *xprt);
+>>>>>>> v3.18
 
 /* apparently the "standard" is that clients close
  * idle connections after 5 minutes, servers after
@@ -222,11 +226,20 @@ static void svc_xprt_received(struct svc_xprt *xprt)
 	if (!test_bit(XPT_BUSY, &xprt->xpt_flags))
 		return;
 	/* As soon as we clear busy, the xprt could be closed and
+<<<<<<< HEAD
 	 * 'put', so we need a reference to call svc_xprt_enqueue with:
 	 */
 	svc_xprt_get(xprt);
 	clear_bit(XPT_BUSY, &xprt->xpt_flags);
 	svc_xprt_enqueue(xprt);
+=======
+	 * 'put', so we need a reference to call svc_xprt_do_enqueue with:
+	 */
+	svc_xprt_get(xprt);
+	smp_mb__before_atomic();
+	clear_bit(XPT_BUSY, &xprt->xpt_flags);
+	svc_xprt_do_enqueue(xprt);
+>>>>>>> v3.18
 	svc_xprt_put(xprt);
 }
 
@@ -335,12 +348,16 @@ static bool svc_xprt_has_something_to_do(struct svc_xprt *xprt)
 	return false;
 }
 
+<<<<<<< HEAD
 /*
  * Queue up a transport with data pending. If there are idle nfsd
  * processes, wake 'em up.
  *
  */
 void svc_xprt_enqueue(struct svc_xprt *xprt)
+=======
+static void svc_xprt_do_enqueue(struct svc_xprt *xprt)
+>>>>>>> v3.18
 {
 	struct svc_pool *pool;
 	struct svc_rqst	*rqstp;
@@ -349,6 +366,7 @@ void svc_xprt_enqueue(struct svc_xprt *xprt)
 	if (!svc_xprt_has_something_to_do(xprt))
 		return;
 
+<<<<<<< HEAD
 	cpu = get_cpu();
 	pool = svc_pool_for_cpu(xprt->xpt_server, cpu);
 	put_cpu();
@@ -363,6 +381,8 @@ void svc_xprt_enqueue(struct svc_xprt *xprt)
 
 	pool->sp_stats.packets++;
 
+=======
+>>>>>>> v3.18
 	/* Mark transport as busy. It will remain in this state until
 	 * the provider calls svc_xprt_received. We update XPT_BUSY
 	 * atomically because it also guards against trying to enqueue
@@ -371,9 +391,21 @@ void svc_xprt_enqueue(struct svc_xprt *xprt)
 	if (test_and_set_bit(XPT_BUSY, &xprt->xpt_flags)) {
 		/* Don't enqueue transport while already enqueued */
 		dprintk("svc: transport %p busy, not enqueued\n", xprt);
+<<<<<<< HEAD
 		goto out_unlock;
 	}
 
+=======
+		return;
+	}
+
+	cpu = get_cpu();
+	pool = svc_pool_for_cpu(xprt->xpt_server, cpu);
+	spin_lock_bh(&pool->sp_lock);
+
+	pool->sp_stats.packets++;
+
+>>>>>>> v3.18
 	if (!list_empty(&pool->sp_threads)) {
 		rqstp = list_entry(pool->sp_threads.next,
 				   struct svc_rqst,
@@ -385,18 +417,47 @@ void svc_xprt_enqueue(struct svc_xprt *xprt)
 			printk(KERN_ERR
 				"svc_xprt_enqueue: server %p, rq_xprt=%p!\n",
 				rqstp, rqstp->rq_xprt);
+<<<<<<< HEAD
 		rqstp->rq_xprt = xprt;
 		svc_xprt_get(xprt);
 		pool->sp_stats.threads_woken++;
 		wake_up(&rqstp->rq_wait);
+=======
+		/* Note the order of the following 3 lines:
+		 * We want to assign xprt to rqstp->rq_xprt only _after_
+		 * we've woken up the process, so that we don't race with
+		 * the lockless check in svc_get_next_xprt().
+		 */
+		svc_xprt_get(xprt);
+		wake_up_process(rqstp->rq_task);
+		rqstp->rq_xprt = xprt;
+		pool->sp_stats.threads_woken++;
+>>>>>>> v3.18
 	} else {
 		dprintk("svc: transport %p put into queue\n", xprt);
 		list_add_tail(&xprt->xpt_ready, &pool->sp_sockets);
 		pool->sp_stats.sockets_queued++;
 	}
 
+<<<<<<< HEAD
 out_unlock:
 	spin_unlock_bh(&pool->sp_lock);
+=======
+	spin_unlock_bh(&pool->sp_lock);
+	put_cpu();
+}
+
+/*
+ * Queue up a transport with data pending. If there are idle nfsd
+ * processes, wake 'em up.
+ *
+ */
+void svc_xprt_enqueue(struct svc_xprt *xprt)
+{
+	if (test_bit(XPT_BUSY, &xprt->xpt_flags))
+		return;
+	svc_xprt_do_enqueue(xprt);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(svc_xprt_enqueue);
 
@@ -439,6 +500,11 @@ void svc_reserve(struct svc_rqst *rqstp, int space)
 		atomic_sub((rqstp->rq_reserved - space), &xprt->xpt_reserved);
 		rqstp->rq_reserved = space;
 
+<<<<<<< HEAD
+=======
+		if (xprt->xpt_ops->xpo_adjust_wspace)
+			xprt->xpt_ops->xpo_adjust_wspace(xprt);
+>>>>>>> v3.18
 		svc_xprt_enqueue(xprt);
 	}
 }
@@ -498,7 +564,11 @@ void svc_wake_up(struct svc_serv *serv)
 			svc_thread_dequeue(pool, rqstp);
 			rqstp->rq_xprt = NULL;
 			 */
+<<<<<<< HEAD
 			wake_up(&rqstp->rq_wait);
+=======
+			wake_up_process(rqstp->rq_task);
+>>>>>>> v3.18
 		} else
 			pool->sp_task_pending = 1;
 		spin_unlock_bh(&pool->sp_lock);
@@ -571,7 +641,11 @@ static void svc_check_conn_limits(struct svc_serv *serv)
 	}
 }
 
+<<<<<<< HEAD
 int svc_alloc_arg(struct svc_rqst *rqstp)
+=======
+static int svc_alloc_arg(struct svc_rqst *rqstp)
+>>>>>>> v3.18
 {
 	struct svc_serv *serv = rqstp->rq_server;
 	struct xdr_buf *arg;
@@ -597,6 +671,10 @@ int svc_alloc_arg(struct svc_rqst *rqstp)
 			}
 			rqstp->rq_pages[i] = p;
 		}
+<<<<<<< HEAD
+=======
+	rqstp->rq_page_end = &rqstp->rq_pages[i];
+>>>>>>> v3.18
 	rqstp->rq_pages[i++] = NULL; /* this might be seen in nfs_read_actor */
 
 	/* Make arg->head point to first page and arg->pages point to rest */
@@ -612,12 +690,20 @@ int svc_alloc_arg(struct svc_rqst *rqstp)
 	return 0;
 }
 
+<<<<<<< HEAD
 struct svc_xprt *svc_get_next_xprt(struct svc_rqst *rqstp, long timeout)
 {
 	struct svc_xprt *xprt;
 	struct svc_pool		*pool = rqstp->rq_pool;
 	DECLARE_WAITQUEUE(wait, current);
 	long			time_left;
+=======
+static struct svc_xprt *svc_get_next_xprt(struct svc_rqst *rqstp, long timeout)
+{
+	struct svc_xprt *xprt;
+	struct svc_pool		*pool = rqstp->rq_pool;
+	long			time_left = 0;
+>>>>>>> v3.18
 
 	/* Normally we will wait up to 5 seconds for any required
 	 * cache information to be provided.
@@ -639,18 +725,25 @@ struct svc_xprt *svc_get_next_xprt(struct svc_rqst *rqstp, long timeout)
 	} else {
 		if (pool->sp_task_pending) {
 			pool->sp_task_pending = 0;
+<<<<<<< HEAD
 			spin_unlock_bh(&pool->sp_lock);
 			return ERR_PTR(-EAGAIN);
 		}
 		/* No data pending. Go to sleep */
 		svc_thread_enqueue(pool, rqstp);
 
+=======
+			xprt = ERR_PTR(-EAGAIN);
+			goto out;
+		}
+>>>>>>> v3.18
 		/*
 		 * We have to be able to interrupt this wait
 		 * to bring down the daemons ...
 		 */
 		set_current_state(TASK_INTERRUPTIBLE);
 
+<<<<<<< HEAD
 		/*
 		 * checking kthread_should_stop() here allows us to avoid
 		 * locking and signalling when stopping kthreads that call
@@ -673,6 +766,25 @@ struct svc_xprt *svc_get_next_xprt(struct svc_rqst *rqstp, long timeout)
 
 		spin_lock_bh(&pool->sp_lock);
 		remove_wait_queue(&rqstp->rq_wait, &wait);
+=======
+		/* No data pending. Go to sleep */
+		svc_thread_enqueue(pool, rqstp);
+		spin_unlock_bh(&pool->sp_lock);
+
+		if (!(signalled() || kthread_should_stop())) {
+			time_left = schedule_timeout(timeout);
+			__set_current_state(TASK_RUNNING);
+
+			try_to_freeze();
+
+			xprt = rqstp->rq_xprt;
+			if (xprt != NULL)
+				return xprt;
+		} else
+			__set_current_state(TASK_RUNNING);
+
+		spin_lock_bh(&pool->sp_lock);
+>>>>>>> v3.18
 		if (!time_left)
 			pool->sp_stats.threads_timedout++;
 
@@ -687,11 +799,19 @@ struct svc_xprt *svc_get_next_xprt(struct svc_rqst *rqstp, long timeout)
 				return ERR_PTR(-EAGAIN);
 		}
 	}
+<<<<<<< HEAD
+=======
+out:
+>>>>>>> v3.18
 	spin_unlock_bh(&pool->sp_lock);
 	return xprt;
 }
 
+<<<<<<< HEAD
 void svc_add_new_temp_xprt(struct svc_serv *serv, struct svc_xprt *newxpt)
+=======
+static void svc_add_new_temp_xprt(struct svc_serv *serv, struct svc_xprt *newxpt)
+>>>>>>> v3.18
 {
 	spin_lock_bh(&serv->sv_lock);
 	set_bit(XPT_TEMP, &newxpt->xpt_flags);
@@ -732,7 +852,11 @@ static int svc_handle_xprt(struct svc_rqst *rqstp, struct svc_xprt *xprt)
 			svc_add_new_temp_xprt(serv, newxpt);
 		else
 			module_put(xprt->xpt_class->xcl_owner);
+<<<<<<< HEAD
 	} else if (xprt->xpt_ops->xpo_has_wspace(xprt)) {
+=======
+	} else {
+>>>>>>> v3.18
 		/* XPT_DATA|XPT_DEFERRED case: */
 		dprintk("svc: server %p, pool %u, transport %p, inuse=%d\n",
 			rqstp, rqstp->rq_pool->sp_id, xprt,
@@ -769,10 +893,13 @@ int svc_recv(struct svc_rqst *rqstp, long timeout)
 		printk(KERN_ERR
 			"svc_recv: service %p, transport not NULL!\n",
 			 rqstp);
+<<<<<<< HEAD
 	if (waitqueue_active(&rqstp->rq_wait))
 		printk(KERN_ERR
 			"svc_recv: service %p, wait queue active!\n",
 			 rqstp);
+=======
+>>>>>>> v3.18
 
 	err = svc_alloc_arg(rqstp);
 	if (err)
@@ -795,7 +922,11 @@ int svc_recv(struct svc_rqst *rqstp, long timeout)
 
 	clear_bit(XPT_OLD, &xprt->xpt_flags);
 
+<<<<<<< HEAD
 	rqstp->rq_secure = svc_port_is_privileged(svc_addr(rqstp));
+=======
+	rqstp->rq_secure = xprt->xpt_ops->xpo_secure_port(rqstp);
+>>>>>>> v3.18
 	rqstp->rq_chandle.defer = svc_defer;
 
 	if (serv->sv_stats)

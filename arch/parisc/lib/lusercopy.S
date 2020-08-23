@@ -88,9 +88,13 @@ ENDPROC(lclear_user)
 	ldo        1(%r25),%r25
 	.previous
 
+<<<<<<< HEAD
 	.section __ex_table,"aw"
 	ASM_ULONG_INSN 1b,2b
 	.previous
+=======
+	ASM_EXCEPTIONTABLE_ENTRY(1b,2b)
+>>>>>>> v3.18
 
 	.procend
 
@@ -129,10 +133,15 @@ ENDPROC(lstrnlen_user)
 	copy        %r24,%r26    /* reset r26 so 0 is returned on fault */
 	.previous
 
+<<<<<<< HEAD
 	.section __ex_table,"aw"
 	ASM_ULONG_INSN 1b,3b
 	ASM_ULONG_INSN 2b,3b
 	.previous
+=======
+	ASM_EXCEPTIONTABLE_ENTRY(1b,3b)
+	ASM_EXCEPTIONTABLE_ENTRY(2b,3b)
+>>>>>>> v3.18
 
 	.procend
 

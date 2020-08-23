@@ -46,7 +46,11 @@ struct smiapp_pll {
 			uint8_t bus_width;
 		} parallel;
 	};
+<<<<<<< HEAD
 	uint8_t flags;
+=======
+	unsigned long flags;
+>>>>>>> v3.18
 	uint8_t binning_horizontal;
 	uint8_t binning_vertical;
 	uint8_t scale_m;

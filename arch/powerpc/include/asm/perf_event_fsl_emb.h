@@ -13,7 +13,11 @@
 #include <linux/types.h>
 #include <asm/hw_irq.h>
 
+<<<<<<< HEAD
 #define MAX_HWEVENTS 4
+=======
+#define MAX_HWEVENTS 6
+>>>>>>> v3.18
 
 /* event flags */
 #define FSL_EMB_EVENT_VALID      1

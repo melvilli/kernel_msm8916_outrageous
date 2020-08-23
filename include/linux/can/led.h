@@ -6,8 +6,13 @@
  * published by the Free Software Foundation.
  */
 
+<<<<<<< HEAD
 #ifndef CAN_LED_H
 #define CAN_LED_H
+=======
+#ifndef _CAN_LED_H
+#define _CAN_LED_H
+>>>>>>> v3.18
 
 #include <linux/if.h>
 #include <linux/leds.h>
@@ -48,4 +53,8 @@ static inline void can_led_notifier_exit(void)
 
 #endif
 
+<<<<<<< HEAD
 #endif
+=======
+#endif /* !_CAN_LED_H */
+>>>>>>> v3.18

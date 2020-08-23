@@ -9,16 +9,24 @@
 
 #include <linux/module.h>
 #include <linux/dma-mapping.h>
+<<<<<<< HEAD
+=======
+#include <linux/clk/at91_pmc.h>
+>>>>>>> v3.18
 
 #include <asm/irq.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 #include <mach/sama5d3.h>
+<<<<<<< HEAD
 #include <mach/at91_pmc.h>
+=======
+>>>>>>> v3.18
 #include <mach/cpu.h>
 
 #include "soc.h"
 #include "generic.h"
+<<<<<<< HEAD
 #include "clock.h"
 #include "sam9_smc.h"
 
@@ -363,6 +371,11 @@ static void __init sama5d3_register_clocks(void)
 }
 
 /* --------------------------------------------------------------------
+=======
+#include "sam9_smc.h"
+
+/* --------------------------------------------------------------------
+>>>>>>> v3.18
  *  AT91SAM9x5 processor initialization
  * -------------------------------------------------------------------- */
 
@@ -378,6 +391,9 @@ static void __init sama5d3_initialize(void)
 
 AT91_SOC_START(sama5d3)
 	.map_io = sama5d3_map_io,
+<<<<<<< HEAD
 	.register_clocks = sama5d3_register_clocks,
+=======
+>>>>>>> v3.18
 	.init = sama5d3_initialize,
 AT91_SOC_END

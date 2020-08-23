@@ -46,6 +46,11 @@
 #include <linux/usb.h>
 #include <linux/usb/otg.h>
 #include <linux/usb/musb.h>
+<<<<<<< HEAD
+=======
+#include <linux/phy/phy.h>
+#include <linux/workqueue.h>
+>>>>>>> v3.18
 
 struct musb;
 struct musb_hw_ep;
@@ -77,6 +82,7 @@ struct musb_ep;
 #define is_peripheral_active(m)		(!(m)->is_host)
 #define is_host_active(m)		((m)->is_host)
 
+<<<<<<< HEAD
 #ifdef CONFIG_PROC_FS
 #include <linux/fs.h>
 #define MUSB_CONFIG_PROC_FS
@@ -98,6 +104,13 @@ extern void musb_g_disconnect(struct musb *);
 extern irqreturn_t musb_h_ep0_irq(struct musb *);
 extern void musb_host_tx(struct musb *, u8);
 extern void musb_host_rx(struct musb *, u8);
+=======
+enum {
+	MUSB_PORT_MODE_HOST	= 1,
+	MUSB_PORT_MODE_GADGET,
+	MUSB_PORT_MODE_DUAL_ROLE,
+};
+>>>>>>> v3.18
 
 /****************************** CONSTANTS ********************************/
 
@@ -206,6 +219,10 @@ struct musb_platform_ops {
 
 	int	(*set_mode)(struct musb *musb, u8 mode);
 	void	(*try_idle)(struct musb *musb, unsigned long timeout);
+<<<<<<< HEAD
+=======
+	int	(*reset)(struct musb *musb);
+>>>>>>> v3.18
 
 	int	(*vbus_status)(struct musb *musb);
 	void	(*set_vbus)(struct musb *musb, int on);
@@ -310,6 +327,12 @@ struct musb {
 
 	irqreturn_t		(*isr)(int, void *);
 	struct work_struct	irq_work;
+<<<<<<< HEAD
+=======
+	struct delayed_work	recover_work;
+	struct delayed_work	deassert_reset_work;
+	struct delayed_work	finish_resume_work;
+>>>>>>> v3.18
 	u16			hwvers;
 
 	u16			intrrxe;
@@ -349,6 +372,10 @@ struct musb {
 	dma_addr_t		async;
 	dma_addr_t		sync;
 	void __iomem		*sync_va;
+<<<<<<< HEAD
+=======
+	u8			tusb_revision;
+>>>>>>> v3.18
 #endif
 
 	/* passed down from chip/board specific irq handlers */
@@ -357,6 +384,10 @@ struct musb {
 	u16			int_tx;
 
 	struct usb_phy		*xceiv;
+<<<<<<< HEAD
+=======
+	struct phy		*phy;
+>>>>>>> v3.18
 
 	int nIrq;
 	unsigned		irq_wake:1;
@@ -373,6 +404,10 @@ struct musb {
 
 	u8			min_power;	/* vbus for periph, in mA/2 */
 
+<<<<<<< HEAD
+=======
+	int			port_mode;	/* MUSB_PORT_MODE_* */
+>>>>>>> v3.18
 	bool			is_host;
 
 	int			a_wait_bcon;	/* VBUS timeout in msecs */
@@ -382,7 +417,10 @@ struct musb {
 	unsigned		is_active:1;
 
 	unsigned is_multipoint:1;
+<<<<<<< HEAD
 	unsigned ignore_disconnect:1;	/* during bus resets */
+=======
+>>>>>>> v3.18
 
 	unsigned		hb_iso_rx:1;	/* high bandwidth iso rx? */
 	unsigned		hb_iso_tx:1;	/* high bandwidth iso tx? */
@@ -419,6 +457,10 @@ struct musb {
 	enum musb_g_ep0_state	ep0_state;
 	struct usb_gadget	g;			/* the gadget */
 	struct usb_gadget_driver *gadget_driver;	/* its driver */
+<<<<<<< HEAD
+=======
+	struct usb_hcd		*hcd;			/* the usb hcd */
+>>>>>>> v3.18
 
 	/*
 	 * FIXME: Remove this flag.
@@ -435,9 +477,12 @@ struct musb {
 
 	struct musb_hdrc_config	*config;
 
+<<<<<<< HEAD
 #ifdef MUSB_CONFIG_PROC_FS
 	struct proc_dir_entry *proc_entry;
 #endif
+=======
+>>>>>>> v3.18
 	int			xceiv_old_state;
 #ifdef CONFIG_DEBUG_FS
 	struct dentry		*debugfs_root;
@@ -520,8 +565,13 @@ static inline void musb_configure_ep0(struct musb *musb)
 
 extern const char musb_driver_name[];
 
+<<<<<<< HEAD
 extern void musb_start(struct musb *musb);
 extern void musb_stop(struct musb *musb);
+=======
+extern void musb_stop(struct musb *musb);
+extern void musb_start(struct musb *musb);
+>>>>>>> v3.18
 
 extern void musb_write_fifo(struct musb_hw_ep *ep, u16 len, const u8 *src);
 extern void musb_read_fifo(struct musb_hw_ep *ep, u16 len, u8 *dst);
@@ -565,6 +615,17 @@ static inline void musb_platform_try_idle(struct musb *musb,
 		musb->ops->try_idle(musb, timeout);
 }
 
+<<<<<<< HEAD
+=======
+static inline int  musb_platform_reset(struct musb *musb)
+{
+	if (!musb->ops->reset)
+		return -EINVAL;
+
+	return musb->ops->reset(musb);
+}
+
+>>>>>>> v3.18
 static inline int musb_platform_get_vbus_status(struct musb *musb)
 {
 	if (!musb->ops->vbus_status)

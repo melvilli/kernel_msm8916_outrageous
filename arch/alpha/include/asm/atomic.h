@@ -17,8 +17,13 @@
 #define ATOMIC_INIT(i)		{ (i) }
 #define ATOMIC64_INIT(i)	{ (i) }
 
+<<<<<<< HEAD
 #define atomic_read(v)		(*(volatile int *)&(v)->counter)
 #define atomic64_read(v)	(*(volatile long *)&(v)->counter)
+=======
+#define atomic_read(v)		ACCESS_ONCE((v)->counter)
+#define atomic64_read(v)	ACCESS_ONCE((v)->counter)
+>>>>>>> v3.18
 
 #define atomic_set(v,i)		((v)->counter = (i))
 #define atomic64_set(v,i)	((v)->counter = (i))
@@ -29,6 +34,7 @@
  * branch back to restart the operation.
  */
 
+<<<<<<< HEAD
 static __inline__ void atomic_add(int i, atomic_t * v)
 {
 	unsigned long temp;
@@ -168,6 +174,94 @@ static __inline__ long atomic64_sub_return(long i, atomic64_t * v)
 	smp_mb();
 	return result;
 }
+=======
+#define ATOMIC_OP(op)							\
+static __inline__ void atomic_##op(int i, atomic_t * v)			\
+{									\
+	unsigned long temp;						\
+	__asm__ __volatile__(						\
+	"1:	ldl_l %0,%1\n"						\
+	"	" #op "l %0,%2,%0\n"					\
+	"	stl_c %0,%1\n"						\
+	"	beq %0,2f\n"						\
+	".subsection 2\n"						\
+	"2:	br 1b\n"						\
+	".previous"							\
+	:"=&r" (temp), "=m" (v->counter)				\
+	:"Ir" (i), "m" (v->counter));					\
+}									\
+
+#define ATOMIC_OP_RETURN(op)						\
+static inline int atomic_##op##_return(int i, atomic_t *v)		\
+{									\
+	long temp, result;						\
+	smp_mb();							\
+	__asm__ __volatile__(						\
+	"1:	ldl_l %0,%1\n"						\
+	"	" #op "l %0,%3,%2\n"					\
+	"	" #op "l %0,%3,%0\n"					\
+	"	stl_c %0,%1\n"						\
+	"	beq %0,2f\n"						\
+	".subsection 2\n"						\
+	"2:	br 1b\n"						\
+	".previous"							\
+	:"=&r" (temp), "=m" (v->counter), "=&r" (result)		\
+	:"Ir" (i), "m" (v->counter) : "memory");			\
+	smp_mb();							\
+	return result;							\
+}
+
+#define ATOMIC64_OP(op)							\
+static __inline__ void atomic64_##op(long i, atomic64_t * v)		\
+{									\
+	unsigned long temp;						\
+	__asm__ __volatile__(						\
+	"1:	ldq_l %0,%1\n"						\
+	"	" #op "q %0,%2,%0\n"					\
+	"	stq_c %0,%1\n"						\
+	"	beq %0,2f\n"						\
+	".subsection 2\n"						\
+	"2:	br 1b\n"						\
+	".previous"							\
+	:"=&r" (temp), "=m" (v->counter)				\
+	:"Ir" (i), "m" (v->counter));					\
+}									\
+
+#define ATOMIC64_OP_RETURN(op)						\
+static __inline__ long atomic64_##op##_return(long i, atomic64_t * v)	\
+{									\
+	long temp, result;						\
+	smp_mb();							\
+	__asm__ __volatile__(						\
+	"1:	ldq_l %0,%1\n"						\
+	"	" #op "q %0,%3,%2\n"					\
+	"	" #op "q %0,%3,%0\n"					\
+	"	stq_c %0,%1\n"						\
+	"	beq %0,2f\n"						\
+	".subsection 2\n"						\
+	"2:	br 1b\n"						\
+	".previous"							\
+	:"=&r" (temp), "=m" (v->counter), "=&r" (result)		\
+	:"Ir" (i), "m" (v->counter) : "memory");			\
+	smp_mb();							\
+	return result;							\
+}
+
+#define ATOMIC_OPS(opg)							\
+	ATOMIC_OP(opg)							\
+	ATOMIC_OP_RETURN(opg)						\
+	ATOMIC64_OP(opg)						\
+	ATOMIC64_OP_RETURN(opg)
+
+ATOMIC_OPS(add)
+ATOMIC_OPS(sub)
+
+#undef ATOMIC_OPS
+#undef ATOMIC64_OP_RETURN
+#undef ATOMIC64_OP
+#undef ATOMIC_OP_RETURN
+#undef ATOMIC_OP
+>>>>>>> v3.18
 
 #define atomic64_cmpxchg(v, old, new) (cmpxchg(&((v)->counter), old, new))
 #define atomic64_xchg(v, new) (xchg(&((v)->counter), new))
@@ -186,6 +280,7 @@ static __inline__ long atomic64_sub_return(long i, atomic64_t * v)
  */
 static __inline__ int __atomic_add_unless(atomic_t *v, int a, int u)
 {
+<<<<<<< HEAD
 	int c, old;
 	c = atomic_read(v);
 	for (;;) {
@@ -197,6 +292,26 @@ static __inline__ int __atomic_add_unless(atomic_t *v, int a, int u)
 		c = old;
 	}
 	return c;
+=======
+	int c, new, old;
+	smp_mb();
+	__asm__ __volatile__(
+	"1:	ldl_l	%[old],%[mem]\n"
+	"	cmpeq	%[old],%[u],%[c]\n"
+	"	addl	%[old],%[a],%[new]\n"
+	"	bne	%[c],2f\n"
+	"	stl_c	%[new],%[mem]\n"
+	"	beq	%[new],3f\n"
+	"2:\n"
+	".subsection 2\n"
+	"3:	br	1b\n"
+	".previous"
+	: [old] "=&r"(old), [new] "=&r"(new), [c] "=&r"(c)
+	: [mem] "m"(*v), [a] "rI"(a), [u] "rI"((long)u)
+	: "memory");
+	smp_mb();
+	return old;
+>>>>>>> v3.18
 }
 
 
@@ -207,6 +322,7 @@ static __inline__ int __atomic_add_unless(atomic_t *v, int a, int u)
  * @u: ...unless v is equal to u.
  *
  * Atomically adds @a to @v, so long as it was not @u.
+<<<<<<< HEAD
  * Returns the old value of @v.
  */
 static __inline__ int atomic64_add_unless(atomic64_t *v, long a, long u)
@@ -222,6 +338,58 @@ static __inline__ int atomic64_add_unless(atomic64_t *v, long a, long u)
 		c = old;
 	}
 	return c != (u);
+=======
+ * Returns true iff @v was not @u.
+ */
+static __inline__ int atomic64_add_unless(atomic64_t *v, long a, long u)
+{
+	long c, tmp;
+	smp_mb();
+	__asm__ __volatile__(
+	"1:	ldq_l	%[tmp],%[mem]\n"
+	"	cmpeq	%[tmp],%[u],%[c]\n"
+	"	addq	%[tmp],%[a],%[tmp]\n"
+	"	bne	%[c],2f\n"
+	"	stq_c	%[tmp],%[mem]\n"
+	"	beq	%[tmp],3f\n"
+	"2:\n"
+	".subsection 2\n"
+	"3:	br	1b\n"
+	".previous"
+	: [tmp] "=&r"(tmp), [c] "=&r"(c)
+	: [mem] "m"(*v), [a] "rI"(a), [u] "rI"(u)
+	: "memory");
+	smp_mb();
+	return !c;
+}
+
+/*
+ * atomic64_dec_if_positive - decrement by 1 if old value positive
+ * @v: pointer of type atomic_t
+ *
+ * The function returns the old value of *v minus 1, even if
+ * the atomic variable, v, was not decremented.
+ */
+static inline long atomic64_dec_if_positive(atomic64_t *v)
+{
+	long old, tmp;
+	smp_mb();
+	__asm__ __volatile__(
+	"1:	ldq_l	%[old],%[mem]\n"
+	"	subq	%[old],1,%[tmp]\n"
+	"	ble	%[old],2f\n"
+	"	stq_c	%[tmp],%[mem]\n"
+	"	beq	%[tmp],3f\n"
+	"2:\n"
+	".subsection 2\n"
+	"3:	br	1b\n"
+	".previous"
+	: [old] "=&r"(old), [tmp] "=&r"(tmp)
+	: [mem] "m"(*v)
+	: "memory");
+	smp_mb();
+	return old - 1;
+>>>>>>> v3.18
 }
 
 #define atomic64_inc_not_zero(v) atomic64_add_unless((v), 1, 0)
@@ -250,9 +418,12 @@ static __inline__ int atomic64_add_unless(atomic64_t *v, long a, long u)
 #define atomic_dec(v) atomic_sub(1,(v))
 #define atomic64_dec(v) atomic64_sub(1,(v))
 
+<<<<<<< HEAD
 #define smp_mb__before_atomic_dec()	smp_mb()
 #define smp_mb__after_atomic_dec()	smp_mb()
 #define smp_mb__before_atomic_inc()	smp_mb()
 #define smp_mb__after_atomic_inc()	smp_mb()
 
+=======
+>>>>>>> v3.18
 #endif /* _ALPHA_ATOMIC_H */

@@ -6,10 +6,21 @@
  *
  * Author: Anton Tikhomirov <av.tikhomirov@samsung.com>
  *
+<<<<<<< HEAD
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
+=======
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2  of
+ * the License as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+>>>>>>> v3.18
  */
 
 #include <linux/module.h>
@@ -20,9 +31,16 @@
 #include <linux/dma-mapping.h>
 #include <linux/clk.h>
 #include <linux/usb/otg.h>
+<<<<<<< HEAD
 #include <linux/usb/nop-usb-xceiv.h>
 #include <linux/of.h>
 #include <linux/of_platform.h>
+=======
+#include <linux/usb/usb_phy_generic.h>
+#include <linux/of.h>
+#include <linux/of_platform.h>
+#include <linux/regulator/consumer.h>
+>>>>>>> v3.18
 
 struct dwc3_exynos {
 	struct platform_device	*usb2_phy;
@@ -30,28 +48,49 @@ struct dwc3_exynos {
 	struct device		*dev;
 
 	struct clk		*clk;
+<<<<<<< HEAD
+=======
+	struct regulator	*vdd33;
+	struct regulator	*vdd10;
+>>>>>>> v3.18
 };
 
 static int dwc3_exynos_register_phys(struct dwc3_exynos *exynos)
 {
+<<<<<<< HEAD
 	struct nop_usb_xceiv_platform_data pdata;
+=======
+	struct usb_phy_generic_platform_data pdata;
+>>>>>>> v3.18
 	struct platform_device	*pdev;
 	int			ret;
 
 	memset(&pdata, 0x00, sizeof(pdata));
 
+<<<<<<< HEAD
 	pdev = platform_device_alloc("nop_usb_xceiv", PLATFORM_DEVID_AUTO);
+=======
+	pdev = platform_device_alloc("usb_phy_generic", PLATFORM_DEVID_AUTO);
+>>>>>>> v3.18
 	if (!pdev)
 		return -ENOMEM;
 
 	exynos->usb2_phy = pdev;
 	pdata.type = USB_PHY_TYPE_USB2;
+<<<<<<< HEAD
+=======
+	pdata.gpio_reset = -1;
+>>>>>>> v3.18
 
 	ret = platform_device_add_data(exynos->usb2_phy, &pdata, sizeof(pdata));
 	if (ret)
 		goto err1;
 
+<<<<<<< HEAD
 	pdev = platform_device_alloc("nop_usb_xceiv", PLATFORM_DEVID_AUTO);
+=======
+	pdev = platform_device_alloc("usb_phy_generic", PLATFORM_DEVID_AUTO);
+>>>>>>> v3.18
 	if (!pdev) {
 		ret = -ENOMEM;
 		goto err1;
@@ -102,6 +141,7 @@ static int dwc3_exynos_probe(struct platform_device *pdev)
 	struct device		*dev = &pdev->dev;
 	struct device_node	*node = dev->of_node;
 
+<<<<<<< HEAD
 	int			ret = -ENOMEM;
 
 	exynos = devm_kzalloc(dev, sizeof(*exynos), GFP_KERNEL);
@@ -109,30 +149,51 @@ static int dwc3_exynos_probe(struct platform_device *pdev)
 		dev_err(dev, "not enough memory\n");
 		goto err1;
 	}
+=======
+	int			ret;
+
+	exynos = devm_kzalloc(dev, sizeof(*exynos), GFP_KERNEL);
+	if (!exynos)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	/*
 	 * Right now device-tree probed devices don't get dma_mask set.
 	 * Since shared usb code relies on it, set it here for now.
 	 * Once we move to full device tree support this will vanish off.
 	 */
+<<<<<<< HEAD
 	if (!dev->dma_mask)
 		dev->dma_mask = &dev->coherent_dma_mask;
 	if (!dev->coherent_dma_mask)
 		dev->coherent_dma_mask = DMA_BIT_MASK(32);
+=======
+	ret = dma_coerce_mask_and_coherent(dev, DMA_BIT_MASK(32));
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 
 	platform_set_drvdata(pdev, exynos);
 
 	ret = dwc3_exynos_register_phys(exynos);
 	if (ret) {
 		dev_err(dev, "couldn't register PHYs\n");
+<<<<<<< HEAD
 		goto err1;
+=======
+		return ret;
+>>>>>>> v3.18
 	}
 
 	clk = devm_clk_get(dev, "usbdrd30");
 	if (IS_ERR(clk)) {
 		dev_err(dev, "couldn't get clock\n");
+<<<<<<< HEAD
 		ret = -EINVAL;
 		goto err1;
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 	}
 
 	exynos->dev	= dev;
@@ -140,23 +201,65 @@ static int dwc3_exynos_probe(struct platform_device *pdev)
 
 	clk_prepare_enable(exynos->clk);
 
+<<<<<<< HEAD
+=======
+	exynos->vdd33 = devm_regulator_get(dev, "vdd33");
+	if (IS_ERR(exynos->vdd33)) {
+		ret = PTR_ERR(exynos->vdd33);
+		goto err2;
+	}
+	ret = regulator_enable(exynos->vdd33);
+	if (ret) {
+		dev_err(dev, "Failed to enable VDD33 supply\n");
+		goto err2;
+	}
+
+	exynos->vdd10 = devm_regulator_get(dev, "vdd10");
+	if (IS_ERR(exynos->vdd10)) {
+		ret = PTR_ERR(exynos->vdd10);
+		goto err3;
+	}
+	ret = regulator_enable(exynos->vdd10);
+	if (ret) {
+		dev_err(dev, "Failed to enable VDD10 supply\n");
+		goto err3;
+	}
+
+>>>>>>> v3.18
 	if (node) {
 		ret = of_platform_populate(node, NULL, NULL, dev);
 		if (ret) {
 			dev_err(dev, "failed to add dwc3 core\n");
+<<<<<<< HEAD
 			goto err2;
+=======
+			goto err4;
+>>>>>>> v3.18
 		}
 	} else {
 		dev_err(dev, "no device node, failed to add dwc3 core\n");
 		ret = -ENODEV;
+<<<<<<< HEAD
 		goto err2;
+=======
+		goto err4;
+>>>>>>> v3.18
 	}
 
 	return 0;
 
+<<<<<<< HEAD
 err2:
 	clk_disable_unprepare(clk);
 err1:
+=======
+err4:
+	regulator_disable(exynos->vdd10);
+err3:
+	regulator_disable(exynos->vdd33);
+err2:
+	clk_disable_unprepare(clk);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -170,6 +273,12 @@ static int dwc3_exynos_remove(struct platform_device *pdev)
 
 	clk_disable_unprepare(exynos->clk);
 
+<<<<<<< HEAD
+=======
+	regulator_disable(exynos->vdd33);
+	regulator_disable(exynos->vdd10);
+
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -188,12 +297,33 @@ static int dwc3_exynos_suspend(struct device *dev)
 
 	clk_disable(exynos->clk);
 
+<<<<<<< HEAD
+=======
+	regulator_disable(exynos->vdd33);
+	regulator_disable(exynos->vdd10);
+
+>>>>>>> v3.18
 	return 0;
 }
 
 static int dwc3_exynos_resume(struct device *dev)
 {
 	struct dwc3_exynos *exynos = dev_get_drvdata(dev);
+<<<<<<< HEAD
+=======
+	int ret;
+
+	ret = regulator_enable(exynos->vdd33);
+	if (ret) {
+		dev_err(dev, "Failed to enable VDD33 supply\n");
+		return ret;
+	}
+	ret = regulator_enable(exynos->vdd10);
+	if (ret) {
+		dev_err(dev, "Failed to enable VDD10 supply\n");
+		return ret;
+	}
+>>>>>>> v3.18
 
 	clk_enable(exynos->clk);
 
@@ -228,5 +358,9 @@ module_platform_driver(dwc3_exynos_driver);
 
 MODULE_ALIAS("platform:exynos-dwc3");
 MODULE_AUTHOR("Anton Tikhomirov <av.tikhomirov@samsung.com>");
+<<<<<<< HEAD
 MODULE_LICENSE("GPL");
+=======
+MODULE_LICENSE("GPL v2");
+>>>>>>> v3.18
 MODULE_DESCRIPTION("DesignWare USB3 EXYNOS Glue Layer");

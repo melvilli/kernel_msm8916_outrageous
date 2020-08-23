@@ -18,8 +18,11 @@
 
 static struct option set_opts[] = {
 	{ .name = "perf-bias",	.has_arg = optional_argument,	.flag = NULL,	.val = 'b'},
+<<<<<<< HEAD
 	{ .name = "sched-mc",	.has_arg = optional_argument,	.flag = NULL,	.val = 'm'},
 	{ .name = "sched-smt",	.has_arg = optional_argument,	.flag = NULL,	.val = 's'},
+=======
+>>>>>>> v3.18
 	{ },
 };
 
@@ -37,8 +40,11 @@ int cmd_info(int argc, char **argv)
 
 	union {
 		struct {
+<<<<<<< HEAD
 			int sched_mc:1;
 			int sched_smt:1;
+=======
+>>>>>>> v3.18
 			int perf_bias:1;
 		};
 		int params;
@@ -49,13 +55,18 @@ int cmd_info(int argc, char **argv)
 	textdomain(PACKAGE);
 
 	/* parameter parsing */
+<<<<<<< HEAD
 	while ((ret = getopt_long(argc, argv, "msb", set_opts, NULL)) != -1) {
+=======
+	while ((ret = getopt_long(argc, argv, "b", set_opts, NULL)) != -1) {
+>>>>>>> v3.18
 		switch (ret) {
 		case 'b':
 			if (params.perf_bias)
 				print_wrong_arg_exit();
 			params.perf_bias = 1;
 			break;
+<<<<<<< HEAD
 		case 'm':
 			if (params.sched_mc)
 				print_wrong_arg_exit();
@@ -66,6 +77,8 @@ int cmd_info(int argc, char **argv)
 				print_wrong_arg_exit();
 			params.sched_smt = 1;
 			break;
+=======
+>>>>>>> v3.18
 		default:
 			print_wrong_arg_exit();
 		}
@@ -78,6 +91,7 @@ int cmd_info(int argc, char **argv)
 	if (bitmask_isallclear(cpus_chosen))
 		bitmask_setbit(cpus_chosen, 0);
 
+<<<<<<< HEAD
 	if (params.sched_mc) {
 		ret = sysfs_get_sched("mc");
 		printf(_("System's multi core scheduler setting: "));
@@ -97,6 +111,8 @@ int cmd_info(int argc, char **argv)
 			printf("%d\n", ret);
 	}
 
+=======
+>>>>>>> v3.18
 	/* Add more per cpu options here */
 	if (!params.perf_bias)
 		return ret;
@@ -125,11 +141,21 @@ int cmd_info(int argc, char **argv)
 		if (params.perf_bias) {
 			ret = msr_intel_get_perf_bias(cpu);
 			if (ret < 0) {
+<<<<<<< HEAD
 				printf(_("Could not read perf-bias value\n"));
 				break;
+=======
+				fprintf(stderr,
+			_("Could not read perf-bias value[%d]\n"), ret);
+				exit(EXIT_FAILURE);
+>>>>>>> v3.18
 			} else
 				printf(_("perf-bias: %d\n"), ret);
 		}
 	}
+<<<<<<< HEAD
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 }

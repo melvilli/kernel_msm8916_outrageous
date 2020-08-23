@@ -24,6 +24,10 @@
 #include <linux/kernel.h>
 #include <linux/timer.h>
 #include <linux/miscdevice.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+>>>>>>> v3.18
 #include <linux/of_platform.h>
 #include <linux/module.h>
 #include <linux/watchdog.h>
@@ -72,9 +76,13 @@ MODULE_PARM_DESC(nowayout, "Watchdog cannot be stopped once started "
  * to 0
  */
 static int prescale = 1;
+<<<<<<< HEAD
 static unsigned int timeout_sec;
 
 static unsigned long wdt_is_open;
+=======
+
+>>>>>>> v3.18
 static DEFINE_SPINLOCK(wdt_spinlock);
 
 static void mpc8xxx_wdt_keepalive(void)
@@ -86,6 +94,7 @@ static void mpc8xxx_wdt_keepalive(void)
 	spin_unlock(&wdt_spinlock);
 }
 
+<<<<<<< HEAD
 static void mpc8xxx_wdt_timer_ping(unsigned long arg);
 static DEFINE_TIMER(wdt_timer, mpc8xxx_wdt_timer_ping, 0, 0);
 
@@ -119,6 +128,25 @@ static int mpc8xxx_wdt_open(struct inode *inode, struct file *file)
 	/* Once we start the watchdog we can't stop it */
 	if (nowayout)
 		__module_get(THIS_MODULE);
+=======
+static struct watchdog_device mpc8xxx_wdt_dev;
+static void mpc8xxx_wdt_timer_ping(unsigned long arg);
+static DEFINE_TIMER(wdt_timer, mpc8xxx_wdt_timer_ping, 0,
+		(unsigned long)&mpc8xxx_wdt_dev);
+
+static void mpc8xxx_wdt_timer_ping(unsigned long arg)
+{
+	struct watchdog_device *w = (struct watchdog_device *)arg;
+
+	mpc8xxx_wdt_keepalive();
+	/* We're pinging it twice faster than needed, just to be sure. */
+	mod_timer(&wdt_timer, jiffies + HZ * w->timeout / 2);
+}
+
+static int mpc8xxx_wdt_start(struct watchdog_device *w)
+{
+	u32 tmp = SWCRR_SWEN;
+>>>>>>> v3.18
 
 	/* Good, fire up the show */
 	if (prescale)
@@ -132,6 +160,7 @@ static int mpc8xxx_wdt_open(struct inode *inode, struct file *file)
 
 	del_timer_sync(&wdt_timer);
 
+<<<<<<< HEAD
 	return nonseekable_open(inode, file);
 }
 
@@ -185,6 +214,39 @@ static struct miscdevice mpc8xxx_wdt_miscdev = {
 	.minor	= WATCHDOG_MINOR,
 	.name	= "watchdog",
 	.fops	= &mpc8xxx_wdt_fops,
+=======
+	return 0;
+}
+
+static int mpc8xxx_wdt_ping(struct watchdog_device *w)
+{
+	mpc8xxx_wdt_keepalive();
+	return 0;
+}
+
+static int mpc8xxx_wdt_stop(struct watchdog_device *w)
+{
+	mod_timer(&wdt_timer, jiffies);
+	return 0;
+}
+
+static struct watchdog_info mpc8xxx_wdt_info = {
+	.options = WDIOF_KEEPALIVEPING,
+	.firmware_version = 1,
+	.identity = "MPC8xxx",
+};
+
+static struct watchdog_ops mpc8xxx_wdt_ops = {
+	.owner = THIS_MODULE,
+	.start = mpc8xxx_wdt_start,
+	.ping = mpc8xxx_wdt_ping,
+	.stop = mpc8xxx_wdt_stop,
+};
+
+static struct watchdog_device mpc8xxx_wdt_dev = {
+	.info = &mpc8xxx_wdt_info,
+	.ops = &mpc8xxx_wdt_ops,
+>>>>>>> v3.18
 };
 
 static const struct of_device_id mpc8xxx_wdt_match[];
@@ -196,6 +258,10 @@ static int mpc8xxx_wdt_probe(struct platform_device *ofdev)
 	const struct mpc8xxx_wdt_type *wdt_type;
 	u32 freq = fsl_get_sys_freq();
 	bool enabled;
+<<<<<<< HEAD
+=======
+	unsigned int timeout_sec;
+>>>>>>> v3.18
 
 	match = of_match_device(mpc8xxx_wdt_match, &ofdev->dev);
 	if (!match)
@@ -222,6 +288,10 @@ static int mpc8xxx_wdt_probe(struct platform_device *ofdev)
 	else
 		timeout_sec = timeout / freq;
 
+<<<<<<< HEAD
+=======
+	mpc8xxx_wdt_dev.timeout = timeout_sec;
+>>>>>>> v3.18
 #ifdef MODULE
 	ret = mpc8xxx_wdt_init_late();
 	if (ret)
@@ -237,7 +307,11 @@ static int mpc8xxx_wdt_probe(struct platform_device *ofdev)
 	 * userspace handles it.
 	 */
 	if (enabled)
+<<<<<<< HEAD
 		mpc8xxx_wdt_timer_ping(0);
+=======
+		mod_timer(&wdt_timer, jiffies);
+>>>>>>> v3.18
 	return 0;
 err_unmap:
 	iounmap(wd_base);
@@ -247,9 +321,16 @@ err_unmap:
 
 static int mpc8xxx_wdt_remove(struct platform_device *ofdev)
 {
+<<<<<<< HEAD
 	mpc8xxx_wdt_pr_warn("watchdog removed");
 	del_timer_sync(&wdt_timer);
 	misc_deregister(&mpc8xxx_wdt_miscdev);
+=======
+	pr_crit("Watchdog removed, expect the %s soon!\n",
+		reset ? "reset" : "machine check exception");
+	del_timer_sync(&wdt_timer);
+	watchdog_unregister_device(&mpc8xxx_wdt_dev);
+>>>>>>> v3.18
 	iounmap(wd_base);
 
 	return 0;
@@ -273,6 +354,10 @@ static const struct of_device_id mpc8xxx_wdt_match[] = {
 		.compatible = "fsl,mpc823-wdt",
 		.data = &(struct mpc8xxx_wdt_type) {
 			.prescaler = 0x800,
+<<<<<<< HEAD
+=======
+			.hw_enabled = true,
+>>>>>>> v3.18
 		},
 	},
 	{},
@@ -301,10 +386,18 @@ static int mpc8xxx_wdt_init_late(void)
 	if (!wd_base)
 		return -ENODEV;
 
+<<<<<<< HEAD
 	ret = misc_register(&mpc8xxx_wdt_miscdev);
 	if (ret) {
 		pr_err("cannot register miscdev on minor=%d (err=%d)\n",
 		       WATCHDOG_MINOR, ret);
+=======
+	watchdog_set_nowayout(&mpc8xxx_wdt_dev, nowayout);
+
+	ret = watchdog_register_device(&mpc8xxx_wdt_dev);
+	if (ret) {
+		pr_err("cannot register watchdog device (err=%d)\n", ret);
+>>>>>>> v3.18
 		return ret;
 	}
 	return 0;
@@ -329,4 +422,7 @@ MODULE_AUTHOR("Dave Updegraff, Kumar Gala");
 MODULE_DESCRIPTION("Driver for watchdog timer in MPC8xx/MPC83xx/MPC86xx "
 		   "uProcessors");
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18

@@ -348,7 +348,11 @@ int __init fuse_ctl_init(void)
 	return register_filesystem(&fuse_ctl_fs_type);
 }
 
+<<<<<<< HEAD
 void fuse_ctl_cleanup(void)
+=======
+void __exit fuse_ctl_cleanup(void)
+>>>>>>> v3.18
 {
 	unregister_filesystem(&fuse_ctl_fs_type);
 }

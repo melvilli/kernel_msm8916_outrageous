@@ -22,6 +22,10 @@
 #include <plat/devs.h>
 #include <linux/platform_data/asoc-s3c.h>
 #include <plat/gpio-cfg.h>
+<<<<<<< HEAD
+=======
+#include <mach/gpio-samsung.h>
+>>>>>>> v3.18
 
 static int s3c64xx_i2s_cfg_gpio(struct platform_device *pdev)
 {

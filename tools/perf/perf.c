@@ -13,11 +13,20 @@
 #include "util/quote.h"
 #include "util/run-command.h"
 #include "util/parse-events.h"
+<<<<<<< HEAD
 #include <lk/debugfs.h>
 #include <pthread.h>
 
 const char perf_usage_string[] =
 	"perf [--version] [--help] COMMAND [ARGS]";
+=======
+#include "util/debug.h"
+#include <api/fs/debugfs.h>
+#include <pthread.h>
+
+const char perf_usage_string[] =
+	"perf [--version] [--help] [OPTIONS] COMMAND [ARGS]";
+>>>>>>> v3.18
 
 const char perf_more_info_string[] =
 	"See 'perf help COMMAND' for more information on a specific command.";
@@ -43,21 +52,32 @@ static struct cmd_struct commands[] = {
 	{ "report",	cmd_report,	0 },
 	{ "bench",	cmd_bench,	0 },
 	{ "stat",	cmd_stat,	0 },
+<<<<<<< HEAD
 	{ "periodic",   cmd_periodic,   0 },
+=======
+>>>>>>> v3.18
 	{ "timechart",	cmd_timechart,	0 },
 	{ "top",	cmd_top,	0 },
 	{ "annotate",	cmd_annotate,	0 },
 	{ "version",	cmd_version,	0 },
 	{ "script",	cmd_script,	0 },
 	{ "sched",	cmd_sched,	0 },
+<<<<<<< HEAD
 #ifdef LIBELF_SUPPORT
+=======
+#ifdef HAVE_LIBELF_SUPPORT
+>>>>>>> v3.18
 	{ "probe",	cmd_probe,	0 },
 #endif
 	{ "kmem",	cmd_kmem,	0 },
 	{ "lock",	cmd_lock,	0 },
 	{ "kvm",	cmd_kvm,	0 },
 	{ "test",	cmd_test,	0 },
+<<<<<<< HEAD
 #ifdef LIBAUDIT_SUPPORT
+=======
+#ifdef HAVE_LIBAUDIT_SUPPORT
+>>>>>>> v3.18
 	{ "trace",	cmd_trace,	0 },
 #endif
 	{ "inject",	cmd_inject,	0 },
@@ -213,6 +233,19 @@ static int handle_options(const char ***argv, int *argc, int *envchanged)
 				printf("%s ", p->cmd);
 			}
 			exit(0);
+<<<<<<< HEAD
+=======
+		} else if (!strcmp(cmd, "--debug")) {
+			if (*argc < 2) {
+				fprintf(stderr, "No variable specified for --debug.\n");
+				usage(perf_usage_string);
+			}
+			if (perf_debug_option((*argv)[1]))
+				usage(perf_usage_string);
+
+			(*argv)++;
+			(*argc)--;
+>>>>>>> v3.18
 		} else {
 			fprintf(stderr, "Unknown option: %s\n", cmd);
 			usage(perf_usage_string);
@@ -303,6 +336,10 @@ static int run_builtin(struct cmd_struct *p, int argc, const char **argv)
 	int status;
 	struct stat st;
 	const char *prefix;
+<<<<<<< HEAD
+=======
+	char sbuf[STRERR_BUFSIZE];
+>>>>>>> v3.18
 
 	prefix = NULL;
 	if (p->option & RUN_SETUP)
@@ -333,7 +370,12 @@ static int run_builtin(struct cmd_struct *p, int argc, const char **argv)
 	status = 1;
 	/* Check for ENOSPC and EIO errors.. */
 	if (fflush(stdout)) {
+<<<<<<< HEAD
 		fprintf(stderr, "write failure on standard output: %s", strerror(errno));
+=======
+		fprintf(stderr, "write failure on standard output: %s",
+			strerror_r(errno, sbuf, sizeof(sbuf)));
+>>>>>>> v3.18
 		goto out;
 	}
 	if (ferror(stdout)) {
@@ -341,7 +383,12 @@ static int run_builtin(struct cmd_struct *p, int argc, const char **argv)
 		goto out;
 	}
 	if (fclose(stdout)) {
+<<<<<<< HEAD
 		fprintf(stderr, "close failed on standard output: %s", strerror(errno));
+=======
+		fprintf(stderr, "close failed on standard output: %s",
+			strerror_r(errno, sbuf, sizeof(sbuf)));
+>>>>>>> v3.18
 		goto out;
 	}
 	status = 0;
@@ -456,8 +503,16 @@ void pthread__unblock_sigwinch(void)
 int main(int argc, const char **argv)
 {
 	const char *cmd;
+<<<<<<< HEAD
 
 	page_size = sysconf(_SC_PAGE_SIZE);
+=======
+	char sbuf[STRERR_BUFSIZE];
+
+	/* The page_size is placed in util object. */
+	page_size = sysconf(_SC_PAGE_SIZE);
+	cacheline_size = sysconf(_SC_LEVEL1_DCACHE_LINESIZE);
+>>>>>>> v3.18
 
 	cmd = perf_extract_argv0_path(argv[0]);
 	if (!cmd)
@@ -481,7 +536,22 @@ int main(int argc, const char **argv)
 		fprintf(stderr, "cannot handle %s internally", cmd);
 		goto out;
 	}
+<<<<<<< HEAD
 
+=======
+	if (!prefixcmp(cmd, "trace")) {
+#ifdef HAVE_LIBAUDIT_SUPPORT
+		set_buildid_dir();
+		setup_path();
+		argv[0] = "trace";
+		return cmd_trace(argc, argv, NULL);
+#else
+		fprintf(stderr,
+			"trace command not available: missing audit-libs devel package at build time.\n");
+		goto out;
+#endif
+	}
+>>>>>>> v3.18
 	/* Look for flags.. */
 	argv++;
 	argc--;
@@ -538,7 +608,11 @@ int main(int argc, const char **argv)
 	}
 
 	fprintf(stderr, "Failed to run command '%s': %s\n",
+<<<<<<< HEAD
 		cmd, strerror(errno));
+=======
+		cmd, strerror_r(errno, sbuf, sizeof(sbuf)));
+>>>>>>> v3.18
 out:
 	return 1;
 }

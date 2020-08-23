@@ -17,6 +17,10 @@
 #include <linux/slab.h>
 #include <linux/rtc.h>
 #include <linux/init.h>
+<<<<<<< HEAD
+=======
+#include <linux/err.h>
+>>>>>>> v3.18
 #include <linux/errno.h>
 #include <linux/bcd.h>
 
@@ -175,7 +179,15 @@ static int pcf8583_rtc_read_time(struct device *dev, struct rtc_time *tm)
 {
 	struct i2c_client *client = to_i2c_client(dev);
 	unsigned char ctrl, year[2];
+<<<<<<< HEAD
 	struct rtc_mem mem = { CMOS_YEAR, sizeof(year), year };
+=======
+	struct rtc_mem mem = {
+		.loc = CMOS_YEAR,
+		.nr = sizeof(year),
+		.data = year
+	};
+>>>>>>> v3.18
 	int real_year, year_offset, err;
 
 	/*
@@ -188,7 +200,12 @@ static int pcf8583_rtc_read_time(struct device *dev, struct rtc_time *tm)
 		dev_warn(dev, "resetting control %02x -> %02x\n",
 			ctrl, new_ctrl);
 
+<<<<<<< HEAD
 		if ((err = pcf8583_set_ctrl(client, &new_ctrl)) < 0)
+=======
+		err = pcf8583_set_ctrl(client, &new_ctrl);
+		if (err < 0)
+>>>>>>> v3.18
 			return err;
 	}
 
@@ -220,8 +237,21 @@ static int pcf8583_rtc_set_time(struct device *dev, struct rtc_time *tm)
 {
 	struct i2c_client *client = to_i2c_client(dev);
 	unsigned char year[2], chk;
+<<<<<<< HEAD
 	struct rtc_mem cmos_year  = { CMOS_YEAR, sizeof(year), year };
 	struct rtc_mem cmos_check = { CMOS_CHECKSUM, 1, &chk };
+=======
+	struct rtc_mem cmos_year  = {
+		.loc = CMOS_YEAR,
+		.nr = sizeof(year),
+		.data = year
+	};
+	struct rtc_mem cmos_check = {
+		.loc = CMOS_CHECKSUM,
+		.nr = 1,
+		.data = &chk
+	};
+>>>>>>> v3.18
 	unsigned int proper_year = tm->tm_year + 1900;
 	int ret;
 
@@ -283,6 +313,7 @@ static int pcf8583_probe(struct i2c_client *client,
 				pcf8583_driver.driver.name,
 				&pcf8583_rtc_ops, THIS_MODULE);
 
+<<<<<<< HEAD
 	if (IS_ERR(pcf8583->rtc))
 		return PTR_ERR(pcf8583->rtc);
 
@@ -292,6 +323,9 @@ static int pcf8583_probe(struct i2c_client *client,
 static int pcf8583_remove(struct i2c_client *client)
 {
 	return 0;
+=======
+	return PTR_ERR_OR_ZERO(pcf8583->rtc);
+>>>>>>> v3.18
 }
 
 static const struct i2c_device_id pcf8583_id[] = {
@@ -306,7 +340,10 @@ static struct i2c_driver pcf8583_driver = {
 		.owner	= THIS_MODULE,
 	},
 	.probe		= pcf8583_probe,
+<<<<<<< HEAD
 	.remove		= pcf8583_remove,
+=======
+>>>>>>> v3.18
 	.id_table	= pcf8583_id,
 };
 

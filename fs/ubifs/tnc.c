@@ -34,11 +34,14 @@
 #include <linux/slab.h>
 #include "ubifs.h"
 
+<<<<<<< HEAD
 static int try_read_node(const struct ubifs_info *c, void *buf, int type,
 			 int len, int lnum, int offs);
 static int fallible_read_node(struct ubifs_info *c, const union ubifs_key *key,
 			      struct ubifs_zbranch *zbr, void *node);
 
+=======
+>>>>>>> v3.18
 /*
  * Returned codes of 'matches_name()' and 'fallible_matches_name()' functions.
  * @NAME_LESS: name corresponding to the first argument is less than second
@@ -103,7 +106,11 @@ static int insert_old_idx(struct ubifs_info *c, int lnum, int offs)
 		else if (offs > o->offs)
 			p = &(*p)->rb_right;
 		else {
+<<<<<<< HEAD
 			ubifs_err("old idx added twice!", c->vi.ubi_num);
+=======
+			ubifs_err("old idx added twice!");
+>>>>>>> v3.18
 			kfree(old_idx);
 			return 0;
 		}
@@ -183,6 +190,7 @@ static int ins_clr_old_idx_znode(struct ubifs_info *c,
  */
 void destroy_old_idx(struct ubifs_info *c)
 {
+<<<<<<< HEAD
 	struct rb_node *this = c->old_idx.rb_node;
 	struct ubifs_old_idx *old_idx;
 
@@ -204,6 +212,13 @@ void destroy_old_idx(struct ubifs_info *c)
 		}
 		kfree(old_idx);
 	}
+=======
+	struct ubifs_old_idx *old_idx, *n;
+
+	rbtree_postorder_for_each_entry_safe(old_idx, n, &c->old_idx, rb)
+		kfree(old_idx);
+
+>>>>>>> v3.18
 	c->old_idx = RB_ROOT;
 }
 
@@ -424,6 +439,7 @@ static int tnc_read_node_nm(struct ubifs_info *c, struct ubifs_zbranch *zbr,
 		return 0;
 	}
 
+<<<<<<< HEAD
 	if (c->replaying) {
 		err = fallible_read_node(c, &zbr->key, zbr, node);
 		/*
@@ -437,6 +453,9 @@ static int tnc_read_node_nm(struct ubifs_info *c, struct ubifs_zbranch *zbr,
 	} else {
 		err = ubifs_tnc_read_node(c, zbr, node);
 	}
+=======
+	err = ubifs_tnc_read_node(c, zbr, node);
+>>>>>>> v3.18
 	if (err)
 		return err;
 
@@ -481,7 +500,11 @@ static int try_read_node(const struct ubifs_info *c, void *buf, int type,
 	err = ubifs_leb_read(c, lnum, buf, offs, len, 1);
 	if (err) {
 		ubifs_err("cannot read node type %d from LEB %d:%d, error %d",
+<<<<<<< HEAD
 				c->vi.ubi_num, type, lnum, offs, err);
+=======
+			  type, lnum, offs, err);
+>>>>>>> v3.18
 		return err;
 	}
 
@@ -1717,29 +1740,45 @@ static int validate_data_node(struct ubifs_info *c, void *buf,
 	int err, len;
 
 	if (ch->node_type != UBIFS_DATA_NODE) {
+<<<<<<< HEAD
 		ubifs_err("bad node type (%d but expected %d)", c->vi.ubi_num,
+=======
+		ubifs_err("bad node type (%d but expected %d)",
+>>>>>>> v3.18
 			  ch->node_type, UBIFS_DATA_NODE);
 		goto out_err;
 	}
 
 	err = ubifs_check_node(c, buf, zbr->lnum, zbr->offs, 0, 0);
 	if (err) {
+<<<<<<< HEAD
 		ubifs_err("expected node type %d", c->vi.ubi_num,
 				UBIFS_DATA_NODE);
+=======
+		ubifs_err("expected node type %d", UBIFS_DATA_NODE);
+>>>>>>> v3.18
 		goto out;
 	}
 
 	len = le32_to_cpu(ch->len);
 	if (len != zbr->len) {
+<<<<<<< HEAD
 		ubifs_err("bad node length %d, expected %d", c->vi.ubi_num,
 				len, zbr->len);
+=======
+		ubifs_err("bad node length %d, expected %d", len, zbr->len);
+>>>>>>> v3.18
 		goto out_err;
 	}
 
 	/* Make sure the key of the read node is correct */
 	key_read(c, buf + UBIFS_KEY_OFFSET, &key1);
 	if (!keys_eq(c, &zbr->key, &key1)) {
+<<<<<<< HEAD
 		ubifs_err("bad key in node at LEB %d:%d", c->vi.ubi_num,
+=======
+		ubifs_err("bad key in node at LEB %d:%d",
+>>>>>>> v3.18
 			  zbr->lnum, zbr->offs);
 		dbg_tnck(&zbr->key, "looked for key ");
 		dbg_tnck(&key1, "found node's key ");
@@ -1751,7 +1790,11 @@ static int validate_data_node(struct ubifs_info *c, void *buf,
 out_err:
 	err = -EINVAL;
 out:
+<<<<<<< HEAD
 	ubifs_err("bad node at LEB %d:%d", c->vi.ubi_num, zbr->lnum, zbr->offs);
+=======
+	ubifs_err("bad node at LEB %d:%d", zbr->lnum, zbr->offs);
+>>>>>>> v3.18
 	ubifs_dump_node(c, buf);
 	dump_stack();
 	return err;
@@ -1776,8 +1819,12 @@ int ubifs_tnc_bulk_read(struct ubifs_info *c, struct bu_info *bu)
 	len = bu->zbranch[bu->cnt - 1].offs;
 	len += bu->zbranch[bu->cnt - 1].len - offs;
 	if (len > bu->buf_len) {
+<<<<<<< HEAD
 		ubifs_err("buffer too small %d vs %d", c->vi.ubi_num,
 				bu->buf_len, len);
+=======
+		ubifs_err("buffer too small %d vs %d", bu->buf_len, len);
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
@@ -1794,7 +1841,11 @@ int ubifs_tnc_bulk_read(struct ubifs_info *c, struct bu_info *bu)
 
 	if (err && err != -EBADMSG) {
 		ubifs_err("failed to read from LEB %d:%d, error %d",
+<<<<<<< HEAD
 				c->vi.ubi_num, lnum, offs, err);
+=======
+			  lnum, offs, err);
+>>>>>>> v3.18
 		dump_stack();
 		dbg_tnck(&bu->key, "key ");
 		return err;
@@ -2803,11 +2854,15 @@ struct ubifs_dent_node *ubifs_tnc_next_ent(struct ubifs_info *c,
 	if (nm->name) {
 		if (err) {
 			/* Handle collisions */
+<<<<<<< HEAD
 			if (c->replaying)
 				err = fallible_resolve_collision(c, key, &znode, &n,
 							 nm, 0);
 			else
 				err = resolve_collision(c, key, &znode, &n, nm);
+=======
+			err = resolve_collision(c, key, &znode, &n, nm);
+>>>>>>> v3.18
 			dbg_tnc("rc returned %d, znode %p, n %d",
 				err, znode, n);
 			if (unlikely(err < 0))
@@ -2899,10 +2954,18 @@ void ubifs_tnc_close(struct ubifs_info *c)
 {
 	tnc_destroy_cnext(c);
 	if (c->zroot.znode) {
+<<<<<<< HEAD
 		long n;
 
 		ubifs_destroy_tnc_subtree(c->zroot.znode);
 		n = atomic_long_read(&c->clean_zn_cnt);
+=======
+		long n, freed;
+
+		n = atomic_long_read(&c->clean_zn_cnt);
+		freed = ubifs_destroy_tnc_subtree(c->zroot.znode);
+		ubifs_assert(freed == n);
+>>>>>>> v3.18
 		atomic_long_sub(n, &ubifs_clean_zn_cnt);
 	}
 	kfree(c->gap_lebs);
@@ -3333,7 +3396,10 @@ int dbg_check_inode_size(struct ubifs_info *c, const struct inode *inode,
 		goto out_unlock;
 
 	if (err) {
+<<<<<<< HEAD
 		err = -EINVAL;
+=======
+>>>>>>> v3.18
 		key = &from_key;
 		goto out_dump;
 	}
@@ -3354,7 +3420,11 @@ int dbg_check_inode_size(struct ubifs_info *c, const struct inode *inode,
 out_dump:
 	block = key_block(c, key);
 	ubifs_err("inode %lu has size %lld, but there are data at offset %lld",
+<<<<<<< HEAD
 		  c->vi.ubi_num, (unsigned long)inode->i_ino, size,
+=======
+		  (unsigned long)inode->i_ino, size,
+>>>>>>> v3.18
 		  ((loff_t)block) << UBIFS_BLOCK_SHIFT);
 	mutex_unlock(&c->tnc_mutex);
 	ubifs_dump_inode(c, inode);

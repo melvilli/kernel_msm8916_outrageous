@@ -31,7 +31,11 @@ static inline void arch_kgdb_breakpoint(void)
 	__asm__ __volatile__ ("trap_s	0x4\n");
 }
 
+<<<<<<< HEAD
 extern void kgdb_trap(struct pt_regs *regs, int param);
+=======
+extern void kgdb_trap(struct pt_regs *regs);
+>>>>>>> v3.18
 
 /* This is the numbering of registers according to the GDB. See GDB's
  * arc-tdep.h for details.
@@ -57,7 +61,11 @@ enum arc_linux_regnums {
 };
 
 #else
+<<<<<<< HEAD
 #define kgdb_trap(regs, param)
+=======
+#define kgdb_trap(regs)
+>>>>>>> v3.18
 #endif
 
 #endif	/* __ARC_KGDB_H__ */

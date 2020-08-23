@@ -3,6 +3,10 @@
 
 #include <linux/device.h>
 #include <linux/uuid.h>
+<<<<<<< HEAD
+=======
+#include <linux/mod_devicetable.h>
+>>>>>>> v3.18
 
 struct mei_cl_device;
 

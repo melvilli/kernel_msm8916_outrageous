@@ -4,7 +4,11 @@
  *
  * Copyright (c) 2010 by Kyle Strickland
  *   (based on kworld-plus-tv-analog.c by
+<<<<<<< HEAD
  *    Mauro Carvalho Chehab <mchehab@redhat.com>)
+=======
+ *    Mauro Carvalho Chehab)
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

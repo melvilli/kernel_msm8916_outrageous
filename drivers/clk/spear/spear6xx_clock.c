@@ -169,8 +169,14 @@ void __init spear6xx_clk_init(void __iomem *misc_base)
 	clk_register_clkdev(clk1, "uart_syn_gclk", NULL);
 
 	clk = clk_register_mux(NULL, "uart_mclk", uart_parents,
+<<<<<<< HEAD
 			ARRAY_SIZE(uart_parents), 0, PERIP_CLK_CFG,
 			UART_CLK_SHIFT, UART_CLK_MASK, 0, &_lock);
+=======
+			ARRAY_SIZE(uart_parents), CLK_SET_RATE_NO_REPARENT,
+			PERIP_CLK_CFG, UART_CLK_SHIFT, UART_CLK_MASK, 0,
+			&_lock);
+>>>>>>> v3.18
 	clk_register_clkdev(clk, "uart_mclk", NULL);
 
 	clk = clk_register_gate(NULL, "uart0", "uart_mclk", 0, PERIP1_CLK_ENB,
@@ -188,8 +194,14 @@ void __init spear6xx_clk_init(void __iomem *misc_base)
 	clk_register_clkdev(clk1, "firda_syn_gclk", NULL);
 
 	clk = clk_register_mux(NULL, "firda_mclk", firda_parents,
+<<<<<<< HEAD
 			ARRAY_SIZE(firda_parents), 0, PERIP_CLK_CFG,
 			FIRDA_CLK_SHIFT, FIRDA_CLK_MASK, 0, &_lock);
+=======
+			ARRAY_SIZE(firda_parents), CLK_SET_RATE_NO_REPARENT,
+			PERIP_CLK_CFG, FIRDA_CLK_SHIFT, FIRDA_CLK_MASK, 0,
+			&_lock);
+>>>>>>> v3.18
 	clk_register_clkdev(clk, "firda_mclk", NULL);
 
 	clk = clk_register_gate(NULL, "firda_clk", "firda_mclk", 0,
@@ -203,8 +215,14 @@ void __init spear6xx_clk_init(void __iomem *misc_base)
 	clk_register_clkdev(clk1, "clcd_syn_gclk", NULL);
 
 	clk = clk_register_mux(NULL, "clcd_mclk", clcd_parents,
+<<<<<<< HEAD
 			ARRAY_SIZE(clcd_parents), 0, PERIP_CLK_CFG,
 			CLCD_CLK_SHIFT, CLCD_CLK_MASK, 0, &_lock);
+=======
+			ARRAY_SIZE(clcd_parents), CLK_SET_RATE_NO_REPARENT,
+			PERIP_CLK_CFG, CLCD_CLK_SHIFT, CLCD_CLK_MASK, 0,
+			&_lock);
+>>>>>>> v3.18
 	clk_register_clkdev(clk, "clcd_mclk", NULL);
 
 	clk = clk_register_gate(NULL, "clcd_clk", "clcd_mclk", 0,
@@ -217,6 +235,7 @@ void __init spear6xx_clk_init(void __iomem *misc_base)
 	clk_register_clkdev(clk, "gpt0_1_syn_clk", NULL);
 
 	clk = clk_register_mux(NULL, "gpt0_mclk", gpt0_1_parents,
+<<<<<<< HEAD
 			ARRAY_SIZE(gpt0_1_parents), 0, PERIP_CLK_CFG,
 			GPT0_CLK_SHIFT, GPT_CLK_MASK, 0, &_lock);
 	clk_register_clkdev(clk, NULL, "gpt0");
@@ -224,6 +243,15 @@ void __init spear6xx_clk_init(void __iomem *misc_base)
 	clk = clk_register_mux(NULL, "gpt1_mclk", gpt0_1_parents,
 			ARRAY_SIZE(gpt0_1_parents), 0, PERIP_CLK_CFG,
 			GPT1_CLK_SHIFT, GPT_CLK_MASK, 0, &_lock);
+=======
+			ARRAY_SIZE(gpt0_1_parents), CLK_SET_RATE_NO_REPARENT,
+			PERIP_CLK_CFG, GPT0_CLK_SHIFT, GPT_CLK_MASK, 0, &_lock);
+	clk_register_clkdev(clk, NULL, "gpt0");
+
+	clk = clk_register_mux(NULL, "gpt1_mclk", gpt0_1_parents,
+			ARRAY_SIZE(gpt0_1_parents), CLK_SET_RATE_NO_REPARENT,
+			PERIP_CLK_CFG, GPT1_CLK_SHIFT, GPT_CLK_MASK, 0, &_lock);
+>>>>>>> v3.18
 	clk_register_clkdev(clk, "gpt1_mclk", NULL);
 
 	clk = clk_register_gate(NULL, "gpt1_clk", "gpt1_mclk", 0,
@@ -235,8 +263,13 @@ void __init spear6xx_clk_init(void __iomem *misc_base)
 	clk_register_clkdev(clk, "gpt2_syn_clk", NULL);
 
 	clk = clk_register_mux(NULL, "gpt2_mclk", gpt2_parents,
+<<<<<<< HEAD
 			ARRAY_SIZE(gpt2_parents), 0, PERIP_CLK_CFG,
 			GPT2_CLK_SHIFT, GPT_CLK_MASK, 0, &_lock);
+=======
+			ARRAY_SIZE(gpt2_parents), CLK_SET_RATE_NO_REPARENT,
+			PERIP_CLK_CFG, GPT2_CLK_SHIFT, GPT_CLK_MASK, 0, &_lock);
+>>>>>>> v3.18
 	clk_register_clkdev(clk, "gpt2_mclk", NULL);
 
 	clk = clk_register_gate(NULL, "gpt2_clk", "gpt2_mclk", 0,
@@ -248,8 +281,13 @@ void __init spear6xx_clk_init(void __iomem *misc_base)
 	clk_register_clkdev(clk, "gpt3_syn_clk", NULL);
 
 	clk = clk_register_mux(NULL, "gpt3_mclk", gpt3_parents,
+<<<<<<< HEAD
 			ARRAY_SIZE(gpt3_parents), 0, PERIP_CLK_CFG,
 			GPT3_CLK_SHIFT, GPT_CLK_MASK, 0, &_lock);
+=======
+			ARRAY_SIZE(gpt3_parents), CLK_SET_RATE_NO_REPARENT,
+			PERIP_CLK_CFG, GPT3_CLK_SHIFT, GPT_CLK_MASK, 0, &_lock);
+>>>>>>> v3.18
 	clk_register_clkdev(clk, "gpt3_mclk", NULL);
 
 	clk = clk_register_gate(NULL, "gpt3_clk", "gpt3_mclk", 0,
@@ -277,8 +315,13 @@ void __init spear6xx_clk_init(void __iomem *misc_base)
 	clk_register_clkdev(clk, "ahbmult2_clk", NULL);
 
 	clk = clk_register_mux(NULL, "ddr_clk", ddr_parents,
+<<<<<<< HEAD
 			ARRAY_SIZE(ddr_parents), 0, PLL_CLK_CFG, MCTR_CLK_SHIFT,
 			MCTR_CLK_MASK, 0, &_lock);
+=======
+			ARRAY_SIZE(ddr_parents), CLK_SET_RATE_NO_REPARENT,
+			PLL_CLK_CFG, MCTR_CLK_SHIFT, MCTR_CLK_MASK, 0, &_lock);
+>>>>>>> v3.18
 	clk_register_clkdev(clk, "ddr_clk", NULL);
 
 	clk = clk_register_divider(NULL, "apb_clk", "ahb_clk",

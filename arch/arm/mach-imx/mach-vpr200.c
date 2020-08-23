@@ -29,11 +29,19 @@
 #include <asm/mach/time.h>
 
 #include <linux/i2c.h>
+<<<<<<< HEAD
 #include <linux/i2c/at24.h>
+=======
+#include <linux/platform_data/at24.h>
+>>>>>>> v3.18
 #include <linux/mfd/mc13xxx.h>
 
 #include "common.h"
 #include "devices-imx35.h"
+<<<<<<< HEAD
+=======
+#include "ehci.h"
+>>>>>>> v3.18
 #include "hardware.h"
 #include "iomux-mx35.h"
 
@@ -310,7 +318,10 @@ MACHINE_START(VPR200, "VPR200")
 	.map_io = mx35_map_io,
 	.init_early = imx35_init_early,
 	.init_irq = mx35_init_irq,
+<<<<<<< HEAD
 	.handle_irq = imx35_handle_irq,
+=======
+>>>>>>> v3.18
 	.init_time = vpr200_timer_init,
 	.init_machine = vpr200_board_init,
 	.restart	= mxc_restart,

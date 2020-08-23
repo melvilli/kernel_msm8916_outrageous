@@ -25,6 +25,7 @@
 #ifndef _HYPERV_H
 #define _HYPERV_H
 
+<<<<<<< HEAD
 #include <linux/types.h>
 
 
@@ -336,6 +337,13 @@ struct hv_kvp_ip_msg {
 #include <linux/scatterlist.h>
 #include <linux/list.h>
 #include <linux/uuid.h>
+=======
+#include <uapi/linux/hyperv.h>
+
+#include <linux/types.h>
+#include <linux/scatterlist.h>
+#include <linux/list.h>
+>>>>>>> v3.18
 #include <linux/timer.h>
 #include <linux/workqueue.h>
 #include <linux/completion.h>
@@ -343,7 +351,11 @@ struct hv_kvp_ip_msg {
 #include <linux/mod_devicetable.h>
 
 
+<<<<<<< HEAD
 #define MAX_PAGE_BUFFER_COUNT				19
+=======
+#define MAX_PAGE_BUFFER_COUNT				32
+>>>>>>> v3.18
 #define MAX_MULTIPAGE_BUFFER_COUNT			32 /* 128K */
 
 #pragma pack(push, 1)
@@ -421,6 +433,7 @@ struct hv_ring_buffer_info {
 	u32 ring_data_startoffset;
 };
 
+<<<<<<< HEAD
 struct hv_ring_buffer_debug_info {
 	u32 current_interrupt_mask;
 	u32 current_read_index;
@@ -430,6 +443,8 @@ struct hv_ring_buffer_debug_info {
 };
 
 
+=======
+>>>>>>> v3.18
 /*
  *
  * hv_get_ringbuffer_availbytes()
@@ -455,6 +470,7 @@ hv_get_ringbuffer_availbytes(struct hv_ring_buffer_info *rbi,
 	*read = dsize - *write;
 }
 
+<<<<<<< HEAD
 
 /*
  * We use the same version numbering for all Hyper-V modules.
@@ -476,6 +492,8 @@ hv_get_ringbuffer_availbytes(struct hv_ring_buffer_info *rbi,
  */
 #define HV_DRV_VERSION           "3.1"
 
+=======
+>>>>>>> v3.18
 /*
  * VMBUS version is 32 bit entity broken up into
  * two 16 bit quantities: major_number. minor_number.
@@ -491,7 +509,10 @@ hv_get_ringbuffer_availbytes(struct hv_ring_buffer_info *rbi,
 #define VERSION_WIN8    ((2 << 16) | (4))
 #define VERSION_WIN8_1    ((3 << 16) | (0))
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 #define VERSION_INVAL -1
 
 #define VERSION_CURRENT VERSION_WIN8_1
@@ -912,6 +933,7 @@ enum vmbus_channel_state {
 	CHANNEL_OFFER_STATE,
 	CHANNEL_OPENING_STATE,
 	CHANNEL_OPEN_STATE,
+<<<<<<< HEAD
 };
 
 struct vmbus_channel_debug_info {
@@ -929,6 +951,9 @@ struct vmbus_channel_debug_info {
 
 	struct hv_ring_buffer_debug_info inbound;
 	struct hv_ring_buffer_debug_info outbound;
+=======
+	CHANNEL_OPENED_STATE,
+>>>>>>> v3.18
 };
 
 /*
@@ -1049,6 +1074,52 @@ struct vmbus_channel {
 	 * preserve the earlier behavior.
 	 */
 	u32 target_vp;
+<<<<<<< HEAD
+=======
+	/* The corresponding CPUID in the guest */
+	u32 target_cpu;
+	/*
+	 * Support for sub-channels. For high performance devices,
+	 * it will be useful to have multiple sub-channels to support
+	 * a scalable communication infrastructure with the host.
+	 * The support for sub-channels is implemented as an extention
+	 * to the current infrastructure.
+	 * The initial offer is considered the primary channel and this
+	 * offer message will indicate if the host supports sub-channels.
+	 * The guest is free to ask for sub-channels to be offerred and can
+	 * open these sub-channels as a normal "primary" channel. However,
+	 * all sub-channels will have the same type and instance guids as the
+	 * primary channel. Requests sent on a given channel will result in a
+	 * response on the same channel.
+	 */
+
+	/*
+	 * Sub-channel creation callback. This callback will be called in
+	 * process context when a sub-channel offer is received from the host.
+	 * The guest can open the sub-channel in the context of this callback.
+	 */
+	void (*sc_creation_callback)(struct vmbus_channel *new_sc);
+
+	spinlock_t sc_lock;
+	/*
+	 * All Sub-channels of a primary channel are linked here.
+	 */
+	struct list_head sc_list;
+	/*
+	 * The primary channel this sub-channel belongs to.
+	 * This will be NULL for the primary channel.
+	 */
+	struct vmbus_channel *primary_channel;
+	/*
+	 * Support per-channel state for use by vmbus drivers.
+	 */
+	void *per_channel_state;
+	/*
+	 * To support per-cpu lookup mapping of relid to channel,
+	 * link up channels based on their CPU affinity.
+	 */
+	struct list_head percpu_list;
+>>>>>>> v3.18
 };
 
 static inline void set_channel_read_state(struct vmbus_channel *c, bool state)
@@ -1056,10 +1127,54 @@ static inline void set_channel_read_state(struct vmbus_channel *c, bool state)
 	c->batched_reading = state;
 }
 
+<<<<<<< HEAD
+=======
+static inline void set_per_channel_state(struct vmbus_channel *c, void *s)
+{
+	c->per_channel_state = s;
+}
+
+static inline void *get_per_channel_state(struct vmbus_channel *c)
+{
+	return c->per_channel_state;
+}
+
+>>>>>>> v3.18
 void vmbus_onmessage(void *context);
 
 int vmbus_request_offers(void);
 
+<<<<<<< HEAD
+=======
+/*
+ * APIs for managing sub-channels.
+ */
+
+void vmbus_set_sc_create_callback(struct vmbus_channel *primary_channel,
+			void (*sc_cr_cb)(struct vmbus_channel *new_sc));
+
+/*
+ * Retrieve the (sub) channel on which to send an outgoing request.
+ * When a primary channel has multiple sub-channels, we choose a
+ * channel whose VCPU binding is closest to the VCPU on which
+ * this call is being made.
+ */
+struct vmbus_channel *vmbus_get_outgoing_channel(struct vmbus_channel *primary);
+
+/*
+ * Check if sub-channels have already been offerred. This API will be useful
+ * when the driver is unloaded after establishing sub-channels. In this case,
+ * when the driver is re-loaded, the driver would have to check if the
+ * subchannels have already been established before attempting to request
+ * the creation of sub-channels.
+ * This function returns TRUE to indicate that subchannels have already been
+ * created.
+ * This function should be invoked after setting the callback function for
+ * sub-channel creation.
+ */
+bool vmbus_are_subchannels_present(struct vmbus_channel *primary);
+
+>>>>>>> v3.18
 /* The format must be the same as struct vmdata_gpa_direct */
 struct vmbus_channel_packet_page_buffer {
 	u16 type;
@@ -1096,7 +1211,11 @@ extern int vmbus_open(struct vmbus_channel *channel,
 extern void vmbus_close(struct vmbus_channel *channel);
 
 extern int vmbus_sendpacket(struct vmbus_channel *channel,
+<<<<<<< HEAD
 				  const void *buffer,
+=======
+				  void *buffer,
+>>>>>>> v3.18
 				  u32 bufferLen,
 				  u64 requestid,
 				  enum vmbus_packet_type type,
@@ -1136,6 +1255,7 @@ extern int vmbus_recvpacket_raw(struct vmbus_channel *channel,
 				     u64 *requestid);
 
 
+<<<<<<< HEAD
 extern void vmbus_get_debug_info(struct vmbus_channel *channel,
 				     struct vmbus_channel_debug_info *debug);
 
@@ -1149,6 +1269,10 @@ struct hv_dev_port_info {
 	u32 bytes_avail_towrite;
 };
 
+=======
+extern void vmbus_ontimer(unsigned long data);
+
+>>>>>>> v3.18
 /* Base driver object */
 struct hv_driver {
 	const char *name;
@@ -1330,6 +1454,29 @@ void vmbus_driver_unregister(struct hv_driver *hv_driver);
 			0x8e, 0x77, 0x05, 0x58, 0xeb, 0x10, 0x73, 0xf8 \
 		}
 
+<<<<<<< HEAD
+=======
+/*
+ * Synthetic FC GUID
+ * {2f9bcc4a-0069-4af3-b76b-6fd0be528cda}
+ */
+#define HV_SYNTHFC_GUID \
+	.guid = { \
+			0x4A, 0xCC, 0x9B, 0x2F, 0x69, 0x00, 0xF3, 0x4A, \
+			0xB7, 0x6B, 0x6F, 0xD0, 0xBE, 0x52, 0x8C, 0xDA \
+		}
+
+/*
+ * Guest File Copy Service
+ * {34D14BE3-DEE4-41c8-9AE7-6B174977C192}
+ */
+
+#define HV_FCOPY_GUID \
+	.guid = { \
+			0xE3, 0x4B, 0xD1, 0x34, 0xE4, 0xDE, 0xC8, 0x41, \
+			0x9A, 0xE7, 0x6B, 0x17, 0x49, 0x77, 0xC1, 0x92 \
+		}
+>>>>>>> v3.18
 
 /*
  * Common header for Hyper-V ICs
@@ -1427,7 +1574,11 @@ struct hyperv_service_callback {
 };
 
 #define MAX_SRV_VER	0x7ffffff
+<<<<<<< HEAD
 extern void vmbus_prep_negotiate_resp(struct icmsg_hdr *,
+=======
+extern bool vmbus_prep_negotiate_resp(struct icmsg_hdr *,
+>>>>>>> v3.18
 					struct icmsg_negotiate *, u8 *, int,
 					int);
 
@@ -1439,11 +1590,19 @@ int hv_vss_init(struct hv_util_service *);
 void hv_vss_deinit(void);
 void hv_vss_onchannelcallback(void *);
 
+<<<<<<< HEAD
+=======
+extern struct resource hyperv_mmio;
+
+>>>>>>> v3.18
 /*
  * Negotiated version with the Host.
  */
 
 extern __u32 vmbus_proto_version;
 
+<<<<<<< HEAD
 #endif /* __KERNEL__ */
+=======
+>>>>>>> v3.18
 #endif /* _HYPERV_H */

@@ -26,6 +26,10 @@
 #include <asm/errno.h>
 #include <asm/xics.h>
 #include <asm/kvm_ppc.h>
+<<<<<<< HEAD
+=======
+#include <asm/dbell.h>
+>>>>>>> v3.18
 
 struct icp_ipl {
 	union {
@@ -145,7 +149,42 @@ static unsigned int icp_native_get_irq(void)
 static void icp_native_cause_ipi(int cpu, unsigned long data)
 {
 	kvmppc_set_host_ipi(cpu, 1);
+<<<<<<< HEAD
 	icp_native_set_qirr(cpu, IPI_PRIORITY);
+=======
+#ifdef CONFIG_PPC_DOORBELL
+	if (cpu_has_feature(CPU_FTR_DBELL) &&
+	    (cpumask_test_cpu(cpu, cpu_sibling_mask(smp_processor_id()))))
+		doorbell_cause_ipi(cpu, data);
+	else
+#endif
+		icp_native_set_qirr(cpu, IPI_PRIORITY);
+}
+
+/*
+ * Called when an interrupt is received on an off-line CPU to
+ * clear the interrupt, so that the CPU can go back to nap mode.
+ */
+void icp_native_flush_interrupt(void)
+{
+	unsigned int xirr = icp_native_get_xirr();
+	unsigned int vec = xirr & 0x00ffffff;
+
+	if (vec == XICS_IRQ_SPURIOUS)
+		return;
+	if (vec == XICS_IPI) {
+		/* Clear pending IPI */
+		int cpu = smp_processor_id();
+		kvmppc_set_host_ipi(cpu, 0);
+		icp_native_set_qirr(cpu, 0xff);
+	} else {
+		pr_err("XICS: hw interrupt 0x%x to offline cpu, disabling\n",
+		       vec);
+		xics_mask_unknown_vec(vec);
+	}
+	/* EOI the interrupt */
+	icp_native_set_xirr(xirr);
+>>>>>>> v3.18
 }
 
 void xics_wake_cpu(int cpu)
@@ -216,7 +255,11 @@ static int __init icp_native_init_one_node(struct device_node *np,
 					   unsigned int *indx)
 {
 	unsigned int ilen;
+<<<<<<< HEAD
 	const u32 *ireg;
+=======
+	const __be32 *ireg;
+>>>>>>> v3.18
 	int i;
 	int reg_tuple_size;
 	int num_servers = 0;

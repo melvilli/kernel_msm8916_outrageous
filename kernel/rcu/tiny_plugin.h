@@ -14,8 +14,13 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+ * along with this program; if not, you can access it online at
+ * http://www.gnu.org/licenses/gpl-2.0.html.
+>>>>>>> v3.18
  *
  * Copyright (c) 2010 Linaro
  *
@@ -36,7 +41,11 @@ struct rcu_ctrlblk {
 	RCU_TRACE(unsigned long gp_start); /* Start time for stalls. */
 	RCU_TRACE(unsigned long ticks_this_gp); /* Statistic for stalls. */
 	RCU_TRACE(unsigned long jiffies_stall); /* Jiffies at next stall. */
+<<<<<<< HEAD
 	RCU_TRACE(char *name);		/* Name of RCU type. */
+=======
+	RCU_TRACE(const char *name);	/* Name of RCU type. */
+>>>>>>> v3.18
 };
 
 /* Definition for rcupdate control block. */
@@ -53,6 +62,7 @@ static struct rcu_ctrlblk rcu_bh_ctrlblk = {
 };
 
 #ifdef CONFIG_DEBUG_LOCK_ALLOC
+<<<<<<< HEAD
 int rcu_scheduler_active __read_mostly;
 EXPORT_SYMBOL_GPL(rcu_scheduler_active);
 #endif /* #ifdef CONFIG_DEBUG_LOCK_ALLOC */
@@ -1005,6 +1015,12 @@ early_initcall(rcu_scheduler_really_started);
 
 #ifdef CONFIG_DEBUG_LOCK_ALLOC
 #include <linux/kernel_stat.h>
+=======
+#include <linux/kernel_stat.h>
+
+int rcu_scheduler_active __read_mostly;
+EXPORT_SYMBOL_GPL(rcu_scheduler_active);
+>>>>>>> v3.18
 
 /*
  * During boot, we forgive RCU lockdep issues.  After this function is
@@ -1020,6 +1036,7 @@ void __init rcu_scheduler_starting(void)
 
 #ifdef CONFIG_RCU_TRACE
 
+<<<<<<< HEAD
 #ifdef CONFIG_RCU_BOOST
 
 static void rcu_initiate_boost_trace(void)
@@ -1039,6 +1056,8 @@ static void rcu_initiate_boost_trace(void)
 
 #endif /* #ifdef CONFIG_RCU_BOOST */
 
+=======
+>>>>>>> v3.18
 static void rcu_trace_sub_qlen(struct rcu_ctrlblk *rcp, int n)
 {
 	unsigned long flags;
@@ -1053,7 +1072,10 @@ static void rcu_trace_sub_qlen(struct rcu_ctrlblk *rcp, int n)
  */
 static int show_tiny_stats(struct seq_file *m, void *unused)
 {
+<<<<<<< HEAD
 	show_tiny_preempt_stats(m);
+=======
+>>>>>>> v3.18
 	seq_printf(m, "rcu_sched: qlen: %ld\n", rcu_sched_ctrlblk.qlen);
 	seq_printf(m, "rcu_bh: qlen: %ld\n", rcu_bh_ctrlblk.qlen);
 	return 0;
@@ -1103,11 +1125,48 @@ MODULE_AUTHOR("Paul E. McKenney");
 MODULE_DESCRIPTION("Read-Copy Update tracing for tiny implementation");
 MODULE_LICENSE("GPL");
 
+<<<<<<< HEAD
 static void check_cpu_stall_preempt(void)
 {
 #ifdef CONFIG_TINY_PREEMPT_RCU
 	check_cpu_stall(&rcu_preempt_ctrlblk.rcb);
 #endif /* #ifdef CONFIG_TINY_PREEMPT_RCU */
+=======
+static void check_cpu_stall(struct rcu_ctrlblk *rcp)
+{
+	unsigned long j;
+	unsigned long js;
+
+	if (rcu_cpu_stall_suppress)
+		return;
+	rcp->ticks_this_gp++;
+	j = jiffies;
+	js = ACCESS_ONCE(rcp->jiffies_stall);
+	if (*rcp->curtail && ULONG_CMP_GE(j, js)) {
+		pr_err("INFO: %s stall on CPU (%lu ticks this GP) idle=%llx (t=%lu jiffies q=%ld)\n",
+		       rcp->name, rcp->ticks_this_gp, rcu_dynticks_nesting,
+		       jiffies - rcp->gp_start, rcp->qlen);
+		dump_stack();
+	}
+	if (*rcp->curtail && ULONG_CMP_GE(j, js))
+		ACCESS_ONCE(rcp->jiffies_stall) = jiffies +
+			3 * rcu_jiffies_till_stall_check() + 3;
+	else if (ULONG_CMP_GE(j, js))
+		ACCESS_ONCE(rcp->jiffies_stall) = jiffies + rcu_jiffies_till_stall_check();
+}
+
+static void reset_cpu_stall_ticks(struct rcu_ctrlblk *rcp)
+{
+	rcp->ticks_this_gp = 0;
+	rcp->gp_start = jiffies;
+	ACCESS_ONCE(rcp->jiffies_stall) = jiffies + rcu_jiffies_till_stall_check();
+}
+
+static void check_cpu_stalls(void)
+{
+	RCU_TRACE(check_cpu_stall(&rcu_bh_ctrlblk));
+	RCU_TRACE(check_cpu_stall(&rcu_sched_ctrlblk));
+>>>>>>> v3.18
 }
 
 #endif /* #ifdef CONFIG_RCU_TRACE */

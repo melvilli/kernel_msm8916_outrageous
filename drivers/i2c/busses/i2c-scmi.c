@@ -12,7 +12,10 @@
 #include <linux/slab.h>
 #include <linux/kernel.h>
 #include <linux/stddef.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/i2c.h>
 #include <linux/acpi.h>
 
@@ -223,7 +226,11 @@ acpi_smbus_cmi_access(struct i2c_adapter *adap, u16 addr, unsigned short flags,
 		goto out;
 
 	obj = pkg->package.elements + 1;
+<<<<<<< HEAD
 	if (obj == NULL || obj->type != ACPI_TYPE_INTEGER) {
+=======
+	if (obj->type != ACPI_TYPE_INTEGER) {
+>>>>>>> v3.18
 		ACPI_ERROR((AE_INFO, "Invalid argument type"));
 		result = -EIO;
 		goto out;
@@ -235,7 +242,11 @@ acpi_smbus_cmi_access(struct i2c_adapter *adap, u16 addr, unsigned short flags,
 	case I2C_SMBUS_BYTE:
 	case I2C_SMBUS_BYTE_DATA:
 	case I2C_SMBUS_WORD_DATA:
+<<<<<<< HEAD
 		if (obj == NULL || obj->type != ACPI_TYPE_INTEGER) {
+=======
+		if (obj->type != ACPI_TYPE_INTEGER) {
+>>>>>>> v3.18
 			ACPI_ERROR((AE_INFO, "Invalid argument type"));
 			result = -EIO;
 			goto out;
@@ -246,7 +257,11 @@ acpi_smbus_cmi_access(struct i2c_adapter *adap, u16 addr, unsigned short flags,
 			data->byte = obj->integer.value;
 		break;
 	case I2C_SMBUS_BLOCK_DATA:
+<<<<<<< HEAD
 		if (obj == NULL || obj->type != ACPI_TYPE_BUFFER) {
+=======
+		if (obj->type != ACPI_TYPE_BUFFER) {
+>>>>>>> v3.18
 			ACPI_ERROR((AE_INFO, "Invalid argument type"));
 			result = -EIO;
 			goto out;

@@ -80,8 +80,16 @@ syscall_trace_entry:
 	SAVE_STATIC
 	move	s0, t2
 	move	a0, sp
+<<<<<<< HEAD
 	jal	syscall_trace_enter
 
+=======
+	daddiu	a1, v0, __NR_64_Linux
+	jal	syscall_trace_enter
+
+	bltz	v0, 2f			# seccomp failed? Skip syscall
+
+>>>>>>> v3.18
 	move	t0, s0
 	RESTORE_STATIC
 	ld	a0, PT_R4(sp)		# Restore argument registers
@@ -102,7 +110,11 @@ syscall_trace_entry:
 	sd	t1, PT_R0(sp)		# save it for syscall restarting
 1:	sd	v0, PT_R2(sp)		# result
 
+<<<<<<< HEAD
 	j	syscall_exit
+=======
+2:	j	syscall_exit
+>>>>>>> v3.18
 
 illegal_syscall:
 	/* This also isn't a 64-bit syscall, throw an error.  */
@@ -114,7 +126,12 @@ illegal_syscall:
 	END(handle_sys64)
 
 	.align	3
+<<<<<<< HEAD
 sys_call_table:
+=======
+	.type	sys_call_table, @object
+EXPORT(sys_call_table)
+>>>>>>> v3.18
 	PTR	sys_read			/* 5000 */
 	PTR	sys_write
 	PTR	sys_open
@@ -343,8 +360,13 @@ sys_call_table:
 	PTR	sys_tgkill			/* 5225 */
 	PTR	sys_utimes
 	PTR	sys_mbind
+<<<<<<< HEAD
 	PTR	sys_ni_syscall			/* sys_get_mempolicy */
 	PTR	sys_ni_syscall			/* sys_set_mempolicy */
+=======
+	PTR	sys_get_mempolicy
+	PTR	sys_set_mempolicy
+>>>>>>> v3.18
 	PTR	sys_mq_open			/* 5230 */
 	PTR	sys_mq_unlink
 	PTR	sys_mq_timedsend
@@ -424,4 +446,14 @@ sys_call_table:
 	PTR	sys_kcmp
 	PTR	sys_finit_module
 	PTR	sys_getdents64
+<<<<<<< HEAD
+=======
+	PTR	sys_sched_setattr
+	PTR	sys_sched_getattr		/* 5310 */
+	PTR	sys_renameat2
+	PTR	sys_seccomp
+	PTR	sys_getrandom
+	PTR	sys_memfd_create
+	PTR	sys_bpf				/* 5315 */
+>>>>>>> v3.18
 	.size	sys_call_table,.-sys_call_table

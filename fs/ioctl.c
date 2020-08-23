@@ -37,7 +37,11 @@ static long vfs_ioctl(struct file *filp, unsigned int cmd,
 {
 	int error = -ENOTTY;
 
+<<<<<<< HEAD
 	if (!filp->f_op || !filp->f_op->unlocked_ioctl)
+=======
+	if (!filp->f_op->unlocked_ioctl)
+>>>>>>> v3.18
 		goto out;
 
 	error = filp->f_op->unlocked_ioctl(filp, cmd, arg);
@@ -501,7 +505,11 @@ static int ioctl_fioasync(unsigned int fd, struct file *filp,
 
 	/* Did FASYNC state change ? */
 	if ((flag ^ filp->f_flags) & FASYNC) {
+<<<<<<< HEAD
 		if (filp->f_op && filp->f_op->fasync)
+=======
+		if (filp->f_op->fasync)
+>>>>>>> v3.18
 			/* fasync() adjusts filp->f_flags */
 			error = filp->f_op->fasync(fd, filp, on);
 		else

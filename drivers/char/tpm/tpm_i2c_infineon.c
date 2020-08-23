@@ -21,10 +21,15 @@
  *
  *
  */
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/i2c.h>
 #include <linux/module.h>
 #include <linux/moduleparam.h>
+=======
+#include <linux/i2c.h>
+#include <linux/module.h>
+>>>>>>> v3.18
 #include <linux/wait.h>
 #include "tpm.h"
 
@@ -74,7 +79,10 @@ struct tpm_inf_dev {
 };
 
 static struct tpm_inf_dev tpm_dev;
+<<<<<<< HEAD
 static struct i2c_driver tpm_tis_i2c_driver;
+=======
+>>>>>>> v3.18
 
 /*
  * iic_tpm_read() - read from TPM register
@@ -568,6 +576,7 @@ static bool tpm_tis_i2c_req_canceled(struct tpm_chip *chip, u8 status)
 	return (status == TPM_STS_COMMAND_READY);
 }
 
+<<<<<<< HEAD
 static const struct file_operations tis_ops = {
 	.owner = THIS_MODULE,
 	.llseek = no_llseek,
@@ -607,6 +616,9 @@ static struct attribute_group tis_attr_grp = {
 };
 
 static struct tpm_vendor_specific tpm_tis_i2c = {
+=======
+static const struct tpm_class_ops tpm_tis_i2c = {
+>>>>>>> v3.18
 	.status = tpm_tis_i2c_status,
 	.recv = tpm_tis_i2c_recv,
 	.send = tpm_tis_i2c_send,
@@ -614,8 +626,11 @@ static struct tpm_vendor_specific tpm_tis_i2c = {
 	.req_complete_mask = TPM_STS_DATA_AVAIL | TPM_STS_VALID,
 	.req_complete_val = TPM_STS_DATA_AVAIL | TPM_STS_VALID,
 	.req_canceled = tpm_tis_i2c_req_canceled,
+<<<<<<< HEAD
 	.attr_group = &tis_attr_grp,
 	.miscdev.fops = &tis_ops,
+=======
+>>>>>>> v3.18
 };
 
 static int tpm_tis_i2c_init(struct device *dev)
@@ -687,7 +702,10 @@ out_vendor:
 	chip->dev->release = NULL;
 	chip->release = NULL;
 	tpm_dev.client = NULL;
+<<<<<<< HEAD
 	dev_set_drvdata(chip->dev, chip);
+=======
+>>>>>>> v3.18
 out_err:
 	return rc;
 }
@@ -744,11 +762,17 @@ static int tpm_tis_i2c_probe(struct i2c_client *client,
 		return -ENODEV;
 	}
 
+<<<<<<< HEAD
 	client->driver = &tpm_tis_i2c_driver;
 	tpm_dev.client = client;
 	rc = tpm_tis_i2c_init(&client->dev);
 	if (rc != 0) {
 		client->driver = NULL;
+=======
+	tpm_dev.client = client;
+	rc = tpm_tis_i2c_init(&client->dev);
+	if (rc != 0) {
+>>>>>>> v3.18
 		tpm_dev.client = NULL;
 		rc = -ENODEV;
 	}
@@ -770,7 +794,10 @@ static int tpm_tis_i2c_remove(struct i2c_client *client)
 	chip->dev->release = NULL;
 	chip->release = NULL;
 	tpm_dev.client = NULL;
+<<<<<<< HEAD
 	dev_set_drvdata(chip->dev, chip);
+=======
+>>>>>>> v3.18
 
 	return 0;
 }

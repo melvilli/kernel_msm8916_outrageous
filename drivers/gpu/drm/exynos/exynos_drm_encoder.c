@@ -17,7 +17,10 @@
 
 #include "exynos_drm_drv.h"
 #include "exynos_drm_encoder.h"
+<<<<<<< HEAD
 #include "exynos_drm_connector.h"
+=======
+>>>>>>> v3.18
 
 #define to_exynos_encoder(x)	container_of(x, struct exynos_drm_encoder,\
 				drm_encoder)
@@ -26,6 +29,7 @@
  * exynos specific encoder structure.
  *
  * @drm_encoder: encoder object.
+<<<<<<< HEAD
  * @manager: specific encoder has its own manager to control a hardware
  *	appropriately and we can access a hardware drawing on this manager.
  * @dpms: store the encoder dpms value.
@@ -92,6 +96,24 @@ static void exynos_drm_encoder_dpms(struct drm_encoder *encoder, int mode)
 	}
 
 	mutex_unlock(&dev->struct_mutex);
+=======
+ * @display: the display structure that maps to this encoder
+ */
+struct exynos_drm_encoder {
+	struct drm_encoder		drm_encoder;
+	struct exynos_drm_display	*display;
+};
+
+static void exynos_drm_encoder_dpms(struct drm_encoder *encoder, int mode)
+{
+	struct exynos_drm_encoder *exynos_encoder = to_exynos_encoder(encoder);
+	struct exynos_drm_display *display = exynos_encoder->display;
+
+	DRM_DEBUG_KMS("encoder dpms: %d\n", mode);
+
+	if (display->ops->dpms)
+		display->ops->dpms(display, mode);
+>>>>>>> v3.18
 }
 
 static bool
@@ -100,6 +122,7 @@ exynos_drm_encoder_mode_fixup(struct drm_encoder *encoder,
 			       struct drm_display_mode *adjusted_mode)
 {
 	struct drm_device *dev = encoder->dev;
+<<<<<<< HEAD
 	struct drm_connector *connector;
 	struct exynos_drm_manager *manager = exynos_drm_get_manager(encoder);
 	struct exynos_drm_manager_ops *manager_ops = manager->ops;
@@ -111,11 +134,25 @@ exynos_drm_encoder_mode_fixup(struct drm_encoder *encoder,
 			if (manager_ops && manager_ops->mode_fixup)
 				manager_ops->mode_fixup(manager->dev, connector,
 							mode, adjusted_mode);
+=======
+	struct exynos_drm_encoder *exynos_encoder = to_exynos_encoder(encoder);
+	struct exynos_drm_display *display = exynos_encoder->display;
+	struct drm_connector *connector;
+
+	list_for_each_entry(connector, &dev->mode_config.connector_list, head) {
+		if (connector->encoder != encoder)
+			continue;
+
+		if (display->ops->mode_fixup)
+			display->ops->mode_fixup(display, connector, mode,
+					adjusted_mode);
+>>>>>>> v3.18
 	}
 
 	return true;
 }
 
+<<<<<<< HEAD
 static void disable_plane_to_crtc(struct drm_device *dev,
 						struct drm_crtc *old_crtc,
 						struct drm_crtc *new_crtc)
@@ -146,10 +183,13 @@ static void disable_plane_to_crtc(struct drm_device *dev,
 	}
 }
 
+=======
+>>>>>>> v3.18
 static void exynos_drm_encoder_mode_set(struct drm_encoder *encoder,
 					 struct drm_display_mode *mode,
 					 struct drm_display_mode *adjusted_mode)
 {
+<<<<<<< HEAD
 	struct drm_device *dev = encoder->dev;
 	struct drm_connector *connector;
 	struct exynos_drm_manager *manager;
@@ -185,18 +225,29 @@ static void exynos_drm_encoder_mode_set(struct drm_encoder *encoder,
 			exynos_encoder->old_crtc = encoder->crtc;
 		}
 	}
+=======
+	struct exynos_drm_encoder *exynos_encoder = to_exynos_encoder(encoder);
+	struct exynos_drm_display *display = exynos_encoder->display;
+
+	if (display->ops->mode_set)
+		display->ops->mode_set(display, adjusted_mode);
+>>>>>>> v3.18
 }
 
 static void exynos_drm_encoder_prepare(struct drm_encoder *encoder)
 {
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __FILE__);
 
+=======
+>>>>>>> v3.18
 	/* drm framework doesn't check NULL. */
 }
 
 static void exynos_drm_encoder_commit(struct drm_encoder *encoder)
 {
 	struct exynos_drm_encoder *exynos_encoder = to_exynos_encoder(encoder);
+<<<<<<< HEAD
 	struct exynos_drm_manager *manager = exynos_encoder->manager;
 	struct exynos_drm_manager_ops *manager_ops = manager->ops;
 
@@ -246,6 +297,17 @@ void exynos_drm_encoder_complete_scanout(struct drm_framebuffer *fb)
 }
 
 
+=======
+	struct exynos_drm_display *display = exynos_encoder->display;
+
+	if (display->ops->dpms)
+		display->ops->dpms(display, DRM_MODE_DPMS_ON);
+
+	if (display->ops->commit)
+		display->ops->commit(display);
+}
+
+>>>>>>> v3.18
 static void exynos_drm_encoder_disable(struct drm_encoder *encoder)
 {
 	struct drm_plane *plane;
@@ -254,7 +316,11 @@ static void exynos_drm_encoder_disable(struct drm_encoder *encoder)
 	exynos_drm_encoder_dpms(encoder, DRM_MODE_DPMS_OFF);
 
 	/* all planes connected to this encoder should be also disabled. */
+<<<<<<< HEAD
 	list_for_each_entry(plane, &dev->mode_config.plane_list, head) {
+=======
+	drm_for_each_legacy_plane(plane, &dev->mode_config.plane_list) {
+>>>>>>> v3.18
 		if (plane->crtc == encoder->crtc)
 			plane->funcs->disable_plane(plane);
 	}
@@ -271,12 +337,16 @@ static struct drm_encoder_helper_funcs exynos_encoder_helper_funcs = {
 
 static void exynos_drm_encoder_destroy(struct drm_encoder *encoder)
 {
+<<<<<<< HEAD
 	struct exynos_drm_encoder *exynos_encoder =
 		to_exynos_encoder(encoder);
 
 	DRM_DEBUG_KMS("%s\n", __FILE__);
 
 	exynos_encoder->manager->pipe = -1;
+=======
+	struct exynos_drm_encoder *exynos_encoder = to_exynos_encoder(encoder);
+>>>>>>> v3.18
 
 	drm_encoder_cleanup(encoder);
 	kfree(exynos_encoder);
@@ -291,13 +361,21 @@ static unsigned int exynos_drm_encoder_clones(struct drm_encoder *encoder)
 	struct drm_encoder *clone;
 	struct drm_device *dev = encoder->dev;
 	struct exynos_drm_encoder *exynos_encoder = to_exynos_encoder(encoder);
+<<<<<<< HEAD
 	struct exynos_drm_display_ops *display_ops =
 				exynos_encoder->manager->display_ops;
+=======
+	struct exynos_drm_display *display = exynos_encoder->display;
+>>>>>>> v3.18
 	unsigned int clone_mask = 0;
 	int cnt = 0;
 
 	list_for_each_entry(clone, &dev->mode_config.encoder_list, head) {
+<<<<<<< HEAD
 		switch (display_ops->type) {
+=======
+		switch (display->type) {
+>>>>>>> v3.18
 		case EXYNOS_DISPLAY_TYPE_LCD:
 		case EXYNOS_DISPLAY_TYPE_HDMI:
 		case EXYNOS_DISPLAY_TYPE_VIDI:
@@ -315,20 +393,29 @@ void exynos_drm_encoder_setup(struct drm_device *dev)
 {
 	struct drm_encoder *encoder;
 
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __FILE__);
 
+=======
+>>>>>>> v3.18
 	list_for_each_entry(encoder, &dev->mode_config.encoder_list, head)
 		encoder->possible_clones = exynos_drm_encoder_clones(encoder);
 }
 
 struct drm_encoder *
 exynos_drm_encoder_create(struct drm_device *dev,
+<<<<<<< HEAD
 			   struct exynos_drm_manager *manager,
 			   unsigned int possible_crtcs)
+=======
+			   struct exynos_drm_display *display,
+			   unsigned long possible_crtcs)
+>>>>>>> v3.18
 {
 	struct drm_encoder *encoder;
 	struct exynos_drm_encoder *exynos_encoder;
 
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __FILE__);
 
 	if (!manager || !possible_crtcs)
@@ -345,6 +432,16 @@ exynos_drm_encoder_create(struct drm_device *dev,
 
 	exynos_encoder->dpms = DRM_MODE_DPMS_OFF;
 	exynos_encoder->manager = manager;
+=======
+	if (!possible_crtcs)
+		return NULL;
+
+	exynos_encoder = kzalloc(sizeof(*exynos_encoder), GFP_KERNEL);
+	if (!exynos_encoder)
+		return NULL;
+
+	exynos_encoder->display = display;
+>>>>>>> v3.18
 	encoder = &exynos_encoder->drm_encoder;
 	encoder->possible_crtcs = possible_crtcs;
 
@@ -360,6 +457,7 @@ exynos_drm_encoder_create(struct drm_device *dev,
 	return encoder;
 }
 
+<<<<<<< HEAD
 struct exynos_drm_manager *exynos_drm_get_manager(struct drm_encoder *encoder)
 {
 	return to_exynos_encoder(encoder)->manager;
@@ -517,4 +615,9 @@ void exynos_drm_encoder_plane_disable(struct drm_encoder *encoder, void *data)
 
 	if (overlay_ops && overlay_ops->disable)
 		overlay_ops->disable(manager->dev, zpos);
+=======
+struct exynos_drm_display *exynos_drm_get_display(struct drm_encoder *encoder)
+{
+	return to_exynos_encoder(encoder)->display;
+>>>>>>> v3.18
 }

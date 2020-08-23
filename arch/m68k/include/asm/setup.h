@@ -22,6 +22,10 @@
 #ifndef _M68K_SETUP_H
 #define _M68K_SETUP_H
 
+<<<<<<< HEAD
+=======
+#include <uapi/asm/bootinfo.h>
+>>>>>>> v3.18
 #include <uapi/asm/setup.h>
 
 
@@ -297,14 +301,22 @@ extern int m68k_is040or060;
 #define NUM_MEMINFO	4
 
 #ifndef __ASSEMBLY__
+<<<<<<< HEAD
 struct mem_info {
+=======
+struct m68k_mem_info {
+>>>>>>> v3.18
 	unsigned long addr;		/* physical address of memory chunk */
 	unsigned long size;		/* length of memory chunk (in bytes) */
 };
 
 extern int m68k_num_memory;		/* # of memory blocks found (and used) */
 extern int m68k_realnum_memory;		/* real # of memory blocks found */
+<<<<<<< HEAD
 extern struct mem_info m68k_memory[NUM_MEMINFO];/* memory description */
+=======
+extern struct m68k_mem_info m68k_memory[NUM_MEMINFO];/* memory description */
+>>>>>>> v3.18
 #endif
 
 #endif /* _M68K_SETUP_H */

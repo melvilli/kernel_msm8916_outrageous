@@ -3,6 +3,10 @@
 #
 
 lib-y	:= lusercopy.o bitops.o checksum.o io.o memset.o fixup.o memcpy.o \
+<<<<<<< HEAD
 	   ucmpdi2.o
+=======
+	   ucmpdi2.o delay.o
+>>>>>>> v3.18
 
 obj-y	:= iomap.o

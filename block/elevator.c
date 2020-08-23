@@ -155,7 +155,11 @@ struct elevator_queue *elevator_alloc(struct request_queue *q,
 {
 	struct elevator_queue *eq;
 
+<<<<<<< HEAD
 	eq = kmalloc_node(sizeof(*eq), GFP_KERNEL | __GFP_ZERO, q->node);
+=======
+	eq = kzalloc_node(sizeof(*eq), GFP_KERNEL, q->node);
+>>>>>>> v3.18
 	if (unlikely(!eq))
 		goto err;
 
@@ -229,7 +233,13 @@ int elevator_init(struct request_queue *q, char *name)
 	}
 
 	err = e->ops.elevator_init_fn(q, e);
+<<<<<<< HEAD
 	return 0;
+=======
+	if (err)
+		elevator_put(e);
+	return err;
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(elevator_init);
 
@@ -247,6 +257,10 @@ EXPORT_SYMBOL(elevator_exit);
 static inline void __elv_rqhash_del(struct request *rq)
 {
 	hash_del(&rq->hash);
+<<<<<<< HEAD
+=======
+	rq->cmd_flags &= ~REQ_HASHED;
+>>>>>>> v3.18
 }
 
 static void elv_rqhash_del(struct request_queue *q, struct request *rq)
@@ -261,6 +275,10 @@ static void elv_rqhash_add(struct request_queue *q, struct request *rq)
 
 	BUG_ON(ELV_ON_HASH(rq));
 	hash_add(e->hash, &rq->hash, rq_hash_key(rq));
+<<<<<<< HEAD
+=======
+	rq->cmd_flags |= REQ_HASHED;
+>>>>>>> v3.18
 }
 
 static void elv_rqhash_reposition(struct request_queue *q, struct request *rq)
@@ -440,7 +458,11 @@ int elv_merge(struct request_queue *q, struct request **req, struct bio *bio)
 	/*
 	 * See if our hash lookup can find a potential backmerge.
 	 */
+<<<<<<< HEAD
 	__rq = elv_rqhash_find(q, bio->bi_sector);
+=======
+	__rq = elv_rqhash_find(q, bio->bi_iter.bi_sector);
+>>>>>>> v3.18
 	if (__rq && elv_rq_merge_ok(__rq, bio)) {
 		*req = __rq;
 		return ELEVATOR_BACK_MERGE;
@@ -575,6 +597,7 @@ void elv_requeue_request(struct request_queue *q, struct request *rq)
 	__elv_add_request(q, rq, ELEVATOR_INSERT_REQUEUE);
 }
 
+<<<<<<< HEAD
 /**
  * elv_reinsert_request() - Insert a request back to the scheduler
  * @q:		request queue where request should be inserted
@@ -610,6 +633,8 @@ int elv_reinsert_request(struct request_queue *q, struct request *rq)
 	return res;
 }
 
+=======
+>>>>>>> v3.18
 void elv_drain_elevator(struct request_queue *q)
 {
 	static int printed;
@@ -762,6 +787,7 @@ int elv_may_queue(struct request_queue *q, int rw)
 	return ELV_MQUEUE_MAY;
 }
 
+<<<<<<< HEAD
 void elv_abort_queue(struct request_queue *q)
 {
 	struct request *rq;
@@ -782,15 +808,20 @@ void elv_abort_queue(struct request_queue *q)
 }
 EXPORT_SYMBOL(elv_abort_queue);
 
+=======
+>>>>>>> v3.18
 void elv_completed_request(struct request_queue *q, struct request *rq)
 {
 	struct elevator_queue *e = q->elevator;
 
+<<<<<<< HEAD
 	if (rq->cmd_flags & REQ_URGENT) {
 		q->notified_urgent = false;
 		WARN_ON(!q->dispatched_urgent);
 		q->dispatched_urgent = false;
 	}
+=======
+>>>>>>> v3.18
 	/*
 	 * request is released from the driver, io must be done
 	 */

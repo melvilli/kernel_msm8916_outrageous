@@ -7,6 +7,14 @@
  * as published by the Free Software Foundation; either version
  * 2 of the License, or (at your option) any later version.
  */
+<<<<<<< HEAD
 #include <linux/byteorder/big_endian.h>
+=======
+#ifdef __LITTLE_ENDIAN__
+#include <linux/byteorder/little_endian.h>
+#else
+#include <linux/byteorder/big_endian.h>
+#endif
+>>>>>>> v3.18
 
 #endif /* _ASM_POWERPC_BYTEORDER_H */

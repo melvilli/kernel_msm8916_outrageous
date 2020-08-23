@@ -109,6 +109,7 @@ enum bna_tx_res_req_type {
 enum bna_rx_mem_type {
 	BNA_RX_RES_MEM_T_CCB		= 0,	/* CQ context */
 	BNA_RX_RES_MEM_T_RCB		= 1,	/* CQ context */
+<<<<<<< HEAD
 	BNA_RX_RES_MEM_T_UNMAPQ		= 2,	/* UnmapQ for RxQs */
 	BNA_RX_RES_MEM_T_CQPT		= 3,	/* CQ QPT */
 	BNA_RX_RES_MEM_T_CSWQPT		= 4,	/* S/W QPT */
@@ -123,6 +124,23 @@ enum bna_rx_mem_type {
 	BNA_RX_RES_MEM_T_RIT		= 13,
 	BNA_RX_RES_T_INTR		= 14,	/* Rx interrupts */
 	BNA_RX_RES_T_MAX		= 15
+=======
+	BNA_RX_RES_MEM_T_UNMAPHQ	= 2,
+	BNA_RX_RES_MEM_T_UNMAPDQ	= 3,
+	BNA_RX_RES_MEM_T_CQPT		= 4,
+	BNA_RX_RES_MEM_T_CSWQPT		= 5,
+	BNA_RX_RES_MEM_T_CQPT_PAGE	= 6,
+	BNA_RX_RES_MEM_T_HQPT		= 7,
+	BNA_RX_RES_MEM_T_DQPT		= 8,
+	BNA_RX_RES_MEM_T_HSWQPT		= 9,
+	BNA_RX_RES_MEM_T_DSWQPT		= 10,
+	BNA_RX_RES_MEM_T_DPAGE		= 11,
+	BNA_RX_RES_MEM_T_HPAGE		= 12,
+	BNA_RX_RES_MEM_T_IBIDX		= 13,
+	BNA_RX_RES_MEM_T_RIT		= 14,
+	BNA_RX_RES_T_INTR		= 15,
+	BNA_RX_RES_T_MAX		= 16
+>>>>>>> v3.18
 };
 
 enum bna_tx_type {
@@ -583,6 +601,11 @@ struct bna_rxq {
 
 	int			buffer_size;
 	int			q_depth;
+<<<<<<< HEAD
+=======
+	u32			num_vecs;
+	enum bna_status		multi_buffer;
+>>>>>>> v3.18
 
 	struct bna_qpt qpt;
 	struct bna_rcb *rcb;
@@ -632,6 +655,11 @@ struct bna_ccb {
 	struct bna_rcb *rcb[2];
 	void			*ctrl; /* For bnad */
 	struct bna_pkt_rate pkt_rate;
+<<<<<<< HEAD
+=======
+	u32			pkts_una;
+	u32			bytes_per_intr;
+>>>>>>> v3.18
 
 	/* Control path */
 	struct bna_cq *cq;
@@ -671,6 +699,7 @@ struct bna_rx_config {
 	int			num_paths;
 	enum bna_rxp_type rxp_type;
 	int			paused;
+<<<<<<< HEAD
 	int			q_depth;
 	int			coalescing_timeo;
 	/*
@@ -679,6 +708,24 @@ struct bna_rx_config {
 	 * enet->mtu.
 	 */
 	int			small_buff_size;
+=======
+	int			coalescing_timeo;
+	/*
+	 * Small/Large (or Header/Data) buffer size to be configured
+	 * for SLR and HDS queue type.
+	 */
+	u32			frame_size;
+
+	/* header or small queue */
+	u32			q1_depth;
+	u32			q1_buf_size;
+
+	/* data or large queue */
+	u32			q0_depth;
+	u32			q0_buf_size;
+	u32			q0_num_vecs;
+	enum bna_status		q0_multi_buf;
+>>>>>>> v3.18
 
 	enum bna_status rss_status;
 	struct bna_rss_config rss_config;
@@ -866,8 +913,14 @@ struct bna_rx_mod {
 /* CAM */
 
 struct bna_ucam_mod {
+<<<<<<< HEAD
 	struct bna_mac *ucmac;		/* BFI_MAX_UCMAC entries */
 	struct list_head			free_q;
+=======
+	struct bna_mac *ucmac;		/* num_ucmac * 2 entries */
+	struct list_head			free_q;
+	struct list_head			del_q;
+>>>>>>> v3.18
 
 	struct bna *bna;
 };
@@ -880,9 +933,16 @@ struct bna_mcam_handle {
 };
 
 struct bna_mcam_mod {
+<<<<<<< HEAD
 	struct bna_mac *mcmac;		/* BFI_MAX_MCMAC entries */
 	struct bna_mcam_handle *mchandle;	/* BFI_MAX_MCMAC entries */
 	struct list_head			free_q;
+=======
+	struct bna_mac *mcmac;		/* num_mcmac * 2 entries */
+	struct bna_mcam_handle *mchandle;	/* num_mcmac entries */
+	struct list_head			free_q;
+	struct list_head			del_q;
+>>>>>>> v3.18
 	struct list_head			free_handle_q;
 
 	struct bna *bna;

@@ -12,6 +12,10 @@
 #include <mem_user.h>
 #include <os.h>
 #include <skas.h>
+<<<<<<< HEAD
+=======
+#include <kern_util.h>
+>>>>>>> v3.18
 
 struct host_vm_change {
 	struct host_vm_op {
@@ -124,6 +128,12 @@ static int add_munmap(unsigned long addr, unsigned long len,
 	struct host_vm_op *last;
 	int ret = 0;
 
+<<<<<<< HEAD
+=======
+	if ((addr >= STUB_START) && (addr < STUB_END))
+		return -EINVAL;
+
+>>>>>>> v3.18
 	if (hvc->index != 0) {
 		last = &hvc->ops[hvc->index - 1];
 		if ((last->type == MUNMAP) &&
@@ -283,8 +293,16 @@ void fix_range_common(struct mm_struct *mm, unsigned long start_addr,
 	/* This is not an else because ret is modified above */
 	if (ret) {
 		printk(KERN_ERR "fix_range_common: failed, killing current "
+<<<<<<< HEAD
 		       "process\n");
 		force_sig(SIGKILL, current);
+=======
+		       "process: %d\n", task_tgid_vnr(current));
+		/* We are under mmap_sem, release it such that current can terminate */
+		up_write(&current->mm->mmap_sem);
+		force_sig(SIGKILL, current);
+		do_signal();
+>>>>>>> v3.18
 	}
 }
 

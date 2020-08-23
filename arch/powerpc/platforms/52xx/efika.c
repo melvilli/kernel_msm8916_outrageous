@@ -13,6 +13,10 @@
 #include <generated/utsrelease.h>
 #include <linux/pci.h>
 #include <linux/of.h>
+<<<<<<< HEAD
+=======
+#include <asm/dma.h>
+>>>>>>> v3.18
 #include <asm/prom.h>
 #include <asm/time.h>
 #include <asm/machdep.h>

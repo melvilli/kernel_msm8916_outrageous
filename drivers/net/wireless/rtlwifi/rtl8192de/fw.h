@@ -132,6 +132,7 @@ struct rtl92d_firmware_header {
 	u32 rsvd5;
 };
 
+<<<<<<< HEAD
 enum rtl8192d_h2c_cmd {
 	H2C_AP_OFFLOAD = 0,
 	H2C_SETPWRMODE = 1,
@@ -144,6 +145,8 @@ enum rtl8192d_h2c_cmd {
 	MAX_H2CCMD
 };
 
+=======
+>>>>>>> v3.18
 int rtl92d_download_fw(struct ieee80211_hw *hw);
 void rtl92d_fill_h2c_cmd(struct ieee80211_hw *hw, u8 element_id,
 			 u32 cmd_len, u8 *p_cmdbuffer);

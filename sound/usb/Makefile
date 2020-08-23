@@ -23,4 +23,8 @@ obj-$(CONFIG_SND_USB_UA101) += snd-usbmidi-lib.o
 obj-$(CONFIG_SND_USB_USX2Y) += snd-usbmidi-lib.o
 obj-$(CONFIG_SND_USB_US122L) += snd-usbmidi-lib.o
 
+<<<<<<< HEAD
 obj-$(CONFIG_SND) += misc/ usx2y/ caiaq/ 6fire/
+=======
+obj-$(CONFIG_SND) += misc/ usx2y/ caiaq/ 6fire/ hiface/ bcd2000/
+>>>>>>> v3.18

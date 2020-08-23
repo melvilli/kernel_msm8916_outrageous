@@ -15,7 +15,11 @@ struct pci_sysdata {
 	int		domain;		/* PCI domain */
 	int		node;		/* NUMA node */
 #ifdef CONFIG_ACPI
+<<<<<<< HEAD
 	void		*acpi;		/* ACPI-specific data */
+=======
+	struct acpi_device *companion;	/* ACPI companion device */
+>>>>>>> v3.18
 #endif
 #ifdef CONFIG_X86_64
 	void		*iommu;		/* IOMMU private data */
@@ -26,11 +30,14 @@ extern int pci_routeirq;
 extern int noioapicquirk;
 extern int noioapicreroute;
 
+<<<<<<< HEAD
 /* scan a bus after allocating a pci_sysdata for it */
 extern struct pci_bus *pci_scan_bus_on_node(int busno, struct pci_ops *ops,
 					    int node);
 extern struct pci_bus *pci_scan_bus_with_sysdata(int busno);
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PCI
 
 #ifdef CONFIG_PCI_DOMAINS
@@ -70,10 +77,16 @@ extern unsigned long pci_mem_start;
 
 extern int pcibios_enabled;
 void pcibios_config_init(void);
+<<<<<<< HEAD
 struct pci_bus *pcibios_scan_root(int bus);
 
 void pcibios_set_master(struct pci_dev *dev);
 void pcibios_penalize_isa_irq(int irq, int active);
+=======
+void pcibios_scan_root(int bus);
+
+void pcibios_set_master(struct pci_dev *dev);
+>>>>>>> v3.18
 struct irq_routing_table *pcibios_get_irq_routing_table(void);
 int pcibios_set_irq_routing(struct pci_dev *dev, int pin, int irq);
 
@@ -100,6 +113,7 @@ static inline void early_quirks(void) { }
 extern void pci_iommu_alloc(void);
 
 #ifdef CONFIG_PCI_MSI
+<<<<<<< HEAD
 /* MSI arch specific hooks */
 static inline int x86_setup_msi_irqs(struct pci_dev *dev, int nvec, int type)
 {
@@ -123,10 +137,13 @@ static inline void x86_restore_msi_irqs(struct pci_dev *dev, int irq)
 #define arch_teardown_msi_irqs x86_teardown_msi_irqs
 #define arch_teardown_msi_irq x86_teardown_msi_irq
 #define arch_restore_msi_irqs x86_restore_msi_irqs
+=======
+>>>>>>> v3.18
 /* implemented in arch/x86/kernel/apic/io_apic. */
 struct msi_desc;
 int native_setup_msi_irqs(struct pci_dev *dev, int nvec, int type);
 void native_teardown_msi_irq(unsigned int irq);
+<<<<<<< HEAD
 void native_restore_msi_irqs(struct pci_dev *dev, int irq);
 int setup_msi_irq(struct pci_dev *dev, struct msi_desc *msidesc,
 		  unsigned int irq_base, unsigned int irq_offset);
@@ -140,6 +157,14 @@ void default_restore_msi_irqs(struct pci_dev *dev, int irq);
 #define native_teardown_msi_irq		NULL
 #define default_teardown_msi_irqs	NULL
 #define default_restore_msi_irqs	NULL
+=======
+void native_restore_msi_irqs(struct pci_dev *dev);
+int setup_msi_irq(struct pci_dev *dev, struct msi_desc *msidesc,
+		  unsigned int irq_base, unsigned int irq_offset);
+#else
+#define native_setup_msi_irqs		NULL
+#define native_teardown_msi_irq		NULL
+>>>>>>> v3.18
 #endif
 
 #define PCI_DMA_BUS_IS_PHYS (dma_ops->is_phys)
@@ -155,7 +180,10 @@ void default_restore_msi_irqs(struct pci_dev *dev, int irq);
 
 /* generic pci stuff */
 #include <asm-generic/pci.h>
+<<<<<<< HEAD
 #define PCIBIOS_MAX_MEM_32 0xffffffff
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_NUMA
 /* Returns the node based on pci bus */

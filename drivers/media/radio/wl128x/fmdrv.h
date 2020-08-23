@@ -30,6 +30,10 @@
 #include <linux/timer.h>
 #include <media/v4l2-ioctl.h>
 #include <media/v4l2-common.h>
+<<<<<<< HEAD
+=======
+#include <media/v4l2-device.h>
+>>>>>>> v3.18
 #include <media/v4l2-ctrls.h>
 
 #define FM_DRV_VERSION            "0.1.1"
@@ -202,6 +206,10 @@ struct fmtx_data {
 /* FM driver operation structure */
 struct fmdev {
 	struct video_device *radio_dev;	/* V4L2 video device pointer */
+<<<<<<< HEAD
+=======
+	struct v4l2_device v4l2_dev;	/* V4L2 top level struct */
+>>>>>>> v3.18
 	struct snd_card *card;	/* Card which holds FM mixer controls */
 	u16 asci_id;
 	spinlock_t rds_buff_lock; /* To protect access to RDS buffer */

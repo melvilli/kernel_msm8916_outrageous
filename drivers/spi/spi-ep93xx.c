@@ -26,7 +26,10 @@
 #include <linux/interrupt.h>
 #include <linux/module.h>
 #include <linux/platform_device.h>
+<<<<<<< HEAD
 #include <linux/workqueue.h>
+=======
+>>>>>>> v3.18
 #include <linux/sched.h>
 #include <linux/scatterlist.h>
 #include <linux/spi/spi.h>
@@ -70,12 +73,16 @@
 
 /**
  * struct ep93xx_spi - EP93xx SPI controller structure
+<<<<<<< HEAD
  * @lock: spinlock that protects concurrent accesses to fields @running,
  *        @current_msg and @msg_queue
+=======
+>>>>>>> v3.18
  * @pdev: pointer to platform device
  * @clk: clock for the controller
  * @regs_base: pointer to ioremap()'d registers
  * @sspdr_phys: physical address of the SSPDR register
+<<<<<<< HEAD
  * @min_rate: minimum clock rate (in Hz) supported by the controller
  * @max_rate: maximum clock rate (in Hz) supported by the controller
  * @running: is the queue running
@@ -83,6 +90,9 @@
  * @msg_work: work that is queued for the driver
  * @wait: wait here until given transfer is completed
  * @msg_queue: queue for the messages
+=======
+ * @wait: wait here until given transfer is completed
+>>>>>>> v3.18
  * @current_msg: message that is currently processed (or %NULL if none)
  * @tx: current byte in transfer to transmit
  * @rx: current byte in transfer to receive
@@ -96,6 +106,7 @@
  * @tx_sgt: sg table for TX transfers
  * @zeropage: dummy page used as RX buffer when only TX buffer is passed in by
  *            the client
+<<<<<<< HEAD
  *
  * This structure holds EP93xx SPI controller specific information. When
  * @running is %true, driver accepts transfer requests from protocol drivers.
@@ -109,10 +120,15 @@
  */
 struct ep93xx_spi {
 	spinlock_t			lock;
+=======
+ */
+struct ep93xx_spi {
+>>>>>>> v3.18
 	const struct platform_device	*pdev;
 	struct clk			*clk;
 	void __iomem			*regs_base;
 	unsigned long			sspdr_phys;
+<<<<<<< HEAD
 	unsigned long			min_rate;
 	unsigned long			max_rate;
 	bool				running;
@@ -120,6 +136,9 @@ struct ep93xx_spi {
 	struct work_struct		msg_work;
 	struct completion		wait;
 	struct list_head		msg_queue;
+=======
+	struct completion		wait;
+>>>>>>> v3.18
 	struct spi_message		*current_msg;
 	size_t				tx;
 	size_t				rx;
@@ -136,6 +155,7 @@ struct ep93xx_spi {
 /**
  * struct ep93xx_spi_chip - SPI device hardware settings
  * @spi: back pointer to the SPI device
+<<<<<<< HEAD
  * @rate: max rate in hz this chip supports
  * @div_cpsr: cpsr (pre-scaler) divider
  * @div_scr: scr divider
@@ -152,12 +172,19 @@ struct ep93xx_spi_chip {
 	u8				div_cpsr;
 	u8				div_scr;
 	u8				dss;
+=======
+ * @ops: private chip operations
+ */
+struct ep93xx_spi_chip {
+	const struct spi_device		*spi;
+>>>>>>> v3.18
 	struct ep93xx_spi_chip_ops	*ops;
 };
 
 /* converts bits per word to CR0.DSS value */
 #define bits_per_word_to_dss(bpw)	((bpw) - 1)
 
+<<<<<<< HEAD
 static inline void
 ep93xx_spi_write_u8(const struct ep93xx_spi *espi, u16 reg, u8 value)
 {
@@ -180,6 +207,28 @@ static inline u16
 ep93xx_spi_read_u16(const struct ep93xx_spi *spi, u16 reg)
 {
 	return __raw_readw(spi->regs_base + reg);
+=======
+static void ep93xx_spi_write_u8(const struct ep93xx_spi *espi,
+				u16 reg, u8 value)
+{
+	writeb(value, espi->regs_base + reg);
+}
+
+static u8 ep93xx_spi_read_u8(const struct ep93xx_spi *spi, u16 reg)
+{
+	return readb(spi->regs_base + reg);
+}
+
+static void ep93xx_spi_write_u16(const struct ep93xx_spi *espi,
+				 u16 reg, u16 value)
+{
+	writew(value, espi->regs_base + reg);
+}
+
+static u16 ep93xx_spi_read_u16(const struct ep93xx_spi *spi, u16 reg)
+{
+	return readw(spi->regs_base + reg);
+>>>>>>> v3.18
 }
 
 static int ep93xx_spi_enable(const struct ep93xx_spi *espi)
@@ -230,6 +279,7 @@ static void ep93xx_spi_disable_interrupts(const struct ep93xx_spi *espi)
 /**
  * ep93xx_spi_calc_divisors() - calculates SPI clock divisors
  * @espi: ep93xx SPI controller struct
+<<<<<<< HEAD
  * @chip: divisors are calculated for this chip
  * @rate: desired SPI output clock rate
  *
@@ -242,15 +292,31 @@ static int ep93xx_spi_calc_divisors(const struct ep93xx_spi *espi,
 				    struct ep93xx_spi_chip *chip,
 				    unsigned long rate)
 {
+=======
+ * @rate: desired SPI output clock rate
+ * @div_cpsr: pointer to return the cpsr (pre-scaler) divider
+ * @div_scr: pointer to return the scr divider
+ */
+static int ep93xx_spi_calc_divisors(const struct ep93xx_spi *espi,
+				    u32 rate, u8 *div_cpsr, u8 *div_scr)
+{
+	struct spi_master *master = platform_get_drvdata(espi->pdev);
+>>>>>>> v3.18
 	unsigned long spi_clk_rate = clk_get_rate(espi->clk);
 	int cpsr, scr;
 
 	/*
 	 * Make sure that max value is between values supported by the
 	 * controller. Note that minimum value is already checked in
+<<<<<<< HEAD
 	 * ep93xx_spi_transfer().
 	 */
 	rate = clamp(rate, espi->min_rate, espi->max_rate);
+=======
+	 * ep93xx_spi_transfer_one_message().
+	 */
+	rate = clamp(rate, master->min_speed_hz, master->max_speed_hz);
+>>>>>>> v3.18
 
 	/*
 	 * Calculate divisors so that we can get speed according the
@@ -263,8 +329,13 @@ static int ep93xx_spi_calc_divisors(const struct ep93xx_spi *espi,
 	for (cpsr = 2; cpsr <= 254; cpsr += 2) {
 		for (scr = 0; scr <= 255; scr++) {
 			if ((spi_clk_rate / (cpsr * (scr + 1))) <= rate) {
+<<<<<<< HEAD
 				chip->div_scr = (u8)scr;
 				chip->div_cpsr = (u8)cpsr;
+=======
+				*div_scr = (u8)scr;
+				*div_cpsr = (u8)cpsr;
+>>>>>>> v3.18
 				return 0;
 			}
 		}
@@ -296,12 +367,15 @@ static int ep93xx_spi_setup(struct spi_device *spi)
 	struct ep93xx_spi *espi = spi_master_get_devdata(spi->master);
 	struct ep93xx_spi_chip *chip;
 
+<<<<<<< HEAD
 	if (spi->bits_per_word < 4 || spi->bits_per_word > 16) {
 		dev_err(&espi->pdev->dev, "invalid bits per word %d\n",
 			spi->bits_per_word);
 		return -EINVAL;
 	}
 
+=======
+>>>>>>> v3.18
 	chip = spi_get_ctldata(spi);
 	if (!chip) {
 		dev_dbg(&espi->pdev->dev, "initial setup for %s\n",
@@ -316,6 +390,10 @@ static int ep93xx_spi_setup(struct spi_device *spi)
 
 		if (chip->ops && chip->ops->setup) {
 			int ret = chip->ops->setup(spi);
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 			if (ret) {
 				kfree(chip);
 				return ret;
@@ -325,6 +403,7 @@ static int ep93xx_spi_setup(struct spi_device *spi)
 		spi_set_ctldata(spi, chip);
 	}
 
+<<<<<<< HEAD
 	if (spi->max_speed_hz != chip->rate) {
 		int err;
 
@@ -339,11 +418,14 @@ static int ep93xx_spi_setup(struct spi_device *spi)
 
 	chip->dss = bits_per_word_to_dss(spi->bits_per_word);
 
+=======
+>>>>>>> v3.18
 	ep93xx_spi_cs_control(spi, false);
 	return 0;
 }
 
 /**
+<<<<<<< HEAD
  * ep93xx_spi_transfer() - queue message to be transferred
  * @spi: target SPI device
  * @msg: message to be transferred
@@ -396,6 +478,8 @@ static int ep93xx_spi_transfer(struct spi_device *spi, struct spi_message *msg)
 }
 
 /**
+=======
+>>>>>>> v3.18
  * ep93xx_spi_cleanup() - cleans up master controller specific state
  * @spi: SPI device to cleanup
  *
@@ -419,6 +503,7 @@ static void ep93xx_spi_cleanup(struct spi_device *spi)
  * ep93xx_spi_chip_setup() - configures hardware according to given @chip
  * @espi: ep93xx SPI controller struct
  * @chip: chip specific settings
+<<<<<<< HEAD
  *
  * This function sets up the actual hardware registers with settings given in
  * @chip. Note that no validation is done so make sure that callers validate
@@ -447,11 +532,46 @@ static inline int bits_per_word(const struct ep93xx_spi *espi)
 	struct spi_transfer *t = msg->state;
 
 	return t->bits_per_word;
+=======
+ * @speed_hz: transfer speed
+ * @bits_per_word: transfer bits_per_word
+ */
+static int ep93xx_spi_chip_setup(const struct ep93xx_spi *espi,
+				 const struct ep93xx_spi_chip *chip,
+				 u32 speed_hz, u8 bits_per_word)
+{
+	u8 dss = bits_per_word_to_dss(bits_per_word);
+	u8 div_cpsr = 0;
+	u8 div_scr = 0;
+	u16 cr0;
+	int err;
+
+	err = ep93xx_spi_calc_divisors(espi, speed_hz, &div_cpsr, &div_scr);
+	if (err)
+		return err;
+
+	cr0 = div_scr << SSPCR0_SCR_SHIFT;
+	cr0 |= (chip->spi->mode & (SPI_CPHA|SPI_CPOL)) << SSPCR0_MODE_SHIFT;
+	cr0 |= dss;
+
+	dev_dbg(&espi->pdev->dev, "setup: mode %d, cpsr %d, scr %d, dss %d\n",
+		chip->spi->mode, div_cpsr, div_scr, dss);
+	dev_dbg(&espi->pdev->dev, "setup: cr0 %#x\n", cr0);
+
+	ep93xx_spi_write_u8(espi, SSPCPSR, div_cpsr);
+	ep93xx_spi_write_u16(espi, SSPCR0, cr0);
+
+	return 0;
+>>>>>>> v3.18
 }
 
 static void ep93xx_do_write(struct ep93xx_spi *espi, struct spi_transfer *t)
 {
+<<<<<<< HEAD
 	if (bits_per_word(espi) > 8) {
+=======
+	if (t->bits_per_word > 8) {
+>>>>>>> v3.18
 		u16 tx_val = 0;
 
 		if (t->tx_buf)
@@ -470,7 +590,11 @@ static void ep93xx_do_write(struct ep93xx_spi *espi, struct spi_transfer *t)
 
 static void ep93xx_do_read(struct ep93xx_spi *espi, struct spi_transfer *t)
 {
+<<<<<<< HEAD
 	if (bits_per_word(espi) > 8) {
+=======
+	if (t->bits_per_word > 8) {
+>>>>>>> v3.18
 		u16 rx_val;
 
 		rx_val = ep93xx_spi_read_u16(espi, SSPDR);
@@ -556,7 +680,11 @@ ep93xx_spi_dma_prepare(struct ep93xx_spi *espi, enum dma_transfer_direction dir)
 	size_t len = t->len;
 	int i, ret, nents;
 
+<<<<<<< HEAD
 	if (bits_per_word(espi) > 8)
+=======
+	if (t->bits_per_word > 8)
+>>>>>>> v3.18
 		buswidth = DMA_SLAVE_BUSWIDTH_2_BYTES;
 	else
 		buswidth = DMA_SLAVE_BUSWIDTH_1_BYTE;
@@ -620,7 +748,11 @@ ep93xx_spi_dma_prepare(struct ep93xx_spi *espi, enum dma_transfer_direction dir)
 	}
 
 	if (WARN_ON(len)) {
+<<<<<<< HEAD
 		dev_warn(&espi->pdev->dev, "len = %d expected 0!", len);
+=======
+		dev_warn(&espi->pdev->dev, "len = %zu expected 0!\n", len);
+>>>>>>> v3.18
 		return ERR_PTR(-EINVAL);
 	}
 
@@ -718,6 +850,7 @@ static void ep93xx_spi_process_transfer(struct ep93xx_spi *espi,
 					struct spi_transfer *t)
 {
 	struct ep93xx_spi_chip *chip = spi_get_ctldata(msg->spi);
+<<<<<<< HEAD
 
 	msg->state = t;
 
@@ -749,6 +882,18 @@ static void ep93xx_spi_process_transfer(struct ep93xx_spi *espi,
 		 * Set up temporary new hw settings for this transfer.
 		 */
 		ep93xx_spi_chip_setup(espi, &tmp_chip);
+=======
+	int err;
+
+	msg->state = t;
+
+	err = ep93xx_spi_chip_setup(espi, chip, t->speed_hz, t->bits_per_word);
+	if (err) {
+		dev_err(&espi->pdev->dev,
+			"failed to setup chip for transfer\n");
+		msg->status = err;
+		return;
+>>>>>>> v3.18
 	}
 
 	espi->rx = 0;
@@ -793,9 +938,12 @@ static void ep93xx_spi_process_transfer(struct ep93xx_spi *espi,
 			ep93xx_spi_cs_control(msg->spi, true);
 		}
 	}
+<<<<<<< HEAD
 
 	if (t->speed_hz || t->bits_per_word)
 		ep93xx_spi_chip_setup(espi, chip);
+=======
+>>>>>>> v3.18
 }
 
 /*
@@ -848,10 +996,15 @@ static void ep93xx_spi_process_message(struct ep93xx_spi *espi,
 	espi->fifo_level = 0;
 
 	/*
+<<<<<<< HEAD
 	 * Update SPI controller registers according to spi device and assert
 	 * the chipselect.
 	 */
 	ep93xx_spi_chip_setup(espi, spi_get_ctldata(msg->spi));
+=======
+	 * Assert the chipselect.
+	 */
+>>>>>>> v3.18
 	ep93xx_spi_cs_control(msg->spi, true);
 
 	list_for_each_entry(t, &msg->transfers, transfer_list) {
@@ -868,6 +1021,7 @@ static void ep93xx_spi_process_message(struct ep93xx_spi *espi,
 	ep93xx_spi_disable(espi);
 }
 
+<<<<<<< HEAD
 #define work_to_espi(work) (container_of((work), struct ep93xx_spi, msg_work))
 
 /**
@@ -912,6 +1066,24 @@ static void ep93xx_spi_work(struct work_struct *work)
 
 	/* notify the protocol driver that we are done with this message */
 	msg->complete(msg->context);
+=======
+static int ep93xx_spi_transfer_one_message(struct spi_master *master,
+					   struct spi_message *msg)
+{
+	struct ep93xx_spi *espi = spi_master_get_devdata(master);
+
+	msg->state = NULL;
+	msg->status = 0;
+	msg->actual_length = 0;
+
+	espi->current_msg = msg;
+	ep93xx_spi_process_message(espi, msg);
+	espi->current_msg = NULL;
+
+	spi_finalize_current_message(master);
+
+	return 0;
+>>>>>>> v3.18
 }
 
 static irqreturn_t ep93xx_spi_interrupt(int irq, void *dev_id)
@@ -1032,6 +1204,7 @@ static int ep93xx_spi_probe(struct platform_device *pdev)
 	int irq;
 	int error;
 
+<<<<<<< HEAD
 	info = pdev->dev.platform_data;
 
 	master = spi_alloc_master(&pdev->dev, sizeof(*espi));
@@ -1042,29 +1215,63 @@ static int ep93xx_spi_probe(struct platform_device *pdev)
 
 	master->setup = ep93xx_spi_setup;
 	master->transfer = ep93xx_spi_transfer;
+=======
+	info = dev_get_platdata(&pdev->dev);
+
+	irq = platform_get_irq(pdev, 0);
+	if (irq < 0) {
+		dev_err(&pdev->dev, "failed to get irq resources\n");
+		return -EBUSY;
+	}
+
+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+	if (!res) {
+		dev_err(&pdev->dev, "unable to get iomem resource\n");
+		return -ENODEV;
+	}
+
+	master = spi_alloc_master(&pdev->dev, sizeof(*espi));
+	if (!master)
+		return -ENOMEM;
+
+	master->setup = ep93xx_spi_setup;
+	master->transfer_one_message = ep93xx_spi_transfer_one_message;
+>>>>>>> v3.18
 	master->cleanup = ep93xx_spi_cleanup;
 	master->bus_num = pdev->id;
 	master->num_chipselect = info->num_chipselect;
 	master->mode_bits = SPI_CPOL | SPI_CPHA | SPI_CS_HIGH;
+<<<<<<< HEAD
+=======
+	master->bits_per_word_mask = SPI_BPW_RANGE_MASK(4, 16);
+>>>>>>> v3.18
 
 	platform_set_drvdata(pdev, master);
 
 	espi = spi_master_get_devdata(master);
 
+<<<<<<< HEAD
 	espi->clk = clk_get(&pdev->dev, NULL);
+=======
+	espi->clk = devm_clk_get(&pdev->dev, NULL);
+>>>>>>> v3.18
 	if (IS_ERR(espi->clk)) {
 		dev_err(&pdev->dev, "unable to get spi clock\n");
 		error = PTR_ERR(espi->clk);
 		goto fail_release_master;
 	}
 
+<<<<<<< HEAD
 	spin_lock_init(&espi->lock);
+=======
+>>>>>>> v3.18
 	init_completion(&espi->wait);
 
 	/*
 	 * Calculate maximum and minimum supported clock rates
 	 * for the controller.
 	 */
+<<<<<<< HEAD
 	espi->max_rate = clk_get_rate(espi->clk) / 2;
 	espi->min_rate = clk_get_rate(espi->clk) / (254 * 256);
 	espi->pdev = pdev;
@@ -1083,24 +1290,39 @@ static int ep93xx_spi_probe(struct platform_device *pdev)
 		goto fail_put_clock;
 	}
 
+=======
+	master->max_speed_hz = clk_get_rate(espi->clk) / 2;
+	master->min_speed_hz = clk_get_rate(espi->clk) / (254 * 256);
+	espi->pdev = pdev;
+
+>>>>>>> v3.18
 	espi->sspdr_phys = res->start + SSPDR;
 
 	espi->regs_base = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(espi->regs_base)) {
 		error = PTR_ERR(espi->regs_base);
+<<<<<<< HEAD
 		goto fail_put_clock;
+=======
+		goto fail_release_master;
+>>>>>>> v3.18
 	}
 
 	error = devm_request_irq(&pdev->dev, irq, ep93xx_spi_interrupt,
 				0, "ep93xx-spi", espi);
 	if (error) {
 		dev_err(&pdev->dev, "failed to request irq\n");
+<<<<<<< HEAD
 		goto fail_put_clock;
+=======
+		goto fail_release_master;
+>>>>>>> v3.18
 	}
 
 	if (info->use_dma && ep93xx_spi_setup_dma(espi))
 		dev_warn(&pdev->dev, "DMA setup failed. Falling back to PIO\n");
 
+<<<<<<< HEAD
 	espi->wq = create_singlethread_workqueue("ep93xx_spid");
 	if (!espi->wq) {
 		dev_err(&pdev->dev, "unable to create workqueue\n");
@@ -1117,6 +1339,15 @@ static int ep93xx_spi_probe(struct platform_device *pdev)
 	if (error) {
 		dev_err(&pdev->dev, "failed to register SPI master\n");
 		goto fail_free_queue;
+=======
+	/* make sure that the hardware is disabled */
+	ep93xx_spi_write_u8(espi, SSPCR1, 0);
+
+	error = devm_spi_register_master(&pdev->dev, master);
+	if (error) {
+		dev_err(&pdev->dev, "failed to register SPI master\n");
+		goto fail_free_dma;
+>>>>>>> v3.18
 	}
 
 	dev_info(&pdev->dev, "EP93xx SPI Controller at 0x%08lx irq %d\n",
@@ -1124,6 +1355,7 @@ static int ep93xx_spi_probe(struct platform_device *pdev)
 
 	return 0;
 
+<<<<<<< HEAD
 fail_free_queue:
 	destroy_workqueue(espi->wq);
 fail_free_dma:
@@ -1133,6 +1365,12 @@ fail_put_clock:
 fail_release_master:
 	spi_master_put(master);
 	platform_set_drvdata(pdev, NULL);
+=======
+fail_free_dma:
+	ep93xx_spi_release_dma(espi);
+fail_release_master:
+	spi_master_put(master);
+>>>>>>> v3.18
 
 	return error;
 }
@@ -1142,6 +1380,7 @@ static int ep93xx_spi_remove(struct platform_device *pdev)
 	struct spi_master *master = platform_get_drvdata(pdev);
 	struct ep93xx_spi *espi = spi_master_get_devdata(master);
 
+<<<<<<< HEAD
 	spin_lock_irq(&espi->lock);
 	espi->running = false;
 	spin_unlock_irq(&espi->lock);
@@ -1170,6 +1409,10 @@ static int ep93xx_spi_remove(struct platform_device *pdev)
 	platform_set_drvdata(pdev, NULL);
 
 	spi_unregister_master(master);
+=======
+	ep93xx_spi_release_dma(espi);
+
+>>>>>>> v3.18
 	return 0;
 }
 

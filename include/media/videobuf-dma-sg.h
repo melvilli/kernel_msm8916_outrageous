@@ -53,6 +53,12 @@ struct videobuf_dmabuf {
 
 	/* for kernel buffers */
 	void                *vaddr;
+<<<<<<< HEAD
+=======
+	struct page         **vaddr_pages;
+	dma_addr_t          *dma_addr;
+	struct device       *dev;
+>>>>>>> v3.18
 
 	/* for overlay buffers (pci-pci dma) */
 	dma_addr_t          bus_addr;

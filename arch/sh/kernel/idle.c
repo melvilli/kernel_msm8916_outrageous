@@ -16,7 +16,10 @@
 #include <linux/thread_info.h>
 #include <linux/irqflags.h>
 #include <linux/smp.h>
+<<<<<<< HEAD
 #include <linux/cpuidle.h>
+=======
+>>>>>>> v3.18
 #include <linux/atomic.h>
 #include <asm/pgalloc.h>
 #include <asm/smp.h>
@@ -40,8 +43,12 @@ void arch_cpu_idle_dead(void)
 
 void arch_cpu_idle(void)
 {
+<<<<<<< HEAD
 	if (cpuidle_idle_call())
 		sh_idle();
+=======
+	sh_idle();
+>>>>>>> v3.18
 }
 
 void __init select_idle_routine(void)

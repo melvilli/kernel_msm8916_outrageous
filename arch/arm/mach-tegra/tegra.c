@@ -16,6 +16,7 @@
  *
  */
 
+<<<<<<< HEAD
 #include <linux/clocksource.h>
 #include <linux/kernel.h>
 #include <linux/init.h>
@@ -79,6 +80,76 @@ static struct of_dev_auxdata tegra20_auxdata_lookup[] __initdata = {
 		       &tegra_ehci3_pdata),
 	{}
 };
+=======
+#include <linux/clk.h>
+#include <linux/clk/tegra.h>
+#include <linux/dma-mapping.h>
+#include <linux/init.h>
+#include <linux/io.h>
+#include <linux/irqchip.h>
+#include <linux/irqdomain.h>
+#include <linux/kernel.h>
+#include <linux/of_address.h>
+#include <linux/of_fdt.h>
+#include <linux/of.h>
+#include <linux/of_platform.h>
+#include <linux/pda_power.h>
+#include <linux/platform_device.h>
+#include <linux/serial_8250.h>
+#include <linux/slab.h>
+#include <linux/sys_soc.h>
+#include <linux/usb/tegra_usb_phy.h>
+
+#include <soc/tegra/fuse.h>
+#include <soc/tegra/pmc.h>
+
+#include <asm/hardware/cache-l2x0.h>
+#include <asm/mach/arch.h>
+#include <asm/mach/time.h>
+#include <asm/mach-types.h>
+#include <asm/setup.h>
+#include <asm/trusted_foundations.h>
+
+#include "board.h"
+#include "common.h"
+#include "cpuidle.h"
+#include "flowctrl.h"
+#include "iomap.h"
+#include "irq.h"
+#include "pm.h"
+#include "reset.h"
+#include "sleep.h"
+
+/*
+ * Storage for debug-macro.S's state.
+ *
+ * This must be in .data not .bss so that it gets initialized each time the
+ * kernel is loaded. The data is declared here rather than debug-macro.S so
+ * that multiple inclusions of debug-macro.S point at the same data.
+ */
+u32 tegra_uart_config[3] = {
+	/* Debug UART initialization required */
+	1,
+	/* Debug UART physical address */
+	0,
+	/* Debug UART virtual address */
+	0,
+};
+
+static void __init tegra_init_early(void)
+{
+	of_register_trusted_foundations();
+	tegra_cpu_reset_handler_init();
+	tegra_flowctrl_init();
+}
+
+static void __init tegra_dt_init_irq(void)
+{
+	tegra_init_irq();
+	irqchip_init();
+	tegra_legacy_irq_syscore_init();
+}
+>>>>>>> v3.18
 
 static void __init tegra_dt_init(void)
 {
@@ -93,8 +164,14 @@ static void __init tegra_dt_init(void)
 		goto out;
 
 	soc_dev_attr->family = kasprintf(GFP_KERNEL, "Tegra");
+<<<<<<< HEAD
 	soc_dev_attr->revision = kasprintf(GFP_KERNEL, "%d", tegra_revision);
 	soc_dev_attr->soc_id = kasprintf(GFP_KERNEL, "%d", tegra_chip_id);
+=======
+	soc_dev_attr->revision = kasprintf(GFP_KERNEL, "%d",
+					   tegra_sku_info.revision);
+	soc_dev_attr->soc_id = kasprintf(GFP_KERNEL, "%u", tegra_get_chip_id());
+>>>>>>> v3.18
 
 	soc_dev = soc_device_register(soc_dev_attr);
 	if (IS_ERR(soc_dev)) {
@@ -112,6 +189,7 @@ static void __init tegra_dt_init(void)
 	 * devices
 	 */
 out:
+<<<<<<< HEAD
 	of_platform_populate(NULL, of_default_bus_match_table,
 				tegra20_auxdata_lookup, parent);
 }
@@ -136,6 +214,9 @@ static void __init harmony_init(void)
 	if (ret)
 		pr_err("harmony_pcie_init() failed: %d\n", ret);
 #endif
+=======
+	of_platform_populate(NULL, of_default_bus_match_table, NULL, parent);
+>>>>>>> v3.18
 }
 
 static void __init paz00_init(void)
@@ -148,8 +229,11 @@ static struct {
 	char *machine;
 	void (*init)(void);
 } board_init_funcs[] = {
+<<<<<<< HEAD
 	{ "compulab,trimslice", trimslice_init },
 	{ "nvidia,harmony", harmony_init },
+=======
+>>>>>>> v3.18
 	{ "compal,paz00", paz00_init },
 };
 
@@ -157,7 +241,12 @@ static void __init tegra_dt_init_late(void)
 {
 	int i;
 
+<<<<<<< HEAD
 	tegra_init_late();
+=======
+	tegra_init_suspend();
+	tegra_cpuidle_init();
+>>>>>>> v3.18
 
 	for (i = 0; i < ARRAY_SIZE(board_init_funcs); i++) {
 		if (of_machine_is_compatible(board_init_funcs[i].machine)) {
@@ -168,6 +257,10 @@ static void __init tegra_dt_init_late(void)
 }
 
 static const char * const tegra_dt_board_compat[] = {
+<<<<<<< HEAD
+=======
+	"nvidia,tegra124",
+>>>>>>> v3.18
 	"nvidia,tegra114",
 	"nvidia,tegra30",
 	"nvidia,tegra20",
@@ -175,6 +268,7 @@ static const char * const tegra_dt_board_compat[] = {
 };
 
 DT_MACHINE_START(TEGRA_DT, "NVIDIA Tegra SoC (Flattened Device Tree)")
+<<<<<<< HEAD
 	.map_io		= tegra_map_common_io,
 	.smp		= smp_ops(tegra_smp_ops),
 	.init_early	= tegra_init_early,
@@ -183,5 +277,16 @@ DT_MACHINE_START(TEGRA_DT, "NVIDIA Tegra SoC (Flattened Device Tree)")
 	.init_machine	= tegra_dt_init,
 	.init_late	= tegra_dt_init_late,
 	.restart	= tegra_assert_system_reset,
+=======
+	.l2c_aux_val	= 0x3c400001,
+	.l2c_aux_mask	= 0xc20fc3fe,
+	.smp		= smp_ops(tegra_smp_ops),
+	.map_io		= tegra_map_common_io,
+	.init_early	= tegra_init_early,
+	.init_irq	= tegra_dt_init_irq,
+	.init_machine	= tegra_dt_init,
+	.init_late	= tegra_dt_init_late,
+	.restart	= tegra_pmc_restart,
+>>>>>>> v3.18
 	.dt_compat	= tegra_dt_board_compat,
 MACHINE_END

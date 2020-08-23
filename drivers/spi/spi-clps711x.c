@@ -1,7 +1,11 @@
 /*
  *  CLPS711X SPI bus driver
  *
+<<<<<<< HEAD
  *  Copyright (C) 2012 Alexander Shiyan <shc_work@mail.ru>
+=======
+ *  Copyright (C) 2012-2014 Alexander Shiyan <shc_work@mail.ru>
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -11,12 +15,16 @@
 
 #include <linux/io.h>
 #include <linux/clk.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/gpio.h>
 #include <linux/delay.h>
 #include <linux/module.h>
 #include <linux/interrupt.h>
 #include <linux/platform_device.h>
+<<<<<<< HEAD
 #include <linux/spi/spi.h>
 #include <linux/platform_data/spi-clps711x.h>
 
@@ -36,10 +44,33 @@ struct spi_clps711x_data {
 	int			len;
 
 	int			chipselect[0];
+=======
+#include <linux/regmap.h>
+#include <linux/mfd/syscon.h>
+#include <linux/mfd/syscon/clps711x.h>
+#include <linux/spi/spi.h>
+#include <linux/platform_data/spi-clps711x.h>
+
+#define DRIVER_NAME	"spi-clps711x"
+
+#define SYNCIO_FRMLEN(x)	((x) << 8)
+#define SYNCIO_TXFRMEN		(1 << 14)
+
+struct spi_clps711x_data {
+	void __iomem		*syncio;
+	struct regmap		*syscon;
+	struct clk		*spi_clk;
+
+	u8			*tx_buf;
+	u8			*rx_buf;
+	unsigned int		bpw;
+	int			len;
+>>>>>>> v3.18
 };
 
 static int spi_clps711x_setup(struct spi_device *spi)
 {
+<<<<<<< HEAD
 	struct spi_clps711x_data *hw = spi_master_get_devdata(spi->master);
 
 	if (spi->bits_per_word != 8) {
@@ -51,10 +82,15 @@ static int spi_clps711x_setup(struct spi_device *spi)
 	/* We are expect that SPI-device is not selected */
 	gpio_direction_output(hw->chipselect[spi->chip_select],
 			      !(spi->mode & SPI_CS_HIGH));
+=======
+	/* We are expect that SPI-device is not selected */
+	gpio_direction_output(spi->cs_gpio, !(spi->mode & SPI_CS_HIGH));
+>>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 static void spi_clps711x_setup_mode(struct spi_device *spi)
 {
 	/* Setup edge for transfer */
@@ -139,10 +175,44 @@ out_xfr:
 	spi_finalize_current_message(master);
 
 	return 0;
+=======
+static int spi_clps711x_prepare_message(struct spi_master *master,
+					struct spi_message *msg)
+{
+	struct spi_clps711x_data *hw = spi_master_get_devdata(master);
+	struct spi_device *spi = msg->spi;
+
+	/* Setup mode for transfer */
+	return regmap_update_bits(hw->syscon, SYSCON_OFFSET, SYSCON3_ADCCKNSEN,
+				  (spi->mode & SPI_CPHA) ?
+				  SYSCON3_ADCCKNSEN : 0);
+}
+
+static int spi_clps711x_transfer_one(struct spi_master *master,
+				     struct spi_device *spi,
+				     struct spi_transfer *xfer)
+{
+	struct spi_clps711x_data *hw = spi_master_get_devdata(master);
+	u8 data;
+
+	clk_set_rate(hw->spi_clk, xfer->speed_hz ? : spi->max_speed_hz);
+
+	hw->len = xfer->len;
+	hw->bpw = xfer->bits_per_word;
+	hw->tx_buf = (u8 *)xfer->tx_buf;
+	hw->rx_buf = (u8 *)xfer->rx_buf;
+
+	/* Initiate transfer */
+	data = hw->tx_buf ? *hw->tx_buf++ : 0;
+	writel(data | SYNCIO_FRMLEN(hw->bpw) | SYNCIO_TXFRMEN, hw->syncio);
+
+	return 1;
+>>>>>>> v3.18
 }
 
 static irqreturn_t spi_clps711x_isr(int irq, void *dev_id)
 {
+<<<<<<< HEAD
 	struct spi_clps711x_data *hw = (struct spi_clps711x_data *)dev_id;
 	u32 data;
 
@@ -159,16 +229,42 @@ static irqreturn_t spi_clps711x_isr(int irq, void *dev_id)
 		clps_writel(data | SYNCIO_FRMLEN(8) | SYNCIO_TXFRMEN, SYNCIO);
 	} else
 		complete(&hw->done);
+=======
+	struct spi_master *master = dev_id;
+	struct spi_clps711x_data *hw = spi_master_get_devdata(master);
+	u8 data;
+
+	/* Handle RX */
+	data = readb(hw->syncio);
+	if (hw->rx_buf)
+		*hw->rx_buf++ = data;
+
+	/* Handle TX */
+	if (--hw->len > 0) {
+		data = hw->tx_buf ? *hw->tx_buf++ : 0;
+		writel(data | SYNCIO_FRMLEN(hw->bpw) | SYNCIO_TXFRMEN,
+		       hw->syncio);
+	} else
+		spi_finalize_current_transfer(master);
+>>>>>>> v3.18
 
 	return IRQ_HANDLED;
 }
 
 static int spi_clps711x_probe(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	int i, ret;
 	struct spi_master *master;
 	struct spi_clps711x_data *hw;
 	struct spi_clps711x_pdata *pdata = dev_get_platdata(&pdev->dev);
+=======
+	struct spi_clps711x_data *hw;
+	struct spi_clps711x_pdata *pdata = dev_get_platdata(&pdev->dev);
+	struct spi_master *master;
+	struct resource *res;
+	int i, irq, ret;
+>>>>>>> v3.18
 
 	if (!pdata) {
 		dev_err(&pdev->dev, "No platform data supplied\n");
@@ -180,23 +276,48 @@ static int spi_clps711x_probe(struct platform_device *pdev)
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 	master = spi_alloc_master(&pdev->dev,
 				  sizeof(struct spi_clps711x_data) +
 				  sizeof(int) * pdata->num_chipselect);
 	if (!master) {
 		dev_err(&pdev->dev, "SPI allocating memory error\n");
 		return -ENOMEM;
+=======
+	irq = platform_get_irq(pdev, 0);
+	if (irq < 0)
+		return irq;
+
+	master = spi_alloc_master(&pdev->dev, sizeof(*hw));
+	if (!master)
+		return -ENOMEM;
+
+	master->cs_gpios = devm_kzalloc(&pdev->dev, sizeof(int) *
+					pdata->num_chipselect, GFP_KERNEL);
+	if (!master->cs_gpios) {
+		ret = -ENOMEM;
+		goto err_out;
+>>>>>>> v3.18
 	}
 
 	master->bus_num = pdev->id;
 	master->mode_bits = SPI_CPHA | SPI_CS_HIGH;
+<<<<<<< HEAD
 	master->num_chipselect = pdata->num_chipselect;
 	master->setup = spi_clps711x_setup;
 	master->transfer_one_message = spi_clps711x_transfer_one_message;
+=======
+	master->bits_per_word_mask =  SPI_BPW_RANGE_MASK(1, 8);
+	master->num_chipselect = pdata->num_chipselect;
+	master->setup = spi_clps711x_setup;
+	master->prepare_message = spi_clps711x_prepare_message;
+	master->transfer_one = spi_clps711x_transfer_one;
+>>>>>>> v3.18
 
 	hw = spi_master_get_devdata(master);
 
 	for (i = 0; i < master->num_chipselect; i++) {
+<<<<<<< HEAD
 		hw->chipselect[i] = pdata->chipselect[i];
 		if (!gpio_is_valid(hw->chipselect[i])) {
 			dev_err(&pdev->dev, "Invalid CS GPIO %i\n", i);
@@ -206,10 +327,18 @@ static int spi_clps711x_probe(struct platform_device *pdev)
 		if (gpio_request(hw->chipselect[i], DRIVER_NAME)) {
 			dev_err(&pdev->dev, "Can't get CS GPIO %i\n", i);
 			ret = -EINVAL;
+=======
+		master->cs_gpios[i] = pdata->chipselect[i];
+		ret = devm_gpio_request(&pdev->dev, master->cs_gpios[i],
+					DRIVER_NAME);
+		if (ret) {
+			dev_err(&pdev->dev, "Can't get CS GPIO %i\n", i);
+>>>>>>> v3.18
 			goto err_out;
 		}
 	}
 
+<<<<<<< HEAD
 	hw->spi_clk = devm_clk_get(&pdev->dev, "spi");
 	if (IS_ERR(hw->spi_clk)) {
 		dev_err(&pdev->dev, "Can't get clocks\n");
@@ -240,10 +369,48 @@ static int spi_clps711x_probe(struct platform_device *pdev)
 		dev_info(&pdev->dev,
 			 "SPI bus driver initialized. Master clock %u Hz\n",
 			 hw->max_speed_hz);
+=======
+	hw->spi_clk = devm_clk_get(&pdev->dev, NULL);
+	if (IS_ERR(hw->spi_clk)) {
+		ret = PTR_ERR(hw->spi_clk);
+		goto err_out;
+	}
+
+	hw->syscon = syscon_regmap_lookup_by_pdevname("syscon.3");
+	if (IS_ERR(hw->syscon)) {
+		ret = PTR_ERR(hw->syscon);
+		goto err_out;
+	}
+
+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+	hw->syncio = devm_ioremap_resource(&pdev->dev, res);
+	if (IS_ERR(hw->syncio)) {
+		ret = PTR_ERR(hw->syncio);
+		goto err_out;
+	}
+
+	/* Disable extended mode due hardware problems */
+	regmap_update_bits(hw->syscon, SYSCON_OFFSET, SYSCON3_ADCCON, 0);
+
+	/* Clear possible pending interrupt */
+	readl(hw->syncio);
+
+	ret = devm_request_irq(&pdev->dev, irq, spi_clps711x_isr, 0,
+			       dev_name(&pdev->dev), master);
+	if (ret)
+		goto err_out;
+
+	ret = devm_spi_register_master(&pdev->dev, master);
+	if (!ret) {
+		dev_info(&pdev->dev,
+			 "SPI bus driver initialized. Master clock %u Hz\n",
+			 master->max_speed_hz);
+>>>>>>> v3.18
 		return 0;
 	}
 
 	dev_err(&pdev->dev, "Failed to register master\n");
+<<<<<<< HEAD
 	devm_free_irq(&pdev->dev, IRQ_SSEOTI, hw);
 
 clk_out:
@@ -257,10 +424,16 @@ err_out:
 	platform_set_drvdata(pdev, NULL);
 	spi_master_put(master);
 	kfree(master);
+=======
+
+err_out:
+	spi_master_put(master);
+>>>>>>> v3.18
 
 	return ret;
 }
 
+<<<<<<< HEAD
 static int spi_clps711x_remove(struct platform_device *pdev)
 {
 	int i;
@@ -281,16 +454,25 @@ static int spi_clps711x_remove(struct platform_device *pdev)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 static struct platform_driver clps711x_spi_driver = {
 	.driver	= {
 		.name	= DRIVER_NAME,
 		.owner	= THIS_MODULE,
 	},
 	.probe	= spi_clps711x_probe,
+<<<<<<< HEAD
 	.remove	= spi_clps711x_remove,
+=======
+>>>>>>> v3.18
 };
 module_platform_driver(clps711x_spi_driver);
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Alexander Shiyan <shc_work@mail.ru>");
 MODULE_DESCRIPTION("CLPS711X SPI bus driver");
+<<<<<<< HEAD
+=======
+MODULE_ALIAS("platform:" DRIVER_NAME);
+>>>>>>> v3.18

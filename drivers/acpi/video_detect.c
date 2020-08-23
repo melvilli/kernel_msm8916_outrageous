@@ -38,7 +38,11 @@
 #include <linux/dmi.h>
 #include <linux/pci.h>
 
+<<<<<<< HEAD
 #define PREFIX "ACPI: "
+=======
+#include "internal.h"
+>>>>>>> v3.18
 
 ACPI_MODULE_NAME("video");
 #define _COMPONENT		ACPI_VIDEO_COMPONENT
@@ -48,6 +52,7 @@ static bool acpi_video_caps_checked;
 
 static acpi_status
 acpi_backlight_cap_match(acpi_handle handle, u32 level, void *context,
+<<<<<<< HEAD
 			  void **retyurn_value)
 {
 	long *cap = context;
@@ -59,6 +64,18 @@ acpi_backlight_cap_match(acpi_handle handle, u32 level, void *context,
 				  "support\n"));
 		*cap |= ACPI_VIDEO_BACKLIGHT;
 		if (ACPI_FAILURE(acpi_get_handle(handle, "_BQC", &h_dummy)))
+=======
+			  void **return_value)
+{
+	long *cap = context;
+
+	if (acpi_has_method(handle, "_BCM") &&
+	    acpi_has_method(handle, "_BCL")) {
+		ACPI_DEBUG_PRINT((ACPI_DB_INFO, "Found generic backlight "
+				  "support\n"));
+		*cap |= ACPI_VIDEO_BACKLIGHT;
+		if (!acpi_has_method(handle, "_BQC"))
+>>>>>>> v3.18
 			printk(KERN_WARNING FW_BUG PREFIX "No _BQC method, "
 				"cannot determine initial brightness\n");
 		/* We have backlight support, no need to scan further */
@@ -77,6 +94,7 @@ acpi_backlight_cap_match(acpi_handle handle, u32 level, void *context,
  */
 long acpi_is_video_device(acpi_handle handle)
 {
+<<<<<<< HEAD
 	acpi_handle h_dummy;
 	long video_caps = 0;
 
@@ -93,6 +111,22 @@ long acpi_is_video_device(acpi_handle handle)
 	if (ACPI_SUCCESS(acpi_get_handle(handle, "_VPO", &h_dummy)) &&
 	    ACPI_SUCCESS(acpi_get_handle(handle, "_GPD", &h_dummy)) &&
 	    ACPI_SUCCESS(acpi_get_handle(handle, "_SPD", &h_dummy)))
+=======
+	long video_caps = 0;
+
+	/* Is this device able to support video switching ? */
+	if (acpi_has_method(handle, "_DOD") || acpi_has_method(handle, "_DOS"))
+		video_caps |= ACPI_VIDEO_OUTPUT_SWITCHING;
+
+	/* Is this device able to retrieve a video ROM ? */
+	if (acpi_has_method(handle, "_ROM"))
+		video_caps |= ACPI_VIDEO_ROM_AVAILABLE;
+
+	/* Is this device able to configure which video head to be POSTed ? */
+	if (acpi_has_method(handle, "_VPO") &&
+	    acpi_has_method(handle, "_GPD") &&
+	    acpi_has_method(handle, "_SPD"))
+>>>>>>> v3.18
 		video_caps |= ACPI_VIDEO_DEVICE_POSTING;
 
 	/* Only check for backlight functionality if one of the above hit. */
@@ -169,6 +203,25 @@ static struct dmi_system_id video_detect_dmi_table[] = {
 		DMI_MATCH(DMI_PRODUCT_NAME, "UL30A"),
 		},
 	},
+<<<<<<< HEAD
+=======
+	{
+	.callback = video_detect_force_vendor,
+	.ident = "Dell Inspiron 5737",
+	.matches = {
+		DMI_MATCH(DMI_SYS_VENDOR, "Dell Inc."),
+		DMI_MATCH(DMI_PRODUCT_NAME, "Inspiron 5737"),
+		},
+	},
+	{
+	.callback = video_detect_force_vendor,
+	.ident = "Lenovo IdeaPad Z570",
+	.matches = {
+		DMI_MATCH(DMI_SYS_VENDOR, "LENOVO"),
+		DMI_MATCH(DMI_PRODUCT_VERSION, "Ideapad Z570"),
+		},
+	},
+>>>>>>> v3.18
 	{ },
 };
 
@@ -234,6 +287,15 @@ static void acpi_video_caps_check(void)
 		acpi_video_get_capabilities(NULL);
 }
 
+<<<<<<< HEAD
+=======
+bool acpi_osi_is_win8(void)
+{
+	return acpi_gbl_osi_data >= ACPI_OSI_WIN_8;
+}
+EXPORT_SYMBOL(acpi_osi_is_win8);
+
+>>>>>>> v3.18
 /* Promote the vendor interface instead of the generic video module.
  * This function allow DMI blacklists to be implemented by externals
  * platform drivers instead of putting a big blacklist in video_detect.c

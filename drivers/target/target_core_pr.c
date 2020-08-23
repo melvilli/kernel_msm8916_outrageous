@@ -4,7 +4,11 @@
  * This file contains SPC-3 compliant persistent reservations and
  * legacy SPC-2 reservations with compatible reservation handling (CRH=1)
  *
+<<<<<<< HEAD
  * (c) Copyright 2009-2012 RisingTide Systems LLC.
+=======
+ * (c) Copyright 2009-2013 Datera, Inc.
+>>>>>>> v3.18
  *
  * Nicholas A. Bellinger <nab@kernel.org>
  *
@@ -53,18 +57,41 @@ struct pr_transport_id_holder {
 	struct list_head dest_list;
 };
 
+<<<<<<< HEAD
 int core_pr_dump_initiator_port(
+=======
+void core_pr_dump_initiator_port(
+>>>>>>> v3.18
 	struct t10_pr_registration *pr_reg,
 	char *buf,
 	u32 size)
 {
 	if (!pr_reg->isid_present_at_reg)
+<<<<<<< HEAD
 		return 0;
 
 	snprintf(buf, size, ",i,0x%s", &pr_reg->pr_reg_isid[0]);
 	return 1;
 }
 
+=======
+		buf[0] = '\0';
+
+	snprintf(buf, size, ",i,0x%s", pr_reg->pr_reg_isid);
+}
+
+enum register_type {
+	REGISTER,
+	REGISTER_AND_IGNORE_EXISTING_KEY,
+	REGISTER_AND_MOVE,
+};
+
+enum preempt_type {
+	PREEMPT,
+	PREEMPT_AND_ABORT,
+};
+
+>>>>>>> v3.18
 static void __core_scsi3_complete_pro_release(struct se_device *, struct se_node_acl *,
 			struct t10_pr_registration *, int);
 
@@ -464,7 +491,11 @@ static int core_scsi3_pr_seq_non_holder(
 	 * statement.
 	 */
 	if (!ret && !other_cdb) {
+<<<<<<< HEAD
 		pr_debug("Allowing explict CDB: 0x%02x for %s"
+=======
+		pr_debug("Allowing explicit CDB: 0x%02x for %s"
+>>>>>>> v3.18
 			" reservation holder\n", cdb[0],
 			core_scsi3_pr_dump_type(pr_reg_type));
 
@@ -497,7 +528,11 @@ static int core_scsi3_pr_seq_non_holder(
 			 */
 
 			if (!registered_nexus) {
+<<<<<<< HEAD
 				pr_debug("Allowing implict CDB: 0x%02x"
+=======
+				pr_debug("Allowing implicit CDB: 0x%02x"
+>>>>>>> v3.18
 					" for %s reservation on unregistered"
 					" nexus\n", cdb[0],
 					core_scsi3_pr_dump_type(pr_reg_type));
@@ -512,12 +547,17 @@ static int core_scsi3_pr_seq_non_holder(
 			 * allow commands from registered nexuses.
 			 */
 
+<<<<<<< HEAD
 			pr_debug("Allowing implict CDB: 0x%02x for %s"
+=======
+			pr_debug("Allowing implicit CDB: 0x%02x for %s"
+>>>>>>> v3.18
 				" reservation\n", cdb[0],
 				core_scsi3_pr_dump_type(pr_reg_type));
 
 			return 0;
 		}
+<<<<<<< HEAD
        } else if (we && registered_nexus) {
                /*
                 * Reads are allowed for Write Exclusive locks
@@ -530,6 +570,8 @@ static int core_scsi3_pr_seq_non_holder(
 
                        return 0;
                }
+=======
+>>>>>>> v3.18
 	}
 	pr_debug("%s Conflict for %sregistered nexus %s CDB: 0x%2x"
 		" for %s reservation\n", transport_dump_cmd_direction(cmd),
@@ -608,6 +650,7 @@ static struct t10_pr_registration *__core_scsi3_do_alloc_registration(
 		return NULL;
 	}
 
+<<<<<<< HEAD
 	pr_reg->pr_aptpl_buf = kzalloc(dev->t10_pr.pr_aptpl_buf_len,
 					GFP_ATOMIC);
 	if (!pr_reg->pr_aptpl_buf) {
@@ -616,6 +659,8 @@ static struct t10_pr_registration *__core_scsi3_do_alloc_registration(
 		return NULL;
 	}
 
+=======
+>>>>>>> v3.18
 	INIT_LIST_HEAD(&pr_reg->pr_reg_list);
 	INIT_LIST_HEAD(&pr_reg->pr_reg_abort_list);
 	INIT_LIST_HEAD(&pr_reg->pr_reg_aptpl_list);
@@ -684,8 +729,12 @@ static struct t10_pr_registration *__core_scsi3_alloc_registration(
 	 */
 	spin_lock(&dev->se_port_lock);
 	list_for_each_entry_safe(port, port_tmp, &dev->dev_sep_list, sep_list) {
+<<<<<<< HEAD
 		atomic_inc(&port->sep_tg_pt_ref_cnt);
 		smp_mb__after_atomic();
+=======
+		atomic_inc_mb(&port->sep_tg_pt_ref_cnt);
+>>>>>>> v3.18
 		spin_unlock(&dev->se_port_lock);
 
 		spin_lock_bh(&port->sep_alua_lock);
@@ -693,7 +742,11 @@ static struct t10_pr_registration *__core_scsi3_alloc_registration(
 					alua_port_list) {
 			/*
 			 * This pointer will be NULL for demo mode MappedLUNs
+<<<<<<< HEAD
 			 * that have not been make explict via a ConfigFS
+=======
+			 * that have not been make explicit via a ConfigFS
+>>>>>>> v3.18
 			 * MappedLUN group for the SCSI Initiator Node ACL.
 			 */
 			if (!deve_tmp->se_lun_acl)
@@ -719,8 +772,12 @@ static struct t10_pr_registration *__core_scsi3_alloc_registration(
 			if (strcmp(nacl->initiatorname, nacl_tmp->initiatorname))
 				continue;
 
+<<<<<<< HEAD
 			atomic_inc(&deve_tmp->pr_ref_count);
 			smp_mb__after_atomic();
+=======
+			atomic_inc_mb(&deve_tmp->pr_ref_count);
+>>>>>>> v3.18
 			spin_unlock_bh(&port->sep_alua_lock);
 			/*
 			 * Grab a configfs group dependency that is released
@@ -732,10 +789,15 @@ static struct t10_pr_registration *__core_scsi3_alloc_registration(
 			if (ret < 0) {
 				pr_err("core_scsi3_lunacl_depend"
 						"_item() failed\n");
+<<<<<<< HEAD
 				atomic_dec(&port->sep_tg_pt_ref_cnt);
 				smp_mb__after_atomic();
 				atomic_dec(&deve_tmp->pr_ref_count);
 				smp_mb__after_atomic();
+=======
+				atomic_dec_mb(&port->sep_tg_pt_ref_cnt);
+				atomic_dec_mb(&deve_tmp->pr_ref_count);
+>>>>>>> v3.18
 				goto out;
 			}
 			/*
@@ -749,10 +811,15 @@ static struct t10_pr_registration *__core_scsi3_alloc_registration(
 						nacl_tmp, deve_tmp, NULL,
 						sa_res_key, all_tg_pt, aptpl);
 			if (!pr_reg_atp) {
+<<<<<<< HEAD
 				atomic_dec(&port->sep_tg_pt_ref_cnt);
 				smp_mb__after_atomic();
 				atomic_dec(&deve_tmp->pr_ref_count);
 				smp_mb__after_atomic();
+=======
+				atomic_dec_mb(&port->sep_tg_pt_ref_cnt);
+				atomic_dec_mb(&deve_tmp->pr_ref_count);
+>>>>>>> v3.18
 				core_scsi3_lunacl_undepend_item(deve_tmp);
 				goto out;
 			}
@@ -764,8 +831,12 @@ static struct t10_pr_registration *__core_scsi3_alloc_registration(
 		spin_unlock_bh(&port->sep_alua_lock);
 
 		spin_lock(&dev->se_port_lock);
+<<<<<<< HEAD
 		atomic_dec(&port->sep_tg_pt_ref_cnt);
 		smp_mb__after_atomic();
+=======
+		atomic_dec_mb(&port->sep_tg_pt_ref_cnt);
+>>>>>>> v3.18
 	}
 	spin_unlock(&dev->se_port_lock);
 
@@ -806,7 +877,10 @@ int core_scsi3_alloc_aptpl_registration(
 		pr_err("Unable to allocate struct t10_pr_registration\n");
 		return -ENOMEM;
 	}
+<<<<<<< HEAD
 	pr_reg->pr_aptpl_buf = kzalloc(pr_tmpl->pr_aptpl_buf_len, GFP_KERNEL);
+=======
+>>>>>>> v3.18
 
 	INIT_LIST_HEAD(&pr_reg->pr_reg_list);
 	INIT_LIST_HEAD(&pr_reg->pr_reg_abort_list);
@@ -860,11 +934,17 @@ static void core_scsi3_aptpl_reserve(
 	struct t10_pr_registration *pr_reg)
 {
 	char i_buf[PR_REG_ISID_ID_LEN];
+<<<<<<< HEAD
 	int prf_isid;
 
 	memset(i_buf, 0, PR_REG_ISID_ID_LEN);
 	prf_isid = core_pr_dump_initiator_port(pr_reg, &i_buf[0],
 				PR_REG_ISID_ID_LEN);
+=======
+
+	memset(i_buf, 0, PR_REG_ISID_ID_LEN);
+	core_pr_dump_initiator_port(pr_reg, i_buf, PR_REG_ISID_ID_LEN);
+>>>>>>> v3.18
 
 	spin_lock(&dev->dev_reservation_lock);
 	dev->dev_pr_res_holder = pr_reg;
@@ -877,11 +957,19 @@ static void core_scsi3_aptpl_reserve(
 		(pr_reg->pr_reg_all_tg_pt) ? 1 : 0);
 	pr_debug("SPC-3 PR [%s] RESERVE Node: %s%s\n",
 		tpg->se_tpg_tfo->get_fabric_name(), node_acl->initiatorname,
+<<<<<<< HEAD
 		(prf_isid) ? &i_buf[0] : "");
 }
 
 static void __core_scsi3_add_registration(struct se_device *, struct se_node_acl *,
 				struct t10_pr_registration *, int, int);
+=======
+		i_buf);
+}
+
+static void __core_scsi3_add_registration(struct se_device *, struct se_node_acl *,
+				struct t10_pr_registration *, enum register_type, int);
+>>>>>>> v3.18
 
 static int __core_scsi3_check_aptpl_registration(
 	struct se_device *dev,
@@ -915,6 +1003,10 @@ static int __core_scsi3_check_aptpl_registration(
 	spin_lock(&pr_tmpl->aptpl_reg_lock);
 	list_for_each_entry_safe(pr_reg, pr_reg_tmp, &pr_tmpl->aptpl_reg_list,
 				pr_reg_aptpl_list) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		if (!strcmp(pr_reg->pr_iport, i_port) &&
 		     (pr_reg->pr_res_mapped_lun == deve->mapped_lun) &&
 		    !(strcmp(pr_reg->pr_tport, t_port)) &&
@@ -974,6 +1066,7 @@ static void __core_scsi3_dump_registration(
 	struct se_device *dev,
 	struct se_node_acl *nacl,
 	struct t10_pr_registration *pr_reg,
+<<<<<<< HEAD
 	int register_type)
 {
 	struct se_portal_group *se_tpg = nacl->se_tpg;
@@ -989,6 +1082,21 @@ static void __core_scsi3_dump_registration(
 		"_AND_MOVE" : (register_type == 1) ?
 		"_AND_IGNORE_EXISTING_KEY" : "", nacl->initiatorname,
 		(prf_isid) ? i_buf : "");
+=======
+	enum register_type register_type)
+{
+	struct se_portal_group *se_tpg = nacl->se_tpg;
+	char i_buf[PR_REG_ISID_ID_LEN];
+
+	memset(&i_buf[0], 0, PR_REG_ISID_ID_LEN);
+	core_pr_dump_initiator_port(pr_reg, i_buf, PR_REG_ISID_ID_LEN);
+
+	pr_debug("SPC-3 PR [%s] Service Action: REGISTER%s Initiator"
+		" Node: %s%s\n", tfo->get_fabric_name(), (register_type == REGISTER_AND_MOVE) ?
+		"_AND_MOVE" : (register_type == REGISTER_AND_IGNORE_EXISTING_KEY) ?
+		"_AND_IGNORE_EXISTING_KEY" : "", nacl->initiatorname,
+		i_buf);
+>>>>>>> v3.18
 	pr_debug("SPC-3 PR [%s] registration on Target Port: %s,0x%04x\n",
 		 tfo->get_fabric_name(), tfo->tpg_get_wwn(se_tpg),
 		tfo->tpg_get_tag(se_tpg));
@@ -1010,7 +1118,11 @@ static void __core_scsi3_add_registration(
 	struct se_device *dev,
 	struct se_node_acl *nacl,
 	struct t10_pr_registration *pr_reg,
+<<<<<<< HEAD
 	int register_type,
+=======
+	enum register_type register_type,
+>>>>>>> v3.18
 	int register_move)
 {
 	struct target_core_fabric_ops *tfo = nacl->se_tpg->se_tpg_tfo;
@@ -1076,7 +1188,11 @@ static int core_scsi3_alloc_registration(
 	u64 sa_res_key,
 	int all_tg_pt,
 	int aptpl,
+<<<<<<< HEAD
 	int register_type,
+=======
+	enum register_type register_type,
+>>>>>>> v3.18
 	int register_move)
 {
 	struct t10_pr_registration *pr_reg;
@@ -1124,8 +1240,12 @@ static struct t10_pr_registration *__core_scsi3_locate_pr_reg(
 				if (dev->dev_attrib.enforce_pr_isids)
 					continue;
 			}
+<<<<<<< HEAD
 			atomic_inc(&pr_reg->pr_res_holders);
 			smp_mb__after_atomic();
+=======
+			atomic_inc_mb(&pr_reg->pr_res_holders);
+>>>>>>> v3.18
 			spin_unlock(&pr_tmpl->registration_lock);
 			return pr_reg;
 		}
@@ -1139,8 +1259,12 @@ static struct t10_pr_registration *__core_scsi3_locate_pr_reg(
 		if (strcmp(isid, pr_reg->pr_reg_isid))
 			continue;
 
+<<<<<<< HEAD
 		atomic_inc(&pr_reg->pr_res_holders);
 		smp_mb__after_atomic();
+=======
+		atomic_inc_mb(&pr_reg->pr_res_holders);
+>>>>>>> v3.18
 		spin_unlock(&pr_tmpl->registration_lock);
 		return pr_reg;
 	}
@@ -1169,11 +1293,18 @@ static struct t10_pr_registration *core_scsi3_locate_pr_reg(
 
 static void core_scsi3_put_pr_reg(struct t10_pr_registration *pr_reg)
 {
+<<<<<<< HEAD
 	atomic_dec(&pr_reg->pr_res_holders);
 	smp_mb__after_atomic();
 }
 
 static int core_scsi3_check_implict_release(
+=======
+	atomic_dec_mb(&pr_reg->pr_res_holders);
+}
+
+static int core_scsi3_check_implicit_release(
+>>>>>>> v3.18
 	struct se_device *dev,
 	struct t10_pr_registration *pr_reg)
 {
@@ -1189,7 +1320,11 @@ static int core_scsi3_check_implict_release(
 	}
 	if (pr_res_holder == pr_reg) {
 		/*
+<<<<<<< HEAD
 		 * Perform an implict RELEASE if the registration that
+=======
+		 * Perform an implicit RELEASE if the registration that
+>>>>>>> v3.18
 		 * is being released is holding the reservation.
 		 *
 		 * From spc4r17, section 5.7.11.1:
@@ -1207,7 +1342,11 @@ static int core_scsi3_check_implict_release(
 		 * For 'All Registrants' reservation types, all existing
 		 * registrations are still processed as reservation holders
 		 * in core_scsi3_pr_seq_non_holder() after the initial
+<<<<<<< HEAD
 		 * reservation holder is implictly released here.
+=======
+		 * reservation holder is implicitly released here.
+>>>>>>> v3.18
 		 */
 	} else if (pr_reg->pr_reg_all_tg_pt &&
 		  (!strcmp(pr_res_holder->pr_reg_nacl->initiatorname,
@@ -1237,11 +1376,17 @@ static void __core_scsi3_free_registration(
 			pr_reg->pr_reg_nacl->se_tpg->se_tpg_tfo;
 	struct t10_reservation *pr_tmpl = &dev->t10_pr;
 	char i_buf[PR_REG_ISID_ID_LEN];
+<<<<<<< HEAD
 	int prf_isid;
 
 	memset(i_buf, 0, PR_REG_ISID_ID_LEN);
 	prf_isid = core_pr_dump_initiator_port(pr_reg, &i_buf[0],
 				PR_REG_ISID_ID_LEN);
+=======
+
+	memset(i_buf, 0, PR_REG_ISID_ID_LEN);
+	core_pr_dump_initiator_port(pr_reg, i_buf, PR_REG_ISID_ID_LEN);
+>>>>>>> v3.18
 
 	pr_reg->pr_reg_deve->def_pr_registered = 0;
 	pr_reg->pr_reg_deve->pr_res_key = 0;
@@ -1269,7 +1414,11 @@ static void __core_scsi3_free_registration(
 	pr_debug("SPC-3 PR [%s] Service Action: UNREGISTER Initiator"
 		" Node: %s%s\n", tfo->get_fabric_name(),
 		pr_reg->pr_reg_nacl->initiatorname,
+<<<<<<< HEAD
 		(prf_isid) ? &i_buf[0] : "");
+=======
+		i_buf);
+>>>>>>> v3.18
 	pr_debug("SPC-3 PR [%s] for %s TCM Subsystem %s Object Target"
 		" Port(s)\n", tfo->get_fabric_name(),
 		(pr_reg->pr_reg_all_tg_pt) ? "ALL" : "SINGLE",
@@ -1281,7 +1430,10 @@ static void __core_scsi3_free_registration(
 	if (!preempt_and_abort_list) {
 		pr_reg->pr_reg_deve = NULL;
 		pr_reg->pr_reg_nacl = NULL;
+<<<<<<< HEAD
 		kfree(pr_reg->pr_aptpl_buf);
+=======
+>>>>>>> v3.18
 		kmem_cache_free(t10_pr_reg_cache, pr_reg);
 		return;
 	}
@@ -1350,7 +1502,10 @@ void core_scsi3_free_all_registrations(
 	list_for_each_entry_safe(pr_reg, pr_reg_tmp, &pr_tmpl->aptpl_reg_list,
 				pr_reg_aptpl_list) {
 		list_del(&pr_reg->pr_reg_aptpl_list);
+<<<<<<< HEAD
 		kfree(pr_reg->pr_aptpl_buf);
+=======
+>>>>>>> v3.18
 		kmem_cache_free(t10_pr_reg_cache, pr_reg);
 	}
 	spin_unlock(&pr_tmpl->aptpl_reg_lock);
@@ -1367,8 +1522,12 @@ static void core_scsi3_tpg_undepend_item(struct se_portal_group *tpg)
 	configfs_undepend_item(tpg->se_tpg_tfo->tf_subsys,
 			&tpg->tpg_group.cg_item);
 
+<<<<<<< HEAD
 	atomic_dec(&tpg->tpg_pr_ref_count);
 	smp_mb__after_atomic();
+=======
+	atomic_dec_mb(&tpg->tpg_pr_ref_count);
+>>>>>>> v3.18
 }
 
 static int core_scsi3_nodeacl_depend_item(struct se_node_acl *nacl)
@@ -1387,16 +1546,24 @@ static void core_scsi3_nodeacl_undepend_item(struct se_node_acl *nacl)
 	struct se_portal_group *tpg = nacl->se_tpg;
 
 	if (nacl->dynamic_node_acl) {
+<<<<<<< HEAD
 		atomic_dec(&nacl->acl_pr_ref_count);
 		smp_mb__after_atomic();
+=======
+		atomic_dec_mb(&nacl->acl_pr_ref_count);
+>>>>>>> v3.18
 		return;
 	}
 
 	configfs_undepend_item(tpg->se_tpg_tfo->tf_subsys,
 			&nacl->acl_group.cg_item);
 
+<<<<<<< HEAD
 	atomic_dec(&nacl->acl_pr_ref_count);
 	smp_mb__after_atomic();
+=======
+	atomic_dec_mb(&nacl->acl_pr_ref_count);
+>>>>>>> v3.18
 }
 
 static int core_scsi3_lunacl_depend_item(struct se_dev_entry *se_deve)
@@ -1426,8 +1593,12 @@ static void core_scsi3_lunacl_undepend_item(struct se_dev_entry *se_deve)
 	 * For nacl->dynamic_node_acl=1
 	 */
 	if (!lun_acl) {
+<<<<<<< HEAD
 		atomic_dec(&se_deve->pr_ref_count);
 		smp_mb__after_atomic();
+=======
+		atomic_dec_mb(&se_deve->pr_ref_count);
+>>>>>>> v3.18
 		return;
 	}
 	nacl = lun_acl->se_lun_nacl;
@@ -1436,8 +1607,12 @@ static void core_scsi3_lunacl_undepend_item(struct se_dev_entry *se_deve)
 	configfs_undepend_item(tpg->se_tpg_tfo->tf_subsys,
 			&lun_acl->se_lun_group.cg_item);
 
+<<<<<<< HEAD
 	atomic_dec(&se_deve->pr_ref_count);
 	smp_mb__after_atomic();
+=======
+	atomic_dec_mb(&se_deve->pr_ref_count);
+>>>>>>> v3.18
 }
 
 static sense_reason_t
@@ -1465,7 +1640,11 @@ core_scsi3_decode_spec_i_port(
 	char *iport_ptr = NULL, dest_iport[64], i_buf[PR_REG_ISID_ID_LEN];
 	sense_reason_t ret;
 	u32 tpdl, tid_len = 0;
+<<<<<<< HEAD
 	int dest_local_nexus, prf_isid;
+=======
+	int dest_local_nexus;
+>>>>>>> v3.18
 	u32 dest_rtpi = 0;
 
 	memset(dest_iport, 0, 64);
@@ -1570,15 +1749,23 @@ core_scsi3_decode_spec_i_port(
 			if (!i_str)
 				continue;
 
+<<<<<<< HEAD
 			atomic_inc(&tmp_tpg->tpg_pr_ref_count);
 			smp_mb__after_atomic();
+=======
+			atomic_inc_mb(&tmp_tpg->tpg_pr_ref_count);
+>>>>>>> v3.18
 			spin_unlock(&dev->se_port_lock);
 
 			if (core_scsi3_tpg_depend_item(tmp_tpg)) {
 				pr_err(" core_scsi3_tpg_depend_item()"
 					" for tmp_tpg\n");
+<<<<<<< HEAD
 				atomic_dec(&tmp_tpg->tpg_pr_ref_count);
 				smp_mb__after_atomic();
+=======
+				atomic_dec_mb(&tmp_tpg->tpg_pr_ref_count);
+>>>>>>> v3.18
 				ret = TCM_LOGICAL_UNIT_COMMUNICATION_FAILURE;
 				goto out_unmap;
 			}
@@ -1590,10 +1777,15 @@ core_scsi3_decode_spec_i_port(
 			spin_lock_irq(&tmp_tpg->acl_node_lock);
 			dest_node_acl = __core_tpg_get_initiator_node_acl(
 						tmp_tpg, i_str);
+<<<<<<< HEAD
 			if (dest_node_acl) {
 				atomic_inc(&dest_node_acl->acl_pr_ref_count);
 				smp_mb__after_atomic();
 			}
+=======
+			if (dest_node_acl)
+				atomic_inc_mb(&dest_node_acl->acl_pr_ref_count);
+>>>>>>> v3.18
 			spin_unlock_irq(&tmp_tpg->acl_node_lock);
 
 			if (!dest_node_acl) {
@@ -1605,8 +1797,12 @@ core_scsi3_decode_spec_i_port(
 			if (core_scsi3_nodeacl_depend_item(dest_node_acl)) {
 				pr_err("configfs_depend_item() failed"
 					" for dest_node_acl->acl_group\n");
+<<<<<<< HEAD
 				atomic_dec(&dest_node_acl->acl_pr_ref_count);
 				smp_mb__after_atomic();
+=======
+				atomic_dec_mb(&dest_node_acl->acl_pr_ref_count);
+>>>>>>> v3.18
 				core_scsi3_tpg_undepend_item(tmp_tpg);
 				ret = TCM_LOGICAL_UNIT_COMMUNICATION_FAILURE;
 				goto out_unmap;
@@ -1665,8 +1861,12 @@ core_scsi3_decode_spec_i_port(
 		if (core_scsi3_lunacl_depend_item(dest_se_deve)) {
 			pr_err("core_scsi3_lunacl_depend_item()"
 					" failed\n");
+<<<<<<< HEAD
 			atomic_dec(&dest_se_deve->pr_ref_count);
 			smp_mb__after_atomic();
+=======
+			atomic_dec_mb(&dest_se_deve->pr_ref_count);
+>>>>>>> v3.18
 			core_scsi3_nodeacl_undepend_item(dest_node_acl);
 			core_scsi3_tpg_undepend_item(dest_tpg);
 			ret = TCM_LOGICAL_UNIT_COMMUNICATION_FAILURE;
@@ -1776,8 +1976,12 @@ core_scsi3_decode_spec_i_port(
 		kfree(tidh);
 
 		memset(i_buf, 0, PR_REG_ISID_ID_LEN);
+<<<<<<< HEAD
 		prf_isid = core_pr_dump_initiator_port(dest_pr_reg, &i_buf[0],
 						PR_REG_ISID_ID_LEN);
+=======
+		core_pr_dump_initiator_port(dest_pr_reg, i_buf, PR_REG_ISID_ID_LEN);
+>>>>>>> v3.18
 
 		__core_scsi3_add_registration(cmd->se_dev, dest_node_acl,
 					dest_pr_reg, 0, 0);
@@ -1785,8 +1989,12 @@ core_scsi3_decode_spec_i_port(
 		pr_debug("SPC-3 PR [%s] SPEC_I_PT: Successfully"
 			" registered Transport ID for Node: %s%s Mapped LUN:"
 			" %u\n", dest_tpg->se_tpg_tfo->get_fabric_name(),
+<<<<<<< HEAD
 			dest_node_acl->initiatorname, (prf_isid) ?
 			&i_buf[0] : "", dest_se_deve->mapped_lun);
+=======
+			dest_node_acl->initiatorname, i_buf, dest_se_deve->mapped_lun);
+>>>>>>> v3.18
 
 		if (dest_local_nexus)
 			continue;
@@ -1825,7 +2033,10 @@ out:
 			kmem_cache_free(t10_pr_reg_cache, pr_reg_tmp);
 		}
 
+<<<<<<< HEAD
 		kfree(dest_pr_reg->pr_aptpl_buf);
+=======
+>>>>>>> v3.18
 		kmem_cache_free(t10_pr_reg_cache, dest_pr_reg);
 
 		if (dest_local_nexus)
@@ -1838,6 +2049,7 @@ out:
 	return ret;
 }
 
+<<<<<<< HEAD
 /*
  * Called with struct se_device->dev_reservation_lock held
  */
@@ -1846,6 +2058,12 @@ static int __core_scsi3_update_aptpl_buf(
 	unsigned char *buf,
 	u32 pr_aptpl_buf_len,
 	int clear_aptpl_metadata)
+=======
+static int core_scsi3_update_aptpl_buf(
+	struct se_device *dev,
+	unsigned char *buf,
+	u32 pr_aptpl_buf_len)
+>>>>>>> v3.18
 {
 	struct se_lun *lun;
 	struct se_portal_group *tpg;
@@ -1853,6 +2071,7 @@ static int __core_scsi3_update_aptpl_buf(
 	unsigned char tmp[512], isid_buf[32];
 	ssize_t len = 0;
 	int reg_count = 0;
+<<<<<<< HEAD
 
 	memset(buf, 0, pr_aptpl_buf_len);
 	/*
@@ -1867,6 +2086,15 @@ static int __core_scsi3_update_aptpl_buf(
 	 * Walk the registration list..
 	 */
 	spin_lock(&dev->t10_pr.registration_lock);
+=======
+	int ret = 0;
+
+	spin_lock(&dev->dev_reservation_lock);
+	spin_lock(&dev->t10_pr.registration_lock);
+	/*
+	 * Walk the registration list..
+	 */
+>>>>>>> v3.18
 	list_for_each_entry(pr_reg, &dev->t10_pr.registration_list,
 			pr_reg_list) {
 
@@ -1912,8 +2140,13 @@ static int __core_scsi3_update_aptpl_buf(
 		if ((len + strlen(tmp) >= pr_aptpl_buf_len)) {
 			pr_err("Unable to update renaming"
 				" APTPL metadata\n");
+<<<<<<< HEAD
 			spin_unlock(&dev->t10_pr.registration_lock);
 			return -EMSGSIZE;
+=======
+			ret = -EMSGSIZE;
+			goto out;
+>>>>>>> v3.18
 		}
 		len += sprintf(buf+len, "%s", tmp);
 
@@ -1930,17 +2163,26 @@ static int __core_scsi3_update_aptpl_buf(
 		if ((len + strlen(tmp) >= pr_aptpl_buf_len)) {
 			pr_err("Unable to update renaming"
 				" APTPL metadata\n");
+<<<<<<< HEAD
 			spin_unlock(&dev->t10_pr.registration_lock);
 			return -EMSGSIZE;
+=======
+			ret = -EMSGSIZE;
+			goto out;
+>>>>>>> v3.18
 		}
 		len += sprintf(buf+len, "%s", tmp);
 		reg_count++;
 	}
+<<<<<<< HEAD
 	spin_unlock(&dev->t10_pr.registration_lock);
+=======
+>>>>>>> v3.18
 
 	if (!reg_count)
 		len += sprintf(buf+len, "No Registrations or Reservations");
 
+<<<<<<< HEAD
 	return 0;
 }
 
@@ -1955,11 +2197,16 @@ static int core_scsi3_update_aptpl_buf(
 	spin_lock(&dev->dev_reservation_lock);
 	ret = __core_scsi3_update_aptpl_buf(dev, buf, pr_aptpl_buf_len,
 				clear_aptpl_metadata);
+=======
+out:
+	spin_unlock(&dev->t10_pr.registration_lock);
+>>>>>>> v3.18
 	spin_unlock(&dev->dev_reservation_lock);
 
 	return ret;
 }
 
+<<<<<<< HEAD
 /*
  * Called with struct se_device->aptpl_file_mutex held
  */
@@ -1967,11 +2214,20 @@ static int __core_scsi3_write_aptpl_to_file(
 	struct se_device *dev,
 	unsigned char *buf,
 	u32 pr_aptpl_buf_len)
+=======
+static int __core_scsi3_write_aptpl_to_file(
+	struct se_device *dev,
+	unsigned char *buf)
+>>>>>>> v3.18
 {
 	struct t10_wwn *wwn = &dev->t10_wwn;
 	struct file *file;
 	int flags = O_RDWR | O_CREAT | O_TRUNC;
 	char path[512];
+<<<<<<< HEAD
+=======
+	u32 pr_aptpl_buf_len;
+>>>>>>> v3.18
 	int ret;
 
 	memset(path, 0, 512);
@@ -1990,8 +2246,12 @@ static int __core_scsi3_write_aptpl_to_file(
 		return PTR_ERR(file);
 	}
 
+<<<<<<< HEAD
 	if (!pr_aptpl_buf_len)
 		pr_aptpl_buf_len = (strlen(&buf[0]) + 1); /* Add extra for NULL */
+=======
+	pr_aptpl_buf_len = (strlen(buf) + 1); /* Add extra for NULL */
+>>>>>>> v3.18
 
 	ret = kernel_write(file, buf, pr_aptpl_buf_len, 0);
 
@@ -2002,6 +2262,7 @@ static int __core_scsi3_write_aptpl_to_file(
 	return (ret < 0) ? -EIO : 0;
 }
 
+<<<<<<< HEAD
 static int
 core_scsi3_update_and_write_aptpl(struct se_device *dev, unsigned char *in_buf,
 		u32 in_pr_aptpl_buf_len)
@@ -2038,21 +2299,74 @@ core_scsi3_update_and_write_aptpl(struct se_device *dev, unsigned char *in_buf,
 	 * on the passed buf to determine pr_aptpl_buf_len.
 	 */
 	return __core_scsi3_write_aptpl_to_file(dev, buf, 0);
+=======
+/*
+ * Clear the APTPL metadata if APTPL has been disabled, otherwise
+ * write out the updated metadata to struct file for this SCSI device.
+ */
+static sense_reason_t core_scsi3_update_and_write_aptpl(struct se_device *dev, bool aptpl)
+{
+	unsigned char *buf;
+	int rc;
+
+	if (!aptpl) {
+		char *null_buf = "No Registrations or Reservations\n";
+
+		rc = __core_scsi3_write_aptpl_to_file(dev, null_buf);
+		dev->t10_pr.pr_aptpl_active = 0;
+		pr_debug("SPC-3 PR: Set APTPL Bit Deactivated\n");
+
+		if (rc)
+			return TCM_LOGICAL_UNIT_COMMUNICATION_FAILURE;
+
+		return 0;
+	}
+
+	buf = kzalloc(PR_APTPL_BUF_LEN, GFP_KERNEL);
+	if (!buf)
+		return TCM_OUT_OF_RESOURCES;
+
+	rc = core_scsi3_update_aptpl_buf(dev, buf, PR_APTPL_BUF_LEN);
+	if (rc < 0) {
+		kfree(buf);
+		return TCM_OUT_OF_RESOURCES;
+	}
+
+	rc = __core_scsi3_write_aptpl_to_file(dev, buf);
+	if (rc != 0) {
+		pr_err("SPC-3 PR: Could not update APTPL\n");
+		kfree(buf);
+		return TCM_LOGICAL_UNIT_COMMUNICATION_FAILURE;
+	}
+	dev->t10_pr.pr_aptpl_active = 1;
+	kfree(buf);
+	pr_debug("SPC-3 PR: Set APTPL Bit Activated\n");
+	return 0;
+>>>>>>> v3.18
 }
 
 static sense_reason_t
 core_scsi3_emulate_pro_register(struct se_cmd *cmd, u64 res_key, u64 sa_res_key,
+<<<<<<< HEAD
 		int aptpl, int all_tg_pt, int spec_i_pt, int ignore_key)
+=======
+		bool aptpl, bool all_tg_pt, bool spec_i_pt, enum register_type register_type)
+>>>>>>> v3.18
 {
 	struct se_session *se_sess = cmd->se_sess;
 	struct se_device *dev = cmd->se_dev;
 	struct se_dev_entry *se_deve;
 	struct se_lun *se_lun = cmd->se_lun;
 	struct se_portal_group *se_tpg;
+<<<<<<< HEAD
 	struct t10_pr_registration *pr_reg, *pr_reg_p, *pr_reg_tmp, *pr_reg_e;
 	struct t10_reservation *pr_tmpl = &dev->t10_pr;
 	/* Used for APTPL metadata w/ UNREGISTER */
 	unsigned char *pr_aptpl_buf = NULL;
+=======
+	struct t10_pr_registration *pr_reg, *pr_reg_p, *pr_reg_tmp;
+	struct t10_reservation *pr_tmpl = &dev->t10_pr;
+>>>>>>> v3.18
 	unsigned char isid_buf[PR_REG_ISID_LEN], *isid_ptr = NULL;
 	sense_reason_t ret = TCM_NO_SENSE;
 	int pr_holder = 0, type;
@@ -2073,8 +2387,13 @@ core_scsi3_emulate_pro_register(struct se_cmd *cmd, u64 res_key, u64 sa_res_key,
 	/*
 	 * Follow logic from spc4r17 Section 5.7.7, Register Behaviors Table 47
 	 */
+<<<<<<< HEAD
 	pr_reg_e = core_scsi3_locate_pr_reg(dev, se_sess->se_node_acl, se_sess);
 	if (!pr_reg_e) {
+=======
+	pr_reg = core_scsi3_locate_pr_reg(dev, se_sess->se_node_acl, se_sess);
+	if (!pr_reg) {
+>>>>>>> v3.18
 		if (res_key) {
 			pr_warn("SPC-3 PR: Reservation Key non-zero"
 				" for SA REGISTER, returning CONFLICT\n");
@@ -2095,7 +2414,11 @@ core_scsi3_emulate_pro_register(struct se_cmd *cmd, u64 res_key, u64 sa_res_key,
 			if (core_scsi3_alloc_registration(cmd->se_dev,
 					se_sess->se_node_acl, se_deve, isid_ptr,
 					sa_res_key, all_tg_pt, aptpl,
+<<<<<<< HEAD
 					ignore_key, 0)) {
+=======
+					register_type, 0)) {
+>>>>>>> v3.18
 				pr_err("Unable to allocate"
 					" struct t10_pr_registration\n");
 				return TCM_INVALID_PARAMETER_LIST;
@@ -2114,6 +2437,7 @@ core_scsi3_emulate_pro_register(struct se_cmd *cmd, u64 res_key, u64 sa_res_key,
 			if (ret != 0)
 				return ret;
 		}
+<<<<<<< HEAD
 		/*
 		 * Nothing left to do for the APTPL=0 case.
 		 */
@@ -2165,12 +2489,36 @@ core_scsi3_emulate_pro_register(struct se_cmd *cmd, u64 res_key, u64 sa_res_key,
 			" set while sa_res_key=0\n");
 		ret = TCM_INVALID_PARAMETER_LIST;
 		goto out_put_pr_reg;
+=======
+
+		return core_scsi3_update_and_write_aptpl(dev, aptpl);
+	}
+
+	/* ok, existing registration */
+
+	if ((register_type == REGISTER) && (res_key != pr_reg->pr_res_key)) {
+		pr_err("SPC-3 PR REGISTER: Received"
+		       " res_key: 0x%016Lx does not match"
+		       " existing SA REGISTER res_key:"
+		       " 0x%016Lx\n", res_key,
+		       pr_reg->pr_res_key);
+		ret = TCM_RESERVATION_CONFLICT;
+		goto out;
+	}
+
+	if (spec_i_pt) {
+		pr_err("SPC-3 PR REGISTER: SPEC_I_PT"
+			" set on a registered nexus\n");
+		ret = TCM_INVALID_PARAMETER_LIST;
+		goto out;
+>>>>>>> v3.18
 	}
 
 	/*
 	 * An existing ALL_TG_PT=1 registration being released
 	 * must also set ALL_TG_PT=1 in the incoming PROUT.
 	 */
+<<<<<<< HEAD
 	if (pr_reg->pr_reg_all_tg_pt && !(all_tg_pt)) {
 		pr_err("SPC-3 PR UNREGISTER: ALL_TG_PT=1"
 			" registration exists, but ALL_TG_PT=1 bit not"
@@ -2206,6 +2554,45 @@ core_scsi3_emulate_pro_register(struct se_cmd *cmd, u64 res_key, u64 sa_res_key,
 			ret = TCM_RESERVATION_CONFLICT;
 			goto out_put_pr_reg;
 		}
+=======
+	if (pr_reg->pr_reg_all_tg_pt && !all_tg_pt) {
+		pr_err("SPC-3 PR REGISTER: ALL_TG_PT=1"
+			" registration exists, but ALL_TG_PT=1 bit not"
+			" present in received PROUT\n");
+		ret = TCM_INVALID_CDB_FIELD;
+		goto out;
+	}
+
+	/*
+	 * sa_res_key=1 Change Reservation Key for registered I_T Nexus.
+	 */
+	if (sa_res_key) {
+		/*
+		 * Increment PRgeneration counter for struct se_device"
+		 * upon a successful REGISTER, see spc4r17 section 6.3.2
+		 * READ_KEYS service action.
+		 */
+		pr_reg->pr_res_generation = core_scsi3_pr_generation(cmd->se_dev);
+		pr_reg->pr_res_key = sa_res_key;
+		pr_debug("SPC-3 PR [%s] REGISTER%s: Changed Reservation"
+			 " Key for %s to: 0x%016Lx PRgeneration:"
+			 " 0x%08x\n", cmd->se_tfo->get_fabric_name(),
+			 (register_type == REGISTER_AND_IGNORE_EXISTING_KEY) ? "_AND_IGNORE_EXISTING_KEY" : "",
+			 pr_reg->pr_reg_nacl->initiatorname,
+			 pr_reg->pr_res_key, pr_reg->pr_res_generation);
+
+	} else {
+		/*
+		 * sa_res_key=0 Unregister Reservation Key for registered I_T Nexus.
+		 */
+		pr_holder = core_scsi3_check_implicit_release(
+				cmd->se_dev, pr_reg);
+		if (pr_holder < 0) {
+			ret = TCM_RESERVATION_CONFLICT;
+			goto out;
+		}
+		type = pr_reg->pr_res_type;
+>>>>>>> v3.18
 
 		spin_lock(&pr_tmpl->registration_lock);
 		/*
@@ -2236,6 +2623,10 @@ core_scsi3_emulate_pro_register(struct se_cmd *cmd, u64 res_key, u64 sa_res_key,
 		 * Release the calling I_T Nexus registration now..
 		 */
 		__core_scsi3_free_registration(cmd->se_dev, pr_reg, NULL, 1);
+<<<<<<< HEAD
+=======
+		pr_reg = NULL;
+>>>>>>> v3.18
 
 		/*
 		 * From spc4r17, section 5.7.11.3 Unregistering
@@ -2249,8 +2640,13 @@ core_scsi3_emulate_pro_register(struct se_cmd *cmd, u64 res_key, u64 sa_res_key,
 		 * RESERVATIONS RELEASED.
 		 */
 		if (pr_holder &&
+<<<<<<< HEAD
 		   (type == PR_TYPE_WRITE_EXCLUSIVE_REGONLY ||
 		    type == PR_TYPE_EXCLUSIVE_ACCESS_REGONLY)) {
+=======
+		    (type == PR_TYPE_WRITE_EXCLUSIVE_REGONLY ||
+		     type == PR_TYPE_EXCLUSIVE_ACCESS_REGONLY)) {
+>>>>>>> v3.18
 			list_for_each_entry(pr_reg_p,
 					&pr_tmpl->registration_list,
 					pr_reg_list) {
@@ -2262,6 +2658,7 @@ core_scsi3_emulate_pro_register(struct se_cmd *cmd, u64 res_key, u64 sa_res_key,
 					ASCQ_2AH_RESERVATIONS_RELEASED);
 			}
 		}
+<<<<<<< HEAD
 		spin_unlock(&pr_tmpl->registration_lock);
 
 		if (!aptpl) {
@@ -2317,6 +2714,17 @@ out_free_aptpl_buf:
 	ret = 0;
 out_put_pr_reg:
 	core_scsi3_put_pr_reg(pr_reg);
+=======
+
+		spin_unlock(&pr_tmpl->registration_lock);
+	}
+
+	ret = core_scsi3_update_and_write_aptpl(dev, aptpl);
+
+out:
+	if (pr_reg)
+		core_scsi3_put_pr_reg(pr_reg);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -2352,7 +2760,10 @@ core_scsi3_pro_reserve(struct se_cmd *cmd, int type, int scope, u64 res_key)
 	struct t10_reservation *pr_tmpl = &dev->t10_pr;
 	char i_buf[PR_REG_ISID_ID_LEN];
 	sense_reason_t ret;
+<<<<<<< HEAD
 	int prf_isid;
+=======
+>>>>>>> v3.18
 
 	memset(i_buf, 0, PR_REG_ISID_ID_LEN);
 
@@ -2409,7 +2820,10 @@ core_scsi3_pro_reserve(struct se_cmd *cmd, int type, int scope, u64 res_key)
 	spin_lock(&dev->dev_reservation_lock);
 	pr_res_holder = dev->dev_pr_res_holder;
 	if (pr_res_holder) {
+<<<<<<< HEAD
 		int pr_res_type = pr_res_holder->pr_res_type;
+=======
+>>>>>>> v3.18
 		/*
 		 * From spc4r17 Section 5.7.9: Reserving:
 		 *
@@ -2420,9 +2834,13 @@ core_scsi3_pro_reserve(struct se_cmd *cmd, int type, int scope, u64 res_key)
 		 * the logical unit, then the command shall be completed with
 		 * RESERVATION CONFLICT status.
 		 */
+<<<<<<< HEAD
 		if ((pr_res_holder != pr_reg) &&
 		    (pr_res_type != PR_TYPE_WRITE_EXCLUSIVE_ALLREG) &&
 		    (pr_res_type != PR_TYPE_EXCLUSIVE_ACCESS_ALLREG)) {
+=======
+		if (pr_res_holder != pr_reg) {
+>>>>>>> v3.18
 			struct se_node_acl *pr_res_nacl = pr_res_holder->pr_reg_nacl;
 			pr_err("SPC-3 PR: Attempted RESERVE from"
 				" [%s]: %s while reservation already held by"
@@ -2481,8 +2899,12 @@ core_scsi3_pro_reserve(struct se_cmd *cmd, int type, int scope, u64 res_key)
 	pr_reg->pr_res_type = type;
 	pr_reg->pr_res_holder = 1;
 	dev->dev_pr_res_holder = pr_reg;
+<<<<<<< HEAD
 	prf_isid = core_pr_dump_initiator_port(pr_reg, &i_buf[0],
 				PR_REG_ISID_ID_LEN);
+=======
+	core_pr_dump_initiator_port(pr_reg, i_buf, PR_REG_ISID_ID_LEN);
+>>>>>>> v3.18
 
 	pr_debug("SPC-3 PR [%s] Service Action: RESERVE created new"
 		" reservation holder TYPE: %s ALL_TG_PT: %d\n",
@@ -2491,6 +2913,7 @@ core_scsi3_pro_reserve(struct se_cmd *cmd, int type, int scope, u64 res_key)
 	pr_debug("SPC-3 PR [%s] RESERVE Node: %s%s\n",
 			cmd->se_tfo->get_fabric_name(),
 			se_sess->se_node_acl->initiatorname,
+<<<<<<< HEAD
 			(prf_isid) ? &i_buf[0] : "");
 	spin_unlock(&dev->dev_reservation_lock);
 
@@ -2502,6 +2925,13 @@ core_scsi3_pro_reserve(struct se_cmd *cmd, int type, int scope, u64 res_key)
 					" for RESERVE\n");
 		}
 	}
+=======
+			i_buf);
+	spin_unlock(&dev->dev_reservation_lock);
+
+	if (pr_tmpl->pr_aptpl_active)
+		core_scsi3_update_and_write_aptpl(cmd->se_dev, true);
+>>>>>>> v3.18
 
 	ret = 0;
 out_put_pr_reg:
@@ -2535,6 +2965,7 @@ static void __core_scsi3_complete_pro_release(
 	struct se_device *dev,
 	struct se_node_acl *se_nacl,
 	struct t10_pr_registration *pr_reg,
+<<<<<<< HEAD
 	int explict)
 {
 	struct target_core_fabric_ops *tfo = se_nacl->se_tpg->se_tpg_tfo;
@@ -2544,6 +2975,15 @@ static void __core_scsi3_complete_pro_release(
 	memset(i_buf, 0, PR_REG_ISID_ID_LEN);
 	prf_isid = core_pr_dump_initiator_port(pr_reg, &i_buf[0],
 				PR_REG_ISID_ID_LEN);
+=======
+	int explicit)
+{
+	struct target_core_fabric_ops *tfo = se_nacl->se_tpg->se_tpg_tfo;
+	char i_buf[PR_REG_ISID_ID_LEN];
+
+	memset(i_buf, 0, PR_REG_ISID_ID_LEN);
+	core_pr_dump_initiator_port(pr_reg, i_buf, PR_REG_ISID_ID_LEN);
+>>>>>>> v3.18
 	/*
 	 * Go ahead and release the current PR reservation holder.
 	 */
@@ -2551,12 +2991,20 @@ static void __core_scsi3_complete_pro_release(
 
 	pr_debug("SPC-3 PR [%s] Service Action: %s RELEASE cleared"
 		" reservation holder TYPE: %s ALL_TG_PT: %d\n",
+<<<<<<< HEAD
 		tfo->get_fabric_name(), (explict) ? "explict" : "implict",
+=======
+		tfo->get_fabric_name(), (explicit) ? "explicit" : "implicit",
+>>>>>>> v3.18
 		core_scsi3_pr_dump_type(pr_reg->pr_res_type),
 		(pr_reg->pr_reg_all_tg_pt) ? 1 : 0);
 	pr_debug("SPC-3 PR [%s] RELEASE Node: %s%s\n",
 		tfo->get_fabric_name(), se_nacl->initiatorname,
+<<<<<<< HEAD
 		(prf_isid) ? &i_buf[0] : "");
+=======
+		i_buf);
+>>>>>>> v3.18
 	/*
 	 * Clear TYPE and SCOPE for the next PROUT Service Action: RESERVE
 	 */
@@ -2717,12 +3165,18 @@ core_scsi3_emulate_pro_release(struct se_cmd *cmd, int type, int scope,
 	spin_unlock(&pr_tmpl->registration_lock);
 
 write_aptpl:
+<<<<<<< HEAD
 	if (pr_tmpl->pr_aptpl_active) {
 		if (!core_scsi3_update_and_write_aptpl(cmd->se_dev,
 			&pr_reg->pr_aptpl_buf[0], pr_tmpl->pr_aptpl_buf_len)) {
 			pr_debug("SPC-3 PR: Updated APTPL metadata for RELEASE\n");
 		}
 	}
+=======
+	if (pr_tmpl->pr_aptpl_active)
+		core_scsi3_update_and_write_aptpl(cmd->se_dev, true);
+
+>>>>>>> v3.18
 out_put_pr_reg:
 	core_scsi3_put_pr_reg(pr_reg);
 	return ret;
@@ -2806,11 +3260,15 @@ core_scsi3_emulate_pro_clear(struct se_cmd *cmd, u64 res_key)
 	pr_debug("SPC-3 PR [%s] Service Action: CLEAR complete\n",
 		cmd->se_tfo->get_fabric_name());
 
+<<<<<<< HEAD
 	if (pr_tmpl->pr_aptpl_active) {
 		core_scsi3_update_and_write_aptpl(cmd->se_dev, NULL, 0);
 		pr_debug("SPC-3 PR: Updated APTPL metadata"
 				" for CLEAR\n");
 	}
+=======
+	core_scsi3_update_and_write_aptpl(cmd->se_dev, false);
+>>>>>>> v3.18
 
 	core_scsi3_pr_generation(dev);
 	return 0;
@@ -2825,11 +3283,16 @@ static void __core_scsi3_complete_pro_preempt(
 	struct list_head *preempt_and_abort_list,
 	int type,
 	int scope,
+<<<<<<< HEAD
 	int abort)
+=======
+	enum preempt_type preempt_type)
+>>>>>>> v3.18
 {
 	struct se_node_acl *nacl = pr_reg->pr_reg_nacl;
 	struct target_core_fabric_ops *tfo = nacl->se_tpg->se_tpg_tfo;
 	char i_buf[PR_REG_ISID_ID_LEN];
+<<<<<<< HEAD
 	int prf_isid;
 
 	memset(i_buf, 0, PR_REG_ISID_ID_LEN);
@@ -2837,6 +3300,13 @@ static void __core_scsi3_complete_pro_preempt(
 				PR_REG_ISID_ID_LEN);
 	/*
 	 * Do an implict RELEASE of the existing reservation.
+=======
+
+	memset(i_buf, 0, PR_REG_ISID_ID_LEN);
+	core_pr_dump_initiator_port(pr_reg, i_buf, PR_REG_ISID_ID_LEN);
+	/*
+	 * Do an implicit RELEASE of the existing reservation.
+>>>>>>> v3.18
 	 */
 	if (dev->dev_pr_res_holder)
 		__core_scsi3_complete_pro_release(dev, nacl,
@@ -2849,12 +3319,21 @@ static void __core_scsi3_complete_pro_preempt(
 
 	pr_debug("SPC-3 PR [%s] Service Action: PREEMPT%s created new"
 		" reservation holder TYPE: %s ALL_TG_PT: %d\n",
+<<<<<<< HEAD
 		tfo->get_fabric_name(), (abort) ? "_AND_ABORT" : "",
 		core_scsi3_pr_dump_type(type),
 		(pr_reg->pr_reg_all_tg_pt) ? 1 : 0);
 	pr_debug("SPC-3 PR [%s] PREEMPT%s from Node: %s%s\n",
 		tfo->get_fabric_name(), (abort) ? "_AND_ABORT" : "",
 		nacl->initiatorname, (prf_isid) ? &i_buf[0] : "");
+=======
+		tfo->get_fabric_name(), (preempt_type == PREEMPT_AND_ABORT) ? "_AND_ABORT" : "",
+		core_scsi3_pr_dump_type(type),
+		(pr_reg->pr_reg_all_tg_pt) ? 1 : 0);
+	pr_debug("SPC-3 PR [%s] PREEMPT%s from Node: %s%s\n",
+		tfo->get_fabric_name(), (preempt_type == PREEMPT_AND_ABORT) ? "_AND_ABORT" : "",
+		nacl->initiatorname, i_buf);
+>>>>>>> v3.18
 	/*
 	 * For PREEMPT_AND_ABORT, add the preempting reservation's
 	 * struct t10_pr_registration to the list that will be compared
@@ -2884,14 +3363,21 @@ static void core_scsi3_release_preempt_and_abort(
 
 		pr_reg->pr_reg_deve = NULL;
 		pr_reg->pr_reg_nacl = NULL;
+<<<<<<< HEAD
 		kfree(pr_reg->pr_aptpl_buf);
+=======
+>>>>>>> v3.18
 		kmem_cache_free(t10_pr_reg_cache, pr_reg);
 	}
 }
 
 static sense_reason_t
 core_scsi3_pro_preempt(struct se_cmd *cmd, int type, int scope, u64 res_key,
+<<<<<<< HEAD
 		u64 sa_res_key, int abort)
+=======
+		u64 sa_res_key, enum preempt_type preempt_type)
+>>>>>>> v3.18
 {
 	struct se_device *dev = cmd->se_dev;
 	struct se_node_acl *pr_reg_nacl;
@@ -2900,7 +3386,12 @@ core_scsi3_pro_preempt(struct se_cmd *cmd, int type, int scope, u64 res_key,
 	struct t10_pr_registration *pr_reg, *pr_reg_tmp, *pr_reg_n, *pr_res_holder;
 	struct t10_reservation *pr_tmpl = &dev->t10_pr;
 	u32 pr_res_mapped_lun = 0;
+<<<<<<< HEAD
 	int all_reg = 0, calling_it_nexus = 0, released_regs = 0;
+=======
+	int all_reg = 0, calling_it_nexus = 0;
+	bool sa_res_key_unmatched = sa_res_key != 0;
+>>>>>>> v3.18
 	int prh_type = 0, prh_scope = 0;
 
 	if (!se_sess)
@@ -2911,7 +3402,11 @@ core_scsi3_pro_preempt(struct se_cmd *cmd, int type, int scope, u64 res_key,
 	if (!pr_reg_n) {
 		pr_err("SPC-3 PR: Unable to locate"
 			" PR_REGISTERED *pr_reg for PREEMPT%s\n",
+<<<<<<< HEAD
 			(abort) ? "_AND_ABORT" : "");
+=======
+			(preempt_type == PREEMPT_AND_ABORT) ? "_AND_ABORT" : "");
+>>>>>>> v3.18
 		return TCM_RESERVATION_CONFLICT;
 	}
 	if (pr_reg_n->pr_res_key != res_key) {
@@ -2975,14 +3470,23 @@ core_scsi3_pro_preempt(struct se_cmd *cmd, int type, int scope, u64 res_key,
 			if (!all_reg) {
 				if (pr_reg->pr_res_key != sa_res_key)
 					continue;
+<<<<<<< HEAD
+=======
+				sa_res_key_unmatched = false;
+>>>>>>> v3.18
 
 				calling_it_nexus = (pr_reg_n == pr_reg) ? 1 : 0;
 				pr_reg_nacl = pr_reg->pr_reg_nacl;
 				pr_res_mapped_lun = pr_reg->pr_res_mapped_lun;
 				__core_scsi3_free_registration(dev, pr_reg,
+<<<<<<< HEAD
 					(abort) ? &preempt_and_abort_list :
 						NULL, calling_it_nexus);
 				released_regs++;
+=======
+					(preempt_type == PREEMPT_AND_ABORT) ? &preempt_and_abort_list :
+						NULL, calling_it_nexus);
+>>>>>>> v3.18
 			} else {
 				/*
 				 * Case for any existing all registrants type
@@ -2990,7 +3494,11 @@ core_scsi3_pro_preempt(struct se_cmd *cmd, int type, int scope, u64 res_key,
 				 * 5.7.11.4 Preempting, Table 52 and Figure 7.
 				 *
 				 * For a ZERO SA Reservation key, release
+<<<<<<< HEAD
 				 * all other registrations and do an implict
+=======
+				 * all other registrations and do an implicit
+>>>>>>> v3.18
 				 * release of active persistent reservation.
 				 *
 				 * For a non-ZERO SA Reservation key, only
@@ -3000,6 +3508,10 @@ core_scsi3_pro_preempt(struct se_cmd *cmd, int type, int scope, u64 res_key,
 				if ((sa_res_key) &&
 				     (pr_reg->pr_res_key != sa_res_key))
 					continue;
+<<<<<<< HEAD
+=======
+				sa_res_key_unmatched = false;
+>>>>>>> v3.18
 
 				calling_it_nexus = (pr_reg_n == pr_reg) ? 1 : 0;
 				if (calling_it_nexus)
@@ -3008,9 +3520,14 @@ core_scsi3_pro_preempt(struct se_cmd *cmd, int type, int scope, u64 res_key,
 				pr_reg_nacl = pr_reg->pr_reg_nacl;
 				pr_res_mapped_lun = pr_reg->pr_res_mapped_lun;
 				__core_scsi3_free_registration(dev, pr_reg,
+<<<<<<< HEAD
 					(abort) ? &preempt_and_abort_list :
 						NULL, 0);
 				released_regs++;
+=======
+					(preempt_type == PREEMPT_AND_ABORT) ? &preempt_and_abort_list :
+						NULL, 0);
+>>>>>>> v3.18
 			}
 			if (!calling_it_nexus)
 				core_scsi3_ua_allocate(pr_reg_nacl,
@@ -3025,7 +3542,11 @@ core_scsi3_pro_preempt(struct se_cmd *cmd, int type, int scope, u64 res_key,
 		 * registered reservation key, then the device server shall
 		 * complete the command with RESERVATION CONFLICT status.
 		 */
+<<<<<<< HEAD
 		if (!released_regs) {
+=======
+		if (sa_res_key_unmatched) {
+>>>>>>> v3.18
 			spin_unlock(&dev->dev_reservation_lock);
 			core_scsi3_put_pr_reg(pr_reg_n);
 			return TCM_RESERVATION_CONFLICT;
@@ -3037,15 +3558,23 @@ core_scsi3_pro_preempt(struct se_cmd *cmd, int type, int scope, u64 res_key,
 		 */
 		if (pr_res_holder && all_reg && !(sa_res_key)) {
 			__core_scsi3_complete_pro_preempt(dev, pr_reg_n,
+<<<<<<< HEAD
 				(abort) ? &preempt_and_abort_list : NULL,
 				type, scope, abort);
 
 			if (abort)
+=======
+				(preempt_type == PREEMPT_AND_ABORT) ? &preempt_and_abort_list : NULL,
+				type, scope, preempt_type);
+
+			if (preempt_type == PREEMPT_AND_ABORT)
+>>>>>>> v3.18
 				core_scsi3_release_preempt_and_abort(
 					&preempt_and_abort_list, pr_reg_n);
 		}
 		spin_unlock(&dev->dev_reservation_lock);
 
+<<<<<<< HEAD
 		if (pr_tmpl->pr_aptpl_active) {
 			if (!core_scsi3_update_and_write_aptpl(cmd->se_dev,
 					&pr_reg_n->pr_aptpl_buf[0],
@@ -3055,6 +3584,10 @@ core_scsi3_pro_preempt(struct se_cmd *cmd, int type, int scope, u64 res_key,
 					"_AND_ABORT" : "");
 			}
 		}
+=======
+		if (pr_tmpl->pr_aptpl_active)
+			core_scsi3_update_and_write_aptpl(cmd->se_dev, true);
+>>>>>>> v3.18
 
 		core_scsi3_put_pr_reg(pr_reg_n);
 		core_scsi3_pr_generation(cmd->se_dev);
@@ -3118,7 +3651,11 @@ core_scsi3_pro_preempt(struct se_cmd *cmd, int type, int scope, u64 res_key,
 		pr_reg_nacl = pr_reg->pr_reg_nacl;
 		pr_res_mapped_lun = pr_reg->pr_res_mapped_lun;
 		__core_scsi3_free_registration(dev, pr_reg,
+<<<<<<< HEAD
 				(abort) ? &preempt_and_abort_list : NULL,
+=======
+				(preempt_type == PREEMPT_AND_ABORT) ? &preempt_and_abort_list : NULL,
+>>>>>>> v3.18
 				calling_it_nexus);
 		/*
 		 * e) Establish a unit attention condition for the initiator
@@ -3135,8 +3672,13 @@ core_scsi3_pro_preempt(struct se_cmd *cmd, int type, int scope, u64 res_key,
 	 *    I_T nexus using the contents of the SCOPE and TYPE fields;
 	 */
 	__core_scsi3_complete_pro_preempt(dev, pr_reg_n,
+<<<<<<< HEAD
 			(abort) ? &preempt_and_abort_list : NULL,
 			type, scope, abort);
+=======
+			(preempt_type == PREEMPT_AND_ABORT) ? &preempt_and_abort_list : NULL,
+			type, scope, preempt_type);
+>>>>>>> v3.18
 	/*
 	 * d) Process tasks as defined in 5.7.1;
 	 * e) See above..
@@ -3176,12 +3718,17 @@ core_scsi3_pro_preempt(struct se_cmd *cmd, int type, int scope, u64 res_key,
 	 * been removed from the primary pr_reg list), except the
 	 * new persistent reservation holder, the calling Initiator Port.
 	 */
+<<<<<<< HEAD
 	if (abort) {
+=======
+	if (preempt_type == PREEMPT_AND_ABORT) {
+>>>>>>> v3.18
 		core_tmr_lun_reset(dev, NULL, &preempt_and_abort_list, cmd);
 		core_scsi3_release_preempt_and_abort(&preempt_and_abort_list,
 						pr_reg_n);
 	}
 
+<<<<<<< HEAD
 	if (pr_tmpl->pr_aptpl_active) {
 		if (!core_scsi3_update_and_write_aptpl(cmd->se_dev,
 				&pr_reg_n->pr_aptpl_buf[0],
@@ -3190,6 +3737,10 @@ core_scsi3_pro_preempt(struct se_cmd *cmd, int type, int scope, u64 res_key,
 				"%s\n", abort ? "_AND_ABORT" : "");
 		}
 	}
+=======
+	if (pr_tmpl->pr_aptpl_active)
+		core_scsi3_update_and_write_aptpl(cmd->se_dev, true);
+>>>>>>> v3.18
 
 	core_scsi3_put_pr_reg(pr_reg_n);
 	core_scsi3_pr_generation(cmd->se_dev);
@@ -3198,7 +3749,11 @@ core_scsi3_pro_preempt(struct se_cmd *cmd, int type, int scope, u64 res_key,
 
 static sense_reason_t
 core_scsi3_emulate_pro_preempt(struct se_cmd *cmd, int type, int scope,
+<<<<<<< HEAD
 		u64 res_key, u64 sa_res_key, int abort)
+=======
+		u64 res_key, u64 sa_res_key, enum preempt_type preempt_type)
+>>>>>>> v3.18
 {
 	switch (type) {
 	case PR_TYPE_WRITE_EXCLUSIVE:
@@ -3208,10 +3763,17 @@ core_scsi3_emulate_pro_preempt(struct se_cmd *cmd, int type, int scope,
 	case PR_TYPE_WRITE_EXCLUSIVE_ALLREG:
 	case PR_TYPE_EXCLUSIVE_ACCESS_ALLREG:
 		return core_scsi3_pro_preempt(cmd, type, scope, res_key,
+<<<<<<< HEAD
 					      sa_res_key, abort);
 	default:
 		pr_err("SPC-3 PR: Unknown Service Action PREEMPT%s"
 			" Type: 0x%02x\n", (abort) ? "_AND_ABORT" : "", type);
+=======
+					      sa_res_key, preempt_type);
+	default:
+		pr_err("SPC-3 PR: Unknown Service Action PREEMPT%s"
+			" Type: 0x%02x\n", (preempt_type == PREEMPT_AND_ABORT) ? "_AND_ABORT" : "", type);
+>>>>>>> v3.18
 		return TCM_INVALID_CDB_FIELD;
 	}
 }
@@ -3235,7 +3797,11 @@ core_scsi3_emulate_pro_register_and_move(struct se_cmd *cmd, u64 res_key,
 	unsigned char *initiator_str;
 	char *iport_ptr = NULL, dest_iport[64], i_buf[PR_REG_ISID_ID_LEN];
 	u32 tid_len, tmp_tid_len;
+<<<<<<< HEAD
 	int new_reg = 0, type, scope, matching_iname, prf_isid;
+=======
+	int new_reg = 0, type, scope, matching_iname;
+>>>>>>> v3.18
 	sense_reason_t ret;
 	unsigned short rtpi;
 	unsigned char proto_ident;
@@ -3322,15 +3888,23 @@ core_scsi3_emulate_pro_register_and_move(struct se_cmd *cmd, u64 res_key,
 		if (!dest_tf_ops)
 			continue;
 
+<<<<<<< HEAD
 		atomic_inc(&dest_se_tpg->tpg_pr_ref_count);
 		smp_mb__after_atomic();
+=======
+		atomic_inc_mb(&dest_se_tpg->tpg_pr_ref_count);
+>>>>>>> v3.18
 		spin_unlock(&dev->se_port_lock);
 
 		if (core_scsi3_tpg_depend_item(dest_se_tpg)) {
 			pr_err("core_scsi3_tpg_depend_item() failed"
 				" for dest_se_tpg\n");
+<<<<<<< HEAD
 			atomic_dec(&dest_se_tpg->tpg_pr_ref_count);
 			smp_mb__after_atomic();
+=======
+			atomic_dec_mb(&dest_se_tpg->tpg_pr_ref_count);
+>>>>>>> v3.18
 			ret = TCM_LOGICAL_UNIT_COMMUNICATION_FAILURE;
 			goto out_put_pr_reg;
 		}
@@ -3426,10 +4000,15 @@ after_iport_check:
 	spin_lock_irq(&dest_se_tpg->acl_node_lock);
 	dest_node_acl = __core_tpg_get_initiator_node_acl(dest_se_tpg,
 				initiator_str);
+<<<<<<< HEAD
 	if (dest_node_acl) {
 		atomic_inc(&dest_node_acl->acl_pr_ref_count);
 		smp_mb__after_atomic();
 	}
+=======
+	if (dest_node_acl)
+		atomic_inc_mb(&dest_node_acl->acl_pr_ref_count);
+>>>>>>> v3.18
 	spin_unlock_irq(&dest_se_tpg->acl_node_lock);
 
 	if (!dest_node_acl) {
@@ -3443,8 +4022,12 @@ after_iport_check:
 	if (core_scsi3_nodeacl_depend_item(dest_node_acl)) {
 		pr_err("core_scsi3_nodeacl_depend_item() for"
 			" dest_node_acl\n");
+<<<<<<< HEAD
 		atomic_dec(&dest_node_acl->acl_pr_ref_count);
 		smp_mb__after_atomic();
+=======
+		atomic_dec_mb(&dest_node_acl->acl_pr_ref_count);
+>>>>>>> v3.18
 		dest_node_acl = NULL;
 		ret = TCM_INVALID_PARAMETER_LIST;
 		goto out;
@@ -3468,8 +4051,12 @@ after_iport_check:
 
 	if (core_scsi3_lunacl_depend_item(dest_se_deve)) {
 		pr_err("core_scsi3_lunacl_depend_item() failed\n");
+<<<<<<< HEAD
 		atomic_dec(&dest_se_deve->pr_ref_count);
 		smp_mb__after_atomic();
+=======
+		atomic_dec_mb(&dest_se_deve->pr_ref_count);
+>>>>>>> v3.18
 		dest_se_deve = NULL;
 		ret = TCM_LOGICAL_UNIT_COMMUNICATION_FAILURE;
 		goto out;
@@ -3579,8 +4166,12 @@ after_iport_check:
 	dest_pr_reg->pr_res_holder = 1;
 	dest_pr_reg->pr_res_type = type;
 	pr_reg->pr_res_scope = scope;
+<<<<<<< HEAD
 	prf_isid = core_pr_dump_initiator_port(pr_reg, &i_buf[0],
 				PR_REG_ISID_ID_LEN);
+=======
+	core_pr_dump_initiator_port(pr_reg, i_buf, PR_REG_ISID_ID_LEN);
+>>>>>>> v3.18
 	/*
 	 * Increment PRGeneration for existing registrations..
 	 */
@@ -3596,7 +4187,11 @@ after_iport_check:
 	pr_debug("SPC-3 PR Successfully moved reservation from"
 		" %s Fabric Node: %s%s -> %s Fabric Node: %s %s\n",
 		tf_ops->get_fabric_name(), pr_reg_nacl->initiatorname,
+<<<<<<< HEAD
 		(prf_isid) ? &i_buf[0] : "", dest_tf_ops->get_fabric_name(),
+=======
+		i_buf, dest_tf_ops->get_fabric_name(),
+>>>>>>> v3.18
 		dest_node_acl->initiatorname, (iport_ptr != NULL) ?
 		iport_ptr : "");
 	/*
@@ -3617,6 +4212,7 @@ after_iport_check:
 	} else
 		core_scsi3_put_pr_reg(pr_reg);
 
+<<<<<<< HEAD
 	/*
 	 * Clear the APTPL metadata if APTPL has been disabled, otherwise
 	 * write out the updated metadata to struct file for this SCSI device.
@@ -3635,6 +4231,9 @@ after_iport_check:
 					" REGISTER_AND_MOVE\n");
 		}
 	}
+=======
+	core_scsi3_update_and_write_aptpl(cmd->se_dev, aptpl);
+>>>>>>> v3.18
 
 	transport_kunmap_data_sg(cmd);
 
@@ -3670,6 +4269,10 @@ static unsigned long long core_scsi3_extract_reservation_key(unsigned char *cdb)
 sense_reason_t
 target_scsi3_emulate_pr_out(struct se_cmd *cmd)
 {
+<<<<<<< HEAD
+=======
+	struct se_device *dev = cmd->se_dev;
+>>>>>>> v3.18
 	unsigned char *cdb = &cmd->t_task_cdb[0];
 	unsigned char *buf;
 	u64 res_key, sa_res_key;
@@ -3734,6 +4337,16 @@ target_scsi3_emulate_pr_out(struct se_cmd *cmd)
 		aptpl = (buf[17] & 0x01);
 		unreg = (buf[17] & 0x02);
 	}
+<<<<<<< HEAD
+=======
+	/*
+	 * If the backend device has been configured to force APTPL metadata
+	 * write-out, go ahead and propigate aptpl=1 down now.
+	 */
+	if (dev->dev_attrib.force_pr_aptpl)
+		aptpl = 1;
+
+>>>>>>> v3.18
 	transport_kunmap_data_sg(cmd);
 	buf = NULL;
 
@@ -3767,7 +4380,11 @@ target_scsi3_emulate_pr_out(struct se_cmd *cmd)
 	switch (sa) {
 	case PRO_REGISTER:
 		ret = core_scsi3_emulate_pro_register(cmd,
+<<<<<<< HEAD
 			res_key, sa_res_key, aptpl, all_tg_pt, spec_i_pt, 0);
+=======
+			res_key, sa_res_key, aptpl, all_tg_pt, spec_i_pt, REGISTER);
+>>>>>>> v3.18
 		break;
 	case PRO_RESERVE:
 		ret = core_scsi3_emulate_pro_reserve(cmd, type, scope, res_key);
@@ -3780,6 +4397,7 @@ target_scsi3_emulate_pr_out(struct se_cmd *cmd)
 		break;
 	case PRO_PREEMPT:
 		ret = core_scsi3_emulate_pro_preempt(cmd, type, scope,
+<<<<<<< HEAD
 					res_key, sa_res_key, 0);
 		break;
 	case PRO_PREEMPT_AND_ABORT:
@@ -3789,6 +4407,17 @@ target_scsi3_emulate_pr_out(struct se_cmd *cmd)
 	case PRO_REGISTER_AND_IGNORE_EXISTING_KEY:
 		ret = core_scsi3_emulate_pro_register(cmd,
 			0, sa_res_key, aptpl, all_tg_pt, spec_i_pt, 1);
+=======
+					res_key, sa_res_key, PREEMPT);
+		break;
+	case PRO_PREEMPT_AND_ABORT:
+		ret = core_scsi3_emulate_pro_preempt(cmd, type, scope,
+					res_key, sa_res_key, PREEMPT_AND_ABORT);
+		break;
+	case PRO_REGISTER_AND_IGNORE_EXISTING_KEY:
+		ret = core_scsi3_emulate_pro_register(cmd,
+			0, sa_res_key, aptpl, all_tg_pt, spec_i_pt, REGISTER_AND_IGNORE_EXISTING_KEY);
+>>>>>>> v3.18
 		break;
 	case PRO_REGISTER_AND_MOVE:
 		ret = core_scsi3_emulate_pro_register_and_move(cmd, res_key,
@@ -3976,7 +4605,11 @@ core_scsi3_pri_report_capabilities(struct se_cmd *cmd)
 	if (!buf)
 		return TCM_LOGICAL_UNIT_COMMUNICATION_FAILURE;
 
+<<<<<<< HEAD
 	buf[0] = ((add_len << 8) & 0xff);
+=======
+	buf[0] = ((add_len >> 8) & 0xff);
+>>>>>>> v3.18
 	buf[1] = (add_len & 0xff);
 	buf[2] |= 0x10; /* CRH: Compatible Reservation Hanlding bit. */
 	buf[2] |= 0x08; /* SIP_C: Specify Initiator Ports Capable bit */
@@ -4027,8 +4660,12 @@ core_scsi3_pri_read_full_status(struct se_cmd *cmd)
 	unsigned char *buf;
 	u32 add_desc_len = 0, add_len = 0, desc_len, exp_desc_len;
 	u32 off = 8; /* off into first Full Status descriptor */
+<<<<<<< HEAD
 	int format_code = 0, pr_res_type = 0, pr_res_scope = 0;
 	bool all_reg = false;
+=======
+	int format_code = 0;
+>>>>>>> v3.18
 
 	if (cmd->data_length < 8) {
 		pr_err("PRIN SA READ_FULL_STATUS SCSI Data Length: %u"
@@ -4045,6 +4682,7 @@ core_scsi3_pri_read_full_status(struct se_cmd *cmd)
 	buf[2] = ((dev->t10_pr.pr_generation >> 8) & 0xff);
 	buf[3] = (dev->t10_pr.pr_generation & 0xff);
 
+<<<<<<< HEAD
 	spin_lock(&dev->dev_reservation_lock);
 	if (dev->dev_pr_res_holder) {
 		struct t10_pr_registration *pr_holder = dev->dev_pr_res_holder;
@@ -4058,6 +4696,8 @@ core_scsi3_pri_read_full_status(struct se_cmd *cmd)
 	}
 	spin_unlock(&dev->dev_reservation_lock);
 
+=======
+>>>>>>> v3.18
 	spin_lock(&pr_tmpl->registration_lock);
 	list_for_each_entry_safe(pr_reg, pr_reg_tmp,
 			&pr_tmpl->registration_list, pr_reg_list) {
@@ -4066,8 +4706,12 @@ core_scsi3_pri_read_full_status(struct se_cmd *cmd)
 		se_tpg = pr_reg->pr_reg_nacl->se_tpg;
 		add_desc_len = 0;
 
+<<<<<<< HEAD
 		atomic_inc(&pr_reg->pr_res_holders);
 		smp_mb__after_atomic();
+=======
+		atomic_inc_mb(&pr_reg->pr_res_holders);
+>>>>>>> v3.18
 		spin_unlock(&pr_tmpl->registration_lock);
 		/*
 		 * Determine expected length of $FABRIC_MOD specific
@@ -4080,8 +4724,12 @@ core_scsi3_pri_read_full_status(struct se_cmd *cmd)
 			pr_warn("SPC-3 PRIN READ_FULL_STATUS ran"
 				" out of buffer: %d\n", cmd->data_length);
 			spin_lock(&pr_tmpl->registration_lock);
+<<<<<<< HEAD
 			atomic_dec(&pr_reg->pr_res_holders);
 			smp_mb__after_atomic();
+=======
+			atomic_dec_mb(&pr_reg->pr_res_holders);
+>>>>>>> v3.18
 			break;
 		}
 		/*
@@ -4107,13 +4755,18 @@ core_scsi3_pri_read_full_status(struct se_cmd *cmd)
 		 * reservation holder for PR_HOLDER bit.
 		 *
 		 * Also, if this registration is the reservation
+<<<<<<< HEAD
 		 * holder or there is an All Registrants reservation
 		 * active, fill in SCOPE and TYPE in the next byte.
+=======
+		 * holder, fill in SCOPE and TYPE in the next byte.
+>>>>>>> v3.18
 		 */
 		if (pr_reg->pr_res_holder) {
 			buf[off++] |= 0x01;
 			buf[off++] = (pr_reg->pr_res_scope & 0xf0) |
 				     (pr_reg->pr_res_type & 0x0f);
+<<<<<<< HEAD
 		} else if (all_reg) {
 			buf[off++] |= 0x01;
 			buf[off++] = (pr_res_scope & 0xf0) |
@@ -4121,6 +4774,10 @@ core_scsi3_pri_read_full_status(struct se_cmd *cmd)
 		} else {
 			off += 2;
 		}
+=======
+		} else
+			off += 2;
+>>>>>>> v3.18
 
 		off += 4; /* Skip over reserved area */
 		/*
@@ -4148,8 +4805,12 @@ core_scsi3_pri_read_full_status(struct se_cmd *cmd)
 				se_nacl, pr_reg, &format_code, &buf[off+4]);
 
 		spin_lock(&pr_tmpl->registration_lock);
+<<<<<<< HEAD
 		atomic_dec(&pr_reg->pr_res_holders);
 		smp_mb__after_atomic();
+=======
+		atomic_dec_mb(&pr_reg->pr_res_holders);
+>>>>>>> v3.18
 		/*
 		 * Set the ADDITIONAL DESCRIPTOR LENGTH
 		 */

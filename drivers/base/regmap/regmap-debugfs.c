@@ -15,15 +15,36 @@
 #include <linux/debugfs.h>
 #include <linux/uaccess.h>
 #include <linux/device.h>
+<<<<<<< HEAD
 
 #include "internal.h"
 
 static struct dentry *regmap_debugfs_root;
+=======
+#include <linux/list.h>
+
+#include "internal.h"
+
+struct regmap_debugfs_node {
+	struct regmap *map;
+	const char *name;
+	struct list_head link;
+};
+
+static struct dentry *regmap_debugfs_root;
+static LIST_HEAD(regmap_debugfs_early_list);
+static DEFINE_MUTEX(regmap_debugfs_early_lock);
+>>>>>>> v3.18
 
 /* Calculate the length of a fixed format  */
 static size_t regmap_calc_reg_len(int max_val, char *buf, size_t buf_size)
 {
+<<<<<<< HEAD
 	return snprintf(NULL, 0, "%x", max_val);
+=======
+	snprintf(buf, buf_size, "%x", max_val);
+	return strlen(buf);
+>>>>>>> v3.18
 }
 
 static ssize_t regmap_name_read_file(struct file *file,
@@ -83,6 +104,13 @@ static unsigned int regmap_debugfs_get_dump_start(struct regmap *map,
 	unsigned int fpos_offset;
 	unsigned int reg_offset;
 
+<<<<<<< HEAD
+=======
+	/* Suppress the cache if we're using a subrange */
+	if (base)
+		return base;
+
+>>>>>>> v3.18
 	/*
 	 * If we don't have a cache build one so we don't have to do a
 	 * linear scan each time.
@@ -144,7 +172,11 @@ static unsigned int regmap_debugfs_get_dump_start(struct regmap *map,
 			reg_offset = fpos_offset / map->debugfs_tot_len;
 			*pos = c->min + (reg_offset * map->debugfs_tot_len);
 			mutex_unlock(&map->cache_lock);
+<<<<<<< HEAD
 			return c->base_reg + reg_offset;
+=======
+			return c->base_reg + (reg_offset * map->reg_stride);
+>>>>>>> v3.18
 		}
 
 		*pos = c->max;
@@ -247,7 +279,12 @@ static ssize_t regmap_map_read_file(struct file *file, char __user *user_buf,
 				   count, ppos);
 }
 
+<<<<<<< HEAD
 #if IS_ENABLED(CONFIG_REGMAP_ALLOW_WRITE_DEBUGFS)
+=======
+#undef REGMAP_ALLOW_WRITE_DEBUGFS
+#ifdef REGMAP_ALLOW_WRITE_DEBUGFS
+>>>>>>> v3.18
 /*
  * This can be dangerous especially when we have clients such as
  * PMICs, therefore don't provide any real compile time configuration option
@@ -275,11 +312,19 @@ static ssize_t regmap_map_write_file(struct file *file,
 	reg = simple_strtoul(start, &start, 16);
 	while (*start == ' ')
 		start++;
+<<<<<<< HEAD
 	if (strict_strtoul(start, 16, &value))
 		return -EINVAL;
 
 	/* Userspace has been fiddling around behind the kernel's back */
 	add_taint(TAINT_USER, LOCKDEP_NOW_UNRELIABLE);
+=======
+	if (kstrtoul(start, 16, &value))
+		return -EINVAL;
+
+	/* Userspace has been fiddling around behind the kernel's back */
+	add_taint(TAINT_USER, LOCKDEP_STILL_OK);
+>>>>>>> v3.18
 
 	ret = regmap_write(map, reg, value);
 	if (ret < 0)
@@ -417,7 +462,11 @@ static ssize_t regmap_access_read_file(struct file *file,
 		/* If we're in the region the user is trying to read */
 		if (p >= *ppos) {
 			/* ...but not beyond it */
+<<<<<<< HEAD
 			if (buf_pos + tot_len + 1 >= count)
+=======
+			if (buf_pos >= count - 1 - tot_len)
+>>>>>>> v3.18
 				break;
 
 			/* Format the register */
@@ -460,6 +509,23 @@ void regmap_debugfs_init(struct regmap *map, const char *name)
 	struct regmap_range_node *range_node;
 	const char *devname = "dummy";
 
+<<<<<<< HEAD
+=======
+	/* If we don't have the debugfs root yet, postpone init */
+	if (!regmap_debugfs_root) {
+		struct regmap_debugfs_node *node;
+		node = kzalloc(sizeof(*node), GFP_KERNEL);
+		if (!node)
+			return;
+		node->map = map;
+		node->name = name;
+		mutex_lock(&regmap_debugfs_early_lock);
+		list_add(&node->link, &regmap_debugfs_early_list);
+		mutex_unlock(&regmap_debugfs_early_lock);
+		return;
+	}
+
+>>>>>>> v3.18
 	INIT_LIST_HEAD(&map->debugfs_off_cache);
 	mutex_init(&map->cache_lock);
 
@@ -486,10 +552,17 @@ void regmap_debugfs_init(struct regmap *map, const char *name)
 	debugfs_create_file("range", 0400, map->debugfs,
 			    map, &regmap_reg_ranges_fops);
 
+<<<<<<< HEAD
 	if (map->max_register) {
 		umode_t registers_mode;
 
 		if (IS_ENABLED(CONFIG_REGMAP_ALLOW_WRITE_DEBUGFS))
+=======
+	if (map->max_register || regmap_readable(map, 0)) {
+		umode_t registers_mode;
+
+		if (IS_ENABLED(REGMAP_ALLOW_WRITE_DEBUGFS))
+>>>>>>> v3.18
 			registers_mode = 0600;
 		else
 			registers_mode = 0400;
@@ -520,22 +593,66 @@ void regmap_debugfs_init(struct regmap *map, const char *name)
 
 		next = rb_next(&range_node->node);
 	}
+<<<<<<< HEAD
+=======
+
+	if (map->cache_ops && map->cache_ops->debugfs_init)
+		map->cache_ops->debugfs_init(map);
+>>>>>>> v3.18
 }
 
 void regmap_debugfs_exit(struct regmap *map)
 {
+<<<<<<< HEAD
 	debugfs_remove_recursive(map->debugfs);
 	mutex_lock(&map->cache_lock);
 	regmap_debugfs_free_dump_cache(map);
 	mutex_unlock(&map->cache_lock);
 	kfree(map->debugfs_name);
+=======
+	if (map->debugfs) {
+		debugfs_remove_recursive(map->debugfs);
+		mutex_lock(&map->cache_lock);
+		regmap_debugfs_free_dump_cache(map);
+		mutex_unlock(&map->cache_lock);
+		kfree(map->debugfs_name);
+	} else {
+		struct regmap_debugfs_node *node, *tmp;
+
+		mutex_lock(&regmap_debugfs_early_lock);
+		list_for_each_entry_safe(node, tmp, &regmap_debugfs_early_list,
+					 link) {
+			if (node->map == map) {
+				list_del(&node->link);
+				kfree(node);
+			}
+		}
+		mutex_unlock(&regmap_debugfs_early_lock);
+	}
+>>>>>>> v3.18
 }
 
 void regmap_debugfs_initcall(void)
 {
+<<<<<<< HEAD
+=======
+	struct regmap_debugfs_node *node, *tmp;
+
+>>>>>>> v3.18
 	regmap_debugfs_root = debugfs_create_dir("regmap", NULL);
 	if (!regmap_debugfs_root) {
 		pr_warn("regmap: Failed to create debugfs root\n");
 		return;
 	}
+<<<<<<< HEAD
+=======
+
+	mutex_lock(&regmap_debugfs_early_lock);
+	list_for_each_entry_safe(node, tmp, &regmap_debugfs_early_list, link) {
+		regmap_debugfs_init(node->map, node->name);
+		list_del(&node->link);
+		kfree(node);
+	}
+	mutex_unlock(&regmap_debugfs_early_lock);
+>>>>>>> v3.18
 }

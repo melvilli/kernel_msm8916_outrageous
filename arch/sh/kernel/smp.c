@@ -37,7 +37,11 @@ struct plat_smp_ops *mp_ops = NULL;
 /* State of each CPU */
 DEFINE_PER_CPU(int, cpu_state) = { 0 };
 
+<<<<<<< HEAD
 void __cpuinit register_smp_ops(struct plat_smp_ops *ops)
+=======
+void register_smp_ops(struct plat_smp_ops *ops)
+>>>>>>> v3.18
 {
 	if (mp_ops)
 		printk(KERN_WARNING "Overriding previously set SMP ops\n");
@@ -45,7 +49,11 @@ void __cpuinit register_smp_ops(struct plat_smp_ops *ops)
 	mp_ops = ops;
 }
 
+<<<<<<< HEAD
 static inline void __cpuinit smp_store_cpu_info(unsigned int cpu)
+=======
+static inline void smp_store_cpu_info(unsigned int cpu)
+>>>>>>> v3.18
 {
 	struct sh_cpuinfo *c = cpu_data + cpu;
 
@@ -111,7 +119,11 @@ void play_dead_common(void)
 	irq_ctx_exit(raw_smp_processor_id());
 	mb();
 
+<<<<<<< HEAD
 	__get_cpu_var(cpu_state) = CPU_DEAD;
+=======
+	__this_cpu_write(cpu_state, CPU_DEAD);
+>>>>>>> v3.18
 	local_irq_disable();
 }
 
@@ -174,7 +186,11 @@ void native_play_dead(void)
 }
 #endif
 
+<<<<<<< HEAD
 asmlinkage void __cpuinit start_secondary(void)
+=======
+asmlinkage void start_secondary(void)
+>>>>>>> v3.18
 {
 	unsigned int cpu = smp_processor_id();
 	struct mm_struct *mm = &init_mm;
@@ -215,7 +231,11 @@ extern struct {
 	void *thread_info;
 } stack_start;
 
+<<<<<<< HEAD
 int __cpuinit __cpu_up(unsigned int cpu, struct task_struct *tsk)
+=======
+int __cpu_up(unsigned int cpu, struct task_struct *tsk)
+>>>>>>> v3.18
 {
 	unsigned long timeout;
 

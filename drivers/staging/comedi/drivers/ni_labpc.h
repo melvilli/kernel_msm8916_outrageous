@@ -14,11 +14,14 @@
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 */
 
 #ifndef _NI_LABPC_H
@@ -27,13 +30,17 @@
 #define EEPROM_SIZE	256	/*  256 byte eeprom */
 #define NUM_AO_CHAN	2	/*  boards have two analog output channels */
 
+<<<<<<< HEAD
 enum labpc_register_layout { labpc_plus_layout, labpc_1200_layout };
+=======
+>>>>>>> v3.18
 enum transfer_type { fifo_not_empty_transfer, fifo_half_full_transfer,
 	isa_dma_transfer
 };
 
 struct labpc_boardinfo {
 	const char *name;
+<<<<<<< HEAD
 	int device_id;		/*  device id for pci and pcmcia boards */
 	int ai_speed;		/*  maximum input speed in nanoseconds */
 
@@ -52,6 +59,15 @@ struct labpc_boardinfo {
 
 struct labpc_private {
 	struct mite_struct *mite;	/*  for mite chip on pci-1200 */
+=======
+	int ai_speed;			/* maximum input speed in ns */
+	unsigned ai_scan_up:1;		/* can auto scan up in ai channels */
+	unsigned has_ao:1;		/* has analog outputs */
+	unsigned is_labpc1200:1;	/* has extra regs compared to pc+ */
+};
+
+struct labpc_private {
+>>>>>>> v3.18
 	/*  number of data points left to be taken */
 	unsigned long long count;
 	/*  software copy of analog output values */
@@ -95,15 +111,24 @@ struct labpc_private {
 	 * function pointers so we can use inb/outb or readb/writeb as
 	 * appropriate
 	 */
+<<<<<<< HEAD
 	unsigned int (*read_byte) (unsigned long address);
 	void (*write_byte) (unsigned int byte, unsigned long address);
+=======
+	unsigned int (*read_byte)(struct comedi_device *, unsigned long reg);
+	void (*write_byte)(struct comedi_device *,
+			   unsigned int byte, unsigned long reg);
+>>>>>>> v3.18
 };
 
 int labpc_common_attach(struct comedi_device *dev,
 			unsigned int irq, unsigned long isr_flags);
+<<<<<<< HEAD
 void labpc_common_detach(struct comedi_device *dev);
 
 extern const int labpc_1200_ai_gain_bits[];
 extern const struct comedi_lrange range_labpc_1200_ai;
+=======
+>>>>>>> v3.18
 
 #endif /* _NI_LABPC_H */

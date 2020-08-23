@@ -9,7 +9,11 @@
  *
  * derived in part from smsc47m1.c:
  * Copyright (C) 2002 Mark D. Studebaker <mdsxyz123@yahoo.com>
+<<<<<<< HEAD
  * Copyright (C) 2004 Jean Delvare <khali@linux-fr.org>
+=======
+ * Copyright (C) 2004 Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -100,8 +104,11 @@ static u8 smsc47b397_reg_temp[] = {0x25, 0x26, 0x27, 0x80};
 
 struct smsc47b397_data {
 	unsigned short addr;
+<<<<<<< HEAD
 	const char *name;
 	struct device *hwmon_dev;
+=======
+>>>>>>> v3.18
 	struct mutex lock;
 
 	struct mutex update_lock;
@@ -202,6 +209,7 @@ static SENSOR_DEVICE_ATTR(fan2_input, S_IRUGO, show_fan, NULL, 1);
 static SENSOR_DEVICE_ATTR(fan3_input, S_IRUGO, show_fan, NULL, 2);
 static SENSOR_DEVICE_ATTR(fan4_input, S_IRUGO, show_fan, NULL, 3);
 
+<<<<<<< HEAD
 static ssize_t show_name(struct device *dev, struct device_attribute
 			 *devattr, char *buf)
 {
@@ -211,6 +219,9 @@ static ssize_t show_name(struct device *dev, struct device_attribute
 static DEVICE_ATTR(name, S_IRUGO, show_name, NULL);
 
 static struct attribute *smsc47b397_attributes[] = {
+=======
+static struct attribute *smsc47b397_attrs[] = {
+>>>>>>> v3.18
 	&sensor_dev_attr_temp1_input.dev_attr.attr,
 	&sensor_dev_attr_temp2_input.dev_attr.attr,
 	&sensor_dev_attr_temp3_input.dev_attr.attr,
@@ -220,6 +231,7 @@ static struct attribute *smsc47b397_attributes[] = {
 	&sensor_dev_attr_fan3_input.dev_attr.attr,
 	&sensor_dev_attr_fan4_input.dev_attr.attr,
 
+<<<<<<< HEAD
 	&dev_attr_name.attr,
 	NULL
 };
@@ -237,6 +249,12 @@ static int smsc47b397_remove(struct platform_device *pdev)
 
 	return 0;
 }
+=======
+	NULL
+};
+
+ATTRIBUTE_GROUPS(smsc47b397);
+>>>>>>> v3.18
 
 static int smsc47b397_probe(struct platform_device *pdev);
 
@@ -246,15 +264,23 @@ static struct platform_driver smsc47b397_driver = {
 		.name	= DRVNAME,
 	},
 	.probe		= smsc47b397_probe,
+<<<<<<< HEAD
 	.remove		= smsc47b397_remove,
+=======
+>>>>>>> v3.18
 };
 
 static int smsc47b397_probe(struct platform_device *pdev)
 {
 	struct device *dev = &pdev->dev;
 	struct smsc47b397_data *data;
+<<<<<<< HEAD
 	struct resource *res;
 	int err = 0;
+=======
+	struct device *hwmon_dev;
+	struct resource *res;
+>>>>>>> v3.18
 
 	res = platform_get_resource(pdev, IORESOURCE_IO, 0);
 	if (!devm_request_region(dev, res->start, SMSC_EXTENT,
@@ -270,6 +296,7 @@ static int smsc47b397_probe(struct platform_device *pdev)
 		return -ENOMEM;
 
 	data->addr = res->start;
+<<<<<<< HEAD
 	data->name = "smsc47b397";
 	mutex_init(&data->lock);
 	mutex_init(&data->update_lock);
@@ -290,6 +317,15 @@ static int smsc47b397_probe(struct platform_device *pdev)
 error_remove:
 	sysfs_remove_group(&dev->kobj, &smsc47b397_group);
 	return err;
+=======
+	mutex_init(&data->lock);
+	mutex_init(&data->update_lock);
+
+	hwmon_dev = devm_hwmon_device_register_with_groups(dev, "smsc47b397",
+							   data,
+							   smsc47b397_groups);
+	return PTR_ERR_OR_ZERO(hwmon_dev);
+>>>>>>> v3.18
 }
 
 static int __init smsc47b397_device_add(unsigned short address)

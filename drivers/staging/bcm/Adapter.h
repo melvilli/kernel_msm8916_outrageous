@@ -35,6 +35,7 @@ struct bcm_link_request {
 #define MAX_PROTOCOL_LENGTH   32
 #define IPV6_ADDRESS_SIZEINBYTES 0x10
 
+<<<<<<< HEAD
 typedef union _U_IP_ADDRESS {
 	struct {
 		ULONG ulIpv4Addr[MAX_IP_RANGE_LENGTH]; /* Source Ip Address Range */
@@ -43,6 +44,20 @@ typedef union _U_IP_ADDRESS {
 	struct {
 		ULONG ulIpv6Addr[MAX_IP_RANGE_LENGTH * 4]; /* Source Ip Address Range */
 		ULONG ulIpv6Mask[MAX_IP_RANGE_LENGTH * 4]; /* Source Ip Mask Address Range */
+=======
+union u_ip_address {
+	struct {
+		/* Source Ip Address Range */
+		ULONG ulIpv4Addr[MAX_IP_RANGE_LENGTH];
+		 /* Source Ip Mask Address Range */
+		ULONG ulIpv4Mask[MAX_IP_RANGE_LENGTH];
+	};
+	struct {
+		/* Source Ip Address Range */
+		ULONG ulIpv6Addr[MAX_IP_RANGE_LENGTH * 4];
+		/* Source Ip Mask Address Range */
+		ULONG ulIpv6Mask[MAX_IP_RANGE_LENGTH * 4];
+>>>>>>> v3.18
 	};
 	struct {
 		UCHAR ucIpv4Address[MAX_IP_RANGE_LENGTH * IP_LENGTH_OF_ADDRESS];
@@ -52,17 +67,28 @@ typedef union _U_IP_ADDRESS {
 		UCHAR ucIpv6Address[MAX_IP_RANGE_LENGTH * IPV6_ADDRESS_SIZEINBYTES];
 		UCHAR ucIpv6Mask[MAX_IP_RANGE_LENGTH * IPV6_ADDRESS_SIZEINBYTES];
 	};
+<<<<<<< HEAD
 } U_IP_ADDRESS;
 
 struct bcm_hdr_suppression_contextinfo {
 	UCHAR ucaHdrSuppressionInBuf[MAX_PHS_LENGTHS]; /* Intermediate buffer to accumulate pkt Header for PHS */
 	UCHAR ucaHdrSuppressionOutBuf[MAX_PHS_LENGTHS + PHSI_LEN]; /* Intermediate buffer containing pkt Header after PHS */
+=======
+};
+
+struct bcm_hdr_suppression_contextinfo {
+	/* Intermediate buffer to accumulate pkt Header for PHS */
+	UCHAR ucaHdrSuppressionInBuf[MAX_PHS_LENGTHS];
+	/* Intermediate buffer containing pkt Header after PHS */
+	UCHAR ucaHdrSuppressionOutBuf[MAX_PHS_LENGTHS + PHSI_LEN];
+>>>>>>> v3.18
 };
 
 struct bcm_classifier_rule {
 	ULONG		ulSFID;
 	UCHAR		ucReserved[2];
 	B_UINT16	uiClassifierRuleIndex;
+<<<<<<< HEAD
 	BOOLEAN		bUsed;
 	USHORT		usVCID_Value;
 	B_UINT8		u8ClassifierRulePriority; /* This field detemines the Classifier Priority */
@@ -71,6 +97,18 @@ struct bcm_classifier_rule {
 
 	U_IP_ADDRESS	stDestIpAddress;
 	UCHAR		ucIPDestinationAddressLength; /* Ip Destination Address Length */
+=======
+	bool		bUsed;
+	USHORT		usVCID_Value;
+	/* This field detemines the Classifier Priority */
+	B_UINT8		u8ClassifierRulePriority;
+	union u_ip_address	stSrcIpAddress;
+	UCHAR		ucIPSourceAddressLength; /* Ip Source Address Length */
+
+	union u_ip_address	stDestIpAddress;
+	/* Ip Destination Address Length */
+	UCHAR		ucIPDestinationAddressLength;
+>>>>>>> v3.18
 	UCHAR		ucIPTypeOfServiceLength; /* Type of service Length */
 	UCHAR		ucTosLow; /* Tos Low */
 	UCHAR		ucTosHigh; /* Tos High */
@@ -86,6 +124,7 @@ struct bcm_classifier_rule {
 	USHORT		usDestPortRangeHi[MAX_PORT_RANGE];
 	UCHAR		ucDestPortRangeLength;
 
+<<<<<<< HEAD
 	BOOLEAN		bProtocolValid;
 	BOOLEAN		bTOSValid;
 	BOOLEAN		bDestIpValid;
@@ -94,6 +133,16 @@ struct bcm_classifier_rule {
 	/* For IPv6 Addressing */
 	UCHAR		ucDirection;
 	BOOLEAN		bIpv6Protocol;
+=======
+	bool		bProtocolValid;
+	bool		bTOSValid;
+	bool		bDestIpValid;
+	bool		bSrcIpValid;
+
+	/* For IPv6 Addressing */
+	UCHAR		ucDirection;
+	bool		bIpv6Protocol;
+>>>>>>> v3.18
 	UINT32		u32PHSRuleID;
 	struct bcm_phs_rule sPhsRule;
 	UCHAR		u8AssociatedPHSI;
@@ -113,11 +162,19 @@ struct bcm_classifier_rule {
 };
 
 struct bcm_fragmented_packet_info {
+<<<<<<< HEAD
 	BOOLEAN			bUsed;
 	ULONG			ulSrcIpAddress;
 	USHORT			usIpIdentification;
 	struct bcm_classifier_rule *pstMatchedClassifierEntry;
 	BOOLEAN			bOutOfOrderFragment;
+=======
+	bool			bUsed;
+	ULONG			ulSrcIpAddress;
+	USHORT			usIpIdentification;
+	struct bcm_classifier_rule *pstMatchedClassifierEntry;
+	bool			bOutOfOrderFragment;
+>>>>>>> v3.18
 };
 
 struct bcm_packet_info {
@@ -128,6 +185,7 @@ struct bcm_packet_info {
 	/* This field determines the priority of the SF Queues */
 	B_UINT8		u8TrafficPriority;
 
+<<<<<<< HEAD
 	BOOLEAN		bValid;
 	BOOLEAN		bActive;
 	BOOLEAN		bActivateRequestSent;
@@ -135,6 +193,16 @@ struct bcm_packet_info {
 	B_UINT8		u8QueueType; /* BE or rtPS */
 
 	UINT		uiMaxBucketSize; /* maximum size of the bucket for the queue */
+=======
+	bool		bValid;
+	bool		bActive;
+	bool		bActivateRequestSent;
+
+	B_UINT8		u8QueueType; /* BE or rtPS */
+
+	/* maximum size of the bucket for the queue */
+	UINT		uiMaxBucketSize;
+>>>>>>> v3.18
 	UINT		uiCurrentQueueDepthOnTarget;
 	UINT		uiCurrentBytesOnHost;
 	UINT		uiCurrentPacketsOnHost;
@@ -170,6 +238,7 @@ struct bcm_packet_info {
 		};
 	};
 
+<<<<<<< HEAD
 	BOOLEAN		bProtocolValid;
 	BOOLEAN		bTOSValid;
 	BOOLEAN		bDestIpValid;
@@ -181,6 +250,19 @@ struct bcm_packet_info {
 	BOOLEAN		bClassifierPriority;
 	UCHAR		ucServiceClassName[MAX_CLASS_NAME_LENGTH];
 	BOOLEAN		bHeaderSuppressionEnabled;
+=======
+	bool		bProtocolValid;
+	bool		bTOSValid;
+	bool		bDestIpValid;
+	bool		bSrcIpValid;
+
+	bool		bActiveSet;
+	bool		bAdmittedSet;
+	bool		bAuthorizedSet;
+	bool		bClassifierPriority;
+	UCHAR		ucServiceClassName[MAX_CLASS_NAME_LENGTH];
+	bool		bHeaderSuppressionEnabled;
+>>>>>>> v3.18
 	spinlock_t	SFQueueLock;
 	void		*pstSFIndication;
 	struct timeval	stLastUpdateTokenAt;
@@ -196,8 +278,13 @@ struct bcm_tarang_data {
 	struct sk_buff		*RxAppControlHead;
 	struct sk_buff		*RxAppControlTail;
 	int			AppCtrlQueueLen;
+<<<<<<< HEAD
 	BOOLEAN			MacTracingEnabled;
 	BOOLEAN			bApplicationToExit;
+=======
+	bool			MacTracingEnabled;
+	bool			bApplicationToExit;
+>>>>>>> v3.18
 	struct bcm_mibs_dropped_cntrl_msg stDroppedAppCntrlMsgs;
 	ULONG			RxCntrlMsgBitMask;
 };
@@ -205,7 +292,11 @@ struct bcm_tarang_data {
 struct bcm_targetdsx_buffer {
 	ULONG		ulTargetDsxBuffer;
 	B_UINT16	tid;
+<<<<<<< HEAD
 	BOOLEAN		valid;
+=======
+	bool		valid;
+>>>>>>> v3.18
 };
 
 typedef int (*FP_FLASH_WRITE)(struct bcm_mini_adapter *, UINT, PVOID);
@@ -221,11 +312,19 @@ struct bcm_mini_adapter {
 	u32			msg_enable;
 	CHAR			*caDsxReqResp;
 	atomic_t		ApplicationRunning;
+<<<<<<< HEAD
 	BOOLEAN			AppCtrlQueueOverFlow;
 	atomic_t		CurrentApplicationCount;
 	atomic_t		RegisteredApplicationCount;
 	BOOLEAN			LinkUpStatus;
 	BOOLEAN			TimerActive;
+=======
+	bool			AppCtrlQueueOverFlow;
+	atomic_t		CurrentApplicationCount;
+	atomic_t		RegisteredApplicationCount;
+	bool			LinkUpStatus;
+	bool			TimerActive;
+>>>>>>> v3.18
 	u32			StatisticsPointer;
 	struct sk_buff		*RxControlHead;
 	struct sk_buff		*RxControlTail;
@@ -249,6 +348,7 @@ struct bcm_mini_adapter {
 	UINT			u32TotalDSD;
 	struct bcm_packet_info	PackInfo[NO_OF_QUEUES];
 	struct bcm_classifier_rule astClassifierTable[MAX_CLASSIFIERS];
+<<<<<<< HEAD
 	BOOLEAN			TransferMode;
 
 	/*************** qos ******************/
@@ -258,16 +358,34 @@ struct bcm_mini_adapter {
 	UCHAR			LinkStatus;
 	BOOLEAN			AutoLinkUp;
 	BOOLEAN			AutoSyncup;
+=======
+	bool			TransferMode;
+
+	/*************** qos ******************/
+	bool			bETHCSEnabled;
+	ULONG			BEBucketSize;
+	ULONG			rtPSBucketSize;
+	UCHAR			LinkStatus;
+	bool			AutoLinkUp;
+	bool			AutoSyncup;
+>>>>>>> v3.18
 
 	int			major;
 	int			minor;
 	wait_queue_head_t	tx_packet_wait_queue;
 	wait_queue_head_t	process_rx_cntrlpkt;
 	atomic_t		process_waiting;
+<<<<<<< HEAD
 	BOOLEAN			fw_download_done;
 
 	char			*txctlpacket[MAX_CNTRL_PKTS];
 	atomic_t		cntrlpktCnt ;
+=======
+	bool			fw_download_done;
+
+	char			*txctlpacket[MAX_CNTRL_PKTS];
+	atomic_t		cntrlpktCnt;
+>>>>>>> v3.18
 	atomic_t		index_app_read_cntrlpkt;
 	atomic_t		index_wr_txcntrlpkt;
 	atomic_t		index_rd_txcntrlpkt;
@@ -280,6 +398,7 @@ struct bcm_mini_adapter {
 	ULONG			ulTotalTargetBuffersAvailable;
 	unsigned long		chip_id;
 	wait_queue_head_t	lowpower_mode_wait_queue;
+<<<<<<< HEAD
 	BOOLEAN			bFlashBoot;
 	BOOLEAN			bBinDownloaded;
 	BOOLEAN			bCfgDownloaded;
@@ -293,6 +412,21 @@ struct bcm_mini_adapter {
 	BOOLEAN			DeviceAccess;
 	BOOLEAN			bIsAutoCorrectEnabled;
 	BOOLEAN			bDDRInitDone;
+=======
+	bool			bFlashBoot;
+	bool			bBinDownloaded;
+	bool			bCfgDownloaded;
+	bool			bSyncUpRequestSent;
+	USHORT			usBestEffortQueueIndex;
+	wait_queue_head_t	ioctl_fw_dnld_wait_queue;
+	bool			waiting_to_fw_download_done;
+	pid_t			fw_download_process_pid;
+	struct bcm_target_params *pstargetparams;
+	bool			device_removed;
+	bool			DeviceAccess;
+	bool			bIsAutoCorrectEnabled;
+	bool			bDDRInitDone;
+>>>>>>> v3.18
 	int			DDRSetting;
 	ULONG			ulPowerSaveMode;
 	spinlock_t		txtransmitlock;
@@ -324,6 +458,7 @@ struct bcm_mini_adapter {
 			PVOID,
 			int);
 	int (*interface_transmit)(PVOID, PVOID , UINT);
+<<<<<<< HEAD
 	BOOLEAN			IdleMode;
 	BOOLEAN			bDregRequestSentInIdleMode;
 	BOOLEAN			bTriedToWakeUpFromlowPowerMode;
@@ -332,28 +467,58 @@ struct bcm_mini_adapter {
 	unsigned int		usIdleModePattern;
 	/* BOOLEAN			bTriedToWakeUpFromShutdown; */
 	BOOLEAN			bLinkDownRequested;
+=======
+	bool			IdleMode;
+	bool			bDregRequestSentInIdleMode;
+	bool			bTriedToWakeUpFromlowPowerMode;
+	bool			bShutStatus;
+	bool			bWakeUpDevice;
+	unsigned int		usIdleModePattern;
+	/* BOOLEAN			bTriedToWakeUpFromShutdown; */
+	bool			bLinkDownRequested;
+>>>>>>> v3.18
 	int			downloadDDR;
 	struct bcm_phs_extension stBCMPhsContext;
 	struct bcm_hdr_suppression_contextinfo stPhsTxContextInfo;
 	uint8_t			ucaPHSPktRestoreBuf[2048];
 	uint8_t			bPHSEnabled;
+<<<<<<< HEAD
 	BOOLEAN			AutoFirmDld;
 	BOOLEAN			bMipsConfig;
 	BOOLEAN			bDPLLConfig;
 	UINT32			aTxPktSizeHist[MIBS_MAX_HIST_ENTRIES];
 	UINT32			aRxPktSizeHist[MIBS_MAX_HIST_ENTRIES];
 	struct bcm_fragmented_packet_info astFragmentedPktClassifierTable[MAX_FRAGMENTEDIP_CLASSIFICATION_ENTRIES];
+=======
+	bool			AutoFirmDld;
+	bool			bMipsConfig;
+	bool			bDPLLConfig;
+	UINT32			aTxPktSizeHist[MIBS_MAX_HIST_ENTRIES];
+	UINT32			aRxPktSizeHist[MIBS_MAX_HIST_ENTRIES];
+	struct bcm_fragmented_packet_info
+		astFragmentedPktClassifierTable[MAX_FRAGMENTEDIP_CLASSIFICATION_ENTRIES];
+>>>>>>> v3.18
 	atomic_t		uiMBupdate;
 	UINT32			PmuMode;
 	enum bcm_nvm_type	eNVMType;
 	UINT			uiSectorSize;
 	UINT			uiSectorSizeInCFG;
+<<<<<<< HEAD
 	BOOLEAN			bSectorSizeOverride;
 	BOOLEAN			bStatusWrite;
 	UINT			uiNVMDSDSize;
 	UINT			uiVendorExtnFlag;
 	/* it will always represent chosen DSD at any point of time.
 	 * Generally it is Active DSD but in case of NVM RD/WR it might be different.
+=======
+	bool			bSectorSizeOverride;
+	bool			bStatusWrite;
+	UINT			uiNVMDSDSize;
+	UINT			uiVendorExtnFlag;
+	/* it will always represent chosen DSD at any point of time.
+	 * Generally it is Active DSD but in case of NVM RD/WR it
+	 * might be different.
+>>>>>>> v3.18
 	 */
 	UINT			ulFlashCalStart;
 	ULONG			ulFlashControlSectionStart;
@@ -370,6 +535,7 @@ struct bcm_mini_adapter {
 	struct bcm_flash_cs_info *psFlashCSInfo;
 	struct bcm_flash2x_vendor_info *psFlash2xVendorInfo;
 	UINT			uiFlashBaseAdd; /* Flash start address */
+<<<<<<< HEAD
 	UINT			uiActiveISOOffset; /* Active ISO offset chosen before f/w download */
 	enum bcm_flash2x_section_val eActiveISO; /* Active ISO section val */
 	enum bcm_flash2x_section_val eActiveDSD; /* Active DSD val chosen before f/w download */
@@ -389,6 +555,35 @@ struct bcm_mini_adapter {
 	UINT			syscfgBefFwDld;
 	BOOLEAN			StopAllXaction;
 	UINT32			liTimeSinceLastNetEntry; /* Used to Support extended CAPI requirements from */
+=======
+	/* Active ISO offset chosen before f/w download */
+	UINT			uiActiveISOOffset;
+	enum bcm_flash2x_section_val eActiveISO; /* Active ISO section val */
+	/* Active DSD val chosen before f/w download */
+	enum bcm_flash2x_section_val eActiveDSD;
+	/* For accessing Active DSD chosen before f/w download */
+	UINT			uiActiveDSDOffsetAtFwDld;
+	UINT			uiFlashLayoutMajorVersion;
+	UINT			uiFlashLayoutMinorVersion;
+	bool			bAllDSDWriteAllow;
+	bool			bSigCorrupted;
+	/* this should be set who so ever want to change the Headers.
+	 * after Write it should be reset immediately.
+	 */
+	bool			bHeaderChangeAllowed;
+	int			SelectedChip;
+	bool			bEndPointHalted;
+	/* while bFlashRawRead will be true, Driver
+	 * ignore map lay out and consider flash as of without any map.
+	 */
+	bool			bFlashRawRead;
+	bool			bPreparingForLowPowerMode;
+	bool			bDoSuspend;
+	UINT			syscfgBefFwDld;
+	bool			StopAllXaction;
+	/* Used to Support extended CAPI requirements from */
+	UINT32			liTimeSinceLastNetEntry;
+>>>>>>> v3.18
 	struct semaphore	LowPowerModeSync;
 	ULONG			liDrainCalculated;
 	UINT			gpioBitMap;

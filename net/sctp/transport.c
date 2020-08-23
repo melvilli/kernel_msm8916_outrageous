@@ -24,6 +24,7 @@
  * See the GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
  * along with GNU CC; see the file COPYING.  If not, write to
  * the Free Software Foundation, 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
@@ -34,6 +35,14 @@
  *
  * Or submit a bug report through the following website:
  *    http://www.sf.net/projects/lksctp
+=======
+ * along with GNU CC; see the file COPYING.  If not, see
+ * <http://www.gnu.org/licenses/>.
+ *
+ * Please send any bug reports or fixes you make to the
+ * email address(es):
+ *    lksctp developers <linux-sctp@vger.kernel.org>
+>>>>>>> v3.18
  *
  * Written or modified by:
  *    La Monte H.P. Yarroll <piggy@acm.org>
@@ -43,9 +52,12 @@
  *    Hui Huang             <hui.huang@nokia.com>
  *    Sridhar Samudrala	    <sri@us.ibm.com>
  *    Ardelle Fan	    <ardelle.fan@intel.com>
+<<<<<<< HEAD
  *
  * Any bugs reported given to us we will try to fix... any fixes shared will
  * be incorporated into the next SCTP release.
+=======
+>>>>>>> v3.18
  */
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
@@ -79,7 +91,11 @@ static struct sctp_transport *sctp_transport_init(struct net *net,
 	 */
 	peer->rto = msecs_to_jiffies(net->sctp.rto_initial);
 
+<<<<<<< HEAD
 	peer->last_time_heard = jiffies;
+=======
+	peer->last_time_heard = ktime_get();
+>>>>>>> v3.18
 	peer->last_time_ecne_reduced = jiffies;
 
 	peer->param_flags = SPP_HB_DISABLE |
@@ -116,7 +132,11 @@ struct sctp_transport *sctp_transport_new(struct net *net,
 {
 	struct sctp_transport *transport;
 
+<<<<<<< HEAD
 	transport = t_new(struct sctp_transport, gfp);
+=======
+	transport = kzalloc(sizeof(*transport), gfp);
+>>>>>>> v3.18
 	if (!transport)
 		goto fail;
 
@@ -176,14 +196,26 @@ static void sctp_transport_destroy_rcu(struct rcu_head *head)
  */
 static void sctp_transport_destroy(struct sctp_transport *transport)
 {
+<<<<<<< HEAD
 	SCTP_ASSERT(transport->dead, "Transport is not dead", return);
 
 	call_rcu(&transport->rcu, sctp_transport_destroy_rcu);
+=======
+	if (unlikely(!transport->dead)) {
+		WARN(1, "Attempt to destroy undead transport %p!\n", transport);
+		return;
+	}
+>>>>>>> v3.18
 
 	sctp_packet_free(&transport->packet);
 
 	if (transport->asoc)
 		sctp_association_put(transport->asoc);
+<<<<<<< HEAD
+=======
+
+	call_rcu(&transport->rcu, sctp_transport_destroy_rcu);
+>>>>>>> v3.18
 }
 
 /* Start T3_rtx timer if it is not already running and update the heartbeat
@@ -293,8 +325,13 @@ void sctp_transport_route(struct sctp_transport *transport,
 		 */
 		if (asoc && (!asoc->peer.primary_path ||
 				(transport == asoc->peer.active_path)))
+<<<<<<< HEAD
 			opt->pf->af->to_sk_saddr(&transport->saddr,
 						 asoc->base.sk);
+=======
+			opt->pf->to_sk_saddr(&transport->saddr,
+					     asoc->base.sk);
+>>>>>>> v3.18
 	} else
 		transport->pathmtu = SCTP_DEFAULT_MAXSEGMENT;
 }
@@ -317,11 +354,17 @@ void sctp_transport_put(struct sctp_transport *transport)
 /* Update transport's RTO based on the newly calculated RTT. */
 void sctp_transport_update_rto(struct sctp_transport *tp, __u32 rtt)
 {
+<<<<<<< HEAD
 	/* Check for valid transport.  */
 	SCTP_ASSERT(tp, "NULL transport", return);
 
 	/* We should not be doing any RTO updates unless rto_pending is set.  */
 	SCTP_ASSERT(tp->rto_pending, "rto_pending not set", return);
+=======
+	if (unlikely(!tp->rto_pending))
+		/* We should not be doing any RTO updates unless rto_pending is set.  */
+		pr_debug("%s: rto_pending not set on transport %p!\n", __func__, tp);
+>>>>>>> v3.18
 
 	if (tp->rttvar || tp->srtt) {
 		struct net *net = sock_net(tp->asoc->base.sk);
@@ -377,9 +420,14 @@ void sctp_transport_update_rto(struct sctp_transport *tp, __u32 rtt)
 	 */
 	tp->rto_pending = 0;
 
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK("%s: transport: %p, rtt: %d, srtt: %d "
 			  "rttvar: %d, rto: %ld\n", __func__,
 			  tp, rtt, tp->srtt, tp->rttvar, tp->rto);
+=======
+	pr_debug("%s: transport:%p, rtt:%d, srtt:%d rttvar:%d, rto:%ld\n",
+		 __func__, tp, rtt, tp->srtt, tp->rttvar, tp->rto);
+>>>>>>> v3.18
 }
 
 /* This routine updates the transport's cwnd and partial_bytes_acked
@@ -433,12 +481,20 @@ void sctp_transport_raise_cwnd(struct sctp_transport *transport,
 			cwnd += pmtu;
 		else
 			cwnd += bytes_acked;
+<<<<<<< HEAD
 		SCTP_DEBUG_PRINTK("%s: SLOW START: transport: %p, "
 				  "bytes_acked: %d, cwnd: %d, ssthresh: %d, "
 				  "flight_size: %d, pba: %d\n",
 				  __func__,
 				  transport, bytes_acked, cwnd,
 				  ssthresh, flight_size, pba);
+=======
+
+		pr_debug("%s: slow start: transport:%p, bytes_acked:%d, "
+			 "cwnd:%d, ssthresh:%d, flight_size:%d, pba:%d\n",
+			 __func__, transport, bytes_acked, cwnd, ssthresh,
+			 flight_size, pba);
+>>>>>>> v3.18
 	} else {
 		/* RFC 2960 7.2.2 Whenever cwnd is greater than ssthresh,
 		 * upon each SACK arrival that advances the Cumulative TSN Ack
@@ -459,12 +515,21 @@ void sctp_transport_raise_cwnd(struct sctp_transport *transport,
 			cwnd += pmtu;
 			pba = ((cwnd < pba) ? (pba - cwnd) : 0);
 		}
+<<<<<<< HEAD
 		SCTP_DEBUG_PRINTK("%s: CONGESTION AVOIDANCE: "
 				  "transport: %p, bytes_acked: %d, cwnd: %d, "
 				  "ssthresh: %d, flight_size: %d, pba: %d\n",
 				  __func__,
 				  transport, bytes_acked, cwnd,
 				  ssthresh, flight_size, pba);
+=======
+
+		pr_debug("%s: congestion avoidance: transport:%p, "
+			 "bytes_acked:%d, cwnd:%d, ssthresh:%d, "
+			 "flight_size:%d, pba:%d\n", __func__,
+			 transport, bytes_acked, cwnd, ssthresh,
+			 flight_size, pba);
+>>>>>>> v3.18
 	}
 
 	transport->cwnd = cwnd;
@@ -558,10 +623,17 @@ void sctp_transport_lower_cwnd(struct sctp_transport *transport,
 	}
 
 	transport->partial_bytes_acked = 0;
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK("%s: transport: %p reason: %d cwnd: "
 			  "%d ssthresh: %d\n", __func__,
 			  transport, reason,
 			  transport->cwnd, transport->ssthresh);
+=======
+
+	pr_debug("%s: transport:%p, reason:%d, cwnd:%d, ssthresh:%d\n",
+		 __func__, transport, reason, transport->cwnd,
+		 transport->ssthresh);
+>>>>>>> v3.18
 }
 
 /* Apply Max.Burst limit to the congestion window:
@@ -580,7 +652,11 @@ void sctp_transport_burst_limited(struct sctp_transport *t)
 	u32 old_cwnd = t->cwnd;
 	u32 max_burst_bytes;
 
+<<<<<<< HEAD
 	if (t->burst_limited)
+=======
+	if (t->burst_limited || asoc->max_burst == 0)
+>>>>>>> v3.18
 		return;
 
 	max_burst_bytes = t->flight_size + (asoc->max_burst * asoc->pathmtu);
@@ -602,6 +678,7 @@ void sctp_transport_burst_reset(struct sctp_transport *t)
 }
 
 /* What is the next timeout value for this transport? */
+<<<<<<< HEAD
 unsigned long sctp_transport_timeout(struct sctp_transport *t)
 {
 	unsigned long timeout;
@@ -611,6 +688,18 @@ unsigned long sctp_transport_timeout(struct sctp_transport *t)
 		timeout += t->hbinterval;
 	timeout += jiffies;
 	return timeout;
+=======
+unsigned long sctp_transport_timeout(struct sctp_transport *trans)
+{
+	/* RTO + timer slack +/- 50% of RTO */
+	unsigned long timeout = (trans->rto >> 1) + prandom_u32_max(trans->rto);
+
+	if (trans->state != SCTP_UNCONFIRMED &&
+	    trans->state != SCTP_PF)
+		timeout += trans->hbinterval;
+
+	return timeout + jiffies;
+>>>>>>> v3.18
 }
 
 /* Reset transport variables to their initial values */
@@ -660,5 +749,8 @@ void sctp_transport_immediate_rtx(struct sctp_transport *t)
 		if (!mod_timer(&t->T3_rtx_timer, jiffies + t->rto))
 			sctp_transport_hold(t);
 	}
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 }

@@ -28,6 +28,7 @@
 #ifndef _PCI_HOTPLUG_H
 #define _PCI_HOTPLUG_H
 
+<<<<<<< HEAD
 /* These values come from the PCI Express Spec */
 enum pcie_link_width {
 	PCIE_LNK_WIDTH_RESRV	= 0x00,
@@ -41,6 +42,8 @@ enum pcie_link_width {
 	PCIE_LNK_WIDTH_UNKNOWN  = 0xFF,
 };
 
+=======
+>>>>>>> v3.18
 /**
  * struct hotplug_slot_ops -the callbacks that the hotplug pci core can use
  * @owner: The module owner of this structure
@@ -52,8 +55,13 @@ enum pcie_link_width {
  * @hardware_test: Called to run a specified hardware test on the specified
  * slot.
  * @get_power_status: Called to get the current power status of a slot.
+<<<<<<< HEAD
  * 	If this field is NULL, the value passed in the struct hotplug_slot_info
  * 	will be used when this value is requested by a user.
+=======
+ *	If this field is NULL, the value passed in the struct hotplug_slot_info
+ *	will be used when this value is requested by a user.
+>>>>>>> v3.18
  * @get_attention_status: Called to get the current attention status of a slot.
  *	If this field is NULL, the value passed in the struct hotplug_slot_info
  *	will be used when this value is requested by a user.
@@ -63,6 +71,12 @@ enum pcie_link_width {
  * @get_adapter_status: Called to get see if an adapter is present in the slot or not.
  *	If this field is NULL, the value passed in the struct hotplug_slot_info
  *	will be used when this value is requested by a user.
+<<<<<<< HEAD
+=======
+ * @reset_slot: Optional interface to allow override of a bus reset for the
+ *	slot for cases where a secondary bus reset can result in spurious
+ *	hotplug events or where a slot can be reset independent of the bus.
+>>>>>>> v3.18
  *
  * The table of function pointers that is passed to the hotplug pci core by a
  * hotplug pci driver.  These functions are called by the hotplug pci core when
@@ -80,6 +94,10 @@ struct hotplug_slot_ops {
 	int (*get_attention_status)	(struct hotplug_slot *slot, u8 *value);
 	int (*get_latch_status)		(struct hotplug_slot *slot, u8 *value);
 	int (*get_adapter_status)	(struct hotplug_slot *slot, u8 *value);
+<<<<<<< HEAD
+=======
+	int (*reset_slot)		(struct hotplug_slot *slot, int probe);
+>>>>>>> v3.18
 };
 
 /**
@@ -184,8 +202,12 @@ struct hotplug_params {
 };
 
 #ifdef CONFIG_ACPI
+<<<<<<< HEAD
 #include <acpi/acpi.h>
 #include <acpi/acpi_bus.h>
+=======
+#include <linux/acpi.h>
+>>>>>>> v3.18
 int pci_get_hp_params(struct pci_dev *dev, struct hotplug_params *hpp);
 int acpi_get_hp_hw_control_from_firmware(struct pci_dev *dev, u32 flags);
 int acpi_pci_check_ejectable(struct pci_bus *pbus, acpi_handle handle);
@@ -197,7 +219,11 @@ static inline int pci_get_hp_params(struct pci_dev *dev,
 	return -ENODEV;
 }
 #endif
+<<<<<<< HEAD
 
 void pci_configure_slot(struct pci_dev *dev);
 #endif
 
+=======
+#endif
+>>>>>>> v3.18

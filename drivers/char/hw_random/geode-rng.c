@@ -109,10 +109,17 @@ found:
 		goto out;
 	geode_rng.priv = (unsigned long)mem;
 
+<<<<<<< HEAD
 	printk(KERN_INFO "AMD Geode RNG detected\n");
 	err = hwrng_register(&geode_rng);
 	if (err) {
 		printk(KERN_ERR PFX "RNG registering failed (%d)\n",
+=======
+	pr_info("AMD Geode RNG detected\n");
+	err = hwrng_register(&geode_rng);
+	if (err) {
+		pr_err(PFX "RNG registering failed (%d)\n",
+>>>>>>> v3.18
 		       err);
 		goto err_unmap;
 	}

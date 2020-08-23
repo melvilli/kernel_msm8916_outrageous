@@ -554,7 +554,11 @@ int tick_resume_broadcast_oneshot(struct clock_event_device *bc)
 void tick_check_oneshot_broadcast_this_cpu(void)
 {
 	if (cpumask_test_cpu(smp_processor_id(), tick_broadcast_oneshot_mask)) {
+<<<<<<< HEAD
 		struct tick_device *td = &__get_cpu_var(tick_cpu_device);
+=======
+		struct tick_device *td = this_cpu_ptr(&tick_cpu_device);
+>>>>>>> v3.18
 
 		/*
 		 * We might be in the middle of switching over from
@@ -840,9 +844,12 @@ void tick_broadcast_setup_oneshot(struct clock_event_device *bc)
 {
 	int cpu = smp_processor_id();
 
+<<<<<<< HEAD
 	if (!bc)
 		return;
 
+=======
+>>>>>>> v3.18
 	/* Set it up only once ! */
 	if (bc->event_handler != tick_handle_oneshot_broadcast) {
 		int was_periodic = bc->mode == CLOCK_EVT_MODE_PERIODIC;

@@ -38,7 +38,11 @@ static int ssb_pcihost_resume(struct pci_dev *dev)
 	struct ssb_bus *ssb = pci_get_drvdata(dev);
 	int err;
 
+<<<<<<< HEAD
 	pci_set_power_state(dev, 0);
+=======
+	pci_set_power_state(dev, PCI_D0);
+>>>>>>> v3.18
 	err = pci_enable_device(dev);
 	if (err)
 		return err;

@@ -163,6 +163,7 @@ void t4vf_os_link_changed(struct adapter *adapter, int pidx, int link_ok)
 		netif_carrier_on(dev);
 
 		switch (pi->link_cfg.speed) {
+<<<<<<< HEAD
 		case SPEED_10000:
 			s = "10Gbps";
 			break;
@@ -172,6 +173,21 @@ void t4vf_os_link_changed(struct adapter *adapter, int pidx, int link_ok)
 			break;
 
 		case SPEED_100:
+=======
+		case 40000:
+			s = "40Gbps";
+			break;
+
+		case 10000:
+			s = "10Gbps";
+			break;
+
+		case 1000:
+			s = "1000Mbps";
+			break;
+
+		case 100:
+>>>>>>> v3.18
 			s = "100Mbps";
 			break;
 
@@ -1064,7 +1080,11 @@ static inline unsigned int mk_adap_vers(const struct adapter *adapter)
 	/*
 	 * Chip version 4, revision 0x3f (cxgb4vf).
 	 */
+<<<<<<< HEAD
 	return CHELSIO_CHIP_VERSION(adapter->chip) | (0x3f << 10);
+=======
+	return CHELSIO_CHIP_VERSION(adapter->params.chip) | (0x3f << 10);
+>>>>>>> v3.18
 }
 
 /*
@@ -1551,9 +1571,19 @@ static void cxgb4vf_get_regs(struct net_device *dev,
 	reg_block_dump(adapter, regbuf,
 		       T4VF_MPS_BASE_ADDR + T4VF_MOD_MAP_MPS_FIRST,
 		       T4VF_MPS_BASE_ADDR + T4VF_MOD_MAP_MPS_LAST);
+<<<<<<< HEAD
 	reg_block_dump(adapter, regbuf,
 		       T4VF_PL_BASE_ADDR + T4VF_MOD_MAP_PL_FIRST,
 		       T4VF_PL_BASE_ADDR + T4VF_MOD_MAP_PL_LAST);
+=======
+
+	/* T5 adds new registers in the PL Register map.
+	 */
+	reg_block_dump(adapter, regbuf,
+		       T4VF_PL_BASE_ADDR + T4VF_MOD_MAP_PL_FIRST,
+		       T4VF_PL_BASE_ADDR + (is_t4(adapter->params.chip)
+		       ? A_PL_VF_WHOAMI : A_PL_VF_REVISION));
+>>>>>>> v3.18
 	reg_block_dump(adapter, regbuf,
 		       T4VF_CIM_BASE_ADDR + T4VF_MOD_MAP_CIM_FIRST,
 		       T4VF_CIM_BASE_ADDR + T4VF_MOD_MAP_CIM_LAST);
@@ -2087,6 +2117,10 @@ static int adap_init0(struct adapter *adapter)
 	unsigned int ethqsets;
 	int err;
 	u32 param, val = 0;
+<<<<<<< HEAD
+=======
+	unsigned int chipid;
+>>>>>>> v3.18
 
 	/*
 	 * Wait for the device to become ready before proceeding ...
@@ -2114,12 +2148,23 @@ static int adap_init0(struct adapter *adapter)
 		return err;
 	}
 
+<<<<<<< HEAD
 	switch (adapter->pdev->device >> 12) {
 	case CHELSIO_T4:
 		adapter->chip = CHELSIO_CHIP_CODE(CHELSIO_T4, 0);
 		break;
 	case CHELSIO_T5:
 		adapter->chip = CHELSIO_CHIP_CODE(CHELSIO_T5, 0);
+=======
+	adapter->params.chip = 0;
+	switch (adapter->pdev->device >> 12) {
+	case CHELSIO_T4:
+		adapter->params.chip = CHELSIO_CHIP_CODE(CHELSIO_T4, 0);
+		break;
+	case CHELSIO_T5:
+		chipid = G_REV(t4_read_reg(adapter, A_PL_VF_REV));
+		adapter->params.chip |= CHELSIO_CHIP_CODE(CHELSIO_T5, chipid);
+>>>>>>> v3.18
 		break;
 	}
 
@@ -2344,7 +2389,11 @@ static void cfg_queues(struct adapter *adapter)
 		struct port_info *pi = adap2pinfo(adapter, pidx);
 
 		pi->first_qset = qidx;
+<<<<<<< HEAD
 		pi->nqsets = is_10g_port(&pi->link_cfg) ? q10g : 1;
+=======
+		pi->nqsets = is_x_10g_port(&pi->link_cfg) ? q10g : 1;
+>>>>>>> v3.18
 		qidx += pi->nqsets;
 	}
 	s->ethqsets = qidx;
@@ -2437,7 +2486,11 @@ static void reduce_ethqs(struct adapter *adapter, int n)
  */
 static int enable_msix(struct adapter *adapter)
 {
+<<<<<<< HEAD
 	int i, err, want, need;
+=======
+	int i, want, need, nqsets;
+>>>>>>> v3.18
 	struct msix_entry entries[MSIX_ENTRIES];
 	struct sge *s = &adapter->sge;
 
@@ -2453,6 +2506,7 @@ static int enable_msix(struct adapter *adapter)
 	 */
 	want = s->max_ethqsets + MSIX_EXTRAS;
 	need = adapter->params.nports + MSIX_EXTRAS;
+<<<<<<< HEAD
 	while ((err = pci_enable_msix(adapter->pdev, entries, want)) >= need)
 		want = err;
 
@@ -2473,6 +2527,25 @@ static int enable_msix(struct adapter *adapter)
 			 " not using MSI-X\n", err);
 	}
 	return err;
+=======
+
+	want = pci_enable_msix_range(adapter->pdev, entries, need, want);
+	if (want < 0)
+		return want;
+
+	nqsets = want - MSIX_EXTRAS;
+	if (nqsets < s->max_ethqsets) {
+		dev_warn(adapter->pdev_dev, "only enough MSI-X vectors"
+			 " for %d Queue Sets\n", nqsets);
+		s->max_ethqsets = nqsets;
+		if (nqsets < s->ethqsets)
+			reduce_ethqs(adapter, nqsets);
+	}
+	for (i = 0; i < want; ++i)
+		adapter->msix_info[i].vec = entries[i].vector;
+
+	return 0;
+>>>>>>> v3.18
 }
 
 static const struct net_device_ops cxgb4vf_netdev_ops	= {
@@ -2660,7 +2733,11 @@ static int cxgb4vf_pci_probe(struct pci_dev *pdev,
 		netdev->priv_flags |= IFF_UNICAST_FLT;
 
 		netdev->netdev_ops = &cxgb4vf_netdev_ops;
+<<<<<<< HEAD
 		SET_ETHTOOL_OPS(netdev, &cxgb4vf_ethtool_ops);
+=======
+		netdev->ethtool_ops = &cxgb4vf_ethtool_ops;
+>>>>>>> v3.18
 
 		/*
 		 * Initialize the hardware/software state for the port.
@@ -2782,11 +2859,17 @@ err_unmap_bar:
 
 err_free_adapter:
 	kfree(adapter);
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
 
 err_release_regions:
 	pci_release_regions(pdev);
 	pci_set_drvdata(pdev, NULL);
+=======
+
+err_release_regions:
+	pci_release_regions(pdev);
+>>>>>>> v3.18
 	pci_clear_master(pdev);
 
 err_disable_device:
@@ -2851,7 +2934,10 @@ static void cxgb4vf_pci_remove(struct pci_dev *pdev)
 		}
 		iounmap(adapter->regs);
 		kfree(adapter);
+<<<<<<< HEAD
 		pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	}
 
 	/*
@@ -2875,6 +2961,7 @@ static void cxgb4vf_pci_shutdown(struct pci_dev *pdev)
 	if (!adapter)
 		return;
 
+<<<<<<< HEAD
 	/*
 	 * Disable all Virtual Interfaces.  This will shut down the
 	 * delivery of all ingress packets into the chip for these
@@ -2893,6 +2980,26 @@ static void cxgb4vf_pci_shutdown(struct pci_dev *pdev)
 
 		pi = netdev_priv(netdev);
 		t4vf_enable_vi(adapter, pi->viid, false, false);
+=======
+	/* Disable all Virtual Interfaces.  This will shut down the
+	 * delivery of all ingress packets into the chip for these
+	 * Virtual Interfaces.
+	 */
+	for_each_port(adapter, pidx)
+		if (test_bit(pidx, &adapter->registered_device_map))
+			unregister_netdev(adapter->port[pidx]);
+
+	/* Free up all Queues which will prevent further DMA and
+	 * Interrupts allowing various internal pathways to drain.
+	 */
+	t4vf_sge_stop(adapter);
+	if (adapter->flags & USING_MSIX) {
+		pci_disable_msix(adapter->pdev);
+		adapter->flags &= ~USING_MSIX;
+	} else if (adapter->flags & USING_MSI) {
+		pci_disable_msi(adapter->pdev);
+		adapter->flags &= ~USING_MSI;
+>>>>>>> v3.18
 	}
 
 	/*
@@ -2900,11 +3007,16 @@ static void cxgb4vf_pci_shutdown(struct pci_dev *pdev)
 	 * Interrupts allowing various internal pathways to drain.
 	 */
 	t4vf_free_sge_resources(adapter);
+<<<<<<< HEAD
+=======
+	pci_set_drvdata(pdev, NULL);
+>>>>>>> v3.18
 }
 
 /*
  * PCI Device registration data structures.
  */
+<<<<<<< HEAD
 #define CH_DEVICE(devid, idx) \
 	{ PCI_VENDOR_ID_CHELSIO, devid, PCI_ANY_ID, PCI_ANY_ID, 0, 0, idx }
 
@@ -2943,6 +3055,64 @@ static struct pci_device_id cxgb4vf_pci_tbl[] = {
 	CH_DEVICE(0x5811, 0),   /* T520-lp-cr */
 	CH_DEVICE(0x5812, 0),   /* T560-cr */
 	CH_DEVICE(0x5813, 0),   /* T580-cr */
+=======
+#define CH_DEVICE(devid) \
+	{ PCI_VENDOR_ID_CHELSIO, devid, PCI_ANY_ID, PCI_ANY_ID, 0, 0, 0 }
+
+static const struct pci_device_id cxgb4vf_pci_tbl[] = {
+	CH_DEVICE(0xb000),	/* PE10K FPGA */
+	CH_DEVICE(0x4801),	/* T420-cr */
+	CH_DEVICE(0x4802),	/* T422-cr */
+	CH_DEVICE(0x4803),	/* T440-cr */
+	CH_DEVICE(0x4804),	/* T420-bch */
+	CH_DEVICE(0x4805),	/* T440-bch */
+	CH_DEVICE(0x4806),	/* T460-ch */
+	CH_DEVICE(0x4807),	/* T420-so */
+	CH_DEVICE(0x4808),	/* T420-cx */
+	CH_DEVICE(0x4809),	/* T420-bt */
+	CH_DEVICE(0x480a),	/* T404-bt */
+	CH_DEVICE(0x480d),	/* T480-cr */
+	CH_DEVICE(0x480e),	/* T440-lp-cr */
+	CH_DEVICE(0x4880),
+	CH_DEVICE(0x4881),
+	CH_DEVICE(0x4882),
+	CH_DEVICE(0x4883),
+	CH_DEVICE(0x4884),
+	CH_DEVICE(0x4885),
+	CH_DEVICE(0x4886),
+	CH_DEVICE(0x4887),
+	CH_DEVICE(0x4888),
+	CH_DEVICE(0x5801),	/* T520-cr */
+	CH_DEVICE(0x5802),	/* T522-cr */
+	CH_DEVICE(0x5803),	/* T540-cr */
+	CH_DEVICE(0x5804),	/* T520-bch */
+	CH_DEVICE(0x5805),	/* T540-bch */
+	CH_DEVICE(0x5806),	/* T540-ch */
+	CH_DEVICE(0x5807),	/* T520-so */
+	CH_DEVICE(0x5808),	/* T520-cx */
+	CH_DEVICE(0x5809),	/* T520-bt */
+	CH_DEVICE(0x580a),	/* T504-bt */
+	CH_DEVICE(0x580b),	/* T520-sr */
+	CH_DEVICE(0x580c),	/* T504-bt */
+	CH_DEVICE(0x580d),	/* T580-cr */
+	CH_DEVICE(0x580e),	/* T540-lp-cr */
+	CH_DEVICE(0x580f),	/* Amsterdam */
+	CH_DEVICE(0x5810),	/* T580-lp-cr */
+	CH_DEVICE(0x5811),	/* T520-lp-cr */
+	CH_DEVICE(0x5812),	/* T560-cr */
+	CH_DEVICE(0x5813),	/* T580-cr */
+	CH_DEVICE(0x5814),	/* T580-so-cr */
+	CH_DEVICE(0x5815),	/* T502-bt */
+	CH_DEVICE(0x5880),
+	CH_DEVICE(0x5881),
+	CH_DEVICE(0x5882),
+	CH_DEVICE(0x5883),
+	CH_DEVICE(0x5884),
+	CH_DEVICE(0x5885),
+	CH_DEVICE(0x5886),
+	CH_DEVICE(0x5887),
+	CH_DEVICE(0x5888),
+>>>>>>> v3.18
 	{ 0, }
 };
 

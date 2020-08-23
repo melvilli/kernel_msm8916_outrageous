@@ -12,6 +12,9 @@
 #include <asm-generic/sections.h>
 
 extern char __arc_dccm_base[];
+<<<<<<< HEAD
 extern char __dtb_start[];
+=======
+>>>>>>> v3.18
 
 #endif

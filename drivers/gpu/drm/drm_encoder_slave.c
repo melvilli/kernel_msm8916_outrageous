@@ -67,12 +67,20 @@ int drm_i2c_encoder_init(struct drm_device *dev,
 		goto fail;
 	}
 
+<<<<<<< HEAD
 	if (!client->driver) {
+=======
+	if (!client->dev.driver) {
+>>>>>>> v3.18
 		err = -ENODEV;
 		goto fail_unregister;
 	}
 
+<<<<<<< HEAD
 	module = client->driver->driver.owner;
+=======
+	module = client->dev.driver->owner;
+>>>>>>> v3.18
 	if (!try_module_get(module)) {
 		err = -ENODEV;
 		goto fail_unregister;
@@ -80,7 +88,11 @@ int drm_i2c_encoder_init(struct drm_device *dev,
 
 	encoder->bus_priv = client;
 
+<<<<<<< HEAD
 	encoder_drv = to_drm_i2c_encoder_driver(client->driver);
+=======
+	encoder_drv = to_drm_i2c_encoder_driver(to_i2c_driver(client->dev.driver));
+>>>>>>> v3.18
 
 	err = encoder_drv->encoder_init(client, dev, encoder);
 	if (err)
@@ -111,7 +123,11 @@ void drm_i2c_encoder_destroy(struct drm_encoder *drm_encoder)
 {
 	struct drm_encoder_slave *encoder = to_encoder_slave(drm_encoder);
 	struct i2c_client *client = drm_i2c_encoder_get_client(drm_encoder);
+<<<<<<< HEAD
 	struct module *module = client->driver->driver.owner;
+=======
+	struct module *module = client->dev.driver->owner;
+>>>>>>> v3.18
 
 	i2c_unregister_device(client);
 	encoder->bus_priv = NULL;

@@ -28,6 +28,7 @@
 #include "util.h"
 #include "trace-event.h"
 
+<<<<<<< HEAD
 int header_page_size_size;
 int header_page_ts_size;
 int header_page_data_offset;
@@ -47,6 +48,8 @@ struct pevent *read_trace_init(int file_bigendian, int host_bigendian)
 	return pevent;
 }
 
+=======
+>>>>>>> v3.18
 static int get_common_field(struct scripting_context *context,
 			    int *offset, int *size, const char *type)
 {
@@ -126,6 +129,7 @@ raw_field_value(struct event_format *event, const char *name, void *data)
 	return val;
 }
 
+<<<<<<< HEAD
 void *raw_field_ptr(struct event_format *event, const char *name, void *data)
 {
 	struct format_field *field;
@@ -162,6 +166,8 @@ int trace_parse_common_pid(struct pevent *pevent, void *data)
 	return pevent_data_pid(pevent, &record);
 }
 
+=======
+>>>>>>> v3.18
 unsigned long long read_size(struct event_format *event, void *ptr, int size)
 {
 	return pevent_read_number(event->pevent, ptr, size);
@@ -181,6 +187,10 @@ void event_format__print(struct event_format *event,
 	trace_seq_init(&s);
 	pevent_event_info(&s, event, &record);
 	trace_seq_do_printf(&s);
+<<<<<<< HEAD
+=======
+	trace_seq_destroy(&s);
+>>>>>>> v3.18
 }
 
 void parse_proc_kallsyms(struct pevent *pevent,
@@ -192,7 +202,11 @@ void parse_proc_kallsyms(struct pevent *pevent,
 	char *next = NULL;
 	char *addr_str;
 	char *mod;
+<<<<<<< HEAD
 	char *fmt;
+=======
+	char *fmt = NULL;
+>>>>>>> v3.18
 
 	line = strtok_r(file, "\n", &next);
 	while (line) {

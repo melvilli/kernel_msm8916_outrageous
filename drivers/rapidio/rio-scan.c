@@ -406,6 +406,10 @@ static struct rio_dev *rio_setup_device(struct rio_net *net,
 		rio_mport_write_config_32(port, destid, hopcount,
 					  RIO_COMPONENT_TAG_CSR, next_comptag);
 		rdev->comp_tag = next_comptag++;
+<<<<<<< HEAD
+=======
+		rdev->do_enum = true;
+>>>>>>> v3.18
 	}  else {
 		rio_mport_read_config_32(port, destid, hopcount,
 					 RIO_COMPONENT_TAG_CSR,
@@ -432,8 +436,13 @@ static struct rio_dev *rio_setup_device(struct rio_net *net,
 	/* If a PE has both switch and other functions, show it as a switch */
 	if (rio_is_switch(rdev)) {
 		rswitch = rdev->rswitch;
+<<<<<<< HEAD
 		rswitch->switchid = rdev->comp_tag & RIO_CTAG_UDEVID;
 		rswitch->port_ok = 0;
+=======
+		rswitch->port_ok = 0;
+		spin_lock_init(&rswitch->lock);
+>>>>>>> v3.18
 		rswitch->route_table = kzalloc(sizeof(u8)*
 					RIO_MAX_ROUTE_ENTRIES(port->sys_size),
 					GFP_KERNEL);
@@ -444,12 +453,19 @@ static struct rio_dev *rio_setup_device(struct rio_net *net,
 				rdid++)
 			rswitch->route_table[rdid] = RIO_INVALID_ROUTE;
 		dev_set_name(&rdev->dev, "%02x:s:%04x", rdev->net->id,
+<<<<<<< HEAD
 			     rswitch->switchid);
 		rio_switch_init(rdev, do_enum);
 
 		if (do_enum && rswitch->clr_table)
 			rswitch->clr_table(port, destid, hopcount,
 					   RIO_GLOBAL_TABLE);
+=======
+			     rdev->comp_tag & RIO_CTAG_UDEVID);
+
+		if (do_enum)
+			rio_route_clr_table(rdev, RIO_GLOBAL_TABLE, 0);
+>>>>>>> v3.18
 
 		list_add_tail(&rswitch->node, &net->switches);
 
@@ -459,9 +475,16 @@ static struct rio_dev *rio_setup_device(struct rio_net *net,
 			rio_enable_rx_tx_port(port, 0, destid, hopcount, 0);
 
 		dev_set_name(&rdev->dev, "%02x:e:%04x", rdev->net->id,
+<<<<<<< HEAD
 			     rdev->destid);
 	}
 
+=======
+			     rdev->comp_tag & RIO_CTAG_UDEVID);
+	}
+
+	rdev->dev.parent = &port->dev;
+>>>>>>> v3.18
 	rio_attach_device(rdev);
 
 	device_initialize(&rdev->dev);
@@ -533,6 +556,7 @@ rio_sport_is_active(struct rio_mport *port, u16 destid, u8 hopcount, int sport)
 }
 
 /**
+<<<<<<< HEAD
  * rio_lock_device - Acquires host device lock for specified device
  * @port: Master port to send transaction
  * @destid: Destination ID for device/switch
@@ -683,6 +707,8 @@ rio_route_get_entry(struct rio_dev *rdev, u16 table,
 }
 
 /**
+=======
+>>>>>>> v3.18
  * rio_get_host_deviceid_lock- Reads the Host Device ID Lock CSR on a device
  * @port: Master port to send transaction
  * @hopcount: Number of hops to the device
@@ -1094,12 +1120,18 @@ static void rio_update_route_tables(struct rio_net *net)
 
 				sport = RIO_GET_PORT_NUM(swrdev->swpinfo);
 
+<<<<<<< HEAD
 				if (rswitch->add_entry)	{
 					rio_route_add_entry(swrdev,
 						RIO_GLOBAL_TABLE, destid,
 						sport, 0);
 					rswitch->route_table[destid] = sport;
 				}
+=======
+				rio_route_add_entry(swrdev, RIO_GLOBAL_TABLE,
+						    destid, sport, 0);
+				rswitch->route_table[destid] = sport;
+>>>>>>> v3.18
 			}
 		}
 	}
@@ -1115,8 +1147,13 @@ static void rio_update_route_tables(struct rio_net *net)
 static void rio_init_em(struct rio_dev *rdev)
 {
 	if (rio_is_switch(rdev) && (rdev->em_efptr) &&
+<<<<<<< HEAD
 	    (rdev->rswitch->em_init)) {
 		rdev->rswitch->em_init(rdev);
+=======
+	    rdev->rswitch->ops && rdev->rswitch->ops->em_init) {
+		rdev->rswitch->ops->em_init(rdev);
+>>>>>>> v3.18
 	}
 }
 
@@ -1141,7 +1178,11 @@ static void rio_pw_enable(struct rio_mport *port, int enable)
  * link, then start recursive peer enumeration. Returns %0 if
  * enumeration succeeds or %-EBUSY if enumeration fails.
  */
+<<<<<<< HEAD
 int rio_enum_mport(struct rio_mport *mport, u32 flags)
+=======
+static int rio_enum_mport(struct rio_mport *mport, u32 flags)
+>>>>>>> v3.18
 {
 	struct rio_net *net = NULL;
 	int rc = 0;
@@ -1256,7 +1297,11 @@ static void rio_build_route_tables(struct rio_net *net)
  * peer discovery. Returns %0 if discovery succeeds or %-EBUSY
  * on failure.
  */
+<<<<<<< HEAD
 int rio_disc_mport(struct rio_mport *mport, u32 flags)
+=======
+static int rio_disc_mport(struct rio_mport *mport, u32 flags)
+>>>>>>> v3.18
 {
 	struct rio_net *net = NULL;
 	unsigned long to_end;
@@ -1315,6 +1360,10 @@ bail:
 }
 
 static struct rio_scan rio_scan_ops = {
+<<<<<<< HEAD
+=======
+	.owner = THIS_MODULE,
+>>>>>>> v3.18
 	.enumerate = rio_enum_mport,
 	.discover = rio_disc_mport,
 };

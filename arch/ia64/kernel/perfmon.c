@@ -521,7 +521,11 @@ static pmu_config_t		*pmu_conf;
 pfm_sysctl_t pfm_sysctl;
 EXPORT_SYMBOL(pfm_sysctl);
 
+<<<<<<< HEAD
 static ctl_table pfm_ctl_table[]={
+=======
+static struct ctl_table pfm_ctl_table[] = {
+>>>>>>> v3.18
 	{
 		.procname	= "debug",
 		.data		= &pfm_sysctl.debug,
@@ -552,7 +556,11 @@ static ctl_table pfm_ctl_table[]={
 	},
 	{}
 };
+<<<<<<< HEAD
 static ctl_table pfm_sysctl_dir[] = {
+=======
+static struct ctl_table pfm_sysctl_dir[] = {
+>>>>>>> v3.18
 	{
 		.procname	= "perfmon",
 		.mode		= 0555,
@@ -560,7 +568,11 @@ static ctl_table pfm_sysctl_dir[] = {
 	},
  	{}
 };
+<<<<<<< HEAD
 static ctl_table pfm_sysctl_root[] = {
+=======
+static struct ctl_table pfm_sysctl_root[] = {
+>>>>>>> v3.18
 	{
 		.procname	= "kernel",
 		.mode		= 0555,
@@ -2166,12 +2178,15 @@ static const struct file_operations pfm_file_ops = {
 	.flush		= pfm_flush
 };
 
+<<<<<<< HEAD
 static int
 pfmfs_delete_dentry(const struct dentry *dentry)
 {
 	return 1;
 }
 
+=======
+>>>>>>> v3.18
 static char *pfmfs_dname(struct dentry *dentry, char *buffer, int buflen)
 {
 	return dynamic_dname(dentry, buffer, buflen, "pfm:[%lu]",
@@ -2179,7 +2194,11 @@ static char *pfmfs_dname(struct dentry *dentry, char *buffer, int buflen)
 }
 
 static const struct dentry_operations pfmfs_dentry_operations = {
+<<<<<<< HEAD
 	.d_delete = pfmfs_delete_dentry,
+=======
+	.d_delete = always_delete_dentry,
+>>>>>>> v3.18
 	.d_dname = pfmfs_dname,
 };
 
@@ -5647,6 +5666,7 @@ pfm_proc_show_header(struct seq_file *m)
 
 	list_for_each(pos, &pfm_buffer_fmt_list) {
 		entry = list_entry(pos, pfm_buffer_fmt_t, fmt_list);
+<<<<<<< HEAD
 		seq_printf(m, "format                    : %02x-%02x-%02x-%02x-%02x-%02x-%02x-%02x-%02x-%02x-%02x-%02x-%02x-%02x-%02x-%02x %s\n",
 			entry->fmt_uuid[0],
 			entry->fmt_uuid[1],
@@ -5665,6 +5685,10 @@ pfm_proc_show_header(struct seq_file *m)
 			entry->fmt_uuid[14],
 			entry->fmt_uuid[15],
 			entry->fmt_name);
+=======
+		seq_printf(m, "format                    : %16phD %s\n",
+			   entry->fmt_uuid, entry->fmt_name);
+>>>>>>> v3.18
 	}
 	spin_unlock(&pfm_buffer_fmt_lock);
 
@@ -6409,7 +6433,10 @@ pfm_flush_pmds(struct task_struct *task, pfm_context_t *ctx)
 
 static struct irqaction perfmon_irqaction = {
 	.handler = pfm_interrupt_handler,
+<<<<<<< HEAD
 	.flags   = IRQF_DISABLED,
+=======
+>>>>>>> v3.18
 	.name    = "perfmon"
 };
 

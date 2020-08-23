@@ -65,7 +65,11 @@ struct ds1374 {
 static struct i2c_driver ds1374_driver;
 
 static int ds1374_read_rtc(struct i2c_client *client, u32 *time,
+<<<<<<< HEAD
                            int reg, int nbytes)
+=======
+			   int reg, int nbytes)
+>>>>>>> v3.18
 {
 	u8 buf[4];
 	int ret;
@@ -90,7 +94,11 @@ static int ds1374_read_rtc(struct i2c_client *client, u32 *time,
 }
 
 static int ds1374_write_rtc(struct i2c_client *client, u32 time,
+<<<<<<< HEAD
                             int reg, int nbytes)
+=======
+			    int reg, int nbytes)
+>>>>>>> v3.18
 {
 	u8 buf[4];
 	int i;
@@ -119,8 +127,12 @@ static int ds1374_check_rtc_status(struct i2c_client *client)
 
 	if (stat & DS1374_REG_SR_OSF)
 		dev_warn(&client->dev,
+<<<<<<< HEAD
 		         "oscillator discontinuity flagged, "
 		         "time unreliable\n");
+=======
+			 "oscillator discontinuity flagged, time unreliable\n");
+>>>>>>> v3.18
 
 	stat &= ~(DS1374_REG_SR_OSF | DS1374_REG_SR_AF);
 
@@ -363,7 +375,11 @@ static int ds1374_probe(struct i2c_client *client,
 
 	if (client->irq > 0) {
 		ret = devm_request_irq(&client->dev, client->irq, ds1374_irq, 0,
+<<<<<<< HEAD
 		                  "ds1374", client);
+=======
+					"ds1374", client);
+>>>>>>> v3.18
 		if (ret) {
 			dev_err(&client->dev, "unable to request IRQ\n");
 			return ret;
@@ -373,7 +389,11 @@ static int ds1374_probe(struct i2c_client *client,
 	}
 
 	ds1374->rtc = devm_rtc_device_register(&client->dev, client->name,
+<<<<<<< HEAD
 	                                  &ds1374_rtc_ops, THIS_MODULE);
+=======
+						&ds1374_rtc_ops, THIS_MODULE);
+>>>>>>> v3.18
 	if (IS_ERR(ds1374->rtc)) {
 		dev_err(&client->dev, "unable to register the class device\n");
 		return PTR_ERR(ds1374->rtc);

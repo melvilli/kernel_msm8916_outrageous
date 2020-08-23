@@ -18,6 +18,11 @@
 #include <linux/rbtree.h>
 #include <linux/slab.h>
 
+<<<<<<< HEAD
+=======
+#include "power.h"
+
+>>>>>>> v3.18
 static DEFINE_MUTEX(wakelocks_lock);
 
 struct wakelock {

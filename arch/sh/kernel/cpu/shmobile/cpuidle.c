@@ -91,13 +91,20 @@ static struct cpuidle_driver cpuidle_driver = {
 
 int __init sh_mobile_setup_cpuidle(void)
 {
+<<<<<<< HEAD
 	int ret;
 
+=======
+>>>>>>> v3.18
 	if (sh_mobile_sleep_supported & SUSP_SH_SF)
 		cpuidle_driver.states[1].disabled = false;
 
 	if (sh_mobile_sleep_supported & SUSP_SH_STANDBY)
 		cpuidle_driver.states[2].disabled = false;
 
+<<<<<<< HEAD
 	return cpuidle_register(&cpuidle_driver);
+=======
+	return cpuidle_register(&cpuidle_driver, NULL);
+>>>>>>> v3.18
 }

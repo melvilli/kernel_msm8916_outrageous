@@ -12,7 +12,11 @@
 
 ENTRY(__raw_readsl)
 		teq	r2, #0		@ do we have to check for the zero len?
+<<<<<<< HEAD
 		moveq	pc, lr
+=======
+		reteq	lr
+>>>>>>> v3.18
 		ands	ip, r1, #3
 		bne	3f
 
@@ -33,7 +37,11 @@ ENTRY(__raw_readsl)
 		stmcsia	r1!, {r3, ip}
 		ldrne	r3, [r0, #0]
 		strne	r3, [r1, #0]
+<<<<<<< HEAD
 		mov	pc, lr
+=======
+		ret	lr
+>>>>>>> v3.18
 
 3:		ldr	r3, [r0]
 		cmp	ip, #2
@@ -47,25 +55,43 @@ ENTRY(__raw_readsl)
 		strb	ip, [r1], #1
 
 4:		subs	r2, r2, #1
+<<<<<<< HEAD
 		mov	ip, r3, pull #24
 		ldrne	r3, [r0]
 		orrne	ip, ip, r3, push #8
+=======
+		mov	ip, r3, lspull #24
+		ldrne	r3, [r0]
+		orrne	ip, ip, r3, lspush #8
+>>>>>>> v3.18
 		strne	ip, [r1], #4
 		bne	4b
 		b	8f
 
 5:		subs	r2, r2, #1
+<<<<<<< HEAD
 		mov	ip, r3, pull #16
 		ldrne	r3, [r0]
 		orrne	ip, ip, r3, push #16
+=======
+		mov	ip, r3, lspull #16
+		ldrne	r3, [r0]
+		orrne	ip, ip, r3, lspush #16
+>>>>>>> v3.18
 		strne	ip, [r1], #4
 		bne	5b
 		b	7f
 
 6:		subs	r2, r2, #1
+<<<<<<< HEAD
 		mov	ip, r3, pull #8
 		ldrne	r3, [r0]
 		orrne	ip, ip, r3, push #24
+=======
+		mov	ip, r3, lspull #8
+		ldrne	r3, [r0]
+		orrne	ip, ip, r3, lspush #24
+>>>>>>> v3.18
 		strne	ip, [r1], #4
 		bne	6b
 
@@ -75,5 +101,9 @@ ENTRY(__raw_readsl)
 		strb	r3, [r1, #1]
 8:		mov	r3, ip, get_byte_0
 		strb	r3, [r1, #0]
+<<<<<<< HEAD
 		mov	pc, lr
+=======
+		ret	lr
+>>>>>>> v3.18
 ENDPROC(__raw_readsl)

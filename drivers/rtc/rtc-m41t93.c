@@ -194,19 +194,25 @@ static int m41t93_probe(struct spi_device *spi)
 	return 0;
 }
 
+<<<<<<< HEAD
 
 static int m41t93_remove(struct spi_device *spi)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 static struct spi_driver m41t93_driver = {
 	.driver = {
 		.name	= "rtc-m41t93",
 		.owner	= THIS_MODULE,
 	},
 	.probe	= m41t93_probe,
+<<<<<<< HEAD
 	.remove = m41t93_remove,
+=======
+>>>>>>> v3.18
 };
 
 module_spi_driver(m41t93_driver);

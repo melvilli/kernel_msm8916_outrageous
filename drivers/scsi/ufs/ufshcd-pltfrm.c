@@ -37,13 +37,21 @@
 #include <linux/pm_runtime.h>
 #include <linux/of.h>
 
+<<<<<<< HEAD
 #include <linux/scsi/ufs/ufshcd.h>
+=======
+#include "ufshcd.h"
+>>>>>>> v3.18
 
 static const struct of_device_id ufs_of_match[];
 static struct ufs_hba_variant_ops *get_variant_ops(struct device *dev)
 {
 	if (dev->of_node) {
 		const struct of_device_id *match;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		match = of_match_node(ufs_of_match, dev->of_node);
 		if (match)
 			return (struct ufs_hba_variant_ops *)match->data;
@@ -101,7 +109,10 @@ static int ufshcd_parse_clock_info(struct ufs_hba *hba)
 	clkfreq = devm_kzalloc(dev, sz * sizeof(*clkfreq),
 			GFP_KERNEL);
 	if (!clkfreq) {
+<<<<<<< HEAD
 		dev_err(dev, "%s: no memory\n", "freq-table-hz");
+=======
+>>>>>>> v3.18
 		ret = -ENOMEM;
 		goto out;
 	}
@@ -111,7 +122,11 @@ static int ufshcd_parse_clock_info(struct ufs_hba *hba)
 	if (ret && (ret != -EINVAL)) {
 		dev_err(dev, "%s: error reading array %d\n",
 				"freq-table-hz", ret);
+<<<<<<< HEAD
 		goto out;
+=======
+		return ret;
+>>>>>>> v3.18
 	}
 
 	for (i = 0; i < sz; i += 2) {
@@ -159,10 +174,15 @@ static int ufshcd_populate_vreg(struct device *dev, const char *name,
 	}
 
 	vreg = devm_kzalloc(dev, sizeof(*vreg), GFP_KERNEL);
+<<<<<<< HEAD
 	if (!vreg) {
 		dev_err(dev, "No memory for %s regulator\n", name);
 		goto out;
 	}
+=======
+	if (!vreg)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	vreg->name = kstrdup(name, GFP_KERNEL);
 
@@ -176,7 +196,11 @@ static int ufshcd_populate_vreg(struct device *dev, const char *name,
 	if (ret) {
 		dev_err(dev, "%s: unable to find %s err %d\n",
 				__func__, prop_name, ret);
+<<<<<<< HEAD
 		goto out;
+=======
+		goto out_free;
+>>>>>>> v3.18
 	}
 
 	vreg->min_uA = 0;
@@ -198,6 +222,12 @@ static int ufshcd_populate_vreg(struct device *dev, const char *name,
 
 	goto out;
 
+<<<<<<< HEAD
+=======
+out_free:
+	devm_kfree(dev, vreg);
+	vreg = NULL;
+>>>>>>> v3.18
 out:
 	if (!ret)
 		*out_vreg = vreg;
@@ -236,6 +266,7 @@ out:
 	return err;
 }
 
+<<<<<<< HEAD
 static void ufshcd_parse_pm_levels(struct ufs_hba *hba)
 {
 	struct device *dev = hba->dev;
@@ -249,6 +280,8 @@ static void ufshcd_parse_pm_levels(struct ufs_hba *hba)
 	}
 }
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM
 /**
  * ufshcd_pltfrm_suspend - suspend power management function
@@ -318,8 +351,13 @@ static int ufshcd_pltfrm_probe(struct platform_device *pdev)
 
 	mem_res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	mmio_base = devm_ioremap_resource(dev, mem_res);
+<<<<<<< HEAD
 	if (IS_ERR(mmio_base)) {
 		err = PTR_ERR(mmio_base);
+=======
+	if (IS_ERR(*(void **)&mmio_base)) {
+		err = PTR_ERR(*(void **)&mmio_base);
+>>>>>>> v3.18
 		goto out;
 	}
 
@@ -342,12 +380,17 @@ static int ufshcd_pltfrm_probe(struct platform_device *pdev)
 	if (err) {
 		dev_err(&pdev->dev, "%s: clock parse failed %d\n",
 				__func__, err);
+<<<<<<< HEAD
 		goto dealloc_host;
+=======
+		goto out;
+>>>>>>> v3.18
 	}
 	err = ufshcd_parse_regulator_info(hba);
 	if (err) {
 		dev_err(&pdev->dev, "%s: regulator init failed %d\n",
 				__func__, err);
+<<<<<<< HEAD
 		goto dealloc_host;
 	}
 
@@ -358,6 +401,14 @@ static int ufshcd_pltfrm_probe(struct platform_device *pdev)
 	if (!dev->dma_mask)
 		dev->dma_mask = &dev->coherent_dma_mask;
 
+=======
+		goto out;
+	}
+
+	pm_runtime_set_active(&pdev->dev);
+	pm_runtime_enable(&pdev->dev);
+
+>>>>>>> v3.18
 	err = ufshcd_init(hba, mmio_base, irq);
 	if (err) {
 		dev_err(dev, "Intialization failed\n");
@@ -371,8 +422,11 @@ static int ufshcd_pltfrm_probe(struct platform_device *pdev)
 out_disable_rpm:
 	pm_runtime_disable(&pdev->dev);
 	pm_runtime_set_suspended(&pdev->dev);
+<<<<<<< HEAD
 dealloc_host:
 	ufshcd_dealloc_host(hba);
+=======
+>>>>>>> v3.18
 out:
 	return err;
 }
@@ -389,13 +443,19 @@ static int ufshcd_pltfrm_remove(struct platform_device *pdev)
 
 	pm_runtime_get_sync(&(pdev)->dev);
 	ufshcd_remove(hba);
+<<<<<<< HEAD
 	ufshcd_dealloc_host(hba);
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
 static const struct of_device_id ufs_of_match[] = {
 	{ .compatible = "jedec,ufs-1.1"},
+<<<<<<< HEAD
 	{ .compatible = "qcom,ufshc", .data = (void *)&ufs_hba_qcom_vops, },
+=======
+>>>>>>> v3.18
 	{},
 };
 

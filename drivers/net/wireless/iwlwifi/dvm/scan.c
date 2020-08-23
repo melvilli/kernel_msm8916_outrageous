@@ -2,7 +2,11 @@
  *
  * GPL LICENSE SUMMARY
  *
+<<<<<<< HEAD
  * Copyright(c) 2008 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of version 2 of the GNU General Public License as
@@ -59,7 +63,11 @@ static int iwl_send_scan_abort(struct iwl_priv *priv)
 	int ret;
 	struct iwl_host_cmd cmd = {
 		.id = REPLY_SCAN_ABORT_CMD,
+<<<<<<< HEAD
 		.flags = CMD_SYNC | CMD_WANT_SKB,
+=======
+		.flags = CMD_WANT_SKB,
+>>>>>>> v3.18
 	};
 	__le32 *status;
 
@@ -100,9 +108,12 @@ static void iwl_complete_scan(struct iwl_priv *priv, bool aborted)
 		ieee80211_scan_completed(priv->hw, aborted);
 	}
 
+<<<<<<< HEAD
 	if (priv->scan_type == IWL_SCAN_ROC)
 		iwl_scan_roc_expired(priv);
 
+=======
+>>>>>>> v3.18
 	priv->scan_type = IWL_SCAN_NORMAL;
 	priv->scan_vif = NULL;
 	priv->scan_request = NULL;
@@ -130,9 +141,12 @@ static void iwl_process_scan_complete(struct iwl_priv *priv)
 		goto out_settings;
 	}
 
+<<<<<<< HEAD
 	if (priv->scan_type == IWL_SCAN_ROC)
 		iwl_scan_roc_expired(priv);
 
+=======
+>>>>>>> v3.18
 	if (priv->scan_type != IWL_SCAN_NORMAL && !aborted) {
 		int err;
 
@@ -284,12 +298,15 @@ static int iwl_rx_scan_start_notif(struct iwl_priv *priv,
 		       le32_to_cpu(notif->tsf_low),
 		       notif->status, notif->beacon_timer);
 
+<<<<<<< HEAD
 	if (priv->scan_type == IWL_SCAN_ROC &&
 	    !priv->hw_roc_start_notified) {
 		ieee80211_ready_on_channel(priv->hw);
 		priv->hw_roc_start_notified = true;
 	}
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -556,7 +573,11 @@ static int iwl_get_channels_for_scan(struct iwl_priv *priv,
 		channel = chan->hw_value;
 		scan_ch->channel = cpu_to_le16(channel);
 
+<<<<<<< HEAD
 		if (!is_active || (chan->flags & IEEE80211_CHAN_PASSIVE_SCAN))
+=======
+		if (!is_active || (chan->flags & IEEE80211_CHAN_NO_IR))
+>>>>>>> v3.18
 			scan_ch->type = SCAN_CHANNEL_TYPE_PASSIVE;
 		else
 			scan_ch->type = SCAN_CHANNEL_TYPE_ACTIVE;
@@ -651,7 +672,10 @@ static int iwlagn_request_scan(struct iwl_priv *priv, struct ieee80211_vif *vif)
 	struct iwl_host_cmd cmd = {
 		.id = REPLY_SCAN_CMD,
 		.len = { sizeof(struct iwl_scan_cmd), },
+<<<<<<< HEAD
 		.flags = CMD_SYNC,
+=======
+>>>>>>> v3.18
 	};
 	struct iwl_scan_cmd *scan;
 	struct iwl_rxon_context *ctx = &priv->contexts[IWL_RXON_CTX_BSS];
@@ -697,8 +721,12 @@ static int iwlagn_request_scan(struct iwl_priv *priv, struct ieee80211_vif *vif)
 	scan->quiet_plcp_th = IWL_PLCP_QUIET_THRESH;
 	scan->quiet_time = IWL_ACTIVE_QUIET_TIME;
 
+<<<<<<< HEAD
 	if (priv->scan_type != IWL_SCAN_ROC &&
 	    iwl_is_any_associated(priv)) {
+=======
+	if (iwl_is_any_associated(priv)) {
+>>>>>>> v3.18
 		u16 interval = 0;
 		u32 extra;
 		u32 suspend_time = 100;
@@ -706,9 +734,12 @@ static int iwlagn_request_scan(struct iwl_priv *priv, struct ieee80211_vif *vif)
 
 		IWL_DEBUG_INFO(priv, "Scanning while associated...\n");
 		switch (priv->scan_type) {
+<<<<<<< HEAD
 		case IWL_SCAN_ROC:
 			WARN_ON(1);
 			break;
+=======
+>>>>>>> v3.18
 		case IWL_SCAN_RADIO_RESET:
 			interval = 0;
 			break;
@@ -728,11 +759,14 @@ static int iwlagn_request_scan(struct iwl_priv *priv, struct ieee80211_vif *vif)
 		scan->suspend_time = cpu_to_le32(scan_suspend_time);
 		IWL_DEBUG_SCAN(priv, "suspend_time 0x%X beacon interval %d\n",
 			       scan_suspend_time, interval);
+<<<<<<< HEAD
 	} else if (priv->scan_type == IWL_SCAN_ROC) {
 		scan->suspend_time = 0;
 		scan->max_out_time = 0;
 		scan->quiet_time = 0;
 		scan->quiet_plcp_th = 0;
+=======
+>>>>>>> v3.18
 	}
 
 	switch (priv->scan_type) {
@@ -774,9 +808,12 @@ static int iwlagn_request_scan(struct iwl_priv *priv, struct ieee80211_vif *vif)
 		} else
 			IWL_DEBUG_SCAN(priv, "Start passive scan.\n");
 		break;
+<<<<<<< HEAD
 	case IWL_SCAN_ROC:
 		IWL_DEBUG_SCAN(priv, "Start ROC scan.\n");
 		break;
+=======
+>>>>>>> v3.18
 	}
 
 	scan->tx_cmd.tx_flags = TX_CMD_FLG_SEQ_CTL_MSK;
@@ -801,8 +838,13 @@ static int iwlagn_request_scan(struct iwl_priv *priv, struct ieee80211_vif *vif)
 		 * Internal scans are passive, so we can indiscriminately set
 		 * the BT ignore flag on 2.4 GHz since it applies to TX only.
 		 */
+<<<<<<< HEAD
 		if (priv->cfg->bt_params &&
 		    priv->cfg->bt_params->advanced_bt_coexist)
+=======
+		if (priv->lib->bt_params &&
+		    priv->lib->bt_params->advanced_bt_coexist)
+>>>>>>> v3.18
 			scan->tx_cmd.tx_flags |= TX_CMD_FLG_IGNORE_BT;
 		break;
 	case IEEE80211_BAND_5GHZ:
@@ -844,8 +886,13 @@ static int iwlagn_request_scan(struct iwl_priv *priv, struct ieee80211_vif *vif)
 	band = priv->scan_band;
 
 	if (band == IEEE80211_BAND_2GHZ &&
+<<<<<<< HEAD
 	    priv->cfg->bt_params &&
 	    priv->cfg->bt_params->advanced_bt_coexist) {
+=======
+	    priv->lib->bt_params &&
+	    priv->lib->bt_params->advanced_bt_coexist) {
+>>>>>>> v3.18
 		/* transmit 2.4 GHz probes only on first antenna */
 		scan_tx_antennas = first_antenna(scan_tx_antennas);
 	}
@@ -873,8 +920,13 @@ static int iwlagn_request_scan(struct iwl_priv *priv, struct ieee80211_vif *vif)
 
 		rx_ant = first_antenna(active_chains);
 	}
+<<<<<<< HEAD
 	if (priv->cfg->bt_params &&
 	    priv->cfg->bt_params->advanced_bt_coexist &&
+=======
+	if (priv->lib->bt_params &&
+	    priv->lib->bt_params->advanced_bt_coexist &&
+>>>>>>> v3.18
 	    priv->bt_full_concurrent) {
 		/* operated as 1x1 in full concurrency mode */
 		rx_ant = first_antenna(rx_ant);
@@ -898,7 +950,10 @@ static int iwlagn_request_scan(struct iwl_priv *priv, struct ieee80211_vif *vif)
 					scan_cmd_size - sizeof(*scan));
 		break;
 	case IWL_SCAN_RADIO_RESET:
+<<<<<<< HEAD
 	case IWL_SCAN_ROC:
+=======
+>>>>>>> v3.18
 		/* use bcast addr, will not be transmitted but must be valid */
 		cmd_len = iwl_fill_probe_req(
 					(struct ieee80211_mgmt *)scan->data,
@@ -926,6 +981,7 @@ static int iwlagn_request_scan(struct iwl_priv *priv, struct ieee80211_vif *vif)
 				is_active, n_probes,
 				(void *)&scan->data[cmd_len]);
 		break;
+<<<<<<< HEAD
 	case IWL_SCAN_ROC: {
 		struct iwl_scan_channel *scan_ch;
 		int n_chan, i;
@@ -966,6 +1022,8 @@ static int iwlagn_request_scan(struct iwl_priv *priv, struct ieee80211_vif *vif)
 		}
 
 		break;
+=======
+>>>>>>> v3.18
 	}
 
 	if (scan->channel_count == 0) {
@@ -1035,7 +1093,10 @@ int __must_check iwl_scan_initiate(struct iwl_priv *priv,
 
 	IWL_DEBUG_SCAN(priv, "Starting %sscan...\n",
 			scan_type == IWL_SCAN_NORMAL ? "" :
+<<<<<<< HEAD
 			scan_type == IWL_SCAN_ROC ? "remain-on-channel " :
+=======
+>>>>>>> v3.18
 			"internal short ");
 
 	set_bit(STATUS_SCANNING, &priv->status);
@@ -1149,6 +1210,7 @@ void iwl_cancel_scan_deferred_work(struct iwl_priv *priv)
 		mutex_unlock(&priv->mutex);
 	}
 }
+<<<<<<< HEAD
 
 void iwl_scan_roc_expired(struct iwl_priv *priv)
 {
@@ -1186,3 +1248,5 @@ void iwl_scan_offchannel_skb_status(struct iwl_priv *priv)
 		iwl_scan_roc_expired(priv);
 	}
 }
+=======
+>>>>>>> v3.18

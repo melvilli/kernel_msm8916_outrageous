@@ -44,6 +44,7 @@
 #include <sound/compress_offload.h>
 #include <sound/compress_driver.h>
 
+<<<<<<< HEAD
 #define U32_MAX ((u32)~0U)
 
 /* struct snd_compr_codec_caps overflows the ioctl bit size for some
@@ -53,6 +54,8 @@
 #define COMPR_CODEC_CAPS_OVERFLOW
 #endif
 
+=======
+>>>>>>> v3.18
 /* TODO:
  * - add substream support for multiple devices in case of
  *	SND_DYNAMIC_MINORS is not used
@@ -154,8 +157,12 @@ static int snd_compr_free(struct inode *inode, struct file *f)
 	case SNDRV_PCM_STATE_RUNNING:
 	case SNDRV_PCM_STATE_DRAINING:
 	case SNDRV_PCM_STATE_PAUSED:
+<<<<<<< HEAD
 		data->stream.ops->trigger(&data->stream,
 					SNDRV_PCM_TRIGGER_STOP);
+=======
+		data->stream.ops->trigger(&data->stream, SNDRV_PCM_TRIGGER_STOP);
+>>>>>>> v3.18
 		break;
 	default:
 		break;
@@ -171,12 +178,18 @@ static int snd_compr_free(struct inode *inode, struct file *f)
 static int snd_compr_update_tstamp(struct snd_compr_stream *stream,
 		struct snd_compr_tstamp *tstamp)
 {
+<<<<<<< HEAD
 	int err = 0;
 	if (!stream->ops->pointer)
 		return -ENOTSUPP;
 	err = stream->ops->pointer(stream, tstamp);
 	if (err)
 		return err;
+=======
+	if (!stream->ops->pointer)
+		return -ENOTSUPP;
+	stream->ops->pointer(stream, tstamp);
+>>>>>>> v3.18
 	pr_debug("dsp consumed till %d total %d bytes\n",
 		tstamp->byte_offset, tstamp->copied_total);
 	if (stream->direction == SND_COMPRESS_PLAYBACK)
@@ -257,8 +270,13 @@ static int snd_compr_write_data(struct snd_compr_stream *stream,
 		      (app_pointer * runtime->buffer_size);
 
 	dstn = runtime->buffer + app_pointer;
+<<<<<<< HEAD
 	pr_debug("copying %zu at %lld\n",
 			count, app_pointer);
+=======
+	pr_debug("copying %ld at %lld\n",
+			(unsigned long)count, app_pointer);
+>>>>>>> v3.18
 	if (count < runtime->buffer_size - app_pointer) {
 		if (copy_from_user(dstn, buf, count))
 			return -EFAULT;
@@ -296,7 +314,11 @@ static ssize_t snd_compr_write(struct file *f, const char __user *buf,
 	}
 
 	avail = snd_compr_get_avail(stream);
+<<<<<<< HEAD
 	pr_debug("avail returned %zu\n", avail);
+=======
+	pr_debug("avail returned %ld\n", (unsigned long)avail);
+>>>>>>> v3.18
 	/* calculate how much we can write to buffer */
 	if (avail > count)
 		avail = count;
@@ -351,7 +373,11 @@ static ssize_t snd_compr_read(struct file *f, char __user *buf,
 	}
 
 	avail = snd_compr_get_avail(stream);
+<<<<<<< HEAD
 	pr_debug("avail returned %zu\n", avail);
+=======
+	pr_debug("avail returned %ld\n", (unsigned long)avail);
+>>>>>>> v3.18
 	/* calculate how much we can read from buffer */
 	if (avail > count)
 		avail = count;
@@ -397,15 +423,23 @@ static unsigned int snd_compr_poll(struct file *f, poll_table *wait)
 		return -EFAULT;
 
 	mutex_lock(&stream->device->lock);
+<<<<<<< HEAD
 	if (stream->runtime->state == SNDRV_PCM_STATE_PAUSED ||
 			stream->runtime->state == SNDRV_PCM_STATE_OPEN) {
+=======
+	if (stream->runtime->state == SNDRV_PCM_STATE_OPEN) {
+>>>>>>> v3.18
 		retval = -EBADFD;
 		goto out;
 	}
 	poll_wait(f, &stream->runtime->sleep, wait);
 
 	avail = snd_compr_get_avail(stream);
+<<<<<<< HEAD
 	pr_debug("avail is %zu\n", avail);
+=======
+	pr_debug("avail is %ld\n", (unsigned long)avail);
+>>>>>>> v3.18
 	/* check if we have at least one fragment to fill */
 	switch (stream->runtime->state) {
 	case SNDRV_PCM_STATE_DRAINING:
@@ -452,7 +486,10 @@ out:
 	return retval;
 }
 
+<<<<<<< HEAD
 #ifndef COMPR_CODEC_CAPS_OVERFLOW
+=======
+>>>>>>> v3.18
 static int
 snd_compr_get_codec_caps(struct snd_compr_stream *stream, unsigned long arg)
 {
@@ -476,7 +513,10 @@ out:
 	kfree(caps);
 	return retval;
 }
+<<<<<<< HEAD
 #endif /* !COMPR_CODEC_CAPS_OVERFLOW */
+=======
+>>>>>>> v3.18
 
 /* revisit this with snd_pcm_preallocate_xxx */
 static int snd_compr_allocate_buffer(struct snd_compr_stream *stream,
@@ -507,7 +547,11 @@ static int snd_compress_check_input(struct snd_compr_params *params)
 {
 	/* first let's check the buffer parameter's */
 	if (params->buffer.fragment_size == 0 ||
+<<<<<<< HEAD
 			params->buffer.fragments > U32_MAX / params->buffer.fragment_size)
+=======
+	    params->buffer.fragments > INT_MAX / params->buffer.fragment_size)
+>>>>>>> v3.18
 		return -EINVAL;
 
 	/* now codec parameters */
@@ -517,9 +561,12 @@ static int snd_compress_check_input(struct snd_compr_params *params)
 	if (params->codec.ch_in == 0 || params->codec.ch_out == 0)
 		return -EINVAL;
 
+<<<<<<< HEAD
 	if (!(params->codec.sample_rate & SNDRV_PCM_RATE_8000_192000))
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -640,10 +687,16 @@ snd_compr_set_metadata(struct snd_compr_stream *stream, unsigned long arg)
 static inline int
 snd_compr_tstamp(struct snd_compr_stream *stream, unsigned long arg)
 {
+<<<<<<< HEAD
 	struct snd_compr_tstamp tstamp;
 	int ret;
 
 	memset(&tstamp, 0, sizeof(tstamp));
+=======
+	struct snd_compr_tstamp tstamp = {0};
+	int ret;
+
+>>>>>>> v3.18
 	ret = snd_compr_update_tstamp(stream, &tstamp);
 	if (ret == 0)
 		ret = copy_to_user((struct snd_compr_tstamp __user *)arg,
@@ -696,22 +749,65 @@ static int snd_compr_stop(struct snd_compr_stream *stream)
 		return -EPERM;
 	retval = stream->ops->trigger(stream, SNDRV_PCM_TRIGGER_STOP);
 	if (!retval) {
+<<<<<<< HEAD
 		stream->runtime->state = SNDRV_PCM_STATE_SETUP;
 		wake_up(&stream->runtime->sleep);
+=======
+		snd_compr_drain_notify(stream);
+>>>>>>> v3.18
 		stream->runtime->total_bytes_available = 0;
 		stream->runtime->total_bytes_transferred = 0;
 	}
 	return retval;
 }
 
+<<<<<<< HEAD
 /* this fn is called without lock being held and we change stream states here
  * so while using the stream state auquire the lock but relase before invoking
  * DSP as the call will possibly take a while
  */
+=======
+static int snd_compress_wait_for_drain(struct snd_compr_stream *stream)
+{
+	int ret;
+
+	/*
+	 * We are called with lock held. So drop the lock while we wait for
+	 * drain complete notfication from the driver
+	 *
+	 * It is expected that driver will notify the drain completion and then
+	 * stream will be moved to SETUP state, even if draining resulted in an
+	 * error. We can trigger next track after this.
+	 */
+	stream->runtime->state = SNDRV_PCM_STATE_DRAINING;
+	mutex_unlock(&stream->device->lock);
+
+	/* we wait for drain to complete here, drain can return when
+	 * interruption occurred, wait returned error or success.
+	 * For the first two cases we don't do anything different here and
+	 * return after waking up
+	 */
+
+	ret = wait_event_interruptible(stream->runtime->sleep,
+			(stream->runtime->state != SNDRV_PCM_STATE_DRAINING));
+	if (ret == -ERESTARTSYS)
+		pr_debug("wait aborted by a signal");
+	else if (ret)
+		pr_debug("wait for drain failed with %d\n", ret);
+
+
+	wake_up(&stream->runtime->sleep);
+	mutex_lock(&stream->device->lock);
+
+	return ret;
+}
+
+>>>>>>> v3.18
 static int snd_compr_drain(struct snd_compr_stream *stream)
 {
 	int retval;
 
+<<<<<<< HEAD
 	mutex_lock(&stream->device->lock);
 	if (stream->runtime->state == SNDRV_PCM_STATE_PREPARED ||
 			stream->runtime->state == SNDRV_PCM_STATE_SETUP) {
@@ -728,6 +824,20 @@ static int snd_compr_drain(struct snd_compr_stream *stream)
 ret:
 	mutex_unlock(&stream->device->lock);
 	return retval;
+=======
+	if (stream->runtime->state == SNDRV_PCM_STATE_PREPARED ||
+			stream->runtime->state == SNDRV_PCM_STATE_SETUP)
+		return -EPERM;
+
+	retval = stream->ops->trigger(stream, SND_COMPR_TRIGGER_DRAIN);
+	if (retval) {
+		pr_debug("SND_COMPR_TRIGGER_DRAIN failed %d\n", retval);
+		wake_up(&stream->runtime->sleep);
+		return retval;
+	}
+
+	return snd_compress_wait_for_drain(stream);
+>>>>>>> v3.18
 }
 
 static int snd_compr_next_track(struct snd_compr_stream *stream)
@@ -755,6 +865,7 @@ static int snd_compr_next_track(struct snd_compr_stream *stream)
 static int snd_compr_partial_drain(struct snd_compr_stream *stream)
 {
 	int retval;
+<<<<<<< HEAD
 
 	mutex_lock(&stream->device->lock);
 	if (stream->runtime->state == SNDRV_PCM_STATE_PREPARED ||
@@ -763,11 +874,17 @@ static int snd_compr_partial_drain(struct snd_compr_stream *stream)
 		return -EPERM;
 	}
 	mutex_unlock(&stream->device->lock);
+=======
+	if (stream->runtime->state == SNDRV_PCM_STATE_PREPARED ||
+			stream->runtime->state == SNDRV_PCM_STATE_SETUP)
+		return -EPERM;
+>>>>>>> v3.18
 	/* stream can be drained only when next track has been signalled */
 	if (stream->next_track == false)
 		return -EPERM;
 
 	retval = stream->ops->trigger(stream, SND_COMPR_TRIGGER_PARTIAL_DRAIN);
+<<<<<<< HEAD
 
 	stream->next_track = false;
 	return retval;
@@ -839,6 +956,16 @@ static int snd_compress_simple_ioctls(struct file *file,
 	}
 
 	return retval;
+=======
+	if (retval) {
+		pr_debug("Partial drain returned failure\n");
+		wake_up(&stream->runtime->sleep);
+		return retval;
+	}
+
+	stream->next_track = false;
+	return snd_compress_wait_for_drain(stream);
+>>>>>>> v3.18
 }
 
 static long snd_compr_ioctl(struct file *f, unsigned int cmd, unsigned long arg)
@@ -852,6 +979,7 @@ static long snd_compr_ioctl(struct file *f, unsigned int cmd, unsigned long arg)
 	stream = &data->stream;
 	if (snd_BUG_ON(!stream))
 		return -EFAULT;
+<<<<<<< HEAD
 
 	mutex_lock(&stream->device->lock);
 	switch (_IOC_NR(cmd)) {
@@ -887,10 +1015,61 @@ static long snd_compr_ioctl(struct file *f, unsigned int cmd, unsigned long arg)
 		retval = snd_compr_stop(stream);
 		break;
 
+=======
+	mutex_lock(&stream->device->lock);
+	switch (_IOC_NR(cmd)) {
+	case _IOC_NR(SNDRV_COMPRESS_IOCTL_VERSION):
+		retval = put_user(SNDRV_COMPRESS_VERSION,
+				(int __user *)arg) ? -EFAULT : 0;
+		break;
+	case _IOC_NR(SNDRV_COMPRESS_GET_CAPS):
+		retval = snd_compr_get_caps(stream, arg);
+		break;
+	case _IOC_NR(SNDRV_COMPRESS_GET_CODEC_CAPS):
+		retval = snd_compr_get_codec_caps(stream, arg);
+		break;
+	case _IOC_NR(SNDRV_COMPRESS_SET_PARAMS):
+		retval = snd_compr_set_params(stream, arg);
+		break;
+	case _IOC_NR(SNDRV_COMPRESS_GET_PARAMS):
+		retval = snd_compr_get_params(stream, arg);
+		break;
+	case _IOC_NR(SNDRV_COMPRESS_SET_METADATA):
+		retval = snd_compr_set_metadata(stream, arg);
+		break;
+	case _IOC_NR(SNDRV_COMPRESS_GET_METADATA):
+		retval = snd_compr_get_metadata(stream, arg);
+		break;
+	case _IOC_NR(SNDRV_COMPRESS_TSTAMP):
+		retval = snd_compr_tstamp(stream, arg);
+		break;
+	case _IOC_NR(SNDRV_COMPRESS_AVAIL):
+		retval = snd_compr_ioctl_avail(stream, arg);
+		break;
+	case _IOC_NR(SNDRV_COMPRESS_PAUSE):
+		retval = snd_compr_pause(stream);
+		break;
+	case _IOC_NR(SNDRV_COMPRESS_RESUME):
+		retval = snd_compr_resume(stream);
+		break;
+	case _IOC_NR(SNDRV_COMPRESS_START):
+		retval = snd_compr_start(stream);
+		break;
+	case _IOC_NR(SNDRV_COMPRESS_STOP):
+		retval = snd_compr_stop(stream);
+		break;
+	case _IOC_NR(SNDRV_COMPRESS_DRAIN):
+		retval = snd_compr_drain(stream);
+		break;
+	case _IOC_NR(SNDRV_COMPRESS_PARTIAL_DRAIN):
+		retval = snd_compr_partial_drain(stream);
+		break;
+>>>>>>> v3.18
 	case _IOC_NR(SNDRV_COMPRESS_NEXT_TRACK):
 		retval = snd_compr_next_track(stream);
 		break;
 
+<<<<<<< HEAD
 	case _IOC_NR(SNDRV_COMPRESS_SET_NEXT_TRACK_PARAM):
 		retval = snd_compr_set_next_track_param(stream, arg);
 		break;
@@ -901,11 +1080,15 @@ static long snd_compr_ioctl(struct file *f, unsigned int cmd, unsigned long arg)
 
 	}
 
+=======
+	}
+>>>>>>> v3.18
 	mutex_unlock(&stream->device->lock);
 	return retval;
 }
 
 static const struct file_operations snd_compr_file_ops = {
+<<<<<<< HEAD
 		.owner =          THIS_MODULE,
 		.open =           snd_compr_open,
 		.release =        snd_compr_free,
@@ -915,6 +1098,16 @@ static const struct file_operations snd_compr_file_ops = {
 		.compat_ioctl   = snd_compr_ioctl,
 		.mmap =           snd_compr_mmap,
 		.poll =           snd_compr_poll,
+=======
+		.owner =	THIS_MODULE,
+		.open =		snd_compr_open,
+		.release =	snd_compr_free,
+		.write =	snd_compr_write,
+		.read =		snd_compr_read,
+		.unlocked_ioctl = snd_compr_ioctl,
+		.mmap =		snd_compr_mmap,
+		.poll =		snd_compr_poll,
+>>>>>>> v3.18
 };
 
 static int snd_compress_dev_register(struct snd_device *device)
@@ -974,6 +1167,7 @@ int snd_compress_new(struct snd_card *card, int device,
 }
 EXPORT_SYMBOL_GPL(snd_compress_new);
 
+<<<<<<< HEAD
 /*
  * snd_compress_free: free compress device
  * @card: sound card pointer
@@ -985,6 +1179,8 @@ void snd_compress_free(struct snd_card *card, struct snd_compr *compr)
 }
 EXPORT_SYMBOL_GPL(snd_compress_free);
 
+=======
+>>>>>>> v3.18
 static int snd_compress_add_device(struct snd_compr *device)
 {
 	int ret;

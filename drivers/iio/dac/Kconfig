@@ -1,6 +1,11 @@
 #
 # DAC drivers
 #
+<<<<<<< HEAD
+=======
+# When adding new entries keep the list in alphabetical order
+
+>>>>>>> v3.18
 menu "Digital to analog converters"
 
 config AD5064
@@ -15,7 +20,11 @@ config AD5064
 	  module will be called ad5064.
 
 config AD5360
+<<<<<<< HEAD
 	tristate "Analog Devices Analog Devices AD5360/61/62/63/70/71/73 DAC driver"
+=======
+	tristate "Analog Devices AD5360/61/62/63/70/71/73 DAC driver"
+>>>>>>> v3.18
 	depends on SPI
 	help
 	  Say yes here to build support for Analog Devices AD5360, AD5361,
@@ -48,6 +57,7 @@ config AD5421
 	  To compile this driver as module choose M here: the module will be called
 	  ad5421.
 
+<<<<<<< HEAD
 config AD5624R_SPI
 	tristate "Analog Devices AD5624/44/64R DAC spi driver"
 	depends on SPI
@@ -55,6 +65,8 @@ config AD5624R_SPI
 	  Say yes here to build support for Analog Devices AD5624R, AD5644R and
 	  AD5664R converters (DAC). This driver uses the common SPI interface.
 
+=======
+>>>>>>> v3.18
 config AD5446
 	tristate "Analog Devices AD5446 and similar single channel DACs driver"
 	depends on (SPI_MASTER && I2C!=m) || I2C
@@ -62,13 +74,21 @@ config AD5446
 	  Say yes here to build support for Analog Devices AD5300, AD5301, AD5310,
 	  AD5311, AD5320, AD5321, AD5444, AD5446, AD5450, AD5451, AD5452, AD5453,
 	  AD5512A, AD5541A, AD5542A, AD5543, AD5553, AD5601, AD5602, AD5611, AD5612,
+<<<<<<< HEAD
 	  AD5620, AD5621, AD5622, AD5640, AD5660, AD5662 DACs.
+=======
+	  AD5620, AD5621, AD5622, AD5640, AD5641, AD5660, AD5662 DACs.
+>>>>>>> v3.18
 
 	  To compile this driver as a module, choose M here: the
 	  module will be called ad5446.
 
 config AD5449
+<<<<<<< HEAD
 	tristate "Analog Device AD5449 and similar DACs driver"
+=======
+	tristate "Analog Devices AD5449 and similar DACs driver"
+>>>>>>> v3.18
 	depends on SPI_MASTER
 	help
 	  Say yes here to build support for Analog Devices AD5415, AD5426, AD5429,
@@ -87,6 +107,27 @@ config AD5504
 	  To compile this driver as a module, choose M here: the
 	  module will be called ad5504.
 
+<<<<<<< HEAD
+=======
+config AD5624R_SPI
+	tristate "Analog Devices AD5624/44/64R DAC spi driver"
+	depends on SPI
+	help
+	  Say yes here to build support for Analog Devices AD5624R, AD5644R and
+	  AD5664R converters (DAC). This driver uses the common SPI interface.
+
+config AD5686
+	tristate "Analog Devices AD5686R/AD5685R/AD5684R DAC SPI driver"
+	depends on SPI
+	help
+	  Say yes here to build support for Analog Devices AD5686R, AD5685R,
+	  AD5684R, AD5791 Voltage Output Digital to
+	  Analog Converter.
+
+	  To compile this driver as a module, choose M here: the
+	  module will be called ad5686.
+
+>>>>>>> v3.18
 config AD5755
 	tristate "Analog Devices AD5755/AD5755-1/AD5757/AD5735/AD5737 DAC driver"
 	depends on SPI_MASTER
@@ -119,6 +160,7 @@ config AD5791
 	  To compile this driver as a module, choose M here: the
 	  module will be called ad5791.
 
+<<<<<<< HEAD
 config AD5686
 	tristate "Analog Devices AD5686R/AD5685R/AD5684R DAC SPI driver"
 	depends on SPI
@@ -129,6 +171,17 @@ config AD5686
 
 	  To compile this driver as a module, choose M here: the
 	  module will be called ad5686.
+=======
+config AD7303
+	tristate "Analog Devices AD7303 DAC driver"
+	depends on SPI
+	help
+	  Say yes here to build support for Analog Devices AD7303 Digital to Analog
+	  Converters (DAC).
+
+	  To compile this driver as module choose M here: the module will be called
+	  ad7303.
+>>>>>>> v3.18
 
 config MAX517
 	tristate "Maxim MAX517/518/519 DAC driver"
@@ -140,6 +193,17 @@ config MAX517
 	  This driver can also be built as a module.  If so, the module
 	  will be called max517.
 
+<<<<<<< HEAD
+=======
+config MAX5821
+	tristate "Maxim MAX5821 DAC driver"
+	depends on I2C
+	depends on OF
+	help
+	  Say yes here to build support for Maxim MAX5821
+	  10 bits DAC.
+
+>>>>>>> v3.18
 config MCP4725
 	tristate "MCP4725 DAC driver"
 	depends on I2C
@@ -151,4 +215,17 @@ config MCP4725
 	  To compile this driver as a module, choose M here: the module
 	  will be called mcp4725.
 
+<<<<<<< HEAD
+=======
+config MCP4922
+	tristate "MCP4902, MCP4912, MCP4922 DAC driver"
+	depends on SPI
+	help
+	  Say yes here to build the driver for the Microchip MCP4902
+	  MCP4912, and MCP4922 DAC devices.
+
+	  To compile this driver as a module, choose M here: the module
+	  will be called mcp4922.
+
+>>>>>>> v3.18
 endmenu

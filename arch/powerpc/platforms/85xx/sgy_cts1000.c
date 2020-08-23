@@ -14,8 +14,13 @@
 #include <linux/platform_device.h>
 #include <linux/device.h>
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/of_gpio.h>
+=======
+#include <linux/of_gpio.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 #include <linux/workqueue.h>
 #include <linux/reboot.h>
 #include <linux/interrupt.h>
@@ -24,7 +29,11 @@
 
 static struct device_node *halt_node;
 
+<<<<<<< HEAD
 static struct of_device_id child_match[] = {
+=======
+static const struct of_device_id child_match[] = {
+>>>>>>> v3.18
 	{
 		.compatible = "sgy,gpio-halt",
 	},
@@ -147,7 +156,11 @@ static int gpio_halt_remove(struct platform_device *pdev)
 	return 0;
 }
 
+<<<<<<< HEAD
 static struct of_device_id gpio_halt_match[] = {
+=======
+static const struct of_device_id gpio_halt_match[] = {
+>>>>>>> v3.18
 	/* We match on the gpio bus itself and scan the children since they
 	 * wont be matched against us. We know the bus wont match until it
 	 * has been registered too. */

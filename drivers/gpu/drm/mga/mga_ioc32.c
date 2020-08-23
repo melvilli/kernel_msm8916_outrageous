@@ -34,6 +34,10 @@
 
 #include <drm/drmP.h>
 #include <drm/mga_drm.h>
+<<<<<<< HEAD
+=======
+#include "mga_drv.h"
+>>>>>>> v3.18
 
 typedef struct drm32_mga_init {
 	int func;
@@ -213,7 +217,11 @@ long mga_compat_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 	if (nr < DRM_COMMAND_BASE)
 		return drm_compat_ioctl(filp, cmd, arg);
 
+<<<<<<< HEAD
 	if (nr < DRM_COMMAND_BASE + DRM_ARRAY_SIZE(mga_compat_ioctls))
+=======
+	if (nr < DRM_COMMAND_BASE + ARRAY_SIZE(mga_compat_ioctls))
+>>>>>>> v3.18
 		fn = mga_compat_ioctls[nr - DRM_COMMAND_BASE];
 
 	if (fn != NULL)

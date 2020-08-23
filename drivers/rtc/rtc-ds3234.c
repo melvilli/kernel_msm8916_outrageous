@@ -73,7 +73,11 @@ static int ds3234_read_time(struct device *dev, struct rtc_time *dt)
 	dt->tm_wday	= bcd2bin(buf[3]) - 1; /* 0 = Sun */
 	dt->tm_mday	= bcd2bin(buf[4]);
 	dt->tm_mon	= bcd2bin(buf[5] & 0x1f) - 1; /* 0 = Jan */
+<<<<<<< HEAD
 	dt->tm_year 	= bcd2bin(buf[6] & 0xff) + 100; /* Assume 20YY */
+=======
+	dt->tm_year	= bcd2bin(buf[6] & 0xff) + 100; /* Assume 20YY */
+>>>>>>> v3.18
 
 	return rtc_valid_tm(dt);
 }
@@ -156,18 +160,24 @@ static int ds3234_probe(struct spi_device *spi)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int ds3234_remove(struct spi_device *spi)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 static struct spi_driver ds3234_driver = {
 	.driver = {
 		.name	 = "ds3234",
 		.owner	= THIS_MODULE,
 	},
 	.probe	 = ds3234_probe,
+<<<<<<< HEAD
 	.remove = ds3234_remove,
+=======
+>>>>>>> v3.18
 };
 
 module_spi_driver(ds3234_driver);

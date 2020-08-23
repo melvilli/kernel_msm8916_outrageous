@@ -19,6 +19,10 @@
 #include <linux/slab.h>
 #include <linux/spinlock.h>
 #include <linux/of.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+>>>>>>> v3.18
 
 #include <asm/io.h>
 #include <asm/irq.h>
@@ -27,8 +31,11 @@
 #include <asm/ehv_pic.h>
 #include <asm/fsl_hcalls.h>
 
+<<<<<<< HEAD
 #include "../../../kernel/irq/settings.h"
 
+=======
+>>>>>>> v3.18
 static struct ehv_pic *global_ehv_pic;
 static DEFINE_SPINLOCK(ehv_pic_lock);
 
@@ -112,17 +119,24 @@ static unsigned int ehv_pic_type_to_vecpri(unsigned int type)
 int ehv_pic_set_irq_type(struct irq_data *d, unsigned int flow_type)
 {
 	unsigned int src = virq_to_hw(d->irq);
+<<<<<<< HEAD
 	struct irq_desc *desc = irq_to_desc(d->irq);
+=======
+>>>>>>> v3.18
 	unsigned int vecpri, vold, vnew, prio, cpu_dest;
 	unsigned long flags;
 
 	if (flow_type == IRQ_TYPE_NONE)
 		flow_type = IRQ_TYPE_LEVEL_LOW;
 
+<<<<<<< HEAD
 	irq_settings_clr_level(desc);
 	irq_settings_set_trigger_mask(desc, flow_type);
 	if (flow_type & (IRQ_TYPE_LEVEL_HIGH | IRQ_TYPE_LEVEL_LOW))
 		irq_settings_set_level(desc);
+=======
+	irqd_set_trigger_type(d, flow_type);
+>>>>>>> v3.18
 
 	vecpri = ehv_pic_type_to_vecpri(flow_type);
 
@@ -143,7 +157,11 @@ int ehv_pic_set_irq_type(struct irq_data *d, unsigned int flow_type)
 	ev_int_set_config(src, vecpri, prio, cpu_dest);
 
 	spin_unlock_irqrestore(&ehv_pic_lock, flags);
+<<<<<<< HEAD
 	return 0;
+=======
+	return IRQ_SET_MASK_OK_NOCOPY;
+>>>>>>> v3.18
 }
 
 static struct irq_chip ehv_pic_irq_chip = {

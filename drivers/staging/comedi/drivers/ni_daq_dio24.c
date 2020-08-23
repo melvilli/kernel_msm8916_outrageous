@@ -3,8 +3,13 @@
     Driver for National Instruments PCMCIA DAQ-Card DIO-24
     Copyright (C) 2002 Daniel Vecino Castel <dvecino@able.es>
 
+<<<<<<< HEAD
     PCMCIA crap at end of file is adapted from dummy_cs.c 1.31 2001/08/24 12:13:13
     from the pcmcia package.
+=======
+    PCMCIA crap at end of file is adapted from dummy_cs.c 1.31
+    2001/08/24 12:13:13 from the pcmcia package.
+>>>>>>> v3.18
     The initial developer of the pcmcia dummy_cs.c code is David A. Hinds
     <dahinds@users.sourceforge.net>.  Portions created by David A. Hinds
     are Copyright (C) 1999 David A. Hinds.  All Rights Reserved.
@@ -18,12 +23,15 @@
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ************************************************************************
+=======
+>>>>>>> v3.18
 */
 /*
 Driver: ni_daq_dio24
@@ -37,6 +45,10 @@ This is just a wrapper around the 8255.o driver to properly handle
 the PCMCIA interface.
 */
 
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 #include "../comedidev.h"
 
 #include <pcmcia/cistpl.h>
@@ -64,24 +76,35 @@ static int dio24_auto_attach(struct comedi_device *dev,
 
 	/* 8255 dio */
 	s = &dev->subdevices[0];
+<<<<<<< HEAD
 	ret = subdev_8255_init(dev, s, NULL, dev->iobase);
+=======
+	ret = subdev_8255_init(dev, s, NULL, 0x00);
+>>>>>>> v3.18
 	if (ret)
 		return ret;
 
 	return 0;
 }
 
+<<<<<<< HEAD
 static void dio24_detach(struct comedi_device *dev)
 {
 	comedi_spriv_free(dev, 0);
 	comedi_pcmcia_disable(dev);
 }
 
+=======
+>>>>>>> v3.18
 static struct comedi_driver driver_dio24 = {
 	.driver_name	= "ni_daq_dio24",
 	.module		= THIS_MODULE,
 	.auto_attach	= dio24_auto_attach,
+<<<<<<< HEAD
 	.detach		= dio24_detach,
+=======
+	.detach		= comedi_pcmcia_disable,
+>>>>>>> v3.18
 };
 
 static int dio24_cs_attach(struct pcmcia_device *link)

@@ -9,10 +9,15 @@
  * under the terms of the GNU General Public License version 2 as published by
  * the Free Software Foundation.
  */
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/miscdevice.h>
+=======
+#include <linux/kernel.h>
+#include <linux/module.h>
+>>>>>>> v3.18
 #include <linux/watchdog.h>
 #include <linux/platform_device.h>
 #include <linux/stmp3xxx_rtc_wdt.h>
@@ -30,7 +35,11 @@ MODULE_PARM_DESC(heartbeat, "Watchdog heartbeat period in seconds from 1 to "
 static int wdt_start(struct watchdog_device *wdd)
 {
 	struct device *dev = watchdog_get_drvdata(wdd);
+<<<<<<< HEAD
 	struct stmp3xxx_wdt_pdata *pdata = dev->platform_data;
+=======
+	struct stmp3xxx_wdt_pdata *pdata = dev_get_platdata(dev);
+>>>>>>> v3.18
 
 	pdata->wdt_set_timeout(dev->parent, wdd->timeout * WDOG_TICK_RATE);
 	return 0;
@@ -39,7 +48,11 @@ static int wdt_start(struct watchdog_device *wdd)
 static int wdt_stop(struct watchdog_device *wdd)
 {
 	struct device *dev = watchdog_get_drvdata(wdd);
+<<<<<<< HEAD
 	struct stmp3xxx_wdt_pdata *pdata = dev->platform_data;
+=======
+	struct stmp3xxx_wdt_pdata *pdata = dev_get_platdata(dev);
+>>>>>>> v3.18
 
 	pdata->wdt_set_timeout(dev->parent, 0);
 	return 0;
@@ -96,9 +109,39 @@ static int stmp3xxx_wdt_remove(struct platform_device *pdev)
 	return 0;
 }
 
+<<<<<<< HEAD
 static struct platform_driver stmp3xxx_wdt_driver = {
 	.driver = {
 		.name = "stmp3xxx_rtc_wdt",
+=======
+static int __maybe_unused stmp3xxx_wdt_suspend(struct device *dev)
+{
+	struct watchdog_device *wdd = &stmp3xxx_wdd;
+
+	if (watchdog_active(wdd))
+		return wdt_stop(wdd);
+
+	return 0;
+}
+
+static int __maybe_unused stmp3xxx_wdt_resume(struct device *dev)
+{
+	struct watchdog_device *wdd = &stmp3xxx_wdd;
+
+	if (watchdog_active(wdd))
+		return wdt_start(wdd);
+
+	return 0;
+}
+
+static SIMPLE_DEV_PM_OPS(stmp3xxx_wdt_pm_ops,
+			 stmp3xxx_wdt_suspend, stmp3xxx_wdt_resume);
+
+static struct platform_driver stmp3xxx_wdt_driver = {
+	.driver = {
+		.name = "stmp3xxx_rtc_wdt",
+		.pm = &stmp3xxx_wdt_pm_ops,
+>>>>>>> v3.18
 	},
 	.probe = stmp3xxx_wdt_probe,
 	.remove = stmp3xxx_wdt_remove,
@@ -108,4 +151,7 @@ module_platform_driver(stmp3xxx_wdt_driver);
 MODULE_DESCRIPTION("STMP3XXX RTC Watchdog Driver");
 MODULE_LICENSE("GPL v2");
 MODULE_AUTHOR("Wolfram Sang <w.sang@pengutronix.de>");
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18

@@ -201,6 +201,7 @@ static int validate_identity(void);
 *	0	- success
 *	~0	- failure
 ----------------------------------------------------------------*/
+<<<<<<< HEAD
 int prism2_fwtry(struct usb_device *udev, wlandevice_t *wlandev)
 {
 	const struct firmware *fw_entry = NULL;
@@ -212,12 +213,31 @@ int prism2_fwtry(struct usb_device *udev, wlandevice_t *wlandev)
 		printk(KERN_INFO
 		       "prism2_usb: Firmware not available, but not essential\n");
 		printk(KERN_INFO
+=======
+static int prism2_fwtry(struct usb_device *udev, wlandevice_t *wlandev)
+{
+	const struct firmware *fw_entry = NULL;
+
+	netdev_info(wlandev->netdev, "prism2_usb: Checking for firmware %s\n",
+	       PRISM2_USB_FWFILE);
+	if (request_ihex_firmware(&fw_entry,
+				  PRISM2_USB_FWFILE, &udev->dev) != 0) {
+		netdev_info(wlandev->netdev,
+		       "prism2_usb: Firmware not available, but not essential\n");
+		netdev_info(wlandev->netdev,
+>>>>>>> v3.18
 		       "prism2_usb: can continue to use card anyway.\n");
 		return 1;
 	}
 
+<<<<<<< HEAD
 	printk(KERN_INFO "prism2_usb: %s will be processed, size %zu\n",
 	       PRISM2_USB_FWFILE, fw_entry->size);
+=======
+	netdev_info(wlandev->netdev,
+		    "prism2_usb: %s will be processed, size %zu\n",
+		    PRISM2_USB_FWFILE, fw_entry->size);
+>>>>>>> v3.18
 	prism2_fwapply((const struct ihex_binrec *)fw_entry->data, wlandev);
 
 	release_firmware(fw_entry);
@@ -275,7 +295,11 @@ static int prism2_fwapply(const struct ihex_binrec *rfptr, wlandevice_t *wlandev
 
 	/* Build the PDA we're going to use. */
 	if (read_cardpda(&pda, wlandev)) {
+<<<<<<< HEAD
 		printk(KERN_ERR "load_cardpda failed, exiting.\n");
+=======
+		netdev_err(wlandev->netdev, "load_cardpda failed, exiting.\n");
+>>>>>>> v3.18
 		return 1;
 	}
 
@@ -299,7 +323,11 @@ static int prism2_fwapply(const struct ihex_binrec *rfptr, wlandevice_t *wlandev
 	/* DIDmsg_dot11req_mibget */
 	prism2mgmt_mibset_mibget(wlandev, &getmsg);
 	if (getmsg.resultcode.data != P80211ENUM_resultcode_success)
+<<<<<<< HEAD
 		printk(KERN_ERR "Couldn't fetch PRI-SUP info\n");
+=======
+		netdev_err(wlandev->netdev, "Couldn't fetch PRI-SUP info\n");
+>>>>>>> v3.18
 
 	/* Already in host order */
 	priid.role = *data++;
@@ -311,19 +339,33 @@ static int prism2_fwapply(const struct ihex_binrec *rfptr, wlandevice_t *wlandev
 	/* Read the S3 file */
 	result = read_fwfile(rfptr);
 	if (result) {
+<<<<<<< HEAD
 		printk(KERN_ERR "Failed to read the data exiting.\n");
+=======
+		netdev_err(wlandev->netdev,
+			   "Failed to read the data exiting.\n");
+>>>>>>> v3.18
 		return 1;
 	}
 
 	result = validate_identity();
 
 	if (result) {
+<<<<<<< HEAD
 		printk(KERN_ERR "Incompatible firmware image.\n");
+=======
+		netdev_err(wlandev->netdev, "Incompatible firmware image.\n");
+>>>>>>> v3.18
 		return 1;
 	}
 
 	if (startaddr == 0x00000000) {
+<<<<<<< HEAD
 		printk(KERN_ERR "Can't RAM download a Flash image!\n");
+=======
+		netdev_err(wlandev->netdev,
+			   "Can't RAM download a Flash image!\n");
+>>>>>>> v3.18
 		return 1;
 	}
 
@@ -333,20 +375,32 @@ static int prism2_fwapply(const struct ihex_binrec *rfptr, wlandevice_t *wlandev
 	/* Do any plugging */
 	result = plugimage(fchunk, nfchunks, s3plug, ns3plug, &pda);
 	if (result) {
+<<<<<<< HEAD
 		printk(KERN_ERR "Failed to plug data.\n");
+=======
+		netdev_err(wlandev->netdev, "Failed to plug data.\n");
+>>>>>>> v3.18
 		return 1;
 	}
 
 	/* Insert any CRCs */
 	if (crcimage(fchunk, nfchunks, s3crc, ns3crc)) {
+<<<<<<< HEAD
 		printk(KERN_ERR "Failed to insert all CRCs\n");
+=======
+		netdev_err(wlandev->netdev, "Failed to insert all CRCs\n");
+>>>>>>> v3.18
 		return 1;
 	}
 
 	/* Write the image */
 	result = writeimage(wlandev, fchunk, nfchunks);
 	if (result) {
+<<<<<<< HEAD
 		printk(KERN_ERR "Failed to ramwrite image data.\n");
+=======
+		netdev_err(wlandev->netdev, "Failed to ramwrite image data.\n");
+>>>>>>> v3.18
 		return 1;
 	}
 
@@ -354,7 +408,11 @@ static int prism2_fwapply(const struct ihex_binrec *rfptr, wlandevice_t *wlandev
 	free_chunks(fchunk, &nfchunks);
 	free_srecs();
 
+<<<<<<< HEAD
 	printk(KERN_INFO "prism2_usb: firmware loading finished.\n");
+=======
+	netdev_info(wlandev->netdev, "prism2_usb: firmware loading finished.\n");
+>>>>>>> v3.18
 
 	return result;
 }
@@ -410,10 +468,14 @@ static int crcimage(struct imgchunk *fchunk, unsigned int nfchunks,
 				break;
 		}
 		if (c >= nfchunks) {
+<<<<<<< HEAD
 			printk(KERN_ERR
 			       "Failed to find chunk for "
 			       "crcrec[%d], addr=0x%06x len=%d , "
 			       "aborting crc.\n",
+=======
+			pr_err("Failed to find chunk for crcrec[%d], addr=0x%06x len=%d , aborting crc.\n",
+>>>>>>> v3.18
 			       i, s3crc[i].addr, s3crc[i].len);
 			return 1;
 		}
@@ -443,6 +505,10 @@ static int crcimage(struct imgchunk *fchunk, unsigned int nfchunks,
 static void free_chunks(struct imgchunk *fchunk, unsigned int *nfchunks)
 {
 	int i;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	for (i = 0; i < *nfchunks; i++)
 		kfree(fchunk[i].data);
 
@@ -537,8 +603,12 @@ static int mkimage(struct imgchunk *clist, unsigned int *ccnt)
 	for (i = 0; i < *ccnt; i++) {
 		clist[i].data = kzalloc(clist[i].len, GFP_KERNEL);
 		if (clist[i].data == NULL) {
+<<<<<<< HEAD
 			printk(KERN_ERR
 			       "failed to allocate image space, exitting.\n");
+=======
+			pr_err("failed to allocate image space, exitting.\n");
+>>>>>>> v3.18
 			return 1;
 		}
 		pr_debug("chunk[%d]: addr=0x%06x len=%d\n",
@@ -556,8 +626,12 @@ static int mkimage(struct imgchunk *clist, unsigned int *ccnt)
 				break;
 		}
 		if (((unsigned int)j) >= (*ccnt)) {
+<<<<<<< HEAD
 			printk(KERN_ERR
 			       "s3rec(a=0x%06x,l=%d), no chunk match, exiting.\n",
+=======
+			pr_err("s3rec(a=0x%06x,l=%d), no chunk match, exiting.\n",
+>>>>>>> v3.18
 			       s3start, s3data[i].len);
 			return 1;
 		}
@@ -627,9 +701,14 @@ static int mkpdrlist(struct pda *pda)
 
 	}
 	if (curroff >= (HFA384x_PDA_LEN_MAX / 2)) {
+<<<<<<< HEAD
 		printk(KERN_ERR
 		       "no end record found or invalid lengths in "
 		       "PDR data, exiting. %x %d\n", curroff, pda->nrec);
+=======
+		pr_err("no end record found or invalid lengths in PDR data, exiting. %x %d\n",
+		       curroff, pda->nrec);
+>>>>>>> v3.18
 		return 1;
 	}
 	if (le16_to_cpu(pda16[curroff + 1]) == HFA384x_PDR_END_OF_PDA) {
@@ -685,9 +764,14 @@ static int plugimage(struct imgchunk *fchunk, unsigned int nfchunks,
 			j = -1;
 		}
 		if (j >= pda->nrec && j != -1) { /*  if no matching PDR, fail */
+<<<<<<< HEAD
 			printk(KERN_WARNING
 			       "warning: Failed to find PDR for "
 			       "plugrec 0x%04x.\n", s3plug[i].itemcode);
+=======
+			pr_warn("warning: Failed to find PDR for plugrec 0x%04x.\n",
+				s3plug[i].itemcode);
+>>>>>>> v3.18
 			continue;	/* and move on to the next PDR */
 #if 0
 			/* MSM: They swear that unless it's the MAC address,
@@ -704,9 +788,13 @@ static int plugimage(struct imgchunk *fchunk, unsigned int nfchunks,
 
 		/* Validate plug len against PDR len */
 		if (j != -1 && s3plug[i].len < le16_to_cpu(pda->rec[j]->len)) {
+<<<<<<< HEAD
 			printk(KERN_ERR
 			       "error: Plug vs. PDR len mismatch for "
 			       "plugrec 0x%04x, abort plugging.\n",
+=======
+			pr_err("error: Plug vs. PDR len mismatch for plugrec 0x%04x, abort plugging.\n",
+>>>>>>> v3.18
 			       s3plug[i].itemcode);
 			result = 1;
 			continue;
@@ -720,9 +808,14 @@ static int plugimage(struct imgchunk *fchunk, unsigned int nfchunks,
 				break;
 		}
 		if (c >= nfchunks) {
+<<<<<<< HEAD
 			printk(KERN_ERR
 			       "error: Failed to find image chunk for "
 			       "plugrec 0x%04x.\n", s3plug[i].itemcode);
+=======
+			pr_err("error: Failed to find image chunk for plugrec 0x%04x.\n",
+			       s3plug[i].itemcode);
+>>>>>>> v3.18
 			result = 1;
 			continue;
 		}
@@ -730,8 +823,12 @@ static int plugimage(struct imgchunk *fchunk, unsigned int nfchunks,
 		/* Plug data */
 		chunkoff = pstart - cstart;
 		dest = fchunk[c].data + chunkoff;
+<<<<<<< HEAD
 		pr_debug("Plugging item 0x%04x @ 0x%06x, len=%d, "
 			 "cnum=%d coff=0x%06x\n",
+=======
+		pr_debug("Plugging item 0x%04x @ 0x%06x, len=%d, cnum=%d coff=0x%06x\n",
+>>>>>>> v3.18
 			 s3plug[i].itemcode, pstart, s3plug[i].len,
 			 c, chunkoff);
 
@@ -767,6 +864,7 @@ static int plugimage(struct imgchunk *fchunk, unsigned int nfchunks,
 static int read_cardpda(struct pda *pda, wlandevice_t *wlandev)
 {
 	int result = 0;
+<<<<<<< HEAD
 	struct p80211msg_p2req_readpda msg;
 
 	/* set up the msg */
@@ -785,12 +883,40 @@ static int read_cardpda(struct pda *pda, wlandevice_t *wlandev)
 		result = -1;
 	} else if (msg.resultcode.data == P80211ENUM_resultcode_success) {
 		memcpy(pda->buf, msg.pda.data, HFA384x_PDA_LEN_MAX);
+=======
+	struct p80211msg_p2req_readpda *msg;
+
+	msg = kzalloc(sizeof(*msg), GFP_KERNEL);
+	if (!msg)
+		return -ENOMEM;
+
+	/* set up the msg */
+	msg->msgcode = DIDmsg_p2req_readpda;
+	msg->msglen = sizeof(msg);
+	strcpy(msg->devname, wlandev->name);
+	msg->pda.did = DIDmsg_p2req_readpda_pda;
+	msg->pda.len = HFA384x_PDA_LEN_MAX;
+	msg->pda.status = P80211ENUM_msgitem_status_no_value;
+	msg->resultcode.did = DIDmsg_p2req_readpda_resultcode;
+	msg->resultcode.len = sizeof(u32);
+	msg->resultcode.status = P80211ENUM_msgitem_status_no_value;
+
+	if (prism2mgmt_readpda(wlandev, msg) != 0) {
+		/* prism2mgmt_readpda prints an errno if appropriate */
+		result = -1;
+	} else if (msg->resultcode.data == P80211ENUM_resultcode_success) {
+		memcpy(pda->buf, msg->pda.data, HFA384x_PDA_LEN_MAX);
+>>>>>>> v3.18
 		result = mkpdrlist(pda);
 	} else {
 		/* resultcode must've been something other than success */
 		result = -1;
 	}
 
+<<<<<<< HEAD
+=======
+	kfree(msg);
+>>>>>>> v3.18
 	return result;
 }
 
@@ -879,8 +1005,12 @@ static int read_fwfile(const struct ihex_binrec *record)
 		switch (addr) {
 		case S3ADDR_START:
 			startaddr = *ptr32;
+<<<<<<< HEAD
 			pr_debug("  S7 start addr, record=%d "
 				      " addr=0x%08x\n",
+=======
+			pr_debug("  S7 start addr, record=%d addr=0x%08x\n",
+>>>>>>> v3.18
 				      rcnt,
 				      startaddr);
 			break;
@@ -889,8 +1019,12 @@ static int read_fwfile(const struct ihex_binrec *record)
 			s3plug[ns3plug].addr = *(ptr32 + 1);
 			s3plug[ns3plug].len = *(ptr32 + 2);
 
+<<<<<<< HEAD
 			pr_debug("  S3 plugrec, record=%d "
 				      "itemcode=0x%08x addr=0x%08x len=%d\n",
+=======
+			pr_debug("  S3 plugrec, record=%d itemcode=0x%08x addr=0x%08x len=%d\n",
+>>>>>>> v3.18
 				      rcnt,
 				      s3plug[ns3plug].itemcode,
 				      s3plug[ns3plug].addr,
@@ -898,7 +1032,11 @@ static int read_fwfile(const struct ihex_binrec *record)
 
 			ns3plug++;
 			if (ns3plug == S3PLUG_MAX) {
+<<<<<<< HEAD
 				printk(KERN_ERR "S3 plugrec limit reached - aborting\n");
+=======
+				pr_err("S3 plugrec limit reached - aborting\n");
+>>>>>>> v3.18
 				return 1;
 			}
 			break;
@@ -907,15 +1045,23 @@ static int read_fwfile(const struct ihex_binrec *record)
 			s3crc[ns3crc].len = *(ptr32 + 1);
 			s3crc[ns3crc].dowrite = *(ptr32 + 2);
 
+<<<<<<< HEAD
 			pr_debug("  S3 crcrec, record=%d "
 				      "addr=0x%08x len=%d write=0x%08x\n",
+=======
+			pr_debug("  S3 crcrec, record=%d addr=0x%08x len=%d write=0x%08x\n",
+>>>>>>> v3.18
 				      rcnt,
 				      s3crc[ns3crc].addr,
 				      s3crc[ns3crc].len,
 				      s3crc[ns3crc].dowrite);
 			ns3crc++;
 			if (ns3crc == S3CRC_MAX) {
+<<<<<<< HEAD
 				printk(KERN_ERR "S3 crcrec limit reached - aborting\n");
+=======
+				pr_err("S3 crcrec limit reached - aborting\n");
+>>>>>>> v3.18
 				return 1;
 			}
 			break;
@@ -923,13 +1069,21 @@ static int read_fwfile(const struct ihex_binrec *record)
 			s3info[ns3info].len = *ptr16;
 			s3info[ns3info].type = *(ptr16 + 1);
 
+<<<<<<< HEAD
 			pr_debug("  S3 inforec, record=%d "
 			      "len=0x%04x type=0x%04x\n",
+=======
+			pr_debug("  S3 inforec, record=%d len=0x%04x type=0x%04x\n",
+>>>>>>> v3.18
 				      rcnt,
 				      s3info[ns3info].len,
 				      s3info[ns3info].type);
 			if (((s3info[ns3info].len - 1) * sizeof(u16)) > sizeof(s3info[ns3info].info)) {
+<<<<<<< HEAD
 				printk(KERN_ERR " S3 inforec length too long - aborting\n");
+=======
+				pr_err("S3 inforec length too long - aborting\n");
+>>>>>>> v3.18
 				return 1;
 			}
 
@@ -943,7 +1097,11 @@ static int read_fwfile(const struct ihex_binrec *record)
 
 			ns3info++;
 			if (ns3info == S3INFO_MAX) {
+<<<<<<< HEAD
 				printk(KERN_ERR "S3 inforec limit reached - aborting\n");
+=======
+				pr_err("S3 inforec limit reached - aborting\n");
+>>>>>>> v3.18
 				return 1;
 			}
 			break;
@@ -953,7 +1111,11 @@ static int read_fwfile(const struct ihex_binrec *record)
 			s3data[ns3data].data = (uint8_t *) record->data;
 			ns3data++;
 			if (ns3data == S3DATA_MAX) {
+<<<<<<< HEAD
 				printk(KERN_ERR "S3 datarec limit reached - aborting\n");
+=======
+				pr_err("S3 datarec limit reached - aborting\n");
+>>>>>>> v3.18
 				return 1;
 			}
 			break;
@@ -997,9 +1159,14 @@ static int writeimage(wlandevice_t *wlandev, struct imgchunk *fchunk,
 	if (!rstmsg || !rwrmsg) {
 		kfree(rstmsg);
 		kfree(rwrmsg);
+<<<<<<< HEAD
 		printk(KERN_ERR
 		       "writeimage: no memory for firmware download, "
 		       "aborting download\n");
+=======
+		netdev_err(wlandev->netdev,
+			   "writeimage: no memory for firmware download, aborting download\n");
+>>>>>>> v3.18
 		return -ENOMEM;
 	}
 
@@ -1042,16 +1209,28 @@ static int writeimage(wlandevice_t *wlandev, struct imgchunk *fchunk,
 
 	result = prism2mgmt_ramdl_state(wlandev, rstmsg);
 	if (result) {
+<<<<<<< HEAD
 		printk(KERN_ERR
 		       "writeimage state enable failed w/ result=%d, "
 		       "aborting download\n", result);
+=======
+		netdev_err(wlandev->netdev,
+			   "writeimage state enable failed w/ result=%d, aborting download\n",
+			   result);
+>>>>>>> v3.18
 		goto free_result;
 	}
 	resultcode = rstmsg->resultcode.data;
 	if (resultcode != P80211ENUM_resultcode_success) {
+<<<<<<< HEAD
 		printk(KERN_ERR
 		       "writeimage()->xxxdl_state msg indicates failure, "
 		       "w/ resultcode=%d, aborting download.\n", resultcode);
+=======
+		netdev_err(wlandev->netdev,
+			   "writeimage()->xxxdl_state msg indicates failure, w/ resultcode=%d, aborting download.\n",
+			   resultcode);
+>>>>>>> v3.18
 		result = 1;
 		goto free_result;
 	}
@@ -1064,6 +1243,10 @@ static int writeimage(wlandevice_t *wlandev, struct imgchunk *fchunk,
 		for (j = 0; j < nwrites; j++) {
 			/* TODO Move this to a separate function */
 			int lenleft = fchunk[i].len - (WRITESIZE_MAX * j);
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 			if (fchunk[i].len > WRITESIZE_MAX)
 				currlen = WRITESIZE_MAX;
 			else
@@ -1085,16 +1268,26 @@ static int writeimage(wlandevice_t *wlandev, struct imgchunk *fchunk,
 
 			/* Check the results */
 			if (result) {
+<<<<<<< HEAD
 				printk(KERN_ERR
 				       "writeimage chunk write failed w/ result=%d, "
 				       "aborting download\n", result);
+=======
+				netdev_err(wlandev->netdev,
+					   "writeimage chunk write failed w/ result=%d, aborting download\n",
+					   result);
+>>>>>>> v3.18
 				goto free_result;
 			}
 			resultcode = rstmsg->resultcode.data;
 			if (resultcode != P80211ENUM_resultcode_success) {
+<<<<<<< HEAD
 				printk(KERN_ERR
 				       "writeimage()->xxxdl_write msg indicates failure, "
 				       "w/ resultcode=%d, aborting download.\n",
+=======
+				pr_err("writeimage()->xxxdl_write msg indicates failure, w/ resultcode=%d, aborting download.\n",
+>>>>>>> v3.18
 				       resultcode);
 				result = 1;
 				goto free_result;
@@ -1110,16 +1303,28 @@ static int writeimage(wlandevice_t *wlandev, struct imgchunk *fchunk,
 
 	result = prism2mgmt_ramdl_state(wlandev, rstmsg);
 	if (result) {
+<<<<<<< HEAD
 		printk(KERN_ERR
 		       "writeimage state disable failed w/ result=%d, "
 		       "aborting download\n", result);
+=======
+		netdev_err(wlandev->netdev,
+			   "writeimage state disable failed w/ result=%d, aborting download\n",
+			   result);
+>>>>>>> v3.18
 		goto free_result;
 	}
 	resultcode = rstmsg->resultcode.data;
 	if (resultcode != P80211ENUM_resultcode_success) {
+<<<<<<< HEAD
 		printk(KERN_ERR
 		       "writeimage()->xxxdl_state msg indicates failure, "
 		       "w/ resultcode=%d, aborting download.\n", resultcode);
+=======
+		netdev_err(wlandev->netdev,
+			   "writeimage()->xxxdl_state msg indicates failure, w/ resultcode=%d, aborting download.\n",
+			   resultcode);
+>>>>>>> v3.18
 		result = 1;
 		goto free_result;
 	}

@@ -63,9 +63,12 @@ static inline void kvmppc_account_exit_stat(struct kvm_vcpu *vcpu, int type)
 	case EMULATED_INST_EXITS:
 		vcpu->stat.emulated_inst_exits++;
 		break;
+<<<<<<< HEAD
 	case DCR_EXITS:
 		vcpu->stat.dcr_exits++;
 		break;
+=======
+>>>>>>> v3.18
 	case DSI_EXITS:
 		vcpu->stat.dsi_exits++;
 		break;

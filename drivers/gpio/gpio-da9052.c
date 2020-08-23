@@ -200,7 +200,11 @@ static struct gpio_chip reference_gp = {
 	.direction_input = da9052_gpio_direction_input,
 	.direction_output = da9052_gpio_direction_output,
 	.to_irq = da9052_gpio_to_irq,
+<<<<<<< HEAD
 	.can_sleep = 1,
+=======
+	.can_sleep = true,
+>>>>>>> v3.18
 	.ngpio = 16,
 	.base = -1,
 };
@@ -216,7 +220,11 @@ static int da9052_gpio_probe(struct platform_device *pdev)
 		return -ENOMEM;
 
 	gpio->da9052 = dev_get_drvdata(pdev->dev.parent);
+<<<<<<< HEAD
 	pdata = gpio->da9052->dev->platform_data;
+=======
+	pdata = dev_get_platdata(gpio->da9052->dev);
+>>>>>>> v3.18
 
 	gpio->gp = reference_gp;
 	if (pdata && pdata->gpio_base)
@@ -237,7 +245,12 @@ static int da9052_gpio_remove(struct platform_device *pdev)
 {
 	struct da9052_gpio *gpio = platform_get_drvdata(pdev);
 
+<<<<<<< HEAD
 	return gpiochip_remove(&gpio->gp);
+=======
+	gpiochip_remove(&gpio->gp);
+	return 0;
+>>>>>>> v3.18
 }
 
 static struct platform_driver da9052_gpio_driver = {

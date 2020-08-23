@@ -29,6 +29,35 @@
 /* HACK: Avoid pointless "shadow" warnings. */
 #define link link_shadow
 
+<<<<<<< HEAD
+=======
+/**
+ * strscpy - Copy a C-string into a sized buffer, but only if it fits
+ * @dest: Where to copy the string to
+ * @src: Where to copy the string from
+ * @size: size of destination buffer
+ *
+ * Use this routine to avoid copying too-long strings.
+ * The routine returns the total number of bytes copied
+ * (including the trailing NUL) or zero if the buffer wasn't
+ * big enough.  To ensure that programmers pay attention
+ * to the return code, the destination has a single NUL
+ * written at the front (if size is non-zero) when the
+ * buffer is not big enough.
+ */
+static size_t strscpy(char *dest, const char *src, size_t size)
+{
+	size_t len = strnlen(src, size) + 1;
+	if (len > size) {
+		if (size)
+			dest[0] = '\0';
+		return 0;
+	}
+	memcpy(dest, src, len);
+	return len;
+}
+
+>>>>>>> v3.18
 int gxio_mpipe_init(gxio_mpipe_context_t *context, unsigned int mpipe_index)
 {
 	char file[32];
@@ -36,8 +65,19 @@ int gxio_mpipe_init(gxio_mpipe_context_t *context, unsigned int mpipe_index)
 	int fd;
 	int i;
 
+<<<<<<< HEAD
 	snprintf(file, sizeof(file), "mpipe/%d/iorpc", mpipe_index);
 	fd = hv_dev_open((HV_VirtAddr) file, 0);
+=======
+	if (mpipe_index >= GXIO_MPIPE_INSTANCE_MAX)
+		return -EINVAL;
+
+	snprintf(file, sizeof(file), "mpipe/%d/iorpc", mpipe_index);
+	fd = hv_dev_open((HV_VirtAddr) file, 0);
+
+	context->fd = fd;
+
+>>>>>>> v3.18
 	if (fd < 0) {
 		if (fd >= GXIO_ERR_MIN && fd <= GXIO_ERR_MAX)
 			return fd;
@@ -45,8 +85,11 @@ int gxio_mpipe_init(gxio_mpipe_context_t *context, unsigned int mpipe_index)
 			return -ENODEV;
 	}
 
+<<<<<<< HEAD
 	context->fd = fd;
 
+=======
+>>>>>>> v3.18
 	/* Map in the MMIO space. */
 	context->mmio_cfg_base = (void __force *)
 		iorpc_ioremap(fd, HV_MPIPE_CONFIG_MMIO_OFFSET,
@@ -64,12 +107,21 @@ int gxio_mpipe_init(gxio_mpipe_context_t *context, unsigned int mpipe_index)
 	for (i = 0; i < 8; i++)
 		context->__stacks.stacks[i] = 255;
 
+<<<<<<< HEAD
+=======
+	context->instance = mpipe_index;
+
+>>>>>>> v3.18
 	return 0;
 
       fast_failed:
 	iounmap((void __force __iomem *)(context->mmio_cfg_base));
       cfg_failed:
 	hv_dev_close(context->fd);
+<<<<<<< HEAD
+=======
+	context->fd = -1;
+>>>>>>> v3.18
 	return -ENODEV;
 }
 
@@ -383,7 +435,11 @@ EXPORT_SYMBOL_GPL(gxio_mpipe_iqueue_init);
 
 int gxio_mpipe_equeue_init(gxio_mpipe_equeue_t *equeue,
 			   gxio_mpipe_context_t *context,
+<<<<<<< HEAD
 			   unsigned int edma_ring_id,
+=======
+			   unsigned int ering,
+>>>>>>> v3.18
 			   unsigned int channel,
 			   void *mem, unsigned int mem_size,
 			   unsigned int mem_flags)
@@ -394,7 +450,11 @@ int gxio_mpipe_equeue_init(gxio_mpipe_equeue_t *equeue,
 	/* Offset used to read number of completed commands. */
 	MPIPE_EDMA_POST_REGION_ADDR_t offset;
 
+<<<<<<< HEAD
 	int result = gxio_mpipe_init_edma_ring(context, edma_ring_id, channel,
+=======
+	int result = gxio_mpipe_init_edma_ring(context, ering, channel,
+>>>>>>> v3.18
 					       mem, mem_size, mem_flags);
 	if (result < 0)
 		return result;
@@ -405,7 +465,11 @@ int gxio_mpipe_equeue_init(gxio_mpipe_equeue_t *equeue,
 	offset.region =
 		MPIPE_MMIO_ADDR__REGION_VAL_EDMA -
 		MPIPE_MMIO_ADDR__REGION_VAL_IDMA;
+<<<<<<< HEAD
 	offset.ring = edma_ring_id;
+=======
+	offset.ring = ering;
+>>>>>>> v3.18
 
 	__gxio_dma_queue_init(&equeue->dma_queue,
 			      context->mmio_fast_base + offset.word,
@@ -413,6 +477,12 @@ int gxio_mpipe_equeue_init(gxio_mpipe_equeue_t *equeue,
 	equeue->edescs = mem;
 	equeue->mask_num_entries = num_entries - 1;
 	equeue->log2_num_entries = __builtin_ctz(num_entries);
+<<<<<<< HEAD
+=======
+	equeue->context = context;
+	equeue->ering = ering;
+	equeue->channel = channel;
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -493,6 +563,23 @@ static gxio_mpipe_context_t *_gxio_get_link_context(void)
 	return contextp;
 }
 
+<<<<<<< HEAD
+=======
+int gxio_mpipe_link_instance(const char *link_name)
+{
+	_gxio_mpipe_link_name_t name;
+	gxio_mpipe_context_t *context = _gxio_get_link_context();
+
+	if (!context)
+		return GXIO_ERR_NO_DEVICE;
+
+	if (strscpy(name.name, link_name, sizeof(name.name)) == 0)
+		return GXIO_ERR_NO_DEVICE;
+
+	return gxio_mpipe_info_instance_aux(context, name);
+}
+
+>>>>>>> v3.18
 int gxio_mpipe_link_enumerate_mac(int idx, char *link_name, uint8_t *link_mac)
 {
 	int rv;
@@ -505,7 +592,12 @@ int gxio_mpipe_link_enumerate_mac(int idx, char *link_name, uint8_t *link_mac)
 
 	rv = gxio_mpipe_info_enumerate_aux(context, idx, &name, &mac);
 	if (rv >= 0) {
+<<<<<<< HEAD
 		strncpy(link_name, name.name, sizeof(name.name));
+=======
+		if (strscpy(link_name, name.name, sizeof(name.name)) == 0)
+			return GXIO_ERR_INVAL_MEMORY_SIZE;
+>>>>>>> v3.18
 		memcpy(link_mac, mac.mac, sizeof(mac.mac));
 	}
 
@@ -521,8 +613,13 @@ int gxio_mpipe_link_open(gxio_mpipe_link_t *link,
 	_gxio_mpipe_link_name_t name;
 	int rv;
 
+<<<<<<< HEAD
 	strncpy(name.name, link_name, sizeof(name.name));
 	name.name[GXIO_MPIPE_LINK_NAME_LEN - 1] = '\0';
+=======
+	if (strscpy(name.name, link_name, sizeof(name.name)) == 0)
+		return GXIO_ERR_NO_DEVICE;
+>>>>>>> v3.18
 
 	rv = gxio_mpipe_link_open_aux(context, name, flags);
 	if (rv < 0)
@@ -543,3 +640,15 @@ int gxio_mpipe_link_close(gxio_mpipe_link_t *link)
 }
 
 EXPORT_SYMBOL_GPL(gxio_mpipe_link_close);
+<<<<<<< HEAD
+=======
+
+int gxio_mpipe_link_set_attr(gxio_mpipe_link_t *link, uint32_t attr,
+			     int64_t val)
+{
+	return gxio_mpipe_link_set_attr_aux(link->context, link->mac, attr,
+					    val);
+}
+
+EXPORT_SYMBOL_GPL(gxio_mpipe_link_set_attr);
+>>>>>>> v3.18

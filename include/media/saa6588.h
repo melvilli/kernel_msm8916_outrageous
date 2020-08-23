@@ -27,6 +27,10 @@
 
 struct saa6588_command {
 	unsigned int  block_count;
+<<<<<<< HEAD
+=======
+	bool          nonblocking;
+>>>>>>> v3.18
 	int           result;
 	unsigned char __user *buffer;
 	struct file   *instance;
@@ -34,7 +38,10 @@ struct saa6588_command {
 };
 
 /* These ioctls are internal to the kernel */
+<<<<<<< HEAD
 #define SAA6588_CMD_OPEN	_IOW('R', 1, int)
+=======
+>>>>>>> v3.18
 #define SAA6588_CMD_CLOSE	_IOW('R', 2, int)
 #define SAA6588_CMD_READ	_IOR('R', 3, int)
 #define SAA6588_CMD_POLL	_IOR('R', 4, int)

@@ -8,7 +8,10 @@
  *	2 of the License, or (at your option) any later version.
  */
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/pci.h>
 
 /*

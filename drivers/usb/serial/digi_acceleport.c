@@ -17,7 +17,10 @@
 
 #include <linux/kernel.h>
 #include <linux/errno.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/tty.h>
 #include <linux/tty_driver.h>
@@ -835,7 +838,10 @@ static void digi_set_termios(struct tty_struct *tty,
 			arg |= DIGI_OUTPUT_FLOW_CONTROL_CTS;
 		} else {
 			arg &= ~DIGI_OUTPUT_FLOW_CONTROL_CTS;
+<<<<<<< HEAD
 			tty->hw_stopped = 0;
+=======
+>>>>>>> v3.18
 		}
 
 		buf[i++] = DIGI_CMD_SET_OUTPUT_FLOW_CONTROL;
@@ -1253,6 +1259,7 @@ static int digi_port_init(struct usb_serial_port *port, unsigned port_num)
 
 static int digi_startup(struct usb_serial *serial)
 {
+<<<<<<< HEAD
 	struct device *dev = &serial->interface->dev;
 	struct digi_serial *serial_priv;
 	int ret;
@@ -1274,6 +1281,10 @@ static int digi_startup(struct usb_serial *serial)
 			return -ENODEV;
 		}
 	}
+=======
+	struct digi_serial *serial_priv;
+	int ret;
+>>>>>>> v3.18
 
 	serial_priv = kzalloc(sizeof(*serial_priv), GFP_KERNEL);
 	if (!serial_priv)
@@ -1323,11 +1334,15 @@ static void digi_release(struct usb_serial *serial)
 
 static int digi_port_probe(struct usb_serial_port *port)
 {
+<<<<<<< HEAD
 	unsigned port_num;
 
 	port_num = port->number - port->serial->minor;
 
 	return digi_port_init(port, port_num);
+=======
+	return digi_port_init(port, port->port_number);
+>>>>>>> v3.18
 }
 
 static int digi_port_remove(struct usb_serial_port *port)
@@ -1489,11 +1504,15 @@ static int digi_read_oob_callback(struct urb *urb)
 	struct usb_serial *serial = port->serial;
 	struct tty_struct *tty;
 	struct digi_port *priv = usb_get_serial_port_data(port);
+<<<<<<< HEAD
 	unsigned char *buf = urb->transfer_buffer;
+=======
+>>>>>>> v3.18
 	int opcode, line, status, val;
 	int i;
 	unsigned int rts;
 
+<<<<<<< HEAD
 	if (urb->actual_length < 4)
 		return -1;
 
@@ -1503,6 +1522,14 @@ static int digi_read_oob_callback(struct urb *urb)
 		line = buf[i + 1];
 		status = buf[i + 2];
 		val = buf[i + 3];
+=======
+	/* handle each oob command */
+	for (i = 0; i < urb->actual_length - 3;) {
+		opcode = ((unsigned char *)urb->transfer_buffer)[i++];
+		line = ((unsigned char *)urb->transfer_buffer)[i++];
+		status = ((unsigned char *)urb->transfer_buffer)[i++];
+		val = ((unsigned char *)urb->transfer_buffer)[i++];
+>>>>>>> v3.18
 
 		dev_dbg(&port->dev, "digi_read_oob_callback: opcode=%d, line=%d, status=%d, val=%d\n",
 			opcode, line, status, val);
@@ -1528,6 +1555,7 @@ static int digi_read_oob_callback(struct urb *urb)
 			if (val & DIGI_READ_INPUT_SIGNALS_CTS) {
 				priv->dp_modem_signals |= TIOCM_CTS;
 				/* port must be open to use tty struct */
+<<<<<<< HEAD
 				if (rts) {
 					tty->hw_stopped = 0;
 					tty_port_tty_wakeup(&port->port);
@@ -1537,6 +1565,13 @@ static int digi_read_oob_callback(struct urb *urb)
 				/* port must be open to use tty struct */
 				if (rts)
 					tty->hw_stopped = 1;
+=======
+				if (rts)
+					tty_port_tty_wakeup(&port->port);
+			} else {
+				priv->dp_modem_signals &= ~TIOCM_CTS;
+				/* port must be open to use tty struct */
+>>>>>>> v3.18
 			}
 			if (val & DIGI_READ_INPUT_SIGNALS_DSR)
 				priv->dp_modem_signals |= TIOCM_DSR;

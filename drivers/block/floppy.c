@@ -961,17 +961,43 @@ static void empty(void)
 {
 }
 
+<<<<<<< HEAD
 static DECLARE_WORK(floppy_work, NULL);
+=======
+static void (*floppy_work_fn)(void);
+
+static void floppy_work_workfn(struct work_struct *work)
+{
+	floppy_work_fn();
+}
+
+static DECLARE_WORK(floppy_work, floppy_work_workfn);
+>>>>>>> v3.18
 
 static void schedule_bh(void (*handler)(void))
 {
 	WARN_ON(work_pending(&floppy_work));
 
+<<<<<<< HEAD
 	PREPARE_WORK(&floppy_work, (work_func_t)handler);
 	queue_work(floppy_wq, &floppy_work);
 }
 
 static DECLARE_DELAYED_WORK(fd_timer, NULL);
+=======
+	floppy_work_fn = handler;
+	queue_work(floppy_wq, &floppy_work);
+}
+
+static void (*fd_timer_fn)(void) = NULL;
+
+static void fd_timer_workfn(struct work_struct *work)
+{
+	fd_timer_fn();
+}
+
+static DECLARE_DELAYED_WORK(fd_timer, fd_timer_workfn);
+>>>>>>> v3.18
 
 static void cancel_activity(void)
 {
@@ -982,7 +1008,11 @@ static void cancel_activity(void)
 
 /* this function makes sure that the disk stays in the drive during the
  * transfer */
+<<<<<<< HEAD
 static void fd_watchdog(struct work_struct *arg)
+=======
+static void fd_watchdog(void)
+>>>>>>> v3.18
 {
 	debug_dcl(DP->flags, "calling disk change from watchdog\n");
 
@@ -993,7 +1023,11 @@ static void fd_watchdog(struct work_struct *arg)
 		reset_fdc();
 	} else {
 		cancel_delayed_work(&fd_timer);
+<<<<<<< HEAD
 		PREPARE_DELAYED_WORK(&fd_timer, fd_watchdog);
+=======
+		fd_timer_fn = fd_watchdog;
+>>>>>>> v3.18
 		queue_delayed_work(floppy_wq, &fd_timer, HZ / 10);
 	}
 }
@@ -1005,7 +1039,12 @@ static void main_command_interrupt(void)
 }
 
 /* waits for a delay (spinup or select) to pass */
+<<<<<<< HEAD
 static int fd_wait_for_completion(unsigned long expires, work_func_t function)
+=======
+static int fd_wait_for_completion(unsigned long expires,
+				  void (*function)(void))
+>>>>>>> v3.18
 {
 	if (FDCS->reset) {
 		reset_fdc();	/* do the reset during sleep to win time
@@ -1016,7 +1055,11 @@ static int fd_wait_for_completion(unsigned long expires, work_func_t function)
 
 	if (time_before(jiffies, expires)) {
 		cancel_delayed_work(&fd_timer);
+<<<<<<< HEAD
 		PREPARE_DELAYED_WORK(&fd_timer, function);
+=======
+		fd_timer_fn = function;
+>>>>>>> v3.18
 		queue_delayed_work(floppy_wq, &fd_timer, expires - jiffies);
 		return 1;
 	}
@@ -1334,8 +1377,12 @@ static int fdc_dtr(void)
 	 * Pause 5 msec to avoid trouble. (Needs to be 2 jiffies)
 	 */
 	FDCS->dtr = raw_cmd->rate & 3;
+<<<<<<< HEAD
 	return fd_wait_for_completion(jiffies + 2UL * HZ / 100,
 				      (work_func_t)floppy_ready);
+=======
+	return fd_wait_for_completion(jiffies + 2UL * HZ / 100, floppy_ready);
+>>>>>>> v3.18
 }				/* fdc_dtr */
 
 static void tell_sector(void)
@@ -1440,7 +1487,11 @@ static void setup_rw_floppy(void)
 	int flags;
 	int dflags;
 	unsigned long ready_date;
+<<<<<<< HEAD
 	work_func_t function;
+=======
+	void (*function)(void);
+>>>>>>> v3.18
 
 	flags = raw_cmd->flags;
 	if (flags & (FD_RAW_READ | FD_RAW_WRITE))
@@ -1454,9 +1505,15 @@ static void setup_rw_floppy(void)
 		 */
 		if (time_after(ready_date, jiffies + DP->select_delay)) {
 			ready_date -= DP->select_delay;
+<<<<<<< HEAD
 			function = (work_func_t)floppy_start;
 		} else
 			function = (work_func_t)setup_rw_floppy;
+=======
+			function = floppy_start;
+		} else
+			function = setup_rw_floppy;
+>>>>>>> v3.18
 
 		/* wait until the floppy is spinning fast enough */
 		if (fd_wait_for_completion(ready_date, function))
@@ -1486,7 +1543,11 @@ static void setup_rw_floppy(void)
 		inr = result();
 		cont->interrupt();
 	} else if (flags & FD_RAW_NEED_DISK)
+<<<<<<< HEAD
 		fd_watchdog(NULL);
+=======
+		fd_watchdog();
+>>>>>>> v3.18
 }
 
 static int blind_seek;
@@ -1863,7 +1924,11 @@ static int start_motor(void (*function)(void))
 
 	/* wait_for_completion also schedules reset if needed. */
 	return fd_wait_for_completion(DRS->select_date + DP->select_delay,
+<<<<<<< HEAD
 				      (work_func_t)function);
+=======
+				      function);
+>>>>>>> v3.18
 }
 
 static void floppy_ready(void)
@@ -2337,7 +2402,11 @@ static void rw_interrupt(void)
 	}
 
 	if (CT(COMMAND) != FD_READ ||
+<<<<<<< HEAD
 	    raw_cmd->kernel_data == current_req->buffer) {
+=======
+	    raw_cmd->kernel_data == bio_data(current_req->bio)) {
+>>>>>>> v3.18
 		/* transfer directly from buffer */
 		cont->done(1);
 	} else if (CT(COMMAND) == FD_READ) {
@@ -2351,7 +2420,11 @@ static void rw_interrupt(void)
 /* Compute maximal contiguous buffer size. */
 static int buffer_chain_size(void)
 {
+<<<<<<< HEAD
 	struct bio_vec *bv;
+=======
+	struct bio_vec bv;
+>>>>>>> v3.18
 	int size;
 	struct req_iterator iter;
 	char *base;
@@ -2360,10 +2433,17 @@ static int buffer_chain_size(void)
 	size = 0;
 
 	rq_for_each_segment(bv, current_req, iter) {
+<<<<<<< HEAD
 		if (page_address(bv->bv_page) + bv->bv_offset != base + size)
 			break;
 
 		size += bv->bv_len;
+=======
+		if (page_address(bv.bv_page) + bv.bv_offset != base + size)
+			break;
+
+		size += bv.bv_len;
+>>>>>>> v3.18
 	}
 
 	return size >> 9;
@@ -2389,7 +2469,11 @@ static int transfer_size(int ssize, int max_sector, int max_size)
 static void copy_buffer(int ssize, int max_sector, int max_sector_2)
 {
 	int remaining;		/* number of transferred 512-byte sectors */
+<<<<<<< HEAD
 	struct bio_vec *bv;
+=======
+	struct bio_vec bv;
+>>>>>>> v3.18
 	char *buffer;
 	char *dma_buffer;
 	int size;
@@ -2427,10 +2511,17 @@ static void copy_buffer(int ssize, int max_sector, int max_sector_2)
 		if (!remaining)
 			break;
 
+<<<<<<< HEAD
 		size = bv->bv_len;
 		SUPBOUND(size, remaining);
 
 		buffer = page_address(bv->bv_page) + bv->bv_offset;
+=======
+		size = bv.bv_len;
+		SUPBOUND(size, remaining);
+
+		buffer = page_address(bv.bv_page) + bv.bv_offset;
+>>>>>>> v3.18
 		if (dma_buffer + size >
 		    floppy_track_buffer + (max_buffer_sectors << 10) ||
 		    dma_buffer < floppy_track_buffer) {
@@ -2626,7 +2717,11 @@ static int make_raw_rw_request(void)
 		raw_cmd->flags &= ~FD_RAW_WRITE;
 		raw_cmd->flags |= FD_RAW_READ;
 		COMMAND = FM_MODE(_floppy, FD_READ);
+<<<<<<< HEAD
 	} else if ((unsigned long)current_req->buffer < MAX_DMA_ADDRESS) {
+=======
+	} else if ((unsigned long)bio_data(current_req->bio) < MAX_DMA_ADDRESS) {
+>>>>>>> v3.18
 		unsigned long dma_limit;
 		int direct, indirect;
 
@@ -2640,6 +2735,7 @@ static int make_raw_rw_request(void)
 		 */
 		max_size = buffer_chain_size();
 		dma_limit = (MAX_DMA_ADDRESS -
+<<<<<<< HEAD
 			     ((unsigned long)current_req->buffer)) >> 9;
 		if ((unsigned long)max_size > dma_limit)
 			max_size = dma_limit;
@@ -2647,6 +2743,15 @@ static int make_raw_rw_request(void)
 		if (CROSS_64KB(current_req->buffer, max_size << 9))
 			max_size = (K_64 -
 				    ((unsigned long)current_req->buffer) %
+=======
+			     ((unsigned long)bio_data(current_req->bio))) >> 9;
+		if ((unsigned long)max_size > dma_limit)
+			max_size = dma_limit;
+		/* 64 kb boundaries */
+		if (CROSS_64KB(bio_data(current_req->bio), max_size << 9))
+			max_size = (K_64 -
+				    ((unsigned long)bio_data(current_req->bio)) %
+>>>>>>> v3.18
 				    K_64) >> 9;
 		direct = transfer_size(ssize, max_sector, max_size) - fsector_t;
 		/*
@@ -2663,7 +2768,11 @@ static int make_raw_rw_request(void)
 		       (DP->read_track & (1 << DRS->probed_format)))))) {
 			max_size = blk_rq_sectors(current_req);
 		} else {
+<<<<<<< HEAD
 			raw_cmd->kernel_data = current_req->buffer;
+=======
+			raw_cmd->kernel_data = bio_data(current_req->bio);
+>>>>>>> v3.18
 			raw_cmd->length = current_count_sectors << 9;
 			if (raw_cmd->length == 0) {
 				DPRINT("%s: zero dma transfer attempted\n", __func__);
@@ -2717,7 +2826,11 @@ static int make_raw_rw_request(void)
 	raw_cmd->length = ((raw_cmd->length - 1) | (ssize - 1)) + 1;
 	raw_cmd->length <<= 9;
 	if ((raw_cmd->length < current_count_sectors << 9) ||
+<<<<<<< HEAD
 	    (raw_cmd->kernel_data != current_req->buffer &&
+=======
+	    (raw_cmd->kernel_data != bio_data(current_req->bio) &&
+>>>>>>> v3.18
 	     CT(COMMAND) == FD_WRITE &&
 	     (aligned_sector_t + (raw_cmd->length >> 9) > buffer_max ||
 	      aligned_sector_t < buffer_min)) ||
@@ -2725,7 +2838,11 @@ static int make_raw_rw_request(void)
 	    raw_cmd->length <= 0 || current_count_sectors <= 0) {
 		DPRINT("fractionary current count b=%lx s=%lx\n",
 		       raw_cmd->length, current_count_sectors);
+<<<<<<< HEAD
 		if (raw_cmd->kernel_data != current_req->buffer)
+=======
+		if (raw_cmd->kernel_data != bio_data(current_req->bio))
+>>>>>>> v3.18
 			pr_info("addr=%d, length=%ld\n",
 				(int)((raw_cmd->kernel_data -
 				       floppy_track_buffer) >> 9),
@@ -2742,7 +2859,11 @@ static int make_raw_rw_request(void)
 		return 0;
 	}
 
+<<<<<<< HEAD
 	if (raw_cmd->kernel_data != current_req->buffer) {
+=======
+	if (raw_cmd->kernel_data != bio_data(current_req->bio)) {
+>>>>>>> v3.18
 		if (raw_cmd->kernel_data < floppy_track_buffer ||
 		    current_count_sectors < 0 ||
 		    raw_cmd->length < 0 ||
@@ -2886,9 +3007,15 @@ static void do_fd_request(struct request_queue *q)
 		return;
 
 	if (WARN(atomic_read(&usage_count) == 0,
+<<<<<<< HEAD
 		 "warning: usage count=0, current_req=%p sect=%ld type=%x flags=%x\n",
 		 current_req, (long)blk_rq_pos(current_req), current_req->cmd_type,
 		 current_req->cmd_flags))
+=======
+		 "warning: usage count=0, current_req=%p sect=%ld type=%x flags=%llx\n",
+		 current_req, (long)blk_rq_pos(current_req), current_req->cmd_type,
+		 (unsigned long long) current_req->cmd_flags))
+>>>>>>> v3.18
 		return;
 
 	if (test_and_set_bit(0, &fdc_busy)) {
@@ -3694,9 +3821,18 @@ static int floppy_open(struct block_device *bdev, fmode_t mode)
 	if (!(mode & FMODE_NDELAY)) {
 		if (mode & (FMODE_READ|FMODE_WRITE)) {
 			UDRS->last_checked = 0;
+<<<<<<< HEAD
 			check_disk_change(bdev);
 			if (test_bit(FD_DISK_CHANGED_BIT, &UDRS->flags))
 				goto out;
+=======
+			clear_bit(FD_OPEN_SHOULD_FAIL_BIT, &UDRS->flags);
+			check_disk_change(bdev);
+			if (test_bit(FD_DISK_CHANGED_BIT, &UDRS->flags))
+				goto out;
+			if (test_bit(FD_OPEN_SHOULD_FAIL_BIT, &UDRS->flags))
+				goto out;
+>>>>>>> v3.18
 		}
 		res = -EROFS;
 		if ((mode & FMODE_WRITE) &&
@@ -3749,6 +3885,7 @@ static unsigned int floppy_check_events(struct gendisk *disk,
  * a disk in the drive, and whether that disk is writable.
  */
 
+<<<<<<< HEAD
 static void floppy_rb0_complete(struct bio *bio, int err)
 {
 	complete((struct completion *)bio->bi_private);
@@ -3760,6 +3897,31 @@ static int __floppy_read_block_0(struct block_device *bdev)
 	struct bio_vec bio_vec;
 	struct completion complete;
 	struct page *page;
+=======
+struct rb0_cbdata {
+	int drive;
+	struct completion complete;
+};
+
+static void floppy_rb0_cb(struct bio *bio, int err)
+{
+	struct rb0_cbdata *cbdata = (struct rb0_cbdata *)bio->bi_private;
+	int drive = cbdata->drive;
+
+	if (err) {
+		pr_info("floppy: error %d while reading block 0\n", err);
+		set_bit(FD_OPEN_SHOULD_FAIL_BIT, &UDRS->flags);
+	}
+	complete(&cbdata->complete);
+}
+
+static int __floppy_read_block_0(struct block_device *bdev, int drive)
+{
+	struct bio bio;
+	struct bio_vec bio_vec;
+	struct page *page;
+	struct rb0_cbdata cbdata;
+>>>>>>> v3.18
 	size_t size;
 
 	page = alloc_page(GFP_NOIO);
@@ -3772,12 +3934,18 @@ static int __floppy_read_block_0(struct block_device *bdev)
 	if (!size)
 		size = 1024;
 
+<<<<<<< HEAD
+=======
+	cbdata.drive = drive;
+
+>>>>>>> v3.18
 	bio_init(&bio);
 	bio.bi_io_vec = &bio_vec;
 	bio_vec.bv_page = page;
 	bio_vec.bv_len = size;
 	bio_vec.bv_offset = 0;
 	bio.bi_vcnt = 1;
+<<<<<<< HEAD
 	bio.bi_size = size;
 	bio.bi_bdev = bdev;
 	bio.bi_sector = 0;
@@ -3789,6 +3957,20 @@ static int __floppy_read_block_0(struct block_device *bdev)
 	submit_bio(READ, &bio);
 	process_fd_request();
 	wait_for_completion(&complete);
+=======
+	bio.bi_iter.bi_size = size;
+	bio.bi_bdev = bdev;
+	bio.bi_iter.bi_sector = 0;
+	bio.bi_flags |= (1 << BIO_QUIET);
+	bio.bi_private = &cbdata;
+	bio.bi_end_io = floppy_rb0_cb;
+
+	submit_bio(READ, &bio);
+	process_fd_request();
+
+	init_completion(&cbdata.complete);
+	wait_for_completion(&cbdata.complete);
+>>>>>>> v3.18
 
 	__free_page(page);
 
@@ -3830,7 +4012,11 @@ static int floppy_revalidate(struct gendisk *disk)
 			UDRS->generation++;
 		if (drive_no_geom(drive)) {
 			/* auto-sensing */
+<<<<<<< HEAD
 			res = __floppy_read_block_0(opened_bdev[drive]);
+=======
+			res = __floppy_read_block_0(opened_bdev[drive], drive);
+>>>>>>> v3.18
 		} else {
 			if (cf)
 				poll_drive(false, FD_RAW_NEED_DISK);

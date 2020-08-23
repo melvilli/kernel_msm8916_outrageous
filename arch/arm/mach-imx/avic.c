@@ -54,6 +54,7 @@
 static void __iomem *avic_base;
 static struct irq_domain *domain;
 
+<<<<<<< HEAD
 #ifdef CONFIG_MXC_IRQ_PRIOR
 static int avic_irq_set_priority(unsigned char irq, unsigned char prio)
 {
@@ -76,6 +77,8 @@ static int avic_irq_set_priority(unsigned char irq, unsigned char prio)
 }
 #endif
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_FIQ
 static int avic_set_irq_fiq(unsigned int irq, unsigned int type)
 {
@@ -102,9 +105,12 @@ static int avic_set_irq_fiq(unsigned int irq, unsigned int type)
 
 
 static struct mxc_extra_irq avic_extra_irq = {
+<<<<<<< HEAD
 #ifdef CONFIG_MXC_IRQ_PRIOR
 	.set_priority = avic_irq_set_priority,
 #endif
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_FIQ
 	.set_irq_fiq = avic_set_irq_fiq,
 #endif
@@ -160,7 +166,11 @@ static __init void avic_init_gc(int idx, unsigned int irq_start)
 	irq_setup_generic_chip(gc, IRQ_MSK(32), 0, IRQ_NOREQUEST, 0);
 }
 
+<<<<<<< HEAD
 asmlinkage void __exception_irq_entry avic_handle_irq(struct pt_regs *regs)
+=======
+static void __exception_irq_entry avic_handle_irq(struct pt_regs *regs)
+>>>>>>> v3.18
 {
 	u32 nivector;
 
@@ -169,7 +179,11 @@ asmlinkage void __exception_irq_entry avic_handle_irq(struct pt_regs *regs)
 		if (nivector == 0xffff)
 			break;
 
+<<<<<<< HEAD
 		handle_IRQ(irq_find_mapping(domain, nivector), regs);
+=======
+		handle_domain_irq(domain, nivector, regs);
+>>>>>>> v3.18
 	} while (1);
 }
 
@@ -215,6 +229,11 @@ void __init mxc_init_irq(void __iomem *irqbase)
 	for (i = 0; i < 8; i++)
 		__raw_writel(0, avic_base + AVIC_NIPRIORITY(i));
 
+<<<<<<< HEAD
+=======
+	set_handle_irq(avic_handle_irq);
+
+>>>>>>> v3.18
 #ifdef CONFIG_FIQ
 	/* Initialize FIQ */
 	init_FIQ(FIQ_START);

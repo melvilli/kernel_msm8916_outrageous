@@ -11,6 +11,10 @@
 #include <linux/pm.h>
 
 #include <asm/bootinfo.h>
+<<<<<<< HEAD
+=======
+#include <asm/idle.h>
+>>>>>>> v3.18
 #include <asm/reboot.h>
 #include <asm/mach-au1x00/au1000.h>
 #include <asm/mach-db1x00/bcsr.h>
@@ -53,6 +57,11 @@ static void db1x_power_off(void)
 {
 	bcsr_write(BCSR_RESETS, 0);
 	bcsr_write(BCSR_SYSTEM, BCSR_SYSTEM_PWROFF | BCSR_SYSTEM_RESET);
+<<<<<<< HEAD
+=======
+	while (1)		/* sit and spin */
+		cpu_wait();
+>>>>>>> v3.18
 }
 
 static void db1x_reset(char *c)

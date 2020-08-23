@@ -70,7 +70,11 @@ static int adis16220_capture(struct iio_dev *indio_dev)
 	if (ret)
 		dev_err(&indio_dev->dev, "problem beginning capture");
 
+<<<<<<< HEAD
 	msleep(10); /* delay for capture to finish */
+=======
+	usleep_range(10000, 11000); /* delay for capture to finish */
+>>>>>>> v3.18
 
 	return ret;
 }
@@ -102,7 +106,10 @@ static ssize_t adis16220_capture_buffer_read(struct iio_dev *indio_dev,
 					int addr)
 {
 	struct adis16220_state *st = iio_priv(indio_dev);
+<<<<<<< HEAD
 	struct spi_message msg;
+=======
+>>>>>>> v3.18
 	struct spi_transfer xfers[] = {
 		{
 			.tx_buf = st->tx,
@@ -147,10 +154,14 @@ static ssize_t adis16220_capture_buffer_read(struct iio_dev *indio_dev,
 	}
 	xfers[1].len = count;
 
+<<<<<<< HEAD
 	spi_message_init(&msg);
 	spi_message_add_tail(&xfers[0], &msg);
 	spi_message_add_tail(&xfers[1], &msg);
 	ret = spi_sync(st->adis.spi, &msg);
+=======
+	ret = spi_sync_transfer(st->adis.spi, xfers, ARRAY_SIZE(xfers));
+>>>>>>> v3.18
 	if (ret) {
 
 		mutex_unlock(&st->buf_lock);
@@ -327,6 +338,7 @@ static int adis16220_read_raw(struct iio_dev *indio_dev,
 		sval = (s16)(sval << (16 - bits)) >> (16 - bits);
 		*val = sval;
 		return IIO_VAL_INT;
+<<<<<<< HEAD
 	} else {
 		ret = adis_read_reg_16(&st->adis, addr->addr, &uval);
 		if (ret)
@@ -336,6 +348,16 @@ static int adis16220_read_raw(struct iio_dev *indio_dev,
 		*val = uval;
 		return IIO_VAL_INT;
 	}
+=======
+	}
+	ret = adis_read_reg_16(&st->adis, addr->addr, &uval);
+	if (ret)
+		return ret;
+	bits = addr->bits;
+	uval &= (1 << bits) - 1;
+	*val = uval;
+	return IIO_VAL_INT;
+>>>>>>> v3.18
 }
 
 static const struct iio_chan_spec adis16220_channels[] = {
@@ -428,11 +450,17 @@ static int adis16220_probe(struct spi_device *spi)
 	struct iio_dev *indio_dev;
 
 	/* setup the industrialio driver allocated elements */
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*st));
 	if (indio_dev == NULL) {
 		ret = -ENOMEM;
 		goto error_ret;
 	}
+=======
+	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
+	if (!indio_dev)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	st = iio_priv(indio_dev);
 	/* this is only used for removal purposes */
@@ -445,6 +473,7 @@ static int adis16220_probe(struct spi_device *spi)
 	indio_dev->channels = adis16220_channels;
 	indio_dev->num_channels = ARRAY_SIZE(adis16220_channels);
 
+<<<<<<< HEAD
 	ret = iio_device_register(indio_dev);
 	if (ret)
 		goto error_free_dev;
@@ -452,6 +481,15 @@ static int adis16220_probe(struct spi_device *spi)
 	ret = sysfs_create_bin_file(&indio_dev->dev.kobj, &accel_bin);
 	if (ret)
 		goto error_unregister_dev;
+=======
+	ret = devm_iio_device_register(&spi->dev, indio_dev);
+	if (ret)
+		return ret;
+
+	ret = sysfs_create_bin_file(&indio_dev->dev.kobj, &accel_bin);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 
 	ret = sysfs_create_bin_file(&indio_dev->dev.kobj, &adc1_bin);
 	if (ret)
@@ -476,11 +514,14 @@ error_rm_adc1_bin:
 	sysfs_remove_bin_file(&indio_dev->dev.kobj, &adc1_bin);
 error_rm_accel_bin:
 	sysfs_remove_bin_file(&indio_dev->dev.kobj, &accel_bin);
+<<<<<<< HEAD
 error_unregister_dev:
 	iio_device_unregister(indio_dev);
 error_free_dev:
 	iio_device_free(indio_dev);
 error_ret:
+=======
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -491,8 +532,11 @@ static int adis16220_remove(struct spi_device *spi)
 	sysfs_remove_bin_file(&indio_dev->dev.kobj, &adc2_bin);
 	sysfs_remove_bin_file(&indio_dev->dev.kobj, &adc1_bin);
 	sysfs_remove_bin_file(&indio_dev->dev.kobj, &accel_bin);
+<<<<<<< HEAD
 	iio_device_unregister(indio_dev);
 	iio_device_free(indio_dev);
+=======
+>>>>>>> v3.18
 
 	return 0;
 }

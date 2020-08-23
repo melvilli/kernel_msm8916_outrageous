@@ -1,4 +1,8 @@
 /*
+<<<<<<< HEAD
+=======
+ * Copyright (c) 2014 Open Grid Computing, Inc. All rights reserved.
+>>>>>>> v3.18
  * Copyright (c) 2005-2006 Network Appliance, Inc. All rights reserved.
  *
  * This software is available to you under a choice of one of two
@@ -49,6 +53,7 @@
 
 #define RPCDBG_FACILITY	RPCDBG_SVCXPRT
 
+<<<<<<< HEAD
 /* Encode an XDR as an array of IB SGE
  *
  * Assumptions:
@@ -195,6 +200,8 @@ static int fast_reg_xdr(struct svcxprt_rdma *xprt,
 	return -EIO;
 }
 
+=======
+>>>>>>> v3.18
 static int map_xdr(struct svcxprt_rdma *xprt,
 		   struct xdr_buf *xdr,
 		   struct svc_rdma_req_map *vec)
@@ -208,9 +215,12 @@ static int map_xdr(struct svcxprt_rdma *xprt,
 	BUG_ON(xdr->len !=
 	       (xdr->head[0].iov_len + xdr->page_len + xdr->tail[0].iov_len));
 
+<<<<<<< HEAD
 	if (xprt->sc_frmr_pg_list_len)
 		return fast_reg_xdr(xprt, xdr, vec);
 
+=======
+>>>>>>> v3.18
 	/* Skip the first sge, this is for the RPCRDMA header */
 	sge_no = 1;
 
@@ -265,6 +275,10 @@ static dma_addr_t dma_map_xdr(struct svcxprt_rdma *xprt,
 		xdr_off -= xdr->head[0].iov_len;
 		if (xdr_off < xdr->page_len) {
 			/* This offset is in the page list */
+<<<<<<< HEAD
+=======
+			xdr_off += xdr->page_base;
+>>>>>>> v3.18
 			page = xdr->pages[xdr_off >> PAGE_SHIFT];
 			xdr_off &= ~PAGE_MASK;
 		} else {
@@ -281,8 +295,11 @@ static dma_addr_t dma_map_xdr(struct svcxprt_rdma *xprt,
 }
 
 /* Assumptions:
+<<<<<<< HEAD
  * - We are using FRMR
  *     - or -
+=======
+>>>>>>> v3.18
  * - The specified write_len can be represented in sc_max_sge * PAGE_SIZE
  */
 static int send_write(struct svcxprt_rdma *xprt, struct svc_rqst *rqstp,
@@ -326,6 +343,7 @@ static int send_write(struct svcxprt_rdma *xprt, struct svc_rqst *rqstp,
 		sge_bytes = min_t(size_t,
 			  bc, vec->sge[xdr_sge_no].iov_len-sge_off);
 		sge[sge_no].length = sge_bytes;
+<<<<<<< HEAD
 		if (!vec->frmr) {
 			sge[sge_no].addr =
 				dma_map_xdr(xprt, &rqstp->rq_res, xdr_off,
@@ -343,11 +361,28 @@ static int send_write(struct svcxprt_rdma *xprt, struct svc_rqst *rqstp,
 		}
 		ctxt->count++;
 		ctxt->frmr = vec->frmr;
+=======
+		sge[sge_no].addr =
+			dma_map_xdr(xprt, &rqstp->rq_res, xdr_off,
+				    sge_bytes, DMA_TO_DEVICE);
+		xdr_off += sge_bytes;
+		if (ib_dma_mapping_error(xprt->sc_cm_id->device,
+					 sge[sge_no].addr))
+			goto err;
+		atomic_inc(&xprt->sc_dma_used);
+		sge[sge_no].lkey = xprt->sc_dma_lkey;
+		ctxt->count++;
+>>>>>>> v3.18
 		sge_off = 0;
 		sge_no++;
 		xdr_sge_no++;
 		BUG_ON(xdr_sge_no > vec->count);
 		bc -= sge_bytes;
+<<<<<<< HEAD
+=======
+		if (sge_no == xprt->sc_max_sge)
+			break;
+>>>>>>> v3.18
 	}
 
 	/* Prepare WRITE WR */
@@ -365,10 +400,16 @@ static int send_write(struct svcxprt_rdma *xprt, struct svc_rqst *rqstp,
 	atomic_inc(&rdma_stat_write);
 	if (svc_rdma_send(xprt, &write_wr))
 		goto err;
+<<<<<<< HEAD
 	return 0;
  err:
 	svc_rdma_unmap_dma(ctxt);
 	svc_rdma_put_frmr(xprt, vec->frmr);
+=======
+	return write_len - bc;
+ err:
+	svc_rdma_unmap_dma(ctxt);
+>>>>>>> v3.18
 	svc_rdma_put_context(ctxt, 0);
 	/* Fatal error, close transport */
 	return -EIO;
@@ -382,7 +423,10 @@ static int send_write_chunks(struct svcxprt_rdma *xprt,
 {
 	u32 xfer_len = rqstp->rq_res.page_len + rqstp->rq_res.tail[0].iov_len;
 	int write_len;
+<<<<<<< HEAD
 	int max_write;
+=======
+>>>>>>> v3.18
 	u32 xdr_off;
 	int chunk_off;
 	int chunk_no;
@@ -396,11 +440,14 @@ static int send_write_chunks(struct svcxprt_rdma *xprt,
 	res_ary = (struct rpcrdma_write_array *)
 		&rdma_resp->rm_body.rm_chunks[1];
 
+<<<<<<< HEAD
 	if (vec->frmr)
 		max_write = vec->frmr->map_len;
 	else
 		max_write = xprt->sc_max_sge * PAGE_SIZE;
 
+=======
+>>>>>>> v3.18
 	/* Write chunks start at the pagelist */
 	for (xdr_off = rqstp->rq_res.head[0].iov_len, chunk_no = 0;
 	     xfer_len && chunk_no < arg_ary->wc_nchunks;
@@ -420,23 +467,39 @@ static int send_write_chunks(struct svcxprt_rdma *xprt,
 						write_len);
 		chunk_off = 0;
 		while (write_len) {
+<<<<<<< HEAD
 			int this_write;
 			this_write = min(write_len, max_write);
+=======
+>>>>>>> v3.18
 			ret = send_write(xprt, rqstp,
 					 ntohl(arg_ch->rs_handle),
 					 rs_offset + chunk_off,
 					 xdr_off,
+<<<<<<< HEAD
 					 this_write,
 					 vec);
 			if (ret) {
+=======
+					 write_len,
+					 vec);
+			if (ret <= 0) {
+>>>>>>> v3.18
 				dprintk("svcrdma: RDMA_WRITE failed, ret=%d\n",
 					ret);
 				return -EIO;
 			}
+<<<<<<< HEAD
 			chunk_off += this_write;
 			xdr_off += this_write;
 			xfer_len -= this_write;
 			write_len -= this_write;
+=======
+			chunk_off += ret;
+			xdr_off += ret;
+			xfer_len -= ret;
+			write_len -= ret;
+>>>>>>> v3.18
 		}
 	}
 	/* Update the req with the number of chunks actually used */
@@ -453,7 +516,10 @@ static int send_reply_chunks(struct svcxprt_rdma *xprt,
 {
 	u32 xfer_len = rqstp->rq_res.len;
 	int write_len;
+<<<<<<< HEAD
 	int max_write;
+=======
+>>>>>>> v3.18
 	u32 xdr_off;
 	int chunk_no;
 	int chunk_off;
@@ -471,11 +537,14 @@ static int send_reply_chunks(struct svcxprt_rdma *xprt,
 	res_ary = (struct rpcrdma_write_array *)
 		&rdma_resp->rm_body.rm_chunks[2];
 
+<<<<<<< HEAD
 	if (vec->frmr)
 		max_write = vec->frmr->map_len;
 	else
 		max_write = xprt->sc_max_sge * PAGE_SIZE;
 
+=======
+>>>>>>> v3.18
 	/* xdr offset starts at RPC message */
 	nchunks = ntohl(arg_ary->wc_nchunks);
 	for (xdr_off = 0, chunk_no = 0;
@@ -493,24 +562,40 @@ static int send_reply_chunks(struct svcxprt_rdma *xprt,
 						write_len);
 		chunk_off = 0;
 		while (write_len) {
+<<<<<<< HEAD
 			int this_write;
 
 			this_write = min(write_len, max_write);
+=======
+>>>>>>> v3.18
 			ret = send_write(xprt, rqstp,
 					 ntohl(ch->rs_handle),
 					 rs_offset + chunk_off,
 					 xdr_off,
+<<<<<<< HEAD
 					 this_write,
 					 vec);
 			if (ret) {
+=======
+					 write_len,
+					 vec);
+			if (ret <= 0) {
+>>>>>>> v3.18
 				dprintk("svcrdma: RDMA_WRITE failed, ret=%d\n",
 					ret);
 				return -EIO;
 			}
+<<<<<<< HEAD
 			chunk_off += this_write;
 			xdr_off += this_write;
 			xfer_len -= this_write;
 			write_len -= this_write;
+=======
+			chunk_off += ret;
+			xdr_off += ret;
+			xfer_len -= ret;
+			write_len -= ret;
+>>>>>>> v3.18
 		}
 	}
 	/* Update the req with the number of chunks actually used */
@@ -544,7 +629,10 @@ static int send_reply(struct svcxprt_rdma *rdma,
 		      int byte_count)
 {
 	struct ib_send_wr send_wr;
+<<<<<<< HEAD
 	struct ib_send_wr inv_wr;
+=======
+>>>>>>> v3.18
 	int sge_no;
 	int sge_bytes;
 	int page_no;
@@ -558,7 +646,10 @@ static int send_reply(struct svcxprt_rdma *rdma,
 		       "svcrdma: could not post a receive buffer, err=%d."
 		       "Closing transport %p.\n", ret, rdma);
 		set_bit(XPT_CLOSE, &rdma->sc_xprt.xpt_flags);
+<<<<<<< HEAD
 		svc_rdma_put_frmr(rdma, vec->frmr);
+=======
+>>>>>>> v3.18
 		svc_rdma_put_context(ctxt, 0);
 		return -ENOTCONN;
 	}
@@ -566,11 +657,14 @@ static int send_reply(struct svcxprt_rdma *rdma,
 	/* Prepare the context */
 	ctxt->pages[0] = page;
 	ctxt->count = 1;
+<<<<<<< HEAD
 	ctxt->frmr = vec->frmr;
 	if (vec->frmr)
 		set_bit(RDMACTXT_F_FAST_UNREG, &ctxt->flags);
 	else
 		clear_bit(RDMACTXT_F_FAST_UNREG, &ctxt->flags);
+=======
+>>>>>>> v3.18
 
 	/* Prepare the SGE for the RPCRDMA Header */
 	ctxt->sge[0].lkey = rdma->sc_dma_lkey;
@@ -589,6 +683,7 @@ static int send_reply(struct svcxprt_rdma *rdma,
 		int xdr_off = 0;
 		sge_bytes = min_t(size_t, vec->sge[sge_no].iov_len, byte_count);
 		byte_count -= sge_bytes;
+<<<<<<< HEAD
 		if (!vec->frmr) {
 			ctxt->sge[sge_no].addr =
 				dma_map_xdr(rdma, &rqstp->rq_res, xdr_off,
@@ -604,6 +699,17 @@ static int send_reply(struct svcxprt_rdma *rdma,
 				vec->sge[sge_no].iov_base;
 			ctxt->sge[sge_no].lkey = vec->frmr->mr->lkey;
 		}
+=======
+		ctxt->sge[sge_no].addr =
+			dma_map_xdr(rdma, &rqstp->rq_res, xdr_off,
+				    sge_bytes, DMA_TO_DEVICE);
+		xdr_off += sge_bytes;
+		if (ib_dma_mapping_error(rdma->sc_cm_id->device,
+					 ctxt->sge[sge_no].addr))
+			goto err;
+		atomic_inc(&rdma->sc_dma_used);
+		ctxt->sge[sge_no].lkey = rdma->sc_dma_lkey;
+>>>>>>> v3.18
 		ctxt->sge[sge_no].length = sge_bytes;
 	}
 	BUG_ON(byte_count != 0);
@@ -625,6 +731,11 @@ static int send_reply(struct svcxprt_rdma *rdma,
 		if (page_no+1 >= sge_no)
 			ctxt->sge[page_no+1].length = 0;
 	}
+<<<<<<< HEAD
+=======
+	rqstp->rq_next_page = rqstp->rq_respages + 1;
+
+>>>>>>> v3.18
 	BUG_ON(sge_no > rdma->sc_max_sge);
 	memset(&send_wr, 0, sizeof send_wr);
 	ctxt->wr_op = IB_WR_SEND;
@@ -633,6 +744,7 @@ static int send_reply(struct svcxprt_rdma *rdma,
 	send_wr.num_sge = sge_no;
 	send_wr.opcode = IB_WR_SEND;
 	send_wr.send_flags =  IB_SEND_SIGNALED;
+<<<<<<< HEAD
 	if (vec->frmr) {
 		/* Prepare INVALIDATE WR */
 		memset(&inv_wr, 0, sizeof inv_wr);
@@ -642,6 +754,8 @@ static int send_reply(struct svcxprt_rdma *rdma,
 			vec->frmr->mr->lkey;
 		send_wr.next = &inv_wr;
 	}
+=======
+>>>>>>> v3.18
 
 	ret = svc_rdma_send(rdma, &send_wr);
 	if (ret)
@@ -651,7 +765,10 @@ static int send_reply(struct svcxprt_rdma *rdma,
 
  err:
 	svc_rdma_unmap_dma(ctxt);
+<<<<<<< HEAD
 	svc_rdma_put_frmr(rdma, vec->frmr);
+=======
+>>>>>>> v3.18
 	svc_rdma_put_context(ctxt, 1);
 	return -EIO;
 }

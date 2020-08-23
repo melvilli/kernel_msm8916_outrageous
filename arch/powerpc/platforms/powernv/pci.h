@@ -17,10 +17,19 @@ enum pnv_phb_model {
 	PNV_PHB_MODEL_PHB3,
 };
 
+<<<<<<< HEAD
 #define PNV_PCI_DIAG_BUF_SIZE	4096
 #define PNV_IODA_PE_DEV		(1 << 0)	/* PE has single PCI device	*/
 #define PNV_IODA_PE_BUS		(1 << 1)	/* PE has primary PCI bus	*/
 #define PNV_IODA_PE_BUS_ALL	(1 << 2)	/* PE has subordinate buses	*/
+=======
+#define PNV_PCI_DIAG_BUF_SIZE	8192
+#define PNV_IODA_PE_DEV		(1 << 0)	/* PE has single PCI device	*/
+#define PNV_IODA_PE_BUS		(1 << 1)	/* PE has primary PCI bus	*/
+#define PNV_IODA_PE_BUS_ALL	(1 << 2)	/* PE has subordinate buses	*/
+#define PNV_IODA_PE_MASTER	(1 << 3)	/* Master PE in compound case	*/
+#define PNV_IODA_PE_SLAVE	(1 << 4)	/* Slave PE in compound case	*/
+>>>>>>> v3.18
 
 /* Data associated with a PE, including IOMMU tracking etc.. */
 struct pnv_phb;
@@ -52,8 +61,16 @@ struct pnv_ioda_pe {
 	int			tce32_seg;
 	int			tce32_segcount;
 	struct iommu_table	tce32_table;
+<<<<<<< HEAD
 
 	/* XXX TODO: Add support for additional 64-bit iommus */
+=======
+	phys_addr_t		tce_inval_reg_phys;
+
+	/* 64-bit TCE bypass region */
+	bool			tce_bypass_enabled;
+	uint64_t		tce_bypass_base;
+>>>>>>> v3.18
 
 	/* MSIs. MVE index is identical for for 32 and 64 bit MSI
 	 * and -1 if not supported. (It's actually identical to the
@@ -61,20 +78,66 @@ struct pnv_ioda_pe {
 	 */
 	int			mve_number;
 
+<<<<<<< HEAD
+=======
+	/* PEs in compound case */
+	struct pnv_ioda_pe	*master;
+	struct list_head	slaves;
+
+>>>>>>> v3.18
 	/* Link in list of PE#s */
 	struct list_head	dma_link;
 	struct list_head	list;
 };
 
+<<<<<<< HEAD
+=======
+/* IOC dependent EEH operations */
+#ifdef CONFIG_EEH
+struct pnv_eeh_ops {
+	int (*post_init)(struct pci_controller *hose);
+	int (*set_option)(struct eeh_pe *pe, int option);
+	int (*get_state)(struct eeh_pe *pe);
+	int (*reset)(struct eeh_pe *pe, int option);
+	int (*get_log)(struct eeh_pe *pe, int severity,
+		       char *drv_log, unsigned long len);
+	int (*configure_bridge)(struct eeh_pe *pe);
+	int (*err_inject)(struct eeh_pe *pe, int type, int func,
+			  unsigned long addr, unsigned long mask);
+	int (*next_error)(struct eeh_pe **pe);
+};
+#endif /* CONFIG_EEH */
+
+#define PNV_PHB_FLAG_EEH	(1 << 0)
+
+>>>>>>> v3.18
 struct pnv_phb {
 	struct pci_controller	*hose;
 	enum pnv_phb_type	type;
 	enum pnv_phb_model	model;
+<<<<<<< HEAD
 	u64			opal_id;
+=======
+	u64			hub_id;
+	u64			opal_id;
+	int			flags;
+>>>>>>> v3.18
 	void __iomem		*regs;
 	int			initialized;
 	spinlock_t		lock;
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_EEH
+	struct pnv_eeh_ops	*eeh_ops;
+#endif
+
+#ifdef CONFIG_DEBUG_FS
+	int			has_dbgfs;
+	struct dentry		*dbgfs;
+#endif
+
+>>>>>>> v3.18
 #ifdef CONFIG_PCI_MSI
 	unsigned int		msi_base;
 	unsigned int		msi32_support;
@@ -84,9 +147,25 @@ struct pnv_phb {
 			 unsigned int hwirq, unsigned int virq,
 			 unsigned int is_64, struct msi_msg *msg);
 	void (*dma_dev_setup)(struct pnv_phb *phb, struct pci_dev *pdev);
+<<<<<<< HEAD
 	void (*fixup_phb)(struct pci_controller *hose);
 	u32 (*bdfn_to_pe)(struct pnv_phb *phb, struct pci_bus *bus, u32 devfn);
 	void (*shutdown)(struct pnv_phb *phb);
+=======
+	int (*dma_set_mask)(struct pnv_phb *phb, struct pci_dev *pdev,
+			    u64 dma_mask);
+	u64 (*dma_get_required_mask)(struct pnv_phb *phb,
+				     struct pci_dev *pdev);
+	void (*fixup_phb)(struct pci_controller *hose);
+	u32 (*bdfn_to_pe)(struct pnv_phb *phb, struct pci_bus *bus, u32 devfn);
+	void (*shutdown)(struct pnv_phb *phb);
+	int (*init_m64)(struct pnv_phb *phb);
+	void (*alloc_m64_pe)(struct pnv_phb *phb);
+	int (*pick_m64_pe)(struct pnv_phb *phb, struct pci_bus *bus, int all);
+	int (*get_pe_state)(struct pnv_phb *phb, int pe_no);
+	void (*freeze_pe)(struct pnv_phb *phb, int pe_no);
+	int (*unfreeze_pe)(struct pnv_phb *phb, int pe_no, int opt);
+>>>>>>> v3.18
 
 	union {
 		struct {
@@ -96,9 +175,27 @@ struct pnv_phb {
 		struct {
 			/* Global bridge info */
 			unsigned int		total_pe;
+<<<<<<< HEAD
 			unsigned int		m32_size;
 			unsigned int		m32_segsize;
 			unsigned int		m32_pci_base;
+=======
+			unsigned int		reserved_pe;
+
+			/* 32-bit MMIO window */
+			unsigned int		m32_size;
+			unsigned int		m32_segsize;
+			unsigned int		m32_pci_base;
+
+			/* 64-bit MMIO window */
+			unsigned int		m64_bar_idx;
+			unsigned long		m64_size;
+			unsigned long		m64_segsize;
+			unsigned long		m64_base;
+			unsigned long		m64_bar_alloc;
+
+			/* IO ports */
+>>>>>>> v3.18
 			unsigned int		io_size;
 			unsigned int		io_segsize;
 			unsigned int		io_pci_base;
@@ -142,6 +239,7 @@ struct pnv_phb {
 		} ioda;
 	};
 
+<<<<<<< HEAD
 	/* PHB status structure */
 	union {
 		unsigned char			blob[PNV_PCI_DIAG_BUF_SIZE];
@@ -154,10 +252,42 @@ extern struct pci_ops pnv_pci_ops;
 extern void pnv_pci_setup_iommu_table(struct iommu_table *tbl,
 				      void *tce_mem, u64 tce_size,
 				      u64 dma_offset);
+=======
+	/* PHB and hub status structure */
+	union {
+		unsigned char			blob[PNV_PCI_DIAG_BUF_SIZE];
+		struct OpalIoP7IOCPhbErrorData	p7ioc;
+		struct OpalIoPhb3ErrorData	phb3;
+		struct OpalIoP7IOCErrorData 	hub_diag;
+	} diag;
+
+};
+
+extern struct pci_ops pnv_pci_ops;
+#ifdef CONFIG_EEH
+extern struct pnv_eeh_ops ioda_eeh_ops;
+#endif
+
+void pnv_pci_dump_phb_diag_data(struct pci_controller *hose,
+				unsigned char *log_buff);
+int pnv_pci_cfg_read(struct device_node *dn,
+		     int where, int size, u32 *val);
+int pnv_pci_cfg_write(struct device_node *dn,
+		      int where, int size, u32 val);
+extern void pnv_pci_setup_iommu_table(struct iommu_table *tbl,
+				      void *tce_mem, u64 tce_size,
+				      u64 dma_offset, unsigned page_shift);
+>>>>>>> v3.18
 extern void pnv_pci_init_p5ioc2_hub(struct device_node *np);
 extern void pnv_pci_init_ioda_hub(struct device_node *np);
 extern void pnv_pci_init_ioda2_phb(struct device_node *np);
 extern void pnv_pci_ioda_tce_invalidate(struct iommu_table *tbl,
+<<<<<<< HEAD
 					u64 *startp, u64 *endp);
+=======
+					__be64 *startp, __be64 *endp, bool rm);
+extern void pnv_pci_reset_secondary_bus(struct pci_dev *dev);
+extern int ioda_eeh_phb_reset(struct pci_controller *hose, int option);
+>>>>>>> v3.18
 
 #endif /* __POWERNV_PCI_H */

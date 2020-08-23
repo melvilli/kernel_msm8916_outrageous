@@ -79,17 +79,26 @@ void PHY_SetRF8256Bandwidth(struct net_device *dev,
 
 		}
 	}
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 }
 
 bool PHY_RF8256_Config(struct net_device *dev)
 {
 	struct r8192_priv *priv = rtllib_priv(dev);
+<<<<<<< HEAD
 	bool rtStatus = true;
 	priv->NumTotalRFPath = RTL819X_TOTAL_RF_PATH;
 	rtStatus = phy_RF8256_Config_ParaFile(dev);
 
 	return rtStatus;
+=======
+
+	priv->NumTotalRFPath = RTL819X_TOTAL_RF_PATH;
+	return phy_RF8256_Config_ParaFile(dev);
+>>>>>>> v3.18
 }
 
 bool phy_RF8256_Config_ParaFile(struct net_device *dev)
@@ -140,7 +149,11 @@ bool phy_RF8256_Config_ParaFile(struct net_device *dev)
 
 		rtStatus = rtl8192_phy_checkBBAndRF(dev, HW90_BLOCK_RF,
 						(enum rf90_radio_path)eRFPath);
+<<<<<<< HEAD
 		if (rtStatus != true) {
+=======
+		if (!rtStatus) {
+>>>>>>> v3.18
 			RT_TRACE(COMP_ERR, "PHY_RF8256_Config():Check "
 				 "Radio[%d] Fail!!\n", eRFPath);
 			goto phy_RF8256_Config_ParaFile_Fail;
@@ -231,11 +244,19 @@ bool phy_RF8256_Config_ParaFile(struct net_device *dev)
 
 	}
 
+<<<<<<< HEAD
 	RT_TRACE(COMP_PHY, "PHY Initialization Success\n") ;
 	return true;
 
 phy_RF8256_Config_ParaFile_Fail:
 	RT_TRACE(COMP_ERR, "PHY Initialization failed\n") ;
+=======
+	RT_TRACE(COMP_PHY, "PHY Initialization Success\n");
+	return true;
+
+phy_RF8256_Config_ParaFile_Fail:
+	RT_TRACE(COMP_ERR, "PHY Initialization failed\n");
+>>>>>>> v3.18
 	return false;
 }
 
@@ -245,7 +266,11 @@ void PHY_SetRF8256CCKTxPower(struct net_device *dev, u8	powerlevel)
 	struct r8192_priv *priv = rtllib_priv(dev);
 
 	TxAGC = powerlevel;
+<<<<<<< HEAD
 	if (priv->bDynamicTxLowPower == true) {
+=======
+	if (priv->bDynamicTxLowPower) {
+>>>>>>> v3.18
 		if (priv->CustomerID == RT_CID_819x_Netcore)
 			TxAGC = 0x22;
 		else
@@ -294,7 +319,11 @@ void PHY_SetRF8256OFDMTxPower(struct net_device *dev, u8 powerlevel)
 			priv->Pwr_Track = writeVal_tmp;
 		}
 
+<<<<<<< HEAD
 		if (priv->bDynamicTxHighPower == true)
+=======
+		if (priv->bDynamicTxHighPower)
+>>>>>>> v3.18
 			writeVal = 0x03030303;
 		else
 			writeVal = (byte3 << 24) | (byte2 << 16) |
@@ -302,5 +331,8 @@ void PHY_SetRF8256OFDMTxPower(struct net_device *dev, u8 powerlevel)
 		rtl8192_setBBreg(dev, RegOffset[index], 0x7f7f7f7f, writeVal);
 	}
 
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 }

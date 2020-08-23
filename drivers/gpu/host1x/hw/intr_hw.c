@@ -20,10 +20,16 @@
 #include <linux/interrupt.h>
 #include <linux/irq.h>
 #include <linux/io.h>
+<<<<<<< HEAD
 #include <asm/mach/irq.h>
 
 #include "intr.h"
 #include "dev.h"
+=======
+
+#include "../intr.h"
+#include "../dev.h"
+>>>>>>> v3.18
 
 /*
  * Sync point threshold interrupt service function

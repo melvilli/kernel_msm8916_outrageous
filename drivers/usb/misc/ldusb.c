@@ -24,7 +24,10 @@
 
 #include <linux/kernel.h>
 #include <linux/errno.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/module.h>
 #include <linux/mutex.h>
@@ -129,6 +132,7 @@ MODULE_DESCRIPTION("LD USB Driver");
 MODULE_LICENSE("GPL");
 MODULE_SUPPORTED_DEVICE("LD USB Devices");
 
+<<<<<<< HEAD
 #ifdef CONFIG_USB_DEBUG
 	static int debug = 1;
 #else
@@ -142,6 +146,8 @@ MODULE_SUPPORTED_DEVICE("LD USB Devices");
 module_param(debug, int, S_IRUGO | S_IWUSR);
 MODULE_PARM_DESC(debug, "Debug enabled or not");
 
+=======
+>>>>>>> v3.18
 /* All interrupt in transfers are collected in a ring buffer to
  * avoid racing conditions and get better performance of the driver.
  */
@@ -256,8 +262,14 @@ static void ld_usb_interrupt_in_callback(struct urb *urb)
 		    status == -ESHUTDOWN) {
 			goto exit;
 		} else {
+<<<<<<< HEAD
 			dbg_info(&dev->intf->dev, "%s: nonzero status received: %d\n",
 				 __func__, status);
+=======
+			dev_dbg(&dev->intf->dev,
+				"%s: nonzero status received: %d\n", __func__,
+				status);
+>>>>>>> v3.18
 			spin_lock(&dev->rbsl);
 			goto resubmit; /* maybe we can recover */
 		}
@@ -272,8 +284,13 @@ static void ld_usb_interrupt_in_callback(struct urb *urb)
 			*actual_buffer = urb->actual_length;
 			memcpy(actual_buffer+1, dev->interrupt_in_buffer, urb->actual_length);
 			dev->ring_head = next_ring_head;
+<<<<<<< HEAD
 			dbg_info(&dev->intf->dev, "%s: received %d bytes\n",
 				 __func__, urb->actual_length);
+=======
+			dev_dbg(&dev->intf->dev, "%s: received %d bytes\n",
+				__func__, urb->actual_length);
+>>>>>>> v3.18
 		} else {
 			dev_warn(&dev->intf->dev,
 				 "Ring buffer overflow, %d bytes dropped\n",
@@ -310,9 +327,15 @@ static void ld_usb_interrupt_out_callback(struct urb *urb)
 	if (status && !(status == -ENOENT ||
 			status == -ECONNRESET ||
 			status == -ESHUTDOWN))
+<<<<<<< HEAD
 		dbg_info(&dev->intf->dev,
 			 "%s - nonzero write interrupt status received: %d\n",
 			 __func__, status);
+=======
+		dev_dbg(&dev->intf->dev,
+			"%s - nonzero write interrupt status received: %d\n",
+			__func__, status);
+>>>>>>> v3.18
 
 	dev->interrupt_out_busy = 0;
 	wake_up_interruptible(&dev->write_wait);
@@ -585,7 +608,12 @@ static ssize_t ld_usb_write(struct file *file, const char __user *buffer,
 	bytes_to_write = min(count, write_buffer_size*dev->interrupt_out_endpoint_size);
 	if (bytes_to_write < count)
 		dev_warn(&dev->intf->dev, "Write buffer overflow, %zd bytes dropped\n",count-bytes_to_write);
+<<<<<<< HEAD
 	dbg_info(&dev->intf->dev, "%s: count = %zd, bytes_to_write = %zd\n", __func__, count, bytes_to_write);
+=======
+	dev_dbg(&dev->intf->dev, "%s: count = %zd, bytes_to_write = %zd\n",
+		__func__, count, bytes_to_write);
+>>>>>>> v3.18
 
 	if (copy_from_user(dev->interrupt_out_buffer, buffer, bytes_to_write)) {
 		retval = -EFAULT;

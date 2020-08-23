@@ -33,7 +33,10 @@
 #include <linux/i2c.h>
 #include <linux/videodev2.h>
 #include <media/v4l2-device.h>
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 #include <media/v4l2-ctrls.h>
 #include <media/wm8775.h>
 
@@ -156,6 +159,7 @@ static int wm8775_s_ctrl(struct v4l2_ctrl *ctrl)
 	return -EINVAL;
 }
 
+<<<<<<< HEAD
 static int wm8775_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ident *chip)
 {
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
@@ -163,6 +167,8 @@ static int wm8775_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_iden
 	return v4l2_chip_ident_i2c_client(client, chip, V4L2_IDENT_WM8775, 0);
 }
 
+=======
+>>>>>>> v3.18
 static int wm8775_log_status(struct v4l2_subdev *sd)
 {
 	struct wm8775_state *state = to_state(sd);
@@ -186,7 +192,10 @@ static const struct v4l2_ctrl_ops wm8775_ctrl_ops = {
 
 static const struct v4l2_subdev_core_ops wm8775_core_ops = {
 	.log_status = wm8775_log_status,
+<<<<<<< HEAD
 	.g_chip_ident = wm8775_g_chip_ident,
+=======
+>>>>>>> v3.18
 	.g_ext_ctrls = v4l2_subdev_g_ext_ctrls,
 	.try_ext_ctrls = v4l2_subdev_try_ext_ctrls,
 	.s_ext_ctrls = v4l2_subdev_s_ext_ctrls,
@@ -239,7 +248,11 @@ static int wm8775_probe(struct i2c_client *client,
 	v4l_info(client, "chip found @ 0x%02x (%s)\n",
 			client->addr << 1, client->adapter->name);
 
+<<<<<<< HEAD
 	state = kzalloc(sizeof(struct wm8775_state), GFP_KERNEL);
+=======
+	state = devm_kzalloc(&client->dev, sizeof(*state), GFP_KERNEL);
+>>>>>>> v3.18
 	if (state == NULL)
 		return -ENOMEM;
 	sd = &state->sd;
@@ -259,7 +272,10 @@ static int wm8775_probe(struct i2c_client *client,
 	err = state->hdl.error;
 	if (err) {
 		v4l2_ctrl_handler_free(&state->hdl);
+<<<<<<< HEAD
 		kfree(state);
+=======
+>>>>>>> v3.18
 		return err;
 	}
 
@@ -317,7 +333,10 @@ static int wm8775_remove(struct i2c_client *client)
 
 	v4l2_device_unregister_subdev(sd);
 	v4l2_ctrl_handler_free(&state->hdl);
+<<<<<<< HEAD
 	kfree(state);
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

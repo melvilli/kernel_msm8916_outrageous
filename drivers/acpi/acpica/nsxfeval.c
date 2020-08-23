@@ -6,7 +6,11 @@
  ******************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -42,7 +46,12 @@
  * POSSIBILITY OF SUCH DAMAGES.
  */
 
+<<<<<<< HEAD
 #include <linux/export.h>
+=======
+#define EXPORT_ACPI_INTERFACES
+
+>>>>>>> v3.18
 #include <acpi/acpi.h>
 #include "accommon.h"
 #include "acnamesp.h"
@@ -83,7 +92,11 @@ acpi_evaluate_object_typed(acpi_handle handle,
 			   acpi_object_type return_type)
 {
 	acpi_status status;
+<<<<<<< HEAD
 	u8 must_free = FALSE;
+=======
+	u8 free_buffer_on_error = FALSE;
+>>>>>>> v3.18
 
 	ACPI_FUNCTION_TRACE(acpi_evaluate_object_typed);
 
@@ -94,14 +107,23 @@ acpi_evaluate_object_typed(acpi_handle handle,
 	}
 
 	if (return_buffer->length == ACPI_ALLOCATE_BUFFER) {
+<<<<<<< HEAD
 		must_free = TRUE;
+=======
+		free_buffer_on_error = TRUE;
+>>>>>>> v3.18
 	}
 
 	/* Evaluate the object */
 
+<<<<<<< HEAD
 	status =
 	    acpi_evaluate_object(handle, pathname, external_params,
 				 return_buffer);
+=======
+	status = acpi_evaluate_object(handle, pathname,
+				      external_params, return_buffer);
+>>>>>>> v3.18
 	if (ACPI_FAILURE(status)) {
 		return_ACPI_STATUS(status);
 	}
@@ -134,11 +156,23 @@ acpi_evaluate_object_typed(acpi_handle handle,
 					   pointer)->type),
 		    acpi_ut_get_type_name(return_type)));
 
+<<<<<<< HEAD
 	if (must_free) {
 
 		/* Caller used ACPI_ALLOCATE_BUFFER, free the return buffer */
 
 		ACPI_FREE(return_buffer->pointer);
+=======
+	if (free_buffer_on_error) {
+		/*
+		 * Free a buffer created via ACPI_ALLOCATE_BUFFER.
+		 * Note: We use acpi_os_free here because acpi_os_allocate was used
+		 * to allocate the buffer. This purposefully bypasses the
+		 * (optionally enabled) allocation tracking mechanism since we
+		 * only want to track internal allocations.
+		 */
+		acpi_os_free(return_buffer->pointer);
+>>>>>>> v3.18
 		return_buffer->pointer = NULL;
 	}
 
@@ -187,8 +221,11 @@ acpi_evaluate_object(acpi_handle handle,
 		return_ACPI_STATUS(AE_NO_MEMORY);
 	}
 
+<<<<<<< HEAD
 	info->pathname = pathname;
 
+=======
+>>>>>>> v3.18
 	/* Convert and validate the device handle */
 
 	info->prefix_node = acpi_ns_validate_handle(handle);
@@ -198,17 +235,77 @@ acpi_evaluate_object(acpi_handle handle,
 	}
 
 	/*
+<<<<<<< HEAD
 	 * If there are parameters to be passed to a control method, the external
 	 * objects must all be converted to internal objects
 	 */
 	if (external_params && external_params->count) {
+=======
+	 * Get the actual namespace node for the target object.
+	 * Handles these cases:
+	 *
+	 * 1) Null node, valid pathname from root (absolute path)
+	 * 2) Node and valid pathname (path relative to Node)
+	 * 3) Node, Null pathname
+	 */
+	if ((pathname) && (ACPI_IS_ROOT_PREFIX(pathname[0]))) {
+
+		/* The path is fully qualified, just evaluate by name */
+
+		info->prefix_node = NULL;
+	} else if (!handle) {
+		/*
+		 * A handle is optional iff a fully qualified pathname is specified.
+		 * Since we've already handled fully qualified names above, this is
+		 * an error.
+		 */
+		if (!pathname) {
+			ACPI_DEBUG_PRINT((ACPI_DB_INFO,
+					  "Both Handle and Pathname are NULL"));
+		} else {
+			ACPI_DEBUG_PRINT((ACPI_DB_INFO,
+					  "Null Handle with relative pathname [%s]",
+					  pathname));
+		}
+
+		status = AE_BAD_PARAMETER;
+		goto cleanup;
+	}
+
+	info->relative_pathname = pathname;
+
+	/*
+	 * Convert all external objects passed as arguments to the
+	 * internal version(s).
+	 */
+	if (external_params && external_params->count) {
+		info->param_count = (u16)external_params->count;
+
+		/* Warn on impossible argument count */
+
+		if (info->param_count > ACPI_METHOD_NUM_ARGS) {
+			ACPI_WARN_PREDEFINED((AE_INFO, pathname,
+					      ACPI_WARN_ALWAYS,
+					      "Excess arguments (%u) - using only %u",
+					      info->param_count,
+					      ACPI_METHOD_NUM_ARGS));
+
+			info->param_count = ACPI_METHOD_NUM_ARGS;
+		}
+
+>>>>>>> v3.18
 		/*
 		 * Allocate a new parameter block for the internal objects
 		 * Add 1 to count to allow for null terminated internal list
 		 */
+<<<<<<< HEAD
 		info->parameters = ACPI_ALLOCATE_ZEROED(((acpi_size)
 							 external_params->
 							 count +
+=======
+		info->parameters = ACPI_ALLOCATE_ZEROED(((acpi_size) info->
+							 param_count +
+>>>>>>> v3.18
 							 1) * sizeof(void *));
 		if (!info->parameters) {
 			status = AE_NO_MEMORY;
@@ -217,7 +314,11 @@ acpi_evaluate_object(acpi_handle handle,
 
 		/* Convert each external object in the list to an internal object */
 
+<<<<<<< HEAD
 		for (i = 0; i < external_params->count; i++) {
+=======
+		for (i = 0; i < info->param_count; i++) {
+>>>>>>> v3.18
 			status =
 			    acpi_ut_copy_eobject_to_iobject(&external_params->
 							    pointer[i],
@@ -227,6 +328,7 @@ acpi_evaluate_object(acpi_handle handle,
 				goto cleanup;
 			}
 		}
+<<<<<<< HEAD
 		info->parameters[external_params->count] = NULL;
 	}
 
@@ -264,6 +366,98 @@ acpi_evaluate_object(acpi_handle handle,
 		status = acpi_ns_evaluate(info);
 	}
 
+=======
+
+		info->parameters[info->param_count] = NULL;
+	}
+
+#if 0
+
+	/*
+	 * Begin incoming argument count analysis. Check for too few args
+	 * and too many args.
+	 */
+
+	switch (acpi_ns_get_type(info->node)) {
+	case ACPI_TYPE_METHOD:
+
+		/* Check incoming argument count against the method definition */
+
+		if (info->obj_desc->method.param_count > info->param_count) {
+			ACPI_ERROR((AE_INFO,
+				    "Insufficient arguments (%u) - %u are required",
+				    info->param_count,
+				    info->obj_desc->method.param_count));
+
+			status = AE_MISSING_ARGUMENTS;
+			goto cleanup;
+		}
+
+		else if (info->obj_desc->method.param_count < info->param_count) {
+			ACPI_WARNING((AE_INFO,
+				      "Excess arguments (%u) - only %u are required",
+				      info->param_count,
+				      info->obj_desc->method.param_count));
+
+			/* Just pass the required number of arguments */
+
+			info->param_count = info->obj_desc->method.param_count;
+		}
+
+		/*
+		 * Any incoming external objects to be passed as arguments to the
+		 * method must be converted to internal objects
+		 */
+		if (info->param_count) {
+			/*
+			 * Allocate a new parameter block for the internal objects
+			 * Add 1 to count to allow for null terminated internal list
+			 */
+			info->parameters = ACPI_ALLOCATE_ZEROED(((acpi_size)
+								 info->
+								 param_count +
+								 1) *
+								sizeof(void *));
+			if (!info->parameters) {
+				status = AE_NO_MEMORY;
+				goto cleanup;
+			}
+
+			/* Convert each external object in the list to an internal object */
+
+			for (i = 0; i < info->param_count; i++) {
+				status =
+				    acpi_ut_copy_eobject_to_iobject
+				    (&external_params->pointer[i],
+				     &info->parameters[i]);
+				if (ACPI_FAILURE(status)) {
+					goto cleanup;
+				}
+			}
+
+			info->parameters[info->param_count] = NULL;
+		}
+		break;
+
+	default:
+
+		/* Warn if arguments passed to an object that is not a method */
+
+		if (info->param_count) {
+			ACPI_WARNING((AE_INFO,
+				      "%u arguments were passed to a non-method ACPI object",
+				      info->param_count));
+		}
+		break;
+	}
+
+#endif
+
+	/* Now we can evaluate the object */
+
+	status = acpi_ns_evaluate(info);
+
+>>>>>>> v3.18
 	/*
 	 * If we are expecting a return value, and all went well above,
 	 * copy the return value to an external object.
@@ -343,7 +537,11 @@ acpi_evaluate_object(acpi_handle handle,
 		acpi_ex_exit_interpreter();
 	}
 
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 
 	/* Free the input parameter list (if we created one) */
 
@@ -413,6 +611,10 @@ static void acpi_ns_resolve_references(struct acpi_evaluate_info *info)
 		break;
 
 	default:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		return;
 	}
 
@@ -434,9 +636,15 @@ static void acpi_ns_resolve_references(struct acpi_evaluate_info *info)
  * PARAMETERS:  type                - acpi_object_type to search for
  *              start_object        - Handle in namespace where search begins
  *              max_depth           - Depth to which search is to reach
+<<<<<<< HEAD
  *              pre_order_visit     - Called during tree pre-order visit
  *                                    when an object of "Type" is found
  *              post_order_visit    - Called during tree post-order visit
+=======
+ *              descending_callback - Called during tree descent
+ *                                    when an object of "Type" is found
+ *              ascending_callback  - Called during tree ascent
+>>>>>>> v3.18
  *                                    when an object of "Type" is found
  *              context             - Passed to user function(s) above
  *              return_value        - Location where return value of
@@ -464,8 +672,13 @@ acpi_status
 acpi_walk_namespace(acpi_object_type type,
 		    acpi_handle start_object,
 		    u32 max_depth,
+<<<<<<< HEAD
 		    acpi_walk_callback pre_order_visit,
 		    acpi_walk_callback post_order_visit,
+=======
+		    acpi_walk_callback descending_callback,
+		    acpi_walk_callback ascending_callback,
+>>>>>>> v3.18
 		    void *context, void **return_value)
 {
 	acpi_status status;
@@ -475,7 +688,11 @@ acpi_walk_namespace(acpi_object_type type,
 	/* Parameter validation */
 
 	if ((type > ACPI_TYPE_LOCAL_MAX) ||
+<<<<<<< HEAD
 	    (!max_depth) || (!pre_order_visit && !post_order_visit)) {
+=======
+	    (!max_depth) || (!descending_callback && !ascending_callback)) {
+>>>>>>> v3.18
 		return_ACPI_STATUS(AE_BAD_PARAMETER);
 	}
 
@@ -506,6 +723,7 @@ acpi_walk_namespace(acpi_object_type type,
 		goto unlock_and_exit;
 	}
 
+<<<<<<< HEAD
 	status = acpi_ns_walk_namespace(type, start_object, max_depth,
 					ACPI_NS_WALK_UNLOCK, pre_order_visit,
 					post_order_visit, context,
@@ -514,6 +732,24 @@ acpi_walk_namespace(acpi_object_type type,
 	(void)acpi_ut_release_mutex(ACPI_MTX_NAMESPACE);
 
       unlock_and_exit:
+=======
+	/* Now we can validate the starting node */
+
+	if (!acpi_ns_validate_handle(start_object)) {
+		status = AE_BAD_PARAMETER;
+		goto unlock_and_exit2;
+	}
+
+	status = acpi_ns_walk_namespace(type, start_object, max_depth,
+					ACPI_NS_WALK_UNLOCK,
+					descending_callback, ascending_callback,
+					context, return_value);
+
+unlock_and_exit2:
+	(void)acpi_ut_release_mutex(ACPI_MTX_NAMESPACE);
+
+unlock_and_exit:
+>>>>>>> v3.18
 	(void)acpi_ut_release_read_lock(&acpi_gbl_namespace_rw_lock);
 	return_ACPI_STATUS(status);
 }
@@ -757,7 +993,11 @@ acpi_attach_data(acpi_handle obj_handle,
 
 	status = acpi_ns_attach_data(node, handler, data);
 
+<<<<<<< HEAD
       unlock_and_exit:
+=======
+unlock_and_exit:
+>>>>>>> v3.18
 	(void)acpi_ut_release_mutex(ACPI_MTX_NAMESPACE);
 	return (status);
 }
@@ -803,7 +1043,11 @@ acpi_detach_data(acpi_handle obj_handle, acpi_object_handler handler)
 
 	status = acpi_ns_detach_data(node, handler);
 
+<<<<<<< HEAD
       unlock_and_exit:
+=======
+unlock_and_exit:
+>>>>>>> v3.18
 	(void)acpi_ut_release_mutex(ACPI_MTX_NAMESPACE);
 	return (status);
 }
@@ -812,11 +1056,16 @@ ACPI_EXPORT_SYMBOL(acpi_detach_data)
 
 /*******************************************************************************
  *
+<<<<<<< HEAD
  * FUNCTION:    acpi_get_data
+=======
+ * FUNCTION:    acpi_get_data_full
+>>>>>>> v3.18
  *
  * PARAMETERS:  obj_handle          - Namespace node
  *              handler             - Handler used in call to attach_data
  *              data                - Where the data is returned
+<<<<<<< HEAD
  *
  * RETURN:      Status
  *
@@ -825,6 +1074,19 @@ ACPI_EXPORT_SYMBOL(acpi_detach_data)
  ******************************************************************************/
 acpi_status
 acpi_get_data(acpi_handle obj_handle, acpi_object_handler handler, void **data)
+=======
+ *              callback            - function to execute before returning
+ *
+ * RETURN:      Status
+ *
+ * DESCRIPTION: Retrieve data that was previously attached to a namespace node
+ *              and execute a callback before returning.
+ *
+ ******************************************************************************/
+acpi_status
+acpi_get_data_full(acpi_handle obj_handle, acpi_object_handler handler,
+		   void **data, void (*callback)(void *))
+>>>>>>> v3.18
 {
 	struct acpi_namespace_node *node;
 	acpi_status status;
@@ -849,10 +1111,42 @@ acpi_get_data(acpi_handle obj_handle, acpi_object_handler handler, void **data)
 	}
 
 	status = acpi_ns_get_attached_data(node, handler, data);
+<<<<<<< HEAD
 
       unlock_and_exit:
+=======
+	if (ACPI_SUCCESS(status) && callback) {
+		callback(*data);
+	}
+
+unlock_and_exit:
+>>>>>>> v3.18
 	(void)acpi_ut_release_mutex(ACPI_MTX_NAMESPACE);
 	return (status);
 }
 
+<<<<<<< HEAD
+=======
+ACPI_EXPORT_SYMBOL(acpi_get_data_full)
+
+/*******************************************************************************
+ *
+ * FUNCTION:    acpi_get_data
+ *
+ * PARAMETERS:  obj_handle          - Namespace node
+ *              handler             - Handler used in call to attach_data
+ *              data                - Where the data is returned
+ *
+ * RETURN:      Status
+ *
+ * DESCRIPTION: Retrieve data that was previously attached to a namespace node.
+ *
+ ******************************************************************************/
+acpi_status
+acpi_get_data(acpi_handle obj_handle, acpi_object_handler handler, void **data)
+{
+	return acpi_get_data_full(obj_handle, handler, data, NULL);
+}
+
+>>>>>>> v3.18
 ACPI_EXPORT_SYMBOL(acpi_get_data)

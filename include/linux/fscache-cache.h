@@ -97,7 +97,12 @@ struct fscache_operation {
 #define FSCACHE_OP_WAITING	4	/* cleared when op is woken */
 #define FSCACHE_OP_EXCLUSIVE	5	/* exclusive op, other ops must wait */
 #define FSCACHE_OP_DEC_READ_CNT	6	/* decrement object->n_reads on destruction */
+<<<<<<< HEAD
 #define FSCACHE_OP_KEEP_FLAGS	0x0070	/* flags to keep when repurposing an op */
+=======
+#define FSCACHE_OP_UNUSE_COOKIE	7	/* call fscache_unuse_cookie() on completion */
+#define FSCACHE_OP_KEEP_FLAGS	0x00f0	/* flags to keep when repurposing an op */
+>>>>>>> v3.18
 
 	enum fscache_operation_state state;
 	atomic_t		usage;
@@ -150,7 +155,11 @@ struct fscache_retrieval {
 	void			*context;	/* netfs read context (pinned) */
 	struct list_head	to_do;		/* list of things to be done by the backend */
 	unsigned long		start_time;	/* time at which retrieval started */
+<<<<<<< HEAD
 	unsigned		n_pages;	/* number of pages to be retrieved */
+=======
+	atomic_t		n_pages;	/* number of pages to be retrieved */
+>>>>>>> v3.18
 };
 
 typedef int (*fscache_page_retrieval_func_t)(struct fscache_retrieval *op,
@@ -194,15 +203,23 @@ static inline void fscache_enqueue_retrieval(struct fscache_retrieval *op)
 static inline void fscache_retrieval_complete(struct fscache_retrieval *op,
 					      int n_pages)
 {
+<<<<<<< HEAD
 	op->n_pages -= n_pages;
 	if (op->n_pages <= 0)
+=======
+	atomic_sub(n_pages, &op->n_pages);
+	if (atomic_read(&op->n_pages) <= 0)
+>>>>>>> v3.18
 		fscache_op_complete(&op->op, true);
 }
 
 /**
  * fscache_put_retrieval - Drop a reference to a retrieval operation
  * @op: The retrieval operation affected
+<<<<<<< HEAD
  * @n_pages: The number of pages to account for
+=======
+>>>>>>> v3.18
  *
  * Drop a reference to a retrieval operation.
  */
@@ -251,6 +268,13 @@ struct fscache_cache_ops {
 	/* unpin an object in the cache */
 	void (*unpin_object)(struct fscache_object *object);
 
+<<<<<<< HEAD
+=======
+	/* check the consistency between the backing cache and the FS-Cache
+	 * cookie */
+	bool (*check_consistency)(struct fscache_operation *op);
+
+>>>>>>> v3.18
 	/* store the updated auxiliary data on an object */
 	void (*update_object)(struct fscache_object *object);
 
@@ -304,6 +328,7 @@ struct fscache_cache_ops {
 	void (*dissociate_pages)(struct fscache_cache *cache);
 };
 
+<<<<<<< HEAD
 /*
  * data file or index object cookie
  * - a file will only appear in one cache
@@ -335,26 +360,38 @@ struct fscache_cookie {
 #define FSCACHE_COOKIE_INVALIDATING	7	/* T if cookie is being invalidated */
 };
 
+=======
+>>>>>>> v3.18
 extern struct fscache_cookie fscache_fsdef_index;
 
 /*
  * Event list for fscache_object::{event_mask,events}
  */
 enum {
+<<<<<<< HEAD
 	FSCACHE_OBJECT_EV_REQUEUE,	/* T if object should be requeued */
+=======
+	FSCACHE_OBJECT_EV_NEW_CHILD,	/* T if object has a new child */
+	FSCACHE_OBJECT_EV_PARENT_READY,	/* T if object's parent is ready */
+>>>>>>> v3.18
 	FSCACHE_OBJECT_EV_UPDATE,	/* T if object should be updated */
 	FSCACHE_OBJECT_EV_INVALIDATE,	/* T if cache requested object invalidation */
 	FSCACHE_OBJECT_EV_CLEARED,	/* T if accessors all gone */
 	FSCACHE_OBJECT_EV_ERROR,	/* T if fatal error occurred during processing */
+<<<<<<< HEAD
 	FSCACHE_OBJECT_EV_RELEASE,	/* T if netfs requested object release */
 	FSCACHE_OBJECT_EV_RETIRE,	/* T if netfs requested object retirement */
 	FSCACHE_OBJECT_EV_WITHDRAW,	/* T if cache requested object withdrawal */
+=======
+	FSCACHE_OBJECT_EV_KILL,		/* T if netfs relinquished or cache withdrew object */
+>>>>>>> v3.18
 	NR_FSCACHE_OBJECT_EVENTS
 };
 
 #define FSCACHE_OBJECT_EVENTS_MASK ((1UL << NR_FSCACHE_OBJECT_EVENTS) - 1)
 
 /*
+<<<<<<< HEAD
  * on-disk cache file or index handle
  */
 struct fscache_object {
@@ -380,6 +417,29 @@ struct fscache_object {
 		FSCACHE_OBJECT__NSTATES
 	} state;
 
+=======
+ * States for object state machine.
+ */
+struct fscache_transition {
+	unsigned long events;
+	const struct fscache_state *transit_to;
+};
+
+struct fscache_state {
+	char name[24];
+	char short_name[8];
+	const struct fscache_state *(*work)(struct fscache_object *object,
+					    int event);
+	const struct fscache_transition transitions[];
+};
+
+/*
+ * on-disk cache file or index handle
+ */
+struct fscache_object {
+	const struct fscache_state *state;	/* Object state machine state */
+	const struct fscache_transition *oob_table; /* OOB state transition table */
+>>>>>>> v3.18
 	int			debug_id;	/* debugging ID */
 	int			n_children;	/* number of child objects */
 	int			n_ops;		/* number of extant ops on object */
@@ -390,6 +450,10 @@ struct fscache_object {
 	spinlock_t		lock;		/* state and operations lock */
 
 	unsigned long		lookup_jif;	/* time at which lookup started */
+<<<<<<< HEAD
+=======
+	unsigned long		oob_event_mask;	/* OOB events this object is interested in */
+>>>>>>> v3.18
 	unsigned long		event_mask;	/* events this object is interested in */
 	unsigned long		events;		/* events to be processed by this object
 						 * (order is important - using fls) */
@@ -398,6 +462,13 @@ struct fscache_object {
 #define FSCACHE_OBJECT_LOCK		0	/* T if object is busy being processed */
 #define FSCACHE_OBJECT_PENDING_WRITE	1	/* T if object has pending write */
 #define FSCACHE_OBJECT_WAITING		2	/* T if object is waiting on its parent */
+<<<<<<< HEAD
+=======
+#define FSCACHE_OBJECT_IS_LIVE		3	/* T if object is not withdrawn or relinquished */
+#define FSCACHE_OBJECT_IS_LOOKED_UP	4	/* T if object has been looked up */
+#define FSCACHE_OBJECT_IS_AVAILABLE	5	/* T if object has become active */
+#define FSCACHE_OBJECT_RETIRED		6	/* T if object was retired on relinquishment */
+>>>>>>> v3.18
 
 	struct list_head	cache_link;	/* link in cache->object_list */
 	struct hlist_node	cookie_link;	/* link in cookie->backing_objects */
@@ -415,6 +486,7 @@ struct fscache_object {
 	loff_t			store_limit_l;	/* current storage limit */
 };
 
+<<<<<<< HEAD
 extern const char *fscache_object_states[];
 
 #define fscache_object_is_active(obj)			      \
@@ -471,6 +543,42 @@ extern void fscache_object_destroy(struct fscache_object *object);
 #else
 #define fscache_object_destroy(object) do {} while(0)
 #endif
+=======
+extern void fscache_object_init(struct fscache_object *, struct fscache_cookie *,
+				struct fscache_cache *);
+extern void fscache_object_destroy(struct fscache_object *);
+
+extern void fscache_object_lookup_negative(struct fscache_object *object);
+extern void fscache_obtained_object(struct fscache_object *object);
+
+static inline bool fscache_object_is_live(struct fscache_object *object)
+{
+	return test_bit(FSCACHE_OBJECT_IS_LIVE, &object->flags);
+}
+
+static inline bool fscache_object_is_dying(struct fscache_object *object)
+{
+	return !fscache_object_is_live(object);
+}
+
+static inline bool fscache_object_is_available(struct fscache_object *object)
+{
+	return test_bit(FSCACHE_OBJECT_IS_AVAILABLE, &object->flags);
+}
+
+static inline bool fscache_object_is_active(struct fscache_object *object)
+{
+	return fscache_object_is_available(object) &&
+		fscache_object_is_live(object) &&
+		!test_bit(FSCACHE_IOERROR, &object->cache->flags);
+}
+
+static inline bool fscache_object_is_dead(struct fscache_object *object)
+{
+	return fscache_object_is_dying(object) &&
+		test_bit(FSCACHE_IOERROR, &object->cache->flags);
+}
+>>>>>>> v3.18
 
 /**
  * fscache_object_destroyed - Note destruction of an object in a cache
@@ -531,6 +639,51 @@ static inline void fscache_end_io(struct fscache_retrieval *op,
 	op->end_io_func(page, op->context, error);
 }
 
+<<<<<<< HEAD
+=======
+static inline void __fscache_use_cookie(struct fscache_cookie *cookie)
+{
+	atomic_inc(&cookie->n_active);
+}
+
+/**
+ * fscache_use_cookie - Request usage of cookie attached to an object
+ * @object: Object description
+ * 
+ * Request usage of the cookie attached to an object.  NULL is returned if the
+ * relinquishment had reduced the cookie usage count to 0.
+ */
+static inline bool fscache_use_cookie(struct fscache_object *object)
+{
+	struct fscache_cookie *cookie = object->cookie;
+	return atomic_inc_not_zero(&cookie->n_active) != 0;
+}
+
+static inline bool __fscache_unuse_cookie(struct fscache_cookie *cookie)
+{
+	return atomic_dec_and_test(&cookie->n_active);
+}
+
+static inline void __fscache_wake_unused_cookie(struct fscache_cookie *cookie)
+{
+	wake_up_atomic_t(&cookie->n_active);
+}
+
+/**
+ * fscache_unuse_cookie - Cease usage of cookie attached to an object
+ * @object: Object description
+ * 
+ * Cease usage of the cookie attached to an object.  When the users count
+ * reaches zero then the cookie relinquishment will be permitted to proceed.
+ */
+static inline void fscache_unuse_cookie(struct fscache_object *object)
+{
+	struct fscache_cookie *cookie = object->cookie;
+	if (__fscache_unuse_cookie(cookie))
+		__fscache_wake_unused_cookie(cookie);
+}
+
+>>>>>>> v3.18
 /*
  * out-of-line cache backend functions
  */

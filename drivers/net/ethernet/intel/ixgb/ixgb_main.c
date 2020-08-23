@@ -53,7 +53,11 @@ MODULE_PARM_DESC(copybreak,
  * { Vendor ID, Device ID, SubVendor ID, SubDevice ID,
  *   Class, Class Mask, private data (not used) }
  */
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(ixgb_pci_tbl) = {
+=======
+static const struct pci_device_id ixgb_pci_tbl[] = {
+>>>>>>> v3.18
 	{PCI_VENDOR_ID_INTEL, IXGB_DEVICE_ID_82597EX,
 	 PCI_ANY_ID, PCI_ANY_ID, 0, 0, 0},
 	{PCI_VENDOR_ID_INTEL, IXGB_DEVICE_ID_82597EX_CX4,
@@ -408,6 +412,7 @@ ixgb_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 		return err;
 
 	pci_using_dac = 0;
+<<<<<<< HEAD
 	err = dma_set_mask(&pdev->dev, DMA_BIT_MASK(64));
 	if (!err) {
 		err = dma_set_coherent_mask(&pdev->dev, DMA_BIT_MASK(64));
@@ -422,6 +427,16 @@ ixgb_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 				pr_err("No usable DMA configuration, aborting\n");
 				goto err_dma_mask;
 			}
+=======
+	err = dma_set_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(64));
+	if (!err) {
+		pci_using_dac = 1;
+	} else {
+		err = dma_set_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(32));
+		if (err) {
+			pr_err("No usable DMA configuration, aborting\n");
+			goto err_dma_mask;
+>>>>>>> v3.18
 		}
 	}
 
@@ -718,8 +733,13 @@ ixgb_setup_tx_resources(struct ixgb_adapter *adapter)
 	txdr->size = txdr->count * sizeof(struct ixgb_tx_desc);
 	txdr->size = ALIGN(txdr->size, 4096);
 
+<<<<<<< HEAD
 	txdr->desc = dma_alloc_coherent(&pdev->dev, txdr->size, &txdr->dma,
 					GFP_KERNEL | __GFP_ZERO);
+=======
+	txdr->desc = dma_zalloc_coherent(&pdev->dev, txdr->size, &txdr->dma,
+					 GFP_KERNEL);
+>>>>>>> v3.18
 	if (!txdr->desc) {
 		vfree(txdr->buffer_info);
 		return -ENOMEM;
@@ -1226,17 +1246,28 @@ ixgb_tso(struct ixgb_adapter *adapter, struct sk_buff *skb)
 	unsigned int i;
 	u8 ipcss, ipcso, tucss, tucso, hdr_len;
 	u16 ipcse, tucse, mss;
+<<<<<<< HEAD
 	int err;
+=======
+>>>>>>> v3.18
 
 	if (likely(skb_is_gso(skb))) {
 		struct ixgb_buffer *buffer_info;
 		struct iphdr *iph;
+<<<<<<< HEAD
 
 		if (skb_header_cloned(skb)) {
 			err = pskb_expand_head(skb, 0, 0, GFP_ATOMIC);
 			if (err)
 				return err;
 		}
+=======
+		int err;
+
+		err = skb_cow_head(skb, 0);
+		if (err < 0)
+			return err;
+>>>>>>> v3.18
 
 		hdr_len = skb_transport_offset(skb) + tcp_hdrlen(skb);
 		mss = skb_shinfo(skb)->gso_size;

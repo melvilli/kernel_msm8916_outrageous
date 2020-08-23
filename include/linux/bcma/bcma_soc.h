@@ -10,6 +10,10 @@ struct bcma_soc {
 };
 
 int __init bcma_host_soc_register(struct bcma_soc *soc);
+<<<<<<< HEAD
+=======
+int __init bcma_host_soc_init(struct bcma_soc *soc);
+>>>>>>> v3.18
 
 int bcma_bus_register(struct bcma_bus *bus);
 

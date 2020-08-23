@@ -379,6 +379,7 @@
 #define  DEBUG_PRINT_NVRAM	0
 #define  DEBUG_QLA1280		0
 
+<<<<<<< HEAD
 /*
  * The SGI VISWS is broken and doesn't support MMIO ;-(
  */
@@ -387,6 +388,9 @@
 #else
 #define	MEMORY_MAPPED_IO	1
 #endif
+=======
+#define	MEMORY_MAPPED_IO	1
+>>>>>>> v3.18
 
 #include "qla1280.h"
 
@@ -2502,7 +2506,11 @@ qla1280_mailbox_command(struct scsi_qla_host *ha, uint8_t mr, uint16_t *mb)
 	/* Issue set host interrupt command. */
 
 	/* set up a timer just in case we're really jammed */
+<<<<<<< HEAD
 	init_timer(&timer);
+=======
+	init_timer_on_stack(&timer);
+>>>>>>> v3.18
 	timer.expires = jiffies + 20*HZ;
 	timer.data = (unsigned long)ha;
 	timer.function = qla1280_mailbox_timeout;

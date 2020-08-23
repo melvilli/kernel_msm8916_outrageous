@@ -8,12 +8,17 @@
  * published by the Free Software Foundation.
  */
 
+<<<<<<< HEAD
 #include <linux/ctype.h>
 #include <linux/export.h>
 #include <linux/jhash.h>
 #include <linux/spinlock.h>
 #include <linux/types.h>
 #include <linux/slab.h>
+=======
+#include <linux/export.h>
+#include <linux/types.h>
+>>>>>>> v3.18
 
 #include <net/netfilter/nf_conntrack_ecache.h>
 #include <net/netfilter/nf_conntrack_labels.h>

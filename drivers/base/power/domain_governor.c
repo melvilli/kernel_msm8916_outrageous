@@ -6,7 +6,10 @@
  * This file is released under the GPLv2.
  */
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/pm_domain.h>
 #include <linux/pm_qos.h>
@@ -43,7 +46,11 @@ static int dev_update_qos_constraint(struct device *dev, void *data)
  * default_stop_ok - Default PM domain governor routine for stopping devices.
  * @dev: Device to check.
  */
+<<<<<<< HEAD
 bool default_stop_ok(struct device *dev)
+=======
+static bool default_stop_ok(struct device *dev)
+>>>>>>> v3.18
 {
 	struct gpd_timing_data *td = &dev_gpd_data(dev)->td;
 	unsigned long flags;
@@ -230,10 +237,14 @@ static bool always_on_power_down_ok(struct dev_pm_domain *domain)
 
 #else /* !CONFIG_PM_RUNTIME */
 
+<<<<<<< HEAD
 bool default_stop_ok(struct device *dev)
 {
 	return false;
 }
+=======
+static inline bool default_stop_ok(struct device *dev) { return false; }
+>>>>>>> v3.18
 
 #define default_power_down_ok	NULL
 #define always_on_power_down_ok	NULL

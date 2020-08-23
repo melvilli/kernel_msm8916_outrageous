@@ -16,7 +16,10 @@
 #include <linux/module.h>
 
 #include <media/ak881x.h>
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 #include <media/v4l2-common.h>
 #include <media/v4l2-device.h>
 
@@ -33,7 +36,10 @@ struct ak881x {
 	struct v4l2_subdev subdev;
 	struct ak881x_pdata *pdata;
 	unsigned int lines;
+<<<<<<< HEAD
 	int id;	/* DEVICE_ID code V4L2_IDENT_AK881X code from v4l2-chip-ident.h */
+=======
+>>>>>>> v3.18
 	char revision;	/* DEVICE_REVISION content */
 };
 
@@ -62,6 +68,7 @@ static struct ak881x *to_ak881x(const struct i2c_client *client)
 	return container_of(i2c_get_clientdata(client), struct ak881x, subdev);
 }
 
+<<<<<<< HEAD
 static int ak881x_g_chip_ident(struct v4l2_subdev *sd,
 			       struct v4l2_dbg_chip_ident *id)
 {
@@ -80,18 +87,27 @@ static int ak881x_g_chip_ident(struct v4l2_subdev *sd,
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 static int ak881x_g_register(struct v4l2_subdev *sd,
 			     struct v4l2_dbg_register *reg)
 {
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 
+<<<<<<< HEAD
 	if (reg->match.type != V4L2_CHIP_MATCH_I2C_ADDR || reg->reg > 0x26)
 		return -EINVAL;
 
 	if (reg->match.addr != client->addr)
 		return -ENODEV;
 
+=======
+	if (reg->reg > 0x26)
+		return -EINVAL;
+
+	reg->size = 1;
+>>>>>>> v3.18
 	reg->val = reg_read(client, reg->reg);
 
 	if (reg->val > 0xffff)
@@ -105,12 +121,18 @@ static int ak881x_s_register(struct v4l2_subdev *sd,
 {
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 
+<<<<<<< HEAD
 	if (reg->match.type != V4L2_CHIP_MATCH_I2C_ADDR || reg->reg > 0x26)
 		return -EINVAL;
 
 	if (reg->match.addr != client->addr)
 		return -ENODEV;
 
+=======
+	if (reg->reg > 0x26)
+		return -EINVAL;
+
+>>>>>>> v3.18
 	if (reg_write(client, reg->reg, reg->val) < 0)
 		return -EIO;
 
@@ -229,7 +251,10 @@ static int ak881x_s_stream(struct v4l2_subdev *sd, int enable)
 }
 
 static struct v4l2_subdev_core_ops ak881x_subdev_core_ops = {
+<<<<<<< HEAD
 	.g_chip_ident	= ak881x_g_chip_ident,
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 	.g_register	= ak881x_g_register,
 	.s_register	= ak881x_s_register,
@@ -264,7 +289,11 @@ static int ak881x_probe(struct i2c_client *client,
 		return -EIO;
 	}
 
+<<<<<<< HEAD
 	ak881x = kzalloc(sizeof(struct ak881x), GFP_KERNEL);
+=======
+	ak881x = devm_kzalloc(&client->dev, sizeof(*ak881x), GFP_KERNEL);
+>>>>>>> v3.18
 	if (!ak881x)
 		return -ENOMEM;
 
@@ -274,15 +303,22 @@ static int ak881x_probe(struct i2c_client *client,
 
 	switch (data) {
 	case 0x13:
+<<<<<<< HEAD
 		ak881x->id = V4L2_IDENT_AK8813;
 		break;
 	case 0x14:
 		ak881x->id = V4L2_IDENT_AK8814;
+=======
+	case 0x14:
+>>>>>>> v3.18
 		break;
 	default:
 		dev_err(&client->dev,
 			"No ak881x chip detected, register read %x\n", data);
+<<<<<<< HEAD
 		kfree(ak881x);
+=======
+>>>>>>> v3.18
 		return -ENODEV;
 	}
 
@@ -331,7 +367,10 @@ static int ak881x_remove(struct i2c_client *client)
 	struct ak881x *ak881x = to_ak881x(client);
 
 	v4l2_device_unregister_subdev(&ak881x->subdev);
+<<<<<<< HEAD
 	kfree(ak881x);
+=======
+>>>>>>> v3.18
 
 	return 0;
 }

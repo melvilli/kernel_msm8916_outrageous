@@ -78,7 +78,11 @@ static int em_sti_enable(struct em_sti_priv *p)
 	int ret;
 
 	/* enable clock */
+<<<<<<< HEAD
 	ret = clk_enable(p->clk);
+=======
+	ret = clk_prepare_enable(p->clk);
+>>>>>>> v3.18
 	if (ret) {
 		dev_err(&p->pdev->dev, "cannot enable clock\n");
 		return ret;
@@ -107,7 +111,11 @@ static void em_sti_disable(struct em_sti_priv *p)
 	em_sti_write(p, STI_INTENCLR, 3);
 
 	/* stop clock */
+<<<<<<< HEAD
 	clk_disable(p->clk);
+=======
+	clk_disable_unprepare(p->clk);
+>>>>>>> v3.18
 }
 
 static cycle_t em_sti_count(struct em_sti_priv *p)
@@ -315,6 +323,7 @@ static int em_sti_probe(struct platform_device *pdev)
 {
 	struct em_sti_priv *p;
 	struct resource *res;
+<<<<<<< HEAD
 	int irq, ret;
 
 	p = kzalloc(sizeof(*p), GFP_KERNEL);
@@ -323,10 +332,18 @@ static int em_sti_probe(struct platform_device *pdev)
 		ret = -ENOMEM;
 		goto err0;
 	}
+=======
+	int irq;
+
+	p = devm_kzalloc(&pdev->dev, sizeof(*p), GFP_KERNEL);
+	if (p == NULL)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	p->pdev = pdev;
 	platform_set_drvdata(pdev, p);
 
+<<<<<<< HEAD
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!res) {
 		dev_err(&pdev->dev, "failed to get I/O memory\n");
@@ -363,12 +380,39 @@ static int em_sti_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "failed to request low IRQ\n");
 		ret = -ENOENT;
 		goto err2;
+=======
+	irq = platform_get_irq(pdev, 0);
+	if (irq < 0) {
+		dev_err(&pdev->dev, "failed to get irq\n");
+		return -EINVAL;
+	}
+
+	/* map memory, let base point to the STI instance */
+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+	p->base = devm_ioremap_resource(&pdev->dev, res);
+	if (IS_ERR(p->base))
+		return PTR_ERR(p->base);
+
+	/* get hold of clock */
+	p->clk = devm_clk_get(&pdev->dev, "sclk");
+	if (IS_ERR(p->clk)) {
+		dev_err(&pdev->dev, "cannot get clock\n");
+		return PTR_ERR(p->clk);
+	}
+
+	if (devm_request_irq(&pdev->dev, irq, em_sti_interrupt,
+			     IRQF_TIMER | IRQF_IRQPOLL | IRQF_NOBALANCING,
+			     dev_name(&pdev->dev), p)) {
+		dev_err(&pdev->dev, "failed to request low IRQ\n");
+		return -ENOENT;
+>>>>>>> v3.18
 	}
 
 	raw_spin_lock_init(&p->lock);
 	em_sti_register_clockevent(p);
 	em_sti_register_clocksource(p);
 	return 0;
+<<<<<<< HEAD
 
 err2:
 	clk_put(p->clk);
@@ -377,6 +421,8 @@ err1:
 err0:
 	kfree(p);
 	return ret;
+=======
+>>>>>>> v3.18
 }
 
 static int em_sti_remove(struct platform_device *pdev)

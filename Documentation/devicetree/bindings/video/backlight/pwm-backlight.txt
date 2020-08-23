@@ -10,12 +10,24 @@ Required properties:
       last value in the array represents a 100% duty cycle (brightest).
   - default-brightness-level: the default brightness level (index into the
       array defined by the "brightness-levels" property)
+<<<<<<< HEAD
+=======
+  - power-supply: regulator for supply voltage
+>>>>>>> v3.18
 
 Optional properties:
   - pwm-names: a list of names for the PWM devices specified in the
                "pwms" property (see PWM binding[0])
+<<<<<<< HEAD
 
 [0]: Documentation/devicetree/bindings/pwm/pwm.txt
+=======
+  - enable-gpios: contains a single GPIO specifier for the GPIO which enables
+                  and disables the backlight (see GPIO binding[1])
+
+[0]: Documentation/devicetree/bindings/pwm/pwm.txt
+[1]: Documentation/devicetree/bindings/gpio/gpio.txt
+>>>>>>> v3.18
 
 Example:
 
@@ -25,4 +37,10 @@ Example:
 
 		brightness-levels = <0 4 8 16 32 64 128 255>;
 		default-brightness-level = <6>;
+<<<<<<< HEAD
+=======
+
+		power-supply = <&vdd_bl_reg>;
+		enable-gpios = <&gpio 58 0>;
+>>>>>>> v3.18
 	};

@@ -24,7 +24,10 @@
  */
 
 #include <linux/kernel.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/platform_device.h>
 #include <linux/err.h>
@@ -35,6 +38,10 @@
 #include <linux/slab.h>
 #include <linux/of_device.h>
 #include <linux/of.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_mtd.h>
+>>>>>>> v3.18
 
 #include <linux/platform_data/mtd-davinci.h>
 #include <linux/platform_data/mtd-davinci-aemif.h>
@@ -241,9 +248,12 @@ static void nand_davinci_hwctl_4bit(struct mtd_info *mtd, int mode)
 	unsigned long flags;
 	u32 val;
 
+<<<<<<< HEAD
 	/* Reset ECC hardware */
 	davinci_nand_readl(info, NAND_4BIT_ECC1_OFFSET);
 
+=======
+>>>>>>> v3.18
 	spin_lock_irqsave(&davinci_nand_lock, flags);
 
 	/* Start 4-bit ECC calculation for read/write */
@@ -490,7 +500,11 @@ static int nand_davinci_dev_ready(struct mtd_info *mtd)
  * ten ECC bytes plus the manufacturer's bad block marker byte, and
  * and not overlapping the default BBT markers.
  */
+<<<<<<< HEAD
 static struct nand_ecclayout hwecc4_small __initconst = {
+=======
+static struct nand_ecclayout hwecc4_small = {
+>>>>>>> v3.18
 	.eccbytes = 10,
 	.eccpos = { 0, 1, 2, 3, 4,
 		/* offset 5 holds the badblock marker */
@@ -506,7 +520,11 @@ static struct nand_ecclayout hwecc4_small __initconst = {
  * storing ten ECC bytes plus the manufacturer's bad block marker byte,
  * and not overlapping the default BBT markers.
  */
+<<<<<<< HEAD
 static struct nand_ecclayout hwecc4_2048 __initconst = {
+=======
+static struct nand_ecclayout hwecc4_2048 = {
+>>>>>>> v3.18
 	.eccbytes = 40,
 	.eccpos = {
 		/* at the end of spare sector */
@@ -526,6 +544,10 @@ static struct nand_ecclayout hwecc4_2048 __initconst = {
 #if defined(CONFIG_OF)
 static const struct of_device_id davinci_nand_of_match[] = {
 	{.compatible = "ti,davinci-nand", },
+<<<<<<< HEAD
+=======
+	{.compatible = "ti,keystone-nand", },
+>>>>>>> v3.18
 	{},
 };
 MODULE_DEVICE_TABLE(of, davinci_nand_of_match);
@@ -533,21 +555,38 @@ MODULE_DEVICE_TABLE(of, davinci_nand_of_match);
 static struct davinci_nand_pdata
 	*nand_davinci_get_pdata(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	if (!pdev->dev.platform_data && pdev->dev.of_node) {
 		struct davinci_nand_pdata *pdata;
 		const char *mode;
 		u32 prop;
 		int len;
+=======
+	if (!dev_get_platdata(&pdev->dev) && pdev->dev.of_node) {
+		struct davinci_nand_pdata *pdata;
+		const char *mode;
+		u32 prop;
+>>>>>>> v3.18
 
 		pdata =  devm_kzalloc(&pdev->dev,
 				sizeof(struct davinci_nand_pdata),
 				GFP_KERNEL);
 		pdev->dev.platform_data = pdata;
 		if (!pdata)
+<<<<<<< HEAD
 			return NULL;
 		if (!of_property_read_u32(pdev->dev.of_node,
 			"ti,davinci-chipselect", &prop))
 			pdev->id = prop;
+=======
+			return ERR_PTR(-ENOMEM);
+		if (!of_property_read_u32(pdev->dev.of_node,
+			"ti,davinci-chipselect", &prop))
+			pdev->id = prop;
+		else
+			return ERR_PTR(-EINVAL);
+
+>>>>>>> v3.18
 		if (!of_property_read_u32(pdev->dev.of_node,
 			"ti,davinci-mask-ale", &prop))
 			pdata->mask_ale = prop;
@@ -558,6 +597,11 @@ static struct davinci_nand_pdata
 			"ti,davinci-mask-chipsel", &prop))
 			pdata->mask_chipsel = prop;
 		if (!of_property_read_string(pdev->dev.of_node,
+<<<<<<< HEAD
+=======
+			"nand-ecc-mode", &mode) ||
+		    !of_property_read_string(pdev->dev.of_node,
+>>>>>>> v3.18
 			"ti,davinci-ecc-mode", &mode)) {
 			if (!strncmp("none", mode, 4))
 				pdata->ecc_mode = NAND_ECC_NONE;
@@ -569,6 +613,7 @@ static struct davinci_nand_pdata
 		if (!of_property_read_u32(pdev->dev.of_node,
 			"ti,davinci-ecc-bits", &prop))
 			pdata->ecc_bits = prop;
+<<<<<<< HEAD
 		if (!of_property_read_u32(pdev->dev.of_node,
 			"ti,davinci-nand-buswidth", &prop))
 			if (prop == 16)
@@ -579,16 +624,45 @@ static struct davinci_nand_pdata
 	}
 
 	return pdev->dev.platform_data;
+=======
+
+		prop = of_get_nand_bus_width(pdev->dev.of_node);
+		if (0 < prop || !of_property_read_u32(pdev->dev.of_node,
+			"ti,davinci-nand-buswidth", &prop))
+			if (prop == 16)
+				pdata->options |= NAND_BUSWIDTH_16;
+		if (of_property_read_bool(pdev->dev.of_node,
+			"nand-on-flash-bbt") ||
+		    of_property_read_bool(pdev->dev.of_node,
+			"ti,davinci-nand-use-bbt"))
+			pdata->bbt_options = NAND_BBT_USE_FLASH;
+
+		if (of_device_is_compatible(pdev->dev.of_node,
+					    "ti,keystone-nand")) {
+			pdata->options |= NAND_NO_SUBPAGE_WRITE;
+		}
+	}
+
+	return dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 }
 #else
 static struct davinci_nand_pdata
 	*nand_davinci_get_pdata(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	return pdev->dev.platform_data;
 }
 #endif
 
 static int __init nand_davinci_probe(struct platform_device *pdev)
+=======
+	return dev_get_platdata(&pdev->dev);
+}
+#endif
+
+static int nand_davinci_probe(struct platform_device *pdev)
+>>>>>>> v3.18
 {
 	struct davinci_nand_pdata	*pdata;
 	struct davinci_nand_info	*info;
@@ -601,6 +675,12 @@ static int __init nand_davinci_probe(struct platform_device *pdev)
 	nand_ecc_modes_t		ecc_mode;
 
 	pdata = nand_davinci_get_pdata(pdev);
+<<<<<<< HEAD
+=======
+	if (IS_ERR(pdata))
+		return PTR_ERR(pdata);
+
+>>>>>>> v3.18
 	/* insist on board-specific configuration */
 	if (!pdata)
 		return -ENODEV;
@@ -610,11 +690,16 @@ static int __init nand_davinci_probe(struct platform_device *pdev)
 		return -ENODEV;
 
 	info = devm_kzalloc(&pdev->dev, sizeof(*info), GFP_KERNEL);
+<<<<<<< HEAD
 	if (!info) {
 		dev_err(&pdev->dev, "unable to allocate memory\n");
 		ret = -ENOMEM;
 		goto err_nomem;
 	}
+=======
+	if (!info)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	platform_set_drvdata(pdev, info);
 
@@ -622,6 +707,7 @@ static int __init nand_davinci_probe(struct platform_device *pdev)
 	res2 = platform_get_resource(pdev, IORESOURCE_MEM, 1);
 	if (!res1 || !res2) {
 		dev_err(&pdev->dev, "resource missing\n");
+<<<<<<< HEAD
 		ret = -EINVAL;
 		goto err_nomem;
 	}
@@ -632,6 +718,25 @@ static int __init nand_davinci_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "ioremap failed\n");
 		ret = -EADDRNOTAVAIL;
 		goto err_ioremap;
+=======
+		return -EINVAL;
+	}
+
+	vaddr = devm_ioremap_resource(&pdev->dev, res1);
+	if (IS_ERR(vaddr))
+		return PTR_ERR(vaddr);
+
+	/*
+	 * This registers range is used to setup NAND settings. In case with
+	 * TI AEMIF driver, the same memory address range is requested already
+	 * by AEMIF, so we cannot request it twice, just ioremap.
+	 * The AEMIF and NAND drivers not use the same registers in this range.
+	 */
+	base = devm_ioremap(&pdev->dev, res2->start, resource_size(res2));
+	if (!base) {
+		dev_err(&pdev->dev, "ioremap failed for resource %pR\n", res2);
+		return -EADDRNOTAVAIL;
+>>>>>>> v3.18
 	}
 
 	info->dev		= &pdev->dev;
@@ -699,7 +804,11 @@ static int __init nand_davinci_probe(struct platform_device *pdev)
 			spin_unlock_irq(&davinci_nand_lock);
 
 			if (ret == -EBUSY)
+<<<<<<< HEAD
 				goto err_ecc;
+=======
+				return ret;
+>>>>>>> v3.18
 
 			info->chip.ecc.calculate = nand_davinci_calculate_4bit;
 			info->chip.ecc.correct = nand_davinci_correct_4bit;
@@ -715,8 +824,12 @@ static int __init nand_davinci_probe(struct platform_device *pdev)
 		info->chip.ecc.strength = pdata->ecc_bits;
 		break;
 	default:
+<<<<<<< HEAD
 		ret = -EINVAL;
 		goto err_ecc;
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 	}
 	info->chip.ecc.mode = ecc_mode;
 
@@ -724,7 +837,11 @@ static int __init nand_davinci_probe(struct platform_device *pdev)
 	if (IS_ERR(info->clk)) {
 		ret = PTR_ERR(info->clk);
 		dev_dbg(&pdev->dev, "unable to get AEMIF clock, err %d\n", ret);
+<<<<<<< HEAD
 		goto err_clk;
+=======
+		return ret;
+>>>>>>> v3.18
 	}
 
 	ret = clk_prepare_enable(info->clk);
@@ -734,6 +851,7 @@ static int __init nand_davinci_probe(struct platform_device *pdev)
 		goto err_clk_enable;
 	}
 
+<<<<<<< HEAD
 	/*
 	 * Setup Async configuration register in case we did not boot from
 	 * NAND and so bootloader did not bother to set it up.
@@ -756,6 +874,8 @@ static int __init nand_davinci_probe(struct platform_device *pdev)
 		goto err_timing;
 	}
 
+=======
+>>>>>>> v3.18
 	spin_lock_irq(&davinci_nand_lock);
 
 	/* put CSxNAND into NAND mode */
@@ -769,7 +889,11 @@ static int __init nand_davinci_probe(struct platform_device *pdev)
 	ret = nand_scan_ident(&info->mtd, pdata->mask_chipsel ? 2 : 1, NULL);
 	if (ret < 0) {
 		dev_dbg(&pdev->dev, "no NAND chip(s) found\n");
+<<<<<<< HEAD
 		goto err_scan;
+=======
+		goto err;
+>>>>>>> v3.18
 	}
 
 	/* Update ECC layout if needed ... for 1-bit HW ECC, the default
@@ -783,7 +907,11 @@ static int __init nand_davinci_probe(struct platform_device *pdev)
 		if (!chunks || info->mtd.oobsize < 16) {
 			dev_dbg(&pdev->dev, "too small\n");
 			ret = -EINVAL;
+<<<<<<< HEAD
 			goto err_scan;
+=======
+			goto err;
+>>>>>>> v3.18
 		}
 
 		/* For small page chips, preserve the manufacturer's
@@ -814,7 +942,11 @@ static int __init nand_davinci_probe(struct platform_device *pdev)
 		dev_warn(&pdev->dev, "no 4-bit ECC support yet "
 				"for 4KiB-page NAND\n");
 		ret = -EIO;
+<<<<<<< HEAD
 		goto err_scan;
+=======
+		goto err;
+>>>>>>> v3.18
 
 syndrome_done:
 		info->chip.ecc.layout = &info->ecclayout;
@@ -822,7 +954,11 @@ syndrome_done:
 
 	ret = nand_scan_tail(&info->mtd);
 	if (ret < 0)
+<<<<<<< HEAD
 		goto err_scan;
+=======
+		goto err;
+>>>>>>> v3.18
 
 	if (pdata->parts)
 		ret = mtd_device_parse_register(&info->mtd, NULL, NULL,
@@ -835,7 +971,11 @@ syndrome_done:
 						NULL, 0);
 	}
 	if (ret < 0)
+<<<<<<< HEAD
 		goto err_scan;
+=======
+		goto err;
+>>>>>>> v3.18
 
 	val = davinci_nand_readl(info, NRCSR_OFFSET);
 	dev_info(&pdev->dev, "controller rev. %d.%d\n",
@@ -843,8 +983,12 @@ syndrome_done:
 
 	return 0;
 
+<<<<<<< HEAD
 err_scan:
 err_timing:
+=======
+err:
+>>>>>>> v3.18
 	clk_disable_unprepare(info->clk);
 
 err_clk_enable:
@@ -852,6 +996,7 @@ err_clk_enable:
 	if (ecc_mode == NAND_ECC_HW_SYNDROME)
 		ecc4_busy = false;
 	spin_unlock_irq(&davinci_nand_lock);
+<<<<<<< HEAD
 
 err_ecc:
 err_clk:
@@ -861,6 +1006,12 @@ err_nomem:
 }
 
 static int __exit nand_davinci_remove(struct platform_device *pdev)
+=======
+	return ret;
+}
+
+static int nand_davinci_remove(struct platform_device *pdev)
+>>>>>>> v3.18
 {
 	struct davinci_nand_info *info = platform_get_drvdata(pdev);
 
@@ -877,7 +1028,12 @@ static int __exit nand_davinci_remove(struct platform_device *pdev)
 }
 
 static struct platform_driver nand_davinci_driver = {
+<<<<<<< HEAD
 	.remove		= __exit_p(nand_davinci_remove),
+=======
+	.probe		= nand_davinci_probe,
+	.remove		= nand_davinci_remove,
+>>>>>>> v3.18
 	.driver		= {
 		.name	= "davinci_nand",
 		.owner	= THIS_MODULE,
@@ -886,7 +1042,11 @@ static struct platform_driver nand_davinci_driver = {
 };
 MODULE_ALIAS("platform:davinci_nand");
 
+<<<<<<< HEAD
 module_platform_driver_probe(nand_davinci_driver, nand_davinci_probe);
+=======
+module_platform_driver(nand_davinci_driver);
+>>>>>>> v3.18
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Texas Instruments");

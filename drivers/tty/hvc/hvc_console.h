@@ -75,6 +75,12 @@ struct hv_ops {
 	/* tiocmget/set implementation */
 	int (*tiocmget)(struct hvc_struct *hp);
 	int (*tiocmset)(struct hvc_struct *hp, unsigned int set, unsigned int clear);
+<<<<<<< HEAD
+=======
+
+	/* Callbacks to handle tty ports */
+	void (*dtr_rts)(struct hvc_struct *hp, int raise);
+>>>>>>> v3.18
 };
 
 /* Register a vterm and a slot index for use as a console (console_init) */

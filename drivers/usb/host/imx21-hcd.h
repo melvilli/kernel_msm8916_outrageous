@@ -24,6 +24,13 @@
 #ifndef __LINUX_IMX21_HCD_H__
 #define __LINUX_IMX21_HCD_H__
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_DYNAMIC_DEBUG
+#define DEBUG
+#endif
+
+>>>>>>> v3.18
 #include <linux/platform_data/usb-mx2.h>
 
 #define NUM_ISO_ETDS 	2

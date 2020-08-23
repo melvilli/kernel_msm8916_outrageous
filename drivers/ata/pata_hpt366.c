@@ -19,7 +19,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/pci.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/blkdev.h>
 #include <linux/delay.h>
 #include <scsi/scsi_host.h>
@@ -387,10 +390,17 @@ static int hpt36x_init_one(struct pci_dev *dev, const struct pci_device_id *id)
 	return ata_pci_bmdma_init_one(dev, ppi, &hpt36x_sht, hpriv, 0);
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 static int hpt36x_reinit_one(struct pci_dev *dev)
 {
 	struct ata_host *host = dev_get_drvdata(&dev->dev);
+=======
+#ifdef CONFIG_PM_SLEEP
+static int hpt36x_reinit_one(struct pci_dev *dev)
+{
+	struct ata_host *host = pci_get_drvdata(dev);
+>>>>>>> v3.18
 	int rc;
 
 	rc = ata_pci_device_do_resume(dev);
@@ -412,7 +422,11 @@ static struct pci_driver hpt36x_pci_driver = {
 	.id_table	= hpt36x,
 	.probe		= hpt36x_init_one,
 	.remove		= ata_pci_remove_one,
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 	.suspend	= ata_pci_device_suspend,
 	.resume		= hpt36x_reinit_one,
 #endif

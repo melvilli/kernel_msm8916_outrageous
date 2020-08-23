@@ -12,6 +12,7 @@
 CFLAGS_octeon-platform.o = -I$(src)/../../../scripts/dtc/libfdt
 CFLAGS_setup.o = -I$(src)/../../../scripts/dtc/libfdt
 
+<<<<<<< HEAD
 obj-y := cpu.o setup.o serial.o octeon-platform.o octeon-irq.o csrc-octeon.o
 obj-y += dma-octeon.o flash_setup.o
 obj-y += octeon-memcpy.o
@@ -29,3 +30,13 @@ obj-y += $(patsubst %.dts, %.dtb.o, $(DTS_FILES))
 .SECONDARY:  $(addprefix $(obj)/, $(DTB_FILES))
 
 clean-files += $(DTB_FILES) $(patsubst %.dtb, %.dtb.S, $(DTB_FILES))
+=======
+obj-y := cpu.o setup.o octeon-platform.o octeon-irq.o csrc-octeon.o
+obj-y += dma-octeon.o
+obj-y += octeon-memcpy.o
+obj-y += executive/
+
+obj-$(CONFIG_MTD)		      += flash_setup.o
+obj-$(CONFIG_SMP)		      += smp.o
+obj-$(CONFIG_OCTEON_ILM)	      += oct_ilm.o
+>>>>>>> v3.18

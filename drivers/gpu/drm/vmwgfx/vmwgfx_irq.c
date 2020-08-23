@@ -30,7 +30,11 @@
 
 #define VMW_FENCE_WRAP (1 << 24)
 
+<<<<<<< HEAD
 irqreturn_t vmw_irq_handler(DRM_IRQ_ARGS)
+=======
+irqreturn_t vmw_irq_handler(int irq, void *arg)
+>>>>>>> v3.18
 {
 	struct drm_device *dev = (struct drm_device *)arg;
 	struct vmw_private *dev_priv = vmw_priv(dev);

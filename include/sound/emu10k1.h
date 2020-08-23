@@ -41,8 +41,12 @@
 
 #define EMUPAGESIZE     4096
 #define MAXREQVOICES    8
+<<<<<<< HEAD
 #define MAXPAGES0       4096	/* 32 bit mode */
 #define MAXPAGES1       8192	/* 31 bit mode */
+=======
+#define MAXPAGES        8192
+>>>>>>> v3.18
 #define RESERVED        0
 #define NUM_MIDI        16
 #define NUM_G           64              /* use all channels */
@@ -51,7 +55,12 @@
 
 /* FIXME? - according to the OSS driver the EMU10K1 needs a 29 bit DMA mask */
 #define EMU10K1_DMA_MASK	0x7fffffffUL	/* 31bit */
+<<<<<<< HEAD
 #define AUDIGY_DMA_MASK		0xffffffffUL	/* 32bit mode */
+=======
+#define AUDIGY_DMA_MASK		0x7fffffffUL	/* 31bit FIXME - 32 should work? */
+						/* See ALSA bug #1276 - rlrevell */
+>>>>>>> v3.18
 
 #define TMEMSIZE        256*1024
 #define TMEMSIZEREG     4
@@ -436,8 +445,11 @@
 #define CCCA_CURRADDR_MASK	0x00ffffff	/* Current address of the selected channel		*/
 #define CCCA_CURRADDR		0x18000008
 
+<<<<<<< HEAD
 /* undefine CCR to avoid conflict with the definition for SH */
 #undef CCR
+=======
+>>>>>>> v3.18
 #define CCR			0x09		/* Cache control register				*/
 #define CCR_CACHEINVALIDSIZE	0x07190009
 #define CCR_CACHEINVALIDSIZE_MASK	0xfe000000	/* Number of invalid samples cache for this channel    	*/
@@ -468,11 +480,16 @@
 
 #define MAPB			0x0d		/* Cache map B						*/
 
+<<<<<<< HEAD
 #define MAP_PTE_MASK0		0xfffff000	/* The 20 MSBs of the PTE indexed by the PTI		*/
 #define MAP_PTI_MASK0		0x00000fff	/* The 12 bit index to one of the 4096 PTE dwords      	*/
 
 #define MAP_PTE_MASK1		0xffffe000	/* The 19 MSBs of the PTE indexed by the PTI		*/
 #define MAP_PTI_MASK1		0x00001fff	/* The 13 bit index to one of the 8192 PTE dwords      	*/
+=======
+#define MAP_PTE_MASK		0xffffe000	/* The 19 MSBs of the PTE indexed by the PTI		*/
+#define MAP_PTI_MASK		0x00001fff	/* The 13 bit index to one of the 8192 PTE dwords      	*/
+>>>>>>> v3.18
 
 /* 0x0e, 0x0f: Not used */
 
@@ -1709,7 +1726,10 @@ struct snd_emu10k1 {
 	unsigned short model;			/* subsystem id */
 	unsigned int card_type;			/* EMU10K1_CARD_* */
 	unsigned int ecard_ctrl;		/* ecard control bits */
+<<<<<<< HEAD
 	unsigned int address_mode;		/* address mode */
+=======
+>>>>>>> v3.18
 	unsigned long dma_mask;			/* PCI DMA mask */
 	unsigned int delay_pcm_irq;		/* in samples */
 	int max_cache_pages;			/* max memory size / PAGE_SIZE */

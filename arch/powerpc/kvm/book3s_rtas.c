@@ -23,20 +23,34 @@ static void kvm_rtas_set_xive(struct kvm_vcpu *vcpu, struct rtas_args *args)
 	u32 irq, server, priority;
 	int rc;
 
+<<<<<<< HEAD
 	if (args->nargs != 3 || args->nret != 1) {
+=======
+	if (be32_to_cpu(args->nargs) != 3 || be32_to_cpu(args->nret) != 1) {
+>>>>>>> v3.18
 		rc = -3;
 		goto out;
 	}
 
+<<<<<<< HEAD
 	irq = args->args[0];
 	server = args->args[1];
 	priority = args->args[2];
+=======
+	irq = be32_to_cpu(args->args[0]);
+	server = be32_to_cpu(args->args[1]);
+	priority = be32_to_cpu(args->args[2]);
+>>>>>>> v3.18
 
 	rc = kvmppc_xics_set_xive(vcpu->kvm, irq, server, priority);
 	if (rc)
 		rc = -3;
 out:
+<<<<<<< HEAD
 	args->rets[0] = rc;
+=======
+	args->rets[0] = cpu_to_be32(rc);
+>>>>>>> v3.18
 }
 
 static void kvm_rtas_get_xive(struct kvm_vcpu *vcpu, struct rtas_args *args)
@@ -44,12 +58,20 @@ static void kvm_rtas_get_xive(struct kvm_vcpu *vcpu, struct rtas_args *args)
 	u32 irq, server, priority;
 	int rc;
 
+<<<<<<< HEAD
 	if (args->nargs != 1 || args->nret != 3) {
+=======
+	if (be32_to_cpu(args->nargs) != 1 || be32_to_cpu(args->nret) != 3) {
+>>>>>>> v3.18
 		rc = -3;
 		goto out;
 	}
 
+<<<<<<< HEAD
 	irq = args->args[0];
+=======
+	irq = be32_to_cpu(args->args[0]);
+>>>>>>> v3.18
 
 	server = priority = 0;
 	rc = kvmppc_xics_get_xive(vcpu->kvm, irq, &server, &priority);
@@ -58,10 +80,17 @@ static void kvm_rtas_get_xive(struct kvm_vcpu *vcpu, struct rtas_args *args)
 		goto out;
 	}
 
+<<<<<<< HEAD
 	args->rets[1] = server;
 	args->rets[2] = priority;
 out:
 	args->rets[0] = rc;
+=======
+	args->rets[1] = cpu_to_be32(server);
+	args->rets[2] = cpu_to_be32(priority);
+out:
+	args->rets[0] = cpu_to_be32(rc);
+>>>>>>> v3.18
 }
 
 static void kvm_rtas_int_off(struct kvm_vcpu *vcpu, struct rtas_args *args)
@@ -69,18 +98,30 @@ static void kvm_rtas_int_off(struct kvm_vcpu *vcpu, struct rtas_args *args)
 	u32 irq;
 	int rc;
 
+<<<<<<< HEAD
 	if (args->nargs != 1 || args->nret != 1) {
+=======
+	if (be32_to_cpu(args->nargs) != 1 || be32_to_cpu(args->nret) != 1) {
+>>>>>>> v3.18
 		rc = -3;
 		goto out;
 	}
 
+<<<<<<< HEAD
 	irq = args->args[0];
+=======
+	irq = be32_to_cpu(args->args[0]);
+>>>>>>> v3.18
 
 	rc = kvmppc_xics_int_off(vcpu->kvm, irq);
 	if (rc)
 		rc = -3;
 out:
+<<<<<<< HEAD
 	args->rets[0] = rc;
+=======
+	args->rets[0] = cpu_to_be32(rc);
+>>>>>>> v3.18
 }
 
 static void kvm_rtas_int_on(struct kvm_vcpu *vcpu, struct rtas_args *args)
@@ -88,18 +129,30 @@ static void kvm_rtas_int_on(struct kvm_vcpu *vcpu, struct rtas_args *args)
 	u32 irq;
 	int rc;
 
+<<<<<<< HEAD
 	if (args->nargs != 1 || args->nret != 1) {
+=======
+	if (be32_to_cpu(args->nargs) != 1 || be32_to_cpu(args->nret) != 1) {
+>>>>>>> v3.18
 		rc = -3;
 		goto out;
 	}
 
+<<<<<<< HEAD
 	irq = args->args[0];
+=======
+	irq = be32_to_cpu(args->args[0]);
+>>>>>>> v3.18
 
 	rc = kvmppc_xics_int_on(vcpu->kvm, irq);
 	if (rc)
 		rc = -3;
 out:
+<<<<<<< HEAD
 	args->rets[0] = rc;
+=======
+	args->rets[0] = cpu_to_be32(rc);
+>>>>>>> v3.18
 }
 #endif /* CONFIG_KVM_XICS */
 
@@ -213,8 +266,16 @@ int kvmppc_rtas_hcall(struct kvm_vcpu *vcpu)
 	gpa_t args_phys;
 	int rc;
 
+<<<<<<< HEAD
 	/* r4 contains the guest physical address of the RTAS args */
 	args_phys = kvmppc_get_gpr(vcpu, 4);
+=======
+	/*
+	 * r4 contains the guest physical address of the RTAS args
+	 * Mask off the top 4 bits since this is a guest real address
+	 */
+	args_phys = kvmppc_get_gpr(vcpu, 4) & KVM_PAM;
+>>>>>>> v3.18
 
 	rc = kvm_read_guest(vcpu->kvm, args_phys, &args, sizeof(args));
 	if (rc)
@@ -227,13 +288,21 @@ int kvmppc_rtas_hcall(struct kvm_vcpu *vcpu)
 	 * value so we can restore it on the way out.
 	 */
 	orig_rets = args.rets;
+<<<<<<< HEAD
 	args.rets = &args.args[args.nargs];
+=======
+	args.rets = &args.args[be32_to_cpu(args.nargs)];
+>>>>>>> v3.18
 
 	mutex_lock(&vcpu->kvm->lock);
 
 	rc = -ENOENT;
 	list_for_each_entry(d, &vcpu->kvm->arch.rtas_tokens, list) {
+<<<<<<< HEAD
 		if (d->token == args.token) {
+=======
+		if (d->token == be32_to_cpu(args.token)) {
+>>>>>>> v3.18
 			d->handler->handler(vcpu, &args);
 			rc = 0;
 			break;
@@ -260,6 +329,10 @@ fail:
 	 */
 	return rc;
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(kvmppc_rtas_hcall);
+>>>>>>> v3.18
 
 void kvmppc_rtas_tokens_free(struct kvm *kvm)
 {

@@ -803,8 +803,12 @@ static void wbsd_request(struct mmc_host *mmc, struct mmc_request *mrq)
 
 		default:
 #ifdef CONFIG_MMC_DEBUG
+<<<<<<< HEAD
 			pr_warning("%s: Data command %d is not "
 				"supported by this controller.\n",
+=======
+			pr_warn("%s: Data command %d is not supported by this controller\n",
+>>>>>>> v3.18
 				mmc_hostname(host->mmc), cmd->opcode);
 #endif
 			cmd->error = -EINVAL;
@@ -1429,8 +1433,13 @@ free:
 	free_dma(dma);
 
 err:
+<<<<<<< HEAD
 	pr_warning(DRIVER_NAME ": Unable to allocate DMA %d. "
 		"Falling back on FIFO.\n", dma);
+=======
+	pr_warn(DRIVER_NAME ": Unable to allocate DMA %d - falling back on FIFO\n",
+		dma);
+>>>>>>> v3.18
 }
 
 static void wbsd_release_dma(struct wbsd_host *host)
@@ -1664,9 +1673,13 @@ static int wbsd_init(struct device *dev, int base, int irq, int dma,
 	ret = wbsd_scan(host);
 	if (ret) {
 		if (pnp && (ret == -ENODEV)) {
+<<<<<<< HEAD
 			pr_warning(DRIVER_NAME
 				": Unable to confirm device presence. You may "
 				"experience lock-ups.\n");
+=======
+			pr_warn(DRIVER_NAME ": Unable to confirm device presence - you may experience lock-ups\n");
+>>>>>>> v3.18
 		} else {
 			wbsd_free_mmc(dev);
 			return ret;
@@ -1688,10 +1701,14 @@ static int wbsd_init(struct device *dev, int base, int irq, int dma,
 	 */
 	if (pnp) {
 		if ((host->config != 0) && !wbsd_chip_validate(host)) {
+<<<<<<< HEAD
 			pr_warning(DRIVER_NAME
 				": PnP active but chip not configured! "
 				"You probably have a buggy BIOS. "
 				"Configuring chip manually.\n");
+=======
+			pr_warn(DRIVER_NAME ": PnP active but chip not configured! You probably have a buggy BIOS. Configuring chip manually.\n");
+>>>>>>> v3.18
 			wbsd_chip_config(host);
 		}
 	} else
@@ -1814,6 +1831,7 @@ static void wbsd_pnp_remove(struct pnp_dev *dev)
 
 #ifdef CONFIG_PM
 
+<<<<<<< HEAD
 static int wbsd_suspend(struct wbsd_host *host, pm_message_t state)
 {
 	BUG_ON(host == NULL);
@@ -1830,12 +1848,17 @@ static int wbsd_resume(struct wbsd_host *host)
 	return mmc_resume_host(host->mmc);
 }
 
+=======
+>>>>>>> v3.18
 static int wbsd_platform_suspend(struct platform_device *dev,
 				 pm_message_t state)
 {
 	struct mmc_host *mmc = platform_get_drvdata(dev);
 	struct wbsd_host *host;
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 
 	if (mmc == NULL)
 		return 0;
@@ -1844,12 +1867,16 @@ static int wbsd_platform_suspend(struct platform_device *dev,
 
 	host = mmc_priv(mmc);
 
+<<<<<<< HEAD
 	ret = wbsd_suspend(host, state);
 	if (ret)
 		return ret;
 
 	wbsd_chip_poweroff(host);
 
+=======
+	wbsd_chip_poweroff(host);
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -1872,7 +1899,12 @@ static int wbsd_platform_resume(struct platform_device *dev)
 	 */
 	mdelay(5);
 
+<<<<<<< HEAD
 	return wbsd_resume(host);
+=======
+	wbsd_init_device(host);
+	return 0;
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_PNP
@@ -1880,16 +1912,23 @@ static int wbsd_platform_resume(struct platform_device *dev)
 static int wbsd_pnp_suspend(struct pnp_dev *pnp_dev, pm_message_t state)
 {
 	struct mmc_host *mmc = dev_get_drvdata(&pnp_dev->dev);
+<<<<<<< HEAD
 	struct wbsd_host *host;
+=======
+>>>>>>> v3.18
 
 	if (mmc == NULL)
 		return 0;
 
 	DBGF("Suspending...\n");
+<<<<<<< HEAD
 
 	host = mmc_priv(mmc);
 
 	return wbsd_suspend(host, state);
+=======
+	return 0;
+>>>>>>> v3.18
 }
 
 static int wbsd_pnp_resume(struct pnp_dev *pnp_dev)
@@ -1909,10 +1948,14 @@ static int wbsd_pnp_resume(struct pnp_dev *pnp_dev)
 	 */
 	if (host->config != 0) {
 		if (!wbsd_chip_validate(host)) {
+<<<<<<< HEAD
 			pr_warning(DRIVER_NAME
 				": PnP active but chip not configured! "
 				"You probably have a buggy BIOS. "
 				"Configuring chip manually.\n");
+=======
+			pr_warn(DRIVER_NAME ": PnP active but chip not configured! You probably have a buggy BIOS. Configuring chip manually.\n");
+>>>>>>> v3.18
 			wbsd_chip_config(host);
 		}
 	}
@@ -1922,7 +1965,12 @@ static int wbsd_pnp_resume(struct pnp_dev *pnp_dev)
 	 */
 	mdelay(5);
 
+<<<<<<< HEAD
 	return wbsd_resume(host);
+=======
+	wbsd_init_device(host);
+	return 0;
+>>>>>>> v3.18
 }
 
 #endif /* CONFIG_PNP */

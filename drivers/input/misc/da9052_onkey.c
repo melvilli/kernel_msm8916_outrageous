@@ -11,7 +11,10 @@
  * option) any later version.
  */
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/input.h>
 #include <linux/module.h>
 #include <linux/platform_device.h>
@@ -28,18 +31,28 @@ struct da9052_onkey {
 
 static void da9052_onkey_query(struct da9052_onkey *onkey)
 {
+<<<<<<< HEAD
 	int key_stat;
 
 	key_stat = da9052_reg_read(onkey->da9052, DA9052_EVENT_B_REG);
 	if (key_stat < 0) {
 		dev_err(onkey->da9052->dev,
 			"Failed to read onkey event %d\n", key_stat);
+=======
+	int ret;
+
+	ret = da9052_reg_read(onkey->da9052, DA9052_STATUS_A_REG);
+	if (ret < 0) {
+		dev_err(onkey->da9052->dev,
+			"Failed to read onkey event err=%d\n", ret);
+>>>>>>> v3.18
 	} else {
 		/*
 		 * Since interrupt for deassertion of ONKEY pin is not
 		 * generated, onkey event state determines the onkey
 		 * button state.
 		 */
+<<<<<<< HEAD
 		key_stat &= DA9052_EVENTB_ENONKEY;
 		input_report_key(onkey->input, KEY_POWER, key_stat);
 		input_sync(onkey->input);
@@ -51,6 +64,22 @@ static void da9052_onkey_query(struct da9052_onkey *onkey)
 	 */
 	if (key_stat)
 		schedule_delayed_work(&onkey->work, msecs_to_jiffies(50));
+=======
+		bool pressed = !(ret & DA9052_STATUSA_NONKEY);
+
+		input_report_key(onkey->input, KEY_POWER, pressed);
+		input_sync(onkey->input);
+
+		/*
+		 * Interrupt is generated only when the ONKEY pin
+		 * is asserted.  Hence the deassertion of the pin
+		 * is simulated through work queue.
+		 */
+		if (pressed)
+			schedule_delayed_work(&onkey->work,
+						msecs_to_jiffies(50));
+	}
+>>>>>>> v3.18
 }
 
 static void da9052_onkey_work(struct work_struct *work)

@@ -12,10 +12,15 @@
 
 /dts-v1/;
 #include "imx6q.dtsi"
+<<<<<<< HEAD
+=======
+#include "imx6qdl-sabrelite.dtsi"
+>>>>>>> v3.18
 
 / {
 	model = "Freescale i.MX6 Quad SABRE Lite Board";
 	compatible = "fsl,imx6q-sabrelite", "fsl,imx6q";
+<<<<<<< HEAD
 
 	memory {
 		reg = <0x10000000 0x40000000>;
@@ -168,3 +173,10 @@
 		VDDIO-supply = <&reg_3p3v>;
 	};
 };
+=======
+};
+
+&sata {
+	status = "okay";
+};
+>>>>>>> v3.18

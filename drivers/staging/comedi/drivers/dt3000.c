@@ -14,11 +14,14 @@
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 */
 /*
 Driver: dt3000
@@ -53,8 +56,12 @@ AO commands are not supported.
    you the docs without one, also.
 */
 
+<<<<<<< HEAD
 #define DEBUG 1
 
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 #include <linux/pci.h>
 #include <linux/delay.h>
 #include <linux/interrupt.h>
@@ -250,13 +257,18 @@ static const struct dt3k_boardtype dt3k_boardtypes[] = {
 #define DT3000_CHANNEL_MODE_DI		1
 
 struct dt3k_private {
+<<<<<<< HEAD
 	void __iomem *io_addr;
 	unsigned int lock;
 	unsigned int ao_readback[2];
+=======
+	unsigned int lock;
+>>>>>>> v3.18
 	unsigned int ai_front;
 	unsigned int ai_rear;
 };
 
+<<<<<<< HEAD
 #ifdef DEBUG
 static char *intr_flags[] = {
 	"AdFull", "AdSwError", "AdHwError", "DaEmpty",
@@ -275,10 +287,13 @@ static void debug_intr_flags(unsigned int flags)
 }
 #endif
 
+=======
+>>>>>>> v3.18
 #define TIMEOUT 100
 
 static void dt3k_send_cmd(struct comedi_device *dev, unsigned int cmd)
 {
+<<<<<<< HEAD
 	struct dt3k_private *devpriv = dev->private;
 	int i;
 	unsigned int status = 0;
@@ -287,6 +302,15 @@ static void dt3k_send_cmd(struct comedi_device *dev, unsigned int cmd)
 
 	for (i = 0; i < TIMEOUT; i++) {
 		status = readw(devpriv->io_addr + DPR_Command_Mbx);
+=======
+	int i;
+	unsigned int status = 0;
+
+	writew(cmd, dev->mmio + DPR_Command_Mbx);
+
+	for (i = 0; i < TIMEOUT; i++) {
+		status = readw(dev->mmio + DPR_Command_Mbx);
+>>>>>>> v3.18
 		if ((status & DT3000_COMPLETION_MASK) != DT3000_NOTPROCESSED)
 			break;
 		udelay(1);
@@ -301,6 +325,7 @@ static unsigned int dt3k_readsingle(struct comedi_device *dev,
 				    unsigned int subsys, unsigned int chan,
 				    unsigned int gain)
 {
+<<<<<<< HEAD
 	struct dt3k_private *devpriv = dev->private;
 
 	writew(subsys, devpriv->io_addr + DPR_SubSys);
@@ -311,11 +336,22 @@ static unsigned int dt3k_readsingle(struct comedi_device *dev,
 	dt3k_send_cmd(dev, CMD_READSINGLE);
 
 	return readw(devpriv->io_addr + DPR_Params(2));
+=======
+	writew(subsys, dev->mmio + DPR_SubSys);
+
+	writew(chan, dev->mmio + DPR_Params(0));
+	writew(gain, dev->mmio + DPR_Params(1));
+
+	dt3k_send_cmd(dev, CMD_READSINGLE);
+
+	return readw(dev->mmio + DPR_Params(2));
+>>>>>>> v3.18
 }
 
 static void dt3k_writesingle(struct comedi_device *dev, unsigned int subsys,
 			     unsigned int chan, unsigned int data)
 {
+<<<<<<< HEAD
 	struct dt3k_private *devpriv = dev->private;
 
 	writew(subsys, devpriv->io_addr + DPR_SubSys);
@@ -323,6 +359,13 @@ static void dt3k_writesingle(struct comedi_device *dev, unsigned int subsys,
 	writew(chan, devpriv->io_addr + DPR_Params(0));
 	writew(0, devpriv->io_addr + DPR_Params(1));
 	writew(data, devpriv->io_addr + DPR_Params(2));
+=======
+	writew(subsys, dev->mmio + DPR_SubSys);
+
+	writew(chan, dev->mmio + DPR_Params(0));
+	writew(0, dev->mmio + DPR_Params(1));
+	writew(data, dev->mmio + DPR_Params(2));
+>>>>>>> v3.18
 
 	dt3k_send_cmd(dev, CMD_WRITESINGLE);
 }
@@ -335,9 +378,15 @@ static void dt3k_ai_empty_fifo(struct comedi_device *dev,
 	int rear;
 	int count;
 	int i;
+<<<<<<< HEAD
 	short data;
 
 	front = readw(devpriv->io_addr + DPR_AD_Buf_Front);
+=======
+	unsigned short data;
+
+	front = readw(dev->mmio + DPR_AD_Buf_Front);
+>>>>>>> v3.18
 	count = front - devpriv->ai_front;
 	if (count < 0)
 		count += AI_FIFO_DEPTH;
@@ -345,14 +394,20 @@ static void dt3k_ai_empty_fifo(struct comedi_device *dev,
 	rear = devpriv->ai_rear;
 
 	for (i = 0; i < count; i++) {
+<<<<<<< HEAD
 		data = readw(devpriv->io_addr + DPR_ADC_buffer + rear);
 		comedi_buf_put(s->async, data);
+=======
+		data = readw(dev->mmio + DPR_ADC_buffer + rear);
+		comedi_buf_put(s, data);
+>>>>>>> v3.18
 		rear++;
 		if (rear >= AI_FIFO_DEPTH)
 			rear = 0;
 	}
 
 	devpriv->ai_rear = rear;
+<<<<<<< HEAD
 	writew(rear, devpriv->io_addr + DPR_AD_Buf_Rear);
 }
 
@@ -364,6 +419,18 @@ static int dt3k_ai_cancel(struct comedi_device *dev, struct comedi_subdevice *s)
 	dt3k_send_cmd(dev, CMD_STOP);
 
 	writew(0, devpriv->io_addr + DPR_Int_Mask);
+=======
+	writew(rear, dev->mmio + DPR_AD_Buf_Rear);
+}
+
+static int dt3k_ai_cancel(struct comedi_device *dev,
+			  struct comedi_subdevice *s)
+{
+	writew(SUBS_AI, dev->mmio + DPR_SubSys);
+	dt3k_send_cmd(dev, CMD_STOP);
+
+	writew(0, dev->mmio + DPR_Int_Mask);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -375,18 +442,26 @@ static int debug_n_ints;
 static irqreturn_t dt3k_interrupt(int irq, void *d)
 {
 	struct comedi_device *dev = d;
+<<<<<<< HEAD
 	struct dt3k_private *devpriv = dev->private;
 	struct comedi_subdevice *s;
+=======
+	struct comedi_subdevice *s = dev->read_subdev;
+>>>>>>> v3.18
 	unsigned int status;
 
 	if (!dev->attached)
 		return IRQ_NONE;
 
+<<<<<<< HEAD
 	s = &dev->subdevices[0];
 	status = readw(devpriv->io_addr + DPR_Intr_Flag);
 #ifdef DEBUG
 	debug_intr_flags(status);
 #endif
+=======
+	status = readw(dev->mmio + DPR_Intr_Flag);
+>>>>>>> v3.18
 
 	if (status & DT3000_ADFULL) {
 		dt3k_ai_empty_fifo(dev, s);
@@ -397,17 +472,28 @@ static irqreturn_t dt3k_interrupt(int irq, void *d)
 		s->async->events |= COMEDI_CB_ERROR | COMEDI_CB_EOA;
 
 	debug_n_ints++;
+<<<<<<< HEAD
 	if (debug_n_ints >= 10) {
 		dt3k_ai_cancel(dev, s);
 		s->async->events |= COMEDI_CB_EOA;
 	}
 
 	comedi_event(dev, s);
+=======
+	if (debug_n_ints >= 10)
+		s->async->events |= COMEDI_CB_EOA;
+
+	cfc_handle_events(dev, s);
+>>>>>>> v3.18
 	return IRQ_HANDLED;
 }
 
 static int dt3k_ns_to_timer(unsigned int timer_base, unsigned int *nanosec,
+<<<<<<< HEAD
 			    unsigned int round_mode)
+=======
+			    unsigned int flags)
+>>>>>>> v3.18
 {
 	int divider, base, prescale;
 
@@ -416,6 +502,7 @@ static int dt3k_ns_to_timer(unsigned int timer_base, unsigned int *nanosec,
 
 	for (prescale = 0; prescale < 16; prescale++) {
 		base = timer_base * (prescale + 1);
+<<<<<<< HEAD
 		switch (round_mode) {
 		case TRIG_ROUND_NEAREST:
 		default:
@@ -425,6 +512,17 @@ static int dt3k_ns_to_timer(unsigned int timer_base, unsigned int *nanosec,
 			divider = (*nanosec) / base;
 			break;
 		case TRIG_ROUND_UP:
+=======
+		switch (flags & CMDF_ROUND_MASK) {
+		case CMDF_ROUND_NEAREST:
+		default:
+			divider = (*nanosec + base / 2) / base;
+			break;
+		case CMDF_ROUND_DOWN:
+			divider = (*nanosec) / base;
+			break;
+		case CMDF_ROUND_UP:
+>>>>>>> v3.18
 			divider = (*nanosec) / base;
 			break;
 		}
@@ -444,9 +542,15 @@ static int dt3k_ns_to_timer(unsigned int timer_base, unsigned int *nanosec,
 static int dt3k_ai_cmdtest(struct comedi_device *dev,
 			   struct comedi_subdevice *s, struct comedi_cmd *cmd)
 {
+<<<<<<< HEAD
 	const struct dt3k_boardtype *this_board = comedi_board(dev);
 	int err = 0;
 	int tmp;
+=======
+	const struct dt3k_boardtype *this_board = dev->board_ptr;
+	int err = 0;
+	unsigned int arg;
+>>>>>>> v3.18
 
 	/* Step 1 : check if triggers are trivially valid */
 
@@ -462,9 +566,12 @@ static int dt3k_ai_cmdtest(struct comedi_device *dev,
 	/* Step 2a : make sure trigger sources are unique */
 	/* Step 2b : and mutually compatible */
 
+<<<<<<< HEAD
 	if (err)
 		return 2;
 
+=======
+>>>>>>> v3.18
 	/* Step 3: check if arguments are trivially valid */
 
 	err |= cfc_check_trigger_arg_is(&cmd->start_arg, 0);
@@ -496,6 +603,7 @@ static int dt3k_ai_cmdtest(struct comedi_device *dev,
 	/* step 4: fix up any arguments */
 
 	if (cmd->scan_begin_src == TRIG_TIMER) {
+<<<<<<< HEAD
 		tmp = cmd->scan_begin_arg;
 		dt3k_ns_to_timer(100, &cmd->scan_begin_arg,
 				 cmd->flags & TRIG_ROUND_MASK);
@@ -515,6 +623,22 @@ static int dt3k_ai_cmdtest(struct comedi_device *dev,
 			cmd->scan_begin_arg =
 			    cmd->convert_arg * cmd->scan_end_arg;
 			err++;
+=======
+		arg = cmd->scan_begin_arg;
+		dt3k_ns_to_timer(100, &arg, cmd->flags);
+		err |= cfc_check_trigger_arg_is(&cmd->scan_begin_arg, arg);
+	}
+
+	if (cmd->convert_src == TRIG_TIMER) {
+		arg = cmd->convert_arg;
+		dt3k_ns_to_timer(50, &arg, cmd->flags);
+		err |= cfc_check_trigger_arg_is(&cmd->convert_arg, arg);
+
+		if (cmd->scan_begin_src == TRIG_TIMER) {
+			arg = cmd->convert_arg * cmd->scan_end_arg;
+			err |= cfc_check_trigger_arg_min(&cmd->scan_begin_arg,
+							 arg);
+>>>>>>> v3.18
 		}
 	}
 
@@ -526,18 +650,25 @@ static int dt3k_ai_cmdtest(struct comedi_device *dev,
 
 static int dt3k_ai_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 {
+<<<<<<< HEAD
 	struct dt3k_private *devpriv = dev->private;
+=======
+>>>>>>> v3.18
 	struct comedi_cmd *cmd = &s->async->cmd;
 	int i;
 	unsigned int chan, range, aref;
 	unsigned int divider;
 	unsigned int tscandiv;
+<<<<<<< HEAD
 	unsigned int mode;
+=======
+>>>>>>> v3.18
 
 	for (i = 0; i < cmd->chanlist_len; i++) {
 		chan = CR_CHAN(cmd->chanlist[i]);
 		range = CR_RANGE(cmd->chanlist[i]);
 
+<<<<<<< HEAD
 		writew((range << 6) | chan,
 		       devpriv->io_addr + DPR_ADC_buffer + i);
 	}
@@ -550,10 +681,23 @@ static int dt3k_ai_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 					   cmd->flags & TRIG_ROUND_MASK);
 		writew((divider >> 16), devpriv->io_addr + DPR_Params(1));
 		writew((divider & 0xffff), devpriv->io_addr + DPR_Params(2));
+=======
+		writew((range << 6) | chan, dev->mmio + DPR_ADC_buffer + i);
+	}
+	aref = CR_AREF(cmd->chanlist[0]);
+
+	writew(cmd->scan_end_arg, dev->mmio + DPR_Params(0));
+
+	if (cmd->convert_src == TRIG_TIMER) {
+		divider = dt3k_ns_to_timer(50, &cmd->convert_arg, cmd->flags);
+		writew((divider >> 16), dev->mmio + DPR_Params(1));
+		writew((divider & 0xffff), dev->mmio + DPR_Params(2));
+>>>>>>> v3.18
 	}
 
 	if (cmd->scan_begin_src == TRIG_TIMER) {
 		tscandiv = dt3k_ns_to_timer(100, &cmd->scan_begin_arg,
+<<<<<<< HEAD
 					    cmd->flags & TRIG_ROUND_MASK);
 		writew((tscandiv >> 16), devpriv->io_addr + DPR_Params(3));
 		writew((tscandiv & 0xffff), devpriv->io_addr + DPR_Params(4));
@@ -574,6 +718,27 @@ static int dt3k_ai_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 	debug_n_ints = 0;
 
 	writew(SUBS_AI, devpriv->io_addr + DPR_SubSys);
+=======
+					    cmd->flags);
+		writew((tscandiv >> 16), dev->mmio + DPR_Params(3));
+		writew((tscandiv & 0xffff), dev->mmio + DPR_Params(4));
+	}
+
+	writew(DT3000_AD_RETRIG_INTERNAL, dev->mmio + DPR_Params(5));
+	writew(aref == AREF_DIFF, dev->mmio + DPR_Params(6));
+
+	writew(AI_FIFO_DEPTH / 2, dev->mmio + DPR_Params(7));
+
+	writew(SUBS_AI, dev->mmio + DPR_SubSys);
+	dt3k_send_cmd(dev, CMD_CONFIG);
+
+	writew(DT3000_ADFULL | DT3000_ADSWERR | DT3000_ADHWERR,
+	       dev->mmio + DPR_Int_Mask);
+
+	debug_n_ints = 0;
+
+	writew(SUBS_AI, dev->mmio + DPR_SubSys);
+>>>>>>> v3.18
 	dt3k_send_cmd(dev, CMD_START);
 
 	return 0;
@@ -596,6 +761,7 @@ static int dt3k_ai_insn(struct comedi_device *dev, struct comedi_subdevice *s,
 	return i;
 }
 
+<<<<<<< HEAD
 static int dt3k_ao_insn(struct comedi_device *dev, struct comedi_subdevice *s,
 			struct comedi_insn *insn, unsigned int *data)
 {
@@ -625,10 +791,29 @@ static int dt3k_ao_insn_read(struct comedi_device *dev,
 		data[i] = devpriv->ao_readback[chan];
 
 	return i;
+=======
+static int dt3k_ao_insn_write(struct comedi_device *dev,
+			      struct comedi_subdevice *s,
+			      struct comedi_insn *insn,
+			      unsigned int *data)
+{
+	unsigned int chan = CR_CHAN(insn->chanspec);
+	unsigned int val = s->readback[chan];
+	int i;
+
+	for (i = 0; i < insn->n; i++) {
+		val = data[i];
+		dt3k_writesingle(dev, SUBS_AO, chan, val);
+	}
+	s->readback[chan] = val;
+
+	return insn->n;
+>>>>>>> v3.18
 }
 
 static void dt3k_dio_config(struct comedi_device *dev, int bits)
 {
+<<<<<<< HEAD
 	struct dt3k_private *devpriv = dev->private;
 
 	/* XXX */
@@ -639,6 +824,16 @@ static void dt3k_dio_config(struct comedi_device *dev, int bits)
 	/* don't know */
 	writew(0, devpriv->io_addr + DPR_Params(1));
 	writew(0, devpriv->io_addr + DPR_Params(2));
+=======
+	/* XXX */
+	writew(SUBS_DOUT, dev->mmio + DPR_SubSys);
+
+	writew(bits, dev->mmio + DPR_Params(0));
+#if 0
+	/* don't know */
+	writew(0, dev->mmio + DPR_Params(1));
+	writew(0, dev->mmio + DPR_Params(2));
+>>>>>>> v3.18
 #endif
 
 	dt3k_send_cmd(dev, CMD_CONFIG);
@@ -646,6 +841,7 @@ static void dt3k_dio_config(struct comedi_device *dev, int bits)
 
 static int dt3k_dio_insn_config(struct comedi_device *dev,
 				struct comedi_subdevice *s,
+<<<<<<< HEAD
 				struct comedi_insn *insn, unsigned int *data)
 {
 	int mask;
@@ -672,12 +868,32 @@ static int dt3k_dio_insn_config(struct comedi_device *dev,
 	}
 	mask = (s->io_bits & 0x01) | ((s->io_bits & 0x10) >> 3);
 	dt3k_dio_config(dev, mask);
+=======
+				struct comedi_insn *insn,
+				unsigned int *data)
+{
+	unsigned int chan = CR_CHAN(insn->chanspec);
+	unsigned int mask;
+	int ret;
+
+	if (chan < 4)
+		mask = 0x0f;
+	else
+		mask = 0xf0;
+
+	ret = comedi_dio_insn_config(dev, s, insn, data, mask);
+	if (ret)
+		return ret;
+
+	dt3k_dio_config(dev, (s->io_bits & 0x01) | ((s->io_bits & 0x10) >> 3));
+>>>>>>> v3.18
 
 	return insn->n;
 }
 
 static int dt3k_dio_insn_bits(struct comedi_device *dev,
 			      struct comedi_subdevice *s,
+<<<<<<< HEAD
 			      struct comedi_insn *insn, unsigned int *data)
 {
 	if (data[0]) {
@@ -685,6 +901,14 @@ static int dt3k_dio_insn_bits(struct comedi_device *dev,
 		s->state |= data[1] & data[0];
 		dt3k_writesingle(dev, SUBS_DOUT, 0, s->state);
 	}
+=======
+			      struct comedi_insn *insn,
+			      unsigned int *data)
+{
+	if (comedi_dio_update_state(s, data))
+		dt3k_writesingle(dev, SUBS_DOUT, 0, s->state);
+
+>>>>>>> v3.18
 	data[1] = dt3k_readsingle(dev, SUBS_DIN, 0, 0);
 
 	return insn->n;
@@ -692,13 +916,20 @@ static int dt3k_dio_insn_bits(struct comedi_device *dev,
 
 static int dt3k_mem_insn_read(struct comedi_device *dev,
 			      struct comedi_subdevice *s,
+<<<<<<< HEAD
 			      struct comedi_insn *insn, unsigned int *data)
 {
 	struct dt3k_private *devpriv = dev->private;
+=======
+			      struct comedi_insn *insn,
+			      unsigned int *data)
+{
+>>>>>>> v3.18
 	unsigned int addr = CR_CHAN(insn->chanspec);
 	int i;
 
 	for (i = 0; i < insn->n; i++) {
+<<<<<<< HEAD
 		writew(SUBS_MEM, devpriv->io_addr + DPR_SubSys);
 		writew(addr, devpriv->io_addr + DPR_Params(0));
 		writew(1, devpriv->io_addr + DPR_Params(1));
@@ -706,6 +937,15 @@ static int dt3k_mem_insn_read(struct comedi_device *dev,
 		dt3k_send_cmd(dev, CMD_READCODE);
 
 		data[i] = readw(devpriv->io_addr + DPR_Params(2));
+=======
+		writew(SUBS_MEM, dev->mmio + DPR_SubSys);
+		writew(addr, dev->mmio + DPR_Params(0));
+		writew(1, dev->mmio + DPR_Params(1));
+
+		dt3k_send_cmd(dev, CMD_READCODE);
+
+		data[i] = readw(dev->mmio + DPR_Params(2));
+>>>>>>> v3.18
 	}
 
 	return i;
@@ -727,15 +967,22 @@ static int dt3000_auto_attach(struct comedi_device *dev,
 	dev->board_ptr = this_board;
 	dev->board_name = this_board->name;
 
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
+=======
+	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
+	if (!devpriv)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	ret = comedi_pci_enable(dev);
 	if (ret < 0)
 		return ret;
 
+<<<<<<< HEAD
 	devpriv->io_addr = pci_ioremap_bar(pcidev, 0);
 	if (!devpriv->io_addr)
 		return -ENOMEM;
@@ -745,12 +992,25 @@ static int dt3000_auto_attach(struct comedi_device *dev,
 	if (ret)
 		return ret;
 	dev->irq = pcidev->irq;
+=======
+	dev->mmio = pci_ioremap_bar(pcidev, 0);
+	if (!dev->mmio)
+		return -ENOMEM;
+
+	if (pcidev->irq) {
+		ret = request_irq(pcidev->irq, dt3k_interrupt, IRQF_SHARED,
+				  dev->board_name, dev);
+		if (ret == 0)
+			dev->irq = pcidev->irq;
+	}
+>>>>>>> v3.18
 
 	ret = comedi_alloc_subdevices(dev, 4);
 	if (ret)
 		return ret;
 
 	s = &dev->subdevices[0];
+<<<<<<< HEAD
 	dev->read_subdev = s;
 	/* ai subdevice */
 	s->type		= COMEDI_SUBD_AI;
@@ -763,17 +1023,46 @@ static int dt3000_auto_attach(struct comedi_device *dev,
 	s->do_cmd	= dt3k_ai_cmd;
 	s->do_cmdtest	= dt3k_ai_cmdtest;
 	s->cancel	= dt3k_ai_cancel;
+=======
+	/* ai subdevice */
+	s->type		= COMEDI_SUBD_AI;
+	s->subdev_flags	= SDF_READABLE | SDF_GROUND | SDF_DIFF;
+	s->n_chan	= this_board->adchan;
+	s->insn_read	= dt3k_ai_insn;
+	s->maxdata	= (1 << this_board->adbits) - 1;
+	s->range_table	= &range_dt3000_ai;	/* XXX */
+	if (dev->irq) {
+		dev->read_subdev = s;
+		s->subdev_flags	|= SDF_CMD_READ;
+		s->len_chanlist	= 512;
+		s->do_cmd	= dt3k_ai_cmd;
+		s->do_cmdtest	= dt3k_ai_cmdtest;
+		s->cancel	= dt3k_ai_cancel;
+	}
+>>>>>>> v3.18
 
 	s = &dev->subdevices[1];
 	/* ao subsystem */
 	s->type		= COMEDI_SUBD_AO;
 	s->subdev_flags	= SDF_WRITABLE;
 	s->n_chan	= 2;
+<<<<<<< HEAD
 	s->insn_read	= dt3k_ao_insn_read;
 	s->insn_write	= dt3k_ao_insn;
 	s->maxdata	= (1 << this_board->dabits) - 1;
 	s->len_chanlist	= 1;
 	s->range_table	= &range_bipolar10;
+=======
+	s->maxdata	= (1 << this_board->dabits) - 1;
+	s->len_chanlist	= 1;
+	s->range_table	= &range_bipolar10;
+	s->insn_write	= dt3k_ao_insn_write;
+	s->insn_read	= comedi_readback_insn_read;
+
+	ret = comedi_alloc_subdev_readback(s);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 
 	s = &dev->subdevices[2];
 	/* dio subsystem */
@@ -802,6 +1091,7 @@ static int dt3000_auto_attach(struct comedi_device *dev,
 	s->type = COMEDI_SUBD_PROC;
 #endif
 
+<<<<<<< HEAD
 	dev_info(dev->class_dev, "%s attached\n", dev->board_name);
 
 	return 0;
@@ -820,11 +1110,20 @@ static void dt3000_detach(struct comedi_device *dev)
 	comedi_pci_disable(dev);
 }
 
+=======
+	return 0;
+}
+
+>>>>>>> v3.18
 static struct comedi_driver dt3000_driver = {
 	.driver_name	= "dt3000",
 	.module		= THIS_MODULE,
 	.auto_attach	= dt3000_auto_attach,
+<<<<<<< HEAD
 	.detach		= dt3000_detach,
+=======
+	.detach		= comedi_pci_detach,
+>>>>>>> v3.18
 };
 
 static int dt3000_pci_probe(struct pci_dev *dev,
@@ -833,7 +1132,11 @@ static int dt3000_pci_probe(struct pci_dev *dev,
 	return comedi_pci_auto_config(dev, &dt3000_driver, id->driver_data);
 }
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(dt3000_pci_table) = {
+=======
+static const struct pci_device_id dt3000_pci_table[] = {
+>>>>>>> v3.18
 	{ PCI_VDEVICE(DT, 0x0022), BOARD_DT3001 },
 	{ PCI_VDEVICE(DT, 0x0023), BOARD_DT3002 },
 	{ PCI_VDEVICE(DT, 0x0024), BOARD_DT3003 },

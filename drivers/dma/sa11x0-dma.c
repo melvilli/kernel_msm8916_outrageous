@@ -113,11 +113,17 @@ struct sa11x0_dma_phy {
 	struct sa11x0_dma_desc	*txd_load;
 	unsigned		sg_done;
 	struct sa11x0_dma_desc	*txd_done;
+<<<<<<< HEAD
 #ifdef CONFIG_PM_SLEEP
 	u32			dbs[2];
 	u32			dbt[2];
 	u32			dcsr;
 #endif
+=======
+	u32			dbs[2];
+	u32			dbt[2];
+	u32			dcsr;
+>>>>>>> v3.18
 };
 
 struct sa11x0_dma_dev {
@@ -436,7 +442,11 @@ static enum dma_status sa11x0_dma_tx_status(struct dma_chan *chan,
 	enum dma_status ret;
 
 	ret = dma_cookie_status(&c->vc.chan, cookie, state);
+<<<<<<< HEAD
 	if (ret == DMA_SUCCESS)
+=======
+	if (ret == DMA_COMPLETE)
+>>>>>>> v3.18
 		return ret;
 
 	if (!state)
@@ -614,7 +624,11 @@ static struct dma_async_tx_descriptor *sa11x0_dma_prep_slave_sg(
 
 static struct dma_async_tx_descriptor *sa11x0_dma_prep_dma_cyclic(
 	struct dma_chan *chan, dma_addr_t addr, size_t size, size_t period,
+<<<<<<< HEAD
 	enum dma_transfer_direction dir, unsigned long flags, void *context)
+=======
+	enum dma_transfer_direction dir, unsigned long flags)
+>>>>>>> v3.18
 {
 	struct sa11x0_dma_chan *c = to_sa11x0_dma_chan(chan);
 	struct sa11x0_dma_desc *txd;
@@ -984,7 +998,10 @@ static int sa11x0_dma_remove(struct platform_device *pdev)
 	return 0;
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_PM_SLEEP
+=======
+>>>>>>> v3.18
 static int sa11x0_dma_suspend(struct device *dev)
 {
 	struct sa11x0_dma_dev *d = dev_get_drvdata(dev);
@@ -1054,7 +1071,10 @@ static int sa11x0_dma_resume(struct device *dev)
 
 	return 0;
 }
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 
 static const struct dev_pm_ops sa11x0_dma_pm_ops = {
 	.suspend_noirq = sa11x0_dma_suspend,

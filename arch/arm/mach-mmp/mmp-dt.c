@@ -9,6 +9,7 @@
  *  publishhed by the Free Software Foundation.
  */
 
+<<<<<<< HEAD
 #include <linux/irq.h>
 #include <linux/irqdomain.h>
 #include <linux/of_irq.h>
@@ -20,6 +21,15 @@
 #include "common.h"
 
 extern void __init mmp_dt_irq_init(void);
+=======
+#include <linux/irqchip.h>
+#include <linux/of_platform.h>
+#include <asm/mach/arch.h>
+#include <asm/mach/time.h>
+
+#include "common.h"
+
+>>>>>>> v3.18
 extern void __init mmp_dt_init_timer(void);
 
 static const struct of_dev_auxdata pxa168_auxdata_lookup[] __initconst = {
@@ -64,7 +74,10 @@ static const char *mmp_dt_board_compat[] __initdata = {
 
 DT_MACHINE_START(PXA168_DT, "Marvell PXA168 (Device Tree Support)")
 	.map_io		= mmp_map_io,
+<<<<<<< HEAD
 	.init_irq	= mmp_dt_irq_init,
+=======
+>>>>>>> v3.18
 	.init_time	= mmp_dt_init_timer,
 	.init_machine	= pxa168_dt_init,
 	.dt_compat	= mmp_dt_board_compat,
@@ -72,7 +85,10 @@ MACHINE_END
 
 DT_MACHINE_START(PXA910_DT, "Marvell PXA910 (Device Tree Support)")
 	.map_io		= mmp_map_io,
+<<<<<<< HEAD
 	.init_irq	= mmp_dt_irq_init,
+=======
+>>>>>>> v3.18
 	.init_time	= mmp_dt_init_timer,
 	.init_machine	= pxa910_dt_init,
 	.dt_compat	= mmp_dt_board_compat,

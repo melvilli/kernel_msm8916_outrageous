@@ -14,6 +14,10 @@
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
 #include <linux/module.h>
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 #include <linux/rtc.h>
 #include <linux/kdev_t.h>
 #include <linux/idr.h>
@@ -38,7 +42,11 @@ static void rtc_device_release(struct device *dev)
 int rtc_hctosys_ret = -ENODEV;
 #endif
 
+<<<<<<< HEAD
 #if defined(CONFIG_PM) && defined(CONFIG_RTC_HCTOSYS_DEVICE)
+=======
+#if defined(CONFIG_PM_SLEEP) && defined(CONFIG_RTC_HCTOSYS_DEVICE)
+>>>>>>> v3.18
 /*
  * On suspend(), measure the delta between one RTC and the
  * system's wall clock; restore it on resume().
@@ -47,11 +55,19 @@ int rtc_hctosys_ret = -ENODEV;
 static struct timespec old_rtc, old_system, old_delta;
 
 
+<<<<<<< HEAD
 static int rtc_suspend(struct device *dev, pm_message_t mesg)
+=======
+static int rtc_suspend(struct device *dev)
+>>>>>>> v3.18
 {
 	struct rtc_device	*rtc = to_rtc_device(dev);
 	struct rtc_time		tm;
 	struct timespec		delta, delta_delta;
+<<<<<<< HEAD
+=======
+	int err;
+>>>>>>> v3.18
 
 	if (has_persistent_clock())
 		return 0;
@@ -60,7 +76,16 @@ static int rtc_suspend(struct device *dev, pm_message_t mesg)
 		return 0;
 
 	/* snapshot the current RTC and system time at suspend*/
+<<<<<<< HEAD
 	rtc_read_time(rtc, &tm);
+=======
+	err = rtc_read_time(rtc, &tm);
+	if (err < 0) {
+		pr_debug("%s:  fail to read rtc time\n", dev_name(&rtc->dev));
+		return 0;
+	}
+
+>>>>>>> v3.18
 	getnstimeofday(&old_system);
 	rtc_tm_to_time(&tm, &old_rtc.tv_sec);
 
@@ -93,6 +118,10 @@ static int rtc_resume(struct device *dev)
 	struct rtc_time		tm;
 	struct timespec		new_system, new_rtc;
 	struct timespec		sleep_time;
+<<<<<<< HEAD
+=======
+	int err;
+>>>>>>> v3.18
 
 	if (has_persistent_clock())
 		return 0;
@@ -103,7 +132,16 @@ static int rtc_resume(struct device *dev)
 
 	/* snapshot the current rtc and system time at resume */
 	getnstimeofday(&new_system);
+<<<<<<< HEAD
 	rtc_read_time(rtc, &tm);
+=======
+	err = rtc_read_time(rtc, &tm);
+	if (err < 0) {
+		pr_debug("%s:  fail to read rtc time\n", dev_name(&rtc->dev));
+		return 0;
+	}
+
+>>>>>>> v3.18
 	if (rtc_valid_tm(&tm) != 0) {
 		pr_debug("%s:  bogus resume time\n", dev_name(&rtc->dev));
 		return 0;
@@ -135,9 +173,16 @@ static int rtc_resume(struct device *dev)
 	return 0;
 }
 
+<<<<<<< HEAD
 #else
 #define rtc_suspend	NULL
 #define rtc_resume	NULL
+=======
+static SIMPLE_DEV_PM_OPS(rtc_class_dev_pm_ops, rtc_suspend, rtc_resume);
+#define RTC_CLASS_DEV_PM_OPS	(&rtc_class_dev_pm_ops)
+#else
+#define RTC_CLASS_DEV_PM_OPS	NULL
+>>>>>>> v3.18
 #endif
 
 
@@ -156,12 +201,36 @@ struct rtc_device *rtc_device_register(const char *name, struct device *dev,
 {
 	struct rtc_device *rtc;
 	struct rtc_wkalrm alrm;
+<<<<<<< HEAD
 	int id, err;
 
 	id = ida_simple_get(&rtc_ida, 0, 0, GFP_KERNEL);
 	if (id < 0) {
 		err = id;
 		goto exit;
+=======
+	int of_id = -1, id = -1, err;
+
+	if (dev->of_node)
+		of_id = of_alias_get_id(dev->of_node, "rtc");
+	else if (dev->parent && dev->parent->of_node)
+		of_id = of_alias_get_id(dev->parent->of_node, "rtc");
+
+	if (of_id >= 0) {
+		id = ida_simple_get(&rtc_ida, of_id, of_id + 1,
+				    GFP_KERNEL);
+		if (id < 0)
+			dev_warn(dev, "/aliases ID %d not available\n",
+				    of_id);
+	}
+
+	if (id < 0) {
+		id = ida_simple_get(&rtc_ida, 0, 0, GFP_KERNEL);
+		if (id < 0) {
+			err = id;
+			goto exit;
+		}
+>>>>>>> v3.18
 	}
 
 	rtc = kzalloc(sizeof(struct rtc_device), GFP_KERNEL);
@@ -336,8 +405,12 @@ static int __init rtc_init(void)
 		pr_err("couldn't create class\n");
 		return PTR_ERR(rtc_class);
 	}
+<<<<<<< HEAD
 	rtc_class->suspend = rtc_suspend;
 	rtc_class->resume = rtc_resume;
+=======
+	rtc_class->pm = RTC_CLASS_DEV_PM_OPS;
+>>>>>>> v3.18
 	rtc_dev_init();
 	rtc_sysfs_init(rtc_class);
 	return 0;

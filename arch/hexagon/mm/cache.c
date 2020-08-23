@@ -68,6 +68,10 @@ void flush_icache_range(unsigned long start, unsigned long end)
 	);
 	local_irq_restore(flags);
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(flush_icache_range);
+>>>>>>> v3.18
 
 void hexagon_clean_dcache_range(unsigned long start, unsigned long end)
 {

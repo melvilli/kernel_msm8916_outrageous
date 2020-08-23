@@ -100,6 +100,7 @@ struct ioat_dma_descriptor {
 	uint64_t	user2;
 };
 
+<<<<<<< HEAD
 struct ioat_fill_descriptor {
 	uint32_t	size;
 	union {
@@ -127,6 +128,8 @@ struct ioat_fill_descriptor {
 	uint64_t	user2;
 };
 
+=======
+>>>>>>> v3.18
 struct ioat_xor_descriptor {
 	uint32_t	size;
 	union {

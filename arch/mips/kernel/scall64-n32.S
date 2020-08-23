@@ -72,8 +72,16 @@ n32_syscall_trace_entry:
 	SAVE_STATIC
 	move	s0, t2
 	move	a0, sp
+<<<<<<< HEAD
 	jal	syscall_trace_enter
 
+=======
+	daddiu	a1, v0, __NR_N32_Linux
+	jal	syscall_trace_enter
+
+	bltz	v0, 2f			# seccomp failed? Skip syscall
+
+>>>>>>> v3.18
 	move	t0, s0
 	RESTORE_STATIC
 	ld	a0, PT_R4(sp)		# Restore argument registers
@@ -94,7 +102,11 @@ n32_syscall_trace_entry:
 	sd	t1, PT_R0(sp)		# save it for syscall restarting
 1:	sd	v0, PT_R2(sp)		# result
 
+<<<<<<< HEAD
 	j	syscall_exit
+=======
+2:	j	syscall_exit
+>>>>>>> v3.18
 
 not_n32_scall:
 	/* This is not an n32 compatibility syscall, pass it on to
@@ -103,6 +115,10 @@ not_n32_scall:
 
 	END(handle_sysn32)
 
+<<<<<<< HEAD
+=======
+	.type	sysn32_call_table, @object
+>>>>>>> v3.18
 EXPORT(sysn32_call_table)
 	PTR	sys_read			/* 6000 */
 	PTR	sys_write
@@ -158,7 +174,11 @@ EXPORT(sysn32_call_table)
 	PTR	sys_getpeername
 	PTR	sys_socketpair
 	PTR	compat_sys_setsockopt
+<<<<<<< HEAD
 	PTR	sys_getsockopt
+=======
+	PTR	compat_sys_getsockopt
+>>>>>>> v3.18
 	PTR	__sys_clone			/* 6055 */
 	PTR	__sys_fork
 	PTR	compat_sys_execve
@@ -335,9 +355,15 @@ EXPORT(sysn32_call_table)
 	PTR	compat_sys_clock_nanosleep
 	PTR	sys_tgkill
 	PTR	compat_sys_utimes		/* 6230 */
+<<<<<<< HEAD
 	PTR	sys_ni_syscall			/* sys_mbind */
 	PTR	sys_ni_syscall			/* sys_get_mempolicy */
 	PTR	sys_ni_syscall			/* sys_set_mempolicy */
+=======
+	PTR	compat_sys_mbind
+	PTR	compat_sys_get_mempolicy
+	PTR	compat_sys_set_mempolicy
+>>>>>>> v3.18
 	PTR	compat_sys_mq_open
 	PTR	sys_mq_unlink			/* 6235 */
 	PTR	compat_sys_mq_timedsend
@@ -349,12 +375,20 @@ EXPORT(sysn32_call_table)
 	PTR	sys_ni_syscall			/* available, was setaltroot */
 	PTR	sys_add_key
 	PTR	sys_request_key
+<<<<<<< HEAD
 	PTR	compat_sys_keyctl		/* 6245 */
+=======
+	PTR	sys_keyctl			/* 6245 */
+>>>>>>> v3.18
 	PTR	sys_set_thread_area
 	PTR	sys_inotify_init
 	PTR	sys_inotify_add_watch
 	PTR	sys_inotify_rm_watch
+<<<<<<< HEAD
 	PTR	sys_migrate_pages		/* 6250 */
+=======
+	PTR	compat_sys_migrate_pages	/* 6250 */
+>>>>>>> v3.18
 	PTR	sys_openat
 	PTR	sys_mkdirat
 	PTR	sys_mknodat
@@ -375,7 +409,11 @@ EXPORT(sysn32_call_table)
 	PTR	sys_sync_file_range
 	PTR	sys_tee
 	PTR	compat_sys_vmsplice		/* 6270 */
+<<<<<<< HEAD
 	PTR	sys_move_pages
+=======
+	PTR	compat_sys_move_pages
+>>>>>>> v3.18
 	PTR	compat_sys_set_robust_list
 	PTR	compat_sys_get_robust_list
 	PTR	compat_sys_kexec_load
@@ -417,4 +455,14 @@ EXPORT(sysn32_call_table)
 	PTR	compat_sys_process_vm_writev	/* 6310 */
 	PTR	sys_kcmp
 	PTR	sys_finit_module
+<<<<<<< HEAD
+=======
+	PTR	sys_sched_setattr
+	PTR	sys_sched_getattr
+	PTR	sys_renameat2			/* 6315 */
+	PTR	sys_seccomp
+	PTR	sys_getrandom
+	PTR	sys_memfd_create
+	PTR	sys_bpf
+>>>>>>> v3.18
 	.size	sysn32_call_table,.-sysn32_call_table

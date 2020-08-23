@@ -110,6 +110,7 @@ static inline int futex_atomic_op_inuser(int encoded_op, u32 __user *uaddr)
 static inline int futex_atomic_cmpxchg_inatomic(u32 *uval, u32 __user *uaddr,
 						u32 oldval, u32 newval)
 {
+<<<<<<< HEAD
 	int ret = 0;
 
 	if (!access_ok(VERIFY_WRITE, uaddr, sizeof(u32)))
@@ -130,6 +131,9 @@ static inline int futex_atomic_cmpxchg_inatomic(u32 *uval, u32 __user *uaddr,
 
 	*uval = oldval;
 	return ret;
+=======
+	return user_atomic_cmpxchg_inatomic(uval, uaddr, oldval, newval);
+>>>>>>> v3.18
 }
 
 #endif

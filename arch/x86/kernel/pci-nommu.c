@@ -3,7 +3,10 @@
 #include <linux/dma-mapping.h>
 #include <linux/scatterlist.h>
 #include <linux/string.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/gfp.h>
 #include <linux/pci.h>
 #include <linux/mm.h>

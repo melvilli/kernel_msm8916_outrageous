@@ -1,4 +1,8 @@
 generic-y += auxvec.h
+<<<<<<< HEAD
+=======
+generic-y += barrier.h
+>>>>>>> v3.18
 generic-y += bitsperlong.h
 generic-y += bugs.h
 generic-y += clkdev.h
@@ -11,11 +15,19 @@ generic-y += fb.h
 generic-y += fcntl.h
 generic-y += ftrace.h
 generic-y += hardirq.h
+<<<<<<< HEAD
+=======
+generic-y += hash.h
+>>>>>>> v3.18
 generic-y += hw_irq.h
 generic-y += ioctl.h
 generic-y += ioctls.h
 generic-y += ipcbuf.h
 generic-y += irq_regs.h
+<<<<<<< HEAD
+=======
+generic-y += irq_work.h
+>>>>>>> v3.18
 generic-y += kmap_types.h
 generic-y += kvm_para.h
 generic-y += local.h
@@ -29,6 +41,10 @@ generic-y += pci.h
 generic-y += percpu.h
 generic-y += poll.h
 generic-y += posix_types.h
+<<<<<<< HEAD
+=======
+generic-y += preempt.h
+>>>>>>> v3.18
 generic-y += resource.h
 generic-y += scatterlist.h
 generic-y += sembuf.h

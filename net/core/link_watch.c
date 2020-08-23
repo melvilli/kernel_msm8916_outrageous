@@ -92,6 +92,12 @@ static bool linkwatch_urgent_event(struct net_device *dev)
 	if (dev->ifindex != dev->iflink)
 		return true;
 
+<<<<<<< HEAD
+=======
+	if (dev->priv_flags & IFF_TEAM_PORT)
+		return true;
+
+>>>>>>> v3.18
 	return netif_carrier_ok(dev) &&	qdisc_tx_changing(dev);
 }
 

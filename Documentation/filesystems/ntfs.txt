@@ -14,7 +14,10 @@ Table of contents
   - The Device-Mapper driver
   - The Software RAID / MD driver
   - Limitations when using the MD driver
+<<<<<<< HEAD
 - ChangeLog
+=======
+>>>>>>> v3.18
 
 
 Overview
@@ -450,6 +453,7 @@ number of sectors BEFORE attempting to use it.  You have been warned!
 
 Even better is to simply use the Device-Mapper for linear raid and then you do
 not have this problem with odd numbers of sectors.
+<<<<<<< HEAD
 
 
 ChangeLog
@@ -719,3 +723,5 @@ Note, a technical ChangeLog aimed at kernel hackers is in fs/ntfs/ChangeLog.
 2.0.0:
 	- Started ChangeLog.
 
+=======
+>>>>>>> v3.18

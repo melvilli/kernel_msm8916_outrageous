@@ -282,8 +282,13 @@ sun4v_chip_type:
 	stx	%l2, [%l4 + 0x0]
 	ldx	[%sp + 2047 + 128 + 0x50], %l3	! physaddr low
 	/* 4MB align */
+<<<<<<< HEAD
 	srlx	%l3, 22, %l3
 	sllx	%l3, 22, %l3
+=======
+	srlx	%l3, ILOG2_4MB, %l3
+	sllx	%l3, ILOG2_4MB, %l3
+>>>>>>> v3.18
 	stx	%l3, [%l4 + 0x8]
 
 	/* Leave service as-is, "call-method" */
@@ -427,6 +432,15 @@ sun4v_chip_type:
 	cmp	%g2, '5'
 	be,pt	%xcc, 5f
 	 mov	SUN4V_CHIP_NIAGARA5, %g4
+<<<<<<< HEAD
+=======
+	cmp	%g2, '6'
+	be,pt	%xcc, 5f
+	 mov	SUN4V_CHIP_SPARC_M6, %g4
+	cmp	%g2, '7'
+	be,pt	%xcc, 5f
+	 mov	SUN4V_CHIP_SPARC_M7, %g4
+>>>>>>> v3.18
 	ba,pt	%xcc, 49f
 	 nop
 
@@ -585,6 +599,15 @@ niagara_tlb_fixup:
 	cmp	%g1, SUN4V_CHIP_NIAGARA5
 	be,pt	%xcc, niagara4_patch
 	 nop
+<<<<<<< HEAD
+=======
+	cmp	%g1, SUN4V_CHIP_SPARC_M6
+	be,pt	%xcc, niagara4_patch
+	 nop
+	cmp	%g1, SUN4V_CHIP_SPARC_M7
+	be,pt	%xcc, niagara4_patch
+	 nop
+>>>>>>> v3.18
 
 	call	generic_patch_copyops
 	 nop
@@ -660,14 +683,20 @@ tlb_fixup_done:
 	sethi	%hi(init_thread_union), %g6
 	or	%g6, %lo(init_thread_union), %g6
 	ldx	[%g6 + TI_TASK], %g4
+<<<<<<< HEAD
 	mov	%sp, %l6
+=======
+>>>>>>> v3.18
 
 	wr	%g0, ASI_P, %asi
 	mov	1, %g1
 	sllx	%g1, THREAD_SHIFT, %g1
 	sub	%g1, (STACKFRAME_SZ + STACK_BIAS), %g1
 	add	%g6, %g1, %sp
+<<<<<<< HEAD
 	mov	0, %fp
+=======
+>>>>>>> v3.18
 
 	/* Set per-cpu pointer initially to zero, this makes
 	 * the boot-cpu use the in-kernel-image per-cpu areas
@@ -694,6 +723,7 @@ tlb_fixup_done:
 	 nop
 #endif
 
+<<<<<<< HEAD
 	mov	%l6, %o1			! OpenPROM stack
 	call	prom_init
 	 mov	%l7, %o0			! OpenPROM cif handler
@@ -732,6 +762,16 @@ tlb_fixup_done:
 
 	/* Off we go.... */
 	call	start_kernel
+=======
+	call	prom_init
+	 mov	%l7, %o0			! OpenPROM cif handler
+
+	/* To create a one-register-window buffer between the kernel's
+	 * initial stack and the last stack frame we use from the firmware,
+	 * do the rest of the boot from a C helper function.
+	 */
+	call	start_early_boot
+>>>>>>> v3.18
 	 nop
 	/* Not reached... */
 

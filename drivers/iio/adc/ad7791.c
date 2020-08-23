@@ -202,7 +202,10 @@ static int ad7791_read_raw(struct iio_dev *indio_dev,
 {
 	struct ad7791_state *st = iio_priv(indio_dev);
 	bool unipolar = !!(st->mode & AD7791_MODE_UNIPOLAR);
+<<<<<<< HEAD
 	unsigned long long scale_pv;
+=======
+>>>>>>> v3.18
 
 	switch (info) {
 	case IIO_CHAN_INFO_RAW:
@@ -220,13 +223,22 @@ static int ad7791_read_raw(struct iio_dev *indio_dev,
 	case IIO_CHAN_INFO_SCALE:
 		/* The monitor channel uses an internal reference. */
 		if (chan->address == AD7791_CH_AVDD_MONITOR) {
+<<<<<<< HEAD
 			scale_pv = 5850000000000ULL;
+=======
+			/*
+			 * The signal is attenuated by a factor of 5 and
+			 * compared against a 1.17V internal reference.
+			 */
+			*val = 1170 * 5;
+>>>>>>> v3.18
 		} else {
 			int voltage_uv;
 
 			voltage_uv = regulator_get_voltage(st->reg);
 			if (voltage_uv < 0)
 				return voltage_uv;
+<<<<<<< HEAD
 			scale_pv = (unsigned long long)voltage_uv * 1000000;
 		}
 		if (unipolar)
@@ -237,6 +249,17 @@ static int ad7791_read_raw(struct iio_dev *indio_dev,
 		*val = scale_pv;
 
 		return IIO_VAL_INT_PLUS_NANO;
+=======
+
+			*val = voltage_uv / 1000;
+		}
+		if (unipolar)
+			*val2 = chan->scan_type.realbits;
+		else
+			*val2 = chan->scan_type.realbits - 1;
+
+		return IIO_VAL_FRACTIONAL_LOG2;
+>>>>>>> v3.18
 	}
 
 	return -EINVAL;
@@ -361,12 +384,17 @@ static int ad7791_probe(struct spi_device *spi)
 		return -ENXIO;
 	}
 
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*st));
+=======
+	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
+>>>>>>> v3.18
 	if (!indio_dev)
 		return -ENOMEM;
 
 	st = iio_priv(indio_dev);
 
+<<<<<<< HEAD
 	st->reg = regulator_get(&spi->dev, "refin");
 	if (IS_ERR(st->reg)) {
 		ret = PTR_ERR(st->reg);
@@ -376,6 +404,15 @@ static int ad7791_probe(struct spi_device *spi)
 	ret = regulator_enable(st->reg);
 	if (ret)
 		goto error_put_reg;
+=======
+	st->reg = devm_regulator_get(&spi->dev, "refin");
+	if (IS_ERR(st->reg))
+		return PTR_ERR(st->reg);
+
+	ret = regulator_enable(st->reg);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 
 	st->info = &ad7791_chip_infos[spi_get_device_id(spi)->driver_data];
 	ad_sd_init(&st->sd, indio_dev, spi, &ad7791_sigma_delta_info);
@@ -410,10 +447,13 @@ error_remove_trigger:
 	ad_sd_cleanup_buffer_and_trigger(indio_dev);
 error_disable_reg:
 	regulator_disable(st->reg);
+<<<<<<< HEAD
 error_put_reg:
 	regulator_put(st->reg);
 err_iio_free:
 	iio_device_free(indio_dev);
+=======
+>>>>>>> v3.18
 
 	return ret;
 }
@@ -427,9 +467,12 @@ static int ad7791_remove(struct spi_device *spi)
 	ad_sd_cleanup_buffer_and_trigger(indio_dev);
 
 	regulator_disable(st->reg);
+<<<<<<< HEAD
 	regulator_put(st->reg);
 
 	iio_device_free(indio_dev);
+=======
+>>>>>>> v3.18
 
 	return 0;
 }

@@ -9,6 +9,10 @@
 
 /* For __swab32 */
 #include <asm/byteorder.h>
+<<<<<<< HEAD
+=======
+#include <asm/barrier.h>
+>>>>>>> v3.18
 
 #ifdef CONFIG_GUSA_RB
 #include <asm/bitops-grb.h>
@@ -22,12 +26,15 @@
 #include <asm-generic/bitops/non-atomic.h>
 #endif
 
+<<<<<<< HEAD
 /*
  * clear_bit() doesn't provide any barrier for the compiler.
  */
 #define smp_mb__before_clear_bit()	smp_mb()
 #define smp_mb__after_clear_bit()	smp_mb()
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SUPERH32
 static inline unsigned long ffz(unsigned long word)
 {

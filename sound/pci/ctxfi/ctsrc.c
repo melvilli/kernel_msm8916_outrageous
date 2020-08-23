@@ -431,7 +431,12 @@ get_src_rsc(struct src_mgr *mgr, const struct src_desc *desc, struct src **rsrc)
 
 	spin_unlock_irqrestore(&mgr->mgr_lock, flags);
 	if (err) {
+<<<<<<< HEAD
 		printk(KERN_ERR "ctxfi: Can't meet SRC resource request!\n");
+=======
+		dev_err(mgr->card->dev,
+			"Can't meet SRC resource request!\n");
+>>>>>>> v3.18
 		return err;
 	}
 
@@ -543,7 +548,11 @@ static int src_mgr_commit_write(struct src_mgr *mgr)
 	return 0;
 }
 
+<<<<<<< HEAD
 int src_mgr_create(void *hw, struct src_mgr **rsrc_mgr)
+=======
+int src_mgr_create(struct hw *hw, struct src_mgr **rsrc_mgr)
+>>>>>>> v3.18
 {
 	int err, i;
 	struct src_mgr *src_mgr;
@@ -558,7 +567,11 @@ int src_mgr_create(void *hw, struct src_mgr **rsrc_mgr)
 		goto error1;
 
 	spin_lock_init(&src_mgr->mgr_lock);
+<<<<<<< HEAD
 	conj_mask = ((struct hw *)hw)->src_dirty_conj_mask();
+=======
+	conj_mask = hw->src_dirty_conj_mask();
+>>>>>>> v3.18
 
 	src_mgr->get_src = get_src_rsc;
 	src_mgr->put_src = put_src_rsc;
@@ -566,12 +579,22 @@ int src_mgr_create(void *hw, struct src_mgr **rsrc_mgr)
 	src_mgr->src_enable = src_enable;
 	src_mgr->src_disable = src_disable;
 	src_mgr->commit_write = src_mgr_commit_write;
+<<<<<<< HEAD
 
 	/* Disable all SRC resources. */
 	for (i = 0; i < 256; i++)
 		((struct hw *)hw)->src_mgr_dsb_src(src_mgr->mgr.ctrl_blk, i);
 
 	((struct hw *)hw)->src_mgr_commit_write(hw, src_mgr->mgr.ctrl_blk);
+=======
+	src_mgr->card = hw->card;
+
+	/* Disable all SRC resources. */
+	for (i = 0; i < 256; i++)
+		hw->src_mgr_dsb_src(src_mgr->mgr.ctrl_blk, i);
+
+	hw->src_mgr_commit_write(hw, src_mgr->mgr.ctrl_blk);
+>>>>>>> v3.18
 
 	*rsrc_mgr = src_mgr;
 
@@ -739,7 +762,12 @@ static int get_srcimp_rsc(struct srcimp_mgr *mgr,
 	}
 	spin_unlock_irqrestore(&mgr->mgr_lock, flags);
 	if (err) {
+<<<<<<< HEAD
 		printk(KERN_ERR "ctxfi: Can't meet SRCIMP resource request!\n");
+=======
+		dev_err(mgr->card->dev,
+			"Can't meet SRCIMP resource request!\n");
+>>>>>>> v3.18
 		goto error1;
 	}
 
@@ -825,7 +853,11 @@ static int srcimp_imap_delete(struct srcimp_mgr *mgr, struct imapper *entry)
 	return err;
 }
 
+<<<<<<< HEAD
 int srcimp_mgr_create(void *hw, struct srcimp_mgr **rsrcimp_mgr)
+=======
+int srcimp_mgr_create(struct hw *hw, struct srcimp_mgr **rsrcimp_mgr)
+>>>>>>> v3.18
 {
 	int err;
 	struct srcimp_mgr *srcimp_mgr;
@@ -857,6 +889,10 @@ int srcimp_mgr_create(void *hw, struct srcimp_mgr **rsrcimp_mgr)
 	srcimp_mgr->put_srcimp = put_srcimp_rsc;
 	srcimp_mgr->imap_add = srcimp_imap_add;
 	srcimp_mgr->imap_delete = srcimp_imap_delete;
+<<<<<<< HEAD
+=======
+	srcimp_mgr->card = hw->card;
+>>>>>>> v3.18
 
 	*rsrcimp_mgr = srcimp_mgr;
 

@@ -38,6 +38,10 @@ struct kvm_stats_debugfs_item debugfs_entries[] = {
 
 int kvm_arch_vcpu_setup(struct kvm_vcpu *vcpu)
 {
+<<<<<<< HEAD
+=======
+	vcpu->arch.hcr = HCR_GUEST_MASK;
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -123,6 +127,7 @@ static bool is_timer_reg(u64 index)
 	return false;
 }
 
+<<<<<<< HEAD
 int kvm_arm_timer_set_reg(struct kvm_vcpu *vcpu, u64 regid, u64 value)
 {
 	return 0;
@@ -133,6 +138,8 @@ u64 kvm_arm_timer_get_reg(struct kvm_vcpu *vcpu, u64 regid)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 #else
 
 #define NUM_TIMER_REGS 3
@@ -172,7 +179,11 @@ static int set_timer_reg(struct kvm_vcpu *vcpu, const struct kvm_one_reg *reg)
 
 	ret = copy_from_user(&val, uaddr, KVM_REG_SIZE(reg->id));
 	if (ret != 0)
+<<<<<<< HEAD
 		return ret;
+=======
+		return -EFAULT;
+>>>>>>> v3.18
 
 	return kvm_arm_timer_set_reg(vcpu, reg->id, val);
 }
@@ -273,6 +284,7 @@ int kvm_arch_vcpu_ioctl_set_sregs(struct kvm_vcpu *vcpu,
 
 int __attribute_const__ kvm_target_cpu(void)
 {
+<<<<<<< HEAD
 	unsigned long implementor = read_cpuid_implementor();
 	unsigned long part_number = read_cpuid_part_number();
 
@@ -280,6 +292,11 @@ int __attribute_const__ kvm_target_cpu(void)
 		return -EINVAL;
 
 	switch (part_number) {
+=======
+	switch (read_cpuid_part()) {
+	case ARM_CPU_PART_CORTEX_A7:
+		return KVM_ARM_TARGET_CORTEX_A7;
+>>>>>>> v3.18
 	case ARM_CPU_PART_CORTEX_A15:
 		return KVM_ARM_TARGET_CORTEX_A15;
 	default:
@@ -292,7 +309,11 @@ int kvm_vcpu_set_target(struct kvm_vcpu *vcpu,
 {
 	unsigned int i;
 
+<<<<<<< HEAD
 	/* We can only do a cortex A15 for now. */
+=======
+	/* We can only cope with guest==host and only on A15/A7 (for now). */
+>>>>>>> v3.18
 	if (init->target != kvm_target_cpu())
 		return -EINVAL;
 
@@ -312,6 +333,29 @@ int kvm_vcpu_set_target(struct kvm_vcpu *vcpu,
 	return kvm_reset_vcpu(vcpu);
 }
 
+<<<<<<< HEAD
+=======
+int kvm_vcpu_preferred_target(struct kvm_vcpu_init *init)
+{
+	int target = kvm_target_cpu();
+
+	if (target < 0)
+		return -ENODEV;
+
+	memset(init, 0, sizeof(*init));
+
+	/*
+	 * For now, we don't return any features.
+	 * In future, we might use features to return target
+	 * specific features available for the preferred
+	 * target type.
+	 */
+	init->target = (__u32)target;
+
+	return 0;
+}
+
+>>>>>>> v3.18
 int kvm_arch_vcpu_ioctl_get_fpu(struct kvm_vcpu *vcpu, struct kvm_fpu *fpu)
 {
 	return -EINVAL;

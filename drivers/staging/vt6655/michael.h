@@ -31,6 +31,7 @@
 #ifndef __MICHAEL_H__
 #define __MICHAEL_H__
 
+<<<<<<< HEAD
 /*---------------------  Export Definitions -------------------------*/
 
 /*---------------------  Export Types  ------------------------------*/
@@ -49,8 +50,28 @@ void MIC_vGetMIC(unsigned long *pdwL, unsigned long *pdwR);
 /*---------------------  Export Macros ------------------------------*/
 
 // Rotation functions on 32 bit values
+=======
+#include <linux/types.h>
+
+void MIC_vInit(u32 dwK0, u32 dwK1);
+
+void MIC_vUnInit(void);
+
+/* Append bytes to the message to be MICed */
+void MIC_vAppend(unsigned char *src, unsigned int nBytes);
+
+/* Get the MIC result. Destination should accept 8 bytes of result. */
+/* This also resets the message to empty. */
+void MIC_vGetMIC(u32 *pdwL, u32 *pdwR);
+
+/* Rotation functions on 32 bit values */
+>>>>>>> v3.18
 #define ROL32(A, n)							\
 	(((A) << (n)) | (((A)>>(32-(n)))  & ((1UL << (n)) - 1)))
 #define ROR32(A, n) ROL32((A), 32-(n))
 
+<<<<<<< HEAD
 #endif //__MICHAEL_H__
+=======
+#endif /*__MICHAEL_H__ */
+>>>>>>> v3.18

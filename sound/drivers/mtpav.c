@@ -697,7 +697,12 @@ static int snd_mtpav_probe(struct platform_device *dev)
 	int err;
 	struct mtpav *mtp_card;
 
+<<<<<<< HEAD
 	err = snd_card_create(index, id, THIS_MODULE, sizeof(*mtp_card), &card);
+=======
+	err = snd_card_new(&dev->dev, index, id, THIS_MODULE,
+			   sizeof(*mtp_card), &card);
+>>>>>>> v3.18
 	if (err < 0)
 		return err;
 
@@ -732,7 +737,10 @@ static int snd_mtpav_probe(struct platform_device *dev)
 
 	snd_mtpav_portscan(mtp_card);
 
+<<<<<<< HEAD
 	snd_card_set_dev(card, &dev->dev);
+=======
+>>>>>>> v3.18
 	err = snd_card_register(mtp_card->card);
 	if (err < 0)
 		goto __error;
@@ -749,7 +757,10 @@ static int snd_mtpav_probe(struct platform_device *dev)
 static int snd_mtpav_remove(struct platform_device *devptr)
 {
 	snd_card_free(platform_get_drvdata(devptr));
+<<<<<<< HEAD
 	platform_set_drvdata(devptr, NULL);
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

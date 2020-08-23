@@ -86,10 +86,13 @@ struct zfcp_reqlist;
 #define ZFCP_STATUS_PORT_PHYS_OPEN		0x00000001
 #define ZFCP_STATUS_PORT_LINK_TEST		0x00000002
 
+<<<<<<< HEAD
 /* logical unit status */
 #define ZFCP_STATUS_LUN_SHARED			0x00000004
 #define ZFCP_STATUS_LUN_READONLY		0x00000008
 
+=======
+>>>>>>> v3.18
 /* FSF request status (this does not have a common part) */
 #define ZFCP_STATUS_FSFREQ_ERROR		0x00000008
 #define ZFCP_STATUS_FSFREQ_CLEANUP		0x00000010

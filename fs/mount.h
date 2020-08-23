@@ -10,7 +10,11 @@ struct mnt_namespace {
 	struct user_namespace	*user_ns;
 	u64			seq;	/* Sequence number to prevent loops */
 	wait_queue_head_t poll;
+<<<<<<< HEAD
 	int event;
+=======
+	u64 event;
+>>>>>>> v3.18
 };
 
 struct mnt_pcp {
@@ -19,16 +23,33 @@ struct mnt_pcp {
 };
 
 struct mountpoint {
+<<<<<<< HEAD
 	struct list_head m_hash;
 	struct dentry *m_dentry;
+=======
+	struct hlist_node m_hash;
+	struct dentry *m_dentry;
+	struct hlist_head m_list;
+>>>>>>> v3.18
 	int m_count;
 };
 
 struct mount {
+<<<<<<< HEAD
 	struct list_head mnt_hash;
 	struct mount *mnt_parent;
 	struct dentry *mnt_mountpoint;
 	struct vfsmount mnt;
+=======
+	struct hlist_node mnt_hash;
+	struct mount *mnt_parent;
+	struct dentry *mnt_mountpoint;
+	struct vfsmount mnt;
+	union {
+		struct rcu_head mnt_rcu;
+		struct llist_node mnt_llist;
+	};
+>>>>>>> v3.18
 #ifdef CONFIG_SMP
 	struct mnt_pcp __percpu *mnt_pcp;
 #else
@@ -47,6 +68,10 @@ struct mount {
 	struct mount *mnt_master;	/* slave is on master->mnt_slave_list */
 	struct mnt_namespace *mnt_ns;	/* containing namespace */
 	struct mountpoint *mnt_mp;	/* where is it mounted */
+<<<<<<< HEAD
+=======
+	struct hlist_node mnt_mp_list;	/* list mounts with the same mountpoint */
+>>>>>>> v3.18
 #ifdef CONFIG_FSNOTIFY
 	struct hlist_head mnt_fsnotify_marks;
 	__u32 mnt_fsnotify_mask;
@@ -54,8 +79,13 @@ struct mount {
 	int mnt_id;			/* mount identifier */
 	int mnt_group_id;		/* peer group identifier */
 	int mnt_expiry_mark;		/* true if marked for expiry */
+<<<<<<< HEAD
 	int mnt_pinned;
 	int mnt_ghosts;
+=======
+	struct hlist_head mnt_pins;
+	struct path mnt_ex_mountpoint;
+>>>>>>> v3.18
 };
 
 #define MNT_NS_INTERNAL ERR_PTR(-EINVAL) /* distinct from any mnt_namespace */
@@ -76,20 +106,69 @@ static inline int is_mounted(struct vfsmount *mnt)
 	return !IS_ERR_OR_NULL(real_mount(mnt)->mnt_ns);
 }
 
+<<<<<<< HEAD
 extern struct mount *__lookup_mnt(struct vfsmount *, struct dentry *, int);
+=======
+extern struct mount *__lookup_mnt(struct vfsmount *, struct dentry *);
+extern struct mount *__lookup_mnt_last(struct vfsmount *, struct dentry *);
+
+extern bool legitimize_mnt(struct vfsmount *, unsigned);
+
+extern void __detach_mounts(struct dentry *dentry);
+
+static inline void detach_mounts(struct dentry *dentry)
+{
+	if (!d_mountpoint(dentry))
+		return;
+	__detach_mounts(dentry);
+}
+>>>>>>> v3.18
 
 static inline void get_mnt_ns(struct mnt_namespace *ns)
 {
 	atomic_inc(&ns->count);
 }
 
+<<<<<<< HEAD
+=======
+extern seqlock_t mount_lock;
+
+static inline void lock_mount_hash(void)
+{
+	write_seqlock(&mount_lock);
+}
+
+static inline void unlock_mount_hash(void)
+{
+	write_sequnlock(&mount_lock);
+}
+
+>>>>>>> v3.18
 struct proc_mounts {
 	struct seq_file m;
 	struct mnt_namespace *ns;
 	struct path root;
 	int (*show)(struct seq_file *, struct vfsmount *);
+<<<<<<< HEAD
+=======
+	void *cached_mount;
+	u64 cached_event;
+	loff_t cached_index;
+>>>>>>> v3.18
 };
 
 #define proc_mounts(p) (container_of((p), struct proc_mounts, m))
 
 extern const struct seq_operations mounts_op;
+<<<<<<< HEAD
+=======
+
+extern bool __is_local_mountpoint(struct dentry *dentry);
+static inline bool is_local_mountpoint(struct dentry *dentry)
+{
+	if (!d_mountpoint(dentry))
+		return false;
+
+	return __is_local_mountpoint(dentry);
+}
+>>>>>>> v3.18

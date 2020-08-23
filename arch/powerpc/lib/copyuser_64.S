@@ -9,8 +9,21 @@
 #include <asm/processor.h>
 #include <asm/ppc_asm.h>
 
+<<<<<<< HEAD
 	.align	7
 _GLOBAL(__copy_tofrom_user)
+=======
+#ifdef __BIG_ENDIAN__
+#define sLd sld		/* Shift towards low-numbered address. */
+#define sHd srd		/* Shift towards high-numbered address. */
+#else
+#define sLd srd		/* Shift towards low-numbered address. */
+#define sHd sld		/* Shift towards high-numbered address. */
+#endif
+
+	.align	7
+_GLOBAL_TOC(__copy_tofrom_user)
+>>>>>>> v3.18
 BEGIN_FTR_SECTION
 	nop
 FTR_SECTION_ELSE
@@ -118,10 +131,17 @@ END_FTR_SECTION_IFCLR(CPU_FTR_UNALIGNED_LD_STD)
 
 24:	ld	r9,0(r4)	/* 3+2n loads, 2+2n stores */
 25:	ld	r0,8(r4)
+<<<<<<< HEAD
 	sld	r6,r9,r10
 26:	ldu	r9,16(r4)
 	srd	r7,r0,r11
 	sld	r8,r0,r10
+=======
+	sLd	r6,r9,r10
+26:	ldu	r9,16(r4)
+	sHd	r7,r0,r11
+	sLd	r8,r0,r10
+>>>>>>> v3.18
 	or	r7,r7,r6
 	blt	cr6,79f
 27:	ld	r0,8(r4)
@@ -129,6 +149,7 @@ END_FTR_SECTION_IFCLR(CPU_FTR_UNALIGNED_LD_STD)
 
 28:	ld	r0,0(r4)	/* 4+2n loads, 3+2n stores */
 29:	ldu	r9,8(r4)
+<<<<<<< HEAD
 	sld	r8,r0,r10
 	addi	r3,r3,-8
 	blt	cr6,5f
@@ -139,12 +160,25 @@ END_FTR_SECTION_IFCLR(CPU_FTR_UNALIGNED_LD_STD)
 	or	r12,r8,r12
 	srd	r7,r0,r11
 	sld	r8,r0,r10
+=======
+	sLd	r8,r0,r10
+	addi	r3,r3,-8
+	blt	cr6,5f
+30:	ld	r0,8(r4)
+	sHd	r12,r9,r11
+	sLd	r6,r9,r10
+31:	ldu	r9,16(r4)
+	or	r12,r8,r12
+	sHd	r7,r0,r11
+	sLd	r8,r0,r10
+>>>>>>> v3.18
 	addi	r3,r3,16
 	beq	cr6,78f
 
 1:	or	r7,r7,r6
 32:	ld	r0,8(r4)
 76:	std	r12,8(r3)
+<<<<<<< HEAD
 2:	srd	r12,r9,r11
 	sld	r6,r9,r10
 33:	ldu	r9,16(r4)
@@ -152,12 +186,25 @@ END_FTR_SECTION_IFCLR(CPU_FTR_UNALIGNED_LD_STD)
 77:	stdu	r7,16(r3)
 	srd	r7,r0,r11
 	sld	r8,r0,r10
+=======
+2:	sHd	r12,r9,r11
+	sLd	r6,r9,r10
+33:	ldu	r9,16(r4)
+	or	r12,r8,r12
+77:	stdu	r7,16(r3)
+	sHd	r7,r0,r11
+	sLd	r8,r0,r10
+>>>>>>> v3.18
 	bdnz	1b
 
 78:	std	r12,8(r3)
 	or	r7,r7,r6
 79:	std	r7,16(r3)
+<<<<<<< HEAD
 5:	srd	r12,r9,r11
+=======
+5:	sHd	r12,r9,r11
+>>>>>>> v3.18
 	or	r12,r8,r12
 80:	std	r12,24(r3)
 	bne	6f
@@ -165,6 +212,7 @@ END_FTR_SECTION_IFCLR(CPU_FTR_UNALIGNED_LD_STD)
 	blr
 6:	cmpwi	cr1,r5,8
 	addi	r3,r3,32
+<<<<<<< HEAD
 	sld	r9,r9,r10
 	ble	cr1,7f
 34:	ld	r0,8(r4)
@@ -182,6 +230,40 @@ END_FTR_SECTION_IFCLR(CPU_FTR_UNALIGNED_LD_STD)
 2:	bf	cr7*4+3,3f
 	rotldi	r9,r9,8
 96:	stb	r9,0(r3)
+=======
+	sLd	r9,r9,r10
+	ble	cr1,7f
+34:	ld	r0,8(r4)
+	sHd	r7,r0,r11
+	or	r9,r7,r9
+7:
+	bf	cr7*4+1,1f
+#ifdef __BIG_ENDIAN__
+	rotldi	r9,r9,32
+#endif
+94:	stw	r9,0(r3)
+#ifdef __LITTLE_ENDIAN__
+	rotrdi	r9,r9,32
+#endif
+	addi	r3,r3,4
+1:	bf	cr7*4+2,2f
+#ifdef __BIG_ENDIAN__
+	rotldi	r9,r9,16
+#endif
+95:	sth	r9,0(r3)
+#ifdef __LITTLE_ENDIAN__
+	rotrdi	r9,r9,16
+#endif
+	addi	r3,r3,2
+2:	bf	cr7*4+3,3f
+#ifdef __BIG_ENDIAN__
+	rotldi	r9,r9,8
+#endif
+96:	stb	r9,0(r3)
+#ifdef __LITTLE_ENDIAN__
+	rotrdi	r9,r9,8
+#endif
+>>>>>>> v3.18
 3:	li	r3,0
 	blr
 
@@ -336,7 +418,10 @@ END_FTR_SECTION_IFCLR(CPU_FTR_UNALIGNED_LD_STD)
 	addi	r3,r3,8
 171:
 177:
+<<<<<<< HEAD
 179:
+=======
+>>>>>>> v3.18
 	addi	r3,r3,8
 370:
 372:
@@ -351,6 +436,10 @@ END_FTR_SECTION_IFCLR(CPU_FTR_UNALIGNED_LD_STD)
 173:
 174:
 175:
+<<<<<<< HEAD
+=======
+179:
+>>>>>>> v3.18
 181:
 184:
 186:
@@ -438,8 +527,12 @@ END_FTR_SECTION_IFCLR(CPU_FTR_UNALIGNED_LD_STD)
 /*
  * Routine to copy a whole page of data, optimized for POWER4.
  * On POWER4 it is more than 50% faster than the simple loop
+<<<<<<< HEAD
  * above (following the .Ldst_aligned label) but it runs slightly
  * slower on POWER3.
+=======
+ * above (following the .Ldst_aligned label).
+>>>>>>> v3.18
  */
 .Lcopy_page_4K:
 	std	r31,-32(1)

@@ -54,16 +54,28 @@
 !Ikernel/sched/cpupri.c
 !Ikernel/sched/fair.c
 !Iinclude/linux/completion.h
+<<<<<<< HEAD
 !Ekernel/timer.c
      </sect1>
      <sect1><title>Wait queues and Wake events</title>
 !Iinclude/linux/wait.h
 !Ekernel/wait.c
+=======
+!Ekernel/time/timer.c
+     </sect1>
+     <sect1><title>Wait queues and Wake events</title>
+!Iinclude/linux/wait.h
+!Ekernel/sched/wait.c
+>>>>>>> v3.18
      </sect1>
      <sect1><title>High-resolution timers</title>
 !Iinclude/linux/ktime.h
 !Iinclude/linux/hrtimer.h
+<<<<<<< HEAD
 !Ekernel/hrtimer.c
+=======
+!Ekernel/time/hrtimer.c
+>>>>>>> v3.18
      </sect1>
      <sect1><title>Workqueues and Kevents</title>
 !Ekernel/workqueue.c
@@ -84,7 +96,11 @@ X!Iinclude/linux/kobject.h
 
      <sect1><title>Kernel utility functions</title>
 !Iinclude/linux/kernel.h
+<<<<<<< HEAD
 !Ekernel/printk.c
+=======
+!Ekernel/printk/printk.c
+>>>>>>> v3.18
 !Ekernel/panic.c
 !Ekernel/sys.c
 !Ekernel/rcu/srcu.c
@@ -128,7 +144,17 @@ X!Edrivers/base/interface.c
 !Edrivers/base/bus.c
      </sect1>
      <sect1><title>Device Drivers DMA Management</title>
+<<<<<<< HEAD
 !Edrivers/base/dma-buf.c
+=======
+!Edrivers/dma-buf/dma-buf.c
+!Edrivers/dma-buf/fence.c
+!Edrivers/dma-buf/seqno-fence.c
+!Iinclude/linux/fence.h
+!Iinclude/linux/seqno-fence.h
+!Edrivers/dma-buf/reservation.c
+!Iinclude/linux/reservation.h
+>>>>>>> v3.18
 !Edrivers/base/dma-coherent.c
 !Edrivers/base/dma-mapping.c
      </sect1>
@@ -274,7 +300,11 @@ X!Isound/sound_firmware.c
      </para>
 
      <sect1><title>Frame Buffer Memory</title>
+<<<<<<< HEAD
 !Edrivers/video/fbmem.c
+=======
+!Edrivers/video/fbdev/core/fbmem.c
+>>>>>>> v3.18
      </sect1>
 <!--
      <sect1><title>Frame Buffer Console</title>
@@ -282,7 +312,11 @@ X!Edrivers/video/console/fbcon.c
      </sect1>
 -->
      <sect1><title>Frame Buffer Colormap</title>
+<<<<<<< HEAD
 !Edrivers/video/fbcmap.c
+=======
+!Edrivers/video/fbdev/core/fbcmap.c
+>>>>>>> v3.18
      </sect1>
 <!-- FIXME:
   drivers/video/fbgen.c has no docs, which stuffs up the sgml.  Comment
@@ -292,6 +326,7 @@ X!Idrivers/video/fbgen.c
      </sect1>
 KAO -->
      <sect1><title>Frame Buffer Video Mode Database</title>
+<<<<<<< HEAD
 !Idrivers/video/modedb.c
 !Edrivers/video/modedb.c
      </sect1>
@@ -304,6 +339,20 @@ KAO -->
         </para>
 <!-- FIXME: Removed for now since no structured comments in source
 X!Idrivers/video/console/fonts.c
+=======
+!Idrivers/video/fbdev/core/modedb.c
+!Edrivers/video/fbdev/core/modedb.c
+     </sect1>
+     <sect1><title>Frame Buffer Macintosh Video Mode Database</title>
+!Edrivers/video/fbdev/macmodes.c
+     </sect1>
+     <sect1><title>Frame Buffer Fonts</title>
+        <para>
+           Refer to the file lib/fonts/fonts.c for more information.
+        </para>
+<!-- FIXME: Removed for now since no structured comments in source
+X!Ilib/fonts/fonts.c
+>>>>>>> v3.18
 -->
      </sect1>
   </chapter>

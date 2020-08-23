@@ -23,7 +23,11 @@
 static inline void __ide_flush_prologue(void)
 {
 #ifdef CONFIG_SMP
+<<<<<<< HEAD
 	if (cpu_has_dc_aliases)
+=======
+	if (cpu_has_dc_aliases || !cpu_has_ic_fills_f_dc)
+>>>>>>> v3.18
 		preempt_disable();
 #endif
 }
@@ -31,14 +35,22 @@ static inline void __ide_flush_prologue(void)
 static inline void __ide_flush_epilogue(void)
 {
 #ifdef CONFIG_SMP
+<<<<<<< HEAD
 	if (cpu_has_dc_aliases)
+=======
+	if (cpu_has_dc_aliases || !cpu_has_ic_fills_f_dc)
+>>>>>>> v3.18
 		preempt_enable();
 #endif
 }
 
 static inline void __ide_flush_dcache_range(unsigned long addr, unsigned long size)
 {
+<<<<<<< HEAD
 	if (cpu_has_dc_aliases) {
+=======
+	if (cpu_has_dc_aliases || !cpu_has_ic_fills_f_dc) {
+>>>>>>> v3.18
 		unsigned long end = addr + size;
 
 		while (addr < end) {

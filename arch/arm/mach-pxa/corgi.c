@@ -26,14 +26,23 @@
 #include <linux/i2c.h>
 #include <linux/i2c/pxa-i2c.h>
 #include <linux/io.h>
+<<<<<<< HEAD
 #include <linux/regulator/machine.h>
+=======
+>>>>>>> v3.18
 #include <linux/spi/spi.h>
 #include <linux/spi/ads7846.h>
 #include <linux/spi/corgi_lcd.h>
 #include <linux/spi/pxa2xx_spi.h>
 #include <linux/mtd/sharpsl.h>
 #include <linux/input/matrix_keypad.h>
+<<<<<<< HEAD
 #include <linux/module.h>
+=======
+#include <linux/gpio_keys.h>
+#include <linux/module.h>
+#include <linux/memblock.h>
+>>>>>>> v3.18
 #include <video/w100fb.h>
 
 #include <asm/setup.h>
@@ -406,6 +415,47 @@ static struct platform_device corgikbd_device = {
 	},
 };
 
+<<<<<<< HEAD
+=======
+static struct gpio_keys_button corgi_gpio_keys[] = {
+	{
+		.type	= EV_SW,
+		.code	= SW_LID,
+		.gpio	= CORGI_GPIO_SWA,
+		.desc	= "Lid close switch",
+		.debounce_interval = 500,
+	},
+	{
+		.type	= EV_SW,
+		.code	= SW_TABLET_MODE,
+		.gpio	= CORGI_GPIO_SWB,
+		.desc	= "Tablet mode switch",
+		.debounce_interval = 500,
+	},
+	{
+		.type	= EV_SW,
+		.code	= SW_HEADPHONE_INSERT,
+		.gpio	= CORGI_GPIO_AK_INT,
+		.desc	= "HeadPhone insert",
+		.debounce_interval = 500,
+	},
+};
+
+static struct gpio_keys_platform_data corgi_gpio_keys_platform_data = {
+	.buttons	= corgi_gpio_keys,
+	.nbuttons	= ARRAY_SIZE(corgi_gpio_keys),
+	.poll_interval	= 250,
+};
+
+static struct platform_device corgi_gpio_keys_device = {
+	.name	= "gpio-keys-polled",
+	.id	= -1,
+	.dev	= {
+		.platform_data	= &corgi_gpio_keys_platform_data,
+	},
+};
+
+>>>>>>> v3.18
 /*
  * Corgi LEDs
  */
@@ -475,7 +525,11 @@ static struct pxa2xx_udc_mach_info udc_info __initdata = {
 	.gpio_pullup		= CORGI_GPIO_USB_PULLUP,
 };
 
+<<<<<<< HEAD
 #if defined(CONFIG_SPI_PXA2XX) || defined(CONFIG_SPI_PXA2XX_MASTER)
+=======
+#if IS_ENABLED(CONFIG_SPI_PXA2XX)
+>>>>>>> v3.18
 static struct pxa2xx_spi_master corgi_spi_info = {
 	.num_chipselect	= 3,
 };
@@ -647,6 +701,10 @@ static struct platform_device sharpsl_rom_device = {
 static struct platform_device *devices[] __initdata = {
 	&corgiscoop_device,
 	&corgifb_device,
+<<<<<<< HEAD
+=======
+	&corgi_gpio_keys_device,
+>>>>>>> v3.18
 	&corgikbd_device,
 	&corgiled_device,
 	&corgi_audio_device,
@@ -712,6 +770,7 @@ static void __init corgi_init(void)
 		sharpsl_nand_partitions[1].size = 53 * 1024 * 1024;
 
 	platform_add_devices(devices, ARRAY_SIZE(devices));
+<<<<<<< HEAD
 
 	regulator_has_full_constraints();
 }
@@ -726,6 +785,17 @@ static void __init fixup_corgi(struct tag *tags, char **cmdline,
 		mi->bank[0].size = (32*1024*1024);
 	else
 		mi->bank[0].size = (64*1024*1024);
+=======
+}
+
+static void __init fixup_corgi(struct tag *tags, char **cmdline)
+{
+	sharpsl_save_param();
+	if (machine_is_corgi())
+		memblock_add(0xa0000000, SZ_32M);
+	else
+		memblock_add(0xa0000000, SZ_64M);
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_MACH_CORGI

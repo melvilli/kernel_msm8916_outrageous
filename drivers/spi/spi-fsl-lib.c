@@ -16,10 +16,17 @@
  * Free Software Foundation;  either version 2 of the  License, or (at your
  * option) any later version.
  */
+<<<<<<< HEAD
 #include <linux/kernel.h>
 #include <linux/interrupt.h>
 #include <linux/fsl_devices.h>
 #include <linux/dma-mapping.h>
+=======
+#include <linux/dma-mapping.h>
+#include <linux/fsl_devices.h>
+#include <linux/interrupt.h>
+#include <linux/kernel.h>
+>>>>>>> v3.18
 #include <linux/mm.h>
 #include <linux/of_platform.h>
 #include <linux/spi/spi.h>
@@ -61,7 +68,11 @@ struct mpc8xxx_spi_probe_info *to_of_pinfo(struct fsl_spi_platform_data *pdata)
 	return container_of(pdata, struct mpc8xxx_spi_probe_info, pdata);
 }
 
+<<<<<<< HEAD
 void mpc8xxx_spi_work(struct work_struct *work)
+=======
+static void mpc8xxx_spi_work(struct work_struct *work)
+>>>>>>> v3.18
 {
 	struct mpc8xxx_spi *mpc8xxx_spi = container_of(work, struct mpc8xxx_spi,
 						       work);
@@ -99,11 +110,14 @@ int mpc8xxx_spi_transfer(struct spi_device *spi,
 	return 0;
 }
 
+<<<<<<< HEAD
 void mpc8xxx_spi_cleanup(struct spi_device *spi)
 {
 	kfree(spi->controller_state);
 }
 
+=======
+>>>>>>> v3.18
 const char *mpc8xxx_spi_strmode(unsigned int flags)
 {
 	if (flags & SPI_QE_CPU_MODE) {
@@ -122,7 +136,11 @@ const char *mpc8xxx_spi_strmode(unsigned int flags)
 int mpc8xxx_spi_probe(struct device *dev, struct resource *mem,
 			unsigned int irq)
 {
+<<<<<<< HEAD
 	struct fsl_spi_platform_data *pdata = dev->platform_data;
+=======
+	struct fsl_spi_platform_data *pdata = dev_get_platdata(dev);
+>>>>>>> v3.18
 	struct spi_master *master;
 	struct mpc8xxx_spi *mpc8xxx_spi;
 	int ret = 0;
@@ -134,7 +152,10 @@ int mpc8xxx_spi_probe(struct device *dev, struct resource *mem,
 			| SPI_LSB_FIRST | SPI_LOOP;
 
 	master->transfer = mpc8xxx_spi_transfer;
+<<<<<<< HEAD
 	master->cleanup = mpc8xxx_spi_cleanup;
+=======
+>>>>>>> v3.18
 	master->dev.of_node = dev->of_node;
 
 	mpc8xxx_spi = spi_master_get_devdata(master);
@@ -200,9 +221,15 @@ int of_mpc8xxx_spi_probe(struct platform_device *ofdev)
 	const void *prop;
 	int ret = -ENOMEM;
 
+<<<<<<< HEAD
 	pinfo = kzalloc(sizeof(*pinfo), GFP_KERNEL);
 	if (!pinfo)
 		return -ENOMEM;
+=======
+	pinfo = devm_kzalloc(&ofdev->dev, sizeof(*pinfo), GFP_KERNEL);
+	if (!pinfo)
+		return ret;
+>>>>>>> v3.18
 
 	pdata = &pinfo->pdata;
 	dev->platform_data = pdata;
@@ -215,15 +242,24 @@ int of_mpc8xxx_spi_probe(struct platform_device *ofdev)
 	pdata->sysclk = get_brgfreq();
 	if (pdata->sysclk == -1) {
 		pdata->sysclk = fsl_get_sys_freq();
+<<<<<<< HEAD
 		if (pdata->sysclk == -1) {
 			ret = -ENODEV;
 			goto err;
 		}
+=======
+		if (pdata->sysclk == -1)
+			return -ENODEV;
+>>>>>>> v3.18
 	}
 #else
 	ret = of_property_read_u32(np, "clock-frequency", &pdata->sysclk);
 	if (ret)
+<<<<<<< HEAD
 		goto err;
+=======
+		return ret;
+>>>>>>> v3.18
 #endif
 
 	prop = of_get_property(np, "mode", NULL);
@@ -237,8 +273,11 @@ int of_mpc8xxx_spi_probe(struct platform_device *ofdev)
 		pdata->flags = SPI_CPM_MODE | SPI_CPM1;
 
 	return 0;
+<<<<<<< HEAD
 
 err:
 	kfree(pinfo);
 	return ret;
+=======
+>>>>>>> v3.18
 }

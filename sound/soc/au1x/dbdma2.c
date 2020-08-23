@@ -65,6 +65,7 @@ struct au1xpsc_audio_dmadata {
 #define AU1XPSC_PERIOD_MIN_BYTES	1024
 #define AU1XPSC_BUFFER_MIN_BYTES	65536
 
+<<<<<<< HEAD
 #define AU1XPSC_PCM_FMTS					\
 	(SNDRV_PCM_FMTBIT_S8     | SNDRV_PCM_FMTBIT_U8 |	\
 	 SNDRV_PCM_FMTBIT_S16_LE | SNDRV_PCM_FMTBIT_S16_BE |	\
@@ -73,11 +74,16 @@ struct au1xpsc_audio_dmadata {
 	 SNDRV_PCM_FMTBIT_U32_LE | SNDRV_PCM_FMTBIT_U32_BE |	\
 	 0)
 
+=======
+>>>>>>> v3.18
 /* PCM hardware DMA capabilities - platform specific */
 static const struct snd_pcm_hardware au1xpsc_pcm_hardware = {
 	.info		  = SNDRV_PCM_INFO_MMAP | SNDRV_PCM_INFO_MMAP_VALID |
 			    SNDRV_PCM_INFO_INTERLEAVED | SNDRV_PCM_INFO_BATCH,
+<<<<<<< HEAD
 	.formats	  = AU1XPSC_PCM_FMTS,
+=======
+>>>>>>> v3.18
 	.period_bytes_min = AU1XPSC_PERIOD_MIN_BYTES,
 	.period_bytes_max = 4096 * 1024 - 1,
 	.periods_min	  = 2,

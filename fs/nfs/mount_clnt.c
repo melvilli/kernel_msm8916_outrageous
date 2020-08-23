@@ -139,7 +139,14 @@ struct mnt_fhstatus {
  * nfs_mount - Obtain an NFS file handle for the given host and path
  * @info: pointer to mount request arguments
  *
+<<<<<<< HEAD
  * Uses default timeout parameters specified by underlying transport.
+=======
+ * Uses default timeout parameters specified by underlying transport. On
+ * successful return, the auth_flavs list and auth_flav_len will be populated
+ * with the list from the server or a faked-up list if the server didn't
+ * provide one.
+>>>>>>> v3.18
  */
 int nfs_mount(struct nfs_mount_request *info)
 {
@@ -195,6 +202,18 @@ int nfs_mount(struct nfs_mount_request *info)
 	dprintk("NFS: MNT request succeeded\n");
 	status = 0;
 
+<<<<<<< HEAD
+=======
+	/*
+	 * If the server didn't provide a flavor list, allow the
+	 * client to try any flavor.
+	 */
+	if (info->version != NFS_MNT3_VERSION || *info->auth_flav_len == 0) {
+		dprintk("NFS: Faking up auth_flavs list\n");
+		info->auth_flavs[0] = RPC_AUTH_NULL;
+		*info->auth_flav_len = 1;
+	}
+>>>>>>> v3.18
 out:
 	return status;
 

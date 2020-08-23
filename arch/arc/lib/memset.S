@@ -6,11 +6,19 @@
  * published by the Free Software Foundation.
  */
 
+<<<<<<< HEAD
 #include <asm/linkage.h>
 
 #define SMALL	7 /* Must be at least 6 to deal with alignment/loop issues.  */
 
 ARC_ENTRY memset
+=======
+#include <linux/linkage.h>
+
+#define SMALL	7 /* Must be at least 6 to deal with alignment/loop issues.  */
+
+ENTRY(memset)
+>>>>>>> v3.18
 	mov_s	r4,r0
 	or	r12,r0,r2
 	bmsk.f	r12,r12,1
@@ -46,14 +54,26 @@ ARC_ENTRY memset
 	stb.ab	r1,[r4,1]
 .Ltiny_end:
 	j_s	[blink]
+<<<<<<< HEAD
 ARC_EXIT memset
+=======
+END(memset)
+>>>>>>> v3.18
 
 ; memzero: @r0 = mem, @r1 = size_t
 ; memset:  @r0 = mem, @r1 = char, @r2 = size_t
 
+<<<<<<< HEAD
 ARC_ENTRY memzero
+=======
+ENTRY(memzero)
+>>>>>>> v3.18
     ; adjust bzero args to memset args
     mov r2, r1
     mov r1, 0
     b  memset    ;tail call so need to tinker with blink
+<<<<<<< HEAD
 ARC_EXIT memzero
+=======
+END(memzero)
+>>>>>>> v3.18

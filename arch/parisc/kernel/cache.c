@@ -323,7 +323,12 @@ void flush_dcache_page(struct page *page)
 		 * specifically accesses it, of course) */
 
 		flush_tlb_page(mpnt, addr);
+<<<<<<< HEAD
 		if (old_addr == 0 || (old_addr & (SHMLBA - 1)) != (addr & (SHMLBA - 1))) {
+=======
+		if (old_addr == 0 || (old_addr & (SHM_COLOUR - 1))
+				      != (addr & (SHM_COLOUR - 1))) {
+>>>>>>> v3.18
 			__flush_cache_page(mpnt, addr, page_to_phys(page));
 			if (old_addr)
 				printk(KERN_ERR "INEQUIVALENT ALIASES 0x%lx and 0x%lx in file %s\n", old_addr, addr, mpnt->vm_file ? (char *)mpnt->vm_file->f_path.dentry->d_name.name : "(null)");
@@ -581,6 +586,7 @@ flush_cache_page(struct vm_area_struct *vma, unsigned long vmaddr, unsigned long
 		__flush_cache_page(vma, vmaddr, PFN_PHYS(pfn));
 	}
 }
+<<<<<<< HEAD
 
 #ifdef CONFIG_PARISC_TMPALIAS
 
@@ -645,3 +651,5 @@ void copy_user_highpage(struct page *to, struct page *from,
 }
 
 #endif /* CONFIG_PARISC_TMPALIAS */
+=======
+>>>>>>> v3.18

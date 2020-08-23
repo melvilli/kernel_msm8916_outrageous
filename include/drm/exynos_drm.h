@@ -15,6 +15,10 @@
 #define _EXYNOS_DRM_H_
 
 #include <uapi/drm/exynos_drm.h>
+<<<<<<< HEAD
+=======
+#include <video/videomode.h>
+>>>>>>> v3.18
 
 /**
  * A structure for lcd panel information.
@@ -24,7 +28,11 @@
  * @height_mm: physical size of lcd height.
  */
 struct exynos_drm_panel_info {
+<<<<<<< HEAD
 	struct fb_videomode timing;
+=======
+	struct videomode vm;
+>>>>>>> v3.18
 	u32 width_mm;
 	u32 height_mm;
 };

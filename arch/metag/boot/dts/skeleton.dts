@@ -7,4 +7,8 @@
  */
 /dts-v1/;
 
+<<<<<<< HEAD
 /include/ "skeleton.dtsi"
+=======
+#include "skeleton.dtsi"
+>>>>>>> v3.18

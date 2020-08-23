@@ -20,6 +20,7 @@
 
 #define DA8XX_NUM_UARTS	3
 
+<<<<<<< HEAD
 static void __init da8xx_uart_clk_enable(void)
 {
 	int i;
@@ -27,6 +28,8 @@ static void __init da8xx_uart_clk_enable(void)
 		davinci_serial_setup_clk(i, NULL);
 }
 
+=======
+>>>>>>> v3.18
 static struct of_device_id da8xx_irq_match[] __initdata = {
 	{ .compatible = "ti,cp-intc", .data = cp_intc_of_init, },
 	{ }
@@ -39,7 +42,11 @@ static void __init da8xx_init_irq(void)
 
 static struct of_dev_auxdata da850_auxdata_lookup[] __initdata = {
 	OF_DEV_AUXDATA("ti,davinci-i2c", 0x01c22000, "i2c_davinci.1", NULL),
+<<<<<<< HEAD
 	OF_DEV_AUXDATA("ti,davinci-wdt", 0x01c21000, "watchdog", NULL),
+=======
+	OF_DEV_AUXDATA("ti,davinci-wdt", 0x01c21000, "davinci-wdt", NULL),
+>>>>>>> v3.18
 	OF_DEV_AUXDATA("ti,da830-mmc", 0x01c40000, "da830-mmc.0", NULL),
 	OF_DEV_AUXDATA("ti,da850-ehrpwm", 0x01f00000, "ehrpwm", NULL),
 	OF_DEV_AUXDATA("ti,da850-ehrpwm", 0x01f02000, "ehrpwm", NULL),
@@ -47,6 +54,16 @@ static struct of_dev_auxdata da850_auxdata_lookup[] __initdata = {
 	OF_DEV_AUXDATA("ti,da850-ecap", 0x01f07000, "ecap", NULL),
 	OF_DEV_AUXDATA("ti,da850-ecap", 0x01f08000, "ecap", NULL),
 	OF_DEV_AUXDATA("ti,da830-spi", 0x01f0e000, "spi_davinci.1", NULL),
+<<<<<<< HEAD
+=======
+	OF_DEV_AUXDATA("ns16550a", 0x01c42000, "serial8250.0", NULL),
+	OF_DEV_AUXDATA("ns16550a", 0x01d0c000, "serial8250.1", NULL),
+	OF_DEV_AUXDATA("ns16550a", 0x01d0d000, "serial8250.2", NULL),
+	OF_DEV_AUXDATA("ti,davinci_mdio", 0x01e24000, "davinci_mdio.0", NULL),
+	OF_DEV_AUXDATA("ti,davinci-dm6467-emac", 0x01e20000, "davinci_emac.1",
+		       NULL),
+	OF_DEV_AUXDATA("ti,da830-mcasp-audio", 0x01d00000, "davinci-mcasp.0", NULL),
+>>>>>>> v3.18
 	{}
 };
 
@@ -57,7 +74,10 @@ static void __init da850_init_machine(void)
 	of_platform_populate(NULL, of_default_bus_match_table,
 			     da850_auxdata_lookup, NULL);
 
+<<<<<<< HEAD
 	da8xx_uart_clk_enable();
+=======
+>>>>>>> v3.18
 }
 
 static const char *da850_boards_compat[] __initdata = {

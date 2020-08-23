@@ -33,12 +33,18 @@
 #include "80211hdr.h"
 #include "80211mgr.h"
 
+<<<<<<< HEAD
 /*---------------------  Export Definitions -------------------------*/
 
 #define AUTHENTICATE_TIMEOUT   1000 //ms
 #define ASSOCIATE_TIMEOUT      1000 //ms
 
 // Command code
+=======
+#define AUTHENTICATE_TIMEOUT   1000
+#define ASSOCIATE_TIMEOUT      1000
+
+>>>>>>> v3.18
 typedef enum tagCMD_CODE {
 	WLAN_CMD_BSSID_SCAN,
 	WLAN_CMD_SSID,
@@ -76,7 +82,10 @@ typedef struct tagCMD_ITEM {
 	bool bForceSCAN;
 } CMD_ITEM, *PCMD_ITEM;
 
+<<<<<<< HEAD
 // Command state
+=======
+>>>>>>> v3.18
 typedef enum tagCMD_STATE {
 	WLAN_CMD_SCAN_START,
 	WLAN_CMD_SCAN_END,
@@ -92,6 +101,7 @@ typedef enum tagCMD_STATE {
 	WLAN_CMD_IDLE
 } CMD_STATE, *PCMD_STATE;
 
+<<<<<<< HEAD
 /*---------------------  Export Classes  ----------------------------*/
 
 /*---------------------  Export Variables  --------------------------*/
@@ -99,6 +109,8 @@ typedef enum tagCMD_STATE {
 /*---------------------  Export Types  ------------------------------*/
 
 /*---------------------  Export Functions  --------------------------*/
+=======
+>>>>>>> v3.18
 void
 vResetCommandTimer(
 	void *hDeviceContext
@@ -125,11 +137,18 @@ vCommandTimerWait(
 	void *hDeviceContext,
 	unsigned int MSecond
 );
+<<<<<<< HEAD
 #ifdef TxInSleep
+=======
+
+>>>>>>> v3.18
 void
 BSSvSecondTxData(
 	void *hDeviceContext
 );
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 
 #endif //__WCMD_H__

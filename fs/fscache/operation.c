@@ -35,7 +35,11 @@ void fscache_enqueue_operation(struct fscache_operation *op)
 
 	ASSERT(list_empty(&op->pend_link));
 	ASSERT(op->processor != NULL);
+<<<<<<< HEAD
 	ASSERTCMP(op->object->state, >=, FSCACHE_OBJECT_AVAILABLE);
+=======
+	ASSERT(fscache_object_is_available(op->object));
+>>>>>>> v3.18
 	ASSERTCMP(atomic_read(&op->usage), >, 0);
 	ASSERTCMP(op->state, ==, FSCACHE_OP_ST_IN_PROGRESS);
 
@@ -51,8 +55,12 @@ void fscache_enqueue_operation(struct fscache_operation *op)
 		_debug("queue for caller's attention");
 		break;
 	default:
+<<<<<<< HEAD
 		printk(KERN_ERR "FS-Cache: Unexpected op type %lx",
 		       op->flags);
+=======
+		pr_err("Unexpected op type %lx", op->flags);
+>>>>>>> v3.18
 		BUG();
 		break;
 	}
@@ -119,7 +127,11 @@ int fscache_submit_exclusive_op(struct fscache_object *object,
 		/* need to issue a new write op after this */
 		clear_bit(FSCACHE_OBJECT_PENDING_WRITE, &object->flags);
 		ret = 0;
+<<<<<<< HEAD
 	} else if (object->state == FSCACHE_OBJECT_CREATING) {
+=======
+	} else if (test_bit(FSCACHE_OBJECT_IS_LOOKED_UP, &object->flags)) {
+>>>>>>> v3.18
 		op->object = object;
 		object->n_ops++;
 		object->n_exclusive++;	/* reads and writes must wait */
@@ -144,7 +156,11 @@ int fscache_submit_exclusive_op(struct fscache_object *object,
  */
 static void fscache_report_unexpected_submission(struct fscache_object *object,
 						 struct fscache_operation *op,
+<<<<<<< HEAD
 						 unsigned long ostate)
+=======
+						 const struct fscache_state *ostate)
+>>>>>>> v3.18
 {
 	static bool once_only;
 	struct fscache_operation *p;
@@ -155,11 +171,16 @@ static void fscache_report_unexpected_submission(struct fscache_object *object,
 	once_only = true;
 
 	kdebug("unexpected submission OP%x [OBJ%x %s]",
+<<<<<<< HEAD
 	       op->debug_id, object->debug_id,
 	       fscache_object_states[object->state]);
 	kdebug("objstate=%s [%s]",
 	       fscache_object_states[object->state],
 	       fscache_object_states[ostate]);
+=======
+	       op->debug_id, object->debug_id, object->state->name);
+	kdebug("objstate=%s [%s]", object->state->name, ostate->name);
+>>>>>>> v3.18
 	kdebug("objflags=%lx", object->flags);
 	kdebug("objevent=%lx [%lx]", object->events, object->event_mask);
 	kdebug("ops=%u inp=%u exc=%u",
@@ -190,7 +211,11 @@ static void fscache_report_unexpected_submission(struct fscache_object *object,
 int fscache_submit_op(struct fscache_object *object,
 		      struct fscache_operation *op)
 {
+<<<<<<< HEAD
 	unsigned long ostate;
+=======
+	const struct fscache_state *ostate;
+>>>>>>> v3.18
 	int ret;
 
 	_enter("{OBJ%x OP%x},{%u}",
@@ -226,16 +251,24 @@ int fscache_submit_op(struct fscache_object *object,
 			fscache_run_op(object, op);
 		}
 		ret = 0;
+<<<<<<< HEAD
 	} else if (object->state == FSCACHE_OBJECT_CREATING) {
+=======
+	} else if (test_bit(FSCACHE_OBJECT_IS_LOOKED_UP, &object->flags)) {
+>>>>>>> v3.18
 		op->object = object;
 		object->n_ops++;
 		atomic_inc(&op->usage);
 		list_add_tail(&op->pend_link, &object->pending_ops);
 		fscache_stat(&fscache_n_op_pend);
 		ret = 0;
+<<<<<<< HEAD
 	} else if (object->state == FSCACHE_OBJECT_DYING ||
 		   object->state == FSCACHE_OBJECT_LC_DYING ||
 		   object->state == FSCACHE_OBJECT_WITHDRAWING) {
+=======
+	} else if (fscache_object_is_dying(object)) {
+>>>>>>> v3.18
 		fscache_stat(&fscache_n_op_rejected);
 		op->state = FSCACHE_OP_ST_CANCELLED;
 		ret = -ENOBUFS;
@@ -265,8 +298,13 @@ void fscache_abort_object(struct fscache_object *object)
 }
 
 /*
+<<<<<<< HEAD
  * jump start the operation processing on an object
  * - caller must hold object->lock
+=======
+ * Jump start the operation processing on an object.  The caller must hold
+ * object->lock.
+>>>>>>> v3.18
  */
 void fscache_start_operations(struct fscache_object *object)
 {
@@ -428,6 +466,7 @@ void fscache_put_operation(struct fscache_operation *op)
 
 	object = op->object;
 
+<<<<<<< HEAD
 	if (test_bit(FSCACHE_OP_DEC_READ_CNT, &op->flags)) {
 		if (atomic_dec_and_test(&object->n_reads)) {
 			clear_bit(FSCACHE_COOKIE_WAITING_ON_READS,
@@ -436,6 +475,12 @@ void fscache_put_operation(struct fscache_operation *op)
 				    FSCACHE_COOKIE_WAITING_ON_READS);
 		}
 	}
+=======
+	if (test_bit(FSCACHE_OP_DEC_READ_CNT, &op->flags))
+		atomic_dec(&object->n_reads);
+	if (test_bit(FSCACHE_OP_UNUSE_COOKIE, &op->flags))
+		fscache_unuse_cookie(object);
+>>>>>>> v3.18
 
 	/* now... we may get called with the object spinlock held, so we
 	 * complete the cleanup here only if we can immediately acquire the

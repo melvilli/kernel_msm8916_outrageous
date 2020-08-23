@@ -58,7 +58,11 @@ void *module_alloc(unsigned long size)
 	area->nr_pages = npages;
 	area->pages = pages;
 
+<<<<<<< HEAD
 	if (map_vm_area(area, prot_rwx, &pages)) {
+=======
+	if (map_vm_area(area, prot_rwx, pages)) {
+>>>>>>> v3.18
 		vunmap(area->addr);
 		goto error;
 	}
@@ -74,7 +78,11 @@ error:
 
 
 /* Free memory returned from module_alloc */
+<<<<<<< HEAD
 void module_memfree(void *module_region)
+=======
+void module_free(struct module *mod, void *module_region)
+>>>>>>> v3.18
 {
 	vfree(module_region);
 

@@ -20,7 +20,16 @@
  * to consider dynamic allocation.
  */
 #define MAX_CPUS_PER_CLUSTER	4
+<<<<<<< HEAD
 #define MAX_NR_CLUSTERS		2
+=======
+
+#ifdef CONFIG_MCPM_QUAD_CLUSTER
+#define MAX_NR_CLUSTERS		4
+#else
+#define MAX_NR_CLUSTERS		2
+#endif
+>>>>>>> v3.18
 
 #ifndef __ASSEMBLY__
 
@@ -42,10 +51,31 @@ extern void mcpm_entry_point(void);
 void mcpm_set_entry_vector(unsigned cpu, unsigned cluster, void *ptr);
 
 /*
+<<<<<<< HEAD
+=======
+ * This sets an early poke i.e a value to be poked into some address
+ * from very early assembly code before the CPU is ungated.  The
+ * address must be physical, and if 0 then nothing will happen.
+ */
+void mcpm_set_early_poke(unsigned cpu, unsigned cluster,
+			 unsigned long poke_phys_addr, unsigned long poke_val);
+
+/*
+>>>>>>> v3.18
  * CPU/cluster power operations API for higher subsystems to use.
  */
 
 /**
+<<<<<<< HEAD
+=======
+ * mcpm_is_available - returns whether MCPM is initialized and available
+ *
+ * This returns true or false accordingly.
+ */
+bool mcpm_is_available(void);
+
+/**
+>>>>>>> v3.18
  * mcpm_cpu_power_up - make given CPU in given cluster runable
  *
  * @cpu: CPU number within given cluster
@@ -76,12 +106,53 @@ int mcpm_cpu_power_up(unsigned int cpu, unsigned int cluster);
  *
  * This must be called with interrupts disabled.
  *
+<<<<<<< HEAD
  * This does not return.  Re-entry in the kernel is expected via
  * mcpm_entry_point.
+=======
+ * On success this does not return.  Re-entry in the kernel is expected
+ * via mcpm_entry_point.
+ *
+ * This will return if mcpm_platform_register() has not been called
+ * previously in which case the caller should take appropriate action.
+ *
+ * On success, the CPU is not guaranteed to be truly halted until
+ * mcpm_wait_for_cpu_powerdown() subsequently returns non-zero for the
+ * specified cpu.  Until then, other CPUs should make sure they do not
+ * trash memory the target CPU might be executing/accessing.
+>>>>>>> v3.18
  */
 void mcpm_cpu_power_down(void);
 
 /**
+<<<<<<< HEAD
+=======
+ * mcpm_wait_for_cpu_powerdown - wait for a specified CPU to halt, and
+ *	make sure it is powered off
+ *
+ * @cpu: CPU number within given cluster
+ * @cluster: cluster number for the CPU
+ *
+ * Call this function to ensure that a pending powerdown has taken
+ * effect and the CPU is safely parked before performing non-mcpm
+ * operations that may affect the CPU (such as kexec trashing the
+ * kernel text).
+ *
+ * It is *not* necessary to call this function if you only need to
+ * serialise a pending powerdown with mcpm_cpu_power_up() or a wakeup
+ * event.
+ *
+ * Do not call this function unless the specified CPU has already
+ * called mcpm_cpu_power_down() or has committed to doing so.
+ *
+ * @return:
+ *	- zero if the CPU is in a safely parked state
+ *	- nonzero otherwise (e.g., timeout)
+ */
+int mcpm_wait_for_cpu_powerdown(unsigned int cpu, unsigned int cluster);
+
+/**
+>>>>>>> v3.18
  * mcpm_cpu_suspend - bring the calling CPU in a suspended state
  *
  * @expected_residency: duration in microseconds the CPU is expected
@@ -98,8 +169,16 @@ void mcpm_cpu_power_down(void);
  *
  * This must be called with interrupts disabled.
  *
+<<<<<<< HEAD
  * This does not return.  Re-entry in the kernel is expected via
  * mcpm_entry_point.
+=======
+ * On success this does not return.  Re-entry in the kernel is expected
+ * via mcpm_entry_point.
+ *
+ * This will return if mcpm_platform_register() has not been called
+ * previously in which case the caller should take appropriate action.
+>>>>>>> v3.18
  */
 void mcpm_cpu_suspend(u64 expected_residency);
 
@@ -120,6 +199,10 @@ int mcpm_cpu_powered_up(void);
 struct mcpm_platform_ops {
 	int (*power_up)(unsigned int cpu, unsigned int cluster);
 	void (*power_down)(void);
+<<<<<<< HEAD
+=======
+	int (*wait_for_powerdown)(unsigned int cpu, unsigned int cluster);
+>>>>>>> v3.18
 	void (*suspend)(u64);
 	void (*powered_up)(void);
 };
@@ -156,8 +239,11 @@ struct sync_struct {
 	struct mcpm_sync_struct clusters[MAX_NR_CLUSTERS];
 };
 
+<<<<<<< HEAD
 extern unsigned long sync_phys;	/* physical address of *mcpm_sync */
 
+=======
+>>>>>>> v3.18
 void __mcpm_cpu_going_down(unsigned int cpu, unsigned int cluster);
 void __mcpm_cpu_down(unsigned int cpu, unsigned int cluster);
 void __mcpm_outbound_leave_critical(unsigned int cluster, int state);
@@ -167,6 +253,25 @@ int __mcpm_cluster_state(unsigned int cluster);
 int __init mcpm_sync_init(
 	void (*power_up_setup)(unsigned int affinity_level));
 
+<<<<<<< HEAD
+=======
+/**
+ * mcpm_loopback - make a run through the MCPM low-level code
+ *
+ * @cache_disable: pointer to function performing cache disabling
+ *
+ * This exercises the MCPM machinery by soft resetting the CPU and branching
+ * to the MCPM low-level entry code before returning to the caller.
+ * The @cache_disable function must do the necessary cache disabling to
+ * let the regular kernel init code turn it back on as if the CPU was
+ * hotplugged in. The MCPM state machine is set as if the cluster was
+ * initialized meaning the power_up_setup callback passed to mcpm_sync_init()
+ * will be invoked for all affinity levels. This may be useful to initialize
+ * some resources such as enabling the CCI that requires the cache to be off, or simply for testing purposes.
+ */
+int __init mcpm_loopback(void (*cache_disable)(void));
+
+>>>>>>> v3.18
 void __init mcpm_smp_set_ops(void);
 
 #else

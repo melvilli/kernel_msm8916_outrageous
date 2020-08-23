@@ -495,6 +495,7 @@ static int spacc_aead_setkey(struct crypto_aead *tfm, const u8 *key,
 {
 	struct spacc_aead_ctx *ctx = crypto_aead_ctx(tfm);
 	struct spacc_alg *alg = to_spacc_alg(tfm->base.__crt_alg);
+<<<<<<< HEAD
 	struct rtattr *rta = (void *)key;
 	struct crypto_authenc_key_param *param;
 	unsigned int authkeylen, enckeylen;
@@ -521,19 +522,42 @@ static int spacc_aead_setkey(struct crypto_aead *tfm, const u8 *key,
 	authkeylen = keylen - enckeylen;
 
 	if (enckeylen > AES_MAX_KEY_SIZE)
+=======
+	struct crypto_authenc_keys keys;
+	int err = -EINVAL;
+
+	if (crypto_authenc_extractkeys(&keys, key, keylen) != 0)
+		goto badkey;
+
+	if (keys.enckeylen > AES_MAX_KEY_SIZE)
+		goto badkey;
+
+	if (keys.authkeylen > sizeof(ctx->hash_ctx))
+>>>>>>> v3.18
 		goto badkey;
 
 	if ((alg->ctrl_default & SPACC_CRYPTO_ALG_MASK) ==
 	    SPA_CTRL_CIPH_ALG_AES)
+<<<<<<< HEAD
 		err = spacc_aead_aes_setkey(tfm, key + authkeylen, enckeylen);
 	else
 		err = spacc_aead_des_setkey(tfm, key + authkeylen, enckeylen);
+=======
+		err = spacc_aead_aes_setkey(tfm, keys.enckey, keys.enckeylen);
+	else
+		err = spacc_aead_des_setkey(tfm, keys.enckey, keys.enckeylen);
+>>>>>>> v3.18
 
 	if (err)
 		goto badkey;
 
+<<<<<<< HEAD
 	memcpy(ctx->hash_ctx, key, authkeylen);
 	ctx->hash_key_len = authkeylen;
+=======
+	memcpy(ctx->hash_ctx, keys.authkey, keys.authkeylen);
+	ctx->hash_key_len = keys.authkeylen;
+>>>>>>> v3.18
 
 	return 0;
 
@@ -1298,7 +1322,11 @@ static ssize_t spacc_stat_irq_thresh_store(struct device *dev,
 	struct spacc_engine *engine = spacc_dev_to_engine(dev);
 	unsigned long thresh;
 
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &thresh))
+=======
+	if (kstrtoul(buf, 0, &thresh))
+>>>>>>> v3.18
 		return -EINVAL;
 
 	thresh = clamp(thresh, 1UL, engine->fifo_sz - 1);
@@ -1736,12 +1764,22 @@ static int spacc_probe(struct platform_device *pdev)
 	engine->name = dev_name(&pdev->dev);
 
 	mem = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
 	irq = platform_get_resource(pdev, IORESOURCE_IRQ, 0);
 	if (!mem || !irq) {
+=======
+	engine->regs = devm_ioremap_resource(&pdev->dev, mem);
+	if (IS_ERR(engine->regs))
+		return PTR_ERR(engine->regs);
+
+	irq = platform_get_resource(pdev, IORESOURCE_IRQ, 0);
+	if (!irq) {
+>>>>>>> v3.18
 		dev_err(&pdev->dev, "no memory/irq resource for engine\n");
 		return -ENXIO;
 	}
 
+<<<<<<< HEAD
 	if (!devm_request_mem_region(&pdev->dev, mem->start, resource_size(mem),
 				     engine->name))
 		return -ENOMEM;
@@ -1752,6 +1790,8 @@ static int spacc_probe(struct platform_device *pdev)
 		return -ENOMEM;
 	}
 
+=======
+>>>>>>> v3.18
 	if (devm_request_irq(&pdev->dev, irq->start, spacc_spacc_irq, 0,
 			     engine->name, engine)) {
 		dev_err(engine->dev, "failed to request IRQ\n");

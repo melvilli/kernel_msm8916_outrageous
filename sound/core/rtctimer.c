@@ -27,7 +27,11 @@
 #include <sound/core.h>
 #include <sound/timer.h>
 
+<<<<<<< HEAD
 #if defined(CONFIG_RTC) || defined(CONFIG_RTC_MODULE)
+=======
+#if IS_ENABLED(CONFIG_RTC)
+>>>>>>> v3.18
 
 #include <linux/mc146818rtc.h>
 
@@ -132,8 +136,12 @@ static int __init rtctimer_init(void)
 
 	if (rtctimer_freq < 2 || rtctimer_freq > 8192 ||
 	    !is_power_of_2(rtctimer_freq)) {
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "rtctimer: invalid frequency %d\n",
 			   rtctimer_freq);
+=======
+		pr_err("ALSA: rtctimer: invalid frequency %d\n", rtctimer_freq);
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
@@ -185,4 +193,8 @@ MODULE_LICENSE("GPL");
 
 MODULE_ALIAS("snd-timer-" __stringify(SNDRV_TIMER_GLOBAL_RTC));
 
+<<<<<<< HEAD
 #endif /* CONFIG_RTC || CONFIG_RTC_MODULE */
+=======
+#endif /* IS_ENABLED(CONFIG_RTC) */
+>>>>>>> v3.18

@@ -26,7 +26,10 @@
 #include <linux/mm.h>
 #include <linux/highmem.h>
 #include <linux/hrtimer.h>
+<<<<<<< HEAD
 #include <linux/backing-dev.h>
+=======
+>>>>>>> v3.18
 
 static void __journal_temp_unlink_buffer(struct journal_head *jh);
 
@@ -100,10 +103,18 @@ static int start_this_handle(journal_t *journal, handle_t *handle)
 
 alloc_transaction:
 	if (!journal->j_running_transaction) {
+<<<<<<< HEAD
 		new_transaction = kzalloc(sizeof(*new_transaction), GFP_NOFS);
 		if (!new_transaction) {
 			congestion_wait(BLK_RW_ASYNC, HZ/50);
 			goto alloc_transaction;
+=======
+		new_transaction = kzalloc(sizeof(*new_transaction),
+						GFP_NOFS|__GFP_NOFAIL);
+		if (!new_transaction) {
+			ret = -ENOMEM;
+			goto out;
+>>>>>>> v3.18
 		}
 	}
 
@@ -675,7 +686,11 @@ repeat:
 					jbd_alloc(jh2bh(jh)->b_size,
 							 GFP_NOFS);
 				if (!frozen_buffer) {
+<<<<<<< HEAD
 					printk(KERN_EMERG
+=======
+					printk(KERN_ERR
+>>>>>>> v3.18
 					       "%s: OOM for frozen_buffer\n",
 					       __func__);
 					JBUFFER_TRACE(jh, "oom!");
@@ -898,7 +913,11 @@ repeat:
 	if (!jh->b_committed_data) {
 		committed_data = jbd_alloc(jh2bh(jh)->b_size, GFP_NOFS);
 		if (!committed_data) {
+<<<<<<< HEAD
 			printk(KERN_EMERG "%s: No memory for committed data\n",
+=======
+			printk(KERN_ERR "%s: No memory for committed data\n",
+>>>>>>> v3.18
 				__func__);
 			err = -ENOMEM;
 			goto out;
@@ -2019,6 +2038,7 @@ zap_buffer_unlocked:
  * void journal_invalidatepage() - invalidate a journal page
  * @journal: journal to use for flush
  * @page:    page to flush
+<<<<<<< HEAD
  * @offset:  length of page to invalidate.
  *
  * Reap page buffers containing data after offset in page.
@@ -2029,6 +2049,22 @@ void journal_invalidatepage(journal_t *journal,
 {
 	struct buffer_head *head, *bh, *next;
 	unsigned int curr_off = 0;
+=======
+ * @offset:  offset of the range to invalidate
+ * @length:  length of the range to invalidate
+ *
+ * Reap page buffers containing data in specified range in page.
+ */
+void journal_invalidatepage(journal_t *journal,
+		      struct page *page,
+		      unsigned int offset,
+		      unsigned int length)
+{
+	struct buffer_head *head, *bh, *next;
+	unsigned int stop = offset + length;
+	unsigned int curr_off = 0;
+	int partial_page = (offset || length < PAGE_CACHE_SIZE);
+>>>>>>> v3.18
 	int may_free = 1;
 
 	if (!PageLocked(page))
@@ -2036,6 +2072,11 @@ void journal_invalidatepage(journal_t *journal,
 	if (!page_has_buffers(page))
 		return;
 
+<<<<<<< HEAD
+=======
+	BUG_ON(stop > PAGE_CACHE_SIZE || stop < length);
+
+>>>>>>> v3.18
 	/* We will potentially be playing with lists other than just the
 	 * data lists (especially for journaled data mode), so be
 	 * cautious in our locking. */
@@ -2045,11 +2086,21 @@ void journal_invalidatepage(journal_t *journal,
 		unsigned int next_off = curr_off + bh->b_size;
 		next = bh->b_this_page;
 
+<<<<<<< HEAD
+=======
+		if (next_off > stop)
+			return;
+
+>>>>>>> v3.18
 		if (offset <= curr_off) {
 			/* This block is wholly outside the truncation point */
 			lock_buffer(bh);
 			may_free &= journal_unmap_buffer(journal, bh,
+<<<<<<< HEAD
 							 offset > 0);
+=======
+							 partial_page);
+>>>>>>> v3.18
 			unlock_buffer(bh);
 		}
 		curr_off = next_off;
@@ -2057,7 +2108,11 @@ void journal_invalidatepage(journal_t *journal,
 
 	} while (bh != head);
 
+<<<<<<< HEAD
 	if (!offset) {
+=======
+	if (!partial_page) {
+>>>>>>> v3.18
 		if (may_free && try_to_free_buffers(page))
 			J_ASSERT(!page_has_buffers(page));
 	}

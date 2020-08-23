@@ -12,7 +12,11 @@
 #include <asm/vsyscall.h>
 #include <asm/x86_init.h>
 #include <asm/time.h>
+<<<<<<< HEAD
 #include <asm/mrst.h>
+=======
+#include <asm/intel-mid.h>
+>>>>>>> v3.18
 #include <asm/rtc.h>
 
 #ifdef CONFIG_X86_32
@@ -38,8 +42,14 @@ EXPORT_SYMBOL(rtc_lock);
  * jump to the next second precisely 500 ms later. Check the Motorola
  * MC146818A or Dallas DS12887 data sheet for details.
  */
+<<<<<<< HEAD
 int mach_set_rtc_mmss(unsigned long nowtime)
 {
+=======
+int mach_set_rtc_mmss(const struct timespec *now)
+{
+	unsigned long nowtime = now->tv_sec;
+>>>>>>> v3.18
 	struct rtc_time tm;
 	int retval = 0;
 
@@ -58,7 +68,11 @@ int mach_set_rtc_mmss(unsigned long nowtime)
 	return retval;
 }
 
+<<<<<<< HEAD
 unsigned long mach_get_cmos_time(void)
+=======
+void mach_get_cmos_time(struct timespec *now)
+>>>>>>> v3.18
 {
 	unsigned int status, year, mon, day, hour, min, sec, century = 0;
 	unsigned long flags;
@@ -107,7 +121,12 @@ unsigned long mach_get_cmos_time(void)
 	} else
 		year += CMOS_YEARS_OFFS;
 
+<<<<<<< HEAD
 	return mktime(year, mon, day, hour, min, sec);
+=======
+	now->tv_sec = mktime(year, mon, day, hour, min, sec);
+	now->tv_nsec = 0;
+>>>>>>> v3.18
 }
 
 /* Routines for accessing the CMOS RAM/RTC. */
@@ -135,18 +154,26 @@ EXPORT_SYMBOL(rtc_cmos_write);
 
 int update_persistent_clock(struct timespec now)
 {
+<<<<<<< HEAD
 	return x86_platform.set_wallclock(now.tv_sec);
+=======
+	return x86_platform.set_wallclock(&now);
+>>>>>>> v3.18
 }
 
 /* not static: needed by APM */
 void read_persistent_clock(struct timespec *ts)
 {
+<<<<<<< HEAD
 	unsigned long retval;
 
 	retval = x86_platform.get_wallclock();
 
 	ts->tv_sec = retval;
 	ts->tv_nsec = 0;
+=======
+	x86_platform.get_wallclock(ts);
+>>>>>>> v3.18
 }
 
 
@@ -192,9 +219,23 @@ static __init int add_rtc_cmos(void)
 		return 0;
 
 	/* Intel MID platforms don't have ioport rtc */
+<<<<<<< HEAD
 	if (mrst_identify_cpu())
 		return -ENODEV;
 
+=======
+	if (intel_mid_identify_cpu())
+		return -ENODEV;
+
+#ifdef CONFIG_ACPI
+	if (acpi_gbl_FADT.boot_flags & ACPI_FADT_NO_CMOS_RTC) {
+		/* This warning can likely go away again in a year or two. */
+		pr_info("ACPI: not registering RTC platform device\n");
+		return -ENODEV;
+	}
+#endif
+
+>>>>>>> v3.18
 	platform_device_register(&rtc_device);
 	dev_info(&rtc_device.dev,
 		 "registered platform RTC device (no PNP device found)\n");

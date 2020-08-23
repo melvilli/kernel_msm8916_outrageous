@@ -57,6 +57,10 @@ unsigned long get_wchan(struct task_struct *p);
   ((tsk) == current ? rdusp() : task_thread_info(tsk)->pcb.usp)
 
 #define cpu_relax()	barrier()
+<<<<<<< HEAD
+=======
+#define cpu_relax_lowlatency() cpu_relax()
+>>>>>>> v3.18
 
 #define ARCH_HAS_PREFETCH
 #define ARCH_HAS_PREFETCHW

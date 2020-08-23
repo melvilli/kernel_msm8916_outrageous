@@ -22,15 +22,30 @@
  * Authors: Ben Skeggs
  */
 
+<<<<<<< HEAD
 #include <subdev/i2c.h>
+=======
+#include "priv.h"
+>>>>>>> v3.18
 
 int
 nv_rdaux(struct nouveau_i2c_port *port, u32 addr, u8 *data, u8 size)
 {
+<<<<<<< HEAD
 	if (port->func->aux) {
 		if (port->func->acquire)
 			port->func->acquire(port);
 		return port->func->aux(port, 9, addr, data, size);
+=======
+	struct nouveau_i2c *i2c = nouveau_i2c(port);
+	if (port->func->aux) {
+		int ret = i2c->acquire(port, 0);
+		if (ret == 0) {
+			ret = port->func->aux(port, true, 9, addr, data, size);
+			i2c->release(port);
+		}
+		return ret;
+>>>>>>> v3.18
 	}
 	return -ENODEV;
 }
@@ -38,10 +53,21 @@ nv_rdaux(struct nouveau_i2c_port *port, u32 addr, u8 *data, u8 size)
 int
 nv_wraux(struct nouveau_i2c_port *port, u32 addr, u8 *data, u8 size)
 {
+<<<<<<< HEAD
 	if (port->func->aux) {
 		if (port->func->acquire)
 			port->func->acquire(port);
 		return port->func->aux(port, 8, addr, data, size);
+=======
+	struct nouveau_i2c *i2c = nouveau_i2c(port);
+	if (port->func->aux) {
+		int ret = i2c->acquire(port, 0);
+		if (ret == 0) {
+			ret = port->func->aux(port, true, 8, addr, data, size);
+			i2c->release(port);
+		}
+		return ret;
+>>>>>>> v3.18
 	}
 	return -ENODEV;
 }
@@ -50,13 +76,24 @@ static int
 aux_xfer(struct i2c_adapter *adap, struct i2c_msg *msgs, int num)
 {
 	struct nouveau_i2c_port *port = adap->algo_data;
+<<<<<<< HEAD
+=======
+	struct nouveau_i2c *i2c = nouveau_i2c(port);
+>>>>>>> v3.18
 	struct i2c_msg *msg = msgs;
 	int ret, mcnt = num;
 
 	if (!port->func->aux)
 		return -ENODEV;
+<<<<<<< HEAD
 	if ( port->func->acquire)
 		port->func->acquire(port);
+=======
+
+	ret = i2c->acquire(port, 0);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 
 	while (mcnt--) {
 		u8 remaining = msg->len;
@@ -74,9 +111,17 @@ aux_xfer(struct i2c_adapter *adap, struct i2c_msg *msgs, int num)
 			if (mcnt || remaining > 16)
 				cmd |= 4; /* MOT */
 
+<<<<<<< HEAD
 			ret = port->func->aux(port, cmd, msg->addr, ptr, cnt);
 			if (ret < 0)
 				return ret;
+=======
+			ret = port->func->aux(port, true, cmd, msg->addr, ptr, cnt);
+			if (ret < 0) {
+				i2c->release(port);
+				return ret;
+			}
+>>>>>>> v3.18
 
 			ptr += cnt;
 			remaining -= cnt;
@@ -85,6 +130,10 @@ aux_xfer(struct i2c_adapter *adap, struct i2c_msg *msgs, int num)
 		msg++;
 	}
 
+<<<<<<< HEAD
+=======
+	i2c->release(port);
+>>>>>>> v3.18
 	return num;
 }
 

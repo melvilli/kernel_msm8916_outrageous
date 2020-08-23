@@ -37,6 +37,11 @@
 #ifndef _TIPC_ADDR_H
 #define _TIPC_ADDR_H
 
+<<<<<<< HEAD
+=======
+#include "core.h"
+
+>>>>>>> v3.18
 #define TIPC_ZONE_MASK		0xff000000u
 #define TIPC_CLUSTER_MASK	0xfffff000u
 

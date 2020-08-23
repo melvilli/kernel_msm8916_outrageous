@@ -213,7 +213,11 @@ static int ad7192_setup(struct ad7192_state *st,
 	ret = spi_write(st->sd.spi, &ones, 6);
 	if (ret < 0)
 		goto out;
+<<<<<<< HEAD
 	msleep(1); /* Wait for at least 500us */
+=======
+	usleep_range(500, 1000); /* Wait for at least 500us */
+>>>>>>> v3.18
 
 	/* write/read test for device presence */
 	ret = ad_sd_read_reg(&st->sd, AD7192_REG_ID, 1, &id);
@@ -326,7 +330,11 @@ static ssize_t ad7192_write_frequency(struct device *dev,
 	unsigned long lval;
 	int div, ret;
 
+<<<<<<< HEAD
 	ret = strict_strtoul(buf, 10, &lval);
+=======
+	ret = kstrtoul(buf, 10, &lval);
+>>>>>>> v3.18
 	if (ret)
 		return ret;
 	if (lval == 0)
@@ -623,17 +631,29 @@ static int ad7192_probe(struct spi_device *spi)
 		return -ENODEV;
 	}
 
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*st));
+=======
+	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
+>>>>>>> v3.18
 	if (indio_dev == NULL)
 		return -ENOMEM;
 
 	st = iio_priv(indio_dev);
 
+<<<<<<< HEAD
 	st->reg = regulator_get(&spi->dev, "vcc");
 	if (!IS_ERR(st->reg)) {
 		ret = regulator_enable(st->reg);
 		if (ret)
 			goto error_put_reg;
+=======
+	st->reg = devm_regulator_get(&spi->dev, "vcc");
+	if (!IS_ERR(st->reg)) {
+		ret = regulator_enable(st->reg);
+		if (ret)
+			return ret;
+>>>>>>> v3.18
 
 		voltage_uv = regulator_get_voltage(st->reg);
 	}
@@ -677,11 +697,14 @@ error_remove_trigger:
 error_disable_reg:
 	if (!IS_ERR(st->reg))
 		regulator_disable(st->reg);
+<<<<<<< HEAD
 error_put_reg:
 	if (!IS_ERR(st->reg))
 		regulator_put(st->reg);
 
 	iio_device_free(indio_dev);
+=======
+>>>>>>> v3.18
 
 	return ret;
 }
@@ -694,10 +717,15 @@ static int ad7192_remove(struct spi_device *spi)
 	iio_device_unregister(indio_dev);
 	ad_sd_cleanup_buffer_and_trigger(indio_dev);
 
+<<<<<<< HEAD
 	if (!IS_ERR(st->reg)) {
 		regulator_disable(st->reg);
 		regulator_put(st->reg);
 	}
+=======
+	if (!IS_ERR(st->reg))
+		regulator_disable(st->reg);
+>>>>>>> v3.18
 
 	return 0;
 }

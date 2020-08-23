@@ -13,11 +13,16 @@
 #include <linux/debugfs.h>
 #include <linux/workqueue.h>
 #include <linux/kref.h>
+<<<<<<< HEAD
+=======
+#include <asm/hypfs.h>
+>>>>>>> v3.18
 
 #define REG_FILE_MODE    0440
 #define UPDATE_FILE_MODE 0220
 #define DIR_MODE         0550
 
+<<<<<<< HEAD
 extern struct dentry *hypfs_mkdir(struct super_block *sb, struct dentry *parent,
 				  const char *name);
 
@@ -27,17 +32,37 @@ extern struct dentry *hypfs_create_u64(struct super_block *sb,
 
 extern struct dentry *hypfs_create_str(struct super_block *sb,
 				       struct dentry *dir, const char *name,
+=======
+extern struct dentry *hypfs_mkdir(struct dentry *parent, const char *name);
+
+extern struct dentry *hypfs_create_u64(struct dentry *dir, const char *name,
+				       __u64 value);
+
+extern struct dentry *hypfs_create_str(struct dentry *dir, const char *name,
+>>>>>>> v3.18
 				       char *string);
 
 /* LPAR Hypervisor */
 extern int hypfs_diag_init(void);
 extern void hypfs_diag_exit(void);
+<<<<<<< HEAD
 extern int hypfs_diag_create_files(struct super_block *sb, struct dentry *root);
+=======
+extern int hypfs_diag_create_files(struct dentry *root);
+>>>>>>> v3.18
 
 /* VM Hypervisor */
 extern int hypfs_vm_init(void);
 extern void hypfs_vm_exit(void);
+<<<<<<< HEAD
 extern int hypfs_vm_create_files(struct super_block *sb, struct dentry *root);
+=======
+extern int hypfs_vm_create_files(struct dentry *root);
+
+/* Set Partition-Resource Parameter */
+int hypfs_sprp_init(void);
+void hypfs_sprp_exit(void);
+>>>>>>> v3.18
 
 /* debugfs interface */
 struct hypfs_dbfs_file;
@@ -55,6 +80,11 @@ struct hypfs_dbfs_file {
 	int		(*data_create)(void **data, void **data_free_ptr,
 				       size_t *size);
 	void		(*data_free)(const void *buf_free_ptr);
+<<<<<<< HEAD
+=======
+	long		(*unlocked_ioctl) (struct file *, unsigned int,
+					   unsigned long);
+>>>>>>> v3.18
 
 	/* Private data for hypfs_dbfs.c */
 	struct hypfs_dbfs_data	*data;

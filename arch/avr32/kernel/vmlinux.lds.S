@@ -23,7 +23,11 @@ SECTIONS
 {
 	. = CONFIG_ENTRY_ADDRESS;
 	.init		: AT(ADDR(.init) - LOAD_OFFSET) {
+<<<<<<< HEAD
 		_stext = .;
+=======
+		_text = .;
+>>>>>>> v3.18
 		__init_begin = .;
 			_sinittext = .;
 			*(.text.reset)
@@ -46,7 +50,11 @@ SECTIONS
 
 	.text		: AT(ADDR(.text) - LOAD_OFFSET) {
 		_evba = .;
+<<<<<<< HEAD
 		_text = .;
+=======
+		_stext = .;
+>>>>>>> v3.18
 		*(.ex.text)
 		*(.irq.text)
 		KPROBES_TEXT

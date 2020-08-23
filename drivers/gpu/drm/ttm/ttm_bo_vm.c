@@ -33,6 +33,10 @@
 #include <ttm/ttm_module.h>
 #include <ttm/ttm_bo_driver.h>
 #include <ttm/ttm_placement.h>
+<<<<<<< HEAD
+=======
+#include <drm/drm_vma_manager.h>
+>>>>>>> v3.18
 #include <linux/mm.h>
 #include <linux/rbtree.h>
 #include <linux/module.h>
@@ -40,6 +44,7 @@
 
 #define TTM_BO_VM_NUM_PREFAULT 16
 
+<<<<<<< HEAD
 static struct ttm_buffer_object *ttm_bo_vm_lookup_rb(struct ttm_bo_device *bdev,
 						     unsigned long page_start,
 						     unsigned long num_pages)
@@ -69,6 +74,48 @@ static struct ttm_buffer_object *ttm_bo_vm_lookup_rb(struct ttm_bo_device *bdev,
 		return NULL;
 
 	return best_bo;
+=======
+static int ttm_bo_vm_fault_idle(struct ttm_buffer_object *bo,
+				struct vm_area_struct *vma,
+				struct vm_fault *vmf)
+{
+	int ret = 0;
+
+	if (likely(!test_bit(TTM_BO_PRIV_FLAG_MOVING, &bo->priv_flags)))
+		goto out_unlock;
+
+	/*
+	 * Quick non-stalling check for idle.
+	 */
+	ret = ttm_bo_wait(bo, false, false, true);
+	if (likely(ret == 0))
+		goto out_unlock;
+
+	/*
+	 * If possible, avoid waiting for GPU with mmap_sem
+	 * held.
+	 */
+	if (vmf->flags & FAULT_FLAG_ALLOW_RETRY) {
+		ret = VM_FAULT_RETRY;
+		if (vmf->flags & FAULT_FLAG_RETRY_NOWAIT)
+			goto out_unlock;
+
+		up_read(&vma->vm_mm->mmap_sem);
+		(void) ttm_bo_wait(bo, false, true, false);
+		goto out_unlock;
+	}
+
+	/*
+	 * Ordinary wait.
+	 */
+	ret = ttm_bo_wait(bo, false, true, false);
+	if (unlikely(ret != 0))
+		ret = (ret != -ERESTARTSYS) ? VM_FAULT_SIGBUS :
+			VM_FAULT_NOPAGE;
+
+out_unlock:
+	return ret;
+>>>>>>> v3.18
 }
 
 static int ttm_bo_vm_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
@@ -87,10 +134,15 @@ static int ttm_bo_vm_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 	int retval = VM_FAULT_NOPAGE;
 	struct ttm_mem_type_manager *man =
 		&bdev->man[bo->mem.mem_type];
+<<<<<<< HEAD
+=======
+	struct vm_area_struct cvma;
+>>>>>>> v3.18
 
 	/*
 	 * Work around locking order reversal in fault / nopfn
 	 * between mmap_sem and bo_reserve: Perform a trylock operation
+<<<<<<< HEAD
 	 * for reserve, and if it fails, retry the fault after scheduling.
 	 */
 
@@ -101,13 +153,52 @@ static int ttm_bo_vm_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 		return VM_FAULT_NOPAGE;
 	}
 
+=======
+	 * for reserve, and if it fails, retry the fault after waiting
+	 * for the buffer to become unreserved.
+	 */
+	ret = ttm_bo_reserve(bo, true, true, false, NULL);
+	if (unlikely(ret != 0)) {
+		if (ret != -EBUSY)
+			return VM_FAULT_NOPAGE;
+
+		if (vmf->flags & FAULT_FLAG_ALLOW_RETRY) {
+			if (!(vmf->flags & FAULT_FLAG_RETRY_NOWAIT)) {
+				up_read(&vma->vm_mm->mmap_sem);
+				(void) ttm_bo_wait_unreserved(bo);
+			}
+
+			return VM_FAULT_RETRY;
+		}
+
+		/*
+		 * If we'd want to change locking order to
+		 * mmap_sem -> bo::reserve, we'd use a blocking reserve here
+		 * instead of retrying the fault...
+		 */
+		return VM_FAULT_NOPAGE;
+	}
+
+	/*
+	 * Refuse to fault imported pages. This should be handled
+	 * (if at all) by redirecting mmap to the exporter.
+	 */
+	if (bo->ttm && (bo->ttm->page_flags & TTM_PAGE_FLAG_SG)) {
+		retval = VM_FAULT_SIGBUS;
+		goto out_unlock;
+	}
+
+>>>>>>> v3.18
 	if (bdev->driver->fault_reserve_notify) {
 		ret = bdev->driver->fault_reserve_notify(bo);
 		switch (ret) {
 		case 0:
 			break;
 		case -EBUSY:
+<<<<<<< HEAD
 			set_need_resched();
+=======
+>>>>>>> v3.18
 		case -ERESTARTSYS:
 			retval = VM_FAULT_NOPAGE;
 			goto out_unlock;
@@ -121,6 +212,7 @@ static int ttm_bo_vm_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 	 * Wait for buffer data in transit, due to a pipelined
 	 * move.
 	 */
+<<<<<<< HEAD
 
 	spin_lock(&bdev->fence_lock);
 	if (test_bit(TTM_BO_PRIV_FLAG_MOVING, &bo->priv_flags)) {
@@ -133,6 +225,13 @@ static int ttm_bo_vm_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 		}
 	} else
 		spin_unlock(&bdev->fence_lock);
+=======
+	ret = ttm_bo_vm_fault_idle(bo, vma, vmf);
+	if (unlikely(ret != 0)) {
+		retval = ret;
+		goto out_unlock;
+	}
+>>>>>>> v3.18
 
 	ret = ttm_mem_io_lock(man, true);
 	if (unlikely(ret != 0)) {
@@ -146,9 +245,15 @@ static int ttm_bo_vm_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 	}
 
 	page_offset = ((address - vma->vm_start) >> PAGE_SHIFT) +
+<<<<<<< HEAD
 	    bo->vm_node->start - vma->vm_pgoff;
 	page_last = vma_pages(vma) +
 	    bo->vm_node->start - vma->vm_pgoff;
+=======
+		vma->vm_pgoff - drm_vma_node_start(&bo->vma_node);
+	page_last = vma_pages(vma) + vma->vm_pgoff -
+		drm_vma_node_start(&bo->vma_node);
+>>>>>>> v3.18
 
 	if (unlikely(page_offset >= bo->num_pages)) {
 		retval = VM_FAULT_SIGBUS;
@@ -156,6 +261,7 @@ static int ttm_bo_vm_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 	}
 
 	/*
+<<<<<<< HEAD
 	 * Strictly, we're not allowed to modify vma->vm_page_prot here,
 	 * since the mmap_sem is only held in read mode. However, we
 	 * modify only the caching bits of vma->vm_page_prot and
@@ -176,6 +282,22 @@ static int ttm_bo_vm_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 		vma->vm_page_prot = (bo->mem.placement & TTM_PL_FLAG_CACHED) ?
 		    vm_get_page_prot(vma->vm_flags) :
 		    ttm_io_prot(bo->mem.placement, vma->vm_page_prot);
+=======
+	 * Make a local vma copy to modify the page_prot member
+	 * and vm_flags if necessary. The vma parameter is protected
+	 * by mmap_sem in write mode.
+	 */
+	cvma = *vma;
+	cvma.vm_page_prot = vm_get_page_prot(cvma.vm_flags);
+
+	if (bo->mem.bus.is_iomem) {
+		cvma.vm_page_prot = ttm_io_prot(bo->mem.placement,
+						cvma.vm_page_prot);
+	} else {
+		ttm = bo->ttm;
+		cvma.vm_page_prot = ttm_io_prot(bo->mem.placement,
+						cvma.vm_page_prot);
+>>>>>>> v3.18
 
 		/* Allocate all page at once, most common usage */
 		if (ttm->bdev->driver->ttm_tt_populate(ttm)) {
@@ -199,10 +321,24 @@ static int ttm_bo_vm_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 			} else if (unlikely(!page)) {
 				break;
 			}
+<<<<<<< HEAD
 			pfn = page_to_pfn(page);
 		}
 
 		ret = vm_insert_mixed(vma, address, pfn);
+=======
+			page->mapping = vma->vm_file->f_mapping;
+			page->index = drm_vma_node_start(&bo->vma_node) +
+				page_offset;
+			pfn = page_to_pfn(page);
+		}
+
+		if (vma->vm_flags & VM_MIXEDMAP)
+			ret = vm_insert_mixed(&cvma, address, pfn);
+		else
+			ret = vm_insert_pfn(&cvma, address, pfn);
+
+>>>>>>> v3.18
 		/*
 		 * Somebody beat us to this PTE or prefaulting to
 		 * an already populated PTE, or prefaulting error.
@@ -232,6 +368,11 @@ static void ttm_bo_vm_open(struct vm_area_struct *vma)
 	struct ttm_buffer_object *bo =
 	    (struct ttm_buffer_object *)vma->vm_private_data;
 
+<<<<<<< HEAD
+=======
+	WARN_ON(bo->bdev->dev_mapping != vma->vm_file->f_mapping);
+
+>>>>>>> v3.18
 	(void)ttm_bo_reference(bo);
 }
 
@@ -249,6 +390,33 @@ static const struct vm_operations_struct ttm_bo_vm_ops = {
 	.close = ttm_bo_vm_close
 };
 
+<<<<<<< HEAD
+=======
+static struct ttm_buffer_object *ttm_bo_vm_lookup(struct ttm_bo_device *bdev,
+						  unsigned long offset,
+						  unsigned long pages)
+{
+	struct drm_vma_offset_node *node;
+	struct ttm_buffer_object *bo = NULL;
+
+	drm_vma_offset_lock_lookup(&bdev->vma_manager);
+
+	node = drm_vma_offset_lookup_locked(&bdev->vma_manager, offset, pages);
+	if (likely(node)) {
+		bo = container_of(node, struct ttm_buffer_object, vma_node);
+		if (!kref_get_unless_zero(&bo->kref))
+			bo = NULL;
+	}
+
+	drm_vma_offset_unlock_lookup(&bdev->vma_manager);
+
+	if (!bo)
+		pr_err("Could not find buffer object to map\n");
+
+	return bo;
+}
+
+>>>>>>> v3.18
 int ttm_bo_mmap(struct file *filp, struct vm_area_struct *vma,
 		struct ttm_bo_device *bdev)
 {
@@ -256,6 +424,7 @@ int ttm_bo_mmap(struct file *filp, struct vm_area_struct *vma,
 	struct ttm_buffer_object *bo;
 	int ret;
 
+<<<<<<< HEAD
 	read_lock(&bdev->vm_lock);
 	bo = ttm_bo_vm_lookup_rb(bdev, vma->vm_pgoff,
 				 vma_pages(vma));
@@ -267,6 +436,11 @@ int ttm_bo_mmap(struct file *filp, struct vm_area_struct *vma,
 		pr_err("Could not find buffer object to map\n");
 		return -EINVAL;
 	}
+=======
+	bo = ttm_bo_vm_lookup(bdev, vma->vm_pgoff, vma_pages(vma));
+	if (unlikely(!bo))
+		return -EINVAL;
+>>>>>>> v3.18
 
 	driver = bo->bdev->driver;
 	if (unlikely(!driver->verify_access)) {
@@ -285,7 +459,20 @@ int ttm_bo_mmap(struct file *filp, struct vm_area_struct *vma,
 	 */
 
 	vma->vm_private_data = bo;
+<<<<<<< HEAD
 	vma->vm_flags |= VM_IO | VM_MIXEDMAP | VM_DONTEXPAND | VM_DONTDUMP;
+=======
+
+	/*
+	 * We'd like to use VM_PFNMAP on shared mappings, where
+	 * (vma->vm_flags & VM_SHARED) != 0, for performance reasons,
+	 * but for some reason VM_PFNMAP + x86 PAT + write-combine is very
+	 * bad for performance. Until that has been sorted out, use
+	 * VM_MIXEDMAP on all mappings. See freedesktop.org bug #75719
+	 */
+	vma->vm_flags |= VM_MIXEDMAP;
+	vma->vm_flags |= VM_IO | VM_DONTEXPAND | VM_DONTDUMP;
+>>>>>>> v3.18
 	return 0;
 out_unref:
 	ttm_bo_unref(&bo);
@@ -300,6 +487,7 @@ int ttm_fbdev_mmap(struct vm_area_struct *vma, struct ttm_buffer_object *bo)
 
 	vma->vm_ops = &ttm_bo_vm_ops;
 	vma->vm_private_data = ttm_bo_reference(bo);
+<<<<<<< HEAD
 	vma->vm_flags |= VM_IO | VM_MIXEDMAP | VM_DONTEXPAND;
 	return 0;
 }
@@ -463,3 +651,10 @@ ssize_t ttm_bo_fbdev_io(struct ttm_buffer_object *bo, const char __user *wbuf,
 
 	return io_size;
 }
+=======
+	vma->vm_flags |= VM_MIXEDMAP;
+	vma->vm_flags |= VM_IO | VM_DONTEXPAND;
+	return 0;
+}
+EXPORT_SYMBOL(ttm_fbdev_mmap);
+>>>>>>> v3.18

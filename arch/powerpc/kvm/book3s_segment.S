@@ -90,6 +90,18 @@ kvmppc_handler_trampoline_enter:
 	LOAD_GUEST_SEGMENTS
 
 #ifdef CONFIG_PPC_BOOK3S_64
+<<<<<<< HEAD
+=======
+BEGIN_FTR_SECTION
+	/* Save host FSCR */
+	mfspr	r8, SPRN_FSCR
+	std	r8, HSTATE_HOST_FSCR(r13)
+	/* Set FSCR during guest execution */
+	ld	r9, SVCPU_SHADOW_FSCR(r13)
+	mtspr	SPRN_FSCR, r9
+END_FTR_SECTION_IFSET(CPU_FTR_ARCH_207S)
+
+>>>>>>> v3.18
 	/* Some guests may need to have dcbz set to 32 byte length.
 	 *
 	 * Usually we ensure that by patching the guest's instructions
@@ -161,8 +173,13 @@ kvmppc_handler_trampoline_enter_end:
 .global kvmppc_handler_trampoline_exit
 kvmppc_handler_trampoline_exit:
 
+<<<<<<< HEAD
 .global kvmppc_interrupt
 kvmppc_interrupt:
+=======
+.global kvmppc_interrupt_pr
+kvmppc_interrupt_pr:
+>>>>>>> v3.18
 
 	/* Register usage at this point:
 	 *
@@ -255,6 +272,13 @@ BEGIN_FTR_SECTION
 	cmpwi	r12, BOOK3S_INTERRUPT_H_EMUL_ASSIST
 	beq-	ld_last_inst
 END_FTR_SECTION_IFSET(CPU_FTR_HVMODE)
+<<<<<<< HEAD
+=======
+BEGIN_FTR_SECTION
+	cmpwi	r12, BOOK3S_INTERRUPT_FAC_UNAVAIL
+	beq-	ld_last_inst
+END_FTR_SECTION_IFSET(CPU_FTR_ARCH_207S)
+>>>>>>> v3.18
 #endif
 
 	b	no_ld_last_inst
@@ -311,6 +335,21 @@ no_ld_last_inst:
 
 no_dcbz32_off:
 
+<<<<<<< HEAD
+=======
+BEGIN_FTR_SECTION
+	/* Save guest FSCR on a FAC_UNAVAIL interrupt */
+	cmpwi	r12, BOOK3S_INTERRUPT_FAC_UNAVAIL
+	bne+	no_fscr_save
+	mfspr	r7, SPRN_FSCR
+	std	r7, SVCPU_SHADOW_FSCR(r13)
+no_fscr_save:
+	/* Restore host FSCR */
+	ld	r8, HSTATE_HOST_FSCR(r13)
+	mtspr	SPRN_FSCR, r8
+END_FTR_SECTION_IFSET(CPU_FTR_ARCH_207S)
+
+>>>>>>> v3.18
 #endif /* CONFIG_PPC_BOOK3S_64 */
 
 	/*
@@ -361,6 +400,11 @@ END_FTR_SECTION_IFSET(CPU_FTR_HVMODE)
 	beqa	BOOK3S_INTERRUPT_DECREMENTER
 	cmpwi	r12, BOOK3S_INTERRUPT_PERFMON
 	beqa	BOOK3S_INTERRUPT_PERFMON
+<<<<<<< HEAD
+=======
+	cmpwi	r12, BOOK3S_INTERRUPT_DOORBELL
+	beqa	BOOK3S_INTERRUPT_DOORBELL
+>>>>>>> v3.18
 
 	RFI
 kvmppc_handler_trampoline_exit_end:

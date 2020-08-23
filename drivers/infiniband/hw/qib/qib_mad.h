@@ -54,7 +54,11 @@ struct ib_node_info {
 	__be32 revision;
 	u8 local_port_num;
 	u8 vendor_id[3];
+<<<<<<< HEAD
 } __attribute__ ((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 
 struct ib_mad_notice_attr {
 	u8 generic_type;
@@ -73,7 +77,11 @@ struct ib_mad_notice_attr {
 			__be16	reserved;
 			__be16	lid;		/* where violation happened */
 			u8	port_num;	/* where violation happened */
+<<<<<<< HEAD
 		} __attribute__ ((packed)) ntc_129_131;
+=======
+		} __packed ntc_129_131;
+>>>>>>> v3.18
 
 		struct {
 			__be16	reserved;
@@ -83,14 +91,22 @@ struct ib_mad_notice_attr {
 			__be32	new_cap_mask;	/* new capability mask */
 			u8	reserved3;
 			u8	change_flags;	/* low 3 bits only */
+<<<<<<< HEAD
 		} __attribute__ ((packed)) ntc_144;
+=======
+		} __packed ntc_144;
+>>>>>>> v3.18
 
 		struct {
 			__be16	reserved;
 			__be16	lid;		/* lid where sys guid changed */
 			__be16	reserved2;
 			__be64	new_sys_guid;
+<<<<<<< HEAD
 		} __attribute__ ((packed)) ntc_145;
+=======
+		} __packed ntc_145;
+>>>>>>> v3.18
 
 		struct {
 			__be16	reserved;
@@ -104,7 +120,11 @@ struct ib_mad_notice_attr {
 			u8	reserved3;
 			u8	dr_trunc_hop;
 			u8	dr_rtn_path[30];
+<<<<<<< HEAD
 		} __attribute__ ((packed)) ntc_256;
+=======
+		} __packed ntc_256;
+>>>>>>> v3.18
 
 		struct {
 			__be16		reserved;
@@ -115,7 +135,11 @@ struct ib_mad_notice_attr {
 			__be32		qp2;	/* high 8 bits reserved */
 			union ib_gid	gid1;
 			union ib_gid	gid2;
+<<<<<<< HEAD
 		} __attribute__ ((packed)) ntc_257_258;
+=======
+		} __packed ntc_257_258;
+>>>>>>> v3.18
 
 	} details;
 };
@@ -209,7 +233,11 @@ struct ib_pma_portcounters_cong {
 	__be64 port_rcv_packets;
 	__be64 port_xmit_wait;
 	__be64 port_adr_events;
+<<<<<<< HEAD
 } __attribute__ ((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 
 #define IB_PMA_CONG_HW_CONTROL_TIMER            0x00
 #define IB_PMA_CONG_HW_CONTROL_SAMPLE           0x01
@@ -415,7 +443,10 @@ struct cc_table_shadow {
 	struct ib_cc_table_entry_shadow entries[CC_TABLE_SHADOW_MAX];
 } __packed;
 
+<<<<<<< HEAD
 #endif				/* _QIB_MAD_H */
+=======
+>>>>>>> v3.18
 /*
  * The PortSamplesControl.CounterMasks field is an array of 3 bit fields
  * which specify the N'th counter's capabilities. See ch. 16.1.3.2.
@@ -428,3 +459,8 @@ struct cc_table_shadow {
 		    COUNTER_MASK(1, 2) | \
 		    COUNTER_MASK(1, 3) | \
 		    COUNTER_MASK(1, 4))
+<<<<<<< HEAD
+=======
+
+#endif				/* _QIB_MAD_H */
+>>>>>>> v3.18

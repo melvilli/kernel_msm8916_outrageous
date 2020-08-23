@@ -26,14 +26,22 @@
 struct vexpress_regulator {
 	struct regulator_desc desc;
 	struct regulator_dev *regdev;
+<<<<<<< HEAD
 	struct vexpress_config_func *func;
+=======
+	struct regmap *regmap;
+>>>>>>> v3.18
 };
 
 static int vexpress_regulator_get_voltage(struct regulator_dev *regdev)
 {
 	struct vexpress_regulator *reg = rdev_get_drvdata(regdev);
 	u32 uV;
+<<<<<<< HEAD
 	int err = vexpress_config_read(reg->func, 0, &uV);
+=======
+	int err = regmap_read(reg->regmap, 0, &uV);
+>>>>>>> v3.18
 
 	return err ? err : uV;
 }
@@ -43,7 +51,11 @@ static int vexpress_regulator_set_voltage(struct regulator_dev *regdev,
 {
 	struct vexpress_regulator *reg = rdev_get_drvdata(regdev);
 
+<<<<<<< HEAD
 	return vexpress_config_write(reg->func, 0, min_uV);
+=======
+	return regmap_write(reg->regmap, 0, min_uV);
+>>>>>>> v3.18
 }
 
 static struct regulator_ops vexpress_regulator_ops_ro = {
@@ -57,12 +69,16 @@ static struct regulator_ops vexpress_regulator_ops = {
 
 static int vexpress_regulator_probe(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	int err;
+=======
+>>>>>>> v3.18
 	struct vexpress_regulator *reg;
 	struct regulator_init_data *init_data;
 	struct regulator_config config = { };
 
 	reg = devm_kzalloc(&pdev->dev, sizeof(*reg), GFP_KERNEL);
+<<<<<<< HEAD
 	if (!reg) {
 		err = -ENOMEM;
 		goto error_kzalloc;
@@ -73,6 +89,14 @@ static int vexpress_regulator_probe(struct platform_device *pdev)
 		err = -ENXIO;
 		goto error_get_func;
 	}
+=======
+	if (!reg)
+		return -ENOMEM;
+
+	reg->regmap = devm_regmap_init_vexpress_config(&pdev->dev);
+	if (IS_ERR(reg->regmap))
+		return PTR_ERR(reg->regmap);
+>>>>>>> v3.18
 
 	reg->desc.name = dev_name(&pdev->dev);
 	reg->desc.type = REGULATOR_VOLTAGE;
@@ -80,10 +104,15 @@ static int vexpress_regulator_probe(struct platform_device *pdev)
 	reg->desc.continuous_voltage_range = true;
 
 	init_data = of_get_regulator_init_data(&pdev->dev, pdev->dev.of_node);
+<<<<<<< HEAD
 	if (!init_data) {
 		err = -EINVAL;
 		goto error_get_regulator_init_data;
 	}
+=======
+	if (!init_data)
+		return -EINVAL;
+>>>>>>> v3.18
 
 	init_data->constraints.apply_uV = 0;
 	if (init_data->constraints.min_uV && init_data->constraints.max_uV)
@@ -96,15 +125,22 @@ static int vexpress_regulator_probe(struct platform_device *pdev)
 	config.driver_data = reg;
 	config.of_node = pdev->dev.of_node;
 
+<<<<<<< HEAD
 	reg->regdev = regulator_register(&reg->desc, &config);
 	if (IS_ERR(reg->regdev)) {
 		err = PTR_ERR(reg->regdev);
 		goto error_regulator_register;
 	}
+=======
+	reg->regdev = devm_regulator_register(&pdev->dev, &reg->desc, &config);
+	if (IS_ERR(reg->regdev))
+		return PTR_ERR(reg->regdev);
+>>>>>>> v3.18
 
 	platform_set_drvdata(pdev, reg);
 
 	return 0;
+<<<<<<< HEAD
 
 error_regulator_register:
 error_get_regulator_init_data:
@@ -125,13 +161,21 @@ static int vexpress_regulator_remove(struct platform_device *pdev)
 }
 
 static struct of_device_id vexpress_regulator_of_match[] = {
+=======
+}
+
+static const struct of_device_id vexpress_regulator_of_match[] = {
+>>>>>>> v3.18
 	{ .compatible = "arm,vexpress-volt", },
 	{ }
 };
 
 static struct platform_driver vexpress_regulator_driver = {
 	.probe = vexpress_regulator_probe,
+<<<<<<< HEAD
 	.remove = vexpress_regulator_remove,
+=======
+>>>>>>> v3.18
 	.driver	= {
 		.name = DRVNAME,
 		.owner = THIS_MODULE,

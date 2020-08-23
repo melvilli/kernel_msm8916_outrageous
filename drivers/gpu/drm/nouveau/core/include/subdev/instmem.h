@@ -23,6 +23,7 @@ nv_memobj(void *obj)
 	return obj;
 }
 
+<<<<<<< HEAD
 #define nouveau_instobj_create(p,e,o,d)                                        \
 	nouveau_instobj_create_((p), (e), (o), sizeof(**d), (void **)d)
 #define nouveau_instobj_init(p)                                                \
@@ -38,6 +39,8 @@ void _nouveau_instobj_dtor(struct nouveau_object *);
 #define _nouveau_instobj_init nouveau_object_init
 #define _nouveau_instobj_fini nouveau_object_fini
 
+=======
+>>>>>>> v3.18
 struct nouveau_instmem {
 	struct nouveau_subdev base;
 	struct list_head list;
@@ -50,6 +53,7 @@ struct nouveau_instmem {
 static inline struct nouveau_instmem *
 nouveau_instmem(void *obj)
 {
+<<<<<<< HEAD
 	return (void *)nv_device(obj)->subdev[NVDEV_SUBDEV_INSTMEM];
 }
 
@@ -69,5 +73,20 @@ int _nouveau_instmem_fini(struct nouveau_object *, bool);
 extern struct nouveau_oclass nv04_instmem_oclass;
 extern struct nouveau_oclass nv40_instmem_oclass;
 extern struct nouveau_oclass nv50_instmem_oclass;
+=======
+	/* nv04/nv40 impls need to create objects in their constructor,
+	 * which is before the subdev pointer is valid
+	 */
+	if (nv_iclass(obj, NV_SUBDEV_CLASS) &&
+	    nv_subidx(obj) == NVDEV_SUBDEV_INSTMEM)
+		return obj;
+
+	return (void *)nv_device(obj)->subdev[NVDEV_SUBDEV_INSTMEM];
+}
+
+extern struct nouveau_oclass *nv04_instmem_oclass;
+extern struct nouveau_oclass *nv40_instmem_oclass;
+extern struct nouveau_oclass *nv50_instmem_oclass;
+>>>>>>> v3.18
 
 #endif

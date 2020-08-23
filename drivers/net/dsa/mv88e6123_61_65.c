@@ -17,10 +17,21 @@
 #include <net/dsa.h>
 #include "mv88e6xxx.h"
 
+<<<<<<< HEAD
 static char *mv88e6123_61_65_probe(struct mii_bus *bus, int sw_addr)
 {
 	int ret;
 
+=======
+static char *mv88e6123_61_65_probe(struct device *host_dev, int sw_addr)
+{
+	struct mii_bus *bus = dsa_host_dev_to_mii_bus(host_dev);
+	int ret;
+
+	if (bus == NULL)
+		return NULL;
+
+>>>>>>> v3.18
 	ret = __mv88e6xxx_reg_read(bus, sw_addr, REG_PORT(0), 0x03);
 	if (ret >= 0) {
 		if (ret == 0x1212)
@@ -207,7 +218,11 @@ static int mv88e6123_61_65_setup_port(struct dsa_switch *ds, int p)
 	 */
 	val = 0x0433;
 	if (dsa_is_cpu_port(ds, p)) {
+<<<<<<< HEAD
 		if (ds->dst->tag_protocol == htons(ETH_P_EDSA))
+=======
+		if (ds->dst->tag_protocol == DSA_TAG_PROTO_EDSA)
+>>>>>>> v3.18
 			val |= 0x3300;
 		else
 			val |= 0x0100;
@@ -289,7 +304,11 @@ static int mv88e6123_61_65_setup_port(struct dsa_switch *ds, int p)
 
 static int mv88e6123_61_65_setup(struct dsa_switch *ds)
 {
+<<<<<<< HEAD
 	struct mv88e6xxx_priv_state *ps = (void *)(ds + 1);
+=======
+	struct mv88e6xxx_priv_state *ps = ds_to_priv(ds);
+>>>>>>> v3.18
 	int i;
 	int ret;
 
@@ -391,7 +410,11 @@ static int mv88e6123_61_65_get_sset_count(struct dsa_switch *ds)
 }
 
 struct dsa_switch_driver mv88e6123_61_65_switch_driver = {
+<<<<<<< HEAD
 	.tag_protocol		= cpu_to_be16(ETH_P_EDSA),
+=======
+	.tag_protocol		= DSA_TAG_PROTO_EDSA,
+>>>>>>> v3.18
 	.priv_size		= sizeof(struct mv88e6xxx_priv_state),
 	.probe			= mv88e6123_61_65_probe,
 	.setup			= mv88e6123_61_65_setup,

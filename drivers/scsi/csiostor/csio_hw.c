@@ -852,6 +852,7 @@ csio_hw_get_flash_params(struct csio_hw *hw)
 	return 0;
 }
 
+<<<<<<< HEAD
 static void
 csio_set_pcie_completion_timeout(struct csio_hw *hw, u8 range)
 {
@@ -868,6 +869,8 @@ csio_set_pcie_completion_timeout(struct csio_hw *hw, u8 range)
 	}
 }
 
+=======
+>>>>>>> v3.18
 /*****************************************************************************/
 /* HW State machine assists                                                  */
 /*****************************************************************************/
@@ -1597,6 +1600,7 @@ out:
 	return rv;
 }
 
+<<<<<<< HEAD
 static int
 csio_config_global_rss(struct csio_hw *hw)
 {
@@ -1678,6 +1682,8 @@ csio_config_pfvf(struct csio_hw *hw)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 /*
  * csio_enable_ports - Bring up all available ports.
  * @hw: HW module.
@@ -2056,6 +2062,7 @@ csio_hw_no_fwconfig(struct csio_hw *hw, int reset)
 	if (rv != 0)
 		goto out;
 
+<<<<<<< HEAD
 	/* Config Global RSS command */
 	rv = csio_config_global_rss(hw);
 	if (rv != 0)
@@ -2066,6 +2073,8 @@ csio_hw_no_fwconfig(struct csio_hw *hw, int reset)
 	if (rv != 0)
 		goto out;
 
+=======
+>>>>>>> v3.18
 	/* device parameters */
 	rv = csio_get_device_params(hw);
 	if (rv != 0)
@@ -2160,8 +2169,15 @@ csio_hw_configure(struct csio_hw *hw)
 		goto out;
 	}
 
+<<<<<<< HEAD
 	/* Set pci completion timeout value to 4 seconds. */
 	csio_set_pcie_completion_timeout(hw, 0xd);
+=======
+	/* Set PCIe completion timeout to 4 seconds */
+	if (pci_is_pcie(hw->pdev))
+		pcie_capability_clear_and_set_word(hw->pdev, PCI_EXP_DEVCTL2,
+				PCI_EXP_DEVCTL2_COMP_TIMEOUT, 0xd);
+>>>>>>> v3.18
 
 	hw->chip_ops->chip_set_mem_win(hw, MEMWIN_CSIOSTOR);
 

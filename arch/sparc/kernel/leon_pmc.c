@@ -12,14 +12,22 @@
 #include <asm/processor.h>
 
 /* List of Systems that need fixup instructions around power-down instruction */
+<<<<<<< HEAD
 unsigned int pmc_leon_fixup_ids[] = {
+=======
+static unsigned int pmc_leon_fixup_ids[] = {
+>>>>>>> v3.18
 	AEROFLEX_UT699,
 	GAISLER_GR712RC,
 	LEON4_NEXTREME1,
 	0
 };
 
+<<<<<<< HEAD
 int pmc_leon_need_fixup(void)
+=======
+static int pmc_leon_need_fixup(void)
+>>>>>>> v3.18
 {
 	unsigned int systemid = amba_system_id >> 16;
 	unsigned int *id;
@@ -38,7 +46,11 @@ int pmc_leon_need_fixup(void)
  * CPU idle callback function for systems that need some extra handling
  * See .../arch/sparc/kernel/process.c
  */
+<<<<<<< HEAD
 void pmc_leon_idle_fixup(void)
+=======
+static void pmc_leon_idle_fixup(void)
+>>>>>>> v3.18
 {
 	/* Prepare an address to a non-cachable region. APB is always
 	 * none-cachable. One instruction is executed after the Sleep
@@ -62,7 +74,11 @@ void pmc_leon_idle_fixup(void)
  * CPU idle callback function
  * See .../arch/sparc/kernel/process.c
  */
+<<<<<<< HEAD
 void pmc_leon_idle(void)
+=======
+static void pmc_leon_idle(void)
+>>>>>>> v3.18
 {
 	/* Interrupts need to be enabled to not hang the CPU */
 	local_irq_enable();

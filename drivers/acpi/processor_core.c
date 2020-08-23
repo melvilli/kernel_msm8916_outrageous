@@ -4,6 +4,7 @@
  *
  *	Alex Chiang <achiang@hp.com>
  *	- Unified x86/ia64 implementations
+<<<<<<< HEAD
  *	Venkatesh Pallipadi <venkatesh.pallipadi@intel.com>
  *	- Added _PDC for platforms with Intel CPUs
  */
@@ -38,10 +39,21 @@ static struct dmi_system_id __initdata processor_idle_dmi_table[] = {
 	{},
 };
 
+=======
+ */
+#include <linux/export.h>
+#include <linux/acpi.h>
+#include <acpi/processor.h>
+
+#define _COMPONENT		ACPI_PROCESSOR_COMPONENT
+ACPI_MODULE_NAME("processor_core");
+
+>>>>>>> v3.18
 static int map_lapic_id(struct acpi_subtable_header *entry,
 		 u32 acpi_id, int *apic_id)
 {
 	struct acpi_madt_local_apic *lapic =
+<<<<<<< HEAD
 		(struct acpi_madt_local_apic *)entry;
 
 	if (!(lapic->lapic_flags & ACPI_MADT_ENABLED))
@@ -52,12 +64,25 @@ static int map_lapic_id(struct acpi_subtable_header *entry,
 
 	*apic_id = lapic->id;
 	return 1;
+=======
+		container_of(entry, struct acpi_madt_local_apic, header);
+
+	if (!(lapic->lapic_flags & ACPI_MADT_ENABLED))
+		return -ENODEV;
+
+	if (lapic->processor_id != acpi_id)
+		return -EINVAL;
+
+	*apic_id = lapic->id;
+	return 0;
+>>>>>>> v3.18
 }
 
 static int map_x2apic_id(struct acpi_subtable_header *entry,
 			 int device_declaration, u32 acpi_id, int *apic_id)
 {
 	struct acpi_madt_local_x2apic *apic =
+<<<<<<< HEAD
 		(struct acpi_madt_local_x2apic *)entry;
 
 	if (!(apic->lapic_flags & ACPI_MADT_ENABLED))
@@ -69,12 +94,26 @@ static int map_x2apic_id(struct acpi_subtable_header *entry,
 	}
 
 	return 0;
+=======
+		container_of(entry, struct acpi_madt_local_x2apic, header);
+
+	if (!(apic->lapic_flags & ACPI_MADT_ENABLED))
+		return -ENODEV;
+
+	if (device_declaration && (apic->uid == acpi_id)) {
+		*apic_id = apic->local_apic_id;
+		return 0;
+	}
+
+	return -EINVAL;
+>>>>>>> v3.18
 }
 
 static int map_lsapic_id(struct acpi_subtable_header *entry,
 		int device_declaration, u32 acpi_id, int *apic_id)
 {
 	struct acpi_madt_local_sapic *lsapic =
+<<<<<<< HEAD
 		(struct acpi_madt_local_sapic *)entry;
 
 	if (!(lsapic->lapic_flags & ACPI_MADT_ENABLED))
@@ -88,6 +127,21 @@ static int map_lsapic_id(struct acpi_subtable_header *entry,
 
 	*apic_id = (lsapic->id << 8) | lsapic->eid;
 	return 1;
+=======
+		container_of(entry, struct acpi_madt_local_sapic, header);
+
+	if (!(lsapic->lapic_flags & ACPI_MADT_ENABLED))
+		return -ENODEV;
+
+	if (device_declaration) {
+		if ((entry->length < 16) || (lsapic->uid != acpi_id))
+			return -EINVAL;
+	} else if (lsapic->processor_id != acpi_id)
+		return -EINVAL;
+
+	*apic_id = (lsapic->id << 8) | lsapic->eid;
+	return 0;
+>>>>>>> v3.18
 }
 
 static int map_madt_entry(int type, u32 acpi_id)
@@ -117,6 +171,7 @@ static int map_madt_entry(int type, u32 acpi_id)
 		struct acpi_subtable_header *header =
 			(struct acpi_subtable_header *)entry;
 		if (header->type == ACPI_MADT_TYPE_LOCAL_APIC) {
+<<<<<<< HEAD
 			if (map_lapic_id(header, acpi_id, &apic_id))
 				break;
 		} else if (header->type == ACPI_MADT_TYPE_LOCAL_X2APIC) {
@@ -124,6 +179,15 @@ static int map_madt_entry(int type, u32 acpi_id)
 				break;
 		} else if (header->type == ACPI_MADT_TYPE_LOCAL_SAPIC) {
 			if (map_lsapic_id(header, type, acpi_id, &apic_id))
+=======
+			if (!map_lapic_id(header, acpi_id, &apic_id))
+				break;
+		} else if (header->type == ACPI_MADT_TYPE_LOCAL_X2APIC) {
+			if (!map_x2apic_id(header, type, acpi_id, &apic_id))
+				break;
+		} else if (header->type == ACPI_MADT_TYPE_LOCAL_SAPIC) {
+			if (!map_lsapic_id(header, type, acpi_id, &apic_id))
+>>>>>>> v3.18
 				break;
 		}
 		entry += header->length;
@@ -155,6 +219,11 @@ static int map_mat_entry(acpi_handle handle, int type, u32 acpi_id)
 		map_lapic_id(header, acpi_id, &apic_id);
 	} else if (header->type == ACPI_MADT_TYPE_LOCAL_SAPIC) {
 		map_lsapic_id(header, type, acpi_id, &apic_id);
+<<<<<<< HEAD
+=======
+	} else if (header->type == ACPI_MADT_TYPE_LOCAL_X2APIC) {
+		map_x2apic_id(header, type, acpi_id, &apic_id);
+>>>>>>> v3.18
 	}
 
 exit:
@@ -162,16 +231,35 @@ exit:
 	return apic_id;
 }
 
+<<<<<<< HEAD
 int acpi_get_cpuid(acpi_handle handle, int type, u32 acpi_id)
 {
 #ifdef CONFIG_SMP
 	int i;
 #endif
 	int apic_id = -1;
+=======
+int acpi_get_apicid(acpi_handle handle, int type, u32 acpi_id)
+{
+	int apic_id;
+>>>>>>> v3.18
 
 	apic_id = map_mat_entry(handle, type, acpi_id);
 	if (apic_id == -1)
 		apic_id = map_madt_entry(type, acpi_id);
+<<<<<<< HEAD
+=======
+
+	return apic_id;
+}
+
+int acpi_map_cpuid(int apic_id, u32 acpi_id)
+{
+#ifdef CONFIG_SMP
+	int i;
+#endif
+
+>>>>>>> v3.18
 	if (apic_id == -1) {
 		/*
 		 * On UP processor, there is no _MAT or MADT table.
@@ -211,6 +299,7 @@ int acpi_get_cpuid(acpi_handle handle, int type, u32 acpi_id)
 #endif
 	return -1;
 }
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(acpi_get_cpuid);
 
 static bool __init processor_physically_present(acpi_handle handle)
@@ -377,3 +466,15 @@ void __init acpi_early_processor_set_pdc(void)
 			    early_init_pdc, NULL, NULL, NULL);
 	acpi_get_devices("ACPI0007", early_init_pdc, NULL, NULL);
 }
+=======
+
+int acpi_get_cpuid(acpi_handle handle, int type, u32 acpi_id)
+{
+	int apic_id;
+
+	apic_id = acpi_get_apicid(handle, type, acpi_id);
+
+	return acpi_map_cpuid(apic_id, acpi_id);
+}
+EXPORT_SYMBOL_GPL(acpi_get_cpuid);
+>>>>>>> v3.18

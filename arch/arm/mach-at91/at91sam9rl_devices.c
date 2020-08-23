@@ -21,10 +21,20 @@
 #include <mach/at91sam9rl_matrix.h>
 #include <mach/at91_matrix.h>
 #include <mach/at91sam9_smc.h>
+<<<<<<< HEAD
 #include <linux/platform_data/dma-atmel.h>
 
 #include "board.h"
 #include "generic.h"
+=======
+#include <mach/hardware.h>
+#include <linux/platform_data/dma-atmel.h>
+#include <linux/platform_data/at91_adc.h>
+
+#include "board.h"
+#include "generic.h"
+#include "gpio.h"
+>>>>>>> v3.18
 
 
 /* --------------------------------------------------------------------
@@ -498,7 +508,11 @@ void __init at91_add_device_ac97(struct ac97c_platform_data *data) {}
 
 #if defined(CONFIG_FB_ATMEL) || defined(CONFIG_FB_ATMEL_MODULE)
 static u64 lcdc_dmamask = DMA_BIT_MASK(32);
+<<<<<<< HEAD
 static struct atmel_lcdfb_info lcdc_data;
+=======
+static struct atmel_lcdfb_pdata lcdc_data;
+>>>>>>> v3.18
 
 static struct resource lcdc_resources[] = {
 	[0] = {
@@ -525,7 +539,11 @@ static struct platform_device at91_lcdc_device = {
 	.num_resources	= ARRAY_SIZE(lcdc_resources),
 };
 
+<<<<<<< HEAD
 void __init at91_add_device_lcdc(struct atmel_lcdfb_info *data)
+=======
+void __init at91_add_device_lcdc(struct atmel_lcdfb_pdata *data)
+>>>>>>> v3.18
 {
 	if (!data) {
 		return;
@@ -557,7 +575,11 @@ void __init at91_add_device_lcdc(struct atmel_lcdfb_info *data)
 	platform_device_register(&at91_lcdc_device);
 }
 #else
+<<<<<<< HEAD
 void __init at91_add_device_lcdc(struct atmel_lcdfb_info *data) {}
+=======
+void __init at91_add_device_lcdc(struct atmel_lcdfb_pdata *data) {}
+>>>>>>> v3.18
 #endif
 
 
@@ -607,6 +629,7 @@ static void __init at91_add_device_tc(void) { }
 
 
 /* --------------------------------------------------------------------
+<<<<<<< HEAD
  *  Touchscreen
  * -------------------------------------------------------------------- */
 
@@ -615,6 +638,15 @@ static u64 tsadcc_dmamask = DMA_BIT_MASK(32);
 static struct at91_tsadcc_data tsadcc_data;
 
 static struct resource tsadcc_resources[] = {
+=======
+ *  ADC and Touchscreen
+ * -------------------------------------------------------------------- */
+
+#if IS_ENABLED(CONFIG_AT91_ADC)
+static struct at91_adc_data adc_data;
+
+static struct resource adc_resources[] = {
+>>>>>>> v3.18
 	[0] = {
 		.start	= AT91SAM9RL_BASE_TSC,
 		.end	= AT91SAM9RL_BASE_TSC + SZ_16K - 1,
@@ -627,6 +659,7 @@ static struct resource tsadcc_resources[] = {
 	}
 };
 
+<<<<<<< HEAD
 static struct platform_device at91sam9rl_tsadcc_device = {
 	.name		= "atmel_tsadcc",
 	.id		= -1,
@@ -640,10 +673,47 @@ static struct platform_device at91sam9rl_tsadcc_device = {
 };
 
 void __init at91_add_device_tsadcc(struct at91_tsadcc_data *data)
+=======
+static struct platform_device at91_adc_device = {
+	.name           = "at91sam9rl-adc",
+	.id             = -1,
+	.dev            = {
+		.platform_data  = &adc_data,
+	},
+	.resource       = adc_resources,
+	.num_resources  = ARRAY_SIZE(adc_resources),
+};
+
+static struct at91_adc_trigger at91_adc_triggers[] = {
+	[0] = {
+		.name = "external-rising",
+		.value = 1,
+		.is_external = true,
+	},
+	[1] = {
+		.name = "external-falling",
+		.value = 2,
+		.is_external = true,
+	},
+	[2] = {
+		.name = "external-any",
+		.value = 3,
+		.is_external = true,
+	},
+	[3] = {
+		.name = "continuous",
+		.value = 6,
+		.is_external = false,
+	},
+};
+
+void __init at91_add_device_adc(struct at91_adc_data *data)
+>>>>>>> v3.18
 {
 	if (!data)
 		return;
 
+<<<<<<< HEAD
 	at91_set_A_periph(AT91_PIN_PA17, 0);	/* AD0_XR */
 	at91_set_A_periph(AT91_PIN_PA18, 0);	/* AD1_XL */
 	at91_set_A_periph(AT91_PIN_PA19, 0);	/* AD2_YT */
@@ -657,6 +727,35 @@ void __init at91_add_device_tsadcc(struct at91_tsadcc_data *data) {}
 #endif
 
 
+=======
+	if (test_bit(0, &data->channels_used))
+		at91_set_A_periph(AT91_PIN_PA17, 0);
+	if (test_bit(1, &data->channels_used))
+		at91_set_A_periph(AT91_PIN_PA18, 0);
+	if (test_bit(2, &data->channels_used))
+		at91_set_A_periph(AT91_PIN_PA19, 0);
+	if (test_bit(3, &data->channels_used))
+		at91_set_A_periph(AT91_PIN_PA20, 0);
+	if (test_bit(4, &data->channels_used))
+		at91_set_A_periph(AT91_PIN_PD6, 0);
+	if (test_bit(5, &data->channels_used))
+		at91_set_A_periph(AT91_PIN_PD7, 0);
+
+	if (data->use_external_triggers)
+		at91_set_A_periph(AT91_PIN_PB15, 0);
+
+	data->startup_time = 40;
+	data->trigger_number = 4;
+	data->trigger_list = at91_adc_triggers;
+
+	adc_data = *data;
+	platform_device_register(&at91_adc_device);
+}
+#else
+void __init at91_add_device_adc(struct at91_adc_data *data) {}
+#endif
+
+>>>>>>> v3.18
 /* --------------------------------------------------------------------
  *  RTC
  * -------------------------------------------------------------------- */
@@ -762,9 +861,13 @@ static void __init at91_add_device_watchdog(void) {}
  *  PWM
  * --------------------------------------------------------------------*/
 
+<<<<<<< HEAD
 #if defined(CONFIG_ATMEL_PWM)
 static u32 pwm_mask;
 
+=======
+#if IS_ENABLED(CONFIG_PWM_ATMEL)
+>>>>>>> v3.18
 static struct resource pwm_resources[] = {
 	[0] = {
 		.start	= AT91SAM9RL_BASE_PWMC,
@@ -779,11 +882,16 @@ static struct resource pwm_resources[] = {
 };
 
 static struct platform_device at91sam9rl_pwm0_device = {
+<<<<<<< HEAD
 	.name	= "atmel_pwm",
 	.id	= -1,
 	.dev	= {
 		.platform_data		= &pwm_mask,
 	},
+=======
+	.name	= "at91sam9rl-pwm",
+	.id	= -1,
+>>>>>>> v3.18
 	.resource	= pwm_resources,
 	.num_resources	= ARRAY_SIZE(pwm_resources),
 };
@@ -802,8 +910,11 @@ void __init at91_add_device_pwm(u32 mask)
 	if (mask & (1 << AT91_PWM3))
 		at91_set_B_periph(AT91_PIN_PD8, 1);	/* enable PWM3 */
 
+<<<<<<< HEAD
 	pwm_mask = mask;
 
+=======
+>>>>>>> v3.18
 	platform_device_register(&at91sam9rl_pwm0_device);
 }
 #else

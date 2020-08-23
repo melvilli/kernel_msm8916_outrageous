@@ -34,10 +34,13 @@
  * 1+ (800) 334-5454
  */
 
+<<<<<<< HEAD
 /*
  * $Log: t128.h,v $
  */
 
+=======
+>>>>>>> v3.18
 #ifndef T128_H
 #define T128_H
 
@@ -107,8 +110,11 @@ static int t128_bus_reset(struct scsi_cmnd *);
 #define CAN_QUEUE 32
 #endif
 
+<<<<<<< HEAD
 #ifndef HOSTS_C
 
+=======
+>>>>>>> v3.18
 #define NCR5380_implementation_fields \
     void __iomem *base
 
@@ -148,6 +154,9 @@ static int t128_bus_reset(struct scsi_cmnd *);
 
 #define T128_IRQS 0xc4a8
 
+<<<<<<< HEAD
 #endif /* else def HOSTS_C */
+=======
+>>>>>>> v3.18
 #endif /* ndef ASM */
 #endif /* T128_H */

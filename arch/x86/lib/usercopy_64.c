@@ -68,7 +68,11 @@ EXPORT_SYMBOL(copy_in_user);
  * Since protection fault in copy_from/to_user is not a normal situation,
  * it is not necessary to optimize tail handling.
  */
+<<<<<<< HEAD
 unsigned long
+=======
+__visible unsigned long
+>>>>>>> v3.18
 copy_user_handle_tail(char *to, char *from, unsigned len, unsigned zerorest)
 {
 	char c;

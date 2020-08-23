@@ -15,6 +15,11 @@
 #ifndef _INCLUDE_PALMT5_H_
 #define _INCLUDE_PALMT5_H_
 
+<<<<<<< HEAD
+=======
+#include "irqs.h" /* PXA_GPIO_TO_IRQ */
+
+>>>>>>> v3.18
 /** HERE ARE GPIOs **/
 
 /* GPIOs */

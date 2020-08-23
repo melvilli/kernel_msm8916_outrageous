@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 /* arch/arm/mach-msm/include/mach/msm_fb.h
  *
+=======
+/*
+>>>>>>> v3.18
  * Internal shared definitions for various MSM framebuffer parts.
  *
  * Copyright (C) 2007 Google Incorporated
@@ -21,10 +25,13 @@
 
 struct mddi_info;
 
+<<<<<<< HEAD
 /* output interface format */
 #define MSM_MDP_OUT_IF_FMT_RGB565 0
 #define MSM_MDP_OUT_IF_FMT_RGB666 1
 
+=======
+>>>>>>> v3.18
 struct msm_fb_data {
 	int xres;	/* x resolution in pixels */
 	int yres;	/* y resolution in pixels */
@@ -38,12 +45,18 @@ struct msmfb_callback {
 };
 
 enum {
+<<<<<<< HEAD
 	MSM_MDDI_PMDH_INTERFACE = 0,
 	MSM_MDDI_EMDH_INTERFACE,
 	MSM_EBI2_INTERFACE,
 	MSM_LCDC_INTERFACE,
 
 	MSM_MDP_NUM_INTERFACES = MSM_LCDC_INTERFACE + 1,
+=======
+	MSM_MDDI_PMDH_INTERFACE,
+	MSM_MDDI_EMDH_INTERFACE,
+	MSM_EBI2_INTERFACE,
+>>>>>>> v3.18
 };
 
 #define MSMFB_CAP_PARTIAL_UPDATES	(1 << 0)
@@ -77,7 +90,11 @@ struct msm_mddi_client_data {
 			     uint32_t reg);
 	uint32_t (*remote_read)(struct msm_mddi_client_data *, uint32_t reg);
 	void (*auto_hibernate)(struct msm_mddi_client_data *, int);
+<<<<<<< HEAD
 	/* custom data that needs to be passed from the board file to a
+=======
+	/* custom data that needs to be passed from the board file to a 
+>>>>>>> v3.18
 	 * particular client */
 	void *private_client_data;
 	struct resource *fb_resource;
@@ -92,8 +109,11 @@ struct msm_mddi_platform_data {
 	/* fixup the mfr name, product id */
 	void (*fixup)(uint16_t *mfr_name, uint16_t *product_id);
 
+<<<<<<< HEAD
 	int vsync_irq;
 
+=======
+>>>>>>> v3.18
 	struct resource *fb_resource; /*optional*/
 	/* number of clients in the list that follows */
 	int num_clients;
@@ -119,6 +139,7 @@ struct msm_mddi_platform_data {
 	} client_platform_data[];
 };
 
+<<<<<<< HEAD
 struct msm_lcdc_timing {
 	unsigned int clk_rate;		/* dclk freq */
 	unsigned int hsync_pulse_width;	/* in dclks */
@@ -150,10 +171,13 @@ struct msm_lcdc_platform_data {
 	struct resource			*fb_resource;
 };
 
+=======
+>>>>>>> v3.18
 struct mdp_blit_req;
 struct fb_info;
 struct mdp_device {
 	struct device dev;
+<<<<<<< HEAD
 	void (*dma)(struct mdp_device *mdp, uint32_t addr,
 		    uint32_t stride, uint32_t w, uint32_t h, uint32_t x,
 		    uint32_t y, struct msmfb_callback *callback, int interface);
@@ -163,6 +187,15 @@ struct mdp_device {
 	void (*set_grp_disp)(struct mdp_device *mdp, uint32_t disp_id);
 	int (*check_output_format)(struct mdp_device *mdp, int bpp);
 	int (*set_output_format)(struct mdp_device *mdp, int bpp);
+=======
+	void (*dma)(struct mdp_device *mpd, uint32_t addr,
+		    uint32_t stride, uint32_t w, uint32_t h, uint32_t x,
+		    uint32_t y, struct msmfb_callback *callback, int interface);
+	void (*dma_wait)(struct mdp_device *mdp);
+	int (*blit)(struct mdp_device *mdp, struct fb_info *fb,
+		    struct mdp_blit_req *req);
+	void (*set_grp_disp)(struct mdp_device *mdp, uint32_t disp_id);
+>>>>>>> v3.18
 };
 
 struct class_interface;
@@ -182,6 +215,7 @@ struct msm_mddi_bridge_platform_data {
 	int (*unblank)(struct msm_mddi_bridge_platform_data *,
 		       struct msm_mddi_client_data *);
 	struct msm_fb_data fb_data;
+<<<<<<< HEAD
 
 	/* board file will identify what capabilities the panel supports */
 	uint32_t panel_caps;
@@ -194,5 +228,10 @@ int msm_fb_v4l2_update(void *par, bool bUserPtr,
 	unsigned long srcp0_addr, unsigned long srcp0_size,
 	unsigned long srcp1_addr, unsigned long srcp1_size,
 	unsigned long srcp2_addr, unsigned long srcp2_size);
+=======
+};
+
+
+>>>>>>> v3.18
 
 #endif

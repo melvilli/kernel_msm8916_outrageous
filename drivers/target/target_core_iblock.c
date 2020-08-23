@@ -4,7 +4,11 @@
  * This file contains the Storage Engine  <-> Linux BlockIO transport
  * specific functions.
  *
+<<<<<<< HEAD
  * (c) Copyright 2003-2012 RisingTide Systems LLC.
+=======
+ * (c) Copyright 2003-2013 Datera, Inc.
+>>>>>>> v3.18
  *
  * Nicholas A. Bellinger <nab@kernel.org>
  *
@@ -91,6 +95,10 @@ static int iblock_configure_device(struct se_device *dev)
 	struct iblock_dev *ib_dev = IBLOCK_DEV(dev);
 	struct request_queue *q;
 	struct block_device *bd = NULL;
+<<<<<<< HEAD
+=======
+	struct blk_integrity *bi;
+>>>>>>> v3.18
 	fmode_t mode;
 	int ret = -ENOMEM;
 
@@ -122,7 +130,11 @@ static int iblock_configure_device(struct se_device *dev)
 	q = bdev_get_queue(bd);
 
 	dev->dev_attrib.hw_block_size = bdev_logical_block_size(bd);
+<<<<<<< HEAD
 	dev->dev_attrib.hw_max_sectors = queue_max_hw_sectors(q);
+=======
+	dev->dev_attrib.hw_max_sectors = UINT_MAX;
+>>>>>>> v3.18
 	dev->dev_attrib.hw_queue_depth = q->nr_requests;
 
 	/*
@@ -155,8 +167,45 @@ static int iblock_configure_device(struct se_device *dev)
 	if (blk_queue_nonrot(q))
 		dev->dev_attrib.is_nonrot = 1;
 
+<<<<<<< HEAD
 	return 0;
 
+=======
+	bi = bdev_get_integrity(bd);
+	if (bi) {
+		struct bio_set *bs = ib_dev->ibd_bio_set;
+
+		if (!strcmp(bi->name, "T10-DIF-TYPE3-IP") ||
+		    !strcmp(bi->name, "T10-DIF-TYPE1-IP")) {
+			pr_err("IBLOCK export of blk_integrity: %s not"
+			       " supported\n", bi->name);
+			ret = -ENOSYS;
+			goto out_blkdev_put;
+		}
+
+		if (!strcmp(bi->name, "T10-DIF-TYPE3-CRC")) {
+			dev->dev_attrib.pi_prot_type = TARGET_DIF_TYPE3_PROT;
+		} else if (!strcmp(bi->name, "T10-DIF-TYPE1-CRC")) {
+			dev->dev_attrib.pi_prot_type = TARGET_DIF_TYPE1_PROT;
+		}
+
+		if (dev->dev_attrib.pi_prot_type) {
+			if (bioset_integrity_create(bs, IBLOCK_BIO_POOL_SIZE) < 0) {
+				pr_err("Unable to allocate bioset for PI\n");
+				ret = -ENOMEM;
+				goto out_blkdev_put;
+			}
+			pr_debug("IBLOCK setup BIP bs->bio_integrity_pool: %p\n",
+				 bs->bio_integrity_pool);
+		}
+		dev->dev_attrib.hw_pi_prot_type = dev->dev_attrib.pi_prot_type;
+	}
+
+	return 0;
+
+out_blkdev_put:
+	blkdev_put(ib_dev->ibd_bd, FMODE_WRITE|FMODE_READ|FMODE_EXCL);
+>>>>>>> v3.18
 out_free_bioset:
 	bioset_free(ib_dev->ibd_bio_set);
 	ib_dev->ibd_bio_set = NULL;
@@ -172,6 +221,10 @@ static void iblock_free_device(struct se_device *dev)
 		blkdev_put(ib_dev->ibd_bd, FMODE_WRITE|FMODE_READ|FMODE_EXCL);
 	if (ib_dev->ibd_bio_set != NULL)
 		bioset_free(ib_dev->ibd_bio_set);
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	kfree(ib_dev);
 }
 
@@ -319,7 +372,11 @@ iblock_get_bio(struct se_cmd *cmd, sector_t lba, u32 sg_num)
 	bio->bi_bdev = ib_dev->ibd_bd;
 	bio->bi_private = cmd;
 	bio->bi_end_io = &iblock_bio_done;
+<<<<<<< HEAD
 	bio->bi_sector = lba;
+=======
+	bio->bi_iter.bi_sector = lba;
+>>>>>>> v3.18
 
 	return bio;
 }
@@ -536,10 +593,17 @@ static ssize_t iblock_set_configfs_dev_params(struct se_device *dev,
 				ret = -ENOMEM;
 				break;
 			}
+<<<<<<< HEAD
 			ret = strict_strtoul(arg_p, 0, &tmp_readonly);
 			kfree(arg_p);
 			if (ret < 0) {
 				pr_err("strict_strtoul() failed for"
+=======
+			ret = kstrtoul(arg_p, 0, &tmp_readonly);
+			kfree(arg_p);
+			if (ret < 0) {
+				pr_err("kstrtoul() failed for"
+>>>>>>> v3.18
 						" readonly=\n");
 				goto out;
 			}
@@ -586,6 +650,7 @@ static ssize_t iblock_show_configfs_dev_params(struct se_device *dev, char *b)
 	return bl;
 }
 
+<<<<<<< HEAD
 static sense_reason_t
 iblock_execute_rw(struct se_cmd *cmd)
 {
@@ -595,6 +660,60 @@ iblock_execute_rw(struct se_cmd *cmd)
 	struct se_device *dev = cmd->se_dev;
 	struct iblock_req *ibr;
 	struct bio *bio;
+=======
+static int
+iblock_alloc_bip(struct se_cmd *cmd, struct bio *bio)
+{
+	struct se_device *dev = cmd->se_dev;
+	struct blk_integrity *bi;
+	struct bio_integrity_payload *bip;
+	struct iblock_dev *ib_dev = IBLOCK_DEV(dev);
+	struct scatterlist *sg;
+	int i, rc;
+
+	bi = bdev_get_integrity(ib_dev->ibd_bd);
+	if (!bi) {
+		pr_err("Unable to locate bio_integrity\n");
+		return -ENODEV;
+	}
+
+	bip = bio_integrity_alloc(bio, GFP_NOIO, cmd->t_prot_nents);
+	if (!bip) {
+		pr_err("Unable to allocate bio_integrity_payload\n");
+		return -ENOMEM;
+	}
+
+	bip->bip_iter.bi_size = (cmd->data_length / dev->dev_attrib.block_size) *
+			 dev->prot_length;
+	bip->bip_iter.bi_sector = bio->bi_iter.bi_sector;
+
+	pr_debug("IBLOCK BIP Size: %u Sector: %llu\n", bip->bip_iter.bi_size,
+		 (unsigned long long)bip->bip_iter.bi_sector);
+
+	for_each_sg(cmd->t_prot_sg, sg, cmd->t_prot_nents, i) {
+
+		rc = bio_integrity_add_page(bio, sg_page(sg), sg->length,
+					    sg->offset);
+		if (rc != sg->length) {
+			pr_err("bio_integrity_add_page() failed; %d\n", rc);
+			return -ENOMEM;
+		}
+
+		pr_debug("Added bio integrity page: %p length: %d offset; %d\n",
+			 sg_page(sg), sg->length, sg->offset);
+	}
+
+	return 0;
+}
+
+static sense_reason_t
+iblock_execute_rw(struct se_cmd *cmd, struct scatterlist *sgl, u32 sgl_nents,
+		  enum dma_data_direction data_direction)
+{
+	struct se_device *dev = cmd->se_dev;
+	struct iblock_req *ibr;
+	struct bio *bio, *bio_start;
+>>>>>>> v3.18
 	struct bio_list list;
 	struct scatterlist *sg;
 	u32 sg_num = sgl_nents;
@@ -657,6 +776,10 @@ iblock_execute_rw(struct se_cmd *cmd)
 	if (!bio)
 		goto fail_free_ibr;
 
+<<<<<<< HEAD
+=======
+	bio_start = bio;
+>>>>>>> v3.18
 	bio_list_init(&list);
 	bio_list_add(&list, bio);
 
@@ -690,6 +813,15 @@ iblock_execute_rw(struct se_cmd *cmd)
 		sg_num--;
 	}
 
+<<<<<<< HEAD
+=======
+	if (cmd->prot_type) {
+		int rc = iblock_alloc_bip(cmd, bio_start);
+		if (rc)
+			goto fail_put_bios;
+	}
+
+>>>>>>> v3.18
 	iblock_submit_bios(&list, rw);
 	iblock_complete_cmd(cmd);
 	return 0;
@@ -712,6 +844,48 @@ static sector_t iblock_get_blocks(struct se_device *dev)
 	return iblock_emulate_read_cap_with_block_size(dev, bd, q);
 }
 
+<<<<<<< HEAD
+=======
+static sector_t iblock_get_alignment_offset_lbas(struct se_device *dev)
+{
+	struct iblock_dev *ib_dev = IBLOCK_DEV(dev);
+	struct block_device *bd = ib_dev->ibd_bd;
+	int ret;
+
+	ret = bdev_alignment_offset(bd);
+	if (ret == -1)
+		return 0;
+
+	/* convert offset-bytes to offset-lbas */
+	return ret / bdev_logical_block_size(bd);
+}
+
+static unsigned int iblock_get_lbppbe(struct se_device *dev)
+{
+	struct iblock_dev *ib_dev = IBLOCK_DEV(dev);
+	struct block_device *bd = ib_dev->ibd_bd;
+	int logs_per_phys = bdev_physical_block_size(bd) / bdev_logical_block_size(bd);
+
+	return ilog2(logs_per_phys);
+}
+
+static unsigned int iblock_get_io_min(struct se_device *dev)
+{
+	struct iblock_dev *ib_dev = IBLOCK_DEV(dev);
+	struct block_device *bd = ib_dev->ibd_bd;
+
+	return bdev_io_min(bd);
+}
+
+static unsigned int iblock_get_io_opt(struct se_device *dev)
+{
+	struct iblock_dev *ib_dev = IBLOCK_DEV(dev);
+	struct block_device *bd = ib_dev->ibd_bd;
+
+	return bdev_io_opt(bd);
+}
+
+>>>>>>> v3.18
 static struct sbc_ops iblock_sbc_ops = {
 	.execute_rw		= iblock_execute_rw,
 	.execute_sync_cache	= iblock_execute_sync_cache,
@@ -726,7 +900,11 @@ iblock_parse_cdb(struct se_cmd *cmd)
 	return sbc_parse_cdb(cmd, &iblock_sbc_ops);
 }
 
+<<<<<<< HEAD
 bool iblock_get_write_cache(struct se_device *dev)
+=======
+static bool iblock_get_write_cache(struct se_device *dev)
+>>>>>>> v3.18
 {
 	struct iblock_dev *ib_dev = IBLOCK_DEV(dev);
 	struct block_device *bd = ib_dev->ibd_bd;
@@ -751,6 +929,13 @@ static struct se_subsystem_api iblock_template = {
 	.show_configfs_dev_params = iblock_show_configfs_dev_params,
 	.get_device_type	= sbc_get_device_type,
 	.get_blocks		= iblock_get_blocks,
+<<<<<<< HEAD
+=======
+	.get_alignment_offset_lbas = iblock_get_alignment_offset_lbas,
+	.get_lbppbe		= iblock_get_lbppbe,
+	.get_io_min		= iblock_get_io_min,
+	.get_io_opt		= iblock_get_io_opt,
+>>>>>>> v3.18
 	.get_write_cache	= iblock_get_write_cache,
 };
 

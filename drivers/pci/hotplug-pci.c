@@ -4,7 +4,11 @@
 #include <linux/export.h>
 #include "pci.h"
 
+<<<<<<< HEAD
 int __ref pci_hp_add_bridge(struct pci_dev *dev)
+=======
+int pci_hp_add_bridge(struct pci_dev *dev)
+>>>>>>> v3.18
 {
 	struct pci_bus *parent = dev->bus;
 	int pass, busnr, start = parent->busn_res.start;

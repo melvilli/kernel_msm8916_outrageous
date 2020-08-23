@@ -20,13 +20,17 @@
 #include <linux/types.h>
 #include <linux/io.h>
 
+<<<<<<< HEAD
 #define IO_CHECK_ALIGN(v, a) ((((unsigned long)(v)) & ((a) - 1)) == 0)
 
+=======
+>>>>>>> v3.18
 /*
  * Copy data from IO memory space to "real" memory space.
  */
 void __memcpy_fromio(void *to, const volatile void __iomem *from, size_t count)
 {
+<<<<<<< HEAD
 	while (count && (!IO_CHECK_ALIGN(from, 8) || !IO_CHECK_ALIGN(to, 8))) {
 		*(u8 *)to = readb_relaxed_no_log(from);
 		from++;
@@ -48,6 +52,15 @@ void __memcpy_fromio(void *to, const volatile void __iomem *from, size_t count)
 		count--;
 	}
 	__iormb();
+=======
+	unsigned char *t = to;
+	while (count) {
+		count--;
+		*t = readb(from);
+		t++;
+		from++;
+	}
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(__memcpy_fromio);
 
@@ -56,6 +69,7 @@ EXPORT_SYMBOL(__memcpy_fromio);
  */
 void __memcpy_toio(volatile void __iomem *to, const void *from, size_t count)
 {
+<<<<<<< HEAD
 	void *p = (void __force *)to;
 
 	__iowmb();
@@ -78,6 +92,14 @@ void __memcpy_toio(volatile void __iomem *to, const void *from, size_t count)
 		from++;
 		p++;
 		count--;
+=======
+	const unsigned char *f = from;
+	while (count) {
+		count--;
+		writeb(*f, to);
+		f++;
+		to++;
+>>>>>>> v3.18
 	}
 }
 EXPORT_SYMBOL(__memcpy_toio);
@@ -87,6 +109,7 @@ EXPORT_SYMBOL(__memcpy_toio);
  */
 void __memset_io(volatile void __iomem *dst, int c, size_t count)
 {
+<<<<<<< HEAD
 	void *p = (void __force *)dst;
 	u64 qc = c;
 
@@ -111,6 +134,12 @@ void __memset_io(volatile void __iomem *dst, int c, size_t count)
 		writeb_relaxed_no_log(c, p);
 		p++;
 		count--;
+=======
+	while (count) {
+		count--;
+		writeb(c, dst);
+		dst++;
+>>>>>>> v3.18
 	}
 }
 EXPORT_SYMBOL(__memset_io);

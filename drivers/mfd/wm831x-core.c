@@ -1011,7 +1011,11 @@ static struct resource wm831x_wdt_resources[] = {
 	},
 };
 
+<<<<<<< HEAD
 static struct mfd_cell wm8310_devs[] = {
+=======
+static const struct mfd_cell wm8310_devs[] = {
+>>>>>>> v3.18
 	{
 		.name = "wm831x-backup",
 	},
@@ -1165,7 +1169,11 @@ static struct mfd_cell wm8310_devs[] = {
 	},
 };
 
+<<<<<<< HEAD
 static struct mfd_cell wm8311_devs[] = {
+=======
+static const struct mfd_cell wm8311_devs[] = {
+>>>>>>> v3.18
 	{
 		.name = "wm831x-backup",
 	},
@@ -1295,7 +1303,11 @@ static struct mfd_cell wm8311_devs[] = {
 	},
 };
 
+<<<<<<< HEAD
 static struct mfd_cell wm8312_devs[] = {
+=======
+static const struct mfd_cell wm8312_devs[] = {
+>>>>>>> v3.18
 	{
 		.name = "wm831x-backup",
 	},
@@ -1449,7 +1461,11 @@ static struct mfd_cell wm8312_devs[] = {
 	},
 };
 
+<<<<<<< HEAD
 static struct mfd_cell wm8320_devs[] = {
+=======
+static const struct mfd_cell wm8320_devs[] = {
+>>>>>>> v3.18
 	{
 		.name = "wm831x-backup",
 	},
@@ -1578,7 +1594,11 @@ static struct mfd_cell wm8320_devs[] = {
 	},
 };
 
+<<<<<<< HEAD
 static struct mfd_cell touch_devs[] = {
+=======
+static const struct mfd_cell touch_devs[] = {
+>>>>>>> v3.18
 	{
 		.name = "wm831x-touch",
 		.num_resources = ARRAY_SIZE(wm831x_touch_resources),
@@ -1586,7 +1606,11 @@ static struct mfd_cell touch_devs[] = {
 	},
 };
 
+<<<<<<< HEAD
 static struct mfd_cell rtc_devs[] = {
+=======
+static const struct mfd_cell rtc_devs[] = {
+>>>>>>> v3.18
 	{
 		.name = "wm831x-rtc",
 		.num_resources = ARRAY_SIZE(wm831x_rtc_resources),
@@ -1594,7 +1618,11 @@ static struct mfd_cell rtc_devs[] = {
 	},
 };
 
+<<<<<<< HEAD
 static struct mfd_cell backlight_devs[] = {
+=======
+static const struct mfd_cell backlight_devs[] = {
+>>>>>>> v3.18
 	{
 		.name = "wm831x-backlight",
 	},
@@ -1618,7 +1646,11 @@ EXPORT_SYMBOL_GPL(wm831x_regmap_config);
  */
 int wm831x_device_init(struct wm831x *wm831x, unsigned long id, int irq)
 {
+<<<<<<< HEAD
 	struct wm831x_pdata *pdata = wm831x->dev->platform_data;
+=======
+	struct wm831x_pdata *pdata = dev_get_platdata(wm831x->dev);
+>>>>>>> v3.18
 	int rev, wm831x_num;
 	enum wm831x_parent parent;
 	int ret, i;

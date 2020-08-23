@@ -39,7 +39,10 @@
 #include <linux/workqueue.h>
 #include <linux/nmi.h>
 #include <linux/acpi.h>
+<<<<<<< HEAD
 #include <linux/acpi_io.h>
+=======
+>>>>>>> v3.18
 #include <linux/efi.h>
 #include <linux/ioport.h>
 #include <linux/list.h>
@@ -49,6 +52,7 @@
 #include <asm/io.h>
 #include <asm/uaccess.h>
 
+<<<<<<< HEAD
 #include <acpi/acpi.h>
 #include <acpi/acpi_bus.h>
 #include <acpi/processor.h>
@@ -56,11 +60,21 @@
 #define _COMPONENT		ACPI_OS_SERVICES
 ACPI_MODULE_NAME("osl");
 #define PREFIX		"ACPI: "
+=======
+#include "internal.h"
+
+#define _COMPONENT		ACPI_OS_SERVICES
+ACPI_MODULE_NAME("osl");
+
+>>>>>>> v3.18
 struct acpi_os_dpc {
 	acpi_osd_exec_callback function;
 	void *context;
 	struct work_struct work;
+<<<<<<< HEAD
 	int wait;
+=======
+>>>>>>> v3.18
 };
 
 #ifdef CONFIG_ACPI_CUSTOM_DSDT
@@ -79,6 +93,11 @@ extern char line_buf[80];
 
 static int (*__acpi_os_prepare_sleep)(u8 sleep_state, u32 pm1a_ctrl,
 				      u32 pm1b_ctrl);
+<<<<<<< HEAD
+=======
+static int (*__acpi_os_prepare_extended_sleep)(u8 sleep_state, u32 val_a,
+				      u32 val_b);
+>>>>>>> v3.18
 
 static acpi_osd_handler acpi_irq_handler;
 static void *acpi_irq_context;
@@ -140,7 +159,12 @@ static struct osi_linux {
 	unsigned int	enable:1;
 	unsigned int	dmi:1;
 	unsigned int	cmdline:1;
+<<<<<<< HEAD
 } osi_linux = {0, 0, 0};
+=======
+	unsigned int	default_disabling:1;
+} osi_linux = {0, 0, 0, 0};
+>>>>>>> v3.18
 
 static u32 acpi_osi_handler(acpi_string interface, u32 supported)
 {
@@ -153,6 +177,19 @@ static u32 acpi_osi_handler(acpi_string interface, u32 supported)
 			osi_linux.dmi ? " via DMI" : "");
 	}
 
+<<<<<<< HEAD
+=======
+	if (!strcmp("Darwin", interface)) {
+		/*
+		 * Apple firmware will behave poorly if it receives positive
+		 * answers to "Darwin" and any other OS. Respond positively
+		 * to Darwin and then disable all other vendor strings.
+		 */
+		acpi_update_interfaces(ACPI_DISABLE_ALL_VENDOR_STRINGS);
+		supported = ACPI_UINT32_MAX;
+	}
+
+>>>>>>> v3.18
 	return supported;
 }
 
@@ -205,7 +242,11 @@ static int __init acpi_reserve_resources(void)
 
 	return 0;
 }
+<<<<<<< HEAD
 fs_initcall_sync(acpi_reserve_resources);
+=======
+device_initcall(acpi_reserve_resources);
+>>>>>>> v3.18
 
 void acpi_os_printf(const char *fmt, ...)
 {
@@ -236,7 +277,12 @@ void acpi_os_vprintf(const char *fmt, va_list args)
 static unsigned long acpi_rsdp;
 static int __init setup_acpi_rsdp(char *arg)
 {
+<<<<<<< HEAD
 	acpi_rsdp = simple_strtoul(arg, NULL, 16);
+=======
+	if (kstrtoul(arg, 16, &acpi_rsdp))
+		return -EINVAL;
+>>>>>>> v3.18
 	return 0;
 }
 early_param("acpi_rsdp", setup_acpi_rsdp);
@@ -259,12 +305,21 @@ acpi_physical_address __init acpi_os_get_root_pointer(void)
 			       "System description tables not found\n");
 			return 0;
 		}
+<<<<<<< HEAD
 	} else {
+=======
+	} else if (IS_ENABLED(CONFIG_ACPI_LEGACY_TABLES_LOOKUP)) {
+>>>>>>> v3.18
 		acpi_physical_address pa = 0;
 
 		acpi_find_root_pointer(&pa);
 		return pa;
 	}
+<<<<<<< HEAD
+=======
+
+	return 0;
+>>>>>>> v3.18
 }
 
 /* Must be called with 'acpi_ioremap_lock' or RCU read lock held. */
@@ -356,7 +411,11 @@ static void acpi_unmap(acpi_physical_address pg_off, void __iomem *vaddr)
 }
 
 void __iomem *__init_refok
+<<<<<<< HEAD
 acpi_os_map_memory(acpi_physical_address phys, acpi_size size)
+=======
+acpi_os_map_iomem(acpi_physical_address phys, acpi_size size)
+>>>>>>> v3.18
 {
 	struct acpi_ioremap *map;
 	void __iomem *virt;
@@ -402,10 +461,24 @@ acpi_os_map_memory(acpi_physical_address phys, acpi_size size)
 
 	list_add_tail_rcu(&map->list, &acpi_ioremaps);
 
+<<<<<<< HEAD
  out:
 	mutex_unlock(&acpi_ioremap_lock);
 	return map->virt + (phys - map->phys);
 }
+=======
+out:
+	mutex_unlock(&acpi_ioremap_lock);
+	return map->virt + (phys - map->phys);
+}
+EXPORT_SYMBOL_GPL(acpi_os_map_iomem);
+
+void *__init_refok
+acpi_os_map_memory(acpi_physical_address phys, acpi_size size)
+{
+	return (void *)acpi_os_map_iomem(phys, size);
+}
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(acpi_os_map_memory);
 
 static void acpi_os_drop_map_ref(struct acpi_ioremap *map)
@@ -423,7 +496,11 @@ static void acpi_os_map_cleanup(struct acpi_ioremap *map)
 	}
 }
 
+<<<<<<< HEAD
 void __ref acpi_os_unmap_memory(void __iomem *virt, acpi_size size)
+=======
+void __ref acpi_os_unmap_iomem(void __iomem *virt, acpi_size size)
+>>>>>>> v3.18
 {
 	struct acpi_ioremap *map;
 
@@ -444,6 +521,15 @@ void __ref acpi_os_unmap_memory(void __iomem *virt, acpi_size size)
 
 	acpi_os_map_cleanup(map);
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(acpi_os_unmap_iomem);
+
+void __ref acpi_os_unmap_memory(void *virt, acpi_size size)
+{
+	return acpi_os_unmap_iomem((void __iomem *)virt, size);
+}
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(acpi_os_unmap_memory);
 
 void __init early_acpi_os_unmap_memory(void __iomem *virt, acpi_size size)
@@ -465,7 +551,11 @@ int acpi_os_map_generic_address(struct acpi_generic_address *gas)
 	if (!addr || !gas->bit_width)
 		return -EINVAL;
 
+<<<<<<< HEAD
 	virt = acpi_os_map_memory(addr, gas->bit_width / 8);
+=======
+	virt = acpi_os_map_iomem(addr, gas->bit_width / 8);
+>>>>>>> v3.18
 	if (!virt)
 		return -EIO;
 
@@ -541,7 +631,11 @@ static u64 acpi_tables_addr;
 static int all_tables_size;
 
 /* Copied from acpica/tbutils.c:acpi_tb_checksum() */
+<<<<<<< HEAD
 u8 __init acpi_table_checksum(u8 *buffer, u32 length)
+=======
+static u8 __init acpi_table_checksum(u8 *buffer, u32 length)
+>>>>>>> v3.18
 {
 	u8 sum = 0;
 	u8 *end = buffer + length;
@@ -563,6 +657,7 @@ static const char * const table_sigs[] = {
 	ACPI_SIG_WDRT, ACPI_SIG_DSDT, ACPI_SIG_FADT, ACPI_SIG_PSDT,
 	ACPI_SIG_RSDT, ACPI_SIG_XSDT, ACPI_SIG_SSDT, NULL };
 
+<<<<<<< HEAD
 /* Non-fatal errors: Affected tables/files are ignored */
 #define INVALID_TABLE(x, path, name)					\
 	{ pr_err("ACPI OVERRIDE: " x " [%s%s]\n", path, name); continue; }
@@ -571,6 +666,14 @@ static const char * const table_sigs[] = {
 
 /* Must not increase 10 or needs code modification below */
 #define ACPI_OVERRIDE_TABLES 10
+=======
+#define ACPI_HEADER_SIZE sizeof(struct acpi_table_header)
+
+#define ACPI_OVERRIDE_TABLES 64
+static struct cpio_data __initdata acpi_initrd_files[ACPI_OVERRIDE_TABLES];
+
+#define MAP_CHUNK_SIZE   (NR_FIX_BTMAPS << PAGE_SHIFT)
+>>>>>>> v3.18
 
 void __init acpi_initrd_override(void *data, size_t size)
 {
@@ -579,8 +682,11 @@ void __init acpi_initrd_override(void *data, size_t size)
 	struct acpi_table_header *table;
 	char cpio_path[32] = "kernel/firmware/acpi/";
 	struct cpio_data file;
+<<<<<<< HEAD
 	struct cpio_data early_initrd_files[ACPI_OVERRIDE_TABLES];
 	char *p;
+=======
+>>>>>>> v3.18
 
 	if (data == NULL || size == 0)
 		return;
@@ -593,9 +699,17 @@ void __init acpi_initrd_override(void *data, size_t size)
 		data += offset;
 		size -= offset;
 
+<<<<<<< HEAD
 		if (file.size < sizeof(struct acpi_table_header))
 			INVALID_TABLE("Table smaller than ACPI header",
 				      cpio_path, file.name);
+=======
+		if (file.size < sizeof(struct acpi_table_header)) {
+			pr_err("ACPI OVERRIDE: Table smaller than ACPI header [%s%s]\n",
+				cpio_path, file.name);
+			continue;
+		}
+>>>>>>> v3.18
 
 		table = file.data;
 
@@ -603,6 +717,7 @@ void __init acpi_initrd_override(void *data, size_t size)
 			if (!memcmp(table->signature, table_sigs[sig], 4))
 				break;
 
+<<<<<<< HEAD
 		if (!table_sigs[sig])
 			INVALID_TABLE("Unknown signature",
 				      cpio_path, file.name);
@@ -612,13 +727,35 @@ void __init acpi_initrd_override(void *data, size_t size)
 		if (acpi_table_checksum(file.data, table->length))
 			INVALID_TABLE("Bad table checksum",
 				      cpio_path, file.name);
+=======
+		if (!table_sigs[sig]) {
+			pr_err("ACPI OVERRIDE: Unknown signature [%s%s]\n",
+				cpio_path, file.name);
+			continue;
+		}
+		if (file.size != table->length) {
+			pr_err("ACPI OVERRIDE: File length does not match table length [%s%s]\n",
+				cpio_path, file.name);
+			continue;
+		}
+		if (acpi_table_checksum(file.data, table->length)) {
+			pr_err("ACPI OVERRIDE: Bad table checksum [%s%s]\n",
+				cpio_path, file.name);
+			continue;
+		}
+>>>>>>> v3.18
 
 		pr_info("%4.4s ACPI table found in initrd [%s%s][0x%x]\n",
 			table->signature, cpio_path, file.name, table->length);
 
 		all_tables_size += table->length;
+<<<<<<< HEAD
 		early_initrd_files[table_nr].data = file.data;
 		early_initrd_files[table_nr].size = file.size;
+=======
+		acpi_initrd_files[table_nr].data = file.data;
+		acpi_initrd_files[table_nr].size = file.size;
+>>>>>>> v3.18
 		table_nr++;
 	}
 	if (table_nr == 0)
@@ -644,6 +781,7 @@ void __init acpi_initrd_override(void *data, size_t size)
 	memblock_reserve(acpi_tables_addr, all_tables_size);
 	arch_reserve_mem_area(acpi_tables_addr, all_tables_size);
 
+<<<<<<< HEAD
 	p = early_ioremap(acpi_tables_addr, all_tables_size);
 
 	for (no = 0; no < table_nr; no++) {
@@ -652,6 +790,36 @@ void __init acpi_initrd_override(void *data, size_t size)
 		total_offset += early_initrd_files[no].size;
 	}
 	early_iounmap(p, all_tables_size);
+=======
+	/*
+	 * early_ioremap only can remap 256k one time. If we map all
+	 * tables one time, we will hit the limit. Need to map chunks
+	 * one by one during copying the same as that in relocate_initrd().
+	 */
+	for (no = 0; no < table_nr; no++) {
+		unsigned char *src_p = acpi_initrd_files[no].data;
+		phys_addr_t size = acpi_initrd_files[no].size;
+		phys_addr_t dest_addr = acpi_tables_addr + total_offset;
+		phys_addr_t slop, clen;
+		char *dest_p;
+
+		total_offset += size;
+
+		while (size) {
+			slop = dest_addr & ~PAGE_MASK;
+			clen = size;
+			if (clen > MAP_CHUNK_SIZE - slop)
+				clen = MAP_CHUNK_SIZE - slop;
+			dest_p = early_ioremap(dest_addr & PAGE_MASK,
+						 clen + slop);
+			memcpy(dest_p + slop, src_p, clen);
+			early_iounmap(dest_p, clen + slop);
+			src_p += clen;
+			dest_addr += clen;
+			size -= clen;
+		}
+	}
+>>>>>>> v3.18
 }
 #endif /* CONFIG_ACPI_INITRD_TABLE_OVERRIDE */
 
@@ -786,7 +954,11 @@ acpi_os_install_interrupt_handler(u32 gsi, acpi_osd_handler handler,
 
 	acpi_irq_handler = handler;
 	acpi_irq_context = context;
+<<<<<<< HEAD
 	if (request_irq(irq, acpi_irq, IRQF_SHARED | IRQF_NO_SUSPEND, "acpi", acpi_irq)) {
+=======
+	if (request_irq(irq, acpi_irq, IRQF_SHARED, "acpi", acpi_irq)) {
+>>>>>>> v3.18
 		printk(KERN_ERR PREFIX "SCI (IRQ%d) allocation failed\n", irq);
 		acpi_irq_handler = NULL;
 		return AE_NOT_ACQUIRED;
@@ -812,7 +984,11 @@ acpi_status acpi_os_remove_interrupt_handler(u32 irq, acpi_osd_handler handler)
 
 void acpi_os_sleep(u64 ms)
 {
+<<<<<<< HEAD
 	schedule_timeout_interruptible(msecs_to_jiffies(ms));
+=======
+	msleep(ms);
+>>>>>>> v3.18
 }
 
 void acpi_os_stall(u32 us)
@@ -835,6 +1011,7 @@ void acpi_os_stall(u32 us)
  */
 u64 acpi_os_get_timer(void)
 {
+<<<<<<< HEAD
 	static u64 t;
 
 #ifdef	CONFIG_HPET
@@ -848,6 +1025,11 @@ u64 acpi_os_get_timer(void)
 		printk(KERN_ERR PREFIX "acpi_os_get_timer() TBD\n");
 
 	return ++t;
+=======
+	u64 time_ns = ktime_to_ns(ktime_get());
+	do_div(time_ns, 100);
+	return time_ns;
+>>>>>>> v3.18
 }
 
 acpi_status acpi_os_read_port(acpi_io_address port, u32 * value, u32 width)
@@ -1069,9 +1251,12 @@ static void acpi_os_execute_deferred(struct work_struct *work)
 {
 	struct acpi_os_dpc *dpc = container_of(work, struct acpi_os_dpc, work);
 
+<<<<<<< HEAD
 	if (dpc->wait)
 		acpi_os_wait_events_complete();
 
+=======
+>>>>>>> v3.18
 	dpc->function(dpc->context);
 	kfree(dpc);
 }
@@ -1091,8 +1276,13 @@ static void acpi_os_execute_deferred(struct work_struct *work)
  *
  ******************************************************************************/
 
+<<<<<<< HEAD
 static acpi_status __acpi_os_execute(acpi_execute_type type,
 	acpi_osd_exec_callback function, void *context, int hp)
+=======
+acpi_status acpi_os_execute(acpi_execute_type type,
+			    acpi_osd_exec_callback function, void *context)
+>>>>>>> v3.18
 {
 	acpi_status status = AE_OK;
 	struct acpi_os_dpc *dpc;
@@ -1119,20 +1309,27 @@ static acpi_status __acpi_os_execute(acpi_execute_type type,
 	dpc->context = context;
 
 	/*
+<<<<<<< HEAD
 	 * We can't run hotplug code in keventd_wq/kacpid_wq/kacpid_notify_wq
 	 * because the hotplug code may call driver .remove() functions,
 	 * which invoke flush_scheduled_work/acpi_os_wait_events_complete
 	 * to flush these workqueues.
 	 *
+=======
+>>>>>>> v3.18
 	 * To prevent lockdep from complaining unnecessarily, make sure that
 	 * there is a different static lockdep key for each workqueue by using
 	 * INIT_WORK() for each of them separately.
 	 */
+<<<<<<< HEAD
 	if (hp) {
 		queue = kacpi_hotplug_wq;
 		dpc->wait = 1;
 		INIT_WORK(&dpc->work, acpi_os_execute_deferred);
 	} else if (type == OSL_NOTIFY_HANDLER) {
+=======
+	if (type == OSL_NOTIFY_HANDLER) {
+>>>>>>> v3.18
 		queue = kacpi_notify_wq;
 		INIT_WORK(&dpc->work, acpi_os_execute_deferred);
 	} else {
@@ -1157,6 +1354,7 @@ static acpi_status __acpi_os_execute(acpi_execute_type type,
 	}
 	return status;
 }
+<<<<<<< HEAD
 
 acpi_status acpi_os_execute(acpi_execute_type type,
 			    acpi_osd_exec_callback function, void *context)
@@ -1179,16 +1377,79 @@ void acpi_os_wait_events_complete(void)
 }
 
 EXPORT_SYMBOL(acpi_os_wait_events_complete);
+=======
+EXPORT_SYMBOL(acpi_os_execute);
+
+void acpi_os_wait_events_complete(void)
+{
+	flush_workqueue(kacpid_wq);
+	flush_workqueue(kacpi_notify_wq);
+}
+
+struct acpi_hp_work {
+	struct work_struct work;
+	struct acpi_device *adev;
+	u32 src;
+};
+
+static void acpi_hotplug_work_fn(struct work_struct *work)
+{
+	struct acpi_hp_work *hpw = container_of(work, struct acpi_hp_work, work);
+
+	acpi_os_wait_events_complete();
+	acpi_device_hotplug(hpw->adev, hpw->src);
+	kfree(hpw);
+}
+
+acpi_status acpi_hotplug_schedule(struct acpi_device *adev, u32 src)
+{
+	struct acpi_hp_work *hpw;
+
+	ACPI_DEBUG_PRINT((ACPI_DB_EXEC,
+		  "Scheduling hotplug event (%p, %u) for deferred execution.\n",
+		  adev, src));
+
+	hpw = kmalloc(sizeof(*hpw), GFP_KERNEL);
+	if (!hpw)
+		return AE_NO_MEMORY;
+
+	INIT_WORK(&hpw->work, acpi_hotplug_work_fn);
+	hpw->adev = adev;
+	hpw->src = src;
+	/*
+	 * We can't run hotplug code in kacpid_wq/kacpid_notify_wq etc., because
+	 * the hotplug code may call driver .remove() functions, which may
+	 * invoke flush_scheduled_work()/acpi_os_wait_events_complete() to flush
+	 * these workqueues.
+	 */
+	if (!queue_work(kacpi_hotplug_wq, &hpw->work)) {
+		kfree(hpw);
+		return AE_ERROR;
+	}
+	return AE_OK;
+}
+
+bool acpi_queue_hotplug_work(struct work_struct *work)
+{
+	return queue_work(kacpi_hotplug_wq, work);
+}
+>>>>>>> v3.18
 
 acpi_status
 acpi_os_create_semaphore(u32 max_units, u32 initial_units, acpi_handle * handle)
 {
 	struct semaphore *sem = NULL;
 
+<<<<<<< HEAD
 	sem = acpi_os_allocate(sizeof(struct semaphore));
 	if (!sem)
 		return AE_NO_MEMORY;
 	memset(sem, 0, sizeof(struct semaphore));
+=======
+	sem = acpi_os_allocate_zeroed(sizeof(struct semaphore));
+	if (!sem)
+		return AE_NO_MEMORY;
+>>>>>>> v3.18
 
 	sema_init(sem, initial_units);
 
@@ -1246,7 +1507,11 @@ acpi_status acpi_os_wait_semaphore(acpi_handle handle, u32 units, u16 timeout)
 		jiffies = MAX_SCHEDULE_TIMEOUT;
 	else
 		jiffies = msecs_to_jiffies(timeout);
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 	ret = down_timeout(sem, jiffies);
 	if (ret)
 		status = AE_TIME;
@@ -1337,7 +1602,11 @@ static int __init acpi_os_name_setup(char *str)
 	if (!str || !*str)
 		return 0;
 
+<<<<<<< HEAD
 	for (; count-- && str && *str; str++) {
+=======
+	for (; count-- && *str; str++) {
+>>>>>>> v3.18
 		if (isalnum(*str) || *str == ' ' || *str == ':')
 			*p++ = *str;
 		else if (*str == '\'' || *str == '"')
@@ -1361,8 +1630,13 @@ struct osi_setup_entry {
 	bool enable;
 };
 
+<<<<<<< HEAD
 static struct osi_setup_entry __initdata
 		osi_setup_entries[OSI_STRING_ENTRIES_MAX] = {
+=======
+static struct osi_setup_entry
+		osi_setup_entries[OSI_STRING_ENTRIES_MAX] __initdata = {
+>>>>>>> v3.18
 	{"Module Device", true},
 	{"Processor Device", true},
 	{"3.0 _SCP Extensions", true},
@@ -1386,6 +1660,20 @@ void __init acpi_osi_setup(char *str)
 
 	if (*str == '!') {
 		str++;
+<<<<<<< HEAD
+=======
+		if (*str == '\0') {
+			osi_linux.default_disabling = 1;
+			return;
+		} else if (*str == '*') {
+			acpi_update_interfaces(ACPI_DISABLE_ALL_STRINGS);
+			for (i = 0; i < OSI_STRING_ENTRIES_MAX; i++) {
+				osi = &osi_setup_entries[i];
+				osi->enable = false;
+			}
+			return;
+		}
+>>>>>>> v3.18
 		enable = false;
 	}
 
@@ -1451,6 +1739,16 @@ static void __init acpi_osi_setup_late(void)
 	int i;
 	acpi_status status;
 
+<<<<<<< HEAD
+=======
+	if (osi_linux.default_disabling) {
+		status = acpi_update_interfaces(ACPI_DISABLE_ALL_VENDOR_STRINGS);
+
+		if (ACPI_SUCCESS(status))
+			printk(KERN_INFO PREFIX "Disabled all _OSI OS vendors\n");
+	}
+
+>>>>>>> v3.18
 	for (i = 0; i < OSI_STRING_ENTRIES_MAX; i++) {
 		osi = &osi_setup_entries[i];
 		str = osi->string;
@@ -1485,17 +1783,34 @@ static int __init osi_setup(char *str)
 
 __setup("acpi_osi=", osi_setup);
 
+<<<<<<< HEAD
 /* enable serialization to combat AE_ALREADY_EXISTS errors */
 static int __init acpi_serialize_setup(char *str)
 {
 	printk(KERN_INFO PREFIX "serialize enabled\n");
 
 	acpi_gbl_all_methods_serialized = TRUE;
+=======
+/*
+ * Disable the auto-serialization of named objects creation methods.
+ *
+ * This feature is enabled by default.  It marks the AML control methods
+ * that contain the opcodes to create named objects as "Serialized".
+ */
+static int __init acpi_no_auto_serialize_setup(char *str)
+{
+	acpi_gbl_auto_serialize_methods = FALSE;
+	pr_info("ACPI: auto-serialization disabled\n");
+>>>>>>> v3.18
 
 	return 1;
 }
 
+<<<<<<< HEAD
 __setup("acpi_serialize", acpi_serialize_setup);
+=======
+__setup("acpi_no_auto_serialize", acpi_no_auto_serialize_setup);
+>>>>>>> v3.18
 
 /* Check of resource interference between native drivers and ACPI
  * OperationRegions (SystemIO and System Memory only).
@@ -1715,12 +2030,49 @@ acpi_status acpi_os_release_object(acpi_cache_t * cache, void *object)
 }
 #endif
 
+<<<<<<< HEAD
+=======
+static int __init acpi_no_static_ssdt_setup(char *s)
+{
+	acpi_gbl_disable_ssdt_table_install = TRUE;
+	pr_info("ACPI: static SSDT installation disabled\n");
+
+	return 0;
+}
+
+early_param("acpi_no_static_ssdt", acpi_no_static_ssdt_setup);
+
+static int __init acpi_disable_return_repair(char *s)
+{
+	printk(KERN_NOTICE PREFIX
+	       "ACPI: Predefined validation mechanism disabled\n");
+	acpi_gbl_disable_auto_repair = TRUE;
+
+	return 1;
+}
+
+__setup("acpica_no_return_repair", acpi_disable_return_repair);
+
+>>>>>>> v3.18
 acpi_status __init acpi_os_initialize(void)
 {
 	acpi_os_map_generic_address(&acpi_gbl_FADT.xpm1a_event_block);
 	acpi_os_map_generic_address(&acpi_gbl_FADT.xpm1b_event_block);
 	acpi_os_map_generic_address(&acpi_gbl_FADT.xgpe0_block);
 	acpi_os_map_generic_address(&acpi_gbl_FADT.xgpe1_block);
+<<<<<<< HEAD
+=======
+	if (acpi_gbl_FADT.flags & ACPI_FADT_RESET_REGISTER) {
+		/*
+		 * Use acpi_os_map_generic_address to pre-map the reset
+		 * register if it's in system memory.
+		 */
+		int rv;
+
+		rv = acpi_os_map_generic_address(&acpi_gbl_FADT.reset_register);
+		pr_debug(PREFIX "%s: map reset_reg status %d\n", __func__, rv);
+	}
+>>>>>>> v3.18
 
 	return AE_OK;
 }
@@ -1729,7 +2081,11 @@ acpi_status __init acpi_os_initialize1(void)
 {
 	kacpid_wq = alloc_workqueue("kacpid", 0, 1);
 	kacpi_notify_wq = alloc_workqueue("kacpi_notify", 0, 1);
+<<<<<<< HEAD
 	kacpi_hotplug_wq = alloc_workqueue("kacpi_hotplug", 0, 1);
+=======
+	kacpi_hotplug_wq = alloc_ordered_workqueue("kacpi_hotplug", 0);
+>>>>>>> v3.18
 	BUG_ON(!kacpid_wq);
 	BUG_ON(!kacpi_notify_wq);
 	BUG_ON(!kacpi_hotplug_wq);
@@ -1749,6 +2105,11 @@ acpi_status acpi_os_terminate(void)
 	acpi_os_unmap_generic_address(&acpi_gbl_FADT.xgpe0_block);
 	acpi_os_unmap_generic_address(&acpi_gbl_FADT.xpm1b_event_block);
 	acpi_os_unmap_generic_address(&acpi_gbl_FADT.xpm1a_event_block);
+<<<<<<< HEAD
+=======
+	if (acpi_gbl_FADT.flags & ACPI_FADT_RESET_REGISTER)
+		acpi_os_unmap_generic_address(&acpi_gbl_FADT.reset_register);
+>>>>>>> v3.18
 
 	destroy_workqueue(kacpid_wq);
 	destroy_workqueue(kacpi_notify_wq);
@@ -1778,6 +2139,7 @@ void acpi_os_set_prepare_sleep(int (*func)(u8 sleep_state,
 	__acpi_os_prepare_sleep = func;
 }
 
+<<<<<<< HEAD
 void alloc_acpi_hp_work(acpi_handle handle, u32 type, void *context,
 			void (*func)(struct work_struct *work))
 {
@@ -1798,3 +2160,25 @@ void alloc_acpi_hp_work(acpi_handle handle, u32 type, void *context,
 		kfree(hp_work);
 }
 EXPORT_SYMBOL_GPL(alloc_acpi_hp_work);
+=======
+acpi_status acpi_os_prepare_extended_sleep(u8 sleep_state, u32 val_a,
+				  u32 val_b)
+{
+	int rc = 0;
+	if (__acpi_os_prepare_extended_sleep)
+		rc = __acpi_os_prepare_extended_sleep(sleep_state,
+					     val_a, val_b);
+	if (rc < 0)
+		return AE_ERROR;
+	else if (rc > 0)
+		return AE_CTRL_SKIP;
+
+	return AE_OK;
+}
+
+void acpi_os_set_prepare_extended_sleep(int (*func)(u8 sleep_state,
+			       u32 val_a, u32 val_b))
+{
+	__acpi_os_prepare_extended_sleep = func;
+}
+>>>>>>> v3.18

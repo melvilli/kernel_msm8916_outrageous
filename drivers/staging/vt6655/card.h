@@ -31,8 +31,13 @@
 
 #include "ttype.h"
 #include <linux/types.h>
+<<<<<<< HEAD
 
 /*---------------------  Export Definitions -------------------------*/
+=======
+#include <linux/nl80211.h>
+
+>>>>>>> v3.18
 //
 // Loopback mode
 //
@@ -48,7 +53,11 @@
 #define DEFAULT_MGN_LIFETIME_RES_64us   125  // 64us
 
 #define CB_MAX_CHANNEL_24G      14
+<<<<<<< HEAD
 #define CB_MAX_CHANNEL_5G       42 //[20050104] add channel9(5045MHz), 41==>42
+=======
+#define CB_MAX_CHANNEL_5G       42
+>>>>>>> v3.18
 #define CB_MAX_CHANNEL          (CB_MAX_CHANNEL_24G+CB_MAX_CHANNEL_5G)
 
 typedef enum _CARD_PHY_TYPE {
@@ -71,6 +80,7 @@ typedef enum _CARD_STATUS_TYPE {
 	CARD_STATUS_PMKID
 } CARD_STATUS_TYPE, *PCARD_STATUS_TYPE;
 
+<<<<<<< HEAD
 typedef enum _CARD_OP_MODE {
 	OP_MODE_INFRASTRUCTURE,
 	OP_MODE_ADHOC,
@@ -129,6 +139,50 @@ bool CARDbRemoveKey(void *pDeviceHandler, unsigned char *pbyBSSID);
 bool
 CARDbAdd_PMKID_Candidate(
 	void *pDeviceHandler,
+=======
+struct vnt_private;
+
+void CARDvSetRSPINF(struct vnt_private *, CARD_PHY_TYPE ePHYType);
+void vUpdateIFS(struct vnt_private *);
+void CARDvUpdateBasicTopRate(struct vnt_private *);
+bool CARDbAddBasicRate(struct vnt_private *, unsigned short wRateIdx);
+bool CARDbIsOFDMinBasicRate(struct vnt_private *);
+void CARDvSetLoopbackMode(void __iomem *dwIoBase, unsigned short wLoopbackMode);
+bool CARDbSoftwareReset(struct vnt_private *);
+void CARDvSetFirstNextTBTT(void __iomem *dwIoBase, unsigned short wBeaconInterval);
+void CARDvUpdateNextTBTT(void __iomem *dwIoBase, u64 qwTSF, unsigned short wBeaconInterval);
+bool CARDbGetCurrentTSF(void __iomem *dwIoBase, u64 *pqwCurrTSF);
+u64 CARDqGetNextTBTT(u64 qwTSF, unsigned short wBeaconInterval);
+u64 CARDqGetTSFOffset(unsigned char byRxRate, u64 qwTSF1, u64 qwTSF2);
+bool CARDbSetTxPower(struct vnt_private *, unsigned long ulTxPower);
+unsigned char CARDbyGetPktType(struct vnt_private *);
+void CARDvSafeResetTx(struct vnt_private *);
+void CARDvSafeResetRx(struct vnt_private *);
+bool CARDbRadioPowerOff(struct vnt_private *);
+bool CARDbRadioPowerOn(struct vnt_private *);
+bool CARDbIsShortPreamble(struct vnt_private *);
+bool CARDbIsShorSlotTime(struct vnt_private *);
+bool CARDbSetPhyParameter(struct vnt_private *, CARD_PHY_TYPE ePHYType,
+			  unsigned short wCapInfo, unsigned char byERPField,
+			  void *pvSupportRateIEs, void *pvExtSupportRateIEs);
+bool CARDbUpdateTSF(struct vnt_private *, unsigned char byRxRate,
+		    u64 qwBSSTimestamp, u64 qwLocalTSF);
+bool CARDbStopTxPacket(struct vnt_private *, CARD_PKT_TYPE ePktType);
+bool CARDbStartTxPacket(struct vnt_private *, CARD_PKT_TYPE ePktType);
+bool CARDbSetBeaconPeriod(struct vnt_private *, unsigned short wBeaconInterval);
+bool CARDbSetBSSID(struct vnt_private *,
+		   unsigned char *pbyBSSID, enum nl80211_iftype);
+
+bool CARDbPowerDown(struct vnt_private *);
+
+bool CARDbSetTxDataRate(struct vnt_private *, unsigned short wDataRate);
+
+bool CARDbRemoveKey(struct vnt_private *, unsigned char *pbyBSSID);
+
+bool
+CARDbAdd_PMKID_Candidate(
+	struct vnt_private *,
+>>>>>>> v3.18
 	unsigned char *pbyBSSID,
 	bool bRSNCapExist,
 	unsigned short wRSNCap
@@ -136,19 +190,31 @@ CARDbAdd_PMKID_Candidate(
 
 void *
 CARDpGetCurrentAddress(
+<<<<<<< HEAD
 	void *pDeviceHandler
+=======
+	struct vnt_private *
+>>>>>>> v3.18
 );
 
 bool
 CARDbStartMeasure(
+<<<<<<< HEAD
 	void *pDeviceHandler,
+=======
+	struct vnt_private *,
+>>>>>>> v3.18
 	void *pvMeasureEIDs,
 	unsigned int uNumOfMeasureEIDs
 );
 
 bool
 CARDbChannelSwitch(
+<<<<<<< HEAD
 	void *pDeviceHandler,
+=======
+	struct vnt_private *,
+>>>>>>> v3.18
 	unsigned char byMode,
 	unsigned char byNewChannel,
 	unsigned char byCount
@@ -156,7 +222,11 @@ CARDbChannelSwitch(
 
 bool
 CARDbSetQuiet(
+<<<<<<< HEAD
 	void *pDeviceHandler,
+=======
+	struct vnt_private *,
+>>>>>>> v3.18
 	bool bResetQuiet,
 	unsigned char byQuietCount,
 	unsigned char byQuietPeriod,
@@ -166,26 +236,42 @@ CARDbSetQuiet(
 
 bool
 CARDbStartQuiet(
+<<<<<<< HEAD
 	void *pDeviceHandler
+=======
+	struct vnt_private *
+>>>>>>> v3.18
 );
 
 void
 CARDvSetPowerConstraint(
+<<<<<<< HEAD
 	void *pDeviceHandler,
+=======
+	struct vnt_private *,
+>>>>>>> v3.18
 	unsigned char byChannel,
 	char byPower
 );
 
 void
 CARDvGetPowerCapability(
+<<<<<<< HEAD
 	void *pDeviceHandler,
+=======
+	struct vnt_private *,
+>>>>>>> v3.18
 	unsigned char *pbyMinPower,
 	unsigned char *pbyMaxPower
 );
 
 char
 CARDbyGetTransmitPower(
+<<<<<<< HEAD
 	void *pDeviceHandler
+=======
+	struct vnt_private *
+>>>>>>> v3.18
 );
 
 #endif // __CARD_H__

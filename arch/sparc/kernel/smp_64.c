@@ -25,6 +25,10 @@
 #include <linux/ftrace.h>
 #include <linux/cpu.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
+=======
+#include <linux/kgdb.h>
+>>>>>>> v3.18
 
 #include <asm/head.h>
 #include <asm/ptrace.h>
@@ -35,6 +39,10 @@
 #include <asm/hvtramp.h>
 #include <asm/io.h>
 #include <asm/timer.h>
+<<<<<<< HEAD
+=======
+#include <asm/setup.h>
+>>>>>>> v3.18
 
 #include <asm/irq.h>
 #include <asm/irq_regs.h>
@@ -52,8 +60,12 @@
 #include <asm/pcr.h>
 
 #include "cpumap.h"
+<<<<<<< HEAD
 
 int sparc64_multi_core __read_mostly;
+=======
+#include "kernel.h"
+>>>>>>> v3.18
 
 DEFINE_PER_CPU(cpumask_t, cpu_sibling_map) = CPU_MASK_NONE;
 cpumask_t cpu_core_map[NR_CPUS] __read_mostly =
@@ -87,7 +99,11 @@ extern void setup_sparc64_timer(void);
 
 static volatile unsigned long callin_flag = 0;
 
+<<<<<<< HEAD
 void __cpuinit smp_callin(void)
+=======
+void smp_callin(void)
+>>>>>>> v3.18
 {
 	int cpuid = hard_smp_processor_id();
 
@@ -123,11 +139,19 @@ void __cpuinit smp_callin(void)
 		rmb();
 
 	set_cpu_online(cpuid, true);
+<<<<<<< HEAD
 	local_irq_enable();
+=======
+>>>>>>> v3.18
 
 	/* idle thread is expected to have preempt disabled */
 	preempt_disable();
 
+<<<<<<< HEAD
+=======
+	local_irq_enable();
+
+>>>>>>> v3.18
 	cpu_startup_entry(CPUHP_ONLINE);
 }
 
@@ -273,6 +297,7 @@ static void smp_synchronize_one_tick(int cpu)
 }
 
 #if defined(CONFIG_SUN_LDOMS) && defined(CONFIG_HOTPLUG_CPU)
+<<<<<<< HEAD
 /* XXX Put this in some common place. XXX */
 static unsigned long kimage_addr_to_ra(void *p)
 {
@@ -282,6 +307,10 @@ static unsigned long kimage_addr_to_ra(void *p)
 }
 
 static void __cpuinit ldom_startcpu_cpuid(unsigned int cpu, unsigned long thread_reg, void **descrp)
+=======
+static void ldom_startcpu_cpuid(unsigned int cpu, unsigned long thread_reg,
+				void **descrp)
+>>>>>>> v3.18
 {
 	extern unsigned long sparc64_ttable_tl0;
 	extern unsigned long kern_locked_tte_data;
@@ -342,7 +371,11 @@ extern unsigned long sparc64_cpu_startup;
  */
 static struct thread_info *cpu_new_thread = NULL;
 
+<<<<<<< HEAD
 static int __cpuinit smp_boot_one_cpu(unsigned int cpu, struct task_struct *idle)
+=======
+static int smp_boot_one_cpu(unsigned int cpu, struct task_struct *idle)
+>>>>>>> v3.18
 {
 	unsigned long entry =
 		(unsigned long)(&sparc64_cpu_startup);
@@ -871,11 +904,14 @@ extern unsigned long xcall_flush_dcache_page_cheetah;
 #endif
 extern unsigned long xcall_flush_dcache_page_spitfire;
 
+<<<<<<< HEAD
 #ifdef CONFIG_DEBUG_DCFLUSH
 extern atomic_t dcpage_flushes;
 extern atomic_t dcpage_flushes_xcall;
 #endif
 
+=======
+>>>>>>> v3.18
 static inline void __local_flush_dcache_page(struct page *page)
 {
 #ifdef DCACHE_ALIASING_POSSIBLE
@@ -1152,7 +1188,11 @@ static unsigned long penguins_are_doing_time;
 
 void smp_capture(void)
 {
+<<<<<<< HEAD
 	int result = atomic_add_ret(1, &smp_capture_depth);
+=======
+	int result = atomic_add_return(1, &smp_capture_depth);
+>>>>>>> v3.18
 
 	if (result == 1) {
 		int ncpus = num_online_cpus();
@@ -1270,7 +1310,11 @@ void smp_fill_in_sib_core_maps(void)
 	}
 }
 
+<<<<<<< HEAD
 int __cpuinit __cpu_up(unsigned int cpu, struct task_struct *tidle)
+=======
+int __cpu_up(unsigned int cpu, struct task_struct *tidle)
+>>>>>>> v3.18
 {
 	int ret = smp_boot_one_cpu(cpu, tidle);
 
@@ -1397,13 +1441,26 @@ void __cpu_die(unsigned int cpu)
 
 void __init smp_cpus_done(unsigned int max_cpus)
 {
+<<<<<<< HEAD
 	pcr_arch_init();
+=======
+>>>>>>> v3.18
 }
 
 void smp_send_reschedule(int cpu)
 {
+<<<<<<< HEAD
 	xcall_deliver((u64) &xcall_receive_signal, 0, 0,
 		      cpumask_of(cpu));
+=======
+	if (cpu == smp_processor_id()) {
+		WARN_ON_ONCE(preemptible());
+		set_softint(1 << PIL_SMP_RECEIVE_SIGNAL);
+	} else {
+		xcall_deliver((u64) &xcall_receive_signal,
+			      0, 0, cpumask_of(cpu));
+	}
+>>>>>>> v3.18
 }
 
 void __irq_entry smp_receive_signal_client(int irq, struct pt_regs *regs)
@@ -1477,6 +1534,16 @@ static void __init pcpu_populate_pte(unsigned long addr)
 	pud_t *pud;
 	pmd_t *pmd;
 
+<<<<<<< HEAD
+=======
+	if (pgd_none(*pgd)) {
+		pud_t *new;
+
+		new = __alloc_bootmem(PAGE_SIZE, PAGE_SIZE, PAGE_SIZE);
+		pgd_populate(&init_mm, pgd, new);
+	}
+
+>>>>>>> v3.18
 	pud = pud_offset(pgd, addr);
 	if (pud_none(*pud)) {
 		pmd_t *new;

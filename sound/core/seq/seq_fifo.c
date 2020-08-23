@@ -34,7 +34,11 @@ struct snd_seq_fifo *snd_seq_fifo_new(int poolsize)
 
 	f = kzalloc(sizeof(*f), GFP_KERNEL);
 	if (f == NULL) {
+<<<<<<< HEAD
 		snd_printd("malloc failed for snd_seq_fifo_new() \n");
+=======
+		pr_debug("ALSA: seq: malloc failed for snd_seq_fifo_new() \n");
+>>>>>>> v3.18
 		return NULL;
 	}
 
@@ -72,9 +76,12 @@ void snd_seq_fifo_delete(struct snd_seq_fifo **fifo)
 		return;
 	*fifo = NULL;
 
+<<<<<<< HEAD
 	if (f->pool)
 		snd_seq_pool_mark_closing(f->pool);
 
+=======
+>>>>>>> v3.18
 	snd_seq_fifo_clear(f);
 
 	/* wake up clients if any */
@@ -127,7 +134,11 @@ int snd_seq_fifo_event_in(struct snd_seq_fifo *f,
 	snd_use_lock_use(&f->use_lock);
 	err = snd_seq_event_dup(f->pool, event, &cell, 1, NULL); /* always non-blocking */
 	if (err < 0) {
+<<<<<<< HEAD
 		if (err == -ENOMEM)
+=======
+		if ((err == -ENOMEM) || (err == -EAGAIN))
+>>>>>>> v3.18
 			atomic_inc(&f->overflow);
 		snd_use_lock_free(&f->use_lock);
 		return err;
@@ -140,7 +151,10 @@ int snd_seq_fifo_event_in(struct snd_seq_fifo *f,
 	f->tail = cell;
 	if (f->head == NULL)
 		f->head = cell;
+<<<<<<< HEAD
 	cell->next = NULL;
+=======
+>>>>>>> v3.18
 	f->cells++;
 	spin_unlock_irqrestore(&f->lock, flags);
 
@@ -220,8 +234,11 @@ void snd_seq_fifo_cell_putback(struct snd_seq_fifo *f,
 		spin_lock_irqsave(&f->lock, flags);
 		cell->next = f->head;
 		f->head = cell;
+<<<<<<< HEAD
 		if (!f->tail)
 			f->tail = cell;
+=======
+>>>>>>> v3.18
 		f->cells++;
 		spin_unlock_irqrestore(&f->lock, flags);
 	}
@@ -267,10 +284,13 @@ int snd_seq_fifo_resize(struct snd_seq_fifo *f, int poolsize)
 	/* NOTE: overflow flag is not cleared */
 	spin_unlock_irqrestore(&f->lock, flags);
 
+<<<<<<< HEAD
 	/* close the old pool and wait until all users are gone */
 	snd_seq_pool_mark_closing(oldpool);
 	snd_use_lock_sync(&f->use_lock);
 
+=======
+>>>>>>> v3.18
 	/* release cells in old pool */
 	for (cell = oldhead; cell; cell = next) {
 		next = cell->next;

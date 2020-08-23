@@ -32,6 +32,7 @@ int st_gyro_trig_set_state(struct iio_trigger *trig, bool state)
 
 static int st_gyro_buffer_preenable(struct iio_dev *indio_dev)
 {
+<<<<<<< HEAD
 	int err;
 
 	err = st_sensors_set_enable(indio_dev, true);
@@ -42,6 +43,9 @@ static int st_gyro_buffer_preenable(struct iio_dev *indio_dev)
 
 st_gyro_set_enable_error:
 	return err;
+=======
+	return st_sensors_set_enable(indio_dev, true);
+>>>>>>> v3.18
 }
 
 static int st_gyro_buffer_postenable(struct iio_dev *indio_dev)

@@ -1,6 +1,10 @@
 /*
  * QLogic iSCSI HBA Driver
+<<<<<<< HEAD
  * Copyright (c)  2003-2012 QLogic Corporation
+=======
+ * Copyright (c)  2003-2013 QLogic Corporation
+>>>>>>> v3.18
  *
  * See LICENSE.qla4xxx for copyright and licensing details.
  */
@@ -83,7 +87,11 @@ static int qla4xxx_get_req_pkt(struct scsi_qla_host *ha,
  * This routine issues a marker IOCB.
  **/
 int qla4xxx_send_marker_iocb(struct scsi_qla_host *ha,
+<<<<<<< HEAD
 	struct ddb_entry *ddb_entry, int lun, uint16_t mrkr_mod)
+=======
+	struct ddb_entry *ddb_entry, uint64_t lun, uint16_t mrkr_mod)
+>>>>>>> v3.18
 {
 	struct qla4_marker_entry *marker_entry;
 	unsigned long flags = 0;

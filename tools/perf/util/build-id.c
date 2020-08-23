@@ -18,13 +18,22 @@
 
 int build_id__mark_dso_hit(struct perf_tool *tool __maybe_unused,
 			   union perf_event *event,
+<<<<<<< HEAD
 			   struct perf_sample *sample __maybe_unused,
+=======
+			   struct perf_sample *sample,
+>>>>>>> v3.18
 			   struct perf_evsel *evsel __maybe_unused,
 			   struct machine *machine)
 {
 	struct addr_location al;
 	u8 cpumode = event->header.misc & PERF_RECORD_MISC_CPUMODE_MASK;
+<<<<<<< HEAD
 	struct thread *thread = machine__findnew_thread(machine, event->ip.pid);
+=======
+	struct thread *thread = machine__findnew_thread(machine, sample->pid,
+							sample->tid);
+>>>>>>> v3.18
 
 	if (thread == NULL) {
 		pr_err("problem processing %d event, skipping it.\n",
@@ -33,7 +42,11 @@ int build_id__mark_dso_hit(struct perf_tool *tool __maybe_unused,
 	}
 
 	thread__find_addr_map(thread, machine, cpumode, MAP__FUNCTION,
+<<<<<<< HEAD
 			      event->ip.ip, &al);
+=======
+			      sample->ip, &al);
+>>>>>>> v3.18
 
 	if (al.map != NULL)
 		al.map->dso->hit = 1;
@@ -47,7 +60,13 @@ static int perf_event__exit_del_thread(struct perf_tool *tool __maybe_unused,
 				       __maybe_unused,
 				       struct machine *machine)
 {
+<<<<<<< HEAD
 	struct thread *thread = machine__findnew_thread(machine, event->fork.tid);
+=======
+	struct thread *thread = machine__findnew_thread(machine,
+							event->fork.pid,
+							event->fork.tid);
+>>>>>>> v3.18
 
 	dump_printf("(%d:%d):(%d:%d)\n", event->fork.pid, event->fork.tid,
 		    event->fork.ppid, event->fork.ptid);
@@ -64,6 +83,10 @@ static int perf_event__exit_del_thread(struct perf_tool *tool __maybe_unused,
 struct perf_tool build_id__mark_dso_hit_ops = {
 	.sample	= build_id__mark_dso_hit,
 	.mmap	= perf_event__process_mmap,
+<<<<<<< HEAD
+=======
+	.mmap2	= perf_event__process_mmap2,
+>>>>>>> v3.18
 	.fork	= perf_event__process_fork,
 	.exit	= perf_event__exit_del_thread,
 	.attr		 = perf_event__process_attr,
@@ -85,6 +108,7 @@ int build_id__sprintf(const u8 *build_id, int len, char *bf)
 	return raw - build_id;
 }
 
+<<<<<<< HEAD
 char *dso__build_id_filename(struct dso *self, char *bf, size_t size)
 {
 	char build_id_hex[BUILD_ID_SIZE * 2 + 1];
@@ -93,6 +117,16 @@ char *dso__build_id_filename(struct dso *self, char *bf, size_t size)
 		return NULL;
 
 	build_id__sprintf(self->build_id, sizeof(self->build_id), build_id_hex);
+=======
+char *dso__build_id_filename(const struct dso *dso, char *bf, size_t size)
+{
+	char build_id_hex[BUILD_ID_SIZE * 2 + 1];
+
+	if (!dso->has_build_id)
+		return NULL;
+
+	build_id__sprintf(dso->build_id, sizeof(dso->build_id), build_id_hex);
+>>>>>>> v3.18
 	if (bf == NULL) {
 		if (asprintf(&bf, "%s/.build-id/%.2s/%s", buildid_dir,
 			     build_id_hex, build_id_hex + 2) < 0)

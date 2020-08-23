@@ -24,12 +24,20 @@
 
 /* Proxy routine having the same arguments as actual do_fork() routine */
 static long jdo_fork(unsigned long clone_flags, unsigned long stack_start,
+<<<<<<< HEAD
 	      struct pt_regs *regs, unsigned long stack_size,
 	      int __user *parent_tidptr, int __user *child_tidptr)
 {
 	printk(KERN_INFO "jprobe: clone_flags = 0x%lx, stack_size = 0x%lx,"
 			" regs = 0x%p\n",
 	       clone_flags, stack_size, regs);
+=======
+	      unsigned long stack_size, int __user *parent_tidptr,
+	      int __user *child_tidptr)
+{
+	pr_info("jprobe: clone_flags = 0x%lx, stack_start = 0x%lx "
+		"stack_size = 0x%lx\n", clone_flags, stack_start, stack_size);
+>>>>>>> v3.18
 
 	/* Always end with a call to jprobe_return(). */
 	jprobe_return();

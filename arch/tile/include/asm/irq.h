@@ -18,10 +18,19 @@
 #include <linux/hardirq.h>
 
 /* The hypervisor interface provides 32 IRQs. */
+<<<<<<< HEAD
 #define NR_IRQS 32
 
 /* IRQ numbers used for linux IPIs. */
 #define IRQ_RESCHEDULE 0
+=======
+#define NR_IRQS			32
+
+/* IRQ numbers used for linux IPIs. */
+#define IRQ_RESCHEDULE	0
+/* Interrupts for dynamic allocation start at 1. Let the core allocate irq0 */
+#define NR_IRQS_LEGACY	1
+>>>>>>> v3.18
 
 #define irq_canonicalize(irq)   (irq)
 

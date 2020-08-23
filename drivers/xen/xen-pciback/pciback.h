@@ -37,7 +37,10 @@ struct xen_pcibk_device {
 	struct xen_pci_sharedinfo *sh_info;
 	unsigned long flags;
 	struct work_struct op_work;
+<<<<<<< HEAD
 	struct xen_pci_op op;
+=======
+>>>>>>> v3.18
 };
 
 struct xen_pcibk_dev_data {

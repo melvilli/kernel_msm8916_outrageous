@@ -39,7 +39,10 @@
 #include <linux/errno.h>
 #include <linux/fcntl.h>
 #include <linux/in.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 
 #include <asm/uaccess.h>
 #include <asm/io.h>
@@ -112,10 +115,17 @@ static struct rtnl_link_stats64 *loopback_get_stats64(struct net_device *dev,
 
 		lb_stats = per_cpu_ptr(dev->lstats, i);
 		do {
+<<<<<<< HEAD
 			start = u64_stats_fetch_begin_bh(&lb_stats->syncp);
 			tbytes = lb_stats->bytes;
 			tpackets = lb_stats->packets;
 		} while (u64_stats_fetch_retry_bh(&lb_stats->syncp, start));
+=======
+			start = u64_stats_fetch_begin_irq(&lb_stats->syncp);
+			tbytes = lb_stats->bytes;
+			tpackets = lb_stats->packets;
+		} while (u64_stats_fetch_retry_irq(&lb_stats->syncp, start));
+>>>>>>> v3.18
 		bytes   += tbytes;
 		packets += tpackets;
 	}
@@ -137,15 +147,25 @@ static const struct ethtool_ops loopback_ethtool_ops = {
 
 static int loopback_dev_init(struct net_device *dev)
 {
+<<<<<<< HEAD
 	dev->lstats = alloc_percpu(struct pcpu_lstats);
 	if (!dev->lstats)
 		return -ENOMEM;
 
+=======
+	dev->lstats = netdev_alloc_pcpu_stats(struct pcpu_lstats);
+	if (!dev->lstats)
+		return -ENOMEM;
+>>>>>>> v3.18
 	return 0;
 }
 
 static void loopback_dev_free(struct net_device *dev)
 {
+<<<<<<< HEAD
+=======
+	dev_net(dev)->loopback_dev = NULL;
+>>>>>>> v3.18
 	free_percpu(dev->lstats);
 	free_netdev(dev);
 }
@@ -154,6 +174,10 @@ static const struct net_device_ops loopback_ops = {
 	.ndo_init      = loopback_dev_init,
 	.ndo_start_xmit= loopback_xmit,
 	.ndo_get_stats64 = loopback_get_stats64,
+<<<<<<< HEAD
+=======
+	.ndo_set_mac_address = eth_mac_addr,
+>>>>>>> v3.18
 };
 
 /*
@@ -168,13 +192,22 @@ static void loopback_setup(struct net_device *dev)
 	dev->tx_queue_len	= 0;
 	dev->type		= ARPHRD_LOOPBACK;	/* 0x0001*/
 	dev->flags		= IFF_LOOPBACK;
+<<<<<<< HEAD
 	dev->priv_flags	       &= ~IFF_XMIT_DST_RELEASE;
+=======
+	dev->priv_flags		|= IFF_LIVE_ADDR_CHANGE;
+	netif_keep_dst(dev);
+>>>>>>> v3.18
 	dev->hw_features	= NETIF_F_ALL_TSO | NETIF_F_UFO;
 	dev->features 		= NETIF_F_SG | NETIF_F_FRAGLIST
 		| NETIF_F_ALL_TSO
 		| NETIF_F_UFO
 		| NETIF_F_HW_CSUM
 		| NETIF_F_RXCSUM
+<<<<<<< HEAD
+=======
+		| NETIF_F_SCTP_CSUM
+>>>>>>> v3.18
 		| NETIF_F_HIGHDMA
 		| NETIF_F_LLTX
 		| NETIF_F_NETNS_LOCAL
@@ -193,7 +226,11 @@ static __net_init int loopback_net_init(struct net *net)
 	int err;
 
 	err = -ENOMEM;
+<<<<<<< HEAD
 	dev = alloc_netdev(0, "lo", loopback_setup);
+=======
+	dev = alloc_netdev(0, "lo", NET_NAME_UNKNOWN, loopback_setup);
+>>>>>>> v3.18
 	if (!dev)
 		goto out;
 

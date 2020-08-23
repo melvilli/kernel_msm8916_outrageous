@@ -53,7 +53,13 @@ void snd_pcm_timer_resolution_change(struct snd_pcm_substream *substream)
 		post *= 2;
 	}
 	if (rate == 0) {
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "pcm timer resolution out of range (rate = %u, period_size = %lu)\n", runtime->rate, runtime->period_size);
+=======
+		pcm_err(substream->pcm,
+			"pcm timer resolution out of range (rate = %u, period_size = %lu)\n",
+			runtime->rate, runtime->period_size);
+>>>>>>> v3.18
 		runtime->timer_resolution = -1;
 		return;
 	}
@@ -63,6 +69,7 @@ void snd_pcm_timer_resolution_change(struct snd_pcm_substream *substream)
 static unsigned long snd_pcm_timer_resolution(struct snd_timer * timer)
 {
 	struct snd_pcm_substream *substream;
+<<<<<<< HEAD
 	unsigned long ret = 0, flags = 0;
 	
 	substream = timer->private_data;
@@ -73,6 +80,11 @@ static unsigned long snd_pcm_timer_resolution(struct snd_timer * timer)
 		ret = 0;
 	spin_unlock_irqrestore(&substream->runtime_lock, flags);
 	return ret;
+=======
+	
+	substream = timer->private_data;
+	return substream->runtime ? substream->runtime->timer_resolution : 0;
+>>>>>>> v3.18
 }
 
 static int snd_pcm_timer_start(struct snd_timer * timer)

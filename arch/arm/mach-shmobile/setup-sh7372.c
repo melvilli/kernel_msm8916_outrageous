@@ -29,21 +29,38 @@
 #include <linux/io.h>
 #include <linux/serial_sci.h>
 #include <linux/sh_dma.h>
+<<<<<<< HEAD
 #include <linux/sh_intc.h>
+=======
+>>>>>>> v3.18
 #include <linux/sh_timer.h>
 #include <linux/pm_domain.h>
 #include <linux/dma-mapping.h>
 #include <linux/platform_data/sh_ipmmu.h>
+<<<<<<< HEAD
 #include <mach/dma-register.h>
 #include <mach/hardware.h>
 #include <mach/irqs.h>
 #include <mach/sh7372.h>
 #include <mach/common.h>
+=======
+
+>>>>>>> v3.18
 #include <asm/mach/map.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/time.h>
 
+<<<<<<< HEAD
+=======
+#include "common.h"
+#include "dma-register.h"
+#include "intc.h"
+#include "irqs.h"
+#include "pm-rmobile.h"
+#include "sh7372.h"
+
+>>>>>>> v3.18
 static struct map_desc sh7372_io_desc[] __initdata = {
 	/* create a 1:1 entity map for 0xe6xxxxxx
 	 * used by CPGA, INTC and PFC.
@@ -87,6 +104,7 @@ void __init sh7372_pinmux_init(void)
 	platform_device_register(&sh7372_pfc_device);
 }
 
+<<<<<<< HEAD
 /* SCIFA0 */
 static struct plat_sci_port scif0_platform_data = {
 	.mapbase	= 0xe6c40000,
@@ -244,6 +262,51 @@ static struct resource cmt2_resources[] = {
 
 static struct platform_device cmt2_device = {
 	.name		= "sh_cmt",
+=======
+/* SCIF */
+#define SH7372_SCIF(scif_type, index, baseaddr, irq)		\
+static struct plat_sci_port scif##index##_platform_data = {	\
+	.type		= scif_type,				\
+	.flags		= UPF_BOOT_AUTOCONF,			\
+	.scscr		= SCSCR_RE | SCSCR_TE,			\
+};								\
+								\
+static struct resource scif##index##_resources[] = {		\
+	DEFINE_RES_MEM(baseaddr, 0x100),			\
+	DEFINE_RES_IRQ(irq),					\
+};								\
+								\
+static struct platform_device scif##index##_device = {		\
+	.name		= "sh-sci",				\
+	.id		= index,				\
+	.resource	= scif##index##_resources,		\
+	.num_resources	= ARRAY_SIZE(scif##index##_resources),	\
+	.dev		= {					\
+		.platform_data	= &scif##index##_platform_data,	\
+	},							\
+}
+
+SH7372_SCIF(PORT_SCIFA, 0, 0xe6c40000, evt2irq(0x0c00));
+SH7372_SCIF(PORT_SCIFA, 1, 0xe6c50000, evt2irq(0x0c20));
+SH7372_SCIF(PORT_SCIFA, 2, 0xe6c60000, evt2irq(0x0c40));
+SH7372_SCIF(PORT_SCIFA, 3, 0xe6c70000, evt2irq(0x0c60));
+SH7372_SCIF(PORT_SCIFA, 4, 0xe6c80000, evt2irq(0x0d20));
+SH7372_SCIF(PORT_SCIFA, 5, 0xe6cb0000, evt2irq(0x0d40));
+SH7372_SCIF(PORT_SCIFB, 6, 0xe6c30000, evt2irq(0x0d60));
+
+/* CMT */
+static struct sh_timer_config cmt2_platform_data = {
+	.channels_mask = 0x20,
+};
+
+static struct resource cmt2_resources[] = {
+	DEFINE_RES_MEM(0xe6130000, 0x50),
+	DEFINE_RES_IRQ(evt2irq(0x0b80)),
+};
+
+static struct platform_device cmt2_device = {
+	.name		= "sh-cmt-32-fast",
+>>>>>>> v3.18
 	.id		= 2,
 	.dev = {
 		.platform_data	= &cmt2_platform_data,
@@ -253,6 +316,7 @@ static struct platform_device cmt2_device = {
 };
 
 /* TMU */
+<<<<<<< HEAD
 static struct sh_timer_config tmu00_platform_data = {
 	.name = "TMU00",
 	.channel_offset = 0x4,
@@ -311,6 +375,27 @@ static struct platform_device tmu01_device = {
 	},
 	.resource	= tmu01_resources,
 	.num_resources	= ARRAY_SIZE(tmu01_resources),
+=======
+static struct sh_timer_config tmu0_platform_data = {
+	.channels_mask = 7,
+};
+
+static struct resource tmu0_resources[] = {
+	DEFINE_RES_MEM(0xfff60000, 0x2c),
+	DEFINE_RES_IRQ(intcs_evt2irq(0xe80)),
+	DEFINE_RES_IRQ(intcs_evt2irq(0xea0)),
+	DEFINE_RES_IRQ(intcs_evt2irq(0xec0)),
+};
+
+static struct platform_device tmu0_device = {
+	.name		= "sh-tmu",
+	.id		= 0,
+	.dev = {
+		.platform_data	= &tmu0_platform_data,
+	},
+	.resource	= tmu0_resources,
+	.num_resources	= ARRAY_SIZE(tmu0_resources),
+>>>>>>> v3.18
 };
 
 /* I2C */
@@ -1055,8 +1140,12 @@ static struct platform_device *sh7372_early_devices[] __initdata = {
 	&scif5_device,
 	&scif6_device,
 	&cmt2_device,
+<<<<<<< HEAD
 	&tmu00_device,
 	&tmu01_device,
+=======
+	&tmu0_device,
+>>>>>>> v3.18
 	&ipmmu_device,
 };
 
@@ -1080,7 +1169,11 @@ static struct platform_device *sh7372_late_devices[] __initdata = {
 
 void __init sh7372_add_standard_devices(void)
 {
+<<<<<<< HEAD
 	struct pm_domain_device domain_devices[] = {
+=======
+	static struct pm_domain_device domain_devices[] __initdata = {
+>>>>>>> v3.18
 		{ "A3RV", &vpu_device, },
 		{ "A4MP", &spu0_device, },
 		{ "A4MP", &spu1_device, },
@@ -1103,8 +1196,12 @@ void __init sh7372_add_standard_devices(void)
 		{ "A4R", &veu2_device, },
 		{ "A4R", &veu3_device, },
 		{ "A4R", &jpu_device, },
+<<<<<<< HEAD
 		{ "A4R", &tmu00_device, },
 		{ "A4R", &tmu01_device, },
+=======
+		{ "A4R", &tmu0_device, },
+>>>>>>> v3.18
 	};
 
 	sh7372_init_pm_domains();
@@ -1138,6 +1235,7 @@ void __init sh7372_add_early_devices(void)
 
 void __init sh7372_add_early_devices_dt(void)
 {
+<<<<<<< HEAD
 	shmobile_setup_delay(800, 1, 3); /* Cortex-A8 @ 800MHz */
 
 	early_platform_add_devices(sh7372_early_devices,
@@ -1151,6 +1249,13 @@ static const struct of_dev_auxdata sh7372_auxdata_lookup[] __initconst = {
 	{ }
 };
 
+=======
+	shmobile_init_delay();
+
+	sh7372_add_early_devices();
+}
+
+>>>>>>> v3.18
 void __init sh7372_add_standard_devices_dt(void)
 {
 	/* clocks are setup late during boot in the case of DT */
@@ -1159,8 +1264,12 @@ void __init sh7372_add_standard_devices_dt(void)
 	platform_add_devices(sh7372_early_devices,
 			    ARRAY_SIZE(sh7372_early_devices));
 
+<<<<<<< HEAD
 	of_platform_populate(NULL, of_default_bus_match_table,
 			     sh7372_auxdata_lookup, NULL);
+=======
+	of_platform_populate(NULL, of_default_bus_match_table, NULL, NULL);
+>>>>>>> v3.18
 }
 
 static const char *sh7372_boards_compat_dt[] __initdata = {
@@ -1171,7 +1280,10 @@ static const char *sh7372_boards_compat_dt[] __initdata = {
 DT_MACHINE_START(SH7372_DT, "Generic SH7372 (Flattened Device Tree)")
 	.map_io		= sh7372_map_io,
 	.init_early	= sh7372_add_early_devices_dt,
+<<<<<<< HEAD
 	.nr_irqs	= NR_IRQS_LEGACY,
+=======
+>>>>>>> v3.18
 	.init_irq	= sh7372_init_irq,
 	.handle_irq	= shmobile_handle_irq_intc,
 	.init_machine	= sh7372_add_standard_devices_dt,

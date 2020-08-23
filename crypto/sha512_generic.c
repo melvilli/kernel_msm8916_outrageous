@@ -20,6 +20,10 @@
 #include <crypto/sha.h>
 #include <linux/percpu.h>
 #include <asm/byteorder.h>
+<<<<<<< HEAD
+=======
+#include <asm/unaligned.h>
+>>>>>>> v3.18
 
 static inline u64 Ch(u64 x, u64 y, u64 z)
 {
@@ -68,7 +72,11 @@ static const u64 sha512_K[80] = {
 
 static inline void LOAD_OP(int I, u64 *W, const u8 *input)
 {
+<<<<<<< HEAD
 	W[I] = __be64_to_cpu( ((__be64*)(input))[I] );
+=======
+	W[I] = get_unaligned_be64((__u64 *)input + I);
+>>>>>>> v3.18
 }
 
 static inline void BLEND_OP(int I, u64 *W)
@@ -238,7 +246,11 @@ static int sha384_final(struct shash_desc *desc, u8 *hash)
 	sha512_final(desc, D);
 
 	memcpy(hash, D, 48);
+<<<<<<< HEAD
 	memset(D, 0, 64);
+=======
+	memzero_explicit(D, 64);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -251,6 +263,10 @@ static struct shash_alg sha512_algs[2] = { {
 	.descsize	=	sizeof(struct sha512_state),
 	.base		=	{
 		.cra_name	=	"sha512",
+<<<<<<< HEAD
+=======
+		.cra_driver_name =	"sha512-generic",
+>>>>>>> v3.18
 		.cra_flags	=	CRYPTO_ALG_TYPE_SHASH,
 		.cra_blocksize	=	SHA512_BLOCK_SIZE,
 		.cra_module	=	THIS_MODULE,
@@ -263,6 +279,10 @@ static struct shash_alg sha512_algs[2] = { {
 	.descsize	=	sizeof(struct sha512_state),
 	.base		=	{
 		.cra_name	=	"sha384",
+<<<<<<< HEAD
+=======
+		.cra_driver_name =	"sha384-generic",
+>>>>>>> v3.18
 		.cra_flags	=	CRYPTO_ALG_TYPE_SHASH,
 		.cra_blocksize	=	SHA384_BLOCK_SIZE,
 		.cra_module	=	THIS_MODULE,
@@ -285,7 +305,12 @@ module_exit(sha512_generic_mod_fini);
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("SHA-512 and SHA-384 Secure Hash Algorithms");
 
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("sha384");
 MODULE_ALIAS_CRYPTO("sha384-generic");
 MODULE_ALIAS_CRYPTO("sha512");
 MODULE_ALIAS_CRYPTO("sha512-generic");
+=======
+MODULE_ALIAS("sha384");
+MODULE_ALIAS("sha512");
+>>>>>>> v3.18

@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright 2013 Red Hat Inc.
+=======
+ * Copyright 2013-2014 Red Hat Inc.
+>>>>>>> v3.18
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -20,6 +24,7 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
+<<<<<<< HEAD
 #include <core/os.h>
 #include <core/event.h>
 
@@ -88,10 +93,71 @@ nouveau_event_destroy(struct nouveau_event **pevent)
 	if (event) {
 		kfree(event);
 		*pevent = NULL;
+=======
+#include <core/object.h>
+#include <core/event.h>
+
+void
+nvkm_event_put(struct nvkm_event *event, u32 types, int index)
+{
+	BUG_ON(!spin_is_locked(&event->refs_lock));
+	while (types) {
+		int type = __ffs(types); types &= ~(1 << type);
+		if (--event->refs[index * event->types_nr + type] == 0) {
+			if (event->func->fini)
+				event->func->fini(event, 1 << type, index);
+		}
+	}
+}
+
+void
+nvkm_event_get(struct nvkm_event *event, u32 types, int index)
+{
+	BUG_ON(!spin_is_locked(&event->refs_lock));
+	while (types) {
+		int type = __ffs(types); types &= ~(1 << type);
+		if (++event->refs[index * event->types_nr + type] == 1) {
+			if (event->func->init)
+				event->func->init(event, 1 << type, index);
+		}
+	}
+}
+
+void
+nvkm_event_send(struct nvkm_event *event, u32 types, int index,
+		void *data, u32 size)
+{
+	struct nvkm_notify *notify;
+	unsigned long flags;
+
+	if (!event->refs || WARN_ON(index >= event->index_nr))
+		return;
+
+	spin_lock_irqsave(&event->list_lock, flags);
+	list_for_each_entry(notify, &event->list, head) {
+		if (notify->index == index && (notify->types & types)) {
+			if (event->func->send) {
+				event->func->send(data, size, notify);
+				continue;
+			}
+			nvkm_notify_send(notify, data, size);
+		}
+	}
+	spin_unlock_irqrestore(&event->list_lock, flags);
+}
+
+void
+nvkm_event_fini(struct nvkm_event *event)
+{
+	if (event->refs) {
+		kfree(event->refs);
+		event->refs = NULL;
+>>>>>>> v3.18
 	}
 }
 
 int
+<<<<<<< HEAD
 nouveau_event_create(int index_nr, struct nouveau_event **pevent)
 {
 	struct nouveau_event *event;
@@ -106,5 +172,21 @@ nouveau_event_create(int index_nr, struct nouveau_event **pevent)
 	for (i = 0; i < index_nr; i++)
 		INIT_LIST_HEAD(&event->index[i].list);
 	event->index_nr = index_nr;
+=======
+nvkm_event_init(const struct nvkm_event_func *func, int types_nr, int index_nr,
+		struct nvkm_event *event)
+{
+	event->refs = kzalloc(sizeof(*event->refs) * index_nr * types_nr,
+			      GFP_KERNEL);
+	if (!event->refs)
+		return -ENOMEM;
+
+	event->func = func;
+	event->types_nr = types_nr;
+	event->index_nr = index_nr;
+	spin_lock_init(&event->refs_lock);
+	spin_lock_init(&event->list_lock);
+	INIT_LIST_HEAD(&event->list);
+>>>>>>> v3.18
 	return 0;
 }

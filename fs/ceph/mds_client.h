@@ -67,6 +67,10 @@ struct ceph_mds_reply_info_parsed {
 		/* for readdir results */
 		struct {
 			struct ceph_mds_reply_dirfrag *dir_dir;
+<<<<<<< HEAD
+=======
+			size_t			      dir_buf_size;
+>>>>>>> v3.18
 			int                           dir_nr;
 			char                          **dir_dname;
 			u32                           *dir_dname_len;
@@ -132,6 +136,10 @@ struct ceph_mds_session {
 	struct list_head  s_caps;     /* all caps issued by this session */
 	int               s_nr_caps, s_trim_caps;
 	int               s_num_cap_releases;
+<<<<<<< HEAD
+=======
+	int		  s_cap_reconnect;
+>>>>>>> v3.18
 	struct list_head  s_cap_releases; /* waiting cap_release messages */
 	struct list_head  s_cap_releases_done; /* ready to send */
 	struct ceph_cap  *s_cap_iterator;
@@ -192,6 +200,10 @@ struct ceph_mds_request {
 	int r_fmode;        /* file mode, if expecting cap */
 	kuid_t r_uid;
 	kgid_t r_gid;
+<<<<<<< HEAD
+=======
+	struct timespec r_stamp;
+>>>>>>> v3.18
 
 	/* for choosing which mds to send this request to */
 	int r_direct_mode;
@@ -199,9 +211,13 @@ struct ceph_mds_request {
 	bool r_direct_is_hash;  /* true if r_direct_hash is valid */
 
 	/* data payload is used for xattr ops */
+<<<<<<< HEAD
 	struct page **r_pages;
 	int r_num_pages;
 	int r_data_len;
+=======
+	struct ceph_pagelist *r_pagelist;
+>>>>>>> v3.18
 
 	/* what caps shall we drop? */
 	int r_inode_drop, r_inode_unless;
@@ -329,6 +345,11 @@ ceph_get_mds_session(struct ceph_mds_session *s)
 	return s;
 }
 
+<<<<<<< HEAD
+=======
+extern const char *ceph_session_state_name(int s);
+
+>>>>>>> v3.18
 extern void ceph_put_mds_session(struct ceph_mds_session *s);
 
 extern int ceph_send_msg_mds(struct ceph_mds_client *mdsc,
@@ -345,7 +366,12 @@ extern void ceph_mdsc_lease_release(struct ceph_mds_client *mdsc,
 				    struct dentry *dn);
 
 extern void ceph_invalidate_dir_request(struct ceph_mds_request *req);
+<<<<<<< HEAD
 
+=======
+extern int ceph_alloc_readdir_reply_buffer(struct ceph_mds_request *req,
+					   struct inode *dir);
+>>>>>>> v3.18
 extern struct ceph_mds_request *
 ceph_mdsc_create_request(struct ceph_mds_client *mdsc, int op, int mode);
 extern void ceph_mdsc_submit_request(struct ceph_mds_client *mdsc,
@@ -382,6 +408,11 @@ extern void ceph_mdsc_lease_send_msg(struct ceph_mds_session *session,
 extern void ceph_mdsc_handle_map(struct ceph_mds_client *mdsc,
 				 struct ceph_msg *msg);
 
+<<<<<<< HEAD
+=======
+extern struct ceph_mds_session *
+ceph_mdsc_open_export_target_session(struct ceph_mds_client *mdsc, int target);
+>>>>>>> v3.18
 extern void ceph_mdsc_open_export_target_sessions(struct ceph_mds_client *mdsc,
 					  struct ceph_mds_session *session);
 

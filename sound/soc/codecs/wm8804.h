@@ -57,5 +57,12 @@
 #define WM8804_CLKOUT_SRC_OSCCLK		4
 
 #define WM8804_CLKOUT_DIV			1
+<<<<<<< HEAD
+=======
+#define WM8804_MCLK_DIV				2
+
+#define WM8804_MCLKDIV_256FS			0
+#define WM8804_MCLKDIV_128FS			1
+>>>>>>> v3.18
 
 #endif  /* _WM8804_H */

@@ -152,7 +152,13 @@ nodes to be present and contain the properties described below.
 			    "arm,cortex-a7"
 			    "arm,cortex-a8"
 			    "arm,cortex-a9"
+<<<<<<< HEAD
 			    "arm,cortex-a15"
+=======
+			    "arm,cortex-a12"
+			    "arm,cortex-a15"
+			    "arm,cortex-a17"
+>>>>>>> v3.18
 			    "arm,cortex-a53"
 			    "arm,cortex-a57"
 			    "arm,cortex-m0"
@@ -163,6 +169,11 @@ nodes to be present and contain the properties described below.
 			    "arm,cortex-r4"
 			    "arm,cortex-r5"
 			    "arm,cortex-r7"
+<<<<<<< HEAD
+=======
+			    "brcm,brahma-b15"
+			    "cavium,thunder"
+>>>>>>> v3.18
 			    "faraday,fa526"
 			    "intel,sa110"
 			    "intel,sa1100"
@@ -178,6 +189,7 @@ nodes to be present and contain the properties described below.
 		Usage and definition depend on ARM architecture version.
 			# On ARM v8 64-bit this property is required and must
 			  be one of:
+<<<<<<< HEAD
 			     "spin-table"
 			     "psci"
 			     "qcom,arm-cortex-acc"
@@ -187,6 +199,22 @@ nodes to be present and contain the properties described below.
 			    "qcom,gcc-msm8660"
 			    "qcom,kpss-acc-v1"
 			    "qcom,kpss-acc-v2"
+=======
+			     "psci"
+			     "spin-table"
+			# On ARM 32-bit systems this property is optional and
+			  can be one of:
+			    "allwinner,sun6i-a31"
+			    "arm,psci"
+			    "brcm,brahma-b15"
+			    "marvell,armada-375-smp"
+			    "marvell,armada-380-smp"
+			    "marvell,armada-xp-smp"
+			    "qcom,gcc-msm8660"
+			    "qcom,kpss-acc-v1"
+			    "qcom,kpss-acc-v2"
+			    "rockchip,rk3066-smp"
+>>>>>>> v3.18
 
 	- cpu-release-addr
 		Usage: required for systems that have an "enable-method"
@@ -206,11 +234,25 @@ nodes to be present and contain the properties described below.
 
 	- qcom,acc
 		Usage: required for systems that have an "enable-method"
+<<<<<<< HEAD
 		       property value of "qcom,kpss-acc-v1",
 		       "qcom,kpss-acc-v2" or "qcom,arm-cortex-acc"
 		Value type: <phandle>
 		Definition: Specifies the ACC[2] node associated with this CPU.
 
+=======
+		       property value of "qcom,kpss-acc-v1" or
+		       "qcom,kpss-acc-v2"
+		Value type: <phandle>
+		Definition: Specifies the ACC[2] node associated with this CPU.
+
+	- cpu-idle-states
+		Usage: Optional
+		Value type: <prop-encoded-array>
+		Definition:
+			# List of phandles to idle state nodes supported
+			  by this cpu [3].
+>>>>>>> v3.18
 
 Example 1 (dual-cluster big.LITTLE system 32-bit):
 
@@ -407,3 +449,8 @@ cpus {
 --
 [1] arm/msm/qcom,saw2.txt
 [2] arm/msm/qcom,kpss-acc.txt
+<<<<<<< HEAD
+=======
+[3] ARM Linux kernel documentation - idle states bindings
+    Documentation/devicetree/bindings/arm/idle-states.txt
+>>>>>>> v3.18

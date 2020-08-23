@@ -33,10 +33,15 @@
 #include <linux/acpi.h>
 #include <linux/cper.h>
 #include <acpi/apei.h>
+<<<<<<< HEAD
+=======
+#include <acpi/ghes.h>
+>>>>>>> v3.18
 #include <asm/mce.h>
 
 #include "mce-internal.h"
 
+<<<<<<< HEAD
 void apei_mce_report_mem_error(int corrected, struct cper_sec_mem_err *mem_err)
 {
 	struct mce m;
@@ -44,12 +49,30 @@ void apei_mce_report_mem_error(int corrected, struct cper_sec_mem_err *mem_err)
 	/* Only corrected MC is reported */
 	if (!corrected || !(mem_err->validation_bits &
 				CPER_MEM_VALID_PHYSICAL_ADDRESS))
+=======
+void apei_mce_report_mem_error(int severity, struct cper_sec_mem_err *mem_err)
+{
+	struct mce m;
+
+	if (!(mem_err->validation_bits & CPER_MEM_VALID_PA))
+>>>>>>> v3.18
 		return;
 
 	mce_setup(&m);
 	m.bank = 1;
+<<<<<<< HEAD
 	/* Fake a memory read corrected error with unknown channel */
 	m.status = MCI_STATUS_VAL | MCI_STATUS_EN | MCI_STATUS_ADDRV | 0x9f;
+=======
+	/* Fake a memory read error with unknown channel */
+	m.status = MCI_STATUS_VAL | MCI_STATUS_EN | MCI_STATUS_ADDRV | 0x9f;
+
+	if (severity >= GHES_SEV_RECOVERABLE)
+		m.status |= MCI_STATUS_UC;
+	if (severity >= GHES_SEV_PANIC)
+		m.status |= MCI_STATUS_PCC;
+
+>>>>>>> v3.18
 	m.addr = mem_err->physical_addr;
 	mce_log(&m);
 	mce_notify_irq();

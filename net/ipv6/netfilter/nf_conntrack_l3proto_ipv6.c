@@ -28,6 +28,10 @@
 #include <net/netfilter/nf_conntrack_l3proto.h>
 #include <net/netfilter/nf_conntrack_core.h>
 #include <net/netfilter/nf_conntrack_zones.h>
+<<<<<<< HEAD
+=======
+#include <net/netfilter/nf_conntrack_seqadj.h>
+>>>>>>> v3.18
 #include <net/netfilter/ipv6/nf_conntrack_ipv6.h>
 #include <net/netfilter/nf_nat_helper.h>
 #include <net/netfilter/ipv6/nf_defrag_ipv6.h>
@@ -94,7 +98,11 @@ static int ipv6_get_l4proto(const struct sk_buff *skb, unsigned int nhoff,
 	return NF_ACCEPT;
 }
 
+<<<<<<< HEAD
 static unsigned int ipv6_helper(unsigned int hooknum,
+=======
+static unsigned int ipv6_helper(const struct nf_hook_ops *ops,
+>>>>>>> v3.18
 				struct sk_buff *skb,
 				const struct net_device *in,
 				const struct net_device *out,
@@ -132,7 +140,11 @@ static unsigned int ipv6_helper(unsigned int hooknum,
 	return helper->help(skb, protoff, ct, ctinfo);
 }
 
+<<<<<<< HEAD
 static unsigned int ipv6_confirm(unsigned int hooknum,
+=======
+static unsigned int ipv6_confirm(const struct nf_hook_ops *ops,
+>>>>>>> v3.18
 				 struct sk_buff *skb,
 				 const struct net_device *in,
 				 const struct net_device *out,
@@ -158,11 +170,15 @@ static unsigned int ipv6_confirm(unsigned int hooknum,
 	/* adjust seqs for loopback traffic only in outgoing direction */
 	if (test_bit(IPS_SEQ_ADJUST_BIT, &ct->status) &&
 	    !nf_is_loopback_packet(skb)) {
+<<<<<<< HEAD
 		typeof(nf_nat_seq_adjust_hook) seq_adjust;
 
 		seq_adjust = rcu_dereference(nf_nat_seq_adjust_hook);
 		if (!seq_adjust ||
 		    !seq_adjust(skb, ct, ctinfo, protoff)) {
+=======
+		if (!nf_ct_seq_adjust(skb, ct, ctinfo, protoff)) {
+>>>>>>> v3.18
 			NF_CT_STAT_INC_ATOMIC(nf_ct_net(ct), drop);
 			return NF_DROP;
 		}
@@ -172,16 +188,27 @@ out:
 	return nf_conntrack_confirm(skb);
 }
 
+<<<<<<< HEAD
 static unsigned int ipv6_conntrack_in(unsigned int hooknum,
+=======
+static unsigned int ipv6_conntrack_in(const struct nf_hook_ops *ops,
+>>>>>>> v3.18
 				      struct sk_buff *skb,
 				      const struct net_device *in,
 				      const struct net_device *out,
 				      int (*okfn)(struct sk_buff *))
 {
+<<<<<<< HEAD
 	return nf_conntrack_in(dev_net(in), PF_INET6, hooknum, skb);
 }
 
 static unsigned int ipv6_conntrack_local(unsigned int hooknum,
+=======
+	return nf_conntrack_in(dev_net(in), PF_INET6, ops->hooknum, skb);
+}
+
+static unsigned int ipv6_conntrack_local(const struct nf_hook_ops *ops,
+>>>>>>> v3.18
 					 struct sk_buff *skb,
 					 const struct net_device *in,
 					 const struct net_device *out,
@@ -192,7 +219,11 @@ static unsigned int ipv6_conntrack_local(unsigned int hooknum,
 		net_notice_ratelimited("ipv6_conntrack_local: packet too short\n");
 		return NF_ACCEPT;
 	}
+<<<<<<< HEAD
 	return nf_conntrack_in(dev_net(out), PF_INET6, hooknum, skb);
+=======
+	return nf_conntrack_in(dev_net(out), PF_INET6, ops->hooknum, skb);
+>>>>>>> v3.18
 }
 
 static struct nf_hook_ops ipv6_conntrack_ops[] __read_mostly = {
@@ -250,9 +281,15 @@ ipv6_getorigdst(struct sock *sk, int optval, void __user *user, int *len)
 	struct nf_conntrack_tuple tuple = { .src.l3num = NFPROTO_IPV6 };
 	struct nf_conn *ct;
 
+<<<<<<< HEAD
 	tuple.src.u3.in6 = inet6->rcv_saddr;
 	tuple.src.u.tcp.port = inet->inet_sport;
 	tuple.dst.u3.in6 = inet6->daddr;
+=======
+	tuple.src.u3.in6 = sk->sk_v6_rcv_saddr;
+	tuple.src.u.tcp.port = inet->inet_sport;
+	tuple.dst.u3.in6 = sk->sk_v6_daddr;
+>>>>>>> v3.18
 	tuple.dst.u.tcp.port = inet->inet_dport;
 	tuple.dst.protonum = sk->sk_protocol;
 

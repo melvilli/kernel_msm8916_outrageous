@@ -24,6 +24,7 @@ Please note that implementation details can be changed.
 
    a page/swp_entry may be charged (usage += PAGE_SIZE) at
 
+<<<<<<< HEAD
 	mem_cgroup_newpage_charge()
 	  Called at new page fault and Copy-On-Write.
 
@@ -42,10 +43,14 @@ Please note that implementation details can be changed.
 	  Called before migration. "extra" charge is done and followed by
 	  charge-commit-cancel protocol.
 	  At commit, charge against oldpage or newpage will be committed.
+=======
+	mem_cgroup_try_charge()
+>>>>>>> v3.18
 
 2. Uncharge
   a page/swp_entry may be uncharged (usage -= PAGE_SIZE) by
 
+<<<<<<< HEAD
 	mem_cgroup_uncharge_page()
 	  Called when an anonymous page is fully unmapped. I.e., mapcount goes
 	  to 0. If the page is SwapCache, uncharge is delayed until
@@ -59,11 +64,16 @@ Please note that implementation details can be changed.
 	  Called when SwapCache is removed from radix-tree. The charge itself
 	  is moved to swap_cgroup. (If mem+swap controller is disabled, no
 	  charge to swap occurs.)
+=======
+	mem_cgroup_uncharge()
+	  Called when a page's refcount goes down to 0.
+>>>>>>> v3.18
 
 	mem_cgroup_uncharge_swap()
 	  Called when swp_entry's refcnt goes down to 0. A charge against swap
 	  disappears.
 
+<<<<<<< HEAD
 	mem_cgroup_end_migration(old, new)
 	At success of migration old is uncharged (if necessary), a charge
 	to new page is committed. At failure, charge to old page is committed.
@@ -76,12 +86,22 @@ Please note that implementation details can be changed.
 		mem_cgroup_commit_charge_XXX
 		mem_cgroup_cancel_charge_XXX
 	these are used in swap-in and migration.
+=======
+3. charge-commit-cancel
+	Memcg pages are charged in two steps:
+		mem_cgroup_try_charge()
+		mem_cgroup_commit_charge() or mem_cgroup_cancel_charge()
+>>>>>>> v3.18
 
 	At try_charge(), there are no flags to say "this page is charged".
 	at this point, usage += PAGE_SIZE.
 
+<<<<<<< HEAD
 	At commit(), the function checks the page should be charged or not
 	and set flags or avoid charging.(usage -= PAGE_SIZE)
+=======
+	At commit(), the page is associated with the memcg.
+>>>>>>> v3.18
 
 	At cancel(), simply usage -= PAGE_SIZE.
 
@@ -91,6 +111,7 @@ Under below explanation, we assume CONFIG_MEM_RES_CTRL_SWAP=y.
 	Anonymous page is newly allocated at
 		  - page fault into MAP_ANONYMOUS mapping.
 		  - Copy-On-Write.
+<<<<<<< HEAD
  	It is charged right after it's allocated before doing any page table
 	related operations. Of course, it's uncharged when another page is used
 	for the fault address.
@@ -103,6 +124,8 @@ Under below explanation, we assume CONFIG_MEM_RES_CTRL_SWAP=y.
 	pages are swapped out. In this case, the page is marked as
 	PageSwapCache(). uncharge() routine doesn't uncharge the page marked
 	as SwapCache(). It's delayed until __delete_from_swap_cache().
+=======
+>>>>>>> v3.18
 
 	4.1 Swap-in.
 	At swap-in, the page is taken from swap-cache. There are 2 cases.
@@ -111,6 +134,7 @@ Under below explanation, we assume CONFIG_MEM_RES_CTRL_SWAP=y.
 	(b) If the SwapCache has been mapped by processes, it has been
 	    charged already.
 
+<<<<<<< HEAD
 	This swap-in is one of the most complicated work. In do_swap_page(),
 	following events occur when pte is unchanged.
 
@@ -146,6 +170,8 @@ Under below explanation, we assume CONFIG_MEM_RES_CTRL_SWAP=y.
 
        In any cases, charges to this page should be 1/ 1.
 
+=======
+>>>>>>> v3.18
 	4.2 Swap-out.
 	At swap-out, typical state transition is below.
 
@@ -158,6 +184,7 @@ Under below explanation, we assume CONFIG_MEM_RES_CTRL_SWAP=y.
 	    swp_entry's refcnt -= 1.
 
 
+<<<<<<< HEAD
 	At (b), the page is marked as SwapCache and not uncharged.
 	At (d), the page is removed from SwapCache and a charge in page_cgroup
 	is moved to swap_cgroup.
@@ -165,21 +192,33 @@ Under below explanation, we assume CONFIG_MEM_RES_CTRL_SWAP=y.
 	Finally, at task exit,
 	(e) zap_pte() is called and swp_entry's refcnt -=1 -> 0.
 	Here, a charge in swap_cgroup disappears.
+=======
+	Finally, at task exit,
+	(e) zap_pte() is called and swp_entry's refcnt -=1 -> 0.
+>>>>>>> v3.18
 
 5. Page Cache
    	Page Cache is charged at
 	- add_to_page_cache_locked().
 
+<<<<<<< HEAD
 	uncharged at
 	- __remove_from_page_cache().
 
+=======
+>>>>>>> v3.18
 	The logic is very clear. (About migration, see below)
 	Note: __remove_from_page_cache() is called by remove_from_page_cache()
 	and __remove_mapping().
 
 6. Shmem(tmpfs) Page Cache
+<<<<<<< HEAD
 	Memcg's charge/uncharge have special handlers of shmem. The best way
 	to understand shmem's page state transition is to read mm/shmem.c.
+=======
+	The best way to understand shmem's page state transition is to read
+	mm/shmem.c.
+>>>>>>> v3.18
 	But brief explanation of the behavior of memcg around shmem will be
 	helpful to understand the logic.
 
@@ -192,6 +231,7 @@ Under below explanation, we assume CONFIG_MEM_RES_CTRL_SWAP=y.
 	It's charged when...
 	- A new page is added to shmem's radix-tree.
 	- A swp page is read. (move a charge from swap_cgroup to page_cgroup)
+<<<<<<< HEAD
 	It's uncharged when
 	- A page is removed from radix-tree and not SwapCache.
 	- When SwapCache is removed, a charge is moved to swap_cgroup.
@@ -242,6 +282,12 @@ Under below explanation, we assume CONFIG_MEM_RES_CTRL_SWAP=y.
 
 	  But zap_pte() (by exit or munmap) can be called while migration,
 	  we have to check if OLDPAGE/NEWPAGE is a valid page after commit().
+=======
+
+7. Page Migration
+
+	mem_cgroup_migrate()
+>>>>>>> v3.18
 
 8. LRU
         Each memcg has its own private LRU. Now, its handling is under global

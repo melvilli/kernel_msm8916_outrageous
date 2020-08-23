@@ -6,11 +6,21 @@
 
 struct at91_init_soc {
 	int builtin;
+<<<<<<< HEAD
+=======
+	u32 extern_irq;
+>>>>>>> v3.18
 	unsigned int *default_irq_priority;
 	void (*map_io)(void);
 	void (*ioremap_registers)(void);
 	void (*register_clocks)(void);
+<<<<<<< HEAD
 	void (*init)(void);
+=======
+	void (*register_devices)(void);
+	void (*init)(void);
+	void (*init_time)(void);
+>>>>>>> v3.18
 };
 
 extern struct at91_init_soc at91_boot_soc;
@@ -23,6 +33,10 @@ extern struct at91_init_soc at91sam9rl_soc;
 extern struct at91_init_soc at91sam9x5_soc;
 extern struct at91_init_soc at91sam9n12_soc;
 extern struct at91_init_soc sama5d3_soc;
+<<<<<<< HEAD
+=======
+extern struct at91_init_soc sama5d4_soc;
+>>>>>>> v3.18
 
 #define AT91_SOC_START(_name)				\
 struct at91_init_soc __initdata _name##_soc		\
@@ -73,3 +87,10 @@ static inline int at91_soc_is_enabled(void)
 #if !defined(CONFIG_SOC_SAMA5D3)
 #define sama5d3_soc	at91_boot_soc
 #endif
+<<<<<<< HEAD
+=======
+
+#if !defined(CONFIG_SOC_SAMA5D4)
+#define sama5d4_soc	at91_boot_soc
+#endif
+>>>>>>> v3.18

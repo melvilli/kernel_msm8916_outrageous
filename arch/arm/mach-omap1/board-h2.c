@@ -41,7 +41,10 @@
 #include <mach/mux.h>
 #include <linux/omap-dma.h>
 #include <mach/tc.h>
+<<<<<<< HEAD
 #include <mach/irda.h>
+=======
+>>>>>>> v3.18
 #include <linux/platform_data/keypad-omap.h>
 #include <mach/flash.h>
 
@@ -50,7 +53,10 @@
 
 #include "common.h"
 #include "board-h2.h"
+<<<<<<< HEAD
 #include "dma.h"
+=======
+>>>>>>> v3.18
 
 /* At OMAP1610 Innovator the Ethernet is directly connected to CS1 */
 #define OMAP1610_ETHR_START		0x04000300
@@ -276,6 +282,7 @@ static struct platform_device h2_kp_device = {
 	.resource	= h2_kp_resources,
 };
 
+<<<<<<< HEAD
 #define H2_IRDA_FIRSEL_GPIO_PIN	17
 
 static struct omap_irda_config h2_irda_data = {
@@ -309,6 +316,8 @@ static struct platform_device h2_irda_device = {
 	.resource	= h2_irda_resources,
 };
 
+=======
+>>>>>>> v3.18
 static struct gpio_led h2_gpio_led_pins[] = {
 	{
 		.name		= "h2:red",
@@ -339,7 +348,10 @@ static struct platform_device *h2_devices[] __initdata = {
 	&h2_nor_device,
 	&h2_nand_device,
 	&h2_smc91x_device,
+<<<<<<< HEAD
 	&h2_irda_device,
+=======
+>>>>>>> v3.18
 	&h2_kp_device,
 	&h2_gpio_leds,
 };
@@ -354,6 +366,12 @@ static void __init h2_init_smc91x(void)
 
 static int tps_setup(struct i2c_client *client, void *context)
 {
+<<<<<<< HEAD
+=======
+	if (!IS_BUILTIN(CONFIG_TPS65010))
+		return -ENOSYS;
+	
+>>>>>>> v3.18
 	tps65010_config_vregs1(TPS_LDO2_ENABLE | TPS_VLDO2_3_0V |
 				TPS_LDO1_ENABLE | TPS_VLDO1_3_0V);
 

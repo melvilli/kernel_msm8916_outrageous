@@ -212,6 +212,7 @@
 #define TLS_SIZE (GDT_ENTRY_TLS_ENTRIES * 8)
 
 #ifdef __KERNEL__
+<<<<<<< HEAD
 
 /*
  * early_idt_handler_array is an array of entry points referenced in the
@@ -225,6 +226,13 @@
 #ifndef __ASSEMBLY__
 
 extern const char early_idt_handler_array[NUM_EXCEPTION_VECTORS][EARLY_IDT_HANDLER_SIZE];
+=======
+#ifndef __ASSEMBLY__
+extern const char early_idt_handlers[NUM_EXCEPTION_VECTORS][2+2+5];
+#ifdef CONFIG_TRACING
+#define trace_early_idt_handlers early_idt_handlers
+#endif
+>>>>>>> v3.18
 
 /*
  * Load a segment. Fall back on loading the zero

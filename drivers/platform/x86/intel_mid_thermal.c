@@ -481,7 +481,12 @@ static int mid_thermal_probe(struct platform_device *pdev)
 	int i;
 	struct platform_info *pinfo;
 
+<<<<<<< HEAD
 	pinfo = kzalloc(sizeof(struct platform_info), GFP_KERNEL);
+=======
+	pinfo = devm_kzalloc(&pdev->dev, sizeof(struct platform_info),
+			     GFP_KERNEL);
+>>>>>>> v3.18
 	if (!pinfo)
 		return -ENOMEM;
 
@@ -489,7 +494,10 @@ static int mid_thermal_probe(struct platform_device *pdev)
 	ret = mid_initialize_adc(&pdev->dev);
 	if (ret) {
 		dev_err(&pdev->dev, "ADC init failed");
+<<<<<<< HEAD
 		kfree(pinfo);
+=======
+>>>>>>> v3.18
 		return ret;
 	}
 
@@ -520,7 +528,10 @@ err:
 		thermal_zone_device_unregister(pinfo->tzd[i]);
 	}
 	configure_adc(0);
+<<<<<<< HEAD
 	kfree(pinfo);
+=======
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -541,9 +552,12 @@ static int mid_thermal_remove(struct platform_device *pdev)
 		thermal_zone_device_unregister(pinfo->tzd[i]);
 	}
 
+<<<<<<< HEAD
 	kfree(pinfo);
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 	/* Stop the ADC */
 	return configure_adc(0);
 }

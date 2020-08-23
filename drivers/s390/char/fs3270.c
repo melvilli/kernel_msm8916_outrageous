@@ -524,20 +524,32 @@ static const struct file_operations fs3270_fops = {
 	.llseek		= no_llseek,
 };
 
+<<<<<<< HEAD
 void fs3270_create_cb(int minor)
+=======
+static void fs3270_create_cb(int minor)
+>>>>>>> v3.18
 {
 	__register_chrdev(IBM_FS3270_MAJOR, minor, 1, "tub", &fs3270_fops);
 	device_create(class3270, NULL, MKDEV(IBM_FS3270_MAJOR, minor),
 		      NULL, "3270/tub%d", minor);
 }
 
+<<<<<<< HEAD
 void fs3270_destroy_cb(int minor)
+=======
+static void fs3270_destroy_cb(int minor)
+>>>>>>> v3.18
 {
 	device_destroy(class3270, MKDEV(IBM_FS3270_MAJOR, minor));
 	__unregister_chrdev(IBM_FS3270_MAJOR, minor, 1, "tub");
 }
 
+<<<<<<< HEAD
 struct raw3270_notifier fs3270_notifier =
+=======
+static struct raw3270_notifier fs3270_notifier =
+>>>>>>> v3.18
 {
 	.create = fs3270_create_cb,
 	.destroy = fs3270_destroy_cb,
@@ -564,6 +576,10 @@ static void __exit
 fs3270_exit(void)
 {
 	raw3270_unregister_notifier(&fs3270_notifier);
+<<<<<<< HEAD
+=======
+	device_destroy(class3270, MKDEV(IBM_FS3270_MAJOR, 0));
+>>>>>>> v3.18
 	__unregister_chrdev(IBM_FS3270_MAJOR, 0, 1, "fs3270");
 }
 

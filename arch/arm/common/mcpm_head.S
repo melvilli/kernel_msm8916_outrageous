@@ -15,6 +15,10 @@
 
 #include <linux/linkage.h>
 #include <asm/mcpm.h>
+<<<<<<< HEAD
+=======
+#include <asm/assembler.h>
+>>>>>>> v3.18
 
 #include "vlock.h"
 
@@ -32,11 +36,19 @@
 1901:	adr	r0, 1902b
 	bl	printascii
 	mov	r0, r9
+<<<<<<< HEAD
 	bl	printhex8
 	adr	r0, 1903b
 	bl	printascii
 	mov	r0, r10
 	bl	printhex8
+=======
+	bl	printhex2
+	adr	r0, 1903b
+	bl	printascii
+	mov	r0, r10
+	bl	printhex2
+>>>>>>> v3.18
 	adr	r0, 1904b
 	bl	printascii
 #endif
@@ -47,6 +59,10 @@
 
 ENTRY(mcpm_entry_point)
 
+<<<<<<< HEAD
+=======
+ ARM_BE8(setend        be)
+>>>>>>> v3.18
  THUMB(	adr	r12, BSYM(1f)	)
  THUMB(	bx	r12		)
  THUMB(	.thumb			)
@@ -71,12 +87,26 @@ ENTRY(mcpm_entry_point)
 	 * position independent way.
 	 */
 	adr	r5, 3f
+<<<<<<< HEAD
 	ldmia	r5, {r6, r7, r8, r11}
+=======
+	ldmia	r5, {r0, r6, r7, r8, r11}
+	add	r0, r5, r0			@ r0 = mcpm_entry_early_pokes
+>>>>>>> v3.18
 	add	r6, r5, r6			@ r6 = mcpm_entry_vectors
 	ldr	r7, [r5, r7]			@ r7 = mcpm_power_up_setup_phys
 	add	r8, r5, r8			@ r8 = mcpm_sync
 	add	r11, r5, r11			@ r11 = first_man_locks
 
+<<<<<<< HEAD
+=======
+	@ Perform an early poke, if any
+	add	r0, r0, r4, lsl #3
+	ldmia	r0, {r0, r1}
+	teq	r0, #0
+	strne	r1, [r0]
+
+>>>>>>> v3.18
 	mov	r0, #MCPM_SYNC_CLUSTER_SIZE
 	mla	r8, r0, r10, r8			@ r8 = sync cluster base
 
@@ -151,7 +181,11 @@ mcpm_setup_leave:
 
 	mov	r0, #INBOUND_NOT_COMING_UP
 	strb	r0, [r8, #MCPM_SYNC_CLUSTER_INBOUND]
+<<<<<<< HEAD
 	dsb
+=======
+	dsb	st
+>>>>>>> v3.18
 	sev
 
 	mov	r0, r11
@@ -195,7 +229,12 @@ mcpm_entry_gated:
 
 	.align	2
 
+<<<<<<< HEAD
 3:	.word	mcpm_entry_vectors - .
+=======
+3:	.word	mcpm_entry_early_pokes - .
+	.word	mcpm_entry_vectors - 3b
+>>>>>>> v3.18
 	.word	mcpm_power_up_setup_phys - 3b
 	.word	mcpm_sync - 3b
 	.word	first_man_locks - 3b
@@ -214,6 +253,13 @@ first_man_locks:
 ENTRY(mcpm_entry_vectors)
 	.space	4 * MAX_NR_CLUSTERS * MAX_CPUS_PER_CLUSTER
 
+<<<<<<< HEAD
+=======
+	.type	mcpm_entry_early_pokes, #object
+ENTRY(mcpm_entry_early_pokes)
+	.space	8 * MAX_NR_CLUSTERS * MAX_CPUS_PER_CLUSTER
+
+>>>>>>> v3.18
 	.type	mcpm_power_up_setup_phys, #object
 ENTRY(mcpm_power_up_setup_phys)
 	.space  4		@ set by mcpm_sync_init()

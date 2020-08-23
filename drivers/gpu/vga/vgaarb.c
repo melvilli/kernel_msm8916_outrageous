@@ -41,6 +41,10 @@
 #include <linux/poll.h>
 #include <linux/miscdevice.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
+=======
+#include <linux/screen_info.h>
+>>>>>>> v3.18
 
 #include <linux/uaccess.h>
 
@@ -112,10 +116,15 @@ both:
 	return 1;
 }
 
+<<<<<<< HEAD
 #ifndef __ARCH_HAS_VGA_DEFAULT_DEVICE
 /* this is only used a cookie - it should not be dereferenced */
 static struct pci_dev *vga_default;
 #endif
+=======
+/* this is only used a cookie - it should not be dereferenced */
+static struct pci_dev *vga_default;
+>>>>>>> v3.18
 
 static void vga_arb_device_card_gone(struct pci_dev *pdev);
 
@@ -131,7 +140,10 @@ static struct vga_device *vgadev_find(struct pci_dev *pdev)
 }
 
 /* Returns the default VGA device (vgacon's babe) */
+<<<<<<< HEAD
 #ifndef __ARCH_HAS_VGA_DEFAULT_DEVICE
+=======
+>>>>>>> v3.18
 struct pci_dev *vga_default_device(void)
 {
 	return vga_default;
@@ -147,7 +159,10 @@ void vga_set_default_device(struct pci_dev *pdev)
 	pci_dev_put(vga_default);
 	vga_default = pci_dev_get(pdev);
 }
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 
 static inline void vga_irq_set_state(struct vga_device *vgadev, bool state)
 {
@@ -237,12 +252,19 @@ static struct vga_device *__vga_tryget(struct vga_device *vgadev,
 		if (conflict->locks & lwants)
 			return conflict;
 
+<<<<<<< HEAD
 		/* Ok, now check if he owns the resource we want. We don't need
 		 * to check "decodes" since it should be impossible to own
 		 * own legacy resources you don't decode unless I have a bug
 		 * in this code...
 		 */
 		WARN_ON(conflict->owns & ~conflict->decodes);
+=======
+		/* Ok, now check if it owns the resource we want.  We can
+		 * lock resources that are not decoded, therefore a device
+		 * can own resources it doesn't decode.
+		 */
+>>>>>>> v3.18
 		match = lwants & conflict->owns;
 		if (!match)
 			continue;
@@ -254,6 +276,7 @@ static struct vga_device *__vga_tryget(struct vga_device *vgadev,
 		flags = 0;
 		pci_bits = 0;
 
+<<<<<<< HEAD
 		if (!conflict->bridge_has_one_vga) {
 			vga_irq_set_state(conflict, false);
 			flags |= PCI_VGA_STATE_CHANGE_DECODES;
@@ -261,25 +284,55 @@ static struct vga_device *__vga_tryget(struct vga_device *vgadev,
 				pci_bits |= PCI_COMMAND_MEMORY;
 			if (lwants & (VGA_RSRC_LEGACY_IO|VGA_RSRC_NORMAL_IO))
 				pci_bits |= PCI_COMMAND_IO;
+=======
+		/* If we can't control legacy resources via the bridge, we
+		 * also need to disable normal decoding.
+		 */
+		if (!conflict->bridge_has_one_vga) {
+			if ((match & conflict->decodes) & VGA_RSRC_LEGACY_MEM)
+				pci_bits |= PCI_COMMAND_MEMORY;
+			if ((match & conflict->decodes) & VGA_RSRC_LEGACY_IO)
+				pci_bits |= PCI_COMMAND_IO;
+
+			if (pci_bits) {
+				vga_irq_set_state(conflict, false);
+				flags |= PCI_VGA_STATE_CHANGE_DECODES;
+			}
+>>>>>>> v3.18
 		}
 
 		if (change_bridge)
 			flags |= PCI_VGA_STATE_CHANGE_BRIDGE;
 
 		pci_set_vga_state(conflict->pdev, false, pci_bits, flags);
+<<<<<<< HEAD
 		conflict->owns &= ~lwants;
 		/* If he also owned non-legacy, that is no longer the case */
 		if (lwants & VGA_RSRC_LEGACY_MEM)
 			conflict->owns &= ~VGA_RSRC_NORMAL_MEM;
 		if (lwants & VGA_RSRC_LEGACY_IO)
+=======
+		conflict->owns &= ~match;
+
+		/* If we disabled normal decoding, reflect it in owns */
+		if (pci_bits & PCI_COMMAND_MEMORY)
+			conflict->owns &= ~VGA_RSRC_NORMAL_MEM;
+		if (pci_bits & PCI_COMMAND_IO)
+>>>>>>> v3.18
 			conflict->owns &= ~VGA_RSRC_NORMAL_IO;
 	}
 
 enable_them:
 	/* ok dude, we got it, everybody conflicting has been disabled, let's
+<<<<<<< HEAD
 	 * enable us. Make sure we don't mark a bit in "owns" that we don't
 	 * also have in "decodes". We can lock resources we don't decode but
 	 * not own them.
+=======
+	 * enable us.  Mark any bits in "owns" regardless of whether we
+	 * decoded them.  We can lock resources we don't decode, therefore
+	 * we must track them via "owns".
+>>>>>>> v3.18
 	 */
 	flags = 0;
 	pci_bits = 0;
@@ -291,7 +344,11 @@ enable_them:
 		if (wants & (VGA_RSRC_LEGACY_IO|VGA_RSRC_NORMAL_IO))
 			pci_bits |= PCI_COMMAND_IO;
 	}
+<<<<<<< HEAD
 	if (!!(wants & VGA_RSRC_LEGACY_MASK))
+=======
+	if (wants & VGA_RSRC_LEGACY_MASK)
+>>>>>>> v3.18
 		flags |= PCI_VGA_STATE_CHANGE_BRIDGE;
 
 	pci_set_vga_state(vgadev->pdev, true, pci_bits, flags);
@@ -299,7 +356,11 @@ enable_them:
 	if (!vgadev->bridge_has_one_vga) {
 		vga_irq_set_state(vgadev, true);
 	}
+<<<<<<< HEAD
 	vgadev->owns |= (wants & vgadev->decodes);
+=======
+	vgadev->owns |= wants;
+>>>>>>> v3.18
 lock_them:
 	vgadev->locks |= (rsrc & VGA_RSRC_LEGACY_MASK);
 	if (rsrc & VGA_RSRC_LEGACY_IO)
@@ -392,15 +453,23 @@ int vga_get(struct pci_dev *pdev, unsigned int rsrc, int interruptible)
 		set_current_state(interruptible ?
 				  TASK_INTERRUPTIBLE :
 				  TASK_UNINTERRUPTIBLE);
+<<<<<<< HEAD
 		if (interruptible && signal_pending(current)) {
 			__set_current_state(TASK_RUNNING);
 			remove_wait_queue(&vga_wait_queue, &wait);
 			rc = -ERESTARTSYS;
+=======
+		if (signal_pending(current)) {
+			rc = -EINTR;
+>>>>>>> v3.18
 			break;
 		}
 		schedule();
 		remove_wait_queue(&vga_wait_queue, &wait);
+<<<<<<< HEAD
 		set_current_state(TASK_RUNNING);
+=======
+>>>>>>> v3.18
 	}
 	return rc;
 }
@@ -580,11 +649,20 @@ static bool vga_arbiter_add_pci_device(struct pci_dev *pdev)
 	/* Deal with VGA default device. Use first enabled one
 	 * by default if arch doesn't have it's own hook
 	 */
+<<<<<<< HEAD
 #ifndef __ARCH_HAS_VGA_DEFAULT_DEVICE
 	if (vga_default == NULL &&
 	    ((vgadev->owns & VGA_RSRC_LEGACY_MASK) == VGA_RSRC_LEGACY_MASK))
 		vga_set_default_device(pdev);
 #endif
+=======
+	if (vga_default == NULL &&
+	    ((vgadev->owns & VGA_RSRC_LEGACY_MASK) == VGA_RSRC_LEGACY_MASK)) {
+		pr_info("vgaarb: setting as boot device: PCI:%s\n",
+			pci_name(pdev));
+		vga_set_default_device(pdev);
+	}
+>>>>>>> v3.18
 
 	vga_arbiter_check_bridge_sharing(vgadev);
 
@@ -618,10 +696,15 @@ static bool vga_arbiter_del_pci_device(struct pci_dev *pdev)
 		goto bail;
 	}
 
+<<<<<<< HEAD
 #ifndef __ARCH_HAS_VGA_DEFAULT_DEVICE
 	if (vga_default == pdev)
 		vga_set_default_device(NULL);
 #endif
+=======
+	if (vga_default == pdev)
+		vga_set_default_device(NULL);
+>>>>>>> v3.18
 
 	if (vgadev->decodes & (VGA_RSRC_LEGACY_IO | VGA_RSRC_LEGACY_MEM))
 		vga_decode_count--;
@@ -646,10 +729,18 @@ bail:
 static inline void vga_update_device_decodes(struct vga_device *vgadev,
 					     int new_decodes)
 {
+<<<<<<< HEAD
 	int old_decodes;
 	struct vga_device *new_vgadev, *conflict;
 
 	old_decodes = vgadev->decodes;
+=======
+	int old_decodes, decodes_removed, decodes_unlocked;
+
+	old_decodes = vgadev->decodes;
+	decodes_removed = ~new_decodes & old_decodes;
+	decodes_unlocked = vgadev->locks & decodes_removed;
+>>>>>>> v3.18
 	vgadev->decodes = new_decodes;
 
 	pr_info("vgaarb: device changed decodes: PCI:%s,olddecodes=%s,decodes=%s:owns=%s\n",
@@ -658,6 +749,7 @@ static inline void vga_update_device_decodes(struct vga_device *vgadev,
 		vga_iostate_to_str(vgadev->decodes),
 		vga_iostate_to_str(vgadev->owns));
 
+<<<<<<< HEAD
 
 	/* if we own the decodes we should move them along to
 	   another card */
@@ -683,6 +775,24 @@ static inline void vga_update_device_decodes(struct vga_device *vgadev,
 		else
 			vga_decode_count--;
 	}
+=======
+	/* if we removed locked decodes, lock count goes to zero, and release */
+	if (decodes_unlocked) {
+		if (decodes_unlocked & VGA_RSRC_LEGACY_IO)
+			vgadev->io_lock_cnt = 0;
+		if (decodes_unlocked & VGA_RSRC_LEGACY_MEM)
+			vgadev->mem_lock_cnt = 0;
+		__vga_put(vgadev, decodes_unlocked);
+	}
+
+	/* change decodes counter */
+	if (old_decodes & VGA_RSRC_LEGACY_MASK &&
+	    !(new_decodes & VGA_RSRC_LEGACY_MASK))
+		vga_decode_count--;
+	if (!(old_decodes & VGA_RSRC_LEGACY_MASK) &&
+	    new_decodes & VGA_RSRC_LEGACY_MASK)
+		vga_decode_count++;
+>>>>>>> v3.18
 	pr_debug("vgaarb: decoding count now is: %d\n", vga_decode_count);
 }
 
@@ -1325,6 +1435,41 @@ static int __init vga_arb_device_init(void)
 	pr_info("vgaarb: loaded\n");
 
 	list_for_each_entry(vgadev, &vga_list, list) {
+<<<<<<< HEAD
+=======
+#if defined(CONFIG_X86) || defined(CONFIG_IA64)
+		/* Override I/O based detection done by vga_arbiter_add_pci_device()
+		 * as it may take the wrong device (e.g. on Apple system under EFI).
+		 *
+		 * Select the device owning the boot framebuffer if there is one.
+		 */
+		resource_size_t start, end;
+		int i;
+
+		/* Does firmware framebuffer belong to us? */
+		for (i = 0; i < DEVICE_COUNT_RESOURCE; i++) {
+			if (!(pci_resource_flags(vgadev->pdev, i) & IORESOURCE_MEM))
+				continue;
+
+			start = pci_resource_start(vgadev->pdev, i);
+			end  = pci_resource_end(vgadev->pdev, i);
+
+			if (!start || !end)
+				continue;
+
+			if (screen_info.lfb_base < start ||
+			    (screen_info.lfb_base + screen_info.lfb_size) >= end)
+				continue;
+			if (!vga_default_device())
+				pr_info("vgaarb: setting as boot device: PCI:%s\n",
+					pci_name(vgadev->pdev));
+			else if (vgadev->pdev != vga_default_device())
+				pr_info("vgaarb: overriding boot device: PCI:%s\n",
+					pci_name(vgadev->pdev));
+			vga_set_default_device(vgadev->pdev);
+		}
+#endif
+>>>>>>> v3.18
 		if (vgadev->bridge_has_one_vga)
 			pr_info("vgaarb: bridge control possible %s\n", pci_name(vgadev->pdev));
 		else

@@ -79,6 +79,13 @@ struct autofs_info {
 };
 
 #define AUTOFS_INF_EXPIRING	(1<<0) /* dentry is in the process of expiring */
+<<<<<<< HEAD
+=======
+#define AUTOFS_INF_NO_RCU	(1<<1) /* the dentry is being considered
+					* for expiry, so RCU_walk is
+					* not permitted
+					*/
+>>>>>>> v3.18
 #define AUTOFS_INF_PENDING	(1<<2) /* dentry pending mount */
 
 struct autofs_wait_queue {
@@ -104,7 +111,11 @@ struct autofs_sb_info {
 	u32 magic;
 	int pipefd;
 	struct file *pipe;
+<<<<<<< HEAD
 	pid_t oz_pgrp;
+=======
+	struct pid *oz_pgrp;
+>>>>>>> v3.18
 	int catatonic;
 	int version;
 	int sub_version;
@@ -122,6 +133,10 @@ struct autofs_sb_info {
 	spinlock_t lookup_lock;
 	struct list_head active_list;
 	struct list_head expiring_list;
+<<<<<<< HEAD
+=======
+	struct rcu_head rcu;
+>>>>>>> v3.18
 };
 
 static inline struct autofs_sb_info *autofs4_sbi(struct super_block *sb)
@@ -139,6 +154,7 @@ static inline struct autofs_info *autofs4_dentry_ino(struct dentry *dentry)
    filesystem without "magic".) */
 
 static inline int autofs4_oz_mode(struct autofs_sb_info *sbi) {
+<<<<<<< HEAD
 	return sbi->catatonic || task_pgrp_nr(current) == sbi->oz_pgrp;
 }
 
@@ -154,6 +170,9 @@ static inline int autofs4_ispending(struct dentry *dentry)
 		return 1;
 
 	return 0;
+=======
+	return sbi->catatonic || task_pgrp(current) == sbi->oz_pgrp;
+>>>>>>> v3.18
 }
 
 struct inode *autofs4_get_inode(struct super_block *, umode_t);
@@ -161,7 +180,11 @@ void autofs4_free_ino(struct autofs_info *);
 
 /* Expiration */
 int is_autofs4_dentry(struct dentry *);
+<<<<<<< HEAD
 int autofs4_expire_wait(struct dentry *dentry);
+=======
+int autofs4_expire_wait(struct dentry *dentry, int rcu_walk);
+>>>>>>> v3.18
 int autofs4_expire_run(struct super_block *, struct vfsmount *,
 			struct autofs_sb_info *,
 			struct autofs_packet_expire __user *);
@@ -190,6 +213,7 @@ extern const struct file_operations autofs4_root_operations;
 extern const struct dentry_operations autofs4_dentry_operations;
 
 /* VFS automount flags management functions */
+<<<<<<< HEAD
 
 static inline void __managed_dentry_set_automount(struct dentry *dentry)
 {
@@ -239,6 +263,8 @@ static inline void managed_dentry_clear_transit(struct dentry *dentry)
 	spin_unlock(&dentry->d_lock);
 }
 
+=======
+>>>>>>> v3.18
 static inline void __managed_dentry_set_managed(struct dentry *dentry)
 {
 	dentry->d_flags |= (DCACHE_NEED_AUTOMOUNT|DCACHE_MANAGE_TRANSIT);
@@ -271,7 +297,11 @@ void autofs4_clean_ino(struct autofs_info *);
 
 static inline int autofs_prepare_pipe(struct file *pipe)
 {
+<<<<<<< HEAD
 	if (!pipe->f_op || !pipe->f_op->write)
+=======
+	if (!pipe->f_op->write)
+>>>>>>> v3.18
 		return -EINVAL;
 	if (!S_ISFIFO(file_inode(pipe)->i_mode))
 		return -EINVAL;

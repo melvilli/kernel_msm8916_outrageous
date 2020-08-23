@@ -12,7 +12,10 @@
  * Copyright (C) 2012 Olivier Sobrie <olivier@sobrie.be>
  */
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/completion.h>
 #include <linux/module.h>
 #include <linux/netdevice.h>
@@ -54,6 +57,11 @@
 #define USB_OEM_MERCURY_PRODUCT_ID	34
 #define USB_OEM_LEAF_PRODUCT_ID		35
 #define USB_CAN_R_PRODUCT_ID		39
+<<<<<<< HEAD
+=======
+#define USB_LEAF_LITE_V2_PRODUCT_ID	288
+#define USB_MINI_PCIE_HS_PRODUCT_ID	289
+>>>>>>> v3.18
 
 /* USB devices features */
 #define KVASER_HAS_SILENT_MODE		BIT(0)
@@ -357,6 +365,11 @@ static const struct usb_device_id kvaser_usb_table[] = {
 		.driver_info = KVASER_HAS_TXRX_ERRORS },
 	{ USB_DEVICE(KVASER_VENDOR_ID, USB_CAN_R_PRODUCT_ID),
 		.driver_info = KVASER_HAS_TXRX_ERRORS },
+<<<<<<< HEAD
+=======
+	{ USB_DEVICE(KVASER_VENDOR_ID, USB_LEAF_LITE_V2_PRODUCT_ID) },
+	{ USB_DEVICE(KVASER_VENDOR_ID, USB_MINI_PCIE_HS_PRODUCT_ID) },
+>>>>>>> v3.18
 	{ }
 };
 MODULE_DEVICE_TABLE(usb, kvaser_usb_table);
@@ -380,12 +393,18 @@ static int kvaser_usb_wait_msg(const struct kvaser_usb *dev, u8 id,
 	void *buf;
 	int actual_len;
 	int err;
+<<<<<<< HEAD
 	int pos = 0;
+=======
+	int pos;
+	unsigned long to = jiffies + msecs_to_jiffies(USB_RECV_TIMEOUT);
+>>>>>>> v3.18
 
 	buf = kzalloc(RX_BUFFER_SIZE, GFP_KERNEL);
 	if (!buf)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 	err = usb_bulk_msg(dev->udev,
 			   usb_rcvbulkpipe(dev->udev,
 					   dev->bulk_in->bEndpointAddress),
@@ -412,6 +431,38 @@ static int kvaser_usb_wait_msg(const struct kvaser_usb *dev, u8 id,
 
 		pos += tmp->len;
 	}
+=======
+	do {
+		err = usb_bulk_msg(dev->udev,
+				   usb_rcvbulkpipe(dev->udev,
+					dev->bulk_in->bEndpointAddress),
+				   buf, RX_BUFFER_SIZE, &actual_len,
+				   USB_RECV_TIMEOUT);
+		if (err < 0)
+			goto end;
+
+		pos = 0;
+		while (pos <= actual_len - MSG_HEADER_LEN) {
+			tmp = buf + pos;
+
+			if (!tmp->len)
+				break;
+
+			if (pos + tmp->len > actual_len) {
+				dev_err(dev->udev->dev.parent,
+					"Format error\n");
+				break;
+			}
+
+			if (tmp->id == id) {
+				memcpy(msg, tmp, tmp->len);
+				goto end;
+			}
+
+			pos += tmp->len;
+		}
+	} while (time_before(jiffies, to));
+>>>>>>> v3.18
 
 	err = -EINVAL;
 
@@ -579,7 +630,11 @@ static int kvaser_usb_simple_msg_async(struct kvaser_usb_net_priv *priv,
 			  usb_sndbulkpipe(dev->udev,
 					  dev->bulk_out->bEndpointAddress),
 			  buf, msg->len,
+<<<<<<< HEAD
 			  kvaser_usb_simple_msg_callback, netdev);
+=======
+			  kvaser_usb_simple_msg_callback, priv);
+>>>>>>> v3.18
 	usb_anchor_urb(urb, &priv->tx_submitted);
 
 	err = usb_submit_urb(urb, GFP_ATOMIC);
@@ -654,6 +709,14 @@ static void kvaser_usb_rx_error(const struct kvaser_usb *dev,
 	priv = dev->nets[channel];
 	stats = &priv->netdev->stats;
 
+<<<<<<< HEAD
+=======
+	if (status & M16C_STATE_BUS_RESET) {
+		kvaser_usb_unlink_tx_urbs(priv);
+		return;
+	}
+
+>>>>>>> v3.18
 	skb = alloc_can_err_skb(priv->netdev, &cf);
 	if (!skb) {
 		stats->rx_dropped++;
@@ -664,7 +727,11 @@ static void kvaser_usb_rx_error(const struct kvaser_usb *dev,
 
 	netdev_dbg(priv->netdev, "Error status: 0x%02x\n", status);
 
+<<<<<<< HEAD
 	if (status & (M16C_STATE_BUS_OFF | M16C_STATE_BUS_RESET)) {
+=======
+	if (status & M16C_STATE_BUS_OFF) {
+>>>>>>> v3.18
 		cf->can_id |= CAN_ERR_BUSOFF;
 
 		priv->can.can_stats.bus_off++;
@@ -690,7 +757,13 @@ static void kvaser_usb_rx_error(const struct kvaser_usb *dev,
 		}
 
 		new_state = CAN_STATE_ERROR_PASSIVE;
+<<<<<<< HEAD
 	} else if (status & M16C_STATE_BUS_ERROR) {
+=======
+	}
+
+	if (status == M16C_STATE_BUS_ERROR) {
+>>>>>>> v3.18
 		if ((priv->can.state < CAN_STATE_ERROR_WARNING) &&
 		    ((txerr >= 96) || (rxerr >= 96))) {
 			cf->can_id |= CAN_ERR_CRTL;
@@ -700,8 +773,12 @@ static void kvaser_usb_rx_error(const struct kvaser_usb *dev,
 
 			priv->can.can_stats.error_warning++;
 			new_state = CAN_STATE_ERROR_WARNING;
+<<<<<<< HEAD
 		} else if ((priv->can.state > CAN_STATE_ERROR_ACTIVE) &&
 			   ((txerr < 96) && (rxerr < 96))) {
+=======
+		} else if (priv->can.state > CAN_STATE_ERROR_ACTIVE) {
+>>>>>>> v3.18
 			cf->can_id |= CAN_ERR_PROT;
 			cf->data[2] = CAN_ERR_PROT_ACTIVE;
 
@@ -1232,9 +1309,12 @@ static int kvaser_usb_close(struct net_device *netdev)
 	if (err)
 		netdev_warn(netdev, "Cannot stop device, error %d\n", err);
 
+<<<<<<< HEAD
 	/* reset tx contexts */
 	kvaser_usb_unlink_tx_urbs(priv);
 
+=======
+>>>>>>> v3.18
 	priv->can.state = CAN_STATE_STOPPED;
 	close_candev(priv->netdev);
 
@@ -1283,14 +1363,21 @@ static netdev_tx_t kvaser_usb_start_xmit(struct sk_buff *skb,
 	if (!urb) {
 		netdev_err(netdev, "No memory left for URBs\n");
 		stats->tx_dropped++;
+<<<<<<< HEAD
 		dev_kfree_skb(skb);
 		return NETDEV_TX_OK;
+=======
+		goto nourbmem;
+>>>>>>> v3.18
 	}
 
 	buf = kmalloc(sizeof(struct kvaser_msg), GFP_ATOMIC);
 	if (!buf) {
 		stats->tx_dropped++;
+<<<<<<< HEAD
 		dev_kfree_skb(skb);
+=======
+>>>>>>> v3.18
 		goto nobufmem;
 	}
 
@@ -1325,7 +1412,10 @@ static netdev_tx_t kvaser_usb_start_xmit(struct sk_buff *skb,
 		}
 	}
 
+<<<<<<< HEAD
 	/* This should never happen; it implies a flow control bug */
+=======
+>>>>>>> v3.18
 	if (!context) {
 		netdev_warn(netdev, "cannot find free context\n");
 		ret =  NETDEV_TX_BUSY;
@@ -1356,6 +1446,12 @@ static netdev_tx_t kvaser_usb_start_xmit(struct sk_buff *skb,
 	if (unlikely(err)) {
 		can_free_echo_skb(netdev, context->echo_index);
 
+<<<<<<< HEAD
+=======
+		skb = NULL; /* set to NULL to avoid double free in
+			     * dev_kfree_skb(skb) */
+
+>>>>>>> v3.18
 		atomic_dec(&priv->active_tx_urbs);
 		usb_unanchor_urb(urb);
 
@@ -1377,6 +1473,11 @@ releasebuf:
 	kfree(buf);
 nobufmem:
 	usb_free_urb(urb);
+<<<<<<< HEAD
+=======
+nourbmem:
+	dev_kfree_skb(skb);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -1384,6 +1485,10 @@ static const struct net_device_ops kvaser_usb_netdev_ops = {
 	.ndo_open = kvaser_usb_open,
 	.ndo_stop = kvaser_usb_close,
 	.ndo_start_xmit = kvaser_usb_start_xmit,
+<<<<<<< HEAD
+=======
+	.ndo_change_mtu = can_change_mtu,
+>>>>>>> v3.18
 };
 
 static const struct can_bittiming_const kvaser_usb_bittiming_const = {
@@ -1488,10 +1593,13 @@ static int kvaser_usb_init_one(struct usb_interface *intf,
 	struct kvaser_usb_net_priv *priv;
 	int i, err;
 
+<<<<<<< HEAD
 	err = kvaser_usb_send_simple_msg(dev, CMD_RESET_CHIP, channel);
 	if (err)
 		return err;
 
+=======
+>>>>>>> v3.18
 	netdev = alloc_candev(sizeof(*priv), MAX_TX_URBS);
 	if (!netdev) {
 		dev_err(&intf->dev, "Cannot alloc candev\n");
@@ -1529,6 +1637,10 @@ static int kvaser_usb_init_one(struct usb_interface *intf,
 	netdev->netdev_ops = &kvaser_usb_netdev_ops;
 
 	SET_NETDEV_DEV(netdev, &intf->dev);
+<<<<<<< HEAD
+=======
+	netdev->dev_id = channel;
+>>>>>>> v3.18
 
 	dev->nets[channel] = priv;
 
@@ -1577,7 +1689,11 @@ static int kvaser_usb_probe(struct usb_interface *intf,
 {
 	struct kvaser_usb *dev;
 	int err = -ENOMEM;
+<<<<<<< HEAD
 	int i, retry = 3;
+=======
+	int i;
+>>>>>>> v3.18
 
 	dev = devm_kzalloc(&intf->dev, sizeof(*dev), GFP_KERNEL);
 	if (!dev)
@@ -1595,6 +1711,7 @@ static int kvaser_usb_probe(struct usb_interface *intf,
 
 	usb_set_intfdata(intf, dev);
 
+<<<<<<< HEAD
 	/* On some x86 laptops, plugging a Kvaser device again after
 	 * an unplug makes the firmware always ignore the very first
 	 * command. For such a case, provide some room for retries
@@ -1604,6 +1721,12 @@ static int kvaser_usb_probe(struct usb_interface *intf,
 		err = kvaser_usb_get_software_info(dev);
 	} while (--retry && err == -ETIMEDOUT);
 
+=======
+	for (i = 0; i < MAX_NET_DEVICES; i++)
+		kvaser_usb_send_simple_msg(dev, CMD_RESET_CHIP, i);
+
+	err = kvaser_usb_get_software_info(dev);
+>>>>>>> v3.18
 	if (err) {
 		dev_err(&intf->dev,
 			"Cannot get software infos, error %d\n", err);

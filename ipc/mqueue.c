@@ -6,7 +6,11 @@
  *
  * Spinlocks:               Mohamed Abbas           (abbas.mohamed@intel.com)
  * Lockless receive & send, fd based notify:
+<<<<<<< HEAD
  * 			    Manfred Spraul	    (manfred@colorfullife.com)
+=======
+ *			    Manfred Spraul	    (manfred@colorfullife.com)
+>>>>>>> v3.18
  *
  * Audit:                   George Wilson           (ltcgcw@us.ibm.com)
  *
@@ -73,7 +77,11 @@ struct mqueue_inode_info {
 	struct mq_attr attr;
 
 	struct sigevent notify;
+<<<<<<< HEAD
 	struct pid* notify_owner;
+=======
+	struct pid *notify_owner;
+>>>>>>> v3.18
 	struct user_namespace *notify_user_ns;
 	struct user_struct *user;	/* user who created, for accounting */
 	struct sock *notify_sock;
@@ -92,7 +100,11 @@ static void remove_notification(struct mqueue_inode_info *info);
 
 static struct kmem_cache *mqueue_inode_cachep;
 
+<<<<<<< HEAD
 static struct ctl_table_header * mq_sysctl_table;
+=======
+static struct ctl_table_header *mq_sysctl_table;
+>>>>>>> v3.18
 
 static inline struct mqueue_inode_info *MQUEUE_I(struct inode *inode)
 {
@@ -143,6 +155,10 @@ static int msg_insert(struct msg_msg *msg, struct mqueue_inode_info *info)
 		if (!leaf)
 			return -ENOMEM;
 		INIT_LIST_HEAD(&leaf->msg_list);
+<<<<<<< HEAD
+=======
+		info->qsize += sizeof(*leaf);
+>>>>>>> v3.18
 	}
 	leaf->priority = msg->m_type;
 	rb_link_node(&leaf->rb_node, parent, p);
@@ -187,6 +203,10 @@ try_again:
 			     "lazy leaf delete!\n");
 		rb_erase(&leaf->rb_node, &info->msg_tree);
 		if (info->node_cache) {
+<<<<<<< HEAD
+=======
+			info->qsize -= sizeof(*leaf);
+>>>>>>> v3.18
 			kfree(leaf);
 		} else {
 			info->node_cache = leaf;
@@ -199,6 +219,10 @@ try_again:
 		if (list_empty(&leaf->msg_list)) {
 			rb_erase(&leaf->rb_node, &info->msg_tree);
 			if (info->node_cache) {
+<<<<<<< HEAD
+=======
+				info->qsize -= sizeof(*leaf);
+>>>>>>> v3.18
 				kfree(leaf);
 			} else {
 				info->node_cache = leaf;
@@ -463,6 +487,7 @@ out_unlock:
 
 static int mqueue_unlink(struct inode *dir, struct dentry *dentry)
 {
+<<<<<<< HEAD
   	struct inode *inode = dentry->d_inode;
 
 	dir->i_ctime = dir->i_mtime = dir->i_atime = CURRENT_TIME;
@@ -470,6 +495,15 @@ static int mqueue_unlink(struct inode *dir, struct dentry *dentry)
   	drop_nlink(inode);
   	dput(dentry);
   	return 0;
+=======
+	struct inode *inode = dentry->d_inode;
+
+	dir->i_ctime = dir->i_mtime = dir->i_atime = CURRENT_TIME;
+	dir->i_size -= DIRENT_SIZE;
+	drop_nlink(inode);
+	dput(dentry);
+	return 0;
+>>>>>>> v3.18
 }
 
 /*
@@ -619,7 +653,11 @@ static struct ext_wait_queue *wq_get_first_waiter(
 
 static inline void set_cookie(struct sk_buff *skb, char code)
 {
+<<<<<<< HEAD
 	((char*)skb->data)[NOTIFY_COOKIE_LEN-1] = code;
+=======
+	((char *)skb->data)[NOTIFY_COOKIE_LEN-1] = code;
+>>>>>>> v3.18
 }
 
 /*
@@ -751,7 +789,11 @@ static struct file *do_create(struct ipc_namespace *ipc_ns, struct inode *dir,
 	}
 
 	mode &= ~current_umask();
+<<<<<<< HEAD
 	ret = vfs_create2(path->mnt, dir, path->dentry, mode, true);
+=======
+	ret = vfs_create(dir, path->dentry, mode, true);
+>>>>>>> v3.18
 	path->dentry->d_fsdata = NULL;
 	if (ret)
 		return ERR_PTR(ret);
@@ -767,7 +809,11 @@ static struct file *do_open(struct path *path, int oflag)
 	if ((oflag & O_ACCMODE) == (O_RDWR | O_WRONLY))
 		return ERR_PTR(-EINVAL);
 	acc = oflag2acc[oflag & O_ACCMODE];
+<<<<<<< HEAD
 	if (inode_permission2(path->mnt, path->dentry->d_inode, acc))
+=======
+	if (inode_permission(path->dentry->d_inode, acc))
+>>>>>>> v3.18
 		return ERR_PTR(-EACCES);
 	return dentry_open(path, oflag, current_cred());
 }
@@ -800,7 +846,11 @@ SYSCALL_DEFINE4(mq_open, const char __user *, u_name, int, oflag, umode_t, mode,
 	ro = mnt_want_write(mnt);	/* we'll drop it in any case */
 	error = 0;
 	mutex_lock(&root->d_inode->i_mutex);
+<<<<<<< HEAD
 	path.dentry = lookup_one_len2(name->name, mnt, root, strlen(name->name));
+=======
+	path.dentry = lookup_one_len(name->name, root, strlen(name->name));
+>>>>>>> v3.18
 	if (IS_ERR(path.dentry)) {
 		error = PTR_ERR(path.dentry);
 		goto out_putfd;
@@ -871,7 +921,11 @@ SYSCALL_DEFINE1(mq_unlink, const char __user *, u_name)
 	if (err)
 		goto out_name;
 	mutex_lock_nested(&mnt->mnt_root->d_inode->i_mutex, I_MUTEX_PARENT);
+<<<<<<< HEAD
 	dentry = lookup_one_len2(name->name, mnt, mnt->mnt_root,
+=======
+	dentry = lookup_one_len(name->name, mnt->mnt_root,
+>>>>>>> v3.18
 				strlen(name->name));
 	if (IS_ERR(dentry)) {
 		err = PTR_ERR(dentry);
@@ -883,7 +937,11 @@ SYSCALL_DEFINE1(mq_unlink, const char __user *, u_name)
 		err = -ENOENT;
 	} else {
 		ihold(inode);
+<<<<<<< HEAD
 		err = vfs_unlink2(mnt, dentry->d_parent->d_inode, dentry);
+=======
+		err = vfs_unlink(dentry->d_parent->d_inode, dentry, NULL);
+>>>>>>> v3.18
 	}
 	dput(dentry);
 
@@ -1023,6 +1081,10 @@ SYSCALL_DEFINE5(mq_timedsend, mqd_t, mqdes, const char __user *, u_msg_ptr,
 		/* Save our speculative allocation into the cache */
 		INIT_LIST_HEAD(&new_leaf->msg_list);
 		info->node_cache = new_leaf;
+<<<<<<< HEAD
+=======
+		info->qsize += sizeof(*new_leaf);
+>>>>>>> v3.18
 		new_leaf = NULL;
 	} else {
 		kfree(new_leaf);
@@ -1129,6 +1191,10 @@ SYSCALL_DEFINE5(mq_timedreceive, mqd_t, mqdes, char __user *, u_msg_ptr,
 		/* Save our speculative allocation into the cache */
 		INIT_LIST_HEAD(&new_leaf->msg_list);
 		info->node_cache = new_leaf;
+<<<<<<< HEAD
+=======
+		info->qsize += sizeof(*new_leaf);
+>>>>>>> v3.18
 	} else {
 		kfree(new_leaf);
 	}
@@ -1298,11 +1364,19 @@ retry:
 out_fput:
 	fdput(f);
 out:
+<<<<<<< HEAD
 	if (sock) {
 		netlink_detachskb(sock, nc);
 	} else if (nc) {
 		dev_kfree_skb(nc);
 	}
+=======
+	if (sock)
+		netlink_detachskb(sock, nc);
+	else if (nc)
+		dev_kfree_skb(nc);
+
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -1454,4 +1528,8 @@ out_sysctl:
 	return error;
 }
 
+<<<<<<< HEAD
 __initcall(init_mqueue_fs);
+=======
+device_initcall(init_mqueue_fs);
+>>>>>>> v3.18

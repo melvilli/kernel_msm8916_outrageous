@@ -25,7 +25,14 @@
 
 #define FT1000_DPRAM_BASE	0x0000	/* Dual Port RAM starting offset */
 
+<<<<<<< HEAD
 /* Maximum number of occurrence of pseudo header errors before resetting PC Card. */
+=======
+/*
+ * Maximum number of occurrence of pseudo header errors before resetting PC
+ * Card.
+ */
+>>>>>>> v3.18
 #define MAX_PH_ERR	300
 
 #define SUCCESS	0x00
@@ -40,6 +47,7 @@ struct ft1000_pcmcia {
 struct pcmcia_device;
 struct net_device;
 extern struct net_device *init_ft1000_card(struct pcmcia_device *link,
+<<<<<<< HEAD
 						void *ft1000_reset);
 extern void stop_ft1000_card(struct net_device *dev);
 extern int card_download(struct net_device *dev, const u8 *pFileStart,
@@ -50,6 +58,17 @@ extern void ft1000CleanupProc(struct net_device *dev);
 extern u16 ft1000_read_dpram(struct net_device *dev, int offset);
 extern void card_bootload(struct net_device *dev);
 extern u16 ft1000_read_dpram_mag_16(struct net_device *dev, int offset, int Index);
+=======
+					   void *ft1000_reset);
+extern void stop_ft1000_card(struct net_device *dev);
+extern int card_download(struct net_device *dev, const u8 *pFileStart,
+			 size_t FileLength);
+
+extern u16 ft1000_read_dpram(struct net_device *dev, int offset);
+extern void card_bootload(struct net_device *dev);
+extern u16 ft1000_read_dpram_mag_16(struct net_device *dev, int offset,
+				    int Index);
+>>>>>>> v3.18
 extern u32 ft1000_read_dpram_mag_32(struct net_device *dev, int offset);
 void ft1000_write_dpram_mag_32(struct net_device *dev, int offset, u32 value);
 
@@ -60,7 +79,12 @@ static inline u16 ft1000_read_reg(struct net_device *dev, u16 offset)
 }
 
 /* Set the value of a given ASIC register. */
+<<<<<<< HEAD
 static inline void ft1000_write_reg(struct net_device *dev, u16 offset, u16 value)
+=======
+static inline void ft1000_write_reg(struct net_device *dev, u16 offset,
+				    u16 value)
+>>>>>>> v3.18
 {
 	outw(value, dev->base_addr + offset);
 }

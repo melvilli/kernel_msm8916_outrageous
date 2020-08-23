@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*******************************************************************************
 
   Intel PRO/1000 Linux driver
@@ -25,6 +26,28 @@
   Intel Corporation, 5200 N.E. Elam Young Parkway, Hillsboro, OR 97124-6497
 
 *******************************************************************************/
+=======
+/* Intel PRO/1000 Linux driver
+ * Copyright(c) 1999 - 2014 Intel Corporation.
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms and conditions of the GNU General Public License,
+ * version 2, as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ * more details.
+ *
+ * The full GNU General Public License is included in this distribution in
+ * the file called "COPYING".
+ *
+ * Contact Information:
+ * Linux NICS <linux.nics@intel.com>
+ * e1000-devel Mailing List <e1000-devel@lists.sourceforge.net>
+ * Intel Corporation, 5200 N.E. Elam Young Parkway, Hillsboro, OR 97124-6497
+ */
+>>>>>>> v3.18
 
 #include "e1000.h"
 
@@ -218,6 +241,14 @@ s32 e1000_check_alt_mac_addr_generic(struct e1000_hw *hw)
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+u32 e1000e_rar_get_count_generic(struct e1000_hw *hw)
+{
+	return hw->mac.rar_entry_count;
+}
+
+>>>>>>> v3.18
 /**
  *  e1000e_rar_set_generic - Set receive address register
  *  @hw: pointer to the HW structure
@@ -227,7 +258,11 @@ s32 e1000_check_alt_mac_addr_generic(struct e1000_hw *hw)
  *  Sets the receive address array register at index to the address passed
  *  in by addr.
  **/
+<<<<<<< HEAD
 void e1000e_rar_set_generic(struct e1000_hw *hw, u8 *addr, u32 index)
+=======
+int e1000e_rar_set_generic(struct e1000_hw *hw, u8 *addr, u32 index)
+>>>>>>> v3.18
 {
 	u32 rar_low, rar_high;
 
@@ -251,6 +286,11 @@ void e1000e_rar_set_generic(struct e1000_hw *hw, u8 *addr, u32 index)
 	e1e_flush();
 	ew32(RAH(index), rar_high);
 	e1e_flush();
+<<<<<<< HEAD
+=======
+
+	return 0;
+>>>>>>> v3.18
 }
 
 /**
@@ -787,7 +827,10 @@ static s32 e1000_commit_fc_settings_generic(struct e1000_hw *hw)
 	default:
 		e_dbg("Flow control param set incorrectly\n");
 		return -E1000_ERR_CONFIG;
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 	}
 
 	ew32(TXCW, txcw);

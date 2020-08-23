@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* Copyright (C) 2011-2013 B.A.T.M.A.N. contributors:
+=======
+/* Copyright (C) 2011-2014 B.A.T.M.A.N. contributors:
+>>>>>>> v3.18
  *
  * Antonio Quartulli
  *
@@ -12,13 +16,21 @@
  * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
  */
 
 #include <linux/if_ether.h>
 #include <linux/if_arp.h>
+<<<<<<< HEAD
+=======
+#include <linux/if_vlan.h>
+>>>>>>> v3.18
 #include <net/arp.h>
 
 #include "main.h"
@@ -29,7 +41,10 @@
 #include "send.h"
 #include "types.h"
 #include "translation-table.h"
+<<<<<<< HEAD
 #include "unicast.h"
+=======
+>>>>>>> v3.18
 
 static void batadv_dat_purge(struct work_struct *work);
 
@@ -45,9 +60,15 @@ static void batadv_dat_start_timer(struct batadv_priv *bat_priv)
 }
 
 /**
+<<<<<<< HEAD
  * batadv_dat_entry_free_ref - decrements the dat_entry refcounter and possibly
  * free it
  * @dat_entry: the oentry to free
+=======
+ * batadv_dat_entry_free_ref - decrement the dat_entry refcounter and possibly
+ * free it
+ * @dat_entry: the entry to free
+>>>>>>> v3.18
  */
 static void batadv_dat_entry_free_ref(struct batadv_dat_entry *dat_entry)
 {
@@ -56,10 +77,17 @@ static void batadv_dat_entry_free_ref(struct batadv_dat_entry *dat_entry)
 }
 
 /**
+<<<<<<< HEAD
  * batadv_dat_to_purge - checks whether a dat_entry has to be purged or not
  * @dat_entry: the entry to check
  *
  * Returns true if the entry has to be purged now, false otherwise
+=======
+ * batadv_dat_to_purge - check whether a dat_entry has to be purged or not
+ * @dat_entry: the entry to check
+ *
+ * Returns true if the entry has to be purged now, false otherwise.
+>>>>>>> v3.18
  */
 static bool batadv_dat_to_purge(struct batadv_dat_entry *dat_entry)
 {
@@ -75,8 +103,13 @@ static bool batadv_dat_to_purge(struct batadv_dat_entry *dat_entry)
  *	      returns a boolean value: true is the entry has to be deleted,
  *	      false otherwise
  *
+<<<<<<< HEAD
  * Loops over each entry in the DAT local storage and delete it if and only if
  * the to_purge function passed as argument returns true
+=======
+ * Loops over each entry in the DAT local storage and deletes it if and only if
+ * the to_purge function passed as argument returns true.
+>>>>>>> v3.18
  */
 static void __batadv_dat_purge(struct batadv_priv *bat_priv,
 			       bool (*to_purge)(struct batadv_dat_entry *))
@@ -97,7 +130,11 @@ static void __batadv_dat_purge(struct batadv_priv *bat_priv,
 		spin_lock_bh(list_lock);
 		hlist_for_each_entry_safe(dat_entry, node_tmp, head,
 					  hash_entry) {
+<<<<<<< HEAD
 			/* if an helper function has been passed as parameter,
+=======
+			/* if a helper function has been passed as parameter,
+>>>>>>> v3.18
 			 * ask it if the entry has to be purged or not
 			 */
 			if (to_purge && !to_purge(dat_entry))
@@ -134,14 +171,22 @@ static void batadv_dat_purge(struct work_struct *work)
  * @node: node in the local table
  * @data2: second object to compare the node to
  *
+<<<<<<< HEAD
  * Returns 1 if the two entry are the same, 0 otherwise
+=======
+ * Returns 1 if the two entries are the same, 0 otherwise.
+>>>>>>> v3.18
  */
 static int batadv_compare_dat(const struct hlist_node *node, const void *data2)
 {
 	const void *data1 = container_of(node, struct batadv_dat_entry,
 					 hash_entry);
 
+<<<<<<< HEAD
 	return (memcmp(data1, data2, sizeof(__be32)) == 0 ? 1 : 0);
+=======
+	return memcmp(data1, data2, sizeof(__be32)) == 0 ? 1 : 0;
+>>>>>>> v3.18
 }
 
 /**
@@ -149,7 +194,11 @@ static int batadv_compare_dat(const struct hlist_node *node, const void *data2)
  * @skb: ARP packet
  * @hdr_size: size of the possible header before the ARP packet
  *
+<<<<<<< HEAD
  * Returns the value of the hw_src field in the ARP packet
+=======
+ * Returns the value of the hw_src field in the ARP packet.
+>>>>>>> v3.18
  */
 static uint8_t *batadv_arp_hw_src(struct sk_buff *skb, int hdr_size)
 {
@@ -166,7 +215,11 @@ static uint8_t *batadv_arp_hw_src(struct sk_buff *skb, int hdr_size)
  * @skb: ARP packet
  * @hdr_size: size of the possible header before the ARP packet
  *
+<<<<<<< HEAD
  * Returns the value of the ip_src field in the ARP packet
+=======
+ * Returns the value of the ip_src field in the ARP packet.
+>>>>>>> v3.18
  */
 static __be32 batadv_arp_ip_src(struct sk_buff *skb, int hdr_size)
 {
@@ -178,7 +231,11 @@ static __be32 batadv_arp_ip_src(struct sk_buff *skb, int hdr_size)
  * @skb: ARP packet
  * @hdr_size: size of the possible header before the ARP packet
  *
+<<<<<<< HEAD
  * Returns the value of the hw_dst field in the ARP packet
+=======
+ * Returns the value of the hw_dst field in the ARP packet.
+>>>>>>> v3.18
  */
 static uint8_t *batadv_arp_hw_dst(struct sk_buff *skb, int hdr_size)
 {
@@ -190,7 +247,11 @@ static uint8_t *batadv_arp_hw_dst(struct sk_buff *skb, int hdr_size)
  * @skb: ARP packet
  * @hdr_size: size of the possible header before the ARP packet
  *
+<<<<<<< HEAD
  * Returns the value of the ip_dst field in the ARP packet
+=======
+ * Returns the value of the ip_dst field in the ARP packet.
+>>>>>>> v3.18
  */
 static __be32 batadv_arp_ip_dst(struct sk_buff *skb, int hdr_size)
 {
@@ -202,6 +263,7 @@ static __be32 batadv_arp_ip_dst(struct sk_buff *skb, int hdr_size)
  * @data: data to hash
  * @size: size of the hash table
  *
+<<<<<<< HEAD
  * Returns the selected index in the hash table for the given data
  */
 static uint32_t batadv_hash_dat(const void *data, uint32_t size)
@@ -215,6 +277,17 @@ static uint32_t batadv_hash_dat(const void *data, uint32_t size)
 		hash += (hash << 10);
 		hash ^= (hash >> 6);
 	}
+=======
+ * Returns the selected index in the hash table for the given data.
+ */
+static uint32_t batadv_hash_dat(const void *data, uint32_t size)
+{
+	uint32_t hash = 0;
+	const struct batadv_dat_entry *dat = data;
+
+	hash = batadv_hash_bytes(hash, &dat->ip, sizeof(dat->ip));
+	hash = batadv_hash_bytes(hash, &dat->vid, sizeof(dat->vid));
+>>>>>>> v3.18
 
 	hash += (hash << 3);
 	hash ^= (hash >> 11);
@@ -224,6 +297,7 @@ static uint32_t batadv_hash_dat(const void *data, uint32_t size)
 }
 
 /**
+<<<<<<< HEAD
  * batadv_dat_entry_hash_find - looks for a given dat_entry in the local hash
  * table
  * @bat_priv: the bat priv with all the soft interface information
@@ -236,13 +310,36 @@ batadv_dat_entry_hash_find(struct batadv_priv *bat_priv, __be32 ip)
 {
 	struct hlist_head *head;
 	struct batadv_dat_entry *dat_entry, *dat_entry_tmp = NULL;
+=======
+ * batadv_dat_entry_hash_find - look for a given dat_entry in the local hash
+ * table
+ * @bat_priv: the bat priv with all the soft interface information
+ * @ip: search key
+ * @vid: VLAN identifier
+ *
+ * Returns the dat_entry if found, NULL otherwise.
+ */
+static struct batadv_dat_entry *
+batadv_dat_entry_hash_find(struct batadv_priv *bat_priv, __be32 ip,
+			   unsigned short vid)
+{
+	struct hlist_head *head;
+	struct batadv_dat_entry to_find, *dat_entry, *dat_entry_tmp = NULL;
+>>>>>>> v3.18
 	struct batadv_hashtable *hash = bat_priv->dat.hash;
 	uint32_t index;
 
 	if (!hash)
 		return NULL;
 
+<<<<<<< HEAD
 	index = batadv_hash_dat(&ip, hash->size);
+=======
+	to_find.ip = ip;
+	to_find.vid = vid;
+
+	index = batadv_hash_dat(&to_find, hash->size);
+>>>>>>> v3.18
 	head = &hash->table[index];
 
 	rcu_read_lock();
@@ -266,13 +363,21 @@ batadv_dat_entry_hash_find(struct batadv_priv *bat_priv, __be32 ip)
  * @bat_priv: the bat priv with all the soft interface information
  * @ip: ipv4 to add/edit
  * @mac_addr: mac address to assign to the given ipv4
+<<<<<<< HEAD
  */
 static void batadv_dat_entry_add(struct batadv_priv *bat_priv, __be32 ip,
 				 uint8_t *mac_addr)
+=======
+ * @vid: VLAN identifier
+ */
+static void batadv_dat_entry_add(struct batadv_priv *bat_priv, __be32 ip,
+				 uint8_t *mac_addr, unsigned short vid)
+>>>>>>> v3.18
 {
 	struct batadv_dat_entry *dat_entry;
 	int hash_added;
 
+<<<<<<< HEAD
 	dat_entry = batadv_dat_entry_hash_find(bat_priv, ip);
 	/* if this entry is already known, just update it */
 	if (dat_entry) {
@@ -282,6 +387,18 @@ static void batadv_dat_entry_add(struct batadv_priv *bat_priv, __be32 ip,
 		batadv_dbg(BATADV_DBG_DAT, bat_priv,
 			   "Entry updated: %pI4 %pM\n", &dat_entry->ip,
 			   dat_entry->mac_addr);
+=======
+	dat_entry = batadv_dat_entry_hash_find(bat_priv, ip, vid);
+	/* if this entry is already known, just update it */
+	if (dat_entry) {
+		if (!batadv_compare_eth(dat_entry->mac_addr, mac_addr))
+			ether_addr_copy(dat_entry->mac_addr, mac_addr);
+		dat_entry->last_update = jiffies;
+		batadv_dbg(BATADV_DBG_DAT, bat_priv,
+			   "Entry updated: %pI4 %pM (vid: %d)\n",
+			   &dat_entry->ip, dat_entry->mac_addr,
+			   BATADV_PRINT_VID(vid));
+>>>>>>> v3.18
 		goto out;
 	}
 
@@ -290,12 +407,21 @@ static void batadv_dat_entry_add(struct batadv_priv *bat_priv, __be32 ip,
 		goto out;
 
 	dat_entry->ip = ip;
+<<<<<<< HEAD
 	memcpy(dat_entry->mac_addr, mac_addr, ETH_ALEN);
+=======
+	dat_entry->vid = vid;
+	ether_addr_copy(dat_entry->mac_addr, mac_addr);
+>>>>>>> v3.18
 	dat_entry->last_update = jiffies;
 	atomic_set(&dat_entry->refcount, 2);
 
 	hash_added = batadv_hash_add(bat_priv->dat.hash, batadv_compare_dat,
+<<<<<<< HEAD
 				     batadv_hash_dat, &dat_entry->ip,
+=======
+				     batadv_hash_dat, dat_entry,
+>>>>>>> v3.18
 				     &dat_entry->hash_entry);
 
 	if (unlikely(hash_added != 0)) {
@@ -304,8 +430,13 @@ static void batadv_dat_entry_add(struct batadv_priv *bat_priv, __be32 ip,
 		goto out;
 	}
 
+<<<<<<< HEAD
 	batadv_dbg(BATADV_DBG_DAT, bat_priv, "New entry added: %pI4 %pM\n",
 		   &dat_entry->ip, dat_entry->mac_addr);
+=======
+	batadv_dbg(BATADV_DBG_DAT, bat_priv, "New entry added: %pI4 %pM (vid: %d)\n",
+		   &dat_entry->ip, dat_entry->mac_addr, BATADV_PRINT_VID(vid));
+>>>>>>> v3.18
 
 out:
 	if (dat_entry)
@@ -343,12 +474,18 @@ static void batadv_dbg_arp(struct batadv_priv *bat_priv, struct sk_buff *skb,
 	if (hdr_size == 0)
 		return;
 
+<<<<<<< HEAD
 	/* if the ARP packet is encapsulated in a batman packet, let's print
 	 * some debug messages
 	 */
 	unicast_4addr_packet = (struct batadv_unicast_4addr_packet *)skb->data;
 
 	switch (unicast_4addr_packet->u.header.packet_type) {
+=======
+	unicast_4addr_packet = (struct batadv_unicast_4addr_packet *)skb->data;
+
+	switch (unicast_4addr_packet->u.packet_type) {
+>>>>>>> v3.18
 	case BATADV_UNICAST:
 		batadv_dbg(BATADV_DBG_DAT, bat_priv,
 			   "* encapsulated within a UNICAST packet\n");
@@ -373,7 +510,11 @@ static void batadv_dbg_arp(struct batadv_priv *bat_priv, struct sk_buff *skb,
 			break;
 		default:
 			batadv_dbg(BATADV_DBG_DAT, bat_priv, "* type: Unknown (%u)!\n",
+<<<<<<< HEAD
 				   unicast_4addr_packet->u.header.packet_type);
+=======
+				   unicast_4addr_packet->u.packet_type);
+>>>>>>> v3.18
 		}
 		break;
 	case BATADV_BCAST:
@@ -386,7 +527,11 @@ static void batadv_dbg_arp(struct batadv_priv *bat_priv, struct sk_buff *skb,
 	default:
 		batadv_dbg(BATADV_DBG_DAT, bat_priv,
 			   "* encapsulated within an unknown packet type (0x%x)\n",
+<<<<<<< HEAD
 			   unicast_4addr_packet->u.header.packet_type);
+=======
+			   unicast_4addr_packet->u.packet_type);
+>>>>>>> v3.18
 	}
 }
 
@@ -409,7 +554,12 @@ static void batadv_dbg_arp(struct batadv_priv *bat_priv, struct sk_buff *skb,
  * @candidate: orig_node under evaluation
  * @max_orig_node: last selected candidate
  *
+<<<<<<< HEAD
  * Returns true if the node has been elected as next candidate or false othrwise
+=======
+ * Returns true if the node has been elected as next candidate or false
+ * otherwise.
+>>>>>>> v3.18
  */
 static bool batadv_is_orig_node_eligible(struct batadv_dat_candidate *res,
 					 int select, batadv_dat_addr_t tmp_max,
@@ -421,6 +571,13 @@ static bool batadv_is_orig_node_eligible(struct batadv_dat_candidate *res,
 	bool ret = false;
 	int j;
 
+<<<<<<< HEAD
+=======
+	/* check if orig node candidate is running DAT */
+	if (!(candidate->capabilities & BATADV_ORIG_CAPA_HAS_DAT))
+		goto out;
+
+>>>>>>> v3.18
 	/* Check if this node has already been selected... */
 	for (j = 0; j < select; j++)
 		if (res[j].orig_node == candidate)
@@ -472,7 +629,11 @@ static void batadv_choose_next_candidate(struct batadv_priv *bat_priv,
 	 */
 	cands[select].type = BATADV_DAT_CANDIDATE_NOT_FOUND;
 
+<<<<<<< HEAD
 	/* iterate over the originator list and find the node with closest
+=======
+	/* iterate over the originator list and find the node with the closest
+>>>>>>> v3.18
 	 * dat_address which has not been selected yet
 	 */
 	for (i = 0; i < hash->size; i++) {
@@ -480,7 +641,11 @@ static void batadv_choose_next_candidate(struct batadv_priv *bat_priv,
 
 		rcu_read_lock();
 		hlist_for_each_entry_rcu(orig_node, head, hash_entry) {
+<<<<<<< HEAD
 			/* the dht space is a ring and addresses are unsigned */
+=======
+			/* the dht space is a ring using unsigned addresses */
+>>>>>>> v3.18
 			tmp_max = BATADV_DAT_ADDR_MAX - orig_node->dat_addr +
 				  ip_key;
 
@@ -512,7 +677,11 @@ static void batadv_choose_next_candidate(struct batadv_priv *bat_priv,
 }
 
 /**
+<<<<<<< HEAD
  * batadv_dat_select_candidates - selects the nodes which the DHT message has to
+=======
+ * batadv_dat_select_candidates - select the nodes which the DHT message has to
+>>>>>>> v3.18
  * be sent to
  * @bat_priv: the bat priv with all the soft interface information
  * @ip_dst: ipv4 to look up in the DHT
@@ -521,7 +690,11 @@ static void batadv_choose_next_candidate(struct batadv_priv *bat_priv,
  * closest values (from the LEFT, with wrap around if needed) then the hash
  * value of the key. ip_dst is the key.
  *
+<<<<<<< HEAD
  * Returns the candidate array of size BATADV_DAT_CANDIDATE_NUM
+=======
+ * Returns the candidate array of size BATADV_DAT_CANDIDATE_NUM.
+>>>>>>> v3.18
  */
 static struct batadv_dat_candidate *
 batadv_dat_select_candidates(struct batadv_priv *bat_priv, __be32 ip_dst)
@@ -533,7 +706,12 @@ batadv_dat_select_candidates(struct batadv_priv *bat_priv, __be32 ip_dst)
 	if (!bat_priv->orig_hash)
 		return NULL;
 
+<<<<<<< HEAD
 	res = kmalloc(BATADV_DAT_CANDIDATES_NUM * sizeof(*res), GFP_ATOMIC);
+=======
+	res = kmalloc_array(BATADV_DAT_CANDIDATES_NUM, sizeof(*res),
+			    GFP_ATOMIC);
+>>>>>>> v3.18
 	if (!res)
 		return NULL;
 
@@ -558,10 +736,18 @@ batadv_dat_select_candidates(struct batadv_priv *bat_priv, __be32 ip_dst)
  * @ip: the DHT key
  * @packet_subtype: unicast4addr packet subtype to use
  *
+<<<<<<< HEAD
  * In this function the skb is copied by means of pskb_copy() and is sent as
  * unicast packet to each of the selected candidates
  *
  * Returns true if the packet is sent to at least one candidate, false otherwise
+=======
+ * This function copies the skb with pskb_copy() and is sent as unicast packet
+ * to each of the selected candidates.
+ *
+ * Returns true if the packet is sent to at least one candidate, false
+ * otherwise.
+>>>>>>> v3.18
  */
 static bool batadv_dat_send_data(struct batadv_priv *bat_priv,
 				 struct sk_buff *skb, __be32 ip,
@@ -584,6 +770,7 @@ static bool batadv_dat_send_data(struct batadv_priv *bat_priv,
 		if (cand[i].type == BATADV_DAT_CANDIDATE_NOT_FOUND)
 			continue;
 
+<<<<<<< HEAD
 		neigh_node = batadv_orig_node_get_router(cand[i].orig_node);
 		if (!neigh_node)
 			goto free_orig;
@@ -592,6 +779,17 @@ static bool batadv_dat_send_data(struct batadv_priv *bat_priv,
 		if (!batadv_unicast_4addr_prepare_skb(bat_priv, tmp_skb,
 						      cand[i].orig_node,
 						      packet_subtype)) {
+=======
+		neigh_node = batadv_orig_router_get(cand[i].orig_node,
+						    BATADV_IF_DEFAULT);
+		if (!neigh_node)
+			goto free_orig;
+
+		tmp_skb = pskb_copy_for_clone(skb, GFP_ATOMIC);
+		if (!batadv_send_skb_prepare_unicast_4addr(bat_priv, tmp_skb,
+							   cand[i].orig_node,
+							   packet_subtype)) {
+>>>>>>> v3.18
 			kfree_skb(tmp_skb);
 			goto free_neigh;
 		}
@@ -627,6 +825,63 @@ out:
 }
 
 /**
+<<<<<<< HEAD
+=======
+ * batadv_dat_tvlv_container_update - update the dat tvlv container after dat
+ *  setting change
+ * @bat_priv: the bat priv with all the soft interface information
+ */
+static void batadv_dat_tvlv_container_update(struct batadv_priv *bat_priv)
+{
+	char dat_mode;
+
+	dat_mode = atomic_read(&bat_priv->distributed_arp_table);
+
+	switch (dat_mode) {
+	case 0:
+		batadv_tvlv_container_unregister(bat_priv, BATADV_TVLV_DAT, 1);
+		break;
+	case 1:
+		batadv_tvlv_container_register(bat_priv, BATADV_TVLV_DAT, 1,
+					       NULL, 0);
+		break;
+	}
+}
+
+/**
+ * batadv_dat_status_update - update the dat tvlv container after dat
+ *  setting change
+ * @net_dev: the soft interface net device
+ */
+void batadv_dat_status_update(struct net_device *net_dev)
+{
+	struct batadv_priv *bat_priv = netdev_priv(net_dev);
+
+	batadv_dat_tvlv_container_update(bat_priv);
+}
+
+/**
+ * batadv_gw_tvlv_ogm_handler_v1 - process incoming dat tvlv container
+ * @bat_priv: the bat priv with all the soft interface information
+ * @orig: the orig_node of the ogm
+ * @flags: flags indicating the tvlv state (see batadv_tvlv_handler_flags)
+ * @tvlv_value: tvlv buffer containing the gateway data
+ * @tvlv_value_len: tvlv buffer length
+ */
+static void batadv_dat_tvlv_ogm_handler_v1(struct batadv_priv *bat_priv,
+					   struct batadv_orig_node *orig,
+					   uint8_t flags,
+					   void *tvlv_value,
+					   uint16_t tvlv_value_len)
+{
+	if (flags & BATADV_TVLV_HANDLER_OGM_CIFNOTFND)
+		orig->capabilities &= ~BATADV_ORIG_CAPA_HAS_DAT;
+	else
+		orig->capabilities |= BATADV_ORIG_CAPA_HAS_DAT;
+}
+
+/**
+>>>>>>> v3.18
  * batadv_dat_hash_free - free the local DAT hash table
  * @bat_priv: the bat priv with all the soft interface information
  */
@@ -658,6 +913,13 @@ int batadv_dat_init(struct batadv_priv *bat_priv)
 
 	batadv_dat_start_timer(bat_priv);
 
+<<<<<<< HEAD
+=======
+	batadv_tvlv_handler_register(bat_priv, batadv_dat_tvlv_ogm_handler_v1,
+				     NULL, BATADV_TVLV_DAT, 1,
+				     BATADV_TVLV_HANDLER_OGM_CIFNOTFND);
+	batadv_dat_tvlv_container_update(bat_priv);
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -667,6 +929,12 @@ int batadv_dat_init(struct batadv_priv *bat_priv)
  */
 void batadv_dat_free(struct batadv_priv *bat_priv)
 {
+<<<<<<< HEAD
+=======
+	batadv_tvlv_container_unregister(bat_priv, BATADV_TVLV_DAT, 1);
+	batadv_tvlv_handler_unregister(bat_priv, BATADV_TVLV_DAT, 1);
+
+>>>>>>> v3.18
 	cancel_delayed_work_sync(&bat_priv->dat.work);
 
 	batadv_dat_hash_free(bat_priv);
@@ -694,8 +962,13 @@ int batadv_dat_cache_seq_print_text(struct seq_file *seq, void *offset)
 		goto out;
 
 	seq_printf(seq, "Distributed ARP Table (%s):\n", net_dev->name);
+<<<<<<< HEAD
 	seq_printf(seq, "          %-7s          %-13s %5s\n", "IPv4", "MAC",
 		   "last-seen");
+=======
+	seq_printf(seq, "          %-7s          %-9s %4s %11s\n", "IPv4",
+		   "MAC", "VID", "last-seen");
+>>>>>>> v3.18
 
 	for (i = 0; i < hash->size; i++) {
 		head = &hash->table[i];
@@ -708,8 +981,14 @@ int batadv_dat_cache_seq_print_text(struct seq_file *seq, void *offset)
 			last_seen_msecs = last_seen_msecs % 60000;
 			last_seen_secs = last_seen_msecs / 1000;
 
+<<<<<<< HEAD
 			seq_printf(seq, " * %15pI4 %14pM %6i:%02i\n",
 				   &dat_entry->ip, dat_entry->mac_addr,
+=======
+			seq_printf(seq, " * %15pI4 %14pM %4i %6i:%02i\n",
+				   &dat_entry->ip, dat_entry->mac_addr,
+				   BATADV_PRINT_VID(dat_entry->vid),
+>>>>>>> v3.18
 				   last_seen_mins, last_seen_secs);
 		}
 		rcu_read_unlock();
@@ -727,7 +1006,11 @@ out:
  * @skb: packet to analyse
  * @hdr_size: size of the possible header before the ARP packet in the skb
  *
+<<<<<<< HEAD
  * Returns the ARP type if the skb contains a valid ARP packet, 0 otherwise
+=======
+ * Returns the ARP type if the skb contains a valid ARP packet, 0 otherwise.
+>>>>>>> v3.18
  */
 static uint16_t batadv_arp_get_type(struct batadv_priv *bat_priv,
 				    struct sk_buff *skb, int hdr_size)
@@ -754,9 +1037,13 @@ static uint16_t batadv_arp_get_type(struct batadv_priv *bat_priv,
 
 	arphdr = (struct arphdr *)(skb->data + hdr_size + ETH_HLEN);
 
+<<<<<<< HEAD
 	/* Check whether the ARP packet carries a valid
 	 * IP information
 	 */
+=======
+	/* check whether the ARP packet carries a valid IP information */
+>>>>>>> v3.18
 	if (arphdr->ar_hrd != htons(ARPHRD_ETHER))
 		goto out;
 
@@ -784,7 +1071,11 @@ static uint16_t batadv_arp_get_type(struct batadv_priv *bat_priv,
 	if (is_zero_ether_addr(hw_src) || is_multicast_ether_addr(hw_src))
 		goto out;
 
+<<<<<<< HEAD
 	/* we don't care about the destination MAC address in ARP requests */
+=======
+	/* don't care about the destination MAC address in ARP requests */
+>>>>>>> v3.18
 	if (arphdr->ar_op != htons(ARPOP_REQUEST)) {
 		hw_dst = batadv_arp_hw_dst(skb, hdr_size);
 		if (is_zero_ether_addr(hw_dst) ||
@@ -798,14 +1089,47 @@ out:
 }
 
 /**
+<<<<<<< HEAD
+=======
+ * batadv_dat_get_vid - extract the VLAN identifier from skb if any
+ * @skb: the buffer containing the packet to extract the VID from
+ * @hdr_size: the size of the batman-adv header encapsulating the packet
+ *
+ * If the packet embedded in the skb is vlan tagged this function returns the
+ * VID with the BATADV_VLAN_HAS_TAG flag. Otherwise BATADV_NO_FLAGS is returned.
+ */
+static unsigned short batadv_dat_get_vid(struct sk_buff *skb, int *hdr_size)
+{
+	unsigned short vid;
+
+	vid = batadv_get_vid(skb, *hdr_size);
+
+	/* ARP parsing functions jump forward of hdr_size + ETH_HLEN.
+	 * If the header contained in the packet is a VLAN one (which is longer)
+	 * hdr_size is updated so that the functions will still skip the
+	 * correct amount of bytes.
+	 */
+	if (vid & BATADV_VLAN_HAS_TAG)
+		*hdr_size += VLAN_HLEN;
+
+	return vid;
+}
+
+/**
+>>>>>>> v3.18
  * batadv_dat_snoop_outgoing_arp_request - snoop the ARP request and try to
  * answer using DAT
  * @bat_priv: the bat priv with all the soft interface information
  * @skb: packet to check
  *
  * Returns true if the message has been sent to the dht candidates, false
+<<<<<<< HEAD
  * otherwise. In case of true the message has to be enqueued to permit the
  * fallback
+=======
+ * otherwise. In case of a positive return value the message has to be enqueued
+ * to permit the fallback.
+>>>>>>> v3.18
  */
 bool batadv_dat_snoop_outgoing_arp_request(struct batadv_priv *bat_priv,
 					   struct sk_buff *skb)
@@ -816,17 +1140,29 @@ bool batadv_dat_snoop_outgoing_arp_request(struct batadv_priv *bat_priv,
 	bool ret = false;
 	struct batadv_dat_entry *dat_entry = NULL;
 	struct sk_buff *skb_new;
+<<<<<<< HEAD
+=======
+	int hdr_size = 0;
+	unsigned short vid;
+>>>>>>> v3.18
 
 	if (!atomic_read(&bat_priv->distributed_arp_table))
 		goto out;
 
+<<<<<<< HEAD
 	type = batadv_arp_get_type(bat_priv, skb, 0);
+=======
+	vid = batadv_dat_get_vid(skb, &hdr_size);
+
+	type = batadv_arp_get_type(bat_priv, skb, hdr_size);
+>>>>>>> v3.18
 	/* If the node gets an ARP_REQUEST it has to send a DHT_GET unicast
 	 * message to the selected DHT candidates
 	 */
 	if (type != ARPOP_REQUEST)
 		goto out;
 
+<<<<<<< HEAD
 	batadv_dbg_arp(bat_priv, skb, type, 0, "Parsing outgoing ARP REQUEST");
 
 	ip_src = batadv_arp_ip_src(skb, 0);
@@ -836,6 +1172,18 @@ bool batadv_dat_snoop_outgoing_arp_request(struct batadv_priv *bat_priv,
 	batadv_dat_entry_add(bat_priv, ip_src, hw_src);
 
 	dat_entry = batadv_dat_entry_hash_find(bat_priv, ip_dst);
+=======
+	batadv_dbg_arp(bat_priv, skb, type, hdr_size,
+		       "Parsing outgoing ARP REQUEST");
+
+	ip_src = batadv_arp_ip_src(skb, hdr_size);
+	hw_src = batadv_arp_hw_src(skb, hdr_size);
+	ip_dst = batadv_arp_ip_dst(skb, hdr_size);
+
+	batadv_dat_entry_add(bat_priv, ip_src, hw_src, vid);
+
+	dat_entry = batadv_dat_entry_hash_find(bat_priv, ip_dst, vid);
+>>>>>>> v3.18
 	if (dat_entry) {
 		/* If the ARP request is destined for a local client the local
 		 * client will answer itself. DAT would only generate a
@@ -845,7 +1193,11 @@ bool batadv_dat_snoop_outgoing_arp_request(struct batadv_priv *bat_priv,
 		 * additional DAT answer may trigger kernel warnings about
 		 * a packet coming from the wrong port.
 		 */
+<<<<<<< HEAD
 		if (batadv_is_my_client(bat_priv, dat_entry->mac_addr)) {
+=======
+		if (batadv_is_my_client(bat_priv, dat_entry->mac_addr, vid)) {
+>>>>>>> v3.18
 			ret = true;
 			goto out;
 		}
@@ -856,18 +1208,33 @@ bool batadv_dat_snoop_outgoing_arp_request(struct batadv_priv *bat_priv,
 		if (!skb_new)
 			goto out;
 
+<<<<<<< HEAD
+=======
+		if (vid & BATADV_VLAN_HAS_TAG)
+			skb_new = vlan_insert_tag(skb_new, htons(ETH_P_8021Q),
+						  vid & VLAN_VID_MASK);
+
+>>>>>>> v3.18
 		skb_reset_mac_header(skb_new);
 		skb_new->protocol = eth_type_trans(skb_new,
 						   bat_priv->soft_iface);
 		bat_priv->stats.rx_packets++;
+<<<<<<< HEAD
 		bat_priv->stats.rx_bytes += skb->len + ETH_HLEN;
+=======
+		bat_priv->stats.rx_bytes += skb->len + ETH_HLEN + hdr_size;
+>>>>>>> v3.18
 		bat_priv->soft_iface->last_rx = jiffies;
 
 		netif_rx(skb_new);
 		batadv_dbg(BATADV_DBG_DAT, bat_priv, "ARP request replied locally\n");
 		ret = true;
 	} else {
+<<<<<<< HEAD
 		/* Send the request on the DHT */
+=======
+		/* Send the request to the DHT */
+>>>>>>> v3.18
 		ret = batadv_dat_send_data(bat_priv, skb, ip_dst,
 					   BATADV_P_DAT_DHT_GET);
 	}
@@ -884,7 +1251,11 @@ out:
  * @skb: packet to check
  * @hdr_size: size of the encapsulation header
  *
+<<<<<<< HEAD
  * Returns true if the request has been answered, false otherwise
+=======
+ * Returns true if the request has been answered, false otherwise.
+>>>>>>> v3.18
  */
 bool batadv_dat_snoop_incoming_arp_request(struct batadv_priv *bat_priv,
 					   struct sk_buff *skb, int hdr_size)
@@ -895,11 +1266,20 @@ bool batadv_dat_snoop_incoming_arp_request(struct batadv_priv *bat_priv,
 	struct sk_buff *skb_new;
 	struct batadv_dat_entry *dat_entry = NULL;
 	bool ret = false;
+<<<<<<< HEAD
+=======
+	unsigned short vid;
+>>>>>>> v3.18
 	int err;
 
 	if (!atomic_read(&bat_priv->distributed_arp_table))
 		goto out;
 
+<<<<<<< HEAD
+=======
+	vid = batadv_dat_get_vid(skb, &hdr_size);
+
+>>>>>>> v3.18
 	type = batadv_arp_get_type(bat_priv, skb, hdr_size);
 	if (type != ARPOP_REQUEST)
 		goto out;
@@ -911,9 +1291,15 @@ bool batadv_dat_snoop_incoming_arp_request(struct batadv_priv *bat_priv,
 	batadv_dbg_arp(bat_priv, skb, type, hdr_size,
 		       "Parsing incoming ARP REQUEST");
 
+<<<<<<< HEAD
 	batadv_dat_entry_add(bat_priv, ip_src, hw_src);
 
 	dat_entry = batadv_dat_entry_hash_find(bat_priv, ip_dst);
+=======
+	batadv_dat_entry_add(bat_priv, ip_src, hw_src, vid);
+
+	dat_entry = batadv_dat_entry_hash_find(bat_priv, ip_dst, vid);
+>>>>>>> v3.18
 	if (!dat_entry)
 		goto out;
 
@@ -924,6 +1310,7 @@ bool batadv_dat_snoop_incoming_arp_request(struct batadv_priv *bat_priv,
 	if (!skb_new)
 		goto out;
 
+<<<<<<< HEAD
 	/* to preserve backwards compatibility, here the node has to answer
 	 * using the same packet type it received for the request. This is due
 	 * to that if a node is not using the 4addr packet format it may not
@@ -936,6 +1323,29 @@ bool batadv_dat_snoop_incoming_arp_request(struct batadv_priv *bat_priv,
 		err = batadv_unicast_send_skb(bat_priv, skb_new);
 
 	if (!err) {
+=======
+	/* the rest of the TX path assumes that the mac_header offset pointing
+	 * to the inner Ethernet header has been set, therefore reset it now.
+	 */
+	skb_reset_mac_header(skb_new);
+
+	if (vid & BATADV_VLAN_HAS_TAG)
+		skb_new = vlan_insert_tag(skb_new, htons(ETH_P_8021Q),
+					  vid & VLAN_VID_MASK);
+
+	/* To preserve backwards compatibility, the node has choose the outgoing
+	 * format based on the incoming request packet type. The assumption is
+	 * that a node not using the 4addr packet format doesn't support it.
+	 */
+	if (hdr_size == sizeof(struct batadv_unicast_4addr_packet))
+		err = batadv_send_skb_via_tt_4addr(bat_priv, skb_new,
+						   BATADV_P_DAT_CACHE_REPLY,
+						   NULL, vid);
+	else
+		err = batadv_send_skb_via_tt(bat_priv, skb_new, NULL, vid);
+
+	if (err != NET_XMIT_DROP) {
+>>>>>>> v3.18
 		batadv_inc_counter(bat_priv, BATADV_CNT_DAT_CACHED_REPLY_TX);
 		ret = true;
 	}
@@ -958,10 +1368,16 @@ void batadv_dat_snoop_outgoing_arp_reply(struct batadv_priv *bat_priv,
 	uint16_t type;
 	__be32 ip_src, ip_dst;
 	uint8_t *hw_src, *hw_dst;
+<<<<<<< HEAD
+=======
+	int hdr_size = 0;
+	unsigned short vid;
+>>>>>>> v3.18
 
 	if (!atomic_read(&bat_priv->distributed_arp_table))
 		return;
 
+<<<<<<< HEAD
 	type = batadv_arp_get_type(bat_priv, skb, 0);
 	if (type != ARPOP_REPLY)
 		return;
@@ -978,6 +1394,27 @@ void batadv_dat_snoop_outgoing_arp_reply(struct batadv_priv *bat_priv,
 
 	/* Send the ARP reply to the candidates for both the IP addresses that
 	 * the node got within the ARP reply
+=======
+	vid = batadv_dat_get_vid(skb, &hdr_size);
+
+	type = batadv_arp_get_type(bat_priv, skb, hdr_size);
+	if (type != ARPOP_REPLY)
+		return;
+
+	batadv_dbg_arp(bat_priv, skb, type, hdr_size,
+		       "Parsing outgoing ARP REPLY");
+
+	hw_src = batadv_arp_hw_src(skb, hdr_size);
+	ip_src = batadv_arp_ip_src(skb, hdr_size);
+	hw_dst = batadv_arp_hw_dst(skb, hdr_size);
+	ip_dst = batadv_arp_ip_dst(skb, hdr_size);
+
+	batadv_dat_entry_add(bat_priv, ip_src, hw_src, vid);
+	batadv_dat_entry_add(bat_priv, ip_dst, hw_dst, vid);
+
+	/* Send the ARP reply to the candidates for both the IP addresses that
+	 * the node obtained from the ARP reply
+>>>>>>> v3.18
 	 */
 	batadv_dat_send_data(bat_priv, skb, ip_src, BATADV_P_DAT_DHT_PUT);
 	batadv_dat_send_data(bat_priv, skb, ip_dst, BATADV_P_DAT_DHT_PUT);
@@ -987,7 +1424,11 @@ void batadv_dat_snoop_outgoing_arp_reply(struct batadv_priv *bat_priv,
  * DAT storage only
  * @bat_priv: the bat priv with all the soft interface information
  * @skb: packet to check
+<<<<<<< HEAD
  * @hdr_size: siaze of the encapsulation header
+=======
+ * @hdr_size: size of the encapsulation header
+>>>>>>> v3.18
  */
 bool batadv_dat_snoop_incoming_arp_reply(struct batadv_priv *bat_priv,
 					 struct sk_buff *skb, int hdr_size)
@@ -996,10 +1437,19 @@ bool batadv_dat_snoop_incoming_arp_reply(struct batadv_priv *bat_priv,
 	__be32 ip_src, ip_dst;
 	uint8_t *hw_src, *hw_dst;
 	bool ret = false;
+<<<<<<< HEAD
+=======
+	unsigned short vid;
+>>>>>>> v3.18
 
 	if (!atomic_read(&bat_priv->distributed_arp_table))
 		goto out;
 
+<<<<<<< HEAD
+=======
+	vid = batadv_dat_get_vid(skb, &hdr_size);
+
+>>>>>>> v3.18
 	type = batadv_arp_get_type(bat_priv, skb, hdr_size);
 	if (type != ARPOP_REPLY)
 		goto out;
@@ -1015,13 +1465,22 @@ bool batadv_dat_snoop_incoming_arp_reply(struct batadv_priv *bat_priv,
 	/* Update our internal cache with both the IP addresses the node got
 	 * within the ARP reply
 	 */
+<<<<<<< HEAD
 	batadv_dat_entry_add(bat_priv, ip_src, hw_src);
 	batadv_dat_entry_add(bat_priv, ip_dst, hw_dst);
+=======
+	batadv_dat_entry_add(bat_priv, ip_src, hw_src, vid);
+	batadv_dat_entry_add(bat_priv, ip_dst, hw_dst, vid);
+>>>>>>> v3.18
 
 	/* if this REPLY is directed to a client of mine, let's deliver the
 	 * packet to the interface
 	 */
+<<<<<<< HEAD
 	ret = !batadv_is_my_client(bat_priv, hw_dst);
+=======
+	ret = !batadv_is_my_client(bat_priv, hw_dst, vid);
+>>>>>>> v3.18
 out:
 	if (ret)
 		kfree_skb(skb);
@@ -1031,11 +1490,19 @@ out:
 
 /**
  * batadv_dat_drop_broadcast_packet - check if an ARP request has to be dropped
+<<<<<<< HEAD
  * (because the node has already got the reply via DAT) or not
  * @bat_priv: the bat priv with all the soft interface information
  * @forw_packet: the broadcast packet
  *
  * Returns true if the node can drop the packet, false otherwise
+=======
+ * (because the node has already obtained the reply via DAT) or not
+ * @bat_priv: the bat priv with all the soft interface information
+ * @forw_packet: the broadcast packet
+ *
+ * Returns true if the node can drop the packet, false otherwise.
+>>>>>>> v3.18
  */
 bool batadv_dat_drop_broadcast_packet(struct batadv_priv *bat_priv,
 				      struct batadv_forw_packet *forw_packet)
@@ -1044,7 +1511,12 @@ bool batadv_dat_drop_broadcast_packet(struct batadv_priv *bat_priv,
 	__be32 ip_dst;
 	struct batadv_dat_entry *dat_entry = NULL;
 	bool ret = false;
+<<<<<<< HEAD
 	const size_t bcast_len = sizeof(struct batadv_bcast_packet);
+=======
+	int hdr_size = sizeof(struct batadv_bcast_packet);
+	unsigned short vid;
+>>>>>>> v3.18
 
 	if (!atomic_read(&bat_priv->distributed_arp_table))
 		goto out;
@@ -1055,12 +1527,23 @@ bool batadv_dat_drop_broadcast_packet(struct batadv_priv *bat_priv,
 	if (forw_packet->num_packets)
 		goto out;
 
+<<<<<<< HEAD
 	type = batadv_arp_get_type(bat_priv, forw_packet->skb, bcast_len);
 	if (type != ARPOP_REQUEST)
 		goto out;
 
 	ip_dst = batadv_arp_ip_dst(forw_packet->skb, bcast_len);
 	dat_entry = batadv_dat_entry_hash_find(bat_priv, ip_dst);
+=======
+	vid = batadv_dat_get_vid(forw_packet->skb, &hdr_size);
+
+	type = batadv_arp_get_type(bat_priv, forw_packet->skb, hdr_size);
+	if (type != ARPOP_REQUEST)
+		goto out;
+
+	ip_dst = batadv_arp_ip_dst(forw_packet->skb, hdr_size);
+	dat_entry = batadv_dat_entry_hash_find(bat_priv, ip_dst, vid);
+>>>>>>> v3.18
 	/* check if the node already got this entry */
 	if (!dat_entry) {
 		batadv_dbg(BATADV_DBG_DAT, bat_priv,

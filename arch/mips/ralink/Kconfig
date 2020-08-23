@@ -1,5 +1,15 @@
 if RALINK
 
+<<<<<<< HEAD
+=======
+config CLKEVT_RT3352
+	bool
+	depends on SOC_RT305X || SOC_MT7620
+	default y
+	select CLKSRC_OF
+	select CLKSRC_MMIO
+
+>>>>>>> v3.18
 choice
 	prompt "Ralink SoC selection"
 	default SOC_RT305X
@@ -8,10 +18,15 @@ choice
 
 	config SOC_RT288X
 		bool "RT288x"
+<<<<<<< HEAD
+=======
+		select MIPS_L1_CACHE_SHIFT_4
+>>>>>>> v3.18
 
 	config SOC_RT305X
 		bool "RT305x"
 		select USB_ARCH_HAS_HCD
+<<<<<<< HEAD
 		select USB_ARCH_HAS_OHCI
 		select USB_ARCH_HAS_EHCI
 
@@ -19,6 +34,12 @@ choice
 		bool "RT3883"
 		select USB_ARCH_HAS_OHCI
 		select USB_ARCH_HAS_EHCI
+=======
+
+	config SOC_RT3883
+		bool "RT3883"
+		select HW_HAS_PCI
+>>>>>>> v3.18
 
 	config SOC_MT7620
 		bool "MT7620"
@@ -37,18 +58,34 @@ choice
 	config DTB_RT2880_EVAL
 		bool "RT2880 eval kit"
 		depends on SOC_RT288X
+<<<<<<< HEAD
+=======
+		select BUILTIN_DTB
+>>>>>>> v3.18
 
 	config DTB_RT305X_EVAL
 		bool "RT305x eval kit"
 		depends on SOC_RT305X
+<<<<<<< HEAD
+=======
+		select BUILTIN_DTB
+>>>>>>> v3.18
 
 	config DTB_RT3883_EVAL
 		bool "RT3883 eval kit"
 		depends on SOC_RT3883
+<<<<<<< HEAD
+=======
+		select BUILTIN_DTB
+>>>>>>> v3.18
 
 	config DTB_MT7620A_EVAL
 		bool "MT7620A eval kit"
 		depends on SOC_MT7620
+<<<<<<< HEAD
+=======
+		select BUILTIN_DTB
+>>>>>>> v3.18
 
 endchoice
 

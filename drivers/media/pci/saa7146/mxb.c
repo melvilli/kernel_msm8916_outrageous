@@ -357,7 +357,11 @@ static int mxb_init_done(struct saa7146_dev* dev)
 	tea6420_route(mxb, 6);
 
 	/* select video mode in saa7111a */
+<<<<<<< HEAD
 	saa7111a_call(mxb, core, s_std, std);
+=======
+	saa7111a_call(mxb, video, s_std, std);
+>>>>>>> v3.18
 
 	/* select tuner-output on saa7111a */
 	i = 0;
@@ -379,8 +383,13 @@ static int mxb_init_done(struct saa7146_dev* dev)
 	/* These two gpio calls set the GPIO pins that control the tda9820 */
 	saa7146_write(dev, GPIO_CTRL, 0x00404050);
 	saa7111a_call(mxb, core, s_gpio, 1);
+<<<<<<< HEAD
 	saa7111a_call(mxb, core, s_std, std);
 	tuner_call(mxb, core, s_std, std);
+=======
+	saa7111a_call(mxb, video, s_std, std);
+	tuner_call(mxb, video, s_std, std);
+>>>>>>> v3.18
 
 	/* switch to tuner-channel on tea6415c */
 	tea6415c_call(mxb, video, s_routing, 3, 17, 0);
@@ -669,6 +678,7 @@ static int vidioc_g_register(struct file *file, void *fh, struct v4l2_dbg_regist
 {
 	struct saa7146_dev *dev = ((struct saa7146_fh *)fh)->dev;
 
+<<<<<<< HEAD
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
 	if (v4l2_chip_match_host(&reg->match)) {
@@ -677,6 +687,12 @@ static int vidioc_g_register(struct file *file, void *fh, struct v4l2_dbg_regist
 		return 0;
 	}
 	call_all(dev, core, g_register, reg);
+=======
+	if (reg->reg > pci_resource_len(dev->pci, 0) - 4)
+		return -EINVAL;
+	reg->val = saa7146_read(dev, reg->reg);
+	reg->size = 4;
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -684,6 +700,7 @@ static int vidioc_s_register(struct file *file, void *fh, const struct v4l2_dbg_
 {
 	struct saa7146_dev *dev = ((struct saa7146_fh *)fh)->dev;
 
+<<<<<<< HEAD
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
 	if (v4l2_chip_match_host(&reg->match)) {
@@ -691,6 +708,12 @@ static int vidioc_s_register(struct file *file, void *fh, const struct v4l2_dbg_
 		return 0;
 	}
 	return call_all(dev, core, s_register, reg);
+=======
+	if (reg->reg > pci_resource_len(dev->pci, 0) - 4)
+		return -EINVAL;
+	saa7146_write(dev, reg->reg, reg->val);
+	return 0;
+>>>>>>> v3.18
 }
 #endif
 
@@ -778,9 +801,15 @@ static int std_callback(struct saa7146_dev *dev, struct saa7146_standard *standa
 		/* These two gpio calls set the GPIO pins that control the tda9820 */
 		saa7146_write(dev, GPIO_CTRL, 0x00404050);
 		saa7111a_call(mxb, core, s_gpio, 0);
+<<<<<<< HEAD
 		saa7111a_call(mxb, core, s_std, std);
 		if (mxb->cur_input == 0)
 			tuner_call(mxb, core, s_std, std);
+=======
+		saa7111a_call(mxb, video, s_std, std);
+		if (mxb->cur_input == 0)
+			tuner_call(mxb, video, s_std, std);
+>>>>>>> v3.18
 	} else {
 		v4l2_std_id std = V4L2_STD_PAL_BG;
 
@@ -790,9 +819,15 @@ static int std_callback(struct saa7146_dev *dev, struct saa7146_standard *standa
 		/* These two gpio calls set the GPIO pins that control the tda9820 */
 		saa7146_write(dev, GPIO_CTRL, 0x00404050);
 		saa7111a_call(mxb, core, s_gpio, 1);
+<<<<<<< HEAD
 		saa7111a_call(mxb, core, s_std, std);
 		if (mxb->cur_input == 0)
 			tuner_call(mxb, core, s_std, std);
+=======
+		saa7111a_call(mxb, video, s_std, std);
+		if (mxb->cur_input == 0)
+			tuner_call(mxb, video, s_std, std);
+>>>>>>> v3.18
 	}
 	return 0;
 }

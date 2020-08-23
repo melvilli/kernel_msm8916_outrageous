@@ -47,6 +47,7 @@ kvmap_itlb_vmalloc_addr:
 	KERN_PGTABLE_WALK(%g4, %g5, %g2, kvmap_itlb_longpath)
 
 	TSB_LOCK_TAG(%g1, %g2, %g7)
+<<<<<<< HEAD
 
 	/* Load and check PTE.  */
 	ldxa		[%g5] ASI_PHYS_USE_EC, %g5
@@ -55,6 +56,8 @@ kvmap_itlb_vmalloc_addr:
 	brgez,a,pn	%g5, kvmap_itlb_longpath
 	 TSB_STORE(%g1, %g7)
 
+=======
+>>>>>>> v3.18
 	TSB_WRITE(%g1, %g5, %g6)
 
 	/* fallthrough to TLB load */
@@ -118,6 +121,15 @@ kvmap_dtlb_obp:
 	ba,pt		%xcc, kvmap_dtlb_load
 	 nop
 
+<<<<<<< HEAD
+=======
+kvmap_linear_early:
+	sethi		%hi(kern_linear_pte_xor), %g7
+	ldx		[%g7 + %lo(kern_linear_pte_xor)], %g2
+	ba,pt		%xcc, kvmap_dtlb_tsb4m_load
+	 xor		%g2, %g4, %g5
+
+>>>>>>> v3.18
 	.align		32
 kvmap_dtlb_tsb4m_load:
 	TSB_LOCK_TAG(%g1, %g2, %g7)
@@ -146,6 +158,7 @@ kvmap_dtlb_4v:
 	/* Correct TAG_TARGET is already in %g6, check 4mb TSB.  */
 	KERN_TSB4M_LOOKUP_TL1(%g6, %g5, %g1, %g2, %g3, kvmap_dtlb_load)
 #endif
+<<<<<<< HEAD
 	/* TSB entry address left in %g1, lookup linear PTE.
 	 * Must preserve %g1 and %g6 (TAG).
 	 */
@@ -212,11 +225,20 @@ valid_addr_bitmap_patch:
 kvmap_linear_patch:
 	ba,pt		%xcc, kvmap_dtlb_tsb4m_load
 	 xor		%g2, %g4, %g5
+=======
+	/* Linear mapping TSB lookup failed.  Fallthrough to kernel
+	 * page table based lookup.
+	 */
+	.globl		kvmap_linear_patch
+kvmap_linear_patch:
+	ba,a,pt		%xcc, kvmap_linear_early
+>>>>>>> v3.18
 
 kvmap_dtlb_vmalloc_addr:
 	KERN_PGTABLE_WALK(%g4, %g5, %g2, kvmap_dtlb_longpath)
 
 	TSB_LOCK_TAG(%g1, %g2, %g7)
+<<<<<<< HEAD
 
 	/* Load and check PTE.  */
 	ldxa		[%g5] ASI_PHYS_USE_EC, %g5
@@ -225,6 +247,8 @@ kvmap_dtlb_vmalloc_addr:
 	brgez,a,pn	%g5, kvmap_dtlb_longpath
 	 TSB_STORE(%g1, %g7)
 
+=======
+>>>>>>> v3.18
 	TSB_WRITE(%g1, %g5, %g6)
 
 	/* fallthrough to TLB load */
@@ -256,6 +280,7 @@ kvmap_dtlb_load:
 
 #ifdef CONFIG_SPARSEMEM_VMEMMAP
 kvmap_vmemmap:
+<<<<<<< HEAD
 	sub		%g4, %g5, %g5
 	srlx		%g5, 22, %g5
 	sethi		%hi(vmemmap_table), %g1
@@ -263,6 +288,10 @@ kvmap_vmemmap:
 	or		%g1, %lo(vmemmap_table), %g1
 	ba,pt		%xcc, kvmap_dtlb_load
 	 ldx		[%g1 + %g5], %g5
+=======
+	KERN_PGTABLE_WALK(%g4, %g5, %g2, kvmap_dtlb_longpath)
+	ba,a,pt		%xcc, kvmap_dtlb_load
+>>>>>>> v3.18
 #endif
 
 kvmap_dtlb_nonlinear:
@@ -274,8 +303,13 @@ kvmap_dtlb_nonlinear:
 
 #ifdef CONFIG_SPARSEMEM_VMEMMAP
 	/* Do not use the TSB for vmemmap.  */
+<<<<<<< HEAD
 	mov		(VMEMMAP_BASE >> 40), %g5
 	sllx		%g5, 40, %g5
+=======
+	sethi		%hi(VMEMMAP_BASE), %g5
+	ldx		[%g5 + %lo(VMEMMAP_BASE)], %g5
+>>>>>>> v3.18
 	cmp		%g4,%g5
 	bgeu,pn		%xcc, kvmap_vmemmap
 	 nop
@@ -287,8 +321,13 @@ kvmap_dtlb_tsbmiss:
 	sethi		%hi(MODULES_VADDR), %g5
 	cmp		%g4, %g5
 	blu,pn		%xcc, kvmap_dtlb_longpath
+<<<<<<< HEAD
 	 mov		(VMALLOC_END >> 40), %g5
 	sllx		%g5, 40, %g5
+=======
+	 sethi		%hi(VMALLOC_END), %g5
+	ldx		[%g5 + %lo(VMALLOC_END)], %g5
+>>>>>>> v3.18
 	cmp		%g4, %g5
 	bgeu,pn		%xcc, kvmap_dtlb_longpath
 	 nop

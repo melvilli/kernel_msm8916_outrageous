@@ -34,8 +34,12 @@
 #include <asm/firmware.h>
 #include <asm/vdso.h>
 #include <asm/vdso_datapage.h>
+<<<<<<< HEAD
 
 #include "setup.h"
+=======
+#include <asm/setup.h>
+>>>>>>> v3.18
 
 #undef DEBUG
 
@@ -711,13 +715,22 @@ static void __init vdso_setup_syscall_map(void)
 }
 
 #ifdef CONFIG_PPC64
+<<<<<<< HEAD
 int __cpuinit vdso_getcpu_init(void)
+=======
+int vdso_getcpu_init(void)
+>>>>>>> v3.18
 {
 	unsigned long cpu, node, val;
 
 	/*
+<<<<<<< HEAD
 	 * SPRG3 contains the CPU in the bottom 16 bits and the NUMA node in
 	 * the next 16 bits. The VDSO uses this to implement getcpu().
+=======
+	 * SPRG_VDSO contains the CPU in the bottom 16 bits and the NUMA node
+	 * in the next 16 bits.  The VDSO uses this to implement getcpu().
+>>>>>>> v3.18
 	 */
 	cpu = get_cpu();
 	WARN_ON_ONCE(cpu > 0xffff);
@@ -726,8 +739,13 @@ int __cpuinit vdso_getcpu_init(void)
 	WARN_ON_ONCE(node > 0xffff);
 
 	val = (cpu & 0xfff) | ((node & 0xffff) << 16);
+<<<<<<< HEAD
 	mtspr(SPRN_SPRG3, val);
 	get_paca()->sprg3 = val;
+=======
+	mtspr(SPRN_SPRG_VDSO_WRITE, val);
+	get_paca()->sprg_vdso = val;
+>>>>>>> v3.18
 
 	put_cpu();
 
@@ -841,6 +859,7 @@ static int __init vdso_init(void)
 	return 0;
 }
 arch_initcall(vdso_init);
+<<<<<<< HEAD
 
 int in_gate_area_no_mm(unsigned long addr)
 {
@@ -857,3 +876,5 @@ struct vm_area_struct *get_gate_vma(struct mm_struct *mm)
 	return NULL;
 }
 
+=======
+>>>>>>> v3.18

@@ -20,7 +20,11 @@
 #include <linux/leds.h>
 #include <linux/i2c.h>
 #include <linux/i2c/pxa-i2c.h>
+<<<<<<< HEAD
 #include <linux/i2c/pca953x.h>
+=======
+#include <linux/platform_data/pca953x.h>
+>>>>>>> v3.18
 #include <linux/spi/spi.h>
 #include <linux/spi/ads7846.h>
 #include <linux/spi/corgi_lcd.h>
@@ -32,6 +36,10 @@
 #include <linux/io.h>
 #include <linux/module.h>
 #include <linux/reboot.h>
+<<<<<<< HEAD
+=======
+#include <linux/memblock.h>
+>>>>>>> v3.18
 
 #include <asm/setup.h>
 #include <asm/mach-types.h>
@@ -598,7 +606,11 @@ static inline void spitz_spi_init(void) {}
  * NOTE: The card detect interrupt isn't debounced so we delay it by 250ms to
  * give the card a chance to fully insert/eject.
  */
+<<<<<<< HEAD
 static void spitz_mci_setpower(struct device *dev, unsigned int vdd)
+=======
+static int spitz_mci_setpower(struct device *dev, unsigned int vdd)
+>>>>>>> v3.18
 {
 	struct pxamci_platform_data* p_d = dev->platform_data;
 
@@ -606,6 +618,11 @@ static void spitz_mci_setpower(struct device *dev, unsigned int vdd)
 		spitz_card_pwr_ctrl(SCOOP_CPR_SD_3V, SCOOP_CPR_SD_3V);
 	else
 		spitz_card_pwr_ctrl(SCOOP_CPR_SD_3V, 0x0);
+<<<<<<< HEAD
+=======
+
+	return 0;
+>>>>>>> v3.18
 }
 
 static struct pxamci_platform_data spitz_mci_platform_data = {
@@ -969,6 +986,7 @@ static void __init spitz_init(void)
 	spitz_i2c_init();
 }
 
+<<<<<<< HEAD
 static void __init spitz_fixup(struct tag *tags, char **cmdline,
 			       struct meminfo *mi)
 {
@@ -976,11 +994,20 @@ static void __init spitz_fixup(struct tag *tags, char **cmdline,
 	mi->nr_banks = 1;
 	mi->bank[0].start = 0xa0000000;
 	mi->bank[0].size = (64*1024*1024);
+=======
+static void __init spitz_fixup(struct tag *tags, char **cmdline)
+{
+	sharpsl_save_param();
+	memblock_add(0xa0000000, SZ_64M);
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_MACH_SPITZ
 MACHINE_START(SPITZ, "SHARP Spitz")
+<<<<<<< HEAD
 	.restart_mode	= 'g',
+=======
+>>>>>>> v3.18
 	.fixup		= spitz_fixup,
 	.map_io		= pxa27x_map_io,
 	.nr_irqs	= PXA_NR_IRQS,
@@ -994,7 +1021,10 @@ MACHINE_END
 
 #ifdef CONFIG_MACH_BORZOI
 MACHINE_START(BORZOI, "SHARP Borzoi")
+<<<<<<< HEAD
 	.restart_mode	= 'g',
+=======
+>>>>>>> v3.18
 	.fixup		= spitz_fixup,
 	.map_io		= pxa27x_map_io,
 	.nr_irqs	= PXA_NR_IRQS,
@@ -1008,7 +1038,10 @@ MACHINE_END
 
 #ifdef CONFIG_MACH_AKITA
 MACHINE_START(AKITA, "SHARP Akita")
+<<<<<<< HEAD
 	.restart_mode	= 'g',
+=======
+>>>>>>> v3.18
 	.fixup		= spitz_fixup,
 	.map_io		= pxa27x_map_io,
 	.nr_irqs	= PXA_NR_IRQS,

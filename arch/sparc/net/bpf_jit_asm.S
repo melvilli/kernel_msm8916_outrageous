@@ -6,10 +6,18 @@
 #define SAVE_SZ		176
 #define SCRATCH_OFF	STACK_BIAS + 128
 #define BE_PTR(label)	be,pn %xcc, label
+<<<<<<< HEAD
+=======
+#define SIGN_EXTEND(reg)	sra reg, 0, reg
+>>>>>>> v3.18
 #else
 #define SAVE_SZ		96
 #define SCRATCH_OFF	72
 #define BE_PTR(label)	be label
+<<<<<<< HEAD
+=======
+#define SIGN_EXTEND(reg)
+>>>>>>> v3.18
 #endif
 
 #define SKF_MAX_NEG_OFF	(-0x200000) /* SKF_LL_OFF from filter.h */
@@ -135,6 +143,10 @@ bpf_slow_path_byte_msh:
 	save	%sp, -SAVE_SZ, %sp;			\
 	mov	%i0, %o0;				\
 	mov	r_OFF, %o1;				\
+<<<<<<< HEAD
+=======
+	SIGN_EXTEND(%o1);				\
+>>>>>>> v3.18
 	call	bpf_internal_load_pointer_neg_helper;	\
 	 mov	(LEN), %o2;				\
 	mov	%o0, r_TMP;				\

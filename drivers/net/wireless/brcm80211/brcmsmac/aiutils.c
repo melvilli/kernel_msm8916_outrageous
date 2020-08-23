@@ -679,6 +679,7 @@ bool ai_clkctl_cc(struct si_pub *sih, enum bcma_clkmode mode)
 	return mode == BCMA_CLKMODE_FAST;
 }
 
+<<<<<<< HEAD
 void ai_pci_up(struct si_pub *sih)
 {
 	struct si_info *sii;
@@ -700,6 +701,8 @@ void ai_pci_down(struct si_pub *sih)
 		bcma_core_pci_extend_L1timer(&sii->icbus->drv_pci[0], false);
 }
 
+=======
+>>>>>>> v3.18
 /* Enable BT-COEX & Ex-PA for 4313 */
 void ai_epa_4313war(struct si_pub *sih)
 {

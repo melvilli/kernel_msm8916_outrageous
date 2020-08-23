@@ -121,6 +121,7 @@ static bool tpm_atml_req_canceled(struct tpm_chip *chip, u8 status)
 	return (status == ATML_STATUS_READY);
 }
 
+<<<<<<< HEAD
 static const struct file_operations atmel_ops = {
 	.owner = THIS_MODULE,
 	.llseek = no_llseek,
@@ -146,6 +147,9 @@ static struct attribute* atmel_attrs[] = {
 static struct attribute_group atmel_attr_grp = { .attrs = atmel_attrs };
 
 static const struct tpm_vendor_specific tpm_atmel = {
+=======
+static const struct tpm_class_ops tpm_atmel = {
+>>>>>>> v3.18
 	.recv = tpm_atml_recv,
 	.send = tpm_atml_send,
 	.cancel = tpm_atml_cancel,
@@ -153,8 +157,11 @@ static const struct tpm_vendor_specific tpm_atmel = {
 	.req_complete_mask = ATML_STATUS_BUSY | ATML_STATUS_DATA_AVAIL,
 	.req_complete_val = ATML_STATUS_DATA_AVAIL,
 	.req_canceled = tpm_atml_req_canceled,
+<<<<<<< HEAD
 	.attr_group = &atmel_attr_grp,
 	.miscdev = { .fops = &atmel_ops, },
+=======
+>>>>>>> v3.18
 };
 
 static struct platform_device *pdev;
@@ -202,7 +209,11 @@ static int __init init_atmel(void)
 
 	have_region =
 	    (atmel_request_region
+<<<<<<< HEAD
 	     (tpm_atmel.base, region_size, "tpm_atmel0") == NULL) ? 0 : 1;
+=======
+	     (base, region_size, "tpm_atmel0") == NULL) ? 0 : 1;
+>>>>>>> v3.18
 
 	pdev = platform_device_register_simple("tpm_atmel", -1, NULL, 0);
 	if (IS_ERR(pdev)) {

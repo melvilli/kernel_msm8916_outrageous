@@ -26,6 +26,10 @@
 #include <net/xfrm.h>
 
 #include <crypto/algapi.h>
+<<<<<<< HEAD
+=======
+#include <crypto/null.h>
+>>>>>>> v3.18
 #include <crypto/aes.h>
 #include <crypto/des.h>
 #include <crypto/sha.h>

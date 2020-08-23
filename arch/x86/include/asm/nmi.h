@@ -1,6 +1,10 @@
 #ifndef _ASM_X86_NMI_H
 #define _ASM_X86_NMI_H
 
+<<<<<<< HEAD
+=======
+#include <linux/irq_work.h>
+>>>>>>> v3.18
 #include <linux/pm.h>
 #include <asm/irq.h>
 #include <asm/io.h>
@@ -38,6 +42,11 @@ typedef int (*nmi_handler_t)(unsigned int, struct pt_regs *);
 struct nmiaction {
 	struct list_head	list;
 	nmi_handler_t		handler;
+<<<<<<< HEAD
+=======
+	u64			max_duration;
+	struct irq_work		irq_work;
+>>>>>>> v3.18
 	unsigned long		flags;
 	const char		*name;
 };

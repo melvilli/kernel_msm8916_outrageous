@@ -25,6 +25,7 @@
 #include <core/option.h>
 #include <core/debug.h>
 
+<<<<<<< HEAD
 /* compares unterminated string 'str' with zero-terminated string 'cmp' */
 static inline int
 strncasecmpz(const char *str, const char *cmp, size_t len)
@@ -34,6 +35,8 @@ strncasecmpz(const char *str, const char *cmp, size_t len)
 	return strncasecmp(str, cmp, len);
 }
 
+=======
+>>>>>>> v3.18
 const char *
 nouveau_stropt(const char *optstr, const char *opt, int *arglen)
 {
@@ -105,7 +108,11 @@ nouveau_dbgopt(const char *optstr, const char *sub)
 				else if (!strncasecmpz(optstr, "warn", len))
 					level = NV_DBG_WARN;
 				else if (!strncasecmpz(optstr, "info", len))
+<<<<<<< HEAD
 					level = NV_DBG_INFO;
+=======
+					level = NV_DBG_INFO_NORMAL;
+>>>>>>> v3.18
 				else if (!strncasecmpz(optstr, "debug", len))
 					level = NV_DBG_DEBUG;
 				else if (!strncasecmpz(optstr, "trace", len))

@@ -39,8 +39,11 @@
 
 /*---------------------  Static Definitions -------------------------*/
 
+<<<<<<< HEAD
 //static int          msglevel                =MSG_LEVEL_INFO;
 
+=======
+>>>>>>> v3.18
 #define BY_AL2230_REG_LEN     23 //24bit
 #define CB_AL2230_INIT_SEQ    15
 #define SWITCH_CHANNEL_DELAY_AL2230 200 //us
@@ -55,7 +58,11 @@
 
 /*---------------------  Static Variables  --------------------------*/
 
+<<<<<<< HEAD
 const unsigned long dwAL2230InitTable[CB_AL2230_INIT_SEQ] = {
+=======
+static const unsigned long dwAL2230InitTable[CB_AL2230_INIT_SEQ] = {
+>>>>>>> v3.18
 	0x03F79000+(BY_AL2230_REG_LEN<<3)+IFREGCTL_REGW, //
 	0x03333100+(BY_AL2230_REG_LEN<<3)+IFREGCTL_REGW, //
 	0x01A00200+(BY_AL2230_REG_LEN<<3)+IFREGCTL_REGW, //
@@ -73,7 +80,11 @@ const unsigned long dwAL2230InitTable[CB_AL2230_INIT_SEQ] = {
 	0x00580F00+(BY_AL2230_REG_LEN<<3)+IFREGCTL_REGW
 };
 
+<<<<<<< HEAD
 const unsigned long dwAL2230ChannelTable0[CB_MAX_CHANNEL] = {
+=======
+static const unsigned long dwAL2230ChannelTable0[CB_MAX_CHANNEL] = {
+>>>>>>> v3.18
 	0x03F79000+(BY_AL2230_REG_LEN<<3)+IFREGCTL_REGW, // channel = 1, Tf = 2412MHz
 	0x03F79000+(BY_AL2230_REG_LEN<<3)+IFREGCTL_REGW, // channel = 2, Tf = 2417MHz
 	0x03E79000+(BY_AL2230_REG_LEN<<3)+IFREGCTL_REGW, // channel = 3, Tf = 2422MHz
@@ -90,7 +101,11 @@ const unsigned long dwAL2230ChannelTable0[CB_MAX_CHANNEL] = {
 	0x03E7C000+(BY_AL2230_REG_LEN<<3)+IFREGCTL_REGW  // channel = 14, Tf = 2412M
 };
 
+<<<<<<< HEAD
 const unsigned long dwAL2230ChannelTable1[CB_MAX_CHANNEL] = {
+=======
+static const unsigned long dwAL2230ChannelTable1[CB_MAX_CHANNEL] = {
+>>>>>>> v3.18
 	0x03333100+(BY_AL2230_REG_LEN<<3)+IFREGCTL_REGW, // channel = 1, Tf = 2412MHz
 	0x0B333100+(BY_AL2230_REG_LEN<<3)+IFREGCTL_REGW, // channel = 2, Tf = 2417MHz
 	0x03333100+(BY_AL2230_REG_LEN<<3)+IFREGCTL_REGW, // channel = 3, Tf = 2422MHz
@@ -107,7 +122,11 @@ const unsigned long dwAL2230ChannelTable1[CB_MAX_CHANNEL] = {
 	0x06666100+(BY_AL2230_REG_LEN<<3)+IFREGCTL_REGW  // channel = 14, Tf = 2412M
 };
 
+<<<<<<< HEAD
 unsigned long dwAL2230PowerTable[AL2230_PWR_IDX_LEN] = {
+=======
+static unsigned long dwAL2230PowerTable[AL2230_PWR_IDX_LEN] = {
+>>>>>>> v3.18
 	0x04040900+(BY_AL2230_REG_LEN<<3)+IFREGCTL_REGW,
 	0x04041900+(BY_AL2230_REG_LEN<<3)+IFREGCTL_REGW,
 	0x04042900+(BY_AL2230_REG_LEN<<3)+IFREGCTL_REGW,
@@ -177,13 +196,20 @@ unsigned long dwAL2230PowerTable[AL2230_PWR_IDX_LEN] = {
 //{{ RobertYu:20050104
 // 40MHz reference frequency
 // Need to Pull PLLON(PE3) low when writing channel registers through 3-wire.
+<<<<<<< HEAD
 const unsigned long dwAL7230InitTable[CB_AL7230_INIT_SEQ] = {
+=======
+static const unsigned long dwAL7230InitTable[CB_AL7230_INIT_SEQ] = {
+>>>>>>> v3.18
 	0x00379000+(BY_AL7230_REG_LEN<<3)+IFREGCTL_REGW, // Channel1 // Need modify for 11a
 	0x13333100+(BY_AL7230_REG_LEN<<3)+IFREGCTL_REGW, // Channel1 // Need modify for 11a
 	0x841FF200+(BY_AL7230_REG_LEN<<3)+IFREGCTL_REGW, // Need modify for 11a: 451FE2
 	0x3FDFA300+(BY_AL7230_REG_LEN<<3)+IFREGCTL_REGW, // Need modify for 11a: 5FDFA3
 	0x7FD78400+(BY_AL7230_REG_LEN<<3)+IFREGCTL_REGW, // 11b/g    // Need modify for 11a
+<<<<<<< HEAD
 	//0x802B4500+(BY_AL7230_REG_LEN<<3)+IFREGCTL_REGW, // Need modify for 11a: 8D1B45
+=======
+>>>>>>> v3.18
 	// RoberYu:20050113, Rev0.47 Regsiter Setting Guide
 	0x802B5500+(BY_AL7230_REG_LEN<<3)+IFREGCTL_REGW, // Need modify for 11a: 8D1B55
 	0x56AF3600+(BY_AL7230_REG_LEN<<3)+IFREGCTL_REGW,
@@ -192,7 +218,10 @@ const unsigned long dwAL7230InitTable[CB_AL7230_INIT_SEQ] = {
 	0x221BB900+(BY_AL7230_REG_LEN<<3)+IFREGCTL_REGW,
 	0xE0000A00+(BY_AL7230_REG_LEN<<3)+IFREGCTL_REGW, // Need modify for 11a: E0600A
 	0x08031B00+(BY_AL7230_REG_LEN<<3)+IFREGCTL_REGW, // init 0x080B1B00 => 0x080F1B00 for 3 wire control TxGain(D10)
+<<<<<<< HEAD
 	//0x00093C00+(BY_AL7230_REG_LEN<<3)+IFREGCTL_REGW, // Need modify for 11a: 00143C
+=======
+>>>>>>> v3.18
 	// RoberYu:20050113, Rev0.47 Regsiter Setting Guide
 	0x000A3C00+(BY_AL7230_REG_LEN<<3)+IFREGCTL_REGW, // Need modify for 11a: 00143C
 	0xFFFFFD00+(BY_AL7230_REG_LEN<<3)+IFREGCTL_REGW,
@@ -200,7 +229,11 @@ const unsigned long dwAL7230InitTable[CB_AL7230_INIT_SEQ] = {
 	0x1ABA8F00+(BY_AL7230_REG_LEN<<3)+IFREGCTL_REGW  // Need modify for 11a: 12BACF
 };
 
+<<<<<<< HEAD
 const unsigned long dwAL7230InitTableAMode[CB_AL7230_INIT_SEQ] = {
+=======
+static const unsigned long dwAL7230InitTableAMode[CB_AL7230_INIT_SEQ] = {
+>>>>>>> v3.18
 	0x0FF52000+(BY_AL7230_REG_LEN<<3)+IFREGCTL_REGW, // Channel184 // Need modify for 11b/g
 	0x00000100+(BY_AL7230_REG_LEN<<3)+IFREGCTL_REGW, // Channel184 // Need modify for 11b/g
 	0x451FE200+(BY_AL7230_REG_LEN<<3)+IFREGCTL_REGW, // Need modify for 11b/g
@@ -219,7 +252,11 @@ const unsigned long dwAL7230InitTableAMode[CB_AL7230_INIT_SEQ] = {
 	0x12BACF00+(BY_AL7230_REG_LEN<<3)+IFREGCTL_REGW  // Need modify for 11b/g
 };
 
+<<<<<<< HEAD
 const unsigned long dwAL7230ChannelTable0[CB_MAX_CHANNEL] = {
+=======
+static const unsigned long dwAL7230ChannelTable0[CB_MAX_CHANNEL] = {
+>>>>>>> v3.18
 	0x00379000+(BY_AL7230_REG_LEN<<3)+IFREGCTL_REGW, // channel =  1, Tf = 2412MHz
 	0x00379000+(BY_AL7230_REG_LEN<<3)+IFREGCTL_REGW, // channel =  2, Tf = 2417MHz
 	0x00379000+(BY_AL7230_REG_LEN<<3)+IFREGCTL_REGW, // channel =  3, Tf = 2422MHz
@@ -285,7 +322,11 @@ const unsigned long dwAL7230ChannelTable0[CB_MAX_CHANNEL] = {
 	0x0FF61000+(BY_AL7230_REG_LEN<<3)+IFREGCTL_REGW  // channel = 165, Tf = 5825MHz (56)
 };
 
+<<<<<<< HEAD
 const unsigned long dwAL7230ChannelTable1[CB_MAX_CHANNEL] = {
+=======
+static const unsigned long dwAL7230ChannelTable1[CB_MAX_CHANNEL] = {
+>>>>>>> v3.18
 	0x13333100+(BY_AL7230_REG_LEN<<3)+IFREGCTL_REGW, // channel =  1, Tf = 2412MHz
 	0x1B333100+(BY_AL7230_REG_LEN<<3)+IFREGCTL_REGW, // channel =  2, Tf = 2417MHz
 	0x03333100+(BY_AL7230_REG_LEN<<3)+IFREGCTL_REGW, // channel =  3, Tf = 2422MHz
@@ -349,7 +390,11 @@ const unsigned long dwAL7230ChannelTable1[CB_MAX_CHANNEL] = {
 	0x02AAA100+(BY_AL7230_REG_LEN<<3)+IFREGCTL_REGW  // channel = 165, Tf = 5825MHz (56)
 };
 
+<<<<<<< HEAD
 const unsigned long dwAL7230ChannelTable2[CB_MAX_CHANNEL] = {
+=======
+static const unsigned long dwAL7230ChannelTable2[CB_MAX_CHANNEL] = {
+>>>>>>> v3.18
 	0x7FD78400+(BY_AL7230_REG_LEN<<3)+IFREGCTL_REGW, // channel =  1, Tf = 2412MHz
 	0x7FD78400+(BY_AL7230_REG_LEN<<3)+IFREGCTL_REGW, // channel =  2, Tf = 2417MHz
 	0x7FD78400+(BY_AL7230_REG_LEN<<3)+IFREGCTL_REGW, // channel =  3, Tf = 2422MHz
@@ -428,7 +473,11 @@ const unsigned long dwAL7230ChannelTable2[CB_MAX_CHANNEL] = {
  * Return Value: true if succeeded; false if failed.
  *
  */
+<<<<<<< HEAD
 bool s_bAL7230Init(unsigned long dwIoBase)
+=======
+static bool s_bAL7230Init(void __iomem *dwIoBase)
+>>>>>>> v3.18
 {
 	int     ii;
 	bool bResult;
@@ -471,7 +520,11 @@ bool s_bAL7230Init(unsigned long dwIoBase)
 }
 
 // Need to Pull PLLON low when writing channel registers through 3-wire interface
+<<<<<<< HEAD
 bool s_bAL7230SelectChannel(unsigned long dwIoBase, unsigned char byChannel)
+=======
+static bool s_bAL7230SelectChannel(void __iomem *dwIoBase, unsigned char byChannel)
+>>>>>>> v3.18
 {
 	bool bResult;
 
@@ -571,7 +624,11 @@ bool s_bAL7230SelectChannel(unsigned long dwIoBase, unsigned char byChannel)
  * Return Value: true if succeeded; false if failed.
  *
  */
+<<<<<<< HEAD
 bool IFRFbWriteEmbedded(unsigned long dwIoBase, unsigned long dwData)
+=======
+bool IFRFbWriteEmbedded(void __iomem *dwIoBase, unsigned long dwData)
+>>>>>>> v3.18
 {
 	unsigned short ww;
 	unsigned long dwValue;
@@ -585,10 +642,16 @@ bool IFRFbWriteEmbedded(unsigned long dwIoBase, unsigned long dwData)
 			break;
 	}
 
+<<<<<<< HEAD
 	if (ww == W_MAX_TIMEOUT) {
 //        DBG_PORT80_ALWAYS(0x32);
 		return false;
 	}
+=======
+	if (ww == W_MAX_TIMEOUT)
+		return false;
+
+>>>>>>> v3.18
 	return true;
 }
 
@@ -631,7 +694,11 @@ bool IFRFbWriteEmbedded(unsigned long dwIoBase, unsigned long dwData)
  * Return Value: true if succeeded; false if failed.
  *
  */
+<<<<<<< HEAD
 bool RFbAL2230Init(unsigned long dwIoBase)
+=======
+static bool RFbAL2230Init(void __iomem *dwIoBase)
+>>>>>>> v3.18
 {
 	int     ii;
 	bool bResult;
@@ -678,7 +745,11 @@ bool RFbAL2230Init(unsigned long dwIoBase)
 	return bResult;
 }
 
+<<<<<<< HEAD
 bool RFbAL2230SelectChannel(unsigned long dwIoBase, unsigned char byChannel)
+=======
+static bool RFbAL2230SelectChannel(void __iomem *dwIoBase, unsigned char byChannel)
+>>>>>>> v3.18
 {
 	bool bResult;
 
@@ -751,10 +822,18 @@ bool RFbAL2230SelectChannel(unsigned long dwIoBase, unsigned char byChannel)
  *
  */
 bool RFbInit(
+<<<<<<< HEAD
 	PSDevice  pDevice
 )
 {
 	bool bResult = true;
+=======
+	struct vnt_private *pDevice
+)
+{
+	bool bResult = true;
+
+>>>>>>> v3.18
 	switch (pDevice->byRFType) {
 	case RF_AIROHA:
 	case RF_AL2230S:
@@ -776,6 +855,7 @@ bool RFbInit(
 }
 
 /*
+<<<<<<< HEAD
  * Description: RF ShutDown function
  *
  * Parameters:
@@ -806,6 +886,8 @@ bool RFbShutDown(
 }
 
 /*
+=======
+>>>>>>> v3.18
  * Description: Select channel
  *
  * Parameters:
@@ -818,9 +900,16 @@ bool RFbShutDown(
  * Return Value: true if succeeded; false if failed.
  *
  */
+<<<<<<< HEAD
 bool RFbSelectChannel(unsigned long dwIoBase, unsigned char byRFType, unsigned char byChannel)
 {
 	bool bResult = true;
+=======
+bool RFbSelectChannel(void __iomem *dwIoBase, unsigned char byRFType, unsigned char byChannel)
+{
+	bool bResult = true;
+
+>>>>>>> v3.18
 	switch (byRFType) {
 	case RF_AIROHA:
 	case RF_AL2230S:
@@ -853,7 +942,11 @@ bool RFbSelectChannel(unsigned long dwIoBase, unsigned char byRFType, unsigned c
  * Return Value: None.
  *
  */
+<<<<<<< HEAD
 bool RFvWriteWakeProgSyn(unsigned long dwIoBase, unsigned char byRFType, unsigned int uChannel)
+=======
+bool RFvWriteWakeProgSyn(void __iomem *dwIoBase, unsigned char byRFType, unsigned int uChannel)
+>>>>>>> v3.18
 {
 	int   ii;
 	unsigned char byInitCount = 0;
@@ -869,6 +962,7 @@ bool RFvWriteWakeProgSyn(unsigned long dwIoBase, unsigned char byRFType, unsigne
 
 		byInitCount = CB_AL2230_INIT_SEQ + 2; // Init Reg + Channel Reg (2)
 		bySleepCount = 0;
+<<<<<<< HEAD
 		if (byInitCount > (MISCFIFO_SYNDATASIZE - bySleepCount)) {
 			return false;
 		}
@@ -876,6 +970,14 @@ bool RFvWriteWakeProgSyn(unsigned long dwIoBase, unsigned char byRFType, unsigne
 		for (ii = 0; ii < CB_AL2230_INIT_SEQ; ii++) {
 			MACvSetMISCFifo(dwIoBase, (unsigned short)(MISCFIFO_SYNDATA_IDX + ii), dwAL2230InitTable[ii]);
 		}
+=======
+		if (byInitCount > (MISCFIFO_SYNDATASIZE - bySleepCount))
+			return false;
+
+		for (ii = 0; ii < CB_AL2230_INIT_SEQ; ii++)
+			MACvSetMISCFifo(dwIoBase, (unsigned short)(MISCFIFO_SYNDATA_IDX + ii), dwAL2230InitTable[ii]);
+
+>>>>>>> v3.18
 		MACvSetMISCFifo(dwIoBase, (unsigned short)(MISCFIFO_SYNDATA_IDX + ii), dwAL2230ChannelTable0[uChannel-1]);
 		ii++;
 		MACvSetMISCFifo(dwIoBase, (unsigned short)(MISCFIFO_SYNDATA_IDX + ii), dwAL2230ChannelTable1[uChannel-1]);
@@ -886,6 +988,7 @@ bool RFvWriteWakeProgSyn(unsigned long dwIoBase, unsigned char byRFType, unsigne
 	case RF_AIROHA7230:
 		byInitCount = CB_AL7230_INIT_SEQ + 3; // Init Reg + Channel Reg (3)
 		bySleepCount = 0;
+<<<<<<< HEAD
 		if (byInitCount > (MISCFIFO_SYNDATASIZE - bySleepCount)) {
 			return false;
 		}
@@ -898,6 +1001,17 @@ bool RFvWriteWakeProgSyn(unsigned long dwIoBase, unsigned char byRFType, unsigne
 			for (ii = 0; ii < CB_AL7230_INIT_SEQ; ii++) {
 				MACvSetMISCFifo(dwIoBase, (unsigned short)(MISCFIFO_SYNDATA_IDX + ii), dwAL7230InitTableAMode[ii]);
 			}
+=======
+		if (byInitCount > (MISCFIFO_SYNDATASIZE - bySleepCount))
+			return false;
+
+		if (uChannel <= CB_MAX_CHANNEL_24G) {
+			for (ii = 0; ii < CB_AL7230_INIT_SEQ; ii++)
+				MACvSetMISCFifo(dwIoBase, (unsigned short)(MISCFIFO_SYNDATA_IDX + ii), dwAL7230InitTable[ii]);
+		} else {
+			for (ii = 0; ii < CB_AL7230_INIT_SEQ; ii++)
+				MACvSetMISCFifo(dwIoBase, (unsigned short)(MISCFIFO_SYNDATA_IDX + ii), dwAL7230InitTableAMode[ii]);
+>>>>>>> v3.18
 		}
 
 		MACvSetMISCFifo(dwIoBase, (unsigned short)(MISCFIFO_SYNDATA_IDX + ii), dwAL7230ChannelTable0[uChannel-1]);
@@ -910,11 +1024,17 @@ bool RFvWriteWakeProgSyn(unsigned long dwIoBase, unsigned char byRFType, unsigne
 
 	case RF_NOTHING:
 		return true;
+<<<<<<< HEAD
 		break;
 
 	default:
 		return false;
 		break;
+=======
+
+	default:
+		return false;
+>>>>>>> v3.18
 	}
 
 	MACvSetMISCFifo(dwIoBase, MISCFIFO_SYNINFO_IDX, (unsigned long)MAKEWORD(bySleepCount, byInitCount));
@@ -936,7 +1056,11 @@ bool RFvWriteWakeProgSyn(unsigned long dwIoBase, unsigned char byRFType, unsigne
  *
  */
 bool RFbSetPower(
+<<<<<<< HEAD
 	PSDevice  pDevice,
+=======
+	struct vnt_private *pDevice,
+>>>>>>> v3.18
 	unsigned int uRATE,
 	unsigned int uCH
 )
@@ -946,12 +1070,20 @@ bool RFbSetPower(
 	unsigned char byDec = 0;
 	unsigned char byPwrdBm = 0;
 
+<<<<<<< HEAD
 	if (pDevice->dwDiagRefCount != 0) {
 		return true;
 	}
 	if ((uCH < 1) || (uCH > CB_MAX_CHANNEL)) {
 		return false;
 	}
+=======
+	if (pDevice->dwDiagRefCount != 0)
+		return true;
+
+	if ((uCH < 1) || (uCH > CB_MAX_CHANNEL))
+		return false;
+>>>>>>> v3.18
 
 	switch (uRATE) {
 	case RATE_1M:
@@ -960,6 +1092,7 @@ bool RFbSetPower(
 	case RATE_11M:
 		byPwr = pDevice->abyCCKPwrTbl[uCH];
 		byPwrdBm = pDevice->abyCCKDefaultPwr[uCH];
+<<<<<<< HEAD
 //PLICE_DEBUG->
 		//byPwr+=5;
 //PLICE_DEBUG <-
@@ -977,6 +1110,21 @@ bool RFbSetPower(
 		if (byDec >= pDevice->byMaxPwrLevel) {
 			byDec = pDevice->byMaxPwrLevel-1;
 		}
+=======
+		break;
+	case RATE_6M:
+	case RATE_9M:
+	case RATE_18M:
+		byPwr = pDevice->abyOFDMPwrTbl[uCH];
+		if (pDevice->byRFType == RF_UW2452)
+			byDec = byPwr + 14;
+		else
+			byDec = byPwr + 10;
+
+		if (byDec >= pDevice->byMaxPwrLevel)
+			byDec = pDevice->byMaxPwrLevel-1;
+
+>>>>>>> v3.18
 		if (pDevice->byRFType == RF_UW2452) {
 			byPwrdBm = byDec - byPwr;
 			byPwrdBm /= 3;
@@ -984,11 +1132,17 @@ bool RFbSetPower(
 			byPwrdBm = byDec - byPwr;
 			byPwrdBm >>= 1;
 		}
+<<<<<<< HEAD
 		byPwrdBm += pDevice->abyOFDMDefaultPwr[uCH];
 		byPwr = byDec;
 //PLICE_DEBUG->
 		//byPwr+=5;
 //PLICE_DEBUG<-
+=======
+
+		byPwrdBm += pDevice->abyOFDMDefaultPwr[uCH];
+		byPwr = byDec;
+>>>>>>> v3.18
 		break;
 	case RATE_24M:
 	case RATE_36M:
@@ -996,6 +1150,7 @@ bool RFbSetPower(
 	case RATE_54M:
 		byPwr = pDevice->abyOFDMPwrTbl[uCH];
 		byPwrdBm = pDevice->abyOFDMDefaultPwr[uCH];
+<<<<<<< HEAD
 //PLICE_DEBUG->
 		//byPwr+=5;
 //PLICE_DEBUG<-
@@ -1010,6 +1165,18 @@ bool RFbSetPower(
 	if (bResult == true) {
 		pDevice->byCurPwr = byPwr;
 	}
+=======
+		break;
+	}
+
+	if (pDevice->byCurPwr == byPwr)
+		return true;
+
+	bResult = RFbRawSetPower(pDevice, byPwr, uRATE);
+	if (bResult)
+		pDevice->byCurPwr = byPwr;
+
+>>>>>>> v3.18
 	return bResult;
 }
 
@@ -1028,7 +1195,11 @@ bool RFbSetPower(
  */
 
 bool RFbRawSetPower(
+<<<<<<< HEAD
 	PSDevice  pDevice,
+=======
+	struct vnt_private *pDevice,
+>>>>>>> v3.18
 	unsigned char byPwr,
 	unsigned int uRATE
 )
@@ -1036,6 +1207,7 @@ bool RFbRawSetPower(
 	bool bResult = true;
 	unsigned long dwMax7230Pwr = 0;
 
+<<<<<<< HEAD
 	if (byPwr >=  pDevice->byMaxPwrLevel) {
 		return false;
 	}
@@ -1047,6 +1219,19 @@ bool RFbRawSetPower(
 		} else {
 			bResult &= IFRFbWriteEmbedded(pDevice->PortOffset, 0x0005A400+(BY_AL2230_REG_LEN<<3)+IFREGCTL_REGW);
 		}
+=======
+	if (byPwr >=  pDevice->byMaxPwrLevel)
+		return false;
+
+	switch (pDevice->byRFType) {
+	case RF_AIROHA:
+		bResult &= IFRFbWriteEmbedded(pDevice->PortOffset, dwAL2230PowerTable[byPwr]);
+		if (uRATE <= RATE_11M)
+			bResult &= IFRFbWriteEmbedded(pDevice->PortOffset, 0x0001B400+(BY_AL2230_REG_LEN<<3)+IFREGCTL_REGW);
+		else
+			bResult &= IFRFbWriteEmbedded(pDevice->PortOffset, 0x0005A400+(BY_AL2230_REG_LEN<<3)+IFREGCTL_REGW);
+
+>>>>>>> v3.18
 		break;
 
 	case RF_AL2230S:
@@ -1092,7 +1277,11 @@ bool RFbRawSetPower(
  -*/
 void
 RFvRSSITodBm(
+<<<<<<< HEAD
 	PSDevice pDevice,
+=======
+	struct vnt_private *pDevice,
+>>>>>>> v3.18
 	unsigned char byCurrRSSI,
 	long *pldBm
 	)
@@ -1120,7 +1309,11 @@ RFvRSSITodBm(
 
 // Post processing for the 11b/g and 11a.
 // for save time on changing Reg2,3,5,7,10,12,15
+<<<<<<< HEAD
 bool RFbAL7230SelectChannelPostProcess(unsigned long dwIoBase, unsigned char byOldChannel, unsigned char byNewChannel)
+=======
+bool RFbAL7230SelectChannelPostProcess(void __iomem *dwIoBase, unsigned char byOldChannel, unsigned char byNewChannel)
+>>>>>>> v3.18
 {
 	bool bResult;
 

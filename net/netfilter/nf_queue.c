@@ -52,7 +52,11 @@ void nf_queue_entry_release_refs(struct nf_queue_entry *entry)
 		dev_put(entry->indev);
 	if (entry->outdev)
 		dev_put(entry->outdev);
+<<<<<<< HEAD
 #ifdef CONFIG_BRIDGE_NETFILTER
+=======
+#if IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
+>>>>>>> v3.18
 	if (entry->skb->nf_bridge) {
 		struct nf_bridge_info *nf_bridge = entry->skb->nf_bridge;
 
@@ -77,7 +81,11 @@ bool nf_queue_entry_get_refs(struct nf_queue_entry *entry)
 		dev_hold(entry->indev);
 	if (entry->outdev)
 		dev_hold(entry->outdev);
+<<<<<<< HEAD
 #ifdef CONFIG_BRIDGE_NETFILTER
+=======
+#if IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
+>>>>>>> v3.18
 	if (entry->skb->nf_bridge) {
 		struct nf_bridge_info *nf_bridge = entry->skb->nf_bridge;
 		struct net_device *physdev;

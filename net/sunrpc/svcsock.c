@@ -60,7 +60,11 @@
 
 static struct svc_sock *svc_setup_socket(struct svc_serv *, struct socket *,
 					 int flags);
+<<<<<<< HEAD
 static void		svc_udp_data_ready(struct sock *, int);
+=======
+static void		svc_udp_data_ready(struct sock *);
+>>>>>>> v3.18
 static int		svc_udp_recvfrom(struct svc_rqst *);
 static int		svc_udp_sendto(struct svc_rqst *);
 static void		svc_sock_detach(struct svc_xprt *);
@@ -291,12 +295,23 @@ static int svc_one_sock_name(struct svc_sock *svsk, char *buf, int remaining)
 				&inet_sk(sk)->inet_rcv_saddr,
 				inet_sk(sk)->inet_num);
 		break;
+<<<<<<< HEAD
 	case PF_INET6:
 		len = snprintf(buf, remaining, "ipv6 %s %pI6 %d\n",
 				proto_name,
 				&inet6_sk(sk)->rcv_saddr,
 				inet_sk(sk)->inet_num);
 		break;
+=======
+#if IS_ENABLED(CONFIG_IPV6)
+	case PF_INET6:
+		len = snprintf(buf, remaining, "ipv6 %s %pI6 %d\n",
+				proto_name,
+				&sk->sk_v6_rcv_saddr,
+				inet_sk(sk)->inet_num);
+		break;
+#endif
+>>>>>>> v3.18
 	default:
 		len = snprintf(buf, remaining, "*unknown-%d*\n",
 				sk->sk_family);
@@ -310,6 +325,7 @@ static int svc_one_sock_name(struct svc_sock *svsk, char *buf, int remaining)
 }
 
 /*
+<<<<<<< HEAD
  * Check input queue length
  */
 static int svc_recv_available(struct svc_sock *svsk)
@@ -323,6 +339,8 @@ static int svc_recv_available(struct svc_sock *svsk)
 }
 
 /*
+=======
+>>>>>>> v3.18
  * Generic recvfrom routine.
  */
 static int svc_recvfrom(struct svc_rqst *rqstp, struct kvec *iov, int nr,
@@ -337,8 +355,19 @@ static int svc_recvfrom(struct svc_rqst *rqstp, struct kvec *iov, int nr,
 
 	rqstp->rq_xprt_hlen = 0;
 
+<<<<<<< HEAD
 	len = kernel_recvmsg(svsk->sk_sock, &msg, iov, nr, buflen,
 				msg.msg_flags);
+=======
+	clear_bit(XPT_DATA, &svsk->sk_xprt.xpt_flags);
+	len = kernel_recvmsg(svsk->sk_sock, &msg, iov, nr, buflen,
+				msg.msg_flags);
+	/* If we read a full record, then assume there may be more
+	 * data to read (stream based sockets only!)
+	 */
+	if (len == buflen)
+		set_bit(XPT_DATA, &svsk->sk_xprt.xpt_flags);
+>>>>>>> v3.18
 
 	dprintk("svc: socket %p recvfrom(%p, %Zu) = %d\n",
 		svsk, iov[0].iov_base, iov[0].iov_len, len);
@@ -398,17 +427,35 @@ static void svc_sock_setbufsize(struct socket *sock, unsigned int snd,
 	release_sock(sock->sk);
 #endif
 }
+<<<<<<< HEAD
 /*
  * INET callback when data has been received on the socket.
  */
 static void svc_udp_data_ready(struct sock *sk, int count)
+=======
+
+static int svc_sock_secure_port(struct svc_rqst *rqstp)
+{
+	return svc_port_is_privileged(svc_addr(rqstp));
+}
+
+/*
+ * INET callback when data has been received on the socket.
+ */
+static void svc_udp_data_ready(struct sock *sk)
+>>>>>>> v3.18
 {
 	struct svc_sock	*svsk = (struct svc_sock *)sk->sk_user_data;
 	wait_queue_head_t *wq = sk_sleep(sk);
 
 	if (svsk) {
+<<<<<<< HEAD
 		dprintk("svc: socket %p(inet %p), count=%d, busy=%d\n",
 			svsk, sk, count,
+=======
+		dprintk("svc: socket %p(inet %p), busy=%d\n",
+			svsk, sk,
+>>>>>>> v3.18
 			test_bit(XPT_BUSY, &svsk->sk_xprt.xpt_flags));
 		set_bit(XPT_DATA, &svsk->sk_xprt.xpt_flags);
 		svc_xprt_enqueue(&svsk->sk_xprt);
@@ -438,15 +485,54 @@ static void svc_write_space(struct sock *sk)
 	}
 }
 
+<<<<<<< HEAD
 static void svc_tcp_write_space(struct sock *sk)
 {
 	struct socket *sock = sk->sk_socket;
 
 	if (sk_stream_wspace(sk) >= sk_stream_min_wspace(sk) && sock)
+=======
+static int svc_tcp_has_wspace(struct svc_xprt *xprt)
+{
+	struct svc_sock *svsk =	container_of(xprt, struct svc_sock, sk_xprt);
+	struct svc_serv *serv = svsk->sk_xprt.xpt_server;
+	int required;
+
+	if (test_bit(XPT_LISTENER, &xprt->xpt_flags))
+		return 1;
+	required = atomic_read(&xprt->xpt_reserved) + serv->sv_max_mesg;
+	if (sk_stream_wspace(svsk->sk_sk) >= required ||
+	    (sk_stream_min_wspace(svsk->sk_sk) == 0 &&
+	     atomic_read(&xprt->xpt_reserved) == 0))
+		return 1;
+	set_bit(SOCK_NOSPACE, &svsk->sk_sock->flags);
+	return 0;
+}
+
+static void svc_tcp_write_space(struct sock *sk)
+{
+	struct svc_sock *svsk = (struct svc_sock *)(sk->sk_user_data);
+	struct socket *sock = sk->sk_socket;
+
+	if (!sk_stream_is_writeable(sk) || !sock)
+		return;
+	if (!svsk || svc_tcp_has_wspace(&svsk->sk_xprt))
+>>>>>>> v3.18
 		clear_bit(SOCK_NOSPACE, &sock->flags);
 	svc_write_space(sk);
 }
 
+<<<<<<< HEAD
+=======
+static void svc_tcp_adjust_wspace(struct svc_xprt *xprt)
+{
+	struct svc_sock *svsk = container_of(xprt, struct svc_sock, sk_xprt);
+
+	if (svc_tcp_has_wspace(xprt))
+		clear_bit(SOCK_NOSPACE, &svsk->sk_sock->flags);
+}
+
+>>>>>>> v3.18
 /*
  * See net/ipv6/ip_sockglue.c : ip_cmsg_recv_pktinfo
  */
@@ -676,6 +762,10 @@ static struct svc_xprt_ops svc_udp_ops = {
 	.xpo_prep_reply_hdr = svc_udp_prep_reply_hdr,
 	.xpo_has_wspace = svc_udp_has_wspace,
 	.xpo_accept = svc_udp_accept,
+<<<<<<< HEAD
+=======
+	.xpo_secure_port = svc_sock_secure_port,
+>>>>>>> v3.18
 };
 
 static struct svc_xprt_class svc_udp_class = {
@@ -730,7 +820,11 @@ static void svc_udp_init(struct svc_sock *svsk, struct svc_serv *serv)
  * A data_ready event on a listening socket means there's a connection
  * pending. Do not use state_change as a substitute for it.
  */
+<<<<<<< HEAD
 static void svc_tcp_listen_data_ready(struct sock *sk, int count_unused)
+=======
+static void svc_tcp_listen_data_ready(struct sock *sk)
+>>>>>>> v3.18
 {
 	struct svc_sock	*svsk = (struct svc_sock *)sk->sk_user_data;
 	wait_queue_head_t *wq;
@@ -782,7 +876,11 @@ static void svc_tcp_state_change(struct sock *sk)
 		wake_up_interruptible_all(wq);
 }
 
+<<<<<<< HEAD
 static void svc_tcp_data_ready(struct sock *sk, int count)
+=======
+static void svc_tcp_data_ready(struct sock *sk)
+>>>>>>> v3.18
 {
 	struct svc_sock *svsk = (struct svc_sock *)sk->sk_user_data;
 	wait_queue_head_t *wq = sk_sleep(sk);
@@ -841,8 +939,12 @@ static struct svc_xprt *svc_tcp_accept(struct svc_xprt *xprt)
 	 * tell us anything.  For now just warn about unpriv connections.
 	 */
 	if (!svc_port_is_privileged(sin)) {
+<<<<<<< HEAD
 		dprintk(KERN_WARNING
 			"%s: connect from unprivileged port: %s\n",
+=======
+		dprintk("%s: connect from unprivileged port: %s\n",
+>>>>>>> v3.18
 			serv->sv_name,
 			__svc_print_addr(sin, buf, sizeof(buf)));
 	}
@@ -866,6 +968,13 @@ static struct svc_xprt *svc_tcp_accept(struct svc_xprt *xprt)
 	}
 	svc_xprt_set_local(&newsvsk->sk_xprt, sin, slen);
 
+<<<<<<< HEAD
+=======
+	if (sock_is_loopback(newsock->sk))
+		set_bit(XPT_LOCAL, &newsvsk->sk_xprt.xpt_flags);
+	else
+		clear_bit(XPT_LOCAL, &newsvsk->sk_xprt.xpt_flags);
+>>>>>>> v3.18
 	if (serv->sv_stats)
 		serv->sv_stats->nettcpconn++;
 
@@ -940,8 +1049,11 @@ static int svc_tcp_recv_record(struct svc_sock *svsk, struct svc_rqst *rqstp)
 	unsigned int want;
 	int len;
 
+<<<<<<< HEAD
 	clear_bit(XPT_DATA, &svsk->sk_xprt.xpt_flags);
 
+=======
+>>>>>>> v3.18
 	if (svsk->sk_tcplen < sizeof(rpc_fraghdr)) {
 		struct kvec	iov;
 
@@ -988,6 +1100,7 @@ static int receive_cb_reply(struct svc_sock *svsk, struct svc_rqst *rqstp)
 	xid = *p++;
 	calldir = *p;
 
+<<<<<<< HEAD
 	if (bc_xprt)
 		req = xprt_lookup_rqst(bc_xprt, xid);
 
@@ -999,6 +1112,14 @@ static int receive_cb_reply(struct svc_sock *svsk, struct svc_rqst *rqstp)
 			bc_xprt, xid);
 		return -EAGAIN;
 	}
+=======
+	if (!bc_xprt)
+		return -EAGAIN;
+	spin_lock_bh(&bc_xprt->transport_lock);
+	req = xprt_lookup_rqst(bc_xprt, xid);
+	if (!req)
+		goto unlock_notfound;
+>>>>>>> v3.18
 
 	memcpy(&req->rq_private_buf, &req->rq_rcv_buf, sizeof(struct xdr_buf));
 	/*
@@ -1009,11 +1130,29 @@ static int receive_cb_reply(struct svc_sock *svsk, struct svc_rqst *rqstp)
 	dst = &req->rq_private_buf.head[0];
 	src = &rqstp->rq_arg.head[0];
 	if (dst->iov_len < src->iov_len)
+<<<<<<< HEAD
 		return -EAGAIN; /* whatever; just giving up. */
 	memcpy(dst->iov_base, src->iov_base, src->iov_len);
 	xprt_complete_rqst(req->rq_task, rqstp->rq_arg.len);
 	rqstp->rq_arg.len = 0;
 	return 0;
+=======
+		goto unlock_eagain; /* whatever; just giving up. */
+	memcpy(dst->iov_base, src->iov_base, src->iov_len);
+	xprt_complete_rqst(req->rq_task, rqstp->rq_arg.len);
+	rqstp->rq_arg.len = 0;
+	spin_unlock_bh(&bc_xprt->transport_lock);
+	return 0;
+unlock_notfound:
+	printk(KERN_NOTICE
+		"%s: Got unrecognized reply: "
+		"calldir 0x%x xpt_bc_xprt %p xid %08x\n",
+		__func__, ntohl(calldir),
+		bc_xprt, ntohl(xid));
+unlock_eagain:
+	spin_unlock_bh(&bc_xprt->transport_lock);
+	return -EAGAIN;
+>>>>>>> v3.18
 }
 
 static int copy_pages_to_kvecs(struct kvec *vec, struct page **pages, int len)
@@ -1033,8 +1172,11 @@ static int copy_pages_to_kvecs(struct kvec *vec, struct page **pages, int len)
 static void svc_tcp_fragment_received(struct svc_sock *svsk)
 {
 	/* If we have more data, signal svc_xprt_enqueue() to try again */
+<<<<<<< HEAD
 	if (svc_recv_available(svsk) > sizeof(rpc_fraghdr))
 		set_bit(XPT_DATA, &svsk->sk_xprt.xpt_flags);
+=======
+>>>>>>> v3.18
 	dprintk("svc: TCP %s record (%d bytes)\n",
 		svc_sock_final_rec(svsk) ? "final" : "nonfinal",
 		svc_sock_reclen(svsk));
@@ -1111,6 +1253,10 @@ static int svc_tcp_recvfrom(struct svc_rqst *rqstp)
 
 	rqstp->rq_xprt_ctxt   = NULL;
 	rqstp->rq_prot	      = IPPROTO_TCP;
+<<<<<<< HEAD
+=======
+	rqstp->rq_local	      = !!test_bit(XPT_LOCAL, &svsk->sk_xprt.xpt_flags);
+>>>>>>> v3.18
 
 	p = (__be32 *)rqstp->rq_arg.head[0].iov_base;
 	calldir = p[1];
@@ -1185,6 +1331,7 @@ static void svc_tcp_prep_reply_hdr(struct svc_rqst *rqstp)
 	svc_putnl(resv, 0);
 }
 
+<<<<<<< HEAD
 static int svc_tcp_has_wspace(struct svc_xprt *xprt)
 {
 	struct svc_sock *svsk =	container_of(xprt, struct svc_sock, sk_xprt);
@@ -1200,6 +1347,8 @@ static int svc_tcp_has_wspace(struct svc_xprt *xprt)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 static struct svc_xprt *svc_tcp_create(struct svc_serv *serv,
 				       struct net *net,
 				       struct sockaddr *sa, int salen,
@@ -1231,6 +1380,10 @@ static struct svc_xprt_ops svc_tcp_bc_ops = {
 	.xpo_detach = svc_bc_tcp_sock_detach,
 	.xpo_free = svc_bc_sock_free,
 	.xpo_prep_reply_hdr = svc_tcp_prep_reply_hdr,
+<<<<<<< HEAD
+=======
+	.xpo_secure_port = svc_sock_secure_port,
+>>>>>>> v3.18
 };
 
 static struct svc_xprt_class svc_tcp_bc_class = {
@@ -1269,6 +1422,11 @@ static struct svc_xprt_ops svc_tcp_ops = {
 	.xpo_prep_reply_hdr = svc_tcp_prep_reply_hdr,
 	.xpo_has_wspace = svc_tcp_has_wspace,
 	.xpo_accept = svc_tcp_accept,
+<<<<<<< HEAD
+=======
+	.xpo_secure_port = svc_sock_secure_port,
+	.xpo_adjust_wspace = svc_tcp_adjust_wspace,
+>>>>>>> v3.18
 };
 
 static struct svc_xprt_class svc_tcp_class = {

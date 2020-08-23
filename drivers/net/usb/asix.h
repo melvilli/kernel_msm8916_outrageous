@@ -16,8 +16,12 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
  */
 
 #ifndef _ASIX_H
@@ -28,7 +32,10 @@
 
 #include <linux/module.h>
 #include <linux/kmod.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/netdevice.h>
 #include <linux/etherdevice.h>
 #include <linux/ethtool.h>
@@ -178,6 +185,11 @@ struct asix_common_private {
 	struct asix_rx_fixup_info rx_fixup_info;
 };
 
+<<<<<<< HEAD
+=======
+extern const struct driver_info ax88172a_info;
+
+>>>>>>> v3.18
 /* ASIX specific flags */
 #define FLAG_EEPROM_MAC		(1UL << 0)  /* init device MAC from eeprom */
 

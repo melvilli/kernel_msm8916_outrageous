@@ -5,3 +5,7 @@ config_data.h
 config_data.gz
 timeconst.h
 hz.bc
+<<<<<<< HEAD
+=======
+x509_certificate_list
+>>>>>>> v3.18

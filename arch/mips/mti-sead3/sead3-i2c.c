@@ -5,10 +5,15 @@
  *
  * Copyright (C) 2012 MIPS Technologies, Inc.  All rights reserved.
  */
+<<<<<<< HEAD
 #include <linux/module.h>
 #include <linux/init.h>
 #include <linux/platform_device.h>
 #include <irq.h>
+=======
+#include <linux/init.h>
+#include <linux/platform_device.h>
+>>>>>>> v3.18
 
 struct resource sead3_i2c_resources[] = {
 	{
@@ -30,8 +35,12 @@ static int __init sead3_i2c_init(void)
 	return platform_device_register(&sead3_i2c_device);
 }
 
+<<<<<<< HEAD
 module_init(sead3_i2c_init);
 
 MODULE_AUTHOR("Chris Dearman <chris@mips.com>");
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("I2C probe driver for SEAD3");
+=======
+device_initcall(sead3_i2c_init);
+>>>>>>> v3.18

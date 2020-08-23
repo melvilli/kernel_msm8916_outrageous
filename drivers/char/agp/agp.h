@@ -239,6 +239,10 @@ long compat_agp_ioctl(struct file *file, unsigned int cmd, unsigned long arg);
 
 /* Chipset independent registers (from AGP Spec) */
 #define AGP_APBASE	0x10
+<<<<<<< HEAD
+=======
+#define AGP_APERTURE_BAR	0
+>>>>>>> v3.18
 
 #define AGPSTAT		0x4
 #define AGPCMD		0x8

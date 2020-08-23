@@ -2,6 +2,10 @@
 #include <linux/cdrom.h>
 #include <linux/pm_runtime.h>
 #include <linux/module.h>
+<<<<<<< HEAD
+=======
+#include <linux/pm_qos.h>
+>>>>>>> v3.18
 #include <scsi/scsi_device.h>
 
 #include "libata.h"
@@ -84,6 +88,7 @@ static enum odd_mech_type zpodd_get_mech_type(struct ata_device *dev)
 		return ODD_MECH_TYPE_UNSUPPORTED;
 }
 
+<<<<<<< HEAD
 static bool odd_can_poweroff(struct ata_device *ata_dev)
 {
 	acpi_handle handle;
@@ -101,6 +106,8 @@ static bool odd_can_poweroff(struct ata_device *ata_dev)
 	return acpi_device_can_poweroff(acpi_dev);
 }
 
+=======
+>>>>>>> v3.18
 /* Test if ODD is zero power ready by sense code */
 static bool zpready(struct ata_device *dev)
 {
@@ -190,8 +197,13 @@ void zpodd_enable_run_wake(struct ata_device *dev)
 	sdev_disable_disk_events(dev->sdev);
 
 	zpodd->powered_off = true;
+<<<<<<< HEAD
 	device_set_run_wake(&dev->sdev->sdev_gendev, true);
 	acpi_pm_device_run_wake(&dev->sdev->sdev_gendev, true);
+=======
+	device_set_run_wake(&dev->tdev, true);
+	acpi_pm_device_run_wake(&dev->tdev, true);
+>>>>>>> v3.18
 }
 
 /* Disable runtime wake capability if it is enabled */
@@ -200,8 +212,13 @@ void zpodd_disable_run_wake(struct ata_device *dev)
 	struct zpodd *zpodd = dev->zpodd;
 
 	if (zpodd->powered_off) {
+<<<<<<< HEAD
 		acpi_pm_device_run_wake(&dev->sdev->sdev_gendev, false);
 		device_set_run_wake(&dev->sdev->sdev_gendev, false);
+=======
+		acpi_pm_device_run_wake(&dev->tdev, false);
+		device_set_run_wake(&dev->tdev, false);
+>>>>>>> v3.18
 	}
 }
 
@@ -262,12 +279,17 @@ static void ata_acpi_add_pm_notifier(struct ata_device *dev)
 
 static void ata_acpi_remove_pm_notifier(struct ata_device *dev)
 {
+<<<<<<< HEAD
 	acpi_handle handle = DEVICE_ACPI_HANDLE(&dev->sdev->sdev_gendev);
+=======
+	acpi_handle handle = ata_dev_acpi_handle(dev);
+>>>>>>> v3.18
 	acpi_remove_notify_handler(handle, ACPI_SYSTEM_NOTIFY, zpodd_wake_dev);
 }
 
 void zpodd_init(struct ata_device *dev)
 {
+<<<<<<< HEAD
 	enum odd_mech_type mech_type;
 	struct zpodd *zpodd;
 
@@ -275,6 +297,13 @@ void zpodd_init(struct ata_device *dev)
 		return;
 
 	if (!odd_can_poweroff(dev))
+=======
+	struct acpi_device *adev = ACPI_COMPANION(&dev->tdev);
+	enum odd_mech_type mech_type;
+	struct zpodd *zpodd;
+
+	if (dev->zpodd || !adev || !acpi_device_can_poweroff(adev))
+>>>>>>> v3.18
 		return;
 
 	mech_type = zpodd_get_mech_type(dev);
@@ -290,6 +319,10 @@ void zpodd_init(struct ata_device *dev)
 	ata_acpi_add_pm_notifier(dev);
 	zpodd->dev = dev;
 	dev->zpodd = zpodd;
+<<<<<<< HEAD
+=======
+	dev_pm_qos_expose_flags(&dev->tdev, 0);
+>>>>>>> v3.18
 }
 
 void zpodd_exit(struct ata_device *dev)

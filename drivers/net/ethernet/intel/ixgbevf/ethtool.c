@@ -1,7 +1,11 @@
 /*******************************************************************************
 
   Intel 82599 Virtual Function driver
+<<<<<<< HEAD
   Copyright(c) 1999 - 2012 Intel Corporation.
+=======
+  Copyright(c) 1999 - 2014 Intel Corporation.
+>>>>>>> v3.18
 
   This program is free software; you can redistribute it and/or modify it
   under the terms and conditions of the GNU General Public License,
@@ -45,6 +49,7 @@
 
 struct ixgbe_stats {
 	char stat_string[ETH_GSTRING_LEN];
+<<<<<<< HEAD
 	int sizeof_stat;
 	int stat_offset;
 	int base_stat_offset;
@@ -55,6 +60,29 @@ struct ixgbe_stats {
 			    offsetof(struct ixgbevf_adapter, m),         \
 			    offsetof(struct ixgbevf_adapter, b),         \
 			    offsetof(struct ixgbevf_adapter, r)
+=======
+	struct {
+		int sizeof_stat;
+		int stat_offset;
+		int base_stat_offset;
+		int saved_reset_offset;
+	};
+};
+
+#define IXGBEVF_STAT(m, b, r) { \
+	.sizeof_stat = FIELD_SIZEOF(struct ixgbevf_adapter, m), \
+	.stat_offset = offsetof(struct ixgbevf_adapter, m), \
+	.base_stat_offset = offsetof(struct ixgbevf_adapter, b), \
+	.saved_reset_offset = offsetof(struct ixgbevf_adapter, r) \
+}
+
+#define IXGBEVF_ZSTAT(m) { \
+	.sizeof_stat = FIELD_SIZEOF(struct ixgbevf_adapter, m), \
+	.stat_offset = offsetof(struct ixgbevf_adapter, m), \
+	.base_stat_offset = -1, \
+	.saved_reset_offset = -1 \
+}
+>>>>>>> v3.18
 
 static const struct ixgbe_stats ixgbe_gstrings_stats[] = {
 	{"rx_packets", IXGBEVF_STAT(stats.vfgprc, stats.base_vfgprc,
@@ -65,6 +93,7 @@ static const struct ixgbe_stats ixgbe_gstrings_stats[] = {
 				  stats.saved_reset_vfgorc)},
 	{"tx_bytes", IXGBEVF_STAT(stats.vfgotc, stats.base_vfgotc,
 				  stats.saved_reset_vfgotc)},
+<<<<<<< HEAD
 	{"tx_busy", IXGBEVF_STAT(tx_busy, zero_base, zero_base)},
 	{"multicast", IXGBEVF_STAT(stats.vfmprc, stats.base_vfmprc,
 				   stats.saved_reset_vfmprc)},
@@ -74,6 +103,22 @@ static const struct ixgbe_stats ixgbe_gstrings_stats[] = {
 						zero_base)},
 	{"tx_csum_offload_ctxt", IXGBEVF_STAT(hw_csum_tx_good, zero_base,
 					      zero_base)},
+=======
+	{"tx_busy", IXGBEVF_ZSTAT(tx_busy)},
+	{"tx_restart_queue", IXGBEVF_ZSTAT(restart_queue)},
+	{"tx_timeout_count", IXGBEVF_ZSTAT(tx_timeout_count)},
+	{"multicast", IXGBEVF_STAT(stats.vfmprc, stats.base_vfmprc,
+				   stats.saved_reset_vfmprc)},
+	{"rx_csum_offload_errors", IXGBEVF_ZSTAT(hw_csum_rx_error)},
+#ifdef BP_EXTENDED_STATS
+	{"rx_bp_poll_yield", IXGBEVF_ZSTAT(bp_rx_yields)},
+	{"rx_bp_cleaned", IXGBEVF_ZSTAT(bp_rx_cleaned)},
+	{"rx_bp_misses", IXGBEVF_ZSTAT(bp_rx_missed)},
+	{"tx_bp_napi_yield", IXGBEVF_ZSTAT(bp_tx_yields)},
+	{"tx_bp_cleaned", IXGBEVF_ZSTAT(bp_tx_cleaned)},
+	{"tx_bp_misses", IXGBEVF_ZSTAT(bp_tx_missed)},
+#endif
+>>>>>>> v3.18
 };
 
 #define IXGBE_QUEUE_STATS_LEN 0
@@ -119,8 +164,13 @@ static int ixgbevf_get_settings(struct net_device *netdev,
 		ethtool_cmd_speed_set(ecmd, speed);
 		ecmd->duplex = DUPLEX_FULL;
 	} else {
+<<<<<<< HEAD
 		ethtool_cmd_speed_set(ecmd, -1);
 		ecmd->duplex = -1;
+=======
+		ethtool_cmd_speed_set(ecmd, SPEED_UNKNOWN);
+		ecmd->duplex = DUPLEX_UNKNOWN;
+>>>>>>> v3.18
 	}
 
 	return 0;
@@ -140,6 +190,7 @@ static void ixgbevf_set_msglevel(struct net_device *netdev, u32 data)
 
 #define IXGBE_GET_STAT(_A_, _R_) (_A_->stats._R_)
 
+<<<<<<< HEAD
 static char *ixgbevf_reg_names[] = {
 	"IXGBE_VFCTRL",
 	"IXGBE_VFSTATUS",
@@ -192,6 +243,12 @@ static char *ixgbevf_reg_names[] = {
 static int ixgbevf_get_regs_len(struct net_device *netdev)
 {
 	return (ARRAY_SIZE(ixgbevf_reg_names)) * sizeof(u32);
+=======
+static int ixgbevf_get_regs_len(struct net_device *netdev)
+{
+#define IXGBE_REGS_LEN 45
+	return IXGBE_REGS_LEN * sizeof(u32);
+>>>>>>> v3.18
 }
 
 static void ixgbevf_get_regs(struct net_device *netdev,
@@ -264,9 +321,12 @@ static void ixgbevf_get_regs(struct net_device *netdev,
 		regs_buff[41 + i] = IXGBE_READ_REG(hw, IXGBE_VFTDWBAL(i));
 	for (i = 0; i < 2; i++)
 		regs_buff[43 + i] = IXGBE_READ_REG(hw, IXGBE_VFTDWBAH(i));
+<<<<<<< HEAD
 
 	for (i = 0; i < ARRAY_SIZE(ixgbevf_reg_names); i++)
 		hw_dbg(hw, "%s\t%8.8x\n", ixgbevf_reg_names[i], regs_buff[i]);
+=======
+>>>>>>> v3.18
 }
 
 static void ixgbevf_get_drvinfo(struct net_device *netdev,
@@ -321,9 +381,15 @@ static int ixgbevf_set_ringparam(struct net_device *netdev,
 
 	if (!netif_running(adapter->netdev)) {
 		for (i = 0; i < adapter->num_tx_queues; i++)
+<<<<<<< HEAD
 			adapter->tx_ring[i].count = new_tx_count;
 		for (i = 0; i < adapter->num_rx_queues; i++)
 			adapter->rx_ring[i].count = new_rx_count;
+=======
+			adapter->tx_ring[i]->count = new_tx_count;
+		for (i = 0; i < adapter->num_rx_queues; i++)
+			adapter->rx_ring[i]->count = new_rx_count;
+>>>>>>> v3.18
 		adapter->tx_ring_count = new_tx_count;
 		adapter->rx_ring_count = new_rx_count;
 		goto clear_reset;
@@ -338,6 +404,7 @@ static int ixgbevf_set_ringparam(struct net_device *netdev,
 
 		for (i = 0; i < adapter->num_tx_queues; i++) {
 			/* clone ring and setup updated count */
+<<<<<<< HEAD
 			tx_ring[i] = adapter->tx_ring[i];
 			tx_ring[i].count = new_tx_count;
 			err = ixgbevf_setup_tx_resources(adapter, &tx_ring[i]);
@@ -352,6 +419,22 @@ static int ixgbevf_set_ringparam(struct net_device *netdev,
 			tx_ring = NULL;
 
 			goto clear_reset;
+=======
+			tx_ring[i] = *adapter->tx_ring[i];
+			tx_ring[i].count = new_tx_count;
+			err = ixgbevf_setup_tx_resources(&tx_ring[i]);
+			if (err) {
+				while (i) {
+					i--;
+					ixgbevf_free_tx_resources(&tx_ring[i]);
+				}
+
+				vfree(tx_ring);
+				tx_ring = NULL;
+
+				goto clear_reset;
+			}
+>>>>>>> v3.18
 		}
 	}
 
@@ -364,6 +447,7 @@ static int ixgbevf_set_ringparam(struct net_device *netdev,
 
 		for (i = 0; i < adapter->num_rx_queues; i++) {
 			/* clone ring and setup updated count */
+<<<<<<< HEAD
 			rx_ring[i] = adapter->rx_ring[i];
 			rx_ring[i].count = new_rx_count;
 			err = ixgbevf_setup_rx_resources(adapter, &rx_ring[i]);
@@ -378,6 +462,22 @@ static int ixgbevf_set_ringparam(struct net_device *netdev,
 			rx_ring = NULL;
 
 			goto clear_reset;
+=======
+			rx_ring[i] = *adapter->rx_ring[i];
+			rx_ring[i].count = new_rx_count;
+			err = ixgbevf_setup_rx_resources(&rx_ring[i]);
+			if (err) {
+				while (i) {
+					i--;
+					ixgbevf_free_rx_resources(&rx_ring[i]);
+				}
+
+				vfree(rx_ring);
+				rx_ring = NULL;
+
+				goto clear_reset;
+			}
+>>>>>>> v3.18
 		}
 	}
 
@@ -387,9 +487,14 @@ static int ixgbevf_set_ringparam(struct net_device *netdev,
 	/* Tx */
 	if (tx_ring) {
 		for (i = 0; i < adapter->num_tx_queues; i++) {
+<<<<<<< HEAD
 			ixgbevf_free_tx_resources(adapter,
 						  &adapter->tx_ring[i]);
 			adapter->tx_ring[i] = tx_ring[i];
+=======
+			ixgbevf_free_tx_resources(adapter->tx_ring[i]);
+			*adapter->tx_ring[i] = tx_ring[i];
+>>>>>>> v3.18
 		}
 		adapter->tx_ring_count = new_tx_count;
 
@@ -400,9 +505,14 @@ static int ixgbevf_set_ringparam(struct net_device *netdev,
 	/* Rx */
 	if (rx_ring) {
 		for (i = 0; i < adapter->num_rx_queues; i++) {
+<<<<<<< HEAD
 			ixgbevf_free_rx_resources(adapter,
 						  &adapter->rx_ring[i]);
 			adapter->rx_ring[i] = rx_ring[i];
+=======
+			ixgbevf_free_rx_resources(adapter->rx_ring[i]);
+			*adapter->rx_ring[i] = rx_ring[i];
+>>>>>>> v3.18
 		}
 		adapter->rx_ring_count = new_rx_count;
 
@@ -417,7 +527,11 @@ clear_reset:
 	/* free Tx resources if Rx error is encountered */
 	if (tx_ring) {
 		for (i = 0; i < adapter->num_tx_queues; i++)
+<<<<<<< HEAD
 			ixgbevf_free_tx_resources(adapter, &tx_ring[i]);
+=======
+			ixgbevf_free_tx_resources(&tx_ring[i]);
+>>>>>>> v3.18
 		vfree(tx_ring);
 	}
 
@@ -441,6 +555,7 @@ static void ixgbevf_get_ethtool_stats(struct net_device *netdev,
 				      struct ethtool_stats *stats, u64 *data)
 {
 	struct ixgbevf_adapter *adapter = netdev_priv(netdev);
+<<<<<<< HEAD
 	int i;
 
 	ixgbevf_update_stats(adapter);
@@ -457,6 +572,52 @@ static void ixgbevf_get_ethtool_stats(struct net_device *netdev,
 			    sizeof(u64)) ? *(u64 *)b : *(u32 *)b) +
 			  ((ixgbe_gstrings_stats[i].sizeof_stat ==
 			    sizeof(u64)) ? *(u64 *)r : *(u32 *)r);
+=======
+	char *base = (char *) adapter;
+	int i;
+#ifdef BP_EXTENDED_STATS
+	u64 rx_yields = 0, rx_cleaned = 0, rx_missed = 0,
+	    tx_yields = 0, tx_cleaned = 0, tx_missed = 0;
+
+	for (i = 0; i < adapter->num_rx_queues; i++) {
+		rx_yields += adapter->rx_ring[i]->stats.yields;
+		rx_cleaned += adapter->rx_ring[i]->stats.cleaned;
+		rx_yields += adapter->rx_ring[i]->stats.yields;
+	}
+
+	for (i = 0; i < adapter->num_tx_queues; i++) {
+		tx_yields += adapter->tx_ring[i]->stats.yields;
+		tx_cleaned += adapter->tx_ring[i]->stats.cleaned;
+		tx_yields += adapter->tx_ring[i]->stats.yields;
+	}
+
+	adapter->bp_rx_yields = rx_yields;
+	adapter->bp_rx_cleaned = rx_cleaned;
+	adapter->bp_rx_missed = rx_missed;
+
+	adapter->bp_tx_yields = tx_yields;
+	adapter->bp_tx_cleaned = tx_cleaned;
+	adapter->bp_tx_missed = tx_missed;
+#endif
+
+	ixgbevf_update_stats(adapter);
+	for (i = 0; i < IXGBE_GLOBAL_STATS_LEN; i++) {
+		char *p = base + ixgbe_gstrings_stats[i].stat_offset;
+		char *b = base + ixgbe_gstrings_stats[i].base_stat_offset;
+		char *r = base + ixgbe_gstrings_stats[i].saved_reset_offset;
+
+		if (ixgbe_gstrings_stats[i].sizeof_stat == sizeof(u64)) {
+			if (ixgbe_gstrings_stats[i].base_stat_offset >= 0)
+				data[i] = *(u64 *)p - *(u64 *)b + *(u64 *)r;
+			else
+				data[i] = *(u64 *)p;
+		} else {
+			if (ixgbe_gstrings_stats[i].base_stat_offset >= 0)
+				data[i] = *(u32 *)p - *(u32 *)b + *(u32 *)r;
+			else
+				data[i] = *(u32 *)p;
+		}
+>>>>>>> v3.18
 	}
 }
 
@@ -532,13 +693,18 @@ static const struct ixgbevf_reg_test reg_test_vf[] = {
 	{ IXGBE_VFTDBAL(0), 2, PATTERN_TEST, 0xFFFFFF80, 0xFFFFFFFF },
 	{ IXGBE_VFTDBAH(0), 2, PATTERN_TEST, 0xFFFFFFFF, 0xFFFFFFFF },
 	{ IXGBE_VFTDLEN(0), 2, PATTERN_TEST, 0x000FFF80, 0x000FFF80 },
+<<<<<<< HEAD
 	{ 0, 0, 0, 0 }
+=======
+	{ .reg = 0 }
+>>>>>>> v3.18
 };
 
 static const u32 register_test_patterns[] = {
 	0x5A5A5A5A, 0xA5A5A5A5, 0x00000000, 0xFFFFFFFF
 };
 
+<<<<<<< HEAD
 #define REG_PATTERN_TEST(R, M, W)                                             \
 {                                                                             \
 	u32 pat, val, before;                                                 \
@@ -574,6 +740,57 @@ static const u32 register_test_patterns[] = {
 		return 1;                                                     \
 	}                                                                     \
 	writel(before, (adapter->hw.hw_addr + R));                            \
+=======
+static bool reg_pattern_test(struct ixgbevf_adapter *adapter, u64 *data,
+			     int reg, u32 mask, u32 write)
+{
+	u32 pat, val, before;
+
+	if (IXGBE_REMOVED(adapter->hw.hw_addr)) {
+		*data = 1;
+		return true;
+	}
+	for (pat = 0; pat < ARRAY_SIZE(register_test_patterns); pat++) {
+		before = ixgbevf_read_reg(&adapter->hw, reg);
+		ixgbe_write_reg(&adapter->hw, reg,
+				register_test_patterns[pat] & write);
+		val = ixgbevf_read_reg(&adapter->hw, reg);
+		if (val != (register_test_patterns[pat] & write & mask)) {
+			hw_dbg(&adapter->hw,
+			       "pattern test reg %04X failed: got 0x%08X expected 0x%08X\n",
+			       reg, val,
+			       register_test_patterns[pat] & write & mask);
+			*data = reg;
+			ixgbe_write_reg(&adapter->hw, reg, before);
+			return true;
+		}
+		ixgbe_write_reg(&adapter->hw, reg, before);
+	}
+	return false;
+}
+
+static bool reg_set_and_check(struct ixgbevf_adapter *adapter, u64 *data,
+			      int reg, u32 mask, u32 write)
+{
+	u32 val, before;
+
+	if (IXGBE_REMOVED(adapter->hw.hw_addr)) {
+		*data = 1;
+		return true;
+	}
+	before = ixgbevf_read_reg(&adapter->hw, reg);
+	ixgbe_write_reg(&adapter->hw, reg, write & mask);
+	val = ixgbevf_read_reg(&adapter->hw, reg);
+	if ((write & mask) != (val & mask)) {
+		pr_err("set/check reg %04X test failed: got 0x%08X expected 0x%08X\n",
+		       reg, (val & mask), write & mask);
+		*data = reg;
+		ixgbe_write_reg(&adapter->hw, reg, before);
+		return true;
+	}
+	ixgbe_write_reg(&adapter->hw, reg, before);
+	return false;
+>>>>>>> v3.18
 }
 
 static int ixgbevf_reg_test(struct ixgbevf_adapter *adapter, u64 *data)
@@ -581,6 +798,15 @@ static int ixgbevf_reg_test(struct ixgbevf_adapter *adapter, u64 *data)
 	const struct ixgbevf_reg_test *test;
 	u32 i;
 
+<<<<<<< HEAD
+=======
+	if (IXGBE_REMOVED(adapter->hw.hw_addr)) {
+		dev_err(&adapter->pdev->dev,
+			"Adapter removed - register test blocked\n");
+		*data = 1;
+		return 1;
+	}
+>>>>>>> v3.18
 	test = reg_test_vf;
 
 	/*
@@ -589,6 +815,7 @@ static int ixgbevf_reg_test(struct ixgbevf_adapter *adapter, u64 *data)
 	 */
 	while (test->reg) {
 		for (i = 0; i < test->array_len; i++) {
+<<<<<<< HEAD
 			switch (test->test_type) {
 			case PATTERN_TEST:
 				REG_PATTERN_TEST(test->reg + (i * 0x40),
@@ -621,6 +848,49 @@ static int ixgbevf_reg_test(struct ixgbevf_adapter *adapter, u64 *data)
 						test->write);
 				break;
 			}
+=======
+			bool b = false;
+
+			switch (test->test_type) {
+			case PATTERN_TEST:
+				b = reg_pattern_test(adapter, data,
+						     test->reg + (i * 0x40),
+						     test->mask,
+						     test->write);
+				break;
+			case SET_READ_TEST:
+				b = reg_set_and_check(adapter, data,
+						      test->reg + (i * 0x40),
+						      test->mask,
+						      test->write);
+				break;
+			case WRITE_NO_TEST:
+				ixgbe_write_reg(&adapter->hw,
+						  test->reg + (i * 0x40),
+						  test->write);
+				break;
+			case TABLE32_TEST:
+				b = reg_pattern_test(adapter, data,
+						     test->reg + (i * 4),
+						     test->mask,
+						     test->write);
+				break;
+			case TABLE64_TEST_LO:
+				b = reg_pattern_test(adapter, data,
+						     test->reg + (i * 8),
+						     test->mask,
+						     test->write);
+				break;
+			case TABLE64_TEST_HI:
+				b = reg_pattern_test(adapter, data,
+						     test->reg + 4 + (i * 8),
+						     test->mask,
+						     test->write);
+				break;
+			}
+			if (b)
+				return 1;
+>>>>>>> v3.18
 		}
 		test++;
 	}
@@ -635,6 +905,17 @@ static void ixgbevf_diag_test(struct net_device *netdev,
 	struct ixgbevf_adapter *adapter = netdev_priv(netdev);
 	bool if_running = netif_running(netdev);
 
+<<<<<<< HEAD
+=======
+	if (IXGBE_REMOVED(adapter->hw.hw_addr)) {
+		dev_err(&adapter->pdev->dev,
+			"Adapter removed - test blocked\n");
+		data[0] = 1;
+		data[1] = 1;
+		eth_test->flags |= ETH_TEST_FL_FAILED;
+		return;
+	}
+>>>>>>> v3.18
 	set_bit(__IXGBEVF_TESTING, &adapter->state);
 	if (eth_test->flags == ETH_TEST_FL_OFFLINE) {
 		/* Offline tests */
@@ -685,6 +966,88 @@ static int ixgbevf_nway_reset(struct net_device *netdev)
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+static int ixgbevf_get_coalesce(struct net_device *netdev,
+				struct ethtool_coalesce *ec)
+{
+	struct ixgbevf_adapter *adapter = netdev_priv(netdev);
+
+	/* only valid if in constant ITR mode */
+	if (adapter->rx_itr_setting <= 1)
+		ec->rx_coalesce_usecs = adapter->rx_itr_setting;
+	else
+		ec->rx_coalesce_usecs = adapter->rx_itr_setting >> 2;
+
+	/* if in mixed tx/rx queues per vector mode, report only rx settings */
+	if (adapter->q_vector[0]->tx.count && adapter->q_vector[0]->rx.count)
+		return 0;
+
+	/* only valid if in constant ITR mode */
+	if (adapter->tx_itr_setting <= 1)
+		ec->tx_coalesce_usecs = adapter->tx_itr_setting;
+	else
+		ec->tx_coalesce_usecs = adapter->tx_itr_setting >> 2;
+
+	return 0;
+}
+
+static int ixgbevf_set_coalesce(struct net_device *netdev,
+				struct ethtool_coalesce *ec)
+{
+	struct ixgbevf_adapter *adapter = netdev_priv(netdev);
+	struct ixgbevf_q_vector *q_vector;
+	int num_vectors, i;
+	u16 tx_itr_param, rx_itr_param;
+
+	/* don't accept tx specific changes if we've got mixed RxTx vectors */
+	if (adapter->q_vector[0]->tx.count && adapter->q_vector[0]->rx.count
+	    && ec->tx_coalesce_usecs)
+		return -EINVAL;
+
+
+	if ((ec->rx_coalesce_usecs > (IXGBE_MAX_EITR >> 2)) ||
+	    (ec->tx_coalesce_usecs > (IXGBE_MAX_EITR >> 2)))
+		return -EINVAL;
+
+	if (ec->rx_coalesce_usecs > 1)
+		adapter->rx_itr_setting = ec->rx_coalesce_usecs << 2;
+	else
+		adapter->rx_itr_setting = ec->rx_coalesce_usecs;
+
+	if (adapter->rx_itr_setting == 1)
+		rx_itr_param = IXGBE_20K_ITR;
+	else
+		rx_itr_param = adapter->rx_itr_setting;
+
+
+	if (ec->tx_coalesce_usecs > 1)
+		adapter->tx_itr_setting = ec->tx_coalesce_usecs << 2;
+	else
+		adapter->tx_itr_setting = ec->tx_coalesce_usecs;
+
+	if (adapter->tx_itr_setting == 1)
+		tx_itr_param = IXGBE_10K_ITR;
+	else
+		tx_itr_param = adapter->tx_itr_setting;
+
+	num_vectors = adapter->num_msix_vectors - NON_Q_VECTORS;
+
+	for (i = 0; i < num_vectors; i++) {
+		q_vector = adapter->q_vector[i];
+		if (q_vector->tx.count && !q_vector->rx.count)
+			/* tx only */
+			q_vector->itr = tx_itr_param;
+		else
+			/* rx only or mixed */
+			q_vector->itr = rx_itr_param;
+		ixgbevf_write_eitr(q_vector);
+	}
+
+	return 0;
+}
+
+>>>>>>> v3.18
 static const struct ethtool_ops ixgbevf_ethtool_ops = {
 	.get_settings           = ixgbevf_get_settings,
 	.get_drvinfo            = ixgbevf_get_drvinfo,
@@ -700,9 +1063,18 @@ static const struct ethtool_ops ixgbevf_ethtool_ops = {
 	.get_sset_count         = ixgbevf_get_sset_count,
 	.get_strings            = ixgbevf_get_strings,
 	.get_ethtool_stats      = ixgbevf_get_ethtool_stats,
+<<<<<<< HEAD
+=======
+	.get_coalesce           = ixgbevf_get_coalesce,
+	.set_coalesce           = ixgbevf_set_coalesce,
+>>>>>>> v3.18
 };
 
 void ixgbevf_set_ethtool_ops(struct net_device *netdev)
 {
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(netdev, &ixgbevf_ethtool_ops);
+=======
+	netdev->ethtool_ops = &ixgbevf_ethtool_ops;
+>>>>>>> v3.18
 }

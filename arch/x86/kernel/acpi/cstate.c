@@ -87,7 +87,13 @@ static long acpi_processor_ffh_cstate_probe_cpu(void *_cx)
 	num_cstate_subtype = edx_part & MWAIT_SUBSTATE_MASK;
 
 	retval = 0;
+<<<<<<< HEAD
 	if (num_cstate_subtype < (cx->address & MWAIT_SUBSTATE_MASK)) {
+=======
+	/* If the HW does not support any sub-states in this C-state */
+	if (num_cstate_subtype == 0) {
+		pr_warn(FW_BUG "ACPI MWAIT C-state 0x%x not supported by HW (0x%x)\n", cx->address, edx_part);
+>>>>>>> v3.18
 		retval = -1;
 		goto out;
 	}
@@ -150,6 +156,7 @@ int acpi_processor_ffh_cstate_probe(unsigned int cpu,
 }
 EXPORT_SYMBOL_GPL(acpi_processor_ffh_cstate_probe);
 
+<<<<<<< HEAD
 /*
  * This uses new MONITOR/MWAIT instructions on P4 processors with PNI,
  * which can obviate IPI to trigger checking of need_resched.
@@ -173,6 +180,8 @@ void mwait_idle_with_hints(unsigned long ax, unsigned long cx)
 	}
 }
 
+=======
+>>>>>>> v3.18
 void acpi_processor_ffh_cstate_enter(struct acpi_processor_cx *cx)
 {
 	unsigned int cpu = smp_processor_id();

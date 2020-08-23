@@ -41,7 +41,11 @@ unsigned long ioremap_base;
 unsigned long ioremap_bot;
 EXPORT_SYMBOL(ioremap_bot);	/* aka VMALLOC_END */
 
+<<<<<<< HEAD
 #if defined(CONFIG_6xx) || defined(CONFIG_POWER3)
+=======
+#ifdef CONFIG_6xx
+>>>>>>> v3.18
 #define HAVE_BATS	1
 #endif
 
@@ -121,7 +125,14 @@ pgtable_t pte_alloc_one(struct mm_struct *mm, unsigned long address)
 	ptepage = alloc_pages(flags, 0);
 	if (!ptepage)
 		return NULL;
+<<<<<<< HEAD
 	pgtable_page_ctor(ptepage);
+=======
+	if (!pgtable_page_ctor(ptepage)) {
+		__free_page(ptepage);
+		return NULL;
+	}
+>>>>>>> v3.18
 	return ptepage;
 }
 
@@ -296,6 +307,10 @@ int map_page(unsigned long va, phys_addr_t pa, int flags)
 		set_pte_at(&init_mm, va, pg, pfn_pte(pa >> PAGE_SHIFT,
 						     __pgprot(flags)));
 	}
+<<<<<<< HEAD
+=======
+	smp_wmb();
+>>>>>>> v3.18
 	return err;
 }
 

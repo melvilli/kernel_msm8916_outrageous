@@ -23,10 +23,17 @@ proc-y	+= version.o
 proc-y	+= softirqs.o
 proc-y	+= namespaces.o
 proc-y	+= self.o
+<<<<<<< HEAD
+=======
+proc-y	+= thread_self.o
+>>>>>>> v3.18
 proc-$(CONFIG_PROC_SYSCTL)	+= proc_sysctl.o
 proc-$(CONFIG_NET)		+= proc_net.o
 proc-$(CONFIG_PROC_KCORE)	+= kcore.o
 proc-$(CONFIG_PROC_VMCORE)	+= vmcore.o
+<<<<<<< HEAD
 proc-$(CONFIG_PROC_DEVICETREE)	+= proc_devtree.o
+=======
+>>>>>>> v3.18
 proc-$(CONFIG_PRINTK)	+= kmsg.o
 proc-$(CONFIG_PROC_PAGE_MONITOR)	+= page.o

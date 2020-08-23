@@ -14,8 +14,11 @@
 #include <uapi/asm/setup.h>
 
 #ifndef __ASSEMBLY__
+<<<<<<< HEAD
 extern char c6x_command_line[COMMAND_LINE_SIZE];
 
+=======
+>>>>>>> v3.18
 extern int c6x_add_memory(phys_addr_t start, unsigned long size);
 
 extern unsigned long ram_start;

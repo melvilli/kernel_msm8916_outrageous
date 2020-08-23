@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -178,7 +182,10 @@ acpi_ut_copy_isimple_to_esimple(union acpi_operand_object *internal_object,
 
 		switch (internal_object->reference.class) {
 		case ACPI_REFCLASS_NAME:
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 			/*
 			 * For namepath, return the object handle ("reference")
 			 * We are referring to the namespace node
@@ -264,7 +271,10 @@ acpi_ut_copy_ielement_to_eelement(u8 object_type,
 
 	switch (object_type) {
 	case ACPI_COPY_TYPE_SIMPLE:
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 		/*
 		 * This is a simple or null object
 		 */
@@ -278,7 +288,10 @@ acpi_ut_copy_ielement_to_eelement(u8 object_type,
 		break;
 
 	case ACPI_COPY_TYPE_PACKAGE:
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 		/*
 		 * Build the package object
 		 */
@@ -304,6 +317,10 @@ acpi_ut_copy_ielement_to_eelement(u8 object_type,
 		break;
 
 	default:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		return (AE_BAD_PARAMETER);
 	}
 
@@ -481,6 +498,10 @@ acpi_ut_copy_esimple_to_isimple(union acpi_object *external_object,
 		return_ACPI_STATUS(AE_OK);
 
 	default:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		/* All other types are not supported */
 
 		ACPI_ERROR((AE_INFO,
@@ -536,22 +557,39 @@ acpi_ut_copy_esimple_to_isimple(union acpi_object *external_object,
 
 	case ACPI_TYPE_LOCAL_REFERENCE:
 
+<<<<<<< HEAD
 		/* TBD: should validate incoming handle */
 
 		internal_object->reference.class = ACPI_REFCLASS_NAME;
 		internal_object->reference.node =
+=======
+		/* An incoming reference is defined to be a namespace node */
+
+		internal_object->reference.class = ACPI_REFCLASS_REFOF;
+		internal_object->reference.object =
+>>>>>>> v3.18
 		    external_object->reference.handle;
 		break;
 
 	default:
+<<<<<<< HEAD
 		/* Other types can't get here */
+=======
+
+		/* Other types can't get here */
+
+>>>>>>> v3.18
 		break;
 	}
 
 	*ret_internal_object = internal_object;
 	return_ACPI_STATUS(AE_OK);
 
+<<<<<<< HEAD
       error_exit:
+=======
+error_exit:
+>>>>>>> v3.18
 	acpi_ut_remove_reference(internal_object);
 	return_ACPI_STATUS(AE_NO_MEMORY);
 }
@@ -800,7 +838,13 @@ acpi_ut_copy_simple_object(union acpi_operand_object *source_desc,
 		break;
 
 	default:
+<<<<<<< HEAD
 		/* Nothing to do for other simple objects */
+=======
+
+		/* Nothing to do for other simple objects */
+
+>>>>>>> v3.18
 		break;
 	}
 
@@ -868,7 +912,10 @@ acpi_ut_copy_ielement_to_ielement(u8 object_type,
 		break;
 
 	case ACPI_COPY_TYPE_PACKAGE:
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 		/*
 		 * This object is a package - go down another nesting level
 		 * Create and build the package object
@@ -891,12 +938,20 @@ acpi_ut_copy_ielement_to_ielement(u8 object_type,
 		break;
 
 	default:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		return (AE_BAD_PARAMETER);
 	}
 
 	return (status);
 
+<<<<<<< HEAD
       error_exit:
+=======
+error_exit:
+>>>>>>> v3.18
 	acpi_ut_remove_reference(target_object);
 	return (status);
 }

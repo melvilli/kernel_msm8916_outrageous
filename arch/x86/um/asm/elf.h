@@ -216,6 +216,9 @@ extern long elf_aux_hwcap;
 #define ELF_HWCAP (elf_aux_hwcap)
 
 #define SET_PERSONALITY(ex) do ; while(0)
+<<<<<<< HEAD
 #define __HAVE_ARCH_GATE_AREA 1
+=======
+>>>>>>> v3.18
 
 #endif

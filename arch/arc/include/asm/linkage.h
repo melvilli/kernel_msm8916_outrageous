@@ -11,6 +11,7 @@
 
 #ifdef __ASSEMBLY__
 
+<<<<<<< HEAD
 /* Can't use the ENTRY macro in linux/linkage.h
  * gas considers ';' as comment vs. newline
  */
@@ -24,6 +25,9 @@
 #define ASM_PREV_SYM_ADDR(name)  .-##name
 	.size \ name, ASM_PREV_SYM_ADDR(\name)
 .endm
+=======
+#define ASM_NL		 `	/* use '`' to mark new line in macro */
+>>>>>>> v3.18
 
 /* annotation for data we want in DCCM - if enabled in .config */
 .macro ARCFP_DATA nm

@@ -2,7 +2,12 @@
  * I2C driver for Marvell 88PM860x
  *
  * Copyright (C) 2009 Marvell International Ltd.
+<<<<<<< HEAD
  * 	Haojian Zhuang <haojian.zhuang@marvell.com>
+=======
+ *
+ * Author: Haojian Zhuang <haojian.zhuang@marvell.com>
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -121,7 +126,11 @@ static int read_device(struct i2c_client *i2c, int reg,
 static int write_device(struct i2c_client *i2c, int reg,
 			int bytes, void *src)
 {
+<<<<<<< HEAD
 	unsigned char buf[bytes + 1];
+=======
+	unsigned char buf[2];
+>>>>>>> v3.18
 	struct i2c_adapter *adap = i2c->adapter;
 	struct i2c_msg msg;
 	int ret;
@@ -139,6 +148,7 @@ static int write_device(struct i2c_client *i2c, int reg,
 	return 0;
 }
 
+<<<<<<< HEAD
 int pm860x_page_reg_read(struct i2c_client *i2c, int reg)
 {
 	unsigned char zero = 0;
@@ -159,6 +169,8 @@ int pm860x_page_reg_read(struct i2c_client *i2c, int reg)
 }
 EXPORT_SYMBOL(pm860x_page_reg_read);
 
+=======
+>>>>>>> v3.18
 int pm860x_page_reg_write(struct i2c_client *i2c, int reg,
 			  unsigned char data)
 {
@@ -194,6 +206,7 @@ int pm860x_page_bulk_read(struct i2c_client *i2c, int reg,
 	return ret;
 }
 EXPORT_SYMBOL(pm860x_page_bulk_read);
+<<<<<<< HEAD
 
 int pm860x_page_bulk_write(struct i2c_client *i2c, int reg,
 			   int count, unsigned char *buf)
@@ -238,3 +251,5 @@ out:
 	return ret;
 }
 EXPORT_SYMBOL(pm860x_page_set_bits);
+=======
+>>>>>>> v3.18

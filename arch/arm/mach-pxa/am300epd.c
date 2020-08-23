@@ -30,6 +30,10 @@
 
 #include <mach/gumstix.h>
 #include <mach/mfp-pxa25x.h>
+<<<<<<< HEAD
+=======
+#include <mach/irqs.h>
+>>>>>>> v3.18
 #include <linux/platform_data/video-pxafb.h>
 
 #include "generic.h"
@@ -241,8 +245,12 @@ static int am300_setup_irq(struct fb_info *info)
 	struct broadsheetfb_par *par = info->par;
 
 	ret = request_irq(PXA_GPIO_TO_IRQ(RDY_GPIO_PIN), am300_handle_irq,
+<<<<<<< HEAD
 				IRQF_DISABLED|IRQF_TRIGGER_RISING,
 				"AM300", par);
+=======
+				IRQF_TRIGGER_RISING, "AM300", par);
+>>>>>>> v3.18
 	if (ret)
 		dev_err(&am300_device->dev, "request_irq failed: %d\n", ret);
 

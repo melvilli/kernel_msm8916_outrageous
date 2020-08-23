@@ -21,6 +21,11 @@
 #include <linux/init.h>
 #include <linux/interrupt.h>
 #include <linux/io.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 #include <linux/of_platform.h>
 #include <linux/slab.h>
 #include <media/v4l2-common.h>
@@ -962,7 +967,11 @@ static int vidioc_s_std(struct file *file, void *priv, v4l2_std_id id)
 	struct viu_fh *fh = priv;
 
 	fh->dev->std = id;
+<<<<<<< HEAD
 	decoder_call(fh->dev, core, s_std, id);
+=======
+	decoder_call(fh->dev, video, s_std, id);
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -1475,7 +1484,10 @@ static struct video_device viu_template = {
 	.release	= video_device_release,
 
 	.tvnorms        = V4L2_STD_NTSC_M | V4L2_STD_PAL,
+<<<<<<< HEAD
 	.current_norm   = V4L2_STD_NTSC_M,
+=======
+>>>>>>> v3.18
 };
 
 static int viu_of_probe(struct platform_device *op)
@@ -1486,6 +1498,10 @@ static int viu_of_probe(struct platform_device *op)
 	struct viu_reg __iomem *viu_regs;
 	struct i2c_adapter *ad;
 	int ret, viu_irq;
+<<<<<<< HEAD
+=======
+	struct clk *clk;
+>>>>>>> v3.18
 
 	ret = of_address_to_resource(op->dev.of_node, 0, &r);
 	if (ret) {
@@ -1546,6 +1562,10 @@ static int viu_of_probe(struct platform_device *op)
 	viu_dev->vidq.timeout.function = viu_vid_timeout;
 	viu_dev->vidq.timeout.data     = (unsigned long)viu_dev;
 	init_timer(&viu_dev->vidq.timeout);
+<<<<<<< HEAD
+=======
+	viu_dev->std = V4L2_STD_NTSC_M;
+>>>>>>> v3.18
 	viu_dev->first = 1;
 
 	/* Allocate memory for video device */
@@ -1577,6 +1597,7 @@ static int viu_of_probe(struct platform_device *op)
 	}
 
 	/* enable VIU clock */
+<<<<<<< HEAD
 	viu_dev->clk = clk_get(&op->dev, "viu_clk");
 	if (IS_ERR(viu_dev->clk)) {
 		dev_err(&op->dev, "failed to find the clock module!\n");
@@ -1585,6 +1606,20 @@ static int viu_of_probe(struct platform_device *op)
 	} else {
 		clk_enable(viu_dev->clk);
 	}
+=======
+	clk = devm_clk_get(&op->dev, "ipg");
+	if (IS_ERR(clk)) {
+		dev_err(&op->dev, "failed to lookup the clock!\n");
+		ret = PTR_ERR(clk);
+		goto err_clk;
+	}
+	ret = clk_prepare_enable(clk);
+	if (ret) {
+		dev_err(&op->dev, "failed to enable the clock!\n");
+		goto err_clk;
+	}
+	viu_dev->clk = clk;
+>>>>>>> v3.18
 
 	/* reset VIU module */
 	viu_reset(viu_dev->vr);
@@ -1602,8 +1637,12 @@ static int viu_of_probe(struct platform_device *op)
 	return ret;
 
 err_irq:
+<<<<<<< HEAD
 	clk_disable(viu_dev->clk);
 	clk_put(viu_dev->clk);
+=======
+	clk_disable_unprepare(viu_dev->clk);
+>>>>>>> v3.18
 err_clk:
 	video_unregister_device(viu_dev->vdev);
 err_vdev:
@@ -1626,8 +1665,12 @@ static int viu_of_remove(struct platform_device *op)
 	free_irq(dev->irq, (void *)dev);
 	irq_dispose_mapping(dev->irq);
 
+<<<<<<< HEAD
 	clk_disable(dev->clk);
 	clk_put(dev->clk);
+=======
+	clk_disable_unprepare(dev->clk);
+>>>>>>> v3.18
 
 	video_unregister_device(dev->vdev);
 	i2c_put_adapter(client->adapter);

@@ -5,7 +5,10 @@
  *
  * Copyright (C) 2001, 2002 Ralf Baechle
  */
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 
 #include <asm/page.h>
 #include <asm/sn/addrs.h>

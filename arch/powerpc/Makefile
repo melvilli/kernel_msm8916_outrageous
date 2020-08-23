@@ -36,17 +36,38 @@ KBUILD_DEFCONFIG := ppc64_defconfig
 endif
 
 ifeq ($(CONFIG_PPC64),y)
+<<<<<<< HEAD
 OLDARCH	:= ppc64
 
+=======
+>>>>>>> v3.18
 new_nm := $(shell if $(NM) --help 2>&1 | grep -- '--synthetic' > /dev/null; then echo y; else echo n; fi)
 
 ifeq ($(new_nm),y)
 NM		:= $(NM) --synthetic
 endif
+<<<<<<< HEAD
 
 else
 OLDARCH	:= ppc
 endif
+=======
+endif
+
+ifeq ($(CONFIG_PPC64),y)
+ifeq ($(CONFIG_CPU_LITTLE_ENDIAN),y)
+OLDARCH	:= ppc64le
+else
+OLDARCH	:= ppc64
+endif
+else
+ifeq ($(CONFIG_CPU_LITTLE_ENDIAN),y)
+OLDARCH	:= ppcle
+else
+OLDARCH	:= ppc
+endif
+endif
+>>>>>>> v3.18
 
 # It seems there are times we use this Makefile without
 # including the config file, but this replicates the old behaviour
@@ -56,11 +77,40 @@ endif
 
 UTS_MACHINE := $(OLDARCH)
 
+<<<<<<< HEAD
 ifeq ($(HAS_BIARCH),y)
 override AS	+= -a$(CONFIG_WORD_SIZE)
 override LD	+= -m elf$(CONFIG_WORD_SIZE)ppc
 override CC	+= -m$(CONFIG_WORD_SIZE)
 override AR	:= GNUTARGET=elf$(CONFIG_WORD_SIZE)-powerpc $(AR)
+=======
+ifeq ($(CONFIG_CPU_LITTLE_ENDIAN),y)
+override CC	+= -mlittle-endian -mno-strict-align
+override AS	+= -mlittle-endian
+override LD	+= -EL
+override CROSS32CC += -mlittle-endian
+override CROSS32AS += -mlittle-endian
+LDEMULATION	:= lppc
+GNUTARGET	:= powerpcle
+MULTIPLEWORD	:= -mno-multiple
+KBUILD_CFLAGS_MODULE += $(call cc-option,-mno-save-toc-indirect)
+else
+ifeq ($(call cc-option-yn,-mbig-endian),y)
+override CC	+= -mbig-endian
+override AS	+= -mbig-endian
+endif
+override LD	+= -EB
+LDEMULATION	:= ppc
+GNUTARGET	:= powerpc
+MULTIPLEWORD	:= -mmultiple
+endif
+
+ifeq ($(HAS_BIARCH),y)
+override AS	+= -a$(CONFIG_WORD_SIZE)
+override LD	+= -m elf$(CONFIG_WORD_SIZE)$(LDEMULATION)
+override CC	+= -m$(CONFIG_WORD_SIZE)
+override AR	:= GNUTARGET=elf$(CONFIG_WORD_SIZE)-$(GNUTARGET) $(AR)
+>>>>>>> v3.18
 endif
 
 LDFLAGS_vmlinux-y := -Bstatic
@@ -83,24 +133,69 @@ else
 endif
 endif
 
+<<<<<<< HEAD
 CFLAGS-$(CONFIG_PPC64)	:= -mtraceback=no -mcall-aixdesc
 CFLAGS-$(CONFIG_PPC64)	+= $(call cc-option,-mcmodel=medium,-mminimal-toc)
 CFLAGS-$(CONFIG_PPC64)	+= $(call cc-option,-mno-pointers-to-nested-functions)
 CFLAGS-$(CONFIG_PPC32)	:= -ffixed-r2 -mmultiple
 
 CFLAGS-$(CONFIG_GENERIC_CPU) += $(call cc-option,-mtune=power7,-mtune=power4)
+=======
+CFLAGS-$(CONFIG_PPC64)	:= -mtraceback=no
+ifeq ($(CONFIG_CPU_LITTLE_ENDIAN),y)
+CFLAGS-$(CONFIG_PPC64)	+= $(call cc-option,-mabi=elfv2,-mcall-aixdesc)
+AFLAGS-$(CONFIG_PPC64)	+= $(call cc-option,-mabi=elfv2)
+else
+CFLAGS-$(CONFIG_PPC64)	+= -mcall-aixdesc
+endif
+CFLAGS-$(CONFIG_PPC64)	+= $(call cc-option,-mcmodel=medium,-mminimal-toc)
+CFLAGS-$(CONFIG_PPC64)	+= $(call cc-option,-mno-pointers-to-nested-functions)
+CFLAGS-$(CONFIG_PPC32)	:= -ffixed-r2 $(MULTIPLEWORD)
+
+ifeq ($(CONFIG_PPC_BOOK3S_64),y)
+CFLAGS-$(CONFIG_GENERIC_CPU) += $(call cc-option,-mtune=power7,-mtune=power4)
+else
+CFLAGS-$(CONFIG_GENERIC_CPU) += -mcpu=powerpc64
+endif
+
+>>>>>>> v3.18
 CFLAGS-$(CONFIG_CELL_CPU) += $(call cc-option,-mcpu=cell)
 CFLAGS-$(CONFIG_POWER4_CPU) += $(call cc-option,-mcpu=power4)
 CFLAGS-$(CONFIG_POWER5_CPU) += $(call cc-option,-mcpu=power5)
 CFLAGS-$(CONFIG_POWER6_CPU) += $(call cc-option,-mcpu=power6)
 CFLAGS-$(CONFIG_POWER7_CPU) += $(call cc-option,-mcpu=power7)
+<<<<<<< HEAD
+=======
+CFLAGS-$(CONFIG_POWER8_CPU) += $(call cc-option,-mcpu=power8)
+
+# Altivec option not allowed with e500mc64 in GCC.
+ifeq ($(CONFIG_ALTIVEC),y)
+E5500_CPU := -mcpu=powerpc64
+else
+E5500_CPU := $(call cc-option,-mcpu=e500mc64,-mcpu=powerpc64)
+endif
+CFLAGS-$(CONFIG_E5500_CPU) += $(E5500_CPU)
+CFLAGS-$(CONFIG_E6500_CPU) += $(call cc-option,-mcpu=e6500,$(E5500_CPU))
+
+ifeq ($(CONFIG_PPC32),y)
+ifeq ($(CONFIG_PPC_E500MC),y)
+CFLAGS-y += $(call cc-option,-mcpu=e500mc,-mcpu=powerpc)
+else
+CFLAGS-$(CONFIG_E500) += $(call cc-option,-mcpu=8540 -msoft-float,-mcpu=powerpc)
+endif
+endif
+>>>>>>> v3.18
 
 CFLAGS-$(CONFIG_TUNE_CELL) += $(call cc-option,-mtune=cell)
 
 asinstr := $(call as-instr,lis 9$(comma)foo@high,-DHAVE_AS_ATHIGH=1)
 
 KBUILD_CPPFLAGS	+= -Iarch/$(ARCH) $(asinstr)
+<<<<<<< HEAD
 KBUILD_AFLAGS	+= -Iarch/$(ARCH)
+=======
+KBUILD_AFLAGS	+= -Iarch/$(ARCH) $(AFLAGS-y)
+>>>>>>> v3.18
 KBUILD_CFLAGS	+= -msoft-float -pipe -Iarch/$(ARCH) $(CFLAGS-y)
 CPP		= $(CC) -E $(KBUILD_CFLAGS)
 
@@ -108,6 +203,14 @@ CHECKFLAGS	+= -m$(CONFIG_WORD_SIZE) -D__powerpc__ -D__powerpc$(CONFIG_WORD_SIZE)
 
 KBUILD_LDFLAGS_MODULE += arch/powerpc/lib/crtsavres.o
 
+<<<<<<< HEAD
+=======
+ifeq ($(CONFIG_476FPE_ERR46),y)
+	KBUILD_LDFLAGS_MODULE += --ppc476-workaround \
+		-T $(srctree)/arch/powerpc/platforms/44x/ppc476_modules.lds
+endif
+
+>>>>>>> v3.18
 # No AltiVec or VSX instructions when building kernel
 KBUILD_CFLAGS += $(call cc-option,-mno-altivec)
 KBUILD_CFLAGS += $(call cc-option,-mno-vsx)
@@ -141,7 +244,10 @@ endif
 
 cpu-as-$(CONFIG_4xx)		+= -Wa,-m405
 cpu-as-$(CONFIG_ALTIVEC)	+= -Wa,-maltivec
+<<<<<<< HEAD
 cpu-as-$(CONFIG_E500)		+= -Wa,-me500
+=======
+>>>>>>> v3.18
 cpu-as-$(CONFIG_E200)		+= -Wa,-me200
 
 KBUILD_AFLAGS += $(cpu-as-y)
@@ -273,6 +379,7 @@ checkbin:
 		echo 'disable kernel modules' ; \
 		false ; \
 	fi
+<<<<<<< HEAD
 	@if test "x${CONFIG_CPU_LITTLE_ENDIAN}" = "xy" \
 	    && $(LD) --version | head -1 | grep ' 2\.24$$' >/dev/null ; then \
 		echo -n '*** binutils 2.24 miscompiles weak symbols ' ; \
@@ -281,6 +388,8 @@ checkbin:
 		false ; \
 	fi
 
+=======
+>>>>>>> v3.18
 
 CLEAN_FILES += $(TOUT)
 

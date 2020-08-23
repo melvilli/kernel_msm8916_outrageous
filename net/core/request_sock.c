@@ -41,12 +41,17 @@ int reqsk_queue_alloc(struct request_sock_queue *queue,
 		      unsigned int nr_table_entries)
 {
 	size_t lopt_size = sizeof(struct listen_sock);
+<<<<<<< HEAD
 	struct listen_sock *lopt;
+=======
+	struct listen_sock *lopt = NULL;
+>>>>>>> v3.18
 
 	nr_table_entries = min_t(u32, nr_table_entries, sysctl_max_syn_backlog);
 	nr_table_entries = max_t(u32, nr_table_entries, 8);
 	nr_table_entries = roundup_pow_of_two(nr_table_entries + 1);
 	lopt_size += nr_table_entries * sizeof(struct request_sock *);
+<<<<<<< HEAD
 	if (lopt_size > PAGE_SIZE)
 		lopt = vzalloc(lopt_size);
 	else
@@ -58,10 +63,26 @@ int reqsk_queue_alloc(struct request_sock_queue *queue,
 	     (1 << lopt->max_qlen_log) < nr_table_entries;
 	     lopt->max_qlen_log++);
 
+=======
+
+	if (lopt_size <= (PAGE_SIZE << PAGE_ALLOC_COSTLY_ORDER))
+		lopt = kzalloc(lopt_size, GFP_KERNEL |
+					  __GFP_NOWARN |
+					  __GFP_NORETRY);
+	if (!lopt)
+		lopt = vzalloc(lopt_size);
+	if (!lopt)
+		return -ENOMEM;
+
+>>>>>>> v3.18
 	get_random_bytes(&lopt->hash_rnd, sizeof(lopt->hash_rnd));
 	rwlock_init(&queue->syn_wait_lock);
 	queue->rskq_accept_head = NULL;
 	lopt->nr_table_entries = nr_table_entries;
+<<<<<<< HEAD
+=======
+	lopt->max_qlen_log = ilog2(nr_table_entries);
+>>>>>>> v3.18
 
 	write_lock_bh(&queue->syn_wait_lock);
 	queue->listen_opt = lopt;
@@ -72,6 +93,7 @@ int reqsk_queue_alloc(struct request_sock_queue *queue,
 
 void __reqsk_queue_destroy(struct request_sock_queue *queue)
 {
+<<<<<<< HEAD
 	struct listen_sock *lopt;
 	size_t lopt_size;
 
@@ -88,6 +110,10 @@ void __reqsk_queue_destroy(struct request_sock_queue *queue)
 		vfree(lopt);
 	else
 		kfree(lopt);
+=======
+	/* This is an error recovery path only, no locking needed */
+	kvfree(queue->listen_opt);
+>>>>>>> v3.18
 }
 
 static inline struct listen_sock *reqsk_queue_yank_listen_sk(
@@ -107,8 +133,11 @@ void reqsk_queue_destroy(struct request_sock_queue *queue)
 {
 	/* make all the listen_opt local to us */
 	struct listen_sock *lopt = reqsk_queue_yank_listen_sk(queue);
+<<<<<<< HEAD
 	size_t lopt_size = sizeof(struct listen_sock) +
 		lopt->nr_table_entries * sizeof(struct request_sock *);
+=======
+>>>>>>> v3.18
 
 	if (lopt->qlen != 0) {
 		unsigned int i;
@@ -125,10 +154,14 @@ void reqsk_queue_destroy(struct request_sock_queue *queue)
 	}
 
 	WARN_ON(lopt->qlen != 0);
+<<<<<<< HEAD
 	if (lopt_size > PAGE_SIZE)
 		vfree(lopt);
 	else
 		kfree(lopt);
+=======
+	kvfree(lopt);
+>>>>>>> v3.18
 }
 
 /*
@@ -221,5 +254,8 @@ void reqsk_fastopen_remove(struct sock *sk, struct request_sock *req,
 out:
 	spin_unlock_bh(&fastopenq->lock);
 	sock_put(lsk);
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 }

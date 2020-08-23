@@ -19,6 +19,11 @@ if MEDIA_ANALOG_TV_SUPPORT
 source "drivers/media/pci/ivtv/Kconfig"
 source "drivers/media/pci/zoran/Kconfig"
 source "drivers/media/pci/saa7146/Kconfig"
+<<<<<<< HEAD
+=======
+source "drivers/media/pci/solo6x10/Kconfig"
+source "drivers/media/pci/tw68/Kconfig"
+>>>>>>> v3.18
 endif
 
 if MEDIA_ANALOG_TV_SUPPORT || MEDIA_DIGITAL_TV_SUPPORT
@@ -40,6 +45,10 @@ source "drivers/media/pci/b2c2/Kconfig"
 source "drivers/media/pci/pluto2/Kconfig"
 source "drivers/media/pci/dm1105/Kconfig"
 source "drivers/media/pci/pt1/Kconfig"
+<<<<<<< HEAD
+=======
+source "drivers/media/pci/pt3/Kconfig"
+>>>>>>> v3.18
 source "drivers/media/pci/mantis/Kconfig"
 source "drivers/media/pci/ngene/Kconfig"
 source "drivers/media/pci/ddbridge/Kconfig"

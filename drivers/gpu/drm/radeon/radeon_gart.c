@@ -28,7 +28,10 @@
 #include <drm/drmP.h>
 #include <drm/radeon_drm.h>
 #include "radeon.h"
+<<<<<<< HEAD
 #include "radeon_reg.h"
+=======
+>>>>>>> v3.18
 
 /*
  * GART
@@ -129,7 +132,11 @@ int radeon_gart_table_vram_alloc(struct radeon_device *rdev)
 	if (rdev->gart.robj == NULL) {
 		r = radeon_bo_create(rdev, rdev->gart.table_size,
 				     PAGE_SIZE, true, RADEON_GEM_DOMAIN_VRAM,
+<<<<<<< HEAD
 				     NULL, &rdev->gart.robj);
+=======
+				     0, NULL, NULL, &rdev->gart.robj);
+>>>>>>> v3.18
 		if (r) {
 			return r;
 		}
@@ -207,7 +214,10 @@ void radeon_gart_table_vram_free(struct radeon_device *rdev)
 	if (rdev->gart.robj == NULL) {
 		return;
 	}
+<<<<<<< HEAD
 	radeon_gart_table_vram_unpin(rdev);
+=======
+>>>>>>> v3.18
 	radeon_bo_unref(&rdev->gart.robj);
 }
 
@@ -245,16 +255,26 @@ void radeon_gart_unbind(struct radeon_device *rdev, unsigned offset,
 			page_base = rdev->gart.pages_addr[p];
 			for (j = 0; j < (PAGE_SIZE / RADEON_GPU_PAGE_SIZE); j++, t++) {
 				if (rdev->gart.ptr) {
+<<<<<<< HEAD
 					radeon_gart_set_page(rdev, t, page_base);
+=======
+					radeon_gart_set_page(rdev, t, page_base,
+							     RADEON_GART_PAGE_DUMMY);
+>>>>>>> v3.18
 				}
 				page_base += RADEON_GPU_PAGE_SIZE;
 			}
 		}
 	}
+<<<<<<< HEAD
 	if (rdev->gart.ptr) {
 		mb();
 		radeon_gart_tlb_flush(rdev);
 	}
+=======
+	mb();
+	radeon_gart_tlb_flush(rdev);
+>>>>>>> v3.18
 }
 
 /**
@@ -265,13 +285,22 @@ void radeon_gart_unbind(struct radeon_device *rdev, unsigned offset,
  * @pages: number of pages to bind
  * @pagelist: pages to bind
  * @dma_addr: DMA addresses of pages
+<<<<<<< HEAD
+=======
+ * @flags: RADEON_GART_PAGE_* flags
+>>>>>>> v3.18
  *
  * Binds the requested pages to the gart page table
  * (all asics).
  * Returns 0 for success, -EINVAL for failure.
  */
 int radeon_gart_bind(struct radeon_device *rdev, unsigned offset,
+<<<<<<< HEAD
 		     int pages, struct page **pagelist, dma_addr_t *dma_addr)
+=======
+		     int pages, struct page **pagelist, dma_addr_t *dma_addr,
+		     uint32_t flags)
+>>>>>>> v3.18
 {
 	unsigned t;
 	unsigned p;
@@ -291,11 +320,16 @@ int radeon_gart_bind(struct radeon_device *rdev, unsigned offset,
 		if (rdev->gart.ptr) {
 			page_base = rdev->gart.pages_addr[p];
 			for (j = 0; j < (PAGE_SIZE / RADEON_GPU_PAGE_SIZE); j++, t++) {
+<<<<<<< HEAD
 				radeon_gart_set_page(rdev, t, page_base);
+=======
+				radeon_gart_set_page(rdev, t, page_base, flags);
+>>>>>>> v3.18
 				page_base += RADEON_GPU_PAGE_SIZE;
 			}
 		}
 	}
+<<<<<<< HEAD
 	if (rdev->gart.ptr) {
 		mb();
 		radeon_gart_tlb_flush(rdev);
@@ -328,6 +362,11 @@ void radeon_gart_restore(struct radeon_device *rdev)
 	}
 	mb();
 	radeon_gart_tlb_flush(rdev);
+=======
+	mb();
+	radeon_gart_tlb_flush(rdev);
+	return 0;
+>>>>>>> v3.18
 }
 
 /**
@@ -398,6 +437,7 @@ void radeon_gart_fini(struct radeon_device *rdev)
 
 	radeon_dummy_page_fini(rdev);
 }
+<<<<<<< HEAD
 
 /*
  * GPUVM
@@ -1291,3 +1331,5 @@ void radeon_vm_fini(struct radeon_device *rdev, struct radeon_vm *vm)
 	radeon_fence_unref(&vm->last_flush);
 	mutex_unlock(&vm->mutex);
 }
+=======
+>>>>>>> v3.18

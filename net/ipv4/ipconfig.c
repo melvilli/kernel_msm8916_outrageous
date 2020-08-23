@@ -143,8 +143,11 @@ __be32 ic_servaddr = NONE;	/* Boot server IP address */
 __be32 root_server_addr = NONE;	/* Address of NFS server */
 u8 root_server_path[256] = { 0, };	/* Path to mount as root */
 
+<<<<<<< HEAD
 __be32 ic_dev_xid;		/* Device under configuration */
 
+=======
+>>>>>>> v3.18
 /* vendor class identifier */
 static char vendor_class_identifier[253] __initdata;
 
@@ -264,7 +267,12 @@ static int __init ic_open_devs(void)
 	/* wait for a carrier on at least one device */
 	start = jiffies;
 	next_msg = start + msecs_to_jiffies(CONF_CARRIER_TIMEOUT/12);
+<<<<<<< HEAD
 	while (jiffies - start < msecs_to_jiffies(CONF_CARRIER_TIMEOUT)) {
+=======
+	while (time_before(jiffies, start +
+			   msecs_to_jiffies(CONF_CARRIER_TIMEOUT))) {
+>>>>>>> v3.18
 		int wait, elapsed;
 
 		for_each_netdev(&init_net, dev)
@@ -273,7 +281,11 @@ static int __init ic_open_devs(void)
 
 		msleep(1);
 
+<<<<<<< HEAD
 		if time_before(jiffies, next_msg)
+=======
+		if (time_before(jiffies, next_msg))
+>>>>>>> v3.18
 			continue;
 
 		elapsed = jiffies_to_msecs(jiffies - start);
@@ -654,6 +666,10 @@ static struct packet_type bootp_packet_type __initdata = {
 	.func =	ic_bootp_recv,
 };
 
+<<<<<<< HEAD
+=======
+static __be32 ic_dev_xid;		/* Device under configuration */
+>>>>>>> v3.18
 
 /*
  *  Initialize DHCP/BOOTP extension fields in the request.
@@ -1218,10 +1234,17 @@ static int __init ic_dynamic(void)
 	get_random_bytes(&timeout, sizeof(timeout));
 	timeout = CONF_BASE_TIMEOUT + (timeout % (unsigned int) CONF_TIMEOUT_RANDOM);
 	for (;;) {
+<<<<<<< HEAD
 		/* Track the device we are configuring */
 		ic_dev_xid = d->xid;
 
 #ifdef IPCONFIG_BOOTP
+=======
+#ifdef IPCONFIG_BOOTP
+		/* Track the device we are configuring */
+		ic_dev_xid = d->xid;
+
+>>>>>>> v3.18
 		if (do_bootp && (d->able & IC_BOOTP))
 			ic_bootp_send_if(d, jiffies - start_jiffies);
 #endif

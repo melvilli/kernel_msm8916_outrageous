@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * OMAP4 SMP source file. It contains platform specific fucntions
+=======
+ * OMAP4 SMP source file. It contains platform specific functions
+>>>>>>> v3.18
  * needed for the linux smp kernel.
  *
  * Copyright (C) 2009 Texas Instruments, Inc.
@@ -39,8 +43,11 @@
 
 #define OMAP5_CORE_COUNT	0x2
 
+<<<<<<< HEAD
 u16 pm44xx_errata;
 
+=======
+>>>>>>> v3.18
 /* SCU base address */
 static void __iomem *scu_base;
 
@@ -51,7 +58,11 @@ void __iomem *omap4_get_scu_base(void)
 	return scu_base;
 }
 
+<<<<<<< HEAD
 static void __cpuinit omap4_secondary_init(unsigned int cpu)
+=======
+static void omap4_secondary_init(unsigned int cpu)
+>>>>>>> v3.18
 {
 	/*
 	 * Configure ACTRL and enable NS SMP bit access on CPU1 on HS device.
@@ -66,13 +77,27 @@ static void __cpuinit omap4_secondary_init(unsigned int cpu)
 							4, 0, 0, 0, 0, 0);
 
 	/*
+<<<<<<< HEAD
+=======
+	 * Configure the CNTFRQ register for the secondary cpu's which
+	 * indicates the frequency of the cpu local timers.
+	 */
+	if (soc_is_omap54xx() || soc_is_dra7xx())
+		set_cntfreq();
+
+	/*
+>>>>>>> v3.18
 	 * Synchronise with the boot thread.
 	 */
 	spin_lock(&boot_lock);
 	spin_unlock(&boot_lock);
 }
 
+<<<<<<< HEAD
 static int __cpuinit omap4_boot_secondary(unsigned int cpu, struct task_struct *idle)
+=======
+static int omap4_boot_secondary(unsigned int cpu, struct task_struct *idle)
+>>>>>>> v3.18
 {
 	static struct clockdomain *cpu1_clkdm;
 	static bool booted;
@@ -87,14 +112,22 @@ static int __cpuinit omap4_boot_secondary(unsigned int cpu, struct task_struct *
 
 	/*
 	 * Update the AuxCoreBoot0 with boot state for secondary core.
+<<<<<<< HEAD
 	 * omap_secondary_startup() routine will hold the secondary core till
+=======
+	 * omap4_secondary_startup() routine will hold the secondary core till
+>>>>>>> v3.18
 	 * the AuxCoreBoot1 register is updated with cpu state
 	 * A barrier is added to ensure that write buffer is drained
 	 */
 	if (omap_secure_apis_support())
 		omap_modify_auxcoreboot0(0x200, 0xfffffdff);
 	else
+<<<<<<< HEAD
 		__raw_writel(0x20, base + OMAP_AUX_CORE_BOOT_0);
+=======
+		writel_relaxed(0x20, base + OMAP_AUX_CORE_BOOT_0);
+>>>>>>> v3.18
 
 	if (!cpu1_clkdm && !cpu1_pwrdm) {
 		cpu1_clkdm = clkdm_lookup("mpu1_clkdm");
@@ -200,7 +233,11 @@ static void __init omap4_smp_init_cpus(void)
 
 static void __init omap4_smp_prepare_cpus(unsigned int max_cpus)
 {
+<<<<<<< HEAD
 	void *startup_addr = omap_secondary_startup;
+=======
+	void *startup_addr = omap4_secondary_startup;
+>>>>>>> v3.18
 	void __iomem *base = omap_get_wakeupgen_base();
 
 	/*
@@ -210,10 +247,15 @@ static void __init omap4_smp_prepare_cpus(unsigned int max_cpus)
 	if (scu_base)
 		scu_enable(scu_base);
 
+<<<<<<< HEAD
 	if (cpu_is_omap446x()) {
 		startup_addr = omap_secondary_startup_4460;
 		pm44xx_errata |= PM_OMAP4_ROM_SMP_BOOT_ERRATUM_GICD;
 	}
+=======
+	if (cpu_is_omap446x())
+		startup_addr = omap4460_secondary_startup;
+>>>>>>> v3.18
 
 	/*
 	 * Write the address of secondary startup routine into the
@@ -224,8 +266,13 @@ static void __init omap4_smp_prepare_cpus(unsigned int max_cpus)
 	if (omap_secure_apis_support())
 		omap_auxcoreboot_addr(virt_to_phys(startup_addr));
 	else
+<<<<<<< HEAD
 		__raw_writel(virt_to_phys(omap5_secondary_startup),
 						base + OMAP_AUX_CORE_BOOT_1);
+=======
+		writel_relaxed(virt_to_phys(omap5_secondary_startup),
+			       base + OMAP_AUX_CORE_BOOT_1);
+>>>>>>> v3.18
 
 }
 

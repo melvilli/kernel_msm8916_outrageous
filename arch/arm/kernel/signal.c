@@ -13,6 +13,10 @@
 #include <linux/personality.h>
 #include <linux/uaccess.h>
 #include <linux/tracehook.h>
+<<<<<<< HEAD
+=======
+#include <linux/uprobes.h>
+>>>>>>> v3.18
 
 #include <asm/elf.h>
 #include <asm/cacheflush.h>
@@ -21,6 +25,7 @@
 #include <asm/unistd.h>
 #include <asm/vfp.h>
 
+<<<<<<< HEAD
 /*
  * For ARM syscalls, we encode the syscall number into the instruction.
  */
@@ -44,6 +49,9 @@ static const unsigned long sigreturn_codes[7] = {
 	MOV_R7_NR_SIGRETURN,    SWI_SYS_SIGRETURN,    SWI_THUMB_SIGRETURN,
 	MOV_R7_NR_RT_SIGRETURN, SWI_SYS_RT_SIGRETURN, SWI_THUMB_RT_SIGRETURN,
 };
+=======
+extern const unsigned long sigreturn_codes[7];
+>>>>>>> v3.18
 
 static unsigned long signal_return_offset;
 
@@ -400,6 +408,13 @@ setup_return(struct pt_regs *regs, struct ksignal *ksig,
 		if (ksig->ka.sa.sa_flags & SA_SIGINFO)
 			idx += 3;
 
+<<<<<<< HEAD
+=======
+		/*
+		 * Put the sigreturn code on the stack no matter which return
+		 * mechanism we use in order to remain ABI compliant
+		 */
+>>>>>>> v3.18
 		if (__put_user(sigreturn_codes[idx],   rc) ||
 		    __put_user(sigreturn_codes[idx+1], rc+1))
 			return 1;
@@ -407,6 +422,10 @@ setup_return(struct pt_regs *regs, struct ksignal *ksig,
 #ifdef CONFIG_MMU
 		if (cpsr & MODE32_BIT) {
 			struct mm_struct *mm = current->mm;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 			/*
 			 * 32-bit code can use the signal return page
 			 * except when the MPU has protected the vectors
@@ -607,6 +626,12 @@ do_work_pending(struct pt_regs *regs, unsigned int thread_flags, int syscall)
 					return restart;
 				}
 				syscall = 0;
+<<<<<<< HEAD
+=======
+			} else if (thread_flags & _TIF_UPROBE) {
+				clear_thread_flag(TIF_UPROBE);
+				uprobe_notify_resume(regs);
+>>>>>>> v3.18
 			} else {
 				clear_thread_flag(TIF_NOTIFY_RESUME);
 				tracehook_notify_resume(regs);

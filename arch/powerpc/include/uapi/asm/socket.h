@@ -81,4 +81,13 @@
 
 #define SO_SELECT_ERR_QUEUE	45
 
+<<<<<<< HEAD
+=======
+#define SO_BUSY_POLL		46
+
+#define SO_MAX_PACING_RATE	47
+
+#define SO_BPF_EXTENSIONS	48
+
+>>>>>>> v3.18
 #endif	/* _ASM_POWERPC_SOCKET_H */

@@ -22,6 +22,10 @@
 #include <linux/idr.h>
 #include <linux/iommu.h>
 #include <linux/list.h>
+<<<<<<< HEAD
+=======
+#include <linux/miscdevice.h>
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/mutex.h>
 #include <linux/rwsem.h>
@@ -45,9 +49,13 @@ static struct vfio {
 	struct idr			group_idr;
 	struct mutex			group_lock;
 	struct cdev			group_cdev;
+<<<<<<< HEAD
 	struct device			*dev;
 	dev_t				devt;
 	struct cdev			cdev;
+=======
+	dev_t				group_devt;
+>>>>>>> v3.18
 	wait_queue_head_t		release_q;
 } vfio;
 
@@ -76,6 +84,10 @@ struct vfio_group {
 	struct notifier_block		nb;
 	struct list_head		vfio_next;
 	struct list_head		container_next;
+<<<<<<< HEAD
+=======
+	atomic_t			opened;
+>>>>>>> v3.18
 };
 
 struct vfio_device {
@@ -141,8 +153,12 @@ EXPORT_SYMBOL_GPL(vfio_unregister_iommu_driver);
  */
 static int vfio_alloc_group_minor(struct vfio_group *group)
 {
+<<<<<<< HEAD
 	/* index 0 is used by /dev/vfio/vfio */
 	return idr_alloc(&vfio.group_idr, group, 1, MINORMASK + 1, GFP_KERNEL);
+=======
+	return idr_alloc(&vfio.group_idr, group, 0, MINORMASK + 1, GFP_KERNEL);
+>>>>>>> v3.18
 }
 
 static void vfio_free_group_minor(int minor)
@@ -206,6 +222,10 @@ static struct vfio_group *vfio_create_group(struct iommu_group *iommu_group)
 	INIT_LIST_HEAD(&group->device_list);
 	mutex_init(&group->device_lock);
 	atomic_set(&group->container_users, 0);
+<<<<<<< HEAD
+=======
+	atomic_set(&group->opened, 0);
+>>>>>>> v3.18
 	group->iommu_group = iommu_group;
 
 	group->nb.notifier_call = vfio_iommu_group_notifier;
@@ -241,7 +261,12 @@ static struct vfio_group *vfio_create_group(struct iommu_group *iommu_group)
 		}
 	}
 
+<<<<<<< HEAD
 	dev = device_create(vfio.class, NULL, MKDEV(MAJOR(vfio.devt), minor),
+=======
+	dev = device_create(vfio.class, NULL,
+			    MKDEV(MAJOR(vfio.group_devt), minor),
+>>>>>>> v3.18
 			    group, "%d", iommu_group_id(iommu_group));
 	if (IS_ERR(dev)) {
 		vfio_free_group_minor(minor);
@@ -266,7 +291,11 @@ static void vfio_group_release(struct kref *kref)
 
 	WARN_ON(!list_empty(&group->device_list));
 
+<<<<<<< HEAD
 	device_destroy(vfio.class, MKDEV(MAJOR(vfio.devt), group->minor));
+=======
+	device_destroy(vfio.class, MKDEV(MAJOR(vfio.group_devt), group->minor));
+>>>>>>> v3.18
 	list_del(&group->vfio_next);
 	vfio_free_group_minor(group->minor);
 	vfio_group_unlock_and_free(group);
@@ -348,7 +377,10 @@ struct vfio_device *vfio_group_create_device(struct vfio_group *group,
 					     void *device_data)
 {
 	struct vfio_device *device;
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 
 	device = kzalloc(sizeof(*device), GFP_KERNEL);
 	if (!device)
@@ -359,12 +391,16 @@ struct vfio_device *vfio_group_create_device(struct vfio_group *group,
 	device->group = group;
 	device->ops = ops;
 	device->device_data = device_data;
+<<<<<<< HEAD
 
 	ret = dev_set_drvdata(dev, device);
 	if (ret) {
 		kfree(device);
 		return ERR_PTR(ret);
 	}
+=======
+	dev_set_drvdata(dev, device);
+>>>>>>> v3.18
 
 	/* No need to get group_lock, caller has group reference */
 	vfio_group_get(group);
@@ -492,6 +528,7 @@ static int vfio_group_nb_add_dev(struct vfio_group *group, struct device *dev)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int vfio_group_nb_del_dev(struct vfio_group *group, struct device *dev)
 {
 	struct vfio_device *device;
@@ -513,6 +550,8 @@ static int vfio_group_nb_del_dev(struct vfio_group *group, struct device *dev)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 static int vfio_group_nb_verify(struct vfio_group *group, struct device *dev)
 {
 	/* We don't care what happens when the group isn't in use */
@@ -529,6 +568,7 @@ static int vfio_iommu_group_notifier(struct notifier_block *nb,
 	struct device *dev = data;
 
 	/*
+<<<<<<< HEAD
 	 * Need to go through a group_lock lookup to get a reference or
 	 * we risk racing a group being removed.  Leave a WARN_ON for
 	 * debuging, but if the group no longer exists, a spurious notify
@@ -536,6 +576,13 @@ static int vfio_iommu_group_notifier(struct notifier_block *nb,
 	 */
 	group = vfio_group_try_get(group);
 	if (WARN_ON(!group))
+=======
+	 * Need to go through a group_lock lookup to get a reference or we
+	 * risk racing a group being removed.  Ignore spurious notifies.
+	 */
+	group = vfio_group_try_get(group);
+	if (!group)
+>>>>>>> v3.18
 		return NOTIFY_OK;
 
 	switch (action) {
@@ -543,7 +590,17 @@ static int vfio_iommu_group_notifier(struct notifier_block *nb,
 		vfio_group_nb_add_dev(group, dev);
 		break;
 	case IOMMU_GROUP_NOTIFY_DEL_DEVICE:
+<<<<<<< HEAD
 		vfio_group_nb_del_dev(group, dev);
+=======
+		/*
+		 * Nothing to do here.  If the device is in use, then the
+		 * vfio sub-driver should block the remove callback until
+		 * it is unused.  If the device is unused or attached to a
+		 * stub driver, then it should be released and we don't
+		 * care that it will be going away.
+		 */
+>>>>>>> v3.18
 		break;
 	case IOMMU_GROUP_NOTIFY_BIND_DRIVER:
 		pr_debug("%s: Device %s, group %d binding to driver\n",
@@ -1124,7 +1181,11 @@ static int vfio_group_get_device_fd(struct vfio_group *group, char *buf)
 		 * We can't use anon_inode_getfd() because we need to modify
 		 * the f_mode flags directly to allow more than just ioctls
 		 */
+<<<<<<< HEAD
 		ret = get_unused_fd();
+=======
+		ret = get_unused_fd_flags(O_CLOEXEC);
+>>>>>>> v3.18
 		if (ret < 0) {
 			device->ops->release(device->device_data);
 			break;
@@ -1236,12 +1297,29 @@ static long vfio_group_fops_compat_ioctl(struct file *filep,
 static int vfio_group_fops_open(struct inode *inode, struct file *filep)
 {
 	struct vfio_group *group;
+<<<<<<< HEAD
+=======
+	int opened;
+>>>>>>> v3.18
 
 	group = vfio_group_get_from_minor(iminor(inode));
 	if (!group)
 		return -ENODEV;
 
+<<<<<<< HEAD
 	if (group->container) {
+=======
+	/* Do we need multiple instances of the group open?  Seems not. */
+	opened = atomic_cmpxchg(&group->opened, 0, 1);
+	if (opened) {
+		vfio_group_put(group);
+		return -EBUSY;
+	}
+
+	/* Is something still in use from a previous open? */
+	if (group->container) {
+		atomic_dec(&group->opened);
+>>>>>>> v3.18
 		vfio_group_put(group);
 		return -EBUSY;
 	}
@@ -1259,6 +1337,11 @@ static int vfio_group_fops_release(struct inode *inode, struct file *filep)
 
 	vfio_group_try_dissolve_container(group);
 
+<<<<<<< HEAD
+=======
+	atomic_dec(&group->opened);
+
+>>>>>>> v3.18
 	vfio_group_put(group);
 
 	return 0;
@@ -1356,16 +1439,101 @@ static const struct file_operations vfio_device_fops = {
 };
 
 /**
+<<<<<<< HEAD
+=======
+ * External user API, exported by symbols to be linked dynamically.
+ *
+ * The protocol includes:
+ *  1. do normal VFIO init operation:
+ *	- opening a new container;
+ *	- attaching group(s) to it;
+ *	- setting an IOMMU driver for a container.
+ * When IOMMU is set for a container, all groups in it are
+ * considered ready to use by an external user.
+ *
+ * 2. User space passes a group fd to an external user.
+ * The external user calls vfio_group_get_external_user()
+ * to verify that:
+ *	- the group is initialized;
+ *	- IOMMU is set for it.
+ * If both checks passed, vfio_group_get_external_user()
+ * increments the container user counter to prevent
+ * the VFIO group from disposal before KVM exits.
+ *
+ * 3. The external user calls vfio_external_user_iommu_id()
+ * to know an IOMMU ID.
+ *
+ * 4. When the external KVM finishes, it calls
+ * vfio_group_put_external_user() to release the VFIO group.
+ * This call decrements the container user counter.
+ */
+struct vfio_group *vfio_group_get_external_user(struct file *filep)
+{
+	struct vfio_group *group = filep->private_data;
+
+	if (filep->f_op != &vfio_group_fops)
+		return ERR_PTR(-EINVAL);
+
+	if (!atomic_inc_not_zero(&group->container_users))
+		return ERR_PTR(-EINVAL);
+
+	if (!group->container->iommu_driver ||
+			!vfio_group_viable(group)) {
+		atomic_dec(&group->container_users);
+		return ERR_PTR(-EINVAL);
+	}
+
+	vfio_group_get(group);
+
+	return group;
+}
+EXPORT_SYMBOL_GPL(vfio_group_get_external_user);
+
+void vfio_group_put_external_user(struct vfio_group *group)
+{
+	vfio_group_put(group);
+	vfio_group_try_dissolve_container(group);
+}
+EXPORT_SYMBOL_GPL(vfio_group_put_external_user);
+
+int vfio_external_user_iommu_id(struct vfio_group *group)
+{
+	return iommu_group_id(group->iommu_group);
+}
+EXPORT_SYMBOL_GPL(vfio_external_user_iommu_id);
+
+long vfio_external_check_extension(struct vfio_group *group, unsigned long arg)
+{
+	return vfio_ioctl_check_extension(group->container, arg);
+}
+EXPORT_SYMBOL_GPL(vfio_external_check_extension);
+
+/**
+>>>>>>> v3.18
  * Module/class support
  */
 static char *vfio_devnode(struct device *dev, umode_t *mode)
 {
+<<<<<<< HEAD
 	if (mode && (MINOR(dev->devt) == 0))
 		*mode = S_IRUGO | S_IWUGO;
 
 	return kasprintf(GFP_KERNEL, "vfio/%s", dev_name(dev));
 }
 
+=======
+	return kasprintf(GFP_KERNEL, "vfio/%s", dev_name(dev));
+}
+
+static struct miscdevice vfio_dev = {
+	.minor = VFIO_MINOR,
+	.name = "vfio",
+	.fops = &vfio_fops,
+	.nodename = "vfio/vfio",
+	.mode = S_IRUGO | S_IWUGO,
+};
+
+>>>>>>> v3.18
 static int __init vfio_init(void)
 {
 	int ret;
@@ -1377,6 +1545,16 @@ static int __init vfio_init(void)
 	INIT_LIST_HEAD(&vfio.iommu_drivers_list);
 	init_waitqueue_head(&vfio.release_q);
 
+<<<<<<< HEAD
+=======
+	ret = misc_register(&vfio_dev);
+	if (ret) {
+		pr_err("vfio: misc device register failed\n");
+		return ret;
+	}
+
+	/* /dev/vfio/$GROUP */
+>>>>>>> v3.18
 	vfio.class = class_create(THIS_MODULE, "vfio");
 	if (IS_ERR(vfio.class)) {
 		ret = PTR_ERR(vfio.class);
@@ -1385,6 +1563,7 @@ static int __init vfio_init(void)
 
 	vfio.class->devnode = vfio_devnode;
 
+<<<<<<< HEAD
 	ret = alloc_chrdev_region(&vfio.devt, 0, MINORMASK, "vfio");
 	if (ret)
 		goto err_base_chrdev;
@@ -1406,6 +1585,16 @@ static int __init vfio_init(void)
 		       MKDEV(MAJOR(vfio.devt), 1), MINORMASK - 1);
 	if (ret)
 		goto err_groups_cdev;
+=======
+	ret = alloc_chrdev_region(&vfio.group_devt, 0, MINORMASK, "vfio");
+	if (ret)
+		goto err_alloc_chrdev;
+
+	cdev_init(&vfio.group_cdev, &vfio_group_fops);
+	ret = cdev_add(&vfio.group_cdev, vfio.group_devt, MINORMASK);
+	if (ret)
+		goto err_cdev_add;
+>>>>>>> v3.18
 
 	pr_info(DRIVER_DESC " version: " DRIVER_VERSION "\n");
 
@@ -1415,6 +1604,7 @@ static int __init vfio_init(void)
 	 * drivers.
 	 */
 	request_module_nowait("vfio_iommu_type1");
+<<<<<<< HEAD
 
 	return 0;
 
@@ -1428,6 +1618,19 @@ err_base_chrdev:
 	class_destroy(vfio.class);
 	vfio.class = NULL;
 err_class:
+=======
+	request_module_nowait("vfio_iommu_spapr_tce");
+
+	return 0;
+
+err_cdev_add:
+	unregister_chrdev_region(vfio.group_devt, MINORMASK);
+err_alloc_chrdev:
+	class_destroy(vfio.class);
+	vfio.class = NULL;
+err_class:
+	misc_deregister(&vfio_dev);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -1437,11 +1640,18 @@ static void __exit vfio_cleanup(void)
 
 	idr_destroy(&vfio.group_idr);
 	cdev_del(&vfio.group_cdev);
+<<<<<<< HEAD
 	device_destroy(vfio.class, vfio.devt);
 	cdev_del(&vfio.cdev);
 	unregister_chrdev_region(vfio.devt, MINORMASK);
 	class_destroy(vfio.class);
 	vfio.class = NULL;
+=======
+	unregister_chrdev_region(vfio.group_devt, MINORMASK);
+	class_destroy(vfio.class);
+	vfio.class = NULL;
+	misc_deregister(&vfio_dev);
+>>>>>>> v3.18
 }
 
 module_init(vfio_init);
@@ -1451,3 +1661,8 @@ MODULE_VERSION(DRIVER_VERSION);
 MODULE_LICENSE("GPL v2");
 MODULE_AUTHOR(DRIVER_AUTHOR);
 MODULE_DESCRIPTION(DRIVER_DESC);
+<<<<<<< HEAD
+=======
+MODULE_ALIAS_MISCDEV(VFIO_MINOR);
+MODULE_ALIAS("devname:vfio/vfio");
+>>>>>>> v3.18

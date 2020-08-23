@@ -5,7 +5,10 @@
 
 #include <linux/init.h>
 #include <linux/acpi.h>
+<<<<<<< HEAD
 #include <acpi/acpi_drivers.h>
+=======
+>>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/types.h>
 

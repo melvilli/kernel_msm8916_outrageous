@@ -3,11 +3,19 @@
  *
  * Authors:
  *	Mitsuru KANDA @USAGI
+<<<<<<< HEAD
  * 	Kazunori MIYAZAWA @USAGI
  * 	Kunihiro Ishiguro <kunihiro@ipinfusion.com>
  * 		IPv6 support
  * 	YOSHIFUJI Hideaki @USAGI
  * 		Split up af-specific portion
+=======
+ *	Kazunori MIYAZAWA @USAGI
+ *	Kunihiro Ishiguro <kunihiro@ipinfusion.com>
+ *		IPv6 support
+ *	YOSHIFUJI Hideaki @USAGI
+ *		Split up af-specific portion
+>>>>>>> v3.18
  *
  */
 
@@ -45,10 +53,17 @@ xfrm6_init_temprop(struct xfrm_state *x, const struct xfrm_tmpl *tmpl,
 		   const xfrm_address_t *daddr, const xfrm_address_t *saddr)
 {
 	x->id = tmpl->id;
+<<<<<<< HEAD
 	if (ipv6_addr_any((struct in6_addr*)&x->id.daddr))
 		memcpy(&x->id.daddr, daddr, sizeof(x->sel.daddr));
 	memcpy(&x->props.saddr, &tmpl->saddr, sizeof(x->props.saddr));
 	if (ipv6_addr_any((struct in6_addr*)&x->props.saddr))
+=======
+	if (ipv6_addr_any((struct in6_addr *)&x->id.daddr))
+		memcpy(&x->id.daddr, daddr, sizeof(x->sel.daddr));
+	memcpy(&x->props.saddr, &tmpl->saddr, sizeof(x->props.saddr));
+	if (ipv6_addr_any((struct in6_addr *)&x->props.saddr))
+>>>>>>> v3.18
 		memcpy(&x->props.saddr, saddr, sizeof(x->props.saddr));
 	x->props.mode = tmpl->mode;
 	x->props.reqid = tmpl->reqid;
@@ -183,6 +198,10 @@ static struct xfrm_state_afinfo xfrm6_state_afinfo = {
 	.extract_input		= xfrm6_extract_input,
 	.extract_output		= xfrm6_extract_output,
 	.transport_finish	= xfrm6_transport_finish,
+<<<<<<< HEAD
+=======
+	.local_error		= xfrm6_local_error,
+>>>>>>> v3.18
 };
 
 int __init xfrm6_state_init(void)

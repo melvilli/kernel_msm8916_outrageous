@@ -18,7 +18,11 @@
 
 /* this file is part of ehci-hcd.c */
 
+<<<<<<< HEAD
 #ifdef	DEBUG
+=======
+#ifdef CONFIG_DYNAMIC_DEBUG
+>>>>>>> v3.18
 
 /* check the values in the HCSPARAMS register
  * (host controller _Structural_ parameters)
@@ -62,7 +66,11 @@ static inline void dbg_hcs_params (struct ehci_hcd *ehci, char *label) {}
 
 #endif
 
+<<<<<<< HEAD
 #ifdef	DEBUG
+=======
+#ifdef CONFIG_DYNAMIC_DEBUG
+>>>>>>> v3.18
 
 /* check the values in the HCCPARAMS register
  * (host controller _Capability_ parameters)
@@ -101,12 +109,20 @@ static inline void dbg_hcc_params (struct ehci_hcd *ehci, char *label) {}
 
 #endif
 
+<<<<<<< HEAD
 #ifdef	DEBUG
+=======
+#ifdef CONFIG_DYNAMIC_DEBUG
+>>>>>>> v3.18
 
 static void __maybe_unused
 dbg_qtd (const char *label, struct ehci_hcd *ehci, struct ehci_qtd *qtd)
 {
+<<<<<<< HEAD
 	ehci_dbg(ehci, "%s td %pK n%08x %08x t%08x p0=%08x\n", label, qtd,
+=======
+	ehci_dbg(ehci, "%s td %p n%08x %08x t%08x p0=%08x\n", label, qtd,
+>>>>>>> v3.18
 		hc32_to_cpup(ehci, &qtd->hw_next),
 		hc32_to_cpup(ehci, &qtd->hw_alt_next),
 		hc32_to_cpup(ehci, &qtd->hw_token),
@@ -124,7 +140,11 @@ dbg_qh (const char *label, struct ehci_hcd *ehci, struct ehci_qh *qh)
 {
 	struct ehci_qh_hw *hw = qh->hw;
 
+<<<<<<< HEAD
 	ehci_dbg (ehci, "%s qh %pK n%08x info %x %x qtd %x\n", label,
+=======
+	ehci_dbg (ehci, "%s qh %p n%08x info %x %x qtd %x\n", label,
+>>>>>>> v3.18
 		qh, hw->hw_next, hw->hw_info1, hw->hw_info2, hw->hw_current);
 	dbg_qtd("overlay", ehci, (struct ehci_qtd *) &hw->hw_qtd_next);
 }
@@ -132,7 +152,11 @@ dbg_qh (const char *label, struct ehci_hcd *ehci, struct ehci_qh *qh)
 static void __maybe_unused
 dbg_itd (const char *label, struct ehci_hcd *ehci, struct ehci_itd *itd)
 {
+<<<<<<< HEAD
 	ehci_dbg (ehci, "%s [%d] itd %pK, next %08x, urb %pK\n",
+=======
+	ehci_dbg (ehci, "%s [%d] itd %p, next %08x, urb %p\n",
+>>>>>>> v3.18
 		label, itd->frame, itd, hc32_to_cpu(ehci, itd->hw_next),
 		itd->urb);
 	ehci_dbg (ehci,
@@ -163,7 +187,11 @@ dbg_itd (const char *label, struct ehci_hcd *ehci, struct ehci_itd *itd)
 static void __maybe_unused
 dbg_sitd (const char *label, struct ehci_hcd *ehci, struct ehci_sitd *sitd)
 {
+<<<<<<< HEAD
 	ehci_dbg (ehci, "%s [%d] sitd %pK, next %08x, urb %pK\n",
+=======
+	ehci_dbg (ehci, "%s [%d] sitd %p, next %08x, urb %p\n",
+>>>>>>> v3.18
 		label, sitd->frame, sitd, hc32_to_cpu(ehci, sitd->hw_next),
 		sitd->urb);
 	ehci_dbg (ehci,
@@ -301,7 +329,11 @@ static inline int __maybe_unused
 dbg_port_buf (char *buf, unsigned len, const char *label, int port, u32 status)
 { return 0; }
 
+<<<<<<< HEAD
 #endif	/* DEBUG */
+=======
+#endif	/* CONFIG_DYNAMIC_DEBUG */
+>>>>>>> v3.18
 
 /* functions have the "wrong" filename when they're output... */
 #define dbg_status(ehci, label, status) { \
@@ -334,9 +366,15 @@ static inline void remove_debug_files (struct ehci_hcd *bus) { }
 /* troubleshooting help: expose state in debugfs */
 
 static int debug_async_open(struct inode *, struct file *);
+<<<<<<< HEAD
 static int debug_periodic_open(struct inode *, struct file *);
 static int debug_registers_open(struct inode *, struct file *);
 static int debug_async_open(struct inode *, struct file *);
+=======
+static int debug_bandwidth_open(struct inode *, struct file *);
+static int debug_periodic_open(struct inode *, struct file *);
+static int debug_registers_open(struct inode *, struct file *);
+>>>>>>> v3.18
 
 static ssize_t debug_output(struct file*, char __user*, size_t, loff_t*);
 static int debug_close(struct inode *, struct file *);
@@ -348,6 +386,16 @@ static const struct file_operations debug_async_fops = {
 	.release	= debug_close,
 	.llseek		= default_llseek,
 };
+<<<<<<< HEAD
+=======
+static const struct file_operations debug_bandwidth_fops = {
+	.owner		= THIS_MODULE,
+	.open		= debug_bandwidth_open,
+	.read		= debug_output,
+	.release	= debug_close,
+	.llseek		= default_llseek,
+};
+>>>>>>> v3.18
 static const struct file_operations debug_periodic_fops = {
 	.owner		= THIS_MODULE,
 	.open		= debug_periodic_open,
@@ -380,7 +428,11 @@ struct debug_buffer {
 		case QH_LOW_SPEED:  tmp = 'l'; break; \
 		case QH_HIGH_SPEED: tmp = 'h'; break; \
 		default: tmp = '?'; break; \
+<<<<<<< HEAD
 		}; tmp; })
+=======
+		} tmp; })
+>>>>>>> v3.18
 
 static inline char token_mark(struct ehci_hcd *ehci, __hc32 token)
 {
@@ -429,7 +481,11 @@ static void qh_lines (
 	scratch = hc32_to_cpup(ehci, &hw->hw_info1);
 	hw_curr = (mark == '*') ? hc32_to_cpup(ehci, &hw->hw_current) : 0;
 	temp = scnprintf (next, size,
+<<<<<<< HEAD
 			"qh/%pK dev%d %cs ep%d %08x %08x (%08x%c %s nak%d)",
+=======
+			"qh/%p dev%d %cs ep%d %08x %08x (%08x%c %s nak%d)",
+>>>>>>> v3.18
 			qh, scratch & 0x007f,
 			speed_char (scratch),
 			(scratch >> 8) & 0x000f,
@@ -457,7 +513,11 @@ static void qh_lines (
 				mark = '/';
 		}
 		temp = snprintf (next, size,
+<<<<<<< HEAD
 				"\n\t%pK%c%s len=%d %08x urb %pK",
+=======
+				"\n\t%p%c%s len=%d %08x urb %p",
+>>>>>>> v3.18
 				td, mark, ({ char *tmp;
 				 switch ((scratch>>8)&0x03) {
 				 case 0: tmp = "out"; break;
@@ -526,6 +586,92 @@ static ssize_t fill_async_buffer(struct debug_buffer *buf)
 	return strlen(buf->output_buf);
 }
 
+<<<<<<< HEAD
+=======
+static ssize_t fill_bandwidth_buffer(struct debug_buffer *buf)
+{
+	struct ehci_hcd		*ehci;
+	struct ehci_tt		*tt;
+	struct ehci_per_sched	*ps;
+	unsigned		temp, size;
+	char			*next;
+	unsigned		i;
+	u8			*bw;
+	u16			*bf;
+	u8			budget[EHCI_BANDWIDTH_SIZE];
+
+	ehci = hcd_to_ehci(bus_to_hcd(buf->bus));
+	next = buf->output_buf;
+	size = buf->alloc_size;
+
+	*next = 0;
+
+	spin_lock_irq(&ehci->lock);
+
+	/* Dump the HS bandwidth table */
+	temp = scnprintf(next, size,
+			"HS bandwidth allocation (us per microframe)\n");
+	size -= temp;
+	next += temp;
+	for (i = 0; i < EHCI_BANDWIDTH_SIZE; i += 8) {
+		bw = &ehci->bandwidth[i];
+		temp = scnprintf(next, size,
+				"%2u: %4u%4u%4u%4u%4u%4u%4u%4u\n",
+				i, bw[0], bw[1], bw[2], bw[3],
+					bw[4], bw[5], bw[6], bw[7]);
+		size -= temp;
+		next += temp;
+	}
+
+	/* Dump all the FS/LS tables */
+	list_for_each_entry(tt, &ehci->tt_list, tt_list) {
+		temp = scnprintf(next, size,
+				"\nTT %s port %d  FS/LS bandwidth allocation (us per frame)\n",
+				dev_name(&tt->usb_tt->hub->dev),
+				tt->tt_port + !!tt->usb_tt->multi);
+		size -= temp;
+		next += temp;
+
+		bf = tt->bandwidth;
+		temp = scnprintf(next, size,
+				"  %5u%5u%5u%5u%5u%5u%5u%5u\n",
+				bf[0], bf[1], bf[2], bf[3],
+					bf[4], bf[5], bf[6], bf[7]);
+		size -= temp;
+		next += temp;
+
+		temp = scnprintf(next, size,
+				"FS/LS budget (us per microframe)\n");
+		size -= temp;
+		next += temp;
+		compute_tt_budget(budget, tt);
+		for (i = 0; i < EHCI_BANDWIDTH_SIZE; i += 8) {
+			bw = &budget[i];
+			temp = scnprintf(next, size,
+					"%2u: %4u%4u%4u%4u%4u%4u%4u%4u\n",
+					i, bw[0], bw[1], bw[2], bw[3],
+						bw[4], bw[5], bw[6], bw[7]);
+			size -= temp;
+			next += temp;
+		}
+		list_for_each_entry(ps, &tt->ps_list, ps_list) {
+			temp = scnprintf(next, size,
+					"%s ep %02x:  %4u @ %2u.%u+%u mask %04x\n",
+					dev_name(&ps->udev->dev),
+					ps->ep->desc.bEndpointAddress,
+					ps->tt_usecs,
+					ps->bw_phase, ps->phase_uf,
+					ps->bw_period, ps->cs_mask);
+			size -= temp;
+			next += temp;
+		}
+	}
+	spin_unlock_irq(&ehci->lock);
+
+	return next - buf->output_buf;
+}
+
+>>>>>>> v3.18
 #define DBG_SCHED_LIMIT 64
 static ssize_t fill_periodic_buffer(struct debug_buffer *buf)
 {
@@ -571,8 +717,13 @@ static ssize_t fill_periodic_buffer(struct debug_buffer *buf)
 			switch (hc32_to_cpu(ehci, tag)) {
 			case Q_TYPE_QH:
 				hw = p.qh->hw;
+<<<<<<< HEAD
 				temp = scnprintf (next, size, " qh%d-%04x/%pK",
 						p.qh->period,
+=======
+				temp = scnprintf (next, size, " qh%d-%04x/%p",
+						p.qh->ps.period,
+>>>>>>> v3.18
 						hc32_to_cpup(ehci,
 							&hw->hw_info2)
 							/* uframe masks */
@@ -619,7 +770,12 @@ static ssize_t fill_periodic_buffer(struct debug_buffer *buf)
 						speed_char (scratch),
 						scratch & 0x007f,
 						(scratch >> 8) & 0x000f, type,
+<<<<<<< HEAD
 						p.qh->usecs, p.qh->c_usecs,
+=======
+						p.qh->ps.usecs,
+						p.qh->ps.c_usecs,
+>>>>>>> v3.18
 						temp,
 						0x7ff & (scratch >> 16));
 
@@ -632,21 +788,34 @@ static ssize_t fill_periodic_buffer(struct debug_buffer *buf)
 				break;
 			case Q_TYPE_FSTN:
 				temp = scnprintf (next, size,
+<<<<<<< HEAD
 					" fstn-%8x/%pK", p.fstn->hw_prev,
+=======
+					" fstn-%8x/%p", p.fstn->hw_prev,
+>>>>>>> v3.18
 					p.fstn);
 				tag = Q_NEXT_TYPE(ehci, p.fstn->hw_next);
 				p = p.fstn->fstn_next;
 				break;
 			case Q_TYPE_ITD:
 				temp = scnprintf (next, size,
+<<<<<<< HEAD
 					" itd/%pK", p.itd);
+=======
+					" itd/%p", p.itd);
+>>>>>>> v3.18
 				tag = Q_NEXT_TYPE(ehci, p.itd->hw_next);
 				p = p.itd->itd_next;
 				break;
 			case Q_TYPE_SITD:
 				temp = scnprintf (next, size,
+<<<<<<< HEAD
 					" sitd%d-%04x/%pK",
 					p.sitd->stream->interval,
+=======
+					" sitd%d-%04x/%p",
+					p.sitd->stream->ps.period,
+>>>>>>> v3.18
 					hc32_to_cpup(ehci, &p.sitd->hw_uframe)
 						& 0x0000ffff,
 					p.sitd);
@@ -727,7 +896,11 @@ static ssize_t fill_registers_buffer(struct debug_buffer *buf)
 
 #ifdef	CONFIG_PCI
 	/* EHCI 0.96 and later may have "extended capabilities" */
+<<<<<<< HEAD
 	if (hcd->self.controller->bus == &pci_bus_type) {
+=======
+	if (dev_is_pci(hcd->self.controller)) {
+>>>>>>> v3.18
 		struct pci_dev	*pdev;
 		u32		offset, cap, cap2;
 		unsigned	count = 256/4;
@@ -817,7 +990,11 @@ static ssize_t fill_registers_buffer(struct debug_buffer *buf)
 	}
 
 	if (!list_empty(&ehci->async_unlink)) {
+<<<<<<< HEAD
 		temp = scnprintf(next, size, "async unlink qh %pK\n",
+=======
+		temp = scnprintf(next, size, "async unlink qh %p\n",
+>>>>>>> v3.18
 				list_first_entry(&ehci->async_unlink,
 						struct ehci_qh, unlink_node));
 		size -= temp;
@@ -919,6 +1096,10 @@ static int debug_close(struct inode *inode, struct file *file)
 
 	return 0;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 static int debug_async_open(struct inode *inode, struct file *file)
 {
 	file->private_data = alloc_buffer(inode->i_private, fill_async_buffer);
@@ -926,6 +1107,17 @@ static int debug_async_open(struct inode *inode, struct file *file)
 	return file->private_data ? 0 : -ENOMEM;
 }
 
+<<<<<<< HEAD
+=======
+static int debug_bandwidth_open(struct inode *inode, struct file *file)
+{
+	file->private_data = alloc_buffer(inode->i_private,
+			fill_bandwidth_buffer);
+
+	return file->private_data ? 0 : -ENOMEM;
+}
+
+>>>>>>> v3.18
 static int debug_periodic_open(struct inode *inode, struct file *file)
 {
 	struct debug_buffer *buf;
@@ -958,6 +1150,13 @@ static inline void create_debug_files (struct ehci_hcd *ehci)
 						&debug_async_fops))
 		goto file_error;
 
+<<<<<<< HEAD
+=======
+	if (!debugfs_create_file("bandwidth", S_IRUGO, ehci->debug_dir, bus,
+						&debug_bandwidth_fops))
+		goto file_error;
+
+>>>>>>> v3.18
 	if (!debugfs_create_file("periodic", S_IRUGO, ehci->debug_dir, bus,
 						&debug_periodic_fops))
 		goto file_error;

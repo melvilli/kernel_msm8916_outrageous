@@ -145,7 +145,11 @@ struct mtdswap_dev {
 struct mtdswap_oobdata {
 	__le16 magic;
 	__le32 count;
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 
 #define MTDSWAP_MAGIC_CLEAN	0x2095
 #define MTDSWAP_MAGIC_DIRTY	(MTDSWAP_MAGIC_CLEAN + 1)
@@ -1287,7 +1291,11 @@ static int mtdswap_show(struct seq_file *s, void *data)
 
 	seq_printf(s, "total erasures: %lu\n", sum);
 
+<<<<<<< HEAD
 	seq_printf(s, "\n");
+=======
+	seq_puts(s, "\n");
+>>>>>>> v3.18
 
 	seq_printf(s, "mtdswap_readsect count: %llu\n", d->sect_read_count);
 	seq_printf(s, "mtdswap_writesect count: %llu\n", d->sect_write_count);
@@ -1296,7 +1304,11 @@ static int mtdswap_show(struct seq_file *s, void *data)
 	seq_printf(s, "mtd write count: %llu\n", d->mtd_write_count);
 	seq_printf(s, "discarded pages count: %llu\n", d->discard_page_count);
 
+<<<<<<< HEAD
 	seq_printf(s, "\n");
+=======
+	seq_puts(s, "\n");
+>>>>>>> v3.18
 	seq_printf(s, "total pages: %u\n", pages);
 	seq_printf(s, "pages mapped: %u\n", mapped);
 
@@ -1425,7 +1437,11 @@ static void mtdswap_add_mtd(struct mtd_blktrans_ops *tr, struct mtd_info *mtd)
 		return;
 
 	while ((this_opt = strsep(&parts, ",")) != NULL) {
+<<<<<<< HEAD
 		if (strict_strtoul(this_opt, 0, &part) < 0)
+=======
+		if (kstrtoul(this_opt, 0, &part) < 0)
+>>>>>>> v3.18
 			return;
 
 		if (mtd->index == part)
@@ -1474,7 +1490,11 @@ static void mtdswap_add_mtd(struct mtd_blktrans_ops *tr, struct mtd_info *mtd)
 	}
 
 	eblocks = mtd_div_by_eb(use_size, mtd);
+<<<<<<< HEAD
 	use_size = eblocks * mtd->erasesize;
+=======
+	use_size = (uint64_t)eblocks * mtd->erasesize;
+>>>>>>> v3.18
 	bad_blocks = mtdswap_badblocks(mtd, use_size);
 	eavailable = eblocks - bad_blocks;
 

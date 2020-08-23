@@ -493,7 +493,10 @@ static ssize_t device_write(struct file *file, const char __user *buf,
 {
 	struct dlm_user_proc *proc = file->private_data;
 	struct dlm_write_request *kbuf;
+<<<<<<< HEAD
 	sigset_t tmpsig, allsigs;
+=======
+>>>>>>> v3.18
 	int error;
 
 #ifdef CONFIG_COMPAT
@@ -557,9 +560,12 @@ static ssize_t device_write(struct file *file, const char __user *buf,
 		goto out_free;
 	}
 
+<<<<<<< HEAD
 	sigfillset(&allsigs);
 	sigprocmask(SIG_BLOCK, &allsigs, &tmpsig);
 
+=======
+>>>>>>> v3.18
 	error = -EINVAL;
 
 	switch (kbuf->cmd)
@@ -567,7 +573,11 @@ static ssize_t device_write(struct file *file, const char __user *buf,
 	case DLM_USER_LOCK:
 		if (!proc) {
 			log_print("no locking on control device");
+<<<<<<< HEAD
 			goto out_sig;
+=======
+			goto out_free;
+>>>>>>> v3.18
 		}
 		error = device_user_lock(proc, &kbuf->i.lock);
 		break;
@@ -575,7 +585,11 @@ static ssize_t device_write(struct file *file, const char __user *buf,
 	case DLM_USER_UNLOCK:
 		if (!proc) {
 			log_print("no locking on control device");
+<<<<<<< HEAD
 			goto out_sig;
+=======
+			goto out_free;
+>>>>>>> v3.18
 		}
 		error = device_user_unlock(proc, &kbuf->i.lock);
 		break;
@@ -583,7 +597,11 @@ static ssize_t device_write(struct file *file, const char __user *buf,
 	case DLM_USER_DEADLOCK:
 		if (!proc) {
 			log_print("no locking on control device");
+<<<<<<< HEAD
 			goto out_sig;
+=======
+			goto out_free;
+>>>>>>> v3.18
 		}
 		error = device_user_deadlock(proc, &kbuf->i.lock);
 		break;
@@ -591,7 +609,11 @@ static ssize_t device_write(struct file *file, const char __user *buf,
 	case DLM_USER_CREATE_LOCKSPACE:
 		if (proc) {
 			log_print("create/remove only on control device");
+<<<<<<< HEAD
 			goto out_sig;
+=======
+			goto out_free;
+>>>>>>> v3.18
 		}
 		error = device_create_lockspace(&kbuf->i.lspace);
 		break;
@@ -599,7 +621,11 @@ static ssize_t device_write(struct file *file, const char __user *buf,
 	case DLM_USER_REMOVE_LOCKSPACE:
 		if (proc) {
 			log_print("create/remove only on control device");
+<<<<<<< HEAD
 			goto out_sig;
+=======
+			goto out_free;
+>>>>>>> v3.18
 		}
 		error = device_remove_lockspace(&kbuf->i.lspace);
 		break;
@@ -607,7 +633,11 @@ static ssize_t device_write(struct file *file, const char __user *buf,
 	case DLM_USER_PURGE:
 		if (!proc) {
 			log_print("no locking on control device");
+<<<<<<< HEAD
 			goto out_sig;
+=======
+			goto out_free;
+>>>>>>> v3.18
 		}
 		error = device_user_purge(proc, &kbuf->i.purge);
 		break;
@@ -617,8 +647,11 @@ static ssize_t device_write(struct file *file, const char __user *buf,
 			  kbuf->cmd);
 	}
 
+<<<<<<< HEAD
  out_sig:
 	sigprocmask(SIG_SETMASK, &tmpsig, NULL);
+=======
+>>>>>>> v3.18
  out_free:
 	kfree(kbuf);
 	return error;
@@ -659,15 +692,21 @@ static int device_close(struct inode *inode, struct file *file)
 {
 	struct dlm_user_proc *proc = file->private_data;
 	struct dlm_ls *ls;
+<<<<<<< HEAD
 	sigset_t tmpsig, allsigs;
+=======
+>>>>>>> v3.18
 
 	ls = dlm_find_lockspace_local(proc->lockspace);
 	if (!ls)
 		return -ENOENT;
 
+<<<<<<< HEAD
 	sigfillset(&allsigs);
 	sigprocmask(SIG_BLOCK, &allsigs, &tmpsig);
 
+=======
+>>>>>>> v3.18
 	set_bit(DLM_PROC_FLAGS_CLOSING, &proc->flags);
 
 	dlm_clear_proc_locks(ls, proc);
@@ -685,9 +724,12 @@ static int device_close(struct inode *inode, struct file *file)
 	/* FIXME: AUTOFREE: if this ls is no longer used do
 	   device_remove_lockspace() */
 
+<<<<<<< HEAD
 	sigprocmask(SIG_SETMASK, &tmpsig, NULL);
 	recalc_sigpending();
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

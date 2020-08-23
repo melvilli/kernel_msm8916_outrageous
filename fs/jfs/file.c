@@ -19,6 +19,10 @@
 
 #include <linux/mm.h>
 #include <linux/fs.h>
+<<<<<<< HEAD
+=======
+#include <linux/posix_acl.h>
+>>>>>>> v3.18
 #include <linux/quotaops.h>
 #include "jfs_incore.h"
 #include "jfs_inode.h"
@@ -131,7 +135,11 @@ int jfs_setattr(struct dentry *dentry, struct iattr *iattr)
 	mark_inode_dirty(inode);
 
 	if (iattr->ia_valid & ATTR_MODE)
+<<<<<<< HEAD
 		rc = jfs_acl_chmod(inode);
+=======
+		rc = posix_acl_chmod(inode, inode->i_mode);
+>>>>>>> v3.18
 	return rc;
 }
 
@@ -143,12 +151,17 @@ const struct inode_operations jfs_file_inode_operations = {
 	.setattr	= jfs_setattr,
 #ifdef CONFIG_JFS_POSIX_ACL
 	.get_acl	= jfs_get_acl,
+<<<<<<< HEAD
+=======
+	.set_acl	= jfs_set_acl,
+>>>>>>> v3.18
 #endif
 };
 
 const struct file_operations jfs_file_operations = {
 	.open		= jfs_open,
 	.llseek		= generic_file_llseek,
+<<<<<<< HEAD
 	.write		= do_sync_write,
 	.read		= do_sync_read,
 	.aio_read	= generic_file_aio_read,
@@ -156,6 +169,15 @@ const struct file_operations jfs_file_operations = {
 	.mmap		= generic_file_mmap,
 	.splice_read	= generic_file_splice_read,
 	.splice_write	= generic_file_splice_write,
+=======
+	.write		= new_sync_write,
+	.read		= new_sync_read,
+	.read_iter	= generic_file_read_iter,
+	.write_iter	= generic_file_write_iter,
+	.mmap		= generic_file_mmap,
+	.splice_read	= generic_file_splice_read,
+	.splice_write	= iter_file_splice_write,
+>>>>>>> v3.18
 	.fsync		= jfs_fsync,
 	.release	= jfs_release,
 	.unlocked_ioctl = jfs_ioctl,

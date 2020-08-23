@@ -93,7 +93,10 @@ static int lbs_mesh_config(struct lbs_private *priv, uint16_t action,
 {
 	struct cmd_ds_mesh_config cmd;
 	struct mrvl_meshie *ie;
+<<<<<<< HEAD
 	DECLARE_SSID_BUF(ssid);
+=======
+>>>>>>> v3.18
 
 	memset(&cmd, 0, sizeof(cmd));
 	cmd.channel = cpu_to_le16(chan);
@@ -122,9 +125,15 @@ static int lbs_mesh_config(struct lbs_private *priv, uint16_t action,
 	default:
 		return -1;
 	}
+<<<<<<< HEAD
 	lbs_deb_cmd("mesh config action %d type %x channel %d SSID %s\n",
 		    action, priv->mesh_tlv, chan,
 		    print_ssid(ssid, priv->mesh_ssid, priv->mesh_ssid_len));
+=======
+	lbs_deb_cmd("mesh config action %d type %x channel %d SSID %*pE\n",
+		    action, priv->mesh_tlv, chan, priv->mesh_ssid_len,
+		    priv->mesh_ssid);
+>>>>>>> v3.18
 
 	return __lbs_mesh_config_send(priv, &cmd, action, priv->mesh_tlv);
 }
@@ -240,7 +249,11 @@ static ssize_t lbs_prb_rsp_limit_set(struct device *dev,
 	memset(&mesh_access, 0, sizeof(mesh_access));
 	mesh_access.data[0] = cpu_to_le32(CMD_ACT_SET);
 
+<<<<<<< HEAD
 	if (!strict_strtoul(buf, 10, &retry_limit))
+=======
+	if (!kstrtoul(buf, 10, &retry_limit))
+>>>>>>> v3.18
 		return -ENOTSUPP;
 	if (retry_limit > 15)
 		return -ENOTSUPP;
@@ -1000,7 +1013,11 @@ static int lbs_add_mesh(struct lbs_private *priv)
 		goto done;
 	}
 
+<<<<<<< HEAD
 	mesh_dev = alloc_netdev(0, "msh%d", ether_setup);
+=======
+	mesh_dev = alloc_netdev(0, "msh%d", NET_NAME_UNKNOWN, ether_setup);
+>>>>>>> v3.18
 	if (!mesh_dev) {
 		lbs_deb_mesh("init mshX device failed\n");
 		ret = -ENOMEM;
@@ -1017,7 +1034,11 @@ static int lbs_add_mesh(struct lbs_private *priv)
 
 	mesh_dev->netdev_ops = &mesh_netdev_ops;
 	mesh_dev->ethtool_ops = &lbs_ethtool_ops;
+<<<<<<< HEAD
 	memcpy(mesh_dev->dev_addr, priv->dev->dev_addr, ETH_ALEN);
+=======
+	eth_hw_addr_inherit(mesh_dev, priv->dev);
+>>>>>>> v3.18
 
 	SET_NETDEV_DEV(priv->mesh_dev, priv->dev->dev.parent);
 

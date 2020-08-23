@@ -29,11 +29,14 @@ config HAVE_FUNCTION_GRAPH_FP_TEST
 	help
 	  See Documentation/trace/ftrace-design.txt
 
+<<<<<<< HEAD
 config HAVE_FUNCTION_TRACE_MCOUNT_TEST
 	bool
 	help
 	  See Documentation/trace/ftrace-design.txt
 
+=======
+>>>>>>> v3.18
 config HAVE_DYNAMIC_FTRACE
 	bool
 	help
@@ -82,9 +85,12 @@ config EVENT_TRACING
 	select CONTEXT_SWITCH_TRACER
 	bool
 
+<<<<<<< HEAD
 config GPU_TRACEPOINTS
 	bool
 
+=======
+>>>>>>> v3.18
 config CONTEXT_SWITCH_TRACER
 	bool
 
@@ -94,6 +100,7 @@ config RING_BUFFER_ALLOW_SWAP
 	 Allow the use of ring_buffer_swap_cpu.
 	 Adds a very slight overhead to tracing when enabled.
 
+<<<<<<< HEAD
 config MSM_RTB
 	bool "Register tracing"
 	help
@@ -119,6 +126,8 @@ config IPC_LOGGING
 
 	  If in doubt, say no.
 
+=======
+>>>>>>> v3.18
 # All tracer options should select GENERIC_TRACER. For those options that are
 # enabled by all tracers (context switch and event tracer) they select TRACING.
 # This allows those options to appear when no other tracer is selected. But the
@@ -452,6 +461,10 @@ config UPROBE_EVENT
 	bool "Enable uprobes-based dynamic events"
 	depends on ARCH_SUPPORTS_UPROBES
 	depends on MMU
+<<<<<<< HEAD
+=======
+	depends on PERF_EVENTS
+>>>>>>> v3.18
 	select UPROBES
 	select PROBE_EVENTS
 	select TRACING
@@ -509,6 +522,7 @@ config FUNCTION_PROFILER
 
 	  If in doubt, say N.
 
+<<<<<<< HEAD
 config CPU_FREQ_SWITCH_PROFILER
 	bool "CPU frequency switch time profiler"
 	select GENERIC_TRACER
@@ -522,6 +536,8 @@ config CPU_FREQ_SWITCH_PROFILER
 
 	  If in doubt, say N.
 
+=======
+>>>>>>> v3.18
 config FTRACE_MCOUNT_RECORD
 	def_bool y
 	depends on DYNAMIC_FTRACE
@@ -575,6 +591,39 @@ config MMIOTRACE_TEST
 
 	  Say N, unless you absolutely know what you are doing.
 
+<<<<<<< HEAD
+=======
+config TRACEPOINT_BENCHMARK
+        bool "Add tracepoint that benchmarks tracepoints"
+	help
+	 This option creates the tracepoint "benchmark:benchmark_event".
+	 When the tracepoint is enabled, it kicks off a kernel thread that
+	 goes into an infinite loop (calling cond_sched() to let other tasks
+	 run), and calls the tracepoint. Each iteration will record the time
+	 it took to write to the tracepoint and the next iteration that
+	 data will be passed to the tracepoint itself. That is, the tracepoint
+	 will report the time it took to do the previous tracepoint.
+	 The string written to the tracepoint is a static string of 128 bytes
+	 to keep the time the same. The initial string is simply a write of
+	 "START". The second string records the cold cache time of the first
+	 write which is not added to the rest of the calculations.
+
+	 As it is a tight loop, it benchmarks as hot cache. That's fine because
+	 we care most about hot paths that are probably in cache already.
+
+	 An example of the output:
+
+	      START
+	      first=3672 [COLD CACHED]
+	      last=632 first=3672 max=632 min=632 avg=316 std=446 std^2=199712
+	      last=278 first=3672 max=632 min=278 avg=303 std=316 std^2=100337
+	      last=277 first=3672 max=632 min=277 avg=296 std=258 std^2=67064
+	      last=273 first=3672 max=632 min=273 avg=292 std=224 std^2=50411
+	      last=273 first=3672 max=632 min=273 avg=288 std=200 std^2=40389
+	      last=281 first=3672 max=632 min=273 avg=287 std=183 std^2=33666
+
+
+>>>>>>> v3.18
 config RING_BUFFER_BENCHMARK
 	tristate "Ring buffer benchmark stress tester"
 	depends on RING_BUFFER

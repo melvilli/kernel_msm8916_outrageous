@@ -19,6 +19,10 @@
 #include <linux/init.h>
 #include <linux/reboot.h>
 #include <linux/seq_file.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_fdt.h>
+>>>>>>> v3.18
 #include <linux/of_platform.h>
 
 #include <asm/machdep.h>
@@ -58,7 +62,11 @@ static void ppa8548_show_cpuinfo(struct seq_file *m)
 	seq_printf(m, "PLL setting\t: 0x%x\n", ((phid1 >> 24) & 0x3f));
 }
 
+<<<<<<< HEAD
 static struct of_device_id __initdata of_bus_ids[] = {
+=======
+static const struct of_device_id of_bus_ids[] __initconst = {
+>>>>>>> v3.18
 	{ .name = "soc", },
 	{ .type = "soc", },
 	{ .compatible = "simple-bus", },

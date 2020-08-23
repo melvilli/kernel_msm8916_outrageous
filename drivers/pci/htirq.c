@@ -87,12 +87,18 @@ void unmask_ht_irq(struct irq_data *data)
 int __ht_create_irq(struct pci_dev *dev, int idx, ht_irq_update_t *update)
 {
 	struct ht_irq_cfg *cfg;
+<<<<<<< HEAD
 	unsigned long flags;
 	u32 data;
 	int max_irq;
 	int pos;
 	int irq;
 	int node;
+=======
+	int max_irq, pos, irq;
+	unsigned long flags;
+	u32 data;
+>>>>>>> v3.18
 
 	pos = pci_find_ht_capability(dev, HT_CAPTYPE_IRQ);
 	if (!pos)
@@ -105,7 +111,11 @@ int __ht_create_irq(struct pci_dev *dev, int idx, ht_irq_update_t *update)
 	spin_unlock_irqrestore(&ht_irq_lock, flags);
 
 	max_irq = (data >> 16) & 0xff;
+<<<<<<< HEAD
 	if ( idx > max_irq)
+=======
+	if (idx > max_irq)
+>>>>>>> v3.18
 		return -EINVAL;
 
 	cfg = kmalloc(sizeof(*cfg), GFP_KERNEL);
@@ -120,10 +130,15 @@ int __ht_create_irq(struct pci_dev *dev, int idx, ht_irq_update_t *update)
 	cfg->msg.address_lo = 0xffffffff;
 	cfg->msg.address_hi = 0xffffffff;
 
+<<<<<<< HEAD
 	node = dev_to_node(&dev->dev);
 	irq = create_irq_nr(0, node);
 
 	if (irq <= 0) {
+=======
+	irq = irq_alloc_hwirq(dev_to_node(&dev->dev));
+	if (!irq) {
+>>>>>>> v3.18
 		kfree(cfg);
 		return -EBUSY;
 	}
@@ -136,6 +151,10 @@ int __ht_create_irq(struct pci_dev *dev, int idx, ht_irq_update_t *update)
 
 	return irq;
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(__ht_create_irq);
+>>>>>>> v3.18
 
 /**
  * ht_create_irq - create an irq and attach it to a device.
@@ -151,6 +170,10 @@ int ht_create_irq(struct pci_dev *dev, int idx)
 {
 	return __ht_create_irq(dev, idx, NULL);
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(ht_create_irq);
+>>>>>>> v3.18
 
 /**
  * ht_destroy_irq - destroy an irq created with ht_create_irq
@@ -166,6 +189,7 @@ void ht_destroy_irq(unsigned int irq)
 	cfg = irq_get_handler_data(irq);
 	irq_set_chip(irq, NULL);
 	irq_set_handler_data(irq, NULL);
+<<<<<<< HEAD
 	destroy_irq(irq);
 
 	kfree(cfg);
@@ -173,4 +197,10 @@ void ht_destroy_irq(unsigned int irq)
 
 EXPORT_SYMBOL(__ht_create_irq);
 EXPORT_SYMBOL(ht_create_irq);
+=======
+	irq_free_hwirq(irq);
+
+	kfree(cfg);
+}
+>>>>>>> v3.18
 EXPORT_SYMBOL(ht_destroy_irq);

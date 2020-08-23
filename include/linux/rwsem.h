@@ -13,8 +13,15 @@
 #include <linux/kernel.h>
 #include <linux/list.h>
 #include <linux/spinlock.h>
+<<<<<<< HEAD
 
 #include <linux/atomic.h>
+=======
+#include <linux/atomic.h>
+#ifdef CONFIG_RWSEM_SPIN_ON_OWNER
+#include <linux/osq_lock.h>
+#endif
+>>>>>>> v3.18
 
 struct rw_semaphore;
 
@@ -23,9 +30,23 @@ struct rw_semaphore;
 #else
 /* All arch specific implementations share the same struct */
 struct rw_semaphore {
+<<<<<<< HEAD
 	long			count;
 	raw_spinlock_t		wait_lock;
 	struct list_head	wait_list;
+=======
+	long count;
+	struct list_head wait_list;
+	raw_spinlock_t wait_lock;
+#ifdef CONFIG_RWSEM_SPIN_ON_OWNER
+	struct optimistic_spin_queue osq; /* spinner MCS lock */
+	/*
+	 * Write owner. Used as a speculative check to see
+	 * if the owner is running on the cpu.
+	 */
+	struct task_struct *owner;
+#endif
+>>>>>>> v3.18
 #ifdef CONFIG_DEBUG_LOCK_ALLOC
 	struct lockdep_map	dep_map;
 #endif
@@ -55,10 +76,24 @@ static inline int rwsem_is_locked(struct rw_semaphore *sem)
 # define __RWSEM_DEP_MAP_INIT(lockname)
 #endif
 
+<<<<<<< HEAD
 #define __RWSEM_INITIALIZER(name)			\
 	{ RWSEM_UNLOCKED_VALUE,				\
 	  __RAW_SPIN_LOCK_UNLOCKED(name.wait_lock),	\
 	  LIST_HEAD_INIT((name).wait_list)		\
+=======
+#ifdef CONFIG_RWSEM_SPIN_ON_OWNER
+#define __RWSEM_OPT_INIT(lockname) , .osq = OSQ_LOCK_UNLOCKED, .owner = NULL
+#else
+#define __RWSEM_OPT_INIT(lockname)
+#endif
+
+#define __RWSEM_INITIALIZER(name)				\
+	{ .count = RWSEM_UNLOCKED_VALUE,			\
+	  .wait_list = LIST_HEAD_INIT((name).wait_list),	\
+	  .wait_lock = __RAW_SPIN_LOCK_UNLOCKED(name.wait_lock)	\
+	  __RWSEM_OPT_INIT(name)				\
+>>>>>>> v3.18
 	  __RWSEM_DEP_MAP_INIT(name) }
 
 #define DECLARE_RWSEM(name) \
@@ -75,6 +110,20 @@ do {								\
 } while (0)
 
 /*
+<<<<<<< HEAD
+=======
+ * This is the same regardless of which rwsem implementation that is being used.
+ * It is just a heuristic meant to be called by somebody alreadying holding the
+ * rwsem to see if somebody from an incompatible type is wanting access to the
+ * lock.
+ */
+static inline int rwsem_is_contended(struct rw_semaphore *sem)
+{
+	return !list_empty(&sem->wait_list);
+}
+
+/*
+>>>>>>> v3.18
  * lock for reading
  */
 extern void down_read(struct rw_semaphore *sem);
@@ -121,7 +170,11 @@ extern void downgrade_write(struct rw_semaphore *sem);
  * static then another method for expressing nested locking is
  * the explicit definition of lock class keys and the use of
  * lockdep_set_class() at lock initialization time.
+<<<<<<< HEAD
  * See Documentation/lockdep-design.txt for more details.)
+=======
+ * See Documentation/locking/lockdep-design.txt for more details.)
+>>>>>>> v3.18
  */
 extern void down_read_nested(struct rw_semaphore *sem, int subclass);
 extern void down_write_nested(struct rw_semaphore *sem, int subclass);

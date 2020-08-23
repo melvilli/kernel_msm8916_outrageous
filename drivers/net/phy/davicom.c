@@ -72,7 +72,11 @@ static int dm9161_config_intr(struct phy_device *phydev)
 	if (temp < 0)
 		return temp;
 
+<<<<<<< HEAD
 	if(PHY_INTERRUPT_ENABLED == phydev->interrupts )
+=======
+	if (PHY_INTERRUPT_ENABLED == phydev->interrupts)
+>>>>>>> v3.18
 		temp &= ~(MII_DM9161_INTR_STOP);
 	else
 		temp |= MII_DM9161_INTR_STOP;

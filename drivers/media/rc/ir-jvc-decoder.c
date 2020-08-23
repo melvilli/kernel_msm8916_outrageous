@@ -140,7 +140,11 @@ again:
 			scancode = (bitrev8((data->bits >> 8) & 0xff) << 8) |
 				   (bitrev8((data->bits >> 0) & 0xff) << 0);
 			IR_dprintk(1, "JVC scancode 0x%04x\n", scancode);
+<<<<<<< HEAD
 			rc_keydown(dev, scancode, data->toggle);
+=======
+			rc_keydown(dev, RC_TYPE_JVC, scancode, data->toggle);
+>>>>>>> v3.18
 			data->first = false;
 			data->old_bits = data->bits;
 		} else if (data->bits == data->old_bits) {

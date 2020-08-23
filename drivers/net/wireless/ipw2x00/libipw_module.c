@@ -100,8 +100,12 @@ static inline void libipw_networks_free(struct libipw_device *ieee)
 	int i;
 
 	for (i = 0; i < MAX_NETWORK_COUNT; i++) {
+<<<<<<< HEAD
 		if (ieee->networks[i]->ibss_dfs)
 			kfree(ieee->networks[i]->ibss_dfs);
+=======
+		kfree(ieee->networks[i]->ibss_dfs);
+>>>>>>> v3.18
 		kfree(ieee->networks[i]);
 	}
 }

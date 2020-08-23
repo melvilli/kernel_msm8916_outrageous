@@ -31,6 +31,16 @@
 #include <linux/sysrq.h>
 #include <uapi/linux/serial_core.h>
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_SERIAL_CORE_CONSOLE
+#define uart_console(port) \
+	((port)->cons && (port)->cons->index == (port)->line)
+#else
+#define uart_console(port)      (0)
+#endif
+
+>>>>>>> v3.18
 struct uart_port;
 struct serial_struct;
 struct device;
@@ -59,8 +69,11 @@ struct uart_ops {
 	void		(*set_ldisc)(struct uart_port *, int new);
 	void		(*pm)(struct uart_port *, unsigned int state,
 			      unsigned int oldstate);
+<<<<<<< HEAD
 	int		(*set_wake)(struct uart_port *, unsigned int state);
 	void		(*wake_peer)(struct uart_port *);
+=======
+>>>>>>> v3.18
 
 	/*
 	 * Return a string describing the type of the port
@@ -107,6 +120,10 @@ struct uart_icount {
 };
 
 typedef unsigned int __bitwise__ upf_t;
+<<<<<<< HEAD
+=======
+typedef unsigned int __bitwise__ upstat_t;
+>>>>>>> v3.18
 
 struct uart_port {
 	spinlock_t		lock;			/* port lock */
@@ -117,6 +134,13 @@ struct uart_port {
 	void			(*set_termios)(struct uart_port *,
 				               struct ktermios *new,
 				               struct ktermios *old);
+<<<<<<< HEAD
+=======
+	int			(*startup)(struct uart_port *port);
+	void			(*shutdown)(struct uart_port *port);
+	void			(*throttle)(struct uart_port *port);
+	void			(*unthrottle)(struct uart_port *port);
+>>>>>>> v3.18
 	int			(*handle_irq)(struct uart_port *);
 	void			(*pm)(struct uart_port *, unsigned int state,
 				      unsigned int old);
@@ -147,6 +171,10 @@ struct uart_port {
 	unsigned long		sysrq;			/* sysrq timeout */
 #endif
 
+<<<<<<< HEAD
+=======
+	/* flags must be updated while holding port mutex */
+>>>>>>> v3.18
 	upf_t			flags;
 
 #define UPF_FOURPORT		((__force upf_t) (1 << 1))
@@ -182,6 +210,16 @@ struct uart_port {
 #define UPF_CHANGE_MASK		((__force upf_t) (0x17fff))
 #define UPF_USR_MASK		((__force upf_t) (UPF_SPD_MASK|UPF_LOW_LATENCY))
 
+<<<<<<< HEAD
+=======
+	/* status must be updated while holding port lock */
+	upstat_t		status;
+
+#define UPSTAT_CTS_ENABLE	((__force upstat_t) (1 << 0))
+#define UPSTAT_DCD_ENABLE	((__force upstat_t) (1 << 1))
+
+	int			hw_stopped;		/* sw-assisted CTS flow state */
+>>>>>>> v3.18
 	unsigned int		mctrl;			/* current modem ctrl settings */
 	unsigned int		timeout;		/* character-based timeout */
 	unsigned int		type;			/* port type */
@@ -194,6 +232,11 @@ struct uart_port {
 	unsigned char		suspended;
 	unsigned char		irq_wake;
 	unsigned char		unused[2];
+<<<<<<< HEAD
+=======
+	struct attribute_group	*attr_group;		/* port specific attributes */
+	const struct attribute_group **tty_groups;	/* all attributes (serial core use only) */
+>>>>>>> v3.18
 	void			*private_data;		/* generic platform data pointer */
 };
 
@@ -280,6 +323,31 @@ static inline int uart_poll_timeout(struct uart_port *port)
 /*
  * Console helpers.
  */
+<<<<<<< HEAD
+=======
+struct earlycon_device {
+	struct console *con;
+	struct uart_port port;
+	char options[16];		/* e.g., 115200n8 */
+	unsigned int baud;
+};
+int setup_earlycon(char *buf, const char *match,
+		   int (*setup)(struct earlycon_device *, const char *));
+
+extern int of_setup_earlycon(unsigned long addr,
+			     int (*setup)(struct earlycon_device *, const char *));
+
+#define EARLYCON_DECLARE(name, func) \
+static int __init name ## _setup_earlycon(char *buf) \
+{ \
+	return setup_earlycon(buf, __stringify(name), func); \
+} \
+early_param("earlycon", name ## _setup_earlycon);
+
+#define OF_EARLYCON_DECLARE(name, compat, fn)				\
+	_OF_DECLARE(earlycon, name, compat, fn, void *)
+
+>>>>>>> v3.18
 struct uart_port *uart_get_console(struct uart_port *ports, int nr,
 				   struct console *c);
 void uart_parse_options(char *options, int *baud, int *parity, int *bits,
@@ -318,11 +386,23 @@ int uart_resume_port(struct uart_driver *reg, struct uart_port *port);
 static inline int uart_tx_stopped(struct uart_port *port)
 {
 	struct tty_struct *tty = port->state->port.tty;
+<<<<<<< HEAD
 	if(tty->stopped || tty->hw_stopped)
+=======
+	if (tty->stopped || port->hw_stopped)
+>>>>>>> v3.18
 		return 1;
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+static inline bool uart_cts_enabled(struct uart_port *uport)
+{
+	return uport->status & UPSTAT_CTS_ENABLE;
+}
+
+>>>>>>> v3.18
 /*
  * The following are helper functions for the low level drivers.
  */

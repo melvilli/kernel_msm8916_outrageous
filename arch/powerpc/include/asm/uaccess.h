@@ -178,7 +178,11 @@ do {								\
 	long __pu_err;						\
 	__typeof__(*(ptr)) __user *__pu_addr = (ptr);		\
 	if (!is_kernel_addr((unsigned long)__pu_addr))		\
+<<<<<<< HEAD
 		might_sleep();					\
+=======
+		might_fault();					\
+>>>>>>> v3.18
 	__chk_user_ptr(ptr);					\
 	__put_user_size((x), __pu_addr, (size), __pu_err);	\
 	__pu_err;						\
@@ -188,7 +192,11 @@ do {								\
 ({									\
 	long __pu_err = -EFAULT;					\
 	__typeof__(*(ptr)) __user *__pu_addr = (ptr);			\
+<<<<<<< HEAD
 	might_sleep();							\
+=======
+	might_fault();							\
+>>>>>>> v3.18
 	if (access_ok(VERIFY_WRITE, __pu_addr, size))			\
 		__put_user_size((x), __pu_addr, (size), __pu_err);	\
 	__pu_err;							\
@@ -268,7 +276,11 @@ do {								\
 	const __typeof__(*(ptr)) __user *__gu_addr = (ptr);	\
 	__chk_user_ptr(ptr);					\
 	if (!is_kernel_addr((unsigned long)__gu_addr))		\
+<<<<<<< HEAD
 		might_sleep();					\
+=======
+		might_fault();					\
+>>>>>>> v3.18
 	__get_user_size(__gu_val, __gu_addr, (size), __gu_err);	\
 	(x) = (__typeof__(*(ptr)))__gu_val;			\
 	__gu_err;						\
@@ -282,7 +294,11 @@ do {								\
 	const __typeof__(*(ptr)) __user *__gu_addr = (ptr);	\
 	__chk_user_ptr(ptr);					\
 	if (!is_kernel_addr((unsigned long)__gu_addr))		\
+<<<<<<< HEAD
 		might_sleep();					\
+=======
+		might_fault();					\
+>>>>>>> v3.18
 	__get_user_size(__gu_val, __gu_addr, (size), __gu_err);	\
 	(x) = (__typeof__(*(ptr)))__gu_val;			\
 	__gu_err;						\
@@ -294,7 +310,11 @@ do {								\
 	long __gu_err = -EFAULT;					\
 	unsigned long  __gu_val = 0;					\
 	const __typeof__(*(ptr)) __user *__gu_addr = (ptr);		\
+<<<<<<< HEAD
 	might_sleep();							\
+=======
+	might_fault();							\
+>>>>>>> v3.18
 	if (access_ok(VERIFY_READ, __gu_addr, (size)))			\
 		__get_user_size(__gu_val, __gu_addr, (size), __gu_err);	\
 	(x) = (__typeof__(*(ptr)))__gu_val;				\
@@ -323,17 +343,41 @@ extern unsigned long __copy_tofrom_user(void __user *to,
 static inline unsigned long copy_from_user(void *to,
 		const void __user *from, unsigned long n)
 {
+<<<<<<< HEAD
 	if (likely(access_ok(VERIFY_READ, from, n)))
 		return __copy_tofrom_user((__force void __user *)to, from, n);
 	memset(to, 0, n);
+=======
+	unsigned long over;
+
+	if (access_ok(VERIFY_READ, from, n))
+		return __copy_tofrom_user((__force void __user *)to, from, n);
+	if ((unsigned long)from < TASK_SIZE) {
+		over = (unsigned long)from + n - TASK_SIZE;
+		return __copy_tofrom_user((__force void __user *)to, from,
+				n - over) + over;
+	}
+>>>>>>> v3.18
 	return n;
 }
 
 static inline unsigned long copy_to_user(void __user *to,
 		const void *from, unsigned long n)
 {
+<<<<<<< HEAD
 	if (access_ok(VERIFY_WRITE, to, n))
 		return __copy_tofrom_user(to, (__force void __user *)from, n);
+=======
+	unsigned long over;
+
+	if (access_ok(VERIFY_WRITE, to, n))
+		return __copy_tofrom_user(to, (__force void __user *)from, n);
+	if ((unsigned long)to < TASK_SIZE) {
+		over = (unsigned long)to + n - TASK_SIZE;
+		return __copy_tofrom_user(to, (__force void __user *)from,
+				n - over) + over;
+	}
+>>>>>>> v3.18
 	return n;
 }
 
@@ -406,14 +450,22 @@ static inline unsigned long __copy_to_user_inatomic(void __user *to,
 static inline unsigned long __copy_from_user(void *to,
 		const void __user *from, unsigned long size)
 {
+<<<<<<< HEAD
 	might_sleep();
+=======
+	might_fault();
+>>>>>>> v3.18
 	return __copy_from_user_inatomic(to, from, size);
 }
 
 static inline unsigned long __copy_to_user(void __user *to,
 		const void *from, unsigned long size)
 {
+<<<<<<< HEAD
 	might_sleep();
+=======
+	might_fault();
+>>>>>>> v3.18
 	return __copy_to_user_inatomic(to, from, size);
 }
 
@@ -421,9 +473,19 @@ extern unsigned long __clear_user(void __user *addr, unsigned long size);
 
 static inline unsigned long clear_user(void __user *addr, unsigned long size)
 {
+<<<<<<< HEAD
 	might_sleep();
 	if (likely(access_ok(VERIFY_WRITE, addr, size)))
 		return __clear_user(addr, size);
+=======
+	might_fault();
+	if (likely(access_ok(VERIFY_WRITE, addr, size)))
+		return __clear_user(addr, size);
+	if ((unsigned long)addr < TASK_SIZE) {
+		unsigned long over = (unsigned long)addr + size - TASK_SIZE;
+		return __clear_user(addr, size - over) + over;
+	}
+>>>>>>> v3.18
 	return size;
 }
 

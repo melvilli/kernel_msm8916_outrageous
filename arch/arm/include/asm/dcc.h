@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2010, 2014 The Linux Foundation. All rights reserved.
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -21,7 +25,10 @@ static inline u32 __dcc_getstatus(void)
 	return __ret;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 static inline char __dcc_getchar(void)
 {
 	char __c;

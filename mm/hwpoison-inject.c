@@ -20,8 +20,11 @@ static int hwpoison_inject(void *data, u64 val)
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
 
+<<<<<<< HEAD
 	if (!hwpoison_filter_enable)
 		goto inject;
+=======
+>>>>>>> v3.18
 	if (!pfn_valid(pfn))
 		return -ENXIO;
 
@@ -33,6 +36,12 @@ static int hwpoison_inject(void *data, u64 val)
 	if (!get_page_unless_zero(hpage))
 		return 0;
 
+<<<<<<< HEAD
+=======
+	if (!hwpoison_filter_enable)
+		goto inject;
+
+>>>>>>> v3.18
 	if (!PageLRU(p) && !PageHuge(p))
 		shake_page(p, 0);
 	/*
@@ -54,7 +63,11 @@ static int hwpoison_inject(void *data, u64 val)
 		return 0;
 
 inject:
+<<<<<<< HEAD
 	printk(KERN_INFO "Injecting memory failure at pfn %lx\n", pfn);
+=======
+	pr_info("Injecting memory failure at pfn %#lx\n", pfn);
+>>>>>>> v3.18
 	return memory_failure(pfn, 18, MF_COUNT_INCREASED);
 }
 
@@ -71,8 +84,12 @@ DEFINE_SIMPLE_ATTRIBUTE(unpoison_fops, NULL, hwpoison_unpoison, "%lli\n");
 
 static void pfn_inject_exit(void)
 {
+<<<<<<< HEAD
 	if (hwpoison_dir)
 		debugfs_remove_recursive(hwpoison_dir);
+=======
+	debugfs_remove_recursive(hwpoison_dir);
+>>>>>>> v3.18
 }
 
 static int pfn_inject_init(void)
@@ -88,12 +105,20 @@ static int pfn_inject_init(void)
 	 * hardware status change, hence do not require hardware support.
 	 * They are mainly for testing hwpoison in software level.
 	 */
+<<<<<<< HEAD
 	dentry = debugfs_create_file("corrupt-pfn", 0600, hwpoison_dir,
+=======
+	dentry = debugfs_create_file("corrupt-pfn", 0200, hwpoison_dir,
+>>>>>>> v3.18
 					  NULL, &hwpoison_fops);
 	if (!dentry)
 		goto fail;
 
+<<<<<<< HEAD
 	dentry = debugfs_create_file("unpoison-pfn", 0600, hwpoison_dir,
+=======
+	dentry = debugfs_create_file("unpoison-pfn", 0200, hwpoison_dir,
+>>>>>>> v3.18
 				     NULL, &unpoison_fops);
 	if (!dentry)
 		goto fail;

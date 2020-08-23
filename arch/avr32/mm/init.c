@@ -100,6 +100,7 @@ void __init paging_init(void)
 
 void __init mem_init(void)
 {
+<<<<<<< HEAD
 	int codesize, reservedpages, datasize, initsize;
 	int nid, i;
 
@@ -142,16 +143,36 @@ void __init mem_init(void)
 		reservedpages << (PAGE_SHIFT - 10),
 		datasize >> 10,
 		initsize >> 10);
+=======
+	pg_data_t *pgdat;
+
+	high_memory = NULL;
+	for_each_online_pgdat(pgdat)
+		high_memory = max_t(void *, high_memory,
+				    __va(pgdat_end_pfn(pgdat) << PAGE_SHIFT));
+
+	set_max_mapnr(MAP_NR(high_memory));
+	free_all_bootmem();
+	mem_init_print_info(NULL);
+>>>>>>> v3.18
 }
 
 void free_initmem(void)
 {
+<<<<<<< HEAD
 	free_initmem_default(0);
+=======
+	free_initmem_default(-1);
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_BLK_DEV_INITRD
 void free_initrd_mem(unsigned long start, unsigned long end)
 {
+<<<<<<< HEAD
 	free_reserved_area(start, end, 0, "initrd");
+=======
+	free_reserved_area((void *)start, (void *)end, -1, "initrd");
+>>>>>>> v3.18
 }
 #endif

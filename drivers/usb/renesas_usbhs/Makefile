@@ -4,7 +4,11 @@
 
 obj-$(CONFIG_USB_RENESAS_USBHS)	+= renesas_usbhs.o
 
+<<<<<<< HEAD
 renesas_usbhs-y			:= common.o mod.o pipe.o fifo.o
+=======
+renesas_usbhs-y			:= common.o mod.o pipe.o fifo.o rcar2.o
+>>>>>>> v3.18
 
 ifneq ($(CONFIG_USB_RENESAS_USBHS_HCD),)
 	renesas_usbhs-y		+= mod_host.o

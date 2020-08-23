@@ -21,6 +21,11 @@ $(obj)/bzImage: $(obj)/compressed/vmlinux FORCE
 $(obj)/compressed/vmlinux: FORCE
 	$(Q)$(MAKE) $(build)=$(obj)/compressed $@
 
+<<<<<<< HEAD
 install: $(CONFIGURE) $(obj)/image
 	sh -x  $(srctree)/$(obj)/install.sh $(KERNELRELEASE) $(obj)/image \
+=======
+install: $(CONFIGURE) $(obj)/bzImage
+	sh -x  $(srctree)/$(obj)/install.sh $(KERNELRELEASE) $(obj)/bzImage \
+>>>>>>> v3.18
 	      System.map "$(INSTALL_PATH)"

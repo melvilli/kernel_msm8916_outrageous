@@ -27,13 +27,21 @@ void hfs_bnode_read(struct hfs_bnode *node, void *buf, int off, int len)
 	pagep = node->page + (off >> PAGE_CACHE_SHIFT);
 	off &= ~PAGE_CACHE_MASK;
 
+<<<<<<< HEAD
 	l = min(len, (int)PAGE_CACHE_SIZE - off);
+=======
+	l = min_t(int, len, PAGE_CACHE_SIZE - off);
+>>>>>>> v3.18
 	memcpy(buf, kmap(*pagep) + off, l);
 	kunmap(*pagep);
 
 	while ((len -= l) != 0) {
 		buf += l;
+<<<<<<< HEAD
 		l = min(len, (int)PAGE_CACHE_SIZE);
+=======
+		l = min_t(int, len, PAGE_CACHE_SIZE);
+>>>>>>> v3.18
 		memcpy(buf, kmap(*++pagep), l);
 		kunmap(*pagep);
 	}
@@ -80,14 +88,22 @@ void hfs_bnode_write(struct hfs_bnode *node, void *buf, int off, int len)
 	pagep = node->page + (off >> PAGE_CACHE_SHIFT);
 	off &= ~PAGE_CACHE_MASK;
 
+<<<<<<< HEAD
 	l = min(len, (int)PAGE_CACHE_SIZE - off);
+=======
+	l = min_t(int, len, PAGE_CACHE_SIZE - off);
+>>>>>>> v3.18
 	memcpy(kmap(*pagep) + off, buf, l);
 	set_page_dirty(*pagep);
 	kunmap(*pagep);
 
 	while ((len -= l) != 0) {
 		buf += l;
+<<<<<<< HEAD
 		l = min(len, (int)PAGE_CACHE_SIZE);
+=======
+		l = min_t(int, len, PAGE_CACHE_SIZE);
+>>>>>>> v3.18
 		memcpy(kmap(*++pagep), buf, l);
 		set_page_dirty(*pagep);
 		kunmap(*pagep);
@@ -110,13 +126,21 @@ void hfs_bnode_clear(struct hfs_bnode *node, int off, int len)
 	pagep = node->page + (off >> PAGE_CACHE_SHIFT);
 	off &= ~PAGE_CACHE_MASK;
 
+<<<<<<< HEAD
 	l = min(len, (int)PAGE_CACHE_SIZE - off);
+=======
+	l = min_t(int, len, PAGE_CACHE_SIZE - off);
+>>>>>>> v3.18
 	memset(kmap(*pagep) + off, 0, l);
 	set_page_dirty(*pagep);
 	kunmap(*pagep);
 
 	while ((len -= l) != 0) {
+<<<<<<< HEAD
 		l = min(len, (int)PAGE_CACHE_SIZE);
+=======
+		l = min_t(int, len, PAGE_CACHE_SIZE);
+>>>>>>> v3.18
 		memset(kmap(*++pagep), 0, l);
 		set_page_dirty(*pagep);
 		kunmap(*pagep);
@@ -142,14 +166,22 @@ void hfs_bnode_copy(struct hfs_bnode *dst_node, int dst,
 	dst &= ~PAGE_CACHE_MASK;
 
 	if (src == dst) {
+<<<<<<< HEAD
 		l = min(len, (int)PAGE_CACHE_SIZE - src);
+=======
+		l = min_t(int, len, PAGE_CACHE_SIZE - src);
+>>>>>>> v3.18
 		memcpy(kmap(*dst_page) + src, kmap(*src_page) + src, l);
 		kunmap(*src_page);
 		set_page_dirty(*dst_page);
 		kunmap(*dst_page);
 
 		while ((len -= l) != 0) {
+<<<<<<< HEAD
 			l = min(len, (int)PAGE_CACHE_SIZE);
+=======
+			l = min_t(int, len, PAGE_CACHE_SIZE);
+>>>>>>> v3.18
 			memcpy(kmap(*++dst_page), kmap(*++src_page), l);
 			kunmap(*src_page);
 			set_page_dirty(*dst_page);
@@ -251,7 +283,11 @@ void hfs_bnode_move(struct hfs_bnode *node, int dst, int src, int len)
 		dst &= ~PAGE_CACHE_MASK;
 
 		if (src == dst) {
+<<<<<<< HEAD
 			l = min(len, (int)PAGE_CACHE_SIZE - src);
+=======
+			l = min_t(int, len, PAGE_CACHE_SIZE - src);
+>>>>>>> v3.18
 			memmove(kmap(*dst_page) + src,
 				kmap(*src_page) + src, l);
 			kunmap(*src_page);
@@ -259,7 +295,11 @@ void hfs_bnode_move(struct hfs_bnode *node, int dst, int src, int len)
 			kunmap(*dst_page);
 
 			while ((len -= l) != 0) {
+<<<<<<< HEAD
 				l = min(len, (int)PAGE_CACHE_SIZE);
+=======
+				l = min_t(int, len, PAGE_CACHE_SIZE);
+>>>>>>> v3.18
 				memmove(kmap(*++dst_page),
 					kmap(*++src_page), l);
 				kunmap(*src_page);
@@ -386,9 +426,14 @@ struct hfs_bnode *hfs_bnode_findhash(struct hfs_btree *tree, u32 cnid)
 	struct hfs_bnode *node;
 
 	if (cnid >= tree->node_count) {
+<<<<<<< HEAD
 		pr_err("request for non-existent node "
 				"%d in B*Tree\n",
 			cnid);
+=======
+		pr_err("request for non-existent node %d in B*Tree\n",
+		       cnid);
+>>>>>>> v3.18
 		return NULL;
 	}
 
@@ -409,9 +454,14 @@ static struct hfs_bnode *__hfs_bnode_create(struct hfs_btree *tree, u32 cnid)
 	loff_t off;
 
 	if (cnid >= tree->node_count) {
+<<<<<<< HEAD
 		pr_err("request for non-existent node "
 				"%d in B*Tree\n",
 			cnid);
+=======
+		pr_err("request for non-existent node %d in B*Tree\n",
+		       cnid);
+>>>>>>> v3.18
 		return NULL;
 	}
 
@@ -456,6 +506,10 @@ static struct hfs_bnode *__hfs_bnode_create(struct hfs_btree *tree, u32 cnid)
 			page_cache_release(page);
 			goto fail;
 		}
+<<<<<<< HEAD
+=======
+		page_cache_release(page);
+>>>>>>> v3.18
 		node->page[i] = page;
 	}
 
@@ -567,11 +621,19 @@ node_error:
 
 void hfs_bnode_free(struct hfs_bnode *node)
 {
+<<<<<<< HEAD
+=======
+#if 0
+>>>>>>> v3.18
 	int i;
 
 	for (i = 0; i < node->tree->pages_per_bnode; i++)
 		if (node->page[i])
 			page_cache_release(node->page[i]);
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 	kfree(node);
 }
 
@@ -599,7 +661,11 @@ struct hfs_bnode *hfs_bnode_create(struct hfs_btree *tree, u32 num)
 
 	pagep = node->page;
 	memset(kmap(*pagep) + node->page_offset, 0,
+<<<<<<< HEAD
 	       min((int)PAGE_CACHE_SIZE, (int)tree->node_size));
+=======
+	       min_t(int, PAGE_CACHE_SIZE, tree->node_size));
+>>>>>>> v3.18
 	set_page_dirty(*pagep);
 	kunmap(*pagep);
 	for (i = 1; i < tree->pages_per_bnode; i++) {
@@ -645,8 +711,13 @@ void hfs_bnode_put(struct hfs_bnode *node)
 		if (test_bit(HFS_BNODE_DELETED, &node->flags)) {
 			hfs_bnode_unhash(node);
 			spin_unlock(&tree->hash_lock);
+<<<<<<< HEAD
 			hfs_bnode_clear(node, 0,
 				PAGE_CACHE_SIZE * tree->pages_per_bnode);
+=======
+			if (hfs_bnode_need_zeroout(tree))
+				hfs_bnode_clear(node, 0, tree->node_size);
+>>>>>>> v3.18
 			hfs_bmap_free(node);
 			hfs_bnode_free(node);
 			return;
@@ -655,3 +726,19 @@ void hfs_bnode_put(struct hfs_bnode *node)
 	}
 }
 
+<<<<<<< HEAD
+=======
+/*
+ * Unused nodes have to be zeroed if this is the catalog tree and
+ * a corresponding flag in the volume header is set.
+ */
+bool hfs_bnode_need_zeroout(struct hfs_btree *tree)
+{
+	struct super_block *sb = tree->inode->i_sb;
+	struct hfsplus_sb_info *sbi = HFSPLUS_SB(sb);
+	const u32 volume_attr = be32_to_cpu(sbi->s_vhdr->attributes);
+
+	return tree->cnid == HFSPLUS_CAT_CNID &&
+		volume_attr & HFSPLUS_VOL_UNUSED_NODE_FIX;
+}
+>>>>>>> v3.18

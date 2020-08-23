@@ -26,7 +26,11 @@ static int dvb_usb_v2_generic_io(struct dvb_usb_device *d,
 {
 	int ret, actual_length;
 
+<<<<<<< HEAD
 	if (!d || !wbuf || !wlen || !d->props->generic_bulk_ctrl_endpoint ||
+=======
+	if (!wbuf || !wlen || !d->props->generic_bulk_ctrl_endpoint ||
+>>>>>>> v3.18
 			!d->props->generic_bulk_ctrl_endpoint_response) {
 		dev_dbg(&d->udev->dev, "%s: failed=%d\n", __func__, -EINVAL);
 		return -EINVAL;

@@ -51,6 +51,7 @@ enum {
 	NvSubCtxSurf2D  = 0,
 	NvSubSw		= 1,
 	NvSubImageBlit  = 2,
+<<<<<<< HEAD
 	NvSub2D		= 3,
 	NvSubGdiRect    = 3,
 	NvSubCopy	= 4,
@@ -81,6 +82,23 @@ enum {
 	NvEvoFB32	= 0x01000002,
 	NvEvoVRAM_LP	= 0x01000003,
 	NvEvoSync	= 0xcafe0000
+=======
+	NvSubGdiRect    = 3,
+
+	NvSub2D		= 3, /* DO NOT CHANGE - hardcoded for kepler gr fifo */
+	NvSubCopy	= 4, /* DO NOT CHANGE - hardcoded for kepler gr fifo */
+	FermiSw		= 5, /* DO NOT CHANGE (well.. 6/7 will work...) */
+};
+
+/* Object handles - for stuff that's doesn't use handle == oclass. */
+enum {
+	NvDmaFB		= 0x80000002,
+	NvDmaTT		= 0x80000003,
+	NvNotify0       = 0x80000006,
+	NvSema		= 0x8000000f,
+	NvEvoSema0	= 0x80000010,
+	NvEvoSema1	= 0x80000011,
+>>>>>>> v3.18
 };
 
 #define NV_MEMORY_TO_MEMORY_FORMAT                                    0x00000039
@@ -153,9 +171,15 @@ BEGIN_IMC0(struct nouveau_channel *chan, int subc, int mthd, u16 data)
 }
 
 #define WRITE_PUT(val) do {                                                    \
+<<<<<<< HEAD
 	DRM_MEMORYBARRIER();                                                   \
 	nouveau_bo_rd32(chan->push.buffer, 0);                                 \
 	nv_wo32(chan->object, chan->user_put, ((val) << 2) + chan->push.vma.offset);  \
+=======
+	mb();                                                   \
+	nouveau_bo_rd32(chan->push.buffer, 0);                                 \
+	nvif_wr32(chan, chan->user_put, ((val) << 2) + chan->push.vma.offset); \
+>>>>>>> v3.18
 } while (0)
 
 static inline void
@@ -194,7 +218,10 @@ WIND_RING(struct nouveau_channel *chan)
 #define NV84_SUBCHAN_UEVENT                                          0x00000020
 #define NV84_SUBCHAN_WRCACHE_FLUSH                                   0x00000024
 #define NV10_SUBCHAN_REF_CNT                                         0x00000050
+<<<<<<< HEAD
 #define NVSW_SUBCHAN_PAGE_FLIP                                       0x00000054
+=======
+>>>>>>> v3.18
 #define NV11_SUBCHAN_DMA_SEMAPHORE                                   0x00000060
 #define NV11_SUBCHAN_SEMAPHORE_OFFSET                                0x00000064
 #define NV11_SUBCHAN_SEMAPHORE_ACQUIRE                               0x00000068

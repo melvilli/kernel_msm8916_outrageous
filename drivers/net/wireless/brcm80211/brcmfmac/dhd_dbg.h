@@ -18,6 +18,7 @@
 #define _BRCMF_DBG_H_
 
 /* message levels */
+<<<<<<< HEAD
 #define BRCMF_TRACE_VAL	0x00000002
 #define BRCMF_INFO_VAL	0x00000004
 #define BRCMF_DATA_VAL	0x00000008
@@ -35,6 +36,27 @@
 #define BRCMF_CONN_VAL	0x00008000
 #define BRCMF_CDC_VAL	0x00010000
 #define BRCMF_SDIO_VAL	0x00020000
+=======
+#define BRCMF_TRACE_VAL		0x00000002
+#define BRCMF_INFO_VAL		0x00000004
+#define BRCMF_DATA_VAL		0x00000008
+#define BRCMF_CTL_VAL		0x00000010
+#define BRCMF_TIMER_VAL		0x00000020
+#define BRCMF_HDRS_VAL		0x00000040
+#define BRCMF_BYTES_VAL		0x00000080
+#define BRCMF_INTR_VAL		0x00000100
+#define BRCMF_GLOM_VAL		0x00000200
+#define BRCMF_EVENT_VAL		0x00000400
+#define BRCMF_BTA_VAL		0x00000800
+#define BRCMF_FIL_VAL		0x00001000
+#define BRCMF_USB_VAL		0x00002000
+#define BRCMF_SCAN_VAL		0x00004000
+#define BRCMF_CONN_VAL		0x00008000
+#define BRCMF_BCDC_VAL		0x00010000
+#define BRCMF_SDIO_VAL		0x00020000
+#define BRCMF_MSGBUF_VAL	0x00040000
+#define BRCMF_PCIE_VAL		0x00080000
+>>>>>>> v3.18
 
 /* set default print format */
 #undef pr_fmt
@@ -100,6 +122,7 @@ do {									\
 
 extern int brcmf_msg_level;
 
+<<<<<<< HEAD
 /*
  * hold counter variables used in brcmfmac sdio driver.
  */
@@ -160,6 +183,8 @@ struct brcmf_fws_stats {
 	u32 txs_tossed;
 };
 
+=======
+>>>>>>> v3.18
 struct brcmf_pub;
 #ifdef DEBUG
 void brcmf_debugfs_init(void);
@@ -167,10 +192,15 @@ void brcmf_debugfs_exit(void);
 int brcmf_debugfs_attach(struct brcmf_pub *drvr);
 void brcmf_debugfs_detach(struct brcmf_pub *drvr);
 struct dentry *brcmf_debugfs_get_devdir(struct brcmf_pub *drvr);
+<<<<<<< HEAD
 void brcmf_debugfs_create_sdio_count(struct brcmf_pub *drvr,
 				     struct brcmf_sdio_count *sdcnt);
 void brcmf_debugfs_create_fws_stats(struct brcmf_pub *drvr,
 				    struct brcmf_fws_stats *stats);
+=======
+int brcmf_debugfs_add_entry(struct brcmf_pub *drvr, const char *fn,
+			    int (*read_fn)(struct seq_file *seq, void *data));
+>>>>>>> v3.18
 #else
 static inline void brcmf_debugfs_init(void)
 {
@@ -185,9 +215,17 @@ static inline int brcmf_debugfs_attach(struct brcmf_pub *drvr)
 static inline void brcmf_debugfs_detach(struct brcmf_pub *drvr)
 {
 }
+<<<<<<< HEAD
 static inline void brcmf_debugfs_create_fws_stats(struct brcmf_pub *drvr,
 						  struct brcmf_fws_stats *stats)
 {
+=======
+static inline
+int brcmf_debugfs_add_entry(struct brcmf_pub *drvr, const char *fn,
+			    int (*read_fn)(struct seq_file *seq, void *data))
+{
+	return 0;
+>>>>>>> v3.18
 }
 #endif
 

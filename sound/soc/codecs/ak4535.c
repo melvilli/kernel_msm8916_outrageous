@@ -388,6 +388,7 @@ static int ak4535_resume(struct snd_soc_codec *codec)
 
 static int ak4535_probe(struct snd_soc_codec *codec)
 {
+<<<<<<< HEAD
 	struct ak4535_priv *ak4535 = snd_soc_codec_get_drvdata(codec);
 	int ret;
 
@@ -397,6 +398,8 @@ static int ak4535_probe(struct snd_soc_codec *codec)
 		dev_err(codec->dev, "Failed to set cache I/O: %d\n", ret);
 		return ret;
 	}
+=======
+>>>>>>> v3.18
 	/* power on device */
 	ak4535_set_bias_level(codec, SND_SOC_BIAS_STANDBY);
 

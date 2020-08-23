@@ -96,7 +96,11 @@ static const struct hc_driver mv_ehci_hc_driver = {
 	 * generic hardware linkage
 	 */
 	.irq = ehci_irq,
+<<<<<<< HEAD
 	.flags = HCD_MEMORY | HCD_USB2,
+=======
+	.flags = HCD_MEMORY | HCD_USB2 | HCD_BH,
+>>>>>>> v3.18
 
 	/*
 	 * basic lifecycle operations
@@ -131,7 +135,11 @@ static const struct hc_driver mv_ehci_hc_driver = {
 
 static int mv_ehci_probe(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct mv_usb_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct mv_usb_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	struct usb_hcd *hcd;
 	struct ehci_hcd *ehci;
 	struct ehci_hcd_mv *ehci_mv;
@@ -166,13 +174,18 @@ static int mv_ehci_probe(struct platform_device *pdev)
 	if (IS_ERR(ehci_mv->clk)) {
 		dev_err(&pdev->dev, "error getting clock\n");
 		retval = PTR_ERR(ehci_mv->clk);
+<<<<<<< HEAD
 		goto err_clear_drvdata;
+=======
+		goto err_put_hcd;
+>>>>>>> v3.18
 	}
 
 	r = platform_get_resource_byname(pdev, IORESOURCE_MEM, "phyregs");
 	if (r == NULL) {
 		dev_err(&pdev->dev, "no phy I/O memory resource defined\n");
 		retval = -ENODEV;
+<<<<<<< HEAD
 		goto err_clear_drvdata;
 	}
 
@@ -182,12 +195,22 @@ static int mv_ehci_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "failed to map phy I/O memory\n");
 		retval = -EFAULT;
 		goto err_clear_drvdata;
+=======
+		goto err_put_hcd;
+	}
+
+	ehci_mv->phy_regs = devm_ioremap_resource(&pdev->dev, r);
+	if (IS_ERR(ehci_mv->phy_regs)) {
+		retval = PTR_ERR(ehci_mv->phy_regs);
+		goto err_put_hcd;
+>>>>>>> v3.18
 	}
 
 	r = platform_get_resource_byname(pdev, IORESOURCE_MEM, "capregs");
 	if (!r) {
 		dev_err(&pdev->dev, "no I/O memory resource defined\n");
 		retval = -ENODEV;
+<<<<<<< HEAD
 		goto err_clear_drvdata;
 	}
 
@@ -197,12 +220,25 @@ static int mv_ehci_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "failed to map I/O memory\n");
 		retval = -EFAULT;
 		goto err_clear_drvdata;
+=======
+		goto err_put_hcd;
+	}
+
+	ehci_mv->cap_regs = devm_ioremap_resource(&pdev->dev, r);
+	if (IS_ERR(ehci_mv->cap_regs)) {
+		retval = PTR_ERR(ehci_mv->cap_regs);
+		goto err_put_hcd;
+>>>>>>> v3.18
 	}
 
 	retval = mv_ehci_enable(ehci_mv);
 	if (retval) {
 		dev_err(&pdev->dev, "init phy error %d\n", retval);
+<<<<<<< HEAD
 		goto err_clear_drvdata;
+=======
+		goto err_put_hcd;
+>>>>>>> v3.18
 	}
 
 	offset = readl(ehci_mv->cap_regs) & CAPLENGTH_MASK;
@@ -257,13 +293,21 @@ static int mv_ehci_probe(struct platform_device *pdev)
 				"failed to add hcd with err %d\n", retval);
 			goto err_set_vbus;
 		}
+<<<<<<< HEAD
+=======
+		device_wakeup_enable(hcd->self.controller);
+>>>>>>> v3.18
 	}
 
 	if (pdata->private_init)
 		pdata->private_init(ehci_mv->op_regs, ehci_mv->phy_regs);
 
 	dev_info(&pdev->dev,
+<<<<<<< HEAD
 		 "successful find EHCI device with regs 0x%pK irq %d"
+=======
+		 "successful find EHCI device with regs 0x%p irq %d"
+>>>>>>> v3.18
 		 " working in %s mode\n", hcd->regs, hcd->irq,
 		 ehci_mv->mode == MV_USB_MODE_OTG ? "OTG" : "Host");
 
@@ -274,8 +318,11 @@ err_set_vbus:
 		pdata->set_vbus(0);
 err_disable_clk:
 	mv_ehci_disable(ehci_mv);
+<<<<<<< HEAD
 err_clear_drvdata:
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 err_put_hcd:
 	usb_put_hcd(hcd);
 
@@ -300,8 +347,11 @@ static int mv_ehci_remove(struct platform_device *pdev)
 		mv_ehci_disable(ehci_mv);
 	}
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 	usb_put_hcd(hcd);
 
 	return 0;

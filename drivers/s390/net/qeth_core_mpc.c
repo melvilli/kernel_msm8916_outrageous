@@ -249,10 +249,18 @@ static struct ipa_cmd_names qeth_ipa_cmd_names[] = {
 	{IPA_CMD_DELIP,		"delip"},
 	{IPA_CMD_SETADAPTERPARMS, "setadapterparms"},
 	{IPA_CMD_SET_DIAG_ASS,	"set_diag_ass"},
+<<<<<<< HEAD
+=======
+	{IPA_CMD_SETBRIDGEPORT,	"set_bridge_port"},
+>>>>>>> v3.18
 	{IPA_CMD_CREATE_ADDR,	"create_addr"},
 	{IPA_CMD_DESTROY_ADDR,	"destroy_addr"},
 	{IPA_CMD_REGISTER_LOCAL_ADDR,	"register_local_addr"},
 	{IPA_CMD_UNREGISTER_LOCAL_ADDR,	"unregister_local_addr"},
+<<<<<<< HEAD
+=======
+	{IPA_CMD_ADDRESS_CHANGE_NOTIF, "address_change_notification"},
+>>>>>>> v3.18
 	{IPA_CMD_UNKNOWN,	"unknown"},
 };
 

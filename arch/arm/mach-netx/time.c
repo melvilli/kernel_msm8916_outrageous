@@ -28,6 +28,12 @@
 #include <asm/mach/time.h>
 #include <mach/netx-regs.h>
 
+<<<<<<< HEAD
+=======
+#define NETX_CLOCK_FREQ 100000000
+#define NETX_LATCH DIV_ROUND_CLOSEST(NETX_CLOCK_FREQ, HZ)
+
+>>>>>>> v3.18
 #define TIMER_CLOCKEVENT 0
 #define TIMER_CLOCKSOURCE 1
 
@@ -41,7 +47,11 @@ static void netx_set_mode(enum clock_event_mode mode,
 
 	switch (mode) {
 	case CLOCK_EVT_MODE_PERIODIC:
+<<<<<<< HEAD
 		writel(LATCH, NETX_GPIO_COUNTER_MAX(TIMER_CLOCKEVENT));
+=======
+		writel(NETX_LATCH, NETX_GPIO_COUNTER_MAX(TIMER_CLOCKEVENT));
+>>>>>>> v3.18
 		tmode = NETX_GPIO_COUNTER_CTRL_RST_EN |
 			NETX_GPIO_COUNTER_CTRL_IRQ_EN |
 			NETX_GPIO_COUNTER_CTRL_RUN;
@@ -99,7 +109,11 @@ netx_timer_interrupt(int irq, void *dev_id)
 
 static struct irqaction netx_timer_irq = {
 	.name		= "NetX Timer Tick",
+<<<<<<< HEAD
 	.flags		= IRQF_DISABLED | IRQF_TIMER | IRQF_IRQPOLL,
+=======
+	.flags		= IRQF_TIMER | IRQF_IRQPOLL,
+>>>>>>> v3.18
 	.handler	= netx_timer_interrupt,
 };
 
@@ -114,7 +128,11 @@ void __init netx_timer_init(void)
 	/* Reset the timer value to zero */
 	writel(0, NETX_GPIO_COUNTER_CURRENT(0));
 
+<<<<<<< HEAD
 	writel(LATCH, NETX_GPIO_COUNTER_MAX(0));
+=======
+	writel(NETX_LATCH, NETX_GPIO_COUNTER_MAX(0));
+>>>>>>> v3.18
 
 	/* acknowledge interrupt */
 	writel(COUNTER_BIT(0), NETX_GPIO_IRQ);
@@ -137,11 +155,19 @@ void __init netx_timer_init(void)
 			NETX_GPIO_COUNTER_CTRL(TIMER_CLOCKSOURCE));
 
 	clocksource_mmio_init(NETX_GPIO_COUNTER_CURRENT(TIMER_CLOCKSOURCE),
+<<<<<<< HEAD
 		"netx_timer", CLOCK_TICK_RATE, 200, 32, clocksource_mmio_readl_up);
+=======
+		"netx_timer", NETX_CLOCK_FREQ, 200, 32, clocksource_mmio_readl_up);
+>>>>>>> v3.18
 
 	/* with max_delta_ns >= delta2ns(0x800) the system currently runs fine.
 	 * Adding some safety ... */
 	netx_clockevent.cpumask = cpumask_of(0);
+<<<<<<< HEAD
 	clockevents_config_and_register(&netx_clockevent, CLOCK_TICK_RATE,
+=======
+	clockevents_config_and_register(&netx_clockevent, NETX_CLOCK_FREQ,
+>>>>>>> v3.18
 					0xa00, 0xfffffffe);
 }

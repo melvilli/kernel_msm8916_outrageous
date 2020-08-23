@@ -46,6 +46,11 @@
 #include <linux/suspend.h>
 #include <linux/cpu.h>
 #include <linux/compat.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 #include <asm/prom.h>
 #include <asm/machdep.h>
 #include <asm/io.h>

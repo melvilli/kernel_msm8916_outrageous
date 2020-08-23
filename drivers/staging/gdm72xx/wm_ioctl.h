@@ -11,18 +11,31 @@
  * GNU General Public License for more details.
  */
 
+<<<<<<< HEAD
 #if !defined(WM_IOCTL_H_20080714)
 #define WM_IOCTL_H_20080714
+=======
+#ifndef __GDM72XX_WM_IOCTL_H__
+#define __GDM72XX_WM_IOCTL_H__
+
+>>>>>>> v3.18
 #if !defined(__KERNEL__)
 #include <net/if.h>
 #endif
 
 #define NETLINK_WIMAX	31
 
+<<<<<<< HEAD
 #define SIOCWMIOCTL			SIOCDEVPRIVATE
 
 #define SIOCG_DATA			0x8D10
 #define SIOCS_DATA			0x8D11
+=======
+#define SIOCWMIOCTL	SIOCDEVPRIVATE
+
+#define SIOCG_DATA	0x8D10
+#define SIOCS_DATA	0x8D11
+>>>>>>> v3.18
 
 enum {
 	SIOC_DATA_FSM,
@@ -34,7 +47,11 @@ enum {
 	SIOC_DATA_END
 };
 
+<<<<<<< HEAD
 #define SIOC_DATA_MAX			16
+=======
+#define SIOC_DATA_MAX	16
+>>>>>>> v3.18
 
 /* FSM */
 enum {
@@ -67,6 +84,7 @@ enum {
 };
 
 struct fsm_s {
+<<<<<<< HEAD
 	int		m_status;	/*main status*/
 	int		c_status;	/*connection status*/
 	int		d_status;	/*oma-dm status*/
@@ -74,16 +92,31 @@ struct fsm_s {
 
 struct data_s {
 	int		size;
+=======
+	int	m_status;	/*main status*/
+	int	c_status;	/*connection status*/
+	int	d_status;	/*oma-dm status*/
+};
+
+struct data_s {
+	int	size;
+>>>>>>> v3.18
 	void	*buf;
 };
 
 struct wm_req_s {
 	union {
+<<<<<<< HEAD
 		char	ifrn_name[IFNAMSIZ];
 	} ifr_ifrn;
 
 	unsigned short	cmd;
 
+=======
+		char ifrn_name[IFNAMSIZ];
+	} ifr_ifrn;
+	unsigned short	cmd;
+>>>>>>> v3.18
 	unsigned short	data_id;
 	struct data_s	data;
 
@@ -91,7 +124,14 @@ struct wm_req_s {
 };
 
 #ifndef ifr_name
+<<<<<<< HEAD
 #define ifr_name	ifr_ifrn.ifrn_name
 #endif
 
 #endif
+=======
+#define ifr_name ifr_ifrn.ifrn_name
+#endif
+
+#endif /* __GDM72XX_WM_IOCTL_H__ */
+>>>>>>> v3.18

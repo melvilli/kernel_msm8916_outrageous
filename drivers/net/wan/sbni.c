@@ -57,6 +57,10 @@
 
 #include <net/net_namespace.h>
 #include <net/arp.h>
+<<<<<<< HEAD
+=======
+#include <net/Space.h>
+>>>>>>> v3.18
 
 #include <asm/io.h>
 #include <asm/types.h>
@@ -148,10 +152,13 @@ static int  enslave( struct net_device *, struct net_device * );
 static int  emancipate( struct net_device * );
 #endif
 
+<<<<<<< HEAD
 #ifdef __i386__
 #define ASM_CRC 1
 #endif
 
+=======
+>>>>>>> v3.18
 static const char  version[] =
 	"Granch SBNI12 driver ver 5.0.1  Jun 22 2001  Denis I.Timofeev.\n";
 
@@ -176,7 +183,11 @@ static u32	mac[  SBNI_MAX_NUM_CARDS ] __initdata;
 
 #ifndef MODULE
 typedef u32  iarr[];
+<<<<<<< HEAD
 static iarr __initdata *dest[5] = { &io, &irq, &baud, &rxl, &mac };
+=======
+static iarr *dest[5] __initdata = { &io, &irq, &baud, &rxl, &mac };
+>>>>>>> v3.18
 #endif
 
 /* A zero-terminated list of I/O addresses to be probed on ISA bus */
@@ -230,7 +241,12 @@ int __init sbni_probe(int unit)
 	struct net_device *dev;
 	int err;
 
+<<<<<<< HEAD
 	dev = alloc_netdev(sizeof(struct net_local), "sbni", sbni_devsetup);
+=======
+	dev = alloc_netdev(sizeof(struct net_local), "sbni",
+			   NET_NAME_UNKNOWN, sbni_devsetup);
+>>>>>>> v3.18
 	if (!dev)
 		return -ENOMEM;
 
@@ -1480,8 +1496,13 @@ int __init init_module( void )
 	int err;
 
 	while( num < SBNI_MAX_NUM_CARDS ) {
+<<<<<<< HEAD
 		dev = alloc_netdev(sizeof(struct net_local), 
 				   "sbni%d", sbni_devsetup);
+=======
+		dev = alloc_netdev(sizeof(struct net_local), "sbni%d",
+				   NET_NAME_UNKNOWN, sbni_devsetup);
+>>>>>>> v3.18
 		if( !dev)
 			break;
 
@@ -1551,6 +1572,7 @@ __setup( "sbni=", sbni_setup );
 
 /* -------------------------------------------------------------------------- */
 
+<<<<<<< HEAD
 #ifdef ASM_CRC
 
 static u32
@@ -1633,6 +1655,8 @@ calc_crc32( u32  crc,  u8  *p,  u32  len )
 
 #else	/* ASM_CRC */
 
+=======
+>>>>>>> v3.18
 static u32
 calc_crc32( u32  crc,  u8  *p,  u32  len )
 {
@@ -1642,9 +1666,12 @@ calc_crc32( u32  crc,  u8  *p,  u32  len )
 	return  crc;
 }
 
+<<<<<<< HEAD
 #endif	/* ASM_CRC */
 
 
+=======
+>>>>>>> v3.18
 static u32  crc32tab[] __attribute__ ((aligned(8))) = {
 	0xD202EF8D,  0xA505DF1B,  0x3C0C8EA1,  0x4B0BBE37,
 	0xD56F2B94,  0xA2681B02,  0x3B614AB8,  0x4C667A2E,

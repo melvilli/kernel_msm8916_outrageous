@@ -45,7 +45,11 @@ static struct vfsmount *shm_mnt;
 #include <linux/xattr.h>
 #include <linux/exportfs.h>
 #include <linux/posix_acl.h>
+<<<<<<< HEAD
 #include <linux/generic_acl.h>
+=======
+#include <linux/posix_acl_xattr.h>
+>>>>>>> v3.18
 #include <linux/mman.h>
 #include <linux/string.h>
 #include <linux/slab.h>
@@ -65,8 +69,14 @@ static struct vfsmount *shm_mnt;
 #include <linux/migrate.h>
 #include <linux/highmem.h>
 #include <linux/seq_file.h>
+<<<<<<< HEAD
 #include <linux/syscalls.h>
 #include <linux/magic.h>
+=======
+#include <linux/magic.h>
+#include <linux/syscalls.h>
+#include <linux/fcntl.h>
+>>>>>>> v3.18
 #include <uapi/linux/memfd.h>
 
 #include <asm/uaccess.h>
@@ -151,6 +161,22 @@ static inline void shmem_unacct_size(unsigned long flags, loff_t size)
 		vm_unacct_memory(VM_ACCT(size));
 }
 
+<<<<<<< HEAD
+=======
+static inline int shmem_reacct_size(unsigned long flags,
+		loff_t oldsize, loff_t newsize)
+{
+	if (!(flags & VM_NORESERVE)) {
+		if (VM_ACCT(newsize) > VM_ACCT(oldsize))
+			return security_vm_enough_memory_mm(current->mm,
+					VM_ACCT(newsize) - VM_ACCT(oldsize));
+		else if (VM_ACCT(newsize) < VM_ACCT(oldsize))
+			vm_unacct_memory(VM_ACCT(oldsize) - VM_ACCT(newsize));
+	}
+	return 0;
+}
+
+>>>>>>> v3.18
 /*
  * ... whereas tmpfs objects are accounted incrementally as
  * pages are allocated, in order to allow huge sparse files.
@@ -245,6 +271,7 @@ static int shmem_radix_tree_replace(struct address_space *mapping,
 			pgoff_t index, void *expected, void *replacement)
 {
 	void **pslot;
+<<<<<<< HEAD
 	void *item = NULL;
 
 	VM_BUG_ON(!expected);
@@ -258,6 +285,19 @@ static int shmem_radix_tree_replace(struct address_space *mapping,
 		radix_tree_replace_slot(pslot, replacement);
 	else
 		radix_tree_delete(&mapping->page_tree, index);
+=======
+	void *item;
+
+	VM_BUG_ON(!expected);
+	VM_BUG_ON(!replacement);
+	pslot = radix_tree_lookup_slot(&mapping->page_tree, index);
+	if (!pslot)
+		return -ENOENT;
+	item = radix_tree_deref_slot_protected(pslot, &mapping->tree_lock);
+	if (item != expected)
+		return -ENOENT;
+	radix_tree_replace_slot(pslot, replacement);
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -284,12 +324,21 @@ static bool shmem_confirm_swap(struct address_space *mapping,
  */
 static int shmem_add_to_page_cache(struct page *page,
 				   struct address_space *mapping,
+<<<<<<< HEAD
 				   pgoff_t index, gfp_t gfp, void *expected)
 {
 	int error;
 
 	VM_BUG_ON(!PageLocked(page));
 	VM_BUG_ON(!PageSwapBacked(page));
+=======
+				   pgoff_t index, void *expected)
+{
+	int error;
+
+	VM_BUG_ON_PAGE(!PageLocked(page), page);
+	VM_BUG_ON_PAGE(!PageSwapBacked(page), page);
+>>>>>>> v3.18
 
 	page_cache_get(page);
 	page->mapping = mapping;
@@ -334,6 +383,7 @@ static void shmem_delete_from_page_cache(struct page *page, void *radswap)
 }
 
 /*
+<<<<<<< HEAD
  * Like find_get_pages, but collecting swap entries as well as pages.
  */
 static unsigned shmem_find_get_pages_and_swap(struct address_space *mapping,
@@ -384,11 +434,14 @@ export:
 }
 
 /*
+=======
+>>>>>>> v3.18
  * Remove swap entry from radix tree, free the swap and its page cache.
  */
 static int shmem_free_swap(struct address_space *mapping,
 			   pgoff_t index, void *radswap)
 {
+<<<<<<< HEAD
 	int error;
 
 	spin_lock_irq(&mapping->tree_lock);
@@ -412,6 +465,17 @@ static void shmem_deswap_pagevec(struct pagevec *pvec)
 			pvec->pages[j++] = page;
 	}
 	pvec->nr = j;
+=======
+	void *old;
+
+	spin_lock_irq(&mapping->tree_lock);
+	old = radix_tree_delete_item(&mapping->page_tree, index, radswap);
+	spin_unlock_irq(&mapping->tree_lock);
+	if (old != radswap)
+		return -ENOENT;
+	free_swap_and_cache(radix_to_swp_entry(radswap));
+	return 0;
+>>>>>>> v3.18
 }
 
 /*
@@ -432,12 +496,21 @@ void shmem_unlock_mapping(struct address_space *mapping)
 		 * Avoid pagevec_lookup(): find_get_pages() returns 0 as if it
 		 * has finished, if it hits a row of PAGEVEC_SIZE swap entries.
 		 */
+<<<<<<< HEAD
 		pvec.nr = shmem_find_get_pages_and_swap(mapping, index,
 					PAGEVEC_SIZE, pvec.pages, indices);
 		if (!pvec.nr)
 			break;
 		index = indices[pvec.nr - 1] + 1;
 		shmem_deswap_pagevec(&pvec);
+=======
+		pvec.nr = find_get_entries(mapping, index,
+					   PAGEVEC_SIZE, pvec.pages, indices);
+		if (!pvec.nr)
+			break;
+		index = indices[pvec.nr - 1] + 1;
+		pagevec_remove_exceptionals(&pvec);
+>>>>>>> v3.18
 		check_move_unevictable_pages(pvec.pages, pvec.nr);
 		pagevec_release(&pvec);
 		cond_resched();
@@ -469,12 +542,20 @@ static void shmem_undo_range(struct inode *inode, loff_t lstart, loff_t lend,
 	pagevec_init(&pvec, 0);
 	index = start;
 	while (index < end) {
+<<<<<<< HEAD
 		pvec.nr = shmem_find_get_pages_and_swap(mapping, index,
 				min(end - index, (pgoff_t)PAGEVEC_SIZE),
 							pvec.pages, indices);
 		if (!pvec.nr)
 			break;
 		mem_cgroup_uncharge_start();
+=======
+		pvec.nr = find_get_entries(mapping, index,
+			min(end - index, (pgoff_t)PAGEVEC_SIZE),
+			pvec.pages, indices);
+		if (!pvec.nr)
+			break;
+>>>>>>> v3.18
 		for (i = 0; i < pagevec_count(&pvec); i++) {
 			struct page *page = pvec.pages[i];
 
@@ -494,15 +575,24 @@ static void shmem_undo_range(struct inode *inode, loff_t lstart, loff_t lend,
 				continue;
 			if (!unfalloc || !PageUptodate(page)) {
 				if (page->mapping == mapping) {
+<<<<<<< HEAD
 					VM_BUG_ON(PageWriteback(page));
+=======
+					VM_BUG_ON_PAGE(PageWriteback(page), page);
+>>>>>>> v3.18
 					truncate_inode_page(mapping, page);
 				}
 			}
 			unlock_page(page);
 		}
+<<<<<<< HEAD
 		shmem_deswap_pagevec(&pvec);
 		pagevec_release(&pvec);
 		mem_cgroup_uncharge_end();
+=======
+		pagevec_remove_exceptionals(&pvec);
+		pagevec_release(&pvec);
+>>>>>>> v3.18
 		cond_resched();
 		index++;
 	}
@@ -538,9 +628,16 @@ static void shmem_undo_range(struct inode *inode, loff_t lstart, loff_t lend,
 	index = start;
 	while (index < end) {
 		cond_resched();
+<<<<<<< HEAD
 		pvec.nr = shmem_find_get_pages_and_swap(mapping, index,
 				min(end - index, (pgoff_t)PAGEVEC_SIZE),
 							pvec.pages, indices);
+=======
+
+		pvec.nr = find_get_entries(mapping, index,
+				min(end - index, (pgoff_t)PAGEVEC_SIZE),
+				pvec.pages, indices);
+>>>>>>> v3.18
 		if (!pvec.nr) {
 			/* If all gone or hole-punch or unfalloc, we're done */
 			if (index == start || end != -1)
@@ -549,7 +646,10 @@ static void shmem_undo_range(struct inode *inode, loff_t lstart, loff_t lend,
 			index = start;
 			continue;
 		}
+<<<<<<< HEAD
 		mem_cgroup_uncharge_start();
+=======
+>>>>>>> v3.18
 		for (i = 0; i < pagevec_count(&pvec); i++) {
 			struct page *page = pvec.pages[i];
 
@@ -572,7 +672,11 @@ static void shmem_undo_range(struct inode *inode, loff_t lstart, loff_t lend,
 			lock_page(page);
 			if (!unfalloc || !PageUptodate(page)) {
 				if (page->mapping == mapping) {
+<<<<<<< HEAD
 					VM_BUG_ON(PageWriteback(page));
+=======
+					VM_BUG_ON_PAGE(PageWriteback(page), page);
+>>>>>>> v3.18
 					truncate_inode_page(mapping, page);
 				} else {
 					/* Page was replaced by swap: retry */
@@ -583,9 +687,14 @@ static void shmem_undo_range(struct inode *inode, loff_t lstart, loff_t lend,
 			}
 			unlock_page(page);
 		}
+<<<<<<< HEAD
 		shmem_deswap_pagevec(&pvec);
 		pagevec_release(&pvec);
 		mem_cgroup_uncharge_end();
+=======
+		pagevec_remove_exceptionals(&pvec);
+		pagevec_release(&pvec);
+>>>>>>> v3.18
 		index++;
 	}
 
@@ -605,6 +714,10 @@ EXPORT_SYMBOL_GPL(shmem_truncate_range);
 static int shmem_setattr(struct dentry *dentry, struct iattr *attr)
 {
 	struct inode *inode = dentry->d_inode;
+<<<<<<< HEAD
+=======
+	struct shmem_inode_info *info = SHMEM_I(inode);
+>>>>>>> v3.18
 	int error;
 
 	error = inode_change_ok(inode, attr);
@@ -615,7 +728,20 @@ static int shmem_setattr(struct dentry *dentry, struct iattr *attr)
 		loff_t oldsize = inode->i_size;
 		loff_t newsize = attr->ia_size;
 
+<<<<<<< HEAD
 		if (newsize != oldsize) {
+=======
+		/* protected by i_mutex */
+		if ((newsize < oldsize && (info->seals & F_SEAL_SHRINK)) ||
+		    (newsize > oldsize && (info->seals & F_SEAL_GROW)))
+			return -EPERM;
+
+		if (newsize != oldsize) {
+			error = shmem_reacct_size(SHMEM_I(inode)->flags,
+					oldsize, newsize);
+			if (error)
+				return error;
+>>>>>>> v3.18
 			i_size_write(inode, newsize);
 			inode->i_ctime = inode->i_mtime = CURRENT_TIME;
 		}
@@ -629,10 +755,15 @@ static int shmem_setattr(struct dentry *dentry, struct iattr *attr)
 	}
 
 	setattr_copy(inode, attr);
+<<<<<<< HEAD
 #ifdef CONFIG_TMPFS_POSIX_ACL
 	if (attr->ia_valid & ATTR_MODE)
 		error = generic_acl_chmod(inode);
 #endif
+=======
+	if (attr->ia_valid & ATTR_MODE)
+		error = posix_acl_chmod(inode, inode->i_mode);
+>>>>>>> v3.18
 	return error;
 }
 
@@ -673,7 +804,11 @@ static int shmem_unuse_inode(struct shmem_inode_info *info,
 	radswap = swp_to_radix_entry(swap);
 	index = radix_tree_locate_item(&mapping->page_tree, radswap);
 	if (index == -1)
+<<<<<<< HEAD
 		return 0;
+=======
+		return -EAGAIN;	/* tell shmem_unuse we found nothing */
+>>>>>>> v3.18
 
 	/*
 	 * Move _head_ to start search for next from here.
@@ -718,7 +853,11 @@ static int shmem_unuse_inode(struct shmem_inode_info *info,
 	 */
 	if (!error)
 		error = shmem_add_to_page_cache(*pagep, mapping, index,
+<<<<<<< HEAD
 						GFP_NOWAIT, radswap);
+=======
+						radswap);
+>>>>>>> v3.18
 	if (error != -ENOMEM) {
 		/*
 		 * Truncation and eviction use free_swap_and_cache(), which
@@ -732,7 +871,10 @@ static int shmem_unuse_inode(struct shmem_inode_info *info,
 			spin_unlock(&info->lock);
 			swap_free(swap);
 		}
+<<<<<<< HEAD
 		error = 1;	/* not an error, but entry was found */
+=======
+>>>>>>> v3.18
 	}
 	return error;
 }
@@ -744,7 +886,11 @@ int shmem_unuse(swp_entry_t swap, struct page *page)
 {
 	struct list_head *this, *next;
 	struct shmem_inode_info *info;
+<<<<<<< HEAD
 	int found = 0;
+=======
+	struct mem_cgroup *memcg;
+>>>>>>> v3.18
 	int error = 0;
 
 	/*
@@ -759,15 +905,24 @@ int shmem_unuse(swp_entry_t swap, struct page *page)
 	 * the shmem_swaplist_mutex which might hold up shmem_writepage().
 	 * Charged back to the user (not to caller) when swap account is used.
 	 */
+<<<<<<< HEAD
 	error = mem_cgroup_cache_charge(page, current->mm, GFP_KERNEL);
 	if (error)
 		goto out;
 	/* No radix_tree_preload: swap entry keeps a place for page in tree */
+=======
+	error = mem_cgroup_try_charge(page, current->mm, GFP_KERNEL, &memcg);
+	if (error)
+		goto out;
+	/* No radix_tree_preload: swap entry keeps a place for page in tree */
+	error = -EAGAIN;
+>>>>>>> v3.18
 
 	mutex_lock(&shmem_swaplist_mutex);
 	list_for_each_safe(this, next, &shmem_swaplist) {
 		info = list_entry(this, struct shmem_inode_info, swaplist);
 		if (info->swapped)
+<<<<<<< HEAD
 			found = shmem_unuse_inode(info, swap, &page);
 		else
 			list_del_init(&info->swaplist);
@@ -779,6 +934,24 @@ int shmem_unuse(swp_entry_t swap, struct page *page)
 
 	if (found < 0)
 		error = found;
+=======
+			error = shmem_unuse_inode(info, swap, &page);
+		else
+			list_del_init(&info->swaplist);
+		cond_resched();
+		if (error != -EAGAIN)
+			break;
+		/* found nothing in this: move on to search the next */
+	}
+	mutex_unlock(&shmem_swaplist_mutex);
+
+	if (error) {
+		if (error != -ENOMEM)
+			error = 0;
+		mem_cgroup_cancel_charge(page, memcg);
+	} else
+		mem_cgroup_commit_charge(page, memcg, true);
+>>>>>>> v3.18
 out:
 	unlock_page(page);
 	page_cache_release(page);
@@ -882,7 +1055,11 @@ static int shmem_writepage(struct page *page, struct writeback_control *wbc)
 	}
 
 	mutex_unlock(&shmem_swaplist_mutex);
+<<<<<<< HEAD
 	swapcache_free(swap, NULL);
+=======
+	swapcache_free(swap);
+>>>>>>> v3.18
 redirty:
 	set_page_dirty(page);
 	if (wbc->for_reclaim)
@@ -1055,7 +1232,11 @@ static int shmem_replace_page(struct page **pagep, gfp_t gfp,
 		 */
 		oldpage = newpage;
 	} else {
+<<<<<<< HEAD
 		mem_cgroup_replace_page_cache(oldpage, newpage);
+=======
+		mem_cgroup_migrate(oldpage, newpage, false);
+>>>>>>> v3.18
 		lru_cache_add_anon(newpage);
 		*pagep = newpage;
 	}
@@ -1082,6 +1263,10 @@ static int shmem_getpage_gfp(struct inode *inode, pgoff_t index,
 	struct address_space *mapping = inode->i_mapping;
 	struct shmem_inode_info *info;
 	struct shmem_sb_info *sbinfo;
+<<<<<<< HEAD
+=======
+	struct mem_cgroup *memcg;
+>>>>>>> v3.18
 	struct page *page;
 	swp_entry_t swap;
 	int error;
@@ -1092,7 +1277,11 @@ static int shmem_getpage_gfp(struct inode *inode, pgoff_t index,
 		return -EFBIG;
 repeat:
 	swap.val = 0;
+<<<<<<< HEAD
 	page = find_lock_page(mapping, index);
+=======
+	page = find_lock_entry(mapping, index);
+>>>>>>> v3.18
 	if (radix_tree_exceptional_entry(page)) {
 		swap = radix_to_swp_entry(page);
 		page = NULL;
@@ -1104,6 +1293,12 @@ repeat:
 		goto failed;
 	}
 
+<<<<<<< HEAD
+=======
+	if (page && sgp == SGP_WRITE)
+		mark_page_accessed(page);
+
+>>>>>>> v3.18
 	/* fallocated page? */
 	if (page && !PageUptodate(page)) {
 		if (sgp != SGP_READ)
@@ -1157,11 +1352,18 @@ repeat:
 				goto failed;
 		}
 
+<<<<<<< HEAD
 		error = mem_cgroup_cache_charge(page, current->mm,
 						gfp & GFP_RECLAIM_MASK);
 		if (!error) {
 			error = shmem_add_to_page_cache(page, mapping, index,
 						gfp, swp_to_radix_entry(swap));
+=======
+		error = mem_cgroup_try_charge(page, current->mm, gfp, &memcg);
+		if (!error) {
+			error = shmem_add_to_page_cache(page, mapping, index,
+						swp_to_radix_entry(swap));
+>>>>>>> v3.18
 			/*
 			 * We already confirmed swap under page lock, and make
 			 * no memory allocation here, so usually no possibility
@@ -1174,17 +1376,35 @@ repeat:
 			 * Reset swap.val? No, leave it so "failed" goes back to
 			 * "repeat": reading a hole and writing should succeed.
 			 */
+<<<<<<< HEAD
 			if (error)
 				delete_from_swap_cache(page);
+=======
+			if (error) {
+				mem_cgroup_cancel_charge(page, memcg);
+				delete_from_swap_cache(page);
+			}
+>>>>>>> v3.18
 		}
 		if (error)
 			goto failed;
 
+<<<<<<< HEAD
+=======
+		mem_cgroup_commit_charge(page, memcg, true);
+
+>>>>>>> v3.18
 		spin_lock(&info->lock);
 		info->swapped--;
 		shmem_recalc_inode(inode);
 		spin_unlock(&info->lock);
 
+<<<<<<< HEAD
+=======
+		if (sgp == SGP_WRITE)
+			mark_page_accessed(page);
+
+>>>>>>> v3.18
 		delete_from_swap_cache(page);
 		set_page_dirty(page);
 		swap_free(swap);
@@ -1209,6 +1429,7 @@ repeat:
 			goto decused;
 		}
 
+<<<<<<< HEAD
 		SetPageSwapBacked(page);
 		__set_page_locked(page);
 		error = mem_cgroup_cache_charge(page, current->mm,
@@ -1225,6 +1446,27 @@ repeat:
 			mem_cgroup_uncharge_cache_page(page);
 			goto decused;
 		}
+=======
+		__SetPageSwapBacked(page);
+		__set_page_locked(page);
+		if (sgp == SGP_WRITE)
+			__SetPageReferenced(page);
+
+		error = mem_cgroup_try_charge(page, current->mm, gfp, &memcg);
+		if (error)
+			goto decused;
+		error = radix_tree_maybe_preload(gfp & GFP_RECLAIM_MASK);
+		if (!error) {
+			error = shmem_add_to_page_cache(page, mapping, index,
+							NULL);
+			radix_tree_preload_end();
+		}
+		if (error) {
+			mem_cgroup_cancel_charge(page, memcg);
+			goto decused;
+		}
+		mem_cgroup_commit_charge(page, memcg, false);
+>>>>>>> v3.18
 		lru_cache_add_anon(page);
 
 		spin_lock(&info->lock);
@@ -1450,6 +1692,10 @@ static struct inode *shmem_get_inode(struct super_block *sb, const struct inode 
 		info = SHMEM_I(inode);
 		memset(info, 0, (char *)inode - (char *)info);
 		spin_lock_init(&info->lock);
+<<<<<<< HEAD
+=======
+		info->seals = F_SEAL_SEAL;
+>>>>>>> v3.18
 		info->flags = flags & VM_NORESERVE;
 		INIT_LIST_HEAD(&info->swaplist);
 		simple_xattrs_init(&info->xattrs);
@@ -1487,6 +1733,14 @@ static struct inode *shmem_get_inode(struct super_block *sb, const struct inode 
 	return inode;
 }
 
+<<<<<<< HEAD
+=======
+bool shmem_mapping(struct address_space *mapping)
+{
+	return mapping->backing_dev_info == &shmem_backing_dev_info;
+}
+
+>>>>>>> v3.18
 #ifdef CONFIG_TMPFS
 static const struct inode_operations shmem_symlink_inode_operations;
 static const struct inode_operations shmem_short_symlink_operations;
@@ -1503,7 +1757,21 @@ shmem_write_begin(struct file *file, struct address_space *mapping,
 			struct page **pagep, void **fsdata)
 {
 	struct inode *inode = mapping->host;
+<<<<<<< HEAD
 	pgoff_t index = pos >> PAGE_CACHE_SHIFT;
+=======
+	struct shmem_inode_info *info = SHMEM_I(inode);
+	pgoff_t index = pos >> PAGE_CACHE_SHIFT;
+
+	/* i_mutex is held by caller */
+	if (unlikely(info->seals)) {
+		if (info->seals & F_SEAL_WRITE)
+			return -EPERM;
+		if ((info->seals & F_SEAL_GROW) && pos + len > inode->i_size)
+			return -EPERM;
+	}
+
+>>>>>>> v3.18
 	return shmem_getpage(inode, index, pagep, SGP_WRITE, NULL);
 }
 
@@ -1532,13 +1800,26 @@ shmem_write_end(struct file *file, struct address_space *mapping,
 	return copied;
 }
 
+<<<<<<< HEAD
 static void do_shmem_file_read(struct file *filp, loff_t *ppos, read_descriptor_t *desc, read_actor_t actor)
 {
 	struct inode *inode = file_inode(filp);
+=======
+static ssize_t shmem_file_read_iter(struct kiocb *iocb, struct iov_iter *to)
+{
+	struct file *file = iocb->ki_filp;
+	struct inode *inode = file_inode(file);
+>>>>>>> v3.18
 	struct address_space *mapping = inode->i_mapping;
 	pgoff_t index;
 	unsigned long offset;
 	enum sgp_type sgp = SGP_READ;
+<<<<<<< HEAD
+=======
+	int error = 0;
+	ssize_t retval = 0;
+	loff_t *ppos = &iocb->ki_pos;
+>>>>>>> v3.18
 
 	/*
 	 * Might this read be for a stacking filesystem?  Then when reading
@@ -1566,10 +1847,17 @@ static void do_shmem_file_read(struct file *filp, loff_t *ppos, read_descriptor_
 				break;
 		}
 
+<<<<<<< HEAD
 		desc->error = shmem_getpage(inode, index, &page, sgp, NULL);
 		if (desc->error) {
 			if (desc->error == -EINVAL)
 				desc->error = 0;
+=======
+		error = shmem_getpage(inode, index, &page, sgp, NULL);
+		if (error) {
+			if (error == -EINVAL)
+				error = 0;
+>>>>>>> v3.18
 			break;
 		}
 		if (page)
@@ -1613,6 +1901,7 @@ static void do_shmem_file_read(struct file *filp, loff_t *ppos, read_descriptor_
 		/*
 		 * Ok, we have the page, and it's up-to-date, so
 		 * now we can copy it to user space...
+<<<<<<< HEAD
 		 *
 		 * The actor routine returns how many bytes were actually used..
 		 * NOTE! This may not be the same as how much of a user buffer
@@ -1621,18 +1910,33 @@ static void do_shmem_file_read(struct file *filp, loff_t *ppos, read_descriptor_
 		 * pointers and the remaining count).
 		 */
 		ret = actor(desc, page, offset, nr);
+=======
+		 */
+		ret = copy_page_to_iter(page, offset, nr, to);
+		retval += ret;
+>>>>>>> v3.18
 		offset += ret;
 		index += offset >> PAGE_CACHE_SHIFT;
 		offset &= ~PAGE_CACHE_MASK;
 
 		page_cache_release(page);
+<<<<<<< HEAD
 		if (ret != nr || !desc->count)
 			break;
 
+=======
+		if (!iov_iter_count(to))
+			break;
+		if (ret < nr) {
+			error = -EFAULT;
+			break;
+		}
+>>>>>>> v3.18
 		cond_resched();
 	}
 
 	*ppos = ((loff_t) index << PAGE_CACHE_SHIFT) + offset;
+<<<<<<< HEAD
 	file_accessed(filp);
 }
 
@@ -1668,6 +1972,10 @@ static ssize_t shmem_file_aio_read(struct kiocb *iocb,
 			break;
 	}
 	return retval;
+=======
+	file_accessed(file);
+	return retval ? retval : error;
+>>>>>>> v3.18
 }
 
 static ssize_t shmem_file_splice_read(struct file *in, loff_t *ppos,
@@ -1706,7 +2014,11 @@ static ssize_t shmem_file_splice_read(struct file *in, loff_t *ppos,
 	index = *ppos >> PAGE_CACHE_SHIFT;
 	loff = *ppos & ~PAGE_CACHE_MASK;
 	req_pages = (len + loff + PAGE_CACHE_SIZE - 1) >> PAGE_CACHE_SHIFT;
+<<<<<<< HEAD
 	nr_pages = min(req_pages, pipe->buffers);
+=======
+	nr_pages = min(req_pages, spd.nr_pages_max);
+>>>>>>> v3.18
 
 	spd.nr_pages = find_get_pages_contig(mapping, index,
 						nr_pages, spd.pages);
@@ -1799,7 +2111,11 @@ static pgoff_t shmem_seek_hole_data(struct address_space *mapping,
 	pagevec_init(&pvec, 0);
 	pvec.nr = 1;		/* start small: we may be there already */
 	while (!done) {
+<<<<<<< HEAD
 		pvec.nr = shmem_find_get_pages_and_swap(mapping, index,
+=======
+		pvec.nr = find_get_entries(mapping, index,
+>>>>>>> v3.18
 					pvec.nr, pvec.pages, indices);
 		if (!pvec.nr) {
 			if (whence == SEEK_DATA)
@@ -1826,7 +2142,11 @@ static pgoff_t shmem_seek_hole_data(struct address_space *mapping,
 				break;
 			}
 		}
+<<<<<<< HEAD
 		shmem_deswap_pagevec(&pvec);
+=======
+		pagevec_remove_exceptionals(&pvec);
+>>>>>>> v3.18
 		pagevec_release(&pvec);
 		pvec.nr = PAGEVEC_SIZE;
 		cond_resched();
@@ -1866,23 +2186,262 @@ static loff_t shmem_file_llseek(struct file *file, loff_t offset, int whence)
 		}
 	}
 
+<<<<<<< HEAD
 	if (offset >= 0 && offset != file->f_pos) {
 		file->f_pos = offset;
 		file->f_version = 0;
 	}
+=======
+	if (offset >= 0)
+		offset = vfs_setpos(file, offset, MAX_LFS_FILESIZE);
+>>>>>>> v3.18
 	mutex_unlock(&inode->i_mutex);
 	return offset;
 }
 
+<<<<<<< HEAD
+=======
+/*
+ * We need a tag: a new tag would expand every radix_tree_node by 8 bytes,
+ * so reuse a tag which we firmly believe is never set or cleared on shmem.
+ */
+#define SHMEM_TAG_PINNED        PAGECACHE_TAG_TOWRITE
+#define LAST_SCAN               4       /* about 150ms max */
+
+static void shmem_tag_pins(struct address_space *mapping)
+{
+	struct radix_tree_iter iter;
+	void **slot;
+	pgoff_t start;
+	struct page *page;
+
+	lru_add_drain();
+	start = 0;
+	rcu_read_lock();
+
+restart:
+	radix_tree_for_each_slot(slot, &mapping->page_tree, &iter, start) {
+		page = radix_tree_deref_slot(slot);
+		if (!page || radix_tree_exception(page)) {
+			if (radix_tree_deref_retry(page))
+				goto restart;
+		} else if (page_count(page) - page_mapcount(page) > 1) {
+			spin_lock_irq(&mapping->tree_lock);
+			radix_tree_tag_set(&mapping->page_tree, iter.index,
+					   SHMEM_TAG_PINNED);
+			spin_unlock_irq(&mapping->tree_lock);
+		}
+
+		if (need_resched()) {
+			cond_resched_rcu();
+			start = iter.index + 1;
+			goto restart;
+		}
+	}
+	rcu_read_unlock();
+}
+
+/*
+ * Setting SEAL_WRITE requires us to verify there's no pending writer. However,
+ * via get_user_pages(), drivers might have some pending I/O without any active
+ * user-space mappings (eg., direct-IO, AIO). Therefore, we look at all pages
+ * and see whether it has an elevated ref-count. If so, we tag them and wait for
+ * them to be dropped.
+ * The caller must guarantee that no new user will acquire writable references
+ * to those pages to avoid races.
+ */
+static int shmem_wait_for_pins(struct address_space *mapping)
+{
+	struct radix_tree_iter iter;
+	void **slot;
+	pgoff_t start;
+	struct page *page;
+	int error, scan;
+
+	shmem_tag_pins(mapping);
+
+	error = 0;
+	for (scan = 0; scan <= LAST_SCAN; scan++) {
+		if (!radix_tree_tagged(&mapping->page_tree, SHMEM_TAG_PINNED))
+			break;
+
+		if (!scan)
+			lru_add_drain_all();
+		else if (schedule_timeout_killable((HZ << scan) / 200))
+			scan = LAST_SCAN;
+
+		start = 0;
+		rcu_read_lock();
+restart:
+		radix_tree_for_each_tagged(slot, &mapping->page_tree, &iter,
+					   start, SHMEM_TAG_PINNED) {
+
+			page = radix_tree_deref_slot(slot);
+			if (radix_tree_exception(page)) {
+				if (radix_tree_deref_retry(page))
+					goto restart;
+
+				page = NULL;
+			}
+
+			if (page &&
+			    page_count(page) - page_mapcount(page) != 1) {
+				if (scan < LAST_SCAN)
+					goto continue_resched;
+
+				/*
+				 * On the last scan, we clean up all those tags
+				 * we inserted; but make a note that we still
+				 * found pages pinned.
+				 */
+				error = -EBUSY;
+			}
+
+			spin_lock_irq(&mapping->tree_lock);
+			radix_tree_tag_clear(&mapping->page_tree,
+					     iter.index, SHMEM_TAG_PINNED);
+			spin_unlock_irq(&mapping->tree_lock);
+continue_resched:
+			if (need_resched()) {
+				cond_resched_rcu();
+				start = iter.index + 1;
+				goto restart;
+			}
+		}
+		rcu_read_unlock();
+	}
+
+	return error;
+}
+
+#define F_ALL_SEALS (F_SEAL_SEAL | \
+		     F_SEAL_SHRINK | \
+		     F_SEAL_GROW | \
+		     F_SEAL_WRITE)
+
+int shmem_add_seals(struct file *file, unsigned int seals)
+{
+	struct inode *inode = file_inode(file);
+	struct shmem_inode_info *info = SHMEM_I(inode);
+	int error;
+
+	/*
+	 * SEALING
+	 * Sealing allows multiple parties to share a shmem-file but restrict
+	 * access to a specific subset of file operations. Seals can only be
+	 * added, but never removed. This way, mutually untrusted parties can
+	 * share common memory regions with a well-defined policy. A malicious
+	 * peer can thus never perform unwanted operations on a shared object.
+	 *
+	 * Seals are only supported on special shmem-files and always affect
+	 * the whole underlying inode. Once a seal is set, it may prevent some
+	 * kinds of access to the file. Currently, the following seals are
+	 * defined:
+	 *   SEAL_SEAL: Prevent further seals from being set on this file
+	 *   SEAL_SHRINK: Prevent the file from shrinking
+	 *   SEAL_GROW: Prevent the file from growing
+	 *   SEAL_WRITE: Prevent write access to the file
+	 *
+	 * As we don't require any trust relationship between two parties, we
+	 * must prevent seals from being removed. Therefore, sealing a file
+	 * only adds a given set of seals to the file, it never touches
+	 * existing seals. Furthermore, the "setting seals"-operation can be
+	 * sealed itself, which basically prevents any further seal from being
+	 * added.
+	 *
+	 * Semantics of sealing are only defined on volatile files. Only
+	 * anonymous shmem files support sealing. More importantly, seals are
+	 * never written to disk. Therefore, there's no plan to support it on
+	 * other file types.
+	 */
+
+	if (file->f_op != &shmem_file_operations)
+		return -EINVAL;
+	if (!(file->f_mode & FMODE_WRITE))
+		return -EPERM;
+	if (seals & ~(unsigned int)F_ALL_SEALS)
+		return -EINVAL;
+
+	mutex_lock(&inode->i_mutex);
+
+	if (info->seals & F_SEAL_SEAL) {
+		error = -EPERM;
+		goto unlock;
+	}
+
+	if ((seals & F_SEAL_WRITE) && !(info->seals & F_SEAL_WRITE)) {
+		error = mapping_deny_writable(file->f_mapping);
+		if (error)
+			goto unlock;
+
+		error = shmem_wait_for_pins(file->f_mapping);
+		if (error) {
+			mapping_allow_writable(file->f_mapping);
+			goto unlock;
+		}
+	}
+
+	info->seals |= seals;
+	error = 0;
+
+unlock:
+	mutex_unlock(&inode->i_mutex);
+	return error;
+}
+EXPORT_SYMBOL_GPL(shmem_add_seals);
+
+int shmem_get_seals(struct file *file)
+{
+	if (file->f_op != &shmem_file_operations)
+		return -EINVAL;
+
+	return SHMEM_I(file_inode(file))->seals;
+}
+EXPORT_SYMBOL_GPL(shmem_get_seals);
+
+long shmem_fcntl(struct file *file, unsigned int cmd, unsigned long arg)
+{
+	long error;
+
+	switch (cmd) {
+	case F_ADD_SEALS:
+		/* disallow upper 32bit */
+		if (arg > UINT_MAX)
+			return -EINVAL;
+
+		error = shmem_add_seals(file, arg);
+		break;
+	case F_GET_SEALS:
+		error = shmem_get_seals(file);
+		break;
+	default:
+		error = -EINVAL;
+		break;
+	}
+
+	return error;
+}
+
+>>>>>>> v3.18
 static long shmem_fallocate(struct file *file, int mode, loff_t offset,
 							 loff_t len)
 {
 	struct inode *inode = file_inode(file);
 	struct shmem_sb_info *sbinfo = SHMEM_SB(inode->i_sb);
+<<<<<<< HEAD
+=======
+	struct shmem_inode_info *info = SHMEM_I(inode);
+>>>>>>> v3.18
 	struct shmem_falloc shmem_falloc;
 	pgoff_t start, index, end;
 	int error;
 
+<<<<<<< HEAD
+=======
+	if (mode & ~(FALLOC_FL_KEEP_SIZE | FALLOC_FL_PUNCH_HOLE))
+		return -EOPNOTSUPP;
+
+>>>>>>> v3.18
 	mutex_lock(&inode->i_mutex);
 
 	if (mode & FALLOC_FL_PUNCH_HOLE) {
@@ -1891,6 +2450,15 @@ static long shmem_fallocate(struct file *file, int mode, loff_t offset,
 		loff_t unmap_end = round_down(offset + len, PAGE_SIZE) - 1;
 		DECLARE_WAIT_QUEUE_HEAD_ONSTACK(shmem_falloc_waitq);
 
+<<<<<<< HEAD
+=======
+		/* protected by i_mutex */
+		if (info->seals & F_SEAL_WRITE) {
+			error = -EPERM;
+			goto out;
+		}
+
+>>>>>>> v3.18
 		shmem_falloc.waitq = &shmem_falloc_waitq;
 		shmem_falloc.start = unmap_start >> PAGE_SHIFT;
 		shmem_falloc.next = (unmap_end + 1) >> PAGE_SHIFT;
@@ -1917,6 +2485,14 @@ static long shmem_fallocate(struct file *file, int mode, loff_t offset,
 	if (error)
 		goto out;
 
+<<<<<<< HEAD
+=======
+	if ((info->seals & F_SEAL_GROW) && offset + len > inode->i_size) {
+		error = -EPERM;
+		goto out;
+	}
+
+>>>>>>> v3.18
 	start = offset >> PAGE_CACHE_SHIFT;
 	end = (offset + len + PAGE_CACHE_SIZE - 1) >> PAGE_CACHE_SHIFT;
 	/* Try to avoid a swapstorm if len is impossible to satisfy */
@@ -1950,11 +2526,17 @@ static long shmem_fallocate(struct file *file, int mode, loff_t offset,
 									NULL);
 		if (error) {
 			/* Remove the !PageUptodate pages we added */
+<<<<<<< HEAD
 			if (index > start) {
 				shmem_undo_range(inode,
 				 (loff_t)start << PAGE_CACHE_SHIFT,
 				 ((loff_t)index << PAGE_CACHE_SHIFT) - 1, true);
 			}
+=======
+			shmem_undo_range(inode,
+				(loff_t)start << PAGE_CACHE_SHIFT,
+				(loff_t)index << PAGE_CACHE_SHIFT, true);
+>>>>>>> v3.18
 			goto undone;
 		}
 
@@ -2023,6 +2605,7 @@ shmem_mknod(struct inode *dir, struct dentry *dentry, umode_t mode, dev_t dev)
 
 	inode = shmem_get_inode(dir->i_sb, dir, mode, dev, VM_NORESERVE);
 	if (inode) {
+<<<<<<< HEAD
 		error = security_inode_init_security(inode, dir,
 						     &dentry->d_name,
 						     shmem_initxattrs, NULL);
@@ -2041,12 +2624,30 @@ shmem_mknod(struct inode *dir, struct dentry *dentry, umode_t mode, dev_t dev)
 #else
 		error = 0;
 #endif
+=======
+		error = simple_acl_create(dir, inode);
+		if (error)
+			goto out_iput;
+		error = security_inode_init_security(inode, dir,
+						     &dentry->d_name,
+						     shmem_initxattrs, NULL);
+		if (error && error != -EOPNOTSUPP)
+			goto out_iput;
+
+		error = 0;
+>>>>>>> v3.18
 		dir->i_size += BOGO_DIRENT_SIZE;
 		dir->i_ctime = dir->i_mtime = CURRENT_TIME;
 		d_instantiate(dentry, inode);
 		dget(dentry); /* Extra count - pin the dentry in core */
 	}
 	return error;
+<<<<<<< HEAD
+=======
+out_iput:
+	iput(inode);
+	return error;
+>>>>>>> v3.18
 }
 
 static int
@@ -2060,6 +2661,7 @@ shmem_tmpfile(struct inode *dir, struct dentry *dentry, umode_t mode)
 		error = security_inode_init_security(inode, dir,
 						     NULL,
 						     shmem_initxattrs, NULL);
+<<<<<<< HEAD
 		if (error) {
 			if (error != -EOPNOTSUPP) {
 				iput(inode);
@@ -2078,6 +2680,19 @@ shmem_tmpfile(struct inode *dir, struct dentry *dentry, umode_t mode)
 		d_tmpfile(dentry, inode);
 	}
 	return error;
+=======
+		if (error && error != -EOPNOTSUPP)
+			goto out_iput;
+		error = simple_acl_create(dir, inode);
+		if (error)
+			goto out_iput;
+		d_tmpfile(dentry, inode);
+	}
+	return error;
+out_iput:
+	iput(inode);
+	return error;
+>>>>>>> v3.18
 }
 
 static int shmem_mkdir(struct inode *dir, struct dentry *dentry, umode_t mode)
@@ -2147,20 +2762,95 @@ static int shmem_rmdir(struct inode *dir, struct dentry *dentry)
 	return shmem_unlink(dir, dentry);
 }
 
+<<<<<<< HEAD
+=======
+static int shmem_exchange(struct inode *old_dir, struct dentry *old_dentry, struct inode *new_dir, struct dentry *new_dentry)
+{
+	bool old_is_dir = S_ISDIR(old_dentry->d_inode->i_mode);
+	bool new_is_dir = S_ISDIR(new_dentry->d_inode->i_mode);
+
+	if (old_dir != new_dir && old_is_dir != new_is_dir) {
+		if (old_is_dir) {
+			drop_nlink(old_dir);
+			inc_nlink(new_dir);
+		} else {
+			drop_nlink(new_dir);
+			inc_nlink(old_dir);
+		}
+	}
+	old_dir->i_ctime = old_dir->i_mtime =
+	new_dir->i_ctime = new_dir->i_mtime =
+	old_dentry->d_inode->i_ctime =
+	new_dentry->d_inode->i_ctime = CURRENT_TIME;
+
+	return 0;
+}
+
+static int shmem_whiteout(struct inode *old_dir, struct dentry *old_dentry)
+{
+	struct dentry *whiteout;
+	int error;
+
+	whiteout = d_alloc(old_dentry->d_parent, &old_dentry->d_name);
+	if (!whiteout)
+		return -ENOMEM;
+
+	error = shmem_mknod(old_dir, whiteout,
+			    S_IFCHR | WHITEOUT_MODE, WHITEOUT_DEV);
+	dput(whiteout);
+	if (error)
+		return error;
+
+	/*
+	 * Cheat and hash the whiteout while the old dentry is still in
+	 * place, instead of playing games with FS_RENAME_DOES_D_MOVE.
+	 *
+	 * d_lookup() will consistently find one of them at this point,
+	 * not sure which one, but that isn't even important.
+	 */
+	d_rehash(whiteout);
+	return 0;
+}
+
+>>>>>>> v3.18
 /*
  * The VFS layer already does all the dentry stuff for rename,
  * we just have to decrement the usage count for the target if
  * it exists so that the VFS layer correctly free's it when it
  * gets overwritten.
  */
+<<<<<<< HEAD
 static int shmem_rename(struct inode *old_dir, struct dentry *old_dentry, struct inode *new_dir, struct dentry *new_dentry)
+=======
+static int shmem_rename2(struct inode *old_dir, struct dentry *old_dentry, struct inode *new_dir, struct dentry *new_dentry, unsigned int flags)
+>>>>>>> v3.18
 {
 	struct inode *inode = old_dentry->d_inode;
 	int they_are_dirs = S_ISDIR(inode->i_mode);
 
+<<<<<<< HEAD
 	if (!simple_empty(new_dentry))
 		return -ENOTEMPTY;
 
+=======
+	if (flags & ~(RENAME_NOREPLACE | RENAME_EXCHANGE | RENAME_WHITEOUT))
+		return -EINVAL;
+
+	if (flags & RENAME_EXCHANGE)
+		return shmem_exchange(old_dir, old_dentry, new_dir, new_dentry);
+
+	if (!simple_empty(new_dentry))
+		return -ENOTEMPTY;
+
+	if (flags & RENAME_WHITEOUT) {
+		int error;
+
+		error = shmem_whiteout(old_dir, old_dentry);
+		if (error)
+			return error;
+	}
+
+>>>>>>> v3.18
 	if (new_dentry->d_inode) {
 		(void) shmem_unlink(new_dir, new_dentry);
 		if (they_are_dirs) {
@@ -2311,8 +3001,13 @@ static int shmem_initxattrs(struct inode *inode,
 
 static const struct xattr_handler *shmem_xattr_handlers[] = {
 #ifdef CONFIG_TMPFS_POSIX_ACL
+<<<<<<< HEAD
 	&generic_acl_access_handler,
 	&generic_acl_default_handler,
+=======
+	&posix_acl_access_xattr_handler,
+	&posix_acl_default_xattr_handler,
+>>>>>>> v3.18
 #endif
 	NULL
 };
@@ -2722,9 +3417,17 @@ SYSCALL_DEFINE2(memfd_create,
 		error = PTR_ERR(file);
 		goto err_fd;
 	}
+<<<<<<< HEAD
 	info = SHMEM_I(file->f_path.dentry->d_inode);
 	file->f_mode |= FMODE_LSEEK | FMODE_PREAD | FMODE_PWRITE;
 	file->f_flags |= O_RDWR | O_LARGEFILE;
+=======
+	info = SHMEM_I(file_inode(file));
+	file->f_mode |= FMODE_LSEEK | FMODE_PREAD | FMODE_PWRITE;
+	file->f_flags |= O_RDWR | O_LARGEFILE;
+	if (flags & MFD_ALLOW_SEALING)
+		info->seals &= ~F_SEAL_SEAL;
+>>>>>>> v3.18
 
 	fd_install(fd, file);
 	kfree(name);
@@ -2772,13 +3475,22 @@ int shmem_fill_super(struct super_block *sb, void *data, int silent)
 	 * tmpfs instance, limiting inodes to one per page of lowmem;
 	 * but the internal instance is left unlimited.
 	 */
+<<<<<<< HEAD
 	if (!(sb->s_flags & MS_NOUSER)) {
+=======
+	if (!(sb->s_flags & MS_KERNMOUNT)) {
+>>>>>>> v3.18
 		sbinfo->max_blocks = shmem_default_max_blocks();
 		sbinfo->max_inodes = shmem_default_max_inodes();
 		if (shmem_parse_options(data, sbinfo, false)) {
 			err = -EINVAL;
 			goto failed;
 		}
+<<<<<<< HEAD
+=======
+	} else {
+		sb->s_flags |= MS_NOUSER;
+>>>>>>> v3.18
 	}
 	sb->s_export_op = &shmem_export_ops;
 	sb->s_flags |= MS_NOSEC;
@@ -2787,7 +3499,11 @@ int shmem_fill_super(struct super_block *sb, void *data, int silent)
 #endif
 
 	spin_lock_init(&sbinfo->stat_lock);
+<<<<<<< HEAD
 	if (percpu_counter_init(&sbinfo->used_blocks, 0))
+=======
+	if (percpu_counter_init(&sbinfo->used_blocks, 0, GFP_KERNEL))
+>>>>>>> v3.18
 		goto failed;
 	sbinfo->free_inodes = sbinfo->max_inodes;
 
@@ -2869,7 +3585,13 @@ static const struct address_space_operations shmem_aops = {
 	.write_begin	= shmem_write_begin,
 	.write_end	= shmem_write_end,
 #endif
+<<<<<<< HEAD
 	.migratepage	= migrate_page,
+=======
+#ifdef CONFIG_MIGRATION
+	.migratepage	= migrate_page,
+#endif
+>>>>>>> v3.18
 	.error_remove_page = generic_error_remove_page,
 };
 
@@ -2877,6 +3599,7 @@ static const struct file_operations shmem_file_operations = {
 	.mmap		= shmem_mmap,
 #ifdef CONFIG_TMPFS
 	.llseek		= shmem_file_llseek,
+<<<<<<< HEAD
 	.read		= do_sync_read,
 	.write		= do_sync_write,
 	.aio_read	= shmem_file_aio_read,
@@ -2884,6 +3607,15 @@ static const struct file_operations shmem_file_operations = {
 	.fsync		= noop_fsync,
 	.splice_read	= shmem_file_splice_read,
 	.splice_write	= generic_file_splice_write,
+=======
+	.read		= new_sync_read,
+	.write		= new_sync_write,
+	.read_iter	= shmem_file_read_iter,
+	.write_iter	= generic_file_write_iter,
+	.fsync		= noop_fsync,
+	.splice_read	= shmem_file_splice_read,
+	.splice_write	= iter_file_splice_write,
+>>>>>>> v3.18
 	.fallocate	= shmem_fallocate,
 #endif
 };
@@ -2895,6 +3627,10 @@ static const struct inode_operations shmem_inode_operations = {
 	.getxattr	= shmem_getxattr,
 	.listxattr	= shmem_listxattr,
 	.removexattr	= shmem_removexattr,
+<<<<<<< HEAD
+=======
+	.set_acl	= simple_set_acl,
+>>>>>>> v3.18
 #endif
 };
 
@@ -2908,7 +3644,11 @@ static const struct inode_operations shmem_dir_inode_operations = {
 	.mkdir		= shmem_mkdir,
 	.rmdir		= shmem_rmdir,
 	.mknod		= shmem_mknod,
+<<<<<<< HEAD
 	.rename		= shmem_rename,
+=======
+	.rename2	= shmem_rename2,
+>>>>>>> v3.18
 	.tmpfile	= shmem_tmpfile,
 #endif
 #ifdef CONFIG_TMPFS_XATTR
@@ -2919,6 +3659,10 @@ static const struct inode_operations shmem_dir_inode_operations = {
 #endif
 #ifdef CONFIG_TMPFS_POSIX_ACL
 	.setattr	= shmem_setattr,
+<<<<<<< HEAD
+=======
+	.set_acl	= simple_set_acl,
+>>>>>>> v3.18
 #endif
 };
 
@@ -2931,6 +3675,10 @@ static const struct inode_operations shmem_special_inode_operations = {
 #endif
 #ifdef CONFIG_TMPFS_POSIX_ACL
 	.setattr	= shmem_setattr,
+<<<<<<< HEAD
+=======
+	.set_acl	= simple_set_acl,
+>>>>>>> v3.18
 #endif
 };
 
@@ -2949,6 +3697,10 @@ static const struct super_operations shmem_ops = {
 
 static const struct vm_operations_struct shmem_vm_ops = {
 	.fault		= shmem_fault,
+<<<<<<< HEAD
+=======
+	.map_pages	= filemap_map_pages,
+>>>>>>> v3.18
 #ifdef CONFIG_NUMA
 	.set_policy     = shmem_set_policy,
 	.get_policy     = shmem_get_policy,
@@ -2974,6 +3726,13 @@ int __init shmem_init(void)
 {
 	int error;
 
+<<<<<<< HEAD
+=======
+	/* If rootfs called this, don't re-init */
+	if (shmem_inode_cachep)
+		return 0;
+
+>>>>>>> v3.18
 	error = bdi_init(&shmem_backing_dev_info);
 	if (error)
 		goto out4;
@@ -2988,8 +3747,12 @@ int __init shmem_init(void)
 		goto out2;
 	}
 
+<<<<<<< HEAD
 	shm_mnt = vfs_kern_mount(&shmem_fs_type, MS_NOUSER,
 				 shmem_fs_type.name, NULL);
+=======
+	shm_mnt = kern_mount(&shmem_fs_type);
+>>>>>>> v3.18
 	if (IS_ERR(shm_mnt)) {
 		error = PTR_ERR(shm_mnt);
 		printk(KERN_ERR "Could not kern_mount tmpfs\n");
@@ -3070,6 +3833,7 @@ static struct dentry_operations anon_ops = {
 	.d_dname = simple_dname
 };
 
+<<<<<<< HEAD
 /**
  * shmem_file_setup - get an unlinked file living in tmpfs
  * @name: name for dentry (to be seen in /proc/<pid>/maps
@@ -3077,6 +3841,10 @@ static struct dentry_operations anon_ops = {
  * @flags: VM_NORESERVE suppresses pre-accounting of the entire object size
  */
 struct file *shmem_file_setup(const char *name, loff_t size, unsigned long flags)
+=======
+static struct file *__shmem_file_setup(const char *name, loff_t size,
+				       unsigned long flags, unsigned int i_flags)
+>>>>>>> v3.18
 {
 	struct file *res;
 	struct inode *inode;
@@ -3098,27 +3866,45 @@ struct file *shmem_file_setup(const char *name, loff_t size, unsigned long flags
 	this.len = strlen(name);
 	this.hash = 0; /* will go */
 	sb = shm_mnt->mnt_sb;
+<<<<<<< HEAD
+=======
+	path.mnt = mntget(shm_mnt);
+>>>>>>> v3.18
 	path.dentry = d_alloc_pseudo(sb, &this);
 	if (!path.dentry)
 		goto put_memory;
 	d_set_d_op(path.dentry, &anon_ops);
+<<<<<<< HEAD
 	path.mnt = mntget(shm_mnt);
+=======
+>>>>>>> v3.18
 
 	res = ERR_PTR(-ENOSPC);
 	inode = shmem_get_inode(sb, NULL, S_IFREG | S_IRWXUGO, 0, flags);
 	if (!inode)
+<<<<<<< HEAD
 		goto put_dentry;
 
+=======
+		goto put_memory;
+
+	inode->i_flags |= i_flags;
+>>>>>>> v3.18
 	d_instantiate(path.dentry, inode);
 	inode->i_size = size;
 	clear_nlink(inode);	/* It is unlinked */
 	res = ERR_PTR(ramfs_nommu_expand_for_mapping(inode, size));
 	if (IS_ERR(res))
+<<<<<<< HEAD
 		goto put_dentry;
+=======
+		goto put_path;
+>>>>>>> v3.18
 
 	res = alloc_file(&path, FMODE_WRITE | FMODE_READ,
 		  &shmem_file_operations);
 	if (IS_ERR(res))
+<<<<<<< HEAD
 		goto put_dentry;
 
 	return res;
@@ -3138,6 +3924,45 @@ void shmem_set_file(struct vm_area_struct *vma, struct file *file)
 	vma->vm_file = file;
 	vma->vm_ops = &shmem_vm_ops;
 }
+=======
+		goto put_path;
+
+	return res;
+
+put_memory:
+	shmem_unacct_size(flags, size);
+put_path:
+	path_put(&path);
+	return res;
+}
+
+/**
+ * shmem_kernel_file_setup - get an unlinked file living in tmpfs which must be
+ * 	kernel internal.  There will be NO LSM permission checks against the
+ * 	underlying inode.  So users of this interface must do LSM checks at a
+ * 	higher layer.  The one user is the big_key implementation.  LSM checks
+ * 	are provided at the key level rather than the inode level.
+ * @name: name for dentry (to be seen in /proc/<pid>/maps
+ * @size: size to be set for the file
+ * @flags: VM_NORESERVE suppresses pre-accounting of the entire object size
+ */
+struct file *shmem_kernel_file_setup(const char *name, loff_t size, unsigned long flags)
+{
+	return __shmem_file_setup(name, size, flags, S_PRIVATE);
+}
+
+/**
+ * shmem_file_setup - get an unlinked file living in tmpfs
+ * @name: name for dentry (to be seen in /proc/<pid>/maps
+ * @size: size to be set for the file
+ * @flags: VM_NORESERVE suppresses pre-accounting of the entire object size
+ */
+struct file *shmem_file_setup(const char *name, loff_t size, unsigned long flags)
+{
+	return __shmem_file_setup(name, size, flags, 0);
+}
+EXPORT_SYMBOL_GPL(shmem_file_setup);
+>>>>>>> v3.18
 
 /**
  * shmem_zero_setup - setup a shared anonymous mapping
@@ -3152,7 +3977,14 @@ int shmem_zero_setup(struct vm_area_struct *vma)
 	if (IS_ERR(file))
 		return PTR_ERR(file);
 
+<<<<<<< HEAD
 	shmem_set_file(vma, file);
+=======
+	if (vma->vm_file)
+		fput(vma->vm_file);
+	vma->vm_file = file;
+	vma->vm_ops = &shmem_vm_ops;
+>>>>>>> v3.18
 	return 0;
 }
 

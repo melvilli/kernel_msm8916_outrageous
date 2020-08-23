@@ -53,8 +53,12 @@ struct persistent_ram_zone {
 };
 
 struct persistent_ram_zone *persistent_ram_new(phys_addr_t start, size_t size,
+<<<<<<< HEAD
 			u32 sig, struct persistent_ram_ecc_info *ecc_info,
 			unsigned int memtype);
+=======
+			u32 sig, struct persistent_ram_ecc_info *ecc_info);
+>>>>>>> v3.18
 void persistent_ram_free(struct persistent_ram_zone *prz);
 void persistent_ram_zap(struct persistent_ram_zone *prz);
 
@@ -68,8 +72,11 @@ void persistent_ram_free_old(struct persistent_ram_zone *prz);
 ssize_t persistent_ram_ecc_string(struct persistent_ram_zone *prz,
 	char *str, size_t len);
 
+<<<<<<< HEAD
 void ramoops_console_write_buf(const char *buf, size_t size);
 
+=======
+>>>>>>> v3.18
 /*
  * Ramoops platform data
  * @mem_size	memory size for ramoops
@@ -79,11 +86,17 @@ void ramoops_console_write_buf(const char *buf, size_t size);
 struct ramoops_platform_data {
 	unsigned long	mem_size;
 	unsigned long	mem_address;
+<<<<<<< HEAD
 	unsigned int	mem_type;
 	unsigned long	record_size;
 	unsigned long	console_size;
 	unsigned long	ftrace_size;
 	unsigned long	pmsg_size;
+=======
+	unsigned long	record_size;
+	unsigned long	console_size;
+	unsigned long	ftrace_size;
+>>>>>>> v3.18
 	int		dump_oops;
 	struct persistent_ram_ecc_info ecc_info;
 };

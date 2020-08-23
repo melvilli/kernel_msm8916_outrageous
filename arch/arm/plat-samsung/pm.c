@@ -17,11 +17,16 @@
 #include <linux/errno.h>
 #include <linux/delay.h>
 #include <linux/of.h>
+<<<<<<< HEAD
 #include <linux/serial_core.h>
+=======
+#include <linux/serial_s3c.h>
+>>>>>>> v3.18
 #include <linux/io.h>
 
 #include <asm/cacheflush.h>
 #include <asm/suspend.h>
+<<<<<<< HEAD
 #include <mach/hardware.h>
 #include <mach/map.h>
 
@@ -29,6 +34,18 @@
 #include <mach/regs-clock.h>
 #include <mach/regs-irq.h>
 #include <mach/irqs.h>
+=======
+
+#ifdef CONFIG_SAMSUNG_ATAGS
+#include <mach/map.h>
+#ifndef CONFIG_ARCH_EXYNOS
+#include <mach/regs-clock.h>
+#include <mach/regs-irq.h>
+#endif
+#include <mach/irqs.h>
+#endif
+
+>>>>>>> v3.18
 #include <asm/irq.h>
 
 #include <plat/pm.h>
@@ -38,6 +55,7 @@
 
 unsigned long s3c_pm_flags;
 
+<<<<<<< HEAD
 /* Debug code:
  *
  * This code supports debug output to the low level UARTs for use on
@@ -133,6 +151,8 @@ static void s3c_pm_save_uarts(void) { }
 static void s3c_pm_restore_uarts(void) { }
 #endif
 
+=======
+>>>>>>> v3.18
 /* The IRQ ext-int code goes here, it is too small to currently bother
  * with its own file. */
 
@@ -157,6 +177,7 @@ int s3c_irqext_wake(struct irq_data *data, unsigned int state)
 	return 0;
 }
 
+<<<<<<< HEAD
 /* helper functions to save and restore register state */
 
 /**
@@ -213,6 +234,8 @@ void s3c_pm_do_restore_core(struct sleep_save *ptr, int count)
 		__raw_writel(ptr->val, ptr->reg);
 }
 
+=======
+>>>>>>> v3.18
 /* s3c2410_pm_show_resume_irqs
  *
  * print any IRQs asserted at resume time (ie, we woke from)

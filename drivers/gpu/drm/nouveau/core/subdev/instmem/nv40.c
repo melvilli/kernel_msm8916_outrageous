@@ -22,6 +22,7 @@
  * Authors: Ben Skeggs
  */
 
+<<<<<<< HEAD
 #include "nv04.h"
 
 static inline int
@@ -30,6 +31,28 @@ nv44_graph_class(struct nv04_instmem_priv *priv)
 	if ((nv_device(priv)->chipset & 0xf0) == 0x60)
 		return 1;
 	return !(0x0baf & (1 << (nv_device(priv)->chipset & 0x0f)));
+=======
+#include <engine/graph/nv40.h>
+
+#include "nv04.h"
+
+/******************************************************************************
+ * instmem subdev implementation
+ *****************************************************************************/
+
+static u32
+nv40_instmem_rd32(struct nouveau_object *object, u64 addr)
+{
+	struct nv04_instmem_priv *priv = (void *)object;
+	return ioread32_native(priv->iomem + addr);
+}
+
+static void
+nv40_instmem_wr32(struct nouveau_object *object, u64 addr, u32 data)
+{
+	struct nv04_instmem_priv *priv = (void *)object;
+	iowrite32_native(data, priv->iomem + addr);
+>>>>>>> v3.18
 }
 
 static int
@@ -38,7 +61,10 @@ nv40_instmem_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		  struct nouveau_object **pobject)
 {
 	struct nouveau_device *device = nv_device(parent);
+<<<<<<< HEAD
 	struct pci_dev *pdev = device->pdev;
+=======
+>>>>>>> v3.18
 	struct nv04_instmem_priv *priv;
 	int ret, bar, vs;
 
@@ -48,13 +74,22 @@ nv40_instmem_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		return ret;
 
 	/* map bar */
+<<<<<<< HEAD
 	if (pci_resource_len(pdev, 2))
+=======
+	if (nv_device_resource_len(device, 2))
+>>>>>>> v3.18
 		bar = 2;
 	else
 		bar = 3;
 
+<<<<<<< HEAD
 	priv->iomem = ioremap(pci_resource_start(pdev, bar),
 			      pci_resource_len(pdev, bar));
+=======
+	priv->iomem = ioremap(nv_device_resource_start(device, bar),
+			      nv_device_resource_len(device, bar));
+>>>>>>> v3.18
 	if (!priv->iomem) {
 		nv_error(priv, "unable to map PRAMIN BAR\n");
 		return -EFAULT;
@@ -75,7 +110,10 @@ nv40_instmem_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	priv->base.reserved += 512 * 1024;	/* object storage */
 
 	priv->base.reserved = round_up(priv->base.reserved, 4096);
+<<<<<<< HEAD
 	priv->base.alloc    = nv04_instmem_alloc;
+=======
+>>>>>>> v3.18
 
 	ret = nouveau_mm_init(&priv->heap, 0, priv->base.reserved, 1);
 	if (ret)
@@ -112,6 +150,7 @@ nv40_instmem_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	return 0;
 }
 
+<<<<<<< HEAD
 static u32
 nv40_instmem_rd32(struct nouveau_object *object, u64 addr)
 {
@@ -130,6 +169,12 @@ struct nouveau_oclass
 nv40_instmem_oclass = {
 	.handle = NV_SUBDEV(INSTMEM, 0x40),
 	.ofuncs = &(struct nouveau_ofuncs) {
+=======
+struct nouveau_oclass *
+nv40_instmem_oclass = &(struct nouveau_instmem_impl) {
+	.base.handle = NV_SUBDEV(INSTMEM, 0x40),
+	.base.ofuncs = &(struct nouveau_ofuncs) {
+>>>>>>> v3.18
 		.ctor = nv40_instmem_ctor,
 		.dtor = nv04_instmem_dtor,
 		.init = _nouveau_instmem_init,
@@ -137,4 +182,9 @@ nv40_instmem_oclass = {
 		.rd32 = nv40_instmem_rd32,
 		.wr32 = nv40_instmem_wr32,
 	},
+<<<<<<< HEAD
 };
+=======
+	.instobj = &nv04_instobj_oclass.base,
+}.base;
+>>>>>>> v3.18

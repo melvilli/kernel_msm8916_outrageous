@@ -32,7 +32,11 @@
 #include <asm/mpic.h>
 #include <asm/mmu.h>
 
+<<<<<<< HEAD
 static __initdata struct of_device_id iss4xx_of_bus[] = {
+=======
+static const struct of_device_id iss4xx_of_bus[] __initconst = {
+>>>>>>> v3.18
 	{ .compatible = "ibm,plb4", },
 	{ .compatible = "ibm,plb6", },
 	{ .compatible = "ibm,opb", },
@@ -81,12 +85,20 @@ static void __init iss4xx_init_irq(void)
 }
 
 #ifdef CONFIG_SMP
+<<<<<<< HEAD
 static void __cpuinit smp_iss4xx_setup_cpu(int cpu)
+=======
+static void smp_iss4xx_setup_cpu(int cpu)
+>>>>>>> v3.18
 {
 	mpic_setup_this_cpu();
 }
 
+<<<<<<< HEAD
 static int __cpuinit smp_iss4xx_kick_cpu(int cpu)
+=======
+static int smp_iss4xx_kick_cpu(int cpu)
+>>>>>>> v3.18
 {
 	struct device_node *cpunode = of_get_cpu_node(cpu, NULL);
 	const u64 *spin_table_addr_prop;

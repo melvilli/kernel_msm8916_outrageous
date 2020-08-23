@@ -30,11 +30,14 @@ extern void platform_init(bp_tag_t*);
 extern void platform_setup (char **);
 
 /*
+<<<<<<< HEAD
  * platform_init_irq is called from init_IRQ.
  */
 extern void platform_init_irq (void);
 
 /*
+=======
+>>>>>>> v3.18
  * platform_restart is called to restart the system.
  */
 extern void platform_restart (void);

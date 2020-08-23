@@ -46,11 +46,14 @@ static inline int pte_file(pte_t pte) { return 0; }
 #define ZERO_PAGE(vaddr)	(virt_to_page(0))
 
 /*
+<<<<<<< HEAD
  * These would be in other places but having them here reduces the diffs.
  */
 extern unsigned int kobjsize(const void *objp);
 
 /*
+=======
+>>>>>>> v3.18
  * No page table caches to initialise.
  */
 #define pgtable_cache_init()	do { } while (0)

@@ -12,6 +12,10 @@
 
 #include <linux/types.h>
 #include <linux/compiler.h>
+<<<<<<< HEAD
+=======
+#include <linux/ppp_defs.h>
+>>>>>>> v3.18
 
 /*
  * Bit definitions for flags argument to PPPIOCGFLAGS/PPPIOCSFLAGS.

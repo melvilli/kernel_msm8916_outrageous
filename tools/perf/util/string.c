@@ -9,12 +9,19 @@
  */
 s64 perf_atoll(const char *str)
 {
+<<<<<<< HEAD
 	unsigned int i;
 	s64 length = -1, unit = 1;
+=======
+	s64 length;
+	char *p;
+	char c;
+>>>>>>> v3.18
 
 	if (!isdigit(str[0]))
 		goto out_err;
 
+<<<<<<< HEAD
 	for (i = 1; i < strlen(str); i++) {
 		switch (str[i]) {
 		case 'B':
@@ -81,6 +88,43 @@ out_err:
 	length = -1;
 out:
 	return length;
+=======
+	length = strtoll(str, &p, 10);
+	switch (c = *p++) {
+		case 'b': case 'B':
+			if (*p)
+				goto out_err;
+		case '\0':
+			return length;
+		default:
+			goto out_err;
+		/* two-letter suffices */
+		case 'k': case 'K':
+			length <<= 10;
+			break;
+		case 'm': case 'M':
+			length <<= 20;
+			break;
+		case 'g': case 'G':
+			length <<= 30;
+			break;
+		case 't': case 'T':
+			length <<= 40;
+			break;
+	}
+	/* we want the cases to match */
+	if (islower(c)) {
+		if (strcmp(p, "b") != 0)
+			goto out_err;
+	} else {
+		if (strcmp(p, "B") != 0)
+			goto out_err;
+	}
+	return length;
+
+out_err:
+	return -1;
+>>>>>>> v3.18
 }
 
 /*
@@ -128,7 +172,11 @@ void argv_free(char **argv)
 {
 	char **p;
 	for (p = argv; *p; p++)
+<<<<<<< HEAD
 		free(*p);
+=======
+		zfree(p);
+>>>>>>> v3.18
 
 	free(argv);
 }

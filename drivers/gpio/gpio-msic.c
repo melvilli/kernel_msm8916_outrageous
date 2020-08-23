@@ -259,7 +259,11 @@ static void msic_gpio_irq_handler(unsigned irq, struct irq_desc *desc)
 static int platform_msic_gpio_probe(struct platform_device *pdev)
 {
 	struct device *dev = &pdev->dev;
+<<<<<<< HEAD
 	struct intel_msic_gpio_pdata *pdata = dev->platform_data;
+=======
+	struct intel_msic_gpio_pdata *pdata = dev_get_platdata(dev);
+>>>>>>> v3.18
 	struct msic_gpio *mg;
 	int irq = platform_get_irq(pdev, 0);
 	int retval;
@@ -292,7 +296,11 @@ static int platform_msic_gpio_probe(struct platform_device *pdev)
 	mg->chip.to_irq = msic_gpio_to_irq;
 	mg->chip.base = pdata->gpio_base;
 	mg->chip.ngpio = MSIC_NUM_GPIO;
+<<<<<<< HEAD
 	mg->chip.can_sleep = 1;
+=======
+	mg->chip.can_sleep = true;
+>>>>>>> v3.18
 	mg->chip.dev = dev;
 
 	mutex_init(&mg->buslock);
@@ -305,10 +313,16 @@ static int platform_msic_gpio_probe(struct platform_device *pdev)
 
 	for (i = 0; i < mg->chip.ngpio; i++) {
 		irq_set_chip_data(i + mg->irq_base, mg);
+<<<<<<< HEAD
 		irq_set_chip_and_handler_name(i + mg->irq_base,
 					      &msic_irqchip,
 					      handle_simple_irq,
 					      "demux");
+=======
+		irq_set_chip_and_handler(i + mg->irq_base,
+					 &msic_irqchip,
+					 handle_simple_irq);
+>>>>>>> v3.18
 	}
 	irq_set_chained_handler(mg->irq, msic_gpio_irq_handler);
 	irq_set_handler_data(mg->irq, mg);

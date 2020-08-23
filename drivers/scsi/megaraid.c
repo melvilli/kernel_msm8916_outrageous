@@ -531,6 +531,7 @@ mega_build_cmd(adapter_t *adapter, Scsi_Cmnd *cmd, int *busy)
 	int	target = 0;
 	int	ldrv_num = 0;   /* logical drive number */
 
+<<<<<<< HEAD
 
 	/*
 	 * filter the internal and ioctl commands
@@ -538,6 +539,8 @@ mega_build_cmd(adapter_t *adapter, Scsi_Cmnd *cmd, int *busy)
 	if((cmd->cmnd[0] == MEGA_INTERNAL_CMD))
 		return (scb_t *)cmd->host_scribble;
 
+=======
+>>>>>>> v3.18
 	/*
 	 * We know what channels our logical drives are on - mega_find_card()
 	 */
@@ -1439,6 +1442,7 @@ mega_cmd_done(adapter_t *adapter, u8 completed[], int nstatus, int status)
 
 		cmdid = completed[i];
 
+<<<<<<< HEAD
 		if( cmdid == CMDID_INT_CMDS ) { /* internal command */
 			scb = &adapter->int_scb;
 			cmd = scb->cmd;
@@ -1452,6 +1456,24 @@ mega_cmd_done(adapter_t *adapter, u8 completed[], int nstatus, int status)
 
 		}
 		else {
+=======
+		/*
+		 * Only free SCBs for the commands coming down from the
+		 * mid-layer, not for which were issued internally
+		 *
+		 * For internal command, restore the status returned by the
+		 * firmware so that user can interpret it.
+		 */
+		if (cmdid == CMDID_INT_CMDS) {
+			scb = &adapter->int_scb;
+
+			list_del_init(&scb->list);
+			scb->state = SCB_FREE;
+
+			adapter->int_status = status;
+			complete(&adapter->int_waitq);
+		} else {
+>>>>>>> v3.18
 			scb = &adapter->scb_list[cmdid];
 
 			/*
@@ -1640,6 +1662,7 @@ mega_cmd_done(adapter_t *adapter, u8 completed[], int nstatus, int status)
 				cmd->result |= (DID_BAD_TARGET << 16)|status;
 		}
 
+<<<<<<< HEAD
 		/*
 		 * Only free SCBs for the commands coming down from the
 		 * mid-layer, not for which were issued internally
@@ -1659,6 +1682,9 @@ mega_cmd_done(adapter_t *adapter, u8 completed[], int nstatus, int status)
 		else {
 			mega_free_scb(adapter, scb);
 		}
+=======
+		mega_free_scb(adapter, scb);
+>>>>>>> v3.18
 
 		/* Add Scsi_Command to end of completed queue */
 		list_add_tail(SCSI_LIST(cmd), &adapter->completed_list);
@@ -1882,7 +1908,11 @@ megaraid_info(struct Scsi_Host *host)
 		 "LSI Logic MegaRAID %s %d commands %d targs %d chans %d luns",
 		 adapter->fw_version, adapter->product_info.max_commands,
 		 adapter->host->max_id, adapter->host->max_channel,
+<<<<<<< HEAD
 		 adapter->host->max_lun);
+=======
+		 (u32)adapter->host->max_lun);
+>>>>>>> v3.18
 	return buffer;
 }
 
@@ -1963,8 +1993,13 @@ megaraid_abort_and_reset(adapter_t *adapter, Scsi_Cmnd *cmd, int aor)
 
 	printk(KERN_WARNING "megaraid: %s cmd=%x <c=%d t=%d l=%d>\n",
 	     (aor == SCB_ABORT)? "ABORTING":"RESET",
+<<<<<<< HEAD
 	     cmd->cmnd[0], cmd->device->channel, 
 	     cmd->device->id, cmd->device->lun);
+=======
+	     cmd->cmnd[0], cmd->device->channel,
+	     cmd->device->id, (u32)cmd->device->lun);
+>>>>>>> v3.18
 
 	if(list_empty(&adapter->pending_list))
 		return FALSE;
@@ -2026,7 +2061,11 @@ megaraid_abort_and_reset(adapter_t *adapter, Scsi_Cmnd *cmd, int aor)
 static inline int
 make_local_pdev(adapter_t *adapter, struct pci_dev **pdev)
 {
+<<<<<<< HEAD
 	*pdev = alloc_pci_dev();
+=======
+	*pdev = pci_alloc_dev(NULL);
+>>>>>>> v3.18
 
 	if( *pdev == NULL ) return -1;
 
@@ -4133,14 +4172,18 @@ mega_internal_dev_inquiry(adapter_t *adapter, u8 ch, u8 tgt,
  * The last argument is the address of the passthru structure if the command
  * to be fired is a passthru command
  *
+<<<<<<< HEAD
  * lockscope specifies whether the caller has already acquired the lock. Of
  * course, the caller must know which lock we are talking about.
  *
+=======
+>>>>>>> v3.18
  * Note: parameter 'pthru' is null for non-passthru commands.
  */
 static int
 mega_internal_command(adapter_t *adapter, megacmd_t *mc, mega_passthru *pthru)
 {
+<<<<<<< HEAD
 	Scsi_Cmnd	*scmd;
 	struct	scsi_device *sdev;
 	scb_t	*scb;
@@ -4150,6 +4193,12 @@ mega_internal_command(adapter_t *adapter, megacmd_t *mc, mega_passthru *pthru)
 	if (!scmd)
 		return -ENOMEM;
 
+=======
+	unsigned long flags;
+	scb_t	*scb;
+	int	rval;
+
+>>>>>>> v3.18
 	/*
 	 * The internal commands share one command id and hence are
 	 * serialized. This is so because we want to reserve maximum number of
@@ -4160,6 +4209,7 @@ mega_internal_command(adapter_t *adapter, megacmd_t *mc, mega_passthru *pthru)
 	scb = &adapter->int_scb;
 	memset(scb, 0, sizeof(scb_t));
 
+<<<<<<< HEAD
 	sdev = kzalloc(sizeof(struct scsi_device), GFP_KERNEL);
 	scmd->device = sdev;
 
@@ -4171,12 +4221,17 @@ mega_internal_command(adapter_t *adapter, megacmd_t *mc, mega_passthru *pthru)
 
 	scb->state |= SCB_ACTIVE;
 	scb->cmd = scmd;
+=======
+	scb->idx = CMDID_INT_CMDS;
+	scb->state |= SCB_ACTIVE | SCB_PENDQ;
+>>>>>>> v3.18
 
 	memcpy(scb->raw_mbox, mc, sizeof(megacmd_t));
 
 	/*
 	 * Is it a passthru command
 	 */
+<<<<<<< HEAD
 	if( mc->cmd == MEGA_MBOXCMD_PASSTHRU ) {
 
 		scb->pthru = pthru;
@@ -4191,11 +4246,31 @@ mega_internal_command(adapter_t *adapter, megacmd_t *mc, mega_passthru *pthru)
 	rval = scmd->result;
 	mc->status = scmd->result;
 	kfree(sdev);
+=======
+	if (mc->cmd == MEGA_MBOXCMD_PASSTHRU)
+		scb->pthru = pthru;
+
+	spin_lock_irqsave(&adapter->lock, flags);
+	list_add_tail(&scb->list, &adapter->pending_list);
+	/*
+	 * Check if the HBA is in quiescent state, e.g., during a
+	 * delete logical drive opertion. If it is, don't run
+	 * the pending_list.
+	 */
+	if (atomic_read(&adapter->quiescent) == 0)
+		mega_runpendq(adapter);
+	spin_unlock_irqrestore(&adapter->lock, flags);
+
+	wait_for_completion(&adapter->int_waitq);
+
+	mc->status = rval = adapter->int_status;
+>>>>>>> v3.18
 
 	/*
 	 * Print a debug message for all failed commands. Applications can use
 	 * this information.
 	 */
+<<<<<<< HEAD
 	if( scmd->result && trace_level ) {
 		printk("megaraid: cmd [%x, %x, %x] status:[%x]\n",
 			mc->cmd, mc->opcode, mc->subopcode, scmd->result);
@@ -4227,6 +4302,17 @@ mega_internal_done(Scsi_Cmnd *scmd)
 }
 
 
+=======
+	if (rval && trace_level) {
+		printk("megaraid: cmd [%x, %x, %x] status:[%x]\n",
+			mc->cmd, mc->opcode, mc->subopcode, rval);
+	}
+
+	mutex_unlock(&adapter->int_mtx);
+	return rval;
+}
+
+>>>>>>> v3.18
 static struct scsi_host_template megaraid_template = {
 	.module				= THIS_MODULE,
 	.name				= "MegaRAID",

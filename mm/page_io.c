@@ -22,6 +22,7 @@
 #include <linux/frontswap.h>
 #include <linux/aio.h>
 #include <linux/blkdev.h>
+<<<<<<< HEAD
 #include <linux/ratelimit.h>
 #include <asm/pgtable.h>
 
@@ -31,6 +32,10 @@
  */
 #define SWAP_ERROR_LOG_RATE_MS 1000
 
+=======
+#include <asm/pgtable.h>
+
+>>>>>>> v3.18
 static struct bio *get_swap_bio(gfp_t gfp_flags,
 				struct page *page, bio_end_io_t end_io)
 {
@@ -38,13 +43,22 @@ static struct bio *get_swap_bio(gfp_t gfp_flags,
 
 	bio = bio_alloc(gfp_flags, 1);
 	if (bio) {
+<<<<<<< HEAD
 		bio->bi_sector = map_swap_page(page, &bio->bi_bdev);
 		bio->bi_sector <<= PAGE_SHIFT - 9;
+=======
+		bio->bi_iter.bi_sector = map_swap_page(page, &bio->bi_bdev);
+		bio->bi_iter.bi_sector <<= PAGE_SHIFT - 9;
+>>>>>>> v3.18
 		bio->bi_io_vec[0].bv_page = page;
 		bio->bi_io_vec[0].bv_len = PAGE_SIZE;
 		bio->bi_io_vec[0].bv_offset = 0;
 		bio->bi_vcnt = 1;
+<<<<<<< HEAD
 		bio->bi_size = PAGE_SIZE;
+=======
+		bio->bi_iter.bi_size = PAGE_SIZE;
+>>>>>>> v3.18
 		bio->bi_end_io = end_io;
 	}
 	return bio;
@@ -54,7 +68,10 @@ void end_swap_bio_write(struct bio *bio, int err)
 {
 	const int uptodate = test_bit(BIO_UPTODATE, &bio->bi_flags);
 	struct page *page = bio->bi_io_vec[0].bv_page;
+<<<<<<< HEAD
 	static unsigned long swap_error_rs_time;
+=======
+>>>>>>> v3.18
 
 	if (!uptodate) {
 		SetPageError(page);
@@ -67,12 +84,19 @@ void end_swap_bio_write(struct bio *bio, int err)
 		 * Also clear PG_reclaim to avoid rotate_reclaimable_page()
 		 */
 		set_page_dirty(page);
+<<<<<<< HEAD
 		if (printk_timed_ratelimit(&swap_error_rs_time,
 					   SWAP_ERROR_LOG_RATE_MS))
 			printk(KERN_ALERT "Write-error on swap-device (%u:%u:%Lu)\n",
 				imajor(bio->bi_bdev->bd_inode),
 				iminor(bio->bi_bdev->bd_inode),
 				(unsigned long long)bio->bi_sector);
+=======
+		printk(KERN_ALERT "Write-error on swap-device (%u:%u:%Lu)\n",
+				imajor(bio->bi_bdev->bd_inode),
+				iminor(bio->bi_bdev->bd_inode),
+				(unsigned long long)bio->bi_iter.bi_sector);
+>>>>>>> v3.18
 		ClearPageReclaim(page);
 	}
 	end_page_writeback(page);
@@ -90,7 +114,11 @@ void end_swap_bio_read(struct bio *bio, int err)
 		printk(KERN_ALERT "Read-error on swap-device (%u:%u:%Lu)\n",
 				imajor(bio->bi_bdev->bd_inode),
 				iminor(bio->bi_bdev->bd_inode),
+<<<<<<< HEAD
 				(unsigned long long)bio->bi_sector);
+=======
+				(unsigned long long)bio->bi_iter.bi_sector);
+>>>>>>> v3.18
 		goto out;
 	}
 
@@ -258,17 +286,30 @@ out:
 	return ret;
 }
 
+<<<<<<< HEAD
+=======
+static sector_t swap_page_sector(struct page *page)
+{
+	return (sector_t)__page_file_index(page) << (PAGE_CACHE_SHIFT - 9);
+}
+
+>>>>>>> v3.18
 int __swap_writepage(struct page *page, struct writeback_control *wbc,
 	void (*end_write_func)(struct bio *, int))
 {
 	struct bio *bio;
+<<<<<<< HEAD
 	int ret = 0, rw = WRITE;
+=======
+	int ret, rw = WRITE;
+>>>>>>> v3.18
 	struct swap_info_struct *sis = page_swap_info(page);
 
 	if (sis->flags & SWP_FILE) {
 		struct kiocb kiocb;
 		struct file *swap_file = sis->swap_file;
 		struct address_space *mapping = swap_file->f_mapping;
+<<<<<<< HEAD
 		struct iovec iov = {
 			.iov_base = kmap(page),
 			.iov_len  = PAGE_SIZE,
@@ -277,14 +318,37 @@ int __swap_writepage(struct page *page, struct writeback_control *wbc,
 		init_sync_kiocb(&kiocb, swap_file);
 		kiocb.ki_pos = page_file_offset(page);
 		kiocb.ki_left = PAGE_SIZE;
+=======
+		struct bio_vec bv = {
+			.bv_page = page,
+			.bv_len  = PAGE_SIZE,
+			.bv_offset = 0
+		};
+		struct iov_iter from = {
+			.type = ITER_BVEC | WRITE,
+			.count = PAGE_SIZE,
+			.iov_offset = 0,
+			.nr_segs = 1,
+		};
+		from.bvec = &bv;	/* older gcc versions are broken */
+
+		init_sync_kiocb(&kiocb, swap_file);
+		kiocb.ki_pos = page_file_offset(page);
+>>>>>>> v3.18
 		kiocb.ki_nbytes = PAGE_SIZE;
 
 		set_page_writeback(page);
 		unlock_page(page);
+<<<<<<< HEAD
 		ret = mapping->a_ops->direct_IO(KERNEL_WRITE,
 						&kiocb, &iov,
 						kiocb.ki_pos, 1);
 		kunmap(page);
+=======
+		ret = mapping->a_ops->direct_IO(ITER_BVEC | WRITE,
+						&kiocb, &from,
+						kiocb.ki_pos);
+>>>>>>> v3.18
 		if (ret == PAGE_SIZE) {
 			count_vm_event(PSWPOUT);
 			ret = 0;
@@ -308,6 +372,16 @@ int __swap_writepage(struct page *page, struct writeback_control *wbc,
 		return ret;
 	}
 
+<<<<<<< HEAD
+=======
+	ret = bdev_write_page(sis->bdev, swap_page_sector(page), page, wbc);
+	if (!ret) {
+		count_vm_event(PSWPOUT);
+		return 0;
+	}
+
+	ret = 0;
+>>>>>>> v3.18
 	bio = get_swap_bio(GFP_NOIO, page, end_write_func);
 	if (bio == NULL) {
 		set_page_dirty(page);
@@ -331,8 +405,13 @@ int swap_readpage(struct page *page)
 	int ret = 0;
 	struct swap_info_struct *sis = page_swap_info(page);
 
+<<<<<<< HEAD
 	VM_BUG_ON(!PageLocked(page));
 	VM_BUG_ON(PageUptodate(page));
+=======
+	VM_BUG_ON_PAGE(!PageLocked(page), page);
+	VM_BUG_ON_PAGE(PageUptodate(page), page);
+>>>>>>> v3.18
 	if (frontswap_load(page) == 0) {
 		SetPageUptodate(page);
 		unlock_page(page);
@@ -349,6 +428,16 @@ int swap_readpage(struct page *page)
 		return ret;
 	}
 
+<<<<<<< HEAD
+=======
+	ret = bdev_read_page(sis->bdev, swap_page_sector(page), page);
+	if (!ret) {
+		count_vm_event(PSWPIN);
+		return 0;
+	}
+
+	ret = 0;
+>>>>>>> v3.18
 	bio = get_swap_bio(GFP_KERNEL, page, end_swap_bio_read);
 	if (bio == NULL) {
 		unlock_page(page);

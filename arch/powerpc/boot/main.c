@@ -139,18 +139,30 @@ static struct addr_range prep_initrd(struct addr_range vmlinux, void *chosen,
  * edit the command line passed to vmlinux (by setting /chosen/bootargs).
  * The buffer is put in it's own section so that tools may locate it easier.
  */
+<<<<<<< HEAD
 static char cmdline[COMMAND_LINE_SIZE]
+=======
+static char cmdline[BOOT_COMMAND_LINE_SIZE]
+>>>>>>> v3.18
 	__attribute__((__section__("__builtin_cmdline")));
 
 static void prep_cmdline(void *chosen)
 {
 	if (cmdline[0] == '\0')
+<<<<<<< HEAD
 		getprop(chosen, "bootargs", cmdline, COMMAND_LINE_SIZE-1);
+=======
+		getprop(chosen, "bootargs", cmdline, BOOT_COMMAND_LINE_SIZE-1);
+>>>>>>> v3.18
 
 	printf("\n\rLinux/PowerPC load: %s", cmdline);
 	/* If possible, edit the command line */
 	if (console_ops.edit_cmdline)
+<<<<<<< HEAD
 		console_ops.edit_cmdline(cmdline, COMMAND_LINE_SIZE);
+=======
+		console_ops.edit_cmdline(cmdline, BOOT_COMMAND_LINE_SIZE);
+>>>>>>> v3.18
 	printf("\n\r");
 
 	/* Put the command line back into the devtree for the kernel */
@@ -174,7 +186,11 @@ void start(void)
 	 * built-in command line wasn't set by an external tool */
 	if ((loader_info.cmdline_len > 0) && (cmdline[0] == '\0'))
 		memmove(cmdline, loader_info.cmdline,
+<<<<<<< HEAD
 			min(loader_info.cmdline_len, COMMAND_LINE_SIZE-1));
+=======
+			min(loader_info.cmdline_len, BOOT_COMMAND_LINE_SIZE-1));
+>>>>>>> v3.18
 
 	if (console_ops.open && (console_ops.open() < 0))
 		exit();

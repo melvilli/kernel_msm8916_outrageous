@@ -3,6 +3,10 @@
  *
  * Author: Nicolas Pitre
  */
+<<<<<<< HEAD
+=======
+#include <linux/cpufreq.h>
+>>>>>>> v3.18
 #include <linux/reboot.h>
 
 extern void sa1100_timer_init(void);
@@ -19,12 +23,17 @@ extern void sa11x0_init_late(void);
 extern void sa1110_mb_enable(void);
 extern void sa1110_mb_disable(void);
 
+<<<<<<< HEAD
 struct cpufreq_policy;
 
 extern unsigned int sa11x0_freq_to_ppcr(unsigned int khz);
 extern int sa11x0_verify_speed(struct cpufreq_policy *policy);
 extern unsigned int sa11x0_getspeed(unsigned int cpu);
 extern unsigned int sa11x0_ppcr_to_freq(unsigned int idx);
+=======
+extern struct cpufreq_frequency_table sa11x0_freq_table[];
+extern unsigned int sa11x0_getspeed(unsigned int cpu);
+>>>>>>> v3.18
 
 struct flash_platform_data;
 struct resource;

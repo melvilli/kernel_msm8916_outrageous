@@ -7,6 +7,7 @@
 #undef TRACE_SYSTEM
 #define TRACE_SYSTEM kvmmmu
 
+<<<<<<< HEAD
 #define KVM_MMU_PAGE_FIELDS \
 	__field(__u64, gfn) \
 	__field(__u32, role) \
@@ -21,6 +22,24 @@
 
 #define KVM_MMU_PAGE_PRINTK() ({				        \
 	const char *ret = p->buffer + p->len;				\
+=======
+#define KVM_MMU_PAGE_FIELDS			\
+	__field(unsigned long, mmu_valid_gen)	\
+	__field(__u64, gfn)			\
+	__field(__u32, role)			\
+	__field(__u32, root_count)		\
+	__field(bool, unsync)
+
+#define KVM_MMU_PAGE_ASSIGN(sp)				\
+	__entry->mmu_valid_gen = sp->mmu_valid_gen;	\
+	__entry->gfn = sp->gfn;				\
+	__entry->role = sp->role.word;			\
+	__entry->root_count = sp->root_count;		\
+	__entry->unsync = sp->unsync;
+
+#define KVM_MMU_PAGE_PRINTK() ({				        \
+	const u32 saved_len = p->len;					\
+>>>>>>> v3.18
 	static const char *access_str[] = {			        \
 		"---", "--x", "w--", "w-x", "-u-", "-ux", "wu-", "wux"  \
 	};							        \
@@ -28,8 +47,13 @@
 								        \
 	role.word = __entry->role;					\
 									\
+<<<<<<< HEAD
 	trace_seq_printf(p, "sp gfn %llx %u%s q%u%s %s%s"		\
 			 " %snxe root %u %s%c",				\
+=======
+	trace_seq_printf(p, "sp gen %lx gfn %llx %u%s q%u%s %s%s"	\
+			 " %snxe root %u %s%c",	__entry->mmu_valid_gen,	\
+>>>>>>> v3.18
 			 __entry->gfn, role.level,			\
 			 role.cr4_pae ? " pae" : "",			\
 			 role.quadrant,					\
@@ -39,7 +63,11 @@
 			 role.nxe ? "" : "!",				\
 			 __entry->root_count,				\
 			 __entry->unsync ? "unsync" : "sync", 0);	\
+<<<<<<< HEAD
 	ret;								\
+=======
+	p->buffer + saved_len;						\
+>>>>>>> v3.18
 		})
 
 #define kvm_mmu_trace_pferr_flags       \
@@ -197,23 +225,40 @@ DEFINE_EVENT(kvm_mmu_page_class, kvm_mmu_prepare_zap_page,
 
 TRACE_EVENT(
 	mark_mmio_spte,
+<<<<<<< HEAD
 	TP_PROTO(u64 *sptep, gfn_t gfn, unsigned access),
 	TP_ARGS(sptep, gfn, access),
+=======
+	TP_PROTO(u64 *sptep, gfn_t gfn, unsigned access, unsigned int gen),
+	TP_ARGS(sptep, gfn, access, gen),
+>>>>>>> v3.18
 
 	TP_STRUCT__entry(
 		__field(void *, sptep)
 		__field(gfn_t, gfn)
 		__field(unsigned, access)
+<<<<<<< HEAD
+=======
+		__field(unsigned int, gen)
+>>>>>>> v3.18
 	),
 
 	TP_fast_assign(
 		__entry->sptep = sptep;
 		__entry->gfn = gfn;
 		__entry->access = access;
+<<<<<<< HEAD
 	),
 
 	TP_printk("sptep:%p gfn %llx access %x", __entry->sptep, __entry->gfn,
 		  __entry->access)
+=======
+		__entry->gen = gen;
+	),
+
+	TP_printk("sptep:%p gfn %llx access %x gen %x", __entry->sptep,
+		  __entry->gfn, __entry->access, __entry->gen)
+>>>>>>> v3.18
 );
 
 TRACE_EVENT(
@@ -274,6 +319,53 @@ TRACE_EVENT(
 		  __spte_satisfied(old_spte), __spte_satisfied(new_spte)
 	)
 );
+<<<<<<< HEAD
+=======
+
+TRACE_EVENT(
+	kvm_mmu_invalidate_zap_all_pages,
+	TP_PROTO(struct kvm *kvm),
+	TP_ARGS(kvm),
+
+	TP_STRUCT__entry(
+		__field(unsigned long, mmu_valid_gen)
+		__field(unsigned int, mmu_used_pages)
+	),
+
+	TP_fast_assign(
+		__entry->mmu_valid_gen = kvm->arch.mmu_valid_gen;
+		__entry->mmu_used_pages = kvm->arch.n_used_mmu_pages;
+	),
+
+	TP_printk("kvm-mmu-valid-gen %lx used_pages %x",
+		  __entry->mmu_valid_gen, __entry->mmu_used_pages
+	)
+);
+
+
+TRACE_EVENT(
+	check_mmio_spte,
+	TP_PROTO(u64 spte, unsigned int kvm_gen, unsigned int spte_gen),
+	TP_ARGS(spte, kvm_gen, spte_gen),
+
+	TP_STRUCT__entry(
+		__field(unsigned int, kvm_gen)
+		__field(unsigned int, spte_gen)
+		__field(u64, spte)
+	),
+
+	TP_fast_assign(
+		__entry->kvm_gen = kvm_gen;
+		__entry->spte_gen = spte_gen;
+		__entry->spte = spte;
+	),
+
+	TP_printk("spte %llx kvm_gen %x spte-gen %x valid %d", __entry->spte,
+		  __entry->kvm_gen, __entry->spte_gen,
+		  __entry->kvm_gen == __entry->spte_gen
+	)
+);
+>>>>>>> v3.18
 #endif /* _TRACE_KVMMMU_H */
 
 #undef TRACE_INCLUDE_PATH

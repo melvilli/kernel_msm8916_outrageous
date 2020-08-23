@@ -99,7 +99,11 @@ static int *check_rtc_access_enable(struct nuc900_rtc *nuc900_rtc)
 	if (!timeout)
 		return ERR_PTR(-EPERM);
 
+<<<<<<< HEAD
 	return 0;
+=======
+	return NULL;
+>>>>>>> v3.18
 }
 
 static int nuc900_rtc_bcd2bin(unsigned int timereg,
@@ -229,10 +233,16 @@ static int __init nuc900_rtc_probe(struct platform_device *pdev)
 
 	nuc900_rtc = devm_kzalloc(&pdev->dev, sizeof(struct nuc900_rtc),
 				GFP_KERNEL);
+<<<<<<< HEAD
 	if (!nuc900_rtc) {
 		dev_err(&pdev->dev, "kzalloc nuc900_rtc failed\n");
 		return -ENOMEM;
 	}
+=======
+	if (!nuc900_rtc)
+		return -ENOMEM;
+
+>>>>>>> v3.18
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	nuc900_rtc->rtc_reg = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(nuc900_rtc->rtc_reg))
@@ -260,6 +270,7 @@ static int __init nuc900_rtc_probe(struct platform_device *pdev)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int __exit nuc900_rtc_remove(struct platform_device *pdev)
 {
 	platform_set_drvdata(pdev, NULL);
@@ -269,6 +280,9 @@ static int __exit nuc900_rtc_remove(struct platform_device *pdev)
 
 static struct platform_driver nuc900_rtc_driver = {
 	.remove		= __exit_p(nuc900_rtc_remove),
+=======
+static struct platform_driver nuc900_rtc_driver = {
+>>>>>>> v3.18
 	.driver		= {
 		.name	= "nuc900-rtc",
 		.owner	= THIS_MODULE,

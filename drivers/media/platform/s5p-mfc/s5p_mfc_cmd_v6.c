@@ -16,6 +16,10 @@
 #include "s5p_mfc_debug.h"
 #include "s5p_mfc_intr.h"
 #include "s5p_mfc_opr.h"
+<<<<<<< HEAD
+=======
+#include "s5p_mfc_cmd_v6.h"
+>>>>>>> v3.18
 
 static int s5p_mfc_cmd_host2risc_v6(struct s5p_mfc_dev *dev, int cmd,
 				struct s5p_mfc_cmd_args *args)
@@ -108,9 +112,18 @@ static int s5p_mfc_open_inst_cmd_v6(struct s5p_mfc_ctx *ctx)
 	case S5P_MFC_CODEC_H263_ENC:
 		codec_type = S5P_FIMV_CODEC_H263_ENC_V6;
 		break;
+<<<<<<< HEAD
 	default:
 		codec_type = S5P_FIMV_CODEC_NONE_V6;
 	};
+=======
+	case S5P_MFC_CODEC_VP8_ENC:
+		codec_type = S5P_FIMV_CODEC_VP8_ENC_V7;
+		break;
+	default:
+		codec_type = S5P_FIMV_CODEC_NONE_V6;
+	}
+>>>>>>> v3.18
 	mfc_write(dev, codec_type, S5P_FIMV_CODEC_TYPE_V6);
 	mfc_write(dev, ctx->ctx.dma, S5P_FIMV_CONTEXT_MEM_ADDR_V6);
 	mfc_write(dev, ctx->ctx.size, S5P_FIMV_CONTEXT_MEM_SIZE_V6);

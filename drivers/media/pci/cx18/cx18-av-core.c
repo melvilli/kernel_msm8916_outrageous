@@ -22,7 +22,10 @@
  *  02110-1301, USA.
  */
 
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 #include "cx18-driver.h"
 #include "cx18-io.h"
 #include "cx18-cards.h"
@@ -1231,6 +1234,7 @@ static int cx18_av_log_status(struct v4l2_subdev *sd)
 	return 0;
 }
 
+<<<<<<< HEAD
 static inline int cx18_av_dbg_match(const struct v4l2_dbg_match *match)
 {
 	return match->type == V4L2_CHIP_MATCH_HOST && match->addr == 1;
@@ -1248,18 +1252,25 @@ static int cx18_av_g_chip_ident(struct v4l2_subdev *sd,
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 static int cx18_av_g_register(struct v4l2_subdev *sd,
 			      struct v4l2_dbg_register *reg)
 {
 	struct cx18 *cx = v4l2_get_subdevdata(sd);
 
+<<<<<<< HEAD
 	if (!cx18_av_dbg_match(&reg->match))
 		return -EINVAL;
 	if ((reg->reg & 0x3) != 0)
 		return -EINVAL;
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
+=======
+	if ((reg->reg & 0x3) != 0)
+		return -EINVAL;
+>>>>>>> v3.18
 	reg->size = 4;
 	reg->val = cx18_av_read4(cx, reg->reg & 0x00000ffc);
 	return 0;
@@ -1270,12 +1281,17 @@ static int cx18_av_s_register(struct v4l2_subdev *sd,
 {
 	struct cx18 *cx = v4l2_get_subdevdata(sd);
 
+<<<<<<< HEAD
 	if (!cx18_av_dbg_match(&reg->match))
 		return -EINVAL;
 	if ((reg->reg & 0x3) != 0)
 		return -EINVAL;
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
+=======
+	if ((reg->reg & 0x3) != 0)
+		return -EINVAL;
+>>>>>>> v3.18
 	cx18_av_write4(cx, reg->reg & 0x00000ffc, reg->val);
 	return 0;
 }
@@ -1286,6 +1302,7 @@ static const struct v4l2_ctrl_ops cx18_av_ctrl_ops = {
 };
 
 static const struct v4l2_subdev_core_ops cx18_av_general_ops = {
+<<<<<<< HEAD
 	.g_chip_ident = cx18_av_g_chip_ident,
 	.log_status = cx18_av_log_status,
 	.load_fw = cx18_av_load_fw,
@@ -1298,6 +1315,11 @@ static const struct v4l2_subdev_core_ops cx18_av_general_ops = {
 	.queryctrl = v4l2_subdev_queryctrl,
 	.querymenu = v4l2_subdev_querymenu,
 	.s_std = cx18_av_s_std,
+=======
+	.log_status = cx18_av_log_status,
+	.load_fw = cx18_av_load_fw,
+	.reset = cx18_av_reset,
+>>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 	.g_register = cx18_av_g_register,
 	.s_register = cx18_av_s_register,
@@ -1317,6 +1339,10 @@ static const struct v4l2_subdev_audio_ops cx18_av_audio_ops = {
 };
 
 static const struct v4l2_subdev_video_ops cx18_av_video_ops = {
+<<<<<<< HEAD
+=======
+	.s_std = cx18_av_s_std,
+>>>>>>> v3.18
 	.s_routing = cx18_av_s_video_routing,
 	.s_stream = cx18_av_s_stream,
 	.s_mbus_fmt = cx18_av_s_mbus_fmt,
@@ -1344,8 +1370,11 @@ int cx18_av_probe(struct cx18 *cx)
 	int err;
 
 	state->rev = cx18_av_read4(cx, CXADEC_CHIP_CTRL) & 0xffff;
+<<<<<<< HEAD
 	state->id = ((state->rev >> 4) == CXADEC_CHIP_TYPE_MAKO)
 		    ? V4L2_IDENT_CX23418_843 : V4L2_IDENT_UNKNOWN;
+=======
+>>>>>>> v3.18
 
 	state->vid_input = CX18_AV_COMPOSITE7;
 	state->aud_input = CX18_AV_AUDIO8;

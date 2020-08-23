@@ -478,8 +478,13 @@ static inline bool llc_estab_match(const struct llc_sap *sap,
 
 	return llc->laddr.lsap == laddr->lsap &&
 		llc->daddr.lsap == daddr->lsap &&
+<<<<<<< HEAD
 		llc_mac_match(llc->laddr.mac, laddr->mac) &&
 		llc_mac_match(llc->daddr.mac, daddr->mac);
+=======
+		ether_addr_equal(llc->laddr.mac, laddr->mac) &&
+		ether_addr_equal(llc->daddr.mac, daddr->mac);
+>>>>>>> v3.18
 }
 
 /**
@@ -550,7 +555,11 @@ static inline bool llc_listener_match(const struct llc_sap *sap,
 
 	return sk->sk_type == SOCK_STREAM && sk->sk_state == TCP_LISTEN &&
 		llc->laddr.lsap == laddr->lsap &&
+<<<<<<< HEAD
 		llc_mac_match(llc->laddr.mac, laddr->mac);
+=======
+		ether_addr_equal(llc->laddr.mac, laddr->mac);
+>>>>>>> v3.18
 }
 
 static struct sock *__llc_lookup_listener(struct llc_sap *sap,
@@ -753,7 +762,11 @@ void llc_sap_remove_socket(struct llc_sap *sap, struct sock *sk)
  *
  *	Sends received pdus to the connection state machine.
  */
+<<<<<<< HEAD
 static int llc_conn_rcv(struct sock* sk, struct sk_buff *skb)
+=======
+static int llc_conn_rcv(struct sock *sk, struct sk_buff *skb)
+>>>>>>> v3.18
 {
 	struct llc_conn_state_ev *ev = llc_conn_ev(skb);
 
@@ -821,10 +834,14 @@ void llc_conn_handler(struct llc_sap *sap, struct sk_buff *skb)
 		 * another trick required to cope with how the PROCOM state
 		 * machine works. -acme
 		 */
+<<<<<<< HEAD
 		skb_orphan(skb);
 		sock_hold(sk);
 		skb->sk = sk;
 		skb->destructor = sock_efree;
+=======
+		skb->sk = sk;
+>>>>>>> v3.18
 	}
 	if (!sock_owned_by_user(sk))
 		llc_conn_rcv(sk, skb);
@@ -894,7 +911,11 @@ out_kfree_skb:
  *
  *     Initializes a socket with default llc values.
  */
+<<<<<<< HEAD
 static void llc_sk_init(struct sock* sk)
+=======
+static void llc_sk_init(struct sock *sk)
+>>>>>>> v3.18
 {
 	struct llc_sock *llc = llc_sk(sk);
 

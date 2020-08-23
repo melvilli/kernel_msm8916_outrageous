@@ -181,7 +181,10 @@ struct __large_struct { unsigned long buf[100]; };
 		"2:\n"						\
 		"	.section	.fixup,\"ax\"\n"	\
 		"3:\n\t"					\
+<<<<<<< HEAD
 		"	mov		0,%1\n"			\
+=======
+>>>>>>> v3.18
 		"	mov		%3,%0\n"		\
 		"	jmp		2b\n"			\
 		"	.previous\n"				\
@@ -472,13 +475,21 @@ extern unsigned long __generic_copy_from_user(void *, const void __user *,
 
 #define __copy_to_user(to, from, n)			\
 ({							\
+<<<<<<< HEAD
 	might_sleep();					\
+=======
+	might_fault();					\
+>>>>>>> v3.18
 	__copy_to_user_inatomic((to), (from), (n));	\
 })
 
 #define __copy_from_user(to, from, n)			\
 ({							\
+<<<<<<< HEAD
 	might_sleep();					\
+=======
+	might_fault();					\
+>>>>>>> v3.18
 	__copy_from_user_inatomic((to), (from), (n));	\
 })
 

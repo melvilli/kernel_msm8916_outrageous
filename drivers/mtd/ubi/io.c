@@ -1,9 +1,12 @@
 /*
  * Copyright (c) International Business Machines Corp., 2006
  * Copyright (c) Nokia Corporation, 2006, 2007
+<<<<<<< HEAD
  * Copyright (c) 2014, Linux Foundation. All rights reserved.
  * Linux Foundation chooses to take subject only to the GPLv2
  * license terms, and distributes only under these terms.
+=======
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -180,24 +183,36 @@ retry:
 			 * enabled. A corresponding message will be printed
 			 * later, when it is has been scrubbed.
 			 */
+<<<<<<< HEAD
 			ubi_msg(ubi->ubi_num,
 				"fixable bit-flip detected at PEB %d", pnum);
+=======
+			ubi_msg("fixable bit-flip detected at PEB %d", pnum);
+>>>>>>> v3.18
 			ubi_assert(len == read);
 			return UBI_IO_BITFLIPS;
 		}
 
 		if (retries++ < UBI_IO_RETRIES) {
+<<<<<<< HEAD
 			ubi_warn(ubi->ubi_num,
 				 "error %d%s while reading %d bytes from "
 				 "PEB %d:%d, read only %zd bytes, retry",
+=======
+			ubi_warn("error %d%s while reading %d bytes from PEB %d:%d, read only %zd bytes, retry",
+>>>>>>> v3.18
 				 err, errstr, len, pnum, offset, read);
 			yield();
 			goto retry;
 		}
 
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num,
 			"error %d%s while reading %d bytes from PEB %d:%d,"
 			" read %zd bytes",
+=======
+		ubi_err("error %d%s while reading %d bytes from PEB %d:%d, read %zd bytes",
+>>>>>>> v3.18
 			err, errstr, len, pnum, offset, read);
 		dump_stack();
 
@@ -212,6 +227,7 @@ retry:
 		}
 	} else {
 		ubi_assert(len == read);
+<<<<<<< HEAD
 		if (ubi->lookuptbl && ubi->lookuptbl[pnum]) {
 			if (ubi->lookuptbl[pnum]->rc <
 				UBI_MAX_READCOUNTER)
@@ -221,6 +237,8 @@ retry:
 				  "read counter overflow at PEB %d, RC %d",
 					pnum, ubi->lookuptbl[pnum]->rc);
 		}
+=======
+>>>>>>> v3.18
 
 		if (ubi_dbg_is_bitflip(ubi)) {
 			dbg_gen("bit-flip (emulated)");
@@ -263,7 +281,11 @@ int ubi_io_write(struct ubi_device *ubi, const void *buf, int pnum, int offset,
 	ubi_assert(len > 0 && len % ubi->hdrs_min_io_size == 0);
 
 	if (ubi->ro_mode) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num, "read-only mode");
+=======
+		ubi_err("read-only mode");
+>>>>>>> v3.18
 		return -EROFS;
 	}
 
@@ -290,8 +312,12 @@ int ubi_io_write(struct ubi_device *ubi, const void *buf, int pnum, int offset,
 	}
 
 	if (ubi_dbg_is_write_failure(ubi)) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num,
 			"cannot write %d bytes to PEB %d:%d (emulated)",
+=======
+		ubi_err("cannot write %d bytes to PEB %d:%d (emulated)",
+>>>>>>> v3.18
 			len, pnum, offset);
 		dump_stack();
 		return -EIO;
@@ -300,9 +326,13 @@ int ubi_io_write(struct ubi_device *ubi, const void *buf, int pnum, int offset,
 	addr = (loff_t)pnum * ubi->peb_size + offset;
 	err = mtd_write(ubi->mtd, addr, len, &written, buf);
 	if (err) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num,
 			"error %d while writing %d bytes to PEB %d:%d, "
 			"written %zd bytes",
+=======
+		ubi_err("error %d while writing %d bytes to PEB %d:%d, written %zd bytes",
+>>>>>>> v3.18
 			err, len, pnum, offset, written);
 		dump_stack();
 		ubi_dump_flash(ubi, pnum, offset, len);
@@ -358,7 +388,11 @@ static int do_sync_erase(struct ubi_device *ubi, int pnum)
 	ubi_assert(pnum >= 0 && pnum < ubi->peb_count);
 
 	if (ubi->ro_mode) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num, "read-only mode");
+=======
+		ubi_err("read-only mode");
+>>>>>>> v3.18
 		return -EROFS;
 	}
 
@@ -375,14 +409,22 @@ retry:
 	err = mtd_erase(ubi->mtd, &ei);
 	if (err) {
 		if (retries++ < UBI_IO_RETRIES) {
+<<<<<<< HEAD
 			ubi_warn(ubi->ubi_num,
 				 "error %d while erasing PEB %d, retry",
+=======
+			ubi_warn("error %d while erasing PEB %d, retry",
+>>>>>>> v3.18
 				 err, pnum);
 			yield();
 			goto retry;
 		}
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num,
 			"cannot erase PEB %d, error %d", pnum, err);
+=======
+		ubi_err("cannot erase PEB %d, error %d", pnum, err);
+>>>>>>> v3.18
 		dump_stack();
 		return err;
 	}
@@ -390,18 +432,30 @@ retry:
 	err = wait_event_interruptible(wq, ei.state == MTD_ERASE_DONE ||
 					   ei.state == MTD_ERASE_FAILED);
 	if (err) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num, "interrupted PEB %d erasure", pnum);
+=======
+		ubi_err("interrupted PEB %d erasure", pnum);
+>>>>>>> v3.18
 		return -EINTR;
 	}
 
 	if (ei.state == MTD_ERASE_FAILED) {
 		if (retries++ < UBI_IO_RETRIES) {
+<<<<<<< HEAD
 			ubi_warn(ubi->ubi_num,
 				 "error while erasing PEB %d, retry", pnum);
 			yield();
 			goto retry;
 		}
 		ubi_err(ubi->ubi_num, "cannot erase PEB %d", pnum);
+=======
+			ubi_warn("error while erasing PEB %d, retry", pnum);
+			yield();
+			goto retry;
+		}
+		ubi_err("cannot erase PEB %d", pnum);
+>>>>>>> v3.18
 		dump_stack();
 		return -EIO;
 	}
@@ -411,7 +465,11 @@ retry:
 		return err;
 
 	if (ubi_dbg_is_erase_failure(ubi)) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num, "cannot erase PEB %d (emulated)", pnum);
+=======
+		ubi_err("cannot erase PEB %d (emulated)", pnum);
+>>>>>>> v3.18
 		return -EIO;
 	}
 
@@ -434,7 +492,11 @@ static int torture_peb(struct ubi_device *ubi, int pnum)
 {
 	int err, i, patt_count;
 
+<<<<<<< HEAD
 	ubi_msg(ubi->ubi_num, "run torture test for PEB %d", pnum);
+=======
+	ubi_msg("run torture test for PEB %d", pnum);
+>>>>>>> v3.18
 	patt_count = ARRAY_SIZE(patterns);
 	ubi_assert(patt_count > 0);
 
@@ -451,8 +513,12 @@ static int torture_peb(struct ubi_device *ubi, int pnum)
 
 		err = ubi_check_pattern(ubi->peb_buf, 0xFF, ubi->peb_size);
 		if (err == 0) {
+<<<<<<< HEAD
 			ubi_err(ubi->ubi_num,
 				"erased PEB %d, but a non-0xFF byte found",
+=======
+			ubi_err("erased PEB %d, but a non-0xFF byte found",
+>>>>>>> v3.18
 				pnum);
 			err = -EIO;
 			goto out;
@@ -472,8 +538,12 @@ static int torture_peb(struct ubi_device *ubi, int pnum)
 		err = ubi_check_pattern(ubi->peb_buf, patterns[i],
 					ubi->peb_size);
 		if (err == 0) {
+<<<<<<< HEAD
 			ubi_err(ubi->ubi_num,
 				"pattern %x checking failed for PEB %d",
+=======
+			ubi_err("pattern %x checking failed for PEB %d",
+>>>>>>> v3.18
 				patterns[i], pnum);
 			err = -EIO;
 			goto out;
@@ -481,8 +551,12 @@ static int torture_peb(struct ubi_device *ubi, int pnum)
 	}
 
 	err = patt_count;
+<<<<<<< HEAD
 	ubi_msg(ubi->ubi_num,
 		"PEB %d passed torture test, do not mark it as bad", pnum);
+=======
+	ubi_msg("PEB %d passed torture test, do not mark it as bad", pnum);
+>>>>>>> v3.18
 
 out:
 	mutex_unlock(&ubi->buf_mutex);
@@ -492,8 +566,12 @@ out:
 		 * has not passed because it happened on a freshly erased
 		 * physical eraseblock which means something is wrong with it.
 		 */
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num,
 			"read problems on freshly erased PEB %d, must be bad",
+=======
+		ubi_err("read problems on freshly erased PEB %d, must be bad",
+>>>>>>> v3.18
 			pnum);
 		err = -EIO;
 	}
@@ -569,8 +647,12 @@ error:
 	 * it. Supposedly the flash media or the driver is screwed up, so
 	 * return an error.
 	 */
+<<<<<<< HEAD
 	ubi_err(ubi->ubi_num,
 		"cannot invalidate PEB %d, write returned %d", pnum, err);
+=======
+	ubi_err("cannot invalidate PEB %d, write returned %d", pnum, err);
+>>>>>>> v3.18
 	ubi_dump_flash(ubi, pnum, 0, ubi->peb_size);
 	return -EIO;
 }
@@ -602,7 +684,11 @@ int ubi_io_sync_erase(struct ubi_device *ubi, int pnum, int torture)
 		return err;
 
 	if (ubi->ro_mode) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num, "read-only mode");
+=======
+		ubi_err("read-only mode");
+>>>>>>> v3.18
 		return -EROFS;
 	}
 
@@ -644,8 +730,12 @@ int ubi_io_is_bad(const struct ubi_device *ubi, int pnum)
 
 		ret = mtd_block_isbad(mtd, (loff_t)pnum * ubi->peb_size);
 		if (ret < 0)
+<<<<<<< HEAD
 			ubi_err(ubi->ubi_num,
 				"error %d while checking if PEB %d is bad",
+=======
+			ubi_err("error %d while checking if PEB %d is bad",
+>>>>>>> v3.18
 				ret, pnum);
 		else if (ret)
 			dbg_io("PEB %d is bad", pnum);
@@ -671,7 +761,11 @@ int ubi_io_mark_bad(const struct ubi_device *ubi, int pnum)
 	ubi_assert(pnum >= 0 && pnum < ubi->peb_count);
 
 	if (ubi->ro_mode) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num, "read-only mode");
+=======
+		ubi_err("read-only mode");
+>>>>>>> v3.18
 		return -EROFS;
 	}
 
@@ -680,8 +774,12 @@ int ubi_io_mark_bad(const struct ubi_device *ubi, int pnum)
 
 	err = mtd_block_markbad(mtd, (loff_t)pnum * ubi->peb_size);
 	if (err)
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num,
 			"cannot mark PEB %d bad, error %d", pnum, err);
+=======
+		ubi_err("cannot mark PEB %d bad, error %d", pnum, err);
+>>>>>>> v3.18
 	return err;
 }
 
@@ -704,34 +802,54 @@ static int validate_ec_hdr(const struct ubi_device *ubi,
 	leb_start = be32_to_cpu(ec_hdr->data_offset);
 
 	if (ec_hdr->version != UBI_VERSION) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num,
 			"node with incompatible UBI version found: "
 			"this UBI version is %d, image version is %d",
+=======
+		ubi_err("node with incompatible UBI version found: this UBI version is %d, image version is %d",
+>>>>>>> v3.18
 			UBI_VERSION, (int)ec_hdr->version);
 		goto bad;
 	}
 
 	if (vid_hdr_offset != ubi->vid_hdr_offset) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num, "bad VID header offset %d, expected %d",
+=======
+		ubi_err("bad VID header offset %d, expected %d",
+>>>>>>> v3.18
 			vid_hdr_offset, ubi->vid_hdr_offset);
 		goto bad;
 	}
 
 	if (leb_start != ubi->leb_start) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num, "bad data offset %d, expected %d",
+=======
+		ubi_err("bad data offset %d, expected %d",
+>>>>>>> v3.18
 			leb_start, ubi->leb_start);
 		goto bad;
 	}
 
 	if (ec < 0 || ec > UBI_MAX_ERASECOUNTER) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num, "bad erase counter %lld", ec);
+=======
+		ubi_err("bad erase counter %lld", ec);
+>>>>>>> v3.18
 		goto bad;
 	}
 
 	return 0;
 
 bad:
+<<<<<<< HEAD
 	ubi_err(ubi->ubi_num, "bad EC header");
+=======
+	ubi_err("bad EC header");
+>>>>>>> v3.18
 	ubi_dump_ec_hdr(ec_hdr);
 	dump_stack();
 	return 1;
@@ -797,8 +915,12 @@ int ubi_io_read_ec_hdr(struct ubi_device *ubi, int pnum,
 		if (ubi_check_pattern(ec_hdr, 0xFF, UBI_EC_HDR_SIZE)) {
 			/* The physical eraseblock is supposedly empty */
 			if (verbose)
+<<<<<<< HEAD
 				ubi_warn(ubi->ubi_num,
 				"no EC header found at PEB %d, only 0xFF bytes",
+=======
+				ubi_warn("no EC header found at PEB %d, only 0xFF bytes",
+>>>>>>> v3.18
 					 pnum);
 			dbg_bld("no EC header found at PEB %d, only 0xFF bytes",
 				pnum);
@@ -813,8 +935,12 @@ int ubi_io_read_ec_hdr(struct ubi_device *ubi, int pnum,
 		 * 0xFF bytes. Report that the header is corrupted.
 		 */
 		if (verbose) {
+<<<<<<< HEAD
 			ubi_warn(ubi->ubi_num,
 			   "bad magic number at PEB %d: %08x instead of %08x",
+=======
+			ubi_warn("bad magic number at PEB %d: %08x instead of %08x",
+>>>>>>> v3.18
 				 pnum, magic, UBI_EC_HDR_MAGIC);
 			ubi_dump_ec_hdr(ec_hdr);
 		}
@@ -828,9 +954,13 @@ int ubi_io_read_ec_hdr(struct ubi_device *ubi, int pnum,
 
 	if (hdr_crc != crc) {
 		if (verbose) {
+<<<<<<< HEAD
 			ubi_warn(ubi->ubi_num,
 				 "bad EC header CRC at PEB %d, "
 				 "calculated %#08x, read %#08x",
+=======
+			ubi_warn("bad EC header CRC at PEB %d, calculated %#08x, read %#08x",
+>>>>>>> v3.18
 				 pnum, crc, hdr_crc);
 			ubi_dump_ec_hdr(ec_hdr);
 		}
@@ -846,7 +976,11 @@ int ubi_io_read_ec_hdr(struct ubi_device *ubi, int pnum,
 	/* And of course validate what has just been read from the media */
 	err = validate_ec_hdr(ubi, ec_hdr);
 	if (err) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num, "validation failed for PEB %d", pnum);
+=======
+		ubi_err("validation failed for PEB %d", pnum);
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
@@ -920,45 +1054,73 @@ static int validate_vid_hdr(const struct ubi_device *ubi,
 	int usable_leb_size = ubi->leb_size - data_pad;
 
 	if (copy_flag != 0 && copy_flag != 1) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num, "bad copy_flag");
+=======
+		ubi_err("bad copy_flag");
+>>>>>>> v3.18
 		goto bad;
 	}
 
 	if (vol_id < 0 || lnum < 0 || data_size < 0 || used_ebs < 0 ||
 	    data_pad < 0) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num, "negative values");
+=======
+		ubi_err("negative values");
+>>>>>>> v3.18
 		goto bad;
 	}
 
 	if (vol_id >= UBI_MAX_VOLUMES && vol_id < UBI_INTERNAL_VOL_START) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num, "bad vol_id");
+=======
+		ubi_err("bad vol_id");
+>>>>>>> v3.18
 		goto bad;
 	}
 
 	if (vol_id < UBI_INTERNAL_VOL_START && compat != 0) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num, "bad compat");
+=======
+		ubi_err("bad compat");
+>>>>>>> v3.18
 		goto bad;
 	}
 
 	if (vol_id >= UBI_INTERNAL_VOL_START && compat != UBI_COMPAT_DELETE &&
 	    compat != UBI_COMPAT_RO && compat != UBI_COMPAT_PRESERVE &&
 	    compat != UBI_COMPAT_REJECT) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num, "bad compat");
+=======
+		ubi_err("bad compat");
+>>>>>>> v3.18
 		goto bad;
 	}
 
 	if (vol_type != UBI_VID_DYNAMIC && vol_type != UBI_VID_STATIC) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num, "bad vol_type");
+=======
+		ubi_err("bad vol_type");
+>>>>>>> v3.18
 		goto bad;
 	}
 
 	if (data_pad >= ubi->leb_size / 2) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num, "bad data_pad");
 		goto bad;
 	}
 
 	if (data_size > ubi->leb_size) {
 		ubi_err("bad data_size");
+=======
+		ubi_err("bad data_pad");
+>>>>>>> v3.18
 		goto bad;
 	}
 
@@ -970,46 +1132,82 @@ static int validate_vid_hdr(const struct ubi_device *ubi,
 		 * mapped logical eraseblocks.
 		 */
 		if (used_ebs == 0) {
+<<<<<<< HEAD
 			ubi_err(ubi->ubi_num, "zero used_ebs");
 			goto bad;
 		}
 		if (data_size == 0) {
 			ubi_err(ubi->ubi_num, "zero data_size");
+=======
+			ubi_err("zero used_ebs");
+			goto bad;
+		}
+		if (data_size == 0) {
+			ubi_err("zero data_size");
+>>>>>>> v3.18
 			goto bad;
 		}
 		if (lnum < used_ebs - 1) {
 			if (data_size != usable_leb_size) {
+<<<<<<< HEAD
 				ubi_err(ubi->ubi_num, "bad data_size");
+=======
+				ubi_err("bad data_size");
+>>>>>>> v3.18
 				goto bad;
 			}
 		} else if (lnum == used_ebs - 1) {
 			if (data_size == 0) {
+<<<<<<< HEAD
 				ubi_err(ubi->ubi_num,
 					"bad data_size at last LEB");
 				goto bad;
 			}
 		} else {
 			ubi_err(ubi->ubi_num, "too high lnum");
+=======
+				ubi_err("bad data_size at last LEB");
+				goto bad;
+			}
+		} else {
+			ubi_err("too high lnum");
+>>>>>>> v3.18
 			goto bad;
 		}
 	} else {
 		if (copy_flag == 0) {
 			if (data_crc != 0) {
+<<<<<<< HEAD
 				ubi_err(ubi->ubi_num, "non-zero data CRC");
 				goto bad;
 			}
 			if (data_size != 0) {
 				ubi_err(ubi->ubi_num, "non-zero data_size");
+=======
+				ubi_err("non-zero data CRC");
+				goto bad;
+			}
+			if (data_size != 0) {
+				ubi_err("non-zero data_size");
+>>>>>>> v3.18
 				goto bad;
 			}
 		} else {
 			if (data_size == 0) {
+<<<<<<< HEAD
 				ubi_err(ubi->ubi_num, "zero data_size of copy");
+=======
+				ubi_err("zero data_size of copy");
+>>>>>>> v3.18
 				goto bad;
 			}
 		}
 		if (used_ebs != 0) {
+<<<<<<< HEAD
 			ubi_err(ubi->ubi_num, "bad used_ebs");
+=======
+			ubi_err("bad used_ebs");
+>>>>>>> v3.18
 			goto bad;
 		}
 	}
@@ -1017,7 +1215,11 @@ static int validate_vid_hdr(const struct ubi_device *ubi,
 	return 0;
 
 bad:
+<<<<<<< HEAD
 	ubi_err(ubi->ubi_num, "bad VID header");
+=======
+	ubi_err("bad VID header");
+>>>>>>> v3.18
 	ubi_dump_vid_hdr(vid_hdr);
 	dump_stack();
 	return 1;
@@ -1062,8 +1264,12 @@ int ubi_io_read_vid_hdr(struct ubi_device *ubi, int pnum,
 
 		if (ubi_check_pattern(vid_hdr, 0xFF, UBI_VID_HDR_SIZE)) {
 			if (verbose)
+<<<<<<< HEAD
 				ubi_warn(ubi->ubi_num,
 				"no VID header found at PEB %d, only 0xFF bytes",
+=======
+				ubi_warn("no VID header found at PEB %d, only 0xFF bytes",
+>>>>>>> v3.18
 					 pnum);
 			dbg_bld("no VID header found at PEB %d, only 0xFF bytes",
 				pnum);
@@ -1074,8 +1280,12 @@ int ubi_io_read_vid_hdr(struct ubi_device *ubi, int pnum,
 		}
 
 		if (verbose) {
+<<<<<<< HEAD
 			ubi_warn(ubi->ubi_num,
 			 "bad magic number at PEB %d: %08x instead of %08x",
+=======
+			ubi_warn("bad magic number at PEB %d: %08x instead of %08x",
+>>>>>>> v3.18
 				 pnum, magic, UBI_VID_HDR_MAGIC);
 			ubi_dump_vid_hdr(vid_hdr);
 		}
@@ -1089,8 +1299,12 @@ int ubi_io_read_vid_hdr(struct ubi_device *ubi, int pnum,
 
 	if (hdr_crc != crc) {
 		if (verbose) {
+<<<<<<< HEAD
 			ubi_warn(ubi->ubi_num,
 			  "bad CRC at PEB %d, calculated %#08x, read %#08x",
+=======
+			ubi_warn("bad CRC at PEB %d, calculated %#08x, read %#08x",
+>>>>>>> v3.18
 				 pnum, crc, hdr_crc);
 			ubi_dump_vid_hdr(vid_hdr);
 		}
@@ -1104,7 +1318,11 @@ int ubi_io_read_vid_hdr(struct ubi_device *ubi, int pnum,
 
 	err = validate_vid_hdr(ubi, vid_hdr);
 	if (err) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num, "validation failed for PEB %d", pnum);
+=======
+		ubi_err("validation failed for PEB %d", pnum);
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
@@ -1174,7 +1392,11 @@ static int self_check_not_bad(const struct ubi_device *ubi, int pnum)
 	if (!err)
 		return err;
 
+<<<<<<< HEAD
 	ubi_err(ubi->ubi_num, "self-check failed for PEB %d", pnum);
+=======
+	ubi_err("self-check failed for PEB %d", pnum);
+>>>>>>> v3.18
 	dump_stack();
 	return err > 0 ? -EINVAL : err;
 }
@@ -1199,14 +1421,22 @@ static int self_check_ec_hdr(const struct ubi_device *ubi, int pnum,
 
 	magic = be32_to_cpu(ec_hdr->magic);
 	if (magic != UBI_EC_HDR_MAGIC) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num, "bad magic %#08x, must be %#08x",
+=======
+		ubi_err("bad magic %#08x, must be %#08x",
+>>>>>>> v3.18
 			magic, UBI_EC_HDR_MAGIC);
 		goto fail;
 	}
 
 	err = validate_ec_hdr(ubi, ec_hdr);
 	if (err) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num, "self-check failed for PEB %d", pnum);
+=======
+		ubi_err("self-check failed for PEB %d", pnum);
+>>>>>>> v3.18
 		goto fail;
 	}
 
@@ -1246,9 +1476,14 @@ static int self_check_peb_ec_hdr(const struct ubi_device *ubi, int pnum)
 	crc = crc32(UBI_CRC32_INIT, ec_hdr, UBI_EC_HDR_SIZE_CRC);
 	hdr_crc = be32_to_cpu(ec_hdr->hdr_crc);
 	if (hdr_crc != crc) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num, "bad CRC, calculated %#08x, read %#08x",
 			crc, hdr_crc);
 		ubi_err(ubi->ubi_num, "self-check failed for PEB %d", pnum);
+=======
+		ubi_err("bad CRC, calculated %#08x, read %#08x", crc, hdr_crc);
+		ubi_err("self-check failed for PEB %d", pnum);
+>>>>>>> v3.18
 		ubi_dump_ec_hdr(ec_hdr);
 		dump_stack();
 		err = -EINVAL;
@@ -1282,22 +1517,34 @@ static int self_check_vid_hdr(const struct ubi_device *ubi, int pnum,
 
 	magic = be32_to_cpu(vid_hdr->magic);
 	if (magic != UBI_VID_HDR_MAGIC) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num,
 			"bad VID header magic %#08x at PEB %d, must be %#08x",
+=======
+		ubi_err("bad VID header magic %#08x at PEB %d, must be %#08x",
+>>>>>>> v3.18
 			magic, pnum, UBI_VID_HDR_MAGIC);
 		goto fail;
 	}
 
 	err = validate_vid_hdr(ubi, vid_hdr);
 	if (err) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num, "self-check failed for PEB %d", pnum);
+=======
+		ubi_err("self-check failed for PEB %d", pnum);
+>>>>>>> v3.18
 		goto fail;
 	}
 
 	return err;
 
 fail:
+<<<<<<< HEAD
 	ubi_err(ubi->ubi_num, "self-check failed for PEB %d", pnum);
+=======
+	ubi_err("self-check failed for PEB %d", pnum);
+>>>>>>> v3.18
 	ubi_dump_vid_hdr(vid_hdr);
 	dump_stack();
 	return -EINVAL;
@@ -1335,10 +1582,16 @@ static int self_check_peb_vid_hdr(const struct ubi_device *ubi, int pnum)
 	crc = crc32(UBI_CRC32_INIT, vid_hdr, UBI_EC_HDR_SIZE_CRC);
 	hdr_crc = be32_to_cpu(vid_hdr->hdr_crc);
 	if (hdr_crc != crc) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num,
 		  "bad VID header CRC at PEB %d, calculated %#08x, read %#08x",
 			pnum, crc, hdr_crc);
 		ubi_err(ubi->ubi_num, "self-check failed for PEB %d", pnum);
+=======
+		ubi_err("bad VID header CRC at PEB %d, calculated %#08x, read %#08x",
+			pnum, crc, hdr_crc);
+		ubi_err("self-check failed for PEB %d", pnum);
+>>>>>>> v3.18
 		ubi_dump_vid_hdr(vid_hdr);
 		dump_stack();
 		err = -EINVAL;
@@ -1377,7 +1630,11 @@ static int self_check_write(struct ubi_device *ubi, const void *buf, int pnum,
 
 	buf1 = __vmalloc(len, GFP_NOFS, PAGE_KERNEL);
 	if (!buf1) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num, "cannot allocate memory to check writes");
+=======
+		ubi_err("cannot allocate memory to check writes");
+>>>>>>> v3.18
 		return 0;
 	}
 
@@ -1385,6 +1642,7 @@ static int self_check_write(struct ubi_device *ubi, const void *buf, int pnum,
 	if (err && !mtd_is_bitflip(err))
 		goto out_free;
 
+<<<<<<< HEAD
 	if (ubi->lookuptbl && ubi->lookuptbl[pnum]) {
 		if (ubi->lookuptbl[pnum]->rc < UBI_MAX_READCOUNTER)
 			ubi->lookuptbl[pnum]->rc++;
@@ -1395,6 +1653,8 @@ static int self_check_write(struct ubi_device *ubi, const void *buf, int pnum,
 	} else
 		ubi_err(ubi->ubi_num, "Can't update RC. No lookuptbl");
 
+=======
+>>>>>>> v3.18
 	for (i = 0; i < len; i++) {
 		uint8_t c = ((uint8_t *)buf)[i];
 		uint8_t c1 = ((uint8_t *)buf1)[i];
@@ -1403,6 +1663,7 @@ static int self_check_write(struct ubi_device *ubi, const void *buf, int pnum,
 		if (c == c1)
 			continue;
 
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num, "self-check failed for PEB %d:%d, len %d",
 			pnum, offset, len);
 		ubi_msg(ubi->ubi_num, "data differ at position %d", i);
@@ -1414,6 +1675,17 @@ static int self_check_write(struct ubi_device *ubi, const void *buf, int pnum,
 			       buf + i, dump_len, 1);
 		ubi_msg(ubi->ubi_num,
 			"hex dump of the read buffer from %d to %d",
+=======
+		ubi_err("self-check failed for PEB %d:%d, len %d",
+			pnum, offset, len);
+		ubi_msg("data differ at position %d", i);
+		dump_len = max_t(int, 128, len - i);
+		ubi_msg("hex dump of the original buffer from %d to %d",
+			i, i + dump_len);
+		print_hex_dump(KERN_DEBUG, "", DUMP_PREFIX_OFFSET, 32, 1,
+			       buf + i, dump_len, 1);
+		ubi_msg("hex dump of the read buffer from %d to %d",
+>>>>>>> v3.18
 			i, i + dump_len);
 		print_hex_dump(KERN_DEBUG, "", DUMP_PREFIX_OFFSET, 32, 1,
 			       buf1 + i, dump_len, 1);
@@ -1453,12 +1725,17 @@ int ubi_self_check_all_ff(struct ubi_device *ubi, int pnum, int offset, int len)
 
 	buf = __vmalloc(len, GFP_NOFS, PAGE_KERNEL);
 	if (!buf) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num, "cannot allocate memory to check for 0xFFs");
+=======
+		ubi_err("cannot allocate memory to check for 0xFFs");
+>>>>>>> v3.18
 		return 0;
 	}
 
 	err = mtd_read(ubi->mtd, addr, len, &read, buf);
 	if (err && !mtd_is_bitflip(err)) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num,
 		"err %d while reading %d bytes from PEB %d:%d, read %zd bytes",
 			err, len, pnum, offset, read);
@@ -1479,6 +1756,16 @@ int ubi_self_check_all_ff(struct ubi_device *ubi, int pnum, int offset, int len)
 	if (err == 0) {
 		ubi_err(ubi->ubi_num,
 		  "flash region at PEB %d:%d, length %d does not contain all 0xFF bytes",
+=======
+		ubi_err("error %d while reading %d bytes from PEB %d:%d, read %zd bytes",
+			err, len, pnum, offset, read);
+		goto error;
+	}
+
+	err = ubi_check_pattern(buf, 0xFF, len);
+	if (err == 0) {
+		ubi_err("flash region at PEB %d:%d, length %d does not contain all 0xFF bytes",
+>>>>>>> v3.18
 			pnum, offset, len);
 		goto fail;
 	}
@@ -1487,9 +1774,14 @@ int ubi_self_check_all_ff(struct ubi_device *ubi, int pnum, int offset, int len)
 	return 0;
 
 fail:
+<<<<<<< HEAD
 	ubi_err(ubi->ubi_num, "self-check failed for PEB %d", pnum);
 	ubi_msg(ubi->ubi_num, "hex dump of the %d-%d region",
 		 offset, offset + len);
+=======
+	ubi_err("self-check failed for PEB %d", pnum);
+	ubi_msg("hex dump of the %d-%d region", offset, offset + len);
+>>>>>>> v3.18
 	print_hex_dump(KERN_DEBUG, "", DUMP_PREFIX_OFFSET, 32, 1, buf, len, 1);
 	err = -EINVAL;
 error:

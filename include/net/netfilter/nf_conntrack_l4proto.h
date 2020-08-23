@@ -114,6 +114,7 @@ extern struct nf_conntrack_l4proto nf_conntrack_l4proto_generic;
 
 #define MAX_NF_CT_PROTO 256
 
+<<<<<<< HEAD
 extern struct nf_conntrack_l4proto *
 __nf_ct_l4proto_find(u_int16_t l3proto, u_int8_t l4proto);
 
@@ -130,6 +131,24 @@ extern void nf_ct_l4proto_pernet_unregister(struct net *net,
 /* Protocol global registration. */
 extern int nf_ct_l4proto_register(struct nf_conntrack_l4proto *proto);
 extern void nf_ct_l4proto_unregister(struct nf_conntrack_l4proto *proto);
+=======
+struct nf_conntrack_l4proto *__nf_ct_l4proto_find(u_int16_t l3proto,
+						  u_int8_t l4proto);
+
+struct nf_conntrack_l4proto *nf_ct_l4proto_find_get(u_int16_t l3proto,
+						    u_int8_t l4proto);
+void nf_ct_l4proto_put(struct nf_conntrack_l4proto *p);
+
+/* Protocol pernet registration. */
+int nf_ct_l4proto_pernet_register(struct net *net,
+				  struct nf_conntrack_l4proto *proto);
+void nf_ct_l4proto_pernet_unregister(struct net *net,
+				     struct nf_conntrack_l4proto *proto);
+
+/* Protocol global registration. */
+int nf_ct_l4proto_register(struct nf_conntrack_l4proto *proto);
+void nf_ct_l4proto_unregister(struct nf_conntrack_l4proto *proto);
+>>>>>>> v3.18
 
 static inline void nf_ct_kfree_compat_sysctl_table(struct nf_proto_net *pn)
 {
@@ -140,6 +159,7 @@ static inline void nf_ct_kfree_compat_sysctl_table(struct nf_proto_net *pn)
 }
 
 /* Generic netlink helpers */
+<<<<<<< HEAD
 extern int nf_ct_port_tuple_to_nlattr(struct sk_buff *skb,
 				      const struct nf_conntrack_tuple *tuple);
 extern int nf_ct_port_nlattr_to_tuple(struct nlattr *tb[],
@@ -149,16 +169,29 @@ extern const struct nla_policy nf_ct_port_nla_policy[];
 
 #ifdef CONFIG_SYSCTL
 #ifdef DEBUG_INVALID_PACKETS
+=======
+int nf_ct_port_tuple_to_nlattr(struct sk_buff *skb,
+			       const struct nf_conntrack_tuple *tuple);
+int nf_ct_port_nlattr_to_tuple(struct nlattr *tb[],
+			       struct nf_conntrack_tuple *t);
+int nf_ct_port_nlattr_tuple_size(void);
+extern const struct nla_policy nf_ct_port_nla_policy[];
+
+#ifdef CONFIG_SYSCTL
+>>>>>>> v3.18
 #define LOG_INVALID(net, proto)				\
 	((net)->ct.sysctl_log_invalid == (proto) ||	\
 	 (net)->ct.sysctl_log_invalid == IPPROTO_RAW)
 #else
+<<<<<<< HEAD
 #define LOG_INVALID(net, proto)				\
 	(((net)->ct.sysctl_log_invalid == (proto) ||	\
 	  (net)->ct.sysctl_log_invalid == IPPROTO_RAW)	\
 	 && net_ratelimit())
 #endif
 #else
+=======
+>>>>>>> v3.18
 static inline int LOG_INVALID(struct net *net, int proto) { return 0; }
 #endif /* CONFIG_SYSCTL */
 

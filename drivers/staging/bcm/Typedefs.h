@@ -6,10 +6,17 @@
 #define  STATUS_SUCCESS	0
 #define  STATUS_FAILURE -1
 
+<<<<<<< HEAD
 #define	 FALSE		0
 #define	 TRUE		1
 
 typedef char BOOLEAN;
+=======
+
+#define	 TRUE		1
+
+
+>>>>>>> v3.18
 typedef char CHAR;
 typedef int INT;
 typedef short SHORT;
@@ -25,6 +32,7 @@ typedef unsigned int B_UINT32;
 typedef unsigned long ULONG;
 typedef unsigned long DWORD;
 
+<<<<<<< HEAD
 typedef char* PCHAR;
 typedef short* PSHORT;
 typedef int* PINT;
@@ -35,6 +43,18 @@ typedef unsigned char* PUCHAR;
 typedef unsigned short* PUSHORT;
 typedef unsigned int* PUINT;
 typedef unsigned long* PULONG;
+=======
+typedef char *PCHAR;
+typedef short *PSHORT;
+typedef int *PINT;
+typedef long *PLONG;
+typedef void *PVOID;
+
+typedef unsigned char *PUCHAR;
+typedef unsigned short *PUSHORT;
+typedef unsigned int *PUINT;
+typedef unsigned long *PULONG;
+>>>>>>> v3.18
 typedef unsigned long long ULONG64;
 typedef unsigned long long LARGE_INTEGER;
 typedef unsigned int UINT32;
@@ -43,5 +63,9 @@ typedef unsigned int UINT32;
 #endif
 
 
+<<<<<<< HEAD
 #endif	//__TYPEDEFS_H__
+=======
+#endif	/* __TYPEDEFS_H__ */
+>>>>>>> v3.18
 

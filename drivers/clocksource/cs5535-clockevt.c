@@ -131,7 +131,11 @@ static irqreturn_t mfgpt_tick(int irq, void *dev_id)
 
 static struct irqaction mfgptirq  = {
 	.handler = mfgpt_tick,
+<<<<<<< HEAD
 	.flags = IRQF_DISABLED | IRQF_NOBALANCING | IRQF_TIMER | IRQF_SHARED,
+=======
+	.flags = IRQF_NOBALANCING | IRQF_TIMER | IRQF_SHARED,
+>>>>>>> v3.18
 	.name = DRV_NAME,
 };
 

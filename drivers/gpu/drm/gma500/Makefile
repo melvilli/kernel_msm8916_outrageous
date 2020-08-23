@@ -13,8 +13,16 @@ gma500_gfx-y += \
 	  intel_i2c.o \
 	  intel_gmbus.o \
 	  mmu.o \
+<<<<<<< HEAD
 	  power.o \
 	  psb_drv.o \
+=======
+	  blitter.o \
+	  power.o \
+	  psb_drv.o \
+	  gma_display.o \
+	  gma_device.o \
+>>>>>>> v3.18
 	  psb_intel_display.o \
 	  psb_intel_lvds.o \
 	  psb_intel_modes.o \

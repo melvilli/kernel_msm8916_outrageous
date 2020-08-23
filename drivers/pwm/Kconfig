@@ -28,6 +28,13 @@ menuconfig PWM
 
 if PWM
 
+<<<<<<< HEAD
+=======
+config PWM_SYSFS
+	bool
+	default y if SYSFS
+
+>>>>>>> v3.18
 config PWM_AB8500
 	tristate "AB8500 PWM support"
 	depends on AB8500_CORE && ARCH_U8500
@@ -37,6 +44,18 @@ config PWM_AB8500
 	  To compile this driver as a module, choose M here: the module
 	  will be called pwm-ab8500.
 
+<<<<<<< HEAD
+=======
+config PWM_ATMEL
+	tristate "Atmel PWM support"
+	depends on ARCH_AT91 || AVR32
+	help
+	  Generic PWM framework driver for Atmel SoC.
+
+	  To compile this driver as a module, choose M here: the module
+	  will be called pwm-atmel.
+
+>>>>>>> v3.18
 config PWM_ATMEL_TCB
 	tristate "Atmel TC Block PWM support"
 	depends on ATMEL_TCLIB && OF
@@ -49,6 +68,18 @@ config PWM_ATMEL_TCB
 	  To compile this driver as a module, choose M here: the module
 	  will be called pwm-atmel-tcb.
 
+<<<<<<< HEAD
+=======
+config PWM_BCM_KONA
+	tristate "Kona PWM support"
+	depends on ARCH_BCM_MOBILE
+	help
+	  Generic PWM framework driver for Broadcom Kona PWM block.
+
+	  To compile this driver as a module, choose M here: the module
+	  will be called pwm-bcm-kona.
+
+>>>>>>> v3.18
 config PWM_BFIN
 	tristate "Blackfin PWM support"
 	depends on BFIN_GPTIMERS
@@ -58,6 +89,39 @@ config PWM_BFIN
 	  To compile this driver as a module, choose M here: the module
 	  will be called pwm-bfin.
 
+<<<<<<< HEAD
+=======
+config PWM_CLPS711X
+	tristate "CLPS711X PWM support"
+	depends on ARCH_CLPS711X || COMPILE_TEST
+	depends on HAS_IOMEM
+	help
+	  Generic PWM framework driver for Cirrus Logic CLPS711X.
+
+	  To compile this driver as a module, choose M here: the module
+	  will be called pwm-clps711x.
+
+config PWM_EP93XX
+	tristate "Cirrus Logic EP93xx PWM support"
+	depends on ARCH_EP93XX
+	help
+	  Generic PWM framework driver for Cirrus Logic EP93xx.
+
+	  To compile this driver as a module, choose M here: the module
+	  will be called pwm-ep93xx.
+
+config PWM_FSL_FTM
+	tristate "Freescale FlexTimer Module (FTM) PWM support"
+	depends on OF
+	select REGMAP_MMIO
+	help
+	  Generic FTM PWM framework driver for Freescale VF610 and
+	  Layerscape LS-1 SoCs.
+
+	  To compile this driver as a module, choose M here: the module
+	  will be called pwm-fsl-ftm.
+
+>>>>>>> v3.18
 config PWM_IMX
 	tristate "i.MX PWM support"
 	depends on ARCH_MXC
@@ -77,6 +141,19 @@ config PWM_JZ4740
 	  To compile this driver as a module, choose M here: the module
 	  will be called pwm-jz4740.
 
+<<<<<<< HEAD
+=======
+config PWM_LP3943
+	tristate "TI/National Semiconductor LP3943 PWM support"
+	depends on MFD_LP3943
+	help
+	  Generic PWM framework driver for LP3943 which supports two PWM
+	  channels.
+
+	  To compile this driver as a module, choose M here: the module
+	  will be called pwm-lp3943.
+
+>>>>>>> v3.18
 config PWM_LPC32XX
 	tristate "LPC32XX PWM support"
 	depends on ARCH_LPC32XX
@@ -87,6 +164,37 @@ config PWM_LPC32XX
 	  To compile this driver as a module, choose M here: the module
 	  will be called pwm-lpc32xx.
 
+<<<<<<< HEAD
+=======
+config PWM_LPSS
+	tristate "Intel LPSS PWM support"
+	depends on X86
+	help
+	  Generic PWM framework driver for Intel Low Power Subsystem PWM
+	  controller.
+
+	  To compile this driver as a module, choose M here: the module
+	  will be called pwm-lpss.
+
+config PWM_LPSS_PCI
+	tristate "Intel LPSS PWM PCI driver"
+	depends on PWM_LPSS && PCI
+	help
+	  The PCI driver for Intel Low Power Subsystem PWM controller.
+
+	  To compile this driver as a module, choose M here: the module
+	  will be called pwm-lpss-pci.
+
+config PWM_LPSS_PLATFORM
+	tristate "Intel LPSS PWM platform driver"
+	depends on PWM_LPSS && ACPI
+	help
+	  The platform driver for Intel Low Power Subsystem PWM controller.
+
+	  To compile this driver as a module, choose M here: the module
+	  will be called pwm-lpss-platform.
+
+>>>>>>> v3.18
 config PWM_MXS
 	tristate "Freescale MXS PWM support"
 	depends on ARCH_MXS && OF
@@ -97,6 +205,19 @@ config PWM_MXS
 	  To compile this driver as a module, choose M here: the module
 	  will be called pwm-mxs.
 
+<<<<<<< HEAD
+=======
+config PWM_PCA9685
+	tristate "NXP PCA9685 PWM driver"
+	depends on OF && I2C
+	select REGMAP_I2C
+	help
+	  Generic PWM framework driver for NXP PCA9685 LED controller.
+
+	  To compile this driver as a module, choose M here: the module
+	  will be called pwm-pca9685.
+
+>>>>>>> v3.18
 config PWM_PUV3
 	tristate "PKUnity NetBook-0916 PWM support"
 	depends on ARCH_PUV3
@@ -115,6 +236,27 @@ config PWM_PXA
 	  To compile this driver as a module, choose M here: the module
 	  will be called pwm-pxa.
 
+<<<<<<< HEAD
+=======
+config PWM_RENESAS_TPU
+	tristate "Renesas TPU PWM support"
+	depends on ARCH_SHMOBILE || COMPILE_TEST
+	depends on HAS_IOMEM
+	help
+	  This driver exposes the Timer Pulse Unit (TPU) PWM controller found
+	  in Renesas chips through the PWM API.
+
+	  To compile this driver as a module, choose M here: the module
+	  will be called pwm-renesas-tpu.
+
+config PWM_ROCKCHIP
+	tristate "Rockchip PWM support"
+	depends on ARCH_ROCKCHIP
+	help
+	  Generic PWM framework driver for the PWM controller found on
+	  Rockchip SoCs.
+
+>>>>>>> v3.18
 config PWM_SAMSUNG
 	tristate "Samsung PWM support"
 	depends on PLAT_SAMSUNG
@@ -135,6 +277,19 @@ config PWM_SPEAR
 	  To compile this driver as a module, choose M here: the module
 	  will be called pwm-spear.
 
+<<<<<<< HEAD
+=======
+config PWM_STI
+	tristate "STiH4xx PWM support"
+	depends on ARCH_STI
+	depends on OF
+	help
+	  Generic PWM framework driver for STiH4xx SoCs.
+
+	  To compile this driver as a module, choose M here: the module
+	  will be called pwm-sti.
+
+>>>>>>> v3.18
 config PWM_TEGRA
 	tristate "NVIDIA Tegra PWM support"
 	depends on ARCH_TEGRA
@@ -201,6 +356,7 @@ config PWM_VT8500
 	  To compile this driver as a module, choose M here: the module
 	  will be called pwm-vt8500.
 
+<<<<<<< HEAD
 config PWM_QPNP
 	depends on SPMI
 	depends on OF_SPMI
@@ -210,4 +366,6 @@ config PWM_QPNP
           comply with QPNP.  QPNP is a SPMI based PMIC implementation.  These
           devices support Pulse Width Modulation output with user generated
           patterns. They share a lookup table with size of 64 entries.
+=======
+>>>>>>> v3.18
 endif

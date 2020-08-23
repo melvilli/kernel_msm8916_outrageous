@@ -13,6 +13,11 @@
 #ifndef _ASM_MICROBLAZE_DELAY_H
 #define _ASM_MICROBLAZE_DELAY_H
 
+<<<<<<< HEAD
+=======
+#include <linux/param.h>
+
+>>>>>>> v3.18
 extern inline void __delay(unsigned long loops)
 {
 	asm volatile ("# __delay		\n\t"		\
@@ -59,6 +64,7 @@ extern inline void __udelay(unsigned int x)
 extern void __bad_udelay(void);		/* deliberately undefined */
 extern void __bad_ndelay(void);		/* deliberately undefined */
 
+<<<<<<< HEAD
 #define udelay(n) (__builtin_constant_p(n) ? \
 	((n) > __MAX_UDELAY ? __bad_udelay() : __udelay((n) * (19 * HZ))) : \
 	__udelay((n) * (19 * HZ)))
@@ -66,6 +72,31 @@ extern void __bad_ndelay(void);		/* deliberately undefined */
 #define ndelay(n) (__builtin_constant_p(n) ? \
 	((n) > __MAX_NDELAY ? __bad_ndelay() : __udelay((n) * HZ)) : \
 	__udelay((n) * HZ))
+=======
+#define udelay(n)						\
+	({							\
+		if (__builtin_constant_p(n)) {			\
+			if ((n) / __MAX_UDELAY >= 1)		\
+				__bad_udelay();			\
+			else					\
+				__udelay((n) * (19 * HZ));	\
+		} else {					\
+			__udelay((n) * (19 * HZ));		\
+		}						\
+	})
+
+#define ndelay(n)						\
+	({							\
+		if (__builtin_constant_p(n)) {			\
+			if ((n) / __MAX_NDELAY >= 1)		\
+				__bad_ndelay();			\
+			else					\
+				__udelay((n) * HZ);		\
+		} else {					\
+			__udelay((n) * HZ);			\
+		}						\
+	})
+>>>>>>> v3.18
 
 #define muldiv(a, b, c)		(((a)*(b))/(c))
 

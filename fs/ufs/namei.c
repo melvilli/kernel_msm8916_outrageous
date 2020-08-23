@@ -38,10 +38,18 @@ static inline int ufs_add_nondir(struct dentry *dentry, struct inode *inode)
 {
 	int err = ufs_add_link(dentry, inode);
 	if (!err) {
+<<<<<<< HEAD
+=======
+		unlock_new_inode(inode);
+>>>>>>> v3.18
 		d_instantiate(dentry, inode);
 		return 0;
 	}
 	inode_dec_link_count(inode);
+<<<<<<< HEAD
+=======
+	unlock_new_inode(inode);
+>>>>>>> v3.18
 	iput(inode);
 	return err;
 }
@@ -126,12 +134,21 @@ static int ufs_symlink (struct inode * dir, struct dentry * dentry,
 	if (l > sb->s_blocksize)
 		goto out_notlocked;
 
+<<<<<<< HEAD
 	lock_ufs(dir->i_sb);
 	inode = ufs_new_inode(dir, S_IFLNK | S_IRWXUGO);
 	err = PTR_ERR(inode);
 	if (IS_ERR(inode))
 		goto out;
 
+=======
+	inode = ufs_new_inode(dir, S_IFLNK | S_IRWXUGO);
+	err = PTR_ERR(inode);
+	if (IS_ERR(inode))
+		goto out_notlocked;
+
+	lock_ufs(dir->i_sb);
+>>>>>>> v3.18
 	if (l > UFS_SB(sb)->s_uspi->s_maxsymlinklen) {
 		/* slow symlink */
 		inode->i_op = &ufs_symlink_inode_operations;
@@ -155,6 +172,10 @@ out_notlocked:
 
 out_fail:
 	inode_dec_link_count(inode);
+<<<<<<< HEAD
+=======
+	unlock_new_inode(inode);
+>>>>>>> v3.18
 	iput(inode);
 	goto out;
 }
@@ -181,6 +202,7 @@ static int ufs_mkdir(struct inode * dir, struct dentry * dentry, umode_t mode)
 	struct inode * inode;
 	int err;
 
+<<<<<<< HEAD
 	lock_ufs(dir->i_sb);
 	inode_inc_link_count(dir);
 
@@ -188,6 +210,11 @@ static int ufs_mkdir(struct inode * dir, struct dentry * dentry, umode_t mode)
 	err = PTR_ERR(inode);
 	if (IS_ERR(inode))
 		goto out_dir;
+=======
+	inode = ufs_new_inode(dir, S_IFDIR|mode);
+	if (IS_ERR(inode))
+		return PTR_ERR(inode);
+>>>>>>> v3.18
 
 	inode->i_op = &ufs_dir_inode_operations;
 	inode->i_fop = &ufs_dir_operations;
@@ -195,6 +222,12 @@ static int ufs_mkdir(struct inode * dir, struct dentry * dentry, umode_t mode)
 
 	inode_inc_link_count(inode);
 
+<<<<<<< HEAD
+=======
+	lock_ufs(dir->i_sb);
+	inode_inc_link_count(dir);
+
+>>>>>>> v3.18
 	err = ufs_make_empty(inode, dir);
 	if (err)
 		goto out_fail;
@@ -211,8 +244,13 @@ out:
 out_fail:
 	inode_dec_link_count(inode);
 	inode_dec_link_count(inode);
+<<<<<<< HEAD
 	iput (inode);
 out_dir:
+=======
+	unlock_new_inode(inode);
+	iput (inode);
+>>>>>>> v3.18
 	inode_dec_link_count(dir);
 	unlock_ufs(dir->i_sb);
 	goto out;

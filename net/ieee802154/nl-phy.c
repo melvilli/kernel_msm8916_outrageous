@@ -36,7 +36,11 @@
 #include "ieee802154.h"
 
 static int ieee802154_nl_fill_phy(struct sk_buff *msg, u32 portid,
+<<<<<<< HEAD
 	u32 seq, int flags, struct wpan_phy *phy)
+=======
+				  u32 seq, int flags, struct wpan_phy *phy)
+>>>>>>> v3.18
 {
 	void *hdr;
 	int i, pages = 0;
@@ -48,7 +52,11 @@ static int ieee802154_nl_fill_phy(struct sk_buff *msg, u32 portid,
 		return -EMSGSIZE;
 
 	hdr = genlmsg_put(msg, 0, seq, &nl802154_family, flags,
+<<<<<<< HEAD
 		IEEE802154_LIST_PHY);
+=======
+			  IEEE802154_LIST_PHY);
+>>>>>>> v3.18
 	if (!hdr)
 		goto out;
 
@@ -77,11 +85,19 @@ out:
 	return -EMSGSIZE;
 }
 
+<<<<<<< HEAD
 static int ieee802154_list_phy(struct sk_buff *skb,
 	struct genl_info *info)
 {
 	/* Request for interface name, index, type, IEEE address,
 	   PAN Id, short address */
+=======
+int ieee802154_list_phy(struct sk_buff *skb, struct genl_info *info)
+{
+	/* Request for interface name, index, type, IEEE address,
+	 * PAN Id, short address
+	 */
+>>>>>>> v3.18
 	struct sk_buff *msg;
 	struct wpan_phy *phy;
 	const char *name;
@@ -106,7 +122,11 @@ static int ieee802154_list_phy(struct sk_buff *skb,
 		goto out_dev;
 
 	rc = ieee802154_nl_fill_phy(msg, info->snd_portid, info->snd_seq,
+<<<<<<< HEAD
 			0, phy);
+=======
+				    0, phy);
+>>>>>>> v3.18
 	if (rc < 0)
 		goto out_free;
 
@@ -118,7 +138,10 @@ out_free:
 out_dev:
 	wpan_phy_put(phy);
 	return rc;
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 }
 
 struct dump_phy_data {
@@ -138,10 +161,17 @@ static int ieee802154_dump_phy_iter(struct wpan_phy *phy, void *_data)
 		return 0;
 
 	rc = ieee802154_nl_fill_phy(data->skb,
+<<<<<<< HEAD
 			NETLINK_CB(data->cb->skb).portid,
 			data->cb->nlh->nlmsg_seq,
 			NLM_F_MULTI,
 			phy);
+=======
+				    NETLINK_CB(data->cb->skb).portid,
+				    data->cb->nlh->nlmsg_seq,
+				    NLM_F_MULTI,
+				    phy);
+>>>>>>> v3.18
 
 	if (rc < 0) {
 		data->idx--;
@@ -151,8 +181,12 @@ static int ieee802154_dump_phy_iter(struct wpan_phy *phy, void *_data)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int ieee802154_dump_phy(struct sk_buff *skb,
 	struct netlink_callback *cb)
+=======
+int ieee802154_dump_phy(struct sk_buff *skb, struct netlink_callback *cb)
+>>>>>>> v3.18
 {
 	struct dump_phy_data data = {
 		.cb = cb,
@@ -170,8 +204,12 @@ static int ieee802154_dump_phy(struct sk_buff *skb,
 	return skb->len;
 }
 
+<<<<<<< HEAD
 static int ieee802154_add_iface(struct sk_buff *skb,
 		struct genl_info *info)
+=======
+int ieee802154_add_iface(struct sk_buff *skb, struct genl_info *info)
+>>>>>>> v3.18
 {
 	struct sk_buff *msg;
 	struct wpan_phy *phy;
@@ -241,10 +279,16 @@ static int ieee802154_add_iface(struct sk_buff *skb,
 
 		addr.sa_family = ARPHRD_IEEE802154;
 		nla_memcpy(&addr.sa_data, info->attrs[IEEE802154_ATTR_HW_ADDR],
+<<<<<<< HEAD
 				IEEE802154_ADDR_LEN);
 
 		/*
 		 * strangely enough, some callbacks (inetdev_event) from
+=======
+			   IEEE802154_ADDR_LEN);
+
+		/* strangely enough, some callbacks (inetdev_event) from
+>>>>>>> v3.18
 		 * dev_set_mac_address require RTNL_LOCK
 		 */
 		rtnl_lock();
@@ -275,8 +319,12 @@ out_dev:
 	return rc;
 }
 
+<<<<<<< HEAD
 static int ieee802154_del_iface(struct sk_buff *skb,
 		struct genl_info *info)
+=======
+int ieee802154_del_iface(struct sk_buff *skb, struct genl_info *info)
+>>>>>>> v3.18
 {
 	struct sk_buff *msg;
 	struct wpan_phy *phy;
@@ -358,6 +406,7 @@ out_dev:
 
 	return rc;
 }
+<<<<<<< HEAD
 
 static struct genl_ops ieee802154_phy_ops[] = {
 	IEEE802154_DUMP(IEEE802154_LIST_PHY, ieee802154_list_phy,
@@ -383,3 +432,5 @@ int nl802154_phy_register(void)
 
 	return 0;
 }
+=======
+>>>>>>> v3.18

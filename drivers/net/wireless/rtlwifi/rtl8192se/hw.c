@@ -251,7 +251,11 @@ void rtl92se_set_hw_reg(struct ieee80211_hw *hw, u8 variable, u8 *val)
 			u8 e_aci = *val;
 			rtl92s_dm_init_edca_turbo(hw);
 
+<<<<<<< HEAD
 			if (rtlpci->acm_method != eAcmWay2_SW)
+=======
+			if (rtlpci->acm_method != EACMWAY2_SW)
+>>>>>>> v3.18
 				rtlpriv->cfg->ops->set_hw_reg(hw,
 						 HW_VAR_ACM_CTRL,
 						 &e_aci);
@@ -413,20 +417,33 @@ void rtl92se_set_hw_reg(struct ieee80211_hw *hw, u8 variable, u8 *val)
 					(u8 *)(&fw_current_inps));
 			rtlpriv->cfg->ops->set_hw_reg(hw,
 					HW_VAR_H2C_FW_PWRMODE,
+<<<<<<< HEAD
 					(u8 *)(&ppsc->fwctrl_psmode));
 
 			rtlpriv->cfg->ops->set_hw_reg(hw,
 					HW_VAR_SET_RPWM,
 					(u8 *)(&rpwm_val));
+=======
+					&ppsc->fwctrl_psmode);
+
+			rtlpriv->cfg->ops->set_hw_reg(hw, HW_VAR_SET_RPWM,
+						      &rpwm_val);
+>>>>>>> v3.18
 		} else {
 			rpwm_val = 0x0C;	/* RF on */
 			fw_pwrmode = FW_PS_ACTIVE_MODE;
 			fw_current_inps = false;
 			rtlpriv->cfg->ops->set_hw_reg(hw, HW_VAR_SET_RPWM,
+<<<<<<< HEAD
 					(u8 *)(&rpwm_val));
 			rtlpriv->cfg->ops->set_hw_reg(hw,
 					HW_VAR_H2C_FW_PWRMODE,
 					(u8 *)(&fw_pwrmode));
+=======
+						      &rpwm_val);
+			rtlpriv->cfg->ops->set_hw_reg(hw, HW_VAR_H2C_FW_PWRMODE,
+						      &fw_pwrmode);
+>>>>>>> v3.18
 
 			rtlpriv->cfg->ops->set_hw_reg(hw,
 					HW_VAR_FW_PSMODE_STATUS,
@@ -1150,12 +1167,21 @@ void rtl92se_set_mac_addr(struct rtl_io *io, const u8 *addr)
 void rtl92se_set_check_bssid(struct ieee80211_hw *hw, bool check_bssid)
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
+<<<<<<< HEAD
 	struct rtl_pci *rtlpci = rtl_pcidev(rtl_pcipriv(hw));
 	u32 reg_rcr = rtlpci->receive_config;
+=======
+	u32 reg_rcr;
+>>>>>>> v3.18
 
 	if (rtlpriv->psc.rfpwr_state != ERFON)
 		return;
 
+<<<<<<< HEAD
+=======
+	rtlpriv->cfg->ops->get_hw_reg(hw, HW_VAR_RCR, (u8 *)(&reg_rcr));
+
+>>>>>>> v3.18
 	if (check_bssid) {
 		reg_rcr |= (RCR_CBSSID);
 		rtlpriv->cfg->ops->set_hw_reg(hw, HW_VAR_RCR, (u8 *)(&reg_rcr));
@@ -1199,10 +1225,19 @@ static int _rtl92se_set_media_status(struct ieee80211_hw *hw,
 		RT_TRACE(rtlpriv, COMP_ERR, DBG_EMERG,
 			 "Network type %d not supported!\n", type);
 		return 1;
+<<<<<<< HEAD
 		break;
 
 	}
 
+=======
+
+	}
+
+	if (type != NL80211_IFTYPE_AP &&
+	    rtlpriv->mac80211.link_state < MAC80211_LINKED)
+		bt_msr = rtl_read_byte(rtlpriv, MSR) & ~MSR_LINK_MASK;
+>>>>>>> v3.18
 	rtl_write_byte(rtlpriv, (MSR), bt_msr);
 
 	temp = rtl_read_dword(rtlpriv, TCR);
@@ -1264,6 +1299,10 @@ void rtl92se_enable_interrupt(struct ieee80211_hw *hw)
 	rtl_write_dword(rtlpriv, INTA_MASK, rtlpci->irq_mask[0]);
 	/* Support Bit 32-37(Assign as Bit 0-5) interrupt setting now */
 	rtl_write_dword(rtlpriv, INTA_MASK + 4, rtlpci->irq_mask[1] & 0x3F);
+<<<<<<< HEAD
+=======
+	rtlpci->irq_enabled = true;
+>>>>>>> v3.18
 }
 
 void rtl92se_disable_interrupt(struct ieee80211_hw *hw)
@@ -1278,8 +1317,12 @@ void rtl92se_disable_interrupt(struct ieee80211_hw *hw)
 	rtlpci = rtl_pcidev(rtl_pcipriv(hw));
 	rtl_write_dword(rtlpriv, INTA_MASK, 0);
 	rtl_write_dword(rtlpriv, INTA_MASK + 4, 0);
+<<<<<<< HEAD
 
 	synchronize_irq(rtlpci->pdev->irq);
+=======
+	rtlpci->irq_enabled = false;
+>>>>>>> v3.18
 }
 
 static u8 _rtl92s_set_sysclk(struct ieee80211_hw *hw, u8 data)
@@ -2545,6 +2588,7 @@ void rtl92se_resume(struct ieee80211_hw *hw)
 		pci_write_config_dword(rtlpci->pdev, 0x40,
 			val & 0xffff00ff);
 }
+<<<<<<< HEAD
 
 /* Turn on AAP (RCR:bit 0) for promicuous mode. */
 void rtl92se_allow_all_destaddr(struct ieee80211_hw *hw,
@@ -2565,3 +2609,5 @@ void rtl92se_allow_all_destaddr(struct ieee80211_hw *hw,
 		 "receive_config=0x%08X, write_into_reg=%d\n",
 		 rtlpci->receive_config, write_into_reg);
 }
+=======
+>>>>>>> v3.18

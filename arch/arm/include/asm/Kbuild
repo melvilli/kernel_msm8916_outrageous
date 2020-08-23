@@ -7,6 +7,10 @@ generic-y += current.h
 generic-y += emergency-restart.h
 generic-y += errno.h
 generic-y += exec.h
+<<<<<<< HEAD
+=======
+generic-y += hash.h
+>>>>>>> v3.18
 generic-y += ioctl.h
 generic-y += ipcbuf.h
 generic-y += irq_regs.h
@@ -18,7 +22,14 @@ generic-y += msgbuf.h
 generic-y += param.h
 generic-y += parport.h
 generic-y += poll.h
+<<<<<<< HEAD
 generic-y += resource.h
+=======
+generic-y += preempt.h
+generic-y += resource.h
+generic-y += rwsem.h
+generic-y += scatterlist.h
+>>>>>>> v3.18
 generic-y += sections.h
 generic-y += segment.h
 generic-y += sembuf.h
@@ -33,5 +44,8 @@ generic-y += termbits.h
 generic-y += termios.h
 generic-y += timex.h
 generic-y += trace_clock.h
+<<<<<<< HEAD
 generic-y += types.h
+=======
+>>>>>>> v3.18
 generic-y += unaligned.h

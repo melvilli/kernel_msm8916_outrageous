@@ -34,13 +34,20 @@
 #include <linux/module.h>
 #include <linux/init.h>
 #include <linux/acpi.h>
+<<<<<<< HEAD
 #include <linux/acpi_io.h>
+=======
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/io.h>
 #include <linux/kref.h>
 #include <linux/rculist.h>
 #include <linux/interrupt.h>
 #include <linux/debugfs.h>
+<<<<<<< HEAD
+=======
+#include <asm/unaligned.h>
+>>>>>>> v3.18
 
 #include "apei-internal.h"
 
@@ -567,8 +574,12 @@ static int apei_check_gar(struct acpi_generic_address *reg, u64 *paddr,
 	bit_offset = reg->bit_offset;
 	access_size_code = reg->access_width;
 	space_id = reg->space_id;
+<<<<<<< HEAD
 	/* Handle possible alignment issues */
 	memcpy(paddr, &reg->address, sizeof(*paddr));
+=======
+	*paddr = get_unaligned(&reg->address);
+>>>>>>> v3.18
 	if (!*paddr) {
 		pr_warning(FW_BUG APEI_PFX
 			   "Invalid physical address in GAR [0x%llx/%u/%u/%u/%u]\n",
@@ -746,6 +757,22 @@ struct dentry *apei_get_debugfs_dir(void)
 }
 EXPORT_SYMBOL_GPL(apei_get_debugfs_dir);
 
+<<<<<<< HEAD
+=======
+int __weak arch_apei_enable_cmcff(struct acpi_hest_header *hest_hdr,
+				  void *data)
+{
+	return 1;
+}
+EXPORT_SYMBOL_GPL(arch_apei_enable_cmcff);
+
+void __weak arch_apei_report_mem_error(int sev,
+				       struct cper_sec_mem_err *mem_err)
+{
+}
+EXPORT_SYMBOL_GPL(arch_apei_report_mem_error);
+
+>>>>>>> v3.18
 int apei_osc_setup(void)
 {
 	static u8 whea_uuid_str[] = "ed855e0c-6c90-47bf-a62a-26de0fc5ad5c";
@@ -758,9 +785,15 @@ int apei_osc_setup(void)
 		.cap.pointer	= capbuf,
 	};
 
+<<<<<<< HEAD
 	capbuf[OSC_QUERY_TYPE] = OSC_QUERY_ENABLE;
 	capbuf[OSC_SUPPORT_TYPE] = 1;
 	capbuf[OSC_CONTROL_TYPE] = 0;
+=======
+	capbuf[OSC_QUERY_DWORD] = OSC_QUERY_ENABLE;
+	capbuf[OSC_SUPPORT_DWORD] = 1;
+	capbuf[OSC_CONTROL_DWORD] = 0;
+>>>>>>> v3.18
 
 	if (ACPI_FAILURE(acpi_get_handle(NULL, "\\_SB", &handle))
 	    || ACPI_FAILURE(acpi_run_osc(handle, &context)))

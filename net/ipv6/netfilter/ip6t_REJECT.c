@@ -23,21 +23,31 @@
 #include <linux/skbuff.h>
 #include <linux/icmpv6.h>
 #include <linux/netdevice.h>
+<<<<<<< HEAD
 #include <net/ipv6.h>
 #include <net/tcp.h>
 #include <net/icmp.h>
 #include <net/ip6_checksum.h>
 #include <net/ip6_fib.h>
 #include <net/ip6_route.h>
+=======
+#include <net/icmp.h>
+>>>>>>> v3.18
 #include <net/flow.h>
 #include <linux/netfilter/x_tables.h>
 #include <linux/netfilter_ipv6/ip6_tables.h>
 #include <linux/netfilter_ipv6/ip6t_REJECT.h>
 
+<<<<<<< HEAD
+=======
+#include <net/netfilter/ipv6/nf_reject.h>
+
+>>>>>>> v3.18
 MODULE_AUTHOR("Yasuyuki KOZAKAI <yasuyuki.kozakai@toshiba.co.jp>");
 MODULE_DESCRIPTION("Xtables: packet \"rejection\" target for IPv6");
 MODULE_LICENSE("GPL");
 
+<<<<<<< HEAD
 /* Send RST reply */
 static void send_reset(struct net *net, struct sk_buff *oldskb)
 {
@@ -190,6 +200,8 @@ send_unreach(struct net *net, struct sk_buff *skb_in, unsigned char code,
 	}
 #endif
 }
+=======
+>>>>>>> v3.18
 
 static unsigned int
 reject_tg6(struct sk_buff *skb, const struct xt_action_param *par)
@@ -200,6 +212,7 @@ reject_tg6(struct sk_buff *skb, const struct xt_action_param *par)
 	pr_debug("%s: medium point\n", __func__);
 	switch (reject->with) {
 	case IP6T_ICMP6_NO_ROUTE:
+<<<<<<< HEAD
 		send_unreach(net, skb, ICMPV6_NOROUTE, par->hooknum);
 		break;
 	case IP6T_ICMP6_ADM_PROHIBITED:
@@ -213,12 +226,31 @@ reject_tg6(struct sk_buff *skb, const struct xt_action_param *par)
 		break;
 	case IP6T_ICMP6_PORT_UNREACH:
 		send_unreach(net, skb, ICMPV6_PORT_UNREACH, par->hooknum);
+=======
+		nf_send_unreach6(net, skb, ICMPV6_NOROUTE, par->hooknum);
+		break;
+	case IP6T_ICMP6_ADM_PROHIBITED:
+		nf_send_unreach6(net, skb, ICMPV6_ADM_PROHIBITED, par->hooknum);
+		break;
+	case IP6T_ICMP6_NOT_NEIGHBOUR:
+		nf_send_unreach6(net, skb, ICMPV6_NOT_NEIGHBOUR, par->hooknum);
+		break;
+	case IP6T_ICMP6_ADDR_UNREACH:
+		nf_send_unreach6(net, skb, ICMPV6_ADDR_UNREACH, par->hooknum);
+		break;
+	case IP6T_ICMP6_PORT_UNREACH:
+		nf_send_unreach6(net, skb, ICMPV6_PORT_UNREACH, par->hooknum);
+>>>>>>> v3.18
 		break;
 	case IP6T_ICMP6_ECHOREPLY:
 		/* Do nothing */
 		break;
 	case IP6T_TCP_RESET:
+<<<<<<< HEAD
 		send_reset(net, skb);
+=======
+		nf_send_reset6(net, skb, par->hooknum);
+>>>>>>> v3.18
 		break;
 	default:
 		net_info_ratelimited("case %u not handled yet\n", reject->with);

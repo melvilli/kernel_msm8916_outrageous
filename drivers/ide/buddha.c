@@ -198,7 +198,11 @@ fail_base2:
 				continue;
 			}
 		}	  
+<<<<<<< HEAD
 		buddha_board = ZTWO_VADDR(board);
+=======
+		buddha_board = (unsigned long)ZTWO_VADDR(board);
+>>>>>>> v3.18
 		
 		/* write to BUDDHA_IRQ_MR to enable the board IRQ */
 		/* X-Surf doesn't have this.  IRQs are always on */

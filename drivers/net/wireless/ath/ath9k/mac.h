@@ -121,6 +121,10 @@ struct ath_tx_status {
 	u32 evm0;
 	u32 evm1;
 	u32 evm2;
+<<<<<<< HEAD
+=======
+	u32 duration;
+>>>>>>> v3.18
 };
 
 struct ath_rx_status {
@@ -133,6 +137,7 @@ struct ath_rx_status {
 	u8 rs_rate;
 	u8 rs_antenna;
 	u8 rs_more;
+<<<<<<< HEAD
 	int8_t rs_rssi_ctl0;
 	int8_t rs_rssi_ctl1;
 	int8_t rs_rssi_ctl2;
@@ -140,6 +145,12 @@ struct ath_rx_status {
 	int8_t rs_rssi_ext1;
 	int8_t rs_rssi_ext2;
 	u8 rs_isaggr;
+=======
+	int8_t rs_rssi_ctl[3];
+	int8_t rs_rssi_ext[3];
+	u8 rs_isaggr;
+	u8 rs_firstaggr;
+>>>>>>> v3.18
 	u8 rs_moreaggr;
 	u8 rs_num_delims;
 	u8 rs_flags;
@@ -149,6 +160,10 @@ struct ath_rx_status {
 	u32 evm2;
 	u32 evm3;
 	u32 evm4;
+<<<<<<< HEAD
+=======
+	u32 flag; /* see enum mac80211_rx_flags */
+>>>>>>> v3.18
 };
 
 struct ath_htc_rx_status {
@@ -157,12 +172,17 @@ struct ath_htc_rx_status {
 	u8 rs_status;
 	u8 rs_phyerr;
 	int8_t rs_rssi;
+<<<<<<< HEAD
 	int8_t rs_rssi_ctl0;
 	int8_t rs_rssi_ctl1;
 	int8_t rs_rssi_ctl2;
 	int8_t rs_rssi_ext0;
 	int8_t rs_rssi_ext1;
 	int8_t rs_rssi_ext2;
+=======
+	int8_t rs_rssi_ctl[3];
+	int8_t rs_rssi_ext[3];
+>>>>>>> v3.18
 	u8 rs_keyix;
 	u8 rs_rate;
 	u8 rs_antenna;
@@ -172,6 +192,10 @@ struct ath_htc_rx_status {
 	u8 rs_num_delims;
 	u8 rs_flags;
 	u8 rs_dummy;
+<<<<<<< HEAD
+=======
+	/* FIXME: evm* never used? */
+>>>>>>> v3.18
 	__be32 evm0;
 	__be32 evm1;
 	__be32 evm2;
@@ -351,8 +375,19 @@ struct ar5416_desc {
 #define AR_FrameLen         0x00000fff
 #define AR_VirtMoreFrag     0x00001000
 #define AR_TxCtlRsvd00      0x0000e000
+<<<<<<< HEAD
 #define AR_XmitPower        0x003f0000
 #define AR_XmitPower_S      16
+=======
+#define AR_XmitPower0       0x003f0000
+#define AR_XmitPower0_S     16
+#define AR_XmitPower1	    0x3f000000
+#define AR_XmitPower1_S     24
+#define AR_XmitPower2	    0x3f000000
+#define AR_XmitPower2_S     24
+#define AR_XmitPower3	    0x3f000000
+#define AR_XmitPower3_S     24
+>>>>>>> v3.18
 #define AR_RTSEnable        0x00400000
 #define AR_VEOL             0x00800000
 #define AR_ClrDestMask      0x01000000
@@ -533,7 +568,12 @@ struct ar5416_desc {
 #define AR_2040             0x00000002
 #define AR_Parallel40       0x00000004
 #define AR_Parallel40_S     2
+<<<<<<< HEAD
 #define AR_RxStatusRsvd30   0x000000f8
+=======
+#define AR_STBC             0x00000008 /* on ar9280 and later */
+#define AR_RxStatusRsvd30   0x000000f0
+>>>>>>> v3.18
 #define AR_RxAntenna	    0xffffff00
 #define AR_RxAntenna_S	    8
 
@@ -567,6 +607,10 @@ struct ar5416_desc {
 #define AR_RxAggr           0x00020000
 #define AR_PostDelimCRCErr  0x00040000
 #define AR_RxStatusRsvd71   0x3ff80000
+<<<<<<< HEAD
+=======
+#define AR_RxFirstAggr      0x20000000
+>>>>>>> v3.18
 #define AR_DecryptBusyErr   0x40000000
 #define AR_KeyMiss          0x80000000
 
@@ -599,8 +643,11 @@ enum ath9k_tx_queue_flags {
 #define ATH9K_TXQ_USE_LOCKOUT_BKOFF_DIS 0x00000001
 
 #define ATH9K_DECOMP_MASK_SIZE     128
+<<<<<<< HEAD
 #define ATH9K_READY_TIME_LO_BOUND  50
 #define ATH9K_READY_TIME_HI_BOUND  96
+=======
+>>>>>>> v3.18
 
 enum ath9k_pkt_type {
 	ATH9K_PKT_TYPE_NORMAL = 0,
@@ -734,6 +781,10 @@ void ath9k_hw_startpcureceive(struct ath_hw *ah, bool is_scanning);
 void ath9k_hw_abortpcurecv(struct ath_hw *ah);
 bool ath9k_hw_stopdmarecv(struct ath_hw *ah, bool *reset);
 int ath9k_hw_beaconq_setup(struct ath_hw *ah);
+<<<<<<< HEAD
+=======
+void ath9k_hw_set_tx_filter(struct ath_hw *ah, u8 destidx, bool set);
+>>>>>>> v3.18
 
 /* Interrupt Handling */
 bool ath9k_hw_intrpend(struct ath_hw *ah);

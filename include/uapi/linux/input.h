@@ -152,9 +152,13 @@ struct input_keymap_entry {
 #define EVIOCGEFFECTS		_IOR('E', 0x84, int)			/* Report number of effects playable at the same time */
 
 #define EVIOCGRAB		_IOW('E', 0x90, int)			/* Grab/Release device */
+<<<<<<< HEAD
 
 #define EVIOCGSUSPENDBLOCK	_IOR('E', 0x91, int)			/* get suspend block enable */
 #define EVIOCSSUSPENDBLOCK	_IOW('E', 0x91, int)			/* set suspend block enable */
+=======
+#define EVIOCREVOKE		_IOW('E', 0x91, int)			/* Revoke device access */
+>>>>>>> v3.18
 
 #define EVIOCSCLOCKID		_IOW('E', 0xa0, int)			/* Set clockid to be used for timestamps */
 
@@ -166,7 +170,12 @@ struct input_keymap_entry {
 #define INPUT_PROP_DIRECT		0x01	/* direct input devices */
 #define INPUT_PROP_BUTTONPAD		0x02	/* has button(s) under pad */
 #define INPUT_PROP_SEMI_MT		0x03	/* touch rectangle only */
+<<<<<<< HEAD
 #define INPUT_PROP_NO_DUMMY_RELEASE	0x04	/* no dummy event */
+=======
+#define INPUT_PROP_TOPBUTTONPAD		0x04	/* softbuttons at top of pad */
+#define INPUT_PROP_POINTING_STICK	0x05	/* is a pointing stick */
+>>>>>>> v3.18
 
 #define INPUT_PROP_MAX			0x1f
 #define INPUT_PROP_CNT			(INPUT_PROP_MAX + 1)
@@ -198,8 +207,13 @@ struct input_keymap_entry {
 #define SYN_CONFIG		1
 #define SYN_MT_REPORT		2
 #define SYN_DROPPED		3
+<<<<<<< HEAD
 #define SYN_TIME_SEC		4
 #define SYN_TIME_NSEC		5
+=======
+#define SYN_MAX			0xf
+#define SYN_CNT			(SYN_MAX+1)
+>>>>>>> v3.18
 
 /*
  * Keys and buttons
@@ -476,6 +490,7 @@ struct input_keymap_entry {
 
 #define KEY_MICMUTE		248	/* Mute / unmute the microphone */
 
+<<<<<<< HEAD
 /* Oppo specific keycodes */
 #define KEY_GESTURE_CIRCLE		250
 #define KEY_GESTURE_DOUBLE_SWIPE	251
@@ -490,6 +505,8 @@ struct input_keymap_entry {
 #define KEY_GESTURE_W			260
 #define KEY_GESTURE_M			261
 
+=======
+>>>>>>> v3.18
 /* Code 255 is reserved for special needs of AT keyboard driver */
 
 #define BTN_MISC		0x100
@@ -717,7 +734,10 @@ struct input_keymap_entry {
 #define KEY_NUMERIC_STAR	0x20a
 #define KEY_NUMERIC_POUND	0x20b
 
+<<<<<<< HEAD
 #define KEY_CAMERA_SNAPSHOT	0x2fe
+=======
+>>>>>>> v3.18
 #define KEY_CAMERA_FOCUS	0x210
 #define KEY_WPS_BUTTON		0x211	/* WiFi Protected Setup key */
 
@@ -755,6 +775,16 @@ struct input_keymap_entry {
 #define KEY_BRIGHTNESS_MIN		0x250	/* Set Brightness to Minimum */
 #define KEY_BRIGHTNESS_MAX		0x251	/* Set Brightness to Maximum */
 
+<<<<<<< HEAD
+=======
+#define KEY_KBDINPUTASSIST_PREV		0x260
+#define KEY_KBDINPUTASSIST_NEXT		0x261
+#define KEY_KBDINPUTASSIST_PREVGROUP		0x262
+#define KEY_KBDINPUTASSIST_NEXTGROUP		0x263
+#define KEY_KBDINPUTASSIST_ACCEPT		0x264
+#define KEY_KBDINPUTASSIST_CANCEL		0x265
+
+>>>>>>> v3.18
 #define BTN_TRIGGER_HAPPY		0x2c0
 #define BTN_TRIGGER_HAPPY1		0x2c0
 #define BTN_TRIGGER_HAPPY2		0x2c1
@@ -892,12 +922,17 @@ struct input_keymap_entry {
 #define SW_FRONT_PROXIMITY	0x0b  /* set = front proximity sensor active */
 #define SW_ROTATE_LOCK		0x0c  /* set = rotate locked/disabled */
 #define SW_LINEIN_INSERT	0x0d  /* set = inserted */
+<<<<<<< HEAD
 #define SW_HPHL_OVERCURRENT	0x0e  /* set = over current on left hph */
 #define SW_HPHR_OVERCURRENT	0x0f  /* set = over current on right hph */
 #define SW_UNSUPPORT_INSERT	0x10  /* set = unsupported device inserted */
 #define SW_MICROPHONE2_INSERT   0x11  /* set = inserted */
 #define SW_MUTE_DEVICE		0x12  /* set = device disabled */
 #define SW_MAX			0x20
+=======
+#define SW_MUTE_DEVICE		0x0e  /* set = device disabled */
+#define SW_MAX			0x0f
+>>>>>>> v3.18
 #define SW_CNT			(SW_MAX+1)
 
 /*

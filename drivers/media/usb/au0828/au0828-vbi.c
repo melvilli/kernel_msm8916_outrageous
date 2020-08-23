@@ -21,13 +21,21 @@
    02110-1301, USA.
  */
 
+<<<<<<< HEAD
+=======
+#include "au0828.h"
+
+>>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/init.h>
 #include <linux/slab.h>
 
+<<<<<<< HEAD
 #include "au0828.h"
 
+=======
+>>>>>>> v3.18
 static unsigned int vbibufs = 5;
 module_param(vbibufs, int, 0644);
 MODULE_PARM_DESC(vbibufs, "number of vbi buffers, range 2-32");

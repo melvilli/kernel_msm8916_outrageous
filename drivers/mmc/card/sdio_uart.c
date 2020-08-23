@@ -1063,8 +1063,13 @@ static int sdio_uart_probe(struct sdio_func *func,
 		return -ENOMEM;
 
 	if (func->class == SDIO_CLASS_UART) {
+<<<<<<< HEAD
 		pr_warning("%s: need info on UART class basic setup\n",
 		       sdio_func_id(func));
+=======
+		pr_warn("%s: need info on UART class basic setup\n",
+			sdio_func_id(func));
+>>>>>>> v3.18
 		kfree(port);
 		return -ENOSYS;
 	} else if (func->class == SDIO_CLASS_GPS) {
@@ -1082,9 +1087,14 @@ static int sdio_uart_probe(struct sdio_func *func,
 				break;
 		}
 		if (!tpl) {
+<<<<<<< HEAD
 			pr_warning(
        "%s: can't find tuple 0x91 subtuple 0 (SUBTPL_SIOREG) for GPS class\n",
 			       sdio_func_id(func));
+=======
+			pr_warn("%s: can't find tuple 0x91 subtuple 0 (SUBTPL_SIOREG) for GPS class\n",
+				sdio_func_id(func));
+>>>>>>> v3.18
 			kfree(port);
 			return -EINVAL;
 		}

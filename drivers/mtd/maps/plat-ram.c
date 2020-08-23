@@ -23,7 +23,10 @@
 
 #include <linux/module.h>
 #include <linux/types.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/string.h>
 #include <linux/ioport.h>
@@ -55,7 +58,11 @@ struct platram_info {
 
 static inline struct platram_info *to_platram_info(struct platform_device *dev)
 {
+<<<<<<< HEAD
 	return (struct platram_info *)platform_get_drvdata(dev);
+=======
+	return platform_get_drvdata(dev);
+>>>>>>> v3.18
 }
 
 /* platram_setrw
@@ -84,8 +91,11 @@ static int platram_remove(struct platform_device *pdev)
 {
 	struct platram_info *info = to_platram_info(pdev);
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 	dev_dbg(&pdev->dev, "removing device\n");
 
 	if (info == NULL)
@@ -130,17 +140,28 @@ static int platram_probe(struct platform_device *pdev)
 
 	dev_dbg(&pdev->dev, "probe entered\n");
 
+<<<<<<< HEAD
 	if (pdev->dev.platform_data == NULL) {
+=======
+	if (dev_get_platdata(&pdev->dev) == NULL) {
+>>>>>>> v3.18
 		dev_err(&pdev->dev, "no platform data supplied\n");
 		err = -ENOENT;
 		goto exit_error;
 	}
 
+<<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
 
 	info = kzalloc(sizeof(*info), GFP_KERNEL);
 	if (info == NULL) {
 		dev_err(&pdev->dev, "no memory for flash info\n");
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+
+	info = kzalloc(sizeof(*info), GFP_KERNEL);
+	if (info == NULL) {
+>>>>>>> v3.18
 		err = -ENOMEM;
 		goto exit_error;
 	}
@@ -259,6 +280,7 @@ static struct platform_driver platram_driver = {
 	},
 };
 
+<<<<<<< HEAD
 /* module init/exit */
 
 static int __init platram_init(void)
@@ -274,6 +296,9 @@ static void __exit platram_exit(void)
 
 module_init(platram_init);
 module_exit(platram_exit);
+=======
+module_platform_driver(platram_driver);
+>>>>>>> v3.18
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Ben Dooks <ben@simtec.co.uk>");

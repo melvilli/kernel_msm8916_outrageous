@@ -35,7 +35,11 @@
 #include <drm/drm_sysfs.h>
 
 static DECLARE_WAIT_QUEUE_HEAD(exit_q);
+<<<<<<< HEAD
 atomic_t device_released;
+=======
+static atomic_t device_released;
+>>>>>>> v3.18
 
 static struct device_type ttm_drm_class_type = {
 	.name = "ttm",

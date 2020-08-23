@@ -213,7 +213,11 @@ static int cifs_debug_data_proc_show(struct seq_file *m, void *v)
 						   tcon->nativeFileSystem);
 				}
 				seq_printf(m, "DevInfo: 0x%x Attributes: 0x%x"
+<<<<<<< HEAD
 					"\nPathComponentMax: %d Status: 0x%d",
+=======
+					"\n\tPathComponentMax: %d Status: %d",
+>>>>>>> v3.18
 					le32_to_cpu(tcon->fsDevInfo.DeviceCharacteristics),
 					le32_to_cpu(tcon->fsAttrInfo.Attributes),
 					le32_to_cpu(tcon->fsAttrInfo.MaxPathNameComponentLength),
@@ -224,6 +228,11 @@ static int cifs_debug_data_proc_show(struct seq_file *m, void *v)
 					seq_puts(m, " type: CDROM ");
 				else
 					seq_printf(m, " type: %d ", dev_type);
+<<<<<<< HEAD
+=======
+				if (server->ops->dump_share_caps)
+					server->ops->dump_share_caps(m, tcon);
+>>>>>>> v3.18
 
 				if (tcon->need_reconnect)
 					seq_puts(m, "\tDISCONNECTED ");
@@ -595,9 +604,42 @@ static int cifs_security_flags_proc_open(struct inode *inode, struct file *file)
 	return single_open(file, cifs_security_flags_proc_show, NULL);
 }
 
+<<<<<<< HEAD
 static ssize_t cifs_security_flags_proc_write(struct file *file,
 		const char __user *buffer, size_t count, loff_t *ppos)
 {
+=======
+/*
+ * Ensure that if someone sets a MUST flag, that we disable all other MAY
+ * flags except for the ones corresponding to the given MUST flag. If there are
+ * multiple MUST flags, then try to prefer more secure ones.
+ */
+static void
+cifs_security_flags_handle_must_flags(unsigned int *flags)
+{
+	unsigned int signflags = *flags & CIFSSEC_MUST_SIGN;
+
+	if ((*flags & CIFSSEC_MUST_KRB5) == CIFSSEC_MUST_KRB5)
+		*flags = CIFSSEC_MUST_KRB5;
+	else if ((*flags & CIFSSEC_MUST_NTLMSSP) == CIFSSEC_MUST_NTLMSSP)
+		*flags = CIFSSEC_MUST_NTLMSSP;
+	else if ((*flags & CIFSSEC_MUST_NTLMV2) == CIFSSEC_MUST_NTLMV2)
+		*flags = CIFSSEC_MUST_NTLMV2;
+	else if ((*flags & CIFSSEC_MUST_NTLM) == CIFSSEC_MUST_NTLM)
+		*flags = CIFSSEC_MUST_NTLM;
+	else if ((*flags & CIFSSEC_MUST_LANMAN) == CIFSSEC_MUST_LANMAN)
+		*flags = CIFSSEC_MUST_LANMAN;
+	else if ((*flags & CIFSSEC_MUST_PLNTXT) == CIFSSEC_MUST_PLNTXT)
+		*flags = CIFSSEC_MUST_PLNTXT;
+
+	*flags |= signflags;
+}
+
+static ssize_t cifs_security_flags_proc_write(struct file *file,
+		const char __user *buffer, size_t count, loff_t *ppos)
+{
+	int rc;
+>>>>>>> v3.18
 	unsigned int flags;
 	char flags_string[12];
 	char c;
@@ -620,6 +662,7 @@ static ssize_t cifs_security_flags_proc_write(struct file *file,
 			global_secflags = CIFSSEC_MAX;
 			return count;
 		} else if (!isdigit(c)) {
+<<<<<<< HEAD
 			cifs_dbg(VFS, "invalid flag %c\n", c);
 			return -EINVAL;
 		}
@@ -632,14 +675,44 @@ static ssize_t cifs_security_flags_proc_write(struct file *file,
 
 	if (flags <= 0)  {
 		cifs_dbg(VFS, "invalid security flags %s\n", flags_string);
+=======
+			cifs_dbg(VFS, "Invalid SecurityFlags: %s\n",
+					flags_string);
+			return -EINVAL;
+		}
+	}
+
+	/* else we have a number */
+	rc = kstrtouint(flags_string, 0, &flags);
+	if (rc) {
+		cifs_dbg(VFS, "Invalid SecurityFlags: %s\n",
+				flags_string);
+		return rc;
+	}
+
+	cifs_dbg(FYI, "sec flags 0x%x\n", flags);
+
+	if (flags == 0)  {
+		cifs_dbg(VFS, "Invalid SecurityFlags: %s\n", flags_string);
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
 	if (flags & ~CIFSSEC_MASK) {
+<<<<<<< HEAD
 		cifs_dbg(VFS, "attempt to set unsupported security flags 0x%x\n",
 			 flags & ~CIFSSEC_MASK);
 		return -EINVAL;
 	}
+=======
+		cifs_dbg(VFS, "Unsupported security flags: 0x%x\n",
+			 flags & ~CIFSSEC_MASK);
+		return -EINVAL;
+	}
+
+	cifs_security_flags_handle_must_flags(&flags);
+
+>>>>>>> v3.18
 	/* flags look ok - update the global security flags for cifs module */
 	global_secflags = flags;
 	if (global_secflags & CIFSSEC_MUST_SIGN) {

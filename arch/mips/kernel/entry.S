@@ -16,9 +16,12 @@
 #include <asm/isadep.h>
 #include <asm/thread_info.h>
 #include <asm/war.h>
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 #include <asm/mipsmtregs.h>
 #endif
+=======
+>>>>>>> v3.18
 
 #ifndef CONFIG_PREEMPT
 #define resume_kernel	restore_all
@@ -89,6 +92,7 @@ FEXPORT(syscall_exit)
 	bnez	t0, syscall_exit_work
 
 restore_all:				# restore full frame
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 #ifdef CONFIG_MIPS_MT_SMTC_IM_BACKSTOP
 /* Re-arm any temporarily masked interrupts not explicitly "acked" */
@@ -124,6 +128,8 @@ restore_all:				# restore full frame
 	jal	deferred_smtc_ipi
 	LONG_S	s0, TI_REGS($28)
 #endif /* CONFIG_MIPS_MT_SMTC */
+=======
+>>>>>>> v3.18
 	.set	noat
 	RESTORE_TEMP
 	RESTORE_AT

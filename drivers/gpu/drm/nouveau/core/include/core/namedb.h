@@ -33,7 +33,11 @@ nv_namedb(void *obj)
 
 int  nouveau_namedb_create_(struct nouveau_object *, struct nouveau_object *,
 			    struct nouveau_oclass *, u32 pclass,
+<<<<<<< HEAD
 			    struct nouveau_oclass *, u32 engcls,
+=======
+			    struct nouveau_oclass *, u64 engcls,
+>>>>>>> v3.18
 			    int size, void **);
 
 int  _nouveau_namedb_ctor(struct nouveau_object *, struct nouveau_object *,

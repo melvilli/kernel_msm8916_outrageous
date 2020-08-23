@@ -23,6 +23,11 @@
  * Definitions of CPU card resources only
  */
 
+<<<<<<< HEAD
+=======
+#include "irqs.h" /* PXA_GPIO_TO_IRQ */
+
+>>>>>>> v3.18
 /* phyCORE-PXA270 (PCM027) Interrupts */
 #define PCM027_IRQ(x)          (IRQ_BOARD_START + (x))
 #define PCM027_BTDET_IRQ       PCM027_IRQ(0)

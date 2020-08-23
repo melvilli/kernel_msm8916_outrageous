@@ -4,7 +4,11 @@
 ///
 // Confidence: High
 // Comments:
+<<<<<<< HEAD
 // Options: -no_includes -include_headers
+=======
+// Options: --no-includes --include-headers
+>>>>>>> v3.18
 
 virtual patch
 virtual report

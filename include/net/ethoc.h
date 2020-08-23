@@ -16,6 +16,10 @@
 struct ethoc_platform_data {
 	u8 hwaddr[IFHWADDRLEN];
 	s8 phy_id;
+<<<<<<< HEAD
+=======
+	u32 eth_clkfreq;
+>>>>>>> v3.18
 };
 
 #endif /* !LINUX_NET_ETHOC_H */

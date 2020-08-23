@@ -87,6 +87,7 @@ mxm_shadow_dsm(struct nouveau_mxm *mxm, u8 version)
 		0xB8, 0x9C, 0x79, 0xB6, 0x2F, 0xD5, 0x56, 0x65
 	};
 	u32 mxms_args[] = { 0x00000000 };
+<<<<<<< HEAD
 	union acpi_object args[4] = {
 		/* _DSM MUID */
 		{ .buffer.type = 3,
@@ -136,6 +137,41 @@ mxm_shadow_dsm(struct nouveau_mxm *mxm, u8 version)
 	}
 
 	kfree(obj);
+=======
+	union acpi_object argv4 = {
+		.buffer.type = ACPI_TYPE_BUFFER,
+		.buffer.length = sizeof(mxms_args),
+		.buffer.pointer = (char *)mxms_args,
+	};
+	union acpi_object *obj;
+	acpi_handle handle;
+	int rev;
+
+	handle = ACPI_HANDLE(nv_device_base(device));
+	if (!handle)
+		return false;
+
+	/*
+	 * spec says this can be zero to mean "highest revision", but
+	 * of course there's at least one bios out there which fails
+	 * unless you pass in exactly the version it supports..
+	 */
+	rev = (version & 0xf0) << 4 | (version & 0x0f);
+	obj = acpi_evaluate_dsm(handle, muid, rev, 0x00000010, &argv4);
+	if (!obj) {
+		nv_debug(mxm, "DSM MXMS failed\n");
+		return false;
+	}
+
+	if (obj->type == ACPI_TYPE_BUFFER) {
+		mxm->mxms = kmemdup(obj->buffer.pointer,
+					 obj->buffer.length, GFP_KERNEL);
+	} else if (obj->type == ACPI_TYPE_INTEGER) {
+		nv_debug(mxm, "DSM MXMS returned 0x%llx\n", obj->integer.value);
+	}
+
+	ACPI_FREE(obj);
+>>>>>>> v3.18
 	return mxm->mxms != NULL;
 }
 #endif

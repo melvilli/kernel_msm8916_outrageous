@@ -21,8 +21,11 @@
 #include "dtc.h"
 #include "srcpos.h"
 
+<<<<<<< HEAD
 #include "version_gen.h"
 
+=======
+>>>>>>> v3.18
 /*
  * Command line options
  */
@@ -49,6 +52,7 @@ static void fill_fullpaths(struct node *tree, const char *prefix)
 		fill_fullpaths(child, tree->fullpath);
 }
 
+<<<<<<< HEAD
 static void  __attribute__ ((noreturn)) usage(void)
 {
 	fprintf(stderr, "Usage:\n");
@@ -98,6 +102,62 @@ static void  __attribute__ ((noreturn)) usage(void)
 	fprintf(stderr, "\t\t\tenable or disable warnings and errors\n");
 	exit(3);
 }
+=======
+/* Usage related data. */
+static const char usage_synopsis[] = "dtc [options] <input file>";
+static const char usage_short_opts[] = "qI:O:o:V:d:R:S:p:fb:i:H:sW:E:hv";
+static struct option const usage_long_opts[] = {
+	{"quiet",            no_argument, NULL, 'q'},
+	{"in-format",         a_argument, NULL, 'I'},
+	{"out",               a_argument, NULL, 'o'},
+	{"out-format",        a_argument, NULL, 'O'},
+	{"out-version",       a_argument, NULL, 'V'},
+	{"out-dependency",    a_argument, NULL, 'd'},
+	{"reserve",           a_argument, NULL, 'R'},
+	{"space",             a_argument, NULL, 'S'},
+	{"pad",               a_argument, NULL, 'p'},
+	{"boot-cpu",          a_argument, NULL, 'b'},
+	{"force",            no_argument, NULL, 'f'},
+	{"include",           a_argument, NULL, 'i'},
+	{"sort",             no_argument, NULL, 's'},
+	{"phandle",           a_argument, NULL, 'H'},
+	{"warning",           a_argument, NULL, 'W'},
+	{"error",             a_argument, NULL, 'E'},
+	{"help",             no_argument, NULL, 'h'},
+	{"version",          no_argument, NULL, 'v'},
+	{NULL,               no_argument, NULL, 0x0},
+};
+static const char * const usage_opts_help[] = {
+	"\n\tQuiet: -q suppress warnings, -qq errors, -qqq all",
+	"\n\tInput formats are:\n"
+	 "\t\tdts - device tree source text\n"
+	 "\t\tdtb - device tree blob\n"
+	 "\t\tfs  - /proc/device-tree style directory",
+	"\n\tOutput file",
+	"\n\tOutput formats are:\n"
+	 "\t\tdts - device tree source text\n"
+	 "\t\tdtb - device tree blob\n"
+	 "\t\tasm - assembler source",
+	"\n\tBlob version to produce, defaults to %d (for dtb and asm output)", //, DEFAULT_FDT_VERSION);
+	"\n\tOutput dependency file",
+	"\n\ttMake space for <number> reserve map entries (for dtb and asm output)",
+	"\n\tMake the blob at least <bytes> long (extra space)",
+	"\n\tAdd padding to the blob of <bytes> long (extra space)",
+	"\n\tSet the physical boot cpu",
+	"\n\tTry to produce output even if the input tree has errors",
+	"\n\tAdd a path to search for include files",
+	"\n\tSort nodes and properties before outputting (useful for comparing trees)",
+	"\n\tValid phandle formats are:\n"
+	 "\t\tlegacy - \"linux,phandle\" properties only\n"
+	 "\t\tepapr  - \"phandle\" properties only\n"
+	 "\t\tboth   - Both \"linux,phandle\" and \"phandle\" properties",
+	"\n\tEnable/disable warnings (prefix with \"no-\")",
+	"\n\tEnable/disable errors (prefix with \"no-\")",
+	"\n\tPrint this help and exit",
+	"\n\tPrint version and exit",
+	NULL,
+};
+>>>>>>> v3.18
 
 int main(int argc, char *argv[])
 {
@@ -118,8 +178,12 @@ int main(int argc, char *argv[])
 	minsize    = 0;
 	padsize    = 0;
 
+<<<<<<< HEAD
 	while ((opt = getopt(argc, argv, "hI:O:o:V:d:R:S:p:fqb:i:vH:sW:E:"))
 			!= EOF) {
+=======
+	while ((opt = util_getopt_long()) != EOF) {
+>>>>>>> v3.18
 		switch (opt) {
 		case 'I':
 			inform = optarg;
@@ -158,8 +222,12 @@ int main(int argc, char *argv[])
 			srcfile_add_search_path(optarg);
 			break;
 		case 'v':
+<<<<<<< HEAD
 			printf("Version: %s\n", DTC_VERSION);
 			exit(0);
+=======
+			util_version();
+>>>>>>> v3.18
 		case 'H':
 			if (streq(optarg, "legacy"))
 				phandle_format = PHANDLE_LEGACY;
@@ -185,13 +253,23 @@ int main(int argc, char *argv[])
 			break;
 
 		case 'h':
+<<<<<<< HEAD
 		default:
 			usage();
+=======
+			usage(NULL);
+		default:
+			usage("unknown option");
+>>>>>>> v3.18
 		}
 	}
 
 	if (argc > (optind+1))
+<<<<<<< HEAD
 		usage();
+=======
+		usage("missing files");
+>>>>>>> v3.18
 	else if (argc < (optind+1))
 		arg = "-";
 	else
@@ -201,9 +279,12 @@ int main(int argc, char *argv[])
 	if (minsize && padsize)
 		die("Can't set both -p and -S\n");
 
+<<<<<<< HEAD
 	if (minsize)
 		fprintf(stderr, "DTC: Use of \"-S\" is deprecated; it will be removed soon, use \"-p\" instead\n");
 
+=======
+>>>>>>> v3.18
 	if (depname) {
 		depfile = fopen(depname, "w");
 		if (!depfile)

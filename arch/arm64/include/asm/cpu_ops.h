@@ -28,6 +28,11 @@ struct device_node;
  *		enable-method property.
  * @cpu_init:	Reads any data necessary for a specific enable-method from the
  *		devicetree, for a given cpu node and proposed logical id.
+<<<<<<< HEAD
+=======
+ * @cpu_init_idle: Reads any data necessary to initialize CPU idle states from
+ *		devicetree, for a given cpu node and proposed logical id.
+>>>>>>> v3.18
  * @cpu_prepare: Early one-time preparation step for a cpu. If there is a
  *		mechanism for doing so, tests whether it is possible to boot
  *		the given CPU.
@@ -47,6 +52,10 @@ struct device_node;
 struct cpu_operations {
 	const char	*name;
 	int		(*cpu_init)(struct device_node *, unsigned int);
+<<<<<<< HEAD
+=======
+	int		(*cpu_init_idle)(struct device_node *, unsigned int);
+>>>>>>> v3.18
 	int		(*cpu_prepare)(unsigned int);
 	int		(*cpu_boot)(unsigned int);
 	void		(*cpu_postboot)(void);
@@ -61,6 +70,7 @@ struct cpu_operations {
 };
 
 extern const struct cpu_operations *cpu_ops[NR_CPUS];
+<<<<<<< HEAD
 extern int __init cpu_read_ops(struct device_node *dn, int cpu);
 extern void __init cpu_read_bootcpu_ops(void);
 
@@ -68,5 +78,9 @@ extern void __init cpu_read_bootcpu_ops(void);
 	static const struct cpu_operations *__cpu_method_table_##name	\
 	__used __section(__cpu_method_of_table)				\
 	= __ops;
+=======
+int __init cpu_read_ops(struct device_node *dn, int cpu);
+void __init cpu_read_bootcpu_ops(void);
+>>>>>>> v3.18
 
 #endif /* ifndef __ASM_CPU_OPS_H */

@@ -30,7 +30,10 @@
 #include <media/tuner.h>
 #include <media/tveeprom.h>
 #include <media/videobuf-dma-sg.h>
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 #include <media/cx2341x.h>
 #include <media/videobuf-dvb.h>
 #include <media/ir-kbd-i2c.h>
@@ -259,6 +262,14 @@ struct cx88_input {
 	unsigned int    audioroute:4;
 };
 
+<<<<<<< HEAD
+=======
+enum cx88_audio_chip {
+	CX88_AUDIO_WM8775 = 1,
+	CX88_AUDIO_TVAUDIO,
+};
+
+>>>>>>> v3.18
 struct cx88_board {
 	const char              *name;
 	unsigned int            tuner_type;
@@ -269,7 +280,11 @@ struct cx88_board {
 	struct cx88_input       input[MAX_CX88_INPUT];
 	struct cx88_input       radio;
 	enum cx88_board_type    mpeg;
+<<<<<<< HEAD
 	unsigned int            audio_chip;
+=======
+	enum cx88_audio_chip	audio_chip;
+>>>>>>> v3.18
 	int			num_frontends;
 
 	/* Used for I2S devices */

@@ -14,11 +14,14 @@
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 */
 /*
 Driver: cb_pcimdas
@@ -36,12 +39,22 @@ Configuration Options:
 
 Developed from cb_pcidas and skel by Richard Bytheway (mocelet@sucs.org).
 Only supports DIO, AO and simple AI in it's present form.
+<<<<<<< HEAD
 No interrupts, multi channel or FIFO AI, although the card looks like it could support this.
 See http://www.mccdaq.com/PDFs/Manuals/pcim-das1602-16.pdf for more details.
 */
 
 #include <linux/pci.h>
 #include <linux/delay.h>
+=======
+No interrupts, multi channel or FIFO AI,
+although the card looks like it could support this.
+See http://www.mccdaq.com/PDFs/Manuals/pcim-das1602-16.pdf for more details.
+*/
+
+#include <linux/module.h>
+#include <linux/pci.h>
+>>>>>>> v3.18
 #include <linux/interrupt.h>
 
 #include "../comedidev.h"
@@ -49,6 +62,7 @@ See http://www.mccdaq.com/PDFs/Manuals/pcim-das1602-16.pdf for more details.
 #include "plx9052.h"
 #include "8255.h"
 
+<<<<<<< HEAD
 /* #define CBPCIMDAS_DEBUG */
 #undef CBPCIMDAS_DEBUG
 
@@ -57,6 +71,10 @@ See http://www.mccdaq.com/PDFs/Manuals/pcim-das1602-16.pdf for more details.
 /* sizes of io regions (bytes) */
 #define BADR3_SIZE 16
 
+=======
+/* Registers for the PCIM-DAS1602/16 */
+
+>>>>>>> v3.18
 /* DAC Offsets */
 #define ADC_TRIG 0
 #define DAC0_OFFSET 2
@@ -87,6 +105,7 @@ See http://www.mccdaq.com/PDFs/Manuals/pcim-das1602-16.pdf for more details.
  */
 struct cb_pcimdas_private {
 	/* base addresses */
+<<<<<<< HEAD
 	unsigned long BADR3;
 
 	/* Used for AO readback */
@@ -97,17 +116,46 @@ struct cb_pcimdas_private {
  * "instructions" read/write data in "one-shot" or "software-triggered"
  * mode.
  */
+=======
+	unsigned long daqio;
+	unsigned long BADR3;
+};
+
+static int cb_pcimdas_ai_eoc(struct comedi_device *dev,
+			     struct comedi_subdevice *s,
+			     struct comedi_insn *insn,
+			     unsigned long context)
+{
+	struct cb_pcimdas_private *devpriv = dev->private;
+	unsigned int status;
+
+	status = inb(devpriv->BADR3 + 2);
+	if ((status & 0x80) == 0)
+		return 0;
+	return -EBUSY;
+}
+
+>>>>>>> v3.18
 static int cb_pcimdas_ai_rinsn(struct comedi_device *dev,
 			       struct comedi_subdevice *s,
 			       struct comedi_insn *insn, unsigned int *data)
 {
 	struct cb_pcimdas_private *devpriv = dev->private;
+<<<<<<< HEAD
 	int n, i;
 	unsigned int d;
 	unsigned int busy;
 	int chan = CR_CHAN(insn->chanspec);
 	unsigned short chanlims;
 	int maxchans;
+=======
+	int n;
+	unsigned int d;
+	int chan = CR_CHAN(insn->chanspec);
+	unsigned short chanlims;
+	int maxchans;
+	int ret;
+>>>>>>> v3.18
 
 	/*  only support sw initiated reads from a single channel */
 
@@ -126,8 +174,17 @@ static int cb_pcimdas_ai_rinsn(struct comedi_device *dev,
 		d = d & 0xfd;
 		outb(d, devpriv->BADR3 + 5);
 	}
+<<<<<<< HEAD
 	outb(0x01, devpriv->BADR3 + 6);	/* set bursting off, conversions on */
 	outb(0x00, devpriv->BADR3 + 7);	/* set range to 10V. UP/BP is controlled by a switch on the board */
+=======
+
+	/* set bursting off, conversions on */
+	outb(0x01, devpriv->BADR3 + 6);
+
+	/* set range to 10V. UP/BP is controlled by a switch on the board */
+	outb(0x00, devpriv->BADR3 + 7);
+>>>>>>> v3.18
 
 	/*
 	 * write channel limits to multiplexer, set Low (bits 0-3) and
@@ -139,6 +196,7 @@ static int cb_pcimdas_ai_rinsn(struct comedi_device *dev,
 	/* convert n samples */
 	for (n = 0; n < insn->n; n++) {
 		/* trigger conversion */
+<<<<<<< HEAD
 		outw(0, dev->iobase + 0);
 
 #define TIMEOUT 1000		/* typically takes 5 loops on a lightly loaded Pentium 100MHz, */
@@ -156,12 +214,24 @@ static int cb_pcimdas_ai_rinsn(struct comedi_device *dev,
 		}
 		/* read data */
 		data[n] = inw(dev->iobase + 0);
+=======
+		outw(0, devpriv->daqio + 0);
+
+		/* wait for conversion to end */
+		ret = comedi_timeout(dev, s, insn, cb_pcimdas_ai_eoc, 0);
+		if (ret)
+			return ret;
+
+		/* read data */
+		data[n] = inw(devpriv->daqio + 0);
+>>>>>>> v3.18
 	}
 
 	/* return the number of samples read/written */
 	return n;
 }
 
+<<<<<<< HEAD
 static int cb_pcimdas_ao_winsn(struct comedi_device *dev,
 			       struct comedi_subdevice *s,
 			       struct comedi_insn *insn, unsigned int *data)
@@ -204,6 +274,26 @@ static int cb_pcimdas_ao_rinsn(struct comedi_device *dev,
 		data[i] = devpriv->ao_readback[chan];
 
 	return i;
+=======
+static int cb_pcimdas_ao_insn_write(struct comedi_device *dev,
+				    struct comedi_subdevice *s,
+				    struct comedi_insn *insn,
+				    unsigned int *data)
+{
+	struct cb_pcimdas_private *devpriv = dev->private;
+	unsigned int chan = CR_CHAN(insn->chanspec);
+	unsigned int val = s->readback[chan];
+	unsigned int reg = (chan) ? DAC1_OFFSET : DAC0_OFFSET;
+	int i;
+
+	for (i = 0; i < insn->n; i++) {
+		val = data[i];
+		outw(val, devpriv->daqio + reg);
+	}
+	s->readback[chan] = val;
+
+	return insn->n;
+>>>>>>> v3.18
 }
 
 static int cb_pcimdas_auto_attach(struct comedi_device *dev,
@@ -212,6 +302,7 @@ static int cb_pcimdas_auto_attach(struct comedi_device *dev,
 	struct pci_dev *pcidev = comedi_to_pci_dev(dev);
 	struct cb_pcimdas_private *devpriv;
 	struct comedi_subdevice *s;
+<<<<<<< HEAD
 	unsigned long iobase_8255;
 	int ret;
 
@@ -219,11 +310,19 @@ static int cb_pcimdas_auto_attach(struct comedi_device *dev,
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
+=======
+	int ret;
+
+	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
+	if (!devpriv)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	ret = comedi_pci_enable(dev);
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 	dev->iobase = pci_resource_start(pcidev, 2);
 	devpriv->BADR3 = pci_resource_start(pcidev, 3);
 	iobase_8255 = pci_resource_start(pcidev, 4);
@@ -236,6 +335,11 @@ static int cb_pcimdas_auto_attach(struct comedi_device *dev,
 /* return -EINVAL; */
 /* } */
 /* dev->irq = pcidev->irq; */
+=======
+	devpriv->daqio = pci_resource_start(pcidev, 2);
+	devpriv->BADR3 = pci_resource_start(pcidev, 3);
+	dev->iobase = pci_resource_start(pcidev, 4);
+>>>>>>> v3.18
 
 	ret = comedi_alloc_subdevices(dev, 3);
 	if (ret)
@@ -261,6 +365,7 @@ static int cb_pcimdas_auto_attach(struct comedi_device *dev,
 	s->maxdata = 0xfff;
 	/* ranges are hardware settable, but not software readable. */
 	s->range_table = &range_unknown;
+<<<<<<< HEAD
 	s->insn_write = &cb_pcimdas_ao_winsn;
 	s->insn_read = &cb_pcimdas_ao_rinsn;
 
@@ -269,10 +374,25 @@ static int cb_pcimdas_auto_attach(struct comedi_device *dev,
 	subdev_8255_init(dev, s, NULL, iobase_8255);
 
 	dev_info(dev->class_dev, "%s attached\n", dev->board_name);
+=======
+	s->insn_write = cb_pcimdas_ao_insn_write;
+	s->insn_read = comedi_readback_insn_read;
+
+	ret = comedi_alloc_subdev_readback(s);
+	if (ret)
+		return ret;
+
+	s = &dev->subdevices[2];
+	/* digital i/o subdevice */
+	ret = subdev_8255_init(dev, s, NULL, 0x00);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 static void cb_pcimdas_detach(struct comedi_device *dev)
 {
 	if (dev->irq)
@@ -280,11 +400,17 @@ static void cb_pcimdas_detach(struct comedi_device *dev)
 	comedi_pci_disable(dev);
 }
 
+=======
+>>>>>>> v3.18
 static struct comedi_driver cb_pcimdas_driver = {
 	.driver_name	= "cb_pcimdas",
 	.module		= THIS_MODULE,
 	.auto_attach	= cb_pcimdas_auto_attach,
+<<<<<<< HEAD
 	.detach		= cb_pcimdas_detach,
+=======
+	.detach		= comedi_pci_detach,
+>>>>>>> v3.18
 };
 
 static int cb_pcimdas_pci_probe(struct pci_dev *dev,
@@ -294,7 +420,11 @@ static int cb_pcimdas_pci_probe(struct pci_dev *dev,
 				      id->driver_data);
 }
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(cb_pcimdas_pci_table) = {
+=======
+static const struct pci_device_id cb_pcimdas_pci_table[] = {
+>>>>>>> v3.18
 	{ PCI_DEVICE(PCI_VENDOR_ID_CB, 0x0056) },
 	{ 0 }
 };

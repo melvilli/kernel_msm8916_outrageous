@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -146,7 +150,28 @@ struct acpi_table_rsdp {
 	u8 reserved[3];		/* Reserved, must be zero */
 };
 
+<<<<<<< HEAD
 #define ACPI_RSDP_REV0_SIZE     20	/* Size of original ACPI 1.0 RSDP */
+=======
+/* Standalone struct for the ACPI 1.0 RSDP */
+
+struct acpi_rsdp_common {
+	char signature[8];
+	u8 checksum;
+	char oem_id[ACPI_OEM_ID_SIZE];
+	u8 revision;
+	u32 rsdt_physical_address;
+};
+
+/* Standalone struct for the extended part of the RSDP (ACPI 2.0+) */
+
+struct acpi_rsdp_extension {
+	u32 length;
+	u64 xsdt_physical_address;
+	u8 extended_checksum;
+	u8 reserved[3];
+};
+>>>>>>> v3.18
 
 /*******************************************************************************
  *
@@ -165,6 +190,12 @@ struct acpi_table_xsdt {
 	u64 table_offset_entry[1];	/* Array of pointers to ACPI tables */
 };
 
+<<<<<<< HEAD
+=======
+#define ACPI_RSDT_ENTRY_SIZE        (sizeof (u32))
+#define ACPI_XSDT_ENTRY_SIZE        (sizeof (u64))
+
+>>>>>>> v3.18
 /*******************************************************************************
  *
  * FACS - Firmware ACPI Control Structure (FACS)
@@ -250,7 +281,12 @@ struct acpi_table_fadt {
 	u32 flags;		/* Miscellaneous flag bits (see below for individual flags) */
 	struct acpi_generic_address reset_register;	/* 64-bit address of the Reset register */
 	u8 reset_value;		/* Value to write to the reset_register port to reset the system */
+<<<<<<< HEAD
 	u8 reserved4[3];	/* Reserved, must be zero */
+=======
+	u16 arm_boot_flags;	/* ARM-Specific Boot Flags (see below for individual flags) (ACPI 5.1) */
+	u8 minor_revision;	/* FADT Minor Revision (ACPI 5.1) */
+>>>>>>> v3.18
 	u64 Xfacs;		/* 64-bit physical address of FACS */
 	u64 Xdsdt;		/* 64-bit physical address of DSDT */
 	struct acpi_generic_address xpm1a_event_block;	/* 64-bit Extended Power Mgt 1a Event Reg Blk address */
@@ -265,7 +301,11 @@ struct acpi_table_fadt {
 	struct acpi_generic_address sleep_status;	/* 64-bit Sleep Status register (ACPI 5.0) */
 };
 
+<<<<<<< HEAD
 /* Masks for FADT Boot Architecture Flags (boot_flags) [Vx]=Introduced in this FADT revision */
+=======
+/* Masks for FADT IA-PC Boot Architecture Flags (boot_flags) [Vx]=Introduced in this FADT revision */
+>>>>>>> v3.18
 
 #define ACPI_FADT_LEGACY_DEVICES    (1)  	/* 00: [V2] System has LPC or ISA bus devices */
 #define ACPI_FADT_8042              (1<<1)	/* 01: [V3] System has an 8042 controller on port 60/64 */
@@ -276,6 +316,14 @@ struct acpi_table_fadt {
 
 #define FADT2_REVISION_ID               3
 
+<<<<<<< HEAD
+=======
+/* Masks for FADT ARM Boot Architecture Flags (arm_boot_flags) ACPI 5.1 */
+
+#define ACPI_FADT_PSCI_COMPLIANT    (1)	/* 00: [V5+] PSCI 0.2+ is implemented */
+#define ACPI_FADT_PSCI_USE_HVC      (1<<1)	/* 01: [V5+] HVC must be used instead of SMC as the PSCI conduit */
+
+>>>>>>> v3.18
 /* Masks for FADT flags */
 
 #define ACPI_FADT_WBINVD            (1)	/* 00: [V1] The WBINVD instruction works properly */
@@ -347,12 +395,20 @@ struct acpi_table_desc {
 
 /* Masks for Flags field above */
 
+<<<<<<< HEAD
 #define ACPI_TABLE_ORIGIN_UNKNOWN       (0)
 #define ACPI_TABLE_ORIGIN_MAPPED        (1)
 #define ACPI_TABLE_ORIGIN_ALLOCATED     (2)
 #define ACPI_TABLE_ORIGIN_OVERRIDE      (4)
 #define ACPI_TABLE_ORIGIN_MASK          (7)
 #define ACPI_TABLE_IS_LOADED            (8)
+=======
+#define ACPI_TABLE_ORIGIN_EXTERNAL_VIRTUAL  (0)	/* Virtual address, external maintained */
+#define ACPI_TABLE_ORIGIN_INTERNAL_PHYSICAL (1)	/* Physical address, internally mapped */
+#define ACPI_TABLE_ORIGIN_INTERNAL_VIRTUAL  (2)	/* Virtual address, internallly allocated */
+#define ACPI_TABLE_ORIGIN_MASK              (3)
+#define ACPI_TABLE_IS_LOADED                (8)
+>>>>>>> v3.18
 
 /*
  * Get the remaining ACPI tables
@@ -380,7 +436,11 @@ struct acpi_table_desc {
  *     FADT V5  size: 0x10C
  */
 #define ACPI_FADT_V1_SIZE       (u32) (ACPI_FADT_OFFSET (flags) + 4)
+<<<<<<< HEAD
 #define ACPI_FADT_V2_SIZE       (u32) (ACPI_FADT_OFFSET (reserved4[0]) + 3)
+=======
+#define ACPI_FADT_V2_SIZE       (u32) (ACPI_FADT_OFFSET (minor_revision) + 1)
+>>>>>>> v3.18
 #define ACPI_FADT_V3_SIZE       (u32) (ACPI_FADT_OFFSET (sleep_control))
 #define ACPI_FADT_V5_SIZE       (u32) (sizeof (struct acpi_table_fadt))
 

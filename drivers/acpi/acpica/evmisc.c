@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -78,6 +82,10 @@ u8 acpi_ev_is_notify_object(struct acpi_namespace_node *node)
 		return (TRUE);
 
 	default:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		return (FALSE);
 	}
 }
@@ -166,7 +174,12 @@ acpi_ev_queue_notify_request(struct acpi_namespace_node * node,
 			  "Dispatching Notify on [%4.4s] (%s) Value 0x%2.2X (%s) Node %p\n",
 			  acpi_ut_get_node_name(node),
 			  acpi_ut_get_type_name(node->type), notify_value,
+<<<<<<< HEAD
 			  acpi_ut_get_notify_name(notify_value), node));
+=======
+			  acpi_ut_get_notify_name(notify_value, ACPI_TYPE_ANY),
+			  node));
+>>>>>>> v3.18
 
 	status = acpi_os_execute(OSL_NOTIFY_HANDLER, acpi_ev_notify_dispatch,
 				 info);
@@ -263,6 +276,7 @@ void acpi_ev_terminate(void)
 
 		status = acpi_ev_walk_gpe_list(acpi_hw_disable_gpe_block, NULL);
 
+<<<<<<< HEAD
 		/* Remove SCI handler */
 
 		status = acpi_ev_remove_sci_handler();
@@ -270,11 +284,25 @@ void acpi_ev_terminate(void)
 			ACPI_ERROR((AE_INFO, "Could not remove SCI handler"));
 		}
 
+=======
+>>>>>>> v3.18
 		status = acpi_ev_remove_global_lock_handler();
 		if (ACPI_FAILURE(status)) {
 			ACPI_ERROR((AE_INFO,
 				    "Could not remove Global Lock handler"));
 		}
+<<<<<<< HEAD
+=======
+
+		acpi_gbl_events_initialized = FALSE;
+	}
+
+	/* Remove SCI handlers */
+
+	status = acpi_ev_remove_all_sci_handlers();
+	if (ACPI_FAILURE(status)) {
+		ACPI_ERROR((AE_INFO, "Could not remove SCI handler"));
+>>>>>>> v3.18
 	}
 
 	/* Deallocate all handler objects installed within GPE info structs */

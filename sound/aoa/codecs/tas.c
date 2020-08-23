@@ -826,7 +826,11 @@ static int tas_init_codec(struct aoa_codec *codec)
 		return -ENODEV;
 	}
 
+<<<<<<< HEAD
 	if (aoa_snd_device_new(SNDRV_DEV_LOWLEVEL, tas, &ops)) {
+=======
+	if (aoa_snd_device_new(SNDRV_DEV_CODEC, tas, &ops)) {
+>>>>>>> v3.18
 		printk(KERN_ERR PFX "failed to create tas snd device!\n");
 		return -ENODEV;
 	}

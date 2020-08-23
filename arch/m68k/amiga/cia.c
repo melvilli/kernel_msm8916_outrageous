@@ -18,6 +18,10 @@
 #include <linux/init.h>
 #include <linux/seq_file.h>
 #include <linux/interrupt.h>
+<<<<<<< HEAD
+=======
+#include <linux/irq.h>
+>>>>>>> v3.18
 
 #include <asm/irq.h>
 #include <asm/amigahw.h>

@@ -37,8 +37,12 @@
 #include <linux/interrupt.h>
 #include <linux/platform_device.h>
 #include <linux/i2c.h>
+<<<<<<< HEAD
 
 #include <linux/pinctrl/consumer.h>
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 
 #include <linux/atmel-ssc.h>
 
@@ -49,7 +53,10 @@
 
 #include <asm/mach-types.h>
 #include <mach/hardware.h>
+<<<<<<< HEAD
 #include <mach/gpio.h>
+=======
+>>>>>>> v3.18
 
 #include "../codecs/wm8731.h"
 #include "atmel-pcm.h"
@@ -156,16 +163,20 @@ static int at91sam9g20ek_wm8731_init(struct snd_soc_pcm_runtime *rtd)
 		return ret;
 	}
 
+<<<<<<< HEAD
 	/* Add specific widgets */
 	snd_soc_dapm_new_controls(dapm, at91sam9g20ek_dapm_widgets,
 				  ARRAY_SIZE(at91sam9g20ek_dapm_widgets));
 	/* Set up specific audio path interconnects */
 	snd_soc_dapm_add_routes(dapm, intercon, ARRAY_SIZE(intercon));
 
+=======
+>>>>>>> v3.18
 	/* not connected */
 	snd_soc_dapm_nc_pin(dapm, "RLINEIN");
 	snd_soc_dapm_nc_pin(dapm, "LLINEIN");
 
+<<<<<<< HEAD
 #ifdef ENABLE_MIC_INPUT
 	snd_soc_dapm_enable_pin(dapm, "Int Mic");
 #else
@@ -175,6 +186,12 @@ static int at91sam9g20ek_wm8731_init(struct snd_soc_pcm_runtime *rtd)
 	/* always connected */
 	snd_soc_dapm_enable_pin(dapm, "Ext Spk");
 
+=======
+#ifndef ENABLE_MIC_INPUT
+	snd_soc_dapm_nc_pin(&rtd->card->dapm, "Int Mic");
+#endif
+
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -195,6 +212,14 @@ static struct snd_soc_card snd_soc_at91sam9g20ek = {
 	.dai_link = &at91sam9g20ek_dai,
 	.num_links = 1,
 	.set_bias_level = at91sam9g20ek_set_bias_level,
+<<<<<<< HEAD
+=======
+
+	.dapm_widgets = at91sam9g20ek_dapm_widgets,
+	.num_dapm_widgets = ARRAY_SIZE(at91sam9g20ek_dapm_widgets),
+	.dapm_routes = intercon,
+	.num_dapm_routes = ARRAY_SIZE(intercon),
+>>>>>>> v3.18
 };
 
 static int at91sam9g20ek_audio_probe(struct platform_device *pdev)
@@ -203,6 +228,7 @@ static int at91sam9g20ek_audio_probe(struct platform_device *pdev)
 	struct device_node *codec_np, *cpu_np;
 	struct clk *pllb;
 	struct snd_soc_card *card = &snd_soc_at91sam9g20ek;
+<<<<<<< HEAD
 	struct pinctrl *pinctrl;
 	int ret;
 
@@ -212,6 +238,10 @@ static int at91sam9g20ek_audio_probe(struct platform_device *pdev)
 		return PTR_ERR(pinctrl);
 	}
 
+=======
+	int ret;
+
+>>>>>>> v3.18
 	if (!np) {
 		if (!(machine_is_at91sam9g20ek() ||
 			machine_is_at91sam9g20ek_2mmc()))

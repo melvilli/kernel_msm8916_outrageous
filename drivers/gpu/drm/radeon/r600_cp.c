@@ -1949,6 +1949,7 @@ int r600_do_cleanup_cp(struct drm_device *dev)
 #if __OS_HAS_AGP
 	if (dev_priv->flags & RADEON_IS_AGP) {
 		if (dev_priv->cp_ring != NULL) {
+<<<<<<< HEAD
 			drm_core_ioremapfree(dev_priv->cp_ring, dev);
 			dev_priv->cp_ring = NULL;
 		}
@@ -1958,6 +1959,17 @@ int r600_do_cleanup_cp(struct drm_device *dev)
 		}
 		if (dev->agp_buffer_map != NULL) {
 			drm_core_ioremapfree(dev->agp_buffer_map, dev);
+=======
+			drm_legacy_ioremapfree(dev_priv->cp_ring, dev);
+			dev_priv->cp_ring = NULL;
+		}
+		if (dev_priv->ring_rptr != NULL) {
+			drm_legacy_ioremapfree(dev_priv->ring_rptr, dev);
+			dev_priv->ring_rptr = NULL;
+		}
+		if (dev->agp_buffer_map != NULL) {
+			drm_legacy_ioremapfree(dev->agp_buffer_map, dev);
+>>>>>>> v3.18
 			dev->agp_buffer_map = NULL;
 		}
 	} else
@@ -1968,7 +1980,11 @@ int r600_do_cleanup_cp(struct drm_device *dev)
 			r600_page_table_cleanup(dev, &dev_priv->gart_info);
 
 		if (dev_priv->gart_info.gart_table_location == DRM_ATI_GART_FB) {
+<<<<<<< HEAD
 			drm_core_ioremapfree(&dev_priv->gart_info.mapping, dev);
+=======
+			drm_legacy_ioremapfree(&dev_priv->gart_info.mapping, dev);
+>>>>>>> v3.18
 			dev_priv->gart_info.addr = NULL;
 		}
 	}
@@ -2052,27 +2068,43 @@ int r600_do_init_cp(struct drm_device *dev, drm_radeon_init_t *init,
 	dev_priv->buffers_offset = init->buffers_offset;
 	dev_priv->gart_textures_offset = init->gart_textures_offset;
 
+<<<<<<< HEAD
 	master_priv->sarea = drm_getsarea(dev);
+=======
+	master_priv->sarea = drm_legacy_getsarea(dev);
+>>>>>>> v3.18
 	if (!master_priv->sarea) {
 		DRM_ERROR("could not find sarea!\n");
 		r600_do_cleanup_cp(dev);
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 	dev_priv->cp_ring = drm_core_findmap(dev, init->ring_offset);
+=======
+	dev_priv->cp_ring = drm_legacy_findmap(dev, init->ring_offset);
+>>>>>>> v3.18
 	if (!dev_priv->cp_ring) {
 		DRM_ERROR("could not find cp ring region!\n");
 		r600_do_cleanup_cp(dev);
 		return -EINVAL;
 	}
+<<<<<<< HEAD
 	dev_priv->ring_rptr = drm_core_findmap(dev, init->ring_rptr_offset);
+=======
+	dev_priv->ring_rptr = drm_legacy_findmap(dev, init->ring_rptr_offset);
+>>>>>>> v3.18
 	if (!dev_priv->ring_rptr) {
 		DRM_ERROR("could not find ring read pointer!\n");
 		r600_do_cleanup_cp(dev);
 		return -EINVAL;
 	}
 	dev->agp_buffer_token = init->buffers_offset;
+<<<<<<< HEAD
 	dev->agp_buffer_map = drm_core_findmap(dev, init->buffers_offset);
+=======
+	dev->agp_buffer_map = drm_legacy_findmap(dev, init->buffers_offset);
+>>>>>>> v3.18
 	if (!dev->agp_buffer_map) {
 		DRM_ERROR("could not find dma buffer region!\n");
 		r600_do_cleanup_cp(dev);
@@ -2081,7 +2113,11 @@ int r600_do_init_cp(struct drm_device *dev, drm_radeon_init_t *init,
 
 	if (init->gart_textures_offset) {
 		dev_priv->gart_textures =
+<<<<<<< HEAD
 		    drm_core_findmap(dev, init->gart_textures_offset);
+=======
+		    drm_legacy_findmap(dev, init->gart_textures_offset);
+>>>>>>> v3.18
 		if (!dev_priv->gart_textures) {
 			DRM_ERROR("could not find GART texture region!\n");
 			r600_do_cleanup_cp(dev);
@@ -2092,9 +2128,15 @@ int r600_do_init_cp(struct drm_device *dev, drm_radeon_init_t *init,
 #if __OS_HAS_AGP
 	/* XXX */
 	if (dev_priv->flags & RADEON_IS_AGP) {
+<<<<<<< HEAD
 		drm_core_ioremap_wc(dev_priv->cp_ring, dev);
 		drm_core_ioremap_wc(dev_priv->ring_rptr, dev);
 		drm_core_ioremap_wc(dev->agp_buffer_map, dev);
+=======
+		drm_legacy_ioremap_wc(dev_priv->cp_ring, dev);
+		drm_legacy_ioremap_wc(dev_priv->ring_rptr, dev);
+		drm_legacy_ioremap_wc(dev->agp_buffer_map, dev);
+>>>>>>> v3.18
 		if (!dev_priv->cp_ring->handle ||
 		    !dev_priv->ring_rptr->handle ||
 		    !dev->agp_buffer_map->handle) {
@@ -2200,6 +2242,7 @@ int r600_do_init_cp(struct drm_device *dev, drm_radeon_init_t *init,
 	dev_priv->ring.end = ((u32 *) dev_priv->cp_ring->handle
 			      + init->ring_size / sizeof(u32));
 	dev_priv->ring.size = init->ring_size;
+<<<<<<< HEAD
 	dev_priv->ring.size_l2qw = drm_order(init->ring_size / 8);
 
 	dev_priv->ring.rptr_update = /* init->rptr_update */ 4096;
@@ -2207,6 +2250,15 @@ int r600_do_init_cp(struct drm_device *dev, drm_radeon_init_t *init,
 
 	dev_priv->ring.fetch_size = /* init->fetch_size */ 32;
 	dev_priv->ring.fetch_size_l2ow = drm_order(/* init->fetch_size */ 32 / 16);
+=======
+	dev_priv->ring.size_l2qw = order_base_2(init->ring_size / 8);
+
+	dev_priv->ring.rptr_update = /* init->rptr_update */ 4096;
+	dev_priv->ring.rptr_update_l2qw = order_base_2(/* init->rptr_update */ 4096 / 8);
+
+	dev_priv->ring.fetch_size = /* init->fetch_size */ 32;
+	dev_priv->ring.fetch_size_l2ow = order_base_2(/* init->fetch_size */ 32 / 16);
+>>>>>>> v3.18
 
 	dev_priv->ring.tail_mask = (dev_priv->ring.size / sizeof(u32)) - 1;
 
@@ -2235,7 +2287,11 @@ int r600_do_init_cp(struct drm_device *dev, drm_radeon_init_t *init,
 		dev_priv->gart_info.mapping.size =
 			dev_priv->gart_info.table_size;
 
+<<<<<<< HEAD
 		drm_core_ioremap_wc(&dev_priv->gart_info.mapping, dev);
+=======
+		drm_legacy_ioremap_wc(&dev_priv->gart_info.mapping, dev);
+>>>>>>> v3.18
 		if (!dev_priv->gart_info.mapping.handle) {
 			DRM_ERROR("ioremap failed.\n");
 			r600_do_cleanup_cp(dev);
@@ -2515,7 +2571,11 @@ int r600_cp_dispatch_texture(struct drm_device *dev,
 		buf = radeon_freelist_get(dev);
 		if (!buf) {
 			DRM_DEBUG("EAGAIN\n");
+<<<<<<< HEAD
 			if (DRM_COPY_TO_USER(tex->image, image, sizeof(*image)))
+=======
+			if (copy_to_user(tex->image, image, sizeof(*image)))
+>>>>>>> v3.18
 				return -EFAULT;
 			return -EAGAIN;
 		}
@@ -2528,7 +2588,11 @@ int r600_cp_dispatch_texture(struct drm_device *dev,
 		buffer =
 		    (u32 *) ((char *)dev->agp_buffer_map->handle + buf->offset);
 
+<<<<<<< HEAD
 		if (DRM_COPY_FROM_USER(buffer, data, pass_size)) {
+=======
+		if (copy_from_user(buffer, data, pass_size)) {
+>>>>>>> v3.18
 			DRM_ERROR("EFAULT on pad, %d bytes\n", pass_size);
 			return -EFAULT;
 		}

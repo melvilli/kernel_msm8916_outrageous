@@ -93,12 +93,43 @@ static int jsm_probe_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 	/* store the info for the board we've found */
 	brd->boardnum = adapter_count++;
 	brd->pci_dev = pdev;
+<<<<<<< HEAD
 	if (pdev->device == PCIE_DEVICE_ID_NEO_4_IBM)
 		brd->maxports = 4;
 	else if (pdev->device == PCI_DEVICE_ID_DIGI_NEO_8)
 		brd->maxports = 8;
 	else
 		brd->maxports = 2;
+=======
+
+	switch (pdev->device) {
+
+	case PCI_DEVICE_ID_NEO_2DB9:
+	case PCI_DEVICE_ID_NEO_2DB9PRI:
+	case PCI_DEVICE_ID_NEO_2RJ45:
+	case PCI_DEVICE_ID_NEO_2RJ45PRI:
+	case PCI_DEVICE_ID_NEO_2_422_485:
+		brd->maxports = 2;
+		break;
+
+	case PCI_DEVICE_ID_NEO_4:
+	case PCIE_DEVICE_ID_NEO_4:
+	case PCIE_DEVICE_ID_NEO_4RJ45:
+	case PCIE_DEVICE_ID_NEO_4_IBM:
+		brd->maxports = 4;
+		break;
+
+	case PCI_DEVICE_ID_DIGI_NEO_8:
+	case PCIE_DEVICE_ID_NEO_8:
+	case PCIE_DEVICE_ID_NEO_8RJ45:
+		brd->maxports = 8;
+		break;
+
+	default:
+		brd->maxports = 1;
+		break;
+	}
+>>>>>>> v3.18
 
 	spin_lock_init(&brd->bd_intr_lock);
 
@@ -209,6 +240,17 @@ static struct pci_device_id jsm_pci_tbl[] = {
 	{ PCI_DEVICE(PCI_VENDOR_ID_DIGI, PCI_DEVICE_ID_NEO_2RJ45PRI), 0, 0, 3 },
 	{ PCI_DEVICE(PCI_VENDOR_ID_DIGI, PCIE_DEVICE_ID_NEO_4_IBM), 0, 0, 4 },
 	{ PCI_DEVICE(PCI_VENDOR_ID_DIGI, PCI_DEVICE_ID_DIGI_NEO_8), 0, 0, 5 },
+<<<<<<< HEAD
+=======
+	{ PCI_DEVICE(PCI_VENDOR_ID_DIGI, PCI_DEVICE_ID_NEO_4), 0, 0, 6 },
+	{ PCI_DEVICE(PCI_VENDOR_ID_DIGI, PCI_DEVICE_ID_NEO_1_422), 0, 0, 7 },
+	{ PCI_DEVICE(PCI_VENDOR_ID_DIGI, PCI_DEVICE_ID_NEO_1_422_485), 0, 0, 8 },
+	{ PCI_DEVICE(PCI_VENDOR_ID_DIGI, PCI_DEVICE_ID_NEO_2_422_485), 0, 0, 9 },
+	{ PCI_DEVICE(PCI_VENDOR_ID_DIGI, PCIE_DEVICE_ID_NEO_8), 0, 0, 10 },
+	{ PCI_DEVICE(PCI_VENDOR_ID_DIGI, PCIE_DEVICE_ID_NEO_4), 0, 0, 11 },
+	{ PCI_DEVICE(PCI_VENDOR_ID_DIGI, PCIE_DEVICE_ID_NEO_4RJ45), 0, 0, 12 },
+	{ PCI_DEVICE(PCI_VENDOR_ID_DIGI, PCIE_DEVICE_ID_NEO_8RJ45), 0, 0, 13 },
+>>>>>>> v3.18
 	{ 0, }
 };
 MODULE_DEVICE_TABLE(pci, jsm_pci_tbl);

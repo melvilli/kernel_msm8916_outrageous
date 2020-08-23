@@ -19,6 +19,7 @@
 
 struct device;
 struct ata_port_info;
+<<<<<<< HEAD
 
 struct ahci_platform_data {
 	int (*init)(struct device *dev, void __iomem *addr);
@@ -29,5 +30,24 @@ struct ahci_platform_data {
 	unsigned int force_port_map;
 	unsigned int mask_port_map;
 };
+=======
+struct ahci_host_priv;
+struct platform_device;
+
+int ahci_platform_enable_clks(struct ahci_host_priv *hpriv);
+void ahci_platform_disable_clks(struct ahci_host_priv *hpriv);
+int ahci_platform_enable_resources(struct ahci_host_priv *hpriv);
+void ahci_platform_disable_resources(struct ahci_host_priv *hpriv);
+struct ahci_host_priv *ahci_platform_get_resources(
+	struct platform_device *pdev);
+int ahci_platform_init_host(struct platform_device *pdev,
+			    struct ahci_host_priv *hpriv,
+			    const struct ata_port_info *pi_template);
+
+int ahci_platform_suspend_host(struct device *dev);
+int ahci_platform_resume_host(struct device *dev);
+int ahci_platform_suspend(struct device *dev);
+int ahci_platform_resume(struct device *dev);
+>>>>>>> v3.18
 
 #endif /* _AHCI_PLATFORM_H */

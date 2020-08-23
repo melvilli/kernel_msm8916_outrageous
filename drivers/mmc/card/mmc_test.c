@@ -795,7 +795,11 @@ static int mmc_test_nonblock_transfer(struct mmc_test_card *test,
 	struct mmc_async_req *cur_areq = &test_areq[0].areq;
 	struct mmc_async_req *other_areq = &test_areq[1].areq;
 	int i;
+<<<<<<< HEAD
 	int ret = RESULT_OK;
+=======
+	int ret;
+>>>>>>> v3.18
 
 	test_areq[0].test = test;
 	test_areq[1].test = test;
@@ -2695,7 +2699,10 @@ static void mmc_test_run(struct mmc_test_card *test, int testcase)
 	pr_info("%s: Starting tests of card %s...\n",
 		mmc_hostname(test->card->host), mmc_card_id(test->card));
 
+<<<<<<< HEAD
 	mmc_rpm_hold(test->card->host, &test->card->dev);
+=======
+>>>>>>> v3.18
 	mmc_claim_host(test->card->host);
 
 	for (i = 0;i < ARRAY_SIZE(mmc_test_cases);i++) {
@@ -2779,7 +2786,10 @@ static void mmc_test_run(struct mmc_test_card *test, int testcase)
 	}
 
 	mmc_release_host(test->card->host);
+<<<<<<< HEAD
 	mmc_rpm_release(test->card->host, &test->card->dev);
+=======
+>>>>>>> v3.18
 
 	pr_info("%s: Tests completed.\n",
 		mmc_hostname(test->card->host));
@@ -2851,6 +2861,7 @@ static ssize_t mtf_test_write(struct file *file, const char __user *buf,
 	struct seq_file *sf = (struct seq_file *)file->private_data;
 	struct mmc_card *card = (struct mmc_card *)sf->private;
 	struct mmc_test_card *test;
+<<<<<<< HEAD
 	char lbuf[12];
 	long testcase;
 
@@ -2863,6 +2874,14 @@ static ssize_t mtf_test_write(struct file *file, const char __user *buf,
 
 	if (strict_strtol(lbuf, 10, &testcase))
 		return -EINVAL;
+=======
+	long testcase;
+	int ret;
+
+	ret = kstrtol_from_user(buf, count, 10, &testcase);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 
 	test = kzalloc(sizeof(struct mmc_test_card), GFP_KERNEL);
 	if (!test)
@@ -2892,8 +2911,12 @@ static ssize_t mtf_test_write(struct file *file, const char __user *buf,
 	}
 
 #ifdef CONFIG_HIGHMEM
+<<<<<<< HEAD
 	if (test->highmem)
 		__free_pages(test->highmem, BUFFER_ORDER);
+=======
+	__free_pages(test->highmem, BUFFER_ORDER);
+>>>>>>> v3.18
 #endif
 	kfree(test->buffer);
 	kfree(test);
@@ -3028,12 +3051,23 @@ static void mmc_test_remove(struct mmc_card *card)
 	mmc_test_free_dbgfs_file(card);
 }
 
+<<<<<<< HEAD
+=======
+static void mmc_test_shutdown(struct mmc_card *card)
+{
+}
+
+>>>>>>> v3.18
 static struct mmc_driver mmc_driver = {
 	.drv		= {
 		.name	= "mmc_test",
 	},
 	.probe		= mmc_test_probe,
 	.remove		= mmc_test_remove,
+<<<<<<< HEAD
+=======
+	.shutdown	= mmc_test_shutdown,
+>>>>>>> v3.18
 };
 
 static int __init mmc_test_init(void)

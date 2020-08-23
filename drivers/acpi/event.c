@@ -12,7 +12,11 @@
 #include <linux/init.h>
 #include <linux/poll.h>
 #include <linux/gfp.h>
+<<<<<<< HEAD
 #include <acpi/acpi_drivers.h>
+=======
+#include <linux/acpi.h>
+>>>>>>> v3.18
 #include <net/netlink.h>
 #include <net/genetlink.h>
 
@@ -21,6 +25,7 @@
 #define _COMPONENT		ACPI_SYSTEM_COMPONENT
 ACPI_MODULE_NAME("event");
 
+<<<<<<< HEAD
 #ifdef CONFIG_ACPI_PROC_EVENT
 /* Global vars for handling event proc entry */
 static DEFINE_SPINLOCK(acpi_system_event_lock);
@@ -115,6 +120,8 @@ static const struct file_operations acpi_system_event_ops = {
 };
 #endif	/* CONFIG_ACPI_PROC_EVENT */
 
+=======
+>>>>>>> v3.18
 /* ACPI notifier chain */
 static BLOCKING_NOTIFIER_HEAD(acpi_chain_head);
 
@@ -172,15 +179,27 @@ enum {
 #define ACPI_GENL_VERSION		0x01
 #define ACPI_GENL_MCAST_GROUP_NAME 	"acpi_mc_group"
 
+<<<<<<< HEAD
+=======
+static const struct genl_multicast_group acpi_event_mcgrps[] = {
+	{ .name = ACPI_GENL_MCAST_GROUP_NAME, },
+};
+
+>>>>>>> v3.18
 static struct genl_family acpi_event_genl_family = {
 	.id = GENL_ID_GENERATE,
 	.name = ACPI_GENL_FAMILY_NAME,
 	.version = ACPI_GENL_VERSION,
 	.maxattr = ACPI_GENL_ATTR_MAX,
+<<<<<<< HEAD
 };
 
 static struct genl_multicast_group acpi_event_mcgrp = {
 	.name = ACPI_GENL_MCAST_GROUP_NAME,
+=======
+	.mcgrps = acpi_event_mcgrps,
+	.n_mcgrps = ARRAY_SIZE(acpi_event_mcgrps),
+>>>>>>> v3.18
 };
 
 int acpi_bus_generate_netlink_event(const char *device_class,
@@ -221,11 +240,14 @@ int acpi_bus_generate_netlink_event(const char *device_class,
 	}
 
 	event = nla_data(attr);
+<<<<<<< HEAD
 	if (!event) {
 		nlmsg_free(skb);
 		return -EINVAL;
 	}
 
+=======
+>>>>>>> v3.18
 	memset(event, 0, sizeof(struct acpi_genl_event));
 
 	strcpy(event->device_class, device_class);
@@ -240,7 +262,11 @@ int acpi_bus_generate_netlink_event(const char *device_class,
 		return result;
 	}
 
+<<<<<<< HEAD
 	genlmsg_multicast(skb, 0, acpi_event_mcgrp.id, GFP_ATOMIC);
+=======
+	genlmsg_multicast(&acpi_event_genl_family, skb, 0, 0, GFP_ATOMIC);
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -248,6 +274,7 @@ EXPORT_SYMBOL(acpi_bus_generate_netlink_event);
 
 static int acpi_event_genetlink_init(void)
 {
+<<<<<<< HEAD
 	int result;
 
 	result = genl_register_family(&acpi_event_genl_family);
@@ -260,6 +287,9 @@ static int acpi_event_genetlink_init(void)
 		genl_unregister_family(&acpi_event_genl_family);
 
 	return result;
+=======
+	return genl_register_family(&acpi_event_genl_family);
+>>>>>>> v3.18
 }
 
 #else
@@ -280,9 +310,12 @@ static int acpi_event_genetlink_init(void)
 
 static int __init acpi_event_init(void)
 {
+<<<<<<< HEAD
 #ifdef CONFIG_ACPI_PROC_EVENT
 	struct proc_dir_entry *entry;
 #endif
+=======
+>>>>>>> v3.18
 	int error = 0;
 
 	if (acpi_disabled)
@@ -293,6 +326,7 @@ static int __init acpi_event_init(void)
 	if (error)
 		printk(KERN_WARNING PREFIX
 		       "Failed to create genetlink family for ACPI event\n");
+<<<<<<< HEAD
 
 #ifdef CONFIG_ACPI_PROC_EVENT
 	/* 'event' [R] */
@@ -302,6 +336,8 @@ static int __init acpi_event_init(void)
 		return -ENODEV;
 #endif
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

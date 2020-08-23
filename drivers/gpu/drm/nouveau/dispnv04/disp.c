@@ -22,9 +22,12 @@
  * Author: Ben Skeggs
  */
 
+<<<<<<< HEAD
 #include <core/object.h>
 #include <core/class.h>
 
+=======
+>>>>>>> v3.18
 #include <drm/drmP.h>
 #include <drm/drm_crtc_helper.h>
 
@@ -34,8 +37,11 @@
 #include "nouveau_encoder.h"
 #include "nouveau_connector.h"
 
+<<<<<<< HEAD
 #include <subdev/i2c.h>
 
+=======
+>>>>>>> v3.18
 int
 nv04_display_early_init(struct drm_device *dev)
 {
@@ -58,7 +64,11 @@ int
 nv04_display_create(struct drm_device *dev)
 {
 	struct nouveau_drm *drm = nouveau_drm(dev);
+<<<<<<< HEAD
 	struct nouveau_i2c *i2c = nouveau_i2c(drm->device);
+=======
+	struct nouveau_i2c *i2c = nvkm_i2c(&drm->device);
+>>>>>>> v3.18
 	struct dcb_table *dcb = &drm->vbios.dcb;
 	struct drm_connector *connector, *ct;
 	struct drm_encoder *encoder;
@@ -70,6 +80,11 @@ nv04_display_create(struct drm_device *dev)
 	if (!disp)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+=======
+	nvif_object_map(nvif_object(&drm->device));
+
+>>>>>>> v3.18
 	nouveau_display(dev)->priv = disp;
 	nouveau_display(dev)->dtor = nv04_display_destroy;
 	nouveau_display(dev)->init = nv04_display_init;
@@ -77,11 +92,14 @@ nv04_display_create(struct drm_device *dev)
 
 	nouveau_hw_save_vga_fonts(dev, 1);
 
+<<<<<<< HEAD
 	ret = nouveau_object_new(nv_object(drm), NVDRM_DEVICE, 0xd1500000,
 				 NV04_DISP_CLASS, NULL, 0, &disp->core);
 	if (ret)
 		return ret;
 
+=======
+>>>>>>> v3.18
 	nv04_crtc_create(dev, 0);
 	if (nv_two_heads(dev))
 		nv04_crtc_create(dev, 1);
@@ -120,7 +138,11 @@ nv04_display_create(struct drm_device *dev)
 				 &dev->mode_config.connector_list, head) {
 		if (!connector->encoder_ids[0]) {
 			NV_WARN(drm, "%s has no encoders, removing\n",
+<<<<<<< HEAD
 				drm_get_connector_name(connector));
+=======
+				connector->name);
+>>>>>>> v3.18
 			connector->funcs->destroy(connector);
 		}
 	}
@@ -140,6 +162,11 @@ nv04_display_create(struct drm_device *dev)
 		func->save(encoder);
 	}
 
+<<<<<<< HEAD
+=======
+	nouveau_overlay_init(dev);
+
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -147,6 +174,10 @@ void
 nv04_display_destroy(struct drm_device *dev)
 {
 	struct nv04_display *disp = nv04_display(dev);
+<<<<<<< HEAD
+=======
+	struct nouveau_drm *drm = nouveau_drm(dev);
+>>>>>>> v3.18
 	struct drm_encoder *encoder;
 	struct drm_crtc *crtc;
 
@@ -173,6 +204,11 @@ nv04_display_destroy(struct drm_device *dev)
 
 	nouveau_display(dev)->priv = NULL;
 	kfree(disp);
+<<<<<<< HEAD
+=======
+
+	nvif_object_unmap(nvif_object(&drm->device));
+>>>>>>> v3.18
 }
 
 int

@@ -375,6 +375,10 @@
 #define	MSR_ADHOC				0x01
 #define	MSR_INFRA				0x02
 #define	MSR_AP					0x03
+<<<<<<< HEAD
+=======
+#define	MSR_MASK				0x03
+>>>>>>> v3.18
 
 #define	RRSR_RSC_OFFSET				21
 #define	RRSR_SHORT_OFFSET			23
@@ -560,7 +564,10 @@
 #define	EEPROM_DEFAULT_TXPOWERLEVEL		0x22
 #define	EEPROM_DEFAULT_HT40_2SDIFF		0x0
 #define EEPROM_DEFAULT_HT20_DIFF		2
+<<<<<<< HEAD
 #define	EEPROM_DEFAULT_LEGACYHTTXPOWERDIFF	0x3
+=======
+>>>>>>> v3.18
 #define EEPROM_DEFAULT_HT40_PWRMAXOFFSET	0
 #define EEPROM_DEFAULT_HT20_PWRMAXOFFSET	0
 
@@ -639,6 +646,7 @@
 
 #define	EEPROM_TXPWR_GROUP			0x6F
 
+<<<<<<< HEAD
 #define EEPROM_TSSI_A				0x76
 #define EEPROM_TSSI_B				0x77
 #define EEPROM_THERMAL_METER			0x78
@@ -650,6 +658,10 @@
 #define RF_OPTION3				0x7B
 #define RF_OPTION4				0x7C
 
+=======
+#define EEPROM_CHANNELPLAN			0x75
+
+>>>>>>> v3.18
 #define	STOPBECON				BIT(6)
 #define	STOPHIGHT				BIT(5)
 #define	STOPMGT					BIT(4)
@@ -689,6 +701,7 @@
 #define RSV_CTRL				0x001C
 #define RD_CTRL					0x0524
 
+<<<<<<< HEAD
 #define REG_USB_INFO				0xFE17
 #define REG_USB_SPECIAL_OPTION			0xFE55
 
@@ -696,6 +709,8 @@
 #define REG_USB_AGG_TO				0xFE5C
 #define REG_USB_AGG_TH				0xFE5D
 
+=======
+>>>>>>> v3.18
 #define REG_USB_VID				0xFE60
 #define REG_USB_PID				0xFE62
 #define REG_USB_OPTIONAL			0xFE64
@@ -1196,9 +1211,12 @@
 #define POLLING_LLT_THRESHOLD			20
 #define POLLING_READY_TIMEOUT_COUNT		1000
 
+<<<<<<< HEAD
 #define	MAX_MSS_DENSITY_2T			0x13
 #define	MAX_MSS_DENSITY_1T			0x0A
 
+=======
+>>>>>>> v3.18
 #define EPROM_CMD_OPERATING_MODE_MASK	((1<<7)|(1<<6))
 #define EPROM_CMD_CONFIG			0x3
 #define EPROM_CMD_LOAD				1
@@ -2064,6 +2082,7 @@
 #define	BWORD1					0xc
 #define	BWORD					0xf
 
+<<<<<<< HEAD
 #define	MASKBYTE0				0xff
 #define	MASKBYTE1				0xff00
 #define	MASKBYTE2				0xff0000
@@ -2080,6 +2099,8 @@
 #define	MASK20BITS				0xfffff
 #define RFREG_OFFSET_MASK			0xfffff
 
+=======
+>>>>>>> v3.18
 #define	BENABLE					0x1
 #define	BDISABLE				0x0
 

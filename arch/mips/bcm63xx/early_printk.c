@@ -6,9 +6,14 @@
  * Copyright (C) 2008 Maxime Bizon <mbizon@freebox.fr>
  */
 
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <bcm63xx_io.h>
 #include <bcm63xx_regs.h>
+=======
+#include <bcm63xx_io.h>
+#include <linux/serial_bcm63xx.h>
+>>>>>>> v3.18
 
 static void wait_xfered(void)
 {

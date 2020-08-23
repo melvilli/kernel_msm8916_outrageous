@@ -37,7 +37,10 @@
 #include <linux/fcntl.h>
 #include <linux/gfp.h>
 #include <linux/interrupt.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/ioport.h>
 #include <linux/in.h>
 #include <linux/string.h>
@@ -52,7 +55,10 @@
 #include <linux/bitrev.h>
 #include <linux/slab.h>
 
+<<<<<<< HEAD
 #include <asm/bootinfo.h>
+=======
+>>>>>>> v3.18
 #include <asm/pgtable.h>
 #include <asm/io.h>
 #include <asm/hwtest.h>

@@ -1,6 +1,10 @@
 /******************************************************************************
  *
+<<<<<<< HEAD
  * Copyright(c) 2003 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2003 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
  *
  * Portions of this file are derived from the ipw3945 project, as well
  * as portionhelp of the ieee80211 subsystem header files.
@@ -39,7 +43,11 @@
 
 #define IWL_CMD_ENTRY(x) [x] = #x
 
+<<<<<<< HEAD
 const char *iwl_dvm_cmd_strings[REPLY_MAX] = {
+=======
+const char *const iwl_dvm_cmd_strings[REPLY_MAX] = {
+>>>>>>> v3.18
 	IWL_CMD_ENTRY(REPLY_ALIVE),
 	IWL_CMD_ENTRY(REPLY_ERROR),
 	IWL_CMD_ENTRY(REPLY_ECHO),
@@ -205,8 +213,12 @@ static int iwlagn_rx_pm_debug_statistics_notif(struct iwl_priv *priv,
 					     struct iwl_device_cmd *cmd)
 {
 	struct iwl_rx_packet *pkt = rxb_addr(rxb);
+<<<<<<< HEAD
 	u32 __maybe_unused len =
 		le32_to_cpu(pkt->len_n_flags) & FH_RSCSR_FRAME_SIZE_MSK;
+=======
+	u32 __maybe_unused len = iwl_rx_packet_len(pkt);
+>>>>>>> v3.18
 	IWL_DEBUG_RADIO(priv, "Dumping %d bytes of unhandled "
 			"notification for PM_DEBUG_STATISTIC_NOTIFIC:\n", len);
 	iwl_print_hex_dump(priv, IWL_DL_RADIO, pkt->data, len);
@@ -335,8 +347,12 @@ static void iwlagn_recover_from_statistics(struct iwl_priv *priv,
 	if (msecs < 99)
 		return;
 
+<<<<<<< HEAD
 	if (iwlwifi_mod_params.plcp_check &&
 	    !iwlagn_good_plcp_health(priv, cur_ofdm, cur_ofdm_ht, msecs))
+=======
+	if (!iwlagn_good_plcp_health(priv, cur_ofdm, cur_ofdm_ht, msecs))
+>>>>>>> v3.18
 		iwl_force_rf_reset(priv, false);
 }
 
@@ -458,7 +474,11 @@ static int iwlagn_rx_statistics(struct iwl_priv *priv,
 	const int reg_recalib_period = 60;
 	int change;
 	struct iwl_rx_packet *pkt = rxb_addr(rxb);
+<<<<<<< HEAD
 	u32 len = le32_to_cpu(pkt->len_n_flags) & FH_RSCSR_FRAME_SIZE_MSK;
+=======
+	u32 len = iwl_rx_packet_payload_len(pkt);
+>>>>>>> v3.18
 	__le32 *flag;
 	struct statistics_general_common *common;
 	struct statistics_rx_non_phy *rx_non_phy;
@@ -468,8 +488,11 @@ static int iwlagn_rx_statistics(struct iwl_priv *priv,
 	struct statistics_tx *tx;
 	struct statistics_bt_activity *bt_activity;
 
+<<<<<<< HEAD
 	len -= sizeof(struct iwl_cmd_header); /* skip header */
 
+=======
+>>>>>>> v3.18
 	IWL_DEBUG_RX(priv, "Statistics notification received (%d bytes).\n",
 		     len);
 
@@ -790,7 +813,11 @@ static void iwlagn_pass_packet_to_mac80211(struct iwl_priv *priv,
 
 	memcpy(IEEE80211_SKB_RXCB(skb), stats, sizeof(*stats));
 
+<<<<<<< HEAD
 	ieee80211_rx_ni(priv->hw, skb);
+=======
+	ieee80211_rx(priv->hw, skb);
+>>>>>>> v3.18
 }
 
 static u32 iwlagn_translate_rx_status(struct iwl_priv *priv, u32 decrypt_in)
@@ -1102,7 +1129,11 @@ void iwl_setup_rx_handlers(struct iwl_priv *priv)
 	iwl_notification_wait_init(&priv->notif_wait);
 
 	/* Set up BT Rx handlers */
+<<<<<<< HEAD
 	if (priv->cfg->bt_params)
+=======
+	if (priv->lib->bt_params)
+>>>>>>> v3.18
 		iwlagn_bt_rx_handler_setup(priv);
 }
 
@@ -1120,6 +1151,7 @@ int iwl_rx_dispatch(struct iwl_op_mode *op_mode, struct iwl_rx_cmd_buffer *rxb,
 	 */
 	iwl_notification_wait_notify(&priv->notif_wait, pkt);
 
+<<<<<<< HEAD
 #ifdef CONFIG_IWLWIFI_DEVICE_TESTMODE
 	/*
 	 * RX data may be forwarded to userspace in one
@@ -1146,6 +1178,19 @@ int iwl_rx_dispatch(struct iwl_op_mode *op_mode, struct iwl_rx_cmd_buffer *rxb,
 				     iwl_dvm_get_cmd_string(pkt->hdr.cmd),
 				     pkt->hdr.cmd);
 		}
+=======
+	/* Based on type of command response or notification,
+	 *   handle those that need handling via function in
+	 *   rx_handlers table.  See iwl_setup_rx_handlers() */
+	if (priv->rx_handlers[pkt->hdr.cmd]) {
+		priv->rx_handlers_stats[pkt->hdr.cmd]++;
+		err = priv->rx_handlers[pkt->hdr.cmd] (priv, rxb, cmd);
+	} else {
+		/* No handling needed */
+		IWL_DEBUG_RX(priv, "No handler needed for %s, 0x%02x\n",
+			     iwl_dvm_get_cmd_string(pkt->hdr.cmd),
+			     pkt->hdr.cmd);
+>>>>>>> v3.18
 	}
 	return err;
 }

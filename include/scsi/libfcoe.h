@@ -90,6 +90,10 @@ enum fip_state {
  * @lp:		   &fc_lport: libfc local port.
  * @sel_fcf:	   currently selected FCF, or NULL.
  * @fcfs:	   list of discovered FCFs.
+<<<<<<< HEAD
+=======
+ * @cdev:          (Optional) pointer to sysfs fcoe_ctlr_device.
+>>>>>>> v3.18
  * @fcf_count:	   number of discovered FCF entries.
  * @sol_time:	   time when a multicast solicitation was last sent.
  * @sel_time:	   time after which to select an FCF.
@@ -127,6 +131,10 @@ struct fcoe_ctlr {
 	struct fc_lport *lp;
 	struct fcoe_fcf *sel_fcf;
 	struct list_head fcfs;
+<<<<<<< HEAD
+=======
+	struct fcoe_ctlr_device *cdev;
+>>>>>>> v3.18
 	u16 fcf_count;
 	unsigned long sol_time;
 	unsigned long sel_time;
@@ -168,8 +176,16 @@ static inline void *fcoe_ctlr_priv(const struct fcoe_ctlr *ctlr)
 	return (void *)(ctlr + 1);
 }
 
+<<<<<<< HEAD
 #define fcoe_ctlr_to_ctlr_dev(x)					\
 	(struct fcoe_ctlr_device *)(((struct fcoe_ctlr_device *)(x)) - 1)
+=======
+/*
+ * This assumes that the fcoe_ctlr (x) is allocated with the fcoe_ctlr_device.
+ */
+#define fcoe_ctlr_to_ctlr_dev(x)					\
+	(x)->cdev
+>>>>>>> v3.18
 
 /**
  * struct fcoe_fcf - Fibre-Channel Forwarder

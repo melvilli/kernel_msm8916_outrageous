@@ -1,4 +1,5 @@
 /*
+<<<<<<< HEAD
  * Carsten Langgaard, carstenl@mips.com
  * Copyright (C) 2000, 2001, 2004 MIPS Technologies, Inc.
  * Copyright (C) 2001 Ralf Baechle
@@ -20,6 +21,20 @@
  * Malta board.
  * The interrupt controller is located in the South Bridge a PIIX4 device
  * with two internal 82C95 interrupt controllers.
+=======
+ * This file is subject to the terms and conditions of the GNU General Public
+ * License.  See the file "COPYING" in the main directory of this archive
+ * for more details.
+ *
+ * Carsten Langgaard, carstenl@mips.com
+ * Copyright (C) 2000, 2001, 2004 MIPS Technologies, Inc.
+ * Copyright (C) 2001 Ralf Baechle
+ * Copyright (C) 2013 Imagination Technologies Ltd.
+ *
+ * Routines for generic manipulation of the interrupts found on the MIPS
+ * Malta board. The interrupt controller is located in the South Bridge
+ * a PIIX4 device with two internal 82C95 interrupt controllers.
+>>>>>>> v3.18
  */
 #include <linux/init.h>
 #include <linux/irq.h>
@@ -35,24 +50,44 @@
 #include <asm/i8259.h>
 #include <asm/irq_cpu.h>
 #include <asm/irq_regs.h>
+<<<<<<< HEAD
 #include <asm/mips-boards/malta.h>
 #include <asm/mips-boards/maltaint.h>
 #include <asm/mips-boards/piix4.h>
+=======
+#include <asm/mips-cm.h>
+#include <asm/mips-boards/malta.h>
+#include <asm/mips-boards/maltaint.h>
+>>>>>>> v3.18
 #include <asm/gt64120.h>
 #include <asm/mips-boards/generic.h>
 #include <asm/mips-boards/msc01_pci.h>
 #include <asm/msc01_ic.h>
 #include <asm/gic.h>
+<<<<<<< HEAD
 #include <asm/gcmpregs.h>
 #include <asm/setup.h>
 
 int gcmp_present = -1;
 static unsigned long _msc01_biu_base;
 static unsigned long _gcmp_base;
+=======
+#include <asm/setup.h>
+#include <asm/rtlx.h>
+
+static unsigned long _msc01_biu_base;
+>>>>>>> v3.18
 static unsigned int ipi_map[NR_CPUS];
 
 static DEFINE_RAW_SPINLOCK(mips_irq_lock);
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_MIPS_GIC_IPI
+DECLARE_BITMAP(ipi_ints, GIC_NUM_INTRS);
+#endif
+
+>>>>>>> v3.18
 static inline int mips_pcibios_iack(void)
 {
 	int irq;
@@ -91,7 +126,11 @@ static inline int mips_pcibios_iack(void)
 		BONITO_PCIMAP_CFG = 0;
 		break;
 	default:
+<<<<<<< HEAD
 		printk(KERN_WARNING "Unknown system controller.\n");
+=======
+		pr_emerg("Unknown system controller.\n");
+>>>>>>> v3.18
 		return -1;
 	}
 	return irq;
@@ -127,10 +166,19 @@ static void malta_hw0_irqdispatch(void)
 	}
 
 	do_IRQ(MALTA_INT_BASE + irq);
+<<<<<<< HEAD
+=======
+
+#ifdef CONFIG_MIPS_VPE_APSP_API_MT
+	if (aprp_hook)
+		aprp_hook();
+#endif
+>>>>>>> v3.18
 }
 
 static void malta_ipi_irqdispatch(void)
 {
+<<<<<<< HEAD
 	int irq;
 
 	if (gic_compare_int())
@@ -141,6 +189,24 @@ static void malta_ipi_irqdispatch(void)
 		return;	 /* interrupt has already been cleared */
 
 	do_IRQ(MIPS_GIC_IRQ_BASE + irq);
+=======
+#ifdef CONFIG_MIPS_GIC_IPI
+	unsigned long irq;
+	DECLARE_BITMAP(pending, GIC_NUM_INTRS);
+
+	gic_get_int_mask(pending, ipi_ints);
+
+	irq = find_first_bit(pending, GIC_NUM_INTRS);
+
+	while (irq < GIC_NUM_INTRS) {
+		do_IRQ(MIPS_GIC_IRQ_BASE + irq);
+
+		irq = find_next_bit(pending, GIC_NUM_INTRS, irq + 1);
+	}
+#endif
+	if (gic_compare_int())
+		do_IRQ(MIPS_GIC_IRQ_BASE);
+>>>>>>> v3.18
 }
 
 static void corehi_irqdispatch(void)
@@ -150,11 +216,19 @@ static void corehi_irqdispatch(void)
 	unsigned int intrcause, datalo, datahi;
 	struct pt_regs *regs = get_irq_regs();
 
+<<<<<<< HEAD
 	printk(KERN_EMERG "CoreHI interrupt, shouldn't happen, we die here!\n");
 	printk(KERN_EMERG "epc	 : %08lx\nStatus: %08lx\n"
 			"Cause : %08lx\nbadVaddr : %08lx\n",
 			regs->cp0_epc, regs->cp0_status,
 			regs->cp0_cause, regs->cp0_badvaddr);
+=======
+	pr_emerg("CoreHI interrupt, shouldn't happen, we die here!\n");
+	pr_emerg("epc	 : %08lx\nStatus: %08lx\n"
+		 "Cause : %08lx\nbadVaddr : %08lx\n",
+		 regs->cp0_epc, regs->cp0_status,
+		 regs->cp0_cause, regs->cp0_badvaddr);
+>>>>>>> v3.18
 
 	/* Read all the registers and then print them as there is a
 	   problem with interspersed printk's upsetting the Bonito controller.
@@ -172,8 +246,13 @@ static void corehi_irqdispatch(void)
 		intrcause = GT_READ(GT_INTRCAUSE_OFS);
 		datalo = GT_READ(GT_CPUERR_ADDRLO_OFS);
 		datahi = GT_READ(GT_CPUERR_ADDRHI_OFS);
+<<<<<<< HEAD
 		printk(KERN_EMERG "GT_INTRCAUSE = %08x\n", intrcause);
 		printk(KERN_EMERG "GT_CPUERR_ADDR = %02x%08x\n",
+=======
+		pr_emerg("GT_INTRCAUSE = %08x\n", intrcause);
+		pr_emerg("GT_CPUERR_ADDR = %02x%08x\n",
+>>>>>>> v3.18
 				datahi, datalo);
 		break;
 	case MIPS_REVISION_SCON_BONITO:
@@ -185,6 +264,7 @@ static void corehi_irqdispatch(void)
 		intedge = BONITO_INTEDGE;
 		intsteer = BONITO_INTSTEER;
 		pcicmd = BONITO_PCICMD;
+<<<<<<< HEAD
 		printk(KERN_EMERG "BONITO_INTISR = %08x\n", intisr);
 		printk(KERN_EMERG "BONITO_INTEN = %08x\n", inten);
 		printk(KERN_EMERG "BONITO_INTPOL = %08x\n", intpol);
@@ -193,6 +273,16 @@ static void corehi_irqdispatch(void)
 		printk(KERN_EMERG "BONITO_PCICMD = %08x\n", pcicmd);
 		printk(KERN_EMERG "BONITO_PCIBADADDR = %08x\n", pcibadaddr);
 		printk(KERN_EMERG "BONITO_PCIMSTAT = %08x\n", pcimstat);
+=======
+		pr_emerg("BONITO_INTISR = %08x\n", intisr);
+		pr_emerg("BONITO_INTEN = %08x\n", inten);
+		pr_emerg("BONITO_INTPOL = %08x\n", intpol);
+		pr_emerg("BONITO_INTEDGE = %08x\n", intedge);
+		pr_emerg("BONITO_INTSTEER = %08x\n", intsteer);
+		pr_emerg("BONITO_PCICMD = %08x\n", pcicmd);
+		pr_emerg("BONITO_PCIBADADDR = %08x\n", pcibadaddr);
+		pr_emerg("BONITO_PCIMSTAT = %08x\n", pcimstat);
+>>>>>>> v3.18
 		break;
 	}
 
@@ -292,10 +382,13 @@ asmlinkage void plat_irq_dispatch(void)
 
 #ifdef CONFIG_MIPS_MT_SMP
 
+<<<<<<< HEAD
 
 #define GIC_MIPS_CPU_IPI_RESCHED_IRQ	3
 #define GIC_MIPS_CPU_IPI_CALL_IRQ	4
 
+=======
+>>>>>>> v3.18
 #define MIPS_CPU_IPI_RESCHED_IRQ 0	/* SW int 0 for resched */
 #define C_RESCHED C_SW0
 #define MIPS_CPU_IPI_CALL_IRQ 1		/* SW int 1 for resched */
@@ -312,8 +405,25 @@ static void ipi_call_dispatch(void)
 	do_IRQ(MIPS_CPU_IRQ_BASE + MIPS_CPU_IPI_CALL_IRQ);
 }
 
+<<<<<<< HEAD
 static irqreturn_t ipi_resched_interrupt(int irq, void *dev_id)
 {
+=======
+#endif /* CONFIG_MIPS_MT_SMP */
+
+#ifdef CONFIG_MIPS_GIC_IPI
+
+#define GIC_MIPS_CPU_IPI_RESCHED_IRQ	3
+#define GIC_MIPS_CPU_IPI_CALL_IRQ	4
+
+static irqreturn_t ipi_resched_interrupt(int irq, void *dev_id)
+{
+#ifdef CONFIG_MIPS_VPE_APSP_API_CMP
+	if (aprp_hook)
+		aprp_hook();
+#endif
+
+>>>>>>> v3.18
 	scheduler_ipi();
 
 	return IRQ_HANDLED;
@@ -337,7 +447,11 @@ static struct irqaction irq_call = {
 	.flags		= IRQF_PERCPU,
 	.name		= "IPI_call"
 };
+<<<<<<< HEAD
 #endif /* CONFIG_MIPS_MT_SMP */
+=======
+#endif /* CONFIG_MIPS_GIC_IPI */
+>>>>>>> v3.18
 
 static int gic_resched_int_base;
 static int gic_call_int_base;
@@ -366,6 +480,7 @@ static struct irqaction corehi_irqaction = {
 	.flags = IRQF_NO_THREAD,
 };
 
+<<<<<<< HEAD
 static msc_irqmap_t __initdata msc_irqmap[] = {
 	{MSC01C_INT_TMR,		MSC01_IRQ_EDGE, 0},
 	{MSC01C_INT_PCI,		MSC01_IRQ_LEVEL, 0},
@@ -373,6 +488,15 @@ static msc_irqmap_t __initdata msc_irqmap[] = {
 static int __initdata msc_nr_irqs = ARRAY_SIZE(msc_irqmap);
 
 static msc_irqmap_t __initdata msc_eicirqmap[] = {
+=======
+static msc_irqmap_t msc_irqmap[] __initdata = {
+	{MSC01C_INT_TMR,		MSC01_IRQ_EDGE, 0},
+	{MSC01C_INT_PCI,		MSC01_IRQ_LEVEL, 0},
+};
+static int msc_nr_irqs __initdata = ARRAY_SIZE(msc_irqmap);
+
+static msc_irqmap_t msc_eicirqmap[] __initdata = {
+>>>>>>> v3.18
 	{MSC01E_INT_SW0,		MSC01_IRQ_LEVEL, 0},
 	{MSC01E_INT_SW1,		MSC01_IRQ_LEVEL, 0},
 	{MSC01E_INT_I8259A,		MSC01_IRQ_LEVEL, 0},
@@ -385,7 +509,11 @@ static msc_irqmap_t __initdata msc_eicirqmap[] = {
 	{MSC01E_INT_CPUCTR,		MSC01_IRQ_LEVEL, 0}
 };
 
+<<<<<<< HEAD
 static int __initdata msc_nr_eicirqs = ARRAY_SIZE(msc_eicirqmap);
+=======
+static int msc_nr_eicirqs __initdata = ARRAY_SIZE(msc_eicirqmap);
+>>>>>>> v3.18
 
 /*
  * This GIC specific tabular array defines the association between External
@@ -417,6 +545,7 @@ static struct gic_intr_map gic_intr_map[GIC_NUM_INTRS] = {
 };
 #undef X
 
+<<<<<<< HEAD
 /*
  * GCMP needs to be detected before any SMP initialisation
  */
@@ -456,6 +585,9 @@ void __init gcmp_setregion(int region, unsigned long base,
 }
 
 #if defined(CONFIG_MIPS_MT_SMP)
+=======
+#ifdef CONFIG_MIPS_GIC_IPI
+>>>>>>> v3.18
 static void __init fill_ipi_map1(int baseintr, int cpu, int cpupin)
 {
 	int intr = baseintr + cpu;
@@ -463,15 +595,25 @@ static void __init fill_ipi_map1(int baseintr, int cpu, int cpupin)
 	gic_intr_map[intr].pin = cpupin;
 	gic_intr_map[intr].polarity = GIC_POL_POS;
 	gic_intr_map[intr].trigtype = GIC_TRIG_EDGE;
+<<<<<<< HEAD
 	gic_intr_map[intr].flags = GIC_FLAG_IPI;
 	ipi_map[cpu] |= (1 << (cpupin + 2));
+=======
+	gic_intr_map[intr].flags = 0;
+	ipi_map[cpu] |= (1 << (cpupin + 2));
+	bitmap_set(ipi_ints, intr, 1);
+>>>>>>> v3.18
 }
 
 static void __init fill_ipi_map(void)
 {
 	int cpu;
 
+<<<<<<< HEAD
 	for (cpu = 0; cpu < NR_CPUS; cpu++) {
+=======
+	for (cpu = 0; cpu < nr_cpu_ids; cpu++) {
+>>>>>>> v3.18
 		fill_ipi_map1(gic_resched_int_base, cpu, GIC_CPU_INT1);
 		fill_ipi_map1(gic_call_int_base, cpu, GIC_CPU_INT2);
 	}
@@ -491,8 +633,13 @@ void __init arch_init_irq(void)
 	if (!cpu_has_veic)
 		mips_cpu_irq_init();
 
+<<<<<<< HEAD
 	if (gcmp_present)  {
 		GCMPGCB(GICBA) = GIC_BASE_ADDR | GCMP_GCB_GICBA_EN_MSK;
+=======
+	if (mips_cm_present()) {
+		write_gcr_gic_base(GIC_BASE_ADDR | CM_GCR_GIC_BASE_GICEN_MSK);
+>>>>>>> v3.18
 		gic_present = 1;
 	} else {
 		if (mips_revision_sconid == MIPS_REVISION_SCON_ROCIT) {
@@ -540,6 +687,7 @@ void __init arch_init_irq(void)
 	} else if (cpu_has_vint) {
 		set_vi_handler(MIPSCPU_INT_I8259A, malta_hw0_irqdispatch);
 		set_vi_handler(MIPSCPU_INT_COREHI, corehi_irqdispatch);
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 		setup_irq_smtc(MIPS_CPU_IRQ_BASE+MIPSCPU_INT_I8259A, &i8259irq,
 			(0x100 << MIPSCPU_INT_I8259A));
@@ -562,6 +710,11 @@ void __init arch_init_irq(void)
 		setup_irq(MIPS_CPU_IRQ_BASE+MIPSCPU_INT_COREHI,
 						&corehi_irqaction);
 #endif /* CONFIG_MIPS_MT_SMTC */
+=======
+		setup_irq(MIPS_CPU_IRQ_BASE+MIPSCPU_INT_I8259A, &i8259irq);
+		setup_irq(MIPS_CPU_IRQ_BASE+MIPSCPU_INT_COREHI,
+						&corehi_irqaction);
+>>>>>>> v3.18
 	} else {
 		setup_irq(MIPS_CPU_IRQ_BASE+MIPSCPU_INT_I8259A, &i8259irq);
 		setup_irq(MIPS_CPU_IRQ_BASE+MIPSCPU_INT_COREHI,
@@ -571,33 +724,60 @@ void __init arch_init_irq(void)
 	if (gic_present) {
 		/* FIXME */
 		int i;
+<<<<<<< HEAD
 #if defined(CONFIG_MIPS_MT_SMP)
 		gic_call_int_base = GIC_NUM_INTRS - NR_CPUS;
 		gic_resched_int_base = gic_call_int_base - NR_CPUS;
+=======
+#if defined(CONFIG_MIPS_GIC_IPI)
+		gic_call_int_base = GIC_NUM_INTRS -
+			(NR_CPUS - nr_cpu_ids) * 2 - nr_cpu_ids;
+		gic_resched_int_base = gic_call_int_base - nr_cpu_ids;
+>>>>>>> v3.18
 		fill_ipi_map();
 #endif
 		gic_init(GIC_BASE_ADDR, GIC_ADDRSPACE_SZ, gic_intr_map,
 				ARRAY_SIZE(gic_intr_map), MIPS_GIC_IRQ_BASE);
+<<<<<<< HEAD
 		if (!gcmp_present) {
+=======
+		if (!mips_cm_present()) {
+>>>>>>> v3.18
 			/* Enable the GIC */
 			i = REG(_msc01_biu_base, MSC01_SC_CFG);
 			REG(_msc01_biu_base, MSC01_SC_CFG) =
 				(i | (0x1 << MSC01_SC_CFG_GICENA_SHF));
 			pr_debug("GIC Enabled\n");
 		}
+<<<<<<< HEAD
 #if defined(CONFIG_MIPS_MT_SMP)
+=======
+#if defined(CONFIG_MIPS_GIC_IPI)
+>>>>>>> v3.18
 		/* set up ipi interrupts */
 		if (cpu_has_vint) {
 			set_vi_handler(MIPSCPU_INT_IPI0, malta_ipi_irqdispatch);
 			set_vi_handler(MIPSCPU_INT_IPI1, malta_ipi_irqdispatch);
 		}
 		/* Argh.. this really needs sorting out.. */
+<<<<<<< HEAD
 		printk("CPU%d: status register was %08x\n", smp_processor_id(), read_c0_status());
 		write_c0_status(read_c0_status() | STATUSF_IP3 | STATUSF_IP4);
 		printk("CPU%d: status register now %08x\n", smp_processor_id(), read_c0_status());
 		write_c0_status(0x1100dc00);
 		printk("CPU%d: status register frc %08x\n", smp_processor_id(), read_c0_status());
 		for (i = 0; i < NR_CPUS; i++) {
+=======
+		pr_info("CPU%d: status register was %08x\n",
+			smp_processor_id(), read_c0_status());
+		write_c0_status(read_c0_status() | STATUSF_IP3 | STATUSF_IP4);
+		pr_info("CPU%d: status register now %08x\n",
+			smp_processor_id(), read_c0_status());
+		write_c0_status(0x1100dc00);
+		pr_info("CPU%d: status register frc %08x\n",
+			smp_processor_id(), read_c0_status());
+		for (i = 0; i < nr_cpu_ids; i++) {
+>>>>>>> v3.18
 			arch_init_ipiirq(MIPS_GIC_IRQ_BASE +
 					 GIC_RESCHED_INT(i), &irq_resched);
 			arch_init_ipiirq(MIPS_GIC_IRQ_BASE +
@@ -614,11 +794,23 @@ void __init arch_init_irq(void)
 			cpu_ipi_call_irq = MSC01E_INT_SW1;
 		} else {
 			if (cpu_has_vint) {
+<<<<<<< HEAD
 				set_vi_handler (MIPS_CPU_IPI_RESCHED_IRQ, ipi_resched_dispatch);
 				set_vi_handler (MIPS_CPU_IPI_CALL_IRQ, ipi_call_dispatch);
 			}
 			cpu_ipi_resched_irq = MIPS_CPU_IRQ_BASE + MIPS_CPU_IPI_RESCHED_IRQ;
 			cpu_ipi_call_irq = MIPS_CPU_IRQ_BASE + MIPS_CPU_IPI_CALL_IRQ;
+=======
+				set_vi_handler (MIPS_CPU_IPI_RESCHED_IRQ,
+					ipi_resched_dispatch);
+				set_vi_handler (MIPS_CPU_IPI_CALL_IRQ,
+					ipi_call_dispatch);
+			}
+			cpu_ipi_resched_irq = MIPS_CPU_IRQ_BASE +
+				MIPS_CPU_IPI_RESCHED_IRQ;
+			cpu_ipi_call_irq = MIPS_CPU_IRQ_BASE +
+				MIPS_CPU_IPI_CALL_IRQ;
+>>>>>>> v3.18
 		}
 		arch_init_ipiirq(cpu_ipi_resched_irq, &irq_resched);
 		arch_init_ipiirq(cpu_ipi_call_irq, &irq_call);
@@ -628,9 +820,13 @@ void __init arch_init_irq(void)
 
 void malta_be_init(void)
 {
+<<<<<<< HEAD
 	if (gcmp_present) {
 		/* Could change CM error mask register */
 	}
+=======
+	/* Could change CM error mask register. */
+>>>>>>> v3.18
 }
 
 
@@ -697,6 +893,7 @@ int malta_be_handler(struct pt_regs *regs, int is_fixup)
 	/* This duplicates the handling in do_be which seems wrong */
 	int retval = is_fixup ? MIPS_BE_FIXUP : MIPS_BE_FATAL;
 
+<<<<<<< HEAD
 	if (gcmp_present) {
 		unsigned long cm_error = GCMPGCB(GCMEC);
 		unsigned long cm_addr = GCMPGCB(GCMEA);
@@ -711,13 +908,33 @@ int malta_be_handler(struct pt_regs *regs, int is_fixup)
 				unsigned long cca_bits = (cm_error >> 15) & 7;
 				unsigned long tr_bits = (cm_error >> 12) & 7;
 				unsigned long mcmd_bits = (cm_error >> 7) & 0x1f;
+=======
+	if (mips_cm_present()) {
+		unsigned long cm_error = read_gcr_error_cause();
+		unsigned long cm_addr = read_gcr_error_addr();
+		unsigned long cm_other = read_gcr_error_mult();
+		unsigned long cause, ocause;
+		char buf[256];
+
+		cause = cm_error & CM_GCR_ERROR_CAUSE_ERRTYPE_MSK;
+		if (cause != 0) {
+			cause >>= CM_GCR_ERROR_CAUSE_ERRTYPE_SHF;
+			if (cause < 16) {
+				unsigned long cca_bits = (cm_error >> 15) & 7;
+				unsigned long tr_bits = (cm_error >> 12) & 7;
+				unsigned long cmd_bits = (cm_error >> 7) & 0x1f;
+>>>>>>> v3.18
 				unsigned long stag_bits = (cm_error >> 3) & 15;
 				unsigned long sport_bits = (cm_error >> 0) & 7;
 
 				snprintf(buf, sizeof(buf),
 					 "CCA=%lu TR=%s MCmd=%s STag=%lu "
 					 "SPort=%lu\n",
+<<<<<<< HEAD
 					 cca_bits, tr[tr_bits], mcmd[mcmd_bits],
+=======
+					 cca_bits, tr[tr_bits], mcmd[cmd_bits],
+>>>>>>> v3.18
 					 stag_bits, sport_bits);
 			} else {
 				/* glob state & sresp together */
@@ -726,7 +943,11 @@ int malta_be_handler(struct pt_regs *regs, int is_fixup)
 				unsigned long c1_bits = (cm_error >> 12) & 7;
 				unsigned long c0_bits = (cm_error >> 9) & 7;
 				unsigned long sc_bit = (cm_error >> 8) & 1;
+<<<<<<< HEAD
 				unsigned long mcmd_bits = (cm_error >> 3) & 0x1f;
+=======
+				unsigned long cmd_bits = (cm_error >> 3) & 0x1f;
+>>>>>>> v3.18
 				unsigned long sport_bits = (cm_error >> 0) & 7;
 				snprintf(buf, sizeof(buf),
 					 "C3=%s C2=%s C1=%s C0=%s SC=%s "
@@ -734,6 +955,7 @@ int malta_be_handler(struct pt_regs *regs, int is_fixup)
 					 core[c3_bits], core[c2_bits],
 					 core[c1_bits], core[c0_bits],
 					 sc_bit ? "True" : "False",
+<<<<<<< HEAD
 					 mcmd[mcmd_bits], sport_bits);
 			}
 
@@ -747,6 +969,21 @@ int malta_be_handler(struct pt_regs *regs, int is_fixup)
 
 			/* reprime cause register */
 			GCMPGCB(GCMEC) = 0;
+=======
+					 mcmd[cmd_bits], sport_bits);
+			}
+
+			ocause = (cm_other & CM_GCR_ERROR_MULT_ERR2ND_MSK) >>
+				 CM_GCR_ERROR_MULT_ERR2ND_SHF;
+
+			pr_err("CM_ERROR=%08lx %s <%s>\n", cm_error,
+			       causes[cause], buf);
+			pr_err("CM_ADDR =%08lx\n", cm_addr);
+			pr_err("CM_OTHER=%08lx %s\n", cm_other, causes[ocause]);
+
+			/* reprime cause register */
+			write_gcr_error_cause(0);
+>>>>>>> v3.18
 		}
 	}
 

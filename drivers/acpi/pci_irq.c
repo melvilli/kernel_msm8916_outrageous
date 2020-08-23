@@ -37,8 +37,11 @@
 #include <linux/pci.h>
 #include <linux/acpi.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
 #include <acpi/acpi_bus.h>
 #include <acpi/acpi_drivers.h>
+=======
+>>>>>>> v3.18
 
 #define PREFIX "ACPI: "
 
@@ -372,6 +375,33 @@ static struct acpi_prt_entry *acpi_pci_irq_lookup(struct pci_dev *dev, int pin)
 	return NULL;
 }
 
+<<<<<<< HEAD
+=======
+#if IS_ENABLED(CONFIG_ISA) || IS_ENABLED(CONFIG_EISA)
+static int acpi_isa_register_gsi(struct pci_dev *dev)
+{
+	u32 dev_gsi;
+
+	/* Interrupt Line values above 0xF are forbidden */
+	if (dev->irq > 0 && (dev->irq <= 0xF) &&
+	    (acpi_isa_irq_to_gsi(dev->irq, &dev_gsi) == 0)) {
+		dev_warn(&dev->dev, "PCI INT %c: no GSI - using ISA IRQ %d\n",
+			 pin_name(dev->pin), dev->irq);
+		acpi_register_gsi(&dev->dev, dev_gsi,
+				  ACPI_LEVEL_SENSITIVE,
+				  ACPI_ACTIVE_LOW);
+		return 0;
+	}
+	return -EINVAL;
+}
+#else
+static inline int acpi_isa_register_gsi(struct pci_dev *dev)
+{
+	return -ENODEV;
+}
+#endif
+
+>>>>>>> v3.18
 int acpi_pci_irq_enable(struct pci_dev *dev)
 {
 	struct acpi_prt_entry *entry;
@@ -418,6 +448,7 @@ int acpi_pci_irq_enable(struct pci_dev *dev)
 	 * driver reported one, then use it. Exit in any case.
 	 */
 	if (gsi < 0) {
+<<<<<<< HEAD
 		u32 dev_gsi;
 		/* Interrupt Line values above 0xF are forbidden */
 		if (dev->irq > 0 && (dev->irq <= 0xF) &&
@@ -431,6 +462,11 @@ int acpi_pci_irq_enable(struct pci_dev *dev)
 			dev_warn(&dev->dev, "PCI INT %c: no GSI\n",
 				 pin_name(pin));
 		}
+=======
+		if (acpi_isa_register_gsi(dev))
+			dev_warn(&dev->dev, "PCI INT %c: no GSI\n",
+				 pin_name(pin));
+>>>>>>> v3.18
 
 		kfree(entry);
 		return 0;
@@ -469,6 +505,17 @@ void acpi_pci_irq_disable(struct pci_dev *dev)
 	if (!pin)
 		return;
 
+<<<<<<< HEAD
+=======
+	/* Keep IOAPIC pin configuration when suspending */
+	if (dev->dev.power.is_prepared)
+		return;
+#ifdef	CONFIG_PM_RUNTIME
+	if (dev->dev.power.runtime_status == RPM_SUSPENDING)
+		return;
+#endif
+
+>>>>>>> v3.18
 	entry = acpi_pci_irq_lookup(dev, pin);
 	if (!entry)
 		return;
@@ -486,5 +533,10 @@ void acpi_pci_irq_disable(struct pci_dev *dev)
 	 */
 
 	dev_dbg(&dev->dev, "PCI INT %c disabled\n", pin_name(pin));
+<<<<<<< HEAD
 	acpi_unregister_gsi(gsi);
+=======
+	if (gsi >= 0 && dev->irq > 0)
+		acpi_unregister_gsi(gsi);
+>>>>>>> v3.18
 }

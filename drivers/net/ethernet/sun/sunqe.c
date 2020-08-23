@@ -767,7 +767,11 @@ static struct sunqec *get_qec(struct platform_device *child)
 	struct platform_device *op = to_platform_device(child->dev.parent);
 	struct sunqec *qecp;
 
+<<<<<<< HEAD
 	qecp = dev_get_drvdata(&op->dev);
+=======
+	qecp = platform_get_drvdata(op);
+>>>>>>> v3.18
 	if (!qecp) {
 		qecp = kzalloc(sizeof(struct sunqec), GFP_KERNEL);
 		if (qecp) {
@@ -801,7 +805,11 @@ static struct sunqec *get_qec(struct platform_device *child)
 				goto fail;
 			}
 
+<<<<<<< HEAD
 			dev_set_drvdata(&op->dev, qecp);
+=======
+			platform_set_drvdata(op, qecp);
+>>>>>>> v3.18
 
 			qecp->next_module = root_qec_dev;
 			root_qec_dev = qecp;
@@ -843,7 +851,11 @@ static int qec_ether_init(struct platform_device *op)
 	if (!dev)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 	memcpy(dev->dev_addr, idprom->id_ethaddr, 6);
+=======
+	memcpy(dev->dev_addr, idprom->id_ethaddr, ETH_ALEN);
+>>>>>>> v3.18
 
 	qe = netdev_priv(dev);
 
@@ -902,7 +914,11 @@ static int qec_ether_init(struct platform_device *op)
 	if (res)
 		goto fail;
 
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, qe);
+=======
+	platform_set_drvdata(op, qe);
+>>>>>>> v3.18
 
 	printk(KERN_INFO "%s: qe channel[%d] %pM\n", dev->name, qe->channel,
 	       dev->dev_addr);
@@ -934,7 +950,11 @@ static int qec_sbus_probe(struct platform_device *op)
 
 static int qec_sbus_remove(struct platform_device *op)
 {
+<<<<<<< HEAD
 	struct sunqe *qp = dev_get_drvdata(&op->dev);
+=======
+	struct sunqe *qp = platform_get_drvdata(op);
+>>>>>>> v3.18
 	struct net_device *net_dev = qp->dev;
 
 	unregister_netdev(net_dev);
@@ -948,8 +968,11 @@ static int qec_sbus_remove(struct platform_device *op)
 
 	free_netdev(net_dev);
 
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, NULL);
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

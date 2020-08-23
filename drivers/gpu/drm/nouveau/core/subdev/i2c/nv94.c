@@ -24,6 +24,39 @@
 
 #include "nv50.h"
 
+<<<<<<< HEAD
+=======
+void
+nv94_aux_stat(struct nouveau_i2c *i2c, u32 *hi, u32 *lo, u32 *rq, u32 *tx)
+{
+	u32 intr = nv_rd32(i2c, 0x00e06c);
+	u32 stat = nv_rd32(i2c, 0x00e068) & intr, i;
+	for (i = 0, *hi = *lo = *rq = *tx = 0; i < 8; i++) {
+		if ((stat & (1 << (i * 4)))) *hi |= 1 << i;
+		if ((stat & (2 << (i * 4)))) *lo |= 1 << i;
+		if ((stat & (4 << (i * 4)))) *rq |= 1 << i;
+		if ((stat & (8 << (i * 4)))) *tx |= 1 << i;
+	}
+	nv_wr32(i2c, 0x00e06c, intr);
+}
+
+void
+nv94_aux_mask(struct nouveau_i2c *i2c, u32 type, u32 mask, u32 data)
+{
+	u32 temp = nv_rd32(i2c, 0x00e068), i;
+	for (i = 0; i < 8; i++) {
+		if (mask & (1 << i)) {
+			if (!(data & (1 << i))) {
+				temp &= ~(type << (i * 4));
+				continue;
+			}
+			temp |= type << (i * 4);
+		}
+	}
+	nv_wr32(i2c, 0x00e068, temp);
+}
+
+>>>>>>> v3.18
 #define AUX_DBG(fmt, args...) nv_debug(aux, "AUXCH(%d): " fmt, ch, ##args)
 #define AUX_ERR(fmt, args...) nv_error(aux, "AUXCH(%d): " fmt, ch, ##args)
 
@@ -69,7 +102,12 @@ auxch_init(struct nouveau_i2c *aux, int ch)
 }
 
 int
+<<<<<<< HEAD
 nv94_aux(struct nouveau_i2c_port *base, u8 type, u32 addr, u8 *data, u8 size)
+=======
+nv94_aux(struct nouveau_i2c_port *base, bool retry,
+	 u8 type, u32 addr, u8 *data, u8 size)
+>>>>>>> v3.18
 {
 	struct nouveau_i2c *aux = nouveau_i2c(base);
 	struct nv50_i2c_port *port = (void *)base;
@@ -105,9 +143,14 @@ nv94_aux(struct nouveau_i2c_port *base, u8 type, u32 addr, u8 *data, u8 size)
 	ctrl |= size - 1;
 	nv_wr32(aux, 0x00e4e0 + (ch * 0x50), addr);
 
+<<<<<<< HEAD
 	/* retry transaction a number of times on failure... */
 	ret = -EREMOTEIO;
 	for (retries = 0; retries < 32; retries++) {
+=======
+	/* (maybe) retry transaction a number of times on failure... */
+	for (retries = 0; !ret && retries < 32; retries++) {
+>>>>>>> v3.18
 		/* reset, and delay a while if this is a retry */
 		nv_wr32(aux, 0x00e4e4 + (ch * 0x50), 0x80000000 | ctrl);
 		nv_wr32(aux, 0x00e4e4 + (ch * 0x50), 0x00000000 | ctrl);
@@ -123,6 +166,7 @@ nv94_aux(struct nouveau_i2c_port *base, u8 type, u32 addr, u8 *data, u8 size)
 			udelay(1);
 			if (!timeout--) {
 				AUX_ERR("tx req timeout 0x%08x\n", ctrl);
+<<<<<<< HEAD
 				goto out;
 			}
 		} while (ctrl & 0x00010000);
@@ -133,6 +177,23 @@ nv94_aux(struct nouveau_i2c_port *base, u8 type, u32 addr, u8 *data, u8 size)
 			ret = 0;
 			break;
 		}
+=======
+				ret = -EIO;
+				goto out;
+			}
+		} while (ctrl & 0x00010000);
+		ret = 1;
+
+		/* read status, and check if transaction completed ok */
+		stat = nv_mask(aux, 0x00e4e8 + (ch * 0x50), 0, 0);
+		if ((stat & 0x000f0000) == 0x00080000 ||
+		    (stat & 0x000f0000) == 0x00020000)
+			ret = retry ? 0 : 1;
+		if ((stat & 0x00000100))
+			ret = -ETIMEDOUT;
+		if ((stat & 0x00000e00))
+			ret = -EIO;
+>>>>>>> v3.18
 
 		AUX_DBG("%02d 0x%08x 0x%08x\n", retries, ctrl, stat);
 	}
@@ -147,6 +208,7 @@ nv94_aux(struct nouveau_i2c_port *base, u8 type, u32 addr, u8 *data, u8 size)
 
 out:
 	auxch_fini(aux, ch);
+<<<<<<< HEAD
 	return ret;
 }
 
@@ -164,12 +226,18 @@ nv94_i2c_acquire(struct nouveau_i2c_port *base)
 void
 nv94_i2c_release(struct nouveau_i2c_port *base)
 {
+=======
+	return ret < 0 ? ret : (stat & 0x000f0000) >> 16;
+>>>>>>> v3.18
 }
 
 static const struct nouveau_i2c_func
 nv94_i2c_func = {
+<<<<<<< HEAD
 	.acquire   = nv94_i2c_acquire,
 	.release   = nv94_i2c_release,
+=======
+>>>>>>> v3.18
 	.drive_scl = nv50_i2c_drive_scl,
 	.drive_sda = nv50_i2c_drive_sda,
 	.sense_scl = nv50_i2c_sense_scl,
@@ -186,7 +254,12 @@ nv94_i2c_port_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	int ret;
 
 	ret = nouveau_i2c_port_create(parent, engine, oclass, index,
+<<<<<<< HEAD
 				     &nouveau_i2c_bit_algo, &port);
+=======
+				      &nouveau_i2c_bit_algo, &nv94_i2c_func,
+				      &port);
+>>>>>>> v3.18
 	*pobject = nv_object(port);
 	if (ret)
 		return ret;
@@ -194,7 +267,10 @@ nv94_i2c_port_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	if (info->drive >= nv50_i2c_addr_nr)
 		return -EINVAL;
 
+<<<<<<< HEAD
 	port->base.func = &nv94_i2c_func;
+=======
+>>>>>>> v3.18
 	port->state = 7;
 	port->addr = nv50_i2c_addr[info->drive];
 	if (info->share != DCB_I2C_UNUSED) {
@@ -206,8 +282,11 @@ nv94_i2c_port_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 
 static const struct nouveau_i2c_func
 nv94_aux_func = {
+<<<<<<< HEAD
 	.acquire   = nv94_i2c_acquire,
 	.release   = nv94_i2c_release,
+=======
+>>>>>>> v3.18
 	.aux       = nv94_aux,
 };
 
@@ -221,12 +300,21 @@ nv94_aux_port_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	int ret;
 
 	ret = nouveau_i2c_port_create(parent, engine, oclass, index,
+<<<<<<< HEAD
 				     &nouveau_i2c_aux_algo, &port);
+=======
+				      &nouveau_i2c_aux_algo, &nv94_aux_func,
+				      &port);
+>>>>>>> v3.18
 	*pobject = nv_object(port);
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 	port->base.func = &nv94_aux_func;
+=======
+	port->base.aux = info->drive;
+>>>>>>> v3.18
 	port->addr = info->drive;
 	if (info->share != DCB_I2C_UNUSED) {
 		port->ctrl = 0x00e500 + (info->drive * 0x50);
@@ -257,6 +345,7 @@ nv94_i2c_sclass[] = {
 	{}
 };
 
+<<<<<<< HEAD
 static int
 nv94_i2c_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	      struct nouveau_oclass *oclass, void *data, u32 size,
@@ -278,8 +367,25 @@ nv94_i2c_oclass = {
 	.handle = NV_SUBDEV(I2C, 0x94),
 	.ofuncs = &(struct nouveau_ofuncs) {
 		.ctor = nv94_i2c_ctor,
+=======
+struct nouveau_oclass *
+nv94_i2c_oclass = &(struct nouveau_i2c_impl) {
+	.base.handle = NV_SUBDEV(I2C, 0x94),
+	.base.ofuncs = &(struct nouveau_ofuncs) {
+		.ctor = _nouveau_i2c_ctor,
+>>>>>>> v3.18
 		.dtor = _nouveau_i2c_dtor,
 		.init = _nouveau_i2c_init,
 		.fini = _nouveau_i2c_fini,
 	},
+<<<<<<< HEAD
 };
+=======
+	.sclass = nv94_i2c_sclass,
+	.pad_x = &nv04_i2c_pad_oclass,
+	.pad_s = &nv94_i2c_pad_oclass,
+	.aux = 4,
+	.aux_stat = nv94_aux_stat,
+	.aux_mask = nv94_aux_mask,
+}.base;
+>>>>>>> v3.18

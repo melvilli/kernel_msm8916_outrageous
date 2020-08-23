@@ -31,6 +31,10 @@
 #include <linux/slab.h>
 #include <linux/interrupt.h>
 #include <linux/string.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 #include <sound/core.h>
 #include <asm/io.h>
 #include <asm/irq.h>

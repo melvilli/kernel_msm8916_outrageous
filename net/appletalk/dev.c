@@ -39,6 +39,11 @@ static void ltalk_setup(struct net_device *dev)
 
 struct net_device *alloc_ltalkdev(int sizeof_priv)
 {
+<<<<<<< HEAD
 	return alloc_netdev(sizeof_priv, "lt%d", ltalk_setup);
+=======
+	return alloc_netdev(sizeof_priv, "lt%d", NET_NAME_UNKNOWN,
+			    ltalk_setup);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(alloc_ltalkdev);

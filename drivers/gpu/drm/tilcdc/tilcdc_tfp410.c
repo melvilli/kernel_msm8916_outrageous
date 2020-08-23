@@ -16,7 +16,10 @@
  */
 
 #include <linux/i2c.h>
+<<<<<<< HEAD
 #include <linux/of_i2c.h>
+=======
+>>>>>>> v3.18
 #include <linux/gpio.h>
 #include <linux/of_gpio.h>
 #include <linux/pinctrl/pinmux.h>
@@ -168,7 +171,11 @@ struct tfp410_connector {
 static void tfp410_connector_destroy(struct drm_connector *connector)
 {
 	struct tfp410_connector *tfp410_connector = to_tfp410_connector(connector);
+<<<<<<< HEAD
 	drm_sysfs_connector_remove(connector);
+=======
+	drm_connector_unregister(connector);
+>>>>>>> v3.18
 	drm_connector_cleanup(connector);
 	kfree(tfp410_connector);
 }
@@ -263,7 +270,11 @@ static struct drm_connector *tfp410_connector_create(struct drm_device *dev,
 	if (ret)
 		goto fail;
 
+<<<<<<< HEAD
 	drm_sysfs_connector_add(connector);
+=======
+	drm_connector_register(connector);
+>>>>>>> v3.18
 
 	return connector;
 
@@ -297,6 +308,7 @@ static int tfp410_modeset_init(struct tilcdc_module *mod, struct drm_device *dev
 	return 0;
 }
 
+<<<<<<< HEAD
 static void tfp410_destroy(struct tilcdc_module *mod)
 {
 	struct tfp410_module *tfp410_mod = to_tfp410_module(mod);
@@ -314,6 +326,10 @@ static void tfp410_destroy(struct tilcdc_module *mod)
 static const struct tilcdc_module_ops tfp410_module_ops = {
 		.modeset_init = tfp410_modeset_init,
 		.destroy = tfp410_destroy,
+=======
+static const struct tilcdc_module_ops tfp410_module_ops = {
+		.modeset_init = tfp410_modeset_init,
+>>>>>>> v3.18
 };
 
 /*
@@ -343,6 +359,10 @@ static int tfp410_probe(struct platform_device *pdev)
 		return -ENOMEM;
 
 	mod = &tfp410_mod->base;
+<<<<<<< HEAD
+=======
+	pdev->dev.platform_data = mod;
+>>>>>>> v3.18
 
 	tilcdc_module_init(mod, "tfp410", &tfp410_module_ops);
 
@@ -355,6 +375,11 @@ static int tfp410_probe(struct platform_device *pdev)
 		goto fail;
 	}
 
+<<<<<<< HEAD
+=======
+	mod->preferred_bpp = dvi_info.bpp;
+
+>>>>>>> v3.18
 	i2c_node = of_find_node_by_phandle(i2c_phandle);
 	if (!i2c_node) {
 		dev_err(&pdev->dev, "could not get i2c bus node\n");
@@ -364,6 +389,10 @@ static int tfp410_probe(struct platform_device *pdev)
 	tfp410_mod->i2c = of_find_i2c_adapter_by_node(i2c_node);
 	if (!tfp410_mod->i2c) {
 		dev_err(&pdev->dev, "could not get i2c\n");
+<<<<<<< HEAD
+=======
+		of_node_put(i2c_node);
+>>>>>>> v3.18
 		goto fail;
 	}
 
@@ -377,19 +406,44 @@ static int tfp410_probe(struct platform_device *pdev)
 		ret = gpio_request(tfp410_mod->gpio, "DVI_PDn");
 		if (ret) {
 			dev_err(&pdev->dev, "could not get DVI_PDn gpio\n");
+<<<<<<< HEAD
 			goto fail;
+=======
+			goto fail_adapter;
+>>>>>>> v3.18
 		}
 	}
 
 	return 0;
 
+<<<<<<< HEAD
 fail:
 	tfp410_destroy(mod);
+=======
+fail_adapter:
+	i2c_put_adapter(tfp410_mod->i2c);
+
+fail:
+	kfree(tfp410_mod);
+	tilcdc_module_cleanup(mod);
+>>>>>>> v3.18
 	return ret;
 }
 
 static int tfp410_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
+=======
+	struct tilcdc_module *mod = dev_get_platdata(&pdev->dev);
+	struct tfp410_module *tfp410_mod = to_tfp410_module(mod);
+
+	i2c_put_adapter(tfp410_mod->i2c);
+	gpio_free(tfp410_mod->gpio);
+
+	tilcdc_module_cleanup(mod);
+	kfree(tfp410_mod);
+
+>>>>>>> v3.18
 	return 0;
 }
 

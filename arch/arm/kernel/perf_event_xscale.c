@@ -48,6 +48,7 @@ enum xscale_counters {
 };
 
 static const unsigned xscale_perf_map[PERF_COUNT_HW_MAX] = {
+<<<<<<< HEAD
 	[PERF_COUNT_HW_CPU_CYCLES]		= XSCALE_PERFCTR_CCNT,
 	[PERF_COUNT_HW_INSTRUCTIONS]		= XSCALE_PERFCTR_INSTRUCTION,
 	[PERF_COUNT_HW_CACHE_REFERENCES]	= HW_OP_UNSUPPORTED,
@@ -160,6 +161,33 @@ static unsigned xscale_perf_cache_map[PERF_COUNT_HW_CACHE_MAX]
 			[C(RESULT_MISS)]	= CACHE_OP_UNSUPPORTED,
 		},
 	},
+=======
+	PERF_MAP_ALL_UNSUPPORTED,
+	[PERF_COUNT_HW_CPU_CYCLES]		= XSCALE_PERFCTR_CCNT,
+	[PERF_COUNT_HW_INSTRUCTIONS]		= XSCALE_PERFCTR_INSTRUCTION,
+	[PERF_COUNT_HW_BRANCH_INSTRUCTIONS]	= XSCALE_PERFCTR_BRANCH,
+	[PERF_COUNT_HW_BRANCH_MISSES]		= XSCALE_PERFCTR_BRANCH_MISS,
+	[PERF_COUNT_HW_STALLED_CYCLES_FRONTEND]	= XSCALE_PERFCTR_ICACHE_NO_DELIVER,
+};
+
+static const unsigned xscale_perf_cache_map[PERF_COUNT_HW_CACHE_MAX]
+					   [PERF_COUNT_HW_CACHE_OP_MAX]
+					   [PERF_COUNT_HW_CACHE_RESULT_MAX] = {
+	PERF_CACHE_MAP_ALL_UNSUPPORTED,
+
+	[C(L1D)][C(OP_READ)][C(RESULT_ACCESS)]	= XSCALE_PERFCTR_DCACHE_ACCESS,
+	[C(L1D)][C(OP_READ)][C(RESULT_MISS)]	= XSCALE_PERFCTR_DCACHE_MISS,
+	[C(L1D)][C(OP_WRITE)][C(RESULT_ACCESS)]	= XSCALE_PERFCTR_DCACHE_ACCESS,
+	[C(L1D)][C(OP_WRITE)][C(RESULT_MISS)]	= XSCALE_PERFCTR_DCACHE_MISS,
+
+	[C(L1I)][C(OP_READ)][C(RESULT_MISS)]	= XSCALE_PERFCTR_ICACHE_MISS,
+
+	[C(DTLB)][C(OP_READ)][C(RESULT_MISS)]	= XSCALE_PERFCTR_DTLB_MISS,
+	[C(DTLB)][C(OP_WRITE)][C(RESULT_MISS)]	= XSCALE_PERFCTR_DTLB_MISS,
+
+	[C(ITLB)][C(OP_READ)][C(RESULT_MISS)]	= XSCALE_PERFCTR_ITLB_MISS,
+	[C(ITLB)][C(OP_WRITE)][C(RESULT_MISS)]	= XSCALE_PERFCTR_ITLB_MISS,
+>>>>>>> v3.18
 };
 
 #define	XSCALE_PMU_ENABLE	0x001
@@ -442,7 +470,11 @@ static int xscale_map_event(struct perf_event *event)
 
 static int xscale1pmu_init(struct arm_pmu *cpu_pmu)
 {
+<<<<<<< HEAD
 	cpu_pmu->name		= "xscale1";
+=======
+	cpu_pmu->name		= "armv5_xscale1";
+>>>>>>> v3.18
 	cpu_pmu->handle_irq	= xscale1pmu_handle_irq;
 	cpu_pmu->enable		= xscale1pmu_enable_event;
 	cpu_pmu->disable	= xscale1pmu_disable_event;
@@ -812,7 +844,11 @@ static inline void xscale2pmu_write_counter(struct perf_event *event, u32 val)
 
 static int xscale2pmu_init(struct arm_pmu *cpu_pmu)
 {
+<<<<<<< HEAD
 	cpu_pmu->name		= "xscale2";
+=======
+	cpu_pmu->name		= "armv5_xscale2";
+>>>>>>> v3.18
 	cpu_pmu->handle_irq	= xscale2pmu_handle_irq;
 	cpu_pmu->enable		= xscale2pmu_enable_event;
 	cpu_pmu->disable	= xscale2pmu_disable_event;

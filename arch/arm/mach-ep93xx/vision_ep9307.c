@@ -23,7 +23,11 @@
 #include <linux/mtd/partitions.h>
 #include <linux/i2c.h>
 #include <linux/i2c-gpio.h>
+<<<<<<< HEAD
 #include <linux/i2c/pca953x.h>
+=======
+#include <linux/platform_data/pca953x.h>
+>>>>>>> v3.18
 #include <linux/spi/spi.h>
 #include <linux/spi/flash.h>
 #include <linux/spi/mmc_spi.h>
@@ -224,6 +228,7 @@ static struct ep93xx_spi_chip_ops vision_spi_flash_hw = {
 #define VISION_SPI_MMC_WP	EP93XX_GPIO_LINE_F(0)
 #define VISION_SPI_MMC_CD	EP93XX_GPIO_LINE_EGPIO15
 
+<<<<<<< HEAD
 static struct gpio vision_spi_mmc_gpios[] = {
 	{ VISION_SPI_MMC_WP, GPIOF_DIR_IN, "mmc_spi:wp" },
 	{ VISION_SPI_MMC_CD, GPIOF_DIR_IN, "mmc_spi:cd" },
@@ -280,6 +285,17 @@ static struct mmc_spi_platform_data vision_spi_mmc_data = {
 	.detect_delay	= 100,
 	.powerup_msecs	= 100,
 	.ocr_mask	= MMC_VDD_32_33 | MMC_VDD_33_34,
+=======
+static struct mmc_spi_platform_data vision_spi_mmc_data = {
+	.detect_delay	= 100,
+	.powerup_msecs	= 100,
+	.ocr_mask	= MMC_VDD_32_33 | MMC_VDD_33_34,
+	.flags		= MMC_SPI_USE_CD_GPIO | MMC_SPI_USE_RO_GPIO,
+	.cd_gpio	= VISION_SPI_MMC_CD,
+	.cd_debounce	= 1,
+	.ro_gpio	= VISION_SPI_MMC_WP,
+	.caps2		= MMC_CAP2_RO_ACTIVE_HIGH,
+>>>>>>> v3.18
 };
 
 static int vision_spi_mmc_hw_setup(struct spi_device *spi)

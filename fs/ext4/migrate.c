@@ -39,8 +39,14 @@ static int finish_range(handle_t *handle, struct inode *inode,
 	newext.ee_block = cpu_to_le32(lb->first_block);
 	newext.ee_len   = cpu_to_le16(lb->last_block - lb->first_block + 1);
 	ext4_ext_store_pblock(&newext, lb->first_pblock);
+<<<<<<< HEAD
 	path = ext4_ext_find_extent(inode, lb->first_block, NULL);
 
+=======
+	/* Locking only for convinience since we are operating on temp inode */
+	down_write(&EXT4_I(inode)->i_data_sem);
+	path = ext4_find_extent(inode, lb->first_block, NULL, 0);
+>>>>>>> v3.18
 	if (IS_ERR(path)) {
 		retval = PTR_ERR(path);
 		path = NULL;
@@ -61,7 +67,13 @@ static int finish_range(handle_t *handle, struct inode *inode,
 	 */
 	if (needed && ext4_handle_has_enough_credits(handle,
 						EXT4_RESERVE_TRANS_BLOCKS)) {
+<<<<<<< HEAD
 		retval = ext4_journal_restart(handle, needed);
+=======
+		up_write((&EXT4_I(inode)->i_data_sem));
+		retval = ext4_journal_restart(handle, needed);
+		down_write((&EXT4_I(inode)->i_data_sem));
+>>>>>>> v3.18
 		if (retval)
 			goto err_out;
 	} else if (needed) {
@@ -70,17 +82,31 @@ static int finish_range(handle_t *handle, struct inode *inode,
 			/*
 			 * IF not able to extend the journal restart the journal
 			 */
+<<<<<<< HEAD
 			retval = ext4_journal_restart(handle, needed);
+=======
+			up_write((&EXT4_I(inode)->i_data_sem));
+			retval = ext4_journal_restart(handle, needed);
+			down_write((&EXT4_I(inode)->i_data_sem));
+>>>>>>> v3.18
 			if (retval)
 				goto err_out;
 		}
 	}
+<<<<<<< HEAD
 	retval = ext4_ext_insert_extent(handle, inode, path, &newext, 0);
 err_out:
 	if (path) {
 		ext4_ext_drop_refs(path);
 		kfree(path);
 	}
+=======
+	retval = ext4_ext_insert_extent(handle, inode, &path, &newext, 0);
+err_out:
+	up_write((&EXT4_I(inode)->i_data_sem));
+	ext4_ext_drop_refs(path);
+	kfree(path);
+>>>>>>> v3.18
 	lb->first_pblock = 0;
 	return retval;
 }
@@ -494,7 +520,11 @@ int ext4_ext_migrate(struct inode *inode)
 	 * superblock modification.
 	 *
 	 * For the tmp_inode we already have committed the
+<<<<<<< HEAD
 	 * trascation that created the inode. Later as and
+=======
+	 * transaction that created the inode. Later as and
+>>>>>>> v3.18
 	 * when we add extents we extent the journal
 	 */
 	/*
@@ -505,7 +535,11 @@ int ext4_ext_migrate(struct inode *inode)
 	 * with i_data_sem held to prevent racing with block
 	 * allocation.
 	 */
+<<<<<<< HEAD
 	down_read((&EXT4_I(inode)->i_data_sem));
+=======
+	down_read(&EXT4_I(inode)->i_data_sem);
+>>>>>>> v3.18
 	ext4_set_inode_state(inode, EXT4_STATE_EXT_MIGRATE);
 	up_read((&EXT4_I(inode)->i_data_sem));
 
@@ -616,7 +650,10 @@ int ext4_ind_migrate(struct inode *inode)
 	struct ext4_inode_info		*ei = EXT4_I(inode);
 	struct ext4_extent		*ex;
 	unsigned int			i, len;
+<<<<<<< HEAD
 	ext4_lblk_t			start, end;
+=======
+>>>>>>> v3.18
 	ext4_fsblk_t			blk;
 	handle_t			*handle;
 	int				ret;
@@ -630,6 +667,7 @@ int ext4_ind_migrate(struct inode *inode)
 				       EXT4_FEATURE_RO_COMPAT_BIGALLOC))
 		return -EOPNOTSUPP;
 
+<<<<<<< HEAD
 	/*
 	 * In order to get correct extent info, force all delayed allocation
 	 * blocks to be allocated, otherwise delayed allocation blocks may not
@@ -638,6 +676,8 @@ int ext4_ind_migrate(struct inode *inode)
 	if (test_opt(inode->i_sb, DELALLOC))
 		ext4_alloc_da_blocks(inode);
 
+=======
+>>>>>>> v3.18
 	handle = ext4_journal_start(inode, EXT4_HT_MIGRATE, 1);
 	if (IS_ERR(handle))
 		return PTR_ERR(handle);
@@ -655,6 +695,7 @@ int ext4_ind_migrate(struct inode *inode)
 		goto errout;
 	}
 	if (eh->eh_entries == 0)
+<<<<<<< HEAD
 		blk = len = start = end = 0;
 	else {
 		len = le16_to_cpu(ex->ee_len);
@@ -662,6 +703,13 @@ int ext4_ind_migrate(struct inode *inode)
 		start = le32_to_cpu(ex->ee_block);
 		end = start + len - 1;
 		if (end >= EXT4_NDIR_BLOCKS) {
+=======
+		blk = len = 0;
+	else {
+		len = le16_to_cpu(ex->ee_len);
+		blk = ext4_ext_pblock(ex);
+		if (len > EXT4_NDIR_BLOCKS) {
+>>>>>>> v3.18
 			ret = -EOPNOTSUPP;
 			goto errout;
 		}
@@ -669,7 +717,11 @@ int ext4_ind_migrate(struct inode *inode)
 
 	ext4_clear_inode_flag(inode, EXT4_INODE_EXTENTS);
 	memset(ei->i_data, 0, sizeof(ei->i_data));
+<<<<<<< HEAD
 	for (i = start; i <= end; i++)
+=======
+	for (i=0; i < len; i++)
+>>>>>>> v3.18
 		ei->i_data[i] = cpu_to_le32(blk++);
 	ext4_mark_inode_dirty(handle, inode);
 errout:

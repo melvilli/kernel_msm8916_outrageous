@@ -11,7 +11,10 @@
 #include <linux/init.h>
 #include <linux/types.h>
 #include <linux/errno.h>
+<<<<<<< HEAD
 #include <linux/sched_clock.h>
+=======
+>>>>>>> v3.18
 
 #include <asm/delay.h>
 
@@ -22,11 +25,14 @@ static unsigned long arch_timer_read_counter_long(void)
 	return arch_timer_read_counter();
 }
 
+<<<<<<< HEAD
 static notrace u32 arch_timer_read_counter_u32(void)
 {
 	return arch_timer_read_counter();
 }
 
+=======
+>>>>>>> v3.18
 static struct delay_timer arch_delay_timer;
 
 static void __init arch_timer_delay_timer_register(void)
@@ -39,12 +45,21 @@ static void __init arch_timer_delay_timer_register(void)
 
 int __init arch_timer_arch_init(void)
 {
+<<<<<<< HEAD
 	if (arch_timer_get_rate() == 0)
+=======
+        u32 arch_timer_rate = arch_timer_get_rate();
+
+	if (arch_timer_rate == 0)
+>>>>>>> v3.18
 		return -ENXIO;
 
 	arch_timer_delay_timer_register();
 
+<<<<<<< HEAD
 	setup_sched_clock(arch_timer_read_counter_u32,
 			  32, arch_timer_get_rate());
+=======
+>>>>>>> v3.18
 	return 0;
 }

@@ -28,6 +28,10 @@
 #include <linux/i2c.h>
 #include <linux/err.h>
 #include <linux/interrupt.h>
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 #include <linux/pm_runtime.h>
 #include <linux/mutex.h>
 #include <linux/mfd/core.h>
@@ -40,6 +44,7 @@
 #define I2C_ADDR_MUIC	(0x4A >> 1)
 #define I2C_ADDR_HAPTIC	(0x90 >> 1)
 
+<<<<<<< HEAD
 static struct mfd_cell max77693_devs[] = {
 	{ .name = "max77693-pmic", },
 	{ .name = "max77693-charger", },
@@ -104,12 +109,119 @@ static const struct regmap_config max77693_regmap_config = {
 	.reg_bits = 8,
 	.val_bits = 8,
 	.max_register = MAX77693_PMIC_REG_END,
+=======
+static const struct mfd_cell max77693_devs[] = {
+	{ .name = "max77693-pmic", },
+	{ .name = "max77693-charger", },
+	{ .name = "max77693-muic", },
+	{ .name = "max77693-haptic", },
+	{
+		.name = "max77693-flash",
+		.of_compatible = "maxim,max77693-flash",
+	},
+};
+
+static const struct regmap_config max77693_regmap_config = {
+	.reg_bits = 8,
+	.val_bits = 8,
+	.max_register = MAX77693_PMIC_REG_END,
+};
+
+static const struct regmap_irq max77693_led_irqs[] = {
+	{ .mask = LED_IRQ_FLED2_OPEN,  },
+	{ .mask = LED_IRQ_FLED2_SHORT, },
+	{ .mask = LED_IRQ_FLED1_OPEN,  },
+	{ .mask = LED_IRQ_FLED1_SHORT, },
+	{ .mask = LED_IRQ_MAX_FLASH,   },
+};
+
+static const struct regmap_irq_chip max77693_led_irq_chip = {
+	.name			= "max77693-led",
+	.status_base		= MAX77693_LED_REG_FLASH_INT,
+	.mask_base		= MAX77693_LED_REG_FLASH_INT_MASK,
+	.mask_invert		= false,
+	.num_regs		= 1,
+	.irqs			= max77693_led_irqs,
+	.num_irqs		= ARRAY_SIZE(max77693_led_irqs),
+};
+
+static const struct regmap_irq max77693_topsys_irqs[] = {
+	{ .mask = TOPSYS_IRQ_T120C_INT,  },
+	{ .mask = TOPSYS_IRQ_T140C_INT,  },
+	{ .mask = TOPSYS_IRQ_LOWSYS_INT, },
+};
+
+static const struct regmap_irq_chip max77693_topsys_irq_chip = {
+	.name			= "max77693-topsys",
+	.status_base		= MAX77693_PMIC_REG_TOPSYS_INT,
+	.mask_base		= MAX77693_PMIC_REG_TOPSYS_INT_MASK,
+	.mask_invert		= false,
+	.num_regs		= 1,
+	.irqs			= max77693_topsys_irqs,
+	.num_irqs		= ARRAY_SIZE(max77693_topsys_irqs),
+};
+
+static const struct regmap_irq max77693_charger_irqs[] = {
+	{ .mask = CHG_IRQ_BYP_I,   },
+	{ .mask = CHG_IRQ_THM_I,   },
+	{ .mask = CHG_IRQ_BAT_I,   },
+	{ .mask = CHG_IRQ_CHG_I,   },
+	{ .mask = CHG_IRQ_CHGIN_I, },
+};
+
+static const struct regmap_irq_chip max77693_charger_irq_chip = {
+	.name			= "max77693-charger",
+	.status_base		= MAX77693_CHG_REG_CHG_INT,
+	.mask_base		= MAX77693_CHG_REG_CHG_INT_MASK,
+	.mask_invert		= false,
+	.num_regs		= 1,
+	.irqs			= max77693_charger_irqs,
+	.num_irqs		= ARRAY_SIZE(max77693_charger_irqs),
+};
+
+static const struct regmap_config max77693_regmap_muic_config = {
+	.reg_bits = 8,
+	.val_bits = 8,
+	.max_register = MAX77693_MUIC_REG_END,
+};
+
+static const struct regmap_irq max77693_muic_irqs[] = {
+	{ .reg_offset = 0, .mask = MUIC_IRQ_INT1_ADC,		},
+	{ .reg_offset = 0, .mask = MUIC_IRQ_INT1_ADC_LOW,	},
+	{ .reg_offset = 0, .mask = MUIC_IRQ_INT1_ADC_ERR,	},
+	{ .reg_offset = 0, .mask = MUIC_IRQ_INT1_ADC1K,		},
+
+	{ .reg_offset = 1, .mask = MUIC_IRQ_INT2_CHGTYP,	},
+	{ .reg_offset = 1, .mask = MUIC_IRQ_INT2_CHGDETREUN,	},
+	{ .reg_offset = 1, .mask = MUIC_IRQ_INT2_DCDTMR,	},
+	{ .reg_offset = 1, .mask = MUIC_IRQ_INT2_DXOVP,		},
+	{ .reg_offset = 1, .mask = MUIC_IRQ_INT2_VBVOLT,	},
+	{ .reg_offset = 1, .mask = MUIC_IRQ_INT2_VIDRM,		},
+
+	{ .reg_offset = 2, .mask = MUIC_IRQ_INT3_EOC,		},
+	{ .reg_offset = 2, .mask = MUIC_IRQ_INT3_CGMBC,		},
+	{ .reg_offset = 2, .mask = MUIC_IRQ_INT3_OVP,		},
+	{ .reg_offset = 2, .mask = MUIC_IRQ_INT3_MBCCHG_ERR,	},
+	{ .reg_offset = 2, .mask = MUIC_IRQ_INT3_CHG_ENABLED,	},
+	{ .reg_offset = 2, .mask = MUIC_IRQ_INT3_BAT_DET,	},
+};
+
+static const struct regmap_irq_chip max77693_muic_irq_chip = {
+	.name			= "max77693-muic",
+	.status_base		= MAX77693_MUIC_REG_INT1,
+	.mask_base		= MAX77693_MUIC_REG_INTMASK1,
+	.mask_invert		= true,
+	.num_regs		= 3,
+	.irqs			= max77693_muic_irqs,
+	.num_irqs		= ARRAY_SIZE(max77693_muic_irqs),
+>>>>>>> v3.18
 };
 
 static int max77693_i2c_probe(struct i2c_client *i2c,
 			      const struct i2c_device_id *id)
 {
 	struct max77693_dev *max77693;
+<<<<<<< HEAD
 	struct max77693_platform_data *pdata = i2c->dev.platform_data;
 	u8 reg_data;
 	int ret = 0;
@@ -119,6 +231,11 @@ static int max77693_i2c_probe(struct i2c_client *i2c,
 		return -EINVAL;
 	}
 
+=======
+	unsigned int reg_data;
+	int ret = 0;
+
+>>>>>>> v3.18
 	max77693 = devm_kzalloc(&i2c->dev,
 			sizeof(struct max77693_dev), GFP_KERNEL);
 	if (max77693 == NULL)
@@ -138,9 +255,13 @@ static int max77693_i2c_probe(struct i2c_client *i2c,
 		return ret;
 	}
 
+<<<<<<< HEAD
 	max77693->wakeup = pdata->wakeup;
 
 	ret = max77693_read_reg(max77693->regmap, MAX77693_PMIC_REG_PMIC_ID2,
+=======
+	ret = regmap_read(max77693->regmap, MAX77693_PMIC_REG_PMIC_ID2,
+>>>>>>> v3.18
 				&reg_data);
 	if (ret < 0) {
 		dev_err(max77693->dev, "device not found on this channel\n");
@@ -169,7 +290,11 @@ static int max77693_i2c_probe(struct i2c_client *i2c,
 	 * before call max77693-muic probe() function.
 	 */
 	max77693->regmap_muic = devm_regmap_init_i2c(max77693->muic,
+<<<<<<< HEAD
 					 &max77693_regmap_config);
+=======
+					 &max77693_regmap_muic_config);
+>>>>>>> v3.18
 	if (IS_ERR(max77693->regmap_muic)) {
 		ret = PTR_ERR(max77693->regmap_muic);
 		dev_err(max77693->dev,
@@ -177,9 +302,62 @@ static int max77693_i2c_probe(struct i2c_client *i2c,
 		goto err_regmap_muic;
 	}
 
+<<<<<<< HEAD
 	ret = max77693_irq_init(max77693);
 	if (ret < 0)
 		goto err_irq;
+=======
+	ret = regmap_add_irq_chip(max77693->regmap, max77693->irq,
+				IRQF_ONESHOT | IRQF_SHARED |
+				IRQF_TRIGGER_FALLING, 0,
+				&max77693_led_irq_chip,
+				&max77693->irq_data_led);
+	if (ret) {
+		dev_err(max77693->dev, "failed to add irq chip: %d\n", ret);
+		goto err_regmap_muic;
+	}
+
+	ret = regmap_add_irq_chip(max77693->regmap, max77693->irq,
+				IRQF_ONESHOT | IRQF_SHARED |
+				IRQF_TRIGGER_FALLING, 0,
+				&max77693_topsys_irq_chip,
+				&max77693->irq_data_topsys);
+	if (ret) {
+		dev_err(max77693->dev, "failed to add irq chip: %d\n", ret);
+		goto err_irq_topsys;
+	}
+
+	ret = regmap_add_irq_chip(max77693->regmap, max77693->irq,
+				IRQF_ONESHOT | IRQF_SHARED |
+				IRQF_TRIGGER_FALLING, 0,
+				&max77693_charger_irq_chip,
+				&max77693->irq_data_charger);
+	if (ret) {
+		dev_err(max77693->dev, "failed to add irq chip: %d\n", ret);
+		goto err_irq_charger;
+	}
+
+	ret = regmap_add_irq_chip(max77693->regmap_muic, max77693->irq,
+				IRQF_ONESHOT | IRQF_SHARED |
+				IRQF_TRIGGER_FALLING, 0,
+				&max77693_muic_irq_chip,
+				&max77693->irq_data_muic);
+	if (ret) {
+		dev_err(max77693->dev, "failed to add irq chip: %d\n", ret);
+		goto err_irq_muic;
+	}
+
+	/* Unmask interrupts from all blocks in interrupt source register */
+	ret = regmap_update_bits(max77693->regmap,
+				MAX77693_PMIC_REG_INTSRC_MASK,
+				SRC_IRQ_ALL, (unsigned int)~SRC_IRQ_ALL);
+	if (ret < 0) {
+		dev_err(max77693->dev,
+			"Could not unmask interrupts in INTSRC: %d\n",
+			ret);
+		goto err_intsrc;
+	}
+>>>>>>> v3.18
 
 	pm_runtime_set_active(max77693->dev);
 
@@ -188,6 +366,7 @@ static int max77693_i2c_probe(struct i2c_client *i2c,
 	if (ret < 0)
 		goto err_mfd;
 
+<<<<<<< HEAD
 	device_init_wakeup(max77693->dev, pdata->wakeup);
 
 	return ret;
@@ -195,6 +374,20 @@ static int max77693_i2c_probe(struct i2c_client *i2c,
 err_mfd:
 	max77693_irq_exit(max77693);
 err_irq:
+=======
+	return ret;
+
+err_mfd:
+	mfd_remove_devices(max77693->dev);
+err_intsrc:
+	regmap_del_irq_chip(max77693->irq, max77693->irq_data_muic);
+err_irq_muic:
+	regmap_del_irq_chip(max77693->irq, max77693->irq_data_charger);
+err_irq_charger:
+	regmap_del_irq_chip(max77693->irq, max77693->irq_data_topsys);
+err_irq_topsys:
+	regmap_del_irq_chip(max77693->irq, max77693->irq_data_led);
+>>>>>>> v3.18
 err_regmap_muic:
 	i2c_unregister_device(max77693->haptic);
 err_i2c_haptic:
@@ -207,7 +400,16 @@ static int max77693_i2c_remove(struct i2c_client *i2c)
 	struct max77693_dev *max77693 = i2c_get_clientdata(i2c);
 
 	mfd_remove_devices(max77693->dev);
+<<<<<<< HEAD
 	max77693_irq_exit(max77693);
+=======
+
+	regmap_del_irq_chip(max77693->irq, max77693->irq_data_muic);
+	regmap_del_irq_chip(max77693->irq, max77693->irq_data_charger);
+	regmap_del_irq_chip(max77693->irq, max77693->irq_data_topsys);
+	regmap_del_irq_chip(max77693->irq, max77693->irq_data_led);
+
+>>>>>>> v3.18
 	i2c_unregister_device(max77693->muic);
 	i2c_unregister_device(max77693->haptic);
 
@@ -225,8 +427,16 @@ static int max77693_suspend(struct device *dev)
 	struct i2c_client *i2c = container_of(dev, struct i2c_client, dev);
 	struct max77693_dev *max77693 = i2c_get_clientdata(i2c);
 
+<<<<<<< HEAD
 	if (device_may_wakeup(dev))
 		irq_set_irq_wake(max77693->irq, 1);
+=======
+	if (device_may_wakeup(dev)) {
+		enable_irq_wake(max77693->irq);
+		disable_irq(max77693->irq);
+	}
+
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -235,9 +445,18 @@ static int max77693_resume(struct device *dev)
 	struct i2c_client *i2c = container_of(dev, struct i2c_client, dev);
 	struct max77693_dev *max77693 = i2c_get_clientdata(i2c);
 
+<<<<<<< HEAD
 	if (device_may_wakeup(dev))
 		irq_set_irq_wake(max77693->irq, 0);
 	return max77693_irq_resume(max77693);
+=======
+	if (device_may_wakeup(dev)) {
+		disable_irq_wake(max77693->irq);
+		enable_irq(max77693->irq);
+	}
+
+	return 0;
+>>>>>>> v3.18
 }
 
 static const struct dev_pm_ops max77693_pm = {
@@ -245,11 +464,25 @@ static const struct dev_pm_ops max77693_pm = {
 	.resume = max77693_resume,
 };
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_OF
+static const struct of_device_id max77693_dt_match[] = {
+	{ .compatible = "maxim,max77693" },
+	{},
+};
+#endif
+
+>>>>>>> v3.18
 static struct i2c_driver max77693_i2c_driver = {
 	.driver = {
 		   .name = "max77693",
 		   .owner = THIS_MODULE,
 		   .pm = &max77693_pm,
+<<<<<<< HEAD
+=======
+		   .of_match_table = of_match_ptr(max77693_dt_match),
+>>>>>>> v3.18
 	},
 	.probe = max77693_i2c_probe,
 	.remove = max77693_i2c_remove,

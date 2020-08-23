@@ -14,11 +14,14 @@
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 */
 
 /*
@@ -51,6 +54,10 @@
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 #include <linux/pci.h>
 
 #include "../comedidev.h"
@@ -94,10 +101,19 @@ static unsigned mite_fifo_size(struct mite_struct *mite, unsigned channel)
 	unsigned fcr_bits = readl(mite->mite_io_addr + MITE_FCR(channel));
 	unsigned empty_count = (fcr_bits >> 16) & 0xff;
 	unsigned full_count = fcr_bits & 0xff;
+<<<<<<< HEAD
 	return empty_count + full_count;
 }
 
 int mite_setup2(struct mite_struct *mite, unsigned use_iodwbsr_1)
+=======
+
+	return empty_count + full_count;
+}
+
+int mite_setup2(struct comedi_device *dev,
+		struct mite_struct *mite, bool use_win1)
+>>>>>>> v3.18
 {
 	unsigned long length;
 	int i;
@@ -108,24 +124,40 @@ int mite_setup2(struct mite_struct *mite, unsigned use_iodwbsr_1)
 
 	mite->mite_io_addr = pci_ioremap_bar(mite->pcidev, 0);
 	if (!mite->mite_io_addr) {
+<<<<<<< HEAD
 		dev_err(&mite->pcidev->dev,
+=======
+		dev_err(dev->class_dev,
+>>>>>>> v3.18
 			"Failed to remap mite io memory address\n");
 		return -ENOMEM;
 	}
 	mite->mite_phys_addr = pci_resource_start(mite->pcidev, 0);
 
+<<<<<<< HEAD
 	mite->daq_io_addr = pci_ioremap_bar(mite->pcidev, 1);
 	if (!mite->daq_io_addr) {
 		dev_err(&mite->pcidev->dev,
+=======
+	dev->mmio = pci_ioremap_bar(mite->pcidev, 1);
+	if (!dev->mmio) {
+		dev_err(dev->class_dev,
+>>>>>>> v3.18
 			"Failed to remap daq io memory address\n");
 		return -ENOMEM;
 	}
 	mite->daq_phys_addr = pci_resource_start(mite->pcidev, 1);
 	length = pci_resource_len(mite->pcidev, 1);
 
+<<<<<<< HEAD
 	if (use_iodwbsr_1) {
 		writel(0, mite->mite_io_addr + MITE_IODWBSR);
 		dev_info(&mite->pcidev->dev,
+=======
+	if (use_win1) {
+		writel(0, mite->mite_io_addr + MITE_IODWBSR);
+		dev_info(dev->class_dev,
+>>>>>>> v3.18
 			 "using I/O Window Base Size register 1\n");
 		writel(mite->daq_phys_addr | WENAB |
 		       MITE_IODWBSR_1_WSIZE_bits(length),
@@ -151,7 +183,11 @@ int mite_setup2(struct mite_struct *mite, unsigned use_iodwbsr_1)
 	csigr_bits = readl(mite->mite_io_addr + MITE_CSIGR);
 	mite->num_channels = mite_csigr_dmac(csigr_bits);
 	if (mite->num_channels > MAX_MITE_DMA_CHANNELS) {
+<<<<<<< HEAD
 		dev_warn(&mite->pcidev->dev,
+=======
+		dev_warn(dev->class_dev,
+>>>>>>> v3.18
 			 "mite: bug? chip claims to have %i dma channels. Setting to %i.\n",
 			 mite->num_channels, MAX_MITE_DMA_CHANNELS);
 		mite->num_channels = MAX_MITE_DMA_CHANNELS;
@@ -166,11 +202,16 @@ int mite_setup2(struct mite_struct *mite, unsigned use_iodwbsr_1)
 		       mite->mite_io_addr + MITE_CHCR(i));
 	}
 	mite->fifo_size = mite_fifo_size(mite, 0);
+<<<<<<< HEAD
 	dev_info(&mite->pcidev->dev, "fifo size is %i.\n", mite->fifo_size);
+=======
+	dev_info(dev->class_dev, "fifo size is %i.\n", mite->fifo_size);
+>>>>>>> v3.18
 	return 0;
 }
 EXPORT_SYMBOL_GPL(mite_setup2);
 
+<<<<<<< HEAD
 int mite_setup(struct mite_struct *mite)
 {
 	return mite_setup2(mite, 0);
@@ -196,6 +237,19 @@ void mite_unsetup(struct mite_struct *mite)
 		mite->mite_phys_addr = 0;
 }
 EXPORT_SYMBOL_GPL(mite_unsetup);
+=======
+void mite_detach(struct mite_struct *mite)
+{
+	if (!mite)
+		return;
+
+	if (mite->mite_io_addr)
+		iounmap(mite->mite_io_addr);
+
+	kfree(mite);
+}
+EXPORT_SYMBOL_GPL(mite_detach);
+>>>>>>> v3.18
 
 struct mite_dma_descriptor_ring *mite_alloc_ring(struct mite_struct *mite)
 {
@@ -292,7 +346,10 @@ void mite_dma_arm(struct mite_channel *mite_chan)
 	int chor;
 	unsigned long flags;
 
+<<<<<<< HEAD
 	MDPRINTK("mite_dma_arm ch%i\n", mite_chan->channel);
+=======
+>>>>>>> v3.18
 	/*
 	 * memory barrier is intended to insure any twiddling with the buffer
 	 * is done before writing to the mite to arm dma transfer
@@ -312,8 +369,14 @@ EXPORT_SYMBOL_GPL(mite_dma_arm);
 /**************************************/
 
 int mite_buf_change(struct mite_dma_descriptor_ring *ring,
+<<<<<<< HEAD
 		    struct comedi_async *async)
 {
+=======
+		    struct comedi_subdevice *s)
+{
+	struct comedi_async *async = s->async;
+>>>>>>> v3.18
 	unsigned int n_links;
 	int i;
 
@@ -333,14 +396,21 @@ int mite_buf_change(struct mite_dma_descriptor_ring *ring,
 
 	n_links = async->prealloc_bufsz >> PAGE_SHIFT;
 
+<<<<<<< HEAD
 	MDPRINTK("ring->hw_dev=%p, n_links=0x%04x\n", ring->hw_dev, n_links);
 
+=======
+>>>>>>> v3.18
 	ring->descriptors =
 	    dma_alloc_coherent(ring->hw_dev,
 			       n_links * sizeof(struct mite_dma_descriptor),
 			       &ring->descriptors_dma_addr, GFP_KERNEL);
 	if (!ring->descriptors) {
+<<<<<<< HEAD
 		dev_err(async->subdevice->device->class_dev,
+=======
+		dev_err(s->device->class_dev,
+>>>>>>> v3.18
 			"mite: ring buffer allocation failed\n");
 		return -ENOMEM;
 	}
@@ -349,7 +419,11 @@ int mite_buf_change(struct mite_dma_descriptor_ring *ring,
 	for (i = 0; i < n_links; i++) {
 		ring->descriptors[i].count = cpu_to_le32(PAGE_SIZE);
 		ring->descriptors[i].addr =
+<<<<<<< HEAD
 		    cpu_to_le32(async->buf_page_list[i].dma_addr);
+=======
+		    cpu_to_le32(async->buf_map->page_list[i].dma_addr);
+>>>>>>> v3.18
 		ring->descriptors[i].next =
 		    cpu_to_le32(ring->descriptors_dma_addr + (i +
 							      1) *
@@ -372,8 +446,11 @@ void mite_prep_dma(struct mite_channel *mite_chan,
 	unsigned int chor, chcr, mcr, dcr, lkcr;
 	struct mite_struct *mite = mite_chan->mite;
 
+<<<<<<< HEAD
 	MDPRINTK("mite_prep_dma ch%i\n", mite_chan->channel);
 
+=======
+>>>>>>> v3.18
 	/* reset DMA and FIFO */
 	chor = CHOR_DMARESET | CHOR_FRESET;
 	writel(chor, mite->mite_io_addr + MITE_CHOR(mite_chan->channel));
@@ -452,20 +529,31 @@ void mite_prep_dma(struct mite_channel *mite_chan,
 	/* starting address for link chaining */
 	writel(mite_chan->ring->descriptors_dma_addr,
 	       mite->mite_io_addr + MITE_LKAR(mite_chan->channel));
+<<<<<<< HEAD
 
 	MDPRINTK("exit mite_prep_dma\n");
+=======
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(mite_prep_dma);
 
 static u32 mite_device_bytes_transferred(struct mite_channel *mite_chan)
 {
 	struct mite_struct *mite = mite_chan->mite;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	return readl(mite->mite_io_addr + MITE_DAR(mite_chan->channel));
 }
 
 u32 mite_bytes_in_transit(struct mite_channel *mite_chan)
 {
 	struct mite_struct *mite = mite_chan->mite;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	return readl(mite->mite_io_addr +
 		     MITE_FCR(mite_chan->channel)) & 0x000000FF;
 }
@@ -519,8 +607,11 @@ unsigned mite_dma_tcr(struct mite_channel *mite_chan)
 
 	lkar = readl(mite->mite_io_addr + MITE_LKAR(mite_chan->channel));
 	tcr = readl(mite->mite_io_addr + MITE_TCR(mite_chan->channel));
+<<<<<<< HEAD
 	MDPRINTK("mite_dma_tcr ch%i, lkar=0x%08x tcr=%d\n", mite_chan->channel,
 		 lkar, tcr);
+=======
+>>>>>>> v3.18
 
 	return tcr;
 }
@@ -538,6 +629,7 @@ void mite_dma_disarm(struct mite_channel *mite_chan)
 EXPORT_SYMBOL_GPL(mite_dma_disarm);
 
 int mite_sync_input_dma(struct mite_channel *mite_chan,
+<<<<<<< HEAD
 			struct comedi_async *async)
 {
 	int count;
@@ -547,11 +639,26 @@ int mite_sync_input_dma(struct mite_channel *mite_chan,
 	old_alloc_count = async->buf_write_alloc_count;
 	/* write alloc as much as we can */
 	comedi_buf_write_alloc(async, async->prealloc_bufsz);
+=======
+			struct comedi_subdevice *s)
+{
+	struct comedi_async *async = s->async;
+	int count;
+	unsigned int nbytes, old_alloc_count;
+
+	old_alloc_count = async->buf_write_alloc_count;
+	/* write alloc as much as we can */
+	comedi_buf_write_alloc(s, async->prealloc_bufsz);
+>>>>>>> v3.18
 
 	nbytes = mite_bytes_written_to_memory_lb(mite_chan);
 	if ((int)(mite_bytes_written_to_memory_ub(mite_chan) -
 		  old_alloc_count) > 0) {
+<<<<<<< HEAD
 		dev_warn(async->subdevice->device->class_dev,
+=======
+		dev_warn(s->device->class_dev,
+>>>>>>> v3.18
 			 "mite: DMA overwrite of free area\n");
 		async->events |= COMEDI_CB_OVERFLOW;
 		return -1;
@@ -563,6 +670,7 @@ int mite_sync_input_dma(struct mite_channel *mite_chan,
 	if (count <= 0)
 		return 0;
 
+<<<<<<< HEAD
 	comedi_buf_write_free(async, count);
 
 	async->scan_progress += count;
@@ -570,12 +678,17 @@ int mite_sync_input_dma(struct mite_channel *mite_chan,
 		async->scan_progress %= bytes_per_scan;
 		async->events |= COMEDI_CB_EOS;
 	}
+=======
+	comedi_buf_write_free(s, count);
+	cfc_inc_scan_progress(s, count);
+>>>>>>> v3.18
 	async->events |= COMEDI_CB_BLOCK;
 	return 0;
 }
 EXPORT_SYMBOL_GPL(mite_sync_input_dma);
 
 int mite_sync_output_dma(struct mite_channel *mite_chan,
+<<<<<<< HEAD
 			 struct comedi_async *async)
 {
 	int count;
@@ -598,6 +711,27 @@ int mite_sync_output_dma(struct mite_channel *mite_chan,
 	if ((int)(nbytes_ub - old_alloc_count) > 0) {
 		dev_warn(async->subdevice->device->class_dev,
 			 "mite: DMA underrun\n");
+=======
+			 struct comedi_subdevice *s)
+{
+	struct comedi_async *async = s->async;
+	struct comedi_cmd *cmd = &async->cmd;
+	u32 stop_count = cmd->stop_arg * cfc_bytes_per_scan(s);
+	unsigned int old_alloc_count = async->buf_read_alloc_count;
+	u32 nbytes_ub, nbytes_lb;
+	int count;
+
+	/*  read alloc as much as we can */
+	comedi_buf_read_alloc(s, async->prealloc_bufsz);
+	nbytes_lb = mite_bytes_read_from_memory_lb(mite_chan);
+	if (cmd->stop_src == TRIG_COUNT && (int)(nbytes_lb - stop_count) > 0)
+		nbytes_lb = stop_count;
+	nbytes_ub = mite_bytes_read_from_memory_ub(mite_chan);
+	if (cmd->stop_src == TRIG_COUNT && (int)(nbytes_ub - stop_count) > 0)
+		nbytes_ub = stop_count;
+	if ((int)(nbytes_ub - old_alloc_count) > 0) {
+		dev_warn(s->device->class_dev, "mite: DMA underrun\n");
+>>>>>>> v3.18
 		async->events |= COMEDI_CB_OVERFLOW;
 		return -1;
 	}
@@ -606,7 +740,11 @@ int mite_sync_output_dma(struct mite_channel *mite_chan,
 		return 0;
 
 	if (count) {
+<<<<<<< HEAD
 		comedi_buf_read_free(async, count);
+=======
+		comedi_buf_read_free(s, count);
+>>>>>>> v3.18
 		async->events |= COMEDI_CB_BLOCK;
 	}
 	return 0;
@@ -646,6 +784,7 @@ int mite_done(struct mite_channel *mite_chan)
 }
 EXPORT_SYMBOL_GPL(mite_done);
 
+<<<<<<< HEAD
 #ifdef DEBUG_MITE
 
 /* names of bits in mite registers */
@@ -780,6 +919,8 @@ void mite_dump_regs(struct mite_channel *mite_chan)
 EXPORT_SYMBOL_GPL(mite_dump_regs);
 #endif
 
+=======
+>>>>>>> v3.18
 static int __init mite_module_init(void)
 {
 	return 0;

@@ -35,7 +35,10 @@ enum {
 	INET6_IFADDR_STATE_DAD,
 	INET6_IFADDR_STATE_POSTDAD,
 	INET6_IFADDR_STATE_ERRDAD,
+<<<<<<< HEAD
 	INET6_IFADDR_STATE_UP,
+=======
+>>>>>>> v3.18
 	INET6_IFADDR_STATE_DEAD,
 };
 
@@ -52,8 +55,13 @@ struct inet6_ifaddr {
 
 	int			state;
 
+<<<<<<< HEAD
 	__u8			dad_probes;
 	__u8			flags;
+=======
+	__u32			flags;
+	__u8			dad_probes;
+>>>>>>> v3.18
 
 	__u16			scope;
 
@@ -68,6 +76,7 @@ struct inet6_ifaddr {
 	struct hlist_node	addr_lst;
 	struct list_head	if_list;
 
+<<<<<<< HEAD
 #ifdef CONFIG_IPV6_PRIVACY
 	struct list_head	tmp_list;
 	struct inet6_ifaddr	*ifpub;
@@ -76,6 +85,16 @@ struct inet6_ifaddr {
 	bool			tokenized;
 
 	struct rcu_head		rcu;
+=======
+	struct list_head	tmp_list;
+	struct inet6_ifaddr	*ifpub;
+	int			regen_count;
+
+	bool			tokenized;
+
+	struct rcu_head		rcu;
+	struct in6_addr		peer_addr;
+>>>>>>> v3.18
 };
 
 struct ip6_sf_socklist {
@@ -147,7 +166,10 @@ struct ifacaddr6 {
 	struct ifacaddr6	*aca_next;
 	int			aca_users;
 	atomic_t		aca_refcnt;
+<<<<<<< HEAD
 	spinlock_t		aca_lock;
+=======
+>>>>>>> v3.18
 	unsigned long		aca_cstamp;
 	unsigned long		aca_tstamp;
 };
@@ -171,6 +193,7 @@ struct inet6_dev {
 	struct ifmcaddr6	*mc_list;
 	struct ifmcaddr6	*mc_tomb;
 	spinlock_t		mc_lock;
+<<<<<<< HEAD
 	unsigned char		mc_qrv;
 	unsigned char		mc_gq_running;
 	unsigned char		mc_ifc_count;
@@ -178,6 +201,22 @@ struct inet6_dev {
 	unsigned long		mc_maxdelay;
 	struct timer_list	mc_gq_timer;	/* general query timer */
 	struct timer_list	mc_ifc_timer;	/* interface change timer */
+=======
+
+	unsigned char		mc_qrv;		/* Query Robustness Variable */
+	unsigned char		mc_gq_running;
+	unsigned char		mc_ifc_count;
+	unsigned char		mc_dad_count;
+
+	unsigned long		mc_v1_seen;	/* Max time we stay in MLDv1 mode */
+	unsigned long		mc_qi;		/* Query Interval */
+	unsigned long		mc_qri;		/* Query Response Interval */
+	unsigned long		mc_maxdelay;
+
+	struct timer_list	mc_gq_timer;	/* general query timer */
+	struct timer_list	mc_ifc_timer;	/* interface change timer */
+	struct timer_list	mc_dad_timer;	/* dad complete mc timer */
+>>>>>>> v3.18
 
 	struct ifacaddr6	*ac_list;
 	rwlock_t		lock;
@@ -185,22 +224,35 @@ struct inet6_dev {
 	__u32			if_flags;
 	int			dead;
 
+<<<<<<< HEAD
 #ifdef CONFIG_IPV6_PRIVACY
 	u8			rndid[8];
 	struct timer_list	regen_timer;
 	struct list_head	tempaddr_list;
 #endif
+=======
+	u8			rndid[8];
+	struct timer_list	regen_timer;
+	struct list_head	tempaddr_list;
+>>>>>>> v3.18
 
 	struct in6_addr		token;
 
 	struct neigh_parms	*nd_parms;
+<<<<<<< HEAD
 	struct inet6_dev	*next;
+=======
+>>>>>>> v3.18
 	struct ipv6_devconf	cnf;
 	struct ipv6_devstat	stats;
 
 	struct timer_list	rs_timer;
 	__u8			rs_probes;
 
+<<<<<<< HEAD
+=======
+	__u8			addr_gen_mode;
+>>>>>>> v3.18
 	unsigned long		tstamp; /* ipv6InterfaceTable update timestamp */
 	struct rcu_head		rcu;
 };

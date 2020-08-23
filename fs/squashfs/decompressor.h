@@ -24,15 +24,25 @@
  */
 
 struct squashfs_decompressor {
+<<<<<<< HEAD
 	void	*(*init)(struct squashfs_sb_info *, void *, int);
 	void	(*free)(void *);
 	int	(*decompress)(struct squashfs_sb_info *, void **,
 		struct buffer_head **, int, int, int, int, int);
+=======
+	void	*(*init)(struct squashfs_sb_info *, void *);
+	void	*(*comp_opts)(struct squashfs_sb_info *, void *, int);
+	void	(*free)(void *);
+	int	(*decompress)(struct squashfs_sb_info *, void *,
+		struct buffer_head **, int, int, int,
+		struct squashfs_page_actor *);
+>>>>>>> v3.18
 	int	id;
 	char	*name;
 	int	supported;
 };
 
+<<<<<<< HEAD
 static inline void squashfs_decompressor_free(struct squashfs_sb_info *msblk,
 	void *s)
 {
@@ -46,6 +56,13 @@ static inline int squashfs_decompress(struct squashfs_sb_info *msblk,
 {
 	return msblk->decompressor->decompress(msblk, buffer, bh, b, offset,
 		length, srclength, pages);
+=======
+static inline void *squashfs_comp_opts(struct squashfs_sb_info *msblk,
+							void *buff, int length)
+{
+	return msblk->decompressor->comp_opts ?
+		msblk->decompressor->comp_opts(msblk, buff, length) : NULL;
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_SQUASHFS_XZ

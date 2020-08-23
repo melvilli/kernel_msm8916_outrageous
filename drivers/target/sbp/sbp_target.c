@@ -210,7 +210,11 @@ static struct sbp_session *sbp_session_create(
 		return ERR_PTR(-ENOMEM);
 	}
 
+<<<<<<< HEAD
 	sess->se_sess = transport_init_session();
+=======
+	sess->se_sess = transport_init_session(TARGET_PROT_NORMAL);
+>>>>>>> v3.18
 	if (IS_ERR(sess->se_sess)) {
 		pr_err("failed to init se_session\n");
 
@@ -1842,9 +1846,19 @@ static int sbp_queue_status(struct se_cmd *se_cmd)
 	return sbp_send_sense(req);
 }
 
+<<<<<<< HEAD
 static int sbp_queue_tm_rsp(struct se_cmd *se_cmd)
 {
 	return 0;
+=======
+static void sbp_queue_tm_rsp(struct se_cmd *se_cmd)
+{
+}
+
+static void sbp_aborted_task(struct se_cmd *se_cmd)
+{
+	return;
+>>>>>>> v3.18
 }
 
 static int sbp_check_stop_free(struct se_cmd *se_cmd)
@@ -2527,6 +2541,10 @@ static struct target_core_fabric_ops sbp_ops = {
 	.queue_data_in			= sbp_queue_data_in,
 	.queue_status			= sbp_queue_status,
 	.queue_tm_rsp			= sbp_queue_tm_rsp,
+<<<<<<< HEAD
+=======
+	.aborted_task			= sbp_aborted_task,
+>>>>>>> v3.18
 	.check_stop_free		= sbp_check_stop_free,
 
 	.fabric_make_wwn		= sbp_make_tport,
@@ -2557,6 +2575,7 @@ static int sbp_register_configfs(void)
 	/*
 	 * Setup default attribute lists for various fabric->tf_cit_tmpl
 	 */
+<<<<<<< HEAD
 	TF_CIT_TMPL(fabric)->tfc_wwn_cit.ct_attrs = sbp_wwn_attrs;
 	TF_CIT_TMPL(fabric)->tfc_tpg_base_cit.ct_attrs = sbp_tpg_base_attrs;
 	TF_CIT_TMPL(fabric)->tfc_tpg_attrib_cit.ct_attrs = sbp_tpg_attrib_attrs;
@@ -2566,6 +2585,17 @@ static int sbp_register_configfs(void)
 	TF_CIT_TMPL(fabric)->tfc_tpg_nacl_attrib_cit.ct_attrs = NULL;
 	TF_CIT_TMPL(fabric)->tfc_tpg_nacl_auth_cit.ct_attrs = NULL;
 	TF_CIT_TMPL(fabric)->tfc_tpg_nacl_param_cit.ct_attrs = NULL;
+=======
+	fabric->tf_cit_tmpl.tfc_wwn_cit.ct_attrs = sbp_wwn_attrs;
+	fabric->tf_cit_tmpl.tfc_tpg_base_cit.ct_attrs = sbp_tpg_base_attrs;
+	fabric->tf_cit_tmpl.tfc_tpg_attrib_cit.ct_attrs = sbp_tpg_attrib_attrs;
+	fabric->tf_cit_tmpl.tfc_tpg_param_cit.ct_attrs = NULL;
+	fabric->tf_cit_tmpl.tfc_tpg_np_base_cit.ct_attrs = NULL;
+	fabric->tf_cit_tmpl.tfc_tpg_nacl_base_cit.ct_attrs = NULL;
+	fabric->tf_cit_tmpl.tfc_tpg_nacl_attrib_cit.ct_attrs = NULL;
+	fabric->tf_cit_tmpl.tfc_tpg_nacl_auth_cit.ct_attrs = NULL;
+	fabric->tf_cit_tmpl.tfc_tpg_nacl_param_cit.ct_attrs = NULL;
+>>>>>>> v3.18
 
 	ret = target_fabric_configfs_register(fabric);
 	if (ret < 0) {

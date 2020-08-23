@@ -17,6 +17,10 @@
 
 #include <asm/cacheflush.h>
 #include <asm/cpudata.h>
+<<<<<<< HEAD
+=======
+#include <asm/setup.h>
+>>>>>>> v3.18
 #include <asm/pcic.h>
 #include <asm/leon.h>
 

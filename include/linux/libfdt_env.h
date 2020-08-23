@@ -1,7 +1,10 @@
 #ifndef _LIBFDT_ENV_H
 #define _LIBFDT_ENV_H
 
+<<<<<<< HEAD
 #include <linux/kernel.h>
+=======
+>>>>>>> v3.18
 #include <linux/string.h>
 
 #include <asm/byteorder.h>

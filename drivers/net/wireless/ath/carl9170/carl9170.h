@@ -133,6 +133,12 @@ struct carl9170_sta_tid {
 
 	/* Preaggregation reorder queue */
 	struct sk_buff_head queue;
+<<<<<<< HEAD
+=======
+
+	struct ieee80211_sta *sta;
+	struct ieee80211_vif *vif;
+>>>>>>> v3.18
 };
 
 #define CARL9170_QUEUE_TIMEOUT		256

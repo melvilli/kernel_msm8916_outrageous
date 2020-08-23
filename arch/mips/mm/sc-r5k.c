@@ -98,7 +98,11 @@ static struct bcache_ops r5k_sc_ops = {
 	.bc_inv = r5k_dma_cache_inv_sc
 };
 
+<<<<<<< HEAD
 void __cpuinit r5k_sc_init(void)
+=======
+void r5k_sc_init(void)
+>>>>>>> v3.18
 {
 	if (r5k_sc_probe()) {
 		r5k_sc_enable();

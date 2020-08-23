@@ -16,7 +16,11 @@
  *				- Use the generic rtc class
  *
  *  ??-???-2004: Someone at Compulab
+<<<<<<< HEAD
  *  			- Initial driver creation.
+=======
+ *			- Initial driver creation.
+>>>>>>> v3.18
  *
  */
 #include <linux/platform_device.h>
@@ -278,6 +282,7 @@ static int v3020_set_time(struct device *dev, struct rtc_time *dt)
 	dev_dbg(dev, "tm_year: %i\n", dt->tm_year);
 
 	/* Write all the values to ram... */
+<<<<<<< HEAD
 	v3020_set_reg(chip, V3020_SECONDS, 	bin2bcd(dt->tm_sec));
 	v3020_set_reg(chip, V3020_MINUTES, 	bin2bcd(dt->tm_min));
 	v3020_set_reg(chip, V3020_HOURS, 	bin2bcd(dt->tm_hour));
@@ -285,6 +290,15 @@ static int v3020_set_time(struct device *dev, struct rtc_time *dt)
 	v3020_set_reg(chip, V3020_MONTH,     bin2bcd(dt->tm_mon + 1));
 	v3020_set_reg(chip, V3020_WEEK_DAY, 	bin2bcd(dt->tm_wday));
 	v3020_set_reg(chip, V3020_YEAR, 	bin2bcd(dt->tm_year % 100));
+=======
+	v3020_set_reg(chip, V3020_SECONDS,	bin2bcd(dt->tm_sec));
+	v3020_set_reg(chip, V3020_MINUTES,	bin2bcd(dt->tm_min));
+	v3020_set_reg(chip, V3020_HOURS,	bin2bcd(dt->tm_hour));
+	v3020_set_reg(chip, V3020_MONTH_DAY,	bin2bcd(dt->tm_mday));
+	v3020_set_reg(chip, V3020_MONTH,	bin2bcd(dt->tm_mon + 1));
+	v3020_set_reg(chip, V3020_WEEK_DAY,	bin2bcd(dt->tm_wday));
+	v3020_set_reg(chip, V3020_YEAR,		bin2bcd(dt->tm_year % 100));
+>>>>>>> v3.18
 
 	/* ...and set the clock. */
 	v3020_set_reg(chip, V3020_CMD_RAM2CLOCK, 0);
@@ -303,7 +317,11 @@ static const struct rtc_class_ops v3020_rtc_ops = {
 
 static int rtc_probe(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct v3020_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct v3020_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	struct v3020 *chip;
 	int retval = -EBUSY;
 	int i;
@@ -320,7 +338,11 @@ static int rtc_probe(struct platform_device *pdev)
 
 	retval = chip->ops->map_io(chip, pdev, pdata);
 	if (retval)
+<<<<<<< HEAD
 		goto err_chip;
+=======
+		return retval;
+>>>>>>> v3.18
 
 	/* Make sure the v3020 expects a communication cycle
 	 * by reading 8 times */
@@ -364,7 +386,11 @@ static int rtc_probe(struct platform_device *pdev)
 
 err_io:
 	chip->ops->unmap_io(chip);
+<<<<<<< HEAD
 err_chip:
+=======
+
+>>>>>>> v3.18
 	return retval;
 }
 

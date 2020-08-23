@@ -186,11 +186,14 @@ typedef struct page *pgtable_t;
 #include <asm-generic/memory_model.h>
 #include <asm-generic/getorder.h>
 
+<<<<<<< HEAD
 /* vDSO support */
 #ifdef CONFIG_VSYSCALL
 #define __HAVE_ARCH_GATE_AREA
 #endif
 
+=======
+>>>>>>> v3.18
 /*
  * Some drivers need to perform DMA into kmalloc'ed buffers
  * and so we have to increase the kmalloc minalign for this.

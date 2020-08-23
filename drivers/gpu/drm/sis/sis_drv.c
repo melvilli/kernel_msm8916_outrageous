@@ -70,9 +70,14 @@ static const struct file_operations sis_driver_fops = {
 	.open = drm_open,
 	.release = drm_release,
 	.unlocked_ioctl = drm_ioctl,
+<<<<<<< HEAD
 	.mmap = drm_mmap,
 	.poll = drm_poll,
 	.fasync = drm_fasync,
+=======
+	.mmap = drm_legacy_mmap,
+	.poll = drm_poll,
+>>>>>>> v3.18
 #ifdef CONFIG_COMPAT
 	.compat_ioctl = drm_compat_ioctl,
 #endif
@@ -95,7 +100,11 @@ static int sis_driver_open(struct drm_device *dev, struct drm_file *file)
 	return 0;
 }
 
+<<<<<<< HEAD
 void sis_driver_postclose(struct drm_device *dev, struct drm_file *file)
+=======
+static void sis_driver_postclose(struct drm_device *dev, struct drm_file *file)
+>>>>>>> v3.18
 {
 	struct sis_file_private *file_priv = file->driver_priv;
 
@@ -103,12 +112,20 @@ void sis_driver_postclose(struct drm_device *dev, struct drm_file *file)
 }
 
 static struct drm_driver driver = {
+<<<<<<< HEAD
 	.driver_features = DRIVER_USE_AGP | DRIVER_USE_MTRR,
+=======
+	.driver_features = DRIVER_USE_AGP,
+>>>>>>> v3.18
 	.load = sis_driver_load,
 	.unload = sis_driver_unload,
 	.open = sis_driver_open,
 	.preclose = sis_reclaim_buffers_locked,
 	.postclose = sis_driver_postclose,
+<<<<<<< HEAD
+=======
+	.set_busid = drm_pci_set_busid,
+>>>>>>> v3.18
 	.dma_quiescent = sis_idle,
 	.lastclose = sis_lastclose,
 	.ioctls = sis_ioctls,

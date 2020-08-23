@@ -168,6 +168,16 @@ static inline void outsl(unsigned int port, const void *addr,
 		cris_iops->write_io(port, (void *)addr, 4, count);
 }
 
+<<<<<<< HEAD
+=======
+#define inb_p(port)             inb(port)
+#define inw_p(port)             inw(port)
+#define inl_p(port)             inl(port)
+#define outb_p(val, port)       outb((val), (port))
+#define outw_p(val, port)       outw((val), (port))
+#define outl_p(val, port)       outl((val), (port))
+
+>>>>>>> v3.18
 /*
  * Convert a physical pointer to a virtual kernel pointer for /dev/mem
  * access

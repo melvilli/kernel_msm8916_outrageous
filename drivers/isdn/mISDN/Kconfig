@@ -17,7 +17,11 @@ config MISDN_DSP
 
 	  This module may be used for special applications that require
 	  cross connecting of bchannels, conferencing, dtmf decoding,
+<<<<<<< HEAD
 	  echo cancelation, tone generation, and Blowfish encryption and
+=======
+	  echo cancellation, tone generation, and Blowfish encryption and
+>>>>>>> v3.18
 	  decryption. It may use hardware features if available.
 
 	  E.g. it is required for PBX4Linux. Go to http://isdn.eversberg.eu

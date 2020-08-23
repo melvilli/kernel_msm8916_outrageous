@@ -4,4 +4,7 @@ xipImage
 bootpImage
 uImage
 *.dtb
+<<<<<<< HEAD
 zImage-dtb
+=======
+>>>>>>> v3.18

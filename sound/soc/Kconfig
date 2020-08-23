@@ -26,6 +26,7 @@ if SND_SOC
 config SND_SOC_AC97_BUS
 	bool
 
+<<<<<<< HEAD
 config SND_SOC_DMAENGINE_PCM
 	bool
 
@@ -36,6 +37,17 @@ config SND_SOC_GENERIC_DMAENGINE_PCM
 # All the supported SoCs
 source "sound/soc/atmel/Kconfig"
 source "sound/soc/au1x/Kconfig"
+=======
+config SND_SOC_GENERIC_DMAENGINE_PCM
+	bool
+	select SND_DMAENGINE_PCM
+
+# All the supported SoCs
+source "sound/soc/adi/Kconfig"
+source "sound/soc/atmel/Kconfig"
+source "sound/soc/au1x/Kconfig"
+source "sound/soc/bcm/Kconfig"
+>>>>>>> v3.18
 source "sound/soc/blackfin/Kconfig"
 source "sound/soc/cirrus/Kconfig"
 source "sound/soc/davinci/Kconfig"
@@ -45,6 +57,7 @@ source "sound/soc/jz4740/Kconfig"
 source "sound/soc/nuc900/Kconfig"
 source "sound/soc/omap/Kconfig"
 source "sound/soc/kirkwood/Kconfig"
+<<<<<<< HEAD
 source "sound/soc/mid-x86/Kconfig"
 source "sound/soc/msm/Kconfig"
 source "sound/soc/mxs/Kconfig"
@@ -52,6 +65,16 @@ source "sound/soc/pxa/Kconfig"
 source "sound/soc/samsung/Kconfig"
 source "sound/soc/s6000/Kconfig"
 source "sound/soc/sh/Kconfig"
+=======
+source "sound/soc/intel/Kconfig"
+source "sound/soc/mxs/Kconfig"
+source "sound/soc/pxa/Kconfig"
+source "sound/soc/rockchip/Kconfig"
+source "sound/soc/samsung/Kconfig"
+source "sound/soc/sh/Kconfig"
+source "sound/soc/sirf/Kconfig"
+source "sound/soc/spear/Kconfig"
+>>>>>>> v3.18
 source "sound/soc/tegra/Kconfig"
 source "sound/soc/txx9/Kconfig"
 source "sound/soc/ux500/Kconfig"

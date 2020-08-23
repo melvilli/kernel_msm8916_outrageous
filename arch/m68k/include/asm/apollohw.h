@@ -5,6 +5,7 @@
 
 #include <linux/types.h>
 
+<<<<<<< HEAD
 /*
    apollo models
 */
@@ -17,6 +18,13 @@ extern u_long apollo_model;
 #define APOLLO_DN3500 (3)
 #define APOLLO_DN4000 (4)
 #define APOLLO_DN4500 (5)
+=======
+#include <asm/bootinfo-apollo.h>
+
+
+extern u_long apollo_model;
+
+>>>>>>> v3.18
 
 /*
    see scn2681 data sheet for more info.

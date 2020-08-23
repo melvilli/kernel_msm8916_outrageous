@@ -23,7 +23,10 @@
  * who were very cooperative and answered my questions.
  */
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/signal.h>
 #include <linux/slab.h>
 #include <linux/module.h>
@@ -698,8 +701,13 @@ static netdev_tx_t usb_8dev_start_xmit(struct sk_buff *skb,
 	return NETDEV_TX_OK;
 
 nofreecontext:
+<<<<<<< HEAD
 	usb_unanchor_urb(urb);
 	usb_free_coherent(priv->udev, size, buf, urb->transfer_dma);
+=======
+	usb_free_coherent(priv->udev, size, buf, urb->transfer_dma);
+	usb_free_urb(urb);
+>>>>>>> v3.18
 
 	netdev_warn(netdev, "couldn't find free context");
 
@@ -779,6 +787,10 @@ static int usb_8dev_start(struct usb_8dev_priv *priv)
 			usb_unanchor_urb(urb);
 			usb_free_coherent(priv->udev, RX_BUFFER_SIZE, buf,
 					  urb->transfer_dma);
+<<<<<<< HEAD
+=======
+			usb_free_urb(urb);
+>>>>>>> v3.18
 			break;
 		}
 
@@ -887,6 +899,10 @@ static const struct net_device_ops usb_8dev_netdev_ops = {
 	.ndo_open = usb_8dev_open,
 	.ndo_stop = usb_8dev_close,
 	.ndo_start_xmit = usb_8dev_start_xmit,
+<<<<<<< HEAD
+=======
+	.ndo_change_mtu = can_change_mtu,
+>>>>>>> v3.18
 };
 
 static const struct can_bittiming_const usb_8dev_bittiming_const = {
@@ -956,8 +972,13 @@ static int usb_8dev_probe(struct usb_interface *intf,
 	for (i = 0; i < MAX_TX_URBS; i++)
 		priv->tx_contexts[i].echo_index = MAX_TX_URBS;
 
+<<<<<<< HEAD
 	priv->cmd_msg_buffer = devm_kzalloc(&intf->dev, sizeof(struct usb_8dev_cmd_msg),
 					    GFP_KERNEL);
+=======
+	priv->cmd_msg_buffer = kzalloc(sizeof(struct usb_8dev_cmd_msg),
+				      GFP_KERNEL);
+>>>>>>> v3.18
 	if (!priv->cmd_msg_buffer)
 		goto cleanup_candev;
 
@@ -971,7 +992,11 @@ static int usb_8dev_probe(struct usb_interface *intf,
 	if (err) {
 		netdev_err(netdev,
 			"couldn't register CAN device: %d\n", err);
+<<<<<<< HEAD
 		goto cleanup_candev;
+=======
+		goto cleanup_cmd_msg_buffer;
+>>>>>>> v3.18
 	}
 
 	err = usb_8dev_cmd_version(priv, &version);
@@ -992,6 +1017,12 @@ static int usb_8dev_probe(struct usb_interface *intf,
 cleanup_unregister_candev:
 	unregister_netdev(priv->netdev);
 
+<<<<<<< HEAD
+=======
+cleanup_cmd_msg_buffer:
+	kfree(priv->cmd_msg_buffer);
+
+>>>>>>> v3.18
 cleanup_candev:
 	free_candev(netdev);
 

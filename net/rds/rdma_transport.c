@@ -168,7 +168,11 @@ static int rds_rdma_listen_init(void)
 		return ret;
 	}
 
+<<<<<<< HEAD
 	sin.sin_family = AF_INET,
+=======
+	sin.sin_family = AF_INET;
+>>>>>>> v3.18
 	sin.sin_addr.s_addr = (__force u32)htonl(INADDR_ANY);
 	sin.sin_port = (__force u16)htons(RDS_PORT);
 

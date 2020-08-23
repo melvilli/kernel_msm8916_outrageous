@@ -27,14 +27,24 @@
 #include <linux/bug.h>
 #include <linux/errno.h>
 
+<<<<<<< HEAD
 #ifndef __HAVE_ARCH_STRNICMP
 /**
  * strnicmp - Case insensitive, length-limited string comparison
+=======
+#ifndef __HAVE_ARCH_STRNCASECMP
+/**
+ * strncasecmp - Case insensitive, length-limited string comparison
+>>>>>>> v3.18
  * @s1: One string
  * @s2: The other string
  * @len: the maximum number of characters to compare
  */
+<<<<<<< HEAD
 int strnicmp(const char *s1, const char *s2, size_t len)
+=======
+int strncasecmp(const char *s1, const char *s2, size_t len)
+>>>>>>> v3.18
 {
 	/* Yes, Virginia, it had better be unsigned */
 	unsigned char c1, c2;
@@ -56,6 +66,17 @@ int strnicmp(const char *s1, const char *s2, size_t len)
 	} while (--len);
 	return (int)c1 - (int)c2;
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(strncasecmp);
+#endif
+#ifndef __HAVE_ARCH_STRNICMP
+#undef strnicmp
+int strnicmp(const char *s1, const char *s2, size_t len)
+{
+	return strncasecmp(s1, s2, len);
+}
+>>>>>>> v3.18
 EXPORT_SYMBOL(strnicmp);
 #endif
 
@@ -73,6 +94,7 @@ int strcasecmp(const char *s1, const char *s2)
 EXPORT_SYMBOL(strcasecmp);
 #endif
 
+<<<<<<< HEAD
 #ifndef __HAVE_ARCH_STRNCASECMP
 int strncasecmp(const char *s1, const char *s2, size_t n)
 {
@@ -87,6 +109,8 @@ int strncasecmp(const char *s1, const char *s2, size_t n)
 EXPORT_SYMBOL(strncasecmp);
 #endif
 
+=======
+>>>>>>> v3.18
 #ifndef __HAVE_ARCH_STRCPY
 /**
  * strcpy - Copy a %NUL terminated string
@@ -107,7 +131,11 @@ EXPORT_SYMBOL(strcpy);
 
 #ifndef __HAVE_ARCH_STRNCPY
 /**
+<<<<<<< HEAD
  * strncpy - Copy a length-limited, %NUL-terminated string
+=======
+ * strncpy - Copy a length-limited, C-string
+>>>>>>> v3.18
  * @dest: Where to copy the string to
  * @src: Where to copy the string from
  * @count: The maximum number of bytes to copy
@@ -136,7 +164,11 @@ EXPORT_SYMBOL(strncpy);
 
 #ifndef __HAVE_ARCH_STRLCPY
 /**
+<<<<<<< HEAD
  * strlcpy - Copy a %NUL terminated string into a sized buffer
+=======
+ * strlcpy - Copy a C-string into a sized buffer
+>>>>>>> v3.18
  * @dest: Where to copy the string to
  * @src: Where to copy the string from
  * @size: size of destination buffer
@@ -182,7 +214,11 @@ EXPORT_SYMBOL(strcat);
 
 #ifndef __HAVE_ARCH_STRNCAT
 /**
+<<<<<<< HEAD
  * strncat - Append a length-limited, %NUL-terminated string to another
+=======
+ * strncat - Append a length-limited, C-string to another
+>>>>>>> v3.18
  * @dest: The string to be appended to
  * @src: The string to append to it
  * @count: The maximum numbers of bytes to copy
@@ -211,7 +247,11 @@ EXPORT_SYMBOL(strncat);
 
 #ifndef __HAVE_ARCH_STRLCAT
 /**
+<<<<<<< HEAD
  * strlcat - Append a length-limited, %NUL-terminated string to another
+=======
+ * strlcat - Append a length-limited, C-string to another
+>>>>>>> v3.18
  * @dest: The string to be appended to
  * @src: The string to append to it
  * @count: The size of the destination buffer.
@@ -301,6 +341,27 @@ char *strchr(const char *s, int c)
 EXPORT_SYMBOL(strchr);
 #endif
 
+<<<<<<< HEAD
+=======
+#ifndef __HAVE_ARCH_STRCHRNUL
+/**
+ * strchrnul - Find and return a character in a string, or end of string
+ * @s: The string to be searched
+ * @c: The character to search for
+ *
+ * Returns pointer to first occurrence of 'c' in s. If c is not found, then
+ * return a pointer to the null byte at the end of s.
+ */
+char *strchrnul(const char *s, int c)
+{
+	while (*s && *s != (char)c)
+		s++;
+	return (char *)s;
+}
+EXPORT_SYMBOL(strchrnul);
+#endif
+
+>>>>>>> v3.18
 #ifndef __HAVE_ARCH_STRRCHR
 /**
  * strrchr - Find the last occurrence of a character in a string
@@ -598,7 +659,11 @@ EXPORT_SYMBOL(memset);
 void memzero_explicit(void *s, size_t count)
 {
 	memset(s, 0, count);
+<<<<<<< HEAD
 	barrier();
+=======
+	OPTIMIZER_HIDE_VAR(s);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(memzero_explicit);
 
@@ -664,7 +729,11 @@ EXPORT_SYMBOL(memmove);
  * @count: The size of the area.
  */
 #undef memcmp
+<<<<<<< HEAD
 int memcmp(const void *cs, const void *ct, size_t count)
+=======
+__visible int memcmp(const void *cs, const void *ct, size_t count)
+>>>>>>> v3.18
 {
 	const unsigned char *su1, *su2;
 	int res = 0;
@@ -805,9 +874,15 @@ void *memchr_inv(const void *start, int c, size_t bytes)
 		return check_bytes8(start, value, bytes);
 
 	value64 = value;
+<<<<<<< HEAD
 #if defined(ARCH_HAS_FAST_MULTIPLIER) && BITS_PER_LONG == 64
 	value64 *= 0x0101010101010101;
 #elif defined(ARCH_HAS_FAST_MULTIPLIER)
+=======
+#if defined(CONFIG_ARCH_HAS_FAST_MULTIPLIER) && BITS_PER_LONG == 64
+	value64 *= 0x0101010101010101;
+#elif defined(CONFIG_ARCH_HAS_FAST_MULTIPLIER)
+>>>>>>> v3.18
 	value64 *= 0x01010101;
 	value64 |= value64 << 32;
 #else

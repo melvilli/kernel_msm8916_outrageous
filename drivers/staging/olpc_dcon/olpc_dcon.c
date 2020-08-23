@@ -90,9 +90,16 @@ static int dcon_hw_init(struct dcon_priv *dcon, int is_init)
 
 	/* SDRAM setup/hold time */
 	dcon_write(dcon, 0x3a, 0xc040);
+<<<<<<< HEAD
 	dcon_write(dcon, 0x41, 0x0000);
 	dcon_write(dcon, 0x41, 0x0101);
 	dcon_write(dcon, 0x42, 0x0101);
+=======
+	dcon_write(dcon, DCON_REG_MEM_OPT_A, 0x0000);  /* clear option bits */
+	dcon_write(dcon, DCON_REG_MEM_OPT_A,
+				MEM_DLL_CLOCK_DELAY | MEM_POWER_DOWN);
+	dcon_write(dcon, DCON_REG_MEM_OPT_B, MEM_SOFT_RESET);
+>>>>>>> v3.18
 
 	/* Colour swizzle, AA, no passthrough, backlight */
 	if (is_init) {
@@ -121,30 +128,52 @@ err:
 static int dcon_bus_stabilize(struct dcon_priv *dcon, int is_powered_down)
 {
 	unsigned long timeout;
+<<<<<<< HEAD
+=======
+	u8 pm;
+>>>>>>> v3.18
 	int x;
 
 power_up:
 	if (is_powered_down) {
+<<<<<<< HEAD
 		x = 1;
 		x = olpc_ec_cmd(0x26, (unsigned char *)&x, 1, NULL, 0);
+=======
+		pm = 1;
+		x = olpc_ec_cmd(EC_DCON_POWER_MODE, &pm, 1, NULL, 0);
+>>>>>>> v3.18
 		if (x) {
 			pr_warn("unable to force dcon to power up: %d!\n", x);
 			return x;
 		}
+<<<<<<< HEAD
 		msleep(10); /* we'll be conservative */
+=======
+		usleep_range(10000, 11000);  /* we'll be conservative */
+>>>>>>> v3.18
 	}
 
 	pdata->bus_stabilize_wiggle();
 
 	for (x = -1, timeout = 50; timeout && x < 0; timeout--) {
+<<<<<<< HEAD
 		msleep(1);
+=======
+		usleep_range(1000, 1100);
+>>>>>>> v3.18
 		x = dcon_read(dcon, DCON_REG_ID);
 	}
 	if (x < 0) {
 		pr_err("unable to stabilize dcon's smbus, reasserting power and praying.\n");
 		BUG_ON(olpc_board_at_least(olpc_board(0xc2)));
+<<<<<<< HEAD
 		x = 0;
 		olpc_ec_cmd(0x26, (unsigned char *)&x, 1, NULL, 0);
+=======
+		pm = 0;
+		olpc_ec_cmd(EC_DCON_POWER_MODE, &pm, 1, NULL, 0);
+>>>>>>> v3.18
 		msleep(100);
 		is_powered_down = 1;
 		goto power_up;	/* argh, stupid hardware.. */
@@ -207,8 +236,14 @@ static void dcon_sleep(struct dcon_priv *dcon, bool sleep)
 		return;
 
 	if (sleep) {
+<<<<<<< HEAD
 		x = 0;
 		x = olpc_ec_cmd(0x26, (unsigned char *)&x, 1, NULL, 0);
+=======
+		u8 pm = 0;
+
+		x = olpc_ec_cmd(EC_DCON_POWER_MODE, &pm, 1, NULL, 0);
+>>>>>>> v3.18
 		if (x)
 			pr_warn("unable to force dcon to power down: %d!\n", x);
 		else
@@ -238,6 +273,10 @@ static void dcon_sleep(struct dcon_priv *dcon, bool sleep)
 static void dcon_load_holdoff(struct dcon_priv *dcon)
 {
 	struct timespec delta_t, now;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	while (1) {
 		getnstimeofday(&now);
 		delta_t = timespec_sub(now, dcon->load_time);
@@ -253,17 +292,32 @@ static bool dcon_blank_fb(struct dcon_priv *dcon, bool blank)
 {
 	int err;
 
+<<<<<<< HEAD
 	if (!lock_fb_info(dcon->fbinfo)) {
 		dev_err(&dcon->client->dev, "unable to lock framebuffer\n");
 		return false;
 	}
 	console_lock();
+=======
+	console_lock();
+	if (!lock_fb_info(dcon->fbinfo)) {
+		console_unlock();
+		dev_err(&dcon->client->dev, "unable to lock framebuffer\n");
+		return false;
+	}
+
+>>>>>>> v3.18
 	dcon->ignore_fb_events = true;
 	err = fb_blank(dcon->fbinfo,
 			blank ? FB_BLANK_POWERDOWN : FB_BLANK_UNBLANK);
 	dcon->ignore_fb_events = false;
+<<<<<<< HEAD
 	console_unlock();
 	unlock_fb_info(dcon->fbinfo);
+=======
+	unlock_fb_info(dcon->fbinfo);
+	console_unlock();
+>>>>>>> v3.18
 
 	if (err) {
 		dev_err(&dcon->client->dev, "couldn't %sblank framebuffer\n",
@@ -381,7 +435,11 @@ static void dcon_set_source(struct dcon_priv *dcon, int arg)
 
 	dcon->pending_src = arg;
 
+<<<<<<< HEAD
 	if ((dcon->curr_src != arg) && !work_pending(&dcon->switch_source))
+=======
+	if (dcon->curr_src != arg)
+>>>>>>> v3.18
 		schedule_work(&dcon->switch_source);
 }
 
@@ -395,14 +453,23 @@ static ssize_t dcon_mode_show(struct device *dev,
 	struct device_attribute *attr, char *buf)
 {
 	struct dcon_priv *dcon = dev_get_drvdata(dev);
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	return sprintf(buf, "%4.4X\n", dcon->disp_mode);
 }
 
 static ssize_t dcon_sleep_show(struct device *dev,
 	struct device_attribute *attr, char *buf)
 {
+<<<<<<< HEAD
 
 	struct dcon_priv *dcon = dev_get_drvdata(dev);
+=======
+	struct dcon_priv *dcon = dev_get_drvdata(dev);
+
+>>>>>>> v3.18
 	return sprintf(buf, "%d\n", dcon->asleep);
 }
 
@@ -410,6 +477,10 @@ static ssize_t dcon_freeze_show(struct device *dev,
 	struct device_attribute *attr, char *buf)
 {
 	struct dcon_priv *dcon = dev_get_drvdata(dev);
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	return sprintf(buf, "%d\n", dcon->curr_src == DCON_SOURCE_DCON ? 1 : 0);
 }
 
@@ -417,6 +488,10 @@ static ssize_t dcon_mono_show(struct device *dev,
 	struct device_attribute *attr, char *buf)
 {
 	struct dcon_priv *dcon = dev_get_drvdata(dev);
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	return sprintf(buf, "%d\n", dcon->mono);
 }
 
@@ -530,6 +605,10 @@ static int dcon_bl_update(struct backlight_device *dev)
 static int dcon_bl_get(struct backlight_device *dev)
 {
 	struct dcon_priv *dcon = bl_get_data(dev);
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	return dcon->bl_val;
 }
 

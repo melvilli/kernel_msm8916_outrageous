@@ -90,6 +90,7 @@ asmlinkage void __init init_pda(void)
 
 void __init mem_init(void)
 {
+<<<<<<< HEAD
 	unsigned int codek = 0, datak = 0, initk = 0;
 	unsigned int reservedpages = 0, freepages = 0;
 	unsigned long tmp;
@@ -102,10 +103,18 @@ void __init mem_init(void)
 	start_mem = PAGE_ALIGN(start_mem);
 	max_mapnr = num_physpages = MAP_NR(high_memory);
 	printk(KERN_DEBUG "Kernel managed physical pages: %lu\n", num_physpages);
+=======
+	char buf[64];
+
+	high_memory = (void *)(memory_end & PAGE_MASK);
+	max_mapnr = MAP_NR(high_memory);
+	printk(KERN_DEBUG "Kernel managed physical pages: %lu\n", max_mapnr);
+>>>>>>> v3.18
 
 	/* This will put all low memory onto the freelists. */
 	free_all_bootmem();
 
+<<<<<<< HEAD
 	reservedpages = 0;
 	for (tmp = ARCH_PFN_OFFSET; tmp < max_mapnr; tmp++)
 		if (PageReserved(pfn_to_page(tmp)))
@@ -127,13 +136,21 @@ void __init mem_init(void)
 		"(%uk init code, %uk kernel code, %uk data, %uk dma, %uk reserved)\n",
 		(unsigned long) freepages << (PAGE_SHIFT-10), (_ramend - CONFIG_PHY_RAM_BASE_ADDRESS) >> 10,
 		initk, codek, datak, DMA_UNCACHED_REGION >> 10, (reservedpages << (PAGE_SHIFT-10)));
+=======
+	snprintf(buf, sizeof(buf) - 1, "%uK DMA", DMA_UNCACHED_REGION >> 10);
+	mem_init_print_info(buf);
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_BLK_DEV_INITRD
 void __init free_initrd_mem(unsigned long start, unsigned long end)
 {
 #ifndef CONFIG_MPU
+<<<<<<< HEAD
 	free_reserved_area(start, end, 0, "initrd");
+=======
+	free_reserved_area((void *)start, (void *)end, -1, "initrd");
+>>>>>>> v3.18
 #endif
 }
 #endif
@@ -141,7 +158,11 @@ void __init free_initrd_mem(unsigned long start, unsigned long end)
 void __init_refok free_initmem(void)
 {
 #if defined CONFIG_RAMKERNEL && !defined CONFIG_MPU
+<<<<<<< HEAD
 	free_initmem_default(0);
+=======
+	free_initmem_default(-1);
+>>>>>>> v3.18
 	if (memory_start == (unsigned long)(&__init_end))
 		memory_start = (unsigned long)(&__init_begin);
 #endif

@@ -41,7 +41,11 @@ static irqreturn_t timer_interrupt(int irq, void *dev_id)
 
 static struct irqaction timer_irq = {
 	.handler = timer_interrupt,
+<<<<<<< HEAD
 	.flags = IRQF_DISABLED | IRQF_TIMER,
+=======
+	.flags = IRQF_TIMER,
+>>>>>>> v3.18
 	.name = "timer",
 };
 

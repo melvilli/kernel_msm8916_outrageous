@@ -20,6 +20,7 @@
 # Will compile qconf as a C++ program, and menu as a C program.
 # They are linked as C++ code to the executable qconf
 
+<<<<<<< HEAD
 # hostprogs-y := conf
 # conf-objs  := conf.o libkconfig.so
 # libkconfig-objs := expr.o type.o
@@ -30,11 +31,18 @@
 # libkconfig.so as the executable conf.
 # Note: Shared libraries consisting of C++ files are not supported
 
+=======
+>>>>>>> v3.18
 __hostprogs := $(sort $(hostprogs-y) $(hostprogs-m))
 
 # C code
 # Executables compiled from a single .c file
+<<<<<<< HEAD
 host-csingle	:= $(foreach m,$(__hostprogs),$(if $($(m)-objs),,$(m)))
+=======
+host-csingle	:= $(foreach m,$(__hostprogs), \
+			$(if $($(m)-objs)$($(m)-cxxobjs),,$(m)))
+>>>>>>> v3.18
 
 # C executables linked based on several .o files
 host-cmulti	:= $(foreach m,$(__hostprogs),\
@@ -44,13 +52,18 @@ host-cmulti	:= $(foreach m,$(__hostprogs),\
 host-cobjs	:= $(sort $(foreach m,$(__hostprogs),$($(m)-objs)))
 
 # C++ code
+<<<<<<< HEAD
 # C++ executables compiled from at least on .cc file
+=======
+# C++ executables compiled from at least one .cc file
+>>>>>>> v3.18
 # and zero or more .c files
 host-cxxmulti	:= $(foreach m,$(__hostprogs),$(if $($(m)-cxxobjs),$(m)))
 
 # C++ Object (.o) files compiled from .cc files
 host-cxxobjs	:= $(sort $(foreach m,$(host-cxxmulti),$($(m)-cxxobjs)))
 
+<<<<<<< HEAD
 # Shared libaries (only .c supported)
 # Shared libraries (.so) - all .so files referenced in "xxx-objs"
 host-cshlib	:= $(sort $(filter %.so, $(host-cobjs)))
@@ -71,6 +84,12 @@ host-objdirs += $(foreach f,$(host-cmulti),                  \
 host-objdirs += $(foreach f,$(host-cxxmulti),                  \
                     $(foreach m,$($(f)-cxxobjs),                \
                         $(if $(dir $(m)),$(dir $(m)))))
+=======
+# output directory for programs/.o files
+# hostprogs-y := tools/build may have been specified.
+# Retrieve also directory of .o files from prog-objs or prog-cxxobjs notation
+host-objdirs := $(dir $(__hostprogs) $(host-cobjs) $(host-cxxobjs))
+>>>>>>> v3.18
 
 host-objdirs := $(strip $(sort $(filter-out ./,$(host-objdirs))))
 
@@ -81,8 +100,11 @@ host-cmulti	:= $(addprefix $(obj)/,$(host-cmulti))
 host-cobjs	:= $(addprefix $(obj)/,$(host-cobjs))
 host-cxxmulti	:= $(addprefix $(obj)/,$(host-cxxmulti))
 host-cxxobjs	:= $(addprefix $(obj)/,$(host-cxxobjs))
+<<<<<<< HEAD
 host-cshlib	:= $(addprefix $(obj)/,$(host-cshlib))
 host-cshobjs	:= $(addprefix $(obj)/,$(host-cshobjs))
+=======
+>>>>>>> v3.18
 host-objdirs    := $(addprefix $(obj)/,$(host-objdirs))
 
 obj-dirs += $(host-objdirs)
@@ -123,8 +145,14 @@ quiet_cmd_host-cmulti	= HOSTLD  $@
       cmd_host-cmulti	= $(HOSTCC) $(HOSTLDFLAGS) -o $@ \
 			  $(addprefix $(obj)/,$($(@F)-objs)) \
 			  $(HOST_LOADLIBES) $(HOSTLOADLIBES_$(@F))
+<<<<<<< HEAD
 $(host-cmulti): $(obj)/%: $(host-cobjs) $(host-cshlib) FORCE
 	$(call if_changed,host-cmulti)
+=======
+$(host-cmulti): FORCE
+	$(call if_changed,host-cmulti)
+$(call multi_depend, $(host-cmulti), , -objs)
+>>>>>>> v3.18
 
 # Create .o file from a single .c file
 # host-cobjs -> .o
@@ -140,8 +168,14 @@ quiet_cmd_host-cxxmulti	= HOSTLD  $@
 			  $(foreach o,objs cxxobjs,\
 			  $(addprefix $(obj)/,$($(@F)-$(o)))) \
 			  $(HOST_LOADLIBES) $(HOSTLOADLIBES_$(@F))
+<<<<<<< HEAD
 $(host-cxxmulti): $(obj)/%: $(host-cobjs) $(host-cxxobjs) $(host-cshlib) FORCE
 	$(call if_changed,host-cxxmulti)
+=======
+$(host-cxxmulti): FORCE
+	$(call if_changed,host-cxxmulti)
+$(call multi_depend, $(host-cxxmulti), , -objs -cxxobjs)
+>>>>>>> v3.18
 
 # Create .o file from a single .cc (C++) file
 quiet_cmd_host-cxxobjs	= HOSTCXX $@
@@ -149,6 +183,7 @@ quiet_cmd_host-cxxobjs	= HOSTCXX $@
 $(host-cxxobjs): $(obj)/%.o: $(src)/%.cc FORCE
 	$(call if_changed_dep,host-cxxobjs)
 
+<<<<<<< HEAD
 # Compile .c file, create position independent .o file
 # host-cshobjs -> .o
 quiet_cmd_host-cshobjs	= HOSTCC  -fPIC $@
@@ -168,3 +203,7 @@ $(host-cshlib): $(obj)/%: $(host-cshobjs) FORCE
 targets += $(host-csingle)  $(host-cmulti) $(host-cobjs)\
 	   $(host-cxxmulti) $(host-cxxobjs) $(host-cshlib) $(host-cshobjs) 
 
+=======
+targets += $(host-csingle)  $(host-cmulti) $(host-cobjs)\
+	   $(host-cxxmulti) $(host-cxxobjs)
+>>>>>>> v3.18

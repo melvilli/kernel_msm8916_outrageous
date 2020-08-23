@@ -1,7 +1,11 @@
 /*
  * Copyright (C) 2012
  * Sachin Bhamare <sbhamare@panasas.com>
+<<<<<<< HEAD
  * Boaz Harrosh <bharrosh@panasas.com>
+=======
+ * Boaz Harrosh <ooo@electrozaur.com>
+>>>>>>> v3.18
  *
  * This file is part of exofs.
  *

@@ -123,12 +123,22 @@ static int omap_framebuffer_dirty(struct drm_framebuffer *fb,
 {
 	int i;
 
+<<<<<<< HEAD
+=======
+	drm_modeset_lock_all(fb->dev);
+
+>>>>>>> v3.18
 	for (i = 0; i < num_clips; i++) {
 		omap_framebuffer_flush(fb, clips[i].x1, clips[i].y1,
 					clips[i].x2 - clips[i].x1,
 					clips[i].y2 - clips[i].y1);
 	}
 
+<<<<<<< HEAD
+=======
+	drm_modeset_unlock_all(fb->dev);
+
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -214,6 +224,23 @@ void omap_framebuffer_update_scanout(struct drm_framebuffer *fb,
 		info->rotation_type = OMAP_DSS_ROT_TILER;
 		info->screen_width  = omap_gem_tiled_stride(plane->bo, orient);
 	} else {
+<<<<<<< HEAD
+=======
+		switch (win->rotation & 0xf) {
+		case 0:
+		case BIT(DRM_ROTATE_0):
+			/* OK */
+			break;
+
+		default:
+			dev_warn(fb->dev->dev,
+				"rotation '%d' ignored for non-tiled fb\n",
+				win->rotation);
+			win->rotation = 0;
+			break;
+		}
+
+>>>>>>> v3.18
 		info->paddr         = get_linear_addr(plane, format, 0, x, y);
 		info->rotation_type = OMAP_DSS_ROT_DMA;
 		info->screen_width  = plane->pitch;
@@ -237,6 +264,7 @@ void omap_framebuffer_update_scanout(struct drm_framebuffer *fb,
 	}
 }
 
+<<<<<<< HEAD
 /* Call for unpin 'a' (if not NULL), and pin 'b' (if not NULL).  Although
  * buffers to unpin are just pushed to the unpin fifo so that the
  * caller can defer unpin until vblank.
@@ -286,6 +314,51 @@ int omap_framebuffer_replace(struct drm_framebuffer *a,
 		}
 	}
 
+=======
+/* pin, prepare for scanout: */
+int omap_framebuffer_pin(struct drm_framebuffer *fb)
+{
+	struct omap_framebuffer *omap_fb = to_omap_framebuffer(fb);
+	int ret, i, n = drm_format_num_planes(fb->pixel_format);
+
+	for (i = 0; i < n; i++) {
+		struct plane *plane = &omap_fb->planes[i];
+		ret = omap_gem_get_paddr(plane->bo, &plane->paddr, true);
+		if (ret)
+			goto fail;
+		omap_gem_dma_sync(plane->bo, DMA_TO_DEVICE);
+	}
+
+	return 0;
+
+fail:
+	for (i--; i >= 0; i--) {
+		struct plane *plane = &omap_fb->planes[i];
+		omap_gem_put_paddr(plane->bo);
+		plane->paddr = 0;
+	}
+
+	return ret;
+}
+
+/* unpin, no longer being scanned out: */
+int omap_framebuffer_unpin(struct drm_framebuffer *fb)
+{
+	struct omap_framebuffer *omap_fb = to_omap_framebuffer(fb);
+	int ret, i, n = drm_format_num_planes(fb->pixel_format);
+
+	for (i = 0; i < n; i++) {
+		struct plane *plane = &omap_fb->planes[i];
+		ret = omap_gem_put_paddr(plane->bo);
+		if (ret)
+			goto fail;
+		plane->paddr = 0;
+	}
+
+	return 0;
+
+fail:
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -308,13 +381,22 @@ struct drm_connector *omap_framebuffer_get_next_connector(
 	struct drm_connector *connector = from;
 
 	if (!from)
+<<<<<<< HEAD
 		return list_first_entry(connector_list, typeof(*from), head);
+=======
+		return list_first_entry_or_null(connector_list, typeof(*from),
+						head);
+>>>>>>> v3.18
 
 	list_for_each_entry_from(connector, connector_list, head) {
 		if (connector != from) {
 			struct drm_encoder *encoder = connector->encoder;
 			struct drm_crtc *crtc = encoder ? encoder->crtc : NULL;
+<<<<<<< HEAD
 			if (crtc && crtc->fb == fb)
+=======
+			if (crtc && crtc->primary->fb == fb)
+>>>>>>> v3.18
 				return connector;
 
 		}
@@ -333,6 +415,10 @@ void omap_framebuffer_flush(struct drm_framebuffer *fb,
 
 	VERB("flush: %d,%d %dx%d, fb=%p", x, y, w, h, fb);
 
+<<<<<<< HEAD
+=======
+	/* FIXME: This is racy - no protection against modeset config changes. */
+>>>>>>> v3.18
 	while ((connector = omap_framebuffer_get_next_connector(fb, connector))) {
 		/* only consider connectors that are part of a chain */
 		if (connector->encoder && connector->encoder->crtc) {

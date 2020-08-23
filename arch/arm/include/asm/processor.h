@@ -22,6 +22,10 @@
 #include <asm/hw_breakpoint.h>
 #include <asm/ptrace.h>
 #include <asm/types.h>
+<<<<<<< HEAD
+=======
+#include <asm/unified.h>
+>>>>>>> v3.18
 
 #ifdef __KERNEL__
 #define STACK_TOP	((current->personality & ADDR_LIMIT_32BIT) ? \
@@ -29,9 +33,12 @@
 #define STACK_TOP_MAX	TASK_SIZE
 #endif
 
+<<<<<<< HEAD
 extern unsigned int boot_reason;
 extern unsigned int cold_boot;
 
+=======
+>>>>>>> v3.18
 struct debug_info {
 #ifdef CONFIG_HAVE_HW_BREAKPOINT
 	struct perf_event	*hbp[ARM_MAX_HBP_SLOTS];
@@ -84,12 +91,31 @@ unsigned long get_wchan(struct task_struct *p);
 #define cpu_relax()			barrier()
 #endif
 
+<<<<<<< HEAD
+=======
+#define cpu_relax_lowlatency()                cpu_relax()
+
+>>>>>>> v3.18
 #define task_pt_regs(p) \
 	((struct pt_regs *)(THREAD_START_SP + task_stack_page(p)) - 1)
 
 #define KSTK_EIP(tsk)	task_pt_regs(tsk)->ARM_pc
 #define KSTK_ESP(tsk)	task_pt_regs(tsk)->ARM_sp
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_SMP
+#define __ALT_SMP_ASM(smp, up)						\
+	"9998:	" smp "\n"						\
+	"	.pushsection \".alt.smp.init\", \"a\"\n"		\
+	"	.long	9998b\n"					\
+	"	" up "\n"						\
+	"	.popsection\n"
+#else
+#define __ALT_SMP_ASM(smp, up)	up
+#endif
+
+>>>>>>> v3.18
 /*
  * Prefetching support - only ARMv5.
  */
@@ -100,6 +126,7 @@ static inline void prefetch(const void *ptr)
 {
 	__asm__ __volatile__(
 		"pld\t%a0"
+<<<<<<< HEAD
 		:
 		: "p" (ptr)
 		: "cc");
@@ -111,6 +138,24 @@ static inline void prefetch(const void *ptr)
 #define ARCH_HAS_SPINLOCK_PREFETCH
 #define spin_lock_prefetch(x) do { } while (0)
 
+=======
+		:: "p" (ptr));
+}
+
+#if __LINUX_ARM_ARCH__ >= 7 && defined(CONFIG_SMP)
+#define ARCH_HAS_PREFETCHW
+static inline void prefetchw(const void *ptr)
+{
+	__asm__ __volatile__(
+		".arch_extension	mp\n"
+		__ALT_SMP_ASM(
+			WASM(pldw)		"\t%a0",
+			WASM(pld)		"\t%a0"
+		)
+		:: "p" (ptr));
+}
+#endif
+>>>>>>> v3.18
 #endif
 
 #define HAVE_ARCH_PICK_MMAP_LAYOUT

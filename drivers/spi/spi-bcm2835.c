@@ -217,7 +217,11 @@ static int bcm2835_spi_start_transfer(struct spi_device *spi,
 		cs |= spi->chip_select;
 	}
 
+<<<<<<< HEAD
 	INIT_COMPLETION(bs->done);
+=======
+	reinit_completion(&bs->done);
+>>>>>>> v3.18
 	bs->tx_buf = tfr->tx_buf;
 	bs->rx_buf = tfr->rx_buf;
 	bs->len = tfr->len;
@@ -314,8 +318,12 @@ static int bcm2835_spi_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, master);
 
 	master->mode_bits = BCM2835_SPI_MODE_BITS;
+<<<<<<< HEAD
 	master->bits_per_word_mask = BIT(8 - 1);
 	master->bus_num = -1;
+=======
+	master->bits_per_word_mask = SPI_BPW_MASK(8);
+>>>>>>> v3.18
 	master->num_chipselect = 3;
 	master->transfer_one_message = bcm2835_spi_transfer_one;
 	master->dev.of_node = pdev->dev.of_node;
@@ -325,6 +333,7 @@ static int bcm2835_spi_probe(struct platform_device *pdev)
 	init_completion(&bs->done);
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
 	if (!res) {
 		dev_err(&pdev->dev, "could not get memory resource\n");
 		err = -ENODEV;
@@ -335,6 +344,11 @@ static int bcm2835_spi_probe(struct platform_device *pdev)
 	if (!bs->regs) {
 		dev_err(&pdev->dev, "could not request/map memory region\n");
 		err = -ENODEV;
+=======
+	bs->regs = devm_ioremap_resource(&pdev->dev, res);
+	if (IS_ERR(bs->regs)) {
+		err = PTR_ERR(bs->regs);
+>>>>>>> v3.18
 		goto out_master_put;
 	}
 
@@ -354,8 +368,13 @@ static int bcm2835_spi_probe(struct platform_device *pdev)
 
 	clk_prepare_enable(bs->clk);
 
+<<<<<<< HEAD
 	err = request_irq(bs->irq, bcm2835_spi_interrupt, 0,
 			dev_name(&pdev->dev), master);
+=======
+	err = devm_request_irq(&pdev->dev, bs->irq, bcm2835_spi_interrupt, 0,
+				dev_name(&pdev->dev), master);
+>>>>>>> v3.18
 	if (err) {
 		dev_err(&pdev->dev, "could not request IRQ: %d\n", err);
 		goto out_clk_disable;
@@ -365,16 +384,26 @@ static int bcm2835_spi_probe(struct platform_device *pdev)
 	bcm2835_wr(bs, BCM2835_SPI_CS,
 		   BCM2835_SPI_CS_CLEAR_RX | BCM2835_SPI_CS_CLEAR_TX);
 
+<<<<<<< HEAD
 	err = spi_register_master(master);
 	if (err) {
 		dev_err(&pdev->dev, "could not register SPI master: %d\n", err);
 		goto out_free_irq;
+=======
+	err = devm_spi_register_master(&pdev->dev, master);
+	if (err) {
+		dev_err(&pdev->dev, "could not register SPI master: %d\n", err);
+		goto out_clk_disable;
+>>>>>>> v3.18
 	}
 
 	return 0;
 
+<<<<<<< HEAD
 out_free_irq:
 	free_irq(bs->irq, master);
+=======
+>>>>>>> v3.18
 out_clk_disable:
 	clk_disable_unprepare(bs->clk);
 out_master_put:
@@ -387,15 +416,21 @@ static int bcm2835_spi_remove(struct platform_device *pdev)
 	struct spi_master *master = platform_get_drvdata(pdev);
 	struct bcm2835_spi *bs = spi_master_get_devdata(master);
 
+<<<<<<< HEAD
 	free_irq(bs->irq, master);
 	spi_unregister_master(master);
 
+=======
+>>>>>>> v3.18
 	/* Clear FIFOs, and disable the HW block */
 	bcm2835_wr(bs, BCM2835_SPI_CS,
 		   BCM2835_SPI_CS_CLEAR_RX | BCM2835_SPI_CS_CLEAR_TX);
 
 	clk_disable_unprepare(bs->clk);
+<<<<<<< HEAD
 	spi_master_put(master);
+=======
+>>>>>>> v3.18
 
 	return 0;
 }

@@ -527,11 +527,19 @@ int main(int ac, char **av)
 			seed_env = getenv("KCONFIG_SEED");
 			if( seed_env && *seed_env ) {
 				char *endp;
+<<<<<<< HEAD
 				int tmp = (int)strtol(seed_env, &endp, 10);
+=======
+				int tmp = (int)strtol(seed_env, &endp, 0);
+>>>>>>> v3.18
 				if (*endp == '\0') {
 					seed = tmp;
 				}
 			}
+<<<<<<< HEAD
+=======
+			fprintf( stderr, "KCONFIG_SEED=0x%X\n", seed );
+>>>>>>> v3.18
 			srand(seed);
 			break;
 		}
@@ -653,7 +661,12 @@ int main(int ac, char **av)
 		conf_set_all_new_symbols(def_default);
 		break;
 	case randconfig:
+<<<<<<< HEAD
 		conf_set_all_new_symbols(def_random);
+=======
+		/* Really nothing to do in this loop */
+		while (conf_set_all_new_symbols(def_random)) ;
+>>>>>>> v3.18
 		break;
 	case defconfig:
 		conf_set_all_new_symbols(def_default);
@@ -694,7 +707,11 @@ int main(int ac, char **av)
 	} else if (input_mode == savedefconfig) {
 		if (conf_write_defconfig(defconfig_file)) {
 			fprintf(stderr, _("n*** Error while saving defconfig to: %s\n\n"),
+<<<<<<< HEAD
 			        defconfig_file);
+=======
+				defconfig_file);
+>>>>>>> v3.18
 			return 1;
 		}
 	} else if (input_mode != listnewconfig) {

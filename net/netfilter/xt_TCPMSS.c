@@ -43,27 +43,76 @@ optlen(const u_int8_t *opt, unsigned int offset)
 		return opt[offset+1];
 }
 
+<<<<<<< HEAD
 static int
 tcpmss_mangle_packet(struct sk_buff *skb,
 		     const struct xt_action_param *par,
 		     unsigned int in_mtu,
+=======
+static u_int32_t tcpmss_reverse_mtu(struct net *net,
+				    const struct sk_buff *skb,
+				    unsigned int family)
+{
+	struct flowi fl;
+	const struct nf_afinfo *ai;
+	struct rtable *rt = NULL;
+	u_int32_t mtu     = ~0U;
+
+	if (family == PF_INET) {
+		struct flowi4 *fl4 = &fl.u.ip4;
+		memset(fl4, 0, sizeof(*fl4));
+		fl4->daddr = ip_hdr(skb)->saddr;
+	} else {
+		struct flowi6 *fl6 = &fl.u.ip6;
+
+		memset(fl6, 0, sizeof(*fl6));
+		fl6->daddr = ipv6_hdr(skb)->saddr;
+	}
+	rcu_read_lock();
+	ai = nf_get_afinfo(family);
+	if (ai != NULL)
+		ai->route(net, (struct dst_entry **)&rt, &fl, false);
+	rcu_read_unlock();
+
+	if (rt != NULL) {
+		mtu = dst_mtu(&rt->dst);
+		dst_release(&rt->dst);
+	}
+	return mtu;
+}
+
+static int
+tcpmss_mangle_packet(struct sk_buff *skb,
+		     const struct xt_action_param *par,
+		     unsigned int family,
+>>>>>>> v3.18
 		     unsigned int tcphoff,
 		     unsigned int minlen)
 {
 	const struct xt_tcpmss_info *info = par->targinfo;
 	struct tcphdr *tcph;
+<<<<<<< HEAD
 	unsigned int tcplen, i;
+=======
+	int len, tcp_hdrlen;
+	unsigned int i;
+>>>>>>> v3.18
 	__be16 oldval;
 	u16 newmss;
 	u8 *opt;
 
 	/* This is a fragment, no TCP header is available */
 	if (par->fragoff != 0)
+<<<<<<< HEAD
 		return XT_CONTINUE;
+=======
+		return 0;
+>>>>>>> v3.18
 
 	if (!skb_make_writable(skb, skb->len))
 		return -1;
 
+<<<<<<< HEAD
 	tcplen = skb->len - tcphoff;
 	tcph = (struct tcphdr *)(skb_network_header(skb) + tcphoff);
 
@@ -72,6 +121,22 @@ tcpmss_mangle_packet(struct sk_buff *skb,
 		return -1;
 
 	if (info->mss == XT_TCPMSS_CLAMP_PMTU) {
+=======
+	len = skb->len - tcphoff;
+	if (len < (int)sizeof(struct tcphdr))
+		return -1;
+
+	tcph = (struct tcphdr *)(skb_network_header(skb) + tcphoff);
+	tcp_hdrlen = tcph->doff * 4;
+
+	if (len < tcp_hdrlen)
+		return -1;
+
+	if (info->mss == XT_TCPMSS_CLAMP_PMTU) {
+		struct net *net = dev_net(par->in ? par->in : par->out);
+		unsigned int in_mtu = tcpmss_reverse_mtu(net, skb, family);
+
+>>>>>>> v3.18
 		if (dst_mtu(skb_dst(skb)) <= minlen) {
 			net_err_ratelimited("unknown or invalid path-MTU (%u)\n",
 					    dst_mtu(skb_dst(skb)));
@@ -87,9 +152,14 @@ tcpmss_mangle_packet(struct sk_buff *skb,
 		newmss = info->mss;
 
 	opt = (u_int8_t *)tcph;
+<<<<<<< HEAD
 	for (i = sizeof(struct tcphdr); i < tcph->doff*4; i += optlen(opt, i)) {
 		if (opt[i] == TCPOPT_MSS && tcph->doff*4 - i >= TCPOLEN_MSS &&
 		    opt[i+1] == TCPOLEN_MSS) {
+=======
+	for (i = sizeof(struct tcphdr); i <= tcp_hdrlen - TCPOLEN_MSS; i += optlen(opt, i)) {
+		if (opt[i] == TCPOPT_MSS && opt[i+1] == TCPOLEN_MSS) {
+>>>>>>> v3.18
 			u_int16_t oldmss;
 
 			oldmss = (opt[i+2] << 8) | opt[i+3];
@@ -112,6 +182,7 @@ tcpmss_mangle_packet(struct sk_buff *skb,
 	}
 
 	/* There is data after the header so the option can't be added
+<<<<<<< HEAD
 	   without moving it, and doing so may make the SYN packet
 	   itself too large. Accept the packet unmodified instead. */
 	if (tcplen > tcph->doff*4)
@@ -119,6 +190,12 @@ tcpmss_mangle_packet(struct sk_buff *skb,
 
 	/* tcph->doff has 4 bits, do not wrap it to 0 */
 	if (tcph->doff >= 15)
+=======
+	 * without moving it, and doing so may make the SYN packet
+	 * itself too large. Accept the packet unmodified instead.
+	 */
+	if (len > tcp_hdrlen)
+>>>>>>> v3.18
 		return 0;
 
 	/*
@@ -147,10 +224,17 @@ tcpmss_mangle_packet(struct sk_buff *skb,
 		newmss = min(newmss, (u16)1220);
 
 	opt = (u_int8_t *)tcph + sizeof(struct tcphdr);
+<<<<<<< HEAD
 	memmove(opt + TCPOLEN_MSS, opt, tcplen - sizeof(struct tcphdr));
 
 	inet_proto_csum_replace2(&tcph->check, skb,
 				 htons(tcplen), htons(tcplen + TCPOLEN_MSS), 1);
+=======
+	memmove(opt + TCPOLEN_MSS, opt, len - sizeof(struct tcphdr));
+
+	inet_proto_csum_replace2(&tcph->check, skb,
+				 htons(len), htons(len + TCPOLEN_MSS), 1);
+>>>>>>> v3.18
 	opt[0] = TCPOPT_MSS;
 	opt[1] = TCPOLEN_MSS;
 	opt[2] = (newmss & 0xff00) >> 8;
@@ -165,6 +249,7 @@ tcpmss_mangle_packet(struct sk_buff *skb,
 	return TCPOLEN_MSS;
 }
 
+<<<<<<< HEAD
 static u_int32_t tcpmss_reverse_mtu(const struct sk_buff *skb,
 				    unsigned int family)
 {
@@ -196,6 +281,8 @@ static u_int32_t tcpmss_reverse_mtu(const struct sk_buff *skb,
 	return mtu;
 }
 
+=======
+>>>>>>> v3.18
 static unsigned int
 tcpmss_tg4(struct sk_buff *skb, const struct xt_action_param *par)
 {
@@ -204,7 +291,11 @@ tcpmss_tg4(struct sk_buff *skb, const struct xt_action_param *par)
 	int ret;
 
 	ret = tcpmss_mangle_packet(skb, par,
+<<<<<<< HEAD
 				   tcpmss_reverse_mtu(skb, PF_INET),
+=======
+				   PF_INET,
+>>>>>>> v3.18
 				   iph->ihl * 4,
 				   sizeof(*iph) + sizeof(struct tcphdr));
 	if (ret < 0)
@@ -233,7 +324,11 @@ tcpmss_tg6(struct sk_buff *skb, const struct xt_action_param *par)
 	if (tcphoff < 0)
 		return NF_DROP;
 	ret = tcpmss_mangle_packet(skb, par,
+<<<<<<< HEAD
 				   tcpmss_reverse_mtu(skb, PF_INET6),
+=======
+				   PF_INET6,
+>>>>>>> v3.18
 				   tcphoff,
 				   sizeof(*ipv6h) + sizeof(struct tcphdr));
 	if (ret < 0)

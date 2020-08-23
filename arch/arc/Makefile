@@ -9,25 +9,43 @@
 UTS_MACHINE := arc
 
 ifeq ($(CROSS_COMPILE),)
+<<<<<<< HEAD
 CROSS_COMPILE := arc-elf32-
+=======
+CROSS_COMPILE := arc-linux-uclibc-
+>>>>>>> v3.18
 endif
 
 KBUILD_DEFCONFIG := fpga_defconfig
 
 cflags-y	+= -mA7 -fno-common -pipe -fno-builtin -D__linux__
 
+<<<<<<< HEAD
 LINUXINCLUDE	+=  -include ${src}/arch/arc/include/asm/defines.h
 
+=======
+>>>>>>> v3.18
 ifdef CONFIG_ARC_CURR_IN_REG
 # For a global register defintion, make sure it gets passed to every file
 # We had a customer reported bug where some code built in kernel was NOT using
 # any kernel headers, and missing the r25 global register
+<<<<<<< HEAD
 # Can't do unconditionally (like above) because of recursive include issues
+=======
+# Can't do unconditionally because of recursive include issues
+>>>>>>> v3.18
 # due to <linux/thread_info.h>
 LINUXINCLUDE	+=  -include ${src}/arch/arc/include/asm/current.h
 endif
 
+<<<<<<< HEAD
 atleast_gcc44 :=  $(call cc-ifversion, -gt, 0402, y)
+=======
+upto_gcc44    :=  $(call cc-ifversion, -le, 0404, y)
+atleast_gcc44 :=  $(call cc-ifversion, -ge, 0404, y)
+atleast_gcc48 :=  $(call cc-ifversion, -ge, 0408, y)
+
+>>>>>>> v3.18
 cflags-$(atleast_gcc44)			+= -fsection-anchors
 
 cflags-$(CONFIG_ARC_HAS_LLSC)		+= -mlock
@@ -35,6 +53,14 @@ cflags-$(CONFIG_ARC_HAS_SWAPE)		+= -mswape
 cflags-$(CONFIG_ARC_HAS_RTSC)		+= -mrtsc
 cflags-$(CONFIG_ARC_DW2_UNWIND)		+= -fasynchronous-unwind-tables
 
+<<<<<<< HEAD
+=======
+# By default gcc 4.8 generates dwarf4 which kernel unwinder can't grok
+ifeq ($(atleast_gcc48),y)
+cflags-$(CONFIG_ARC_DW2_UNWIND)		+= -gdwarf-2
+endif
+
+>>>>>>> v3.18
 ifndef CONFIG_CC_OPTIMIZE_FOR_SIZE
 # Generic build system uses -O2, we want -O3
 cflags-y  += -O3
@@ -48,6 +74,7 @@ cflags-$(disable_small_data)		+= -mno-sdata -fcall-used-gp
 cflags-$(CONFIG_CPU_BIG_ENDIAN)		+= -mbig-endian
 ldflags-$(CONFIG_CPU_BIG_ENDIAN)	+= -EB
 
+<<<<<<< HEAD
 # STAR 9000518362:
 # arc-linux-uclibc-ld (buildroot) or arceb-elf32-ld (EZChip) don't accept
 # --build-id w/o "-marclinux".
@@ -73,6 +100,18 @@ ifndef CONFIG_ARC_HAS_HW_MPY
 endif
 
 LIBGCC	:= $(shell $(CC) $(ARC_LIBGCC) $(cflags-y) --print-libgcc-file-name)
+=======
+# STAR 9000518362: (fixed with binutils shipping with gcc 4.8)
+# arc-linux-uclibc-ld (buildroot) or arceb-elf32-ld (EZChip) don't accept
+# --build-id w/o "-marclinux". Default arc-elf32-ld is OK
+ldflags-$(upto_gcc44)			+= -marclinux
+
+ifndef CONFIG_ARC_HAS_HW_MPY
+	cflags-y	+= -mno-mpy
+endif
+
+LIBGCC	:= $(shell $(CC) $(cflags-y) --print-libgcc-file-name)
+>>>>>>> v3.18
 
 # Modules with short calls might break for calls into builtin-kernel
 KBUILD_CFLAGS_MODULE	+= -mlong-calls

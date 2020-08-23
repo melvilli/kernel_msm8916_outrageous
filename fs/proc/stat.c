@@ -9,7 +9,11 @@
 #include <linux/slab.h>
 #include <linux/time.h>
 #include <linux/irqnr.h>
+<<<<<<< HEAD
 #include <asm/cputime.h>
+=======
+#include <linux/cputime.h>
+>>>>>>> v3.18
 #include <linux/tick.h>
 
 #ifndef arch_irq_stat_cpu
@@ -47,10 +51,18 @@ static u64 get_idle_time(int cpu)
 {
 	u64 idle, idle_time = -1ULL;
 
+<<<<<<< HEAD
 	idle_time = get_cpu_idle_time_us(cpu, NULL);
 
 	if (idle_time == -1ULL)
 		/* !NO_HZ: so we can rely on cpustat.idle */
+=======
+	if (cpu_online(cpu))
+		idle_time = get_cpu_idle_time_us(cpu, NULL);
+
+	if (idle_time == -1ULL)
+		/* !NO_HZ or cpu offline so we can rely on cpustat.idle */
+>>>>>>> v3.18
 		idle = kcpustat_cpu(cpu).cpustat[CPUTIME_IDLE];
 	else
 		idle = usecs_to_cputime64(idle_time);
@@ -62,10 +74,18 @@ static u64 get_iowait_time(int cpu)
 {
 	u64 iowait, iowait_time = -1ULL;
 
+<<<<<<< HEAD
 	iowait_time = get_cpu_iowait_time_us(cpu, NULL);
 
 	if (iowait_time == -1ULL)
 		/* !NO_HZ: so we can rely on cpustat.iowait */
+=======
+	if (cpu_online(cpu))
+		iowait_time = get_cpu_iowait_time_us(cpu, NULL);
+
+	if (iowait_time == -1ULL)
+		/* !NO_HZ or cpu offline so we can rely on cpustat.iowait */
+>>>>>>> v3.18
 		iowait = kcpustat_cpu(cpu).cpustat[CPUTIME_IOWAIT];
 	else
 		iowait = usecs_to_cputime64(iowait_time);
@@ -128,7 +148,11 @@ static int show_stat(struct seq_file *p, void *v)
 	seq_put_decimal_ull(p, ' ', cputime64_to_clock_t(guest_nice));
 	seq_putc(p, '\n');
 
+<<<<<<< HEAD
 	for_each_present_cpu(i) {
+=======
+	for_each_online_cpu(i) {
+>>>>>>> v3.18
 		/* Copy values here to work around gcc-2.95.3, gcc-2.96 */
 		user = kcpustat_cpu(i).cpustat[CPUTIME_USER];
 		nice = kcpustat_cpu(i).cpustat[CPUTIME_NICE];
@@ -182,6 +206,7 @@ static int show_stat(struct seq_file *p, void *v)
 
 static int stat_open(struct inode *inode, struct file *file)
 {
+<<<<<<< HEAD
 	size_t size = 1024 + 128 * num_possible_cpus();
 	char *buf;
 	struct seq_file *m;
@@ -205,6 +230,13 @@ static int stat_open(struct inode *inode, struct file *file)
 	} else
 		kfree(buf);
 	return res;
+=======
+	size_t size = 1024 + 128 * num_online_cpus();
+
+	/* minimum size to display an interrupt count : 2 bytes */
+	size += 2 * nr_irqs;
+	return single_open_size(file, show_stat, NULL, size);
+>>>>>>> v3.18
 }
 
 static const struct file_operations proc_stat_operations = {
@@ -219,4 +251,8 @@ static int __init proc_stat_init(void)
 	proc_create("stat", 0, NULL, &proc_stat_operations);
 	return 0;
 }
+<<<<<<< HEAD
 module_init(proc_stat_init);
+=======
+fs_initcall(proc_stat_init);
+>>>>>>> v3.18

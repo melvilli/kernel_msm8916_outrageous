@@ -198,7 +198,10 @@
 			};
 
 			mdio@10d40 {
+<<<<<<< HEAD
 				device_type = "mdio";
+=======
+>>>>>>> v3.18
 				compatible = "fsl,pq2fads-mdio-bitbang",
 				             "fsl,mpc8280-mdio-bitbang",
 				             "fsl,cpm2-mdio-bitbang";
@@ -212,14 +215,20 @@
 					interrupt-parent = <&PIC>;
 					interrupts = <25 2>;
 					reg = <0x0>;
+<<<<<<< HEAD
 					device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 				};
 
 				PHY1: ethernet-phy@1 {
 					interrupt-parent = <&PIC>;
 					interrupts = <25 2>;
 					reg = <0x3>;
+<<<<<<< HEAD
 					device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 				};
 			};
 

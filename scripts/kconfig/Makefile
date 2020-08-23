@@ -33,11 +33,19 @@ oldconfig: $(obj)/conf
 	$< --$@ $(Kconfig)
 
 silentoldconfig: $(obj)/conf
+<<<<<<< HEAD
 	$(Q)mkdir -p include/generated
 	$< --$@ $(Kconfig)
 
 localyesconfig localmodconfig: $(obj)/streamline_config.pl $(obj)/conf
 	$(Q)mkdir -p include/generated
+=======
+	$(Q)mkdir -p include/config include/generated
+	$< --$@ $(Kconfig)
+
+localyesconfig localmodconfig: $(obj)/streamline_config.pl $(obj)/conf
+	$(Q)mkdir -p include/config include/generated
+>>>>>>> v3.18
 	$(Q)perl $< --$@ $(srctree) $(Kconfig) > .tmp.config
 	$(Q)if [ -f .config ]; then 					\
 			cmp -s .tmp.config .config ||			\
@@ -104,6 +112,26 @@ endif
 %_defconfig: $(obj)/conf
 	$(Q)$< --defconfig=arch/$(SRCARCH)/configs/$@ $(Kconfig)
 
+<<<<<<< HEAD
+=======
+configfiles=$(wildcard $(srctree)/kernel/configs/$(1).config $(srctree)/arch/$(SRCARCH)/configs/$(1).config)
+
+define mergeconfig
+$(if $(wildcard $(objtree)/.config),, $(error You need an existing .config for this target))
+$(if $(call configfiles,$(1)),, $(error No configuration exists for this target on this architecture))
+$(Q)$(CONFIG_SHELL) $(srctree)/scripts/kconfig/merge_config.sh -m -O $(objtree) $(objtree)/.config $(call configfiles,$(1))
+$(Q)yes "" | $(MAKE) -f $(srctree)/Makefile oldconfig
+endef
+
+PHONY += kvmconfig
+kvmconfig:
+	$(call mergeconfig,kvm_guest)
+
+PHONY += tinyconfig
+tinyconfig: allnoconfig
+	$(call mergeconfig,tiny)
+
+>>>>>>> v3.18
 # Help text used by make help
 help:
 	@echo  '  config	  - Update current config utilising a line-oriented program'
@@ -124,6 +152,11 @@ help:
 	@echo  '  randconfig	  - New config with random answer to all options'
 	@echo  '  listnewconfig   - List new options'
 	@echo  '  olddefconfig	  - Same as silentoldconfig but sets new symbols to their default value'
+<<<<<<< HEAD
+=======
+	@echo  '  kvmconfig	  - Enable additional options for guest kernel support'
+	@echo  '  tinyconfig	  - Configure the tiniest possible kernel'
+>>>>>>> v3.18
 
 # lxdialog stuff
 check-lxdialog  := $(srctree)/$(src)/lxdialog/check-lxdialog.sh
@@ -157,6 +190,7 @@ qconf-cxxobjs	:= qconf.o
 qconf-objs	:= zconf.tab.o
 gconf-objs	:= gconf.o zconf.tab.o
 
+<<<<<<< HEAD
 hostprogs-y := conf
 
 ifeq ($(MAKECMDGOALS),nconfig)
@@ -190,6 +224,12 @@ endif
 clean-files	:= qconf.moc .tmp_qtcheck .tmp_gtkcheck
 clean-files	+= zconf.tab.c zconf.lex.c zconf.hash.c gconf.glade.h
 clean-files     += mconf qconf gconf nconf
+=======
+hostprogs-y := conf nconf mconf kxgettext qconf gconf
+
+clean-files	:= qconf.moc .tmp_qtcheck .tmp_gtkcheck
+clean-files	+= zconf.tab.c zconf.lex.c zconf.hash.c gconf.glade.h
+>>>>>>> v3.18
 clean-files     += config.pot linux.pot
 
 # Check that we have the required ncurses stuff installed for lxdialog (menuconfig)
@@ -220,11 +260,20 @@ HOSTCFLAGS_gconf.o	= `pkg-config --cflags gtk+-2.0 gmodule-2.0 libglade-2.0` \
 HOSTLOADLIBES_mconf   = $(shell $(CONFIG_SHELL) $(check-lxdialog) -ldflags $(HOSTCC))
 
 HOSTLOADLIBES_nconf	= $(shell \
+<<<<<<< HEAD
 				pkg-config --libs menu panel ncurses 2>/dev/null \
 				|| echo "-lmenu -lpanel -lncurses"  )
 $(obj)/qconf.o: $(obj)/.tmp_qtcheck
 
 ifeq ($(qconf-target),1)
+=======
+				pkg-config --libs menuw panelw ncursesw 2>/dev/null \
+				|| pkg-config --libs menu panel ncurses 2>/dev/null \
+				|| echo "-lmenu -lpanel -lncurses"  )
+$(obj)/qconf.o: $(obj)/.tmp_qtcheck
+
+ifeq ($(MAKECMDGOALS),xconfig)
+>>>>>>> v3.18
 $(obj)/.tmp_qtcheck: $(src)/Makefile
 -include $(obj)/.tmp_qtcheck
 
@@ -281,7 +330,11 @@ endif
 
 $(obj)/gconf.o: $(obj)/.tmp_gtkcheck
 
+<<<<<<< HEAD
 ifeq ($(gconf-target),1)
+=======
+ifeq ($(MAKECMDGOALS),gconfig)
+>>>>>>> v3.18
 -include $(obj)/.tmp_gtkcheck
 
 # GTK needs some extra effort, too...
@@ -319,4 +372,7 @@ $(obj)/%.moc: $(src)/%.h $(obj)/.tmp_qtcheck
 $(obj)/gconf.glade.h: $(obj)/gconf.glade
 	$(Q)intltool-extract --type=gettext/glade --srcdir=$(srctree) \
 	$(obj)/gconf.glade
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18

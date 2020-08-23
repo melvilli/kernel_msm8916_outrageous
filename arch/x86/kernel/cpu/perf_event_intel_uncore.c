@@ -1,6 +1,7 @@
 #include "perf_event_intel_uncore.h"
 
 static struct intel_uncore_type *empty_uncore[] = { NULL, };
+<<<<<<< HEAD
 static struct intel_uncore_type **msr_uncores = empty_uncore;
 static struct intel_uncore_type **pci_uncores = empty_uncore;
 /* pci bus to socket mapping */
@@ -8,10 +9,23 @@ static int pcibus_to_physid[256] = { [0 ... 255] = -1, };
 
 static DEFINE_RAW_SPINLOCK(uncore_box_lock);
 
+=======
+struct intel_uncore_type **uncore_msr_uncores = empty_uncore;
+struct intel_uncore_type **uncore_pci_uncores = empty_uncore;
+
+static bool pcidrv_registered;
+struct pci_driver *uncore_pci_driver;
+/* pci bus to socket mapping */
+int uncore_pcibus_to_physid[256] = { [0 ... 255] = -1, };
+struct pci_dev *uncore_extra_pci_dev[UNCORE_SOCKET_MAX][UNCORE_EXTRA_PCI_DEV_MAX];
+
+static DEFINE_RAW_SPINLOCK(uncore_box_lock);
+>>>>>>> v3.18
 /* mask of cpus that collect uncore events */
 static cpumask_t uncore_cpu_mask;
 
 /* constraint for the fixed counter */
+<<<<<<< HEAD
 static struct event_constraint constraint_fixed =
 	EVENT_CONSTRAINT(~0ULL, 1 << UNCORE_PMC_IDX_FIXED, ~0ULL);
 static struct event_constraint constraint_empty =
@@ -2512,6 +2526,146 @@ static struct intel_uncore_type *nhmex_msr_uncores[] = {
 };
 /* end of Nehalem-EX uncore support */
 
+=======
+static struct event_constraint uncore_constraint_fixed =
+	EVENT_CONSTRAINT(~0ULL, 1 << UNCORE_PMC_IDX_FIXED, ~0ULL);
+struct event_constraint uncore_constraint_empty =
+	EVENT_CONSTRAINT(0, 0, 0);
+
+ssize_t uncore_event_show(struct kobject *kobj,
+			  struct kobj_attribute *attr, char *buf)
+{
+	struct uncore_event_desc *event =
+		container_of(attr, struct uncore_event_desc, attr);
+	return sprintf(buf, "%s", event->config);
+}
+
+struct intel_uncore_pmu *uncore_event_to_pmu(struct perf_event *event)
+{
+	return container_of(event->pmu, struct intel_uncore_pmu, pmu);
+}
+
+struct intel_uncore_box *uncore_pmu_to_box(struct intel_uncore_pmu *pmu, int cpu)
+{
+	struct intel_uncore_box *box;
+
+	box = *per_cpu_ptr(pmu->box, cpu);
+	if (box)
+		return box;
+
+	raw_spin_lock(&uncore_box_lock);
+	/* Recheck in lock to handle races. */
+	if (*per_cpu_ptr(pmu->box, cpu))
+		goto out;
+	list_for_each_entry(box, &pmu->box_list, list) {
+		if (box->phys_id == topology_physical_package_id(cpu)) {
+			atomic_inc(&box->refcnt);
+			*per_cpu_ptr(pmu->box, cpu) = box;
+			break;
+		}
+	}
+out:
+	raw_spin_unlock(&uncore_box_lock);
+
+	return *per_cpu_ptr(pmu->box, cpu);
+}
+
+struct intel_uncore_box *uncore_event_to_box(struct perf_event *event)
+{
+	/*
+	 * perf core schedules event on the basis of cpu, uncore events are
+	 * collected by one of the cpus inside a physical package.
+	 */
+	return uncore_pmu_to_box(uncore_event_to_pmu(event), smp_processor_id());
+}
+
+u64 uncore_msr_read_counter(struct intel_uncore_box *box, struct perf_event *event)
+{
+	u64 count;
+
+	rdmsrl(event->hw.event_base, count);
+
+	return count;
+}
+
+/*
+ * generic get constraint function for shared match/mask registers.
+ */
+struct event_constraint *
+uncore_get_constraint(struct intel_uncore_box *box, struct perf_event *event)
+{
+	struct intel_uncore_extra_reg *er;
+	struct hw_perf_event_extra *reg1 = &event->hw.extra_reg;
+	struct hw_perf_event_extra *reg2 = &event->hw.branch_reg;
+	unsigned long flags;
+	bool ok = false;
+
+	/*
+	 * reg->alloc can be set due to existing state, so for fake box we
+	 * need to ignore this, otherwise we might fail to allocate proper
+	 * fake state for this extra reg constraint.
+	 */
+	if (reg1->idx == EXTRA_REG_NONE ||
+	    (!uncore_box_is_fake(box) && reg1->alloc))
+		return NULL;
+
+	er = &box->shared_regs[reg1->idx];
+	raw_spin_lock_irqsave(&er->lock, flags);
+	if (!atomic_read(&er->ref) ||
+	    (er->config1 == reg1->config && er->config2 == reg2->config)) {
+		atomic_inc(&er->ref);
+		er->config1 = reg1->config;
+		er->config2 = reg2->config;
+		ok = true;
+	}
+	raw_spin_unlock_irqrestore(&er->lock, flags);
+
+	if (ok) {
+		if (!uncore_box_is_fake(box))
+			reg1->alloc = 1;
+		return NULL;
+	}
+
+	return &uncore_constraint_empty;
+}
+
+void uncore_put_constraint(struct intel_uncore_box *box, struct perf_event *event)
+{
+	struct intel_uncore_extra_reg *er;
+	struct hw_perf_event_extra *reg1 = &event->hw.extra_reg;
+
+	/*
+	 * Only put constraint if extra reg was actually allocated. Also
+	 * takes care of event which do not use an extra shared reg.
+	 *
+	 * Also, if this is a fake box we shouldn't touch any event state
+	 * (reg->alloc) and we don't care about leaving inconsistent box
+	 * state either since it will be thrown out.
+	 */
+	if (uncore_box_is_fake(box) || !reg1->alloc)
+		return;
+
+	er = &box->shared_regs[reg1->idx];
+	atomic_dec(&er->ref);
+	reg1->alloc = 0;
+}
+
+u64 uncore_shared_reg_config(struct intel_uncore_box *box, int idx)
+{
+	struct intel_uncore_extra_reg *er;
+	unsigned long flags;
+	u64 config;
+
+	er = &box->shared_regs[idx];
+
+	raw_spin_lock_irqsave(&er->lock, flags);
+	config = er->config;
+	raw_spin_unlock_irqrestore(&er->lock, flags);
+
+	return config;
+}
+
+>>>>>>> v3.18
 static void uncore_assign_hw_event(struct intel_uncore_box *box, struct perf_event *event, int idx)
 {
 	struct hw_perf_event *hwc = &event->hw;
@@ -2529,7 +2683,11 @@ static void uncore_assign_hw_event(struct intel_uncore_box *box, struct perf_eve
 	hwc->event_base  = uncore_perf_ctr(box, hwc->idx);
 }
 
+<<<<<<< HEAD
 static void uncore_perf_event_update(struct intel_uncore_box *box, struct perf_event *event)
+=======
+void uncore_perf_event_update(struct intel_uncore_box *box, struct perf_event *event)
+>>>>>>> v3.18
 {
 	u64 prev_count, new_count, delta;
 	int shift;
@@ -2560,6 +2718,10 @@ again:
 static enum hrtimer_restart uncore_pmu_hrtimer(struct hrtimer *hrtimer)
 {
 	struct intel_uncore_box *box;
+<<<<<<< HEAD
+=======
+	struct perf_event *event;
+>>>>>>> v3.18
 	unsigned long flags;
 	int bit;
 
@@ -2572,11 +2734,23 @@ static enum hrtimer_restart uncore_pmu_hrtimer(struct hrtimer *hrtimer)
 	 */
 	local_irq_save(flags);
 
+<<<<<<< HEAD
+=======
+	/*
+	 * handle boxes with an active event list as opposed to active
+	 * counters
+	 */
+	list_for_each_entry(event, &box->active_list, active_entry) {
+		uncore_perf_event_update(box, event);
+	}
+
+>>>>>>> v3.18
 	for_each_set_bit(bit, box->active_mask, UNCORE_PMC_IDX_MAX)
 		uncore_perf_event_update(box, box->events[bit]);
 
 	local_irq_restore(flags);
 
+<<<<<<< HEAD
 	hrtimer_forward_now(hrtimer, ns_to_ktime(UNCORE_PMU_HRTIMER_INTERVAL));
 	return HRTIMER_RESTART;
 }
@@ -2589,6 +2763,20 @@ static void uncore_pmu_start_hrtimer(struct intel_uncore_box *box)
 }
 
 static void uncore_pmu_cancel_hrtimer(struct intel_uncore_box *box)
+=======
+	hrtimer_forward_now(hrtimer, ns_to_ktime(box->hrtimer_duration));
+	return HRTIMER_RESTART;
+}
+
+void uncore_pmu_start_hrtimer(struct intel_uncore_box *box)
+{
+	__hrtimer_start_range_ns(&box->hrtimer,
+			ns_to_ktime(box->hrtimer_duration), 0,
+			HRTIMER_MODE_REL_PINNED, 0);
+}
+
+void uncore_pmu_cancel_hrtimer(struct intel_uncore_box *box)
+>>>>>>> v3.18
 {
 	hrtimer_cancel(&box->hrtimer);
 }
@@ -2599,14 +2787,22 @@ static void uncore_pmu_init_hrtimer(struct intel_uncore_box *box)
 	box->hrtimer.function = uncore_pmu_hrtimer;
 }
 
+<<<<<<< HEAD
 struct intel_uncore_box *uncore_alloc_box(struct intel_uncore_type *type, int cpu)
+=======
+static struct intel_uncore_box *uncore_alloc_box(struct intel_uncore_type *type, int node)
+>>>>>>> v3.18
 {
 	struct intel_uncore_box *box;
 	int i, size;
 
 	size = sizeof(*box) + type->num_shared_regs * sizeof(struct intel_uncore_extra_reg);
 
+<<<<<<< HEAD
 	box = kmalloc_node(size, GFP_KERNEL | __GFP_ZERO, cpu_to_node(cpu));
+=======
+	box = kzalloc_node(size, GFP_KERNEL, node);
+>>>>>>> v3.18
 	if (!box)
 		return NULL;
 
@@ -2618,6 +2814,7 @@ struct intel_uncore_box *uncore_alloc_box(struct intel_uncore_type *type, int cp
 	box->cpu = -1;
 	box->phys_id = -1;
 
+<<<<<<< HEAD
 	return box;
 }
 
@@ -2666,6 +2863,14 @@ static int uncore_pmu_event_init(struct perf_event *event);
 static bool is_uncore_event(struct perf_event *event)
 {
 	return event->pmu->event_init == uncore_pmu_event_init;
+=======
+	/* set default hrtimer timeout */
+	box->hrtimer_duration = UNCORE_PMU_HRTIMER_INTERVAL;
+
+	INIT_LIST_HEAD(&box->active_list);
+
+	return box;
+>>>>>>> v3.18
 }
 
 static int
@@ -2682,18 +2887,27 @@ uncore_collect_events(struct intel_uncore_box *box, struct perf_event *leader, b
 		return -EINVAL;
 
 	n = box->n_events;
+<<<<<<< HEAD
 
 	if (is_uncore_event(leader)) {
 		box->event_list[n] = leader;
 		n++;
 	}
 
+=======
+	box->event_list[n] = leader;
+	n++;
+>>>>>>> v3.18
 	if (!dogrp)
 		return n;
 
 	list_for_each_entry(event, &leader->sibling_list, group_entry) {
+<<<<<<< HEAD
 		if (!is_uncore_event(event) ||
 		    event->state <= PERF_EVENT_STATE_OFF)
+=======
+		if (event->state <= PERF_EVENT_STATE_OFF)
+>>>>>>> v3.18
 			continue;
 
 		if (n >= max_count)
@@ -2717,8 +2931,13 @@ uncore_get_event_constraint(struct intel_uncore_box *box, struct perf_event *eve
 			return c;
 	}
 
+<<<<<<< HEAD
 	if (event->hw.config == ~0ULL)
 		return &constraint_fixed;
+=======
+	if (event->attr.config == UNCORE_FIXED_EVENT)
+		return &uncore_constraint_fixed;
+>>>>>>> v3.18
 
 	if (type->constraints) {
 		for_each_event_constraint(c, type->constraints) {
@@ -2739,15 +2958,25 @@ static void uncore_put_event_constraint(struct intel_uncore_box *box, struct per
 static int uncore_assign_events(struct intel_uncore_box *box, int assign[], int n)
 {
 	unsigned long used_mask[BITS_TO_LONGS(UNCORE_PMC_IDX_MAX)];
+<<<<<<< HEAD
 	struct event_constraint *c, *constraints[UNCORE_PMC_IDX_MAX];
+=======
+	struct event_constraint *c;
+>>>>>>> v3.18
 	int i, wmin, wmax, ret = 0;
 	struct hw_perf_event *hwc;
 
 	bitmap_zero(used_mask, UNCORE_PMC_IDX_MAX);
 
 	for (i = 0, wmin = UNCORE_PMC_IDX_MAX, wmax = 0; i < n; i++) {
+<<<<<<< HEAD
 		c = uncore_get_event_constraint(box, box->event_list[i]);
 		constraints[i] = c;
+=======
+		hwc = &box->event_list[i]->hw;
+		c = uncore_get_event_constraint(box, box->event_list[i]);
+		hwc->constraint = c;
+>>>>>>> v3.18
 		wmin = min(wmin, c->weight);
 		wmax = max(wmax, c->weight);
 	}
@@ -2755,7 +2984,11 @@ static int uncore_assign_events(struct intel_uncore_box *box, int assign[], int 
 	/* fastpath, try to reuse previous register */
 	for (i = 0; i < n; i++) {
 		hwc = &box->event_list[i]->hw;
+<<<<<<< HEAD
 		c = constraints[i];
+=======
+		c = hwc->constraint;
+>>>>>>> v3.18
 
 		/* never assigned */
 		if (hwc->idx == -1)
@@ -2775,7 +3008,12 @@ static int uncore_assign_events(struct intel_uncore_box *box, int assign[], int 
 	}
 	/* slow path */
 	if (i != n)
+<<<<<<< HEAD
 		ret = perf_assign_events(constraints, n, wmin, wmax, assign);
+=======
+		ret = perf_assign_events(box->event_list, n,
+					 wmin, wmax, assign);
+>>>>>>> v3.18
 
 	if (!assign || ret) {
 		for (i = 0; i < n; i++)
@@ -2921,7 +3159,11 @@ static void uncore_pmu_event_del(struct perf_event *event, int flags)
 	event->hw.last_tag = ~0ULL;
 }
 
+<<<<<<< HEAD
 static void uncore_pmu_event_read(struct perf_event *event)
+=======
+void uncore_pmu_event_read(struct perf_event *event)
+>>>>>>> v3.18
 {
 	struct intel_uncore_box *box = uncore_event_to_box(event);
 	uncore_perf_event_update(box, event);
@@ -2938,7 +3180,11 @@ static int uncore_validate_group(struct intel_uncore_pmu *pmu,
 	struct intel_uncore_box *fake_box;
 	int ret = -EINVAL, n;
 
+<<<<<<< HEAD
 	fake_box = uncore_alloc_box(pmu->type, smp_processor_id());
+=======
+	fake_box = uncore_alloc_box(pmu->type, NUMA_NO_NODE);
+>>>>>>> v3.18
 	if (!fake_box)
 		return -ENOMEM;
 
@@ -3019,7 +3265,13 @@ static int uncore_pmu_event_init(struct perf_event *event)
 		 */
 		if (pmu->type->single_fixed && pmu->pmu_idx > 0)
 			return -EINVAL;
+<<<<<<< HEAD
 		hwc->config = ~0ULL;
+=======
+
+		/* fixed counters have event field hardcoded to zero */
+		hwc->config = 0ULL;
+>>>>>>> v3.18
 	} else {
 		hwc->config = event->attr.config & pmu->type->event_mask;
 		if (pmu->type->ops->hw_config) {
@@ -3058,6 +3310,7 @@ static struct attribute_group uncore_pmu_attr_group = {
 	.attrs = uncore_pmu_attrs,
 };
 
+<<<<<<< HEAD
 static int __init uncore_pmu_register(struct intel_uncore_pmu *pmu)
 {
 	int ret;
@@ -3072,6 +3325,27 @@ static int __init uncore_pmu_register(struct intel_uncore_pmu *pmu)
 		.stop		= uncore_pmu_event_stop,
 		.read		= uncore_pmu_event_read,
 	};
+=======
+static int uncore_pmu_register(struct intel_uncore_pmu *pmu)
+{
+	int ret;
+
+	if (!pmu->type->pmu) {
+		pmu->pmu = (struct pmu) {
+			.attr_groups	= pmu->type->attr_groups,
+			.task_ctx_nr	= perf_invalid_context,
+			.event_init	= uncore_pmu_event_init,
+			.add		= uncore_pmu_event_add,
+			.del		= uncore_pmu_event_del,
+			.start		= uncore_pmu_event_start,
+			.stop		= uncore_pmu_event_stop,
+			.read		= uncore_pmu_event_read,
+		};
+	} else {
+		pmu->pmu = *pmu->type->pmu;
+		pmu->pmu.attr_groups = pmu->type->attr_groups;
+	}
+>>>>>>> v3.18
 
 	if (pmu->type->num_boxes == 1) {
 		if (strlen(pmu->type->name) > 0)
@@ -3117,6 +3391,11 @@ static int __init uncore_type_init(struct intel_uncore_type *type)
 	if (!pmus)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+=======
+	type->pmus = pmus;
+
+>>>>>>> v3.18
 	type->unconstrainted = (struct event_constraint)
 		__EVENT_CONSTRAINT(0, (1ULL << type->num_counters) - 1,
 				0, type->num_counters, 0, 0);
@@ -3152,7 +3431,10 @@ static int __init uncore_type_init(struct intel_uncore_type *type)
 	}
 
 	type->pmu_group = &uncore_pmu_attr_group;
+<<<<<<< HEAD
 	type->pmus = pmus;
+=======
+>>>>>>> v3.18
 	return 0;
 fail:
 	uncore_type_exit(type);
@@ -3175,6 +3457,7 @@ fail:
 	return ret;
 }
 
+<<<<<<< HEAD
 static struct pci_driver *uncore_pci_driver;
 static bool pcidrv_registered;
 
@@ -3192,6 +3475,32 @@ static int uncore_pci_add(struct intel_uncore_type *type, struct pci_dev *pdev)
 		return -ENODEV;
 
 	box = uncore_alloc_box(type, 0);
+=======
+/*
+ * add a pci uncore device
+ */
+static int uncore_pci_probe(struct pci_dev *pdev, const struct pci_device_id *id)
+{
+	struct intel_uncore_pmu *pmu;
+	struct intel_uncore_box *box;
+	struct intel_uncore_type *type;
+	int phys_id;
+	bool first_box = false;
+
+	phys_id = uncore_pcibus_to_physid[pdev->bus->number];
+	if (phys_id < 0)
+		return -ENODEV;
+
+	if (UNCORE_PCI_DEV_TYPE(id->driver_data) == UNCORE_EXTRA_PCI_DEV) {
+		int idx = UNCORE_PCI_DEV_IDX(id->driver_data);
+		uncore_extra_pci_dev[phys_id][idx] = pdev;
+		pci_set_drvdata(pdev, NULL);
+		return 0;
+	}
+
+	type = uncore_pci_uncores[UNCORE_PCI_DEV_TYPE(id->driver_data)];
+	box = uncore_alloc_box(type, NUMA_NO_NODE);
+>>>>>>> v3.18
 	if (!box)
 		return -ENOMEM;
 
@@ -3199,6 +3508,7 @@ static int uncore_pci_add(struct intel_uncore_type *type, struct pci_dev *pdev)
 	 * for performance monitoring unit with multiple boxes,
 	 * each box has a different function id.
 	 */
+<<<<<<< HEAD
 	for (i = 0; i < type->num_boxes; i++) {
 		pmu = &type->pmus[i];
 		if (pmu->func_id == pdev->devfn)
@@ -3214,6 +3524,13 @@ static int uncore_pci_add(struct intel_uncore_type *type, struct pci_dev *pdev)
 		kfree(box);
 		return -EINVAL;
 	}
+=======
+	pmu = &type->pmus[UNCORE_PCI_DEV_IDX(id->driver_data)];
+	if (pmu->func_id < 0)
+		pmu->func_id = pdev->devfn;
+	else
+		WARN_ON_ONCE(pmu->func_id != pdev->devfn);
+>>>>>>> v3.18
 
 	box->phys_id = phys_id;
 	box->pci_dev = pdev;
@@ -3222,18 +3539,48 @@ static int uncore_pci_add(struct intel_uncore_type *type, struct pci_dev *pdev)
 	pci_set_drvdata(pdev, box);
 
 	raw_spin_lock(&uncore_box_lock);
+<<<<<<< HEAD
 	list_add_tail(&box->list, &pmu->box_list);
 	raw_spin_unlock(&uncore_box_lock);
 
+=======
+	if (list_empty(&pmu->box_list))
+		first_box = true;
+	list_add_tail(&box->list, &pmu->box_list);
+	raw_spin_unlock(&uncore_box_lock);
+
+	if (first_box)
+		uncore_pmu_register(pmu);
+>>>>>>> v3.18
 	return 0;
 }
 
 static void uncore_pci_remove(struct pci_dev *pdev)
 {
 	struct intel_uncore_box *box = pci_get_drvdata(pdev);
+<<<<<<< HEAD
 	struct intel_uncore_pmu *pmu = box->pmu;
 	int cpu, phys_id = pcibus_to_physid[pdev->bus->number];
 
+=======
+	struct intel_uncore_pmu *pmu;
+	int i, cpu, phys_id = uncore_pcibus_to_physid[pdev->bus->number];
+	bool last_box = false;
+
+	box = pci_get_drvdata(pdev);
+	if (!box) {
+		for (i = 0; i < UNCORE_EXTRA_PCI_DEV_MAX; i++) {
+			if (uncore_extra_pci_dev[phys_id][i] == pdev) {
+				uncore_extra_pci_dev[phys_id][i] = NULL;
+				break;
+			}
+		}
+		WARN_ON_ONCE(i >= UNCORE_EXTRA_PCI_DEV_MAX);
+		return;
+	}
+
+	pmu = box->pmu;
+>>>>>>> v3.18
 	if (WARN_ON_ONCE(phys_id != box->phys_id))
 		return;
 
@@ -3241,6 +3588,11 @@ static void uncore_pci_remove(struct pci_dev *pdev)
 
 	raw_spin_lock(&uncore_box_lock);
 	list_del(&box->list);
+<<<<<<< HEAD
+=======
+	if (list_empty(&pmu->box_list))
+		last_box = true;
+>>>>>>> v3.18
 	raw_spin_unlock(&uncore_box_lock);
 
 	for_each_possible_cpu(cpu) {
@@ -3252,12 +3604,18 @@ static void uncore_pci_remove(struct pci_dev *pdev)
 
 	WARN_ON_ONCE(atomic_read(&box->refcnt) != 1);
 	kfree(box);
+<<<<<<< HEAD
 }
 
 static int uncore_pci_probe(struct pci_dev *pdev,
 			    const struct pci_device_id *id)
 {
 	return uncore_pci_add(pci_uncores[id->driver_data], pdev);
+=======
+
+	if (last_box)
+		perf_pmu_unregister(&pmu->pmu);
+>>>>>>> v3.18
 }
 
 static int __init uncore_pci_init(void)
@@ -3266,6 +3624,7 @@ static int __init uncore_pci_init(void)
 
 	switch (boot_cpu_data.x86_model) {
 	case 45: /* Sandy Bridge-EP */
+<<<<<<< HEAD
 		ret = snbep_pci2phy_map_init(0x3ce0);
 		if (ret)
 			return ret;
@@ -3278,12 +3637,38 @@ static int __init uncore_pci_init(void)
 			return ret;
 		pci_uncores = ivt_pci_uncores;
 		uncore_pci_driver = &ivt_uncore_pci_driver;
+=======
+		ret = snbep_uncore_pci_init();
+		break;
+	case 62: /* Ivy Bridge-EP */
+		ret = ivbep_uncore_pci_init();
+		break;
+	case 63: /* Haswell-EP */
+		ret = hswep_uncore_pci_init();
+		break;
+	case 42: /* Sandy Bridge */
+		ret = snb_uncore_pci_init();
+		break;
+	case 58: /* Ivy Bridge */
+		ret = ivb_uncore_pci_init();
+		break;
+	case 60: /* Haswell */
+	case 69: /* Haswell Celeron */
+		ret = hsw_uncore_pci_init();
+>>>>>>> v3.18
 		break;
 	default:
 		return 0;
 	}
 
+<<<<<<< HEAD
 	ret = uncore_types_init(pci_uncores);
+=======
+	if (ret)
+		return ret;
+
+	ret = uncore_types_init(uncore_pci_uncores);
+>>>>>>> v3.18
 	if (ret)
 		return ret;
 
@@ -3294,7 +3679,11 @@ static int __init uncore_pci_init(void)
 	if (ret == 0)
 		pcidrv_registered = true;
 	else
+<<<<<<< HEAD
 		uncore_types_exit(pci_uncores);
+=======
+		uncore_types_exit(uncore_pci_uncores);
+>>>>>>> v3.18
 
 	return ret;
 }
@@ -3304,14 +3693,22 @@ static void __init uncore_pci_exit(void)
 	if (pcidrv_registered) {
 		pcidrv_registered = false;
 		pci_unregister_driver(uncore_pci_driver);
+<<<<<<< HEAD
 		uncore_types_exit(pci_uncores);
+=======
+		uncore_types_exit(uncore_pci_uncores);
+>>>>>>> v3.18
 	}
 }
 
 /* CPU hot plug/unplug are serialized by cpu_add_remove_lock mutex */
 static LIST_HEAD(boxes_to_free);
 
+<<<<<<< HEAD
 static void __cpuinit uncore_kfree_boxes(void)
+=======
+static void uncore_kfree_boxes(void)
+>>>>>>> v3.18
 {
 	struct intel_uncore_box *box;
 
@@ -3323,15 +3720,24 @@ static void __cpuinit uncore_kfree_boxes(void)
 	}
 }
 
+<<<<<<< HEAD
 static void __cpuinit uncore_cpu_dying(int cpu)
+=======
+static void uncore_cpu_dying(int cpu)
+>>>>>>> v3.18
 {
 	struct intel_uncore_type *type;
 	struct intel_uncore_pmu *pmu;
 	struct intel_uncore_box *box;
 	int i, j;
 
+<<<<<<< HEAD
 	for (i = 0; msr_uncores[i]; i++) {
 		type = msr_uncores[i];
+=======
+	for (i = 0; uncore_msr_uncores[i]; i++) {
+		type = uncore_msr_uncores[i];
+>>>>>>> v3.18
 		for (j = 0; j < type->num_boxes; j++) {
 			pmu = &type->pmus[j];
 			box = *per_cpu_ptr(pmu->box, cpu);
@@ -3342,7 +3748,11 @@ static void __cpuinit uncore_cpu_dying(int cpu)
 	}
 }
 
+<<<<<<< HEAD
 static int __cpuinit uncore_cpu_starting(int cpu)
+=======
+static int uncore_cpu_starting(int cpu)
+>>>>>>> v3.18
 {
 	struct intel_uncore_type *type;
 	struct intel_uncore_pmu *pmu;
@@ -3351,8 +3761,13 @@ static int __cpuinit uncore_cpu_starting(int cpu)
 
 	phys_id = topology_physical_package_id(cpu);
 
+<<<<<<< HEAD
 	for (i = 0; msr_uncores[i]; i++) {
 		type = msr_uncores[i];
+=======
+	for (i = 0; uncore_msr_uncores[i]; i++) {
+		type = uncore_msr_uncores[i];
+>>>>>>> v3.18
 		for (j = 0; j < type->num_boxes; j++) {
 			pmu = &type->pmus[j];
 			box = *per_cpu_ptr(pmu->box, cpu);
@@ -3385,21 +3800,34 @@ static int __cpuinit uncore_cpu_starting(int cpu)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int __cpuinit uncore_cpu_prepare(int cpu, int phys_id)
+=======
+static int uncore_cpu_prepare(int cpu, int phys_id)
+>>>>>>> v3.18
 {
 	struct intel_uncore_type *type;
 	struct intel_uncore_pmu *pmu;
 	struct intel_uncore_box *box;
 	int i, j;
 
+<<<<<<< HEAD
 	for (i = 0; msr_uncores[i]; i++) {
 		type = msr_uncores[i];
+=======
+	for (i = 0; uncore_msr_uncores[i]; i++) {
+		type = uncore_msr_uncores[i];
+>>>>>>> v3.18
 		for (j = 0; j < type->num_boxes; j++) {
 			pmu = &type->pmus[j];
 			if (pmu->func_id < 0)
 				pmu->func_id = j;
 
+<<<<<<< HEAD
 			box = uncore_alloc_box(type, cpu);
+=======
+			box = uncore_alloc_box(type, cpu_to_node(cpu));
+>>>>>>> v3.18
 			if (!box)
 				return -ENOMEM;
 
@@ -3411,7 +3839,11 @@ static int __cpuinit uncore_cpu_prepare(int cpu, int phys_id)
 	return 0;
 }
 
+<<<<<<< HEAD
 static void __cpuinit
+=======
+static void
+>>>>>>> v3.18
 uncore_change_context(struct intel_uncore_type **uncores, int old_cpu, int new_cpu)
 {
 	struct intel_uncore_type *type;
@@ -3449,7 +3881,11 @@ uncore_change_context(struct intel_uncore_type **uncores, int old_cpu, int new_c
 	}
 }
 
+<<<<<<< HEAD
 static void __cpuinit uncore_event_exit_cpu(int cpu)
+=======
+static void uncore_event_exit_cpu(int cpu)
+>>>>>>> v3.18
 {
 	int i, phys_id, target;
 
@@ -3473,11 +3909,19 @@ static void __cpuinit uncore_event_exit_cpu(int cpu)
 	if (target >= 0)
 		cpumask_set_cpu(target, &uncore_cpu_mask);
 
+<<<<<<< HEAD
 	uncore_change_context(msr_uncores, cpu, target);
 	uncore_change_context(pci_uncores, cpu, target);
 }
 
 static void __cpuinit uncore_event_init_cpu(int cpu)
+=======
+	uncore_change_context(uncore_msr_uncores, cpu, target);
+	uncore_change_context(uncore_pci_uncores, cpu, target);
+}
+
+static void uncore_event_init_cpu(int cpu)
+>>>>>>> v3.18
 {
 	int i, phys_id;
 
@@ -3489,12 +3933,21 @@ static void __cpuinit uncore_event_init_cpu(int cpu)
 
 	cpumask_set_cpu(cpu, &uncore_cpu_mask);
 
+<<<<<<< HEAD
 	uncore_change_context(msr_uncores, -1, cpu);
 	uncore_change_context(pci_uncores, -1, cpu);
 }
 
 static int
  __cpuinit uncore_cpu_notifier(struct notifier_block *self, unsigned long action, void *hcpu)
+=======
+	uncore_change_context(uncore_msr_uncores, -1, cpu);
+	uncore_change_context(uncore_pci_uncores, -1, cpu);
+}
+
+static int uncore_cpu_notifier(struct notifier_block *self,
+			       unsigned long action, void *hcpu)
+>>>>>>> v3.18
 {
 	unsigned int cpu = (long)hcpu;
 
@@ -3534,7 +3987,11 @@ static int
 	return NOTIFY_OK;
 }
 
+<<<<<<< HEAD
 static struct notifier_block uncore_cpu_nb __cpuinitdata = {
+=======
+static struct notifier_block uncore_cpu_nb = {
+>>>>>>> v3.18
 	.notifier_call	= uncore_cpu_notifier,
 	/*
 	 * to migrate uncore events, our notifier should be executed
@@ -3550,14 +4007,20 @@ static void __init uncore_cpu_setup(void *dummy)
 
 static int __init uncore_cpu_init(void)
 {
+<<<<<<< HEAD
 	int ret, cpu, max_cores;
 
 	max_cores = boot_cpu_data.x86_max_cores;
+=======
+	int ret;
+
+>>>>>>> v3.18
 	switch (boot_cpu_data.x86_model) {
 	case 26: /* Nehalem */
 	case 30:
 	case 37: /* Westmere */
 	case 44:
+<<<<<<< HEAD
 		msr_uncores = nhm_msr_uncores;
 		break;
 	case 42: /* Sandy Bridge */
@@ -3586,15 +4049,74 @@ static int __init uncore_cpu_init(void)
 		msr_uncores = ivt_msr_uncores;
 		break;
 
+=======
+		nhm_uncore_cpu_init();
+		break;
+	case 42: /* Sandy Bridge */
+	case 58: /* Ivy Bridge */
+		snb_uncore_cpu_init();
+		break;
+	case 45: /* Sandy Bridge-EP */
+		snbep_uncore_cpu_init();
+		break;
+	case 46: /* Nehalem-EX */
+	case 47: /* Westmere-EX aka. Xeon E7 */
+		nhmex_uncore_cpu_init();
+		break;
+	case 62: /* Ivy Bridge-EP */
+		ivbep_uncore_cpu_init();
+		break;
+	case 63: /* Haswell-EP */
+		hswep_uncore_cpu_init();
+		break;
+>>>>>>> v3.18
 	default:
 		return 0;
 	}
 
+<<<<<<< HEAD
 	ret = uncore_types_init(msr_uncores);
 	if (ret)
 		return ret;
 
 	get_online_cpus();
+=======
+	ret = uncore_types_init(uncore_msr_uncores);
+	if (ret)
+		return ret;
+
+	return 0;
+}
+
+static int __init uncore_pmus_register(void)
+{
+	struct intel_uncore_pmu *pmu;
+	struct intel_uncore_type *type;
+	int i, j;
+
+	for (i = 0; uncore_msr_uncores[i]; i++) {
+		type = uncore_msr_uncores[i];
+		for (j = 0; j < type->num_boxes; j++) {
+			pmu = &type->pmus[j];
+			uncore_pmu_register(pmu);
+		}
+	}
+
+	return 0;
+}
+
+static void __init uncore_cpumask_init(void)
+{
+	int cpu;
+
+	/*
+	 * ony invoke once from msr or pci init code
+	 */
+	if (!cpumask_empty(&uncore_cpu_mask))
+		return;
+
+	cpu_notifier_register_begin();
+>>>>>>> v3.18
 
 	for_each_online_cpu(cpu) {
 		int i, phys_id = topology_physical_package_id(cpu);
@@ -3613,6 +4135,7 @@ static int __init uncore_cpu_init(void)
 	}
 	on_each_cpu(uncore_cpu_setup, NULL, 1);
 
+<<<<<<< HEAD
 	register_cpu_notifier(&uncore_cpu_nb);
 
 	put_online_cpus();
@@ -3644,6 +4167,13 @@ static int __init uncore_pmus_register(void)
 
 	return 0;
 }
+=======
+	__register_cpu_notifier(&uncore_cpu_nb);
+
+	cpu_notifier_register_done();
+}
+
+>>>>>>> v3.18
 
 static int __init intel_uncore_init(void)
 {
@@ -3663,6 +4193,10 @@ static int __init intel_uncore_init(void)
 		uncore_pci_exit();
 		goto fail;
 	}
+<<<<<<< HEAD
+=======
+	uncore_cpumask_init();
+>>>>>>> v3.18
 
 	uncore_pmus_register();
 	return 0;

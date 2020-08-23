@@ -154,6 +154,10 @@ struct hdpvr_video_info {
 	u16	width;
 	u16	height;
 	u8	fps;
+<<<<<<< HEAD
+=======
+	bool	valid;
+>>>>>>> v3.18
 };
 
 enum {
@@ -303,7 +307,11 @@ int hdpvr_set_audio(struct hdpvr_device *dev, u8 input,
 int hdpvr_config_call(struct hdpvr_device *dev, uint value,
 		      unsigned char valbuf);
 
+<<<<<<< HEAD
 struct hdpvr_video_info *get_video_info(struct hdpvr_device *dev);
+=======
+int get_video_info(struct hdpvr_device *dev, struct hdpvr_video_info *vid_info);
+>>>>>>> v3.18
 
 /* :0 s b8 81 1800 0003 0003 3 < */
 /* :0 0 3 = 0301ff */

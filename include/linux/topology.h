@@ -58,7 +58,12 @@ int arch_update_cpu_topology(void);
 /*
  * If the distance between nodes in a system is larger than RECLAIM_DISTANCE
  * (in whatever arch specific measurement units returned by node_distance())
+<<<<<<< HEAD
  * then switch on zone reclaim on boot.
+=======
+ * and zone_reclaim_mode is enabled then the VM will only call zone_reclaim()
+ * on nodes within this distance.
+>>>>>>> v3.18
  */
 #define RECLAIM_DISTANCE 30
 #endif
@@ -66,6 +71,7 @@ int arch_update_cpu_topology(void);
 #define PENALTY_FOR_NODE_WITH_CPUS	(1)
 #endif
 
+<<<<<<< HEAD
 /*
  * Below are the 3 major initializers used in building sched_domains:
  * SD_SIBLING_INIT, for SMT domains
@@ -175,6 +181,8 @@ int arch_update_cpu_topology(void);
 #endif
 #endif /* CONFIG_SCHED_BOOK */
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_USE_PERCPU_NUMA_NODE_ID
 DECLARE_PER_CPU(int, numa_node);
 
@@ -182,7 +190,11 @@ DECLARE_PER_CPU(int, numa_node);
 /* Returns the number of the current Node. */
 static inline int numa_node_id(void)
 {
+<<<<<<< HEAD
 	return __this_cpu_read(numa_node);
+=======
+	return raw_cpu_read(numa_node);
+>>>>>>> v3.18
 }
 #endif
 
@@ -227,11 +239,26 @@ static inline int numa_node_id(void)
  * Use the accessor functions set_numa_mem(), numa_mem_id() and cpu_to_mem().
  */
 DECLARE_PER_CPU(int, _numa_mem_);
+<<<<<<< HEAD
+=======
+extern int _node_numa_mem_[MAX_NUMNODES];
+>>>>>>> v3.18
 
 #ifndef set_numa_mem
 static inline void set_numa_mem(int node)
 {
 	this_cpu_write(_numa_mem_, node);
+<<<<<<< HEAD
+=======
+	_node_numa_mem_[numa_node_id()] = node;
+}
+#endif
+
+#ifndef node_to_mem_node
+static inline int node_to_mem_node(int node)
+{
+	return _node_numa_mem_[node];
+>>>>>>> v3.18
 }
 #endif
 
@@ -239,7 +266,11 @@ static inline void set_numa_mem(int node)
 /* Returns the number of the nearest Node with memory */
 static inline int numa_mem_id(void)
 {
+<<<<<<< HEAD
 	return __this_cpu_read(_numa_mem_);
+=======
+	return raw_cpu_read(_numa_mem_);
+>>>>>>> v3.18
 }
 #endif
 
@@ -254,6 +285,10 @@ static inline int cpu_to_mem(int cpu)
 static inline void set_cpu_numa_mem(int cpu, int node)
 {
 	per_cpu(_numa_mem_, cpu) = node;
+<<<<<<< HEAD
+=======
+	_node_numa_mem_[cpu_to_node(cpu)] = node;
+>>>>>>> v3.18
 }
 #endif
 
@@ -267,6 +302,16 @@ static inline int numa_mem_id(void)
 }
 #endif
 
+<<<<<<< HEAD
+=======
+#ifndef node_to_mem_node
+static inline int node_to_mem_node(int node)
+{
+	return node;
+}
+#endif
+
+>>>>>>> v3.18
 #ifndef cpu_to_mem
 static inline int cpu_to_mem(int cpu)
 {
@@ -289,4 +334,20 @@ static inline int cpu_to_mem(int cpu)
 #define topology_core_cpumask(cpu)		cpumask_of(cpu)
 #endif
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_SCHED_SMT
+static inline const struct cpumask *cpu_smt_mask(int cpu)
+{
+	return topology_thread_cpumask(cpu);
+}
+#endif
+
+static inline const struct cpumask *cpu_cpu_mask(int cpu)
+{
+	return cpumask_of_node(cpu_to_node(cpu));
+}
+
+
+>>>>>>> v3.18
 #endif /* _LINUX_TOPOLOGY_H */

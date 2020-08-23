@@ -29,7 +29,10 @@ enum ipi_message_type {
 	IPI_NOP = 0,
 	IPI_RESCHEDULE = 1,
 	IPI_CALL_FUNC,
+<<<<<<< HEAD
 	IPI_CALL_FUNC_SINGLE,
+=======
+>>>>>>> v3.18
 	IPI_CPU_STOP,
 	IPI_TIMER,
 };

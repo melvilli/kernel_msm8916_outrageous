@@ -15,16 +15,37 @@
 #include <linux/nfs2.h>
 #include <linux/nfs3.h>
 #include <linux/nfs4.h>
+<<<<<<< HEAD
 #include <linux/sunrpc/msg_prot.h>
 
 #include <linux/nfsd/debug.h>
 #include <linux/nfsd/export.h>
 #include <linux/nfsd/stats.h>
+=======
+#include <linux/sunrpc/svc.h>
+#include <linux/sunrpc/msg_prot.h>
+
+#include <uapi/linux/nfsd/debug.h>
+
+#include "stats.h"
+#include "export.h"
+
+#undef ifdebug
+#ifdef NFSD_DEBUG
+# define ifdebug(flag)		if (nfsd_debug & NFSDDBG_##flag)
+#else
+# define ifdebug(flag)		if (0)
+#endif
+>>>>>>> v3.18
 
 /*
  * nfsd version
  */
+<<<<<<< HEAD
 #define NFSD_SUPPORTED_MINOR_VERSION	1
+=======
+#define NFSD_SUPPORTED_MINOR_VERSION	2
+>>>>>>> v3.18
 /*
  * Maximum blocksizes supported by daemon under various circumstances.
  */
@@ -53,7 +74,10 @@ struct readdir_cd {
 extern struct svc_program	nfsd_program;
 extern struct svc_version	nfsd_version2, nfsd_version3,
 				nfsd_version4;
+<<<<<<< HEAD
 extern u32			nfsd_supported_minorversion;
+=======
+>>>>>>> v3.18
 extern struct mutex		nfsd_mutex;
 extern spinlock_t		nfsd_drc_lock;
 extern unsigned long		nfsd_drc_max_mem;
@@ -107,7 +131,10 @@ static inline int nfsd_v4client(struct svc_rqst *rq)
  */
 #ifdef CONFIG_NFSD_V4
 extern unsigned long max_delegations;
+<<<<<<< HEAD
 void nfs4_state_init(void);
+=======
+>>>>>>> v3.18
 int nfsd4_init_slabs(void);
 void nfsd4_free_slabs(void);
 int nfs4_state_start(void);
@@ -118,7 +145,10 @@ void nfs4_reset_lease(time_t leasetime);
 int nfs4_reset_recoverydir(char *recdir);
 char * nfs4_recoverydir(void);
 #else
+<<<<<<< HEAD
 static inline void nfs4_state_init(void) { }
+=======
+>>>>>>> v3.18
 static inline int nfsd4_init_slabs(void) { return 0; }
 static inline void nfsd4_free_slabs(void) { }
 static inline int nfs4_state_start(void) { return 0; }
@@ -243,6 +273,15 @@ void		nfsd_lockd_shutdown(void);
 #define nfserr_reject_deleg		cpu_to_be32(NFS4ERR_REJECT_DELEG)
 #define nfserr_returnconflict		cpu_to_be32(NFS4ERR_RETURNCONFLICT)
 #define nfserr_deleg_revoked		cpu_to_be32(NFS4ERR_DELEG_REVOKED)
+<<<<<<< HEAD
+=======
+#define nfserr_partner_notsupp		cpu_to_be32(NFS4ERR_PARTNER_NOTSUPP)
+#define nfserr_partner_no_auth		cpu_to_be32(NFS4ERR_PARTNER_NO_AUTH)
+#define nfserr_union_notsupp		cpu_to_be32(NFS4ERR_UNION_NOTSUPP)
+#define nfserr_offload_denied		cpu_to_be32(NFS4ERR_OFFLOAD_DENIED)
+#define nfserr_wrong_lfs		cpu_to_be32(NFS4ERR_WRONG_LFS)
+#define nfserr_badlabel		cpu_to_be32(NFS4ERR_BADLABEL)
+>>>>>>> v3.18
 
 /* error codes for internal use */
 /* if a request fails due to kmalloc failure, it gets dropped.
@@ -277,7 +316,11 @@ void		nfsd_lockd_shutdown(void);
  * reason.
  */
 #define	COMPOUND_SLACK_SPACE		140    /* OP_GETFH */
+<<<<<<< HEAD
 #define COMPOUND_ERR_SLACK_SPACE	12     /* OP_SETATTR */
+=======
+#define COMPOUND_ERR_SLACK_SPACE	16     /* OP_SETATTR */
+>>>>>>> v3.18
 
 #define NFSD_LAUNDROMAT_MINTIMEOUT      1   /* seconds */
 
@@ -322,6 +365,19 @@ void		nfsd_lockd_shutdown(void);
 #define NFSD4_1_SUPPORTED_ATTRS_WORD2 \
 	(NFSD4_SUPPORTED_ATTRS_WORD2 | FATTR4_WORD2_SUPPATTR_EXCLCREAT)
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_NFSD_V4_SECURITY_LABEL
+#define NFSD4_2_SECURITY_ATTRS		FATTR4_WORD2_SECURITY_LABEL
+#else
+#define NFSD4_2_SECURITY_ATTRS		0
+#endif
+
+#define NFSD4_2_SUPPORTED_ATTRS_WORD2 \
+	(NFSD4_1_SUPPORTED_ATTRS_WORD2 | \
+	NFSD4_2_SECURITY_ATTRS)
+
+>>>>>>> v3.18
 static inline u32 nfsd_suppattrs0(u32 minorversion)
 {
 	return minorversion ? NFSD4_1_SUPPORTED_ATTRS_WORD0
@@ -336,8 +392,16 @@ static inline u32 nfsd_suppattrs1(u32 minorversion)
 
 static inline u32 nfsd_suppattrs2(u32 minorversion)
 {
+<<<<<<< HEAD
 	return minorversion ? NFSD4_1_SUPPORTED_ATTRS_WORD2
 			    : NFSD4_SUPPORTED_ATTRS_WORD2;
+=======
+	switch (minorversion) {
+	default: return NFSD4_2_SUPPORTED_ATTRS_WORD2;
+	case 1:  return NFSD4_1_SUPPORTED_ATTRS_WORD2;
+	case 0:  return NFSD4_SUPPORTED_ATTRS_WORD2;
+	}
+>>>>>>> v3.18
 }
 
 /* These will return ERR_INVAL if specified in GETATTR or READDIR. */
@@ -350,7 +414,15 @@ static inline u32 nfsd_suppattrs2(u32 minorversion)
 #define NFSD_WRITEABLE_ATTRS_WORD1 \
 	(FATTR4_WORD1_MODE | FATTR4_WORD1_OWNER | FATTR4_WORD1_OWNER_GROUP \
 	| FATTR4_WORD1_TIME_ACCESS_SET | FATTR4_WORD1_TIME_MODIFY_SET)
+<<<<<<< HEAD
 #define NFSD_WRITEABLE_ATTRS_WORD2 0
+=======
+#ifdef CONFIG_NFSD_V4_SECURITY_LABEL
+#define NFSD_WRITEABLE_ATTRS_WORD2 FATTR4_WORD2_SECURITY_LABEL
+#else
+#define NFSD_WRITEABLE_ATTRS_WORD2 0
+#endif
+>>>>>>> v3.18
 
 #define NFSD_SUPPATTR_EXCLCREAT_WORD0 \
 	NFSD_WRITEABLE_ATTRS_WORD0

@@ -1,6 +1,10 @@
 /*
  * Copyright (C) 2011
+<<<<<<< HEAD
  * Boaz Harrosh <bharrosh@panasas.com>
+=======
+ * Boaz Harrosh <ooo@electrozaur.com>
+>>>>>>> v3.18
  *
  * Public Declarations of the ORE API
  *

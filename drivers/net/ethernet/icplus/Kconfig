@@ -5,7 +5,10 @@
 config IP1000
 	tristate "IP1000 Gigabit Ethernet support"
 	depends on PCI
+<<<<<<< HEAD
 	select NET_CORE
+=======
+>>>>>>> v3.18
 	select MII
 	---help---
 	  This driver supports IP1000 gigabit Ethernet cards.

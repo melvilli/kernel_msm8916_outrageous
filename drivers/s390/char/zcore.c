@@ -17,6 +17,11 @@
 #include <linux/miscdevice.h>
 #include <linux/debugfs.h>
 #include <linux/module.h>
+<<<<<<< HEAD
+=======
+#include <linux/memblock.h>
+
+>>>>>>> v3.18
 #include <asm/asm-offsets.h>
 #include <asm/ipl.h>
 #include <asm/sclp.h>
@@ -26,12 +31,21 @@
 #include <asm/processor.h>
 #include <asm/irqflags.h>
 #include <asm/checksum.h>
+<<<<<<< HEAD
+=======
+#include <asm/switch_to.h>
+>>>>>>> v3.18
 #include "sclp.h"
 
 #define TRACE(x...) debug_sprintf_event(zcore_dbf, 1, x)
 
+<<<<<<< HEAD
 #define TO_USER		0
 #define TO_KERNEL	1
+=======
+#define TO_USER		1
+#define TO_KERNEL	0
+>>>>>>> v3.18
 #define CHUNK_INFO_SIZE	34 /* 2 16-byte char, each followed by blank */
 
 enum arch_id {
@@ -73,7 +87,11 @@ static struct ipl_parameter_block *ipl_block;
  * @count: Size of buffer, which should be copied
  * @mode:  Either TO_KERNEL or TO_USER
  */
+<<<<<<< HEAD
 static int memcpy_hsa(void *dest, unsigned long src, size_t count, int mode)
+=======
+int memcpy_hsa(void *dest, unsigned long src, size_t count, int mode)
+>>>>>>> v3.18
 {
 	int offs, blk_num;
 	static char buf[PAGE_SIZE] __attribute__((__aligned__(PAGE_SIZE)));
@@ -147,6 +165,7 @@ static int memcpy_hsa_kernel(void *dest, unsigned long src, size_t count)
 
 static int __init init_cpu_info(enum arch_id arch)
 {
+<<<<<<< HEAD
 	struct save_area *sa;
 
 	/* get info for boot cpu from lowcore, stored in the HSA */
@@ -160,6 +179,23 @@ static int __init init_cpu_info(enum arch_id arch)
 		return -EIO;
 	}
 	zfcpdump_save_areas[0] = sa;
+=======
+	struct save_area_ext *sa_ext;
+
+	/* get info for boot cpu from lowcore, stored in the HSA */
+
+	sa_ext = dump_save_area_create(0);
+	if (!sa_ext)
+		return -ENOMEM;
+	if (memcpy_hsa_kernel(&sa_ext->sa, sys_info.sa_base,
+			      sys_info.sa_size) < 0) {
+		TRACE("could not copy from HSA\n");
+		kfree(sa_ext);
+		return -EIO;
+	}
+	if (MACHINE_HAS_VX)
+		save_vx_regs_safe(sa_ext->vx_regs);
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -246,24 +282,42 @@ static int copy_lc(void __user *buf, void *sa, int sa_off, int len)
 static int zcore_add_lc(char __user *buf, unsigned long start, size_t count)
 {
 	unsigned long end;
+<<<<<<< HEAD
 	int i = 0;
+=======
+	int i;
+>>>>>>> v3.18
 
 	if (count == 0)
 		return 0;
 
 	end = start + count;
+<<<<<<< HEAD
 	while (zfcpdump_save_areas[i]) {
+=======
+	for (i = 0; i < dump_save_areas.count; i++) {
+>>>>>>> v3.18
 		unsigned long cp_start, cp_end; /* copy range */
 		unsigned long sa_start, sa_end; /* save area range */
 		unsigned long prefix;
 		unsigned long sa_off, len, buf_off;
+<<<<<<< HEAD
 
 		prefix = zfcpdump_save_areas[i]->pref_reg;
+=======
+		struct save_area *save_area = &dump_save_areas.areas[i]->sa;
+
+		prefix = save_area->pref_reg;
+>>>>>>> v3.18
 		sa_start = prefix + sys_info.sa_base;
 		sa_end = prefix + sys_info.sa_base + sys_info.sa_size;
 
 		if ((end < sa_start) || (start > sa_end))
+<<<<<<< HEAD
 			goto next;
+=======
+			continue;
+>>>>>>> v3.18
 		cp_start = max(start, sa_start);
 		cp_end = min(end, sa_end);
 
@@ -272,10 +326,15 @@ static int zcore_add_lc(char __user *buf, unsigned long start, size_t count)
 		len = cp_end - cp_start;
 
 		TRACE("copy_lc for: %lx\n", start);
+<<<<<<< HEAD
 		if (copy_lc(buf + buf_off, zfcpdump_save_areas[i], sa_off, len))
 			return -EFAULT;
 next:
 		i++;
+=======
+		if (copy_lc(buf + buf_off, save_area, sa_off, len))
+			return -EFAULT;
+>>>>>>> v3.18
 	}
 	return 0;
 }
@@ -330,9 +389,15 @@ static ssize_t zcore_read(struct file *file, char __user *buf, size_t count,
 	mem_offs = 0;
 
 	/* Copy from HSA data */
+<<<<<<< HEAD
 	if (*ppos < (ZFCPDUMP_HSA_SIZE + HEADER_SIZE)) {
 		size = min((count - hdr_count), (size_t) (ZFCPDUMP_HSA_SIZE
 			   - mem_start));
+=======
+	if (*ppos < sclp_get_hsa_size() + HEADER_SIZE) {
+		size = min((count - hdr_count),
+			   (size_t) (sclp_get_hsa_size() - mem_start));
+>>>>>>> v3.18
 		rc = memcpy_hsa_user(buf + hdr_count, mem_start, size);
 		if (rc)
 			goto fail;
@@ -413,11 +478,16 @@ static ssize_t zcore_memmap_read(struct file *filp, char __user *buf,
 				 size_t count, loff_t *ppos)
 {
 	return simple_read_from_buffer(buf, count, ppos, filp->private_data,
+<<<<<<< HEAD
 				       MEMORY_CHUNKS * CHUNK_INFO_SIZE);
+=======
+				       memblock.memory.cnt * CHUNK_INFO_SIZE);
+>>>>>>> v3.18
 }
 
 static int zcore_memmap_open(struct inode *inode, struct file *filp)
 {
+<<<<<<< HEAD
 	int i;
 	char *buf;
 	struct mem_chunk *chunk_array;
@@ -440,6 +510,21 @@ static int zcore_memmap_open(struct inode *inode, struct file *filp)
 			break;
 	}
 	kfree(chunk_array);
+=======
+	struct memblock_region *reg;
+	char *buf;
+	int i = 0;
+
+	buf = kzalloc(memblock.memory.cnt * CHUNK_INFO_SIZE, GFP_KERNEL);
+	if (!buf) {
+		return -ENOMEM;
+	}
+	for_each_memblock(memory, reg) {
+		sprintf(buf + (i++ * CHUNK_INFO_SIZE), "%016llx %016llx ",
+			(unsigned long long) reg->base,
+			(unsigned long long) reg->size);
+	}
+>>>>>>> v3.18
 	filp->private_data = buf;
 	return nonseekable_open(inode, filp);
 }
@@ -492,7 +577,11 @@ static ssize_t zcore_hsa_read(struct file *filp, char __user *buf,
 	static char str[18];
 
 	if (hsa_available)
+<<<<<<< HEAD
 		snprintf(str, sizeof(str), "%lx\n", ZFCPDUMP_HSA_SIZE);
+=======
+		snprintf(str, sizeof(str), "%lx\n", sclp_get_hsa_size());
+>>>>>>> v3.18
 	else
 		snprintf(str, sizeof(str), "0\n");
 	return simple_read_from_buffer(buf, count, ppos, str, strlen(str));
@@ -586,6 +675,7 @@ static int __init sys_info_init(enum arch_id arch, unsigned long mem_end)
 
 static int __init check_sdias(void)
 {
+<<<<<<< HEAD
 	int rc, act_hsa_size;
 
 	rc = sclp_sdias_blk_count();
@@ -597,12 +687,18 @@ static int __init check_sdias(void)
 	if (act_hsa_size < ZFCPDUMP_HSA_SIZE) {
 		TRACE("HSA size too small: %i\n", act_hsa_size);
 		return -EINVAL;
+=======
+	if (!sclp_get_hsa_size()) {
+		TRACE("Could not determine HSA size\n");
+		return -ENODEV;
+>>>>>>> v3.18
 	}
 	return 0;
 }
 
 static int __init get_mem_info(unsigned long *mem, unsigned long *end)
 {
+<<<<<<< HEAD
 	int i;
 	struct mem_chunk *chunk_array;
 
@@ -618,6 +714,14 @@ static int __init get_mem_info(unsigned long *mem, unsigned long *end)
 		*end = max(*end, chunk_array[i].addr + chunk_array[i].size);
 	}
 	kfree(chunk_array);
+=======
+	struct memblock_region *reg;
+
+	for_each_memblock(memory, reg) {
+		*mem += reg->size;
+		*end = max_t(unsigned long, *end, reg->base + reg->size);
+	}
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -637,8 +741,13 @@ static void __init zcore_header_init(int arch, struct zcore_header *hdr,
 	hdr->num_pages = mem_size / PAGE_SIZE;
 	hdr->tod = get_tod_clock();
 	get_cpu_id(&hdr->cpu_id);
+<<<<<<< HEAD
 	for (i = 0; zfcpdump_save_areas[i]; i++) {
 		prefix = zfcpdump_save_areas[i]->pref_reg;
+=======
+	for (i = 0; i < dump_save_areas.count; i++) {
+		prefix = dump_save_areas.areas[i]->sa.pref_reg;
+>>>>>>> v3.18
 		hdr->real_cpu_cnt++;
 		if (!prefix)
 			continue;
@@ -664,7 +773,11 @@ static int __init zcore_reipl_init(void)
 	ipl_block = (void *) __get_free_page(GFP_KERNEL);
 	if (!ipl_block)
 		return -ENOMEM;
+<<<<<<< HEAD
 	if (ipib_info.ipib < ZFCPDUMP_HSA_SIZE)
+=======
+	if (ipib_info.ipib < sclp_get_hsa_size())
+>>>>>>> v3.18
 		rc = memcpy_hsa_kernel(ipl_block, ipib_info.ipib, PAGE_SIZE);
 	else
 		rc = memcpy_real(ipl_block, (void *) ipib_info.ipib, PAGE_SIZE);

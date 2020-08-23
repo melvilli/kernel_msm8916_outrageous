@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -113,11 +117,21 @@ void acpi_db_display_handlers(void);
 ACPI_HW_DEPENDENT_RETURN_VOID(void
 			      acpi_db_generate_gpe(char *gpe_arg,
 						   char *block_arg))
+<<<<<<< HEAD
+=======
+ACPI_HW_DEPENDENT_RETURN_VOID(void acpi_db_generate_sci(void))
+
+void acpi_db_execute_test(char *type_arg);
+>>>>>>> v3.18
 
 /*
  * dbconvert - miscellaneous conversion routines
  */
+<<<<<<< HEAD
  acpi_status acpi_db_hex_char_to_value(int hex_char, u8 *return_value);
+=======
+acpi_status acpi_db_hex_char_to_value(int hex_char, u8 *return_value);
+>>>>>>> v3.18
 
 acpi_status acpi_db_convert_to_package(char *string, union acpi_object *object);
 
@@ -154,6 +168,11 @@ void acpi_db_set_scope(char *name);
 
 void acpi_db_dump_namespace(char *start_arg, char *depth_arg);
 
+<<<<<<< HEAD
+=======
+void acpi_db_dump_namespace_paths(void);
+
+>>>>>>> v3.18
 void acpi_db_dump_namespace_by_owner(char *owner_arg, char *depth_arg);
 
 acpi_status acpi_db_find_name_in_namespace(char *name_arg);
@@ -228,9 +247,12 @@ acpi_status acpi_db_load_acpi_table(char *filename);
 acpi_status
 acpi_db_get_table_from_file(char *filename, struct acpi_table_header **table);
 
+<<<<<<< HEAD
 acpi_status
 acpi_db_read_table_from_file(char *filename, struct acpi_table_header **table);
 
+=======
+>>>>>>> v3.18
 /*
  * dbhistry - debugger HISTORY command
  */
@@ -240,6 +262,11 @@ void acpi_db_display_history(void);
 
 char *acpi_db_get_from_history(char *command_num_arg);
 
+<<<<<<< HEAD
+=======
+char *acpi_db_get_history_by_index(u32 commandd_num);
+
+>>>>>>> v3.18
 /*
  * dbinput - user front-end to the AML debugger
  */

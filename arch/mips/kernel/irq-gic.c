@@ -16,7 +16,10 @@
 #include <asm/gic.h>
 #include <asm/setup.h>
 #include <asm/traps.h>
+<<<<<<< HEAD
 #include <asm/gcmpregs.h>
+=======
+>>>>>>> v3.18
 #include <linux/hardirq.h>
 #include <asm-generic/bitops/find.h>
 
@@ -29,6 +32,21 @@ unsigned int gic_irq_flags[GIC_NUM_INTRS];
 /* The index into this array is the vector # of the interrupt. */
 struct gic_shared_intr_map gic_shared_intr_map[GIC_NUM_INTRS];
 
+<<<<<<< HEAD
+=======
+struct gic_pcpu_mask {
+	DECLARE_BITMAP(pcpu_mask, GIC_NUM_INTRS);
+};
+
+struct gic_pending_regs {
+	DECLARE_BITMAP(pending, GIC_NUM_INTRS);
+};
+
+struct gic_intrmask_regs {
+	DECLARE_BITMAP(intrmask, GIC_NUM_INTRS);
+};
+
+>>>>>>> v3.18
 static struct gic_pcpu_mask pcpu_masks[NR_CPUS];
 static struct gic_pending_regs pending_regs[NR_CPUS];
 static struct gic_intrmask_regs intrmask_regs[NR_CPUS];
@@ -55,6 +73,24 @@ void gic_write_compare(cycle_t cnt)
 				(int)(cnt & 0xffffffff));
 }
 
+<<<<<<< HEAD
+=======
+void gic_write_cpu_compare(cycle_t cnt, int cpu)
+{
+	unsigned long flags;
+
+	local_irq_save(flags);
+
+	GICWRITE(GIC_REG(VPE_LOCAL, GIC_VPE_OTHER_ADDR), cpu);
+	GICWRITE(GIC_REG(VPE_OTHER, GIC_VPE_COMPARE_HI),
+				(int)(cnt >> 32));
+	GICWRITE(GIC_REG(VPE_OTHER, GIC_VPE_COMPARE_LO),
+				(int)(cnt & 0xffffffff));
+
+	local_irq_restore(flags);
+}
+
+>>>>>>> v3.18
 cycle_t gic_read_compare(void)
 {
 	unsigned int hi, lo;
@@ -163,7 +199,11 @@ unsigned int gic_compare_int(void)
 		return 0;
 }
 
+<<<<<<< HEAD
 unsigned int gic_get_int(void)
+=======
+void gic_get_int_mask(unsigned long *dst, const unsigned long *src)
+>>>>>>> v3.18
 {
 	unsigned int i;
 	unsigned long *pending, *intrmask, *pcpu_mask;
@@ -188,8 +228,22 @@ unsigned int gic_get_int(void)
 
 	bitmap_and(pending, pending, intrmask, GIC_NUM_INTRS);
 	bitmap_and(pending, pending, pcpu_mask, GIC_NUM_INTRS);
+<<<<<<< HEAD
 
 	return find_first_bit(pending, GIC_NUM_INTRS);
+=======
+	bitmap_and(dst, src, pending, GIC_NUM_INTRS);
+}
+
+unsigned int gic_get_int(void)
+{
+	DECLARE_BITMAP(interrupts, GIC_NUM_INTRS);
+
+	bitmap_fill(interrupts, GIC_NUM_INTRS);
+	gic_get_int_mask(interrupts, interrupts);
+
+	return find_first_bit(interrupts, GIC_NUM_INTRS);
+>>>>>>> v3.18
 }
 
 static void gic_mask_irq(struct irq_data *d)
@@ -219,6 +273,7 @@ static int gic_set_affinity(struct irq_data *d, const struct cpumask *cpumask,
 
 	/* Assumption : cpumask refers to a single CPU */
 	spin_lock_irqsave(&gic_lock, flags);
+<<<<<<< HEAD
 	for (;;) {
 		/* Re-route this IRQ */
 		GIC_SH_MAP_TO_VPE_SMASK(irq, first_cpu(tmp));
@@ -229,6 +284,17 @@ static int gic_set_affinity(struct irq_data *d, const struct cpumask *cpumask,
 		set_bit(irq, pcpu_masks[first_cpu(tmp)].pcpu_mask);
 
 	}
+=======
+
+	/* Re-route this IRQ */
+	GIC_SH_MAP_TO_VPE_SMASK(irq, first_cpu(tmp));
+
+	/* Update the pcpu_masks */
+	for (i = 0; i < NR_CPUS; i++)
+		clear_bit(irq, pcpu_masks[i].pcpu_mask);
+	set_bit(irq, pcpu_masks[first_cpu(tmp)].pcpu_mask);
+
+>>>>>>> v3.18
 	cpumask_copy(d->affinity, cpumask);
 	spin_unlock_irqrestore(&gic_lock, flags);
 
@@ -288,9 +354,16 @@ static void __init gic_setup_intr(unsigned int intr, unsigned int cpu,
 
 	/* Init Intr Masks */
 	GIC_CLR_INTR_MASK(intr);
+<<<<<<< HEAD
 	/* Initialise per-cpu Interrupt software masks */
 	if (flags & GIC_FLAG_IPI)
 		set_bit(intr, pcpu_masks[cpu].pcpu_mask);
+=======
+
+	/* Initialise per-cpu Interrupt software masks */
+	set_bit(intr, pcpu_masks[cpu].pcpu_mask);
+
+>>>>>>> v3.18
 	if ((flags & GIC_FLAG_TRANSPARENT) && (cpu_has_veic == 0))
 		GIC_SET_INTR_MASK(intr);
 	if (trigtype == GIC_TRIG_EDGE)
@@ -329,8 +402,11 @@ static void __init gic_basic_init(int numintrs, int numvpes,
 		cpu = intrmap[i].cpunum;
 		if (cpu == GIC_UNUSED)
 			continue;
+<<<<<<< HEAD
 		if (cpu == 0 && i != 0 && intrmap[i].flags == 0)
 			continue;
+=======
+>>>>>>> v3.18
 		gic_setup_intr(i,
 			intrmap[i].cpunum,
 			intrmap[i].pin + pin_offset,

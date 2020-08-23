@@ -1,6 +1,12 @@
 #ifndef __NV40_GRAPH_H__
 #define __NV40_GRAPH_H__
 
+<<<<<<< HEAD
+=======
+#include <core/device.h>
+#include <core/gpuobj.h>
+
+>>>>>>> v3.18
 /* returns 1 if device is one of the nv4x using the 0x4497 object class,
  * helpful to determine a number of other hardware features
  */

@@ -17,6 +17,7 @@
  */
 #include "xfs.h"
 #include "xfs_fs.h"
+<<<<<<< HEAD
 #include "xfs_types.h"
 #include "xfs_log.h"
 #include "xfs_trans.h"
@@ -30,6 +31,22 @@
 #include "xfs_inode_item.h"
 #include "xfs_error.h"
 #include "xfs_trace.h"
+=======
+#include "xfs_format.h"
+#include "xfs_log_format.h"
+#include "xfs_trans_resv.h"
+#include "xfs_sb.h"
+#include "xfs_ag.h"
+#include "xfs_mount.h"
+#include "xfs_inode.h"
+#include "xfs_trans.h"
+#include "xfs_inode_item.h"
+#include "xfs_error.h"
+#include "xfs_trace.h"
+#include "xfs_trans_priv.h"
+#include "xfs_dinode.h"
+#include "xfs_log.h"
+>>>>>>> v3.18
 
 
 kmem_zone_t	*xfs_ili_zone;		/* inode log item zone */
@@ -39,6 +56,7 @@ static inline struct xfs_inode_log_item *INODE_ITEM(struct xfs_log_item *lip)
 	return container_of(lip, struct xfs_inode_log_item, ili_item);
 }
 
+<<<<<<< HEAD
 
 /*
  * This returns the number of iovecs needed to log the given inode item.
@@ -54,11 +72,21 @@ xfs_inode_item_size(
 	struct xfs_inode_log_item *iip = INODE_ITEM(lip);
 	struct xfs_inode	*ip = iip->ili_inode;
 	uint			nvecs = 2;
+=======
+STATIC void
+xfs_inode_item_data_fork_size(
+	struct xfs_inode_log_item *iip,
+	int			*nvecs,
+	int			*nbytes)
+{
+	struct xfs_inode	*ip = iip->ili_inode;
+>>>>>>> v3.18
 
 	switch (ip->i_d.di_format) {
 	case XFS_DINODE_FMT_EXTENTS:
 		if ((iip->ili_fields & XFS_ILOG_DEXT) &&
 		    ip->i_d.di_nextents > 0 &&
+<<<<<<< HEAD
 		    ip->i_df.if_bytes > 0)
 			nvecs++;
 		break;
@@ -73,16 +101,41 @@ xfs_inode_item_size(
 		if ((iip->ili_fields & XFS_ILOG_DDATA) &&
 		    ip->i_df.if_bytes > 0)
 			nvecs++;
+=======
+		    ip->i_df.if_bytes > 0) {
+			/* worst case, doesn't subtract delalloc extents */
+			*nbytes += XFS_IFORK_DSIZE(ip);
+			*nvecs += 1;
+		}
+		break;
+	case XFS_DINODE_FMT_BTREE:
+		if ((iip->ili_fields & XFS_ILOG_DBROOT) &&
+		    ip->i_df.if_broot_bytes > 0) {
+			*nbytes += ip->i_df.if_broot_bytes;
+			*nvecs += 1;
+		}
+		break;
+	case XFS_DINODE_FMT_LOCAL:
+		if ((iip->ili_fields & XFS_ILOG_DDATA) &&
+		    ip->i_df.if_bytes > 0) {
+			*nbytes += roundup(ip->i_df.if_bytes, 4);
+			*nvecs += 1;
+		}
+>>>>>>> v3.18
 		break;
 
 	case XFS_DINODE_FMT_DEV:
 	case XFS_DINODE_FMT_UUID:
 		break;
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 	default:
 		ASSERT(0);
 		break;
 	}
+<<<<<<< HEAD
 
 	if (!XFS_IFORK_Q(ip))
 		return nvecs;
@@ -91,10 +144,23 @@ xfs_inode_item_size(
 	/*
 	 * Log any necessary attribute data.
 	 */
+=======
+}
+
+STATIC void
+xfs_inode_item_attr_fork_size(
+	struct xfs_inode_log_item *iip,
+	int			*nvecs,
+	int			*nbytes)
+{
+	struct xfs_inode	*ip = iip->ili_inode;
+
+>>>>>>> v3.18
 	switch (ip->i_d.di_aformat) {
 	case XFS_DINODE_FMT_EXTENTS:
 		if ((iip->ili_fields & XFS_ILOG_AEXT) &&
 		    ip->i_d.di_anextents > 0 &&
+<<<<<<< HEAD
 		    ip->i_afp->if_bytes > 0)
 			nvecs++;
 		break;
@@ -111,10 +177,33 @@ xfs_inode_item_size(
 			nvecs++;
 		break;
 
+=======
+		    ip->i_afp->if_bytes > 0) {
+			/* worst case, doesn't subtract unused space */
+			*nbytes += XFS_IFORK_ASIZE(ip);
+			*nvecs += 1;
+		}
+		break;
+	case XFS_DINODE_FMT_BTREE:
+		if ((iip->ili_fields & XFS_ILOG_ABROOT) &&
+		    ip->i_afp->if_broot_bytes > 0) {
+			*nbytes += ip->i_afp->if_broot_bytes;
+			*nvecs += 1;
+		}
+		break;
+	case XFS_DINODE_FMT_LOCAL:
+		if ((iip->ili_fields & XFS_ILOG_ADATA) &&
+		    ip->i_afp->if_bytes > 0) {
+			*nbytes += roundup(ip->i_afp->if_bytes, 4);
+			*nvecs += 1;
+		}
+		break;
+>>>>>>> v3.18
 	default:
 		ASSERT(0);
 		break;
 	}
+<<<<<<< HEAD
 
 	return nvecs;
 }
@@ -212,6 +301,44 @@ xfs_inode_item_format(
 			memset(&(ip->i_d.di_pad[0]), 0, sizeof(ip->i_d.di_pad));
 		}
 	}
+=======
+}
+
+/*
+ * This returns the number of iovecs needed to log the given inode item.
+ *
+ * We need one iovec for the inode log format structure, one for the
+ * inode core, and possibly one for the inode data/extents/b-tree root
+ * and one for the inode attribute data/extents/b-tree root.
+ */
+STATIC void
+xfs_inode_item_size(
+	struct xfs_log_item	*lip,
+	int			*nvecs,
+	int			*nbytes)
+{
+	struct xfs_inode_log_item *iip = INODE_ITEM(lip);
+	struct xfs_inode	*ip = iip->ili_inode;
+
+	*nvecs += 2;
+	*nbytes += sizeof(struct xfs_inode_log_format) +
+		   xfs_icdinode_size(ip->i_d.di_version);
+
+	xfs_inode_item_data_fork_size(iip, nvecs, nbytes);
+	if (XFS_IFORK_Q(ip))
+		xfs_inode_item_attr_fork_size(iip, nvecs, nbytes);
+}
+
+STATIC void
+xfs_inode_item_format_data_fork(
+	struct xfs_inode_log_item *iip,
+	struct xfs_inode_log_format *ilf,
+	struct xfs_log_vec	*lv,
+	struct xfs_log_iovec	**vecp)
+{
+	struct xfs_inode	*ip = iip->ili_inode;
+	size_t			data_bytes;
+>>>>>>> v3.18
 
 	switch (ip->i_d.di_format) {
 	case XFS_DINODE_FMT_EXTENTS:
@@ -222,6 +349,7 @@ xfs_inode_item_format(
 		if ((iip->ili_fields & XFS_ILOG_DEXT) &&
 		    ip->i_d.di_nextents > 0 &&
 		    ip->i_df.if_bytes > 0) {
+<<<<<<< HEAD
 			ASSERT(ip->i_df.if_u1.if_extents != NULL);
 			ASSERT(ip->i_df.if_bytes / sizeof(xfs_bmbt_rec_t) > 0);
 			ASSERT(iip->ili_extents_buf == NULL);
@@ -247,11 +375,29 @@ xfs_inode_item_format(
 			iip->ili_format.ilf_dsize = vecp->i_len;
 			vecp++;
 			nvecs++;
+=======
+			struct xfs_bmbt_rec *p;
+
+			ASSERT(ip->i_df.if_u1.if_extents != NULL);
+			ASSERT(ip->i_df.if_bytes / sizeof(xfs_bmbt_rec_t) > 0);
+
+			p = xlog_prepare_iovec(lv, vecp, XLOG_REG_TYPE_IEXT);
+			data_bytes = xfs_iextents_copy(ip, p, XFS_DATA_FORK);
+			xlog_finish_iovec(lv, *vecp, data_bytes);
+
+			ASSERT(data_bytes <= ip->i_df.if_bytes);
+
+			ilf->ilf_dsize = data_bytes;
+			ilf->ilf_size++;
+>>>>>>> v3.18
 		} else {
 			iip->ili_fields &= ~XFS_ILOG_DEXT;
 		}
 		break;
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 	case XFS_DINODE_FMT_BTREE:
 		iip->ili_fields &=
 			~(XFS_ILOG_DDATA | XFS_ILOG_DEXT |
@@ -260,35 +406,50 @@ xfs_inode_item_format(
 		if ((iip->ili_fields & XFS_ILOG_DBROOT) &&
 		    ip->i_df.if_broot_bytes > 0) {
 			ASSERT(ip->i_df.if_broot != NULL);
+<<<<<<< HEAD
 			vecp->i_addr = ip->i_df.if_broot;
 			vecp->i_len = ip->i_df.if_broot_bytes;
 			vecp->i_type = XLOG_REG_TYPE_IBROOT;
 			vecp++;
 			nvecs++;
 			iip->ili_format.ilf_dsize = ip->i_df.if_broot_bytes;
+=======
+			xlog_copy_iovec(lv, vecp, XLOG_REG_TYPE_IBROOT,
+					ip->i_df.if_broot,
+					ip->i_df.if_broot_bytes);
+			ilf->ilf_dsize = ip->i_df.if_broot_bytes;
+			ilf->ilf_size++;
+>>>>>>> v3.18
 		} else {
 			ASSERT(!(iip->ili_fields &
 				 XFS_ILOG_DBROOT));
 			iip->ili_fields &= ~XFS_ILOG_DBROOT;
 		}
 		break;
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 	case XFS_DINODE_FMT_LOCAL:
 		iip->ili_fields &=
 			~(XFS_ILOG_DEXT | XFS_ILOG_DBROOT |
 			  XFS_ILOG_DEV | XFS_ILOG_UUID);
 		if ((iip->ili_fields & XFS_ILOG_DDATA) &&
 		    ip->i_df.if_bytes > 0) {
+<<<<<<< HEAD
 			ASSERT(ip->i_df.if_u1.if_data != NULL);
 			ASSERT(ip->i_d.di_size > 0);
 
 			vecp->i_addr = ip->i_df.if_u1.if_data;
+=======
+>>>>>>> v3.18
 			/*
 			 * Round i_bytes up to a word boundary.
 			 * The underlying memory is guaranteed to
 			 * to be there by xfs_idata_realloc().
 			 */
 			data_bytes = roundup(ip->i_df.if_bytes, 4);
+<<<<<<< HEAD
 			ASSERT((ip->i_df.if_real_bytes == 0) ||
 			       (ip->i_df.if_real_bytes == data_bytes));
 			vecp->i_len = (int)data_bytes;
@@ -296,35 +457,61 @@ xfs_inode_item_format(
 			vecp++;
 			nvecs++;
 			iip->ili_format.ilf_dsize = (unsigned)data_bytes;
+=======
+			ASSERT(ip->i_df.if_real_bytes == 0 ||
+			       ip->i_df.if_real_bytes == data_bytes);
+			ASSERT(ip->i_df.if_u1.if_data != NULL);
+			ASSERT(ip->i_d.di_size > 0);
+			xlog_copy_iovec(lv, vecp, XLOG_REG_TYPE_ILOCAL,
+					ip->i_df.if_u1.if_data, data_bytes);
+			ilf->ilf_dsize = (unsigned)data_bytes;
+			ilf->ilf_size++;
+>>>>>>> v3.18
 		} else {
 			iip->ili_fields &= ~XFS_ILOG_DDATA;
 		}
 		break;
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 	case XFS_DINODE_FMT_DEV:
 		iip->ili_fields &=
 			~(XFS_ILOG_DDATA | XFS_ILOG_DBROOT |
 			  XFS_ILOG_DEXT | XFS_ILOG_UUID);
+<<<<<<< HEAD
 		if (iip->ili_fields & XFS_ILOG_DEV) {
 			iip->ili_format.ilf_u.ilfu_rdev =
 				ip->i_df.if_u2.if_rdev;
 		}
 		break;
 
+=======
+		if (iip->ili_fields & XFS_ILOG_DEV)
+			ilf->ilf_u.ilfu_rdev = ip->i_df.if_u2.if_rdev;
+		break;
+>>>>>>> v3.18
 	case XFS_DINODE_FMT_UUID:
 		iip->ili_fields &=
 			~(XFS_ILOG_DDATA | XFS_ILOG_DBROOT |
 			  XFS_ILOG_DEXT | XFS_ILOG_DEV);
+<<<<<<< HEAD
 		if (iip->ili_fields & XFS_ILOG_UUID) {
 			iip->ili_format.ilf_u.ilfu_uuid =
 				ip->i_df.if_u2.if_uuid;
 		}
 		break;
 
+=======
+		if (iip->ili_fields & XFS_ILOG_UUID)
+			ilf->ilf_u.ilfu_uuid = ip->i_df.if_u2.if_uuid;
+		break;
+>>>>>>> v3.18
 	default:
 		ASSERT(0);
 		break;
 	}
+<<<<<<< HEAD
 
 	/*
 	 * If there are no attributes associated with the file, then we're done.
@@ -334,6 +521,19 @@ xfs_inode_item_format(
 			~(XFS_ILOG_ADATA | XFS_ILOG_ABROOT | XFS_ILOG_AEXT);
 		goto out;
 	}
+=======
+}
+
+STATIC void
+xfs_inode_item_format_attr_fork(
+	struct xfs_inode_log_item *iip,
+	struct xfs_inode_log_format *ilf,
+	struct xfs_log_vec	*lv,
+	struct xfs_log_iovec	**vecp)
+{
+	struct xfs_inode	*ip = iip->ili_inode;
+	size_t			data_bytes;
+>>>>>>> v3.18
 
 	switch (ip->i_d.di_aformat) {
 	case XFS_DINODE_FMT_EXTENTS:
@@ -343,6 +543,7 @@ xfs_inode_item_format(
 		if ((iip->ili_fields & XFS_ILOG_AEXT) &&
 		    ip->i_d.di_anextents > 0 &&
 		    ip->i_afp->if_bytes > 0) {
+<<<<<<< HEAD
 			ASSERT(ip->i_afp->if_bytes / sizeof(xfs_bmbt_rec_t) ==
 				ip->i_d.di_anextents);
 			ASSERT(ip->i_afp->if_u1.if_extents != NULL);
@@ -362,11 +563,28 @@ xfs_inode_item_format(
 			iip->ili_format.ilf_asize = vecp->i_len;
 			vecp++;
 			nvecs++;
+=======
+			struct xfs_bmbt_rec *p;
+
+			ASSERT(ip->i_afp->if_bytes / sizeof(xfs_bmbt_rec_t) ==
+				ip->i_d.di_anextents);
+			ASSERT(ip->i_afp->if_u1.if_extents != NULL);
+
+			p = xlog_prepare_iovec(lv, vecp, XLOG_REG_TYPE_IATTR_EXT);
+			data_bytes = xfs_iextents_copy(ip, p, XFS_ATTR_FORK);
+			xlog_finish_iovec(lv, *vecp, data_bytes);
+
+			ilf->ilf_asize = data_bytes;
+			ilf->ilf_size++;
+>>>>>>> v3.18
 		} else {
 			iip->ili_fields &= ~XFS_ILOG_AEXT;
 		}
 		break;
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 	case XFS_DINODE_FMT_BTREE:
 		iip->ili_fields &=
 			~(XFS_ILOG_ADATA | XFS_ILOG_AEXT);
@@ -375,32 +593,47 @@ xfs_inode_item_format(
 		    ip->i_afp->if_broot_bytes > 0) {
 			ASSERT(ip->i_afp->if_broot != NULL);
 
+<<<<<<< HEAD
 			vecp->i_addr = ip->i_afp->if_broot;
 			vecp->i_len = ip->i_afp->if_broot_bytes;
 			vecp->i_type = XLOG_REG_TYPE_IATTR_BROOT;
 			vecp++;
 			nvecs++;
 			iip->ili_format.ilf_asize = ip->i_afp->if_broot_bytes;
+=======
+			xlog_copy_iovec(lv, vecp, XLOG_REG_TYPE_IATTR_BROOT,
+					ip->i_afp->if_broot,
+					ip->i_afp->if_broot_bytes);
+			ilf->ilf_asize = ip->i_afp->if_broot_bytes;
+			ilf->ilf_size++;
+>>>>>>> v3.18
 		} else {
 			iip->ili_fields &= ~XFS_ILOG_ABROOT;
 		}
 		break;
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 	case XFS_DINODE_FMT_LOCAL:
 		iip->ili_fields &=
 			~(XFS_ILOG_AEXT | XFS_ILOG_ABROOT);
 
 		if ((iip->ili_fields & XFS_ILOG_ADATA) &&
 		    ip->i_afp->if_bytes > 0) {
+<<<<<<< HEAD
 			ASSERT(ip->i_afp->if_u1.if_data != NULL);
 
 			vecp->i_addr = ip->i_afp->if_u1.if_data;
+=======
+>>>>>>> v3.18
 			/*
 			 * Round i_bytes up to a word boundary.
 			 * The underlying memory is guaranteed to
 			 * to be there by xfs_idata_realloc().
 			 */
 			data_bytes = roundup(ip->i_afp->if_bytes, 4);
+<<<<<<< HEAD
 			ASSERT((ip->i_afp->if_real_bytes == 0) ||
 			       (ip->i_afp->if_real_bytes == data_bytes));
 			vecp->i_len = (int)data_bytes;
@@ -408,15 +641,29 @@ xfs_inode_item_format(
 			vecp++;
 			nvecs++;
 			iip->ili_format.ilf_asize = (unsigned)data_bytes;
+=======
+			ASSERT(ip->i_afp->if_real_bytes == 0 ||
+			       ip->i_afp->if_real_bytes == data_bytes);
+			ASSERT(ip->i_afp->if_u1.if_data != NULL);
+			xlog_copy_iovec(lv, vecp, XLOG_REG_TYPE_IATTR_LOCAL,
+					ip->i_afp->if_u1.if_data,
+					data_bytes);
+			ilf->ilf_asize = (unsigned)data_bytes;
+			ilf->ilf_size++;
+>>>>>>> v3.18
 		} else {
 			iip->ili_fields &= ~XFS_ILOG_ADATA;
 		}
 		break;
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 	default:
 		ASSERT(0);
 		break;
 	}
+<<<<<<< HEAD
 
 out:
 	/*
@@ -430,6 +677,54 @@ out:
 	iip->ili_format.ilf_size = nvecs;
 }
 
+=======
+}
+
+/*
+ * This is called to fill in the vector of log iovecs for the given inode
+ * log item.  It fills the first item with an inode log format structure,
+ * the second with the on-disk inode structure, and a possible third and/or
+ * fourth with the inode data/extents/b-tree root and inode attributes
+ * data/extents/b-tree root.
+ */
+STATIC void
+xfs_inode_item_format(
+	struct xfs_log_item	*lip,
+	struct xfs_log_vec	*lv)
+{
+	struct xfs_inode_log_item *iip = INODE_ITEM(lip);
+	struct xfs_inode	*ip = iip->ili_inode;
+	struct xfs_inode_log_format *ilf;
+	struct xfs_log_iovec	*vecp = NULL;
+
+	ASSERT(ip->i_d.di_version > 1);
+
+	ilf = xlog_prepare_iovec(lv, &vecp, XLOG_REG_TYPE_IFORMAT);
+	ilf->ilf_type = XFS_LI_INODE;
+	ilf->ilf_ino = ip->i_ino;
+	ilf->ilf_blkno = ip->i_imap.im_blkno;
+	ilf->ilf_len = ip->i_imap.im_len;
+	ilf->ilf_boffset = ip->i_imap.im_boffset;
+	ilf->ilf_fields = XFS_ILOG_CORE;
+	ilf->ilf_size = 2; /* format + core */
+	xlog_finish_iovec(lv, vecp, sizeof(struct xfs_inode_log_format));
+
+	xlog_copy_iovec(lv, &vecp, XLOG_REG_TYPE_ICORE,
+			&ip->i_d,
+			xfs_icdinode_size(ip->i_d.di_version));
+
+	xfs_inode_item_format_data_fork(iip, ilf, lv, &vecp);
+	if (XFS_IFORK_Q(ip)) {
+		xfs_inode_item_format_attr_fork(iip, ilf, lv, &vecp);
+	} else {
+		iip->ili_fields &=
+			~(XFS_ILOG_ADATA | XFS_ILOG_ABROOT | XFS_ILOG_AEXT);
+	}
+
+	/* update the format with the exact fields we actually logged */
+	ilf->ilf_fields |= (iip->ili_fields & ~XFS_ILOG_TIMESTAMP);
+}
+>>>>>>> v3.18
 
 /*
  * This is called to pin the inode associated with the inode log
@@ -546,6 +841,7 @@ xfs_inode_item_unlock(
 	ASSERT(ip->i_itemp != NULL);
 	ASSERT(xfs_isilocked(ip, XFS_ILOCK_EXCL));
 
+<<<<<<< HEAD
 	/*
 	 * If the inode needed a separate buffer with which to log
 	 * its extents, then free it now.
@@ -567,6 +863,8 @@ xfs_inode_item_unlock(
 		iip->ili_aextents_buf = NULL;
 	}
 
+=======
+>>>>>>> v3.18
 	lock_flags = iip->ili_lock_flags;
 	iip->ili_lock_flags = 0;
 	if (lock_flags)
@@ -653,11 +951,14 @@ xfs_inode_item_init(
 	iip->ili_inode = ip;
 	xfs_log_item_init(mp, &iip->ili_item, XFS_LI_INODE,
 						&xfs_inode_item_ops);
+<<<<<<< HEAD
 	iip->ili_format.ilf_type = XFS_LI_INODE;
 	iip->ili_format.ilf_ino = ip->i_ino;
 	iip->ili_format.ilf_blkno = ip->i_imap.im_blkno;
 	iip->ili_format.ilf_len = ip->i_imap.im_len;
 	iip->ili_format.ilf_boffset = ip->i_imap.im_boffset;
+=======
+>>>>>>> v3.18
 }
 
 /*
@@ -702,7 +1003,11 @@ xfs_iflush_done(
 	blip = bp->b_fspriv;
 	prev = NULL;
 	while (blip != NULL) {
+<<<<<<< HEAD
 		if (lip->li_cb != xfs_iflush_done) {
+=======
+		if (blip->li_cb != xfs_iflush_done) {
+>>>>>>> v3.18
 			prev = blip;
 			blip = blip->li_bio_list;
 			continue;
@@ -875,5 +1180,9 @@ xfs_inode_item_format_convert(
 		in_f->ilf_boffset = in_f64->ilf_boffset;
 		return 0;
 	}
+<<<<<<< HEAD
 	return EFSCORRUPTED;
+=======
+	return -EFSCORRUPTED;
+>>>>>>> v3.18
 }

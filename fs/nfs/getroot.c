@@ -58,7 +58,11 @@ static int nfs_superblock_set_dummy_root(struct super_block *sb, struct inode *i
 		 */
 		spin_lock(&sb->s_root->d_inode->i_lock);
 		spin_lock(&sb->s_root->d_lock);
+<<<<<<< HEAD
 		hlist_del_init(&sb->s_root->d_u.d_alias);
+=======
+		hlist_del_init(&sb->s_root->d_alias);
+>>>>>>> v3.18
 		spin_unlock(&sb->s_root->d_lock);
 		spin_unlock(&sb->s_root->d_inode->i_lock);
 	}
@@ -95,7 +99,11 @@ struct dentry *nfs_get_root(struct super_block *sb, struct nfs_fh *mntfh,
 		goto out;
 	}
 
+<<<<<<< HEAD
 	inode = nfs_fhget(sb, mntfh, fsinfo.fattr);
+=======
+	inode = nfs_fhget(sb, mntfh, fsinfo.fattr, NULL);
+>>>>>>> v3.18
 	if (IS_ERR(inode)) {
 		dprintk("nfs_get_root: get root inode failed\n");
 		ret = ERR_CAST(inode);
@@ -112,7 +120,11 @@ struct dentry *nfs_get_root(struct super_block *sb, struct nfs_fh *mntfh,
 	 * if the dentry tree reaches them; however if the dentry already
 	 * exists, we'll pick it up at this point and use it as the root
 	 */
+<<<<<<< HEAD
 	ret = d_obtain_alias(inode);
+=======
+	ret = d_obtain_root(inode);
+>>>>>>> v3.18
 	if (IS_ERR(ret)) {
 		dprintk("nfs_get_root: get root dentry failed\n");
 		goto out;
@@ -120,7 +132,12 @@ struct dentry *nfs_get_root(struct super_block *sb, struct nfs_fh *mntfh,
 
 	security_d_instantiate(ret, inode);
 	spin_lock(&ret->d_lock);
+<<<<<<< HEAD
 	if (IS_ROOT(ret) && !(ret->d_flags & DCACHE_NFSFS_RENAMED)) {
+=======
+	if (IS_ROOT(ret) && !ret->d_fsdata &&
+	    !(ret->d_flags & DCACHE_NFSFS_RENAMED)) {
+>>>>>>> v3.18
 		ret->d_fsdata = name;
 		name = NULL;
 	}

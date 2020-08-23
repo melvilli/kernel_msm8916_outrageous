@@ -30,8 +30,11 @@ MODULE_LICENSE("GPL");
 #define dprintf(x...)
 #endif
 
+<<<<<<< HEAD
 void dump_imap(const char *prefix, struct super_block *s);
 
+=======
+>>>>>>> v3.18
 struct inode *bfs_iget(struct super_block *sb, unsigned long ino)
 {
 	struct bfs_inode *di;
@@ -40,7 +43,11 @@ struct inode *bfs_iget(struct super_block *sb, unsigned long ino)
 	int block, off;
 
 	inode = iget_locked(sb, ino);
+<<<<<<< HEAD
 	if (IS_ERR(inode))
+=======
+	if (!inode)
+>>>>>>> v3.18
 		return ERR_PTR(-ENOMEM);
 	if (!(inode->i_state & I_NEW))
 		return inode;
@@ -172,7 +179,11 @@ static void bfs_evict_inode(struct inode *inode)
 
 	dprintf("ino=%08lx\n", ino);
 
+<<<<<<< HEAD
 	truncate_inode_pages(&inode->i_data, 0);
+=======
+	truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 	invalidate_inode_buffers(inode);
 	clear_inode(inode);
 
@@ -194,7 +205,11 @@ static void bfs_evict_inode(struct inode *inode)
 			info->si_freeb += bi->i_eblock + 1 - bi->i_sblock;
 		info->si_freei++;
 		clear_bit(ino, info->si_imap);
+<<<<<<< HEAD
 		dump_imap("delete_inode", s);
+=======
+		bfs_dump_imap("delete_inode", s);
+>>>>>>> v3.18
         }
 
 	/*
@@ -266,7 +281,11 @@ static void init_once(void *foo)
 	inode_init_once(&bi->vfs_inode);
 }
 
+<<<<<<< HEAD
 static int init_inodecache(void)
+=======
+static int __init init_inodecache(void)
+>>>>>>> v3.18
 {
 	bfs_inode_cachep = kmem_cache_create("bfs_inode_cache",
 					     sizeof(struct bfs_inode_info),
@@ -297,7 +316,11 @@ static const struct super_operations bfs_sops = {
 	.statfs		= bfs_statfs,
 };
 
+<<<<<<< HEAD
 void dump_imap(const char *prefix, struct super_block *s)
+=======
+void bfs_dump_imap(const char *prefix, struct super_block *s)
+>>>>>>> v3.18
 {
 #ifdef DEBUG
 	int i;
@@ -443,7 +466,11 @@ static int bfs_fill_super(struct super_block *s, void *data, int silent)
 	}
 	brelse(bh);
 	brelse(sbh);
+<<<<<<< HEAD
 	dump_imap("read_super", s);
+=======
+	bfs_dump_imap("read_super", s);
+>>>>>>> v3.18
 	return 0;
 
 out3:

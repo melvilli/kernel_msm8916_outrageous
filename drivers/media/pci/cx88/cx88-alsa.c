@@ -834,7 +834,11 @@ static int snd_cx88_create(struct snd_card *card, struct pci_dev *pci,
 
 	/* get irq */
 	err = request_irq(chip->pci->irq, cx8801_irq,
+<<<<<<< HEAD
 			  IRQF_SHARED | IRQF_DISABLED, chip->core->name, chip);
+=======
+			  IRQF_SHARED, chip->core->name, chip);
+>>>>>>> v3.18
 	if (err < 0) {
 		dprintk(0, "%s: can't get IRQ %d\n",
 		       chip->core->name, chip->pci->irq);
@@ -852,8 +856,11 @@ static int snd_cx88_create(struct snd_card *card, struct pci_dev *pci,
 	chip->irq = pci->irq;
 	synchronize_irq(chip->irq);
 
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pci->dev);
 
+=======
+>>>>>>> v3.18
 	*rchip = chip;
 	*core_ptr = core;
 
@@ -876,8 +883,13 @@ static int cx88_audio_initdev(struct pci_dev *pci,
 		return (-ENOENT);
 	}
 
+<<<<<<< HEAD
 	err = snd_card_create(index[devno], id[devno], THIS_MODULE,
 			      sizeof(snd_cx88_card_t), &card);
+=======
+	err = snd_card_new(&pci->dev, index[devno], id[devno], THIS_MODULE,
+			   sizeof(snd_cx88_card_t), &card);
+>>>>>>> v3.18
 	if (err < 0)
 		return err;
 
@@ -931,11 +943,17 @@ error:
  */
 static void cx88_audio_finidev(struct pci_dev *pci)
 {
+<<<<<<< HEAD
 	struct cx88_audio_dev *card = pci_get_drvdata(pci);
 
 	snd_card_free((void *)card);
 
 	pci_set_drvdata(pci, NULL);
+=======
+	struct snd_card *card = pci_get_drvdata(pci);
+
+	snd_card_free(card);
+>>>>>>> v3.18
 
 	devno--;
 }
@@ -951,6 +969,7 @@ static struct pci_driver cx88_audio_pci_driver = {
 	.remove   = cx88_audio_finidev,
 };
 
+<<<<<<< HEAD
 /****************************************************************************
 				LINUX MODULE INIT
  ****************************************************************************/
@@ -975,3 +994,6 @@ static void __exit cx88_audio_fini(void)
 
 module_init(cx88_audio_init);
 module_exit(cx88_audio_fini);
+=======
+module_pci_driver(cx88_audio_pci_driver);
+>>>>>>> v3.18

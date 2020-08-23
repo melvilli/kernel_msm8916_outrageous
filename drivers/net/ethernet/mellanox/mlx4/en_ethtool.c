@@ -51,23 +51,44 @@ static int mlx4_en_moderation_update(struct mlx4_en_priv *priv)
 	int err = 0;
 
 	for (i = 0; i < priv->tx_ring_num; i++) {
+<<<<<<< HEAD
 		priv->tx_cq[i].moder_cnt = priv->tx_frames;
 		priv->tx_cq[i].moder_time = priv->tx_usecs;
 		err = mlx4_en_set_cq_moder(priv, &priv->tx_cq[i]);
 		if (err)
 			return err;
+=======
+		priv->tx_cq[i]->moder_cnt = priv->tx_frames;
+		priv->tx_cq[i]->moder_time = priv->tx_usecs;
+		if (priv->port_up) {
+			err = mlx4_en_set_cq_moder(priv, priv->tx_cq[i]);
+			if (err)
+				return err;
+		}
+>>>>>>> v3.18
 	}
 
 	if (priv->adaptive_rx_coal)
 		return 0;
 
 	for (i = 0; i < priv->rx_ring_num; i++) {
+<<<<<<< HEAD
 		priv->rx_cq[i].moder_cnt = priv->rx_frames;
 		priv->rx_cq[i].moder_time = priv->rx_usecs;
 		priv->last_moder_time[i] = MLX4_EN_AUTO_CONF;
 		err = mlx4_en_set_cq_moder(priv, &priv->rx_cq[i]);
 		if (err)
 			return err;
+=======
+		priv->rx_cq[i]->moder_cnt = priv->rx_frames;
+		priv->rx_cq[i]->moder_time = priv->rx_usecs;
+		priv->last_moder_time[i] = MLX4_EN_AUTO_CONF;
+		if (priv->port_up) {
+			err = mlx4_en_set_cq_moder(priv, priv->rx_cq[i]);
+			if (err)
+				return err;
+		}
+>>>>>>> v3.18
 	}
 
 	return err;
@@ -94,6 +115,13 @@ mlx4_en_get_drvinfo(struct net_device *dev, struct ethtool_drvinfo *drvinfo)
 	drvinfo->eedump_len = 0;
 }
 
+<<<<<<< HEAD
+=======
+static const char mlx4_en_priv_flags[][ETH_GSTRING_LEN] = {
+	"blueflame",
+};
+
+>>>>>>> v3.18
 static const char main_strings[][ETH_GSTRING_LEN] = {
 	"rx_packets", "tx_packets", "rx_bytes", "tx_bytes", "rx_errors",
 	"tx_errors", "rx_dropped", "tx_dropped", "multicast", "collisions",
@@ -104,6 +132,10 @@ static const char main_strings[][ETH_GSTRING_LEN] = {
 
 	/* port statistics */
 	"tso_packets",
+<<<<<<< HEAD
+=======
+	"xmit_more",
+>>>>>>> v3.18
 	"queue_stopped", "wake_queue", "tx_timeout", "rx_alloc_failed",
 	"rx_csum_good", "rx_csum_none", "tx_chksum_offload",
 
@@ -222,10 +254,24 @@ static int mlx4_en_get_sset_count(struct net_device *dev, int sset)
 	switch (sset) {
 	case ETH_SS_STATS:
 		return (priv->stats_bitmap ? bit_count : NUM_ALL_STATS) +
+<<<<<<< HEAD
 			(priv->tx_ring_num + priv->rx_ring_num) * 2;
 	case ETH_SS_TEST:
 		return MLX4_EN_NUM_SELF_TEST - !(priv->mdev->dev->caps.flags
 					& MLX4_DEV_CAP_FLAG_UC_LOOPBACK) * 2;
+=======
+			(priv->tx_ring_num * 2) +
+#ifdef CONFIG_NET_RX_BUSY_POLL
+			(priv->rx_ring_num * 5);
+#else
+			(priv->rx_ring_num * 2);
+#endif
+	case ETH_SS_TEST:
+		return MLX4_EN_NUM_SELF_TEST - !(priv->mdev->dev->caps.flags
+					& MLX4_DEV_CAP_FLAG_UC_LOOPBACK) * 2;
+	case ETH_SS_PRIV_FLAGS:
+		return ARRAY_SIZE(mlx4_en_priv_flags);
+>>>>>>> v3.18
 	default:
 		return -EOPNOTSUPP;
 	}
@@ -265,12 +311,26 @@ static void mlx4_en_get_ethtool_stats(struct net_device *dev,
 		}
 	}
 	for (i = 0; i < priv->tx_ring_num; i++) {
+<<<<<<< HEAD
 		data[index++] = priv->tx_ring[i].packets;
 		data[index++] = priv->tx_ring[i].bytes;
 	}
 	for (i = 0; i < priv->rx_ring_num; i++) {
 		data[index++] = priv->rx_ring[i].packets;
 		data[index++] = priv->rx_ring[i].bytes;
+=======
+		data[index++] = priv->tx_ring[i]->packets;
+		data[index++] = priv->tx_ring[i]->bytes;
+	}
+	for (i = 0; i < priv->rx_ring_num; i++) {
+		data[index++] = priv->rx_ring[i]->packets;
+		data[index++] = priv->rx_ring[i]->bytes;
+#ifdef CONFIG_NET_RX_BUSY_POLL
+		data[index++] = priv->rx_ring[i]->yields;
+		data[index++] = priv->rx_ring[i]->misses;
+		data[index++] = priv->rx_ring[i]->cleaned;
+#endif
+>>>>>>> v3.18
 	}
 	spin_unlock_bh(&priv->stats_lock);
 
@@ -334,8 +394,27 @@ static void mlx4_en_get_strings(struct net_device *dev,
 				"rx%d_packets", i);
 			sprintf(data + (index++) * ETH_GSTRING_LEN,
 				"rx%d_bytes", i);
+<<<<<<< HEAD
 		}
 		break;
+=======
+#ifdef CONFIG_NET_RX_BUSY_POLL
+			sprintf(data + (index++) * ETH_GSTRING_LEN,
+				"rx%d_napi_yield", i);
+			sprintf(data + (index++) * ETH_GSTRING_LEN,
+				"rx%d_misses", i);
+			sprintf(data + (index++) * ETH_GSTRING_LEN,
+				"rx%d_cleaned", i);
+#endif
+		}
+		break;
+	case ETH_SS_PRIV_FLAGS:
+		for (i = 0; i < ARRAY_SIZE(mlx4_en_priv_flags); i++)
+			strcpy(data + i * ETH_GSTRING_LEN,
+			       mlx4_en_priv_flags[i]);
+		break;
+
+>>>>>>> v3.18
 	}
 }
 
@@ -356,8 +435,13 @@ static int mlx4_en_get_settings(struct net_device *dev, struct ethtool_cmd *cmd)
 		ethtool_cmd_speed_set(cmd, priv->port_state.link_speed);
 		cmd->duplex = DUPLEX_FULL;
 	} else {
+<<<<<<< HEAD
 		ethtool_cmd_speed_set(cmd, -1);
 		cmd->duplex = -1;
+=======
+		ethtool_cmd_speed_set(cmd, SPEED_UNKNOWN);
+		cmd->duplex = DUPLEX_UNKNOWN;
+>>>>>>> v3.18
 	}
 
 	if (trans_type > 0 && trans_type <= 0xC) {
@@ -395,6 +479,11 @@ static int mlx4_en_get_coalesce(struct net_device *dev,
 
 	coal->tx_coalesce_usecs = priv->tx_usecs;
 	coal->tx_max_coalesced_frames = priv->tx_frames;
+<<<<<<< HEAD
+=======
+	coal->tx_max_coalesced_frames_irq = priv->tx_work_limit;
+
+>>>>>>> v3.18
 	coal->rx_coalesce_usecs = priv->rx_usecs;
 	coal->rx_max_coalesced_frames = priv->rx_frames;
 
@@ -404,6 +493,10 @@ static int mlx4_en_get_coalesce(struct net_device *dev,
 	coal->rx_coalesce_usecs_high = priv->rx_usecs_high;
 	coal->rate_sample_interval = priv->sample_interval;
 	coal->use_adaptive_rx_coalesce = priv->adaptive_rx_coal;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -412,6 +505,12 @@ static int mlx4_en_set_coalesce(struct net_device *dev,
 {
 	struct mlx4_en_priv *priv = netdev_priv(dev);
 
+<<<<<<< HEAD
+=======
+	if (!coal->tx_max_coalesced_frames_irq)
+		return -EINVAL;
+
+>>>>>>> v3.18
 	priv->rx_frames = (coal->rx_max_coalesced_frames ==
 			   MLX4_EN_AUTO_CONF) ?
 				MLX4_EN_RX_COAL_TARGET :
@@ -435,6 +534,10 @@ static int mlx4_en_set_coalesce(struct net_device *dev,
 	priv->rx_usecs_high = coal->rx_coalesce_usecs_high;
 	priv->sample_interval = coal->rate_sample_interval;
 	priv->adaptive_rx_coal = coal->use_adaptive_rx_coalesce;
+<<<<<<< HEAD
+=======
+	priv->tx_work_limit = coal->tx_max_coalesced_frames_irq;
+>>>>>>> v3.18
 
 	return mlx4_en_moderation_update(priv);
 }
@@ -446,6 +549,12 @@ static int mlx4_en_set_pauseparam(struct net_device *dev,
 	struct mlx4_en_dev *mdev = priv->mdev;
 	int err;
 
+<<<<<<< HEAD
+=======
+	if (pause->autoneg)
+		return -EINVAL;
+
+>>>>>>> v3.18
 	priv->prof->tx_pause = pause->tx_pause != 0;
 	priv->prof->rx_pause = pause->rx_pause != 0;
 	err = mlx4_SET_PORT_general(mdev->dev, priv->port,
@@ -488,9 +597,15 @@ static int mlx4_en_set_ringparam(struct net_device *dev,
 	tx_size = max_t(u32, tx_size, MLX4_EN_MIN_TX_SIZE);
 	tx_size = min_t(u32, tx_size, MLX4_EN_MAX_TX_SIZE);
 
+<<<<<<< HEAD
 	if (rx_size == (priv->port_up ? priv->rx_ring[0].actual_size :
 					priv->rx_ring[0].size) &&
 	    tx_size == priv->tx_ring[0].size)
+=======
+	if (rx_size == (priv->port_up ? priv->rx_ring[0]->actual_size :
+					priv->rx_ring[0]->size) &&
+	    tx_size == priv->tx_ring[0]->size)
+>>>>>>> v3.18
 		return 0;
 
 	mutex_lock(&mdev->state_lock);
@@ -531,8 +646,13 @@ static void mlx4_en_get_ringparam(struct net_device *dev,
 	param->rx_max_pending = MLX4_EN_MAX_RX_SIZE;
 	param->tx_max_pending = MLX4_EN_MAX_TX_SIZE;
 	param->rx_pending = priv->port_up ?
+<<<<<<< HEAD
 		priv->rx_ring[0].actual_size : priv->rx_ring[0].size;
 	param->tx_pending = priv->tx_ring[0].size;
+=======
+		priv->rx_ring[0]->actual_size : priv->rx_ring[0]->size;
+	param->tx_pending = priv->tx_ring[0]->size;
+>>>>>>> v3.18
 }
 
 static u32 mlx4_en_get_rxfh_indir_size(struct net_device *dev)
@@ -542,7 +662,11 @@ static u32 mlx4_en_get_rxfh_indir_size(struct net_device *dev)
 	return priv->rx_ring_num;
 }
 
+<<<<<<< HEAD
 static int mlx4_en_get_rxfh_indir(struct net_device *dev, u32 *ring_index)
+=======
+static int mlx4_en_get_rxfh(struct net_device *dev, u32 *ring_index, u8 *key)
+>>>>>>> v3.18
 {
 	struct mlx4_en_priv *priv = netdev_priv(dev);
 	struct mlx4_en_rss_map *rss_map = &priv->rss_map;
@@ -560,8 +684,13 @@ static int mlx4_en_get_rxfh_indir(struct net_device *dev, u32 *ring_index)
 	return err;
 }
 
+<<<<<<< HEAD
 static int mlx4_en_set_rxfh_indir(struct net_device *dev,
 		const u32 *ring_index)
+=======
+static int mlx4_en_set_rxfh(struct net_device *dev, const u32 *ring_index,
+			    const u8 *key)
+>>>>>>> v3.18
 {
 	struct mlx4_en_priv *priv = netdev_priv(dev);
 	struct mlx4_en_dev *mdev = priv->mdev;
@@ -903,13 +1032,21 @@ static int mlx4_en_flow_replace(struct net_device *dev,
 		qpn = cmd->fs.ring_cookie & (EN_ETHTOOL_QP_ATTACH - 1);
 	} else {
 		if (cmd->fs.ring_cookie >= priv->rx_ring_num) {
+<<<<<<< HEAD
 			en_warn(priv, "rxnfc: RX ring (%llu) doesn't exist.\n",
+=======
+			en_warn(priv, "rxnfc: RX ring (%llu) doesn't exist\n",
+>>>>>>> v3.18
 				cmd->fs.ring_cookie);
 			return -EINVAL;
 		}
 		qpn = priv->rss_map.qps[cmd->fs.ring_cookie].qpn;
 		if (!qpn) {
+<<<<<<< HEAD
 			en_warn(priv, "rxnfc: RX ring (%llu) is inactive.\n",
+=======
+			en_warn(priv, "rxnfc: RX ring (%llu) is inactive\n",
+>>>>>>> v3.18
 				cmd->fs.ring_cookie);
 			return -EINVAL;
 		}
@@ -934,7 +1071,11 @@ static int mlx4_en_flow_replace(struct net_device *dev,
 	}
 	err = mlx4_flow_attach(priv->mdev->dev, &rule, &reg_id);
 	if (err) {
+<<<<<<< HEAD
 		en_err(priv, "Fail to attach network rule at location %d.\n",
+=======
+		en_err(priv, "Fail to attach network rule at location %d\n",
+>>>>>>> v3.18
 		       cmd->fs.location);
 		goto out_free_list;
 	}
@@ -1099,7 +1240,11 @@ static int mlx4_en_set_channels(struct net_device *dev,
 {
 	struct mlx4_en_priv *priv = netdev_priv(dev);
 	struct mlx4_en_dev *mdev = priv->mdev;
+<<<<<<< HEAD
 	int port_up;
+=======
+	int port_up = 0;
+>>>>>>> v3.18
 	int err = 0;
 
 	if (channel->other_count || channel->combined_count ||
@@ -1129,7 +1274,12 @@ static int mlx4_en_set_channels(struct net_device *dev,
 	netif_set_real_num_tx_queues(dev, priv->tx_ring_num);
 	netif_set_real_num_rx_queues(dev, priv->rx_ring_num);
 
+<<<<<<< HEAD
 	mlx4_en_setup_tc(dev, MLX4_EN_NUM_UP);
+=======
+	if (dev->num_tc)
+		mlx4_en_setup_tc(dev, MLX4_EN_NUM_UP);
+>>>>>>> v3.18
 
 	en_warn(priv, "Using %d TX rings\n", priv->tx_ring_num);
 	en_warn(priv, "Using %d RX rings\n", priv->rx_ring_num);
@@ -1171,11 +1321,105 @@ static int mlx4_en_get_ts_info(struct net_device *dev,
 		info->rx_filters =
 			(1 << HWTSTAMP_FILTER_NONE) |
 			(1 << HWTSTAMP_FILTER_ALL);
+<<<<<<< HEAD
+=======
+
+		if (mdev->ptp_clock)
+			info->phc_index = ptp_clock_index(mdev->ptp_clock);
+>>>>>>> v3.18
 	}
 
 	return ret;
 }
 
+<<<<<<< HEAD
+=======
+static int mlx4_en_set_priv_flags(struct net_device *dev, u32 flags)
+{
+	struct mlx4_en_priv *priv = netdev_priv(dev);
+	bool bf_enabled_new = !!(flags & MLX4_EN_PRIV_FLAGS_BLUEFLAME);
+	bool bf_enabled_old = !!(priv->pflags & MLX4_EN_PRIV_FLAGS_BLUEFLAME);
+	int i;
+
+	if (bf_enabled_new == bf_enabled_old)
+		return 0; /* Nothing to do */
+
+	if (bf_enabled_new) {
+		bool bf_supported = true;
+
+		for (i = 0; i < priv->tx_ring_num; i++)
+			bf_supported &= priv->tx_ring[i]->bf_alloced;
+
+		if (!bf_supported) {
+			en_err(priv, "BlueFlame is not supported\n");
+			return -EINVAL;
+		}
+
+		priv->pflags |= MLX4_EN_PRIV_FLAGS_BLUEFLAME;
+	} else {
+		priv->pflags &= ~MLX4_EN_PRIV_FLAGS_BLUEFLAME;
+	}
+
+	for (i = 0; i < priv->tx_ring_num; i++)
+		priv->tx_ring[i]->bf_enabled = bf_enabled_new;
+
+	en_info(priv, "BlueFlame %s\n",
+		bf_enabled_new ?  "Enabled" : "Disabled");
+
+	return 0;
+}
+
+static u32 mlx4_en_get_priv_flags(struct net_device *dev)
+{
+	struct mlx4_en_priv *priv = netdev_priv(dev);
+
+	return priv->pflags;
+}
+
+static int mlx4_en_get_tunable(struct net_device *dev,
+			       const struct ethtool_tunable *tuna,
+			       void *data)
+{
+	const struct mlx4_en_priv *priv = netdev_priv(dev);
+	int ret = 0;
+
+	switch (tuna->id) {
+	case ETHTOOL_TX_COPYBREAK:
+		*(u32 *)data = priv->prof->inline_thold;
+		break;
+	default:
+		ret = -EINVAL;
+		break;
+	}
+
+	return ret;
+}
+
+static int mlx4_en_set_tunable(struct net_device *dev,
+			       const struct ethtool_tunable *tuna,
+			       const void *data)
+{
+	struct mlx4_en_priv *priv = netdev_priv(dev);
+	int val, ret = 0;
+
+	switch (tuna->id) {
+	case ETHTOOL_TX_COPYBREAK:
+		val = *(u32 *)data;
+		if (val < MIN_PKT_LEN || val > MAX_INLINE)
+			ret = -EINVAL;
+		else
+			priv->prof->inline_thold = val;
+		break;
+	default:
+		ret = -EINVAL;
+		break;
+	}
+
+	return ret;
+}
+
+
+>>>>>>> v3.18
 const struct ethtool_ops mlx4_en_ethtool_ops = {
 	.get_drvinfo = mlx4_en_get_drvinfo,
 	.get_settings = mlx4_en_get_settings,
@@ -1198,11 +1442,23 @@ const struct ethtool_ops mlx4_en_ethtool_ops = {
 	.get_rxnfc = mlx4_en_get_rxnfc,
 	.set_rxnfc = mlx4_en_set_rxnfc,
 	.get_rxfh_indir_size = mlx4_en_get_rxfh_indir_size,
+<<<<<<< HEAD
 	.get_rxfh_indir = mlx4_en_get_rxfh_indir,
 	.set_rxfh_indir = mlx4_en_set_rxfh_indir,
 	.get_channels = mlx4_en_get_channels,
 	.set_channels = mlx4_en_set_channels,
 	.get_ts_info = mlx4_en_get_ts_info,
+=======
+	.get_rxfh = mlx4_en_get_rxfh,
+	.set_rxfh = mlx4_en_set_rxfh,
+	.get_channels = mlx4_en_get_channels,
+	.set_channels = mlx4_en_set_channels,
+	.get_ts_info = mlx4_en_get_ts_info,
+	.set_priv_flags = mlx4_en_set_priv_flags,
+	.get_priv_flags = mlx4_en_get_priv_flags,
+	.get_tunable		= mlx4_en_get_tunable,
+	.set_tunable		= mlx4_en_set_tunable,
+>>>>>>> v3.18
 };
 
 

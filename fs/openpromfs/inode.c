@@ -162,11 +162,19 @@ static const struct file_operations openpromfs_prop_ops = {
 	.release	= seq_release,
 };
 
+<<<<<<< HEAD
 static int openpromfs_readdir(struct file *, void *, filldir_t);
 
 static const struct file_operations openprom_operations = {
 	.read		= generic_read_dir,
 	.readdir	= openpromfs_readdir,
+=======
+static int openpromfs_readdir(struct file *, struct dir_context *);
+
+static const struct file_operations openprom_operations = {
+	.read		= generic_read_dir,
+	.iterate	= openpromfs_readdir,
+>>>>>>> v3.18
 	.llseek		= generic_file_llseek,
 };
 
@@ -260,18 +268,28 @@ found:
 	return NULL;
 }
 
+<<<<<<< HEAD
 static int openpromfs_readdir(struct file * filp, void * dirent, filldir_t filldir)
 {
 	struct inode *inode = file_inode(filp);
+=======
+static int openpromfs_readdir(struct file *file, struct dir_context *ctx)
+{
+	struct inode *inode = file_inode(file);
+>>>>>>> v3.18
 	struct op_inode_info *oi = OP_I(inode);
 	struct device_node *dp = oi->u.node;
 	struct device_node *child;
 	struct property *prop;
+<<<<<<< HEAD
 	unsigned int ino;
+=======
+>>>>>>> v3.18
 	int i;
 
 	mutex_lock(&op_mutex);
 	
+<<<<<<< HEAD
 	ino = inode->i_ino;
 	i = filp->f_pos;
 	switch (i) {
@@ -325,6 +343,55 @@ static int openpromfs_readdir(struct file * filp, void * dirent, filldir_t filld
 			prop = prop->next;
 		}
 	}
+=======
+	if (ctx->pos == 0) {
+		if (!dir_emit(ctx, ".", 1, inode->i_ino, DT_DIR))
+			goto out;
+		ctx->pos = 1;
+	}
+	if (ctx->pos == 1) {
+		if (!dir_emit(ctx, "..", 2,
+			    (dp->parent == NULL ?
+			     OPENPROM_ROOT_INO :
+			     dp->parent->unique_id), DT_DIR))
+			goto out;
+		ctx->pos = 2;
+	}
+	i = ctx->pos - 2;
+
+	/* First, the children nodes as directories.  */
+	child = dp->child;
+	while (i && child) {
+		child = child->sibling;
+		i--;
+	}
+	while (child) {
+		if (!dir_emit(ctx,
+			    child->path_component_name,
+			    strlen(child->path_component_name),
+			    child->unique_id, DT_DIR))
+			goto out;
+
+		ctx->pos++;
+		child = child->sibling;
+	}
+
+	/* Next, the properties as files.  */
+	prop = dp->properties;
+	while (i && prop) {
+		prop = prop->next;
+		i--;
+	}
+	while (prop) {
+		if (!dir_emit(ctx, prop->name, strlen(prop->name),
+			    prop->unique_id, DT_REG))
+			goto out;
+
+		ctx->pos++;
+		prop = prop->next;
+	}
+
+>>>>>>> v3.18
 out:
 	mutex_unlock(&op_mutex);
 	return 0;
@@ -375,6 +442,10 @@ static struct inode *openprom_iget(struct super_block *sb, ino_t ino)
 
 static int openprom_remount(struct super_block *sb, int *flags, char *data)
 {
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+>>>>>>> v3.18
 	*flags |= MS_NOATIME;
 	return 0;
 }

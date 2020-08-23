@@ -89,6 +89,7 @@ struct camelot_pcm {
 #define DMABRG_PREALLOC_BUFFER		32 * 1024
 #define DMABRG_PREALLOC_BUFFER_MAX	32 * 1024
 
+<<<<<<< HEAD
 /* support everything the SSI supports */
 #define DMABRG_RATES	\
 	SNDRV_PCM_RATE_8000_192000
@@ -100,18 +101,23 @@ struct camelot_pcm {
 	 SNDRV_PCM_FMTBIT_S24_3LE | SNDRV_PCM_FMTBIT_U24_3LE |	\
 	 SNDRV_PCM_FMTBIT_S32_LE  | SNDRV_PCM_FMTBIT_U32_LE)
 
+=======
+>>>>>>> v3.18
 static struct snd_pcm_hardware camelot_pcm_hardware = {
 	.info = (SNDRV_PCM_INFO_MMAP |
 		SNDRV_PCM_INFO_INTERLEAVED |
 		SNDRV_PCM_INFO_BLOCK_TRANSFER |
 		SNDRV_PCM_INFO_MMAP_VALID |
 		SNDRV_PCM_INFO_BATCH),
+<<<<<<< HEAD
 	.formats =	DMABRG_FMTS,
 	.rates =	DMABRG_RATES,
 	.rate_min =		8000,
 	.rate_max =		192000,
 	.channels_min =		2,
 	.channels_max =		8,		/* max of the SSI */
+=======
+>>>>>>> v3.18
 	.buffer_bytes_max =	DMABRG_PERIOD_MAX,
 	.period_bytes_min =	DMABRG_PERIOD_MIN,
 	.period_bytes_max =	DMABRG_PERIOD_MAX / 2,

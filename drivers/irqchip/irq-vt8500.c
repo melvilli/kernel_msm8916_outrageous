@@ -178,10 +178,17 @@ static struct irq_domain_ops vt8500_irq_domain_ops = {
 	.xlate = irq_domain_xlate_onecell,
 };
 
+<<<<<<< HEAD
 asmlinkage void __exception_irq_entry vt8500_handle_irq(struct pt_regs *regs)
 {
 	u32 stat, i;
 	int irqnr, virq;
+=======
+static void __exception_irq_entry vt8500_handle_irq(struct pt_regs *regs)
+{
+	u32 stat, i;
+	int irqnr;
+>>>>>>> v3.18
 	void __iomem *base;
 
 	/* Loop through each active controller */
@@ -198,12 +205,21 @@ asmlinkage void __exception_irq_entry vt8500_handle_irq(struct pt_regs *regs)
 				continue;
 		}
 
+<<<<<<< HEAD
 		virq = irq_find_mapping(intc[i].domain, irqnr);
 		handle_IRQ(virq, regs);
 	}
 }
 
 int __init vt8500_irq_init(struct device_node *node, struct device_node *parent)
+=======
+		handle_domain_irq(intc[i].domain, irqnr, regs);
+	}
+}
+
+static int __init vt8500_irq_init(struct device_node *node,
+				  struct device_node *parent)
+>>>>>>> v3.18
 {
 	int irq, i;
 	struct device_node *np = node;

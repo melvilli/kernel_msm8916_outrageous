@@ -323,6 +323,12 @@ struct link_params {
 #define LINK_FLAGS_INT_DISABLED		(1<<0)
 #define PHY_INITIALIZED		(1<<1)
 	u32 lfa_base;
+<<<<<<< HEAD
+=======
+
+	/* The same definitions as the shmem2 parameter */
+	u32 link_attr_sync;
+>>>>>>> v3.18
 };
 
 /* Output parameters */
@@ -364,8 +370,11 @@ struct link_vars {
 	u8 rx_tx_asic_rst;
 	u8 turn_to_run_wc_rt;
 	u16 rsrv2;
+<<<<<<< HEAD
 	/* The same definitions as the shmem2 parameter */
 	u32 link_attr_sync;
+=======
+>>>>>>> v3.18
 };
 
 /***********************************************************/
@@ -533,14 +542,19 @@ int bnx2x_ets_strict(const struct link_params *params, const u8 strict_cos);
 int bnx2x_ets_e3b0_config(const struct link_params *params,
 			 const struct link_vars *vars,
 			 struct bnx2x_ets_params *ets_params);
+<<<<<<< HEAD
 /* Read pfc statistic*/
 void bnx2x_pfc_statistic(struct link_params *params, struct link_vars *vars,
 						 u32 pfc_frames_sent[2],
 						 u32 pfc_frames_received[2]);
+=======
+
+>>>>>>> v3.18
 void bnx2x_init_mod_abs_int(struct bnx2x *bp, struct link_vars *vars,
 			    u32 chip_id, u32 shmem_base, u32 shmem2_base,
 			    u8 port);
 
+<<<<<<< HEAD
 int bnx2x_sfp_module_detection(struct bnx2x_phy *phy,
 			       struct link_params *params);
 
@@ -548,4 +562,8 @@ void bnx2x_period_func(struct link_params *params, struct link_vars *vars);
 
 int bnx2x_check_half_open_conn(struct link_params *params,
 			       struct link_vars *vars, u8 notify);
+=======
+void bnx2x_period_func(struct link_params *params, struct link_vars *vars);
+
+>>>>>>> v3.18
 #endif /* BNX2X_LINK_H */

@@ -23,7 +23,11 @@
 #include <linux/skbuff.h>
 #include <net/sock.h>
 #include <net/tcp_states.h>
+<<<<<<< HEAD
 #include <asm/uaccess.h>
+=======
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 #include <linux/fcntl.h>
 #include <linux/mm.h>
 #include <linux/interrupt.h>

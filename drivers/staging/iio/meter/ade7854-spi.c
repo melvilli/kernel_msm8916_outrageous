@@ -278,7 +278,11 @@ static int ade7854_spi_probe(struct spi_device *spi)
 	struct ade7854_state *st;
 	struct iio_dev *indio_dev;
 
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*st));
+=======
+	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
+>>>>>>> v3.18
 	if (indio_dev == NULL)
 		return -ENOMEM;
 	st = iio_priv(indio_dev);
@@ -296,10 +300,15 @@ static int ade7854_spi_probe(struct spi_device *spi)
 
 
 	ret = ade7854_probe(indio_dev, &spi->dev);
+<<<<<<< HEAD
 	if (ret)
 		iio_device_free(indio_dev);
 
 	return 0;
+=======
+
+	return ret;
+>>>>>>> v3.18
 }
 
 static int ade7854_spi_remove(struct spi_device *spi)

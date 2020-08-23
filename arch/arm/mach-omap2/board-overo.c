@@ -68,9 +68,19 @@
 
 #define OVERO_SMSC911X_CS      5
 #define OVERO_SMSC911X_GPIO    176
+<<<<<<< HEAD
 #define OVERO_SMSC911X2_CS     4
 #define OVERO_SMSC911X2_GPIO   65
 
+=======
+#define OVERO_SMSC911X_NRESET  64
+#define OVERO_SMSC911X2_CS     4
+#define OVERO_SMSC911X2_GPIO   65
+
+/* whether to register LCD35 instead of LCD43 */
+static bool overo_use_lcd35;
+
+>>>>>>> v3.18
 #if defined(CONFIG_TOUCHSCREEN_ADS7846) || \
 	defined(CONFIG_TOUCHSCREEN_ADS7846_MODULE)
 
@@ -122,7 +132,11 @@ static struct omap_smsc911x_platform_data smsc911x_cfg = {
 	.id		= 0,
 	.cs             = OVERO_SMSC911X_CS,
 	.gpio_irq       = OVERO_SMSC911X_GPIO,
+<<<<<<< HEAD
 	.gpio_reset     = -EINVAL,
+=======
+	.gpio_reset     = OVERO_SMSC911X_NRESET,
+>>>>>>> v3.18
 	.flags		= SMSC911X_USE_32BIT,
 };
 
@@ -148,6 +162,7 @@ static inline void __init overo_init_smsc911x(void) { return; }
 #define OVERO_GPIO_LCD_EN 144
 #define OVERO_GPIO_LCD_BL 145
 
+<<<<<<< HEAD
 static struct tfp410_platform_data dvi_panel = {
 	.i2c_bus_num		= 3,
 	.power_down_gpio	= -1,
@@ -220,6 +235,96 @@ static struct omap_dss_board_info overo_dss_data = {
 	.default_device	= &overo_dvi_device,
 };
 
+=======
+static struct connector_atv_platform_data overo_tv_pdata = {
+	.name = "tv",
+	.source = "venc.0",
+	.connector_type = OMAP_DSS_VENC_TYPE_SVIDEO,
+	.invert_polarity = false,
+};
+
+static struct platform_device overo_tv_connector_device = {
+	.name                   = "connector-analog-tv",
+	.id                     = 0,
+	.dev.platform_data      = &overo_tv_pdata,
+};
+
+static const struct display_timing overo_lcd43_videomode = {
+	.pixelclock	= { 0, 9200000, 0 },
+
+	.hactive = { 0, 480, 0 },
+	.hfront_porch = { 0, 8, 0 },
+	.hback_porch = { 0, 4, 0 },
+	.hsync_len = { 0, 41, 0 },
+
+	.vactive = { 0, 272, 0 },
+	.vfront_porch = { 0, 4, 0 },
+	.vback_porch = { 0, 2, 0 },
+	.vsync_len = { 0, 10, 0 },
+
+	.flags = DISPLAY_FLAGS_HSYNC_LOW | DISPLAY_FLAGS_VSYNC_LOW |
+		DISPLAY_FLAGS_DE_HIGH | DISPLAY_FLAGS_PIXDATA_POSEDGE,
+};
+
+static struct panel_dpi_platform_data overo_lcd43_pdata = {
+	.name                   = "lcd43",
+	.source                 = "dpi.0",
+
+	.data_lines		= 24,
+
+	.display_timing		= &overo_lcd43_videomode,
+
+	.enable_gpio		= OVERO_GPIO_LCD_EN,
+	.backlight_gpio		= OVERO_GPIO_LCD_BL,
+};
+
+static struct platform_device overo_lcd43_device = {
+	.name                   = "panel-dpi",
+	.id                     = 0,
+	.dev.platform_data      = &overo_lcd43_pdata,
+};
+
+static struct connector_dvi_platform_data overo_dvi_connector_pdata = {
+	.name                   = "dvi",
+	.source                 = "tfp410.0",
+	.i2c_bus_num            = 3,
+};
+
+static struct platform_device overo_dvi_connector_device = {
+	.name                   = "connector-dvi",
+	.id                     = 0,
+	.dev.platform_data      = &overo_dvi_connector_pdata,
+};
+
+static struct encoder_tfp410_platform_data overo_tfp410_pdata = {
+	.name                   = "tfp410.0",
+	.source                 = "dpi.0",
+	.data_lines             = 24,
+	.power_down_gpio        = -1,
+};
+
+static struct platform_device overo_tfp410_device = {
+	.name                   = "tfp410",
+	.id                     = 0,
+	.dev.platform_data      = &overo_tfp410_pdata,
+};
+
+static struct omap_dss_board_info overo_dss_data = {
+	.default_display_name = "lcd43",
+};
+
+static void __init overo_display_init(void)
+{
+	omap_display_init(&overo_dss_data);
+
+	if (!overo_use_lcd35)
+		platform_device_register(&overo_lcd43_device);
+	platform_device_register(&overo_tfp410_device);
+	platform_device_register(&overo_dvi_connector_device);
+	platform_device_register(&overo_tv_connector_device);
+}
+
+>>>>>>> v3.18
 static struct mtd_partition overo_nand_partitions[] = {
 	{
 		.name           = "xloader",
@@ -407,24 +512,59 @@ static int __init overo_i2c_init(void)
 	return 0;
 }
 
+<<<<<<< HEAD
 static struct spi_board_info overo_spi_board_info[] __initdata = {
 #if defined(CONFIG_PANEL_LGPHILIPS_LB035Q02) || \
 	defined(CONFIG_PANEL_LGPHILIPS_LB035Q02_MODULE)
 	{
 		.modalias		= "lgphilips_lb035q02_panel-spi",
+=======
+static struct panel_lb035q02_platform_data overo_lcd35_pdata = {
+	.name                   = "lcd35",
+	.source                 = "dpi.0",
+
+	.data_lines		= 24,
+
+	.enable_gpio		= OVERO_GPIO_LCD_EN,
+	.backlight_gpio		= OVERO_GPIO_LCD_BL,
+};
+
+/*
+ * NOTE: We need to add either the lgphilips panel, or the lcd43 panel. The
+ * selection is done based on the overo_use_lcd35 field. If new SPI
+ * devices are added here, extra work is needed to make only the lgphilips panel
+ * affected by the overo_use_lcd35 field.
+ */
+static struct spi_board_info overo_spi_board_info[] __initdata = {
+	{
+		.modalias		= "panel_lgphilips_lb035q02",
+>>>>>>> v3.18
 		.bus_num		= 1,
 		.chip_select		= 1,
 		.max_speed_hz		= 500000,
 		.mode			= SPI_MODE_3,
+<<<<<<< HEAD
 	},
 #endif
+=======
+		.platform_data		= &overo_lcd35_pdata,
+	},
+>>>>>>> v3.18
 };
 
 static int __init overo_spi_init(void)
 {
 	overo_ads7846_init();
+<<<<<<< HEAD
 	spi_register_board_info(overo_spi_board_info,
 			ARRAY_SIZE(overo_spi_board_info));
+=======
+
+	if (overo_use_lcd35) {
+		spi_register_board_info(overo_spi_board_info,
+				ARRAY_SIZE(overo_spi_board_info));
+	}
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -462,11 +602,20 @@ static void __init overo_init(void)
 {
 	int ret;
 
+<<<<<<< HEAD
+=======
+	if (strstr(boot_command_line, "omapdss.def_disp=lcd35"))
+		overo_use_lcd35 = true;
+
+>>>>>>> v3.18
 	regulator_register_fixed(0, dummy_supplies, ARRAY_SIZE(dummy_supplies));
 	omap3_mux_init(board_mux, OMAP_PACKAGE_CBB);
 	overo_i2c_init();
 	omap_hsmmc_init(mmc);
+<<<<<<< HEAD
 	omap_display_init(&overo_dss_data);
+=======
+>>>>>>> v3.18
 	omap_serial_init();
 	omap_sdrc_init(mt46h32m32lf6_sdrc_params,
 				  mt46h32m32lf6_sdrc_params);
@@ -483,6 +632,11 @@ static void __init overo_init(void)
 	overo_init_keys();
 	omap_twl4030_audio_init("overo", NULL);
 
+<<<<<<< HEAD
+=======
+	overo_display_init();
+
+>>>>>>> v3.18
 	/* Ensure SDRC pins are mux'd for self-refresh */
 	omap_mux_init_signal("sdrc_cke0", OMAP_PIN_OUTPUT);
 	omap_mux_init_signal("sdrc_cke1", OMAP_PIN_OUTPUT);
@@ -523,7 +677,10 @@ MACHINE_START(OVERO, "Gumstix Overo")
 	.map_io		= omap3_map_io,
 	.init_early	= omap35xx_init_early,
 	.init_irq	= omap3_init_irq,
+<<<<<<< HEAD
 	.handle_irq	= omap3_intc_handle_irq,
+=======
+>>>>>>> v3.18
 	.init_machine	= overo_init,
 	.init_late	= omap35xx_init_late,
 	.init_time	= omap3_sync32k_timer_init,

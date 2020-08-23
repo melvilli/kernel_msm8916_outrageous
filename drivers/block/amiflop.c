@@ -343,7 +343,11 @@ static int fd_motor_on(int nr)
 		unit[nr].motor = 1;
 		fd_select(nr);
 
+<<<<<<< HEAD
 		INIT_COMPLETION(motor_on_completion);
+=======
+		reinit_completion(&motor_on_completion);
+>>>>>>> v3.18
 		motor_on_timer.data = nr;
 		mod_timer(&motor_on_timer, jiffies + HZ/2);
 
@@ -1406,7 +1410,11 @@ next_segment:
 
 		track = block / (floppy->dtype->sects * floppy->type->sect_mult);
 		sector = block % (floppy->dtype->sects * floppy->type->sect_mult);
+<<<<<<< HEAD
 		data = rq->buffer + 512 * cnt;
+=======
+		data = bio_data(rq->bio) + 512 * cnt;
+>>>>>>> v3.18
 #ifdef DEBUG
 		printk("access to track %d, sector %d, with buffer at "
 		       "0x%08lx\n", track, sector, data);

@@ -27,7 +27,10 @@
 /*#include <linux/fs.h>
 #include <linux/mount.h>
 #include <linux/pagemap.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/namei.h>
 #include <linux/sched.h>*/
 #include <linux/platform_device.h>
@@ -250,6 +253,10 @@ static int ohci_hcd_tmio_drv_probe(struct platform_device *dev)
 	if (ret)
 		goto err_add_hcd;
 
+<<<<<<< HEAD
+=======
+	device_wakeup_enable(hcd->self.controller);
+>>>>>>> v3.18
 	if (ret == 0)
 		return ret;
 
@@ -287,8 +294,11 @@ static int ohci_hcd_tmio_drv_remove(struct platform_device *dev)
 	iounmap(tmio->ccr);
 	usb_put_hcd(hcd);
 
+<<<<<<< HEAD
 	platform_set_drvdata(dev, NULL);
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

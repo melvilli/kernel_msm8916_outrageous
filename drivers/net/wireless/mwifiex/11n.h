@@ -1,7 +1,11 @@
 /*
  * Marvell Wireless LAN device driver: 802.11n
  *
+<<<<<<< HEAD
  * Copyright (C) 2011, Marvell International Ltd.
+=======
+ * Copyright (C) 2011-2014, Marvell International Ltd.
+>>>>>>> v3.18
  *
  * This software file (the "File") is distributed by Marvell International
  * Ltd. under the terms of the GNU General Public License Version 2, June 1991
@@ -34,8 +38,13 @@ int mwifiex_cmd_11n_cfg(struct mwifiex_private *priv,
 int mwifiex_cmd_append_11n_tlv(struct mwifiex_private *priv,
 			       struct mwifiex_bssdescriptor *bss_desc,
 			       u8 **buffer);
+<<<<<<< HEAD
 void mwifiex_fill_cap_info(struct mwifiex_private *, u8 radio_type,
 			   struct mwifiex_ie_types_htcap *);
+=======
+int mwifiex_fill_cap_info(struct mwifiex_private *, u8 radio_type,
+			  struct ieee80211_ht_cap *);
+>>>>>>> v3.18
 int mwifiex_set_get_11n_htcap_cfg(struct mwifiex_private *priv,
 				  u16 action, int *htcap_cfg);
 void mwifiex_11n_delete_tx_ba_stream_tbl_entry(struct mwifiex_private *priv,
@@ -63,6 +72,7 @@ int mwifiex_cmd_amsdu_aggr_ctrl(struct host_cmd_ds_command *cmd,
 				int cmd_action,
 				struct mwifiex_ds_11n_amsdu_aggr_ctrl *aa_ctrl);
 void mwifiex_del_tx_ba_stream_tbl_by_ra(struct mwifiex_private *priv, u8 *ra);
+<<<<<<< HEAD
 
 /*
  * This function checks whether AMPDU is allowed or not for a particular TID.
@@ -72,6 +82,50 @@ mwifiex_is_ampdu_allowed(struct mwifiex_private *priv, int tid)
 {
 	return ((priv->aggr_prio_tbl[tid].ampdu_ap != BA_STREAM_NOT_ALLOWED)
 		? true : false);
+=======
+u8 mwifiex_get_sec_chan_offset(int chan);
+
+static inline u8
+mwifiex_is_station_ampdu_allowed(struct mwifiex_private *priv,
+				 struct mwifiex_ra_list_tbl *ptr, int tid)
+{
+	struct mwifiex_sta_node *node = mwifiex_get_sta_entry(priv, ptr->ra);
+
+	if (unlikely(!node))
+		return false;
+
+	return (node->ampdu_sta[tid] != BA_STREAM_NOT_ALLOWED) ? true : false;
+}
+
+/* This function checks whether AMSDU is allowed for BA stream. */
+static inline u8
+mwifiex_is_amsdu_in_ampdu_allowed(struct mwifiex_private *priv,
+				  struct mwifiex_ra_list_tbl *ptr, int tid)
+{
+	struct mwifiex_tx_ba_stream_tbl *tx_tbl;
+
+	tx_tbl = mwifiex_get_ba_tbl(priv, tid, ptr->ra);
+	if (tx_tbl)
+		return tx_tbl->amsdu;
+
+	return false;
+}
+
+/* This function checks whether AMPDU is allowed or not for a particular TID. */
+static inline u8
+mwifiex_is_ampdu_allowed(struct mwifiex_private *priv,
+			 struct mwifiex_ra_list_tbl *ptr, int tid)
+{
+	if (GET_BSS_ROLE(priv) == MWIFIEX_BSS_ROLE_UAP) {
+		return mwifiex_is_station_ampdu_allowed(priv, ptr, tid);
+	} else {
+		if (ptr->tdls_link)
+			return mwifiex_is_station_ampdu_allowed(priv, ptr, tid);
+
+		return (priv->aggr_prio_tbl[tid].ampdu_ap !=
+			BA_STREAM_NOT_ALLOWED) ? true : false;
+	}
+>>>>>>> v3.18
 }
 
 /*
@@ -165,4 +219,17 @@ static inline int mwifiex_is_sta_11n_enabled(struct mwifiex_private *priv,
 
 	return node->is_11n_enabled;
 }
+<<<<<<< HEAD
+=======
+
+static inline u8
+mwifiex_tdls_peer_11n_enabled(struct mwifiex_private *priv, const u8 *ra)
+{
+	struct mwifiex_sta_node *node = mwifiex_get_sta_entry(priv, ra);
+	if (node)
+		return node->is_11n_enabled;
+
+	return false;
+}
+>>>>>>> v3.18
 #endif /* !_MWIFIEX_11N_H_ */

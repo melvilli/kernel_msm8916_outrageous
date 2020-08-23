@@ -417,7 +417,11 @@ static void sahara_aes_done_task(unsigned long data)
 	dev->req->base.complete(&dev->req->base, dev->error);
 }
 
+<<<<<<< HEAD
 void sahara_watchdog(unsigned long data)
+=======
+static void sahara_watchdog(unsigned long data)
+>>>>>>> v3.18
 {
 	struct sahara_dev *dev = (struct sahara_dev *)data;
 	unsigned int err = sahara_read(dev, SAHARA_REG_ERRSTATUS);
@@ -728,7 +732,11 @@ static int sahara_aes_cbc_decrypt(struct ablkcipher_request *req)
 
 static int sahara_aes_cra_init(struct crypto_tfm *tfm)
 {
+<<<<<<< HEAD
 	const char *name = tfm->__crt_alg->cra_name;
+=======
+	const char *name = crypto_tfm_alg_name(tfm);
+>>>>>>> v3.18
 	struct sahara_ctx *ctx = crypto_tfm_ctx(tfm);
 
 	ctx->fallback = crypto_alloc_ablkcipher(name, 0,
@@ -885,6 +893,7 @@ static int sahara_probe(struct platform_device *pdev)
 
 	/* Get the base address */
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
 	if (!res) {
 		dev_err(&pdev->dev, "failed to get memory region resource\n");
 		return -ENODEV;
@@ -901,6 +910,11 @@ static int sahara_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "failed to ioremap address region\n");
 		return -ENOENT;
 	}
+=======
+	dev->regs_base = devm_ioremap_resource(&pdev->dev, res);
+	if (IS_ERR(dev->regs_base))
+		return PTR_ERR(dev->regs_base);
+>>>>>>> v3.18
 
 	/* Get the IRQ */
 	irq = platform_get_irq(pdev,  0);
@@ -909,10 +923,18 @@ static int sahara_probe(struct platform_device *pdev)
 		return irq;
 	}
 
+<<<<<<< HEAD
 	if (devm_request_irq(&pdev->dev, irq, sahara_irq_handler,
 		0, SAHARA_NAME, dev) < 0) {
 		dev_err(&pdev->dev, "failed to request irq\n");
 		return -ENOENT;
+=======
+	err = devm_request_irq(&pdev->dev, irq, sahara_irq_handler,
+			       0, dev_name(&pdev->dev), dev);
+	if (err) {
+		dev_err(&pdev->dev, "failed to request irq\n");
+		return err;
+>>>>>>> v3.18
 	}
 
 	/* clocks */
@@ -955,7 +977,11 @@ static int sahara_probe(struct platform_device *pdev)
 	dev->hw_link[0] = dma_alloc_coherent(&pdev->dev,
 			SAHARA_MAX_HW_LINK * sizeof(struct sahara_hw_link),
 			&dev->hw_phys_link[0], GFP_KERNEL);
+<<<<<<< HEAD
 	if (!dev->hw_link) {
+=======
+	if (!dev->hw_link[0]) {
+>>>>>>> v3.18
 		dev_err(&pdev->dev, "Could not allocate hw links\n");
 		err = -ENOMEM;
 		goto err_link;
@@ -1058,7 +1084,11 @@ static struct platform_driver sahara_driver = {
 	.driver		= {
 		.name	= SAHARA_NAME,
 		.owner	= THIS_MODULE,
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(sahara_dt_ids),
+=======
+		.of_match_table = sahara_dt_ids,
+>>>>>>> v3.18
 	},
 	.id_table = sahara_platform_ids,
 };

@@ -15,7 +15,10 @@
 
 #include <asm/unaligned.h>
 #include <linux/errno.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/tty.h>
 #include <linux/tty_driver.h>
@@ -62,6 +65,10 @@
 #define  MAX_BAUD_RATE              921600
 #define  DEFAULT_BAUD_RATE          9600
 
+<<<<<<< HEAD
+=======
+#define QT2_READ_BUFFER_SIZE    512  /* size of read buffer */
+>>>>>>> v3.18
 #define QT2_WRITE_BUFFER_SIZE   512  /* size of write buffer */
 #define QT2_WRITE_CONTROL_SIZE  5    /* control bytes used for a write */
 
@@ -112,7 +119,11 @@ struct qt2_serial_private {
 	unsigned char current_port;  /* current port for incoming data */
 
 	struct urb	*read_urb;   /* shared among all ports */
+<<<<<<< HEAD
 	char		read_buffer[512];
+=======
+	char		*read_buffer;
+>>>>>>> v3.18
 };
 
 struct qt2_port_private {
@@ -121,7 +132,11 @@ struct qt2_port_private {
 	spinlock_t urb_lock;
 	bool       urb_in_use;
 	struct urb *write_urb;
+<<<<<<< HEAD
 	char       write_buffer[QT2_WRITE_BUFFER_SIZE];
+=======
+	char       *write_buffer;
+>>>>>>> v3.18
 
 	spinlock_t  lock;
 	u8          shadowLSR;
@@ -141,8 +156,13 @@ static void qt2_release(struct usb_serial *serial)
 
 	serial_priv = usb_get_serial_data(serial);
 
+<<<<<<< HEAD
 	usb_kill_urb(serial_priv->read_urb);
 	usb_free_urb(serial_priv->read_urb);
+=======
+	usb_free_urb(serial_priv->read_urb);
+	kfree(serial_priv->read_buffer);
+>>>>>>> v3.18
 	kfree(serial_priv);
 }
 
@@ -344,7 +364,11 @@ static int qt2_open(struct tty_struct *tty, struct usb_serial_port *port)
 	int status;
 	unsigned long flags;
 
+<<<<<<< HEAD
 	device_port = (u16) (port->number - port->serial->minor);
+=======
+	device_port = port->port_number;
+>>>>>>> v3.18
 
 	serial = port->serial;
 
@@ -372,7 +396,11 @@ static int qt2_open(struct tty_struct *tty, struct usb_serial_port *port)
 				 device_port, data, 2, QT2_USB_TIMEOUT);
 
 	if (status < 0) {
+<<<<<<< HEAD
 		dev_err(&port->dev, "%s - open port failed %i", __func__,
+=======
+		dev_err(&port->dev, "%s - open port failed %i\n", __func__,
+>>>>>>> v3.18
 			status);
 		kfree(data);
 		return status;
@@ -389,9 +417,14 @@ static int qt2_open(struct tty_struct *tty, struct usb_serial_port *port)
 	status = qt2_set_port_config(serial->dev, device_port,
 				     DEFAULT_BAUD_RATE, UART_LCR_WLEN8);
 	if (status < 0) {
+<<<<<<< HEAD
 		dev_err(&port->dev,
 			"%s - initial setup failed for port %i (%i)\n",
 			__func__, port->number, device_port);
+=======
+		dev_err(&port->dev, "%s - initial setup failed (%i)\n",
+			__func__, device_port);
+>>>>>>> v3.18
 		return status;
 	}
 
@@ -408,12 +441,23 @@ static void qt2_close(struct usb_serial_port *port)
 {
 	struct usb_serial *serial;
 	struct qt2_port_private *port_priv;
+<<<<<<< HEAD
+=======
+	unsigned long flags;
+>>>>>>> v3.18
 	int i;
 
 	serial = port->serial;
 	port_priv = usb_get_serial_port_data(port);
 
+<<<<<<< HEAD
 	usb_kill_urb(port_priv->write_urb);
+=======
+	spin_lock_irqsave(&port_priv->urb_lock, flags);
+	usb_kill_urb(port_priv->write_urb);
+	port_priv->urb_in_use = false;
+	spin_unlock_irqrestore(&port_priv->urb_lock, flags);
+>>>>>>> v3.18
 
 	/* flush the port transmit buffer */
 	i = usb_control_msg(serial->dev,
@@ -463,7 +507,11 @@ static int get_serial_info(struct usb_serial_port *port,
 		return -EFAULT;
 
 	memset(&tmp, 0, sizeof(tmp));
+<<<<<<< HEAD
 	tmp.line		= port->serial->minor;
+=======
+	tmp.line		= port->minor;
+>>>>>>> v3.18
 	tmp.port		= 0;
 	tmp.irq			= 0;
 	tmp.flags		= ASYNC_SKIP_TEST | ASYNC_AUTO_IRQ;
@@ -520,7 +568,11 @@ static void qt2_process_flush(struct usb_serial_port *port, unsigned char *ch)
 	return;
 }
 
+<<<<<<< HEAD
 void qt2_process_read_urb(struct urb *urb)
+=======
+static void qt2_process_read_urb(struct urb *urb)
+>>>>>>> v3.18
 {
 	struct usb_serial *serial;
 	struct qt2_serial_private *serial_priv;
@@ -672,16 +724,25 @@ static int qt2_setup_urbs(struct usb_serial *serial)
 
 	serial_priv = usb_get_serial_data(serial);
 	serial_priv->read_urb = usb_alloc_urb(0, GFP_KERNEL);
+<<<<<<< HEAD
 	if (!serial_priv->read_urb) {
 		dev_err(&serial->dev->dev, "No free urbs available\n");
 		return -ENOMEM;
 	}
+=======
+	if (!serial_priv->read_urb)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	usb_fill_bulk_urb(serial_priv->read_urb, serial->dev,
 			  usb_rcvbulkpipe(serial->dev,
 					  port0->bulk_in_endpointAddress),
 			  serial_priv->read_buffer,
+<<<<<<< HEAD
 			  sizeof(serial_priv->read_buffer),
+=======
+			  QT2_READ_BUFFER_SIZE,
+>>>>>>> v3.18
 			  qt2_read_bulk_callback, serial);
 
 	status = usb_submit_urb(serial_priv->read_urb, GFP_KERNEL);
@@ -711,9 +772,19 @@ static int qt2_attach(struct usb_serial *serial)
 	}
 
 	serial_priv = kzalloc(sizeof(*serial_priv), GFP_KERNEL);
+<<<<<<< HEAD
 	if (!serial_priv) {
 		dev_err(&serial->dev->dev, "%s - Out of memory\n", __func__);
 		return -ENOMEM;
+=======
+	if (!serial_priv)
+		return -ENOMEM;
+
+	serial_priv->read_buffer = kmalloc(QT2_READ_BUFFER_SIZE, GFP_KERNEL);
+	if (!serial_priv->read_buffer) {
+		status = -ENOMEM;
+		goto err_buf;
+>>>>>>> v3.18
 	}
 
 	usb_set_serial_data(serial, serial_priv);
@@ -725,6 +796,11 @@ static int qt2_attach(struct usb_serial *serial)
 	return 0;
 
 attach_failed:
+<<<<<<< HEAD
+=======
+	kfree(serial_priv->read_buffer);
+err_buf:
+>>>>>>> v3.18
 	kfree(serial_priv);
 	return status;
 }
@@ -743,21 +819,44 @@ static int qt2_port_probe(struct usb_serial_port *port)
 	spin_lock_init(&port_priv->urb_lock);
 	port_priv->port = port;
 
+<<<<<<< HEAD
 	port_priv->write_urb = usb_alloc_urb(0, GFP_KERNEL);
 	if (!port_priv->write_urb) {
 		kfree(port_priv);
 		return -ENOMEM;
 	}
+=======
+	port_priv->write_buffer = kmalloc(QT2_WRITE_BUFFER_SIZE, GFP_KERNEL);
+	if (!port_priv->write_buffer)
+		goto err_buf;
+
+	port_priv->write_urb = usb_alloc_urb(0, GFP_KERNEL);
+	if (!port_priv->write_urb)
+		goto err_urb;
+
+>>>>>>> v3.18
 	bEndpointAddress = serial->port[0]->bulk_out_endpointAddress;
 	usb_fill_bulk_urb(port_priv->write_urb, serial->dev,
 				usb_sndbulkpipe(serial->dev, bEndpointAddress),
 				port_priv->write_buffer,
+<<<<<<< HEAD
 				sizeof(port_priv->write_buffer),
+=======
+				QT2_WRITE_BUFFER_SIZE,
+>>>>>>> v3.18
 				qt2_write_bulk_callback, port);
 
 	usb_set_serial_port_data(port, port_priv);
 
 	return 0;
+<<<<<<< HEAD
+=======
+err_urb:
+	kfree(port_priv->write_buffer);
+err_buf:
+	kfree(port_priv);
+	return -ENOMEM;
+>>>>>>> v3.18
 }
 
 static int qt2_port_remove(struct usb_serial_port *port)
@@ -766,6 +865,10 @@ static int qt2_port_remove(struct usb_serial_port *port)
 
 	port_priv = usb_get_serial_port_data(port);
 	usb_free_urb(port_priv->write_urb);
+<<<<<<< HEAD
+=======
+	kfree(port_priv->write_buffer);
+>>>>>>> v3.18
 	kfree(port_priv);
 
 	return 0;

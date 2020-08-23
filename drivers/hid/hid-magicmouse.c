@@ -36,7 +36,11 @@ MODULE_PARM_DESC(emulate_scroll_wheel, "Emulate a scroll wheel");
 static unsigned int scroll_speed = 32;
 static int param_set_scroll_speed(const char *val, struct kernel_param *kp) {
 	unsigned long speed;
+<<<<<<< HEAD
 	if (!val || strict_strtoul(val, 0, &speed) || speed > 63)
+=======
+	if (!val || kstrtoul(val, 0, &speed) || speed > 63)
+>>>>>>> v3.18
 		return -EINVAL;
 	scroll_speed = speed;
 	return 0;
@@ -471,7 +475,11 @@ static int magicmouse_input_mapping(struct hid_device *hdev,
 	return 0;
 }
 
+<<<<<<< HEAD
 static int magicmouse_input_configured(struct hid_device *hdev,
+=======
+static void magicmouse_input_configured(struct hid_device *hdev,
+>>>>>>> v3.18
 		struct hid_input *hi)
 
 {
@@ -483,7 +491,10 @@ static int magicmouse_input_configured(struct hid_device *hdev,
 		/* clean msc->input to notify probe() of the failure */
 		msc->input = NULL;
 	}
+<<<<<<< HEAD
 	return ret;
+=======
+>>>>>>> v3.18
 }
 
 
@@ -495,7 +506,11 @@ static int magicmouse_probe(struct hid_device *hdev,
 	struct hid_report *report;
 	int ret;
 
+<<<<<<< HEAD
 	msc = kzalloc(sizeof(*msc), GFP_KERNEL);
+=======
+	msc = devm_kzalloc(&hdev->dev, sizeof(*msc), GFP_KERNEL);
+>>>>>>> v3.18
 	if (msc == NULL) {
 		hid_err(hdev, "can't alloc magicmouse descriptor\n");
 		return -ENOMEM;
@@ -509,13 +524,21 @@ static int magicmouse_probe(struct hid_device *hdev,
 	ret = hid_parse(hdev);
 	if (ret) {
 		hid_err(hdev, "magicmouse hid parse failed\n");
+<<<<<<< HEAD
 		goto err_free;
+=======
+		return ret;
+>>>>>>> v3.18
 	}
 
 	ret = hid_hw_start(hdev, HID_CONNECT_DEFAULT);
 	if (ret) {
 		hid_err(hdev, "magicmouse hw start failed\n");
+<<<<<<< HEAD
 		goto err_free;
+=======
+		return ret;
+>>>>>>> v3.18
 	}
 
 	if (!msc->input) {
@@ -549,8 +572,13 @@ static int magicmouse_probe(struct hid_device *hdev,
 	 * but there seems to be no other way of switching the mode.
 	 * Thus the super-ugly hacky success check below.
 	 */
+<<<<<<< HEAD
 	ret = hdev->hid_output_raw_report(hdev, feature, sizeof(feature),
 			HID_FEATURE_REPORT);
+=======
+	ret = hid_hw_raw_request(hdev, feature[0], feature, sizeof(feature),
+				HID_FEATURE_REPORT, HID_REQ_SET_REPORT);
+>>>>>>> v3.18
 	if (ret != -EIO && ret != sizeof(feature)) {
 		hid_err(hdev, "unable to request touch data (%d)\n", ret);
 		goto err_stop_hw;
@@ -559,6 +587,7 @@ static int magicmouse_probe(struct hid_device *hdev,
 	return 0;
 err_stop_hw:
 	hid_hw_stop(hdev);
+<<<<<<< HEAD
 err_free:
 	kfree(msc);
 	return ret;
@@ -572,6 +601,11 @@ static void magicmouse_remove(struct hid_device *hdev)
 	kfree(msc);
 }
 
+=======
+	return ret;
+}
+
+>>>>>>> v3.18
 static const struct hid_device_id magic_mice[] = {
 	{ HID_BLUETOOTH_DEVICE(USB_VENDOR_ID_APPLE,
 		USB_DEVICE_ID_APPLE_MAGICMOUSE), .driver_data = 0 },
@@ -585,7 +619,10 @@ static struct hid_driver magicmouse_driver = {
 	.name = "magicmouse",
 	.id_table = magic_mice,
 	.probe = magicmouse_probe,
+<<<<<<< HEAD
 	.remove = magicmouse_remove,
+=======
+>>>>>>> v3.18
 	.raw_event = magicmouse_raw_event,
 	.input_mapping = magicmouse_input_mapping,
 	.input_configured = magicmouse_input_configured,

@@ -26,6 +26,7 @@
 #include <linux/uaccess.h>
 
 /*
+<<<<<<< HEAD
  * Autoloaded crypto modules should only use a prefixed name to avoid allowing
  * arbitrary modules to be loaded. Loading from userspace may still need the
  * unprefixed names, so retains those aliases as well.
@@ -39,6 +40,8 @@
 		__MODULE_INFO(alias, alias_crypto, "crypto-" name)
 
 /*
+=======
+>>>>>>> v3.18
  * Algorithm masks and types.
  */
 #define CRYPTO_ALG_TYPE_MASK		0x0000000f
@@ -354,7 +357,10 @@ struct ablkcipher_tfm {
 
 	unsigned int ivsize;
 	unsigned int reqsize;
+<<<<<<< HEAD
 	bool has_setkey;
+=======
+>>>>>>> v3.18
 };
 
 struct aead_tfm {
@@ -665,6 +671,7 @@ static inline int crypto_ablkcipher_setkey(struct crypto_ablkcipher *tfm,
 	return crt->setkey(crt->base, key, keylen);
 }
 
+<<<<<<< HEAD
 static inline bool crypto_ablkcipher_has_setkey(struct crypto_ablkcipher *tfm)
 {
 	struct ablkcipher_tfm *crt = crypto_ablkcipher_crt(tfm);
@@ -672,6 +679,8 @@ static inline bool crypto_ablkcipher_has_setkey(struct crypto_ablkcipher *tfm)
 	return crt->has_setkey;
 }
 
+=======
+>>>>>>> v3.18
 static inline struct crypto_ablkcipher *crypto_ablkcipher_reqtfm(
 	struct ablkcipher_request *req)
 {
@@ -731,9 +740,15 @@ static inline void ablkcipher_request_free(struct ablkcipher_request *req)
 
 static inline void ablkcipher_request_set_callback(
 	struct ablkcipher_request *req,
+<<<<<<< HEAD
 	u32 flags, crypto_completion_t complete, void *data)
 {
 	req->base.complete = complete;
+=======
+	u32 flags, crypto_completion_t compl, void *data)
+{
+	req->base.complete = compl;
+>>>>>>> v3.18
 	req->base.data = data;
 	req->base.flags = flags;
 }
@@ -862,10 +877,17 @@ static inline void aead_request_free(struct aead_request *req)
 
 static inline void aead_request_set_callback(struct aead_request *req,
 					     u32 flags,
+<<<<<<< HEAD
 					     crypto_completion_t complete,
 					     void *data)
 {
 	req->base.complete = complete;
+=======
+					     crypto_completion_t compl,
+					     void *data)
+{
+	req->base.complete = compl;
+>>>>>>> v3.18
 	req->base.data = data;
 	req->base.flags = flags;
 }

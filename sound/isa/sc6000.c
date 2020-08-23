@@ -559,8 +559,13 @@ static int snd_sc6000_probe(struct device *devptr, unsigned int dev)
 	char __iomem *vmss_port;
 
 
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE, sizeof(vport),
 				&card);
+=======
+	err = snd_card_new(devptr, index[dev], id[dev], THIS_MODULE,
+			   sizeof(vport), &card);
+>>>>>>> v3.18
 	if (err < 0)
 		return err;
 
@@ -668,8 +673,11 @@ static int snd_sc6000_probe(struct device *devptr, unsigned int dev)
 	sprintf(card->longname, "Gallant SC-6000 at 0x%lx, irq %d, dma %d",
 		mss_port[dev], xirq, xdma);
 
+<<<<<<< HEAD
 	snd_card_set_dev(card, devptr);
 
+=======
+>>>>>>> v3.18
 	err = snd_card_register(card);
 	if (err < 0)
 		goto err_unmap2;
@@ -698,7 +706,10 @@ static int snd_sc6000_remove(struct device *devptr, unsigned int dev)
 	release_region(port[dev], 0x10);
 	release_region(mss_port[dev], 4);
 
+<<<<<<< HEAD
 	dev_set_drvdata(devptr, NULL);
+=======
+>>>>>>> v3.18
 	snd_card_free(card);
 	return 0;
 }

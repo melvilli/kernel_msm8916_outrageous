@@ -103,7 +103,11 @@ static struct packet_type bpq_packet_type __read_mostly = {
 };
 
 static struct notifier_block bpq_dev_notifier = {
+<<<<<<< HEAD
 	.notifier_call =bpq_device_event,
+=======
+	.notifier_call = bpq_device_event,
+>>>>>>> v3.18
 };
 
 
@@ -208,7 +212,11 @@ static int bpq_rcv(struct sk_buff *skb, struct net_device *dev, struct packet_ty
 	eth = eth_hdr(skb);
 
 	if (!(bpq->acpt_addr[0] & 0x01) &&
+<<<<<<< HEAD
 	    memcmp(eth->h_source, bpq->acpt_addr, ETH_ALEN))
+=======
+	    !ether_addr_equal(eth->h_source, bpq->acpt_addr))
+>>>>>>> v3.18
 		goto drop_unlock;
 
 	if (skb_cow(skb, sizeof(struct ethhdr)))
@@ -501,8 +509,13 @@ static int bpq_new_device(struct net_device *edev)
 	struct net_device *ndev;
 	struct bpqdev *bpq;
 
+<<<<<<< HEAD
 	ndev = alloc_netdev(sizeof(struct bpqdev), "bpq%d",
 			   bpq_setup);
+=======
+	ndev = alloc_netdev(sizeof(struct bpqdev), "bpq%d", NET_NAME_UNKNOWN,
+			    bpq_setup);
+>>>>>>> v3.18
 	if (!ndev)
 		return -ENOMEM;
 
@@ -544,9 +557,16 @@ static void bpq_free_device(struct net_device *ndev)
 /*
  *	Handle device status changes.
  */
+<<<<<<< HEAD
 static int bpq_device_event(struct notifier_block *this,unsigned long event, void *ptr)
 {
 	struct net_device *dev = (struct net_device *)ptr;
+=======
+static int bpq_device_event(struct notifier_block *this,
+			    unsigned long event, void *ptr)
+{
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 
 	if (!net_eq(dev_net(dev), &init_net))
 		return NOTIFY_DONE;

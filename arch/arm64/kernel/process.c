@@ -34,7 +34,10 @@
 #include <linux/kallsyms.h>
 #include <linux/init.h>
 #include <linux/cpu.h>
+<<<<<<< HEAD
 #include <linux/cpuidle.h>
+=======
+>>>>>>> v3.18
 #include <linux/elfcore.h>
 #include <linux/pm.h>
 #include <linux/tick.h>
@@ -58,6 +61,7 @@ unsigned long __stack_chk_guard __read_mostly;
 EXPORT_SYMBOL(__stack_chk_guard);
 #endif
 
+<<<<<<< HEAD
 static void setup_restart(void)
 {
 	/*
@@ -88,6 +92,12 @@ void soft_restart(unsigned long addr)
 	phys_reset = (phys_reset_t)virt_to_phys(cpu_reset);
 	phys_reset(addr);
 
+=======
+void soft_restart(unsigned long addr)
+{
+	setup_mm_for_reboot();
+	cpu_soft_restart(virt_to_phys(cpu_reset), addr);
+>>>>>>> v3.18
 	/* Should never get here */
 	BUG();
 }
@@ -99,7 +109,10 @@ void (*pm_power_off)(void);
 EXPORT_SYMBOL_GPL(pm_power_off);
 
 void (*arm_pm_restart)(enum reboot_mode reboot_mode, const char *cmd);
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(arm_pm_restart);
+=======
+>>>>>>> v3.18
 
 /*
  * This is our default idle handler.
@@ -110,6 +123,7 @@ void arch_cpu_idle(void)
 	 * This should do all the clock switching and wait for interrupt
 	 * tricks
 	 */
+<<<<<<< HEAD
 	if (cpuidle_idle_call()) {
 		cpu_do_idle();
 		local_irq_enable();
@@ -124,6 +138,10 @@ void arch_cpu_idle_enter(void)
 void arch_cpu_idle_exit(void)
 {
 	idle_notifier_call_chain(IDLE_END);
+=======
+	cpu_do_idle();
+	local_irq_enable();
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_HOTPLUG_CPU
@@ -192,7 +210,13 @@ void machine_restart(char *cmd)
 
 	/* Now call the architecture specific reboot code. */
 	if (arm_pm_restart)
+<<<<<<< HEAD
 		arm_pm_restart(REBOOT_HARD, cmd);
+=======
+		arm_pm_restart(reboot_mode, cmd);
+	else
+		do_kernel_restart(cmd);
+>>>>>>> v3.18
 
 	/*
 	 * Whoops - the architecture was unable to reboot.
@@ -201,6 +225,7 @@ void machine_restart(char *cmd)
 	while (1);
 }
 
+<<<<<<< HEAD
 /*
  * dump a block of kernel memory from around the given address
  */
@@ -258,6 +283,8 @@ static void show_extra_register_data(struct pt_regs *regs, int nbytes)
 	show_data(regs->sp - nbytes, nbytes * 2, "SP");
 }
 
+=======
+>>>>>>> v3.18
 void __show_regs(struct pt_regs *regs)
 {
 	int i, top_reg;
@@ -284,9 +311,12 @@ void __show_regs(struct pt_regs *regs)
 		if (i % 2 == 0)
 			printk("\n");
 	}
+<<<<<<< HEAD
 	/* Dump only kernel mode */
 	if (get_fs() == get_ds())
 		show_extra_register_data(regs, 256);
+=======
+>>>>>>> v3.18
 	printk("\n");
 }
 
@@ -476,8 +506,11 @@ unsigned long arch_randomize_brk(struct mm_struct *mm)
 {
 	return randomize_base(mm->brk);
 }
+<<<<<<< HEAD
 
 unsigned long randomize_et_dyn(unsigned long base)
 {
 	return randomize_base(base);
 }
+=======
+>>>>>>> v3.18

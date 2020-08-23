@@ -20,7 +20,10 @@
 
 #include <linux/init.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
 #include <linux/pci.h>
+=======
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <sound/core.h>
 #include "hda_codec.h"

@@ -59,7 +59,11 @@ EXPORT_SYMBOL(pg_data_table);
 void __init m68k_setup_node(int node)
 {
 #ifndef CONFIG_SINGLE_MEMORY_CHUNK
+<<<<<<< HEAD
 	struct mem_info *info = m68k_memory + node;
+=======
+	struct m68k_mem_info *info = m68k_memory + node;
+>>>>>>> v3.18
 	int i, end;
 
 	i = (unsigned long)phys_to_virt(info->addr) >> __virt_to_node_shift();
@@ -110,7 +114,11 @@ void __init paging_init(void)
 void free_initmem(void)
 {
 #ifndef CONFIG_MMU_SUN3
+<<<<<<< HEAD
 	free_initmem_default(0);
+=======
+	free_initmem_default(-1);
+>>>>>>> v3.18
 #endif /* CONFIG_MMU_SUN3 */
 }
 
@@ -146,6 +154,7 @@ void __init print_memmap(void)
 		MLK_ROUNDUP(__bss_start, __bss_stop));
 }
 
+<<<<<<< HEAD
 void __init mem_init(void)
 {
 	pg_data_t *pgdat;
@@ -178,6 +187,13 @@ void __init mem_init(void)
 	}
 
 #if defined(CONFIG_MMU) && !defined(CONFIG_SUN3) && !defined(CONFIG_COLDFIRE)
+=======
+static inline void init_pointer_tables(void)
+{
+#if defined(CONFIG_MMU) && !defined(CONFIG_SUN3) && !defined(CONFIG_COLDFIRE)
+	int i;
+
+>>>>>>> v3.18
 	/* insert pointer tables allocated so far into the tablelist */
 	init_pointer_table((unsigned long)kernel_pg_dir);
 	for (i = 0; i < PTRS_PER_PGD; i++) {
@@ -189,6 +205,7 @@ void __init mem_init(void)
 	if (zero_pgtable)
 		init_pointer_table((unsigned long)zero_pgtable);
 #endif
+<<<<<<< HEAD
 
 	pr_info("Memory: %luk/%luk available (%dk kernel code, %dk data, %dk init)\n",
 	       nr_free_pages() << (PAGE_SHIFT-10),
@@ -196,12 +213,26 @@ void __init mem_init(void)
 	       codepages << (PAGE_SHIFT-10),
 	       datapages << (PAGE_SHIFT-10),
 	       initpages << (PAGE_SHIFT-10));
+=======
+}
+
+void __init mem_init(void)
+{
+	/* this will put all memory onto the freelists */
+	free_all_bootmem();
+	init_pointer_tables();
+	mem_init_print_info(NULL);
+>>>>>>> v3.18
 	print_memmap();
 }
 
 #ifdef CONFIG_BLK_DEV_INITRD
 void free_initrd_mem(unsigned long start, unsigned long end)
 {
+<<<<<<< HEAD
 	free_reserved_area(start, end, 0, "initrd");
+=======
+	free_reserved_area((void *)start, (void *)end, -1, "initrd");
+>>>>>>> v3.18
 }
 #endif

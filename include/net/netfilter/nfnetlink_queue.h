@@ -15,6 +15,11 @@ int nfqnl_ct_put(struct sk_buff *skb, struct nf_conn *ct,
 		 enum ip_conntrack_info ctinfo);
 void nfqnl_ct_seq_adjust(struct sk_buff *skb, struct nf_conn *ct,
 			 enum ip_conntrack_info ctinfo, int diff);
+<<<<<<< HEAD
+=======
+int nfqnl_attach_expect(struct nf_conn *ct, const struct nlattr *attr,
+			u32 portid, u32 report);
+>>>>>>> v3.18
 #else
 inline struct nf_conn *
 nfqnl_ct_get(struct sk_buff *entskb, size_t *size, enum ip_conntrack_info *ctinfo)
@@ -39,5 +44,14 @@ inline void nfqnl_ct_seq_adjust(struct sk_buff *skb, struct nf_conn *ct,
 				enum ip_conntrack_info ctinfo, int diff)
 {
 }
+<<<<<<< HEAD
+=======
+
+inline int nfqnl_attach_expect(struct nf_conn *ct, const struct nlattr *attr,
+			       u32 portid, u32 report)
+{
+	return 0;
+}
+>>>>>>> v3.18
 #endif /* NF_CONNTRACK */
 #endif

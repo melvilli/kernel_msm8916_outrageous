@@ -1169,6 +1169,7 @@ skip_rbs_switch:
 .work_pending:
 	tbit.z p6,p0=r31,TIF_NEED_RESCHED	// is resched not needed?
 (p6)	br.cond.sptk.few .notify
+<<<<<<< HEAD
 #ifdef CONFIG_PREEMPT
 (pKStk) dep r21=-1,r0,PREEMPT_ACTIVE_BIT,1
 	;;
@@ -1184,6 +1185,10 @@ skip_rbs_switch:
 	;;
 (pKStk)	st4 [r20]=r0		// preempt_count() <- 0
 #endif
+=======
+	br.call.spnt.many rp=preempt_schedule_irq
+.ret9:	cmp.eq p6,p0=r0,r0	// p6 <- 1 (re-check)
+>>>>>>> v3.18
 (pLvSys)br.cond.sptk.few  __paravirt_pending_syscall_end
 	br.cond.sptk.many .work_processed_kernel
 
@@ -1786,6 +1791,15 @@ sys_call_table:
 	data8 sys_process_vm_writev
 	data8 sys_accept4
 	data8 sys_finit_module			// 1335
+<<<<<<< HEAD
+=======
+	data8 sys_sched_setattr
+	data8 sys_sched_getattr
+	data8 sys_renameat2
+	data8 sys_getrandom
+	data8 sys_memfd_create			// 1340
+	data8 sys_bpf
+>>>>>>> v3.18
 
 	.org sys_call_table + 8*NR_syscalls	// guard against failures to increase NR_syscalls
 #endif /* __IA64_ASM_PARAVIRTUALIZED_NATIVE */

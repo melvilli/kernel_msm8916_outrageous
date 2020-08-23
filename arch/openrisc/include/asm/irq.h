@@ -24,4 +24,9 @@
 
 #define NO_IRQ		(-1)
 
+<<<<<<< HEAD
+=======
+extern void set_handle_irq(void (*handle_irq)(struct pt_regs *));
+
+>>>>>>> v3.18
 #endif /* __ASM_OPENRISC_IRQ_H__ */

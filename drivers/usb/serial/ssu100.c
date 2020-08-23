@@ -6,7 +6,10 @@
  */
 
 #include <linux/errno.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/tty.h>
 #include <linux/tty_driver.h>
@@ -323,7 +326,11 @@ static int get_serial_info(struct usb_serial_port *port,
 		return -EFAULT;
 
 	memset(&tmp, 0, sizeof(tmp));
+<<<<<<< HEAD
 	tmp.line		= port->serial->minor;
+=======
+	tmp.line		= port->minor;
+>>>>>>> v3.18
 	tmp.port		= 0;
 	tmp.irq			= 0;
 	tmp.flags		= ASYNC_SKIP_TEST | ASYNC_AUTO_IRQ;
@@ -342,8 +349,11 @@ static int ssu100_ioctl(struct tty_struct *tty,
 {
 	struct usb_serial_port *port = tty->driver_data;
 
+<<<<<<< HEAD
 	dev_dbg(&port->dev, "%s cmd 0x%04x\n", __func__, cmd);
 
+=======
+>>>>>>> v3.18
 	switch (cmd) {
 	case TIOCGSERIAL:
 		return get_serial_info(port,
@@ -352,8 +362,11 @@ static int ssu100_ioctl(struct tty_struct *tty,
 		break;
 	}
 
+<<<<<<< HEAD
 	dev_dbg(&port->dev, "%s arg not supported\n", __func__);
 
+=======
+>>>>>>> v3.18
 	return -ENOIOCTLCMD;
 }
 

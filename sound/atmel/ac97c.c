@@ -31,10 +31,17 @@
 #include <sound/atmel-ac97c.h>
 #include <sound/memalloc.h>
 
+<<<<<<< HEAD
 #include <linux/dw_dmac.h>
 
 #include <mach/cpu.h>
 #include <mach/gpio.h>
+=======
+#include <linux/platform_data/dma-dw.h>
+#include <linux/dma/dw.h>
+
+#include <mach/cpu.h>
+>>>>>>> v3.18
 
 #ifdef CONFIG_ARCH_AT91
 #include <mach/hardware.h>
@@ -946,8 +953,14 @@ static int atmel_ac97c_probe(struct platform_device *pdev)
 	}
 	clk_enable(pclk);
 
+<<<<<<< HEAD
 	retval = snd_card_create(SNDRV_DEFAULT_IDX1, SNDRV_DEFAULT_STR1,
 			THIS_MODULE, sizeof(struct atmel_ac97c), &card);
+=======
+	retval = snd_card_new(&pdev->dev, SNDRV_DEFAULT_IDX1,
+			      SNDRV_DEFAULT_STR1, THIS_MODULE,
+			      sizeof(struct atmel_ac97c), &card);
+>>>>>>> v3.18
 	if (retval) {
 		dev_dbg(&pdev->dev, "could not create sound card device\n");
 		goto err_snd_card_new;
@@ -991,8 +1004,11 @@ static int atmel_ac97c_probe(struct platform_device *pdev)
 		chip->reset_pin = -EINVAL;
 	}
 
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pdev->dev);
 
+=======
+>>>>>>> v3.18
 	atmel_ac97c_reset(chip);
 
 	/* Enable overrun interrupt from codec channel */
@@ -1114,8 +1130,11 @@ err_dma:
 		chip->dma.tx_chan = NULL;
 	}
 err_ac97_bus:
+<<<<<<< HEAD
 	snd_card_set_dev(card, NULL);
 
+=======
+>>>>>>> v3.18
 	if (gpio_is_valid(chip->reset_pin))
 		gpio_free(chip->reset_pin);
 
@@ -1196,13 +1215,20 @@ static int atmel_ac97c_remove(struct platform_device *pdev)
 		chip->dma.tx_chan = NULL;
 	}
 
+<<<<<<< HEAD
 	snd_card_set_dev(card, NULL);
+=======
+>>>>>>> v3.18
 	snd_card_free(card);
 
 	return 0;
 }
 
 static struct platform_driver atmel_ac97c_driver = {
+<<<<<<< HEAD
+=======
+	.probe		= atmel_ac97c_probe,
+>>>>>>> v3.18
 	.remove		= atmel_ac97c_remove,
 	.driver		= {
 		.name	= "atmel_ac97c",
@@ -1210,6 +1236,7 @@ static struct platform_driver atmel_ac97c_driver = {
 		.pm	= ATMEL_AC97C_PM_OPS,
 	},
 };
+<<<<<<< HEAD
 
 static int __init atmel_ac97c_init(void)
 {
@@ -1223,6 +1250,9 @@ static void __exit atmel_ac97c_exit(void)
 	platform_driver_unregister(&atmel_ac97c_driver);
 }
 module_exit(atmel_ac97c_exit);
+=======
+module_platform_driver(atmel_ac97c_driver);
+>>>>>>> v3.18
 
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("Driver for Atmel AC97 controller");

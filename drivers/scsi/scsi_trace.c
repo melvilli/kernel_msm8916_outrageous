@@ -28,7 +28,11 @@ scsi_trace_misc(struct trace_seq *, unsigned char *, int);
 static const char *
 scsi_trace_rw6(struct trace_seq *p, unsigned char *cdb, int len)
 {
+<<<<<<< HEAD
 	const char *ret = p->buffer + p->len;
+=======
+	const char *ret = trace_seq_buffer_ptr(p);
+>>>>>>> v3.18
 	sector_t lba = 0, txlen = 0;
 
 	lba |= ((cdb[1] & 0x1F) << 16);
@@ -46,7 +50,11 @@ scsi_trace_rw6(struct trace_seq *p, unsigned char *cdb, int len)
 static const char *
 scsi_trace_rw10(struct trace_seq *p, unsigned char *cdb, int len)
 {
+<<<<<<< HEAD
 	const char *ret = p->buffer + p->len;
+=======
+	const char *ret = trace_seq_buffer_ptr(p);
+>>>>>>> v3.18
 	sector_t lba = 0, txlen = 0;
 
 	lba |= (cdb[2] << 24);
@@ -71,7 +79,11 @@ scsi_trace_rw10(struct trace_seq *p, unsigned char *cdb, int len)
 static const char *
 scsi_trace_rw12(struct trace_seq *p, unsigned char *cdb, int len)
 {
+<<<<<<< HEAD
 	const char *ret = p->buffer + p->len;
+=======
+	const char *ret = trace_seq_buffer_ptr(p);
+>>>>>>> v3.18
 	sector_t lba = 0, txlen = 0;
 
 	lba |= (cdb[2] << 24);
@@ -94,7 +106,11 @@ scsi_trace_rw12(struct trace_seq *p, unsigned char *cdb, int len)
 static const char *
 scsi_trace_rw16(struct trace_seq *p, unsigned char *cdb, int len)
 {
+<<<<<<< HEAD
 	const char *ret = p->buffer + p->len;
+=======
+	const char *ret = trace_seq_buffer_ptr(p);
+>>>>>>> v3.18
 	sector_t lba = 0, txlen = 0;
 
 	lba |= ((u64)cdb[2] << 56);
@@ -125,7 +141,11 @@ scsi_trace_rw16(struct trace_seq *p, unsigned char *cdb, int len)
 static const char *
 scsi_trace_rw32(struct trace_seq *p, unsigned char *cdb, int len)
 {
+<<<<<<< HEAD
 	const char *ret = p->buffer + p->len, *cmd;
+=======
+	const char *ret = trace_seq_buffer_ptr(p), *cmd;
+>>>>>>> v3.18
 	sector_t lba = 0, txlen = 0;
 	u32 ei_lbrt = 0;
 
@@ -180,7 +200,11 @@ out:
 static const char *
 scsi_trace_unmap(struct trace_seq *p, unsigned char *cdb, int len)
 {
+<<<<<<< HEAD
 	const char *ret = p->buffer + p->len;
+=======
+	const char *ret = trace_seq_buffer_ptr(p);
+>>>>>>> v3.18
 	unsigned int regions = cdb[7] << 8 | cdb[8];
 
 	trace_seq_printf(p, "regions=%u", (regions - 8) / 16);
@@ -192,7 +216,11 @@ scsi_trace_unmap(struct trace_seq *p, unsigned char *cdb, int len)
 static const char *
 scsi_trace_service_action_in(struct trace_seq *p, unsigned char *cdb, int len)
 {
+<<<<<<< HEAD
 	const char *ret = p->buffer + p->len, *cmd;
+=======
+	const char *ret = trace_seq_buffer_ptr(p), *cmd;
+>>>>>>> v3.18
 	sector_t lba = 0;
 	u32 alloc_len = 0;
 
@@ -247,7 +275,11 @@ scsi_trace_varlen(struct trace_seq *p, unsigned char *cdb, int len)
 static const char *
 scsi_trace_misc(struct trace_seq *p, unsigned char *cdb, int len)
 {
+<<<<<<< HEAD
 	const char *ret = p->buffer + p->len;
+=======
+	const char *ret = trace_seq_buffer_ptr(p);
+>>>>>>> v3.18
 
 	trace_seq_printf(p, "-");
 	trace_seq_putc(p, 0);

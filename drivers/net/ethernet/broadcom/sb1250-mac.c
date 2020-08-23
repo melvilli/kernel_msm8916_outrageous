@@ -13,8 +13,12 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
  *
  *
  * This driver is designed for the Broadcom SiByte SOC built-in
@@ -36,7 +40,10 @@
 #include <linux/netdevice.h>
 #include <linux/etherdevice.h>
 #include <linux/skbuff.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/bitops.h>
 #include <linux/err.h>
 #include <linux/ethtool.h>
@@ -2197,7 +2204,11 @@ static const struct net_device_ops sbmac_netdev_ops = {
 
 static int sbmac_init(struct platform_device *pldev, long long base)
 {
+<<<<<<< HEAD
 	struct net_device *dev = dev_get_drvdata(&pldev->dev);
+=======
+	struct net_device *dev = platform_get_drvdata(pldev);
+>>>>>>> v3.18
 	int idx = pldev->id;
 	struct sbmac_softc *sc = netdev_priv(dev);
 	unsigned char *eaddr;
@@ -2275,7 +2286,11 @@ static int sbmac_init(struct platform_device *pldev, long long base)
 		       dev->name);
 		goto free_mdio;
 	}
+<<<<<<< HEAD
 	dev_set_drvdata(&pldev->dev, sc->mii_bus);
+=======
+	platform_set_drvdata(pldev, sc->mii_bus);
+>>>>>>> v3.18
 
 	err = register_netdev(dev);
 	if (err) {
@@ -2300,7 +2315,10 @@ static int sbmac_init(struct platform_device *pldev, long long base)
 	return 0;
 unreg_mdio:
 	mdiobus_unregister(sc->mii_bus);
+<<<<<<< HEAD
 	dev_set_drvdata(&pldev->dev, NULL);
+=======
+>>>>>>> v3.18
 free_mdio:
 	mdiobus_free(sc->mii_bus);
 uninit_ctx:
@@ -2624,7 +2642,11 @@ static int sbmac_probe(struct platform_device *pldev)
 		goto out_unmap;
 	}
 
+<<<<<<< HEAD
 	dev_set_drvdata(&pldev->dev, dev);
+=======
+	platform_set_drvdata(pldev, dev);
+>>>>>>> v3.18
 	SET_NETDEV_DEV(dev, &pldev->dev);
 
 	sc = netdev_priv(dev);
@@ -2649,7 +2671,11 @@ out_out:
 
 static int __exit sbmac_remove(struct platform_device *pldev)
 {
+<<<<<<< HEAD
 	struct net_device *dev = dev_get_drvdata(&pldev->dev);
+=======
+	struct net_device *dev = platform_get_drvdata(pldev);
+>>>>>>> v3.18
 	struct sbmac_softc *sc = netdev_priv(dev);
 
 	unregister_netdev(dev);

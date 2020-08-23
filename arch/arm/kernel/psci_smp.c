@@ -47,8 +47,12 @@
 
 extern void secondary_startup(void);
 
+<<<<<<< HEAD
 static int __cpuinit psci_boot_secondary(unsigned int cpu,
 					 struct task_struct *idle)
+=======
+static int psci_boot_secondary(unsigned int cpu, struct task_struct *idle)
+>>>>>>> v3.18
 {
 	if (psci_ops.cpu_on)
 		return psci_ops.cpu_on(cpu_logical_map(cpu),

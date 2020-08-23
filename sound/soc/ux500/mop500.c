@@ -27,7 +27,11 @@
 #include "mop500_ab8500.h"
 
 /* Define the whole MOP500 soundcard, linking platform to the codec-drivers  */
+<<<<<<< HEAD
 struct snd_soc_dai_link mop500_dai_links[] = {
+=======
+static struct snd_soc_dai_link mop500_dai_links[] = {
+>>>>>>> v3.18
 	{
 		.name = "ab8500_0",
 		.stream_name = "ab8500_0",
@@ -52,6 +56,10 @@ struct snd_soc_dai_link mop500_dai_links[] = {
 
 static struct snd_soc_card mop500_card = {
 	.name = "MOP500-card",
+<<<<<<< HEAD
+=======
+	.owner = THIS_MODULE,
+>>>>>>> v3.18
 	.probe = NULL,
 	.dai_link = mop500_dai_links,
 	.num_links = ARRAY_SIZE(mop500_dai_links),
@@ -90,6 +98,11 @@ static int mop500_of_probe(struct platform_device *pdev,
 	for (i = 0; i < 2; i++) {
 		mop500_dai_links[i].cpu_of_node = msp_np[i];
 		mop500_dai_links[i].cpu_dai_name = NULL;
+<<<<<<< HEAD
+=======
+		mop500_dai_links[i].platform_of_node = msp_np[i];
+		mop500_dai_links[i].platform_name = NULL;
+>>>>>>> v3.18
 		mop500_dai_links[i].codec_of_node = codec_np;
 		mop500_dai_links[i].codec_name = NULL;
 	}

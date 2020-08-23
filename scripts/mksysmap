@@ -42,4 +42,7 @@
 # (At least sparc64 has __crc_ in the middle).
 
 $NM -n $1 | grep -v '\( [aNUw] \)\|\(__crc_\)\|\( \$[adt]\)' > $2
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18

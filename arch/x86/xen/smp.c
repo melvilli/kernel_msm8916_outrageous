@@ -37,6 +37,7 @@
 #include <xen/hvc-console.h>
 #include "xen-ops.h"
 #include "mmu.h"
+<<<<<<< HEAD
 
 cpumask_var_t xen_cpu_initialized_map;
 
@@ -45,6 +46,21 @@ static DEFINE_PER_CPU(int, xen_callfunc_irq);
 static DEFINE_PER_CPU(int, xen_callfuncsingle_irq);
 static DEFINE_PER_CPU(int, xen_irq_work);
 static DEFINE_PER_CPU(int, xen_debug_irq) = -1;
+=======
+#include "smp.h"
+
+cpumask_var_t xen_cpu_initialized_map;
+
+struct xen_common_irq {
+	int irq;
+	char *name;
+};
+static DEFINE_PER_CPU(struct xen_common_irq, xen_resched_irq) = { .irq = -1 };
+static DEFINE_PER_CPU(struct xen_common_irq, xen_callfunc_irq) = { .irq = -1 };
+static DEFINE_PER_CPU(struct xen_common_irq, xen_callfuncsingle_irq) = { .irq = -1 };
+static DEFINE_PER_CPU(struct xen_common_irq, xen_irq_work) = { .irq = -1 };
+static DEFINE_PER_CPU(struct xen_common_irq, xen_debug_irq) = { .irq = -1 };
+>>>>>>> v3.18
 
 static irqreturn_t xen_call_function_interrupt(int irq, void *dev_id);
 static irqreturn_t xen_call_function_single_interrupt(int irq, void *dev_id);
@@ -61,7 +77,11 @@ static irqreturn_t xen_reschedule_interrupt(int irq, void *dev_id)
 	return IRQ_HANDLED;
 }
 
+<<<<<<< HEAD
 static void __cpuinit cpu_bringup(void)
+=======
+static void cpu_bringup(void)
+>>>>>>> v3.18
 {
 	int cpu;
 
@@ -69,9 +89,17 @@ static void __cpuinit cpu_bringup(void)
 	touch_softlockup_watchdog();
 	preempt_disable();
 
+<<<<<<< HEAD
 	xen_enable_sysenter();
 	xen_enable_syscall();
 
+=======
+	/* PVH runs in ring 0 and allows us to do native syscalls. Yay! */
+	if (!xen_feature(XENFEAT_supervisor_mode_kernel)) {
+		xen_enable_sysenter();
+		xen_enable_syscall();
+	}
+>>>>>>> v3.18
 	cpu = smp_processor_id();
 	smp_store_cpu_info(cpu);
 	cpu_data(cpu).x86_max_cores = 1;
@@ -93,37 +121,110 @@ static void __cpuinit cpu_bringup(void)
 	wmb();			/* make sure everything is out */
 }
 
+<<<<<<< HEAD
 static void __cpuinit cpu_bringup_and_idle(void)
 {
+=======
+/*
+ * Note: cpu parameter is only relevant for PVH. The reason for passing it
+ * is we can't do smp_processor_id until the percpu segments are loaded, for
+ * which we need the cpu number! So we pass it in rdi as first parameter.
+ */
+asmlinkage __visible void cpu_bringup_and_idle(int cpu)
+{
+#ifdef CONFIG_XEN_PVH
+	if (xen_feature(XENFEAT_auto_translated_physmap) &&
+	    xen_feature(XENFEAT_supervisor_mode_kernel))
+		xen_pvh_secondary_vcpu_init(cpu);
+#endif
+>>>>>>> v3.18
 	cpu_bringup();
 	cpu_startup_entry(CPUHP_ONLINE);
 }
 
+<<<<<<< HEAD
 static int xen_smp_intr_init(unsigned int cpu)
 {
 	int rc;
 	const char *resched_name, *callfunc_name, *debug_name;
+=======
+static void xen_smp_intr_free(unsigned int cpu)
+{
+	if (per_cpu(xen_resched_irq, cpu).irq >= 0) {
+		unbind_from_irqhandler(per_cpu(xen_resched_irq, cpu).irq, NULL);
+		per_cpu(xen_resched_irq, cpu).irq = -1;
+		kfree(per_cpu(xen_resched_irq, cpu).name);
+		per_cpu(xen_resched_irq, cpu).name = NULL;
+	}
+	if (per_cpu(xen_callfunc_irq, cpu).irq >= 0) {
+		unbind_from_irqhandler(per_cpu(xen_callfunc_irq, cpu).irq, NULL);
+		per_cpu(xen_callfunc_irq, cpu).irq = -1;
+		kfree(per_cpu(xen_callfunc_irq, cpu).name);
+		per_cpu(xen_callfunc_irq, cpu).name = NULL;
+	}
+	if (per_cpu(xen_debug_irq, cpu).irq >= 0) {
+		unbind_from_irqhandler(per_cpu(xen_debug_irq, cpu).irq, NULL);
+		per_cpu(xen_debug_irq, cpu).irq = -1;
+		kfree(per_cpu(xen_debug_irq, cpu).name);
+		per_cpu(xen_debug_irq, cpu).name = NULL;
+	}
+	if (per_cpu(xen_callfuncsingle_irq, cpu).irq >= 0) {
+		unbind_from_irqhandler(per_cpu(xen_callfuncsingle_irq, cpu).irq,
+				       NULL);
+		per_cpu(xen_callfuncsingle_irq, cpu).irq = -1;
+		kfree(per_cpu(xen_callfuncsingle_irq, cpu).name);
+		per_cpu(xen_callfuncsingle_irq, cpu).name = NULL;
+	}
+	if (xen_hvm_domain())
+		return;
+
+	if (per_cpu(xen_irq_work, cpu).irq >= 0) {
+		unbind_from_irqhandler(per_cpu(xen_irq_work, cpu).irq, NULL);
+		per_cpu(xen_irq_work, cpu).irq = -1;
+		kfree(per_cpu(xen_irq_work, cpu).name);
+		per_cpu(xen_irq_work, cpu).name = NULL;
+	}
+};
+static int xen_smp_intr_init(unsigned int cpu)
+{
+	int rc;
+	char *resched_name, *callfunc_name, *debug_name;
+>>>>>>> v3.18
 
 	resched_name = kasprintf(GFP_KERNEL, "resched%d", cpu);
 	rc = bind_ipi_to_irqhandler(XEN_RESCHEDULE_VECTOR,
 				    cpu,
 				    xen_reschedule_interrupt,
+<<<<<<< HEAD
 				    IRQF_DISABLED|IRQF_PERCPU|IRQF_NOBALANCING,
+=======
+				    IRQF_PERCPU|IRQF_NOBALANCING,
+>>>>>>> v3.18
 				    resched_name,
 				    NULL);
 	if (rc < 0)
 		goto fail;
+<<<<<<< HEAD
 	per_cpu(xen_resched_irq, cpu) = rc;
+=======
+	per_cpu(xen_resched_irq, cpu).irq = rc;
+	per_cpu(xen_resched_irq, cpu).name = resched_name;
+>>>>>>> v3.18
 
 	callfunc_name = kasprintf(GFP_KERNEL, "callfunc%d", cpu);
 	rc = bind_ipi_to_irqhandler(XEN_CALL_FUNCTION_VECTOR,
 				    cpu,
 				    xen_call_function_interrupt,
+<<<<<<< HEAD
 				    IRQF_DISABLED|IRQF_PERCPU|IRQF_NOBALANCING,
+=======
+				    IRQF_PERCPU|IRQF_NOBALANCING,
+>>>>>>> v3.18
 				    callfunc_name,
 				    NULL);
 	if (rc < 0)
 		goto fail;
+<<<<<<< HEAD
 	per_cpu(xen_callfunc_irq, cpu) = rc;
 
 	debug_name = kasprintf(GFP_KERNEL, "debug%d", cpu);
@@ -133,17 +234,39 @@ static int xen_smp_intr_init(unsigned int cpu)
 	if (rc < 0)
 		goto fail;
 	per_cpu(xen_debug_irq, cpu) = rc;
+=======
+	per_cpu(xen_callfunc_irq, cpu).irq = rc;
+	per_cpu(xen_callfunc_irq, cpu).name = callfunc_name;
+
+	debug_name = kasprintf(GFP_KERNEL, "debug%d", cpu);
+	rc = bind_virq_to_irqhandler(VIRQ_DEBUG, cpu, xen_debug_interrupt,
+				     IRQF_PERCPU | IRQF_NOBALANCING,
+				     debug_name, NULL);
+	if (rc < 0)
+		goto fail;
+	per_cpu(xen_debug_irq, cpu).irq = rc;
+	per_cpu(xen_debug_irq, cpu).name = debug_name;
+>>>>>>> v3.18
 
 	callfunc_name = kasprintf(GFP_KERNEL, "callfuncsingle%d", cpu);
 	rc = bind_ipi_to_irqhandler(XEN_CALL_FUNCTION_SINGLE_VECTOR,
 				    cpu,
 				    xen_call_function_single_interrupt,
+<<<<<<< HEAD
 				    IRQF_DISABLED|IRQF_PERCPU|IRQF_NOBALANCING,
+=======
+				    IRQF_PERCPU|IRQF_NOBALANCING,
+>>>>>>> v3.18
 				    callfunc_name,
 				    NULL);
 	if (rc < 0)
 		goto fail;
+<<<<<<< HEAD
 	per_cpu(xen_callfuncsingle_irq, cpu) = rc;
+=======
+	per_cpu(xen_callfuncsingle_irq, cpu).irq = rc;
+	per_cpu(xen_callfuncsingle_irq, cpu).name = callfunc_name;
+>>>>>>> v3.18
 
 	/*
 	 * The IRQ worker on PVHVM goes through the native path and uses the
@@ -156,16 +279,26 @@ static int xen_smp_intr_init(unsigned int cpu)
 	rc = bind_ipi_to_irqhandler(XEN_IRQ_WORK_VECTOR,
 				    cpu,
 				    xen_irq_work_interrupt,
+<<<<<<< HEAD
 				    IRQF_DISABLED|IRQF_PERCPU|IRQF_NOBALANCING,
+=======
+				    IRQF_PERCPU|IRQF_NOBALANCING,
+>>>>>>> v3.18
 				    callfunc_name,
 				    NULL);
 	if (rc < 0)
 		goto fail;
+<<<<<<< HEAD
 	per_cpu(xen_irq_work, cpu) = rc;
+=======
+	per_cpu(xen_irq_work, cpu).irq = rc;
+	per_cpu(xen_irq_work, cpu).name = callfunc_name;
+>>>>>>> v3.18
 
 	return 0;
 
  fail:
+<<<<<<< HEAD
 	if (per_cpu(xen_resched_irq, cpu) >= 0)
 		unbind_from_irqhandler(per_cpu(xen_resched_irq, cpu), NULL);
 	if (per_cpu(xen_callfunc_irq, cpu) >= 0)
@@ -181,6 +314,9 @@ static int xen_smp_intr_init(unsigned int cpu)
 	if (per_cpu(xen_irq_work, cpu) >= 0)
 		unbind_from_irqhandler(per_cpu(xen_irq_work, cpu), NULL);
 
+=======
+	xen_smp_intr_free(cpu);
+>>>>>>> v3.18
 	return rc;
 }
 
@@ -241,6 +377,7 @@ static void __init xen_smp_prepare_boot_cpu(void)
 	BUG_ON(smp_processor_id() != 0);
 	native_smp_prepare_boot_cpu();
 
+<<<<<<< HEAD
 	/* We've switched to the "real" per-cpu gdt, so make sure the
 	   old memory can be recycled */
 	make_lowmem_page_readwrite(xen_initial_gdt);
@@ -256,6 +393,33 @@ static void __init xen_smp_prepare_boot_cpu(void)
 
 	xen_filter_cpu_maps();
 	xen_setup_vcpu_info_placement();
+=======
+	if (xen_pv_domain()) {
+		if (!xen_feature(XENFEAT_writable_page_tables))
+			/* We've switched to the "real" per-cpu gdt, so make
+			 * sure the old memory can be recycled. */
+			make_lowmem_page_readwrite(xen_initial_gdt);
+
+#ifdef CONFIG_X86_32
+		/*
+		 * Xen starts us with XEN_FLAT_RING1_DS, but linux code
+		 * expects __USER_DS
+		 */
+		loadsegment(ds, __USER_DS);
+		loadsegment(es, __USER_DS);
+#endif
+
+		xen_filter_cpu_maps();
+		xen_setup_vcpu_info_placement();
+	}
+	/*
+	 * The alternative logic (which patches the unlock/lock) runs before
+	 * the smp bootup up code is activated. Hence we need to set this up
+	 * the core kernel is being patched. Otherwise we will have only
+	 * modules patched but not core code.
+	 */
+	xen_init_spinlocks();
+>>>>>>> v3.18
 }
 
 static void __init xen_smp_prepare_cpus(unsigned int max_cpus)
@@ -303,13 +467,22 @@ static void __init xen_smp_prepare_cpus(unsigned int max_cpus)
 		set_cpu_present(cpu, true);
 }
 
+<<<<<<< HEAD
 static int __cpuinit
+=======
+static int
+>>>>>>> v3.18
 cpu_initialize_context(unsigned int cpu, struct task_struct *idle)
 {
 	struct vcpu_guest_context *ctxt;
 	struct desc_struct *gdt;
 	unsigned long gdt_mfn;
 
+<<<<<<< HEAD
+=======
+	/* used to tell cpu_init() that it can proceed with initialization */
+	cpumask_set_cpu(cpu, cpu_callout_mask);
+>>>>>>> v3.18
 	if (cpumask_test_and_set_cpu(cpu, xen_cpu_initialized_map))
 		return 0;
 
@@ -319,6 +492,7 @@ cpu_initialize_context(unsigned int cpu, struct task_struct *idle)
 
 	gdt = get_cpu_gdt_table(cpu);
 
+<<<<<<< HEAD
 	ctxt->flags = VGCF_IN_KERNEL;
 	ctxt->user_regs.ss = __KERNEL_DS;
 #ifdef CONFIG_X86_32
@@ -335,6 +509,22 @@ cpu_initialize_context(unsigned int cpu, struct task_struct *idle)
 		ctxt->user_regs.eflags = 0x1000; /* IOPL_RING1 */
 		ctxt->user_regs.ds = __USER_DS;
 		ctxt->user_regs.es = __USER_DS;
+=======
+#ifdef CONFIG_X86_32
+	/* Note: PVH is not yet supported on x86_32. */
+	ctxt->user_regs.fs = __KERNEL_PERCPU;
+	ctxt->user_regs.gs = __KERNEL_STACK_CANARY;
+#endif
+	memset(&ctxt->fpu_ctxt, 0, sizeof(ctxt->fpu_ctxt));
+
+	if (!xen_feature(XENFEAT_auto_translated_physmap)) {
+		ctxt->user_regs.eip = (unsigned long)cpu_bringup_and_idle;
+		ctxt->flags = VGCF_IN_KERNEL;
+		ctxt->user_regs.eflags = 0x1000; /* IOPL_RING1 */
+		ctxt->user_regs.ds = __USER_DS;
+		ctxt->user_regs.es = __USER_DS;
+		ctxt->user_regs.ss = __KERNEL_DS;
+>>>>>>> v3.18
 
 		xen_copy_trap_info(ctxt->trap_ctxt);
 
@@ -355,11 +545,17 @@ cpu_initialize_context(unsigned int cpu, struct task_struct *idle)
 #ifdef CONFIG_X86_32
 		ctxt->event_callback_cs     = __KERNEL_CS;
 		ctxt->failsafe_callback_cs  = __KERNEL_CS;
+<<<<<<< HEAD
+=======
+#else
+		ctxt->gs_base_kernel = per_cpu_offset(cpu);
+>>>>>>> v3.18
 #endif
 		ctxt->event_callback_eip    =
 					(unsigned long)xen_hypervisor_callback;
 		ctxt->failsafe_callback_eip =
 					(unsigned long)xen_failsafe_callback;
+<<<<<<< HEAD
 	}
 	ctxt->user_regs.cs = __KERNEL_CS;
 	ctxt->user_regs.esp = idle->thread.sp0 - sizeof(struct pt_regs);
@@ -367,6 +563,25 @@ cpu_initialize_context(unsigned int cpu, struct task_struct *idle)
 	per_cpu(xen_cr3, cpu) = __pa(swapper_pg_dir);
 	ctxt->ctrlreg[3] = xen_pfn_to_cr3(virt_to_mfn(swapper_pg_dir));
 
+=======
+		ctxt->user_regs.cs = __KERNEL_CS;
+		per_cpu(xen_cr3, cpu) = __pa(swapper_pg_dir);
+	}
+#ifdef CONFIG_XEN_PVH
+	else {
+		/*
+		 * The vcpu comes on kernel page tables which have the NX pte
+		 * bit set. This means before DS/SS is touched, NX in
+		 * EFER must be set. Hence the following assembly glue code.
+		 */
+		ctxt->user_regs.eip = (unsigned long)xen_pvh_early_cpu_init;
+		ctxt->user_regs.rdi = cpu;
+		ctxt->user_regs.rsi = true;  /* entry == true */
+	}
+#endif
+	ctxt->user_regs.esp = idle->thread.sp0 - sizeof(struct pt_regs);
+	ctxt->ctrlreg[3] = xen_pfn_to_cr3(virt_to_mfn(swapper_pg_dir));
+>>>>>>> v3.18
 	if (HYPERVISOR_vcpu_op(VCPUOP_initialise, cpu, ctxt))
 		BUG();
 
@@ -374,7 +589,11 @@ cpu_initialize_context(unsigned int cpu, struct task_struct *idle)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int __cpuinit xen_cpu_up(unsigned int cpu, struct task_struct *idle)
+=======
+static int xen_cpu_up(unsigned int cpu, struct task_struct *idle)
+>>>>>>> v3.18
 {
 	int rc;
 
@@ -383,10 +602,18 @@ static int __cpuinit xen_cpu_up(unsigned int cpu, struct task_struct *idle)
 	irq_ctx_init(cpu);
 #else
 	clear_tsk_thread_flag(idle, TIF_FORK);
+<<<<<<< HEAD
 	per_cpu(kernel_stack, cpu) =
 		(unsigned long)task_stack_page(idle) -
 		KERNEL_STACK_OFFSET + THREAD_SIZE;
 #endif
+=======
+#endif
+	per_cpu(kernel_stack, cpu) =
+		(unsigned long)task_stack_page(idle) -
+		KERNEL_STACK_OFFSET + THREAD_SIZE;
+
+>>>>>>> v3.18
 	xen_setup_runstate_info(cpu);
 	xen_setup_timer(cpu);
 	xen_init_lock_cpu(cpu);
@@ -442,17 +669,28 @@ static void xen_cpu_die(unsigned int cpu)
 		current->state = TASK_UNINTERRUPTIBLE;
 		schedule_timeout(HZ/10);
 	}
+<<<<<<< HEAD
 	unbind_from_irqhandler(per_cpu(xen_resched_irq, cpu), NULL);
 	unbind_from_irqhandler(per_cpu(xen_callfunc_irq, cpu), NULL);
 	unbind_from_irqhandler(per_cpu(xen_debug_irq, cpu), NULL);
 	unbind_from_irqhandler(per_cpu(xen_callfuncsingle_irq, cpu), NULL);
 	if (!xen_hvm_domain())
 		unbind_from_irqhandler(per_cpu(xen_irq_work, cpu), NULL);
+=======
+
+	cpu_die_common(cpu);
+
+	xen_smp_intr_free(cpu);
+>>>>>>> v3.18
 	xen_uninit_lock_cpu(cpu);
 	xen_teardown_timer(cpu);
 }
 
+<<<<<<< HEAD
 static void __cpuinit xen_play_dead(void) /* used only with HOTPLUG_CPU */
+=======
+static void xen_play_dead(void) /* used only with HOTPLUG_CPU */
+>>>>>>> v3.18
 {
 	play_dead_common();
 	HYPERVISOR_vcpu_op(VCPUOP_down, smp_processor_id(), NULL);
@@ -554,6 +792,15 @@ static inline int xen_map_vector(int vector)
 	case IRQ_WORK_VECTOR:
 		xen_vector = XEN_IRQ_WORK_VECTOR;
 		break;
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_X86_64
+	case NMI_VECTOR:
+	case APIC_DM_NMI: /* Some use that instead of NMI_VECTOR */
+		xen_vector = XEN_NMI_VECTOR;
+		break;
+#endif
+>>>>>>> v3.18
 	default:
 		xen_vector = -1;
 		printk(KERN_ERR "xen: vector 0x%x is not implemented\n",
@@ -662,7 +909,10 @@ void __init xen_smp_init(void)
 {
 	smp_ops = xen_smp_ops;
 	xen_fill_possible_map();
+<<<<<<< HEAD
 	xen_init_spinlocks();
+=======
+>>>>>>> v3.18
 }
 
 static void __init xen_hvm_smp_prepare_cpus(unsigned int max_cpus)
@@ -673,7 +923,11 @@ static void __init xen_hvm_smp_prepare_cpus(unsigned int max_cpus)
 	xen_init_lock_cpu(0);
 }
 
+<<<<<<< HEAD
 static int __cpuinit xen_hvm_cpu_up(unsigned int cpu, struct task_struct *tidle)
+=======
+static int xen_hvm_cpu_up(unsigned int cpu, struct task_struct *tidle)
+>>>>>>> v3.18
 {
 	int rc;
 	/*
@@ -685,6 +939,18 @@ static int __cpuinit xen_hvm_cpu_up(unsigned int cpu, struct task_struct *tidle)
 	WARN_ON(rc);
 	if (!rc)
 		rc =  native_cpu_up(cpu, tidle);
+<<<<<<< HEAD
+=======
+
+	/*
+	 * We must initialize the slowpath CPU kicker _after_ the native
+	 * path has executed. If we initialized it before none of the
+	 * unlocker IPI kicks would reach the booting CPU as the booting
+	 * CPU had not set itself 'online' in cpu_online_mask. That mask
+	 * is checked when IPIs are sent (on HVM at least).
+	 */
+	xen_init_lock_cpu(cpu);
+>>>>>>> v3.18
 	return rc;
 }
 
@@ -704,4 +970,8 @@ void __init xen_hvm_smp_init(void)
 	smp_ops.cpu_die = xen_hvm_cpu_die;
 	smp_ops.send_call_func_ipi = xen_smp_send_call_function_ipi;
 	smp_ops.send_call_func_single_ipi = xen_smp_send_call_function_single_ipi;
+<<<<<<< HEAD
+=======
+	smp_ops.smp_prepare_boot_cpu = xen_smp_prepare_boot_cpu;
+>>>>>>> v3.18
 }

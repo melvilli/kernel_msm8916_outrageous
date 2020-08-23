@@ -70,7 +70,11 @@
 /*H:320
  * The page table code is curly enough to need helper functions to keep it
  * clear and clean.  The kernel itself provides many of them; one advantage
+<<<<<<< HEAD
  * of insisting that the Guest and Host use the same CONFIG_PAE setting.
+=======
+ * of insisting that the Guest and Host use the same CONFIG_X86_PAE setting.
+>>>>>>> v3.18
  *
  * There are two functions which return pointers to the shadow (aka "real")
  * page tables.
@@ -669,8 +673,15 @@ unsigned long guest_pa(struct lg_cpu *cpu, unsigned long vaddr)
 
 #ifdef CONFIG_X86_PAE
 	gpmd = lgread(cpu, gpmd_addr(gpgd, vaddr), pmd_t);
+<<<<<<< HEAD
 	if (!(pmd_flags(gpmd) & _PAGE_PRESENT))
 		kill_guest(cpu, "Bad address %#lx", vaddr);
+=======
+	if (!(pmd_flags(gpmd) & _PAGE_PRESENT)) {
+		kill_guest(cpu, "Bad address %#lx", vaddr);
+		return -1UL;
+	}
+>>>>>>> v3.18
 	gpte = lgread(cpu, gpte_addr(cpu, gpmd, vaddr), pte_t);
 #else
 	gpte = lgread(cpu, gpte_addr(cpu, gpgd, vaddr), pte_t);
@@ -885,7 +896,11 @@ void guest_new_pagetable(struct lg_cpu *cpu, unsigned long pgtable)
  * _PAGE_ACCESSED then we can put a read-only PTE entry in immediately, and if
  * they set _PAGE_DIRTY then we can put a writable PTE entry in immediately.
  */
+<<<<<<< HEAD
 static void do_set_pte(struct lg_cpu *cpu, int idx,
+=======
+static void __guest_set_pte(struct lg_cpu *cpu, int idx,
+>>>>>>> v3.18
 		       unsigned long vaddr, pte_t gpte)
 {
 	/* Look up the matching shadow page directory entry. */
@@ -958,13 +973,21 @@ void guest_set_pte(struct lg_cpu *cpu,
 		unsigned int i;
 		for (i = 0; i < ARRAY_SIZE(cpu->lg->pgdirs); i++)
 			if (cpu->lg->pgdirs[i].pgdir)
+<<<<<<< HEAD
 				do_set_pte(cpu, i, vaddr, gpte);
+=======
+				__guest_set_pte(cpu, i, vaddr, gpte);
+>>>>>>> v3.18
 	} else {
 		/* Is this page table one we have a shadow for? */
 		int pgdir = find_pgdir(cpu->lg, gpgdir);
 		if (pgdir != ARRAY_SIZE(cpu->lg->pgdirs))
 			/* If so, do the update. */
+<<<<<<< HEAD
 			do_set_pte(cpu, pgdir, vaddr, gpte);
+=======
+			__guest_set_pte(cpu, pgdir, vaddr, gpte);
+>>>>>>> v3.18
 	}
 }
 

@@ -13,7 +13,10 @@
 #ifndef ASM_PPC_RIO_H
 #define ASM_PPC_RIO_H
 
+<<<<<<< HEAD
 extern void platform_rio_init(void);
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_FSL_RIO
 extern int fsl_rio_mcheck_exception(struct pt_regs *);
 #else

@@ -24,7 +24,11 @@
 #include <linux/interrupt.h>
 #include <linux/delay.h>
 #include <linux/i2c.h>
+<<<<<<< HEAD
 #include <linux/i2c/at24.h>
+=======
+#include <linux/platform_data/at24.h>
+>>>>>>> v3.18
 #include <linux/usb/otg.h>
 #include <linux/usb/ulpi.h>
 
@@ -35,6 +39,10 @@
 
 #include "common.h"
 #include "devices-imx35.h"
+<<<<<<< HEAD
+=======
+#include "ehci.h"
+>>>>>>> v3.18
 #include "hardware.h"
 #include "iomux-mx35.h"
 #include "ulpi.h"
@@ -385,7 +393,11 @@ static void __init pcm043_init(void)
 	if (!otg_mode_host)
 		imx35_add_fsl_usb2_udc(&otg_device_pdata);
 
+<<<<<<< HEAD
 	imx35_add_flexcan1(NULL);
+=======
+	imx35_add_flexcan1();
+>>>>>>> v3.18
 	imx35_add_sdhci_esdhc_imx(0, &sd1_pdata);
 }
 
@@ -400,7 +412,10 @@ MACHINE_START(PCM043, "Phytec Phycore pcm043")
 	.map_io = mx35_map_io,
 	.init_early = imx35_init_early,
 	.init_irq = mx35_init_irq,
+<<<<<<< HEAD
 	.handle_irq = imx35_handle_irq,
+=======
+>>>>>>> v3.18
 	.init_time = pcm043_timer_init,
 	.init_machine = pcm043_init,
 	.restart	= mxc_restart,

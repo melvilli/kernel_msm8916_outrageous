@@ -33,6 +33,11 @@
  *
  */
 
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) "xen:" KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 #include <linux/bootmem.h>
 #include <linux/dma-mapping.h>
 #include <linux/export.h>
@@ -40,7 +45,15 @@
 #include <xen/page.h>
 #include <xen/xen-ops.h>
 #include <xen/hvc-console.h>
+<<<<<<< HEAD
 #include <asm/dma-mapping.h>
+=======
+
+#include <asm/dma-mapping.h>
+#include <asm/xen/page-coherent.h>
+
+#include <trace/events/swiotlb.h>
+>>>>>>> v3.18
 /*
  * Used to do a quick range check in swiotlb_tbl_unmap_single and
  * swiotlb_tbl_sync_single_*, to see if the memory was in fact allocated by this
@@ -69,6 +82,7 @@ static unsigned long xen_io_tlb_nslabs;
 
 static u64 start_dma_addr;
 
+<<<<<<< HEAD
 static dma_addr_t xen_phys_to_bus(phys_addr_t paddr)
 {
 	return phys_to_machine(XPADDR(paddr)).maddr;
@@ -80,6 +94,37 @@ static phys_addr_t xen_bus_to_phys(dma_addr_t baddr)
 }
 
 static dma_addr_t xen_virt_to_bus(void *address)
+=======
+/*
+ * Both of these functions should avoid PFN_PHYS because phys_addr_t
+ * can be 32bit when dma_addr_t is 64bit leading to a loss in
+ * information if the shift is done before casting to 64bit.
+ */
+static inline dma_addr_t xen_phys_to_bus(phys_addr_t paddr)
+{
+	unsigned long mfn = pfn_to_mfn(PFN_DOWN(paddr));
+	dma_addr_t dma = (dma_addr_t)mfn << PAGE_SHIFT;
+
+	dma |= paddr & ~PAGE_MASK;
+
+	return dma;
+}
+
+static inline phys_addr_t xen_bus_to_phys(dma_addr_t baddr)
+{
+	unsigned long pfn = mfn_to_pfn(PFN_DOWN(baddr));
+	dma_addr_t dma = (dma_addr_t)pfn << PAGE_SHIFT;
+	phys_addr_t paddr = dma;
+
+	BUG_ON(paddr != dma); /* truncation has occurred, should never happen */
+
+	paddr |= baddr & ~PAGE_MASK;
+
+	return paddr;
+}
+
+static inline dma_addr_t xen_virt_to_bus(void *address)
+>>>>>>> v3.18
 {
 	return xen_phys_to_bus(virt_to_phys(address));
 }
@@ -102,7 +147,11 @@ static int check_pages_physically_contiguous(unsigned long pfn,
 	return 1;
 }
 
+<<<<<<< HEAD
 static int range_straddles_page_boundary(phys_addr_t p, size_t size)
+=======
+static inline int range_straddles_page_boundary(phys_addr_t p, size_t size)
+>>>>>>> v3.18
 {
 	unsigned long pfn = PFN_DOWN(p);
 	unsigned int offset = p & ~PAGE_MASK;
@@ -139,6 +188,11 @@ xen_swiotlb_fixup(void *buf, size_t size, unsigned long nslabs)
 {
 	int i, rc;
 	int dma_bits;
+<<<<<<< HEAD
+=======
+	dma_addr_t dma_handle;
+	phys_addr_t p = virt_to_phys(buf);
+>>>>>>> v3.18
 
 	dma_bits = get_order(IO_TLB_SEGSIZE << IO_TLB_SHIFT) + PAGE_SHIFT;
 
@@ -148,9 +202,15 @@ xen_swiotlb_fixup(void *buf, size_t size, unsigned long nslabs)
 
 		do {
 			rc = xen_create_contiguous_region(
+<<<<<<< HEAD
 				(unsigned long)buf + (i << IO_TLB_SHIFT),
 				get_order(slabs << IO_TLB_SHIFT),
 				dma_bits);
+=======
+				p + (i << IO_TLB_SHIFT),
+				get_order(slabs << IO_TLB_SHIFT),
+				dma_bits, &dma_handle);
+>>>>>>> v3.18
 		} while (rc && dma_bits++ < max_dma_bits);
 		if (rc)
 			return rc;
@@ -217,8 +277,13 @@ retry:
 			order--;
 		}
 		if (order != get_order(bytes)) {
+<<<<<<< HEAD
 			pr_warn("Warning: only able to allocate %ld MB "
 				"for software IO TLB\n", (PAGE_SIZE << order) >> 20);
+=======
+			pr_warn("Warning: only able to allocate %ld MB for software IO TLB\n",
+				(PAGE_SIZE << order) >> 20);
+>>>>>>> v3.18
 			xen_io_tlb_nslabs = SLABS_PER_PAGE << order;
 			bytes = xen_io_tlb_nslabs << IO_TLB_SHIFT;
 		}
@@ -257,11 +322,19 @@ error:
 	if (repeat--) {
 		xen_io_tlb_nslabs = max(1024UL, /* Min is 2MB */
 					(xen_io_tlb_nslabs >> 1));
+<<<<<<< HEAD
 		printk(KERN_INFO "Xen-SWIOTLB: Lowering to %luMB\n",
 		      (xen_io_tlb_nslabs << IO_TLB_SHIFT) >> 20);
 		goto retry;
 	}
 	pr_err("%s (rc:%d)", xen_swiotlb_error(m_ret), rc);
+=======
+		pr_info("Lowering to %luMB\n",
+			(xen_io_tlb_nslabs << IO_TLB_SHIFT) >> 20);
+		goto retry;
+	}
+	pr_err("%s (rc:%d)\n", xen_swiotlb_error(m_ret), rc);
+>>>>>>> v3.18
 	if (early)
 		panic("%s (rc:%d)", xen_swiotlb_error(m_ret), rc);
 	else
@@ -276,7 +349,10 @@ xen_swiotlb_alloc_coherent(struct device *hwdev, size_t size,
 	void *ret;
 	int order = get_order(size);
 	u64 dma_mask = DMA_BIT_MASK(32);
+<<<<<<< HEAD
 	unsigned long vstart;
+=======
+>>>>>>> v3.18
 	phys_addr_t phys;
 	dma_addr_t dev_addr;
 
@@ -291,8 +367,17 @@ xen_swiotlb_alloc_coherent(struct device *hwdev, size_t size,
 	if (dma_alloc_from_coherent(hwdev, size, dma_handle, &ret))
 		return ret;
 
+<<<<<<< HEAD
 	vstart = __get_free_pages(flags, order);
 	ret = (void *)vstart;
+=======
+	/* On ARM this function returns an ioremap'ped virtual address for
+	 * which virt_to_phys doesn't return the corresponding physical
+	 * address. In fact on ARM virt_to_phys only works for kernel direct
+	 * mapped RAM memory. Also see comment below.
+	 */
+	ret = xen_alloc_coherent_pages(hwdev, size, dma_handle, flags, attrs);
+>>>>>>> v3.18
 
 	if (!ret)
 		return ret;
@@ -300,18 +385,34 @@ xen_swiotlb_alloc_coherent(struct device *hwdev, size_t size,
 	if (hwdev && hwdev->coherent_dma_mask)
 		dma_mask = dma_alloc_coherent_mask(hwdev, flags);
 
+<<<<<<< HEAD
 	phys = virt_to_phys(ret);
+=======
+	/* At this point dma_handle is the physical address, next we are
+	 * going to set it to the machine address.
+	 * Do not use virt_to_phys(ret) because on ARM it doesn't correspond
+	 * to *dma_handle. */
+	phys = *dma_handle;
+>>>>>>> v3.18
 	dev_addr = xen_phys_to_bus(phys);
 	if (((dev_addr + size - 1 <= dma_mask)) &&
 	    !range_straddles_page_boundary(phys, size))
 		*dma_handle = dev_addr;
 	else {
+<<<<<<< HEAD
 		if (xen_create_contiguous_region(vstart, order,
 						 fls64(dma_mask)) != 0) {
 			free_pages(vstart, order);
 			return NULL;
 		}
 		*dma_handle = virt_to_machine(ret).maddr;
+=======
+		if (xen_create_contiguous_region(phys, order,
+						 fls64(dma_mask), dma_handle) != 0) {
+			xen_free_coherent_pages(hwdev, size, ret, (dma_addr_t)phys, attrs);
+			return NULL;
+		}
+>>>>>>> v3.18
 	}
 	memset(ret, 0, size);
 	return ret;
@@ -332,6 +433,7 @@ xen_swiotlb_free_coherent(struct device *hwdev, size_t size, void *vaddr,
 	if (hwdev && hwdev->coherent_dma_mask)
 		dma_mask = hwdev->coherent_dma_mask;
 
+<<<<<<< HEAD
 	phys = virt_to_phys(vaddr);
 
 	if (((dev_addr + size - 1 > dma_mask)) ||
@@ -339,6 +441,17 @@ xen_swiotlb_free_coherent(struct device *hwdev, size_t size, void *vaddr,
 		xen_destroy_contiguous_region((unsigned long)vaddr, order);
 
 	free_pages((unsigned long)vaddr, order);
+=======
+	/* do not use virt_to_phys because on ARM it doesn't return you the
+	 * physical address */
+	phys = xen_bus_to_phys(dev_addr);
+
+	if (((dev_addr + size - 1 > dma_mask)) ||
+	    range_straddles_page_boundary(phys, size))
+		xen_destroy_contiguous_region(phys, order);
+
+	xen_free_coherent_pages(hwdev, size, vaddr, (dma_addr_t)phys, attrs);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(xen_swiotlb_free_coherent);
 
@@ -365,16 +478,36 @@ dma_addr_t xen_swiotlb_map_page(struct device *dev, struct page *page,
 	 * buffering it.
 	 */
 	if (dma_capable(dev, dev_addr, size) &&
+<<<<<<< HEAD
 	    !range_straddles_page_boundary(phys, size) && !swiotlb_force)
 		return dev_addr;
+=======
+	    !range_straddles_page_boundary(phys, size) && !swiotlb_force) {
+		/* we are not interested in the dma_addr returned by
+		 * xen_dma_map_page, only in the potential cache flushes executed
+		 * by the function. */
+		xen_dma_map_page(dev, page, offset, size, dir, attrs);
+		return dev_addr;
+	}
+>>>>>>> v3.18
 
 	/*
 	 * Oh well, have to allocate and map a bounce buffer.
 	 */
+<<<<<<< HEAD
+=======
+	trace_swiotlb_bounced(dev, dev_addr, size, swiotlb_force);
+
+>>>>>>> v3.18
 	map = swiotlb_tbl_map_single(dev, start_dma_addr, phys, size, dir);
 	if (map == SWIOTLB_MAP_ERROR)
 		return DMA_ERROR_CODE;
 
+<<<<<<< HEAD
+=======
+	xen_dma_map_page(dev, pfn_to_page(map >> PAGE_SHIFT),
+					map & ~PAGE_MASK, size, dir, attrs);
+>>>>>>> v3.18
 	dev_addr = xen_phys_to_bus(map);
 
 	/*
@@ -397,12 +530,22 @@ EXPORT_SYMBOL_GPL(xen_swiotlb_map_page);
  * whatever the device wrote there.
  */
 static void xen_unmap_single(struct device *hwdev, dma_addr_t dev_addr,
+<<<<<<< HEAD
 			     size_t size, enum dma_data_direction dir)
+=======
+			     size_t size, enum dma_data_direction dir,
+				 struct dma_attrs *attrs)
+>>>>>>> v3.18
 {
 	phys_addr_t paddr = xen_bus_to_phys(dev_addr);
 
 	BUG_ON(dir == DMA_NONE);
 
+<<<<<<< HEAD
+=======
+	xen_dma_unmap_page(hwdev, paddr, size, dir, attrs);
+
+>>>>>>> v3.18
 	/* NOTE: We use dev_addr here, not paddr! */
 	if (is_xen_swiotlb_buffer(dev_addr)) {
 		swiotlb_tbl_unmap_single(hwdev, paddr, size, dir);
@@ -425,7 +568,11 @@ void xen_swiotlb_unmap_page(struct device *hwdev, dma_addr_t dev_addr,
 			    size_t size, enum dma_data_direction dir,
 			    struct dma_attrs *attrs)
 {
+<<<<<<< HEAD
 	xen_unmap_single(hwdev, dev_addr, size, dir);
+=======
+	xen_unmap_single(hwdev, dev_addr, size, dir, attrs);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(xen_swiotlb_unmap_page);
 
@@ -448,11 +595,23 @@ xen_swiotlb_sync_single(struct device *hwdev, dma_addr_t dev_addr,
 
 	BUG_ON(dir == DMA_NONE);
 
+<<<<<<< HEAD
 	/* NOTE: We use dev_addr here, not paddr! */
 	if (is_xen_swiotlb_buffer(dev_addr)) {
 		swiotlb_tbl_sync_single(hwdev, paddr, size, dir, target);
 		return;
 	}
+=======
+	if (target == SYNC_FOR_CPU)
+		xen_dma_sync_single_for_cpu(hwdev, paddr, size, dir);
+
+	/* NOTE: We use dev_addr here, not paddr! */
+	if (is_xen_swiotlb_buffer(dev_addr))
+		swiotlb_tbl_sync_single(hwdev, paddr, size, dir, target);
+
+	if (target == SYNC_FOR_DEVICE)
+		xen_dma_sync_single_for_cpu(hwdev, paddr, size, dir);
+>>>>>>> v3.18
 
 	if (dir != DMA_FROM_DEVICE)
 		return;
@@ -515,10 +674,15 @@ xen_swiotlb_map_sg_attrs(struct device *hwdev, struct scatterlist *sgl,
 								 sg->length,
 								 dir);
 			if (map == SWIOTLB_MAP_ERROR) {
+<<<<<<< HEAD
+=======
+				dev_warn(hwdev, "swiotlb buffer is full\n");
+>>>>>>> v3.18
 				/* Don't panic here, we expect map_sg users
 				   to do proper error handling. */
 				xen_swiotlb_unmap_sg_attrs(hwdev, sgl, i, dir,
 							   attrs);
+<<<<<<< HEAD
 				sgl[0].dma_length = 0;
 				return DMA_ERROR_CODE;
 			}
@@ -526,6 +690,29 @@ xen_swiotlb_map_sg_attrs(struct device *hwdev, struct scatterlist *sgl,
 		} else
 			sg->dma_address = dev_addr;
 		sg->dma_length = sg->length;
+=======
+				sg_dma_len(sgl) = 0;
+				return 0;
+			}
+			xen_dma_map_page(hwdev, pfn_to_page(map >> PAGE_SHIFT),
+						map & ~PAGE_MASK,
+						sg->length,
+						dir,
+						attrs);
+			sg->dma_address = xen_phys_to_bus(map);
+		} else {
+			/* we are not interested in the dma_addr returned by
+			 * xen_dma_map_page, only in the potential cache flushes executed
+			 * by the function. */
+			xen_dma_map_page(hwdev, pfn_to_page(paddr >> PAGE_SHIFT),
+						paddr & ~PAGE_MASK,
+						sg->length,
+						dir,
+						attrs);
+			sg->dma_address = dev_addr;
+		}
+		sg_dma_len(sg) = sg->length;
+>>>>>>> v3.18
 	}
 	return nelems;
 }
@@ -546,7 +733,11 @@ xen_swiotlb_unmap_sg_attrs(struct device *hwdev, struct scatterlist *sgl,
 	BUG_ON(dir == DMA_NONE);
 
 	for_each_sg(sgl, sg, nelems, i)
+<<<<<<< HEAD
 		xen_unmap_single(hwdev, sg->dma_address, sg->dma_length, dir);
+=======
+		xen_unmap_single(hwdev, sg->dma_address, sg_dma_len(sg), dir, attrs);
+>>>>>>> v3.18
 
 }
 EXPORT_SYMBOL_GPL(xen_swiotlb_unmap_sg_attrs);
@@ -568,7 +759,11 @@ xen_swiotlb_sync_sg(struct device *hwdev, struct scatterlist *sgl,
 
 	for_each_sg(sgl, sg, nelems, i)
 		xen_swiotlb_sync_single(hwdev, sg->dma_address,
+<<<<<<< HEAD
 					sg->dma_length, dir, target);
+=======
+					sg_dma_len(sg), dir, target);
+>>>>>>> v3.18
 }
 
 void
@@ -606,3 +801,18 @@ xen_swiotlb_dma_supported(struct device *hwdev, u64 mask)
 	return xen_virt_to_bus(xen_io_tlb_end - 1) <= mask;
 }
 EXPORT_SYMBOL_GPL(xen_swiotlb_dma_supported);
+<<<<<<< HEAD
+=======
+
+int
+xen_swiotlb_set_dma_mask(struct device *dev, u64 dma_mask)
+{
+	if (!dev->dma_mask || !xen_swiotlb_dma_supported(dev, dma_mask))
+		return -EIO;
+
+	*dev->dma_mask = dma_mask;
+
+	return 0;
+}
+EXPORT_SYMBOL_GPL(xen_swiotlb_set_dma_mask);
+>>>>>>> v3.18

@@ -15,6 +15,11 @@
 #include <linux/sunrpc/stats.h>
 #include <linux/lockd/lockd.h>
 
+<<<<<<< HEAD
+=======
+#include <uapi/linux/nfs2.h>
+
+>>>>>>> v3.18
 #define NLMDBG_FACILITY		NLMDBG_XDR
 
 #if (NLMCLNT_OHSIZE > XDR_MAX_NETOBJ)

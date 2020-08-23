@@ -53,7 +53,11 @@ static int make_idx_node(struct ubifs_info *c, struct ubifs_idx_node *idx,
 		br->offs = cpu_to_le32(zbr->offs);
 		br->len = cpu_to_le32(zbr->len);
 		if (!zbr->lnum || !zbr->len) {
+<<<<<<< HEAD
 			ubifs_err("bad ref in znode", c->vi.ubi_num);
+=======
+			ubifs_err("bad ref in znode");
+>>>>>>> v3.18
 			ubifs_dump_znode(c, znode);
 			if (zbr->znode)
 				ubifs_dump_znode(c, zbr->znode);
@@ -370,7 +374,11 @@ static int layout_in_gaps(struct ubifs_info *c, int cnt)
 
 	p = c->gap_lebs;
 	do {
+<<<<<<< HEAD
 		ubifs_assert(p < c->gap_lebs + c->lst.idx_lebs);
+=======
+		ubifs_assert(p < c->gap_lebs + sizeof(int) * c->lst.idx_lebs);
+>>>>>>> v3.18
 		written = layout_leb_in_gaps(c, p);
 		if (written < 0) {
 			err = written;
@@ -384,12 +392,19 @@ static int layout_in_gaps(struct ubifs_info *c, int cnt)
 				 * Do not print scary warnings if the debugging
 				 * option which forces in-the-gaps is enabled.
 				 */
+<<<<<<< HEAD
 				ubifs_warn("out of space", c->vi.ubi_num);
+=======
+				ubifs_warn("out of space");
+>>>>>>> v3.18
 				ubifs_dump_budg(c, &c->bi);
 				ubifs_dump_lprops(c);
 			}
 			/* Try to commit anyway */
+<<<<<<< HEAD
 			err = 0;
+=======
+>>>>>>> v3.18
 			break;
 		}
 		p++;
@@ -442,7 +457,11 @@ static int layout_in_empty_space(struct ubifs_info *c)
 		/* Determine the index node position */
 		if (lnum == -1) {
 			if (c->ileb_nxt >= c->ileb_cnt) {
+<<<<<<< HEAD
 				ubifs_err("out of space", c->vi.ubi_num);
+=======
+				ubifs_err("out of space");
+>>>>>>> v3.18
 				return -ENOSPC;
 			}
 			lnum = c->ilebs[c->ileb_nxt++];
@@ -856,7 +875,11 @@ static int write_index(struct ubifs_info *c)
 			br->offs = cpu_to_le32(zbr->offs);
 			br->len = cpu_to_le32(zbr->len);
 			if (!zbr->lnum || !zbr->len) {
+<<<<<<< HEAD
 				ubifs_err("bad ref in znode", c->vi.ubi_num);
+=======
+				ubifs_err("bad ref in znode");
+>>>>>>> v3.18
 				ubifs_dump_znode(c, znode);
 				if (zbr->znode)
 					ubifs_dump_znode(c, zbr->znode);
@@ -876,7 +899,11 @@ static int write_index(struct ubifs_info *c)
 
 		if (lnum != znode->lnum || offs != znode->offs ||
 		    len != znode->len) {
+<<<<<<< HEAD
 			ubifs_err("inconsistent znode posn", c->vi.ubi_num);
+=======
+			ubifs_err("inconsistent znode posn");
+>>>>>>> v3.18
 			return -EINVAL;
 		}
 
@@ -974,7 +1001,11 @@ static int write_index(struct ubifs_info *c)
 
 	if (lnum != c->dbg->new_ihead_lnum ||
 	    buf_offs != c->dbg->new_ihead_offs) {
+<<<<<<< HEAD
 		ubifs_err("inconsistent ihead", c->vi.ubi_num);
+=======
+		ubifs_err("inconsistent ihead");
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 

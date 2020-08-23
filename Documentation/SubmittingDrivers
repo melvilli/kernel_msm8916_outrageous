@@ -146,10 +146,13 @@ LWN.net:
 	Porting drivers from prior kernels to 2.6:
 		http://lwn.net/Articles/driver-porting/
 
+<<<<<<< HEAD
 KernelTrap:
 	Occasional Linux kernel articles and developer interviews
 	http://kerneltrap.org/
 
+=======
+>>>>>>> v3.18
 KernelNewbies:
 	Documentation and assistance for new kernel programmers
 	http://kernelnewbies.org/

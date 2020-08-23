@@ -73,9 +73,20 @@ bfa_cb_ioim_done(void *drv, struct bfad_ioim_s *dio,
 
 		break;
 
+<<<<<<< HEAD
 	case BFI_IOIM_STS_ABORTED:
 	case BFI_IOIM_STS_TIMEDOUT:
 	case BFI_IOIM_STS_PATHTOV:
+=======
+	case BFI_IOIM_STS_TIMEDOUT:
+		host_status = DID_TIME_OUT;
+		cmnd->result = ScsiResult(host_status, 0);
+		break;
+	case BFI_IOIM_STS_PATHTOV:
+		host_status = DID_TRANSPORT_DISRUPTED;
+		cmnd->result = ScsiResult(host_status, 0);
+		break;
+>>>>>>> v3.18
 	default:
 		host_status = DID_ERROR;
 		cmnd->result = ScsiResult(host_status, 0);
@@ -206,7 +217,11 @@ bfad_im_abort_handler(struct scsi_cmnd *cmnd)
 	spin_lock_irqsave(&bfad->bfad_lock, flags);
 	hal_io = (struct bfa_ioim_s *) cmnd->host_scribble;
 	if (!hal_io) {
+<<<<<<< HEAD
 		/* IO has been completed, retrun success */
+=======
+		/* IO has been completed, return success */
+>>>>>>> v3.18
 		rc = SUCCESS;
 		goto out;
 	}
@@ -944,13 +959,24 @@ static int
 bfad_im_slave_alloc(struct scsi_device *sdev)
 {
 	struct fc_rport *rport = starget_to_rport(scsi_target(sdev));
+<<<<<<< HEAD
 	struct bfad_itnim_data_s *itnim_data =
 				(struct bfad_itnim_data_s *) rport->dd_data;
 	struct bfa_s *bfa = itnim_data->itnim->bfa_itnim->bfa;
+=======
+	struct bfad_itnim_data_s *itnim_data;
+	struct bfa_s *bfa;
+>>>>>>> v3.18
 
 	if (!rport || fc_remote_port_chkready(rport))
 		return -ENXIO;
 
+<<<<<<< HEAD
+=======
+	itnim_data = (struct bfad_itnim_data_s *) rport->dd_data;
+	bfa = itnim_data->itnim->bfa_itnim->bfa;
+
+>>>>>>> v3.18
 	if (bfa_get_lun_mask_status(bfa) == BFA_LUNMASK_ENABLED) {
 		/*
 		 * We should not mask LUN 0 - since this will translate
@@ -1035,7 +1061,11 @@ bfad_fc_host_init(struct bfad_im_port_s *im_port)
 	/* For fibre channel services type 0x20 */
 	fc_host_supported_fc4s(host)[7] = 1;
 
+<<<<<<< HEAD
 	strncpy(symname, bfad->bfa_fcs.fabric.bport.port_cfg.sym_name.symname,
+=======
+	strlcpy(symname, bfad->bfa_fcs.fabric.bport.port_cfg.sym_name.symname,
+>>>>>>> v3.18
 		BFA_SYMNAME_MAXLEN);
 	sprintf(fc_host_symbolic_name(host), "%s", symname);
 

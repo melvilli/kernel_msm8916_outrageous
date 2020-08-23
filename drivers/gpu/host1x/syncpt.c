@@ -30,9 +30,38 @@
 #define SYNCPT_CHECK_PERIOD (2 * HZ)
 #define MAX_STUCK_CHECK_COUNT 15
 
+<<<<<<< HEAD
 static struct host1x_syncpt *_host1x_syncpt_alloc(struct host1x *host,
 						  struct device *dev,
 						  int client_managed)
+=======
+static struct host1x_syncpt_base *
+host1x_syncpt_base_request(struct host1x *host)
+{
+	struct host1x_syncpt_base *bases = host->bases;
+	unsigned int i;
+
+	for (i = 0; i < host->info->nb_bases; i++)
+		if (!bases[i].requested)
+			break;
+
+	if (i >= host->info->nb_bases)
+		return NULL;
+
+	bases[i].requested = true;
+	return &bases[i];
+}
+
+static void host1x_syncpt_base_free(struct host1x_syncpt_base *base)
+{
+	if (base)
+		base->requested = false;
+}
+
+static struct host1x_syncpt *host1x_syncpt_alloc(struct host1x *host,
+						 struct device *dev,
+						 unsigned long flags)
+>>>>>>> v3.18
 {
 	int i;
 	struct host1x_syncpt *sp = host->syncpt;
@@ -40,9 +69,22 @@ static struct host1x_syncpt *_host1x_syncpt_alloc(struct host1x *host,
 
 	for (i = 0; i < host->info->nb_pts && sp->name; i++, sp++)
 		;
+<<<<<<< HEAD
 	if (sp->dev)
 		return NULL;
 
+=======
+
+	if (i >= host->info->nb_pts)
+		return NULL;
+
+	if (flags & HOST1X_SYNCPT_HAS_BASE) {
+		sp->base = host1x_syncpt_base_request(host);
+		if (!sp->base)
+			return NULL;
+	}
+
+>>>>>>> v3.18
 	name = kasprintf(GFP_KERNEL, "%02d-%s", sp->id,
 			dev ? dev_name(dev) : NULL);
 	if (!name)
@@ -50,7 +92,15 @@ static struct host1x_syncpt *_host1x_syncpt_alloc(struct host1x *host,
 
 	sp->dev = dev;
 	sp->name = name;
+<<<<<<< HEAD
 	sp->client_managed = client_managed;
+=======
+
+	if (flags & HOST1X_SYNCPT_CLIENT_MANAGED)
+		sp->client_managed = true;
+	else
+		sp->client_managed = false;
+>>>>>>> v3.18
 
 	return sp;
 }
@@ -59,6 +109,10 @@ u32 host1x_syncpt_id(struct host1x_syncpt *sp)
 {
 	return sp->id;
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(host1x_syncpt_id);
+>>>>>>> v3.18
 
 /*
  * Updates the value sent to hardware.
@@ -67,6 +121,10 @@ u32 host1x_syncpt_incr_max(struct host1x_syncpt *sp, u32 incrs)
 {
 	return (u32)atomic_add_return(incrs, &sp->max_val);
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(host1x_syncpt_incr_max);
+>>>>>>> v3.18
 
  /*
  * Write cached syncpoint and waitbase values to hardware.
@@ -128,6 +186,7 @@ u32 host1x_syncpt_load_wait_base(struct host1x_syncpt *sp)
 }
 
 /*
+<<<<<<< HEAD
  * Write a cpu syncpoint increment to the hardware, without touching
  * the cache. Caller is responsible for host being powered.
  */
@@ -145,6 +204,15 @@ void host1x_syncpt_incr(struct host1x_syncpt *sp)
 		host1x_syncpt_incr_max(sp, 1);
 	host1x_syncpt_cpu_incr(sp);
 }
+=======
+ * Increment syncpoint value from cpu, updating cache
+ */
+int host1x_syncpt_incr(struct host1x_syncpt *sp)
+{
+	return host1x_hw_syncpt_cpu_incr(sp->host, sp);
+}
+EXPORT_SYMBOL(host1x_syncpt_incr);
+>>>>>>> v3.18
 
 /*
  * Updated sync point form hardware, and returns true if syncpoint is expired,
@@ -313,25 +381,54 @@ int host1x_syncpt_patch_wait(struct host1x_syncpt *sp, void *patch_addr)
 
 int host1x_syncpt_init(struct host1x *host)
 {
+<<<<<<< HEAD
+=======
+	struct host1x_syncpt_base *bases;
+>>>>>>> v3.18
 	struct host1x_syncpt *syncpt;
 	int i;
 
 	syncpt = devm_kzalloc(host->dev, sizeof(*syncpt) * host->info->nb_pts,
+<<<<<<< HEAD
 		GFP_KERNEL);
 	if (!syncpt)
 		return -ENOMEM;
 
 	for (i = 0; i < host->info->nb_pts; ++i) {
+=======
+			      GFP_KERNEL);
+	if (!syncpt)
+		return -ENOMEM;
+
+	bases = devm_kzalloc(host->dev, sizeof(*bases) * host->info->nb_bases,
+			     GFP_KERNEL);
+	if (!bases)
+		return -ENOMEM;
+
+	for (i = 0; i < host->info->nb_pts; i++) {
+>>>>>>> v3.18
 		syncpt[i].id = i;
 		syncpt[i].host = host;
 	}
 
+<<<<<<< HEAD
 	host->syncpt = syncpt;
+=======
+	for (i = 0; i < host->info->nb_bases; i++)
+		bases[i].id = i;
+
+	host->syncpt = syncpt;
+	host->bases = bases;
+>>>>>>> v3.18
 
 	host1x_syncpt_restore(host);
 
 	/* Allocate sync point to use for clearing waits for expired fences */
+<<<<<<< HEAD
 	host->nop_sp = _host1x_syncpt_alloc(host, NULL, 0);
+=======
+	host->nop_sp = host1x_syncpt_alloc(host, NULL, 0);
+>>>>>>> v3.18
 	if (!host->nop_sp)
 		return -ENOMEM;
 
@@ -339,22 +436,42 @@ int host1x_syncpt_init(struct host1x *host)
 }
 
 struct host1x_syncpt *host1x_syncpt_request(struct device *dev,
+<<<<<<< HEAD
 					    int client_managed)
 {
 	struct host1x *host = dev_get_drvdata(dev->parent);
 	return _host1x_syncpt_alloc(host, dev, client_managed);
 }
+=======
+					    unsigned long flags)
+{
+	struct host1x *host = dev_get_drvdata(dev->parent);
+	return host1x_syncpt_alloc(host, dev, flags);
+}
+EXPORT_SYMBOL(host1x_syncpt_request);
+>>>>>>> v3.18
 
 void host1x_syncpt_free(struct host1x_syncpt *sp)
 {
 	if (!sp)
 		return;
 
+<<<<<<< HEAD
 	kfree(sp->name);
 	sp->dev = NULL;
 	sp->name = NULL;
 	sp->client_managed = 0;
 }
+=======
+	host1x_syncpt_base_free(sp->base);
+	kfree(sp->name);
+	sp->base = NULL;
+	sp->dev = NULL;
+	sp->name = NULL;
+	sp->client_managed = false;
+}
+EXPORT_SYMBOL(host1x_syncpt_free);
+>>>>>>> v3.18
 
 void host1x_syncpt_deinit(struct host1x *host)
 {
@@ -364,6 +481,30 @@ void host1x_syncpt_deinit(struct host1x *host)
 		kfree(sp->name);
 }
 
+<<<<<<< HEAD
+=======
+/*
+ * Read max. It indicates how many operations there are in queue, either in
+ * channel or in a software thread.
+ * */
+u32 host1x_syncpt_read_max(struct host1x_syncpt *sp)
+{
+	smp_rmb();
+	return (u32)atomic_read(&sp->max_val);
+}
+EXPORT_SYMBOL(host1x_syncpt_read_max);
+
+/*
+ * Read min, which is a shadow of the current sync point value in hardware.
+ */
+u32 host1x_syncpt_read_min(struct host1x_syncpt *sp)
+{
+	smp_rmb();
+	return (u32)atomic_read(&sp->min_val);
+}
+EXPORT_SYMBOL(host1x_syncpt_read_min);
+
+>>>>>>> v3.18
 int host1x_syncpt_nb_pts(struct host1x *host)
 {
 	return host->info->nb_pts;
@@ -385,3 +526,19 @@ struct host1x_syncpt *host1x_syncpt_get(struct host1x *host, u32 id)
 		return NULL;
 	return host->syncpt + id;
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(host1x_syncpt_get);
+
+struct host1x_syncpt_base *host1x_syncpt_get_base(struct host1x_syncpt *sp)
+{
+	return sp ? sp->base : NULL;
+}
+EXPORT_SYMBOL(host1x_syncpt_get_base);
+
+u32 host1x_syncpt_base_id(struct host1x_syncpt_base *base)
+{
+	return base->id;
+}
+EXPORT_SYMBOL(host1x_syncpt_base_id);
+>>>>>>> v3.18

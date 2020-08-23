@@ -3,6 +3,11 @@
 
 config TILE
 	def_bool y
+<<<<<<< HEAD
+=======
+	select HAVE_PERF_EVENTS
+	select USE_PMC if PERF_EVENTS
+>>>>>>> v3.18
 	select HAVE_DMA_ATTRS
 	select HAVE_DMA_API_DEBUG
 	select HAVE_KVM if !TILEGX
@@ -23,6 +28,11 @@ config TILE
 	select HAVE_ARCH_TRACEHOOK
 	select HAVE_SYSCALL_TRACEPOINTS
 	select ARCH_HAS_ATOMIC64_DEC_IF_POSITIVE
+<<<<<<< HEAD
+=======
+	select HAVE_DEBUG_STACKOVERFLOW
+	select ARCH_WANT_FRAME_POINTERS
+>>>>>>> v3.18
 
 # FIXME: investigate whether we need/want these options.
 #	select HAVE_IOREMAP_PROT
@@ -61,6 +71,16 @@ config HUGETLB_SUPER_PAGES
 	depends on HUGETLB_PAGE && TILEGX
 	def_bool y
 
+<<<<<<< HEAD
+=======
+config GENERIC_TIME_VSYSCALL
+	def_bool y
+
+# Enable PMC if PERF_EVENTS, OPROFILE, or WATCHPOINTS are enabled.
+config USE_PMC
+	bool
+
+>>>>>>> v3.18
 # FIXME: tilegx can implement a more efficient rwsem.
 config RWSEM_GENERIC_SPINLOCK
 	def_bool y
@@ -109,10 +129,28 @@ config SMP
 config HVC_TILE
 	depends on TTY
 	select HVC_DRIVER
+<<<<<<< HEAD
 	def_bool y
 
 config TILEGX
 	bool "Building with TILE-Gx (64-bit) compiler and toolchain"
+=======
+	select HVC_IRQ if TILEGX
+	def_bool y
+
+config TILEGX
+	bool "Building for TILE-Gx (64-bit) processor"
+	select SPARSE_IRQ
+	select GENERIC_IRQ_LEGACY_ALLOC_HWIRQ
+	select HAVE_FUNCTION_TRACER
+	select HAVE_FUNCTION_GRAPH_TRACER
+	select HAVE_DYNAMIC_FTRACE
+	select HAVE_FTRACE_MCOUNT_RECORD
+	select HAVE_KPROBES
+	select HAVE_KRETPROBES
+	select HAVE_ARCH_KGDB
+	select ARCH_SUPPORTS_ATOMIC_RMW
+>>>>>>> v3.18
 
 config TILEPRO
 	def_bool !TILEGX
@@ -191,7 +229,11 @@ config SYSVIPC_COMPAT
 	def_bool y
 	depends on COMPAT && SYSVIPC
 
+<<<<<<< HEAD
 # We do not currently support disabling HIGHMEM on tile64 and tilepro.
+=======
+# We do not currently support disabling HIGHMEM on tilepro.
+>>>>>>> v3.18
 config HIGHMEM
 	bool # "Support for more than 512 MB of RAM"
 	default !TILEGX
@@ -297,6 +339,11 @@ config PAGE_OFFSET
 
 source "mm/Kconfig"
 
+<<<<<<< HEAD
+=======
+source "kernel/Kconfig.preempt"
+
+>>>>>>> v3.18
 config CMDLINE_BOOL
 	bool "Built-in kernel command line"
 	default n
@@ -344,7 +391,11 @@ config CMDLINE_OVERRIDE
 
 config VMALLOC_RESERVE
 	hex
+<<<<<<< HEAD
 	default 0x1000000
+=======
+	default 0x2000000
+>>>>>>> v3.18
 
 config HARDWALL
 	bool "Hardwall support to allow access to user dynamic network"
@@ -377,7 +428,10 @@ config PCI
 	select PCI_DOMAINS
 	select GENERIC_PCI_IOMAP
 	select TILE_GXIO_TRIO if TILEGX
+<<<<<<< HEAD
 	select ARCH_SUPPORTS_MSI if TILEGX
+=======
+>>>>>>> v3.18
 	select PCI_MSI if TILEGX
 	---help---
 	  Enable PCI root complex support, so PCIe endpoint devices can
@@ -393,8 +447,25 @@ config NO_IOMEM
 config NO_IOPORT_MAP
 	def_bool !PCI
 
+<<<<<<< HEAD
 source "drivers/pci/Kconfig"
 
+=======
+config TILE_PCI_IO
+	bool "PCI I/O space support"
+	default n
+	depends on PCI
+	depends on TILEGX
+	---help---
+	  Enable PCI I/O space support on TILEGx. Since the PCI I/O space
+	  is used by few modern PCIe endpoint devices, its support is disabled
+	  by default to save the TRIO PIO Region resource for other purposes.
+
+source "drivers/pci/Kconfig"
+
+source "drivers/pci/pcie/Kconfig"
+
+>>>>>>> v3.18
 config TILE_USB
 	tristate "Tilera USB host adapter support"
 	default y

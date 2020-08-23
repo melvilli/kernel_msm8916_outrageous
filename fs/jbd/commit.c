@@ -340,13 +340,20 @@ void journal_commit_transaction(journal_t *journal)
 	J_ASSERT(journal->j_committing_transaction == NULL);
 
 	commit_transaction = journal->j_running_transaction;
+<<<<<<< HEAD
 	J_ASSERT(commit_transaction->t_state == T_RUNNING);
+=======
+>>>>>>> v3.18
 
 	trace_jbd_start_commit(journal, commit_transaction);
 	jbd_debug(1, "JBD: starting commit of transaction %d\n",
 			commit_transaction->t_tid);
 
 	spin_lock(&journal->j_state_lock);
+<<<<<<< HEAD
+=======
+	J_ASSERT(commit_transaction->t_state == T_RUNNING);
+>>>>>>> v3.18
 	commit_transaction->t_state = T_LOCKED;
 
 	trace_jbd_commit_locking(journal, commit_transaction);

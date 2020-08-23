@@ -51,7 +51,11 @@ struct resource {
 
 #define IORESOURCE_EXCLUSIVE	0x08000000	/* Userland may not map this resource */
 #define IORESOURCE_DISABLED	0x10000000
+<<<<<<< HEAD
 #define IORESOURCE_UNSET	0x20000000
+=======
+#define IORESOURCE_UNSET	0x20000000	/* No address assigned yet */
+>>>>>>> v3.18
 #define IORESOURCE_AUTO		0x40000000
 #define IORESOURCE_BUSY		0x80000000	/* Driver has marked this resource busy */
 
@@ -140,8 +144,11 @@ extern struct resource iomem_resource;
 
 extern struct resource *request_resource_conflict(struct resource *root, struct resource *new);
 extern int request_resource(struct resource *root, struct resource *new);
+<<<<<<< HEAD
 extern struct resource *locate_resource(struct resource *root,
 	struct resource *search);
+=======
+>>>>>>> v3.18
 extern int release_resource(struct resource *new);
 void release_child_resources(struct resource *new);
 extern void reserve_region_with_split(struct resource *root,
@@ -171,6 +178,19 @@ static inline unsigned long resource_type(const struct resource *res)
 {
 	return res->flags & IORESOURCE_TYPE_BITS;
 }
+<<<<<<< HEAD
+=======
+/* True iff r1 completely contains r2 */
+static inline bool resource_contains(struct resource *r1, struct resource *r2)
+{
+	if (resource_type(r1) != resource_type(r2))
+		return false;
+	if (r1->flags & IORESOURCE_UNSET || r2->flags & IORESOURCE_UNSET)
+		return false;
+	return r1->start <= r2->start && r1->end >= r2->end;
+}
+
+>>>>>>> v3.18
 
 /* Convenience shorthand with allocation */
 #define request_region(start,n,name)		__request_region(&ioport_resource, (start), (n), (name), 0)
@@ -207,6 +227,14 @@ static inline int __deprecated check_region(resource_size_t s,
 
 /* Wrappers for managed devices */
 struct device;
+<<<<<<< HEAD
+=======
+
+extern int devm_request_resource(struct device *dev, struct resource *root,
+				 struct resource *new);
+extern void devm_release_resource(struct device *dev, struct resource *new);
+
+>>>>>>> v3.18
 #define devm_request_region(dev,start,n,name) \
 	__devm_request_region(dev, &ioport_resource, (start), (n), (name))
 #define devm_request_mem_region(dev,start,n,name) \
@@ -229,6 +257,15 @@ extern int iomem_is_exclusive(u64 addr);
 extern int
 walk_system_ram_range(unsigned long start_pfn, unsigned long nr_pages,
 		void *arg, int (*func)(unsigned long, unsigned long, void *));
+<<<<<<< HEAD
+=======
+extern int
+walk_system_ram_res(u64 start, u64 end, void *arg,
+		    int (*func)(u64, u64, void *));
+extern int
+walk_iomem_res(char *name, unsigned long flags, u64 start, u64 end, void *arg,
+	       int (*func)(u64, u64, void *));
+>>>>>>> v3.18
 
 /* True if any part of r1 overlaps r2 */
 static inline bool resource_overlaps(struct resource *r1, struct resource *r2)

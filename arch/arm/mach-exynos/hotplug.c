@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 /* linux arch/arm/mach-exynos4/hotplug.c
  *
+=======
+/*
+>>>>>>> v3.18
  *  Cloned from linux/arch/arm/mach-realview/hotplug.c
  *
  *  Copyright (C) 2002 ARM Ltd.
@@ -19,6 +23,7 @@
 #include <asm/cp15.h>
 #include <asm/smp_plat.h>
 
+<<<<<<< HEAD
 #include <mach/regs-pmu.h>
 #include <plat/cpu.h>
 
@@ -73,6 +78,10 @@ static inline void cpu_enter_lowpower_a15(void)
 	isb();
 	dsb();
 }
+=======
+#include "common.h"
+#include "regs-pmu.h"
+>>>>>>> v3.18
 
 static inline void cpu_leave_lowpower(void)
 {
@@ -92,6 +101,7 @@ static inline void cpu_leave_lowpower(void)
 
 static inline void platform_do_lowpower(unsigned int cpu, int *spurious)
 {
+<<<<<<< HEAD
 	for (;;) {
 
 		/* make cpu1 to be turned off at next WFI command */
@@ -107,6 +117,19 @@ static inline void platform_do_lowpower(unsigned int cpu, int *spurious)
 		    : "memory", "cc");
 
 		if (pen_release == cpu_logical_map(cpu)) {
+=======
+	u32 mpidr = cpu_logical_map(cpu);
+	u32 core_id = MPIDR_AFFINITY_LEVEL(mpidr, 0);
+
+	for (;;) {
+
+		/* Turn the CPU off on next WFI instruction. */
+		exynos_cpu_power_down(core_id);
+
+		wfi();
+
+		if (pen_release == core_id) {
+>>>>>>> v3.18
 			/*
 			 * OK, proper wakeup, we're done
 			 */
@@ -132,6 +155,7 @@ static inline void platform_do_lowpower(unsigned int cpu, int *spurious)
 void __ref exynos_cpu_die(unsigned int cpu)
 {
 	int spurious = 0;
+<<<<<<< HEAD
 	int primary_part = 0;
 
 	/*
@@ -145,6 +169,10 @@ void __ref exynos_cpu_die(unsigned int cpu)
 		cpu_enter_lowpower_a15();
 	else
 		cpu_enter_lowpower_a9();
+=======
+
+	v7_exit_coherency_flush(louis);
+>>>>>>> v3.18
 
 	platform_do_lowpower(cpu, &spurious);
 

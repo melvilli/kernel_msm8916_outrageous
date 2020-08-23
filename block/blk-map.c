@@ -20,7 +20,11 @@ int blk_rq_append_bio(struct request_queue *q, struct request *rq,
 		rq->biotail->bi_next = bio;
 		rq->biotail = bio;
 
+<<<<<<< HEAD
 		rq->__data_len += bio->bi_size;
+=======
+		rq->__data_len += bio->bi_iter.bi_size;
+>>>>>>> v3.18
 	}
 	return 0;
 }
@@ -76,7 +80,11 @@ static int __blk_rq_map_user(struct request_queue *q, struct request *rq,
 
 	ret = blk_rq_append_bio(q, rq, bio);
 	if (!ret)
+<<<<<<< HEAD
 		return bio->bi_size;
+=======
+		return bio->bi_iter.bi_size;
+>>>>>>> v3.18
 
 	/* if it was boucned we must call the end io function */
 	bio_endio(bio, 0);
@@ -155,7 +163,10 @@ int blk_rq_map_user(struct request_queue *q, struct request *rq,
 	if (!bio_flagged(bio, BIO_USER_MAPPED))
 		rq->cmd_flags |= REQ_COPY_USER;
 
+<<<<<<< HEAD
 	rq->buffer = NULL;
+=======
+>>>>>>> v3.18
 	return 0;
 unmap_rq:
 	blk_rq_unmap_user(bio);
@@ -188,7 +199,11 @@ EXPORT_SYMBOL(blk_rq_map_user);
  *    unmapping.
  */
 int blk_rq_map_user_iov(struct request_queue *q, struct request *rq,
+<<<<<<< HEAD
 			struct rq_map_data *map_data, struct sg_iovec *iov,
+=======
+			struct rq_map_data *map_data, const struct sg_iovec *iov,
+>>>>>>> v3.18
 			int iov_count, unsigned int len, gfp_t gfp_mask)
 {
 	struct bio *bio;
@@ -220,7 +235,11 @@ int blk_rq_map_user_iov(struct request_queue *q, struct request *rq,
 	if (IS_ERR(bio))
 		return PTR_ERR(bio);
 
+<<<<<<< HEAD
 	if (bio->bi_size != len) {
+=======
+	if (bio->bi_iter.bi_size != len) {
+>>>>>>> v3.18
 		/*
 		 * Grab an extra reference to this bio, as bio_unmap_user()
 		 * expects to be able to drop it twice as it happens on the
@@ -238,7 +257,10 @@ int blk_rq_map_user_iov(struct request_queue *q, struct request *rq,
 	blk_queue_bounce(q, &bio);
 	bio_get(bio);
 	blk_rq_bio_prep(q, rq, bio);
+<<<<<<< HEAD
 	rq->buffer = NULL;
+=======
+>>>>>>> v3.18
 	return 0;
 }
 EXPORT_SYMBOL(blk_rq_map_user_iov);
@@ -285,7 +307,11 @@ EXPORT_SYMBOL(blk_rq_unmap_user);
  *
  * Description:
  *    Data will be mapped directly if possible. Otherwise a bounce
+<<<<<<< HEAD
  *    buffer is used. Can be called multple times to append multple
+=======
+ *    buffer is used. Can be called multiple times to append multiple
+>>>>>>> v3.18
  *    buffers.
  */
 int blk_rq_map_kern(struct request_queue *q, struct request *rq, void *kbuf,
@@ -325,7 +351,10 @@ int blk_rq_map_kern(struct request_queue *q, struct request *rq, void *kbuf,
 	}
 
 	blk_queue_bounce(q, &rq->bio);
+<<<<<<< HEAD
 	rq->buffer = NULL;
+=======
+>>>>>>> v3.18
 	return 0;
 }
 EXPORT_SYMBOL(blk_rq_map_kern);

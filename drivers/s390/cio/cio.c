@@ -18,6 +18,10 @@
 #include <linux/device.h>
 #include <linux/kernel_stat.h>
 #include <linux/interrupt.h>
+<<<<<<< HEAD
+=======
+#include <linux/irq.h>
+>>>>>>> v3.18
 #include <asm/cio.h>
 #include <asm/delay.h>
 #include <asm/irq.h>
@@ -28,7 +32,11 @@
 #include <asm/chpid.h>
 #include <asm/airq.h>
 #include <asm/isc.h>
+<<<<<<< HEAD
 #include <asm/cputime.h>
+=======
+#include <linux/cputime.h>
+>>>>>>> v3.18
 #include <asm/fcx.h>
 #include <asm/nmi.h>
 #include <asm/crw.h>
@@ -45,6 +53,12 @@ debug_info_t *cio_debug_msg_id;
 debug_info_t *cio_debug_trace_id;
 debug_info_t *cio_debug_crw_id;
 
+<<<<<<< HEAD
+=======
+DEFINE_PER_CPU_ALIGNED(struct irb, cio_irb);
+EXPORT_PER_CPU_SYMBOL(cio_irb);
+
+>>>>>>> v3.18
 /*
  * Function: cio_debug_init
  * Initializes three debug logs for common I/O:
@@ -54,7 +68,11 @@ debug_info_t *cio_debug_crw_id;
  */
 static int __init cio_debug_init(void)
 {
+<<<<<<< HEAD
 	cio_debug_msg_id = debug_register("cio_msg", 16, 1, 16 * sizeof(long));
+=======
+	cio_debug_msg_id = debug_register("cio_msg", 16, 1, 11 * sizeof(long));
+>>>>>>> v3.18
 	if (!cio_debug_msg_id)
 		goto out_unregister;
 	debug_register_view(cio_debug_msg_id, &debug_sprintf_view);
@@ -64,7 +82,11 @@ static int __init cio_debug_init(void)
 		goto out_unregister;
 	debug_register_view(cio_debug_trace_id, &debug_hex_ascii_view);
 	debug_set_level(cio_debug_trace_id, 2);
+<<<<<<< HEAD
 	cio_debug_crw_id = debug_register("cio_crw", 16, 1, 16 * sizeof(long));
+=======
+	cio_debug_crw_id = debug_register("cio_crw", 8, 1, 8 * sizeof(long));
+>>>>>>> v3.18
 	if (!cio_debug_crw_id)
 		goto out_unregister;
 	debug_register_view(cio_debug_crw_id, &debug_sprintf_view);
@@ -342,8 +364,14 @@ static int cio_check_config(struct subchannel *sch, struct schib *schib)
  */
 int cio_commit_config(struct subchannel *sch)
 {
+<<<<<<< HEAD
 	struct schib schib;
 	int ccode, retry, ret = 0;
+=======
+	int ccode, retry, ret = 0;
+	struct schib schib;
+	struct irb irb;
+>>>>>>> v3.18
 
 	if (stsch_err(sch->schid, &schib) || !css_sch_is_valid(&schib))
 		return -ENODEV;
@@ -367,7 +395,14 @@ int cio_commit_config(struct subchannel *sch)
 			ret = -EAGAIN;
 			break;
 		case 1: /* status pending */
+<<<<<<< HEAD
 			return -EBUSY;
+=======
+			ret = -EBUSY;
+			if (tsch(sch->schid, &irb))
+				return ret;
+			break;
+>>>>>>> v3.18
 		case 2: /* busy */
 			udelay(100); /* allow for recovery */
 			ret = -EBUSY;
@@ -403,7 +438,10 @@ EXPORT_SYMBOL_GPL(cio_update_schib);
  */
 int cio_enable_subchannel(struct subchannel *sch, u32 intparm)
 {
+<<<<<<< HEAD
 	int retry;
+=======
+>>>>>>> v3.18
 	int ret;
 
 	CIO_TRACE_EVENT(2, "ensch");
@@ -418,6 +456,7 @@ int cio_enable_subchannel(struct subchannel *sch, u32 intparm)
 	sch->config.isc = sch->isc;
 	sch->config.intparm = intparm;
 
+<<<<<<< HEAD
 	for (retry = 0; retry < 3; retry++) {
 		ret = cio_commit_config(sch);
 		if (ret == -EIO) {
@@ -432,6 +471,16 @@ int cio_enable_subchannel(struct subchannel *sch, u32 intparm)
 				break;
 		} else
 			break;
+=======
+	ret = cio_commit_config(sch);
+	if (ret == -EIO) {
+		/*
+		 * Got a program check in msch. Try without
+		 * the concurrent sense bit the next time.
+		 */
+		sch->config.csense = 0;
+		ret = cio_commit_config(sch);
+>>>>>>> v3.18
 	}
 	CIO_HEX_EVENT(2, &ret, sizeof(ret));
 	return ret;
@@ -444,7 +493,10 @@ EXPORT_SYMBOL_GPL(cio_enable_subchannel);
  */
 int cio_disable_subchannel(struct subchannel *sch)
 {
+<<<<<<< HEAD
 	int retry;
+=======
+>>>>>>> v3.18
 	int ret;
 
 	CIO_TRACE_EVENT(2, "dissch");
@@ -456,6 +508,7 @@ int cio_disable_subchannel(struct subchannel *sch)
 		return -ENODEV;
 
 	sch->config.ena = 0;
+<<<<<<< HEAD
 
 	for (retry = 0; retry < 3; retry++) {
 		ret = cio_commit_config(sch);
@@ -466,6 +519,10 @@ int cio_disable_subchannel(struct subchannel *sch)
 		} else
 			break;
 	}
+=======
+	ret = cio_commit_config(sch);
+
+>>>>>>> v3.18
 	CIO_HEX_EVENT(2, &ret, sizeof(ret));
 	return ret;
 }
@@ -561,16 +618,23 @@ out:
 }
 
 /*
+<<<<<<< HEAD
  * do_IRQ() handles all normal I/O device IRQ's (the special
  *	    SMP cross-CPU interrupts have their own specific
  *	    handlers).
  *
  */
 void __irq_entry do_IRQ(struct pt_regs *regs)
+=======
+ * do_cio_interrupt() handles all normal I/O device IRQ's
+ */
+static irqreturn_t do_cio_interrupt(int irq, void *dummy)
+>>>>>>> v3.18
 {
 	struct tpi_info *tpi_info;
 	struct subchannel *sch;
 	struct irb *irb;
+<<<<<<< HEAD
 	struct pt_regs *old_regs;
 
 	old_regs = set_irq_regs(regs);
@@ -621,10 +685,54 @@ void __irq_entry do_IRQ(struct pt_regs *regs)
 	} while (MACHINE_IS_LPAR && tpi(NULL) != 0);
 	irq_exit();
 	set_irq_regs(old_regs);
+=======
+
+	set_cpu_flag(CIF_NOHZ_DELAY);
+	tpi_info = (struct tpi_info *) &get_irq_regs()->int_code;
+	irb = this_cpu_ptr(&cio_irb);
+	sch = (struct subchannel *)(unsigned long) tpi_info->intparm;
+	if (!sch) {
+		/* Clear pending interrupt condition. */
+		inc_irq_stat(IRQIO_CIO);
+		tsch(tpi_info->schid, irb);
+		return IRQ_HANDLED;
+	}
+	spin_lock(sch->lock);
+	/* Store interrupt response block to lowcore. */
+	if (tsch(tpi_info->schid, irb) == 0) {
+		/* Keep subchannel information word up to date. */
+		memcpy (&sch->schib.scsw, &irb->scsw, sizeof (irb->scsw));
+		/* Call interrupt handler if there is one. */
+		if (sch->driver && sch->driver->irq)
+			sch->driver->irq(sch);
+		else
+			inc_irq_stat(IRQIO_CIO);
+	} else
+		inc_irq_stat(IRQIO_CIO);
+	spin_unlock(sch->lock);
+
+	return IRQ_HANDLED;
+}
+
+static struct irqaction io_interrupt = {
+	.name	 = "IO",
+	.handler = do_cio_interrupt,
+};
+
+void __init init_cio_interrupts(void)
+{
+	irq_set_chip_and_handler(IO_INTERRUPT,
+				 &dummy_irq_chip, handle_percpu_irq);
+	setup_irq(IO_INTERRUPT, &io_interrupt);
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_CCW_CONSOLE
 static struct subchannel *console_sch;
+<<<<<<< HEAD
+=======
+static struct lock_class_key console_sch_key;
+>>>>>>> v3.18
 
 /*
  * Use cio_tsch to update the subchannel status and call the interrupt handler
@@ -635,7 +743,11 @@ void cio_tsch(struct subchannel *sch)
 	struct irb *irb;
 	int irq_context;
 
+<<<<<<< HEAD
 	irb = (struct irb *)&S390_lowcore.irb;
+=======
+	irb = this_cpu_ptr(&cio_irb);
+>>>>>>> v3.18
 	/* Store interrupt response block to lowcore. */
 	if (tsch(sch->schid, irb) != 0)
 		/* Not status pending or not operational. */
@@ -647,7 +759,11 @@ void cio_tsch(struct subchannel *sch)
 		local_bh_disable();
 		irq_enter();
 	}
+<<<<<<< HEAD
 	kstat_incr_irqs_this_cpu(IO_INTERRUPT, NULL);
+=======
+	kstat_incr_irq_this_cpu(IO_INTERRUPT);
+>>>>>>> v3.18
 	if (sch->driver && sch->driver->irq)
 		sch->driver->irq(sch);
 	else
@@ -709,6 +825,10 @@ struct subchannel *cio_probe_console(void)
 	if (IS_ERR(sch))
 		return sch;
 
+<<<<<<< HEAD
+=======
+	lockdep_set_class(sch->lock, &console_sch_key);
+>>>>>>> v3.18
 	isc_register(CONSOLE_ISC);
 	sch->config.isc = CONSOLE_ISC;
 	sch->config.intparm = (u32)(addr_t)sch;
@@ -772,7 +892,11 @@ __clear_io_subchannel_easy(struct subchannel_id schid)
 		struct tpi_info ti;
 
 		if (tpi(&ti)) {
+<<<<<<< HEAD
 			tsch(ti.schid, (struct irb *)&S390_lowcore.irb);
+=======
+			tsch(ti.schid, this_cpu_ptr(&cio_irb));
+>>>>>>> v3.18
 			if (schid_equal(&ti.schid, &schid))
 				return 0;
 		}
@@ -890,9 +1014,15 @@ static void css_reset(void)
 			atomic_inc(&chpid_reset_count);
 	}
 	/* Wait for machine check for all channel paths. */
+<<<<<<< HEAD
 	timeout = get_tod_clock() + (RCHP_TIMEOUT << 12);
 	while (atomic_read(&chpid_reset_count) != 0) {
 		if (get_tod_clock() > timeout)
+=======
+	timeout = get_tod_clock_fast() + (RCHP_TIMEOUT << 12);
+	while (atomic_read(&chpid_reset_count) != 0) {
+		if (get_tod_clock_fast() > timeout)
+>>>>>>> v3.18
 			break;
 		cpu_relax();
 	}

@@ -47,7 +47,11 @@
 #define LTC4151_ADIN_L	0x05
 
 struct ltc4151_data {
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+	struct i2c_client *client;
+>>>>>>> v3.18
 
 	struct mutex update_lock;
 	bool valid;
@@ -59,8 +63,13 @@ struct ltc4151_data {
 
 static struct ltc4151_data *ltc4151_update_device(struct device *dev)
 {
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct ltc4151_data *data = i2c_get_clientdata(client);
+=======
+	struct ltc4151_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 	struct ltc4151_data *ret = data;
 
 	mutex_lock(&data->update_lock);
@@ -159,7 +168,11 @@ static SENSOR_DEVICE_ATTR(curr1_input, S_IRUGO, ltc4151_show_value, NULL,
  * Finally, construct an array of pointers to members of the above objects,
  * as required for sysfs_create_group()
  */
+<<<<<<< HEAD
 static struct attribute *ltc4151_attributes[] = {
+=======
+static struct attribute *ltc4151_attrs[] = {
+>>>>>>> v3.18
 	&sensor_dev_attr_in1_input.dev_attr.attr,
 	&sensor_dev_attr_in2_input.dev_attr.attr,
 
@@ -167,21 +180,32 @@ static struct attribute *ltc4151_attributes[] = {
 
 	NULL,
 };
+<<<<<<< HEAD
 
 static const struct attribute_group ltc4151_group = {
 	.attrs = ltc4151_attributes,
 };
+=======
+ATTRIBUTE_GROUPS(ltc4151);
+>>>>>>> v3.18
 
 static int ltc4151_probe(struct i2c_client *client,
 			 const struct i2c_device_id *id)
 {
 	struct i2c_adapter *adapter = client->adapter;
+<<<<<<< HEAD
 	struct ltc4151_data *data;
 	int ret;
+=======
+	struct device *dev = &client->dev;
+	struct ltc4151_data *data;
+	struct device *hwmon_dev;
+>>>>>>> v3.18
 
 	if (!i2c_check_functionality(adapter, I2C_FUNC_SMBUS_BYTE_DATA))
 		return -ENODEV;
 
+<<<<<<< HEAD
 	data = devm_kzalloc(&client->dev, sizeof(*data), GFP_KERNEL);
 	if (!data)
 		return -ENOMEM;
@@ -215,6 +239,19 @@ static int ltc4151_remove(struct i2c_client *client)
 	sysfs_remove_group(&client->dev.kobj, &ltc4151_group);
 
 	return 0;
+=======
+	data = devm_kzalloc(dev, sizeof(*data), GFP_KERNEL);
+	if (!data)
+		return -ENOMEM;
+
+	data->client = client;
+	mutex_init(&data->update_lock);
+
+	hwmon_dev = devm_hwmon_device_register_with_groups(dev, client->name,
+							   data,
+							   ltc4151_groups);
+	return PTR_ERR_OR_ZERO(hwmon_dev);
+>>>>>>> v3.18
 }
 
 static const struct i2c_device_id ltc4151_id[] = {
@@ -229,7 +266,10 @@ static struct i2c_driver ltc4151_driver = {
 		.name	= "ltc4151",
 	},
 	.probe		= ltc4151_probe,
+<<<<<<< HEAD
 	.remove		= ltc4151_remove,
+=======
+>>>>>>> v3.18
 	.id_table	= ltc4151_id,
 };
 

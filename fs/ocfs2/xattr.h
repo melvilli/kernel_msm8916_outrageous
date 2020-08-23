@@ -32,7 +32,11 @@ enum ocfs2_xattr_type {
 
 struct ocfs2_security_xattr_info {
 	int enable;
+<<<<<<< HEAD
 	char *name;
+=======
+	const char *name;
+>>>>>>> v3.18
 	void *value;
 	size_t value_len;
 };
@@ -40,8 +44,11 @@ struct ocfs2_security_xattr_info {
 extern const struct xattr_handler ocfs2_xattr_user_handler;
 extern const struct xattr_handler ocfs2_xattr_trusted_handler;
 extern const struct xattr_handler ocfs2_xattr_security_handler;
+<<<<<<< HEAD
 extern const struct xattr_handler ocfs2_xattr_acl_access_handler;
 extern const struct xattr_handler ocfs2_xattr_acl_default_handler;
+=======
+>>>>>>> v3.18
 extern const struct xattr_handler *ocfs2_xattr_handlers[];
 
 ssize_t ocfs2_listxattr(struct dentry *, char *, size_t);
@@ -96,5 +103,11 @@ int ocfs2_reflink_xattrs(struct inode *old_inode,
 			 bool preserve_security);
 int ocfs2_init_security_and_acl(struct inode *dir,
 				struct inode *inode,
+<<<<<<< HEAD
 				const struct qstr *qstr);
+=======
+				const struct qstr *qstr,
+				struct posix_acl *default_acl,
+				struct posix_acl *acl);
+>>>>>>> v3.18
 #endif /* OCFS2_XATTR_H */

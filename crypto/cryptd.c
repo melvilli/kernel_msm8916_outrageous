@@ -233,7 +233,11 @@ static void cryptd_blkcipher_decrypt(struct crypto_async_request *req, int err)
 }
 
 static int cryptd_blkcipher_enqueue(struct ablkcipher_request *req,
+<<<<<<< HEAD
 				    crypto_completion_t complete)
+=======
+				    crypto_completion_t compl)
+>>>>>>> v3.18
 {
 	struct cryptd_blkcipher_request_ctx *rctx = ablkcipher_request_ctx(req);
 	struct crypto_ablkcipher *tfm = crypto_ablkcipher_reqtfm(req);
@@ -241,7 +245,11 @@ static int cryptd_blkcipher_enqueue(struct ablkcipher_request *req,
 
 	queue = cryptd_get_queue(crypto_ablkcipher_tfm(tfm));
 	rctx->complete = req->base.complete;
+<<<<<<< HEAD
 	req->base.complete = complete;
+=======
+	req->base.complete = compl;
+>>>>>>> v3.18
 
 	return cryptd_enqueue_request(queue, &req->base);
 }
@@ -414,7 +422,11 @@ static int cryptd_hash_setkey(struct crypto_ahash *parent,
 }
 
 static int cryptd_hash_enqueue(struct ahash_request *req,
+<<<<<<< HEAD
 				crypto_completion_t complete)
+=======
+				crypto_completion_t compl)
+>>>>>>> v3.18
 {
 	struct cryptd_hash_request_ctx *rctx = ahash_request_ctx(req);
 	struct crypto_ahash *tfm = crypto_ahash_reqtfm(req);
@@ -422,7 +434,11 @@ static int cryptd_hash_enqueue(struct ahash_request *req,
 		cryptd_get_queue(crypto_ahash_tfm(tfm));
 
 	rctx->complete = req->base.complete;
+<<<<<<< HEAD
 	req->base.complete = complete;
+=======
+	req->base.complete = compl;
+>>>>>>> v3.18
 
 	return cryptd_enqueue_request(queue, &req->base);
 }
@@ -565,6 +581,7 @@ static int cryptd_hash_export(struct ahash_request *req, void *out)
 
 static int cryptd_hash_import(struct ahash_request *req, const void *in)
 {
+<<<<<<< HEAD
 	struct crypto_ahash *tfm = crypto_ahash_reqtfm(req);
 	struct cryptd_hash_ctx *ctx = crypto_ahash_ctx(tfm);
 	struct shash_desc *desc = cryptd_shash_desc(req);
@@ -573,6 +590,11 @@ static int cryptd_hash_import(struct ahash_request *req, const void *in)
 	desc->flags = req->base.flags;
 
 	return crypto_shash_import(desc, in);
+=======
+	struct cryptd_hash_request_ctx *rctx = ahash_request_ctx(req);
+
+	return crypto_shash_import(&rctx->desc, in);
+>>>>>>> v3.18
 }
 
 static int cryptd_create_hash(struct crypto_template *tmpl, struct rtattr **tb,
@@ -606,7 +628,10 @@ static int cryptd_create_hash(struct crypto_template *tmpl, struct rtattr **tb,
 	inst->alg.halg.base.cra_flags = CRYPTO_ALG_ASYNC;
 
 	inst->alg.halg.digestsize = salg->digestsize;
+<<<<<<< HEAD
 	inst->alg.halg.statesize = salg->statesize;
+=======
+>>>>>>> v3.18
 	inst->alg.halg.base.cra_ctxsize = sizeof(struct cryptd_hash_ctx);
 
 	inst->alg.halg.base.cra_init = cryptd_hash_init_tfm;
@@ -673,14 +698,22 @@ static void cryptd_aead_decrypt(struct crypto_async_request *areq, int err)
 }
 
 static int cryptd_aead_enqueue(struct aead_request *req,
+<<<<<<< HEAD
 				    crypto_completion_t complete)
+=======
+				    crypto_completion_t compl)
+>>>>>>> v3.18
 {
 	struct cryptd_aead_request_ctx *rctx = aead_request_ctx(req);
 	struct crypto_aead *tfm = crypto_aead_reqtfm(req);
 	struct cryptd_queue *queue = cryptd_get_queue(crypto_aead_tfm(tfm));
 
 	rctx->complete = req->base.complete;
+<<<<<<< HEAD
 	req->base.complete = complete;
+=======
+	req->base.complete = compl;
+>>>>>>> v3.18
 	return cryptd_enqueue_request(queue, &req->base);
 }
 
@@ -961,4 +994,7 @@ module_exit(cryptd_exit);
 
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("Software async crypto daemon");
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("cryptd");
+=======
+>>>>>>> v3.18

@@ -35,7 +35,10 @@
 #include "vmci_driver.h"
 #include "vmci_event.h"
 
+<<<<<<< HEAD
 #define PCI_VENDOR_ID_VMWARE		0x15AD
+=======
+>>>>>>> v3.18
 #define PCI_DEVICE_ID_VMWARE_VMCI	0x0740
 
 #define VMCI_UTIL_NUM_RESOURCES 1
@@ -65,9 +68,17 @@ struct vmci_guest_device {
 
 	void *data_buffer;
 	void *notification_bitmap;
+<<<<<<< HEAD
 };
 
 /* vmci_dev singleton device and supporting data*/
+=======
+	dma_addr_t notification_base;
+};
+
+/* vmci_dev singleton device and supporting data*/
+struct pci_dev *vmci_pdev;
+>>>>>>> v3.18
 static struct vmci_guest_device *vmci_dev_g;
 static DEFINE_SPINLOCK(vmci_dev_spinlock);
 
@@ -163,7 +174,11 @@ static void vmci_guest_cid_update(u32 sub_id,
  * true if required hypercalls (or fallback hypercalls) are
  * supported by the host, false otherwise.
  */
+<<<<<<< HEAD
 static bool vmci_check_host_caps(struct pci_dev *pdev)
+=======
+static int vmci_check_host_caps(struct pci_dev *pdev)
+>>>>>>> v3.18
 {
 	bool result;
 	struct vmci_resource_query_msg *msg;
@@ -174,7 +189,11 @@ static bool vmci_check_host_caps(struct pci_dev *pdev)
 	check_msg = kmalloc(msg_size, GFP_KERNEL);
 	if (!check_msg) {
 		dev_err(&pdev->dev, "%s: Insufficient memory\n", __func__);
+<<<<<<< HEAD
 		return false;
+=======
+		return -ENOMEM;
+>>>>>>> v3.18
 	}
 
 	check_msg->dst = vmci_make_handle(VMCI_HYPERVISOR_CONTEXT_ID,
@@ -194,7 +213,11 @@ static bool vmci_check_host_caps(struct pci_dev *pdev)
 		__func__, result ? "PASSED" : "FAILED");
 
 	/* We need the vector. There are no fallbacks. */
+<<<<<<< HEAD
 	return result;
+=======
+	return result ? 0 : -ENXIO;
+>>>>>>> v3.18
 }
 
 /*
@@ -381,11 +404,20 @@ static int vmci_enable_msix(struct pci_dev *pdev,
 		vmci_dev->msix_entries[i].vector = i;
 	}
 
+<<<<<<< HEAD
 	result = pci_enable_msix(pdev, vmci_dev->msix_entries, VMCI_MAX_INTRS);
 	if (result == 0)
 		vmci_dev->exclusive_vectors = true;
 	else if (result > 0)
 		result = pci_enable_msix(pdev, vmci_dev->msix_entries, 1);
+=======
+	result = pci_enable_msix_exact(pdev,
+				       vmci_dev->msix_entries, VMCI_MAX_INTRS);
+	if (result == 0)
+		vmci_dev->exclusive_vectors = true;
+	else if (result == -ENOSPC)
+		result = pci_enable_msix_exact(pdev, vmci_dev->msix_entries, 1);
+>>>>>>> v3.18
 
 	return result;
 }
@@ -528,7 +560,13 @@ static int vmci_guest_probe_device(struct pci_dev *pdev,
 	 * well.
 	 */
 	if (capabilities & VMCI_CAPS_NOTIFICATIONS) {
+<<<<<<< HEAD
 		vmci_dev->notification_bitmap = vmalloc(PAGE_SIZE);
+=======
+		vmci_dev->notification_bitmap = dma_alloc_coherent(
+			&pdev->dev, PAGE_SIZE, &vmci_dev->notification_base,
+			GFP_KERNEL);
+>>>>>>> v3.18
 		if (!vmci_dev->notification_bitmap) {
 			dev_warn(&pdev->dev,
 				 "Unable to allocate notification bitmap\n");
@@ -546,6 +584,10 @@ static int vmci_guest_probe_device(struct pci_dev *pdev,
 	/* Set up global device so that we can start sending datagrams */
 	spin_lock_irq(&vmci_dev_spinlock);
 	vmci_dev_g = vmci_dev;
+<<<<<<< HEAD
+=======
+	vmci_pdev = pdev;
+>>>>>>> v3.18
 	spin_unlock_irq(&vmci_dev_spinlock);
 
 	/*
@@ -553,19 +595,33 @@ static int vmci_guest_probe_device(struct pci_dev *pdev,
 	 * used.
 	 */
 	if (capabilities & VMCI_CAPS_NOTIFICATIONS) {
+<<<<<<< HEAD
 		struct page *page =
 			vmalloc_to_page(vmci_dev->notification_bitmap);
 		unsigned long bitmap_ppn = page_to_pfn(page);
+=======
+		unsigned long bitmap_ppn =
+			vmci_dev->notification_base >> PAGE_SHIFT;
+>>>>>>> v3.18
 		if (!vmci_dbell_register_notification_bitmap(bitmap_ppn)) {
 			dev_warn(&pdev->dev,
 				 "VMCI device unable to register notification bitmap with PPN 0x%x\n",
 				 (u32) bitmap_ppn);
+<<<<<<< HEAD
+=======
+			error = -ENXIO;
+>>>>>>> v3.18
 			goto err_remove_vmci_dev_g;
 		}
 	}
 
 	/* Check host capabilities. */
+<<<<<<< HEAD
 	if (!vmci_check_host_caps(pdev))
+=======
+	error = vmci_check_host_caps(pdev);
+	if (error)
+>>>>>>> v3.18
 		goto err_remove_bitmap;
 
 	/* Enable device. */
@@ -645,7 +701,11 @@ static int vmci_guest_probe_device(struct pci_dev *pdev,
 	return 0;
 
 err_free_irq:
+<<<<<<< HEAD
 	free_irq(vmci_dev->irq, &vmci_dev);
+=======
+	free_irq(vmci_dev->irq, vmci_dev);
+>>>>>>> v3.18
 	tasklet_kill(&vmci_dev->datagram_tasklet);
 	tasklet_kill(&vmci_dev->bm_tasklet);
 
@@ -665,11 +725,21 @@ err_remove_bitmap:
 	if (vmci_dev->notification_bitmap) {
 		iowrite32(VMCI_CONTROL_RESET,
 			  vmci_dev->iobase + VMCI_CONTROL_ADDR);
+<<<<<<< HEAD
 		vfree(vmci_dev->notification_bitmap);
+=======
+		dma_free_coherent(&pdev->dev, PAGE_SIZE,
+				  vmci_dev->notification_bitmap,
+				  vmci_dev->notification_base);
+>>>>>>> v3.18
 	}
 
 err_remove_vmci_dev_g:
 	spin_lock_irq(&vmci_dev_spinlock);
+<<<<<<< HEAD
+=======
+	vmci_pdev = NULL;
+>>>>>>> v3.18
 	vmci_dev_g = NULL;
 	spin_unlock_irq(&vmci_dev_spinlock);
 
@@ -699,6 +769,10 @@ static void vmci_guest_remove_device(struct pci_dev *pdev)
 
 	spin_lock_irq(&vmci_dev_spinlock);
 	vmci_dev_g = NULL;
+<<<<<<< HEAD
+=======
+	vmci_pdev = NULL;
+>>>>>>> v3.18
 	spin_unlock_irq(&vmci_dev_spinlock);
 
 	dev_dbg(&pdev->dev, "Resetting vmci device\n");
@@ -727,7 +801,13 @@ static void vmci_guest_remove_device(struct pci_dev *pdev)
 		 * device, so we can safely free it here.
 		 */
 
+<<<<<<< HEAD
 		vfree(vmci_dev->notification_bitmap);
+=======
+		dma_free_coherent(&pdev->dev, PAGE_SIZE,
+				  vmci_dev->notification_bitmap,
+				  vmci_dev->notification_base);
+>>>>>>> v3.18
 	}
 
 	vfree(vmci_dev->data_buffer);
@@ -735,7 +815,11 @@ static void vmci_guest_remove_device(struct pci_dev *pdev)
 	/* The rest are managed resources and will be freed by PCI core */
 }
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(vmci_ids) = {
+=======
+static const struct pci_device_id vmci_ids[] = {
+>>>>>>> v3.18
 	{ PCI_DEVICE(PCI_VENDOR_ID_VMWARE, PCI_DEVICE_ID_VMWARE_VMCI), },
 	{ 0 },
 };

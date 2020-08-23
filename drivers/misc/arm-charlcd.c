@@ -11,6 +11,10 @@
 #include <linux/module.h>
 #include <linux/interrupt.h>
 #include <linux/platform_device.h>
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 #include <linux/completion.h>
 #include <linux/delay.h>
 #include <linux/io.h>
@@ -291,13 +295,21 @@ static int __init charlcd_probe(struct platform_device *pdev)
 	lcd->virtbase = ioremap(lcd->phybase, lcd->physize);
 	if (!lcd->virtbase) {
 		ret = -ENOMEM;
+<<<<<<< HEAD
 		goto out_no_remap;
+=======
+		goto out_no_memregion;
+>>>>>>> v3.18
 	}
 
 	lcd->irq = platform_get_irq(pdev, 0);
 	/* If no IRQ is supplied, we'll survive without it */
 	if (lcd->irq >= 0) {
+<<<<<<< HEAD
 		if (request_irq(lcd->irq, charlcd_interrupt, IRQF_DISABLED,
+=======
+		if (request_irq(lcd->irq, charlcd_interrupt, 0,
+>>>>>>> v3.18
 				DRIVERNAME, lcd)) {
 			ret = -EIO;
 			goto out_no_irq;
@@ -320,8 +332,11 @@ static int __init charlcd_probe(struct platform_device *pdev)
 
 out_no_irq:
 	iounmap(lcd->virtbase);
+<<<<<<< HEAD
 out_no_remap:
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 out_no_memregion:
 	release_mem_region(lcd->phybase, SZ_4K);
 out_no_resource:
@@ -337,7 +352,10 @@ static int __exit charlcd_remove(struct platform_device *pdev)
 		free_irq(lcd->irq, lcd);
 		iounmap(lcd->virtbase);
 		release_mem_region(lcd->phybase, lcd->physize);
+<<<<<<< HEAD
 		platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 		kfree(lcd);
 	}
 
@@ -369,11 +387,23 @@ static const struct dev_pm_ops charlcd_pm_ops = {
 	.resume = charlcd_resume,
 };
 
+<<<<<<< HEAD
+=======
+static const struct of_device_id charlcd_match[] = {
+	{ .compatible = "arm,versatile-lcd", },
+	{}
+};
+
+>>>>>>> v3.18
 static struct platform_driver charlcd_driver = {
 	.driver = {
 		.name = DRIVERNAME,
 		.owner = THIS_MODULE,
 		.pm = &charlcd_pm_ops,
+<<<<<<< HEAD
+=======
+		.of_match_table = of_match_ptr(charlcd_match),
+>>>>>>> v3.18
 	},
 	.remove = __exit_p(charlcd_remove),
 };

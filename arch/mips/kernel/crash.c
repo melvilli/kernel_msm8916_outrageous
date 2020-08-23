@@ -5,7 +5,10 @@
 #include <linux/bootmem.h>
 #include <linux/crash_dump.h>
 #include <linux/delay.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/irq.h>
 #include <linux/types.h>
 #include <linux/sched.h>
@@ -15,6 +18,7 @@ static int crashing_cpu = -1;
 static cpumask_t cpus_in_crash = CPU_MASK_NONE;
 
 #ifdef CONFIG_SMP
+<<<<<<< HEAD
 static void crash_shutdown_secondary(void *passed_regs)
 {
 	struct pt_regs *regs = passed_regs;
@@ -31,6 +35,14 @@ static void crash_shutdown_secondary(void *passed_regs)
 		regs = get_irq_regs();
 	if (!regs)
 		regs = task_pt_regs(current);
+=======
+static void crash_shutdown_secondary(void *ignore)
+{
+	struct pt_regs *regs;
+	int cpu = smp_processor_id();
+
+	regs = task_pt_regs(current);
+>>>>>>> v3.18
 
 	if (!cpu_online(cpu))
 		return;

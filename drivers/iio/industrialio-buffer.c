@@ -20,6 +20,10 @@
 #include <linux/cdev.h>
 #include <linux/slab.h>
 #include <linux/poll.h>
+<<<<<<< HEAD
+=======
+#include <linux/sched.h>
+>>>>>>> v3.18
 
 #include <linux/iio/iio.h>
 #include "iio_core.h"
@@ -31,6 +35,7 @@ static const char * const iio_endian_prefix[] = {
 	[IIO_LE] = "le",
 };
 
+<<<<<<< HEAD
 static bool iio_buffer_is_active(struct iio_dev *indio_dev,
 				 struct iio_buffer *buf)
 {
@@ -41,6 +46,16 @@ static bool iio_buffer_is_active(struct iio_dev *indio_dev,
 			return true;
 
 	return false;
+=======
+static bool iio_buffer_is_active(struct iio_buffer *buf)
+{
+	return !list_empty(&buf->buffer_list);
+}
+
+static bool iio_buffer_data_available(struct iio_buffer *buf)
+{
+	return buf->access->data_available(buf);
+>>>>>>> v3.18
 }
 
 /**
@@ -54,10 +69,41 @@ ssize_t iio_buffer_read_first_n_outer(struct file *filp, char __user *buf,
 {
 	struct iio_dev *indio_dev = filp->private_data;
 	struct iio_buffer *rb = indio_dev->buffer;
+<<<<<<< HEAD
 
 	if (!rb || !rb->access->read_first_n)
 		return -EINVAL;
 	return rb->access->read_first_n(rb, n, buf);
+=======
+	int ret;
+
+	if (!indio_dev->info)
+		return -ENODEV;
+
+	if (!rb || !rb->access->read_first_n)
+		return -EINVAL;
+
+	do {
+		if (!iio_buffer_data_available(rb)) {
+			if (filp->f_flags & O_NONBLOCK)
+				return -EAGAIN;
+
+			ret = wait_event_interruptible(rb->pollq,
+					iio_buffer_data_available(rb) ||
+					indio_dev->info == NULL);
+			if (ret)
+				return ret;
+			if (indio_dev->info == NULL)
+				return -ENODEV;
+		}
+
+		ret = rb->access->read_first_n(rb, n, buf);
+		if (ret == 0 && (filp->f_flags & O_NONBLOCK))
+			ret = -EAGAIN;
+	 } while (ret == 0);
+
+	return ret;
+>>>>>>> v3.18
 }
 
 /**
@@ -69,17 +115,49 @@ unsigned int iio_buffer_poll(struct file *filp,
 	struct iio_dev *indio_dev = filp->private_data;
 	struct iio_buffer *rb = indio_dev->buffer;
 
+<<<<<<< HEAD
 	poll_wait(filp, &rb->pollq, wait);
 	if (rb->stufftoread)
+=======
+	if (!indio_dev->info)
+		return -ENODEV;
+
+	poll_wait(filp, &rb->pollq, wait);
+	if (iio_buffer_data_available(rb))
+>>>>>>> v3.18
 		return POLLIN | POLLRDNORM;
 	/* need a way of knowing if there may be enough data... */
 	return 0;
 }
 
+<<<<<<< HEAD
 void iio_buffer_init(struct iio_buffer *buffer)
 {
 	INIT_LIST_HEAD(&buffer->demux_list);
 	init_waitqueue_head(&buffer->pollq);
+=======
+/**
+ * iio_buffer_wakeup_poll - Wakes up the buffer waitqueue
+ * @indio_dev: The IIO device
+ *
+ * Wakes up the event waitqueue used for poll(). Should usually
+ * be called when the device is unregistered.
+ */
+void iio_buffer_wakeup_poll(struct iio_dev *indio_dev)
+{
+	if (!indio_dev->buffer)
+		return;
+
+	wake_up(&indio_dev->buffer->pollq);
+}
+
+void iio_buffer_init(struct iio_buffer *buffer)
+{
+	INIT_LIST_HEAD(&buffer->demux_list);
+	INIT_LIST_HEAD(&buffer->buffer_list);
+	init_waitqueue_head(&buffer->pollq);
+	kref_init(&buffer->ref);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(iio_buffer_init);
 
@@ -104,7 +182,20 @@ static ssize_t iio_show_fixed_type(struct device *dev,
 		type = IIO_BE;
 #endif
 	}
+<<<<<<< HEAD
 	return sprintf(buf, "%s:%c%d/%d>>%u\n",
+=======
+	if (this_attr->c->scan_type.repeat > 1)
+		return sprintf(buf, "%s:%c%d/%dX%d>>%u\n",
+		       iio_endian_prefix[type],
+		       this_attr->c->scan_type.sign,
+		       this_attr->c->scan_type.realbits,
+		       this_attr->c->scan_type.storagebits,
+		       this_attr->c->scan_type.repeat,
+		       this_attr->c->scan_type.shift);
+		else
+			return sprintf(buf, "%s:%c%d/%d>>%u\n",
+>>>>>>> v3.18
 		       iio_endian_prefix[type],
 		       this_attr->c->scan_type.sign,
 		       this_attr->c->scan_type.realbits,
@@ -147,7 +238,11 @@ static ssize_t iio_scan_el_store(struct device *dev,
 	if (ret < 0)
 		return ret;
 	mutex_lock(&indio_dev->mlock);
+<<<<<<< HEAD
 	if (iio_buffer_is_active(indio_dev, indio_dev->buffer)) {
+=======
+	if (iio_buffer_is_active(indio_dev->buffer)) {
+>>>>>>> v3.18
 		ret = -EBUSY;
 		goto error_ret;
 	}
@@ -193,7 +288,11 @@ static ssize_t iio_scan_el_ts_store(struct device *dev,
 		return ret;
 
 	mutex_lock(&indio_dev->mlock);
+<<<<<<< HEAD
 	if (iio_buffer_is_active(indio_dev, indio_dev->buffer)) {
+=======
+	if (iio_buffer_is_active(indio_dev->buffer)) {
+>>>>>>> v3.18
 		ret = -EBUSY;
 		goto error_ret;
 	}
@@ -215,11 +314,19 @@ static int iio_buffer_add_channel_sysfs(struct iio_dev *indio_dev,
 				     &iio_show_scan_index,
 				     NULL,
 				     0,
+<<<<<<< HEAD
 				     0,
 				     &indio_dev->dev,
 				     &buffer->scan_el_dev_attr_list);
 	if (ret)
 		goto error_ret;
+=======
+				     IIO_SEPARATE,
+				     &indio_dev->dev,
+				     &buffer->scan_el_dev_attr_list);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 	attrcount++;
 	ret = __iio_add_chan_devattr("type",
 				     chan,
@@ -230,7 +337,11 @@ static int iio_buffer_add_channel_sysfs(struct iio_dev *indio_dev,
 				     &indio_dev->dev,
 				     &buffer->scan_el_dev_attr_list);
 	if (ret)
+<<<<<<< HEAD
 		goto error_ret;
+=======
+		return ret;
+>>>>>>> v3.18
 	attrcount++;
 	if (chan->type != IIO_TIMESTAMP)
 		ret = __iio_add_chan_devattr("en",
@@ -250,6 +361,7 @@ static int iio_buffer_add_channel_sysfs(struct iio_dev *indio_dev,
 					     0,
 					     &indio_dev->dev,
 					     &buffer->scan_el_dev_attr_list);
+<<<<<<< HEAD
 	attrcount++;
 	ret = attrcount;
 error_ret:
@@ -273,6 +385,15 @@ static void __iio_buffer_attr_cleanup(struct iio_dev *indio_dev)
 		iio_buffer_remove_and_free_scan_dev_attr(indio_dev, p);
 }
 
+=======
+	if (ret)
+		return ret;
+	attrcount++;
+	ret = attrcount;
+	return ret;
+}
+
+>>>>>>> v3.18
 static const char * const iio_scan_elements_group_name = "scan_elements";
 
 int iio_buffer_register(struct iio_dev *indio_dev,
@@ -349,7 +470,11 @@ int iio_buffer_register(struct iio_dev *indio_dev,
 error_free_scan_mask:
 	kfree(buffer->scan_mask);
 error_cleanup_dynamic:
+<<<<<<< HEAD
 	__iio_buffer_attr_cleanup(indio_dev);
+=======
+	iio_free_chan_devattr_list(&buffer->scan_el_dev_attr_list);
+>>>>>>> v3.18
 
 	return ret;
 }
@@ -359,7 +484,11 @@ void iio_buffer_unregister(struct iio_dev *indio_dev)
 {
 	kfree(indio_dev->buffer->scan_mask);
 	kfree(indio_dev->buffer->scan_el_group.attrs);
+<<<<<<< HEAD
 	__iio_buffer_attr_cleanup(indio_dev);
+=======
+	iio_free_chan_devattr_list(&indio_dev->buffer->scan_el_dev_attr_list);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(iio_buffer_unregister);
 
@@ -397,7 +526,11 @@ ssize_t iio_buffer_write_length(struct device *dev,
 			return len;
 
 	mutex_lock(&indio_dev->mlock);
+<<<<<<< HEAD
 	if (iio_buffer_is_active(indio_dev, indio_dev->buffer)) {
+=======
+	if (iio_buffer_is_active(indio_dev->buffer)) {
+>>>>>>> v3.18
 		ret = -EBUSY;
 	} else {
 		if (buffer->access->set_length)
@@ -415,6 +548,7 @@ ssize_t iio_buffer_show_enable(struct device *dev,
 			       char *buf)
 {
 	struct iio_dev *indio_dev = dev_to_iio_dev(dev);
+<<<<<<< HEAD
 	return sprintf(buf, "%d\n",
 		       iio_buffer_is_active(indio_dev,
 					    indio_dev->buffer));
@@ -422,6 +556,13 @@ ssize_t iio_buffer_show_enable(struct device *dev,
 EXPORT_SYMBOL(iio_buffer_show_enable);
 
 /* note NULL used as error indicator as it doesn't make sense. */
+=======
+	return sprintf(buf, "%d\n", iio_buffer_is_active(indio_dev->buffer));
+}
+EXPORT_SYMBOL(iio_buffer_show_enable);
+
+/* Note NULL used as error indicator as it doesn't make sense. */
+>>>>>>> v3.18
 static const unsigned long *iio_scan_mask_match(const unsigned long *av_masks,
 					  unsigned int masklength,
 					  const unsigned long *mask)
@@ -436,8 +577,13 @@ static const unsigned long *iio_scan_mask_match(const unsigned long *av_masks,
 	return NULL;
 }
 
+<<<<<<< HEAD
 static int iio_compute_scan_bytes(struct iio_dev *indio_dev, const long *mask,
 				  bool timestamp)
+=======
+static int iio_compute_scan_bytes(struct iio_dev *indio_dev,
+				const unsigned long *mask, bool timestamp)
+>>>>>>> v3.18
 {
 	const struct iio_chan_spec *ch;
 	unsigned bytes = 0;
@@ -447,21 +593,90 @@ static int iio_compute_scan_bytes(struct iio_dev *indio_dev, const long *mask,
 	for_each_set_bit(i, mask,
 			 indio_dev->masklength) {
 		ch = iio_find_channel_from_si(indio_dev, i);
+<<<<<<< HEAD
 		length = ch->scan_type.storagebits / 8;
+=======
+		if (ch->scan_type.repeat > 1)
+			length = ch->scan_type.storagebits / 8 *
+				ch->scan_type.repeat;
+		else
+			length = ch->scan_type.storagebits / 8;
+>>>>>>> v3.18
 		bytes = ALIGN(bytes, length);
 		bytes += length;
 	}
 	if (timestamp) {
 		ch = iio_find_channel_from_si(indio_dev,
 					      indio_dev->scan_index_timestamp);
+<<<<<<< HEAD
 		length = ch->scan_type.storagebits / 8;
+=======
+		if (ch->scan_type.repeat > 1)
+			length = ch->scan_type.storagebits / 8 *
+				ch->scan_type.repeat;
+		else
+			length = ch->scan_type.storagebits / 8;
+>>>>>>> v3.18
 		bytes = ALIGN(bytes, length);
 		bytes += length;
 	}
 	return bytes;
 }
 
+<<<<<<< HEAD
 int iio_update_buffers(struct iio_dev *indio_dev,
+=======
+static void iio_buffer_activate(struct iio_dev *indio_dev,
+	struct iio_buffer *buffer)
+{
+	iio_buffer_get(buffer);
+	list_add(&buffer->buffer_list, &indio_dev->buffer_list);
+}
+
+static void iio_buffer_deactivate(struct iio_buffer *buffer)
+{
+	list_del_init(&buffer->buffer_list);
+	iio_buffer_put(buffer);
+}
+
+void iio_disable_all_buffers(struct iio_dev *indio_dev)
+{
+	struct iio_buffer *buffer, *_buffer;
+
+	if (list_empty(&indio_dev->buffer_list))
+		return;
+
+	if (indio_dev->setup_ops->predisable)
+		indio_dev->setup_ops->predisable(indio_dev);
+
+	list_for_each_entry_safe(buffer, _buffer,
+			&indio_dev->buffer_list, buffer_list)
+		iio_buffer_deactivate(buffer);
+
+	indio_dev->currentmode = INDIO_DIRECT_MODE;
+	if (indio_dev->setup_ops->postdisable)
+		indio_dev->setup_ops->postdisable(indio_dev);
+
+	if (indio_dev->available_scan_masks == NULL)
+		kfree(indio_dev->active_scan_mask);
+}
+
+static void iio_buffer_update_bytes_per_datum(struct iio_dev *indio_dev,
+	struct iio_buffer *buffer)
+{
+	unsigned int bytes;
+
+	if (!buffer->access->set_bytes_per_datum)
+		return;
+
+	bytes = iio_compute_scan_bytes(indio_dev, buffer->scan_mask,
+		buffer->scan_timestamp);
+
+	buffer->access->set_bytes_per_datum(buffer, bytes);
+}
+
+static int __iio_update_buffers(struct iio_dev *indio_dev,
+>>>>>>> v3.18
 		       struct iio_buffer *insert_buffer,
 		       struct iio_buffer *remove_buffer)
 {
@@ -476,13 +691,21 @@ int iio_update_buffers(struct iio_dev *indio_dev,
 		if (indio_dev->setup_ops->predisable) {
 			ret = indio_dev->setup_ops->predisable(indio_dev);
 			if (ret)
+<<<<<<< HEAD
 				goto error_ret;
+=======
+				return ret;
+>>>>>>> v3.18
 		}
 		indio_dev->currentmode = INDIO_DIRECT_MODE;
 		if (indio_dev->setup_ops->postdisable) {
 			ret = indio_dev->setup_ops->postdisable(indio_dev);
 			if (ret)
+<<<<<<< HEAD
 				goto error_ret;
+=======
+				return ret;
+>>>>>>> v3.18
 		}
 	}
 	/* Keep a copy of current setup to allow roll back */
@@ -491,9 +714,15 @@ int iio_update_buffers(struct iio_dev *indio_dev,
 		indio_dev->active_scan_mask = NULL;
 
 	if (remove_buffer)
+<<<<<<< HEAD
 		list_del(&remove_buffer->buffer_list);
 	if (insert_buffer)
 		list_add(&insert_buffer->buffer_list, &indio_dev->buffer_list);
+=======
+		iio_buffer_deactivate(remove_buffer);
+	if (insert_buffer)
+		iio_buffer_activate(indio_dev, insert_buffer);
+>>>>>>> v3.18
 
 	/* If no buffers in list, we are done */
 	if (list_empty(&indio_dev->buffer_list)) {
@@ -503,7 +732,11 @@ int iio_update_buffers(struct iio_dev *indio_dev,
 		return 0;
 	}
 
+<<<<<<< HEAD
 	/* What scan mask do we actually have ?*/
+=======
+	/* What scan mask do we actually have? */
+>>>>>>> v3.18
 	compound_mask = kcalloc(BITS_TO_LONGS(indio_dev->masklength),
 				sizeof(long), GFP_KERNEL);
 	if (compound_mask == NULL) {
@@ -528,9 +761,22 @@ int iio_update_buffers(struct iio_dev *indio_dev,
 			 * Roll back.
 			 * Note can only occur when adding a buffer.
 			 */
+<<<<<<< HEAD
 			list_del(&insert_buffer->buffer_list);
 			indio_dev->active_scan_mask = old_mask;
 			success = -EINVAL;
+=======
+			iio_buffer_deactivate(insert_buffer);
+			if (old_mask) {
+				indio_dev->active_scan_mask = old_mask;
+				success = -EINVAL;
+			}
+			else {
+				kfree(compound_mask);
+				ret = -EINVAL;
+				return ret;
+			}
+>>>>>>> v3.18
 		}
 	} else {
 		indio_dev->active_scan_mask = compound_mask;
@@ -543,8 +789,12 @@ int iio_update_buffers(struct iio_dev *indio_dev,
 		ret = indio_dev->setup_ops->preenable(indio_dev);
 		if (ret) {
 			printk(KERN_ERR
+<<<<<<< HEAD
 			       "Buffer not started:"
 			       "buffer preenable failed\n");
+=======
+			       "Buffer not started: buffer preenable failed (%d)\n", ret);
+>>>>>>> v3.18
 			goto error_remove_inserted;
 		}
 	}
@@ -552,26 +802,47 @@ int iio_update_buffers(struct iio_dev *indio_dev,
 		iio_compute_scan_bytes(indio_dev,
 				       indio_dev->active_scan_mask,
 				       indio_dev->scan_timestamp);
+<<<<<<< HEAD
 	list_for_each_entry(buffer, &indio_dev->buffer_list, buffer_list)
+=======
+	list_for_each_entry(buffer, &indio_dev->buffer_list, buffer_list) {
+		iio_buffer_update_bytes_per_datum(indio_dev, buffer);
+>>>>>>> v3.18
 		if (buffer->access->request_update) {
 			ret = buffer->access->request_update(buffer);
 			if (ret) {
 				printk(KERN_INFO
+<<<<<<< HEAD
 				       "Buffer not started:"
 				       "buffer parameter update failed\n");
 				goto error_run_postdisable;
 			}
 		}
+=======
+				       "Buffer not started: buffer parameter update failed (%d)\n", ret);
+				goto error_run_postdisable;
+			}
+		}
+	}
+>>>>>>> v3.18
 	if (indio_dev->info->update_scan_mode) {
 		ret = indio_dev->info
 			->update_scan_mode(indio_dev,
 					   indio_dev->active_scan_mask);
 		if (ret < 0) {
+<<<<<<< HEAD
 			printk(KERN_INFO "update scan mode failed\n");
 			goto error_run_postdisable;
 		}
 	}
 	/* Definitely possible for devices to support both of these.*/
+=======
+			printk(KERN_INFO "Buffer not started: update scan mode failed (%d)\n", ret);
+			goto error_run_postdisable;
+		}
+	}
+	/* Definitely possible for devices to support both of these. */
+>>>>>>> v3.18
 	if (indio_dev->modes & INDIO_BUFFER_TRIGGERED) {
 		if (!indio_dev->trig) {
 			printk(KERN_INFO "Buffer not started: no trigger\n");
@@ -582,7 +853,11 @@ int iio_update_buffers(struct iio_dev *indio_dev,
 		indio_dev->currentmode = INDIO_BUFFER_TRIGGERED;
 	} else if (indio_dev->modes & INDIO_BUFFER_HARDWARE) {
 		indio_dev->currentmode = INDIO_BUFFER_HARDWARE;
+<<<<<<< HEAD
 	} else { /* should never be reached */
+=======
+	} else { /* Should never be reached */
+>>>>>>> v3.18
 		ret = -EINVAL;
 		goto error_run_postdisable;
 	}
@@ -591,7 +866,11 @@ int iio_update_buffers(struct iio_dev *indio_dev,
 		ret = indio_dev->setup_ops->postenable(indio_dev);
 		if (ret) {
 			printk(KERN_INFO
+<<<<<<< HEAD
 			       "Buffer not started: postenable failed\n");
+=======
+			       "Buffer not started: postenable failed (%d)\n", ret);
+>>>>>>> v3.18
 			indio_dev->currentmode = INDIO_DIRECT_MODE;
 			if (indio_dev->setup_ops->postdisable)
 				indio_dev->setup_ops->postdisable(indio_dev);
@@ -612,12 +891,55 @@ error_run_postdisable:
 	if (indio_dev->setup_ops->postdisable)
 		indio_dev->setup_ops->postdisable(indio_dev);
 error_remove_inserted:
+<<<<<<< HEAD
 
 	if (insert_buffer)
 		list_del(&insert_buffer->buffer_list);
 	indio_dev->active_scan_mask = old_mask;
 	kfree(compound_mask);
 error_ret:
+=======
+	if (insert_buffer)
+		iio_buffer_deactivate(insert_buffer);
+	indio_dev->active_scan_mask = old_mask;
+	kfree(compound_mask);
+	return ret;
+}
+
+int iio_update_buffers(struct iio_dev *indio_dev,
+		       struct iio_buffer *insert_buffer,
+		       struct iio_buffer *remove_buffer)
+{
+	int ret;
+
+	if (insert_buffer == remove_buffer)
+		return 0;
+
+	mutex_lock(&indio_dev->info_exist_lock);
+	mutex_lock(&indio_dev->mlock);
+
+	if (insert_buffer && iio_buffer_is_active(insert_buffer))
+		insert_buffer = NULL;
+
+	if (remove_buffer && !iio_buffer_is_active(remove_buffer))
+		remove_buffer = NULL;
+
+	if (!insert_buffer && !remove_buffer) {
+		ret = 0;
+		goto out_unlock;
+	}
+
+	if (indio_dev->info == NULL) {
+		ret = -ENODEV;
+		goto out_unlock;
+	}
+
+	ret = __iio_update_buffers(indio_dev, insert_buffer, remove_buffer);
+
+out_unlock:
+	mutex_unlock(&indio_dev->mlock);
+	mutex_unlock(&indio_dev->info_exist_lock);
+>>>>>>> v3.18
 
 	return ret;
 }
@@ -631,7 +953,10 @@ ssize_t iio_buffer_store_enable(struct device *dev,
 	int ret;
 	bool requested_state;
 	struct iio_dev *indio_dev = dev_to_iio_dev(dev);
+<<<<<<< HEAD
 	struct iio_buffer *pbuf = indio_dev->buffer;
+=======
+>>>>>>> v3.18
 	bool inlist;
 
 	ret = strtobool(buf, &requested_state);
@@ -641,16 +966,27 @@ ssize_t iio_buffer_store_enable(struct device *dev,
 	mutex_lock(&indio_dev->mlock);
 
 	/* Find out if it is in the list */
+<<<<<<< HEAD
 	inlist = iio_buffer_is_active(indio_dev, pbuf);
+=======
+	inlist = iio_buffer_is_active(indio_dev->buffer);
+>>>>>>> v3.18
 	/* Already in desired state */
 	if (inlist == requested_state)
 		goto done;
 
 	if (requested_state)
+<<<<<<< HEAD
 		ret = iio_update_buffers(indio_dev,
 					 indio_dev->buffer, NULL);
 	else
 		ret = iio_update_buffers(indio_dev,
+=======
+		ret = __iio_update_buffers(indio_dev,
+					 indio_dev->buffer, NULL);
+	else
+		ret = __iio_update_buffers(indio_dev,
+>>>>>>> v3.18
 					 NULL, indio_dev->buffer);
 
 	if (ret < 0)
@@ -661,6 +997,7 @@ done:
 }
 EXPORT_SYMBOL(iio_buffer_store_enable);
 
+<<<<<<< HEAD
 int iio_sw_buffer_preenable(struct iio_dev *indio_dev)
 {
 	struct iio_buffer *buffer;
@@ -679,6 +1016,8 @@ int iio_sw_buffer_preenable(struct iio_dev *indio_dev)
 }
 EXPORT_SYMBOL(iio_sw_buffer_preenable);
 
+=======
+>>>>>>> v3.18
 /**
  * iio_validate_scan_mask_onehot() - Validates that exactly one channel is selected
  * @indio_dev: the iio device
@@ -706,6 +1045,10 @@ static bool iio_validate_scan_mask(struct iio_dev *indio_dev,
 
 /**
  * iio_scan_mask_set() - set particular bit in the scan mask
+<<<<<<< HEAD
+=======
+ * @indio_dev: the iio device
+>>>>>>> v3.18
  * @buffer: the buffer whose scan mask we are interested in
  * @bit: the bit to be set.
  *
@@ -726,7 +1069,11 @@ int iio_scan_mask_set(struct iio_dev *indio_dev,
 	if (trialmask == NULL)
 		return -ENOMEM;
 	if (!indio_dev->masklength) {
+<<<<<<< HEAD
 		WARN_ON("trying to set scanmask prior to registering buffer\n");
+=======
+		WARN_ON("Trying to set scanmask prior to registering buffer\n");
+>>>>>>> v3.18
 		goto err_invalid_mask;
 	}
 	bitmap_copy(trialmask, buffer->scan_mask, indio_dev->masklength);
@@ -782,8 +1129,13 @@ struct iio_demux_table {
 	struct list_head l;
 };
 
+<<<<<<< HEAD
 static unsigned char *iio_demux(struct iio_buffer *buffer,
 				 unsigned char *datain)
+=======
+static const void *iio_demux(struct iio_buffer *buffer,
+				 const void *datain)
+>>>>>>> v3.18
 {
 	struct iio_demux_table *t;
 
@@ -796,9 +1148,15 @@ static unsigned char *iio_demux(struct iio_buffer *buffer,
 	return buffer->demux_bounce;
 }
 
+<<<<<<< HEAD
 static int iio_push_to_buffer(struct iio_buffer *buffer, unsigned char *data)
 {
 	unsigned char *dataout = iio_demux(buffer, data);
+=======
+static int iio_push_to_buffer(struct iio_buffer *buffer, const void *data)
+{
+	const void *dataout = iio_demux(buffer, data);
+>>>>>>> v3.18
 
 	return buffer->access->store_to(buffer, dataout);
 }
@@ -813,7 +1171,11 @@ static void iio_buffer_demux_free(struct iio_buffer *buffer)
 }
 
 
+<<<<<<< HEAD
 int iio_push_to_buffers(struct iio_dev *indio_dev, unsigned char *data)
+=======
+int iio_push_to_buffers(struct iio_dev *indio_dev, const void *data)
+>>>>>>> v3.18
 {
 	int ret;
 	struct iio_buffer *buf;
@@ -828,13 +1190,41 @@ int iio_push_to_buffers(struct iio_dev *indio_dev, unsigned char *data)
 }
 EXPORT_SYMBOL_GPL(iio_push_to_buffers);
 
+<<<<<<< HEAD
+=======
+static int iio_buffer_add_demux(struct iio_buffer *buffer,
+	struct iio_demux_table **p, unsigned int in_loc, unsigned int out_loc,
+	unsigned int length)
+{
+
+	if (*p && (*p)->from + (*p)->length == in_loc &&
+		(*p)->to + (*p)->length == out_loc) {
+		(*p)->length += length;
+	} else {
+		*p = kmalloc(sizeof(**p), GFP_KERNEL);
+		if (*p == NULL)
+			return -ENOMEM;
+		(*p)->from = in_loc;
+		(*p)->to = out_loc;
+		(*p)->length = length;
+		list_add_tail(&(*p)->l, &buffer->demux_list);
+	}
+
+	return 0;
+}
+
+>>>>>>> v3.18
 static int iio_buffer_update_demux(struct iio_dev *indio_dev,
 				   struct iio_buffer *buffer)
 {
 	const struct iio_chan_spec *ch;
 	int ret, in_ind = -1, out_ind, length;
 	unsigned in_loc = 0, out_loc = 0;
+<<<<<<< HEAD
 	struct iio_demux_table *p;
+=======
+	struct iio_demux_table *p = NULL;
+>>>>>>> v3.18
 
 	/* Clear out any old demux */
 	iio_buffer_demux_free(buffer);
@@ -859,6 +1249,7 @@ static int iio_buffer_update_demux(struct iio_dev *indio_dev,
 					       indio_dev->masklength,
 					       in_ind + 1);
 			ch = iio_find_channel_from_si(indio_dev, in_ind);
+<<<<<<< HEAD
 			length = ch->scan_type.storagebits/8;
 			/* Make sure we are aligned */
 			in_loc += length;
@@ -880,11 +1271,33 @@ static int iio_buffer_update_demux(struct iio_dev *indio_dev,
 		p->to = out_loc;
 		p->length = length;
 		list_add_tail(&p->l, &buffer->demux_list);
+=======
+			if (ch->scan_type.repeat > 1)
+				length = ch->scan_type.storagebits / 8 *
+					ch->scan_type.repeat;
+			else
+				length = ch->scan_type.storagebits / 8;
+			/* Make sure we are aligned */
+			in_loc = roundup(in_loc, length) + length;
+		}
+		ch = iio_find_channel_from_si(indio_dev, in_ind);
+		if (ch->scan_type.repeat > 1)
+			length = ch->scan_type.storagebits / 8 *
+				ch->scan_type.repeat;
+		else
+			length = ch->scan_type.storagebits / 8;
+		out_loc = roundup(out_loc, length);
+		in_loc = roundup(in_loc, length);
+		ret = iio_buffer_add_demux(buffer, &p, in_loc, out_loc, length);
+		if (ret)
+			goto error_clear_mux_table;
+>>>>>>> v3.18
 		out_loc += length;
 		in_loc += length;
 	}
 	/* Relies on scan_timestamp being last */
 	if (buffer->scan_timestamp) {
+<<<<<<< HEAD
 		p = kmalloc(sizeof(*p), GFP_KERNEL);
 		if (p == NULL) {
 			ret = -ENOMEM;
@@ -901,6 +1314,20 @@ static int iio_buffer_update_demux(struct iio_dev *indio_dev,
 		p->to = out_loc;
 		p->length = length;
 		list_add_tail(&p->l, &buffer->demux_list);
+=======
+		ch = iio_find_channel_from_si(indio_dev,
+			indio_dev->scan_index_timestamp);
+		if (ch->scan_type.repeat > 1)
+			length = ch->scan_type.storagebits / 8 *
+				ch->scan_type.repeat;
+		else
+			length = ch->scan_type.storagebits / 8;
+		out_loc = roundup(out_loc, length);
+		in_loc = roundup(in_loc, length);
+		ret = iio_buffer_add_demux(buffer, &p, in_loc, out_loc, length);
+		if (ret)
+			goto error_clear_mux_table;
+>>>>>>> v3.18
 		out_loc += length;
 		in_loc += length;
 	}
@@ -936,3 +1363,48 @@ error_clear_mux_table:
 	return ret;
 }
 EXPORT_SYMBOL_GPL(iio_update_demux);
+<<<<<<< HEAD
+=======
+
+/**
+ * iio_buffer_release() - Free a buffer's resources
+ * @ref: Pointer to the kref embedded in the iio_buffer struct
+ *
+ * This function is called when the last reference to the buffer has been
+ * dropped. It will typically free all resources allocated by the buffer. Do not
+ * call this function manually, always use iio_buffer_put() when done using a
+ * buffer.
+ */
+static void iio_buffer_release(struct kref *ref)
+{
+	struct iio_buffer *buffer = container_of(ref, struct iio_buffer, ref);
+
+	buffer->access->release(buffer);
+}
+
+/**
+ * iio_buffer_get() - Grab a reference to the buffer
+ * @buffer: The buffer to grab a reference for, may be NULL
+ *
+ * Returns the pointer to the buffer that was passed into the function.
+ */
+struct iio_buffer *iio_buffer_get(struct iio_buffer *buffer)
+{
+	if (buffer)
+		kref_get(&buffer->ref);
+
+	return buffer;
+}
+EXPORT_SYMBOL_GPL(iio_buffer_get);
+
+/**
+ * iio_buffer_put() - Release the reference to the buffer
+ * @buffer: The buffer to release the reference for, may be NULL
+ */
+void iio_buffer_put(struct iio_buffer *buffer)
+{
+	if (buffer)
+		kref_put(&buffer->ref, iio_buffer_release);
+}
+EXPORT_SYMBOL_GPL(iio_buffer_put);
+>>>>>>> v3.18

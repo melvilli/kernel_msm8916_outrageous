@@ -11,10 +11,13 @@
  * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
  * more details.
  *
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
+=======
+>>>>>>> v3.18
  * The full GNU General Public License is included in this distribution in the
  * file called LICENSE.
  *
@@ -39,8 +42,15 @@
 
 u8 rtl_query_rxpwrpercentage(char antpower);
 u8 rtl_evm_db_to_percentage(char value);
+<<<<<<< HEAD
 long rtl_signal_scale_mapping(struct ieee80211_hw *hw, long currsig);
 void rtl_process_phyinfo(struct ieee80211_hw *hw, u8 *buffer,
 	struct rtl_stats *pstatus);
+=======
+u8 rtl_evm_dbm_jaguar(char value);
+long rtl_signal_scale_mapping(struct ieee80211_hw *hw, long currsig);
+void rtl_process_phyinfo(struct ieee80211_hw *hw, u8 *buffer,
+			 struct rtl_stats *pstatus);
+>>>>>>> v3.18
 
 #endif

@@ -8,7 +8,11 @@
  * and HeungJun Kim <riverful.kim@samsung.com>.
  *
  * Based on mt9v011 Micron Digital Image Sensor driver
+<<<<<<< HEAD
  * Copyright (c) 2009 Mauro Carvalho Chehab (mchehab@redhat.com)
+=======
+ * Copyright (c) 2009 Mauro Carvalho Chehab
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,6 +27,10 @@
 #include <media/v4l2-device.h>
 #include <media/v4l2-subdev.h>
 #include <media/v4l2-mediabus.h>
+<<<<<<< HEAD
+=======
+#include <media/v4l2-ctrls.h>
+>>>>>>> v3.18
 #include <media/sr030pc30.h>
 
 static int debug;
@@ -142,6 +150,7 @@ module_param(debug, int, 0644);
 
 struct sr030pc30_info {
 	struct v4l2_subdev sd;
+<<<<<<< HEAD
 	const struct sr030pc30_platform_data *pdata;
 	const struct sr030pc30_format *curr_fmt;
 	const struct sr030pc30_frmsize *curr_win;
@@ -153,6 +162,26 @@ struct sr030pc30_info {
 	unsigned int exposure;
 	u8 blue_balance;
 	u8 red_balance;
+=======
+	struct v4l2_ctrl_handler hdl;
+	const struct sr030pc30_platform_data *pdata;
+	const struct sr030pc30_format *curr_fmt;
+	const struct sr030pc30_frmsize *curr_win;
+	unsigned int hflip:1;
+	unsigned int vflip:1;
+	unsigned int sleep:1;
+	struct {
+		/* auto whitebalance control cluster */
+		struct v4l2_ctrl *awb;
+		struct v4l2_ctrl *red;
+		struct v4l2_ctrl *blue;
+	};
+	struct {
+		/* auto exposure control cluster */
+		struct v4l2_ctrl *autoexp;
+		struct v4l2_ctrl *exp;
+	};
+>>>>>>> v3.18
 	u8 i2c_reg_page;
 };
 
@@ -173,6 +202,7 @@ struct i2c_regval {
 	u16 val;
 };
 
+<<<<<<< HEAD
 static const struct v4l2_queryctrl sr030pc30_ctrl[] = {
 	{
 		.id		= V4L2_CID_AUTO_WHITE_BALANCE,
@@ -219,6 +249,8 @@ static const struct v4l2_queryctrl sr030pc30_ctrl[] = {
 	}
 };
 
+=======
+>>>>>>> v3.18
 /* supported resolutions */
 static const struct sr030pc30_frmsize sr030pc30_sizes[] = {
 	{
@@ -394,6 +426,7 @@ static int sr030pc30_pwr_ctrl(struct v4l2_subdev *sd,
 	return ret;
 }
 
+<<<<<<< HEAD
 static inline int sr030pc30_enable_autoexposure(struct v4l2_subdev *sd, int on)
 {
 	struct sr030pc30_info *info = to_sr030pc30(sd);
@@ -436,6 +469,8 @@ static int sr030pc30_enable_autowhitebalance(struct v4l2_subdev *sd, int on)
 	return ret;
 }
 
+=======
+>>>>>>> v3.18
 static int sr030pc30_set_flip(struct v4l2_subdev *sd)
 {
 	struct sr030pc30_info *info = to_sr030pc30(sd);
@@ -498,6 +533,7 @@ static int sr030pc30_try_frame_size(struct v4l2_mbus_framefmt *mf)
 	return -EINVAL;
 }
 
+<<<<<<< HEAD
 static int sr030pc30_queryctrl(struct v4l2_subdev *sd,
 			       struct v4l2_queryctrl *qc)
 {
@@ -599,6 +635,58 @@ static int sr030pc30_g_ctrl(struct v4l2_subdev *sd,
 	default:
 		return -EINVAL;
 	}
+=======
+static int sr030pc30_s_ctrl(struct v4l2_ctrl *ctrl)
+{
+	struct sr030pc30_info *info =
+		container_of(ctrl->handler, struct sr030pc30_info, hdl);
+	struct v4l2_subdev *sd = &info->sd;
+	int ret = 0;
+
+	v4l2_dbg(1, debug, sd, "%s: ctrl_id: %d, value: %d\n",
+			 __func__, ctrl->id, ctrl->val);
+
+	switch (ctrl->id) {
+	case V4L2_CID_AUTO_WHITE_BALANCE:
+		if (ctrl->is_new) {
+			ret = cam_i2c_write(sd, AWB_CTL2_REG,
+					ctrl->val ? 0x2E : 0x2F);
+			if (!ret)
+				ret = cam_i2c_write(sd, AWB_CTL1_REG,
+						ctrl->val ? 0xFB : 0x7B);
+		}
+		if (!ret && info->blue->is_new)
+			ret = cam_i2c_write(sd, MWB_BGAIN_REG, info->blue->val);
+		if (!ret && info->red->is_new)
+			ret = cam_i2c_write(sd, MWB_RGAIN_REG, info->red->val);
+		return ret;
+
+	case V4L2_CID_EXPOSURE_AUTO:
+		/* auto anti-flicker is also enabled here */
+		if (ctrl->is_new)
+			ret = cam_i2c_write(sd, AE_CTL1_REG,
+				ctrl->val == V4L2_EXPOSURE_AUTO ? 0xDC : 0x0C);
+		if (info->exp->is_new) {
+			unsigned long expos = info->exp->val;
+
+			expos = expos * info->pdata->clk_rate / (8 * 1000);
+
+			if (!ret)
+				ret = cam_i2c_write(sd, EXP_TIMEH_REG,
+						expos >> 16 & 0xFF);
+			if (!ret)
+				ret = cam_i2c_write(sd, EXP_TIMEM_REG,
+						expos >> 8 & 0xFF);
+			if (!ret)
+				ret = cam_i2c_write(sd, EXP_TIMEL_REG,
+						expos & 0xFF);
+		}
+		return ret;
+	default:
+		return -EINVAL;
+	}
+
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -752,11 +840,27 @@ static int sr030pc30_s_power(struct v4l2_subdev *sd, int on)
 	return ret;
 }
 
+<<<<<<< HEAD
 static const struct v4l2_subdev_core_ops sr030pc30_core_ops = {
 	.s_power	= sr030pc30_s_power,
 	.queryctrl	= sr030pc30_queryctrl,
 	.s_ctrl		= sr030pc30_s_ctrl,
 	.g_ctrl		= sr030pc30_g_ctrl,
+=======
+static const struct v4l2_ctrl_ops sr030pc30_ctrl_ops = {
+	.s_ctrl = sr030pc30_s_ctrl,
+};
+
+static const struct v4l2_subdev_core_ops sr030pc30_core_ops = {
+	.s_power	= sr030pc30_s_power,
+	.g_ext_ctrls = v4l2_subdev_g_ext_ctrls,
+	.try_ext_ctrls = v4l2_subdev_try_ext_ctrls,
+	.s_ext_ctrls = v4l2_subdev_s_ext_ctrls,
+	.g_ctrl = v4l2_subdev_g_ctrl,
+	.s_ctrl = v4l2_subdev_s_ctrl,
+	.queryctrl = v4l2_subdev_queryctrl,
+	.querymenu = v4l2_subdev_querymenu,
+>>>>>>> v3.18
 };
 
 static const struct v4l2_subdev_video_ops sr030pc30_video_ops = {
@@ -807,6 +911,10 @@ static int sr030pc30_probe(struct i2c_client *client,
 {
 	struct sr030pc30_info *info;
 	struct v4l2_subdev *sd;
+<<<<<<< HEAD
+=======
+	struct v4l2_ctrl_handler *hdl;
+>>>>>>> v3.18
 	const struct sr030pc30_platform_data *pdata
 		= client->dev.platform_data;
 	int ret;
@@ -820,7 +928,11 @@ static int sr030pc30_probe(struct i2c_client *client,
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 	info = kzalloc(sizeof(*info), GFP_KERNEL);
+=======
+	info = devm_kzalloc(&client->dev, sizeof(*info), GFP_KERNEL);
+>>>>>>> v3.18
 	if (!info)
 		return -ENOMEM;
 
@@ -830,10 +942,38 @@ static int sr030pc30_probe(struct i2c_client *client,
 
 	v4l2_i2c_subdev_init(sd, client, &sr030pc30_ops);
 
+<<<<<<< HEAD
 	info->i2c_reg_page	= -1;
 	info->hflip		= 1;
 	info->auto_exp		= 1;
 	info->exposure		= 30;
+=======
+	hdl = &info->hdl;
+	v4l2_ctrl_handler_init(hdl, 6);
+	info->awb = v4l2_ctrl_new_std(hdl, &sr030pc30_ctrl_ops,
+			V4L2_CID_AUTO_WHITE_BALANCE, 0, 1, 1, 1);
+	info->red = v4l2_ctrl_new_std(hdl, &sr030pc30_ctrl_ops,
+			V4L2_CID_RED_BALANCE, 0, 127, 1, 64);
+	info->blue = v4l2_ctrl_new_std(hdl, &sr030pc30_ctrl_ops,
+			V4L2_CID_BLUE_BALANCE, 0, 127, 1, 64);
+	info->autoexp = v4l2_ctrl_new_std(hdl, &sr030pc30_ctrl_ops,
+			V4L2_CID_EXPOSURE_AUTO, 0, 1, 1, 1);
+	info->exp = v4l2_ctrl_new_std(hdl, &sr030pc30_ctrl_ops,
+			V4L2_CID_EXPOSURE, EXPOS_MIN_MS, EXPOS_MAX_MS, 1, 30);
+	sd->ctrl_handler = hdl;
+	if (hdl->error) {
+		int err = hdl->error;
+
+		v4l2_ctrl_handler_free(hdl);
+		return err;
+	}
+	v4l2_ctrl_auto_cluster(3, &info->awb, 0, false);
+	v4l2_ctrl_auto_cluster(2, &info->autoexp, V4L2_EXPOSURE_MANUAL, false);
+	v4l2_ctrl_handler_setup(hdl);
+
+	info->i2c_reg_page	= -1;
+	info->hflip		= 1;
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -841,10 +981,16 @@ static int sr030pc30_probe(struct i2c_client *client,
 static int sr030pc30_remove(struct i2c_client *client)
 {
 	struct v4l2_subdev *sd = i2c_get_clientdata(client);
+<<<<<<< HEAD
 	struct sr030pc30_info *info = to_sr030pc30(sd);
 
 	v4l2_device_unregister_subdev(sd);
 	kfree(info);
+=======
+
+	v4l2_device_unregister_subdev(sd);
+	v4l2_ctrl_handler_free(sd->ctrl_handler);
+>>>>>>> v3.18
 	return 0;
 }
 

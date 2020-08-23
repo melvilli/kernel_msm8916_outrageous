@@ -86,6 +86,17 @@ tlb_end_vma(struct mmu_gather *tlb, struct vm_area_struct *vma)
 	}
 }
 
+<<<<<<< HEAD
+=======
+static inline void tlb_flush_mmu_tlbonly(struct mmu_gather *tlb)
+{
+}
+
+static inline void tlb_flush_mmu_free(struct mmu_gather *tlb)
+{
+}
+
+>>>>>>> v3.18
 static inline void tlb_flush_mmu(struct mmu_gather *tlb)
 {
 }

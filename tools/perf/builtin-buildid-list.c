@@ -15,6 +15,10 @@
 #include "util/parse-options.h"
 #include "util/session.h"
 #include "util/symbol.h"
+<<<<<<< HEAD
+=======
+#include "util/data.h"
+>>>>>>> v3.18
 
 static int sysfs__fprintf_build_id(FILE *fp)
 {
@@ -52,6 +56,14 @@ static bool dso__skip_buildid(struct dso *dso, int with_hits)
 static int perf_session__list_build_ids(bool force, bool with_hits)
 {
 	struct perf_session *session;
+<<<<<<< HEAD
+=======
+	struct perf_data_file file = {
+		.path  = input_name,
+		.mode  = PERF_DATA_MODE_READ,
+		.force = force,
+	};
+>>>>>>> v3.18
 
 	symbol__elf_init();
 	/*
@@ -60,15 +72,23 @@ static int perf_session__list_build_ids(bool force, bool with_hits)
 	if (filename__fprintf_build_id(input_name, stdout))
 		goto out;
 
+<<<<<<< HEAD
 	session = perf_session__new(input_name, O_RDONLY, force, false,
 				    &build_id__mark_dso_hit_ops);
+=======
+	session = perf_session__new(&file, false, &build_id__mark_dso_hit_ops);
+>>>>>>> v3.18
 	if (session == NULL)
 		return -1;
 	/*
 	 * in pipe-mode, the only way to get the buildids is to parse
 	 * the record stream. Buildids are stored as RECORD_HEADER_BUILD_ID
 	 */
+<<<<<<< HEAD
 	if (with_hits || session->fd_pipe)
+=======
+	if (with_hits || perf_data_file__is_pipe(&file))
+>>>>>>> v3.18
 		perf_session__process_events(session, &build_id__mark_dso_hit_ops);
 
 	perf_session__fprintf_dsos_buildid(session, stdout, dso__skip_buildid, with_hits);

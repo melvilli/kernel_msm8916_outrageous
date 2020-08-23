@@ -148,7 +148,11 @@ static void __cleanup(struct ioat2_dma_chan *ioat, dma_addr_t phys_complete)
 		tx = &desc->txd;
 		dump_desc_dbg(ioat, desc);
 		if (tx->cookie) {
+<<<<<<< HEAD
 			ioat_dma_unmap(chan, tx->flags, desc->len, desc->hw);
+=======
+			dma_descriptor_unmap(tx);
+>>>>>>> v3.18
 			dma_cookie_complete(tx);
 			if (tx->callback) {
 				tx->callback(tx->callback_param);
@@ -735,7 +739,12 @@ int ioat2_check_space_lock(struct ioat2_dma_chan *ioat, int num_descs)
 	 * called under bh_disabled so we need to trigger the timer
 	 * event directly
 	 */
+<<<<<<< HEAD
 	if (jiffies > chan->timer.expires && timer_pending(&chan->timer)) {
+=======
+	if (time_is_before_jiffies(chan->timer.expires)
+	    && timer_pending(&chan->timer)) {
+>>>>>>> v3.18
 		struct ioatdma_device *device = chan->device;
 
 		mod_timer(&chan->timer, jiffies + COMPLETION_TIMEOUT);
@@ -899,7 +908,10 @@ int ioat2_dma_probe(struct ioatdma_device *device, int dca)
 	err = ioat_probe(device);
 	if (err)
 		return err;
+<<<<<<< HEAD
 	ioat_set_tcp_copy_break(2048);
+=======
+>>>>>>> v3.18
 
 	list_for_each_entry(c, &dma->channels, device_node) {
 		chan = to_chan_common(c);

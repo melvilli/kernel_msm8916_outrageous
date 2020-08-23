@@ -1,7 +1,11 @@
 /*******************************************************************
  * This file is part of the Emulex Linux Device Driver for         *
  * Fibre Channel Host Bus Adapters.                                *
+<<<<<<< HEAD
  * Copyright (C) 2004-2009 Emulex.  All rights reserved.           *
+=======
+ * Copyright (C) 2004-2013 Emulex.  All rights reserved.           *
+>>>>>>> v3.18
  * EMULEX and SLI are trademarks of Emulex.                        *
  * www.emulex.com                                                  *
  * Portions Copyright (C) 2004-2005 Christoph Hellwig              *
@@ -178,7 +182,12 @@ lpfc_dump_wakeup_param(struct lpfc_hba *phba, LPFC_MBOXQ_t *pmb)
 	mb->mbxOwner = OWN_HOST;
 	mb->un.varDmp.cv = 1;
 	mb->un.varDmp.type = DMP_NV_PARAMS;
+<<<<<<< HEAD
 	mb->un.varDmp.entry_index = 0;
+=======
+	if (phba->sli_rev < LPFC_SLI_REV4)
+		mb->un.varDmp.entry_index = 0;
+>>>>>>> v3.18
 	mb->un.varDmp.region_id = WAKE_UP_PARMS_REGION_ID;
 	mb->un.varDmp.word_cnt = WAKE_UP_PARMS_WORD_SIZE;
 	mb->un.varDmp.co = 0;
@@ -361,7 +370,11 @@ lpfc_config_link(struct lpfc_hba * phba, LPFC_MBOXQ_t * pmb)
 	/* NEW_FEATURE
 	 * SLI-2, Coalescing Response Feature.
 	 */
+<<<<<<< HEAD
 	if (phba->cfg_cr_delay) {
+=======
+	if (phba->cfg_cr_delay && (phba->sli_rev < LPFC_SLI_REV4)) {
+>>>>>>> v3.18
 		mb->un.varCfgLnk.cr = 1;
 		mb->un.varCfgLnk.ci = 1;
 		mb->un.varCfgLnk.cr_delay = phba->cfg_cr_delay;
@@ -377,7 +390,11 @@ lpfc_config_link(struct lpfc_hba * phba, LPFC_MBOXQ_t * pmb)
 	mb->un.varCfgLnk.crtov = phba->fc_crtov;
 	mb->un.varCfgLnk.citov = phba->fc_citov;
 
+<<<<<<< HEAD
 	if (phba->cfg_ack0)
+=======
+	if (phba->cfg_ack0 && (phba->sli_rev < LPFC_SLI_REV4))
+>>>>>>> v3.18
 		mb->un.varCfgLnk.ack0_enable = 1;
 
 	mb->mbxCommand = MBX_CONFIG_LINK;
@@ -1810,12 +1827,21 @@ lpfc_sli4_config(struct lpfc_hba *phba, struct lpfcMboxq *mbox,
 		 * page, this is used as a priori size of SLI4_PAGE_SIZE for
 		 * the later DMA memory free.
 		 */
+<<<<<<< HEAD
 		viraddr = dma_alloc_coherent(&phba->pcidev->dev, SLI4_PAGE_SIZE,
 					     &phyaddr, GFP_KERNEL);
 		/* In case of malloc fails, proceed with whatever we have */
 		if (!viraddr)
 			break;
 		memset(viraddr, 0, SLI4_PAGE_SIZE);
+=======
+		viraddr = dma_zalloc_coherent(&phba->pcidev->dev,
+					      SLI4_PAGE_SIZE, &phyaddr,
+					      GFP_KERNEL);
+		/* In case of malloc fails, proceed with whatever we have */
+		if (!viraddr)
+			break;
+>>>>>>> v3.18
 		mbox->sge_array->addr[pagen] = viraddr;
 		/* Keep the first page for later sub-header construction */
 		if (pagen == 0)

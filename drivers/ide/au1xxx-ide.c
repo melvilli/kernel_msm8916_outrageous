@@ -592,6 +592,7 @@ static struct platform_driver au1200_ide_driver = {
 	.remove		= au_ide_remove,
 };
 
+<<<<<<< HEAD
 static int __init au_ide_init(void)
 {
 	return platform_driver_register(&au1200_ide_driver);
@@ -607,3 +608,9 @@ MODULE_DESCRIPTION("AU1200 IDE driver");
 
 module_init(au_ide_init);
 module_exit(au_ide_exit);
+=======
+module_platform_driver(au1200_ide_driver);
+
+MODULE_LICENSE("GPL");
+MODULE_DESCRIPTION("AU1200 IDE driver");
+>>>>>>> v3.18

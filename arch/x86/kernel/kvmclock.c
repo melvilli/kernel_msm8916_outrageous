@@ -48,10 +48,16 @@ static struct pvclock_wall_clock wall_clock;
  * have elapsed since the hypervisor wrote the data. So we try to account for
  * that with system time
  */
+<<<<<<< HEAD
 static unsigned long kvm_get_wallclock(void)
 {
 	struct pvclock_vcpu_time_info *vcpu_time;
 	struct timespec ts;
+=======
+static void kvm_get_wallclock(struct timespec *now)
+{
+	struct pvclock_vcpu_time_info *vcpu_time;
+>>>>>>> v3.18
 	int low, high;
 	int cpu;
 
@@ -64,6 +70,7 @@ static unsigned long kvm_get_wallclock(void)
 	cpu = smp_processor_id();
 
 	vcpu_time = &hv_clock[cpu].pvti;
+<<<<<<< HEAD
 	pvclock_read_wallclock(&wall_clock, vcpu_time, &ts);
 
 	preempt_enable();
@@ -72,6 +79,14 @@ static unsigned long kvm_get_wallclock(void)
 }
 
 static int kvm_set_wallclock(unsigned long now)
+=======
+	pvclock_read_wallclock(&wall_clock, vcpu_time, now);
+
+	preempt_enable();
+}
+
+static int kvm_set_wallclock(const struct timespec *now)
+>>>>>>> v3.18
 {
 	return -1;
 }
@@ -142,6 +157,10 @@ bool kvm_check_and_clear_guest_paused(void)
 	src = &hv_clock[cpu].pvti;
 	if ((src->flags & PVCLOCK_GUEST_STOPPED) != 0) {
 		src->flags &= ~PVCLOCK_GUEST_STOPPED;
+<<<<<<< HEAD
+=======
+		pvclock_touch_watchdogs();
+>>>>>>> v3.18
 		ret = true;
 	}
 
@@ -185,7 +204,11 @@ static void kvm_restore_sched_clock_state(void)
 }
 
 #ifdef CONFIG_X86_LOCAL_APIC
+<<<<<<< HEAD
 static void __cpuinit kvm_setup_secondary_clock(void)
+=======
+static void kvm_setup_secondary_clock(void)
+>>>>>>> v3.18
 {
 	/*
 	 * Now that the first cpu already had this clocksource initialized,
@@ -244,7 +267,11 @@ void __init kvmclock_init(void)
 	hv_clock = __va(mem);
 	memset(hv_clock, 0, size);
 
+<<<<<<< HEAD
 	if (kvm_register_clock("boot clock")) {
+=======
+	if (kvm_register_clock("primary cpu clock")) {
+>>>>>>> v3.18
 		hv_clock = NULL;
 		memblock_free(mem, size);
 		return;
@@ -265,6 +292,10 @@ void __init kvmclock_init(void)
 #endif
 	kvm_get_preset_lpj();
 	clocksource_register_hz(&kvm_clock, NSEC_PER_SEC);
+<<<<<<< HEAD
+=======
+	pv_info.paravirt_enabled = 1;
+>>>>>>> v3.18
 	pv_info.name = "KVM";
 
 	if (kvm_para_has_feature(KVM_FEATURE_CLOCKSOURCE_STABLE_BIT))

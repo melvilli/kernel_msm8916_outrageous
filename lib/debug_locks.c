@@ -30,6 +30,10 @@ EXPORT_SYMBOL_GPL(debug_locks);
  * a locking bug is detected.
  */
 int debug_locks_silent;
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(debug_locks_silent);
+>>>>>>> v3.18
 
 /*
  * Generic 'turn off all lock debugging' function:
@@ -44,3 +48,7 @@ int debug_locks_off(void)
 	}
 	return 0;
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(debug_locks_off);
+>>>>>>> v3.18

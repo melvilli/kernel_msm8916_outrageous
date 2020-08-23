@@ -29,7 +29,10 @@
 #include <linux/of.h>
 #include <linux/of_device.h>
 #include <linux/of_net.h>
+<<<<<<< HEAD
 #include <linux/pinctrl/consumer.h>
+=======
+>>>>>>> v3.18
 
 #include "macb.h"
 
@@ -305,11 +308,18 @@ MODULE_DEVICE_TABLE(of, at91ether_dt_ids);
 /* Detect MAC & PHY and perform ethernet interface initialization */
 static int __init at91ether_probe(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct macb_platform_data *board_data = pdev->dev.platform_data;
 	struct resource *regs;
 	struct net_device *dev;
 	struct phy_device *phydev;
 	struct pinctrl *pinctrl;
+=======
+	struct macb_platform_data *board_data = dev_get_platdata(&pdev->dev);
+	struct resource *regs;
+	struct net_device *dev;
+	struct phy_device *phydev;
+>>>>>>> v3.18
 	struct macb *lp;
 	int res;
 	u32 reg;
@@ -319,6 +329,7 @@ static int __init at91ether_probe(struct platform_device *pdev)
 	if (!regs)
 		return -ENOENT;
 
+<<<<<<< HEAD
 	pinctrl = devm_pinctrl_get_select_default(&pdev->dev);
 	if (IS_ERR(pinctrl)) {
 		res = PTR_ERR(pinctrl);
@@ -328,6 +339,8 @@ static int __init at91ether_probe(struct platform_device *pdev)
 		dev_warn(&pdev->dev, "No pinctrl provided\n");
 	}
 
+=======
+>>>>>>> v3.18
 	dev = alloc_etherdev(sizeof(struct macb));
 	if (!dev)
 		return -ENOMEM;
@@ -353,13 +366,22 @@ static int __init at91ether_probe(struct platform_device *pdev)
 	}
 	clk_enable(lp->pclk);
 
+<<<<<<< HEAD
+=======
+	lp->hclk = ERR_PTR(-ENOENT);
+	lp->tx_clk = ERR_PTR(-ENOENT);
+
+>>>>>>> v3.18
 	/* Install the interrupt handler */
 	dev->irq = platform_get_irq(pdev, 0);
 	res = devm_request_irq(&pdev->dev, dev->irq, at91ether_interrupt, 0, dev->name, dev);
 	if (res)
 		goto err_disable_clock;
 
+<<<<<<< HEAD
 	ether_setup(dev);
+=======
+>>>>>>> v3.18
 	dev->netdev_ops = &at91ether_netdev_ops;
 	dev->ethtool_ops = &macb_ethtool_ops;
 	platform_set_drvdata(pdev, dev);
@@ -435,7 +457,10 @@ static int at91ether_remove(struct platform_device *pdev)
 	unregister_netdev(dev);
 	clk_disable(lp->pclk);
 	free_netdev(dev);
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 
 	return 0;
 }

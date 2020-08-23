@@ -26,9 +26,19 @@
 #ifndef _EM28XX_H
 #define _EM28XX_H
 
+<<<<<<< HEAD
 #include <linux/workqueue.h>
 #include <linux/i2c.h>
 #include <linux/mutex.h>
+=======
+#define EM28XX_VERSION "0.2.1"
+#define DRIVER_DESC    "Empia em28xx device driver"
+
+#include <linux/workqueue.h>
+#include <linux/i2c.h>
+#include <linux/mutex.h>
+#include <linux/kref.h>
+>>>>>>> v3.18
 #include <linux/videodev2.h>
 
 #include <media/videobuf2-vmalloc.h>
@@ -101,6 +111,10 @@
 #define EM2882_BOARD_PINNACLE_HYBRID_PRO_330E	  56
 #define EM2883_BOARD_KWORLD_HYBRID_330U		  57
 #define EM2820_BOARD_COMPRO_VIDEOMATE_FORYOU	  58
+<<<<<<< HEAD
+=======
+#define EM2874_BOARD_PCTV_HD_MINI_80E		  59
+>>>>>>> v3.18
 #define EM2883_BOARD_HAUPPAUGE_WINTV_HVR_850	  60
 #define EM2820_BOARD_PROLINK_PLAYTV_BOX4_USB2	  61
 #define EM2820_BOARD_GADMEI_TVR200		  62
@@ -130,6 +144,15 @@
 #define EM2884_BOARD_PCTV_520E			  86
 #define EM2884_BOARD_TERRATEC_HTC_USB_XS	  87
 #define EM2884_BOARD_C3TECH_DIGITAL_DUO		  88
+<<<<<<< HEAD
+=======
+#define EM2874_BOARD_DELOCK_61959		  89
+#define EM2874_BOARD_KWORLD_UB435Q_V2		  90
+#define EM2765_BOARD_SPEEDLINK_VAD_LAPLACE	  91
+#define EM28178_BOARD_PCTV_461E                   92
+#define EM2874_BOARD_KWORLD_UB435Q_V3		  93
+#define EM28178_BOARD_PCTV_292E                   94
+>>>>>>> v3.18
 
 /* Limits minimum and default number of buffers */
 #define EM28XX_MIN_BUF 4
@@ -176,8 +199,32 @@
 
 #define EM28XX_INTERLACED_DEFAULT 1
 
+<<<<<<< HEAD
 /* time in msecs to wait for i2c writes to finish */
 #define EM2800_I2C_XFER_TIMEOUT		20
+=======
+/*
+ * Time in msecs to wait for i2c xfers to finish.
+ * 35ms is the maximum time a SMBUS device could wait when
+ * clock stretching is used. As the transfer itself will take
+ * some time to happen, set it to 35 ms.
+ *
+ * Ok, I2C doesn't specify any limit. So, eventually, we may need
+ * to increase this timeout.
+ *
+ * FIXME: this assumes that an I2C message is not longer than 1ms.
+ * This is actually dependent on the I2C bus speed, although most
+ * devices use a 100kHz clock. So, this assumtion is true most of
+ * the time.
+ */
+#define EM28XX_I2C_XFER_TIMEOUT		36
+
+/* time in msecs to wait for AC97 xfers to finish */
+#define EM28XX_AC97_XFER_TIMEOUT	100
+
+/* max. number of button state polling addresses */
+#define EM28XX_NUM_BUTTON_ADDRESSES_MAX		5
+>>>>>>> v3.18
 
 enum em28xx_mode {
 	EM28XX_SUSPEND,
@@ -279,6 +326,7 @@ enum em28xx_ac97_mode {
 
 struct em28xx_audio_mode {
 	enum em28xx_ac97_mode ac97;
+<<<<<<< HEAD
 
 	u16 ac97_feat;
 	u32 ac97_vendor_id;
@@ -287,6 +335,20 @@ struct em28xx_audio_mode {
 
 	unsigned int i2s_3rates:1;
 	unsigned int i2s_5rates:1;
+=======
+};
+
+enum em28xx_int_audio_type {
+	EM28XX_INT_AUDIO_NONE = 0,
+	EM28XX_INT_AUDIO_AC97,
+	EM28XX_INT_AUDIO_I2S,
+};
+
+enum em28xx_usb_audio_type {
+	EM28XX_USB_AUDIO_NONE = 0,
+	EM28XX_USB_AUDIO_CLASS,
+	EM28XX_USB_AUDIO_VENDOR,
+>>>>>>> v3.18
 };
 
 /* em28xx has two audio inputs: tuner and line in.
@@ -372,6 +434,37 @@ enum em28xx_adecoder {
 	EM28XX_TVAUDIO,
 };
 
+<<<<<<< HEAD
+=======
+enum em28xx_led_role {
+	EM28XX_LED_ANALOG_CAPTURING = 0,
+	EM28XX_LED_DIGITAL_CAPTURING,
+	EM28XX_LED_ILLUMINATION,
+	EM28XX_NUM_LED_ROLES, /* must be the last */
+};
+
+struct em28xx_led {
+	enum em28xx_led_role role;
+	u8 gpio_reg;
+	u8 gpio_mask;
+	bool inverted;
+};
+
+enum em28xx_button_role {
+	EM28XX_BUTTON_SNAPSHOT = 0,
+	EM28XX_BUTTON_ILLUMINATION,
+	EM28XX_NUM_BUTTON_ROLES, /* must be the last */
+};
+
+struct em28xx_button {
+	enum em28xx_button_role role;
+	u8 reg_r;
+	u8 reg_clearing;
+	u8 mask;
+	bool inverted;
+};
+
+>>>>>>> v3.18
 struct em28xx_board {
 	char *name;
 	int vchannels;
@@ -393,7 +486,10 @@ struct em28xx_board {
 	unsigned int mts_firmware:1;
 	unsigned int max_range_640_480:1;
 	unsigned int has_dvb:1;
+<<<<<<< HEAD
 	unsigned int has_snapshot_button:1;
+=======
+>>>>>>> v3.18
 	unsigned int is_webcam:1;
 	unsigned int valid:1;
 	unsigned int has_ir_i2c:1;
@@ -408,6 +504,15 @@ struct em28xx_board {
 	struct em28xx_input       input[MAX_EM28XX_INPUT];
 	struct em28xx_input	  radio;
 	char			  *ir_codes;
+<<<<<<< HEAD
+=======
+
+	/* LEDs that need to be controlled explicitly */
+	struct em28xx_led	  *leds;
+
+	/* Buttons */
+	struct em28xx_button	  *buttons;
+>>>>>>> v3.18
 };
 
 struct em28xx_eeprom {
@@ -424,24 +529,93 @@ struct em28xx_eeprom {
 	u8 string_idx_table;
 };
 
+<<<<<<< HEAD
 #define EM28XX_AUDIO_BUFS 5
 #define EM28XX_NUM_AUDIO_PACKETS 64
 #define EM28XX_AUDIO_MAX_PACKET_SIZE 196 /* static value */
+=======
+>>>>>>> v3.18
 #define EM28XX_CAPTURE_STREAM_EN 1
 
 /* em28xx extensions */
 #define EM28XX_AUDIO   0x10
 #define EM28XX_DVB     0x20
 #define EM28XX_RC      0x30
+<<<<<<< HEAD
+=======
+#define EM28XX_V4L2    0x40
+>>>>>>> v3.18
 
 /* em28xx resource types (used for res_get/res_lock etc */
 #define EM28XX_RESOURCE_VIDEO 0x01
 #define EM28XX_RESOURCE_VBI   0x02
 
+<<<<<<< HEAD
 struct em28xx_audio {
 	char name[50];
 	char *transfer_buffer[EM28XX_AUDIO_BUFS];
 	struct urb *urb[EM28XX_AUDIO_BUFS];
+=======
+struct em28xx_v4l2 {
+	struct kref ref;
+	struct em28xx *dev;
+
+	struct v4l2_device v4l2_dev;
+	struct v4l2_ctrl_handler ctrl_handler;
+	struct v4l2_clk *clk;
+
+	struct video_device *vdev;
+	struct video_device *vbi_dev;
+	struct video_device *radio_dev;
+
+	/* Videobuf2 */
+	struct vb2_queue vb_vidq;
+	struct vb2_queue vb_vbiq;
+	struct mutex vb_queue_lock;
+	struct mutex vb_vbi_queue_lock;
+
+	u8 vinmode;
+	u8 vinctl;
+
+	/* Camera specific fields */
+	int sensor_xres;
+	int sensor_yres;
+	int sensor_xtal;
+
+	int users;		/* user count for exclusive use */
+	int streaming_users;    /* number of actively streaming users */
+
+	u32 frequency;		/* selected tuner frequency */
+
+	struct em28xx_fmt *format;
+	v4l2_std_id norm;	/* selected tv norm */
+
+	/* Progressive/interlaced mode */
+	bool progressive;
+	int interlaced_fieldmode; /* 1=interlaced fields, 0=just top fields */
+	/* FIXME: everything else than interlaced_fieldmode=1 doesn't work */
+
+	/* Frame properties */
+	int width;		/* current frame width */
+	int height;		/* current frame height */
+	unsigned hscale;	/* horizontal scale factor (see datasheet) */
+	unsigned vscale;	/* vertical scale factor (see datasheet) */
+	unsigned int vbi_width;
+	unsigned int vbi_height; /* lines per field */
+
+	/* Capture state tracking */
+	int capture_type;
+	bool top_field;
+	int vbi_read;
+	unsigned int field_count;
+};
+
+struct em28xx_audio {
+	char name[50];
+	unsigned num_urb;
+	char **transfer_buffer;
+	struct urb **urb;
+>>>>>>> v3.18
 	struct usb_device *udev;
 	unsigned int capture_transfer_done;
 	struct snd_pcm_substream   *capture_pcm_substream;
@@ -449,12 +623,24 @@ struct em28xx_audio {
 	unsigned int hwptr_done_capture;
 	struct snd_card            *sndcard;
 
+<<<<<<< HEAD
 	int users;
 	spinlock_t slock;
+=======
+	size_t period;
+
+	int users;
+	spinlock_t slock;
+
+	/* Controls streaming */
+	struct work_struct wq_trigger;	/* trigger to start/stop audio */
+	atomic_t       stream_started;	/* stream should be running if true */
+>>>>>>> v3.18
 };
 
 struct em28xx;
 
+<<<<<<< HEAD
 struct em28xx_fh {
 	struct v4l2_fh fh;
 	struct em28xx *dev;
@@ -462,6 +648,8 @@ struct em28xx_fh {
 	enum v4l2_buf_type           type;
 };
 
+=======
+>>>>>>> v3.18
 enum em28xx_i2c_algo_type {
 	EM28XX_I2C_ALGO_EM28XX = 0,
 	EM28XX_I2C_ALGO_EM2800,
@@ -475,14 +663,28 @@ struct em28xx_i2c_bus {
 	enum em28xx_i2c_algo_type algo_type;
 };
 
+<<<<<<< HEAD
 
 /* main device struct */
 struct em28xx {
+=======
+/* main device struct */
+struct em28xx {
+	struct kref ref;
+
+	/* Sub-module data */
+	struct em28xx_v4l2 *v4l2;
+	struct em28xx_dvb *dvb;
+	struct em28xx_audio adev;
+	struct em28xx_IR *ir;
+
+>>>>>>> v3.18
 	/* generic device properties */
 	char name[30];		/* name (including minor) of the device */
 	int model;		/* index in the device_data struct */
 	int devno;		/* marks the number of this device */
 	enum em28xx_chip_id chip_id;
+<<<<<<< HEAD
 	unsigned int is_em25xx:1;	/* em25xx/em276x/7x/8x family bridge */
 
 	unsigned char disconnected:1;	/* device has been diconnected */
@@ -515,6 +717,19 @@ struct em28xx {
 	struct em28xx_fmt *format;
 
 	struct em28xx_IR *ir;
+=======
+
+	unsigned int is_em25xx:1;	/* em25xx/em276x/7x/8x family bridge */
+	unsigned char disconnected:1;	/* device has been diconnected */
+	unsigned int has_video:1;
+	unsigned int is_audio_only:1;
+	enum em28xx_int_audio_type int_audio_type;
+	enum em28xx_usb_audio_type usb_audio_type;
+
+	struct em28xx_board board;
+
+	enum em28xx_sensor em28xx_sensor;	/* camera specific */
+>>>>>>> v3.18
 
 	/* Some older em28xx chips needs a waiting time after writing */
 	unsigned int wait_after_write;
@@ -526,8 +741,11 @@ struct em28xx {
 	struct em28xx_audio_mode audio_mode;
 
 	int tuner_type;		/* type of the tuner */
+<<<<<<< HEAD
 	int tuner_addr;		/* tuner address */
 	int tda9887_conf;
+=======
+>>>>>>> v3.18
 
 	/* i2c i/o */
 	struct i2c_adapter i2c_adap[NUM_I2C_BUSES];
@@ -540,16 +758,20 @@ struct em28xx {
 	struct rt_mutex i2c_bus_lock;
 
 	/* video for linux */
+<<<<<<< HEAD
 	int users;		/* user count for exclusive use */
 	int streaming_users;    /* Number of actively streaming users */
 	struct video_device *vdev;	/* video for linux device struct */
 	v4l2_std_id norm;	/* selected tv norm */
 	int ctl_freq;		/* selected frequency */
+=======
+>>>>>>> v3.18
 	unsigned int ctl_input;	/* selected input */
 	unsigned int ctl_ainput;/* selected audio input */
 	unsigned int ctl_aoutput;/* selected audio output */
 	int mute;
 	int volume;
+<<<<<<< HEAD
 	/* frame properties */
 	int width;		/* current frame width */
 	int height;		/* current frame height */
@@ -557,11 +779,14 @@ struct em28xx {
 	unsigned vscale;	/* vertical scale factor (see datasheet) */
 	int interlaced;		/* 1=interlace fileds, 0=just top fileds */
 	unsigned int video_bytesread;	/* Number of bytes read */
+=======
+>>>>>>> v3.18
 
 	unsigned long hash;	/* eeprom hash - for boards with generic ID */
 	unsigned long i2c_hash;	/* i2c devicelist hash -
 				   for boards with generic ID */
 
+<<<<<<< HEAD
 	struct em28xx_audio adev;
 
 	/* capture state tracking */
@@ -571,11 +796,14 @@ struct em28xx {
 	unsigned int vbi_width;
 	unsigned int vbi_height; /* lines per field */
 
+=======
+>>>>>>> v3.18
 	struct work_struct         request_module_wk;
 
 	/* locks */
 	struct mutex lock;
 	struct mutex ctrl_urb_lock;	/* protects urb_buf */
+<<<<<<< HEAD
 	/* spinlock_t queue_lock; */
 	struct list_head inqueue, outqueue;
 	struct video_device *vbi_dev;
@@ -586,6 +814,8 @@ struct em28xx {
 	struct vb2_queue vb_vbiq;
 	struct mutex vb_queue_lock;
 	struct mutex vb_vbi_queue_lock;
+=======
+>>>>>>> v3.18
 
 	/* resources in use */
 	unsigned int resources;
@@ -600,11 +830,17 @@ struct em28xx {
 	struct em28xx_usb_ctl usb_ctl;
 	spinlock_t slock;
 
+<<<<<<< HEAD
 	unsigned int field_count;
 	unsigned int vbi_field_count;
 
 	/* usb transfer */
 	struct usb_device *udev;	/* the usb device */
+=======
+	/* usb transfer */
+	struct usb_device *udev;	/* the usb device */
+	u8 ifnum;		/* number of the assigned usb interface */
+>>>>>>> v3.18
 	u8 analog_ep_isoc;	/* address of isoc endpoint for analog */
 	u8 analog_ep_bulk;	/* address of bulk endpoint for analog */
 	u8 dvb_ep_isoc;		/* address of isoc endpoint for DVB */
@@ -636,6 +872,7 @@ struct em28xx {
 
 	enum em28xx_mode mode;
 
+<<<<<<< HEAD
 	/* register numbers for GPO/GPIO registers */
 	u16 reg_gpo_num, reg_gpio_num;
 
@@ -650,12 +887,32 @@ struct em28xx {
 	struct em28xx_dvb *dvb;
 };
 
+=======
+	/* Button state polling */
+	struct delayed_work buttons_query_work;
+	u8 button_polling_addresses[EM28XX_NUM_BUTTON_ADDRESSES_MAX];
+	u8 button_polling_last_values[EM28XX_NUM_BUTTON_ADDRESSES_MAX];
+	u8 num_button_polling_addresses;
+	u16 button_polling_interval; /* [ms] */
+	/* Snapshot button input device */
+	char snapshot_button_path[30];	/* path of the input dev */
+	struct input_dev *sbutton_input_dev;
+};
+
+#define kref_to_dev(d) container_of(d, struct em28xx, ref)
+
+>>>>>>> v3.18
 struct em28xx_ops {
 	struct list_head next;
 	char *name;
 	int id;
 	int (*init)(struct em28xx *);
 	int (*fini)(struct em28xx *);
+<<<<<<< HEAD
+=======
+	int (*suspend)(struct em28xx *);
+	int (*resume)(struct em28xx *);
+>>>>>>> v3.18
 };
 
 /* Provided by em28xx-i2c.c */
@@ -675,6 +932,10 @@ int em28xx_write_regs(struct em28xx *dev, u16 reg, char *buf, int len);
 int em28xx_write_reg(struct em28xx *dev, u16 reg, u8 val);
 int em28xx_write_reg_bits(struct em28xx *dev, u16 reg, u8 val,
 				 u8 bitmask);
+<<<<<<< HEAD
+=======
+int em28xx_toggle_reg_bits(struct em28xx *dev, u16 reg, u8 bitmask);
+>>>>>>> v3.18
 
 int em28xx_read_ac97(struct em28xx *dev, u8 reg);
 int em28xx_write_ac97(struct em28xx *dev, u8 reg, u16 val);
@@ -682,12 +943,18 @@ int em28xx_write_ac97(struct em28xx *dev, u8 reg, u16 val);
 int em28xx_audio_analog_set(struct em28xx *dev);
 int em28xx_audio_setup(struct em28xx *dev);
 
+<<<<<<< HEAD
 int em28xx_colorlevels_set_default(struct em28xx *dev);
 int em28xx_capture_start(struct em28xx *dev, int start);
 int em28xx_vbi_supported(struct em28xx *dev);
 int em28xx_set_outfmt(struct em28xx *dev);
 int em28xx_resolution_set(struct em28xx *dev);
 int em28xx_set_alternate(struct em28xx *dev);
+=======
+const struct em28xx_led *em28xx_find_led(struct em28xx *dev,
+					 enum em28xx_led_role role);
+int em28xx_capture_start(struct em28xx *dev, int start);
+>>>>>>> v3.18
 int em28xx_alloc_urbs(struct em28xx *dev, enum em28xx_mode mode, int xfer_bulk,
 		      int num_bufs, int max_pkt_size, int packet_multiplier);
 int em28xx_init_usb_xfer(struct em28xx *dev, enum em28xx_mode mode,
@@ -699,11 +966,15 @@ void em28xx_uninit_usb_xfer(struct em28xx *dev, enum em28xx_mode mode);
 void em28xx_stop_urbs(struct em28xx *dev);
 int em28xx_set_mode(struct em28xx *dev, enum em28xx_mode set_mode);
 int em28xx_gpio_set(struct em28xx *dev, struct em28xx_reg_seq *gpio);
+<<<<<<< HEAD
 void em28xx_wake_i2c(struct em28xx *dev);
+=======
+>>>>>>> v3.18
 int em28xx_register_extension(struct em28xx_ops *dev);
 void em28xx_unregister_extension(struct em28xx_ops *dev);
 void em28xx_init_extension(struct em28xx *dev);
 void em28xx_close_extension(struct em28xx *dev);
+<<<<<<< HEAD
 
 /* Provided by em28xx-video.c */
 int em28xx_vb2_setup(struct em28xx *dev);
@@ -713,15 +984,24 @@ void em28xx_ctrl_notify(struct v4l2_ctrl *ctrl, void *priv);
 int em28xx_start_analog_streaming(struct vb2_queue *vq, unsigned int count);
 int em28xx_stop_vbi_streaming(struct vb2_queue *vq);
 extern const struct v4l2_ctrl_ops em28xx_ctrl_ops;
+=======
+int em28xx_suspend_extension(struct em28xx *dev);
+int em28xx_resume_extension(struct em28xx *dev);
+>>>>>>> v3.18
 
 /* Provided by em28xx-cards.c */
 extern struct em28xx_board em28xx_boards[];
 extern struct usb_device_id em28xx_id_table[];
 int em28xx_tuner_callback(void *ptr, int component, int command, int arg);
+<<<<<<< HEAD
 void em28xx_release_resources(struct em28xx *dev);
 
 /* Provided by em28xx-vbi.c */
 extern struct vb2_ops em28xx_vbi_qops;
+=======
+void em28xx_setup_xc3028(struct em28xx *dev, struct xc2028_ctrl *ctl);
+void em28xx_free_device(struct kref *ref);
+>>>>>>> v3.18
 
 /* Provided by em28xx-camera.c */
 int em28xx_detect_sensor(struct em28xx *dev);
@@ -743,6 +1023,7 @@ int em28xx_init_camera(struct em28xx *dev);
 	printk(KERN_WARNING "%s: "fmt,\
 			dev->name , ##arg); } while (0)
 
+<<<<<<< HEAD
 static inline int em28xx_compression_disable(struct em28xx *dev)
 {
 	/* side effect of disabling scaler and mixer */
@@ -771,4 +1052,6 @@ static inline unsigned int norm_maxh(struct em28xx *dev)
 
 	return (dev->norm & V4L2_STD_625_50) ? 576 : 480;
 }
+=======
+>>>>>>> v3.18
 #endif

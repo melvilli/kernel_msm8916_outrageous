@@ -1,6 +1,9 @@
 #include <linux/kernel.h>
 #include <linux/stddef.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/sched.h>
 #include <linux/signal.h>
 #include <linux/irq.h>

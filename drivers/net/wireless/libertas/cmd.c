@@ -1111,6 +1111,10 @@ int lbs_set_radio(struct lbs_private *priv, u8 preamble, u8 radio_on)
 
 	cmd.hdr.size = cpu_to_le16(sizeof(cmd));
 	cmd.action = cpu_to_le16(CMD_ACT_SET);
+<<<<<<< HEAD
+=======
+	cmd.control = 0;
+>>>>>>> v3.18
 
 	/* Only v8 and below support setting the preamble */
 	if (priv->fwrelease < 0x09000000) {

@@ -10,7 +10,10 @@
 #include <linux/cpufreq.h>
 #include <linux/errno.h>
 #include <linux/export.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/list.h>
 #include <linux/mutex.h>
 #include <linux/spinlock.h>
@@ -29,6 +32,7 @@ enum {
 };
 
 struct cpufreq_frequency_table loongson2_clockmod_table[] = {
+<<<<<<< HEAD
 	{DC_RESV, CPUFREQ_ENTRY_INVALID},
 	{DC_ZERO, CPUFREQ_ENTRY_INVALID},
 	{DC_25PT, 0},
@@ -39,6 +43,18 @@ struct cpufreq_frequency_table loongson2_clockmod_table[] = {
 	{DC_87PT, 0},
 	{DC_DISABLE, 0},
 	{DC_RESV, CPUFREQ_TABLE_END},
+=======
+	{0, DC_RESV, CPUFREQ_ENTRY_INVALID},
+	{0, DC_ZERO, CPUFREQ_ENTRY_INVALID},
+	{0, DC_25PT, 0},
+	{0, DC_37PT, 0},
+	{0, DC_50PT, 0},
+	{0, DC_62PT, 0},
+	{0, DC_75PT, 0},
+	{0, DC_87PT, 0},
+	{0, DC_DISABLE, 0},
+	{0, DC_RESV, CPUFREQ_TABLE_END},
+>>>>>>> v3.18
 };
 EXPORT_SYMBOL_GPL(loongson2_clockmod_table);
 
@@ -92,9 +108,16 @@ EXPORT_SYMBOL(clk_put);
 
 int clk_set_rate(struct clk *clk, unsigned long rate)
 {
+<<<<<<< HEAD
 	int ret = 0;
 	int regval;
 	int i;
+=======
+	unsigned int rate_khz = rate / 1000;
+	struct cpufreq_frequency_table *pos;
+	int ret = 0;
+	int regval;
+>>>>>>> v3.18
 
 	if (likely(clk->ops && clk->ops->set_rate)) {
 		unsigned long flags;
@@ -107,6 +130,7 @@ int clk_set_rate(struct clk *clk, unsigned long rate)
 	if (unlikely(clk->flags & CLK_RATE_PROPAGATES))
 		propagate_rate(clk);
 
+<<<<<<< HEAD
 	for (i = 0; loongson2_clockmod_table[i].frequency != CPUFREQ_TABLE_END;
 	     i++) {
 		if (loongson2_clockmod_table[i].frequency ==
@@ -116,14 +140,26 @@ int clk_set_rate(struct clk *clk, unsigned long rate)
 			break;
 	}
 	if (rate != loongson2_clockmod_table[i].frequency)
+=======
+	cpufreq_for_each_valid_entry(pos, loongson2_clockmod_table)
+		if (rate_khz == pos->frequency)
+			break;
+	if (rate_khz != pos->frequency)
+>>>>>>> v3.18
 		return -ENOTSUPP;
 
 	clk->rate = rate;
 
+<<<<<<< HEAD
 	regval = LOONGSON_CHIPCFG0;
 	regval = (regval & ~0x7) |
 		(loongson2_clockmod_table[i].driver_data - 1);
 	LOONGSON_CHIPCFG0 = regval;
+=======
+	regval = LOONGSON_CHIPCFG(0);
+	regval = (regval & ~0x7) | (pos->driver_data - 1);
+	LOONGSON_CHIPCFG(0) = regval;
+>>>>>>> v3.18
 
 	return ret;
 }

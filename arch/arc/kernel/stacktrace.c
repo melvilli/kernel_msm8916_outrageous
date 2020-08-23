@@ -79,7 +79,11 @@ static void seed_unwind_frame_info(struct task_struct *tsk,
 		 * assembly code
 		 */
 		frame_info->regs.r27 = 0;
+<<<<<<< HEAD
 		frame_info->regs.r28 += 64;
+=======
+		frame_info->regs.r28 += 60;
+>>>>>>> v3.18
 		frame_info->call_frame = 0;
 
 	} else {
@@ -131,7 +135,11 @@ arc_unwind_core(struct task_struct *tsk, struct pt_regs *regs,
 	 * prelogue is setup (callee regs saved and then fp set and not other
 	 * way around
 	 */
+<<<<<<< HEAD
 	pr_warn_once("CONFIG_ARC_DW2_UNWIND needs to be enabled\n");
+=======
+	pr_warn("CONFIG_ARC_DW2_UNWIND needs to be enabled\n");
+>>>>>>> v3.18
 	return 0;
 
 #endif
@@ -237,11 +245,22 @@ unsigned int get_wchan(struct task_struct *tsk)
  */
 void save_stack_trace_tsk(struct task_struct *tsk, struct stack_trace *trace)
 {
+<<<<<<< HEAD
+=======
+	/* Assumes @tsk is sleeping so unwinds from __switch_to */
+>>>>>>> v3.18
 	arc_unwind_core(tsk, NULL, __collect_all_but_sched, trace);
 }
 
 void save_stack_trace(struct stack_trace *trace)
 {
+<<<<<<< HEAD
 	arc_unwind_core(current, NULL, __collect_all, trace);
 }
+=======
+	/* Pass NULL for task so it unwinds the current call frame */
+	arc_unwind_core(NULL, NULL, __collect_all, trace);
+}
+EXPORT_SYMBOL_GPL(save_stack_trace);
+>>>>>>> v3.18
 #endif

@@ -8,6 +8,10 @@
 #include <linux/module.h>
 #include <linux/kdebug.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
+=======
+#include <linux/context_tracking.h>
+>>>>>>> v3.18
 #include <asm/signal.h>
 #include <asm/cacheflush.h>
 #include <asm/uaccess.h>
@@ -82,7 +86,11 @@ static void __kprobes save_previous_kprobe(struct kprobe_ctlblk *kcb)
 
 static void __kprobes restore_previous_kprobe(struct kprobe_ctlblk *kcb)
 {
+<<<<<<< HEAD
 	__get_cpu_var(current_kprobe) = kcb->prev_kprobe.kp;
+=======
+	__this_cpu_write(current_kprobe, kcb->prev_kprobe.kp);
+>>>>>>> v3.18
 	kcb->kprobe_status = kcb->prev_kprobe.status;
 	kcb->kprobe_orig_tnpc = kcb->prev_kprobe.orig_tnpc;
 	kcb->kprobe_orig_tstate_pil = kcb->prev_kprobe.orig_tstate_pil;
@@ -91,7 +99,11 @@ static void __kprobes restore_previous_kprobe(struct kprobe_ctlblk *kcb)
 static void __kprobes set_current_kprobe(struct kprobe *p, struct pt_regs *regs,
 				struct kprobe_ctlblk *kcb)
 {
+<<<<<<< HEAD
 	__get_cpu_var(current_kprobe) = p;
+=======
+	__this_cpu_write(current_kprobe, p);
+>>>>>>> v3.18
 	kcb->kprobe_orig_tnpc = regs->tnpc;
 	kcb->kprobe_orig_tstate_pil = (regs->tstate & TSTATE_PIL);
 }
@@ -154,7 +166,11 @@ static int __kprobes kprobe_handler(struct pt_regs *regs)
 				ret = 1;
 				goto no_kprobe;
 			}
+<<<<<<< HEAD
 			p = __get_cpu_var(current_kprobe);
+=======
+			p = __this_cpu_read(current_kprobe);
+>>>>>>> v3.18
 			if (p->break_handler && p->break_handler(p, regs))
 				goto ss_probe;
 		}
@@ -349,7 +365,11 @@ int __kprobes kprobe_fault_handler(struct pt_regs *regs, int trapnr)
 	case KPROBE_HIT_SSDONE:
 		/*
 		 * We increment the nmissed count for accounting,
+<<<<<<< HEAD
 		 * we can also use npre/npostfault count for accouting
+=======
+		 * we can also use npre/npostfault count for accounting
+>>>>>>> v3.18
 		 * these specific fault cases.
 		 */
 		kprobes_inc_nmissed_count(cur);
@@ -418,12 +438,21 @@ int __kprobes kprobe_exceptions_notify(struct notifier_block *self,
 asmlinkage void __kprobes kprobe_trap(unsigned long trap_level,
 				      struct pt_regs *regs)
 {
+<<<<<<< HEAD
+=======
+	enum ctx_state prev_state = exception_enter();
+
+>>>>>>> v3.18
 	BUG_ON(trap_level != 0x170 && trap_level != 0x171);
 
 	if (user_mode(regs)) {
 		local_irq_enable();
 		bad_trap(regs, trap_level);
+<<<<<<< HEAD
 		return;
+=======
+		goto out;
+>>>>>>> v3.18
 	}
 
 	/* trap_level == 0x170 --> ta 0x70
@@ -433,6 +462,11 @@ asmlinkage void __kprobes kprobe_trap(unsigned long trap_level,
 		       (trap_level == 0x170) ? "debug" : "debug_2",
 		       regs, 0, trap_level, SIGTRAP) != NOTIFY_STOP)
 		bad_trap(regs, trap_level);
+<<<<<<< HEAD
+=======
+out:
+	exception_exit(prev_state);
+>>>>>>> v3.18
 }
 
 /* Jprobes support.  */
@@ -507,7 +541,12 @@ void __kprobes arch_prepare_kretprobe(struct kretprobe_instance *ri,
 /*
  * Called when the probe at kretprobe trampoline is hit
  */
+<<<<<<< HEAD
 int __kprobes trampoline_probe_handler(struct kprobe *p, struct pt_regs *regs)
+=======
+static int __kprobes trampoline_probe_handler(struct kprobe *p,
+					      struct pt_regs *regs)
+>>>>>>> v3.18
 {
 	struct kretprobe_instance *ri = NULL;
 	struct hlist_head *head, empty_rp;
@@ -571,7 +610,11 @@ int __kprobes trampoline_probe_handler(struct kprobe *p, struct pt_regs *regs)
 	return 1;
 }
 
+<<<<<<< HEAD
 void kretprobe_trampoline_holder(void)
+=======
+static void __used kretprobe_trampoline_holder(void)
+>>>>>>> v3.18
 {
 	asm volatile(".global kretprobe_trampoline\n"
 		     "kretprobe_trampoline:\n"

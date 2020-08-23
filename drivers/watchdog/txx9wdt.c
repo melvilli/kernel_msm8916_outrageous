@@ -13,7 +13,10 @@
 #include <linux/module.h>
 #include <linux/moduleparam.h>
 #include <linux/types.h>
+<<<<<<< HEAD
 #include <linux/miscdevice.h>
+=======
+>>>>>>> v3.18
 #include <linux/watchdog.h>
 #include <linux/init.h>
 #include <linux/platform_device.h>
@@ -176,5 +179,8 @@ module_platform_driver_probe(txx9wdt_driver, txx9wdt_probe);
 
 MODULE_DESCRIPTION("TXx9 Watchdog Driver");
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 MODULE_ALIAS("platform:txx9wdt");

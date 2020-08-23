@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+KBUILD_DEFCONFIG := mmu_defconfig
+
+>>>>>>> v3.18
 ifeq ($(CONFIG_MMU),y)
 UTS_SYSNAME = -DUTS_SYSNAME=\"Linux\"
 else
@@ -46,7 +51,10 @@ head-y := arch/microblaze/kernel/head.o
 libs-y += arch/microblaze/lib/
 core-y += arch/microblaze/kernel/
 core-y += arch/microblaze/mm/
+<<<<<<< HEAD
 core-y += arch/microblaze/platform/
+=======
+>>>>>>> v3.18
 core-$(CONFIG_PCI) += arch/microblaze/pci/
 
 drivers-$(CONFIG_OPROFILE) += arch/microblaze/oprofile/
@@ -72,7 +80,11 @@ all: linux.bin
 archclean:
 	$(Q)$(MAKE) $(clean)=$(boot)
 
+<<<<<<< HEAD
 linux.bin linux.bin.gz: vmlinux
+=======
+linux.bin linux.bin.gz linux.bin.ub: vmlinux
+>>>>>>> v3.18
 	$(Q)$(MAKE) $(build)=$(boot) $(boot)/$@
 
 simpleImage.%: vmlinux
@@ -81,6 +93,10 @@ simpleImage.%: vmlinux
 define archhelp
   echo '* linux.bin    - Create raw binary'
   echo '  linux.bin.gz - Create compressed raw binary'
+<<<<<<< HEAD
+=======
+  echo '  linux.bin.ub - Create U-Boot wrapped raw binary'
+>>>>>>> v3.18
   echo '  simpleImage.<dt> - ELF image with $(arch)/boot/dts/<dt>.dts linked in'
   echo '                   - stripped elf with fdt blob'
   echo '  simpleImage.<dt>.unstrip - full ELF image with fdt blob'

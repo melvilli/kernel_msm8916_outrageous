@@ -287,7 +287,11 @@ void __init eukrea_mbimxsd35_baseboard_init(void)
 
 	imx35_add_imx_ssi(0, &eukrea_mbimxsd_ssi_pdata);
 
+<<<<<<< HEAD
 	imx35_add_flexcan1(NULL);
+=======
+	imx35_add_flexcan1();
+>>>>>>> v3.18
 	imx35_add_sdhci_esdhc_imx(0, &sd1_pdata);
 
 	gpio_request(GPIO_LED1, "LED1");

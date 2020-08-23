@@ -13,7 +13,10 @@ HOST_EXTRACFLAGS += -I$(srctree)/tools/include
 hostprogs-$(CONFIG_KALLSYMS)     += kallsyms
 hostprogs-$(CONFIG_LOGO)         += pnmtologo
 hostprogs-$(CONFIG_VT)           += conmakehash
+<<<<<<< HEAD
 hostprogs-$(CONFIG_IKCONFIG)     += bin2c
+=======
+>>>>>>> v3.18
 hostprogs-$(BUILD_C_RECORDMCOUNT) += recordmcount
 hostprogs-$(CONFIG_BUILDTIME_EXTABLE_SORT) += sortextable
 hostprogs-$(CONFIG_ASN1)	 += asn1_compiler
@@ -27,10 +30,17 @@ always		:= $(hostprogs-y) $(hostprogs-m)
 hostprogs-y += unifdef docproc
 
 # These targets are used internally to avoid "is up to date" messages
+<<<<<<< HEAD
 PHONY += build_unifdef
 build_unifdef: scripts/unifdef FORCE
 	@:
 build_docproc: scripts/docproc FORCE
+=======
+PHONY += build_unifdef build_docproc
+build_unifdef: $(obj)/unifdef
+	@:
+build_docproc: $(obj)/docproc
+>>>>>>> v3.18
 	@:
 
 subdir-$(CONFIG_MODVERSIONS) += genksyms
@@ -39,4 +49,8 @@ subdir-$(CONFIG_SECURITY_SELINUX) += selinux
 subdir-$(CONFIG_DTC)         += dtc
 
 # Let clean descend into subdirs
+<<<<<<< HEAD
 subdir-	+= basic kconfig package selinux
+=======
+subdir-	+= basic kconfig package
+>>>>>>> v3.18

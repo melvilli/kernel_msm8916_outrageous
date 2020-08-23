@@ -3,6 +3,10 @@ menuconfig TARGET_CORE
 	tristate "Generic Target Core Mod (TCM) and ConfigFS Infrastructure"
 	depends on SCSI && BLOCK
 	select CONFIGFS_FS
+<<<<<<< HEAD
+=======
+	select CRC_T10DIF
+>>>>>>> v3.18
 	default n
 	help
 	Say Y or M here to enable the TCM Storage Engine and ConfigFS enabled
@@ -13,6 +17,10 @@ if TARGET_CORE
 
 config TCM_IBLOCK
 	tristate "TCM/IBLOCK Subsystem Plugin for Linux/BLOCK"
+<<<<<<< HEAD
+=======
+	select BLK_DEV_INTEGRITY
+>>>>>>> v3.18
 	help
 	Say Y here to enable the TCM/IBLOCK subsystem plugin for non-buffered
 	access to Linux/Block devices using BIO
@@ -29,6 +37,16 @@ config TCM_PSCSI
 	Say Y here to enable the TCM/pSCSI subsystem plugin for non-buffered
 	passthrough access to Linux/SCSI device
 
+<<<<<<< HEAD
+=======
+config TCM_USER
+	tristate "TCM/USER Subsystem Plugin for Linux"
+	depends on UIO && NET
+	help
+	Say Y here to enable the TCM/USER subsystem plugin for a userspace
+	process to handle requests
+
+>>>>>>> v3.18
 source "drivers/target/loopback/Kconfig"
 source "drivers/target/tcm_fc/Kconfig"
 source "drivers/target/iscsi/Kconfig"

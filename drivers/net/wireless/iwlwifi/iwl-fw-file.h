@@ -5,7 +5,12 @@
  *
  * GPL LICENSE SUMMARY
  *
+<<<<<<< HEAD
  * Copyright(c) 2008 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of version 2 of the GNU General Public License as
@@ -30,7 +35,12 @@
  *
  * BSD LICENSE
  *
+<<<<<<< HEAD
  * Copyright(c) 2005 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -121,6 +131,17 @@ enum iwl_ucode_tlv_type {
 	IWL_UCODE_TLV_SEC_WOWLAN	= 21,
 	IWL_UCODE_TLV_DEF_CALIB		= 22,
 	IWL_UCODE_TLV_PHY_SKU		= 23,
+<<<<<<< HEAD
+=======
+	IWL_UCODE_TLV_SECURE_SEC_RT	= 24,
+	IWL_UCODE_TLV_SECURE_SEC_INIT	= 25,
+	IWL_UCODE_TLV_SECURE_SEC_WOWLAN	= 26,
+	IWL_UCODE_TLV_NUM_OF_CPU	= 27,
+	IWL_UCODE_TLV_CSCHEME		= 28,
+	IWL_UCODE_TLV_API_CHANGES_SET	= 29,
+	IWL_UCODE_TLV_ENABLED_CAPABILITIES	= 30,
+	IWL_UCODE_TLV_N_SCAN_CHANNELS		= 31,
+>>>>>>> v3.18
 };
 
 struct iwl_ucode_tlv {
@@ -129,7 +150,12 @@ struct iwl_ucode_tlv {
 	u8 data[0];
 };
 
+<<<<<<< HEAD
 #define IWL_TLV_UCODE_MAGIC	0x0a4c5749
+=======
+#define IWL_TLV_UCODE_MAGIC		0x0a4c5749
+#define FW_VER_HUMAN_READABLE_SZ	64
+>>>>>>> v3.18
 
 struct iwl_tlv_ucode_header {
 	/*
@@ -140,7 +166,11 @@ struct iwl_tlv_ucode_header {
 	 */
 	__le32 zero;
 	__le32 magic;
+<<<<<<< HEAD
 	u8 human_readable[64];
+=======
+	u8 human_readable[FW_VER_HUMAN_READABLE_SZ];
+>>>>>>> v3.18
 	__le32 ver;		/* major/minor/API/serial */
 	__le32 build;
 	__le64 ignore;
@@ -153,4 +183,22 @@ struct iwl_tlv_ucode_header {
 	u8 data[0];
 };
 
+<<<<<<< HEAD
+=======
+/*
+ * ucode TLVs
+ *
+ * ability to get extension for: flags & capabilities from ucode binaries files
+ */
+struct iwl_ucode_api {
+	__le32 api_index;
+	__le32 api_flags;
+} __packed;
+
+struct iwl_ucode_capa {
+	__le32 api_index;
+	__le32 api_capa;
+} __packed;
+
+>>>>>>> v3.18
 #endif  /* __iwl_fw_file_h__ */

@@ -31,10 +31,28 @@
 #include <tools/be_byteshift.h>
 #include <tools/le_byteshift.h>
 
+<<<<<<< HEAD
+=======
+#ifndef EM_ARCOMPACT
+#define EM_ARCOMPACT	93
+#endif
+
+#ifndef EM_XTENSA
+#define EM_XTENSA	94
+#endif
+
+>>>>>>> v3.18
 #ifndef EM_AARCH64
 #define EM_AARCH64	183
 #endif
 
+<<<<<<< HEAD
+=======
+#ifndef EM_MICROBLAZE
+#define EM_MICROBLAZE	189
+#endif
+
+>>>>>>> v3.18
 static int fd_map;	/* File descriptor for file being modified. */
 static int mmap_failed; /* Boolean flag. */
 static void *ehdr_curr; /* current ElfXX_Ehdr *  for resource cleanup */
@@ -64,6 +82,7 @@ fail_file(void)
 	longjmp(jmpenv, SJ_FAIL);
 }
 
+<<<<<<< HEAD
 static void __attribute__((noreturn))
 succeed_file(void)
 {
@@ -72,6 +91,8 @@ succeed_file(void)
 }
 
 
+=======
+>>>>>>> v3.18
 /*
  * Get the whole file as a programming convenience in order to avoid
  * malloc+lseek+read+free of many pieces.  If successful, then mmap
@@ -160,6 +181,33 @@ static void (*w2)(uint16_t, uint16_t *);
 
 typedef void (*table_sort_t)(char *, int);
 
+<<<<<<< HEAD
+=======
+/*
+ * Move reserved section indices SHN_LORESERVE..SHN_HIRESERVE out of
+ * the way to -256..-1, to avoid conflicting with real section
+ * indices.
+ */
+#define SPECIAL(i) ((i) - (SHN_HIRESERVE + 1))
+
+static inline int is_shndx_special(unsigned int i)
+{
+	return i != SHN_XINDEX && i >= SHN_LORESERVE && i <= SHN_HIRESERVE;
+}
+
+/* Accessor for sym->st_shndx, hides ugliness of "64k sections" */
+static inline unsigned int get_secindex(unsigned int shndx,
+					unsigned int sym_offs,
+					const Elf32_Word *symtab_shndx_start)
+{
+	if (is_shndx_special(shndx))
+		return SPECIAL(shndx);
+	if (shndx != SHN_XINDEX)
+		return shndx;
+	return r(&symtab_shndx_start[sym_offs]);
+}
+
+>>>>>>> v3.18
 /* 32 bit and 64 bit are very similar */
 #include "sortextable.h"
 #define SORTEXTABLE_64
@@ -252,9 +300,18 @@ do_file(char const *const fname)
 	case EM_S390:
 		custom_sort = sort_relative_table;
 		break;
+<<<<<<< HEAD
 	case EM_ARM:
 	case EM_AARCH64:
 	case EM_MIPS:
+=======
+	case EM_ARCOMPACT:
+	case EM_ARM:
+	case EM_AARCH64:
+	case EM_MICROBLAZE:
+	case EM_MIPS:
+	case EM_XTENSA:
+>>>>>>> v3.18
 		break;
 	}  /* end switch */
 

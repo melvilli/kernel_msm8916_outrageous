@@ -332,8 +332,12 @@ static int trizeps4_mci_init(struct device *dev, irq_handler_t mci_detect_int,
 	int err;
 
 	err = request_irq(TRIZEPS4_MMC_IRQ, mci_detect_int,
+<<<<<<< HEAD
 			  IRQF_DISABLED | IRQF_TRIGGER_RISING,
 			  "MMC card detect", data);
+=======
+			  IRQF_TRIGGER_RISING, "MMC card detect", data);
+>>>>>>> v3.18
 	if (err) {
 		printk(KERN_ERR "trizeps4_mci_init: MMC/SD: can't request"
 						"MMC card detect IRQ\n");

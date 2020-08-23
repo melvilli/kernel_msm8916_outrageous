@@ -42,7 +42,10 @@
 #include <linux/moduleparam.h>
 #include <linux/types.h>
 #include <linux/timer.h>
+<<<<<<< HEAD
 #include <linux/miscdevice.h>
+=======
+>>>>>>> v3.18
 #include <linux/watchdog.h>
 #include <linux/notifier.h>
 #include <linux/reboot.h>
@@ -63,7 +66,11 @@ MODULE_PARM_DESC(nowayout,
 		"Watchdog cannot be stopped once started (default="
 				__MODULE_STRING(WATCHDOG_NOWAYOUT) ")");
 
+<<<<<<< HEAD
 static int soft_noboot = 0;
+=======
+static int soft_noboot;
+>>>>>>> v3.18
 module_param(soft_noboot, int, 0);
 MODULE_PARM_DESC(soft_noboot,
 	"Softdog action, set to 1 to ignore reboots, 0 to reboot (default=0)");
@@ -152,7 +159,10 @@ static struct watchdog_ops softdog_ops = {
 	.owner = THIS_MODULE,
 	.start = softdog_ping,
 	.stop = softdog_stop,
+<<<<<<< HEAD
 	.ping = softdog_ping,
+=======
+>>>>>>> v3.18
 	.set_timeout = softdog_set_timeout,
 };
 
@@ -208,4 +218,7 @@ module_exit(watchdog_exit);
 MODULE_AUTHOR("Alan Cox");
 MODULE_DESCRIPTION("Software Watchdog Device Driver");
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18

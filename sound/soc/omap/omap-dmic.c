@@ -40,6 +40,10 @@
 #include <sound/initval.h>
 #include <sound/soc.h>
 #include <sound/dmaengine_pcm.h>
+<<<<<<< HEAD
+=======
+#include <sound/omap-pcm.h>
+>>>>>>> v3.18
 
 #include "omap-dmic.h"
 
@@ -57,17 +61,28 @@ struct omap_dmic {
 	struct mutex mutex;
 
 	struct snd_dmaengine_dai_dma_data dma_data;
+<<<<<<< HEAD
 	unsigned int dma_req;
+=======
+>>>>>>> v3.18
 };
 
 static inline void omap_dmic_write(struct omap_dmic *dmic, u16 reg, u32 val)
 {
+<<<<<<< HEAD
 	__raw_writel(val, dmic->io_base + reg);
+=======
+	writel_relaxed(val, dmic->io_base + reg);
+>>>>>>> v3.18
 }
 
 static inline int omap_dmic_read(struct omap_dmic *dmic, u16 reg)
 {
+<<<<<<< HEAD
 	return __raw_readl(dmic->io_base + reg);
+=======
+	return readl_relaxed(dmic->io_base + reg);
+>>>>>>> v3.18
 }
 
 static inline void omap_dmic_start(struct omap_dmic *dmic)
@@ -114,7 +129,10 @@ static int omap_dmic_dai_startup(struct snd_pcm_substream *substream,
 
 	mutex_unlock(&dmic->mutex);
 
+<<<<<<< HEAD
 	snd_soc_dai_set_dma_data(dai, substream, &dmic->dma_data);
+=======
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -418,6 +436,12 @@ static int omap_dmic_probe(struct snd_soc_dai *dai)
 
 	/* Configure DMIC threshold value */
 	dmic->threshold = OMAP_DMIC_THRES_MAX - 3;
+<<<<<<< HEAD
+=======
+
+	snd_soc_dai_init_dma_data(dai, NULL, &dmic->dma_data);
+
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -464,7 +488,11 @@ static int asoc_dmic_probe(struct platform_device *pdev)
 
 	mutex_init(&dmic->mutex);
 
+<<<<<<< HEAD
 	dmic->fclk = clk_get(dmic->dev, "fck");
+=======
+	dmic->fclk = devm_clk_get(dmic->dev, "fck");
+>>>>>>> v3.18
 	if (IS_ERR(dmic->fclk)) {
 		dev_err(dmic->dev, "cant get fck\n");
 		return -ENODEV;
@@ -473,6 +501,7 @@ static int asoc_dmic_probe(struct platform_device *pdev)
 	res = platform_get_resource_byname(pdev, IORESOURCE_MEM, "dma");
 	if (!res) {
 		dev_err(dmic->dev, "invalid dma memory resource\n");
+<<<<<<< HEAD
 		ret = -ENODEV;
 		goto err_put_clk;
 	}
@@ -495,10 +524,20 @@ static int asoc_dmic_probe(struct platform_device *pdev)
 		goto err_put_clk;
 	}
 
+=======
+		return -ENODEV;
+	}
+	dmic->dma_data.addr = res->start + OMAP_DMIC_DATA_REG;
+
+	dmic->dma_data.filter_data = "up_link";
+
+	res = platform_get_resource_byname(pdev, IORESOURCE_MEM, "mpu");
+>>>>>>> v3.18
 	dmic->io_base = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(dmic->io_base))
 		return PTR_ERR(dmic->io_base);
 
+<<<<<<< HEAD
 	ret = snd_soc_register_component(&pdev->dev, &omap_dmic_component,
 					 &omap_dmic_dai, 1);
 	if (ret)
@@ -517,6 +556,18 @@ static int asoc_dmic_remove(struct platform_device *pdev)
 
 	snd_soc_unregister_component(&pdev->dev);
 	clk_put(dmic->fclk);
+=======
+
+	ret = devm_snd_soc_register_component(&pdev->dev,
+					      &omap_dmic_component,
+					      &omap_dmic_dai, 1);
+	if (ret)
+		return ret;
+
+	ret = omap_pcm_platform_register(&pdev->dev);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -534,7 +585,10 @@ static struct platform_driver asoc_dmic_driver = {
 		.of_match_table = omap_dmic_of_match,
 	},
 	.probe = asoc_dmic_probe,
+<<<<<<< HEAD
 	.remove = asoc_dmic_remove,
+=======
+>>>>>>> v3.18
 };
 
 module_platform_driver(asoc_dmic_driver);

@@ -52,6 +52,20 @@ static int wil_change_mtu(struct net_device *ndev, int new_mtu)
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+static int wil_do_ioctl(struct net_device *ndev, struct ifreq *ifr, int cmd)
+{
+	struct wil6210_priv *wil = ndev_to_wil(ndev);
+
+	int ret = wil_ioctl(wil, ifr->ifr_data, cmd);
+
+	wil_dbg_misc(wil, "ioctl(0x%04x) -> %d\n", cmd, ret);
+
+	return ret;
+}
+
+>>>>>>> v3.18
 static const struct net_device_ops wil_netdev_ops = {
 	.ndo_open		= wil_open,
 	.ndo_stop		= wil_stop,
@@ -59,6 +73,10 @@ static const struct net_device_ops wil_netdev_ops = {
 	.ndo_set_mac_address	= eth_mac_addr,
 	.ndo_validate_addr	= eth_validate_addr,
 	.ndo_change_mtu		= wil_change_mtu,
+<<<<<<< HEAD
+=======
+	.ndo_do_ioctl		= wil_do_ioctl,
+>>>>>>> v3.18
 };
 
 static int wil6210_netdev_poll_rx(struct napi_struct *napi, int budget)
@@ -141,7 +159,11 @@ void *wil_if_alloc(struct device *dev, void __iomem *csr)
 	ch = wdev->wiphy->bands[IEEE80211_BAND_60GHZ]->channels;
 	cfg80211_chandef_create(&wdev->preset_chandef, ch, NL80211_CHAN_NO_HT);
 
+<<<<<<< HEAD
 	ndev = alloc_netdev(0, "wlan%d", ether_setup);
+=======
+	ndev = alloc_netdev(0, "wlan%d", NET_NAME_UNKNOWN, ether_setup);
+>>>>>>> v3.18
 	if (!ndev) {
 		dev_err(dev, "alloc_netdev_mqs failed\n");
 		rc = -ENOMEM;
@@ -149,6 +171,10 @@ void *wil_if_alloc(struct device *dev, void __iomem *csr)
 	}
 
 	ndev->netdev_ops = &wil_netdev_ops;
+<<<<<<< HEAD
+=======
+	wil_set_ethtoolops(ndev);
+>>>>>>> v3.18
 	ndev->ieee80211_ptr = wdev;
 	ndev->hw_features = NETIF_F_HW_CSUM | NETIF_F_RXCSUM |
 			    NETIF_F_SG | NETIF_F_GRO;

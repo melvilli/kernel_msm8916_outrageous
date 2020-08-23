@@ -59,6 +59,7 @@ Required subnode-properties:
 
 Optional subnode-properties:
 - fsl,drive-strength: Integer.
+<<<<<<< HEAD
     0: 4 mA
     1: 8 mA
     2: 12 mA
@@ -69,6 +70,18 @@ Optional subnode-properties:
 - fsl,pull-up: Integer.
     0: Disable the internal pull-up
     1: Enable the internal pull-up
+=======
+    0: MXS_DRIVE_4mA
+    1: MXS_DRIVE_8mA
+    2: MXS_DRIVE_12mA
+    3: MXS_DRIVE_16mA
+- fsl,voltage: Integer.
+    0: MXS_VOLTAGE_LOW  - 1.8 V
+    1: MXS_VOLTAGE_HIGH - 3.3 V
+- fsl,pull-up: Integer.
+    0: MXS_PULL_DISABLE - Disable the internal pull-up
+    1: MXS_PULL_ENABLE  - Enable the internal pull-up
+>>>>>>> v3.18
 
 Note that when enabling the pull-up, the internal pad keeper gets disabled.
 Also, some pins doesn't have a pull up, in that case, setting the fsl,pull-up
@@ -85,6 +98,7 @@ pinctrl@80018000 {
 	mmc0_8bit_pins_a: mmc0-8bit@0 {
 		reg = <0>;
 		fsl,pinmux-ids = <
+<<<<<<< HEAD
 			0x2000 0x2010 0x2020 0x2030
 			0x2040 0x2050 0x2060 0x2070
 			0x2080 0x2090 0x20a0>;
@@ -102,6 +116,34 @@ pinctrl@80018000 {
 		fsl,pinmux-ids = <0x20a0>;
 		fsl,drive-strength = <2>;
 		fsl,pull-up = <0>;
+=======
+			MX28_PAD_SSP0_DATA0__SSP0_D0
+			MX28_PAD_SSP0_DATA1__SSP0_D1
+			MX28_PAD_SSP0_DATA2__SSP0_D2
+			MX28_PAD_SSP0_DATA3__SSP0_D3
+			MX28_PAD_SSP0_DATA4__SSP0_D4
+			MX28_PAD_SSP0_DATA5__SSP0_D5
+			MX28_PAD_SSP0_DATA6__SSP0_D6
+			MX28_PAD_SSP0_DATA7__SSP0_D7
+			MX28_PAD_SSP0_CMD__SSP0_CMD
+			MX28_PAD_SSP0_DETECT__SSP0_CARD_DETECT
+			MX28_PAD_SSP0_SCK__SSP0_SCK
+		>;
+		fsl,drive-strength = <MXS_DRIVE_4mA>;
+		fsl,voltage = <MXS_VOLTAGE_HIGH>;
+		fsl,pull-up = <MXS_PULL_ENABLE>;
+	};
+
+	mmc_cd_cfg: mmc-cd-cfg {
+		fsl,pinmux-ids = <MX28_PAD_SSP0_DETECT__SSP0_CARD_DETECT>;
+		fsl,pull-up = <MXS_PULL_DISABLE>;
+	};
+
+	mmc_sck_cfg: mmc-sck-cfg {
+		fsl,pinmux-ids = <MX28_PAD_SSP0_SCK__SSP0_SCK>;
+		fsl,drive-strength = <MXS_DRIVE_12mA>;
+		fsl,pull-up = <MXS_PULL_DISABLE>;
+>>>>>>> v3.18
 	};
 };
 
@@ -112,6 +154,7 @@ adjusting the configuration for pins card-detection and clock from what group
 node mmc0-8bit defines.  Only the configuration properties to be adjusted need
 to be listed in the config nodes.
 
+<<<<<<< HEAD
 Valid values for i.MX28 pinmux-id:
 
 pinmux						id
@@ -920,3 +963,9 @@ MX23_PAD_GPMI_CE0N__GPIO_2_28			0x21c3
 MX23_PAD_EMI_CKE__GPIO_2_29			0x21d3
 MX23_PAD_EMI_RASN__GPIO_2_30			0x21e3
 MX23_PAD_EMI_WEN__GPIO_2_31			0x21f3
+=======
+Valid values for i.MX28/i.MX23 pinmux-id are defined in
+arch/arm/boot/dts/imx28-pinfunc.h and arch/arm/boot/dts/imx23-pinfunc.h.
+The definitions for the padconfig properties can be found in
+arch/arm/boot/dts/mxs-pinfunc.h.
+>>>>>>> v3.18

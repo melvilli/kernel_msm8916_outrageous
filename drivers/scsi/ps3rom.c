@@ -78,7 +78,11 @@ static int ps3rom_slave_configure(struct scsi_device *scsi_dev)
 	struct ps3rom_private *priv = shost_priv(scsi_dev->host);
 	struct ps3_storage_device *dev = priv->dev;
 
+<<<<<<< HEAD
 	dev_dbg(&dev->sbd.core, "%s:%u: id %u, lun %u, channel %u\n", __func__,
+=======
+	dev_dbg(&dev->sbd.core, "%s:%u: id %u, lun %llu, channel %u\n", __func__,
+>>>>>>> v3.18
 		__LINE__, scsi_dev->id, scsi_dev->lun, scsi_dev->channel);
 
 	/*

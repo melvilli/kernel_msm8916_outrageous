@@ -22,12 +22,20 @@
 #include <linux/rwsem.h>
 #include <linux/xattr.h>
 #include <linux/security.h>
+<<<<<<< HEAD
+=======
+#include <linux/posix_acl_xattr.h>
+>>>>>>> v3.18
 #include "ctree.h"
 #include "btrfs_inode.h"
 #include "transaction.h"
 #include "xattr.h"
 #include "disk-io.h"
+<<<<<<< HEAD
 #include "locking.h"
+=======
+#include "props.h"
+>>>>>>> v3.18
 
 
 ssize_t __btrfs_getxattr(struct inode *inode, const char *name,
@@ -90,7 +98,11 @@ static int do_setxattr(struct btrfs_trans_handle *trans,
 		       struct inode *inode, const char *name,
 		       const void *value, size_t size, int flags)
 {
+<<<<<<< HEAD
 	struct btrfs_dir_item *di = NULL;
+=======
+	struct btrfs_dir_item *di;
+>>>>>>> v3.18
 	struct btrfs_root *root = BTRFS_I(inode)->root;
 	struct btrfs_path *path;
 	size_t name_len = strlen(name);
@@ -102,6 +114,7 @@ static int do_setxattr(struct btrfs_trans_handle *trans,
 	path = btrfs_alloc_path();
 	if (!path)
 		return -ENOMEM;
+<<<<<<< HEAD
 	path->skip_release_on_error = 1;
 
 	if (!value) {
@@ -224,6 +237,86 @@ static int do_setxattr(struct btrfs_trans_handle *trans,
 		 * where our xattr dir_item is and btrfs_insert_xattr_item()
 		 * filled it.
 		 */
+=======
+
+	if (flags & XATTR_REPLACE) {
+		di = btrfs_lookup_xattr(trans, root, path, btrfs_ino(inode), name,
+					name_len, -1);
+		if (IS_ERR(di)) {
+			ret = PTR_ERR(di);
+			goto out;
+		} else if (!di) {
+			ret = -ENODATA;
+			goto out;
+		}
+		ret = btrfs_delete_one_dir_name(trans, root, path, di);
+		if (ret)
+			goto out;
+		btrfs_release_path(path);
+
+		/*
+		 * remove the attribute
+		 */
+		if (!value)
+			goto out;
+	} else {
+		di = btrfs_lookup_xattr(NULL, root, path, btrfs_ino(inode),
+					name, name_len, 0);
+		if (IS_ERR(di)) {
+			ret = PTR_ERR(di);
+			goto out;
+		}
+		if (!di && !value)
+			goto out;
+		btrfs_release_path(path);
+	}
+
+again:
+	ret = btrfs_insert_xattr_item(trans, root, path, btrfs_ino(inode),
+				      name, name_len, value, size);
+	/*
+	 * If we're setting an xattr to a new value but the new value is say
+	 * exactly BTRFS_MAX_XATTR_SIZE, we could end up with EOVERFLOW getting
+	 * back from split_leaf.  This is because it thinks we'll be extending
+	 * the existing item size, but we're asking for enough space to add the
+	 * item itself.  So if we get EOVERFLOW just set ret to EEXIST and let
+	 * the rest of the function figure it out.
+	 */
+	if (ret == -EOVERFLOW)
+		ret = -EEXIST;
+
+	if (ret == -EEXIST) {
+		if (flags & XATTR_CREATE)
+			goto out;
+		/*
+		 * We can't use the path we already have since we won't have the
+		 * proper locking for a delete, so release the path and
+		 * re-lookup to delete the thing.
+		 */
+		btrfs_release_path(path);
+		di = btrfs_lookup_xattr(trans, root, path, btrfs_ino(inode),
+					name, name_len, -1);
+		if (IS_ERR(di)) {
+			ret = PTR_ERR(di);
+			goto out;
+		} else if (!di) {
+			/* Shouldn't happen but just in case... */
+			btrfs_release_path(path);
+			goto again;
+		}
+
+		ret = btrfs_delete_one_dir_name(trans, root, path, di);
+		if (ret)
+			goto out;
+
+		/*
+		 * We have a value to set, so go back and try to insert it now.
+		 */
+		if (value) {
+			btrfs_release_path(path);
+			goto again;
+		}
+>>>>>>> v3.18
 	}
 out:
 	btrfs_free_path(path);
@@ -280,7 +373,11 @@ ssize_t btrfs_listxattr(struct dentry *dentry, char *buffer, size_t size)
 	 * first xattr that we find and walk forward
 	 */
 	key.objectid = btrfs_ino(inode);
+<<<<<<< HEAD
 	btrfs_set_key_type(&key, BTRFS_XATTR_ITEM_KEY);
+=======
+	key.type = BTRFS_XATTR_ITEM_KEY;
+>>>>>>> v3.18
 	key.offset = 0;
 
 	path = btrfs_alloc_path();
@@ -316,7 +413,11 @@ ssize_t btrfs_listxattr(struct dentry *dentry, char *buffer, size_t size)
 		/* check to make sure this item is what we want */
 		if (found_key.objectid != key.objectid)
 			break;
+<<<<<<< HEAD
 		if (btrfs_key_type(&found_key) != BTRFS_XATTR_ITEM_KEY)
+=======
+		if (found_key.type != BTRFS_XATTR_ITEM_KEY)
+>>>>>>> v3.18
 			break;
 
 		di = btrfs_item_ptr(leaf, slot, struct btrfs_dir_item);
@@ -358,8 +459,13 @@ err:
  */
 const struct xattr_handler *btrfs_xattr_handlers[] = {
 #ifdef CONFIG_BTRFS_FS_POSIX_ACL
+<<<<<<< HEAD
 	&btrfs_xattr_acl_access_handler,
 	&btrfs_xattr_acl_default_handler,
+=======
+	&posix_acl_access_xattr_handler,
+	&posix_acl_default_xattr_handler,
+>>>>>>> v3.18
 #endif
 	NULL,
 };
@@ -376,7 +482,12 @@ static bool btrfs_is_valid_xattr(const char *name)
 			XATTR_SECURITY_PREFIX_LEN) ||
 	       !strncmp(name, XATTR_SYSTEM_PREFIX, XATTR_SYSTEM_PREFIX_LEN) ||
 	       !strncmp(name, XATTR_TRUSTED_PREFIX, XATTR_TRUSTED_PREFIX_LEN) ||
+<<<<<<< HEAD
 	       !strncmp(name, XATTR_USER_PREFIX, XATTR_USER_PREFIX_LEN);
+=======
+	       !strncmp(name, XATTR_USER_PREFIX, XATTR_USER_PREFIX_LEN) ||
+		!strncmp(name, XATTR_BTRFS_PREFIX, XATTR_BTRFS_PREFIX_LEN);
+>>>>>>> v3.18
 }
 
 ssize_t btrfs_getxattr(struct dentry *dentry, const char *name,
@@ -418,6 +529,13 @@ int btrfs_setxattr(struct dentry *dentry, const char *name, const void *value,
 	if (!btrfs_is_valid_xattr(name))
 		return -EOPNOTSUPP;
 
+<<<<<<< HEAD
+=======
+	if (!strncmp(name, XATTR_BTRFS_PREFIX, XATTR_BTRFS_PREFIX_LEN))
+		return btrfs_set_prop(dentry->d_inode, name,
+				      value, size, flags);
+
+>>>>>>> v3.18
 	if (size == 0)
 		value = "";  /* empty EA, do not remove */
 
@@ -447,6 +565,13 @@ int btrfs_removexattr(struct dentry *dentry, const char *name)
 	if (!btrfs_is_valid_xattr(name))
 		return -EOPNOTSUPP;
 
+<<<<<<< HEAD
+=======
+	if (!strncmp(name, XATTR_BTRFS_PREFIX, XATTR_BTRFS_PREFIX_LEN))
+		return btrfs_set_prop(dentry->d_inode, name,
+				      NULL, 0, XATTR_REPLACE);
+
+>>>>>>> v3.18
 	return __btrfs_setxattr(NULL, dentry->d_inode, name, NULL, 0,
 				XATTR_REPLACE);
 }

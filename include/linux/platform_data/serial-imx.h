@@ -23,8 +23,11 @@
 #define IMXUART_IRDA        (1<<1)
 
 struct imxuart_platform_data {
+<<<<<<< HEAD
 	int (*init)(struct platform_device *pdev);
 	void (*exit)(struct platform_device *pdev);
+=======
+>>>>>>> v3.18
 	unsigned int flags;
 	void (*irda_enable)(int enable);
 	unsigned int irda_inv_rx:1;

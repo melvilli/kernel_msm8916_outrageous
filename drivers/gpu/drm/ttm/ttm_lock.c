@@ -186,6 +186,7 @@ int ttm_write_lock(struct ttm_lock *lock, bool interruptible)
 }
 EXPORT_SYMBOL(ttm_write_lock);
 
+<<<<<<< HEAD
 void ttm_write_lock_downgrade(struct ttm_lock *lock)
 {
 	spin_lock(&lock->lock);
@@ -194,6 +195,8 @@ void ttm_write_lock_downgrade(struct ttm_lock *lock)
 	spin_unlock(&lock->lock);
 }
 
+=======
+>>>>>>> v3.18
 static int __ttm_vt_unlock(struct ttm_lock *lock)
 {
 	int ret = 0;

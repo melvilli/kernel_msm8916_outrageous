@@ -25,10 +25,17 @@
 #include <asm/cpu.h>
 
 #ifdef CONFIG_X86_32
+<<<<<<< HEAD
 unsigned long saved_context_ebx;
 unsigned long saved_context_esp, saved_context_ebp;
 unsigned long saved_context_esi, saved_context_edi;
 unsigned long saved_context_eflags;
+=======
+__visible unsigned long saved_context_ebx;
+__visible unsigned long saved_context_esp, saved_context_ebp;
+__visible unsigned long saved_context_esi, saved_context_edi;
+__visible unsigned long saved_context_eflags;
+>>>>>>> v3.18
 #endif
 struct saved_context saved_context;
 
@@ -165,7 +172,11 @@ static void fix_processor_context(void)
  *		by __save_processor_state()
  *	@ctxt - structure to load the registers contents from
  */
+<<<<<<< HEAD
 static void __restore_processor_state(struct saved_context *ctxt)
+=======
+static void notrace __restore_processor_state(struct saved_context *ctxt)
+>>>>>>> v3.18
 {
 	if (ctxt->misc_enable_saved)
 		wrmsrl(MSR_IA32_MISC_ENABLE, ctxt->misc_enable);
@@ -239,7 +250,11 @@ static void __restore_processor_state(struct saved_context *ctxt)
 }
 
 /* Needed by apm.c */
+<<<<<<< HEAD
 void restore_processor_state(void)
+=======
+void notrace restore_processor_state(void)
+>>>>>>> v3.18
 {
 	__restore_processor_state(&saved_context);
 }

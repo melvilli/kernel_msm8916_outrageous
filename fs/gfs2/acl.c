@@ -49,10 +49,13 @@ struct posix_acl *gfs2_get_acl(struct inode *inode, int type)
 	if (!ip->i_eattr)
 		return NULL;
 
+<<<<<<< HEAD
 	acl = get_cached_acl(&ip->i_inode, type);
 	if (acl != ACL_NOT_CACHED)
 		return acl;
 
+=======
+>>>>>>> v3.18
 	name = gfs2_acl_name(type);
 	if (name == NULL)
 		return ERR_PTR(-EINVAL);
@@ -68,6 +71,7 @@ struct posix_acl *gfs2_get_acl(struct inode *inode, int type)
 	return acl;
 }
 
+<<<<<<< HEAD
 static int gfs2_set_mode(struct inode *inode, umode_t mode)
 {
 	int error = 0;
@@ -81,6 +85,9 @@ static int gfs2_set_mode(struct inode *inode, umode_t mode)
 }
 
 static int gfs2_acl_set(struct inode *inode, int type, struct posix_acl *acl)
+=======
+int gfs2_set_acl(struct inode *inode, struct posix_acl *acl, int type)
+>>>>>>> v3.18
 {
 	int error;
 	int len;
@@ -88,6 +95,7 @@ static int gfs2_acl_set(struct inode *inode, int type, struct posix_acl *acl)
 	const char *name = gfs2_acl_name(type);
 
 	BUG_ON(name == NULL);
+<<<<<<< HEAD
 	len = posix_acl_to_xattr(&init_user_ns, acl, NULL, 0);
 	if (len == 0)
 		return 0;
@@ -302,3 +310,52 @@ const struct xattr_handler gfs2_xattr_system_handler = {
 	.set    = gfs2_xattr_system_set,
 };
 
+=======
+
+	if (acl->a_count > GFS2_ACL_MAX_ENTRIES(GFS2_SB(inode)))
+		return -E2BIG;
+
+	if (type == ACL_TYPE_ACCESS) {
+		umode_t mode = inode->i_mode;
+
+		error = posix_acl_equiv_mode(acl, &mode);
+		if (error < 0)
+			return error;
+
+		if (error == 0)
+			acl = NULL;
+
+		if (mode != inode->i_mode) {
+			inode->i_mode = mode;
+			mark_inode_dirty(inode);
+		}
+	}
+
+	if (acl) {
+		len = posix_acl_to_xattr(&init_user_ns, acl, NULL, 0);
+		if (len == 0)
+			return 0;
+		data = kmalloc(len, GFP_NOFS);
+		if (data == NULL)
+			return -ENOMEM;
+		error = posix_acl_to_xattr(&init_user_ns, acl, data, len);
+		if (error < 0)
+			goto out;
+	} else {
+		data = NULL;
+		len = 0;
+	}
+
+	error = __gfs2_xattr_set(inode, name, data, len, 0, GFS2_EATYPE_SYS);
+	if (error)
+		goto out;
+
+	if (acl)
+		set_cached_acl(inode, type, acl);
+	else
+		forget_cached_acl(inode, type);
+out:
+	kfree(data);
+	return error;
+}
+>>>>>>> v3.18

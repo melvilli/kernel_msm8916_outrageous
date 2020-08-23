@@ -125,9 +125,12 @@ extern const struct cpumask *cpu_coregroup_mask(int cpu);
 #ifdef ENABLE_TOPO_DEFINES
 #define topology_core_cpumask(cpu)		(per_cpu(cpu_core_map, cpu))
 #define topology_thread_cpumask(cpu)		(per_cpu(cpu_sibling_map, cpu))
+<<<<<<< HEAD
 
 /* indicates that pointers to the topology cpumask_t maps are valid */
 #define arch_provides_topology_pointers		yes
+=======
+>>>>>>> v3.18
 #endif
 
 static inline void arch_fix_phys_package_id(int num, u32 slot)
@@ -135,6 +138,7 @@ static inline void arch_fix_phys_package_id(int num, u32 slot)
 }
 
 struct pci_bus;
+<<<<<<< HEAD
 void x86_pci_root_bus_resources(int bus, struct list_head *resources);
 
 #ifdef CONFIG_SMP
@@ -156,4 +160,9 @@ static inline void set_mp_bus_to_node(int busnum, int node)
 }
 #endif
 
+=======
+int x86_pci_root_bus_node(int bus);
+void x86_pci_root_bus_resources(int bus, struct list_head *resources);
+
+>>>>>>> v3.18
 #endif /* _ASM_X86_TOPOLOGY_H */

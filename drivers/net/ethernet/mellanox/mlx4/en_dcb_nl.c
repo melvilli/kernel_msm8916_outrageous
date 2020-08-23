@@ -62,7 +62,11 @@ static int mlx4_en_ets_validate(struct mlx4_en_priv *priv, struct ieee_ets *ets)
 	int has_ets_tc = 0;
 
 	for (i = 0; i < IEEE_8021QAZ_MAX_TCS; i++) {
+<<<<<<< HEAD
 		if (ets->prio_tc[i] > MLX4_EN_NUM_UP) {
+=======
+		if (ets->prio_tc[i] >= MLX4_EN_NUM_UP) {
+>>>>>>> v3.18
 			en_err(priv, "Bad priority in UP <=> TC mapping. TC: %d, UP: %d\n",
 					i, ets->prio_tc[i]);
 			return -EINVAL;
@@ -160,6 +164,10 @@ static int mlx4_en_dcbnl_ieee_setpfc(struct net_device *dev,
 		struct ieee_pfc *pfc)
 {
 	struct mlx4_en_priv *priv = netdev_priv(dev);
+<<<<<<< HEAD
+=======
+	struct mlx4_en_port_profile *prof = priv->prof;
+>>>>>>> v3.18
 	struct mlx4_en_dev *mdev = priv->mdev;
 	int err;
 
@@ -169,6 +177,7 @@ static int mlx4_en_dcbnl_ieee_setpfc(struct net_device *dev,
 			pfc->mbc,
 			pfc->delay);
 
+<<<<<<< HEAD
 	priv->prof->rx_pause = priv->prof->tx_pause = !!pfc->pfc_en;
 	priv->prof->rx_ppp = priv->prof->tx_ppp = pfc->pfc_en;
 
@@ -178,6 +187,19 @@ static int mlx4_en_dcbnl_ieee_setpfc(struct net_device *dev,
 				    priv->prof->tx_ppp,
 				    priv->prof->rx_pause,
 				    priv->prof->rx_ppp);
+=======
+	prof->rx_pause = !pfc->pfc_en;
+	prof->tx_pause = !pfc->pfc_en;
+	prof->rx_ppp = pfc->pfc_en;
+	prof->tx_ppp = pfc->pfc_en;
+
+	err = mlx4_SET_PORT_general(mdev->dev, priv->port,
+				    priv->rx_skb_size + ETH_FCS_LEN,
+				    prof->tx_pause,
+				    prof->tx_ppp,
+				    prof->rx_pause,
+				    prof->rx_ppp);
+>>>>>>> v3.18
 	if (err)
 		en_err(priv, "Failed setting pause params\n");
 
@@ -207,9 +229,12 @@ static int mlx4_en_dcbnl_ieee_getmaxrate(struct net_device *dev,
 	struct mlx4_en_priv *priv = netdev_priv(dev);
 	int i;
 
+<<<<<<< HEAD
 	if (!priv->maxrate)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 	for (i = 0; i < IEEE_8021QAZ_MAX_TCS; i++)
 		maxrate->tc_maxrate[i] =
 			priv->maxrate[i] * MLX4_RATELIMIT_UNITS_IN_KB;

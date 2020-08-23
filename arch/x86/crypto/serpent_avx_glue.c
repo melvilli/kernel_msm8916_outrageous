@@ -28,6 +28,10 @@
 #include <linux/types.h>
 #include <linux/crypto.h>
 #include <linux/err.h>
+<<<<<<< HEAD
+=======
+#include <crypto/ablk_helper.h>
+>>>>>>> v3.18
 #include <crypto/algapi.h>
 #include <crypto/serpent.h>
 #include <crypto/cryptd.h>
@@ -38,7 +42,10 @@
 #include <asm/xcr.h>
 #include <asm/xsave.h>
 #include <asm/crypto/serpent-avx.h>
+<<<<<<< HEAD
 #include <asm/crypto/ablk_helper.h>
+=======
+>>>>>>> v3.18
 #include <asm/crypto/glue_helper.h>
 
 /* 8-way parallel cipher functions */
@@ -617,4 +624,8 @@ module_exit(serpent_exit);
 
 MODULE_DESCRIPTION("Serpent Cipher Algorithm, AVX optimized");
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("serpent");
+=======
+MODULE_ALIAS("serpent");
+>>>>>>> v3.18

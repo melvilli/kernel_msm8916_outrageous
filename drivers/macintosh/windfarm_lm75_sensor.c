@@ -133,7 +133,11 @@ static int wf_lm75_probe(struct i2c_client *client,
 	lm->inited = 0;
 	lm->ds1775 = ds1775;
 	lm->i2c = client;
+<<<<<<< HEAD
 	lm->sens.name = (char *)name; /* XXX fix constness in structure */
+=======
+	lm->sens.name = name;
+>>>>>>> v3.18
 	lm->sens.ops = &wf_lm75_ops;
 	i2c_set_clientdata(client, lm);
 

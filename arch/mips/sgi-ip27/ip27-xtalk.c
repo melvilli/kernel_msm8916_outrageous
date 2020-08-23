@@ -7,7 +7,10 @@
  * Generic XTALK initialization code
  */
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/smp.h>
 #include <asm/sn/types.h>
@@ -23,7 +26,11 @@
 
 extern int bridge_probe(nasid_t nasid, int widget, int masterwid);
 
+<<<<<<< HEAD
 static int __cpuinit probe_one_port(nasid_t nasid, int widget, int masterwid)
+=======
+static int probe_one_port(nasid_t nasid, int widget, int masterwid)
+>>>>>>> v3.18
 {
 	widgetreg_t		widget_id;
 	xwidget_part_num_t	partnum;
@@ -47,7 +54,11 @@ static int __cpuinit probe_one_port(nasid_t nasid, int widget, int masterwid)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int __cpuinit xbow_probe(nasid_t nasid)
+=======
+static int xbow_probe(nasid_t nasid)
+>>>>>>> v3.18
 {
 	lboard_t *brd;
 	klxbow_t *xbow_p;
@@ -100,7 +111,11 @@ static int __cpuinit xbow_probe(nasid_t nasid)
 	return 0;
 }
 
+<<<<<<< HEAD
 void __cpuinit xtalk_probe_node(cnodeid_t nid)
+=======
+void xtalk_probe_node(cnodeid_t nid)
+>>>>>>> v3.18
 {
 	volatile u64		hubreg;
 	nasid_t			nasid;

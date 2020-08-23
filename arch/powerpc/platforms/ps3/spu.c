@@ -143,7 +143,11 @@ static void _dump_areas(unsigned int spe_id, unsigned long priv2,
 	pr_debug("%s:%d: shadow:  %lxh\n", func, line, shadow);
 }
 
+<<<<<<< HEAD
 inline u64 ps3_get_spe_id(void *arg)
+=======
+u64 ps3_get_spe_id(void *arg)
+>>>>>>> v3.18
 {
 	return spu_pdata(arg)->spe_id;
 }

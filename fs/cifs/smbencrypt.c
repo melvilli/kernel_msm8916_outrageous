@@ -29,6 +29,10 @@
 #include <linux/string.h>
 #include <linux/kernel.h>
 #include <linux/random.h>
+<<<<<<< HEAD
+=======
+#include "cifs_fs_sb.h"
+>>>>>>> v3.18
 #include "cifs_unicode.h"
 #include "cifspdu.h"
 #include "cifsglob.h"

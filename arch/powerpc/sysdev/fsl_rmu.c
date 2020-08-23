@@ -27,6 +27,10 @@
 #include <linux/types.h>
 #include <linux/dma-mapping.h>
 #include <linux/interrupt.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 #include <linux/of_platform.h>
 #include <linux/slab.h>
 
@@ -880,9 +884,15 @@ fsl_open_inb_mbox(struct rio_mport *mport, void *dev_id, int mbox, int entries)
 	rc = request_irq(IRQ_RIO_RX(mport), fsl_rio_rx_handler, 0,
 			 "msg_rx", (void *)mport);
 	if (rc < 0) {
+<<<<<<< HEAD
 		dma_free_coherent(priv->dev, RIO_MSG_BUFFER_SIZE,
 			rmu->msg_tx_ring.virt_buffer[i],
 			rmu->msg_tx_ring.phys_buffer[i]);
+=======
+		dma_free_coherent(priv->dev,
+			rmu->msg_rx_ring.size * RIO_MAX_MSG_SIZE,
+			rmu->msg_rx_ring.virt, rmu->msg_rx_ring.phys);
+>>>>>>> v3.18
 		goto out;
 	}
 

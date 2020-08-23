@@ -80,7 +80,10 @@ static char lancestr[] = "LANCE";
 #include <linux/in.h>
 #include <linux/string.h>
 #include <linux/delay.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/crc32.h>
 #include <linux/errno.h>
 #include <linux/socket.h> /* Used for the temporal inet entries and routing */
@@ -1470,7 +1473,11 @@ no_link_test:
 		goto fail;
 	}
 
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, lp);
+=======
+	platform_set_drvdata(op, lp);
+>>>>>>> v3.18
 
 	printk(KERN_INFO "%s: LANCE %pM\n",
 	       dev->name, dev->dev_addr);
@@ -1501,7 +1508,11 @@ static int sunlance_sbus_probe(struct platform_device *op)
 
 static int sunlance_sbus_remove(struct platform_device *op)
 {
+<<<<<<< HEAD
 	struct lance_private *lp = dev_get_drvdata(&op->dev);
+=======
+	struct lance_private *lp = platform_get_drvdata(op);
+>>>>>>> v3.18
 	struct net_device *net_dev = lp->dev;
 
 	unregister_netdev(net_dev);
@@ -1510,8 +1521,11 @@ static int sunlance_sbus_remove(struct platform_device *op)
 
 	free_netdev(net_dev);
 
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, NULL);
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

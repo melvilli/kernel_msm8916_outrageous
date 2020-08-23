@@ -196,6 +196,10 @@ static int ipipeif_hw_setup(struct v4l2_subdev *sd)
 	int data_shift;
 	int pack_mode;
 	int source1;
+<<<<<<< HEAD
+=======
+	int tmp;
+>>>>>>> v3.18
 
 	ipipeif_base_addr = ipipeif->ipipeif_base_addr;
 
@@ -206,8 +210,13 @@ static int ipipeif_hw_setup(struct v4l2_subdev *sd)
 	outformat = &ipipeif->formats[IPIPEIF_PAD_SOURCE];
 
 	/* Combine all the fields to make CFG1 register of IPIPEIF */
+<<<<<<< HEAD
 	val = get_oneshot_mode(ipipeif->input);
 	if (val < 0) {
+=======
+	tmp = val = get_oneshot_mode(ipipeif->input);
+	if (tmp < 0) {
+>>>>>>> v3.18
 		pr_err("ipipeif: links setup required");
 		return -EINVAL;
 	}
@@ -947,10 +956,17 @@ void vpfe_ipipeif_unregister_entities(struct vpfe_ipipeif_device *ipipeif)
 	/* unregister video device */
 	vpfe_video_unregister(&ipipeif->video_in);
 
+<<<<<<< HEAD
 	/* cleanup entity */
 	media_entity_cleanup(&ipipeif->subdev.entity);
 	/* unregister subdev */
 	v4l2_device_unregister_subdev(&ipipeif->subdev);
+=======
+	/* unregister subdev */
+	v4l2_device_unregister_subdev(&ipipeif->subdev);
+	/* cleanup entity */
+	media_entity_cleanup(&ipipeif->subdev.entity);
+>>>>>>> v3.18
 }
 
 int

@@ -159,8 +159,11 @@ struct pci_dn {
 
 	int	pci_ext_config_space;	/* for pci devices */
 
+<<<<<<< HEAD
 	int	force_32bit_msi:1;
 
+=======
+>>>>>>> v3.18
 	struct	pci_dev *pcidev;	/* back-pointer to the pci device */
 #ifdef CONFIG_EEH
 	struct eeh_dev *edev;		/* eeh device */
@@ -209,7 +212,10 @@ static inline struct eeh_dev *of_node_to_eeh_dev(struct device_node *dn)
 extern struct pci_bus *pcibios_find_pci_bus(struct device_node *dn);
 
 /** Remove all of the PCI devices under this bus */
+<<<<<<< HEAD
 extern void __pcibios_remove_pci_devices(struct pci_bus *bus, int purge_pe);
+=======
+>>>>>>> v3.18
 extern void pcibios_remove_pci_devices(struct pci_bus *bus);
 
 /** Discover new pci devices under this bus, and add them */

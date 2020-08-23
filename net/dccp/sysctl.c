@@ -20,6 +20,10 @@
 
 /* Boundary values */
 static int		zero     = 0,
+<<<<<<< HEAD
+=======
+			one      = 1,
+>>>>>>> v3.18
 			u8_max   = 0xFF;
 static unsigned long	seqw_min = DCCPF_SEQ_WMIN,
 			seqw_max = 0xFFFFFFFF;		/* maximum on 32 bit */
@@ -58,7 +62,11 @@ static struct ctl_table dccp_default_table[] = {
 		.maxlen		= sizeof(sysctl_dccp_request_retries),
 		.mode		= 0644,
 		.proc_handler	= proc_dointvec_minmax,
+<<<<<<< HEAD
 		.extra1		= &zero,
+=======
+		.extra1		= &one,
+>>>>>>> v3.18
 		.extra2		= &u8_max,
 	},
 	{

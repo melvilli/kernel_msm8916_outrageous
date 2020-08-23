@@ -136,6 +136,10 @@ int nla_validate(const struct nlattr *head, int len, int maxtype,
 errout:
 	return err;
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(nla_validate);
+>>>>>>> v3.18
 
 /**
  * nla_policy_len - Determin the max. length of a policy
@@ -162,6 +166,10 @@ nla_policy_len(const struct nla_policy *p, int n)
 
 	return len;
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(nla_policy_len);
+>>>>>>> v3.18
 
 /**
  * nla_parse - Parse a stream of attributes into a tb buffer
@@ -208,6 +216,10 @@ int nla_parse(struct nlattr **tb, int maxtype, const struct nlattr *head,
 errout:
 	return err;
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(nla_parse);
+>>>>>>> v3.18
 
 /**
  * nla_find - Find a specific attribute in a stream of attributes
@@ -228,6 +240,10 @@ struct nlattr *nla_find(const struct nlattr *head, int len, int attrtype)
 
 	return NULL;
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(nla_find);
+>>>>>>> v3.18
 
 /**
  * nla_strlcpy - Copy string attribute payload into a sized buffer
@@ -258,6 +274,10 @@ size_t nla_strlcpy(char *dst, const struct nlattr *nla, size_t dstsize)
 
 	return srclen;
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(nla_strlcpy);
+>>>>>>> v3.18
 
 /**
  * nla_memcpy - Copy a netlink attribute into another memory area
@@ -278,6 +298,10 @@ int nla_memcpy(void *dest, const struct nlattr *src, int count)
 
 	return minlen;
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(nla_memcpy);
+>>>>>>> v3.18
 
 /**
  * nla_memcmp - Compare an attribute with sized memory area
@@ -295,6 +319,10 @@ int nla_memcmp(const struct nlattr *nla, const void *data,
 
 	return d;
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(nla_memcmp);
+>>>>>>> v3.18
 
 /**
  * nla_strcmp - Compare a string attribute against a string
@@ -317,6 +345,10 @@ int nla_strcmp(const struct nlattr *nla, const char *str)
 
 	return d;
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(nla_strcmp);
+>>>>>>> v3.18
 
 #ifdef CONFIG_NET
 /**
@@ -502,6 +534,7 @@ int nla_append(struct sk_buff *skb, int attrlen, const void *data)
 }
 EXPORT_SYMBOL(nla_append);
 #endif
+<<<<<<< HEAD
 
 EXPORT_SYMBOL(nla_validate);
 EXPORT_SYMBOL(nla_policy_len);
@@ -511,3 +544,5 @@ EXPORT_SYMBOL(nla_strlcpy);
 EXPORT_SYMBOL(nla_memcpy);
 EXPORT_SYMBOL(nla_memcmp);
 EXPORT_SYMBOL(nla_strcmp);
+=======
+>>>>>>> v3.18

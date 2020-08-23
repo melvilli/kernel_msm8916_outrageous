@@ -116,7 +116,11 @@ static int clk_frac_set_rate(struct clk_hw *hw, unsigned long drate,
 	return 0;
 }
 
+<<<<<<< HEAD
 struct clk_ops clk_frac_ops = {
+=======
+static struct clk_ops clk_frac_ops = {
+>>>>>>> v3.18
 	.recalc_rate = clk_frac_recalc_rate,
 	.round_rate = clk_frac_round_rate,
 	.set_rate = clk_frac_set_rate,

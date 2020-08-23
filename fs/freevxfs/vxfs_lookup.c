@@ -49,7 +49,11 @@
 
 
 static struct dentry *	vxfs_lookup(struct inode *, struct dentry *, unsigned int);
+<<<<<<< HEAD
 static int		vxfs_readdir(struct file *, void *, filldir_t);
+=======
+static int		vxfs_readdir(struct file *, struct dir_context *);
+>>>>>>> v3.18
 
 const struct inode_operations vxfs_dir_inode_ops = {
 	.lookup =		vxfs_lookup,
@@ -58,7 +62,11 @@ const struct inode_operations vxfs_dir_inode_ops = {
 const struct file_operations vxfs_dir_operations = {
 	.llseek =		generic_file_llseek,
 	.read =			generic_read_dir,
+<<<<<<< HEAD
 	.readdir =		vxfs_readdir,
+=======
+	.iterate =		vxfs_readdir,
+>>>>>>> v3.18
 };
 
  
@@ -192,7 +200,11 @@ vxfs_inode_by_name(struct inode *dip, struct dentry *dp)
  * vxfs_lookup - lookup pathname component
  * @dip:	dir in which we lookup
  * @dp:		dentry we lookup
+<<<<<<< HEAD
  * @nd:		lookup nameidata
+=======
+ * @flags:	lookup flags
+>>>>>>> v3.18
  *
  * Description:
  *   vxfs_lookup tries to lookup the pathname component described
@@ -235,7 +247,11 @@ vxfs_lookup(struct inode *dip, struct dentry *dp, unsigned int flags)
  *   Zero.
  */
 static int
+<<<<<<< HEAD
 vxfs_readdir(struct file *fp, void *retp, filldir_t filler)
+=======
+vxfs_readdir(struct file *fp, struct dir_context *ctx)
+>>>>>>> v3.18
 {
 	struct inode		*ip = file_inode(fp);
 	struct super_block	*sbp = ip->i_sb;
@@ -243,6 +259,7 @@ vxfs_readdir(struct file *fp, void *retp, filldir_t filler)
 	u_long			page, npages, block, pblocks, nblocks, offset;
 	loff_t			pos;
 
+<<<<<<< HEAD
 	switch ((long)fp->f_pos) {
 	case 0:
 		if (filler(retp, ".", 1, fp->f_pos, ip->i_ino, DT_DIR) < 0)
@@ -257,6 +274,19 @@ vxfs_readdir(struct file *fp, void *retp, filldir_t filler)
 	}
 
 	pos = fp->f_pos - 2;
+=======
+	if (ctx->pos == 0) {
+		if (!dir_emit_dot(fp, ctx))
+			return 0;
+		ctx->pos = 1;
+	}
+	if (ctx->pos == 1) {
+		if (!dir_emit(ctx, "..", 2, VXFS_INO(ip)->vii_dotdot, DT_DIR))
+			return 0;
+		ctx->pos = 2;
+	}
+	pos = ctx->pos - 2;
+>>>>>>> v3.18
 	
 	if (pos > VXFS_DIRROUND(ip->i_size))
 		return 0;
@@ -270,16 +300,27 @@ vxfs_readdir(struct file *fp, void *retp, filldir_t filler)
 	block = (u_long)(pos >> sbp->s_blocksize_bits) % pblocks;
 
 	for (; page < npages; page++, block = 0) {
+<<<<<<< HEAD
 		caddr_t			kaddr;
+=======
+		char			*kaddr;
+>>>>>>> v3.18
 		struct page		*pp;
 
 		pp = vxfs_get_page(ip->i_mapping, page);
 		if (IS_ERR(pp))
 			continue;
+<<<<<<< HEAD
 		kaddr = (caddr_t)page_address(pp);
 
 		for (; block <= nblocks && block <= pblocks; block++) {
 			caddr_t			baddr, limit;
+=======
+		kaddr = (char *)page_address(pp);
+
+		for (; block <= nblocks && block <= pblocks; block++) {
+			char			*baddr, *limit;
+>>>>>>> v3.18
 			struct vxfs_dirblk	*dbp;
 			struct vxfs_direct	*de;
 
@@ -292,14 +333,19 @@ vxfs_readdir(struct file *fp, void *retp, filldir_t filler)
 				 (kaddr + offset) :
 				 (baddr + VXFS_DIRBLKOV(dbp)));
 
+<<<<<<< HEAD
 			for (; (caddr_t)de <= limit; de = vxfs_next_entry(de)) {
 				int	over;
 
+=======
+			for (; (char *)de <= limit; de = vxfs_next_entry(de)) {
+>>>>>>> v3.18
 				if (!de->d_reclen)
 					break;
 				if (!de->d_ino)
 					continue;
 
+<<<<<<< HEAD
 				offset = (caddr_t)de - kaddr;
 				over = filler(retp, de->d_name, de->d_namelen,
 					((page << PAGE_CACHE_SHIFT) | offset) + 2,
@@ -307,6 +353,14 @@ vxfs_readdir(struct file *fp, void *retp, filldir_t filler)
 				if (over) {
 					vxfs_put_page(pp);
 					goto done;
+=======
+				offset = (char *)de - kaddr;
+				ctx->pos = ((page << PAGE_CACHE_SHIFT) | offset) + 2;
+				if (!dir_emit(ctx, de->d_name, de->d_namelen,
+					de->d_ino, DT_UNKNOWN)) {
+					vxfs_put_page(pp);
+					return 0;
+>>>>>>> v3.18
 				}
 			}
 			offset = 0;
@@ -314,9 +368,13 @@ vxfs_readdir(struct file *fp, void *retp, filldir_t filler)
 		vxfs_put_page(pp);
 		offset = 0;
 	}
+<<<<<<< HEAD
 
 done:
 	fp->f_pos = ((page << PAGE_CACHE_SHIFT) | offset) + 2;
 out:
+=======
+	ctx->pos = ((page << PAGE_CACHE_SHIFT) | offset) + 2;
+>>>>>>> v3.18
 	return 0;
 }

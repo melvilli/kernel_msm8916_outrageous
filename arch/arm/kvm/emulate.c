@@ -354,7 +354,11 @@ static void inject_abt(struct kvm_vcpu *vcpu, bool is_pabt, unsigned long addr)
 	*vcpu_pc(vcpu) = exc_vector_base(vcpu) + vect_offset;
 
 	if (is_pabt) {
+<<<<<<< HEAD
 		/* Set DFAR and DFSR */
+=======
+		/* Set IFAR and IFSR */
+>>>>>>> v3.18
 		vcpu->arch.cp15[c6_IFAR] = addr;
 		is_lpae = (vcpu->arch.cp15[c2_TTBCR] >> 31);
 		/* Always give debug fault for now - should give guest a clue */

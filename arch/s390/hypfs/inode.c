@@ -28,8 +28,12 @@
 #define HYPFS_MAGIC 0x687970	/* ASCII 'hyp' */
 #define TMP_SIZE 64		/* size of temporary buffers */
 
+<<<<<<< HEAD
 static struct dentry *hypfs_create_update_file(struct super_block *sb,
 					       struct dentry *dir);
+=======
+static struct dentry *hypfs_create_update_file(struct dentry *dir);
+>>>>>>> v3.18
 
 struct hypfs_sb_info {
 	kuid_t uid;			/* uid used for files and dirs */
@@ -193,9 +197,15 @@ static ssize_t hypfs_aio_write(struct kiocb *iocb, const struct iovec *iov,
 	}
 	hypfs_delete_tree(sb->s_root);
 	if (MACHINE_IS_VM)
+<<<<<<< HEAD
 		rc = hypfs_vm_create_files(sb, sb->s_root);
 	else
 		rc = hypfs_diag_create_files(sb, sb->s_root);
+=======
+		rc = hypfs_vm_create_files(sb->s_root);
+	else
+		rc = hypfs_diag_create_files(sb->s_root);
+>>>>>>> v3.18
 	if (rc) {
 		pr_err("Updating the hypfs tree failed\n");
 		hypfs_delete_tree(sb->s_root);
@@ -302,12 +312,21 @@ static int hypfs_fill_super(struct super_block *sb, void *data, int silent)
 	if (!root_dentry)
 		return -ENOMEM;
 	if (MACHINE_IS_VM)
+<<<<<<< HEAD
 		rc = hypfs_vm_create_files(sb, root_dentry);
 	else
 		rc = hypfs_diag_create_files(sb, root_dentry);
 	if (rc)
 		return rc;
 	sbi->update_file = hypfs_create_update_file(sb, root_dentry);
+=======
+		rc = hypfs_vm_create_files(root_dentry);
+	else
+		rc = hypfs_diag_create_files(root_dentry);
+	if (rc)
+		return rc;
+	sbi->update_file = hypfs_create_update_file(root_dentry);
+>>>>>>> v3.18
 	if (IS_ERR(sbi->update_file))
 		return PTR_ERR(sbi->update_file);
 	hypfs_update_update(sb);
@@ -334,8 +353,12 @@ static void hypfs_kill_super(struct super_block *sb)
 	kill_litter_super(sb);
 }
 
+<<<<<<< HEAD
 static struct dentry *hypfs_create_file(struct super_block *sb,
 					struct dentry *parent, const char *name,
+=======
+static struct dentry *hypfs_create_file(struct dentry *parent, const char *name,
+>>>>>>> v3.18
 					char *data, umode_t mode)
 {
 	struct dentry *dentry;
@@ -347,7 +370,11 @@ static struct dentry *hypfs_create_file(struct super_block *sb,
 		dentry = ERR_PTR(-ENOMEM);
 		goto fail;
 	}
+<<<<<<< HEAD
 	inode = hypfs_make_inode(sb, mode);
+=======
+	inode = hypfs_make_inode(parent->d_sb, mode);
+>>>>>>> v3.18
 	if (!inode) {
 		dput(dentry);
 		dentry = ERR_PTR(-ENOMEM);
@@ -373,24 +400,40 @@ fail:
 	return dentry;
 }
 
+<<<<<<< HEAD
 struct dentry *hypfs_mkdir(struct super_block *sb, struct dentry *parent,
 			   const char *name)
 {
 	struct dentry *dentry;
 
 	dentry = hypfs_create_file(sb, parent, name, NULL, S_IFDIR | DIR_MODE);
+=======
+struct dentry *hypfs_mkdir(struct dentry *parent, const char *name)
+{
+	struct dentry *dentry;
+
+	dentry = hypfs_create_file(parent, name, NULL, S_IFDIR | DIR_MODE);
+>>>>>>> v3.18
 	if (IS_ERR(dentry))
 		return dentry;
 	hypfs_add_dentry(dentry);
 	return dentry;
 }
 
+<<<<<<< HEAD
 static struct dentry *hypfs_create_update_file(struct super_block *sb,
 					       struct dentry *dir)
 {
 	struct dentry *dentry;
 
 	dentry = hypfs_create_file(sb, dir, "update", NULL,
+=======
+static struct dentry *hypfs_create_update_file(struct dentry *dir)
+{
+	struct dentry *dentry;
+
+	dentry = hypfs_create_file(dir, "update", NULL,
+>>>>>>> v3.18
 				   S_IFREG | UPDATE_FILE_MODE);
 	/*
 	 * We do not put the update file on the 'delete' list with
@@ -400,7 +443,11 @@ static struct dentry *hypfs_create_update_file(struct super_block *sb,
 	return dentry;
 }
 
+<<<<<<< HEAD
 struct dentry *hypfs_create_u64(struct super_block *sb, struct dentry *dir,
+=======
+struct dentry *hypfs_create_u64(struct dentry *dir,
+>>>>>>> v3.18
 				const char *name, __u64 value)
 {
 	char *buffer;
@@ -412,7 +459,11 @@ struct dentry *hypfs_create_u64(struct super_block *sb, struct dentry *dir,
 	if (!buffer)
 		return ERR_PTR(-ENOMEM);
 	dentry =
+<<<<<<< HEAD
 	    hypfs_create_file(sb, dir, name, buffer, S_IFREG | REG_FILE_MODE);
+=======
+	    hypfs_create_file(dir, name, buffer, S_IFREG | REG_FILE_MODE);
+>>>>>>> v3.18
 	if (IS_ERR(dentry)) {
 		kfree(buffer);
 		return ERR_PTR(-ENOMEM);
@@ -421,7 +472,11 @@ struct dentry *hypfs_create_u64(struct super_block *sb, struct dentry *dir,
 	return dentry;
 }
 
+<<<<<<< HEAD
 struct dentry *hypfs_create_str(struct super_block *sb, struct dentry *dir,
+=======
+struct dentry *hypfs_create_str(struct dentry *dir,
+>>>>>>> v3.18
 				const char *name, char *string)
 {
 	char *buffer;
@@ -432,7 +487,11 @@ struct dentry *hypfs_create_str(struct super_block *sb, struct dentry *dir,
 		return ERR_PTR(-ENOMEM);
 	sprintf(buffer, "%s\n", string);
 	dentry =
+<<<<<<< HEAD
 	    hypfs_create_file(sb, dir, name, buffer, S_IFREG | REG_FILE_MODE);
+=======
+	    hypfs_create_file(dir, name, buffer, S_IFREG | REG_FILE_MODE);
+>>>>>>> v3.18
 	if (IS_ERR(dentry)) {
 		kfree(buffer);
 		return ERR_PTR(-ENOMEM);
@@ -482,10 +541,21 @@ static int __init hypfs_init(void)
 		rc = -ENODATA;
 		goto fail_hypfs_diag_exit;
 	}
+<<<<<<< HEAD
 	s390_kobj = kobject_create_and_add("s390", hypervisor_kobj);
 	if (!s390_kobj) {
 		rc = -ENOMEM;
 		goto fail_hypfs_vm_exit;
+=======
+	if (hypfs_sprp_init()) {
+		rc = -ENODATA;
+		goto fail_hypfs_vm_exit;
+	}
+	s390_kobj = kobject_create_and_add("s390", hypervisor_kobj);
+	if (!s390_kobj) {
+		rc = -ENOMEM;
+		goto fail_hypfs_sprp_exit;
+>>>>>>> v3.18
 	}
 	rc = register_filesystem(&hypfs_type);
 	if (rc)
@@ -494,6 +564,11 @@ static int __init hypfs_init(void)
 
 fail_filesystem:
 	kobject_put(s390_kobj);
+<<<<<<< HEAD
+=======
+fail_hypfs_sprp_exit:
+	hypfs_sprp_exit();
+>>>>>>> v3.18
 fail_hypfs_vm_exit:
 	hypfs_vm_exit();
 fail_hypfs_diag_exit:
@@ -506,11 +581,20 @@ fail_dbfs_exit:
 
 static void __exit hypfs_exit(void)
 {
+<<<<<<< HEAD
 	hypfs_diag_exit();
 	hypfs_vm_exit();
 	hypfs_dbfs_exit();
 	unregister_filesystem(&hypfs_type);
 	kobject_put(s390_kobj);
+=======
+	unregister_filesystem(&hypfs_type);
+	kobject_put(s390_kobj);
+	hypfs_sprp_exit();
+	hypfs_vm_exit();
+	hypfs_diag_exit();
+	hypfs_dbfs_exit();
+>>>>>>> v3.18
 }
 
 module_init(hypfs_init)

@@ -16,15 +16,26 @@
  */
 
 #include <linux/clk.h>
+<<<<<<< HEAD
+=======
+#include <linux/clk-provider.h>
+>>>>>>> v3.18
 #include <linux/interrupt.h>
 #include <linux/clockchips.h>
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
 #include <linux/clk-provider.h>
 
 /*
  * This driver configures the 2 16-bit count-up timers as follows:
+=======
+#include <linux/sched_clock.h>
+
+/*
+ * This driver configures the 2 16/32-bit count-up timers as follows:
+>>>>>>> v3.18
  *
  * T1: Timer 1, clocksource for generic timekeeping
  * T2: Timer 2, clockevent source for hrtimers
@@ -51,6 +62,13 @@
 
 #define TTC_CNT_CNTRL_DISABLE_MASK	0x1
 
+<<<<<<< HEAD
+=======
+#define TTC_CLK_CNTRL_CSRC_MASK		(1 << 5)	/* clock source */
+#define TTC_CLK_CNTRL_PSV_MASK		0x1e
+#define TTC_CLK_CNTRL_PSV_SHIFT		1
+
+>>>>>>> v3.18
 /*
  * Setup the timers to use pre-scaling, using a fixed value for now that will
  * work across most input frequency, but it may need to be more dynamic
@@ -61,15 +79,28 @@
 #define CLK_CNTRL_PRESCALE_EN	1
 #define CNT_CNTRL_RESET		(1 << 4)
 
+<<<<<<< HEAD
+=======
+#define MAX_F_ERR 50
+
+>>>>>>> v3.18
 /**
  * struct ttc_timer - This definition defines local timer structure
  *
  * @base_addr:	Base address of timer
+<<<<<<< HEAD
+=======
+ * @freq:	Timer input clock frequency
+>>>>>>> v3.18
  * @clk:	Associated clock source
  * @clk_rate_change_nb	Notifier block for clock rate changes
  */
 struct ttc_timer {
 	void __iomem *base_addr;
+<<<<<<< HEAD
+=======
+	unsigned long freq;
+>>>>>>> v3.18
 	struct clk *clk;
 	struct notifier_block clk_rate_change_nb;
 };
@@ -78,6 +109,11 @@ struct ttc_timer {
 		container_of(x, struct ttc_timer, clk_rate_change_nb)
 
 struct ttc_timer_clocksource {
+<<<<<<< HEAD
+=======
+	u32			scale_clk_ctrl_reg_old;
+	u32			scale_clk_ctrl_reg_new;
+>>>>>>> v3.18
 	struct ttc_timer	ttc;
 	struct clocksource	cs;
 };
@@ -93,6 +129,11 @@ struct ttc_timer_clockevent {
 #define to_ttc_timer_clkevent(x) \
 		container_of(x, struct ttc_timer_clockevent, ce)
 
+<<<<<<< HEAD
+=======
+static void __iomem *ttc_sched_clock_val_reg;
+
+>>>>>>> v3.18
 /**
  * ttc_set_interval - Set the timer interval value
  *
@@ -105,11 +146,19 @@ static void ttc_set_interval(struct ttc_timer *timer,
 	u32 ctrl_reg;
 
 	/* Disable the counter, set the counter value  and re-enable counter */
+<<<<<<< HEAD
 	ctrl_reg = __raw_readl(timer->base_addr + TTC_CNT_CNTRL_OFFSET);
 	ctrl_reg |= TTC_CNT_CNTRL_DISABLE_MASK;
 	__raw_writel(ctrl_reg, timer->base_addr + TTC_CNT_CNTRL_OFFSET);
 
 	__raw_writel(cycles, timer->base_addr + TTC_INTR_VAL_OFFSET);
+=======
+	ctrl_reg = readl_relaxed(timer->base_addr + TTC_CNT_CNTRL_OFFSET);
+	ctrl_reg |= TTC_CNT_CNTRL_DISABLE_MASK;
+	writel_relaxed(ctrl_reg, timer->base_addr + TTC_CNT_CNTRL_OFFSET);
+
+	writel_relaxed(cycles, timer->base_addr + TTC_INTR_VAL_OFFSET);
+>>>>>>> v3.18
 
 	/*
 	 * Reset the counter (0x10) so that it starts from 0, one-shot
@@ -117,7 +166,11 @@ static void ttc_set_interval(struct ttc_timer *timer,
 	 */
 	ctrl_reg |= CNT_CNTRL_RESET;
 	ctrl_reg &= ~TTC_CNT_CNTRL_DISABLE_MASK;
+<<<<<<< HEAD
 	__raw_writel(ctrl_reg, timer->base_addr + TTC_CNT_CNTRL_OFFSET);
+=======
+	writel_relaxed(ctrl_reg, timer->base_addr + TTC_CNT_CNTRL_OFFSET);
+>>>>>>> v3.18
 }
 
 /**
@@ -134,7 +187,11 @@ static irqreturn_t ttc_clock_event_interrupt(int irq, void *dev_id)
 	struct ttc_timer *timer = &ttce->ttc;
 
 	/* Acknowledge the interrupt and call event handler */
+<<<<<<< HEAD
 	__raw_readl(timer->base_addr + TTC_ISR_OFFSET);
+=======
+	readl_relaxed(timer->base_addr + TTC_ISR_OFFSET);
+>>>>>>> v3.18
 
 	ttce->ce.event_handler(&ttce->ce);
 
@@ -150,10 +207,22 @@ static cycle_t __ttc_clocksource_read(struct clocksource *cs)
 {
 	struct ttc_timer *timer = &to_ttc_timer_clksrc(cs)->ttc;
 
+<<<<<<< HEAD
 	return (cycle_t)__raw_readl(timer->base_addr +
 				TTC_COUNT_VAL_OFFSET);
 }
 
+=======
+	return (cycle_t)readl_relaxed(timer->base_addr +
+				TTC_COUNT_VAL_OFFSET);
+}
+
+static u64 notrace ttc_sched_clock_read(void)
+{
+	return readl_relaxed(ttc_sched_clock_val_reg);
+}
+
+>>>>>>> v3.18
 /**
  * ttc_set_next_event - Sets the time interval for next event
  *
@@ -187,13 +256,19 @@ static void ttc_set_mode(enum clock_event_mode mode,
 
 	switch (mode) {
 	case CLOCK_EVT_MODE_PERIODIC:
+<<<<<<< HEAD
 		ttc_set_interval(timer,
 				DIV_ROUND_CLOSEST(clk_get_rate(ttce->ttc.clk),
 					PRESCALE * HZ));
+=======
+		ttc_set_interval(timer, DIV_ROUND_CLOSEST(ttce->ttc.freq,
+						PRESCALE * HZ));
+>>>>>>> v3.18
 		break;
 	case CLOCK_EVT_MODE_ONESHOT:
 	case CLOCK_EVT_MODE_UNUSED:
 	case CLOCK_EVT_MODE_SHUTDOWN:
+<<<<<<< HEAD
 		ctrl_reg = __raw_readl(timer->base_addr +
 					TTC_CNT_CNTRL_OFFSET);
 		ctrl_reg |= TTC_CNT_CNTRL_DISABLE_MASK;
@@ -205,6 +280,19 @@ static void ttc_set_mode(enum clock_event_mode mode,
 					TTC_CNT_CNTRL_OFFSET);
 		ctrl_reg &= ~TTC_CNT_CNTRL_DISABLE_MASK;
 		__raw_writel(ctrl_reg,
+=======
+		ctrl_reg = readl_relaxed(timer->base_addr +
+					TTC_CNT_CNTRL_OFFSET);
+		ctrl_reg |= TTC_CNT_CNTRL_DISABLE_MASK;
+		writel_relaxed(ctrl_reg,
+				timer->base_addr + TTC_CNT_CNTRL_OFFSET);
+		break;
+	case CLOCK_EVT_MODE_RESUME:
+		ctrl_reg = readl_relaxed(timer->base_addr +
+					TTC_CNT_CNTRL_OFFSET);
+		ctrl_reg &= ~TTC_CNT_CNTRL_DISABLE_MASK;
+		writel_relaxed(ctrl_reg,
+>>>>>>> v3.18
 				timer->base_addr + TTC_CNT_CNTRL_OFFSET);
 		break;
 	}
@@ -219,6 +307,7 @@ static int ttc_rate_change_clocksource_cb(struct notifier_block *nb,
 			struct ttc_timer_clocksource, ttc);
 
 	switch (event) {
+<<<<<<< HEAD
 	case POST_RATE_CHANGE:
 		/*
 		 * Do whatever is necessary to maintain a proper time base
@@ -248,6 +337,95 @@ static int ttc_rate_change_clocksource_cb(struct notifier_block *nb,
 }
 
 static void __init ttc_setup_clocksource(struct clk *clk, void __iomem *base)
+=======
+	case PRE_RATE_CHANGE:
+	{
+		u32 psv;
+		unsigned long factor, rate_low, rate_high;
+
+		if (ndata->new_rate > ndata->old_rate) {
+			factor = DIV_ROUND_CLOSEST(ndata->new_rate,
+					ndata->old_rate);
+			rate_low = ndata->old_rate;
+			rate_high = ndata->new_rate;
+		} else {
+			factor = DIV_ROUND_CLOSEST(ndata->old_rate,
+					ndata->new_rate);
+			rate_low = ndata->new_rate;
+			rate_high = ndata->old_rate;
+		}
+
+		if (!is_power_of_2(factor))
+				return NOTIFY_BAD;
+
+		if (abs(rate_high - (factor * rate_low)) > MAX_F_ERR)
+			return NOTIFY_BAD;
+
+		factor = __ilog2_u32(factor);
+
+		/*
+		 * store timer clock ctrl register so we can restore it in case
+		 * of an abort.
+		 */
+		ttccs->scale_clk_ctrl_reg_old =
+			readl_relaxed(ttccs->ttc.base_addr +
+			TTC_CLK_CNTRL_OFFSET);
+
+		psv = (ttccs->scale_clk_ctrl_reg_old &
+				TTC_CLK_CNTRL_PSV_MASK) >>
+				TTC_CLK_CNTRL_PSV_SHIFT;
+		if (ndata->new_rate < ndata->old_rate)
+			psv -= factor;
+		else
+			psv += factor;
+
+		/* prescaler within legal range? */
+		if (psv & ~(TTC_CLK_CNTRL_PSV_MASK >> TTC_CLK_CNTRL_PSV_SHIFT))
+			return NOTIFY_BAD;
+
+		ttccs->scale_clk_ctrl_reg_new = ttccs->scale_clk_ctrl_reg_old &
+			~TTC_CLK_CNTRL_PSV_MASK;
+		ttccs->scale_clk_ctrl_reg_new |= psv << TTC_CLK_CNTRL_PSV_SHIFT;
+
+
+		/* scale down: adjust divider in post-change notification */
+		if (ndata->new_rate < ndata->old_rate)
+			return NOTIFY_DONE;
+
+		/* scale up: adjust divider now - before frequency change */
+		writel_relaxed(ttccs->scale_clk_ctrl_reg_new,
+			       ttccs->ttc.base_addr + TTC_CLK_CNTRL_OFFSET);
+		break;
+	}
+	case POST_RATE_CHANGE:
+		/* scale up: pre-change notification did the adjustment */
+		if (ndata->new_rate > ndata->old_rate)
+			return NOTIFY_OK;
+
+		/* scale down: adjust divider now - after frequency change */
+		writel_relaxed(ttccs->scale_clk_ctrl_reg_new,
+			       ttccs->ttc.base_addr + TTC_CLK_CNTRL_OFFSET);
+		break;
+
+	case ABORT_RATE_CHANGE:
+		/* we have to undo the adjustment in case we scale up */
+		if (ndata->new_rate < ndata->old_rate)
+			return NOTIFY_OK;
+
+		/* restore original register value */
+		writel_relaxed(ttccs->scale_clk_ctrl_reg_old,
+			       ttccs->ttc.base_addr + TTC_CLK_CNTRL_OFFSET);
+		/* fall through */
+	default:
+		return NOTIFY_DONE;
+	}
+
+	return NOTIFY_DONE;
+}
+
+static void __init ttc_setup_clocksource(struct clk *clk, void __iomem *base,
+					 u32 timer_width)
+>>>>>>> v3.18
 {
 	struct ttc_timer_clocksource *ttccs;
 	int err;
@@ -264,6 +442,11 @@ static void __init ttc_setup_clocksource(struct clk *clk, void __iomem *base)
 		return;
 	}
 
+<<<<<<< HEAD
+=======
+	ttccs->ttc.freq = clk_get_rate(ttccs->ttc.clk);
+
+>>>>>>> v3.18
 	ttccs->ttc.clk_rate_change_nb.notifier_call =
 		ttc_rate_change_clocksource_cb;
 	ttccs->ttc.clk_rate_change_nb.next = NULL;
@@ -275,7 +458,11 @@ static void __init ttc_setup_clocksource(struct clk *clk, void __iomem *base)
 	ttccs->cs.name = "ttc_clocksource";
 	ttccs->cs.rating = 200;
 	ttccs->cs.read = __ttc_clocksource_read;
+<<<<<<< HEAD
 	ttccs->cs.mask = CLOCKSOURCE_MASK(16);
+=======
+	ttccs->cs.mask = CLOCKSOURCE_MASK(timer_width);
+>>>>>>> v3.18
 	ttccs->cs.flags = CLOCK_SOURCE_IS_CONTINUOUS;
 
 	/*
@@ -283,6 +470,7 @@ static void __init ttc_setup_clocksource(struct clk *clk, void __iomem *base)
 	 * with no interrupt and it rolls over at 0xFFFF. Pre-scale
 	 * it by 32 also. Let it start running now.
 	 */
+<<<<<<< HEAD
 	__raw_writel(0x0,  ttccs->ttc.base_addr + TTC_IER_OFFSET);
 	__raw_writel(CLK_CNTRL_PRESCALE | CLK_CNTRL_PRESCALE_EN,
 		     ttccs->ttc.base_addr + TTC_CLK_CNTRL_OFFSET);
@@ -291,10 +479,26 @@ static void __init ttc_setup_clocksource(struct clk *clk, void __iomem *base)
 
 	err = clocksource_register_hz(&ttccs->cs,
 			clk_get_rate(ttccs->ttc.clk) / PRESCALE);
+=======
+	writel_relaxed(0x0,  ttccs->ttc.base_addr + TTC_IER_OFFSET);
+	writel_relaxed(CLK_CNTRL_PRESCALE | CLK_CNTRL_PRESCALE_EN,
+		     ttccs->ttc.base_addr + TTC_CLK_CNTRL_OFFSET);
+	writel_relaxed(CNT_CNTRL_RESET,
+		     ttccs->ttc.base_addr + TTC_CNT_CNTRL_OFFSET);
+
+	err = clocksource_register_hz(&ttccs->cs, ttccs->ttc.freq / PRESCALE);
+>>>>>>> v3.18
 	if (WARN_ON(err)) {
 		kfree(ttccs);
 		return;
 	}
+<<<<<<< HEAD
+=======
+
+	ttc_sched_clock_val_reg = base + TTC_COUNT_VAL_OFFSET;
+	sched_clock_register(ttc_sched_clock_read, timer_width,
+			     ttccs->ttc.freq / PRESCALE);
+>>>>>>> v3.18
 }
 
 static int ttc_rate_change_clockevent_cb(struct notifier_block *nb,
@@ -307,6 +511,7 @@ static int ttc_rate_change_clockevent_cb(struct notifier_block *nb,
 
 	switch (event) {
 	case POST_RATE_CHANGE:
+<<<<<<< HEAD
 	{
 		unsigned long flags;
 
@@ -323,6 +528,14 @@ static int ttc_rate_change_clockevent_cb(struct notifier_block *nb,
 
 		/* fall through */
 	}
+=======
+		/* update cached frequency */
+		ttc->freq = ndata->new_rate;
+
+		clockevents_update_freq(&ttcce->ce, ndata->new_rate / PRESCALE);
+
+		/* fall through */
+>>>>>>> v3.18
 	case PRE_RATE_CHANGE:
 	case ABORT_RATE_CHANGE:
 	default:
@@ -354,6 +567,10 @@ static void __init ttc_setup_clockevent(struct clk *clk,
 	if (clk_notifier_register(ttcce->ttc.clk,
 				&ttcce->ttc.clk_rate_change_nb))
 		pr_warn("Unable to register clock notifier.\n");
+<<<<<<< HEAD
+=======
+	ttcce->ttc.freq = clk_get_rate(ttcce->ttc.clk);
+>>>>>>> v3.18
 
 	ttcce->ttc.base_addr = base;
 	ttcce->ce.name = "ttc_clockevent";
@@ -369,6 +586,7 @@ static void __init ttc_setup_clockevent(struct clk *clk,
 	 * is prescaled by 32 using the interval interrupt. Leave it
 	 * disabled for now.
 	 */
+<<<<<<< HEAD
 	__raw_writel(0x23, ttcce->ttc.base_addr + TTC_CNT_CNTRL_OFFSET);
 	__raw_writel(CLK_CNTRL_PRESCALE | CLK_CNTRL_PRESCALE_EN,
 		     ttcce->ttc.base_addr + TTC_CLK_CNTRL_OFFSET);
@@ -377,13 +595,26 @@ static void __init ttc_setup_clockevent(struct clk *clk,
 	err = request_irq(irq, ttc_clock_event_interrupt,
 			  IRQF_DISABLED | IRQF_TIMER,
 			  ttcce->ce.name, ttcce);
+=======
+	writel_relaxed(0x23, ttcce->ttc.base_addr + TTC_CNT_CNTRL_OFFSET);
+	writel_relaxed(CLK_CNTRL_PRESCALE | CLK_CNTRL_PRESCALE_EN,
+		     ttcce->ttc.base_addr + TTC_CLK_CNTRL_OFFSET);
+	writel_relaxed(0x1,  ttcce->ttc.base_addr + TTC_IER_OFFSET);
+
+	err = request_irq(irq, ttc_clock_event_interrupt,
+			  IRQF_TIMER, ttcce->ce.name, ttcce);
+>>>>>>> v3.18
 	if (WARN_ON(err)) {
 		kfree(ttcce);
 		return;
 	}
 
 	clockevents_config_and_register(&ttcce->ce,
+<<<<<<< HEAD
 			clk_get_rate(ttcce->ttc.clk) / PRESCALE, 1, 0xfffe);
+=======
+			ttcce->ttc.freq / PRESCALE, 1, 0xfffe);
+>>>>>>> v3.18
 }
 
 /**
@@ -396,8 +627,15 @@ static void __init ttc_timer_init(struct device_node *timer)
 {
 	unsigned int irq;
 	void __iomem *timer_baseaddr;
+<<<<<<< HEAD
 	struct clk *clk;
 	static int initialized;
+=======
+	struct clk *clk_cs, *clk_ce;
+	static int initialized;
+	int clksel;
+	u32 timer_width = 16;
+>>>>>>> v3.18
 
 	if (initialized)
 		return;
@@ -421,14 +659,36 @@ static void __init ttc_timer_init(struct device_node *timer)
 		BUG();
 	}
 
+<<<<<<< HEAD
 	clk = of_clk_get_by_name(timer, "cpu_1x");
 	if (IS_ERR(clk)) {
+=======
+	of_property_read_u32(timer, "timer-width", &timer_width);
+
+	clksel = readl_relaxed(timer_baseaddr + TTC_CLK_CNTRL_OFFSET);
+	clksel = !!(clksel & TTC_CLK_CNTRL_CSRC_MASK);
+	clk_cs = of_clk_get(timer, clksel);
+	if (IS_ERR(clk_cs)) {
 		pr_err("ERROR: timer input clock not found\n");
 		BUG();
 	}
 
+	clksel = readl_relaxed(timer_baseaddr + 4 + TTC_CLK_CNTRL_OFFSET);
+	clksel = !!(clksel & TTC_CLK_CNTRL_CSRC_MASK);
+	clk_ce = of_clk_get(timer, clksel);
+	if (IS_ERR(clk_ce)) {
+>>>>>>> v3.18
+		pr_err("ERROR: timer input clock not found\n");
+		BUG();
+	}
+
+<<<<<<< HEAD
 	ttc_setup_clocksource(clk, timer_baseaddr);
 	ttc_setup_clockevent(clk, timer_baseaddr + 4, irq);
+=======
+	ttc_setup_clocksource(clk_cs, timer_baseaddr, timer_width);
+	ttc_setup_clockevent(clk_ce, timer_baseaddr + 4, irq);
+>>>>>>> v3.18
 
 	pr_info("%s #0 at %p, irq=%d\n", timer->name, timer_baseaddr, irq);
 }

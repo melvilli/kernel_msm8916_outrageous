@@ -24,6 +24,15 @@
  * configfs Copyright (C) 2005 Oracle.  All rights reserved.
  */
 
+<<<<<<< HEAD
+=======
+#ifdef pr_fmt
+#undef pr_fmt
+#endif
+
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/list.h>
 #include <linux/spinlock.h>

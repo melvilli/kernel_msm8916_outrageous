@@ -25,10 +25,15 @@
 #include <linux/platform_device.h>
 #include <linux/slab.h>
 #include <linux/spinlock.h>
+<<<<<<< HEAD
 #include <linux/cpu_pm.h>
 #include <linux/irq.h>
 #include <linux/uaccess.h>
 #include <linux/debugfs.h>
+=======
+#include <linux/irq.h>
+#include <linux/irqdesc.h>
+>>>>>>> v3.18
 
 #include <asm/cputype.h>
 #include <asm/irq_regs.h>
@@ -37,6 +42,7 @@
 /* Set at runtime when we know what CPU type we are. */
 static struct arm_pmu *cpu_pmu;
 
+<<<<<<< HEAD
 static DEFINE_PER_CPU(u32, from_idle);
 static DEFINE_PER_CPU(struct perf_event * [ARMPMU_MAX_HWEVENTS], hw_events);
 static DEFINE_PER_CPU(unsigned long [BITS_TO_LONGS(ARMPMU_MAX_HWEVENTS)], used_mask);
@@ -45,6 +51,12 @@ static DEFINE_PER_CPU(void *, pmu_irq_cookie);
 #ifdef CONFIG_PERF_EVENTS_RESET_PMU_DEBUGFS
 static u32 msm_perf_clear_l2_pmu;
 #endif
+=======
+static DEFINE_PER_CPU(struct arm_pmu *, percpu_pmu);
+static DEFINE_PER_CPU(struct perf_event * [ARMPMU_MAX_HWEVENTS], hw_events);
+static DEFINE_PER_CPU(unsigned long [BITS_TO_LONGS(ARMPMU_MAX_HWEVENTS)], used_mask);
+static DEFINE_PER_CPU(struct pmu_hw_events, cpu_hw_events);
+>>>>>>> v3.18
 
 /*
  * Despite the names, these two functions are CPU-specific and are used
@@ -74,20 +86,42 @@ EXPORT_SYMBOL_GPL(perf_num_counters);
 #include "perf_event_xscale.c"
 #include "perf_event_v6.c"
 #include "perf_event_v7.c"
+<<<<<<< HEAD
 #include "perf_event_msm_krait.c"
+=======
+>>>>>>> v3.18
 
 static struct pmu_hw_events *cpu_pmu_get_cpu_events(void)
 {
 	return this_cpu_ptr(&cpu_hw_events);
 }
 
+<<<<<<< HEAD
 void cpu_pmu_free_irq(struct arm_pmu *cpu_pmu)
+=======
+static void cpu_pmu_enable_percpu_irq(void *data)
+{
+	int irq = *(int *)data;
+
+	enable_percpu_irq(irq, IRQ_TYPE_NONE);
+}
+
+static void cpu_pmu_disable_percpu_irq(void *data)
+{
+	int irq = *(int *)data;
+
+	disable_percpu_irq(irq);
+}
+
+static void cpu_pmu_free_irq(struct arm_pmu *cpu_pmu)
+>>>>>>> v3.18
 {
 	int i, irq, irqs;
 	struct platform_device *pmu_device = cpu_pmu->plat_device;
 
 	irqs = min(pmu_device->num_resources, num_possible_cpus());
 
+<<<<<<< HEAD
 	for (i = 0; i < irqs; ++i) {
 		if (!cpumask_test_and_clear_cpu(i, &cpu_pmu->active_irqs))
 			continue;
@@ -97,6 +131,24 @@ void cpu_pmu_free_irq(struct arm_pmu *cpu_pmu)
 }
 
 int cpu_pmu_request_irq(struct arm_pmu *cpu_pmu, irq_handler_t handler)
+=======
+	irq = platform_get_irq(pmu_device, 0);
+	if (irq >= 0 && irq_is_percpu(irq)) {
+		on_each_cpu(cpu_pmu_disable_percpu_irq, &irq, 1);
+		free_percpu_irq(irq, &percpu_pmu);
+	} else {
+		for (i = 0; i < irqs; ++i) {
+			if (!cpumask_test_and_clear_cpu(i, &cpu_pmu->active_irqs))
+				continue;
+			irq = platform_get_irq(pmu_device, i);
+			if (irq >= 0)
+				free_irq(irq, cpu_pmu);
+		}
+	}
+}
+
+static int cpu_pmu_request_irq(struct arm_pmu *cpu_pmu, irq_handler_t handler)
+>>>>>>> v3.18
 {
 	int i, err, irq, irqs;
 	struct platform_device *pmu_device = cpu_pmu->plat_device;
@@ -106,6 +158,7 @@ int cpu_pmu_request_irq(struct arm_pmu *cpu_pmu, irq_handler_t handler)
 
 	irqs = min(pmu_device->num_resources, num_possible_cpus());
 	if (irqs < 1) {
+<<<<<<< HEAD
 		pr_err("no irqs for PMUs defined\n");
 		return -ENODEV;
 	}
@@ -128,13 +181,55 @@ int cpu_pmu_request_irq(struct arm_pmu *cpu_pmu, irq_handler_t handler)
 		}
 
 		err = cpu_pmu->request_pmu_irq(irq, &handler, &cpu_pmu);
+=======
+		printk_once("perf/ARM: No irqs for PMU defined, sampling events not supported\n");
+		return 0;
+	}
+
+	irq = platform_get_irq(pmu_device, 0);
+	if (irq >= 0 && irq_is_percpu(irq)) {
+		err = request_percpu_irq(irq, handler, "arm-pmu", &percpu_pmu);
+>>>>>>> v3.18
 		if (err) {
 			pr_err("unable to request IRQ%d for ARM PMU counters\n",
 				irq);
 			return err;
 		}
+<<<<<<< HEAD
 
 		cpumask_set_cpu(i, &cpu_pmu->active_irqs);
+=======
+		on_each_cpu(cpu_pmu_enable_percpu_irq, &irq, 1);
+	} else {
+		for (i = 0; i < irqs; ++i) {
+			err = 0;
+			irq = platform_get_irq(pmu_device, i);
+			if (irq < 0)
+				continue;
+
+			/*
+			 * If we have a single PMU interrupt that we can't shift,
+			 * assume that we're running on a uniprocessor machine and
+			 * continue. Otherwise, continue without this interrupt.
+			 */
+			if (irq_set_affinity(irq, cpumask_of(i)) && irqs > 1) {
+				pr_warn("unable to set irq affinity (irq=%d, cpu=%u)\n",
+					irq, i);
+				continue;
+			}
+
+			err = request_irq(irq, handler,
+					  IRQF_NOBALANCING | IRQF_NO_THREAD, "arm-pmu",
+					  cpu_pmu);
+			if (err) {
+				pr_err("unable to request IRQ%d for ARM PMU counters\n",
+					irq);
+				return err;
+			}
+
+			cpumask_set_cpu(i, &cpu_pmu->active_irqs);
+		}
+>>>>>>> v3.18
 	}
 
 	return 0;
@@ -143,14 +238,22 @@ int cpu_pmu_request_irq(struct arm_pmu *cpu_pmu, irq_handler_t handler)
 static void cpu_pmu_init(struct arm_pmu *cpu_pmu)
 {
 	int cpu;
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 	for_each_possible_cpu(cpu) {
 		struct pmu_hw_events *events = &per_cpu(cpu_hw_events, cpu);
 		events->events = per_cpu(hw_events, cpu);
 		events->used_mask = per_cpu(used_mask, cpu);
+<<<<<<< HEAD
 		events->from_idle = &per_cpu(from_idle, cpu);
 		per_cpu(pmu_irq_cookie, cpu) = cpu_pmu;
 		raw_spin_lock_init(&events->pmu_lock);
+=======
+		raw_spin_lock_init(&events->pmu_lock);
+		per_cpu(percpu_pmu, cpu) = cpu_pmu;
+>>>>>>> v3.18
 	}
 
 	cpu_pmu->get_hw_events	= cpu_pmu_get_cpu_events;
@@ -160,6 +263,7 @@ static void cpu_pmu_init(struct arm_pmu *cpu_pmu)
 	/* Ensure the PMU has sane values out of reset. */
 	if (cpu_pmu->reset)
 		on_each_cpu(cpu_pmu->reset, cpu_pmu, 1);
+<<<<<<< HEAD
 }
 
 static int cpu_has_active_perf(int cpu)
@@ -249,6 +353,12 @@ static void armpmu_hotplug_disable(void *parm_pmu)
 		event->state = PERF_EVENT_STATE_OFF;
 		pmu->stop(event, 0);
 	}
+=======
+
+	/* If no interrupts available, set the corresponding capability flag */
+	if (!platform_get_irq(cpu_pmu->plat_device, 0))
+		cpu_pmu->pmu.capabilities |= PERF_PMU_CAP_NO_INTERRUPT;
+>>>>>>> v3.18
 }
 
 /*
@@ -257,6 +367,7 @@ static void armpmu_hotplug_disable(void *parm_pmu)
  * UNKNOWN at reset, the PMU must be explicitly reset to avoid reading
  * junk values out of them.
  */
+<<<<<<< HEAD
 static int __cpuinit cpu_pmu_notify(struct notifier_block *b,
 				    unsigned long action, void *hcpu)
 {
@@ -362,33 +473,68 @@ static int perf_cpu_pm_notifier(struct notifier_block *self, unsigned long cmd,
 		}
 		break;
 	}
+=======
+static int cpu_pmu_notify(struct notifier_block *b, unsigned long action,
+			  void *hcpu)
+{
+	if ((action & ~CPU_TASKS_FROZEN) != CPU_STARTING)
+		return NOTIFY_DONE;
+
+	if (cpu_pmu && cpu_pmu->reset)
+		cpu_pmu->reset(cpu_pmu);
+	else
+		return NOTIFY_DONE;
+>>>>>>> v3.18
 
 	return NOTIFY_OK;
 }
 
+<<<<<<< HEAD
 static struct notifier_block perf_cpu_pm_notifier_block = {
 	.notifier_call = perf_cpu_pm_notifier,
+=======
+static struct notifier_block cpu_pmu_hotplug_notifier = {
+	.notifier_call = cpu_pmu_notify,
+>>>>>>> v3.18
 };
 
 /*
  * PMU platform driver and devicetree bindings.
  */
 static struct of_device_id cpu_pmu_of_device_ids[] = {
+<<<<<<< HEAD
 	{.compatible = "arm,cortex-a15-pmu",	.data = armv7_a15_pmu_init},
+=======
+	{.compatible = "arm,cortex-a17-pmu",	.data = armv7_a17_pmu_init},
+	{.compatible = "arm,cortex-a15-pmu",	.data = armv7_a15_pmu_init},
+	{.compatible = "arm,cortex-a12-pmu",	.data = armv7_a12_pmu_init},
+>>>>>>> v3.18
 	{.compatible = "arm,cortex-a9-pmu",	.data = armv7_a9_pmu_init},
 	{.compatible = "arm,cortex-a8-pmu",	.data = armv7_a8_pmu_init},
 	{.compatible = "arm,cortex-a7-pmu",	.data = armv7_a7_pmu_init},
 	{.compatible = "arm,cortex-a5-pmu",	.data = armv7_a5_pmu_init},
 	{.compatible = "arm,arm11mpcore-pmu",	.data = armv6mpcore_pmu_init},
+<<<<<<< HEAD
 	{.compatible = "arm,arm1176-pmu",	.data = armv6pmu_init},
 	{.compatible = "arm,arm1136-pmu",	.data = armv6pmu_init},
 	{.compatible = "qcom,krait-pmu",	.data = armv7_krait_pmu_init},
 	{.compatible = "arm,armv8-pmuv3",       .data = armv8_pmuv3_pmu_init},
+=======
+	{.compatible = "arm,arm1176-pmu",	.data = armv6_1176_pmu_init},
+	{.compatible = "arm,arm1136-pmu",	.data = armv6_1136_pmu_init},
+	{.compatible = "qcom,krait-pmu",	.data = krait_pmu_init},
+>>>>>>> v3.18
 	{},
 };
 
 static struct platform_device_id cpu_pmu_plat_device_ids[] = {
 	{.name = "arm-pmu"},
+<<<<<<< HEAD
+=======
+	{.name = "armv6-pmu"},
+	{.name = "armv7-pmu"},
+	{.name = "xscale-pmu"},
+>>>>>>> v3.18
 	{},
 };
 
@@ -398,12 +544,16 @@ static struct platform_device_id cpu_pmu_plat_device_ids[] = {
 static int probe_current_pmu(struct arm_pmu *pmu)
 {
 	int cpu = get_cpu();
+<<<<<<< HEAD
 	unsigned long implementor = read_cpuid_implementor();
 	unsigned long part_number = read_cpuid_part_number();
+=======
+>>>>>>> v3.18
 	int ret = -ENODEV;
 
 	pr_info("probing PMU on CPU %d\n", cpu);
 
+<<<<<<< HEAD
 	/* ARM Ltd CPUs. */
 	if (implementor == ARM_CPU_IMP_ARM) {
 		switch (part_number) {
@@ -448,12 +598,48 @@ static int probe_current_pmu(struct arm_pmu *pmu)
 			ret = armv7_krait_pmu_init(pmu);
 			break;
 		}
+=======
+	switch (read_cpuid_part()) {
+	/* ARM Ltd CPUs. */
+	case ARM_CPU_PART_ARM1136:
+		ret = armv6_1136_pmu_init(pmu);
+		break;
+	case ARM_CPU_PART_ARM1156:
+		ret = armv6_1156_pmu_init(pmu);
+		break;
+	case ARM_CPU_PART_ARM1176:
+		ret = armv6_1176_pmu_init(pmu);
+		break;
+	case ARM_CPU_PART_ARM11MPCORE:
+		ret = armv6mpcore_pmu_init(pmu);
+		break;
+	case ARM_CPU_PART_CORTEX_A8:
+		ret = armv7_a8_pmu_init(pmu);
+		break;
+	case ARM_CPU_PART_CORTEX_A9:
+		ret = armv7_a9_pmu_init(pmu);
+		break;
+
+	default:
+		if (read_cpuid_implementor() == ARM_CPU_IMP_INTEL) {
+			switch (xscale_cpu_arch_version()) {
+			case ARM_CPU_XSCALE_ARCH_V1:
+				ret = xscale1pmu_init(pmu);
+				break;
+			case ARM_CPU_XSCALE_ARCH_V2:
+				ret = xscale2pmu_init(pmu);
+				break;
+			}
+		}
+		break;
+>>>>>>> v3.18
 	}
 
 	put_cpu();
 	return ret;
 }
 
+<<<<<<< HEAD
 
 static int multicore_request_irq(int irq, irq_handler_t *handle_irq, void *dev_id)
 {
@@ -509,6 +695,12 @@ static int cpu_pmu_device_probe(struct platform_device *pdev)
 {
 	const struct of_device_id *of_id;
 	int (*init_fn)(struct arm_pmu *);
+=======
+static int cpu_pmu_device_probe(struct platform_device *pdev)
+{
+	const struct of_device_id *of_id;
+	const int (*init_fn)(struct arm_pmu *);
+>>>>>>> v3.18
 	struct device_node *node = pdev->dev.of_node;
 	struct arm_pmu *pmu;
 	int ret = -ENODEV;
@@ -524,6 +716,12 @@ static int cpu_pmu_device_probe(struct platform_device *pdev)
 		return -ENOMEM;
 	}
 
+<<<<<<< HEAD
+=======
+	cpu_pmu = pmu;
+	cpu_pmu->plat_device = pdev;
+
+>>>>>>> v3.18
 	if (node && (of_id = of_match_node(cpu_pmu_of_device_ids, pdev->dev.of_node))) {
 		init_fn = of_id->data;
 		ret = init_fn(pmu);
@@ -536,6 +734,7 @@ static int cpu_pmu_device_probe(struct platform_device *pdev)
 		goto out_free;
 	}
 
+<<<<<<< HEAD
 	cpu_pmu = pmu;
 	cpu_pmu->plat_device = pdev;
 	cpu_pmu_init(cpu_pmu);
@@ -543,6 +742,9 @@ static int cpu_pmu_device_probe(struct platform_device *pdev)
 	if (get_dt_irq_prop())
 		cpu_pmu->plat_device->dev.platform_data = &multicore_data;
 
+=======
+	cpu_pmu_init(cpu_pmu);
+>>>>>>> v3.18
 	ret = armpmu_register(cpu_pmu, PERF_TYPE_RAW);
 
 	if (!ret)
@@ -572,6 +774,7 @@ static int __init register_pmu_driver(void)
 	if (err)
 		return err;
 
+<<<<<<< HEAD
 	err = cpu_pm_register_notifier(&perf_cpu_pm_notifier_block);
 	if (err)
 		goto err_cpu_pm;
@@ -642,3 +845,12 @@ int __init init_pmu_actions(void)
 #endif
 device_initcall(register_pmu_driver);
 late_initcall(init_pmu_actions);
+=======
+	err = platform_driver_register(&cpu_pmu_driver);
+	if (err)
+		unregister_cpu_notifier(&cpu_pmu_hotplug_notifier);
+
+	return err;
+}
+device_initcall(register_pmu_driver);
+>>>>>>> v3.18

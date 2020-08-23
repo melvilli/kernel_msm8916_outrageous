@@ -321,6 +321,10 @@ config SH_CAYMAN
 	bool "Hitachi Cayman"
 	depends on CPU_SUBTYPE_SH5_101 || CPU_SUBTYPE_SH5_103
 	select SYS_SUPPORTS_PCI
+<<<<<<< HEAD
+=======
+	select ARCH_MIGHT_HAVE_PC_SERIO
+>>>>>>> v3.18
 
 config SH_POLARIS
 	bool "SMSC Polaris"
@@ -370,7 +374,11 @@ if SH_MAGIC_PANEL_R2
 menu "Magic Panel R2 options"
 
 config SH_MAGIC_PANEL_R2_VERSION
+<<<<<<< HEAD
 	int SH_MAGIC_PANEL_R2_VERSION
+=======
+	int "Magic Panel R2 Version"
+>>>>>>> v3.18
 	default "3"
 	help
 	  Set the version of the Magic Panel R2

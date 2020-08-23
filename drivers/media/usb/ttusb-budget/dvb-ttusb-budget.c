@@ -791,8 +791,12 @@ static void ttusb_free_iso_urbs(struct ttusb *ttusb)
 	int i;
 
 	for (i = 0; i < ISO_BUF_COUNT; i++)
+<<<<<<< HEAD
 		if (ttusb->iso_urb[i])
 			usb_free_urb(ttusb->iso_urb[i]);
+=======
+		usb_free_urb(ttusb->iso_urb[i]);
+>>>>>>> v3.18
 
 	pci_free_consistent(NULL,
 			    ISO_FRAME_SIZE * FRAMES_PER_ISO_BUF *
@@ -804,11 +808,17 @@ static int ttusb_alloc_iso_urbs(struct ttusb *ttusb)
 {
 	int i;
 
+<<<<<<< HEAD
 	ttusb->iso_buffer = pci_alloc_consistent(NULL,
 						 ISO_FRAME_SIZE *
 						 FRAMES_PER_ISO_BUF *
 						 ISO_BUF_COUNT,
 						 &ttusb->iso_dma_handle);
+=======
+	ttusb->iso_buffer = pci_zalloc_consistent(NULL,
+						  ISO_FRAME_SIZE * FRAMES_PER_ISO_BUF * ISO_BUF_COUNT,
+						  &ttusb->iso_dma_handle);
+>>>>>>> v3.18
 
 	if (!ttusb->iso_buffer) {
 		dprintk("%s: pci_alloc_consistent - not enough memory\n",
@@ -816,9 +826,12 @@ static int ttusb_alloc_iso_urbs(struct ttusb *ttusb)
 		return -ENOMEM;
 	}
 
+<<<<<<< HEAD
 	memset(ttusb->iso_buffer, 0,
 	       ISO_FRAME_SIZE * FRAMES_PER_ISO_BUF * ISO_BUF_COUNT);
 
+=======
+>>>>>>> v3.18
 	for (i = 0; i < ISO_BUF_COUNT; i++) {
 		struct urb *urb;
 
@@ -1768,6 +1781,11 @@ err_i2c_del_adapter:
 	i2c_del_adapter(&ttusb->i2c_adap);
 err_unregister_adapter:
 	dvb_unregister_adapter (&ttusb->adapter);
+<<<<<<< HEAD
+=======
+	ttusb_free_iso_urbs(ttusb);
+	kfree(ttusb);
+>>>>>>> v3.18
 	return result;
 }
 

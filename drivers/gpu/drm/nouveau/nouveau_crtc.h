@@ -27,10 +27,19 @@
 #ifndef __NOUVEAU_CRTC_H__
 #define __NOUVEAU_CRTC_H__
 
+<<<<<<< HEAD
+=======
+#include <nvif/notify.h>
+
+>>>>>>> v3.18
 struct nouveau_crtc {
 	struct drm_crtc base;
 
 	int index;
+<<<<<<< HEAD
+=======
+	struct nvif_notify vblank;
+>>>>>>> v3.18
 
 	uint32_t dpms_saved_fp_control;
 	uint32_t fp_users;
@@ -46,7 +55,11 @@ struct nouveau_crtc {
 		int cpp;
 		bool blanked;
 		uint32_t offset;
+<<<<<<< HEAD
 		uint32_t tile_flags;
+=======
+		uint32_t handle;
+>>>>>>> v3.18
 	} fb;
 
 	struct {
@@ -74,7 +87,11 @@ struct nouveau_crtc {
 
 static inline struct nouveau_crtc *nouveau_crtc(struct drm_crtc *crtc)
 {
+<<<<<<< HEAD
 	return container_of(crtc, struct nouveau_crtc, base);
+=======
+	return crtc ? container_of(crtc, struct nouveau_crtc, base) : NULL;
+>>>>>>> v3.18
 }
 
 static inline struct drm_crtc *to_drm_crtc(struct nouveau_crtc *crtc)

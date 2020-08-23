@@ -35,6 +35,7 @@
 #include "80211hdr.h"
 #include "80211mgr.h"
 
+<<<<<<< HEAD
 /*---------------------  Export Definitions -------------------------*/
 
 /*---------------------  Export Classes  ----------------------------*/
@@ -45,6 +46,8 @@
 
 /*---------------------  Export Functions  --------------------------*/
 
+=======
+>>>>>>> v3.18
 bool IEEE11hbMSRRepTx(
 	void *pMgmtHandle
 );

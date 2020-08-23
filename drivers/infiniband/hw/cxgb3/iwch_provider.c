@@ -226,6 +226,10 @@ static struct ib_cq *iwch_create_cq(struct ib_device *ibdev, int entries, int ve
 			mm->len = PAGE_ALIGN(((1UL << uresp.size_log2) + 1) *
 					     sizeof(struct t3_cqe));
 			uresp.memsize = mm->len;
+<<<<<<< HEAD
+=======
+			uresp.reserved = 0;
+>>>>>>> v3.18
 			resplen = sizeof uresp;
 		}
 		if (ib_copy_to_udata(udata, &uresp, resplen)) {
@@ -617,14 +621,23 @@ static struct ib_mr *iwch_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 {
 	__be64 *pages;
 	int shift, n, len;
+<<<<<<< HEAD
 	int i, j, k;
 	int err = 0;
 	struct ib_umem_chunk *chunk;
+=======
+	int i, k, entry;
+	int err = 0;
+>>>>>>> v3.18
 	struct iwch_dev *rhp;
 	struct iwch_pd *php;
 	struct iwch_mr *mhp;
 	struct iwch_reg_user_mr_resp uresp;
+<<<<<<< HEAD
 
+=======
+	struct scatterlist *sg;
+>>>>>>> v3.18
 	PDBG("%s ib_pd %p\n", __func__, pd);
 
 	php = to_iwch_pd(pd);
@@ -644,9 +657,13 @@ static struct ib_mr *iwch_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 
 	shift = ffs(mhp->umem->page_size) - 1;
 
+<<<<<<< HEAD
 	n = 0;
 	list_for_each_entry(chunk, &mhp->umem->chunk_list, list)
 		n += chunk->nents;
+=======
+	n = mhp->umem->nmap;
+>>>>>>> v3.18
 
 	err = iwch_alloc_pbl(mhp, n);
 	if (err)
@@ -660,12 +677,19 @@ static struct ib_mr *iwch_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 
 	i = n = 0;
 
+<<<<<<< HEAD
 	list_for_each_entry(chunk, &mhp->umem->chunk_list, list)
 		for (j = 0; j < chunk->nmap; ++j) {
 			len = sg_dma_len(&chunk->page_list[j]) >> shift;
 			for (k = 0; k < len; ++k) {
 				pages[i++] = cpu_to_be64(sg_dma_address(
 					&chunk->page_list[j]) +
+=======
+	for_each_sg(mhp->umem->sg_head.sgl, sg, mhp->umem->nmap, entry) {
+			len = sg_dma_len(sg) >> shift;
+			for (k = 0; k < len; ++k) {
+				pages[i++] = cpu_to_be64(sg_dma_address(sg) +
+>>>>>>> v3.18
 					mhp->umem->page_size * k);
 				if (i == PAGE_SIZE / sizeof *pages) {
 					err = iwch_write_pbl(mhp, pages, i, n);
@@ -675,7 +699,11 @@ static struct ib_mr *iwch_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 					i = 0;
 				}
 			}
+<<<<<<< HEAD
 		}
+=======
+	}
+>>>>>>> v3.18
 
 	if (i)
 		err = iwch_write_pbl(mhp, pages, i, n);

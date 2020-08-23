@@ -172,7 +172,11 @@ static struct crypto_alg *crypto_larval_wait(struct crypto_alg *alg)
 	struct crypto_larval *larval = (void *)alg;
 	long timeout;
 
+<<<<<<< HEAD
 	timeout = wait_for_completion_killable_timeout(
+=======
+	timeout = wait_for_completion_interruptible_timeout(
+>>>>>>> v3.18
 		&larval->completion, 60 * HZ);
 
 	alg = larval->adult;
@@ -216,11 +220,19 @@ struct crypto_alg *crypto_larval_lookup(const char *name, u32 type, u32 mask)
 
 	alg = crypto_alg_lookup(name, type, mask);
 	if (!alg) {
+<<<<<<< HEAD
 		request_module("crypto-%s", name);
 
 		if (!((type ^ CRYPTO_ALG_NEED_FALLBACK) & mask &
 		      CRYPTO_ALG_NEED_FALLBACK))
 			request_module("crypto-%s-all", name);
+=======
+		request_module("%s", name);
+
+		if (!((type ^ CRYPTO_ALG_NEED_FALLBACK) & mask &
+		      CRYPTO_ALG_NEED_FALLBACK))
+			request_module("%s-all", name);
+>>>>>>> v3.18
 
 		alg = crypto_alg_lookup(name, type, mask);
 	}
@@ -396,7 +408,11 @@ EXPORT_SYMBOL_GPL(__crypto_alloc_tfm);
  *	@mask: Mask for type comparison
  *
  *	This function should not be used by new algorithm types.
+<<<<<<< HEAD
  *	Plesae use crypto_alloc_tfm instead.
+=======
+ *	Please use crypto_alloc_tfm instead.
+>>>>>>> v3.18
  *
  *	crypto_alloc_base() will first attempt to locate an already loaded
  *	algorithm.  If that fails and the kernel supports dynamically loadable
@@ -435,7 +451,11 @@ struct crypto_tfm *crypto_alloc_base(const char *alg_name, u32 type, u32 mask)
 err:
 		if (err != -EAGAIN)
 			break;
+<<<<<<< HEAD
 		if (fatal_signal_pending(current)) {
+=======
+		if (signal_pending(current)) {
+>>>>>>> v3.18
 			err = -EINTR;
 			break;
 		}
@@ -552,7 +572,11 @@ void *crypto_alloc_tfm(const char *alg_name,
 err:
 		if (err != -EAGAIN)
 			break;
+<<<<<<< HEAD
 		if (fatal_signal_pending(current)) {
+=======
+		if (signal_pending(current)) {
+>>>>>>> v3.18
 			err = -EINTR;
 			break;
 		}

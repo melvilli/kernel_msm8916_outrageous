@@ -130,6 +130,10 @@ struct inode *ocfs2_iget(struct ocfs2_super *osb, u64 blkno, unsigned flags,
 	struct inode *inode = NULL;
 	struct super_block *sb = osb->sb;
 	struct ocfs2_find_inode_args args;
+<<<<<<< HEAD
+=======
+	journal_t *journal = OCFS2_SB(sb)->journal->j_journal;
+>>>>>>> v3.18
 
 	trace_ocfs2_iget_begin((unsigned long long)blkno, flags,
 			       sysfile_type);
@@ -169,6 +173,35 @@ struct inode *ocfs2_iget(struct ocfs2_super *osb, u64 blkno, unsigned flags,
 		goto bail;
 	}
 
+<<<<<<< HEAD
+=======
+	/*
+	 * Set transaction id's of transactions that have to be committed
+	 * to finish f[data]sync. We set them to currently running transaction
+	 * as we cannot be sure that the inode or some of its metadata isn't
+	 * part of the transaction - the inode could have been reclaimed and
+	 * now it is reread from disk.
+	 */
+	if (journal) {
+		transaction_t *transaction;
+		tid_t tid;
+		struct ocfs2_inode_info *oi = OCFS2_I(inode);
+
+		read_lock(&journal->j_state_lock);
+		if (journal->j_running_transaction)
+			transaction = journal->j_running_transaction;
+		else
+			transaction = journal->j_committing_transaction;
+		if (transaction)
+			tid = transaction->t_tid;
+		else
+			tid = journal->j_commit_sequence;
+		read_unlock(&journal->j_state_lock);
+		oi->i_sync_tid = tid;
+		oi->i_datasync_tid = tid;
+	}
+
+>>>>>>> v3.18
 bail:
 	if (!IS_ERR(inode)) {
 		trace_ocfs2_iget_end(inode, 
@@ -386,6 +419,7 @@ static int ocfs2_read_locked_inode(struct inode *inode,
 	u32 generation = 0;
 
 	status = -EINVAL;
+<<<<<<< HEAD
 	if (inode == NULL || inode->i_sb == NULL) {
 		mlog(ML_ERROR, "bad inode\n");
 		return status;
@@ -399,6 +433,11 @@ static int ocfs2_read_locked_inode(struct inode *inode,
 		return status;
 	}
 
+=======
+	sb = inode->i_sb;
+	osb = OCFS2_SB(sb);
+
+>>>>>>> v3.18
 	/*
 	 * To improve performance of cold-cache inode stats, we take
 	 * the cluster lock here if possible.
@@ -814,11 +853,21 @@ static int ocfs2_inode_is_valid_to_delete(struct inode *inode)
 		goto bail;
 	}
 
+<<<<<<< HEAD
 	/* If we're coming from downconvert_thread we can't go into our own
 	 * voting [hello, deadlock city!], so unforuntately we just
 	 * have to skip deleting this guy. That's OK though because
 	 * the node who's doing the actual deleting should handle it
 	 * anyway. */
+=======
+	/*
+	 * If we're coming from downconvert_thread we can't go into our own
+	 * voting [hello, deadlock city!] so we cannot delete the inode. But
+	 * since we dropped last inode ref when downconverting dentry lock,
+	 * we cannot have the file open and thus the node doing unlink will
+	 * take care of deleting the inode.
+	 */
+>>>>>>> v3.18
 	if (current == osb->dc_task)
 		goto bail;
 
@@ -832,12 +881,15 @@ static int ocfs2_inode_is_valid_to_delete(struct inode *inode)
 		goto bail_unlock;
 	}
 
+<<<<<<< HEAD
 	/* If we have allowd wipe of this inode for another node, it
 	 * will be marked here so we can safely skip it. Recovery will
 	 * cleanup any inodes we might inadvertently skip here. */
 	if (oi->ip_flags & OCFS2_INODE_SKIP_DELETE)
 		goto bail_unlock;
 
+=======
+>>>>>>> v3.18
 	ret = 1;
 bail_unlock:
 	spin_unlock(&oi->ip_lock);
@@ -951,7 +1003,11 @@ static void ocfs2_cleanup_delete_inode(struct inode *inode,
 		(unsigned long long)OCFS2_I(inode)->ip_blkno, sync_data);
 	if (sync_data)
 		filemap_write_and_wait(inode->i_mapping);
+<<<<<<< HEAD
 	truncate_inode_pages(&inode->i_data, 0);
+=======
+	truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 }
 
 static void ocfs2_delete_inode(struct inode *inode)
@@ -970,8 +1026,11 @@ static void ocfs2_delete_inode(struct inode *inode)
 	if (is_bad_inode(inode) || !OCFS2_I(inode)->ip_blkno)
 		goto bail;
 
+<<<<<<< HEAD
 	dquot_initialize(inode);
 
+=======
+>>>>>>> v3.18
 	if (!ocfs2_inode_is_valid_to_delete(inode)) {
 		/* It's probably not necessary to truncate_inode_pages
 		 * here but we do it for safety anyway (it will most
@@ -980,6 +1039,11 @@ static void ocfs2_delete_inode(struct inode *inode)
 		goto bail;
 	}
 
+<<<<<<< HEAD
+=======
+	dquot_initialize(inode);
+
+>>>>>>> v3.18
 	/* We want to block signals in delete_inode as the lock and
 	 * messaging paths may return us -ERESTARTSYS. Which would
 	 * cause us to exit early, resulting in inodes being orphaned
@@ -1067,6 +1131,10 @@ static void ocfs2_clear_inode(struct inode *inode)
 {
 	int status;
 	struct ocfs2_inode_info *oi = OCFS2_I(inode);
+<<<<<<< HEAD
+=======
+	struct ocfs2_super *osb = OCFS2_SB(inode->i_sb);
+>>>>>>> v3.18
 
 	clear_inode(inode);
 	trace_ocfs2_clear_inode((unsigned long long)oi->ip_blkno,
@@ -1083,9 +1151,15 @@ static void ocfs2_clear_inode(struct inode *inode)
 
 	/* Do these before all the other work so that we don't bounce
 	 * the downconvert thread while waiting to destroy the locks. */
+<<<<<<< HEAD
 	ocfs2_mark_lockres_freeing(&oi->ip_rw_lockres);
 	ocfs2_mark_lockres_freeing(&oi->ip_inode_lockres);
 	ocfs2_mark_lockres_freeing(&oi->ip_open_lockres);
+=======
+	ocfs2_mark_lockres_freeing(osb, &oi->ip_rw_lockres);
+	ocfs2_mark_lockres_freeing(osb, &oi->ip_inode_lockres);
+	ocfs2_mark_lockres_freeing(osb, &oi->ip_open_lockres);
+>>>>>>> v3.18
 
 	ocfs2_resv_discard(&OCFS2_SB(inode->i_sb)->osb_la_resmap,
 			   &oi->ip_la_data_resv);
@@ -1167,7 +1241,11 @@ void ocfs2_evict_inode(struct inode *inode)
 	    (OCFS2_I(inode)->ip_flags & OCFS2_INODE_MAYBE_ORPHANED)) {
 		ocfs2_delete_inode(inode);
 	} else {
+<<<<<<< HEAD
 		truncate_inode_pages(&inode->i_data, 0);
+=======
+		truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 	}
 	ocfs2_clear_inode(inode);
 }
@@ -1270,6 +1348,10 @@ int ocfs2_mark_inode_dirty(handle_t *handle,
 	fe->i_mtime_nsec = cpu_to_le32(inode->i_mtime.tv_nsec);
 
 	ocfs2_journal_dirty(handle, bh);
+<<<<<<< HEAD
+=======
+	ocfs2_update_inode_fsync_trans(handle, inode, 1);
+>>>>>>> v3.18
 leave:
 	return status;
 }

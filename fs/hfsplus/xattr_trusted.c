@@ -6,18 +6,29 @@
  * Handler for trusted extended attributes.
  */
 
+<<<<<<< HEAD
+=======
+#include <linux/nls.h>
+
+>>>>>>> v3.18
 #include "hfsplus_fs.h"
 #include "xattr.h"
 
 static int hfsplus_trusted_getxattr(struct dentry *dentry, const char *name,
 					void *buffer, size_t size, int type)
 {
+<<<<<<< HEAD
 	char xattr_name[HFSPLUS_ATTR_MAX_STRLEN + 1] = {0};
 	size_t len = strlen(name);
+=======
+	char *xattr_name;
+	int res;
+>>>>>>> v3.18
 
 	if (!strcmp(name, ""))
 		return -EINVAL;
 
+<<<<<<< HEAD
 	if (len + XATTR_TRUSTED_PREFIX_LEN > HFSPLUS_ATTR_MAX_STRLEN)
 		return -EOPNOTSUPP;
 
@@ -25,17 +36,35 @@ static int hfsplus_trusted_getxattr(struct dentry *dentry, const char *name,
 	strcpy(xattr_name + XATTR_TRUSTED_PREFIX_LEN, name);
 
 	return hfsplus_getxattr(dentry, xattr_name, buffer, size);
+=======
+	xattr_name = kmalloc(NLS_MAX_CHARSET_SIZE * HFSPLUS_ATTR_MAX_STRLEN + 1,
+		GFP_KERNEL);
+	if (!xattr_name)
+		return -ENOMEM;
+	strcpy(xattr_name, XATTR_TRUSTED_PREFIX);
+	strcpy(xattr_name + XATTR_TRUSTED_PREFIX_LEN, name);
+
+	res = hfsplus_getxattr(dentry, xattr_name, buffer, size);
+	kfree(xattr_name);
+	return res;
+>>>>>>> v3.18
 }
 
 static int hfsplus_trusted_setxattr(struct dentry *dentry, const char *name,
 		const void *buffer, size_t size, int flags, int type)
 {
+<<<<<<< HEAD
 	char xattr_name[HFSPLUS_ATTR_MAX_STRLEN + 1] = {0};
 	size_t len = strlen(name);
+=======
+	char *xattr_name;
+	int res;
+>>>>>>> v3.18
 
 	if (!strcmp(name, ""))
 		return -EINVAL;
 
+<<<<<<< HEAD
 	if (len + XATTR_TRUSTED_PREFIX_LEN > HFSPLUS_ATTR_MAX_STRLEN)
 		return -EOPNOTSUPP;
 
@@ -43,6 +72,18 @@ static int hfsplus_trusted_setxattr(struct dentry *dentry, const char *name,
 	strcpy(xattr_name + XATTR_TRUSTED_PREFIX_LEN, name);
 
 	return hfsplus_setxattr(dentry, xattr_name, buffer, size, flags);
+=======
+	xattr_name = kmalloc(NLS_MAX_CHARSET_SIZE * HFSPLUS_ATTR_MAX_STRLEN + 1,
+		GFP_KERNEL);
+	if (!xattr_name)
+		return -ENOMEM;
+	strcpy(xattr_name, XATTR_TRUSTED_PREFIX);
+	strcpy(xattr_name + XATTR_TRUSTED_PREFIX_LEN, name);
+
+	res = hfsplus_setxattr(dentry, xattr_name, buffer, size, flags);
+	kfree(xattr_name);
+	return res;
+>>>>>>> v3.18
 }
 
 static size_t hfsplus_trusted_listxattr(struct dentry *dentry, char *list,

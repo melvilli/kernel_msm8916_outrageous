@@ -7,6 +7,10 @@
 #include <linux/debugfs.h>
 #include <linux/log2.h>
 #include <linux/gfp.h>
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+>>>>>>> v3.18
 
 #include <asm/paravirt.h>
 
@@ -16,6 +20,7 @@
 #include "xen-ops.h"
 #include "debugfs.h"
 
+<<<<<<< HEAD
 #ifdef CONFIG_XEN_DEBUG_FS
 static struct xen_spinlock_stats
 {
@@ -37,11 +42,30 @@ static struct xen_spinlock_stats
 
 	u64 time_total;
 	u64 time_spinning;
+=======
+enum xen_contention_stat {
+	TAKEN_SLOW,
+	TAKEN_SLOW_PICKUP,
+	TAKEN_SLOW_SPURIOUS,
+	RELEASED_SLOW,
+	RELEASED_SLOW_KICKED,
+	NR_CONTENTION_STATS
+};
+
+
+#ifdef CONFIG_XEN_DEBUG_FS
+#define HISTO_BUCKETS	30
+static struct xen_spinlock_stats
+{
+	u32 contention_stats[NR_CONTENTION_STATS];
+	u32 histo_spin_blocked[HISTO_BUCKETS+1];
+>>>>>>> v3.18
 	u64 time_blocked;
 } spinlock_stats;
 
 static u8 zero_stats;
 
+<<<<<<< HEAD
 static unsigned lock_timeout = 1 << 10;
 #define TIMEOUT lock_timeout
 
@@ -55,6 +79,25 @@ static inline void check_zero(void)
 
 #define ADD_STATS(elem, val)			\
 	do { check_zero(); spinlock_stats.elem += (val); } while(0)
+=======
+static inline void check_zero(void)
+{
+	u8 ret;
+	u8 old = ACCESS_ONCE(zero_stats);
+	if (unlikely(old)) {
+		ret = cmpxchg(&zero_stats, old, 0);
+		/* This ensures only one fellow resets the stat */
+		if (ret == old)
+			memset(&spinlock_stats, 0, sizeof(spinlock_stats));
+	}
+}
+
+static inline void add_stats(enum xen_contention_stat var, u32 val)
+{
+	check_zero();
+	spinlock_stats.contention_stats[var] += val;
+}
+>>>>>>> v3.18
 
 static inline u64 spin_time_start(void)
 {
@@ -73,6 +116,7 @@ static void __spin_time_accum(u64 delta, u32 *array)
 		array[HISTO_BUCKETS]++;
 }
 
+<<<<<<< HEAD
 static inline void spin_time_accum_spinning(u64 start)
 {
 	u32 delta = xen_clocksource_read() - start;
@@ -89,6 +133,8 @@ static inline void spin_time_accum_total(u64 start)
 	spinlock_stats.time_total += delta;
 }
 
+=======
+>>>>>>> v3.18
 static inline void spin_time_accum_blocked(u64 start)
 {
 	u32 delta = xen_clocksource_read() - start;
@@ -97,25 +143,35 @@ static inline void spin_time_accum_blocked(u64 start)
 	spinlock_stats.time_blocked += delta;
 }
 #else  /* !CONFIG_XEN_DEBUG_FS */
+<<<<<<< HEAD
 #define TIMEOUT			(1 << 10)
 #define ADD_STATS(elem, val)	do { (void)(val); } while(0)
+=======
+static inline void add_stats(enum xen_contention_stat var, u32 val)
+{
+}
+>>>>>>> v3.18
 
 static inline u64 spin_time_start(void)
 {
 	return 0;
 }
 
+<<<<<<< HEAD
 static inline void spin_time_accum_total(u64 start)
 {
 }
 static inline void spin_time_accum_spinning(u64 start)
 {
 }
+=======
+>>>>>>> v3.18
 static inline void spin_time_accum_blocked(u64 start)
 {
 }
 #endif  /* CONFIG_XEN_DEBUG_FS */
 
+<<<<<<< HEAD
 /*
  * Size struct xen_spinlock so it's the same as arch_spinlock_t.
  */
@@ -328,10 +384,127 @@ static noinline void xen_spin_unlock_slow(struct xen_spinlock *xl)
 		if (per_cpu(lock_spinners, cpu) == xl) {
 			ADD_STATS(released_slow_kicked, 1);
 			xen_send_IPI_one(cpu, XEN_SPIN_UNLOCK_VECTOR);
+=======
+struct xen_lock_waiting {
+	struct arch_spinlock *lock;
+	__ticket_t want;
+};
+
+static DEFINE_PER_CPU(int, lock_kicker_irq) = -1;
+static DEFINE_PER_CPU(char *, irq_name);
+static DEFINE_PER_CPU(struct xen_lock_waiting, lock_waiting);
+static cpumask_t waiting_cpus;
+
+static bool xen_pvspin = true;
+__visible void xen_lock_spinning(struct arch_spinlock *lock, __ticket_t want)
+{
+	int irq = __this_cpu_read(lock_kicker_irq);
+	struct xen_lock_waiting *w = this_cpu_ptr(&lock_waiting);
+	int cpu = smp_processor_id();
+	u64 start;
+	unsigned long flags;
+
+	/* If kicker interrupts not initialized yet, just spin */
+	if (irq == -1)
+		return;
+
+	start = spin_time_start();
+
+	/*
+	 * Make sure an interrupt handler can't upset things in a
+	 * partially setup state.
+	 */
+	local_irq_save(flags);
+	/*
+	 * We don't really care if we're overwriting some other
+	 * (lock,want) pair, as that would mean that we're currently
+	 * in an interrupt context, and the outer context had
+	 * interrupts enabled.  That has already kicked the VCPU out
+	 * of xen_poll_irq(), so it will just return spuriously and
+	 * retry with newly setup (lock,want).
+	 *
+	 * The ordering protocol on this is that the "lock" pointer
+	 * may only be set non-NULL if the "want" ticket is correct.
+	 * If we're updating "want", we must first clear "lock".
+	 */
+	w->lock = NULL;
+	smp_wmb();
+	w->want = want;
+	smp_wmb();
+	w->lock = lock;
+
+	/* This uses set_bit, which atomic and therefore a barrier */
+	cpumask_set_cpu(cpu, &waiting_cpus);
+	add_stats(TAKEN_SLOW, 1);
+
+	/* clear pending */
+	xen_clear_irq_pending(irq);
+
+	/* Only check lock once pending cleared */
+	barrier();
+
+	/*
+	 * Mark entry to slowpath before doing the pickup test to make
+	 * sure we don't deadlock with an unlocker.
+	 */
+	__ticket_enter_slowpath(lock);
+
+	/*
+	 * check again make sure it didn't become free while
+	 * we weren't looking
+	 */
+	if (ACCESS_ONCE(lock->tickets.head) == want) {
+		add_stats(TAKEN_SLOW_PICKUP, 1);
+		goto out;
+	}
+
+	/* Allow interrupts while blocked */
+	local_irq_restore(flags);
+
+	/*
+	 * If an interrupt happens here, it will leave the wakeup irq
+	 * pending, which will cause xen_poll_irq() to return
+	 * immediately.
+	 */
+
+	/* Block until irq becomes pending (or perhaps a spurious wakeup) */
+	xen_poll_irq(irq);
+	add_stats(TAKEN_SLOW_SPURIOUS, !xen_test_irq_pending(irq));
+
+	local_irq_save(flags);
+
+	kstat_incr_irq_this_cpu(irq);
+out:
+	cpumask_clear_cpu(cpu, &waiting_cpus);
+	w->lock = NULL;
+
+	local_irq_restore(flags);
+
+	spin_time_accum_blocked(start);
+}
+PV_CALLEE_SAVE_REGS_THUNK(xen_lock_spinning);
+
+static void xen_unlock_kick(struct arch_spinlock *lock, __ticket_t next)
+{
+	int cpu;
+
+	add_stats(RELEASED_SLOW, 1);
+
+	for_each_cpu(cpu, &waiting_cpus) {
+		const struct xen_lock_waiting *w = &per_cpu(lock_waiting, cpu);
+
+		/* Make sure we read lock before want */
+		if (ACCESS_ONCE(w->lock) == lock &&
+		    ACCESS_ONCE(w->want) == next) {
+			add_stats(RELEASED_SLOW_KICKED, 1);
+			xen_send_IPI_one(cpu, XEN_SPIN_UNLOCK_VECTOR);
+			break;
+>>>>>>> v3.18
 		}
 	}
 }
 
+<<<<<<< HEAD
 static void xen_spin_unlock(struct arch_spinlock *lock)
 {
 	struct xen_spinlock *xl = (struct xen_spinlock *)lock;
@@ -353,20 +526,33 @@ static void xen_spin_unlock(struct arch_spinlock *lock)
 		xen_spin_unlock_slow(xl);
 }
 
+=======
+>>>>>>> v3.18
 static irqreturn_t dummy_handler(int irq, void *dev_id)
 {
 	BUG();
 	return IRQ_HANDLED;
 }
 
+<<<<<<< HEAD
 void __cpuinit xen_init_lock_cpu(int cpu)
 {
 	int irq;
 	const char *name;
+=======
+void xen_init_lock_cpu(int cpu)
+{
+	int irq;
+	char *name;
+
+	if (!xen_pvspin)
+		return;
+>>>>>>> v3.18
 
 	WARN(per_cpu(lock_kicker_irq, cpu) >= 0, "spinlock on CPU%d exists on IRQ%d!\n",
 	     cpu, per_cpu(lock_kicker_irq, cpu));
 
+<<<<<<< HEAD
 	/*
 	 * See git commit f10cd522c5fbfec9ae3cc01967868c9c2401ed23
 	 * (xen: disable PV spinlocks on HVM)
@@ -374,17 +560,27 @@ void __cpuinit xen_init_lock_cpu(int cpu)
 	if (xen_hvm_domain())
 		return;
 
+=======
+>>>>>>> v3.18
 	name = kasprintf(GFP_KERNEL, "spinlock%d", cpu);
 	irq = bind_ipi_to_irqhandler(XEN_SPIN_UNLOCK_VECTOR,
 				     cpu,
 				     dummy_handler,
+<<<<<<< HEAD
 				     IRQF_DISABLED|IRQF_PERCPU|IRQF_NOBALANCING,
+=======
+				     IRQF_PERCPU|IRQF_NOBALANCING,
+>>>>>>> v3.18
 				     name,
 				     NULL);
 
 	if (irq >= 0) {
 		disable_irq(irq); /* make sure it's never delivered */
 		per_cpu(lock_kicker_irq, cpu) = irq;
+<<<<<<< HEAD
+=======
+		per_cpu(irq_name, cpu) = name;
+>>>>>>> v3.18
 	}
 
 	printk("cpu %d spinlock event irq %d\n", cpu, irq);
@@ -392,15 +588,20 @@ void __cpuinit xen_init_lock_cpu(int cpu)
 
 void xen_uninit_lock_cpu(int cpu)
 {
+<<<<<<< HEAD
 	/*
 	 * See git commit f10cd522c5fbfec9ae3cc01967868c9c2401ed23
 	 * (xen: disable PV spinlocks on HVM)
 	 */
 	if (xen_hvm_domain())
+=======
+	if (!xen_pvspin)
+>>>>>>> v3.18
 		return;
 
 	unbind_from_irqhandler(per_cpu(lock_kicker_irq, cpu), NULL);
 	per_cpu(lock_kicker_irq, cpu) = -1;
+<<<<<<< HEAD
 }
 
 void __init xen_init_spinlocks(void)
@@ -421,6 +622,58 @@ void __init xen_init_spinlocks(void)
 	pv_lock_ops.spin_trylock = xen_spin_trylock;
 	pv_lock_ops.spin_unlock = xen_spin_unlock;
 }
+=======
+	kfree(per_cpu(irq_name, cpu));
+	per_cpu(irq_name, cpu) = NULL;
+}
+
+
+/*
+ * Our init of PV spinlocks is split in two init functions due to us
+ * using paravirt patching and jump labels patching and having to do
+ * all of this before SMP code is invoked.
+ *
+ * The paravirt patching needs to be done _before_ the alternative asm code
+ * is started, otherwise we would not patch the core kernel code.
+ */
+void __init xen_init_spinlocks(void)
+{
+
+	if (!xen_pvspin) {
+		printk(KERN_DEBUG "xen: PV spinlocks disabled\n");
+		return;
+	}
+	printk(KERN_DEBUG "xen: PV spinlocks enabled\n");
+	pv_lock_ops.lock_spinning = PV_CALLEE_SAVE(xen_lock_spinning);
+	pv_lock_ops.unlock_kick = xen_unlock_kick;
+}
+
+/*
+ * While the jump_label init code needs to happend _after_ the jump labels are
+ * enabled and before SMP is started. Hence we use pre-SMP initcall level
+ * init. We cannot do it in xen_init_spinlocks as that is done before
+ * jump labels are activated.
+ */
+static __init int xen_init_spinlocks_jump(void)
+{
+	if (!xen_pvspin)
+		return 0;
+
+	if (!xen_domain())
+		return 0;
+
+	static_key_slow_inc(&paravirt_ticketlocks_enabled);
+	return 0;
+}
+early_initcall(xen_init_spinlocks_jump);
+
+static __init int xen_parse_nopvspin(char *arg)
+{
+	xen_pvspin = false;
+	return 0;
+}
+early_param("xen_nopvspin", xen_parse_nopvspin);
+>>>>>>> v3.18
 
 #ifdef CONFIG_XEN_DEBUG_FS
 
@@ -433,10 +686,17 @@ static int __init xen_spinlock_debugfs(void)
 	if (d_xen == NULL)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+=======
+	if (!xen_pvspin)
+		return 0;
+
+>>>>>>> v3.18
 	d_spin_debug = debugfs_create_dir("spinlocks", d_xen);
 
 	debugfs_create_u8("zero_stats", 0644, d_spin_debug, &zero_stats);
 
+<<<<<<< HEAD
 	debugfs_create_u32("timeout", 0644, d_spin_debug, &lock_timeout);
 
 	debugfs_create_u64("taken", 0444, d_spin_debug, &spinlock_stats.taken);
@@ -468,6 +728,23 @@ static int __init xen_spinlock_debugfs(void)
 				spinlock_stats.histo_spin_total, HISTO_BUCKETS + 1);
 	debugfs_create_u32_array("histo_spinning", 0444, d_spin_debug,
 				spinlock_stats.histo_spin_spinning, HISTO_BUCKETS + 1);
+=======
+	debugfs_create_u32("taken_slow", 0444, d_spin_debug,
+			   &spinlock_stats.contention_stats[TAKEN_SLOW]);
+	debugfs_create_u32("taken_slow_pickup", 0444, d_spin_debug,
+			   &spinlock_stats.contention_stats[TAKEN_SLOW_PICKUP]);
+	debugfs_create_u32("taken_slow_spurious", 0444, d_spin_debug,
+			   &spinlock_stats.contention_stats[TAKEN_SLOW_SPURIOUS]);
+
+	debugfs_create_u32("released_slow", 0444, d_spin_debug,
+			   &spinlock_stats.contention_stats[RELEASED_SLOW]);
+	debugfs_create_u32("released_slow_kicked", 0444, d_spin_debug,
+			   &spinlock_stats.contention_stats[RELEASED_SLOW_KICKED]);
+
+	debugfs_create_u64("time_blocked", 0444, d_spin_debug,
+			   &spinlock_stats.time_blocked);
+
+>>>>>>> v3.18
 	debugfs_create_u32_array("histo_blocked", 0444, d_spin_debug,
 				spinlock_stats.histo_spin_blocked, HISTO_BUCKETS + 1);
 

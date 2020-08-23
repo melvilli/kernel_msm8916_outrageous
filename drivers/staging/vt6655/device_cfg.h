@@ -27,7 +27,10 @@
 #ifndef __DEVICE_CONFIG_H
 #define __DEVICE_CONFIG_H
 
+<<<<<<< HEAD
 //#include <linux/config.h>
+=======
+>>>>>>> v3.18
 #include <linux/types.h>
 
 #include "ttype.h"
@@ -60,19 +63,27 @@ struct _version {
 #define DEVICE_VERSION       "1.19.12"
 #endif
 
+<<<<<<< HEAD
 //config file
+=======
+>>>>>>> v3.18
 #include <linux/fs.h>
 #include <linux/fcntl.h>
 #ifndef CONFIG_PATH
 #define CONFIG_PATH            "/etc/vntconfiguration.dat"
 #endif
 
+<<<<<<< HEAD
 //Max: 2378=2312Payload + 30HD +4CRC + 2Padding + 4Len + 8TSF + 4RSR
 #define PKT_BUF_SZ          2390
 
 #define MAX_UINTS           8
 #define OPTION_DEFAULT      { [0 ... MAX_UINTS-1] = -1}
 
+=======
+#define PKT_BUF_SZ          2390
+
+>>>>>>> v3.18
 typedef enum  _chip_type {
 	VT3253 = 1
 } CHIP_TYPE, *PCHIP_TYPE;
@@ -81,7 +92,11 @@ typedef enum  _chip_type {
 #define ASSERT(x)							\
 do {									\
 	if (!(x)) {							\
+<<<<<<< HEAD
 		printk(KERN_ERR "assertion %s failed: file %s line %d\n", \
+=======
+		pr_err("assertion %s failed: file %s line %d\n", \
+>>>>>>> v3.18
 		       #x, __func__, __LINE__);				\
 		*(int *)0 = 0;						\
 	}								\

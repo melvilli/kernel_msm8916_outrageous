@@ -12,10 +12,13 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
  */
 
 /*
@@ -33,13 +36,21 @@
  * 340914a (pci-1200)
  */
 
+<<<<<<< HEAD
 #include <linux/interrupt.h>
 #include <linux/slab.h>
+=======
+#include <linux/module.h>
+#include <linux/interrupt.h>
+>>>>>>> v3.18
 #include <linux/pci.h>
 
 #include "../comedidev.h"
 
+<<<<<<< HEAD
 #include "mite.h"
+=======
+>>>>>>> v3.18
 #include "ni_labpc.h"
 
 enum labpc_pci_boardid {
@@ -50,6 +61,7 @@ static const struct labpc_boardinfo labpc_pci_boards[] = {
 	[BOARD_NI_PCI1200] = {
 		.name			= "ni_pci-1200",
 		.ai_speed		= 10000,
+<<<<<<< HEAD
 		.register_layout	= labpc_1200_layout,
 		.has_ao			= 1,
 		.ai_range_table		= &range_labpc_1200_ai,
@@ -59,6 +71,37 @@ static const struct labpc_boardinfo labpc_pci_boards[] = {
 	},
 };
 
+=======
+		.ai_scan_up		= 1,
+		.has_ao			= 1,
+		.is_labpc1200		= 1,
+	},
+};
+
+/* ripped from mite.h and mite_setup2() to avoid mite dependancy */
+#define MITE_IODWBSR	0xc0	 /* IO Device Window Base Size Register */
+#define WENAB		(1 << 7) /* window enable */
+
+static int labpc_pci_mite_init(struct pci_dev *pcidev)
+{
+	void __iomem *mite_base;
+	u32 main_phys_addr;
+
+	/* ioremap the MITE registers (BAR 0) temporarily */
+	mite_base = pci_ioremap_bar(pcidev, 0);
+	if (!mite_base)
+		return -ENOMEM;
+
+	/* set data window to main registers (BAR 1) */
+	main_phys_addr = pci_resource_start(pcidev, 1);
+	writel(main_phys_addr | WENAB, mite_base + MITE_IODWBSR);
+
+	/* finished with MITE registers */
+	iounmap(mite_base);
+	return 0;
+}
+
+>>>>>>> v3.18
 static int labpc_pci_auto_attach(struct comedi_device *dev,
 				 unsigned long context)
 {
@@ -78,6 +121,7 @@ static int labpc_pci_auto_attach(struct comedi_device *dev,
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
@@ -107,16 +151,38 @@ static void labpc_pci_detach(struct comedi_device *dev)
 	if (dev->irq)
 		free_irq(dev->irq, dev);
 	comedi_pci_disable(dev);
+=======
+	ret = labpc_pci_mite_init(pcidev);
+	if (ret)
+		return ret;
+
+	dev->mmio = pci_ioremap_bar(pcidev, 1);
+	if (!dev->mmio)
+		return -ENOMEM;
+
+	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
+	if (!devpriv)
+		return -ENOMEM;
+
+	return labpc_common_attach(dev, pcidev->irq, IRQF_SHARED);
+>>>>>>> v3.18
 }
 
 static struct comedi_driver labpc_pci_comedi_driver = {
 	.driver_name	= "labpc_pci",
 	.module		= THIS_MODULE,
 	.auto_attach	= labpc_pci_auto_attach,
+<<<<<<< HEAD
 	.detach		= labpc_pci_detach,
 };
 
 static DEFINE_PCI_DEVICE_TABLE(labpc_pci_table) = {
+=======
+	.detach		= comedi_pci_detach,
+};
+
+static const struct pci_device_id labpc_pci_table[] = {
+>>>>>>> v3.18
 	{ PCI_VDEVICE(NI, 0x161), BOARD_NI_PCI1200 },
 	{ 0 }
 };

@@ -16,6 +16,11 @@ Optional properties:
 
 - clock-frequency : The oscillator frequency driving the flexcan device
 
+<<<<<<< HEAD
+=======
+- xceiver-supply: Regulator that powers the CAN transceiver
+
+>>>>>>> v3.18
 Example:
 
 	can@1c000 {

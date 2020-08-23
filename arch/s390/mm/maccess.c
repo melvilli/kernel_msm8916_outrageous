@@ -14,6 +14,10 @@
 #include <linux/gfp.h>
 #include <linux/cpu.h>
 #include <asm/ctl_reg.h>
+<<<<<<< HEAD
+=======
+#include <asm/io.h>
+>>>>>>> v3.18
 
 /*
  * This function writes to kernel memory bypassing DAT and possible
@@ -127,7 +131,11 @@ void memcpy_absolute(void *dest, void *src, size_t count)
 /*
  * Copy memory from kernel (real) to user (virtual)
  */
+<<<<<<< HEAD
 int copy_to_user_real(void __user *dest, void *src, size_t count)
+=======
+int copy_to_user_real(void __user *dest, void *src, unsigned long count)
+>>>>>>> v3.18
 {
 	int offs = 0, size, rc;
 	char *buf;
@@ -151,6 +159,7 @@ out:
 }
 
 /*
+<<<<<<< HEAD
  * Copy memory from user (virtual) to kernel (real)
  */
 int copy_from_user_real(void *dest, void __user *src, size_t count)
@@ -177,6 +186,8 @@ out:
 }
 
 /*
+=======
+>>>>>>> v3.18
  * Check if physical address is within prefix or zero page
  */
 static int is_swapped(unsigned long addr)

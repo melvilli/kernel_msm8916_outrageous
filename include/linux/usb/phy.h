@@ -44,7 +44,10 @@ enum usb_otg_state {
 	OTG_STATE_B_IDLE,
 	OTG_STATE_B_SRP_INIT,
 	OTG_STATE_B_PERIPHERAL,
+<<<<<<< HEAD
 	OTG_STATE_B_CHARGER,
+=======
+>>>>>>> v3.18
 
 	/* extra dual-role default-b states */
 	OTG_STATE_B_WAIT_ACON,
@@ -104,12 +107,15 @@ struct usb_phy {
 	/* enable/disable VBUS */
 	int	(*set_vbus)(struct usb_phy *x, int on);
 
+<<<<<<< HEAD
 	/* set additional settings parameters post-init */
 	int	(*set_params)(struct usb_phy *x);
 
 	/* do additional settings after complete initialization */
 	int	(*post_init)(struct usb_phy *x);
 
+=======
+>>>>>>> v3.18
 	/* effective for B devices, ignored for A-peripheral */
 	int	(*set_power)(struct usb_phy *x,
 				unsigned mA);
@@ -118,11 +124,22 @@ struct usb_phy {
 	int	(*set_suspend)(struct usb_phy *x,
 				int suspend);
 
+<<<<<<< HEAD
+=======
+	/*
+	 * Set wakeup enable for PHY, in that case, the PHY can be
+	 * woken up from suspend status due to external events,
+	 * like vbus change, dp/dm change and id.
+	 */
+	int	(*set_wakeup)(struct usb_phy *x, bool enabled);
+
+>>>>>>> v3.18
 	/* notify phy connect status change */
 	int	(*notify_connect)(struct usb_phy *x,
 			enum usb_device_speed speed);
 	int	(*notify_disconnect)(struct usb_phy *x,
 			enum usb_device_speed speed);
+<<<<<<< HEAD
 
 	/* reset the PHY clocks */
 	int	(*reset)(struct usb_phy *x);
@@ -130,6 +147,8 @@ struct usb_phy {
 	/* for notification of usb_phy_dbg_events */
 	void	(*dbg_event)(struct usb_phy *x,
 			char *event, int msg1, int msg2);
+=======
+>>>>>>> v3.18
 };
 
 /**
@@ -204,6 +223,7 @@ usb_phy_vbus_off(struct usb_phy *x)
 	return x->set_vbus(x, false);
 }
 
+<<<<<<< HEAD
 static inline int
 usb_phy_set_params(struct usb_phy *x)
 {
@@ -231,6 +251,8 @@ usb_phy_reset(struct usb_phy *x)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 /* for usb host and peripheral controller drivers */
 #if IS_ENABLED(CONFIG_USB_PHY)
 extern struct usb_phy *usb_get_phy(enum usb_phy_type type);
@@ -306,6 +328,18 @@ usb_phy_set_suspend(struct usb_phy *x, int suspend)
 }
 
 static inline int
+<<<<<<< HEAD
+=======
+usb_phy_set_wakeup(struct usb_phy *x, bool enabled)
+{
+	if (x && x->set_wakeup)
+		return x->set_wakeup(x, enabled);
+	else
+		return 0;
+}
+
+static inline int
+>>>>>>> v3.18
 usb_phy_notify_connect(struct usb_phy *x, enum usb_device_speed speed)
 {
 	if (x && x->notify_connect)
@@ -323,6 +357,7 @@ usb_phy_notify_disconnect(struct usb_phy *x, enum usb_device_speed speed)
 		return 0;
 }
 
+<<<<<<< HEAD
 static inline void
 usb_phy_dbg_events(struct usb_phy *x,
 		char *event, int msg1, int msg2)
@@ -331,6 +366,8 @@ usb_phy_dbg_events(struct usb_phy *x,
 		x->dbg_event(x, event, msg1, msg2);
 }
 
+=======
+>>>>>>> v3.18
 /* notifiers */
 static inline int
 usb_register_notifier(struct usb_phy *x, struct notifier_block *nb)

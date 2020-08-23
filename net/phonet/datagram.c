@@ -86,7 +86,11 @@ static int pn_init(struct sock *sk)
 static int pn_sendmsg(struct kiocb *iocb, struct sock *sk,
 			struct msghdr *msg, size_t len)
 {
+<<<<<<< HEAD
 	struct sockaddr_pn *target;
+=======
+	DECLARE_SOCKADDR(struct sockaddr_pn *, target, msg->msg_name);
+>>>>>>> v3.18
 	struct sk_buff *skb;
 	int err;
 
@@ -94,13 +98,20 @@ static int pn_sendmsg(struct kiocb *iocb, struct sock *sk,
 				MSG_CMSG_COMPAT))
 		return -EOPNOTSUPP;
 
+<<<<<<< HEAD
 	if (msg->msg_name == NULL)
+=======
+	if (target == NULL)
+>>>>>>> v3.18
 		return -EDESTADDRREQ;
 
 	if (msg->msg_namelen < sizeof(struct sockaddr_pn))
 		return -EINVAL;
 
+<<<<<<< HEAD
 	target = (struct sockaddr_pn *)msg->msg_name;
+=======
+>>>>>>> v3.18
 	if (target->spn_family != AF_PHONET)
 		return -EAFNOSUPPORT;
 
@@ -160,6 +171,10 @@ static int pn_recvmsg(struct kiocb *iocb, struct sock *sk,
 	rval = (flags & MSG_TRUNC) ? skb->len : copylen;
 
 	if (msg->msg_name != NULL) {
+<<<<<<< HEAD
+=======
+		__sockaddr_check_size(sizeof(sa));
+>>>>>>> v3.18
 		memcpy(msg->msg_name, &sa, sizeof(sa));
 		*addr_len = sizeof(sa);
 	}

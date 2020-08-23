@@ -115,8 +115,13 @@ int cfe_read(int handle, unsigned char *buffer, int length);
 int cfe_readblk(int handle, int64_t offset, unsigned char *buffer,
 		int length);
 int cfe_setenv(char *name, char *val);
+<<<<<<< HEAD
 int cfe_write(int handle, unsigned char *buffer, int length);
 int cfe_writeblk(int handle, int64_t offset, unsigned char *buffer,
+=======
+int cfe_write(int handle, const char *buffer, int length);
+int cfe_writeblk(int handle, int64_t offset, const char *buffer,
+>>>>>>> v3.18
 		 int length);
 
 #endif				/* CFE_API_H */

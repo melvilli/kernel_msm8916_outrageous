@@ -17,7 +17,11 @@ Authors:
         Mark Studebaker <mdsxyz123@yahoo.com>,
         Stephen Rousset <stephen.rousset@rocketlogix.com>,
         Dan Eaton <dan.eaton@rocketlogix.com>,
+<<<<<<< HEAD
         Jean Delvare <khali@linux-fr.org>,
+=======
+        Jean Delvare <jdelvare@suse.de>,
+>>>>>>> v3.18
         Original 2.6 port Jeff Oliver
 
 Description

@@ -21,7 +21,11 @@
 #include <asm/uaccess.h>
 #include <asm/pgalloc.h>
 
+<<<<<<< HEAD
 unsigned long asid_cache = ASID_USER_FIRST;
+=======
+DEFINE_PER_CPU(unsigned long, asid_cache) = ASID_USER_FIRST;
+>>>>>>> v3.18
 void bad_page_fault(struct pt_regs*, unsigned long, int);
 
 #undef DEBUG_PAGE_FAULT
@@ -117,8 +121,11 @@ good_area:
 	if (unlikely(fault & VM_FAULT_ERROR)) {
 		if (fault & VM_FAULT_OOM)
 			goto out_of_memory;
+<<<<<<< HEAD
 		else if (fault & VM_FAULT_SIGSEGV)
 			goto bad_area;
+=======
+>>>>>>> v3.18
 		else if (fault & VM_FAULT_SIGBUS)
 			goto do_sigbus;
 		BUG();

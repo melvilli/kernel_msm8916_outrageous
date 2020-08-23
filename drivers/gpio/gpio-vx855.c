@@ -214,7 +214,11 @@ static void vx855gpio_gpio_setup(struct vx855_gpio *vg)
 	c->dbg_show = NULL;
 	c->base = 0;
 	c->ngpio = NR_VX855_GP;
+<<<<<<< HEAD
 	c->can_sleep = 0;
+=======
+	c->can_sleep = false;
+>>>>>>> v3.18
 	c->names = vx855gpio_names;
 }
 
@@ -279,7 +283,10 @@ out_release:
 		release_region(res_gpi->start, resource_size(res_gpi));
 	if (vg->gpo_reserved)
 		release_region(res_gpi->start, resource_size(res_gpo));
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	kfree(vg);
 	return ret;
 }
@@ -289,8 +296,12 @@ static int vx855gpio_remove(struct platform_device *pdev)
 	struct vx855_gpio *vg = platform_get_drvdata(pdev);
 	struct resource *res;
 
+<<<<<<< HEAD
 	if (gpiochip_remove(&vg->gpio))
 		dev_err(&pdev->dev, "unable to remove gpio_chip?\n");
+=======
+	gpiochip_remove(&vg->gpio);
+>>>>>>> v3.18
 
 	if (vg->gpi_reserved) {
 		res = platform_get_resource(pdev, IORESOURCE_IO, 0);
@@ -301,7 +312,10 @@ static int vx855gpio_remove(struct platform_device *pdev)
 		release_region(res->start, resource_size(res));
 	}
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	kfree(vg);
 	return 0;
 }

@@ -1,12 +1,20 @@
 #ifndef __NV10_FENCE_H_
 #define __NV10_FENCE_H_
 
+<<<<<<< HEAD
 #include <core/os.h>
+=======
+>>>>>>> v3.18
 #include "nouveau_fence.h"
 #include "nouveau_bo.h"
 
 struct nv10_fence_chan {
 	struct nouveau_fence_chan base;
+<<<<<<< HEAD
+=======
+	struct nvif_object sema;
+	struct nvif_object head[4];
+>>>>>>> v3.18
 };
 
 struct nv10_fence_priv {

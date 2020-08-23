@@ -124,7 +124,10 @@ extern struct mpc8xxx_spi_probe_info *to_of_pinfo(
 extern int mpc8xxx_spi_bufs(struct mpc8xxx_spi *mspi,
 		struct spi_transfer *t, unsigned int len);
 extern int mpc8xxx_spi_transfer(struct spi_device *spi, struct spi_message *m);
+<<<<<<< HEAD
 extern void mpc8xxx_spi_cleanup(struct spi_device *spi);
+=======
+>>>>>>> v3.18
 extern const char *mpc8xxx_spi_strmode(unsigned int flags);
 extern int mpc8xxx_spi_probe(struct device *dev, struct resource *mem,
 		unsigned int irq);

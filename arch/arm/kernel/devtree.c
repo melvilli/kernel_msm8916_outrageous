@@ -18,6 +18,10 @@
 #include <linux/of_fdt.h>
 #include <linux/of_irq.h>
 #include <linux/of_platform.h>
+<<<<<<< HEAD
+=======
+#include <linux/smp.h>
+>>>>>>> v3.18
 
 #include <asm/cputype.h>
 #include <asm/setup.h>
@@ -26,10 +30,44 @@
 #include <asm/mach/arch.h>
 #include <asm/mach-types.h>
 
+<<<<<<< HEAD
 void * __init early_init_dt_alloc_memory_arch(u64 size, u64 align)
 {
 	return alloc_bootmem_align(size, align);
 }
+=======
+
+#ifdef CONFIG_SMP
+extern struct of_cpu_method __cpu_method_of_table[];
+
+static const struct of_cpu_method __cpu_method_of_table_sentinel
+	__used __section(__cpu_method_of_table_end);
+
+
+static int __init set_smp_ops_by_method(struct device_node *node)
+{
+	const char *method;
+	struct of_cpu_method *m = __cpu_method_of_table;
+
+	if (of_property_read_string(node, "enable-method", &method))
+		return 0;
+
+	for (; m->method; m++)
+		if (!strcmp(m->method, method)) {
+			smp_set_ops(m->ops);
+			return 1;
+		}
+
+	return 0;
+}
+#else
+static inline int set_smp_ops_by_method(struct device_node *node)
+{
+	return 1;
+}
+#endif
+
+>>>>>>> v3.18
 
 /*
  * arm_dt_init_cpu_maps - Function retrieves cpu nodes from the device tree
@@ -47,6 +85,10 @@ void __init arm_dt_init_cpu_maps(void)
 	 * read as 0.
 	 */
 	struct device_node *cpu, *cpus;
+<<<<<<< HEAD
+=======
+	int found_method = 0;
+>>>>>>> v3.18
 	u32 i, j, cpuidx = 1;
 	u32 mpidr = is_smp() ? read_cpuid_mpidr() & MPIDR_HWID_BITMASK : 0;
 
@@ -58,8 +100,11 @@ void __init arm_dt_init_cpu_maps(void)
 		return;
 
 	for_each_child_of_node(cpus, cpu) {
+<<<<<<< HEAD
 		const __be32 *cell;
 		int prop_bytes;
+=======
+>>>>>>> v3.18
 		u32 hwid;
 
 		if (of_node_cmp(cpu->type, "cpu"))
@@ -71,14 +116,19 @@ void __init arm_dt_init_cpu_maps(void)
 		 * properties is considered invalid to build the
 		 * cpu_logical_map.
 		 */
+<<<<<<< HEAD
 		cell = of_get_property(cpu, "reg", &prop_bytes);
 		if (!cell || prop_bytes < sizeof(*cell)) {
+=======
+		if (of_property_read_u32(cpu, "reg", &hwid)) {
+>>>>>>> v3.18
 			pr_debug(" * %s missing reg property\n",
 				     cpu->full_name);
 			return;
 		}
 
 		/*
+<<<<<<< HEAD
 		 * Bits n:24 must be set to 0 in the DT since the reg property
 		 * defines the MPIDR[23:0].
 		 */
@@ -88,6 +138,12 @@ void __init arm_dt_init_cpu_maps(void)
 		} while (!hwid && prop_bytes > 0);
 
 		if (prop_bytes || (hwid & ~MPIDR_HWID_BITMASK))
+=======
+		 * 8 MSBs must be set to 0 in the DT since the reg property
+		 * defines the MPIDR[23:0].
+		 */
+		if (hwid & ~MPIDR_HWID_BITMASK)
+>>>>>>> v3.18
 			return;
 
 		/*
@@ -126,8 +182,23 @@ void __init arm_dt_init_cpu_maps(void)
 		}
 
 		tmp_map[i] = hwid;
+<<<<<<< HEAD
 	}
 
+=======
+
+		if (!found_method)
+			found_method = set_smp_ops_by_method(cpu);
+	}
+
+	/*
+	 * Fallback to an enable-method in the cpus node if nothing found in
+	 * a cpu node.
+	 */
+	if (!found_method)
+		set_smp_ops_by_method(cpus);
+
+>>>>>>> v3.18
 	if (!bootcpu_valid) {
 		pr_warn("DT missing boot CPU MPIDR[23:0], fall back to default cpu_logical_map\n");
 		return;
@@ -138,6 +209,7 @@ void __init arm_dt_init_cpu_maps(void)
 	 * a reg property, the DT CPU list can be considered valid and the
 	 * logical map created in smp_setup_processor_id() can be overridden
 	 */
+<<<<<<< HEAD
 	for (i = 0; i < nr_cpu_ids; i++) {
 		if (i < cpuidx) {
 			set_cpu_possible(i, true);
@@ -146,6 +218,12 @@ void __init arm_dt_init_cpu_maps(void)
 		} else {
 			set_cpu_possible(i, false);
 		}
+=======
+	for (i = 0; i < cpuidx; i++) {
+		set_cpu_possible(i, true);
+		cpu_logical_map(i) = tmp_map[i];
+		pr_debug("cpu logical map 0x%x\n", cpu_logical_map(i));
+>>>>>>> v3.18
 	}
 }
 
@@ -154,6 +232,22 @@ bool arch_match_cpu_phys_id(int cpu, u64 phys_id)
 	return phys_id == cpu_logical_map(cpu);
 }
 
+<<<<<<< HEAD
+=======
+static const void * __init arch_get_next_mach(const char *const **match)
+{
+	static const struct machine_desc *mdesc = __arch_info_begin;
+	const struct machine_desc *m = mdesc;
+
+	if (m >= __arch_info_end)
+		return NULL;
+
+	mdesc++;
+	*match = m->dt_compat;
+	return m;
+}
+
+>>>>>>> v3.18
 /**
  * setup_machine_fdt - Machine setup when an dtb was passed to the kernel
  * @dt_phys: physical address of dt blob
@@ -163,11 +257,15 @@ bool arch_match_cpu_phys_id(int cpu, u64 phys_id)
  */
 const struct machine_desc * __init setup_machine_fdt(unsigned int dt_phys)
 {
+<<<<<<< HEAD
 	struct boot_param_header *devtree;
 	const struct machine_desc *mdesc, *mdesc_best = NULL;
 	unsigned int score, mdesc_score = ~1;
 	unsigned long dt_root;
 	const char *model;
+=======
+	const struct machine_desc *mdesc, *mdesc_best = NULL;
+>>>>>>> v3.18
 
 #ifdef CONFIG_ARCH_MULTIPLATFORM
 	DT_MACHINE_START(GENERIC_DT, "Generic DT based system")
@@ -176,6 +274,7 @@ const struct machine_desc * __init setup_machine_fdt(unsigned int dt_phys)
 	mdesc_best = &__mach_desc_GENERIC_DT;
 #endif
 
+<<<<<<< HEAD
 	if (!dt_phys)
 		return NULL;
 
@@ -198,10 +297,25 @@ const struct machine_desc * __init setup_machine_fdt(unsigned int dt_phys)
 	if (!mdesc_best) {
 		const char *prop;
 		int size;
+=======
+	if (!dt_phys || !early_init_dt_verify(phys_to_virt(dt_phys)))
+		return NULL;
+
+	mdesc = of_flat_dt_match_machine(mdesc_best, arch_get_next_mach);
+
+	if (!mdesc) {
+		const char *prop;
+		int size;
+		unsigned long dt_root;
+>>>>>>> v3.18
 
 		early_print("\nError: unrecognized/unsupported "
 			    "device tree compatible list:\n[ ");
 
+<<<<<<< HEAD
+=======
+		dt_root = of_get_flat_dt_root();
+>>>>>>> v3.18
 		prop = of_get_flat_dt_prop(dt_root, "compatible", &size);
 		while (size > 0) {
 			early_print("'%s' ", prop);
@@ -213,6 +327,7 @@ const struct machine_desc * __init setup_machine_fdt(unsigned int dt_phys)
 		dump_machine_table(); /* does not return */
 	}
 
+<<<<<<< HEAD
 	model = of_get_flat_dt_prop(dt_root, "model", NULL);
 	if (!model)
 		model = of_get_flat_dt_prop(dt_root, "compatible", NULL);
@@ -231,4 +346,16 @@ const struct machine_desc * __init setup_machine_fdt(unsigned int dt_phys)
 	__machine_arch_type = mdesc_best->nr;
 
 	return mdesc_best;
+=======
+	/* We really don't want to do this, but sometimes firmware provides buggy data */
+	if (mdesc->dt_fixup)
+		mdesc->dt_fixup();
+
+	early_init_dt_scan_nodes();
+
+	/* Change machine number to match the mdesc we're using */
+	__machine_arch_type = mdesc->nr;
+
+	return mdesc;
+>>>>>>> v3.18
 }

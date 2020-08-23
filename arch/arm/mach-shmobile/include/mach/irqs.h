@@ -1,6 +1,7 @@
 #ifndef __ASM_MACH_IRQS_H
 #define __ASM_MACH_IRQS_H
 
+<<<<<<< HEAD
 #include <linux/sh_intc.h>
 
 /* GIC */
@@ -11,6 +12,9 @@
 #define INTCS_VECT_BASE		0x3400
 #define INTCS_VECT(n, vect)	INTC_VECT((n), INTCS_VECT_BASE + (vect))
 #define intcs_evt2irq(evt)	evt2irq(INTCS_VECT_BASE + (evt))
+=======
+/* Stuck here until drivers/pinctl/sh-pfc gets rid of legacy code */
+>>>>>>> v3.18
 
 /* External IRQ pins */
 #define IRQPIN_BASE		2000

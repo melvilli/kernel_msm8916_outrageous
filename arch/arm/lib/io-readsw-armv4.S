@@ -26,7 +26,11 @@
 
 ENTRY(__raw_readsw)
 		teq	r2, #0
+<<<<<<< HEAD
 		moveq	pc, lr
+=======
+		reteq	lr
+>>>>>>> v3.18
 		tst	r1, #3
 		bne	.Linsw_align
 

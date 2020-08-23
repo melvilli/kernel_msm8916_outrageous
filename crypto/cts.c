@@ -202,7 +202,12 @@ static int cts_cbc_decrypt(struct crypto_cts_ctx *ctx,
 	/* 5. Append the tail (BB - Ln) bytes of Xn (tmp) to Cn to create En */
 	memcpy(s + bsize + lastn, tmp + lastn, bsize - lastn);
 	/* 6. Decrypt En to create Pn-1 */
+<<<<<<< HEAD
 	memset(iv, 0, sizeof(iv));
+=======
+	memzero_explicit(iv, sizeof(iv));
+
+>>>>>>> v3.18
 	sg_set_buf(&sgsrc[0], s + bsize, bsize);
 	sg_set_buf(&sgdst[0], d, bsize);
 	err = crypto_blkcipher_decrypt_iv(&lcldesc, sgdst, sgsrc, bsize);
@@ -350,4 +355,7 @@ module_exit(crypto_cts_module_exit);
 
 MODULE_LICENSE("Dual BSD/GPL");
 MODULE_DESCRIPTION("CTS-CBC CipherText Stealing for CBC");
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("cts");
+=======
+>>>>>>> v3.18

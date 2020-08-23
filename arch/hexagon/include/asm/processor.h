@@ -56,6 +56,10 @@ struct thread_struct {
 }
 
 #define cpu_relax() __vmyield()
+<<<<<<< HEAD
+=======
+#define cpu_relax_lowlatency() cpu_relax()
+>>>>>>> v3.18
 
 /*
  * Decides where the kernel will search for a free chunk of vm space during

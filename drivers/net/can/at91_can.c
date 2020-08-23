@@ -22,7 +22,10 @@
 #include <linux/clk.h>
 #include <linux/errno.h>
 #include <linux/if_arp.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/interrupt.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
@@ -421,7 +424,15 @@ static void at91_chip_start(struct net_device *dev)
 	at91_transceiver_switch(priv, 1);
 
 	/* enable chip */
+<<<<<<< HEAD
 	at91_write(priv, AT91_MR, AT91_MR_CANEN);
+=======
+	if (priv->can.ctrlmode & CAN_CTRLMODE_LISTENONLY)
+		reg_mr = AT91_MR_CANEN | AT91_MR_ABM;
+	else
+		reg_mr = AT91_MR_CANEN;
+	at91_write(priv, AT91_MR, reg_mr);
+>>>>>>> v3.18
 
 	priv->can.state = CAN_STATE_ERROR_ACTIVE;
 
@@ -731,10 +742,16 @@ static int at91_poll_rx(struct net_device *dev, int quota)
 
 	/* upper group completed, look again in lower */
 	if (priv->rx_next > get_mb_rx_low_last(priv) &&
+<<<<<<< HEAD
 	    mb > get_mb_rx_last(priv)) {
 		priv->rx_next = get_mb_rx_first(priv);
 		if (quota > 0)
 			goto again;
+=======
+	    quota > 0 && mb > get_mb_rx_last(priv)) {
+		priv->rx_next = get_mb_rx_first(priv);
+		goto again;
+>>>>>>> v3.18
 	}
 
 	return received;
@@ -1121,7 +1138,13 @@ static int at91_open(struct net_device *dev)
 	struct at91_priv *priv = netdev_priv(dev);
 	int err;
 
+<<<<<<< HEAD
 	clk_enable(priv->clk);
+=======
+	err = clk_prepare_enable(priv->clk);
+	if (err)
+		return err;
+>>>>>>> v3.18
 
 	/* check or determine and set bittime */
 	err = open_candev(dev);
@@ -1147,7 +1170,11 @@ static int at91_open(struct net_device *dev)
  out_close:
 	close_candev(dev);
  out:
+<<<<<<< HEAD
 	clk_disable(priv->clk);
+=======
+	clk_disable_unprepare(priv->clk);
+>>>>>>> v3.18
 
 	return err;
 }
@@ -1164,7 +1191,11 @@ static int at91_close(struct net_device *dev)
 	at91_chip_stop(dev, CAN_STATE_STOPPED);
 
 	free_irq(dev->irq, dev);
+<<<<<<< HEAD
 	clk_disable(priv->clk);
+=======
+	clk_disable_unprepare(priv->clk);
+>>>>>>> v3.18
 
 	close_candev(dev);
 
@@ -1192,6 +1223,10 @@ static const struct net_device_ops at91_netdev_ops = {
 	.ndo_open	= at91_open,
 	.ndo_stop	= at91_close,
 	.ndo_start_xmit	= at91_start_xmit,
+<<<<<<< HEAD
+=======
+	.ndo_change_mtu = can_change_mtu,
+>>>>>>> v3.18
 };
 
 static ssize_t at91_sysfs_show_mb0_id(struct device *dev,
@@ -1221,7 +1256,11 @@ static ssize_t at91_sysfs_set_mb0_id(struct device *dev,
 		goto out;
 	}
 
+<<<<<<< HEAD
 	err = strict_strtoul(buf, 0, &can_id);
+=======
+	err = kstrtoul(buf, 0, &can_id);
+>>>>>>> v3.18
 	if (err) {
 		ret = err;
 		goto out;
@@ -1265,8 +1304,11 @@ static const struct of_device_id at91_can_dt_ids[] = {
 	}
 };
 MODULE_DEVICE_TABLE(of, at91_can_dt_ids);
+<<<<<<< HEAD
 #else
 #define at91_can_dt_ids NULL
+=======
+>>>>>>> v3.18
 #endif
 
 static const struct at91_devtype_data *at91_can_get_driver_data(struct platform_device *pdev)
@@ -1345,12 +1387,21 @@ static int at91_can_probe(struct platform_device *pdev)
 	priv->can.bittiming_const = &at91_bittiming_const;
 	priv->can.do_set_mode = at91_set_mode;
 	priv->can.do_get_berr_counter = at91_get_berr_counter;
+<<<<<<< HEAD
 	priv->can.ctrlmode_supported = CAN_CTRLMODE_3_SAMPLES;
+=======
+	priv->can.ctrlmode_supported = CAN_CTRLMODE_3_SAMPLES |
+		CAN_CTRLMODE_LISTENONLY;
+>>>>>>> v3.18
 	priv->dev = dev;
 	priv->reg_base = addr;
 	priv->devtype_data = *devtype_data;
 	priv->clk = clk;
+<<<<<<< HEAD
 	priv->pdata = pdev->dev.platform_data;
+=======
+	priv->pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	priv->mb0_id = 0x7ff;
 
 	netif_napi_add(dev, &priv->napi, at91_poll, get_mb_rx_num(priv));
@@ -1358,7 +1409,11 @@ static int at91_can_probe(struct platform_device *pdev)
 	if (at91_is_sam9263(priv))
 		dev->sysfs_groups[0] = &at91_sysfs_attr_group;
 
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, dev);
+=======
+	platform_set_drvdata(pdev, dev);
+>>>>>>> v3.18
 	SET_NETDEV_DEV(dev, &pdev->dev);
 
 	err = register_candev(dev);
@@ -1394,8 +1449,11 @@ static int at91_can_remove(struct platform_device *pdev)
 
 	unregister_netdev(dev);
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 	iounmap(priv->reg_base);
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
@@ -1427,7 +1485,11 @@ static struct platform_driver at91_can_driver = {
 	.driver = {
 		.name = KBUILD_MODNAME,
 		.owner = THIS_MODULE,
+<<<<<<< HEAD
 		.of_match_table = at91_can_dt_ids,
+=======
+		.of_match_table = of_match_ptr(at91_can_dt_ids),
+>>>>>>> v3.18
 	},
 	.id_table = at91_can_id_table,
 };

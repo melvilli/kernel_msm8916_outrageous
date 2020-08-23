@@ -228,7 +228,11 @@ void ext3_evict_inode (struct inode *inode)
 		log_wait_commit(journal, commit_tid);
 		filemap_write_and_wait(&inode->i_data);
 	}
+<<<<<<< HEAD
 	truncate_inode_pages(&inode->i_data, 0);
+=======
+	truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 
 	ext3_discard_reservation(inode);
 	rsv = ei->i_block_alloc_info;
@@ -1559,14 +1563,22 @@ static int buffer_unmapped(handle_t *handle, struct buffer_head *bh)
 }
 
 /*
+<<<<<<< HEAD
  * Note that we always start a transaction even if we're not journalling
  * data.  This is to preserve ordering: any hole instantiation within
  * __block_write_full_page -> ext3_get_block() should be journalled
  * along with the data so we don't crash and then get metadata which
+=======
+ * Note that whenever we need to map blocks we start a transaction even if
+ * we're not journalling data.  This is to preserve ordering: any hole
+ * instantiation within __block_write_full_page -> ext3_get_block() should be
+ * journalled along with the data so we don't crash and then get metadata which
+>>>>>>> v3.18
  * refers to old data.
  *
  * In all journalling modes block_write_full_page() will start the I/O.
  *
+<<<<<<< HEAD
  * Problem:
  *
  *	ext3_writepage() -> kmalloc() -> __alloc_pages() -> page_launder() ->
@@ -1609,6 +1621,11 @@ static int buffer_unmapped(handle_t *handle, struct buffer_head *bh)
  *
  * AKPM2: if all the page's buffers are mapped to disk and !data=journal,
  * we don't need to open a transaction here.
+=======
+ * We don't honour synchronous mounts for writepage().  That would be
+ * disastrous.  Any write() or metadata operation will sync the fs for
+ * us.
+>>>>>>> v3.18
  */
 static int ext3_ordered_writepage(struct page *page,
 				struct writeback_control *wbc)
@@ -1673,12 +1690,18 @@ static int ext3_ordered_writepage(struct page *page,
 	 * block_write_full_page() succeeded.  Otherwise they are unmapped,
 	 * and generally junk.
 	 */
+<<<<<<< HEAD
 	if (ret == 0) {
 		err = walk_page_buffers(handle, page_bufs, 0, PAGE_CACHE_SIZE,
 					NULL, journal_dirty_data_fn);
 		if (!ret)
 			ret = err;
 	}
+=======
+	if (ret == 0)
+		ret = walk_page_buffers(handle, page_bufs, 0, PAGE_CACHE_SIZE,
+					NULL, journal_dirty_data_fn);
+>>>>>>> v3.18
 	walk_page_buffers(handle, page_bufs, 0,
 			PAGE_CACHE_SIZE, NULL, bput_one);
 	err = ext3_journal_stop(handle);
@@ -1758,6 +1781,7 @@ static int ext3_journalled_writepage(struct page *page,
 	WARN_ON_ONCE(IS_RDONLY(inode) &&
 		     !(EXT3_SB(inode->i_sb)->s_mount_state & EXT3_ERROR_FS));
 
+<<<<<<< HEAD
 	if (ext3_journal_current_handle())
 		goto no_write;
 
@@ -1769,6 +1793,19 @@ static int ext3_journalled_writepage(struct page *page,
 	}
 
 	if (!page_has_buffers(page) || PageChecked(page)) {
+=======
+	trace_ext3_journalled_writepage(page);
+	if (!page_has_buffers(page) || PageChecked(page)) {
+		if (ext3_journal_current_handle())
+			goto no_write;
+
+		handle = ext3_journal_start(inode,
+					    ext3_writepage_trans_blocks(inode));
+		if (IS_ERR(handle)) {
+			ret = PTR_ERR(handle);
+			goto no_write;
+		}
+>>>>>>> v3.18
 		/*
 		 * It's mmapped pagecache.  Add buffers and journal it.  There
 		 * doesn't seem much point in redirtying the page here.
@@ -1791,6 +1828,7 @@ static int ext3_journalled_writepage(struct page *page,
 		atomic_set(&EXT3_I(inode)->i_datasync_tid,
 			   handle->h_transaction->t_tid);
 		unlock_page(page);
+<<<<<<< HEAD
 	} else {
 		/*
 		 * It may be a page full of checkpoint-mode buffers.  We don't
@@ -1802,6 +1840,20 @@ static int ext3_journalled_writepage(struct page *page,
 	err = ext3_journal_stop(handle);
 	if (!ret)
 		ret = err;
+=======
+		err = ext3_journal_stop(handle);
+		if (!ret)
+			ret = err;
+	} else {
+		/*
+		 * It is a page full of checkpoint-mode buffers. Go and write
+		 * them. They should have been already mapped when they went
+		 * to the journal so provide NULL get_block function to catch
+		 * errors.
+		 */
+		ret = block_write_full_page(page, NULL, wbc);
+	}
+>>>>>>> v3.18
 out:
 	return ret;
 
@@ -1825,19 +1877,35 @@ ext3_readpages(struct file *file, struct address_space *mapping,
 	return mpage_readpages(mapping, pages, nr_pages, ext3_get_block);
 }
 
+<<<<<<< HEAD
 static void ext3_invalidatepage(struct page *page, unsigned long offset)
 {
 	journal_t *journal = EXT3_JOURNAL(page->mapping->host);
 
 	trace_ext3_invalidatepage(page, offset);
+=======
+static void ext3_invalidatepage(struct page *page, unsigned int offset,
+				unsigned int length)
+{
+	journal_t *journal = EXT3_JOURNAL(page->mapping->host);
+
+	trace_ext3_invalidatepage(page, offset, length);
+>>>>>>> v3.18
 
 	/*
 	 * If it's a full truncate we just forget about the pending dirtying
 	 */
+<<<<<<< HEAD
 	if (offset == 0)
 		ClearPageChecked(page);
 
 	journal_invalidatepage(journal, page, offset);
+=======
+	if (offset == 0 && length == PAGE_CACHE_SIZE)
+		ClearPageChecked(page);
+
+	journal_invalidatepage(journal, page, offset, length);
+>>>>>>> v3.18
 }
 
 static int ext3_releasepage(struct page *page, gfp_t wait)
@@ -1861,8 +1929,12 @@ static int ext3_releasepage(struct page *page, gfp_t wait)
  * VFS code falls back into buffered path in that case so we are safe.
  */
 static ssize_t ext3_direct_IO(int rw, struct kiocb *iocb,
+<<<<<<< HEAD
 			const struct iovec *iov, loff_t offset,
 			unsigned long nr_segs)
+=======
+			struct iov_iter *iter, loff_t offset)
+>>>>>>> v3.18
 {
 	struct file *file = iocb->ki_filp;
 	struct inode *inode = file->f_mapping->host;
@@ -1870,10 +1942,17 @@ static ssize_t ext3_direct_IO(int rw, struct kiocb *iocb,
 	handle_t *handle;
 	ssize_t ret;
 	int orphan = 0;
+<<<<<<< HEAD
 	size_t count = iov_length(iov, nr_segs);
 	int retries = 0;
 
 	trace_ext3_direct_IO_enter(inode, offset, iov_length(iov, nr_segs), rw);
+=======
+	size_t count = iov_iter_count(iter);
+	int retries = 0;
+
+	trace_ext3_direct_IO_enter(inode, offset, count, rw);
+>>>>>>> v3.18
 
 	if (rw == WRITE) {
 		loff_t final_size = offset + count;
@@ -1897,15 +1976,23 @@ static ssize_t ext3_direct_IO(int rw, struct kiocb *iocb,
 	}
 
 retry:
+<<<<<<< HEAD
 	ret = blockdev_direct_IO(rw, iocb, inode, iov, offset, nr_segs,
 				 ext3_get_block);
+=======
+	ret = blockdev_direct_IO(rw, iocb, inode, iter, offset, ext3_get_block);
+>>>>>>> v3.18
 	/*
 	 * In case of error extending write may have instantiated a few
 	 * blocks outside i_size. Trim these off again.
 	 */
 	if (unlikely((rw & WRITE) && ret < 0)) {
 		loff_t isize = i_size_read(inode);
+<<<<<<< HEAD
 		loff_t end = offset + iov_length(iov, nr_segs);
+=======
+		loff_t end = offset + count;
+>>>>>>> v3.18
 
 		if (end > isize)
 			ext3_truncate_failed_direct_write(inode);
@@ -1924,6 +2011,11 @@ retry:
 			 * and pretend the write failed... */
 			ext3_truncate_failed_direct_write(inode);
 			ret = PTR_ERR(handle);
+<<<<<<< HEAD
+=======
+			if (inode->i_nlink)
+				ext3_orphan_del(NULL, inode);
+>>>>>>> v3.18
 			goto out;
 		}
 		if (inode->i_nlink)
@@ -1948,8 +2040,12 @@ retry:
 			ret = err;
 	}
 out:
+<<<<<<< HEAD
 	trace_ext3_direct_IO_exit(inode, offset,
 				iov_length(iov, nr_segs), rw, ret);
+=======
+	trace_ext3_direct_IO_exit(inode, offset, count, rw, ret);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -3211,6 +3307,7 @@ out_brelse:
  *
  * We are called from a few places:
  *
+<<<<<<< HEAD
  * - Within generic_file_write() for O_SYNC files.
  *   Here, there will be no transaction running. We wait for any running
  *   transaction to commit.
@@ -3226,6 +3323,22 @@ out_brelse:
  * because the inode has been copied into a raw inode buffer in
  * ext3_mark_inode_dirty().  This is a correctness thing for O_SYNC and for
  * knfsd.
+=======
+ * - Within generic_file_aio_write() -> generic_write_sync() for O_SYNC files.
+ *   Here, there will be no transaction running. We wait for any running
+ *   transaction to commit.
+ *
+ * - Within flush work (for sys_sync(), kupdate and such).
+ *   We wait on commit, if told to.
+ *
+ * - Within iput_final() -> write_inode_now()
+ *   We wait on commit, if told to.
+ *
+ * In all cases it is actually safe for us to return without doing anything,
+ * because the inode has been copied into a raw inode buffer in
+ * ext3_mark_inode_dirty().  This is a correctness thing for WB_SYNC_ALL
+ * writeback.
+>>>>>>> v3.18
  *
  * Note that we are absolutely dependent upon all inode dirtiers doing the
  * right thing: they *must* call mark_inode_dirty() after dirtying info in
@@ -3237,6 +3350,7 @@ out_brelse:
  *	stuff();
  *	inode->i_size = expr;
  *
+<<<<<<< HEAD
  * is in error because a kswapd-driven write_inode() could occur while
  * `stuff()' is running, and the new i_size will be lost.  Plus the inode
  * will no longer be on the superblock's dirty inode list.
@@ -3244,6 +3358,15 @@ out_brelse:
 int ext3_write_inode(struct inode *inode, struct writeback_control *wbc)
 {
 	if (current->flags & PF_MEMALLOC)
+=======
+ * is in error because write_inode() could occur while `stuff()' is running,
+ * and the new i_size will be lost.  Plus the inode will no longer be on the
+ * superblock's dirty inode list.
+ */
+int ext3_write_inode(struct inode *inode, struct writeback_control *wbc)
+{
+	if (WARN_ON_ONCE(current->flags & PF_MEMALLOC))
+>>>>>>> v3.18
 		return 0;
 
 	if (ext3_journal_current_handle()) {
@@ -3252,7 +3375,16 @@ int ext3_write_inode(struct inode *inode, struct writeback_control *wbc)
 		return -EIO;
 	}
 
+<<<<<<< HEAD
 	if (wbc->sync_mode != WB_SYNC_ALL)
+=======
+	/*
+	 * No need to force transaction in WB_SYNC_NONE mode. Also
+	 * ext3_sync_fs() will force the commit after everything is
+	 * written.
+	 */
+	if (wbc->sync_mode != WB_SYNC_ALL || wbc->for_sync)
+>>>>>>> v3.18
 		return 0;
 
 	return ext3_force_commit(inode->i_sb);
@@ -3364,7 +3496,11 @@ int ext3_setattr(struct dentry *dentry, struct iattr *attr)
 	mark_inode_dirty(inode);
 
 	if (ia_valid & ATTR_MODE)
+<<<<<<< HEAD
 		rc = ext3_acl_chmod(inode);
+=======
+		rc = posix_acl_chmod(inode, inode->i_mode);
+>>>>>>> v3.18
 
 err_out:
 	ext3_std_error(inode->i_sb, error);

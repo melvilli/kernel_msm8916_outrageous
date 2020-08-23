@@ -20,7 +20,10 @@
 #include <linux/slab.h>
 #include <linux/input.h>
 #include <linux/serio.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 
 #define DRIVER_DESC	"Touchright serial touchscreen driver"
 

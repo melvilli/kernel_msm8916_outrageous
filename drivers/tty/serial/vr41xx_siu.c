@@ -559,7 +559,11 @@ static void siu_set_termios(struct uart_port *port, struct ktermios *new,
 	port->read_status_mask = UART_LSR_THRE | UART_LSR_OE | UART_LSR_DR;
 	if (c_iflag & INPCK)
 		port->read_status_mask |= UART_LSR_FE | UART_LSR_PE;
+<<<<<<< HEAD
 	if (c_iflag & (BRKINT | PARMRK))
+=======
+	if (c_iflag & (IGNBRK | BRKINT | PARMRK))
+>>>>>>> v3.18
 		port->read_status_mask |= UART_LSR_BI;
 
 	port->ignore_status_mask = 0;
@@ -705,7 +709,11 @@ static int siu_init_ports(struct platform_device *pdev)
 {
 	struct uart_port *port;
 	struct resource *res;
+<<<<<<< HEAD
 	int *type = pdev->dev.platform_data;
+=======
+	int *type = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	int i;
 
 	if (!type)
@@ -847,7 +855,10 @@ void __init vr41xx_siu_early_setup(struct uart_port *port)
 	siu_uart_ports[port->line].type = port->type;
 	siu_uart_ports[port->line].uartclk = SIU_BAUD_BASE * 16;
 	siu_uart_ports[port->line].mapbase = port->mapbase;
+<<<<<<< HEAD
 	siu_uart_ports[port->line].mapbase = port->mapbase;
+=======
+>>>>>>> v3.18
 	siu_uart_ports[port->line].ops = &siu_uart_ops;
 }
 

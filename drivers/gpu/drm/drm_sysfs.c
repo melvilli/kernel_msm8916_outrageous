@@ -21,23 +21,38 @@
 #include <drm/drm_sysfs.h>
 #include <drm/drm_core.h>
 #include <drm/drmP.h>
+<<<<<<< HEAD
 
 #define to_drm_minor(d) container_of(d, struct drm_minor, kdev)
 #define to_drm_connector(d) container_of(d, struct drm_connector, kdev)
+=======
+#include "drm_internal.h"
+
+#define to_drm_minor(d) dev_get_drvdata(d)
+#define to_drm_connector(d) dev_get_drvdata(d)
+>>>>>>> v3.18
 
 static struct device_type drm_sysfs_device_minor = {
 	.name = "drm_minor"
 };
 
 /**
+<<<<<<< HEAD
  * drm_class_suspend - DRM class suspend hook
+=======
+ * __drm_class_suspend - internal DRM class suspend routine
+>>>>>>> v3.18
  * @dev: Linux device to suspend
  * @state: power state to enter
  *
  * Just figures out what the actual struct drm_device associated with
  * @dev is and calls its suspend hook, if present.
  */
+<<<<<<< HEAD
 static int drm_class_suspend(struct device *dev, pm_message_t state)
+=======
+static int __drm_class_suspend(struct device *dev, pm_message_t state)
+>>>>>>> v3.18
 {
 	if (dev->type == &drm_sysfs_device_minor) {
 		struct drm_minor *drm_minor = to_drm_minor(dev);
@@ -52,6 +67,29 @@ static int drm_class_suspend(struct device *dev, pm_message_t state)
 }
 
 /**
+<<<<<<< HEAD
+=======
+ * drm_class_suspend - internal DRM class suspend hook. Simply calls
+ * __drm_class_suspend() with the correct pm state.
+ * @dev: Linux device to suspend
+ */
+static int drm_class_suspend(struct device *dev)
+{
+	return __drm_class_suspend(dev, PMSG_SUSPEND);
+}
+
+/**
+ * drm_class_freeze - internal DRM class freeze hook. Simply calls
+ * __drm_class_suspend() with the correct pm state.
+ * @dev: Linux device to freeze
+ */
+static int drm_class_freeze(struct device *dev)
+{
+	return __drm_class_suspend(dev, PMSG_FREEZE);
+}
+
+/**
+>>>>>>> v3.18
  * drm_class_resume - DRM class resume hook
  * @dev: Linux device to resume
  *
@@ -72,6 +110,15 @@ static int drm_class_resume(struct device *dev)
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+static const struct dev_pm_ops drm_class_dev_pm_ops = {
+	.suspend	= drm_class_suspend,
+	.resume		= drm_class_resume,
+	.freeze		= drm_class_freeze,
+};
+
+>>>>>>> v3.18
 static char *drm_devnode(struct device *dev, umode_t *mode)
 {
 	return kasprintf(GFP_KERNEL, "dri/%s", dev_name(dev));
@@ -106,8 +153,12 @@ struct class *drm_sysfs_create(struct module *owner, char *name)
 		goto err_out;
 	}
 
+<<<<<<< HEAD
 	class->suspend = drm_class_suspend;
 	class->resume = drm_class_resume;
+=======
+	class->pm = &drm_class_dev_pm_ops;
+>>>>>>> v3.18
 
 	err = class_create_file(class, &class_attr_version.attr);
 	if (err)
@@ -137,6 +188,7 @@ void drm_sysfs_destroy(void)
 	drm_class = NULL;
 }
 
+<<<<<<< HEAD
 /**
  * drm_sysfs_device_release - do nothing
  * @dev: Linux device
@@ -151,6 +203,8 @@ static void drm_sysfs_device_release(struct device *dev)
 	return;
 }
 
+=======
+>>>>>>> v3.18
 /*
  * Connector properties
  */
@@ -355,11 +409,14 @@ static struct bin_attribute edid_attr = {
  * properties (so far, connection status, dpms, mode list & edid) and
  * generate a hotplug event so userspace knows there's a new connector
  * available.
+<<<<<<< HEAD
  *
  * Note:
  * This routine should only be called *once* for each registered connector.
  * A second call for an already registered connector will trigger the BUG_ON
  * below.
+=======
+>>>>>>> v3.18
  */
 int drm_sysfs_connector_add(struct drm_connector *connector)
 {
@@ -369,6 +426,7 @@ int drm_sysfs_connector_add(struct drm_connector *connector)
 	int i;
 	int ret;
 
+<<<<<<< HEAD
 	/* We shouldn't get called more than once for the same connector */
 	BUG_ON(device_is_registered(&connector->kdev));
 
@@ -385,13 +443,31 @@ int drm_sysfs_connector_add(struct drm_connector *connector)
 
 	if (ret) {
 		DRM_ERROR("failed to register connector device: %d\n", ret);
+=======
+	if (connector->kdev)
+		return 0;
+
+	connector->kdev = device_create(drm_class, dev->primary->kdev,
+					0, connector, "card%d-%s",
+					dev->primary->index, connector->name);
+	DRM_DEBUG("adding \"%s\" to sysfs\n",
+		  connector->name);
+
+	if (IS_ERR(connector->kdev)) {
+		DRM_ERROR("failed to register connector device: %ld\n", PTR_ERR(connector->kdev));
+		ret = PTR_ERR(connector->kdev);
+>>>>>>> v3.18
 		goto out;
 	}
 
 	/* Standard attributes */
 
 	for (attr_cnt = 0; attr_cnt < ARRAY_SIZE(connector_attrs); attr_cnt++) {
+<<<<<<< HEAD
 		ret = device_create_file(&connector->kdev, &connector_attrs[attr_cnt]);
+=======
+		ret = device_create_file(connector->kdev, &connector_attrs[attr_cnt]);
+>>>>>>> v3.18
 		if (ret)
 			goto err_out_files;
 	}
@@ -408,7 +484,11 @@ int drm_sysfs_connector_add(struct drm_connector *connector)
 		case DRM_MODE_CONNECTOR_Component:
 		case DRM_MODE_CONNECTOR_TV:
 			for (opt_cnt = 0; opt_cnt < ARRAY_SIZE(connector_attrs_opt1); opt_cnt++) {
+<<<<<<< HEAD
 				ret = device_create_file(&connector->kdev, &connector_attrs_opt1[opt_cnt]);
+=======
+				ret = device_create_file(connector->kdev, &connector_attrs_opt1[opt_cnt]);
+>>>>>>> v3.18
 				if (ret)
 					goto err_out_files;
 			}
@@ -417,7 +497,11 @@ int drm_sysfs_connector_add(struct drm_connector *connector)
 			break;
 	}
 
+<<<<<<< HEAD
 	ret = sysfs_create_bin_file(&connector->kdev.kobj, &edid_attr);
+=======
+	ret = sysfs_create_bin_file(&connector->kdev->kobj, &edid_attr);
+>>>>>>> v3.18
 	if (ret)
 		goto err_out_files;
 
@@ -428,15 +512,25 @@ int drm_sysfs_connector_add(struct drm_connector *connector)
 
 err_out_files:
 	for (i = 0; i < opt_cnt; i++)
+<<<<<<< HEAD
 		device_remove_file(&connector->kdev, &connector_attrs_opt1[i]);
 	for (i = 0; i < attr_cnt; i++)
 		device_remove_file(&connector->kdev, &connector_attrs[i]);
 	device_unregister(&connector->kdev);
+=======
+		device_remove_file(connector->kdev, &connector_attrs_opt1[i]);
+	for (i = 0; i < attr_cnt; i++)
+		device_remove_file(connector->kdev, &connector_attrs[i]);
+	device_unregister(connector->kdev);
+>>>>>>> v3.18
 
 out:
 	return ret;
 }
+<<<<<<< HEAD
 EXPORT_SYMBOL(drm_sysfs_connector_add);
+=======
+>>>>>>> v3.18
 
 /**
  * drm_sysfs_connector_remove - remove an connector device from sysfs
@@ -455,6 +549,7 @@ void drm_sysfs_connector_remove(struct drm_connector *connector)
 {
 	int i;
 
+<<<<<<< HEAD
 	if (!connector->kdev.parent)
 		return;
 	DRM_DEBUG("removing \"%s\" from sysfs\n",
@@ -467,6 +562,19 @@ void drm_sysfs_connector_remove(struct drm_connector *connector)
 	connector->kdev.parent = NULL;
 }
 EXPORT_SYMBOL(drm_sysfs_connector_remove);
+=======
+	if (!connector->kdev)
+		return;
+	DRM_DEBUG("removing \"%s\" from sysfs\n",
+		  connector->name);
+
+	for (i = 0; i < ARRAY_SIZE(connector_attrs); i++)
+		device_remove_file(connector->kdev, &connector_attrs[i]);
+	sysfs_remove_bin_file(&connector->kdev->kobj, &edid_attr);
+	device_unregister(connector->kdev);
+	connector->kdev = NULL;
+}
+>>>>>>> v3.18
 
 /**
  * drm_sysfs_hotplug_event - generate a DRM uevent
@@ -483,6 +591,7 @@ void drm_sysfs_hotplug_event(struct drm_device *dev)
 
 	DRM_DEBUG("generating hotplug event\n");
 
+<<<<<<< HEAD
 	kobject_uevent_env(&dev->primary->kdev.kobj, KOBJ_CHANGE, envp);
 }
 EXPORT_SYMBOL(drm_sysfs_hotplug_event);
@@ -542,6 +651,66 @@ void drm_sysfs_device_remove(struct drm_minor *minor)
 	minor->kdev.parent = NULL;
 }
 
+=======
+	kobject_uevent_env(&dev->primary->kdev->kobj, KOBJ_CHANGE, envp);
+}
+EXPORT_SYMBOL(drm_sysfs_hotplug_event);
+
+static void drm_sysfs_release(struct device *dev)
+{
+	kfree(dev);
+}
+
+/**
+ * drm_sysfs_minor_alloc() - Allocate sysfs device for given minor
+ * @minor: minor to allocate sysfs device for
+ *
+ * This allocates a new sysfs device for @minor and returns it. The device is
+ * not registered nor linked. The caller has to use device_add() and
+ * device_del() to register and unregister it.
+ *
+ * Note that dev_get_drvdata() on the new device will return the minor.
+ * However, the device does not hold a ref-count to the minor nor to the
+ * underlying drm_device. This is unproblematic as long as you access the
+ * private data only in sysfs callbacks. device_del() disables those
+ * synchronously, so they cannot be called after you cleanup a minor.
+ */
+struct device *drm_sysfs_minor_alloc(struct drm_minor *minor)
+{
+	const char *minor_str;
+	struct device *kdev;
+	int r;
+
+	if (minor->type == DRM_MINOR_CONTROL)
+		minor_str = "controlD%d";
+	else if (minor->type == DRM_MINOR_RENDER)
+		minor_str = "renderD%d";
+	else
+		minor_str = "card%d";
+
+	kdev = kzalloc(sizeof(*kdev), GFP_KERNEL);
+	if (!kdev)
+		return ERR_PTR(-ENOMEM);
+
+	device_initialize(kdev);
+	kdev->devt = MKDEV(DRM_MAJOR, minor->index);
+	kdev->class = drm_class;
+	kdev->type = &drm_sysfs_device_minor;
+	kdev->parent = minor->dev->dev;
+	kdev->release = drm_sysfs_release;
+	dev_set_drvdata(kdev, minor);
+
+	r = dev_set_name(kdev, minor_str, minor->index);
+	if (r < 0)
+		goto err_free;
+
+	return kdev;
+
+err_free:
+	put_device(kdev);
+	return ERR_PTR(r);
+}
+>>>>>>> v3.18
 
 /**
  * drm_class_device_register - Register a struct device in the drm class.

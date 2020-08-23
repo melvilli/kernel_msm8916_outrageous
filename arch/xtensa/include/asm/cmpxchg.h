@@ -93,6 +93,10 @@ static inline unsigned long __cmpxchg_local(volatile void *ptr,
 	((__typeof__(*(ptr)))__cmpxchg_local_generic((ptr), (unsigned long)(o),\
 			(unsigned long)(n), sizeof(*(ptr))))
 #define cmpxchg64_local(ptr, o, n) __cmpxchg64_local_generic((ptr), (o), (n))
+<<<<<<< HEAD
+=======
+#define cmpxchg64(ptr, o, n)    cmpxchg64_local((ptr), (o), (n))
+>>>>>>> v3.18
 
 /*
  * xchg_u32

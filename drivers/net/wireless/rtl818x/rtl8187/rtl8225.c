@@ -2,10 +2,17 @@
  * Radio tuning for RTL8225 on RTL8187
  *
  * Copyright 2007 Michael Wu <flamingice@sourmilk.net>
+<<<<<<< HEAD
  * Copyright 2007 Andrea Merello <andreamrl@tiscali.it>
  *
  * Based on the r8187 driver, which is:
  * Copyright 2005 Andrea Merello <andreamrl@tiscali.it>, et al.
+=======
+ * Copyright 2007 Andrea Merello <andrea.merello@gmail.com>
+ *
+ * Based on the r8187 driver, which is:
+ * Copyright 2005 Andrea Merello <andrea.merello@gmail.com>, et al.
+>>>>>>> v3.18
  *
  * Magic delays, register offsets, and phy value tables below are
  * taken from the original r8187 driver sources.  Thanks to Realtek
@@ -16,7 +23,10 @@
  * published by the Free Software Foundation.
  */
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/usb.h>
 #include <net/mac80211.h>
 

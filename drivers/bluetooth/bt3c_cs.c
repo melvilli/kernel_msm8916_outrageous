@@ -67,7 +67,11 @@ MODULE_FIRMWARE("BT3CPCC.bin");
 /* ======================== Local structures ======================== */
 
 
+<<<<<<< HEAD
 typedef struct bt3c_info_t {
+=======
+struct bt3c_info {
+>>>>>>> v3.18
 	struct pcmcia_device *p_dev;
 
 	struct hci_dev *hdev;
@@ -80,7 +84,11 @@ typedef struct bt3c_info_t {
 	unsigned long rx_state;
 	unsigned long rx_count;
 	struct sk_buff *rx_skb;
+<<<<<<< HEAD
 } bt3c_info_t;
+=======
+};
+>>>>>>> v3.18
 
 
 static int bt3c_config(struct pcmcia_device *link);
@@ -175,7 +183,11 @@ static int bt3c_write(unsigned int iobase, int fifo_size, __u8 *buf, int len)
 }
 
 
+<<<<<<< HEAD
 static void bt3c_write_wakeup(bt3c_info_t *info)
+=======
+static void bt3c_write_wakeup(struct bt3c_info *info)
+>>>>>>> v3.18
 {
 	if (!info) {
 		BT_ERR("Unknown device");
@@ -193,8 +205,13 @@ static void bt3c_write_wakeup(bt3c_info_t *info)
 		if (!pcmcia_dev_present(info->p_dev))
 			break;
 
+<<<<<<< HEAD
 
 		if (!(skb = skb_dequeue(&(info->txq)))) {
+=======
+		skb = skb_dequeue(&(info->txq));
+		if (!skb) {
+>>>>>>> v3.18
 			clear_bit(XMIT_SENDING, &(info->tx_state));
 			break;
 		}
@@ -214,7 +231,11 @@ static void bt3c_write_wakeup(bt3c_info_t *info)
 }
 
 
+<<<<<<< HEAD
 static void bt3c_receive(bt3c_info_t *info)
+=======
+static void bt3c_receive(struct bt3c_info *info)
+>>>>>>> v3.18
 {
 	unsigned int iobase;
 	int size = 0, avail;
@@ -238,7 +259,12 @@ static void bt3c_receive(bt3c_info_t *info)
 		if (info->rx_skb == NULL) {
 			info->rx_state = RECV_WAIT_PACKET_TYPE;
 			info->rx_count = 0;
+<<<<<<< HEAD
 			if (!(info->rx_skb = bt_skb_alloc(HCI_MAX_FRAME_SIZE, GFP_ATOMIC))) {
+=======
+			info->rx_skb = bt_skb_alloc(HCI_MAX_FRAME_SIZE, GFP_ATOMIC);
+			if (!info->rx_skb) {
+>>>>>>> v3.18
 				BT_ERR("Can't allocate mem for new packet");
 				return;
 			}
@@ -247,7 +273,10 @@ static void bt3c_receive(bt3c_info_t *info)
 
 		if (info->rx_state == RECV_WAIT_PACKET_TYPE) {
 
+<<<<<<< HEAD
 			info->rx_skb->dev = (void *) info->hdev;
+=======
+>>>>>>> v3.18
 			bt_cb(info->rx_skb)->pkt_type = inb(iobase + DATA_L);
 			inb(iobase + DATA_H);
 			//printk("bt3c: PACKET_TYPE=%02x\n", bt_cb(info->rx_skb)->pkt_type);
@@ -318,7 +347,11 @@ static void bt3c_receive(bt3c_info_t *info)
 					break;
 
 				case RECV_WAIT_DATA:
+<<<<<<< HEAD
 					hci_recv_frame(info->rx_skb);
+=======
+					hci_recv_frame(info->hdev, info->rx_skb);
+>>>>>>> v3.18
 					info->rx_skb = NULL;
 					break;
 
@@ -336,7 +369,11 @@ static void bt3c_receive(bt3c_info_t *info)
 
 static irqreturn_t bt3c_interrupt(int irq, void *dev_inst)
 {
+<<<<<<< HEAD
 	bt3c_info_t *info = dev_inst;
+=======
+	struct bt3c_info *info = dev_inst;
+>>>>>>> v3.18
 	unsigned int iobase;
 	int iir;
 	irqreturn_t r = IRQ_NONE;
@@ -388,7 +425,11 @@ static irqreturn_t bt3c_interrupt(int irq, void *dev_inst)
 
 static int bt3c_hci_flush(struct hci_dev *hdev)
 {
+<<<<<<< HEAD
 	bt3c_info_t *info = hci_get_drvdata(hdev);
+=======
+	struct bt3c_info *info = hci_get_drvdata(hdev);
+>>>>>>> v3.18
 
 	/* Drop TX queue */
 	skb_queue_purge(&(info->txq));
@@ -416,6 +457,7 @@ static int bt3c_hci_close(struct hci_dev *hdev)
 }
 
 
+<<<<<<< HEAD
 static int bt3c_hci_send_frame(struct sk_buff *skb)
 {
 	bt3c_info_t *info;
@@ -429,6 +471,13 @@ static int bt3c_hci_send_frame(struct sk_buff *skb)
 
 	info = hci_get_drvdata(hdev);
 
+=======
+static int bt3c_hci_send_frame(struct hci_dev *hdev, struct sk_buff *skb)
+{
+	struct bt3c_info *info = hci_get_drvdata(hdev);
+	unsigned long flags;
+
+>>>>>>> v3.18
 	switch (bt_cb(skb)->pkt_type) {
 	case HCI_COMMAND_PKT:
 		hdev->stat.cmd_tx++;
@@ -455,17 +504,25 @@ static int bt3c_hci_send_frame(struct sk_buff *skb)
 }
 
 
+<<<<<<< HEAD
 static int bt3c_hci_ioctl(struct hci_dev *hdev, unsigned int cmd, unsigned long arg)
 {
 	return -ENOIOCTLCMD;
 }
 
 
+=======
+>>>>>>> v3.18
 
 /* ======================== Card services HCI interaction ======================== */
 
 
+<<<<<<< HEAD
 static int bt3c_load_firmware(bt3c_info_t *info, const unsigned char *firmware,
+=======
+static int bt3c_load_firmware(struct bt3c_info *info,
+			      const unsigned char *firmware,
+>>>>>>> v3.18
 			      int count)
 {
 	char *ptr = (char *) firmware;
@@ -550,7 +607,11 @@ error:
 }
 
 
+<<<<<<< HEAD
 static int bt3c_open(bt3c_info_t *info)
+=======
+static int bt3c_open(struct bt3c_info *info)
+>>>>>>> v3.18
 {
 	const struct firmware *firmware;
 	struct hci_dev *hdev;
@@ -577,11 +638,18 @@ static int bt3c_open(bt3c_info_t *info)
 	hci_set_drvdata(hdev, info);
 	SET_HCIDEV_DEV(hdev, &info->p_dev->dev);
 
+<<<<<<< HEAD
 	hdev->open     = bt3c_hci_open;
 	hdev->close    = bt3c_hci_close;
 	hdev->flush    = bt3c_hci_flush;
 	hdev->send     = bt3c_hci_send_frame;
 	hdev->ioctl    = bt3c_hci_ioctl;
+=======
+	hdev->open  = bt3c_hci_open;
+	hdev->close = bt3c_hci_close;
+	hdev->flush = bt3c_hci_flush;
+	hdev->send  = bt3c_hci_send_frame;
+>>>>>>> v3.18
 
 	/* Load firmware */
 	err = request_firmware(&firmware, "BT3CPCC.bin", &info->p_dev->dev);
@@ -618,7 +686,11 @@ error:
 }
 
 
+<<<<<<< HEAD
 static int bt3c_close(bt3c_info_t *info)
+=======
+static int bt3c_close(struct bt3c_info *info)
+>>>>>>> v3.18
 {
 	struct hci_dev *hdev = info->hdev;
 
@@ -635,7 +707,11 @@ static int bt3c_close(bt3c_info_t *info)
 
 static int bt3c_probe(struct pcmcia_device *link)
 {
+<<<<<<< HEAD
 	bt3c_info_t *info;
+=======
+	struct bt3c_info *info;
+>>>>>>> v3.18
 
 	/* Create new info device */
 	info = devm_kzalloc(&link->dev, sizeof(*info), GFP_KERNEL);
@@ -698,7 +774,11 @@ static int bt3c_check_config_notpicky(struct pcmcia_device *p_dev,
 
 static int bt3c_config(struct pcmcia_device *link)
 {
+<<<<<<< HEAD
 	bt3c_info_t *info = link->priv;
+=======
+	struct bt3c_info *info = link->priv;
+>>>>>>> v3.18
 	int i;
 	unsigned long try;
 
@@ -739,7 +819,11 @@ failed:
 
 static void bt3c_release(struct pcmcia_device *link)
 {
+<<<<<<< HEAD
 	bt3c_info_t *info = link->priv;
+=======
+	struct bt3c_info *info = link->priv;
+>>>>>>> v3.18
 
 	bt3c_close(info);
 

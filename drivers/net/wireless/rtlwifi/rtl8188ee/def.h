@@ -11,10 +11,13 @@
  * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
  * more details.
  *
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
+=======
+>>>>>>> v3.18
  * The full GNU General Public License is included in this distribution in the
  * file called LICENSE.
  *
@@ -111,7 +114,10 @@
 
 #define CHIP_BONDING_IDENTIFIER(_value)	(((_value)>>22)&0x3)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 /* [15:12] IC version(CUT): A-cut=0, B-cut=1, C-cut=2, D-cut=3
  * [7] Manufacturer: TSMC=0, UMC=1
  * [6:4] RF type: 1T1R=0, 1T2R=1, 2T2R=2
@@ -130,7 +136,10 @@
 #define D_CUT_VERSION			((BIT(12)|BIT(13)))
 #define E_CUT_VERSION			BIT(14)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 /* MASK */
 #define IC_TYPE_MASK			(BIT(0)|BIT(1)|BIT(2))
 #define CHIP_TYPE_MASK			BIT(3)
@@ -147,7 +156,10 @@
 #define GET_CVID_ROM_VERSION(version)	((version) & ROM_VERSION_MASK)
 #define GET_CVID_CUT_VERSION(version)	((version) & CUT_VERSION_MASK)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 #define IS_81XXC(version)						\
 	((GET_CVID_IC_TYPE(version) == 0) ? true : false)
 #define IS_8723_SERIES(version)						\
@@ -174,7 +186,11 @@
 #define IS_81xxC_VENDOR_UMC_A_CUT(version)				\
 	(IS_81XXC(version) ? ((IS_CHIP_VENDOR_UMC(version)) ?		\
 	 ((GET_CVID_CUT_VERSION(version)) ? false : true) : false) : false)
+<<<<<<< HEAD
 #define IS_81xxC_VENDOR_UMC_B_CUT(version)				\
+=======
+#define IS_81XXC_VENDOR_UMC_B_CUT(version)				\
+>>>>>>> v3.18
 	(IS_81XXC(version) ? (IS_CHIP_VENDOR_UMC(version) ?		\
 	((GET_CVID_CUT_VERSION(version) == B_CUT_VERSION) ? true	\
 	: false) : false) : false)
@@ -225,6 +241,7 @@ enum power_polocy_config {
 };
 
 enum interface_select_pci {
+<<<<<<< HEAD
 	INTF_SEL1_MINICARD,
 	INTF_SEL0_PCIE,
 	INTF_SEL2_RSV,
@@ -263,6 +280,39 @@ enum wake_on_wlan_mode {
 	ewakeonbothtypepacket
 };
 
+=======
+	INTF_SEL1_MINICARD = 0,
+	INTF_SEL0_PCIE = 1,
+	INTF_SEL2_RSV = 2,
+	INTF_SEL3_RSV = 3,
+};
+
+enum hal_fw_c2h_cmd_id {
+	HAL_FW_C2H_CMD_READ_MACREG = 0,
+	HAL_FW_C2H_CMD_READ_BBREG = 1,
+	HAL_FW_C2H_CMD_READ_RFREG = 2,
+	HAL_FW_C2H_CMD_READ_EEPROM = 3,
+	HAL_FW_C2H_CMD_READ_EFUSE = 4,
+	HAL_FW_C2H_CMD_READ_CAM = 5,
+	HAL_FW_C2H_CMD_GET_BASICRATE = 6,
+	HAL_FW_C2H_CMD_GET_DATARATE = 7,
+	HAL_FW_C2H_CMD_SURVEY = 8,
+	HAL_FW_C2H_CMD_SURVEYDONE = 9,
+	HAL_FW_C2H_CMD_JOINBSS = 10,
+	HAL_FW_C2H_CMD_ADDSTA = 11,
+	HAL_FW_C2H_CMD_DELSTA = 12,
+	HAL_FW_C2H_CMD_ATIMDONE = 13,
+	HAL_FW_C2H_CMD_TX_REPORT = 14,
+	HAL_FW_C2H_CMD_CCX_REPORT = 15,
+	HAL_FW_C2H_CMD_DTM_REPORT = 16,
+	HAL_FW_C2H_CMD_TX_RATE_STATISTICS = 17,
+	HAL_FW_C2H_CMD_C2HLBK = 18,
+	HAL_FW_C2H_CMD_C2HDBG = 19,
+	HAL_FW_C2H_CMD_C2HFEEDBACK = 20,
+	HAL_FW_C2H_CMD_MAX
+};
+
+>>>>>>> v3.18
 enum rtl_desc_qsel {
 	QSLT_BK = 0x2,
 	QSLT_BE = 0x0,

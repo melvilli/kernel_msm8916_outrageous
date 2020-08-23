@@ -23,7 +23,10 @@
 #include <linux/delay.h>
 #include <linux/errno.h>
 #include <linux/fs.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/io.h>
 #include <linux/kernel.h>
 #include <linux/miscdevice.h>
@@ -266,7 +269,11 @@ static int ath79_wdt_probe(struct platform_device *pdev)
 	if (IS_ERR(wdt_clk))
 		return PTR_ERR(wdt_clk);
 
+<<<<<<< HEAD
 	err = clk_enable(wdt_clk);
+=======
+	err = clk_prepare_enable(wdt_clk);
+>>>>>>> v3.18
 	if (err)
 		return err;
 
@@ -297,14 +304,22 @@ static int ath79_wdt_probe(struct platform_device *pdev)
 	return 0;
 
 err_clk_disable:
+<<<<<<< HEAD
 	clk_disable(wdt_clk);
+=======
+	clk_disable_unprepare(wdt_clk);
+>>>>>>> v3.18
 	return err;
 }
 
 static int ath79_wdt_remove(struct platform_device *pdev)
 {
 	misc_deregister(&ath79_wdt_miscdev);
+<<<<<<< HEAD
 	clk_disable(wdt_clk);
+=======
+	clk_disable_unprepare(wdt_clk);
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -339,4 +354,7 @@ MODULE_AUTHOR("Gabor Juhos <juhosg@openwrt.org");
 MODULE_AUTHOR("Imre Kaloz <kaloz@openwrt.org");
 MODULE_LICENSE("GPL v2");
 MODULE_ALIAS("platform:" DRIVER_NAME);
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18

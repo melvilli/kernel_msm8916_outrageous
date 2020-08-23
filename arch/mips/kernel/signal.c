@@ -6,8 +6,15 @@
  * Copyright (C) 1991, 1992  Linus Torvalds
  * Copyright (C) 1994 - 2000  Ralf Baechle
  * Copyright (C) 1999, 2000 Silicon Graphics, Inc.
+<<<<<<< HEAD
  */
 #include <linux/cache.h>
+=======
+ * Copyright (C) 2014, Imagination Technologies Ltd.
+ */
+#include <linux/cache.h>
+#include <linux/context_tracking.h>
+>>>>>>> v3.18
 #include <linux/irqflags.h>
 #include <linux/sched.h>
 #include <linux/mm.h>
@@ -45,9 +52,12 @@ static int (*restore_fp_context)(struct sigcontext __user *sc);
 extern asmlinkage int _save_fp_context(struct sigcontext __user *sc);
 extern asmlinkage int _restore_fp_context(struct sigcontext __user *sc);
 
+<<<<<<< HEAD
 extern asmlinkage int fpu_emulator_save_context(struct sigcontext __user *sc);
 extern asmlinkage int fpu_emulator_restore_context(struct sigcontext __user *sc);
 
+=======
+>>>>>>> v3.18
 struct sigframe {
 	u32 sf_ass[4];		/* argument save space for o32 */
 	u32 sf_pad[2];		/* Was: signal trampoline */
@@ -63,16 +73,66 @@ struct rt_sigframe {
 };
 
 /*
+<<<<<<< HEAD
+=======
+ * Thread saved context copy to/from a signal context presumed to be on the
+ * user stack, and therefore accessed with appropriate macros from uaccess.h.
+ */
+static int copy_fp_to_sigcontext(struct sigcontext __user *sc)
+{
+	int i;
+	int err = 0;
+
+	for (i = 0; i < NUM_FPU_REGS; i++) {
+		err |=
+		    __put_user(get_fpr64(&current->thread.fpu.fpr[i], 0),
+			       &sc->sc_fpregs[i]);
+	}
+	err |= __put_user(current->thread.fpu.fcr31, &sc->sc_fpc_csr);
+
+	return err;
+}
+
+static int copy_fp_from_sigcontext(struct sigcontext __user *sc)
+{
+	int i;
+	int err = 0;
+	u64 fpr_val;
+
+	for (i = 0; i < NUM_FPU_REGS; i++) {
+		err |= __get_user(fpr_val, &sc->sc_fpregs[i]);
+		set_fpr64(&current->thread.fpu.fpr[i], 0, fpr_val);
+	}
+	err |= __get_user(current->thread.fpu.fcr31, &sc->sc_fpc_csr);
+
+	return err;
+}
+
+/*
+>>>>>>> v3.18
  * Helper routines
  */
 static int protected_save_fp_context(struct sigcontext __user *sc)
 {
 	int err;
+<<<<<<< HEAD
 	while (1) {
 		lock_fpu_owner();
 		own_fpu_inatomic(1);
 		err = save_fp_context(sc); /* this might fail */
 		unlock_fpu_owner();
+=======
+#ifndef CONFIG_EVA
+	while (1) {
+		lock_fpu_owner();
+		if (is_fpu_owner()) {
+			err = save_fp_context(sc);
+			unlock_fpu_owner();
+		} else {
+			unlock_fpu_owner();
+			err = copy_fp_to_sigcontext(sc);
+		}
+>>>>>>> v3.18
 		if (likely(!err))
 			break;
 		/* touch the sigcontext and try again */
@@ -82,17 +142,41 @@ static int protected_save_fp_context(struct sigcontext __user *sc)
 		if (err)
 			break;	/* really bad sigcontext */
 	}
+<<<<<<< HEAD
+=======
+#else
+	/*
+	 * EVA does not have FPU EVA instructions so saving fpu context directly
+	 * does not work.
+	 */
+	lose_fpu(1);
+	err = save_fp_context(sc); /* this might fail */
+#endif
+>>>>>>> v3.18
 	return err;
 }
 
 static int protected_restore_fp_context(struct sigcontext __user *sc)
 {
 	int err, tmp __maybe_unused;
+<<<<<<< HEAD
 	while (1) {
 		lock_fpu_owner();
 		own_fpu_inatomic(0);
 		err = restore_fp_context(sc); /* this might fail */
 		unlock_fpu_owner();
+=======
+#ifndef CONFIG_EVA
+	while (1) {
+		lock_fpu_owner();
+		if (is_fpu_owner()) {
+			err = restore_fp_context(sc);
+			unlock_fpu_owner();
+		} else {
+			unlock_fpu_owner();
+			err = copy_fp_from_sigcontext(sc);
+		}
+>>>>>>> v3.18
 		if (likely(!err))
 			break;
 		/* touch the sigcontext and try again */
@@ -102,6 +186,17 @@ static int protected_restore_fp_context(struct sigcontext __user *sc)
 		if (err)
 			break;	/* really bad sigcontext */
 	}
+<<<<<<< HEAD
+=======
+#else
+	/*
+	 * EVA does not have FPU EVA instructions so restoring fpu context
+	 * directly does not work.
+	 */
+	lose_fpu(0);
+	err = restore_fp_context(sc); /* this might fail */
+#endif
+>>>>>>> v3.18
 	return err;
 }
 
@@ -221,7 +316,11 @@ int restore_sigcontext(struct pt_regs *regs, struct sigcontext __user *sc)
 	return err;
 }
 
+<<<<<<< HEAD
 void __user *get_sigframe(struct k_sigaction *ka, struct pt_regs *regs,
+=======
+void __user *get_sigframe(struct ksignal *ksig, struct pt_regs *regs,
+>>>>>>> v3.18
 			  size_t frame_size)
 {
 	unsigned long sp;
@@ -236,9 +335,13 @@ void __user *get_sigframe(struct k_sigaction *ka, struct pt_regs *regs,
 	 */
 	sp -= 32;
 
+<<<<<<< HEAD
 	/* This is the X/Open sanctioned signal stack switching.  */
 	if ((ka->sa.sa_flags & SA_ONSTACK) && (sas_ss_flags (sp) == 0))
 		sp = current->sas_ss_sp + current->sas_ss_size;
+=======
+	sp = sigsp(sp, ksig);
+>>>>>>> v3.18
 
 	return (void __user *)((sp - frame_size) & (ICACHE_REFILLS_WORKAROUND_WAR ? ~(cpu_icache_line_size()-1) : ALMASK));
 }
@@ -369,20 +472,35 @@ badframe:
 }
 
 #ifdef CONFIG_TRAD_SIGNALS
+<<<<<<< HEAD
 static int setup_frame(void *sig_return, struct k_sigaction *ka,
 		       struct pt_regs *regs, int signr, sigset_t *set)
+=======
+static int setup_frame(void *sig_return, struct ksignal *ksig,
+		       struct pt_regs *regs, sigset_t *set)
+>>>>>>> v3.18
 {
 	struct sigframe __user *frame;
 	int err = 0;
 
+<<<<<<< HEAD
 	frame = get_sigframe(ka, regs, sizeof(*frame));
 	if (!access_ok(VERIFY_WRITE, frame, sizeof (*frame)))
 		goto give_sigsegv;
+=======
+	frame = get_sigframe(ksig, regs, sizeof(*frame));
+	if (!access_ok(VERIFY_WRITE, frame, sizeof (*frame)))
+		return -EFAULT;
+>>>>>>> v3.18
 
 	err |= setup_sigcontext(regs, &frame->sf_sc);
 	err |= __copy_to_user(&frame->sf_mask, set, sizeof(*set));
 	if (err)
+<<<<<<< HEAD
 		goto give_sigsegv;
+=======
+		return -EFAULT;
+>>>>>>> v3.18
 
 	/*
 	 * Arguments to signal handler:
@@ -394,17 +512,26 @@ static int setup_frame(void *sig_return, struct k_sigaction *ka,
 	 * $25 and c0_epc point to the signal handler, $29 points to the
 	 * struct sigframe.
 	 */
+<<<<<<< HEAD
 	regs->regs[ 4] = signr;
+=======
+	regs->regs[ 4] = ksig->sig;
+>>>>>>> v3.18
 	regs->regs[ 5] = 0;
 	regs->regs[ 6] = (unsigned long) &frame->sf_sc;
 	regs->regs[29] = (unsigned long) frame;
 	regs->regs[31] = (unsigned long) sig_return;
+<<<<<<< HEAD
 	regs->cp0_epc = regs->regs[25] = (unsigned long) ka->sa.sa_handler;
+=======
+	regs->cp0_epc = regs->regs[25] = (unsigned long) ksig->ka.sa.sa_handler;
+>>>>>>> v3.18
 
 	DEBUGP("SIG deliver (%s:%d): sp=0x%p pc=0x%lx ra=0x%lx\n",
 	       current->comm, current->pid,
 	       frame, regs->cp0_epc, regs->regs[31]);
 	return 0;
+<<<<<<< HEAD
 
 give_sigsegv:
 	force_sigsegv(signr, current);
@@ -415,16 +542,32 @@ give_sigsegv:
 static int setup_rt_frame(void *sig_return, struct k_sigaction *ka,
 			  struct pt_regs *regs, int signr, sigset_t *set,
 			  siginfo_t *info)
+=======
+}
+#endif
+
+static int setup_rt_frame(void *sig_return, struct ksignal *ksig,
+			  struct pt_regs *regs, sigset_t *set)
+>>>>>>> v3.18
 {
 	struct rt_sigframe __user *frame;
 	int err = 0;
 
+<<<<<<< HEAD
 	frame = get_sigframe(ka, regs, sizeof(*frame));
 	if (!access_ok(VERIFY_WRITE, frame, sizeof (*frame)))
 		goto give_sigsegv;
 
 	/* Create siginfo.  */
 	err |= copy_siginfo_to_user(&frame->rs_info, info);
+=======
+	frame = get_sigframe(ksig, regs, sizeof(*frame));
+	if (!access_ok(VERIFY_WRITE, frame, sizeof (*frame)))
+		return -EFAULT;
+
+	/* Create siginfo.  */
+	err |= copy_siginfo_to_user(&frame->rs_info, &ksig->info);
+>>>>>>> v3.18
 
 	/* Create the ucontext.	 */
 	err |= __put_user(0, &frame->rs_uc.uc_flags);
@@ -434,7 +577,11 @@ static int setup_rt_frame(void *sig_return, struct k_sigaction *ka,
 	err |= __copy_to_user(&frame->rs_uc.uc_sigmask, set, sizeof(*set));
 
 	if (err)
+<<<<<<< HEAD
 		goto give_sigsegv;
+=======
+		return -EFAULT;
+>>>>>>> v3.18
 
 	/*
 	 * Arguments to signal handler:
@@ -446,22 +593,33 @@ static int setup_rt_frame(void *sig_return, struct k_sigaction *ka,
 	 * $25 and c0_epc point to the signal handler, $29 points to
 	 * the struct rt_sigframe.
 	 */
+<<<<<<< HEAD
 	regs->regs[ 4] = signr;
+=======
+	regs->regs[ 4] = ksig->sig;
+>>>>>>> v3.18
 	regs->regs[ 5] = (unsigned long) &frame->rs_info;
 	regs->regs[ 6] = (unsigned long) &frame->rs_uc;
 	regs->regs[29] = (unsigned long) frame;
 	regs->regs[31] = (unsigned long) sig_return;
+<<<<<<< HEAD
 	regs->cp0_epc = regs->regs[25] = (unsigned long) ka->sa.sa_handler;
+=======
+	regs->cp0_epc = regs->regs[25] = (unsigned long) ksig->ka.sa.sa_handler;
+>>>>>>> v3.18
 
 	DEBUGP("SIG deliver (%s:%d): sp=0x%p pc=0x%lx ra=0x%lx\n",
 	       current->comm, current->pid,
 	       frame, regs->cp0_epc, regs->regs[31]);
 
 	return 0;
+<<<<<<< HEAD
 
 give_sigsegv:
 	force_sigsegv(signr, current);
 	return -EFAULT;
+=======
+>>>>>>> v3.18
 }
 
 struct mips_abi mips_abi = {
@@ -475,8 +633,12 @@ struct mips_abi mips_abi = {
 	.restart	= __NR_restart_syscall
 };
 
+<<<<<<< HEAD
 static void handle_signal(unsigned long sig, siginfo_t *info,
 	struct k_sigaction *ka, struct pt_regs *regs)
+=======
+static void handle_signal(struct ksignal *ksig, struct pt_regs *regs)
+>>>>>>> v3.18
 {
 	sigset_t *oldset = sigmask_to_save();
 	int ret;
@@ -498,7 +660,11 @@ static void handle_signal(unsigned long sig, siginfo_t *info,
 			regs->regs[2] = EINTR;
 			break;
 		case ERESTARTSYS:
+<<<<<<< HEAD
 			if (!(ka->sa.sa_flags & SA_RESTART)) {
+=======
+			if (!(ksig->ka.sa.sa_flags & SA_RESTART)) {
+>>>>>>> v3.18
 				regs->regs[2] = EINTR;
 				break;
 			}
@@ -512,6 +678,7 @@ static void handle_signal(unsigned long sig, siginfo_t *info,
 		regs->regs[0] = 0;		/* Don't deal with this again.	*/
 	}
 
+<<<<<<< HEAD
 	if (sig_uses_siginfo(ka))
 		ret = abi->setup_rt_frame(vdso + abi->rt_signal_return_offset,
 					  ka, regs, sig, oldset, info);
@@ -523,10 +690,21 @@ static void handle_signal(unsigned long sig, siginfo_t *info,
 		return;
 
 	signal_delivered(sig, info, ka, regs, 0);
+=======
+	if (sig_uses_siginfo(&ksig->ka))
+		ret = abi->setup_rt_frame(vdso + abi->rt_signal_return_offset,
+					  ksig, regs, oldset);
+	else
+		ret = abi->setup_frame(vdso + abi->signal_return_offset, ksig,
+				       regs, oldset);
+
+	signal_setup_done(ret, ksig, 0);
+>>>>>>> v3.18
 }
 
 static void do_signal(struct pt_regs *regs)
 {
+<<<<<<< HEAD
 	struct k_sigaction ka;
 	siginfo_t info;
 	int signr;
@@ -535,6 +713,13 @@ static void do_signal(struct pt_regs *regs)
 	if (signr > 0) {
 		/* Whee!  Actually deliver the signal.	*/
 		handle_signal(signr, &info, &ka, regs);
+=======
+	struct ksignal ksig;
+
+	if (get_signal(&ksig)) {
+		/* Whee!  Actually deliver the signal.	*/
+		handle_signal(&ksig, regs);
+>>>>>>> v3.18
 		return;
 	}
 
@@ -573,6 +758,11 @@ asmlinkage void do_notify_resume(struct pt_regs *regs, void *unused,
 {
 	local_irq_enable();
 
+<<<<<<< HEAD
+=======
+	user_exit();
+
+>>>>>>> v3.18
 	/* deal with pending signal delivery */
 	if (thread_info_flags & _TIF_SIGPENDING)
 		do_signal(regs);
@@ -581,26 +771,49 @@ asmlinkage void do_notify_resume(struct pt_regs *regs, void *unused,
 		clear_thread_flag(TIF_NOTIFY_RESUME);
 		tracehook_notify_resume(regs);
 	}
+<<<<<<< HEAD
 }
 
 #ifdef CONFIG_SMP
+=======
+
+	user_enter();
+}
+
+#ifdef CONFIG_SMP
+#ifndef CONFIG_EVA
+>>>>>>> v3.18
 static int smp_save_fp_context(struct sigcontext __user *sc)
 {
 	return raw_cpu_has_fpu
 	       ? _save_fp_context(sc)
+<<<<<<< HEAD
 	       : fpu_emulator_save_context(sc);
+=======
+	       : copy_fp_to_sigcontext(sc);
+>>>>>>> v3.18
 }
 
 static int smp_restore_fp_context(struct sigcontext __user *sc)
 {
 	return raw_cpu_has_fpu
 	       ? _restore_fp_context(sc)
+<<<<<<< HEAD
 	       : fpu_emulator_restore_context(sc);
 }
+=======
+	       : copy_fp_from_sigcontext(sc);
+}
+#endif /* CONFIG_EVA */
+>>>>>>> v3.18
 #endif
 
 static int signal_setup(void)
 {
+<<<<<<< HEAD
+=======
+#ifndef CONFIG_EVA
+>>>>>>> v3.18
 #ifdef CONFIG_SMP
 	/* For now just do the cpu_has_fpu check when the functions are invoked */
 	save_fp_context = smp_save_fp_context;
@@ -610,9 +823,19 @@ static int signal_setup(void)
 		save_fp_context = _save_fp_context;
 		restore_fp_context = _restore_fp_context;
 	} else {
+<<<<<<< HEAD
 		save_fp_context = fpu_emulator_save_context;
 		restore_fp_context = fpu_emulator_restore_context;
 	}
+=======
+		save_fp_context = copy_fp_to_sigcontext;
+		restore_fp_context = copy_fp_from_sigcontext;
+	}
+#endif /* CONFIG_SMP */
+#else
+	save_fp_context = copy_fp_to_sigcontext;
+	restore_fp_context = copy_fp_from_sigcontext;
+>>>>>>> v3.18
 #endif
 
 	return 0;

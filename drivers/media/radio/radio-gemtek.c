@@ -332,7 +332,11 @@ static int __init gemtek_init(void)
 
 static void __exit gemtek_exit(void)
 {
+<<<<<<< HEAD
 	hardmute = 1;	/* Turn off PLL */
+=======
+	hardmute = true;	/* Turn off PLL */
+>>>>>>> v3.18
 #ifdef CONFIG_PNP
 	pnp_unregister_driver(&gemtek_driver.pnp_driver);
 #endif

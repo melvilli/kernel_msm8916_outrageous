@@ -81,6 +81,10 @@ struct appledisplay {
 	struct delayed_work work;
 	int button_pressed;
 	spinlock_t lock;
+<<<<<<< HEAD
+=======
+	struct mutex sysfslock;		/* concurrent read and write */
+>>>>>>> v3.18
 };
 
 static atomic_t count_displays = ATOMIC_INIT(0);
@@ -110,7 +114,11 @@ static void appledisplay_complete(struct urb *urb)
 			__func__, status);
 		return;
 	default:
+<<<<<<< HEAD
 		dev_dbg(dev, "%s - nonzero urb status received: %d/n",
+=======
+		dev_dbg(dev, "%s - nonzero urb status received: %d\n",
+>>>>>>> v3.18
 			__func__, status);
 		goto exit;
 	}
@@ -144,6 +152,10 @@ static int appledisplay_bl_update_status(struct backlight_device *bd)
 	struct appledisplay *pdata = bl_get_data(bd);
 	int retval;
 
+<<<<<<< HEAD
+=======
+	mutex_lock(&pdata->sysfslock);
+>>>>>>> v3.18
 	pdata->msgdata[0] = 0x10;
 	pdata->msgdata[1] = bd->props.brightness;
 
@@ -156,15 +168,26 @@ static int appledisplay_bl_update_status(struct backlight_device *bd)
 		0,
 		pdata->msgdata, 2,
 		ACD_USB_TIMEOUT);
+<<<<<<< HEAD
 
+=======
+	mutex_unlock(&pdata->sysfslock);
+	
+>>>>>>> v3.18
 	return retval;
 }
 
 static int appledisplay_bl_get_brightness(struct backlight_device *bd)
 {
 	struct appledisplay *pdata = bl_get_data(bd);
+<<<<<<< HEAD
 	int retval;
 
+=======
+	int retval, brightness;
+
+	mutex_lock(&pdata->sysfslock);
+>>>>>>> v3.18
 	retval = usb_control_msg(
 		pdata->udev,
 		usb_rcvctrlpipe(pdata->udev, 0),
@@ -174,11 +197,20 @@ static int appledisplay_bl_get_brightness(struct backlight_device *bd)
 		0,
 		pdata->msgdata, 2,
 		ACD_USB_TIMEOUT);
+<<<<<<< HEAD
+=======
+	brightness = pdata->msgdata[1];
+	mutex_unlock(&pdata->sysfslock);
+>>>>>>> v3.18
 
 	if (retval < 0)
 		return retval;
 	else
+<<<<<<< HEAD
 		return pdata->msgdata[1];
+=======
+		return brightness;
+>>>>>>> v3.18
 }
 
 static const struct backlight_ops appledisplay_bl_data = {
@@ -241,6 +273,10 @@ static int appledisplay_probe(struct usb_interface *iface,
 
 	spin_lock_init(&pdata->lock);
 	INIT_DELAYED_WORK(&pdata->work, appledisplay_work);
+<<<<<<< HEAD
+=======
+	mutex_init(&pdata->sysfslock);
+>>>>>>> v3.18
 
 	/* Allocate buffer for control messages */
 	pdata->msgdata = kmalloc(ACD_MSG_BUFFER_LEN, GFP_KERNEL);

@@ -15,12 +15,17 @@
 static inline int init_new_context(struct task_struct *tsk,
 				   struct mm_struct *mm)
 {
+<<<<<<< HEAD
+=======
+	cpumask_clear(&mm->context.cpu_attach_mask);
+>>>>>>> v3.18
 	atomic_set(&mm->context.attach_count, 0);
 	mm->context.flush_mm = 0;
 	mm->context.asce_bits = _ASCE_TABLE_LENGTH | _ASCE_USER_BITS;
 #ifdef CONFIG_64BIT
 	mm->context.asce_bits |= _ASCE_TYPE_REGION3;
 #endif
+<<<<<<< HEAD
 	if (current->mm && current->mm->context.alloc_pgste) {
 		/*
 		 * alloc_pgste indicates, that any NEW context will be created
@@ -39,6 +44,10 @@ static inline int init_new_context(struct task_struct *tsk,
 		mm->context.has_pgste = 0;
 		mm->context.alloc_pgste = 0;
 	}
+=======
+	mm->context.has_pgste = 0;
+	mm->context.use_skey = 0;
+>>>>>>> v3.18
 	mm->context.asce_limit = STACK_TOP_MAX;
 	crst_table_init((unsigned long *) mm->pgd, pgd_entry_type(mm));
 	return 0;
@@ -46,6 +55,7 @@ static inline int init_new_context(struct task_struct *tsk,
 
 #define destroy_context(mm)             do { } while (0)
 
+<<<<<<< HEAD
 #ifndef CONFIG_64BIT
 #define LCTL_OPCODE "lctl"
 #else
@@ -66,11 +76,38 @@ static inline void update_mm(struct mm_struct *mm, struct task_struct *tsk)
 		asm volatile(LCTL_OPCODE" 13,13,%0"
 			     : : "m" (S390_lowcore.user_asce) );
 	set_fs(current->thread.mm_segment);
+=======
+static inline void set_user_asce(struct mm_struct *mm)
+{
+	S390_lowcore.user_asce = mm->context.asce_bits | __pa(mm->pgd);
+	if (current->thread.mm_segment.ar4)
+		__ctl_load(S390_lowcore.user_asce, 7, 7);
+	set_cpu_flag(CIF_ASCE);
+}
+
+static inline void clear_user_asce(void)
+{
+	S390_lowcore.user_asce = S390_lowcore.kernel_asce;
+
+	__ctl_load(S390_lowcore.user_asce, 1, 1);
+	__ctl_load(S390_lowcore.user_asce, 7, 7);
+}
+
+static inline void load_kernel_asce(void)
+{
+	unsigned long asce;
+
+	__ctl_store(asce, 1, 1);
+	if (asce != S390_lowcore.kernel_asce)
+		__ctl_load(S390_lowcore.kernel_asce, 1, 1);
+	set_cpu_flag(CIF_ASCE);
+>>>>>>> v3.18
 }
 
 static inline void switch_mm(struct mm_struct *prev, struct mm_struct *next,
 			     struct task_struct *tsk)
 {
+<<<<<<< HEAD
 	cpumask_set_cpu(smp_processor_id(), mm_cpumask(next));
 	update_mm(next, tsk);
 	atomic_dec(&prev->context.attach_count);
@@ -79,6 +116,42 @@ static inline void switch_mm(struct mm_struct *prev, struct mm_struct *next,
 	/* Check for TLBs not flushed yet */
 	if (next->context.flush_mm)
 		__tlb_flush_mm(next);
+=======
+	int cpu = smp_processor_id();
+
+	if (prev == next)
+		return;
+	if (MACHINE_HAS_TLB_LC)
+		cpumask_set_cpu(cpu, &next->context.cpu_attach_mask);
+	/* Clear old ASCE by loading the kernel ASCE. */
+	__ctl_load(S390_lowcore.kernel_asce, 1, 1);
+	__ctl_load(S390_lowcore.kernel_asce, 7, 7);
+	atomic_inc(&next->context.attach_count);
+	atomic_dec(&prev->context.attach_count);
+	if (MACHINE_HAS_TLB_LC)
+		cpumask_clear_cpu(cpu, &prev->context.cpu_attach_mask);
+	S390_lowcore.user_asce = next->context.asce_bits | __pa(next->pgd);
+}
+
+#define finish_arch_post_lock_switch finish_arch_post_lock_switch
+static inline void finish_arch_post_lock_switch(void)
+{
+	struct task_struct *tsk = current;
+	struct mm_struct *mm = tsk->mm;
+
+	load_kernel_asce();
+	if (mm) {
+		preempt_disable();
+		while (atomic_read(&mm->context.attach_count) >> 16)
+			cpu_relax();
+
+		cpumask_set_cpu(smp_processor_id(), mm_cpumask(mm));
+		if (mm->context.flush_mm)
+			__tlb_flush_mm(mm);
+		preempt_enable();
+	}
+	set_fs(current->thread.mm_segment);
+>>>>>>> v3.18
 }
 
 #define enter_lazy_tlb(mm,tsk)	do { } while (0)
@@ -87,7 +160,13 @@ static inline void switch_mm(struct mm_struct *prev, struct mm_struct *next,
 static inline void activate_mm(struct mm_struct *prev,
                                struct mm_struct *next)
 {
+<<<<<<< HEAD
         switch_mm(prev, next, current);
+=======
+	switch_mm(prev, next, current);
+	cpumask_set_cpu(smp_processor_id(), mm_cpumask(next));
+	set_user_asce(next);
+>>>>>>> v3.18
 }
 
 static inline void arch_dup_mmap(struct mm_struct *oldmm,

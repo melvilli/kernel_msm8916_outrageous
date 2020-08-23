@@ -109,10 +109,13 @@ static void altera_jtaguart_break_ctl(struct uart_port *port, int break_state)
 {
 }
 
+<<<<<<< HEAD
 static void altera_jtaguart_enable_ms(struct uart_port *port)
 {
 }
 
+=======
+>>>>>>> v3.18
 static void altera_jtaguart_set_termios(struct uart_port *port,
 					struct ktermios *termios,
 					struct ktermios *old)
@@ -139,7 +142,13 @@ static void altera_jtaguart_rx_chars(struct altera_jtaguart *pp)
 		uart_insert_char(port, 0, 0, ch, flag);
 	}
 
+<<<<<<< HEAD
 	tty_flip_buffer_push(&port->state->port);
+=======
+	spin_unlock(&port->lock);
+	tty_flip_buffer_push(&port->state->port);
+	spin_lock(&port->lock);
+>>>>>>> v3.18
 }
 
 static void altera_jtaguart_tx_chars(struct altera_jtaguart *pp)
@@ -289,7 +298,10 @@ static struct uart_ops altera_jtaguart_ops = {
 	.start_tx	= altera_jtaguart_start_tx,
 	.stop_tx	= altera_jtaguart_stop_tx,
 	.stop_rx	= altera_jtaguart_stop_rx,
+<<<<<<< HEAD
 	.enable_ms	= altera_jtaguart_enable_ms,
+=======
+>>>>>>> v3.18
 	.break_ctl	= altera_jtaguart_break_ctl,
 	.startup	= altera_jtaguart_startup,
 	.shutdown	= altera_jtaguart_shutdown,
@@ -307,9 +319,14 @@ static struct altera_jtaguart altera_jtaguart_ports[ALTERA_JTAGUART_MAXPORTS];
 #if defined(CONFIG_SERIAL_ALTERA_JTAGUART_CONSOLE)
 
 #if defined(CONFIG_SERIAL_ALTERA_JTAGUART_CONSOLE_BYPASS)
+<<<<<<< HEAD
 static void altera_jtaguart_console_putc(struct console *co, const char c)
 {
 	struct uart_port *port = &(altera_jtaguart_ports + co->index)->port;
+=======
+static void altera_jtaguart_console_putc(struct uart_port *port, int c)
+{
+>>>>>>> v3.18
 	unsigned long status;
 	unsigned long flags;
 
@@ -328,9 +345,14 @@ static void altera_jtaguart_console_putc(struct console *co, const char c)
 	spin_unlock_irqrestore(&port->lock, flags);
 }
 #else
+<<<<<<< HEAD
 static void altera_jtaguart_console_putc(struct console *co, const char c)
 {
 	struct uart_port *port = &(altera_jtaguart_ports + co->index)->port;
+=======
+static void altera_jtaguart_console_putc(struct uart_port *port, int c)
+{
+>>>>>>> v3.18
 	unsigned long flags;
 
 	spin_lock_irqsave(&port->lock, flags);
@@ -348,11 +370,17 @@ static void altera_jtaguart_console_putc(struct console *co, const char c)
 static void altera_jtaguart_console_write(struct console *co, const char *s,
 					  unsigned int count)
 {
+<<<<<<< HEAD
 	for (; count; count--, s++) {
 		altera_jtaguart_console_putc(co, *s);
 		if (*s == '\n')
 			altera_jtaguart_console_putc(co, '\r');
 	}
+=======
+	struct uart_port *port = &(altera_jtaguart_ports + co->index)->port;
+
+	uart_console_write(port, s, count, altera_jtaguart_console_putc);
+>>>>>>> v3.18
 }
 
 static int __init altera_jtaguart_console_setup(struct console *co,
@@ -408,7 +436,12 @@ static struct uart_driver altera_jtaguart_driver = {
 
 static int altera_jtaguart_probe(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct altera_jtaguart_platform_uart *platp = pdev->dev.platform_data;
+=======
+	struct altera_jtaguart_platform_uart *platp =
+			dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	struct uart_port *port;
 	struct resource *res_irq, *res_mem;
 	int i = pdev->id;
@@ -468,8 +501,14 @@ static int altera_jtaguart_remove(struct platform_device *pdev)
 }
 
 #ifdef CONFIG_OF
+<<<<<<< HEAD
 static struct of_device_id altera_jtaguart_match[] = {
 	{ .compatible = "ALTR,juart-1.0", },
+=======
+static const struct of_device_id altera_jtaguart_match[] = {
+	{ .compatible = "ALTR,juart-1.0", },
+	{ .compatible = "altr,juart-1.0", },
+>>>>>>> v3.18
 	{},
 };
 MODULE_DEVICE_TABLE(of, altera_jtaguart_match);

@@ -11,8 +11,12 @@
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+ *  along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
  *
  */
 
@@ -682,7 +686,11 @@ mgt_update_addr(islpci_private *priv)
 				     isl_oid[GEN_OID_MACADDRESS].size, &res);
 
 	if ((ret == 0) && res && (res->header->operation != PIMFOR_OP_ERROR))
+<<<<<<< HEAD
 		memcpy(priv->ndev->dev_addr, res->data, 6);
+=======
+		memcpy(priv->ndev->dev_addr, res->data, ETH_ALEN);
+>>>>>>> v3.18
 	else
 		ret = -EIO;
 	if (res)
@@ -794,7 +802,10 @@ mgt_response_to_str(enum oid_num_t n, union oid_res_t *r, char *str)
 	switch (isl_oid[n].flags & OID_FLAG_TYPE) {
 	case OID_TYPE_U32:
 		return snprintf(str, PRIV_STR_SIZE, "%u\n", r->u);
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 	case OID_TYPE_BUFFER:{
 			struct obj_buffer *buff = r->ptr;
 			return snprintf(str, PRIV_STR_SIZE,

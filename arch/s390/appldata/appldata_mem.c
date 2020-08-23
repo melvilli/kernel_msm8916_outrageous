@@ -13,6 +13,10 @@
 #include <linux/kernel_stat.h>
 #include <linux/pagemap.h>
 #include <linux/swap.h>
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+>>>>>>> v3.18
 #include <asm/io.h>
 
 #include "appldata.h"
@@ -32,7 +36,11 @@
  * book:
  * http://oss.software.ibm.com/developerworks/opensource/linux390/index.shtml
  */
+<<<<<<< HEAD
 static struct appldata_mem_data {
+=======
+struct appldata_mem_data {
+>>>>>>> v3.18
 	u64 timestamp;
 	u32 sync_count_1;       /* after VM collected the record data, */
 	u32 sync_count_2;	/* sync_count_1 and sync_count_2 should be the
@@ -63,7 +71,11 @@ static struct appldata_mem_data {
 	u64 pgmajfault;		/* page faults (major only) */
 // <-- New in 2.6
 
+<<<<<<< HEAD
 } __attribute__((packed)) appldata_mem_data;
+=======
+} __packed;
+>>>>>>> v3.18
 
 
 /*
@@ -118,7 +130,10 @@ static struct appldata_ops ops = {
 	.record_nr = APPLDATA_RECORD_MEM_ID,
 	.size	   = sizeof(struct appldata_mem_data),
 	.callback  = &appldata_get_mem_data,
+<<<<<<< HEAD
 	.data      = &appldata_mem_data,
+=======
+>>>>>>> v3.18
 	.owner     = THIS_MODULE,
 	.mod_lvl   = {0xF0, 0xF0},		/* EBCDIC "00" */
 };
@@ -131,7 +146,21 @@ static struct appldata_ops ops = {
  */
 static int __init appldata_mem_init(void)
 {
+<<<<<<< HEAD
 	return appldata_register_ops(&ops);
+=======
+	int ret;
+
+	ops.data = kzalloc(sizeof(struct appldata_mem_data), GFP_KERNEL);
+	if (!ops.data)
+		return -ENOMEM;
+
+	ret = appldata_register_ops(&ops);
+	if (ret)
+		kfree(ops.data);
+
+	return ret;
+>>>>>>> v3.18
 }
 
 /*
@@ -142,6 +171,10 @@ static int __init appldata_mem_init(void)
 static void __exit appldata_mem_exit(void)
 {
 	appldata_unregister_ops(&ops);
+<<<<<<< HEAD
+=======
+	kfree(ops.data);
+>>>>>>> v3.18
 }
 
 

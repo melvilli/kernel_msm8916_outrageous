@@ -29,6 +29,7 @@
 #ifndef __WCMD_H__
 #define __WCMD_H__
 
+<<<<<<< HEAD
 #include "80211hdr.h"
 #include "80211mgr.h"
 
@@ -115,5 +116,37 @@ WCMDvCommandThread(
 */
 
 void BSSvSecondTxData(struct vnt_private *);
+=======
+#include "device.h"
+
+/* Command code */
+enum vnt_cmd {
+	WLAN_CMD_INIT_MAC80211,
+	WLAN_CMD_SETPOWER,
+	WLAN_CMD_TBTT_WAKEUP,
+	WLAN_CMD_BECON_SEND,
+	WLAN_CMD_CHANGE_ANTENNA
+};
+
+#define CMD_Q_SIZE              32
+
+/* Command state */
+enum vnt_cmd_state {
+	WLAN_CMD_INIT_MAC80211_START,
+	WLAN_CMD_SETPOWER_START,
+	WLAN_CMD_TBTT_WAKEUP_START,
+	WLAN_CMD_BECON_SEND_START,
+	WLAN_CMD_CHANGE_ANTENNA_START,
+	WLAN_CMD_IDLE
+};
+
+struct vnt_private;
+
+void vnt_reset_command_timer(struct vnt_private *);
+
+int vnt_schedule_command(struct vnt_private *, enum vnt_cmd);
+
+void vnt_run_command(struct work_struct *work);
+>>>>>>> v3.18
 
 #endif /* __WCMD_H__ */

@@ -12,7 +12,10 @@
 
 #include <linux/kernel.h>
 #include <linux/errno.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/module.h>
 #include <linux/string.h>
@@ -57,7 +60,11 @@ struct usb_sevsegdev {
  * if str commands are used, we would assume the end of string
  * so mem commands are used.
  */
+<<<<<<< HEAD
 inline size_t my_memlen(const char *buf, size_t count)
+=======
+static inline size_t my_memlen(const char *buf, size_t count)
+>>>>>>> v3.18
 {
 	if (count > 0 && buf[count-1] == '\n')
 		return count - 1;

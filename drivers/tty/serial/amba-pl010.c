@@ -46,8 +46,12 @@
 #include <linux/amba/serial.h>
 #include <linux/clk.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
 
 #include <asm/io.h>
+=======
+#include <linux/io.h>
+>>>>>>> v3.18
 
 #define UART_NR		8
 
@@ -420,7 +424,11 @@ pl010_set_termios(struct uart_port *port, struct ktermios *termios,
 	uap->port.read_status_mask = UART01x_RSR_OE;
 	if (termios->c_iflag & INPCK)
 		uap->port.read_status_mask |= UART01x_RSR_FE | UART01x_RSR_PE;
+<<<<<<< HEAD
 	if (termios->c_iflag & (BRKINT | PARMRK))
+=======
+	if (termios->c_iflag & (IGNBRK | BRKINT | PARMRK))
+>>>>>>> v3.18
 		uap->port.read_status_mask |= UART01x_RSR_BE;
 
 	/*
@@ -688,6 +696,7 @@ static int pl010_probe(struct amba_device *dev, const struct amba_id *id)
 		if (amba_ports[i] == NULL)
 			break;
 
+<<<<<<< HEAD
 	if (i == ARRAY_SIZE(amba_ports)) {
 		ret = -EBUSY;
 		goto out;
@@ -710,6 +719,24 @@ static int pl010_probe(struct amba_device *dev, const struct amba_id *id)
 		ret = PTR_ERR(uap->clk);
 		goto unmap;
 	}
+=======
+	if (i == ARRAY_SIZE(amba_ports))
+		return -EBUSY;
+
+	uap = devm_kzalloc(&dev->dev, sizeof(struct uart_amba_port),
+			   GFP_KERNEL);
+	if (!uap)
+		return -ENOMEM;
+
+	base = devm_ioremap(&dev->dev, dev->res.start,
+			    resource_size(&dev->res));
+	if (!base)
+		return -ENOMEM;
+
+	uap->clk = devm_clk_get(&dev->dev, NULL);
+	if (IS_ERR(uap->clk))
+		return PTR_ERR(uap->clk);
+>>>>>>> v3.18
 
 	uap->port.dev = &dev->dev;
 	uap->port.mapbase = dev->res.start;
@@ -721,12 +748,17 @@ static int pl010_probe(struct amba_device *dev, const struct amba_id *id)
 	uap->port.flags = UPF_BOOT_AUTOCONF;
 	uap->port.line = i;
 	uap->dev = dev;
+<<<<<<< HEAD
 	uap->data = dev->dev.platform_data;
+=======
+	uap->data = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 
 	amba_ports[i] = uap;
 
 	amba_set_drvdata(dev, uap);
 	ret = uart_add_one_port(&amba_reg, &uap->port);
+<<<<<<< HEAD
 	if (ret) {
 		amba_set_drvdata(dev, NULL);
 		amba_ports[i] = NULL;
@@ -737,6 +769,11 @@ static int pl010_probe(struct amba_device *dev, const struct amba_id *id)
 		kfree(uap);
 	}
  out:
+=======
+	if (ret)
+		amba_ports[i] = NULL;
+
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -745,14 +782,18 @@ static int pl010_remove(struct amba_device *dev)
 	struct uart_amba_port *uap = amba_get_drvdata(dev);
 	int i;
 
+<<<<<<< HEAD
 	amba_set_drvdata(dev, NULL);
 
+=======
+>>>>>>> v3.18
 	uart_remove_one_port(&amba_reg, &uap->port);
 
 	for (i = 0; i < ARRAY_SIZE(amba_ports); i++)
 		if (amba_ports[i] == uap)
 			amba_ports[i] = NULL;
 
+<<<<<<< HEAD
 	iounmap(uap->port.membase);
 	clk_put(uap->clk);
 	kfree(uap);
@@ -762,6 +803,15 @@ static int pl010_remove(struct amba_device *dev)
 static int pl010_suspend(struct amba_device *dev, pm_message_t state)
 {
 	struct uart_amba_port *uap = amba_get_drvdata(dev);
+=======
+	return 0;
+}
+
+#ifdef CONFIG_PM_SLEEP
+static int pl010_suspend(struct device *dev)
+{
+	struct uart_amba_port *uap = dev_get_drvdata(dev);
+>>>>>>> v3.18
 
 	if (uap)
 		uart_suspend_port(&amba_reg, &uap->port);
@@ -769,15 +819,27 @@ static int pl010_suspend(struct amba_device *dev, pm_message_t state)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int pl010_resume(struct amba_device *dev)
 {
 	struct uart_amba_port *uap = amba_get_drvdata(dev);
+=======
+static int pl010_resume(struct device *dev)
+{
+	struct uart_amba_port *uap = dev_get_drvdata(dev);
+>>>>>>> v3.18
 
 	if (uap)
 		uart_resume_port(&amba_reg, &uap->port);
 
 	return 0;
 }
+<<<<<<< HEAD
+=======
+#endif
+
+static SIMPLE_DEV_PM_OPS(pl010_dev_pm_ops, pl010_suspend, pl010_resume);
+>>>>>>> v3.18
 
 static struct amba_id pl010_ids[] = {
 	{
@@ -792,12 +854,19 @@ MODULE_DEVICE_TABLE(amba, pl010_ids);
 static struct amba_driver pl010_driver = {
 	.drv = {
 		.name	= "uart-pl010",
+<<<<<<< HEAD
+=======
+		.pm	= &pl010_dev_pm_ops,
+>>>>>>> v3.18
 	},
 	.id_table	= pl010_ids,
 	.probe		= pl010_probe,
 	.remove		= pl010_remove,
+<<<<<<< HEAD
 	.suspend	= pl010_suspend,
 	.resume		= pl010_resume,
+=======
+>>>>>>> v3.18
 };
 
 static int __init pl010_init(void)

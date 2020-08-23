@@ -40,9 +40,13 @@
 
 #include <mach/usb.h>
 
+<<<<<<< HEAD
 #ifndef	DEBUG
 #undef	VERBOSE
 #endif
+=======
+#undef VERBOSE
+>>>>>>> v3.18
 
 
 #define	DRIVER_VERSION	"24 August 2004"
@@ -387,7 +391,10 @@ static void b_idle(struct isp1301 *isp, const char *tag)
 static void
 dump_regs(struct isp1301 *isp, const char *label)
 {
+<<<<<<< HEAD
 #ifdef	DEBUG
+=======
+>>>>>>> v3.18
 	u8	ctrl = isp1301_get_u8(isp, ISP1301_OTG_CONTROL_1);
 	u8	status = isp1301_get_u8(isp, ISP1301_OTG_STATUS);
 	u8	src = isp1301_get_u8(isp, ISP1301_INTERRUPT_SOURCE);
@@ -396,7 +403,10 @@ dump_regs(struct isp1301 *isp, const char *label)
 		omap_readl(OTG_CTRL), label, state_name(isp),
 		ctrl, status, src);
 	/* mode control and irq enables don't change much */
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 }
 
 /*-------------------------------------------------------------------------*/
@@ -1015,7 +1025,11 @@ static void isp_update_otg(struct isp1301 *isp, u8 stat)
 				break;
 			case OTG_STATE_A_WAIT_VFALL:
 				state = OTG_STATE_A_IDLE;
+<<<<<<< HEAD
 				/* khubd may take a while to notice and
+=======
+				/* hub_wq may take a while to notice and
+>>>>>>> v3.18
 				 * handle this disconnect, so don't go
 				 * to B_IDLE quite yet.
 				 */
@@ -1281,7 +1295,11 @@ isp1301_set_host(struct usb_otg *otg, struct usb_bus *host)
 {
 	struct isp1301	*isp = container_of(otg->phy, struct isp1301, phy);
 
+<<<<<<< HEAD
 	if (!otg || isp != the_transceiver)
+=======
+	if (isp != the_transceiver)
+>>>>>>> v3.18
 		return -ENODEV;
 
 	if (!host) {
@@ -1337,7 +1355,11 @@ isp1301_set_peripheral(struct usb_otg *otg, struct usb_gadget *gadget)
 {
 	struct isp1301	*isp = container_of(otg->phy, struct isp1301, phy);
 
+<<<<<<< HEAD
 	if (!otg || isp != the_transceiver)
+=======
+	if (isp != the_transceiver)
+>>>>>>> v3.18
 		return -ENODEV;
 
 	if (!gadget) {
@@ -1418,8 +1440,12 @@ isp1301_start_srp(struct usb_otg *otg)
 	struct isp1301	*isp = container_of(otg->phy, struct isp1301, phy);
 	u32		otg_ctrl;
 
+<<<<<<< HEAD
 	if (!otg || isp != the_transceiver
 			|| isp->phy.state != OTG_STATE_B_IDLE)
+=======
+	if (isp != the_transceiver || isp->phy.state != OTG_STATE_B_IDLE)
+>>>>>>> v3.18
 		return -ENODEV;
 
 	otg_ctrl = omap_readl(OTG_CTRL);
@@ -1446,7 +1472,11 @@ isp1301_start_hnp(struct usb_otg *otg)
 	struct isp1301	*isp = container_of(otg->phy, struct isp1301, phy);
 	u32 l;
 
+<<<<<<< HEAD
 	if (!otg || isp != the_transceiver)
+=======
+	if (isp != the_transceiver)
+>>>>>>> v3.18
 		return -ENODEV;
 	if (otg->default_a && (otg->host == NULL || !otg->host->b_hnp_enable))
 		return -ENOTCONN;

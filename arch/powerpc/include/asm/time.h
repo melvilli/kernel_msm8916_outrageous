@@ -28,6 +28,10 @@ extern struct clock_event_device decrementer_clockevent;
 struct rtc_time;
 extern void to_tm(int tim, struct rtc_time * tm);
 extern void GregorianDay(struct rtc_time *tm);
+<<<<<<< HEAD
+=======
+extern void tick_broadcast_ipi_handler(void);
+>>>>>>> v3.18
 
 extern void generic_calibrate_decr(void);
 
@@ -101,6 +105,18 @@ static inline u64 get_rtc(void)
 	return (u64)hi * 1000000000 + lo;
 }
 
+<<<<<<< HEAD
+=======
+static inline u64 get_vtb(void)
+{
+#ifdef CONFIG_PPC_BOOK3S_64
+	if (cpu_has_feature(CPU_FTR_ARCH_207S))
+		return mfvtb();
+#endif
+	return 0;
+}
+
+>>>>>>> v3.18
 #ifdef CONFIG_PPC64
 static inline u64 get_tb(void)
 {

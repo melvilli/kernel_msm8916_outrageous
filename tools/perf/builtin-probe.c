@@ -37,7 +37,11 @@
 #include "util/strfilter.h"
 #include "util/symbol.h"
 #include "util/debug.h"
+<<<<<<< HEAD
 #include <lk/debugfs.h>
+=======
+#include <api/fs/debugfs.h>
+>>>>>>> v3.18
 #include "util/parse-options.h"
 #include "util/probe-finder.h"
 #include "util/probe-event.h"
@@ -59,7 +63,11 @@ static struct {
 	struct perf_probe_event events[MAX_PROBES];
 	struct strlist *dellist;
 	struct line_range line_range;
+<<<<<<< HEAD
 	const char *target;
+=======
+	char *target;
+>>>>>>> v3.18
 	int max_probe_points;
 	struct strfilter *filter;
 } params;
@@ -98,7 +106,14 @@ static int set_target(const char *ptr)
 	 * short module name.
 	 */
 	if (!params.target && ptr && *ptr == '/') {
+<<<<<<< HEAD
 		params.target = ptr;
+=======
+		params.target = strdup(ptr);
+		if (!params.target)
+			return -ENOMEM;
+
+>>>>>>> v3.18
 		found = 1;
 		buf = ptr + (strlen(ptr) - 3);
 
@@ -116,6 +131,12 @@ static int parse_probe_event_argv(int argc, const char **argv)
 	char *buf;
 
 	found_target = set_target(argv[0]);
+<<<<<<< HEAD
+=======
+	if (found_target < 0)
+		return found_target;
+
+>>>>>>> v3.18
 	if (found_target && argc == 1)
 		return 0;
 
@@ -169,25 +190,53 @@ static int opt_set_target(const struct option *opt, const char *str,
 			int unset __maybe_unused)
 {
 	int ret = -ENOENT;
+<<<<<<< HEAD
+=======
+	char *tmp;
+>>>>>>> v3.18
 
 	if  (str && !params.target) {
 		if (!strcmp(opt->long_name, "exec"))
 			params.uprobes = true;
+<<<<<<< HEAD
 #ifdef DWARF_SUPPORT
+=======
+#ifdef HAVE_DWARF_SUPPORT
+>>>>>>> v3.18
 		else if (!strcmp(opt->long_name, "module"))
 			params.uprobes = false;
 #endif
 		else
 			return ret;
 
+<<<<<<< HEAD
 		params.target = str;
+=======
+		/* Expand given path to absolute path, except for modulename */
+		if (params.uprobes || strchr(str, '/')) {
+			tmp = realpath(str, NULL);
+			if (!tmp) {
+				pr_warning("Failed to get the absolute path of %s: %m\n", str);
+				return ret;
+			}
+		} else {
+			tmp = strdup(str);
+			if (!tmp)
+				return -ENOMEM;
+		}
+		params.target = tmp;
+>>>>>>> v3.18
 		ret = 0;
 	}
 
 	return ret;
 }
 
+<<<<<<< HEAD
 #ifdef DWARF_SUPPORT
+=======
+#ifdef HAVE_DWARF_SUPPORT
+>>>>>>> v3.18
 static int opt_show_lines(const struct option *opt __maybe_unused,
 			  const char *str, int unset __maybe_unused)
 {
@@ -204,7 +253,10 @@ static int opt_show_lines(const struct option *opt __maybe_unused,
 
 	params.show_lines = true;
 	ret = parse_line_range_desc(str, &params.line_range);
+<<<<<<< HEAD
 	INIT_LIST_HEAD(&params.line_range.line_list);
+=======
+>>>>>>> v3.18
 
 	return ret;
 }
@@ -250,14 +302,53 @@ static int opt_set_filter(const struct option *opt __maybe_unused,
 	return 0;
 }
 
+<<<<<<< HEAD
 int cmd_probe(int argc, const char **argv, const char *prefix __maybe_unused)
+=======
+static int init_params(void)
+{
+	return line_range__init(&params.line_range);
+}
+
+static void cleanup_params(void)
+{
+	int i;
+
+	for (i = 0; i < params.nevents; i++)
+		clear_perf_probe_event(params.events + i);
+	if (params.dellist)
+		strlist__delete(params.dellist);
+	line_range__clear(&params.line_range);
+	free(params.target);
+	if (params.filter)
+		strfilter__delete(params.filter);
+	memset(&params, 0, sizeof(params));
+}
+
+static void pr_err_with_code(const char *msg, int err)
+{
+	char sbuf[STRERR_BUFSIZE];
+
+	pr_err("%s", msg);
+	pr_debug(" Reason: %s (Code: %d)",
+		 strerror_r(-err, sbuf, sizeof(sbuf)), err);
+	pr_err("\n");
+}
+
+static int
+__cmd_probe(int argc, const char **argv, const char *prefix __maybe_unused)
+>>>>>>> v3.18
 {
 	const char * const probe_usage[] = {
 		"perf probe [<options>] 'PROBEDEF' ['PROBEDEF' ...]",
 		"perf probe [<options>] --add 'PROBEDEF' [--add 'PROBEDEF' ...]",
 		"perf probe [<options>] --del '[GROUP:]EVENT' ...",
 		"perf probe --list",
+<<<<<<< HEAD
 #ifdef DWARF_SUPPORT
+=======
+#ifdef HAVE_DWARF_SUPPORT
+>>>>>>> v3.18
 		"perf probe [<options>] --line 'LINEDESC'",
 		"perf probe [<options>] --vars 'PROBEPOINT'",
 #endif
@@ -271,7 +362,11 @@ int cmd_probe(int argc, const char **argv, const char *prefix __maybe_unused)
 	OPT_CALLBACK('d', "del", NULL, "[GROUP:]EVENT", "delete a probe event.",
 		opt_del_probe_event),
 	OPT_CALLBACK('a', "add", NULL,
+<<<<<<< HEAD
 #ifdef DWARF_SUPPORT
+=======
+#ifdef HAVE_DWARF_SUPPORT
+>>>>>>> v3.18
 		"[EVENT=]FUNC[@SRC][+OFF|%return|:RL|;PT]|SRC:AL|SRC;PT"
 		" [[NAME=]ARG ...]",
 #else
@@ -283,7 +378,11 @@ int cmd_probe(int argc, const char **argv, const char *prefix __maybe_unused)
 		"\t\tFUNC:\tFunction name\n"
 		"\t\tOFF:\tOffset from function entry (in byte)\n"
 		"\t\t%return:\tPut the probe at function return\n"
+<<<<<<< HEAD
 #ifdef DWARF_SUPPORT
+=======
+#ifdef HAVE_DWARF_SUPPORT
+>>>>>>> v3.18
 		"\t\tSRC:\tSource code path\n"
 		"\t\tRL:\tRelative line number from function entry.\n"
 		"\t\tAL:\tAbsolute line number in file.\n"
@@ -296,7 +395,11 @@ int cmd_probe(int argc, const char **argv, const char *prefix __maybe_unused)
 		opt_add_probe_event),
 	OPT_BOOLEAN('f', "force", &params.force_add, "forcibly add events"
 		    " with existing name"),
+<<<<<<< HEAD
 #ifdef DWARF_SUPPORT
+=======
+#ifdef HAVE_DWARF_SUPPORT
+>>>>>>> v3.18
 	OPT_CALLBACK('L', "line", NULL,
 		     "FUNC[:RLN[+NUM|-RLN2]]|SRC:ALN[+NUM|-ALN2]",
 		     "Show source code lines.", opt_show_lines),
@@ -325,6 +428,13 @@ int cmd_probe(int argc, const char **argv, const char *prefix __maybe_unused)
 		     opt_set_filter),
 	OPT_CALLBACK('x', "exec", NULL, "executable|path",
 			"target executable name or path", opt_set_target),
+<<<<<<< HEAD
+=======
+	OPT_BOOLEAN(0, "demangle", &symbol_conf.demangle,
+		    "Enable symbol demangling"),
+	OPT_BOOLEAN(0, "demangle-kernel", &symbol_conf.demangle_kernel,
+		    "Enable kernel symbol demangling"),
+>>>>>>> v3.18
 	OPT_END()
 	};
 	int ret;
@@ -338,7 +448,11 @@ int cmd_probe(int argc, const char **argv, const char *prefix __maybe_unused)
 		}
 		ret = parse_probe_event_argv(argc, argv);
 		if (ret < 0) {
+<<<<<<< HEAD
 			pr_err("  Error: Parse Error.  (%d)\n", ret);
+=======
+			pr_err_with_code("  Error: Command Parse Error.", ret);
+>>>>>>> v3.18
 			return ret;
 		}
 	}
@@ -378,8 +492,12 @@ int cmd_probe(int argc, const char **argv, const char *prefix __maybe_unused)
 		}
 		ret = show_perf_probe_events();
 		if (ret < 0)
+<<<<<<< HEAD
 			pr_err("  Error: Failed to show event list. (%d)\n",
 			       ret);
+=======
+			pr_err_with_code("  Error: Failed to show event list.", ret);
+>>>>>>> v3.18
 		return ret;
 	}
 	if (params.show_funcs) {
@@ -402,6 +520,7 @@ int cmd_probe(int argc, const char **argv, const char *prefix __maybe_unused)
 		ret = show_available_funcs(params.target, params.filter,
 					params.uprobes);
 		strfilter__delete(params.filter);
+<<<<<<< HEAD
 		if (ret < 0)
 			pr_err("  Error: Failed to show functions."
 			       " (%d)\n", ret);
@@ -410,6 +529,16 @@ int cmd_probe(int argc, const char **argv, const char *prefix __maybe_unused)
 
 #ifdef DWARF_SUPPORT
 	if (params.show_lines && !params.uprobes) {
+=======
+		params.filter = NULL;
+		if (ret < 0)
+			pr_err_with_code("  Error: Failed to show functions.", ret);
+		return ret;
+	}
+
+#ifdef HAVE_DWARF_SUPPORT
+	if (params.show_lines) {
+>>>>>>> v3.18
 		if (params.mod_events) {
 			pr_err("  Error: Don't use --line with"
 			       " --add/--del.\n");
@@ -420,9 +549,16 @@ int cmd_probe(int argc, const char **argv, const char *prefix __maybe_unused)
 			usage_with_options(probe_usage, options);
 		}
 
+<<<<<<< HEAD
 		ret = show_line_range(&params.line_range, params.target);
 		if (ret < 0)
 			pr_err("  Error: Failed to show lines. (%d)\n", ret);
+=======
+		ret = show_line_range(&params.line_range, params.target,
+				      params.uprobes);
+		if (ret < 0)
+			pr_err_with_code("  Error: Failed to show lines.", ret);
+>>>>>>> v3.18
 		return ret;
 	}
 	if (params.show_vars) {
@@ -441,17 +577,28 @@ int cmd_probe(int argc, const char **argv, const char *prefix __maybe_unused)
 					  params.filter,
 					  params.show_ext_vars);
 		strfilter__delete(params.filter);
+<<<<<<< HEAD
 		if (ret < 0)
 			pr_err("  Error: Failed to show vars. (%d)\n", ret);
+=======
+		params.filter = NULL;
+		if (ret < 0)
+			pr_err_with_code("  Error: Failed to show vars.", ret);
+>>>>>>> v3.18
 		return ret;
 	}
 #endif
 
 	if (params.dellist) {
 		ret = del_perf_probe_events(params.dellist);
+<<<<<<< HEAD
 		strlist__delete(params.dellist);
 		if (ret < 0) {
 			pr_err("  Error: Failed to delete events. (%d)\n", ret);
+=======
+		if (ret < 0) {
+			pr_err_with_code("  Error: Failed to delete events.", ret);
+>>>>>>> v3.18
 			return ret;
 		}
 	}
@@ -462,9 +609,29 @@ int cmd_probe(int argc, const char **argv, const char *prefix __maybe_unused)
 					    params.target,
 					    params.force_add);
 		if (ret < 0) {
+<<<<<<< HEAD
 			pr_err("  Error: Failed to add events. (%d)\n", ret);
+=======
+			pr_err_with_code("  Error: Failed to add events.", ret);
+>>>>>>> v3.18
 			return ret;
 		}
 	}
 	return 0;
 }
+<<<<<<< HEAD
+=======
+
+int cmd_probe(int argc, const char **argv, const char *prefix)
+{
+	int ret;
+
+	ret = init_params();
+	if (!ret) {
+		ret = __cmd_probe(argc, argv, prefix);
+		cleanup_params();
+	}
+
+	return ret;
+}
+>>>>>>> v3.18

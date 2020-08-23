@@ -208,7 +208,11 @@ static long sbwdog_ioctl(struct file *file, unsigned int cmd,
 		 * get the remaining count from the ... count register
 		 * which is 1*8 before the config register
 		 */
+<<<<<<< HEAD
 		ret = put_user(__raw_readq(user_dog - 8) / 1000000, p);
+=======
+		ret = put_user((u32)__raw_readq(user_dog - 8) / 1000000, p);
+>>>>>>> v3.18
 		break;
 	}
 	return ret;
@@ -341,7 +345,10 @@ MODULE_PARM_DESC(timeout,
       "Watchdog timeout in microseconds (max/default 8388607 or 8.3ish secs)");
 
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 
 /*
  * example code that can be put in a platform code area to utilize the

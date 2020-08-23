@@ -568,7 +568,11 @@ static struct carm_request *carm_get_special(struct carm_host *host)
 		return NULL;
 
 	rq = blk_get_request(host->oob_q, WRITE /* bogus */, GFP_KERNEL);
+<<<<<<< HEAD
 	if (!rq) {
+=======
+	if (IS_ERR(rq)) {
+>>>>>>> v3.18
 		spin_lock_irqsave(&host->lock, flags);
 		carm_put_request(host, crq);
 		spin_unlock_irqrestore(&host->lock, flags);
@@ -1744,6 +1748,7 @@ static void carm_remove_one (struct pci_dev *pdev)
 	kfree(host);
 	pci_release_regions(pdev);
 	pci_disable_device(pdev);
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
 }
 
@@ -1761,3 +1766,8 @@ module_init(carm_init);
 module_exit(carm_exit);
 
 
+=======
+}
+
+module_pci_driver(carm_driver);
+>>>>>>> v3.18

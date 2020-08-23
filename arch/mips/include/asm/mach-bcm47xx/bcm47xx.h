@@ -56,4 +56,9 @@ void bcm47xx_fill_bcma_boardinfo(struct bcma_boardinfo *boardinfo,
 				 const char *prefix);
 #endif
 
+<<<<<<< HEAD
+=======
+void bcm47xx_set_system_type(u16 chip_id);
+
+>>>>>>> v3.18
 #endif /* __ASM_BCM47XX_H */

@@ -20,6 +20,10 @@
  */
 
 #include <mach/pcm027.h>
+<<<<<<< HEAD
+=======
+#include "irqs.h" /* PXA_GPIO_TO_IRQ */
+>>>>>>> v3.18
 
 /*
  * definitions relevant only when the PCM-990

@@ -7,7 +7,11 @@
  */
 /dts-v1/;
 
+<<<<<<< HEAD
 /include/ "omap34xx.dtsi"
+=======
+#include "omap34xx.dtsi"
+>>>>>>> v3.18
 / {
 	model = "TimLL OMAP3 Devkit8000";
 	compatible = "timll,omap3-devkit8000", "ti,omap3";
@@ -22,21 +26,33 @@
 
 		heartbeat {
 			label = "devkit8000::led1";
+<<<<<<< HEAD
 			gpios = <&gpio6 26 0>;	/* 186 -> LED1 */
+=======
+			gpios = <&gpio6 26 GPIO_ACTIVE_HIGH>;	/* 186 -> LED1 */
+>>>>>>> v3.18
 			default-state = "on";
 			linux,default-trigger = "heartbeat";
 		};
 
 		mmc {
 			label = "devkit8000::led2";
+<<<<<<< HEAD
 			gpios = <&gpio6 3 0>;	/* 163 -> LED2 */
+=======
+			gpios = <&gpio6 3 GPIO_ACTIVE_HIGH>;	/* 163 -> LED2 */
+>>>>>>> v3.18
 			default-state = "on";
 			linux,default-trigger = "none";
 		};
 
 		usr {
 			label = "devkit8000::led3";
+<<<<<<< HEAD
 			gpios = <&gpio6 4 0>;	/* 164 -> LED3 */
+=======
+			gpios = <&gpio6 4 GPIO_ACTIVE_HIGH>;	/* 164 -> LED3 */
+>>>>>>> v3.18
 			default-state = "on";
 			linux,default-trigger = "usr";
                 };
@@ -80,7 +96,12 @@
 	status = "disabled";
 };
 
+<<<<<<< HEAD
 /include/ "twl4030.dtsi"
+=======
+#include "twl4030.dtsi"
+#include "twl4030_omap3.dtsi"
+>>>>>>> v3.18
 
 &mmc1 {
 	vmmc-supply = <&vmmc1>;
@@ -100,6 +121,7 @@
 	status = "disabled";
 };
 
+<<<<<<< HEAD
 &mcbsp1 {
 	status = "disabled";
 };
@@ -114,6 +136,10 @@
 
 &mcbsp5 {
 	status = "disabled";
+=======
+&mcbsp2 {
+	status = "okay";
+>>>>>>> v3.18
 };
 
 &gpmc {
@@ -123,6 +149,7 @@
 		reg = <0 0 0>; /* CS0, offset 0 */
 		nand-bus-width = <16>;
 
+<<<<<<< HEAD
 		gpmc,sync-clk = <0>;
 		gpmc,cs-on = <0>;
 		gpmc,cs-rd-off = <44>;
@@ -137,6 +164,22 @@
 		gpmc,wr-cycle = <82>;
 		gpmc,wr-access = <40>;
 		gpmc,wr-data-mux-bus = <0>;
+=======
+		gpmc,sync-clk-ps = <0>;
+		gpmc,cs-on-ns = <0>;
+		gpmc,cs-rd-off-ns = <44>;
+		gpmc,cs-wr-off-ns = <44>;
+		gpmc,adv-on-ns = <6>;
+		gpmc,adv-rd-off-ns = <34>;
+		gpmc,adv-wr-off-ns = <44>;
+		gpmc,we-off-ns = <40>;
+		gpmc,oe-off-ns = <54>;
+		gpmc,access-ns = <64>;
+		gpmc,rd-cycle-ns = <82>;
+		gpmc,wr-cycle-ns = <82>;
+		gpmc,wr-access-ns = <40>;
+		gpmc,wr-data-mux-bus-ns = <0>;
+>>>>>>> v3.18
 
 		#address-cells = <1>;
 		#size-cells = <1>;

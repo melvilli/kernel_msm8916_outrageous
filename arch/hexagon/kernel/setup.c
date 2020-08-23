@@ -32,16 +32,23 @@
 #include <asm/hexagon_vm.h>
 #include <asm/vm_mmu.h>
 #include <asm/time.h>
+<<<<<<< HEAD
 #ifdef CONFIG_OF
 #include <asm/prom.h>
 #endif
+=======
+>>>>>>> v3.18
 
 char cmd_line[COMMAND_LINE_SIZE];
 static char default_command_line[COMMAND_LINE_SIZE] __initdata = CONFIG_CMDLINE;
 
 int on_simulator;
 
+<<<<<<< HEAD
 void __cpuinit calibrate_delay(void)
+=======
+void calibrate_delay(void)
+>>>>>>> v3.18
 {
 	loops_per_jiffy = thread_freq_mhz * 1000000 / HZ;
 }

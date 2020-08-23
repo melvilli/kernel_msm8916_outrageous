@@ -10,7 +10,10 @@
  * by the Free Software Foundation.
  */
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/pm.h>
 #include <linux/types.h>
 #include <linux/ioport.h>
@@ -20,6 +23,11 @@
 #include <linux/freezer.h>
 #include <linux/suspend.h>
 #include <linux/fsl_devices.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 #include <linux/of_platform.h>
 #include <linux/export.h>
 
@@ -320,7 +328,11 @@ static const struct platform_suspend_ops mpc83xx_suspend_ops = {
 	.end = mpc83xx_suspend_end,
 };
 
+<<<<<<< HEAD
 static struct of_device_id pmc_match[];
+=======
+static const struct of_device_id pmc_match[];
+>>>>>>> v3.18
 static int pmc_probe(struct platform_device *ofdev)
 {
 	const struct of_device_id *match;
@@ -419,7 +431,11 @@ static struct pmc_type pmc_types[] = {
 	}
 };
 
+<<<<<<< HEAD
 static struct of_device_id pmc_match[] = {
+=======
+static const struct of_device_id pmc_match[] = {
+>>>>>>> v3.18
 	{
 		.compatible = "fsl,mpc8313-pmc",
 		.data = &pmc_types[0],

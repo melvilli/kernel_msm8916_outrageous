@@ -86,7 +86,10 @@ enum {
 	IPOIB_FLAG_INITIALIZED	  = 1,
 	IPOIB_FLAG_ADMIN_UP	  = 2,
 	IPOIB_PKEY_ASSIGNED	  = 3,
+<<<<<<< HEAD
 	IPOIB_PKEY_STOP		  = 4,
+=======
+>>>>>>> v3.18
 	IPOIB_FLAG_SUBINTERFACE	  = 5,
 	IPOIB_MCAST_RUN		  = 6,
 	IPOIB_STOP_REAPER	  = 7,
@@ -101,6 +104,10 @@ enum {
 	IPOIB_MCAST_FLAG_SENDONLY = 1,
 	IPOIB_MCAST_FLAG_BUSY	  = 2,	/* joining or already joined */
 	IPOIB_MCAST_FLAG_ATTACHED = 3,
+<<<<<<< HEAD
+=======
+	IPOIB_MCAST_JOIN_STARTED  = 4,
+>>>>>>> v3.18
 
 	MAX_SEND_CQE		  = 16,
 	IPOIB_CM_COPYBREAK	  = 256,
@@ -131,6 +138,15 @@ struct ipoib_cb {
 	u8			hwaddr[INFINIBAND_ALEN];
 };
 
+<<<<<<< HEAD
+=======
+static inline struct ipoib_cb *ipoib_skb_cb(const struct sk_buff *skb)
+{
+	BUILD_BUG_ON(sizeof(skb->cb) < sizeof(struct ipoib_cb));
+	return (struct ipoib_cb *)skb->cb;
+}
+
+>>>>>>> v3.18
 /* Used for all multicast joins (broadcast, IPv4 mcast and IPv6 mcast) */
 struct ipoib_mcast {
 	struct ib_sa_mcmember_rec mcmember;
@@ -151,6 +167,10 @@ struct ipoib_mcast {
 	struct sk_buff_head pkt_queue;
 
 	struct net_device *dev;
+<<<<<<< HEAD
+=======
+	struct completion done;
+>>>>>>> v3.18
 };
 
 struct ipoib_rx_buf {
@@ -299,7 +319,11 @@ struct ipoib_dev_priv {
 
 	unsigned long flags;
 
+<<<<<<< HEAD
 	struct mutex vlan_mutex;
+=======
+	struct rw_semaphore vlan_rwsem;
+>>>>>>> v3.18
 
 	struct rb_root  path_tree;
 	struct list_head path_list;
@@ -310,7 +334,10 @@ struct ipoib_dev_priv {
 	struct list_head multicast_list;
 	struct rb_root multicast_tree;
 
+<<<<<<< HEAD
 	struct delayed_work pkey_poll_task;
+=======
+>>>>>>> v3.18
 	struct delayed_work mcast_task;
 	struct work_struct carrier_on_task;
 	struct work_struct flush_light;
@@ -460,7 +487,10 @@ void ipoib_send(struct net_device *dev, struct sk_buff *skb,
 		struct ipoib_ah *address, u32 qpn);
 void ipoib_reap_ah(struct work_struct *work);
 
+<<<<<<< HEAD
 struct ipoib_path *__path_find(struct net_device *dev, void *gid);
+=======
+>>>>>>> v3.18
 void ipoib_mark_paths_invalid(struct net_device *dev);
 void ipoib_flush_paths(struct net_device *dev);
 struct ipoib_dev_priv *ipoib_intf_alloc(const char *format);
@@ -472,10 +502,18 @@ void ipoib_ib_dev_flush_heavy(struct work_struct *work);
 void ipoib_pkey_event(struct work_struct *work);
 void ipoib_ib_dev_cleanup(struct net_device *dev);
 
+<<<<<<< HEAD
 int ipoib_ib_dev_open(struct net_device *dev);
 int ipoib_ib_dev_up(struct net_device *dev);
 int ipoib_ib_dev_down(struct net_device *dev, int flush);
 int ipoib_ib_dev_stop(struct net_device *dev, int flush);
+=======
+int ipoib_ib_dev_open(struct net_device *dev, int flush);
+int ipoib_ib_dev_up(struct net_device *dev);
+int ipoib_ib_dev_down(struct net_device *dev, int flush);
+int ipoib_ib_dev_stop(struct net_device *dev, int flush);
+void ipoib_pkey_dev_check_presence(struct net_device *dev);
+>>>>>>> v3.18
 
 int ipoib_dev_init(struct net_device *dev, struct ib_device *ca, int port);
 void ipoib_dev_cleanup(struct net_device *dev);
@@ -531,8 +569,12 @@ int  ipoib_set_mode(struct net_device *dev, const char *buf);
 
 void ipoib_setup(struct net_device *dev);
 
+<<<<<<< HEAD
 void ipoib_pkey_poll(struct work_struct *work);
 int ipoib_pkey_dev_delay_open(struct net_device *dev);
+=======
+void ipoib_pkey_open(struct ipoib_dev_priv *priv);
+>>>>>>> v3.18
 void ipoib_drain_cq(struct net_device *dev);
 
 void ipoib_set_ethtool_ops(struct net_device *dev);

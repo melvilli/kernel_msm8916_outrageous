@@ -41,7 +41,11 @@ static ssize_t version_show(struct kobject *kobj, struct kobj_attribute *attr,
 	return snprintf(buf, PAGE_SIZE, "%u\n", O2NM_API_VERSION);
 }
 static struct kobj_attribute attr_version =
+<<<<<<< HEAD
 	__ATTR(interface_revision, S_IFREG | S_IRUGO, version_show, NULL);
+=======
+	__ATTR(interface_revision, S_IRUGO, version_show, NULL);
+>>>>>>> v3.18
 
 static struct attribute *o2cb_attrs[] = {
 	&attr_version.attr,

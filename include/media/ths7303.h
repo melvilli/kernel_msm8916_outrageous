@@ -30,13 +30,19 @@
  * @ch_1: Bias value for channel one.
  * @ch_2: Bias value for channel two.
  * @ch_3: Bias value for channel three.
+<<<<<<< HEAD
  * @init_enable: initalize on init.
+=======
+>>>>>>> v3.18
  */
 struct ths7303_platform_data {
 	u8 ch_1;
 	u8 ch_2;
 	u8 ch_3;
+<<<<<<< HEAD
 	u8 init_enable;
+=======
+>>>>>>> v3.18
 };
 
 #endif

@@ -11,7 +11,11 @@
 // Copyright: (C) 2012 Gilles Muller, INRIA/LIP6.  GPLv2.
 // URL: http://coccinelle.lip6.fr/
 // Comments:
+<<<<<<< HEAD
 // Options: -no_includes -include_headers
+=======
+// Options: --no-includes --include-headers
+>>>>>>> v3.18
 
 virtual context
 virtual org
@@ -123,7 +127,11 @@ list_remove_head(x,c,...)
 |
 sizeof(<+...c...+>)
 |
+<<<<<<< HEAD
  &c->member
+=======
+&c->member
+>>>>>>> v3.18
 |
 c = E
 |

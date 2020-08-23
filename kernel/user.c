@@ -51,9 +51,16 @@ struct user_namespace init_user_ns = {
 	.owner = GLOBAL_ROOT_UID,
 	.group = GLOBAL_ROOT_GID,
 	.proc_inum = PROC_USER_INIT_INO,
+<<<<<<< HEAD
 	.flags = USERNS_INIT_FLAGS,
 	.may_mount_sysfs = true,
 	.may_mount_proc = true,
+=======
+#ifdef CONFIG_PERSISTENT_KEYRINGS
+	.persistent_keyring_register_sem =
+	__RWSEM_INITIALIZER(init_user_ns.persistent_keyring_register_sem),
+#endif
+>>>>>>> v3.18
 };
 EXPORT_SYMBOL_GPL(init_user_ns);
 
@@ -86,7 +93,10 @@ static DEFINE_SPINLOCK(uidhash_lock);
 struct user_struct root_user = {
 	.__count	= ATOMIC_INIT(1),
 	.processes	= ATOMIC_INIT(1),
+<<<<<<< HEAD
 	.files		= ATOMIC_INIT(0),
+=======
+>>>>>>> v3.18
 	.sigpending	= ATOMIC_INIT(0),
 	.locked_shm     = 0,
 	.uid		= GLOBAL_ROOT_UID,
@@ -221,5 +231,9 @@ static int __init uid_cache_init(void)
 
 	return 0;
 }
+<<<<<<< HEAD
 
 module_init(uid_cache_init);
+=======
+subsys_initcall(uid_cache_init);
+>>>>>>> v3.18

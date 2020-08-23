@@ -33,6 +33,10 @@ struct netlink_diag_ring {
 };
 
 enum {
+<<<<<<< HEAD
+=======
+	/* NETLINK_DIAG_NONE, standard nl API requires this attribute!  */
+>>>>>>> v3.18
 	NETLINK_DIAG_MEMINFO,
 	NETLINK_DIAG_GROUPS,
 	NETLINK_DIAG_RX_RING,

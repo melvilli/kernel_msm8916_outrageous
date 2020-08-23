@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -241,13 +245,19 @@ struct acpi_s3pt_suspend {
 
 /*******************************************************************************
  *
+<<<<<<< HEAD
  * GTDT - Generic Timer Description Table (ACPI 5.0)
  *        Version 1
+=======
+ * GTDT - Generic Timer Description Table (ACPI 5.1)
+ *        Version 2
+>>>>>>> v3.18
  *
  ******************************************************************************/
 
 struct acpi_table_gtdt {
 	struct acpi_table_header header;	/* Common ACPI table header */
+<<<<<<< HEAD
 	u64 address;
 	u32 flags;
 	u32 secure_pl1_interrupt;
@@ -268,6 +278,96 @@ struct acpi_table_gtdt {
 
 #define ACPI_GTDT_INTERRUPT_MODE            1
 #define ACPI_GTDT_INTERRUPT_POLARITY        2
+=======
+	u64 counter_block_addresss;
+	u32 reserved;
+	u32 secure_el1_interrupt;
+	u32 secure_el1_flags;
+	u32 non_secure_el1_interrupt;
+	u32 non_secure_el1_flags;
+	u32 virtual_timer_interrupt;
+	u32 virtual_timer_flags;
+	u32 non_secure_el2_interrupt;
+	u32 non_secure_el2_flags;
+	u64 counter_read_block_address;
+	u32 platform_timer_count;
+	u32 platform_timer_offset;
+};
+
+/* Flag Definitions: Timer Block Physical Timers and Virtual timers */
+
+#define ACPI_GTDT_INTERRUPT_MODE        (1)
+#define ACPI_GTDT_INTERRUPT_POLARITY    (1<<1)
+#define ACPI_GTDT_ALWAYS_ON             (1<<2)
+
+/* Common GTDT subtable header */
+
+struct acpi_gtdt_header {
+	u8 type;
+	u16 length;
+};
+
+/* Values for GTDT subtable type above */
+
+enum acpi_gtdt_type {
+	ACPI_GTDT_TYPE_TIMER_BLOCK = 0,
+	ACPI_GTDT_TYPE_WATCHDOG = 1,
+	ACPI_GTDT_TYPE_RESERVED = 2	/* 2 and greater are reserved */
+};
+
+/* GTDT Subtables, correspond to Type in struct acpi_gtdt_header */
+
+/* 0: Generic Timer Block */
+
+struct acpi_gtdt_timer_block {
+	struct acpi_gtdt_header header;
+	u8 reserved;
+	u64 block_address;
+	u32 timer_count;
+	u32 timer_offset;
+};
+
+/* Timer Sub-Structure, one per timer */
+
+struct acpi_gtdt_timer_entry {
+	u8 frame_number;
+	u8 reserved[3];
+	u64 base_address;
+	u64 el0_base_address;
+	u32 timer_interrupt;
+	u32 timer_flags;
+	u32 virtual_timer_interrupt;
+	u32 virtual_timer_flags;
+	u32 common_flags;
+};
+
+/* Flag Definitions: timer_flags and virtual_timer_flags above */
+
+#define ACPI_GTDT_GT_IRQ_MODE               (1)
+#define ACPI_GTDT_GT_IRQ_POLARITY           (1<<1)
+
+/* Flag Definitions: common_flags above */
+
+#define ACPI_GTDT_GT_IS_SECURE_TIMER        (1)
+#define ACPI_GTDT_GT_ALWAYS_ON              (1<<1)
+
+/* 1: SBSA Generic Watchdog Structure */
+
+struct acpi_gtdt_watchdog {
+	struct acpi_gtdt_header header;
+	u8 reserved;
+	u64 refresh_frame_address;
+	u64 control_frame_address;
+	u32 timer_interrupt;
+	u32 timer_flags;
+};
+
+/* Flag Definitions: timer_flags above */
+
+#define ACPI_GTDT_WATCHDOG_IRQ_MODE         (1)
+#define ACPI_GTDT_WATCHDOG_IRQ_POLARITY     (1<<1)
+#define ACPI_GTDT_WATCHDOG_SECURE           (1<<2)
+>>>>>>> v3.18
 
 /*******************************************************************************
  *
@@ -374,16 +474,33 @@ struct acpi_mpst_shared {
 struct acpi_table_pcct {
 	struct acpi_table_header header;	/* Common ACPI table header */
 	u32 flags;
+<<<<<<< HEAD
 	u32 latency;
 	u32 reserved;
+=======
+	u64 reserved;
+>>>>>>> v3.18
 };
 
 /* Values for Flags field above */
 
 #define ACPI_PCCT_DOORBELL              1
 
+<<<<<<< HEAD
 /*
  * PCCT subtables
+=======
+/* Values for subtable type in struct acpi_subtable_header */
+
+enum acpi_pcct_type {
+	ACPI_PCCT_TYPE_GENERIC_SUBSPACE = 0,
+	ACPI_PCCT_TYPE_HW_REDUCED_SUBSPACE = 1,
+	ACPI_PCCT_TYPE_RESERVED = 2	/* 2 and greater are reserved */
+};
+
+/*
+ * PCCT Subtables, correspond to Type in struct acpi_subtable_header
+>>>>>>> v3.18
  */
 
 /* 0: Generic Communications Subspace */
@@ -396,8 +513,38 @@ struct acpi_pcct_subspace {
 	struct acpi_generic_address doorbell_register;
 	u64 preserve_mask;
 	u64 write_mask;
+<<<<<<< HEAD
 };
 
+=======
+	u32 latency;
+	u32 max_access_rate;
+	u16 min_turnaround_time;
+};
+
+/* 1: HW-reduced Communications Subspace (ACPI 5.1) */
+
+struct acpi_pcct_hw_reduced {
+	struct acpi_subtable_header header;
+	u32 doorbell_interrupt;
+	u8 flags;
+	u8 reserved;
+	u64 base_address;
+	u64 length;
+	struct acpi_generic_address doorbell_register;
+	u64 preserve_mask;
+	u64 write_mask;
+	u32 latency;
+	u32 max_access_rate;
+	u16 min_turnaround_time;
+};
+
+/* Values for doorbell flags above */
+
+#define ACPI_PCCT_INTERRUPT_POLARITY    (1)
+#define ACPI_PCCT_INTERRUPT_MODE        (1<<1)
+
+>>>>>>> v3.18
 /*
  * PCC memory structures (not part of the ACPI table)
  */

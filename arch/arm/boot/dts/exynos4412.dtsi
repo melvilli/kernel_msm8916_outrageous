@@ -17,6 +17,7 @@
  * published by the Free Software Foundation.
 */
 
+<<<<<<< HEAD
 /include/ "exynos4x12.dtsi"
 
 / {
@@ -67,5 +68,26 @@
 		interrupts = <0 77 0>;
 		#address-cells = <1>;
 		#size-cells = <0>;
+=======
+#include "exynos4x12.dtsi"
+
+/ {
+	compatible = "samsung,exynos4412", "samsung,exynos4";
+
+	combiner: interrupt-controller@10440000 {
+		samsung,combiner-nr = <20>;
+	};
+
+	pmu {
+		interrupts = <2 2>, <3 2>, <18 2>, <19 2>;
+	};
+
+	gic: interrupt-controller@10490000 {
+		cpu-offset = <0x4000>;
+	};
+
+	pmu_system_controller: system-controller@10020000 {
+		compatible = "samsung,exynos4412-pmu", "syscon";
+>>>>>>> v3.18
 	};
 };

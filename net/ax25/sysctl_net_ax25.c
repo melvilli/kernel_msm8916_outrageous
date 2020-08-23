@@ -29,7 +29,11 @@ static int min_proto[1],		max_proto[] = { AX25_PROTO_MAX };
 static int min_ds_timeout[1],		max_ds_timeout[] = {65535000};
 #endif
 
+<<<<<<< HEAD
 static const ctl_table ax25_param_table[] = {
+=======
+static const struct ctl_table ax25_param_table[] = {
+>>>>>>> v3.18
 	{
 		.procname	= "ip_default_mode",
 		.maxlen		= sizeof(int),

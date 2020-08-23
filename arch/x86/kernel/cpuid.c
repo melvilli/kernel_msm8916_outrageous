@@ -137,7 +137,11 @@ static const struct file_operations cpuid_fops = {
 	.open = cpuid_open,
 };
 
+<<<<<<< HEAD
 static __cpuinit int cpuid_device_create(int cpu)
+=======
+static int cpuid_device_create(int cpu)
+>>>>>>> v3.18
 {
 	struct device *dev;
 
@@ -151,9 +155,14 @@ static void cpuid_device_destroy(int cpu)
 	device_destroy(cpuid_class, MKDEV(CPUID_MAJOR, cpu));
 }
 
+<<<<<<< HEAD
 static int __cpuinit cpuid_class_cpu_callback(struct notifier_block *nfb,
 					      unsigned long action,
 					      void *hcpu)
+=======
+static int cpuid_class_cpu_callback(struct notifier_block *nfb,
+				    unsigned long action, void *hcpu)
+>>>>>>> v3.18
 {
 	unsigned int cpu = (unsigned long)hcpu;
 	int err = 0;
@@ -199,14 +208,24 @@ static int __init cpuid_init(void)
 		goto out_chrdev;
 	}
 	cpuid_class->devnode = cpuid_devnode;
+<<<<<<< HEAD
 	get_online_cpus();
+=======
+
+	cpu_notifier_register_begin();
+>>>>>>> v3.18
 	for_each_online_cpu(i) {
 		err = cpuid_device_create(i);
 		if (err != 0)
 			goto out_class;
 	}
+<<<<<<< HEAD
 	register_hotcpu_notifier(&cpuid_class_cpu_notifier);
 	put_online_cpus();
+=======
+	__register_hotcpu_notifier(&cpuid_class_cpu_notifier);
+	cpu_notifier_register_done();
+>>>>>>> v3.18
 
 	err = 0;
 	goto out;
@@ -216,7 +235,11 @@ out_class:
 	for_each_online_cpu(i) {
 		cpuid_device_destroy(i);
 	}
+<<<<<<< HEAD
 	put_online_cpus();
+=======
+	cpu_notifier_register_done();
+>>>>>>> v3.18
 	class_destroy(cpuid_class);
 out_chrdev:
 	__unregister_chrdev(CPUID_MAJOR, 0, NR_CPUS, "cpu/cpuid");
@@ -228,13 +251,22 @@ static void __exit cpuid_exit(void)
 {
 	int cpu = 0;
 
+<<<<<<< HEAD
 	get_online_cpus();
+=======
+	cpu_notifier_register_begin();
+>>>>>>> v3.18
 	for_each_online_cpu(cpu)
 		cpuid_device_destroy(cpu);
 	class_destroy(cpuid_class);
 	__unregister_chrdev(CPUID_MAJOR, 0, NR_CPUS, "cpu/cpuid");
+<<<<<<< HEAD
 	unregister_hotcpu_notifier(&cpuid_class_cpu_notifier);
 	put_online_cpus();
+=======
+	__unregister_hotcpu_notifier(&cpuid_class_cpu_notifier);
+	cpu_notifier_register_done();
+>>>>>>> v3.18
 }
 
 module_init(cpuid_init);

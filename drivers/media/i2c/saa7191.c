@@ -22,7 +22,10 @@
 #include <linux/videodev2.h>
 #include <linux/i2c.h>
 #include <media/v4l2-device.h>
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 
 #include "saa7191.h"
 
@@ -272,7 +275,11 @@ static int saa7191_querystd(struct v4l2_subdev *sd, v4l2_std_id *norm)
 
 	dprintk("SAA7191 extended signal auto-detection...\n");
 
+<<<<<<< HEAD
 	*norm = V4L2_STD_NTSC | V4L2_STD_PAL | V4L2_STD_SECAM;
+=======
+	*norm &= V4L2_STD_NTSC | V4L2_STD_PAL | V4L2_STD_SECAM;
+>>>>>>> v3.18
 	stdc &= ~SAA7191_STDC_SECS;
 	ctl3 &= ~(SAA7191_CTL3_FSEL);
 
@@ -303,7 +310,11 @@ static int saa7191_querystd(struct v4l2_subdev *sd, v4l2_std_id *norm)
 	if (status & SAA7191_STATUS_FIDT) {
 		/* 60Hz signal -> NTSC */
 		dprintk("60Hz signal: NTSC\n");
+<<<<<<< HEAD
 		*norm = V4L2_STD_NTSC;
+=======
+		*norm &= V4L2_STD_NTSC;
+>>>>>>> v3.18
 		return 0;
 	}
 
@@ -325,12 +336,21 @@ static int saa7191_querystd(struct v4l2_subdev *sd, v4l2_std_id *norm)
 	if (status & SAA7191_STATUS_FIDT) {
 		dprintk("No 50Hz signal\n");
 		saa7191_s_std(sd, old_norm);
+<<<<<<< HEAD
 		return -EAGAIN;
+=======
+		*norm = V4L2_STD_UNKNOWN;
+		return 0;
+>>>>>>> v3.18
 	}
 
 	if (status & SAA7191_STATUS_CODE) {
 		dprintk("PAL\n");
+<<<<<<< HEAD
 		*norm = V4L2_STD_PAL;
+=======
+		*norm &= V4L2_STD_PAL;
+>>>>>>> v3.18
 		return saa7191_s_std(sd, old_norm);
 	}
 
@@ -350,18 +370,30 @@ static int saa7191_querystd(struct v4l2_subdev *sd, v4l2_std_id *norm)
 	/* not 50Hz ? */
 	if (status & SAA7191_STATUS_FIDT) {
 		dprintk("No 50Hz signal\n");
+<<<<<<< HEAD
 		err = -EAGAIN;
+=======
+		*norm = V4L2_STD_UNKNOWN;
+>>>>>>> v3.18
 		goto out;
 	}
 
 	if (status & SAA7191_STATUS_CODE) {
 		/* Color detected -> SECAM */
 		dprintk("SECAM\n");
+<<<<<<< HEAD
 		*norm = V4L2_STD_SECAM;
+=======
+		*norm &= V4L2_STD_SECAM;
+>>>>>>> v3.18
 		return saa7191_s_std(sd, old_norm);
 	}
 
 	dprintk("No color detected with SECAM - Going back to PAL.\n");
+<<<<<<< HEAD
+=======
+	*norm = V4L2_STD_UNKNOWN;
+>>>>>>> v3.18
 
 out:
 	return saa7191_s_std(sd, old_norm);
@@ -567,6 +599,7 @@ static int saa7191_g_input_status(struct v4l2_subdev *sd, u32 *status)
 }
 
 
+<<<<<<< HEAD
 static int saa7191_g_chip_ident(struct v4l2_subdev *sd,
 		struct v4l2_dbg_chip_ident *chip)
 {
@@ -585,6 +618,17 @@ static const struct v4l2_subdev_core_ops saa7191_core_ops = {
 };
 
 static const struct v4l2_subdev_video_ops saa7191_video_ops = {
+=======
+/* ----------------------------------------------------------------------- */
+
+static const struct v4l2_subdev_core_ops saa7191_core_ops = {
+	.g_ctrl = saa7191_g_ctrl,
+	.s_ctrl = saa7191_s_ctrl,
+};
+
+static const struct v4l2_subdev_video_ops saa7191_video_ops = {
+	.s_std = saa7191_s_std,
+>>>>>>> v3.18
 	.s_routing = saa7191_s_routing,
 	.querystd = saa7191_querystd,
 	.g_input_status = saa7191_g_input_status,
@@ -605,7 +649,11 @@ static int saa7191_probe(struct i2c_client *client,
 	v4l_info(client, "chip found @ 0x%x (%s)\n",
 			client->addr << 1, client->adapter->name);
 
+<<<<<<< HEAD
 	decoder = kzalloc(sizeof(*decoder), GFP_KERNEL);
+=======
+	decoder = devm_kzalloc(&client->dev, sizeof(*decoder), GFP_KERNEL);
+>>>>>>> v3.18
 	if (!decoder)
 		return -ENOMEM;
 
@@ -615,7 +663,10 @@ static int saa7191_probe(struct i2c_client *client,
 	err = saa7191_write_block(sd, sizeof(initseq), initseq);
 	if (err) {
 		printk(KERN_ERR "SAA7191 initialization failed\n");
+<<<<<<< HEAD
 		kfree(decoder);
+=======
+>>>>>>> v3.18
 		return err;
 	}
 
@@ -636,7 +687,10 @@ static int saa7191_remove(struct i2c_client *client)
 	struct v4l2_subdev *sd = i2c_get_clientdata(client);
 
 	v4l2_device_unregister_subdev(sd);
+<<<<<<< HEAD
 	kfree(to_saa7191(sd));
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

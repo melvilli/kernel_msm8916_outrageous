@@ -64,7 +64,11 @@ static int
 rs5c348_rtc_set_time(struct device *dev, struct rtc_time *tm)
 {
 	struct spi_device *spi = to_spi_device(dev);
+<<<<<<< HEAD
 	struct rs5c348_plat_data *pdata = spi->dev.platform_data;
+=======
+	struct rs5c348_plat_data *pdata = dev_get_platdata(&spi->dev);
+>>>>>>> v3.18
 	u8 txbuf[5+7], *txp;
 	int ret;
 
@@ -100,7 +104,11 @@ static int
 rs5c348_rtc_read_time(struct device *dev, struct rtc_time *tm)
 {
 	struct spi_device *spi = to_spi_device(dev);
+<<<<<<< HEAD
 	struct rs5c348_plat_data *pdata = spi->dev.platform_data;
+=======
+	struct rs5c348_plat_data *pdata = dev_get_platdata(&spi->dev);
+>>>>>>> v3.18
 	u8 txbuf[5], rxbuf[7];
 	int ret;
 
@@ -218,18 +226,24 @@ static int rs5c348_probe(struct spi_device *spi)
 	return ret;
 }
 
+<<<<<<< HEAD
 static int rs5c348_remove(struct spi_device *spi)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 static struct spi_driver rs5c348_driver = {
 	.driver = {
 		.name	= "rtc-rs5c348",
 		.owner	= THIS_MODULE,
 	},
 	.probe	= rs5c348_probe,
+<<<<<<< HEAD
 	.remove	= rs5c348_remove,
+=======
+>>>>>>> v3.18
 };
 
 module_spi_driver(rs5c348_driver);

@@ -23,6 +23,10 @@
 #include <linux/tty.h>
 #include <linux/binfmts.h>
 #include <linux/bitops.h>
+<<<<<<< HEAD
+=======
+#include <linux/context_tracking.h>
+>>>>>>> v3.18
 
 #include <asm/uaccess.h>
 #include <asm/ptrace.h>
@@ -34,15 +38,26 @@
 #include <asm/switch_to.h>
 #include <asm/cacheflush.h>
 
+<<<<<<< HEAD
 #include "entry.h"
 #include "systbls.h"
 #include "sigutil.h"
+=======
+#include "sigutil.h"
+#include "systbls.h"
+#include "kernel.h"
+#include "entry.h"
+>>>>>>> v3.18
 
 /* {set, get}context() needed for 64-bit SparcLinux userland. */
 asmlinkage void sparc64_set_context(struct pt_regs *regs)
 {
 	struct ucontext __user *ucp = (struct ucontext __user *)
 		regs->u_regs[UREG_I0];
+<<<<<<< HEAD
+=======
+	enum ctx_state prev_state = exception_enter();
+>>>>>>> v3.18
 	mc_gregset_t __user *grp;
 	unsigned long pc, npc, tstate;
 	unsigned long fp, i7;
@@ -129,16 +144,29 @@ asmlinkage void sparc64_set_context(struct pt_regs *regs)
 	}
 	if (err)
 		goto do_sigsegv;
+<<<<<<< HEAD
 
 	return;
 do_sigsegv:
 	force_sig(SIGSEGV, current);
+=======
+out:
+	exception_exit(prev_state);
+	return;
+do_sigsegv:
+	force_sig(SIGSEGV, current);
+	goto out;
+>>>>>>> v3.18
 }
 
 asmlinkage void sparc64_get_context(struct pt_regs *regs)
 {
 	struct ucontext __user *ucp = (struct ucontext __user *)
 		regs->u_regs[UREG_I0];
+<<<<<<< HEAD
+=======
+	enum ctx_state prev_state = exception_enter();
+>>>>>>> v3.18
 	mc_gregset_t __user *grp;
 	mcontext_t __user *mcp;
 	unsigned long fp, i7;
@@ -220,10 +248,19 @@ asmlinkage void sparc64_get_context(struct pt_regs *regs)
 	}
 	if (err)
 		goto do_sigsegv;
+<<<<<<< HEAD
 
 	return;
 do_sigsegv:
 	force_sig(SIGSEGV, current);
+=======
+out:
+	exception_exit(prev_state);
+	return;
+do_sigsegv:
+	force_sig(SIGSEGV, current);
+	goto out;
+>>>>>>> v3.18
 }
 
 struct rt_signal_frame {
@@ -485,7 +522,10 @@ static void do_signal(struct pt_regs *regs, unsigned long orig_i0)
 
 #ifdef CONFIG_COMPAT
 	if (test_thread_flag(TIF_32BIT)) {
+<<<<<<< HEAD
 		extern void do_signal32(struct pt_regs *);
+=======
+>>>>>>> v3.18
 		do_signal32(regs);
 		return;
 	}
@@ -528,11 +568,19 @@ static void do_signal(struct pt_regs *regs, unsigned long orig_i0)
 
 void do_notify_resume(struct pt_regs *regs, unsigned long orig_i0, unsigned long thread_info_flags)
 {
+<<<<<<< HEAD
+=======
+	user_exit();
+>>>>>>> v3.18
 	if (thread_info_flags & _TIF_SIGPENDING)
 		do_signal(regs, orig_i0);
 	if (thread_info_flags & _TIF_NOTIFY_RESUME) {
 		clear_thread_flag(TIF_NOTIFY_RESUME);
 		tracehook_notify_resume(regs);
 	}
+<<<<<<< HEAD
+=======
+	user_enter();
+>>>>>>> v3.18
 }
 

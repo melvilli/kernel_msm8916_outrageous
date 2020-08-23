@@ -15,6 +15,10 @@
 #include <linux/uaccess.h>
 #include <linux/kdebug.h>
 #include <asm/pgalloc.h>
+<<<<<<< HEAD
+=======
+#include <asm/mmu.h>
+>>>>>>> v3.18
 
 static int handle_vmalloc_fault(unsigned long address)
 {
@@ -51,14 +55,22 @@ bad_area:
 	return 1;
 }
 
+<<<<<<< HEAD
 void do_page_fault(struct pt_regs *regs, int write, unsigned long address,
 		   unsigned long cause_code)
+=======
+void do_page_fault(unsigned long address, struct pt_regs *regs)
+>>>>>>> v3.18
 {
 	struct vm_area_struct *vma = NULL;
 	struct task_struct *tsk = current;
 	struct mm_struct *mm = tsk->mm;
 	siginfo_t info;
 	int fault, ret;
+<<<<<<< HEAD
+=======
+	int write = regs->ecr_cause & ECR_C_PROTV_STORE;  /* ST/EX */
+>>>>>>> v3.18
 	unsigned int flags = FAULT_FLAG_ALLOW_RETRY | FAULT_FLAG_KILLABLE;
 
 	/*
@@ -110,7 +122,12 @@ good_area:
 
 	/* Handle protection violation, execute on heap or stack */
 
+<<<<<<< HEAD
 	if (cause_code == ((ECR_V_PROTV << 16) | ECR_C_PROTV_INST_FETCH))
+=======
+	if ((regs->ecr_vec == ECR_V_PROTV) &&
+	    (regs->ecr_cause == ECR_C_PROTV_INST_FETCH))
+>>>>>>> v3.18
 		goto bad_area;
 
 	if (write) {
@@ -157,11 +174,16 @@ good_area:
 		return;
 	}
 
+<<<<<<< HEAD
 	/* TBD: switch to pagefault_out_of_memory() */
 	if (fault & VM_FAULT_OOM)
 		goto out_of_memory;
 	else if (fault & VM_FAULT_SIGSEGV)
 		goto bad_area;
+=======
+	if (fault & VM_FAULT_OOM)
+		goto out_of_memory;
+>>>>>>> v3.18
 	else if (fault & VM_FAULT_SIGBUS)
 		goto do_sigbus;
 
@@ -179,7 +201,10 @@ bad_area_nosemaphore:
 	/* User mode accesses just cause a SIGSEGV */
 	if (user_mode(regs)) {
 		tsk->thread.fault_address = address;
+<<<<<<< HEAD
 		tsk->thread.cause_code = cause_code;
+=======
+>>>>>>> v3.18
 		info.si_signo = SIGSEGV;
 		info.si_errno = 0;
 		/* info.si_code has been set above */
@@ -200,7 +225,11 @@ no_context:
 	if (fixup_exception(regs))
 		return;
 
+<<<<<<< HEAD
 	die("Oops", regs, address, cause_code);
+=======
+	die("Oops", regs, address);
+>>>>>>> v3.18
 
 out_of_memory:
 	up_read(&mm->mmap_sem);
@@ -219,7 +248,10 @@ do_sigbus:
 		goto no_context;
 
 	tsk->thread.fault_address = address;
+<<<<<<< HEAD
 	tsk->thread.cause_code = cause_code;
+=======
+>>>>>>> v3.18
 	info.si_signo = SIGBUS;
 	info.si_errno = 0;
 	info.si_code = BUS_ADRERR;

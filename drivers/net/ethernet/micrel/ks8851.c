@@ -23,12 +23,19 @@
 #include <linux/crc32.h>
 #include <linux/mii.h>
 #include <linux/eeprom_93cx6.h>
+<<<<<<< HEAD
 #include <linux/ks8851.h>
 
 #include <linux/spi/spi.h>
 #include <linux/regulator/consumer.h>
 #include <linux/gpio.h>
 #include <linux/of.h>
+=======
+#include <linux/regulator/consumer.h>
+
+#include <linux/spi/spi.h>
+#include <linux/gpio.h>
+>>>>>>> v3.18
 #include <linux/of_gpio.h>
 
 #include "ks8851.h"
@@ -88,6 +95,12 @@ union ks8851_tx_hdr {
  * @rc_rxqcr: Cached copy of KS_RXQCR.
  * @eeprom_size: Companion eeprom size in Bytes, 0 if no eeprom
  * @eeprom: 93CX6 EEPROM state for accessing on-board EEPROM.
+<<<<<<< HEAD
+=======
+ * @vdd_reg:	Optional regulator supplying the chip
+ * @vdd_io: Optional digital power supply for IO
+ * @gpio: Optional reset_n gpio
+>>>>>>> v3.18
  *
  * The @lock ensures that the chip is protected when certain operations are
  * in progress. When the read or write packet transfer is in progress, most
@@ -134,11 +147,18 @@ struct ks8851_net {
 	struct spi_transfer	spi_xfer1;
 	struct spi_transfer	spi_xfer2[2];
 
+<<<<<<< HEAD
 	struct regulator	*vdd_io;
 	struct regulator	*vdd_phy;
 	int			rst_gpio;
 
 	struct eeprom_93cx6	eeprom;
+=======
+	struct eeprom_93cx6	eeprom;
+	struct regulator	*vdd_reg;
+	struct regulator	*vdd_io;
+	int			gpio;
+>>>>>>> v3.18
 };
 
 static int msg_enable;
@@ -1404,6 +1424,7 @@ static int ks8851_resume(struct device *dev)
 
 static SIMPLE_DEV_PM_OPS(ks8851_pm_ops, ks8851_suspend, ks8851_resume);
 
+<<<<<<< HEAD
 static int ks8851_init_hw(struct spi_device *spi, struct ks8851_net *ks)
 {
 	struct ks8851_pdata *pdata = spi->dev.platform_data;
@@ -1465,12 +1486,18 @@ fail_gpio:
 	return ret;
 }
 
+=======
+>>>>>>> v3.18
 static int ks8851_probe(struct spi_device *spi)
 {
 	struct net_device *ndev;
 	struct ks8851_net *ks;
 	int ret;
 	unsigned cider;
+<<<<<<< HEAD
+=======
+	int gpio;
+>>>>>>> v3.18
 
 	ndev = alloc_etherdev(sizeof(struct ks8851_net));
 	if (!ndev)
@@ -1480,14 +1507,68 @@ static int ks8851_probe(struct spi_device *spi)
 
 	ks = netdev_priv(ndev);
 
+<<<<<<< HEAD
 	ret = ks8851_init_hw(spi, ks);
 	if (ret)
 		goto err_init;
 
+=======
+>>>>>>> v3.18
 	ks->netdev = ndev;
 	ks->spidev = spi;
 	ks->tx_space = 6144;
 
+<<<<<<< HEAD
+=======
+	gpio = of_get_named_gpio_flags(spi->dev.of_node, "reset-gpios",
+				       0, NULL);
+	if (gpio == -EPROBE_DEFER) {
+		ret = gpio;
+		goto err_gpio;
+	}
+
+	ks->gpio = gpio;
+	if (gpio_is_valid(gpio)) {
+		ret = devm_gpio_request_one(&spi->dev, gpio,
+					    GPIOF_OUT_INIT_LOW, "ks8851_rst_n");
+		if (ret) {
+			dev_err(&spi->dev, "reset gpio request failed\n");
+			goto err_gpio;
+		}
+	}
+
+	ks->vdd_io = devm_regulator_get(&spi->dev, "vdd-io");
+	if (IS_ERR(ks->vdd_io)) {
+		ret = PTR_ERR(ks->vdd_io);
+		goto err_reg_io;
+	}
+
+	ret = regulator_enable(ks->vdd_io);
+	if (ret) {
+		dev_err(&spi->dev, "regulator vdd_io enable fail: %d\n",
+			ret);
+		goto err_reg_io;
+	}
+
+	ks->vdd_reg = devm_regulator_get(&spi->dev, "vdd");
+	if (IS_ERR(ks->vdd_reg)) {
+		ret = PTR_ERR(ks->vdd_reg);
+		goto err_reg;
+	}
+
+	ret = regulator_enable(ks->vdd_reg);
+	if (ret) {
+		dev_err(&spi->dev, "regulator vdd enable fail: %d\n",
+			ret);
+		goto err_reg;
+	}
+
+	if (gpio_is_valid(gpio)) {
+		usleep_range(10000, 11000);
+		gpio_set_value(gpio, 1);
+	}
+
+>>>>>>> v3.18
 	mutex_init(&ks->lock);
 	spin_lock_init(&ks->statelock);
 
@@ -1527,7 +1608,11 @@ static int ks8851_probe(struct spi_device *spi)
 
 	skb_queue_head_init(&ks->txq);
 
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(ndev, &ks8851_ethtool_ops);
+=======
+	ndev->ethtool_ops = &ks8851_ethtool_ops;
+>>>>>>> v3.18
 	SET_NETDEV_DEV(ndev, &spi->dev);
 
 	spi_set_drvdata(spi, ks);
@@ -1582,12 +1667,24 @@ static int ks8851_probe(struct spi_device *spi)
 err_netdev:
 	free_irq(ndev->irq, ks);
 
+<<<<<<< HEAD
 err_id:
 err_irq:
 	if (gpio_is_valid(ks->rst_gpio))
 		gpio_free(ks->rst_gpio);
 
 err_init:
+=======
+err_irq:
+	if (gpio_is_valid(gpio))
+		gpio_set_value(gpio, 0);
+err_id:
+	regulator_disable(ks->vdd_reg);
+err_reg:
+	regulator_disable(ks->vdd_io);
+err_reg_io:
+err_gpio:
+>>>>>>> v3.18
 	free_netdev(ndev);
 	return ret;
 }
@@ -1599,6 +1696,7 @@ static int ks8851_remove(struct spi_device *spi)
 	if (netif_msg_drv(priv))
 		dev_info(&spi->dev, "remove\n");
 
+<<<<<<< HEAD
 	if (gpio_is_valid(priv->rst_gpio))
 		gpio_free(priv->rst_gpio);
 
@@ -1614,16 +1712,30 @@ static int ks8851_remove(struct spi_device *spi)
 
 	unregister_netdev(priv->netdev);
 	free_irq(spi->irq, priv);
+=======
+	unregister_netdev(priv->netdev);
+	free_irq(spi->irq, priv);
+	if (gpio_is_valid(priv->gpio))
+		gpio_set_value(priv->gpio, 0);
+	regulator_disable(priv->vdd_reg);
+	regulator_disable(priv->vdd_io);
+>>>>>>> v3.18
 	free_netdev(priv->netdev);
 
 	return 0;
 }
 
+<<<<<<< HEAD
 static struct of_device_id ks8851_match_table[] = {
 	{
 		.compatible = "micrel,ks8851",
 	},
 	{}
+=======
+static const struct of_device_id ks8851_match_table[] = {
+	{ .compatible = "micrel,ks8851" },
+	{ }
+>>>>>>> v3.18
 };
 
 static struct spi_driver ks8851_driver = {

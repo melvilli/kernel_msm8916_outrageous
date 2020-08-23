@@ -21,23 +21,39 @@
 #include <asm/suspend.h>
 
 /* Defined in hibernate_asm_64.S */
+<<<<<<< HEAD
 extern int restore_image(void);
+=======
+extern asmlinkage __visible int restore_image(void);
+>>>>>>> v3.18
 
 /*
  * Address to jump to in the last phase of restore in order to get to the image
  * kernel's text (this value is passed in the image header).
  */
+<<<<<<< HEAD
 unsigned long restore_jump_address;
+=======
+unsigned long restore_jump_address __visible;
+>>>>>>> v3.18
 
 /*
  * Value of the cr3 register from before the hibernation (this value is passed
  * in the image header).
  */
+<<<<<<< HEAD
 unsigned long restore_cr3;
 
 pgd_t *temp_level4_pgt;
 
 void *relocated_restore_code;
+=======
+unsigned long restore_cr3 __visible;
+
+pgd_t *temp_level4_pgt __visible;
+
+void *relocated_restore_code __visible;
+>>>>>>> v3.18
 
 static void *alloc_pgt_page(void *context)
 {

@@ -21,7 +21,11 @@
 
 #include "mpc10x.h"
 
+<<<<<<< HEAD
 static __initdata struct of_device_id of_bus_ids[] = {
+=======
+static const struct of_device_id of_bus_ids[] __initconst = {
+>>>>>>> v3.18
 	{ .type = "soc", },
 	{ .compatible = "simple-bus", },
 	{},

@@ -92,7 +92,11 @@ __clmul_gf128mul_ble:
 	ret
 ENDPROC(__clmul_gf128mul_ble)
 
+<<<<<<< HEAD
 /* void clmul_ghash_mul(char *dst, const be128 *shash) */
+=======
+/* void clmul_ghash_mul(char *dst, const u128 *shash) */
+>>>>>>> v3.18
 ENTRY(clmul_ghash_mul)
 	movups (%rdi), DATA
 	movups (%rsi), SHASH
@@ -106,7 +110,11 @@ ENDPROC(clmul_ghash_mul)
 
 /*
  * void clmul_ghash_update(char *dst, const char *src, unsigned int srclen,
+<<<<<<< HEAD
  *			   const be128 *shash);
+=======
+ *			   const u128 *shash);
+>>>>>>> v3.18
  */
 ENTRY(clmul_ghash_update)
 	cmp $16, %rdx

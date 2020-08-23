@@ -32,11 +32,16 @@
 #include <linux/errno.h>
 #include <linux/init.h>
 #include <linux/netlink.h>
+<<<<<<< HEAD
+=======
+#include <net/Space.h>
+>>>>>>> v3.18
 
 /* A unified ethernet device probe.  This is the easiest way to have every
    ethernet adaptor have the name "eth[0123...]".
    */
 
+<<<<<<< HEAD
 extern struct net_device *hp100_probe(int unit);
 extern struct net_device *ultra_probe(int unit);
 extern struct net_device *wd_probe(int unit);
@@ -65,6 +70,8 @@ extern int iph5526_probe(struct net_device *dev);
 /* SBNI adapters */
 extern int sbni_probe(int unit);
 
+=======
+>>>>>>> v3.18
 struct devprobe2 {
 	struct net_device *(*probe)(int unit);
 	int status;	/* non-zero if autoprobe has failed */
@@ -102,8 +109,12 @@ static struct devprobe2 isa_probes[] __initdata = {
 #ifdef CONFIG_WD80x3
 	{wd_probe, 0},
 #endif
+<<<<<<< HEAD
 #if defined(CONFIG_NE2000) || \
     defined(CONFIG_NE_H8300)  /* ISA (use ne2k-pci for PCI cards) */
+=======
+#if defined(CONFIG_NE2000) /* ISA (use ne2k-pci for PCI cards) */
+>>>>>>> v3.18
 	{ne_probe, 0},
 #endif
 #ifdef CONFIG_LANCE		/* ISA/VLB (use pcnet32 for PCI cards) */

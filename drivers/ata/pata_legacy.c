@@ -916,7 +916,10 @@ static __init int probe_chip_type(struct legacy_probe *probe)
 			local_irq_restore(flags);
 			return BIOS;
 		}
+<<<<<<< HEAD
 		local_irq_restore(flags);
+=======
+>>>>>>> v3.18
 	}
 
 	if (ht6560a & mask)

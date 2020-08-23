@@ -87,7 +87,11 @@ static void dnrmg_send_peer(struct sk_buff *skb)
 }
 
 
+<<<<<<< HEAD
 static unsigned int dnrmg_hook(unsigned int hook,
+=======
+static unsigned int dnrmg_hook(const struct nf_hook_ops *ops,
+>>>>>>> v3.18
 			struct sk_buff *skb,
 			const struct net_device *in,
 			const struct net_device *out,

@@ -15,13 +15,20 @@
 #define _LINUX_VEXPRESS_H
 
 #include <linux/device.h>
+<<<<<<< HEAD
 #include <linux/reboot.h>
+=======
+#include <linux/platform_device.h>
+#include <linux/reboot.h>
+#include <linux/regmap.h>
+>>>>>>> v3.18
 
 #define VEXPRESS_SITE_MB		0
 #define VEXPRESS_SITE_DB1		1
 #define VEXPRESS_SITE_DB2		2
 #define VEXPRESS_SITE_MASTER		0xf
 
+<<<<<<< HEAD
 #define VEXPRESS_CONFIG_STATUS_DONE	0
 #define VEXPRESS_CONFIG_STATUS_WAIT	1
 
@@ -37,6 +44,8 @@
 #define VEXPRESS_GPIO_LED6		9
 #define VEXPRESS_GPIO_LED7		10
 
+=======
+>>>>>>> v3.18
 #define VEXPRESS_RES_FUNC(_site, _func)	\
 {					\
 	.start = (_site),		\
@@ -44,6 +53,7 @@
 	.flags = IORESOURCE_BUS,	\
 }
 
+<<<<<<< HEAD
 /* Config bridge API */
 
 /**
@@ -123,5 +133,45 @@ void vexpress_osc_of_setup(struct device_node *node);
 
 void vexpress_clk_init(void __iomem *sp810_base);
 void vexpress_clk_of_init(void);
+=======
+/* Config infrastructure */
+
+void vexpress_config_set_master(u32 site);
+u32 vexpress_config_get_master(void);
+
+void vexpress_config_lock(void *arg);
+void vexpress_config_unlock(void *arg);
+
+int vexpress_config_get_topo(struct device_node *node, u32 *site,
+		u32 *position, u32 *dcc);
+
+/* Config bridge API */
+
+struct vexpress_config_bridge_ops {
+	struct regmap * (*regmap_init)(struct device *dev, void *context);
+	void (*regmap_exit)(struct regmap *regmap, void *context);
+};
+
+struct device *vexpress_config_bridge_register(struct device *parent,
+		struct vexpress_config_bridge_ops *ops, void *context);
+
+/* Config regmap API */
+
+struct regmap *devm_regmap_init_vexpress_config(struct device *dev);
+
+/* Platform control */
+
+unsigned int vexpress_get_mci_cardin(struct device *dev);
+u32 vexpress_get_procid(int site);
+void *vexpress_get_24mhz_clock_base(void);
+void vexpress_flags_set(u32 data);
+
+void vexpress_sysreg_early_init(void __iomem *base);
+int vexpress_syscfg_device_register(struct platform_device *pdev);
+
+/* Clocks */
+
+void vexpress_clk_init(void __iomem *sp810_base);
+>>>>>>> v3.18
 
 #endif

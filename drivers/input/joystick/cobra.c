@@ -29,7 +29,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/gameport.h>
 #include <linux/input.h>
 #include <linux/jiffies.h>

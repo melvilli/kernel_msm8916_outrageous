@@ -10,7 +10,10 @@
  * GNU General Public License for more details.
  */
 
+<<<<<<< HEAD
 #include <linux/console.h>
+=======
+>>>>>>> v3.18
 #include <linux/init.h>
 
 #include <asm/dcc.h>
@@ -49,6 +52,24 @@ static int hvc_dcc_get_chars(uint32_t vt, char *buf, int count)
 	return i;
 }
 
+<<<<<<< HEAD
+=======
+static bool hvc_dcc_check(void)
+{
+	unsigned long time = jiffies + (HZ / 10);
+
+	/* Write a test character to check if it is handled */
+	__dcc_putchar('\n');
+
+	while (time_is_after_jiffies(time)) {
+		if (!(__dcc_getstatus() & DCC_STATUS_TX))
+			return true;
+	}
+
+	return false;
+}
+
+>>>>>>> v3.18
 static const struct hv_ops hvc_dcc_get_put_ops = {
 	.get_chars = hvc_dcc_get_chars,
 	.put_chars = hvc_dcc_put_chars,
@@ -56,6 +77,12 @@ static const struct hv_ops hvc_dcc_get_put_ops = {
 
 static int __init hvc_dcc_console_init(void)
 {
+<<<<<<< HEAD
+=======
+	if (!hvc_dcc_check())
+		return -ENODEV;
+
+>>>>>>> v3.18
 	hvc_instantiate(0, 0, &hvc_dcc_get_put_ops);
 	return 0;
 }
@@ -63,6 +90,12 @@ console_initcall(hvc_dcc_console_init);
 
 static int __init hvc_dcc_init(void)
 {
+<<<<<<< HEAD
+=======
+	if (!hvc_dcc_check())
+		return -ENODEV;
+
+>>>>>>> v3.18
 	hvc_alloc(0, 0, &hvc_dcc_get_put_ops, 128);
 	return 0;
 }

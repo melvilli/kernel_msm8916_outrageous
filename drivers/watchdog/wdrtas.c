@@ -48,8 +48,11 @@
 MODULE_AUTHOR("Utz Bacher <utz.bacher@de.ibm.com>");
 MODULE_DESCRIPTION("RTAS watchdog driver");
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
 MODULE_ALIAS_MISCDEV(TEMP_MINOR);
+=======
+>>>>>>> v3.18
 
 static bool wdrtas_nowayout = WATCHDOG_NOWAYOUT;
 static atomic_t wdrtas_miscdev_open = ATOMIC_INIT(0);
@@ -162,6 +165,7 @@ static void wdrtas_timer_stop(void)
 }
 
 /**
+<<<<<<< HEAD
  * wdrtas_log_scanned_event - logs an event we received during keepalive
  *
  * wdrtas_log_scanned_event prints a message to the log buffer dumping
@@ -187,6 +191,8 @@ static void wdrtas_log_scanned_event(void)
 }
 
 /**
+=======
+>>>>>>> v3.18
  * wdrtas_timer_keepalive - resets watchdog timer to keep system alive
  *
  * wdrtas_timer_keepalive restarts the watchdog timer by calling the
@@ -205,7 +211,13 @@ static void wdrtas_timer_keepalive(void)
 		if (result < 0)
 			pr_err("event-scan failed: %li\n", result);
 		if (result == 0)
+<<<<<<< HEAD
 			wdrtas_log_scanned_event();
+=======
+			print_hex_dump(KERN_INFO, "dumping event, data: ",
+				DUMP_PREFIX_OFFSET, 16, 1,
+				wdrtas_logbuffer, WDRTAS_LOGBUFFER_LEN, false);
+>>>>>>> v3.18
 	} while (result == 0);
 }
 

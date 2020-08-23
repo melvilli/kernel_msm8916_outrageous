@@ -28,6 +28,11 @@
 #include "cifsglob.h"
 #include "cifsproto.h"
 #include "cifs_debug.h"
+<<<<<<< HEAD
+=======
+#include "cifs_fs_sb.h"
+#include "cifs_unicode.h"
+>>>>>>> v3.18
 
 #define MAX_EA_VALUE_SIZE 65535
 #define CIFS_XATTR_DOS_ATTRIB "user.DosAttrib"
@@ -85,8 +90,12 @@ int cifs_removexattr(struct dentry *direntry, const char *ea_name)
 		if (pTcon->ses->server->ops->set_EA)
 			rc = pTcon->ses->server->ops->set_EA(xid, pTcon,
 				full_path, ea_name, NULL, (__u16)0,
+<<<<<<< HEAD
 				cifs_sb->local_nls, cifs_sb->mnt_cifs_flags &
 					CIFS_MOUNT_MAP_SPECIAL_CHR);
+=======
+				cifs_sb->local_nls, cifs_remap(cifs_sb));
+>>>>>>> v3.18
 	}
 remove_ea_exit:
 	kfree(full_path);
@@ -154,8 +163,12 @@ int cifs_setxattr(struct dentry *direntry, const char *ea_name,
 		if (pTcon->ses->server->ops->set_EA)
 			rc = pTcon->ses->server->ops->set_EA(xid, pTcon,
 				full_path, ea_name, ea_value, (__u16)value_size,
+<<<<<<< HEAD
 				cifs_sb->local_nls, cifs_sb->mnt_cifs_flags &
 					CIFS_MOUNT_MAP_SPECIAL_CHR);
+=======
+				cifs_sb->local_nls, cifs_remap(cifs_sb));
+>>>>>>> v3.18
 	} else if (strncmp(ea_name, XATTR_OS2_PREFIX, XATTR_OS2_PREFIX_LEN)
 		   == 0) {
 		if (cifs_sb->mnt_cifs_flags & CIFS_MOUNT_NO_XATTR)
@@ -165,8 +178,12 @@ int cifs_setxattr(struct dentry *direntry, const char *ea_name,
 		if (pTcon->ses->server->ops->set_EA)
 			rc = pTcon->ses->server->ops->set_EA(xid, pTcon,
 				full_path, ea_name, ea_value, (__u16)value_size,
+<<<<<<< HEAD
 				cifs_sb->local_nls, cifs_sb->mnt_cifs_flags &
 					CIFS_MOUNT_MAP_SPECIAL_CHR);
+=======
+				cifs_sb->local_nls, cifs_remap(cifs_sb));
+>>>>>>> v3.18
 	} else if (strncmp(ea_name, CIFS_XATTR_CIFS_ACL,
 			strlen(CIFS_XATTR_CIFS_ACL)) == 0) {
 #ifdef CONFIG_CIFS_ACL
@@ -199,8 +216,12 @@ int cifs_setxattr(struct dentry *direntry, const char *ea_name,
 				rc = CIFSSMBSetPosixACL(xid, pTcon, full_path,
 					ea_value, (const int)value_size,
 					ACL_TYPE_ACCESS, cifs_sb->local_nls,
+<<<<<<< HEAD
 					cifs_sb->mnt_cifs_flags &
 						CIFS_MOUNT_MAP_SPECIAL_CHR);
+=======
+					cifs_remap(cifs_sb));
+>>>>>>> v3.18
 			cifs_dbg(FYI, "set POSIX ACL rc %d\n", rc);
 #else
 			cifs_dbg(FYI, "set POSIX ACL not supported\n");
@@ -212,8 +233,12 @@ int cifs_setxattr(struct dentry *direntry, const char *ea_name,
 				rc = CIFSSMBSetPosixACL(xid, pTcon, full_path,
 					ea_value, (const int)value_size,
 					ACL_TYPE_DEFAULT, cifs_sb->local_nls,
+<<<<<<< HEAD
 					cifs_sb->mnt_cifs_flags &
 						CIFS_MOUNT_MAP_SPECIAL_CHR);
+=======
+					cifs_remap(cifs_sb));
+>>>>>>> v3.18
 			cifs_dbg(FYI, "set POSIX default ACL rc %d\n", rc);
 #else
 			cifs_dbg(FYI, "set default POSIX ACL not supported\n");
@@ -285,8 +310,12 @@ ssize_t cifs_getxattr(struct dentry *direntry, const char *ea_name,
 		if (pTcon->ses->server->ops->query_all_EAs)
 			rc = pTcon->ses->server->ops->query_all_EAs(xid, pTcon,
 				full_path, ea_name, ea_value, buf_size,
+<<<<<<< HEAD
 				cifs_sb->local_nls, cifs_sb->mnt_cifs_flags &
 					CIFS_MOUNT_MAP_SPECIAL_CHR);
+=======
+				cifs_sb->local_nls, cifs_remap(cifs_sb));
+>>>>>>> v3.18
 	} else if (strncmp(ea_name, XATTR_OS2_PREFIX, XATTR_OS2_PREFIX_LEN) == 0) {
 		if (cifs_sb->mnt_cifs_flags & CIFS_MOUNT_NO_XATTR)
 			goto get_ea_exit;
@@ -295,8 +324,12 @@ ssize_t cifs_getxattr(struct dentry *direntry, const char *ea_name,
 		if (pTcon->ses->server->ops->query_all_EAs)
 			rc = pTcon->ses->server->ops->query_all_EAs(xid, pTcon,
 				full_path, ea_name, ea_value, buf_size,
+<<<<<<< HEAD
 				cifs_sb->local_nls, cifs_sb->mnt_cifs_flags &
 					CIFS_MOUNT_MAP_SPECIAL_CHR);
+=======
+				cifs_sb->local_nls, cifs_remap(cifs_sb));
+>>>>>>> v3.18
 	} else if (strncmp(ea_name, POSIX_ACL_XATTR_ACCESS,
 			  strlen(POSIX_ACL_XATTR_ACCESS)) == 0) {
 #ifdef CONFIG_CIFS_POSIX
@@ -304,8 +337,12 @@ ssize_t cifs_getxattr(struct dentry *direntry, const char *ea_name,
 			rc = CIFSSMBGetPosixACL(xid, pTcon, full_path,
 				ea_value, buf_size, ACL_TYPE_ACCESS,
 				cifs_sb->local_nls,
+<<<<<<< HEAD
 				cifs_sb->mnt_cifs_flags &
 					CIFS_MOUNT_MAP_SPECIAL_CHR);
+=======
+				cifs_remap(cifs_sb));
+>>>>>>> v3.18
 #else
 		cifs_dbg(FYI, "Query POSIX ACL not supported yet\n");
 #endif /* CONFIG_CIFS_POSIX */
@@ -316,8 +353,12 @@ ssize_t cifs_getxattr(struct dentry *direntry, const char *ea_name,
 			rc = CIFSSMBGetPosixACL(xid, pTcon, full_path,
 				ea_value, buf_size, ACL_TYPE_DEFAULT,
 				cifs_sb->local_nls,
+<<<<<<< HEAD
 				cifs_sb->mnt_cifs_flags &
 					CIFS_MOUNT_MAP_SPECIAL_CHR);
+=======
+				cifs_remap(cifs_sb));
+>>>>>>> v3.18
 #else
 		cifs_dbg(FYI, "Query POSIX default ACL not supported yet\n");
 #endif /* CONFIG_CIFS_POSIX */
@@ -421,8 +462,12 @@ ssize_t cifs_listxattr(struct dentry *direntry, char *data, size_t buf_size)
 	if (pTcon->ses->server->ops->query_all_EAs)
 		rc = pTcon->ses->server->ops->query_all_EAs(xid, pTcon,
 				full_path, NULL, data, buf_size,
+<<<<<<< HEAD
 				cifs_sb->local_nls, cifs_sb->mnt_cifs_flags &
 					CIFS_MOUNT_MAP_SPECIAL_CHR);
+=======
+				cifs_sb->local_nls, cifs_remap(cifs_sb));
+>>>>>>> v3.18
 list_ea_exit:
 	kfree(full_path);
 	free_xid(xid);

@@ -113,8 +113,13 @@ static u32 read_wb_reg(int n)
 	GEN_READ_WB_REG_CASES(ARM_OP2_WVR, val);
 	GEN_READ_WB_REG_CASES(ARM_OP2_WCR, val);
 	default:
+<<<<<<< HEAD
 		pr_warning("attempt to read from unknown breakpoint "
 				"register %d\n", n);
+=======
+		pr_warn("attempt to read from unknown breakpoint register %d\n",
+			n);
+>>>>>>> v3.18
 	}
 
 	return val;
@@ -128,8 +133,13 @@ static void write_wb_reg(int n, u32 val)
 	GEN_WRITE_WB_REG_CASES(ARM_OP2_WVR, val);
 	GEN_WRITE_WB_REG_CASES(ARM_OP2_WCR, val);
 	default:
+<<<<<<< HEAD
 		pr_warning("attempt to write to unknown breakpoint "
 				"register %d\n", n);
+=======
+		pr_warn("attempt to write to unknown breakpoint register %d\n",
+			n);
+>>>>>>> v3.18
 	}
 	isb();
 }
@@ -227,6 +237,7 @@ static int get_num_brps(void)
 	return core_has_mismatch_brps() ? brps - 1 : brps;
 }
 
+<<<<<<< HEAD
 /* Determine if halting mode is enabled */
 static int halting_mode_enabled(void)
 {
@@ -238,6 +249,8 @@ static int halting_mode_enabled(void)
 	return !!(dscr & ARM_DSCR_HDBGEN);
 }
 
+=======
+>>>>>>> v3.18
 /*
  * In order to access the breakpoint/watchpoint control registers,
  * we must be running in debug monitor mode. Unfortunately, we can
@@ -303,7 +316,11 @@ int hw_breakpoint_slots(int type)
 	case TYPE_DATA:
 		return get_num_wrps();
 	default:
+<<<<<<< HEAD
 		pr_warning("unknown slot type: %d\n", type);
+=======
+		pr_warn("unknown slot type: %d\n", type);
+>>>>>>> v3.18
 		return 0;
 	}
 }
@@ -376,7 +393,11 @@ int arch_install_hw_breakpoint(struct perf_event *bp)
 	}
 
 	if (i == max_slots) {
+<<<<<<< HEAD
 		pr_warning("Can't find any breakpoint slot\n");
+=======
+		pr_warn("Can't find any breakpoint slot\n");
+>>>>>>> v3.18
 		return -EBUSY;
 	}
 
@@ -428,7 +449,11 @@ void arch_uninstall_hw_breakpoint(struct perf_event *bp)
 	}
 
 	if (i == max_slots) {
+<<<<<<< HEAD
 		pr_warning("Can't find any breakpoint slot\n");
+=======
+		pr_warn("Can't find any breakpoint slot\n");
+>>>>>>> v3.18
 		return;
 	}
 
@@ -905,8 +930,13 @@ static int debug_reg_trap(struct pt_regs *regs, unsigned int instr)
 {
 	int cpu = smp_processor_id();
 
+<<<<<<< HEAD
 	pr_warning("Debug register access (0x%x) caused undefined instruction on CPU %d\n",
 		   instr, cpu);
+=======
+	pr_warn("Debug register access (0x%x) caused undefined instruction on CPU %d\n",
+		instr, cpu);
+>>>>>>> v3.18
 
 	/* Set the error flag for this CPU and skip the faulting instruction. */
 	cpumask_set_cpu(cpu, &debug_err_mask);
@@ -943,6 +973,7 @@ static void reset_ctrl_regs(void *unused)
 	u32 val;
 
 	/*
+<<<<<<< HEAD
 	 * Bail out without clearing the breakpoint registers if halting
 	 * debug mode or monitor debug mode is enabled. Checking for monitor
 	 * debug mode here ensures we don't clear the breakpoint registers
@@ -954,6 +985,8 @@ static void reset_ctrl_regs(void *unused)
 		return;
 
 	/*
+=======
+>>>>>>> v3.18
 	 * v7 debug contains save and restore registers so that debug state
 	 * can be maintained across low-power modes without leaving the debug
 	 * logic powered up. It is IMPLEMENTATION DEFINED whether we can access
@@ -1043,7 +1076,11 @@ out_mdbgen:
 		cpumask_or(&debug_err_mask, &debug_err_mask, cpumask_of(cpu));
 }
 
+<<<<<<< HEAD
 static int __cpuinit dbg_reset_notify(struct notifier_block *self,
+=======
+static int dbg_reset_notify(struct notifier_block *self,
+>>>>>>> v3.18
 				      unsigned long action, void *cpu)
 {
 	if ((action & ~CPU_TASKS_FROZEN) == CPU_ONLINE)
@@ -1052,7 +1089,11 @@ static int __cpuinit dbg_reset_notify(struct notifier_block *self,
 	return NOTIFY_OK;
 }
 
+<<<<<<< HEAD
 static struct notifier_block __cpuinitdata dbg_reset_nb = {
+=======
+static struct notifier_block dbg_reset_nb = {
+>>>>>>> v3.18
 	.notifier_call = dbg_reset_notify,
 };
 
@@ -1089,6 +1130,7 @@ static int __init arch_hw_breakpoint_init(void)
 		return 0;
 	}
 
+<<<<<<< HEAD
 	/*
 	 * Scorpion CPUs (at least those in APQ8060) seem to set DBGPRSR.SPD
 	 * whenever a WFI is issued, even if the core is not powered down, in
@@ -1105,6 +1147,8 @@ static int __init arch_hw_breakpoint_init(void)
 		return 0;
 	}
 
+=======
+>>>>>>> v3.18
 	has_ossr = core_has_os_save_restore();
 
 	/* Determine how many BRPs/WRPs are available. */

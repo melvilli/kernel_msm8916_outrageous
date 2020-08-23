@@ -4,6 +4,12 @@
 #include <linux/seq_file.h>
 #include <linux/interrupt.h>
 
+<<<<<<< HEAD
+=======
+#include <asm/bootinfo-mac.h>
+
+
+>>>>>>> v3.18
 /*
  *	Apple Macintoshisms
  */
@@ -74,6 +80,7 @@ struct mac_model
 #define MAC_FLOPPY_SWIM_IOP	3
 #define MAC_FLOPPY_AV		4
 
+<<<<<<< HEAD
 /*
  *	Gestalt numbers
  */
@@ -134,5 +141,31 @@ struct mac_model
 #define MAC_MODEL_PB150		115
 
 extern struct mac_model *macintosh_config;
+=======
+extern struct mac_model *macintosh_config;
+
+
+    /*
+     * Internal representation of the Mac hardware, filled in from bootinfo
+     */
+
+struct mac_booter_data
+{
+	unsigned long videoaddr;
+	unsigned long videorow;
+	unsigned long videodepth;
+	unsigned long dimensions;
+	unsigned long boottime;
+	unsigned long gmtbias;
+	unsigned long videological;
+	unsigned long sccbase;
+	unsigned long id;
+	unsigned long memsize;
+	unsigned long cpuid;
+	unsigned long rombase;
+};
+
+extern struct mac_booter_data mac_bi_data;
+>>>>>>> v3.18
 
 #endif

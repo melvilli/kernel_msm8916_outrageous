@@ -10,7 +10,10 @@
 #include <linux/of_mdio.h>
 #include <linux/delay.h>
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/gfp.h>
 #include <linux/phy.h>
 #include <linux/io.h>
@@ -222,7 +225,11 @@ static int octeon_mdiobus_probe(struct platform_device *pdev)
 	bus->mii_bus->read = octeon_mdiobus_read;
 	bus->mii_bus->write = octeon_mdiobus_write;
 
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, bus);
+=======
+	platform_set_drvdata(pdev, bus);
+>>>>>>> v3.18
 
 	err = of_mdiobus_register(bus->mii_bus, pdev->dev.of_node);
 	if (err)
@@ -244,7 +251,11 @@ static int octeon_mdiobus_remove(struct platform_device *pdev)
 	struct octeon_mdiobus *bus;
 	union cvmx_smix_en smi_en;
 
+<<<<<<< HEAD
 	bus = dev_get_drvdata(&pdev->dev);
+=======
+	bus = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 
 	mdiobus_unregister(bus->mii_bus);
 	mdiobus_free(bus->mii_bus);

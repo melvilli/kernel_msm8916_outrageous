@@ -63,7 +63,11 @@
 #include <dmxdev.h>
 #include <media/v4l2-common.h>
 #include <media/v4l2-ioctl.h>
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+#include <media/v4l2-device.h>
+>>>>>>> v3.18
 
 #include "saa7164-reg.h"
 #include "saa7164-types.h"
@@ -376,6 +380,10 @@ struct saa7164_port {
 	/* Encoder */
 	/* Defaults established in saa7164-encoder.c */
 	struct saa7164_tvnorm encodernorm;
+<<<<<<< HEAD
+=======
+	v4l2_std_id std;
+>>>>>>> v3.18
 	u32 height;
 	u32 width;
 	u32 freq;
@@ -427,6 +435,11 @@ struct saa7164_dev {
 	struct list_head	devlist;
 	atomic_t		refcount;
 
+<<<<<<< HEAD
+=======
+	struct v4l2_device v4l2_dev;
+
+>>>>>>> v3.18
 	/* pci stuff */
 	struct pci_dev	*pci;
 	unsigned char	pci_rev, pci_lat;

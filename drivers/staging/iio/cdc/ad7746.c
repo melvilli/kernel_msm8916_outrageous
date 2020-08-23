@@ -91,7 +91,11 @@
 #define AD7746_CAPDAC_DACP(x)		((x) & 0x7F)
 
 /*
+<<<<<<< HEAD
  * struct ad7746_chip_info - chip specifc information
+=======
+ * struct ad7746_chip_info - chip specific information
+>>>>>>> v3.18
  */
 
 struct ad7746_chip_info {
@@ -105,6 +109,14 @@ struct ad7746_chip_info {
 	u8	vt_setup;
 	u8	capdac[2][2];
 	s8	capdac_set;
+<<<<<<< HEAD
+=======
+
+	union {
+		__be32 d32;
+		u8 d8[4];
+	} data ____cacheline_aligned;
+>>>>>>> v3.18
 };
 
 enum ad7746_chan {
@@ -566,11 +578,14 @@ static int ad7746_read_raw(struct iio_dev *indio_dev,
 	int ret, delay;
 	u8 regval, reg;
 
+<<<<<<< HEAD
 	union {
 		u32 d32;
 		u8 d8[4];
 	} data;
 
+=======
+>>>>>>> v3.18
 	mutex_lock(&indio_dev->mlock);
 
 	switch (mask) {
@@ -591,12 +606,20 @@ static int ad7746_read_raw(struct iio_dev *indio_dev,
 		/* Now read the actual register */
 
 		ret = i2c_smbus_read_i2c_block_data(chip->client,
+<<<<<<< HEAD
 			chan->address >> 8, 3, &data.d8[1]);
+=======
+			chan->address >> 8, 3, &chip->data.d8[1]);
+>>>>>>> v3.18
 
 		if (ret < 0)
 			goto out;
 
+<<<<<<< HEAD
 		*val = (be32_to_cpu(data.d32) & 0xFFFFFF) - 0x800000;
+=======
+		*val = (be32_to_cpu(chip->data.d32) & 0xFFFFFF) - 0x800000;
+>>>>>>> v3.18
 
 		switch (chan->type) {
 		case IIO_TEMP:
@@ -656,6 +679,7 @@ static int ad7746_read_raw(struct iio_dev *indio_dev,
 		switch (chan->type) {
 		case IIO_CAPACITANCE:
 			/* 8.192pf / 2^24 */
+<<<<<<< HEAD
 			*val2 = 488;
 			*val =  0;
 			break;
@@ -670,6 +694,23 @@ static int ad7746_read_raw(struct iio_dev *indio_dev,
 		}
 
 		ret = IIO_VAL_INT_PLUS_NANO;
+=======
+			*val =  0;
+			*val2 = 488;
+			ret = IIO_VAL_INT_PLUS_NANO;
+			break;
+		case IIO_VOLTAGE:
+			/* 1170mV / 2^23 */
+			*val = 1170;
+			*val2 = 23;
+			ret = IIO_VAL_FRACTIONAL_LOG2;
+			break;
+		default:
+			ret = -EINVAL;
+			break;
+		}
+
+>>>>>>> v3.18
 		break;
 	default:
 		ret = -EINVAL;
@@ -699,11 +740,17 @@ static int ad7746_probe(struct i2c_client *client,
 	int ret = 0;
 	unsigned char regval = 0;
 
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*chip));
 	if (indio_dev == NULL) {
 		ret = -ENOMEM;
 		goto error_ret;
 	}
+=======
+	indio_dev = devm_iio_device_alloc(&client->dev, sizeof(*chip));
+	if (!indio_dev)
+		return -ENOMEM;
+>>>>>>> v3.18
 	chip = iio_priv(indio_dev);
 	/* this is only used for device removal purposes */
 	i2c_set_clientdata(client, indio_dev);
@@ -748,20 +795,31 @@ static int ad7746_probe(struct i2c_client *client,
 	ret = i2c_smbus_write_byte_data(chip->client,
 					AD7746_REG_EXC_SETUP, regval);
 	if (ret < 0)
+<<<<<<< HEAD
 		goto error_free_dev;
 
 	ret = iio_device_register(indio_dev);
 	if (ret)
 		goto error_free_dev;
+=======
+		return ret;
+
+	ret = iio_device_register(indio_dev);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 
 	dev_info(&client->dev, "%s capacitive sensor registered\n", id->name);
 
 	return 0;
+<<<<<<< HEAD
 
 error_free_dev:
 	iio_device_free(indio_dev);
 error_ret:
 	return ret;
+=======
+>>>>>>> v3.18
 }
 
 static int ad7746_remove(struct i2c_client *client)
@@ -769,7 +827,10 @@ static int ad7746_remove(struct i2c_client *client)
 	struct iio_dev *indio_dev = i2c_get_clientdata(client);
 
 	iio_device_unregister(indio_dev);
+<<<<<<< HEAD
 	iio_device_free(indio_dev);
+=======
+>>>>>>> v3.18
 
 	return 0;
 }

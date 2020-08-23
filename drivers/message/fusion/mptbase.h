@@ -405,7 +405,11 @@ typedef struct _VirtTarget {
 typedef struct _VirtDevice {
 	VirtTarget		*vtarget;
 	u8			 configured_lun;
+<<<<<<< HEAD
 	int			 lun;
+=======
+	u64			 lun;
+>>>>>>> v3.18
 } VirtDevice;
 
 /*
@@ -605,7 +609,11 @@ typedef struct _MPT_ADAPTER
 	int			 id;		/* Unique adapter id N {0,1,2,...} */
 	int			 pci_irq;	/* This irq           */
 	char			 name[MPT_NAME_LENGTH];	/* "iocN"             */
+<<<<<<< HEAD
 	char			 prod_name[MPT_NAME_LENGTH];	/* "LSIFC9x9"         */
+=======
+	const char		 *prod_name;	/* "LSIFC9x9"         */
+>>>>>>> v3.18
 #ifdef CONFIG_FUSION_LOGGING
 	/* used in mpt_display_event_info */
 	char			 evStr[EVENT_DESCR_STR_SZ];

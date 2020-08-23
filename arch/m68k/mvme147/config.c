@@ -26,6 +26,11 @@
 #include <linux/interrupt.h>
 
 #include <asm/bootinfo.h>
+<<<<<<< HEAD
+=======
+#include <asm/bootinfo-vme.h>
+#include <asm/byteorder.h>
+>>>>>>> v3.18
 #include <asm/pgtable.h>
 #include <asm/setup.h>
 #include <asm/irq.h>
@@ -51,9 +56,16 @@ static int bcd2int (unsigned char b);
 irq_handler_t tick_handler;
 
 
+<<<<<<< HEAD
 int mvme147_parse_bootinfo(const struct bi_record *bi)
 {
 	if (bi->tag == BI_VME_TYPE || bi->tag == BI_VME_BRDINFO)
+=======
+int __init mvme147_parse_bootinfo(const struct bi_record *bi)
+{
+	uint16_t tag = be16_to_cpu(bi->tag);
+	if (tag == BI_VME_TYPE || tag == BI_VME_BRDINFO)
+>>>>>>> v3.18
 		return 0;
 	else
 		return 1;

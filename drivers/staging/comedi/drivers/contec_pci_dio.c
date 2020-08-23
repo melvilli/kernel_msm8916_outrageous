@@ -13,11 +13,14 @@
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 */
 /*
 Driver: contec_pci_dio
@@ -30,12 +33,19 @@ Status: works
 Configuration Options: not applicable, uses comedi PCI auto config
 */
 
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 #include <linux/pci.h>
 
 #include "../comedidev.h"
 
+<<<<<<< HEAD
 #define PCI_DEVICE_ID_PIO1616L 0x8172
 
+=======
+>>>>>>> v3.18
 /*
  * Register map
  */
@@ -44,6 +54,7 @@ Configuration Options: not applicable, uses comedi PCI auto config
 
 static int contec_do_insn_bits(struct comedi_device *dev,
 			       struct comedi_subdevice *s,
+<<<<<<< HEAD
 			       struct comedi_insn *insn, unsigned int *data)
 {
 	unsigned int mask = data[0];
@@ -55,6 +66,13 @@ static int contec_do_insn_bits(struct comedi_device *dev,
 
 		outw(s->state, dev->iobase + PIO1616L_DO_REG);
 	}
+=======
+			       struct comedi_insn *insn,
+			       unsigned int *data)
+{
+	if (comedi_dio_update_state(s, data))
+		outw(s->state, dev->iobase + PIO1616L_DO_REG);
+>>>>>>> v3.18
 
 	data[1] = s->state;
 
@@ -102,8 +120,11 @@ static int contec_auto_attach(struct comedi_device *dev,
 	s->range_table	= &range_digital;
 	s->insn_bits	= contec_do_insn_bits;
 
+<<<<<<< HEAD
 	dev_info(dev->class_dev, "%s attached\n", dev->board_name);
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -111,7 +132,11 @@ static struct comedi_driver contec_pci_dio_driver = {
 	.driver_name	= "contec_pci_dio",
 	.module		= THIS_MODULE,
 	.auto_attach	= contec_auto_attach,
+<<<<<<< HEAD
 	.detach		= comedi_pci_disable,
+=======
+	.detach		= comedi_pci_detach,
+>>>>>>> v3.18
 };
 
 static int contec_pci_dio_pci_probe(struct pci_dev *dev,
@@ -121,8 +146,13 @@ static int contec_pci_dio_pci_probe(struct pci_dev *dev,
 				      id->driver_data);
 }
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(contec_pci_dio_pci_table) = {
 	{ PCI_DEVICE(PCI_VENDOR_ID_CONTEC, PCI_DEVICE_ID_PIO1616L) },
+=======
+static const struct pci_device_id contec_pci_dio_pci_table[] = {
+	{ PCI_DEVICE(PCI_VENDOR_ID_CONTEC, 0x8172) },
+>>>>>>> v3.18
 	{ 0 }
 };
 MODULE_DEVICE_TABLE(pci, contec_pci_dio_pci_table);

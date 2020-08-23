@@ -13,7 +13,11 @@
 #include <linux/gpio.h>
 #include <linux/of.h>
 #include <linux/of_irq.h>
+<<<<<<< HEAD
 #include <linux/of_platform.h>
+=======
+#include <linux/clk-provider.h>
+>>>>>>> v3.18
 
 #include <asm/setup.h>
 #include <asm/irq.h>
@@ -25,6 +29,7 @@
 #include "board.h"
 #include "generic.h"
 
+<<<<<<< HEAD
 
 static const struct of_device_id irq_of_match[] __initconst = {
 
@@ -42,6 +47,8 @@ static void __init at91_dt_device_init(void)
 	of_platform_populate(NULL, of_default_bus_match_table, NULL, NULL);
 }
 
+=======
+>>>>>>> v3.18
 static const char *at91_dt_board_compat[] __initdata = {
 	"atmel,at91sam9",
 	NULL
@@ -49,11 +56,16 @@ static const char *at91_dt_board_compat[] __initdata = {
 
 DT_MACHINE_START(at91sam_dt, "Atmel AT91SAM (Device Tree)")
 	/* Maintainer: Atmel */
+<<<<<<< HEAD
 	.init_time	= at91sam926x_pit_init,
 	.map_io		= at91_map_io,
 	.handle_irq	= at91_aic_handle_irq,
 	.init_early	= at91_dt_initialize,
 	.init_irq	= at91_dt_init_irq,
 	.init_machine	= at91_dt_device_init,
+=======
+	.map_io		= at91_map_io,
+	.init_early	= at91_dt_initialize,
+>>>>>>> v3.18
 	.dt_compat	= at91_dt_board_compat,
 MACHINE_END

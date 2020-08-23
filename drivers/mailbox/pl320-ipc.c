@@ -26,7 +26,11 @@
 #include <linux/device.h>
 #include <linux/amba/bus.h>
 
+<<<<<<< HEAD
 #include <linux/mailbox.h>
+=======
+#include <linux/pl320-ipc.h>
+>>>>>>> v3.18
 
 #define IPCMxSOURCE(m)		((m) * 0x40)
 #define IPCMxDSET(m)		(((m) * 0x40) + 0x004)

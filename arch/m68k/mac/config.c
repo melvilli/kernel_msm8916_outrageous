@@ -26,9 +26,16 @@
 #include <linux/adb.h>
 #include <linux/cuda.h>
 
+<<<<<<< HEAD
 #define BOOTINFO_COMPAT_1_0
 #include <asm/setup.h>
 #include <asm/bootinfo.h>
+=======
+#include <asm/setup.h>
+#include <asm/bootinfo.h>
+#include <asm/bootinfo-mac.h>
+#include <asm/byteorder.h>
+>>>>>>> v3.18
 
 #include <asm/io.h>
 #include <asm/irq.h>
@@ -70,6 +77,7 @@ static void mac_get_model(char *str);
 static void mac_identify(void);
 static void mac_report_hardware(void);
 
+<<<<<<< HEAD
 #ifdef CONFIG_EARLY_PRINTK
 asmlinkage void __init mac_early_print(const char *s, unsigned n);
 
@@ -95,6 +103,8 @@ int __init mac_unregister_early_cons(void)
 late_initcall(mac_unregister_early_cons);
 #endif
 
+=======
+>>>>>>> v3.18
 static void __init mac_sched_init(irq_handler_t vector)
 {
 	via_init_clock(vector);
@@ -107,6 +117,7 @@ static void __init mac_sched_init(irq_handler_t vector)
 int __init mac_parse_bootinfo(const struct bi_record *record)
 {
 	int unknown = 0;
+<<<<<<< HEAD
 	const u_long *data = record->data;
 
 	switch (record->tag) {
@@ -146,6 +157,48 @@ int __init mac_parse_bootinfo(const struct bi_record *record)
 		break;
 	case BI_MAC_ROMBASE:
 		mac_bi_data.rombase = *data;
+=======
+	const void *data = record->data;
+
+	switch (be16_to_cpu(record->tag)) {
+	case BI_MAC_MODEL:
+		mac_bi_data.id = be32_to_cpup(data);
+		break;
+	case BI_MAC_VADDR:
+		mac_bi_data.videoaddr = be32_to_cpup(data);
+		break;
+	case BI_MAC_VDEPTH:
+		mac_bi_data.videodepth = be32_to_cpup(data);
+		break;
+	case BI_MAC_VROW:
+		mac_bi_data.videorow = be32_to_cpup(data);
+		break;
+	case BI_MAC_VDIM:
+		mac_bi_data.dimensions = be32_to_cpup(data);
+		break;
+	case BI_MAC_VLOGICAL:
+		mac_orig_videoaddr = be32_to_cpup(data);
+		mac_bi_data.videological =
+			VIDEOMEMBASE + (mac_orig_videoaddr & ~VIDEOMEMMASK);
+		break;
+	case BI_MAC_SCCBASE:
+		mac_bi_data.sccbase = be32_to_cpup(data);
+		break;
+	case BI_MAC_BTIME:
+		mac_bi_data.boottime = be32_to_cpup(data);
+		break;
+	case BI_MAC_GMTBIAS:
+		mac_bi_data.gmtbias = be32_to_cpup(data);
+		break;
+	case BI_MAC_MEMSIZE:
+		mac_bi_data.memsize = be32_to_cpup(data);
+		break;
+	case BI_MAC_CPUID:
+		mac_bi_data.cpuid = be32_to_cpup(data);
+		break;
+	case BI_MAC_ROMBASE:
+		mac_bi_data.rombase = be32_to_cpup(data);
+>>>>>>> v3.18
 		break;
 	default:
 		unknown = 1;
@@ -188,10 +241,13 @@ void __init config_mac(void)
 	mach_beep = mac_mksound;
 #endif
 
+<<<<<<< HEAD
 #ifdef CONFIG_EARLY_PRINTK
 	register_console(&mac_early_cons);
 #endif
 
+=======
+>>>>>>> v3.18
 	/*
 	 * Determine hardware present
 	 */

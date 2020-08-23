@@ -33,16 +33,23 @@ struct cpuacct {
 	struct kernel_cpustat __percpu *cpustat;
 };
 
+<<<<<<< HEAD
 /* return cpu accounting group corresponding to this container */
 static inline struct cpuacct *cgroup_ca(struct cgroup *cgrp)
 {
 	return container_of(cgroup_subsys_state(cgrp, cpuacct_subsys_id),
 			    struct cpuacct, css);
+=======
+static inline struct cpuacct *css_ca(struct cgroup_subsys_state *css)
+{
+	return css ? container_of(css, struct cpuacct, css) : NULL;
+>>>>>>> v3.18
 }
 
 /* return cpu accounting group to which this task belongs */
 static inline struct cpuacct *task_ca(struct task_struct *tsk)
 {
+<<<<<<< HEAD
 	return container_of(task_subsys_state(tsk, cpuacct_subsys_id),
 			    struct cpuacct, css);
 }
@@ -50,13 +57,20 @@ static inline struct cpuacct *task_ca(struct task_struct *tsk)
 static inline struct cpuacct *__parent_ca(struct cpuacct *ca)
 {
 	return cgroup_ca(ca->css.cgroup->parent);
+=======
+	return css_ca(task_css(tsk, cpuacct_cgrp_id));
+>>>>>>> v3.18
 }
 
 static inline struct cpuacct *parent_ca(struct cpuacct *ca)
 {
+<<<<<<< HEAD
 	if (!ca->css.cgroup->parent)
 		return NULL;
 	return cgroup_ca(ca->css.cgroup->parent);
+=======
+	return css_ca(ca->css.parent);
+>>>>>>> v3.18
 }
 
 static DEFINE_PER_CPU(u64, root_cpuacct_cpuusage);
@@ -66,11 +80,20 @@ static struct cpuacct root_cpuacct = {
 };
 
 /* create a new cpu accounting group */
+<<<<<<< HEAD
 static struct cgroup_subsys_state *cpuacct_css_alloc(struct cgroup *cgrp)
 {
 	struct cpuacct *ca;
 
 	if (!cgrp->parent)
+=======
+static struct cgroup_subsys_state *
+cpuacct_css_alloc(struct cgroup_subsys_state *parent_css)
+{
+	struct cpuacct *ca;
+
+	if (!parent_css)
+>>>>>>> v3.18
 		return &root_cpuacct.css;
 
 	ca = kzalloc(sizeof(*ca), GFP_KERNEL);
@@ -96,9 +119,15 @@ out:
 }
 
 /* destroy an existing cpu accounting group */
+<<<<<<< HEAD
 static void cpuacct_css_free(struct cgroup *cgrp)
 {
 	struct cpuacct *ca = cgroup_ca(cgrp);
+=======
+static void cpuacct_css_free(struct cgroup_subsys_state *css)
+{
+	struct cpuacct *ca = css_ca(css);
+>>>>>>> v3.18
 
 	free_percpu(ca->cpustat);
 	free_percpu(ca->cpuusage);
@@ -141,9 +170,15 @@ static void cpuacct_cpuusage_write(struct cpuacct *ca, int cpu, u64 val)
 }
 
 /* return total cpu usage (in nanoseconds) of a group */
+<<<<<<< HEAD
 static u64 cpuusage_read(struct cgroup *cgrp, struct cftype *cft)
 {
 	struct cpuacct *ca = cgroup_ca(cgrp);
+=======
+static u64 cpuusage_read(struct cgroup_subsys_state *css, struct cftype *cft)
+{
+	struct cpuacct *ca = css_ca(css);
+>>>>>>> v3.18
 	u64 totalcpuusage = 0;
 	int i;
 
@@ -153,10 +188,17 @@ static u64 cpuusage_read(struct cgroup *cgrp, struct cftype *cft)
 	return totalcpuusage;
 }
 
+<<<<<<< HEAD
 static int cpuusage_write(struct cgroup *cgrp, struct cftype *cftype,
 								u64 reset)
 {
 	struct cpuacct *ca = cgroup_ca(cgrp);
+=======
+static int cpuusage_write(struct cgroup_subsys_state *css, struct cftype *cft,
+			  u64 reset)
+{
+	struct cpuacct *ca = css_ca(css);
+>>>>>>> v3.18
 	int err = 0;
 	int i;
 
@@ -172,10 +214,16 @@ out:
 	return err;
 }
 
+<<<<<<< HEAD
 static int cpuacct_percpu_seq_read(struct cgroup *cgroup, struct cftype *cft,
 				   struct seq_file *m)
 {
 	struct cpuacct *ca = cgroup_ca(cgroup);
+=======
+static int cpuacct_percpu_seq_show(struct seq_file *m, void *V)
+{
+	struct cpuacct *ca = css_ca(seq_css(m));
+>>>>>>> v3.18
 	u64 percpu;
 	int i;
 
@@ -192,10 +240,16 @@ static const char * const cpuacct_stat_desc[] = {
 	[CPUACCT_STAT_SYSTEM] = "system",
 };
 
+<<<<<<< HEAD
 static int cpuacct_stats_show(struct cgroup *cgrp, struct cftype *cft,
 			      struct cgroup_map_cb *cb)
 {
 	struct cpuacct *ca = cgroup_ca(cgrp);
+=======
+static int cpuacct_stats_show(struct seq_file *sf, void *v)
+{
+	struct cpuacct *ca = css_ca(seq_css(sf));
+>>>>>>> v3.18
 	int cpu;
 	s64 val = 0;
 
@@ -205,7 +259,11 @@ static int cpuacct_stats_show(struct cgroup *cgrp, struct cftype *cft,
 		val += kcpustat->cpustat[CPUTIME_NICE];
 	}
 	val = cputime64_to_clock_t(val);
+<<<<<<< HEAD
 	cb->fill(cb, cpuacct_stat_desc[CPUACCT_STAT_USER], val);
+=======
+	seq_printf(sf, "%s %lld\n", cpuacct_stat_desc[CPUACCT_STAT_USER], val);
+>>>>>>> v3.18
 
 	val = 0;
 	for_each_online_cpu(cpu) {
@@ -216,7 +274,11 @@ static int cpuacct_stats_show(struct cgroup *cgrp, struct cftype *cft,
 	}
 
 	val = cputime64_to_clock_t(val);
+<<<<<<< HEAD
 	cb->fill(cb, cpuacct_stat_desc[CPUACCT_STAT_SYSTEM], val);
+=======
+	seq_printf(sf, "%s %lld\n", cpuacct_stat_desc[CPUACCT_STAT_SYSTEM], val);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -229,11 +291,19 @@ static struct cftype files[] = {
 	},
 	{
 		.name = "usage_percpu",
+<<<<<<< HEAD
 		.read_seq_string = cpuacct_percpu_seq_read,
 	},
 	{
 		.name = "stat",
 		.read_map = cpuacct_stats_show,
+=======
+		.seq_show = cpuacct_percpu_seq_show,
+	},
+	{
+		.name = "stat",
+		.seq_show = cpuacct_stats_show,
+>>>>>>> v3.18
 	},
 	{ }	/* terminate */
 };
@@ -281,16 +351,27 @@ void cpuacct_account_field(struct task_struct *p, int index, u64 val)
 	while (ca != &root_cpuacct) {
 		kcpustat = this_cpu_ptr(ca->cpustat);
 		kcpustat->cpustat[index] += val;
+<<<<<<< HEAD
 		ca = __parent_ca(ca);
+=======
+		ca = parent_ca(ca);
+>>>>>>> v3.18
 	}
 	rcu_read_unlock();
 }
 
+<<<<<<< HEAD
 struct cgroup_subsys cpuacct_subsys = {
 	.name		= "cpuacct",
 	.css_alloc	= cpuacct_css_alloc,
 	.css_free	= cpuacct_css_free,
 	.subsys_id	= cpuacct_subsys_id,
 	.base_cftypes	= files,
+=======
+struct cgroup_subsys cpuacct_cgrp_subsys = {
+	.css_alloc	= cpuacct_css_alloc,
+	.css_free	= cpuacct_css_free,
+	.legacy_cftypes	= files,
+>>>>>>> v3.18
 	.early_init	= 1,
 };

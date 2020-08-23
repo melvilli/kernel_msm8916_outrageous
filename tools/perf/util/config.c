@@ -11,6 +11,10 @@
 #include "util.h"
 #include "cache.h"
 #include "exec_cmd.h"
+<<<<<<< HEAD
+=======
+#include "util/hist.h"  /* perf_hist_config */
+>>>>>>> v3.18
 
 #define MAXNAME (256)
 
@@ -221,7 +225,12 @@ static int perf_parse_file(config_fn_t fn, void *data)
 	const unsigned char *bomptr = utf8_bom;
 
 	for (;;) {
+<<<<<<< HEAD
 		int c = get_next_char();
+=======
+		int line, c = get_next_char();
+
+>>>>>>> v3.18
 		if (bomptr && *bomptr) {
 			/* We are at the file beginning; skip UTF8-encoded BOM
 			 * if present. Sane editors won't put this in on their
@@ -260,8 +269,21 @@ static int perf_parse_file(config_fn_t fn, void *data)
 		if (!isalpha(c))
 			break;
 		var[baselen] = tolower(c);
+<<<<<<< HEAD
 		if (get_value(fn, data, var, baselen+1) < 0)
 			break;
+=======
+
+		/*
+		 * The get_value function might or might not reach the '\n',
+		 * so saving the current line number for error reporting.
+		 */
+		line = config_linenr;
+		if (get_value(fn, data, var, baselen+1) < 0) {
+			config_linenr = line;
+			break;
+		}
+>>>>>>> v3.18
 	}
 	die("bad config file line %d in %s", config_linenr, config_file_name);
 }
@@ -285,6 +307,24 @@ static int parse_unit_factor(const char *end, unsigned long *val)
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+static int perf_parse_llong(const char *value, long long *ret)
+{
+	if (value && *value) {
+		char *end;
+		long long val = strtoll(value, &end, 0);
+		unsigned long factor = 1;
+
+		if (!parse_unit_factor(end, &factor))
+			return 0;
+		*ret = val * factor;
+		return 1;
+	}
+	return 0;
+}
+
+>>>>>>> v3.18
 static int perf_parse_long(const char *value, long *ret)
 {
 	if (value && *value) {
@@ -306,6 +346,18 @@ static void die_bad_config(const char *name)
 	die("bad config value for '%s'", name);
 }
 
+<<<<<<< HEAD
+=======
+u64 perf_config_u64(const char *name, const char *value)
+{
+	long long ret = 0;
+
+	if (!perf_parse_llong(value, &ret))
+		die_bad_config(name);
+	return (u64) ret;
+}
+
+>>>>>>> v3.18
 int perf_config_int(const char *name, const char *value)
 {
 	long ret = 0;
@@ -349,12 +401,37 @@ static int perf_default_core_config(const char *var __maybe_unused,
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+static int perf_ui_config(const char *var, const char *value)
+{
+	/* Add other config variables here. */
+	if (!strcmp(var, "ui.show-headers")) {
+		symbol_conf.show_hist_headers = perf_config_bool(var, value);
+		return 0;
+	}
+	return 0;
+}
+
+>>>>>>> v3.18
 int perf_default_config(const char *var, const char *value,
 			void *dummy __maybe_unused)
 {
 	if (!prefixcmp(var, "core."))
 		return perf_default_core_config(var, value);
 
+<<<<<<< HEAD
+=======
+	if (!prefixcmp(var, "hist."))
+		return perf_hist_config(var, value);
+
+	if (!prefixcmp(var, "ui."))
+		return perf_ui_config(var, value);
+
+	if (!prefixcmp(var, "call-graph."))
+		return perf_callchain_config(var, value);
+
+>>>>>>> v3.18
 	/* Add other config variables here. */
 	return 0;
 }

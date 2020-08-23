@@ -76,7 +76,11 @@ static int atmel_tcb_pwm_request(struct pwm_chip *chip,
 	if (!tcbpwm)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 	ret = clk_enable(tc->clk[group]);
+=======
+	ret = clk_prepare_enable(tc->clk[group]);
+>>>>>>> v3.18
 	if (ret) {
 		devm_kfree(chip->dev, tcbpwm);
 		return ret;
@@ -124,7 +128,11 @@ static void atmel_tcb_pwm_free(struct pwm_chip *chip, struct pwm_device *pwm)
 	struct atmel_tcb_pwm_device *tcbpwm = pwm_get_chip_data(pwm);
 	struct atmel_tc *tc = tcbpwmc->tc;
 
+<<<<<<< HEAD
 	clk_disable(tc->clk[pwm->hwpwm / 2]);
+=======
+	clk_disable_unprepare(tc->clk[pwm->hwpwm / 2]);
+>>>>>>> v3.18
 	tcbpwmc->pwms[pwm->hwpwm] = NULL;
 	devm_kfree(chip->dev, tcbpwm);
 }
@@ -249,6 +257,11 @@ static int atmel_tcb_pwm_enable(struct pwm_chip *chip, struct pwm_device *pwm)
 		}
 	}
 
+<<<<<<< HEAD
+=======
+	cmr |= (tcbpwm->div & ATMEL_TC_TCCLKS);
+
+>>>>>>> v3.18
 	__raw_writel(cmr, regs + ATMEL_TC_REG(group, CMR));
 
 	if (index == 0)
@@ -305,7 +318,11 @@ static int atmel_tcb_pwm_config(struct pwm_chip *chip, struct pwm_device *pwm,
 		i = slowclk;
 		rate = 32768;
 		min = div_u64(NSEC_PER_SEC, rate);
+<<<<<<< HEAD
 		max = min << 16;
+=======
+		max = min << tc->tcb_config->counter_width;
+>>>>>>> v3.18
 
 		/* If period is too big return ERANGE error */
 		if (max < period_ns)
@@ -377,7 +394,11 @@ static int atmel_tcb_pwm_probe(struct platform_device *pdev)
 		return err;
 	}
 
+<<<<<<< HEAD
 	tc = atmel_tc_alloc(tcblock, "tcb-pwm");
+=======
+	tc = atmel_tc_alloc(tcblock);
+>>>>>>> v3.18
 	if (tc == NULL) {
 		dev_err(&pdev->dev, "failed to allocate Timer Counter Block\n");
 		return -ENOMEM;
@@ -434,6 +455,10 @@ MODULE_DEVICE_TABLE(of, atmel_tcb_pwm_dt_ids);
 static struct platform_driver atmel_tcb_pwm_driver = {
 	.driver = {
 		.name = "atmel-tcb-pwm",
+<<<<<<< HEAD
+=======
+		.owner = THIS_MODULE,
+>>>>>>> v3.18
 		.of_match_table = atmel_tcb_pwm_dt_ids,
 	},
 	.probe = atmel_tcb_pwm_probe,

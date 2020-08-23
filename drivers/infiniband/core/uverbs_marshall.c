@@ -140,5 +140,12 @@ void ib_copy_path_rec_from_user(struct ib_sa_path_rec *dst,
 	dst->packet_life_time	= src->packet_life_time;
 	dst->preference		= src->preference;
 	dst->packet_life_time_selector = src->packet_life_time_selector;
+<<<<<<< HEAD
+=======
+
+	memset(dst->smac, 0, sizeof(dst->smac));
+	memset(dst->dmac, 0, sizeof(dst->dmac));
+	dst->vlan_id = 0xffff;
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(ib_copy_path_rec_from_user);

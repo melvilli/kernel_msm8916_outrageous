@@ -32,6 +32,11 @@
 #include <linux/interrupt.h>
 #include <linux/crypto.h>
 #include <linux/hw_random.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 #include <linux/of_platform.h>
 #include <linux/dma-mapping.h>
 #include <linux/io.h>
@@ -336,6 +341,7 @@ DEF_TALITOS_DONE(ch1_3, TALITOS_ISR_CH_1_3_DONE)
 static u32 current_desc_hdr(struct device *dev, int ch)
 {
 	struct talitos_private *priv = dev_get_drvdata(dev);
+<<<<<<< HEAD
 	int tail = priv->chan[ch].tail;
 	dma_addr_t cur_desc;
 
@@ -344,12 +350,35 @@ static u32 current_desc_hdr(struct device *dev, int ch)
 	while (priv->chan[ch].fifo[tail].dma_desc != cur_desc) {
 		tail = (tail + 1) & (priv->fifo_len - 1);
 		if (tail == priv->chan[ch].tail) {
+=======
+	int tail, iter;
+	dma_addr_t cur_desc;
+
+	cur_desc = ((u64)in_be32(priv->chan[ch].reg + TALITOS_CDPR)) << 32;
+	cur_desc |= in_be32(priv->chan[ch].reg + TALITOS_CDPR_LO);
+
+	if (!cur_desc) {
+		dev_err(dev, "CDPR is NULL, giving up search for offending descriptor\n");
+		return 0;
+	}
+
+	tail = priv->chan[ch].tail;
+
+	iter = tail;
+	while (priv->chan[ch].fifo[iter].dma_desc != cur_desc) {
+		iter = (iter + 1) & (priv->fifo_len - 1);
+		if (iter == tail) {
+>>>>>>> v3.18
 			dev_err(dev, "couldn't locate current descriptor\n");
 			return 0;
 		}
 	}
 
+<<<<<<< HEAD
 	return priv->chan[ch].fifo[tail].desc->hdr;
+=======
+	return priv->chan[ch].fifo[iter].desc->hdr;
+>>>>>>> v3.18
 }
 
 /*
@@ -623,7 +652,11 @@ static void talitos_unregister_rng(struct device *dev)
  * crypto alg
  */
 #define TALITOS_CRA_PRIORITY		3000
+<<<<<<< HEAD
 #define TALITOS_MAX_KEY_SIZE		(AES_MAX_KEY_SIZE + SHA512_BLOCK_SIZE)
+=======
+#define TALITOS_MAX_KEY_SIZE		96
+>>>>>>> v3.18
 #define TALITOS_MAX_IV_LENGTH		16 /* max of AES_BLOCK_SIZE, DES3_EDE_BLOCK_SIZE */
 
 #define MD5_BLOCK_SIZE    64
@@ -671,6 +704,7 @@ static int aead_setkey(struct crypto_aead *authenc,
 		       const u8 *key, unsigned int keylen)
 {
 	struct talitos_ctx *ctx = crypto_aead_ctx(authenc);
+<<<<<<< HEAD
 	struct rtattr *rta = (void *)key;
 	struct crypto_authenc_key_param *param;
 	unsigned int authkeylen;
@@ -704,6 +738,22 @@ static int aead_setkey(struct crypto_aead *authenc,
 	ctx->keylen = keylen;
 	ctx->enckeylen = enckeylen;
 	ctx->authkeylen = authkeylen;
+=======
+	struct crypto_authenc_keys keys;
+
+	if (crypto_authenc_extractkeys(&keys, key, keylen) != 0)
+		goto badkey;
+
+	if (keys.authkeylen + keys.enckeylen > TALITOS_MAX_KEY_SIZE)
+		goto badkey;
+
+	memcpy(ctx->key, keys.authkey, keys.authkeylen);
+	memcpy(&ctx->key[keys.authkeylen], keys.enckey, keys.enckeylen);
+
+	ctx->keylen = keys.authkeylen + keys.enckeylen;
+	ctx->enckeylen = keys.enckeylen;
+	ctx->authkeylen = keys.authkeylen;
+>>>>>>> v3.18
 
 	return 0;
 
@@ -807,7 +857,11 @@ static void ipsec_esp_unmap(struct device *dev,
 
 	if (edesc->assoc_chained)
 		talitos_unmap_sg_chain(dev, areq->assoc, DMA_TO_DEVICE);
+<<<<<<< HEAD
 	else
+=======
+	else if (areq->assoclen)
+>>>>>>> v3.18
 		/* assoc_nents counts also for IV in non-contiguous cases */
 		dma_unmap_sg(dev, areq->assoc,
 			     edesc->assoc_nents ? edesc->assoc_nents - 1 : 1,
@@ -935,8 +989,12 @@ static int sg_to_link_tbl(struct scatterlist *sg, int sg_count,
 		sg_count--;
 		link_tbl_ptr--;
 	}
+<<<<<<< HEAD
 	link_tbl_ptr->len = cpu_to_be16(be16_to_cpu(link_tbl_ptr->len)
 					+ cryptlen);
+=======
+	be16_add_cpu(&link_tbl_ptr->len, cryptlen);
+>>>>>>> v3.18
 
 	/* tag end of link table */
 	link_tbl_ptr->j_extent = DESC_PTR_LNKTBL_RETURN;
@@ -991,7 +1049,15 @@ static int ipsec_esp(struct talitos_edesc *edesc, struct aead_request *areq,
 		dma_sync_single_for_device(dev, edesc->dma_link_tbl,
 					   edesc->dma_len, DMA_BIDIRECTIONAL);
 	} else {
+<<<<<<< HEAD
 		to_talitos_ptr(&desc->ptr[1], sg_dma_address(areq->assoc));
+=======
+		if (areq->assoclen)
+			to_talitos_ptr(&desc->ptr[1],
+				       sg_dma_address(areq->assoc));
+		else
+			to_talitos_ptr(&desc->ptr[1], edesc->iv_dma);
+>>>>>>> v3.18
 		desc->ptr[1].j_extent = 0;
 	}
 
@@ -1113,6 +1179,7 @@ static int sg_count(struct scatterlist *sg_list, int nbytes, bool *chained)
 	return sg_nents;
 }
 
+<<<<<<< HEAD
 /**
  * sg_copy_end_to_buffer - Copy end data from SG list to a linear buffer
  * @sgl:		 The SG list
@@ -1171,6 +1238,8 @@ static size_t sg_copy_end_to_buffer(struct scatterlist *sgl, unsigned int nents,
 	return boffset;
 }
 
+=======
+>>>>>>> v3.18
 /*
  * allocate and map the extended descriptor
  */
@@ -1184,7 +1253,12 @@ static struct talitos_edesc *talitos_edesc_alloc(struct device *dev,
 						 unsigned int authsize,
 						 unsigned int ivsize,
 						 int icv_stashing,
+<<<<<<< HEAD
 						 u32 cryptoflags)
+=======
+						 u32 cryptoflags,
+						 bool encrypt)
+>>>>>>> v3.18
 {
 	struct talitos_edesc *edesc;
 	int assoc_nents = 0, src_nents, dst_nents, alloc_len, dma_len;
@@ -1198,10 +1272,17 @@ static struct talitos_edesc *talitos_edesc_alloc(struct device *dev,
 		return ERR_PTR(-EINVAL);
 	}
 
+<<<<<<< HEAD
 	if (iv)
 		iv_dma = dma_map_single(dev, iv, ivsize, DMA_TO_DEVICE);
 
 	if (assoc) {
+=======
+	if (ivsize)
+		iv_dma = dma_map_single(dev, iv, ivsize, DMA_TO_DEVICE);
+
+	if (assoclen) {
+>>>>>>> v3.18
 		/*
 		 * Currently it is assumed that iv is provided whenever assoc
 		 * is.
@@ -1217,6 +1298,7 @@ static struct talitos_edesc *talitos_edesc_alloc(struct device *dev,
 			assoc_nents = assoc_nents ? assoc_nents + 1 : 2;
 	}
 
+<<<<<<< HEAD
 	src_nents = sg_count(src, cryptlen + authsize, &src_chained);
 	src_nents = (src_nents == 1) ? 0 : src_nents;
 
@@ -1230,6 +1312,19 @@ static struct talitos_edesc *talitos_edesc_alloc(struct device *dev,
 					     &dst_chained);
 			dst_nents = (dst_nents == 1) ? 0 : dst_nents;
 		}
+=======
+	if (!dst || dst == src) {
+		src_nents = sg_count(src, cryptlen + authsize, &src_chained);
+		src_nents = (src_nents == 1) ? 0 : src_nents;
+		dst_nents = dst ? src_nents : 0;
+	} else { /* dst && dst != src*/
+		src_nents = sg_count(src, cryptlen + (encrypt ? 0 : authsize),
+				     &src_chained);
+		src_nents = (src_nents == 1) ? 0 : src_nents;
+		dst_nents = sg_count(dst, cryptlen + (encrypt ? authsize : 0),
+				     &dst_chained);
+		dst_nents = (dst_nents == 1) ? 0 : dst_nents;
+>>>>>>> v3.18
 	}
 
 	/*
@@ -1249,9 +1344,22 @@ static struct talitos_edesc *talitos_edesc_alloc(struct device *dev,
 
 	edesc = kmalloc(alloc_len, GFP_DMA | flags);
 	if (!edesc) {
+<<<<<<< HEAD
 		talitos_unmap_sg_chain(dev, assoc, DMA_TO_DEVICE);
 		if (iv_dma)
 			dma_unmap_single(dev, iv_dma, ivsize, DMA_TO_DEVICE);
+=======
+		if (assoc_chained)
+			talitos_unmap_sg_chain(dev, assoc, DMA_TO_DEVICE);
+		else if (assoclen)
+			dma_unmap_sg(dev, assoc,
+				     assoc_nents ? assoc_nents - 1 : 1,
+				     DMA_TO_DEVICE);
+
+		if (iv_dma)
+			dma_unmap_single(dev, iv_dma, ivsize, DMA_TO_DEVICE);
+
+>>>>>>> v3.18
 		dev_err(dev, "could not allocate edescriptor\n");
 		return ERR_PTR(-ENOMEM);
 	}
@@ -1273,7 +1381,11 @@ static struct talitos_edesc *talitos_edesc_alloc(struct device *dev,
 }
 
 static struct talitos_edesc *aead_edesc_alloc(struct aead_request *areq, u8 *iv,
+<<<<<<< HEAD
 					      int icv_stashing)
+=======
+					      int icv_stashing, bool encrypt)
+>>>>>>> v3.18
 {
 	struct crypto_aead *authenc = crypto_aead_reqtfm(areq);
 	struct talitos_ctx *ctx = crypto_aead_ctx(authenc);
@@ -1282,7 +1394,11 @@ static struct talitos_edesc *aead_edesc_alloc(struct aead_request *areq, u8 *iv,
 	return talitos_edesc_alloc(ctx->dev, areq->assoc, areq->src, areq->dst,
 				   iv, areq->assoclen, areq->cryptlen,
 				   ctx->authsize, ivsize, icv_stashing,
+<<<<<<< HEAD
 				   areq->base.flags);
+=======
+				   areq->base.flags, encrypt);
+>>>>>>> v3.18
 }
 
 static int aead_encrypt(struct aead_request *req)
@@ -1292,7 +1408,11 @@ static int aead_encrypt(struct aead_request *req)
 	struct talitos_edesc *edesc;
 
 	/* allocate extended descriptor */
+<<<<<<< HEAD
 	edesc = aead_edesc_alloc(req, req->iv, 0);
+=======
+	edesc = aead_edesc_alloc(req, req->iv, 0, true);
+>>>>>>> v3.18
 	if (IS_ERR(edesc))
 		return PTR_ERR(edesc);
 
@@ -1315,7 +1435,11 @@ static int aead_decrypt(struct aead_request *req)
 	req->cryptlen -= authsize;
 
 	/* allocate extended descriptor */
+<<<<<<< HEAD
 	edesc = aead_edesc_alloc(req, req->iv, 1);
+=======
+	edesc = aead_edesc_alloc(req, req->iv, 1, false);
+>>>>>>> v3.18
 	if (IS_ERR(edesc))
 		return PTR_ERR(edesc);
 
@@ -1361,7 +1485,11 @@ static int aead_givencrypt(struct aead_givcrypt_request *req)
 	struct talitos_edesc *edesc;
 
 	/* allocate extended descriptor */
+<<<<<<< HEAD
 	edesc = aead_edesc_alloc(areq, req->giv, 0);
+=======
+	edesc = aead_edesc_alloc(areq, req->giv, 0, true);
+>>>>>>> v3.18
 	if (IS_ERR(edesc))
 		return PTR_ERR(edesc);
 
@@ -1380,11 +1508,14 @@ static int ablkcipher_setkey(struct crypto_ablkcipher *cipher,
 {
 	struct talitos_ctx *ctx = crypto_ablkcipher_ctx(cipher);
 
+<<<<<<< HEAD
 	if (keylen > TALITOS_MAX_KEY_SIZE) {
 		crypto_ablkcipher_set_flags(cipher, CRYPTO_TFM_RES_BAD_KEY_LEN);
 		return -EINVAL;
 	}
 
+=======
+>>>>>>> v3.18
 	memcpy(&ctx->key, key, keylen);
 	ctx->keylen = keylen;
 
@@ -1522,7 +1653,11 @@ static int common_nonsnoop(struct talitos_edesc *edesc,
 }
 
 static struct talitos_edesc *ablkcipher_edesc_alloc(struct ablkcipher_request *
+<<<<<<< HEAD
 						    areq)
+=======
+						    areq, bool encrypt)
+>>>>>>> v3.18
 {
 	struct crypto_ablkcipher *cipher = crypto_ablkcipher_reqtfm(areq);
 	struct talitos_ctx *ctx = crypto_ablkcipher_ctx(cipher);
@@ -1530,7 +1665,11 @@ static struct talitos_edesc *ablkcipher_edesc_alloc(struct ablkcipher_request *
 
 	return talitos_edesc_alloc(ctx->dev, NULL, areq->src, areq->dst,
 				   areq->info, 0, areq->nbytes, 0, ivsize, 0,
+<<<<<<< HEAD
 				   areq->base.flags);
+=======
+				   areq->base.flags, encrypt);
+>>>>>>> v3.18
 }
 
 static int ablkcipher_encrypt(struct ablkcipher_request *areq)
@@ -1540,7 +1679,11 @@ static int ablkcipher_encrypt(struct ablkcipher_request *areq)
 	struct talitos_edesc *edesc;
 
 	/* allocate extended descriptor */
+<<<<<<< HEAD
 	edesc = ablkcipher_edesc_alloc(areq);
+=======
+	edesc = ablkcipher_edesc_alloc(areq, true);
+>>>>>>> v3.18
 	if (IS_ERR(edesc))
 		return PTR_ERR(edesc);
 
@@ -1557,7 +1700,11 @@ static int ablkcipher_decrypt(struct ablkcipher_request *areq)
 	struct talitos_edesc *edesc;
 
 	/* allocate extended descriptor */
+<<<<<<< HEAD
 	edesc = ablkcipher_edesc_alloc(areq);
+=======
+	edesc = ablkcipher_edesc_alloc(areq, false);
+>>>>>>> v3.18
 	if (IS_ERR(edesc))
 		return PTR_ERR(edesc);
 
@@ -1709,7 +1856,11 @@ static struct talitos_edesc *ahash_edesc_alloc(struct ahash_request *areq,
 	struct talitos_ahash_req_ctx *req_ctx = ahash_request_ctx(areq);
 
 	return talitos_edesc_alloc(ctx->dev, NULL, req_ctx->psrc, NULL, NULL, 0,
+<<<<<<< HEAD
 				   nbytes, 0, 0, 0, areq->base.flags);
+=======
+				   nbytes, 0, 0, 0, areq->base.flags, false);
+>>>>>>> v3.18
 }
 
 static int ahash_init(struct ahash_request *areq)
@@ -1806,7 +1957,11 @@ static int ahash_process_req(struct ahash_request *areq, unsigned int nbytes)
 
 	if (to_hash_later) {
 		int nents = sg_count(areq->src, nbytes, &chained);
+<<<<<<< HEAD
 		sg_copy_end_to_buffer(areq->src, nents,
+=======
+		sg_pcopy_to_buffer(areq->src, nents,
+>>>>>>> v3.18
 				      req_ctx->bufnext,
 				      to_hash_later,
 				      nbytes - to_hash_later);
@@ -2557,8 +2712,11 @@ static int talitos_remove(struct platform_device *ofdev)
 
 	iounmap(priv->reg);
 
+<<<<<<< HEAD
 	dev_set_drvdata(dev, NULL);
 
+=======
+>>>>>>> v3.18
 	kfree(priv);
 
 	return 0;
@@ -2627,7 +2785,10 @@ static struct talitos_crypto_alg *talitos_alg_alloc(struct device *dev,
 		break;
 	default:
 		dev_err(dev, "unknown algorithm type %d\n", t_alg->algt.type);
+<<<<<<< HEAD
 		kfree(t_alg);
+=======
+>>>>>>> v3.18
 		return ERR_PTR(-EINVAL);
 	}
 
@@ -2702,6 +2863,11 @@ static int talitos_probe(struct platform_device *ofdev)
 	if (!priv)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+=======
+	INIT_LIST_HEAD(&priv->alg_list);
+
+>>>>>>> v3.18
 	dev_set_drvdata(dev, priv);
 
 	priv->ofdev = ofdev;
@@ -2722,8 +2888,11 @@ static int talitos_probe(struct platform_device *ofdev)
 			     (unsigned long)dev);
 	}
 
+<<<<<<< HEAD
 	INIT_LIST_HEAD(&priv->alg_list);
 
+=======
+>>>>>>> v3.18
 	priv->reg = of_iomap(np, 0);
 	if (!priv->reg) {
 		dev_err(dev, "failed to of_iomap\n");

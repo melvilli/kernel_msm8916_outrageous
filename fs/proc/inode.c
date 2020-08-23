@@ -23,7 +23,10 @@
 #include <linux/slab.h>
 #include <linux/mount.h>
 #include <linux/magic.h>
+<<<<<<< HEAD
 #include <linux/namei.h>
+=======
+>>>>>>> v3.18
 
 #include <asm/uaccess.h>
 
@@ -36,7 +39,11 @@ static void proc_evict_inode(struct inode *inode)
 	const struct proc_ns_operations *ns_ops;
 	void *ns;
 
+<<<<<<< HEAD
 	truncate_inode_pages(&inode->i_data, 0);
+=======
+	truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 	clear_inode(inode);
 
 	/* Stop tracking associated processes */
@@ -48,7 +55,11 @@ static void proc_evict_inode(struct inode *inode)
 		pde_put(de);
 	head = PROC_I(inode)->sysctl;
 	if (head) {
+<<<<<<< HEAD
 		rcu_assign_pointer(PROC_I(inode)->sysctl, NULL);
+=======
+		RCU_INIT_POINTER(PROC_I(inode)->sysctl, NULL);
+>>>>>>> v3.18
 		sysctl_head_put(head);
 	}
 	/* Release any associated namespace */
@@ -286,6 +297,35 @@ static int proc_reg_mmap(struct file *file, struct vm_area_struct *vma)
 	return rv;
 }
 
+<<<<<<< HEAD
+=======
+static unsigned long
+proc_reg_get_unmapped_area(struct file *file, unsigned long orig_addr,
+			   unsigned long len, unsigned long pgoff,
+			   unsigned long flags)
+{
+	struct proc_dir_entry *pde = PDE(file_inode(file));
+	unsigned long rv = -EIO;
+
+	if (use_pde(pde)) {
+		typeof(proc_reg_get_unmapped_area) *get_area;
+
+		get_area = pde->proc_fops->get_unmapped_area;
+#ifdef CONFIG_MMU
+		if (!get_area)
+			get_area = current->mm->get_unmapped_area;
+#endif
+
+		if (get_area)
+			rv = get_area(file, orig_addr, len, pgoff, flags);
+		else
+			rv = orig_addr;
+		unuse_pde(pde);
+	}
+	return rv;
+}
+
+>>>>>>> v3.18
 static int proc_reg_open(struct inode *inode, struct file *file)
 {
 	struct proc_dir_entry *pde = PDE(inode);
@@ -357,6 +397,10 @@ static const struct file_operations proc_reg_file_ops = {
 	.compat_ioctl	= proc_reg_compat_ioctl,
 #endif
 	.mmap		= proc_reg_mmap,
+<<<<<<< HEAD
+=======
+	.get_unmapped_area = proc_reg_get_unmapped_area,
+>>>>>>> v3.18
 	.open		= proc_reg_open,
 	.release	= proc_reg_release,
 };
@@ -369,11 +413,16 @@ static const struct file_operations proc_reg_file_ops_no_compat = {
 	.poll		= proc_reg_poll,
 	.unlocked_ioctl	= proc_reg_unlocked_ioctl,
 	.mmap		= proc_reg_mmap,
+<<<<<<< HEAD
+=======
+	.get_unmapped_area = proc_reg_get_unmapped_area,
+>>>>>>> v3.18
 	.open		= proc_reg_open,
 	.release	= proc_reg_release,
 };
 #endif
 
+<<<<<<< HEAD
 static void *proc_follow_link(struct dentry *dentry, struct nameidata *nd)
 {
 	struct proc_dir_entry *pde = PDE(dentry->d_inode);
@@ -394,6 +443,8 @@ const struct inode_operations proc_link_inode_operations = {
 	.put_link	= proc_put_link,
 };
 
+=======
+>>>>>>> v3.18
 struct inode *proc_get_inode(struct super_block *sb, struct proc_dir_entry *de)
 {
 	struct inode *inode = new_inode_pseudo(sb);
@@ -435,6 +486,10 @@ struct inode *proc_get_inode(struct super_block *sb, struct proc_dir_entry *de)
 int proc_fill_super(struct super_block *s)
 {
 	struct inode *root_inode;
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 
 	s->s_flags |= MS_NODIRATIME | MS_NOSUID | MS_NOEXEC;
 	s->s_blocksize = 1024;
@@ -456,5 +511,13 @@ int proc_fill_super(struct super_block *s)
 		return -ENOMEM;
 	}
 
+<<<<<<< HEAD
 	return proc_setup_self(s);
+=======
+	ret = proc_setup_self(s);
+	if (ret) {
+		return ret;
+	}
+	return proc_setup_thread_self(s);
+>>>>>>> v3.18
 }

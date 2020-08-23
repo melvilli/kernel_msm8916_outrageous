@@ -54,6 +54,11 @@
 	(1000 +	(SMIAPP_RESET_DELAY_CLOCKS * 1000	\
 		 + (clk) / 1000 - 1) / ((clk) / 1000))
 
+<<<<<<< HEAD
+=======
+#define SMIAPP_COLOUR_COMPONENTS	4
+
+>>>>>>> v3.18
 #include "smiapp-limits.h"
 
 struct smiapp_quirk;
@@ -241,6 +246,11 @@ struct smiapp_sensor {
 	/* src controls */
 	struct v4l2_ctrl *link_freq;
 	struct v4l2_ctrl *pixel_rate_csi;
+<<<<<<< HEAD
+=======
+	/* test pattern colour components */
+	struct v4l2_ctrl *test_data[SMIAPP_COLOUR_COMPONENTS];
+>>>>>>> v3.18
 };
 
 #define to_smiapp_subdev(_sd)				\

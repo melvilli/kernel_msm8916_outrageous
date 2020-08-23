@@ -25,8 +25,12 @@
 #include <asm/uaccess.h>
 #include <asm/firmware.h>
 #include <linux/sort.h>
+<<<<<<< HEAD
 
 #include "setup.h"
+=======
+#include <asm/setup.h>
+>>>>>>> v3.18
 
 LIST_HEAD(module_bug_list);
 

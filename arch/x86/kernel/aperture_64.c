@@ -10,6 +10,11 @@
  *
  * Copyright 2002 Andi Kleen, SuSE Labs.
  */
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) "AGP: " fmt
+
+>>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/types.h>
 #include <linux/init.h>
@@ -18,7 +23,10 @@
 #include <linux/pci_ids.h>
 #include <linux/pci.h>
 #include <linux/bitops.h>
+<<<<<<< HEAD
 #include <linux/ioport.h>
+=======
+>>>>>>> v3.18
 #include <linux/suspend.h>
 #include <asm/e820.h>
 #include <asm/io.h>
@@ -54,6 +62,7 @@ int fallback_aper_force __initdata;
 
 int fix_aperture __initdata = 1;
 
+<<<<<<< HEAD
 static struct resource gart_resource = {
 	.name	= "GART",
 	.flags	= IORESOURCE_MEM,
@@ -66,6 +75,8 @@ static void __init insert_aperture_resource(u32 aper_base, u32 aper_size)
 	insert_resource(&iomem_resource, &gart_resource);
 }
 
+=======
+>>>>>>> v3.18
 /* This code runs before the PCI subsystem is initialized, so just
    access the northbridge directly. */
 
@@ -88,6 +99,7 @@ static u32 __init allocate_aperture(void)
 	addr = memblock_find_in_range(GART_MIN_ADDR, GART_MAX_ADDR,
 				      aper_size, aper_size);
 	if (!addr) {
+<<<<<<< HEAD
 		printk(KERN_ERR
 			"Cannot allocate aperture memory hole (%lx,%uK)\n",
 				addr, aper_size>>10);
@@ -97,6 +109,15 @@ static u32 __init allocate_aperture(void)
 	printk(KERN_INFO "Mapping aperture over %d KB of RAM @ %lx\n",
 			aper_size >> 10, addr);
 	insert_aperture_resource((u32)addr, aper_size);
+=======
+		pr_err("Cannot allocate aperture memory hole [mem %#010lx-%#010lx] (%uKB)\n",
+		       addr, addr + aper_size - 1, aper_size >> 10);
+		return 0;
+	}
+	memblock_reserve(addr, aper_size);
+	pr_info("Mapping aperture over RAM [mem %#010lx-%#010lx] (%uKB)\n",
+		addr, addr + aper_size - 1, aper_size >> 10);
+>>>>>>> v3.18
 	register_nosave_region(addr >> PAGE_SHIFT,
 			       (addr+aper_size) >> PAGE_SHIFT);
 
@@ -140,10 +161,18 @@ static u32 __init read_agp(int bus, int slot, int func, int cap, u32 *order)
 	u64 aper;
 	u32 old_order;
 
+<<<<<<< HEAD
 	printk(KERN_INFO "AGP bridge at %02x:%02x:%02x\n", bus, slot, func);
 	apsizereg = read_pci_config_16(bus, slot, func, cap + 0x14);
 	if (apsizereg == 0xffffffff) {
 		printk(KERN_ERR "APSIZE in AGP bridge unreadable\n");
+=======
+	pr_info("pci 0000:%02x:%02x:%02x: AGP bridge\n", bus, slot, func);
+	apsizereg = read_pci_config_16(bus, slot, func, cap + 0x14);
+	if (apsizereg == 0xffffffff) {
+		pr_err("pci 0000:%02x:%02x.%d: APSIZE unreadable\n",
+		       bus, slot, func);
+>>>>>>> v3.18
 		return 0;
 	}
 
@@ -167,6 +196,7 @@ static u32 __init read_agp(int bus, int slot, int func, int cap, u32 *order)
 	 * On some sick chips, APSIZE is 0. It means it wants 4G
 	 * so let double check that order, and lets trust AMD NB settings:
 	 */
+<<<<<<< HEAD
 	printk(KERN_INFO "Aperture from AGP @ %Lx old size %u MB\n",
 			aper, 32 << old_order);
 	if (aper + (32ULL<<(20 + *order)) > 0x100000000ULL) {
@@ -177,6 +207,20 @@ static u32 __init read_agp(int bus, int slot, int func, int cap, u32 *order)
 
 	printk(KERN_INFO "Aperture from AGP @ %Lx size %u MB (APSIZE %x)\n",
 			aper, 32 << *order, apsizereg);
+=======
+	pr_info("pci 0000:%02x:%02x.%d: AGP aperture [bus addr %#010Lx-%#010Lx] (old size %uMB)\n",
+		bus, slot, func, aper, aper + (32ULL << (old_order + 20)) - 1,
+		32 << old_order);
+	if (aper + (32ULL<<(20 + *order)) > 0x100000000ULL) {
+		pr_info("pci 0000:%02x:%02x.%d: AGP aperture size %uMB (APSIZE %#x) is not right, using settings from NB\n",
+			bus, slot, func, 32 << *order, apsizereg);
+		*order = old_order;
+	}
+
+	pr_info("pci 0000:%02x:%02x.%d: AGP aperture [bus addr %#010Lx-%#010Lx] (%uMB, APSIZE %#x)\n",
+		bus, slot, func, aper, aper + (32ULL << (*order + 20)) - 1,
+		32 << *order, apsizereg);
+>>>>>>> v3.18
 
 	if (!aperture_valid(aper, (32*1024*1024) << *order, 32<<20))
 		return 0;
@@ -232,7 +276,11 @@ static u32 __init search_agp_bridge(u32 *order, int *valid_agp)
 			}
 		}
 	}
+<<<<<<< HEAD
 	printk(KERN_INFO "No AGP bridge found\n");
+=======
+	pr_info("No AGP bridge found\n");
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -324,7 +372,12 @@ void __init early_gart_iommu_check(void)
 		if (e820_any_mapped(aper_base, aper_base + aper_size,
 				    E820_RAM)) {
 			/* reserve it, so we can reuse it in second kernel */
+<<<<<<< HEAD
 			printk(KERN_INFO "update e820 for GART\n");
+=======
+			pr_info("e820: reserve [mem %#010Lx-%#010Lx] for GART\n",
+				aper_base, aper_base + aper_size - 1);
+>>>>>>> v3.18
 			e820_add_region(aper_base, aper_size, E820_RESERVED);
 			update_e820();
 		}
@@ -368,7 +421,11 @@ int __init gart_iommu_hole_init(void)
 	    !early_pci_allowed())
 		return -ENODEV;
 
+<<<<<<< HEAD
 	printk(KERN_INFO  "Checking aperture...\n");
+=======
+	pr_info("Checking aperture...\n");
+>>>>>>> v3.18
 
 	if (!fallback_aper_force)
 		agp_aper_base = search_agp_bridge(&agp_aper_order, &valid_agp);
@@ -409,8 +466,14 @@ int __init gart_iommu_hole_init(void)
 			aper_base = read_pci_config(bus, slot, 3, AMD64_GARTAPERTUREBASE) & 0x7fff;
 			aper_base <<= 25;
 
+<<<<<<< HEAD
 			printk(KERN_INFO "Node %d: aperture @ %Lx size %u MB\n",
 					node, aper_base, aper_size >> 20);
+=======
+			pr_info("Node %d: aperture [bus addr %#010Lx-%#010Lx] (%uMB)\n",
+				node, aper_base, aper_base + aper_size - 1,
+				aper_size >> 20);
+>>>>>>> v3.18
 			node++;
 
 			if (!aperture_valid(aper_base, aper_size, 64<<20)) {
@@ -421,9 +484,15 @@ int __init gart_iommu_hole_init(void)
 					if (!no_iommu &&
 					    max_pfn > MAX_DMA32_PFN &&
 					    !printed_gart_size_msg) {
+<<<<<<< HEAD
 						printk(KERN_ERR "you are using iommu with agp, but GART size is less than 64M\n");
 						printk(KERN_ERR "please increase GART size in your BIOS setup\n");
 						printk(KERN_ERR "if BIOS doesn't have that option, contact your HW vendor!\n");
+=======
+						pr_err("you are using iommu with agp, but GART size is less than 64MB\n");
+						pr_err("please increase GART size in your BIOS setup\n");
+						pr_err("if BIOS doesn't have that option, contact your HW vendor!\n");
+>>>>>>> v3.18
 						printed_gart_size_msg = 1;
 					}
 				} else {
@@ -444,12 +513,17 @@ int __init gart_iommu_hole_init(void)
 
 out:
 	if (!fix && !fallback_aper_force) {
+<<<<<<< HEAD
 		if (last_aper_base) {
 			unsigned long n = (32 * 1024 * 1024) << last_aper_order;
 
 			insert_aperture_resource((u32)last_aper_base, n);
 			return 1;
 		}
+=======
+		if (last_aper_base)
+			return 1;
+>>>>>>> v3.18
 		return 0;
 	}
 
@@ -464,6 +538,7 @@ out:
 		   force_iommu ||
 		   valid_agp ||
 		   fallback_aper_force) {
+<<<<<<< HEAD
 		printk(KERN_INFO
 			"Your BIOS doesn't leave a aperture memory hole\n");
 		printk(KERN_INFO
@@ -471,6 +546,12 @@ out:
 		printk(KERN_INFO
 			"This costs you %d MB of RAM\n",
 				32 << fallback_aper_order);
+=======
+		pr_info("Your BIOS doesn't leave a aperture memory hole\n");
+		pr_info("Please enable the IOMMU option in the BIOS setup\n");
+		pr_info("This costs you %dMB of RAM\n",
+			32 << fallback_aper_order);
+>>>>>>> v3.18
 
 		aper_order = fallback_aper_order;
 		aper_alloc = allocate_aperture();

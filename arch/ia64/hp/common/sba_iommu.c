@@ -242,7 +242,11 @@ struct ioc {
 	struct pci_dev	*sac_only_dev;
 };
 
+<<<<<<< HEAD
 static struct ioc *ioc_list;
+=======
+static struct ioc *ioc_list, *ioc_found;
+>>>>>>> v3.18
 static int reserve_sba_gart = 1;
 
 static SBA_INLINE void sba_mark_invalid(struct ioc *, dma_addr_t, size_t);
@@ -255,7 +259,11 @@ static u64 prefetch_spill_page;
 #endif
 
 #ifdef CONFIG_PCI
+<<<<<<< HEAD
 # define GET_IOC(dev)	(((dev)->bus == &pci_bus_type)						\
+=======
+# define GET_IOC(dev)	((dev_is_pci(dev))						\
+>>>>>>> v3.18
 			 ? ((struct ioc *) PCI_CONTROLLER(to_pci_dev(dev))->iommu) : NULL)
 #else
 # define GET_IOC(dev)	NULL
@@ -1140,11 +1148,21 @@ sba_alloc_coherent(struct device *dev, size_t size, dma_addr_t *dma_handle,
 
 #ifdef CONFIG_NUMA
 	{
+<<<<<<< HEAD
 		struct page *page;
 		page = alloc_pages_exact_node(ioc->node == MAX_NUMNODES ?
 		                        numa_node_id() : ioc->node, flags,
 		                        get_order(size));
 
+=======
+		int node = ioc->node;
+		struct page *page;
+
+		if (node == NUMA_NO_NODE)
+			node = numa_node_id();
+
+		page = alloc_pages_exact_node(node, flags, get_order(size));
+>>>>>>> v3.18
 		if (unlikely(!page))
 			return NULL;
 
@@ -1596,7 +1614,11 @@ static void sba_unmap_sg_attrs(struct device *dev, struct scatterlist *sglist,
 *
 ***************************************************************/
 
+<<<<<<< HEAD
 static void __init
+=======
+static void
+>>>>>>> v3.18
 ioc_iova_init(struct ioc *ioc)
 {
 	int tcnfg;
@@ -1807,6 +1829,7 @@ static struct ioc_iommu ioc_iommu_info[] __initdata = {
 	{ SX2000_IOC_ID, "sx2000", NULL },
 };
 
+<<<<<<< HEAD
 static struct ioc * __init
 ioc_init(unsigned long hpa, void *handle)
 {
@@ -1821,6 +1844,15 @@ ioc_init(unsigned long hpa, void *handle)
 	ioc_list = ioc;
 
 	ioc->handle = handle;
+=======
+static void ioc_init(unsigned long hpa, struct ioc *ioc)
+{
+	struct ioc_iommu *info;
+
+	ioc->next = ioc_list;
+	ioc_list = ioc;
+
+>>>>>>> v3.18
 	ioc->ioc_hpa = ioremap(hpa, 0x1000);
 
 	ioc->func_id = READ_REG(ioc->ioc_hpa + IOC_FUNC_ID);
@@ -1861,8 +1893,11 @@ ioc_init(unsigned long hpa, void *handle)
 		"%s %d.%d HPA 0x%lx IOVA space %dMb at 0x%lx\n",
 		ioc->name, (ioc->rev >> 4) & 0xF, ioc->rev & 0xF,
 		hpa, ioc->iov_size >> 20, ioc->ibase);
+<<<<<<< HEAD
 
 	return ioc;
+=======
+>>>>>>> v3.18
 }
 
 
@@ -1914,7 +1949,11 @@ ioc_show(struct seq_file *s, void *v)
 	seq_printf(s, "Hewlett Packard %s IOC rev %d.%d\n",
 		ioc->name, ((ioc->rev >> 4) & 0xF), (ioc->rev & 0xF));
 #ifdef CONFIG_NUMA
+<<<<<<< HEAD
 	if (ioc->node != MAX_NUMNODES)
+=======
+	if (ioc->node != NUMA_NO_NODE)
+>>>>>>> v3.18
 		seq_printf(s, "NUMA node       : %d\n", ioc->node);
 #endif
 	seq_printf(s, "IOVA size       : %ld MB\n", ((ioc->pdir_size >> 3) * iovp_size)/(1024*1024));
@@ -1992,7 +2031,11 @@ sba_connect_bus(struct pci_bus *bus)
 	if (PCI_CONTROLLER(bus)->iommu)
 		return;
 
+<<<<<<< HEAD
 	handle = PCI_CONTROLLER(bus)->acpi_handle;
+=======
+	handle = acpi_device_handle(PCI_CONTROLLER(bus)->companion);
+>>>>>>> v3.18
 	if (!handle)
 		return;
 
@@ -2015,6 +2058,7 @@ sba_connect_bus(struct pci_bus *bus)
 	printk(KERN_WARNING "No IOC for PCI Bus %04x:%02x in ACPI\n", pci_domain_nr(bus), bus->number);
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_NUMA
 static void __init
 sba_map_ioc_to_node(struct ioc *ioc, acpi_handle handle)
@@ -2045,10 +2089,30 @@ static int __init
 acpi_sba_ioc_add(struct acpi_device *device)
 {
 	struct ioc *ioc;
+=======
+static void __init
+sba_map_ioc_to_node(struct ioc *ioc, acpi_handle handle)
+{
+#ifdef CONFIG_NUMA
+	unsigned int node;
+
+	node = acpi_get_node(handle);
+	if (node != NUMA_NO_NODE && !node_online(node))
+		node = NUMA_NO_NODE;
+
+	ioc->node = node;
+#endif
+}
+
+static void acpi_sba_ioc_add(struct ioc *ioc)
+{
+	acpi_handle handle = ioc->handle;
+>>>>>>> v3.18
 	acpi_status status;
 	u64 hpa, length;
 	struct acpi_device_info *adi;
 
+<<<<<<< HEAD
 	status = hp_acpi_csr_space(device->handle, &hpa, &length);
 	if (ACPI_FAILURE(status))
 		return 1;
@@ -2056,6 +2120,16 @@ acpi_sba_ioc_add(struct acpi_device *device)
 	status = acpi_get_object_info(device->handle, &adi);
 	if (ACPI_FAILURE(status))
 		return 1;
+=======
+	ioc_found = ioc->next;
+	status = hp_acpi_csr_space(handle, &hpa, &length);
+	if (ACPI_FAILURE(status))
+		goto err;
+
+	status = acpi_get_object_info(handle, &adi);
+	if (ACPI_FAILURE(status))
+		goto err;
+>>>>>>> v3.18
 
 	/*
 	 * For HWP0001, only SBA appears in ACPI namespace.  It encloses the PCI
@@ -2076,6 +2150,7 @@ acpi_sba_ioc_add(struct acpi_device *device)
 	if (!iovp_shift)
 		iovp_shift = 12;
 
+<<<<<<< HEAD
 	ioc = ioc_init(hpa, device->handle);
 	if (!ioc)
 		return 1;
@@ -2083,6 +2158,15 @@ acpi_sba_ioc_add(struct acpi_device *device)
 	/* setup NUMA node association */
 	sba_map_ioc_to_node(ioc, device->handle);
 	return 0;
+=======
+	ioc_init(hpa, ioc);
+	/* setup NUMA node association */
+	sba_map_ioc_to_node(ioc, handle);
+	return;
+
+ err:
+	kfree(ioc);
+>>>>>>> v3.18
 }
 
 static const struct acpi_device_id hp_ioc_iommu_device_ids[] = {
@@ -2090,6 +2174,7 @@ static const struct acpi_device_id hp_ioc_iommu_device_ids[] = {
 	{"HWP0004", 0},
 	{"", 0},
 };
+<<<<<<< HEAD
 static struct acpi_driver acpi_sba_ioc_driver = {
 	.name		= "IOC IOMMU Driver",
 	.ids		= hp_ioc_iommu_device_ids,
@@ -2098,6 +2183,37 @@ static struct acpi_driver acpi_sba_ioc_driver = {
 	},
 };
 
+=======
+
+static int acpi_sba_ioc_attach(struct acpi_device *device,
+			       const struct acpi_device_id *not_used)
+{
+	struct ioc *ioc;
+
+	ioc = kzalloc(sizeof(*ioc), GFP_KERNEL);
+	if (!ioc)
+		return -ENOMEM;
+
+	ioc->next = ioc_found;
+	ioc_found = ioc;
+	ioc->handle = device->handle;
+	return 1;
+}
+
+
+static struct acpi_scan_handler acpi_sba_ioc_handler = {
+	.ids	= hp_ioc_iommu_device_ids,
+	.attach	= acpi_sba_ioc_attach,
+};
+
+static int __init acpi_sba_ioc_init_acpi(void)
+{
+	return acpi_scan_add_handler(&acpi_sba_ioc_handler);
+}
+/* This has to run before acpi_scan_init(). */
+arch_initcall(acpi_sba_ioc_init_acpi);
+
+>>>>>>> v3.18
 extern struct dma_map_ops swiotlb_dma_ops;
 
 static int __init
@@ -2122,7 +2238,17 @@ sba_init(void)
 	}
 #endif
 
+<<<<<<< HEAD
 	acpi_bus_register_driver(&acpi_sba_ioc_driver);
+=======
+	/*
+	 * ioc_found should be populated by the acpi_sba_ioc_handler's .attach()
+	 * routine, but that only happens if acpi_scan_init() has already run.
+	 */
+	while (ioc_found)
+		acpi_sba_ioc_add(ioc_found);
+
+>>>>>>> v3.18
 	if (!ioc_list) {
 #ifdef CONFIG_IA64_GENERIC
 		/*

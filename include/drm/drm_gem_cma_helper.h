@@ -1,9 +1,21 @@
 #ifndef __DRM_GEM_CMA_HELPER_H__
 #define __DRM_GEM_CMA_HELPER_H__
 
+<<<<<<< HEAD
 struct drm_gem_cma_object {
 	struct drm_gem_object base;
 	dma_addr_t paddr;
+=======
+#include <drm/drmP.h>
+#include <drm/drm_gem.h>
+
+struct drm_gem_cma_object {
+	struct drm_gem_object base;
+	dma_addr_t paddr;
+	struct sg_table *sgt;
+
+	/* For objects with DMA memory allocated by GEM CMA */
+>>>>>>> v3.18
 	void *vaddr;
 };
 
@@ -27,6 +39,7 @@ int drm_gem_cma_dumb_map_offset(struct drm_file *file_priv,
 /* set vm_flags and we can change the vm attribute to other one at here. */
 int drm_gem_cma_mmap(struct file *filp, struct vm_area_struct *vma);
 
+<<<<<<< HEAD
 /*
  * destroy memory region allocated.
  *	- a gem handle and physical memory region pointed by a gem object
@@ -35,6 +48,8 @@ int drm_gem_cma_mmap(struct file *filp, struct vm_area_struct *vma);
 int drm_gem_cma_dumb_destroy(struct drm_file *file_priv,
 		struct drm_device *drm, unsigned int handle);
 
+=======
+>>>>>>> v3.18
 /* allocate physical memory. */
 struct drm_gem_cma_object *drm_gem_cma_create(struct drm_device *drm,
 		unsigned int size);
@@ -45,4 +60,17 @@ extern const struct vm_operations_struct drm_gem_cma_vm_ops;
 void drm_gem_cma_describe(struct drm_gem_cma_object *obj, struct seq_file *m);
 #endif
 
+<<<<<<< HEAD
+=======
+struct sg_table *drm_gem_cma_prime_get_sg_table(struct drm_gem_object *obj);
+struct drm_gem_object *
+drm_gem_cma_prime_import_sg_table(struct drm_device *dev,
+				  struct dma_buf_attachment *attach,
+				  struct sg_table *sgt);
+int drm_gem_cma_prime_mmap(struct drm_gem_object *obj,
+			   struct vm_area_struct *vma);
+void *drm_gem_cma_prime_vmap(struct drm_gem_object *obj);
+void drm_gem_cma_prime_vunmap(struct drm_gem_object *obj, void *vaddr);
+
+>>>>>>> v3.18
 #endif /* __DRM_GEM_CMA_HELPER_H__ */

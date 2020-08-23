@@ -29,8 +29,13 @@
 #else
 #  define assert(expr) \
         if(unlikely(!(expr))) {				        \
+<<<<<<< HEAD
         printk(KERN_ERR "Assertion failed! %s,%s,%s,line=%d\n",	\
 	#expr, __FILE__, __func__, __LINE__);		        \
+=======
+		pr_err("Assertion failed! %s,%s,%s,line=%d\n",	\
+		#expr, __FILE__, __func__, __LINE__);		\
+>>>>>>> v3.18
         }
 #endif
 

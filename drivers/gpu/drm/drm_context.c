@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**
  * \file drm_context.c
  * IOCTLs for generic contexts
@@ -8,11 +9,21 @@
 
 /*
  * Created: Fri Nov 24 18:31:37 2000 by gareth@valinux.com
+=======
+/*
+ * Legacy: Generic DRM Contexts
+>>>>>>> v3.18
  *
  * Copyright 1999, 2000 Precision Insight, Inc., Cedar Park, Texas.
  * Copyright 2000 VA Linux Systems, Inc., Sunnyvale, California.
  * All Rights Reserved.
  *
+<<<<<<< HEAD
+=======
+ * Author: Rickard E. (Rik) Faith <faith@valinux.com>
+ * Author: Gareth Hughes <gareth@valinux.com>
+ *
+>>>>>>> v3.18
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
  * to deal in the Software without restriction, including without limitation
@@ -33,6 +44,7 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
+<<<<<<< HEAD
 /*
  * ChangeLog:
  *  2001-11-16	Torsten Duwe <duwe@caldera.de>
@@ -41,6 +53,16 @@
  */
 
 #include <drm/drmP.h>
+=======
+#include <drm/drmP.h>
+#include "drm_legacy.h"
+
+struct drm_ctx_list {
+	struct list_head head;
+	drm_context_t handle;
+	struct drm_file *tag;
+};
+>>>>>>> v3.18
 
 /******************************************************************/
 /** \name Context bitmap support */
@@ -56,7 +78,11 @@
  * in drm_device::ctx_idr, while holding the drm_device::struct_mutex
  * lock.
  */
+<<<<<<< HEAD
 void drm_ctxbitmap_free(struct drm_device * dev, int ctx_handle)
+=======
+void drm_legacy_ctxbitmap_free(struct drm_device * dev, int ctx_handle)
+>>>>>>> v3.18
 {
 	mutex_lock(&dev->struct_mutex);
 	idr_remove(&dev->ctx_idr, ctx_handle);
@@ -72,7 +98,11 @@ void drm_ctxbitmap_free(struct drm_device * dev, int ctx_handle)
  * Allocate a new idr from drm_device::ctx_idr while holding the
  * drm_device::struct_mutex lock.
  */
+<<<<<<< HEAD
 static int drm_ctxbitmap_next(struct drm_device * dev)
+=======
+static int drm_legacy_ctxbitmap_next(struct drm_device * dev)
+>>>>>>> v3.18
 {
 	int ret;
 
@@ -90,7 +120,11 @@ static int drm_ctxbitmap_next(struct drm_device * dev)
  *
  * Initialise the drm_device::ctx_idr
  */
+<<<<<<< HEAD
 int drm_ctxbitmap_init(struct drm_device * dev)
+=======
+int drm_legacy_ctxbitmap_init(struct drm_device * dev)
+>>>>>>> v3.18
 {
 	idr_init(&dev->ctx_idr);
 	return 0;
@@ -104,13 +138,50 @@ int drm_ctxbitmap_init(struct drm_device * dev)
  * Free all idr members using drm_ctx_sarea_free helper function
  * while holding the drm_device::struct_mutex lock.
  */
+<<<<<<< HEAD
 void drm_ctxbitmap_cleanup(struct drm_device * dev)
+=======
+void drm_legacy_ctxbitmap_cleanup(struct drm_device * dev)
+>>>>>>> v3.18
 {
 	mutex_lock(&dev->struct_mutex);
 	idr_destroy(&dev->ctx_idr);
 	mutex_unlock(&dev->struct_mutex);
 }
 
+<<<<<<< HEAD
+=======
+/**
+ * drm_ctxbitmap_flush() - Flush all contexts owned by a file
+ * @dev: DRM device to operate on
+ * @file: Open file to flush contexts for
+ *
+ * This iterates over all contexts on @dev and drops them if they're owned by
+ * @file. Note that after this call returns, new contexts might be added if
+ * the file is still alive.
+ */
+void drm_legacy_ctxbitmap_flush(struct drm_device *dev, struct drm_file *file)
+{
+	struct drm_ctx_list *pos, *tmp;
+
+	mutex_lock(&dev->ctxlist_mutex);
+
+	list_for_each_entry_safe(pos, tmp, &dev->ctxlist, head) {
+		if (pos->tag == file &&
+		    pos->handle != DRM_KERNEL_CONTEXT) {
+			if (dev->driver->context_dtor)
+				dev->driver->context_dtor(dev, pos->handle);
+
+			drm_legacy_ctxbitmap_free(dev, pos->handle);
+			list_del(&pos->head);
+			kfree(pos);
+		}
+	}
+
+	mutex_unlock(&dev->ctxlist_mutex);
+}
+
+>>>>>>> v3.18
 /*@}*/
 
 /******************************************************************/
@@ -129,8 +200,13 @@ void drm_ctxbitmap_cleanup(struct drm_device * dev)
  * Gets the map from drm_device::ctx_idr with the handle specified and
  * returns its handle.
  */
+<<<<<<< HEAD
 int drm_getsareactx(struct drm_device *dev, void *data,
 		    struct drm_file *file_priv)
+=======
+int drm_legacy_getsareactx(struct drm_device *dev, void *data,
+			   struct drm_file *file_priv)
+>>>>>>> v3.18
 {
 	struct drm_ctx_priv_map *request = data;
 	struct drm_local_map *map;
@@ -173,8 +249,13 @@ int drm_getsareactx(struct drm_device *dev, void *data,
  * Searches the mapping specified in \p arg and update the entry in
  * drm_device::ctx_idr with it.
  */
+<<<<<<< HEAD
 int drm_setsareactx(struct drm_device *dev, void *data,
 		    struct drm_file *file_priv)
+=======
+int drm_legacy_setsareactx(struct drm_device *dev, void *data,
+			   struct drm_file *file_priv)
+>>>>>>> v3.18
 {
 	struct drm_ctx_priv_map *request = data;
 	struct drm_local_map *map = NULL;
@@ -251,7 +332,10 @@ static int drm_context_switch_complete(struct drm_device *dev,
 				       struct drm_file *file_priv, int new)
 {
 	dev->last_context = new;	/* PRE/POST: This is the _only_ writer. */
+<<<<<<< HEAD
 	dev->last_switch = jiffies;
+=======
+>>>>>>> v3.18
 
 	if (!_DRM_LOCK_IS_HELD(file_priv->master->lock.hw_lock->lock)) {
 		DRM_ERROR("Lock isn't held after context switch\n");
@@ -261,7 +345,10 @@ static int drm_context_switch_complete(struct drm_device *dev,
 	   when the kernel holds the lock, release
 	   that lock here. */
 	clear_bit(0, &dev->context_flag);
+<<<<<<< HEAD
 	wake_up(&dev->context_wait);
+=======
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -275,8 +362,13 @@ static int drm_context_switch_complete(struct drm_device *dev,
  * \param arg user argument pointing to a drm_ctx_res structure.
  * \return zero on success or a negative number on failure.
  */
+<<<<<<< HEAD
 int drm_resctx(struct drm_device *dev, void *data,
 	       struct drm_file *file_priv)
+=======
+int drm_legacy_resctx(struct drm_device *dev, void *data,
+		      struct drm_file *file_priv)
+>>>>>>> v3.18
 {
 	struct drm_ctx_res *res = data;
 	struct drm_ctx ctx;
@@ -306,16 +398,28 @@ int drm_resctx(struct drm_device *dev, void *data,
  *
  * Get a new handle for the context and copy to userspace.
  */
+<<<<<<< HEAD
 int drm_addctx(struct drm_device *dev, void *data,
 	       struct drm_file *file_priv)
+=======
+int drm_legacy_addctx(struct drm_device *dev, void *data,
+		      struct drm_file *file_priv)
+>>>>>>> v3.18
 {
 	struct drm_ctx_list *ctx_entry;
 	struct drm_ctx *ctx = data;
 
+<<<<<<< HEAD
 	ctx->handle = drm_ctxbitmap_next(dev);
 	if (ctx->handle == DRM_KERNEL_CONTEXT) {
 		/* Skip kernel's context and get a new one. */
 		ctx->handle = drm_ctxbitmap_next(dev);
+=======
+	ctx->handle = drm_legacy_ctxbitmap_next(dev);
+	if (ctx->handle == DRM_KERNEL_CONTEXT) {
+		/* Skip kernel's context and get a new one. */
+		ctx->handle = drm_legacy_ctxbitmap_next(dev);
+>>>>>>> v3.18
 	}
 	DRM_DEBUG("%d\n", ctx->handle);
 	if (ctx->handle == -1) {
@@ -336,18 +440,24 @@ int drm_addctx(struct drm_device *dev, void *data,
 
 	mutex_lock(&dev->ctxlist_mutex);
 	list_add(&ctx_entry->head, &dev->ctxlist);
+<<<<<<< HEAD
 	++dev->ctx_count;
+=======
+>>>>>>> v3.18
 	mutex_unlock(&dev->ctxlist_mutex);
 
 	return 0;
 }
 
+<<<<<<< HEAD
 int drm_modctx(struct drm_device *dev, void *data, struct drm_file *file_priv)
 {
 	/* This does nothing */
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 /**
  * Get context.
  *
@@ -357,7 +467,12 @@ int drm_modctx(struct drm_device *dev, void *data, struct drm_file *file_priv)
  * \param arg user argument pointing to a drm_ctx structure.
  * \return zero on success or a negative number on failure.
  */
+<<<<<<< HEAD
 int drm_getctx(struct drm_device *dev, void *data, struct drm_file *file_priv)
+=======
+int drm_legacy_getctx(struct drm_device *dev, void *data,
+		      struct drm_file *file_priv)
+>>>>>>> v3.18
 {
 	struct drm_ctx *ctx = data;
 
@@ -378,8 +493,13 @@ int drm_getctx(struct drm_device *dev, void *data, struct drm_file *file_priv)
  *
  * Calls context_switch().
  */
+<<<<<<< HEAD
 int drm_switchctx(struct drm_device *dev, void *data,
 		  struct drm_file *file_priv)
+=======
+int drm_legacy_switchctx(struct drm_device *dev, void *data,
+			 struct drm_file *file_priv)
+>>>>>>> v3.18
 {
 	struct drm_ctx *ctx = data;
 
@@ -398,8 +518,13 @@ int drm_switchctx(struct drm_device *dev, void *data,
  *
  * Calls context_switch_complete().
  */
+<<<<<<< HEAD
 int drm_newctx(struct drm_device *dev, void *data,
 	       struct drm_file *file_priv)
+=======
+int drm_legacy_newctx(struct drm_device *dev, void *data,
+		      struct drm_file *file_priv)
+>>>>>>> v3.18
 {
 	struct drm_ctx *ctx = data;
 
@@ -420,8 +545,13 @@ int drm_newctx(struct drm_device *dev, void *data,
  *
  * If not the special kernel context, calls ctxbitmap_free() to free the specified context.
  */
+<<<<<<< HEAD
 int drm_rmctx(struct drm_device *dev, void *data,
 	      struct drm_file *file_priv)
+=======
+int drm_legacy_rmctx(struct drm_device *dev, void *data,
+		     struct drm_file *file_priv)
+>>>>>>> v3.18
 {
 	struct drm_ctx *ctx = data;
 
@@ -429,7 +559,11 @@ int drm_rmctx(struct drm_device *dev, void *data,
 	if (ctx->handle != DRM_KERNEL_CONTEXT) {
 		if (dev->driver->context_dtor)
 			dev->driver->context_dtor(dev, ctx->handle);
+<<<<<<< HEAD
 		drm_ctxbitmap_free(dev, ctx->handle);
+=======
+		drm_legacy_ctxbitmap_free(dev, ctx->handle);
+>>>>>>> v3.18
 	}
 
 	mutex_lock(&dev->ctxlist_mutex);
@@ -440,7 +574,10 @@ int drm_rmctx(struct drm_device *dev, void *data,
 			if (pos->handle == ctx->handle) {
 				list_del(&pos->head);
 				kfree(pos);
+<<<<<<< HEAD
 				--dev->ctx_count;
+=======
+>>>>>>> v3.18
 			}
 		}
 	}

@@ -24,11 +24,19 @@
 #include <mach/at91sam9260_matrix.h>
 #include <mach/at91_matrix.h>
 #include <mach/at91sam9_smc.h>
+<<<<<<< HEAD
 #include <mach/at91_adc.h>
 
 #include "board.h"
 #include "generic.h"
 
+=======
+#include <mach/hardware.h>
+
+#include "board.h"
+#include "generic.h"
+#include "gpio.h"
+>>>>>>> v3.18
 
 /* --------------------------------------------------------------------
  *  USB Host
@@ -1255,12 +1263,17 @@ void __init at91_add_device_cf(struct at91_cf_data *data)
 	at91_set_A_periph(AT91_PIN_PC10, 0);    /* CFRNW */
 	at91_set_A_periph(AT91_PIN_PC15, 1);    /* NWAIT */
 
+<<<<<<< HEAD
 	if (data->flags & AT91_CF_TRUE_IDE)
 #if defined(CONFIG_PATA_AT91) || defined(CONFIG_PATA_AT91_MODULE)
 		pdev->name = "pata_at91";
 #else
 #warning "board requires AT91_CF_TRUE_IDE: enable pata_at91"
 #endif
+=======
+	if (IS_ENABLED(CONFIG_PATA_AT91) && (data->flags & AT91_CF_TRUE_IDE))
+		pdev->name = "pata_at91";
+>>>>>>> v3.18
 	else
 		pdev->name = "at91_cf";
 
@@ -1292,7 +1305,11 @@ static struct resource adc_resources[] = {
 };
 
 static struct platform_device at91_adc_device = {
+<<<<<<< HEAD
 	.name		= "at91_adc",
+=======
+	.name		= "at91sam9260-adc",
+>>>>>>> v3.18
 	.id		= -1,
 	.dev		= {
 				.platform_data		= &adc_data,
@@ -1304,6 +1321,7 @@ static struct platform_device at91_adc_device = {
 static struct at91_adc_trigger at91_adc_triggers[] = {
 	[0] = {
 		.name = "timer-counter-0",
+<<<<<<< HEAD
 		.value = AT91_ADC_TRGSEL_TC0 | AT91_ADC_TRGEN,
 	},
 	[1] = {
@@ -1317,10 +1335,26 @@ static struct at91_adc_trigger at91_adc_triggers[] = {
 	[3] = {
 		.name = "external",
 		.value = AT91_ADC_TRGSEL_EXTERNAL | AT91_ADC_TRGEN,
+=======
+		.value = 0x1,
+	},
+	[1] = {
+		.name = "timer-counter-1",
+		.value = 0x3,
+	},
+	[2] = {
+		.name = "timer-counter-2",
+		.value = 0x5,
+	},
+	[3] = {
+		.name = "external",
+		.value = 0xd,
+>>>>>>> v3.18
 		.is_external = true,
 	},
 };
 
+<<<<<<< HEAD
 static struct at91_adc_reg_desc at91_adc_register_g20 = {
 	.channel_base = AT91_ADC_CHR(0),
 	.drdy_mask = AT91_ADC_DRDY,
@@ -1328,6 +1362,8 @@ static struct at91_adc_reg_desc at91_adc_register_g20 = {
 	.trigger_register = AT91_ADC_MR,
 };
 
+=======
+>>>>>>> v3.18
 void __init at91_add_device_adc(struct at91_adc_data *data)
 {
 	if (!data)
@@ -1345,9 +1381,13 @@ void __init at91_add_device_adc(struct at91_adc_data *data)
 	if (data->use_external_triggers)
 		at91_set_A_periph(AT91_PIN_PA22, 0);
 
+<<<<<<< HEAD
 	data->num_channels = 4;
 	data->startup_time = 10;
 	data->registers = &at91_adc_register_g20;
+=======
+	data->startup_time = 10;
+>>>>>>> v3.18
 	data->trigger_number = 4;
 	data->trigger_list = at91_adc_triggers;
 

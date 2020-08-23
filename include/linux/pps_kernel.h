@@ -80,7 +80,11 @@ struct pps_device {
  * Global variables
  */
 
+<<<<<<< HEAD
 extern struct device_attribute pps_attrs[];
+=======
+extern const struct attribute_group *pps_groups[];
+>>>>>>> v3.18
 
 /*
  * Internal functions.

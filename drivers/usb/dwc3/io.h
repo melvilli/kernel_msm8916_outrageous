@@ -6,6 +6,7 @@
  * Authors: Felipe Balbi <balbi@ti.com>,
  *	    Sebastian Andrzej Siewior <bigeasy@linutronix.de>
  *
+<<<<<<< HEAD
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -34,33 +35,85 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+=======
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2  of
+ * the License as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+>>>>>>> v3.18
  */
 
 #ifndef __DRIVERS_USB_DWC3_IO_H
 #define __DRIVERS_USB_DWC3_IO_H
 
 #include <linux/io.h>
+<<<<<<< HEAD
 
+=======
+#include "trace.h"
+#include "debug.h"
+>>>>>>> v3.18
 #include "core.h"
 
 static inline u32 dwc3_readl(void __iomem *base, u32 offset)
 {
+<<<<<<< HEAD
+=======
+	u32 offs = offset - DWC3_GLOBALS_REGS_START;
+	u32 value;
+
+>>>>>>> v3.18
 	/*
 	 * We requested the mem region starting from the Globals address
 	 * space, see dwc3_probe in core.c.
 	 * However, the offsets are given starting from xHCI address space.
 	 */
+<<<<<<< HEAD
 	return readl(base + (offset - DWC3_GLOBALS_REGS_START));
+=======
+	value = readl(base + offs);
+
+	/*
+	 * When tracing we want to make it easy to find the correct address on
+	 * documentation, so we revert it back to the proper addresses, the
+	 * same way they are described on SNPS documentation
+	 */
+	dwc3_trace(trace_dwc3_readl, "addr %p value %08x",
+			base - DWC3_GLOBALS_REGS_START + offset, value);
+
+	return value;
+>>>>>>> v3.18
 }
 
 static inline void dwc3_writel(void __iomem *base, u32 offset, u32 value)
 {
+<<<<<<< HEAD
+=======
+	u32 offs = offset - DWC3_GLOBALS_REGS_START;
+
+>>>>>>> v3.18
 	/*
 	 * We requested the mem region starting from the Globals address
 	 * space, see dwc3_probe in core.c.
 	 * However, the offsets are given starting from xHCI address space.
 	 */
+<<<<<<< HEAD
 	writel(value, base + (offset - DWC3_GLOBALS_REGS_START));
+=======
+	writel(value, base + offs);
+
+	/*
+	 * When tracing we want to make it easy to find the correct address on
+	 * documentation, so we revert it back to the proper addresses, the
+	 * same way they are described on SNPS documentation
+	 */
+	dwc3_trace(trace_dwc3_writel, "addr %p value %08x",
+			base - DWC3_GLOBALS_REGS_START + offset, value);
+>>>>>>> v3.18
 }
 
 #endif /* __DRIVERS_USB_DWC3_IO_H */

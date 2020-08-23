@@ -1142,8 +1142,13 @@ static int loopback_probe(struct platform_device *devptr)
 	int dev = devptr->id;
 	int err;
 
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE,
 			      sizeof(struct loopback), &card);
+=======
+	err = snd_card_new(&devptr->dev, index[dev], id[dev], THIS_MODULE,
+			   sizeof(struct loopback), &card);
+>>>>>>> v3.18
 	if (err < 0)
 		return err;
 	loopback = card->private_data;
@@ -1183,7 +1188,10 @@ static int loopback_probe(struct platform_device *devptr)
 static int loopback_remove(struct platform_device *devptr)
 {
 	snd_card_free(platform_get_drvdata(devptr));
+<<<<<<< HEAD
 	platform_set_drvdata(devptr, NULL);
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

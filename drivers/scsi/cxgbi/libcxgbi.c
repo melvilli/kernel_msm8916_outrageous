@@ -24,6 +24,13 @@
 #include <linux/inet.h>
 #include <net/dst.h>
 #include <net/route.h>
+<<<<<<< HEAD
+=======
+#include <net/ipv6.h>
+#include <net/ip6_route.h>
+#include <net/addrconf.h>
+
+>>>>>>> v3.18
 #include <linux/inetdevice.h>	/* ip_dev_find */
 #include <linux/module.h>
 #include <net/tcp.h>
@@ -53,6 +60,12 @@ MODULE_PARM_DESC(dbg_level, "libiscsi debug level (default=0)");
 static LIST_HEAD(cdev_list);
 static DEFINE_MUTEX(cdev_mutex);
 
+<<<<<<< HEAD
+=======
+static LIST_HEAD(cdev_rcu_list);
+static DEFINE_SPINLOCK(cdev_rcu_lock);
+
+>>>>>>> v3.18
 int cxgbi_device_portmap_create(struct cxgbi_device *cdev, unsigned int base,
 				unsigned int max_conn)
 {
@@ -138,6 +151,13 @@ struct cxgbi_device *cxgbi_device_register(unsigned int extra,
 	list_add_tail(&cdev->list_head, &cdev_list);
 	mutex_unlock(&cdev_mutex);
 
+<<<<<<< HEAD
+=======
+	spin_lock(&cdev_rcu_lock);
+	list_add_tail_rcu(&cdev->rcu_node, &cdev_rcu_list);
+	spin_unlock(&cdev_rcu_lock);
+
+>>>>>>> v3.18
 	log_debug(1 << CXGBI_DBG_DEV,
 		"cdev 0x%p, p# %u.\n", cdev, nports);
 	return cdev;
@@ -149,9 +169,22 @@ void cxgbi_device_unregister(struct cxgbi_device *cdev)
 	log_debug(1 << CXGBI_DBG_DEV,
 		"cdev 0x%p, p# %u,%s.\n",
 		cdev, cdev->nports, cdev->nports ? cdev->ports[0]->name : "");
+<<<<<<< HEAD
 	mutex_lock(&cdev_mutex);
 	list_del(&cdev->list_head);
 	mutex_unlock(&cdev_mutex);
+=======
+
+	mutex_lock(&cdev_mutex);
+	list_del(&cdev->list_head);
+	mutex_unlock(&cdev_mutex);
+
+	spin_lock(&cdev_rcu_lock);
+	list_del_rcu(&cdev->rcu_node);
+	spin_unlock(&cdev_rcu_lock);
+	synchronize_rcu();
+
+>>>>>>> v3.18
 	cxgbi_device_destroy(cdev);
 }
 EXPORT_SYMBOL_GPL(cxgbi_device_unregister);
@@ -163,12 +196,18 @@ void cxgbi_device_unregister_all(unsigned int flag)
 	mutex_lock(&cdev_mutex);
 	list_for_each_entry_safe(cdev, tmp, &cdev_list, list_head) {
 		if ((cdev->flags & flag) == flag) {
+<<<<<<< HEAD
 			log_debug(1 << CXGBI_DBG_DEV,
 				"cdev 0x%p, p# %u,%s.\n",
 				cdev, cdev->nports, cdev->nports ?
 				 cdev->ports[0]->name : "");
 			list_del(&cdev->list_head);
 			cxgbi_device_destroy(cdev);
+=======
+			mutex_unlock(&cdev_mutex);
+			cxgbi_device_unregister(cdev);
+			mutex_lock(&cdev_mutex);
+>>>>>>> v3.18
 		}
 	}
 	mutex_unlock(&cdev_mutex);
@@ -187,14 +226,23 @@ struct cxgbi_device *cxgbi_device_find_by_lldev(void *lldev)
 		}
 	}
 	mutex_unlock(&cdev_mutex);
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	log_debug(1 << CXGBI_DBG_DEV,
 		"lldev 0x%p, NO match found.\n", lldev);
 	return NULL;
 }
 EXPORT_SYMBOL_GPL(cxgbi_device_find_by_lldev);
 
+<<<<<<< HEAD
 static struct cxgbi_device *cxgbi_device_find_by_netdev(struct net_device *ndev,
 							int *port)
+=======
+struct cxgbi_device *cxgbi_device_find_by_netdev(struct net_device *ndev,
+						 int *port)
+>>>>>>> v3.18
 {
 	struct net_device *vdev = NULL;
 	struct cxgbi_device *cdev, *tmp;
@@ -224,6 +272,78 @@ static struct cxgbi_device *cxgbi_device_find_by_netdev(struct net_device *ndev,
 		"ndev 0x%p, %s, NO match found.\n", ndev, ndev->name);
 	return NULL;
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(cxgbi_device_find_by_netdev);
+
+struct cxgbi_device *cxgbi_device_find_by_netdev_rcu(struct net_device *ndev,
+						     int *port)
+{
+	struct net_device *vdev = NULL;
+	struct cxgbi_device *cdev;
+	int i;
+
+	if (ndev->priv_flags & IFF_802_1Q_VLAN) {
+		vdev = ndev;
+		ndev = vlan_dev_real_dev(ndev);
+		pr_info("vlan dev %s -> %s.\n", vdev->name, ndev->name);
+	}
+
+	rcu_read_lock();
+	list_for_each_entry_rcu(cdev, &cdev_rcu_list, rcu_node) {
+		for (i = 0; i < cdev->nports; i++) {
+			if (ndev == cdev->ports[i]) {
+				cdev->hbas[i]->vdev = vdev;
+				rcu_read_unlock();
+				if (port)
+					*port = i;
+				return cdev;
+			}
+		}
+	}
+	rcu_read_unlock();
+
+	log_debug(1 << CXGBI_DBG_DEV,
+		  "ndev 0x%p, %s, NO match found.\n", ndev, ndev->name);
+	return NULL;
+}
+EXPORT_SYMBOL_GPL(cxgbi_device_find_by_netdev_rcu);
+
+#if IS_ENABLED(CONFIG_IPV6)
+static struct cxgbi_device *cxgbi_device_find_by_mac(struct net_device *ndev,
+						     int *port)
+{
+	struct net_device *vdev = NULL;
+	struct cxgbi_device *cdev, *tmp;
+	int i;
+
+	if (ndev->priv_flags & IFF_802_1Q_VLAN) {
+		vdev = ndev;
+		ndev = vlan_dev_real_dev(ndev);
+		pr_info("vlan dev %s -> %s.\n", vdev->name, ndev->name);
+	}
+
+	mutex_lock(&cdev_mutex);
+	list_for_each_entry_safe(cdev, tmp, &cdev_list, list_head) {
+		for (i = 0; i < cdev->nports; i++) {
+			if (!memcmp(ndev->dev_addr, cdev->ports[i]->dev_addr,
+				    MAX_ADDR_LEN)) {
+				cdev->hbas[i]->vdev = vdev;
+				mutex_unlock(&cdev_mutex);
+				if (port)
+					*port = i;
+				return cdev;
+			}
+		}
+	}
+	mutex_unlock(&cdev_mutex);
+	log_debug(1 << CXGBI_DBG_DEV,
+		  "ndev 0x%p, %s, NO match mac found.\n",
+		  ndev, ndev->name);
+	return NULL;
+}
+#endif
+>>>>>>> v3.18
 
 void cxgbi_hbas_remove(struct cxgbi_device *cdev)
 {
@@ -245,7 +365,11 @@ void cxgbi_hbas_remove(struct cxgbi_device *cdev)
 }
 EXPORT_SYMBOL_GPL(cxgbi_hbas_remove);
 
+<<<<<<< HEAD
 int cxgbi_hbas_add(struct cxgbi_device *cdev, unsigned int max_lun,
+=======
+int cxgbi_hbas_add(struct cxgbi_device *cdev, u64 max_lun,
+>>>>>>> v3.18
 		unsigned int max_id, struct scsi_host_template *sht,
 		struct scsi_transport_template *stt)
 {
@@ -314,12 +438,48 @@ EXPORT_SYMBOL_GPL(cxgbi_hbas_add);
  *   If the source port is outside our allocation range, the caller is
  *   responsible for keeping track of their port usage.
  */
+<<<<<<< HEAD
+=======
+
+static struct cxgbi_sock *find_sock_on_port(struct cxgbi_device *cdev,
+					    unsigned char port_id)
+{
+	struct cxgbi_ports_map *pmap = &cdev->pmap;
+	unsigned int i;
+	unsigned int used;
+
+	if (!pmap->max_connect || !pmap->used)
+		return NULL;
+
+	spin_lock_bh(&pmap->lock);
+	used = pmap->used;
+	for (i = 0; used && i < pmap->max_connect; i++) {
+		struct cxgbi_sock *csk = pmap->port_csk[i];
+
+		if (csk) {
+			if (csk->port_id == port_id) {
+				spin_unlock_bh(&pmap->lock);
+				return csk;
+			}
+			used--;
+		}
+	}
+	spin_unlock_bh(&pmap->lock);
+
+	return NULL;
+}
+
+>>>>>>> v3.18
 static int sock_get_port(struct cxgbi_sock *csk)
 {
 	struct cxgbi_device *cdev = csk->cdev;
 	struct cxgbi_ports_map *pmap = &cdev->pmap;
 	unsigned int start;
 	int idx;
+<<<<<<< HEAD
+=======
+	__be16 *port;
+>>>>>>> v3.18
 
 	if (!pmap->max_connect) {
 		pr_err("cdev 0x%p, p#%u %s, NO port map.\n",
@@ -327,9 +487,20 @@ static int sock_get_port(struct cxgbi_sock *csk)
 		return -EADDRNOTAVAIL;
 	}
 
+<<<<<<< HEAD
 	if (csk->saddr.sin_port) {
 		pr_err("source port NON-ZERO %u.\n",
 			ntohs(csk->saddr.sin_port));
+=======
+	if (csk->csk_family == AF_INET)
+		port = &csk->saddr.sin_port;
+	else /* ipv6 */
+		port = &csk->saddr6.sin6_port;
+
+	if (*port) {
+		pr_err("source port NON-ZERO %u.\n",
+			ntohs(*port));
+>>>>>>> v3.18
 		return -EADDRINUSE;
 	}
 
@@ -347,8 +518,12 @@ static int sock_get_port(struct cxgbi_sock *csk)
 			idx = 0;
 		if (!pmap->port_csk[idx]) {
 			pmap->used++;
+<<<<<<< HEAD
 			csk->saddr.sin_port =
 				htons(pmap->sport_base + idx);
+=======
+			*port = htons(pmap->sport_base + idx);
+>>>>>>> v3.18
 			pmap->next = idx;
 			pmap->port_csk[idx] = csk;
 			spin_unlock_bh(&pmap->lock);
@@ -374,16 +549,34 @@ static void sock_put_port(struct cxgbi_sock *csk)
 {
 	struct cxgbi_device *cdev = csk->cdev;
 	struct cxgbi_ports_map *pmap = &cdev->pmap;
+<<<<<<< HEAD
 
 	if (csk->saddr.sin_port) {
 		int idx = ntohs(csk->saddr.sin_port) - pmap->sport_base;
 
 		csk->saddr.sin_port = 0;
+=======
+	__be16 *port;
+
+	if (csk->csk_family == AF_INET)
+		port = &csk->saddr.sin_port;
+	else /* ipv6 */
+		port = &csk->saddr6.sin6_port;
+
+	if (*port) {
+		int idx = ntohs(*port) - pmap->sport_base;
+
+		*port = 0;
+>>>>>>> v3.18
 		if (idx < 0 || idx >= pmap->max_connect) {
 			pr_err("cdev 0x%p, p#%u %s, port %u OOR.\n",
 				cdev, csk->port_id,
 				cdev->ports[csk->port_id]->name,
+<<<<<<< HEAD
 				ntohs(csk->saddr.sin_port));
+=======
+				ntohs(*port));
+>>>>>>> v3.18
 			return;
 		}
 
@@ -479,6 +672,7 @@ static struct cxgbi_sock *cxgbi_check_route(struct sockaddr *dst_addr)
 	int port = 0xFFFF;
 	int err = 0;
 
+<<<<<<< HEAD
 	if (daddr->sin_family != AF_INET) {
 		pr_info("address family 0x%x NOT supported.\n",
 			daddr->sin_family);
@@ -490,6 +684,13 @@ static struct cxgbi_sock *cxgbi_check_route(struct sockaddr *dst_addr)
 	if (!rt) {
 		pr_info("no route to ipv4 0x%x, port %u.\n",
 			daddr->sin_addr.s_addr, daddr->sin_port);
+=======
+	rt = find_route_ipv4(&fl4, 0, daddr->sin_addr.s_addr, 0, daddr->sin_port, 0);
+	if (!rt) {
+		pr_info("no route to ipv4 0x%x, port %u.\n",
+			be32_to_cpu(daddr->sin_addr.s_addr),
+			be16_to_cpu(daddr->sin_port));
+>>>>>>> v3.18
 		err = -ENETUNREACH;
 		goto err_out;
 	}
@@ -537,9 +738,18 @@ static struct cxgbi_sock *cxgbi_check_route(struct sockaddr *dst_addr)
 	csk->port_id = port;
 	csk->mtu = mtu;
 	csk->dst = dst;
+<<<<<<< HEAD
 	csk->daddr.sin_addr.s_addr = daddr->sin_addr.s_addr;
 	csk->daddr.sin_port = daddr->sin_port;
 	csk->daddr.sin_family = daddr->sin_family;
+=======
+
+	csk->csk_family = AF_INET;
+	csk->daddr.sin_addr.s_addr = daddr->sin_addr.s_addr;
+	csk->daddr.sin_port = daddr->sin_port;
+	csk->daddr.sin_family = daddr->sin_family;
+	csk->saddr.sin_family = daddr->sin_family;
+>>>>>>> v3.18
 	csk->saddr.sin_addr.s_addr = fl4.saddr;
 	neigh_release(n);
 
@@ -556,6 +766,127 @@ err_out:
 	return ERR_PTR(err);
 }
 
+<<<<<<< HEAD
+=======
+#if IS_ENABLED(CONFIG_IPV6)
+static struct rt6_info *find_route_ipv6(const struct in6_addr *saddr,
+					const struct in6_addr *daddr)
+{
+	struct flowi6 fl;
+
+	if (saddr)
+		memcpy(&fl.saddr, saddr, sizeof(struct in6_addr));
+	if (daddr)
+		memcpy(&fl.daddr, daddr, sizeof(struct in6_addr));
+	return (struct rt6_info *)ip6_route_output(&init_net, NULL, &fl);
+}
+
+static struct cxgbi_sock *cxgbi_check_route6(struct sockaddr *dst_addr)
+{
+	struct sockaddr_in6 *daddr6 = (struct sockaddr_in6 *)dst_addr;
+	struct dst_entry *dst;
+	struct net_device *ndev;
+	struct cxgbi_device *cdev;
+	struct rt6_info *rt = NULL;
+	struct neighbour *n;
+	struct in6_addr pref_saddr;
+	struct cxgbi_sock *csk = NULL;
+	unsigned int mtu = 0;
+	int port = 0xFFFF;
+	int err = 0;
+
+	rt = find_route_ipv6(NULL, &daddr6->sin6_addr);
+
+	if (!rt) {
+		pr_info("no route to ipv6 %pI6 port %u\n",
+			daddr6->sin6_addr.s6_addr,
+			be16_to_cpu(daddr6->sin6_port));
+		err = -ENETUNREACH;
+		goto err_out;
+	}
+
+	dst = &rt->dst;
+
+	n = dst_neigh_lookup(dst, &daddr6->sin6_addr);
+
+	if (!n) {
+		pr_info("%pI6, port %u, dst no neighbour.\n",
+			daddr6->sin6_addr.s6_addr,
+			be16_to_cpu(daddr6->sin6_port));
+		err = -ENETUNREACH;
+		goto rel_rt;
+	}
+	ndev = n->dev;
+
+	if (ipv6_addr_is_multicast(&rt->rt6i_dst.addr)) {
+		pr_info("multi-cast route %pI6 port %u, dev %s.\n",
+			daddr6->sin6_addr.s6_addr,
+			ntohs(daddr6->sin6_port), ndev->name);
+		err = -ENETUNREACH;
+		goto rel_rt;
+	}
+
+	cdev = cxgbi_device_find_by_netdev(ndev, &port);
+	if (!cdev)
+		cdev = cxgbi_device_find_by_mac(ndev, &port);
+	if (!cdev) {
+		pr_info("dst %pI6 %s, NOT cxgbi device.\n",
+			daddr6->sin6_addr.s6_addr, ndev->name);
+		err = -ENETUNREACH;
+		goto rel_rt;
+	}
+	log_debug(1 << CXGBI_DBG_SOCK,
+		  "route to %pI6 :%u, ndev p#%d,%s, cdev 0x%p.\n",
+		  daddr6->sin6_addr.s6_addr, ntohs(daddr6->sin6_port), port,
+		  ndev->name, cdev);
+
+	csk = cxgbi_sock_create(cdev);
+	if (!csk) {
+		err = -ENOMEM;
+		goto rel_rt;
+	}
+	csk->cdev = cdev;
+	csk->port_id = port;
+	csk->mtu = mtu;
+	csk->dst = dst;
+
+	if (ipv6_addr_any(&rt->rt6i_prefsrc.addr)) {
+		struct inet6_dev *idev = ip6_dst_idev((struct dst_entry *)rt);
+
+		err = ipv6_dev_get_saddr(&init_net, idev ? idev->dev : NULL,
+					 &daddr6->sin6_addr, 0, &pref_saddr);
+		if (err) {
+			pr_info("failed to get source address to reach %pI6\n",
+				&daddr6->sin6_addr);
+			goto rel_rt;
+		}
+	} else {
+		pref_saddr = rt->rt6i_prefsrc.addr;
+	}
+
+	csk->csk_family = AF_INET6;
+	csk->daddr6.sin6_addr = daddr6->sin6_addr;
+	csk->daddr6.sin6_port = daddr6->sin6_port;
+	csk->daddr6.sin6_family = daddr6->sin6_family;
+	csk->saddr6.sin6_family = daddr6->sin6_family;
+	csk->saddr6.sin6_addr = pref_saddr;
+
+	neigh_release(n);
+	return csk;
+
+rel_rt:
+	if (n)
+		neigh_release(n);
+
+	ip6_rt_put(rt);
+	if (csk)
+		cxgbi_sock_closed(csk);
+err_out:
+	return ERR_PTR(err);
+}
+#endif /* IS_ENABLED(CONFIG_IPV6) */
+
+>>>>>>> v3.18
 void cxgbi_sock_established(struct cxgbi_sock *csk, unsigned int snd_isn,
 			unsigned int opt)
 {
@@ -576,7 +907,11 @@ static void cxgbi_inform_iscsi_conn_closing(struct cxgbi_sock *csk)
 		read_lock_bh(&csk->callback_lock);
 		if (csk->user_data)
 			iscsi_conn_failure(csk->user_data,
+<<<<<<< HEAD
 					ISCSI_ERR_CONN_FAILED);
+=======
+					ISCSI_ERR_TCP_CONN_CLOSE);
+>>>>>>> v3.18
 		read_unlock_bh(&csk->callback_lock);
 	}
 }
@@ -665,6 +1000,7 @@ void cxgbi_sock_rcv_abort_rpl(struct cxgbi_sock *csk)
 {
 	cxgbi_sock_get(csk);
 	spin_lock_bh(&csk->lock);
+<<<<<<< HEAD
 	if (cxgbi_sock_flag(csk, CTPF_ABORT_RPL_PENDING)) {
 		if (!cxgbi_sock_flag(csk, CTPF_ABORT_RPL_RCVD))
 			cxgbi_sock_set_flag(csk, CTPF_ABORT_RPL_RCVD);
@@ -677,6 +1013,18 @@ void cxgbi_sock_rcv_abort_rpl(struct cxgbi_sock *csk)
 			cxgbi_sock_closed(csk);
 		}
 	}
+=======
+
+	cxgbi_sock_set_flag(csk, CTPF_ABORT_RPL_RCVD);
+	if (cxgbi_sock_flag(csk, CTPF_ABORT_RPL_PENDING)) {
+		cxgbi_sock_clear_flag(csk, CTPF_ABORT_RPL_PENDING);
+		if (cxgbi_sock_flag(csk, CTPF_ABORT_REQ_RCVD))
+			pr_err("csk 0x%p,%u,0x%lx,%u,ABT_RPL_RSS.\n",
+			       csk, csk->state, csk->flags, csk->tid);
+		cxgbi_sock_closed(csk);
+	}
+
+>>>>>>> v3.18
 	spin_unlock_bh(&csk->lock);
 	cxgbi_sock_put(csk);
 }
@@ -1644,7 +1992,11 @@ static void csk_return_rx_credits(struct cxgbi_sock *csk, int copied)
 	u32 credits;
 
 	log_debug(1 << CXGBI_DBG_PDU_RX,
+<<<<<<< HEAD
 		"csk 0x%p,%u,0x%lu,%u, seq %u, wup %u, thre %u, %u.\n",
+=======
+		"csk 0x%p,%u,0x%lx,%u, seq %u, wup %u, thre %u, %u.\n",
+>>>>>>> v3.18
 		csk, csk->state, csk->flags, csk->tid, csk->copied_seq,
 		csk->rcv_wup, cdev->rx_credit_thres,
 		cdev->rcv_win);
@@ -2194,6 +2546,37 @@ int cxgbi_set_conn_param(struct iscsi_cls_conn *cls_conn,
 }
 EXPORT_SYMBOL_GPL(cxgbi_set_conn_param);
 
+<<<<<<< HEAD
+=======
+static inline int csk_print_port(struct cxgbi_sock *csk, char *buf)
+{
+	int len;
+
+	cxgbi_sock_get(csk);
+	len = sprintf(buf, "%hu\n", ntohs(csk->daddr.sin_port));
+	cxgbi_sock_put(csk);
+
+	return len;
+}
+
+static inline int csk_print_ip(struct cxgbi_sock *csk, char *buf)
+{
+	int len;
+
+	cxgbi_sock_get(csk);
+	if (csk->csk_family == AF_INET)
+		len = sprintf(buf, "%pI4",
+			      &csk->daddr.sin_addr.s_addr);
+	else
+		len = sprintf(buf, "%pI6",
+			      &csk->daddr6.sin6_addr);
+
+	cxgbi_sock_put(csk);
+
+	return len;
+}
+
+>>>>>>> v3.18
 int cxgbi_get_ep_param(struct iscsi_endpoint *ep, enum iscsi_param param,
 		       char *buf)
 {
@@ -2409,12 +2792,23 @@ int cxgbi_get_host_param(struct Scsi_Host *shost, enum iscsi_host_param param,
 		break;
 	case ISCSI_HOST_PARAM_IPADDRESS:
 	{
+<<<<<<< HEAD
 		__be32 addr;
 
 		addr = cxgbi_get_iscsi_ipv4(chba);
 		len = sprintf(buf, "%pI4", &addr);
 		log_debug(1 << CXGBI_DBG_ISCSI,
 			"hba %s, ipv4 %pI4.\n", chba->ndev->name, &addr);
+=======
+		struct cxgbi_sock *csk = find_sock_on_port(chba->cdev,
+							   chba->port_id);
+		if (csk) {
+			len = sprintf(buf, "%pIS",
+				      (struct sockaddr *)&csk->saddr);
+		}
+		log_debug(1 << CXGBI_DBG_ISCSI,
+			  "hba %s, addr %s.\n", chba->ndev->name, buf);
+>>>>>>> v3.18
 		break;
 	}
 	default:
@@ -2447,7 +2841,23 @@ struct iscsi_endpoint *cxgbi_ep_connect(struct Scsi_Host *shost,
 		}
 	}
 
+<<<<<<< HEAD
 	csk = cxgbi_check_route(dst_addr);
+=======
+	if (dst_addr->sa_family == AF_INET) {
+		csk = cxgbi_check_route(dst_addr);
+#if IS_ENABLED(CONFIG_IPV6)
+	} else if (dst_addr->sa_family == AF_INET6) {
+		csk = cxgbi_check_route6(dst_addr);
+#endif
+	} else {
+		pr_info("address family 0x%x NOT supported.\n",
+			dst_addr->sa_family);
+		err = -EAFNOSUPPORT;
+		return (struct iscsi_endpoint *)ERR_PTR(err);
+	}
+
+>>>>>>> v3.18
 	if (IS_ERR(csk))
 		return (struct iscsi_endpoint *)csk;
 	cxgbi_sock_get(csk);

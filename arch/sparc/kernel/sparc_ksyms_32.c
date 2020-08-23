@@ -6,7 +6,10 @@
  */
 
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 
 #include <asm/pgtable.h>
 #include <asm/uaccess.h>

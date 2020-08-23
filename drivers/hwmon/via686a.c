@@ -824,7 +824,11 @@ static struct via686a_data *via686a_update_device(struct device *dev)
 	return data;
 }
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(via686a_pci_ids) = {
+=======
+static const struct pci_device_id via686a_pci_ids[] = {
+>>>>>>> v3.18
 	{ PCI_DEVICE(PCI_VENDOR_ID_VIA, PCI_DEVICE_ID_VIA_82C686_4) },
 	{ }
 };

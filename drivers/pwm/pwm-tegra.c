@@ -173,10 +173,15 @@ static int tegra_pwm_probe(struct platform_device *pdev)
 	int ret;
 
 	pwm = devm_kzalloc(&pdev->dev, sizeof(*pwm), GFP_KERNEL);
+<<<<<<< HEAD
 	if (!pwm) {
 		dev_err(&pdev->dev, "failed to allocate memory\n");
 		return -ENOMEM;
 	}
+=======
+	if (!pwm)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	pwm->dev = &pdev->dev;
 
@@ -239,6 +244,10 @@ MODULE_DEVICE_TABLE(of, tegra_pwm_of_match);
 static struct platform_driver tegra_pwm_driver = {
 	.driver = {
 		.name = "tegra-pwm",
+<<<<<<< HEAD
+=======
+		.owner = THIS_MODULE,
+>>>>>>> v3.18
 		.of_match_table = tegra_pwm_of_match,
 	},
 	.probe = tegra_pwm_probe,

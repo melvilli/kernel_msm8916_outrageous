@@ -49,7 +49,11 @@ static int bmp085_i2c_probe(struct i2c_client *client,
 		return err;
 	}
 
+<<<<<<< HEAD
 	return bmp085_probe(&client->dev, regmap);
+=======
+	return bmp085_probe(&client->dev, regmap, client->irq);
+>>>>>>> v3.18
 }
 
 static int bmp085_i2c_remove(struct i2c_client *client)

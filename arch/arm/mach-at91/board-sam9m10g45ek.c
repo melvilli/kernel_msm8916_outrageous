@@ -26,6 +26,11 @@
 #include <linux/leds.h>
 #include <linux/atmel-mci.h>
 #include <linux/delay.h>
+<<<<<<< HEAD
+=======
+#include <linux/pwm.h>
+#include <linux/leds_pwm.h>
+>>>>>>> v3.18
 
 #include <linux/platform_data/at91_adc.h>
 
@@ -46,10 +51,17 @@
 #include <mach/system_rev.h>
 
 #include "at91_aic.h"
+<<<<<<< HEAD
 #include "at91_shdwc.h"
 #include "board.h"
 #include "sam9_smc.h"
 #include "generic.h"
+=======
+#include "board.h"
+#include "sam9_smc.h"
+#include "generic.h"
+#include "gpio.h"
+>>>>>>> v3.18
 
 
 static void __init ek_init_early(void)
@@ -284,7 +296,11 @@ static struct fb_monspecs at91fb_default_monspecs = {
 					| ATMEL_LCDC_CLKMOD_ALWAYSACTIVE)
 
 /* Driver datas */
+<<<<<<< HEAD
 static struct atmel_lcdfb_info __initdata ek_lcdc_data = {
+=======
+static struct atmel_lcdfb_pdata __initdata ek_lcdc_data = {
+>>>>>>> v3.18
 	.lcdcon_is_backlight		= true,
 	.default_bpp			= 32,
 	.default_dmacon			= ATMEL_LCDC_DMAEN,
@@ -295,11 +311,16 @@ static struct atmel_lcdfb_info __initdata ek_lcdc_data = {
 };
 
 #else
+<<<<<<< HEAD
 static struct atmel_lcdfb_info __initdata ek_lcdc_data;
+=======
+static struct atmel_lcdfb_pdata __initdata ek_lcdc_data;
+>>>>>>> v3.18
 #endif
 
 
 /*
+<<<<<<< HEAD
  * Touchscreen
  */
 static struct at91_tsadcc_data ek_tsadcc_data = {
@@ -310,11 +331,18 @@ static struct at91_tsadcc_data ek_tsadcc_data = {
 
 /*
  * ADCs
+=======
+ * ADCs and touchscreen
+>>>>>>> v3.18
  */
 static struct at91_adc_data ek_adc_data = {
 	.channels_used = BIT(0) | BIT(1) | BIT(2) | BIT(3) | BIT(4) | BIT(5) | BIT(6) | BIT(7),
 	.use_external_triggers = true,
 	.vref = 3300,
+<<<<<<< HEAD
+=======
+	.touchscreen_type = ATMEL_ADC_TOUCHSCREEN_4WIRE,
+>>>>>>> v3.18
 };
 
 /*
@@ -423,7 +451,11 @@ static struct gpio_led ek_leds[] = {
 		.active_low		= 1,
 		.default_trigger	= "nand-disk",
 	},
+<<<<<<< HEAD
 #if !(defined(CONFIG_LEDS_ATMEL_PWM) || defined(CONFIG_LEDS_ATMEL_PWM_MODULE))
+=======
+#if !IS_ENABLED(CONFIG_LEDS_PWM)
+>>>>>>> v3.18
 	{	/* "right" led, green, userled1, pwm1 */
 		.name			= "d7",
 		.gpio			= AT91_PIN_PD31,
@@ -437,6 +469,7 @@ static struct gpio_led ek_leds[] = {
 /*
  * PWM Leds
  */
+<<<<<<< HEAD
 static struct gpio_led ek_pwm_led[] = {
 #if defined(CONFIG_LEDS_ATMEL_PWM) || defined(CONFIG_LEDS_ATMEL_PWM_MODULE)
 	{	/* "right" led, green, userled1, pwm1 */
@@ -448,15 +481,55 @@ static struct gpio_led ek_pwm_led[] = {
 #endif
 };
 
+=======
+static struct pwm_lookup pwm_lookup[] = {
+	PWM_LOOKUP("at91sam9rl-pwm", 1, "leds_pwm", "d7",
+		   5000, PWM_POLARITY_INVERSED),
+};
+
+#if IS_ENABLED(CONFIG_LEDS_PWM)
+static struct led_pwm pwm_leds[] = {
+	{	/* "right" led, green, userled1, pwm1 */
+		.name = "d7",
+		.max_brightness	= 255,
+	},
+};
+
+static struct led_pwm_platform_data pwm_data = {
+	.num_leds	= ARRAY_SIZE(pwm_leds),
+	.leds		= pwm_leds,
+};
+
+static struct platform_device leds_pwm = {
+	.name	= "leds_pwm",
+	.id	= -1,
+	.dev	= {
+		.platform_data = &pwm_data,
+	},
+};
+#endif
+
+>>>>>>> v3.18
 static struct platform_device *devices[] __initdata = {
 #if defined(CONFIG_SOC_CAMERA_OV2640) || \
 	defined(CONFIG_SOC_CAMERA_OV2640_MODULE)
 	&isi_ov2640,
 #endif
+<<<<<<< HEAD
+=======
+#if IS_ENABLED(CONFIG_LEDS_PWM)
+	&leds_pwm,
+#endif
+>>>>>>> v3.18
 };
 
 static void __init ek_board_init(void)
 {
+<<<<<<< HEAD
+=======
+	at91_register_devices();
+
+>>>>>>> v3.18
 	/* Serial */
 	/* DGBU on ttyS0. (Rx & Tx only) */
 	at91_register_uart(0, 0, 0);
@@ -485,9 +558,13 @@ static void __init ek_board_init(void)
 	at91_add_device_isi(&isi_data, true);
 	/* LCD Controller */
 	at91_add_device_lcdc(&ek_lcdc_data);
+<<<<<<< HEAD
 	/* Touch Screen */
 	at91_add_device_tsadcc(&ek_tsadcc_data);
 	/* ADC */
+=======
+	/* ADC and touchscreen */
+>>>>>>> v3.18
 	at91_add_device_adc(&ek_adc_data);
 	/* Push Buttons */
 	ek_add_device_buttons();
@@ -495,14 +572,25 @@ static void __init ek_board_init(void)
 	at91_add_device_ac97(&ek_ac97_data);
 	/* LEDs */
 	at91_gpio_leds(ek_leds, ARRAY_SIZE(ek_leds));
+<<<<<<< HEAD
 	at91_pwm_leds(ek_pwm_led, ARRAY_SIZE(ek_pwm_led));
+=======
+	pwm_add_table(pwm_lookup, ARRAY_SIZE(pwm_lookup));
+#if IS_ENABLED(CONFIG_LEDS_PWM)
+	at91_add_device_pwm(1 << AT91_PWM1);
+#endif
+>>>>>>> v3.18
 	/* Other platform devices */
 	platform_add_devices(devices, ARRAY_SIZE(devices));
 }
 
 MACHINE_START(AT91SAM9M10G45EK, "Atmel AT91SAM9M10G45-EK")
 	/* Maintainer: Atmel */
+<<<<<<< HEAD
 	.init_time	= at91sam926x_pit_init,
+=======
+	.init_time	= at91_init_time,
+>>>>>>> v3.18
 	.map_io		= at91_map_io,
 	.handle_irq	= at91_aic_handle_irq,
 	.init_early	= ek_init_early,

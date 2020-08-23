@@ -38,10 +38,13 @@ struct trace_bprintk_fmt {
 static inline struct trace_bprintk_fmt *lookup_format(const char *fmt)
 {
 	struct trace_bprintk_fmt *pos;
+<<<<<<< HEAD
 
 	if (!fmt)
 		return ERR_PTR(-EINVAL);
 
+=======
+>>>>>>> v3.18
 	list_for_each_entry(pos, &trace_bprintk_fmt_list, list) {
 		if (!strcmp(pos->fmt, fmt))
 			return pos;
@@ -63,8 +66,12 @@ void hold_module_trace_bprintk_format(const char **start, const char **end)
 	for (iter = start; iter < end; iter++) {
 		struct trace_bprintk_fmt *tb_fmt = lookup_format(*iter);
 		if (tb_fmt) {
+<<<<<<< HEAD
 			if (!IS_ERR(tb_fmt))
 				*iter = tb_fmt->fmt;
+=======
+			*iter = tb_fmt->fmt;
+>>>>>>> v3.18
 			continue;
 		}
 
@@ -249,12 +256,37 @@ static const char **find_next(void *v, loff_t *pos)
 {
 	const char **fmt = v;
 	int start_index;
+<<<<<<< HEAD
+=======
+	int last_index;
+>>>>>>> v3.18
 
 	start_index = __stop___trace_bprintk_fmt - __start___trace_bprintk_fmt;
 
 	if (*pos < start_index)
 		return __start___trace_bprintk_fmt + *pos;
 
+<<<<<<< HEAD
+=======
+	/*
+	 * The __tracepoint_str section is treated the same as the
+	 * __trace_printk_fmt section. The difference is that the
+	 * __trace_printk_fmt section should only be used by trace_printk()
+	 * in a debugging environment, as if anything exists in that section
+	 * the trace_prink() helper buffers are allocated, which would just
+	 * waste space in a production environment.
+	 *
+	 * The __tracepoint_str sections on the other hand are used by
+	 * tracepoints which need to map pointers to their strings to
+	 * the ASCII text for userspace.
+	 */
+	last_index = start_index;
+	start_index = __stop___tracepoint_str - __start___tracepoint_str;
+
+	if (*pos < last_index + start_index)
+		return __start___tracepoint_str + (*pos - last_index);
+
+>>>>>>> v3.18
 	return find_next_mod_format(start_index, v, fmt, pos);
 }
 
@@ -277,10 +309,14 @@ static int t_show(struct seq_file *m, void *v)
 	const char *str = *fmt;
 	int i;
 
+<<<<<<< HEAD
 	if (!*fmt)
 		return 0;
 
 	seq_printf(m, "0x%lx : \"", 0L);
+=======
+	seq_printf(m, "0x%lx : \"", *(unsigned long *)fmt);
+>>>>>>> v3.18
 
 	/*
 	 * Tabs and new lines need to be converted.

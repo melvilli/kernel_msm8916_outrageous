@@ -51,7 +51,10 @@
 #include <linux/slab.h>
 #include <linux/input.h>
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/usb.h>
 #include <linux/usb/input.h>
 #include <linux/hid.h>
@@ -626,9 +629,12 @@ static int dmc_tsc10_init(struct usbtouch_usb *usbtouch)
 		goto err_out;
 	}
 
+<<<<<<< HEAD
 	/* TSC-25 data sheet specifies a delay after the RESET command */
 	msleep(150);
 
+=======
+>>>>>>> v3.18
 	/* set coordinate output rate */
 	buf[0] = buf[1] = 0xFF;
 	ret = usb_control_msg(dev, usb_rcvctrlpipe (dev, 0),

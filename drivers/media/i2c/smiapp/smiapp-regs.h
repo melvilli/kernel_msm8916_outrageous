@@ -28,6 +28,7 @@
 #include <linux/i2c.h>
 #include <linux/types.h>
 
+<<<<<<< HEAD
 /* Use upper 8 bits of the type field for flags */
 #define SMIA_REG_FLAG_FLOAT		(1 << 24)
 
@@ -44,6 +45,25 @@ struct smiapp_sensor;
 
 int smiapp_read(struct smiapp_sensor *sensor, u32 reg, u32 *val);
 int smiapp_read_8only(struct smiapp_sensor *sensor, u32 reg, u32 *val);
+=======
+#define SMIAPP_REG_ADDR(reg)		((u16)reg)
+#define SMIAPP_REG_WIDTH(reg)		((u8)(reg >> 16))
+#define SMIAPP_REG_FLAGS(reg)		((u8)(reg >> 24))
+
+/* Use upper 8 bits of the type field for flags */
+#define SMIAPP_REG_FLAG_FLOAT		(1 << 24)
+
+#define SMIAPP_REG_8BIT			1
+#define SMIAPP_REG_16BIT		2
+#define SMIAPP_REG_32BIT		4
+
+struct smiapp_sensor;
+
+int smiapp_read_no_quirk(struct smiapp_sensor *sensor, u32 reg, u32 *val);
+int smiapp_read(struct smiapp_sensor *sensor, u32 reg, u32 *val);
+int smiapp_read_8only(struct smiapp_sensor *sensor, u32 reg, u32 *val);
+int smiapp_write_no_quirk(struct smiapp_sensor *sensor, u32 reg, u32 val);
+>>>>>>> v3.18
 int smiapp_write(struct smiapp_sensor *sensor, u32 reg, u32 val);
 
 #endif

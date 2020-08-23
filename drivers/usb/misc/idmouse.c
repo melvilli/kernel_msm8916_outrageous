@@ -19,7 +19,10 @@
 #include <linux/kernel.h>
 #include <linux/errno.h>
 #include <linux/delay.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/module.h>
 #include <linux/completion.h>
@@ -347,9 +350,12 @@ static int idmouse_probe(struct usb_interface *interface,
 	if (iface_desc->desc.bInterfaceClass != 0x0A)
 		return -ENODEV;
 
+<<<<<<< HEAD
 	if (iface_desc->desc.bNumEndpoints < 1)
 		return -ENODEV;
 
+=======
+>>>>>>> v3.18
 	/* allocate memory for our device state and initialize it */
 	dev = kzalloc(sizeof(*dev), GFP_KERNEL);
 	if (dev == NULL)
@@ -389,7 +395,11 @@ static int idmouse_probe(struct usb_interface *interface,
 	result = usb_register_dev(interface, &idmouse_class);
 	if (result) {
 		/* something prevented us from registering this device */
+<<<<<<< HEAD
 		dev_err(&interface->dev, "Unble to allocate minor number.\n");
+=======
+		dev_err(&interface->dev, "Unable to allocate minor number.\n");
+>>>>>>> v3.18
 		usb_set_intfdata(interface, NULL);
 		idmouse_delete(dev);
 		return result;

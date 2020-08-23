@@ -25,7 +25,11 @@
  *  o '0' means 'OFF'
  *  o 'X' means 'Don't care'
  *
+<<<<<<< HEAD
  * SMDK6410, SMDK6440, SMDK6450 Base B/D: CFG1-0000, CFG2-1111
+=======
+ * SMDK6410 Base B/D: CFG1-0000, CFG2-1111
+>>>>>>> v3.18
  * SMDKC110, SMDKV210: CFGB11-100100, CFGB12-0000
  */
 
@@ -164,6 +168,7 @@ static int snd_smdk_probe(struct platform_device *pdev)
 		xtal_freq = mclk_freq = SMDK_WM8580_EXT_VOICE;
 
 	smdk_pcm.dev = &pdev->dev;
+<<<<<<< HEAD
 	ret = snd_soc_register_card(&smdk_pcm);
 	if (ret) {
 		dev_err(&pdev->dev, "snd_soc_register_card failed %d\n", ret);
@@ -178,6 +183,13 @@ static int snd_smdk_remove(struct platform_device *pdev)
 	snd_soc_unregister_card(&smdk_pcm);
 	platform_set_drvdata(pdev, NULL);
 	return 0;
+=======
+	ret = devm_snd_soc_register_card(&pdev->dev, &smdk_pcm);
+	if (ret)
+		dev_err(&pdev->dev, "snd_soc_register_card failed %d\n", ret);
+
+	return ret;
+>>>>>>> v3.18
 }
 
 static struct platform_driver snd_smdk_driver = {
@@ -186,7 +198,10 @@ static struct platform_driver snd_smdk_driver = {
 		.name = "samsung-smdk-pcm",
 	},
 	.probe = snd_smdk_probe,
+<<<<<<< HEAD
 	.remove = snd_smdk_remove,
+=======
+>>>>>>> v3.18
 };
 
 module_platform_driver(snd_smdk_driver);

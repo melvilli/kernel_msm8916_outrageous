@@ -17,6 +17,7 @@
  */
 #include "xfs.h"
 #include "xfs_fs.h"
+<<<<<<< HEAD
 #include "xfs_log.h"
 #include "xfs_trans.h"
 #include "xfs_sb.h"
@@ -44,6 +45,30 @@
 #include "xfs_icache.h"
 #include "xfs_dquot_item.h"
 #include "xfs_dquot.h"
+=======
+#include "xfs_shared.h"
+#include "xfs_format.h"
+#include "xfs_log_format.h"
+#include "xfs_trans_resv.h"
+#include "xfs_sb.h"
+#include "xfs_ag.h"
+#include "xfs_mount.h"
+#include "xfs_inode.h"
+#include "xfs_btree.h"
+#include "xfs_bmap_btree.h"
+#include "xfs_bmap.h"
+#include "xfs_bmap_util.h"
+#include "xfs_error.h"
+#include "xfs_trans.h"
+#include "xfs_trans_space.h"
+#include "xfs_iomap.h"
+#include "xfs_trace.h"
+#include "xfs_icache.h"
+#include "xfs_quota.h"
+#include "xfs_dquot_item.h"
+#include "xfs_dquot.h"
+#include "xfs_dinode.h"
+>>>>>>> v3.18
 
 
 #define XFS_WRITEIO_ALIGN(mp,off)	(((off) >> mp->m_writeio_log) \
@@ -109,13 +134,21 @@ xfs_alert_fsblock_zero(
 	xfs_alert_tag(ip->i_mount, XFS_PTAG_FSBLOCK_ZERO,
 			"Access to block zero in inode %llu "
 			"start_block: %llx start_off: %llx "
+<<<<<<< HEAD
 			"blkcnt: %llx extent-state: %x\n",
+=======
+			"blkcnt: %llx extent-state: %x",
+>>>>>>> v3.18
 		(unsigned long long)ip->i_ino,
 		(unsigned long long)imap->br_startblock,
 		(unsigned long long)imap->br_startoff,
 		(unsigned long long)imap->br_blockcount,
 		imap->br_state);
+<<<<<<< HEAD
 	return EFSCORRUPTED;
+=======
+	return -EFSCORRUPTED;
+>>>>>>> v3.18
 }
 
 int
@@ -133,7 +166,10 @@ xfs_iomap_write_direct(
 	xfs_fsblock_t	firstfsb;
 	xfs_extlen_t	extsz, temp;
 	int		nimaps;
+<<<<<<< HEAD
 	int		bmapi_flag;
+=======
+>>>>>>> v3.18
 	int		quota_flag;
 	int		rt;
 	xfs_trans_t	*tp;
@@ -144,7 +180,11 @@ xfs_iomap_write_direct(
 
 	error = xfs_qm_dqattach(ip, 0);
 	if (error)
+<<<<<<< HEAD
 		return XFS_ERROR(error);
+=======
+		return error;
+>>>>>>> v3.18
 
 	rt = XFS_IS_REALTIME_INODE(ip);
 	extsz = xfs_get_extsz_hint(ip);
@@ -154,7 +194,11 @@ xfs_iomap_write_direct(
 	if ((offset + count) > XFS_ISIZE(ip)) {
 		error = xfs_iomap_eof_align_last_fsb(mp, ip, extsz, &last_fsb);
 		if (error)
+<<<<<<< HEAD
 			return XFS_ERROR(error);
+=======
+			return error;
+>>>>>>> v3.18
 	} else {
 		if (nmaps && (imap->br_startblock == HOLESTARTBLOCK))
 			last_fsb = MIN(last_fsb, (xfs_fileoff_t)
@@ -187,16 +231,25 @@ xfs_iomap_write_direct(
 	 * Allocate and setup the transaction
 	 */
 	tp = xfs_trans_alloc(mp, XFS_TRANS_DIOSTRAT);
+<<<<<<< HEAD
 	error = xfs_trans_reserve(tp, resblks,
 			XFS_WRITE_LOG_RES(mp), resrtextents,
 			XFS_TRANS_PERM_LOG_RES,
 			XFS_WRITE_LOG_COUNT);
+=======
+	error = xfs_trans_reserve(tp, &M_RES(mp)->tr_write,
+				  resblks, resrtextents);
+>>>>>>> v3.18
 	/*
 	 * Check for running out of space, note: need lock to return
 	 */
 	if (error) {
 		xfs_trans_cancel(tp, 0);
+<<<<<<< HEAD
 		return XFS_ERROR(error);
+=======
+		return error;
+>>>>>>> v3.18
 	}
 
 	xfs_ilock(ip, XFS_ILOCK_EXCL);
@@ -207,18 +260,27 @@ xfs_iomap_write_direct(
 
 	xfs_trans_ijoin(tp, ip, 0);
 
+<<<<<<< HEAD
 	bmapi_flag = 0;
 	if (offset < XFS_ISIZE(ip) || extsz)
 		bmapi_flag |= XFS_BMAPI_PREALLOC;
 
+=======
+>>>>>>> v3.18
 	/*
 	 * From this point onwards we overwrite the imap pointer that the
 	 * caller gave to us.
 	 */
 	xfs_bmap_init(&free_list, &firstfsb);
 	nimaps = 1;
+<<<<<<< HEAD
 	error = xfs_bmapi_write(tp, ip, offset_fsb, count_fsb, bmapi_flag,
 				&firstfsb, 0, imap, &nimaps, &free_list);
+=======
+	error = xfs_bmapi_write(tp, ip, offset_fsb, count_fsb,
+				XFS_BMAPI_PREALLOC, &firstfsb, 0,
+				imap, &nimaps, &free_list);
+>>>>>>> v3.18
 	if (error)
 		goto out_bmap_cancel;
 
@@ -236,7 +298,11 @@ xfs_iomap_write_direct(
 	 * Copy any maps to caller's array and return any error.
 	 */
 	if (nimaps == 0) {
+<<<<<<< HEAD
 		error = XFS_ERROR(ENOSPC);
+=======
+		error = -ENOSPC;
+>>>>>>> v3.18
 		goto out_unlock;
 	}
 
@@ -284,6 +350,18 @@ xfs_iomap_eof_want_preallocate(
 		return 0;
 
 	/*
+<<<<<<< HEAD
+=======
+	 * If the file is smaller than the minimum prealloc and we are using
+	 * dynamic preallocation, don't do any preallocation at all as it is
+	 * likely this is the only write to the file that is going to be done.
+	 */
+	if (!(mp->m_flags & XFS_MOUNT_DFLT_IOSIZE) &&
+	    XFS_ISIZE(ip) < XFS_FSB_TO_B(mp, mp->m_writeio_blocks))
+		return 0;
+
+	/*
+>>>>>>> v3.18
 	 * If there are any real blocks past eof, then don't
 	 * do any speculative allocation.
 	 */
@@ -345,6 +423,13 @@ xfs_iomap_eof_prealloc_initial_size(
 	if (mp->m_flags & XFS_MOUNT_DFLT_IOSIZE)
 		return 0;
 
+<<<<<<< HEAD
+=======
+	/* If the file is small, then use the minimum prealloc */
+	if (XFS_ISIZE(ip) < XFS_FSB_TO_B(mp, mp->m_dalign))
+		return 0;
+
+>>>>>>> v3.18
 	/*
 	 * As we write multiple pages, the offset will always align to the
 	 * start of a page and hence point to a hole at EOF. i.e. if the size is
@@ -395,15 +480,27 @@ xfs_quota_calc_throttle(
 	struct xfs_inode *ip,
 	int type,
 	xfs_fsblock_t *qblocks,
+<<<<<<< HEAD
 	int *qshift)
+=======
+	int *qshift,
+	int64_t	*qfreesp)
+>>>>>>> v3.18
 {
 	int64_t freesp;
 	int shift = 0;
 	struct xfs_dquot *dq = xfs_inode_dquot(ip, type);
 
+<<<<<<< HEAD
 	/* over hi wmark, squash the prealloc completely */
 	if (dq->q_res_bcount >= dq->q_prealloc_hi_wmark) {
 		*qblocks = 0;
+=======
+	/* no dq, or over hi wmark, squash the prealloc completely */
+	if (!dq || dq->q_res_bcount >= dq->q_prealloc_hi_wmark) {
+		*qblocks = 0;
+		*qfreesp = 0;
+>>>>>>> v3.18
 		return;
 	}
 
@@ -416,6 +513,12 @@ xfs_quota_calc_throttle(
 			shift += 2;
 	}
 
+<<<<<<< HEAD
+=======
+	if (freesp < *qfreesp)
+		*qfreesp = freesp;
+
+>>>>>>> v3.18
 	/* only overwrite the throttle values if we are more aggressive */
 	if ((freesp >> shift) < (*qblocks >> *qshift)) {
 		*qblocks = freesp;
@@ -474,6 +577,7 @@ xfs_iomap_prealloc_size(
 	}
 
 	/*
+<<<<<<< HEAD
 	 * Check each quota to cap the prealloc size and provide a shift
 	 * value to throttle with.
 	 */
@@ -483,6 +587,20 @@ xfs_iomap_prealloc_size(
 		xfs_quota_calc_throttle(ip, XFS_DQ_GROUP, &qblocks, &qshift);
 	if (xfs_quota_need_throttle(ip, XFS_DQ_PROJ, alloc_blocks))
 		xfs_quota_calc_throttle(ip, XFS_DQ_PROJ, &qblocks, &qshift);
+=======
+	 * Check each quota to cap the prealloc size, provide a shift value to
+	 * throttle with and adjust amount of available space.
+	 */
+	if (xfs_quota_need_throttle(ip, XFS_DQ_USER, alloc_blocks))
+		xfs_quota_calc_throttle(ip, XFS_DQ_USER, &qblocks, &qshift,
+					&freesp);
+	if (xfs_quota_need_throttle(ip, XFS_DQ_GROUP, alloc_blocks))
+		xfs_quota_calc_throttle(ip, XFS_DQ_GROUP, &qblocks, &qshift,
+					&freesp);
+	if (xfs_quota_need_throttle(ip, XFS_DQ_PROJ, alloc_blocks))
+		xfs_quota_calc_throttle(ip, XFS_DQ_PROJ, &qblocks, &qshift,
+					&freesp);
+>>>>>>> v3.18
 
 	/*
 	 * The final prealloc size is set to the minimum of free space available
@@ -550,7 +668,11 @@ xfs_iomap_write_delay(
 	 */
 	error = xfs_qm_dqattach_locked(ip, 0);
 	if (error)
+<<<<<<< HEAD
 		return XFS_ERROR(error);
+=======
+		return error;
+>>>>>>> v3.18
 
 	extsz = xfs_get_extsz_hint(ip);
 	offset_fsb = XFS_B_TO_FSBT(mp, offset);
@@ -594,11 +716,19 @@ retry:
 				imap, &nimaps, XFS_BMAPI_ENTIRE);
 	switch (error) {
 	case 0:
+<<<<<<< HEAD
 	case ENOSPC:
 	case EDQUOT:
 		break;
 	default:
 		return XFS_ERROR(error);
+=======
+	case -ENOSPC:
+	case -EDQUOT:
+		break;
+	default:
+		return error;
+>>>>>>> v3.18
 	}
 
 	/*
@@ -612,7 +742,11 @@ retry:
 			error = 0;
 			goto retry;
 		}
+<<<<<<< HEAD
 		return XFS_ERROR(error ? error : ENOSPC);
+=======
+		return error ? error : -ENOSPC;
+>>>>>>> v3.18
 	}
 
 	if (!(imap[0].br_startblock || XFS_IS_REALTIME_INODE(ip)))
@@ -643,7 +777,10 @@ int
 xfs_iomap_write_allocate(
 	xfs_inode_t	*ip,
 	xfs_off_t	offset,
+<<<<<<< HEAD
 	size_t		count,
+=======
+>>>>>>> v3.18
 	xfs_bmbt_irec_t *imap)
 {
 	xfs_mount_t	*mp = ip->i_mount;
@@ -662,7 +799,11 @@ xfs_iomap_write_allocate(
 	 */
 	error = xfs_qm_dqattach(ip, 0);
 	if (error)
+<<<<<<< HEAD
 		return XFS_ERROR(error);
+=======
+		return error;
+>>>>>>> v3.18
 
 	offset_fsb = XFS_B_TO_FSBT(mp, offset);
 	count_fsb = imap->br_blockcount;
@@ -685,6 +826,7 @@ xfs_iomap_write_allocate(
 			tp = xfs_trans_alloc(mp, XFS_TRANS_STRAT_WRITE);
 			tp->t_flags |= XFS_TRANS_RESERVE;
 			nres = XFS_EXTENTADD_SPACE_RES(mp, XFS_DATA_FORK);
+<<<<<<< HEAD
 			error = xfs_trans_reserve(tp, nres,
 					XFS_WRITE_LOG_RES(mp),
 					0, XFS_TRANS_PERM_LOG_RES,
@@ -692,6 +834,13 @@ xfs_iomap_write_allocate(
 			if (error) {
 				xfs_trans_cancel(tp, 0);
 				return XFS_ERROR(error);
+=======
+			error = xfs_trans_reserve(tp, &M_RES(mp)->tr_write,
+						  nres, 0);
+			if (error) {
+				xfs_trans_cancel(tp, 0);
+				return error;
+>>>>>>> v3.18
 			}
 			xfs_ilock(ip, XFS_ILOCK_EXCL);
 			xfs_trans_ijoin(tp, ip, 0);
@@ -731,7 +880,11 @@ xfs_iomap_write_allocate(
 			 */
 			nimaps = 1;
 			end_fsb = XFS_B_TO_FSB(mp, XFS_ISIZE(ip));
+<<<<<<< HEAD
 			error = xfs_bmap_last_offset(NULL, ip, &last_block,
+=======
+			error = xfs_bmap_last_offset(ip, &last_block,
+>>>>>>> v3.18
 							XFS_DATA_FORK);
 			if (error)
 				goto trans_cancel;
@@ -740,7 +893,11 @@ xfs_iomap_write_allocate(
 			if ((map_start_fsb + count_fsb) > last_block) {
 				count_fsb = last_block - map_start_fsb;
 				if (count_fsb == 0) {
+<<<<<<< HEAD
 					error = EAGAIN;
+=======
+					error = -EAGAIN;
+>>>>>>> v3.18
 					goto trans_cancel;
 				}
 			}
@@ -750,8 +907,12 @@ xfs_iomap_write_allocate(
 			 * pointer that the caller gave to us.
 			 */
 			error = xfs_bmapi_write(tp, ip, map_start_fsb,
+<<<<<<< HEAD
 						count_fsb,
 						XFS_BMAPI_STACK_SWITCH,
+=======
+						count_fsb, 0,
+>>>>>>> v3.18
 						&first_block, 1,
 						imap, &nimaps, &free_list);
 			if (error)
@@ -795,7 +956,11 @@ trans_cancel:
 	xfs_trans_cancel(tp, XFS_TRANS_RELEASE_LOG_RES | XFS_TRANS_ABORT);
 error0:
 	xfs_iunlock(ip, XFS_ILOCK_EXCL);
+<<<<<<< HEAD
 	return XFS_ERROR(error);
+=======
+	return error;
+>>>>>>> v3.18
 }
 
 int
@@ -851,6 +1016,7 @@ xfs_iomap_write_unwritten(
 		sb_start_intwrite(mp->m_super);
 		tp = _xfs_trans_alloc(mp, XFS_TRANS_STRAT_WRITE, KM_NOFS);
 		tp->t_flags |= XFS_TRANS_RESERVE | XFS_TRANS_FREEZE_PROT;
+<<<<<<< HEAD
 		error = xfs_trans_reserve(tp, resblks,
 				XFS_WRITE_LOG_RES(mp), 0,
 				XFS_TRANS_PERM_LOG_RES,
@@ -858,6 +1024,13 @@ xfs_iomap_write_unwritten(
 		if (error) {
 			xfs_trans_cancel(tp, 0);
 			return XFS_ERROR(error);
+=======
+		error = xfs_trans_reserve(tp, &M_RES(mp)->tr_write,
+					  resblks, 0);
+		if (error) {
+			xfs_trans_cancel(tp, 0);
+			return error;
+>>>>>>> v3.18
 		}
 
 		xfs_ilock(ip, XFS_ILOCK_EXCL);
@@ -896,7 +1069,11 @@ xfs_iomap_write_unwritten(
 		error = xfs_trans_commit(tp, XFS_TRANS_RELEASE_LOG_RES);
 		xfs_iunlock(ip, XFS_ILOCK_EXCL);
 		if (error)
+<<<<<<< HEAD
 			return XFS_ERROR(error);
+=======
+			return error;
+>>>>>>> v3.18
 
 		if (!(imap.br_startblock || XFS_IS_REALTIME_INODE(ip)))
 			return xfs_alert_fsblock_zero(ip, &imap);
@@ -919,5 +1096,9 @@ error_on_bmapi_transaction:
 	xfs_bmap_cancel(&free_list);
 	xfs_trans_cancel(tp, (XFS_TRANS_RELEASE_LOG_RES | XFS_TRANS_ABORT));
 	xfs_iunlock(ip, XFS_ILOCK_EXCL);
+<<<<<<< HEAD
 	return XFS_ERROR(error);
+=======
+	return error;
+>>>>>>> v3.18
 }

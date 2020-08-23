@@ -21,7 +21,11 @@
 void zfcp_unit_scsi_scan(struct zfcp_unit *unit)
 {
 	struct fc_rport *rport = unit->port->rport;
+<<<<<<< HEAD
 	unsigned int lun;
+=======
+	u64 lun;
+>>>>>>> v3.18
 
 	lun = scsilun_to_int((struct scsi_lun *) &unit->fcp_lun);
 
@@ -145,6 +149,10 @@ int zfcp_unit_add(struct zfcp_port *port, u64 fcp_lun)
 	unit->fcp_lun = fcp_lun;
 	unit->dev.parent = &port->dev;
 	unit->dev.release = zfcp_unit_release;
+<<<<<<< HEAD
+=======
+	unit->dev.groups = zfcp_unit_attr_groups;
+>>>>>>> v3.18
 	INIT_WORK(&unit->scsi_work, zfcp_unit_scsi_scan_work);
 
 	if (dev_set_name(&unit->dev, "0x%016llx",
@@ -160,12 +168,15 @@ int zfcp_unit_add(struct zfcp_port *port, u64 fcp_lun)
 		goto out;
 	}
 
+<<<<<<< HEAD
 	if (sysfs_create_group(&unit->dev.kobj, &zfcp_sysfs_unit_attrs)) {
 		device_unregister(&unit->dev);
 		retval = -EINVAL;
 		goto out;
 	}
 
+=======
+>>>>>>> v3.18
 	atomic_inc(&port->units); /* under zfcp_sysfs_port_units_mutex ! */
 
 	write_lock_irq(&port->unit_list_lock);
@@ -193,7 +204,11 @@ struct scsi_device *zfcp_unit_sdev(struct zfcp_unit *unit)
 {
 	struct Scsi_Host *shost;
 	struct zfcp_port *port;
+<<<<<<< HEAD
 	unsigned int lun;
+=======
+	u64 lun;
+>>>>>>> v3.18
 
 	lun = scsilun_to_int((struct scsi_lun *) &unit->fcp_lun);
 	port = unit->port;
@@ -254,7 +269,11 @@ int zfcp_unit_remove(struct zfcp_port *port, u64 fcp_lun)
 
 	put_device(&unit->dev);
 
+<<<<<<< HEAD
 	zfcp_device_unregister(&unit->dev, &zfcp_sysfs_unit_attrs);
+=======
+	device_unregister(&unit->dev);
+>>>>>>> v3.18
 
 	return 0;
 }

@@ -24,7 +24,11 @@ static inline int gup_pte_range(pmd_t *pmdp, pmd_t pmd, unsigned long addr,
 	pte_t *ptep, pte;
 	struct page *page;
 
+<<<<<<< HEAD
 	mask = (write ? _PAGE_RO : 0) | _PAGE_INVALID | _PAGE_SPECIAL;
+=======
+	mask = (write ? _PAGE_PROTECT : 0) | _PAGE_INVALID | _PAGE_SPECIAL;
+>>>>>>> v3.18
 
 	ptep = ((pte_t *) pmd_deref(pmd)) + pte_index(addr);
 	do {
@@ -55,8 +59,13 @@ static inline int gup_huge_pmd(pmd_t *pmdp, pmd_t pmd, unsigned long addr,
 	struct page *head, *page, *tail;
 	int refs;
 
+<<<<<<< HEAD
 	result = write ? 0 : _SEGMENT_ENTRY_RO;
 	mask = result | _SEGMENT_ENTRY_INV;
+=======
+	result = write ? 0 : _SEGMENT_ENTRY_PROTECT;
+	mask = result | _SEGMENT_ENTRY_INVALID;
+>>>>>>> v3.18
 	if ((pmd_val(pmd) & mask) != result)
 		return 0;
 	VM_BUG_ON(!pfn_valid(pmd_val(pmd) >> PAGE_SHIFT));
@@ -180,9 +189,21 @@ int __get_user_pages_fast(unsigned long start, int nr_pages, int write,
 	addr = start;
 	len = (unsigned long) nr_pages << PAGE_SHIFT;
 	end = start + len;
+<<<<<<< HEAD
 	if ((end < start) || (end > TASK_SIZE))
 		return 0;
 
+=======
+	if ((end <= start) || (end > TASK_SIZE))
+		return 0;
+	/*
+	 * local_irq_save() doesn't prevent pagetable teardown, but does
+	 * prevent the pagetables from being freed on s390.
+	 *
+	 * So long as we atomically load page table pointers versus teardown,
+	 * we can follow the address down to the the page and take a ref on it.
+	 */
+>>>>>>> v3.18
 	local_irq_save(flags);
 	pgdp = pgd_offset(mm, addr);
 	do {
@@ -219,6 +240,7 @@ int get_user_pages_fast(unsigned long start, int nr_pages, int write,
 			struct page **pages)
 {
 	struct mm_struct *mm = current->mm;
+<<<<<<< HEAD
 	unsigned long addr, len, end;
 	unsigned long next;
 	pgd_t *pgdp, pgd;
@@ -278,4 +300,24 @@ slow_irqon:
 
 		return ret;
 	}
+=======
+	int nr, ret;
+
+	start &= PAGE_MASK;
+	nr = __get_user_pages_fast(start, nr_pages, write, pages);
+	if (nr == nr_pages)
+		return nr;
+
+	/* Try to get the remaining pages with get_user_pages */
+	start += nr << PAGE_SHIFT;
+	pages += nr;
+	down_read(&mm->mmap_sem);
+	ret = get_user_pages(current, mm, start,
+			     nr_pages - nr, write, 0, pages, NULL);
+	up_read(&mm->mmap_sem);
+	/* Have to be a bit careful with return values */
+	if (nr > 0)
+		ret = (ret < 0) ? nr : ret + nr;
+	return ret;
+>>>>>>> v3.18
 }

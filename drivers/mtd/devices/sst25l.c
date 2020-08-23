@@ -15,7 +15,10 @@
  *
  */
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/device.h>
 #include <linux/mutex.h>
@@ -364,15 +367,25 @@ static int sst25l_probe(struct spi_device *spi)
 	if (!flash_info)
 		return -ENODEV;
 
+<<<<<<< HEAD
 	flash = kzalloc(sizeof(struct sst25l_flash), GFP_KERNEL);
+=======
+	flash = devm_kzalloc(&spi->dev, sizeof(*flash), GFP_KERNEL);
+>>>>>>> v3.18
 	if (!flash)
 		return -ENOMEM;
 
 	flash->spi = spi;
 	mutex_init(&flash->lock);
+<<<<<<< HEAD
 	dev_set_drvdata(&spi->dev, flash);
 
 	data = spi->dev.platform_data;
+=======
+	spi_set_drvdata(spi, flash);
+
+	data = dev_get_platdata(&spi->dev);
+>>>>>>> v3.18
 	if (data && data->name)
 		flash->mtd.name = data->name;
 	else
@@ -402,17 +415,23 @@ static int sst25l_probe(struct spi_device *spi)
 	ret = mtd_device_parse_register(&flash->mtd, NULL, NULL,
 					data ? data->parts : NULL,
 					data ? data->nr_parts : 0);
+<<<<<<< HEAD
 	if (ret) {
 		kfree(flash);
 		dev_set_drvdata(&spi->dev, NULL);
 		return -ENODEV;
 	}
+=======
+	if (ret)
+		return -ENODEV;
+>>>>>>> v3.18
 
 	return 0;
 }
 
 static int sst25l_remove(struct spi_device *spi)
 {
+<<<<<<< HEAD
 	struct sst25l_flash *flash = dev_get_drvdata(&spi->dev);
 	int ret;
 
@@ -420,6 +439,11 @@ static int sst25l_remove(struct spi_device *spi)
 	if (ret == 0)
 		kfree(flash);
 	return ret;
+=======
+	struct sst25l_flash *flash = spi_get_drvdata(spi);
+
+	return mtd_device_unregister(&flash->mtd);
+>>>>>>> v3.18
 }
 
 static struct spi_driver sst25l_driver = {

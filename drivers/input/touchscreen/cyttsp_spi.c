@@ -8,6 +8,10 @@
  *
  * Copyright (C) 2009, 2010, 2011 Cypress Semiconductor, Inc.
  * Copyright (C) 2012 Javier Martinez Canillas <javier@dowhile0.org>
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2013 Cypress Semiconductor
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,11 +23,15 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  * Contact Cypress Semiconductor at www.cypress.com <kev@cypress.com>
+=======
+ * Contact Cypress Semiconductor at www.cypress.com <ttdrivers@cypress.com>
+>>>>>>> v3.18
  *
  */
 
@@ -43,6 +51,7 @@
 #define CY_SPI_DATA_BUF_SIZE	(CY_SPI_CMD_BYTES + CY_SPI_DATA_SIZE)
 #define CY_SPI_BITS_PER_WORD	8
 
+<<<<<<< HEAD
 static int cyttsp_spi_xfer(struct cyttsp *ts,
 			   u8 op, u8 reg, u8 *buf, int length)
 {
@@ -51,11 +60,25 @@ static int cyttsp_spi_xfer(struct cyttsp *ts,
 	struct spi_transfer xfer[2];
 	u8 *wr_buf = &ts->xfer_buf[0];
 	u8 *rd_buf = &ts->xfer_buf[CY_SPI_DATA_BUF_SIZE];
+=======
+static int cyttsp_spi_xfer(struct device *dev, u8 *xfer_buf,
+			   u8 op, u16 reg, u8 *buf, int length)
+{
+	struct spi_device *spi = to_spi_device(dev);
+	struct spi_message msg;
+	struct spi_transfer xfer[2];
+	u8 *wr_buf = &xfer_buf[0];
+	u8 *rd_buf = &xfer_buf[CY_SPI_DATA_BUF_SIZE];
+>>>>>>> v3.18
 	int retval;
 	int i;
 
 	if (length > CY_SPI_DATA_SIZE) {
+<<<<<<< HEAD
 		dev_err(ts->dev, "%s: length %d is too big.\n",
+=======
+		dev_err(dev, "%s: length %d is too big.\n",
+>>>>>>> v3.18
 			__func__, length);
 		return -EINVAL;
 	}
@@ -95,13 +118,21 @@ static int cyttsp_spi_xfer(struct cyttsp *ts,
 		break;
 
 	default:
+<<<<<<< HEAD
 		dev_err(ts->dev, "%s: bad operation code=%d\n", __func__, op);
+=======
+		dev_err(dev, "%s: bad operation code=%d\n", __func__, op);
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
 	retval = spi_sync(spi, &msg);
 	if (retval < 0) {
+<<<<<<< HEAD
 		dev_dbg(ts->dev, "%s: spi_sync() error %d, len=%d, op=%d\n",
+=======
+		dev_dbg(dev, "%s: spi_sync() error %d, len=%d, op=%d\n",
+>>>>>>> v3.18
 			__func__, retval, xfer[1].len, op);
 
 		/*
@@ -113,6 +144,7 @@ static int cyttsp_spi_xfer(struct cyttsp *ts,
 
 	if (rd_buf[CY_SPI_SYNC_BYTE] != CY_SPI_SYNC_ACK1 ||
 	    rd_buf[CY_SPI_SYNC_BYTE + 1] != CY_SPI_SYNC_ACK2) {
+<<<<<<< HEAD
 
 		dev_dbg(ts->dev, "%s: operation %d failed\n", __func__, op);
 
@@ -121,6 +153,15 @@ static int cyttsp_spi_xfer(struct cyttsp *ts,
 				__func__, i, rd_buf[i]);
 		for (i = 0; i < length; i++)
 			dev_dbg(ts->dev, "%s: test buf[%d]:0x%02x\n",
+=======
+		dev_dbg(dev, "%s: operation %d failed\n", __func__, op);
+
+		for (i = 0; i < CY_SPI_CMD_BYTES; i++)
+			dev_dbg(dev, "%s: test rd_buf[%d]:0x%02x\n",
+				__func__, i, rd_buf[i]);
+		for (i = 0; i < length; i++)
+			dev_dbg(dev, "%s: test buf[%d]:0x%02x\n",
+>>>>>>> v3.18
 				__func__, i, buf[i]);
 
 		return -EIO;
@@ -129,6 +170,7 @@ static int cyttsp_spi_xfer(struct cyttsp *ts,
 	return 0;
 }
 
+<<<<<<< HEAD
 static int cyttsp_spi_read_block_data(struct cyttsp *ts,
 				      u8 addr, u8 length, void *data)
 {
@@ -139,6 +181,20 @@ static int cyttsp_spi_write_block_data(struct cyttsp *ts,
 				       u8 addr, u8 length, const void *data)
 {
 	return cyttsp_spi_xfer(ts, CY_SPI_WR_OP, addr, (void *)data, length);
+=======
+static int cyttsp_spi_read_block_data(struct device *dev, u8 *xfer_buf,
+				      u16 addr, u8 length, void *data)
+{
+	return cyttsp_spi_xfer(dev, xfer_buf, CY_SPI_RD_OP, addr, data,
+			length);
+}
+
+static int cyttsp_spi_write_block_data(struct device *dev, u8 *xfer_buf,
+				       u16 addr, u8 length, const void *data)
+{
+	return cyttsp_spi_xfer(dev, xfer_buf, CY_SPI_WR_OP, addr, (void *)data,
+			length);
+>>>>>>> v3.18
 }
 
 static const struct cyttsp_bus_ops cyttsp_spi_bus_ops = {

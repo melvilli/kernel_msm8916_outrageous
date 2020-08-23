@@ -23,7 +23,10 @@ config BFIN_MAC
 	tristate "Blackfin on-chip MAC support"
 	depends on (BF516 || BF518 || BF526 || BF527 || BF536 || BF537)
 	select CRC32
+<<<<<<< HEAD
 	select NET_CORE
+=======
+>>>>>>> v3.18
 	select MII
 	select PHYLIB
 	select BFIN_MAC_USE_L1 if DMA_UNCACHED_NONE
@@ -53,8 +56,12 @@ config BFIN_TX_DESC_NUM
 config BFIN_RX_DESC_NUM
 	int "Number of receive buffer packets"
 	depends on BFIN_MAC
+<<<<<<< HEAD
 	range 20 100 if BFIN_MAC_USE_L1
 	range 20 800
+=======
+	range 20 64
+>>>>>>> v3.18
 	default "20"
 	---help---
 	  Set the number of buffer packets used in driver.

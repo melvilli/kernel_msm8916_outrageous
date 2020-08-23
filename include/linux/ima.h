@@ -15,10 +15,18 @@ struct linux_binprm;
 
 #ifdef CONFIG_IMA
 extern int ima_bprm_check(struct linux_binprm *bprm);
+<<<<<<< HEAD
 extern int ima_file_check(struct file *file, int mask);
 extern void ima_file_free(struct file *file);
 extern int ima_file_mmap(struct file *file, unsigned long prot);
 extern int ima_module_check(struct file *file);
+=======
+extern int ima_file_check(struct file *file, int mask, int opened);
+extern void ima_file_free(struct file *file);
+extern int ima_file_mmap(struct file *file, unsigned long prot);
+extern int ima_module_check(struct file *file);
+extern int ima_fw_from_file(struct file *file, char *buf, size_t size);
+>>>>>>> v3.18
 
 #else
 static inline int ima_bprm_check(struct linux_binprm *bprm)
@@ -26,7 +34,11 @@ static inline int ima_bprm_check(struct linux_binprm *bprm)
 	return 0;
 }
 
+<<<<<<< HEAD
 static inline int ima_file_check(struct file *file, int mask)
+=======
+static inline int ima_file_check(struct file *file, int mask, int opened)
+>>>>>>> v3.18
 {
 	return 0;
 }
@@ -46,6 +58,14 @@ static inline int ima_module_check(struct file *file)
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+static inline int ima_fw_from_file(struct file *file, char *buf, size_t size)
+{
+	return 0;
+}
+
+>>>>>>> v3.18
 #endif /* CONFIG_IMA */
 
 #ifdef CONFIG_IMA_APPRAISE

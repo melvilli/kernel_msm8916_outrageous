@@ -25,6 +25,10 @@
 #include <linux/llc.h>
 #include <linux/rtnetlink.h>
 #include <linux/skbuff.h>
+<<<<<<< HEAD
+=======
+#include <linux/openvswitch.h>
+>>>>>>> v3.18
 
 #include <net/llc.h>
 
@@ -49,7 +53,13 @@ static void netdev_port_receive(struct vport *vport, struct sk_buff *skb)
 		return;
 
 	skb_push(skb, ETH_HLEN);
+<<<<<<< HEAD
 	ovs_vport_receive(vport, skb);
+=======
+	ovs_skb_postpush_rcsum(skb, skb->data, ETH_HLEN);
+
+	ovs_vport_receive(vport, skb, NULL);
+>>>>>>> v3.18
 	return;
 
 error:
@@ -72,6 +82,18 @@ static rx_handler_result_t netdev_frame_hook(struct sk_buff **pskb)
 	return RX_HANDLER_CONSUMED;
 }
 
+<<<<<<< HEAD
+=======
+static struct net_device *get_dpdev(struct datapath *dp)
+{
+	struct vport *local;
+
+	local = ovs_vport_ovsl(dp, OVSP_LOCAL);
+	BUG_ON(!local);
+	return netdev_vport_priv(local)->dev;
+}
+
+>>>>>>> v3.18
 static struct vport *netdev_create(const struct vport_parms *parms)
 {
 	struct vport *vport;
@@ -101,10 +123,22 @@ static struct vport *netdev_create(const struct vport_parms *parms)
 	}
 
 	rtnl_lock();
+<<<<<<< HEAD
 	err = netdev_rx_handler_register(netdev_vport->dev, netdev_frame_hook,
 					 vport);
 	if (err)
 		goto error_unlock;
+=======
+	err = netdev_master_upper_dev_link(netdev_vport->dev,
+					   get_dpdev(vport->dp));
+	if (err)
+		goto error_unlock;
+
+	err = netdev_rx_handler_register(netdev_vport->dev, netdev_frame_hook,
+					 vport);
+	if (err)
+		goto error_master_upper_dev_unlink;
+>>>>>>> v3.18
 
 	dev_set_promiscuity(netdev_vport->dev, 1);
 	netdev_vport->dev->priv_flags |= IFF_OVS_DATAPATH;
@@ -112,6 +146,11 @@ static struct vport *netdev_create(const struct vport_parms *parms)
 
 	return vport;
 
+<<<<<<< HEAD
+=======
+error_master_upper_dev_unlink:
+	netdev_upper_dev_unlink(netdev_vport->dev, get_dpdev(vport->dp));
+>>>>>>> v3.18
 error_unlock:
 	rtnl_unlock();
 error_put:
@@ -131,6 +170,7 @@ static void free_port_rcu(struct rcu_head *rcu)
 	ovs_vport_free(vport_from_priv(netdev_vport));
 }
 
+<<<<<<< HEAD
 static void netdev_destroy(struct vport *vport)
 {
 	struct netdev_vport *netdev_vport = netdev_vport_priv(vport);
@@ -139,6 +179,27 @@ static void netdev_destroy(struct vport *vport)
 	netdev_vport->dev->priv_flags &= ~IFF_OVS_DATAPATH;
 	netdev_rx_handler_unregister(netdev_vport->dev);
 	dev_set_promiscuity(netdev_vport->dev, -1);
+=======
+void ovs_netdev_detach_dev(struct vport *vport)
+{
+	struct netdev_vport *netdev_vport = netdev_vport_priv(vport);
+
+	ASSERT_RTNL();
+	netdev_vport->dev->priv_flags &= ~IFF_OVS_DATAPATH;
+	netdev_rx_handler_unregister(netdev_vport->dev);
+	netdev_upper_dev_unlink(netdev_vport->dev,
+				netdev_master_upper_dev_get(netdev_vport->dev));
+	dev_set_promiscuity(netdev_vport->dev, -1);
+}
+
+static void netdev_destroy(struct vport *vport)
+{
+	struct netdev_vport *netdev_vport = netdev_vport_priv(vport);
+
+	rtnl_lock();
+	if (netdev_vport->dev->priv_flags & IFF_OVS_DATAPATH)
+		ovs_netdev_detach_dev(vport);
+>>>>>>> v3.18
 	rtnl_unlock();
 
 	call_rcu(&netdev_vport->rcu, free_port_rcu);
@@ -170,7 +231,11 @@ static int netdev_send(struct vport *vport, struct sk_buff *skb)
 		net_warn_ratelimited("%s: dropped over-mtu packet: %d > %d\n",
 				     netdev_vport->dev->name,
 				     packet_length(skb), mtu);
+<<<<<<< HEAD
 		goto error;
+=======
+		goto drop;
+>>>>>>> v3.18
 	}
 
 	skb->dev = netdev_vport->dev;
@@ -179,9 +244,14 @@ static int netdev_send(struct vport *vport, struct sk_buff *skb)
 
 	return len;
 
+<<<<<<< HEAD
 error:
 	kfree_skb(skb);
 	ovs_vport_record_error(vport, VPORT_E_TX_DROPPED);
+=======
+drop:
+	kfree_skb(skb);
+>>>>>>> v3.18
 	return 0;
 }
 

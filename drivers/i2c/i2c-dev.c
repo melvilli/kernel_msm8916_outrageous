@@ -14,11 +14,14 @@
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
     MA 02110-1301 USA.
+=======
+>>>>>>> v3.18
 */
 
 /* Note that this is a complete rewrite of Simon Vogl's i2c-dev module.
@@ -102,8 +105,13 @@ static void return_i2c_dev(struct i2c_dev *i2c_dev)
 	kfree(i2c_dev);
 }
 
+<<<<<<< HEAD
 static ssize_t show_adapter_name(struct device *dev,
 				 struct device_attribute *attr, char *buf)
+=======
+static ssize_t name_show(struct device *dev,
+			 struct device_attribute *attr, char *buf)
+>>>>>>> v3.18
 {
 	struct i2c_dev *i2c_dev = i2c_dev_get_by_minor(MINOR(dev->devt));
 
@@ -111,7 +119,17 @@ static ssize_t show_adapter_name(struct device *dev,
 		return -ENODEV;
 	return sprintf(buf, "%s\n", i2c_dev->adap->name);
 }
+<<<<<<< HEAD
 static DEVICE_ATTR(name, S_IRUGO, show_adapter_name, NULL);
+=======
+static DEVICE_ATTR_RO(name);
+
+static struct attribute *i2c_attrs[] = {
+	&dev_attr_name.attr,
+	NULL,
+};
+ATTRIBUTE_GROUPS(i2c);
+>>>>>>> v3.18
 
 /* ------------------------------------------------------------------------- */
 
@@ -328,7 +346,11 @@ static noinline int i2cdev_ioctl_smbus(struct i2c_client *client,
 		unsigned long arg)
 {
 	struct i2c_smbus_ioctl_data data_arg;
+<<<<<<< HEAD
 	union i2c_smbus_data temp = {};
+=======
+	union i2c_smbus_data temp;
+>>>>>>> v3.18
 	int datasize, res;
 
 	if (copy_from_user(&data_arg,
@@ -562,15 +584,21 @@ static int i2cdev_attach_adapter(struct device *dev, void *dummy)
 		res = PTR_ERR(i2c_dev->dev);
 		goto error;
 	}
+<<<<<<< HEAD
 	res = device_create_file(i2c_dev->dev, &dev_attr_name);
 	if (res)
 		goto error_destroy;
+=======
+>>>>>>> v3.18
 
 	pr_debug("i2c-dev: adapter [%s] registered as minor %d\n",
 		 adap->name, adap->nr);
 	return 0;
+<<<<<<< HEAD
 error_destroy:
 	device_destroy(i2c_dev_class, MKDEV(I2C_MAJOR, adap->nr));
+=======
+>>>>>>> v3.18
 error:
 	return_i2c_dev(i2c_dev);
 	return res;
@@ -589,7 +617,10 @@ static int i2cdev_detach_adapter(struct device *dev, void *dummy)
 	if (!i2c_dev) /* attach_adapter must have failed */
 		return 0;
 
+<<<<<<< HEAD
 	device_remove_file(i2c_dev->dev, &dev_attr_name);
+=======
+>>>>>>> v3.18
 	return_i2c_dev(i2c_dev);
 	device_destroy(i2c_dev_class, MKDEV(I2C_MAJOR, adap->nr));
 
@@ -637,6 +668,10 @@ static int __init i2c_dev_init(void)
 		res = PTR_ERR(i2c_dev_class);
 		goto out_unreg_chrdev;
 	}
+<<<<<<< HEAD
+=======
+	i2c_dev_class->dev_groups = i2c_groups;
+>>>>>>> v3.18
 
 	/* Keep track of adapters which will be added or removed later */
 	res = bus_register_notifier(&i2c_bus_type, &i2cdev_notifier);

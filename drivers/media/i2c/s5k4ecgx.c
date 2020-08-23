@@ -594,6 +594,10 @@ static int s5k4ecgx_set_fmt(struct v4l2_subdev *sd, struct v4l2_subdev_fh *fh,
 	pf = s5k4ecgx_try_fmt(sd, &fmt->format);
 	s5k4ecgx_try_frame_size(&fmt->format, &fsize);
 	fmt->format.colorspace = V4L2_COLORSPACE_JPEG;
+<<<<<<< HEAD
+=======
+	fmt->format.field = V4L2_FIELD_NONE;
+>>>>>>> v3.18
 
 	if (fmt->which == V4L2_SUBDEV_FORMAT_TRY) {
 		if (fh) {

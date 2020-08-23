@@ -1,6 +1,10 @@
 config OCTEON_ETHERNET
 	tristate "Cavium Networks Octeon Ethernet support"
+<<<<<<< HEAD
 	depends on CPU_CAVIUM_OCTEON && NETDEVICES
+=======
+	depends on CAVIUM_OCTEON_SOC && NETDEVICES
+>>>>>>> v3.18
 	select PHYLIB
 	select MDIO_OCTEON
 	help

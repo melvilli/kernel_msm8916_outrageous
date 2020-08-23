@@ -32,6 +32,7 @@
 
 #include "device.h"
 
+<<<<<<< HEAD
 typedef struct tagSINTData {
 	u8 byTSR0;
 	u8 byPkt0;
@@ -58,5 +59,32 @@ SINTData, *PSINTData;
 
 void INTvWorkItem(struct vnt_private *);
 void INTnsProcessData(struct vnt_private *);
+=======
+struct vnt_interrupt_data {
+	u8 tsr0;
+	u8 pkt0;
+	u16 time0;
+	u8 tsr1;
+	u8 pkt1;
+	u16 time1;
+	u8 tsr2;
+	u8 pkt2;
+	u16 time2;
+	u8 tsr3;
+	u8 pkt3;
+	u16 time3;
+	__le64 tsf;
+	u8 isr0;
+	u8 isr1;
+	u8 rts_success;
+	u8 rts_fail;
+	u8 ack_fail;
+	u8 fcs_err;
+	u8 sw[2];
+} __packed;
+
+void vnt_int_start_interrupt(struct vnt_private *);
+void vnt_int_process_data(struct vnt_private *);
+>>>>>>> v3.18
 
 #endif /* __INT_H__ */

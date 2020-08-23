@@ -108,9 +108,15 @@ static void rds_tcp_accept_worker(struct work_struct *work)
 		cond_resched();
 }
 
+<<<<<<< HEAD
 void rds_tcp_listen_data_ready(struct sock *sk, int bytes)
 {
 	void (*ready)(struct sock *sk, int bytes);
+=======
+void rds_tcp_listen_data_ready(struct sock *sk)
+{
+	void (*ready)(struct sock *sk);
+>>>>>>> v3.18
 
 	rdsdebug("listen data ready sk %p\n", sk);
 
@@ -132,7 +138,11 @@ void rds_tcp_listen_data_ready(struct sock *sk, int bytes)
 
 out:
 	read_unlock(&sk->sk_callback_lock);
+<<<<<<< HEAD
 	ready(sk, bytes);
+=======
+	ready(sk);
+>>>>>>> v3.18
 }
 
 int rds_tcp_listen_init(void)
@@ -153,7 +163,11 @@ int rds_tcp_listen_init(void)
 	sock->sk->sk_data_ready = rds_tcp_listen_data_ready;
 	write_unlock_bh(&sock->sk->sk_callback_lock);
 
+<<<<<<< HEAD
 	sin.sin_family = PF_INET,
+=======
+	sin.sin_family = PF_INET;
+>>>>>>> v3.18
 	sin.sin_addr.s_addr = (__force u32)htonl(INADDR_ANY);
 	sin.sin_port = (__force u16)htons(RDS_TCP_PORT);
 

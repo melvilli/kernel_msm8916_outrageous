@@ -298,6 +298,11 @@ enum xfrm_attr_type_t {
 	XFRMA_TFCPAD,		/* __u32 */
 	XFRMA_REPLAY_ESN_VAL,	/* struct xfrm_replay_esn */
 	XFRMA_SA_EXTRA_FLAGS,	/* __u32 */
+<<<<<<< HEAD
+=======
+	XFRMA_PROTO,		/* __u8 */
+	XFRMA_ADDRESS_FILTER,	/* struct xfrm_address_filter */
+>>>>>>> v3.18
 	__XFRMA_MAX
 
 #define XFRMA_MAX (__XFRMA_MAX - 1)
@@ -326,6 +331,11 @@ enum xfrm_spdattr_type_t {
 	XFRMA_SPD_UNSPEC,
 	XFRMA_SPD_INFO,
 	XFRMA_SPD_HINFO,
+<<<<<<< HEAD
+=======
+	XFRMA_SPD_IPV4_HTHRESH,
+	XFRMA_SPD_IPV6_HTHRESH,
+>>>>>>> v3.18
 	__XFRMA_SPD_MAX
 
 #define XFRMA_SPD_MAX (__XFRMA_SPD_MAX - 1)
@@ -345,6 +355,14 @@ struct xfrmu_spdhinfo {
 	__u32 spdhmcnt;
 };
 
+<<<<<<< HEAD
+=======
+struct xfrmu_spdhthresh {
+	__u8 lbits;
+	__u8 rbits;
+};
+
+>>>>>>> v3.18
 struct xfrm_usersa_info {
 	struct xfrm_selector		sel;
 	struct xfrm_id			id;
@@ -474,6 +492,17 @@ struct xfrm_user_mapping {
 	__be16				new_sport;
 };
 
+<<<<<<< HEAD
+=======
+struct xfrm_address_filter {
+	xfrm_address_t			saddr;
+	xfrm_address_t			daddr;
+	__u16				family;
+	__u8				splen;
+	__u8				dplen;
+};
+
+>>>>>>> v3.18
 #ifndef __KERNEL__
 /* backwards compatibility for userspace */
 #define XFRMGRP_ACQUIRE		1

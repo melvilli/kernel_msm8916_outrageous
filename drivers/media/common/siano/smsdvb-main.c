@@ -44,14 +44,22 @@ module_param_named(debug, sms_dbg, int, 0644);
 MODULE_PARM_DESC(debug, "set debug level (info=1, adv=2 (or-able))");
 
 
+<<<<<<< HEAD
 u32 sms_to_guard_interval_table[] = {
+=======
+static u32 sms_to_guard_interval_table[] = {
+>>>>>>> v3.18
 	[0] = GUARD_INTERVAL_1_32,
 	[1] = GUARD_INTERVAL_1_16,
 	[2] = GUARD_INTERVAL_1_8,
 	[3] = GUARD_INTERVAL_1_4,
 };
 
+<<<<<<< HEAD
 u32 sms_to_code_rate_table[] = {
+=======
+static u32 sms_to_code_rate_table[] = {
+>>>>>>> v3.18
 	[0] = FEC_1_2,
 	[1] = FEC_2_3,
 	[2] = FEC_3_4,
@@ -60,14 +68,22 @@ u32 sms_to_code_rate_table[] = {
 };
 
 
+<<<<<<< HEAD
 u32 sms_to_hierarchy_table[] = {
+=======
+static u32 sms_to_hierarchy_table[] = {
+>>>>>>> v3.18
 	[0] = HIERARCHY_NONE,
 	[1] = HIERARCHY_1,
 	[2] = HIERARCHY_2,
 	[3] = HIERARCHY_4,
 };
 
+<<<<<<< HEAD
 u32 sms_to_modulation_table[] = {
+=======
+static u32 sms_to_modulation_table[] = {
+>>>>>>> v3.18
 	[0] = QPSK,
 	[1] = QAM_16,
 	[2] = QAM_64,
@@ -140,6 +156,10 @@ static void smsdvb_stats_not_ready(struct dvb_frontend *fe)
 	case DEVICE_MODE_ISDBT:
 	case DEVICE_MODE_ISDBT_BDA:
 		n_layers = 4;
+<<<<<<< HEAD
+=======
+		break;
+>>>>>>> v3.18
 	default:
 		n_layers = 1;
 	}

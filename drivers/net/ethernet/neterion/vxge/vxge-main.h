@@ -427,7 +427,10 @@ void vxge_os_timer(struct timer_list *timer, void (*func)(unsigned long data),
 }
 
 void vxge_initialize_ethtool_ops(struct net_device *ndev);
+<<<<<<< HEAD
 enum vxge_hw_status vxge_reset_all_vpaths(struct vxgedev *vdev);
+=======
+>>>>>>> v3.18
 int vxge_fw_upgrade(struct vxgedev *vdev, char *fw_name, int override);
 
 /* #define VXGE_DEBUG_INIT: debug for initialization functions

@@ -46,6 +46,7 @@ struct ib_umem {
 	int			page_size;
 	int                     writable;
 	int                     hugetlb;
+<<<<<<< HEAD
 	struct list_head	chunk_list;
 	struct work_struct	work;
 	struct mm_struct       *mm;
@@ -57,6 +58,15 @@ struct ib_umem_chunk {
 	int                     nents;
 	int                     nmap;
 	struct scatterlist      page_list[0];
+=======
+	struct work_struct	work;
+	struct pid             *pid;
+	struct mm_struct       *mm;
+	unsigned long		diff;
+	struct sg_table sg_head;
+	int             nmap;
+	int             npages;
+>>>>>>> v3.18
 };
 
 #ifdef CONFIG_INFINIBAND_USER_MEM

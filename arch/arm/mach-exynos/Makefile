@@ -5,6 +5,7 @@
 #
 # Licensed under GPLv2
 
+<<<<<<< HEAD
 obj-y				:=
 obj-m				:=
 obj-n				:=
@@ -19,17 +20,32 @@ obj-$(CONFIG_PM_GENERIC_DOMAINS) += pm_domains.o
 obj-$(CONFIG_CPU_IDLE)		+= cpuidle.o
 
 obj-$(CONFIG_ARCH_EXYNOS)	+= pmu.o
+=======
+ccflags-$(CONFIG_ARCH_MULTIPLATFORM) += -I$(srctree)/$(src)/include -I$(srctree)/arch/arm/plat-samsung/include
+
+# Core
+
+obj-$(CONFIG_ARCH_EXYNOS)	+= exynos.o pmu.o exynos-smc.o firmware.o
+
+obj-$(CONFIG_PM_SLEEP)		+= pm.o sleep.o
+obj-$(CONFIG_PM_GENERIC_DOMAINS) += pm_domains.o
+>>>>>>> v3.18
 
 obj-$(CONFIG_SMP)		+= platsmp.o headsmp.o
 
 obj-$(CONFIG_HOTPLUG_CPU)	+= hotplug.o
+<<<<<<< HEAD
 
 obj-$(CONFIG_ARCH_EXYNOS)	+= exynos-smc.o
 obj-$(CONFIG_ARCH_EXYNOS)	+= firmware.o
+=======
+CFLAGS_hotplug.o		+= -march=armv7-a
+>>>>>>> v3.18
 
 plus_sec := $(call as-instr,.arch_extension sec,+sec)
 AFLAGS_exynos-smc.o		:=-Wa,-march=armv7-a$(plus_sec)
 
+<<<<<<< HEAD
 # machine support
 
 obj-$(CONFIG_MACH_SMDKC210)		+= mach-smdkv310.o
@@ -67,3 +83,7 @@ obj-$(CONFIG_EXYNOS4_SETUP_KEYPAD)	+= setup-keypad.o
 obj-$(CONFIG_EXYNOS4_SETUP_SDHCI_GPIO)	+= setup-sdhci-gpio.o
 obj-$(CONFIG_EXYNOS4_SETUP_USB_PHY)	+= setup-usb-phy.o
 obj-$(CONFIG_EXYNOS_SETUP_SPI)		+= setup-spi.o
+=======
+obj-$(CONFIG_EXYNOS5420_MCPM)	+= mcpm-exynos.o
+CFLAGS_mcpm-exynos.o		+= -march=armv7-a
+>>>>>>> v3.18

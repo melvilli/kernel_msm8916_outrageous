@@ -27,12 +27,18 @@ struct clock_data {
 	u32 mult;
 	u32 shift;
 	bool suspended;
+<<<<<<< HEAD
 	bool needs_suspend;
+=======
+>>>>>>> v3.18
 };
 
 static struct hrtimer sched_clock_timer;
 static int irqtime = -1;
+<<<<<<< HEAD
 static int initialized;
+=======
+>>>>>>> v3.18
 
 core_param(irqtime, irqtime, int, 0400);
 
@@ -51,6 +57,7 @@ static u64 notrace jiffy_sched_clock_read(void)
 	return (u64)(jiffies - INITIAL_JIFFIES);
 }
 
+<<<<<<< HEAD
 static u32 __read_mostly (*read_sched_clock_32)(void);
 
 static u64 notrace read_sched_clock_32_wrapper(void)
@@ -58,6 +65,8 @@ static u64 notrace read_sched_clock_32_wrapper(void)
 	return read_sched_clock_32();
 }
 
+=======
+>>>>>>> v3.18
 static u64 __read_mostly (*read_sched_clock)(void) = jiffy_sched_clock_read;
 
 static inline u64 notrace cyc_to_ns(u64 cyc, u32 mult, u32 shift)
@@ -65,7 +74,11 @@ static inline u64 notrace cyc_to_ns(u64 cyc, u32 mult, u32 shift)
 	return (cyc * mult) >> shift;
 }
 
+<<<<<<< HEAD
 static unsigned long long notrace sched_clock_32(void)
+=======
+unsigned long long notrace sched_clock(void)
+>>>>>>> v3.18
 {
 	u64 epoch_ns;
 	u64 epoch_cyc;
@@ -76,7 +89,11 @@ static unsigned long long notrace sched_clock_32(void)
 		return cd.epoch_ns;
 
 	do {
+<<<<<<< HEAD
 		seq = read_seqcount_begin(&cd.seq);
+=======
+		seq = raw_read_seqcount_begin(&cd.seq);
+>>>>>>> v3.18
 		epoch_cyc = cd.epoch_cyc;
 		epoch_ns = cd.epoch_ns;
 	} while (read_seqcount_retry(&cd.seq, seq));
@@ -101,10 +118,17 @@ static void notrace update_sched_clock(void)
 			  cd.mult, cd.shift);
 
 	raw_local_irq_save(flags);
+<<<<<<< HEAD
 	write_seqcount_begin(&cd.seq);
 	cd.epoch_ns = ns;
 	cd.epoch_cyc = cyc;
 	write_seqcount_end(&cd.seq);
+=======
+	raw_write_seqcount_begin(&cd.seq);
+	cd.epoch_ns = ns;
+	cd.epoch_cyc = cyc;
+	raw_write_seqcount_end(&cd.seq);
+>>>>>>> v3.18
 	raw_local_irq_restore(flags);
 }
 
@@ -118,20 +142,56 @@ static enum hrtimer_restart sched_clock_poll(struct hrtimer *hrt)
 void __init sched_clock_register(u64 (*read)(void), int bits,
 				 unsigned long rate)
 {
+<<<<<<< HEAD
 	unsigned long r;
 	u64 res, wrap;
+=======
+	u64 res, wrap, new_mask, new_epoch, cyc, ns;
+	u32 new_mult, new_shift;
+	ktime_t new_wrap_kt;
+	unsigned long r;
+>>>>>>> v3.18
 	char r_unit;
 
 	if (cd.rate > rate)
 		return;
 
 	WARN_ON(!irqs_disabled());
+<<<<<<< HEAD
 	read_sched_clock = read;
 	sched_clock_mask = CLOCKSOURCE_MASK(bits);
 	cd.rate = rate;
 
 	/* calculate the mult/shift to convert counter ticks to ns. */
 	clocks_calc_mult_shift(&cd.mult, &cd.shift, rate, NSEC_PER_SEC, 3600);
+=======
+
+	/* calculate the mult/shift to convert counter ticks to ns. */
+	clocks_calc_mult_shift(&new_mult, &new_shift, rate, NSEC_PER_SEC, 3600);
+
+	new_mask = CLOCKSOURCE_MASK(bits);
+
+	/* calculate how many ns until we wrap */
+	wrap = clocks_calc_max_nsecs(new_mult, new_shift, 0, new_mask);
+	new_wrap_kt = ns_to_ktime(wrap - (wrap >> 3));
+
+	/* update epoch for new counter and update epoch_ns from old counter*/
+	new_epoch = read();
+	cyc = read_sched_clock();
+	ns = cd.epoch_ns + cyc_to_ns((cyc - cd.epoch_cyc) & sched_clock_mask,
+			  cd.mult, cd.shift);
+
+	raw_write_seqcount_begin(&cd.seq);
+	read_sched_clock = read;
+	sched_clock_mask = new_mask;
+	cd.rate = rate;
+	cd.wrap_kt = new_wrap_kt;
+	cd.mult = new_mult;
+	cd.shift = new_shift;
+	cd.epoch_cyc = new_epoch;
+	cd.epoch_ns = ns;
+	raw_write_seqcount_end(&cd.seq);
+>>>>>>> v3.18
 
 	r = rate;
 	if (r >= 4000000) {
@@ -143,6 +203,7 @@ void __init sched_clock_register(u64 (*read)(void), int bits,
 	} else
 		r_unit = ' ';
 
+<<<<<<< HEAD
 	/* calculate how many ns until we wrap */
 	wrap = clocks_calc_max_nsecs(cd.mult, cd.shift, 0, sched_clock_mask);
 	cd.wrap_kt = ns_to_ktime(wrap - (wrap >> 3));
@@ -159,6 +220,14 @@ void __init sched_clock_register(u64 (*read)(void), int bits,
 	 */
 	cd.epoch_ns = 0;
 
+=======
+	/* calculate the ns resolution of this counter */
+	res = cyc_to_ns(1ULL, new_mult, new_shift);
+
+	pr_info("sched_clock: %u bits at %lu%cHz, resolution %lluns, wraps every %lluns\n",
+		bits, r, r_unit, res, wrap);
+
+>>>>>>> v3.18
 	/* Enable IRQ time accounting if we have a fast enough sched_clock */
 	if (irqtime > 0 || (irqtime == -1 && rate >= 1000000))
 		enable_sched_clock_irqtime();
@@ -166,6 +235,7 @@ void __init sched_clock_register(u64 (*read)(void), int bits,
 	pr_debug("Registered %pF as sched_clock source\n", read);
 }
 
+<<<<<<< HEAD
 void __init setup_sched_clock(u32 (*read)(void), int bits, unsigned long rate)
 {
 	read_sched_clock_32 = read;
@@ -184,6 +254,8 @@ int sched_clock_initialized(void)
 	return initialized;
 }
 
+=======
+>>>>>>> v3.18
 void __init sched_clock_postinit(void)
 {
 	/*
@@ -202,8 +274,11 @@ void __init sched_clock_postinit(void)
 	hrtimer_init(&sched_clock_timer, CLOCK_MONOTONIC, HRTIMER_MODE_REL);
 	sched_clock_timer.function = sched_clock_poll;
 	hrtimer_start(&sched_clock_timer, cd.wrap_kt, HRTIMER_MODE_REL);
+<<<<<<< HEAD
 
 	initialized = 1;
+=======
+>>>>>>> v3.18
 }
 
 static int sched_clock_suspend(void)

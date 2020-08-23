@@ -19,7 +19,10 @@
 
 #ifdef __KERNEL__
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/interrupt.h>
 #include <linux/uaccess.h>
 #include <asm/kmap_types.h>

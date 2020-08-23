@@ -129,10 +129,17 @@ static u32 ath9k_hw_4k_dump_eeprom(struct ath_hw *ah, bool dump_base_hdr,
 	struct base_eep_header_4k *pBase = &eep->baseEepHeader;
 
 	if (!dump_base_hdr) {
+<<<<<<< HEAD
 		len += snprintf(buf + len, size - len,
 				"%20s :\n", "2GHz modal Header");
 		len = ath9k_dump_4k_modal_eeprom(buf, len, size,
 						  &eep->modalHeader);
+=======
+		len += scnprintf(buf + len, size - len,
+				 "%20s :\n", "2GHz modal Header");
+		len = ath9k_dump_4k_modal_eeprom(buf, len, size,
+						 &eep->modalHeader);
+>>>>>>> v3.18
 		goto out;
 	}
 
@@ -160,8 +167,13 @@ static u32 ath9k_hw_4k_dump_eeprom(struct ath_hw *ah, bool dump_base_hdr,
 	PR_EEP("Cal Bin Build", (pBase->binBuildNumber >> 8) & 0xFF);
 	PR_EEP("TX Gain type", pBase->txGainType);
 
+<<<<<<< HEAD
 	len += snprintf(buf + len, size - len, "%20s : %pM\n", "MacAddress",
 			pBase->macAddr);
+=======
+	len += scnprintf(buf + len, size - len, "%20s : %pM\n", "MacAddress",
+			 pBase->macAddr);
+>>>>>>> v3.18
 
 out:
 	if (len > size)
@@ -812,6 +824,10 @@ static void ath9k_hw_4k_set_gain(struct ath_hw *ah,
 static void ath9k_hw_4k_set_board_values(struct ath_hw *ah,
 					 struct ath9k_channel *chan)
 {
+<<<<<<< HEAD
+=======
+	struct ath9k_hw_capabilities *pCap = &ah->caps;
+>>>>>>> v3.18
 	struct modal_eep_4k_header *pModal;
 	struct ar5416_eeprom_4k *eep = &ah->eeprom.map4k;
 	struct base_eep_header_4k *pBase = &eep->baseEepHeader;
@@ -858,6 +874,27 @@ static void ath9k_hw_4k_set_board_values(struct ath_hw *ah,
 
 		REG_WRITE(ah, AR_PHY_CCK_DETECT, regVal);
 		regVal = REG_READ(ah, AR_PHY_CCK_DETECT);
+<<<<<<< HEAD
+=======
+
+		if (pCap->hw_caps & ATH9K_HW_CAP_ANT_DIV_COMB) {
+			/*
+			 * If diversity combining is enabled,
+			 * set MAIN to LNA1 and ALT to LNA2 initially.
+			 */
+			regVal = REG_READ(ah, AR_PHY_MULTICHAIN_GAIN_CTL);
+			regVal &= (~(AR_PHY_9285_ANT_DIV_MAIN_LNACONF |
+				     AR_PHY_9285_ANT_DIV_ALT_LNACONF));
+
+			regVal |= (ATH_ANT_DIV_COMB_LNA1 <<
+				   AR_PHY_9285_ANT_DIV_MAIN_LNACONF_S);
+			regVal |= (ATH_ANT_DIV_COMB_LNA2 <<
+				   AR_PHY_9285_ANT_DIV_ALT_LNACONF_S);
+			regVal &= (~(AR_PHY_9285_FAST_DIV_BIAS));
+			regVal |= (0 << AR_PHY_9285_FAST_DIV_BIAS_S);
+			REG_WRITE(ah, AR_PHY_MULTICHAIN_GAIN_CTL, regVal);
+		}
+>>>>>>> v3.18
 	}
 
 	if (pModal->version >= 2) {
@@ -1066,6 +1103,7 @@ static void ath9k_hw_4k_set_board_values(struct ath_hw *ah,
 
 static u16 ath9k_hw_4k_get_spur_channel(struct ath_hw *ah, u16 i, bool is2GHz)
 {
+<<<<<<< HEAD
 #define EEP_MAP4K_SPURCHAN \
 	(ah->eeprom.map4k.modalHeader.spurChans[i].spurChan)
 	struct ath_common *common = ath9k_hw_common(ah);
@@ -1091,6 +1129,9 @@ static u16 ath9k_hw_4k_get_spur_channel(struct ath_hw *ah, u16 i, bool is2GHz)
 	return spur_val;
 
 #undef EEP_MAP4K_SPURCHAN
+=======
+	return ah->eeprom.map4k.modalHeader.spurChans[i].spurChan;
+>>>>>>> v3.18
 }
 
 const struct eeprom_ops eep_4k_ops = {

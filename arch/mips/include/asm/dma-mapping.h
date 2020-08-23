@@ -49,9 +49,20 @@ static inline int dma_mapping_error(struct device *dev, u64 mask)
 static inline int
 dma_set_mask(struct device *dev, u64 mask)
 {
+<<<<<<< HEAD
 	if(!dev->dma_mask || !dma_supported(dev, mask))
 		return -EIO;
 
+=======
+	struct dma_map_ops *ops = get_dma_ops(dev);
+
+	if(!dev->dma_mask || !dma_supported(dev, mask))
+		return -EIO;
+
+	if (ops->set_dma_mask)
+		return ops->set_dma_mask(dev, mask);
+
+>>>>>>> v3.18
 	*dev->dma_mask = mask;
 
 	return 0;

@@ -142,7 +142,11 @@ void watchdog_interrupt(struct pt_regs *regs, enum exception_code excep)
 	NMICR = NMICR_WDIF;
 
 	nmi_count(smp_processor_id())++;
+<<<<<<< HEAD
 	kstat_incr_irqs_this_cpu(irq, irq_to_desc(irq));
+=======
+	kstat_incr_irq_this_cpu(irq);
+>>>>>>> v3.18
 
 	for_each_online_cpu(cpu) {
 

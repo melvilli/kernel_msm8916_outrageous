@@ -5,12 +5,21 @@
  *
  */
 
+<<<<<<< HEAD
 #ifndef __BFIN_POLL_H
 #define __BFIN_POLL_H
+=======
+#ifndef _UAPI__BFIN_POLL_H
+#define _UAPI__BFIN_POLL_H
+>>>>>>> v3.18
 
 #define POLLWRNORM	4 /* POLLOUT */
 #define POLLWRBAND	256
 
 #include <asm-generic/poll.h>
 
+<<<<<<< HEAD
 #endif
+=======
+#endif /* _UAPI__BFIN_POLL_H */
+>>>>>>> v3.18

@@ -34,6 +34,7 @@
 #include "fscache.h"
 #include "smb2proto.h"
 
+<<<<<<< HEAD
 void
 smb2_set_oplock_level(struct cifsInodeInfo *cinode, __u32 oplock)
 {
@@ -61,13 +62,24 @@ smb2_open_file(const unsigned int xid, struct cifs_tcon *tcon, const char *path,
 	       int disposition, int desired_access, int create_options,
 	       struct cifs_fid *fid, __u32 *oplock, FILE_ALL_INFO *buf,
 	       struct cifs_sb_info *cifs_sb)
+=======
+int
+smb2_open_file(const unsigned int xid, struct cifs_open_parms *oparms,
+	       __u32 *oplock, FILE_ALL_INFO *buf)
+>>>>>>> v3.18
 {
 	int rc;
 	__le16 *smb2_path;
 	struct smb2_file_all_info *smb2_data = NULL;
 	__u8 smb2_oplock[17];
+<<<<<<< HEAD
 
 	smb2_path = cifs_convert_path_to_utf16(path, cifs_sb);
+=======
+	struct cifs_fid *fid = oparms->fid;
+
+	smb2_path = cifs_convert_path_to_utf16(oparms->path, oparms->cifs_sb);
+>>>>>>> v3.18
 	if (smb2_path == NULL) {
 		rc = -ENOMEM;
 		goto out;
@@ -80,6 +92,7 @@ smb2_open_file(const unsigned int xid, struct cifs_tcon *tcon, const char *path,
 		goto out;
 	}
 
+<<<<<<< HEAD
 	desired_access |= FILE_READ_ATTRIBUTES;
 	*smb2_oplock = SMB2_OPLOCK_LEVEL_EXCLUSIVE;
 
@@ -89,12 +102,25 @@ smb2_open_file(const unsigned int xid, struct cifs_tcon *tcon, const char *path,
 	rc = SMB2_open(xid, tcon, smb2_path, &fid->persistent_fid,
 		       &fid->volatile_fid, desired_access, disposition,
 		       0, 0, smb2_oplock, smb2_data);
+=======
+	oparms->desired_access |= FILE_READ_ATTRIBUTES;
+	*smb2_oplock = SMB2_OPLOCK_LEVEL_BATCH;
+
+	if (oparms->tcon->ses->server->capabilities & SMB2_GLOBAL_CAP_LEASING)
+		memcpy(smb2_oplock + 1, fid->lease_key, SMB2_LEASE_KEY_SIZE);
+
+	rc = SMB2_open(xid, oparms, smb2_path, smb2_oplock, smb2_data, NULL);
+>>>>>>> v3.18
 	if (rc)
 		goto out;
 
 	if (buf) {
 		/* open response does not have IndexNumber field - get it */
+<<<<<<< HEAD
 		rc = SMB2_get_srv_num(xid, tcon, fid->persistent_fid,
+=======
+		rc = SMB2_get_srv_num(xid, oparms->tcon, fid->persistent_fid,
+>>>>>>> v3.18
 				      fid->volatile_fid,
 				      &smb2_data->IndexNumber);
 		if (rc) {
@@ -266,7 +292,11 @@ smb2_push_mandatory_locks(struct cifsFileInfo *cfile)
 	 * and check it for zero before using.
 	 */
 	max_buf = tlink_tcon(cfile->tlink)->ses->server->maxBuf;
+<<<<<<< HEAD
 	if (max_buf < sizeof(struct smb2_lock_element)) {
+=======
+	if (!max_buf) {
+>>>>>>> v3.18
 		free_xid(xid);
 		return -EINVAL;
 	}

@@ -58,24 +58,39 @@ int r8712_init_recv_priv(struct recv_priv *precvpriv, struct _adapter *padapter)
 
 	/*init recv_buf*/
 	_init_queue(&precvpriv->free_recv_buf_queue);
+<<<<<<< HEAD
 	precvpriv->pallocated_recv_buf = _malloc(NR_RECVBUFF *
 					 sizeof(struct recv_buf) + 4);
 	if (precvpriv->pallocated_recv_buf == NULL)
 		return _FAIL;
 	memset(precvpriv->pallocated_recv_buf, 0, NR_RECVBUFF *
 		sizeof(struct recv_buf) + 4);
+=======
+	precvpriv->pallocated_recv_buf = kzalloc(NR_RECVBUFF * sizeof(struct recv_buf) + 4,
+						 GFP_ATOMIC);
+	if (precvpriv->pallocated_recv_buf == NULL)
+		return _FAIL;
+>>>>>>> v3.18
 	precvpriv->precv_buf = precvpriv->pallocated_recv_buf + 4 -
 			      ((addr_t) (precvpriv->pallocated_recv_buf) & 3);
 	precvbuf = (struct recv_buf *)precvpriv->precv_buf;
 	for (i = 0; i < NR_RECVBUFF; i++) {
+<<<<<<< HEAD
 		_init_listhead(&precvbuf->list);
+=======
+		INIT_LIST_HEAD(&precvbuf->list);
+>>>>>>> v3.18
 		spin_lock_init(&precvbuf->recvbuf_lock);
 		res = r8712_os_recvbuf_resource_alloc(padapter, precvbuf);
 		if (res == _FAIL)
 			break;
 		precvbuf->ref_cnt = 0;
 		precvbuf->adapter = padapter;
+<<<<<<< HEAD
 		list_insert_tail(&precvbuf->list,
+=======
+		list_add_tail(&precvbuf->list,
+>>>>>>> v3.18
 				 &(precvpriv->free_recv_buf_queue.queue));
 		precvbuf++;
 	}
@@ -90,7 +105,10 @@ int r8712_init_recv_priv(struct recv_priv *precvpriv, struct _adapter *padapter)
 		pskb = netdev_alloc_skb(padapter->pnetdev, MAX_RECVBUF_SZ +
 		       RECVBUFF_ALIGN_SZ);
 		if (pskb) {
+<<<<<<< HEAD
 			pskb->dev = padapter->pnetdev;
+=======
+>>>>>>> v3.18
 			tmpaddr = (addr_t)pskb->data;
 			alignment = tmpaddr & (RECVBUFF_ALIGN_SZ-1);
 			skb_reserve(pskb, (RECVBUFF_ALIGN_SZ - alignment));
@@ -108,7 +126,11 @@ void r8712_free_recv_priv(struct recv_priv *precvpriv)
 	struct _adapter *padapter = precvpriv->adapter;
 
 	precvbuf = (struct recv_buf *)precvpriv->precv_buf;
+<<<<<<< HEAD
 	for (i = 0; i < NR_RECVBUFF ; i++) {
+=======
+	for (i = 0; i < NR_RECVBUFF; i++) {
+>>>>>>> v3.18
 		r8712_os_recvbuf_resource_free(padapter, precvbuf);
 		precvbuf++;
 	}
@@ -124,8 +146,11 @@ void r8712_free_recv_priv(struct recv_priv *precvpriv)
 
 int r8712_init_recvbuf(struct _adapter *padapter, struct recv_buf *precvbuf)
 {
+<<<<<<< HEAD
 	int res = _SUCCESS;
 
+=======
+>>>>>>> v3.18
 	precvbuf->transfer_len = 0;
 	precvbuf->len = 0;
 	precvbuf->ref_cnt = 0;
@@ -135,7 +160,11 @@ int r8712_init_recvbuf(struct _adapter *padapter, struct recv_buf *precvbuf)
 		precvbuf->ptail = precvbuf->pbuf;
 		precvbuf->pend = precvbuf->pdata + MAX_RECVBUF_SZ;
 	}
+<<<<<<< HEAD
 	return res;
+=======
+	return _SUCCESS;
+>>>>>>> v3.18
 }
 
 int r8712_free_recvframe(union recv_frame *precvframe,
@@ -150,9 +179,14 @@ int r8712_free_recvframe(union recv_frame *precvframe,
 		precvframe->u.hdr.pkt = NULL;
 	}
 	spin_lock_irqsave(&pfree_recv_queue->lock, irqL);
+<<<<<<< HEAD
 	list_delete(&(precvframe->u.hdr.list));
 	list_insert_tail(&(precvframe->u.hdr.list),
 			 get_list_head(pfree_recv_queue));
+=======
+	list_del_init(&(precvframe->u.hdr.list));
+	list_add_tail(&(precvframe->u.hdr.list), &pfree_recv_queue->queue);
+>>>>>>> v3.18
 	if (padapter != NULL) {
 		if (pfree_recv_queue == &precvpriv->free_recv_queue)
 				precvpriv->free_recvframe_cnt++;
@@ -213,10 +247,17 @@ static union recv_frame *recvframe_defrag(struct _adapter *adapter,
 	struct  __queue	*pfree_recv_queue;
 
 	pfree_recv_queue = &adapter->recvpriv.free_recv_queue;
+<<<<<<< HEAD
 	phead = get_list_head(defrag_q);
 	plist = get_next(phead);
 	prframe = LIST_CONTAINOR(plist, union recv_frame, u);
 	list_delete(&prframe->u.list);
+=======
+	phead = &defrag_q->queue;
+	plist = phead->next;
+	prframe = LIST_CONTAINOR(plist, union recv_frame, u);
+	list_del_init(&prframe->u.list);
+>>>>>>> v3.18
 	pfhdr = &prframe->u.hdr;
 	curfragnum = 0;
 	if (curfragnum != pfhdr->attrib.frag_num) {
@@ -227,8 +268,13 @@ static union recv_frame *recvframe_defrag(struct _adapter *adapter,
 		return NULL;
 	}
 	curfragnum++;
+<<<<<<< HEAD
 	plist = get_list_head(defrag_q);
 	plist = get_next(plist);
+=======
+	plist = &defrag_q->queue;
+	plist = plist->next;
+>>>>>>> v3.18
 	data = get_recvframe_data(prframe);
 	while (end_of_queue_search(phead, plist) == false) {
 		pnextrframe = LIST_CONTAINOR(plist, union recv_frame, u);
@@ -252,7 +298,11 @@ static union recv_frame *recvframe_defrag(struct _adapter *adapter,
 		memcpy(pfhdr->rx_tail, pnfhdr->rx_data, pnfhdr->len);
 		recvframe_put(prframe, pnfhdr->len);
 		pfhdr->attrib.icv_len = pnfhdr->attrib.icv_len;
+<<<<<<< HEAD
 		plist = get_next(plist);
+=======
+		plist = plist->next;
+>>>>>>> v3.18
 	}
 	/* free the defrag_q queue and return the prframe */
 	r8712_free_recvframe_queue(defrag_q, pfree_recv_queue);
@@ -268,7 +318,11 @@ union recv_frame *r8712_recvframe_chk_defrag(struct _adapter *padapter,
 	u8   *psta_addr;
 	struct recv_frame_hdr *pfhdr;
 	struct sta_info *psta;
+<<<<<<< HEAD
 	struct	sta_priv *pstapriv ;
+=======
+	struct	sta_priv *pstapriv;
+>>>>>>> v3.18
 	struct list_head *phead;
 	union recv_frame *prtnframe = NULL;
 	struct  __queue *pfree_recv_queue, *pdefrag_q;
@@ -294,15 +348,24 @@ union recv_frame *r8712_recvframe_chk_defrag(struct _adapter *padapter,
 		if (pdefrag_q != NULL) {
 			if (fragnum == 0) {
 				/*the first fragment*/
+<<<<<<< HEAD
 				if (_queue_empty(pdefrag_q) == false) {
+=======
+				if (!list_empty(&pdefrag_q->queue)) {
+>>>>>>> v3.18
 					/*free current defrag_q */
 					r8712_free_recvframe_queue(pdefrag_q,
 							     pfree_recv_queue);
 				}
 			}
 			/* Then enqueue the 0~(n-1) fragment to the defrag_q */
+<<<<<<< HEAD
 			phead = get_list_head(pdefrag_q);
 			list_insert_tail(&pfhdr->list, phead);
+=======
+			phead = &pdefrag_q->queue;
+			list_add_tail(&pfhdr->list, phead);
+>>>>>>> v3.18
 			prtnframe = NULL;
 		} else {
 			/* can't find this ta's defrag_queue, so free this
@@ -316,8 +379,13 @@ union recv_frame *r8712_recvframe_chk_defrag(struct _adapter *padapter,
 		/* the last fragment frame
 		 * enqueue the last fragment */
 		if (pdefrag_q != NULL) {
+<<<<<<< HEAD
 			phead = get_list_head(pdefrag_q);
 			list_insert_tail(&pfhdr->list, phead);
+=======
+			phead = &pdefrag_q->queue;
+			list_add_tail(&pfhdr->list, phead);
+>>>>>>> v3.18
 			/*call recvframe_defrag to defrag*/
 			precv_frame = recvframe_defrag(padapter, pdefrag_q);
 			prtnframe = precv_frame;
@@ -348,7 +416,10 @@ static int amsdu_to_msdu(struct _adapter *padapter, union recv_frame *prframe)
 	_pkt *sub_skb, *subframes[MAX_SUBFRAME_COUNT];
 	struct recv_priv *precvpriv = &padapter->recvpriv;
 	struct  __queue *pfree_recv_queue = &(precvpriv->free_recv_queue);
+<<<<<<< HEAD
 	int	ret = _SUCCESS;
+=======
+>>>>>>> v3.18
 
 	nr_subframes = 0;
 	pattrib = &prframe->u.hdr.attrib;
@@ -436,7 +507,11 @@ static int amsdu_to_msdu(struct _adapter *padapter, union recv_frame *prframe)
 exit:
 	prframe->u.hdr.len = 0;
 	r8712_free_recvframe(prframe, pfree_recv_queue);
+<<<<<<< HEAD
 	return ret;
+=======
+	return _SUCCESS;
+>>>>>>> v3.18
 }
 
 void r8712_rxcmd_event_hdl(struct _adapter *padapter, void *prxcmdbuf)
@@ -505,20 +580,34 @@ static int enqueue_reorder_recvframe(struct recv_reorder_ctrl *preorder_ctrl,
 					&preorder_ctrl->pending_recvframe_queue;
 	struct rx_pkt_attrib *pattrib = &prframe->u.hdr.attrib;
 
+<<<<<<< HEAD
 	phead = get_list_head(ppending_recvframe_queue);
 	plist = get_next(phead);
+=======
+	phead = &ppending_recvframe_queue->queue;
+	plist = phead->next;
+>>>>>>> v3.18
 	while (end_of_queue_search(phead, plist) == false) {
 		pnextrframe = LIST_CONTAINOR(plist, union recv_frame, u);
 		pnextattrib = &pnextrframe->u.hdr.attrib;
 		if (SN_LESS(pnextattrib->seq_num, pattrib->seq_num))
+<<<<<<< HEAD
 			plist = get_next(plist);
+=======
+			plist = plist->next;
+>>>>>>> v3.18
 		else if (SN_EQUAL(pnextattrib->seq_num, pattrib->seq_num))
 			return false;
 		else
 			break;
 	}
+<<<<<<< HEAD
 	list_delete(&(prframe->u.hdr.list));
 	list_insert_tail(&(prframe->u.hdr.list), plist);
+=======
+	list_del_init(&(prframe->u.hdr.list));
+	list_add_tail(&(prframe->u.hdr.list), plist);
+>>>>>>> v3.18
 	return true;
 }
 
@@ -534,11 +623,19 @@ int r8712_recv_indicatepkts_in_order(struct _adapter *padapter,
 	struct  __queue *ppending_recvframe_queue =
 			 &preorder_ctrl->pending_recvframe_queue;
 
+<<<<<<< HEAD
 	phead = get_list_head(ppending_recvframe_queue);
 	plist = get_next(phead);
 	/* Handling some condition for forced indicate case.*/
 	if (bforced == true) {
 		if (is_list_empty(phead))
+=======
+	phead = &ppending_recvframe_queue->queue;
+	plist = phead->next;
+	/* Handling some condition for forced indicate case.*/
+	if (bforced == true) {
+		if (list_empty(phead))
+>>>>>>> v3.18
 			return true;
 		else {
 			prframe = LIST_CONTAINOR(plist, union recv_frame, u);
@@ -548,12 +645,21 @@ int r8712_recv_indicatepkts_in_order(struct _adapter *padapter,
 	}
 	/* Prepare indication list and indication.
 	 * Check if there is any packet need indicate. */
+<<<<<<< HEAD
 	while (!is_list_empty(phead)) {
 		prframe = LIST_CONTAINOR(plist, union recv_frame, u);
 		pattrib = &prframe->u.hdr.attrib;
 		if (!SN_LESS(preorder_ctrl->indicate_seq, pattrib->seq_num)) {
 			plist = get_next(plist);
 			list_delete(&(prframe->u.hdr.list));
+=======
+	while (!list_empty(phead)) {
+		prframe = LIST_CONTAINOR(plist, union recv_frame, u);
+		pattrib = &prframe->u.hdr.attrib;
+		if (!SN_LESS(preorder_ctrl->indicate_seq, pattrib->seq_num)) {
+			plist = plist->next;
+			list_del_init(&(prframe->u.hdr.list));
+>>>>>>> v3.18
 			if (SN_EQUAL(preorder_ctrl->indicate_seq,
 			    pattrib->seq_num))
 				preorder_ctrl->indicate_seq =
@@ -849,7 +955,11 @@ static void query_rx_phy_status(struct _adapter *padapter,
 	} else {
 		/* (1)Get RSSI for HT rate */
 		for (i = 0; i < ((padapter->registrypriv.rf_config) &
+<<<<<<< HEAD
 			    0x0f) ; i++) {
+=======
+			    0x0f); i++) {
+>>>>>>> v3.18
 			rf_rx_num++;
 			rx_pwr[i] = ((pphy_head[PHY_STAT_GAIN_TRSW_SHT + i]
 				    & 0x3F) * 2) - 110;
@@ -981,7 +1091,11 @@ int recv_func(struct _adapter *padapter, void *pcontext)
 	prframe = (union recv_frame *)pcontext;
 	orig_prframe = prframe;
 	pattrib = &prframe->u.hdr.attrib;
+<<<<<<< HEAD
 	if ((check_fwstate(pmlmepriv, WIFI_MP_STATE) == true)) {
+=======
+	if (check_fwstate(pmlmepriv, WIFI_MP_STATE) == true) {
+>>>>>>> v3.18
 		if (pattrib->crc_err == 1)
 			padapter->mppriv.rx_crcerrpktcount++;
 		else
@@ -1067,6 +1181,7 @@ static int recvbuf2recvframe(struct _adapter *padapter, struct sk_buff *pskb)
 		precvframe = r8712_alloc_recvframe(pfree_recv_queue);
 		if (precvframe == NULL)
 			goto  _exit_recvbuf2recvframe;
+<<<<<<< HEAD
 		_init_listhead(&precvframe->u.hdr.list);
 		precvframe->u.hdr.precvbuf = NULL; /*can't access the precvbuf*/
 		precvframe->u.hdr.len = 0;
@@ -1077,6 +1192,17 @@ static int recvbuf2recvframe(struct _adapter *padapter, struct sk_buff *pskb)
 		if ((mf == 1) && (frag == 0))
 			/*1658+6=1664, 1664 is 128 alignment.*/
 			alloc_sz = max_t(u16, tmp_len, 1658);
+=======
+		INIT_LIST_HEAD(&precvframe->u.hdr.list);
+		precvframe->u.hdr.precvbuf = NULL; /*can't access the precvbuf*/
+		precvframe->u.hdr.len = 0;
+		tmp_len = pkt_len + drvinfo_sz + RXDESC_SIZE;
+		pkt_offset = (u16)round_up(tmp_len, 128);
+		/* for first fragment packet, driver need allocate 1536 +
+		 * drvinfo_sz + RXDESC_SIZE to defrag packet. */
+		if ((mf == 1) && (frag == 0))
+			alloc_sz = 1658;/*1658+6=1664, 1664 is 128 alignment.*/
+>>>>>>> v3.18
 		else
 			alloc_sz = tmp_len;
 		/* 2 is for IP header 4 bytes alignment in QoS packet case.
@@ -1084,7 +1210,10 @@ static int recvbuf2recvframe(struct _adapter *padapter, struct sk_buff *pskb)
 		alloc_sz += 6;
 		pkt_copy = netdev_alloc_skb(padapter->pnetdev, alloc_sz);
 		if (pkt_copy) {
+<<<<<<< HEAD
 			pkt_copy->dev = padapter->pnetdev;
+=======
+>>>>>>> v3.18
 			precvframe->u.hdr.pkt = pkt_copy;
 			skb_reserve(pkt_copy, 4 - ((addr_t)(pkt_copy->data)
 				    % 4));

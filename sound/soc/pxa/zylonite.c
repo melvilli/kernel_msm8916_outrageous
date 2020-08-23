@@ -71,13 +71,17 @@ static const struct snd_soc_dapm_route audio_map[] = {
 
 static int zylonite_wm9713_init(struct snd_soc_pcm_runtime *rtd)
 {
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = rtd->codec;
 	struct snd_soc_dapm_context *dapm = &codec->dapm;
 
+=======
+>>>>>>> v3.18
 	if (clk_pout)
 		snd_soc_dai_set_pll(rtd->codec_dai, 0, 0,
 				    clk_get_rate(pout), 0);
 
+<<<<<<< HEAD
 	snd_soc_dapm_new_controls(dapm, zylonite_dapm_widgets,
 				  ARRAY_SIZE(zylonite_dapm_widgets));
 
@@ -87,6 +91,8 @@ static int zylonite_wm9713_init(struct snd_soc_pcm_runtime *rtd)
 	snd_soc_dapm_enable_pin(dapm, "Headphone");
 	snd_soc_dapm_enable_pin(dapm, "Headset Earpiece");
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -256,7 +262,15 @@ static struct snd_soc_card zylonite = {
 	.resume_pre = &zylonite_resume_pre,
 	.dai_link = zylonite_dai,
 	.num_links = ARRAY_SIZE(zylonite_dai),
+<<<<<<< HEAD
 	.owner = THIS_MODULE,
+=======
+
+	.dapm_widgets = zylonite_dapm_widgets,
+	.num_dapm_widgets = ARRAY_SIZE(zylonite_dapm_widgets),
+	.dapm_routes = audio_map,
+	.num_dapm_routes = ARRAY_SIZE(audio_map),
+>>>>>>> v3.18
 };
 
 static struct platform_device *zylonite_snd_ac97_device;

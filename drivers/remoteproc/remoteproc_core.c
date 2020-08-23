@@ -762,6 +762,7 @@ static void rproc_resource_cleanup(struct rproc *rproc)
 		kfree(entry);
 	}
 
+<<<<<<< HEAD
 	/* clean up carveout allocations */
 	list_for_each_entry_safe(entry, tmp, &rproc->carveouts, node) {
 		dma_free_coherent(dev->parent, entry->len, entry->va, entry->dma);
@@ -769,6 +770,8 @@ static void rproc_resource_cleanup(struct rproc *rproc)
 		kfree(entry);
 	}
 
+=======
+>>>>>>> v3.18
 	/* clean up iommu mapping entries */
 	list_for_each_entry_safe(entry, tmp, &rproc->mappings, node) {
 		size_t unmapped;
@@ -783,6 +786,16 @@ static void rproc_resource_cleanup(struct rproc *rproc)
 		list_del(&entry->node);
 		kfree(entry);
 	}
+<<<<<<< HEAD
+=======
+
+	/* clean up carveout allocations */
+	list_for_each_entry_safe(entry, tmp, &rproc->carveouts, node) {
+		dma_free_coherent(dev->parent, entry->len, entry->va, entry->dma);
+		list_del(&entry->node);
+		kfree(entry);
+	}
+>>>>>>> v3.18
 }
 
 /*
@@ -815,18 +828,28 @@ static int rproc_fw_boot(struct rproc *rproc, const struct firmware *fw)
 	}
 
 	rproc->bootaddr = rproc_get_boot_addr(rproc, fw);
+<<<<<<< HEAD
+=======
+	ret = -EINVAL;
+>>>>>>> v3.18
 
 	/* look for the resource table */
 	table = rproc_find_rsc_table(rproc, fw, &tablesz);
 	if (!table) {
+<<<<<<< HEAD
 		ret = -EINVAL;
+=======
+>>>>>>> v3.18
 		goto clean_up;
 	}
 
 	/* Verify that resource table in loaded fw is unchanged */
 	if (rproc->table_csum != crc32(0, table, tablesz)) {
 		dev_err(dev, "resource checksum failed, fw changed?\n");
+<<<<<<< HEAD
 		ret = -EINVAL;
+=======
+>>>>>>> v3.18
 		goto clean_up;
 	}
 
@@ -852,8 +875,15 @@ static int rproc_fw_boot(struct rproc *rproc, const struct firmware *fw)
 	 * copy this information to device memory.
 	 */
 	loaded_table = rproc_find_loaded_rsc_table(rproc, fw);
+<<<<<<< HEAD
 	if (!loaded_table)
 		goto clean_up;
+=======
+	if (!loaded_table) {
+		ret = -EINVAL;
+		goto clean_up;
+	}
+>>>>>>> v3.18
 
 	memcpy(loaded_table, rproc->cached_table, tablesz);
 
@@ -913,11 +943,18 @@ static void rproc_fw_config_virtio(const struct firmware *fw, void *context)
 	 * will be stored in the cached_table. Before the device is started,
 	 * cached_table will be copied into devic memory.
 	 */
+<<<<<<< HEAD
 	rproc->cached_table = kmalloc(tablesz, GFP_KERNEL);
 	if (!rproc->cached_table)
 		goto out;
 
 	memcpy(rproc->cached_table, table, tablesz);
+=======
+	rproc->cached_table = kmemdup(table, tablesz, GFP_KERNEL);
+	if (!rproc->cached_table)
+		goto out;
+
+>>>>>>> v3.18
 	rproc->table_ptr = rproc->cached_table;
 
 	/* count the number of notify-ids */

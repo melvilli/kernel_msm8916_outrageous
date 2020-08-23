@@ -15,13 +15,22 @@
 #include <linux/swap.h>
 #include <linux/capability.h>
 #include <linux/fs.h>
+<<<<<<< HEAD
+=======
+#include <linux/swapops.h>
+>>>>>>> v3.18
 #include <linux/highmem.h>
 #include <linux/security.h>
 #include <linux/syscalls.h>
 #include <linux/mmu_notifier.h>
 #include <linux/sched/sysctl.h>
+<<<<<<< HEAD
 
 #include <asm/uaccess.h>
+=======
+#include <linux/uaccess.h>
+
+>>>>>>> v3.18
 #include <asm/cacheflush.h>
 #include <asm/tlbflush.h>
 
@@ -69,6 +78,26 @@ static pmd_t *alloc_new_pmd(struct mm_struct *mm, struct vm_area_struct *vma,
 	return pmd;
 }
 
+<<<<<<< HEAD
+=======
+static pte_t move_soft_dirty_pte(pte_t pte)
+{
+	/*
+	 * Set soft dirty bit so we can notice
+	 * in userspace the ptes were moved.
+	 */
+#ifdef CONFIG_MEM_SOFT_DIRTY
+	if (pte_present(pte))
+		pte = pte_mksoft_dirty(pte);
+	else if (is_swap_pte(pte))
+		pte = pte_swp_mksoft_dirty(pte);
+	else if (pte_file(pte))
+		pte = pte_file_mksoft_dirty(pte);
+#endif
+	return pte;
+}
+
+>>>>>>> v3.18
 static void move_ptes(struct vm_area_struct *vma, pmd_t *old_pmd,
 		unsigned long old_addr, unsigned long old_end,
 		struct vm_area_struct *new_vma, pmd_t *new_pmd,
@@ -126,6 +155,10 @@ static void move_ptes(struct vm_area_struct *vma, pmd_t *old_pmd,
 			continue;
 		pte = ptep_get_and_clear(mm, old_addr, old_pte);
 		pte = move_pte(pte, new_vma->vm_page_prot, old_addr, new_addr);
+<<<<<<< HEAD
+=======
+		pte = move_soft_dirty_pte(pte);
+>>>>>>> v3.18
 		set_pte_at(mm, new_addr, new_pte, pte);
 	}
 
@@ -176,7 +209,12 @@ unsigned long move_page_tables(struct vm_area_struct *vma,
 		if (pmd_trans_huge(*old_pmd)) {
 			int err = 0;
 			if (extent == HPAGE_PMD_SIZE) {
+<<<<<<< HEAD
 				VM_BUG_ON(vma->vm_file || !vma->anon_vma);
+=======
+				VM_BUG_ON_VMA(vma->vm_file || !vma->anon_vma,
+					      vma);
+>>>>>>> v3.18
 				/* See comment in move_ptes() */
 				if (need_rmap_locks)
 					anon_vma_lock_write(vma->anon_vma);
@@ -463,6 +501,7 @@ SYSCALL_DEFINE5(mremap, unsigned long, addr, unsigned long, old_len,
 	unsigned long charged = 0;
 	bool locked = false;
 
+<<<<<<< HEAD
 	down_write(&current->mm->mmap_sem);
 
 	if (flags & ~(MREMAP_FIXED | MREMAP_MAYMOVE))
@@ -470,6 +509,16 @@ SYSCALL_DEFINE5(mremap, unsigned long, addr, unsigned long, old_len,
 
 	if (addr & ~PAGE_MASK)
 		goto out;
+=======
+	if (flags & ~(MREMAP_FIXED | MREMAP_MAYMOVE))
+		return ret;
+
+	if (flags & MREMAP_FIXED && !(flags & MREMAP_MAYMOVE))
+		return ret;
+
+	if (addr & ~PAGE_MASK)
+		return ret;
+>>>>>>> v3.18
 
 	old_len = PAGE_ALIGN(old_len);
 	new_len = PAGE_ALIGN(new_len);
@@ -480,12 +529,22 @@ SYSCALL_DEFINE5(mremap, unsigned long, addr, unsigned long, old_len,
 	 * a zero new-len is nonsensical.
 	 */
 	if (!new_len)
+<<<<<<< HEAD
 		goto out;
 
 	if (flags & MREMAP_FIXED) {
 		if (flags & MREMAP_MAYMOVE)
 			ret = mremap_to(addr, old_len, new_addr, new_len,
 					&locked);
+=======
+		return ret;
+
+	down_write(&current->mm->mmap_sem);
+
+	if (flags & MREMAP_FIXED) {
+		ret = mremap_to(addr, old_len, new_addr, new_len,
+				&locked);
+>>>>>>> v3.18
 		goto out;
 	}
 

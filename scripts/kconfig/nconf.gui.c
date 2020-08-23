@@ -276,8 +276,13 @@ int btn_dialog(WINDOW *main_window, const char *msg, int btn_num, ...)
 
 	total_width = max(msg_width, btns_width);
 	/* place dialog in middle of screen */
+<<<<<<< HEAD
 	y = (LINES-(msg_lines+4))/2;
 	x = (COLS-(total_width+4))/2;
+=======
+	y = (getmaxy(stdscr)-(msg_lines+4))/2;
+	x = (getmaxx(stdscr)-(total_width+4))/2;
+>>>>>>> v3.18
 
 
 	/* create the windows */
@@ -387,8 +392,13 @@ int dialog_inputbox(WINDOW *main_window,
 		prompt_width = max(prompt_width, strlen(title));
 
 	/* place dialog in middle of screen */
+<<<<<<< HEAD
 	y = (LINES-(prompt_lines+4))/2;
 	x = (COLS-(prompt_width+4))/2;
+=======
+	y = (getmaxy(stdscr)-(prompt_lines+4))/2;
+	x = (getmaxx(stdscr)-(prompt_width+4))/2;
+>>>>>>> v3.18
 
 	strncpy(result, init, *result_len);
 
@@ -545,7 +555,11 @@ void show_scroll_win(WINDOW *main_window,
 {
 	int res;
 	int total_lines = get_line_no(text);
+<<<<<<< HEAD
 	int x, y;
+=======
+	int x, y, lines, columns;
+>>>>>>> v3.18
 	int start_x = 0, start_y = 0;
 	int text_lines = 0, text_cols = 0;
 	int total_cols = 0;
@@ -556,6 +570,11 @@ void show_scroll_win(WINDOW *main_window,
 	WINDOW *pad;
 	PANEL *panel;
 
+<<<<<<< HEAD
+=======
+	getmaxyx(stdscr, lines, columns);
+
+>>>>>>> v3.18
 	/* find the widest line of msg: */
 	total_lines = get_line_no(text);
 	for (i = 0; i < total_lines; i++) {
@@ -569,14 +588,24 @@ void show_scroll_win(WINDOW *main_window,
 	(void) wattrset(pad, attributes[SCROLLWIN_TEXT]);
 	fill_window(pad, text);
 
+<<<<<<< HEAD
 	win_lines = min(total_lines+4, LINES-2);
 	win_cols = min(total_cols+2, COLS-2);
+=======
+	win_lines = min(total_lines+4, lines-2);
+	win_cols = min(total_cols+2, columns-2);
+>>>>>>> v3.18
 	text_lines = max(win_lines-4, 0);
 	text_cols = max(win_cols-2, 0);
 
 	/* place window in middle of screen */
+<<<<<<< HEAD
 	y = (LINES-win_lines)/2;
 	x = (COLS-win_cols)/2;
+=======
+	y = (lines-win_lines)/2;
+	x = (columns-win_cols)/2;
+>>>>>>> v3.18
 
 	win = newwin(win_lines, win_cols, y, x);
 	keypad(win, TRUE);

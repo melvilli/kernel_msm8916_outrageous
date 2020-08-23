@@ -610,12 +610,21 @@ static struct dm_exception *dm_lookup_exception(struct dm_exception_table *et,
 	return NULL;
 }
 
+<<<<<<< HEAD
 static struct dm_exception *alloc_completed_exception(void)
 {
 	struct dm_exception *e;
 
 	e = kmem_cache_alloc(exception_cache, GFP_NOIO);
 	if (!e)
+=======
+static struct dm_exception *alloc_completed_exception(gfp_t gfp)
+{
+	struct dm_exception *e;
+
+	e = kmem_cache_alloc(exception_cache, gfp);
+	if (!e && gfp == GFP_NOIO)
+>>>>>>> v3.18
 		e = kmem_cache_alloc(exception_cache, GFP_ATOMIC);
 
 	return e;
@@ -697,7 +706,11 @@ static int dm_add_exception(void *context, chunk_t old, chunk_t new)
 	struct dm_snapshot *s = context;
 	struct dm_exception *e;
 
+<<<<<<< HEAD
 	e = alloc_completed_exception();
+=======
+	e = alloc_completed_exception(GFP_KERNEL);
+>>>>>>> v3.18
 	if (!e)
 		return -ENOMEM;
 
@@ -1032,6 +1045,7 @@ static void start_merge(struct dm_snapshot *s)
 		snapshot_merge_next_chunks(s);
 }
 
+<<<<<<< HEAD
 static int wait_schedule(void *ptr)
 {
 	schedule();
@@ -1039,14 +1053,20 @@ static int wait_schedule(void *ptr)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 /*
  * Stop the merging process and wait until it finishes.
  */
 static void stop_merge(struct dm_snapshot *s)
 {
 	set_bit(SHUTDOWN_MERGE, &s->state_bits);
+<<<<<<< HEAD
 	wait_on_bit(&s->state_bits, RUNNING_MERGE, wait_schedule,
 		    TASK_UNINTERRUPTIBLE);
+=======
+	wait_on_bit(&s->state_bits, RUNNING_MERGE, TASK_UNINTERRUPTIBLE);
+>>>>>>> v3.18
 	clear_bit(SHUTDOWN_MERGE, &s->state_bits);
 }
 
@@ -1388,9 +1408,14 @@ static void __invalidate_snapshot(struct dm_snapshot *s, int err)
 	dm_table_event(s->ti->table);
 }
 
+<<<<<<< HEAD
 static void pending_complete(void *context, int success)
 {
 	struct dm_snap_pending_exception *pe = context;
+=======
+static void pending_complete(struct dm_snap_pending_exception *pe, int success)
+{
+>>>>>>> v3.18
 	struct dm_exception *e;
 	struct dm_snapshot *s = pe->snap;
 	struct bio *origin_bios = NULL;
@@ -1406,7 +1431,11 @@ static void pending_complete(void *context, int success)
 		goto out;
 	}
 
+<<<<<<< HEAD
 	e = alloc_completed_exception();
+=======
+	e = alloc_completed_exception(GFP_NOIO);
+>>>>>>> v3.18
 	if (!e) {
 		down_write(&s->lock);
 		__invalidate_snapshot(s, -ENOMEM);
@@ -1439,7 +1468,14 @@ out:
 	if (full_bio) {
 		full_bio->bi_end_io = pe->full_bio_end_io;
 		full_bio->bi_private = pe->full_bio_private;
+<<<<<<< HEAD
 	}
+=======
+		atomic_inc(&full_bio->bi_remaining);
+	}
+	free_pending_exception(pe);
+
+>>>>>>> v3.18
 	increment_pending_exceptions_done_count();
 
 	up_write(&s->lock);
@@ -1456,17 +1492,37 @@ out:
 	}
 
 	retry_origin_bios(s, origin_bios);
+<<<<<<< HEAD
 
 	free_pending_exception(pe);
+=======
+}
+
+static void commit_callback(void *context, int success)
+{
+	struct dm_snap_pending_exception *pe = context;
+
+	pending_complete(pe, success);
+>>>>>>> v3.18
 }
 
 static void complete_exception(struct dm_snap_pending_exception *pe)
 {
 	struct dm_snapshot *s = pe->snap;
 
+<<<<<<< HEAD
 	/* Update the metadata if we are persistent */
 	s->store->type->commit_exception(s->store, &pe->e, !pe->copy_error,
 					 pending_complete, pe);
+=======
+	if (unlikely(pe->copy_error))
+		pending_complete(pe, 0);
+
+	else
+		/* Update the metadata if we are persistent */
+		s->store->type->commit_exception(s->store, &pe->e,
+						 commit_callback, pe);
+>>>>>>> v3.18
 }
 
 /*
@@ -1609,11 +1665,18 @@ static void remap_exception(struct dm_snapshot *s, struct dm_exception *e,
 			    struct bio *bio, chunk_t chunk)
 {
 	bio->bi_bdev = s->cow->bdev;
+<<<<<<< HEAD
 	bio->bi_sector = chunk_to_sector(s->store,
 					 dm_chunk_number(e->new_chunk) +
 					 (chunk - e->old_chunk)) +
 					 (bio->bi_sector &
 					  s->store->chunk_mask);
+=======
+	bio->bi_iter.bi_sector =
+		chunk_to_sector(s->store, dm_chunk_number(e->new_chunk) +
+				(chunk - e->old_chunk)) +
+		(bio->bi_iter.bi_sector & s->store->chunk_mask);
+>>>>>>> v3.18
 }
 
 static int snapshot_map(struct dm_target *ti, struct bio *bio)
@@ -1631,7 +1694,11 @@ static int snapshot_map(struct dm_target *ti, struct bio *bio)
 		return DM_MAPIO_REMAPPED;
 	}
 
+<<<<<<< HEAD
 	chunk = sector_to_chunk(s->store, bio->bi_sector);
+=======
+	chunk = sector_to_chunk(s->store, bio->bi_iter.bi_sector);
+>>>>>>> v3.18
 
 	/* Full snapshots are not usable */
 	/* To get here the table must be live so s->active is always set. */
@@ -1692,7 +1759,12 @@ static int snapshot_map(struct dm_target *ti, struct bio *bio)
 		r = DM_MAPIO_SUBMITTED;
 
 		if (!pe->started &&
+<<<<<<< HEAD
 		    bio->bi_size == (s->store->chunk_size << SECTOR_SHIFT)) {
+=======
+		    bio->bi_iter.bi_size ==
+		    (s->store->chunk_size << SECTOR_SHIFT)) {
+>>>>>>> v3.18
 			pe->started = 1;
 			up_write(&s->lock);
 			start_full_bio(pe, bio);
@@ -1748,7 +1820,11 @@ static int snapshot_merge_map(struct dm_target *ti, struct bio *bio)
 		return DM_MAPIO_REMAPPED;
 	}
 
+<<<<<<< HEAD
 	chunk = sector_to_chunk(s->store, bio->bi_sector);
+=======
+	chunk = sector_to_chunk(s->store, bio->bi_iter.bi_sector);
+>>>>>>> v3.18
 
 	down_write(&s->lock);
 
@@ -2085,7 +2161,11 @@ static int do_origin(struct dm_dev *origin, struct bio *bio)
 	down_read(&_origins_lock);
 	o = __lookup_origin(origin->bdev);
 	if (o)
+<<<<<<< HEAD
 		r = __origin_write(&o->snapshots, bio->bi_sector, bio);
+=======
+		r = __origin_write(&o->snapshots, bio->bi_iter.bi_sector, bio);
+>>>>>>> v3.18
 	up_read(&_origins_lock);
 
 	return r;
@@ -2130,6 +2210,14 @@ static int origin_write_extent(struct dm_snapshot *merging_snap,
  * Origin: maps a linear range of a device, with hooks for snapshotting.
  */
 
+<<<<<<< HEAD
+=======
+struct dm_origin {
+	struct dm_dev *dev;
+	unsigned split_boundary;
+};
+
+>>>>>>> v3.18
 /*
  * Construct an origin mapping: <dev_path>
  * The context for an origin is merely a 'struct dm_dev *'
@@ -2138,13 +2226,18 @@ static int origin_write_extent(struct dm_snapshot *merging_snap,
 static int origin_ctr(struct dm_target *ti, unsigned int argc, char **argv)
 {
 	int r;
+<<<<<<< HEAD
 	struct dm_dev *dev;
+=======
+	struct dm_origin *o;
+>>>>>>> v3.18
 
 	if (argc != 1) {
 		ti->error = "origin: incorrect number of arguments";
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 	r = dm_get_device(ti, argv[0], dm_table_get_mode(ti->table), &dev);
 	if (r) {
 		ti->error = "Cannot get target device";
@@ -2155,16 +2248,47 @@ static int origin_ctr(struct dm_target *ti, unsigned int argc, char **argv)
 	ti->num_flush_bios = 1;
 
 	return 0;
+=======
+	o = kmalloc(sizeof(struct dm_origin), GFP_KERNEL);
+	if (!o) {
+		ti->error = "Cannot allocate private origin structure";
+		r = -ENOMEM;
+		goto bad_alloc;
+	}
+
+	r = dm_get_device(ti, argv[0], dm_table_get_mode(ti->table), &o->dev);
+	if (r) {
+		ti->error = "Cannot get target device";
+		goto bad_open;
+	}
+
+	ti->private = o;
+	ti->num_flush_bios = 1;
+
+	return 0;
+
+bad_open:
+	kfree(o);
+bad_alloc:
+	return r;
+>>>>>>> v3.18
 }
 
 static void origin_dtr(struct dm_target *ti)
 {
+<<<<<<< HEAD
 	struct dm_dev *dev = ti->private;
 	dm_put_device(ti, dev);
+=======
+	struct dm_origin *o = ti->private;
+	dm_put_device(ti, o->dev);
+	kfree(o);
+>>>>>>> v3.18
 }
 
 static int origin_map(struct dm_target *ti, struct bio *bio)
 {
+<<<<<<< HEAD
 	struct dm_dev *dev = ti->private;
 	bio->bi_bdev = dev->bdev;
 
@@ -2173,6 +2297,27 @@ static int origin_map(struct dm_target *ti, struct bio *bio)
 
 	/* Only tell snapshots if this is a write */
 	return (bio_rw(bio) == WRITE) ? do_origin(dev, bio) : DM_MAPIO_REMAPPED;
+=======
+	struct dm_origin *o = ti->private;
+	unsigned available_sectors;
+
+	bio->bi_bdev = o->dev->bdev;
+
+	if (unlikely(bio->bi_rw & REQ_FLUSH))
+		return DM_MAPIO_REMAPPED;
+
+	if (bio_rw(bio) != WRITE)
+		return DM_MAPIO_REMAPPED;
+
+	available_sectors = o->split_boundary -
+		((unsigned)bio->bi_iter.bi_sector & (o->split_boundary - 1));
+
+	if (bio_sectors(bio) > available_sectors)
+		dm_accept_partial_bio(bio, available_sectors);
+
+	/* Only tell snapshots if this is a write */
+	return do_origin(o->dev, bio);
+>>>>>>> v3.18
 }
 
 /*
@@ -2181,15 +2326,25 @@ static int origin_map(struct dm_target *ti, struct bio *bio)
  */
 static void origin_resume(struct dm_target *ti)
 {
+<<<<<<< HEAD
 	struct dm_dev *dev = ti->private;
 
 	ti->max_io_len = get_origin_minimum_chunksize(dev->bdev);
+=======
+	struct dm_origin *o = ti->private;
+
+	o->split_boundary = get_origin_minimum_chunksize(o->dev->bdev);
+>>>>>>> v3.18
 }
 
 static void origin_status(struct dm_target *ti, status_type_t type,
 			  unsigned status_flags, char *result, unsigned maxlen)
 {
+<<<<<<< HEAD
 	struct dm_dev *dev = ti->private;
+=======
+	struct dm_origin *o = ti->private;
+>>>>>>> v3.18
 
 	switch (type) {
 	case STATUSTYPE_INFO:
@@ -2197,7 +2352,11 @@ static void origin_status(struct dm_target *ti, status_type_t type,
 		break;
 
 	case STATUSTYPE_TABLE:
+<<<<<<< HEAD
 		snprintf(result, maxlen, "%s", dev->name);
+=======
+		snprintf(result, maxlen, "%s", o->dev->name);
+>>>>>>> v3.18
 		break;
 	}
 }
@@ -2205,13 +2364,22 @@ static void origin_status(struct dm_target *ti, status_type_t type,
 static int origin_merge(struct dm_target *ti, struct bvec_merge_data *bvm,
 			struct bio_vec *biovec, int max_size)
 {
+<<<<<<< HEAD
 	struct dm_dev *dev = ti->private;
 	struct request_queue *q = bdev_get_queue(dev->bdev);
+=======
+	struct dm_origin *o = ti->private;
+	struct request_queue *q = bdev_get_queue(o->dev->bdev);
+>>>>>>> v3.18
 
 	if (!q->merge_bvec_fn)
 		return max_size;
 
+<<<<<<< HEAD
 	bvm->bi_bdev = dev->bdev;
+=======
+	bvm->bi_bdev = o->dev->bdev;
+>>>>>>> v3.18
 
 	return min(max_size, q->merge_bvec_fn(q, bvm, biovec));
 }
@@ -2219,9 +2387,15 @@ static int origin_merge(struct dm_target *ti, struct bvec_merge_data *bvm,
 static int origin_iterate_devices(struct dm_target *ti,
 				  iterate_devices_callout_fn fn, void *data)
 {
+<<<<<<< HEAD
 	struct dm_dev *dev = ti->private;
 
 	return fn(ti, dev, 0, ti->len, data);
+=======
+	struct dm_origin *o = ti->private;
+
+	return fn(ti, o->dev, 0, ti->len, data);
+>>>>>>> v3.18
 }
 
 static struct target_type origin_target = {

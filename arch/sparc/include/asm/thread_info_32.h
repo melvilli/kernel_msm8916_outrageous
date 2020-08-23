@@ -105,8 +105,11 @@ register struct thread_info *current_thread_info_reg asm("g6");
 #define TI_W_SAVED	0x250
 /* #define TI_RESTART_BLOCK 0x25n */ /* Nobody cares */
 
+<<<<<<< HEAD
 #define PREEMPT_ACTIVE		0x4000000
 
+=======
+>>>>>>> v3.18
 /*
  * thread information flag bit numbers
  */
@@ -132,6 +135,11 @@ register struct thread_info *current_thread_info_reg asm("g6");
 #define _TIF_DO_NOTIFY_RESUME_MASK	(_TIF_NOTIFY_RESUME | \
 					 _TIF_SIGPENDING)
 
+<<<<<<< HEAD
+=======
+#define is_32bit_task()	(1)
+
+>>>>>>> v3.18
 #endif /* __KERNEL__ */
 
 #endif /* _ASM_THREAD_INFO_H */

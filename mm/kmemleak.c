@@ -193,8 +193,11 @@ static struct kmem_cache *scan_area_cache;
 
 /* set if tracing memory operations is enabled */
 static int kmemleak_enabled;
+<<<<<<< HEAD
 /* same as above but only for the kmemleak_free() callback */
 static int kmemleak_free_enabled;
+=======
+>>>>>>> v3.18
 /* set in the late_initcall if there were no errors */
 static int kmemleak_initialized;
 /* enables or disables early logging of the memory operations */
@@ -214,6 +217,7 @@ static unsigned long jiffies_min_age;
 static unsigned long jiffies_last_scan;
 /* delay between automatic memory scannings */
 static signed long jiffies_scan_wait;
+<<<<<<< HEAD
 
 /* Enables or disables the task stacks scanning.
  * Set to 1 if at compile time we want it enabled.
@@ -226,6 +230,10 @@ static int kmemleak_stack_scan;
 static int kmemleak_stack_scan = 1;
 #endif
 
+=======
+/* enables or disables the task stacks scanning */
+static int kmemleak_stack_scan = 1;
+>>>>>>> v3.18
 /* protects the memory scanning, parameters and debug/kmemleak file access */
 static DEFINE_MUTEX(scan_mutex);
 /* setting kmemleak=on, will set this var, skipping the disable */
@@ -399,7 +407,11 @@ static void dump_object_info(struct kmemleak_object *object)
 	pr_notice("  min_count = %d\n", object->min_count);
 	pr_notice("  count = %d\n", object->count);
 	pr_notice("  flags = 0x%lx\n", object->flags);
+<<<<<<< HEAD
 	pr_notice("  checksum = %d\n", object->checksum);
+=======
+	pr_notice("  checksum = %u\n", object->checksum);
+>>>>>>> v3.18
 	pr_notice("  backtrace:\n");
 	print_stack_trace(&trace, 4);
 }
@@ -952,7 +964,11 @@ void __ref kmemleak_free(const void *ptr)
 {
 	pr_debug("%s(0x%p)\n", __func__, ptr);
 
+<<<<<<< HEAD
 	if (kmemleak_free_enabled && ptr && !IS_ERR(ptr))
+=======
+	if (kmemleak_enabled && ptr && !IS_ERR(ptr))
+>>>>>>> v3.18
 		delete_object_full((unsigned long)ptr);
 	else if (kmemleak_early_log)
 		log_early(KMEMLEAK_FREE, ptr, 0, 0);
@@ -992,7 +1008,11 @@ void __ref kmemleak_free_percpu(const void __percpu *ptr)
 
 	pr_debug("%s(0x%p)\n", __func__, ptr);
 
+<<<<<<< HEAD
 	if (kmemleak_free_enabled && ptr && !IS_ERR(ptr))
+=======
+	if (kmemleak_enabled && ptr && !IS_ERR(ptr))
+>>>>>>> v3.18
 		for_each_possible_cpu(cpu)
 			delete_object_full((unsigned long)per_cpu_ptr(ptr,
 								      cpu));
@@ -1002,6 +1022,43 @@ void __ref kmemleak_free_percpu(const void __percpu *ptr)
 EXPORT_SYMBOL_GPL(kmemleak_free_percpu);
 
 /**
+<<<<<<< HEAD
+=======
+ * kmemleak_update_trace - update object allocation stack trace
+ * @ptr:	pointer to beginning of the object
+ *
+ * Override the object allocation stack trace for cases where the actual
+ * allocation place is not always useful.
+ */
+void __ref kmemleak_update_trace(const void *ptr)
+{
+	struct kmemleak_object *object;
+	unsigned long flags;
+
+	pr_debug("%s(0x%p)\n", __func__, ptr);
+
+	if (!kmemleak_enabled || IS_ERR_OR_NULL(ptr))
+		return;
+
+	object = find_and_get_object((unsigned long)ptr, 1);
+	if (!object) {
+#ifdef DEBUG
+		kmemleak_warn("Updating stack trace for unknown object at %p\n",
+			      ptr);
+#endif
+		return;
+	}
+
+	spin_lock_irqsave(&object->lock, flags);
+	object->trace_len = __save_stack_trace(object->trace);
+	spin_unlock_irqrestore(&object->lock, flags);
+
+	put_object(object);
+}
+EXPORT_SYMBOL(kmemleak_update_trace);
+
+/**
+>>>>>>> v3.18
  * kmemleak_not_leak - mark an allocated object as false positive
  * @ptr:	pointer to beginning of the object
  *
@@ -1312,7 +1369,11 @@ static void kmemleak_scan(void)
 	/*
 	 * Struct page scanning for each node.
 	 */
+<<<<<<< HEAD
 	lock_memory_hotplug();
+=======
+	get_online_mems();
+>>>>>>> v3.18
 	for_each_online_node(i) {
 		unsigned long start_pfn = node_start_pfn(i);
 		unsigned long end_pfn = node_end_pfn(i);
@@ -1330,7 +1391,11 @@ static void kmemleak_scan(void)
 			scan_block(page, page + 1, NULL, 1);
 		}
 	}
+<<<<<<< HEAD
 	unlock_memory_hotplug();
+=======
+	put_online_mems();
+>>>>>>> v3.18
 
 	/*
 	 * Scanning the task stacks (may introduce false negatives).
@@ -1561,11 +1626,14 @@ static int kmemleak_open(struct inode *inode, struct file *file)
 	return seq_open(file, &kmemleak_seq_ops);
 }
 
+<<<<<<< HEAD
 static int kmemleak_release(struct inode *inode, struct file *file)
 {
 	return seq_release(inode, file);
 }
 
+=======
+>>>>>>> v3.18
 static int dump_str_object_info(const char *str)
 {
 	unsigned long flags;
@@ -1672,7 +1740,11 @@ static ssize_t kmemleak_write(struct file *file, const char __user *user_buf,
 	else if (strncmp(buf, "scan=", 5) == 0) {
 		unsigned long secs;
 
+<<<<<<< HEAD
 		ret = strict_strtoul(buf + 5, 0, &secs);
+=======
+		ret = kstrtoul(buf + 5, 0, &secs);
+>>>>>>> v3.18
 		if (ret < 0)
 			goto out;
 		stop_scan_thread();
@@ -1703,7 +1775,11 @@ static const struct file_operations kmemleak_fops = {
 	.read		= seq_read,
 	.write		= kmemleak_write,
 	.llseek		= seq_lseek,
+<<<<<<< HEAD
 	.release	= kmemleak_release,
+=======
+	.release	= seq_release,
+>>>>>>> v3.18
 };
 
 static void __kmemleak_do_cleanup(void)
@@ -1726,6 +1802,7 @@ static void kmemleak_do_cleanup(struct work_struct *work)
 	mutex_lock(&scan_mutex);
 	stop_scan_thread();
 
+<<<<<<< HEAD
 	/*
 	 * Once the scan thread has stopped, it is safe to no longer track
 	 * object freeing. Ordering of the scan thread stopping and the memory
@@ -1733,6 +1810,8 @@ static void kmemleak_do_cleanup(struct work_struct *work)
 	 */
 	kmemleak_free_enabled = 0;
 
+=======
+>>>>>>> v3.18
 	if (!kmemleak_found_leaks)
 		__kmemleak_do_cleanup();
 	else
@@ -1759,8 +1838,11 @@ static void kmemleak_disable(void)
 	/* check whether it is too early for a kernel thread */
 	if (kmemleak_initialized)
 		schedule_work(&cleanup_work);
+<<<<<<< HEAD
 	else
 		kmemleak_free_enabled = 0;
+=======
+>>>>>>> v3.18
 
 	pr_info("Kernel memory leak detector disabled\n");
 }
@@ -1801,10 +1883,16 @@ void __init kmemleak_init(void)
 	int i;
 	unsigned long flags;
 
+<<<<<<< HEAD
 	kmemleak_early_log = 0;
 
 #ifdef CONFIG_DEBUG_KMEMLEAK_DEFAULT_OFF
 	if (!kmemleak_skip_disable) {
+=======
+#ifdef CONFIG_DEBUG_KMEMLEAK_DEFAULT_OFF
+	if (!kmemleak_skip_disable) {
+		kmemleak_early_log = 0;
+>>>>>>> v3.18
 		kmemleak_disable();
 		return;
 	}
@@ -1822,6 +1910,7 @@ void __init kmemleak_init(void)
 
 	/* the kernel is still in UP mode, so disabling the IRQs is enough */
 	local_irq_save(flags);
+<<<<<<< HEAD
 	if (kmemleak_error) {
 		local_irq_restore(flags);
 		return;
@@ -1829,6 +1918,14 @@ void __init kmemleak_init(void)
 		kmemleak_enabled = 1;
 		kmemleak_free_enabled = 1;
 	}
+=======
+	kmemleak_early_log = 0;
+	if (kmemleak_error) {
+		local_irq_restore(flags);
+		return;
+	} else
+		kmemleak_enabled = 1;
+>>>>>>> v3.18
 	local_irq_restore(flags);
 
 	/*

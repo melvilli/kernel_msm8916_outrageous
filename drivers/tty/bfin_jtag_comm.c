@@ -77,7 +77,10 @@ bfin_jc_emudat_manager(void *arg)
 			pr_debug("waiting for readers\n");
 			__set_current_state(TASK_UNINTERRUPTIBLE);
 			schedule();
+<<<<<<< HEAD
 			__set_current_state(TASK_RUNNING);
+=======
+>>>>>>> v3.18
 			continue;
 		}
 
@@ -349,7 +352,11 @@ bfin_jc_early_write(struct console *co, const char *buf, unsigned int count)
 	bfin_jc_straight_buffer_write(buf, count);
 }
 
+<<<<<<< HEAD
 static struct __initdata console bfin_jc_early_console = {
+=======
+static struct console bfin_jc_early_console __initdata = {
+>>>>>>> v3.18
 	.name   = "early_BFJC",
 	.write   = bfin_jc_early_write,
 	.flags   = CON_ANYTIME | CON_PRINTBUFFER,

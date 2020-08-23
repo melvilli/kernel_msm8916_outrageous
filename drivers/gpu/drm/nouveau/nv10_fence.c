@@ -22,9 +22,12 @@
  * Authors: Ben Skeggs <bskeggs@redhat.com>
  */
 
+<<<<<<< HEAD
 #include <core/object.h>
 #include <core/class.h>
 
+=======
+>>>>>>> v3.18
 #include "nouveau_drm.h"
 #include "nouveau_dma.h"
 #include "nv10_fence.h"
@@ -36,7 +39,11 @@ nv10_fence_emit(struct nouveau_fence *fence)
 	int ret = RING_SPACE(chan, 2);
 	if (ret == 0) {
 		BEGIN_NV04(chan, 0, NV10_SUBCHAN_REF_CNT, 1);
+<<<<<<< HEAD
 		OUT_RING  (chan, fence->sequence);
+=======
+		OUT_RING  (chan, fence->base.seqno);
+>>>>>>> v3.18
 		FIRE_RING (chan);
 	}
 	return ret;
@@ -53,16 +60,30 @@ nv10_fence_sync(struct nouveau_fence *fence,
 u32
 nv10_fence_read(struct nouveau_channel *chan)
 {
+<<<<<<< HEAD
 	return nv_ro32(chan->object, 0x0048);
+=======
+	return nvif_rd32(chan, 0x0048);
+>>>>>>> v3.18
 }
 
 void
 nv10_fence_context_del(struct nouveau_channel *chan)
 {
 	struct nv10_fence_chan *fctx = chan->fence;
+<<<<<<< HEAD
 	nouveau_fence_context_del(&fctx->base);
 	chan->fence = NULL;
 	kfree(fctx);
+=======
+	int i;
+	nouveau_fence_context_del(&fctx->base);
+	for (i = 0; i < ARRAY_SIZE(fctx->head); i++)
+		nvif_object_fini(&fctx->head[i]);
+	nvif_object_fini(&fctx->sema);
+	chan->fence = NULL;
+	nouveau_fence_context_free(&fctx->base);
+>>>>>>> v3.18
 }
 
 int
@@ -74,7 +95,11 @@ nv10_fence_context_new(struct nouveau_channel *chan)
 	if (!fctx)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 	nouveau_fence_context_new(&fctx->base);
+=======
+	nouveau_fence_context_new(chan, &fctx->base);
+>>>>>>> v3.18
 	fctx->base.emit = nv10_fence_emit;
 	fctx->base.read = nv10_fence_read;
 	fctx->base.sync = nv10_fence_sync;
@@ -105,6 +130,11 @@ nv10_fence_create(struct nouveau_drm *drm)
 	priv->base.dtor = nv10_fence_destroy;
 	priv->base.context_new = nv10_fence_context_new;
 	priv->base.context_del = nv10_fence_context_del;
+<<<<<<< HEAD
+=======
+	priv->base.contexts = 31;
+	priv->base.context_base = fence_context_alloc(priv->base.contexts);
+>>>>>>> v3.18
 	spin_lock_init(&priv->lock);
 	return 0;
 }

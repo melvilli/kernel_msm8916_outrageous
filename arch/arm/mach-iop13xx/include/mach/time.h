@@ -1,5 +1,11 @@
 #ifndef _IOP13XX_TIME_H_
 #define _IOP13XX_TIME_H_
+<<<<<<< HEAD
+=======
+
+#include <mach/irqs.h>
+
+>>>>>>> v3.18
 #define IRQ_IOP_TIMER0 IRQ_IOP13XX_TIMER0
 
 #define IOP_TMR_EN	    0x02

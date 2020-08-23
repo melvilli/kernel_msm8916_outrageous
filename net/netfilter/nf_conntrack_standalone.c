@@ -101,7 +101,11 @@ static void *ct_seq_start(struct seq_file *seq, loff_t *pos)
 {
 	struct ct_iter_state *st = seq->private;
 
+<<<<<<< HEAD
 	st->time_now = ktime_to_ns(ktime_get_real());
+=======
+	st->time_now = ktime_get_real_ns();
+>>>>>>> v3.18
 	rcu_read_lock();
 	return ct_get_idx(seq, *pos);
 }
@@ -408,7 +412,11 @@ static int log_invalid_proto_max = 255;
 
 static struct ctl_table_header *nf_ct_netfilter_header;
 
+<<<<<<< HEAD
 static ctl_table nf_ct_sysctl_table[] = {
+=======
+static struct ctl_table nf_ct_sysctl_table[] = {
+>>>>>>> v3.18
 	{
 		.procname	= "nf_conntrack_max",
 		.data		= &nf_conntrack_max,
@@ -458,7 +466,11 @@ static ctl_table nf_ct_sysctl_table[] = {
 
 #define NET_NF_CONNTRACK_MAX 2089
 
+<<<<<<< HEAD
 static ctl_table nf_ct_netfilter_table[] = {
+=======
+static struct ctl_table nf_ct_netfilter_table[] = {
+>>>>>>> v3.18
 	{
 		.procname	= "nf_conntrack_max",
 		.data		= &nf_conntrack_max,

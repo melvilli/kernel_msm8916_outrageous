@@ -14,6 +14,10 @@ config HSI_BOARDINFO
 	bool
 	default y
 
+<<<<<<< HEAD
+=======
+source "drivers/hsi/controllers/Kconfig"
+>>>>>>> v3.18
 source "drivers/hsi/clients/Kconfig"
 
 endif # HSI

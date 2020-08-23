@@ -682,7 +682,11 @@ set_videobus_dir (struct zoran *zr,
 	switch (zr->card.type) {
 	case LML33:
 	case LML33R10:
+<<<<<<< HEAD
 		if (lml33dpath == 0)
+=======
+		if (!lml33dpath)
+>>>>>>> v3.18
 			GPIO(zr, 5, val);
 		else
 			GPIO(zr, 5, 1);
@@ -1572,7 +1576,11 @@ zoran_init_hardware (struct zoran *zr)
 	}
 
 	decoder_call(zr, core, init, 0);
+<<<<<<< HEAD
 	decoder_call(zr, core, s_std, zr->norm);
+=======
+	decoder_call(zr, video, s_std, zr->norm);
+>>>>>>> v3.18
 	decoder_call(zr, video, s_routing,
 		zr->card.input[zr->input].muxsel, 0, 0);
 

@@ -22,6 +22,11 @@
 #include <drm/ttm/ttm_memory.h>
 #include <drm/ttm/ttm_module.h>
 
+<<<<<<< HEAD
+=======
+#include <drm/drm_gem.h>
+
+>>>>>>> v3.18
 #include <linux/i2c.h>
 #include <linux/i2c-algo-bit.h>
 
@@ -149,6 +154,24 @@ struct mga_connector {
 	struct mga_i2c_chan *i2c;
 };
 
+<<<<<<< HEAD
+=======
+struct mga_cursor {
+	/*
+	   We have to have 2 buffers for the cursor to avoid occasional
+	   corruption while switching cursor icons.
+	   If either of these is NULL, then don't do hardware cursors, and
+	   fall back to software.
+	*/
+	struct mgag200_bo *pixels_1;
+	struct mgag200_bo *pixels_2;
+	u64 pixels_1_gpu_addr, pixels_2_gpu_addr;
+	/* The currently displayed icon, this points to one of pixels_1, or pixels_2 */
+	struct mgag200_bo *pixels_current;
+	/* The previously displayed icon */
+	struct mgag200_bo *pixels_prev;
+};
+>>>>>>> v3.18
 
 struct mga_mc {
 	resource_size_t			vram_size;
@@ -175,12 +198,19 @@ struct mga_device {
 	resource_size_t			rmmio_size;
 	void __iomem			*rmmio;
 
+<<<<<<< HEAD
 	drm_local_map_t			*framebuffer;
 
+=======
+>>>>>>> v3.18
 	struct mga_mc			mc;
 	struct mga_mode_info		mode_info;
 
 	struct mga_fbdev *mfbdev;
+<<<<<<< HEAD
+=======
+	struct mga_cursor cursor;
+>>>>>>> v3.18
 
 	bool				suspended;
 	int				num_crtc;
@@ -208,7 +238,11 @@ struct mgag200_bo {
 	struct ttm_placement placement;
 	struct ttm_bo_kmap_obj kmap;
 	struct drm_gem_object gem;
+<<<<<<< HEAD
 	u32 placements[3];
+=======
+	struct ttm_place placements[3];
+>>>>>>> v3.18
 	int pin_count;
 };
 #define gem_to_mga_bo(gobj) container_of((gobj), struct mgag200_bo, gem)
@@ -244,6 +278,7 @@ int mgag200_driver_unload(struct drm_device *dev);
 int mgag200_gem_create(struct drm_device *dev,
 		   u32 size, bool iskernel,
 		       struct drm_gem_object **obj);
+<<<<<<< HEAD
 int mgag200_gem_init_object(struct drm_gem_object *obj);
 int mgag200_dumb_create(struct drm_file *file,
 			struct drm_device *dev,
@@ -251,6 +286,11 @@ int mgag200_dumb_create(struct drm_file *file,
 int mgag200_dumb_destroy(struct drm_file *file,
 			 struct drm_device *dev,
 			 uint32_t handle);
+=======
+int mgag200_dumb_create(struct drm_file *file,
+			struct drm_device *dev,
+			struct drm_mode_create_dumb *args);
+>>>>>>> v3.18
 void mgag200_gem_free_object(struct drm_gem_object *obj);
 int
 mgag200_dumb_mmap_offset(struct drm_file *file,
@@ -264,8 +304,29 @@ void mgag200_i2c_destroy(struct mga_i2c_chan *i2c);
 #define DRM_FILE_PAGE_OFFSET (0x100000000ULL >> PAGE_SHIFT)
 void mgag200_ttm_placement(struct mgag200_bo *bo, int domain);
 
+<<<<<<< HEAD
 int mgag200_bo_reserve(struct mgag200_bo *bo, bool no_wait);
 void mgag200_bo_unreserve(struct mgag200_bo *bo);
+=======
+static inline int mgag200_bo_reserve(struct mgag200_bo *bo, bool no_wait)
+{
+	int ret;
+
+	ret = ttm_bo_reserve(&bo->bo, true, no_wait, false, NULL);
+	if (ret) {
+		if (ret != -ERESTARTSYS && ret != -EBUSY)
+			DRM_ERROR("reserve failed %p\n", bo);
+		return ret;
+	}
+	return 0;
+}
+
+static inline void mgag200_bo_unreserve(struct mgag200_bo *bo)
+{
+	ttm_bo_unreserve(&bo->bo);
+}
+
+>>>>>>> v3.18
 int mgag200_bo_create(struct drm_device *dev, int size, int align,
 		      uint32_t flags, struct mgag200_bo **pastbo);
 int mgag200_mm_init(struct mga_device *mdev);
@@ -274,4 +335,12 @@ int mgag200_mmap(struct file *filp, struct vm_area_struct *vma);
 int mgag200_bo_pin(struct mgag200_bo *bo, u32 pl_flag, u64 *gpu_addr);
 int mgag200_bo_unpin(struct mgag200_bo *bo);
 int mgag200_bo_push_sysram(struct mgag200_bo *bo);
+<<<<<<< HEAD
+=======
+			   /* mgag200_cursor.c */
+int mga_crtc_cursor_set(struct drm_crtc *crtc, struct drm_file *file_priv,
+						uint32_t handle, uint32_t width, uint32_t height);
+int mga_crtc_cursor_move(struct drm_crtc *crtc, int x, int y);
+
+>>>>>>> v3.18
 #endif				/* __MGAG200_DRV_H__ */

@@ -18,7 +18,14 @@
 #include <net/af_rxrpc.h>
 #include "ar-internal.h"
 
+<<<<<<< HEAD
 int rxrpc_resend_timeout = 4;
+=======
+/*
+ * Time till packet resend (in jiffies).
+ */
+unsigned rxrpc_resend_timeout = 4 * HZ;
+>>>>>>> v3.18
 
 static int rxrpc_send_data(struct kiocb *iocb,
 			   struct rxrpc_sock *rx,
@@ -152,8 +159,13 @@ int rxrpc_client_sendmsg(struct kiocb *iocb, struct rxrpc_sock *rx,
 	if (trans) {
 		service_id = rx->service_id;
 		if (msg->msg_name) {
+<<<<<<< HEAD
 			struct sockaddr_rxrpc *srx =
 				(struct sockaddr_rxrpc *) msg->msg_name;
+=======
+			DECLARE_SOCKADDR(struct sockaddr_rxrpc *, srx,
+					 msg->msg_name);
+>>>>>>> v3.18
 			service_id = htons(srx->srx_service);
 		}
 		key = rx->key;
@@ -487,7 +499,11 @@ static void rxrpc_queue_packet(struct rxrpc_call *call, struct sk_buff *skb,
 	       ntohl(sp->hdr.serial), ntohl(sp->hdr.seq));
 
 	sp->need_resend = false;
+<<<<<<< HEAD
 	sp->resend_at = jiffies + rxrpc_resend_timeout * HZ;
+=======
+	sp->resend_at = jiffies + rxrpc_resend_timeout;
+>>>>>>> v3.18
 	if (!test_and_set_bit(RXRPC_CALL_RUN_RTIMER, &call->flags)) {
 		_debug("run timer");
 		call->resend_timer.expires = sp->resend_at;
@@ -666,6 +682,10 @@ static int rxrpc_send_data(struct kiocb *iocb,
 		/* add the packet to the send queue if it's now full */
 		if (sp->remain <= 0 || (segment == 0 && !more)) {
 			struct rxrpc_connection *conn = call->conn;
+<<<<<<< HEAD
+=======
+			uint32_t seq;
+>>>>>>> v3.18
 			size_t pad;
 
 			/* pad out if we're using security */
@@ -678,11 +698,20 @@ static int rxrpc_send_data(struct kiocb *iocb,
 					memset(skb_put(skb, pad), 0, pad);
 			}
 
+<<<<<<< HEAD
 			sp->hdr.epoch = conn->epoch;
 			sp->hdr.cid = call->cid;
 			sp->hdr.callNumber = call->call_id;
 			sp->hdr.seq =
 				htonl(atomic_inc_return(&call->sequence));
+=======
+			seq = atomic_inc_return(&call->sequence);
+
+			sp->hdr.epoch = conn->epoch;
+			sp->hdr.cid = call->cid;
+			sp->hdr.callNumber = call->call_id;
+			sp->hdr.seq = htonl(seq);
+>>>>>>> v3.18
 			sp->hdr.serial =
 				htonl(atomic_inc_return(&conn->serial));
 			sp->hdr.type = RXRPC_PACKET_TYPE_DATA;
@@ -697,6 +726,11 @@ static int rxrpc_send_data(struct kiocb *iocb,
 			else if (CIRC_SPACE(call->acks_head, call->acks_tail,
 					    call->acks_winsz) > 1)
 				sp->hdr.flags |= RXRPC_MORE_PACKETS;
+<<<<<<< HEAD
+=======
+			if (more && seq & 1)
+				sp->hdr.flags |= RXRPC_REQUEST_ACK;
+>>>>>>> v3.18
 
 			ret = rxrpc_secure_packet(
 				call, skb, skb->mark,

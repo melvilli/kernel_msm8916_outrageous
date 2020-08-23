@@ -193,8 +193,14 @@ static int snd_card_als100_probe(int dev,
 	struct snd_card_als100 *acard;
 	struct snd_opl3 *opl3;
 
+<<<<<<< HEAD
 	error = snd_card_create(index[dev], id[dev], THIS_MODULE,
 				sizeof(struct snd_card_als100), &card);
+=======
+	error = snd_card_new(&pcard->card->dev,
+			     index[dev], id[dev], THIS_MODULE,
+			     sizeof(struct snd_card_als100), &card);
+>>>>>>> v3.18
 	if (error < 0)
 		return error;
 	acard = card->private_data;
@@ -203,7 +209,10 @@ static int snd_card_als100_probe(int dev,
 		snd_card_free(card);
 		return error;
 	}
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pcard->card->dev);
+=======
+>>>>>>> v3.18
 
 	if (pid->driver_data == SB_HW_DT019X)
 		dma16[dev] = -1;

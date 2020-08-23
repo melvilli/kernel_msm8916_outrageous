@@ -177,21 +177,35 @@ out:
 
 static int __init spu_map_interrupts(struct spu *spu, struct device_node *np)
 {
+<<<<<<< HEAD
 	struct of_irq oirq;
+=======
+	struct of_phandle_args oirq;
+>>>>>>> v3.18
 	int ret;
 	int i;
 
 	for (i=0; i < 3; i++) {
+<<<<<<< HEAD
 		ret = of_irq_map_one(np, i, &oirq);
+=======
+		ret = of_irq_parse_one(np, i, &oirq);
+>>>>>>> v3.18
 		if (ret) {
 			pr_debug("spu_new: failed to get irq %d\n", i);
 			goto err;
 		}
 		ret = -EINVAL;
+<<<<<<< HEAD
 		pr_debug("  irq %d no 0x%x on %s\n", i, oirq.specifier[0],
 			 oirq.controller->full_name);
 		spu->irqs[i] = irq_create_of_mapping(oirq.controller,
 					oirq.specifier, oirq.size);
+=======
+		pr_debug("  irq %d no 0x%x on %s\n", i, oirq.args[0],
+			 oirq.np->full_name);
+		spu->irqs[i] = irq_create_of_mapping(&oirq);
+>>>>>>> v3.18
 		if (spu->irqs[i] == NO_IRQ) {
 			pr_debug("spu_new: failed to map it !\n");
 			goto err;
@@ -200,7 +214,11 @@ static int __init spu_map_interrupts(struct spu *spu, struct device_node *np)
 	return 0;
 
 err:
+<<<<<<< HEAD
 	pr_debug("failed to map irq %x for spu %s\n", *oirq.specifier,
+=======
+	pr_debug("failed to map irq %x for spu %s\n", *oirq.args,
+>>>>>>> v3.18
 		spu->name);
 	for (; i >= 0; i--) {
 		if (spu->irqs[i] != NO_IRQ)

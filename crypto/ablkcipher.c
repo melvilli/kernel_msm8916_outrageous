@@ -16,9 +16,13 @@
 #include <crypto/internal/skcipher.h>
 #include <linux/cpumask.h>
 #include <linux/err.h>
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
+=======
+#include <linux/kernel.h>
+>>>>>>> v3.18
 #include <linux/rtnetlink.h>
 #include <linux/sched.h>
 #include <linux/slab.h>
@@ -30,8 +34,11 @@
 
 #include "internal.h"
 
+<<<<<<< HEAD
 static const char *skcipher_default_geniv __read_mostly;
 
+=======
+>>>>>>> v3.18
 struct ablkcipher_buffer {
 	struct list_head	entry;
 	struct scatter_walk	dst;
@@ -379,7 +386,10 @@ static int crypto_init_ablkcipher_ops(struct crypto_tfm *tfm, u32 type,
 	}
 	crt->base = __crypto_ablkcipher_cast(tfm);
 	crt->ivsize = alg->ivsize;
+<<<<<<< HEAD
 	crt->has_setkey = alg->max_keysize;
+=======
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -461,7 +471,10 @@ static int crypto_init_givcipher_ops(struct crypto_tfm *tfm, u32 type,
 	crt->givdecrypt = alg->givdecrypt ?: no_givdecrypt;
 	crt->base = __crypto_ablkcipher_cast(tfm);
 	crt->ivsize = alg->ivsize;
+<<<<<<< HEAD
 	crt->has_setkey = alg->max_keysize;
+=======
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -529,8 +542,12 @@ const char *crypto_default_geniv(const struct crypto_alg *alg)
 	    alg->cra_blocksize)
 		return "chainiv";
 
+<<<<<<< HEAD
 	return alg->cra_flags & CRYPTO_ALG_ASYNC ?
 	       "eseqiv" : skcipher_default_geniv;
+=======
+	return "eseqiv";
+>>>>>>> v3.18
 }
 
 static int crypto_givcipher_default(struct crypto_alg *alg, u32 type, u32 mask)
@@ -702,7 +719,11 @@ struct crypto_ablkcipher *crypto_alloc_ablkcipher(const char *alg_name,
 err:
 		if (err != -EAGAIN)
 			break;
+<<<<<<< HEAD
 		if (fatal_signal_pending(current)) {
+=======
+		if (signal_pending(current)) {
+>>>>>>> v3.18
 			err = -EINTR;
 			break;
 		}
@@ -711,6 +732,7 @@ err:
 	return ERR_PTR(err);
 }
 EXPORT_SYMBOL_GPL(crypto_alloc_ablkcipher);
+<<<<<<< HEAD
 
 static int __init skcipher_module_init(void)
 {
@@ -725,3 +747,5 @@ static void skcipher_module_exit(void)
 
 module_init(skcipher_module_init);
 module_exit(skcipher_module_exit);
+=======
+>>>>>>> v3.18

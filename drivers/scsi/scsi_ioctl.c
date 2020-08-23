@@ -91,12 +91,22 @@ static int ioctl_internal_command(struct scsi_device *sdev, char *cmd,
 	int result;
 	struct scsi_sense_hdr sshdr;
 
+<<<<<<< HEAD
 	SCSI_LOG_IOCTL(1, printk("Trying ioctl with scsi command %d\n", *cmd));
+=======
+	SCSI_LOG_IOCTL(1, sdev_printk(KERN_INFO, sdev,
+				      "Trying ioctl with scsi command %d\n", *cmd));
+>>>>>>> v3.18
 
 	result = scsi_execute_req(sdev, cmd, DMA_NONE, NULL, 0,
 				  &sshdr, timeout, retries, NULL);
 
+<<<<<<< HEAD
 	SCSI_LOG_IOCTL(2, printk("Ioctl returned  0x%x\n", result));
+=======
+	SCSI_LOG_IOCTL(2, sdev_printk(KERN_INFO, sdev,
+				      "Ioctl returned  0x%x\n", result));
+>>>>>>> v3.18
 
 	if ((driver_byte(result) & DRIVER_SENSE) &&
 	    (scsi_sense_valid(&sshdr))) {
@@ -105,9 +115,17 @@ static int ioctl_internal_command(struct scsi_device *sdev, char *cmd,
 			if (cmd[0] == ALLOW_MEDIUM_REMOVAL)
 				sdev->lockable = 0;
 			else
+<<<<<<< HEAD
 				printk(KERN_INFO "ioctl_internal_command: "
 				       "ILLEGAL REQUEST asc=0x%x ascq=0x%x\n",
 				       sshdr.asc, sshdr.ascq);
+=======
+				sdev_printk(KERN_INFO, sdev,
+					    "ioctl_internal_command: "
+					    "ILLEGAL REQUEST "
+					    "asc=0x%x ascq=0x%x\n",
+					    sshdr.asc, sshdr.ascq);
+>>>>>>> v3.18
 			break;
 		case NOT_READY:	/* This happens if there is no disc in drive */
 			if (sdev->removable)
@@ -127,7 +145,12 @@ static int ioctl_internal_command(struct scsi_device *sdev, char *cmd,
 		}
 	}
 
+<<<<<<< HEAD
 	SCSI_LOG_IOCTL(2, printk("IOCTL Releasing command\n"));
+=======
+	SCSI_LOG_IOCTL(2, sdev_printk(KERN_INFO, sdev,
+				      "IOCTL Releasing command\n"));
+>>>>>>> v3.18
 	return result;
 }
 

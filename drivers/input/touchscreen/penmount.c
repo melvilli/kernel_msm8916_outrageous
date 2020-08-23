@@ -21,7 +21,10 @@
 #include <linux/input.h>
 #include <linux/input/mt.h>
 #include <linux/serio.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 
 #define DRIVER_DESC	"PenMount serial touchscreen driver"
 

@@ -21,6 +21,7 @@
 #include <asm/war.h>
 #include <asm/thread_info.h>
 
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 #define PANIC_PIC(msg)					\
 		.set	push;				\
@@ -35,6 +36,8 @@
 		TEXT(msg)
 #endif
 
+=======
+>>>>>>> v3.18
 	__INIT
 
 /*
@@ -67,7 +70,11 @@ NESTED(except_vec3_generic, 0, sp)
  */
 NESTED(except_vec3_r4000, 0, sp)
 	.set	push
+<<<<<<< HEAD
 	.set	mips3
+=======
+	.set	arch=r4000
+>>>>>>> v3.18
 	.set	noat
 	mfc0	k1, CP0_CAUSE
 	li	k0, 31<<2
@@ -139,7 +146,11 @@ LEAF(__r4k_wait)
 	nop
 	nop
 #endif
+<<<<<<< HEAD
 	.set	mips3
+=======
+	.set	arch=r4000
+>>>>>>> v3.18
 	wait
 	/* end of rollback region (the region size must be power of two) */
 1:
@@ -251,6 +262,7 @@ NESTED(except_vec_vi, 0, sp)
 	SAVE_AT
 	.set	push
 	.set	noreorder
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	/*
 	 * To keep from blindly blocking *all* interrupts
@@ -260,6 +272,8 @@ NESTED(except_vec_vi, 0, sp)
 FEXPORT(except_vec_vi_mori)
 	ori	a0, $0, 0
 #endif /* CONFIG_MIPS_MT_SMTC */
+=======
+>>>>>>> v3.18
 	PTR_LA	v1, except_vec_vi_handler
 FEXPORT(except_vec_vi_lui)
 	lui	v0, 0		/* Patched */
@@ -277,6 +291,7 @@ EXPORT(except_vec_vi_end)
 NESTED(except_vec_vi_handler, 0, sp)
 	SAVE_TEMP
 	SAVE_STATIC
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	/*
 	 * SMTC has an interesting problem that interrupts are level-triggered,
@@ -308,6 +323,12 @@ NESTED(except_vec_vi_handler, 0, sp)
 #ifdef CONFIG_MIPS_MT_SMTC
 	move	a0, s1
 #endif
+=======
+	CLI
+#ifdef CONFIG_TRACE_IRQFLAGS
+	move	s0, v0
+	TRACE_IRQS_OFF
+>>>>>>> v3.18
 	move	v0, s0
 #endif
 
@@ -374,12 +395,29 @@ NESTED(except_vec_nmi, 0, sp)
 NESTED(nmi_handler, PT_SIZE, sp)
 	.set	push
 	.set	noat
+<<<<<<< HEAD
 	SAVE_ALL
 	move	a0, sp
 	jal	nmi_exception_handler
 	RESTORE_ALL
 	.set	mips3
 	eret
+=======
+	/*
+	 * Clear ERL - restore segment mapping
+	 * Clear BEV - required for page fault exception handler to work
+	 */
+	mfc0	k0, CP0_STATUS
+	ori     k0, k0, ST0_EXL
+	li	k1, ~(ST0_BEV | ST0_ERL)
+	and     k0, k0, k1
+	mtc0    k0, CP0_STATUS
+	_ehb
+	SAVE_ALL
+	move	a0, sp
+	jal	nmi_exception_handler
+	/* nmi_exception_handler never returns */
+>>>>>>> v3.18
 	.set	pop
 	END(nmi_handler)
 
@@ -400,6 +438,10 @@ NESTED(nmi_handler, PT_SIZE, sp)
 	.set	push
 	/* gas fails to assemble cfc1 for some archs (octeon).*/ \
 	.set	mips1
+<<<<<<< HEAD
+=======
+	SET_HARDFLOAT
+>>>>>>> v3.18
 	cfc1	a1, fcr31
 	li	a2, ~(0x3f << 12)
 	and	a2, a1
@@ -467,7 +509,14 @@ NESTED(nmi_handler, PT_SIZE, sp)
 	BUILD_HANDLER cpu cpu sti silent		/* #11 */
 	BUILD_HANDLER ov ov sti silent			/* #12 */
 	BUILD_HANDLER tr tr sti silent			/* #13 */
+<<<<<<< HEAD
 	BUILD_HANDLER fpe fpe fpe silent		/* #15 */
+=======
+	BUILD_HANDLER msa_fpe msa_fpe sti silent	/* #14 */
+	BUILD_HANDLER fpe fpe fpe silent		/* #15 */
+	BUILD_HANDLER ftlb ftlb none silent		/* #16 */
+	BUILD_HANDLER msa msa sti silent		/* #21 */
+>>>>>>> v3.18
 	BUILD_HANDLER mdmx mdmx sti silent		/* #22 */
 #ifdef	CONFIG_HARDWARE_WATCHPOINTS
 	/*
@@ -485,9 +534,12 @@ NESTED(nmi_handler, PT_SIZE, sp)
 
 	.align	5
 	LEAF(handle_ri_rdhwr_vivt)
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	PANIC_PIC("handle_ri_rdhwr_vivt called")
 #else
+=======
+>>>>>>> v3.18
 	.set	push
 	.set	noat
 	.set	noreorder
@@ -506,7 +558,10 @@ NESTED(nmi_handler, PT_SIZE, sp)
 	.set	pop
 	bltz	k1, handle_ri	/* slow path */
 	/* fall thru */
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 	END(handle_ri_rdhwr_vivt)
 
 	LEAF(handle_ri_rdhwr)
@@ -566,7 +621,11 @@ isrdhwr:
 	ori	k1, _THREAD_MASK
 	xori	k1, _THREAD_MASK
 	LONG_L	v1, TI_TP_VALUE(k1)
+<<<<<<< HEAD
 	.set	mips3
+=======
+	.set	arch=r4000
+>>>>>>> v3.18
 	eret
 	.set	mips0
 #endif

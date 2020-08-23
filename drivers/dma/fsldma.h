@@ -41,7 +41,11 @@
  * channel is allowed to transfer before the DMA engine pauses
  * the current channel and switches to the next channel
  */
+<<<<<<< HEAD
 #define FSL_DMA_MR_BWC         0x08000000
+=======
+#define FSL_DMA_MR_BWC         0x0A000000
+>>>>>>> v3.18
 
 /* Special MR definition for MPC8349 */
 #define FSL_DMA_MR_EOTIE	0x00000080
@@ -112,7 +116,11 @@ struct fsldma_chan_regs {
 };
 
 struct fsldma_chan;
+<<<<<<< HEAD
 #define FSL_DMA_MAX_CHANS_PER_DEVICE 4
+=======
+#define FSL_DMA_MAX_CHANS_PER_DEVICE 8
+>>>>>>> v3.18
 
 struct fsldma_device {
 	void __iomem *regs;	/* DGSR register base */
@@ -134,12 +142,44 @@ struct fsldma_device {
 #define FSL_DMA_CHAN_PAUSE_EXT	0x00001000
 #define FSL_DMA_CHAN_START_EXT	0x00002000
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PM
+struct fsldma_chan_regs_save {
+	u32 mr;
+};
+
+enum fsldma_pm_state {
+	RUNNING = 0,
+	SUSPENDED,
+};
+#endif
+
+>>>>>>> v3.18
 struct fsldma_chan {
 	char name[8];			/* Channel name */
 	struct fsldma_chan_regs __iomem *regs;
 	spinlock_t desc_lock;		/* Descriptor operation lock */
+<<<<<<< HEAD
 	struct list_head ld_pending;	/* Link descriptors queue */
 	struct list_head ld_running;	/* Link descriptors queue */
+=======
+	/*
+	 * Descriptors which are queued to run, but have not yet been
+	 * submitted to the hardware for execution
+	 */
+	struct list_head ld_pending;
+	/*
+	 * Descriptors which are currently being executed by the hardware
+	 */
+	struct list_head ld_running;
+	/*
+	 * Descriptors which have finished execution by the hardware. These
+	 * descriptors have already had their cleanup actions run. They are
+	 * waiting for the ACK bit to be set by the async_tx API.
+	 */
+	struct list_head ld_completed;	/* Link descriptors queue */
+>>>>>>> v3.18
 	struct dma_chan common;		/* DMA common channel */
 	struct dma_pool *desc_pool;	/* Descriptors pool */
 	struct device *dev;		/* Channel device */
@@ -148,6 +188,13 @@ struct fsldma_chan {
 	struct tasklet_struct tasklet;
 	u32 feature;
 	bool idle;			/* DMA controller is idle */
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PM
+	struct fsldma_chan_regs_save regs_save;
+	enum fsldma_pm_state pm_state;
+#endif
+>>>>>>> v3.18
 
 	void (*toggle_ext_pause)(struct fsldma_chan *fsl_chan, int enable);
 	void (*toggle_ext_start)(struct fsldma_chan *fsl_chan, int enable);

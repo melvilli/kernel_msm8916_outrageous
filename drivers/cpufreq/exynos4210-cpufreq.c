@@ -16,8 +16,13 @@
 #include <linux/io.h>
 #include <linux/slab.h>
 #include <linux/cpufreq.h>
+<<<<<<< HEAD
 
 #include <mach/regs-clock.h>
+=======
+#include <linux/of.h>
+#include <linux/of_address.h>
+>>>>>>> v3.18
 
 #include "exynos-cpufreq.h"
 
@@ -25,18 +30,31 @@ static struct clk *cpu_clk;
 static struct clk *moutcore;
 static struct clk *mout_mpll;
 static struct clk *mout_apll;
+<<<<<<< HEAD
+=======
+static struct exynos_dvfs_info *cpufreq;
+>>>>>>> v3.18
 
 static unsigned int exynos4210_volt_table[] = {
 	1250000, 1150000, 1050000, 975000, 950000,
 };
 
 static struct cpufreq_frequency_table exynos4210_freq_table[] = {
+<<<<<<< HEAD
 	{L0, 1200 * 1000},
 	{L1, 1000 * 1000},
 	{L2,  800 * 1000},
 	{L3,  500 * 1000},
 	{L4,  200 * 1000},
 	{0, CPUFREQ_TABLE_END},
+=======
+	{0, L0, 1200 * 1000},
+	{0, L1, 1000 * 1000},
+	{0, L2,  800 * 1000},
+	{0, L3,  500 * 1000},
+	{0, L4,  200 * 1000},
+	{0, 0, CPUFREQ_TABLE_END},
+>>>>>>> v3.18
 };
 
 static struct apll_freq apll_freq_4210[] = {
@@ -62,25 +80,40 @@ static void exynos4210_set_clkdiv(unsigned int div_index)
 
 	tmp = apll_freq_4210[div_index].clk_div_cpu0;
 
+<<<<<<< HEAD
 	__raw_writel(tmp, EXYNOS4_CLKDIV_CPU);
 
 	do {
 		tmp = __raw_readl(EXYNOS4_CLKDIV_STATCPU);
+=======
+	__raw_writel(tmp, cpufreq->cmu_regs + EXYNOS4_CLKDIV_CPU);
+
+	do {
+		tmp = __raw_readl(cpufreq->cmu_regs + EXYNOS4_CLKDIV_STATCPU);
+>>>>>>> v3.18
 	} while (tmp & 0x1111111);
 
 	/* Change Divider - CPU1 */
 
 	tmp = apll_freq_4210[div_index].clk_div_cpu1;
 
+<<<<<<< HEAD
 	__raw_writel(tmp, EXYNOS4_CLKDIV_CPU1);
 
 	do {
 		tmp = __raw_readl(EXYNOS4_CLKDIV_STATCPU1);
+=======
+	__raw_writel(tmp, cpufreq->cmu_regs + EXYNOS4_CLKDIV_CPU1);
+
+	do {
+		tmp = __raw_readl(cpufreq->cmu_regs + EXYNOS4_CLKDIV_STATCPU1);
+>>>>>>> v3.18
 	} while (tmp & 0x11);
 }
 
 static void exynos4210_set_apll(unsigned int index)
 {
+<<<<<<< HEAD
 	unsigned int tmp;
 
 	/* 1. MUX_CORE_SEL = MPLL, ARMCLK uses MPLL for lock time */
@@ -88,10 +121,20 @@ static void exynos4210_set_apll(unsigned int index)
 
 	do {
 		tmp = (__raw_readl(EXYNOS4_CLKMUX_STATCPU)
+=======
+	unsigned int tmp, freq = apll_freq_4210[index].freq;
+
+	/* MUX_CORE_SEL = MPLL, ARMCLK uses MPLL for lock time */
+	clk_set_parent(moutcore, mout_mpll);
+
+	do {
+		tmp = (__raw_readl(cpufreq->cmu_regs + EXYNOS4_CLKMUX_STATCPU)
+>>>>>>> v3.18
 			>> EXYNOS4_CLKSRC_CPU_MUXCORE_SHIFT);
 		tmp &= 0x7;
 	} while (tmp != 0x2);
 
+<<<<<<< HEAD
 	/* 2. Set APLL Lock time */
 	__raw_writel(EXYNOS4_APLL_LOCKTIME, EXYNOS4_APLL_LOCK);
 
@@ -111,10 +154,20 @@ static void exynos4210_set_apll(unsigned int index)
 
 	do {
 		tmp = __raw_readl(EXYNOS4_CLKMUX_STATCPU);
+=======
+	clk_set_rate(mout_apll, freq * 1000);
+
+	/* MUX_CORE_SEL = APLL */
+	clk_set_parent(moutcore, mout_apll);
+
+	do {
+		tmp = __raw_readl(cpufreq->cmu_regs + EXYNOS4_CLKMUX_STATCPU);
+>>>>>>> v3.18
 		tmp &= EXYNOS4_CLKMUX_STATCPU_MUXCORE_MASK;
 	} while (tmp != (0x1 << EXYNOS4_CLKSRC_CPU_MUXCORE_SHIFT));
 }
 
+<<<<<<< HEAD
 static bool exynos4210_pms_change(unsigned int old_index, unsigned int new_index)
 {
 	unsigned int old_pm = apll_freq_4210[old_index].mps >> 8;
@@ -162,13 +215,51 @@ static void exynos4210_set_frequency(unsigned int old_index,
 			/* 2. Change the system clock divider values */
 			exynos4210_set_clkdiv(new_index);
 		}
+=======
+static void exynos4210_set_frequency(unsigned int old_index,
+				     unsigned int new_index)
+{
+	if (old_index > new_index) {
+		exynos4210_set_clkdiv(new_index);
+		exynos4210_set_apll(new_index);
+	} else if (old_index < new_index) {
+		exynos4210_set_apll(new_index);
+		exynos4210_set_clkdiv(new_index);
+>>>>>>> v3.18
 	}
 }
 
 int exynos4210_cpufreq_init(struct exynos_dvfs_info *info)
 {
+<<<<<<< HEAD
 	unsigned long rate;
 
+=======
+	struct device_node *np;
+	unsigned long rate;
+
+	/*
+	 * HACK: This is a temporary workaround to get access to clock
+	 * controller registers directly and remove static mappings and
+	 * dependencies on platform headers. It is necessary to enable
+	 * Exynos multi-platform support and will be removed together with
+	 * this whole driver as soon as Exynos gets migrated to use
+	 * cpufreq-dt driver.
+	 */
+	np = of_find_compatible_node(NULL, NULL, "samsung,exynos4210-clock");
+	if (!np) {
+		pr_err("%s: failed to find clock controller DT node\n",
+			__func__);
+		return -ENODEV;
+	}
+
+	info->cmu_regs = of_iomap(np, 0);
+	if (!info->cmu_regs) {
+		pr_err("%s: failed to map CMU registers\n", __func__);
+		return -EFAULT;
+	}
+
+>>>>>>> v3.18
 	cpu_clk = clk_get(NULL, "armclk");
 	if (IS_ERR(cpu_clk))
 		return PTR_ERR(cpu_clk);
@@ -194,7 +285,12 @@ int exynos4210_cpufreq_init(struct exynos_dvfs_info *info)
 	info->volt_table = exynos4210_volt_table;
 	info->freq_table = exynos4210_freq_table;
 	info->set_freq = exynos4210_set_frequency;
+<<<<<<< HEAD
 	info->need_apll_change = exynos4210_pms_change;
+=======
+
+	cpufreq = info;
+>>>>>>> v3.18
 
 	return 0;
 
@@ -208,4 +304,7 @@ err_moutcore:
 	pr_debug("%s: failed initialization\n", __func__);
 	return -EINVAL;
 }
+<<<<<<< HEAD
 EXPORT_SYMBOL(exynos4210_cpufreq_init);
+=======
+>>>>>>> v3.18

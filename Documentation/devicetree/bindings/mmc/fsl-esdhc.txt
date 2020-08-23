@@ -19,6 +19,12 @@ Optional properties:
     "bus-width = <1>" property.
   - sdhci,auto-cmd12: specifies that a controller can only handle auto
     CMD12.
+<<<<<<< HEAD
+=======
+  - voltage-ranges : two cells are required, first cell specifies minimum
+    slot voltage (mV), second cell specifies maximum slot voltage (mV).
+    Several ranges could be specified.
+>>>>>>> v3.18
 
 Example:
 
@@ -29,4 +35,8 @@ sdhci@2e000 {
 	interrupt-parent = <&ipic>;
 	/* Filled in by U-Boot */
 	clock-frequency = <0>;
+<<<<<<< HEAD
+=======
+	voltage-ranges = <3300 3300>;
+>>>>>>> v3.18
 };

@@ -168,7 +168,11 @@ static void mma8450_close(struct input_polled_dev *dev)
  * I2C init/probing/exit functions
  */
 static int mma8450_probe(struct i2c_client *c,
+<<<<<<< HEAD
 				   const struct i2c_device_id *id)
+=======
+			 const struct i2c_device_id *id)
+>>>>>>> v3.18
 {
 	struct input_polled_dev *idev;
 	struct mma8450 *m;
@@ -204,6 +208,11 @@ static int mma8450_probe(struct i2c_client *c,
 		goto err_free_mem;
 	}
 
+<<<<<<< HEAD
+=======
+	i2c_set_clientdata(c, m);
+
+>>>>>>> v3.18
 	return 0;
 
 err_free_mem:

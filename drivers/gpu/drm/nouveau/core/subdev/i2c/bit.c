@@ -22,7 +22,11 @@
  * Authors: Ben Skeggs
  */
 
+<<<<<<< HEAD
 #include "subdev/i2c.h"
+=======
+#include "priv.h"
+>>>>>>> v3.18
 
 #ifdef CONFIG_NOUVEAU_I2C_INTERNAL
 #define T_TIMEOUT  2200000
@@ -187,8 +191,14 @@ i2c_bit_xfer(struct i2c_adapter *adap, struct i2c_msg *msgs, int num)
 	struct i2c_msg *msg = msgs;
 	int ret = 0, mcnt = num;
 
+<<<<<<< HEAD
 	if (port->func->acquire)
 		port->func->acquire(port);
+=======
+	ret = nouveau_i2c(port)->acquire(port, nsecs_to_jiffies(T_TIMEOUT));
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 
 	while (!ret && mcnt--) {
 		u8 remaining = msg->len;
@@ -210,6 +220,10 @@ i2c_bit_xfer(struct i2c_adapter *adap, struct i2c_msg *msgs, int num)
 	}
 
 	i2c_stop(port);
+<<<<<<< HEAD
+=======
+	nouveau_i2c(port)->release(port);
+>>>>>>> v3.18
 	return (ret < 0) ? ret : num;
 }
 #else

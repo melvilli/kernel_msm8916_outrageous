@@ -622,7 +622,11 @@ void irlap_send_rd_frame(struct irlap_cb *self)
 	frame = (struct rd_frame *)skb_put(tx_skb, 2);
 
 	frame->caddr = self->caddr;
+<<<<<<< HEAD
 	frame->caddr = RD_RSP | PF_BIT;
+=======
+	frame->control = RD_RSP | PF_BIT;
+>>>>>>> v3.18
 
 	irlap_queue_xmit(self, tx_skb);
 }

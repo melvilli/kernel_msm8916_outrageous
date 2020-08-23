@@ -12,12 +12,16 @@
 
 #include <linux/linkage.h>
 #include <linux/init.h>
+<<<<<<< HEAD
 #include <asm/asm-offsets.h>
 #include <asm/hardware/cache-l2x0.h>
 
 	.section ".text.head", "ax"
 
 #ifdef CONFIG_SMP
+=======
+
+>>>>>>> v3.18
 diag_reg_offset:
 	.word	g_diag_reg - .
 
@@ -34,6 +38,7 @@ ENTRY(v7_secondary_startup)
 	set_diag_reg
 	b	secondary_startup
 ENDPROC(v7_secondary_startup)
+<<<<<<< HEAD
 #endif
 
 #ifdef CONFIG_ARM_CPU_SUSPEND
@@ -69,3 +74,5 @@ ENTRY(v7_cpu_resume)
 	b	cpu_resume
 ENDPROC(v7_cpu_resume)
 #endif
+=======
+>>>>>>> v3.18

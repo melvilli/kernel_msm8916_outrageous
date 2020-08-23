@@ -32,11 +32,20 @@
 #include "pm.h"
 #include "twl-common.h"
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_SUSPEND
+>>>>>>> v3.18
 /*
  * omap_pm_suspend: points to a function that does the SoC-specific
  * suspend work
  */
+<<<<<<< HEAD
 int (*omap_pm_suspend)(void);
+=======
+static int (*omap_pm_suspend)(void);
+#endif
+>>>>>>> v3.18
 
 #ifdef CONFIG_PM
 /**
@@ -131,7 +140,11 @@ static int __init omap2_set_init_voltage(char *vdd_name, char *clk_name,
 {
 	struct voltagedomain *voltdm;
 	struct clk *clk;
+<<<<<<< HEAD
 	struct opp *opp;
+=======
+	struct dev_pm_opp *opp;
+>>>>>>> v3.18
 	unsigned long freq, bootup_volt;
 	struct device *dev;
 
@@ -243,6 +256,18 @@ static const struct platform_suspend_ops omap_pm_ops = {
 	.valid		= suspend_valid_only_mem,
 };
 
+<<<<<<< HEAD
+=======
+/**
+ * omap_common_suspend_init - Set common suspend routines for OMAP SoCs
+ * @pm_suspend: function pointer to SoC specific suspend function
+ */
+void omap_common_suspend_init(void *pm_suspend)
+{
+	omap_pm_suspend = pm_suspend;
+	suspend_set_ops(&omap_pm_ops);
+}
+>>>>>>> v3.18
 #endif /* CONFIG_SUSPEND */
 
 static void __init omap3_init_voltages(void)
@@ -266,7 +291,16 @@ static void __init omap4_init_voltages(void)
 
 static inline void omap_init_cpufreq(void)
 {
+<<<<<<< HEAD
 	struct platform_device_info devinfo = { .name = "omap-cpufreq", };
+=======
+	struct platform_device_info devinfo = { };
+
+	if (!of_have_populated_dt())
+		devinfo.name = "omap-cpufreq";
+	else
+		devinfo.name = "cpufreq-dt";
+>>>>>>> v3.18
 	platform_device_register_full(&devinfo);
 }
 
@@ -282,6 +316,7 @@ omap_postcore_initcall(omap2_common_pm_init);
 
 int __init omap2_common_pm_late_init(void)
 {
+<<<<<<< HEAD
 	/*
 	 * In the case of DT, the PMIC and SR initialization will be done using
 	 * a completely different mechanism.
@@ -307,6 +342,26 @@ int __init omap2_common_pm_late_init(void)
 #ifdef CONFIG_SUSPEND
 	suspend_set_ops(&omap_pm_ops);
 #endif
+=======
+	if (of_have_populated_dt()) {
+		omap3_twl_init();
+		omap4_twl_init();
+	}
+
+	/* Init the voltage layer */
+	omap_pmic_late_init();
+	omap_voltage_late_init();
+
+	/* Initialize the voltages */
+	omap3_init_voltages();
+	omap4_init_voltages();
+
+	/* Smartreflex device init */
+	omap_devinit_smartreflex();
+
+	/* cpufreq dummy device instantiation */
+	omap_init_cpufreq();
+>>>>>>> v3.18
 
 	return 0;
 }

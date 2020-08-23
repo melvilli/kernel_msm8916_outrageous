@@ -34,7 +34,11 @@ int
 i915_verify_lists(struct drm_device *dev)
 {
 	static int warned;
+<<<<<<< HEAD
 	drm_i915_private_t *dev_priv = dev->dev_private;
+=======
+	struct drm_i915_private *dev_priv = dev->dev_private;
+>>>>>>> v3.18
 	struct drm_i915_gem_object *obj;
 	int err = 0;
 
@@ -97,7 +101,11 @@ i915_verify_lists(struct drm_device *dev)
 		}
 	}
 
+<<<<<<< HEAD
 	list_for_each_entry(obj, &dev_priv->mm.inactive_list, list) {
+=======
+	list_for_each_entry(obj, &i915_gtt_vm->inactive_list, list) {
+>>>>>>> v3.18
 		if (obj->base.dev != dev ||
 		    !atomic_read(&obj->base.refcount.refcount)) {
 			DRM_ERROR("freed inactive %p\n", obj);
@@ -115,6 +123,7 @@ i915_verify_lists(struct drm_device *dev)
 
 	return warned = err;
 }
+<<<<<<< HEAD
 #endif /* WATCH_INACTIVE */
 
 #if WATCH_COHERENCY
@@ -185,3 +194,6 @@ i915_gem_object_check_coherency(struct drm_i915_gem_object *obj, int handle)
 	i915_gem_clflush_object(obj);
 }
 #endif
+=======
+#endif /* WATCH_LIST */
+>>>>>>> v3.18

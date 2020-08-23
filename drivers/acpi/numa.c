@@ -29,7 +29,10 @@
 #include <linux/errno.h>
 #include <linux/acpi.h>
 #include <linux/numa.h>
+<<<<<<< HEAD
 #include <acpi/acpi_bus.h>
+=======
+>>>>>>> v3.18
 
 #define PREFIX "ACPI: "
 
@@ -61,7 +64,11 @@ int node_to_pxm(int node)
 	return node_to_pxm_map[node];
 }
 
+<<<<<<< HEAD
 void __acpi_map_pxm_to_node(int pxm, int node)
+=======
+static void __acpi_map_pxm_to_node(int pxm, int node)
+>>>>>>> v3.18
 {
 	if (pxm_to_node_map[pxm] == NUMA_NO_NODE || node < pxm_to_node_map[pxm])
 		pxm_to_node_map[pxm] = node;
@@ -73,7 +80,11 @@ int acpi_map_pxm_to_node(int pxm)
 {
 	int node = pxm_to_node_map[pxm];
 
+<<<<<<< HEAD
 	if (node < 0) {
+=======
+	if (node == NUMA_NO_NODE) {
+>>>>>>> v3.18
 		if (nodes_weight(nodes_found_map) >= MAX_NUMNODES)
 			return NUMA_NO_NODE;
 		node = first_unset_node(nodes_found_map);
@@ -159,7 +170,11 @@ acpi_table_print_srat_entry(struct acpi_subtable_header *header)
  * distance than the others.
  * Do some quick checks here and only use the SLIT if it passes.
  */
+<<<<<<< HEAD
 static __init int slit_valid(struct acpi_table_slit *slit)
+=======
+static int __init slit_valid(struct acpi_table_slit *slit)
+>>>>>>> v3.18
 {
 	int i, j;
 	int d = slit->locality_count;
@@ -194,7 +209,11 @@ static int __init acpi_parse_slit(struct acpi_table_header *table)
 	return 0;
 }
 
+<<<<<<< HEAD
 void __init __attribute__ ((weak))
+=======
+void __init __weak
+>>>>>>> v3.18
 acpi_numa_x2apic_affinity_init(struct acpi_srat_x2apic_cpu_affinity *pa)
 {
 	printk(KERN_WARNING PREFIX
@@ -315,7 +334,11 @@ int __init acpi_numa_init(void)
 	return 0;
 }
 
+<<<<<<< HEAD
 int acpi_get_pxm(acpi_handle h)
+=======
+static int acpi_get_pxm(acpi_handle h)
+>>>>>>> v3.18
 {
 	unsigned long long pxm;
 	acpi_status status;
@@ -332,6 +355,7 @@ int acpi_get_pxm(acpi_handle h)
 	return -1;
 }
 
+<<<<<<< HEAD
 int acpi_get_node(acpi_handle *handle)
 {
 	int pxm, node = -1;
@@ -341,5 +365,16 @@ int acpi_get_node(acpi_handle *handle)
 		node = acpi_map_pxm_to_node(pxm);
 
 	return node;
+=======
+int acpi_get_node(acpi_handle handle)
+{
+	int pxm;
+
+	pxm = acpi_get_pxm(handle);
+	if (pxm < 0 || pxm >= MAX_PXM_DOMAINS)
+		return NUMA_NO_NODE;
+
+	return acpi_map_pxm_to_node(pxm);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(acpi_get_node);

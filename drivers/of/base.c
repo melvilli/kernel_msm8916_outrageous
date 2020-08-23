@@ -17,12 +17,23 @@
  *      as published by the Free Software Foundation; either version
  *      2 of the License, or (at your option) any later version.
  */
+<<<<<<< HEAD
+=======
+#include <linux/console.h>
+>>>>>>> v3.18
 #include <linux/ctype.h>
 #include <linux/cpu.h>
 #include <linux/module.h>
 #include <linux/of.h>
+<<<<<<< HEAD
 #include <linux/spinlock.h>
 #include <linux/slab.h>
+=======
+#include <linux/of_graph.h>
+#include <linux/spinlock.h>
+#include <linux/slab.h>
+#include <linux/string.h>
+>>>>>>> v3.18
 #include <linux/proc_fs.h>
 
 #include "of_private.h"
@@ -33,8 +44,22 @@ struct device_node *of_allnodes;
 EXPORT_SYMBOL(of_allnodes);
 struct device_node *of_chosen;
 struct device_node *of_aliases;
+<<<<<<< HEAD
 
 DEFINE_MUTEX(of_aliases_mutex);
+=======
+struct device_node *of_stdout;
+
+struct kset *of_kset;
+
+/*
+ * Used to protect the of_aliases, to hold off addition of nodes to sysfs.
+ * This mutex must be held whenever modifications are being made to the
+ * device tree. The of_{attach,detach}_node() and
+ * of_{add,remove,update}_property() helpers make sure this happens.
+ */
+DEFINE_MUTEX(of_mutex);
+>>>>>>> v3.18
 
 /* use when traversing tree through the allnext, child, sibling,
  * or parent members of struct device_node.
@@ -73,6 +98,7 @@ int of_n_size_cells(struct device_node *np)
 }
 EXPORT_SYMBOL(of_n_size_cells);
 
+<<<<<<< HEAD
 #if defined(CONFIG_OF_DYNAMIC)
 /**
  *	of_node_get - Increment refcount of a node
@@ -147,6 +173,133 @@ void of_node_put(struct device_node *node)
 }
 EXPORT_SYMBOL(of_node_put);
 #endif /* CONFIG_OF_DYNAMIC */
+=======
+#ifdef CONFIG_NUMA
+int __weak of_node_to_nid(struct device_node *np)
+{
+	return numa_node_id();
+}
+#endif
+
+#ifndef CONFIG_OF_DYNAMIC
+static void of_node_release(struct kobject *kobj)
+{
+	/* Without CONFIG_OF_DYNAMIC, no nodes gets freed */
+}
+#endif /* CONFIG_OF_DYNAMIC */
+
+struct kobj_type of_node_ktype = {
+	.release = of_node_release,
+};
+
+static ssize_t of_node_property_read(struct file *filp, struct kobject *kobj,
+				struct bin_attribute *bin_attr, char *buf,
+				loff_t offset, size_t count)
+{
+	struct property *pp = container_of(bin_attr, struct property, attr);
+	return memory_read_from_buffer(buf, count, &offset, pp->value, pp->length);
+}
+
+static const char *safe_name(struct kobject *kobj, const char *orig_name)
+{
+	const char *name = orig_name;
+	struct kernfs_node *kn;
+	int i = 0;
+
+	/* don't be a hero. After 16 tries give up */
+	while (i < 16 && (kn = sysfs_get_dirent(kobj->sd, name))) {
+		sysfs_put(kn);
+		if (name != orig_name)
+			kfree(name);
+		name = kasprintf(GFP_KERNEL, "%s#%i", orig_name, ++i);
+	}
+
+	if (name != orig_name)
+		pr_warn("device-tree: Duplicate name in %s, renamed to \"%s\"\n",
+			kobject_name(kobj), name);
+	return name;
+}
+
+int __of_add_property_sysfs(struct device_node *np, struct property *pp)
+{
+	int rc;
+
+	/* Important: Don't leak passwords */
+	bool secure = strncmp(pp->name, "security-", 9) == 0;
+
+	if (!IS_ENABLED(CONFIG_SYSFS))
+		return 0;
+
+	if (!of_kset || !of_node_is_attached(np))
+		return 0;
+
+	sysfs_bin_attr_init(&pp->attr);
+	pp->attr.attr.name = safe_name(&np->kobj, pp->name);
+	pp->attr.attr.mode = secure ? S_IRUSR : S_IRUGO;
+	pp->attr.size = secure ? 0 : pp->length;
+	pp->attr.read = of_node_property_read;
+
+	rc = sysfs_create_bin_file(&np->kobj, &pp->attr);
+	WARN(rc, "error adding attribute %s to node %s\n", pp->name, np->full_name);
+	return rc;
+}
+
+int __of_attach_node_sysfs(struct device_node *np)
+{
+	const char *name;
+	struct property *pp;
+	int rc;
+
+	if (!IS_ENABLED(CONFIG_SYSFS))
+		return 0;
+
+	if (!of_kset)
+		return 0;
+
+	np->kobj.kset = of_kset;
+	if (!np->parent) {
+		/* Nodes without parents are new top level trees */
+		rc = kobject_add(&np->kobj, NULL, "%s",
+				 safe_name(&of_kset->kobj, "base"));
+	} else {
+		name = safe_name(&np->parent->kobj, kbasename(np->full_name));
+		if (!name || !name[0])
+			return -EINVAL;
+
+		rc = kobject_add(&np->kobj, &np->parent->kobj, "%s", name);
+	}
+	if (rc)
+		return rc;
+
+	for_each_property_of_node(np, pp)
+		__of_add_property_sysfs(np, pp);
+
+	return 0;
+}
+
+static int __init of_init(void)
+{
+	struct device_node *np;
+
+	/* Create the kset, and register existing nodes */
+	mutex_lock(&of_mutex);
+	of_kset = kset_create_and_add("devicetree", NULL, firmware_kobj);
+	if (!of_kset) {
+		mutex_unlock(&of_mutex);
+		return -ENOMEM;
+	}
+	for_each_of_allnodes(np)
+		__of_attach_node_sysfs(np);
+	mutex_unlock(&of_mutex);
+
+	/* Symlink in /proc as required by userspace ABI */
+	if (of_allnodes)
+		proc_symlink("device-tree", NULL, "/sys/firmware/devicetree/base");
+
+	return 0;
+}
+core_initcall(of_init);
+>>>>>>> v3.18
 
 static struct property *__of_find_property(const struct device_node *np,
 					   const char *name, int *lenp)
@@ -210,8 +363,13 @@ EXPORT_SYMBOL(of_find_all_nodes);
  * Find a property with a given name for a given node
  * and return the value.
  */
+<<<<<<< HEAD
 static const void *__of_get_property(const struct device_node *np,
 				     const char *name, int *lenp)
+=======
+const void *__of_get_property(const struct device_node *np,
+			      const char *name, int *lenp)
+>>>>>>> v3.18
 {
 	struct property *pp = __of_find_property(np, name, lenp);
 
@@ -264,9 +422,15 @@ static bool __of_find_n_match_cpu_property(struct device_node *cpun,
 
 	ac = of_n_addr_cells(cpun);
 	cell = of_get_property(cpun, prop_name, &prop_len);
+<<<<<<< HEAD
 	if (!cell)
 		return false;
 	prop_len /= sizeof(*cell);
+=======
+	if (!cell || !ac)
+		return false;
+	prop_len /= sizeof(*cell) * ac;
+>>>>>>> v3.18
 	for (tid = 0; tid < prop_len; tid++) {
 		hwid = of_read_number(cell, ac);
 		if (arch_match_cpu_phys_id(cpu, hwid)) {
@@ -279,6 +443,34 @@ static bool __of_find_n_match_cpu_property(struct device_node *cpun,
 	return false;
 }
 
+<<<<<<< HEAD
+=======
+/*
+ * arch_find_n_match_cpu_physical_id - See if the given device node is
+ * for the cpu corresponding to logical cpu 'cpu'.  Return true if so,
+ * else false.  If 'thread' is non-NULL, the local thread number within the
+ * core is returned in it.
+ */
+bool __weak arch_find_n_match_cpu_physical_id(struct device_node *cpun,
+					      int cpu, unsigned int *thread)
+{
+	/* Check for non-standard "ibm,ppc-interrupt-server#s" property
+	 * for thread ids on PowerPC. If it doesn't exist fallback to
+	 * standard "reg" property.
+	 */
+	if (IS_ENABLED(CONFIG_PPC) &&
+	    __of_find_n_match_cpu_property(cpun,
+					   "ibm,ppc-interrupt-server#s",
+					   cpu, thread))
+		return true;
+
+	if (__of_find_n_match_cpu_property(cpun, "reg", cpu, thread))
+		return true;
+
+	return false;
+}
+
+>>>>>>> v3.18
 /**
  * of_get_cpu_node - Get device node associated with the given logical CPU
  *
@@ -299,6 +491,7 @@ static bool __of_find_n_match_cpu_property(struct device_node *cpun,
  */
 struct device_node *of_get_cpu_node(int cpu, unsigned int *thread)
 {
+<<<<<<< HEAD
 	struct device_node *cpun, *cpus;
 
 	cpus = of_find_node_by_path("/cpus");
@@ -319,12 +512,19 @@ struct device_node *of_get_cpu_node(int cpu, unsigned int *thread)
 				"ibm,ppc-interrupt-server#s", cpu, thread))
 			return cpun;
 		if (__of_find_n_match_cpu_property(cpun, "reg", cpu, thread))
+=======
+	struct device_node *cpun;
+
+	for_each_node_by_type(cpun, "cpu") {
+		if (arch_find_n_match_cpu_physical_id(cpun, cpu, thread))
+>>>>>>> v3.18
 			return cpun;
 	}
 	return NULL;
 }
 EXPORT_SYMBOL(of_get_cpu_node);
 
+<<<<<<< HEAD
 /** Checks if the given "compat" string matches one of the strings in
  * the device's "compatible" property
  */
@@ -346,6 +546,74 @@ static int __of_device_is_compatible(const struct device_node *device,
 	}
 
 	return 0;
+=======
+/**
+ * __of_device_is_compatible() - Check if the node matches given constraints
+ * @device: pointer to node
+ * @compat: required compatible string, NULL or "" for any match
+ * @type: required device_type value, NULL or "" for any match
+ * @name: required node name, NULL or "" for any match
+ *
+ * Checks if the given @compat, @type and @name strings match the
+ * properties of the given @device. A constraints can be skipped by
+ * passing NULL or an empty string as the constraint.
+ *
+ * Returns 0 for no match, and a positive integer on match. The return
+ * value is a relative score with larger values indicating better
+ * matches. The score is weighted for the most specific compatible value
+ * to get the highest score. Matching type is next, followed by matching
+ * name. Practically speaking, this results in the following priority
+ * order for matches:
+ *
+ * 1. specific compatible && type && name
+ * 2. specific compatible && type
+ * 3. specific compatible && name
+ * 4. specific compatible
+ * 5. general compatible && type && name
+ * 6. general compatible && type
+ * 7. general compatible && name
+ * 8. general compatible
+ * 9. type && name
+ * 10. type
+ * 11. name
+ */
+static int __of_device_is_compatible(const struct device_node *device,
+				     const char *compat, const char *type, const char *name)
+{
+	struct property *prop;
+	const char *cp;
+	int index = 0, score = 0;
+
+	/* Compatible match has highest priority */
+	if (compat && compat[0]) {
+		prop = __of_find_property(device, "compatible", NULL);
+		for (cp = of_prop_next_string(prop, NULL); cp;
+		     cp = of_prop_next_string(prop, cp), index++) {
+			if (of_compat_cmp(cp, compat, strlen(compat)) == 0) {
+				score = INT_MAX/2 - (index << 2);
+				break;
+			}
+		}
+		if (!score)
+			return 0;
+	}
+
+	/* Matching type is better than matching name */
+	if (type && type[0]) {
+		if (!device->type || of_node_cmp(type, device->type))
+			return 0;
+		score += 2;
+	}
+
+	/* Matching name is a bit better than not */
+	if (name && name[0]) {
+		if (!device->name || of_node_cmp(name, device->name))
+			return 0;
+		score++;
+	}
+
+	return score;
+>>>>>>> v3.18
 }
 
 /** Checks if the given "compat" string matches one of the strings in
@@ -358,7 +626,11 @@ int of_device_is_compatible(const struct device_node *device,
 	int res;
 
 	raw_spin_lock_irqsave(&devtree_lock, flags);
+<<<<<<< HEAD
 	res = __of_device_is_compatible(device, compat);
+=======
+	res = __of_device_is_compatible(device, compat, NULL, NULL);
+>>>>>>> v3.18
 	raw_spin_unlock_irqrestore(&devtree_lock, flags);
 	return res;
 }
@@ -398,6 +670,12 @@ static int __of_device_is_available(const struct device_node *device)
 	const char *status;
 	int statlen;
 
+<<<<<<< HEAD
+=======
+	if (!device)
+		return 0;
+
+>>>>>>> v3.18
 	status = __of_get_property(device, "status", &statlen);
 	if (status == NULL)
 		return 1;
@@ -480,6 +758,28 @@ struct device_node *of_get_next_parent(struct device_node *node)
 }
 EXPORT_SYMBOL(of_get_next_parent);
 
+<<<<<<< HEAD
+=======
+static struct device_node *__of_get_next_child(const struct device_node *node,
+						struct device_node *prev)
+{
+	struct device_node *next;
+
+	if (!node)
+		return NULL;
+
+	next = prev ? prev->sibling : node->child;
+	for (; next; next = next->sibling)
+		if (of_node_get(next))
+			break;
+	of_node_put(prev);
+	return next;
+}
+#define __for_each_child_of_node(parent, child) \
+	for (child = __of_get_next_child(parent, NULL); child != NULL; \
+	     child = __of_get_next_child(parent, child))
+
+>>>>>>> v3.18
 /**
  *	of_get_next_child - Iterate a node childs
  *	@node:	parent node
@@ -495,11 +795,15 @@ struct device_node *of_get_next_child(const struct device_node *node,
 	unsigned long flags;
 
 	raw_spin_lock_irqsave(&devtree_lock, flags);
+<<<<<<< HEAD
 	next = prev ? prev->sibling : node->child;
 	for (; next; next = next->sibling)
 		if (of_node_get(next))
 			break;
 	of_node_put(prev);
+=======
+	next = __of_get_next_child(node, prev);
+>>>>>>> v3.18
 	raw_spin_unlock_irqrestore(&devtree_lock, flags);
 	return next;
 }
@@ -519,6 +823,12 @@ struct device_node *of_get_next_available_child(const struct device_node *node,
 	struct device_node *next;
 	unsigned long flags;
 
+<<<<<<< HEAD
+=======
+	if (!node)
+		return NULL;
+
+>>>>>>> v3.18
 	raw_spin_lock_irqsave(&devtree_lock, flags);
 	next = prev ? prev->sibling : node->child;
 	for (; next; next = next->sibling) {
@@ -556,15 +866,50 @@ struct device_node *of_get_child_by_name(const struct device_node *node,
 }
 EXPORT_SYMBOL(of_get_child_by_name);
 
+<<<<<<< HEAD
 /**
  *	of_find_node_by_path - Find a node matching a full OF path
  *	@path:	The full path to match
+=======
+static struct device_node *__of_find_node_by_path(struct device_node *parent,
+						const char *path)
+{
+	struct device_node *child;
+	int len = strchrnul(path, '/') - path;
+
+	if (!len)
+		return NULL;
+
+	__for_each_child_of_node(parent, child) {
+		const char *name = strrchr(child->full_name, '/');
+		if (WARN(!name, "malformed device_node %s\n", child->full_name))
+			continue;
+		name++;
+		if (strncmp(path, name, len) == 0 && (strlen(name) == len))
+			return child;
+	}
+	return NULL;
+}
+
+/**
+ *	of_find_node_by_path - Find a node matching a full OF path
+ *	@path: Either the full path to match, or if the path does not
+ *	       start with '/', the name of a property of the /aliases
+ *	       node (an alias).  In the case of an alias, the node
+ *	       matching the alias' value will be returned.
+ *
+ *	Valid paths:
+ *		/foo/bar	Full path
+ *		foo		Valid alias
+ *		foo/bar		Valid alias + relative path
+>>>>>>> v3.18
  *
  *	Returns a node pointer with refcount incremented, use
  *	of_node_put() on it when done.
  */
 struct device_node *of_find_node_by_path(const char *path)
 {
+<<<<<<< HEAD
 	struct device_node *np = of_allnodes;
 	unsigned long flags;
 
@@ -573,6 +918,43 @@ struct device_node *of_find_node_by_path(const char *path)
 		if (np->full_name && (of_node_cmp(np->full_name, path) == 0)
 		    && of_node_get(np))
 			break;
+=======
+	struct device_node *np = NULL;
+	struct property *pp;
+	unsigned long flags;
+
+	if (strcmp(path, "/") == 0)
+		return of_node_get(of_allnodes);
+
+	/* The path could begin with an alias */
+	if (*path != '/') {
+		char *p = strchrnul(path, '/');
+		int len = p - path;
+
+		/* of_aliases must not be NULL */
+		if (!of_aliases)
+			return NULL;
+
+		for_each_property_of_node(of_aliases, pp) {
+			if (strlen(pp->name) == len && !strncmp(pp->name, path, len)) {
+				np = of_find_node_by_path(pp->value);
+				break;
+			}
+		}
+		if (!np)
+			return NULL;
+		path = p;
+	}
+
+	/* Step down the tree matching path components */
+	raw_spin_lock_irqsave(&devtree_lock, flags);
+	if (!np)
+		np = of_node_get(of_allnodes);
+	while (np && *path == '/') {
+		path++; /* Increment past '/' delimiter */
+		np = __of_find_node_by_path(np, path);
+		path = strchrnul(path, '/');
+>>>>>>> v3.18
 	}
 	raw_spin_unlock_irqrestore(&devtree_lock, flags);
 	return np;
@@ -661,10 +1043,14 @@ struct device_node *of_find_compatible_node(struct device_node *from,
 	raw_spin_lock_irqsave(&devtree_lock, flags);
 	np = from ? from->allnext : of_allnodes;
 	for (; np; np = np->allnext) {
+<<<<<<< HEAD
 		if (type
 		    && !(np->type && (of_node_cmp(np->type, type) == 0)))
 			continue;
 		if (__of_device_is_compatible(np, compatible) &&
+=======
+		if (__of_device_is_compatible(np, compatible, type, NULL) &&
+>>>>>>> v3.18
 		    of_node_get(np))
 			break;
 	}
@@ -714,6 +1100,7 @@ static
 const struct of_device_id *__of_match_node(const struct of_device_id *matches,
 					   const struct device_node *node)
 {
+<<<<<<< HEAD
 	if (!matches)
 		return NULL;
 
@@ -733,6 +1120,24 @@ const struct of_device_id *__of_match_node(const struct of_device_id *matches,
 		matches++;
 	}
 	return NULL;
+=======
+	const struct of_device_id *best_match = NULL;
+	int score, best_score = 0;
+
+	if (!matches)
+		return NULL;
+
+	for (; matches->name[0] || matches->type[0] || matches->compatible[0]; matches++) {
+		score = __of_device_is_compatible(node, matches->compatible,
+						  matches->type, matches->name);
+		if (score > best_score) {
+			best_match = matches;
+			best_score = score;
+		}
+	}
+
+	return best_match;
+>>>>>>> v3.18
 }
 
 /**
@@ -834,6 +1239,12 @@ struct device_node *of_find_node_by_phandle(phandle handle)
 	struct device_node *np;
 	unsigned long flags;
 
+<<<<<<< HEAD
+=======
+	if (!handle)
+		return NULL;
+
+>>>>>>> v3.18
 	raw_spin_lock_irqsave(&devtree_lock, flags);
 	for (np = of_allnodes; np; np = np->allnext)
 		if (np->phandle == handle)
@@ -845,6 +1256,41 @@ struct device_node *of_find_node_by_phandle(phandle handle)
 EXPORT_SYMBOL(of_find_node_by_phandle);
 
 /**
+<<<<<<< HEAD
+=======
+ * of_property_count_elems_of_size - Count the number of elements in a property
+ *
+ * @np:		device node from which the property value is to be read.
+ * @propname:	name of the property to be searched.
+ * @elem_size:	size of the individual element
+ *
+ * Search for a property in a device node and count the number of elements of
+ * size elem_size in it. Returns number of elements on sucess, -EINVAL if the
+ * property does not exist or its length does not match a multiple of elem_size
+ * and -ENODATA if the property does not have a value.
+ */
+int of_property_count_elems_of_size(const struct device_node *np,
+				const char *propname, int elem_size)
+{
+	struct property *prop = of_find_property(np, propname, NULL);
+
+	if (!prop)
+		return -EINVAL;
+	if (!prop->value)
+		return -ENODATA;
+
+	if (prop->length % elem_size != 0) {
+		pr_err("size of %s in node %s is not a multiple of %d\n",
+		       propname, np->full_name, elem_size);
+		return -EINVAL;
+	}
+
+	return prop->length / elem_size;
+}
+EXPORT_SYMBOL_GPL(of_property_count_elems_of_size);
+
+/**
+>>>>>>> v3.18
  * of_find_property_value_of_size
  *
  * @np:		device node from which the property value is to be read.
@@ -907,7 +1353,11 @@ EXPORT_SYMBOL_GPL(of_property_read_u32_index);
  *
  * @np:		device node from which the property value is to be read.
  * @propname:	name of the property to be searched.
+<<<<<<< HEAD
  * @out_value:	pointer to return value, modified only if return value is 0.
+=======
+ * @out_values:	pointer to return value, modified only if return value is 0.
+>>>>>>> v3.18
  * @sz:		number of array elements to read
  *
  * Search for a property in a device node and read 8-bit value(s) from
@@ -918,7 +1368,11 @@ EXPORT_SYMBOL_GPL(of_property_read_u32_index);
  * dts entry of array should be like:
  *	property = /bits/ 8 <0x50 0x60 0x70>;
  *
+<<<<<<< HEAD
  * The out_value is modified only if a valid u8 value can be decoded.
+=======
+ * The out_values is modified only if a valid u8 value can be decoded.
+>>>>>>> v3.18
  */
 int of_property_read_u8_array(const struct device_node *np,
 			const char *propname, u8 *out_values, size_t sz)
@@ -940,7 +1394,11 @@ EXPORT_SYMBOL_GPL(of_property_read_u8_array);
  *
  * @np:		device node from which the property value is to be read.
  * @propname:	name of the property to be searched.
+<<<<<<< HEAD
  * @out_value:	pointer to return value, modified only if return value is 0.
+=======
+ * @out_values:	pointer to return value, modified only if return value is 0.
+>>>>>>> v3.18
  * @sz:		number of array elements to read
  *
  * Search for a property in a device node and read 16-bit value(s) from
@@ -951,7 +1409,11 @@ EXPORT_SYMBOL_GPL(of_property_read_u8_array);
  * dts entry of array should be like:
  *	property = /bits/ 16 <0x5000 0x6000 0x7000>;
  *
+<<<<<<< HEAD
  * The out_value is modified only if a valid u16 value can be decoded.
+=======
+ * The out_values is modified only if a valid u16 value can be decoded.
+>>>>>>> v3.18
  */
 int of_property_read_u16_array(const struct device_node *np,
 			const char *propname, u16 *out_values, size_t sz)
@@ -974,7 +1436,11 @@ EXPORT_SYMBOL_GPL(of_property_read_u16_array);
  *
  * @np:		device node from which the property value is to be read.
  * @propname:	name of the property to be searched.
+<<<<<<< HEAD
  * @out_value:	pointer to return value, modified only if return value is 0.
+=======
+ * @out_values:	pointer to return value, modified only if return value is 0.
+>>>>>>> v3.18
  * @sz:		number of array elements to read
  *
  * Search for a property in a device node and read 32-bit value(s) from
@@ -982,7 +1448,11 @@ EXPORT_SYMBOL_GPL(of_property_read_u16_array);
  * -ENODATA if property does not have a value, and -EOVERFLOW if the
  * property data isn't large enough.
  *
+<<<<<<< HEAD
  * The out_value is modified only if a valid u32 value can be decoded.
+=======
+ * The out_values is modified only if a valid u32 value can be decoded.
+>>>>>>> v3.18
  */
 int of_property_read_u32_array(const struct device_node *np,
 			       const char *propname, u32 *out_values,
@@ -1131,6 +1601,7 @@ int of_property_read_string_helper(struct device_node *np, const char *propname,
 }
 EXPORT_SYMBOL_GPL(of_property_read_string_helper);
 
+<<<<<<< HEAD
 /**
  * of_parse_phandle - Resolve a phandle property to a device_node pointer
  * @np: Pointer to device node holding phandle property
@@ -1190,6 +1661,21 @@ EXPORT_SYMBOL(of_parse_phandle);
 static int __of_parse_phandle_with_args(const struct device_node *np,
 					const char *list_name,
 					const char *cells_name, int index,
+=======
+void of_print_phandle_args(const char *msg, const struct of_phandle_args *args)
+{
+	int i;
+	printk("%s %s", msg, of_node_full_name(args->np));
+	for (i = 0; i < args->args_count; i++)
+		printk(i ? ",%08x" : ":%08x", args->args[i]);
+	printk("\n");
+}
+
+static int __of_parse_phandle_with_args(const struct device_node *np,
+					const char *list_name,
+					const char *cells_name,
+					int cell_count, int index,
+>>>>>>> v3.18
 					struct of_phandle_args *out_args)
 {
 	const __be32 *list, *list_end;
@@ -1217,6 +1703,7 @@ static int __of_parse_phandle_with_args(const struct device_node *np,
 		if (phandle) {
 			/*
 			 * Find the provider node and parse the #*-cells
+<<<<<<< HEAD
 			 * property to determine the argument length
 			 */
 			node = of_find_node_by_phandle(phandle);
@@ -1230,6 +1717,34 @@ static int __of_parse_phandle_with_args(const struct device_node *np,
 					 np->full_name, cells_name,
 					 node->full_name);
 				goto err;
+=======
+			 * property to determine the argument length.
+			 *
+			 * This is not needed if the cell count is hard-coded
+			 * (i.e. cells_name not set, but cell_count is set),
+			 * except when we're going to return the found node
+			 * below.
+			 */
+			if (cells_name || cur_index == index) {
+				node = of_find_node_by_phandle(phandle);
+				if (!node) {
+					pr_err("%s: could not find phandle\n",
+						np->full_name);
+					goto err;
+				}
+			}
+
+			if (cells_name) {
+				if (of_property_read_u32(node, cells_name,
+							 &count)) {
+					pr_err("%s: could not get %s for %s\n",
+						np->full_name, cells_name,
+						node->full_name);
+					goto err;
+				}
+			} else {
+				count = cell_count;
+>>>>>>> v3.18
 			}
 
 			/*
@@ -1289,6 +1804,7 @@ static int __of_parse_phandle_with_args(const struct device_node *np,
 	return rc;
 }
 
+<<<<<<< HEAD
 int of_parse_phandle_with_args(const struct device_node *np, const char *list_name,
 				const char *cells_name, int index,
 				struct of_phandle_args *out_args)
@@ -1371,11 +1887,164 @@ int of_add_property(struct device_node *np, struct property *prop)
 	if (np->pde)
 		proc_device_tree_add_prop(np->pde, prop);
 #endif /* CONFIG_PROC_DEVICETREE */
+=======
+/**
+ * of_parse_phandle - Resolve a phandle property to a device_node pointer
+ * @np: Pointer to device node holding phandle property
+ * @phandle_name: Name of property holding a phandle value
+ * @index: For properties holding a table of phandles, this is the index into
+ *         the table
+ *
+ * Returns the device_node pointer with refcount incremented.  Use
+ * of_node_put() on it when done.
+ */
+struct device_node *of_parse_phandle(const struct device_node *np,
+				     const char *phandle_name, int index)
+{
+	struct of_phandle_args args;
+
+	if (index < 0)
+		return NULL;
+
+	if (__of_parse_phandle_with_args(np, phandle_name, NULL, 0,
+					 index, &args))
+		return NULL;
+
+	return args.np;
+}
+EXPORT_SYMBOL(of_parse_phandle);
+
+/**
+ * of_parse_phandle_with_args() - Find a node pointed by phandle in a list
+ * @np:		pointer to a device tree node containing a list
+ * @list_name:	property name that contains a list
+ * @cells_name:	property name that specifies phandles' arguments count
+ * @index:	index of a phandle to parse out
+ * @out_args:	optional pointer to output arguments structure (will be filled)
+ *
+ * This function is useful to parse lists of phandles and their arguments.
+ * Returns 0 on success and fills out_args, on error returns appropriate
+ * errno value.
+ *
+ * Caller is responsible to call of_node_put() on the returned out_args->node
+ * pointer.
+ *
+ * Example:
+ *
+ * phandle1: node1 {
+ * 	#list-cells = <2>;
+ * }
+ *
+ * phandle2: node2 {
+ * 	#list-cells = <1>;
+ * }
+ *
+ * node3 {
+ * 	list = <&phandle1 1 2 &phandle2 3>;
+ * }
+ *
+ * To get a device_node of the `node2' node you may call this:
+ * of_parse_phandle_with_args(node3, "list", "#list-cells", 1, &args);
+ */
+int of_parse_phandle_with_args(const struct device_node *np, const char *list_name,
+				const char *cells_name, int index,
+				struct of_phandle_args *out_args)
+{
+	if (index < 0)
+		return -EINVAL;
+	return __of_parse_phandle_with_args(np, list_name, cells_name, 0,
+					    index, out_args);
+}
+EXPORT_SYMBOL(of_parse_phandle_with_args);
+
+/**
+ * of_parse_phandle_with_fixed_args() - Find a node pointed by phandle in a list
+ * @np:		pointer to a device tree node containing a list
+ * @list_name:	property name that contains a list
+ * @cell_count: number of argument cells following the phandle
+ * @index:	index of a phandle to parse out
+ * @out_args:	optional pointer to output arguments structure (will be filled)
+ *
+ * This function is useful to parse lists of phandles and their arguments.
+ * Returns 0 on success and fills out_args, on error returns appropriate
+ * errno value.
+ *
+ * Caller is responsible to call of_node_put() on the returned out_args->node
+ * pointer.
+ *
+ * Example:
+ *
+ * phandle1: node1 {
+ * }
+ *
+ * phandle2: node2 {
+ * }
+ *
+ * node3 {
+ * 	list = <&phandle1 0 2 &phandle2 2 3>;
+ * }
+ *
+ * To get a device_node of the `node2' node you may call this:
+ * of_parse_phandle_with_fixed_args(node3, "list", 2, 1, &args);
+ */
+int of_parse_phandle_with_fixed_args(const struct device_node *np,
+				const char *list_name, int cell_count,
+				int index, struct of_phandle_args *out_args)
+{
+	if (index < 0)
+		return -EINVAL;
+	return __of_parse_phandle_with_args(np, list_name, NULL, cell_count,
+					   index, out_args);
+}
+EXPORT_SYMBOL(of_parse_phandle_with_fixed_args);
+
+/**
+ * of_count_phandle_with_args() - Find the number of phandles references in a property
+ * @np:		pointer to a device tree node containing a list
+ * @list_name:	property name that contains a list
+ * @cells_name:	property name that specifies phandles' arguments count
+ *
+ * Returns the number of phandle + argument tuples within a property. It
+ * is a typical pattern to encode a list of phandle and variable
+ * arguments into a single property. The number of arguments is encoded
+ * by a property in the phandle-target node. For example, a gpios
+ * property would contain a list of GPIO specifies consisting of a
+ * phandle and 1 or more arguments. The number of arguments are
+ * determined by the #gpio-cells property in the node pointed to by the
+ * phandle.
+ */
+int of_count_phandle_with_args(const struct device_node *np, const char *list_name,
+				const char *cells_name)
+{
+	return __of_parse_phandle_with_args(np, list_name, cells_name, 0, -1,
+					    NULL);
+}
+EXPORT_SYMBOL(of_count_phandle_with_args);
+
+/**
+ * __of_add_property - Add a property to a node without lock operations
+ */
+int __of_add_property(struct device_node *np, struct property *prop)
+{
+	struct property **next;
+
+	prop->next = NULL;
+	next = &np->properties;
+	while (*next) {
+		if (strcmp(prop->name, (*next)->name) == 0)
+			/* duplicate ! don't insert it */
+			return -EEXIST;
+
+		next = &(*next)->next;
+	}
+	*next = prop;
+>>>>>>> v3.18
 
 	return 0;
 }
 
 /**
+<<<<<<< HEAD
  * of_remove_property - Remove a property from a node.
  *
  * Note that we don't actually remove it, since we have given out
@@ -1471,10 +2140,52 @@ int of_update_property(struct device_node *np, struct property *newprop)
 	if (np->pde)
 		proc_device_tree_update_prop(np->pde, newprop, oldprop);
 #endif /* CONFIG_PROC_DEVICETREE */
+=======
+ * of_add_property - Add a property to a node
+ */
+int of_add_property(struct device_node *np, struct property *prop)
+{
+	unsigned long flags;
+	int rc;
+
+	mutex_lock(&of_mutex);
+
+	raw_spin_lock_irqsave(&devtree_lock, flags);
+	rc = __of_add_property(np, prop);
+	raw_spin_unlock_irqrestore(&devtree_lock, flags);
+
+	if (!rc)
+		__of_add_property_sysfs(np, prop);
+
+	mutex_unlock(&of_mutex);
+
+	if (!rc)
+		of_property_notify(OF_RECONFIG_ADD_PROPERTY, np, prop, NULL);
+
+	return rc;
+}
+
+int __of_remove_property(struct device_node *np, struct property *prop)
+{
+	struct property **next;
+
+	for (next = &np->properties; *next; next = &(*next)->next) {
+		if (*next == prop)
+			break;
+	}
+	if (*next == NULL)
+		return -ENODEV;
+
+	/* found the node */
+	*next = prop->next;
+	prop->next = np->deadprops;
+	np->deadprops = prop;
+>>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 #if defined(CONFIG_OF_DYNAMIC)
 /*
  * Support for dynamic device trees.
@@ -1526,10 +2237,32 @@ static void of_add_proc_dt_entry(struct device_node *dn)
  * of_attach_node - Plug a device node into the tree and global list.
  */
 int of_attach_node(struct device_node *np)
+=======
+void __of_remove_property_sysfs(struct device_node *np, struct property *prop)
+{
+	if (!IS_ENABLED(CONFIG_SYSFS))
+		return;
+
+	/* at early boot, bail here and defer setup to of_init() */
+	if (of_kset && of_node_is_attached(np))
+		sysfs_remove_bin_file(&np->kobj, &prop->attr);
+}
+
+/**
+ * of_remove_property - Remove a property from a node.
+ *
+ * Note that we don't actually remove it, since we have given out
+ * who-knows-how-many pointers to the data using get-property.
+ * Instead we just move the property to the "dead properties"
+ * list, so it won't be found any more.
+ */
+int of_remove_property(struct device_node *np, struct property *prop)
+>>>>>>> v3.18
 {
 	unsigned long flags;
 	int rc;
 
+<<<<<<< HEAD
 	rc = of_reconfig_notify(OF_RECONFIG_ATTACH_NODE, np);
 	if (rc)
 		return rc;
@@ -1616,6 +2349,100 @@ int of_detach_node(struct device_node *np)
 	return rc;
 }
 #endif /* defined(CONFIG_OF_DYNAMIC) */
+=======
+	mutex_lock(&of_mutex);
+
+	raw_spin_lock_irqsave(&devtree_lock, flags);
+	rc = __of_remove_property(np, prop);
+	raw_spin_unlock_irqrestore(&devtree_lock, flags);
+
+	if (!rc)
+		__of_remove_property_sysfs(np, prop);
+
+	mutex_unlock(&of_mutex);
+
+	if (!rc)
+		of_property_notify(OF_RECONFIG_REMOVE_PROPERTY, np, prop, NULL);
+
+	return rc;
+}
+
+int __of_update_property(struct device_node *np, struct property *newprop,
+		struct property **oldpropp)
+{
+	struct property **next, *oldprop;
+
+	for (next = &np->properties; *next; next = &(*next)->next) {
+		if (of_prop_cmp((*next)->name, newprop->name) == 0)
+			break;
+	}
+	*oldpropp = oldprop = *next;
+
+	if (oldprop) {
+		/* replace the node */
+		newprop->next = oldprop->next;
+		*next = newprop;
+		oldprop->next = np->deadprops;
+		np->deadprops = oldprop;
+	} else {
+		/* new node */
+		newprop->next = NULL;
+		*next = newprop;
+	}
+
+	return 0;
+}
+
+void __of_update_property_sysfs(struct device_node *np, struct property *newprop,
+		struct property *oldprop)
+{
+	if (!IS_ENABLED(CONFIG_SYSFS))
+		return;
+
+	/* At early boot, bail out and defer setup to of_init() */
+	if (!of_kset)
+		return;
+
+	if (oldprop)
+		sysfs_remove_bin_file(&np->kobj, &oldprop->attr);
+	__of_add_property_sysfs(np, newprop);
+}
+
+/*
+ * of_update_property - Update a property in a node, if the property does
+ * not exist, add it.
+ *
+ * Note that we don't actually remove it, since we have given out
+ * who-knows-how-many pointers to the data using get-property.
+ * Instead we just move the property to the "dead properties" list,
+ * and add the new property to the property list
+ */
+int of_update_property(struct device_node *np, struct property *newprop)
+{
+	struct property *oldprop;
+	unsigned long flags;
+	int rc;
+
+	if (!newprop->name)
+		return -EINVAL;
+
+	mutex_lock(&of_mutex);
+
+	raw_spin_lock_irqsave(&devtree_lock, flags);
+	rc = __of_update_property(np, newprop, &oldprop);
+	raw_spin_unlock_irqrestore(&devtree_lock, flags);
+
+	if (!rc)
+		__of_update_property_sysfs(np, newprop, oldprop);
+
+	mutex_unlock(&of_mutex);
+
+	if (!rc)
+		of_property_notify(OF_RECONFIG_UPDATE_PROPERTY, np, newprop, oldprop);
+
+	return rc;
+}
+>>>>>>> v3.18
 
 static void of_alias_add(struct alias_prop *ap, struct device_node *np,
 			 int id, const char *stem, int stem_len)
@@ -1643,10 +2470,29 @@ void of_alias_scan(void * (*dt_alloc)(u64 size, u64 align))
 {
 	struct property *pp;
 
+<<<<<<< HEAD
 	of_chosen = of_find_node_by_path("/chosen");
 	if (of_chosen == NULL)
 		of_chosen = of_find_node_by_path("/chosen@0");
 	of_aliases = of_find_node_by_path("/aliases");
+=======
+	of_aliases = of_find_node_by_path("/aliases");
+	of_chosen = of_find_node_by_path("/chosen");
+	if (of_chosen == NULL)
+		of_chosen = of_find_node_by_path("/chosen@0");
+
+	if (of_chosen) {
+		/* linux,stdout-path and /aliases/stdout are for legacy compatibility */
+		const char *name = of_get_property(of_chosen, "stdout-path", NULL);
+		if (!name)
+			name = of_get_property(of_chosen, "linux,stdout-path", NULL);
+		if (IS_ENABLED(CONFIG_PPC) && !name)
+			name = of_get_property(of_aliases, "stdout", NULL);
+		if (name)
+			of_stdout = of_find_node_by_path(name);
+	}
+
+>>>>>>> v3.18
 	if (!of_aliases)
 		return;
 
@@ -1691,15 +2537,24 @@ void of_alias_scan(void * (*dt_alloc)(u64 size, u64 align))
  * @np:		Pointer to the given device_node
  * @stem:	Alias stem of the given device_node
  *
+<<<<<<< HEAD
  * The function travels the lookup table to get alias id for the given
  * device_node and alias stem.  It returns the alias id if find it.
+=======
+ * The function travels the lookup table to get the alias id for the given
+ * device_node and alias stem.  It returns the alias id if found.
+>>>>>>> v3.18
  */
 int of_alias_get_id(struct device_node *np, const char *stem)
 {
 	struct alias_prop *app;
 	int id = -ENODEV;
 
+<<<<<<< HEAD
 	mutex_lock(&of_aliases_mutex);
+=======
+	mutex_lock(&of_mutex);
+>>>>>>> v3.18
 	list_for_each_entry(app, &aliases_lookup, link) {
 		if (strcmp(app->stem, stem) != 0)
 			continue;
@@ -1709,7 +2564,11 @@ int of_alias_get_id(struct device_node *np, const char *stem)
 			break;
 		}
 	}
+<<<<<<< HEAD
 	mutex_unlock(&of_aliases_mutex);
+=======
+	mutex_unlock(&of_mutex);
+>>>>>>> v3.18
 
 	return id;
 }
@@ -1755,3 +2614,206 @@ const char *of_prop_next_string(struct property *prop, const char *cur)
 	return curv;
 }
 EXPORT_SYMBOL_GPL(of_prop_next_string);
+<<<<<<< HEAD
+=======
+
+/**
+ * of_console_check() - Test and setup console for DT setup
+ * @dn - Pointer to device node
+ * @name - Name to use for preferred console without index. ex. "ttyS"
+ * @index - Index to use for preferred console.
+ *
+ * Check if the given device node matches the stdout-path property in the
+ * /chosen node. If it does then register it as the preferred console and return
+ * TRUE. Otherwise return FALSE.
+ */
+bool of_console_check(struct device_node *dn, char *name, int index)
+{
+	if (!dn || dn != of_stdout || console_set_on_cmdline)
+		return false;
+	return !add_preferred_console(name, index, NULL);
+}
+EXPORT_SYMBOL_GPL(of_console_check);
+
+/**
+ *	of_find_next_cache_node - Find a node's subsidiary cache
+ *	@np:	node of type "cpu" or "cache"
+ *
+ *	Returns a node pointer with refcount incremented, use
+ *	of_node_put() on it when done.  Caller should hold a reference
+ *	to np.
+ */
+struct device_node *of_find_next_cache_node(const struct device_node *np)
+{
+	struct device_node *child;
+	const phandle *handle;
+
+	handle = of_get_property(np, "l2-cache", NULL);
+	if (!handle)
+		handle = of_get_property(np, "next-level-cache", NULL);
+
+	if (handle)
+		return of_find_node_by_phandle(be32_to_cpup(handle));
+
+	/* OF on pmac has nodes instead of properties named "l2-cache"
+	 * beneath CPU nodes.
+	 */
+	if (!strcmp(np->type, "cpu"))
+		for_each_child_of_node(np, child)
+			if (!strcmp(child->type, "cache"))
+				return child;
+
+	return NULL;
+}
+
+/**
+ * of_graph_parse_endpoint() - parse common endpoint node properties
+ * @node: pointer to endpoint device_node
+ * @endpoint: pointer to the OF endpoint data structure
+ *
+ * The caller should hold a reference to @node.
+ */
+int of_graph_parse_endpoint(const struct device_node *node,
+			    struct of_endpoint *endpoint)
+{
+	struct device_node *port_node = of_get_parent(node);
+
+	WARN_ONCE(!port_node, "%s(): endpoint %s has no parent node\n",
+		  __func__, node->full_name);
+
+	memset(endpoint, 0, sizeof(*endpoint));
+
+	endpoint->local_node = node;
+	/*
+	 * It doesn't matter whether the two calls below succeed.
+	 * If they don't then the default value 0 is used.
+	 */
+	of_property_read_u32(port_node, "reg", &endpoint->port);
+	of_property_read_u32(node, "reg", &endpoint->id);
+
+	of_node_put(port_node);
+
+	return 0;
+}
+EXPORT_SYMBOL(of_graph_parse_endpoint);
+
+/**
+ * of_graph_get_next_endpoint() - get next endpoint node
+ * @parent: pointer to the parent device node
+ * @prev: previous endpoint node, or NULL to get first
+ *
+ * Return: An 'endpoint' node pointer with refcount incremented. Refcount
+ * of the passed @prev node is not decremented, the caller have to use
+ * of_node_put() on it when done.
+ */
+struct device_node *of_graph_get_next_endpoint(const struct device_node *parent,
+					struct device_node *prev)
+{
+	struct device_node *endpoint;
+	struct device_node *port;
+
+	if (!parent)
+		return NULL;
+
+	/*
+	 * Start by locating the port node. If no previous endpoint is specified
+	 * search for the first port node, otherwise get the previous endpoint
+	 * parent port node.
+	 */
+	if (!prev) {
+		struct device_node *node;
+
+		node = of_get_child_by_name(parent, "ports");
+		if (node)
+			parent = node;
+
+		port = of_get_child_by_name(parent, "port");
+		of_node_put(node);
+
+		if (!port) {
+			pr_err("%s(): no port node found in %s\n",
+			       __func__, parent->full_name);
+			return NULL;
+		}
+	} else {
+		port = of_get_parent(prev);
+		if (WARN_ONCE(!port, "%s(): endpoint %s has no parent node\n",
+			      __func__, prev->full_name))
+			return NULL;
+
+		/*
+		 * Avoid dropping prev node refcount to 0 when getting the next
+		 * child below.
+		 */
+		of_node_get(prev);
+	}
+
+	while (1) {
+		/*
+		 * Now that we have a port node, get the next endpoint by
+		 * getting the next child. If the previous endpoint is NULL this
+		 * will return the first child.
+		 */
+		endpoint = of_get_next_child(port, prev);
+		if (endpoint) {
+			of_node_put(port);
+			return endpoint;
+		}
+
+		/* No more endpoints under this port, try the next one. */
+		prev = NULL;
+
+		do {
+			port = of_get_next_child(parent, port);
+			if (!port)
+				return NULL;
+		} while (of_node_cmp(port->name, "port"));
+	}
+}
+EXPORT_SYMBOL(of_graph_get_next_endpoint);
+
+/**
+ * of_graph_get_remote_port_parent() - get remote port's parent node
+ * @node: pointer to a local endpoint device_node
+ *
+ * Return: Remote device node associated with remote endpoint node linked
+ *	   to @node. Use of_node_put() on it when done.
+ */
+struct device_node *of_graph_get_remote_port_parent(
+			       const struct device_node *node)
+{
+	struct device_node *np;
+	unsigned int depth;
+
+	/* Get remote endpoint node. */
+	np = of_parse_phandle(node, "remote-endpoint", 0);
+
+	/* Walk 3 levels up only if there is 'ports' node. */
+	for (depth = 3; depth && np; depth--) {
+		np = of_get_next_parent(np);
+		if (depth == 2 && of_node_cmp(np->name, "ports"))
+			break;
+	}
+	return np;
+}
+EXPORT_SYMBOL(of_graph_get_remote_port_parent);
+
+/**
+ * of_graph_get_remote_port() - get remote port node
+ * @node: pointer to a local endpoint device_node
+ *
+ * Return: Remote port node associated with remote endpoint node linked
+ *	   to @node. Use of_node_put() on it when done.
+ */
+struct device_node *of_graph_get_remote_port(const struct device_node *node)
+{
+	struct device_node *np;
+
+	/* Get remote endpoint node. */
+	np = of_parse_phandle(node, "remote-endpoint", 0);
+	if (!np)
+		return NULL;
+	return of_get_next_parent(np);
+}
+EXPORT_SYMBOL(of_graph_get_remote_port);
+>>>>>>> v3.18

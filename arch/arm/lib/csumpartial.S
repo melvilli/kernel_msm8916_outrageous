@@ -97,7 +97,11 @@ td3	.req	lr
 #endif
 #endif
 		adcnes	sum, sum, td0		@ update checksum
+<<<<<<< HEAD
 		mov	pc, lr
+=======
+		ret	lr
+>>>>>>> v3.18
 
 ENTRY(csum_partial)
 		stmfd	sp!, {buf, lr}

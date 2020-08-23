@@ -48,11 +48,14 @@ void __iomem *at91_aic_base;
 static struct irq_domain *at91_aic_domain;
 static struct device_node *at91_aic_np;
 static unsigned int n_irqs = NR_AIC_IRQS;
+<<<<<<< HEAD
 static unsigned long at91_aic_caps = 0;
 
 /* AIC5 introduces a Source Select Register */
 #define AT91_AIC_CAP_AIC5	(1 << 0)
 #define has_aic5()		(at91_aic_caps & AT91_AIC_CAP_AIC5)
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_PM
 
@@ -92,6 +95,7 @@ static int at91_aic_set_wake(struct irq_data *d, unsigned value)
 
 void at91_irq_suspend(void)
 {
+<<<<<<< HEAD
 	int bit = -1;
 
 	if (has_aic5()) {
@@ -112,10 +116,15 @@ void at91_irq_suspend(void)
 		at91_aic_write(AT91_AIC_IDCR, *backups);
 		at91_aic_write(AT91_AIC_IECR, *wakeups);
 	}
+=======
+	at91_aic_write(AT91_AIC_IDCR, *backups);
+	at91_aic_write(AT91_AIC_IECR, *wakeups);
+>>>>>>> v3.18
 }
 
 void at91_irq_resume(void)
 {
+<<<<<<< HEAD
 	int bit = -1;
 
 	if (has_aic5()) {
@@ -136,6 +145,10 @@ void at91_irq_resume(void)
 		at91_aic_write(AT91_AIC_IDCR, *wakeups);
 		at91_aic_write(AT91_AIC_IECR, *backups);
 	}
+=======
+	at91_aic_write(AT91_AIC_IDCR, *wakeups);
+	at91_aic_write(AT91_AIC_IECR, *backups);
+>>>>>>> v3.18
 }
 
 #else
@@ -169,6 +182,7 @@ at91_aic_handle_irq(struct pt_regs *regs)
 		handle_IRQ(irqnr, regs);
 }
 
+<<<<<<< HEAD
 asmlinkage void __exception_irq_entry
 at91_aic5_handle_irq(struct pt_regs *regs)
 {
@@ -184,6 +198,8 @@ at91_aic5_handle_irq(struct pt_regs *regs)
 		handle_IRQ(irqnr, regs);
 }
 
+=======
+>>>>>>> v3.18
 static void at91_aic_mask_irq(struct irq_data *d)
 {
 	/* Disable interrupt on AIC */
@@ -192,6 +208,7 @@ static void at91_aic_mask_irq(struct irq_data *d)
 	clear_backup(d->hwirq);
 }
 
+<<<<<<< HEAD
 static void __maybe_unused at91_aic5_mask_irq(struct irq_data *d)
 {
 	/* Disable interrupt on AIC5 */
@@ -201,6 +218,8 @@ static void __maybe_unused at91_aic5_mask_irq(struct irq_data *d)
 	clear_backup(d->hwirq);
 }
 
+=======
+>>>>>>> v3.18
 static void at91_aic_unmask_irq(struct irq_data *d)
 {
 	/* Enable interrupt on AIC */
@@ -209,6 +228,7 @@ static void at91_aic_unmask_irq(struct irq_data *d)
 	set_backup(d->hwirq);
 }
 
+<<<<<<< HEAD
 static void __maybe_unused at91_aic5_unmask_irq(struct irq_data *d)
 {
 	/* Enable interrupt on AIC5 */
@@ -218,6 +238,8 @@ static void __maybe_unused at91_aic5_unmask_irq(struct irq_data *d)
 	set_backup(d->hwirq);
 }
 
+=======
+>>>>>>> v3.18
 static void at91_aic_eoi(struct irq_data *d)
 {
 	/*
@@ -227,6 +249,7 @@ static void at91_aic_eoi(struct irq_data *d)
 	at91_aic_write(AT91_AIC_EOICR, 0);
 }
 
+<<<<<<< HEAD
 static void __maybe_unused at91_aic5_eoi(struct irq_data *d)
 {
 	at91_aic_write(AT91_AIC5_EOICR, 0);
@@ -234,6 +257,17 @@ static void __maybe_unused at91_aic5_eoi(struct irq_data *d)
 
 unsigned long *at91_extern_irq;
 
+=======
+static unsigned long *at91_extern_irq;
+
+u32 at91_get_extern_irq(void)
+{
+	if (!at91_extern_irq)
+		return 0;
+	return *at91_extern_irq;
+}
+
+>>>>>>> v3.18
 #define is_extern_irq(hwirq) test_bit(hwirq, at91_extern_irq)
 
 static int at91_aic_compute_srctype(struct irq_data *d, unsigned type)
@@ -275,6 +309,7 @@ static int at91_aic_set_type(struct irq_data *d, unsigned type)
 	if (srctype < 0)
 		return srctype;
 
+<<<<<<< HEAD
 	if (has_aic5()) {
 		at91_aic_write(AT91_AIC5_SSR,
 			       d->hwirq & AT91_AIC5_INTSEL_MSK);
@@ -285,6 +320,10 @@ static int at91_aic_set_type(struct irq_data *d, unsigned type)
 		      & ~AT91_AIC_SRCTYPE;
 		at91_aic_write(AT91_AIC_SMR(d->hwirq), smr | srctype);
 	}
+=======
+	smr = at91_aic_read(AT91_AIC_SMR(d->hwirq)) & ~AT91_AIC_SRCTYPE;
+	at91_aic_write(AT91_AIC_SMR(d->hwirq), smr | srctype);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -324,6 +363,7 @@ static void __init at91_aic_hw_init(unsigned int spu_vector)
 	at91_aic_write(AT91_AIC_ICCR, 0xFFFFFFFF);
 }
 
+<<<<<<< HEAD
 static void __init __maybe_unused at91_aic5_hw_init(unsigned int spu_vector)
 {
 	int i;
@@ -495,6 +535,8 @@ int __init at91_aic5_of_init(struct device_node *node,
 }
 #endif
 
+=======
+>>>>>>> v3.18
 /*
  * Initialize the AIC interrupt controller.
  */

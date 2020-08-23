@@ -10,7 +10,10 @@
  * published by the Free Software Foundation.
  */
 
+<<<<<<< HEAD
 #include <linux/cpu.h>
+=======
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/highmem.h>
 #include <linux/interrupt.h>
@@ -19,6 +22,24 @@
 #include <asm/tlbflush.h>
 #include "mm.h"
 
+<<<<<<< HEAD
+=======
+pte_t *fixmap_page_table;
+
+static inline void set_fixmap_pte(int idx, pte_t pte)
+{
+	unsigned long vaddr = __fix_to_virt(idx);
+	set_pte_ext(fixmap_page_table + idx, pte, 0);
+	local_flush_tlb_kernel_page(vaddr);
+}
+
+static inline pte_t get_fixmap_pte(unsigned long vaddr)
+{
+	unsigned long idx = __virt_to_fix(vaddr);
+	return *(fixmap_page_table + idx);
+}
+
+>>>>>>> v3.18
 void *kmap(struct page *page)
 {
 	might_sleep();
@@ -64,20 +85,32 @@ void *kmap_atomic(struct page *page)
 	type = kmap_atomic_idx_push();
 
 	idx = type + KM_TYPE_NR * smp_processor_id();
+<<<<<<< HEAD
 	vaddr = __fix_to_virt(FIX_KMAP_BEGIN + idx);
+=======
+	vaddr = __fix_to_virt(idx);
+>>>>>>> v3.18
 #ifdef CONFIG_DEBUG_HIGHMEM
 	/*
 	 * With debugging enabled, kunmap_atomic forces that entry to 0.
 	 * Make sure it was indeed properly unmapped.
 	 */
+<<<<<<< HEAD
 	BUG_ON(!pte_none(get_top_pte(vaddr)));
+=======
+	BUG_ON(!pte_none(*(fixmap_page_table + idx)));
+>>>>>>> v3.18
 #endif
 	/*
 	 * When debugging is off, kunmap_atomic leaves the previous mapping
 	 * in place, so the contained TLB flush ensures the TLB is updated
 	 * with the new mapping.
 	 */
+<<<<<<< HEAD
 	set_top_pte(vaddr, mk_pte(page, kmap_prot));
+=======
+	set_fixmap_pte(idx, mk_pte(page, kmap_prot));
+>>>>>>> v3.18
 
 	return (void *)vaddr;
 }
@@ -95,8 +128,13 @@ void __kunmap_atomic(void *kvaddr)
 		if (cache_is_vivt())
 			__cpuc_flush_dcache_area((void *)vaddr, PAGE_SIZE);
 #ifdef CONFIG_DEBUG_HIGHMEM
+<<<<<<< HEAD
 		BUG_ON(vaddr != __fix_to_virt(FIX_KMAP_BEGIN + idx));
 		set_top_pte(vaddr, __pte(0));
+=======
+		BUG_ON(vaddr != __fix_to_virt(idx));
+		set_fixmap_pte(idx, __pte(0));
+>>>>>>> v3.18
 #else
 		(void) idx;  /* to kill a warning */
 #endif
@@ -113,6 +151,7 @@ void *kmap_atomic_pfn(unsigned long pfn)
 {
 	unsigned long vaddr;
 	int idx, type;
+<<<<<<< HEAD
 
 	pagefault_disable();
 
@@ -123,6 +162,21 @@ void *kmap_atomic_pfn(unsigned long pfn)
 	BUG_ON(!pte_none(get_top_pte(vaddr)));
 #endif
 	set_top_pte(vaddr, pfn_pte(pfn, kmap_prot));
+=======
+	struct page *page = pfn_to_page(pfn);
+
+	pagefault_disable();
+	if (!PageHighMem(page))
+		return page_address(page);
+
+	type = kmap_atomic_idx_push();
+	idx = type + KM_TYPE_NR * smp_processor_id();
+	vaddr = __fix_to_virt(idx);
+#ifdef CONFIG_DEBUG_HIGHMEM
+	BUG_ON(!pte_none(*(fixmap_page_table + idx)));
+#endif
+	set_fixmap_pte(idx, pfn_pte(pfn, kmap_prot));
+>>>>>>> v3.18
 
 	return (void *)vaddr;
 }
@@ -134,6 +188,7 @@ struct page *kmap_atomic_to_page(const void *ptr)
 	if (vaddr < FIXADDR_START)
 		return virt_to_page(ptr);
 
+<<<<<<< HEAD
 	return pte_page(get_top_pte(vaddr));
 }
 
@@ -191,3 +246,7 @@ static int __init init_kmap_atomic(void)
 }
 early_initcall(init_kmap_atomic);
 #endif
+=======
+	return pte_page(get_fixmap_pte(vaddr));
+}
+>>>>>>> v3.18

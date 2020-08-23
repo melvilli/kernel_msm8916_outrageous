@@ -109,6 +109,7 @@ axon_ram_make_request(struct request_queue *queue, struct bio *bio)
 	struct axon_ram_bank *bank = bio->bi_bdev->bd_disk->private_data;
 	unsigned long phys_mem, phys_end;
 	void *user_mem;
+<<<<<<< HEAD
 	struct bio_vec *vec;
 	unsigned int transfered;
 	unsigned short idx;
@@ -118,10 +119,23 @@ axon_ram_make_request(struct request_queue *queue, struct bio *bio)
 	transfered = 0;
 	bio_for_each_segment(vec, bio, idx) {
 		if (unlikely(phys_mem + vec->bv_len > phys_end)) {
+=======
+	struct bio_vec vec;
+	unsigned int transfered;
+	struct bvec_iter iter;
+
+	phys_mem = bank->io_addr + (bio->bi_iter.bi_sector <<
+				    AXON_RAM_SECTOR_SHIFT);
+	phys_end = bank->io_addr + bank->size;
+	transfered = 0;
+	bio_for_each_segment(vec, bio, iter) {
+		if (unlikely(phys_mem + vec.bv_len > phys_end)) {
+>>>>>>> v3.18
 			bio_io_error(bio);
 			return;
 		}
 
+<<<<<<< HEAD
 		user_mem = page_address(vec->bv_page) + vec->bv_offset;
 		if (bio_data_dir(bio) == READ)
 			memcpy(user_mem, (void *) phys_mem, vec->bv_len);
@@ -130,6 +144,16 @@ axon_ram_make_request(struct request_queue *queue, struct bio *bio)
 
 		phys_mem += vec->bv_len;
 		transfered += vec->bv_len;
+=======
+		user_mem = page_address(vec.bv_page) + vec.bv_offset;
+		if (bio_data_dir(bio) == READ)
+			memcpy(user_mem, (void *) phys_mem, vec.bv_len);
+		else
+			memcpy((void *) phys_mem, user_mem, vec.bv_len);
+
+		phys_mem += vec.bv_len;
+		transfered += vec.bv_len;
+>>>>>>> v3.18
 	}
 	bio_endio(bio, 0);
 }
@@ -155,7 +179,11 @@ axon_ram_direct_access(struct block_device *device, sector_t sector,
 	}
 
 	*kaddr = (void *)(bank->ph_addr + offset);
+<<<<<<< HEAD
 	*pfn = virt_to_phys(*kaddr) >> PAGE_SHIFT;
+=======
+	*pfn = virt_to_phys(kaddr) >> PAGE_SHIFT;
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -313,7 +341,11 @@ axon_ram_remove(struct platform_device *device)
 	return 0;
 }
 
+<<<<<<< HEAD
 static struct of_device_id axon_ram_device_id[] = {
+=======
+static const struct of_device_id axon_ram_device_id[] = {
+>>>>>>> v3.18
 	{
 		.type	= "dma-memory"
 	},

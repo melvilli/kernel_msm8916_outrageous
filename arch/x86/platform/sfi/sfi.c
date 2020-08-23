@@ -25,6 +25,10 @@
 #include <linux/init.h>
 #include <linux/sfi.h>
 #include <linux/io.h>
+<<<<<<< HEAD
+=======
+#include <linux/irqdomain.h>
+>>>>>>> v3.18
 
 #include <asm/io_apic.h>
 #include <asm/mpspec.h>
@@ -70,19 +74,36 @@ static int __init sfi_parse_cpus(struct sfi_table_header *table)
 #endif /* CONFIG_X86_LOCAL_APIC */
 
 #ifdef CONFIG_X86_IO_APIC
+<<<<<<< HEAD
+=======
+static struct irq_domain_ops sfi_ioapic_irqdomain_ops = {
+	.map = mp_irqdomain_map,
+};
+>>>>>>> v3.18
 
 static int __init sfi_parse_ioapic(struct sfi_table_header *table)
 {
 	struct sfi_table_simple *sb;
 	struct sfi_apic_table_entry *pentry;
 	int i, num;
+<<<<<<< HEAD
+=======
+	struct ioapic_domain_cfg cfg = {
+		.type = IOAPIC_DOMAIN_STRICT,
+		.ops = &sfi_ioapic_irqdomain_ops,
+	};
+>>>>>>> v3.18
 
 	sb = (struct sfi_table_simple *)table;
 	num = SFI_GET_NUM_ENTRIES(sb, struct sfi_apic_table_entry);
 	pentry = (struct sfi_apic_table_entry *)sb->pentry;
 
 	for (i = 0; i < num; i++) {
+<<<<<<< HEAD
 		mp_register_ioapic(i, pentry->phys_addr, gsi_top);
+=======
+		mp_register_ioapic(i, pentry->phys_addr, gsi_top, &cfg);
+>>>>>>> v3.18
 		pentry++;
 	}
 

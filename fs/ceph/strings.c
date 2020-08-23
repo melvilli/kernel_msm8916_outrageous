@@ -41,6 +41,11 @@ const char *ceph_session_op_name(int op)
 	case CEPH_SESSION_RENEWCAPS: return "renewcaps";
 	case CEPH_SESSION_STALE: return "stale";
 	case CEPH_SESSION_RECALL_STATE: return "recall_state";
+<<<<<<< HEAD
+=======
+	case CEPH_SESSION_FLUSHMSG: return "flushmsg";
+	case CEPH_SESSION_FLUSHMSG_ACK: return "flushmsg_ack";
+>>>>>>> v3.18
 	}
 	return "???";
 }
@@ -52,6 +57,10 @@ const char *ceph_mds_op_name(int op)
 	case CEPH_MDS_OP_LOOKUPHASH:  return "lookuphash";
 	case CEPH_MDS_OP_LOOKUPPARENT:  return "lookupparent";
 	case CEPH_MDS_OP_LOOKUPINO:  return "lookupino";
+<<<<<<< HEAD
+=======
+	case CEPH_MDS_OP_LOOKUPNAME:  return "lookupname";
+>>>>>>> v3.18
 	case CEPH_MDS_OP_GETATTR:  return "getattr";
 	case CEPH_MDS_OP_SETXATTR: return "setxattr";
 	case CEPH_MDS_OP_SETATTR: return "setattr";

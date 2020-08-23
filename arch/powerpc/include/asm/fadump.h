@@ -70,15 +70,24 @@
 #define CPU_UNKNOWN		(~((u32)0))
 
 /* Utility macros */
+<<<<<<< HEAD
 #define SKIP_TO_NEXT_CPU(reg_entry)			\
 ({							\
 	while (reg_entry->reg_id != REG_ID("CPUEND"))	\
 		reg_entry++;				\
 	reg_entry++;					\
+=======
+#define SKIP_TO_NEXT_CPU(reg_entry)					\
+({									\
+	while (be64_to_cpu(reg_entry->reg_id) != REG_ID("CPUEND"))	\
+		reg_entry++;						\
+	reg_entry++;							\
+>>>>>>> v3.18
 })
 
 /* Kernel Dump section info */
 struct fadump_section {
+<<<<<<< HEAD
 	u32	request_flag;
 	u16	source_data_type;
 	u16	error_flags;
@@ -86,10 +95,20 @@ struct fadump_section {
 	u64	source_len;
 	u64	bytes_dumped;
 	u64	destination_address;
+=======
+	__be32	request_flag;
+	__be16	source_data_type;
+	__be16	error_flags;
+	__be64	source_address;
+	__be64	source_len;
+	__be64	bytes_dumped;
+	__be64	destination_address;
+>>>>>>> v3.18
 };
 
 /* ibm,configure-kernel-dump header. */
 struct fadump_section_header {
+<<<<<<< HEAD
 	u32	dump_format_version;
 	u16	dump_num_sections;
 	u16	dump_status_flag;
@@ -103,6 +122,21 @@ struct fadump_section_header {
 
 	/* Maximum time allowed to prevent an automatic dump-reboot. */
 	u32	max_time_auto;
+=======
+	__be32	dump_format_version;
+	__be16	dump_num_sections;
+	__be16	dump_status_flag;
+	__be32	offset_first_dump_section;
+
+	/* Fields for disk dump option. */
+	__be32	dd_block_size;
+	__be64	dd_block_offset;
+	__be64	dd_num_blocks;
+	__be32	dd_offset_disk_path;
+
+	/* Maximum time allowed to prevent an automatic dump-reboot. */
+	__be32	max_time_auto;
+>>>>>>> v3.18
 };
 
 /*
@@ -174,15 +208,26 @@ static inline u64 str_to_u64(const char *str)
 
 /* Register save area header. */
 struct fadump_reg_save_area_header {
+<<<<<<< HEAD
 	u64		magic_number;
 	u32		version;
 	u32		num_cpu_offset;
+=======
+	__be64		magic_number;
+	__be32		version;
+	__be32		num_cpu_offset;
+>>>>>>> v3.18
 };
 
 /* Register entry. */
 struct fadump_reg_entry {
+<<<<<<< HEAD
 	u64		reg_id;
 	u64		reg_value;
+=======
+	__be64		reg_id;
+	__be64		reg_value;
+>>>>>>> v3.18
 };
 
 /* fadump crash info structure */
@@ -210,7 +255,10 @@ extern int is_fadump_active(void);
 extern void crash_fadump(struct pt_regs *, const char *);
 extern void fadump_cleanup(void);
 
+<<<<<<< HEAD
 extern void vmcore_cleanup(void);
+=======
+>>>>>>> v3.18
 #else	/* CONFIG_FA_DUMP */
 static inline int is_fadump_active(void) { return 0; }
 static inline void crash_fadump(struct pt_regs *regs, const char *str) { }

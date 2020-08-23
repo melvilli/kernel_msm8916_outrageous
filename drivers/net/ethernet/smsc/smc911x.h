@@ -15,8 +15,12 @@
  . GNU General Public License for more details.
  .
  . You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
  . along with this program; if not, write to the Free Software
  . Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+ . along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
  .
  . Information contained in this file was obtained from the LAN9118
  . manual from SMC.  To get a copy, if you really want one, you can find
@@ -227,7 +231,11 @@ static inline void SMC_outsl(struct smc911x_local *lp, int reg,
 #define SMC_DMA_ACK_IRQ(dev, dma)					\
 {									\
 	if (DCSR(dma) & DCSR_BUSERR) {					\
+<<<<<<< HEAD
 		printk("%s: DMA %d bus error!\n", dev->name, dma);	\
+=======
+		netdev_err(dev, "DMA %d bus error!\n", dma);		\
+>>>>>>> v3.18
 	}								\
 	DCSR(dma) = DCSR_STARTINTR|DCSR_ENDINTR|DCSR_BUSERR;		\
 }

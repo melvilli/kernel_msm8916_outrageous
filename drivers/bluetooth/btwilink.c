@@ -108,10 +108,15 @@ static long st_receive(void *priv_data, struct sk_buff *skb)
 		return -EFAULT;
 	}
 
+<<<<<<< HEAD
 	skb->dev = (void *) lhst->hdev;
 
 	/* Forward skb to HCI core layer */
 	err = hci_recv_frame(skb);
+=======
+	/* Forward skb to HCI core layer */
+	err = hci_recv_frame(lhst->hdev, skb);
+>>>>>>> v3.18
 	if (err < 0) {
 		BT_ERR("Unable to push skb to HCI core(%d)", err);
 		return err;
@@ -253,6 +258,7 @@ static int ti_st_close(struct hci_dev *hdev)
 	return err;
 }
 
+<<<<<<< HEAD
 static int ti_st_send_frame(struct sk_buff *skb)
 {
 	struct hci_dev *hdev;
@@ -261,6 +267,13 @@ static int ti_st_send_frame(struct sk_buff *skb)
 
 	hdev = (struct hci_dev *)skb->dev;
 
+=======
+static int ti_st_send_frame(struct hci_dev *hdev, struct sk_buff *skb)
+{
+	struct ti_st *hst;
+	long len;
+
+>>>>>>> v3.18
 	if (!test_bit(HCI_RUNNING, &hdev->flags))
 		return -EBUSY;
 

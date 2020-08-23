@@ -18,12 +18,15 @@
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ************************************************************************
+=======
+>>>>>>> v3.18
 */
 /*
 Driver: ni_labpc_cs
@@ -59,10 +62,17 @@ NI manuals:
 
 */
 
+<<<<<<< HEAD
 #include "../comedidev.h"
 
 #include <linux/delay.h>
 #include <linux/slab.h>
+=======
+#include <linux/module.h>
+#include "../comedidev.h"
+
+#include <linux/delay.h>
+>>>>>>> v3.18
 
 #include "8253.h"
 #include "8255.h"
@@ -76,12 +86,18 @@ NI manuals:
 static const struct labpc_boardinfo labpc_cs_boards[] = {
 	{
 		.name			= "daqcard-1200",
+<<<<<<< HEAD
 		.device_id		= 0x103,
 		.ai_speed		= 10000,
 		.register_layout	= labpc_1200_layout,
 		.has_ao			= 1,
 		.ai_range_table		= &range_labpc_1200_ai,
 		.ai_range_code		= labpc_1200_ai_gain_bits,
+=======
+		.ai_speed		= 10000,
+		.has_ao			= 1,
+		.is_labpc1200		= 1,
+>>>>>>> v3.18
 	},
 };
 
@@ -105,25 +121,38 @@ static int labpc_auto_attach(struct comedi_device *dev,
 	if (!link->irq)
 		return -EINVAL;
 
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
+=======
+	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
+	if (!devpriv)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	return labpc_common_attach(dev, link->irq, IRQF_SHARED);
 }
 
+<<<<<<< HEAD
 static void labpc_detach(struct comedi_device *dev)
 {
 	labpc_common_detach(dev);
 	comedi_pcmcia_disable(dev);
 }
 
+=======
+>>>>>>> v3.18
 static struct comedi_driver driver_labpc_cs = {
 	.driver_name	= "ni_labpc_cs",
 	.module		= THIS_MODULE,
 	.auto_attach	= labpc_auto_attach,
+<<<<<<< HEAD
 	.detach		= labpc_detach,
+=======
+	.detach		= comedi_pcmcia_disable,
+>>>>>>> v3.18
 };
 
 static int labpc_cs_attach(struct pcmcia_device *link)

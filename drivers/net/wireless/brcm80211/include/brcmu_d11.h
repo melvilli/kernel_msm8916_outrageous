@@ -108,6 +108,7 @@ enum brcmu_chan_bw {
 };
 
 enum brcmu_chan_sb {
+<<<<<<< HEAD
 	BRCMU_CHAN_SB_NONE = 0,
 	BRCMU_CHAN_SB_L,
 	BRCMU_CHAN_SB_U,
@@ -115,6 +116,9 @@ enum brcmu_chan_sb {
 	BRCMU_CHAN_SB_LU,
 	BRCMU_CHAN_SB_UL,
 	BRCMU_CHAN_SB_UU,
+=======
+	BRCMU_CHAN_SB_NONE = -1,
+>>>>>>> v3.18
 	BRCMU_CHAN_SB_LLL,
 	BRCMU_CHAN_SB_LLU,
 	BRCMU_CHAN_SB_LUL,
@@ -123,6 +127,15 @@ enum brcmu_chan_sb {
 	BRCMU_CHAN_SB_ULU,
 	BRCMU_CHAN_SB_UUL,
 	BRCMU_CHAN_SB_UUU,
+<<<<<<< HEAD
+=======
+	BRCMU_CHAN_SB_L = BRCMU_CHAN_SB_LLL,
+	BRCMU_CHAN_SB_U = BRCMU_CHAN_SB_LLU,
+	BRCMU_CHAN_SB_LL = BRCMU_CHAN_SB_LLL,
+	BRCMU_CHAN_SB_LU = BRCMU_CHAN_SB_LLU,
+	BRCMU_CHAN_SB_UL = BRCMU_CHAN_SB_LUL,
+	BRCMU_CHAN_SB_UU = BRCMU_CHAN_SB_LUU,
+>>>>>>> v3.18
 };
 
 struct brcmu_chan {
@@ -140,6 +153,10 @@ struct brcmu_d11inf {
 	void (*decchspec)(struct brcmu_chan *ch);
 };
 
+<<<<<<< HEAD
 extern void brcmu_d11_attach(struct brcmu_d11inf *d11inf);
+=======
+void brcmu_d11_attach(struct brcmu_d11inf *d11inf);
+>>>>>>> v3.18
 
 #endif	/* _BRCMU_CHANNELS_H_ */

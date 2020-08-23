@@ -25,12 +25,24 @@ unsigned int code_bytes = 64;
 int kstack_depth_to_print = 3 * STACKSLOTS_PER_LINE;
 static int die_counter;
 
+<<<<<<< HEAD
 void printk_address(unsigned long address, int reliable)
+=======
+static void printk_stack_address(unsigned long address, int reliable)
+>>>>>>> v3.18
 {
 	pr_cont(" [<%p>] %s%pB\n",
 		(void *)address, reliable ? "" : "? ", (void *)address);
 }
 
+<<<<<<< HEAD
+=======
+void printk_address(unsigned long address)
+{
+	pr_cont(" [<%p>] %pS\n", (void *)address, (void *)address);
+}
+
+>>>>>>> v3.18
 #ifdef CONFIG_FUNCTION_GRAPH_TRACER
 static void
 print_ftrace_graph_addr(unsigned long addr, void *data,
@@ -151,7 +163,11 @@ static void print_trace_address(void *data, unsigned long addr, int reliable)
 {
 	touch_nmi_watchdog();
 	printk(data);
+<<<<<<< HEAD
 	printk_address(addr, reliable);
+=======
+	printk_stack_address(addr, reliable);
+>>>>>>> v3.18
 }
 
 static const struct stacktrace_ops print_trace_ops = {
@@ -195,7 +211,11 @@ static arch_spinlock_t die_lock = __ARCH_SPIN_LOCK_UNLOCKED;
 static int die_owner = -1;
 static unsigned int die_nest_count;
 
+<<<<<<< HEAD
 unsigned __kprobes long oops_begin(void)
+=======
+unsigned long oops_begin(void)
+>>>>>>> v3.18
 {
 	int cpu;
 	unsigned long flags;
@@ -218,8 +238,14 @@ unsigned __kprobes long oops_begin(void)
 	return flags;
 }
 EXPORT_SYMBOL_GPL(oops_begin);
+<<<<<<< HEAD
 
 void __kprobes oops_end(unsigned long flags, struct pt_regs *regs, int signr)
+=======
+NOKPROBE_SYMBOL(oops_begin);
+
+void oops_end(unsigned long flags, struct pt_regs *regs, int signr)
+>>>>>>> v3.18
 {
 	if (regs && kexec_should_crash(current))
 		crash_kexec(regs);
@@ -242,8 +268,14 @@ void __kprobes oops_end(unsigned long flags, struct pt_regs *regs, int signr)
 		panic("Fatal exception");
 	do_exit(signr);
 }
+<<<<<<< HEAD
 
 int __kprobes __die(const char *str, struct pt_regs *regs, long err)
+=======
+NOKPROBE_SYMBOL(oops_end);
+
+int __die(const char *str, struct pt_regs *regs, long err)
+>>>>>>> v3.18
 {
 #ifdef CONFIG_X86_32
 	unsigned short ss;
@@ -281,11 +313,19 @@ int __kprobes __die(const char *str, struct pt_regs *regs, long err)
 #else
 	/* Executive summary in case the oops scrolled away */
 	printk(KERN_ALERT "RIP ");
+<<<<<<< HEAD
 	printk_address(regs->ip, 1);
+=======
+	printk_address(regs->ip);
+>>>>>>> v3.18
 	printk(" RSP <%016lx>\n", regs->sp);
 #endif
 	return 0;
 }
+<<<<<<< HEAD
+=======
+NOKPROBE_SYMBOL(__die);
+>>>>>>> v3.18
 
 /*
  * This is gone through when something in the kernel has done something bad

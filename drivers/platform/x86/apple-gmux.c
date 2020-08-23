@@ -289,7 +289,11 @@ static int gmux_switchto(enum vga_switcheroo_client_id id)
 static int gmux_set_discrete_state(struct apple_gmux_data *gmux_data,
 				   enum vga_switcheroo_state state)
 {
+<<<<<<< HEAD
 	INIT_COMPLETION(gmux_data->powerchange_done);
+=======
+	reinit_completion(&gmux_data->powerchange_done);
+>>>>>>> v3.18
 
 	if (state == VGA_SWITCHEROO_ON) {
 		gmux_write8(gmux_data, GMUX_PORT_DISCRETE_POWER, 1);
@@ -393,17 +397,33 @@ static void gmux_notify_handler(acpi_handle device, u32 value, void *context)
 		complete(&gmux_data->powerchange_done);
 }
 
+<<<<<<< HEAD
 static int gmux_suspend(struct pnp_dev *pnp, pm_message_t state)
 {
 	struct apple_gmux_data *gmux_data = pnp_get_drvdata(pnp);
+=======
+static int gmux_suspend(struct device *dev)
+{
+	struct pnp_dev *pnp = to_pnp_dev(dev);
+	struct apple_gmux_data *gmux_data = pnp_get_drvdata(pnp);
+
+>>>>>>> v3.18
 	gmux_data->resume_client_id = gmux_active_client(gmux_data);
 	gmux_disable_interrupts(gmux_data);
 	return 0;
 }
 
+<<<<<<< HEAD
 static int gmux_resume(struct pnp_dev *pnp)
 {
 	struct apple_gmux_data *gmux_data = pnp_get_drvdata(pnp);
+=======
+static int gmux_resume(struct device *dev)
+{
+	struct pnp_dev *pnp = to_pnp_dev(dev);
+	struct apple_gmux_data *gmux_data = pnp_get_drvdata(pnp);
+
+>>>>>>> v3.18
 	gmux_enable_interrupts(gmux_data);
 	gmux_switchto(gmux_data->resume_client_id);
 	if (gmux_data->power_state == VGA_SWITCHEROO_OFF)
@@ -515,7 +535,11 @@ static int gmux_probe(struct pnp_dev *pnp, const struct pnp_device_id *id)
 
 	gmux_data->power_state = VGA_SWITCHEROO_ON;
 
+<<<<<<< HEAD
 	gmux_data->dhandle = DEVICE_ACPI_HANDLE(&pnp->dev);
+=======
+	gmux_data->dhandle = ACPI_HANDLE(&pnp->dev);
+>>>>>>> v3.18
 	if (!gmux_data->dhandle) {
 		pr_err("Cannot find acpi handle for pnp device %s\n",
 		       dev_name(&pnp->dev));
@@ -605,13 +629,27 @@ static const struct pnp_device_id gmux_device_ids[] = {
 	{"", 0}
 };
 
+<<<<<<< HEAD
+=======
+static const struct dev_pm_ops gmux_dev_pm_ops = {
+	.suspend = gmux_suspend,
+	.resume = gmux_resume,
+};
+
+>>>>>>> v3.18
 static struct pnp_driver gmux_pnp_driver = {
 	.name		= "apple-gmux",
 	.probe		= gmux_probe,
 	.remove		= gmux_remove,
 	.id_table	= gmux_device_ids,
+<<<<<<< HEAD
 	.suspend	= gmux_suspend,
 	.resume		= gmux_resume
+=======
+	.driver		= {
+			.pm = &gmux_dev_pm_ops,
+	},
+>>>>>>> v3.18
 };
 
 static int __init apple_gmux_init(void)

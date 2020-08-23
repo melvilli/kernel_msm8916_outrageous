@@ -2,7 +2,10 @@ menu "Android"
 
 config ANDROID
 	bool "Android Drivers"
+<<<<<<< HEAD
 	default N
+=======
+>>>>>>> v3.18
 	---help---
 	  Enable support for various drivers needed on the Android platform
 
@@ -10,6 +13,10 @@ if ANDROID
 
 config ANDROID_BINDER_IPC
 	bool "Android Binder IPC Driver"
+<<<<<<< HEAD
+=======
+	depends on MMU
+>>>>>>> v3.18
 	default n
 	---help---
 	  Binder is used in Android for both communication between processes,
@@ -20,6 +27,7 @@ config ANDROID_BINDER_IPC
 	  between said processes.
 
 config ANDROID_BINDER_IPC_32BIT
+<<<<<<< HEAD
 	bool "Use old (Android 4.4 and earlier) 32-bit binder API"
 	depends on !64BIT && ANDROID_BINDER_IPC
 	default y
@@ -38,6 +46,19 @@ config ANDROID_BINDER_DEVICES
 	  that specifies the names of the binder device nodes that will be
 	  created. Each binder device has its own context manager, and is
 	  therefore logically separated from the other devices.
+=======
+	bool
+	depends on !64BIT && ANDROID_BINDER_IPC
+	default y
+	---help---
+	  The Binder API has been changed to support both 32 and 64bit
+	  applications in a mixed environment.
+
+	  Enable this to support an old 32-bit Android user-space (v4.4 and
+	  earlier).
+
+	  Note that enabling this will break newer Android user-space.
+>>>>>>> v3.18
 
 config ASHMEM
 	bool "Enable the Anonymous Shared Memory Subsystem"
@@ -68,6 +89,7 @@ config ANDROID_LOGGER
 	  optimized writes. This optimization avoids logging having too
 	  much overhead in the system.
 
+<<<<<<< HEAD
 config LOGCAT_SIZE
 	int "Adjust android log buffer sizes"
 	default 256
@@ -76,6 +98,8 @@ config LOGCAT_SIZE
 	  Set logger buffer size. Enter a number greater than zero.
 	  Any value less than 256 is recommended. Reduce value to save kernel static memory size.
 
+=======
+>>>>>>> v3.18
 config ANDROID_TIMED_OUTPUT
 	bool "Timed output class driver"
 	default y
@@ -87,6 +111,7 @@ config ANDROID_TIMED_GPIO
 
 config ANDROID_LOW_MEMORY_KILLER
 	bool "Android Low Memory Killer"
+<<<<<<< HEAD
 	default N
 	---help---
 	  Registers processes to be killed when memory is low
@@ -102,6 +127,13 @@ config ANDROID_LOW_MEMORY_KILLER_AUTODETECT_OOM_ADJ_VALUES
 
 config ANDROID_INTF_ALARM_DEV
 	bool "Android alarm driver"
+=======
+	---help---
+	  Registers processes to be killed when memory is low
+
+config ANDROID_INTF_ALARM_DEV
+	tristate "Android alarm driver"
+>>>>>>> v3.18
 	depends on RTC_CLASS
 	default n
 	---help---
@@ -113,7 +145,12 @@ config SYNC
 	bool "Synchronization framework"
 	default n
 	select ANON_INODES
+<<<<<<< HEAD
 	help
+=======
+	select DMA_SHARED_BUFFER
+	---help---
+>>>>>>> v3.18
 	  This option enables the framework for synchronization between multiple
 	  drivers.  Sync implementations can take advantage of hardware
 	  synchronization built into devices like GPUs.
@@ -122,7 +159,11 @@ config SW_SYNC
 	bool "Software synchronization objects"
 	default n
 	depends on SYNC
+<<<<<<< HEAD
 	help
+=======
+	---help---
+>>>>>>> v3.18
 	  A sync object driver that uses a 32bit counter to coordinate
 	  syncrhronization.  Useful when there is no hardware primitive backing
 	  the synchronization.
@@ -131,11 +172,16 @@ config SW_SYNC_USER
 	bool "Userspace API for SW_SYNC"
 	default n
 	depends on SW_SYNC
+<<<<<<< HEAD
 	help
+=======
+	---help---
+>>>>>>> v3.18
 	  Provides a user space API to the sw sync object.
 	  *WARNING* improper use of this can result in deadlocking kernel
 	  drivers from userspace.
 
+<<<<<<< HEAD
 config ONESHOT_SYNC
 	bool "One shot sync objects"
 	depends on SYNC
@@ -155,6 +201,10 @@ source "drivers/staging/android/ion/Kconfig"
 
 source "drivers/staging/android/fiq_debugger/Kconfig"
 
+=======
+source "drivers/staging/android/ion/Kconfig"
+
+>>>>>>> v3.18
 endif # if ANDROID
 
 endmenu

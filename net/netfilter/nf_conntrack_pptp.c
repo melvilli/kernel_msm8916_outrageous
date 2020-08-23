@@ -605,6 +605,7 @@ static struct nf_conntrack_helper pptp __read_mostly = {
 	.expect_policy		= &pptp_exp_policy,
 };
 
+<<<<<<< HEAD
 static void nf_conntrack_pptp_net_exit(struct net *net)
 {
 	nf_ct_gre_keymap_flush(net);
@@ -625,12 +626,20 @@ static int __init nf_conntrack_pptp_init(void)
 	if (rv < 0)
 		nf_conntrack_helper_unregister(&pptp);
 	return rv;
+=======
+static int __init nf_conntrack_pptp_init(void)
+{
+	return nf_conntrack_helper_register(&pptp);
+>>>>>>> v3.18
 }
 
 static void __exit nf_conntrack_pptp_fini(void)
 {
 	nf_conntrack_helper_unregister(&pptp);
+<<<<<<< HEAD
 	unregister_pernet_subsys(&nf_conntrack_pptp_net_ops);
+=======
+>>>>>>> v3.18
 }
 
 module_init(nf_conntrack_pptp_init);

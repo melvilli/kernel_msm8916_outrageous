@@ -13,21 +13,34 @@
 #include <linux/serial_8250.h>
 #include <linux/platform_device.h>
 #include <linux/dma-mapping.h>
+<<<<<<< HEAD
 
 #include <linux/spi/spi.h>
+=======
+#include <linux/spi/spi.h>
+#include <linux/platform_data/edma.h>
+#include <linux/platform_data/gpio-davinci.h>
+#include <linux/platform_data/spi-davinci.h>
+>>>>>>> v3.18
 
 #include <asm/mach/map.h>
 
 #include <mach/cputype.h>
+<<<<<<< HEAD
 #include <mach/edma.h>
+=======
+>>>>>>> v3.18
 #include <mach/psc.h>
 #include <mach/mux.h>
 #include <mach/irqs.h>
 #include <mach/time.h>
 #include <mach/serial.h>
 #include <mach/common.h>
+<<<<<<< HEAD
 #include <linux/platform_data/spi-davinci.h>
 #include <mach/gpio-davinci.h>
+=======
+>>>>>>> v3.18
 
 #include "davinci.h"
 #include "clock.h"
@@ -357,9 +370,15 @@ static struct clk_lookup dm355_clks[] = {
 	CLK(NULL, "clkout3", &clkout3_clk),
 	CLK(NULL, "arm", &arm_clk),
 	CLK(NULL, "mjcp", &mjcp_clk),
+<<<<<<< HEAD
 	CLK(NULL, "uart0", &uart0_clk),
 	CLK(NULL, "uart1", &uart1_clk),
 	CLK(NULL, "uart2", &uart2_clk),
+=======
+	CLK("serial8250.0", NULL, &uart0_clk),
+	CLK("serial8250.1", NULL, &uart1_clk),
+	CLK("serial8250.2", NULL, &uart2_clk),
+>>>>>>> v3.18
 	CLK("i2c_davinci.1", NULL, &i2c_clk),
 	CLK("davinci-mcbsp.0", NULL, &asp0_clk),
 	CLK("davinci-mcbsp.1", NULL, &asp1_clk),
@@ -376,7 +395,11 @@ static struct clk_lookup dm355_clks[] = {
 	CLK(NULL, "pwm3", &pwm3_clk),
 	CLK(NULL, "timer0", &timer0_clk),
 	CLK(NULL, "timer1", &timer1_clk),
+<<<<<<< HEAD
 	CLK("watchdog", NULL, &timer2_clk),
+=======
+	CLK("davinci-wdt", NULL, &timer2_clk),
+>>>>>>> v3.18
 	CLK(NULL, "timer3", &timer3_clk),
 	CLK(NULL, "rto", &rto_clk),
 	CLK(NULL, "usb", &usb_clk),
@@ -569,6 +592,7 @@ static u8 dm355_default_priorities[DAVINCI_N_AINTC_IRQ] = {
 
 /*----------------------------------------------------------------------*/
 
+<<<<<<< HEAD
 static const s8
 queue_tc_mapping[][2] = {
 	/* {event queue no, TC no} */
@@ -578,6 +602,9 @@ queue_tc_mapping[][2] = {
 };
 
 static const s8
+=======
+static s8
+>>>>>>> v3.18
 queue_priority_mapping[][2] = {
 	/* {event queue no, Priority} */
 	{0, 3},
@@ -586,12 +613,15 @@ queue_priority_mapping[][2] = {
 };
 
 static struct edma_soc_info edma_cc0_info = {
+<<<<<<< HEAD
 	.n_channel		= 64,
 	.n_region		= 4,
 	.n_slot			= 128,
 	.n_tc			= 2,
 	.n_cc			= 1,
 	.queue_tc_mapping	= queue_tc_mapping,
+=======
+>>>>>>> v3.18
 	.queue_priority_mapping	= queue_priority_mapping,
 	.default_queue		= EVENTQ_1,
 };
@@ -642,6 +672,10 @@ static struct platform_device dm355_edma_device = {
 
 static struct resource dm355_asp1_resources[] = {
 	{
+<<<<<<< HEAD
+=======
+		.name	= "mpu",
+>>>>>>> v3.18
 		.start	= DAVINCI_ASP1_BASE,
 		.end	= DAVINCI_ASP1_BASE + SZ_8K - 1,
 		.flags	= IORESOURCE_MEM,
@@ -860,7 +894,11 @@ static struct platform_device dm355_vpbe_display = {
 	},
 };
 
+<<<<<<< HEAD
 struct venc_platform_data dm355_venc_pdata = {
+=======
+static struct venc_platform_data dm355_venc_pdata = {
+>>>>>>> v3.18
 	.setup_pinmux	= dm355_vpbe_setup_pinmux,
 	.setup_clock	= dm355_venc_setup_clock,
 };
@@ -886,6 +924,32 @@ static struct platform_device dm355_vpbe_dev = {
 	},
 };
 
+<<<<<<< HEAD
+=======
+static struct resource dm355_gpio_resources[] = {
+	{	/* registers */
+		.start	= DAVINCI_GPIO_BASE,
+		.end	= DAVINCI_GPIO_BASE + SZ_4K - 1,
+		.flags	= IORESOURCE_MEM,
+	},
+	{	/* interrupt */
+		.start	= IRQ_DM355_GPIOBNK0,
+		.end	= IRQ_DM355_GPIOBNK6,
+		.flags	= IORESOURCE_IRQ,
+	},
+};
+
+static struct davinci_gpio_platform_data dm355_gpio_platform_data = {
+	.ngpio		= 104,
+};
+
+int __init dm355_gpio_register(void)
+{
+	return davinci_gpio_register(dm355_gpio_resources,
+				     ARRAY_SIZE(dm355_gpio_resources),
+				     &dm355_gpio_platform_data);
+}
+>>>>>>> v3.18
 /*----------------------------------------------------------------------*/
 
 static struct map_desc dm355_io_desc[] = {
@@ -922,7 +986,11 @@ static struct davinci_timer_info dm355_timer_info = {
 	.clocksource_id	= T0_TOP,
 };
 
+<<<<<<< HEAD
 static struct plat_serial8250_port dm355_serial_platform_data[] = {
+=======
+static struct plat_serial8250_port dm355_serial0_platform_data[] = {
+>>>>>>> v3.18
 	{
 		.mapbase	= DAVINCI_UART0_BASE,
 		.irq		= IRQ_UARTINT0,
@@ -932,6 +1000,14 @@ static struct plat_serial8250_port dm355_serial_platform_data[] = {
 		.regshift	= 2,
 	},
 	{
+<<<<<<< HEAD
+=======
+		.flags	= 0,
+	}
+};
+static struct plat_serial8250_port dm355_serial1_platform_data[] = {
+	{
+>>>>>>> v3.18
 		.mapbase	= DAVINCI_UART1_BASE,
 		.irq		= IRQ_UARTINT1,
 		.flags		= UPF_BOOT_AUTOCONF | UPF_SKIP_TEST |
@@ -940,6 +1016,14 @@ static struct plat_serial8250_port dm355_serial_platform_data[] = {
 		.regshift	= 2,
 	},
 	{
+<<<<<<< HEAD
+=======
+		.flags	= 0,
+	}
+};
+static struct plat_serial8250_port dm355_serial2_platform_data[] = {
+	{
+>>>>>>> v3.18
 		.mapbase	= DM355_UART2_BASE,
 		.irq		= IRQ_DM355_UARTINT2,
 		.flags		= UPF_BOOT_AUTOCONF | UPF_SKIP_TEST |
@@ -948,6 +1032,7 @@ static struct plat_serial8250_port dm355_serial_platform_data[] = {
 		.regshift	= 2,
 	},
 	{
+<<<<<<< HEAD
 		.flags		= 0
 	},
 };
@@ -958,6 +1043,36 @@ static struct platform_device dm355_serial_device = {
 	.dev			= {
 		.platform_data	= dm355_serial_platform_data,
 	},
+=======
+		.flags	= 0,
+	}
+};
+
+struct platform_device dm355_serial_device[] = {
+	{
+		.name			= "serial8250",
+		.id			= PLAT8250_DEV_PLATFORM,
+		.dev			= {
+			.platform_data	= dm355_serial0_platform_data,
+		}
+	},
+	{
+		.name			= "serial8250",
+		.id			= PLAT8250_DEV_PLATFORM1,
+		.dev			= {
+			.platform_data	= dm355_serial1_platform_data,
+		}
+	},
+	{
+		.name			= "serial8250",
+		.id			= PLAT8250_DEV_PLATFORM2,
+		.dev			= {
+			.platform_data	= dm355_serial2_platform_data,
+		}
+	},
+	{
+	}
+>>>>>>> v3.18
 };
 
 static struct davinci_soc_info davinci_soc_info_dm355 = {
@@ -977,11 +1092,14 @@ static struct davinci_soc_info davinci_soc_info_dm355 = {
 	.intc_irq_prios		= dm355_default_priorities,
 	.intc_irq_num		= DAVINCI_N_AINTC_IRQ,
 	.timer_info		= &dm355_timer_info,
+<<<<<<< HEAD
 	.gpio_type		= GPIO_TYPE_DAVINCI,
 	.gpio_base		= DAVINCI_GPIO_BASE,
 	.gpio_num		= 104,
 	.gpio_irq		= IRQ_DM355_GPIOBNK0,
 	.serial_dev		= &dm355_serial_device,
+=======
+>>>>>>> v3.18
 	.sram_dma		= 0x00010000,
 	.sram_len		= SZ_32K,
 };
@@ -1030,12 +1148,25 @@ int __init dm355_init_video(struct vpfe_config *vpfe_cfg,
 
 static int __init dm355_init_devices(void)
 {
+<<<<<<< HEAD
+=======
+	int ret = 0;
+
+>>>>>>> v3.18
 	if (!cpu_is_davinci_dm355())
 		return 0;
 
 	davinci_cfg_reg(DM355_INT_EDMA_CC);
 	platform_device_register(&dm355_edma_device);
 
+<<<<<<< HEAD
 	return 0;
+=======
+	ret = davinci_init_wdt();
+	if (ret)
+		pr_warn("%s: watchdog init failed: %d\n", __func__, ret);
+
+	return ret;
+>>>>>>> v3.18
 }
 postcore_initcall(dm355_init_devices);

@@ -254,7 +254,11 @@ static const struct stb0899_s1_reg az6027_stb0899_s1_init_3[] = {
 
 
 
+<<<<<<< HEAD
 struct stb0899_config az6027_stb0899_config = {
+=======
+static struct stb0899_config az6027_stb0899_config = {
+>>>>>>> v3.18
 	.init_dev		= az6027_stb0899_s1_init_1,
 	.init_s2_demod		= stb0899_s2_init_2,
 	.init_s1_demod		= az6027_stb0899_s1_init_3,
@@ -264,7 +268,11 @@ struct stb0899_config az6027_stb0899_config = {
 	.demod_address 		= 0xd0, /* 0x68, 0xd0 >> 1 */
 
 	.xtal_freq		= 27000000,
+<<<<<<< HEAD
 	.inversion		= IQ_SWAP_ON, /* 1 */
+=======
+	.inversion		= IQ_SWAP_ON,
+>>>>>>> v3.18
 
 	.lo_clk			= 76500000,
 	.hi_clk			= 99000000,
@@ -291,7 +299,11 @@ struct stb0899_config az6027_stb0899_config = {
 	.tuner_set_rfsiggain	= NULL,
 };
 
+<<<<<<< HEAD
 struct stb6100_config az6027_stb6100_config = {
+=======
+static struct stb6100_config az6027_stb6100_config = {
+>>>>>>> v3.18
 	.tuner_address	= 0xc0,
 	.refclock	= 27000000,
 };
@@ -1088,6 +1100,10 @@ static struct usb_device_id az6027_usb_table[] = {
 	{ USB_DEVICE(USB_VID_TECHNISAT, USB_PID_TECHNISAT_USB2_HDCI_V1) },
 	{ USB_DEVICE(USB_VID_TECHNISAT, USB_PID_TECHNISAT_USB2_HDCI_V2) },
 	{ USB_DEVICE(USB_VID_ELGATO, USB_PID_ELGATO_EYETV_SAT) },
+<<<<<<< HEAD
+=======
+	{ USB_DEVICE(USB_VID_ELGATO, USB_PID_ELGATO_EYETV_SAT_V2) },
+>>>>>>> v3.18
 	{ },
 };
 
@@ -1136,7 +1152,11 @@ static struct dvb_usb_device_properties az6027_properties = {
 
 	.i2c_algo         = &az6027_i2c_algo,
 
+<<<<<<< HEAD
 	.num_device_descs = 6,
+=======
+	.num_device_descs = 7,
+>>>>>>> v3.18
 	.devices = {
 		{
 			.name = "AZUREWAVE DVB-S/S2 USB2.0 (AZ6027)",
@@ -1162,6 +1182,13 @@ static struct dvb_usb_device_properties az6027_properties = {
 			.name = "Elgato EyeTV Sat",
 			.cold_ids = { &az6027_usb_table[5], NULL },
 			.warm_ids = { NULL },
+<<<<<<< HEAD
+=======
+		}, {
+			.name = "Elgato EyeTV Sat",
+			.cold_ids = { &az6027_usb_table[6], NULL },
+			.warm_ids = { NULL },
+>>>>>>> v3.18
 		},
 		{ NULL },
 	}

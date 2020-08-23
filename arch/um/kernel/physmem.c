@@ -22,6 +22,7 @@ EXPORT_SYMBOL(high_physmem);
 
 extern unsigned long long physmem_size;
 
+<<<<<<< HEAD
 int __init init_maps(unsigned long physmem, unsigned long iomem,
 		     unsigned long highmem)
 {
@@ -55,6 +56,21 @@ int __init init_maps(unsigned long physmem, unsigned long iomem,
 
 	max_mapnr = total_pages;
 	return 0;
+=======
+void __init mem_total_pages(unsigned long physmem, unsigned long iomem,
+		     unsigned long highmem)
+{
+	unsigned long phys_pages, highmem_pages;
+	unsigned long iomem_pages, total_pages;
+
+	phys_pages    = physmem >> PAGE_SHIFT;
+	iomem_pages   = iomem   >> PAGE_SHIFT;
+	highmem_pages = highmem >> PAGE_SHIFT;
+
+	total_pages   = phys_pages + iomem_pages + highmem_pages;
+
+	max_mapnr = total_pages;
+>>>>>>> v3.18
 }
 
 void map_memory(unsigned long virt, unsigned long phys, unsigned long len,
@@ -103,6 +119,10 @@ void __init setup_physmem(unsigned long start, unsigned long reserve_end,
 	 */
 	os_seek_file(physmem_fd, __pa(&__syscall_stub_start));
 	os_write_file(physmem_fd, &__syscall_stub_start, PAGE_SIZE);
+<<<<<<< HEAD
+=======
+	os_fsync_file(physmem_fd);
+>>>>>>> v3.18
 
 	bootmap_size = init_bootmem(pfn, pfn + delta);
 	free_bootmem(__pa(reserve_end) + bootmap_size,

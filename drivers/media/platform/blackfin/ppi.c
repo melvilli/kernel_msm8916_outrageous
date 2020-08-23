@@ -19,6 +19,10 @@
 
 #include <linux/module.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
+=======
+#include <linux/platform_device.h>
+>>>>>>> v3.18
 
 #include <asm/bfin_ppi.h>
 #include <asm/blackfin.h>
@@ -205,6 +209,23 @@ static int ppi_set_params(struct ppi_if *ppi, struct ppi_params *params)
 	int dma_config, bytes_per_line;
 	int hcount, hdelay, samples_per_line;
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PINCTRL
+	static const char * const pin_state[] = {"8bit", "16bit", "24bit"};
+	struct pinctrl *pctrl;
+	struct pinctrl_state *pstate;
+
+	if (params->dlen > 24 || params->dlen <= 0)
+		return -EINVAL;
+	pctrl = devm_pinctrl_get(ppi->dev);
+	pstate = pinctrl_lookup_state(pctrl,
+				      pin_state[(params->dlen + 7) / 8 - 1]);
+	if (pinctrl_select_state(pctrl, pstate))
+		return -EINVAL;
+#endif
+
+>>>>>>> v3.18
 	bytes_per_line = params->width * params->bpp / 8;
 	/* convert parameters unit from pixels to samples */
 	hcount = params->width * params->bpp / params->dlen;
@@ -266,6 +287,21 @@ static int ppi_set_params(struct ppi_if *ppi, struct ppi_params *params)
 		bfin_write32(&reg->vcnt, params->height);
 		if (params->int_mask)
 			bfin_write32(&reg->imsk, params->int_mask & 0xFF);
+<<<<<<< HEAD
+=======
+		if (ppi->ppi_control & PORT_DIR) {
+			u32 hsync_width, vsync_width, vsync_period;
+
+			hsync_width = params->hsync
+					* params->bpp / params->dlen;
+			vsync_width = params->vsync * samples_per_line;
+			vsync_period = samples_per_line * params->frame;
+			bfin_write32(&reg->fs1_wlhb, hsync_width);
+			bfin_write32(&reg->fs1_paspl, samples_per_line);
+			bfin_write32(&reg->fs2_wlvb, vsync_width);
+			bfin_write32(&reg->fs2_palpf, vsync_period);
+		}
+>>>>>>> v3.18
 		break;
 	}
 	default:
@@ -295,26 +331,48 @@ static void ppi_update_addr(struct ppi_if *ppi, unsigned long addr)
 	set_dma_start_addr(ppi->info->dma_ch, addr);
 }
 
+<<<<<<< HEAD
 struct ppi_if *ppi_create_instance(const struct ppi_info *info)
+=======
+struct ppi_if *ppi_create_instance(struct platform_device *pdev,
+			const struct ppi_info *info)
+>>>>>>> v3.18
 {
 	struct ppi_if *ppi;
 
 	if (!info || !info->pin_req)
 		return NULL;
 
+<<<<<<< HEAD
 	if (peripheral_request_list(info->pin_req, KBUILD_MODNAME)) {
 		pr_err("request peripheral failed\n");
 		return NULL;
 	}
+=======
+#ifndef CONFIG_PINCTRL
+	if (peripheral_request_list(info->pin_req, KBUILD_MODNAME)) {
+		dev_err(&pdev->dev, "request peripheral failed\n");
+		return NULL;
+	}
+#endif
+>>>>>>> v3.18
 
 	ppi = kzalloc(sizeof(*ppi), GFP_KERNEL);
 	if (!ppi) {
 		peripheral_free_list(info->pin_req);
+<<<<<<< HEAD
 		pr_err("unable to allocate memory for ppi handle\n");
+=======
+		dev_err(&pdev->dev, "unable to allocate memory for ppi handle\n");
+>>>>>>> v3.18
 		return NULL;
 	}
 	ppi->ops = &ppi_ops;
 	ppi->info = info;
+<<<<<<< HEAD
+=======
+	ppi->dev = &pdev->dev;
+>>>>>>> v3.18
 
 	pr_info("ppi probe success\n");
 	return ppi;

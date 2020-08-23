@@ -252,7 +252,11 @@ static const struct attribute_group env_group = {
 
 static int env_probe(struct platform_device *op)
 {
+<<<<<<< HEAD
 	struct env *p = kzalloc(sizeof(*p), GFP_KERNEL);
+=======
+	struct env *p = devm_kzalloc(&op->dev, sizeof(*p), GFP_KERNEL);
+>>>>>>> v3.18
 	int err = -ENOMEM;
 
 	if (!p)
@@ -262,7 +266,11 @@ static int env_probe(struct platform_device *op)
 
 	p->regs = of_ioremap(&op->resource[0], 0, REG_SIZE, "pic16f747");
 	if (!p->regs)
+<<<<<<< HEAD
 		goto out_free;
+=======
+		goto out;
+>>>>>>> v3.18
 
 	err = sysfs_create_group(&op->dev.kobj, &env_group);
 	if (err)
@@ -286,8 +294,11 @@ out_sysfs_remove_group:
 out_iounmap:
 	of_iounmap(&op->resource[0], p->regs, REG_SIZE);
 
+<<<<<<< HEAD
 out_free:
 	kfree(p);
+=======
+>>>>>>> v3.18
 	goto out;
 }
 
@@ -299,7 +310,10 @@ static int env_remove(struct platform_device *op)
 		sysfs_remove_group(&op->dev.kobj, &env_group);
 		hwmon_device_unregister(p->hwmon_dev);
 		of_iounmap(&op->resource[0], p->regs, REG_SIZE);
+<<<<<<< HEAD
 		kfree(p);
+=======
+>>>>>>> v3.18
 	}
 
 	return 0;

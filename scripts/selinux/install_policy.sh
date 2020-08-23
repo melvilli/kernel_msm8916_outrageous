@@ -66,4 +66,7 @@ if [ "eq$dodev" != "eq" ]; then
 	$SF file_contexts /dev
 	mount --move /mnt /dev
 fi
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18

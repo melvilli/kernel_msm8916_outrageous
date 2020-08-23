@@ -71,6 +71,10 @@ static unsigned int __init smvp_vpe_init(unsigned int tc, unsigned int mvpconf0,
 
 		/* Record this as available CPU */
 		set_cpu_possible(tc, true);
+<<<<<<< HEAD
+=======
+		set_cpu_present(tc, true);
+>>>>>>> v3.18
 		__cpu_number_map[tc]	= ++ncpu;
 		__cpu_logical_map[ncpu] = tc;
 	}
@@ -118,6 +122,15 @@ static void vsmp_send_ipi_single(int cpu, unsigned int action)
 	unsigned long flags;
 	int vpflags;
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_IRQ_GIC
+	if (gic_present) {
+		gic_send_ipi_single(cpu, action);
+		return;
+	}
+#endif
+>>>>>>> v3.18
 	local_irq_save(flags);
 
 	vpflags = dvpe();	/* can't access the other CPU's registers whilst MVPE enabled */
@@ -149,7 +162,11 @@ static void vsmp_send_ipi_mask(const struct cpumask *mask, unsigned int action)
 		vsmp_send_ipi_single(i, action);
 }
 
+<<<<<<< HEAD
 static void __cpuinit vsmp_init_secondary(void)
+=======
+static void vsmp_init_secondary(void)
+>>>>>>> v3.18
 {
 #ifdef CONFIG_IRQ_GIC
 	/* This is Malta specific: IPI,performance and timer interrupts */
@@ -162,7 +179,11 @@ static void __cpuinit vsmp_init_secondary(void)
 					 STATUSF_IP6 | STATUSF_IP7);
 }
 
+<<<<<<< HEAD
 static void __cpuinit vsmp_smp_finish(void)
+=======
+static void vsmp_smp_finish(void)
+>>>>>>> v3.18
 {
 	/* CDFIXME: remove this? */
 	write_c0_compare(read_c0_count() + (8* mips_hpt_frequency/HZ));
@@ -176,10 +197,13 @@ static void __cpuinit vsmp_smp_finish(void)
 	local_irq_enable();
 }
 
+<<<<<<< HEAD
 static void vsmp_cpus_done(void)
 {
 }
 
+=======
+>>>>>>> v3.18
 /*
  * Setup the PC, SP, and GP of a secondary processor and start it
  * running!
@@ -188,7 +212,11 @@ static void vsmp_cpus_done(void)
  * (unsigned long)idle->thread_info the gp
  * assumes a 1:1 mapping of TC => VPE
  */
+<<<<<<< HEAD
 static void __cpuinit vsmp_boot_secondary(int cpu, struct task_struct *idle)
+=======
+static void vsmp_boot_secondary(int cpu, struct task_struct *idle)
+>>>>>>> v3.18
 {
 	struct thread_info *gp = task_thread_info(idle);
 	dvpe();
@@ -280,8 +308,38 @@ struct plat_smp_ops vsmp_smp_ops = {
 	.send_ipi_mask		= vsmp_send_ipi_mask,
 	.init_secondary		= vsmp_init_secondary,
 	.smp_finish		= vsmp_smp_finish,
+<<<<<<< HEAD
 	.cpus_done		= vsmp_cpus_done,
+=======
+>>>>>>> v3.18
 	.boot_secondary		= vsmp_boot_secondary,
 	.smp_setup		= vsmp_smp_setup,
 	.prepare_cpus		= vsmp_prepare_cpus,
 };
+<<<<<<< HEAD
+=======
+
+#ifdef CONFIG_PROC_FS
+static int proc_cpuinfo_chain_call(struct notifier_block *nfb,
+	unsigned long action_unused, void *data)
+{
+	struct proc_cpuinfo_notifier_args *pcn = data;
+	struct seq_file *m = pcn->m;
+	unsigned long n = pcn->n;
+
+	if (!cpu_has_mipsmt)
+		return NOTIFY_OK;
+
+	seq_printf(m, "VPE\t\t\t: %d\n", cpu_data[n].vpe_id);
+
+	return NOTIFY_OK;
+}
+
+static int __init proc_cpuinfo_notifier_init(void)
+{
+	return proc_cpuinfo_notifier(proc_cpuinfo_chain_call, 0);
+}
+
+subsys_initcall(proc_cpuinfo_notifier_init);
+#endif
+>>>>>>> v3.18

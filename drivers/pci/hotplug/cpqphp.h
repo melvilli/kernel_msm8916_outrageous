@@ -255,7 +255,11 @@ struct pci_func {
 	struct pci_resource *io_head;
 	struct pci_resource *bus_head;
 	struct timer_list *p_task_event;
+<<<<<<< HEAD
 	struct pci_dev* pci_dev;
+=======
+	struct pci_dev *pci_dev;
+>>>>>>> v3.18
 };
 
 struct slot {
@@ -278,7 +282,11 @@ struct slot {
 };
 
 struct pci_resource {
+<<<<<<< HEAD
 	struct pci_resource * next;
+=======
+	struct pci_resource *next;
+>>>>>>> v3.18
 	u32 base;
 	u32 length;
 };
@@ -690,7 +698,11 @@ static inline int cpq_get_latch_status(struct controller *ctrl,
 
 	status = (readl(ctrl->hpc_reg + INT_INPUT_CLEAR) & (0x01L << hp_slot));
 
+<<<<<<< HEAD
 	return(status == 0) ? 1 : 0;
+=======
+	return (status == 0) ? 1 : 0;
+>>>>>>> v3.18
 }
 
 

@@ -1,12 +1,17 @@
 #ifndef LINUX_HARDIRQ_H
 #define LINUX_HARDIRQ_H
 
+<<<<<<< HEAD
 #include <linux/preempt.h>
+=======
+#include <linux/preempt_mask.h>
+>>>>>>> v3.18
 #include <linux/lockdep.h>
 #include <linux/ftrace_irq.h>
 #include <linux/vtime.h>
 #include <asm/hardirq.h>
 
+<<<<<<< HEAD
 /*
  * We put the hardirq and softirq counter into the preemption
  * counter. The bitmask has the following meaning:
@@ -125,6 +130,13 @@
 extern void synchronize_irq(unsigned int irq);
 
 #if defined(CONFIG_TINY_RCU) || defined(CONFIG_TINY_PREEMPT_RCU)
+=======
+
+extern void synchronize_irq(unsigned int irq);
+extern void synchronize_hardirq(unsigned int irq);
+
+#if defined(CONFIG_TINY_RCU)
+>>>>>>> v3.18
 
 static inline void rcu_nmi_enter(void)
 {
@@ -148,7 +160,11 @@ extern void rcu_nmi_exit(void);
 #define __irq_enter()					\
 	do {						\
 		account_irq_enter_time(current);	\
+<<<<<<< HEAD
 		add_preempt_count(HARDIRQ_OFFSET);	\
+=======
+		preempt_count_add(HARDIRQ_OFFSET);	\
+>>>>>>> v3.18
 		trace_hardirq_enter();			\
 	} while (0)
 
@@ -164,7 +180,11 @@ extern void irq_enter(void);
 	do {						\
 		trace_hardirq_exit();			\
 		account_irq_exit_time(current);		\
+<<<<<<< HEAD
 		sub_preempt_count(HARDIRQ_OFFSET);	\
+=======
+		preempt_count_sub(HARDIRQ_OFFSET);	\
+>>>>>>> v3.18
 	} while (0)
 
 /*
@@ -177,7 +197,11 @@ extern void irq_exit(void);
 		lockdep_off();					\
 		ftrace_nmi_enter();				\
 		BUG_ON(in_nmi());				\
+<<<<<<< HEAD
 		add_preempt_count(NMI_OFFSET + HARDIRQ_OFFSET);	\
+=======
+		preempt_count_add(NMI_OFFSET + HARDIRQ_OFFSET);	\
+>>>>>>> v3.18
 		rcu_nmi_enter();				\
 		trace_hardirq_enter();				\
 	} while (0)
@@ -187,7 +211,11 @@ extern void irq_exit(void);
 		trace_hardirq_exit();				\
 		rcu_nmi_exit();					\
 		BUG_ON(!in_nmi());				\
+<<<<<<< HEAD
 		sub_preempt_count(NMI_OFFSET + HARDIRQ_OFFSET);	\
+=======
+		preempt_count_sub(NMI_OFFSET + HARDIRQ_OFFSET);	\
+>>>>>>> v3.18
 		ftrace_nmi_exit();				\
 		lockdep_on();					\
 	} while (0)

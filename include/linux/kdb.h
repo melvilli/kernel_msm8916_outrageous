@@ -109,6 +109,10 @@ typedef enum {
 	KDB_REASON_RECURSE,	/* Recursive entry to kdb;
 				 * regs probably valid */
 	KDB_REASON_SSTEP,	/* Single Step trap. - regs valid */
+<<<<<<< HEAD
+=======
+	KDB_REASON_SYSTEM_NMI,	/* In NMI due to SYSTEM cmd; regs valid */
+>>>>>>> v3.18
 } kdb_reason_t;
 
 extern int kdb_trap_printk;

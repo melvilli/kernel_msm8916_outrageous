@@ -8,6 +8,11 @@
  * published by the Free Software Foundation.
  */
 
+<<<<<<< HEAD
+=======
+#include <linux/types.h>
+
+>>>>>>> v3.18
 #ifndef __ASSEMBLY__
 #include <linux/reboot.h>
 
@@ -16,8 +21,15 @@ struct pt_regs;
 struct smp_operations;
 #ifdef CONFIG_SMP
 #define smp_ops(ops) (&(ops))
+<<<<<<< HEAD
 #else
 #define smp_ops(ops) (struct smp_operations *)NULL
+=======
+#define smp_init_ops(ops) (&(ops))
+#else
+#define smp_ops(ops) (struct smp_operations *)NULL
+#define smp_init_ops(ops) (bool (*)(void))NULL
+>>>>>>> v3.18
 #endif
 
 struct machine_desc {
@@ -30,7 +42,11 @@ struct machine_desc {
 	unsigned int		nr_irqs;	/* number of IRQs */
 
 #ifdef CONFIG_ZONE_DMA
+<<<<<<< HEAD
 	unsigned long		dma_zone_size;	/* size of DMA-able area */
+=======
+	phys_addr_t		dma_zone_size;	/* size of DMA-able area */
+>>>>>>> v3.18
 #endif
 
 	unsigned int		video_start;	/* start of video RAM	*/
@@ -40,8 +56,19 @@ struct machine_desc {
 	unsigned char		reserve_lp1 :1;	/* never has lp1	*/
 	unsigned char		reserve_lp2 :1;	/* never has lp2	*/
 	enum reboot_mode	reboot_mode;	/* default restart mode	*/
+<<<<<<< HEAD
 	struct smp_operations	*smp;		/* SMP operations	*/
 	void			(*fixup)(struct tag *, char **);
+=======
+	unsigned		l2c_aux_val;	/* L2 cache aux value	*/
+	unsigned		l2c_aux_mask;	/* L2 cache aux mask	*/
+	void			(*l2c_write_sec)(unsigned long, unsigned);
+	struct smp_operations	*smp;		/* SMP operations	*/
+	bool			(*smp_init)(void);
+	void			(*fixup)(struct tag *, char **);
+	void			(*dt_fixup)(void);
+	void			(*init_meminfo)(void);
+>>>>>>> v3.18
 	void			(*reserve)(void);/* reserve mem blocks	*/
 	void			(*map_io)(void);/* IO mapping function	*/
 	void			(*init_early)(void);

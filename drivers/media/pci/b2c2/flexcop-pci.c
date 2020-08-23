@@ -319,7 +319,10 @@ static int flexcop_pci_init(struct flexcop_pci *fc_pci)
 
 err_pci_iounmap:
 	pci_iounmap(fc_pci->pdev, fc_pci->io_mem);
+<<<<<<< HEAD
 	pci_set_drvdata(fc_pci->pdev, NULL);
+=======
+>>>>>>> v3.18
 err_pci_release_regions:
 	pci_release_regions(fc_pci->pdev);
 err_pci_disable_device:
@@ -332,7 +335,10 @@ static void flexcop_pci_exit(struct flexcop_pci *fc_pci)
 	if (fc_pci->init_state & FC_PCI_INIT) {
 		free_irq(fc_pci->pdev->irq, fc_pci);
 		pci_iounmap(fc_pci->pdev, fc_pci->io_mem);
+<<<<<<< HEAD
 		pci_set_drvdata(fc_pci->pdev, NULL);
+=======
+>>>>>>> v3.18
 		pci_release_regions(fc_pci->pdev);
 		pci_disable_device(fc_pci->pdev);
 	}
@@ -432,6 +438,7 @@ static struct pci_driver flexcop_pci_driver = {
 	.remove   = flexcop_pci_remove,
 };
 
+<<<<<<< HEAD
 static int __init flexcop_pci_module_init(void)
 {
 	return pci_register_driver(&flexcop_pci_driver);
@@ -444,6 +451,9 @@ static void __exit flexcop_pci_module_exit(void)
 
 module_init(flexcop_pci_module_init);
 module_exit(flexcop_pci_module_exit);
+=======
+module_pci_driver(flexcop_pci_driver);
+>>>>>>> v3.18
 
 MODULE_AUTHOR(DRIVER_AUTHOR);
 MODULE_DESCRIPTION(DRIVER_NAME);

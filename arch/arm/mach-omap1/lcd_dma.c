@@ -32,8 +32,11 @@
 #include <mach/hardware.h>
 #include <mach/lcdc.h>
 
+<<<<<<< HEAD
 #include "dma.h"
 
+=======
+>>>>>>> v3.18
 int omap_lcd_dma_running(void)
 {
 	/*

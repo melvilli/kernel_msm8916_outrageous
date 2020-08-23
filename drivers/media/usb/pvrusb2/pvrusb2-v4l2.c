@@ -31,6 +31,10 @@
 #include <linux/videodev2.h>
 #include <linux/module.h>
 #include <media/v4l2-dev.h>
+<<<<<<< HEAD
+=======
+#include <media/v4l2-device.h>
+>>>>>>> v3.18
 #include <media/v4l2-common.h>
 #include <media/v4l2-ioctl.h>
 
@@ -800,6 +804,7 @@ static int pvr2_log_status(struct file *file, void *priv)
 	return 0;
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 static int pvr2_g_register(struct file *file, void *priv, struct v4l2_dbg_register *req)
 {
@@ -830,6 +835,8 @@ static int pvr2_s_register(struct file *file, void *priv, const struct v4l2_dbg_
 }
 #endif
 
+=======
+>>>>>>> v3.18
 static const struct v4l2_ioctl_ops pvr2_ioctl_ops = {
 	.vidioc_querycap		    = pvr2_querycap,
 	.vidioc_g_priority		    = pvr2_g_priority,
@@ -864,10 +871,13 @@ static const struct v4l2_ioctl_ops pvr2_ioctl_ops = {
 	.vidioc_g_ext_ctrls		    = pvr2_g_ext_ctrls,
 	.vidioc_s_ext_ctrls		    = pvr2_s_ext_ctrls,
 	.vidioc_try_ext_ctrls		    = pvr2_try_ext_ctrls,
+<<<<<<< HEAD
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 	.vidioc_g_register		    = pvr2_g_register,
 	.vidioc_s_register		    = pvr2_s_register,
 #endif
+=======
+>>>>>>> v3.18
 };
 
 static void pvr2_v4l2_dev_destroy(struct pvr2_v4l2_dev *dip)
@@ -904,8 +914,13 @@ static void pvr2_v4l2_dev_destroy(struct pvr2_v4l2_dev *dip)
 static void pvr2_v4l2_dev_disassociate_parent(struct pvr2_v4l2_dev *dip)
 {
 	if (!dip) return;
+<<<<<<< HEAD
 	if (!dip->devbase.parent) return;
 	dip->devbase.parent = NULL;
+=======
+	if (!dip->devbase.v4l2_dev->dev) return;
+	dip->devbase.v4l2_dev->dev = NULL;
+>>>>>>> v3.18
 	device_move(&dip->devbase.dev, NULL, DPM_ORDER_NONE);
 }
 
@@ -984,6 +999,7 @@ static long pvr2_v4l2_ioctl(struct file *file,
 	if (ret < 0) {
 		if (pvrusb2_debug & PVR2_TRACE_V4LIOCTL) {
 			pvr2_trace(PVR2_TRACE_V4LIOCTL,
+<<<<<<< HEAD
 				   "pvr2_v4l2_do_ioctl failure, ret=%ld", ret);
 		} else {
 			if (pvrusb2_debug & PVR2_TRACE_V4LIOCTL) {
@@ -993,6 +1009,11 @@ static long pvr2_v4l2_ioctl(struct file *file,
 				v4l_printk_ioctl(pvr2_hdw_get_driver_name(hdw),
 						cmd);
 			}
+=======
+				   "pvr2_v4l2_do_ioctl failure, ret=%ld"
+				   " command was:", ret);
+			v4l_printk_ioctl(pvr2_hdw_get_driver_name(hdw), cmd);
+>>>>>>> v3.18
 		}
 	} else {
 		pvr2_trace(PVR2_TRACE_V4LIOCTL,
@@ -1298,7 +1319,10 @@ static void pvr2_v4l2_dev_init(struct pvr2_v4l2_dev *dip,
 			       struct pvr2_v4l2 *vp,
 			       int v4l_type)
 {
+<<<<<<< HEAD
 	struct usb_device *usbdev;
+=======
+>>>>>>> v3.18
 	int mindevnum;
 	int unit_number;
 	struct pvr2_hdw *hdw;
@@ -1306,7 +1330,10 @@ static void pvr2_v4l2_dev_init(struct pvr2_v4l2_dev *dip,
 	dip->v4lp = vp;
 
 	hdw = vp->channel.mc_head->hdw;
+<<<<<<< HEAD
 	usbdev = pvr2_hdw_get_dev(hdw);
+=======
+>>>>>>> v3.18
 	dip->v4l_type = v4l_type;
 	switch (v4l_type) {
 	case VFL_TYPE_GRABBER:
@@ -1355,7 +1382,11 @@ static void pvr2_v4l2_dev_init(struct pvr2_v4l2_dev *dip,
 	if (nr_ptr && (unit_number >= 0) && (unit_number < PVR_NUM)) {
 		mindevnum = nr_ptr[unit_number];
 	}
+<<<<<<< HEAD
 	dip->devbase.parent = &usbdev->dev;
+=======
+	pvr2_hdw_set_v4l2_dev(hdw, &dip->devbase);
+>>>>>>> v3.18
 	if ((video_register_device(&dip->devbase,
 				   dip->v4l_type, mindevnum) < 0) &&
 	    (video_register_device(&dip->devbase,

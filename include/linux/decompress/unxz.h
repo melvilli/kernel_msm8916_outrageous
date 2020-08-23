@@ -10,10 +10,17 @@
 #ifndef DECOMPRESS_UNXZ_H
 #define DECOMPRESS_UNXZ_H
 
+<<<<<<< HEAD
 int unxz(unsigned char *in, int in_size,
 	 int (*fill)(void *dest, unsigned int size),
 	 int (*flush)(void *src, unsigned int size),
 	 unsigned char *out, int *in_used,
+=======
+int unxz(unsigned char *in, long in_size,
+	 long (*fill)(void *dest, unsigned long size),
+	 long (*flush)(void *src, unsigned long size),
+	 unsigned char *out, long *in_used,
+>>>>>>> v3.18
 	 void (*error)(char *x));
 
 #endif

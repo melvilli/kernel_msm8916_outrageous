@@ -1,8 +1,15 @@
+<<<<<<< HEAD
 #ifndef _BNX2FC_H_
 #define _BNX2FC_H_
 /* bnx2fc.h: Broadcom NetXtreme II Linux FCoE offload driver.
  *
  * Copyright (c) 2008 - 2013 Broadcom Corporation
+=======
+/* bnx2fc.h: QLogic NetXtreme II Linux FCoE offload driver.
+ *
+ * Copyright (c) 2008 - 2013 Broadcom Corporation
+ * Copyright (c) 2014, QLogic Corporation
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -11,6 +18,11 @@
  * Written by: Bhanu Prakash Gollapudi (bprakash@broadcom.com)
  */
 
+<<<<<<< HEAD
+=======
+#ifndef _BNX2FC_H_
+#define _BNX2FC_H_
+>>>>>>> v3.18
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
 #include <linux/module.h>
@@ -64,7 +76,11 @@
 #include "bnx2fc_constants.h"
 
 #define BNX2FC_NAME		"bnx2fc"
+<<<<<<< HEAD
 #define BNX2FC_VERSION		"1.0.14"
+=======
+#define BNX2FC_VERSION		"2.4.2"
+>>>>>>> v3.18
 
 #define PFX			"bnx2fc: "
 
@@ -105,7 +121,11 @@
 #define BNX2FC_RQ_WQE_SIZE		(BNX2FC_RQ_BUF_SZ)
 #define BNX2FC_XFERQ_WQE_SIZE		(sizeof(struct fcoe_xfrqe))
 #define BNX2FC_CONFQ_WQE_SIZE		(sizeof(struct fcoe_confqe))
+<<<<<<< HEAD
 #define BNX2FC_5771X_DB_PAGE_SIZE	128
+=======
+#define BNX2X_DB_SHIFT			3
+>>>>>>> v3.18
 
 #define BNX2FC_TASK_SIZE		128
 #define	BNX2FC_TASKS_PER_PAGE		(PAGE_SIZE/BNX2FC_TASK_SIZE)
@@ -367,6 +387,10 @@ struct bnx2fc_rport {
 	atomic_t num_active_ios;
 	u32 flush_in_prog;
 	unsigned long timestamp;
+<<<<<<< HEAD
+=======
+	unsigned long retry_delay_timestamp;
+>>>>>>> v3.18
 	struct list_head free_task_list;
 	struct bnx2fc_cmd *pending_queue[BNX2FC_SQ_WQES_MAX+1];
 	struct list_head active_cmd_queue;

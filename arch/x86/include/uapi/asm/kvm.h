@@ -23,7 +23,14 @@
 #define GP_VECTOR 13
 #define PF_VECTOR 14
 #define MF_VECTOR 16
+<<<<<<< HEAD
 #define MC_VECTOR 18
+=======
+#define AC_VECTOR 17
+#define MC_VECTOR 18
+#define XM_VECTOR 19
+#define VE_VECTOR 20
+>>>>>>> v3.18
 
 /* Select x86 specific features in <linux/kvm.h> */
 #define __KVM_HAVE_PIT
@@ -211,9 +218,15 @@ struct kvm_cpuid_entry2 {
 	__u32 padding[3];
 };
 
+<<<<<<< HEAD
 #define KVM_CPUID_FLAG_SIGNIFCANT_INDEX 1
 #define KVM_CPUID_FLAG_STATEFUL_FUNC    2
 #define KVM_CPUID_FLAG_STATE_READ_NEXT  4
+=======
+#define KVM_CPUID_FLAG_SIGNIFCANT_INDEX		BIT(0)
+#define KVM_CPUID_FLAG_STATEFUL_FUNC		BIT(1)
+#define KVM_CPUID_FLAG_STATE_READ_NEXT		BIT(2)
+>>>>>>> v3.18
 
 /* for KVM_SET_CPUID2 */
 struct kvm_cpuid2 {

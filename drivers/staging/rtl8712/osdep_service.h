@@ -50,6 +50,7 @@ struct	__queue	{
 #define _pkt struct sk_buff
 #define _buffer unsigned char
 #define thread_exit() complete_and_exit(NULL, 0)
+<<<<<<< HEAD
 #define _workitem struct work_struct
 
 #define _init_queue(pqueue)				\
@@ -76,6 +77,18 @@ static inline void list_delete(struct list_head *plist)
 	list_del_init(plist);
 }
 
+=======
+
+#define _init_queue(pqueue)				\
+	do {						\
+		INIT_LIST_HEAD(&((pqueue)->queue));	\
+		spin_lock_init(&((pqueue)->lock));	\
+	} while (0)
+
+#define LIST_CONTAINOR(ptr, type, member) \
+	((type *)((char *)(ptr)-(SIZE_T)(&((type *)0)->member)))
+
+>>>>>>> v3.18
 static inline void _init_timer(struct timer_list *ptimer,
 			       struct  net_device *padapter,
 			       void *pfunc, void *cntx)
@@ -96,6 +109,7 @@ static inline void _cancel_timer(struct timer_list *ptimer, u8 *bcancelled)
 	*bcancelled = true; /*true ==1; false==0*/
 }
 
+<<<<<<< HEAD
 static inline void _init_workitem(_workitem *pwork, void *pfunc, void *cntx)
 {
 	INIT_WORK(pwork, pfunc);
@@ -106,10 +120,13 @@ static inline void _set_workitem(_workitem *pwork)
 	schedule_work(pwork);
 }
 
+=======
+>>>>>>> v3.18
 #ifndef BIT
 	#define BIT(x)	(1 << (x))
 #endif
 
+<<<<<<< HEAD
 /*
 For the following list_xxx operations,
 caller must guarantee the atomic context.
@@ -129,6 +146,8 @@ static inline void list_insert_tail(struct list_head *plist,
 	list_add_tail(plist, phead);
 }
 
+=======
+>>>>>>> v3.18
 static inline u32 _down_sema(struct semaphore *sema)
 {
 	if (down_interruptible(sema))
@@ -137,6 +156,7 @@ static inline u32 _down_sema(struct semaphore *sema)
 		return _SUCCESS;
 }
 
+<<<<<<< HEAD
 static inline void _init_listhead(struct list_head *list)
 {
 	INIT_LIST_HEAD(list);
@@ -148,6 +168,10 @@ static inline u32 _queue_empty(struct  __queue *pqueue)
 }
 
 static inline u32 end_of_queue_search(struct list_head *head, struct list_head *plist)
+=======
+static inline u32 end_of_queue_search(struct list_head *head,
+		struct list_head *plist)
+>>>>>>> v3.18
 {
 	if (head == plist)
 		return true;
@@ -164,12 +188,16 @@ static inline void sleep_schedulable(int ms)
 		delta = 1;/* 1 ms */
 	set_current_state(TASK_INTERRUPTIBLE);
 	if (schedule_timeout(delta) != 0)
+<<<<<<< HEAD
 		return ;
 }
 
 static inline u8 *_malloc(u32 sz)
 {
 	return	kmalloc(sz, GFP_ATOMIC);
+=======
+		return;
+>>>>>>> v3.18
 }
 
 static inline unsigned char _cancel_timer_ex(struct timer_list *ptimer)
@@ -177,17 +205,21 @@ static inline unsigned char _cancel_timer_ex(struct timer_list *ptimer)
 	return del_timer(ptimer);
 }
 
+<<<<<<< HEAD
 static inline void thread_enter(void *context)
 {
 	allow_signal(SIGTERM);
 }
 
+=======
+>>>>>>> v3.18
 static inline void flush_signals_thread(void)
 {
 	if (signal_pending(current))
 		flush_signals(current);
 }
 
+<<<<<<< HEAD
 static inline u32 _RND8(u32 sz)
 {
 	return ((sz >> 3) + ((sz & 7) ? 1 : 0)) << 3;
@@ -208,5 +240,7 @@ static inline u32 _RND512(u32 sz)
 	return ((sz >> 9) + ((sz & 511) ? 1 : 0)) << 9;
 }
 
+=======
+>>>>>>> v3.18
 #endif
 

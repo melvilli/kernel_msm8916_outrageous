@@ -23,12 +23,20 @@
 #include <linux/ioport.h>
 #include <linux/netdevice.h>
 #include <linux/etherdevice.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/interrupt.h>
 #include <linux/skbuff.h>
 #include <linux/spinlock.h>
 #include <linux/crc32.h>
 #include <linux/mii.h>
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+#include <linux/of_net.h>
+>>>>>>> v3.18
 #include <linux/ethtool.h>
 #include <linux/dm9000.h>
 #include <linux/delay.h>
@@ -92,7 +100,11 @@ enum dm9000_type {
 };
 
 /* Structure/enum declaration ------------------------------- */
+<<<<<<< HEAD
 typedef struct board_info {
+=======
+struct board_info {
+>>>>>>> v3.18
 
 	void __iomem	*io_addr;	/* Register I/O base address */
 	void __iomem	*io_data;	/* Data I/O address */
@@ -108,8 +120,14 @@ typedef struct board_info {
 	u8		imr_all;
 
 	unsigned int	flags;
+<<<<<<< HEAD
 	unsigned int	in_suspend :1;
 	unsigned int	wake_supported :1;
+=======
+	unsigned int	in_timeout:1;
+	unsigned int	in_suspend:1;
+	unsigned int	wake_supported:1;
+>>>>>>> v3.18
 
 	enum dm9000_type type;
 
@@ -139,7 +157,11 @@ typedef struct board_info {
 	u32		wake_state;
 
 	int		ip_summed;
+<<<<<<< HEAD
 } board_info_t;
+=======
+};
+>>>>>>> v3.18
 
 /* debug code */
 
@@ -149,13 +171,18 @@ typedef struct board_info {
 	}						\
 } while (0)
 
+<<<<<<< HEAD
 static inline board_info_t *to_dm9000_board(struct net_device *dev)
+=======
+static inline struct board_info *to_dm9000_board(struct net_device *dev)
+>>>>>>> v3.18
 {
 	return netdev_priv(dev);
 }
 
 /* DM9000 network board routine ---------------------------- */
 
+<<<<<<< HEAD
 static void
 dm9000_reset(board_info_t * db)
 {
@@ -168,11 +195,17 @@ dm9000_reset(board_info_t * db)
 	udelay(200);
 }
 
+=======
+>>>>>>> v3.18
 /*
  *   Read a byte from I/O port
  */
 static u8
+<<<<<<< HEAD
 ior(board_info_t * db, int reg)
+=======
+ior(struct board_info *db, int reg)
+>>>>>>> v3.18
 {
 	writeb(reg, db->io_addr);
 	return readb(db->io_data);
@@ -183,12 +216,40 @@ ior(board_info_t * db, int reg)
  */
 
 static void
+<<<<<<< HEAD
 iow(board_info_t * db, int reg, int value)
+=======
+iow(struct board_info *db, int reg, int value)
+>>>>>>> v3.18
 {
 	writeb(reg, db->io_addr);
 	writeb(value, db->io_data);
 }
 
+<<<<<<< HEAD
+=======
+static void
+dm9000_reset(struct board_info *db)
+{
+	dev_dbg(db->dev, "resetting device\n");
+
+	/* Reset DM9000, see DM9000 Application Notes V1.22 Jun 11, 2004 page 29
+	 * The essential point is that we have to do a double reset, and the
+	 * instruction is to set LBK into MAC internal loopback mode.
+	 */
+	iow(db, DM9000_NCR, NCR_RST | NCR_MAC_LBK);
+	udelay(100); /* Application note says at least 20 us */
+	if (ior(db, DM9000_NCR) & 1)
+		dev_err(db->dev, "dm9000 did not respond to first reset\n");
+
+	iow(db, DM9000_NCR, 0);
+	iow(db, DM9000_NCR, NCR_RST | NCR_MAC_LBK);
+	udelay(100);
+	if (ior(db, DM9000_NCR) & 1)
+		dev_err(db->dev, "dm9000 did not respond to second reset\n");
+}
+
+>>>>>>> v3.18
 /* routines for sending block to chip */
 
 static void dm9000_outblk_8bit(void __iomem *reg, void *data, int count)
@@ -261,9 +322,15 @@ static void dm9000_dumpblk_32bit(void __iomem *reg, int count)
  * Sleep, either by using msleep() or if we are suspending, then
  * use mdelay() to sleep.
  */
+<<<<<<< HEAD
 static void dm9000_msleep(board_info_t *db, unsigned int ms)
 {
 	if (db->in_suspend)
+=======
+static void dm9000_msleep(struct board_info *db, unsigned int ms)
+{
+	if (db->in_suspend || db->in_timeout)
+>>>>>>> v3.18
 		mdelay(ms);
 	else
 		msleep(ms);
@@ -273,7 +340,11 @@ static void dm9000_msleep(board_info_t *db, unsigned int ms)
 static int
 dm9000_phy_read(struct net_device *dev, int phy_reg_unused, int reg)
 {
+<<<<<<< HEAD
 	board_info_t *db = netdev_priv(dev);
+=======
+	struct board_info *db = netdev_priv(dev);
+>>>>>>> v3.18
 	unsigned long flags;
 	unsigned int reg_save;
 	int ret;
@@ -319,12 +390,21 @@ static void
 dm9000_phy_write(struct net_device *dev,
 		 int phyaddr_unused, int reg, int value)
 {
+<<<<<<< HEAD
 	board_info_t *db = netdev_priv(dev);
+=======
+	struct board_info *db = netdev_priv(dev);
+>>>>>>> v3.18
 	unsigned long flags;
 	unsigned long reg_save;
 
 	dm9000_dbg(db, 5, "phy_write[%02x] = %04x\n", reg, value);
+<<<<<<< HEAD
 	mutex_lock(&db->addr_lock);
+=======
+	if (!db->in_timeout)
+		mutex_lock(&db->addr_lock);
+>>>>>>> v3.18
 
 	spin_lock_irqsave(&db->lock, flags);
 
@@ -355,7 +435,12 @@ dm9000_phy_write(struct net_device *dev,
 	writeb(reg_save, db->io_addr);
 
 	spin_unlock_irqrestore(&db->lock, flags);
+<<<<<<< HEAD
 	mutex_unlock(&db->addr_lock);
+=======
+	if (!db->in_timeout)
+		mutex_unlock(&db->addr_lock);
+>>>>>>> v3.18
 }
 
 /* dm9000_set_io
@@ -395,7 +480,11 @@ static void dm9000_set_io(struct board_info *db, int byte_width)
 	}
 }
 
+<<<<<<< HEAD
 static void dm9000_schedule_poll(board_info_t *db)
+=======
+static void dm9000_schedule_poll(struct board_info *db)
+>>>>>>> v3.18
 {
 	if (db->type == TYPE_DM9000E)
 		schedule_delayed_work(&db->phy_poll, HZ * 2);
@@ -403,7 +492,11 @@ static void dm9000_schedule_poll(board_info_t *db)
 
 static int dm9000_ioctl(struct net_device *dev, struct ifreq *req, int cmd)
 {
+<<<<<<< HEAD
 	board_info_t *dm = to_dm9000_board(dev);
+=======
+	struct board_info *dm = to_dm9000_board(dev);
+>>>>>>> v3.18
 
 	if (!netif_running(dev))
 		return -EINVAL;
@@ -412,7 +505,11 @@ static int dm9000_ioctl(struct net_device *dev, struct ifreq *req, int cmd)
 }
 
 static unsigned int
+<<<<<<< HEAD
 dm9000_read_locked(board_info_t *db, int reg)
+=======
+dm9000_read_locked(struct board_info *db, int reg)
+>>>>>>> v3.18
 {
 	unsigned long flags;
 	unsigned int ret;
@@ -424,7 +521,11 @@ dm9000_read_locked(board_info_t *db, int reg)
 	return ret;
 }
 
+<<<<<<< HEAD
 static int dm9000_wait_eeprom(board_info_t *db)
+=======
+static int dm9000_wait_eeprom(struct board_info *db)
+>>>>>>> v3.18
 {
 	unsigned int status;
 	int timeout = 8;	/* wait max 8msec */
@@ -461,7 +562,11 @@ static int dm9000_wait_eeprom(board_info_t *db)
  *  Read a word data from EEPROM
  */
 static void
+<<<<<<< HEAD
 dm9000_read_eeprom(board_info_t *db, int offset, u8 *to)
+=======
+dm9000_read_eeprom(struct board_info *db, int offset, u8 *to)
+>>>>>>> v3.18
 {
 	unsigned long flags;
 
@@ -501,7 +606,11 @@ dm9000_read_eeprom(board_info_t *db, int offset, u8 *to)
  * Write a word data to SROM
  */
 static void
+<<<<<<< HEAD
 dm9000_write_eeprom(board_info_t *db, int offset, u8 *data)
+=======
+dm9000_write_eeprom(struct board_info *db, int offset, u8 *data)
+>>>>>>> v3.18
 {
 	unsigned long flags;
 
@@ -533,7 +642,11 @@ dm9000_write_eeprom(board_info_t *db, int offset, u8 *data)
 static void dm9000_get_drvinfo(struct net_device *dev,
 			       struct ethtool_drvinfo *info)
 {
+<<<<<<< HEAD
 	board_info_t *dm = to_dm9000_board(dev);
+=======
+	struct board_info *dm = to_dm9000_board(dev);
+>>>>>>> v3.18
 
 	strlcpy(info->driver, CARDNAME, sizeof(info->driver));
 	strlcpy(info->version, DRV_VERSION, sizeof(info->version));
@@ -543,21 +656,33 @@ static void dm9000_get_drvinfo(struct net_device *dev,
 
 static u32 dm9000_get_msglevel(struct net_device *dev)
 {
+<<<<<<< HEAD
 	board_info_t *dm = to_dm9000_board(dev);
+=======
+	struct board_info *dm = to_dm9000_board(dev);
+>>>>>>> v3.18
 
 	return dm->msg_enable;
 }
 
 static void dm9000_set_msglevel(struct net_device *dev, u32 value)
 {
+<<<<<<< HEAD
 	board_info_t *dm = to_dm9000_board(dev);
+=======
+	struct board_info *dm = to_dm9000_board(dev);
+>>>>>>> v3.18
 
 	dm->msg_enable = value;
 }
 
 static int dm9000_get_settings(struct net_device *dev, struct ethtool_cmd *cmd)
 {
+<<<<<<< HEAD
 	board_info_t *dm = to_dm9000_board(dev);
+=======
+	struct board_info *dm = to_dm9000_board(dev);
+>>>>>>> v3.18
 
 	mii_ethtool_gset(&dm->mii, cmd);
 	return 0;
@@ -565,21 +690,33 @@ static int dm9000_get_settings(struct net_device *dev, struct ethtool_cmd *cmd)
 
 static int dm9000_set_settings(struct net_device *dev, struct ethtool_cmd *cmd)
 {
+<<<<<<< HEAD
 	board_info_t *dm = to_dm9000_board(dev);
+=======
+	struct board_info *dm = to_dm9000_board(dev);
+>>>>>>> v3.18
 
 	return mii_ethtool_sset(&dm->mii, cmd);
 }
 
 static int dm9000_nway_reset(struct net_device *dev)
 {
+<<<<<<< HEAD
 	board_info_t *dm = to_dm9000_board(dev);
+=======
+	struct board_info *dm = to_dm9000_board(dev);
+>>>>>>> v3.18
 	return mii_nway_restart(&dm->mii);
 }
 
 static int dm9000_set_features(struct net_device *dev,
 	netdev_features_t features)
 {
+<<<<<<< HEAD
 	board_info_t *dm = to_dm9000_board(dev);
+=======
+	struct board_info *dm = to_dm9000_board(dev);
+>>>>>>> v3.18
 	netdev_features_t changed = dev->features ^ features;
 	unsigned long flags;
 
@@ -595,7 +732,11 @@ static int dm9000_set_features(struct net_device *dev,
 
 static u32 dm9000_get_link(struct net_device *dev)
 {
+<<<<<<< HEAD
 	board_info_t *dm = to_dm9000_board(dev);
+=======
+	struct board_info *dm = to_dm9000_board(dev);
+>>>>>>> v3.18
 	u32 ret;
 
 	if (dm->flags & DM9000_PLATF_EXT_PHY)
@@ -616,7 +757,11 @@ static int dm9000_get_eeprom_len(struct net_device *dev)
 static int dm9000_get_eeprom(struct net_device *dev,
 			     struct ethtool_eeprom *ee, u8 *data)
 {
+<<<<<<< HEAD
 	board_info_t *dm = to_dm9000_board(dev);
+=======
+	struct board_info *dm = to_dm9000_board(dev);
+>>>>>>> v3.18
 	int offset = ee->offset;
 	int len = ee->len;
 	int i;
@@ -640,7 +785,11 @@ static int dm9000_get_eeprom(struct net_device *dev,
 static int dm9000_set_eeprom(struct net_device *dev,
 			     struct ethtool_eeprom *ee, u8 *data)
 {
+<<<<<<< HEAD
 	board_info_t *dm = to_dm9000_board(dev);
+=======
+	struct board_info *dm = to_dm9000_board(dev);
+>>>>>>> v3.18
 	int offset = ee->offset;
 	int len = ee->len;
 	int done;
@@ -678,7 +827,11 @@ static int dm9000_set_eeprom(struct net_device *dev,
 
 static void dm9000_get_wol(struct net_device *dev, struct ethtool_wolinfo *w)
 {
+<<<<<<< HEAD
 	board_info_t *dm = to_dm9000_board(dev);
+=======
+	struct board_info *dm = to_dm9000_board(dev);
+>>>>>>> v3.18
 
 	memset(w, 0, sizeof(struct ethtool_wolinfo));
 
@@ -689,7 +842,11 @@ static void dm9000_get_wol(struct net_device *dev, struct ethtool_wolinfo *w)
 
 static int dm9000_set_wol(struct net_device *dev, struct ethtool_wolinfo *w)
 {
+<<<<<<< HEAD
 	board_info_t *dm = to_dm9000_board(dev);
+=======
+	struct board_info *dm = to_dm9000_board(dev);
+>>>>>>> v3.18
 	unsigned long flags;
 	u32 opts = w->wolopts;
 	u32 wcr = 0;
@@ -734,6 +891,7 @@ static const struct ethtool_ops dm9000_ethtool_ops = {
 	.get_link		= dm9000_get_link,
 	.get_wol		= dm9000_get_wol,
 	.set_wol		= dm9000_set_wol,
+<<<<<<< HEAD
  	.get_eeprom_len		= dm9000_get_eeprom_len,
  	.get_eeprom		= dm9000_get_eeprom,
  	.set_eeprom		= dm9000_set_eeprom,
@@ -751,13 +909,41 @@ static void dm9000_show_carrier(board_info_t *db,
 			 (ncr & NCR_FDX) ? "full" : "half");
 	else
 		dev_info(db->dev, "%s: link down\n", ndev->name);
+=======
+	.get_eeprom_len		= dm9000_get_eeprom_len,
+	.get_eeprom		= dm9000_get_eeprom,
+	.set_eeprom		= dm9000_set_eeprom,
+};
+
+static void dm9000_show_carrier(struct board_info *db,
+				unsigned carrier, unsigned nsr)
+{
+	int lpa;
+	struct net_device *ndev = db->ndev;
+	struct mii_if_info *mii = &db->mii;
+	unsigned ncr = dm9000_read_locked(db, DM9000_NCR);
+
+	if (carrier) {
+		lpa = mii->mdio_read(mii->dev, mii->phy_id, MII_LPA);
+		dev_info(db->dev,
+			 "%s: link up, %dMbps, %s-duplex, lpa 0x%04X\n",
+			 ndev->name, (nsr & NSR_SPEED) ? 10 : 100,
+			 (ncr & NCR_FDX) ? "full" : "half", lpa);
+	} else {
+		dev_info(db->dev, "%s: link down\n", ndev->name);
+	}
+>>>>>>> v3.18
 }
 
 static void
 dm9000_poll_work(struct work_struct *w)
 {
 	struct delayed_work *dw = to_delayed_work(w);
+<<<<<<< HEAD
 	board_info_t *db = container_of(dw, board_info_t, phy_poll);
+=======
+	struct board_info *db = container_of(dw, struct board_info, phy_poll);
+>>>>>>> v3.18
 	struct net_device *ndev = db->ndev;
 
 	if (db->flags & DM9000_PLATF_SIMPLE_PHY &&
@@ -779,7 +965,11 @@ dm9000_poll_work(struct work_struct *w)
 		}
 	} else
 		mii_check_media(&db->mii, netif_msg_link(db), 0);
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 	if (netif_running(ndev))
 		dm9000_schedule_poll(db);
 }
@@ -799,10 +989,19 @@ dm9000_release_board(struct platform_device *pdev, struct board_info *db)
 
 	/* release the resources */
 
+<<<<<<< HEAD
 	release_resource(db->data_req);
 	kfree(db->data_req);
 
 	release_resource(db->addr_req);
+=======
+	if (db->data_req)
+		release_resource(db->data_req);
+	kfree(db->data_req);
+
+	if (db->addr_req)
+		release_resource(db->addr_req);
+>>>>>>> v3.18
 	kfree(db->addr_req);
 }
 
@@ -823,11 +1022,19 @@ static unsigned char dm9000_type_to_char(enum dm9000_type type)
 static void
 dm9000_hash_table_unlocked(struct net_device *dev)
 {
+<<<<<<< HEAD
 	board_info_t *db = netdev_priv(dev);
 	struct netdev_hw_addr *ha;
 	int i, oft;
 	u32 hash_val;
 	u16 hash_table[4];
+=======
+	struct board_info *db = netdev_priv(dev);
+	struct netdev_hw_addr *ha;
+	int i, oft;
+	u32 hash_val;
+	u16 hash_table[4] = { 0, 0, 0, 0x8000 }; /* broadcast address */
+>>>>>>> v3.18
 	u8 rcr = RCR_DIS_LONG | RCR_DIS_CRC | RCR_RXEN;
 
 	dm9000_dbg(db, 1, "entering %s\n", __func__);
@@ -835,6 +1042,7 @@ dm9000_hash_table_unlocked(struct net_device *dev)
 	for (i = 0, oft = DM9000_PAR; i < 6; i++, oft++)
 		iow(db, oft, dev->dev_addr[i]);
 
+<<<<<<< HEAD
 	/* Clear Hash Table */
 	for (i = 0; i < 4; i++)
 		hash_table[i] = 0x0;
@@ -842,6 +1050,8 @@ dm9000_hash_table_unlocked(struct net_device *dev)
 	/* broadcast address */
 	hash_table[3] = 0x8000;
 
+=======
+>>>>>>> v3.18
 	if (dev->flags & IFF_PROMISC)
 		rcr |= RCR_PRMSC;
 
@@ -866,7 +1076,11 @@ dm9000_hash_table_unlocked(struct net_device *dev)
 static void
 dm9000_hash_table(struct net_device *dev)
 {
+<<<<<<< HEAD
 	board_info_t *db = netdev_priv(dev);
+=======
+	struct board_info *db = netdev_priv(dev);
+>>>>>>> v3.18
 	unsigned long flags;
 
 	spin_lock_irqsave(&db->lock, flags);
@@ -874,18 +1088,43 @@ dm9000_hash_table(struct net_device *dev)
 	spin_unlock_irqrestore(&db->lock, flags);
 }
 
+<<<<<<< HEAD
+=======
+static void
+dm9000_mask_interrupts(struct board_info *db)
+{
+	iow(db, DM9000_IMR, IMR_PAR);
+}
+
+static void
+dm9000_unmask_interrupts(struct board_info *db)
+{
+	iow(db, DM9000_IMR, db->imr_all);
+}
+
+>>>>>>> v3.18
 /*
  * Initialize dm9000 board
  */
 static void
 dm9000_init_dm9000(struct net_device *dev)
 {
+<<<<<<< HEAD
 	board_info_t *db = netdev_priv(dev);
+=======
+	struct board_info *db = netdev_priv(dev);
+>>>>>>> v3.18
 	unsigned int imr;
 	unsigned int ncr;
 
 	dm9000_dbg(db, 1, "entering %s\n", __func__);
 
+<<<<<<< HEAD
+=======
+	dm9000_reset(db);
+	dm9000_mask_interrupts(db);
+
+>>>>>>> v3.18
 	/* I/O mode */
 	db->io_mode = ior(db, DM9000_ISR) >> 6;	/* ISR bit7:6 keeps I/O mode */
 
@@ -895,9 +1134,21 @@ dm9000_init_dm9000(struct net_device *dev)
 			(dev->features & NETIF_F_RXCSUM) ? RCSR_CSUM : 0);
 
 	iow(db, DM9000_GPCR, GPCR_GEP_CNTL);	/* Let GPIO0 output */
+<<<<<<< HEAD
 
 	dm9000_phy_write(dev, 0, MII_BMCR, BMCR_RESET); /* PHY RESET */
 	dm9000_phy_write(dev, 0, MII_DM_DSPCR, DSPCR_INIT_PARAM); /* Init */
+=======
+	iow(db, DM9000_GPR, 0);
+
+	/* If we are dealing with DM9000B, some extra steps are required: a
+	 * manual phy reset, and setting init params.
+	 */
+	if (db->type == TYPE_DM9000B) {
+		dm9000_phy_write(dev, 0, MII_BMCR, BMCR_RESET);
+		dm9000_phy_write(dev, 0, MII_DM_DSPCR, DSPCR_INIT_PARAM);
+	}
+>>>>>>> v3.18
 
 	ncr = (db->flags & DM9000_PLATF_EXT_PHY) ? NCR_EXT_PHY : 0;
 
@@ -927,9 +1178,12 @@ dm9000_init_dm9000(struct net_device *dev)
 
 	db->imr_all = imr;
 
+<<<<<<< HEAD
 	/* Enable TX/RX interrupt mask */
 	iow(db, DM9000_IMR, imr);
 
+=======
+>>>>>>> v3.18
 	/* Init Driver variable */
 	db->tx_pkt_cnt = 0;
 	db->queue_pkt_len = 0;
@@ -939,23 +1193,40 @@ dm9000_init_dm9000(struct net_device *dev)
 /* Our watchdog timed out. Called by the networking layer */
 static void dm9000_timeout(struct net_device *dev)
 {
+<<<<<<< HEAD
 	board_info_t *db = netdev_priv(dev);
+=======
+	struct board_info *db = netdev_priv(dev);
+>>>>>>> v3.18
 	u8 reg_save;
 	unsigned long flags;
 
 	/* Save previous register address */
 	spin_lock_irqsave(&db->lock, flags);
+<<<<<<< HEAD
 	reg_save = readb(db->io_addr);
 
 	netif_stop_queue(dev);
 	dm9000_reset(db);
 	dm9000_init_dm9000(dev);
+=======
+	db->in_timeout = 1;
+	reg_save = readb(db->io_addr);
+
+	netif_stop_queue(dev);
+	dm9000_init_dm9000(dev);
+	dm9000_unmask_interrupts(db);
+>>>>>>> v3.18
 	/* We can accept TX packets again */
 	dev->trans_start = jiffies; /* prevent tx timeout */
 	netif_wake_queue(dev);
 
 	/* Restore previous register address */
 	writeb(reg_save, db->io_addr);
+<<<<<<< HEAD
+=======
+	db->in_timeout = 0;
+>>>>>>> v3.18
 	spin_unlock_irqrestore(&db->lock, flags);
 }
 
@@ -963,7 +1234,11 @@ static void dm9000_send_packet(struct net_device *dev,
 			       int ip_summed,
 			       u16 pkt_len)
 {
+<<<<<<< HEAD
 	board_info_t *dm = to_dm9000_board(dev);
+=======
+	struct board_info *dm = to_dm9000_board(dev);
+>>>>>>> v3.18
 
 	/* The DM9000 is not smart enough to leave fragmented packets alone. */
 	if (dm->ip_summed != ip_summed) {
@@ -990,7 +1265,11 @@ static int
 dm9000_start_xmit(struct sk_buff *skb, struct net_device *dev)
 {
 	unsigned long flags;
+<<<<<<< HEAD
 	board_info_t *db = netdev_priv(dev);
+=======
+	struct board_info *db = netdev_priv(dev);
+>>>>>>> v3.18
 
 	dm9000_dbg(db, 3, "%s:\n", __func__);
 
@@ -1019,7 +1298,11 @@ dm9000_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	spin_unlock_irqrestore(&db->lock, flags);
 
 	/* free this SKB */
+<<<<<<< HEAD
 	dev_kfree_skb(skb);
+=======
+	dev_consume_skb_any(skb);
+>>>>>>> v3.18
 
 	return NETDEV_TX_OK;
 }
@@ -1029,7 +1312,11 @@ dm9000_start_xmit(struct sk_buff *skb, struct net_device *dev)
  * receive the packet to upper layer, free the transmitted packet
  */
 
+<<<<<<< HEAD
 static void dm9000_tx_done(struct net_device *dev, board_info_t *db)
+=======
+static void dm9000_tx_done(struct net_device *dev, struct board_info *db)
+>>>>>>> v3.18
 {
 	int tx_status = ior(db, DM9000_NSR);	/* Got TX status */
 
@@ -1061,7 +1348,11 @@ struct dm9000_rxhdr {
 static void
 dm9000_rx(struct net_device *dev)
 {
+<<<<<<< HEAD
 	board_info_t *db = netdev_priv(dev);
+=======
+	struct board_info *db = netdev_priv(dev);
+>>>>>>> v3.18
 	struct dm9000_rxhdr rxhdr;
 	struct sk_buff *skb;
 	u8 rxbyte, *rdptr;
@@ -1079,7 +1370,10 @@ dm9000_rx(struct net_device *dev)
 		if (rxbyte & DM9000_PKT_ERR) {
 			dev_warn(db->dev, "status check fail: %d\n", rxbyte);
 			iow(db, DM9000_RCR, 0x00);	/* Stop Device */
+<<<<<<< HEAD
 			iow(db, DM9000_ISR, IMR_PAR);	/* Stop INT request */
+=======
+>>>>>>> v3.18
 			return;
 		}
 
@@ -1164,7 +1458,11 @@ dm9000_rx(struct net_device *dev)
 static irqreturn_t dm9000_interrupt(int irq, void *dev_id)
 {
 	struct net_device *dev = dev_id;
+<<<<<<< HEAD
 	board_info_t *db = netdev_priv(dev);
+=======
+	struct board_info *db = netdev_priv(dev);
+>>>>>>> v3.18
 	int int_status;
 	unsigned long flags;
 	u8 reg_save;
@@ -1179,9 +1477,13 @@ static irqreturn_t dm9000_interrupt(int irq, void *dev_id)
 	/* Save previous register address */
 	reg_save = readb(db->io_addr);
 
+<<<<<<< HEAD
 	/* Disable all interrupts */
 	iow(db, DM9000_IMR, IMR_PAR);
 
+=======
+	dm9000_mask_interrupts(db);
+>>>>>>> v3.18
 	/* Got DM9000 interrupt status */
 	int_status = ior(db, DM9000_ISR);	/* Got ISR */
 	iow(db, DM9000_ISR, int_status);	/* Clear ISR status */
@@ -1204,9 +1506,13 @@ static irqreturn_t dm9000_interrupt(int irq, void *dev_id)
 		}
 	}
 
+<<<<<<< HEAD
 	/* Re-enable interrupt mask */
 	iow(db, DM9000_IMR, db->imr_all);
 
+=======
+	dm9000_unmask_interrupts(db);
+>>>>>>> v3.18
 	/* Restore previous register address */
 	writeb(reg_save, db->io_addr);
 
@@ -1218,7 +1524,11 @@ static irqreturn_t dm9000_interrupt(int irq, void *dev_id)
 static irqreturn_t dm9000_wol_interrupt(int irq, void *dev_id)
 {
 	struct net_device *dev = dev_id;
+<<<<<<< HEAD
 	board_info_t *db = netdev_priv(dev);
+=======
+	struct board_info *db = netdev_priv(dev);
+>>>>>>> v3.18
 	unsigned long flags;
 	unsigned nsr, wcr;
 
@@ -1237,12 +1547,19 @@ static irqreturn_t dm9000_wol_interrupt(int irq, void *dev_id)
 			dev_info(db->dev, "wake by link status change\n");
 		if (wcr & WCR_SAMPLEST)
 			dev_info(db->dev, "wake by sample packet\n");
+<<<<<<< HEAD
 		if (wcr & WCR_MAGICST )
+=======
+		if (wcr & WCR_MAGICST)
+>>>>>>> v3.18
 			dev_info(db->dev, "wake by magic packet\n");
 		if (!(wcr & (WCR_LINKST | WCR_SAMPLEST | WCR_MAGICST)))
 			dev_err(db->dev, "wake signalled with no reason? "
 				"NSR=0x%02x, WSR=0x%02x\n", nsr, wcr);
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 	}
 
 	spin_unlock_irqrestore(&db->lock, flags);
@@ -1269,7 +1586,11 @@ static void dm9000_poll_controller(struct net_device *dev)
 static int
 dm9000_open(struct net_device *dev)
 {
+<<<<<<< HEAD
 	board_info_t *db = netdev_priv(dev);
+=======
+	struct board_info *db = netdev_priv(dev);
+>>>>>>> v3.18
 	unsigned long irqflags = db->irq_res->flags & IRQF_TRIGGER_MASK;
 
 	if (netif_msg_ifup(db))
@@ -1279,6 +1600,12 @@ dm9000_open(struct net_device *dev)
 	 * may work, and tell the user that this is a problem */
 
 	if (irqflags == IRQF_TRIGGER_NONE)
+<<<<<<< HEAD
+=======
+		irqflags = irq_get_trigger_type(dev->irq);
+
+	if (irqflags == IRQF_TRIGGER_NONE)
+>>>>>>> v3.18
 		dev_warn(db->dev, "WARNING: no IRQ resource flags set.\n");
 
 	irqflags |= IRQF_SHARED;
@@ -1288,19 +1615,35 @@ dm9000_open(struct net_device *dev)
 	mdelay(1); /* delay needs by DM9000B */
 
 	/* Initialize DM9000 board */
+<<<<<<< HEAD
 	dm9000_reset(db);
+=======
+>>>>>>> v3.18
 	dm9000_init_dm9000(dev);
 
 	if (request_irq(dev->irq, dm9000_interrupt, irqflags, dev->name, dev))
 		return -EAGAIN;
+<<<<<<< HEAD
+=======
+	/* Now that we have an interrupt handler hooked up we can unmask
+	 * our interrupts
+	 */
+	dm9000_unmask_interrupts(db);
+>>>>>>> v3.18
 
 	/* Init driver variable */
 	db->dbug_cnt = 0;
 
 	mii_check_media(&db->mii, netif_msg_link(db), 1);
 	netif_start_queue(dev);
+<<<<<<< HEAD
 	
 	dm9000_schedule_poll(db);
+=======
+
+	/* Poll initial link status */
+	schedule_delayed_work(&db->phy_poll, 1);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -1308,12 +1651,20 @@ dm9000_open(struct net_device *dev)
 static void
 dm9000_shutdown(struct net_device *dev)
 {
+<<<<<<< HEAD
 	board_info_t *db = netdev_priv(dev);
+=======
+	struct board_info *db = netdev_priv(dev);
+>>>>>>> v3.18
 
 	/* RESET device */
 	dm9000_phy_write(dev, 0, MII_BMCR, BMCR_RESET);	/* PHY RESET */
 	iow(db, DM9000_GPR, 0x01);	/* Power-Down PHY */
+<<<<<<< HEAD
 	iow(db, DM9000_IMR, IMR_PAR);	/* Disable all interrupt */
+=======
+	dm9000_mask_interrupts(db);
+>>>>>>> v3.18
 	iow(db, DM9000_RCR, 0x00);	/* Disable RX */
 }
 
@@ -1324,7 +1675,11 @@ dm9000_shutdown(struct net_device *dev)
 static int
 dm9000_stop(struct net_device *ndev)
 {
+<<<<<<< HEAD
 	board_info_t *db = netdev_priv(ndev);
+=======
+	struct board_info *db = netdev_priv(ndev);
+>>>>>>> v3.18
 
 	if (netif_msg_ifdown(db))
 		dev_dbg(db->dev, "shutting down %s\n", ndev->name);
@@ -1358,13 +1713,45 @@ static const struct net_device_ops dm9000_netdev_ops = {
 #endif
 };
 
+<<<<<<< HEAD
+=======
+static struct dm9000_plat_data *dm9000_parse_dt(struct device *dev)
+{
+	struct dm9000_plat_data *pdata;
+	struct device_node *np = dev->of_node;
+	const void *mac_addr;
+
+	if (!IS_ENABLED(CONFIG_OF) || !np)
+		return ERR_PTR(-ENXIO);
+
+	pdata = devm_kzalloc(dev, sizeof(*pdata), GFP_KERNEL);
+	if (!pdata)
+		return ERR_PTR(-ENOMEM);
+
+	if (of_find_property(np, "davicom,ext-phy", NULL))
+		pdata->flags |= DM9000_PLATF_EXT_PHY;
+	if (of_find_property(np, "davicom,no-eeprom", NULL))
+		pdata->flags |= DM9000_PLATF_NO_EEPROM;
+
+	mac_addr = of_get_mac_address(np);
+	if (mac_addr)
+		memcpy(pdata->dev_addr, mac_addr, sizeof(pdata->dev_addr));
+
+	return pdata;
+}
+
+>>>>>>> v3.18
 /*
  * Search DM9000 board, allocate space and register it
  */
 static int
 dm9000_probe(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct dm9000_plat_data *pdata = pdev->dev.platform_data;
+=======
+	struct dm9000_plat_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	struct board_info *db;	/* Point a board information structure */
 	struct net_device *ndev;
 	const unsigned char *mac_src;
@@ -1373,6 +1760,15 @@ dm9000_probe(struct platform_device *pdev)
 	int i;
 	u32 id_val;
 
+<<<<<<< HEAD
+=======
+	if (!pdata) {
+		pdata = dm9000_parse_dt(&pdev->dev);
+		if (IS_ERR(pdata))
+			return PTR_ERR(pdata);
+	}
+
+>>>>>>> v3.18
 	/* Init network device */
 	ndev = alloc_etherdev(sizeof(struct board_info));
 	if (!ndev)
@@ -1503,12 +1899,16 @@ dm9000_probe(struct platform_device *pdev)
 	db->flags |= DM9000_PLATF_SIMPLE_PHY;
 #endif
 
+<<<<<<< HEAD
 	/* Fixing bug on dm9000_probe, takeover dm9000_reset(db),
 	 * Need 'NCR_MAC_LBK' bit to indeed stable our DM9000 fifo
 	 * while probe stage.
 	 */
 
 	iow(db, DM9000_NCR, NCR_MAC_LBK | NCR_RST);
+=======
+	dm9000_reset(db);
+>>>>>>> v3.18
 
 	/* try multiple times, DM9000 sometimes gets the read wrong */
 	for (i = 0; i < 8; i++) {
@@ -1553,9 +1953,12 @@ dm9000_probe(struct platform_device *pdev)
 
 	/* from this point we assume that we have found a DM9000 */
 
+<<<<<<< HEAD
 	/* driver system function */
 	ether_setup(ndev);
 
+=======
+>>>>>>> v3.18
 	ndev->netdev_ops	= &dm9000_netdev_ops;
 	ndev->watchdog_timeo	= msecs_to_jiffies(watchdog);
 	ndev->ethtool_ops	= &dm9000_ethtool_ops;
@@ -1577,12 +1980,20 @@ dm9000_probe(struct platform_device *pdev)
 
 	if (!is_valid_ether_addr(ndev->dev_addr) && pdata != NULL) {
 		mac_src = "platform data";
+<<<<<<< HEAD
 		memcpy(ndev->dev_addr, pdata->dev_addr, 6);
+=======
+		memcpy(ndev->dev_addr, pdata->dev_addr, ETH_ALEN);
+>>>>>>> v3.18
 	}
 
 	if (!is_valid_ether_addr(ndev->dev_addr)) {
 		/* try reading from mac */
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> v3.18
 		mac_src = "chip";
 		for (i = 0; i < 6; i++)
 			ndev->dev_addr[i] = ior(db, i+DM9000_PAR);
@@ -1621,7 +2032,11 @@ dm9000_drv_suspend(struct device *dev)
 {
 	struct platform_device *pdev = to_platform_device(dev);
 	struct net_device *ndev = platform_get_drvdata(pdev);
+<<<<<<< HEAD
 	board_info_t *db;
+=======
+	struct board_info *db;
+>>>>>>> v3.18
 
 	if (ndev) {
 		db = netdev_priv(ndev);
@@ -1644,15 +2059,24 @@ dm9000_drv_resume(struct device *dev)
 {
 	struct platform_device *pdev = to_platform_device(dev);
 	struct net_device *ndev = platform_get_drvdata(pdev);
+<<<<<<< HEAD
 	board_info_t *db = netdev_priv(ndev);
+=======
+	struct board_info *db = netdev_priv(ndev);
+>>>>>>> v3.18
 
 	if (ndev) {
 		if (netif_running(ndev)) {
 			/* reset if we were not in wake mode to ensure if
 			 * the device was powered off it is in a known state */
 			if (!db->wake_state) {
+<<<<<<< HEAD
 				dm9000_reset(db);
 				dm9000_init_dm9000(ndev);
+=======
+				dm9000_init_dm9000(ndev);
+				dm9000_unmask_interrupts(db);
+>>>>>>> v3.18
 			}
 
 			netif_device_attach(ndev);
@@ -1673,8 +2097,11 @@ dm9000_drv_remove(struct platform_device *pdev)
 {
 	struct net_device *ndev = platform_get_drvdata(pdev);
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 	unregister_netdev(ndev);
 	dm9000_release_board(pdev, netdev_priv(ndev));
 	free_netdev(ndev);		/* free device structure */
@@ -1683,11 +2110,26 @@ dm9000_drv_remove(struct platform_device *pdev)
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_OF
+static const struct of_device_id dm9000_of_matches[] = {
+	{ .compatible = "davicom,dm9000", },
+	{ /* sentinel */ }
+};
+MODULE_DEVICE_TABLE(of, dm9000_of_matches);
+#endif
+
+>>>>>>> v3.18
 static struct platform_driver dm9000_driver = {
 	.driver	= {
 		.name    = "dm9000",
 		.owner	 = THIS_MODULE,
 		.pm	 = &dm9000_drv_pm_ops,
+<<<<<<< HEAD
+=======
+		.of_match_table = of_match_ptr(dm9000_of_matches),
+>>>>>>> v3.18
 	},
 	.probe   = dm9000_probe,
 	.remove  = dm9000_drv_remove,

@@ -23,9 +23,13 @@
 #include <linux/moduleparam.h>
 #include <linux/types.h>
 #include <linux/kernel.h>
+<<<<<<< HEAD
 #include <linux/miscdevice.h>
 #include <linux/watchdog.h>
 #include <linux/init.h>
+=======
+#include <linux/watchdog.h>
+>>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <linux/clk.h>
 #include <linux/spinlock.h>
@@ -159,13 +163,21 @@ static int pnx4008_wdt_probe(struct platform_device *pdev)
 	if (IS_ERR(wdt_base))
 		return PTR_ERR(wdt_base);
 
+<<<<<<< HEAD
 	wdt_clk = clk_get(&pdev->dev, NULL);
+=======
+	wdt_clk = devm_clk_get(&pdev->dev, NULL);
+>>>>>>> v3.18
 	if (IS_ERR(wdt_clk))
 		return PTR_ERR(wdt_clk);
 
 	ret = clk_enable(wdt_clk);
 	if (ret)
+<<<<<<< HEAD
 		goto out;
+=======
+		return ret;
+>>>>>>> v3.18
 
 	pnx4008_wdd.bootstatus = (readl(WDTIM_RES(wdt_base)) & WDOG_RESET) ?
 			WDIOF_CARDRESET : 0;
@@ -186,8 +198,11 @@ static int pnx4008_wdt_probe(struct platform_device *pdev)
 
 disable_clk:
 	clk_disable(wdt_clk);
+<<<<<<< HEAD
 out:
 	clk_put(wdt_clk);
+=======
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -196,7 +211,10 @@ static int pnx4008_wdt_remove(struct platform_device *pdev)
 	watchdog_unregister_device(&pnx4008_wdd);
 
 	clk_disable(wdt_clk);
+<<<<<<< HEAD
 	clk_put(wdt_clk);
+=======
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -236,5 +254,8 @@ MODULE_PARM_DESC(nowayout,
 		 "Set to 1 to keep watchdog running after device release");
 
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 MODULE_ALIAS("platform:pnx4008-watchdog");

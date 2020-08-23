@@ -18,6 +18,10 @@
 #include <linux/input/mt.h>
 #include <linux/serio.h>
 #include <linux/libps2.h>
+<<<<<<< HEAD
+=======
+#include <asm/unaligned.h>
+>>>>>>> v3.18
 #include "psmouse.h"
 #include "elantech.h"
 
@@ -314,7 +318,11 @@ static void elantech_report_semi_mt_data(struct input_dev *dev,
 					 unsigned int x2, unsigned int y2)
 {
 	elantech_set_slot(dev, 0, num_fingers != 0, x1, y1);
+<<<<<<< HEAD
 	elantech_set_slot(dev, 1, num_fingers >= 2, x2, y2);
+=======
+	elantech_set_slot(dev, 1, num_fingers == 2, x2, y2);
+>>>>>>> v3.18
 }
 
 /*
@@ -403,6 +411,63 @@ static void elantech_report_absolute_v2(struct psmouse *psmouse)
 	input_sync(dev);
 }
 
+<<<<<<< HEAD
+=======
+static void elantech_report_trackpoint(struct psmouse *psmouse,
+				       int packet_type)
+{
+	/*
+	 * byte 0:  0   0  sx  sy   0   M   R   L
+	 * byte 1:~sx   0   0   0   0   0   0   0
+	 * byte 2:~sy   0   0   0   0   0   0   0
+	 * byte 3:  0   0 ~sy ~sx   0   1   1   0
+	 * byte 4: x7  x6  x5  x4  x3  x2  x1  x0
+	 * byte 5: y7  y6  y5  y4  y3  y2  y1  y0
+	 *
+	 * x and y are written in two's complement spread
+	 * over 9 bits with sx/sy the relative top bit and
+	 * x7..x0 and y7..y0 the lower bits.
+	 * The sign of y is opposite to what the input driver
+	 * expects for a relative movement
+	 */
+
+	struct elantech_data *etd = psmouse->private;
+	struct input_dev *tp_dev = etd->tp_dev;
+	unsigned char *packet = psmouse->packet;
+	int x, y;
+	u32 t;
+
+	t = get_unaligned_le32(&packet[0]);
+
+	switch (t & ~7U) {
+	case 0x06000030U:
+	case 0x16008020U:
+	case 0x26800010U:
+	case 0x36808000U:
+		x = packet[4] - (int)((packet[1]^0x80) << 1);
+		y = (int)((packet[2]^0x80) << 1) - packet[5];
+
+		input_report_key(tp_dev, BTN_LEFT, packet[0] & 0x01);
+		input_report_key(tp_dev, BTN_RIGHT, packet[0] & 0x02);
+		input_report_key(tp_dev, BTN_MIDDLE, packet[0] & 0x04);
+
+		input_report_rel(tp_dev, REL_X, x);
+		input_report_rel(tp_dev, REL_Y, y);
+
+		input_sync(tp_dev);
+
+		break;
+
+	default:
+		/* Dump unexpected packet sequences if debug=1 (default) */
+		if (etd->debug == 1)
+			elantech_packet_dump(psmouse);
+
+		break;
+	}
+}
+
+>>>>>>> v3.18
 /*
  * Interpret complete data packets and report absolute mode input events for
  * hardware version 3. (12 byte packets for two fingers)
@@ -500,6 +565,10 @@ static void elantech_input_sync_v4(struct psmouse *psmouse)
 	} else {
 		input_report_key(dev, BTN_LEFT, packet[0] & 0x01);
 		input_report_key(dev, BTN_RIGHT, packet[0] & 0x02);
+<<<<<<< HEAD
+=======
+		input_report_key(dev, BTN_MIDDLE, packet[0] & 0x04);
+>>>>>>> v3.18
 	}
 
 	input_mt_report_pointer_emulation(dev, true);
@@ -688,6 +757,10 @@ static int elantech_packet_check_v2(struct psmouse *psmouse)
  */
 static int elantech_packet_check_v3(struct psmouse *psmouse)
 {
+<<<<<<< HEAD
+=======
+	struct elantech_data *etd = psmouse->private;
+>>>>>>> v3.18
 	const u8 debounce_packet[] = { 0xc4, 0xff, 0xff, 0x02, 0xff, 0xff };
 	unsigned char *packet = psmouse->packet;
 
@@ -698,17 +771,40 @@ static int elantech_packet_check_v3(struct psmouse *psmouse)
 	if (!memcmp(packet, debounce_packet, sizeof(debounce_packet)))
 		return PACKET_DEBOUNCE;
 
+<<<<<<< HEAD
 	if ((packet[0] & 0x0c) == 0x04 && (packet[3] & 0xcf) == 0x02)
 		return PACKET_V3_HEAD;
 
 	if ((packet[0] & 0x0c) == 0x0c && (packet[3] & 0xce) == 0x0c)
 		return PACKET_V3_TAIL;
+=======
+	/*
+	 * If the hardware flag 'crc_enabled' is set the packets have
+	 * different signatures.
+	 */
+	if (etd->crc_enabled) {
+		if ((packet[3] & 0x09) == 0x08)
+			return PACKET_V3_HEAD;
+
+		if ((packet[3] & 0x09) == 0x09)
+			return PACKET_V3_TAIL;
+	} else {
+		if ((packet[0] & 0x0c) == 0x04 && (packet[3] & 0xcf) == 0x02)
+			return PACKET_V3_HEAD;
+
+		if ((packet[0] & 0x0c) == 0x0c && (packet[3] & 0xce) == 0x0c)
+			return PACKET_V3_TAIL;
+		if ((packet[3] & 0x0f) == 0x06)
+			return PACKET_TRACKPOINT;
+	}
+>>>>>>> v3.18
 
 	return PACKET_UNKNOWN;
 }
 
 static int elantech_packet_check_v4(struct psmouse *psmouse)
 {
+<<<<<<< HEAD
 	unsigned char *packet = psmouse->packet;
 
 	if ((packet[0] & 0x0c) == 0x04 &&
@@ -723,6 +819,42 @@ static int elantech_packet_check_v4(struct psmouse *psmouse)
 	    (packet[3] & 0x1f) == 0x10)
 		return PACKET_V4_STATUS;
 
+=======
+	struct elantech_data *etd = psmouse->private;
+	unsigned char *packet = psmouse->packet;
+	unsigned char packet_type = packet[3] & 0x03;
+	bool sanity_check;
+
+	if (etd->tp_dev && (packet[3] & 0x0f) == 0x06)
+		return PACKET_TRACKPOINT;
+
+	/*
+	 * Sanity check based on the constant bits of a packet.
+	 * The constant bits change depending on the value of
+	 * the hardware flag 'crc_enabled' but are the same for
+	 * every packet, regardless of the type.
+	 */
+	if (etd->crc_enabled)
+		sanity_check = ((packet[3] & 0x08) == 0x00);
+	else
+		sanity_check = ((packet[0] & 0x0c) == 0x04 &&
+				(packet[3] & 0x1c) == 0x10);
+
+	if (!sanity_check)
+		return PACKET_UNKNOWN;
+
+	switch (packet_type) {
+	case 0:
+		return PACKET_V4_STATUS;
+
+	case 1:
+		return PACKET_V4_HEAD;
+
+	case 2:
+		return PACKET_V4_MOTION;
+	}
+
+>>>>>>> v3.18
 	return PACKET_UNKNOWN;
 }
 
@@ -761,6 +893,7 @@ static psmouse_ret_t elantech_process_byte(struct psmouse *psmouse)
 
 	case 3:
 		packet_type = elantech_packet_check_v3(psmouse);
+<<<<<<< HEAD
 		/* ignore debounce */
 		if (packet_type == PACKET_DEBOUNCE)
 			return PSMOUSE_FULL_PACKET;
@@ -769,14 +902,49 @@ static psmouse_ret_t elantech_process_byte(struct psmouse *psmouse)
 			return PSMOUSE_BAD_DATA;
 
 		elantech_report_absolute_v3(psmouse, packet_type);
+=======
+		switch (packet_type) {
+		case PACKET_UNKNOWN:
+			return PSMOUSE_BAD_DATA;
+
+		case PACKET_DEBOUNCE:
+			/* ignore debounce */
+			break;
+
+		case PACKET_TRACKPOINT:
+			elantech_report_trackpoint(psmouse, packet_type);
+			break;
+
+		default:
+			elantech_report_absolute_v3(psmouse, packet_type);
+			break;
+		}
+
+>>>>>>> v3.18
 		break;
 
 	case 4:
 		packet_type = elantech_packet_check_v4(psmouse);
+<<<<<<< HEAD
 		if (packet_type == PACKET_UNKNOWN)
 			return PSMOUSE_BAD_DATA;
 
 		elantech_report_absolute_v4(psmouse, packet_type);
+=======
+		switch (packet_type) {
+		case PACKET_UNKNOWN:
+			return PSMOUSE_BAD_DATA;
+
+		case PACKET_TRACKPOINT:
+			elantech_report_trackpoint(psmouse, packet_type);
+			break;
+
+		default:
+			elantech_report_absolute_v4(psmouse, packet_type);
+			break;
+		}
+
+>>>>>>> v3.18
 		break;
 	}
 
@@ -784,6 +952,7 @@ static psmouse_ret_t elantech_process_byte(struct psmouse *psmouse)
 }
 
 /*
+<<<<<<< HEAD
  * This writes the reg_07 value again to the hardware at the end of every
  * set_rate call because the register loses its value. reg_07 allows setting
  * absolute mode on v4 hardware
@@ -799,6 +968,8 @@ static void elantech_set_rate_restore_reg_07(struct psmouse *psmouse,
 }
 
 /*
+=======
+>>>>>>> v3.18
  * Put the touchpad into absolute mode
  */
 static int elantech_set_absolute_mode(struct psmouse *psmouse)
@@ -1000,6 +1171,7 @@ static int elantech_get_resolution_v4(struct psmouse *psmouse,
  * Asus K53SV              0x450f01        78, 15, 0c      2 hw buttons
  * Asus G46VW              0x460f02        00, 18, 0c      2 hw buttons
  * Asus G750JX             0x360f00        00, 16, 0c      2 hw buttons
+<<<<<<< HEAD
  * Asus TP500LN            0x381f17        10, 14, 0e      clickpad
  * Asus X750JN             0x381f17        10, 14, 0e      clickpad
  * Asus UX31               0x361f00        20, 15, 0e      clickpad
@@ -1007,6 +1179,15 @@ static int elantech_get_resolution_v4(struct psmouse *psmouse,
  * Avatar AVIU-145A2       0x361f00        ?               clickpad
  * Gigabyte U2442          0x450f01        58, 17, 0c      2 hw buttons
  * Lenovo L430             0x350f02        b9, 15, 0c      2 hw buttons (*)
+=======
+ * Asus UX31               0x361f00        20, 15, 0e      clickpad
+ * Asus UX32VD             0x361f02        00, 15, 0e      clickpad
+ * Avatar AVIU-145A2       0x361f00        ?               clickpad
+ * Fujitsu H730            0x570f00        c0, 14, 0c      3 hw buttons (**)
+ * Gigabyte U2442          0x450f01        58, 17, 0c      2 hw buttons
+ * Lenovo L430             0x350f02        b9, 15, 0c      2 hw buttons (*)
+ * Lenovo L530             0x350f02        b9, 15, 0c      2 hw buttons (*)
+>>>>>>> v3.18
  * Samsung NF210           0x150b00        78, 14, 0a      2 hw buttons
  * Samsung NP770Z5E        0x575f01        10, 15, 0f      clickpad
  * Samsung NP700Z5B        0x361f06        21, 15, 0f      clickpad
@@ -1016,6 +1197,11 @@ static int elantech_get_resolution_v4(struct psmouse *psmouse,
  * Samsung RF710           0x450f00        ?               2 hw buttons
  * System76 Pangolin       0x250f01        ?               2 hw buttons
  * (*) + 3 trackpoint buttons
+<<<<<<< HEAD
+=======
+ * (**) + 0 trackpoint buttons
+ * Note: Lenovo L430 and Lenovo L430 have the same fw_version/caps
+>>>>>>> v3.18
  */
 static void elantech_set_buttonpad_prop(struct psmouse *psmouse)
 {
@@ -1029,6 +1215,25 @@ static void elantech_set_buttonpad_prop(struct psmouse *psmouse)
 }
 
 /*
+<<<<<<< HEAD
+=======
+ * Some hw_version 4 models do have a middle button
+ */
+static const struct dmi_system_id elantech_dmi_has_middle_button[] = {
+#if defined(CONFIG_DMI) && defined(CONFIG_X86)
+	{
+		/* Fujitsu H730 has a middle button */
+		.matches = {
+			DMI_MATCH(DMI_SYS_VENDOR, "FUJITSU"),
+			DMI_MATCH(DMI_PRODUCT_NAME, "CELSIUS H730"),
+		},
+	},
+#endif
+	{ }
+};
+
+/*
+>>>>>>> v3.18
  * Set the appropriate event bits for the input subsystem
  */
 static int elantech_set_input_params(struct psmouse *psmouse)
@@ -1047,6 +1252,11 @@ static int elantech_set_input_params(struct psmouse *psmouse)
 	__clear_bit(EV_REL, dev->evbit);
 
 	__set_bit(BTN_LEFT, dev->keybit);
+<<<<<<< HEAD
+=======
+	if (dmi_check_system(elantech_dmi_has_middle_button))
+		__set_bit(BTN_MIDDLE, dev->keybit);
+>>>>>>> v3.18
 	__set_bit(BTN_RIGHT, dev->keybit);
 
 	__set_bit(BTN_TOUCH, dev->keybit);
@@ -1081,7 +1291,11 @@ static int elantech_set_input_params(struct psmouse *psmouse)
 			input_set_abs_params(dev, ABS_TOOL_WIDTH, ETP_WMIN_V2,
 					     ETP_WMAX_V2, 0, 0);
 		}
+<<<<<<< HEAD
 		input_mt_init_slots(dev, 2, INPUT_MT_SEMI_MT);
+=======
+		input_mt_init_slots(dev, 2, 0);
+>>>>>>> v3.18
 		input_set_abs_params(dev, ABS_MT_POSITION_X, x_min, x_max, 0, 0);
 		input_set_abs_params(dev, ABS_MT_POSITION_Y, y_min, y_max, 0, 0);
 		break;
@@ -1208,6 +1422,10 @@ ELANTECH_INT_ATTR(reg_25, 0x25);
 ELANTECH_INT_ATTR(reg_26, 0x26);
 ELANTECH_INT_ATTR(debug, 0);
 ELANTECH_INT_ATTR(paritycheck, 0);
+<<<<<<< HEAD
+=======
+ELANTECH_INT_ATTR(crc_enabled, 0);
+>>>>>>> v3.18
 
 static struct attribute *elantech_attrs[] = {
 	&psmouse_attr_reg_07.dattr.attr,
@@ -1222,6 +1440,10 @@ static struct attribute *elantech_attrs[] = {
 	&psmouse_attr_reg_26.dattr.attr,
 	&psmouse_attr_debug.dattr.attr,
 	&psmouse_attr_paritycheck.dattr.attr,
+<<<<<<< HEAD
+=======
+	&psmouse_attr_crc_enabled.dattr.attr,
+>>>>>>> v3.18
 	NULL
 };
 
@@ -1241,11 +1463,18 @@ static bool elantech_is_signature_valid(const unsigned char *param)
 		return true;
 
 	/*
+<<<<<<< HEAD
 	 * Some hw_version >= 4 models have a revision higher then 20. Meaning
 	 * that param[2] may be 10 or 20, skip the rates check for these.
 	 */
 	if ((param[0] & 0x0f) >= 0x06 && (param[1] & 0xaf) == 0x0f &&
 	    param[2] < 40)
+=======
+	 * Some models have a revision higher then 20. Meaning param[2] may
+	 * be 10 or 20, skip the rates check for these.
+	 */
+	if (param[0] == 0x46 && (param[1] & 0xef) == 0x0f && param[2] < 40)
+>>>>>>> v3.18
 		return true;
 
 	for (i = 0; i < ARRAY_SIZE(rates); i++)
@@ -1319,6 +1548,13 @@ int elantech_detect(struct psmouse *psmouse, bool set_properties)
  */
 static void elantech_disconnect(struct psmouse *psmouse)
 {
+<<<<<<< HEAD
+=======
+	struct elantech_data *etd = psmouse->private;
+
+	if (etd->tp_dev)
+		input_unregister_device(etd->tp_dev);
+>>>>>>> v3.18
 	sysfs_remove_group(&psmouse->ps2dev.serio->dev.kobj,
 			   &elantech_attr_group);
 	kfree(psmouse->private);
@@ -1345,6 +1581,25 @@ static int elantech_reconnect(struct psmouse *psmouse)
 }
 
 /*
+<<<<<<< HEAD
+=======
+ * Some hw_version 4 models do not work with crc_disabled
+ */
+static const struct dmi_system_id elantech_dmi_force_crc_enabled[] = {
+#if defined(CONFIG_DMI) && defined(CONFIG_X86)
+	{
+		/* Fujitsu H730 does not work with crc_enabled == 0 */
+		.matches = {
+			DMI_MATCH(DMI_SYS_VENDOR, "FUJITSU"),
+			DMI_MATCH(DMI_PRODUCT_NAME, "CELSIUS H730"),
+		},
+	},
+#endif
+	{ }
+};
+
+/*
+>>>>>>> v3.18
  * Some hw_version 3 models go into error state when we try to set
  * bit 3 and/or bit 1 of r10.
  */
@@ -1357,6 +1612,7 @@ static const struct dmi_system_id no_hw_res_dmi_table[] = {
 			DMI_MATCH(DMI_PRODUCT_NAME, "U2442"),
 		},
 	},
+<<<<<<< HEAD
 	{
 		/* Fujitsu LIFEBOOK U745 does not work with crc_enabled == 0 */
 		.matches = {
@@ -1364,6 +1620,8 @@ static const struct dmi_system_id no_hw_res_dmi_table[] = {
 			DMI_MATCH(DMI_PRODUCT_NAME, "LIFEBOOK U745"),
 		},
 	},
+=======
+>>>>>>> v3.18
 #endif
 	{ }
 };
@@ -1389,6 +1647,12 @@ static int elantech_set_properties(struct elantech_data *etd)
 			etd->hw_version = 3;
 			break;
 		case 6:
+<<<<<<< HEAD
+=======
+		case 7:
+		case 8:
+		case 9:
+>>>>>>> v3.18
 			etd->hw_version = 4;
 			break;
 		default:
@@ -1419,6 +1683,16 @@ static int elantech_set_properties(struct elantech_data *etd)
 			etd->reports_pressure = true;
 	}
 
+<<<<<<< HEAD
+=======
+	/*
+	 * The signatures of v3 and v4 packets change depending on the
+	 * value of this hardware flag.
+	 */
+	etd->crc_enabled = (etd->fw_version & 0x4000) == 0x4000 ||
+			   dmi_check_system(elantech_dmi_force_crc_enabled);
+
+>>>>>>> v3.18
 	/* Enable real hardware resolution on hw_version 3 ? */
 	etd->set_hw_resolution = !dmi_check_system(no_hw_res_dmi_table);
 
@@ -1431,8 +1705,15 @@ static int elantech_set_properties(struct elantech_data *etd)
 int elantech_init(struct psmouse *psmouse)
 {
 	struct elantech_data *etd;
+<<<<<<< HEAD
 	int i, error;
 	unsigned char param[3];
+=======
+	int i;
+	int error = -EINVAL;
+	unsigned char param[3];
+	struct input_dev *tp_dev;
+>>>>>>> v3.18
 
 	psmouse->private = etd = kzalloc(sizeof(struct elantech_data), GFP_KERNEL);
 	if (!etd)
@@ -1477,11 +1758,14 @@ int elantech_init(struct psmouse *psmouse)
 		goto init_fail;
 	}
 
+<<<<<<< HEAD
 	if (etd->fw_version == 0x381f17) {
 		etd->original_set_rate = psmouse->set_rate;
 		psmouse->set_rate = elantech_set_rate_restore_reg_07;
 	}
 
+=======
+>>>>>>> v3.18
 	if (elantech_set_input_params(psmouse)) {
 		psmouse_err(psmouse, "failed to query touchpad range.\n");
 		goto init_fail;
@@ -1496,14 +1780,63 @@ int elantech_init(struct psmouse *psmouse)
 		goto init_fail;
 	}
 
+<<<<<<< HEAD
+=======
+	/* The MSB indicates the presence of the trackpoint */
+	if ((etd->capabilities[0] & 0x80) == 0x80) {
+		tp_dev = input_allocate_device();
+
+		if (!tp_dev) {
+			error = -ENOMEM;
+			goto init_fail_tp_alloc;
+		}
+
+		etd->tp_dev = tp_dev;
+		snprintf(etd->tp_phys, sizeof(etd->tp_phys), "%s/input1",
+			psmouse->ps2dev.serio->phys);
+		tp_dev->phys = etd->tp_phys;
+		tp_dev->name = "Elantech PS/2 TrackPoint";
+		tp_dev->id.bustype = BUS_I8042;
+		tp_dev->id.vendor  = 0x0002;
+		tp_dev->id.product = PSMOUSE_ELANTECH;
+		tp_dev->id.version = 0x0000;
+		tp_dev->dev.parent = &psmouse->ps2dev.serio->dev;
+		tp_dev->evbit[0] = BIT_MASK(EV_KEY) | BIT_MASK(EV_REL);
+		tp_dev->relbit[BIT_WORD(REL_X)] =
+			BIT_MASK(REL_X) | BIT_MASK(REL_Y);
+		tp_dev->keybit[BIT_WORD(BTN_LEFT)] =
+			BIT_MASK(BTN_LEFT) | BIT_MASK(BTN_MIDDLE) |
+			BIT_MASK(BTN_RIGHT);
+
+		__set_bit(INPUT_PROP_POINTER, tp_dev->propbit);
+		__set_bit(INPUT_PROP_POINTING_STICK, tp_dev->propbit);
+
+		error = input_register_device(etd->tp_dev);
+		if (error < 0)
+			goto init_fail_tp_reg;
+	}
+
+>>>>>>> v3.18
 	psmouse->protocol_handler = elantech_process_byte;
 	psmouse->disconnect = elantech_disconnect;
 	psmouse->reconnect = elantech_reconnect;
 	psmouse->pktsize = etd->hw_version > 1 ? 6 : 4;
 
 	return 0;
+<<<<<<< HEAD
 
  init_fail:
 	kfree(etd);
 	return -1;
+=======
+ init_fail_tp_reg:
+	input_free_device(tp_dev);
+ init_fail_tp_alloc:
+	sysfs_remove_group(&psmouse->ps2dev.serio->dev.kobj,
+			   &elantech_attr_group);
+ init_fail:
+	psmouse_reset(psmouse);
+	kfree(etd);
+	return error;
+>>>>>>> v3.18
 }

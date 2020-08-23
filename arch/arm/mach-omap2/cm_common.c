@@ -14,11 +14,18 @@
 #include <linux/kernel.h>
 #include <linux/init.h>
 #include <linux/errno.h>
+<<<<<<< HEAD
+=======
+#include <linux/bug.h>
+>>>>>>> v3.18
 
 #include "cm2xxx.h"
 #include "cm3xxx.h"
 #include "cm44xx.h"
+<<<<<<< HEAD
 #include "common.h"
+=======
+>>>>>>> v3.18
 
 /*
  * cm_ll_data: function pointers to SoC-specific implementations of

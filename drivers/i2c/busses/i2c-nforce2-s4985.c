@@ -1,7 +1,11 @@
 /*
  * i2c-nforce2-s4985.c - i2c-nforce2 extras for the Tyan S4985 motherboard
  *
+<<<<<<< HEAD
  * Copyright (C) 2008 Jean Delvare <khali@linux-fr.org>
+=======
+ * Copyright (C) 2008 Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,10 +16,13 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
  */
 
 /*
@@ -245,7 +252,11 @@ static void __exit nforce2_s4985_exit(void)
 		       "Physical bus restoration failed\n");
 }
 
+<<<<<<< HEAD
 MODULE_AUTHOR("Jean Delvare <khali@linux-fr.org>");
+=======
+MODULE_AUTHOR("Jean Delvare <jdelvare@suse.de>");
+>>>>>>> v3.18
 MODULE_DESCRIPTION("S4985 SMBus multiplexing");
 MODULE_LICENSE("GPL");
 

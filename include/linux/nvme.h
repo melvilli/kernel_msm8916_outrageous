@@ -1,6 +1,10 @@
 /*
  * Definitions for the NVM Express interface
+<<<<<<< HEAD
  * Copyright (c) 2011, Intel Corporation.
+=======
+ * Copyright (c) 2011-2014, Intel Corporation.
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms and conditions of the GNU General Public License,
@@ -10,16 +14,26 @@
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
  * more details.
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc., 
  * 51 Franklin St - Fifth Floor, Boston, MA 02110-1301 USA.
+=======
+>>>>>>> v3.18
  */
 
 #ifndef _LINUX_NVME_H
 #define _LINUX_NVME_H
 
+<<<<<<< HEAD
 #include <linux/types.h>
+=======
+#include <uapi/linux/nvme.h>
+#include <linux/pci.h>
+#include <linux/miscdevice.h>
+#include <linux/kref.h>
+>>>>>>> v3.18
 
 struct nvme_bar {
 	__u64			cap;	/* Controller Capabilities */
@@ -50,6 +64,10 @@ enum {
 	NVME_CC_SHN_NONE	= 0 << 14,
 	NVME_CC_SHN_NORMAL	= 1 << 14,
 	NVME_CC_SHN_ABRUPT	= 2 << 14,
+<<<<<<< HEAD
+=======
+	NVME_CC_SHN_MASK	= 3 << 14,
+>>>>>>> v3.18
 	NVME_CC_IOSQES		= 6 << 16,
 	NVME_CC_IOCQES		= 4 << 20,
 	NVME_CSTS_RDY		= 1 << 0,
@@ -57,6 +75,7 @@ enum {
 	NVME_CSTS_SHST_NORMAL	= 0 << 2,
 	NVME_CSTS_SHST_OCCUR	= 1 << 2,
 	NVME_CSTS_SHST_CMPLT	= 2 << 2,
+<<<<<<< HEAD
 };
 
 struct nvme_id_power_state {
@@ -69,10 +88,14 @@ struct nvme_id_power_state {
 	__u8			write_tput;
 	__u8			write_lat;
 	__u8			rsvd16[16];
+=======
+	NVME_CSTS_SHST_MASK	= 3 << 2,
+>>>>>>> v3.18
 };
 
 #define NVME_VS(major, minor)	(major << 16 | minor)
 
+<<<<<<< HEAD
 struct nvme_id_ctrl {
 	__le16			vid;
 	__le16			ssvid;
@@ -514,26 +537,49 @@ struct nvme_admin_cmd {
 #include <linux/kref.h>
 
 #define NVME_IO_TIMEOUT	(5 * HZ)
+=======
+extern unsigned char nvme_io_timeout;
+#define NVME_IO_TIMEOUT	(nvme_io_timeout * HZ)
+>>>>>>> v3.18
 
 /*
  * Represents an NVM Express device.  Each nvme_dev is a PCI function.
  */
 struct nvme_dev {
 	struct list_head node;
+<<<<<<< HEAD
 	struct nvme_queue **queues;
+=======
+	struct nvme_queue __rcu **queues;
+	unsigned short __percpu *io_queue;
+>>>>>>> v3.18
 	u32 __iomem *dbs;
 	struct pci_dev *pci_dev;
 	struct dma_pool *prp_page_pool;
 	struct dma_pool *prp_small_pool;
 	int instance;
+<<<<<<< HEAD
 	int queue_count;
 	int db_stride;
+=======
+	unsigned queue_count;
+	unsigned online_queues;
+	unsigned max_qid;
+	int q_depth;
+	u32 db_stride;
+>>>>>>> v3.18
 	u32 ctrl_config;
 	struct msix_entry *entry;
 	struct nvme_bar __iomem *bar;
 	struct list_head namespaces;
 	struct kref kref;
 	struct miscdevice miscdev;
+<<<<<<< HEAD
+=======
+	work_func_t reset_workfn;
+	struct work_struct reset_work;
+	struct work_struct cpu_work;
+>>>>>>> v3.18
 	char name[12];
 	char serial[20];
 	char model[40];
@@ -541,6 +587,12 @@ struct nvme_dev {
 	u32 max_hw_sectors;
 	u32 stripe_size;
 	u16 oncs;
+<<<<<<< HEAD
+=======
+	u16 abort_limit;
+	u8 vwc;
+	u8 initialized;
+>>>>>>> v3.18
 };
 
 /*
@@ -553,7 +605,11 @@ struct nvme_ns {
 	struct request_queue *queue;
 	struct gendisk *disk;
 
+<<<<<<< HEAD
 	int ns_id;
+=======
+	unsigned ns_id;
+>>>>>>> v3.18
 	int lba_shift;
 	int ms;
 	u64 mode_select_num_blocks;
@@ -572,7 +628,13 @@ struct nvme_iod {
 	int offset;		/* Of PRP list */
 	int nents;		/* Used in scatterlist */
 	int length;		/* Of data, in bytes */
+<<<<<<< HEAD
 	dma_addr_t first_dma;
+=======
+	unsigned long start_time;
+	dma_addr_t first_dma;
+	struct list_head node;
+>>>>>>> v3.18
 	struct scatterlist sg[0];
 };
 
@@ -588,17 +650,25 @@ static inline u64 nvme_block_nr(struct nvme_ns *ns, sector_t sector)
  */
 void nvme_free_iod(struct nvme_dev *dev, struct nvme_iod *iod);
 
+<<<<<<< HEAD
 int nvme_setup_prps(struct nvme_dev *dev, struct nvme_common_command *cmd,
 			struct nvme_iod *iod, int total_len, gfp_t gfp);
+=======
+int nvme_setup_prps(struct nvme_dev *, struct nvme_iod *, int , gfp_t);
+>>>>>>> v3.18
 struct nvme_iod *nvme_map_user_pages(struct nvme_dev *dev, int write,
 				unsigned long addr, unsigned length);
 void nvme_unmap_user_pages(struct nvme_dev *dev, int write,
 			struct nvme_iod *iod);
+<<<<<<< HEAD
 struct nvme_queue *get_nvmeq(struct nvme_dev *dev);
 void put_nvmeq(struct nvme_queue *nvmeq);
 int nvme_submit_sync_cmd(struct nvme_queue *nvmeq, struct nvme_command *cmd,
 						u32 *result, unsigned timeout);
 int nvme_submit_flush_data(struct nvme_queue *nvmeq, struct nvme_ns *ns);
+=======
+int nvme_submit_io_cmd(struct nvme_dev *, struct nvme_command *, u32 *);
+>>>>>>> v3.18
 int nvme_submit_admin_cmd(struct nvme_dev *, struct nvme_command *,
 							u32 *result);
 int nvme_identify(struct nvme_dev *, unsigned nsid, unsigned cns,
@@ -611,8 +681,14 @@ int nvme_set_features(struct nvme_dev *dev, unsigned fid, unsigned dword11,
 struct sg_io_hdr;
 
 int nvme_sg_io(struct nvme_ns *ns, struct sg_io_hdr __user *u_hdr);
+<<<<<<< HEAD
 int nvme_sg_get_version_num(int __user *ip);
 
 #endif
 
+=======
+int nvme_sg_io32(struct nvme_ns *ns, unsigned long arg);
+int nvme_sg_get_version_num(int __user *ip);
+
+>>>>>>> v3.18
 #endif /* _LINUX_NVME_H */

@@ -1,6 +1,10 @@
 /******************************************************************************
  *
+<<<<<<< HEAD
  * Copyright(c) 2008 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -60,11 +64,17 @@ static const struct iwl_base_params iwl1000_base_params = {
 	.max_ll_items = OTP_MAX_LL_ITEMS_1000,
 	.shadow_ram_support = false,
 	.led_compensation = 51,
+<<<<<<< HEAD
 	.support_ct_kill_exit = true,
 	.plcp_delta_threshold = IWL_MAX_PLCP_ERR_EXT_LONG_THRESHOLD_DEF,
 	.chain_noise_scale = 1000,
 	.wd_timeout = IWL_WATCHDOG_DISABLED,
 	.max_event_log_size = 128,
+=======
+	.wd_timeout = IWL_WATCHDOG_DISABLED,
+	.max_event_log_size = 128,
+	.scd_chain_ext_wa = true,
+>>>>>>> v3.18
 };
 
 static const struct iwl_ht_params iwl1000_ht_params = {

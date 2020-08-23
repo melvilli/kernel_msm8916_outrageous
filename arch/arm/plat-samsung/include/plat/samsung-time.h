@@ -22,6 +22,7 @@ enum samsung_timer_mode {
 	SAMSUNG_PWM4,
 };
 
+<<<<<<< HEAD
 struct samsung_timer_source {
 	unsigned int event_id;
 	unsigned int source_id;
@@ -45,6 +46,8 @@ struct samsung_timer_source {
 #define NON_PERIODIC		0
 #define PERIODIC		1
 
+=======
+>>>>>>> v3.18
 extern void __init samsung_set_timer_source(enum samsung_timer_mode event,
 					enum samsung_timer_mode source);
 

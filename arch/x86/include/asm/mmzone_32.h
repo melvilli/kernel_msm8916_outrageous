@@ -11,9 +11,12 @@
 #ifdef CONFIG_NUMA
 extern struct pglist_data *node_data[];
 #define NODE_DATA(nid)	(node_data[nid])
+<<<<<<< HEAD
 
 #include <asm/numaq.h>
 
+=======
+>>>>>>> v3.18
 #endif /* CONFIG_NUMA */
 
 #ifdef CONFIG_DISCONTIGMEM

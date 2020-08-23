@@ -11,11 +11,14 @@
 
 extern struct policydb policydb;
 
+<<<<<<< HEAD
 void services_compute_xperms_drivers(struct extended_perms *xperms,
 				struct avtab_node *node);
 
 void services_compute_xperms_decision(struct extended_perms_decision *xpermd,
 					struct avtab_node *node);
 
+=======
+>>>>>>> v3.18
 #endif	/* _SS_SERVICES_H_ */
 

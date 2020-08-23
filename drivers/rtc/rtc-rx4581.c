@@ -282,11 +282,14 @@ static int rx4581_probe(struct spi_device *spi)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int rx4581_remove(struct spi_device *spi)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 static const struct spi_device_id rx4581_id[] = {
 	{ "rx4581", 0 },
 	{ }
@@ -299,7 +302,10 @@ static struct spi_driver rx4581_driver = {
 		.owner	= THIS_MODULE,
 	},
 	.probe	= rx4581_probe,
+<<<<<<< HEAD
 	.remove = rx4581_remove,
+=======
+>>>>>>> v3.18
 	.id_table = rx4581_id,
 };
 

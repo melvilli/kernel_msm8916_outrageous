@@ -29,7 +29,11 @@
 #include <linux/pwm_backlight.h>
 
 #include <linux/i2c.h>
+<<<<<<< HEAD
 #include <linux/i2c/pca953x.h>
+=======
+#include <linux/platform_data/pca953x.h>
+>>>>>>> v3.18
 #include <linux/i2c/pxa-i2c.h>
 
 #include <linux/mfd/da903x.h>
@@ -310,6 +314,10 @@ static struct platform_pwm_backlight_data cm_x300_backlight_data = {
 	.max_brightness	= 100,
 	.dft_brightness	= 100,
 	.pwm_period_ns	= 10000,
+<<<<<<< HEAD
+=======
+	.enable_gpio	= -1,
+>>>>>>> v3.18
 };
 
 static struct platform_device cm_x300_backlight_device = {
@@ -836,8 +844,12 @@ static void __init cm_x300_init(void)
 	cm_x300_init_bl();
 }
 
+<<<<<<< HEAD
 static void __init cm_x300_fixup(struct tag *tags, char **cmdline,
 				 struct meminfo *mi)
+=======
+static void __init cm_x300_fixup(struct tag *tags, char **cmdline)
+>>>>>>> v3.18
 {
 	/* Make sure that mi->bank[0].start = PHYS_ADDR */
 	for (; tags->hdr.size; tags = tag_next(tags))

@@ -116,7 +116,11 @@ SECTIONS
 
 	_edata = .;
 
+<<<<<<< HEAD
 	BSS_SECTION(0, 0, 0)
+=======
+	BSS_SECTION(4, 4, 4)
+>>>>>>> v3.18
 
 #ifdef CONFIG_ARC_DW2_UNWIND
 	. = ALIGN(PAGE_SIZE);
@@ -125,6 +129,14 @@ SECTIONS
 		*(.debug_frame)
 		__end_unwind = .;
 	}
+<<<<<<< HEAD
+=======
+	/*
+	 * gcc 4.8 generates this for -fasynchonous-unwind-tables,
+	 * while we still use the .debug_frame based unwinder
+	 */
+	/DISCARD/ : {	*(.eh_frame) }
+>>>>>>> v3.18
 #else
 	/DISCARD/ : {	*(.debug_frame) }
 #endif
@@ -142,6 +154,7 @@ SECTIONS
 		*(.arcextmap.*)
 	}
 
+<<<<<<< HEAD
 	/* open-coded because we need .debug_frame seperately for unwinding */
 	.debug_aranges 0 : { *(.debug_aranges) }
 	.debug_pubnames 0 : { *(.debug_pubnames) }
@@ -151,6 +164,20 @@ SECTIONS
 	.debug_str 0 : { *(.debug_str) }
 	.debug_loc 0 : { *(.debug_loc) }
 	.debug_macinfo 0 : { *(.debug_macinfo) }
+=======
+#ifndef CONFIG_DEBUG_INFO
+	/* open-coded because we need .debug_frame seperately for unwinding */
+	/DISCARD/ : { *(.debug_aranges) }
+	/DISCARD/ : { *(.debug_pubnames) }
+	/DISCARD/ : { *(.debug_info) }
+	/DISCARD/ : { *(.debug_abbrev) }
+	/DISCARD/ : { *(.debug_line) }
+	/DISCARD/ : { *(.debug_str) }
+	/DISCARD/ : { *(.debug_loc) }
+	/DISCARD/ : { *(.debug_macinfo) }
+	/DISCARD/ : { *(.debug_ranges) }
+#endif
+>>>>>>> v3.18
 
 #ifdef CONFIG_ARC_HAS_DCCM
 	. = CONFIG_ARC_DCCM_BASE;

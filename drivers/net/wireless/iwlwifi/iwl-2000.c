@@ -1,6 +1,10 @@
 /******************************************************************************
  *
+<<<<<<< HEAD
  * Copyright(c) 2008 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -72,6 +76,7 @@ static const struct iwl_base_params iwl2000_base_params = {
 	.max_ll_items = OTP_MAX_LL_ITEMS_2x00,
 	.shadow_ram_support = true,
 	.led_compensation = 51,
+<<<<<<< HEAD
 	.adv_thermal_throttle = true,
 	.support_ct_kill_exit = true,
 	.plcp_delta_threshold = IWL_MAX_PLCP_ERR_THRESHOLD_DEF,
@@ -80,6 +85,12 @@ static const struct iwl_base_params iwl2000_base_params = {
 	.max_event_log_size = 512,
 	.shadow_reg_enable = false, /* TODO: fix bugs using this feature */
 	.hd_v2 = true,
+=======
+	.wd_timeout = IWL_DEF_WD_TIMEOUT,
+	.max_event_log_size = 512,
+	.shadow_reg_enable = false, /* TODO: fix bugs using this feature */
+	.scd_chain_ext_wa = true,
+>>>>>>> v3.18
 };
 
 
@@ -90,6 +101,7 @@ static const struct iwl_base_params iwl2030_base_params = {
 	.max_ll_items = OTP_MAX_LL_ITEMS_2x00,
 	.shadow_ram_support = true,
 	.led_compensation = 57,
+<<<<<<< HEAD
 	.adv_thermal_throttle = true,
 	.support_ct_kill_exit = true,
 	.plcp_delta_threshold = IWL_MAX_PLCP_ERR_THRESHOLD_DEF,
@@ -98,6 +110,12 @@ static const struct iwl_base_params iwl2030_base_params = {
 	.max_event_log_size = 512,
 	.shadow_reg_enable = false, /* TODO: fix bugs using this feature */
 	.hd_v2 = true,
+=======
+	.wd_timeout = IWL_LONG_WD_TIMEOUT,
+	.max_event_log_size = 512,
+	.shadow_reg_enable = false, /* TODO: fix bugs using this feature */
+	.scd_chain_ext_wa = true,
+>>>>>>> v3.18
 };
 
 static const struct iwl_ht_params iwl2000_ht_params = {
@@ -106,6 +124,7 @@ static const struct iwl_ht_params iwl2000_ht_params = {
 	.ht40_bands = BIT(IEEE80211_BAND_2GHZ),
 };
 
+<<<<<<< HEAD
 static const struct iwl_bt_params iwl2030_bt_params = {
 	/* Due to bluetooth, we transmit 2.4 GHz probes only on antenna A */
 	.advanced_bt_coexist = true,
@@ -116,6 +135,8 @@ static const struct iwl_bt_params iwl2030_bt_params = {
 	.bt_session_2 = true,
 };
 
+=======
+>>>>>>> v3.18
 static const struct iwl_eeprom_params iwl20x0_eeprom_params = {
 	.regulatory_bands = {
 		EEPROM_REG_BAND_1_CHANNELS,
@@ -137,12 +158,19 @@ static const struct iwl_eeprom_params iwl20x0_eeprom_params = {
 	.device_family = IWL_DEVICE_FAMILY_2000,		\
 	.max_inst_size = IWL60_RTC_INST_SIZE,			\
 	.max_data_size = IWL60_RTC_DATA_SIZE,			\
+<<<<<<< HEAD
 	.nvm_ver = EEPROM_2000_EEPROM_VERSION,		\
 	.nvm_calib_ver = EEPROM_2000_TX_POWER_VERSION,	\
 	.base_params = &iwl2000_base_params,			\
 	.eeprom_params = &iwl20x0_eeprom_params,		\
 	.need_temp_offset_calib = true,				\
 	.temp_offset_v2 = true,					\
+=======
+	.nvm_ver = EEPROM_2000_EEPROM_VERSION,			\
+	.nvm_calib_ver = EEPROM_2000_TX_POWER_VERSION,		\
+	.base_params = &iwl2000_base_params,			\
+	.eeprom_params = &iwl20x0_eeprom_params,		\
+>>>>>>> v3.18
 	.led_mode = IWL_LED_RF_STATE
 
 const struct iwl_cfg iwl2000_2bgn_cfg = {
@@ -168,12 +196,17 @@ const struct iwl_cfg iwl2000_2bgn_d_cfg = {
 	.nvm_ver = EEPROM_2000_EEPROM_VERSION,		\
 	.nvm_calib_ver = EEPROM_2000_TX_POWER_VERSION,	\
 	.base_params = &iwl2030_base_params,			\
+<<<<<<< HEAD
 	.bt_params = &iwl2030_bt_params,			\
 	.eeprom_params = &iwl20x0_eeprom_params,		\
 	.need_temp_offset_calib = true,				\
 	.temp_offset_v2 = true,					\
 	.led_mode = IWL_LED_RF_STATE,				\
 	.adv_pm = true
+=======
+	.eeprom_params = &iwl20x0_eeprom_params,		\
+	.led_mode = IWL_LED_RF_STATE
+>>>>>>> v3.18
 
 const struct iwl_cfg iwl2030_2bgn_cfg = {
 	.name = "Intel(R) Centrino(R) Wireless-N 2230 BGN",
@@ -193,10 +226,14 @@ const struct iwl_cfg iwl2030_2bgn_cfg = {
 	.nvm_calib_ver = EEPROM_2000_TX_POWER_VERSION,	\
 	.base_params = &iwl2000_base_params,			\
 	.eeprom_params = &iwl20x0_eeprom_params,		\
+<<<<<<< HEAD
 	.need_temp_offset_calib = true,				\
 	.temp_offset_v2 = true,					\
 	.led_mode = IWL_LED_RF_STATE,				\
 	.adv_pm = true,						\
+=======
+	.led_mode = IWL_LED_RF_STATE,				\
+>>>>>>> v3.18
 	.rx_with_siso_diversity = true
 
 const struct iwl_cfg iwl105_bgn_cfg = {
@@ -222,12 +259,17 @@ const struct iwl_cfg iwl105_bgn_d_cfg = {
 	.nvm_ver = EEPROM_2000_EEPROM_VERSION,		\
 	.nvm_calib_ver = EEPROM_2000_TX_POWER_VERSION,	\
 	.base_params = &iwl2030_base_params,			\
+<<<<<<< HEAD
 	.bt_params = &iwl2030_bt_params,			\
 	.eeprom_params = &iwl20x0_eeprom_params,		\
 	.need_temp_offset_calib = true,				\
 	.temp_offset_v2 = true,					\
 	.led_mode = IWL_LED_RF_STATE,				\
 	.adv_pm = true,						\
+=======
+	.eeprom_params = &iwl20x0_eeprom_params,		\
+	.led_mode = IWL_LED_RF_STATE,				\
+>>>>>>> v3.18
 	.rx_with_siso_diversity = true
 
 const struct iwl_cfg iwl135_bgn_cfg = {

@@ -733,6 +733,7 @@ static void ep93xx_dma_advance_work(struct ep93xx_dma_chan *edmac)
 	spin_unlock_irqrestore(&edmac->lock, flags);
 }
 
+<<<<<<< HEAD
 static void ep93xx_dma_unmap_buffers(struct ep93xx_dma_desc *desc)
 {
 	struct device *dev = desc->txd.chan->device->dev;
@@ -755,6 +756,8 @@ static void ep93xx_dma_unmap_buffers(struct ep93xx_dma_desc *desc)
 	}
 }
 
+=======
+>>>>>>> v3.18
 static void ep93xx_dma_tasklet(unsigned long data)
 {
 	struct ep93xx_dma_chan *edmac = (struct ep93xx_dma_chan *)data;
@@ -787,6 +790,7 @@ static void ep93xx_dma_tasklet(unsigned long data)
 
 	/* Now we can release all the chained descriptors */
 	list_for_each_entry_safe(desc, d, &list, node) {
+<<<<<<< HEAD
 		/*
 		 * For the memcpy channels the API requires us to unmap the
 		 * buffers unless requested otherwise.
@@ -794,6 +798,9 @@ static void ep93xx_dma_tasklet(unsigned long data)
 		if (!edmac->chan.private)
 			ep93xx_dma_unmap_buffers(desc);
 
+=======
+		dma_descriptor_unmap(&desc->txd);
+>>>>>>> v3.18
 		ep93xx_dma_desc_put(edmac, desc);
 	}
 
@@ -1120,7 +1127,10 @@ fail:
  * @period_len: length of a single period
  * @dir: direction of the operation
  * @flags: tx descriptor status flags
+<<<<<<< HEAD
  * @context: operation context (ignored)
+=======
+>>>>>>> v3.18
  *
  * Prepares a descriptor for cyclic DMA operation. This means that once the
  * descriptor is submitted, we will be submitting in a @period_len sized
@@ -1133,8 +1143,12 @@ fail:
 static struct dma_async_tx_descriptor *
 ep93xx_dma_prep_dma_cyclic(struct dma_chan *chan, dma_addr_t dma_addr,
 			   size_t buf_len, size_t period_len,
+<<<<<<< HEAD
 			   enum dma_transfer_direction dir, unsigned long flags,
 			   void *context)
+=======
+			   enum dma_transfer_direction dir, unsigned long flags)
+>>>>>>> v3.18
 {
 	struct ep93xx_dma_chan *edmac = to_ep93xx_dma_chan(chan);
 	struct ep93xx_dma_desc *desc, *first;
@@ -1313,6 +1327,7 @@ static enum dma_status ep93xx_dma_tx_status(struct dma_chan *chan,
 					    dma_cookie_t cookie,
 					    struct dma_tx_state *state)
 {
+<<<<<<< HEAD
 	struct ep93xx_dma_chan *edmac = to_ep93xx_dma_chan(chan);
 	enum dma_status ret;
 	unsigned long flags;
@@ -1322,6 +1337,9 @@ static enum dma_status ep93xx_dma_tx_status(struct dma_chan *chan,
 	spin_unlock_irqrestore(&edmac->lock, flags);
 
 	return ret;
+=======
+	return dma_cookie_status(chan, cookie, state);
+>>>>>>> v3.18
 }
 
 /**

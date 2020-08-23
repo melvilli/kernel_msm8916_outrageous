@@ -35,8 +35,11 @@ struct thread_info {
 };
 #endif /* __ASSEMBLY__ */
 
+<<<<<<< HEAD
 #define PREEMPT_ACTIVE		0x4000000
 
+=======
+>>>>>>> v3.18
 #define INIT_THREAD_INFO(tsk)			\
 {						\
 	.task		= &tsk,			\

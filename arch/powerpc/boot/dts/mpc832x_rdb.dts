@@ -314,13 +314,19 @@
 				interrupt-parent = <&ipic>;
 				interrupts = <0>;
 				reg = <0x0>;
+<<<<<<< HEAD
 				device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 			};
 			phy04:ethernet-phy@04 {
 				interrupt-parent = <&ipic>;
 				interrupts = <0>;
 				reg = <0x4>;
+<<<<<<< HEAD
 				device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 			};
 		};
 

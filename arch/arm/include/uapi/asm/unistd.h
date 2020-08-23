@@ -408,12 +408,20 @@
 #define __NR_finit_module		(__NR_SYSCALL_BASE+379)
 #define __NR_sched_setattr		(__NR_SYSCALL_BASE+380)
 #define __NR_sched_getattr		(__NR_SYSCALL_BASE+381)
+<<<<<<< HEAD
 /* Backporting seccomp, skip a few ...
  #define __NR_renameat2			(__NR_SYSCALL_BASE+382)
  */
 #define __NR_seccomp			(__NR_SYSCALL_BASE+383)
 #define __NR_getrandom			(__NR_SYSCALL_BASE+384)
 #define __NR_memfd_create		(__NR_SYSCALL_BASE+385)
+=======
+#define __NR_renameat2			(__NR_SYSCALL_BASE+382)
+#define __NR_seccomp			(__NR_SYSCALL_BASE+383)
+#define __NR_getrandom			(__NR_SYSCALL_BASE+384)
+#define __NR_memfd_create		(__NR_SYSCALL_BASE+385)
+#define __NR_bpf			(__NR_SYSCALL_BASE+386)
+>>>>>>> v3.18
 
 /*
  * The following SWIs are ARM private.
@@ -426,12 +434,15 @@
 #define __ARM_NR_set_tls		(__ARM_NR_BASE+5)
 
 /*
+<<<<<<< HEAD
  * *NOTE*: This is a ghost syscall private to the kernel.  Only the
  * __kuser_cmpxchg code in entry-armv.S should be aware of its
  * existence.  Don't ever use this from user code.
  */
 
 /*
+=======
+>>>>>>> v3.18
  * The following syscalls are obsolete and no longer available for EABI.
  */
 #if !defined(__KERNEL__)

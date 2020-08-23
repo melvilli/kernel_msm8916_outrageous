@@ -37,7 +37,10 @@
 
 
 #include <linux/device.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/delay.h>
 #include <linux/input.h>
 #include <linux/interrupt.h>
@@ -211,11 +214,14 @@ static bool gpio3;
 module_param(gpio3, bool, 0);
 MODULE_PARM_DESC(gpio3, "If gpio3 is set to 1 AUX3 acts as GPIO3");
 
+<<<<<<< HEAD
 /*
  * ad7877_read/write are only used for initial setup and for sysfs controls.
  * The main traffic is done using spi_async() in the interrupt handler.
  */
 
+=======
+>>>>>>> v3.18
 static int ad7877_read(struct spi_device *spi, u16 reg)
 {
 	struct ser_req *req;
@@ -686,7 +692,11 @@ static int ad7877_probe(struct spi_device *spi)
 {
 	struct ad7877			*ts;
 	struct input_dev		*input_dev;
+<<<<<<< HEAD
 	struct ad7877_platform_data	*pdata = spi->dev.platform_data;
+=======
+	struct ad7877_platform_data	*pdata = dev_get_platdata(&spi->dev);
+>>>>>>> v3.18
 	int				err;
 	u16				verify;
 
@@ -806,7 +816,10 @@ err_free_irq:
 err_free_mem:
 	input_free_device(input_dev);
 	kfree(ts);
+<<<<<<< HEAD
 	spi_set_drvdata(spi, NULL);
+=======
+>>>>>>> v3.18
 	return err;
 }
 
@@ -823,7 +836,10 @@ static int ad7877_remove(struct spi_device *spi)
 	kfree(ts);
 
 	dev_dbg(&spi->dev, "unregistered touchscreen\n");
+<<<<<<< HEAD
 	spi_set_drvdata(spi, NULL);
+=======
+>>>>>>> v3.18
 
 	return 0;
 }

@@ -121,6 +121,7 @@ static void raw_rcv(struct sk_buff *oskb, void *data)
 	if (!ro->recv_own_msgs && oskb->sk == sk)
 		return;
 
+<<<<<<< HEAD
 	/* do not pass frames with DLC > 8 to a legacy socket */
 	if (!ro->fd_frames) {
 		struct canfd_frame *cfd = (struct canfd_frame *)oskb->data;
@@ -128,6 +129,11 @@ static void raw_rcv(struct sk_buff *oskb, void *data)
 		if (unlikely(cfd->len > CAN_MAX_DLEN))
 			return;
 	}
+=======
+	/* do not pass non-CAN2.0 frames to a legacy socket */
+	if (!ro->fd_frames && oskb->len != CAN_MTU)
+		return;
+>>>>>>> v3.18
 
 	/* clone the given skb to be able to enqueue it into the rcv queue */
 	skb = skb_clone(oskb, GFP_ATOMIC);
@@ -168,7 +174,11 @@ static int raw_enable_filters(struct net_device *dev, struct sock *sk,
 	for (i = 0; i < count; i++) {
 		err = can_rx_register(dev, filter[i].can_id,
 				      filter[i].can_mask,
+<<<<<<< HEAD
 				      raw_rcv, sk, "raw", sk);
+=======
+				      raw_rcv, sk, "raw");
+>>>>>>> v3.18
 		if (err) {
 			/* clean up successfully registered filters */
 			while (--i >= 0)
@@ -189,7 +199,11 @@ static int raw_enable_errfilter(struct net_device *dev, struct sock *sk,
 
 	if (err_mask)
 		err = can_rx_register(dev, 0, err_mask | CAN_ERR_FLAG,
+<<<<<<< HEAD
 				      raw_rcv, sk, "raw", sk);
+=======
+				      raw_rcv, sk, "raw");
+>>>>>>> v3.18
 
 	return err;
 }
@@ -239,9 +253,15 @@ static int raw_enable_allfilters(struct net_device *dev, struct sock *sk)
 }
 
 static int raw_notifier(struct notifier_block *nb,
+<<<<<<< HEAD
 			unsigned long msg, void *data)
 {
 	struct net_device *dev = (struct net_device *)data;
+=======
+			unsigned long msg, void *ptr)
+{
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 	struct raw_sock *ro = container_of(nb, struct raw_sock, notifier);
 	struct sock *sk = &ro->sk;
 
@@ -470,9 +490,12 @@ static int raw_setsockopt(struct socket *sock, int level, int optname,
 		if (optlen % sizeof(struct can_filter) != 0)
 			return -EINVAL;
 
+<<<<<<< HEAD
 		if (optlen > CAN_RAW_FILTER_MAX * sizeof(struct can_filter))
 			return -EINVAL;
 
+=======
+>>>>>>> v3.18
 		count = optlen / sizeof(struct can_filter);
 
 		if (count > 1) {
@@ -678,8 +701,12 @@ static int raw_sendmsg(struct kiocb *iocb, struct socket *sock,
 	int err;
 
 	if (msg->msg_name) {
+<<<<<<< HEAD
 		struct sockaddr_can *addr =
 			(struct sockaddr_can *)msg->msg_name;
+=======
+		DECLARE_SOCKADDR(struct sockaddr_can *, addr, msg->msg_name);
+>>>>>>> v3.18
 
 		if (msg->msg_namelen < sizeof(*addr))
 			return -EINVAL;
@@ -719,6 +746,10 @@ static int raw_sendmsg(struct kiocb *iocb, struct socket *sock,
 
 	skb->dev = dev;
 	skb->sk  = sk;
+<<<<<<< HEAD
+=======
+	skb->priority = sk->sk_priority;
+>>>>>>> v3.18
 
 	err = can_send(skb, ro->loopback);
 
@@ -741,9 +772,13 @@ static int raw_recvmsg(struct kiocb *iocb, struct socket *sock,
 		       struct msghdr *msg, size_t size, int flags)
 {
 	struct sock *sk = sock->sk;
+<<<<<<< HEAD
 	struct raw_sock *ro = raw_sk(sk);
 	struct sk_buff *skb;
 	int rxmtu;
+=======
+	struct sk_buff *skb;
+>>>>>>> v3.18
 	int err = 0;
 	int noblock;
 
@@ -754,6 +789,7 @@ static int raw_recvmsg(struct kiocb *iocb, struct socket *sock,
 	if (!skb)
 		return err;
 
+<<<<<<< HEAD
 	/*
 	 * when serving a legacy socket the DLC <= 8 is already checked inside
 	 * raw_rcv(). Now check if we need to pass a canfd_frame to a legacy
@@ -768,6 +804,12 @@ static int raw_recvmsg(struct kiocb *iocb, struct socket *sock,
 		msg->msg_flags |= MSG_TRUNC;
 	else
 		size = rxmtu;
+=======
+	if (size < skb->len)
+		msg->msg_flags |= MSG_TRUNC;
+	else
+		size = skb->len;
+>>>>>>> v3.18
 
 	err = memcpy_toiovec(msg->msg_iov, skb->data, size);
 	if (err < 0) {
@@ -778,6 +820,10 @@ static int raw_recvmsg(struct kiocb *iocb, struct socket *sock,
 	sock_recv_ts_and_drops(msg, sk, skb);
 
 	if (msg->msg_name) {
+<<<<<<< HEAD
+=======
+		__sockaddr_check_size(sizeof(struct sockaddr_can));
+>>>>>>> v3.18
 		msg->msg_namelen = sizeof(struct sockaddr_can);
 		memcpy(msg->msg_name, skb->cb, msg->msg_namelen);
 	}

@@ -19,8 +19,15 @@
 /* DBGU base */
 /* rm9200, 9260/9g20, 9261/9g10, 9rl */
 #define AT91_BASE_DBGU0	0xfffff200
+<<<<<<< HEAD
 /* 9263, 9g45 */
 #define AT91_BASE_DBGU1	0xffffee00
+=======
+/* 9263, 9g45, sama5d3 */
+#define AT91_BASE_DBGU1	0xffffee00
+/* sama5d4 */
+#define AT91_BASE_DBGU2	0xfc069000
+>>>>>>> v3.18
 
 #if defined(CONFIG_ARCH_AT91X40)
 #include <mach/at91x40.h>
@@ -33,6 +40,11 @@
 #include <mach/at91sam9g45.h>
 #include <mach/at91sam9x5.h>
 #include <mach/at91sam9n12.h>
+<<<<<<< HEAD
+=======
+#include <mach/sama5d3.h>
+#include <mach/sama5d4.h>
+>>>>>>> v3.18
 
 /*
  * On all at91 except rm9200 and x40 have the System Controller starts
@@ -46,9 +58,21 @@
  * and map the same memory space
  */
 #define AT91_BASE_SYS	0xffffc000
+<<<<<<< HEAD
 #endif
 
 /*
+=======
+
+#endif
+
+/*
+ * On sama5d4 there is no system controller, we map some needed peripherals
+ */
+#define AT91_ALT_BASE_SYS	0xfc069000
+
+/*
+>>>>>>> v3.18
  * On all at91 have the Advanced Interrupt Controller starts at address
  * 0xfffff000 and the Power Management Controller starts at 0xfffffc00
  */
@@ -68,23 +92,47 @@
  */
 #define AT91_IO_PHYS_BASE	0xFFF78000
 #define AT91_IO_VIRT_BASE	IOMEM(0xFF000000 - AT91_IO_SIZE)
+<<<<<<< HEAD
+=======
+
+/*
+ * On sama5d4, remap the peripherals from address 0xFC069000 .. 0xFC06F000
+ * to 0xFB069000 .. 0xFB06F000.  (24Kb)
+ */
+#define AT91_ALT_IO_PHYS_BASE	AT91_ALT_BASE_SYS
+#define AT91_ALT_IO_VIRT_BASE	IOMEM(0xFB069000)
+>>>>>>> v3.18
 #else
 /*
  * Identity mapping for the non MMU case.
  */
 #define AT91_IO_PHYS_BASE	AT91_BASE_SYS
 #define AT91_IO_VIRT_BASE	IOMEM(AT91_IO_PHYS_BASE)
+<<<<<<< HEAD
+=======
+
+#define AT91_ALT_IO_PHYS_BASE	AT91_ALT_BASE_SYS
+#define AT91_ALT_IO_VIRT_BASE	IOMEM(AT91_ALT_BASE_SYS)
+>>>>>>> v3.18
 #endif
 
 #define AT91_IO_SIZE		(0xFFFFFFFF - AT91_IO_PHYS_BASE + 1)
 
  /* Convert a physical IO address to virtual IO address */
 #define AT91_IO_P2V(x)		((x) - AT91_IO_PHYS_BASE + AT91_IO_VIRT_BASE)
+<<<<<<< HEAD
+=======
+#define AT91_ALT_IO_P2V(x)	((x) - AT91_ALT_IO_PHYS_BASE + AT91_ALT_IO_VIRT_BASE)
+>>>>>>> v3.18
 
 /*
  * Virtual to Physical Address mapping for IO devices.
  */
 #define AT91_VA_BASE_SYS	AT91_IO_P2V(AT91_BASE_SYS)
+<<<<<<< HEAD
+=======
+#define AT91_ALT_VA_BASE_SYS	AT91_ALT_IO_P2V(AT91_ALT_BASE_SYS)
+>>>>>>> v3.18
 
  /* Internal SRAM is mapped below the IO devices */
 #define AT91_SRAM_MAX		SZ_1M
@@ -103,5 +151,23 @@
 /* Clocks */
 #define AT91_SLOW_CLOCK		32768		/* slow clock */
 
+<<<<<<< HEAD
+=======
+/*
+ * FIXME: this is needed to communicate between the pinctrl driver and
+ * the PM implementation in the machine. Possibly part of the PM
+ * implementation should be moved down into the pinctrl driver and get
+ * called as part of the generic suspend/resume path.
+ */
+#ifndef __ASSEMBLY__
+#ifdef CONFIG_PINCTRL_AT91
+extern void at91_pinctrl_gpio_suspend(void);
+extern void at91_pinctrl_gpio_resume(void);
+#else
+static inline void at91_pinctrl_gpio_suspend(void) {}
+static inline void at91_pinctrl_gpio_resume(void) {}
+#endif
+#endif
+>>>>>>> v3.18
 
 #endif

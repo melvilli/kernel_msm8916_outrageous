@@ -33,6 +33,7 @@
 
 #include <linux/types.h>
 #include <linux/mm.h>
+<<<<<<< HEAD
 #include "ttype.h"
 #include "tether.h"
 
@@ -40,10 +41,19 @@
 
 #define B_OWNED_BY_CHIP     1           //
 #define B_OWNED_BY_HOST     0           //
+=======
+#include "linux/ieee80211.h"
+#include "ttype.h"
+#include "tether.h"
+
+#define B_OWNED_BY_CHIP     1
+#define B_OWNED_BY_HOST     0
+>>>>>>> v3.18
 
 //
 // Bits in the RSR register
 //
+<<<<<<< HEAD
 #define RSR_ADDRBROAD       0x80        // 1000 0000
 #define RSR_ADDRMULTI       0x40        // 0100 0000
 #define RSR_ADDRUNI         0x00        // 0000 0000
@@ -53,36 +63,71 @@
 #define RSR_CRCOK           0x04        // 0000 0100
 #define RSR_BCNSSIDOK       0x02        // 0000 0010
 #define RSR_ADDROK          0x01        // 0000 0001
+=======
+#define RSR_ADDRBROAD       0x80
+#define RSR_ADDRMULTI       0x40
+#define RSR_ADDRUNI         0x00
+#define RSR_IVLDTYP         0x20
+#define RSR_IVLDLEN         0x10        // invalid len (> 2312 byte)
+#define RSR_BSSIDOK         0x08
+#define RSR_CRCOK           0x04
+#define RSR_BCNSSIDOK       0x02
+#define RSR_ADDROK          0x01
+>>>>>>> v3.18
 
 //
 // Bits in the new RSR register
 //
+<<<<<<< HEAD
 #define NEWRSR_DECRYPTOK    0x10        // 0001 0000
 #define NEWRSR_CFPIND       0x08        // 0000 1000
 #define NEWRSR_HWUTSF       0x04        // 0000 0100
 #define NEWRSR_BCNHITAID    0x02        // 0000 0010
 #define NEWRSR_BCNHITAID0   0x01        // 0000 0001
+=======
+#define NEWRSR_DECRYPTOK    0x10
+#define NEWRSR_CFPIND       0x08
+#define NEWRSR_HWUTSF       0x04
+#define NEWRSR_BCNHITAID    0x02
+#define NEWRSR_BCNHITAID0   0x01
+>>>>>>> v3.18
 
 //
 // Bits in the TSR0 register
 //
+<<<<<<< HEAD
 #define TSR0_PWRSTS1_2      0xC0        // 1100 0000
 #define TSR0_PWRSTS7        0x20        // 0010 0000
 #define TSR0_NCR            0x1F        // 0001 1111
+=======
+#define TSR0_PWRSTS1_2      0xC0
+#define TSR0_PWRSTS7        0x20
+#define TSR0_NCR            0x1F
+>>>>>>> v3.18
 
 //
 // Bits in the TSR1 register
 //
+<<<<<<< HEAD
 #define TSR1_TERR           0x80        // 1000 0000
 #define TSR1_PWRSTS4_6      0x70        // 0111 0000
 #define TSR1_RETRYTMO       0x08        // 0000 1000
 #define TSR1_TMO            0x04        // 0000 0100
 #define TSR1_PWRSTS3        0x02        // 0000 0010
 #define ACK_DATA            0x01        // 0000 0000
+=======
+#define TSR1_TERR           0x80
+#define TSR1_PWRSTS4_6      0x70
+#define TSR1_RETRYTMO       0x08
+#define TSR1_TMO            0x04
+#define TSR1_PWRSTS3        0x02
+#define ACK_DATA            0x01
+>>>>>>> v3.18
 
 //
 // Bits in the TCR register
 //
+<<<<<<< HEAD
 #define EDMSDU              0x04        // 0000 0100 end of sdu
 #define TCR_EDP             0x02        // 0000 0010 end of packet
 #define TCR_STP             0x01        // 0000 0001 start of packet
@@ -101,14 +146,40 @@
 #define CB_MIN_TX_DESC      16          // min # of tx descriptor
 
 #define CB_MAX_RECEIVED_PACKETS     16  // max # of received packets at one time
+=======
+#define EDMSDU              0x04        // end of sdu
+#define TCR_EDP             0x02        // end of packet
+#define TCR_STP             0x01        // start of packet
+
+// max transmit or receive buffer size
+#define CB_MAX_BUF_SIZE     2900U
+					// NOTE: must be multiple of 4
+#define CB_MAX_TX_BUF_SIZE          CB_MAX_BUF_SIZE
+#define CB_MAX_RX_BUF_SIZE_NORMAL   CB_MAX_BUF_SIZE
+
+#define CB_BEACON_BUF_SIZE  512U
+
+#define CB_MAX_RX_DESC      128
+#define CB_MIN_RX_DESC      16
+#define CB_MAX_TX_DESC      64
+#define CB_MIN_TX_DESC      16
+
+#define CB_MAX_RECEIVED_PACKETS     16
+>>>>>>> v3.18
 					// limit our receive routine to indicating
 					// this many at a time for 2 reasons:
 					// 1. driver flow control to protocol layer
 					// 2. limit the time used in ISR routine
 
+<<<<<<< HEAD
 #define CB_EXTRA_RD_NUM     32          // default # of Extra RD
 #define CB_RD_NUM           32          // default # of RD
 #define CB_TD_NUM           32          // default # of TD
+=======
+#define CB_EXTRA_RD_NUM     32
+#define CB_RD_NUM           32
+#define CB_TD_NUM           32
+>>>>>>> v3.18
 
 // max number of physical segments
 // in a single NDIS packet. Above this threshold, the packet
@@ -128,6 +199,7 @@
 #ifdef __BIG_ENDIAN
 
 // WMAC definition FIFO Control
+<<<<<<< HEAD
 #define FIFOCTL_AUTO_FB_1   0x0010 // 0001 0000 0000 0000
 #define FIFOCTL_AUTO_FB_0   0x0008 // 0000 1000 0000 0000
 #define FIFOCTL_GRPACK      0x0004 // 0000 0100 0000 0000
@@ -183,6 +255,63 @@
 #define FRAGCTL_NONFRAG     0x0000 // 0000 0000 0000 0000
 
 #endif // #ifdef __BIG_ENDIAN
+=======
+#define FIFOCTL_AUTO_FB_1   0x0010
+#define FIFOCTL_AUTO_FB_0   0x0008
+#define FIFOCTL_GRPACK      0x0004
+#define FIFOCTL_11GA        0x0003
+#define FIFOCTL_11GB        0x0002
+#define FIFOCTL_11B         0x0001
+#define FIFOCTL_11A         0x0000
+#define FIFOCTL_RTS         0x8000
+#define FIFOCTL_ISDMA0      0x4000
+#define FIFOCTL_GENINT      0x2000
+#define FIFOCTL_TMOEN       0x1000
+#define FIFOCTL_LRETRY      0x0800
+#define FIFOCTL_CRCDIS      0x0400
+#define FIFOCTL_NEEDACK     0x0200
+#define FIFOCTL_LHEAD       0x0100
+
+//WMAC definition Frag Control
+#define FRAGCTL_AES         0x0003
+#define FRAGCTL_TKIP        0x0002
+#define FRAGCTL_LEGACY      0x0001
+#define FRAGCTL_NONENCRYPT  0x0000
+#define FRAGCTL_ENDFRAG     0x0300
+#define FRAGCTL_MIDFRAG     0x0200
+#define FRAGCTL_STAFRAG     0x0100
+#define FRAGCTL_NONFRAG     0x0000
+
+#else
+
+#define FIFOCTL_AUTO_FB_1   0x1000
+#define FIFOCTL_AUTO_FB_0   0x0800
+#define FIFOCTL_GRPACK      0x0400
+#define FIFOCTL_11GA        0x0300
+#define FIFOCTL_11GB        0x0200
+#define FIFOCTL_11B         0x0100
+#define FIFOCTL_11A         0x0000
+#define FIFOCTL_RTS         0x0080
+#define FIFOCTL_ISDMA0      0x0040
+#define FIFOCTL_GENINT      0x0020
+#define FIFOCTL_TMOEN       0x0010
+#define FIFOCTL_LRETRY      0x0008
+#define FIFOCTL_CRCDIS      0x0004
+#define FIFOCTL_NEEDACK     0x0002
+#define FIFOCTL_LHEAD       0x0001
+
+//WMAC definition Frag Control
+#define FRAGCTL_AES         0x0300
+#define FRAGCTL_TKIP        0x0200
+#define FRAGCTL_LEGACY      0x0100
+#define FRAGCTL_NONENCRYPT  0x0000
+#define FRAGCTL_ENDFRAG     0x0003
+#define FRAGCTL_MIDFRAG     0x0002
+#define FRAGCTL_STAFRAG     0x0001
+#define FRAGCTL_NONFRAG     0x0000
+
+#endif
+>>>>>>> v3.18
 
 #define TYPE_TXDMA0     0
 #define TYPE_AC0DMA     1
@@ -201,8 +330,11 @@
 #define TD_FLAGS_PRIV_SKB                0x02       // check if called from private skb(hostap)
 #define TD_FLAGS_PS_RETRY                0x04       // check if PS STA frame re-transmit
 
+<<<<<<< HEAD
 /*---------------------  Export Types  ------------------------------*/
 
+=======
+>>>>>>> v3.18
 // ref_sk_buff is used for mapping the skb structure between pre-built driver-obj & running kernel.
 // Since different kernel version (2.4x) may change skb structure, i.e. pre-built driver-obj
 // may link to older skb that leads error.
@@ -213,6 +345,7 @@ typedef struct tagDEVICE_RD_INFO {
 	dma_addr_t  curr_desc;
 } DEVICE_RD_INFO,   *PDEVICE_RD_INFO;
 
+<<<<<<< HEAD
 /*
   static inline PDEVICE_RD_INFO alloc_rd_info(void) {
   PDEVICE_RD_INFO  ptr;
@@ -236,6 +369,8 @@ typedef struct tagDEVICE_RD_INFO {
 SRDES0;
 */
 
+=======
+>>>>>>> v3.18
 #ifdef __BIG_ENDIAN
 
 typedef struct tagRDES0 {
@@ -276,15 +411,21 @@ typedef struct tagSRxDesc {
 	volatile SRDES1 m_rd1RD1;
 	volatile u32    buff_addr;
 	volatile u32    next_desc;
+<<<<<<< HEAD
 	struct tagSRxDesc   *next;//4 bytes
 	volatile PDEVICE_RD_INFO    pRDInfo;//4 bytes
 	volatile u32    Reserved[2];//8 bytes
+=======
+	struct tagSRxDesc *next __aligned(8);
+	volatile PDEVICE_RD_INFO pRDInfo __aligned(8);
+>>>>>>> v3.18
 } __attribute__ ((__packed__))
 SRxDesc, *PSRxDesc;
 typedef const SRxDesc *PCSRxDesc;
 
 #ifdef __BIG_ENDIAN
 
+<<<<<<< HEAD
 /*
   typedef struct tagTDES0 {
   volatile    unsigned char byTSR0;
@@ -296,6 +437,8 @@ typedef const SRxDesc *PCSRxDesc;
 STDES0;
 */
 
+=======
+>>>>>>> v3.18
 typedef struct tagTDES0 {
 	volatile    unsigned char byTSR0;
 	volatile    unsigned char byTSR1;
@@ -340,6 +483,7 @@ typedef struct tagDEVICE_TD_INFO {
 	unsigned char byFlags;
 } DEVICE_TD_INFO,    *PDEVICE_TD_INFO;
 
+<<<<<<< HEAD
 /*
   static inline PDEVICE_TD_INFO alloc_td_info(void) {
   PDEVICE_TD_INFO  ptr;
@@ -353,6 +497,8 @@ typedef struct tagDEVICE_TD_INFO {
   }
 */
 
+=======
+>>>>>>> v3.18
 //
 // transmit descriptor
 //
@@ -361,9 +507,14 @@ typedef struct tagSTxDesc {
 	volatile    STDES1  m_td1TD1;
 	volatile    u32    buff_addr;
 	volatile    u32    next_desc;
+<<<<<<< HEAD
 	struct tagSTxDesc *next; //4 bytes
 	volatile    PDEVICE_TD_INFO pTDInfo;//4 bytes
 	volatile    u32    Reserved[2];//8 bytes
+=======
+	struct tagSTxDesc *next __aligned(8);
+	volatile    PDEVICE_TD_INFO pTDInfo __aligned(8);
+>>>>>>> v3.18
 } __attribute__ ((__packed__))
 STxDesc, *PSTxDesc;
 typedef const STxDesc *PCSTxDesc;
@@ -375,9 +526,14 @@ typedef struct tagSTxSyncDesc {
 	volatile    u32 next_desc; // pointer to next logical descriptor
 	volatile    unsigned short m_wFIFOCtl;
 	volatile    unsigned short m_wTimeStamp;
+<<<<<<< HEAD
 	struct tagSTxSyncDesc *next; //4 bytes
 	volatile    PDEVICE_TD_INFO pTDInfo;//4 bytes
 	volatile    u32 m_dwReserved2;
+=======
+	struct tagSTxSyncDesc *next __aligned(8);
+	volatile    PDEVICE_TD_INFO pTDInfo __aligned(8);
+>>>>>>> v3.18
 } __attribute__ ((__packed__))
 STxSyncDesc, *PSTxSyncDesc;
 typedef const STxSyncDesc *PCSTxSyncDesc;
@@ -385,6 +541,7 @@ typedef const STxSyncDesc *PCSTxSyncDesc;
 //
 // RsvTime buffer header
 //
+<<<<<<< HEAD
 typedef struct tagSRrvTime_gRTS {
 	unsigned short wRTSTxRrvTime_ba;
 	unsigned short wRTSTxRrvTime_aa;
@@ -412,6 +569,8 @@ typedef struct tagSRrvTime_ab {
 SRrvTime_ab, *PSRrvTime_ab;
 typedef const SRrvTime_ab *PCSRrvTime_ab;
 
+=======
+>>>>>>> v3.18
 typedef struct tagSRrvTime_atim {
 	unsigned short wCTSTxRrvTime_ba;
 	unsigned short wTxRrvTime_a;
@@ -419,6 +578,7 @@ typedef struct tagSRrvTime_atim {
 SRrvTime_atim, *PSRrvTime_atim;
 typedef const SRrvTime_atim *PCSRrvTime_atim;
 
+<<<<<<< HEAD
 //
 // RTS buffer header
 //
@@ -525,6 +685,20 @@ typedef struct tagSCTS_FB {
 } __attribute__ ((__packed__))
 SCTS_FB, *PSCTS_FB;
 typedef const SCTS_FB *PCSCTS_FB;
+=======
+/* Length, Service, and Signal fields of Phy for Tx */
+struct vnt_phy_field {
+	u8 signal;
+	u8 service;
+	__le16 len;
+} __packed;
+
+union vnt_phy_field_swap {
+	struct vnt_phy_field field_read;
+	u16 swap[2];
+	u32 field_write;
+};
+>>>>>>> v3.18
 
 //
 // Tx FIFO header
@@ -540,6 +714,7 @@ typedef struct tagSTxBufHead {
 STxBufHead, *PSTxBufHead;
 typedef const STxBufHead *PCSTxBufHead;
 
+<<<<<<< HEAD
 typedef struct tagSTxShortBufHead {
 	unsigned short wFIFOCtl;
 	unsigned short wTimeStamp;
@@ -615,6 +790,8 @@ typedef struct tagSMICHDRHead {
 SMICHDRHead, *PSMICHDRHead;
 typedef const SMICHDRHead *PCSMICHDRHead;
 
+=======
+>>>>>>> v3.18
 typedef struct tagSBEACONCtl {
 	u32 BufReady:1;
 	u32 TSF:15;
@@ -640,6 +817,7 @@ typedef struct tagSKeyEntry {
 	u32 dwKey4[4];
 } __attribute__ ((__packed__))
 SKeyEntry;
+<<<<<<< HEAD
 /*---------------------  Export Macros ------------------------------*/
 
 /*---------------------  Export Classes  ----------------------------*/
@@ -647,5 +825,7 @@ SKeyEntry;
 /*---------------------  Export Variables  --------------------------*/
 
 /*---------------------  Export Functions  --------------------------*/
+=======
+>>>>>>> v3.18
 
 #endif // __DESC_H__

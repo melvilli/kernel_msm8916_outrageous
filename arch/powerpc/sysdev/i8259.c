@@ -8,7 +8,10 @@
  */
 #undef DEBUG
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/ioport.h>
 #include <linux/interrupt.h>
 #include <linux/kernel.h>

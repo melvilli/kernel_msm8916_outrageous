@@ -37,7 +37,10 @@
  *    OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/module.h>
 #include <linux/etherdevice.h>
@@ -520,6 +523,10 @@ static void carl9170_ps_beacon(struct ar9170 *ar, void *data, unsigned int len)
 {
 	struct ieee80211_hdr *hdr = data;
 	struct ieee80211_tim_ie *tim_ie;
+<<<<<<< HEAD
+=======
+	struct ath_common *common = &ar->common;
+>>>>>>> v3.18
 	u8 *tim;
 	u8 tim_len;
 	bool cam;
@@ -527,17 +534,26 @@ static void carl9170_ps_beacon(struct ar9170 *ar, void *data, unsigned int len)
 	if (likely(!(ar->hw->conf.flags & IEEE80211_CONF_PS)))
 		return;
 
+<<<<<<< HEAD
 	/* check if this really is a beacon */
 	if (!ieee80211_is_beacon(hdr->frame_control))
 		return;
 
+=======
+>>>>>>> v3.18
 	/* min. beacon length + FCS_LEN */
 	if (len <= 40 + FCS_LEN)
 		return;
 
+<<<<<<< HEAD
 	/* and only beacons from the associated BSSID, please */
 	if (!ether_addr_equal(hdr->addr3, ar->common.curbssid) ||
 	    !ar->common.curaid)
+=======
+	/* check if this really is a beacon */
+	/* and only beacons from the associated BSSID, please */
+	if (!ath_is_mybeacon(common, hdr) || !common->curaid)
+>>>>>>> v3.18
 		return;
 
 	ar->ps.last_beacon = jiffies;
@@ -576,7 +592,11 @@ static void carl9170_ps_beacon(struct ar9170 *ar, void *data, unsigned int len)
 
 static void carl9170_ba_check(struct ar9170 *ar, void *data, unsigned int len)
 {
+<<<<<<< HEAD
 	struct ieee80211_bar *bar = (void *) data;
+=======
+	struct ieee80211_bar *bar = data;
+>>>>>>> v3.18
 	struct carl9170_bar_list_entry *entry;
 	unsigned int queue;
 
@@ -602,8 +622,13 @@ static void carl9170_ba_check(struct ar9170 *ar, void *data, unsigned int len)
 
 		if (bar->start_seq_num == entry_bar->start_seq_num &&
 		    TID_CHECK(bar->control, entry_bar->control) &&
+<<<<<<< HEAD
 		    compare_ether_addr(bar->ra, entry_bar->ta) == 0 &&
 		    compare_ether_addr(bar->ta, entry_bar->ra) == 0) {
+=======
+		    ether_addr_equal_64bits(bar->ra, entry_bar->ta) &&
+		    ether_addr_equal_64bits(bar->ta, entry_bar->ra)) {
+>>>>>>> v3.18
 			struct ieee80211_tx_info *tx_info;
 
 			tx_info = IEEE80211_SKB_CB(entry_skb);

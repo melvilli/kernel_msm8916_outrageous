@@ -1,5 +1,10 @@
 00-INDEX
 	- this file
+<<<<<<< HEAD
+=======
+botching-up-ioctls.txt
+	- how to avoid botching up ioctls
+>>>>>>> v3.18
 cdrom.txt
 	- summary of CDROM ioctl calls
 hdio.txt

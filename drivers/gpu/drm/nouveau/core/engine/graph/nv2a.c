@@ -1,5 +1,8 @@
 #include <core/os.h>
+<<<<<<< HEAD
 #include <core/class.h>
+=======
+>>>>>>> v3.18
 #include <core/engctx.h>
 #include <core/enum.h>
 

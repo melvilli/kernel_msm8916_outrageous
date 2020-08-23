@@ -179,5 +179,9 @@ SECTIONS
 		*(.options)
 		*(.pdr)
 		*(.reginfo)
+<<<<<<< HEAD
+=======
+		*(.eh_frame)
+>>>>>>> v3.18
 	}
 }

@@ -10,6 +10,11 @@
 #ifndef __ASM_ARCH_IMX_ESDHC_H
 #define __ASM_ARCH_IMX_ESDHC_H
 
+<<<<<<< HEAD
+=======
+#include <linux/types.h>
+
+>>>>>>> v3.18
 enum wp_types {
 	ESDHC_WP_NONE,		/* no WP, neither controller nor gpio */
 	ESDHC_WP_CONTROLLER,	/* mmc controller internal WP */
@@ -32,6 +37,10 @@ enum cd_types {
  * @cd_gpio:	gpio for card_detect interrupt
  * @wp_type:	type of write_protect method (see wp_types enum above)
  * @cd_type:	type of card_detect method (see cd_types enum above)
+<<<<<<< HEAD
+=======
+ * @support_vsel:  indicate it supports 1.8v switching
+>>>>>>> v3.18
  */
 
 struct esdhc_platform_data {
@@ -40,5 +49,11 @@ struct esdhc_platform_data {
 	enum wp_types wp_type;
 	enum cd_types cd_type;
 	int max_bus_width;
+<<<<<<< HEAD
+=======
+	unsigned int f_max;
+	bool support_vsel;
+	unsigned int delay_line;
+>>>>>>> v3.18
 };
 #endif /* __ASM_ARCH_IMX_ESDHC_H */

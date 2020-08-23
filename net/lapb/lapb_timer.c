@@ -154,6 +154,10 @@ static void lapb_t1timer_expiry(unsigned long param)
 			} else {
 				lapb->n2count++;
 				lapb_requeue_frames(lapb);
+<<<<<<< HEAD
+=======
+				lapb_kick(lapb);
+>>>>>>> v3.18
 			}
 			break;
 

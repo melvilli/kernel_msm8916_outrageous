@@ -44,6 +44,11 @@ static int tobermory_set_bias_level(struct snd_soc_card *card,
 						     SND_SOC_CLOCK_IN);
 			if (ret < 0) {
 				pr_err("Failed to set SYSCLK: %d\n", ret);
+<<<<<<< HEAD
+=======
+				snd_soc_dai_set_pll(codec_dai, WM8962_FLL,
+						    0, 0, 0);
+>>>>>>> v3.18
 				return ret;
 			}
 		}
@@ -221,6 +226,7 @@ static int tobermory_probe(struct platform_device *pdev)
 
 	card->dev = &pdev->dev;
 
+<<<<<<< HEAD
 	ret = snd_soc_register_card(card);
 	if (ret) {
 		dev_err(&pdev->dev, "snd_soc_register_card() failed: %d\n",
@@ -238,6 +244,14 @@ static int tobermory_remove(struct platform_device *pdev)
 	snd_soc_unregister_card(card);
 
 	return 0;
+=======
+	ret = devm_snd_soc_register_card(&pdev->dev, card);
+	if (ret)
+		dev_err(&pdev->dev, "snd_soc_register_card() failed: %d\n",
+			ret);
+
+	return ret;
+>>>>>>> v3.18
 }
 
 static struct platform_driver tobermory_driver = {
@@ -247,7 +261,10 @@ static struct platform_driver tobermory_driver = {
 		.pm = &snd_soc_pm_ops,
 	},
 	.probe = tobermory_probe,
+<<<<<<< HEAD
 	.remove = tobermory_remove,
+=======
+>>>>>>> v3.18
 };
 
 module_platform_driver(tobermory_driver);

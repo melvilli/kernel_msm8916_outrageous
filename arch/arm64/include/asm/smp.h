@@ -48,6 +48,11 @@ extern void smp_init_cpus(void);
  */
 extern void set_smp_cross_call(void (*)(const struct cpumask *, unsigned int));
 
+<<<<<<< HEAD
+=======
+extern void (*__smp_cross_call)(const struct cpumask *, unsigned int);
+
+>>>>>>> v3.18
 /*
  * Called from the secondary holding pen, this is the secondary CPU entry point.
  */
@@ -64,7 +69,10 @@ extern void secondary_entry(void);
 
 extern void arch_send_call_function_single_ipi(int cpu);
 extern void arch_send_call_function_ipi_mask(const struct cpumask *mask);
+<<<<<<< HEAD
 extern void arch_send_wakeup_ipi_mask(const struct cpumask *mask);
+=======
+>>>>>>> v3.18
 
 extern int __cpu_disable(void);
 

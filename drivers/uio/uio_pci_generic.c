@@ -113,13 +113,18 @@ static void remove(struct pci_dev *pdev)
 	kfree(gdev);
 }
 
+<<<<<<< HEAD
 static struct pci_driver driver = {
+=======
+static struct pci_driver uio_pci_driver = {
+>>>>>>> v3.18
 	.name = "uio_pci_generic",
 	.id_table = NULL, /* only dynamic id's */
 	.probe = probe,
 	.remove = remove,
 };
 
+<<<<<<< HEAD
 static int __init init(void)
 {
 	pr_info(DRIVER_DESC " version: " DRIVER_VERSION "\n");
@@ -134,6 +139,9 @@ static void __exit cleanup(void)
 module_init(init);
 module_exit(cleanup);
 
+=======
+module_pci_driver(uio_pci_driver);
+>>>>>>> v3.18
 MODULE_VERSION(DRIVER_VERSION);
 MODULE_LICENSE("GPL v2");
 MODULE_AUTHOR(DRIVER_AUTHOR);

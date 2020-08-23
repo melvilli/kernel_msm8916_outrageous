@@ -132,10 +132,16 @@ static int ds1390_probe(struct spi_device *spi)
 	spi_setup(spi);
 
 	chip = devm_kzalloc(&spi->dev, sizeof(*chip), GFP_KERNEL);
+<<<<<<< HEAD
 	if (!chip) {
 		dev_err(&spi->dev, "unable to allocate device memory\n");
 		return -ENOMEM;
 	}
+=======
+	if (!chip)
+		return -ENOMEM;
+
+>>>>>>> v3.18
 	spi_set_drvdata(spi, chip);
 
 	res = ds1390_get_reg(&spi->dev, DS1390_REG_SECONDS, &tmp);
@@ -154,18 +160,24 @@ static int ds1390_probe(struct spi_device *spi)
 	return res;
 }
 
+<<<<<<< HEAD
 static int ds1390_remove(struct spi_device *spi)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 static struct spi_driver ds1390_driver = {
 	.driver = {
 		.name	= "rtc-ds1390",
 		.owner	= THIS_MODULE,
 	},
 	.probe	= ds1390_probe,
+<<<<<<< HEAD
 	.remove = ds1390_remove,
+=======
+>>>>>>> v3.18
 };
 
 module_spi_driver(ds1390_driver);

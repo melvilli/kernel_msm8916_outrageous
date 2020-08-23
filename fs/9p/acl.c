@@ -156,7 +156,11 @@ int v9fs_acl_chmod(struct inode *inode, struct p9_fid *fid)
 		return -EOPNOTSUPP;
 	acl = v9fs_get_cached_acl(inode, ACL_TYPE_ACCESS);
 	if (acl) {
+<<<<<<< HEAD
 		retval = posix_acl_chmod(&acl, GFP_KERNEL, inode->i_mode);
+=======
+		retval = __posix_acl_chmod(&acl, GFP_KERNEL, inode->i_mode);
+>>>>>>> v3.18
 		if (retval)
 			return retval;
 		set_cached_acl(inode, ACL_TYPE_ACCESS, acl);
@@ -200,7 +204,11 @@ int v9fs_acl_mode(struct inode *dir, umode_t *modep,
 	if (acl) {
 		if (S_ISDIR(mode))
 			*dpacl = posix_acl_dup(acl);
+<<<<<<< HEAD
 		retval = posix_acl_create(&acl, GFP_NOFS, &mode);
+=======
+		retval = __posix_acl_create(&acl, GFP_NOFS, &mode);
+>>>>>>> v3.18
 		if (retval < 0)
 			return retval;
 		if (retval > 0)
@@ -320,6 +328,7 @@ static int v9fs_xattr_set_acl(struct dentry *dentry, const char *name,
 	case ACL_TYPE_ACCESS:
 		name = POSIX_ACL_XATTR_ACCESS;
 		if (acl) {
+<<<<<<< HEAD
 			struct iattr iattr;
 			struct posix_acl *old_acl = acl;
 
@@ -343,6 +352,34 @@ static int v9fs_xattr_set_acl(struct dentry *dentry, const char *name,
 			 * mode ?
 			 */
 			v9fs_vfs_setattr_dotl(dentry, &iattr);
+=======
+			umode_t mode = inode->i_mode;
+			retval = posix_acl_equiv_mode(acl, &mode);
+			if (retval < 0)
+				goto err_out;
+			else {
+				struct iattr iattr;
+				if (retval == 0) {
+					/*
+					 * ACL can be represented
+					 * by the mode bits. So don't
+					 * update ACL.
+					 */
+					acl = NULL;
+					value = NULL;
+					size = 0;
+				}
+				/* Updte the mode bits */
+				iattr.ia_mode = ((mode & S_IALLUGO) |
+						 (inode->i_mode & ~S_IALLUGO));
+				iattr.ia_valid = ATTR_MODE;
+				/* FIXME should we update ctime ?
+				 * What is the following setxattr update the
+				 * mode ?
+				 */
+				v9fs_vfs_setattr_dotl(dentry, &iattr);
+			}
+>>>>>>> v3.18
 		}
 		break;
 	case ACL_TYPE_DEFAULT:

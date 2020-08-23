@@ -50,7 +50,11 @@ int cfg80211_wext_siwgenie(struct net_device *dev,
 			   struct iw_point *data, char *extra);
 
 
+<<<<<<< HEAD
 int cfg80211_wext_freq(struct wiphy *wiphy, struct iw_freq *freq);
+=======
+int cfg80211_wext_freq(struct iw_freq *freq);
+>>>>>>> v3.18
 
 
 extern const struct iw_handler_def cfg80211_wext_handler;

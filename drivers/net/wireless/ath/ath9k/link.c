@@ -28,6 +28,16 @@ void ath_tx_complete_poll_work(struct work_struct *work)
 	int i;
 	bool needreset = false;
 
+<<<<<<< HEAD
+=======
+
+	if (sc->tx99_state) {
+		ath_dbg(ath9k_hw_common(sc->sc_ah), RESET,
+			"skip tx hung detection on tx99\n");
+		return;
+	}
+
+>>>>>>> v3.18
 	for (i = 0; i < IEEE80211_NUM_ACS; i++) {
 		txq = sc->tx.txq_map[i];
 
@@ -41,7 +51,11 @@ void ath_tx_complete_poll_work(struct work_struct *work)
 				txq->axq_tx_inprogress = true;
 			}
 		}
+<<<<<<< HEAD
 		ath_txq_unlock_complete(sc, txq);
+=======
+		ath_txq_unlock(sc, txq);
+>>>>>>> v3.18
 	}
 
 	if (needreset) {
@@ -58,6 +72,7 @@ void ath_tx_complete_poll_work(struct work_struct *work)
 /*
  * Checks if the BB/MAC is hung.
  */
+<<<<<<< HEAD
 void ath_hw_check(struct work_struct *work)
 {
 	struct ath_softc *sc = container_of(work, struct ath_softc, hw_check_work);
@@ -102,6 +117,28 @@ sched_reset:
 	ath9k_queue_reset(sc, type);
 out:
 	ath9k_ps_restore(sc);
+=======
+bool ath_hw_check(struct ath_softc *sc)
+{
+	struct ath_common *common = ath9k_hw_common(sc->sc_ah);
+	enum ath_reset_type type;
+	bool is_alive;
+
+	ath9k_ps_wakeup(sc);
+
+	is_alive = ath9k_hw_check_alive(sc->sc_ah);
+
+	if (!is_alive) {
+		ath_dbg(common, RESET,
+			"HW hang detected, schedule chip reset\n");
+		type = RESET_TYPE_MAC_HANG;
+		ath9k_queue_reset(sc, type);
+	}
+
+	ath9k_ps_restore(sc);
+
+	return is_alive;
+>>>>>>> v3.18
 }
 
 /*
@@ -132,13 +169,24 @@ void ath_hw_pll_work(struct work_struct *work)
 	u32 pll_sqsum;
 	struct ath_softc *sc = container_of(work, struct ath_softc,
 					    hw_pll_work.work);
+<<<<<<< HEAD
+=======
+	struct ath_common *common = ath9k_hw_common(sc->sc_ah);
+>>>>>>> v3.18
 	/*
 	 * ensure that the PLL WAR is executed only
 	 * after the STA is associated (or) if the
 	 * beaconing had started in interfaces that
 	 * uses beacons.
 	 */
+<<<<<<< HEAD
 	if (!test_bit(SC_OP_BEACONS, &sc->sc_flags))
+=======
+	if (!test_bit(ATH_OP_BEACONS, &common->op_flags))
+		return;
+
+	if (sc->tx99_state)
+>>>>>>> v3.18
 		return;
 
 	ath9k_ps_wakeup(sc);
@@ -152,6 +200,7 @@ void ath_hw_pll_work(struct work_struct *work)
 }
 
 /*
+<<<<<<< HEAD
  * RX Polling - monitors baseband hangs.
  */
 void ath_start_rx_poll(struct ath_softc *sc, u8 nbeacon)
@@ -175,6 +224,8 @@ void ath_rx_poll(unsigned long data)
 }
 
 /*
+=======
+>>>>>>> v3.18
  * PA Pre-distortion.
  */
 static void ath_paprd_activate(struct ath_softc *sc)
@@ -184,7 +235,11 @@ static void ath_paprd_activate(struct ath_softc *sc)
 	struct ath9k_hw_cal_data *caldata = ah->caldata;
 	int chain;
 
+<<<<<<< HEAD
 	if (!caldata || !caldata->paprd_done) {
+=======
+	if (!caldata || !test_bit(PAPRD_DONE, &caldata->cal_flags)) {
+>>>>>>> v3.18
 		ath_dbg(common, CALIBRATE, "Failed to activate PAPRD\n");
 		return;
 	}
@@ -214,7 +269,11 @@ static bool ath_paprd_send_frame(struct ath_softc *sc, struct sk_buff *skb, int 
 	txctl.txq = sc->tx.txq_map[IEEE80211_AC_BE];
 
 	memset(tx_info, 0, sizeof(*tx_info));
+<<<<<<< HEAD
 	tx_info->band = hw->conf.chandef.chan->band;
+=======
+	tx_info->band = sc->cur_chandef.chan->band;
+>>>>>>> v3.18
 	tx_info->flags |= IEEE80211_TX_CTL_NO_ACK;
 	tx_info->control.rates[0].idx = 0;
 	tx_info->control.rates[0].count = 1;
@@ -256,7 +315,13 @@ void ath_paprd_calibrate(struct work_struct *work)
 	int len = 1800;
 	int ret;
 
+<<<<<<< HEAD
 	if (!caldata || !caldata->paprd_packet_sent || caldata->paprd_done) {
+=======
+	if (!caldata ||
+	    !test_bit(PAPRD_PACKET_SENT, &caldata->cal_flags) ||
+	    test_bit(PAPRD_DONE, &caldata->cal_flags)) {
+>>>>>>> v3.18
 		ath_dbg(common, CALIBRATE, "Skipping PAPRD calibration\n");
 		return;
 	}
@@ -316,7 +381,11 @@ void ath_paprd_calibrate(struct work_struct *work)
 	kfree_skb(skb);
 
 	if (chain_ok) {
+<<<<<<< HEAD
 		caldata->paprd_done = true;
+=======
+		set_bit(PAPRD_DONE, &caldata->cal_flags);
+>>>>>>> v3.18
 		ath_paprd_activate(sc);
 	}
 
@@ -343,7 +412,11 @@ void ath_ani_calibrate(unsigned long data)
 	u32 cal_interval, short_cal_interval, long_cal_interval;
 	unsigned long flags;
 
+<<<<<<< HEAD
 	if (ah->caldata && ah->caldata->nfcal_interference)
+=======
+	if (ah->caldata && test_bit(NFCAL_INTF, &ah->caldata->cal_flags))
+>>>>>>> v3.18
 		long_cal_interval = ATH_LONG_CALINTERVAL_INT;
 	else
 		long_cal_interval = ATH_LONG_CALINTERVAL;
@@ -390,19 +463,30 @@ void ath_ani_calibrate(unsigned long data)
 	}
 
 	/* Verify whether we must check ANI */
+<<<<<<< HEAD
 	if (sc->sc_ah->config.enable_ani
 	    && (timestamp - common->ani.checkani_timer) >=
 	    ah->config.ani_poll_interval) {
+=======
+	if ((timestamp - common->ani.checkani_timer) >= ah->config.ani_poll_interval) {
+>>>>>>> v3.18
 		aniflag = true;
 		common->ani.checkani_timer = timestamp;
 	}
 
 	/* Call ANI routine if necessary */
 	if (aniflag) {
+<<<<<<< HEAD
 		spin_lock_irqsave(&common->cc_lock, flags);
 		ath9k_hw_ani_monitor(ah, ah->curchan);
 		ath_update_survey_stats(sc);
 		spin_unlock_irqrestore(&common->cc_lock, flags);
+=======
+		spin_lock(&common->cc_lock);
+		ath9k_hw_ani_monitor(ah, ah->curchan);
+		ath_update_survey_stats(sc);
+		spin_unlock(&common->cc_lock);
+>>>>>>> v3.18
 	}
 
 	/* Perform calibration if necessary */
@@ -418,7 +502,10 @@ void ath_ani_calibrate(unsigned long data)
 		longcal ? "long" : "", shortcal ? "short" : "",
 		aniflag ? "ani" : "", common->ani.caldone ? "true" : "false");
 
+<<<<<<< HEAD
 	ath9k_debug_samp_bb_mac(sc);
+=======
+>>>>>>> v3.18
 	ath9k_ps_restore(sc);
 
 set_timer:
@@ -428,16 +515,24 @@ set_timer:
 	* short calibration and long calibration.
 	*/
 	cal_interval = ATH_LONG_CALINTERVAL;
+<<<<<<< HEAD
 	if (sc->sc_ah->config.enable_ani)
 		cal_interval = min(cal_interval,
 				   (u32)ah->config.ani_poll_interval);
+=======
+	cal_interval = min(cal_interval, (u32)ah->config.ani_poll_interval);
+>>>>>>> v3.18
 	if (!common->ani.caldone)
 		cal_interval = min(cal_interval, (u32)short_cal_interval);
 
 	mod_timer(&common->ani.timer, jiffies + msecs_to_jiffies(cal_interval));
 
 	if (ar9003_is_paprd_enabled(ah) && ah->caldata) {
+<<<<<<< HEAD
 		if (!ah->caldata->paprd_done) {
+=======
+		if (!test_bit(PAPRD_DONE, &ah->caldata->cal_flags)) {
+>>>>>>> v3.18
 			ieee80211_queue_work(sc->hw, &sc->paprd_work);
 		} else if (!ah->paprd_table_write_done) {
 			ath9k_ps_wakeup(sc);
@@ -454,8 +549,13 @@ void ath_start_ani(struct ath_softc *sc)
 	unsigned long timestamp = jiffies_to_msecs(jiffies);
 
 	if (common->disable_ani ||
+<<<<<<< HEAD
 	    !test_bit(SC_OP_ANI_RUN, &sc->sc_flags) ||
 	    (sc->hw->conf.flags & IEEE80211_CONF_OFFCHANNEL))
+=======
+	    !test_bit(ATH_OP_ANI_RUN, &common->op_flags) ||
+	    sc->cur_chan->offchannel)
+>>>>>>> v3.18
 		return;
 
 	common->ani.longcal_timer = timestamp;
@@ -478,7 +578,12 @@ void ath_stop_ani(struct ath_softc *sc)
 void ath_check_ani(struct ath_softc *sc)
 {
 	struct ath_hw *ah = sc->sc_ah;
+<<<<<<< HEAD
 	struct ath_beacon_config *cur_conf = &sc->cur_beacon_conf;
+=======
+	struct ath_common *common = ath9k_hw_common(sc->sc_ah);
+	struct ath_beacon_config *cur_conf = &sc->cur_chan->beacon;
+>>>>>>> v3.18
 
 	/*
 	 * Check for the various conditions in which ANI has to
@@ -493,6 +598,7 @@ void ath_check_ani(struct ath_softc *sc)
 			 * Disable ANI only when there are no
 			 * associated stations.
 			 */
+<<<<<<< HEAD
 			if (!test_bit(SC_OP_PRIM_STA_VIF, &sc->sc_flags))
 				goto stop_ani;
 		}
@@ -503,13 +609,29 @@ void ath_check_ani(struct ath_softc *sc)
 
 	if (!test_bit(SC_OP_ANI_RUN, &sc->sc_flags)) {
 		set_bit(SC_OP_ANI_RUN, &sc->sc_flags);
+=======
+			if (!test_bit(ATH_OP_PRIM_STA_VIF, &common->op_flags))
+				goto stop_ani;
+		}
+	} else if (ah->opmode == NL80211_IFTYPE_STATION) {
+		if (!test_bit(ATH_OP_PRIM_STA_VIF, &common->op_flags))
+			goto stop_ani;
+	}
+
+	if (!test_bit(ATH_OP_ANI_RUN, &common->op_flags)) {
+		set_bit(ATH_OP_ANI_RUN, &common->op_flags);
+>>>>>>> v3.18
 		ath_start_ani(sc);
 	}
 
 	return;
 
 stop_ani:
+<<<<<<< HEAD
 	clear_bit(SC_OP_ANI_RUN, &sc->sc_flags);
+=======
+	clear_bit(ATH_OP_ANI_RUN, &common->op_flags);
+>>>>>>> v3.18
 	ath_stop_ani(sc);
 }
 
@@ -521,7 +643,12 @@ void ath_update_survey_nf(struct ath_softc *sc, int channel)
 
 	if (chan->noisefloor) {
 		survey->filled |= SURVEY_INFO_NOISE_DBM;
+<<<<<<< HEAD
 		survey->noise = ath9k_hw_getchan_noise(ah, chan);
+=======
+		survey->noise = ath9k_hw_getchan_noise(ah, chan,
+						       chan->noisefloor);
+>>>>>>> v3.18
 	}
 }
 

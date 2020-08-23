@@ -15,7 +15,10 @@
 
 #include "security.h"
 #include "conditional.h"
+<<<<<<< HEAD
 #include "services.h"
+=======
+>>>>>>> v3.18
 
 /*
  * cond_evaluate_expr evaluates a conditional expr
@@ -403,6 +406,7 @@ static int cond_read_node(struct policydb *p, struct cond_node *node, void *fp)
 	int rc;
 	struct cond_expr *expr = NULL, *last = NULL;
 
+<<<<<<< HEAD
 	rc = next_entry(buf, fp, sizeof(u32));
 	if (rc)
 		return rc;
@@ -416,6 +420,16 @@ static int cond_read_node(struct policydb *p, struct cond_node *node, void *fp)
 
 	/* expr */
 	len = le32_to_cpu(buf[0]);
+=======
+	rc = next_entry(buf, fp, sizeof(u32) * 2);
+	if (rc)
+		goto err;
+
+	node->cur_state = le32_to_cpu(buf[0]);
+
+	/* expr */
+	len = le32_to_cpu(buf[1]);
+>>>>>>> v3.18
 
 	for (i = 0; i < len; i++) {
 		rc = next_entry(buf, fp, sizeof(u32) * 2);
@@ -618,6 +632,7 @@ int cond_write_list(struct policydb *p, struct cond_node *list, void *fp)
 
 	return 0;
 }
+<<<<<<< HEAD
 
 void cond_compute_xperms(struct avtab *ctab, struct avtab_key *key,
 		struct extended_perms_decision *xpermd)
@@ -640,6 +655,12 @@ void cond_compute_xperms(struct avtab *ctab, struct avtab_key *key,
  */
 void cond_compute_av(struct avtab *ctab, struct avtab_key *key,
 		struct av_decision *avd, struct extended_perms *xperms)
+=======
+/* Determine whether additional permissions are granted by the conditional
+ * av table, and if so, add them to the result
+ */
+void cond_compute_av(struct avtab *ctab, struct avtab_key *key, struct av_decision *avd)
+>>>>>>> v3.18
 {
 	struct avtab_node *node;
 
@@ -650,7 +671,11 @@ void cond_compute_av(struct avtab *ctab, struct avtab_key *key,
 				node = avtab_search_node_next(node, key->specified)) {
 		if ((u16)(AVTAB_ALLOWED|AVTAB_ENABLED) ==
 		    (node->key.specified & (AVTAB_ALLOWED|AVTAB_ENABLED)))
+<<<<<<< HEAD
 			avd->allowed |= node->datum.u.data;
+=======
+			avd->allowed |= node->datum.data;
+>>>>>>> v3.18
 		if ((u16)(AVTAB_AUDITDENY|AVTAB_ENABLED) ==
 		    (node->key.specified & (AVTAB_AUDITDENY|AVTAB_ENABLED)))
 			/* Since a '0' in an auditdeny mask represents a
@@ -658,6 +683,7 @@ void cond_compute_av(struct avtab *ctab, struct avtab_key *key,
 			 * the '&' operand to ensure that all '0's in the mask
 			 * are retained (much unlike the allow and auditallow cases).
 			 */
+<<<<<<< HEAD
 			avd->auditdeny &= node->datum.u.data;
 		if ((u16)(AVTAB_AUDITALLOW|AVTAB_ENABLED) ==
 		    (node->key.specified & (AVTAB_AUDITALLOW|AVTAB_ENABLED)))
@@ -665,6 +691,12 @@ void cond_compute_av(struct avtab *ctab, struct avtab_key *key,
 		if (xperms && (node->key.specified & AVTAB_ENABLED) &&
 				(node->key.specified & AVTAB_XPERMS))
 			services_compute_xperms_drivers(xperms, node);
+=======
+			avd->auditdeny &= node->datum.data;
+		if ((u16)(AVTAB_AUDITALLOW|AVTAB_ENABLED) ==
+		    (node->key.specified & (AVTAB_AUDITALLOW|AVTAB_ENABLED)))
+			avd->auditallow |= node->datum.data;
+>>>>>>> v3.18
 	}
 	return;
 }

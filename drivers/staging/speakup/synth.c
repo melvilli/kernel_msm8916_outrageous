@@ -25,6 +25,21 @@ static int module_status;
 bool spk_quiet_boot;
 
 struct speakup_info_t speakup_info = {
+<<<<<<< HEAD
+=======
+	/*
+	 * This spinlock is used to protect the entire speakup machinery, and
+	 * must be taken at each kernel->speakup transition and released at
+	 * each corresponding speakup->kernel transition.
+	 *
+	 * The progression thread only interferes with the speakup machinery through
+	 * the synth buffer, so only needs to take the lock while tinkering with
+	 * the buffer.
+	 *
+	 * We use spin_lock/trylock_irqsave and spin_unlock_irqrestore with this
+	 * spinlock because speakup needs to disable the keyboard IRQ.
+	 */
+>>>>>>> v3.18
 	.spinlock = __SPIN_LOCK_UNLOCKED(speakup_info.spinlock),
 	.flushing = 0,
 };
@@ -83,6 +98,7 @@ void spk_do_catch_up(struct spk_synth *synth)
 	full_time = spk_get_var(FULL);
 	delay_time = spk_get_var(DELAY);
 
+<<<<<<< HEAD
 	spk_lock(flags);
 	jiffy_delta_val = jiffy_delta->u.n.value;
 	spk_unlock(flags);
@@ -93,29 +109,58 @@ void spk_do_catch_up(struct spk_synth *synth)
 		if (speakup_info.flushing) {
 			speakup_info.flushing = 0;
 			spk_unlock(flags);
+=======
+	spin_lock_irqsave(&speakup_info.spinlock, flags);
+	jiffy_delta_val = jiffy_delta->u.n.value;
+	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+
+	jiff_max = jiffies + jiffy_delta_val;
+	while (!kthread_should_stop()) {
+		spin_lock_irqsave(&speakup_info.spinlock, flags);
+		if (speakup_info.flushing) {
+			speakup_info.flushing = 0;
+			spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 			synth->flush(synth);
 			continue;
 		}
 		if (synth_buffer_empty()) {
+<<<<<<< HEAD
 			spk_unlock(flags);
+=======
+			spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 			break;
 		}
 		ch = synth_buffer_peek();
 		set_current_state(TASK_INTERRUPTIBLE);
 		full_time_val = full_time->u.n.value;
+<<<<<<< HEAD
 		spk_unlock(flags);
+=======
+		spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 		if (ch == '\n')
 			ch = synth->procspeech;
 		if (!spk_serial_out(ch)) {
 			schedule_timeout(msecs_to_jiffies(full_time_val));
 			continue;
 		}
+<<<<<<< HEAD
 		if ((jiffies >= jiff_max) && (ch == SPACE)) {
 			spk_lock(flags);
 			jiffy_delta_val = jiffy_delta->u.n.value;
 			delay_time_val = delay_time->u.n.value;
 			full_time_val = full_time->u.n.value;
 			spk_unlock(flags);
+=======
+		if (time_after_eq(jiffies, jiff_max) && (ch == SPACE)) {
+			spin_lock_irqsave(&speakup_info.spinlock, flags);
+			jiffy_delta_val = jiffy_delta->u.n.value;
+			delay_time_val = delay_time->u.n.value;
+			full_time_val = full_time->u.n.value;
+			spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 			if (spk_serial_out(synth->procspeech))
 				schedule_timeout(
 					msecs_to_jiffies(delay_time_val));
@@ -125,9 +170,15 @@ void spk_do_catch_up(struct spk_synth *synth)
 			jiff_max = jiffies + jiffy_delta_val;
 		}
 		set_current_state(TASK_RUNNING);
+<<<<<<< HEAD
 		spk_lock(flags);
 		synth_buffer_getc();
 		spk_unlock(flags);
+=======
+		spin_lock_irqsave(&speakup_info.spinlock, flags);
+		synth_buffer_getc();
+		spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 	}
 	spk_serial_out(synth->procspeech);
 }
@@ -136,6 +187,10 @@ EXPORT_SYMBOL_GPL(spk_do_catch_up);
 const char *spk_synth_immediate(struct spk_synth *synth, const char *buff)
 {
 	u_char ch;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	while ((ch = *buff)) {
 		if (ch == '\n')
 			ch = synth->procspeech;
@@ -145,7 +200,11 @@ const char *spk_synth_immediate(struct spk_synth *synth, const char *buff)
 			return buff;
 		buff++;
 	}
+<<<<<<< HEAD
 	return 0;
+=======
+	return NULL;
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(spk_synth_immediate);
 
@@ -200,6 +259,12 @@ void synth_start(void)
 
 void spk_do_flush(void)
 {
+<<<<<<< HEAD
+=======
+	if (!synth)
+		return;
+
+>>>>>>> v3.18
 	speakup_info.flushing = 1;
 	synth_buffer_clear();
 	if (synth->alive) {
@@ -244,6 +309,10 @@ static int sentence_count;
 void spk_reset_index_count(int sc)
 {
 	static int first = 1;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	if (first)
 		first = 0;
 	else
@@ -262,6 +331,10 @@ int synth_supports_indexing(void)
 void synth_insert_next_index(int sent_num)
 {
 	int out;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	if (synth->alive) {
 		if (sent_num == 0) {
 			synth->indexing.currindex++;
@@ -280,6 +353,10 @@ void synth_insert_next_index(int sent_num)
 void spk_get_index_count(int *linecount, int *sentcount)
 {
 	int ind = synth->get_index();
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	if (ind) {
 		sentence_count = ind % 10;
 
@@ -300,6 +377,10 @@ static struct resource synth_res;
 int synth_request_region(unsigned long start, unsigned long n)
 {
 	struct resource *parent = &ioport_resource;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	memset(&synth_res, 0, sizeof(synth_res));
 	synth_res.name = synth->name;
 	synth_res.start = start;
@@ -403,11 +484,19 @@ void synth_release(void)
 
 	if (synth == NULL)
 		return;
+<<<<<<< HEAD
 	spk_lock(flags);
 	pr_info("releasing synth %s\n", synth->name);
 	synth->alive = 0;
 	del_timer(&thread_timer);
 	spk_unlock(flags);
+=======
+	spin_lock_irqsave(&speakup_info.spinlock, flags);
+	pr_info("releasing synth %s\n", synth->name);
+	synth->alive = 0;
+	del_timer(&thread_timer);
+	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 	if (synth->attributes.name)
 		sysfs_remove_group(speakup_kobj, &(synth->attributes));
 	for (var = synth->vars; var->var_id != MAXVARS; var++)
@@ -422,6 +511,10 @@ int synth_add(struct spk_synth *in_synth)
 {
 	int i;
 	int status = 0;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	mutex_lock(&spk_mutex);
 	for (i = 0; i < MAXSYNTHS && synths[i] != NULL; i++)
 		/* synth_remove() is responsible for rotating the array down */
@@ -446,6 +539,10 @@ EXPORT_SYMBOL_GPL(synth_add);
 void synth_remove(struct spk_synth *in_synth)
 {
 	int i;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	mutex_lock(&spk_mutex);
 	if (synth == in_synth)
 		synth_release();

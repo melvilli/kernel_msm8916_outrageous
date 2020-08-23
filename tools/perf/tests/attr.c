@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 /*
  * The struct perf_event_attr test support.
  *
@@ -19,6 +22,7 @@
  * permissions. All the event text files are stored there.
  */
 
+<<<<<<< HEAD
 /*
  * Powerpc needs __SANE_USERSPACE_TYPES__ before <linux/types.h> to select
  * 'int-ll64.h' and avoid compile warnings when printing __u64 with %llu.
@@ -27,6 +31,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <inttypes.h>
+=======
+#include <stdlib.h>
+#include <stdio.h>
+>>>>>>> v3.18
 #include <linux/types.h>
 #include <linux/kernel.h>
 #include "../perf.h"

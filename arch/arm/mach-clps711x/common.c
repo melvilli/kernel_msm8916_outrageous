@@ -19,6 +19,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+<<<<<<< HEAD
 #include <linux/io.h>
 #include <linux/init.h>
 #include <linux/sizes.h>
@@ -33,12 +34,23 @@
 #include <asm/mach/irq.h>
 #include <asm/mach/map.h>
 #include <asm/mach/time.h>
+=======
+
+#include <linux/init.h>
+#include <linux/sizes.h>
+
+#include <asm/mach/map.h>
+>>>>>>> v3.18
 #include <asm/system_misc.h>
 
 #include <mach/hardware.h>
 
+<<<<<<< HEAD
 static struct clk *clk_pll, *clk_bus, *clk_uart, *clk_timerl, *clk_timerh,
 		  *clk_tint, *clk_spi;
+=======
+#include "common.h"
+>>>>>>> v3.18
 
 /*
  * This maps the generic CLPS711x registers
@@ -57,6 +69,7 @@ void __init clps711x_map_io(void)
 	iotable_init(clps711x_io_desc, ARRAY_SIZE(clps711x_io_desc));
 }
 
+<<<<<<< HEAD
 static void int1_mask(struct irq_data *d)
 {
 	u32 intmr1;
@@ -280,10 +293,16 @@ static void add_fixed_clk(struct clk *clk, const char *name, int rate)
 {
 	clk = clk_register_fixed_rate(NULL, name, NULL, CLK_IS_ROOT, rate);
 	clk_register_clkdev(clk, name, NULL);
+=======
+void __init clps711x_init_irq(void)
+{
+	clps711x_intc_init(CLPS711X_PHYS_BASE, SZ_16K);
+>>>>>>> v3.18
 }
 
 void __init clps711x_timer_init(void)
 {
+<<<<<<< HEAD
 	int osc, ext, pll, cpu, bus, timl, timh, uart, spi;
 	u32 tmp;
 
@@ -343,12 +362,18 @@ void __init clps711x_timer_init(void)
 	clockevents_config_and_register(&clockevent_clps711x, timh, 1, 0xffff);
 
 	setup_irq(IRQ_TC2OI, &clps711x_timer_irq);
+=======
+	clps711x_clk_init(CLPS711X_VIRT_BASE);
+	clps711x_clksrc_init(CLPS711X_VIRT_BASE + TC1D,
+			     CLPS711X_VIRT_BASE + TC2D, IRQ_TC2OI);
+>>>>>>> v3.18
 }
 
 void clps711x_restart(enum reboot_mode mode, const char *cmd)
 {
 	soft_restart(0);
 }
+<<<<<<< HEAD
 
 static void clps711x_idle(void)
 {
@@ -365,3 +390,5 @@ static int __init clps711x_idle_init(void)
 }
 
 arch_initcall(clps711x_idle_init);
+=======
+>>>>>>> v3.18

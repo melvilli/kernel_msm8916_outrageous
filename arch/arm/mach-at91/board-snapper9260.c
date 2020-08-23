@@ -26,7 +26,11 @@
 #include <linux/gpio.h>
 #include <linux/platform_device.h>
 #include <linux/spi/spi.h>
+<<<<<<< HEAD
 #include <linux/i2c/pca953x.h>
+=======
+#include <linux/platform_data/pca953x.h>
+>>>>>>> v3.18
 
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
@@ -38,6 +42,10 @@
 #include "board.h"
 #include "sam9_smc.h"
 #include "generic.h"
+<<<<<<< HEAD
+=======
+#include "gpio.h"
+>>>>>>> v3.18
 
 #define SNAPPER9260_IO_EXP_GPIO(x)	(NR_BUILTIN_GPIO + (x))
 
@@ -153,6 +161,11 @@ static void __init snapper9260_add_device_nand(void)
 
 static void __init snapper9260_board_init(void)
 {
+<<<<<<< HEAD
+=======
+	at91_register_devices();
+
+>>>>>>> v3.18
 	at91_add_device_i2c(snapper9260_i2c_devices,
 			    ARRAY_SIZE(snapper9260_i2c_devices));
 
@@ -177,7 +190,11 @@ static void __init snapper9260_board_init(void)
 }
 
 MACHINE_START(SNAPPER_9260, "Bluewater Systems Snapper 9260/9G20 module")
+<<<<<<< HEAD
 	.init_time	= at91sam926x_pit_init,
+=======
+	.init_time	= at91_init_time,
+>>>>>>> v3.18
 	.map_io		= at91_map_io,
 	.handle_irq	= at91_aic_handle_irq,
 	.init_early	= snapper9260_init_early,

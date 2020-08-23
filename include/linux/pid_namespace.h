@@ -23,6 +23,10 @@ struct bsd_acct_struct;
 struct pid_namespace {
 	struct kref kref;
 	struct pidmap pidmap[PIDMAP_ENTRIES];
+<<<<<<< HEAD
+=======
+	struct rcu_head rcu;
+>>>>>>> v3.18
 	int last_pid;
 	unsigned int nr_hashed;
 	struct task_struct *child_reaper;
@@ -32,6 +36,10 @@ struct pid_namespace {
 #ifdef CONFIG_PROC_FS
 	struct vfsmount *proc_mnt;
 	struct dentry *proc_self;
+<<<<<<< HEAD
+=======
+	struct dentry *proc_thread_self;
+>>>>>>> v3.18
 #endif
 #ifdef CONFIG_BSD_PROCESS_ACCT
 	struct bsd_acct_struct *bacct;

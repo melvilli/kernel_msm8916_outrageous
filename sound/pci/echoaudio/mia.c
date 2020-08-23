@@ -77,7 +77,11 @@ static const struct firmware card_fw[] = {
 	{0, "mia_dsp.fw"}
 };
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(snd_echo_ids) = {
+=======
+static const struct pci_device_id snd_echo_ids[] = {
+>>>>>>> v3.18
 	{0x1057, 0x3410, 0xECC0, 0x0080, 0, 0, 0},	/* DSP 56361 Mia rev.0 */
 	{0x1057, 0x3410, 0xECC0, 0x0081, 0, 0, 0},	/* DSP 56361 Mia rev.1 */
 	{0,}

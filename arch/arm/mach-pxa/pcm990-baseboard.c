@@ -153,6 +153,10 @@ static struct platform_pwm_backlight_data pcm990_backlight_data = {
 	.max_brightness	= 1023,
 	.dft_brightness	= 1023,
 	.pwm_period_ns	= 78770,
+<<<<<<< HEAD
+=======
+	.enable_gpio	= -1,
+>>>>>>> v3.18
 };
 
 static struct platform_device pcm990_backlight_device = {
@@ -326,7 +330,11 @@ static int pcm990_mci_init(struct device *dev, irq_handler_t mci_detect_int,
 {
 	int err;
 
+<<<<<<< HEAD
 	err = request_irq(PCM027_MMCDET_IRQ, mci_detect_int, IRQF_DISABLED,
+=======
+	err = request_irq(PCM027_MMCDET_IRQ, mci_detect_int, 0,
+>>>>>>> v3.18
 			     "MMC card detect", data);
 	if (err)
 		printk(KERN_ERR "pcm990_mci_init: MMC/SD: can't request MMC "
@@ -335,7 +343,11 @@ static int pcm990_mci_init(struct device *dev, irq_handler_t mci_detect_int,
 	return err;
 }
 
+<<<<<<< HEAD
 static void pcm990_mci_setpower(struct device *dev, unsigned int vdd)
+=======
+static int pcm990_mci_setpower(struct device *dev, unsigned int vdd)
+>>>>>>> v3.18
 {
 	struct pxamci_platform_data *p_d = dev->platform_data;
 	u8 val;
@@ -348,6 +360,10 @@ static void pcm990_mci_setpower(struct device *dev, unsigned int vdd)
 		val &= ~PCM990_CTRL_MMC2PWR;
 
 	pcm990_cpld_writeb(PCM990_CTRL_MMC2PWR, PCM990_CTRL_REG5);
+<<<<<<< HEAD
+=======
+	return 0;
+>>>>>>> v3.18
 }
 
 static void pcm990_mci_exit(struct device *dev, void *data)
@@ -407,7 +423,11 @@ struct pxacamera_platform_data pcm990_pxacamera_platform_data = {
 	.mclk_10khz = 1000,
 };
 
+<<<<<<< HEAD
 #include <linux/i2c/pca953x.h>
+=======
+#include <linux/platform_data/pca953x.h>
+>>>>>>> v3.18
 
 static struct pca953x_platform_data pca9536_data = {
 	.gpio_base	= PXA_NR_BUILTIN_GPIO,

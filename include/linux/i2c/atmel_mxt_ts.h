@@ -3,7 +3,10 @@
  *
  * Copyright (C) 2010 Samsung Electronics Co.Ltd
  * Author: Joonyoung Shim <jy0922.shim@samsung.com>
+<<<<<<< HEAD
  * Copyright (c) 2011-2014, The Linux Foundation. All rights reserved.
+=======
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute  it and/or modify it
  * under  the terms of  the GNU General  Public License as published by the
@@ -16,6 +19,7 @@
 
 #include <linux/types.h>
 
+<<<<<<< HEAD
 /* For key_map array */
 #define MXT_NUM_GPIO		4
 
@@ -97,6 +101,13 @@ struct mxt_platform_data {
 	u8(*read_chg) (void);
 	int (*init_hw) (bool);
 	int (*power_on) (bool);
+=======
+/* The platform data for the Atmel maXTouch touchscreen driver */
+struct mxt_platform_data {
+	unsigned long irqflags;
+	u8 t19_num_keys;
+	const unsigned int *t19_keymap;
+>>>>>>> v3.18
 };
 
 #endif /* __LINUX_ATMEL_MXT_TS_H */

@@ -1,6 +1,10 @@
 
 /*******************************************************************
+<<<<<<< HEAD
 * 		Headers.h
+=======
+*		Headers.h
+>>>>>>> v3.18
 *******************************************************************/
 #ifndef __HEADERS_H__
 #define __HEADERS_H__
@@ -34,11 +38,18 @@
 #include <linux/tcp.h>
 #include <linux/udp.h>
 #include <linux/usb.h>
+<<<<<<< HEAD
 #include <asm/uaccess.h>
 #include <net/ip.h>
 
 #include "Typedefs.h"
 #include "Version.h"
+=======
+#include <linux/uaccess.h>
+#include <net/ip.h>
+
+#include "Typedefs.h"
+>>>>>>> v3.18
 #include "Macros.h"
 #include "HostMIBSInterface.h"
 #include "cntrl_SignalingInterface.h"
@@ -71,7 +82,11 @@
 #define DEV_NAME	"tarang"
 #define DRV_DESCRIPTION "Beceem Communications Inc. WiMAX driver"
 #define DRV_COPYRIGHT	"Copyright 2010. Beceem Communications Inc"
+<<<<<<< HEAD
 #define DRV_VERSION	VER_FILEVERSION_STR
+=======
+#define DRV_VERSION	"5.2.45"
+>>>>>>> v3.18
 #define PFX		DRV_NAME " "
 
 extern struct class *bcm_class;

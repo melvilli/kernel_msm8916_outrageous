@@ -188,8 +188,16 @@ static int bcma_host_pci_probe(struct pci_dev *dev,
 		pci_write_config_dword(dev, 0x40, val & 0xffff00ff);
 
 	/* SSB needed additional powering up, do we have any AMBA PCI cards? */
+<<<<<<< HEAD
 	if (!pci_is_pcie(dev))
 		bcma_err(bus, "PCI card detected, report problems.\n");
+=======
+	if (!pci_is_pcie(dev)) {
+		bcma_err(bus, "PCI card detected, they are not supported.\n");
+		err = -ENXIO;
+		goto err_pci_release_regions;
+	}
+>>>>>>> v3.18
 
 	/* Map MMIO */
 	err = -ENOMEM;
@@ -205,6 +213,12 @@ static int bcma_host_pci_probe(struct pci_dev *dev,
 	bus->boardinfo.vendor = bus->host_pci->subsystem_vendor;
 	bus->boardinfo.type = bus->host_pci->subsystem_device;
 
+<<<<<<< HEAD
+=======
+	/* Initialize struct, detect chip */
+	bcma_init_bus(bus);
+
+>>>>>>> v3.18
 	/* Register */
 	err = bcma_bus_register(bus);
 	if (err)
@@ -235,7 +249,10 @@ static void bcma_host_pci_remove(struct pci_dev *dev)
 	pci_release_regions(dev);
 	pci_disable_device(dev);
 	kfree(bus);
+<<<<<<< HEAD
 	pci_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_PM_SLEEP
@@ -267,15 +284,31 @@ static SIMPLE_DEV_PM_OPS(bcma_pm_ops, bcma_host_pci_suspend,
 
 #endif /* CONFIG_PM_SLEEP */
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(bcma_pci_bridge_tbl) = {
 	{ PCI_DEVICE(PCI_VENDOR_ID_BROADCOM, 0x0576) },
 	{ PCI_DEVICE(PCI_VENDOR_ID_BROADCOM, 43224) },
+=======
+static const struct pci_device_id bcma_pci_bridge_tbl[] = {
+	{ PCI_DEVICE(PCI_VENDOR_ID_BROADCOM, 0x0576) },
+	{ PCI_DEVICE(PCI_VENDOR_ID_BROADCOM, 0x4313) },
+	{ PCI_DEVICE(PCI_VENDOR_ID_BROADCOM, 43224) },	/* 0xa8d8 */
+>>>>>>> v3.18
 	{ PCI_DEVICE(PCI_VENDOR_ID_BROADCOM, 0x4331) },
 	{ PCI_DEVICE(PCI_VENDOR_ID_BROADCOM, 0x4353) },
 	{ PCI_DEVICE(PCI_VENDOR_ID_BROADCOM, 0x4357) },
 	{ PCI_DEVICE(PCI_VENDOR_ID_BROADCOM, 0x4358) },
 	{ PCI_DEVICE(PCI_VENDOR_ID_BROADCOM, 0x4359) },
+<<<<<<< HEAD
 	{ PCI_DEVICE(PCI_VENDOR_ID_BROADCOM, 0x4727) },
+=======
+	{ PCI_DEVICE(PCI_VENDOR_ID_BROADCOM, 0x4365) },
+	{ PCI_DEVICE(PCI_VENDOR_ID_BROADCOM, 0x43a9) },
+	{ PCI_DEVICE(PCI_VENDOR_ID_BROADCOM, 0x43aa) },
+	{ PCI_DEVICE(PCI_VENDOR_ID_BROADCOM, 0x4727) },
+	{ PCI_DEVICE(PCI_VENDOR_ID_BROADCOM, 43227) },	/* 0xa8db, BCM43217 (sic!) */
+	{ PCI_DEVICE(PCI_VENDOR_ID_BROADCOM, 43228) },	/* 0xa8dc */
+>>>>>>> v3.18
 	{ 0, },
 };
 MODULE_DEVICE_TABLE(pci, bcma_pci_bridge_tbl);

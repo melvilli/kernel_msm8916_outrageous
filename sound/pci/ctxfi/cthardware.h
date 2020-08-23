@@ -20,6 +20,10 @@
 
 #include <linux/types.h>
 #include <linux/pci.h>
+<<<<<<< HEAD
+=======
+#include <sound/core.h>
+>>>>>>> v3.18
 
 enum CHIPTYP {
 	ATC20K1,
@@ -184,9 +188,16 @@ struct hw {
 	void *irq_callback_data;
 
 	struct pci_dev *pci;	/* the pci kernel structure of this card */
+<<<<<<< HEAD
 	int irq;
 	unsigned long io_base;
 	unsigned long mem_base;
+=======
+	struct snd_card *card;	/* pointer to this card */
+	int irq;
+	unsigned long io_base;
+	void __iomem *mem_base;
+>>>>>>> v3.18
 
 	enum CHIPTYP chip_type;
 	enum CTCARDS model;

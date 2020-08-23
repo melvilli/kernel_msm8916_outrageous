@@ -16,12 +16,42 @@
 
 #include <asm/stacktrace.h>
 
+<<<<<<< HEAD
+=======
+static void *is_irq_stack(void *p, void *irq)
+{
+	if (p < irq || p >= (irq + THREAD_SIZE))
+		return NULL;
+	return irq + THREAD_SIZE;
+}
+
+
+static void *is_hardirq_stack(unsigned long *stack, int cpu)
+{
+	void *irq = per_cpu(hardirq_stack, cpu);
+
+	return is_irq_stack(stack, irq);
+}
+
+static void *is_softirq_stack(unsigned long *stack, int cpu)
+{
+	void *irq = per_cpu(softirq_stack, cpu);
+
+	return is_irq_stack(stack, irq);
+}
+>>>>>>> v3.18
 
 void dump_trace(struct task_struct *task, struct pt_regs *regs,
 		unsigned long *stack, unsigned long bp,
 		const struct stacktrace_ops *ops, void *data)
 {
+<<<<<<< HEAD
 	int graph = 0;
+=======
+	const unsigned cpu = get_cpu();
+	int graph = 0;
+	u32 *prev_esp;
+>>>>>>> v3.18
 
 	if (!task)
 		task = current;
@@ -30,7 +60,11 @@ void dump_trace(struct task_struct *task, struct pt_regs *regs,
 		unsigned long dummy;
 
 		stack = &dummy;
+<<<<<<< HEAD
 		if (task && task != current)
+=======
+		if (task != current)
+>>>>>>> v3.18
 			stack = (unsigned long *)task->thread.sp;
 	}
 
@@ -39,6 +73,7 @@ void dump_trace(struct task_struct *task, struct pt_regs *regs,
 
 	for (;;) {
 		struct thread_info *context;
+<<<<<<< HEAD
 
 		context = (struct thread_info *)
 			((unsigned long)stack & (~(THREAD_SIZE - 1)));
@@ -47,10 +82,36 @@ void dump_trace(struct task_struct *task, struct pt_regs *regs,
 		stack = (unsigned long *)context->previous_esp;
 		if (!stack)
 			break;
+=======
+		void *end_stack;
+
+		end_stack = is_hardirq_stack(stack, cpu);
+		if (!end_stack)
+			end_stack = is_softirq_stack(stack, cpu);
+
+		context = task_thread_info(task);
+		bp = ops->walk_stack(context, stack, bp, ops, data,
+				     end_stack, &graph);
+
+		/* Stop if not on irq stack */
+		if (!end_stack)
+			break;
+
+		/* The previous esp is saved on the bottom of the stack */
+		prev_esp = (u32 *)(end_stack - THREAD_SIZE);
+		stack = (unsigned long *)*prev_esp;
+		if (!stack)
+			break;
+
+>>>>>>> v3.18
 		if (ops->stack(data, "IRQ") < 0)
 			break;
 		touch_nmi_watchdog();
 	}
+<<<<<<< HEAD
+=======
+	put_cpu();
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(dump_trace);
 

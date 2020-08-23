@@ -13,9 +13,13 @@
 	GNU General Public License for more details.
 
 	You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
 	along with this program; if not, write to the
 	Free Software Foundation, Inc.,
 	59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+	along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
  */
 
 /*
@@ -35,6 +39,7 @@
  */
 #define DEFAULT_RSSI		-128
 
+<<<<<<< HEAD
 /*
  * Helper struct and macro to work with moving/walking averages.
  * When adding a value to the average value the following calculation
@@ -72,13 +77,35 @@
 	__new.avg = __new.avg_weight / (AVG_FACTOR); \
 	__new; \
 })
+=======
+/* Constants for EWMA calculations. */
+#define RT2X00_EWMA_FACTOR	1024
+#define RT2X00_EWMA_WEIGHT	8
+
+static inline int rt2x00link_get_avg_rssi(struct ewma *ewma)
+{
+	unsigned long avg;
+
+	avg = ewma_read(ewma);
+	if (avg)
+		return -avg;
+
+	return DEFAULT_RSSI;
+}
+>>>>>>> v3.18
 
 static int rt2x00link_antenna_get_link_rssi(struct rt2x00_dev *rt2x00dev)
 {
 	struct link_ant *ant = &rt2x00dev->link.ant;
 
+<<<<<<< HEAD
 	if (ant->rssi_ant.avg && rt2x00dev->link.qual.rx_success)
 		return ant->rssi_ant.avg;
+=======
+	if (rt2x00dev->link.qual.rx_success)
+		return rt2x00link_get_avg_rssi(&ant->rssi_ant);
+
+>>>>>>> v3.18
 	return DEFAULT_RSSI;
 }
 
@@ -100,8 +127,13 @@ static void rt2x00link_antenna_update_rssi_history(struct rt2x00_dev *rt2x00dev,
 
 static void rt2x00link_antenna_reset(struct rt2x00_dev *rt2x00dev)
 {
+<<<<<<< HEAD
 	rt2x00dev->link.ant.rssi_ant.avg = 0;
 	rt2x00dev->link.ant.rssi_ant.avg_weight = 0;
+=======
+	ewma_init(&rt2x00dev->link.ant.rssi_ant, RT2X00_EWMA_FACTOR,
+		  RT2X00_EWMA_WEIGHT);
+>>>>>>> v3.18
 }
 
 static void rt2x00lib_antenna_diversity_sample(struct rt2x00_dev *rt2x00dev)
@@ -249,12 +281,20 @@ void rt2x00link_update_stats(struct rt2x00_dev *rt2x00dev,
 	/*
 	 * Update global RSSI
 	 */
+<<<<<<< HEAD
 	link->avg_rssi = MOVING_AVERAGE(link->avg_rssi, rxdesc->rssi);
+=======
+	ewma_add(&link->avg_rssi, -rxdesc->rssi);
+>>>>>>> v3.18
 
 	/*
 	 * Update antenna RSSI
 	 */
+<<<<<<< HEAD
 	ant->rssi_ant = MOVING_AVERAGE(ant->rssi_ant, rxdesc->rssi);
+=======
+	ewma_add(&ant->rssi_ant, -rxdesc->rssi);
+>>>>>>> v3.18
 }
 
 void rt2x00link_start_tuner(struct rt2x00_dev *rt2x00dev)
@@ -309,6 +349,11 @@ void rt2x00link_reset_tuner(struct rt2x00_dev *rt2x00dev, bool antenna)
 	 */
 	rt2x00dev->link.count = 0;
 	memset(qual, 0, sizeof(*qual));
+<<<<<<< HEAD
+=======
+	ewma_init(&rt2x00dev->link.avg_rssi, RT2X00_EWMA_FACTOR,
+		  RT2X00_EWMA_WEIGHT);
+>>>>>>> v3.18
 
 	/*
 	 * Restore the VGC level as stored in the registers,
@@ -363,17 +408,28 @@ static void rt2x00link_tuner(struct work_struct *work)
 	 * collect the RSSI data we could use this. Otherwise we
 	 * must fallback to the default RSSI value.
 	 */
+<<<<<<< HEAD
 	if (!link->avg_rssi.avg || !qual->rx_success)
 		qual->rssi = DEFAULT_RSSI;
 	else
 		qual->rssi = link->avg_rssi.avg;
+=======
+	if (!qual->rx_success)
+		qual->rssi = DEFAULT_RSSI;
+	else
+		qual->rssi = rt2x00link_get_avg_rssi(&link->avg_rssi);
+>>>>>>> v3.18
 
 	/*
 	 * Check if link tuning is supported by the hardware, some hardware
 	 * do not support link tuning at all, while other devices can disable
 	 * the feature from the EEPROM.
 	 */
+<<<<<<< HEAD
 	if (test_bit(CAPABILITY_LINK_TUNING, &rt2x00dev->cap_flags))
+=======
+	if (rt2x00_has_cap_link_tuning(rt2x00dev))
+>>>>>>> v3.18
 		rt2x00dev->ops->lib->link_tuner(rt2x00dev, qual, link->count);
 
 	/*
@@ -513,7 +569,11 @@ static void rt2x00link_vcocal(struct work_struct *work)
 void rt2x00link_register(struct rt2x00_dev *rt2x00dev)
 {
 	INIT_DELAYED_WORK(&rt2x00dev->link.agc_work, rt2x00link_agc);
+<<<<<<< HEAD
 	if (test_bit(CAPABILITY_VCO_RECALIBRATION, &rt2x00dev->cap_flags))
+=======
+	if (rt2x00_has_cap_vco_recalibration(rt2x00dev))
+>>>>>>> v3.18
 		INIT_DELAYED_WORK(&rt2x00dev->link.vco_work, rt2x00link_vcocal);
 	INIT_DELAYED_WORK(&rt2x00dev->link.watchdog_work, rt2x00link_watchdog);
 	INIT_DELAYED_WORK(&rt2x00dev->link.work, rt2x00link_tuner);

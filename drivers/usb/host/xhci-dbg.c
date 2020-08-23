@@ -2,7 +2,10 @@
  * xHCI host controller driver
  *
  * Copyright (C) 2008 Intel Corp.
+<<<<<<< HEAD
  * Copyright (c) 2013, The Linux Foundation. All rights reserved.
+=======
+>>>>>>> v3.18
  *
  * Author: Sarah Sharp
  * Some code borrowed from the Linux EHCI driver.
@@ -31,10 +34,17 @@ void xhci_dbg_regs(struct xhci_hcd *xhci)
 {
 	u32 temp;
 
+<<<<<<< HEAD
 	xhci_dbg(xhci, "// xHCI capability registers at %pK:\n",
 			xhci->cap_regs);
 	temp = xhci_readl(xhci, &xhci->cap_regs->hc_capbase);
 	xhci_dbg(xhci, "// @%pK = 0x%x (CAPLENGTH AND HCIVERSION)\n",
+=======
+	xhci_dbg(xhci, "// xHCI capability registers at %p:\n",
+			xhci->cap_regs);
+	temp = readl(&xhci->cap_regs->hc_capbase);
+	xhci_dbg(xhci, "// @%p = 0x%x (CAPLENGTH AND HCIVERSION)\n",
+>>>>>>> v3.18
 			&xhci->cap_regs->hc_capbase, temp);
 	xhci_dbg(xhci, "//   CAPLENGTH: 0x%x\n",
 			(unsigned int) HC_LENGTH(temp));
@@ -43,6 +53,7 @@ void xhci_dbg_regs(struct xhci_hcd *xhci)
 			(unsigned int) HC_VERSION(temp));
 #endif
 
+<<<<<<< HEAD
 	xhci_dbg(xhci, "// xHCI operational registers at %pK:\n", xhci->op_regs);
 
 	temp = xhci_readl(xhci, &xhci->cap_regs->run_regs_off);
@@ -54,15 +65,34 @@ void xhci_dbg_regs(struct xhci_hcd *xhci)
 	temp = xhci_readl(xhci, &xhci->cap_regs->db_off);
 	xhci_dbg(xhci, "// @%pK = 0x%x DBOFF\n", &xhci->cap_regs->db_off, temp);
 	xhci_dbg(xhci, "// Doorbell array at %pK:\n", xhci->dba);
+=======
+	xhci_dbg(xhci, "// xHCI operational registers at %p:\n", xhci->op_regs);
+
+	temp = readl(&xhci->cap_regs->run_regs_off);
+	xhci_dbg(xhci, "// @%p = 0x%x RTSOFF\n",
+			&xhci->cap_regs->run_regs_off,
+			(unsigned int) temp & RTSOFF_MASK);
+	xhci_dbg(xhci, "// xHCI runtime registers at %p:\n", xhci->run_regs);
+
+	temp = readl(&xhci->cap_regs->db_off);
+	xhci_dbg(xhci, "// @%p = 0x%x DBOFF\n", &xhci->cap_regs->db_off, temp);
+	xhci_dbg(xhci, "// Doorbell array at %p:\n", xhci->dba);
+>>>>>>> v3.18
 }
 
 static void xhci_print_cap_regs(struct xhci_hcd *xhci)
 {
 	u32 temp;
 
+<<<<<<< HEAD
 	xhci_dbg(xhci, "xHCI capability registers at %pK:\n", xhci->cap_regs);
 
 	temp = xhci_readl(xhci, &xhci->cap_regs->hc_capbase);
+=======
+	xhci_dbg(xhci, "xHCI capability registers at %p:\n", xhci->cap_regs);
+
+	temp = readl(&xhci->cap_regs->hc_capbase);
+>>>>>>> v3.18
 	xhci_dbg(xhci, "CAPLENGTH AND HCIVERSION 0x%x:\n",
 			(unsigned int) temp);
 	xhci_dbg(xhci, "CAPLENGTH: 0x%x\n",
@@ -70,7 +100,11 @@ static void xhci_print_cap_regs(struct xhci_hcd *xhci)
 	xhci_dbg(xhci, "HCIVERSION: 0x%x\n",
 			(unsigned int) HC_VERSION(temp));
 
+<<<<<<< HEAD
 	temp = xhci_readl(xhci, &xhci->cap_regs->hcs_params1);
+=======
+	temp = readl(&xhci->cap_regs->hcs_params1);
+>>>>>>> v3.18
 	xhci_dbg(xhci, "HCSPARAMS 1: 0x%x\n",
 			(unsigned int) temp);
 	xhci_dbg(xhci, "  Max device slots: %u\n",
@@ -80,7 +114,11 @@ static void xhci_print_cap_regs(struct xhci_hcd *xhci)
 	xhci_dbg(xhci, "  Max ports: %u\n",
 			(unsigned int) HCS_MAX_PORTS(temp));
 
+<<<<<<< HEAD
 	temp = xhci_readl(xhci, &xhci->cap_regs->hcs_params2);
+=======
+	temp = readl(&xhci->cap_regs->hcs_params2);
+>>>>>>> v3.18
 	xhci_dbg(xhci, "HCSPARAMS 2: 0x%x\n",
 			(unsigned int) temp);
 	xhci_dbg(xhci, "  Isoc scheduling threshold: %u\n",
@@ -88,7 +126,11 @@ static void xhci_print_cap_regs(struct xhci_hcd *xhci)
 	xhci_dbg(xhci, "  Maximum allowed segments in event ring: %u\n",
 			(unsigned int) HCS_ERST_MAX(temp));
 
+<<<<<<< HEAD
 	temp = xhci_readl(xhci, &xhci->cap_regs->hcs_params3);
+=======
+	temp = readl(&xhci->cap_regs->hcs_params3);
+>>>>>>> v3.18
 	xhci_dbg(xhci, "HCSPARAMS 3 0x%x:\n",
 			(unsigned int) temp);
 	xhci_dbg(xhci, "  Worst case U1 device exit latency: %u\n",
@@ -96,14 +138,22 @@ static void xhci_print_cap_regs(struct xhci_hcd *xhci)
 	xhci_dbg(xhci, "  Worst case U2 device exit latency: %u\n",
 			(unsigned int) HCS_U2_LATENCY(temp));
 
+<<<<<<< HEAD
 	temp = xhci_readl(xhci, &xhci->cap_regs->hcc_params);
+=======
+	temp = readl(&xhci->cap_regs->hcc_params);
+>>>>>>> v3.18
 	xhci_dbg(xhci, "HCC PARAMS 0x%x:\n", (unsigned int) temp);
 	xhci_dbg(xhci, "  HC generates %s bit addresses\n",
 			HCC_64BIT_ADDR(temp) ? "64" : "32");
 	/* FIXME */
 	xhci_dbg(xhci, "  FIXME: more HCCPARAMS debugging\n");
 
+<<<<<<< HEAD
 	temp = xhci_readl(xhci, &xhci->cap_regs->run_regs_off);
+=======
+	temp = readl(&xhci->cap_regs->run_regs_off);
+>>>>>>> v3.18
 	xhci_dbg(xhci, "RTSOFF 0x%x:\n", temp & RTSOFF_MASK);
 }
 
@@ -111,7 +161,11 @@ static void xhci_print_command_reg(struct xhci_hcd *xhci)
 {
 	u32 temp;
 
+<<<<<<< HEAD
 	temp = xhci_readl(xhci, &xhci->op_regs->command);
+=======
+	temp = readl(&xhci->op_regs->command);
+>>>>>>> v3.18
 	xhci_dbg(xhci, "USBCMD 0x%x:\n", temp);
 	xhci_dbg(xhci, "  HC is %s\n",
 			(temp & CMD_RUN) ? "running" : "being stopped");
@@ -129,7 +183,11 @@ static void xhci_print_status(struct xhci_hcd *xhci)
 {
 	u32 temp;
 
+<<<<<<< HEAD
 	temp = xhci_readl(xhci, &xhci->op_regs->status);
+=======
+	temp = readl(&xhci->op_regs->status);
+>>>>>>> v3.18
 	xhci_dbg(xhci, "USBSTS 0x%x:\n", temp);
 	xhci_dbg(xhci, "  Event ring is %sempty\n",
 			(temp & STS_EINT) ? "not " : "");
@@ -141,7 +199,11 @@ static void xhci_print_status(struct xhci_hcd *xhci)
 
 static void xhci_print_op_regs(struct xhci_hcd *xhci)
 {
+<<<<<<< HEAD
 	xhci_dbg(xhci, "xHCI operational registers at %pK:\n", xhci->op_regs);
+=======
+	xhci_dbg(xhci, "xHCI operational registers at %p:\n", xhci->op_regs);
+>>>>>>> v3.18
 	xhci_print_command_reg(xhci);
 	xhci_print_status(xhci);
 }
@@ -162,9 +224,15 @@ static void xhci_print_ports(struct xhci_hcd *xhci)
 	addr = &xhci->op_regs->port_status_base;
 	for (i = 0; i < ports; i++) {
 		for (j = 0; j < NUM_PORT_REGS; ++j) {
+<<<<<<< HEAD
 			xhci_dbg(xhci, "%pK port %s reg = 0x%x\n",
 					addr, names[j],
 					(unsigned int) xhci_readl(xhci, addr));
+=======
+			xhci_dbg(xhci, "%p port %s reg = 0x%x\n",
+					addr, names[j],
+					(unsigned int) readl(addr));
+>>>>>>> v3.18
 			addr++;
 		}
 	}
@@ -178,6 +246,7 @@ void xhci_print_ir_set(struct xhci_hcd *xhci, int set_num)
 	u64 temp_64;
 
 	addr = &ir_set->irq_pending;
+<<<<<<< HEAD
 	temp = xhci_readl(xhci, addr);
 	if (temp == XHCI_INIT_VALUE)
 		return;
@@ -201,16 +270,49 @@ void xhci_print_ir_set(struct xhci_hcd *xhci, int set_num)
 	temp = xhci_readl(xhci, addr);
 	if (temp != XHCI_INIT_VALUE)
 		xhci_dbg(xhci, "  WARN: %pK: ir_set.rsvd = 0x%x\n",
+=======
+	temp = readl(addr);
+	if (temp == XHCI_INIT_VALUE)
+		return;
+
+	xhci_dbg(xhci, "  %p: ir_set[%i]\n", ir_set, set_num);
+
+	xhci_dbg(xhci, "  %p: ir_set.pending = 0x%x\n", addr,
+			(unsigned int)temp);
+
+	addr = &ir_set->irq_control;
+	temp = readl(addr);
+	xhci_dbg(xhci, "  %p: ir_set.control = 0x%x\n", addr,
+			(unsigned int)temp);
+
+	addr = &ir_set->erst_size;
+	temp = readl(addr);
+	xhci_dbg(xhci, "  %p: ir_set.erst_size = 0x%x\n", addr,
+			(unsigned int)temp);
+
+	addr = &ir_set->rsvd;
+	temp = readl(addr);
+	if (temp != XHCI_INIT_VALUE)
+		xhci_dbg(xhci, "  WARN: %p: ir_set.rsvd = 0x%x\n",
+>>>>>>> v3.18
 				addr, (unsigned int)temp);
 
 	addr = &ir_set->erst_base;
 	temp_64 = xhci_read_64(xhci, addr);
+<<<<<<< HEAD
 	xhci_dbg(xhci, "  %pK: ir_set.erst_base = @%08llx\n",
+=======
+	xhci_dbg(xhci, "  %p: ir_set.erst_base = @%08llx\n",
+>>>>>>> v3.18
 			addr, temp_64);
 
 	addr = &ir_set->erst_dequeue;
 	temp_64 = xhci_read_64(xhci, addr);
+<<<<<<< HEAD
 	xhci_dbg(xhci, "  %pK: ir_set.erst_dequeue = @%08llx\n",
+=======
+	xhci_dbg(xhci, "  %p: ir_set.erst_dequeue = @%08llx\n",
+>>>>>>> v3.18
 			addr, temp_64);
 }
 
@@ -219,6 +321,7 @@ void xhci_print_run_regs(struct xhci_hcd *xhci)
 	u32 temp;
 	int i;
 
+<<<<<<< HEAD
 	xhci_dbg(xhci, "xHCI runtime registers at %pK:\n", xhci->run_regs);
 	temp = xhci_readl(xhci, &xhci->run_regs->microframe_index);
 	xhci_dbg(xhci, "  %pK: Microframe index = 0x%x\n",
@@ -228,6 +331,17 @@ void xhci_print_run_regs(struct xhci_hcd *xhci)
 		temp = xhci_readl(xhci, &xhci->run_regs->rsvd[i]);
 		if (temp != XHCI_INIT_VALUE)
 			xhci_dbg(xhci, "  WARN: %pK: Rsvd[%i] = 0x%x\n",
+=======
+	xhci_dbg(xhci, "xHCI runtime registers at %p:\n", xhci->run_regs);
+	temp = readl(&xhci->run_regs->microframe_index);
+	xhci_dbg(xhci, "  %p: Microframe index = 0x%x\n",
+			&xhci->run_regs->microframe_index,
+			(unsigned int) temp);
+	for (i = 0; i < 7; ++i) {
+		temp = readl(&xhci->run_regs->rsvd[i]);
+		if (temp != XHCI_INIT_VALUE)
+			xhci_dbg(xhci, "  WARN: %p: Rsvd[%i] = 0x%x\n",
+>>>>>>> v3.18
 					&xhci->run_regs->rsvd[i],
 					i, (unsigned int) temp);
 	}
@@ -329,13 +443,21 @@ void xhci_debug_segment(struct xhci_hcd *xhci, struct xhci_segment *seg)
 
 void xhci_dbg_ring_ptrs(struct xhci_hcd *xhci, struct xhci_ring *ring)
 {
+<<<<<<< HEAD
 	xhci_dbg(xhci, "Ring deq = %pK (virt), 0x%llx (dma)\n",
+=======
+	xhci_dbg(xhci, "Ring deq = %p (virt), 0x%llx (dma)\n",
+>>>>>>> v3.18
 			ring->dequeue,
 			(unsigned long long)xhci_trb_virt_to_dma(ring->deq_seg,
 							    ring->dequeue));
 	xhci_dbg(xhci, "Ring deq updated %u times\n",
 			ring->deq_updates);
+<<<<<<< HEAD
 	xhci_dbg(xhci, "Ring enq = %pK (virt), 0x%llx (dma)\n",
+=======
+	xhci_dbg(xhci, "Ring enq = %p (virt), 0x%llx (dma)\n",
+>>>>>>> v3.18
 			ring->enqueue,
 			(unsigned long long)xhci_trb_virt_to_dma(ring->enq_seg,
 							    ring->enqueue));
@@ -425,7 +547,11 @@ static void dbg_rsvd64(struct xhci_hcd *xhci, u64 *ctx, dma_addr_t dma)
 {
 	int i;
 	for (i = 0; i < 4; ++i) {
+<<<<<<< HEAD
 		xhci_dbg(xhci, "@%pK (virt) @%08llx "
+=======
+		xhci_dbg(xhci, "@%p (virt) @%08llx "
+>>>>>>> v3.18
 			 "(dma) %#08llx - rsvd64[%d]\n",
 			 &ctx[4 + i], (unsigned long long)dma,
 			 ctx[4 + i], i);
@@ -464,6 +590,7 @@ static void xhci_dbg_slot_ctx(struct xhci_hcd *xhci, struct xhci_container_ctx *
 	int csz = HCC_64BYTE_CONTEXT(xhci->hcc_params);
 
 	xhci_dbg(xhci, "Slot Context:\n");
+<<<<<<< HEAD
 	xhci_dbg(xhci, "@%pK (virt) @%08llx (dma) %#08x - dev_info\n",
 			&slot_ctx->dev_info,
 			(unsigned long long)dma, slot_ctx->dev_info);
@@ -477,11 +604,30 @@ static void xhci_dbg_slot_ctx(struct xhci_hcd *xhci, struct xhci_container_ctx *
 			(unsigned long long)dma, slot_ctx->tt_info);
 	dma += field_size;
 	xhci_dbg(xhci, "@%pK (virt) @%08llx (dma) %#08x - dev_state\n",
+=======
+	xhci_dbg(xhci, "@%p (virt) @%08llx (dma) %#08x - dev_info\n",
+			&slot_ctx->dev_info,
+			(unsigned long long)dma, slot_ctx->dev_info);
+	dma += field_size;
+	xhci_dbg(xhci, "@%p (virt) @%08llx (dma) %#08x - dev_info2\n",
+			&slot_ctx->dev_info2,
+			(unsigned long long)dma, slot_ctx->dev_info2);
+	dma += field_size;
+	xhci_dbg(xhci, "@%p (virt) @%08llx (dma) %#08x - tt_info\n",
+			&slot_ctx->tt_info,
+			(unsigned long long)dma, slot_ctx->tt_info);
+	dma += field_size;
+	xhci_dbg(xhci, "@%p (virt) @%08llx (dma) %#08x - dev_state\n",
+>>>>>>> v3.18
 			&slot_ctx->dev_state,
 			(unsigned long long)dma, slot_ctx->dev_state);
 	dma += field_size;
 	for (i = 0; i < 4; ++i) {
+<<<<<<< HEAD
 		xhci_dbg(xhci, "@%pK (virt) @%08llx (dma) %#08x - rsvd[%d]\n",
+=======
+		xhci_dbg(xhci, "@%p (virt) @%08llx (dma) %#08x - rsvd[%d]\n",
+>>>>>>> v3.18
 				&slot_ctx->reserved[i], (unsigned long long)dma,
 				slot_ctx->reserved[i], i);
 		dma += field_size;
@@ -504,10 +650,15 @@ static void xhci_dbg_ep_ctx(struct xhci_hcd *xhci,
 	if (last_ep < 31)
 		last_ep_ctx = last_ep + 1;
 	for (i = 0; i < last_ep_ctx; ++i) {
+<<<<<<< HEAD
+=======
+		unsigned int epaddr = xhci_get_endpoint_address(i);
+>>>>>>> v3.18
 		struct xhci_ep_ctx *ep_ctx = xhci_get_ep_ctx(xhci, ctx, i);
 		dma_addr_t dma = ctx->dma +
 			((unsigned long)ep_ctx - (unsigned long)ctx->bytes);
 
+<<<<<<< HEAD
 		xhci_dbg(xhci, "Endpoint %02d Context:\n", i);
 		xhci_dbg(xhci, "@%pK (virt) @%08llx (dma) %#08x - ep_info\n",
 				&ep_ctx->ep_info,
@@ -522,11 +673,33 @@ static void xhci_dbg_ep_ctx(struct xhci_hcd *xhci,
 				(unsigned long long)dma, ep_ctx->deq);
 		dma += 2*field_size;
 		xhci_dbg(xhci, "@%pK (virt) @%08llx (dma) %#08x - tx_info\n",
+=======
+		xhci_dbg(xhci, "%s Endpoint %02d Context (ep_index %02d):\n",
+				usb_endpoint_out(epaddr) ? "OUT" : "IN",
+				epaddr & USB_ENDPOINT_NUMBER_MASK, i);
+		xhci_dbg(xhci, "@%p (virt) @%08llx (dma) %#08x - ep_info\n",
+				&ep_ctx->ep_info,
+				(unsigned long long)dma, ep_ctx->ep_info);
+		dma += field_size;
+		xhci_dbg(xhci, "@%p (virt) @%08llx (dma) %#08x - ep_info2\n",
+				&ep_ctx->ep_info2,
+				(unsigned long long)dma, ep_ctx->ep_info2);
+		dma += field_size;
+		xhci_dbg(xhci, "@%p (virt) @%08llx (dma) %#08llx - deq\n",
+				&ep_ctx->deq,
+				(unsigned long long)dma, ep_ctx->deq);
+		dma += 2*field_size;
+		xhci_dbg(xhci, "@%p (virt) @%08llx (dma) %#08x - tx_info\n",
+>>>>>>> v3.18
 				&ep_ctx->tx_info,
 				(unsigned long long)dma, ep_ctx->tx_info);
 		dma += field_size;
 		for (j = 0; j < 3; ++j) {
+<<<<<<< HEAD
 			xhci_dbg(xhci, "@%pK (virt) @%08llx (dma) %#08x - rsvd[%d]\n",
+=======
+			xhci_dbg(xhci, "@%p (virt) @%08llx (dma) %#08x - rsvd[%d]\n",
+>>>>>>> v3.18
 					&ep_ctx->reserved[j],
 					(unsigned long long)dma,
 					ep_ctx->reserved[j], j);
@@ -551,16 +724,33 @@ void xhci_dbg_ctx(struct xhci_hcd *xhci,
 	if (ctx->type == XHCI_CTX_TYPE_INPUT) {
 		struct xhci_input_control_ctx *ctrl_ctx =
 			xhci_get_input_control_ctx(xhci, ctx);
+<<<<<<< HEAD
 		xhci_dbg(xhci, "@%pK (virt) @%08llx (dma) %#08x - drop flags\n",
 			 &ctrl_ctx->drop_flags, (unsigned long long)dma,
 			 ctrl_ctx->drop_flags);
 		dma += field_size;
 		xhci_dbg(xhci, "@%pK (virt) @%08llx (dma) %#08x - add flags\n",
+=======
+		if (!ctrl_ctx) {
+			xhci_warn(xhci, "Could not get input context, bad type.\n");
+			return;
+		}
+
+		xhci_dbg(xhci, "@%p (virt) @%08llx (dma) %#08x - drop flags\n",
+			 &ctrl_ctx->drop_flags, (unsigned long long)dma,
+			 ctrl_ctx->drop_flags);
+		dma += field_size;
+		xhci_dbg(xhci, "@%p (virt) @%08llx (dma) %#08x - add flags\n",
+>>>>>>> v3.18
 			 &ctrl_ctx->add_flags, (unsigned long long)dma,
 			 ctrl_ctx->add_flags);
 		dma += field_size;
 		for (i = 0; i < 6; ++i) {
+<<<<<<< HEAD
 			xhci_dbg(xhci, "@%pK (virt) @%08llx (dma) %#08x - rsvd2[%d]\n",
+=======
+			xhci_dbg(xhci, "@%p (virt) @%08llx (dma) %#08x - rsvd2[%d]\n",
+>>>>>>> v3.18
 				 &ctrl_ctx->rsvd2[i], (unsigned long long)dma,
 				 ctrl_ctx->rsvd2[i], i);
 			dma += field_size;
@@ -574,6 +764,7 @@ void xhci_dbg_ctx(struct xhci_hcd *xhci,
 	xhci_dbg_ep_ctx(xhci, ctx, last_ep);
 }
 
+<<<<<<< HEAD
 
 enum event_type {
 	EVENT_UNDEF = -1,
@@ -727,3 +918,19 @@ xhci_dbg_log_event(struct dbg_data *d, struct urb *urb, char *event,
 		write_unlock_irqrestore(&d->data_lck, flags);
 	}
 }
+=======
+void xhci_dbg_trace(struct xhci_hcd *xhci, void (*trace)(struct va_format *),
+			const char *fmt, ...)
+{
+	struct va_format vaf;
+	va_list args;
+
+	va_start(args, fmt);
+	vaf.fmt = fmt;
+	vaf.va = &args;
+	xhci_dbg(xhci, "%pV\n", &vaf);
+	trace(&vaf);
+	va_end(args);
+}
+EXPORT_SYMBOL_GPL(xhci_dbg_trace);
+>>>>>>> v3.18

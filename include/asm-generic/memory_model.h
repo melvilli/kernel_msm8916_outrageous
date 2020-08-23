@@ -53,7 +53,11 @@
 
 #elif defined(CONFIG_SPARSEMEM)
 /*
+<<<<<<< HEAD
  * Note: section's mem_map is encorded to reflect its start_pfn.
+=======
+ * Note: section's mem_map is encoded to reflect its start_pfn.
+>>>>>>> v3.18
  * section[i].section_mem_map == mem_map's address - start_pfn;
  */
 #define __page_to_pfn(pg)					\

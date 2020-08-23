@@ -902,8 +902,11 @@ snd_harmony_free(struct snd_harmony *h)
 	if (h->iobase)
 		iounmap(h->iobase);
 
+<<<<<<< HEAD
 	parisc_set_drvdata(h->dev, NULL);
 
+=======
+>>>>>>> v3.18
 	kfree(h);
 	return 0;
 }
@@ -961,8 +964,11 @@ snd_harmony_create(struct snd_card *card,
                 goto free_and_ret;
         }
 
+<<<<<<< HEAD
 	snd_card_set_dev(card, &padev->dev);
 
+=======
+>>>>>>> v3.18
 	*rchip = h;
 
 	return 0;
@@ -979,7 +985,11 @@ snd_harmony_probe(struct parisc_device *padev)
 	struct snd_card *card;
 	struct snd_harmony *h;
 
+<<<<<<< HEAD
 	err = snd_card_create(index, id, THIS_MODULE, 0, &card);
+=======
+	err = snd_card_new(&padev->dev, index, id, THIS_MODULE, 0, &card);
+>>>>>>> v3.18
 	if (err < 0)
 		return err;
 
@@ -1016,7 +1026,10 @@ static int
 snd_harmony_remove(struct parisc_device *padev)
 {
 	snd_card_free(parisc_get_drvdata(padev));
+<<<<<<< HEAD
 	parisc_set_drvdata(padev, NULL);
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

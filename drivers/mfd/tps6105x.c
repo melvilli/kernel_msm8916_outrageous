@@ -141,20 +141,32 @@ static int tps6105x_probe(struct i2c_client *client,
 	int ret;
 	int i;
 
+<<<<<<< HEAD
 	tps6105x = kmalloc(sizeof(*tps6105x), GFP_KERNEL);
+=======
+	tps6105x = devm_kmalloc(&client->dev, sizeof(*tps6105x), GFP_KERNEL);
+>>>>>>> v3.18
 	if (!tps6105x)
 		return -ENOMEM;
 
 	i2c_set_clientdata(client, tps6105x);
 	tps6105x->client = client;
+<<<<<<< HEAD
 	pdata = client->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 	tps6105x->pdata = pdata;
 	mutex_init(&tps6105x->lock);
 
 	ret = tps6105x_startup(tps6105x);
 	if (ret) {
 		dev_err(&client->dev, "chip initialization failed\n");
+<<<<<<< HEAD
 		goto fail;
+=======
+		return ret;
+>>>>>>> v3.18
 	}
 
 	/* Remove warning texts when you implement new cell drivers */
@@ -187,6 +199,7 @@ static int tps6105x_probe(struct i2c_client *client,
 		tps6105x_cells[i].pdata_size = sizeof(*tps6105x);
 	}
 
+<<<<<<< HEAD
 	ret = mfd_add_devices(&client->dev, 0, tps6105x_cells,
 			      ARRAY_SIZE(tps6105x_cells), NULL, 0, NULL);
 	if (ret)
@@ -197,6 +210,10 @@ static int tps6105x_probe(struct i2c_client *client,
 fail:
 	kfree(tps6105x);
 	return ret;
+=======
+	return mfd_add_devices(&client->dev, 0, tps6105x_cells,
+			       ARRAY_SIZE(tps6105x_cells), NULL, 0, NULL);
+>>>>>>> v3.18
 }
 
 static int tps6105x_remove(struct i2c_client *client)
@@ -210,7 +227,10 @@ static int tps6105x_remove(struct i2c_client *client)
 		TPS6105X_REG0_MODE_MASK,
 		TPS6105X_MODE_SHUTDOWN << TPS6105X_REG0_MODE_SHIFT);
 
+<<<<<<< HEAD
 	kfree(tps6105x);
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

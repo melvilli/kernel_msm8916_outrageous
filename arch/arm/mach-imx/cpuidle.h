@@ -13,6 +13,10 @@
 #ifdef CONFIG_CPU_IDLE
 extern int imx5_cpuidle_init(void);
 extern int imx6q_cpuidle_init(void);
+<<<<<<< HEAD
+=======
+extern int imx6sl_cpuidle_init(void);
+>>>>>>> v3.18
 #else
 static inline int imx5_cpuidle_init(void)
 {
@@ -22,4 +26,11 @@ static inline int imx6q_cpuidle_init(void)
 {
 	return 0;
 }
+<<<<<<< HEAD
+=======
+static inline int imx6sl_cpuidle_init(void)
+{
+	return 0;
+}
+>>>>>>> v3.18
 #endif

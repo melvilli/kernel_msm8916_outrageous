@@ -104,20 +104,32 @@ static int test_probe(struct platform_device *plat_dev)
 	rtc = devm_rtc_device_register(&plat_dev->dev, "test",
 				&test_rtc_ops, THIS_MODULE);
 	if (IS_ERR(rtc)) {
+<<<<<<< HEAD
 		err = PTR_ERR(rtc);
 		return err;
+=======
+		return PTR_ERR(rtc);
+>>>>>>> v3.18
 	}
 
 	err = device_create_file(&plat_dev->dev, &dev_attr_irq);
 	if (err)
+<<<<<<< HEAD
 		goto err;
+=======
+		dev_err(&plat_dev->dev, "Unable to create sysfs entry: %s\n",
+			dev_attr_irq.attr.name);
+>>>>>>> v3.18
 
 	platform_set_drvdata(plat_dev, rtc);
 
 	return 0;
+<<<<<<< HEAD
 
 err:
 	return err;
+=======
+>>>>>>> v3.18
 }
 
 static int test_remove(struct platform_device *plat_dev)

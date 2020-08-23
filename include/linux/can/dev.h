@@ -10,8 +10,13 @@
  *
  */
 
+<<<<<<< HEAD
 #ifndef CAN_DEV_H
 #define CAN_DEV_H
+=======
+#ifndef _CAN_DEV_H
+#define _CAN_DEV_H
+>>>>>>> v3.18
 
 #include <linux/can.h>
 #include <linux/can/netlink.h>
@@ -31,11 +36,19 @@ enum can_mode {
  * CAN common private data
  */
 struct can_priv {
+<<<<<<< HEAD
 	struct net_device *dev;
 	struct can_device_stats can_stats;
 
 	struct can_bittiming bittiming;
 	const struct can_bittiming_const *bittiming_const;
+=======
+	struct can_device_stats can_stats;
+
+	struct can_bittiming bittiming, data_bittiming;
+	const struct can_bittiming_const *bittiming_const,
+		*data_bittiming_const;
+>>>>>>> v3.18
 	struct can_clock clock;
 
 	enum can_state state;
@@ -43,9 +56,16 @@ struct can_priv {
 	u32 ctrlmode_supported;
 
 	int restart_ms;
+<<<<<<< HEAD
 	struct delayed_work restart_work;
 
 	int (*do_set_bittiming)(struct net_device *dev);
+=======
+	struct timer_list restart_timer;
+
+	int (*do_set_bittiming)(struct net_device *dev);
+	int (*do_set_data_bittiming)(struct net_device *dev);
+>>>>>>> v3.18
 	int (*do_set_mode)(struct net_device *dev, enum can_mode mode);
 	int (*do_get_state)(const struct net_device *dev,
 			    enum can_state *state);
@@ -98,6 +118,15 @@ inval_skb:
 	return 1;
 }
 
+<<<<<<< HEAD
+=======
+static inline bool can_is_canfd_skb(const struct sk_buff *skb)
+{
+	/* the CAN specific type of skb is identified by its data length */
+	return skb->len == CANFD_MTU;
+}
+
+>>>>>>> v3.18
 /* get data length from can_dlc with sanitized can_dlc */
 u8 can_dlc2len(u8 can_dlc);
 
@@ -112,6 +141,10 @@ struct can_priv *safe_candev_priv(struct net_device *dev);
 
 int open_candev(struct net_device *dev);
 void close_candev(struct net_device *dev);
+<<<<<<< HEAD
+=======
+int can_change_mtu(struct net_device *dev, int new_mtu);
+>>>>>>> v3.18
 
 int register_candev(struct net_device *dev);
 void unregister_candev(struct net_device *dev);
@@ -125,7 +158,16 @@ unsigned int can_get_echo_skb(struct net_device *dev, unsigned int idx);
 void can_free_echo_skb(struct net_device *dev, unsigned int idx);
 
 struct sk_buff *alloc_can_skb(struct net_device *dev, struct can_frame **cf);
+<<<<<<< HEAD
 struct sk_buff *alloc_can_err_skb(struct net_device *dev,
 				  struct can_frame **cf);
 
 #endif /* CAN_DEV_H */
+=======
+struct sk_buff *alloc_canfd_skb(struct net_device *dev,
+				struct canfd_frame **cfd);
+struct sk_buff *alloc_can_err_skb(struct net_device *dev,
+				  struct can_frame **cf);
+
+#endif /* !_CAN_DEV_H */
+>>>>>>> v3.18

@@ -1,7 +1,13 @@
 Calxeda DDR memory controller
 
 Properties:
+<<<<<<< HEAD
 - compatible : Should be "calxeda,hb-ddr-ctrl"
+=======
+- compatible : Should be:
+  - "calxeda,hb-ddr-ctrl" for ECX-1000
+  - "calxeda,ecx-2000-ddr-ctrl" for ECX-2000
+>>>>>>> v3.18
 - reg : Address and size for DDR controller registers.
 - interrupts : Interrupt for DDR controller.
 

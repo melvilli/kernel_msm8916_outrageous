@@ -109,7 +109,12 @@ static int sis_drm_alloc(struct drm_device *dev, struct drm_file *file,
 	if (pool == AGP_TYPE) {
 		retval = drm_mm_insert_node(&dev_priv->agp_mm,
 					    &item->mm_node,
+<<<<<<< HEAD
 					    mem->size, 0);
+=======
+					    mem->size, 0,
+					    DRM_MM_SEARCH_DEFAULT);
+>>>>>>> v3.18
 		offset = item->mm_node.start;
 	} else {
 #if defined(CONFIG_FB_SIS) || defined(CONFIG_FB_SIS_MODULE)
@@ -121,7 +126,12 @@ static int sis_drm_alloc(struct drm_device *dev, struct drm_file *file,
 #else
 		retval = drm_mm_insert_node(&dev_priv->vram_mm,
 					    &item->mm_node,
+<<<<<<< HEAD
 					    mem->size, 0);
+=======
+					    mem->size, 0,
+					    DRM_MM_SEARCH_DEFAULT);
+>>>>>>> v3.18
 		offset = item->mm_node.start;
 #endif
 	}
@@ -264,7 +274,11 @@ int sis_idle(struct drm_device *dev)
 	 * because its polling frequency is too low.
 	 */
 
+<<<<<<< HEAD
 	end = jiffies + (DRM_HZ * 3);
+=======
+	end = jiffies + (HZ * 3);
+>>>>>>> v3.18
 
 	for (i = 0; i < 4; ++i) {
 		do {
@@ -317,12 +331,20 @@ void sis_reclaim_buffers_locked(struct drm_device *dev,
 	if (!(file->minor->master && file->master->lock.hw_lock))
 		return;
 
+<<<<<<< HEAD
 	drm_idlelock_take(&file->master->lock);
+=======
+	drm_legacy_idlelock_take(&file->master->lock);
+>>>>>>> v3.18
 
 	mutex_lock(&dev->struct_mutex);
 	if (list_empty(&file_priv->obj_list)) {
 		mutex_unlock(&dev->struct_mutex);
+<<<<<<< HEAD
 		drm_idlelock_release(&file->master->lock);
+=======
+		drm_legacy_idlelock_release(&file->master->lock);
+>>>>>>> v3.18
 
 		return;
 	}
@@ -343,12 +365,20 @@ void sis_reclaim_buffers_locked(struct drm_device *dev,
 	}
 	mutex_unlock(&dev->struct_mutex);
 
+<<<<<<< HEAD
 	drm_idlelock_release(&file->master->lock);
+=======
+	drm_legacy_idlelock_release(&file->master->lock);
+>>>>>>> v3.18
 
 	return;
 }
 
+<<<<<<< HEAD
 struct drm_ioctl_desc sis_ioctls[] = {
+=======
+const struct drm_ioctl_desc sis_ioctls[] = {
+>>>>>>> v3.18
 	DRM_IOCTL_DEF_DRV(SIS_FB_ALLOC, sis_fb_alloc, DRM_AUTH),
 	DRM_IOCTL_DEF_DRV(SIS_FB_FREE, sis_drm_free, DRM_AUTH),
 	DRM_IOCTL_DEF_DRV(SIS_AGP_INIT, sis_ioctl_agp_init, DRM_AUTH | DRM_MASTER | DRM_ROOT_ONLY),
@@ -357,4 +387,8 @@ struct drm_ioctl_desc sis_ioctls[] = {
 	DRM_IOCTL_DEF_DRV(SIS_FB_INIT, sis_fb_init, DRM_AUTH | DRM_MASTER | DRM_ROOT_ONLY),
 };
 
+<<<<<<< HEAD
 int sis_max_ioctl = DRM_ARRAY_SIZE(sis_ioctls);
+=======
+int sis_max_ioctl = ARRAY_SIZE(sis_ioctls);
+>>>>>>> v3.18

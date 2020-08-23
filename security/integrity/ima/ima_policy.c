@@ -7,7 +7,11 @@
  * the Free Software Foundation, version 2 of the License.
  *
  * ima_policy.c
+<<<<<<< HEAD
  * 	- initialize default measure policy rules
+=======
+ *	- initialize default measure policy rules
+>>>>>>> v3.18
  *
  */
 #include <linux/module.h>
@@ -21,8 +25,13 @@
 #include "ima.h"
 
 /* flags definitions */
+<<<<<<< HEAD
 #define IMA_FUNC 	0x0001
 #define IMA_MASK 	0x0002
+=======
+#define IMA_FUNC	0x0001
+#define IMA_MASK	0x0002
+>>>>>>> v3.18
 #define IMA_FSMAGIC	0x0004
 #define IMA_UID		0x0008
 #define IMA_FOWNER	0x0010
@@ -35,6 +44,11 @@
 #define DONT_APPRAISE	0x0008
 #define AUDIT		0x0040
 
+<<<<<<< HEAD
+=======
+int ima_policy_flag;
+
+>>>>>>> v3.18
 #define MAX_LSM_RULES 6
 enum lsm_rule_types { LSM_OBJ_USER, LSM_OBJ_ROLE, LSM_OBJ_TYPE,
 	LSM_SUBJ_USER, LSM_SUBJ_ROLE, LSM_SUBJ_TYPE
@@ -69,6 +83,7 @@ struct ima_rule_entry {
  * and running executables.
  */
 static struct ima_rule_entry default_rules[] = {
+<<<<<<< HEAD
 	{.action = DONT_MEASURE,.fsmagic = PROC_SUPER_MAGIC,.flags = IMA_FSMAGIC},
 	{.action = DONT_MEASURE,.fsmagic = SYSFS_MAGIC,.flags = IMA_FSMAGIC},
 	{.action = DONT_MEASURE,.fsmagic = DEBUGFS_MAGIC,.flags = IMA_FSMAGIC},
@@ -98,6 +113,38 @@ static struct ima_rule_entry default_appraise_rules[] = {
 	{.action = DONT_APPRAISE,.fsmagic = SELINUX_MAGIC,.flags = IMA_FSMAGIC},
 	{.action = DONT_APPRAISE,.fsmagic = CGROUP_SUPER_MAGIC,.flags = IMA_FSMAGIC},
 	{.action = APPRAISE,.fowner = GLOBAL_ROOT_UID,.flags = IMA_FOWNER},
+=======
+	{.action = DONT_MEASURE, .fsmagic = PROC_SUPER_MAGIC, .flags = IMA_FSMAGIC},
+	{.action = DONT_MEASURE, .fsmagic = SYSFS_MAGIC, .flags = IMA_FSMAGIC},
+	{.action = DONT_MEASURE, .fsmagic = DEBUGFS_MAGIC, .flags = IMA_FSMAGIC},
+	{.action = DONT_MEASURE, .fsmagic = TMPFS_MAGIC, .flags = IMA_FSMAGIC},
+	{.action = DONT_MEASURE, .fsmagic = DEVPTS_SUPER_MAGIC, .flags = IMA_FSMAGIC},
+	{.action = DONT_MEASURE, .fsmagic = BINFMTFS_MAGIC, .flags = IMA_FSMAGIC},
+	{.action = DONT_MEASURE, .fsmagic = SECURITYFS_MAGIC, .flags = IMA_FSMAGIC},
+	{.action = DONT_MEASURE, .fsmagic = SELINUX_MAGIC, .flags = IMA_FSMAGIC},
+	{.action = MEASURE, .func = MMAP_CHECK, .mask = MAY_EXEC,
+	 .flags = IMA_FUNC | IMA_MASK},
+	{.action = MEASURE, .func = BPRM_CHECK, .mask = MAY_EXEC,
+	 .flags = IMA_FUNC | IMA_MASK},
+	{.action = MEASURE, .func = FILE_CHECK, .mask = MAY_READ, .uid = GLOBAL_ROOT_UID,
+	 .flags = IMA_FUNC | IMA_MASK | IMA_UID},
+	{.action = MEASURE, .func = MODULE_CHECK, .flags = IMA_FUNC},
+	{.action = MEASURE, .func = FIRMWARE_CHECK, .flags = IMA_FUNC},
+};
+
+static struct ima_rule_entry default_appraise_rules[] = {
+	{.action = DONT_APPRAISE, .fsmagic = PROC_SUPER_MAGIC, .flags = IMA_FSMAGIC},
+	{.action = DONT_APPRAISE, .fsmagic = SYSFS_MAGIC, .flags = IMA_FSMAGIC},
+	{.action = DONT_APPRAISE, .fsmagic = DEBUGFS_MAGIC, .flags = IMA_FSMAGIC},
+	{.action = DONT_APPRAISE, .fsmagic = TMPFS_MAGIC, .flags = IMA_FSMAGIC},
+	{.action = DONT_APPRAISE, .fsmagic = RAMFS_MAGIC, .flags = IMA_FSMAGIC},
+	{.action = DONT_APPRAISE, .fsmagic = DEVPTS_SUPER_MAGIC, .flags = IMA_FSMAGIC},
+	{.action = DONT_APPRAISE, .fsmagic = BINFMTFS_MAGIC, .flags = IMA_FSMAGIC},
+	{.action = DONT_APPRAISE, .fsmagic = SECURITYFS_MAGIC, .flags = IMA_FSMAGIC},
+	{.action = DONT_APPRAISE, .fsmagic = SELINUX_MAGIC, .flags = IMA_FSMAGIC},
+	{.action = DONT_APPRAISE, .fsmagic = CGROUP_SUPER_MAGIC, .flags = IMA_FSMAGIC},
+	{.action = APPRAISE, .fowner = GLOBAL_ROOT_UID, .flags = IMA_FOWNER},
+>>>>>>> v3.18
 };
 
 static LIST_HEAD(ima_default_rules);
@@ -122,12 +169,20 @@ static int __init default_appraise_policy_setup(char *str)
 }
 __setup("ima_appraise_tcb", default_appraise_policy_setup);
 
+<<<<<<< HEAD
 /* 
+=======
+/*
+>>>>>>> v3.18
  * Although the IMA policy does not change, the LSM policy can be
  * reloaded, leaving the IMA LSM based rules referring to the old,
  * stale LSM policy.
  *
+<<<<<<< HEAD
  * Update the IMA LSM based rules to reflect the reloaded LSM policy. 
+=======
+ * Update the IMA LSM based rules to reflect the reloaded LSM policy.
+>>>>>>> v3.18
  * We assume the rules still exist; and BUG_ON() if they don't.
  */
 static void ima_lsm_update_rules(void)
@@ -167,9 +222,17 @@ static bool ima_match_rules(struct ima_rule_entry *rule,
 	const struct cred *cred = current_cred();
 	int i;
 
+<<<<<<< HEAD
 	if ((rule->flags & IMA_FUNC) && rule->func != func)
 		return false;
 	if ((rule->flags & IMA_MASK) && rule->mask != mask)
+=======
+	if ((rule->flags & IMA_FUNC) &&
+	    (rule->func != func && func != POST_SETATTR))
+		return false;
+	if ((rule->flags & IMA_MASK) &&
+	    (rule->mask != mask && func != POST_SETATTR))
+>>>>>>> v3.18
 		return false;
 	if ((rule->flags & IMA_FSMAGIC)
 	    && rule->fsmagic != inode->i_sb->s_magic)
@@ -216,7 +279,11 @@ retry:
 			retried = 1;
 			ima_lsm_update_rules();
 			goto retry;
+<<<<<<< HEAD
 		} 
+=======
+		}
+>>>>>>> v3.18
 		if (!rc)
 			return false;
 	}
@@ -232,13 +299,22 @@ static int get_subaction(struct ima_rule_entry *rule, int func)
 	if (!(rule->flags & IMA_FUNC))
 		return IMA_FILE_APPRAISE;
 
+<<<<<<< HEAD
 	switch(func) {
+=======
+	switch (func) {
+>>>>>>> v3.18
 	case MMAP_CHECK:
 		return IMA_MMAP_APPRAISE;
 	case BPRM_CHECK:
 		return IMA_BPRM_APPRAISE;
 	case MODULE_CHECK:
 		return IMA_MODULE_APPRAISE;
+<<<<<<< HEAD
+=======
+	case FIRMWARE_CHECK:
+		return IMA_FIRMWARE_APPRAISE;
+>>>>>>> v3.18
 	case FILE_CHECK:
 	default:
 		return IMA_FILE_APPRAISE;
@@ -290,6 +366,29 @@ int ima_match_policy(struct inode *inode, enum ima_hooks func, int mask,
 	return action;
 }
 
+<<<<<<< HEAD
+=======
+/*
+ * Initialize the ima_policy_flag variable based on the currently
+ * loaded policy.  Based on this flag, the decision to short circuit
+ * out of a function or not call the function in the first place
+ * can be made earlier.
+ */
+void ima_update_policy_flag(void)
+{
+	struct ima_rule_entry *entry;
+
+	ima_policy_flag = 0;
+	list_for_each_entry(entry, ima_rules, list) {
+		if (entry->action & IMA_DO_MASK)
+			ima_policy_flag |= entry->action;
+	}
+
+	if (!ima_appraise)
+		ima_policy_flag &= ~IMA_APPRAISE;
+}
+
+>>>>>>> v3.18
 /**
  * ima_init_policy - initialize the default measure rules.
  *
@@ -304,7 +403,11 @@ void __init ima_init_policy(void)
 	measure_entries = ima_use_tcb ? ARRAY_SIZE(default_rules) : 0;
 	appraise_entries = ima_use_appraise_tcb ?
 			 ARRAY_SIZE(default_appraise_rules) : 0;
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 	for (i = 0; i < measure_entries + appraise_entries; i++) {
 		if (i < measure_entries)
 			list_add_tail(&default_rules[i].list,
@@ -329,13 +432,22 @@ void __init ima_init_policy(void)
  */
 void ima_update_policy(void)
 {
+<<<<<<< HEAD
 	const char *op = "policy_update";
 	const char *cause = "already exists";
+=======
+	static const char op[] = "policy_update";
+	const char *cause = "already-exists";
+>>>>>>> v3.18
 	int result = 1;
 	int audit_info = 0;
 
 	if (ima_rules == &ima_default_rules) {
 		ima_rules = &ima_policy_rules;
+<<<<<<< HEAD
+=======
+		ima_update_policy_flag();
+>>>>>>> v3.18
 		cause = "complete";
 		result = 0;
 	}
@@ -351,7 +463,11 @@ enum {
 	Opt_obj_user, Opt_obj_role, Opt_obj_type,
 	Opt_subj_user, Opt_subj_role, Opt_subj_type,
 	Opt_func, Opt_mask, Opt_fsmagic, Opt_uid, Opt_fowner,
+<<<<<<< HEAD
 	Opt_appraise_type, Opt_fsuuid
+=======
+	Opt_appraise_type, Opt_fsuuid, Opt_permit_directio
+>>>>>>> v3.18
 };
 
 static match_table_t policy_tokens = {
@@ -373,6 +489,10 @@ static match_table_t policy_tokens = {
 	{Opt_uid, "uid=%s"},
 	{Opt_fowner, "fowner=%s"},
 	{Opt_appraise_type, "appraise_type=%s"},
+<<<<<<< HEAD
+=======
+	{Opt_permit_directio, "permit_directio"},
+>>>>>>> v3.18
 	{Opt_err, NULL}
 };
 
@@ -483,6 +603,11 @@ static int ima_parse_rule(char *rule, struct ima_rule_entry *entry)
 				entry->func = FILE_CHECK;
 			else if (strcmp(args[0].from, "MODULE_CHECK") == 0)
 				entry->func = MODULE_CHECK;
+<<<<<<< HEAD
+=======
+			else if (strcmp(args[0].from, "FIRMWARE_CHECK") == 0)
+				entry->func = FIRMWARE_CHECK;
+>>>>>>> v3.18
 			else if ((strcmp(args[0].from, "FILE_MMAP") == 0)
 				|| (strcmp(args[0].from, "MMAP_CHECK") == 0))
 				entry->func = MMAP_CHECK;
@@ -520,8 +645,12 @@ static int ima_parse_rule(char *rule, struct ima_rule_entry *entry)
 				break;
 			}
 
+<<<<<<< HEAD
 			result = strict_strtoul(args[0].from, 16,
 						&entry->fsmagic);
+=======
+			result = kstrtoul(args[0].from, 16, &entry->fsmagic);
+>>>>>>> v3.18
 			if (!result)
 				entry->flags |= IMA_FSMAGIC;
 			break;
@@ -547,7 +676,11 @@ static int ima_parse_rule(char *rule, struct ima_rule_entry *entry)
 				break;
 			}
 
+<<<<<<< HEAD
 			result = strict_strtoul(args[0].from, 10, &lnum);
+=======
+			result = kstrtoul(args[0].from, 10, &lnum);
+>>>>>>> v3.18
 			if (!result) {
 				entry->uid = make_kuid(current_user_ns(), (uid_t)lnum);
 				if (!uid_valid(entry->uid) || (((uid_t)lnum) != lnum))
@@ -564,7 +697,11 @@ static int ima_parse_rule(char *rule, struct ima_rule_entry *entry)
 				break;
 			}
 
+<<<<<<< HEAD
 			result = strict_strtoul(args[0].from, 10, &lnum);
+=======
+			result = kstrtoul(args[0].from, 10, &lnum);
+>>>>>>> v3.18
 			if (!result) {
 				entry->fowner = make_kuid(current_user_ns(), (uid_t)lnum);
 				if (!uid_valid(entry->fowner) || (((uid_t)lnum) != lnum))
@@ -621,6 +758,12 @@ static int ima_parse_rule(char *rule, struct ima_rule_entry *entry)
 			else
 				result = -EINVAL;
 			break;
+<<<<<<< HEAD
+=======
+		case Opt_permit_directio:
+			entry->flags |= IMA_PERMIT_DIRECTIO;
+			break;
+>>>>>>> v3.18
 		case Opt_err:
 			ima_log_string(ab, "UNKNOWN", p);
 			result = -EINVAL;
@@ -631,6 +774,11 @@ static int ima_parse_rule(char *rule, struct ima_rule_entry *entry)
 		result = -EINVAL;
 	else if (entry->func == MODULE_CHECK)
 		ima_appraise |= IMA_APPRAISE_MODULES;
+<<<<<<< HEAD
+=======
+	else if (entry->func == FIRMWARE_CHECK)
+		ima_appraise |= IMA_APPRAISE_FIRMWARE;
+>>>>>>> v3.18
 	audit_log_format(ab, "res=%d", !result);
 	audit_log_end(ab);
 	return result;
@@ -645,7 +793,11 @@ static int ima_parse_rule(char *rule, struct ima_rule_entry *entry)
  */
 ssize_t ima_parse_add_rule(char *rule)
 {
+<<<<<<< HEAD
 	const char *op = "update_policy";
+=======
+	static const char op[] = "update_policy";
+>>>>>>> v3.18
 	char *p;
 	struct ima_rule_entry *entry;
 	ssize_t result, len;
@@ -654,7 +806,11 @@ ssize_t ima_parse_add_rule(char *rule)
 	/* Prevent installed policy from changing */
 	if (ima_rules != &ima_default_rules) {
 		integrity_audit_msg(AUDIT_INTEGRITY_STATUS, NULL,
+<<<<<<< HEAD
 				    NULL, op, "already exists",
+=======
+				    NULL, op, "already-exists",
+>>>>>>> v3.18
 				    -EACCES, audit_info);
 		return -EACCES;
 	}
@@ -680,7 +836,11 @@ ssize_t ima_parse_add_rule(char *rule)
 	if (result) {
 		kfree(entry);
 		integrity_audit_msg(AUDIT_INTEGRITY_STATUS, NULL,
+<<<<<<< HEAD
 				    NULL, op, "invalid policy", result,
+=======
+				    NULL, op, "invalid-policy", result,
+>>>>>>> v3.18
 				    audit_info);
 		return result;
 	}

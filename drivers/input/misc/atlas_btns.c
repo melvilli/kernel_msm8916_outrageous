@@ -25,11 +25,18 @@
 
 #include <linux/kernel.h>
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/input.h>
 #include <linux/types.h>
 #include <asm/uaccess.h>
 #include <acpi/acpi_drivers.h>
+=======
+#include <linux/input.h>
+#include <linux/types.h>
+#include <linux/acpi.h>
+#include <asm/uaccess.h>
+>>>>>>> v3.18
 
 #define ACPI_ATLAS_NAME		"Atlas ACPI"
 #define ACPI_ATLAS_CLASS	"Atlas"

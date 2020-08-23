@@ -2,7 +2,11 @@
  * i2c-smbus.c - SMBus extensions to the I2C protocol
  *
  * Copyright (C) 2008 David Brownell
+<<<<<<< HEAD
  * Copyright (C) 2010 Jean Delvare <khali@linux-fr.org>
+=======
+ * Copyright (C) 2010 Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,11 +17,14 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301 USA.
+=======
+>>>>>>> v3.18
  */
 
 #include <linux/kernel.h>
@@ -46,6 +53,10 @@ static int smbus_do_alert(struct device *dev, void *addrp)
 {
 	struct i2c_client *client = i2c_verify_client(dev);
 	struct alert_data *data = addrp;
+<<<<<<< HEAD
+=======
+	struct i2c_driver *driver;
+>>>>>>> v3.18
 
 	if (!client || client->addr != data->addr)
 		return 0;
@@ -54,12 +65,22 @@ static int smbus_do_alert(struct device *dev, void *addrp)
 
 	/*
 	 * Drivers should either disable alerts, or provide at least
+<<<<<<< HEAD
 	 * a minimal handler.  Lock so client->driver won't change.
 	 */
 	device_lock(dev);
 	if (client->driver) {
 		if (client->driver->alert)
 			client->driver->alert(client, data->flag);
+=======
+	 * a minimal handler.  Lock so the driver won't change.
+	 */
+	device_lock(dev);
+	if (client->dev.driver) {
+		driver = to_i2c_driver(client->dev.driver);
+		if (driver->alert)
+			driver->alert(client, data->flag);
+>>>>>>> v3.18
 		else
 			dev_warn(&client->dev, "no driver alert()!\n");
 	} else
@@ -137,7 +158,11 @@ static irqreturn_t smbalert_irq(int irq, void *d)
 static int smbalert_probe(struct i2c_client *ara,
 			  const struct i2c_device_id *id)
 {
+<<<<<<< HEAD
 	struct i2c_smbus_alert_setup *setup = ara->dev.platform_data;
+=======
+	struct i2c_smbus_alert_setup *setup = dev_get_platdata(&ara->dev);
+>>>>>>> v3.18
 	struct i2c_smbus_alert *alert;
 	struct i2c_adapter *adapter = ara->adapter;
 	int res;
@@ -244,6 +269,10 @@ EXPORT_SYMBOL_GPL(i2c_handle_smbus_alert);
 
 module_i2c_driver(smbalert_driver);
 
+<<<<<<< HEAD
 MODULE_AUTHOR("Jean Delvare <khali@linux-fr.org>");
+=======
+MODULE_AUTHOR("Jean Delvare <jdelvare@suse.de>");
+>>>>>>> v3.18
 MODULE_DESCRIPTION("SMBus protocol extensions support");
 MODULE_LICENSE("GPL");

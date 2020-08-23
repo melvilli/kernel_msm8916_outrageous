@@ -18,7 +18,11 @@
 #include <linux/i2c.h>
 #include <linux/io.h>
 #include <linux/clk.h>
+<<<<<<< HEAD
 #include <linux/i2c/at24.h>
+=======
+#include <linux/platform_data/at24.h>
+>>>>>>> v3.18
 #include <linux/leds.h>
 #include <linux/mtd/mtd.h>
 #include <linux/mtd/partitions.h>
@@ -176,7 +180,11 @@ static struct at24_platform_data eeprom_info = {
 	.context	= (void *)0x7f00,
 };
 
+<<<<<<< HEAD
 static struct snd_platform_data dm365_evm_snd_data = {
+=======
+static struct snd_platform_data dm365_evm_snd_data __maybe_unused = {
+>>>>>>> v3.18
 	.asp_chan_q = EVENTQ_3,
 };
 
@@ -505,11 +513,18 @@ static struct vpbe_output dm365evm_vpbe_outputs[] = {
 /*
  * Amplifiers on the board
  */
+<<<<<<< HEAD
 struct ths7303_platform_data ths7303_pdata = {
 	.ch_1 = 3,
 	.ch_2 = 3,
 	.ch_3 = 3,
 	.init_enable = 1,
+=======
+static struct ths7303_platform_data ths7303_pdata = {
+	.ch_1 = 3,
+	.ch_2 = 3,
+	.ch_3 = 3,
+>>>>>>> v3.18
 };
 
 static struct amp_config_info vpbe_amp = {
@@ -719,10 +734,13 @@ fail:
 	/* REVISIT export switches: NTSC/PAL (SW5.6), EXTRA1 (SW5.2), etc */
 }
 
+<<<<<<< HEAD
 static struct davinci_uart_config uart_config __initdata = {
 	.enabled_uarts = (1 << 0),
 };
 
+=======
+>>>>>>> v3.18
 static void __init dm365_evm_map_io(void)
 {
 	dm365_init();
@@ -748,8 +766,19 @@ static struct spi_board_info dm365_evm_spi_info[] __initconst = {
 
 static __init void dm365_evm_init(void)
 {
+<<<<<<< HEAD
 	evm_init_i2c();
 	davinci_serial_init(&uart_config);
+=======
+	int ret;
+
+	ret = dm365_gpio_register();
+	if (ret)
+		pr_warn("%s: GPIO init failed: %d\n", __func__, ret);
+
+	evm_init_i2c();
+	davinci_serial_init(dm365_serial_device);
+>>>>>>> v3.18
 
 	dm365evm_emac_configure();
 	dm365evm_mmc_configure();

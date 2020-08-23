@@ -13,7 +13,11 @@
 #include <linux/io.h>
 #include <linux/regmap.h>
 
+<<<<<<< HEAD
 #include <media/s5p_fimc.h>
+=======
+#include <media/exynos-fimc.h>
+>>>>>>> v3.18
 #include "media-dev.h"
 
 #include "fimc-reg.h"
@@ -618,7 +622,11 @@ int fimc_hw_set_camera_source(struct fimc_dev *fimc,
 		}
 
 		if (i == ARRAY_SIZE(pix_desc)) {
+<<<<<<< HEAD
 			v4l2_err(&vc->vfd,
+=======
+			v4l2_err(&vc->ve.vdev,
+>>>>>>> v3.18
 				 "Camera color format not supported: %d\n",
 				 vc->ci_fmt.code);
 			return -EINVAL;
@@ -698,7 +706,11 @@ int fimc_hw_set_camera_type(struct fimc_dev *fimc,
 			cfg |= FIMC_REG_CIGCTRL_CAM_JPEG;
 			break;
 		default:
+<<<<<<< HEAD
 			v4l2_err(&vid_cap->vfd,
+=======
+			v4l2_err(&vid_cap->ve.vdev,
+>>>>>>> v3.18
 				 "Not supported camera pixel format: %#x\n",
 				 vid_cap->ci_fmt.code);
 			return -EINVAL;
@@ -721,7 +733,12 @@ int fimc_hw_set_camera_type(struct fimc_dev *fimc,
 			WARN_ONCE(1, "ISP Writeback input is not supported\n");
 		break;
 	default:
+<<<<<<< HEAD
 		v4l2_err(&vid_cap->vfd, "Invalid FIMC bus type selected: %d\n",
+=======
+		v4l2_err(&vid_cap->ve.vdev,
+			 "Invalid FIMC bus type selected: %d\n",
+>>>>>>> v3.18
 			 source->fimc_bus_type);
 		return -EINVAL;
 	}

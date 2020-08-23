@@ -1928,11 +1928,18 @@ static int ene_load_bincode(struct us_data *us, unsigned char flag)
 		usb_stor_dbg(us, "load firmware %s failed\n", fw_name);
 		goto nofw;
 	}
+<<<<<<< HEAD
 	buf = kmalloc(sd_fw->size, GFP_KERNEL);
 	if (buf == NULL)
 		goto nofw;
 
 	memcpy(buf, sd_fw->data, sd_fw->size);
+=======
+	buf = kmemdup(sd_fw->data, sd_fw->size, GFP_KERNEL);
+	if (buf == NULL)
+		goto nofw;
+
+>>>>>>> v3.18
 	memset(bcb, 0, sizeof(struct bulk_cb_wrap));
 	bcb->Signature = cpu_to_le32(US_BULK_CB_SIGN);
 	bcb->DataTransferLength = sd_fw->size;
@@ -2345,8 +2352,13 @@ static int ene_ub6250_probe(struct usb_interface *intf,
 	}
 
 	if (!(misc_reg03 & 0x01)) {
+<<<<<<< HEAD
 		pr_info("ums_eneub6250: The driver only supports SD/MS card. "
 			"To use SM card, please build driver/staging/keucr\n");
+=======
+		pr_info("ums_eneub6250: This driver only supports SD/MS cards. "
+			"It does not support SM cards.\n");
+>>>>>>> v3.18
 	}
 
 	return result;

@@ -26,17 +26,30 @@
 #include <linux/platform_device.h>
 #include <linux/gpio.h>
 #include <linux/mtd/partitions.h>
+<<<<<<< HEAD
+=======
+#include <linux/platform_data/gpio-davinci.h>
+#include <linux/platform_data/i2c-davinci.h>
+#include <linux/platform_data/mmc-davinci.h>
+#include <linux/platform_data/mtd-davinci.h>
+#include <linux/platform_data/usb-davinci.h>
+>>>>>>> v3.18
 
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 
 #include <mach/common.h>
+<<<<<<< HEAD
 #include <linux/platform_data/i2c-davinci.h>
 #include <mach/serial.h>
 #include <mach/mux.h>
 #include <linux/platform_data/mtd-davinci.h>
 #include <linux/platform_data/mmc-davinci.h>
 #include <linux/platform_data/usb-davinci.h>
+=======
+#include <mach/serial.h>
+#include <mach/mux.h>
+>>>>>>> v3.18
 
 #include "davinci.h"
 
@@ -154,10 +167,13 @@ static struct platform_device *davinci_ntosd2_devices[] __initdata = {
 	&ntosd2_leds_dev,
 };
 
+<<<<<<< HEAD
 static struct davinci_uart_config uart_config __initdata = {
 	.enabled_uarts = (1 << 0),
 };
 
+=======
+>>>>>>> v3.18
 static void __init davinci_ntosd2_map_io(void)
 {
 	dm644x_init();
@@ -173,9 +189,20 @@ static struct davinci_mmc_config davinci_ntosd2_mmc_config = {
 
 static __init void davinci_ntosd2_init(void)
 {
+<<<<<<< HEAD
 	struct clk *aemif_clk;
 	struct davinci_soc_info *soc_info = &davinci_soc_info;
 
+=======
+	int ret;
+	struct clk *aemif_clk;
+	struct davinci_soc_info *soc_info = &davinci_soc_info;
+
+	ret = dm644x_gpio_register();
+	if (ret)
+		pr_warn("%s: GPIO init failed: %d\n", __func__, ret);
+
+>>>>>>> v3.18
 	aemif_clk = clk_get(NULL, "aemif");
 	clk_prepare_enable(aemif_clk);
 
@@ -198,7 +225,11 @@ static __init void davinci_ntosd2_init(void)
 	platform_add_devices(davinci_ntosd2_devices,
 				ARRAY_SIZE(davinci_ntosd2_devices));
 
+<<<<<<< HEAD
 	davinci_serial_init(&uart_config);
+=======
+	davinci_serial_init(dm644x_serial_device);
+>>>>>>> v3.18
 	dm644x_init_asp(&dm644x_ntosd2_snd_data);
 
 	soc_info->emac_pdata->phy_id = NEUROS_OSD2_PHY_ID;

@@ -186,7 +186,11 @@ static void __iomem *_sparc_alloc_io(unsigned int busno, unsigned long phys,
 
 	if (name == NULL) name = "???";
 
+<<<<<<< HEAD
 	if ((xres = xres_alloc()) != 0) {
+=======
+	if ((xres = xres_alloc()) != NULL) {
+>>>>>>> v3.18
 		tack = xres->xname;
 		res = &xres->xres;
 	} else {
@@ -278,7 +282,12 @@ static void *sbus_alloc_coherent(struct device *dev, size_t len,
 	}
 
 	order = get_order(len_total);
+<<<<<<< HEAD
 	if ((va = __get_free_pages(GFP_KERNEL|__GFP_COMP, order)) == 0)
+=======
+	va = __get_free_pages(gfp, order);
+	if (va == 0)
+>>>>>>> v3.18
 		goto err_nopages;
 
 	if ((res = kzalloc(sizeof(struct resource), GFP_KERNEL)) == NULL)
@@ -400,7 +409,11 @@ static void sbus_sync_sg_for_device(struct device *dev, struct scatterlist *sg,
 	BUG();
 }
 
+<<<<<<< HEAD
 struct dma_map_ops sbus_dma_ops = {
+=======
+static struct dma_map_ops sbus_dma_ops = {
+>>>>>>> v3.18
 	.alloc			= sbus_alloc_coherent,
 	.free			= sbus_free_coherent,
 	.map_page		= sbus_map_page,
@@ -443,7 +456,11 @@ static void *pci32_alloc_coherent(struct device *dev, size_t len,
 	}
 
 	order = get_order(len_total);
+<<<<<<< HEAD
 	va = (void *) __get_free_pages(GFP_KERNEL, order);
+=======
+	va = (void *) __get_free_pages(gfp, order);
+>>>>>>> v3.18
 	if (va == NULL) {
 		printk("pci_alloc_consistent: no %ld pages\n", len_total>>PAGE_SHIFT);
 		goto err_nopages;
@@ -666,10 +683,16 @@ EXPORT_SYMBOL(dma_ops);
  */
 int dma_supported(struct device *dev, u64 mask)
 {
+<<<<<<< HEAD
 #ifdef CONFIG_PCI
 	if (dev->bus == &pci_bus_type)
 		return 1;
 #endif
+=======
+	if (dev_is_pci(dev))
+		return 1;
+
+>>>>>>> v3.18
 	return 0;
 }
 EXPORT_SYMBOL(dma_supported);
@@ -682,7 +705,11 @@ static int sparc_io_proc_show(struct seq_file *m, void *v)
 	const char *nm;
 
 	for (r = root->child; r != NULL; r = r->sibling) {
+<<<<<<< HEAD
 		if ((nm = r->name) == 0) nm = "???";
+=======
+		if ((nm = r->name) == NULL) nm = "???";
+>>>>>>> v3.18
 		seq_printf(m, "%016llx-%016llx: %s\n",
 				(unsigned long long)r->start,
 				(unsigned long long)r->end, nm);

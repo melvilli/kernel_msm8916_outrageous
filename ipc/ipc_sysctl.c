@@ -18,7 +18,11 @@
 #include <linux/msg.h>
 #include "util.h"
 
+<<<<<<< HEAD
 static void *get_ipc(ctl_table *table)
+=======
+static void *get_ipc(struct ctl_table *table)
+>>>>>>> v3.18
 {
 	char *which = table->data;
 	struct ipc_namespace *ipc_ns = current->nsproxy->ipc_ns;
@@ -27,7 +31,11 @@ static void *get_ipc(ctl_table *table)
 }
 
 #ifdef CONFIG_PROC_SYSCTL
+<<<<<<< HEAD
 static int proc_ipc_dointvec(ctl_table *table, int write,
+=======
+static int proc_ipc_dointvec(struct ctl_table *table, int write,
+>>>>>>> v3.18
 	void __user *buffer, size_t *lenp, loff_t *ppos)
 {
 	struct ctl_table ipc_table;
@@ -38,7 +46,11 @@ static int proc_ipc_dointvec(ctl_table *table, int write,
 	return proc_dointvec(&ipc_table, write, buffer, lenp, ppos);
 }
 
+<<<<<<< HEAD
 static int proc_ipc_dointvec_minmax(ctl_table *table, int write,
+=======
+static int proc_ipc_dointvec_minmax(struct ctl_table *table, int write,
+>>>>>>> v3.18
 	void __user *buffer, size_t *lenp, loff_t *ppos)
 {
 	struct ctl_table ipc_table;
@@ -49,7 +61,11 @@ static int proc_ipc_dointvec_minmax(ctl_table *table, int write,
 	return proc_dointvec_minmax(&ipc_table, write, buffer, lenp, ppos);
 }
 
+<<<<<<< HEAD
 static int proc_ipc_dointvec_minmax_orphans(ctl_table *table, int write,
+=======
+static int proc_ipc_dointvec_minmax_orphans(struct ctl_table *table, int write,
+>>>>>>> v3.18
 	void __user *buffer, size_t *lenp, loff_t *ppos)
 {
 	struct ipc_namespace *ns = current->nsproxy->ipc_ns;
@@ -62,7 +78,11 @@ static int proc_ipc_dointvec_minmax_orphans(ctl_table *table, int write,
 	return err;
 }
 
+<<<<<<< HEAD
 static int proc_ipc_callback_dointvec_minmax(ctl_table *table, int write,
+=======
+static int proc_ipc_callback_dointvec_minmax(struct ctl_table *table, int write,
+>>>>>>> v3.18
 	void __user *buffer, size_t *lenp, loff_t *ppos)
 {
 	struct ctl_table ipc_table;
@@ -85,7 +105,11 @@ static int proc_ipc_callback_dointvec_minmax(ctl_table *table, int write,
 	return rc;
 }
 
+<<<<<<< HEAD
 static int proc_ipc_doulongvec_minmax(ctl_table *table, int write,
+=======
+static int proc_ipc_doulongvec_minmax(struct ctl_table *table, int write,
+>>>>>>> v3.18
 	void __user *buffer, size_t *lenp, loff_t *ppos)
 {
 	struct ctl_table ipc_table;
@@ -119,7 +143,11 @@ static void ipc_auto_callback(int val)
 	}
 }
 
+<<<<<<< HEAD
 static int proc_ipcauto_dointvec_minmax(ctl_table *table, int write,
+=======
+static int proc_ipcauto_dointvec_minmax(struct ctl_table *table, int write,
+>>>>>>> v3.18
 	void __user *buffer, size_t *lenp, loff_t *ppos)
 {
 	struct ctl_table ipc_table;
@@ -163,21 +191,33 @@ static struct ctl_table ipc_kern_table[] = {
 	{
 		.procname	= "shmmax",
 		.data		= &init_ipc_ns.shm_ctlmax,
+<<<<<<< HEAD
 		.maxlen		= sizeof (init_ipc_ns.shm_ctlmax),
+=======
+		.maxlen		= sizeof(init_ipc_ns.shm_ctlmax),
+>>>>>>> v3.18
 		.mode		= 0644,
 		.proc_handler	= proc_ipc_doulongvec_minmax,
 	},
 	{
 		.procname	= "shmall",
 		.data		= &init_ipc_ns.shm_ctlall,
+<<<<<<< HEAD
 		.maxlen		= sizeof (init_ipc_ns.shm_ctlall),
+=======
+		.maxlen		= sizeof(init_ipc_ns.shm_ctlall),
+>>>>>>> v3.18
 		.mode		= 0644,
 		.proc_handler	= proc_ipc_doulongvec_minmax,
 	},
 	{
 		.procname	= "shmmni",
 		.data		= &init_ipc_ns.shm_ctlmni,
+<<<<<<< HEAD
 		.maxlen		= sizeof (init_ipc_ns.shm_ctlmni),
+=======
+		.maxlen		= sizeof(init_ipc_ns.shm_ctlmni),
+>>>>>>> v3.18
 		.mode		= 0644,
 		.proc_handler	= proc_ipc_dointvec,
 	},
@@ -193,7 +233,11 @@ static struct ctl_table ipc_kern_table[] = {
 	{
 		.procname	= "msgmax",
 		.data		= &init_ipc_ns.msg_ctlmax,
+<<<<<<< HEAD
 		.maxlen		= sizeof (init_ipc_ns.msg_ctlmax),
+=======
+		.maxlen		= sizeof(init_ipc_ns.msg_ctlmax),
+>>>>>>> v3.18
 		.mode		= 0644,
 		.proc_handler	= proc_ipc_dointvec_minmax,
 		.extra1		= &zero,
@@ -202,7 +246,11 @@ static struct ctl_table ipc_kern_table[] = {
 	{
 		.procname	= "msgmni",
 		.data		= &init_ipc_ns.msg_ctlmni,
+<<<<<<< HEAD
 		.maxlen		= sizeof (init_ipc_ns.msg_ctlmni),
+=======
+		.maxlen		= sizeof(init_ipc_ns.msg_ctlmni),
+>>>>>>> v3.18
 		.mode		= 0644,
 		.proc_handler	= proc_ipc_callback_dointvec_minmax,
 		.extra1		= &zero,
@@ -211,7 +259,11 @@ static struct ctl_table ipc_kern_table[] = {
 	{
 		.procname	=  "msgmnb",
 		.data		= &init_ipc_ns.msg_ctlmnb,
+<<<<<<< HEAD
 		.maxlen		= sizeof (init_ipc_ns.msg_ctlmnb),
+=======
+		.maxlen		= sizeof(init_ipc_ns.msg_ctlmnb),
+>>>>>>> v3.18
 		.mode		= 0644,
 		.proc_handler	= proc_ipc_dointvec_minmax,
 		.extra1		= &zero,
@@ -220,7 +272,11 @@ static struct ctl_table ipc_kern_table[] = {
 	{
 		.procname	= "sem",
 		.data		= &init_ipc_ns.sem_ctls,
+<<<<<<< HEAD
 		.maxlen		= 4*sizeof (int),
+=======
+		.maxlen		= 4*sizeof(int),
+>>>>>>> v3.18
 		.mode		= 0644,
 		.proc_handler	= proc_ipc_dointvec,
 	},
@@ -280,4 +336,8 @@ static int __init ipc_sysctl_init(void)
 	return 0;
 }
 
+<<<<<<< HEAD
 __initcall(ipc_sysctl_init);
+=======
+device_initcall(ipc_sysctl_init);
+>>>>>>> v3.18

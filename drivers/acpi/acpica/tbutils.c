@@ -1,11 +1,19 @@
 /******************************************************************************
  *
+<<<<<<< HEAD
  * Module Name: tbutils   - table utilities
+=======
+ * Module Name: tbutils - ACPI Table utilities
+>>>>>>> v3.18
  *
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -49,6 +57,7 @@
 ACPI_MODULE_NAME("tbutils")
 
 /* Local prototypes */
+<<<<<<< HEAD
 static void acpi_tb_fix_string(char *string, acpi_size length);
 
 static void
@@ -118,6 +127,11 @@ acpi_tb_check_xsdt(acpi_physical_address address)
 		return AE_OK;
 }
 
+=======
+static acpi_physical_address
+acpi_tb_get_root_table_entry(u8 *table_entry, u32 table_entry_size);
+
+>>>>>>> v3.18
 #if (!ACPI_REDUCED_HARDWARE)
 /*******************************************************************************
  *
@@ -176,6 +190,7 @@ u8 acpi_tb_tables_loaded(void)
 
 /*******************************************************************************
  *
+<<<<<<< HEAD
  * FUNCTION:    acpi_tb_fix_string
  *
  * PARAMETERS:  string              - String to be repaired
@@ -355,6 +370,8 @@ u8 acpi_tb_checksum(u8 *buffer, u32 length)
 
 /*******************************************************************************
  *
+=======
+>>>>>>> v3.18
  * FUNCTION:    acpi_tb_check_dsdt_header
  *
  * PARAMETERS:  None
@@ -421,9 +438,19 @@ struct acpi_table_header *acpi_tb_copy_dsdt(u32 table_index)
 	}
 
 	ACPI_MEMCPY(new_table, table_desc->pointer, table_desc->length);
+<<<<<<< HEAD
 	acpi_tb_delete_table(table_desc);
 	table_desc->pointer = new_table;
 	table_desc->flags = ACPI_TABLE_ORIGIN_ALLOCATED;
+=======
+	acpi_tb_uninstall_table(table_desc);
+
+	acpi_tb_init_table_descriptor(&acpi_gbl_root_table_list.
+				      tables[ACPI_TABLE_INDEX_DSDT],
+				      ACPI_PTR_TO_PHYSADDR(new_table),
+				      ACPI_TABLE_ORIGIN_INTERNAL_VIRTUAL,
+				      new_table);
+>>>>>>> v3.18
 
 	ACPI_INFO((AE_INFO,
 		   "Forced DSDT copy: length 0x%05X copied locally, original unmapped",
@@ -434,6 +461,7 @@ struct acpi_table_header *acpi_tb_copy_dsdt(u32 table_index)
 
 /*******************************************************************************
  *
+<<<<<<< HEAD
  * FUNCTION:    acpi_tb_install_table
  *
  * PARAMETERS:  address                 - Physical address of DSDT or FACS
@@ -544,6 +572,8 @@ acpi_tb_install_table(acpi_physical_address address,
 
 /*******************************************************************************
  *
+=======
+>>>>>>> v3.18
  * FUNCTION:    acpi_tb_get_root_table_entry
  *
  * PARAMETERS:  table_entry         - Pointer to the RSDT/XSDT table entry
@@ -568,7 +598,11 @@ acpi_tb_get_root_table_entry(u8 *table_entry, u32 table_entry_size)
 	 * Get the table physical address (32-bit for RSDT, 64-bit for XSDT):
 	 * Note: Addresses are 32-bit aligned (not 64) in both RSDT and XSDT
 	 */
+<<<<<<< HEAD
 	if (table_entry_size == sizeof(u32)) {
+=======
+	if (table_entry_size == ACPI_RSDT_ENTRY_SIZE) {
+>>>>>>> v3.18
 		/*
 		 * 32-bit platform, RSDT: Return 32-bit table entry
 		 * 64-bit platform, RSDT: Expand 32-bit to 64-bit and return
@@ -615,8 +649,12 @@ acpi_tb_get_root_table_entry(u8 *table_entry, u32 table_entry_size)
  *
  ******************************************************************************/
 
+<<<<<<< HEAD
 acpi_status __init
 acpi_tb_parse_root_table(acpi_physical_address rsdp_address)
+=======
+acpi_status __init acpi_tb_parse_root_table(acpi_physical_address rsdp_address)
+>>>>>>> v3.18
 {
 	struct acpi_table_rsdp *rsdp;
 	u32 table_entry_size;
@@ -624,6 +662,7 @@ acpi_tb_parse_root_table(acpi_physical_address rsdp_address)
 	u32 table_count;
 	struct acpi_table_header *table;
 	acpi_physical_address address;
+<<<<<<< HEAD
 	acpi_physical_address uninitialized_var(rsdt_address);
 	u32 length;
 	u8 *table_entry;
@@ -634,6 +673,17 @@ acpi_tb_parse_root_table(acpi_physical_address rsdp_address)
 	/*
 	 * Map the entire RSDP and extract the address of the RSDT or XSDT
 	 */
+=======
+	u32 length;
+	u8 *table_entry;
+	acpi_status status;
+	u32 table_index;
+
+	ACPI_FUNCTION_TRACE(tb_parse_root_table);
+
+	/* Map the entire RSDP and extract the address of the RSDT or XSDT */
+
+>>>>>>> v3.18
 	rsdp = acpi_os_map_memory(rsdp_address, sizeof(struct acpi_table_rsdp));
 	if (!rsdp) {
 		return_ACPI_STATUS(AE_NO_MEMORY);
@@ -643,6 +693,7 @@ acpi_tb_parse_root_table(acpi_physical_address rsdp_address)
 				   ACPI_CAST_PTR(struct acpi_table_header,
 						 rsdp));
 
+<<<<<<< HEAD
 	/* Differentiate between RSDT and XSDT root tables */
 
 	if (rsdp->revision > 1 && rsdp->xsdt_physical_address
@@ -656,11 +707,28 @@ acpi_tb_parse_root_table(acpi_physical_address rsdp_address)
 		table_entry_size = sizeof(u64);
 		rsdt_address = (acpi_physical_address)
 					rsdp->rsdt_physical_address;
+=======
+	/* Use XSDT if present and not overridden. Otherwise, use RSDT */
+
+	if ((rsdp->revision > 1) &&
+	    rsdp->xsdt_physical_address && !acpi_gbl_do_not_use_xsdt) {
+		/*
+		 * RSDP contains an XSDT (64-bit physical addresses). We must use
+		 * the XSDT if the revision is > 1 and the XSDT pointer is present,
+		 * as per the ACPI specification.
+		 */
+		address = (acpi_physical_address) rsdp->xsdt_physical_address;
+		table_entry_size = ACPI_XSDT_ENTRY_SIZE;
+>>>>>>> v3.18
 	} else {
 		/* Root table is an RSDT (32-bit physical addresses) */
 
 		address = (acpi_physical_address) rsdp->rsdt_physical_address;
+<<<<<<< HEAD
 		table_entry_size = sizeof(u32);
+=======
+		table_entry_size = ACPI_RSDT_ENTRY_SIZE;
+>>>>>>> v3.18
 	}
 
 	/*
@@ -669,6 +737,7 @@ acpi_tb_parse_root_table(acpi_physical_address rsdp_address)
 	 */
 	acpi_os_unmap_memory(rsdp, sizeof(struct acpi_table_rsdp));
 
+<<<<<<< HEAD
 	if (table_entry_size == sizeof(u64)) {
 		if (acpi_tb_check_xsdt(address) == AE_NULL_ENTRY) {
 			/* XSDT has NULL entry, RSDT is used */
@@ -678,6 +747,8 @@ acpi_tb_parse_root_table(acpi_physical_address rsdp_address)
 					"using RSDT"));
 		}
 	}
+=======
+>>>>>>> v3.18
 	/* Map the RSDT/XSDT table header to get the full table length */
 
 	table = acpi_os_map_memory(address, sizeof(struct acpi_table_header));
@@ -687,12 +758,23 @@ acpi_tb_parse_root_table(acpi_physical_address rsdp_address)
 
 	acpi_tb_print_table_header(address, table);
 
+<<<<<<< HEAD
 	/* Get the length of the full table, verify length and map entire table */
 
 	length = table->length;
 	acpi_os_unmap_memory(table, sizeof(struct acpi_table_header));
 
 	if (length < sizeof(struct acpi_table_header)) {
+=======
+	/*
+	 * Validate length of the table, and map entire table.
+	 * Minimum length table must contain at least one entry.
+	 */
+	length = table->length;
+	acpi_os_unmap_memory(table, sizeof(struct acpi_table_header));
+
+	if (length < (sizeof(struct acpi_table_header) + table_entry_size)) {
+>>>>>>> v3.18
 		ACPI_BIOS_ERROR((AE_INFO,
 				 "Invalid table length 0x%X in RSDT/XSDT",
 				 length));
@@ -712,15 +794,25 @@ acpi_tb_parse_root_table(acpi_physical_address rsdp_address)
 		return_ACPI_STATUS(status);
 	}
 
+<<<<<<< HEAD
 	/* Calculate the number of tables described in the root table */
 
 	table_count = (u32)((table->length - sizeof(struct acpi_table_header)) /
 			    table_entry_size);
+=======
+	/* Get the number of entries and pointer to first entry */
+
+	table_count = (u32)((table->length - sizeof(struct acpi_table_header)) /
+			    table_entry_size);
+	table_entry = ACPI_ADD_PTR(u8, table, sizeof(struct acpi_table_header));
+
+>>>>>>> v3.18
 	/*
 	 * First two entries in the table array are reserved for the DSDT
 	 * and FACS, which are not actually present in the RSDT/XSDT - they
 	 * come from the FADT
 	 */
+<<<<<<< HEAD
 	table_entry =
 	    ACPI_CAST_PTR(u8, table) + sizeof(struct acpi_table_header);
 	acpi_gbl_root_table_list.current_table_count = 2;
@@ -779,5 +871,43 @@ acpi_tb_parse_root_table(acpi_physical_address rsdp_address)
 		}
 	}
 
+=======
+	acpi_gbl_root_table_list.current_table_count = 2;
+
+	/* Initialize the root table array from the RSDT/XSDT */
+
+	for (i = 0; i < table_count; i++) {
+
+		/* Get the table physical address (32-bit for RSDT, 64-bit for XSDT) */
+
+		address =
+		    acpi_tb_get_root_table_entry(table_entry, table_entry_size);
+
+		/* Skip NULL entries in RSDT/XSDT */
+
+		if (!address) {
+			goto next_table;
+		}
+
+		status = acpi_tb_install_standard_table(address,
+							ACPI_TABLE_ORIGIN_INTERNAL_PHYSICAL,
+							FALSE, TRUE,
+							&table_index);
+
+		if (ACPI_SUCCESS(status) &&
+		    ACPI_COMPARE_NAME(&acpi_gbl_root_table_list.
+				      tables[table_index].signature,
+				      ACPI_SIG_FADT)) {
+			acpi_tb_parse_fadt(table_index);
+		}
+
+next_table:
+
+		table_entry += table_entry_size;
+	}
+
+	acpi_os_unmap_memory(table, length);
+
+>>>>>>> v3.18
 	return_ACPI_STATUS(AE_OK);
 }

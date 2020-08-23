@@ -170,21 +170,37 @@ static void od_check_cpu(int cpu, unsigned int load)
 		dbs_freq_increase(policy, policy->max);
 	} else {
 		/* Calculate the next frequency proportional to load */
+<<<<<<< HEAD
 		unsigned int freq_next;
 		freq_next = load * policy->cpuinfo.max_freq / 100;
+=======
+		unsigned int freq_next, min_f, max_f;
+
+		min_f = policy->cpuinfo.min_freq;
+		max_f = policy->cpuinfo.max_freq;
+		freq_next = min_f + load * (max_f - min_f) / 100;
+>>>>>>> v3.18
 
 		/* No longer fully busy, reset rate_mult */
 		dbs_info->rate_mult = 1;
 
 		if (!od_tuners->powersave_bias) {
 			__cpufreq_driver_target(policy, freq_next,
+<<<<<<< HEAD
 					CPUFREQ_RELATION_L);
+=======
+					CPUFREQ_RELATION_C);
+>>>>>>> v3.18
 			return;
 		}
 
 		freq_next = od_ops.powersave_bias_target(policy, freq_next,
 					CPUFREQ_RELATION_L);
+<<<<<<< HEAD
 		__cpufreq_driver_target(policy, freq_next, CPUFREQ_RELATION_L);
+=======
+		__cpufreq_driver_target(policy, freq_next, CPUFREQ_RELATION_C);
+>>>>>>> v3.18
 	}
 }
 
@@ -255,7 +271,10 @@ static void update_sampling_rate(struct dbs_data *dbs_data,
 	od_tuners->sampling_rate = new_rate = max(new_rate,
 			dbs_data->min_sampling_rate);
 
+<<<<<<< HEAD
 	get_online_cpus();
+=======
+>>>>>>> v3.18
 	for_each_online_cpu(cpu) {
 		struct cpufreq_policy *policy;
 		struct od_cpu_dbs_info_s *dbs_info;
@@ -293,7 +312,10 @@ static void update_sampling_rate(struct dbs_data *dbs_data,
 		}
 		mutex_unlock(&dbs_info->cdbs.timer_mutex);
 	}
+<<<<<<< HEAD
 	put_online_cpus();
+=======
+>>>>>>> v3.18
 }
 
 static ssize_t store_sampling_rate(struct dbs_data *dbs_data, const char *buf,

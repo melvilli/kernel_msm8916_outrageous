@@ -101,7 +101,11 @@ out:
 }
 
 
+<<<<<<< HEAD
 static struct of_device_id pmi_match[] = {
+=======
+static const struct of_device_id pmi_match[] = {
+>>>>>>> v3.18
 	{ .type = "ibm,pmi", .name = "ibm,pmi" },
 	{ .type = "ibm,pmi" },
 	{},

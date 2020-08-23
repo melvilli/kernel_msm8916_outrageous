@@ -4,7 +4,11 @@
 
 # Object file lists.
 
+<<<<<<< HEAD
 obj-y += prom.o irq.o time.o reset.o setup.o dma.o \
+=======
+obj-y += prom.o irq.o time.o reset.o setup.o \
+>>>>>>> v3.18
 	gpio.o clock.o platform.o timer.o serial.o
 
 obj-$(CONFIG_DEBUG_FS) += clock-debugfs.o

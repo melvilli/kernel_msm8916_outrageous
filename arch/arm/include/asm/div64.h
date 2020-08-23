@@ -46,7 +46,11 @@
 	__rem;							\
 })
 
+<<<<<<< HEAD
 #if __GNUC__ < 4
+=======
+#if __GNUC__ < 4 || !defined(CONFIG_AEABI)
+>>>>>>> v3.18
 
 /*
  * gcc versions earlier than 4.0 are simply too problematic for the

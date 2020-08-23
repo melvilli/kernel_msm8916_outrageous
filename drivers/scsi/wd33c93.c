@@ -502,7 +502,12 @@ wd33c93_execute(struct Scsi_Host *instance)
 	cmd = (struct scsi_cmnd *) hostdata->input_Q;
 	prev = NULL;
 	while (cmd) {
+<<<<<<< HEAD
 		if (!(hostdata->busy[cmd->device->id] & (1 << cmd->device->lun)))
+=======
+		if (!(hostdata->busy[cmd->device->id] &
+		      (1 << (cmd->device->lun & 0xff))))
+>>>>>>> v3.18
 			break;
 		prev = cmd;
 		cmd = (struct scsi_cmnd *) cmd->host_scribble;
@@ -593,10 +598,17 @@ wd33c93_execute(struct Scsi_Host *instance)
 
 	write_wd33c93(regs, WD_SOURCE_ID, ((cmd->SCp.phase) ? SRCID_ER : 0));
 
+<<<<<<< HEAD
 	write_wd33c93(regs, WD_TARGET_LUN, cmd->device->lun);
 	write_wd33c93(regs, WD_SYNCHRONOUS_TRANSFER,
 		      hostdata->sync_xfer[cmd->device->id]);
 	hostdata->busy[cmd->device->id] |= (1 << cmd->device->lun);
+=======
+	write_wd33c93(regs, WD_TARGET_LUN, (u8)cmd->device->lun);
+	write_wd33c93(regs, WD_SYNCHRONOUS_TRANSFER,
+		      hostdata->sync_xfer[cmd->device->id]);
+	hostdata->busy[cmd->device->id] |= (1 << (cmd->device->lun & 0xFF));
+>>>>>>> v3.18
 
 	if ((hostdata->level2 == L2_NONE) ||
 	    (hostdata->sync_stat[cmd->device->id] == SS_UNSET)) {
@@ -862,7 +874,11 @@ wd33c93_intr(struct Scsi_Host *instance)
 		}
 
 		cmd->result = DID_NO_CONNECT << 16;
+<<<<<<< HEAD
 		hostdata->busy[cmd->device->id] &= ~(1 << cmd->device->lun);
+=======
+		hostdata->busy[cmd->device->id] &= ~(1 << (cmd->device->lun & 0xff));
+>>>>>>> v3.18
 		hostdata->state = S_UNCONNECTED;
 		cmd->scsi_done(cmd);
 
@@ -895,7 +911,11 @@ wd33c93_intr(struct Scsi_Host *instance)
 
 		/* construct an IDENTIFY message with correct disconnect bit */
 
+<<<<<<< HEAD
 		hostdata->outgoing_msg[0] = (0x80 | 0x00 | cmd->device->lun);
+=======
+		hostdata->outgoing_msg[0] = IDENTIFY(0, cmd->device->lun);
+>>>>>>> v3.18
 		if (cmd->SCp.phase)
 			hostdata->outgoing_msg[0] |= 0x40;
 
@@ -1179,7 +1199,11 @@ wd33c93_intr(struct Scsi_Host *instance)
 			lun = read_wd33c93(regs, WD_TARGET_LUN);
 			DB(DB_INTR, printk(":%d.%d", cmd->SCp.Status, lun))
 			    hostdata->connected = NULL;
+<<<<<<< HEAD
 			hostdata->busy[cmd->device->id] &= ~(1 << cmd->device->lun);
+=======
+			hostdata->busy[cmd->device->id] &= ~(1 << (cmd->device->lun & 0xff));
+>>>>>>> v3.18
 			hostdata->state = S_UNCONNECTED;
 			if (cmd->SCp.Status == ILLEGAL_STATUS_BYTE)
 				cmd->SCp.Status = lun;
@@ -1268,7 +1292,11 @@ wd33c93_intr(struct Scsi_Host *instance)
 		}
 		DB(DB_INTR, printk("UNEXP_DISC"))
 		    hostdata->connected = NULL;
+<<<<<<< HEAD
 		hostdata->busy[cmd->device->id] &= ~(1 << cmd->device->lun);
+=======
+		hostdata->busy[cmd->device->id] &= ~(1 << (cmd->device->lun & 0xff));
+>>>>>>> v3.18
 		hostdata->state = S_UNCONNECTED;
 		if (cmd->cmnd[0] == REQUEST_SENSE && cmd->SCp.Status != GOOD)
 			cmd->result =
@@ -1300,7 +1328,11 @@ wd33c93_intr(struct Scsi_Host *instance)
 		switch (hostdata->state) {
 		case S_PRE_CMP_DISC:
 			hostdata->connected = NULL;
+<<<<<<< HEAD
 			hostdata->busy[cmd->device->id] &= ~(1 << cmd->device->lun);
+=======
+			hostdata->busy[cmd->device->id] &= ~(1 << (cmd->device->lun & 0xff));
+>>>>>>> v3.18
 			hostdata->state = S_UNCONNECTED;
 			DB(DB_INTR, printk(":%d", cmd->SCp.Status))
 			    if (cmd->cmnd[0] == REQUEST_SENSE
@@ -1353,7 +1385,11 @@ wd33c93_intr(struct Scsi_Host *instance)
 			if (hostdata->selecting) {
 				cmd = (struct scsi_cmnd *) hostdata->selecting;
 				hostdata->selecting = NULL;
+<<<<<<< HEAD
 				hostdata->busy[cmd->device->id] &= ~(1 << cmd->device->lun);
+=======
+				hostdata->busy[cmd->device->id] &= ~(1 << (cmd->device->lun & 0xff));
+>>>>>>> v3.18
 				cmd->host_scribble =
 				    (uchar *) hostdata->input_Q;
 				hostdata->input_Q = cmd;
@@ -1365,7 +1401,11 @@ wd33c93_intr(struct Scsi_Host *instance)
 			if (cmd) {
 				if (phs == 0x00) {
 					hostdata->busy[cmd->device->id] &=
+<<<<<<< HEAD
 					    ~(1 << cmd->device->lun);
+=======
+						~(1 << (cmd->device->lun & 0xff));
+>>>>>>> v3.18
 					cmd->host_scribble =
 					    (uchar *) hostdata->input_Q;
 					hostdata->input_Q = cmd;
@@ -1448,7 +1488,11 @@ wd33c93_intr(struct Scsi_Host *instance)
 		cmd = (struct scsi_cmnd *) hostdata->disconnected_Q;
 		patch = NULL;
 		while (cmd) {
+<<<<<<< HEAD
 			if (id == cmd->device->id && lun == cmd->device->lun)
+=======
+			if (id == cmd->device->id && lun == (u8)cmd->device->lun)
+>>>>>>> v3.18
 				break;
 			patch = cmd;
 			cmd = (struct scsi_cmnd *) cmd->host_scribble;
@@ -1459,7 +1503,11 @@ wd33c93_intr(struct Scsi_Host *instance)
 		if (!cmd) {
 			printk
 			    ("---TROUBLE: target %d.%d not in disconnect queue---",
+<<<<<<< HEAD
 			     id, lun);
+=======
+			     id, (u8)lun);
+>>>>>>> v3.18
 			spin_unlock_irqrestore(&hostdata->lock, flags);
 			return;
 		}
@@ -1705,7 +1753,11 @@ wd33c93_abort(struct scsi_cmnd * cmd)
 		sr = read_wd33c93(regs, WD_SCSI_STATUS);
 		printk("asr=%02x, sr=%02x.", asr, sr);
 
+<<<<<<< HEAD
 		hostdata->busy[cmd->device->id] &= ~(1 << cmd->device->lun);
+=======
+		hostdata->busy[cmd->device->id] &= ~(1 << (cmd->device->lun & 0xff));
+>>>>>>> v3.18
 		hostdata->connected = NULL;
 		hostdata->state = S_UNCONNECTED;
 		cmd->result = DID_ABORT << 16;
@@ -2169,7 +2221,11 @@ wd33c93_show_info(struct seq_file *m, struct Scsi_Host *instance)
 		seq_printf(m, "\nconnected:     ");
 		if (hd->connected) {
 			cmd = (struct scsi_cmnd *) hd->connected;
+<<<<<<< HEAD
 			seq_printf(m, " %d:%d(%02x)",
+=======
+			seq_printf(m, " %d:%llu(%02x)",
+>>>>>>> v3.18
 				cmd->device->id, cmd->device->lun, cmd->cmnd[0]);
 		}
 	}
@@ -2177,7 +2233,11 @@ wd33c93_show_info(struct seq_file *m, struct Scsi_Host *instance)
 		seq_printf(m, "\ninput_Q:       ");
 		cmd = (struct scsi_cmnd *) hd->input_Q;
 		while (cmd) {
+<<<<<<< HEAD
 			seq_printf(m, " %d:%d(%02x)",
+=======
+			seq_printf(m, " %d:%llu(%02x)",
+>>>>>>> v3.18
 				cmd->device->id, cmd->device->lun, cmd->cmnd[0]);
 			cmd = (struct scsi_cmnd *) cmd->host_scribble;
 		}
@@ -2186,7 +2246,11 @@ wd33c93_show_info(struct seq_file *m, struct Scsi_Host *instance)
 		seq_printf(m, "\ndisconnected_Q:");
 		cmd = (struct scsi_cmnd *) hd->disconnected_Q;
 		while (cmd) {
+<<<<<<< HEAD
 			seq_printf(m, " %d:%d(%02x)",
+=======
+			seq_printf(m, " %d:%llu(%02x)",
+>>>>>>> v3.18
 				cmd->device->id, cmd->device->lun, cmd->cmnd[0]);
 			cmd = (struct scsi_cmnd *) cmd->host_scribble;
 		}

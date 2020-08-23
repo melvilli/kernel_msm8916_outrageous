@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 static uint32_t nv98_pcrypt_data[] = {
+=======
+uint32_t nv98_pcrypt_data[] = {
+>>>>>>> v3.18
 /* 0x0000: ctx_dma */
 /* 0x0000: ctx_dma_query */
 	0x00000000,
@@ -150,7 +154,11 @@ static uint32_t nv98_pcrypt_data[] = {
 	0x00000000,
 };
 
+<<<<<<< HEAD
 static uint32_t nv98_pcrypt_code[] = {
+=======
+uint32_t nv98_pcrypt_code[] = {
+>>>>>>> v3.18
 	0x17f004bd,
 	0x0010fe35,
 	0xf10004fe,

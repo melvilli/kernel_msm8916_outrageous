@@ -53,7 +53,11 @@ typedef enum _HT_MCS_RATE{
 	HT_MCS14 = 0x00004000,
 	HT_MCS15 = 0x00008000,
 	// Do not define MCS32 here although 8190 support MCS32
+<<<<<<< HEAD
 }HT_MCS_RATE,*PHT_MCS_RATE;
+=======
+} HT_MCS_RATE, *PHT_MCS_RATE;
+>>>>>>> v3.18
 
 //
 // Represent Channel Width in HT Capabilities

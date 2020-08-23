@@ -1756,7 +1756,11 @@ static int ide_cd_probe(ide_drive_t *drive)
 
 	info->dev.parent = &drive->gendev;
 	info->dev.release = ide_cd_release;
+<<<<<<< HEAD
 	dev_set_name(&info->dev, dev_name(&drive->gendev));
+=======
+	dev_set_name(&info->dev, "%s", dev_name(&drive->gendev));
+>>>>>>> v3.18
 
 	if (device_register(&info->dev))
 		goto out_free_disk;

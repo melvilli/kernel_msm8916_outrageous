@@ -48,7 +48,11 @@ REPORT OPTIONS
 -k::
 --key=<value>::
         Sorting key. Possible values: acquired (default), contended,
+<<<<<<< HEAD
         wait_total, wait_max, wait_min.
+=======
+	avg_wait, wait_total, wait_max, wait_min.
+>>>>>>> v3.18
 
 INFO OPTIONS
 ------------

@@ -38,6 +38,7 @@ struct rtl2832_config {
 	u32 xtal;
 
 	/*
+<<<<<<< HEAD
 	 * IFs for all used modes.
 	 * Hz
 	 * 4570000, 4571429, 36000000, 36125000, 36166667, 44000000
@@ -45,6 +46,8 @@ struct rtl2832_config {
 	u32 if_dvbt;
 
 	/*
+=======
+>>>>>>> v3.18
 	 * tuner
 	 * XXX: This must be keep sync with dvb_usb_rtl28xxu demod driver.
 	 */
@@ -53,15 +56,37 @@ struct rtl2832_config {
 #define RTL2832_TUNER_E4000     0x27
 #define RTL2832_TUNER_FC0013    0x29
 #define RTL2832_TUNER_R820T	0x2a
+<<<<<<< HEAD
+=======
+#define RTL2832_TUNER_R828D	0x2b
+>>>>>>> v3.18
 	u8 tuner;
 };
 
 #if IS_ENABLED(CONFIG_DVB_RTL2832)
+<<<<<<< HEAD
 extern struct dvb_frontend *rtl2832_attach(
 	const struct rtl2832_config *cfg,
 	struct i2c_adapter *i2c
 );
 #else
+=======
+struct dvb_frontend *rtl2832_attach(
+	const struct rtl2832_config *cfg,
+	struct i2c_adapter *i2c
+);
+
+extern struct i2c_adapter *rtl2832_get_i2c_adapter(
+	struct dvb_frontend *fe
+);
+
+extern struct i2c_adapter *rtl2832_get_private_i2c_adapter(
+	struct dvb_frontend *fe
+);
+
+#else
+
+>>>>>>> v3.18
 static inline struct dvb_frontend *rtl2832_attach(
 	const struct rtl2832_config *config,
 	struct i2c_adapter *i2c
@@ -70,6 +95,24 @@ static inline struct dvb_frontend *rtl2832_attach(
 	pr_warn("%s: driver disabled by Kconfig\n", __func__);
 	return NULL;
 }
+<<<<<<< HEAD
+=======
+
+static inline struct i2c_adapter *rtl2832_get_i2c_adapter(
+	struct dvb_frontend *fe
+)
+{
+	return NULL;
+}
+
+static inline struct i2c_adapter *rtl2832_get_private_i2c_adapter(
+	struct dvb_frontend *fe
+)
+{
+	return NULL;
+}
+
+>>>>>>> v3.18
 #endif
 
 

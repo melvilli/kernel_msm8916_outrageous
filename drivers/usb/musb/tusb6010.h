@@ -12,6 +12,7 @@
 #ifndef __TUSB6010_H__
 #define __TUSB6010_H__
 
+<<<<<<< HEAD
 extern u8 tusb_get_revision(struct musb *musb);
 
 #ifdef CONFIG_USB_TUSB6010
@@ -20,6 +21,8 @@ extern u8 tusb_get_revision(struct musb *musb);
 #define musb_in_tusb()			0
 #endif
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_USB_TUSB_OMAP_DMA
 #define tusb_dma_omap()			1
 #else

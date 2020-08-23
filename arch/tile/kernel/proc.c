@@ -113,8 +113,12 @@ arch_initcall(proc_tile_init);
  * Support /proc/sys/tile directory
  */
 
+<<<<<<< HEAD
 #ifndef __tilegx__  /* FIXME: GX: no support for unaligned access yet */
 static ctl_table unaligned_subtable[] = {
+=======
+static struct ctl_table unaligned_subtable[] = {
+>>>>>>> v3.18
 	{
 		.procname	= "enabled",
 		.data		= &unaligned_fixup,
@@ -139,7 +143,11 @@ static ctl_table unaligned_subtable[] = {
 	{}
 };
 
+<<<<<<< HEAD
 static ctl_table unaligned_table[] = {
+=======
+static struct ctl_table unaligned_table[] = {
+>>>>>>> v3.18
 	{
 		.procname	= "unaligned_fixup",
 		.mode		= 0555,
@@ -160,4 +168,7 @@ static int __init proc_sys_tile_init(void)
 }
 
 arch_initcall(proc_sys_tile_init);
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18

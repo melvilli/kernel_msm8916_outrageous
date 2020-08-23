@@ -48,7 +48,11 @@ static unsigned int ixp4xx_mmio_data_xfer(struct ata_device *dev,
 	u16 *buf16 = (u16 *) buf;
 	struct ata_port *ap = dev->link->ap;
 	void __iomem *mmio = ap->ioaddr.data_addr;
+<<<<<<< HEAD
 	struct ixp4xx_pata_data *data = ap->host->dev->platform_data;
+=======
+	struct ixp4xx_pata_data *data = dev_get_platdata(ap->host->dev);
+>>>>>>> v3.18
 
 	/* set the expansion bus in 16bit mode and restore
 	 * 8 bit mode after the transaction.
@@ -143,7 +147,12 @@ static int ixp4xx_pata_probe(struct platform_device *pdev)
 	struct resource *cs0, *cs1;
 	struct ata_host *host;
 	struct ata_port *ap;
+<<<<<<< HEAD
 	struct ixp4xx_pata_data *data = pdev->dev.platform_data;
+=======
+	struct ixp4xx_pata_data *data = dev_get_platdata(&pdev->dev);
+	int ret;
+>>>>>>> v3.18
 
 	cs0 = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	cs1 = platform_get_resource(pdev, IORESOURCE_MEM, 1);
@@ -157,7 +166,13 @@ static int ixp4xx_pata_probe(struct platform_device *pdev)
 		return -ENOMEM;
 
 	/* acquire resources and fill host */
+<<<<<<< HEAD
 	pdev->dev.coherent_dma_mask = DMA_BIT_MASK(32);
+=======
+	ret = dma_set_coherent_mask(&pdev->dev, DMA_BIT_MASK(32));
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 
 	data->cs0 = devm_ioremap(&pdev->dev, cs0->start, 0x1000);
 	data->cs1 = devm_ioremap(&pdev->dev, cs1->start, 0x1000);

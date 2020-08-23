@@ -6,6 +6,7 @@
 ** This file is subject to the terms and conditions of the GNU General Public
 ** License.  See the file COPYING in the main directory of this archive
 ** for more details.
+<<<<<<< HEAD
 **
 ** Created 09/29/92 by Greg Harp
 **
@@ -18,11 +19,14 @@
 ** 5/10/96 Geert Uytterhoeven:
 **   Redesign of the boot information structure; moved boot information
 **   structure to bootinfo.h
+=======
+>>>>>>> v3.18
 */
 
 #ifndef _UAPI_M68K_SETUP_H
 #define _UAPI_M68K_SETUP_H
 
+<<<<<<< HEAD
 
 
     /*
@@ -100,4 +104,8 @@
 #define MMU_COLDFIRE   (1<<MMUB_COLDFIRE)
 
 
+=======
+#define COMMAND_LINE_SIZE 256
+
+>>>>>>> v3.18
 #endif /* _UAPI_M68K_SETUP_H */

@@ -1,7 +1,11 @@
 /*
  * shmob_drm_kms.h  --  SH Mobile DRM Mode Setting
  *
+<<<<<<< HEAD
  * Copyright (C) 2012 Renesas Corporation
+=======
+ * Copyright (C) 2012 Renesas Electronics Corporation
+>>>>>>> v3.18
  *
  * Laurent Pinchart (laurent.pinchart@ideasonboard.com)
  *

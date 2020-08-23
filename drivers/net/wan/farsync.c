@@ -26,6 +26,10 @@
 #include <linux/ioport.h>
 #include <linux/init.h>
 #include <linux/interrupt.h>
+<<<<<<< HEAD
+=======
+#include <linux/delay.h>
+>>>>>>> v3.18
 #include <linux/if.h>
 #include <linux/hdlc.h>
 #include <asm/io.h>
@@ -530,7 +534,11 @@ do {								\
 /*
  *      PCI ID lookup table
  */
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(fst_pci_dev_id) = {
+=======
+static const struct pci_device_id fst_pci_dev_id[] = {
+>>>>>>> v3.18
 	{PCI_VENDOR_ID_FARSITE, PCI_DEVICE_ID_FARSITE_T2P, PCI_ANY_ID, 
 	 PCI_ANY_ID, 0, 0, FST_TYPE_T2P},
 
@@ -678,7 +686,10 @@ static inline void
 fst_cpureset(struct fst_card_info *card)
 {
 	unsigned char interrupt_line_register;
+<<<<<<< HEAD
 	unsigned long j = jiffies + 1;
+=======
+>>>>>>> v3.18
 	unsigned int regval;
 
 	if (card->family == FST_FAMILY_TXU) {
@@ -696,16 +707,24 @@ fst_cpureset(struct fst_card_info *card)
 		/*
 		 * We are delaying here to allow the 9054 to reset itself
 		 */
+<<<<<<< HEAD
 		j = jiffies + 1;
 		while (jiffies < j)
 			/* Do nothing */ ;
+=======
+		usleep_range(10, 20);
+>>>>>>> v3.18
 		outw(0x240f, card->pci_conf + CNTRL_9054 + 2);
 		/*
 		 * We are delaying here to allow the 9054 to reload its eeprom
 		 */
+<<<<<<< HEAD
 		j = jiffies + 1;
 		while (jiffies < j)
 			/* Do nothing */ ;
+=======
+		usleep_range(10, 20);
+>>>>>>> v3.18
 		outw(0x040f, card->pci_conf + CNTRL_9054 + 2);
 
 		if (pci_write_config_byte
@@ -886,20 +905,32 @@ fst_rx_dma_complete(struct fst_card_info *card, struct fst_port_info *port,
  *      Receive a frame through the DMA
  */
 static inline void
+<<<<<<< HEAD
 fst_rx_dma(struct fst_card_info *card, dma_addr_t skb,
 	   dma_addr_t mem, int len)
+=======
+fst_rx_dma(struct fst_card_info *card, dma_addr_t dma, u32 mem, int len)
+>>>>>>> v3.18
 {
 	/*
 	 * This routine will setup the DMA and start it
 	 */
 
+<<<<<<< HEAD
 	dbg(DBG_RX, "In fst_rx_dma %lx %lx %d\n",
 	    (unsigned long) skb, (unsigned long) mem, len);
+=======
+	dbg(DBG_RX, "In fst_rx_dma %x %x %d\n", (u32)dma, mem, len);
+>>>>>>> v3.18
 	if (card->dmarx_in_progress) {
 		dbg(DBG_ASS, "In fst_rx_dma while dma in progress\n");
 	}
 
+<<<<<<< HEAD
 	outl(skb, card->pci_conf + DMAPADR0);	/* Copy to here */
+=======
+	outl(dma, card->pci_conf + DMAPADR0);	/* Copy to here */
+>>>>>>> v3.18
 	outl(mem, card->pci_conf + DMALADR0);	/* from here */
 	outl(len, card->pci_conf + DMASIZ0);	/* for this length */
 	outl(0x00000000c, card->pci_conf + DMADPR0);	/* In this direction */
@@ -915,20 +946,33 @@ fst_rx_dma(struct fst_card_info *card, dma_addr_t skb,
  *      Send a frame through the DMA
  */
 static inline void
+<<<<<<< HEAD
 fst_tx_dma(struct fst_card_info *card, unsigned char *skb,
 	   unsigned char *mem, int len)
+=======
+fst_tx_dma(struct fst_card_info *card, dma_addr_t dma, u32 mem, int len)
+>>>>>>> v3.18
 {
 	/*
 	 * This routine will setup the DMA and start it.
 	 */
 
+<<<<<<< HEAD
 	dbg(DBG_TX, "In fst_tx_dma %p %p %d\n", skb, mem, len);
+=======
+	dbg(DBG_TX, "In fst_tx_dma %x %x %d\n", (u32)dma, mem, len);
+>>>>>>> v3.18
 	if (card->dmatx_in_progress) {
 		dbg(DBG_ASS, "In fst_tx_dma while dma in progress\n");
 	}
 
+<<<<<<< HEAD
 	outl((unsigned long) skb, card->pci_conf + DMAPADR1);	/* Copy from here */
 	outl((unsigned long) mem, card->pci_conf + DMALADR1);	/* to here */
+=======
+	outl(dma, card->pci_conf + DMAPADR1);	/* Copy from here */
+	outl(mem, card->pci_conf + DMALADR1);	/* to here */
+>>>>>>> v3.18
 	outl(len, card->pci_conf + DMASIZ1);	/* for this length */
 	outl(0x000000004, card->pci_conf + DMADPR1);	/* In this direction */
 
@@ -1405,9 +1449,13 @@ do_bottom_half_tx(struct fst_card_info *card)
 					card->dma_len_tx = skb->len;
 					card->dma_txpos = port->txpos;
 					fst_tx_dma(card,
+<<<<<<< HEAD
 						   (char *) card->
 						   tx_dma_handle_card,
 						   (char *)
+=======
+						   card->tx_dma_handle_card,
+>>>>>>> v3.18
 						   BUF_OFFSET(txBuffer[pi]
 							      [port->txpos][0]),
 						   skb->len);
@@ -2372,7 +2420,11 @@ static char *type_strings[] = {
 	"FarSync TE1"
 };
 
+<<<<<<< HEAD
 static void
+=======
+static int
+>>>>>>> v3.18
 fst_init_card(struct fst_card_info *card)
 {
 	int i;
@@ -2383,6 +2435,7 @@ fst_init_card(struct fst_card_info *card)
 	 * we'll have to revise it in some way then.
 	 */
 	for (i = 0; i < card->nports; i++) {
+<<<<<<< HEAD
                 err = register_hdlc_device(card->ports[i].dev);
                 if (err < 0) {
 			int j;
@@ -2395,12 +2448,26 @@ fst_init_card(struct fst_card_info *card)
                         card->nports = i;
                         break;
                 }
+=======
+		err = register_hdlc_device(card->ports[i].dev);
+		if (err < 0) {
+			pr_err("Cannot register HDLC device for port %d (errno %d)\n",
+				i, -err);
+			while (i--)
+				unregister_hdlc_device(card->ports[i].dev);
+			return err;
+		}
+>>>>>>> v3.18
 	}
 
 	pr_info("%s-%s: %s IRQ%d, %d ports\n",
 		port_to_dev(&card->ports[0])->name,
 		port_to_dev(&card->ports[card->nports - 1])->name,
 		type_strings[card->type], card->irq, card->nports);
+<<<<<<< HEAD
+=======
+	return 0;
+>>>>>>> v3.18
 }
 
 static const struct net_device_ops fst_ops = {
@@ -2456,15 +2523,23 @@ fst_add_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 	/* Try to enable the device */
 	if ((err = pci_enable_device(pdev)) != 0) {
 		pr_err("Failed to enable card. Err %d\n", -err);
+<<<<<<< HEAD
 		kfree(card);
 		return err;
+=======
+		goto enable_fail;
+>>>>>>> v3.18
 	}
 
 	if ((err = pci_request_regions(pdev, "FarSync")) !=0) {
 		pr_err("Failed to allocate regions. Err %d\n", -err);
+<<<<<<< HEAD
 		pci_disable_device(pdev);
 		kfree(card);
 	        return err;
+=======
+		goto regions_fail;
+>>>>>>> v3.18
 	}
 
 	/* Get virtual addresses of memory regions */
@@ -2473,6 +2548,7 @@ fst_add_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 	card->phys_ctlmem = pci_resource_start(pdev, 3);
 	if ((card->mem = ioremap(card->phys_mem, FST_MEMSIZE)) == NULL) {
 		pr_err("Physical memory remap failed\n");
+<<<<<<< HEAD
 		pci_release_regions(pdev);
 		pci_disable_device(pdev);
 		kfree(card);
@@ -2485,18 +2561,32 @@ fst_add_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 		iounmap(card->mem);
 		kfree(card);
 		return -ENODEV;
+=======
+		err = -ENODEV;
+		goto ioremap_physmem_fail;
+	}
+	if ((card->ctlmem = ioremap(card->phys_ctlmem, 0x10)) == NULL) {
+		pr_err("Control memory remap failed\n");
+		err = -ENODEV;
+		goto ioremap_ctlmem_fail;
+>>>>>>> v3.18
 	}
 	dbg(DBG_PCI, "kernel mem %p, ctlmem %p\n", card->mem, card->ctlmem);
 
 	/* Register the interrupt handler */
 	if (request_irq(pdev->irq, fst_intr, IRQF_SHARED, FST_DEV_NAME, card)) {
 		pr_err("Unable to register interrupt %d\n", card->irq);
+<<<<<<< HEAD
 		pci_release_regions(pdev);
 		pci_disable_device(pdev);
 		iounmap(card->ctlmem);
 		iounmap(card->mem);
 		kfree(card);
 		return -ENODEV;
+=======
+		err = -ENODEV;
+		goto irq_fail;
+>>>>>>> v3.18
 	}
 
 	/* Record info we need */
@@ -2522,6 +2612,7 @@ fst_add_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 			while (i--)
 				free_netdev(card->ports[i].dev);
 			pr_err("FarSync: out of memory\n");
+<<<<<<< HEAD
                         free_irq(card->irq, card);
                         pci_release_regions(pdev);
                         pci_disable_device(pdev);
@@ -2529,6 +2620,10 @@ fst_add_one(struct pci_dev *pdev, const struct pci_device_id *ent)
                         iounmap(card->mem);
                         kfree(card);
                         return -ENODEV;
+=======
+			err = -ENOMEM;
+			goto hdlcdev_fail;
+>>>>>>> v3.18
 		}
 		card->ports[i].dev    = dev;
                 card->ports[i].card   = card;
@@ -2545,7 +2640,11 @@ fst_add_one(struct pci_dev *pdev, const struct pci_device_id *ent)
                 dev->mem_start   = card->phys_mem
                                  + BUF_OFFSET ( txBuffer[i][0][0]);
                 dev->mem_end     = card->phys_mem
+<<<<<<< HEAD
                                  + BUF_OFFSET ( txBuffer[i][NUM_TX_BUFFER - 1][LEN_RX_BUFFER - 1]);
+=======
+                                 + BUF_OFFSET ( txBuffer[i][NUM_TX_BUFFER][0]);
+>>>>>>> v3.18
                 dev->base_addr   = card->pci_conf;
                 dev->irq         = card->irq;
 
@@ -2574,9 +2673,22 @@ fst_add_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 	pci_set_drvdata(pdev, card);
 
 	/* Remainder of card setup */
+<<<<<<< HEAD
 	fst_card_array[no_of_cards_added] = card;
 	card->card_no = no_of_cards_added++;	/* Record instance and bump it */
 	fst_init_card(card);
+=======
+	if (no_of_cards_added >= FST_MAX_CARDS) {
+		pr_err("FarSync: too many cards\n");
+		err = -ENOMEM;
+		goto card_array_fail;
+	}
+	fst_card_array[no_of_cards_added] = card;
+	card->card_no = no_of_cards_added++;	/* Record instance and bump it */
+	err = fst_init_card(card);
+	if (err)
+		goto init_card_fail;
+>>>>>>> v3.18
 	if (card->family == FST_FAMILY_TXU) {
 		/*
 		 * Allocate a dma buffer for transmit and receives
@@ -2586,6 +2698,7 @@ fst_add_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 					 &card->rx_dma_handle_card);
 		if (card->rx_dma_handle_host == NULL) {
 			pr_err("Could not allocate rx dma buffer\n");
+<<<<<<< HEAD
 			fst_disable_intr(card);
 			pci_release_regions(pdev);
 			pci_disable_device(pdev);
@@ -2593,12 +2706,17 @@ fst_add_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 			iounmap(card->mem);
 			kfree(card);
 			return -ENOMEM;
+=======
+			err = -ENOMEM;
+			goto rx_dma_fail;
+>>>>>>> v3.18
 		}
 		card->tx_dma_handle_host =
 		    pci_alloc_consistent(card->device, FST_MAX_MTU,
 					 &card->tx_dma_handle_card);
 		if (card->tx_dma_handle_host == NULL) {
 			pr_err("Could not allocate tx dma buffer\n");
+<<<<<<< HEAD
 			fst_disable_intr(card);
 			pci_release_regions(pdev);
 			pci_disable_device(pdev);
@@ -2609,6 +2727,40 @@ fst_add_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 		}
 	}
 	return 0;		/* Success */
+=======
+			err = -ENOMEM;
+			goto tx_dma_fail;
+		}
+	}
+	return 0;		/* Success */
+
+tx_dma_fail:
+	pci_free_consistent(card->device, FST_MAX_MTU,
+			    card->rx_dma_handle_host,
+			    card->rx_dma_handle_card);
+rx_dma_fail:
+	fst_disable_intr(card);
+	for (i = 0 ; i < card->nports ; i++)
+		unregister_hdlc_device(card->ports[i].dev);
+init_card_fail:
+	fst_card_array[card->card_no] = NULL;
+card_array_fail:
+	for (i = 0 ; i < card->nports ; i++)
+		free_netdev(card->ports[i].dev);
+hdlcdev_fail:
+	free_irq(card->irq, card);
+irq_fail:
+	iounmap(card->ctlmem);
+ioremap_ctlmem_fail:
+	iounmap(card->mem);
+ioremap_physmem_fail:
+	pci_release_regions(pdev);
+regions_fail:
+	pci_disable_device(pdev);
+enable_fail:
+	kfree(card);
+	return err;
+>>>>>>> v3.18
 }
 
 /*

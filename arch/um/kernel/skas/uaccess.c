@@ -254,6 +254,10 @@ int strnlen_user(const void __user *str, int len)
 	n = buffer_op((unsigned long) str, len, 0, strnlen_chunk, &count);
 	if (n == 0)
 		return count + 1;
+<<<<<<< HEAD
 	return -EFAULT;
+=======
+	return 0;
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(strnlen_user);

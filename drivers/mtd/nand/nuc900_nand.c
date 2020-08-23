@@ -10,7 +10,10 @@
  */
 
 #include <linux/slab.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/interrupt.h>
 #include <linux/io.h>
@@ -152,7 +155,12 @@ static void nuc900_nand_command_lp(struct mtd_info *mtd, unsigned int command,
 	if (column != -1 || page_addr != -1) {
 
 		if (column != -1) {
+<<<<<<< HEAD
 			if (chip->options & NAND_BUSWIDTH_16)
+=======
+			if (chip->options & NAND_BUSWIDTH_16 &&
+					!nand_opcode_8bits(command))
+>>>>>>> v3.18
 				column >>= 1;
 			write_addr_reg(nand, column);
 			write_addr_reg(nand, column >> 8 | ENDADDR);
@@ -241,12 +249,19 @@ static int nuc900_nand_probe(struct platform_device *pdev)
 {
 	struct nuc900_nand *nuc900_nand;
 	struct nand_chip *chip;
+<<<<<<< HEAD
 	int retval;
 	struct resource *res;
 
 	retval = 0;
 
 	nuc900_nand = kzalloc(sizeof(struct nuc900_nand), GFP_KERNEL);
+=======
+	struct resource *res;
+
+	nuc900_nand = devm_kzalloc(&pdev->dev, sizeof(struct nuc900_nand),
+				   GFP_KERNEL);
+>>>>>>> v3.18
 	if (!nuc900_nand)
 		return -ENOMEM;
 	chip = &(nuc900_nand->chip);
@@ -255,11 +270,17 @@ static int nuc900_nand_probe(struct platform_device *pdev)
 	nuc900_nand->mtd.owner	= THIS_MODULE;
 	spin_lock_init(&nuc900_nand->lock);
 
+<<<<<<< HEAD
 	nuc900_nand->clk = clk_get(&pdev->dev, NULL);
 	if (IS_ERR(nuc900_nand->clk)) {
 		retval = -ENOENT;
 		goto fail1;
 	}
+=======
+	nuc900_nand->clk = devm_clk_get(&pdev->dev, NULL);
+	if (IS_ERR(nuc900_nand->clk))
+		return -ENOENT;
+>>>>>>> v3.18
 	clk_enable(nuc900_nand->clk);
 
 	chip->cmdfunc		= nuc900_nand_command_lp;
@@ -272,6 +293,7 @@ static int nuc900_nand_probe(struct platform_device *pdev)
 	chip->ecc.mode		= NAND_ECC_SOFT;
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
 	if (!res) {
 		retval = -ENXIO;
 		goto fail1;
@@ -294,23 +316,38 @@ static int nuc900_nand_probe(struct platform_device *pdev)
 		retval = -ENXIO;
 		goto fail3;
 	}
+=======
+	nuc900_nand->reg = devm_ioremap_resource(&pdev->dev, res);
+	if (IS_ERR(nuc900_nand->reg))
+		return PTR_ERR(nuc900_nand->reg);
+
+	nuc900_nand_enable(nuc900_nand);
+
+	if (nand_scan(&(nuc900_nand->mtd), 1))
+		return -ENXIO;
+>>>>>>> v3.18
 
 	mtd_device_register(&(nuc900_nand->mtd), partitions,
 			    ARRAY_SIZE(partitions));
 
 	platform_set_drvdata(pdev, nuc900_nand);
 
+<<<<<<< HEAD
 	return retval;
 
 fail3:	iounmap(nuc900_nand->reg);
 fail2:	release_mem_region(res->start, resource_size(res));
 fail1:	kfree(nuc900_nand);
 	return retval;
+=======
+	return 0;
+>>>>>>> v3.18
 }
 
 static int nuc900_nand_remove(struct platform_device *pdev)
 {
 	struct nuc900_nand *nuc900_nand = platform_get_drvdata(pdev);
+<<<<<<< HEAD
 	struct resource *res;
 
 	nand_release(&nuc900_nand->mtd);
@@ -325,6 +362,11 @@ static int nuc900_nand_remove(struct platform_device *pdev)
 	kfree(nuc900_nand);
 
 	platform_set_drvdata(pdev, NULL);
+=======
+
+	nand_release(&nuc900_nand->mtd);
+	clk_disable(nuc900_nand->clk);
+>>>>>>> v3.18
 
 	return 0;
 }

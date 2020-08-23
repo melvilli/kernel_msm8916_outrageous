@@ -445,7 +445,11 @@ static int yenta_set_mem_map(struct pcmcia_socket *sock, struct pccard_mem_map *
 	unsigned int start, stop, card_start;
 	unsigned short word;
 
+<<<<<<< HEAD
 	pcibios_resource_to_bus(socket->dev, &region, mem->res);
+=======
+	pcibios_resource_to_bus(socket->dev->bus, &region, mem->res);
+>>>>>>> v3.18
 
 	map = mem->map;
 	start = region.start;
@@ -709,7 +713,11 @@ static int yenta_allocate_res(struct yenta_socket *socket, int nr, unsigned type
 	region.start = config_readl(socket, addr_start) & mask;
 	region.end = config_readl(socket, addr_end) | ~mask;
 	if (region.start && region.end > region.start && !override_bios) {
+<<<<<<< HEAD
 		pcibios_bus_to_resource(dev, res, &region);
+=======
+		pcibios_bus_to_resource(dev->bus, res, &region);
+>>>>>>> v3.18
 		if (pci_claim_resource(dev, PCI_BRIDGE_RESOURCES + nr) == 0)
 			return 0;
 		dev_printk(KERN_INFO, &dev->dev,
@@ -1033,7 +1041,11 @@ static void yenta_config_init(struct yenta_socket *socket)
 	struct pci_dev *dev = socket->dev;
 	struct pci_bus_region region;
 
+<<<<<<< HEAD
 	pcibios_resource_to_bus(socket->dev, &region, &dev->resource[0]);
+=======
+	pcibios_resource_to_bus(socket->dev->bus, &region, &dev->resource[0]);
+>>>>>>> v3.18
 
 	config_writel(socket, CB_LEGACY_MODE_BASE, 0);
 	config_writel(socket, PCI_BASE_ADDRESS_0, region.start);
@@ -1076,7 +1088,11 @@ static void yenta_config_init(struct yenta_socket *socket)
  */
 static void yenta_fixup_parent_bridge(struct pci_bus *cardbus_bridge)
 {
+<<<<<<< HEAD
 	struct list_head *tmp;
+=======
+	struct pci_bus *sibling;
+>>>>>>> v3.18
 	unsigned char upper_limit;
 	/*
 	 * We only check and fix the parent bridge: All systems which need
@@ -1095,6 +1111,7 @@ static void yenta_fixup_parent_bridge(struct pci_bus *cardbus_bridge)
 	/* stay within the limits of the bus range of the parent: */
 	upper_limit = bridge_to_fix->parent->busn_res.end;
 
+<<<<<<< HEAD
 	/* check the bus ranges of all silbling bridges to prevent overlap */
 	list_for_each(tmp, &bridge_to_fix->parent->children) {
 		struct pci_bus *silbling = pci_bus_b(tmp);
@@ -1107,6 +1124,20 @@ static void yenta_fixup_parent_bridge(struct pci_bus *cardbus_bridge)
 		if (silbling->busn_res.start > bridge_to_fix->busn_res.end
 		    && silbling->busn_res.start <= upper_limit)
 			upper_limit = silbling->busn_res.start - 1;
+=======
+	/* check the bus ranges of all sibling bridges to prevent overlap */
+	list_for_each_entry(sibling, &bridge_to_fix->parent->children,
+			node) {
+		/*
+		 * If the sibling has a higher secondary bus number
+		 * and it's secondary is equal or smaller than our
+		 * current upper limit, set the new upper limit to
+		 * the bus number below the sibling's range:
+		 */
+		if (sibling->busn_res.start > bridge_to_fix->busn_res.end
+		    && sibling->busn_res.start <= upper_limit)
+			upper_limit = sibling->busn_res.start - 1;
+>>>>>>> v3.18
 	}
 
 	/* Show that the wanted subordinate number is not possible: */
@@ -1352,7 +1383,11 @@ static const struct dev_pm_ops yenta_pm_ops = {
 		.driver_data	= CARDBUS_TYPE_##type,	\
 	}
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(yenta_table) = {
+=======
+static const struct pci_device_id yenta_table[] = {
+>>>>>>> v3.18
 	CB_ID(PCI_VENDOR_ID_TI, PCI_DEVICE_ID_TI_1031, TI),
 
 	/*
@@ -1439,6 +1474,7 @@ static struct pci_driver yenta_cardbus_driver = {
 	.driver.pm	= YENTA_PM_OPS,
 };
 
+<<<<<<< HEAD
 
 static int __init yenta_socket_init(void)
 {
@@ -1454,5 +1490,8 @@ static void __exit yenta_socket_exit(void)
 
 module_init(yenta_socket_init);
 module_exit(yenta_socket_exit);
+=======
+module_pci_driver(yenta_cardbus_driver);
+>>>>>>> v3.18
 
 MODULE_LICENSE("GPL");

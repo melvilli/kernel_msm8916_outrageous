@@ -6,6 +6,11 @@
  * Copyright (c) 2002-2004, K A Fraser, B Dragovic
  */
 
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) "xen:" KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/sched.h>
@@ -41,9 +46,16 @@ MODULE_LICENSE("GPL");
 
 #define PRIV_VMA_LOCKED ((void *)1)
 
+<<<<<<< HEAD
 #ifndef HAVE_ARCH_PRIVCMD_MMAP
 static int privcmd_enforce_singleshot_mapping(struct vm_area_struct *vma);
 #endif
+=======
+static int privcmd_vma_range_is_mapped(
+               struct vm_area_struct *vma,
+               unsigned long addr,
+               unsigned long nr_pages);
+>>>>>>> v3.18
 
 static long privcmd_ioctl_hypercall(void __user *udata)
 {
@@ -223,9 +235,15 @@ static long privcmd_ioctl_mmap(void __user *udata)
 		vma = find_vma(mm, msg->va);
 		rc = -EINVAL;
 
+<<<<<<< HEAD
 		if (!vma || (msg->va != vma->vm_start) ||
 		    !privcmd_enforce_singleshot_mapping(vma))
 			goto out_up;
+=======
+		if (!vma || (msg->va != vma->vm_start) || vma->vm_private_data)
+			goto out_up;
+		vma->vm_private_data = PRIV_VMA_LOCKED;
+>>>>>>> v3.18
 	}
 
 	state.va = vma->vm_start;
@@ -356,7 +374,11 @@ static int alloc_empty_pages(struct vm_area_struct *vma, int numpgs)
 		kfree(pages);
 		return -ENOMEM;
 	}
+<<<<<<< HEAD
 	BUG_ON(vma->vm_private_data != PRIV_VMA_LOCKED);
+=======
+	BUG_ON(vma->vm_private_data != NULL);
+>>>>>>> v3.18
 	vma->vm_private_data = pages;
 
 	return 0;
@@ -419,6 +441,7 @@ static long privcmd_ioctl_mmap_batch(void __user *udata, int version)
 
 	vma = find_vma(mm, m.addr);
 	if (!vma ||
+<<<<<<< HEAD
 	    vma->vm_ops != &privcmd_vm_ops ||
 	    (m.addr != vma->vm_start) ||
 	    ((m.addr + (nr_pages << PAGE_SHIFT)) != vma->vm_end) ||
@@ -432,6 +455,45 @@ static long privcmd_ioctl_mmap_batch(void __user *udata, int version)
 		if (ret < 0) {
 			up_write(&mm->mmap_sem);
 			goto out;
+=======
+	    vma->vm_ops != &privcmd_vm_ops) {
+		ret = -EINVAL;
+		goto out_unlock;
+	}
+
+	/*
+	 * Caller must either:
+	 *
+	 * Map the whole VMA range, which will also allocate all the
+	 * pages required for the auto_translated_physmap case.
+	 *
+	 * Or
+	 *
+	 * Map unmapped holes left from a previous map attempt (e.g.,
+	 * because those foreign frames were previously paged out).
+	 */
+	if (vma->vm_private_data == NULL) {
+		if (m.addr != vma->vm_start ||
+		    m.addr + (nr_pages << PAGE_SHIFT) != vma->vm_end) {
+			ret = -EINVAL;
+			goto out_unlock;
+		}
+		if (xen_feature(XENFEAT_auto_translated_physmap)) {
+			ret = alloc_empty_pages(vma, m.num);
+			if (ret < 0)
+				goto out_unlock;
+		} else
+			vma->vm_private_data = PRIV_VMA_LOCKED;
+	} else {
+		if (m.addr < vma->vm_start ||
+		    m.addr + (nr_pages << PAGE_SHIFT) > vma->vm_end) {
+			ret = -EINVAL;
+			goto out_unlock;
+		}
+		if (privcmd_vma_range_is_mapped(vma, m.addr, nr_pages)) {
+			ret = -EINVAL;
+			goto out_unlock;
+>>>>>>> v3.18
 		}
 	}
 
@@ -464,8 +526,16 @@ static long privcmd_ioctl_mmap_batch(void __user *udata, int version)
 
 out:
 	free_page_list(&pagelist);
+<<<<<<< HEAD
 
 	return ret;
+=======
+	return ret;
+
+out_unlock:
+	up_write(&mm->mmap_sem);
+	goto out;
+>>>>>>> v3.18
 }
 
 static long privcmd_ioctl(struct file *file,
@@ -503,12 +573,25 @@ static void privcmd_close(struct vm_area_struct *vma)
 {
 	struct page **pages = vma->vm_private_data;
 	int numpgs = (vma->vm_end - vma->vm_start) >> PAGE_SHIFT;
+<<<<<<< HEAD
+=======
+	int rc;
+>>>>>>> v3.18
 
 	if (!xen_feature(XENFEAT_auto_translated_physmap) || !numpgs || !pages)
 		return;
 
+<<<<<<< HEAD
 	xen_unmap_domain_mfn_range(vma, numpgs, pages);
 	free_xenballooned_pages(numpgs, pages);
+=======
+	rc = xen_unmap_domain_mfn_range(vma, numpgs, pages);
+	if (rc == 0)
+		free_xenballooned_pages(numpgs, pages);
+	else
+		pr_crit("unable to unmap MFN range: leaking %d pages. rc=%d\n",
+			numpgs, rc);
+>>>>>>> v3.18
 	kfree(pages);
 }
 
@@ -538,9 +621,30 @@ static int privcmd_mmap(struct file *file, struct vm_area_struct *vma)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int privcmd_enforce_singleshot_mapping(struct vm_area_struct *vma)
 {
 	return !cmpxchg(&vma->vm_private_data, NULL, PRIV_VMA_LOCKED);
+=======
+/*
+ * For MMAPBATCH*. This allows asserting the singleshot mapping
+ * on a per pfn/pte basis. Mapping calls that fail with ENOENT
+ * can be then retried until success.
+ */
+static int is_mapped_fn(pte_t *pte, struct page *pmd_page,
+	                unsigned long addr, void *data)
+{
+	return pte_none(*pte) ? 0 : -EBUSY;
+}
+
+static int privcmd_vma_range_is_mapped(
+	           struct vm_area_struct *vma,
+	           unsigned long addr,
+	           unsigned long nr_pages)
+{
+	return apply_to_page_range(vma->vm_mm, addr, nr_pages << PAGE_SHIFT,
+				   is_mapped_fn, NULL) != 0;
+>>>>>>> v3.18
 }
 
 const struct file_operations xen_privcmd_fops = {
@@ -565,7 +669,11 @@ static int __init privcmd_init(void)
 
 	err = misc_register(&privcmd_dev);
 	if (err != 0) {
+<<<<<<< HEAD
 		printk(KERN_ERR "Could not register Xen privcmd device\n");
+=======
+		pr_err("Could not register Xen privcmd device\n");
+>>>>>>> v3.18
 		return err;
 	}
 	return 0;

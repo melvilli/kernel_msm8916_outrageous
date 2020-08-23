@@ -70,7 +70,11 @@ static inline void kunmap(struct page *page)
  * be used in IRQ contexts, so in some (very limited) cases we need
  * it.
  */
+<<<<<<< HEAD
 static inline unsigned long kmap_atomic(struct page *page)
+=======
+static inline void *kmap_atomic(struct page *page)
+>>>>>>> v3.18
 {
 	unsigned long vaddr;
 	int idx, type;
@@ -89,7 +93,11 @@ static inline unsigned long kmap_atomic(struct page *page)
 	set_pte(kmap_pte - idx, mk_pte(page, kmap_prot));
 	local_flush_tlb_one(vaddr);
 
+<<<<<<< HEAD
 	return vaddr;
+=======
+	return (void *)vaddr;
+>>>>>>> v3.18
 }
 
 static inline void __kunmap_atomic(unsigned long vaddr)

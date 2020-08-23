@@ -11,10 +11,13 @@
  ** FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
  ** more details.
  **
+<<<<<<< HEAD
  ** You should have received a copy of the GNU General Public License along with
  ** this program; if not, write to the Free Software Foundation, Inc.,
  ** 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  **
+=======
+>>>>>>> v3.18
  ** The full GNU General Public License is included in this distribution in the
  ** file called LICENSE.
  **
@@ -24,8 +27,12 @@
  ** Hsinchu 300, Taiwan.
  ** Larry Finger <Larry.Finger@lwfinger.net>
  **
+<<<<<<< HEAD
  *****************************************************************************
  */
+=======
+ ******************************************************************************/
+>>>>>>> v3.18
 
 #ifndef __RTL8723E_BTC_H__
 #define __RTL8723E_BTC_H__

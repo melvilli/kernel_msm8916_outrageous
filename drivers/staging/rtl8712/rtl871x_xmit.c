@@ -43,7 +43,11 @@ static void free_hwxmits(struct _adapter *padapter);
 
 static void _init_txservq(struct tx_servq *ptxservq)
 {
+<<<<<<< HEAD
 	_init_listhead(&ptxservq->tx_pending);
+=======
+	INIT_LIST_HEAD(&ptxservq->tx_pending);
+>>>>>>> v3.18
 	_init_queue(&ptxservq->sta_pending);
 	ptxservq->qcnt = 0;
 }
@@ -57,8 +61,13 @@ void _r8712_init_sta_xmit_priv(struct sta_xmit_priv *psta_xmitpriv)
 	_init_txservq(&psta_xmitpriv->bk_q);
 	_init_txservq(&psta_xmitpriv->vi_q);
 	_init_txservq(&psta_xmitpriv->vo_q);
+<<<<<<< HEAD
 	_init_listhead(&psta_xmitpriv->legacy_dz);
 	_init_listhead(&psta_xmitpriv->apsd);
+=======
+	INIT_LIST_HEAD(&psta_xmitpriv->legacy_dz);
+	INIT_LIST_HEAD(&psta_xmitpriv->apsd);
+>>>>>>> v3.18
 }
 
 sint _r8712_init_xmit_priv(struct xmit_priv *pxmitpriv,
@@ -87,8 +96,13 @@ sint _r8712_init_xmit_priv(struct xmit_priv *pxmitpriv,
 	and initialize free_xmit_frame below.
 	Please also apply  free_txobj to link_up all the xmit_frames...
 	*/
+<<<<<<< HEAD
 	pxmitpriv->pallocated_frame_buf = _malloc(NR_XMITFRAME *
 					  sizeof(struct xmit_frame) + 4);
+=======
+	pxmitpriv->pallocated_frame_buf = kmalloc(NR_XMITFRAME * sizeof(struct xmit_frame) + 4,
+						  GFP_ATOMIC);
+>>>>>>> v3.18
 	if (pxmitpriv->pallocated_frame_buf == NULL) {
 		pxmitpriv->pxmit_frame_buf = NULL;
 		return _FAIL;
@@ -97,13 +111,21 @@ sint _r8712_init_xmit_priv(struct xmit_priv *pxmitpriv,
 			((addr_t) (pxmitpriv->pallocated_frame_buf) & 3);
 	pxframe = (struct xmit_frame *) pxmitpriv->pxmit_frame_buf;
 	for (i = 0; i < NR_XMITFRAME; i++) {
+<<<<<<< HEAD
 		_init_listhead(&(pxframe->list));
+=======
+		INIT_LIST_HEAD(&(pxframe->list));
+>>>>>>> v3.18
 		pxframe->padapter = padapter;
 		pxframe->frame_tag = DATA_FRAMETAG;
 		pxframe->pkt = NULL;
 		pxframe->buf_addr = NULL;
 		pxframe->pxmitbuf = NULL;
+<<<<<<< HEAD
 		list_insert_tail(&(pxframe->list),
+=======
+		list_add_tail(&(pxframe->list),
+>>>>>>> v3.18
 				 &(pxmitpriv->free_xmit_queue.queue));
 		pxframe++;
 	}
@@ -126,29 +148,48 @@ sint _r8712_init_xmit_priv(struct xmit_priv *pxmitpriv,
 	/*init xmit_buf*/
 	_init_queue(&pxmitpriv->free_xmitbuf_queue);
 	_init_queue(&pxmitpriv->pending_xmitbuf_queue);
+<<<<<<< HEAD
 	pxmitpriv->pallocated_xmitbuf = _malloc(NR_XMITBUFF *
 					sizeof(struct xmit_buf) + 4);
+=======
+	pxmitpriv->pallocated_xmitbuf = kmalloc(NR_XMITBUFF * sizeof(struct xmit_buf) + 4,
+						GFP_ATOMIC);
+>>>>>>> v3.18
 	if (pxmitpriv->pallocated_xmitbuf  == NULL)
 		return _FAIL;
 	pxmitpriv->pxmitbuf = pxmitpriv->pallocated_xmitbuf + 4 -
 			      ((addr_t)(pxmitpriv->pallocated_xmitbuf) & 3);
 	pxmitbuf = (struct xmit_buf *)pxmitpriv->pxmitbuf;
 	for (i = 0; i < NR_XMITBUFF; i++) {
+<<<<<<< HEAD
 		_init_listhead(&pxmitbuf->list);
 		pxmitbuf->pallocated_buf = _malloc(MAX_XMITBUF_SZ +
 					   XMITBUF_ALIGN_SZ);
+=======
+		INIT_LIST_HEAD(&pxmitbuf->list);
+		pxmitbuf->pallocated_buf = kmalloc(MAX_XMITBUF_SZ + XMITBUF_ALIGN_SZ,
+						   GFP_ATOMIC);
+>>>>>>> v3.18
 		if (pxmitbuf->pallocated_buf == NULL)
 			return _FAIL;
 		pxmitbuf->pbuf = pxmitbuf->pallocated_buf + XMITBUF_ALIGN_SZ -
 				 ((addr_t) (pxmitbuf->pallocated_buf) &
 				 (XMITBUF_ALIGN_SZ - 1));
 		r8712_xmit_resource_alloc(padapter, pxmitbuf);
+<<<<<<< HEAD
 		list_insert_tail(&pxmitbuf->list,
+=======
+		list_add_tail(&pxmitbuf->list,
+>>>>>>> v3.18
 				 &(pxmitpriv->free_xmitbuf_queue.queue));
 		pxmitbuf++;
 	}
 	pxmitpriv->free_xmitbuf_cnt = NR_XMITBUFF;
+<<<<<<< HEAD
 	_init_workitem(&padapter->wkFilterRxFF0, r8712_SetFilter, padapter);
+=======
+	INIT_WORK(&padapter->wkFilterRxFF0, r8712_SetFilter);
+>>>>>>> v3.18
 	alloc_hwxmits(padapter);
 	init_hwxmits(pxmitpriv->hwxmits, pxmitpriv->hwxmit_entry);
 	tasklet_init(&pxmitpriv->xmit_tasklet,
@@ -248,6 +289,10 @@ sint r8712_update_attrib(struct _adapter *padapter, _pkt *pkt,
 		 * tx these packets and let LPS awake some time
 		 * to prevent DHCP protocol fail */
 		u8 tmp[24];
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		_r8712_pktfile_read(&pktfile, &tmp[0], 24);
 		pattrib->dhcp_pkt = 0;
 		if (pktfile.pkt_len > 282) {/*MINIMUM_DHCP_PACKET_SIZE)*/
@@ -481,6 +526,10 @@ static sint make_wlanhdr(struct _adapter *padapter , u8 *hdr,
 	struct mlme_priv *pmlmepriv = &padapter->mlmepriv;
 	struct qos_priv *pqospriv = &pmlmepriv->qospriv;
 	u16 *fctrl = &pwlanhdr->frame_ctl;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	memset(hdr, 0, WLANHDR_OFFSET);
 	SetFrameSubType(fctrl, pattrib->subtype);
 	if (pattrib->subtype & WIFI_DATA_TYPE) {
@@ -491,7 +540,11 @@ static sint make_wlanhdr(struct _adapter *padapter , u8 *hdr,
 				ETH_ALEN);
 			memcpy(pwlanhdr->addr2, pattrib->src, ETH_ALEN);
 			memcpy(pwlanhdr->addr3, pattrib->dst, ETH_ALEN);
+<<<<<<< HEAD
 		} else if ((check_fwstate(pmlmepriv, WIFI_AP_STATE) == true)) {
+=======
+		} else if (check_fwstate(pmlmepriv, WIFI_AP_STATE) == true) {
+>>>>>>> v3.18
 			/* to_ds = 0, fr_ds = 1; */
 			SetFrDs(fctrl);
 			memcpy(pwlanhdr->addr1, pattrib->dst, ETH_ALEN);
@@ -525,8 +578,13 @@ static sint make_wlanhdr(struct _adapter *padapter , u8 *hdr,
 		/* Update Seq Num will be handled by f/w */
 		{
 			struct sta_info *psta;
+<<<<<<< HEAD
 
 			sint bmcst = IS_MCAST(pattrib->ra);
+=======
+			sint bmcst = IS_MCAST(pattrib->ra);
+
+>>>>>>> v3.18
 			if (pattrib->psta)
 				psta = pattrib->psta;
 			else {
@@ -744,6 +802,7 @@ struct xmit_buf *r8712_alloc_xmitbuf(struct xmit_priv *pxmitpriv)
 	struct  __queue *pfree_xmitbuf_queue = &pxmitpriv->free_xmitbuf_queue;
 
 	spin_lock_irqsave(&pfree_xmitbuf_queue->lock, irqL);
+<<<<<<< HEAD
 	if (_queue_empty(pfree_xmitbuf_queue) == true)
 		pxmitbuf = NULL;
 	else {
@@ -751,6 +810,15 @@ struct xmit_buf *r8712_alloc_xmitbuf(struct xmit_priv *pxmitpriv)
 		plist = get_next(phead);
 		pxmitbuf = LIST_CONTAINOR(plist, struct xmit_buf, list);
 		list_delete(&(pxmitbuf->list));
+=======
+	if (list_empty(&pfree_xmitbuf_queue->queue))
+		pxmitbuf = NULL;
+	else {
+		phead = &pfree_xmitbuf_queue->queue;
+		plist = phead->next;
+		pxmitbuf = LIST_CONTAINOR(plist, struct xmit_buf, list);
+		list_del_init(&(pxmitbuf->list));
+>>>>>>> v3.18
 	}
 	if (pxmitbuf !=  NULL)
 		pxmitpriv->free_xmitbuf_cnt--;
@@ -766,8 +834,13 @@ int r8712_free_xmitbuf(struct xmit_priv *pxmitpriv, struct xmit_buf *pxmitbuf)
 	if (pxmitbuf == NULL)
 		return _FAIL;
 	spin_lock_irqsave(&pfree_xmitbuf_queue->lock, irqL);
+<<<<<<< HEAD
 	list_delete(&pxmitbuf->list);
 	list_insert_tail(&(pxmitbuf->list), get_list_head(pfree_xmitbuf_queue));
+=======
+	list_del_init(&pxmitbuf->list);
+	list_add_tail(&(pxmitbuf->list), &pfree_xmitbuf_queue->queue);
+>>>>>>> v3.18
 	pxmitpriv->free_xmitbuf_cnt++;
 	spin_unlock_irqrestore(&pfree_xmitbuf_queue->lock, irqL);
 	return _SUCCESS;
@@ -798,6 +871,7 @@ struct xmit_frame *r8712_alloc_xmitframe(struct xmit_priv *pxmitpriv)
 	struct  __queue *pfree_xmit_queue = &pxmitpriv->free_xmit_queue;
 
 	spin_lock_irqsave(&pfree_xmit_queue->lock, irqL);
+<<<<<<< HEAD
 	if (_queue_empty(pfree_xmit_queue) == true)
 		pxframe =  NULL;
 	else {
@@ -805,6 +879,15 @@ struct xmit_frame *r8712_alloc_xmitframe(struct xmit_priv *pxmitpriv)
 		plist = get_next(phead);
 		pxframe = LIST_CONTAINOR(plist, struct xmit_frame, list);
 		list_delete(&(pxframe->list));
+=======
+	if (list_empty(&pfree_xmit_queue->queue))
+		pxframe =  NULL;
+	else {
+		phead = &pfree_xmit_queue->queue;
+		plist = phead->next;
+		pxframe = LIST_CONTAINOR(plist, struct xmit_frame, list);
+		list_del_init(&(pxframe->list));
+>>>>>>> v3.18
 	}
 	if (pxframe !=  NULL) {
 		pxmitpriv->free_xmitframe_cnt--;
@@ -828,12 +911,20 @@ void r8712_free_xmitframe(struct xmit_priv *pxmitpriv,
 	if (pxmitframe == NULL)
 		return;
 	spin_lock_irqsave(&pfree_xmit_queue->lock, irqL);
+<<<<<<< HEAD
 	list_delete(&pxmitframe->list);
+=======
+	list_del_init(&pxmitframe->list);
+>>>>>>> v3.18
 	if (pxmitframe->pkt) {
 		pndis_pkt = pxmitframe->pkt;
 		pxmitframe->pkt = NULL;
 	}
+<<<<<<< HEAD
 	list_insert_tail(&pxmitframe->list, get_list_head(pfree_xmit_queue));
+=======
+	list_add_tail(&pxmitframe->list, &pfree_xmit_queue->queue);
+>>>>>>> v3.18
 	pxmitpriv->free_xmitframe_cnt++;
 	spin_unlock_irqrestore(&pfree_xmit_queue->lock, irqL);
 	if (netif_queue_stopped(padapter->pnetdev))
@@ -857,11 +948,19 @@ void r8712_free_xmitframe_queue(struct xmit_priv *pxmitpriv,
 	struct	xmit_frame	*pxmitframe;
 
 	spin_lock_irqsave(&(pframequeue->lock), irqL);
+<<<<<<< HEAD
 	phead = get_list_head(pframequeue);
 	plist = get_next(phead);
 	while (end_of_queue_search(phead, plist) == false) {
 		pxmitframe = LIST_CONTAINOR(plist, struct xmit_frame, list);
 		plist = get_next(plist);
+=======
+	phead = &pframequeue->queue;
+	plist = phead->next;
+	while (end_of_queue_search(phead, plist) == false) {
+		pxmitframe = LIST_CONTAINOR(plist, struct xmit_frame, list);
+		plist = plist->next;
+>>>>>>> v3.18
 		r8712_free_xmitframe(pxmitpriv, pxmitframe);
 	}
 	spin_unlock_irqrestore(&(pframequeue->lock), irqL);
@@ -939,11 +1038,17 @@ sint r8712_xmit_classifier(struct _adapter *padapter,
 	ptxservq = get_sta_pending(padapter, &pstapending,
 		   psta, pattrib->priority);
 	spin_lock_irqsave(&pstapending->lock, irqL0);
+<<<<<<< HEAD
 	if (is_list_empty(&ptxservq->tx_pending))
 		list_insert_tail(&ptxservq->tx_pending,
 				 get_list_head(pstapending));
 	list_insert_tail(&pxmitframe->list,
 			 get_list_head(&ptxservq->sta_pending));
+=======
+	if (list_empty(&ptxservq->tx_pending))
+		list_add_tail(&ptxservq->tx_pending, &pstapending->queue);
+	list_add_tail(&pxmitframe->list, &ptxservq->sta_pending.queue);
+>>>>>>> v3.18
 	ptxservq->qcnt++;
 	spin_unlock_irqrestore(&pstapending->lock, irqL0);
 	return _SUCCESS;
@@ -955,8 +1060,13 @@ static void alloc_hwxmits(struct _adapter *padapter)
 	struct xmit_priv *pxmitpriv = &padapter->xmitpriv;
 
 	pxmitpriv->hwxmit_entry = HWXMIT_ENTRY;
+<<<<<<< HEAD
 	pxmitpriv->hwxmits = (struct hw_xmit *)_malloc(sizeof(struct hw_xmit) *
 			     pxmitpriv->hwxmit_entry);
+=======
+	pxmitpriv->hwxmits = kmalloc_array(pxmitpriv->hwxmit_entry,
+				sizeof(struct hw_xmit), GFP_ATOMIC);
+>>>>>>> v3.18
 	if (pxmitpriv->hwxmits == NULL)
 		return;
 	hwxmits = pxmitpriv->hwxmits;
@@ -1005,7 +1115,11 @@ static void init_hwxmits(struct hw_xmit *phwxmit, sint entry)
 
 	for (i = 0; i < entry; i++, phwxmit++) {
 		spin_lock_init(&phwxmit->xmit_lock);
+<<<<<<< HEAD
 		_init_listhead(&phwxmit->pending);
+=======
+		INIT_LIST_HEAD(&phwxmit->pending);
+>>>>>>> v3.18
 		phwxmit->txcmdcnt = 0;
 		phwxmit->accnt = 0;
 	}

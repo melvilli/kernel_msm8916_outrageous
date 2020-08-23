@@ -70,6 +70,7 @@ void atomic64_set(atomic64_t *v, long long i)
 }
 EXPORT_SYMBOL(atomic64_set);
 
+<<<<<<< HEAD
 void atomic64_add(long long a, atomic64_t *v)
 {
 	unsigned long flags;
@@ -117,6 +118,44 @@ long long atomic64_sub_return(long long a, atomic64_t *v)
 	return val;
 }
 EXPORT_SYMBOL(atomic64_sub_return);
+=======
+#define ATOMIC64_OP(op, c_op)						\
+void atomic64_##op(long long a, atomic64_t *v)				\
+{									\
+	unsigned long flags;						\
+	raw_spinlock_t *lock = lock_addr(v);				\
+									\
+	raw_spin_lock_irqsave(lock, flags);				\
+	v->counter c_op a;						\
+	raw_spin_unlock_irqrestore(lock, flags);			\
+}									\
+EXPORT_SYMBOL(atomic64_##op);
+
+#define ATOMIC64_OP_RETURN(op, c_op)					\
+long long atomic64_##op##_return(long long a, atomic64_t *v)		\
+{									\
+	unsigned long flags;						\
+	raw_spinlock_t *lock = lock_addr(v);				\
+	long long val;							\
+									\
+	raw_spin_lock_irqsave(lock, flags);				\
+	val = (v->counter c_op a);					\
+	raw_spin_unlock_irqrestore(lock, flags);			\
+	return val;							\
+}									\
+EXPORT_SYMBOL(atomic64_##op##_return);
+
+#define ATOMIC64_OPS(op, c_op)						\
+	ATOMIC64_OP(op, c_op)						\
+	ATOMIC64_OP_RETURN(op, c_op)
+
+ATOMIC64_OPS(add, +=)
+ATOMIC64_OPS(sub, -=)
+
+#undef ATOMIC64_OPS
+#undef ATOMIC64_OP_RETURN
+#undef ATOMIC64_OP
+>>>>>>> v3.18
 
 long long atomic64_dec_if_positive(atomic64_t *v)
 {

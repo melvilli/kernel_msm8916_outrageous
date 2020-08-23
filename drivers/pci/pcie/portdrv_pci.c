@@ -93,6 +93,7 @@ static int pcie_port_resume_noirq(struct device *dev)
 	return 0;
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_PM_RUNTIME
 struct d3cold_info {
 	bool no_d3cold;
@@ -164,6 +165,8 @@ static int pcie_port_runtime_idle(struct device *dev)
 #define pcie_port_runtime_idle		NULL
 #endif
 
+=======
+>>>>>>> v3.18
 static const struct dev_pm_ops pcie_portdrv_pm_ops = {
 	.suspend	= pcie_port_device_suspend,
 	.resume		= pcie_port_device_resume,
@@ -172,9 +175,12 @@ static const struct dev_pm_ops pcie_portdrv_pm_ops = {
 	.poweroff	= pcie_port_device_suspend,
 	.restore	= pcie_port_device_resume,
 	.resume_noirq	= pcie_port_resume_noirq,
+<<<<<<< HEAD
 	.runtime_suspend = pcie_port_runtime_suspend,
 	.runtime_resume = pcie_port_runtime_resume,
 	.runtime_idle	= pcie_port_runtime_idle,
+=======
+>>>>>>> v3.18
 };
 
 #define PCIE_PORTDRV_PM_OPS	(&pcie_portdrv_pm_ops)
@@ -203,10 +209,13 @@ static int pcie_portdrv_probe(struct pci_dev *dev,
 	     (pci_pcie_type(dev) != PCI_EXP_TYPE_DOWNSTREAM)))
 		return -ENODEV;
 
+<<<<<<< HEAD
 	if (!dev->irq && dev->pin) {
 		dev_warn(&dev->dev, "device [%04x:%04x] has invalid IRQ; "
 			 "check vendor BIOS\n", dev->vendor, dev->device);
 	}
+=======
+>>>>>>> v3.18
 	status = pcie_port_device_register(dev);
 	if (status)
 		return status;
@@ -389,15 +398,25 @@ static struct pci_driver pcie_portdriver = {
 	.probe		= pcie_portdrv_probe,
 	.remove		= pcie_portdrv_remove,
 
+<<<<<<< HEAD
 	.err_handler 	= &pcie_portdrv_err_handler,
 
 	.driver.pm 	= PCIE_PORTDRV_PM_OPS,
+=======
+	.err_handler	= &pcie_portdrv_err_handler,
+
+	.driver.pm	= PCIE_PORTDRV_PM_OPS,
+>>>>>>> v3.18
 };
 
 static int __init dmi_pcie_pme_disable_msi(const struct dmi_system_id *d)
 {
 	pr_notice("%s detected: will not use MSI for PCIe PME signaling\n",
+<<<<<<< HEAD
 			d->ident);
+=======
+		  d->ident);
+>>>>>>> v3.18
 	pcie_pme_disable_msi();
 	return 0;
 }
@@ -411,7 +430,11 @@ static struct dmi_system_id __initdata pcie_portdrv_dmi_table[] = {
 	 .ident = "MSI Wind U-100",
 	 .matches = {
 		     DMI_MATCH(DMI_SYS_VENDOR,
+<<<<<<< HEAD
 		     		"MICRO-STAR INTERNATIONAL CO., LTD"),
+=======
+				"MICRO-STAR INTERNATIONAL CO., LTD"),
+>>>>>>> v3.18
 		     DMI_MATCH(DMI_PRODUCT_NAME, "U-100"),
 		     },
 	 },

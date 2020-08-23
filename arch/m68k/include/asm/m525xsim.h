@@ -105,7 +105,11 @@
 /*
  *	QSPI module.
  */
+<<<<<<< HEAD
 #define MCFQSPI_BASE		(MCF_MBAR + 0x300)	/* Base address QSPI */
+=======
+#define MCFQSPI_BASE		(MCF_MBAR + 0x400)	/* Base address QSPI */
+>>>>>>> v3.18
 #define MCFQSPI_SIZE		0x40			/* Register set size */
 
 #ifdef CONFIG_M5249

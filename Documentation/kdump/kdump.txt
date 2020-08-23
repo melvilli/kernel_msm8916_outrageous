@@ -18,7 +18,11 @@ memory image to a dump file on the local disk, or across the network to
 a remote system.
 
 Kdump and kexec are currently supported on the x86, x86_64, ppc64, ia64,
+<<<<<<< HEAD
 and s390x architectures.
+=======
+s390x and arm architectures.
+>>>>>>> v3.18
 
 When the system kernel boots, it reserves a small section of memory for
 the dump-capture kernel. This ensures that ongoing Direct Memory Access
@@ -47,6 +51,7 @@ parameter. Optionally the size of the ELF header can also be passed
 when using the elfcorehdr=[size[KMG]@]offset[KMG] syntax.
 
 
+<<<<<<< HEAD
 With the dump-capture kernel, you can access the memory image, or "old
 memory," in two ways:
 
@@ -60,6 +65,14 @@ memory," in two ways:
   you can use analysis tools such as the GNU Debugger (GDB) and the Crash
   tool to debug the dump file. This method ensures that the dump pages are
   correctly ordered.
+=======
+With the dump-capture kernel, you can access the memory image through
+/proc/vmcore. This exports the dump as an ELF-format file that you can
+write out using file copy commands such as cp or scp. Further, you can
+use analysis tools such as the GNU Debugger (GDB) and the Crash tool to
+debug the dump file. This method ensures that the dump pages are correctly
+ordered.
+>>>>>>> v3.18
 
 
 Setup and Installation
@@ -119,7 +132,11 @@ There are two possible methods of using Kdump.
 2) Or use the system kernel binary itself as dump-capture kernel and there is
    no need to build a separate dump-capture kernel. This is possible
    only with the architectures which support a relocatable kernel. As
+<<<<<<< HEAD
    of today, i386, x86_64, ppc64 and ia64 architectures support relocatable
+=======
+   of today, i386, x86_64, ppc64, ia64 and arm architectures support relocatable
+>>>>>>> v3.18
    kernel.
 
 Building a relocatable kernel is advantageous from the point of view that
@@ -248,6 +265,16 @@ Dump-capture kernel config options (Arch Dependent, ia64)
   kernel will be aligned to 64Mb, so if the start address is not then
   any space below the alignment point will be wasted.
 
+<<<<<<< HEAD
+=======
+Dump-capture kernel config options (Arch Dependent, arm)
+----------------------------------------------------------
+
+-   To use a relocatable kernel,
+    Enable "AUTO_ZRELADDR" support under "Boot" options:
+
+    AUTO_ZRELADDR=y
+>>>>>>> v3.18
 
 Extended crashkernel syntax
 ===========================
@@ -263,6 +290,13 @@ The syntax is:
     crashkernel=<range1>:<size1>[,<range2>:<size2>,...][@offset]
     range=start-[end]
 
+<<<<<<< HEAD
+=======
+Please note, on arm, the offset is required.
+    crashkernel=<range1>:<size1>[,<range2>:<size2>,...]@offset
+    range=start-[end]
+
+>>>>>>> v3.18
     'start' is inclusive and 'end' is exclusive.
 
 For example:
@@ -303,6 +337,15 @@ Boot into System Kernel
    on the memory consumption of the kdump system. In general this is not
    dependent on the memory size of the production system.
 
+<<<<<<< HEAD
+=======
+   On arm, use "crashkernel=Y@X". Note that the start address of the kernel
+   will be aligned to 128MiB (0x08000000), so if the start address is not then
+   any space below the alignment point may be overwritten by the dump-capture kernel,
+   which means it is possible that the vmcore is not that precise as expected.
+
+
+>>>>>>> v3.18
 Load the Dump-capture Kernel
 ============================
 
@@ -322,7 +365,12 @@ For ia64:
 	- Use vmlinux or vmlinuz.gz
 For s390x:
 	- Use image or bzImage
+<<<<<<< HEAD
 
+=======
+For arm:
+	- Use zImage
+>>>>>>> v3.18
 
 If you are using a uncompressed vmlinux image then use following command
 to load dump-capture kernel.
@@ -338,6 +386,18 @@ to load dump-capture kernel.
    --initrd=<initrd-for-dump-capture-kernel> \
    --append="root=<root-dev> <arch-specific-options>"
 
+<<<<<<< HEAD
+=======
+If you are using a compressed zImage, then use following command
+to load dump-capture kernel.
+
+   kexec --type zImage -p <dump-capture-kernel-bzImage> \
+   --initrd=<initrd-for-dump-capture-kernel> \
+   --dtb=<dtb-for-dump-capture-kernel> \
+   --append="root=<root-dev> <arch-specific-options>"
+
+
+>>>>>>> v3.18
 Please note, that --args-linux does not need to be specified for ia64.
 It is planned to make this a no-op on that architecture, but for now
 it should be omitted
@@ -354,6 +414,12 @@ For ppc64:
 For s390x:
 	"1 maxcpus=1 cgroup_disable=memory"
 
+<<<<<<< HEAD
+=======
+For arm:
+	"1 maxcpus=1 reset_devices"
+
+>>>>>>> v3.18
 Notes on loading the dump-capture kernel:
 
 * By default, the ELF headers are stored in ELF64 format to support
@@ -423,6 +489,7 @@ the following command:
 
    cp /proc/vmcore <dump-file>
 
+<<<<<<< HEAD
 You can also access dumped memory as a /dev/oldmem device for a linear
 and raw view. To create the device, use the following command:
 
@@ -435,6 +502,8 @@ To see the entire memory, use the following command:
 
    dd if=/dev/oldmem of=oldmem.001
 
+=======
+>>>>>>> v3.18
 
 Analysis
 ========
@@ -461,6 +530,7 @@ format. Crash is available on Dave Anderson's site at the following URL:
    http://people.redhat.com/~anderson/
 
 
+<<<<<<< HEAD
 To Do
 =====
 
@@ -469,6 +539,8 @@ To Do
    can be used to capture the dump.
 
 
+=======
+>>>>>>> v3.18
 Contact
 =======
 

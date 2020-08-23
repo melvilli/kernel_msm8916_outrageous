@@ -29,8 +29,14 @@ nfsd3_proc_null(struct svc_rqst *rqstp, void *argp, void *resp)
 static __be32 nfsd3_proc_getacl(struct svc_rqst * rqstp,
 		struct nfsd3_getaclargs *argp, struct nfsd3_getaclres *resp)
 {
+<<<<<<< HEAD
 	svc_fh *fh;
 	struct posix_acl *acl;
+=======
+	struct posix_acl *acl;
+	struct inode *inode;
+	svc_fh *fh;
+>>>>>>> v3.18
 	__be32 nfserr = 0;
 
 	fh = fh_copy(&resp->fh, &argp->fh);
@@ -38,11 +44,17 @@ static __be32 nfsd3_proc_getacl(struct svc_rqst * rqstp,
 	if (nfserr)
 		RETURN_STATUS(nfserr);
 
+<<<<<<< HEAD
+=======
+	inode = fh->fh_dentry->d_inode;
+
+>>>>>>> v3.18
 	if (argp->mask & ~(NFS_ACL|NFS_ACLCNT|NFS_DFACL|NFS_DFACLCNT))
 		RETURN_STATUS(nfserr_inval);
 	resp->mask = argp->mask;
 
 	if (resp->mask & (NFS_ACL|NFS_ACLCNT)) {
+<<<<<<< HEAD
 		acl = nfsd_get_posix_acl(fh, ACL_TYPE_ACCESS);
 		if (IS_ERR(acl)) {
 			int err = PTR_ERR(acl);
@@ -60,11 +72,23 @@ static __be32 nfsd3_proc_getacl(struct svc_rqst * rqstp,
 			struct inode *inode = fh->fh_dentry->d_inode;
 			acl = posix_acl_from_mode(inode->i_mode, GFP_KERNEL);
 		}
+=======
+		acl = get_acl(inode, ACL_TYPE_ACCESS);
+		if (acl == NULL) {
+			/* Solaris returns the inode's minimum ACL. */
+			acl = posix_acl_from_mode(inode->i_mode, GFP_KERNEL);
+		}
+		if (IS_ERR(acl)) {
+			nfserr = nfserrno(PTR_ERR(acl));
+			goto fail;
+		}
+>>>>>>> v3.18
 		resp->acl_access = acl;
 	}
 	if (resp->mask & (NFS_DFACL|NFS_DFACLCNT)) {
 		/* Check how Solaris handles requests for the Default ACL
 		   of a non-directory! */
+<<<<<<< HEAD
 
 		acl = nfsd_get_posix_acl(fh, ACL_TYPE_DEFAULT);
 		if (IS_ERR(acl)) {
@@ -76,6 +100,12 @@ static __be32 nfsd3_proc_getacl(struct svc_rqst * rqstp,
 				nfserr = nfserrno(err);
 				goto fail;
 			}
+=======
+		acl = get_acl(inode, ACL_TYPE_DEFAULT);
+		if (IS_ERR(acl)) {
+			nfserr = nfserrno(PTR_ERR(acl));
+			goto fail;
+>>>>>>> v3.18
 		}
 		resp->acl_default = acl;
 	}
@@ -96,6 +126,7 @@ static __be32 nfsd3_proc_setacl(struct svc_rqst * rqstp,
 		struct nfsd3_setaclargs *argp,
 		struct nfsd3_attrstat *resp)
 {
+<<<<<<< HEAD
 	svc_fh *fh;
 	__be32 nfserr = 0;
 
@@ -111,6 +142,39 @@ static __be32 nfsd3_proc_setacl(struct svc_rqst * rqstp,
 			fh, ACL_TYPE_DEFAULT, argp->acl_default) );
 	}
 
+=======
+	struct inode *inode;
+	svc_fh *fh;
+	__be32 nfserr = 0;
+	int error;
+
+	fh = fh_copy(&resp->fh, &argp->fh);
+	nfserr = fh_verify(rqstp, &resp->fh, 0, NFSD_MAY_SATTR);
+	if (nfserr)
+		goto out;
+
+	inode = fh->fh_dentry->d_inode;
+	if (!IS_POSIXACL(inode) || !inode->i_op->set_acl) {
+		error = -EOPNOTSUPP;
+		goto out_errno;
+	}
+
+	error = fh_want_write(fh);
+	if (error)
+		goto out_errno;
+
+	error = inode->i_op->set_acl(inode, argp->acl_access, ACL_TYPE_ACCESS);
+	if (error)
+		goto out_drop_write;
+	error = inode->i_op->set_acl(inode, argp->acl_default,
+				     ACL_TYPE_DEFAULT);
+
+out_drop_write:
+	fh_drop_write(fh);
+out_errno:
+	nfserr = nfserrno(error);
+out:
+>>>>>>> v3.18
 	/* argp->acl_{access,default} may have been allocated in
 	   nfs3svc_decode_setaclargs. */
 	posix_acl_release(argp->acl_access);
@@ -124,7 +188,12 @@ static __be32 nfsd3_proc_setacl(struct svc_rqst * rqstp,
 static int nfs3svc_decode_getaclargs(struct svc_rqst *rqstp, __be32 *p,
 		struct nfsd3_getaclargs *args)
 {
+<<<<<<< HEAD
 	if (!(p = nfs3svc_decode_fh(p, &args->fh)))
+=======
+	p = nfs3svc_decode_fh(p, &args->fh);
+	if (!p)
+>>>>>>> v3.18
 		return 0;
 	args->mask = ntohl(*p); p++;
 
@@ -139,7 +208,12 @@ static int nfs3svc_decode_setaclargs(struct svc_rqst *rqstp, __be32 *p,
 	unsigned int base;
 	int n;
 
+<<<<<<< HEAD
 	if (!(p = nfs3svc_decode_fh(p, &args->fh)))
+=======
+	p = nfs3svc_decode_fh(p, &args->fh);
+	if (!p)
+>>>>>>> v3.18
 		return 0;
 	args->mask = ntohl(*p++);
 	if (args->mask & ~(NFS_ACL|NFS_ACLCNT|NFS_DFACL|NFS_DFACLCNT) ||

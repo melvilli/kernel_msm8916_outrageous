@@ -544,7 +544,11 @@ int m5mols_init_controls(struct v4l2_subdev *sd)
 	u16 zoom_step;
 	int ret;
 
+<<<<<<< HEAD
 	/* Determine the firmware dependant control range and step values */
+=======
+	/* Determine the firmware dependent control range and step values */
+>>>>>>> v3.18
 	ret = m5mols_read_u16(sd, AE_MAX_GAIN_MON, &exposure_max);
 	if (ret < 0)
 		return ret;

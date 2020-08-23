@@ -48,6 +48,15 @@ static void bfa_ioc_ct_sync_join(struct bfa_ioc *ioc);
 static void bfa_ioc_ct_sync_leave(struct bfa_ioc *ioc);
 static void bfa_ioc_ct_sync_ack(struct bfa_ioc *ioc);
 static bool bfa_ioc_ct_sync_complete(struct bfa_ioc *ioc);
+<<<<<<< HEAD
+=======
+static void bfa_ioc_ct_set_cur_ioc_fwstate(
+			struct bfa_ioc *ioc, enum bfi_ioc_state fwstate);
+static enum bfi_ioc_state bfa_ioc_ct_get_cur_ioc_fwstate(struct bfa_ioc *ioc);
+static void bfa_ioc_ct_set_alt_ioc_fwstate(
+			struct bfa_ioc *ioc, enum bfi_ioc_state fwstate);
+static enum bfi_ioc_state bfa_ioc_ct_get_alt_ioc_fwstate(struct bfa_ioc *ioc);
+>>>>>>> v3.18
 static enum bfa_status bfa_ioc_ct_pll_init(void __iomem *rb,
 				enum bfi_asic_mode asic_mode);
 static enum bfa_status bfa_ioc_ct2_pll_init(void __iomem *rb,
@@ -68,6 +77,13 @@ static const struct bfa_ioc_hwif nw_hwif_ct = {
 	.ioc_sync_leave	     = bfa_ioc_ct_sync_leave,
 	.ioc_sync_ack	     = bfa_ioc_ct_sync_ack,
 	.ioc_sync_complete   = bfa_ioc_ct_sync_complete,
+<<<<<<< HEAD
+=======
+	.ioc_set_fwstate     = bfa_ioc_ct_set_cur_ioc_fwstate,
+	.ioc_get_fwstate     = bfa_ioc_ct_get_cur_ioc_fwstate,
+	.ioc_set_alt_fwstate     = bfa_ioc_ct_set_alt_ioc_fwstate,
+	.ioc_get_alt_fwstate     = bfa_ioc_ct_get_alt_ioc_fwstate,
+>>>>>>> v3.18
 };
 
 static const struct bfa_ioc_hwif nw_hwif_ct2 = {
@@ -85,6 +101,13 @@ static const struct bfa_ioc_hwif nw_hwif_ct2 = {
 	.ioc_sync_leave	     = bfa_ioc_ct_sync_leave,
 	.ioc_sync_ack	     = bfa_ioc_ct_sync_ack,
 	.ioc_sync_complete   = bfa_ioc_ct_sync_complete,
+<<<<<<< HEAD
+=======
+	.ioc_set_fwstate     = bfa_ioc_ct_set_cur_ioc_fwstate,
+	.ioc_get_fwstate     = bfa_ioc_ct_get_cur_ioc_fwstate,
+	.ioc_set_alt_fwstate     = bfa_ioc_ct_set_alt_ioc_fwstate,
+	.ioc_get_alt_fwstate     = bfa_ioc_ct_get_alt_ioc_fwstate,
+>>>>>>> v3.18
 };
 
 /* Called from bfa_ioc_attach() to map asic specific calls. */
@@ -565,6 +588,35 @@ bfa_ioc_ct_sync_complete(struct bfa_ioc *ioc)
 	return false;
 }
 
+<<<<<<< HEAD
+=======
+static void
+bfa_ioc_ct_set_cur_ioc_fwstate(struct bfa_ioc *ioc,
+			       enum bfi_ioc_state fwstate)
+{
+	writel(fwstate, ioc->ioc_regs.ioc_fwstate);
+}
+
+static enum bfi_ioc_state
+bfa_ioc_ct_get_cur_ioc_fwstate(struct bfa_ioc *ioc)
+{
+	return (enum bfi_ioc_state)readl(ioc->ioc_regs.ioc_fwstate);
+}
+
+static void
+bfa_ioc_ct_set_alt_ioc_fwstate(struct bfa_ioc *ioc,
+			       enum bfi_ioc_state fwstate)
+{
+	writel(fwstate, ioc->ioc_regs.alt_ioc_fwstate);
+}
+
+static enum bfi_ioc_state
+bfa_ioc_ct_get_alt_ioc_fwstate(struct bfa_ioc *ioc)
+{
+	return (enum bfi_ioc_state)readl(ioc->ioc_regs.alt_ioc_fwstate);
+}
+
+>>>>>>> v3.18
 static enum bfa_status
 bfa_ioc_ct_pll_init(void __iomem *rb, enum bfi_asic_mode asic_mode)
 {

@@ -25,8 +25,17 @@ pgtable_t pte_alloc_one(struct mm_struct *mm, unsigned long address)
 	struct page *pte;
 
 	pte = alloc_pages(__userpte_alloc_gfp, 0);
+<<<<<<< HEAD
 	if (pte)
 		pgtable_page_ctor(pte);
+=======
+	if (!pte)
+		return NULL;
+	if (!pgtable_page_ctor(pte)) {
+		__free_page(pte);
+		return NULL;
+	}
+>>>>>>> v3.18
 	return pte;
 }
 
@@ -57,6 +66,10 @@ void ___pte_free_tlb(struct mmu_gather *tlb, struct page *pte)
 #if PAGETABLE_LEVELS > 2
 void ___pmd_free_tlb(struct mmu_gather *tlb, pmd_t *pmd)
 {
+<<<<<<< HEAD
+=======
+	struct page *page = virt_to_page(pmd);
+>>>>>>> v3.18
 	paravirt_release_pmd(__pa(pmd) >> PAGE_SHIFT);
 	/*
 	 * NOTE! For PAE, any changes to the top page-directory-pointer-table
@@ -65,7 +78,12 @@ void ___pmd_free_tlb(struct mmu_gather *tlb, pmd_t *pmd)
 #ifdef CONFIG_X86_PAE
 	tlb->need_flush_all = 1;
 #endif
+<<<<<<< HEAD
 	tlb_remove_page(tlb, virt_to_page(pmd));
+=======
+	pgtable_pmd_page_dtor(page);
+	tlb_remove_page(tlb, page);
+>>>>>>> v3.18
 }
 
 #if PAGETABLE_LEVELS > 3
@@ -189,8 +207,15 @@ static void free_pmds(pmd_t *pmds[])
 	int i;
 
 	for(i = 0; i < PREALLOCATED_PMDS; i++)
+<<<<<<< HEAD
 		if (pmds[i])
 			free_page((unsigned long)pmds[i]);
+=======
+		if (pmds[i]) {
+			pgtable_pmd_page_dtor(virt_to_page(pmds[i]));
+			free_page((unsigned long)pmds[i]);
+		}
+>>>>>>> v3.18
 }
 
 static int preallocate_pmds(pmd_t *pmds[])
@@ -200,8 +225,18 @@ static int preallocate_pmds(pmd_t *pmds[])
 
 	for(i = 0; i < PREALLOCATED_PMDS; i++) {
 		pmd_t *pmd = (pmd_t *)__get_free_page(PGALLOC_GFP);
+<<<<<<< HEAD
 		if (pmd == NULL)
 			failed = true;
+=======
+		if (!pmd)
+			failed = true;
+		if (pmd && !pgtable_pmd_page_ctor(virt_to_page(pmd))) {
+			free_page((unsigned long)pmd);
+			pmd = NULL;
+			failed = true;
+		}
+>>>>>>> v3.18
 		pmds[i] = pmd;
 	}
 
@@ -240,7 +275,10 @@ static void pgd_mop_up_pmds(struct mm_struct *mm, pgd_t *pgdp)
 static void pgd_prepopulate_pmd(struct mm_struct *mm, pgd_t *pgd, pmd_t *pmds[])
 {
 	pud_t *pud;
+<<<<<<< HEAD
 	unsigned long addr;
+=======
+>>>>>>> v3.18
 	int i;
 
 	if (PREALLOCATED_PMDS == 0) /* Work around gcc-3.4.x bug */
@@ -248,8 +286,12 @@ static void pgd_prepopulate_pmd(struct mm_struct *mm, pgd_t *pgd, pmd_t *pmds[])
 
 	pud = pud_offset(pgd, 0);
 
+<<<<<<< HEAD
  	for (addr = i = 0; i < PREALLOCATED_PMDS;
 	     i++, pud++, addr += PUD_SIZE) {
+=======
+	for (i = 0; i < PREALLOCATED_PMDS; i++, pud++) {
+>>>>>>> v3.18
 		pmd_t *pmd = pmds[i];
 
 		if (i >= KERNEL_PGD_BOUNDARY)
@@ -388,6 +430,7 @@ int pmdp_test_and_clear_young(struct vm_area_struct *vma,
 int ptep_clear_flush_young(struct vm_area_struct *vma,
 			   unsigned long address, pte_t *ptep)
 {
+<<<<<<< HEAD
 	int young;
 
 	young = ptep_test_and_clear_young(vma, address, ptep);
@@ -395,6 +438,22 @@ int ptep_clear_flush_young(struct vm_area_struct *vma,
 		flush_tlb_page(vma, address);
 
 	return young;
+=======
+	/*
+	 * On x86 CPUs, clearing the accessed bit without a TLB flush
+	 * doesn't cause data corruption. [ It could cause incorrect
+	 * page aging and the (mistaken) reclaim of hot pages, but the
+	 * chance of that should be relatively low. ]
+	 *
+	 * So as a performance optimization don't flush the TLB when
+	 * clearing the accessed bit, it will eventually be flushed by
+	 * a context switch or a VM operation anyway. [ In the rare
+	 * event of it not getting flushed for a long time the delay
+	 * shouldn't really matter because there's no real memory
+	 * pressure for swapout to react to. ]
+	 */
+	return ptep_test_and_clear_young(vma, address, ptep);
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
@@ -438,9 +497,15 @@ void __init reserve_top_address(unsigned long reserve)
 {
 #ifdef CONFIG_X86_32
 	BUG_ON(fixmaps_set > 0);
+<<<<<<< HEAD
 	printk(KERN_INFO "Reserving virtual address space above 0x%08x\n",
 	       (int)-reserve);
 	__FIXADDR_TOP = -reserve - PAGE_SIZE;
+=======
+	__FIXADDR_TOP = round_down(-reserve, 1 << PMD_SHIFT) - PAGE_SIZE;
+	printk(KERN_INFO "Reserving virtual address space above 0x%08lx (rounded to 0x%08lx)\n",
+	       -reserve, __FIXADDR_TOP + PAGE_SIZE);
+>>>>>>> v3.18
 #endif
 }
 

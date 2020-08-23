@@ -17,7 +17,12 @@
 #include "r819xU_firmware_img.h"
 #include "r819xU_firmware.h"
 #include <linux/firmware.h>
+<<<<<<< HEAD
 void firmware_init_param(struct net_device *dev)
+=======
+
+static void firmware_init_param(struct net_device *dev)
+>>>>>>> v3.18
 {
 	struct r8192_priv	*priv = ieee80211_priv(dev);
 	rt_firmware		*pfirmware = priv->pFirmware;
@@ -29,7 +34,12 @@ void firmware_init_param(struct net_device *dev)
  * segment the img and use the ptr and length to remember info on each segment
  *
  */
+<<<<<<< HEAD
 bool fw_download_code(struct net_device *dev, u8 *code_virtual_address, u32 buffer_len)
+=======
+static bool fw_download_code(struct net_device *dev, u8 *code_virtual_address,
+			     u32 buffer_len)
+>>>>>>> v3.18
 {
 	struct r8192_priv   *priv = ieee80211_priv(dev);
 	bool		    rt_status = true;
@@ -48,8 +58,13 @@ bool fw_download_code(struct net_device *dev, u8 *code_virtual_address, u32 buff
 	//Fragmentation might be required
 	frag_threshold = pfirmware->cmdpacket_frag_thresold;
 	do {
+<<<<<<< HEAD
 		if((buffer_len - frag_offset) > frag_threshold) {
 			frag_length = frag_threshold ;
+=======
+		if ((buffer_len - frag_offset) > frag_threshold) {
+			frag_length = frag_threshold;
+>>>>>>> v3.18
 			bLastIniPkt = 0;
 
 		} else {
@@ -61,6 +76,7 @@ bool fw_download_code(struct net_device *dev, u8 *code_virtual_address, u32 buff
 		/* Allocate skb buffer to contain firmware info and tx descriptor info
 		 * add 4 to avoid packet appending overflow.
 		 * */
+<<<<<<< HEAD
 		#ifdef RTL8192U
 		skb  = dev_alloc_skb(USB_HWDESC_HEADER_LEN + frag_length + 4);
 		#else
@@ -68,19 +84,34 @@ bool fw_download_code(struct net_device *dev, u8 *code_virtual_address, u32 buff
 		#endif
 		memcpy((unsigned char *)(skb->cb),&dev,sizeof(dev));
 		tcb_desc = (cb_desc*)(skb->cb + MAX_DEV_ADDR_SIZE);
+=======
+		skb  = dev_alloc_skb(USB_HWDESC_HEADER_LEN + frag_length + 4);
+		if (!skb)
+			return false;
+		memcpy((unsigned char *)(skb->cb),&dev,sizeof(dev));
+		tcb_desc = (cb_desc *)(skb->cb + MAX_DEV_ADDR_SIZE);
+>>>>>>> v3.18
 		tcb_desc->queue_index = TXCMD_QUEUE;
 		tcb_desc->bCmdOrInit = DESC_PACKET_TYPE_INIT;
 		tcb_desc->bLastIniPkt = bLastIniPkt;
 
+<<<<<<< HEAD
 		#ifdef RTL8192U
 		skb_reserve(skb, USB_HWDESC_HEADER_LEN);
 		#endif
+=======
+		skb_reserve(skb, USB_HWDESC_HEADER_LEN);
+>>>>>>> v3.18
 		seg_ptr = skb->data;
 		/*
 		 * Transform from little endian to big endian
 		 * and pending  zero
 		 */
+<<<<<<< HEAD
 		for(i=0 ; i < frag_length; i+=4) {
+=======
+		for (i=0; i < frag_length; i+=4) {
+>>>>>>> v3.18
 			*seg_ptr++ = ((i+0)<frag_length)?code_virtual_address[i+3]:0;
 			*seg_ptr++ = ((i+1)<frag_length)?code_virtual_address[i+2]:0;
 			*seg_ptr++ = ((i+2)<frag_length)?code_virtual_address[i+1]:0;
@@ -89,6 +120,7 @@ bool fw_download_code(struct net_device *dev, u8 *code_virtual_address, u32 buff
 		tcb_desc->txbuf_size= (u16)i;
 		skb_put(skb, i);
 
+<<<<<<< HEAD
 		if(!priv->ieee80211->check_nic_enough_desc(dev,tcb_desc->queue_index)||
 			(!skb_queue_empty(&priv->ieee80211->skb_waitQ[tcb_desc->queue_index]))||\
 			(priv->ieee80211->queue_stop) ) {
@@ -96,17 +128,31 @@ bool fw_download_code(struct net_device *dev, u8 *code_virtual_address, u32 buff
 			skb_queue_tail(&priv->ieee80211->skb_waitQ[tcb_desc->queue_index], skb);
 		} else {
 			priv->ieee80211->softmac_hard_start_xmit(skb,dev);
+=======
+		if (!priv->ieee80211->check_nic_enough_desc(dev,tcb_desc->queue_index)||
+			(!skb_queue_empty(&priv->ieee80211->skb_waitQ[tcb_desc->queue_index]))||\
+			(priv->ieee80211->queue_stop)) {
+			RT_TRACE(COMP_FIRMWARE,"=====================================================> tx full!\n");
+			skb_queue_tail(&priv->ieee80211->skb_waitQ[tcb_desc->queue_index], skb);
+		} else {
+			priv->ieee80211->softmac_hard_start_xmit(skb, dev);
+>>>>>>> v3.18
 		}
 
 		code_virtual_address += frag_length;
 		frag_offset += frag_length;
 
+<<<<<<< HEAD
 	}while(frag_offset < buffer_len);
+=======
+	} while (frag_offset < buffer_len);
+>>>>>>> v3.18
 
 	return rt_status;
 
 }
 
+<<<<<<< HEAD
 bool
 fwSendNullPacket(
 	struct net_device *dev,
@@ -147,6 +193,8 @@ fwSendNullPacket(
 }
 
 
+=======
+>>>>>>> v3.18
 //-----------------------------------------------------------------------------
 // Procedure:    Check whether main code is download OK. If OK, turn on CPU
 //
@@ -160,7 +208,11 @@ fwSendNullPacket(
 //        NDIS_STATUS_FAILURE - the following initialization process should be terminated
 //        NDIS_STATUS_SUCCESS - if firmware initialization process success
 //-----------------------------------------------------------------------------
+<<<<<<< HEAD
 bool CPUcheck_maincodeok_turnonCPU(struct net_device *dev)
+=======
+static bool CPUcheck_maincodeok_turnonCPU(struct net_device *dev)
+>>>>>>> v3.18
 {
 	bool		rt_status = true;
 	int		check_putcodeOK_time = 200000, check_bootOk_time = 200000;
@@ -168,6 +220,7 @@ bool CPUcheck_maincodeok_turnonCPU(struct net_device *dev)
 
 	/* Check whether put code OK */
 	do {
+<<<<<<< HEAD
 		CPU_status = read_nic_dword(dev, CPU_GEN);
 
 		if(CPU_status&CPU_GEN_PUT_CODE_OK)
@@ -176,6 +229,16 @@ bool CPUcheck_maincodeok_turnonCPU(struct net_device *dev)
 	}while(check_putcodeOK_time--);
 
 	if(!(CPU_status&CPU_GEN_PUT_CODE_OK)) {
+=======
+		read_nic_dword(dev, CPU_GEN, &CPU_status);
+
+		if (CPU_status&CPU_GEN_PUT_CODE_OK)
+			break;
+
+	} while (check_putcodeOK_time--);
+
+	if (!(CPU_status&CPU_GEN_PUT_CODE_OK)) {
+>>>>>>> v3.18
 		RT_TRACE(COMP_ERR, "Download Firmware: Put code fail!\n");
 		goto CPUCheckMainCodeOKAndTurnOnCPU_Fail;
 	} else {
@@ -183,12 +246,17 @@ bool CPUcheck_maincodeok_turnonCPU(struct net_device *dev)
 	}
 
 	/* Turn On CPU */
+<<<<<<< HEAD
 	CPU_status = read_nic_dword(dev, CPU_GEN);
+=======
+	read_nic_dword(dev, CPU_GEN, &CPU_status);
+>>>>>>> v3.18
 	write_nic_byte(dev, CPU_GEN, (u8)((CPU_status|CPU_GEN_PWR_STB_CPU)&0xff));
 	mdelay(1000);
 
 	/* Check whether CPU boot OK */
 	do {
+<<<<<<< HEAD
 		CPU_status = read_nic_dword(dev, CPU_GEN);
 
 		if(CPU_status&CPU_GEN_BOOT_RDY)
@@ -200,16 +268,36 @@ bool CPUcheck_maincodeok_turnonCPU(struct net_device *dev)
 	} else {
 		RT_TRACE(COMP_FIRMWARE, "Download Firmware: Boot ready!\n");
 	}
+=======
+		read_nic_dword(dev, CPU_GEN, &CPU_status);
+
+		if (CPU_status&CPU_GEN_BOOT_RDY)
+			break;
+	} while (check_bootOk_time--);
+
+	if (!(CPU_status&CPU_GEN_BOOT_RDY))
+		goto CPUCheckMainCodeOKAndTurnOnCPU_Fail;
+	else
+		RT_TRACE(COMP_FIRMWARE, "Download Firmware: Boot ready!\n");
+>>>>>>> v3.18
 
 	return rt_status;
 
 CPUCheckMainCodeOKAndTurnOnCPU_Fail:
+<<<<<<< HEAD
 	RT_TRACE(COMP_ERR, "ERR in %s()\n", __FUNCTION__);
+=======
+	RT_TRACE(COMP_ERR, "ERR in %s()\n", __func__);
+>>>>>>> v3.18
 	rt_status = FALSE;
 	return rt_status;
 }
 
+<<<<<<< HEAD
 bool CPUcheck_firmware_ready(struct net_device *dev)
+=======
+static bool CPUcheck_firmware_ready(struct net_device *dev)
+>>>>>>> v3.18
 {
 
 	bool		rt_status = true;
@@ -218,6 +306,7 @@ bool CPUcheck_firmware_ready(struct net_device *dev)
 
 	/* Check Firmware Ready */
 	do {
+<<<<<<< HEAD
 		CPU_status = read_nic_dword(dev, CPU_GEN);
 
 		if(CPU_status&CPU_GEN_FIRM_RDY)
@@ -226,6 +315,16 @@ bool CPUcheck_firmware_ready(struct net_device *dev)
 	}while(check_time--);
 
 	if(!(CPU_status&CPU_GEN_FIRM_RDY))
+=======
+		read_nic_dword(dev, CPU_GEN, &CPU_status);
+
+		if (CPU_status&CPU_GEN_FIRM_RDY)
+			break;
+
+	} while (check_time--);
+
+	if (!(CPU_status&CPU_GEN_FIRM_RDY))
+>>>>>>> v3.18
 		goto CPUCheckFirmwareReady_Fail;
 	else
 		RT_TRACE(COMP_FIRMWARE, "Download Firmware: Firmware ready!\n");
@@ -233,7 +332,11 @@ bool CPUcheck_firmware_ready(struct net_device *dev)
 	return rt_status;
 
 CPUCheckFirmwareReady_Fail:
+<<<<<<< HEAD
 	RT_TRACE(COMP_ERR, "ERR in %s()\n", __FUNCTION__);
+=======
+	RT_TRACE(COMP_ERR, "ERR in %s()\n", __func__);
+>>>>>>> v3.18
 	rt_status = false;
 	return rt_status;
 
@@ -259,17 +362,29 @@ bool init_firmware(struct net_device *dev)
 
 	RT_TRACE(COMP_FIRMWARE, " PlatformInitFirmware()==>\n");
 
+<<<<<<< HEAD
 	if (pfirmware->firmware_status == FW_STATUS_0_INIT ) {
+=======
+	if (pfirmware->firmware_status == FW_STATUS_0_INIT) {
+>>>>>>> v3.18
 		/* it is called by reset */
 		rst_opt = OPT_SYSTEM_RESET;
 		starting_state = FW_INIT_STEP0_BOOT;
 		// TODO: system reset
 
+<<<<<<< HEAD
 	}else if(pfirmware->firmware_status == FW_STATUS_5_READY) {
 		/* it is called by Initialize */
 		rst_opt = OPT_FIRMWARE_RESET;
 		starting_state = FW_INIT_STEP2_DATA;
 	}else {
+=======
+	} else if (pfirmware->firmware_status == FW_STATUS_5_READY) {
+		/* it is called by Initialize */
+		rst_opt = OPT_FIRMWARE_RESET;
+		starting_state = FW_INIT_STEP2_DATA;
+	} else {
+>>>>>>> v3.18
 		 RT_TRACE(COMP_FIRMWARE, "PlatformInitFirmware: undefined firmware state\n");
 	}
 
@@ -277,28 +392,47 @@ bool init_firmware(struct net_device *dev)
 	 * Download boot, main, and data image for System reset.
 	 * Download data image for firmware reset
 	 */
+<<<<<<< HEAD
 	for(init_step = starting_state; init_step <= FW_INIT_STEP2_DATA; init_step++) {
+=======
+	for (init_step = starting_state; init_step <= FW_INIT_STEP2_DATA; init_step++) {
+>>>>>>> v3.18
 		/*
 		 * Open image file, and map file to continuous memory if open file success.
 		 * or read image file from array. Default load from IMG file
 		 */
+<<<<<<< HEAD
 		if(rst_opt == OPT_SYSTEM_RESET) {
 			rc = request_firmware(&fw_entry, fw_name[init_step],&priv->udev->dev);
 			if(rc < 0 ) {
+=======
+		if (rst_opt == OPT_SYSTEM_RESET) {
+			rc = request_firmware(&fw_entry, fw_name[init_step],&priv->udev->dev);
+			if (rc < 0) {
+>>>>>>> v3.18
 				RT_TRACE(COMP_ERR, "request firmware fail!\n");
 				goto download_firmware_fail;
 			}
 
+<<<<<<< HEAD
 			if(fw_entry->size > sizeof(pfirmware->firmware_buf)) {
+=======
+			if (fw_entry->size > sizeof(pfirmware->firmware_buf)) {
+>>>>>>> v3.18
 				RT_TRACE(COMP_ERR, "img file size exceed the container buffer fail!\n");
 				goto download_firmware_fail;
 			}
 
+<<<<<<< HEAD
 			if(init_step != FW_INIT_STEP1_MAIN) {
+=======
+			if (init_step != FW_INIT_STEP1_MAIN) {
+>>>>>>> v3.18
 				memcpy(pfirmware->firmware_buf,fw_entry->data,fw_entry->size);
 				mapped_file = pfirmware->firmware_buf;
 				file_length = fw_entry->size;
 			} else {
+<<<<<<< HEAD
 #ifdef RTL8190P
 				memcpy(pfirmware->firmware_buf,fw_entry->data,fw_entry->size);
 				mapped_file = pfirmware->firmware_buf;
@@ -312,6 +446,15 @@ bool init_firmware(struct net_device *dev)
 			}
 			pfirmware->firmware_buf_size = file_length;
 		}else if(rst_opt == OPT_FIRMWARE_RESET ) {
+=======
+				memset(pfirmware->firmware_buf, 0, 128);
+				memcpy(&pfirmware->firmware_buf[128],fw_entry->data,fw_entry->size);
+				mapped_file = pfirmware->firmware_buf;
+				file_length = fw_entry->size + 128;
+			}
+			pfirmware->firmware_buf_size = file_length;
+		} else if (rst_opt == OPT_FIRMWARE_RESET) {
+>>>>>>> v3.18
 			/* we only need to download data.img here */
 			mapped_file = pfirmware->firmware_buf;
 			file_length = pfirmware->firmware_buf_size;
@@ -324,6 +467,7 @@ bool init_firmware(struct net_device *dev)
 		 * 3. each skb_buff packet data content will already include the firmware info
 		 *   and Tx descriptor info
 		 * */
+<<<<<<< HEAD
 		rt_status = fw_download_code(dev,mapped_file,file_length);
 		if(rst_opt == OPT_SYSTEM_RESET) {
 			release_firmware(fw_entry);
@@ -334,12 +478,23 @@ bool init_firmware(struct net_device *dev)
 		}
 
 		switch(init_step) {
+=======
+		rt_status = fw_download_code(dev, mapped_file, file_length);
+		if (rst_opt == OPT_SYSTEM_RESET)
+			release_firmware(fw_entry);
+
+		if (rt_status != TRUE)
+			goto download_firmware_fail;
+
+		switch (init_step) {
+>>>>>>> v3.18
 		case FW_INIT_STEP0_BOOT:
 			/* Download boot
 			 * initialize command descriptor.
 			 * will set polling bit when firmware code is also configured
 			 */
 			pfirmware->firmware_status = FW_STATUS_1_MOVE_BOOT_CODE;
+<<<<<<< HEAD
 #ifdef RTL8190P
 			// To initialize IMEM, CPU move code  from 0x80000080, hence, we send 0x80 byte packet
 			rt_status = fwSendNullPacket(dev, RTL8190_CPU_START_OFFSET);
@@ -349,6 +504,8 @@ bool init_firmware(struct net_device *dev)
 				goto  download_firmware_fail;
 			}
 #endif
+=======
+>>>>>>> v3.18
 			//mdelay(1000);
 			/*
 			 * To initialize IMEM, CPU move code  from 0x80000080,
@@ -362,7 +519,11 @@ bool init_firmware(struct net_device *dev)
 
 			/* Check Put Code OK and Turn On CPU */
 			rt_status = CPUcheck_maincodeok_turnonCPU(dev);
+<<<<<<< HEAD
 			if(rt_status != TRUE) {
+=======
+			if (rt_status != TRUE) {
+>>>>>>> v3.18
 				RT_TRACE(COMP_ERR, "CPUcheck_maincodeok_turnonCPU fail!\n");
 				goto download_firmware_fail;
 			}
@@ -376,7 +537,11 @@ bool init_firmware(struct net_device *dev)
 			mdelay(1);
 
 			rt_status = CPUcheck_firmware_ready(dev);
+<<<<<<< HEAD
 			if(rt_status != TRUE) {
+=======
+			if (rt_status != TRUE) {
+>>>>>>> v3.18
 				RT_TRACE(COMP_ERR, "CPUcheck_firmware_ready fail(%d)!\n",rt_status);
 				goto download_firmware_fail;
 			}
@@ -393,7 +558,11 @@ bool init_firmware(struct net_device *dev)
 	return rt_status;
 
 download_firmware_fail:
+<<<<<<< HEAD
 	RT_TRACE(COMP_ERR, "ERR in %s()\n", __FUNCTION__);
+=======
+	RT_TRACE(COMP_ERR, "ERR in %s()\n", __func__);
+>>>>>>> v3.18
 	rt_status = FALSE;
 	return rt_status;
 

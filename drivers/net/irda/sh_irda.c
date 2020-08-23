@@ -804,7 +804,11 @@ static int sh_irda_probe(struct platform_device *pdev)
 		goto err_mem_4;
 
 	platform_set_drvdata(pdev, ndev);
+<<<<<<< HEAD
 	err = request_irq(irq, sh_irda_irq, IRQF_DISABLED, "sh_irda", self);
+=======
+	err = devm_request_irq(&pdev->dev, irq, sh_irda_irq, 0, "sh_irda", self);
+>>>>>>> v3.18
 	if (err) {
 		dev_warn(&pdev->dev, "Unable to attach sh_irda interrupt\n");
 		goto err_mem_4;
@@ -838,7 +842,10 @@ static int sh_irda_remove(struct platform_device *pdev)
 	sh_irda_remove_iobuf(self);
 	iounmap(self->membase);
 	free_netdev(ndev);
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 
 	return 0;
 }

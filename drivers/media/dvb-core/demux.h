@@ -7,8 +7,11 @@
  * Copyright (c) 2000 Nokia Research Center
  *                    Tampere, FINLAND
  *
+<<<<<<< HEAD
  * Copyright (c) 2012-2014, The Linux Foundation. All rights reserved.
  *
+=======
+>>>>>>> v3.18
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public License
  * as published by the Free Software Foundation; either version 2.1
@@ -38,8 +41,11 @@
 /* Common definitions */
 /*--------------------------------------------------------------------------*/
 
+<<<<<<< HEAD
 #define DMX_EVENT_QUEUE_SIZE	500 /* number of events */
 
+=======
+>>>>>>> v3.18
 /*
  * DMX_MAX_FILTER_SIZE: Maximum length (in bytes) of a section/PES filter.
  */
@@ -63,6 +69,7 @@
 /*
  * enum dmx_success: Success codes for the Demux Callback API.
  */
+<<<<<<< HEAD
 enum dmx_success {
 	DMX_OK = 0, /* Received Ok */
 	DMX_OK_PES_END, /* Received OK, data reached end of PES packet */
@@ -158,6 +165,18 @@ struct data_buffer {
 	 */
 	void *priv_handle;
 };
+=======
+
+enum dmx_success {
+  DMX_OK = 0, /* Received Ok */
+  DMX_LENGTH_ERROR, /* Incorrect length */
+  DMX_OVERRUN_ERROR, /* Receiver ring buffer overrun */
+  DMX_CRC_ERROR, /* Incorrect CRC */
+  DMX_FRAME_ERROR, /* Frame alignment error */
+  DMX_FIFO_ERROR, /* Receiver FIFO overrun */
+  DMX_MISSED_ERROR /* Receiver missed packet */
+} ;
+>>>>>>> v3.18
 
 /*--------------------------------------------------------------------------*/
 /* TS packet reception */
@@ -172,6 +191,7 @@ struct data_buffer {
 #define TS_DEMUX        8   /* in case TS_PACKET is set, send the TS to
 			       the demux device, not to the dvr device */
 
+<<<<<<< HEAD
 struct dmx_ts_feed;
 typedef int (*dmx_ts_data_ready_cb)(
 		struct dmx_ts_feed *source,
@@ -183,6 +203,12 @@ struct dmx_ts_feed {
 	struct data_buffer buffer;
 	void *priv; /* Pointer to private data of the API client */
 	struct dmx_decoder_buffers *decoder_buffers;
+=======
+struct dmx_ts_feed {
+	int is_filtering; /* Set to non-zero when filtering in progress */
+	struct dmx_demux *parent; /* Back-pointer */
+	void *priv; /* Pointer to private data of the API client */
+>>>>>>> v3.18
 	int (*set) (struct dmx_ts_feed *feed,
 		    u16 pid,
 		    int type,
@@ -191,6 +217,7 @@ struct dmx_ts_feed {
 		    struct timespec timeout);
 	int (*start_filtering) (struct dmx_ts_feed* feed);
 	int (*stop_filtering) (struct dmx_ts_feed* feed);
+<<<<<<< HEAD
 	int (*set_video_codec) (struct dmx_ts_feed *feed,
 				enum dmx_video_codec video_codec);
 	int (*set_idx_params) (struct dmx_ts_feed *feed,
@@ -219,6 +246,8 @@ struct dmx_ts_feed {
 			char *data, size_t size);
 	int (*get_scrambling_bits)(struct dmx_ts_feed *feed, u8 *value);
 	int (*flush_buffer)(struct dmx_ts_feed *feed, size_t length);
+=======
+>>>>>>> v3.18
 };
 
 /*--------------------------------------------------------------------------*/
@@ -230,6 +259,7 @@ struct dmx_section_filter {
 	u8 filter_mask [DMX_MAX_FILTER_SIZE];
 	u8 filter_mode [DMX_MAX_FILTER_SIZE];
 	struct dmx_section_feed* parent; /* Back-pointer */
+<<<<<<< HEAD
 	struct data_buffer buffer;
 	void* priv; /* Pointer to private data of the API client */
 };
@@ -239,6 +269,11 @@ typedef int (*dmx_section_data_ready_cb)(
 		struct dmx_section_filter *source,
 		struct dmx_data_ready *dmx_data_ready);
 
+=======
+	void* priv; /* Pointer to private data of the API client */
+};
+
+>>>>>>> v3.18
 struct dmx_section_feed {
 	int is_filtering; /* Set to non-zero when filtering in progress */
 	struct dmx_demux* parent; /* Back-pointer */
@@ -261,6 +296,7 @@ struct dmx_section_feed {
 			       struct dmx_section_filter* filter);
 	int (*start_filtering) (struct dmx_section_feed* feed);
 	int (*stop_filtering) (struct dmx_section_feed* feed);
+<<<<<<< HEAD
 	int (*data_ready_cb)(struct dmx_section_feed *feed,
 			dmx_section_data_ready_cb callback);
 	int (*notify_data_read)(struct dmx_section_filter *filter,
@@ -273,6 +309,8 @@ struct dmx_section_feed {
 				struct dmx_oob_command *cmd);
 	int (*get_scrambling_bits)(struct dmx_section_feed *feed, u8 *value);
 	int (*flush_buffer)(struct dmx_section_feed *feed, size_t length);
+=======
+>>>>>>> v3.18
 };
 
 /*--------------------------------------------------------------------------*/
@@ -293,6 +331,7 @@ typedef int (*dmx_section_cb) (	const u8 * buffer1,
 				struct dmx_section_filter * source,
 				enum dmx_success success);
 
+<<<<<<< HEAD
 typedef int (*dmx_ts_fullness) (
 				struct dmx_ts_feed *source,
 				int required_space,
@@ -303,6 +342,8 @@ typedef int (*dmx_section_fullness) (
 				int required_space,
 				int wait);
 
+=======
+>>>>>>> v3.18
 /*--------------------------------------------------------------------------*/
 /* DVB Front-End */
 /*--------------------------------------------------------------------------*/
@@ -358,6 +399,7 @@ struct dmx_demux {
 	u32 capabilities;            /* Bitfield of capability flags */
 	struct dmx_frontend* frontend;    /* Front-end connected to the demux */
 	void* priv;                  /* Pointer to private data of the API client */
+<<<<<<< HEAD
 	struct data_buffer dvr_input; /* DVR input buffer */
 	int dvr_input_protected;
 	struct dentry *debugfs_demux_dir; /* debugfs dir */
@@ -365,6 +407,11 @@ struct dmx_demux {
 	int (*open) (struct dmx_demux* demux);
 	int (*close) (struct dmx_demux* demux);
 	int (*write) (struct dmx_demux *demux, const char *buf, size_t count);
+=======
+	int (*open) (struct dmx_demux* demux);
+	int (*close) (struct dmx_demux* demux);
+	int (*write) (struct dmx_demux* demux, const char __user *buf, size_t count);
+>>>>>>> v3.18
 	int (*allocate_ts_feed) (struct dmx_demux* demux,
 				 struct dmx_ts_feed** feed,
 				 dmx_ts_cb callback);
@@ -388,6 +435,7 @@ struct dmx_demux {
 
 	int (*get_caps) (struct dmx_demux* demux, struct dmx_caps *caps);
 
+<<<<<<< HEAD
 	int (*set_source) (struct dmx_demux *demux, const dmx_source_t *src);
 
 	int (*set_tsp_format) (struct dmx_demux *demux,
@@ -411,6 +459,12 @@ struct dmx_demux {
 			void *priv_handle);
 
 	int (*get_tsp_size) (struct dmx_demux *demux);
+=======
+	int (*set_source) (struct dmx_demux* demux, const dmx_source_t *src);
+
+	int (*get_stc) (struct dmx_demux* demux, unsigned int num,
+			u64 *stc, unsigned int *base);
+>>>>>>> v3.18
 };
 
 #endif /* #ifndef __DEMUX_H */

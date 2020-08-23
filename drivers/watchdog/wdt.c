@@ -664,6 +664,9 @@ module_exit(wdt_exit);
 
 MODULE_AUTHOR("Alan Cox");
 MODULE_DESCRIPTION("Driver for ISA ICS watchdog cards (WDT500/501)");
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
 MODULE_ALIAS_MISCDEV(TEMP_MINOR);
+=======
+>>>>>>> v3.18
 MODULE_LICENSE("GPL");

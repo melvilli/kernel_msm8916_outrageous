@@ -9,8 +9,15 @@ Required properties :
 - interrupts: interrupt number to the cpu.
 - #address-cells = <1>;
 - #size-cells = <0>;
+<<<<<<< HEAD
 
 Optional properties:
+=======
+- clocks: phandles to input clocks.
+
+Optional properties:
+- clock-frequency: Desired I2C bus frequency in Hz, otherwise defaults to 100000
+>>>>>>> v3.18
 - Child nodes conforming to i2c bus binding
 
 Examples :
@@ -21,6 +28,11 @@ i2c0: i2c@fff84000 {
 	interrupts = <12 4 6>;
 	#address-cells = <1>;
 	#size-cells = <0>;
+<<<<<<< HEAD
+=======
+	clocks = <&twi0_clk>;
+	clock-frequency = <400000>;
+>>>>>>> v3.18
 
 	24c512@50 {
 		compatible = "24c512";

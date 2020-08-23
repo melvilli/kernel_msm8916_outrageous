@@ -4,7 +4,10 @@
 struct machine_desc;
 
 void arm_memblock_init(const struct machine_desc *);
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 phys_addr_t arm_memblock_steal(phys_addr_t size, phys_addr_t align);
 
 #endif

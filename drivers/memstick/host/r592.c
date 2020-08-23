@@ -188,6 +188,10 @@ static void r592_host_reset(struct r592_device *dev)
 	r592_set_mode(dev, dev->parallel_mode);
 }
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 /* Disable all hardware interrupts */
 static void r592_clear_interrupts(struct r592_device *dev)
 {
@@ -195,6 +199,10 @@ static void r592_clear_interrupts(struct r592_device *dev)
 	r592_clear_reg_mask(dev, R592_REG_MSC, IRQ_ALL_ACK_MASK);
 	r592_clear_reg_mask(dev, R592_REG_MSC, IRQ_ALL_EN_MASK);
 }
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 
 /* Tests if there is an CRC error */
 static int r592_test_io_error(struct r592_device *dev)
@@ -290,7 +298,11 @@ static int r592_transfer_fifo_dma(struct r592_device *dev)
 	dbg_verbose("doing dma transfer");
 
 	dev->dma_error = 0;
+<<<<<<< HEAD
 	INIT_COMPLETION(dev->dma_done);
+=======
+	reinit_completion(&dev->dma_done);
+>>>>>>> v3.18
 
 	/* TODO: hidden assumption about nenth beeing always 1 */
 	sg_count = dma_map_sg(&dev->pci_dev->dev, &dev->req->sg, 1, is_write ?
@@ -884,6 +896,7 @@ static struct pci_driver r852_pci_driver = {
 	.driver.pm	= &r592_pm_ops,
 };
 
+<<<<<<< HEAD
 static __init int r592_module_init(void)
 {
 	return pci_register_driver(&r852_pci_driver);
@@ -896,6 +909,9 @@ static void __exit r592_module_exit(void)
 
 module_init(r592_module_init);
 module_exit(r592_module_exit);
+=======
+module_pci_driver(r852_pci_driver);
+>>>>>>> v3.18
 
 module_param_named(enable_dma, r592_enable_dma, bool, S_IRUGO);
 MODULE_PARM_DESC(enable_dma, "Enable usage of the DMA (default)");

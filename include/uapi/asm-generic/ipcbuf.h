@@ -27,8 +27,13 @@ struct ipc64_perm {
 	unsigned char		__pad1[4 - sizeof(__kernel_mode_t)];
 	unsigned short		seq;
 	unsigned short		__pad2;
+<<<<<<< HEAD
 	unsigned long		__unused1;
 	unsigned long		__unused2;
+=======
+	__kernel_ulong_t	__unused1;
+	__kernel_ulong_t	__unused2;
+>>>>>>> v3.18
 };
 
 #endif /* __ASM_GENERIC_IPCBUF_H */

@@ -564,6 +564,7 @@ struct jffs2_node_frag *jffs2_lookup_node_frag(struct rb_root *fragtree, uint32_
    they're killed. */
 void jffs2_kill_fragtree(struct rb_root *root, struct jffs2_sb_info *c)
 {
+<<<<<<< HEAD
 	struct jffs2_node_frag *frag;
 	struct jffs2_node_frag *parent;
 
@@ -583,6 +584,12 @@ void jffs2_kill_fragtree(struct rb_root *root, struct jffs2_sb_info *c)
 			continue;
 		}
 
+=======
+	struct jffs2_node_frag *frag, *next;
+
+	dbg_fragtree("killing\n");
+	rbtree_postorder_for_each_entry_safe(frag, next, root, rb) {
+>>>>>>> v3.18
 		if (frag->node && !(--frag->node->frags)) {
 			/* Not a hole, and it's the final remaining frag
 			   of this node. Free the node */
@@ -591,6 +598,7 @@ void jffs2_kill_fragtree(struct rb_root *root, struct jffs2_sb_info *c)
 
 			jffs2_free_full_dnode(frag->node);
 		}
+<<<<<<< HEAD
 		parent = frag_parent(frag);
 		if (parent) {
 			if (frag_left(parent) == frag)
@@ -602,6 +610,10 @@ void jffs2_kill_fragtree(struct rb_root *root, struct jffs2_sb_info *c)
 		jffs2_free_node_frag(frag);
 		frag = parent;
 
+=======
+
+		jffs2_free_node_frag(frag);
+>>>>>>> v3.18
 		cond_resched();
 	}
 }

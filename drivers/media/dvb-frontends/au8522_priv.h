@@ -37,6 +37,10 @@
 
 #define AU8522_ANALOG_MODE 0
 #define AU8522_DIGITAL_MODE 1
+<<<<<<< HEAD
+=======
+#define AU8522_SUSPEND_MODE 2
+>>>>>>> v3.18
 
 struct au8522_state {
 	struct i2c_client *c;
@@ -347,6 +351,10 @@ int au8522_led_ctrl(struct au8522_state *state, int led);
 /* Format control 2 */
 #define AU8522_TVDEC_FORMAT_CTRL2_REG062H_STD_AUTODETECT	0x00
 #define AU8522_TVDEC_FORMAT_CTRL2_REG062H_STD_NTSC		0x01
+<<<<<<< HEAD
+=======
+#define AU8522_TVDEC_FORMAT_CTRL2_REG062H_STD_PAL_M		0x02
+>>>>>>> v3.18
 
 
 #define AU8522_INPUT_CONTROL_REG081H_ATSC               	0xC4

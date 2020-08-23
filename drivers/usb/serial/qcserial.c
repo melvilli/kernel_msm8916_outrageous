@@ -1,7 +1,11 @@
 /*
  * Qualcomm Serial USB driver
  *
+<<<<<<< HEAD
  *	Copyright (c) 2008, 2012 The Linux Foundation. All rights reserved.
+=======
+ *	Copyright (c) 2008 QUALCOMM Incorporated.
+>>>>>>> v3.18
  *	Copyright (c) 2009 Greg Kroah-Hartman <gregkh@suse.de>
  *	Copyright (c) 2009 Novell Inc.
  *
@@ -22,8 +26,22 @@
 #define DRIVER_AUTHOR "Qualcomm Inc"
 #define DRIVER_DESC "Qualcomm USB Serial driver"
 
+<<<<<<< HEAD
 #define DEVICE_G1K(v, p) \
 	USB_DEVICE(v, p), .driver_info = 1
+=======
+/* standard device layouts supported by this driver */
+enum qcserial_layouts {
+	QCSERIAL_G2K = 0,	/* Gobi 2000 */
+	QCSERIAL_G1K = 1,	/* Gobi 1000 */
+	QCSERIAL_SWI = 2,	/* Sierra Wireless */
+};
+
+#define DEVICE_G1K(v, p) \
+	USB_DEVICE(v, p), .driver_info = QCSERIAL_G1K
+#define DEVICE_SWI(v, p) \
+	USB_DEVICE(v, p), .driver_info = QCSERIAL_SWI
+>>>>>>> v3.18
 
 static const struct usb_device_id id_table[] = {
 	/* Gobi 1000 devices */
@@ -125,6 +143,7 @@ static const struct usb_device_id id_table[] = {
 	{USB_DEVICE(0x12D1, 0x14F0)},	/* Sony Gobi 3000 QDL */
 	{USB_DEVICE(0x12D1, 0x14F1)},	/* Sony Gobi 3000 Composite */
 	{USB_DEVICE(0x0AF0, 0x8120)},	/* Option GTM681W */
+<<<<<<< HEAD
 	{USB_DEVICE(0x05c6, 0x9048)},	/* MDM9x15 device */
 	{USB_DEVICE(0x05c6, 0x904C)},	/* MDM9x15 device */
 
@@ -189,6 +208,30 @@ static const struct usb_device_id id_table[] = {
 	{USB_DEVICE_INTERFACE_NUMBER(0x413c, 0x81a9, 0)},	/* Dell Wireless 5808e Gobi(TM) 4G LTE Mobile Broadband Card Device Management */
 	{USB_DEVICE_INTERFACE_NUMBER(0x413c, 0x81a9, 2)},	/* Dell Wireless 5808e Gobi(TM) 4G LTE Mobile Broadband Card NMEA */
 	{USB_DEVICE_INTERFACE_NUMBER(0x413c, 0x81a9, 3)},	/* Dell Wireless 5808e Gobi(TM) 4G LTE Mobile Broadband Card Modem */
+=======
+
+	/* non-Gobi Sierra Wireless devices */
+	{DEVICE_SWI(0x0f3d, 0x68a2)},	/* Sierra Wireless MC7700 */
+	{DEVICE_SWI(0x114f, 0x68a2)},	/* Sierra Wireless MC7750 */
+	{DEVICE_SWI(0x1199, 0x68a2)},	/* Sierra Wireless MC7710 */
+	{DEVICE_SWI(0x1199, 0x68c0)},	/* Sierra Wireless MC73xx */
+	{DEVICE_SWI(0x1199, 0x901c)},	/* Sierra Wireless EM7700 */
+	{DEVICE_SWI(0x1199, 0x901f)},	/* Sierra Wireless EM7355 */
+	{DEVICE_SWI(0x1199, 0x9040)},	/* Sierra Wireless Modem */
+	{DEVICE_SWI(0x1199, 0x9041)},	/* Sierra Wireless MC7305/MC7355 */
+	{DEVICE_SWI(0x1199, 0x9051)},	/* Netgear AirCard 340U */
+	{DEVICE_SWI(0x1199, 0x9053)},	/* Sierra Wireless Modem */
+	{DEVICE_SWI(0x1199, 0x9054)},	/* Sierra Wireless Modem */
+	{DEVICE_SWI(0x1199, 0x9055)},	/* Netgear AirCard 341U */
+	{DEVICE_SWI(0x1199, 0x9056)},	/* Sierra Wireless Modem */
+	{DEVICE_SWI(0x1199, 0x9060)},	/* Sierra Wireless Modem */
+	{DEVICE_SWI(0x1199, 0x9061)},	/* Sierra Wireless Modem */
+	{DEVICE_SWI(0x413c, 0x81a2)},	/* Dell Wireless 5806 Gobi(TM) 4G LTE Mobile Broadband Card */
+	{DEVICE_SWI(0x413c, 0x81a3)},	/* Dell Wireless 5570 HSPA+ (42Mbps) Mobile Broadband Card */
+	{DEVICE_SWI(0x413c, 0x81a4)},	/* Dell Wireless 5570e HSPA+ (42Mbps) Mobile Broadband Card */
+	{DEVICE_SWI(0x413c, 0x81a8)},	/* Dell Wireless 5808 Gobi(TM) 4G LTE Mobile Broadband Card */
+	{DEVICE_SWI(0x413c, 0x81a9)},	/* Dell Wireless 5808e Gobi(TM) 4G LTE Mobile Broadband Card */
+>>>>>>> v3.18
 
 	{ }				/* Terminating entry */
 };
@@ -201,11 +244,16 @@ static int qcprobe(struct usb_serial *serial, const struct usb_device_id *id)
 	int retval = -ENODEV;
 	__u8 nintf;
 	__u8 ifnum;
+<<<<<<< HEAD
 	bool is_gobi1k = id->driver_info ? true : false;
 	int altsetting = -1;
 
 	dev_dbg(dev, "Is Gobi 1000 = %d\n", is_gobi1k);
 
+=======
+	int altsetting = -1;
+
+>>>>>>> v3.18
 	nintf = serial->dev->actconfig->desc.bNumInterfaces;
 	dev_dbg(dev, "Num Interfaces = %d\n", nintf);
 	ifnum = intf->desc.bInterfaceNumber;
@@ -233,6 +281,7 @@ static int qcprobe(struct usb_serial *serial, const struct usb_device_id *id)
 
 	}
 
+<<<<<<< HEAD
 	/* allow any number of interfaces when doing direct interface match */
 	if (id->match_flags & USB_DEVICE_ID_MATCH_INT_NUMBER) {
 		dev_dbg(dev, "Generic Qualcomm serial interface found\n");
@@ -254,11 +303,34 @@ static int qcprobe(struct usb_serial *serial, const struct usb_device_id *id)
 
 	if (is_gobi1k) {
 		/* Gobi 1K USB layout:
+=======
+	/* default to enabling interface */
+	altsetting = 0;
+
+	/*
+	 * Composite mode; don't bind to the QMI/net interface as that
+	 * gets handled by other drivers.
+	 */
+
+	switch (id->driver_info) {
+	case QCSERIAL_G1K:
+		/*
+		 * Gobi 1K USB layout:
+>>>>>>> v3.18
 		 * 0: DM/DIAG (use libqcdm from ModemManager for communication)
 		 * 1: serial port (doesn't respond)
 		 * 2: AT-capable modem port
 		 * 3: QMI/net
 		 */
+<<<<<<< HEAD
+=======
+		if (nintf < 3 || nintf > 4) {
+			dev_err(dev, "unknown number of interfaces: %d\n", nintf);
+			altsetting = -1;
+			goto done;
+		}
+
+>>>>>>> v3.18
 		if (ifnum == 0) {
 			dev_dbg(dev, "Gobi 1K DM/DIAG interface found\n");
 			altsetting = 1;
@@ -266,13 +338,29 @@ static int qcprobe(struct usb_serial *serial, const struct usb_device_id *id)
 			dev_dbg(dev, "Modem port found\n");
 		else
 			altsetting = -1;
+<<<<<<< HEAD
 	} else {
 		/* Gobi 2K+ USB layout:
+=======
+		break;
+	case QCSERIAL_G2K:
+		/*
+		 * Gobi 2K+ USB layout:
+>>>>>>> v3.18
 		 * 0: QMI/net
 		 * 1: DM/DIAG (use libqcdm from ModemManager for communication)
 		 * 2: AT-capable modem port
 		 * 3: NMEA
 		 */
+<<<<<<< HEAD
+=======
+		if (nintf < 3 || nintf > 4) {
+			dev_err(dev, "unknown number of interfaces: %d\n", nintf);
+			altsetting = -1;
+			goto done;
+		}
+
+>>>>>>> v3.18
 		switch (ifnum) {
 		case 0:
 			/* Don't claim the QMI/net interface */
@@ -293,6 +381,38 @@ static int qcprobe(struct usb_serial *serial, const struct usb_device_id *id)
 			dev_dbg(dev, "Gobi 2K+ NMEA GPS interface found\n");
 			break;
 		}
+<<<<<<< HEAD
+=======
+		break;
+	case QCSERIAL_SWI:
+		/*
+		 * Sierra Wireless layout:
+		 * 0: DM/DIAG (use libqcdm from ModemManager for communication)
+		 * 2: NMEA
+		 * 3: AT-capable modem port
+		 * 8: QMI/net
+		 */
+		switch (ifnum) {
+		case 0:
+			dev_dbg(dev, "DM/DIAG interface found\n");
+			break;
+		case 2:
+			dev_dbg(dev, "NMEA GPS interface found\n");
+			break;
+		case 3:
+			dev_dbg(dev, "Modem port found\n");
+			break;
+		default:
+			/* don't claim any unsupported interface */
+			altsetting = -1;
+			break;
+		}
+		break;
+	default:
+		dev_err(dev, "unsupported device layout type: %lu\n",
+			id->driver_info);
+		break;
+>>>>>>> v3.18
 	}
 
 done:
@@ -346,8 +466,11 @@ static struct usb_serial_driver qcdevice = {
 	.write		     = usb_wwan_write,
 	.write_room	     = usb_wwan_write_room,
 	.chars_in_buffer     = usb_wwan_chars_in_buffer,
+<<<<<<< HEAD
 	.throttle            = usb_wwan_throttle,
 	.unthrottle          = usb_wwan_unthrottle,
+=======
+>>>>>>> v3.18
 	.attach              = qc_attach,
 	.release	     = qc_release,
 	.port_probe          = usb_wwan_port_probe,

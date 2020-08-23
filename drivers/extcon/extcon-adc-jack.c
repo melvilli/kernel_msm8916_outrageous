@@ -27,6 +27,7 @@
 
 /**
  * struct adc_jack_data - internal data for adc_jack device driver
+<<<<<<< HEAD
  * @edev        - extcon device.
  * @cable_names - list of supported cables.
  * @num_cables  - size of cable_names.
@@ -40,6 +41,21 @@
  */
 struct adc_jack_data {
 	struct extcon_dev edev;
+=======
+ * @edev:		extcon device.
+ * @cable_names:	list of supported cables.
+ * @num_cables:		size of cable_names.
+ * @adc_conditions:	list of adc value conditions.
+ * @num_conditions:	size of adc_conditions.
+ * @irq:		irq number of attach/detach event (0 if not exist).
+ * @handling_delay:	interrupt handler will schedule extcon event
+ *			handling at handling_delay jiffies.
+ * @handler:		extcon event handler called by interrupt handler.
+ * @chan:		iio channel being queried.
+ */
+struct adc_jack_data {
+	struct extcon_dev *edev;
+>>>>>>> v3.18
 
 	const char **cable_names;
 	int num_cables;
@@ -64,7 +80,11 @@ static void adc_jack_handler(struct work_struct *work)
 
 	ret = iio_read_channel_raw(data->chan, &adc_val);
 	if (ret < 0) {
+<<<<<<< HEAD
 		dev_err(data->edev.dev, "read channel() error: %d\n", ret);
+=======
+		dev_err(&data->edev->dev, "read channel() error: %d\n", ret);
+>>>>>>> v3.18
 		return;
 	}
 
@@ -80,27 +100,41 @@ static void adc_jack_handler(struct work_struct *work)
 	}
 	/* if no def has met, it means state = 0 (no cables attached) */
 
+<<<<<<< HEAD
 	extcon_set_state(&data->edev, state);
+=======
+	extcon_set_state(data->edev, state);
+>>>>>>> v3.18
 }
 
 static irqreturn_t adc_jack_irq_thread(int irq, void *_data)
 {
 	struct adc_jack_data *data = _data;
 
+<<<<<<< HEAD
 	schedule_delayed_work(&data->handler, data->handling_delay);
+=======
+	queue_delayed_work(system_power_efficient_wq,
+			   &data->handler, data->handling_delay);
+>>>>>>> v3.18
 	return IRQ_HANDLED;
 }
 
 static int adc_jack_probe(struct platform_device *pdev)
 {
 	struct adc_jack_data *data;
+<<<<<<< HEAD
 	struct adc_jack_pdata *pdata = pdev->dev.platform_data;
+=======
+	struct adc_jack_pdata *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	int i, err = 0;
 
 	data = devm_kzalloc(&pdev->dev, sizeof(*data), GFP_KERNEL);
 	if (!data)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 	data->edev.name = pdata->name;
 
 	if (!pdata->cable_names) {
@@ -119,14 +153,40 @@ static int adc_jack_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "error: pdata->cable_names size = %d\n",
 				i - 1);
 		goto out;
+=======
+	if (!pdata->cable_names) {
+		dev_err(&pdev->dev, "error: cable_names not defined.\n");
+		return -EINVAL;
+	}
+
+	data->edev = devm_extcon_dev_allocate(&pdev->dev, pdata->cable_names);
+	if (IS_ERR(data->edev)) {
+		dev_err(&pdev->dev, "failed to allocate extcon device\n");
+		return -ENOMEM;
+	}
+	data->edev->name = pdata->name;
+
+	/* Check the length of array and set num_cables */
+	for (i = 0; data->edev->supported_cable[i]; i++)
+		;
+	if (i == 0 || i > SUPPORTED_CABLE_MAX) {
+		dev_err(&pdev->dev, "error: pdata->cable_names size = %d\n",
+				i - 1);
+		return -EINVAL;
+>>>>>>> v3.18
 	}
 	data->num_cables = i;
 
 	if (!pdata->adc_conditions ||
 			!pdata->adc_conditions[0].state) {
+<<<<<<< HEAD
 		err = -EINVAL;
 		dev_err(&pdev->dev, "error: adc_conditions not defined.\n");
 		goto out;
+=======
+		dev_err(&pdev->dev, "error: adc_conditions not defined.\n");
+		return -EINVAL;
+>>>>>>> v3.18
 	}
 	data->adc_conditions = pdata->adc_conditions;
 
@@ -136,10 +196,15 @@ static int adc_jack_probe(struct platform_device *pdev)
 	data->num_conditions = i;
 
 	data->chan = iio_channel_get(&pdev->dev, pdata->consumer_channel);
+<<<<<<< HEAD
 	if (IS_ERR(data->chan)) {
 		err = PTR_ERR(data->chan);
 		goto out;
 	}
+=======
+	if (IS_ERR(data->chan))
+		return PTR_ERR(data->chan);
+>>>>>>> v3.18
 
 	data->handling_delay = msecs_to_jiffies(pdata->handling_delay_ms);
 
@@ -147,15 +212,25 @@ static int adc_jack_probe(struct platform_device *pdev)
 
 	platform_set_drvdata(pdev, data);
 
+<<<<<<< HEAD
 	err = extcon_dev_register(&data->edev, &pdev->dev);
 	if (err)
 		goto out;
+=======
+	err = devm_extcon_dev_register(&pdev->dev, data->edev);
+	if (err)
+		return err;
+>>>>>>> v3.18
 
 	data->irq = platform_get_irq(pdev, 0);
 	if (!data->irq) {
 		dev_err(&pdev->dev, "platform_get_irq failed\n");
+<<<<<<< HEAD
 		err = -ENODEV;
 		goto err_irq;
+=======
+		return -ENODEV;
+>>>>>>> v3.18
 	}
 
 	err = request_any_context_irq(data->irq, adc_jack_irq_thread,
@@ -163,6 +238,7 @@ static int adc_jack_probe(struct platform_device *pdev)
 
 	if (err < 0) {
 		dev_err(&pdev->dev, "error: irq %d\n", data->irq);
+<<<<<<< HEAD
 		goto err_irq;
 	}
 
@@ -172,6 +248,12 @@ err_irq:
 	extcon_dev_unregister(&data->edev);
 out:
 	return err;
+=======
+		return err;
+	}
+
+	return 0;
+>>>>>>> v3.18
 }
 
 static int adc_jack_remove(struct platform_device *pdev)
@@ -180,7 +262,10 @@ static int adc_jack_remove(struct platform_device *pdev)
 
 	free_irq(data->irq, data);
 	cancel_work_sync(&data->handler.work);
+<<<<<<< HEAD
 	extcon_dev_unregister(&data->edev);
+=======
+>>>>>>> v3.18
 
 	return 0;
 }

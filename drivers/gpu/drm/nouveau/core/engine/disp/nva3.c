@@ -25,6 +25,7 @@
 #include <engine/software.h>
 #include <engine/disp.h>
 
+<<<<<<< HEAD
 #include <core/class.h>
 
 #include "nv50.h"
@@ -59,6 +60,36 @@ nva3_disp_base_oclass[] = {
 	{}
 };
 
+=======
+#include <nvif/class.h>
+
+#include "nv50.h"
+
+/*******************************************************************************
+ * Base display object
+ ******************************************************************************/
+
+static struct nouveau_oclass
+nva3_disp_sclass[] = {
+	{ GT214_DISP_CORE_CHANNEL_DMA, &nv50_disp_mast_ofuncs.base },
+	{ GT214_DISP_BASE_CHANNEL_DMA, &nv50_disp_sync_ofuncs.base },
+	{ GT214_DISP_OVERLAY_CHANNEL_DMA, &nv50_disp_ovly_ofuncs.base },
+	{ GT214_DISP_OVERLAY, &nv50_disp_oimm_ofuncs.base },
+	{ GT214_DISP_CURSOR, &nv50_disp_curs_ofuncs.base },
+	{}
+};
+
+static struct nouveau_oclass
+nva3_disp_base_oclass[] = {
+	{ GT214_DISP, &nv50_disp_base_ofuncs },
+	{}
+};
+
+/*******************************************************************************
+ * Display engine implementation
+ ******************************************************************************/
+
+>>>>>>> v3.18
 static int
 nva3_disp_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	       struct nouveau_oclass *oclass, void *data, u32 size,
@@ -73,6 +104,13 @@ nva3_disp_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
+=======
+	ret = nvkm_event_init(&nv50_disp_chan_uevent, 1, 9, &priv->uevent);
+	if (ret)
+		return ret;
+
+>>>>>>> v3.18
 	nv_engine(priv)->sclass = nva3_disp_base_oclass;
 	nv_engine(priv)->cclass = &nv50_disp_cclass;
 	nv_subdev(priv)->intr = nv50_disp_intr;
@@ -87,6 +125,7 @@ nva3_disp_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	priv->sor.power = nv50_sor_power;
 	priv->sor.hda_eld = nva3_hda_eld;
 	priv->sor.hdmi = nva3_hdmi_ctrl;
+<<<<<<< HEAD
 	priv->sor.dp = &nv94_sor_dp_func;
 	priv->pior.power = nv50_pior_power;
 	priv->pior.dp = &nv50_pior_dp_func;
@@ -97,9 +136,30 @@ struct nouveau_oclass
 nva3_disp_oclass = {
 	.handle = NV_ENGINE(DISP, 0x85),
 	.ofuncs = &(struct nouveau_ofuncs) {
+=======
+	priv->pior.power = nv50_pior_power;
+	return 0;
+}
+
+struct nouveau_oclass *
+nva3_disp_oclass = &(struct nv50_disp_impl) {
+	.base.base.handle = NV_ENGINE(DISP, 0x85),
+	.base.base.ofuncs = &(struct nouveau_ofuncs) {
+>>>>>>> v3.18
 		.ctor = nva3_disp_ctor,
 		.dtor = _nouveau_disp_dtor,
 		.init = _nouveau_disp_init,
 		.fini = _nouveau_disp_fini,
 	},
+<<<<<<< HEAD
 };
+=======
+	.base.vblank = &nv50_disp_vblank_func,
+	.base.outp =  nv94_disp_outp_sclass,
+	.mthd.core = &nv94_disp_mast_mthd_chan,
+	.mthd.base = &nv84_disp_sync_mthd_chan,
+	.mthd.ovly = &nv84_disp_ovly_mthd_chan,
+	.mthd.prev = 0x000004,
+	.head.scanoutpos = nv50_disp_base_scanoutpos,
+}.base.base;
+>>>>>>> v3.18

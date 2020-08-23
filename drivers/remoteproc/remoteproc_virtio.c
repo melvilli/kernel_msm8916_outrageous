@@ -30,7 +30,11 @@
 #include "remoteproc_internal.h"
 
 /* kick the remote processor, and let it know which virtqueue to poke at */
+<<<<<<< HEAD
 static void rproc_virtio_notify(struct virtqueue *vq)
+=======
+static bool rproc_virtio_notify(struct virtqueue *vq)
+>>>>>>> v3.18
 {
 	struct rproc_vring *rvring = vq->priv;
 	struct rproc *rproc = rvring->rvdev->rproc;
@@ -39,6 +43,10 @@ static void rproc_virtio_notify(struct virtqueue *vq)
 	dev_dbg(&rproc->dev, "kicking vq index: %d\n", notifyid);
 
 	rproc->ops->kick(rproc, notifyid);
+<<<<<<< HEAD
+=======
+	return true;
+>>>>>>> v3.18
 }
 
 /**

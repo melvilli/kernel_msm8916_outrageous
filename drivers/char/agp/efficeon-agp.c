@@ -128,7 +128,10 @@ static void efficeon_cleanup(void)
 
 static int efficeon_configure(void)
 {
+<<<<<<< HEAD
 	u32 temp;
+=======
+>>>>>>> v3.18
 	u16 temp2;
 	struct aper_size_info_lvl2 *current_size;
 
@@ -141,8 +144,13 @@ static int efficeon_configure(void)
 			      current_size->size_value);
 
 	/* address to map to */
+<<<<<<< HEAD
 	pci_read_config_dword(agp_bridge->dev, AGP_APBASE, &temp);
 	agp_bridge->gart_bus_addr = (temp & PCI_BASE_ADDRESS_MEM_MASK);
+=======
+	agp_bridge->gart_bus_addr = pci_bus_address(agp_bridge->dev,
+						    AGP_APERTURE_BAR);
+>>>>>>> v3.18
 
 	/* agpctrl */
 	pci_write_config_dword(agp_bridge->dev, INTEL_AGPCTRL, 0x2280);

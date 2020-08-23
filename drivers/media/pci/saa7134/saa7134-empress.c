@@ -23,6 +23,7 @@
 #include <linux/kernel.h>
 #include <linux/delay.h>
 
+<<<<<<< HEAD
 #include "saa7134-reg.h"
 #include "saa7134.h"
 
@@ -30,6 +31,14 @@
 #include <media/v4l2-common.h>
 #include <media/v4l2-chip-ident.h>
 
+=======
+#include <media/v4l2-common.h>
+#include <media/v4l2-event.h>
+
+#include "saa7134-reg.h"
+#include "saa7134.h"
+
+>>>>>>> v3.18
 /* ------------------------------------------------------------------ */
 
 MODULE_AUTHOR("Gerd Knorr <kraxel@bytesex.org> [SuSE Labs]");
@@ -49,6 +58,7 @@ MODULE_PARM_DESC(debug,"enable debug messages");
 
 /* ------------------------------------------------------------------ */
 
+<<<<<<< HEAD
 static void ts_reset_encoder(struct saa7134_dev* dev)
 {
 	if (!dev->empress_started)
@@ -64,6 +74,18 @@ static void ts_reset_encoder(struct saa7134_dev* dev)
 static int ts_init_encoder(struct saa7134_dev* dev)
 {
 	u32 leading_null_bytes = 0;
+=======
+static int start_streaming(struct vb2_queue *vq, unsigned int count)
+{
+	struct saa7134_dmaqueue *dmaq = vq->drv_priv;
+	struct saa7134_dev *dev = dmaq->dev;
+	u32 leading_null_bytes = 0;
+	int err;
+
+	err = saa7134_ts_start_streaming(vq, count);
+	if (err)
+		return err;
+>>>>>>> v3.18
 
 	/* If more cards start to need this, then this
 	   should probably be added to the card definitions. */
@@ -74,6 +96,7 @@ static int ts_init_encoder(struct saa7134_dev* dev)
 		leading_null_bytes = 1;
 		break;
 	}
+<<<<<<< HEAD
 	ts_reset_encoder(dev);
 	saa_call_all(dev, core, init, leading_null_bytes);
 	dev->empress_started = 1;
@@ -204,6 +227,45 @@ static int empress_s_input(struct file *file, void *priv, unsigned int i)
 
 	return 0;
 }
+=======
+	saa_call_all(dev, core, init, leading_null_bytes);
+	/* Unmute audio */
+	saa_writeb(SAA7134_AUDIO_MUTE_CTRL,
+			saa_readb(SAA7134_AUDIO_MUTE_CTRL) & ~(1 << 6));
+	dev->empress_started = 1;
+	return 0;
+}
+
+static void stop_streaming(struct vb2_queue *vq)
+{
+	struct saa7134_dmaqueue *dmaq = vq->drv_priv;
+	struct saa7134_dev *dev = dmaq->dev;
+
+	saa7134_ts_stop_streaming(vq);
+	saa_writeb(SAA7134_SPECIAL_MODE, 0x00);
+	msleep(20);
+	saa_writeb(SAA7134_SPECIAL_MODE, 0x01);
+	msleep(100);
+	/* Mute audio */
+	saa_writeb(SAA7134_AUDIO_MUTE_CTRL,
+			saa_readb(SAA7134_AUDIO_MUTE_CTRL) | (1 << 6));
+	dev->empress_started = 0;
+}
+
+static struct vb2_ops saa7134_empress_qops = {
+	.queue_setup	= saa7134_ts_queue_setup,
+	.buf_init	= saa7134_ts_buffer_init,
+	.buf_prepare	= saa7134_ts_buffer_prepare,
+	.buf_finish	= saa7134_ts_buffer_finish,
+	.buf_queue	= saa7134_vb2_buffer_queue,
+	.wait_prepare	= vb2_ops_wait_prepare,
+	.wait_finish	= vb2_ops_wait_finish,
+	.start_streaming = start_streaming,
+	.stop_streaming = stop_streaming,
+};
+
+/* ------------------------------------------------------------------ */
+>>>>>>> v3.18
 
 static int empress_enum_fmt_vid_cap(struct file *file, void  *priv,
 					struct v4l2_fmtdesc *f)
@@ -213,14 +275,22 @@ static int empress_enum_fmt_vid_cap(struct file *file, void  *priv,
 
 	strlcpy(f->description, "MPEG TS", sizeof(f->description));
 	f->pixelformat = V4L2_PIX_FMT_MPEG;
+<<<<<<< HEAD
 
+=======
+	f->flags = V4L2_FMT_FLAG_COMPRESSED;
+>>>>>>> v3.18
 	return 0;
 }
 
 static int empress_g_fmt_vid_cap(struct file *file, void *priv,
 				struct v4l2_format *f)
 {
+<<<<<<< HEAD
 	struct saa7134_dev *dev = file->private_data;
+=======
+	struct saa7134_dev *dev = video_drvdata(file);
+>>>>>>> v3.18
 	struct v4l2_mbus_framefmt mbus_fmt;
 
 	saa_call_all(dev, video, g_mbus_fmt, &mbus_fmt);
@@ -228,6 +298,10 @@ static int empress_g_fmt_vid_cap(struct file *file, void *priv,
 	v4l2_fill_pix_format(&f->fmt.pix, &mbus_fmt);
 	f->fmt.pix.pixelformat  = V4L2_PIX_FMT_MPEG;
 	f->fmt.pix.sizeimage    = TS_PACKET_SIZE * dev->ts.nr_packets;
+<<<<<<< HEAD
+=======
+	f->fmt.pix.bytesperline = 0;
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -235,7 +309,11 @@ static int empress_g_fmt_vid_cap(struct file *file, void *priv,
 static int empress_s_fmt_vid_cap(struct file *file, void *priv,
 				struct v4l2_format *f)
 {
+<<<<<<< HEAD
 	struct saa7134_dev *dev = file->private_data;
+=======
+	struct saa7134_dev *dev = video_drvdata(file);
+>>>>>>> v3.18
 	struct v4l2_mbus_framefmt mbus_fmt;
 
 	v4l2_fill_mbus_format(&mbus_fmt, &f->fmt.pix, V4L2_MBUS_FMT_FIXED);
@@ -244,6 +322,10 @@ static int empress_s_fmt_vid_cap(struct file *file, void *priv,
 
 	f->fmt.pix.pixelformat  = V4L2_PIX_FMT_MPEG;
 	f->fmt.pix.sizeimage    = TS_PACKET_SIZE * dev->ts.nr_packets;
+<<<<<<< HEAD
+=======
+	f->fmt.pix.bytesperline = 0;
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -251,14 +333,28 @@ static int empress_s_fmt_vid_cap(struct file *file, void *priv,
 static int empress_try_fmt_vid_cap(struct file *file, void *priv,
 				struct v4l2_format *f)
 {
+<<<<<<< HEAD
 	struct saa7134_dev *dev = file->private_data;
 
 	f->fmt.pix.pixelformat  = V4L2_PIX_FMT_MPEG;
 	f->fmt.pix.sizeimage    = TS_PACKET_SIZE * dev->ts.nr_packets;
+=======
+	struct saa7134_dev *dev = video_drvdata(file);
+	struct v4l2_mbus_framefmt mbus_fmt;
+
+	v4l2_fill_mbus_format(&mbus_fmt, &f->fmt.pix, V4L2_MBUS_FMT_FIXED);
+	saa_call_all(dev, video, try_mbus_fmt, &mbus_fmt);
+	v4l2_fill_pix_format(&f->fmt.pix, &mbus_fmt);
+
+	f->fmt.pix.pixelformat  = V4L2_PIX_FMT_MPEG;
+	f->fmt.pix.sizeimage    = TS_PACKET_SIZE * dev->ts.nr_packets;
+	f->fmt.pix.bytesperline = 0;
+>>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 static int empress_reqbufs(struct file *file, void *priv,
 					struct v4l2_requestbuffers *p)
 {
@@ -456,10 +552,26 @@ static const struct v4l2_file_operations ts_fops =
 
 static const struct v4l2_ioctl_ops ts_ioctl_ops = {
 	.vidioc_querycap		= empress_querycap,
+=======
+static const struct v4l2_file_operations ts_fops =
+{
+	.owner	  = THIS_MODULE,
+	.open	  = v4l2_fh_open,
+	.release  = vb2_fop_release,
+	.read	  = vb2_fop_read,
+	.poll	  = vb2_fop_poll,
+	.mmap	  = vb2_fop_mmap,
+	.unlocked_ioctl = video_ioctl2,
+};
+
+static const struct v4l2_ioctl_ops ts_ioctl_ops = {
+	.vidioc_querycap		= saa7134_querycap,
+>>>>>>> v3.18
 	.vidioc_enum_fmt_vid_cap	= empress_enum_fmt_vid_cap,
 	.vidioc_try_fmt_vid_cap		= empress_try_fmt_vid_cap,
 	.vidioc_s_fmt_vid_cap		= empress_s_fmt_vid_cap,
 	.vidioc_g_fmt_vid_cap		= empress_g_fmt_vid_cap,
+<<<<<<< HEAD
 	.vidioc_reqbufs			= empress_reqbufs,
 	.vidioc_querybuf		= empress_querybuf,
 	.vidioc_qbuf			= empress_qbuf,
@@ -478,6 +590,27 @@ static const struct v4l2_ioctl_ops ts_ioctl_ops = {
 	.vidioc_g_chip_ident 		= empress_g_chip_ident,
 	.vidioc_s_std			= empress_s_std,
 	.vidioc_g_std			= empress_g_std,
+=======
+	.vidioc_reqbufs			= vb2_ioctl_reqbufs,
+	.vidioc_querybuf		= vb2_ioctl_querybuf,
+	.vidioc_qbuf			= vb2_ioctl_qbuf,
+	.vidioc_dqbuf			= vb2_ioctl_dqbuf,
+	.vidioc_streamon		= vb2_ioctl_streamon,
+	.vidioc_streamoff		= vb2_ioctl_streamoff,
+	.vidioc_g_frequency		= saa7134_g_frequency,
+	.vidioc_s_frequency		= saa7134_s_frequency,
+	.vidioc_g_tuner			= saa7134_g_tuner,
+	.vidioc_s_tuner			= saa7134_s_tuner,
+	.vidioc_enum_input		= saa7134_enum_input,
+	.vidioc_g_input			= saa7134_g_input,
+	.vidioc_s_input			= saa7134_s_input,
+	.vidioc_s_std			= saa7134_s_std,
+	.vidioc_g_std			= saa7134_g_std,
+	.vidioc_querystd		= saa7134_querystd,
+	.vidioc_log_status		= v4l2_ctrl_log_status,
+	.vidioc_subscribe_event		= v4l2_ctrl_subscribe_event,
+	.vidioc_unsubscribe_event	= v4l2_event_unsubscribe,
+>>>>>>> v3.18
 };
 
 /* ----------------------------------------------------------- */
@@ -488,7 +621,10 @@ static struct video_device saa7134_empress_template = {
 	.ioctl_ops     = &ts_ioctl_ops,
 
 	.tvnorms			= SAA7134_NORMS,
+<<<<<<< HEAD
 	.current_norm			= V4L2_STD_PAL,
+=======
+>>>>>>> v3.18
 };
 
 static void empress_signal_update(struct work_struct *work)
@@ -508,9 +644,33 @@ static void empress_signal_change(struct saa7134_dev *dev)
 	schedule_work(&dev->empress_workqueue);
 }
 
+<<<<<<< HEAD
 
 static int empress_init(struct saa7134_dev *dev)
 {
+=======
+static bool empress_ctrl_filter(const struct v4l2_ctrl *ctrl)
+{
+	switch (ctrl->id) {
+	case V4L2_CID_BRIGHTNESS:
+	case V4L2_CID_HUE:
+	case V4L2_CID_CONTRAST:
+	case V4L2_CID_SATURATION:
+	case V4L2_CID_AUDIO_MUTE:
+	case V4L2_CID_AUDIO_VOLUME:
+	case V4L2_CID_PRIVATE_INVERT:
+	case V4L2_CID_PRIVATE_AUTOMUTE:
+		return true;
+	default:
+		return false;
+	}
+}
+
+static int empress_init(struct saa7134_dev *dev)
+{
+	struct v4l2_ctrl_handler *hdl = &dev->empress_ctrl_handler;
+	struct vb2_queue *q;
+>>>>>>> v3.18
 	int err;
 
 	dprintk("%s: %s\n",dev->name,__func__);
@@ -518,6 +678,7 @@ static int empress_init(struct saa7134_dev *dev)
 	if (NULL == dev->empress_dev)
 		return -ENOMEM;
 	*(dev->empress_dev) = saa7134_empress_template;
+<<<<<<< HEAD
 	dev->empress_dev->parent  = &dev->pci->dev;
 	dev->empress_dev->release = video_device_release;
 	snprintf(dev->empress_dev->name, sizeof(dev->empress_dev->name),
@@ -526,6 +687,46 @@ static int empress_init(struct saa7134_dev *dev)
 
 	INIT_WORK(&dev->empress_workqueue, empress_signal_update);
 
+=======
+	dev->empress_dev->v4l2_dev  = &dev->v4l2_dev;
+	dev->empress_dev->release = video_device_release;
+	dev->empress_dev->lock = &dev->lock;
+	snprintf(dev->empress_dev->name, sizeof(dev->empress_dev->name),
+		 "%s empress (%s)", dev->name,
+		 saa7134_boards[dev->board].name);
+	v4l2_ctrl_handler_init(hdl, 21);
+	v4l2_ctrl_add_handler(hdl, &dev->ctrl_handler, empress_ctrl_filter);
+	if (dev->empress_sd)
+		v4l2_ctrl_add_handler(hdl, dev->empress_sd->ctrl_handler, NULL);
+	if (hdl->error) {
+		video_device_release(dev->empress_dev);
+		return hdl->error;
+	}
+	dev->empress_dev->ctrl_handler = hdl;
+
+	INIT_WORK(&dev->empress_workqueue, empress_signal_update);
+
+	q = &dev->empress_vbq;
+	q->type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
+	/*
+	 * Do not add VB2_USERPTR: the saa7134 DMA engine cannot handle
+	 * transfers that do not start at the beginning of a page. A USERPTR
+	 * can start anywhere in a page, so USERPTR support is a no-go.
+	 */
+	q->io_modes = VB2_MMAP | VB2_READ;
+	q->drv_priv = &dev->ts_q;
+	q->ops = &saa7134_empress_qops;
+	q->gfp_flags = GFP_DMA32;
+	q->mem_ops = &vb2_dma_sg_memops;
+	q->buf_struct_size = sizeof(struct saa7134_buf);
+	q->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC;
+	q->lock = &dev->lock;
+	err = vb2_queue_init(q);
+	if (err)
+		return err;
+	dev->empress_dev->queue = q;
+
+>>>>>>> v3.18
 	video_set_drvdata(dev->empress_dev, dev);
 	err = video_register_device(dev->empress_dev,VFL_TYPE_GRABBER,
 				    empress_nr[dev->nr]);
@@ -539,6 +740,7 @@ static int empress_init(struct saa7134_dev *dev)
 	printk(KERN_INFO "%s: registered device %s [mpeg]\n",
 	       dev->name, video_device_node_name(dev->empress_dev));
 
+<<<<<<< HEAD
 	videobuf_queue_sg_init(&dev->empress_tsq, &saa7134_ts_qops,
 			    &dev->pci->dev, &dev->slock,
 			    V4L2_BUF_TYPE_VIDEO_CAPTURE,
@@ -546,6 +748,8 @@ static int empress_init(struct saa7134_dev *dev)
 			    sizeof(struct saa7134_buf),
 			    dev, NULL);
 
+=======
+>>>>>>> v3.18
 	empress_signal_update(&dev->empress_workqueue);
 	return 0;
 }
@@ -558,6 +762,11 @@ static int empress_fini(struct saa7134_dev *dev)
 		return 0;
 	flush_work(&dev->empress_workqueue);
 	video_unregister_device(dev->empress_dev);
+<<<<<<< HEAD
+=======
+	vb2_queue_release(&dev->empress_vbq);
+	v4l2_ctrl_handler_free(&dev->empress_ctrl_handler);
+>>>>>>> v3.18
 	dev->empress_dev = NULL;
 	return 0;
 }
@@ -581,6 +790,7 @@ static void __exit empress_unregister(void)
 
 module_init(empress_register);
 module_exit(empress_unregister);
+<<<<<<< HEAD
 
 /* ----------------------------------------------------------- */
 /*
@@ -588,3 +798,5 @@ module_exit(empress_unregister);
  * c-basic-offset: 8
  * End:
  */
+=======
+>>>>>>> v3.18

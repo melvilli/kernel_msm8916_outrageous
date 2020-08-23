@@ -1,7 +1,11 @@
 /*******************************************************************************
 
   Intel 10 Gigabit PCI Express Linux driver
+<<<<<<< HEAD
   Copyright(c) 1999 - 2013 Intel Corporation.
+=======
+  Copyright(c) 1999 - 2014 Intel Corporation.
+>>>>>>> v3.18
 
   This program is free software; you can redistribute it and/or modify it
   under the terms and conditions of the GNU General Public License,
@@ -87,7 +91,10 @@ s32 ixgbe_dcb_calculate_tc_credits(struct ixgbe_hw *hw,
 	int min_credit;
 	int min_multiplier;
 	int min_percent = 100;
+<<<<<<< HEAD
 	s32 ret_val = 0;
+=======
+>>>>>>> v3.18
 	/* Initialization values default for Tx settings */
 	u32 credit_refill       = 0;
 	u32 credit_max          = 0;
@@ -95,10 +102,15 @@ s32 ixgbe_dcb_calculate_tc_credits(struct ixgbe_hw *hw,
 	u8  bw_percent          = 0;
 	u8  i;
 
+<<<<<<< HEAD
 	if (dcb_config == NULL) {
 		ret_val = DCB_ERR_CONFIG;
 		goto out;
 	}
+=======
+	if (!dcb_config)
+		return DCB_ERR_CONFIG;
+>>>>>>> v3.18
 
 	min_credit = ((max_frame / 2) + DCB_CREDIT_QUANTUM - 1) /
 			DCB_CREDIT_QUANTUM;
@@ -174,8 +186,12 @@ s32 ixgbe_dcb_calculate_tc_credits(struct ixgbe_hw *hw,
 		p->data_credits_max = (u16)credit_max;
 	}
 
+<<<<<<< HEAD
 out:
 	return ret_val;
+=======
+	return 0;
+>>>>>>> v3.18
 }
 
 void ixgbe_dcb_unpack_pfc(struct ixgbe_dcb_config *cfg, u8 *pfc_en)
@@ -236,7 +252,11 @@ u8 ixgbe_dcb_get_tc_from_up(struct ixgbe_dcb_config *cfg, int direction, u8 up)
 
 	/* If tc is 0 then DCB is likely not enabled or supported */
 	if (!tc)
+<<<<<<< HEAD
 		goto out;
+=======
+		return 0;
+>>>>>>> v3.18
 
 	/*
 	 * Test from maximum TC to 1 and report the first match we find.  If
@@ -247,7 +267,11 @@ u8 ixgbe_dcb_get_tc_from_up(struct ixgbe_dcb_config *cfg, int direction, u8 up)
 		if (prio_mask & tc_config[tc].path[direction].up_to_tc_bitmap)
 			break;
 	}
+<<<<<<< HEAD
 out:
+=======
+
+>>>>>>> v3.18
 	return tc;
 }
 
@@ -267,9 +291,14 @@ void ixgbe_dcb_unpack_map(struct ixgbe_dcb_config *cfg, int direction, u8 *map)
  * Configure dcb settings and enable dcb mode.
  */
 s32 ixgbe_dcb_hw_config(struct ixgbe_hw *hw,
+<<<<<<< HEAD
                         struct ixgbe_dcb_config *dcb_config)
 {
 	s32 ret = 0;
+=======
+			struct ixgbe_dcb_config *dcb_config)
+{
+>>>>>>> v3.18
 	u8 pfc_en;
 	u8 ptype[MAX_TRAFFIC_CLASS];
 	u8 bwgid[MAX_TRAFFIC_CLASS];
@@ -287,6 +316,7 @@ s32 ixgbe_dcb_hw_config(struct ixgbe_hw *hw,
 
 	switch (hw->mac.type) {
 	case ixgbe_mac_82598EB:
+<<<<<<< HEAD
 		ret = ixgbe_dcb_hw_config_82598(hw, pfc_en, refill, max,
 						bwgid, ptype);
 		break;
@@ -299,11 +329,24 @@ s32 ixgbe_dcb_hw_config(struct ixgbe_hw *hw,
 		break;
 	}
 	return ret;
+=======
+		return ixgbe_dcb_hw_config_82598(hw, pfc_en, refill, max,
+						 bwgid, ptype);
+	case ixgbe_mac_82599EB:
+	case ixgbe_mac_X540:
+		return ixgbe_dcb_hw_config_82599(hw, pfc_en, refill, max,
+						 bwgid, ptype, prio_tc);
+	default:
+		break;
+	}
+	return 0;
+>>>>>>> v3.18
 }
 
 /* Helper routines to abstract HW specifics from DCB netlink ops */
 s32 ixgbe_dcb_hw_pfc_config(struct ixgbe_hw *hw, u8 pfc_en, u8 *prio_tc)
 {
+<<<<<<< HEAD
 	int ret = -EINVAL;
 
 	switch (hw->mac.type) {
@@ -318,6 +361,18 @@ s32 ixgbe_dcb_hw_pfc_config(struct ixgbe_hw *hw, u8 pfc_en, u8 *prio_tc)
 		break;
 	}
 	return ret;
+=======
+	switch (hw->mac.type) {
+	case ixgbe_mac_82598EB:
+		return ixgbe_dcb_config_pfc_82598(hw, pfc_en);
+	case ixgbe_mac_82599EB:
+	case ixgbe_mac_X540:
+		return ixgbe_dcb_config_pfc_82599(hw, pfc_en, prio_tc);
+	default:
+		break;
+	}
+	return -EINVAL;
+>>>>>>> v3.18
 }
 
 s32 ixgbe_dcb_hw_ets(struct ixgbe_hw *hw, struct ieee_ets *ets, int max_frame)
@@ -380,3 +435,28 @@ s32 ixgbe_dcb_hw_ets_config(struct ixgbe_hw *hw,
 	}
 	return 0;
 }
+<<<<<<< HEAD
+=======
+
+static void ixgbe_dcb_read_rtrup2tc_82599(struct ixgbe_hw *hw, u8 *map)
+{
+	u32 reg, i;
+
+	reg = IXGBE_READ_REG(hw, IXGBE_RTRUP2TC);
+	for (i = 0; i < MAX_USER_PRIORITY; i++)
+		map[i] = IXGBE_RTRUP2TC_UP_MASK &
+			(reg >> (i * IXGBE_RTRUP2TC_UP_SHIFT));
+}
+
+void ixgbe_dcb_read_rtrup2tc(struct ixgbe_hw *hw, u8 *map)
+{
+	switch (hw->mac.type) {
+	case ixgbe_mac_82599EB:
+	case ixgbe_mac_X540:
+		ixgbe_dcb_read_rtrup2tc_82599(hw, map);
+		break;
+	default:
+		break;
+	}
+}
+>>>>>>> v3.18

@@ -11,10 +11,13 @@
  * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
  * more details.
  *
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
+=======
+>>>>>>> v3.18
  * The full GNU General Public License is included in this distribution in the
  * file called LICENSE.
  *
@@ -37,6 +40,10 @@
 #include "trx.h"
 #include "led.h"
 #include "dm.h"
+<<<<<<< HEAD
+=======
+#include "phy.h"
+>>>>>>> v3.18
 
 static u8 _rtl88ee_map_hwqueue_to_fwqueue(struct sk_buff *skb, u8 hw_queue)
 {
@@ -50,6 +57,167 @@ static u8 _rtl88ee_map_hwqueue_to_fwqueue(struct sk_buff *skb, u8 hw_queue)
 	return skb->priority;
 }
 
+<<<<<<< HEAD
+=======
+/* mac80211's rate_idx is like this:
+ *
+ * 2.4G band:rx_status->band == IEEE80211_BAND_2GHZ
+ *
+ * B/G rate:
+ * (rx_status->flag & RX_FLAG_HT) = 0,
+ * DESC92C_RATE1M-->DESC92C_RATE54M ==> idx is 0-->11,
+ *
+ * N rate:
+ * (rx_status->flag & RX_FLAG_HT) = 1,
+ * DESC92C_RATEMCS0-->DESC92C_RATEMCS15 ==> idx is 0-->15
+ *
+ * 5G band:rx_status->band == IEEE80211_BAND_5GHZ
+ * A rate:
+ * (rx_status->flag & RX_FLAG_HT) = 0,
+ * DESC92C_RATE6M-->DESC92C_RATE54M ==> idx is 0-->7,
+ *
+ * N rate:
+ * (rx_status->flag & RX_FLAG_HT) = 1,
+ * DESC92C_RATEMCS0-->DESC92C_RATEMCS15 ==> idx is 0-->15
+ */
+static int _rtl88ee_rate_mapping(struct ieee80211_hw *hw,
+				 bool isht, u8 desc_rate)
+{
+	int rate_idx;
+
+	if (!isht) {
+		if (IEEE80211_BAND_2GHZ == hw->conf.chandef.chan->band) {
+			switch (desc_rate) {
+			case DESC92C_RATE1M:
+				rate_idx = 0;
+				break;
+			case DESC92C_RATE2M:
+				rate_idx = 1;
+				break;
+			case DESC92C_RATE5_5M:
+				rate_idx = 2;
+				break;
+			case DESC92C_RATE11M:
+				rate_idx = 3;
+				break;
+			case DESC92C_RATE6M:
+				rate_idx = 4;
+				break;
+			case DESC92C_RATE9M:
+				rate_idx = 5;
+				break;
+			case DESC92C_RATE12M:
+				rate_idx = 6;
+				break;
+			case DESC92C_RATE18M:
+				rate_idx = 7;
+				break;
+			case DESC92C_RATE24M:
+				rate_idx = 8;
+				break;
+			case DESC92C_RATE36M:
+				rate_idx = 9;
+				break;
+			case DESC92C_RATE48M:
+				rate_idx = 10;
+				break;
+			case DESC92C_RATE54M:
+				rate_idx = 11;
+				break;
+			default:
+				rate_idx = 0;
+				break;
+			}
+		} else {
+			switch (desc_rate) {
+			case DESC92C_RATE6M:
+				rate_idx = 0;
+				break;
+			case DESC92C_RATE9M:
+				rate_idx = 1;
+				break;
+			case DESC92C_RATE12M:
+				rate_idx = 2;
+				break;
+			case DESC92C_RATE18M:
+				rate_idx = 3;
+				break;
+			case DESC92C_RATE24M:
+				rate_idx = 4;
+				break;
+			case DESC92C_RATE36M:
+				rate_idx = 5;
+				break;
+			case DESC92C_RATE48M:
+				rate_idx = 6;
+				break;
+			case DESC92C_RATE54M:
+				rate_idx = 7;
+				break;
+			default:
+				rate_idx = 0;
+				break;
+			}
+		}
+	} else {
+		switch (desc_rate) {
+		case DESC92C_RATEMCS0:
+			rate_idx = 0;
+			break;
+		case DESC92C_RATEMCS1:
+			rate_idx = 1;
+			break;
+		case DESC92C_RATEMCS2:
+			rate_idx = 2;
+			break;
+		case DESC92C_RATEMCS3:
+			rate_idx = 3;
+			break;
+		case DESC92C_RATEMCS4:
+			rate_idx = 4;
+			break;
+		case DESC92C_RATEMCS5:
+			rate_idx = 5;
+			break;
+		case DESC92C_RATEMCS6:
+			rate_idx = 6;
+			break;
+		case DESC92C_RATEMCS7:
+			rate_idx = 7;
+			break;
+		case DESC92C_RATEMCS8:
+			rate_idx = 8;
+			break;
+		case DESC92C_RATEMCS9:
+			rate_idx = 9;
+			break;
+		case DESC92C_RATEMCS10:
+			rate_idx = 10;
+			break;
+		case DESC92C_RATEMCS11:
+			rate_idx = 11;
+			break;
+		case DESC92C_RATEMCS12:
+			rate_idx = 12;
+			break;
+		case DESC92C_RATEMCS13:
+			rate_idx = 13;
+			break;
+		case DESC92C_RATEMCS14:
+			rate_idx = 14;
+			break;
+		case DESC92C_RATEMCS15:
+			rate_idx = 15;
+			break;
+		default:
+			rate_idx = 0;
+			break;
+		}
+	}
+	return rate_idx;
+}
+
+>>>>>>> v3.18
 static void _rtl88ee_query_rxphystatus(struct ieee80211_hw *hw,
 			struct rtl_stats *pstatus, u8 *pdesc,
 			struct rx_fwinfo_88e *p_drvinfo,
@@ -59,7 +227,12 @@ static void _rtl88ee_query_rxphystatus(struct ieee80211_hw *hw,
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	struct rtl_ps_ctl *ppsc = rtl_psc(rtlpriv);
 	struct phy_sts_cck_8192s_t *cck_buf;
+<<<<<<< HEAD
 	struct phy_status_rpt *phystrpt = (struct phy_status_rpt *)p_drvinfo;
+=======
+	struct phy_status_rpt *phystrpt =
+		(struct phy_status_rpt *)p_drvinfo;
+>>>>>>> v3.18
 	struct rtl_dm *rtldm = rtl_dm(rtl_priv(hw));
 	char rx_pwr_all = 0, rx_pwr[4];
 	u8 rf_rx_num = 0, evm, pwdb_all;
@@ -72,11 +245,19 @@ static void _rtl88ee_query_rxphystatus(struct ieee80211_hw *hw,
 	pstatus->packet_matchbssid = bpacket_match_bssid;
 	pstatus->packet_toself = bpacket_toself;
 	pstatus->packet_beacon = packet_beacon;
+<<<<<<< HEAD
 	pstatus->rx_mimo_sig_qual[0] = -1;
 	pstatus->rx_mimo_sig_qual[1] = -1;
 
 	if (is_cck) {
 		u8 cck_hipwr;
+=======
+	pstatus->rx_mimo_signalquality[0] = -1;
+	pstatus->rx_mimo_signalquality[1] = -1;
+
+	if (is_cck) {
+		u8 cck_highpwr;
+>>>>>>> v3.18
 		u8 cck_agc_rpt;
 		/* CCK Driver info Structure is not the same as OFDM packet. */
 		cck_buf = (struct phy_sts_cck_8192s_t *)p_drvinfo;
@@ -87,21 +268,35 @@ static void _rtl88ee_query_rxphystatus(struct ieee80211_hw *hw,
 		 * hardware (for rate adaptive)
 		 */
 		if (ppsc->rfpwr_state == ERFON)
+<<<<<<< HEAD
 			cck_hipwr = rtl_get_bbreg(hw, RFPGA0_XA_HSSIPARAMETER2,
 						  BIT(9));
 		else
 			cck_hipwr = false;
+=======
+			cck_highpwr =
+				(u8)rtl_get_bbreg(hw, RFPGA0_XA_HSSIPARAMETER2,
+						  BIT(9));
+		else
+			cck_highpwr = false;
+>>>>>>> v3.18
 
 		lan_idx = ((cck_agc_rpt & 0xE0) >> 5);
 		vga_idx = (cck_agc_rpt & 0x1f);
 		switch (lan_idx) {
 		case 7:
 			if (vga_idx <= 27)
+<<<<<<< HEAD
 				rx_pwr_all = -100 + 2 * (27 - vga_idx);
+=======
+				/*VGA_idx = 27~2*/
+				rx_pwr_all = -100 + 2*(27-vga_idx);
+>>>>>>> v3.18
 			else
 				rx_pwr_all = -100;
 			break;
 		case 6:
+<<<<<<< HEAD
 			rx_pwr_all = -48 + 2 * (2 - vga_idx); /*VGA_idx = 2~0*/
 			break;
 		case 5:
@@ -124,16 +319,50 @@ static void _rtl88ee_query_rxphystatus(struct ieee80211_hw *hw,
 			break;
 		case 0:
 			rx_pwr_all = 14 - 2 * vga_idx;
+=======
+			/*VGA_idx = 2~0*/
+			rx_pwr_all = -48 + 2*(2-vga_idx);
+			break;
+		case 5:
+			/*VGA_idx = 7~5*/
+			rx_pwr_all = -42 + 2*(7-vga_idx);
+			break;
+		case 4:
+			/*VGA_idx = 7~4*/
+			rx_pwr_all = -36 + 2*(7-vga_idx);
+			break;
+		case 3:
+			/*VGA_idx = 7~0*/
+			rx_pwr_all = -24 + 2*(7-vga_idx);
+			break;
+		case 2:
+			if (cck_highpwr)
+				/*VGA_idx = 5~0*/
+				rx_pwr_all = -12 + 2*(5-vga_idx);
+			else
+				rx_pwr_all = -6 + 2*(5-vga_idx);
+			break;
+		case 1:
+			rx_pwr_all = 8-2*vga_idx;
+			break;
+		case 0:
+			rx_pwr_all = 14-2*vga_idx;
+>>>>>>> v3.18
 			break;
 		default:
 			break;
 		}
 		rx_pwr_all += 6;
 		pwdb_all = rtl_query_rxpwrpercentage(rx_pwr_all);
+<<<<<<< HEAD
 		/* CCK gain is smaller than OFDM/MCS gain,
 		 * so we add gain diff by experiences,
 		 * the val is 6
 		 */
+=======
+		/* CCK gain is smaller than OFDM/MCS gain,  */
+		/* so we add gain diff by experiences, the val is 6 */
+>>>>>>> v3.18
 		pwdb_all += 6;
 		if (pwdb_all > 100)
 			pwdb_all = 100;
@@ -148,10 +377,17 @@ static void _rtl88ee_query_rxphystatus(struct ieee80211_hw *hw,
 			pwdb_all -= 8;
 		else if (pwdb_all > 4 && pwdb_all <= 14)
 			pwdb_all -= 4;
+<<<<<<< HEAD
 		if (cck_hipwr == false) {
 			if (pwdb_all >= 80)
 				pwdb_all = ((pwdb_all - 80)<<1) +
 					   ((pwdb_all - 80)>>1) + 80;
+=======
+		if (!cck_highpwr) {
+			if (pwdb_all >= 80)
+				pwdb_all = ((pwdb_all-80)<<1) +
+					   ((pwdb_all-80)>>1) + 80;
+>>>>>>> v3.18
 			else if ((pwdb_all <= 78) && (pwdb_all >= 20))
 				pwdb_all += 3;
 			if (pwdb_all > 100)
@@ -165,9 +401,15 @@ static void _rtl88ee_query_rxphystatus(struct ieee80211_hw *hw,
 		if (bpacket_match_bssid) {
 			u8 sq;
 
+<<<<<<< HEAD
 			if (pstatus->rx_pwdb_all > 40) {
 				sq = 100;
 			} else {
+=======
+			if (pstatus->rx_pwdb_all > 40)
+				sq = 100;
+			else {
+>>>>>>> v3.18
 				sq = cck_buf->sq_rpt;
 				if (sq > 64)
 					sq = 0;
@@ -178,8 +420,13 @@ static void _rtl88ee_query_rxphystatus(struct ieee80211_hw *hw,
 			}
 
 			pstatus->signalquality = sq;
+<<<<<<< HEAD
 			pstatus->rx_mimo_sig_qual[0] = sq;
 			pstatus->rx_mimo_sig_qual[1] = -1;
+=======
+			pstatus->rx_mimo_signalquality[0] = sq;
+			pstatus->rx_mimo_signalquality[1] = -1;
+>>>>>>> v3.18
 		}
 	} else {
 		rtlpriv->dm.rfpath_rxenable[0] =
@@ -191,18 +438,32 @@ static void _rtl88ee_query_rxphystatus(struct ieee80211_hw *hw,
 			if (rtlpriv->dm.rfpath_rxenable[i])
 				rf_rx_num++;
 
+<<<<<<< HEAD
 			rx_pwr[i] = ((p_drvinfo->gain_trsw[i] & 0x3f) * 2)-110;
+=======
+			rx_pwr[i] = ((p_drvinfo->gain_trsw[i] &
+				      0x3f) * 2) - 110;
+>>>>>>> v3.18
 
 			/* Translate DBM to percentage. */
 			rssi = rtl_query_rxpwrpercentage(rx_pwr[i]);
 			total_rssi += rssi;
 
 			/* Get Rx snr value in DB */
+<<<<<<< HEAD
 			rtlpriv->stats.rx_snr_db[i] = p_drvinfo->rxsnr[i] / 2;
 
 			/* Record Signal Strength for next packet */
 			if (bpacket_match_bssid)
 				pstatus->rx_mimo_signalstrength[i] = (u8) rssi;
+=======
+			rtlpriv->stats.rx_snr_db[i] =
+				(long)(p_drvinfo->rxsnr[i] / 2);
+
+			/* Record Signal Strength for next packet */
+			if (bpacket_match_bssid)
+				pstatus->rx_mimo_signalstrength[i] = (u8)rssi;
+>>>>>>> v3.18
 		}
 
 		/* (2)PWDB, Average PWDB cacluated by
@@ -227,11 +488,21 @@ static void _rtl88ee_query_rxphystatus(struct ieee80211_hw *hw,
 
 			if (bpacket_match_bssid) {
 				/* Fill value in RFD, Get the first
+<<<<<<< HEAD
 				 * spatial stream only
 				 */
 				if (i == 0)
 					pstatus->signalquality = evm & 0xff;
 				pstatus->rx_mimo_sig_qual[i] = evm & 0xff;
+=======
+				 * spatial stream onlyi
+				 */
+				if (i == 0)
+					pstatus->signalquality =
+						(u8)(evm & 0xff);
+				pstatus->rx_mimo_signalquality[i] =
+					(u8)(evm & 0xff);
+>>>>>>> v3.18
 			}
 		}
 	}
@@ -241,10 +512,17 @@ static void _rtl88ee_query_rxphystatus(struct ieee80211_hw *hw,
 	 */
 	if (is_cck)
 		pstatus->signalstrength = (u8)(rtl_signal_scale_mapping(hw,
+<<<<<<< HEAD
 					  pwdb_all));
 	else if (rf_rx_num != 0)
 		pstatus->signalstrength = (u8)(rtl_signal_scale_mapping(hw,
 					  total_rssi /= rf_rx_num));
+=======
+			pwdb_all));
+	else if (rf_rx_num != 0)
+		pstatus->signalstrength = (u8)(rtl_signal_scale_mapping(hw,
+			total_rssi /= rf_rx_num));
+>>>>>>> v3.18
 	/*HW antenna diversity*/
 	rtldm->fat_table.antsel_rx_keep_0 = phystrpt->ant_sel;
 	rtldm->fat_table.antsel_rx_keep_1 = phystrpt->ant_sel_b;
@@ -256,6 +534,7 @@ static void _rtl88ee_smart_antenna(struct ieee80211_hw *hw,
 {
 	struct rtl_dm *rtldm = rtl_dm(rtl_priv(hw));
 	struct rtl_efuse *rtlefuse = rtl_efuse(rtl_priv(hw));
+<<<<<<< HEAD
 	u8 ant_mux;
 	struct fast_ant_training *pfat = &(rtldm->fat_table);
 
@@ -278,12 +557,46 @@ static void _rtl88ee_smart_antenna(struct ieee80211_hw *hw,
 			rtl88e_dm_ant_sel_statistics(hw, ant_mux, 0,
 						     pstatus->rx_pwdb_all);
 		}
+=======
+	u8 antsel_tr_mux;
+	struct fast_ant_training *pfat_table = &rtldm->fat_table;
+
+	if (rtlefuse->antenna_div_type == CG_TRX_SMART_ANTDIV) {
+		if (pfat_table->fat_state == FAT_TRAINING_STATE) {
+			if (pstatus->packet_toself) {
+				antsel_tr_mux =
+					(pfat_table->antsel_rx_keep_2 << 2) |
+					(pfat_table->antsel_rx_keep_1 << 1) |
+					pfat_table->antsel_rx_keep_0;
+				pfat_table->ant_sum[antsel_tr_mux] +=
+					pstatus->rx_pwdb_all;
+				pfat_table->ant_cnt[antsel_tr_mux]++;
+			}
+		}
+	} else if ((rtlefuse->antenna_div_type == CG_TRX_HW_ANTDIV) ||
+	(rtlefuse->antenna_div_type == CGCS_RX_HW_ANTDIV)) {
+		if (pstatus->packet_toself || pstatus->packet_matchbssid) {
+			antsel_tr_mux = (pfat_table->antsel_rx_keep_2 << 2) |
+					(pfat_table->antsel_rx_keep_1 << 1) |
+					pfat_table->antsel_rx_keep_0;
+			rtl88e_dm_ant_sel_statistics(hw, antsel_tr_mux, 0,
+						     pstatus->rx_pwdb_all);
+		}
+
+>>>>>>> v3.18
 	}
 }
 
 static void _rtl88ee_translate_rx_signal_stuff(struct ieee80211_hw *hw,
+<<<<<<< HEAD
 		struct sk_buff *skb, struct rtl_stats *pstatus,
 		u8 *pdesc, struct rx_fwinfo_88e *p_drvinfo)
+=======
+					       struct sk_buff *skb,
+					       struct rtl_stats *pstatus,
+					       u8 *pdesc,
+					       struct rx_fwinfo_88e *p_drvinfo)
+>>>>>>> v3.18
 {
 	struct rtl_mac *mac = rtl_mac(rtl_priv(hw));
 	struct rtl_efuse *rtlefuse = rtl_efuse(rtl_priv(hw));
@@ -292,19 +605,27 @@ static void _rtl88ee_translate_rx_signal_stuff(struct ieee80211_hw *hw,
 	u8 *praddr;
 	u8 *psaddr;
 	__le16 fc;
+<<<<<<< HEAD
 	u16 type, ufc;
 	bool match_bssid, packet_toself, packet_beacon = false, addr;
+=======
+	bool packet_matchbssid, packet_toself, packet_beacon;
+>>>>>>> v3.18
 
 	tmp_buf = skb->data + pstatus->rx_drvinfo_size + pstatus->rx_bufshift;
 
 	hdr = (struct ieee80211_hdr *)tmp_buf;
 	fc = hdr->frame_control;
+<<<<<<< HEAD
 	ufc = le16_to_cpu(fc);
 	type = WLAN_FC_GET_TYPE(fc);
+=======
+>>>>>>> v3.18
 	praddr = hdr->addr1;
 	psaddr = ieee80211_get_SA(hdr);
 	memcpy(pstatus->psaddr, psaddr, ETH_ALEN);
 
+<<<<<<< HEAD
 	addr = (!compare_ether_addr(mac->bssid, (ufc & IEEE80211_FCTL_TODS) ?
 		hdr->addr1 : (ufc & IEEE80211_FCTL_FROMDS) ?
 		hdr->addr2 : hdr->addr3));
@@ -319,14 +640,41 @@ static void _rtl88ee_translate_rx_signal_stuff(struct ieee80211_hw *hw,
 
 	_rtl88ee_query_rxphystatus(hw, pstatus, pdesc, p_drvinfo,
 				   match_bssid, packet_toself, packet_beacon);
+=======
+	packet_matchbssid = ((!ieee80211_is_ctl(fc)) &&
+	     (ether_addr_equal(mac->bssid, ieee80211_has_tods(fc) ?
+			       hdr->addr1 : ieee80211_has_fromds(fc) ?
+			       hdr->addr2 : hdr->addr3)) &&
+			       (!pstatus->hwerror) &&
+			       (!pstatus->crc) && (!pstatus->icv));
+
+	packet_toself = packet_matchbssid &&
+	    (ether_addr_equal(praddr, rtlefuse->dev_addr));
+
+	if (ieee80211_is_beacon(hdr->frame_control))
+		packet_beacon = true;
+	else
+		packet_beacon = false;
+
+	_rtl88ee_query_rxphystatus(hw, pstatus, pdesc, p_drvinfo,
+				   packet_matchbssid, packet_toself,
+				   packet_beacon);
+>>>>>>> v3.18
 	_rtl88ee_smart_antenna(hw, pstatus);
 	rtl_process_phyinfo(hw, tmp_buf, pstatus);
 }
 
+<<<<<<< HEAD
 static void insert_em(struct rtl_tcb_desc *ptcb_desc, u8 *virtualaddress)
 {
 	u32 dwtmp = 0;
 
+=======
+static void _rtl88ee_insert_emcontent(struct rtl_tcb_desc *ptcb_desc,
+				      u8 *virtualaddress)
+{
+	u32 dwtmp = 0;
+>>>>>>> v3.18
 	memset(virtualaddress, 0, 8);
 
 	SET_EARLYMODE_PKTNUM(virtualaddress, ptcb_desc->empkt_num);
@@ -334,7 +682,11 @@ static void insert_em(struct rtl_tcb_desc *ptcb_desc, u8 *virtualaddress)
 		dwtmp = ptcb_desc->empkt_len[0];
 	} else {
 		dwtmp = ptcb_desc->empkt_len[0];
+<<<<<<< HEAD
 		dwtmp += ((dwtmp % 4) ? (4 - dwtmp % 4) : 0) + 4;
+=======
+		dwtmp += ((dwtmp%4) ? (4-dwtmp%4) : 0)+4;
+>>>>>>> v3.18
 		dwtmp += ptcb_desc->empkt_len[1];
 	}
 	SET_EARLYMODE_LEN0(virtualaddress, dwtmp);
@@ -343,7 +695,11 @@ static void insert_em(struct rtl_tcb_desc *ptcb_desc, u8 *virtualaddress)
 		dwtmp = ptcb_desc->empkt_len[2];
 	} else {
 		dwtmp = ptcb_desc->empkt_len[2];
+<<<<<<< HEAD
 		dwtmp += ((dwtmp % 4) ? (4 - dwtmp % 4) : 0) + 4;
+=======
+		dwtmp += ((dwtmp%4) ? (4-dwtmp%4) : 0)+4;
+>>>>>>> v3.18
 		dwtmp += ptcb_desc->empkt_len[3];
 	}
 	SET_EARLYMODE_LEN1(virtualaddress, dwtmp);
@@ -351,7 +707,11 @@ static void insert_em(struct rtl_tcb_desc *ptcb_desc, u8 *virtualaddress)
 		dwtmp = ptcb_desc->empkt_len[4];
 	} else {
 		dwtmp = ptcb_desc->empkt_len[4];
+<<<<<<< HEAD
 		dwtmp += ((dwtmp % 4) ? (4 - dwtmp % 4) : 0) + 4;
+=======
+		dwtmp += ((dwtmp%4) ? (4-dwtmp%4) : 0)+4;
+>>>>>>> v3.18
 		dwtmp += ptcb_desc->empkt_len[5];
 	}
 	SET_EARLYMODE_LEN2_1(virtualaddress, dwtmp & 0xF);
@@ -360,7 +720,11 @@ static void insert_em(struct rtl_tcb_desc *ptcb_desc, u8 *virtualaddress)
 		dwtmp = ptcb_desc->empkt_len[6];
 	} else {
 		dwtmp = ptcb_desc->empkt_len[6];
+<<<<<<< HEAD
 		dwtmp += ((dwtmp % 4) ? (4 - dwtmp % 4) : 0) + 4;
+=======
+		dwtmp += ((dwtmp%4) ? (4-dwtmp%4) : 0)+4;
+>>>>>>> v3.18
 		dwtmp += ptcb_desc->empkt_len[7];
 	}
 	SET_EARLYMODE_LEN3(virtualaddress, dwtmp);
@@ -368,7 +732,11 @@ static void insert_em(struct rtl_tcb_desc *ptcb_desc, u8 *virtualaddress)
 		dwtmp = ptcb_desc->empkt_len[8];
 	} else {
 		dwtmp = ptcb_desc->empkt_len[8];
+<<<<<<< HEAD
 		dwtmp += ((dwtmp % 4) ? (4 - dwtmp % 4) : 0) + 4;
+=======
+		dwtmp += ((dwtmp%4) ? (4-dwtmp%4) : 0)+4;
+>>>>>>> v3.18
 		dwtmp += ptcb_desc->empkt_len[9];
 	}
 	SET_EARLYMODE_LEN4(virtualaddress, dwtmp);
@@ -386,6 +754,7 @@ bool rtl88ee_rx_query_desc(struct ieee80211_hw *hw,
 	u32 phystatus = GET_RX_DESC_PHYST(pdesc);
 	status->packet_report_type = (u8)GET_RX_STATUS_DESC_RPT_SEL(pdesc);
 	if (status->packet_report_type == TX_REPORT2)
+<<<<<<< HEAD
 		status->length = (u16) GET_RX_RPT2_DESC_PKT_LEN(pdesc);
 	else
 		status->length = (u16) GET_RX_DESC_PKT_LEN(pdesc);
@@ -401,6 +770,23 @@ bool rtl88ee_rx_query_desc(struct ieee80211_hw *hw,
 	status->isampdu = (bool) (GET_RX_DESC_PAGGR(pdesc) == 1);
 	status->isfirst_ampdu = (bool) ((GET_RX_DESC_PAGGR(pdesc) == 1) &&
 					(GET_RX_DESC_FAGGR(pdesc) == 1));
+=======
+		status->length = (u16)GET_RX_RPT2_DESC_PKT_LEN(pdesc);
+	else
+		status->length = (u16)GET_RX_DESC_PKT_LEN(pdesc);
+	status->rx_drvinfo_size = (u8)GET_RX_DESC_DRV_INFO_SIZE(pdesc) *
+	    RX_DRV_INFO_SIZE_UNIT;
+	status->rx_bufshift = (u8)(GET_RX_DESC_SHIFT(pdesc) & 0x03);
+	status->icv = (u16)GET_RX_DESC_ICV(pdesc);
+	status->crc = (u16)GET_RX_DESC_CRC32(pdesc);
+	status->hwerror = (status->crc | status->icv);
+	status->decrypted = !GET_RX_DESC_SWDEC(pdesc);
+	status->rate = (u8)GET_RX_DESC_RXMCS(pdesc);
+	status->shortpreamble = (u16)GET_RX_DESC_SPLCP(pdesc);
+	status->isampdu = (bool) (GET_RX_DESC_PAGGR(pdesc) == 1);
+	status->isfirst_ampdu = (bool)((GET_RX_DESC_PAGGR(pdesc) == 1) &&
+				(GET_RX_DESC_FAGGR(pdesc) == 1));
+>>>>>>> v3.18
 	if (status->packet_report_type == NORMAL_RX)
 		status->timestamp_low = GET_RX_DESC_TSFL(pdesc);
 	status->rx_is40Mhzpacket = (bool) GET_RX_DESC_BW(pdesc);
@@ -419,11 +805,22 @@ bool rtl88ee_rx_query_desc(struct ieee80211_hw *hw,
 		status->wake_match = 0;
 	if (status->wake_match)
 		RT_TRACE(rtlpriv, COMP_RXDESC, DBG_LOUD,
+<<<<<<< HEAD
 			 "Get Wakeup Packet!! WakeMatch =%d\n",
 			 status->wake_match);
 	rx_status->freq = hw->conf.chandef.chan->center_freq;
 	rx_status->band = hw->conf.chandef.chan->band;
 
+=======
+		"GGGGGGGGGGGGGet Wakeup Packet!! WakeMatch=%d\n",
+		status->wake_match);
+	rx_status->freq = hw->conf.chandef.chan->center_freq;
+	rx_status->band = hw->conf.chandef.chan->band;
+
+	hdr = (struct ieee80211_hdr *)(skb->data + status->rx_drvinfo_size
+			+ status->rx_bufshift);
+
+>>>>>>> v3.18
 	if (status->crc)
 		rx_status->flag |= RX_FLAG_FAILED_FCS_CRC;
 
@@ -444,6 +841,7 @@ bool rtl88ee_rx_query_desc(struct ieee80211_hw *hw,
 	 * to decrypt it
 	 */
 	if (status->decrypted) {
+<<<<<<< HEAD
 		hdr = (struct ieee80211_hdr *)(skb->data +
 		       status->rx_drvinfo_size + status->rx_bufshift);
 
@@ -456,6 +854,13 @@ bool rtl88ee_rx_query_desc(struct ieee80211_hw *hw,
 			rx_status->flag &= ~RX_FLAG_DECRYPTED;
 		else
 			rx_status->flag |= RX_FLAG_DECRYPTED;
+=======
+		if ((!_ieee80211_is_robust_mgmt_frame(hdr)) &&
+		    (ieee80211_has_protected(hdr->frame_control)))
+			rx_status->flag |= RX_FLAG_DECRYPTED;
+		else
+			rx_status->flag &= ~RX_FLAG_DECRYPTED;
+>>>>>>> v3.18
 	}
 
 	/* rate_idx: index of data rate into band's
@@ -463,14 +868,20 @@ bool rtl88ee_rx_query_desc(struct ieee80211_hw *hw,
 	 * are use (RX_FLAG_HT)
 	 * Notice: this is diff with windows define
 	 */
+<<<<<<< HEAD
 	rx_status->rate_idx = rtlwifi_rate_mapping(hw, status->is_ht,
 						   status->rate, false);
+=======
+	rx_status->rate_idx = _rtl88ee_rate_mapping(hw,
+				status->is_ht, status->rate);
+>>>>>>> v3.18
 
 	rx_status->mactime = status->timestamp_low;
 	if (phystatus == true) {
 		p_drvinfo = (struct rx_fwinfo_88e *)(skb->data +
 						     status->rx_bufshift);
 
+<<<<<<< HEAD
 		_rtl88ee_translate_rx_signal_stuff(hw, skb, status, pdesc,
 						   p_drvinfo);
 	}
@@ -478,6 +889,13 @@ bool rtl88ee_rx_query_desc(struct ieee80211_hw *hw,
 	/*rx_status->qual = status->signal; */
 	rx_status->signal = status->recvsignalpower + 10;
 	/*rx_status->noise = -status->noise; */
+=======
+		_rtl88ee_translate_rx_signal_stuff(hw,
+						   skb, status, pdesc,
+						   p_drvinfo);
+	}
+	rx_status->signal = status->recvsignalpower + 10;
+>>>>>>> v3.18
 	if (status->packet_report_type == TX_REPORT2) {
 		status->macid_valid_entry[0] =
 			 GET_RX_RPT2_DESC_MACID_VALID_1(pdesc);
@@ -489,10 +907,18 @@ bool rtl88ee_rx_query_desc(struct ieee80211_hw *hw,
 
 void rtl88ee_tx_fill_desc(struct ieee80211_hw *hw,
 			  struct ieee80211_hdr *hdr, u8 *pdesc_tx,
+<<<<<<< HEAD
 			  struct ieee80211_tx_info *info,
 			  struct ieee80211_sta *sta,
 			  struct sk_buff *skb,
 			  u8 hw_queue, struct rtl_tcb_desc *ptcb_desc)
+=======
+			  u8 *txbd, struct ieee80211_tx_info *info,
+			  struct ieee80211_sta *sta,
+			  struct sk_buff *skb,
+			  u8 hw_queue, struct rtl_tcb_desc *ptcb_desc)
+
+>>>>>>> v3.18
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	struct rtl_mac *mac = rtl_mac(rtl_priv(hw));
@@ -548,8 +974,14 @@ void rtl88ee_tx_fill_desc(struct ieee80211_hw *hw,
 			if (ptcb_desc->empkt_num) {
 				RT_TRACE(rtlpriv, COMP_SEND, DBG_TRACE,
 					 "Insert 8 byte.pTcb->EMPktNum:%d\n",
+<<<<<<< HEAD
 					 ptcb_desc->empkt_num);
 				insert_em(ptcb_desc, (u8 *)(skb->data));
+=======
+					  ptcb_desc->empkt_num);
+				_rtl88ee_insert_emcontent(ptcb_desc,
+							  (u8 *)(skb->data));
+>>>>>>> v3.18
 			}
 		} else {
 			SET_TX_DESC_OFFSET(pdesc, USB_HWDESC_HEADER_LEN);
@@ -561,6 +993,10 @@ void rtl88ee_tx_fill_desc(struct ieee80211_hw *hw,
 			short_gi = (ptcb_desc->use_shortgi) ? 1 : 0;
 		else
 			short_gi = (ptcb_desc->use_shortpreamble) ? 1 : 0;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		SET_TX_DESC_DATA_SHORTGI(pdesc, short_gi);
 
 		if (info->flags & IEEE80211_TX_CTL_AMPDU) {
@@ -569,7 +1005,11 @@ void rtl88ee_tx_fill_desc(struct ieee80211_hw *hw,
 		}
 		SET_TX_DESC_SEQ(pdesc, seq_number);
 		SET_TX_DESC_RTS_ENABLE(pdesc, ((ptcb_desc->rts_enable &&
+<<<<<<< HEAD
 					      !ptcb_desc->cts_enable) ? 1 : 0));
+=======
+						!ptcb_desc->cts_enable) ? 1 : 0));
+>>>>>>> v3.18
 		SET_TX_DESC_HW_RTS_ENABLE(pdesc, 0);
 		SET_TX_DESC_CTS2SELF(pdesc, ((ptcb_desc->cts_enable) ? 1 : 0));
 		SET_TX_DESC_RTS_STBC(pdesc, ((ptcb_desc->rts_stbc) ? 1 : 0));
@@ -582,17 +1022,29 @@ void rtl88ee_tx_fill_desc(struct ieee80211_hw *hw,
 			(ptcb_desc->rts_use_shortpreamble ? 1 : 0) :
 			(ptcb_desc->rts_use_shortgi ? 1 : 0)));
 
+<<<<<<< HEAD
 		if (ptcb_desc->btx_enable_sw_calc_duration)
 			SET_TX_DESC_NAV_USE_HDR(pdesc, 1);
 
 		if (bw_40) {
 			if (ptcb_desc->packet_bw) {
+=======
+		if (ptcb_desc->tx_enable_sw_calc_duration)
+			SET_TX_DESC_NAV_USE_HDR(pdesc, 1);
+
+		if (bw_40) {
+			if (ptcb_desc->packet_bw == HT_CHANNEL_WIDTH_20_40) {
+>>>>>>> v3.18
 				SET_TX_DESC_DATA_BW(pdesc, 1);
 				SET_TX_DESC_TX_SUB_CARRIER(pdesc, 3);
 			} else {
 				SET_TX_DESC_DATA_BW(pdesc, 0);
 				SET_TX_DESC_TX_SUB_CARRIER(pdesc,
+<<<<<<< HEAD
 						   mac->cur_40_prime_sc);
+=======
+							   mac->cur_40_prime_sc);
+>>>>>>> v3.18
 			}
 		} else {
 			SET_TX_DESC_DATA_BW(pdesc, 0);
@@ -600,13 +1052,21 @@ void rtl88ee_tx_fill_desc(struct ieee80211_hw *hw,
 		}
 
 		SET_TX_DESC_LINIP(pdesc, 0);
+<<<<<<< HEAD
 		SET_TX_DESC_PKT_SIZE(pdesc, (u16) skb_len);
+=======
+		SET_TX_DESC_PKT_SIZE(pdesc, (u16)skb_len);
+>>>>>>> v3.18
 		if (sta) {
 			u8 ampdu_density = sta->ht_cap.ampdu_density;
 			SET_TX_DESC_AMPDU_DENSITY(pdesc, ampdu_density);
 		}
 		if (info->control.hw_key) {
 			struct ieee80211_key_conf *keyconf;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 			keyconf = info->control.hw_key;
 			switch (keyconf->cipher) {
 			case WLAN_CIPHER_SUITE_WEP40:
@@ -620,6 +1080,10 @@ void rtl88ee_tx_fill_desc(struct ieee80211_hw *hw,
 			default:
 				SET_TX_DESC_SEC_TYPE(pdesc, 0x0);
 				break;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 			}
 		}
 
@@ -630,6 +1094,10 @@ void rtl88ee_tx_fill_desc(struct ieee80211_hw *hw,
 				       1 : 0);
 		SET_TX_DESC_USE_RATE(pdesc, ptcb_desc->use_driver_rate ? 1 : 0);
 
+<<<<<<< HEAD
+=======
+		/*SET_TX_DESC_PWR_STATUS(pdesc, pwr_status);*/
+>>>>>>> v3.18
 		/* Set TxRate and RTSRate in TxDesc  */
 		/* This prevent Tx initial rate of new-coming packets */
 		/* from being overwritten by retried  packet rate.*/
@@ -640,7 +1108,11 @@ void rtl88ee_tx_fill_desc(struct ieee80211_hw *hw,
 		if (ieee80211_is_data_qos(fc)) {
 			if (mac->rdg_en) {
 				RT_TRACE(rtlpriv, COMP_SEND, DBG_TRACE,
+<<<<<<< HEAD
 					 "Enable RDG function.\n");
+=======
+					"Enable RDG function.\n");
+>>>>>>> v3.18
 				SET_TX_DESC_RDG_ENABLE(pdesc, 1);
 				SET_TX_DESC_HTC(pdesc, 1);
 			}
@@ -649,7 +1121,11 @@ void rtl88ee_tx_fill_desc(struct ieee80211_hw *hw,
 
 	SET_TX_DESC_FIRST_SEG(pdesc, (firstseg ? 1 : 0));
 	SET_TX_DESC_LAST_SEG(pdesc, (lastseg ? 1 : 0));
+<<<<<<< HEAD
 	SET_TX_DESC_TX_BUFFER_SIZE(pdesc, (u16) buf_len);
+=======
+	SET_TX_DESC_TX_BUFFER_SIZE(pdesc, (u16)buf_len);
+>>>>>>> v3.18
 	SET_TX_DESC_TX_BUFFER_ADDRESS(pdesc, mapping);
 	if (rtlpriv->dm.useramask) {
 		SET_TX_DESC_RATE_ID(pdesc, ptcb_desc->ratr_index);
@@ -665,8 +1141,14 @@ void rtl88ee_tx_fill_desc(struct ieee80211_hw *hw,
 		SET_TX_DESC_HWSEQ_EN(pdesc, 1);
 	SET_TX_DESC_MORE_FRAG(pdesc, (lastseg ? 0 : 1));
 	if (is_multicast_ether_addr(ieee80211_get_DA(hdr)) ||
+<<<<<<< HEAD
 	    is_broadcast_ether_addr(ieee80211_get_DA(hdr)))
 		SET_TX_DESC_BMC(pdesc, 1);
+=======
+	    is_broadcast_ether_addr(ieee80211_get_DA(hdr))) {
+		SET_TX_DESC_BMC(pdesc, 1);
+	}
+>>>>>>> v3.18
 
 	rtl88e_dm_set_tx_ant_by_tx_info(hw, pdesc, ptcb_desc->mac_id);
 	RT_TRACE(rtlpriv, COMP_SEND, DBG_TRACE, "\n");
@@ -717,7 +1199,11 @@ void rtl88ee_tx_fill_cmddesc(struct ieee80211_hw *hw,
 
 	SET_TX_DESC_OWN(pdesc, 1);
 
+<<<<<<< HEAD
 	SET_TX_DESC_PKT_SIZE((u8 *)pdesc, (u16)(skb->len));
+=======
+	SET_TX_DESC_PKT_SIZE(pdesc, (u16)(skb->len));
+>>>>>>> v3.18
 
 	SET_TX_DESC_FIRST_SEG(pdesc, 1);
 	SET_TX_DESC_LAST_SEG(pdesc, 1);
@@ -734,7 +1220,12 @@ void rtl88ee_tx_fill_cmddesc(struct ieee80211_hw *hw,
 		      pdesc, TX_DESC_SIZE);
 }
 
+<<<<<<< HEAD
 void rtl88ee_set_desc(u8 *pdesc, bool istx, u8 desc_name, u8 *val)
+=======
+void rtl88ee_set_desc(struct ieee80211_hw *hw, u8 *pdesc,
+		      bool istx, u8 desc_name, u8 *val)
+>>>>>>> v3.18
 {
 	if (istx == true) {
 		switch (desc_name) {
@@ -745,7 +1236,11 @@ void rtl88ee_set_desc(u8 *pdesc, bool istx, u8 desc_name, u8 *val)
 			SET_TX_DESC_NEXT_DESC_ADDRESS(pdesc, *(u32 *)val);
 			break;
 		default:
+<<<<<<< HEAD
 			RT_ASSERT(false, "ERR txdesc :%d not processed\n",
+=======
+			RT_ASSERT(false, "ERR txdesc :%d not process\n",
+>>>>>>> v3.18
 				  desc_name);
 			break;
 		}
@@ -764,7 +1259,11 @@ void rtl88ee_set_desc(u8 *pdesc, bool istx, u8 desc_name, u8 *val)
 			SET_RX_DESC_EOR(pdesc, 1);
 			break;
 		default:
+<<<<<<< HEAD
 			RT_ASSERT(false, "ERR rxdesc :%d not processed\n",
+=======
+			RT_ASSERT(false, "ERR rxdesc :%d not process\n",
+>>>>>>> v3.18
 				  desc_name);
 			break;
 		}
@@ -784,7 +1283,11 @@ u32 rtl88ee_get_desc(u8 *pdesc, bool istx, u8 desc_name)
 			ret = GET_TX_DESC_TX_BUFFER_ADDRESS(pdesc);
 			break;
 		default:
+<<<<<<< HEAD
 			RT_ASSERT(false, "ERR txdesc :%d not processed\n",
+=======
+			RT_ASSERT(false, "ERR txdesc :%d not process\n",
+>>>>>>> v3.18
 				  desc_name);
 			break;
 		}
@@ -796,8 +1299,16 @@ u32 rtl88ee_get_desc(u8 *pdesc, bool istx, u8 desc_name)
 		case HW_DESC_RXPKT_LEN:
 			ret = GET_RX_DESC_PKT_LEN(pdesc);
 			break;
+<<<<<<< HEAD
 		default:
 			RT_ASSERT(false, "ERR rxdesc :%d not processed\n",
+=======
+		case HW_DESC_RXBUFF_ADDR:
+			ret = GET_RX_DESC_BUFF_ADDR(pdesc);
+			break;
+		default:
+			RT_ASSERT(false, "ERR rxdesc :%d not process\n",
+>>>>>>> v3.18
 				  desc_name);
 			break;
 		}
@@ -805,6 +1316,25 @@ u32 rtl88ee_get_desc(u8 *pdesc, bool istx, u8 desc_name)
 	return ret;
 }
 
+<<<<<<< HEAD
+=======
+bool rtl88ee_is_tx_desc_closed(struct ieee80211_hw *hw, u8 hw_queue, u16 index)
+{
+	struct rtl_pci *rtlpci = rtl_pcidev(rtl_pcipriv(hw));
+	struct rtl8192_tx_ring *ring = &rtlpci->tx_ring[hw_queue];
+	u8 *entry = (u8 *)(&ring->desc[ring->idx]);
+	u8 own = (u8)rtl88ee_get_desc(entry, true, HW_DESC_OWN);
+
+	/*beacon packet will only use the first
+	 *descriptor defautly,and the own may not
+	 *be cleared by the hardware
+	 */
+	if (own)
+		return false;
+	return true;
+}
+
+>>>>>>> v3.18
 void rtl88ee_tx_polling(struct ieee80211_hw *hw, u8 hw_queue)
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
@@ -815,3 +1345,13 @@ void rtl88ee_tx_polling(struct ieee80211_hw *hw, u8 hw_queue)
 			       BIT(0) << (hw_queue));
 	}
 }
+<<<<<<< HEAD
+=======
+
+u32 rtl88ee_rx_command_packet(struct ieee80211_hw *hw,
+			      struct rtl_stats status,
+			      struct sk_buff *skb)
+{
+	return 0;
+}
+>>>>>>> v3.18

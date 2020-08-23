@@ -19,6 +19,10 @@
 #include <linux/init.h>
 #include <linux/timer.h>
 #include <linux/spinlock.h>
+<<<<<<< HEAD
+=======
+#include <linux/wait.h>
+>>>>>>> v3.18
 
 #include <asm/io.h>
 #include <dma.h>
@@ -1088,7 +1092,10 @@ static ssize_t sync_serial_write(struct file *file, const char *buf,
 	}
 
 	schedule();
+<<<<<<< HEAD
 	set_current_state(TASK_RUNNING);
+=======
+>>>>>>> v3.18
 	remove_wait_queue(&port->out_wait_q, &wait);
 
 	if (signal_pending(current))
@@ -1144,7 +1151,12 @@ static ssize_t sync_serial_read(struct file * file, char * buf,
 		if (file->f_flags & O_NONBLOCK)
 			return -EAGAIN;
 
+<<<<<<< HEAD
 		interruptible_sleep_on(&port->in_wait_q);
+=======
+		wait_event_interruptible(port->in_wait_q,
+					 !(start == end && !port->full));
+>>>>>>> v3.18
 		if (signal_pending(current))
 			return -EINTR;
 

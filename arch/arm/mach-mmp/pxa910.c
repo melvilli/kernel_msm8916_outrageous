@@ -12,6 +12,11 @@
 #include <linux/init.h>
 #include <linux/list.h>
 #include <linux/io.h>
+<<<<<<< HEAD
+=======
+#include <linux/irq.h>
+#include <linux/irqchip/mmp.h>
+>>>>>>> v3.18
 #include <linux/platform_device.h>
 
 #include <asm/hardware/cache-tauros2.h>
@@ -23,6 +28,11 @@
 #include <mach/dma.h>
 #include <mach/mfp.h>
 #include <mach/devices.h>
+<<<<<<< HEAD
+=======
+#include <mach/pm-pxa910.h>
+#include <mach/pxa910.h>
+>>>>>>> v3.18
 
 #include "common.h"
 
@@ -79,6 +89,12 @@ static struct mfp_addr_map pxa910_mfp_addr_map[] __initdata =
 void __init pxa910_init_irq(void)
 {
 	icu_init_irq();
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PM
+	icu_irq_chip.irq_set_wake = pxa910_set_wake;
+#endif
+>>>>>>> v3.18
 }
 
 static int __init pxa910_init(void)

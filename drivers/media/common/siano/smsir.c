@@ -88,7 +88,11 @@ int sms_ir_init(struct smscore_device_t *coredev)
 
 	dev->priv = coredev;
 	dev->driver_type = RC_DRIVER_IR_RAW;
+<<<<<<< HEAD
 	dev->allowed_protos = RC_BIT_ALL;
+=======
+	dev->allowed_protocols = RC_BIT_ALL;
+>>>>>>> v3.18
 	dev->map_name = sms_get_board(board_id)->rc_codes;
 	dev->driver_name = MODULE_NAME;
 

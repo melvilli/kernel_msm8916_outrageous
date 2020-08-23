@@ -22,8 +22,15 @@
 #include <linux/of_platform.h>
 #include <linux/export.h>
 #include <linux/irqchip/arm-gic.h>
+<<<<<<< HEAD
 #include <linux/of_address.h>
 #include <linux/reboot.h>
+=======
+#include <linux/irqchip/irq-crossbar.h>
+#include <linux/of_address.h>
+#include <linux/reboot.h>
+#include <linux/genalloc.h>
+>>>>>>> v3.18
 
 #include <asm/hardware/cache-l2x0.h>
 #include <asm/mach/map.h>
@@ -35,7 +42,10 @@
 #include "iomap.h"
 #include "common.h"
 #include "mmc.h"
+<<<<<<< HEAD
 #include "hsmmc.h"
+=======
+>>>>>>> v3.18
 #include "prminst44xx.h"
 #include "prcm_mpu44xx.h"
 #include "omap4-sar-layout.h"
@@ -71,6 +81,29 @@ void omap_bus_sync(void)
 }
 EXPORT_SYMBOL(omap_bus_sync);
 
+<<<<<<< HEAD
+=======
+static int __init omap4_sram_init(void)
+{
+	struct device_node *np;
+	struct gen_pool *sram_pool;
+
+	np = of_find_compatible_node(NULL, NULL, "ti,omap4-mpu");
+	if (!np)
+		pr_warn("%s:Unable to allocate sram needed to handle errata I688\n",
+			__func__);
+	sram_pool = of_get_named_gen_pool(np, "sram", 0);
+	if (!sram_pool)
+		pr_warn("%s:Unable to get sram pool needed to handle errata I688\n",
+			__func__);
+	else
+		sram_sync = (void *)gen_pool_alloc(sram_pool, PAGE_SIZE);
+
+	return 0;
+}
+omap_arch_initcall(omap4_sram_init);
+
+>>>>>>> v3.18
 /* Steal one page physical memory for barrier implementation */
 int __init omap_barrier_reserve_memblock(void)
 {
@@ -88,10 +121,16 @@ void __init omap_barriers_init(void)
 	dram_io_desc[0].virtual = OMAP4_DRAM_BARRIER_VA;
 	dram_io_desc[0].pfn = __phys_to_pfn(paddr);
 	dram_io_desc[0].length = size;
+<<<<<<< HEAD
 	dram_io_desc[0].type = MT_MEMORY_SO;
 	iotable_init(dram_io_desc, ARRAY_SIZE(dram_io_desc));
 	dram_sync = (void __iomem *) dram_io_desc[0].virtual;
 	sram_sync = (void __iomem *) OMAP4_SRAM_VA;
+=======
+	dram_io_desc[0].type = MT_MEMORY_RW_SO;
+	iotable_init(dram_io_desc, ARRAY_SIZE(dram_io_desc));
+	dram_sync = (void __iomem *) dram_io_desc[0].virtual;
+>>>>>>> v3.18
 
 	pr_info("OMAP4: Map 0x%08llx to 0x%08lx for dram barrier\n",
 		(long long) paddr, dram_io_desc[0].virtual);
@@ -102,6 +141,7 @@ void __init omap_barriers_init(void)
 {}
 #endif
 
+<<<<<<< HEAD
 void __init gic_init_irq(void)
 {
 	void __iomem *omap_irq_base;
@@ -126,18 +166,40 @@ void gic_dist_disable(void)
 {
 	if (gic_dist_base_addr)
 		__raw_writel(0x0, gic_dist_base_addr + GIC_DIST_CTRL);
+=======
+void gic_dist_disable(void)
+{
+	if (gic_dist_base_addr)
+		writel_relaxed(0x0, gic_dist_base_addr + GIC_DIST_CTRL);
+}
+
+void gic_dist_enable(void)
+{
+	if (gic_dist_base_addr)
+		writel_relaxed(0x1, gic_dist_base_addr + GIC_DIST_CTRL);
+>>>>>>> v3.18
 }
 
 bool gic_dist_disabled(void)
 {
+<<<<<<< HEAD
 	return !(__raw_readl(gic_dist_base_addr + GIC_DIST_CTRL) & 0x1);
+=======
+	return !(readl_relaxed(gic_dist_base_addr + GIC_DIST_CTRL) & 0x1);
+>>>>>>> v3.18
 }
 
 void gic_timer_retrigger(void)
 {
+<<<<<<< HEAD
 	u32 twd_int = __raw_readl(twd_base + TWD_TIMER_INTSTAT);
 	u32 gic_int = __raw_readl(gic_dist_base_addr + GIC_DIST_PENDING_SET);
 	u32 twd_ctrl = __raw_readl(twd_base + TWD_TIMER_CONTROL);
+=======
+	u32 twd_int = readl_relaxed(twd_base + TWD_TIMER_INTSTAT);
+	u32 gic_int = readl_relaxed(gic_dist_base_addr + GIC_DIST_PENDING_SET);
+	u32 twd_ctrl = readl_relaxed(twd_base + TWD_TIMER_CONTROL);
+>>>>>>> v3.18
 
 	if (twd_int && !(gic_int & BIT(IRQ_LOCALTIMER))) {
 		/*
@@ -145,11 +207,19 @@ void gic_timer_retrigger(void)
 		 * disabled.  Ack the pending interrupt, and retrigger it.
 		 */
 		pr_warn("%s: lost localtimer interrupt\n", __func__);
+<<<<<<< HEAD
 		__raw_writel(1, twd_base + TWD_TIMER_INTSTAT);
 		if (!(twd_ctrl & TWD_TIMER_CONTROL_PERIODIC)) {
 			__raw_writel(1, twd_base + TWD_TIMER_COUNTER);
 			twd_ctrl |= TWD_TIMER_CONTROL_ENABLE;
 			__raw_writel(twd_ctrl, twd_base + TWD_TIMER_CONTROL);
+=======
+		writel_relaxed(1, twd_base + TWD_TIMER_INTSTAT);
+		if (!(twd_ctrl & TWD_TIMER_CONTROL_PERIODIC)) {
+			writel_relaxed(1, twd_base + TWD_TIMER_COUNTER);
+			twd_ctrl |= TWD_TIMER_CONTROL_ENABLE;
+			writel_relaxed(twd_ctrl, twd_base + TWD_TIMER_CONTROL);
+>>>>>>> v3.18
 		}
 	}
 }
@@ -161,6 +231,7 @@ void __iomem *omap4_get_l2cache_base(void)
 	return l2cache_base;
 }
 
+<<<<<<< HEAD
 static void omap4_l2x0_disable(void)
 {
 	outer_flush_all();
@@ -184,12 +255,51 @@ static int __init omap_l2_cache_init(void)
 	 */
 	if (!cpu_is_omap44xx())
 		return -ENODEV;
+=======
+static void omap4_l2c310_write_sec(unsigned long val, unsigned reg)
+{
+	unsigned smc_op;
+
+	switch (reg) {
+	case L2X0_CTRL:
+		smc_op = OMAP4_MON_L2X0_CTRL_INDEX;
+		break;
+
+	case L2X0_AUX_CTRL:
+		smc_op = OMAP4_MON_L2X0_AUXCTRL_INDEX;
+		break;
+
+	case L2X0_DEBUG_CTRL:
+		smc_op = OMAP4_MON_L2X0_DBG_CTRL_INDEX;
+		break;
+
+	case L310_PREFETCH_CTRL:
+		smc_op = OMAP4_MON_L2X0_PREFETCH_INDEX;
+		break;
+
+	case L310_POWER_CTRL:
+		pr_info_once("OMAP L2C310: ROM does not support power control setting\n");
+		return;
+
+	default:
+		WARN_ONCE(1, "OMAP L2C310: ignoring write to reg 0x%x\n", reg);
+		return;
+	}
+
+	omap_smc1(smc_op, val);
+}
+
+int __init omap_l2_cache_init(void)
+{
+	u32 aux_ctrl;
+>>>>>>> v3.18
 
 	/* Static mapping, never released */
 	l2cache_base = ioremap(OMAP44XX_L2CACHE_BASE, SZ_4K);
 	if (WARN_ON(!l2cache_base))
 		return -ENOMEM;
 
+<<<<<<< HEAD
 	/*
 	 * 16-way associativity, parity disabled
 	 * Way size - 32KB (es1.0)
@@ -230,6 +340,21 @@ static int __init omap_l2_cache_init(void)
 	return 0;
 }
 omap_early_initcall(omap_l2_cache_init);
+=======
+	/* 16-way associativity, parity disabled, way size - 64KB (es2.0 +) */
+	aux_ctrl = L2C_AUX_CTRL_SHARED_OVERRIDE |
+		   L310_AUX_CTRL_DATA_PREFETCH |
+		   L310_AUX_CTRL_INSTR_PREFETCH;
+
+	outer_cache.write_sec = omap4_l2c310_write_sec;
+	if (of_have_populated_dt())
+		l2x0_of_init(aux_ctrl, 0xcf9fffff);
+	else
+		l2x0_init(l2cache_base, aux_ctrl, 0xcf9fffff);
+
+	return 0;
+}
+>>>>>>> v3.18
 #endif
 
 void __iomem *omap4_get_sar_ram_base(void)
@@ -283,6 +408,7 @@ void __init omap_gic_of_init(void)
 
 skip_errata_init:
 	omap_wakeupgen_init();
+<<<<<<< HEAD
 	irqchip_init();
 }
 
@@ -357,3 +483,10 @@ void omap44xx_restart(char mode, const char *cmd)
 	while (1);
 }
 
+=======
+#ifdef CONFIG_IRQ_CROSSBAR
+	irqcrossbar_init();
+#endif
+	irqchip_init();
+}
+>>>>>>> v3.18

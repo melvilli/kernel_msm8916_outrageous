@@ -50,6 +50,10 @@
 #include "board.h"
 #include "sam9_smc.h"
 #include "generic.h"
+<<<<<<< HEAD
+=======
+#include "gpio.h"
+>>>>>>> v3.18
 
 /*
  * board revision encoding
@@ -409,7 +413,11 @@ static void __init ek_board_init(void)
 
 MACHINE_START(AT91SAM9G20EK, "Atmel AT91SAM9G20-EK")
 	/* Maintainer: Atmel */
+<<<<<<< HEAD
 	.init_time	= at91sam926x_pit_init,
+=======
+	.init_time	= at91_init_time,
+>>>>>>> v3.18
 	.map_io		= at91_map_io,
 	.handle_irq	= at91_aic_handle_irq,
 	.init_early	= ek_init_early,
@@ -419,7 +427,11 @@ MACHINE_END
 
 MACHINE_START(AT91SAM9G20EK_2MMC, "Atmel AT91SAM9G20-EK 2 MMC Slot Mod")
 	/* Maintainer: Atmel */
+<<<<<<< HEAD
 	.init_time	= at91sam926x_pit_init,
+=======
+	.init_time	= at91_init_time,
+>>>>>>> v3.18
 	.map_io		= at91_map_io,
 	.handle_irq	= at91_aic_handle_irq,
 	.init_early	= ek_init_early,

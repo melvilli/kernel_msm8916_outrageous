@@ -161,14 +161,24 @@ static void msp430_ir_interrupt(unsigned long data)
 		return;
 
 	if (budget_ci->ir.full_rc5) {
+<<<<<<< HEAD
 		rc_keydown(dev,
 			   budget_ci->ir.rc5_device <<8 | budget_ci->ir.ir_key,
 			   (command & 0x20) ? 1 : 0);
+=======
+		rc_keydown(dev, RC_TYPE_RC5,
+			   RC_SCANCODE_RC5(budget_ci->ir.rc5_device, budget_ci->ir.ir_key),
+			   !!(command & 0x20));
+>>>>>>> v3.18
 		return;
 	}
 
 	/* FIXME: We should generate complete scancodes for all devices */
+<<<<<<< HEAD
 	rc_keydown(dev, budget_ci->ir.ir_key, (command & 0x20) ? 1 : 0);
+=======
+	rc_keydown(dev, RC_TYPE_UNKNOWN, budget_ci->ir.ir_key, !!(command & 0x20));
+>>>>>>> v3.18
 }
 
 static int msp430_ir_init(struct budget_ci *budget_ci)
@@ -234,7 +244,11 @@ static int msp430_ir_init(struct budget_ci *budget_ci)
 		break;
 	}
 	if (!budget_ci->ir.full_rc5)
+<<<<<<< HEAD
 		dev->scanmask = 0xff;
+=======
+		dev->scancode_mask = 0xff;
+>>>>>>> v3.18
 
 	error = rc_register_device(dev);
 	if (error) {
@@ -1280,7 +1294,11 @@ static struct stb0899_config tt3200_config = {
 	.demod_address 		= 0x68,
 
 	.xtal_freq		= 27000000,
+<<<<<<< HEAD
 	.inversion		= IQ_SWAP_ON, /* 1 */
+=======
+	.inversion		= IQ_SWAP_ON,
+>>>>>>> v3.18
 
 	.lo_clk			= 76500000,
 	.hi_clk			= 99000000,

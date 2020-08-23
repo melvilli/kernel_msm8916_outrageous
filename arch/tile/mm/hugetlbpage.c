@@ -49,6 +49,7 @@ int huge_shift[HUGE_SHIFT_ENTRIES] = {
 #endif
 };
 
+<<<<<<< HEAD
 /*
  * This routine is a hybrid of pte_alloc_map() and pte_alloc_kernel().
  * It assumes that L2 PTEs are never in HIGHMEM (we don't support that).
@@ -81,6 +82,8 @@ static pte_t *pte_alloc_hugetlb(struct mm_struct *mm, pmd_t *pmd,
 
 	return pte_offset_kernel(pmd, address);
 }
+=======
+>>>>>>> v3.18
 #endif
 
 pte_t *huge_pte_alloc(struct mm_struct *mm,
@@ -109,7 +112,11 @@ pte_t *huge_pte_alloc(struct mm_struct *mm,
 		else {
 			if (sz != PAGE_SIZE << huge_shift[HUGE_SHIFT_PAGE])
 				panic("Unexpected page size %#lx\n", sz);
+<<<<<<< HEAD
 			return pte_alloc_hugetlb(mm, pmd, addr);
+=======
+			return pte_alloc_map(mm, NULL, pmd, addr);
+>>>>>>> v3.18
 		}
 	}
 #else
@@ -144,14 +151,22 @@ pte_t *huge_pte_offset(struct mm_struct *mm, unsigned long addr)
 
 	/* Get the top-level page table entry. */
 	pgd = (pgd_t *)get_pte((pte_t *)mm->pgd, pgd_index(addr), 0);
+<<<<<<< HEAD
 	if (!pgd_present(*pgd))
 		return NULL;
+=======
+>>>>>>> v3.18
 
 	/* We don't have four levels. */
 	pud = pud_offset(pgd, addr);
 #ifndef __PAGETABLE_PUD_FOLDED
 # error support fourth page table level
 #endif
+<<<<<<< HEAD
+=======
+	if (!pud_present(*pud))
+		return NULL;
+>>>>>>> v3.18
 
 	/* Check for an L0 huge PTE, if we have three levels. */
 #ifndef __PAGETABLE_PMD_FOLDED
@@ -198,11 +213,14 @@ int pud_huge(pud_t pud)
 	return !!(pud_val(pud) & _PAGE_HUGE_PAGE);
 }
 
+<<<<<<< HEAD
 int pmd_huge_support(void)
 {
 	return 1;
 }
 
+=======
+>>>>>>> v3.18
 struct page *follow_huge_pmd(struct mm_struct *mm, unsigned long address,
 			     pmd_t *pmd, int write)
 {
@@ -302,7 +320,11 @@ unsigned long hugetlb_get_unmapped_area(struct file *file, unsigned long addr,
 		addr = ALIGN(addr, huge_page_size(h));
 		vma = find_vma(mm, addr);
 		if (TASK_SIZE - len >= addr &&
+<<<<<<< HEAD
 		    (!vma || addr + len <= vm_start_gap(vma)))
+=======
+		    (!vma || addr + len <= vma->vm_start))
+>>>>>>> v3.18
 			return addr;
 	}
 	if (current->mm->get_unmapped_area == arch_get_unmapped_area)

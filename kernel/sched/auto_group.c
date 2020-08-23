@@ -148,11 +148,16 @@ autogroup_move_group(struct task_struct *p, struct autogroup *ag)
 	if (!ACCESS_ONCE(sysctl_sched_autogroup_enabled))
 		goto out;
 
+<<<<<<< HEAD
 	t = p;
 	do {
 		sched_move_task(t);
 	} while_each_thread(p, t);
 
+=======
+	for_each_thread(p, t)
+		sched_move_task(t);
+>>>>>>> v3.18
 out:
 	unlock_task_sighand(p, &flags);
 	autogroup_kref_put(prev);
@@ -203,7 +208,11 @@ int proc_sched_autogroup_set_nice(struct task_struct *p, int nice)
 	struct autogroup *ag;
 	int err;
 
+<<<<<<< HEAD
 	if (nice < -20 || nice > 19)
+=======
+	if (nice < MIN_NICE || nice > MAX_NICE)
+>>>>>>> v3.18
 		return -EINVAL;
 
 	err = security_task_setnice(current, nice);

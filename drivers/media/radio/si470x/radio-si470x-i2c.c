@@ -463,7 +463,11 @@ static int si470x_i2c_remove(struct i2c_client *client)
 }
 
 
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 /*
  * si470x_i2c_suspend - suspend the device
  */
@@ -509,7 +513,11 @@ static struct i2c_driver si470x_i2c_driver = {
 	.driver = {
 		.name		= "si470x",
 		.owner		= THIS_MODULE,
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 		.pm		= &si470x_i2c_pm,
 #endif
 	},

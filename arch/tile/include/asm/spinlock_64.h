@@ -27,7 +27,11 @@
  * Return the "current" portion of a ticket lock value,
  * i.e. the number that currently owns the lock.
  */
+<<<<<<< HEAD
 static inline int arch_spin_current(u32 val)
+=======
+static inline u32 arch_spin_current(u32 val)
+>>>>>>> v3.18
 {
 	return val >> __ARCH_SPIN_CURRENT_SHIFT;
 }
@@ -36,7 +40,11 @@ static inline int arch_spin_current(u32 val)
  * Return the "next" portion of a ticket lock value,
  * i.e. the number that the next task to try to acquire the lock will get.
  */
+<<<<<<< HEAD
 static inline int arch_spin_next(u32 val)
+=======
+static inline u32 arch_spin_next(u32 val)
+>>>>>>> v3.18
 {
 	return val & __ARCH_SPIN_NEXT_MASK;
 }

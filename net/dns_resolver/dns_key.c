@@ -19,8 +19,12 @@
  *   the GNU Lesser General Public License for more details.
  *
  *   You should have received a copy of the GNU Lesser General Public License
+<<<<<<< HEAD
  *   along with this library; if not, write to the Free Software
  *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+=======
+ *   along with this library; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
  */
 #include <linux/module.h>
 #include <linux/moduleparam.h>
@@ -47,7 +51,11 @@ const struct cred *dns_resolver_cache;
 #define	DNS_ERRORNO_OPTION	"dnserror"
 
 /*
+<<<<<<< HEAD
  * Instantiate a user defined key for dns_resolver.
+=======
+ * Preparse instantiation data for a dns_resolver key.
+>>>>>>> v3.18
  *
  * The data must be a NUL-terminated string, with the NUL char accounted in
  * datalen.
@@ -59,17 +67,28 @@ const struct cred *dns_resolver_cache;
  *        "ip1,ip2,...#foo=bar"
  */
 static int
+<<<<<<< HEAD
 dns_resolver_instantiate(struct key *key, struct key_preparsed_payload *prep)
+=======
+dns_resolver_preparse(struct key_preparsed_payload *prep)
+>>>>>>> v3.18
 {
 	struct user_key_payload *upayload;
 	unsigned long derrno;
 	int ret;
+<<<<<<< HEAD
 	size_t datalen = prep->datalen, result_len = 0;
 	const char *data = prep->data, *end, *opt;
 
 	kenter("%%%d,%s,'%*.*s',%zu",
 	       key->serial, key->description,
 	       (int)datalen, (int)datalen, data, datalen);
+=======
+	int datalen = prep->datalen, result_len = 0;
+	const char *data = prep->data, *end, *opt;
+
+	kenter("'%*.*s',%u", datalen, datalen, data, datalen);
+>>>>>>> v3.18
 
 	if (datalen <= 1 || !data || data[datalen - 1] != '\0')
 		return -EINVAL;
@@ -96,8 +115,12 @@ dns_resolver_instantiate(struct key *key, struct key_preparsed_payload *prep)
 			opt_len = next_opt - opt;
 			if (!opt_len) {
 				printk(KERN_WARNING
+<<<<<<< HEAD
 				       "Empty option to dns_resolver key %d\n",
 				       key->serial);
+=======
+				       "Empty option to dns_resolver key\n");
+>>>>>>> v3.18
 				return -EINVAL;
 			}
 
@@ -118,7 +141,11 @@ dns_resolver_instantiate(struct key *key, struct key_preparsed_payload *prep)
 				if (opt_vlen <= 0)
 					goto bad_option_value;
 
+<<<<<<< HEAD
 				ret = strict_strtoul(eq, 10, &derrno);
+=======
+				ret = kstrtoul(eq, 10, &derrno);
+>>>>>>> v3.18
 				if (ret < 0)
 					goto bad_option_value;
 
@@ -126,30 +153,49 @@ dns_resolver_instantiate(struct key *key, struct key_preparsed_payload *prep)
 					goto bad_option_value;
 
 				kdebug("dns error no. = %lu", derrno);
+<<<<<<< HEAD
 				key->type_data.x[0] = -derrno;
+=======
+				prep->type_data[0] = ERR_PTR(-derrno);
+>>>>>>> v3.18
 				continue;
 			}
 
 		bad_option_value:
 			printk(KERN_WARNING
+<<<<<<< HEAD
 			       "Option '%*.*s' to dns_resolver key %d:"
 			       " bad/missing value\n",
 			       opt_nlen, opt_nlen, opt, key->serial);
+=======
+			       "Option '%*.*s' to dns_resolver key:"
+			       " bad/missing value\n",
+			       opt_nlen, opt_nlen, opt);
+>>>>>>> v3.18
 			return -EINVAL;
 		} while (opt = next_opt + 1, opt < end);
 	}
 
 	/* don't cache the result if we're caching an error saying there's no
 	 * result */
+<<<<<<< HEAD
 	if (key->type_data.x[0]) {
 		kleave(" = 0 [h_error %ld]", key->type_data.x[0]);
+=======
+	if (prep->type_data[0]) {
+		kleave(" = 0 [h_error %ld]", PTR_ERR(prep->type_data[0]));
+>>>>>>> v3.18
 		return 0;
 	}
 
 	kdebug("store result");
+<<<<<<< HEAD
 	ret = key_payload_reserve(key, result_len);
 	if (ret < 0)
 		return -EINVAL;
+=======
+	prep->quotalen = result_len;
+>>>>>>> v3.18
 
 	upayload = kmalloc(sizeof(*upayload) + result_len + 1, GFP_KERNEL);
 	if (!upayload) {
@@ -160,23 +206,49 @@ dns_resolver_instantiate(struct key *key, struct key_preparsed_payload *prep)
 	upayload->datalen = result_len;
 	memcpy(upayload->data, data, result_len);
 	upayload->data[result_len] = '\0';
+<<<<<<< HEAD
 	rcu_assign_pointer(key->payload.data, upayload);
 
+=======
+
+	prep->payload[0] = upayload;
+>>>>>>> v3.18
 	kleave(" = 0");
 	return 0;
 }
 
 /*
+<<<<<<< HEAD
+=======
+ * Clean up the preparse data
+ */
+static void dns_resolver_free_preparse(struct key_preparsed_payload *prep)
+{
+	pr_devel("==>%s()\n", __func__);
+
+	kfree(prep->payload[0]);
+}
+
+/*
+>>>>>>> v3.18
  * The description is of the form "[<type>:]<domain_name>"
  *
  * The domain name may be a simple name or an absolute domain name (which
  * should end with a period).  The domain name is case-independent.
  */
+<<<<<<< HEAD
 static int
 dns_resolver_match(const struct key *key, const void *description)
 {
 	int slen, dlen, ret = 0;
 	const char *src = key->description, *dsp = description;
+=======
+static bool dns_resolver_cmp(const struct key *key,
+			     const struct key_match_data *match_data)
+{
+	int slen, dlen, ret = 0;
+	const char *src = key->description, *dsp = match_data->raw_data;
+>>>>>>> v3.18
 
 	kenter("%s,%s", src, dsp);
 
@@ -205,6 +277,19 @@ no_match:
 }
 
 /*
+<<<<<<< HEAD
+=======
+ * Preparse the match criterion.
+ */
+static int dns_resolver_match_preparse(struct key_match_data *match_data)
+{
+	match_data->lookup_type = KEYRING_SEARCH_LOOKUP_ITERATE;
+	match_data->cmp = dns_resolver_cmp;
+	return 0;
+}
+
+/*
+>>>>>>> v3.18
  * Describe a DNS key
  */
 static void dns_resolver_describe(const struct key *key, struct seq_file *m)
@@ -235,8 +320,15 @@ static long dns_resolver_read(const struct key *key,
 
 struct key_type key_type_dns_resolver = {
 	.name		= "dns_resolver",
+<<<<<<< HEAD
 	.instantiate	= dns_resolver_instantiate,
 	.match		= dns_resolver_match,
+=======
+	.preparse	= dns_resolver_preparse,
+	.free_preparse	= dns_resolver_free_preparse,
+	.instantiate	= generic_key_instantiate,
+	.match_preparse	= dns_resolver_match_preparse,
+>>>>>>> v3.18
 	.revoke		= user_revoke,
 	.destroy	= user_destroy,
 	.describe	= dns_resolver_describe,

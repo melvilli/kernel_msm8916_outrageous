@@ -165,12 +165,16 @@ validate_ascii_string(efi_char16_t *var_name, int match, u8 *buffer,
 }
 
 struct variable_validate {
+<<<<<<< HEAD
 	efi_guid_t vendor;
+=======
+>>>>>>> v3.18
 	char *name;
 	bool (*validate)(efi_char16_t *var_name, int match, u8 *data,
 			 unsigned long len);
 };
 
+<<<<<<< HEAD
 /*
  * This is the list of variables we need to validate, as well as the
  * whitelist for what we think is safe not to default to immutable.
@@ -306,6 +310,63 @@ efivar_variable_is_removable(efi_guid_t vendor, const char *var_name,
 	return found;
 }
 EXPORT_SYMBOL_GPL(efivar_variable_is_removable);
+=======
+static const struct variable_validate variable_validate[] = {
+	{ "BootNext", validate_uint16 },
+	{ "BootOrder", validate_boot_order },
+	{ "DriverOrder", validate_boot_order },
+	{ "Boot*", validate_load_option },
+	{ "Driver*", validate_load_option },
+	{ "ConIn", validate_device_path },
+	{ "ConInDev", validate_device_path },
+	{ "ConOut", validate_device_path },
+	{ "ConOutDev", validate_device_path },
+	{ "ErrOut", validate_device_path },
+	{ "ErrOutDev", validate_device_path },
+	{ "Timeout", validate_uint16 },
+	{ "Lang", validate_ascii_string },
+	{ "PlatformLang", validate_ascii_string },
+	{ "", NULL },
+};
+
+bool
+efivar_validate(efi_char16_t *var_name, u8 *data, unsigned long len)
+{
+	int i;
+	u16 *unicode_name = var_name;
+
+	for (i = 0; variable_validate[i].validate != NULL; i++) {
+		const char *name = variable_validate[i].name;
+		int match;
+
+		for (match = 0; ; match++) {
+			char c = name[match];
+			u16 u = unicode_name[match];
+
+			/* All special variables are plain ascii */
+			if (u > 127)
+				return true;
+
+			/* Wildcard in the matching name means we've matched */
+			if (c == '*')
+				return variable_validate[i].validate(var_name,
+							     match, data, len);
+
+			/* Case sensitive match */
+			if (c != u)
+				break;
+
+			/* Reached the end of the string while matching */
+			if (!c)
+				return variable_validate[i].validate(var_name,
+							     match, data, len);
+		}
+	}
+
+	return true;
+}
+EXPORT_SYMBOL_GPL(efivar_validate);
+>>>>>>> v3.18
 
 static efi_status_t
 check_var_size(u32 attributes, unsigned long size)
@@ -402,11 +463,19 @@ static unsigned long var_name_strnsize(efi_char16_t *variable_name,
  * Print a warning when duplicate EFI variables are encountered and
  * disable the sysfs workqueue since the firmware is buggy.
  */
+<<<<<<< HEAD
 static void dup_variable_bug(efi_char16_t *s16, efi_guid_t *vendor_guid,
 			     unsigned long len16)
 {
 	size_t i, len8 = len16 / sizeof(efi_char16_t);
 	char *s8;
+=======
+static void dup_variable_bug(efi_char16_t *str16, efi_guid_t *vendor_guid,
+			     unsigned long len16)
+{
+	size_t i, len8 = len16 / sizeof(efi_char16_t);
+	char *str8;
+>>>>>>> v3.18
 
 	/*
 	 * Disable the workqueue since the algorithm it uses for
@@ -415,6 +484,7 @@ static void dup_variable_bug(efi_char16_t *s16, efi_guid_t *vendor_guid,
 	 */
 	efivar_wq_enabled = false;
 
+<<<<<<< HEAD
 	s8 = kzalloc(len8, GFP_KERNEL);
 	if (!s8)
 		return;
@@ -425,6 +495,18 @@ static void dup_variable_bug(efi_char16_t *s16, efi_guid_t *vendor_guid,
 	printk(KERN_WARNING "efivars: duplicate variable: %s-%pUl\n",
 	       s8, vendor_guid);
 	kfree(s8);
+=======
+	str8 = kzalloc(len8, GFP_KERNEL);
+	if (!str8)
+		return;
+
+	for (i = 0; i < len8; i++)
+		str8[i] = str16[i];
+
+	printk(KERN_WARNING "efivars: duplicate variable: %s-%pUl\n",
+	       str8, vendor_guid);
+	kfree(str8);
+>>>>>>> v3.18
 }
 
 /**
@@ -676,6 +758,42 @@ int efivar_entry_set(struct efivar_entry *entry, u32 attributes,
 }
 EXPORT_SYMBOL_GPL(efivar_entry_set);
 
+<<<<<<< HEAD
+=======
+/*
+ * efivar_entry_set_nonblocking - call set_variable_nonblocking()
+ *
+ * This function is guaranteed to not block and is suitable for calling
+ * from crash/panic handlers.
+ *
+ * Crucially, this function will not block if it cannot acquire
+ * __efivars->lock. Instead, it returns -EBUSY.
+ */
+static int
+efivar_entry_set_nonblocking(efi_char16_t *name, efi_guid_t vendor,
+			     u32 attributes, unsigned long size, void *data)
+{
+	const struct efivar_operations *ops = __efivars->ops;
+	unsigned long flags;
+	efi_status_t status;
+
+	if (!spin_trylock_irqsave(&__efivars->lock, flags))
+		return -EBUSY;
+
+	status = check_var_size(attributes, size + ucs2_strsize(name, 1024));
+	if (status != EFI_SUCCESS) {
+		spin_unlock_irqrestore(&__efivars->lock, flags);
+		return -ENOSPC;
+	}
+
+	status = ops->set_variable_nonblocking(name, &vendor, attributes,
+					       size, data);
+
+	spin_unlock_irqrestore(&__efivars->lock, flags);
+	return efi_status_to_err(status);
+}
+
+>>>>>>> v3.18
 /**
  * efivar_entry_set_safe - call set_variable() if enough space in firmware
  * @name: buffer containing the variable name
@@ -703,6 +821,23 @@ int efivar_entry_set_safe(efi_char16_t *name, efi_guid_t vendor, u32 attributes,
 	if (!ops->query_variable_store)
 		return -ENOSYS;
 
+<<<<<<< HEAD
+=======
+	/*
+	 * If the EFI variable backend provides a non-blocking
+	 * ->set_variable() operation and we're in a context where we
+	 * cannot block, then we need to use it to avoid live-locks,
+	 * since the implication is that the regular ->set_variable()
+	 * will block.
+	 *
+	 * If no ->set_variable_nonblocking() is provided then
+	 * ->set_variable() is assumed to be non-blocking.
+	 */
+	if (!block && ops->set_variable_nonblocking)
+		return efivar_entry_set_nonblocking(name, vendor, attributes,
+						    size, data);
+
+>>>>>>> v3.18
 	if (!block) {
 		if (!spin_trylock_irqsave(&__efivars->lock, flags))
 			return -EBUSY;
@@ -764,8 +899,21 @@ struct efivar_entry *efivar_entry_find(efi_char16_t *name, efi_guid_t guid,
 	if (!found)
 		return NULL;
 
+<<<<<<< HEAD
 	if (remove)
 		list_del(&entry->list);
+=======
+	if (remove) {
+		if (entry->scanning) {
+			/*
+			 * The entry will be deleted
+			 * after scanning is completed.
+			 */
+			entry->deleting = true;
+		} else
+			list_del(&entry->list);
+	}
+>>>>>>> v3.18
 
 	return entry;
 }
@@ -878,7 +1026,11 @@ int efivar_entry_set_get_size(struct efivar_entry *entry, u32 attributes,
 
 	*set = false;
 
+<<<<<<< HEAD
 	if (efivar_validate(*vendor, name, data, *size) == false)
+=======
+	if (efivar_validate(name, data, *size) == false)
+>>>>>>> v3.18
 		return -EINVAL;
 
 	/*

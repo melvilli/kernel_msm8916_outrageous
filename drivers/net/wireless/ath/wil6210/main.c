@@ -25,14 +25,28 @@
 #define WAIT_FOR_DISCONNECT_TIMEOUT_MS 2000
 #define WAIT_FOR_DISCONNECT_INTERVAL_MS 10
 
+<<<<<<< HEAD
 static bool no_fw_recovery;
 module_param(no_fw_recovery, bool, S_IRUGO | S_IWUSR);
 MODULE_PARM_DESC(no_fw_recovery, " disable FW error recovery");
+=======
+bool no_fw_recovery;
+module_param(no_fw_recovery, bool, S_IRUGO | S_IWUSR);
+MODULE_PARM_DESC(no_fw_recovery, " disable automatic FW error recovery");
+>>>>>>> v3.18
 
 static bool no_fw_load = true;
 module_param(no_fw_load, bool, S_IRUGO | S_IWUSR);
 MODULE_PARM_DESC(no_fw_load, " do not download FW, use one in on-card flash.");
 
+<<<<<<< HEAD
+=======
+static unsigned int itr_trsh = WIL6210_ITR_TRSH_DEFAULT;
+
+module_param(itr_trsh, uint, S_IRUGO);
+MODULE_PARM_DESC(itr_trsh, " Interrupt moderation threshold, usecs.");
+
+>>>>>>> v3.18
 #define RST_DELAY (20) /* msec, for loop in @wil_target_reset */
 #define RST_COUNT (1 + 1000/RST_DELAY) /* round up to be above 1 sec total */
 
@@ -113,7 +127,11 @@ static void wil_disconnect_cid(struct wil6210_priv *wil, int cid)
 	memset(&sta->stats, 0, sizeof(sta->stats));
 }
 
+<<<<<<< HEAD
 static void _wil6210_disconnect(struct wil6210_priv *wil, void *bssid)
+=======
+static void _wil6210_disconnect(struct wil6210_priv *wil, const u8 *bssid)
+>>>>>>> v3.18
 {
 	int cid = -ENOENT;
 	struct net_device *ndev = wil_to_ndev(wil);
@@ -186,17 +204,51 @@ static void wil_scan_timer_fn(ulong x)
 	schedule_work(&wil->fw_error_worker);
 }
 
+<<<<<<< HEAD
 static void wil_fw_error_worker(struct work_struct *work)
 {
 	struct wil6210_priv *wil = container_of(work,
 			struct wil6210_priv, fw_error_worker);
+=======
+static int wil_wait_for_recovery(struct wil6210_priv *wil)
+{
+	if (wait_event_interruptible(wil->wq, wil->recovery_state !=
+				     fw_recovery_pending)) {
+		wil_err(wil, "Interrupt, canceling recovery\n");
+		return -ERESTARTSYS;
+	}
+	if (wil->recovery_state != fw_recovery_running) {
+		wil_info(wil, "Recovery cancelled\n");
+		return -EINTR;
+	}
+	wil_info(wil, "Proceed with recovery\n");
+	return 0;
+}
+
+void wil_set_recovery_state(struct wil6210_priv *wil, int state)
+{
+	wil_dbg_misc(wil, "%s(%d -> %d)\n", __func__,
+		     wil->recovery_state, state);
+
+	wil->recovery_state = state;
+	wake_up_interruptible(&wil->wq);
+}
+
+static void wil_fw_error_worker(struct work_struct *work)
+{
+	struct wil6210_priv *wil = container_of(work, struct wil6210_priv,
+						fw_error_worker);
+>>>>>>> v3.18
 	struct wireless_dev *wdev = wil->wdev;
 
 	wil_dbg_misc(wil, "fw error worker\n");
 
+<<<<<<< HEAD
 	if (no_fw_recovery)
 		return;
 
+=======
+>>>>>>> v3.18
 	/* increment @recovery_count if less then WIL6210_FW_RECOVERY_TO
 	 * passed since last recovery attempt
 	 */
@@ -219,8 +271,18 @@ static void wil_fw_error_worker(struct work_struct *work)
 	case NL80211_IFTYPE_STATION:
 	case NL80211_IFTYPE_P2P_CLIENT:
 	case NL80211_IFTYPE_MONITOR:
+<<<<<<< HEAD
 		wil_info(wil, "fw error recovery started (try %d)...\n",
 			 wil->recovery_count);
+=======
+		wil_info(wil, "fw error recovery requested (try %d)...\n",
+			 wil->recovery_count);
+		if (!no_fw_recovery)
+			wil->recovery_state = fw_recovery_running;
+		if (0 != wil_wait_for_recovery(wil))
+			break;
+
+>>>>>>> v3.18
 		__wil_down(wil);
 		__wil_up(wil);
 		break;
@@ -297,6 +359,10 @@ int wil_priv_init(struct wil6210_priv *wil)
 
 	INIT_LIST_HEAD(&wil->pending_wmi_ev);
 	spin_lock_init(&wil->wmi_ev_lock);
+<<<<<<< HEAD
+=======
+	init_waitqueue_head(&wil->wq);
+>>>>>>> v3.18
 
 	wil->wmi_wq = create_singlethread_workqueue(WIL_NAME"_wmi");
 	if (!wil->wmi_wq)
@@ -309,11 +375,19 @@ int wil_priv_init(struct wil6210_priv *wil)
 	}
 
 	wil->last_fw_recovery = jiffies;
+<<<<<<< HEAD
+=======
+	wil->itr_trsh = itr_trsh;
+>>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 void wil6210_disconnect(struct wil6210_priv *wil, void *bssid)
+=======
+void wil6210_disconnect(struct wil6210_priv *wil, const u8 *bssid)
+>>>>>>> v3.18
 {
 	wil_dbg_misc(wil, "%s()\n", __func__);
 
@@ -325,6 +399,10 @@ void wil_priv_deinit(struct wil6210_priv *wil)
 {
 	wil_dbg_misc(wil, "%s()\n", __func__);
 
+<<<<<<< HEAD
+=======
+	wil_set_recovery_state(wil, fw_recovery_idle);
+>>>>>>> v3.18
 	del_timer_sync(&wil->scan_timer);
 	cancel_work_sync(&wil->disconnect_worker);
 	cancel_work_sync(&wil->fw_error_worker);
@@ -437,6 +515,29 @@ static int wil_target_reset(struct wil6210_priv *wil)
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+/**
+ * wil_set_itr_trsh: - apply interrupt coalescing params
+ */
+void wil_set_itr_trsh(struct wil6210_priv *wil)
+{
+	/* disable, use usec resolution */
+	W(RGF_DMA_ITR_CNT_CRL, BIT_DMA_ITR_CNT_CRL_EXT_TICK);
+
+	/* disable interrupt moderation for monitor
+	 * to get better timestamp precision
+	 */
+	if (wil->wdev->iftype == NL80211_IFTYPE_MONITOR)
+		return;
+
+	wil_info(wil, "set ITR_TRSH = %d usec\n", wil->itr_trsh);
+	W(RGF_DMA_ITR_CNT_TRSH, wil->itr_trsh);
+	W(RGF_DMA_ITR_CNT_CRL, BIT_DMA_ITR_CNT_CRL_EN |
+	  BIT_DMA_ITR_CNT_CRL_EXT_TICK); /* start it */
+}
+
+>>>>>>> v3.18
 #undef R
 #undef W
 #undef S
@@ -533,8 +634,13 @@ int wil_reset(struct wil6210_priv *wil)
 
 	/* init after reset */
 	wil->pending_connect_cid = -1;
+<<<<<<< HEAD
 	INIT_COMPLETION(wil->wmi_ready);
 	INIT_COMPLETION(wil->wmi_call);
+=======
+	reinit_completion(&wil->wmi_ready);
+	reinit_completion(&wil->wmi_call);
+>>>>>>> v3.18
 
 	wil_unmask_irq(wil);
 
@@ -547,6 +653,10 @@ int wil_reset(struct wil6210_priv *wil)
 void wil_fw_error_recovery(struct wil6210_priv *wil)
 {
 	wil_dbg_misc(wil, "starting fw error recovery\n");
+<<<<<<< HEAD
+=======
+	wil->recovery_state = fw_recovery_pending;
+>>>>>>> v3.18
 	schedule_work(&wil->fw_error_worker);
 }
 
@@ -698,6 +808,10 @@ int wil_down(struct wil6210_priv *wil)
 
 	wil_dbg_misc(wil, "%s()\n", __func__);
 
+<<<<<<< HEAD
+=======
+	wil_set_recovery_state(wil, fw_recovery_idle);
+>>>>>>> v3.18
 	mutex_lock(&wil->mutex);
 	rc = __wil_down(wil);
 	mutex_unlock(&wil->mutex);

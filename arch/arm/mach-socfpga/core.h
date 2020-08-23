@@ -40,7 +40,11 @@ extern void __iomem *rst_manager_base_addr;
 extern struct smp_operations socfpga_smp_ops;
 extern char secondary_trampoline, secondary_trampoline_end;
 
+<<<<<<< HEAD
 extern unsigned long cpu1start_addr;
+=======
+extern unsigned long socfpga_cpu1start_addr;
+>>>>>>> v3.18
 
 #define SOCFPGA_SCU_VIRT_BASE   0xfffec000
 

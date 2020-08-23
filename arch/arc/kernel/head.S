@@ -12,10 +12,49 @@
  *      to skip certain things during boot on simulator
  */
 
+<<<<<<< HEAD
 #include <asm/asm-offsets.h>
 #include <asm/entry.h>
 #include <linux/linkage.h>
 #include <asm/arcregs.h>
+=======
+#include <linux/linkage.h>
+#include <asm/asm-offsets.h>
+#include <asm/entry.h>
+#include <asm/arcregs.h>
+#include <asm/cache.h>
+
+.macro CPU_EARLY_SETUP
+
+	; Setting up Vectror Table (in case exception happens in early boot
+	sr	@_int_vec_base_lds, [AUX_INTR_VEC_BASE]
+
+	; Disable I-cache/D-cache if kernel so configured
+	lr	r5, [ARC_REG_IC_BCR]
+	breq    r5, 0, 1f		; I$ doesn't exist
+	lr	r5, [ARC_REG_IC_CTRL]
+#ifdef CONFIG_ARC_HAS_ICACHE
+	bclr	r5, r5, 0		; 0 - Enable, 1 is Disable
+#else
+	bset	r5, r5, 0		; I$ exists, but is not used
+#endif
+	sr	r5, [ARC_REG_IC_CTRL]
+
+1:
+	lr	r5, [ARC_REG_DC_BCR]
+	breq    r5, 0, 1f		; D$ doesn't exist
+	lr	r5, [ARC_REG_DC_CTRL]
+	bclr	r5, r5, 6		; Invalidate (discard w/o wback)
+#ifdef CONFIG_ARC_HAS_DCACHE
+	bclr	r5, r5, 0		; Enable (+Inv)
+#else
+	bset	r5, r5, 0		; Disable (+Inv)
+#endif
+	sr	r5, [ARC_REG_DC_CTRL]
+
+1:
+.endm
+>>>>>>> v3.18
 
 	.cpu A7
 
@@ -24,6 +63,7 @@
 	.globl stext
 stext:
 	;-------------------------------------------------------------------
+<<<<<<< HEAD
 	; Don't clobber r0-r4 yet. It might have bootloader provided info
 	;-------------------------------------------------------------------
 
@@ -31,6 +71,15 @@ stext:
 
 #ifdef CONFIG_SMP
 	; Only Boot (Master) proceeds. Others wait in platform dependent way
+=======
+	; Don't clobber r0-r2 yet. It might have bootloader provided info
+	;-------------------------------------------------------------------
+
+	CPU_EARLY_SETUP
+
+#ifdef CONFIG_SMP
+	; Ensure Boot (Master) proceeds. Others wait in platform dependent way
+>>>>>>> v3.18
 	;	IDENTITY Reg [ 3  2  1  0 ]
 	;	(cpu-id)             ^^^	=> Zero for UP ARC700
 	;					=> #Core-ID if SMP (Master 0)
@@ -39,11 +88,17 @@ stext:
 	; need to make sure only boot cpu takes this path.
 	GET_CPU_ID  r5
 	cmp	r5, 0
+<<<<<<< HEAD
 	jnz	arc_platform_smp_wait_to_boot
+=======
+	mov.ne	r0, r5
+	jne	arc_platform_smp_wait_to_boot
+>>>>>>> v3.18
 #endif
 	; Clear BSS before updating any globals
 	; XXX: use ZOL here
 	mov	r5, __bss_start
+<<<<<<< HEAD
 	mov	r6, __bss_stop
 1:
 	st.ab   0, [r5,4]
@@ -78,6 +133,21 @@ stext:
 	mov.z	r4, 0
 	mov.nz	r4, 1
 	st	r4, [@running_on_hw]
+=======
+	sub	r6, __bss_stop, r5
+	lsr.f	lp_count, r6, 2
+	lpnz	1f
+	st.ab   0, [r5, 4]
+1:
+
+	; Uboot - kernel ABI
+	;    r0 = [0] No uboot interaction, [1] cmdline in r2, [2] DTB in r2
+	;    r1 = magic number (board identity, unused as of now
+	;    r2 = pointer to uboot provided cmdline or external DTB in mem
+	; These are handled later in setup_arch()
+	st	r0, [@uboot_tag]
+	st	r2, [@uboot_arg]
+>>>>>>> v3.18
 
 	; setup "current" tsk and optionally cache it in dedicated r25
 	mov	r9, @init_task
@@ -95,13 +165,21 @@ stext:
 ;----------------------------------------------------------------
 ;     First lines of code run by secondary before jumping to 'C'
 ;----------------------------------------------------------------
+<<<<<<< HEAD
 	.section .init.text, "ax",@progbits
+=======
+	.section .text, "ax",@progbits
+>>>>>>> v3.18
 	.type first_lines_of_secondary, @function
 	.globl first_lines_of_secondary
 
 first_lines_of_secondary:
 
+<<<<<<< HEAD
 	sr	@_int_vec_base_lds, [AUX_INTR_VEC_BASE]
+=======
+	CPU_EARLY_SETUP
+>>>>>>> v3.18
 
 	; setup per-cpu idle task as "current" on this CPU
 	ld	r0, [@secondary_idle_tsk]

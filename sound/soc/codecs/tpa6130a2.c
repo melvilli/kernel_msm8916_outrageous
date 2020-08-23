@@ -30,6 +30,11 @@
 #include <sound/tpa6130a2-plat.h>
 #include <sound/soc.h>
 #include <sound/tlv.h>
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+#include <linux/of_gpio.h>
+>>>>>>> v3.18
 
 #include "tpa6130a2.h"
 
@@ -55,7 +60,12 @@ static int tpa6130a2_i2c_read(int reg)
 	struct tpa6130a2_data *data;
 	int val;
 
+<<<<<<< HEAD
 	BUG_ON(tpa6130a2_client == NULL);
+=======
+	if (WARN_ON(!tpa6130a2_client))
+		return -EINVAL;
+>>>>>>> v3.18
 	data = i2c_get_clientdata(tpa6130a2_client);
 
 	/* If powered off, return the cached value */
@@ -77,7 +87,12 @@ static int tpa6130a2_i2c_write(int reg, u8 value)
 	struct tpa6130a2_data *data;
 	int val = 0;
 
+<<<<<<< HEAD
 	BUG_ON(tpa6130a2_client == NULL);
+=======
+	if (WARN_ON(!tpa6130a2_client))
+		return -EINVAL;
+>>>>>>> v3.18
 	data = i2c_get_clientdata(tpa6130a2_client);
 
 	if (data->power_state) {
@@ -98,7 +113,12 @@ static u8 tpa6130a2_read(int reg)
 {
 	struct tpa6130a2_data *data;
 
+<<<<<<< HEAD
 	BUG_ON(tpa6130a2_client == NULL);
+=======
+	if (WARN_ON(!tpa6130a2_client))
+		return 0;
+>>>>>>> v3.18
 	data = i2c_get_clientdata(tpa6130a2_client);
 
 	return data->regs[reg];
@@ -109,7 +129,12 @@ static int tpa6130a2_initialize(void)
 	struct tpa6130a2_data *data;
 	int i, ret = 0;
 
+<<<<<<< HEAD
 	BUG_ON(tpa6130a2_client == NULL);
+=======
+	if (WARN_ON(!tpa6130a2_client))
+		return -EINVAL;
+>>>>>>> v3.18
 	data = i2c_get_clientdata(tpa6130a2_client);
 
 	for (i = 1; i < TPA6130A2_REG_VERSION; i++) {
@@ -127,7 +152,12 @@ static int tpa6130a2_power(u8 power)
 	u8	val;
 	int	ret = 0;
 
+<<<<<<< HEAD
 	BUG_ON(tpa6130a2_client == NULL);
+=======
+	if (WARN_ON(!tpa6130a2_client))
+		return -EINVAL;
+>>>>>>> v3.18
 	data = i2c_get_clientdata(tpa6130a2_client);
 
 	mutex_lock(&data->mutex);
@@ -193,7 +223,12 @@ static int tpa6130a2_get_volsw(struct snd_kcontrol *kcontrol,
 	unsigned int mask = (1 << fls(max)) - 1;
 	unsigned int invert = mc->invert;
 
+<<<<<<< HEAD
 	BUG_ON(tpa6130a2_client == NULL);
+=======
+	if (WARN_ON(!tpa6130a2_client))
+		return -EINVAL;
+>>>>>>> v3.18
 	data = i2c_get_clientdata(tpa6130a2_client);
 
 	mutex_lock(&data->mutex);
@@ -223,7 +258,12 @@ static int tpa6130a2_put_volsw(struct snd_kcontrol *kcontrol,
 	unsigned int val = (ucontrol->value.integer.value[0] & mask);
 	unsigned int val_reg;
 
+<<<<<<< HEAD
 	BUG_ON(tpa6130a2_client == NULL);
+=======
+	if (WARN_ON(!tpa6130a2_client))
+		return -EINVAL;
+>>>>>>> v3.18
 	data = i2c_get_clientdata(tpa6130a2_client);
 
 	if (invert)
@@ -364,30 +404,53 @@ static int tpa6130a2_probe(struct i2c_client *client,
 {
 	struct device *dev;
 	struct tpa6130a2_data *data;
+<<<<<<< HEAD
 	struct tpa6130a2_platform_data *pdata;
+=======
+	struct tpa6130a2_platform_data *pdata = client->dev.platform_data;
+	struct device_node *np = client->dev.of_node;
+>>>>>>> v3.18
 	const char *regulator;
 	int ret;
 
 	dev = &client->dev;
 
+<<<<<<< HEAD
 	if (client->dev.platform_data == NULL) {
+=======
+	data = devm_kzalloc(&client->dev, sizeof(*data), GFP_KERNEL);
+	if (!data)
+		return -ENOMEM;
+
+	if (pdata) {
+		data->power_gpio = pdata->power_gpio;
+	} else if (np) {
+		data->power_gpio = of_get_named_gpio(np, "power-gpio", 0);
+	} else {
+>>>>>>> v3.18
 		dev_err(dev, "Platform data not set\n");
 		dump_stack();
 		return -ENODEV;
 	}
 
+<<<<<<< HEAD
 	data = devm_kzalloc(&client->dev, sizeof(*data), GFP_KERNEL);
 	if (data == NULL) {
 		dev_err(dev, "Can not allocate memory\n");
 		return -ENOMEM;
 	}
 
+=======
+>>>>>>> v3.18
 	tpa6130a2_client = client;
 
 	i2c_set_clientdata(tpa6130a2_client, data);
 
+<<<<<<< HEAD
 	pdata = client->dev.platform_data;
 	data->power_gpio = pdata->power_gpio;
+=======
+>>>>>>> v3.18
 	data->id = id->driver_data;
 
 	mutex_init(&data->mutex);
@@ -466,10 +529,26 @@ static const struct i2c_device_id tpa6130a2_id[] = {
 };
 MODULE_DEVICE_TABLE(i2c, tpa6130a2_id);
 
+<<<<<<< HEAD
+=======
+#if IS_ENABLED(CONFIG_OF)
+static const struct of_device_id tpa6130a2_of_match[] = {
+	{ .compatible = "ti,tpa6130a2", },
+	{ .compatible = "ti,tpa6140a2" },
+	{},
+};
+MODULE_DEVICE_TABLE(of, tpa6130a2_of_match);
+#endif
+
+>>>>>>> v3.18
 static struct i2c_driver tpa6130a2_i2c_driver = {
 	.driver = {
 		.name = "tpa6130a2",
 		.owner = THIS_MODULE,
+<<<<<<< HEAD
+=======
+		.of_match_table = of_match_ptr(tpa6130a2_of_match),
+>>>>>>> v3.18
 	},
 	.probe = tpa6130a2_probe,
 	.remove = tpa6130a2_remove,

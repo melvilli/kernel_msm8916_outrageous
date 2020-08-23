@@ -7,6 +7,10 @@
  * Copyright (C) 1997, 1998, 1999, 2000, 2001, 2002 Ralf Baechle (ralf@gnu.org)
  * Copyright (C) 1999, 2000 Silicon Graphics, Inc.
  */
+<<<<<<< HEAD
+=======
+#include <linux/cpu_pm.h>
+>>>>>>> v3.18
 #include <linux/hardirq.h>
 #include <linux/init.h>
 #include <linux/highmem.h>
@@ -25,6 +29,10 @@
 #include <asm/cacheops.h>
 #include <asm/cpu.h>
 #include <asm/cpu-features.h>
+<<<<<<< HEAD
+=======
+#include <asm/cpu-type.h>
+>>>>>>> v3.18
 #include <asm/io.h>
 #include <asm/page.h>
 #include <asm/pgtable.h>
@@ -49,14 +57,22 @@ static inline void r4k_on_each_cpu(void (*func) (void *info), void *info)
 {
 	preempt_disable();
 
+<<<<<<< HEAD
 #if !defined(CONFIG_MIPS_MT_SMP) && !defined(CONFIG_MIPS_MT_SMTC)
+=======
+#ifndef CONFIG_MIPS_MT_SMP
+>>>>>>> v3.18
 	smp_call_function(func, info, 1);
 #endif
 	func(info);
 	preempt_enable();
 }
 
+<<<<<<< HEAD
 #if defined(CONFIG_MIPS_CMP)
+=======
+#if defined(CONFIG_MIPS_CMP) || defined(CONFIG_MIPS_CPS)
+>>>>>>> v3.18
 #define cpu_has_safe_index_cacheops 0
 #else
 #define cpu_has_safe_index_cacheops 1
@@ -104,6 +120,7 @@ static inline void r4k_blast_dcache_page_dc32(unsigned long addr)
 
 static inline void r4k_blast_dcache_page_dc64(unsigned long addr)
 {
+<<<<<<< HEAD
 	R4600_HIT_CACHEOP_WAR_IMPL;
 	blast_dcache64_page(addr);
 }
@@ -125,6 +142,66 @@ static void __cpuinit r4k_blast_dcache_page_setup(void)
 static void (* r4k_blast_dcache_page_indexed)(unsigned long addr);
 
 static void __cpuinit r4k_blast_dcache_page_indexed_setup(void)
+=======
+	blast_dcache64_page(addr);
+}
+
+static inline void r4k_blast_dcache_page_dc128(unsigned long addr)
+{
+	blast_dcache128_page(addr);
+}
+
+static void r4k_blast_dcache_page_setup(void)
+{
+	unsigned long  dc_lsize = cpu_dcache_line_size();
+
+	switch (dc_lsize) {
+	case 0:
+		r4k_blast_dcache_page = (void *)cache_noop;
+		break;
+	case 16:
+		r4k_blast_dcache_page = blast_dcache16_page;
+		break;
+	case 32:
+		r4k_blast_dcache_page = r4k_blast_dcache_page_dc32;
+		break;
+	case 64:
+		r4k_blast_dcache_page = r4k_blast_dcache_page_dc64;
+		break;
+	case 128:
+		r4k_blast_dcache_page = r4k_blast_dcache_page_dc128;
+		break;
+	default:
+		break;
+	}
+}
+
+#ifndef CONFIG_EVA
+#define r4k_blast_dcache_user_page  r4k_blast_dcache_page
+#else
+
+static void (*r4k_blast_dcache_user_page)(unsigned long addr);
+
+static void r4k_blast_dcache_user_page_setup(void)
+{
+	unsigned long  dc_lsize = cpu_dcache_line_size();
+
+	if (dc_lsize == 0)
+		r4k_blast_dcache_user_page = (void *)cache_noop;
+	else if (dc_lsize == 16)
+		r4k_blast_dcache_user_page = blast_dcache16_user_page;
+	else if (dc_lsize == 32)
+		r4k_blast_dcache_user_page = blast_dcache32_user_page;
+	else if (dc_lsize == 64)
+		r4k_blast_dcache_user_page = blast_dcache64_user_page;
+}
+
+#endif
+
+static void (* r4k_blast_dcache_page_indexed)(unsigned long addr);
+
+static void r4k_blast_dcache_page_indexed_setup(void)
+>>>>>>> v3.18
 {
 	unsigned long dc_lsize = cpu_dcache_line_size();
 
@@ -136,12 +213,21 @@ static void __cpuinit r4k_blast_dcache_page_indexed_setup(void)
 		r4k_blast_dcache_page_indexed = blast_dcache32_page_indexed;
 	else if (dc_lsize == 64)
 		r4k_blast_dcache_page_indexed = blast_dcache64_page_indexed;
+<<<<<<< HEAD
+=======
+	else if (dc_lsize == 128)
+		r4k_blast_dcache_page_indexed = blast_dcache128_page_indexed;
+>>>>>>> v3.18
 }
 
 void (* r4k_blast_dcache)(void);
 EXPORT_SYMBOL(r4k_blast_dcache);
 
+<<<<<<< HEAD
 static void __cpuinit r4k_blast_dcache_setup(void)
+=======
+static void r4k_blast_dcache_setup(void)
+>>>>>>> v3.18
 {
 	unsigned long dc_lsize = cpu_dcache_line_size();
 
@@ -153,6 +239,11 @@ static void __cpuinit r4k_blast_dcache_setup(void)
 		r4k_blast_dcache = blast_dcache32;
 	else if (dc_lsize == 64)
 		r4k_blast_dcache = blast_dcache64;
+<<<<<<< HEAD
+=======
+	else if (dc_lsize == 128)
+		r4k_blast_dcache = blast_dcache128;
+>>>>>>> v3.18
 }
 
 /* force code alignment (used for TX49XX_ICACHE_INDEX_INV_WAR) */
@@ -228,7 +319,11 @@ static inline void tx49_blast_icache32_page_indexed(unsigned long page)
 
 static void (* r4k_blast_icache_page)(unsigned long addr);
 
+<<<<<<< HEAD
 static void __cpuinit r4k_blast_icache_page_setup(void)
+=======
+static void r4k_blast_icache_page_setup(void)
+>>>>>>> v3.18
 {
 	unsigned long ic_lsize = cpu_icache_line_size();
 
@@ -236,16 +331,53 @@ static void __cpuinit r4k_blast_icache_page_setup(void)
 		r4k_blast_icache_page = (void *)cache_noop;
 	else if (ic_lsize == 16)
 		r4k_blast_icache_page = blast_icache16_page;
+<<<<<<< HEAD
+=======
+	else if (ic_lsize == 32 && current_cpu_type() == CPU_LOONGSON2)
+		r4k_blast_icache_page = loongson2_blast_icache32_page;
+>>>>>>> v3.18
 	else if (ic_lsize == 32)
 		r4k_blast_icache_page = blast_icache32_page;
 	else if (ic_lsize == 64)
 		r4k_blast_icache_page = blast_icache64_page;
+<<<<<<< HEAD
 }
 
 
 static void (* r4k_blast_icache_page_indexed)(unsigned long addr);
 
 static void __cpuinit r4k_blast_icache_page_indexed_setup(void)
+=======
+	else if (ic_lsize == 128)
+		r4k_blast_icache_page = blast_icache128_page;
+}
+
+#ifndef CONFIG_EVA
+#define r4k_blast_icache_user_page  r4k_blast_icache_page
+#else
+
+static void (*r4k_blast_icache_user_page)(unsigned long addr);
+
+static void __cpuinit r4k_blast_icache_user_page_setup(void)
+{
+	unsigned long ic_lsize = cpu_icache_line_size();
+
+	if (ic_lsize == 0)
+		r4k_blast_icache_user_page = (void *)cache_noop;
+	else if (ic_lsize == 16)
+		r4k_blast_icache_user_page = blast_icache16_user_page;
+	else if (ic_lsize == 32)
+		r4k_blast_icache_user_page = blast_icache32_user_page;
+	else if (ic_lsize == 64)
+		r4k_blast_icache_user_page = blast_icache64_user_page;
+}
+
+#endif
+
+static void (* r4k_blast_icache_page_indexed)(unsigned long addr);
+
+static void r4k_blast_icache_page_indexed_setup(void)
+>>>>>>> v3.18
 {
 	unsigned long ic_lsize = cpu_icache_line_size();
 
@@ -260,6 +392,12 @@ static void __cpuinit r4k_blast_icache_page_indexed_setup(void)
 		else if (TX49XX_ICACHE_INDEX_INV_WAR)
 			r4k_blast_icache_page_indexed =
 				tx49_blast_icache32_page_indexed;
+<<<<<<< HEAD
+=======
+		else if (current_cpu_type() == CPU_LOONGSON2)
+			r4k_blast_icache_page_indexed =
+				loongson2_blast_icache32_page_indexed;
+>>>>>>> v3.18
 		else
 			r4k_blast_icache_page_indexed =
 				blast_icache32_page_indexed;
@@ -270,7 +408,11 @@ static void __cpuinit r4k_blast_icache_page_indexed_setup(void)
 void (* r4k_blast_icache)(void);
 EXPORT_SYMBOL(r4k_blast_icache);
 
+<<<<<<< HEAD
 static void __cpuinit r4k_blast_icache_setup(void)
+=======
+static void r4k_blast_icache_setup(void)
+>>>>>>> v3.18
 {
 	unsigned long ic_lsize = cpu_icache_line_size();
 
@@ -283,15 +425,29 @@ static void __cpuinit r4k_blast_icache_setup(void)
 			r4k_blast_icache = blast_r4600_v1_icache32;
 		else if (TX49XX_ICACHE_INDEX_INV_WAR)
 			r4k_blast_icache = tx49_blast_icache32;
+<<<<<<< HEAD
+=======
+		else if (current_cpu_type() == CPU_LOONGSON2)
+			r4k_blast_icache = loongson2_blast_icache32;
+>>>>>>> v3.18
 		else
 			r4k_blast_icache = blast_icache32;
 	} else if (ic_lsize == 64)
 		r4k_blast_icache = blast_icache64;
+<<<<<<< HEAD
+=======
+	else if (ic_lsize == 128)
+		r4k_blast_icache = blast_icache128;
+>>>>>>> v3.18
 }
 
 static void (* r4k_blast_scache_page)(unsigned long addr);
 
+<<<<<<< HEAD
 static void __cpuinit r4k_blast_scache_page_setup(void)
+=======
+static void r4k_blast_scache_page_setup(void)
+>>>>>>> v3.18
 {
 	unsigned long sc_lsize = cpu_scache_line_size();
 
@@ -309,7 +465,11 @@ static void __cpuinit r4k_blast_scache_page_setup(void)
 
 static void (* r4k_blast_scache_page_indexed)(unsigned long addr);
 
+<<<<<<< HEAD
 static void __cpuinit r4k_blast_scache_page_indexed_setup(void)
+=======
+static void r4k_blast_scache_page_indexed_setup(void)
+>>>>>>> v3.18
 {
 	unsigned long sc_lsize = cpu_scache_line_size();
 
@@ -327,7 +487,11 @@ static void __cpuinit r4k_blast_scache_page_indexed_setup(void)
 
 static void (* r4k_blast_scache)(void);
 
+<<<<<<< HEAD
 static void __cpuinit r4k_blast_scache_setup(void)
+=======
+static void r4k_blast_scache_setup(void)
+>>>>>>> v3.18
 {
 	unsigned long sc_lsize = cpu_scache_line_size();
 
@@ -345,6 +509,7 @@ static void __cpuinit r4k_blast_scache_setup(void)
 
 static inline void local_r4k___flush_cache_all(void * args)
 {
+<<<<<<< HEAD
 #if defined(CONFIG_CPU_LOONGSON2)
 	r4k_blast_scache();
 	return;
@@ -353,6 +518,11 @@ static inline void local_r4k___flush_cache_all(void * args)
 	r4k_blast_icache();
 
 	switch (current_cpu_type()) {
+=======
+	switch (current_cpu_type()) {
+	case CPU_LOONGSON2:
+	case CPU_LOONGSON3:
+>>>>>>> v3.18
 	case CPU_R4000SC:
 	case CPU_R4000MC:
 	case CPU_R4400SC:
@@ -360,7 +530,22 @@ static inline void local_r4k___flush_cache_all(void * args)
 	case CPU_R10000:
 	case CPU_R12000:
 	case CPU_R14000:
+<<<<<<< HEAD
 		r4k_blast_scache();
+=======
+		/*
+		 * These caches are inclusive caches, that is, if something
+		 * is not cached in the S-cache, we know it also won't be
+		 * in one of the primary caches.
+		 */
+		r4k_blast_scache();
+		break;
+
+	default:
+		r4k_blast_dcache();
+		r4k_blast_icache();
+		break;
+>>>>>>> v3.18
 	}
 }
 
@@ -371,7 +556,11 @@ static void r4k___flush_cache_all(void)
 
 static inline int has_valid_asid(const struct mm_struct *mm)
 {
+<<<<<<< HEAD
 #if defined(CONFIG_MIPS_MT_SMP) || defined(CONFIG_MIPS_MT_SMTC)
+=======
+#ifdef CONFIG_MIPS_MT_SMP
+>>>>>>> v3.18
 	int i;
 
 	for_each_online_cpu(i)
@@ -506,7 +695,12 @@ static inline void local_r4k_flush_cache_page(void *args)
 	}
 
 	if (cpu_has_dc_aliases || (exec && !cpu_has_ic_fills_f_dc)) {
+<<<<<<< HEAD
 		r4k_blast_dcache_page(addr);
+=======
+		vaddr ? r4k_blast_dcache_page(addr) :
+			r4k_blast_dcache_user_page(addr);
+>>>>>>> v3.18
 		if (exec && !cpu_icache_snoops_remote_store)
 			r4k_blast_scache_page(addr);
 	}
@@ -517,7 +711,12 @@ static inline void local_r4k_flush_cache_page(void *args)
 			if (cpu_context(cpu, mm) != 0)
 				drop_mmu_context(mm, cpu);
 		} else
+<<<<<<< HEAD
 			r4k_blast_icache_page(addr);
+=======
+			vaddr ? r4k_blast_icache_page(addr) :
+				r4k_blast_icache_user_page(addr);
+>>>>>>> v3.18
 	}
 
 	if (vaddr) {
@@ -571,8 +770,33 @@ static inline void local_r4k_flush_icache_range(unsigned long start, unsigned lo
 
 	if (end - start > icache_size)
 		r4k_blast_icache();
+<<<<<<< HEAD
 	else
 		protected_blast_icache_range(start, end);
+=======
+	else {
+		switch (boot_cpu_type()) {
+		case CPU_LOONGSON2:
+			protected_loongson2_blast_icache_range(start, end);
+			break;
+
+		default:
+			protected_blast_icache_range(start, end);
+			break;
+		}
+	}
+#ifdef CONFIG_EVA
+	/*
+	 * Due to all possible segment mappings, there might cache aliases
+	 * caused by the bootloader being in non-EVA mode, and the CPU switching
+	 * to EVA during early kernel init. It's best to flush the scache
+	 * to avoid having secondary cores fetching stale data and lead to
+	 * kernel crashes.
+	 */
+	bc_wback_inv(start, (end - start));
+	__sync();
+#endif
+>>>>>>> v3.18
 }
 
 static inline void local_r4k_flush_icache_range_ipi(void *args)
@@ -595,7 +819,11 @@ static void r4k_flush_icache_range(unsigned long start, unsigned long end)
 	instruction_hazard();
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_DMA_NONCOHERENT
+=======
+#if defined(CONFIG_DMA_NONCOHERENT) || defined(CONFIG_DMA_MAYBE_COHERENT)
+>>>>>>> v3.18
 
 static void r4k_dma_cache_wback_inv(unsigned long addr, unsigned long size)
 {
@@ -666,7 +894,11 @@ static void r4k_dma_cache_inv(unsigned long addr, unsigned long size)
 	bc_inv(addr, size);
 	__sync();
 }
+<<<<<<< HEAD
 #endif /* CONFIG_DMA_NONCOHERENT */
+=======
+#endif /* CONFIG_DMA_NONCOHERENT || CONFIG_DMA_MAYBE_COHERENT */
+>>>>>>> v3.18
 
 /*
  * While we're protected against bad userland addresses we don't care
@@ -787,12 +1019,19 @@ static inline void rm7k_erratum31(void)
 
 static inline void alias_74k_erratum(struct cpuinfo_mips *c)
 {
+<<<<<<< HEAD
+=======
+	unsigned int imp = c->processor_id & PRID_IMP_MASK;
+	unsigned int rev = c->processor_id & PRID_REV_MASK;
+
+>>>>>>> v3.18
 	/*
 	 * Early versions of the 74K do not update the cache tags on a
 	 * vtag miss/ptag hit which can occur in the case of KSEG0/KUSEG
 	 * aliases. In this case it is better to treat the cache as always
 	 * having aliases.
 	 */
+<<<<<<< HEAD
 	if ((c->processor_id & 0xff) <= PRID_REV_ENCODE_332(2, 4, 0))
 		c->dcache.flags |= MIPS_CACHE_VTAG;
 	if ((c->processor_id & 0xff) == PRID_REV_ENCODE_332(2, 4, 0))
@@ -809,6 +1048,31 @@ static char *way_string[] __cpuinitdata = { NULL, "direct mapped", "2-way",
 };
 
 static void __cpuinit probe_pcache(void)
+=======
+	switch (imp) {
+	case PRID_IMP_74K:
+		if (rev <= PRID_REV_ENCODE_332(2, 4, 0))
+			c->dcache.flags |= MIPS_CACHE_VTAG;
+		if (rev == PRID_REV_ENCODE_332(2, 4, 0))
+			write_c0_config6(read_c0_config6() | MIPS_CONF6_SYND);
+		break;
+	case PRID_IMP_1074K:
+		if (rev <= PRID_REV_ENCODE_332(1, 1, 0)) {
+			c->dcache.flags |= MIPS_CACHE_VTAG;
+			write_c0_config6(read_c0_config6() | MIPS_CONF6_SYND);
+		}
+		break;
+	default:
+		BUG();
+	}
+}
+
+static char *way_string[] = { NULL, "direct mapped", "2-way",
+	"3-way", "4-way", "5-way", "6-way", "7-way", "8-way"
+};
+
+static void probe_pcache(void)
+>>>>>>> v3.18
 {
 	struct cpuinfo_mips *c = &current_cpu_data;
 	unsigned int config = read_c0_config();
@@ -816,7 +1080,11 @@ static void __cpuinit probe_pcache(void)
 	unsigned long config1;
 	unsigned int lsize;
 
+<<<<<<< HEAD
 	switch (c->cputype) {
+=======
+	switch (current_cpu_type()) {
+>>>>>>> v3.18
 	case CPU_R4600:			/* QED style two way caches? */
 	case CPU_R4700:
 	case CPU_R5000:
@@ -978,6 +1246,51 @@ static void __cpuinit probe_pcache(void)
 		c->dcache.waybit = 0;
 		break;
 
+<<<<<<< HEAD
+=======
+	case CPU_LOONGSON3:
+		config1 = read_c0_config1();
+		lsize = (config1 >> 19) & 7;
+		if (lsize)
+			c->icache.linesz = 2 << lsize;
+		else
+			c->icache.linesz = 0;
+		c->icache.sets = 64 << ((config1 >> 22) & 7);
+		c->icache.ways = 1 + ((config1 >> 16) & 7);
+		icache_size = c->icache.sets *
+					  c->icache.ways *
+					  c->icache.linesz;
+		c->icache.waybit = 0;
+
+		lsize = (config1 >> 10) & 7;
+		if (lsize)
+			c->dcache.linesz = 2 << lsize;
+		else
+			c->dcache.linesz = 0;
+		c->dcache.sets = 64 << ((config1 >> 13) & 7);
+		c->dcache.ways = 1 + ((config1 >> 7) & 7);
+		dcache_size = c->dcache.sets *
+					  c->dcache.ways *
+					  c->dcache.linesz;
+		c->dcache.waybit = 0;
+		break;
+
+	case CPU_CAVIUM_OCTEON3:
+		/* For now lie about the number of ways. */
+		c->icache.linesz = 128;
+		c->icache.sets = 16;
+		c->icache.ways = 8;
+		c->icache.flags |= MIPS_CACHE_VTAG;
+		icache_size = c->icache.sets * c->icache.ways * c->icache.linesz;
+
+		c->dcache.linesz = 128;
+		c->dcache.ways = 8;
+		c->dcache.sets = 8;
+		dcache_size = c->dcache.sets * c->dcache.ways * c->dcache.linesz;
+		c->options |= MIPS_CPU_PREFETCH;
+		break;
+
+>>>>>>> v3.18
 	default:
 		if (!(config & MIPS_CONF_M))
 			panic("Don't know how to probe P-caches on this cpu.");
@@ -988,10 +1301,21 @@ static void __cpuinit probe_pcache(void)
 		 */
 		config1 = read_c0_config1();
 
+<<<<<<< HEAD
 		if ((lsize = ((config1 >> 19) & 7)))
 			c->icache.linesz = 2 << lsize;
 		else
 			c->icache.linesz = lsize;
+=======
+		lsize = (config1 >> 19) & 7;
+
+		/* IL == 7 is reserved */
+		if (lsize == 7)
+			panic("Invalid icache line size");
+
+		c->icache.linesz = lsize ? 2 << lsize : 0;
+
+>>>>>>> v3.18
 		c->icache.sets = 32 << (((config1 >> 22) + 1) & 7);
 		c->icache.ways = 1 + ((config1 >> 16) & 7);
 
@@ -1008,10 +1332,21 @@ static void __cpuinit probe_pcache(void)
 		 */
 		c->dcache.flags = 0;
 
+<<<<<<< HEAD
 		if ((lsize = ((config1 >> 10) & 7)))
 			c->dcache.linesz = 2 << lsize;
 		else
 			c->dcache.linesz= lsize;
+=======
+		lsize = (config1 >> 10) & 7;
+
+		/* DL == 7 is reserved */
+		if (lsize == 7)
+			panic("Invalid dcache line size");
+
+		c->dcache.linesz = lsize ? 2 << lsize : 0;
+
+>>>>>>> v3.18
 		c->dcache.sets = 32 << (((config1 >> 13) + 1) & 7);
 		c->dcache.ways = 1 + ((config1 >> 7) & 7);
 
@@ -1032,7 +1367,12 @@ static void __cpuinit probe_pcache(void)
 	 * presumably no vendor is shipping his hardware in the "bad"
 	 * configuration.
 	 */
+<<<<<<< HEAD
 	if ((prid & 0xff00) == PRID_IMP_R4000 && (prid & 0xff) < 0x40 &&
+=======
+	if ((prid & PRID_IMP_MASK) == PRID_IMP_R4000 &&
+	    (prid & PRID_REV_MASK) < PRID_REV_R4400 &&
+>>>>>>> v3.18
 	    !(config & CONF_SC) && c->icache.linesz != 16 &&
 	    PAGE_SIZE <= 0x8000)
 		panic("Improper R4000SC processor configuration detected");
@@ -1052,7 +1392,11 @@ static void __cpuinit probe_pcache(void)
 	 * normally they'd suffer from aliases but magic in the hardware deals
 	 * with that for us so we don't need to take care ourselves.
 	 */
+<<<<<<< HEAD
 	switch (c->cputype) {
+=======
+	switch (current_cpu_type()) {
+>>>>>>> v3.18
 	case CPU_20KC:
 	case CPU_25KF:
 	case CPU_SB1:
@@ -1066,10 +1410,18 @@ static void __cpuinit probe_pcache(void)
 	case CPU_R14000:
 		break;
 
+<<<<<<< HEAD
+=======
+	case CPU_74K:
+	case CPU_1074K:
+		alias_74k_erratum(c);
+		/* Fall through. */
+>>>>>>> v3.18
 	case CPU_M14KC:
 	case CPU_M14KEC:
 	case CPU_24K:
 	case CPU_34K:
+<<<<<<< HEAD
 	case CPU_74K:
 	case CPU_1004K:
 		if (c->cputype == CPU_74K)
@@ -1077,6 +1429,21 @@ static void __cpuinit probe_pcache(void)
 		if ((read_c0_config7() & (1 << 16))) {
 			/* effectively physically indexed dcache,
 			   thus no virtual aliases. */
+=======
+	case CPU_1004K:
+	case CPU_INTERAPTIV:
+	case CPU_P5600:
+	case CPU_PROAPTIV:
+	case CPU_M5150:
+		if (!(read_c0_config7() & MIPS_CONF7_IAR) &&
+		    (c->icache.waysize > PAGE_SIZE))
+			c->icache.flags |= MIPS_CACHE_ALIASES;
+		if (read_c0_config7() & MIPS_CONF7_AR) {
+			/*
+			 * Effectively physically indexed dcache,
+			 * thus no virtual aliases.
+			*/
+>>>>>>> v3.18
 			c->dcache.flags |= MIPS_CACHE_PINDEX;
 			break;
 		}
@@ -1085,7 +1452,11 @@ static void __cpuinit probe_pcache(void)
 			c->dcache.flags |= MIPS_CACHE_ALIASES;
 	}
 
+<<<<<<< HEAD
 	switch (c->cputype) {
+=======
+	switch (current_cpu_type()) {
+>>>>>>> v3.18
 	case CPU_20KC:
 		/*
 		 * Some older 20Kc chips doesn't have the 'VI' bit in
@@ -1097,6 +1468,7 @@ static void __cpuinit probe_pcache(void)
 	case CPU_ALCHEMY:
 		c->icache.flags |= MIPS_CACHE_IC_F_DC;
 		break;
+<<<<<<< HEAD
 	}
 
 #ifdef	CONFIG_CPU_LOONGSON2
@@ -1106,6 +1478,16 @@ static void __cpuinit probe_pcache(void)
 	 */
 	c->icache.ways = 1;
 #endif
+=======
+
+	case CPU_LOONGSON2:
+		/*
+		 * LOONGSON2 has 4 way icache, but when using indexed cache op,
+		 * one op will act on all 4 ways
+		 */
+		c->icache.ways = 1;
+	}
+>>>>>>> v3.18
 
 	printk("Primary instruction cache %ldkB, %s, %s, linesize %d bytes.\n",
 	       icache_size >> 10,
@@ -1126,7 +1508,11 @@ static void __cpuinit probe_pcache(void)
  * executes in KSEG1 space or else you will crash and burn badly.  You have
  * been warned.
  */
+<<<<<<< HEAD
 static int __cpuinit probe_scache(void)
+=======
+static int probe_scache(void)
+>>>>>>> v3.18
 {
 	unsigned long flags, addr, begin, end, pow2;
 	unsigned int config = read_c0_config();
@@ -1181,7 +1567,10 @@ static int __cpuinit probe_scache(void)
 	return 1;
 }
 
+<<<<<<< HEAD
 #if defined(CONFIG_CPU_LOONGSON2)
+=======
+>>>>>>> v3.18
 static void __init loongson2_sc_init(void)
 {
 	struct cpuinfo_mips *c = &current_cpu_data;
@@ -1197,13 +1586,47 @@ static void __init loongson2_sc_init(void)
 
 	c->options |= MIPS_CPU_INCLUSIVE_CACHES;
 }
+<<<<<<< HEAD
 #endif
+=======
+
+static void __init loongson3_sc_init(void)
+{
+	struct cpuinfo_mips *c = &current_cpu_data;
+	unsigned int config2, lsize;
+
+	config2 = read_c0_config2();
+	lsize = (config2 >> 4) & 15;
+	if (lsize)
+		c->scache.linesz = 2 << lsize;
+	else
+		c->scache.linesz = 0;
+	c->scache.sets = 64 << ((config2 >> 8) & 15);
+	c->scache.ways = 1 + (config2 & 15);
+
+	scache_size = c->scache.sets *
+				  c->scache.ways *
+				  c->scache.linesz;
+	/* Loongson-3 has 4 cores, 1MB scache for each. scaches are shared */
+	scache_size *= 4;
+	c->scache.waybit = 0;
+	pr_info("Unified secondary cache %ldkB %s, linesize %d bytes.\n",
+	       scache_size >> 10, way_string[c->scache.ways], c->scache.linesz);
+	if (scache_size)
+		c->options |= MIPS_CPU_INCLUSIVE_CACHES;
+	return;
+}
+>>>>>>> v3.18
 
 extern int r5k_sc_init(void);
 extern int rm7k_sc_init(void);
 extern int mips_sc_init(void);
 
+<<<<<<< HEAD
 static void __cpuinit setup_scache(void)
+=======
+static void setup_scache(void)
+>>>>>>> v3.18
 {
 	struct cpuinfo_mips *c = &current_cpu_data;
 	unsigned int config = read_c0_config();
@@ -1214,7 +1637,11 @@ static void __cpuinit setup_scache(void)
 	 * processors don't have a S-cache that would be relevant to the
 	 * Linux memory management.
 	 */
+<<<<<<< HEAD
 	switch (c->cputype) {
+=======
+	switch (current_cpu_type()) {
+>>>>>>> v3.18
 	case CPU_R4000SC:
 	case CPU_R4000MC:
 	case CPU_R4400SC:
@@ -1247,11 +1674,23 @@ static void __cpuinit setup_scache(void)
 #endif
 		return;
 
+<<<<<<< HEAD
 #if defined(CONFIG_CPU_LOONGSON2)
 	case CPU_LOONGSON2:
 		loongson2_sc_init();
 		return;
 #endif
+=======
+	case CPU_LOONGSON2:
+		loongson2_sc_init();
+		return;
+
+	case CPU_LOONGSON3:
+		loongson3_sc_init();
+		return;
+
+	case CPU_CAVIUM_OCTEON3:
+>>>>>>> v3.18
 	case CPU_XLP:
 		/* don't need to worry about L2, fully coherent */
 		return;
@@ -1336,7 +1775,11 @@ static void nxp_pr4450_fixup_config(void)
 	NXP_BARRIER();
 }
 
+<<<<<<< HEAD
 static int __cpuinitdata cca = -1;
+=======
+static int cca = -1;
+>>>>>>> v3.18
 
 static int __init cca_setup(char *str)
 {
@@ -1347,7 +1790,11 @@ static int __init cca_setup(char *str)
 
 early_param("cca", cca_setup);
 
+<<<<<<< HEAD
 static void __cpuinit coherency_setup(void)
+=======
+static void coherency_setup(void)
+>>>>>>> v3.18
 {
 	if (cca < 0 || cca > 7)
 		cca = read_c0_config() & CONF_CM_CMASK;
@@ -1387,6 +1834,7 @@ static void __cpuinit coherency_setup(void)
 	}
 }
 
+<<<<<<< HEAD
 static void __cpuinit r4k_cache_error_setup(void)
 {
 	extern char __weak except_vec2_generic;
@@ -1394,6 +1842,14 @@ static void __cpuinit r4k_cache_error_setup(void)
 	struct cpuinfo_mips *c = &current_cpu_data;
 
 	switch (c->cputype) {
+=======
+static void r4k_cache_error_setup(void)
+{
+	extern char __weak except_vec2_generic;
+	extern char __weak except_vec2_sb1;
+
+	switch (current_cpu_type()) {
+>>>>>>> v3.18
 	case CPU_SB1:
 	case CPU_SB1A:
 		set_uncached_handler(0x100, &except_vec2_sb1, 0x80);
@@ -1405,7 +1861,11 @@ static void __cpuinit r4k_cache_error_setup(void)
 	}
 }
 
+<<<<<<< HEAD
 void __cpuinit r4k_cache_init(void)
+=======
+void r4k_cache_init(void)
+>>>>>>> v3.18
 {
 	extern void build_clear_page(void);
 	extern void build_copy_page(void);
@@ -1423,6 +1883,13 @@ void __cpuinit r4k_cache_init(void)
 	r4k_blast_scache_page_setup();
 	r4k_blast_scache_page_indexed_setup();
 	r4k_blast_scache_setup();
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_EVA
+	r4k_blast_dcache_user_page_setup();
+	r4k_blast_icache_user_page_setup();
+#endif
+>>>>>>> v3.18
 
 	/*
 	 * Some MIPS32 and MIPS64 processors have physically indexed caches.
@@ -1454,7 +1921,11 @@ void __cpuinit r4k_cache_init(void)
 	flush_icache_range	= r4k_flush_icache_range;
 	local_flush_icache_range	= local_r4k_flush_icache_range;
 
+<<<<<<< HEAD
 #if defined(CONFIG_DMA_NONCOHERENT)
+=======
+#if defined(CONFIG_DMA_NONCOHERENT) || defined(CONFIG_DMA_MAYBE_COHERENT)
+>>>>>>> v3.18
 	if (coherentio) {
 		_dma_cache_wback_inv	= (void *)cache_noop;
 		_dma_cache_wback	= (void *)cache_noop;
@@ -1479,3 +1950,29 @@ void __cpuinit r4k_cache_init(void)
 	coherency_setup();
 	board_cache_error_setup = r4k_cache_error_setup;
 }
+<<<<<<< HEAD
+=======
+
+static int r4k_cache_pm_notifier(struct notifier_block *self, unsigned long cmd,
+			       void *v)
+{
+	switch (cmd) {
+	case CPU_PM_ENTER_FAILED:
+	case CPU_PM_EXIT:
+		coherency_setup();
+		break;
+	}
+
+	return NOTIFY_OK;
+}
+
+static struct notifier_block r4k_cache_pm_notifier_block = {
+	.notifier_call = r4k_cache_pm_notifier,
+};
+
+int __init r4k_cache_init_pm(void)
+{
+	return cpu_pm_register_notifier(&r4k_cache_pm_notifier_block);
+}
+arch_initcall(r4k_cache_init_pm);
+>>>>>>> v3.18

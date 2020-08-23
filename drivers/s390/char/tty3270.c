@@ -125,10 +125,14 @@ static void tty3270_resize_work(struct work_struct *work);
  */
 static void tty3270_set_timer(struct tty3270 *tp, int expires)
 {
+<<<<<<< HEAD
 	if (expires == 0)
 		del_timer(&tp->timer);
 	else
 		mod_timer(&tp->timer, jiffies + expires);
+=======
+	mod_timer(&tp->timer, jiffies + expires);
+>>>>>>> v3.18
 }
 
 /*
@@ -744,7 +748,10 @@ tty3270_free_view(struct tty3270 *tp)
 {
 	int pages;
 
+<<<<<<< HEAD
 	del_timer_sync(&tp->timer);
+=======
+>>>>>>> v3.18
 	kbd_free(tp->kbd);
 	raw3270_request_free(tp->kreset);
 	raw3270_request_free(tp->read);
@@ -810,7 +817,11 @@ static void tty3270_resize_work(struct work_struct *work)
 	struct winsize ws;
 
 	screen = tty3270_alloc_screen(tp->n_rows, tp->n_cols);
+<<<<<<< HEAD
 	if (!screen)
+=======
+	if (IS_ERR(screen))
+>>>>>>> v3.18
 		return;
 	/* Switch to new output size */
 	spin_lock_bh(&tp->view.lock);
@@ -877,6 +888,10 @@ tty3270_free(struct raw3270_view *view)
 {
 	struct tty3270 *tp = container_of(view, struct tty3270, view);
 
+<<<<<<< HEAD
+=======
+	del_timer_sync(&tp->timer);
+>>>>>>> v3.18
 	tty3270_free_screen(tp->screen, tp->view.rows);
 	tty3270_free_view(tp);
 }
@@ -1845,17 +1860,29 @@ static const struct tty_operations tty3270_ops = {
 	.set_termios = tty3270_set_termios
 };
 
+<<<<<<< HEAD
 void tty3270_create_cb(int minor)
+=======
+static void tty3270_create_cb(int minor)
+>>>>>>> v3.18
 {
 	tty_register_device(tty3270_driver, minor - RAW3270_FIRSTMINOR, NULL);
 }
 
+<<<<<<< HEAD
 void tty3270_destroy_cb(int minor)
+=======
+static void tty3270_destroy_cb(int minor)
+>>>>>>> v3.18
 {
 	tty_unregister_device(tty3270_driver, minor - RAW3270_FIRSTMINOR);
 }
 
+<<<<<<< HEAD
 struct raw3270_notifier tty3270_notifier =
+=======
+static struct raw3270_notifier tty3270_notifier =
+>>>>>>> v3.18
 {
 	.create = tty3270_create_cb,
 	.destroy = tty3270_destroy_cb,

@@ -75,10 +75,13 @@ enum tis_defaults {
 #define	TPM_DID_VID(l)			(0x0F00 | ((l) << 12))
 #define	TPM_RID(l)			(0x0F04 | ((l) << 12))
 
+<<<<<<< HEAD
 struct priv_data {
 	bool irq_tested;
 };
 
+=======
+>>>>>>> v3.18
 static LIST_HEAD(tis_chips);
 static DEFINE_MUTEX(tis_lock);
 
@@ -342,6 +345,7 @@ out_err:
 	return rc;
 }
 
+<<<<<<< HEAD
 static void disable_interrupts(struct tpm_chip *chip)
 {
 	u32 intmask;
@@ -357,12 +361,18 @@ static void disable_interrupts(struct tpm_chip *chip)
 	chip->vendor.irq = 0;
 }
 
+=======
+>>>>>>> v3.18
 /*
  * If interrupts are used (signaled by an irq set in the vendor structure)
  * tpm.c can skip polling for the data to be available as the interrupt is
  * waited for here
  */
+<<<<<<< HEAD
 static int tpm_tis_send_main(struct tpm_chip *chip, u8 *buf, size_t len)
+=======
+static int tpm_tis_send(struct tpm_chip *chip, u8 *buf, size_t len)
+>>>>>>> v3.18
 {
 	int rc;
 	u32 ordinal;
@@ -392,6 +402,7 @@ out_err:
 	return rc;
 }
 
+<<<<<<< HEAD
 static int tpm_tis_send(struct tpm_chip *chip, u8 *buf, size_t len)
 {
 	int rc, irq;
@@ -416,6 +427,8 @@ static int tpm_tis_send(struct tpm_chip *chip, u8 *buf, size_t len)
 	return rc;
 }
 
+=======
+>>>>>>> v3.18
 struct tis_vendor_timeout_override {
 	u32 did_vid;
 	unsigned long timeout_us[4];
@@ -505,6 +518,7 @@ static bool tpm_tis_req_canceled(struct tpm_chip *chip, u8 status)
 	}
 }
 
+<<<<<<< HEAD
 static const struct file_operations tis_ops = {
 	.owner = THIS_MODULE,
 	.llseek = no_llseek,
@@ -544,6 +558,9 @@ static struct attribute_group tis_attr_grp = {
 };
 
 static struct tpm_vendor_specific tpm_tis = {
+=======
+static const struct tpm_class_ops tpm_tis = {
+>>>>>>> v3.18
 	.status = tpm_tis_status,
 	.recv = tpm_tis_recv,
 	.send = tpm_tis_send,
@@ -552,9 +569,12 @@ static struct tpm_vendor_specific tpm_tis = {
 	.req_complete_mask = TPM_STS_DATA_AVAIL | TPM_STS_VALID,
 	.req_complete_val = TPM_STS_DATA_AVAIL | TPM_STS_VALID,
 	.req_canceled = tpm_tis_req_canceled,
+<<<<<<< HEAD
 	.attr_group = &tis_attr_grp,
 	.miscdev = {
 		    .fops = &tis_ops,},
+=======
+>>>>>>> v3.18
 };
 
 static irqreturn_t tis_int_probe(int irq, void *dev_id)
@@ -589,7 +609,10 @@ static irqreturn_t tis_int_handler(int dummy, void *dev_id)
 	if (interrupt == 0)
 		return IRQ_NONE;
 
+<<<<<<< HEAD
 	((struct priv_data *)chip->vendor.priv)->irq_tested = true;
+=======
+>>>>>>> v3.18
 	if (interrupt & TPM_INTF_DATA_AVAIL_INT)
 		wake_up_interruptible(&chip->vendor.read_queue);
 	if (interrupt & TPM_INTF_LOCALITY_CHANGE_INT)
@@ -619,6 +642,7 @@ static int tpm_tis_init(struct device *dev, resource_size_t start,
 	u32 vendor, intfcaps, intmask;
 	int rc, i, irq_s, irq_e, probe;
 	struct tpm_chip *chip;
+<<<<<<< HEAD
 	struct priv_data *priv;
 
 	priv = devm_kzalloc(dev, sizeof(struct priv_data), GFP_KERNEL);
@@ -627,6 +651,11 @@ static int tpm_tis_init(struct device *dev, resource_size_t start,
 	if (!(chip = tpm_register_hardware(dev, &tpm_tis)))
 		return -ENODEV;
 	chip->vendor.priv = priv;
+=======
+
+	if (!(chip = tpm_register_hardware(dev, &tpm_tis)))
+		return -ENODEV;
+>>>>>>> v3.18
 
 	chip->vendor.iobase = ioremap(start, len);
 	if (!chip->vendor.iobase) {
@@ -695,6 +724,22 @@ static int tpm_tis_init(struct device *dev, resource_size_t start,
 	if (intfcaps & TPM_INTF_DATA_AVAIL_INT)
 		dev_dbg(dev, "\tData Avail Int Support\n");
 
+<<<<<<< HEAD
+=======
+	/* get the timeouts before testing for irqs */
+	if (tpm_get_timeouts(chip)) {
+		dev_err(dev, "Could not get TPM timeouts and durations\n");
+		rc = -ENODEV;
+		goto out_err;
+	}
+
+	if (tpm_do_selftest(chip)) {
+		dev_err(dev, "TPM self test failed\n");
+		rc = -ENODEV;
+		goto out_err;
+	}
+
+>>>>>>> v3.18
 	/* INTERRUPT Setup */
 	init_waitqueue_head(&chip->vendor.read_queue);
 	init_waitqueue_head(&chip->vendor.int_queue);
@@ -796,6 +841,7 @@ static int tpm_tis_init(struct device *dev, resource_size_t start,
 		}
 	}
 
+<<<<<<< HEAD
 	if (tpm_get_timeouts(chip)) {
 		dev_err(dev, "Could not get TPM timeouts and durations\n");
 		rc = -ENODEV;
@@ -808,6 +854,8 @@ static int tpm_tis_init(struct device *dev, resource_size_t start,
 		goto out_err;
 	}
 
+=======
+>>>>>>> v3.18
 	INIT_LIST_HEAD(&chip->vendor.list);
 	mutex_lock(&tis_lock);
 	list_add(&chip->vendor.list, &tis_chips);
@@ -822,7 +870,11 @@ out_err:
 	return rc;
 }
 
+<<<<<<< HEAD
 #if defined(CONFIG_PNP) || defined(CONFIG_PM_SLEEP)
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 static void tpm_tis_reenable_interrupts(struct tpm_chip *chip)
 {
 	u32 intmask;
@@ -843,8 +895,30 @@ static void tpm_tis_reenable_interrupts(struct tpm_chip *chip)
 	iowrite32(intmask,
 		  chip->vendor.iobase + TPM_INT_ENABLE(chip->vendor.locality));
 }
+<<<<<<< HEAD
 #endif
 
+=======
+
+static int tpm_tis_resume(struct device *dev)
+{
+	struct tpm_chip *chip = dev_get_drvdata(dev);
+	int ret;
+
+	if (chip->vendor.irq)
+		tpm_tis_reenable_interrupts(chip);
+
+	ret = tpm_pm_resume(dev);
+	if (!ret)
+		tpm_do_selftest(chip);
+
+	return ret;
+}
+#endif
+
+static SIMPLE_DEV_PM_OPS(tpm_tis_pm, tpm_pm_suspend, tpm_tis_resume);
+
+>>>>>>> v3.18
 #ifdef CONFIG_PNP
 static int tpm_tis_pnp_init(struct pnp_dev *pnp_dev,
 				      const struct pnp_device_id *pnp_id)
@@ -866,6 +940,7 @@ static int tpm_tis_pnp_init(struct pnp_dev *pnp_dev,
 	return tpm_tis_init(&pnp_dev->dev, start, len, irq);
 }
 
+<<<<<<< HEAD
 static int tpm_tis_pnp_suspend(struct pnp_dev *dev, pm_message_t msg)
 {
 	return tpm_pm_suspend(&dev->dev);
@@ -886,6 +961,8 @@ static int tpm_tis_pnp_resume(struct pnp_dev *dev)
 	return ret;
 }
 
+=======
+>>>>>>> v3.18
 static struct pnp_device_id tpm_pnp_tbl[] = {
 	{"PNP0C31", 0},		/* TPM */
 	{"ATM1200", 0},		/* Atmel */
@@ -914,9 +991,16 @@ static struct pnp_driver tis_pnp_driver = {
 	.name = "tpm_tis",
 	.id_table = tpm_pnp_tbl,
 	.probe = tpm_tis_pnp_init,
+<<<<<<< HEAD
 	.suspend = tpm_tis_pnp_suspend,
 	.resume = tpm_tis_pnp_resume,
 	.remove = tpm_tis_pnp_remove,
+=======
+	.remove = tpm_tis_pnp_remove,
+	.driver	= {
+		.pm = &tpm_tis_pm,
+	},
+>>>>>>> v3.18
 };
 
 #define TIS_HID_USR_IDX sizeof(tpm_pnp_tbl)/sizeof(struct pnp_device_id) -2
@@ -925,6 +1009,7 @@ module_param_string(hid, tpm_pnp_tbl[TIS_HID_USR_IDX].id,
 MODULE_PARM_DESC(hid, "Set additional specific HID for this driver to probe");
 #endif
 
+<<<<<<< HEAD
 #ifdef CONFIG_PM_SLEEP
 static int tpm_tis_resume(struct device *dev)
 {
@@ -939,6 +1024,8 @@ static int tpm_tis_resume(struct device *dev)
 
 static SIMPLE_DEV_PM_OPS(tpm_tis_pm, tpm_pm_suspend, tpm_tis_resume);
 
+=======
+>>>>>>> v3.18
 static struct platform_driver tis_drv = {
 	.driver = {
 		.name = "tpm_tis",
@@ -963,12 +1050,28 @@ static int __init init_tis(void)
 	rc = platform_driver_register(&tis_drv);
 	if (rc < 0)
 		return rc;
+<<<<<<< HEAD
 	if (IS_ERR(pdev=platform_device_register_simple("tpm_tis", -1, NULL, 0)))
 		return PTR_ERR(pdev);
 	if((rc=tpm_tis_init(&pdev->dev, TIS_MEM_BASE, TIS_MEM_LEN, 0)) != 0) {
 		platform_device_unregister(pdev);
 		platform_driver_unregister(&tis_drv);
 	}
+=======
+	pdev = platform_device_register_simple("tpm_tis", -1, NULL, 0);
+	if (IS_ERR(pdev)) {
+		rc = PTR_ERR(pdev);
+		goto err_dev;
+	}
+	rc = tpm_tis_init(&pdev->dev, TIS_MEM_BASE, TIS_MEM_LEN, 0);
+	if (rc)
+		goto err_init;
+	return 0;
+err_init:
+	platform_device_unregister(pdev);
+err_dev:
+	platform_driver_unregister(&tis_drv);
+>>>>>>> v3.18
 	return rc;
 }
 

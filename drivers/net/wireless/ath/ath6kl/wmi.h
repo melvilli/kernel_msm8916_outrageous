@@ -898,7 +898,10 @@ struct wmi_start_scan_cmd {
  *  flags here
  */
 enum wmi_scan_ctrl_flags_bits {
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 	/* set if can scan in the connect cmd */
 	CONNECT_SCAN_CTRL_FLAGS = 0x01,
 
@@ -1068,7 +1071,11 @@ struct wmi_power_mode_cmd {
 } __packed;
 
 /*
+<<<<<<< HEAD
  * Policy to determnine whether power save failure event should be sent to
+=======
+ * Policy to determine whether power save failure event should be sent to
+>>>>>>> v3.18
  * host during scanning
  */
 enum power_save_fail_event_policy {
@@ -2617,7 +2624,11 @@ int ath6kl_wmi_addkey_cmd(struct wmi *wmi, u8 if_idx, u8 key_index,
 			  u8 *key_material,
 			  u8 key_op_ctrl, u8 *mac_addr,
 			  enum wmi_sync_flag sync_flag);
+<<<<<<< HEAD
 int ath6kl_wmi_add_krk_cmd(struct wmi *wmi, u8 if_idx, u8 *krk);
+=======
+int ath6kl_wmi_add_krk_cmd(struct wmi *wmi, u8 if_idx, const u8 *krk);
+>>>>>>> v3.18
 int ath6kl_wmi_deletekey_cmd(struct wmi *wmi, u8 if_idx, u8 key_index);
 int ath6kl_wmi_setpmkid_cmd(struct wmi *wmi, u8 if_idx, const u8 *bssid,
 			    const u8 *pmkid, bool set);
@@ -2633,7 +2644,11 @@ int ath6kl_wmi_set_htcap_cmd(struct wmi *wmi, u8 if_idx,
 			     struct ath6kl_htcap *htcap);
 int ath6kl_wmi_test_cmd(struct wmi *wmi, void *buf, size_t len);
 
+<<<<<<< HEAD
 s32 ath6kl_wmi_get_rate(s8 rate_index);
+=======
+s32 ath6kl_wmi_get_rate(struct wmi *wmi, s8 rate_index);
+>>>>>>> v3.18
 
 int ath6kl_wmi_set_ip_cmd(struct wmi *wmi, u8 if_idx,
 			  __be32 ips0, __be32 ips1);

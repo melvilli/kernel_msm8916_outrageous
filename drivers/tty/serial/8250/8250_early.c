@@ -35,6 +35,7 @@
 #include <linux/serial_8250.h>
 #include <asm/io.h>
 #include <asm/serial.h>
+<<<<<<< HEAD
 #ifdef CONFIG_FIX_EARLYCON_MEM
 #include <asm/pgtable.h>
 #include <asm/fixmap.h>
@@ -47,6 +48,10 @@ struct early_serial8250_device {
 };
 
 static struct early_serial8250_device early_device;
+=======
+
+static struct earlycon_device *early_device;
+>>>>>>> v3.18
 
 unsigned int __weak __init serial8250_early_in(struct uart_port *port, int offset)
 {
@@ -100,7 +105,11 @@ static void __init serial_putc(struct uart_port *port, int c)
 static void __init early_serial8250_write(struct console *console,
 					const char *s, unsigned int count)
 {
+<<<<<<< HEAD
 	struct uart_port *port = &early_device.port;
+=======
+	struct uart_port *port = &early_device->port;
+>>>>>>> v3.18
 	unsigned int ier;
 
 	/* Save the IER and disable interrupts */
@@ -129,7 +138,11 @@ static unsigned int __init probe_baud(struct uart_port *port)
 	return (port->uartclk / 16) / quot;
 }
 
+<<<<<<< HEAD
 static void __init init_port(struct early_serial8250_device *device)
+=======
+static void __init init_port(struct earlycon_device *device)
+>>>>>>> v3.18
 {
 	struct uart_port *port = &device->port;
 	unsigned int divisor;
@@ -148,6 +161,7 @@ static void __init init_port(struct early_serial8250_device *device)
 	serial8250_early_out(port, UART_LCR, c & ~UART_LCR_DLAB);
 }
 
+<<<<<<< HEAD
 static int __init parse_options(struct early_serial8250_device *device,
 								char *options)
 {
@@ -259,16 +273,56 @@ int __init setup_early_serial8250_console(char *cmdline)
 	register_console(&early_serial8250_console);
 
 	return 0;
+=======
+static int __init early_serial8250_setup(struct earlycon_device *device,
+					 const char *options)
+{
+	if (!(device->port.membase || device->port.iobase))
+		return 0;
+
+	if (!device->baud) {
+		device->baud = probe_baud(&device->port);
+		snprintf(device->options, sizeof(device->options), "%u",
+			 device->baud);
+	}
+
+	init_port(device);
+
+	early_device = device;
+	device->con->write = early_serial8250_write;
+	return 0;
+}
+EARLYCON_DECLARE(uart8250, early_serial8250_setup);
+EARLYCON_DECLARE(uart, early_serial8250_setup);
+
+int __init setup_early_serial8250_console(char *cmdline)
+{
+	char match[] = "uart8250";
+
+	if (cmdline && cmdline[4] == ',')
+		match[4] = '\0';
+
+	return setup_earlycon(cmdline, match, early_serial8250_setup);
+>>>>>>> v3.18
 }
 
 int serial8250_find_port_for_earlycon(void)
 {
+<<<<<<< HEAD
 	struct early_serial8250_device *device = &early_device;
 	struct uart_port *port = &device->port;
 	int line;
 	int ret;
 
 	if (!device->port.membase && !device->port.iobase)
+=======
+	struct earlycon_device *device = early_device;
+	struct uart_port *port = device ? &device->port : NULL;
+	int line;
+	int ret;
+
+	if (!port || (!port->membase && !port->iobase))
+>>>>>>> v3.18
 		return -ENODEV;
 
 	line = serial8250_find_port(port);
@@ -283,5 +337,8 @@ int serial8250_find_port_for_earlycon(void)
 
 	return ret;
 }
+<<<<<<< HEAD
 
 early_param("earlycon", setup_early_serial8250_console);
+=======
+>>>>>>> v3.18

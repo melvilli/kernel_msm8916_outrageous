@@ -166,12 +166,21 @@ static struct xmit_frame *dequeue_one_xmitframe(struct xmit_priv *pxmitpriv,
 	struct list_head *xmitframe_plist, *xmitframe_phead;
 	struct	xmit_frame *pxmitframe = NULL;
 
+<<<<<<< HEAD
 	xmitframe_phead = get_list_head(pframe_queue);
 	xmitframe_plist = get_next(xmitframe_phead);
 	if ((end_of_queue_search(xmitframe_phead, xmitframe_plist)) == false) {
 		pxmitframe = LIST_CONTAINOR(xmitframe_plist,
 			     struct xmit_frame, list);
 		list_delete(&pxmitframe->list);
+=======
+	xmitframe_phead = &pframe_queue->queue;
+	xmitframe_plist = xmitframe_phead->next;
+	if ((end_of_queue_search(xmitframe_phead, xmitframe_plist)) == false) {
+		pxmitframe = LIST_CONTAINOR(xmitframe_plist,
+			     struct xmit_frame, list);
+		list_del_init(&pxmitframe->list);
+>>>>>>> v3.18
 		ptxservq->qcnt--;
 		phwxmit->txcmdcnt++;
 	}
@@ -210,8 +219,13 @@ static struct xmit_frame *dequeue_xframe_ex(struct xmit_priv *pxmitpriv,
 	spin_lock_irqsave(&pxmitpriv->lock, irqL0);
 	for (i = 0; i < entry; i++) {
 		phwxmit = phwxmit_i + inx[i];
+<<<<<<< HEAD
 		sta_phead = get_list_head(phwxmit->sta_queue);
 		sta_plist = get_next(sta_phead);
+=======
+		sta_phead = &phwxmit->sta_queue->queue;
+		sta_plist = sta_phead->next;
+>>>>>>> v3.18
 		while ((end_of_queue_search(sta_phead, sta_plist)) == false) {
 			ptxservq = LIST_CONTAINOR(sta_plist, struct tx_servq,
 				  tx_pending);
@@ -222,11 +236,21 @@ static struct xmit_frame *dequeue_xframe_ex(struct xmit_priv *pxmitpriv,
 				phwxmit->accnt--;
 				goto exit_dequeue_xframe_ex;
 			}
+<<<<<<< HEAD
 			sta_plist = get_next(sta_plist);
 			/*Remove sta node when there are no pending packets.*/
 			if (_queue_empty(pframe_queue)) {
 				/*must be done after get_next and before break*/
 				list_delete(&ptxservq->tx_pending);
+=======
+			sta_plist = sta_plist->next;
+			/*Remove sta node when there are no pending packets.*/
+			if (list_empty(&pframe_queue->queue)) {
+				/* must be done after sta_plist->next
+				 * and before break
+				 */
+				list_del_init(&ptxservq->tx_pending);
+>>>>>>> v3.18
 			}
 		}
 	}
@@ -322,6 +346,10 @@ u8 r8712_append_mpdu_unit(struct xmit_buf *pxmitbuf,
 	padding_sz = (8 - (last_txcmdsz % 8));
 	if ((last_txcmdsz % 8) != 0) {
 		int i;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		for (i = 0; i < padding_sz; i++)
 			*(pxmitframe->buf_addr+TXDESC_SIZE+last_txcmdsz+i) = 0;
 	}
@@ -552,6 +580,10 @@ static void update_txdesc(struct xmit_frame *pxmitframe, uint *pmem, int sz)
 		}
 		if (pattrib->pctrl == 1) { /* mp tx packets */
 			struct tx_desc *ptxdesc_mp;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 			ptxdesc_mp = &txdesc_mp;
 			/* offset 8 */
 			ptxdesc->txdw2 = cpu_to_le32(ptxdesc_mp->txdw2);
@@ -653,6 +685,10 @@ int r8712_xmitframe_complete(struct _adapter *padapter,
 		r8712_xmitframe_aggr_1st(pxmitbuf, pxmitframe);
 		if (p2ndxmitframe != NULL) {
 			u16 total_length;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 			total_length = r8712_xmitframe_aggr_next(
 				pxmitbuf, p2ndxmitframe);
 			do {

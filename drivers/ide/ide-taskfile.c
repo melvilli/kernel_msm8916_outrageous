@@ -239,9 +239,12 @@ void ide_pio_bytes(ide_drive_t *drive, struct ide_cmd *cmd,
 		unsigned nr_bytes = min(len, cursg->length - cmd->cursg_ofs);
 		int page_is_high;
 
+<<<<<<< HEAD
 		if (nr_bytes > PAGE_SIZE)
 			nr_bytes = PAGE_SIZE;
 
+=======
+>>>>>>> v3.18
 		page = sg_page(cursg);
 		offset = cursg->offset + cmd->cursg_ofs;
 
@@ -249,6 +252,11 @@ void ide_pio_bytes(ide_drive_t *drive, struct ide_cmd *cmd,
 		page = nth_page(page, (offset >> PAGE_SHIFT));
 		offset %= PAGE_SIZE;
 
+<<<<<<< HEAD
+=======
+		nr_bytes = min_t(unsigned, nr_bytes, (PAGE_SIZE - offset));
+
+>>>>>>> v3.18
 		page_is_high = PageHighMem(page);
 		if (page_is_high)
 			local_irq_save(flags);

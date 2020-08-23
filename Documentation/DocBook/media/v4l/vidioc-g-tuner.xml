@@ -134,7 +134,13 @@ the structure refers to a radio tuner the
 	    <entry spanname="hspan">The lowest tunable frequency in
 units of 62.5 kHz, or if the <structfield>capability</structfield>
 flag <constant>V4L2_TUNER_CAP_LOW</constant> is set, in units of 62.5
+<<<<<<< HEAD
 Hz. If multiple frequency bands are supported, then
+=======
+Hz, or if the <structfield>capability</structfield> flag
+<constant>V4L2_TUNER_CAP_1HZ</constant> is set, in units of 1 Hz.
+If multiple frequency bands are supported, then
+>>>>>>> v3.18
 <structfield>rangelow</structfield> is the lowest frequency
 of all the frequency bands.</entry>
 	  </row>
@@ -144,7 +150,13 @@ of all the frequency bands.</entry>
 	    <entry spanname="hspan">The highest tunable frequency in
 units of 62.5 kHz, or if the <structfield>capability</structfield>
 flag <constant>V4L2_TUNER_CAP_LOW</constant> is set, in units of 62.5
+<<<<<<< HEAD
 Hz. If multiple frequency bands are supported, then
+=======
+Hz, or if the <structfield>capability</structfield> flag
+<constant>V4L2_TUNER_CAP_1HZ</constant> is set, in units of 1 Hz.
+If multiple frequency bands are supported, then
+>>>>>>> v3.18
 <structfield>rangehigh</structfield> is the highest frequency
 of all the frequency bands.</entry>
 	  </row>
@@ -270,7 +282,11 @@ applications must set the array to zero.</entry>
 	    <entry><constant>V4L2_TUNER_CAP_LOW</constant></entry>
 	    <entry>0x0001</entry>
 	    <entry>When set, tuning frequencies are expressed in units of
+<<<<<<< HEAD
 62.5&nbsp;Hz, otherwise in units of 62.5&nbsp;kHz.</entry>
+=======
+62.5 Hz instead of 62.5 kHz.</entry>
+>>>>>>> v3.18
 	  </row>
 	  <row>
 	    <entry><constant>V4L2_TUNER_CAP_NORM</constant></entry>
@@ -360,6 +376,14 @@ radio tuners.</entry>
 	<entry>The range to search when using the hardware seek functionality
 	is programmable, see &VIDIOC-S-HW-FREQ-SEEK; for details.</entry>
 	  </row>
+<<<<<<< HEAD
+=======
+	  <row>
+	<entry><constant>V4L2_TUNER_CAP_1HZ</constant></entry>
+	<entry>0x1000</entry>
+	<entry>When set, tuning frequencies are expressed in units of 1 Hz instead of 62.5 kHz.</entry>
+	  </row>
+>>>>>>> v3.18
 	</tbody>
       </tgroup>
     </table>

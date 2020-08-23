@@ -5,7 +5,11 @@
  *
  * GPL LICENSE SUMMARY
  *
+<<<<<<< HEAD
  * Copyright(c) 2008 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of version 2 of the GNU General Public License as
@@ -30,7 +34,11 @@
  *
  * BSD LICENSE
  *
+<<<<<<< HEAD
  * Copyright(c) 2005 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -76,6 +84,7 @@
 #define IWL_INVALID_STATION	255
 
 /* device operations */
+<<<<<<< HEAD
 extern struct iwl_lib_ops iwl1000_lib;
 extern struct iwl_lib_ops iwl2000_lib;
 extern struct iwl_lib_ops iwl2030_lib;
@@ -83,6 +92,18 @@ extern struct iwl_lib_ops iwl5000_lib;
 extern struct iwl_lib_ops iwl5150_lib;
 extern struct iwl_lib_ops iwl6000_lib;
 extern struct iwl_lib_ops iwl6030_lib;
+=======
+extern const struct iwl_dvm_cfg iwl_dvm_1000_cfg;
+extern const struct iwl_dvm_cfg iwl_dvm_2000_cfg;
+extern const struct iwl_dvm_cfg iwl_dvm_105_cfg;
+extern const struct iwl_dvm_cfg iwl_dvm_2030_cfg;
+extern const struct iwl_dvm_cfg iwl_dvm_5000_cfg;
+extern const struct iwl_dvm_cfg iwl_dvm_5150_cfg;
+extern const struct iwl_dvm_cfg iwl_dvm_6000_cfg;
+extern const struct iwl_dvm_cfg iwl_dvm_6005_cfg;
+extern const struct iwl_dvm_cfg iwl_dvm_6050_cfg;
+extern const struct iwl_dvm_cfg iwl_dvm_6030_cfg;
+>>>>>>> v3.18
 
 
 #define TIME_UNIT		1024
@@ -103,11 +124,18 @@ extern struct iwl_lib_ops iwl6030_lib;
 #define STATUS_CHANNEL_SWITCH_PENDING 11
 #define STATUS_SCAN_COMPLETE	12
 #define STATUS_POWER_PMI	13
+<<<<<<< HEAD
 #define STATUS_SCAN_ROC_EXPIRED 14
 
 struct iwl_ucode_capabilities;
 
 extern struct ieee80211_ops iwlagn_hw_ops;
+=======
+
+struct iwl_ucode_capabilities;
+
+extern const struct ieee80211_ops iwlagn_hw_ops;
+>>>>>>> v3.18
 
 static inline void iwl_set_calib_hdr(struct iwl_calib_hdr *hdr, u8 cmd)
 {
@@ -247,7 +275,10 @@ u8 iwl_toggle_tx_ant(struct iwl_priv *priv, u8 ant_idx, u8 valid);
 
 /* scan */
 void iwlagn_post_scan(struct iwl_priv *priv);
+<<<<<<< HEAD
 void iwlagn_disable_roc(struct iwl_priv *priv);
+=======
+>>>>>>> v3.18
 int iwl_force_rf_reset(struct iwl_priv *priv, bool external);
 void iwl_init_scan_params(struct iwl_priv *priv);
 int iwl_scan_cancel(struct iwl_priv *priv);
@@ -262,10 +293,13 @@ int __must_check iwl_scan_initiate(struct iwl_priv *priv,
 				   enum iwl_scan_type scan_type,
 				   enum ieee80211_band band);
 
+<<<<<<< HEAD
 void iwl_scan_roc_expired(struct iwl_priv *priv);
 void iwl_scan_offchannel_skb(struct iwl_priv *priv);
 void iwl_scan_offchannel_skb_status(struct iwl_priv *priv);
 
+=======
+>>>>>>> v3.18
 /* For faster active scanning, scan will move to the next channel if fewer than
  * PLCP_QUIET_THRESH packets are heard on this channel within
  * ACTIVE_QUIET_TIME after sending probe request.  This shortens the dwell
@@ -291,8 +325,13 @@ void iwlagn_bt_adjust_rssi_monitor(struct iwl_priv *priv, bool rssi_ena);
 
 static inline bool iwl_advanced_bt_coexist(struct iwl_priv *priv)
 {
+<<<<<<< HEAD
 	return priv->cfg->bt_params &&
 	       priv->cfg->bt_params->advanced_bt_coexist;
+=======
+	return priv->lib->bt_params &&
+	       priv->lib->bt_params->advanced_bt_coexist;
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_IWLWIFI_DEBUG
@@ -400,6 +439,7 @@ static inline __le32 iwl_hw_set_rate_n_flags(u8 rate, u32 flags)
 	return cpu_to_le32(flags|(u32)rate);
 }
 
+<<<<<<< HEAD
 extern int iwl_alive_start(struct iwl_priv *priv);
 
 /* testmode support */
@@ -438,6 +478,9 @@ static inline void iwl_testmode_free(struct iwl_priv *priv)
 {
 }
 #endif
+=======
+int iwl_alive_start(struct iwl_priv *priv);
+>>>>>>> v3.18
 
 #ifdef CONFIG_IWLWIFI_DEBUG
 void iwl_print_rx_config_cmd(struct iwl_priv *priv,
@@ -520,7 +563,11 @@ do {									\
 } while (0)
 #endif				/* CONFIG_IWLWIFI_DEBUG */
 
+<<<<<<< HEAD
 extern const char *iwl_dvm_cmd_strings[REPLY_MAX];
+=======
+extern const char *const iwl_dvm_cmd_strings[REPLY_MAX];
+>>>>>>> v3.18
 
 static inline const char *iwl_dvm_get_cmd_string(u8 cmd)
 {

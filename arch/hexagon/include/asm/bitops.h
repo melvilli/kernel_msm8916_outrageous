@@ -25,12 +25,19 @@
 #include <linux/compiler.h>
 #include <asm/byteorder.h>
 #include <asm/atomic.h>
+<<<<<<< HEAD
 
 #ifdef __KERNEL__
 
 #define smp_mb__before_clear_bit()	barrier()
 #define smp_mb__after_clear_bit()	barrier()
 
+=======
+#include <asm/barrier.h>
+
+#ifdef __KERNEL__
+
+>>>>>>> v3.18
 /*
  * The offset calculations for these are based on BITS_PER_LONG == 32
  * (i.e. I get to shift by #5-2 (32 bits per long, 4 bytes per access),

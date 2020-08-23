@@ -1,5 +1,9 @@
 /* IEEE 802.11 SoftMAC layer
+<<<<<<< HEAD
  * Copyright (c) 2005 Andrea Merello <andreamrl@tiscali.it>
+=======
+ * Copyright (c) 2005 Andrea Merello <andrea.merello@gmail.com>
+>>>>>>> v3.18
  *
  * Mostly extracted from the rtl8180-sa2400 driver for the
  * in-kernel generic ieee802.11 stack.
@@ -244,6 +248,10 @@ int rtllib_wx_get_rate(struct rtllib_device *ieee,
 			     union iwreq_data *wrqu, char *extra)
 {
 	u32 tmp_rate = 0;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	tmp_rate = TxCountToDataRate(ieee,
 				     ieee->softmac_stats.CurrentShowTxate);
 	wrqu->bitrate.value = tmp_rate * 500000;
@@ -334,7 +342,10 @@ void rtllib_wx_sync_scan_wq(void *data)
 	enum ht_extchnl_offset chan_offset = 0;
 	enum ht_channel_width bandwidth = 0;
 	int b40M = 0;
+<<<<<<< HEAD
 	static int count;
+=======
+>>>>>>> v3.18
 
 	if (!(ieee->softmac_features & IEEE_SOFTMAC_SCAN)) {
 		rtllib_start_scan_syncro(ieee, 0);
@@ -411,7 +422,10 @@ void rtllib_wx_sync_scan_wq(void *data)
 
 	rtllib_wake_all_queues(ieee);
 
+<<<<<<< HEAD
 	count = 0;
+=======
+>>>>>>> v3.18
 out:
 	up(&ieee->wx_sem);
 
@@ -628,8 +642,11 @@ int rtllib_wx_get_power(struct rtllib_device *ieee,
 				 struct iw_request_info *info,
 				 union iwreq_data *wrqu, char *extra)
 {
+<<<<<<< HEAD
 	int ret = 0;
 
+=======
+>>>>>>> v3.18
 	down(&ieee->wx_sem);
 
 	if (ieee->ps == RTLLIB_PS_DISABLED) {
@@ -657,7 +674,11 @@ int rtllib_wx_get_power(struct rtllib_device *ieee,
 
 exit:
 	up(&ieee->wx_sem);
+<<<<<<< HEAD
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 
 }
 EXPORT_SYMBOL(rtllib_wx_get_power);

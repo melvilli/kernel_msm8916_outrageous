@@ -103,6 +103,10 @@ static void record_compound(struct string_list **keyw,
 
 %token ASM_PHRASE
 %token ATTRIBUTE_PHRASE
+<<<<<<< HEAD
+=======
+%token TYPEOF_PHRASE
+>>>>>>> v3.18
 %token BRACE_PHRASE
 %token BRACKET_PHRASE
 %token EXPRESSION_PHRASE
@@ -220,8 +224,13 @@ storage_class_specifier:
 type_specifier:
 	simple_type_specifier
 	| cvar_qualifier
+<<<<<<< HEAD
 	| TYPEOF_KEYW '(' decl_specifier_seq '*' ')'
 	| TYPEOF_KEYW '(' decl_specifier_seq ')'
+=======
+	| TYPEOF_KEYW '(' parameter_declaration ')'
+	| TYPEOF_PHRASE
+>>>>>>> v3.18
 
 	/* References to s/u/e's defined elsewhere.  Rearrange things
 	   so that it is easier to expand the definition fully later.  */

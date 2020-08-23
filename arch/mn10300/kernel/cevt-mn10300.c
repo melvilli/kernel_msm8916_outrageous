@@ -113,7 +113,11 @@ int __init init_clockevents(void)
 	cd->set_next_event	= next_event;
 
 	iact = &per_cpu(timer_irq, cpu);
+<<<<<<< HEAD
 	iact->flags = IRQF_DISABLED | IRQF_SHARED | IRQF_TIMER;
+=======
+	iact->flags = IRQF_SHARED | IRQF_TIMER;
+>>>>>>> v3.18
 	iact->handler = timer_interrupt;
 
 	clockevents_register_device(cd);

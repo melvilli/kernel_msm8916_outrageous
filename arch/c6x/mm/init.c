@@ -58,31 +58,46 @@ void __init paging_init(void)
 
 void __init mem_init(void)
 {
+<<<<<<< HEAD
 	int codek, datak;
 	unsigned long tmp;
 	unsigned long len = memory_end - memory_start;
 
+=======
+>>>>>>> v3.18
 	high_memory = (void *)(memory_end & PAGE_MASK);
 
 	/* this will put all memory onto the freelists */
 	free_all_bootmem();
 
+<<<<<<< HEAD
 	codek = (_etext - _stext) >> 10;
 	datak = (_end - _sdata) >> 10;
 
 	tmp = nr_free_pages() << PAGE_SHIFT;
 	printk(KERN_INFO "Memory: %luk/%luk RAM (%dk kernel code, %dk data)\n",
 	       tmp >> 10, len >> 10, codek, datak);
+=======
+	mem_init_print_info(NULL);
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_BLK_DEV_INITRD
 void __init free_initrd_mem(unsigned long start, unsigned long end)
 {
+<<<<<<< HEAD
 	free_reserved_area(start, end, 0, "initrd");
+=======
+	free_reserved_area((void *)start, (void *)end, -1, "initrd");
+>>>>>>> v3.18
 }
 #endif
 
 void __init free_initmem(void)
 {
+<<<<<<< HEAD
 	free_initmem_default(0);
+=======
+	free_initmem_default(-1);
+>>>>>>> v3.18
 }

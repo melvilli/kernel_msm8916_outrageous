@@ -45,6 +45,11 @@
 #include <linux/platform_data/tsl2563.h>
 #include <linux/lis3lv02d.h>
 
+<<<<<<< HEAD
+=======
+#include <video/omap-panel-data.h>
+
+>>>>>>> v3.18
 #if defined(CONFIG_IR_RX51) || defined(CONFIG_IR_RX51_MODULE)
 #include <media/ir-rx51.h>
 #endif
@@ -55,6 +60,11 @@
 #include "common-board-devices.h"
 #include "gpmc.h"
 #include "gpmc-onenand.h"
+<<<<<<< HEAD
+=======
+#include "soc.h"
+#include "omap-secure.h"
+>>>>>>> v3.18
 
 #define SYSTEM_REV_B_USES_VAUX3	0x1699
 #define SYSTEM_REV_S_USES_VAUX3 0x8
@@ -80,7 +90,11 @@ enum {
 	RX51_SPI_MIPID,		/* LCD panel */
 };
 
+<<<<<<< HEAD
 static struct wl12xx_platform_data wl1251_pdata;
+=======
+static struct wl1251_platform_data wl1251_pdata;
+>>>>>>> v3.18
 static struct tsc2005_platform_data tsc2005_pdata;
 
 #if defined(CONFIG_SENSORS_LIS3_I2C) || defined(CONFIG_SENSORS_LIS3_I2C_MODULE)
@@ -165,38 +179,71 @@ static struct lp55xx_led_config rx51_lp5523_led_config[] = {
 		.name		= "lp5523:kb1",
 		.chan_nr	= 0,
 		.led_current	= 50,
+<<<<<<< HEAD
+=======
+		.max_current	= 100,
+>>>>>>> v3.18
 	}, {
 		.name		= "lp5523:kb2",
 		.chan_nr	= 1,
 		.led_current	= 50,
+<<<<<<< HEAD
+=======
+		.max_current	= 100,
+>>>>>>> v3.18
 	}, {
 		.name		= "lp5523:kb3",
 		.chan_nr	= 2,
 		.led_current	= 50,
+<<<<<<< HEAD
+=======
+		.max_current	= 100,
+>>>>>>> v3.18
 	}, {
 		.name		= "lp5523:kb4",
 		.chan_nr	= 3,
 		.led_current	= 50,
+<<<<<<< HEAD
+=======
+		.max_current	= 100,
+>>>>>>> v3.18
 	}, {
 		.name		= "lp5523:b",
 		.chan_nr	= 4,
 		.led_current	= 50,
+<<<<<<< HEAD
+=======
+		.max_current	= 100,
+>>>>>>> v3.18
 	}, {
 		.name		= "lp5523:g",
 		.chan_nr	= 5,
 		.led_current	= 50,
+<<<<<<< HEAD
+=======
+		.max_current	= 100,
+>>>>>>> v3.18
 	}, {
 		.name		= "lp5523:r",
 		.chan_nr	= 6,
 		.led_current	= 50,
+<<<<<<< HEAD
+=======
+		.max_current	= 100,
+>>>>>>> v3.18
 	}, {
 		.name		= "lp5523:kb5",
 		.chan_nr	= 7,
 		.led_current	= 50,
+<<<<<<< HEAD
+=======
+		.max_current	= 100,
+>>>>>>> v3.18
 	}, {
 		.name		= "lp5523:kb6",
 		.chan_nr	= 8,
 		.led_current	= 50,
+<<<<<<< HEAD
 	}
 };
 
@@ -216,16 +263,38 @@ static void rx51_lp5523_enable(bool state)
 	gpio_set_value(RX51_LP5523_CHIP_EN_GPIO, !!state);
 }
 
+=======
+		.max_current	= 100,
+	}
+};
+
+>>>>>>> v3.18
 static struct lp55xx_platform_data rx51_lp5523_platform_data = {
 	.led_config		= rx51_lp5523_led_config,
 	.num_channels		= ARRAY_SIZE(rx51_lp5523_led_config),
 	.clock_mode		= LP55XX_CLOCK_AUTO,
+<<<<<<< HEAD
 	.setup_resources	= rx51_lp5523_setup,
 	.release_resources	= rx51_lp5523_release,
 	.enable			= rx51_lp5523_enable,
 };
 #endif
 
+=======
+	.enable_gpio		= RX51_LP5523_CHIP_EN_GPIO,
+};
+#endif
+
+#define RX51_LCD_RESET_GPIO	90
+
+static struct panel_acx565akm_platform_data acx_pdata = {
+	.name		= "lcd",
+	.source		= "sdi.0",
+	.reset_gpio	= RX51_LCD_RESET_GPIO,
+	.datapairs	= 2,
+};
+
+>>>>>>> v3.18
 static struct omap2_mcspi_device_config wl1251_mcspi_config = {
 	.turbo_mode	= 0,
 };
@@ -254,6 +323,10 @@ static struct spi_board_info rx51_peripherals_spi_board_info[] __initdata = {
 		.chip_select		= 2,
 		.max_speed_hz		= 6000000,
 		.controller_data	= &mipid_mcspi_config,
+<<<<<<< HEAD
+=======
+		.platform_data		= &acx_pdata,
+>>>>>>> v3.18
 	},
 	[RX51_SPI_TSC2005] = {
 		.modalias		= "tsc2005",
@@ -553,6 +626,10 @@ static struct regulator_consumer_supply rx51_vio_supplies[] = {
 
 static struct regulator_consumer_supply rx51_vaux1_consumers[] = {
 	REGULATOR_SUPPLY("vdds_sdi", "omapdss"),
+<<<<<<< HEAD
+=======
+	REGULATOR_SUPPLY("vdds_sdi", "omapdss_sdi.0"),
+>>>>>>> v3.18
 	/* Si4713 supply */
 	REGULATOR_SUPPLY("vdd", "2-0063"),
 	/* lis3lv02d */
@@ -754,7 +831,18 @@ static struct regulator_init_data rx51_vintdig = {
 	},
 };
 
+<<<<<<< HEAD
 static struct si4713_platform_data rx51_si4713_i2c_data __initdata_or_module = {
+=======
+static const char * const si4713_supply_names[] = {
+	"vio",
+	"vdd",
+};
+
+static struct si4713_platform_data rx51_si4713_i2c_data __initdata_or_module = {
+	.supplies	= ARRAY_SIZE(si4713_supply_names),
+	.supply_names	= si4713_supply_names,
+>>>>>>> v3.18
 	.gpio_reset	= RX51_FMTX_RESET_GPIO,
 };
 
@@ -1160,6 +1248,7 @@ static inline void board_smc91x_init(void)
 
 #endif
 
+<<<<<<< HEAD
 static void rx51_wl1251_set_power(bool enable)
 {
 	gpio_set_value(RX51_WL1251_POWER_GPIO, enable);
@@ -1167,6 +1256,9 @@ static void rx51_wl1251_set_power(bool enable)
 
 static struct gpio rx51_wl1251_gpios[] __initdata = {
 	{ RX51_WL1251_POWER_GPIO, GPIOF_OUT_INIT_LOW,	"wl1251 power"	},
+=======
+static struct gpio rx51_wl1251_gpios[] __initdata = {
+>>>>>>> v3.18
 	{ RX51_WL1251_IRQ_GPIO,	  GPIOF_IN,		"wl1251 irq"	},
 };
 
@@ -1183,17 +1275,27 @@ static void __init rx51_init_wl1251(void)
 	if (irq < 0)
 		goto err_irq;
 
+<<<<<<< HEAD
 	wl1251_pdata.set_power = rx51_wl1251_set_power;
+=======
+	wl1251_pdata.power_gpio = RX51_WL1251_POWER_GPIO;
+>>>>>>> v3.18
 	rx51_peripherals_spi_board_info[RX51_SPI_WL1251].irq = irq;
 
 	return;
 
 err_irq:
 	gpio_free(RX51_WL1251_IRQ_GPIO);
+<<<<<<< HEAD
 	gpio_free(RX51_WL1251_POWER_GPIO);
 error:
 	printk(KERN_ERR "wl1251 board initialisation failed\n");
 	wl1251_pdata.set_power = NULL;
+=======
+error:
+	printk(KERN_ERR "wl1251 board initialisation failed\n");
+	wl1251_pdata.power_gpio = -1;
+>>>>>>> v3.18
 
 	/*
 	 * Now rx51_peripherals_spi_board_info[1].irq is zero and
@@ -1276,6 +1378,25 @@ static void __init rx51_init_twl4030_hwmon(void)
 	platform_device_register(&madc_hwmon);
 }
 
+<<<<<<< HEAD
+=======
+static struct platform_device omap3_rom_rng_device = {
+	.name		= "omap3-rom-rng",
+	.id		= -1,
+	.dev	= {
+		.platform_data	= rx51_secure_rng_call,
+	},
+};
+
+static void __init rx51_init_omap3_rom_rng(void)
+{
+	if (omap_type() == OMAP2_DEVICE_TYPE_SEC) {
+		pr_info("RX-51: Registring OMAP3 HWRNG device\n");
+		platform_device_register(&omap3_rom_rng_device);
+	}
+}
+
+>>>>>>> v3.18
 void __init rx51_peripherals_init(void)
 {
 	rx51_i2c_init();
@@ -1296,5 +1417,9 @@ void __init rx51_peripherals_init(void)
 
 	rx51_charger_init();
 	rx51_init_twl4030_hwmon();
+<<<<<<< HEAD
+=======
+	rx51_init_omap3_rom_rng();
+>>>>>>> v3.18
 }
 

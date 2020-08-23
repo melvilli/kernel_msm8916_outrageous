@@ -90,6 +90,27 @@ static int journal_convert_superblock_v1(journal_t *, journal_superblock_t *);
 static void __journal_abort_soft (journal_t *journal, int errno);
 static const char *journal_dev_name(journal_t *journal, char *buffer);
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_JBD_DEBUG
+void __jbd_debug(int level, const char *file, const char *func,
+		 unsigned int line, const char *fmt, ...)
+{
+	struct va_format vaf;
+	va_list args;
+
+	if (level > journal_enable_debug)
+		return;
+	va_start(args, fmt);
+	vaf.fmt = fmt;
+	vaf.va = &args;
+	printk(KERN_DEBUG "%s: (%s, %u): %pV\n", file, func, line, &vaf);
+	va_end(args);
+}
+EXPORT_SYMBOL(__jbd_debug);
+#endif
+
+>>>>>>> v3.18
 /*
  * Helper function used to manage commit timeouts
  */
@@ -555,7 +576,11 @@ int log_wait_commit(journal_t *journal, tid_t tid)
 #ifdef CONFIG_JBD_DEBUG
 	spin_lock(&journal->j_state_lock);
 	if (!tid_geq(journal->j_commit_request, tid)) {
+<<<<<<< HEAD
 		printk(KERN_EMERG
+=======
+		printk(KERN_ERR
+>>>>>>> v3.18
 		       "%s: error: j_commit_request=%d, tid=%d\n",
 		       __func__, journal->j_commit_request, tid);
 	}
@@ -586,10 +611,15 @@ int log_wait_commit(journal_t *journal, tid_t tid)
 out_unlock:
 	spin_unlock(&journal->j_state_lock);
 
+<<<<<<< HEAD
 	if (unlikely(is_journal_aborted(journal))) {
 		printk(KERN_EMERG "journal commit I/O error\n");
 		err = -EIO;
 	}
+=======
+	if (unlikely(is_journal_aborted(journal)))
+		err = -EIO;
+>>>>>>> v3.18
 	return err;
 }
 
@@ -870,7 +900,11 @@ journal_t * journal_init_inode (struct inode *inode)
 		goto out_err;
 	}
 
+<<<<<<< HEAD
 	bh = __getblk(journal->j_dev, blocknr, journal->j_blocksize);
+=======
+	bh = getblk_unmovable(journal->j_dev, blocknr, journal->j_blocksize);
+>>>>>>> v3.18
 	if (!bh) {
 		printk(KERN_ERR
 		       "%s: Cannot get buffer for journal superblock\n",
@@ -2118,7 +2152,11 @@ static void __exit journal_exit(void)
 #ifdef CONFIG_JBD_DEBUG
 	int n = atomic_read(&nr_journal_heads);
 	if (n)
+<<<<<<< HEAD
 		printk(KERN_EMERG "JBD: leaked %d journal_heads!\n", n);
+=======
+		printk(KERN_ERR "JBD: leaked %d journal_heads!\n", n);
+>>>>>>> v3.18
 #endif
 	jbd_remove_debugfs_entry();
 	journal_destroy_caches();

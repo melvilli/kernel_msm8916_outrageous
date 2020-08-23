@@ -683,6 +683,10 @@ static void prepare_set(void) __acquires(set_atomicity_lock)
 	}
 
 	/* Flush all TLBs via a mov %cr3, %reg; mov %reg, %cr3 */
+<<<<<<< HEAD
+=======
+	count_vm_tlb_event(NR_TLB_LOCAL_FLUSH_ALL);
+>>>>>>> v3.18
 	__flush_tlb();
 
 	/* Save MTRR state */
@@ -696,13 +700,21 @@ static void prepare_set(void) __acquires(set_atomicity_lock)
 static void post_set(void) __releases(set_atomicity_lock)
 {
 	/* Flush TLBs (no need to flush caches - they are disabled) */
+<<<<<<< HEAD
+=======
+	count_vm_tlb_event(NR_TLB_LOCAL_FLUSH_ALL);
+>>>>>>> v3.18
 	__flush_tlb();
 
 	/* Intel (P6) standard MTRRs */
 	mtrr_wrmsr(MSR_MTRRdefType, deftype_lo, deftype_hi);
 
 	/* Enable caches */
+<<<<<<< HEAD
 	write_cr0(read_cr0() & 0xbfffffff);
+=======
+	write_cr0(read_cr0() & ~X86_CR0_CD);
+>>>>>>> v3.18
 
 	/* Restore value of CR4 */
 	if (cpu_has_pge)

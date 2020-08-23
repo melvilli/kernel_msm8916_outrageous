@@ -19,11 +19,19 @@
 #include <linux/init.h>
 #include <linux/slab.h>
 #include <linux/i2c.h>
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 #include <linux/of_device.h>
 #include <linux/mfd/core.h>
 #include <linux/mfd/tps6507x.h>
 
+<<<<<<< HEAD
 static struct mfd_cell tps6507x_devs[] = {
+=======
+static const struct mfd_cell tps6507x_devs[] = {
+>>>>>>> v3.18
 	{
 		.name = "tps6507x-pmic",
 	},
@@ -118,7 +126,11 @@ static const struct i2c_device_id tps6507x_i2c_id[] = {
 MODULE_DEVICE_TABLE(i2c, tps6507x_i2c_id);
 
 #ifdef CONFIG_OF
+<<<<<<< HEAD
 static struct of_device_id tps6507x_of_match[] = {
+=======
+static const struct of_device_id tps6507x_of_match[] = {
+>>>>>>> v3.18
 	{.compatible = "ti,tps6507x", },
 	{},
 };

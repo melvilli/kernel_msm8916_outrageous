@@ -5,7 +5,11 @@
  *
  * GPL LICENSE SUMMARY
  *
+<<<<<<< HEAD
  * Copyright(c) 2007 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2007 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of version 2 of the GNU General Public License as
@@ -30,7 +34,11 @@
  *
  * BSD LICENSE
  *
+<<<<<<< HEAD
  * Copyright(c) 2005 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -72,7 +80,11 @@
 #include "iwl-trans.h"
 
 #define CHANNEL_NUM_SIZE	4	/* num of channels in calib_ch size */
+<<<<<<< HEAD
 #define IWL_NUM_PAPD_CH_GROUPS	4
+=======
+#define IWL_NUM_PAPD_CH_GROUPS	7
+>>>>>>> v3.18
 #define IWL_NUM_TXP_CH_GROUPS	9
 
 struct iwl_phy_db_entry {
@@ -92,6 +104,7 @@ struct iwl_phy_db_entry {
 struct iwl_phy_db {
 	struct iwl_phy_db_entry	cfg;
 	struct iwl_phy_db_entry	calib_nch;
+<<<<<<< HEAD
 	struct iwl_phy_db_entry	calib_ch;
 	struct iwl_phy_db_entry	calib_ch_group_papd[IWL_NUM_PAPD_CH_GROUPS];
 	struct iwl_phy_db_entry	calib_ch_group_txp[IWL_NUM_TXP_CH_GROUPS];
@@ -99,13 +112,22 @@ struct iwl_phy_db {
 	u32 channel_num;
 	u32 channel_size;
 
+=======
+	struct iwl_phy_db_entry	calib_ch_group_papd[IWL_NUM_PAPD_CH_GROUPS];
+	struct iwl_phy_db_entry	calib_ch_group_txp[IWL_NUM_TXP_CH_GROUPS];
+
+>>>>>>> v3.18
 	struct iwl_trans *trans;
 };
 
 enum iwl_phy_db_section_type {
 	IWL_PHY_DB_CFG = 1,
 	IWL_PHY_DB_CALIB_NCH,
+<<<<<<< HEAD
 	IWL_PHY_DB_CALIB_CH,
+=======
+	IWL_PHY_DB_UNUSED,
+>>>>>>> v3.18
 	IWL_PHY_DB_CALIB_CHG_PAPD,
 	IWL_PHY_DB_CALIB_CHG_TXP,
 	IWL_PHY_DB_MAX
@@ -169,8 +191,11 @@ iwl_phy_db_get_section(struct iwl_phy_db *phy_db,
 		return &phy_db->cfg;
 	case IWL_PHY_DB_CALIB_NCH:
 		return &phy_db->calib_nch;
+<<<<<<< HEAD
 	case IWL_PHY_DB_CALIB_CH:
 		return &phy_db->calib_ch;
+=======
+>>>>>>> v3.18
 	case IWL_PHY_DB_CALIB_CHG_PAPD:
 		if (chg_id >= IWL_NUM_PAPD_CH_GROUPS)
 			return NULL;
@@ -208,7 +233,10 @@ void iwl_phy_db_free(struct iwl_phy_db *phy_db)
 
 	iwl_phy_db_free_section(phy_db, IWL_PHY_DB_CFG, 0);
 	iwl_phy_db_free_section(phy_db, IWL_PHY_DB_CALIB_NCH, 0);
+<<<<<<< HEAD
 	iwl_phy_db_free_section(phy_db, IWL_PHY_DB_CALIB_CH, 0);
+=======
+>>>>>>> v3.18
 	for (i = 0; i < IWL_NUM_PAPD_CH_GROUPS; i++)
 		iwl_phy_db_free_section(phy_db, IWL_PHY_DB_CALIB_CHG_PAPD, i);
 	for (i = 0; i < IWL_NUM_TXP_CH_GROUPS; i++)
@@ -248,6 +276,7 @@ int iwl_phy_db_set_section(struct iwl_phy_db *phy_db, struct iwl_rx_packet *pkt,
 
 	entry->size = size;
 
+<<<<<<< HEAD
 	if (type == IWL_PHY_DB_CALIB_CH) {
 		phy_db->channel_num =
 			le32_to_cpup((__le32 *)phy_db_notif->data);
@@ -255,6 +284,8 @@ int iwl_phy_db_set_section(struct iwl_phy_db *phy_db, struct iwl_rx_packet *pkt,
 			(size - CHANNEL_NUM_SIZE) / phy_db->channel_num;
 	}
 
+=======
+>>>>>>> v3.18
 	IWL_DEBUG_INFO(phy_db->trans,
 		       "%s(%d): [PHYDB]SET: Type %d , Size: %d\n",
 		       __func__, __LINE__, type, size);
@@ -328,10 +359,14 @@ int iwl_phy_db_get_section_data(struct iwl_phy_db *phy_db,
 				u32 type, u8 **data, u16 *size, u16 ch_id)
 {
 	struct iwl_phy_db_entry *entry;
+<<<<<<< HEAD
 	u32 channel_num;
 	u32 channel_size;
 	u16 ch_group_id = 0;
 	u16 index;
+=======
+	u16 ch_group_id = 0;
+>>>>>>> v3.18
 
 	if (!phy_db)
 		return -EINVAL;
@@ -346,6 +381,7 @@ int iwl_phy_db_get_section_data(struct iwl_phy_db *phy_db,
 	if (!entry)
 		return -EINVAL;
 
+<<<<<<< HEAD
 	if (type == IWL_PHY_DB_CALIB_CH) {
 		index = ch_id_to_ch_index(ch_id);
 		channel_num = phy_db->channel_num;
@@ -361,6 +397,10 @@ int iwl_phy_db_get_section_data(struct iwl_phy_db *phy_db,
 		*data = entry->data;
 		*size = entry->size;
 	}
+=======
+	*data = entry->data;
+	*size = entry->size;
+>>>>>>> v3.18
 
 	IWL_DEBUG_INFO(phy_db->trans,
 		       "%s(%d): [PHYDB] GET: Type %d , Size: %d\n",
@@ -375,7 +415,10 @@ static int iwl_send_phy_db_cmd(struct iwl_phy_db *phy_db, u16 type,
 	struct iwl_phy_db_cmd phy_db_cmd;
 	struct iwl_host_cmd cmd = {
 		.id = PHY_DB_CMD,
+<<<<<<< HEAD
 		.flags = CMD_SYNC,
+=======
+>>>>>>> v3.18
 	};
 
 	IWL_DEBUG_INFO(phy_db->trans,
@@ -413,6 +456,12 @@ static int iwl_phy_db_send_all_channel_groups(
 		if (!entry)
 			return -EINVAL;
 
+<<<<<<< HEAD
+=======
+		if (!entry->size)
+			continue;
+
+>>>>>>> v3.18
 		/* Send the requested PHY DB section */
 		err = iwl_send_phy_db_cmd(phy_db,
 					  type,
@@ -420,13 +469,21 @@ static int iwl_phy_db_send_all_channel_groups(
 					  entry->data);
 		if (err) {
 			IWL_ERR(phy_db->trans,
+<<<<<<< HEAD
 				"Can't SEND phy_db section %d (%d), err %d",
+=======
+				"Can't SEND phy_db section %d (%d), err %d\n",
+>>>>>>> v3.18
 				type, i, err);
 			return err;
 		}
 
 		IWL_DEBUG_INFO(phy_db->trans,
+<<<<<<< HEAD
 			       "Sent PHY_DB HCMD, type = %d num = %d",
+=======
+			       "Sent PHY_DB HCMD, type = %d num = %d\n",
+>>>>>>> v3.18
 			       type, i);
 	}
 
@@ -478,7 +535,11 @@ int iwl_send_phy_db_data(struct iwl_phy_db *phy_db)
 						 IWL_NUM_PAPD_CH_GROUPS);
 	if (err) {
 		IWL_ERR(phy_db->trans,
+<<<<<<< HEAD
 			"Cannot send channel specific PAPD groups");
+=======
+			"Cannot send channel specific PAPD groups\n");
+>>>>>>> v3.18
 		return err;
 	}
 
@@ -488,7 +549,11 @@ int iwl_send_phy_db_data(struct iwl_phy_db *phy_db)
 						 IWL_NUM_TXP_CH_GROUPS);
 	if (err) {
 		IWL_ERR(phy_db->trans,
+<<<<<<< HEAD
 			"Cannot send channel specific TX power groups");
+=======
+			"Cannot send channel specific TX power groups\n");
+>>>>>>> v3.18
 		return err;
 	}
 

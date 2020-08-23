@@ -1,20 +1,34 @@
 #include <linux/mm.h>
 #include <linux/slab.h>
 #include <linux/string.h>
+<<<<<<< HEAD
+=======
+#include <linux/compiler.h>
+>>>>>>> v3.18
 #include <linux/export.h>
 #include <linux/err.h>
 #include <linux/sched.h>
 #include <linux/security.h>
 #include <linux/swap.h>
 #include <linux/swapops.h>
+<<<<<<< HEAD
 #include <linux/vmalloc.h>
+=======
+#include <linux/mman.h>
+#include <linux/hugetlb.h>
+#include <linux/vmalloc.h>
+
+>>>>>>> v3.18
 #include <asm/uaccess.h>
 
 #include "internal.h"
 
+<<<<<<< HEAD
 #define CREATE_TRACE_POINTS
 #include <trace/events/kmem.h>
 
+=======
+>>>>>>> v3.18
 /**
  * kstrdup - allocate space for and copy an existing string
  * @s: the string to duplicate
@@ -108,6 +122,7 @@ void *memdup_user(const void __user *src, size_t len)
 }
 EXPORT_SYMBOL(memdup_user);
 
+<<<<<<< HEAD
 static __always_inline void *__do_krealloc(const void *p, size_t new_size,
 					   gfp_t flags)
 {
@@ -199,6 +214,8 @@ void kzfree(const void *p)
 }
 EXPORT_SYMBOL(kzfree);
 
+=======
+>>>>>>> v3.18
 /*
  * strndup_user - duplicate an existing string from user space
  * @s: The string to duplicate
@@ -260,6 +277,7 @@ static int vm_is_stack_for_task(struct task_struct *t,
 /*
  * Check if the vma is being used as a stack.
  * If is_group is non-zero, check in the entire thread group or else
+<<<<<<< HEAD
  * just check in the current task. Returns the pid of the task that
  * the vma is stack for.
  */
@@ -270,10 +288,21 @@ pid_t vm_is_stack(struct task_struct *task,
 
 	if (vm_is_stack_for_task(task, vma))
 		return task->pid;
+=======
+ * just check in the current task. Returns the task_struct of the task
+ * that the vma is stack for. Must be called under rcu_read_lock().
+ */
+struct task_struct *task_of_stack(struct task_struct *task,
+				struct vm_area_struct *vma, bool in_group)
+{
+	if (vm_is_stack_for_task(task, vma))
+		return task;
+>>>>>>> v3.18
 
 	if (in_group) {
 		struct task_struct *t;
 
+<<<<<<< HEAD
 		rcu_read_lock();
 		for_each_thread(task, t) {
 			if (vm_is_stack_for_task(t, vma)) {
@@ -286,6 +315,15 @@ done:
 	}
 
 	return ret;
+=======
+		for_each_thread(task, t) {
+			if (vm_is_stack_for_task(t, vma))
+				return t;
+		}
+	}
+
+	return NULL;
+>>>>>>> v3.18
 }
 
 #if defined(CONFIG_MMU) && !defined(HAVE_ARCH_PICK_MMAP_LAYOUT)
@@ -302,7 +340,11 @@ void arch_pick_mmap_layout(struct mm_struct *mm)
  * If the architecture not support this function, simply return with no
  * page pinned
  */
+<<<<<<< HEAD
 int __attribute__((weak)) __get_user_pages_fast(unsigned long start,
+=======
+int __weak __get_user_pages_fast(unsigned long start,
+>>>>>>> v3.18
 				 int nr_pages, int write, struct page **pages)
 {
 	return 0;
@@ -333,7 +375,11 @@ EXPORT_SYMBOL_GPL(__get_user_pages_fast);
  * callers need to carefully consider what to use. On many architectures,
  * get_user_pages_fast simply falls back to get_user_pages.
  */
+<<<<<<< HEAD
 int __attribute__((weak)) get_user_pages_fast(unsigned long start,
+=======
+int __weak get_user_pages_fast(unsigned long start,
+>>>>>>> v3.18
 				int nr_pages, int write, struct page **pages)
 {
 	struct mm_struct *mm = current->mm;
@@ -394,20 +440,32 @@ struct address_space *page_mapping(struct page *page)
 {
 	struct address_space *mapping = page->mapping;
 
+<<<<<<< HEAD
 	VM_BUG_ON(PageSlab(page));
 #ifdef CONFIG_SWAP
+=======
+	/* This happens if someone calls flush_dcache_page on slab page */
+	if (unlikely(PageSlab(page)))
+		return NULL;
+
+>>>>>>> v3.18
 	if (unlikely(PageSwapCache(page))) {
 		swp_entry_t entry;
 
 		entry.val = page_private(page);
 		mapping = swap_address_space(entry);
+<<<<<<< HEAD
 	} else
 #endif
 	if ((unsigned long)mapping & PAGE_MAPPING_ANON)
+=======
+	} else if ((unsigned long)mapping & PAGE_MAPPING_ANON)
+>>>>>>> v3.18
 		mapping = NULL;
 	return mapping;
 }
 
+<<<<<<< HEAD
 /* Tracepoints definitions. */
 EXPORT_TRACEPOINT_SYMBOL(kmalloc);
 EXPORT_TRACEPOINT_SYMBOL(kmem_cache_alloc);
@@ -415,3 +473,94 @@ EXPORT_TRACEPOINT_SYMBOL(kmalloc_node);
 EXPORT_TRACEPOINT_SYMBOL(kmem_cache_alloc_node);
 EXPORT_TRACEPOINT_SYMBOL(kfree);
 EXPORT_TRACEPOINT_SYMBOL(kmem_cache_free);
+=======
+int overcommit_ratio_handler(struct ctl_table *table, int write,
+			     void __user *buffer, size_t *lenp,
+			     loff_t *ppos)
+{
+	int ret;
+
+	ret = proc_dointvec(table, write, buffer, lenp, ppos);
+	if (ret == 0 && write)
+		sysctl_overcommit_kbytes = 0;
+	return ret;
+}
+
+int overcommit_kbytes_handler(struct ctl_table *table, int write,
+			     void __user *buffer, size_t *lenp,
+			     loff_t *ppos)
+{
+	int ret;
+
+	ret = proc_doulongvec_minmax(table, write, buffer, lenp, ppos);
+	if (ret == 0 && write)
+		sysctl_overcommit_ratio = 0;
+	return ret;
+}
+
+/*
+ * Committed memory limit enforced when OVERCOMMIT_NEVER policy is used
+ */
+unsigned long vm_commit_limit(void)
+{
+	unsigned long allowed;
+
+	if (sysctl_overcommit_kbytes)
+		allowed = sysctl_overcommit_kbytes >> (PAGE_SHIFT - 10);
+	else
+		allowed = ((totalram_pages - hugetlb_total_pages())
+			   * sysctl_overcommit_ratio / 100);
+	allowed += total_swap_pages;
+
+	return allowed;
+}
+
+/**
+ * get_cmdline() - copy the cmdline value to a buffer.
+ * @task:     the task whose cmdline value to copy.
+ * @buffer:   the buffer to copy to.
+ * @buflen:   the length of the buffer. Larger cmdline values are truncated
+ *            to this length.
+ * Returns the size of the cmdline field copied. Note that the copy does
+ * not guarantee an ending NULL byte.
+ */
+int get_cmdline(struct task_struct *task, char *buffer, int buflen)
+{
+	int res = 0;
+	unsigned int len;
+	struct mm_struct *mm = get_task_mm(task);
+	if (!mm)
+		goto out;
+	if (!mm->arg_end)
+		goto out_mm;	/* Shh! No looking before we're done */
+
+	len = mm->arg_end - mm->arg_start;
+
+	if (len > buflen)
+		len = buflen;
+
+	res = access_process_vm(task, mm->arg_start, buffer, len, 0);
+
+	/*
+	 * If the nul at the end of args has been overwritten, then
+	 * assume application is using setproctitle(3).
+	 */
+	if (res > 0 && buffer[res-1] != '\0' && len < buflen) {
+		len = strnlen(buffer, res);
+		if (len < res) {
+			res = len;
+		} else {
+			len = mm->env_end - mm->env_start;
+			if (len > buflen - res)
+				len = buflen - res;
+			res += access_process_vm(task, mm->env_start,
+						 buffer+res, len, 0);
+			res = strnlen(buffer, res);
+		}
+	}
+out_mm:
+	mmput(mm);
+out:
+	return res;
+}
+>>>>>>> v3.18

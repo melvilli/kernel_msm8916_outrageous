@@ -12,6 +12,11 @@
 #include <linux/notifier.h>
 #include <linux/err.h>
 
+<<<<<<< HEAD
+=======
+#include <dt-bindings/mfd/dbx500-prcmu.h> /* For clock identifiers */
+
+>>>>>>> v3.18
 /* Offset for the firmware version within the TCPM */
 #define DB8500_PRCMU_FW_VERSION_OFFSET 0xA4
 #define DBX540_PRCMU_FW_VERSION_OFFSET 0xA8
@@ -94,6 +99,7 @@ enum prcmu_wakeup_index {
 #define PRCMU_CLKSRC_ARMCLKFIX		0x46
 #define PRCMU_CLKSRC_HDMICLK		0x47
 
+<<<<<<< HEAD
 /*
  * Clock identifiers.
  */
@@ -150,6 +156,8 @@ enum prcmu_clock {
 	PRCMU_DSI2ESCCLK,
 };
 
+=======
+>>>>>>> v3.18
 /**
  * enum prcmu_wdog_id - PRCMU watchdog IDs
  * @PRCMU_WDOG_ALL: use all timers
@@ -237,8 +245,11 @@ struct prcmu_pdata
 	bool enable_set_ddr_opp;
 	bool enable_ape_opp_100_voltage;
 	struct ab8500_platform_data *ab_platdata;
+<<<<<<< HEAD
 	int ab_irq;
 	int irq_base;
+=======
+>>>>>>> v3.18
 	u32 version_offset;
 	u32 legacy_offset;
 	u32 adt_offset;

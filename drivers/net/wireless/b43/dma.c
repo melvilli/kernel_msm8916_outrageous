@@ -431,9 +431,15 @@ static int alloc_ringmemory(struct b43_dmaring *ring)
 	u16 ring_mem_size = (ring->type == B43_DMA_64BIT) ?
 				B43_DMA64_RINGMEMSIZE : B43_DMA32_RINGMEMSIZE;
 
+<<<<<<< HEAD
 	ring->descbase = dma_alloc_coherent(ring->dev->dev->dma_dev,
 					    ring_mem_size, &(ring->dmabase),
 					    GFP_KERNEL | __GFP_ZERO);
+=======
+	ring->descbase = dma_zalloc_coherent(ring->dev->dev->dma_dev,
+					     ring_mem_size, &(ring->dmabase),
+					     GFP_KERNEL);
+>>>>>>> v3.18
 	if (!ring->descbase)
 		return -ENOMEM;
 
@@ -1065,12 +1071,18 @@ static int b43_dma_set_mask(struct b43_wldev *dev, u64 mask)
 	/* Try to set the DMA mask. If it fails, try falling back to a
 	 * lower mask, as we can always also support a lower one. */
 	while (1) {
+<<<<<<< HEAD
 		err = dma_set_mask(dev->dev->dma_dev, mask);
 		if (!err) {
 			err = dma_set_coherent_mask(dev->dev->dma_dev, mask);
 			if (!err)
 				break;
 		}
+=======
+		err = dma_set_mask_and_coherent(dev->dev->dma_dev, mask);
+		if (!err)
+			break;
+>>>>>>> v3.18
 		if (mask == DMA_BIT_MASK(64)) {
 			mask = DMA_BIT_MASK(32);
 			fallback = true;

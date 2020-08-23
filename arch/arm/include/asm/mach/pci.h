@@ -16,6 +16,10 @@
 struct pci_sys_data;
 struct pci_ops;
 struct pci_bus;
+<<<<<<< HEAD
+=======
+struct device;
+>>>>>>> v3.18
 
 struct hw_pci {
 #ifdef CONFIG_PCI_DOMAINS
@@ -35,6 +39,11 @@ struct hw_pci {
 					  resource_size_t start,
 					  resource_size_t size,
 					  resource_size_t align);
+<<<<<<< HEAD
+=======
+	void		(*add_bus)(struct pci_bus *bus);
+	void		(*remove_bus)(struct pci_bus *bus);
+>>>>>>> v3.18
 };
 
 /*
@@ -62,13 +71,31 @@ struct pci_sys_data {
 					  resource_size_t start,
 					  resource_size_t size,
 					  resource_size_t align);
+<<<<<<< HEAD
+=======
+	void		(*add_bus)(struct pci_bus *bus);
+	void		(*remove_bus)(struct pci_bus *bus);
+>>>>>>> v3.18
 	void		*private_data;	/* platform controller private data	*/
 };
 
 /*
  * Call this with your hw_pci struct to initialise the PCI system.
  */
+<<<<<<< HEAD
 void pci_common_init(struct hw_pci *);
+=======
+void pci_common_init_dev(struct device *, struct hw_pci *);
+
+/*
+ * Compatibility wrapper for older platforms that do not care about
+ * passing the parent device.
+ */
+static inline void pci_common_init(struct hw_pci *hw)
+{
+	pci_common_init_dev(NULL, hw);
+}
+>>>>>>> v3.18
 
 /*
  * Setup early fixed I/O mapping.
@@ -92,6 +119,7 @@ extern int dc21285_setup(int nr, struct pci_sys_data *);
 extern void dc21285_preinit(void);
 extern void dc21285_postinit(void);
 
+<<<<<<< HEAD
 extern struct pci_ops via82c505_ops;
 extern int via82c505_setup(int nr, struct pci_sys_data *);
 extern void via82c505_init(void *sysdata);
@@ -106,4 +134,6 @@ extern void pci_v3_postinit(void);
 #define arch_teardown_msi_irqs arch_teardown_msi_irqs
 #endif
 
+=======
+>>>>>>> v3.18
 #endif /* __ASM_MACH_PCI_H */

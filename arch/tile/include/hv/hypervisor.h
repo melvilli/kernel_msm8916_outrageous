@@ -318,8 +318,16 @@
 /** hv_set_pte_super_shift */
 #define HV_DISPATCH_SET_PTE_SUPER_SHIFT           57
 
+<<<<<<< HEAD
 /** One more than the largest dispatch value */
 #define _HV_DISPATCH_END                          58
+=======
+/** hv_console_set_ipi */
+#define HV_DISPATCH_CONSOLE_SET_IPI               63
+
+/** One more than the largest dispatch value */
+#define _HV_DISPATCH_END                          64
+>>>>>>> v3.18
 
 
 #ifndef __ASSEMBLER__
@@ -541,14 +549,32 @@ typedef enum {
   HV_CONFSTR_CPUMOD_REV      = 18,
 
   /** Human-readable CPU module description. */
+<<<<<<< HEAD
   HV_CONFSTR_CPUMOD_DESC     = 19
+=======
+  HV_CONFSTR_CPUMOD_DESC     = 19,
+
+  /** Per-tile hypervisor statistics.  When this identifier is specified,
+   *  the hv_confstr call takes two extra arguments.  The first is the
+   *  HV_XY_TO_LOTAR of the target tile's coordinates.  The second is
+   *  a flag word.  The only current flag is the lowest bit, which means
+   *  "zero out the stats instead of retrieving them"; in this case the
+   *  buffer and buffer length are ignored. */
+  HV_CONFSTR_HV_STATS        = 20
+>>>>>>> v3.18
 
 } HV_ConfstrQuery;
 
 /** Query a configuration string from the hypervisor.
  *
  * @param query Identifier for the specific string to be retrieved
+<<<<<<< HEAD
  *        (HV_CONFSTR_xxx).
+=======
+ *        (HV_CONFSTR_xxx).  Some strings may require or permit extra
+ *        arguments to be appended which select specific objects to be
+ *        described; see the string descriptions above.
+>>>>>>> v3.18
  * @param buf Buffer in which to place the string.
  * @param len Length of the buffer.
  * @return If query is valid, then the length of the corresponding string,
@@ -556,21 +582,31 @@ typedef enum {
  *        was truncated.  If query is invalid, HV_EINVAL.  If the specified
  *        buffer is not writable by the client, HV_EFAULT.
  */
+<<<<<<< HEAD
 int hv_confstr(HV_ConfstrQuery query, HV_VirtAddr buf, int len);
+=======
+int hv_confstr(HV_ConfstrQuery query, HV_VirtAddr buf, int len, ...);
+>>>>>>> v3.18
 
 /** Tile coordinate */
 typedef struct
 {
+<<<<<<< HEAD
 #ifndef __BIG_ENDIAN__
+=======
+>>>>>>> v3.18
   /** X coordinate, relative to supervisor's top-left coordinate */
   int x;
 
   /** Y coordinate, relative to supervisor's top-left coordinate */
   int y;
+<<<<<<< HEAD
 #else
   int y;
   int x;
 #endif
+=======
+>>>>>>> v3.18
 } HV_Coord;
 
 
@@ -585,6 +621,33 @@ typedef struct
  */
 int hv_get_ipi_pte(HV_Coord tile, int pl, HV_PTE* pte);
 
+<<<<<<< HEAD
+=======
+/** Configure the console interrupt.
+ *
+ * When the console client interrupt is enabled, the hypervisor will
+ * deliver the specified IPI to the client in the following situations:
+ *
+ * - The console has at least one character available for input.
+ *
+ * - The console can accept new characters for output, and the last call
+ *   to hv_console_write() did not write all of the characters requested
+ *   by the client.
+ *
+ * Note that in some system configurations, console interrupt will not
+ * be available; clients should be prepared for this routine to fail and
+ * to fall back to periodic console polling in that case.
+ *
+ * @param ipi Index of the IPI register which will receive the interrupt.
+ * @param event IPI event number for console interrupt. If less than 0,
+ *        disable the console IPI interrupt.
+ * @param coord Tile to be targeted for console interrupt.
+ * @return 0 on success, otherwise, HV_EINVAL if illegal parameter,
+ *         HV_ENOTSUP if console interrupt are not available.
+ */
+int hv_console_set_ipi(int ipi, int event, HV_Coord coord);
+
+>>>>>>> v3.18
 #else /* !CHIP_HAS_IPI() */
 
 /** A set of interrupts. */
@@ -1092,6 +1155,7 @@ HV_VirtAddrRange hv_inquire_virtual(int idx);
 /** A range of ASID values. */
 typedef struct
 {
+<<<<<<< HEAD
 #ifndef __BIG_ENDIAN__
   HV_ASID start;        /**< First ASID in the range. */
   unsigned int size;    /**< Number of ASIDs. Zero for an invalid range. */
@@ -1099,6 +1163,10 @@ typedef struct
   unsigned int size;    /**< Number of ASIDs. Zero for an invalid range. */
   HV_ASID start;        /**< First ASID in the range. */
 #endif
+=======
+  HV_ASID start;        /**< First ASID in the range. */
+  unsigned int size;    /**< Number of ASIDs. Zero for an invalid range. */
+>>>>>>> v3.18
 } HV_ASIDRange;
 
 /** Returns information about a range of ASIDs.
@@ -1422,7 +1490,10 @@ typedef enum
 /** Message recipient. */
 typedef struct
 {
+<<<<<<< HEAD
 #ifndef __BIG_ENDIAN__
+=======
+>>>>>>> v3.18
   /** X coordinate, relative to supervisor's top-left coordinate */
   unsigned int x:11;
 
@@ -1431,11 +1502,14 @@ typedef struct
 
   /** Status of this recipient */
   HV_Recip_State state:10;
+<<<<<<< HEAD
 #else //__BIG_ENDIAN__
   HV_Recip_State state:10;
   unsigned int y:11;
   unsigned int x:11;
 #endif
+=======
+>>>>>>> v3.18
 } HV_Recipient;
 
 /** Send a message to a set of recipients.

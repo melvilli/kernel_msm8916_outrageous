@@ -36,7 +36,10 @@
 #include <linux/mm.h>
 #include <linux/miscdevice.h>
 #include <linux/watchdog.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/pci.h>
 #include <linux/ioport.h>
 #include <linux/uaccess.h>
@@ -334,7 +337,11 @@ static struct miscdevice esb_miscdev = {
 /*
  * Data for PCI driver interface
  */
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(esb_pci_tbl) = {
+=======
+static const struct pci_device_id esb_pci_tbl[] = {
+>>>>>>> v3.18
 	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_ESB_9), },
 	{ 0, },                 /* End of list */
 };
@@ -497,4 +504,7 @@ module_pci_driver(esb_driver);
 MODULE_AUTHOR("Ross Biro and David Härdeman");
 MODULE_DESCRIPTION("Watchdog driver for Intel 6300ESB chipsets");
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18

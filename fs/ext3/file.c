@@ -50,10 +50,17 @@ static int ext3_release_file (struct inode * inode, struct file * filp)
 
 const struct file_operations ext3_file_operations = {
 	.llseek		= generic_file_llseek,
+<<<<<<< HEAD
 	.read		= do_sync_read,
 	.write		= do_sync_write,
 	.aio_read	= generic_file_aio_read,
 	.aio_write	= generic_file_aio_write,
+=======
+	.read		= new_sync_read,
+	.write		= new_sync_write,
+	.read_iter	= generic_file_read_iter,
+	.write_iter	= generic_file_write_iter,
+>>>>>>> v3.18
 	.unlocked_ioctl	= ext3_ioctl,
 #ifdef CONFIG_COMPAT
 	.compat_ioctl	= ext3_compat_ioctl,
@@ -63,7 +70,11 @@ const struct file_operations ext3_file_operations = {
 	.release	= ext3_release_file,
 	.fsync		= ext3_sync_file,
 	.splice_read	= generic_file_splice_read,
+<<<<<<< HEAD
 	.splice_write	= generic_file_splice_write,
+=======
+	.splice_write	= iter_file_splice_write,
+>>>>>>> v3.18
 };
 
 const struct inode_operations ext3_file_inode_operations = {
@@ -75,6 +86,10 @@ const struct inode_operations ext3_file_inode_operations = {
 	.removexattr	= generic_removexattr,
 #endif
 	.get_acl	= ext3_get_acl,
+<<<<<<< HEAD
+=======
+	.set_acl	= ext3_set_acl,
+>>>>>>> v3.18
 	.fiemap		= ext3_fiemap,
 };
 

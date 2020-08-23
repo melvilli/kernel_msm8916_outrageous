@@ -21,8 +21,11 @@
 
 #include <linux/xattr.h>
 
+<<<<<<< HEAD
 extern const struct xattr_handler btrfs_xattr_acl_access_handler;
 extern const struct xattr_handler btrfs_xattr_acl_default_handler;
+=======
+>>>>>>> v3.18
 extern const struct xattr_handler *btrfs_xattr_handlers[];
 
 extern ssize_t __btrfs_getxattr(struct inode *inode, const char *name,

@@ -123,7 +123,11 @@ void uml_setup_stubs(struct mm_struct *mm)
 	/* dup_mmap already holds mmap_sem */
 	err = install_special_mapping(mm, STUB_START, STUB_END - STUB_START,
 				      VM_READ | VM_MAYREAD | VM_EXEC |
+<<<<<<< HEAD
 				      VM_MAYEXEC | VM_DONTCOPY,
+=======
+				      VM_MAYEXEC | VM_DONTCOPY | VM_PFNMAP,
+>>>>>>> v3.18
 				      mm->context.stub_pages);
 	if (err) {
 		printk(KERN_ERR "install_special_mapping returned %d\n", err);

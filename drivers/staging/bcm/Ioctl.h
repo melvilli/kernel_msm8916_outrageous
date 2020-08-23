@@ -87,9 +87,15 @@ struct bcm_user_thread_req {
 #define IOCTL_BCM_FLASH2X_SECTION_WRITE		_IOW(BCM_IOCTL, 0x866, int)
 #define IOCTL_BCM_GET_FLASH2X_SECTION_BITMAP	_IOR(BCM_IOCTL, 0x867, int)
 #define IOCTL_BCM_SET_ACTIVE_SECTION		_IOW(BCM_IOCTL, 0x868, int)
+<<<<<<< HEAD
 #define	IOCTL_BCM_IDENTIFY_ACTIVE_SECTION	_IO(BCM_IOCTL, 0x869)
 #define IOCTL_BCM_COPY_SECTION			_IOW(BCM_IOCTL, 0x870, int)
 #define	IOCTL_BCM_GET_FLASH_CS_INFO		_IOR(BCM_IOCTL, 0x871, int)
+=======
+#define IOCTL_BCM_IDENTIFY_ACTIVE_SECTION	_IO(BCM_IOCTL, 0x869)
+#define IOCTL_BCM_COPY_SECTION			_IOW(BCM_IOCTL, 0x870, int)
+#define IOCTL_BCM_GET_FLASH_CS_INFO		_IOR(BCM_IOCTL, 0x871, int)
+>>>>>>> v3.18
 #define IOCTL_BCM_SELECT_DSD			_IOW(BCM_IOCTL, 0x872, int)
 #define IOCTL_BCM_NVM_RAW_READ			_IOR(BCM_IOCTL, 0x875, int)
 #define IOCTL_BCM_CNTRLMSG_MASK			_IOW(BCM_IOCTL, 0x874, int)
@@ -130,7 +136,11 @@ struct bcm_bulk_wrm_buffer {
 };
 
 enum bcm_flash2x_section_val {
+<<<<<<< HEAD
 	NO_SECTION_VAL = 0, /* no section is chosen when absolute offset is given for RD/WR */
+=======
+	NO_SECTION_VAL = 0, /* no section chosen when absolute offset is given for RD/WR */
+>>>>>>> v3.18
 	ISO_IMAGE1,
 	ISO_IMAGE2,
 	DSD0,
@@ -152,11 +162,19 @@ enum bcm_flash2x_section_val {
  * Structure used for READ/WRITE Flash Map2.x
  */
 struct bcm_flash2x_readwrite {
+<<<<<<< HEAD
 	enum bcm_flash2x_section_val Section; /* which section has to be read/written */
 	u32 offset;	     /* Offset within Section. */
 	u32 numOfBytes;	     /* NOB from the offset */
 	u32 bVerify;
 	void __user *pDataBuff;	     /* Buffer for reading/writing */
+=======
+	enum bcm_flash2x_section_val Section; /* section to be read/written */
+	u32 offset; /* offset within section. */
+	u32 numOfBytes; /* number of bytes from the offset */
+	u32 bVerify;
+	void __user *pDataBuff; /* buffer for reading/writing */
+>>>>>>> v3.18
 };
 
 /*
@@ -175,7 +193,11 @@ struct bcm_flash2x_copy_section {
 
 /*
  * This section provide the complete bitmap of the Flash.
+<<<<<<< HEAD
  * using this map lib/APP will isssue read/write command.
+=======
+ * using this map lib/APP will issue read/write command.
+>>>>>>> v3.18
  * Fields are defined as :
  * Bit [0] = section is present  //1:present, 0: Not present
  * Bit [1] = section is valid  //1: valid, 0: not valid
@@ -207,13 +229,19 @@ struct bcm_time_elapsed {
 };
 
 enum {
+<<<<<<< HEAD
 	WIMAX_IDX = 0,  /* To access WiMAX chip GPIO's for GPIO_MULTI_INFO or GPIO_MULTI_MODE */
 	HOST_IDX,	/* To access Host chip GPIO's for GPIO_MULTI_INFO or GPIO_MULTI_MODE */
+=======
+	WIMAX_IDX = 0, /* To access WiMAX chip GPIO's for GPIO_MULTI_INFO or GPIO_MULTI_MODE */
+	HOST_IDX, /* To access Host chip GPIO's for GPIO_MULTI_INFO or GPIO_MULTI_MODE */
+>>>>>>> v3.18
 	MAX_IDX
 };
 
 struct bcm_gpio_multi_info {
 	unsigned int uiGPIOCommand; /* 1 for set and 0 for get */
+<<<<<<< HEAD
 	unsigned int uiGPIOMask;    /* set the correspondig bit to 1 to access GPIO */
 	unsigned int uiGPIOValue;   /* 0 or 1; value to be set when command is 1. */
 } __packed;
@@ -221,6 +249,15 @@ struct bcm_gpio_multi_info {
 struct bcm_gpio_multi_mode {
 	unsigned int uiGPIOMode;    /* 1 for OUT mode, 0 for IN mode */
 	unsigned int uiGPIOMask;    /* GPIO mask to set mode */
+=======
+	unsigned int uiGPIOMask; /* set the corresponding bit to 1 to access GPIO */
+	unsigned int uiGPIOValue; /* 0 or 1; value to be set when command is 1. */
+} __packed;
+
+struct bcm_gpio_multi_mode {
+	unsigned int uiGPIOMode; /* 1 for OUT mode, 0 for IN mode */
+	unsigned int uiGPIOMask; /* GPIO mask to set mode */
+>>>>>>> v3.18
 } __packed;
 
 #endif

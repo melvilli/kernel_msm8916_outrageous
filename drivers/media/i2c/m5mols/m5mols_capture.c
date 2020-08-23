@@ -26,7 +26,11 @@
 #include <media/v4l2-device.h>
 #include <media/v4l2-subdev.h>
 #include <media/m5mols.h>
+<<<<<<< HEAD
 #include <media/s5p_fimc.h>
+=======
+#include <media/exynos-fimc.h>
+>>>>>>> v3.18
 
 #include "m5mols.h"
 #include "m5mols_reg.h"

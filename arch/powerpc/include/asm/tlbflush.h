@@ -165,7 +165,12 @@ static inline void flush_tlb_kernel_range(unsigned long start,
 /* Private function for use by PCI IO mapping code */
 extern void __flush_hash_table_range(struct mm_struct *mm, unsigned long start,
 				     unsigned long end);
+<<<<<<< HEAD
 
+=======
+extern void flush_tlb_pmd_range(struct mm_struct *mm, pmd_t *pmd,
+				unsigned long addr);
+>>>>>>> v3.18
 #else
 #error Unsupported MMU type
 #endif

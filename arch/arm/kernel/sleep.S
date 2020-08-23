@@ -107,7 +107,11 @@ ENTRY(cpu_resume_mmu)
 	instr_sync
 	mov	r0, r0
 	mov	r0, r0
+<<<<<<< HEAD
 	mov	pc, r3			@ jump to virtual address
+=======
+	ret	r3			@ jump to virtual address
+>>>>>>> v3.18
 ENDPROC(cpu_resume_mmu)
 	.popsection
 cpu_resume_after_mmu:
@@ -126,6 +130,14 @@ ENDPROC(cpu_resume_after_mmu)
 	.data
 	.align
 ENTRY(cpu_resume)
+<<<<<<< HEAD
+=======
+ARM_BE8(setend be)			@ ensure we are in BE mode
+#ifdef CONFIG_ARM_VIRT_EXT
+	bl	__hyp_stub_install_secondary
+#endif
+	safe_svcmode_maskall r1
+>>>>>>> v3.18
 	mov	r1, #0
 	ALT_SMP(mrc p15, 0, r0, c0, c0, 5)
 	ALT_UP_B(1f)
@@ -143,7 +155,10 @@ ENTRY(cpu_resume)
 	ldr	r0, [r0, #SLEEP_SAVE_SP_PHYS]
 	ldr	r0, [r0, r1, lsl #2]
 
+<<<<<<< HEAD
 	setmode	PSR_I_BIT | PSR_F_BIT | SVC_MODE, r1  @ set SVC, irqs off
+=======
+>>>>>>> v3.18
 	@ load phys pgd, stack, resume fn
   ARM(	ldmia	r0!, {r1, sp, pc}	)
 THUMB(	ldmia	r0!, {r1, r2, r3}	)

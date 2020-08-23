@@ -16,6 +16,10 @@
 #include <linux/string.h>
 
 #include <asm/bootinfo.h>
+<<<<<<< HEAD
+=======
+#include <asm/maar.h>
+>>>>>>> v3.18
 #include <asm/sections.h>
 #include <asm/fw/fw.h>
 
@@ -24,6 +28,7 @@ static fw_memblock_t mdesc[FW_MAX_MEMBLOCKS];
 /* determined physical memory size, not overridden by command line args	 */
 unsigned long physical_memsize = 0L;
 
+<<<<<<< HEAD
 fw_memblock_t * __init fw_getmdesc(void)
 {
 	char *memsize_str, *ptr;
@@ -40,6 +45,38 @@ fw_memblock_t * __init fw_getmdesc(void)
 	} else {
 		tmp = kstrtol(memsize_str, 0, &val);
 		physical_memsize = (unsigned long)val;
+=======
+fw_memblock_t * __init fw_getmdesc(int eva)
+{
+	char *memsize_str, *ememsize_str = NULL, *ptr;
+	unsigned long memsize = 0, ememsize = 0;
+	static char cmdline[COMMAND_LINE_SIZE] __initdata;
+	int tmp;
+
+	/* otherwise look in the environment */
+
+	memsize_str = fw_getenv("memsize");
+	if (memsize_str) {
+		tmp = kstrtoul(memsize_str, 0, &memsize);
+		if (tmp)
+			pr_warn("Failed to read the 'memsize' env variable.\n");
+	}
+	if (eva) {
+	/* Look for ememsize for EVA */
+		ememsize_str = fw_getenv("ememsize");
+		if (ememsize_str) {
+			tmp = kstrtoul(ememsize_str, 0, &ememsize);
+			if (tmp)
+				pr_warn("Failed to read the 'ememsize' env variable.\n");
+		}
+	}
+	if (!memsize && !ememsize) {
+		pr_warn("memsize not set in YAMON, set to default (32Mb)\n");
+		physical_memsize = 0x02000000;
+	} else {
+		/* If ememsize is set, then set physical_memsize to that */
+		physical_memsize = ememsize ? : memsize;
+>>>>>>> v3.18
 	}
 
 #ifdef CONFIG_CPU_BIG_ENDIAN
@@ -54,6 +91,7 @@ fw_memblock_t * __init fw_getmdesc(void)
 	ptr = strstr(cmdline, "memsize=");
 	if (ptr && (ptr != cmdline) && (*(ptr - 1) != ' '))
 		ptr = strstr(ptr, " memsize=");
+<<<<<<< HEAD
 
 	if (ptr)
 		memsize = memparse(ptr + 8, &ptr);
@@ -68,6 +106,32 @@ fw_memblock_t * __init fw_getmdesc(void)
 
 	mdesc[1].type = fw_code;
 	mdesc[1].base = 0x00001000;
+=======
+	/* And now look for ememsize */
+	if (eva) {
+		ptr = strstr(cmdline, "ememsize=");
+		if (ptr && (ptr != cmdline) && (*(ptr - 1) != ' '))
+			ptr = strstr(ptr, " ememsize=");
+	}
+
+	if (ptr)
+		memsize = memparse(ptr + 8 + (eva ? 1 : 0), &ptr);
+	else
+		memsize = physical_memsize;
+
+	/* Last 64K for HIGHMEM arithmetics */
+	if (memsize > 0x7fff0000)
+		memsize = 0x7fff0000;
+
+	memset(mdesc, 0, sizeof(mdesc));
+
+	mdesc[0].type = fw_dontuse;
+	mdesc[0].base = PHYS_OFFSET;
+	mdesc[0].size = 0x00001000;
+
+	mdesc[1].type = fw_code;
+	mdesc[1].base = mdesc[0].base + 0x00001000UL;
+>>>>>>> v3.18
 	mdesc[1].size = 0x000ef000;
 
 	/*
@@ -78,6 +142,7 @@ fw_memblock_t * __init fw_getmdesc(void)
 	 * devices.
 	 */
 	mdesc[2].type = fw_dontuse;
+<<<<<<< HEAD
 	mdesc[2].base = 0x000f0000;
 	mdesc[2].size = 0x00010000;
 
@@ -89,10 +154,32 @@ fw_memblock_t * __init fw_getmdesc(void)
 	mdesc[4].type = fw_free;
 	mdesc[4].base = CPHYSADDR(PFN_ALIGN(&_end));
 	mdesc[4].size = memsize - mdesc[4].base;
+=======
+	mdesc[2].base = mdesc[0].base + 0x000f0000UL;
+	mdesc[2].size = 0x00010000;
+
+	mdesc[3].type = fw_dontuse;
+	mdesc[3].base = mdesc[0].base + 0x00100000UL;
+	mdesc[3].size = CPHYSADDR(PFN_ALIGN((unsigned long)&_end)) -
+		0x00100000UL;
+
+	mdesc[4].type = fw_free;
+	mdesc[4].base = mdesc[0].base + CPHYSADDR(PFN_ALIGN(&_end));
+	mdesc[4].size = memsize - CPHYSADDR(mdesc[4].base);
+>>>>>>> v3.18
 
 	return &mdesc[0];
 }
 
+<<<<<<< HEAD
+=======
+static void free_init_pages_eva_malta(void *begin, void *end)
+{
+	free_init_pages("unused kernel", __pa_symbol((unsigned long *)begin),
+			__pa_symbol((unsigned long *)end));
+}
+
+>>>>>>> v3.18
 static int __init fw_memtype_classify(unsigned int type)
 {
 	switch (type) {
@@ -109,7 +196,13 @@ void __init fw_meminit(void)
 {
 	fw_memblock_t *p;
 
+<<<<<<< HEAD
 	p = fw_getmdesc();
+=======
+	p = fw_getmdesc(config_enabled(CONFIG_EVA));
+	free_init_pages_eva = (config_enabled(CONFIG_EVA) ?
+			       free_init_pages_eva_malta : NULL);
+>>>>>>> v3.18
 
 	while (p->size) {
 		long type;
@@ -138,3 +231,31 @@ void __init prom_free_prom_memory(void)
 				addr, addr + boot_mem_map.map[i].size);
 	}
 }
+<<<<<<< HEAD
+=======
+
+unsigned platform_maar_init(unsigned num_pairs)
+{
+	phys_addr_t mem_end = (physical_memsize & ~0xffffull) - 1;
+	struct maar_config cfg[] = {
+		/* DRAM preceding I/O */
+		{ 0x00000000, 0x0fffffff, MIPS_MAAR_S },
+
+		/* DRAM following I/O */
+		{ 0x20000000, mem_end, MIPS_MAAR_S },
+
+		/* DRAM alias in upper half of physical */
+		{ 0x80000000, 0x80000000 + mem_end, MIPS_MAAR_S },
+	};
+	unsigned i, num_cfg = ARRAY_SIZE(cfg);
+
+	/* If DRAM fits before I/O, drop the region following it */
+	if (physical_memsize <= 0x10000000) {
+		num_cfg--;
+		for (i = 1; i < num_cfg; i++)
+			cfg[i] = cfg[i + 1];
+	}
+
+	return maar_config(cfg, num_cfg, num_pairs);
+}
+>>>>>>> v3.18

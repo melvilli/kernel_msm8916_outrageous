@@ -12,7 +12,10 @@
  */
 
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/input.h>
 #include <linux/serio.h>
 #include <linux/interrupt.h>
@@ -38,7 +41,11 @@ static irqreturn_t altera_ps2_rxint(int irq, void *dev_id)
 {
 	struct ps2if *ps2if = dev_id;
 	unsigned int status;
+<<<<<<< HEAD
 	int handled = IRQ_NONE;
+=======
+	irqreturn_t handled = IRQ_NONE;
+>>>>>>> v3.18
 
 	while ((status = readl(ps2if->base)) & 0xffff0000) {
 		serio_interrupt(ps2if->io, status & 0xff, 0);
@@ -75,7 +82,11 @@ static void altera_ps2_close(struct serio *io)
 {
 	struct ps2if *ps2if = io->port_data;
 
+<<<<<<< HEAD
 	writel(0, ps2if->base); /* disable rx irq */
+=======
+	writel(0, ps2if->base + 4); /* disable rx irq */
+>>>>>>> v3.18
 }
 
 /*
@@ -163,7 +174,10 @@ static int altera_ps2_remove(struct platform_device *pdev)
 {
 	struct ps2if *ps2if = platform_get_drvdata(pdev);
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	serio_unregister_port(ps2if->io);
 	free_irq(ps2if->irq, ps2if);
 	iounmap(ps2if->base);
@@ -177,6 +191,10 @@ static int altera_ps2_remove(struct platform_device *pdev)
 #ifdef CONFIG_OF
 static const struct of_device_id altera_ps2_match[] = {
 	{ .compatible = "ALTR,ps2-1.0", },
+<<<<<<< HEAD
+=======
+	{ .compatible = "altr,ps2-1.0", },
+>>>>>>> v3.18
 	{},
 };
 MODULE_DEVICE_TABLE(of, altera_ps2_match);

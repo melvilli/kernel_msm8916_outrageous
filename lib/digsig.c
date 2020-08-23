@@ -86,12 +86,15 @@ static int digsig_verify_rsa(struct key *key,
 	down_read(&key->sem);
 	ukp = key->payload.data;
 
+<<<<<<< HEAD
 	if (!ukp) {
 		/* key was revoked before we acquired its semaphore */
 		err = -EKEYREVOKED;
 		goto err1;
 	}
 
+=======
+>>>>>>> v3.18
 	if (ukp->datalen < sizeof(*pkh))
 		goto err1;
 
@@ -181,10 +184,18 @@ err1:
  * digsig_verify() - digital signature verification with public key
  * @keyring:	keyring to search key in
  * @sig:	digital signature
+<<<<<<< HEAD
  * @sigen:	length of the signature
  * @data:	data
  * @datalen:	length of the data
  * @return:	0 on success, -EINVAL otherwise
+=======
+ * @siglen:	length of the signature
+ * @data:	data
+ * @datalen:	length of the data
+ *
+ * Returns 0 on success, -EINVAL otherwise
+>>>>>>> v3.18
  *
  * Verifies data integrity against digital signature.
  * Currently only RSA is supported.
@@ -215,7 +226,11 @@ int digsig_verify(struct key *keyring, const char *sig, int siglen,
 		kref = keyring_search(make_key_ref(keyring, 1UL),
 						&key_type_user, name);
 		if (IS_ERR(kref))
+<<<<<<< HEAD
 			key = ERR_PTR(PTR_ERR(kref));
+=======
+			key = ERR_CAST(kref);
+>>>>>>> v3.18
 		else
 			key = key_ref_to_ptr(kref);
 	} else {

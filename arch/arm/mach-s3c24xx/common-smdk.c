@@ -37,8 +37,13 @@
 #include <asm/irq.h>
 
 #include <mach/regs-gpio.h>
+<<<<<<< HEAD
 #include <linux/platform_data/leds-s3c24xx.h>
 
+=======
+#include <mach/gpio-samsung.h>
+#include <linux/platform_data/leds-s3c24xx.h>
+>>>>>>> v3.18
 #include <linux/platform_data/mtd-nand-s3c2410.h>
 
 #include <plat/gpio-cfg.h>

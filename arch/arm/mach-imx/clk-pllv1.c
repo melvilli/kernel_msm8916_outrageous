@@ -18,6 +18,14 @@
  *
  * PLL clock version 1, found on i.MX1/21/25/27/31/35
  */
+<<<<<<< HEAD
+=======
+
+#define MFN_BITS	(10)
+#define MFN_SIGN	(BIT(MFN_BITS - 1))
+#define MFN_MASK	(MFN_SIGN - 1)
+
+>>>>>>> v3.18
 struct clk_pllv1 {
 	struct clk_hw	hw;
 	void __iomem	*base;
@@ -25,6 +33,14 @@ struct clk_pllv1 {
 
 #define to_clk_pllv1(clk) (container_of(clk, struct clk_pllv1, clk))
 
+<<<<<<< HEAD
+=======
+static inline bool mfn_is_negative(unsigned int mfn)
+{
+	return !cpu_is_mx1() && !cpu_is_mx21() && (mfn & MFN_SIGN);
+}
+
+>>>>>>> v3.18
 static unsigned long clk_pllv1_recalc_rate(struct clk_hw *hw,
 		unsigned long parent_rate)
 {
@@ -58,10 +74,22 @@ static unsigned long clk_pllv1_recalc_rate(struct clk_hw *hw,
 
 	/*
 	 * On all i.MXs except i.MX1 and i.MX21 mfn is a 10bit
+<<<<<<< HEAD
 	 * 2's complements number
 	 */
 	if (!cpu_is_mx1() && !cpu_is_mx21() && mfn >= 0x200)
 		mfn_abs = 0x400 - mfn;
+=======
+	 * 2's complements number.
+	 * On i.MX27 the bit 9 is the sign bit.
+	 */
+	if (mfn_is_negative(mfn)) {
+		if (cpu_is_mx27())
+			mfn_abs = mfn & MFN_MASK;
+		else
+			mfn_abs = BIT(MFN_BITS) - mfn;
+	}
+>>>>>>> v3.18
 
 	rate = parent_rate * 2;
 	rate /= pd + 1;
@@ -70,7 +98,11 @@ static unsigned long clk_pllv1_recalc_rate(struct clk_hw *hw,
 
 	do_div(ll, mfd + 1);
 
+<<<<<<< HEAD
 	if (!cpu_is_mx1() && !cpu_is_mx21() && mfn >= 0x200)
+=======
+	if (mfn_is_negative(mfn))
+>>>>>>> v3.18
 		ll = -ll;
 
 	ll = (rate * mfi) + ll;

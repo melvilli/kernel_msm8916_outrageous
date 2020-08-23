@@ -13,12 +13,16 @@
 
 #include <linux/kernel.h>
 #include <linux/kprobes.h>
+<<<<<<< HEAD
 #include <asm/system_info.h>
+=======
+>>>>>>> v3.18
 #include <asm/opcodes.h>
 
 #include "kprobes.h"
 
 
+<<<<<<< HEAD
 #ifndef find_str_pc_offset
 
 /*
@@ -186,6 +190,12 @@ void __kprobes kprobe_emulate_none(struct kprobe *p, struct pt_regs *regs)
 static void __kprobes simulate_ldm1stm1(struct kprobe *p, struct pt_regs *regs)
 {
 	kprobe_opcode_t insn = p->opcode;
+=======
+static void __kprobes simulate_ldm1stm1(probes_opcode_t insn,
+		struct arch_probes_insn *asi,
+		struct pt_regs *regs)
+{
+>>>>>>> v3.18
 	int rn = (insn >> 16) & 0xf;
 	int lbit = insn & (1 << 20);
 	int wbit = insn & (1 << 21);
@@ -224,6 +234,7 @@ static void __kprobes simulate_ldm1stm1(struct kprobe *p, struct pt_regs *regs)
 	}
 }
 
+<<<<<<< HEAD
 static void __kprobes simulate_stm1_pc(struct kprobe *p, struct pt_regs *regs)
 {
 	regs->ARM_pc = (long)p->addr + str_pc_offset;
@@ -234,14 +245,40 @@ static void __kprobes simulate_stm1_pc(struct kprobe *p, struct pt_regs *regs)
 static void __kprobes simulate_ldm1_pc(struct kprobe *p, struct pt_regs *regs)
 {
 	simulate_ldm1stm1(p, regs);
+=======
+static void __kprobes simulate_stm1_pc(probes_opcode_t insn,
+	struct arch_probes_insn *asi,
+	struct pt_regs *regs)
+{
+	unsigned long addr = regs->ARM_pc - 4;
+
+	regs->ARM_pc = (long)addr + str_pc_offset;
+	simulate_ldm1stm1(insn, asi, regs);
+	regs->ARM_pc = (long)addr + 4;
+}
+
+static void __kprobes simulate_ldm1_pc(probes_opcode_t insn,
+	struct arch_probes_insn *asi,
+	struct pt_regs *regs)
+{
+	simulate_ldm1stm1(insn, asi, regs);
+>>>>>>> v3.18
 	load_write_pc(regs->ARM_pc, regs);
 }
 
 static void __kprobes
+<<<<<<< HEAD
 emulate_generic_r0_12_noflags(struct kprobe *p, struct pt_regs *regs)
 {
 	register void *rregs asm("r1") = regs;
 	register void *rfn asm("lr") = p->ainsn.insn_fn;
+=======
+emulate_generic_r0_12_noflags(probes_opcode_t insn,
+	struct arch_probes_insn *asi, struct pt_regs *regs)
+{
+	register void *rregs asm("r1") = regs;
+	register void *rfn asm("lr") = asi->insn_fn;
+>>>>>>> v3.18
 
 	__asm__ __volatile__ (
 		"stmdb	sp!, {%[regs], r11}	\n\t"
@@ -265,6 +302,7 @@ emulate_generic_r0_12_noflags(struct kprobe *p, struct pt_regs *regs)
 }
 
 static void __kprobes
+<<<<<<< HEAD
 emulate_generic_r2_14_noflags(struct kprobe *p, struct pt_regs *regs)
 {
 	emulate_generic_r0_12_noflags(p, (struct pt_regs *)(regs->uregs+2));
@@ -281,6 +319,29 @@ enum kprobe_insn __kprobes
 kprobe_decode_ldmstm(kprobe_opcode_t insn, struct arch_specific_insn *asi)
 {
 	kprobe_insn_handler_t *handler = 0;
+=======
+emulate_generic_r2_14_noflags(probes_opcode_t insn,
+	struct arch_probes_insn *asi, struct pt_regs *regs)
+{
+	emulate_generic_r0_12_noflags(insn, asi,
+		(struct pt_regs *)(regs->uregs+2));
+}
+
+static void __kprobes
+emulate_ldm_r3_15(probes_opcode_t insn,
+	struct arch_probes_insn *asi, struct pt_regs *regs)
+{
+	emulate_generic_r0_12_noflags(insn, asi,
+		(struct pt_regs *)(regs->uregs+3));
+	load_write_pc(regs->ARM_pc, regs);
+}
+
+enum probes_insn __kprobes
+kprobe_decode_ldmstm(probes_opcode_t insn, struct arch_probes_insn *asi,
+		const struct decode_header *h)
+{
+	probes_insn_handler_t *handler = 0;
+>>>>>>> v3.18
 	unsigned reglist = insn & 0xffff;
 	int is_ldm = insn & 0x100000;
 	int rn = (insn >> 16) & 0xf;
@@ -321,6 +382,7 @@ kprobe_decode_ldmstm(kprobe_opcode_t insn, struct arch_specific_insn *asi)
 	return INSN_GOOD_NO_SLOT;
 }
 
+<<<<<<< HEAD
 
 /*
  * Prepare an instruction slot to receive an instruction for emulating.
@@ -579,3 +641,5 @@ kprobe_decode_insn(kprobe_opcode_t insn, struct arch_specific_insn *asi,
 		}
 		}
 	}
+=======
+>>>>>>> v3.18

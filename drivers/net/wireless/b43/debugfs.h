@@ -86,7 +86,11 @@ void b43_debugfs_log_txstat(struct b43_wldev *dev,
 
 static inline bool b43_debug(struct b43_wldev *dev, enum b43_dyndbg feature)
 {
+<<<<<<< HEAD
 	return 0;
+=======
+	return false;
+>>>>>>> v3.18
 }
 
 static inline void b43_debugfs_init(void)

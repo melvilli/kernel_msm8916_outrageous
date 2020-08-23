@@ -26,16 +26,35 @@
  *  675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+<<<<<<< HEAD
 #include <linux/export.h>
 #include <linux/types.h>
+=======
+#include "bcm47xx_private.h"
+
+#include <linux/export.h>
+#include <linux/types.h>
+#include <linux/ethtool.h>
+#include <linux/phy.h>
+#include <linux/phy_fixed.h>
+>>>>>>> v3.18
 #include <linux/ssb/ssb.h>
 #include <linux/ssb/ssb_embedded.h>
 #include <linux/bcma/bcma_soc.h>
 #include <asm/bootinfo.h>
+<<<<<<< HEAD
+=======
+#include <asm/idle.h>
+#include <asm/prom.h>
+>>>>>>> v3.18
 #include <asm/reboot.h>
 #include <asm/time.h>
 #include <bcm47xx.h>
 #include <bcm47xx_nvram.h>
+<<<<<<< HEAD
+=======
+#include <bcm47xx_board.h>
+>>>>>>> v3.18
 
 union bcm47xx_bus bcm47xx_bus;
 EXPORT_SYMBOL(bcm47xx_bus);
@@ -51,7 +70,20 @@ static void bcm47xx_machine_restart(char *command)
 	switch (bcm47xx_bus_type) {
 #ifdef CONFIG_BCM47XX_SSB
 	case BCM47XX_BUS_TYPE_SSB:
+<<<<<<< HEAD
 		ssb_watchdog_timer_set(&bcm47xx_bus.ssb, 1);
+=======
+		if (bcm47xx_bus.ssb.chip_id == 0x4785)
+			write_c0_diag4(1 << 22);
+		ssb_watchdog_timer_set(&bcm47xx_bus.ssb, 1);
+		if (bcm47xx_bus.ssb.chip_id == 0x4785) {
+			__asm__ __volatile__(
+				".set\tmips3\n\t"
+				"sync\n\t"
+				"wait\n\t"
+				".set\tmips0");
+		}
+>>>>>>> v3.18
 		break;
 #endif
 #ifdef CONFIG_BCM47XX_BCMA
@@ -194,6 +226,13 @@ static void __init bcm47xx_register_bcma(void)
 
 	err = bcma_host_soc_register(&bcm47xx_bus.bcma);
 	if (err)
+<<<<<<< HEAD
+=======
+		panic("Failed to register BCMA bus (err %d)", err);
+
+	err = bcma_host_soc_init(&bcm47xx_bus.bcma);
+	if (err)
+>>>>>>> v3.18
 		panic("Failed to initialize BCMA bus (err %d)", err);
 
 	bcm47xx_fill_bcma_boardinfo(&bcm47xx_bus.bcma.bus.boardinfo, NULL);
@@ -204,24 +243,76 @@ void __init plat_mem_setup(void)
 {
 	struct cpuinfo_mips *c = &current_cpu_data;
 
+<<<<<<< HEAD
 	if (c->cputype == CPU_74K) {
+=======
+	if ((c->cputype == CPU_74K) || (c->cputype == CPU_1074K)) {
+>>>>>>> v3.18
 		printk(KERN_INFO "bcm47xx: using bcma bus\n");
 #ifdef CONFIG_BCM47XX_BCMA
 		bcm47xx_bus_type = BCM47XX_BUS_TYPE_BCMA;
 		bcm47xx_register_bcma();
+<<<<<<< HEAD
+=======
+		bcm47xx_set_system_type(bcm47xx_bus.bcma.bus.chipinfo.id);
+#ifdef CONFIG_HIGHMEM
+		bcm47xx_prom_highmem_init();
+#endif
+>>>>>>> v3.18
 #endif
 	} else {
 		printk(KERN_INFO "bcm47xx: using ssb bus\n");
 #ifdef CONFIG_BCM47XX_SSB
 		bcm47xx_bus_type = BCM47XX_BUS_TYPE_SSB;
 		bcm47xx_register_ssb();
+<<<<<<< HEAD
+=======
+		bcm47xx_set_system_type(bcm47xx_bus.ssb.chip_id);
+>>>>>>> v3.18
 #endif
 	}
 
 	_machine_restart = bcm47xx_machine_restart;
 	_machine_halt = bcm47xx_machine_halt;
 	pm_power_off = bcm47xx_machine_halt;
+<<<<<<< HEAD
 }
+=======
+	bcm47xx_board_detect();
+	mips_set_machine_name(bcm47xx_board_get_name());
+}
+
+static int __init bcm47xx_cpu_fixes(void)
+{
+	switch (bcm47xx_bus_type) {
+#ifdef CONFIG_BCM47XX_SSB
+	case BCM47XX_BUS_TYPE_SSB:
+		/* Nothing to do */
+		break;
+#endif
+#ifdef CONFIG_BCM47XX_BCMA
+	case BCM47XX_BUS_TYPE_BCMA:
+		/* The BCM4706 has a problem with the CPU wait instruction.
+		 * When r4k_wait or r4k_wait_irqoff is used will just hang and
+		 * not return from a msleep(). Removing the cpu_wait
+		 * functionality is a workaround for this problem. The BCM4716
+		 * does not have this problem.
+		 */
+		if (bcm47xx_bus.bcma.bus.chipinfo.id == BCMA_CHIP_ID_BCM4706)
+			cpu_wait = NULL;
+		break;
+#endif
+	}
+	return 0;
+}
+arch_initcall(bcm47xx_cpu_fixes);
+
+static struct fixed_phy_status bcm47xx_fixed_phy_status __initdata = {
+	.link	= 1,
+	.speed	= SPEED_100,
+	.duplex	= DUPLEX_FULL,
+};
+>>>>>>> v3.18
 
 static int __init bcm47xx_register_bus_complete(void)
 {
@@ -237,6 +328,14 @@ static int __init bcm47xx_register_bus_complete(void)
 		break;
 #endif
 	}
+<<<<<<< HEAD
+=======
+	bcm47xx_buttons_register();
+	bcm47xx_leds_register();
+	bcm47xx_workarounds();
+
+	fixed_phy_add(PHY_POLL, 0, &bcm47xx_fixed_phy_status);
+>>>>>>> v3.18
 	return 0;
 }
 device_initcall(bcm47xx_register_bus_complete);

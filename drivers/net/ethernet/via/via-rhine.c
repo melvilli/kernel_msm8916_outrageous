@@ -94,6 +94,13 @@ static const int multicast_filter_limit = 32;
 #include <linux/ioport.h>
 #include <linux/interrupt.h>
 #include <linux/pci.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_device.h>
+#include <linux/of_irq.h>
+#include <linux/platform_device.h>
+>>>>>>> v3.18
 #include <linux/dma-mapping.h>
 #include <linux/netdevice.h>
 #include <linux/etherdevice.h>
@@ -116,6 +123,7 @@ static const int multicast_filter_limit = 32;
 static const char version[] =
 	"v1.10-LK" DRV_VERSION " " DRV_RELDATE " Written by Donald Becker";
 
+<<<<<<< HEAD
 /* This driver was written to use PCI memory space. Some early versions
    of the Rhine may only work correctly with I/O space accesses. */
 #ifdef CONFIG_VIA_RHINE_MMIO
@@ -123,6 +131,8 @@ static const char version[] =
 #else
 #endif
 
+=======
+>>>>>>> v3.18
 MODULE_AUTHOR("Donald Becker <becker@scyld.com>");
 MODULE_DESCRIPTION("VIA Rhine PCI Fast Ethernet driver");
 MODULE_LICENSE("GPL");
@@ -260,6 +270,15 @@ enum rhine_quirks {
 	rq6patterns	= 0x0040,	/* 6 instead of 4 patterns for WOL */
 	rqStatusWBRace	= 0x0080,	/* Tx Status Writeback Error possible */
 	rqRhineI	= 0x0100,	/* See comment below */
+<<<<<<< HEAD
+=======
+	rqIntPHY	= 0x0200,	/* Integrated PHY */
+	rqMgmt		= 0x0400,	/* Management adapter */
+	rqNeedEnMMIO	= 0x0800,	/* Whether the core needs to be
+					 * switched from PIO mode to MMIO
+					 * (only applies to PCI)
+					 */
+>>>>>>> v3.18
 };
 /*
  * rqRhineI: VT86C100A (aka Rhine-I) uses different bits to enable
@@ -270,7 +289,11 @@ enum rhine_quirks {
 /* Beware of PCI posted writes */
 #define IOSYNC	do { ioread8(ioaddr + StationAddr); } while (0)
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(rhine_pci_tbl) = {
+=======
+static const struct pci_device_id rhine_pci_tbl[] = {
+>>>>>>> v3.18
 	{ 0x1106, 0x3043, PCI_ANY_ID, PCI_ANY_ID, },	/* VT86C100A */
 	{ 0x1106, 0x3065, PCI_ANY_ID, PCI_ANY_ID, },	/* VT6102 */
 	{ 0x1106, 0x3106, PCI_ANY_ID, PCI_ANY_ID, },	/* 6105{,L,LOM} */
@@ -279,6 +302,18 @@ static DEFINE_PCI_DEVICE_TABLE(rhine_pci_tbl) = {
 };
 MODULE_DEVICE_TABLE(pci, rhine_pci_tbl);
 
+<<<<<<< HEAD
+=======
+/* OpenFirmware identifiers for platform-bus devices
+ * The .data field is currently only used to store quirks
+ */
+static u32 vt8500_quirks = rqWOL | rqForceReset | rq6patterns;
+static struct of_device_id rhine_of_tbl[] = {
+	{ .compatible = "via,vt8500-rhine", .data = &vt8500_quirks },
+	{ }	/* terminate list */
+};
+MODULE_DEVICE_TABLE(of, rhine_of_tbl);
+>>>>>>> v3.18
 
 /* Offsets to the device registers. */
 enum register_offsets {
@@ -338,13 +373,19 @@ enum bcr1_bits {
 	BCR1_MED1=0x80,		/* for VT6102 */
 };
 
+<<<<<<< HEAD
 #ifdef USE_MMIO
+=======
+>>>>>>> v3.18
 /* Registers we check that mmio and reg are the same. */
 static const int mmio_verify_registers[] = {
 	RxConfig, TxConfig, IntrEnable, ConfigA, ConfigB, ConfigC, ConfigD,
 	0
 };
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 
 /* Bits in the interrupt status/mask registers. */
 enum intr_status_bits {
@@ -446,7 +487,11 @@ struct rhine_private {
 	unsigned char *tx_bufs;
 	dma_addr_t tx_bufs_dma;
 
+<<<<<<< HEAD
 	struct pci_dev *pdev;
+=======
+	int irq;
+>>>>>>> v3.18
 	long pioaddr;
 	struct net_device *dev;
 	struct napi_struct napi;
@@ -649,6 +694,7 @@ static void rhine_chip_reset(struct net_device *dev)
 		   "failed" : "succeeded");
 }
 
+<<<<<<< HEAD
 #ifdef USE_MMIO
 static void enable_mmio(long pioaddr, u32 quirks)
 {
@@ -663,6 +709,48 @@ static void enable_mmio(long pioaddr, u32 quirks)
 	}
 }
 #endif
+=======
+static void enable_mmio(long pioaddr, u32 quirks)
+{
+	int n;
+
+	if (quirks & rqNeedEnMMIO) {
+		if (quirks & rqRhineI) {
+			/* More recent docs say that this bit is reserved */
+			n = inb(pioaddr + ConfigA) | 0x20;
+			outb(n, pioaddr + ConfigA);
+		} else {
+			n = inb(pioaddr + ConfigD) | 0x80;
+			outb(n, pioaddr + ConfigD);
+		}
+	}
+}
+
+static inline int verify_mmio(struct device *hwdev,
+			      long pioaddr,
+			      void __iomem *ioaddr,
+			      u32 quirks)
+{
+	if (quirks & rqNeedEnMMIO) {
+		int i = 0;
+
+		/* Check that selected MMIO registers match the PIO ones */
+		while (mmio_verify_registers[i]) {
+			int reg = mmio_verify_registers[i++];
+			unsigned char a = inb(pioaddr+reg);
+			unsigned char b = readb(ioaddr+reg);
+
+			if (a != b) {
+				dev_err(hwdev,
+					"MMIO do not match PIO [%02x] (%02x != %02x)\n",
+					reg, a, b);
+				return -EIO;
+			}
+		}
+	}
+	return 0;
+}
+>>>>>>> v3.18
 
 /*
  * Loads bytes 0x00-0x05, 0x6E-0x6F, 0x78-0x7B from EEPROM
@@ -682,14 +770,20 @@ static void rhine_reload_eeprom(long pioaddr, struct net_device *dev)
 	if (i > 512)
 		pr_info("%4d cycles used @ %s:%d\n", i, __func__, __LINE__);
 
+<<<<<<< HEAD
 #ifdef USE_MMIO
+=======
+>>>>>>> v3.18
 	/*
 	 * Reloading from EEPROM overwrites ConfigA-D, so we must re-enable
 	 * MMIO. If reloading EEPROM was done first this could be avoided, but
 	 * it is not known if that still works with the "win98-reboot" problem.
 	 */
 	enable_mmio(pioaddr, rp->quirks);
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 
 	/* Turn off EEPROM-controlled wake-up (magic packet) */
 	if (rp->quirks & rqWOL)
@@ -701,7 +795,11 @@ static void rhine_reload_eeprom(long pioaddr, struct net_device *dev)
 static void rhine_poll(struct net_device *dev)
 {
 	struct rhine_private *rp = netdev_priv(dev);
+<<<<<<< HEAD
 	const int irq = rp->pdev->irq;
+=======
+	const int irq = rp->irq;
+>>>>>>> v3.18
 
 	disable_irq(irq);
 	rhine_interrupt(irq, dev);
@@ -846,7 +944,12 @@ static void rhine_hw_init(struct net_device *dev, long pioaddr)
 		msleep(5);
 
 	/* Reload EEPROM controlled bytes cleared by soft reset */
+<<<<<<< HEAD
 	rhine_reload_eeprom(pioaddr, dev);
+=======
+	if (dev_is_pci(dev->dev.parent))
+		rhine_reload_eeprom(pioaddr, dev);
+>>>>>>> v3.18
 }
 
 static const struct net_device_ops rhine_netdev_ops = {
@@ -867,6 +970,7 @@ static const struct net_device_ops rhine_netdev_ops = {
 #endif
 };
 
+<<<<<<< HEAD
 static int rhine_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 {
 	struct net_device *dev;
@@ -939,17 +1043,39 @@ static int rhine_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 
 	pci_set_master(pdev);
 
+=======
+static int rhine_init_one_common(struct device *hwdev, u32 quirks,
+				 long pioaddr, void __iomem *ioaddr, int irq)
+{
+	struct net_device *dev;
+	struct rhine_private *rp;
+	int i, rc, phy_id;
+	const char *name;
+
+	/* this should always be supported */
+	rc = dma_set_mask(hwdev, DMA_BIT_MASK(32));
+	if (rc) {
+		dev_err(hwdev, "32-bit DMA addresses not supported by the card!?\n");
+		goto err_out;
+	}
+
+>>>>>>> v3.18
 	dev = alloc_etherdev(sizeof(struct rhine_private));
 	if (!dev) {
 		rc = -ENOMEM;
 		goto err_out;
 	}
+<<<<<<< HEAD
 	SET_NETDEV_DEV(dev, &pdev->dev);
+=======
+	SET_NETDEV_DEV(dev, hwdev);
+>>>>>>> v3.18
 
 	rp = netdev_priv(dev);
 	rp->dev = dev;
 	rp->quirks = quirks;
 	rp->pioaddr = pioaddr;
+<<<<<<< HEAD
 	rp->pdev = pdev;
 	rp->msg_enable = netif_msg_init(debug, RHINE_MSG_DEFAULT);
 
@@ -986,6 +1112,16 @@ static int rhine_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 #endif /* USE_MMIO */
 
 	rp->base = ioaddr;
+=======
+	rp->base = ioaddr;
+	rp->irq = irq;
+	rp->msg_enable = netif_msg_init(debug, RHINE_MSG_DEFAULT);
+
+	phy_id = rp->quirks & rqIntPHY ? 1 : 0;
+
+	u64_stats_init(&rp->tx_stats.syncp);
+	u64_stats_init(&rp->rx_stats.syncp);
+>>>>>>> v3.18
 
 	/* Get chip registers into a sane state */
 	rhine_power_init(dev);
@@ -1019,7 +1155,11 @@ static int rhine_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 
 	/* The chip-specific entries in the device structure. */
 	dev->netdev_ops = &rhine_netdev_ops;
+<<<<<<< HEAD
 	dev->ethtool_ops = &netdev_ethtool_ops,
+=======
+	dev->ethtool_ops = &netdev_ethtool_ops;
+>>>>>>> v3.18
 	dev->watchdog_timeo = TX_TIMEOUT;
 
 	netif_napi_add(dev, &rp->napi, rhine_napipoll, 64);
@@ -1027,7 +1167,11 @@ static int rhine_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 	if (rp->quirks & rqRhineI)
 		dev->features |= NETIF_F_SG|NETIF_F_HW_CSUM;
 
+<<<<<<< HEAD
 	if (pdev->revision >= VT6105M)
+=======
+	if (rp->quirks & rqMgmt)
+>>>>>>> v3.18
 		dev->features |= NETIF_F_HW_VLAN_CTAG_TX |
 				 NETIF_F_HW_VLAN_CTAG_RX |
 				 NETIF_F_HW_VLAN_CTAG_FILTER;
@@ -1035,6 +1179,7 @@ static int rhine_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 	/* dev->name not defined before register_netdev()! */
 	rc = register_netdev(dev);
 	if (rc)
+<<<<<<< HEAD
 		goto err_out_unmap;
 
 	netdev_info(dev, "VIA %s at 0x%lx, %pM, IRQ %d\n",
@@ -1047,6 +1192,23 @@ static int rhine_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 		    dev->dev_addr, pdev->irq);
 
 	pci_set_drvdata(pdev, dev);
+=======
+		goto err_out_free_netdev;
+
+	if (rp->quirks & rqRhineI)
+		name = "Rhine";
+	else if (rp->quirks & rqStatusWBRace)
+		name = "Rhine II";
+	else if (rp->quirks & rqMgmt)
+		name = "Rhine III (Management Adapter)";
+	else
+		name = "Rhine III";
+
+	netdev_info(dev, "VIA %s at 0x%lx, %pM, IRQ %d\n",
+		    name, (long)ioaddr, dev->dev_addr, rp->irq);
+
+	dev_set_drvdata(hwdev, dev);
+>>>>>>> v3.18
 
 	{
 		u16 mii_cmd;
@@ -1075,16 +1237,112 @@ static int rhine_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 
 	return 0;
 
-err_out_unmap:
-	pci_iounmap(pdev, ioaddr);
-err_out_free_res:
-	pci_release_regions(pdev);
+<<<<<<< HEAD
+=======
 err_out_free_netdev:
 	free_netdev(dev);
 err_out:
 	return rc;
 }
 
+static int rhine_init_one_pci(struct pci_dev *pdev,
+			      const struct pci_device_id *ent)
+{
+	struct device *hwdev = &pdev->dev;
+	int rc;
+	long pioaddr, memaddr;
+	void __iomem *ioaddr;
+	int io_size = pdev->revision < VTunknown0 ? 128 : 256;
+
+/* This driver was written to use PCI memory space. Some early versions
+ * of the Rhine may only work correctly with I/O space accesses.
+ * TODO: determine for which revisions this is true and assign the flag
+ *	 in code as opposed to this Kconfig option (???)
+ */
+#ifdef CONFIG_VIA_RHINE_MMIO
+	u32 quirks = rqNeedEnMMIO;
+#else
+	u32 quirks = 0;
+#endif
+
+/* when built into the kernel, we only print version if device is found */
+#ifndef MODULE
+	pr_info_once("%s\n", version);
+#endif
+
+	rc = pci_enable_device(pdev);
+	if (rc)
+		goto err_out;
+
+	if (pdev->revision < VTunknown0) {
+		quirks |= rqRhineI;
+	} else if (pdev->revision >= VT6102) {
+		quirks |= rqWOL | rqForceReset;
+		if (pdev->revision < VT6105) {
+			quirks |= rqStatusWBRace;
+		} else {
+			quirks |= rqIntPHY;
+			if (pdev->revision >= VT6105_B0)
+				quirks |= rq6patterns;
+			if (pdev->revision >= VT6105M)
+				quirks |= rqMgmt;
+		}
+	}
+
+	/* sanity check */
+	if ((pci_resource_len(pdev, 0) < io_size) ||
+	    (pci_resource_len(pdev, 1) < io_size)) {
+		rc = -EIO;
+		dev_err(hwdev, "Insufficient PCI resources, aborting\n");
+		goto err_out_pci_disable;
+	}
+
+	pioaddr = pci_resource_start(pdev, 0);
+	memaddr = pci_resource_start(pdev, 1);
+
+	pci_set_master(pdev);
+
+	rc = pci_request_regions(pdev, DRV_NAME);
+	if (rc)
+		goto err_out_pci_disable;
+
+	ioaddr = pci_iomap(pdev, (quirks & rqNeedEnMMIO ? 1 : 0), io_size);
+	if (!ioaddr) {
+		rc = -EIO;
+		dev_err(hwdev,
+			"ioremap failed for device %s, region 0x%X @ 0x%lX\n",
+			dev_name(hwdev), io_size, memaddr);
+		goto err_out_free_res;
+	}
+
+	enable_mmio(pioaddr, quirks);
+
+	rc = verify_mmio(hwdev, pioaddr, ioaddr, quirks);
+	if (rc)
+		goto err_out_unmap;
+
+	rc = rhine_init_one_common(&pdev->dev, quirks,
+				   pioaddr, ioaddr, pdev->irq);
+	if (!rc)
+		return 0;
+
+>>>>>>> v3.18
+err_out_unmap:
+	pci_iounmap(pdev, ioaddr);
+err_out_free_res:
+	pci_release_regions(pdev);
+<<<<<<< HEAD
+err_out_free_netdev:
+	free_netdev(dev);
+=======
+err_out_pci_disable:
+	pci_disable_device(pdev);
+>>>>>>> v3.18
+err_out:
+	return rc;
+}
+
+<<<<<<< HEAD
 static int alloc_ring(struct net_device* dev)
 {
 	struct rhine_private *rp = netdev_priv(dev);
@@ -1095,11 +1353,55 @@ static int alloc_ring(struct net_device* dev)
 				    RX_RING_SIZE * sizeof(struct rx_desc) +
 				    TX_RING_SIZE * sizeof(struct tx_desc),
 				    &ring_dma);
+=======
+static int rhine_init_one_platform(struct platform_device *pdev)
+{
+	const struct of_device_id *match;
+	const u32 *quirks;
+	int irq;
+	struct resource *res;
+	void __iomem *ioaddr;
+
+	match = of_match_device(rhine_of_tbl, &pdev->dev);
+	if (!match)
+		return -EINVAL;
+
+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+	ioaddr = devm_ioremap_resource(&pdev->dev, res);
+	if (IS_ERR(ioaddr))
+		return PTR_ERR(ioaddr);
+
+	irq = irq_of_parse_and_map(pdev->dev.of_node, 0);
+	if (!irq)
+		return -EINVAL;
+
+	quirks = match->data;
+	if (!quirks)
+		return -EINVAL;
+
+	return rhine_init_one_common(&pdev->dev, *quirks,
+				     (long)ioaddr, ioaddr, irq);
+}
+
+static int alloc_ring(struct net_device* dev)
+{
+	struct rhine_private *rp = netdev_priv(dev);
+	struct device *hwdev = dev->dev.parent;
+	void *ring;
+	dma_addr_t ring_dma;
+
+	ring = dma_alloc_coherent(hwdev,
+				  RX_RING_SIZE * sizeof(struct rx_desc) +
+				  TX_RING_SIZE * sizeof(struct tx_desc),
+				  &ring_dma,
+				  GFP_ATOMIC);
+>>>>>>> v3.18
 	if (!ring) {
 		netdev_err(dev, "Could not allocate DMA memory\n");
 		return -ENOMEM;
 	}
 	if (rp->quirks & rqRhineI) {
+<<<<<<< HEAD
 		rp->tx_bufs = pci_alloc_consistent(rp->pdev,
 						   PKT_BUF_SZ * TX_RING_SIZE,
 						   &rp->tx_bufs_dma);
@@ -1108,6 +1410,17 @@ static int alloc_ring(struct net_device* dev)
 				    RX_RING_SIZE * sizeof(struct rx_desc) +
 				    TX_RING_SIZE * sizeof(struct tx_desc),
 				    ring, ring_dma);
+=======
+		rp->tx_bufs = dma_alloc_coherent(hwdev,
+						 PKT_BUF_SZ * TX_RING_SIZE,
+						 &rp->tx_bufs_dma,
+						 GFP_ATOMIC);
+		if (rp->tx_bufs == NULL) {
+			dma_free_coherent(hwdev,
+					  RX_RING_SIZE * sizeof(struct rx_desc) +
+					  TX_RING_SIZE * sizeof(struct tx_desc),
+					  ring, ring_dma);
+>>>>>>> v3.18
 			return -ENOMEM;
 		}
 	}
@@ -1123,6 +1436,7 @@ static int alloc_ring(struct net_device* dev)
 static void free_ring(struct net_device* dev)
 {
 	struct rhine_private *rp = netdev_priv(dev);
+<<<<<<< HEAD
 
 	pci_free_consistent(rp->pdev,
 			    RX_RING_SIZE * sizeof(struct rx_desc) +
@@ -1133,6 +1447,19 @@ static void free_ring(struct net_device* dev)
 	if (rp->tx_bufs)
 		pci_free_consistent(rp->pdev, PKT_BUF_SZ * TX_RING_SIZE,
 				    rp->tx_bufs, rp->tx_bufs_dma);
+=======
+	struct device *hwdev = dev->dev.parent;
+
+	dma_free_coherent(hwdev,
+			  RX_RING_SIZE * sizeof(struct rx_desc) +
+			  TX_RING_SIZE * sizeof(struct tx_desc),
+			  rp->rx_ring, rp->rx_ring_dma);
+	rp->tx_ring = NULL;
+
+	if (rp->tx_bufs)
+		dma_free_coherent(hwdev, PKT_BUF_SZ * TX_RING_SIZE,
+				  rp->tx_bufs, rp->tx_bufs_dma);
+>>>>>>> v3.18
 
 	rp->tx_bufs = NULL;
 
@@ -1141,6 +1468,10 @@ static void free_ring(struct net_device* dev)
 static void alloc_rbufs(struct net_device *dev)
 {
 	struct rhine_private *rp = netdev_priv(dev);
+<<<<<<< HEAD
+=======
+	struct device *hwdev = dev->dev.parent;
+>>>>>>> v3.18
 	dma_addr_t next;
 	int i;
 
@@ -1169,9 +1500,19 @@ static void alloc_rbufs(struct net_device *dev)
 			break;
 
 		rp->rx_skbuff_dma[i] =
+<<<<<<< HEAD
 			pci_map_single(rp->pdev, skb->data, rp->rx_buf_sz,
 				       PCI_DMA_FROMDEVICE);
 
+=======
+			dma_map_single(hwdev, skb->data, rp->rx_buf_sz,
+				       DMA_FROM_DEVICE);
+		if (dma_mapping_error(hwdev, rp->rx_skbuff_dma[i])) {
+			rp->rx_skbuff_dma[i] = 0;
+			dev_kfree_skb(skb);
+			break;
+		}
+>>>>>>> v3.18
 		rp->rx_ring[i].addr = cpu_to_le32(rp->rx_skbuff_dma[i]);
 		rp->rx_ring[i].rx_status = cpu_to_le32(DescOwn);
 	}
@@ -1181,6 +1522,10 @@ static void alloc_rbufs(struct net_device *dev)
 static void free_rbufs(struct net_device* dev)
 {
 	struct rhine_private *rp = netdev_priv(dev);
+<<<<<<< HEAD
+=======
+	struct device *hwdev = dev->dev.parent;
+>>>>>>> v3.18
 	int i;
 
 	/* Free all the skbuffs in the Rx queue. */
@@ -1188,9 +1533,15 @@ static void free_rbufs(struct net_device* dev)
 		rp->rx_ring[i].rx_status = 0;
 		rp->rx_ring[i].addr = cpu_to_le32(0xBADF00D0); /* An invalid address. */
 		if (rp->rx_skbuff[i]) {
+<<<<<<< HEAD
 			pci_unmap_single(rp->pdev,
 					 rp->rx_skbuff_dma[i],
 					 rp->rx_buf_sz, PCI_DMA_FROMDEVICE);
+=======
+			dma_unmap_single(hwdev,
+					 rp->rx_skbuff_dma[i],
+					 rp->rx_buf_sz, DMA_FROM_DEVICE);
+>>>>>>> v3.18
 			dev_kfree_skb(rp->rx_skbuff[i]);
 		}
 		rp->rx_skbuff[i] = NULL;
@@ -1221,6 +1572,10 @@ static void alloc_tbufs(struct net_device* dev)
 static void free_tbufs(struct net_device* dev)
 {
 	struct rhine_private *rp = netdev_priv(dev);
+<<<<<<< HEAD
+=======
+	struct device *hwdev = dev->dev.parent;
+>>>>>>> v3.18
 	int i;
 
 	for (i = 0; i < TX_RING_SIZE; i++) {
@@ -1229,10 +1584,17 @@ static void free_tbufs(struct net_device* dev)
 		rp->tx_ring[i].addr = cpu_to_le32(0xBADF00D0); /* An invalid address. */
 		if (rp->tx_skbuff[i]) {
 			if (rp->tx_skbuff_dma[i]) {
+<<<<<<< HEAD
 				pci_unmap_single(rp->pdev,
 						 rp->tx_skbuff_dma[i],
 						 rp->tx_skbuff[i]->len,
 						 PCI_DMA_TODEVICE);
+=======
+				dma_unmap_single(hwdev,
+						 rp->tx_skbuff_dma[i],
+						 rp->tx_skbuff[i]->len,
+						 DMA_TO_DEVICE);
+>>>>>>> v3.18
 			}
 			dev_kfree_skb(rp->tx_skbuff[i]);
 		}
@@ -1269,8 +1631,14 @@ static void rhine_set_carrier(struct mii_if_info *mii)
 		/* autoneg is off: Link is always assumed to be up */
 		if (!netif_carrier_ok(dev))
 			netif_carrier_on(dev);
+<<<<<<< HEAD
 	} else	/* Let MMI library update carrier status */
 		rhine_check_media(dev, 0);
+=======
+	}
+
+	rhine_check_media(dev, 0);
+>>>>>>> v3.18
 
 	netif_info(rp, link, dev, "force_media %d, carrier %d\n",
 		   mii->force_media, netif_carrier_ok(dev));
@@ -1460,7 +1828,11 @@ static void init_registers(struct net_device *dev)
 
 	rhine_set_rx_mode(dev);
 
+<<<<<<< HEAD
 	if (rp->pdev->revision >= VT6105M)
+=======
+	if (rp->quirks & rqMgmt)
+>>>>>>> v3.18
 		rhine_init_cam_filter(dev);
 
 	napi_enable(&rp->napi);
@@ -1572,6 +1944,7 @@ static int rhine_open(struct net_device *dev)
 	void __iomem *ioaddr = rp->base;
 	int rc;
 
+<<<<<<< HEAD
 	rc = request_irq(rp->pdev->irq, rhine_interrupt, IRQF_SHARED, dev->name,
 			dev);
 	if (rc)
@@ -1582,6 +1955,17 @@ static int rhine_open(struct net_device *dev)
 	rc = alloc_ring(dev);
 	if (rc) {
 		free_irq(rp->pdev->irq, dev);
+=======
+	rc = request_irq(rp->irq, rhine_interrupt, IRQF_SHARED, dev->name, dev);
+	if (rc)
+		return rc;
+
+	netif_dbg(rp, ifup, dev, "%s() irq %d\n", __func__, rp->irq);
+
+	rc = alloc_ring(dev);
+	if (rc) {
+		free_irq(rp->irq, dev);
+>>>>>>> v3.18
 		return rc;
 	}
 	alloc_rbufs(dev);
@@ -1650,6 +2034,10 @@ static netdev_tx_t rhine_start_tx(struct sk_buff *skb,
 				  struct net_device *dev)
 {
 	struct rhine_private *rp = netdev_priv(dev);
+<<<<<<< HEAD
+=======
+	struct device *hwdev = dev->dev.parent;
+>>>>>>> v3.18
 	void __iomem *ioaddr = rp->base;
 	unsigned entry;
 
@@ -1669,7 +2057,11 @@ static netdev_tx_t rhine_start_tx(struct sk_buff *skb,
 		/* Must use alignment buffer. */
 		if (skb->len > PKT_BUF_SZ) {
 			/* packet too long, drop it */
+<<<<<<< HEAD
 			dev_kfree_skb(skb);
+=======
+			dev_kfree_skb_any(skb);
+>>>>>>> v3.18
 			rp->tx_skbuff[entry] = NULL;
 			dev->stats.tx_dropped++;
 			return NETDEV_TX_OK;
@@ -1686,8 +2078,19 @@ static netdev_tx_t rhine_start_tx(struct sk_buff *skb,
 						       rp->tx_bufs));
 	} else {
 		rp->tx_skbuff_dma[entry] =
+<<<<<<< HEAD
 			pci_map_single(rp->pdev, skb->data, skb->len,
 				       PCI_DMA_TODEVICE);
+=======
+			dma_map_single(hwdev, skb->data, skb->len,
+				       DMA_TO_DEVICE);
+		if (dma_mapping_error(hwdev, rp->tx_skbuff_dma[entry])) {
+			dev_kfree_skb_any(skb);
+			rp->tx_skbuff_dma[entry] = 0;
+			dev->stats.tx_dropped++;
+			return NETDEV_TX_OK;
+		}
+>>>>>>> v3.18
 		rp->tx_ring[entry].addr = cpu_to_le32(rp->tx_skbuff_dma[entry]);
 	}
 
@@ -1773,6 +2176,10 @@ static irqreturn_t rhine_interrupt(int irq, void *dev_instance)
 static void rhine_tx(struct net_device *dev)
 {
 	struct rhine_private *rp = netdev_priv(dev);
+<<<<<<< HEAD
+=======
+	struct device *hwdev = dev->dev.parent;
+>>>>>>> v3.18
 	int txstatus = 0, entry = rp->dirty_tx % TX_RING_SIZE;
 
 	/* find and cleanup dirty tx descriptors */
@@ -1816,12 +2223,21 @@ static void rhine_tx(struct net_device *dev)
 		}
 		/* Free the original skb. */
 		if (rp->tx_skbuff_dma[entry]) {
+<<<<<<< HEAD
 			pci_unmap_single(rp->pdev,
 					 rp->tx_skbuff_dma[entry],
 					 rp->tx_skbuff[entry]->len,
 					 PCI_DMA_TODEVICE);
 		}
 		dev_kfree_skb(rp->tx_skbuff[entry]);
+=======
+			dma_unmap_single(hwdev,
+					 rp->tx_skbuff_dma[entry],
+					 rp->tx_skbuff[entry]->len,
+					 DMA_TO_DEVICE);
+		}
+		dev_consume_skb_any(rp->tx_skbuff[entry]);
+>>>>>>> v3.18
 		rp->tx_skbuff[entry] = NULL;
 		entry = (++rp->dirty_tx) % TX_RING_SIZE;
 	}
@@ -1848,6 +2264,10 @@ static inline u16 rhine_get_vlan_tci(struct sk_buff *skb, int data_size)
 static int rhine_rx(struct net_device *dev, int limit)
 {
 	struct rhine_private *rp = netdev_priv(dev);
+<<<<<<< HEAD
+=======
+	struct device *hwdev = dev->dev.parent;
+>>>>>>> v3.18
 	int count;
 	int entry = rp->cur_rx % RX_RING_SIZE;
 
@@ -1909,19 +2329,33 @@ static int rhine_rx(struct net_device *dev, int limit)
 			if (pkt_len < rx_copybreak)
 				skb = netdev_alloc_skb_ip_align(dev, pkt_len);
 			if (skb) {
+<<<<<<< HEAD
 				pci_dma_sync_single_for_cpu(rp->pdev,
 							    rp->rx_skbuff_dma[entry],
 							    rp->rx_buf_sz,
 							    PCI_DMA_FROMDEVICE);
+=======
+				dma_sync_single_for_cpu(hwdev,
+							rp->rx_skbuff_dma[entry],
+							rp->rx_buf_sz,
+							DMA_FROM_DEVICE);
+>>>>>>> v3.18
 
 				skb_copy_to_linear_data(skb,
 						 rp->rx_skbuff[entry]->data,
 						 pkt_len);
 				skb_put(skb, pkt_len);
+<<<<<<< HEAD
 				pci_dma_sync_single_for_device(rp->pdev,
 							       rp->rx_skbuff_dma[entry],
 							       rp->rx_buf_sz,
 							       PCI_DMA_FROMDEVICE);
+=======
+				dma_sync_single_for_device(hwdev,
+							   rp->rx_skbuff_dma[entry],
+							   rp->rx_buf_sz,
+							   DMA_FROM_DEVICE);
+>>>>>>> v3.18
 			} else {
 				skb = rp->rx_skbuff[entry];
 				if (skb == NULL) {
@@ -1930,10 +2364,17 @@ static int rhine_rx(struct net_device *dev, int limit)
 				}
 				rp->rx_skbuff[entry] = NULL;
 				skb_put(skb, pkt_len);
+<<<<<<< HEAD
 				pci_unmap_single(rp->pdev,
 						 rp->rx_skbuff_dma[entry],
 						 rp->rx_buf_sz,
 						 PCI_DMA_FROMDEVICE);
+=======
+				dma_unmap_single(hwdev,
+						 rp->rx_skbuff_dma[entry],
+						 rp->rx_buf_sz,
+						 DMA_FROM_DEVICE);
+>>>>>>> v3.18
 			}
 
 			if (unlikely(desc_length & DescTag))
@@ -1964,9 +2405,21 @@ static int rhine_rx(struct net_device *dev, int limit)
 			if (skb == NULL)
 				break;	/* Better luck next round. */
 			rp->rx_skbuff_dma[entry] =
+<<<<<<< HEAD
 				pci_map_single(rp->pdev, skb->data,
 					       rp->rx_buf_sz,
 					       PCI_DMA_FROMDEVICE);
+=======
+				dma_map_single(hwdev, skb->data,
+					       rp->rx_buf_sz,
+					       DMA_FROM_DEVICE);
+			if (dma_mapping_error(hwdev,
+					      rp->rx_skbuff_dma[entry])) {
+				dev_kfree_skb(skb);
+				rp->rx_skbuff_dma[entry] = 0;
+				break;
+			}
+>>>>>>> v3.18
 			rp->rx_ring[entry].addr = cpu_to_le32(rp->rx_skbuff_dma[entry]);
 		}
 		rp->rx_ring[entry].rx_status = cpu_to_le32(DescOwn);
@@ -2052,6 +2505,7 @@ rhine_get_stats64(struct net_device *dev, struct rtnl_link_stats64 *stats)
 	netdev_stats_to_stats64(stats, &dev->stats);
 
 	do {
+<<<<<<< HEAD
 		start = u64_stats_fetch_begin_bh(&rp->rx_stats.syncp);
 		stats->rx_packets = rp->rx_stats.packets;
 		stats->rx_bytes = rp->rx_stats.bytes;
@@ -2062,6 +2516,18 @@ rhine_get_stats64(struct net_device *dev, struct rtnl_link_stats64 *stats)
 		stats->tx_packets = rp->tx_stats.packets;
 		stats->tx_bytes = rp->tx_stats.bytes;
 	} while (u64_stats_fetch_retry_bh(&rp->tx_stats.syncp, start));
+=======
+		start = u64_stats_fetch_begin_irq(&rp->rx_stats.syncp);
+		stats->rx_packets = rp->rx_stats.packets;
+		stats->rx_bytes = rp->rx_stats.bytes;
+	} while (u64_stats_fetch_retry_irq(&rp->rx_stats.syncp, start));
+
+	do {
+		start = u64_stats_fetch_begin_irq(&rp->tx_stats.syncp);
+		stats->tx_packets = rp->tx_stats.packets;
+		stats->tx_bytes = rp->tx_stats.bytes;
+	} while (u64_stats_fetch_retry_irq(&rp->tx_stats.syncp, start));
+>>>>>>> v3.18
 
 	return stats;
 }
@@ -2083,7 +2549,11 @@ static void rhine_set_rx_mode(struct net_device *dev)
 		/* Too many to match, or accept all multicasts. */
 		iowrite32(0xffffffff, ioaddr + MulticastFilter0);
 		iowrite32(0xffffffff, ioaddr + MulticastFilter1);
+<<<<<<< HEAD
 	} else if (rp->pdev->revision >= VT6105M) {
+=======
+	} else if (rp->quirks & rqMgmt) {
+>>>>>>> v3.18
 		int i = 0;
 		u32 mCAMmask = 0;	/* 32 mCAMs (6105M and better) */
 		netdev_for_each_mc_addr(ha, dev) {
@@ -2105,7 +2575,11 @@ static void rhine_set_rx_mode(struct net_device *dev)
 		iowrite32(mc_filter[1], ioaddr + MulticastFilter1);
 	}
 	/* enable/disable VLAN receive filtering */
+<<<<<<< HEAD
 	if (rp->pdev->revision >= VT6105M) {
+=======
+	if (rp->quirks & rqMgmt) {
+>>>>>>> v3.18
 		if (dev->flags & IFF_PROMISC)
 			BYTE_REG_BITS_OFF(BCR1_VIDFR, ioaddr + PCIBusConfig1);
 		else
@@ -2116,11 +2590,19 @@ static void rhine_set_rx_mode(struct net_device *dev)
 
 static void netdev_get_drvinfo(struct net_device *dev, struct ethtool_drvinfo *info)
 {
+<<<<<<< HEAD
 	struct rhine_private *rp = netdev_priv(dev);
 
 	strlcpy(info->driver, DRV_NAME, sizeof(info->driver));
 	strlcpy(info->version, DRV_VERSION, sizeof(info->version));
 	strlcpy(info->bus_info, pci_name(rp->pdev), sizeof(info->bus_info));
+=======
+	struct device *hwdev = dev->dev.parent;
+
+	strlcpy(info->driver, DRV_NAME, sizeof(info->driver));
+	strlcpy(info->version, DRV_VERSION, sizeof(info->version));
+	strlcpy(info->bus_info, dev_name(hwdev), sizeof(info->bus_info));
+>>>>>>> v3.18
 }
 
 static int netdev_get_settings(struct net_device *dev, struct ethtool_cmd *cmd)
@@ -2257,7 +2739,11 @@ static int rhine_close(struct net_device *dev)
 	/* Stop the chip's Tx and Rx processes. */
 	iowrite16(CmdStop, ioaddr + ChipCmd);
 
+<<<<<<< HEAD
 	free_irq(rp->pdev->irq, dev);
+=======
+	free_irq(rp->irq, dev);
+>>>>>>> v3.18
 	free_rbufs(dev);
 	free_tbufs(dev);
 	free_ring(dev);
@@ -2266,7 +2752,11 @@ static int rhine_close(struct net_device *dev)
 }
 
 
+<<<<<<< HEAD
 static void rhine_remove_one(struct pci_dev *pdev)
+=======
+static void rhine_remove_one_pci(struct pci_dev *pdev)
+>>>>>>> v3.18
 {
 	struct net_device *dev = pci_get_drvdata(pdev);
 	struct rhine_private *rp = netdev_priv(dev);
@@ -2278,10 +2768,30 @@ static void rhine_remove_one(struct pci_dev *pdev)
 
 	free_netdev(dev);
 	pci_disable_device(pdev);
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
 }
 
 static void rhine_shutdown (struct pci_dev *pdev)
+=======
+}
+
+static int rhine_remove_one_platform(struct platform_device *pdev)
+{
+	struct net_device *dev = platform_get_drvdata(pdev);
+	struct rhine_private *rp = netdev_priv(dev);
+
+	unregister_netdev(dev);
+
+	iounmap(rp->base);
+
+	free_netdev(dev);
+
+	return 0;
+}
+
+static void rhine_shutdown_pci(struct pci_dev *pdev)
+>>>>>>> v3.18
 {
 	struct net_device *dev = pci_get_drvdata(pdev);
 	struct rhine_private *rp = netdev_priv(dev);
@@ -2335,8 +2845,12 @@ static void rhine_shutdown (struct pci_dev *pdev)
 #ifdef CONFIG_PM_SLEEP
 static int rhine_suspend(struct device *device)
 {
+<<<<<<< HEAD
 	struct pci_dev *pdev = to_pci_dev(device);
 	struct net_device *dev = pci_get_drvdata(pdev);
+=======
+	struct net_device *dev = dev_get_drvdata(device);
+>>>>>>> v3.18
 	struct rhine_private *rp = netdev_priv(dev);
 
 	if (!netif_running(dev))
@@ -2348,23 +2862,36 @@ static int rhine_suspend(struct device *device)
 
 	netif_device_detach(dev);
 
+<<<<<<< HEAD
 	rhine_shutdown(pdev);
+=======
+	if (dev_is_pci(device))
+		rhine_shutdown_pci(to_pci_dev(device));
+>>>>>>> v3.18
 
 	return 0;
 }
 
 static int rhine_resume(struct device *device)
 {
+<<<<<<< HEAD
 	struct pci_dev *pdev = to_pci_dev(device);
 	struct net_device *dev = pci_get_drvdata(pdev);
+=======
+	struct net_device *dev = dev_get_drvdata(device);
+>>>>>>> v3.18
 	struct rhine_private *rp = netdev_priv(dev);
 
 	if (!netif_running(dev))
 		return 0;
 
+<<<<<<< HEAD
 #ifdef USE_MMIO
 	enable_mmio(rp->pioaddr, rp->quirks);
 #endif
+=======
+	enable_mmio(rp->pioaddr, rp->quirks);
+>>>>>>> v3.18
 	rhine_power_init(dev);
 	free_tbufs(dev);
 	free_rbufs(dev);
@@ -2389,6 +2916,7 @@ static SIMPLE_DEV_PM_OPS(rhine_pm_ops, rhine_suspend, rhine_resume);
 
 #endif /* !CONFIG_PM_SLEEP */
 
+<<<<<<< HEAD
 static struct pci_driver rhine_driver = {
 	.name		= DRV_NAME,
 	.id_table	= rhine_pci_tbl,
@@ -2399,6 +2927,29 @@ static struct pci_driver rhine_driver = {
 };
 
 static struct dmi_system_id __initdata rhine_dmi_table[] = {
+=======
+static struct pci_driver rhine_driver_pci = {
+	.name		= DRV_NAME,
+	.id_table	= rhine_pci_tbl,
+	.probe		= rhine_init_one_pci,
+	.remove		= rhine_remove_one_pci,
+	.shutdown	= rhine_shutdown_pci,
+	.driver.pm	= RHINE_PM_OPS,
+};
+
+static struct platform_driver rhine_driver_platform = {
+	.probe		= rhine_init_one_platform,
+	.remove		= rhine_remove_one_platform,
+	.driver = {
+		.name	= DRV_NAME,
+		.owner	= THIS_MODULE,
+		.of_match_table	= rhine_of_tbl,
+		.pm		= RHINE_PM_OPS,
+	}
+};
+
+static struct dmi_system_id rhine_dmi_table[] __initdata = {
+>>>>>>> v3.18
 	{
 		.ident = "EPIA-M",
 		.matches = {
@@ -2418,6 +2969,11 @@ static struct dmi_system_id __initdata rhine_dmi_table[] = {
 
 static int __init rhine_init(void)
 {
+<<<<<<< HEAD
+=======
+	int ret_pci, ret_platform;
+
+>>>>>>> v3.18
 /* when a module, this is printed whether or not devices are found in probe */
 #ifdef MODULE
 	pr_info("%s\n", version);
@@ -2430,13 +2986,27 @@ static int __init rhine_init(void)
 	else if (avoid_D3)
 		pr_info("avoid_D3 set\n");
 
+<<<<<<< HEAD
 	return pci_register_driver(&rhine_driver);
+=======
+	ret_pci = pci_register_driver(&rhine_driver_pci);
+	ret_platform = platform_driver_register(&rhine_driver_platform);
+	if ((ret_pci < 0) && (ret_platform < 0))
+		return ret_pci;
+
+	return 0;
+>>>>>>> v3.18
 }
 
 
 static void __exit rhine_cleanup(void)
 {
+<<<<<<< HEAD
 	pci_unregister_driver(&rhine_driver);
+=======
+	platform_driver_unregister(&rhine_driver_platform);
+	pci_unregister_driver(&rhine_driver_pci);
+>>>>>>> v3.18
 }
 
 

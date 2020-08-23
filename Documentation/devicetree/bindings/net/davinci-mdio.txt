@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 TI SoC Davinci MDIO Controller Device Tree Bindings
 ---------------------------------------------------
 
 Required properties:
 - compatible		: Should be "ti,davinci_mdio"
+=======
+TI SoC Davinci/Keystone2 MDIO Controller Device Tree Bindings
+---------------------------------------------------
+
+Required properties:
+- compatible		: Should be "ti,davinci_mdio" or "ti,keystone_mdio"
+>>>>>>> v3.18
 - reg			: physical base address and size of the davinci mdio
 			  registers map
 - bus_freq		: Mdio Bus frequency
@@ -19,7 +27,11 @@ file.
 Examples:
 
 	mdio: davinci_mdio@4A101000 {
+<<<<<<< HEAD
 		compatible = "ti,cpsw";
+=======
+		compatible = "ti,davinci_mdio";
+>>>>>>> v3.18
 		reg = <0x4A101000 0x1000>;
 		bus_freq = <1000000>;
 	};
@@ -27,7 +39,11 @@ Examples:
 (or)
 
 	mdio: davinci_mdio@4A101000 {
+<<<<<<< HEAD
 		compatible = "ti,cpsw";
+=======
+		compatible = "ti,davinci_mdio";
+>>>>>>> v3.18
 		ti,hwmods = "davinci_mdio";
 		bus_freq = <1000000>;
 	};

@@ -2,6 +2,10 @@
 #include "evsel.h"
 #include "parse-events.h"
 #include "tests.h"
+<<<<<<< HEAD
+=======
+#include "debug.h"
+>>>>>>> v3.18
 
 static int perf_evsel__roundtrip_cache_name_test(void)
 {
@@ -79,7 +83,11 @@ static int __perf_evsel__name_array_test(const char *names[], int nr_names)
 	}
 
 	err = 0;
+<<<<<<< HEAD
 	list_for_each_entry(evsel, &evlist->entries, node) {
+=======
+	evlist__for_each(evlist, evsel) {
+>>>>>>> v3.18
 		if (strcmp(perf_evsel__name(evsel), names[evsel->idx])) {
 			--err;
 			pr_debug("%s != %s\n", perf_evsel__name(evsel), names[evsel->idx]);

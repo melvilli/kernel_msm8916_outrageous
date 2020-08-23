@@ -167,7 +167,10 @@ out_cancel:
 	host_ui->xattr_cnt -= 1;
 	host_ui->xattr_size -= CALC_DENT_SIZE(nm->len);
 	host_ui->xattr_size -= CALC_XATTR_BYTES(size);
+<<<<<<< HEAD
 	host_ui->xattr_names -= nm->len;
+=======
+>>>>>>> v3.18
 	mutex_unlock(&host_ui->ui_mutex);
 out_free:
 	make_bad_inode(inode);
@@ -284,12 +287,20 @@ static struct inode *iget_xattr(struct ubifs_info *c, ino_t inum)
 	inode = ubifs_iget(c->vfs_sb, inum);
 	if (IS_ERR(inode)) {
 		ubifs_err("dead extended attribute entry, error %d",
+<<<<<<< HEAD
 				c->vi.ubi_num, (int)PTR_ERR(inode));
+=======
+			  (int)PTR_ERR(inode));
+>>>>>>> v3.18
 		return inode;
 	}
 	if (ubifs_inode(inode)->xattr)
 		return inode;
+<<<<<<< HEAD
 	ubifs_err("corrupt extended attribute entry", c->vi.ubi_num);
+=======
+	ubifs_err("corrupt extended attribute entry");
+>>>>>>> v3.18
 	iput(inode);
 	return ERR_PTR(-EINVAL);
 }
@@ -304,8 +315,13 @@ int ubifs_setxattr(struct dentry *dentry, const char *name,
 	union ubifs_key key;
 	int err, type;
 
+<<<<<<< HEAD
 	dbg_gen("xattr '%s', host ino %lu ('%.*s'), size %zd", name,
 		host->i_ino, dentry->d_name.len, dentry->d_name.name, size);
+=======
+	dbg_gen("xattr '%s', host ino %lu ('%pd'), size %zd", name,
+		host->i_ino, dentry, size);
+>>>>>>> v3.18
 	ubifs_assert(mutex_is_locked(&host->i_mutex));
 
 	if (size > UBIFS_MAX_INO_DATA)
@@ -368,8 +384,13 @@ ssize_t ubifs_getxattr(struct dentry *dentry, const char *name, void *buf,
 	union ubifs_key key;
 	int err;
 
+<<<<<<< HEAD
 	dbg_gen("xattr '%s', ino %lu ('%.*s'), buf size %zd", name,
 		host->i_ino, dentry->d_name.len, dentry->d_name.name, size);
+=======
+	dbg_gen("xattr '%s', ino %lu ('%pd'), buf size %zd", name,
+		host->i_ino, dentry, size);
+>>>>>>> v3.18
 
 	err = check_namespace(&nm);
 	if (err < 0)
@@ -401,7 +422,11 @@ ssize_t ubifs_getxattr(struct dentry *dentry, const char *name, void *buf,
 		/* If @buf is %NULL we are supposed to return the length */
 		if (ui->data_len > size) {
 			ubifs_err("buffer size %zd, xattr len %d",
+<<<<<<< HEAD
 					c->vi.ubi_num, size, ui->data_len);
+=======
+				  size, ui->data_len);
+>>>>>>> v3.18
 			err = -ERANGE;
 			goto out_iput;
 		}
@@ -427,8 +452,13 @@ ssize_t ubifs_listxattr(struct dentry *dentry, char *buffer, size_t size)
 	int err, len, written = 0;
 	struct qstr nm = { .name = NULL };
 
+<<<<<<< HEAD
 	dbg_gen("ino %lu ('%.*s'), buffer size %zd", host->i_ino,
 		dentry->d_name.len, dentry->d_name.name, size);
+=======
+	dbg_gen("ino %lu ('%pd'), buffer size %zd", host->i_ino,
+		dentry, size);
+>>>>>>> v3.18
 
 	len = host_ui->xattr_names + host_ui->xattr_cnt;
 	if (!buffer)
@@ -473,8 +503,12 @@ ssize_t ubifs_listxattr(struct dentry *dentry, char *buffer, size_t size)
 
 	kfree(pxent);
 	if (err != -ENOENT) {
+<<<<<<< HEAD
 		ubifs_err("cannot find next direntry, error %d", c->vi.ubi_num,
 				err);
+=======
+		ubifs_err("cannot find next direntry, error %d", err);
+>>>>>>> v3.18
 		return err;
 	}
 
@@ -516,7 +550,10 @@ out_cancel:
 	host_ui->xattr_cnt += 1;
 	host_ui->xattr_size += CALC_DENT_SIZE(nm->len);
 	host_ui->xattr_size += CALC_XATTR_BYTES(ui->data_len);
+<<<<<<< HEAD
 	host_ui->xattr_names += nm->len;
+=======
+>>>>>>> v3.18
 	mutex_unlock(&host_ui->ui_mutex);
 	ubifs_release_budget(c, &req);
 	make_bad_inode(inode);
@@ -532,8 +569,13 @@ int ubifs_removexattr(struct dentry *dentry, const char *name)
 	union ubifs_key key;
 	int err;
 
+<<<<<<< HEAD
 	dbg_gen("xattr '%s', ino %lu ('%.*s')", name,
 		host->i_ino, dentry->d_name.len, dentry->d_name.name);
+=======
+	dbg_gen("xattr '%s', ino %lu ('%pd')", name,
+		host->i_ino, dentry);
+>>>>>>> v3.18
 	ubifs_assert(mutex_is_locked(&host->i_mutex));
 
 	err = check_namespace(&nm);

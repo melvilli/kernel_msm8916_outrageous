@@ -32,12 +32,22 @@ struct leon3_gptimer_regs_map *leon3_gptimer_regs; /* timer controller base addr
 
 int leondebug_irq_disable;
 int leon_debug_irqout;
+<<<<<<< HEAD
 static int dummy_master_l10_counter;
 unsigned long amba_system_id;
 static DEFINE_SPINLOCK(leon_irq_lock);
 
 unsigned long leon3_gptimer_irq; /* interrupt controller irq number */
 unsigned long leon3_gptimer_idx; /* Timer Index (0..6) within Timer Core */
+=======
+static volatile u32 dummy_master_l10_counter;
+unsigned long amba_system_id;
+static DEFINE_SPINLOCK(leon_irq_lock);
+
+static unsigned long leon3_gptimer_idx; /* Timer Index (0..6) within Timer Core */
+static unsigned long leon3_gptimer_ackmask; /* For clearing pending bit */
+unsigned long leon3_gptimer_irq; /* interrupt controller irq number */
+>>>>>>> v3.18
 unsigned int sparc_leon_eirq;
 #define LEON_IMASK(cpu) (&leon3_irqctrl_regs->mask[cpu])
 #define LEON_IACK (&leon3_irqctrl_regs->iclear)
@@ -65,7 +75,11 @@ static void leon_handle_ext_irq(unsigned int irq, struct irq_desc *desc)
 }
 
 /* The extended IRQ controller has been found, this function registers it */
+<<<<<<< HEAD
 void leon_eirq_setup(unsigned int eirq)
+=======
+static void leon_eirq_setup(unsigned int eirq)
+>>>>>>> v3.18
 {
 	unsigned long mask, oldmask;
 	unsigned int veirq;
@@ -260,17 +274,37 @@ void leon_update_virq_handling(unsigned int virq,
 
 static u32 leon_cycles_offset(void)
 {
+<<<<<<< HEAD
 	u32 rld, val, off;
 	rld = LEON3_BYPASS_LOAD_PA(&leon3_gptimer_regs->e[leon3_gptimer_idx].rld);
 	val = LEON3_BYPASS_LOAD_PA(&leon3_gptimer_regs->e[leon3_gptimer_idx].val);
 	off = rld - val;
 	return rld - val;
+=======
+	u32 rld, val, ctrl, off;
+
+	rld = LEON3_BYPASS_LOAD_PA(&leon3_gptimer_regs->e[leon3_gptimer_idx].rld);
+	val = LEON3_BYPASS_LOAD_PA(&leon3_gptimer_regs->e[leon3_gptimer_idx].val);
+	ctrl = LEON3_BYPASS_LOAD_PA(&leon3_gptimer_regs->e[leon3_gptimer_idx].ctrl);
+	if (LEON3_GPTIMER_CTRL_ISPENDING(ctrl)) {
+		val = LEON3_BYPASS_LOAD_PA(&leon3_gptimer_regs->e[leon3_gptimer_idx].val);
+		off = 2 * rld - val;
+	} else {
+		off = rld - val;
+	}
+
+	return off;
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_SMP
 
 /* smp clockevent irq */
+<<<<<<< HEAD
 irqreturn_t leon_percpu_timer_ce_interrupt(int irq, void *unused)
+=======
+static irqreturn_t leon_percpu_timer_ce_interrupt(int irq, void *unused)
+>>>>>>> v3.18
 {
 	struct clock_event_device *ce;
 	int cpu = smp_processor_id();
@@ -302,6 +336,10 @@ void __init leon_init_timers(void)
 	int ampopts;
 	int err;
 	u32 config;
+<<<<<<< HEAD
+=======
+	u32 ctrl;
+>>>>>>> v3.18
 
 	sparc_config.get_cycles_offset = leon_cycles_offset;
 	sparc_config.cs_period = 1000000 / HZ;
@@ -313,7 +351,11 @@ void __init leon_init_timers(void)
 
 	leondebug_irq_disable = 0;
 	leon_debug_irqout = 0;
+<<<<<<< HEAD
 	master_l10_counter = (unsigned int *)&dummy_master_l10_counter;
+=======
+	master_l10_counter = (u32 __iomem *)&dummy_master_l10_counter;
+>>>>>>> v3.18
 	dummy_master_l10_counter = 0;
 
 	rootnp = of_find_node_by_path("/ambapp0");
@@ -374,6 +416,19 @@ void __init leon_init_timers(void)
 	if (!(leon3_gptimer_regs && leon3_irqctrl_regs && leon3_gptimer_irq))
 		goto bad;
 
+<<<<<<< HEAD
+=======
+	ctrl = LEON3_BYPASS_LOAD_PA(&leon3_gptimer_regs->e[leon3_gptimer_idx].ctrl);
+	LEON3_BYPASS_STORE_PA(&leon3_gptimer_regs->e[leon3_gptimer_idx].ctrl,
+			      ctrl | LEON3_GPTIMER_CTRL_PENDING);
+	ctrl = LEON3_BYPASS_LOAD_PA(&leon3_gptimer_regs->e[leon3_gptimer_idx].ctrl);
+
+	if ((ctrl & LEON3_GPTIMER_CTRL_PENDING) != 0)
+		leon3_gptimer_ackmask = ~LEON3_GPTIMER_CTRL_PENDING;
+	else
+		leon3_gptimer_ackmask = ~0;
+
+>>>>>>> v3.18
 	LEON3_BYPASS_STORE_PA(&leon3_gptimer_regs->e[leon3_gptimer_idx].val, 0);
 	LEON3_BYPASS_STORE_PA(&leon3_gptimer_regs->e[leon3_gptimer_idx].rld,
 				(((1000000 / HZ) - 1)));
@@ -452,6 +507,14 @@ bad:
 
 static void leon_clear_clock_irq(void)
 {
+<<<<<<< HEAD
+=======
+	u32 ctrl;
+
+	ctrl = LEON3_BYPASS_LOAD_PA(&leon3_gptimer_regs->e[leon3_gptimer_idx].ctrl);
+	LEON3_BYPASS_STORE_PA(&leon3_gptimer_regs->e[leon3_gptimer_idx].ctrl,
+			      ctrl & leon3_gptimer_ackmask);
+>>>>>>> v3.18
 }
 
 static void leon_load_profile_irq(int cpu, unsigned int limit)

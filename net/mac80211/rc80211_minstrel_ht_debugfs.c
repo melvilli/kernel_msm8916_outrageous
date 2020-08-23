@@ -46,24 +46,40 @@ minstrel_ht_stats_dump(struct minstrel_ht_sta *mi, int i, char *p)
 		else
 			p += sprintf(p, "HT%c0/%cGI ", htmode, gimode);
 
+<<<<<<< HEAD
 		*(p++) = (idx == mi->max_tp_rate) ? 'T' : ' ';
 		*(p++) = (idx == mi->max_tp_rate2) ? 't' : ' ';
+=======
+		*(p++) = (idx == mi->max_tp_rate[0]) ? 'A' : ' ';
+		*(p++) = (idx == mi->max_tp_rate[1]) ? 'B' : ' ';
+		*(p++) = (idx == mi->max_tp_rate[2]) ? 'C' : ' ';
+		*(p++) = (idx == mi->max_tp_rate[3]) ? 'D' : ' ';
+>>>>>>> v3.18
 		*(p++) = (idx == mi->max_prob_rate) ? 'P' : ' ';
 
 		if (i == max_mcs) {
 			int r = bitrates[j % 4];
 			p += sprintf(p, " %2u.%1uM", r / 10, r % 10);
 		} else {
+<<<<<<< HEAD
 			p += sprintf(p, " MCS%-2u", (mg->streams - 1) *
 					 MCS_GROUP_RATES + j);
+=======
+			p += sprintf(p, " MCS%-2u", (mg->streams - 1) * 8 + j);
+>>>>>>> v3.18
 		}
 
 		tp = mr->cur_tp / 10;
 		prob = MINSTREL_TRUNC(mr->cur_prob * 1000);
 		eprob = MINSTREL_TRUNC(mr->probability * 1000);
 
+<<<<<<< HEAD
 		p += sprintf(p, "      %6u.%1u   %6u.%1u    %6u.%1u    "
 				"%3u            %3u(%3u)  %8llu    %8llu\n",
+=======
+		p += sprintf(p, " %4u.%1u %3u.%1u %3u.%1u "
+				"%3u %4u(%4u) %9llu(%9llu)\n",
+>>>>>>> v3.18
 				tp / 10, tp % 10,
 				eprob / 10, eprob % 10,
 				prob / 10, prob % 10,
@@ -95,14 +111,24 @@ minstrel_ht_stats_open(struct inode *inode, struct file *file)
 		return ret;
 	}
 
+<<<<<<< HEAD
 	ms = kmalloc(sizeof(*ms) + 8192, GFP_KERNEL);
+=======
+	ms = kmalloc(8192, GFP_KERNEL);
+>>>>>>> v3.18
 	if (!ms)
 		return -ENOMEM;
 
 	file->private_data = ms;
 	p = ms->buf;
+<<<<<<< HEAD
 	p += sprintf(p, "type         rate     throughput  ewma prob   this prob  "
 			"retry   this succ/attempt   success    attempts\n");
+=======
+	p += sprintf(p, "type           rate     tpt eprob *prob "
+			"ret  *ok(*cum)        ok(      cum)\n");
+
+>>>>>>> v3.18
 
 	p = minstrel_ht_stats_dump(mi, max_mcs, p);
 	for (i = 0; i < max_mcs; i++)
@@ -117,6 +143,11 @@ minstrel_ht_stats_open(struct inode *inode, struct file *file)
 		MINSTREL_TRUNC(mi->avg_ampdu_len * 10) % 10);
 	ms->len = p - ms->buf;
 
+<<<<<<< HEAD
+=======
+	WARN_ON(ms->len + sizeof(*ms) > 8192);
+
+>>>>>>> v3.18
 	return nonseekable_open(inode, file);
 }
 

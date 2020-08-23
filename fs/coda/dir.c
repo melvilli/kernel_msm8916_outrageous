@@ -19,8 +19,12 @@
 #include <linux/string.h>
 #include <linux/spinlock.h>
 #include <linux/namei.h>
+<<<<<<< HEAD
 
 #include <asm/uaccess.h>
+=======
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 
 #include <linux/coda.h>
 #include <linux/coda_psdev.h>
@@ -43,15 +47,23 @@ static int coda_rename(struct inode *old_inode, struct dentry *old_dentry,
                        struct inode *new_inode, struct dentry *new_dentry);
 
 /* dir file-ops */
+<<<<<<< HEAD
 static int coda_readdir(struct file *file, void *buf, filldir_t filldir);
+=======
+static int coda_readdir(struct file *file, struct dir_context *ctx);
+>>>>>>> v3.18
 
 /* dentry ops */
 static int coda_dentry_revalidate(struct dentry *de, unsigned int flags);
 static int coda_dentry_delete(const struct dentry *);
 
 /* support routines */
+<<<<<<< HEAD
 static int coda_venus_readdir(struct file *coda_file, void *buf,
 			      filldir_t filldir);
+=======
+static int coda_venus_readdir(struct file *, struct dir_context *);
+>>>>>>> v3.18
 
 /* same as fs/bad_inode.c */
 static int coda_return_EIO(void)
@@ -85,7 +97,11 @@ const struct inode_operations coda_dir_inode_operations =
 const struct file_operations coda_dir_operations = {
 	.llseek		= generic_file_llseek,
 	.read		= generic_read_dir,
+<<<<<<< HEAD
 	.readdir	= coda_readdir,
+=======
+	.iterate	= coda_readdir,
+>>>>>>> v3.18
 	.open		= coda_open,
 	.release	= coda_release,
 	.fsync		= coda_fsync,
@@ -103,7 +119,11 @@ static struct dentry *coda_lookup(struct inode *dir, struct dentry *entry, unsig
 	int type = 0;
 
 	if (length > CODA_MAXNAMLEN) {
+<<<<<<< HEAD
 		printk(KERN_ERR "name too long: lookup, %s (%*s)\n",
+=======
+		pr_err("name too long: lookup, %s (%*s)\n",
+>>>>>>> v3.18
 		       coda_i2s(dir), (int)length, name);
 		return ERR_PTR(-ENAMETOOLONG);
 	}
@@ -378,7 +398,11 @@ static int coda_rename(struct inode *old_dir, struct dentry *old_dentry,
 
 
 /* file operations for directories */
+<<<<<<< HEAD
 static int coda_readdir(struct file *coda_file, void *buf, filldir_t filldir)
+=======
+static int coda_readdir(struct file *coda_file, struct dir_context *ctx)
+>>>>>>> v3.18
 {
 	struct coda_file_info *cfi;
 	struct file *host_file;
@@ -388,6 +412,7 @@ static int coda_readdir(struct file *coda_file, void *buf, filldir_t filldir)
 	BUG_ON(!cfi || cfi->cfi_magic != CODA_MAGIC);
 	host_file = cfi->cfi_container;
 
+<<<<<<< HEAD
 	if (!host_file->f_op)
 		return -ENOTDIR;
 
@@ -413,6 +438,10 @@ static int coda_readdir(struct file *coda_file, void *buf, filldir_t filldir)
 		struct inode *host_inode = file_inode(host_file);
 		struct dir_context *ctx = buf;
 
+=======
+	if (host_file->f_op->iterate) {
+		struct inode *host_inode = file_inode(host_file);
+>>>>>>> v3.18
 		mutex_lock(&host_inode->i_mutex);
 		ret = -ENOENT;
 		if (!IS_DEADDIR(host_inode)) {
@@ -420,12 +449,19 @@ static int coda_readdir(struct file *coda_file, void *buf, filldir_t filldir)
 			file_accessed(host_file);
 		}
 		mutex_unlock(&host_inode->i_mutex);
+<<<<<<< HEAD
 
 		coda_file->f_pos = ctx->pos;
 	} else /* Venus: we must read Venus dirents from a file */
 		ret = coda_venus_readdir(coda_file, buf, filldir);
 
 	return ret;
+=======
+		return ret;
+	}
+	/* Venus: we must read Venus dirents from a file */
+	return coda_venus_readdir(coda_file, ctx);
+>>>>>>> v3.18
 }
 
 static inline unsigned int CDT2DT(unsigned char cdt)
@@ -448,10 +484,15 @@ static inline unsigned int CDT2DT(unsigned char cdt)
 }
 
 /* support routines */
+<<<<<<< HEAD
 static int coda_venus_readdir(struct file *coda_file, void *buf,
 			      filldir_t filldir)
 {
 	int result = 0; /* # of entries returned */
+=======
+static int coda_venus_readdir(struct file *coda_file, struct dir_context *ctx)
+{
+>>>>>>> v3.18
 	struct coda_file_info *cfi;
 	struct coda_inode_info *cii;
 	struct file *host_file;
@@ -473,6 +514,7 @@ static int coda_venus_readdir(struct file *coda_file, void *buf,
 	vdir = kmalloc(sizeof(*vdir), GFP_KERNEL);
 	if (!vdir) return -ENOMEM;
 
+<<<<<<< HEAD
 	if (coda_file->f_pos == 0) {
 		ret = filldir(buf, ".", 1, 0, de->d_inode->i_ino, DT_DIR);
 		if (ret < 0)
@@ -494,21 +536,43 @@ static int coda_venus_readdir(struct file *coda_file, void *buf,
 		if (ret < 0) {
 			printk(KERN_ERR "coda readdir: read dir %s failed %d\n",
 			       coda_f2s(&cii->c_fid), ret);
+=======
+	if (!dir_emit_dots(coda_file, ctx))
+		goto out;
+
+	while (1) {
+		/* read entries from the directory file */
+		ret = kernel_read(host_file, ctx->pos - 2, (char *)vdir,
+				  sizeof(*vdir));
+		if (ret < 0) {
+			pr_err("%s: read dir %s failed %d\n",
+			       __func__, coda_f2s(&cii->c_fid), ret);
+>>>>>>> v3.18
 			break;
 		}
 		if (ret == 0) break; /* end of directory file reached */
 
 		/* catch truncated reads */
 		if (ret < vdir_size || ret < vdir_size + vdir->d_namlen) {
+<<<<<<< HEAD
 			printk(KERN_ERR "coda readdir: short read on %s\n",
 			       coda_f2s(&cii->c_fid));
+=======
+			pr_err("%s: short read on %s\n",
+			       __func__, coda_f2s(&cii->c_fid));
+>>>>>>> v3.18
 			ret = -EBADF;
 			break;
 		}
 		/* validate whether the directory file actually makes sense */
 		if (vdir->d_reclen < vdir_size + vdir->d_namlen) {
+<<<<<<< HEAD
 			printk(KERN_ERR "coda readdir: invalid dir %s\n",
 			       coda_f2s(&cii->c_fid));
+=======
+			pr_err("%s: invalid dir %s\n",
+			       __func__, coda_f2s(&cii->c_fid));
+>>>>>>> v3.18
 			ret = -EBADF;
 			break;
 		}
@@ -518,11 +582,16 @@ static int coda_venus_readdir(struct file *coda_file, void *buf,
 
 		/* Make sure we skip '.' and '..', we already got those */
 		if (name.name[0] == '.' && (name.len == 1 ||
+<<<<<<< HEAD
 		    (vdir->d_name[1] == '.' && name.len == 2)))
+=======
+		    (name.name[1] == '.' && name.len == 2)))
+>>>>>>> v3.18
 			vdir->d_fileno = name.len = 0;
 
 		/* skip null entries */
 		if (vdir->d_fileno && name.len) {
+<<<<<<< HEAD
 			/* try to look up this entry in the dcache, that way
 			 * userspace doesn't have to worry about breaking
 			 * getcwd by having mismatched inode numbers for
@@ -544,6 +613,20 @@ static int coda_venus_readdir(struct file *coda_file, void *buf,
 out:
 	kfree(vdir);
 	return result ? result : ret;
+=======
+			ino = vdir->d_fileno;
+			type = CDT2DT(vdir->d_type);
+			if (!dir_emit(ctx, name.name, name.len, ino, type))
+				break;
+		}
+		/* we'll always have progress because d_reclen is unsigned and
+		 * we've already established it is non-zero. */
+		ctx->pos += vdir->d_reclen;
+	}
+out:
+	kfree(vdir);
+	return 0;
+>>>>>>> v3.18
 }
 
 /* called when a cache lookup succeeds */
@@ -571,7 +654,11 @@ static int coda_dentry_revalidate(struct dentry *de, unsigned int flags)
 	if (cii->c_flags & C_FLUSH) 
 		coda_flag_inode_children(inode, C_FLUSH);
 
+<<<<<<< HEAD
 	if (de->d_count > 1)
+=======
+	if (d_count(de) > 1)
+>>>>>>> v3.18
 		/* pretend it's valid, but don't change the flags */
 		goto out;
 
@@ -611,13 +698,20 @@ static int coda_dentry_delete(const struct dentry * dentry)
  * cache manager Venus issues a downcall to the kernel when this 
  * happens 
  */
+<<<<<<< HEAD
 int coda_revalidate_inode(struct dentry *dentry)
+=======
+int coda_revalidate_inode(struct inode *inode)
+>>>>>>> v3.18
 {
 	struct coda_vattr attr;
 	int error;
 	int old_mode;
 	ino_t old_ino;
+<<<<<<< HEAD
 	struct inode *inode = dentry->d_inode;
+=======
+>>>>>>> v3.18
 	struct coda_inode_info *cii = ITOC(inode);
 
 	if (!cii->c_flags)
@@ -638,8 +732,13 @@ int coda_revalidate_inode(struct dentry *dentry)
 		coda_vattr_to_iattr(inode, &attr);
 
 		if ((old_mode & S_IFMT) != (inode->i_mode & S_IFMT)) {
+<<<<<<< HEAD
 			printk("Coda: inode %ld, fid %s changed type!\n",
 			       inode->i_ino, coda_f2s(&(cii->c_fid)));
+=======
+			pr_warn("inode %ld, fid %s changed type!\n",
+				inode->i_ino, coda_f2s(&(cii->c_fid)));
+>>>>>>> v3.18
 		}
 
 		/* the following can happen when a local fid is replaced 

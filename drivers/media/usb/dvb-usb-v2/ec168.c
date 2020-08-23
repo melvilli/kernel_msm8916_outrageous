@@ -170,7 +170,11 @@ static int ec168_i2c_xfer(struct i2c_adapter *adap, struct i2c_msg msg[],
 
 error:
 	mutex_unlock(&d->i2c_mutex);
+<<<<<<< HEAD
 	return i;
+=======
+	return ret;
+>>>>>>> v3.18
 }
 
 static u32 ec168_i2c_func(struct i2c_adapter *adapter)

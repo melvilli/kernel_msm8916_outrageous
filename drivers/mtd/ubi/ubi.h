@@ -1,9 +1,12 @@
 /*
  * Copyright (c) International Business Machines Corp., 2006
  * Copyright (c) Nokia Corporation, 2006, 2007
+<<<<<<< HEAD
  * Copyright (c) 2014, Linux Foundation. All rights reserved.
  * Linux Foundation chooses to take subject only to the GPLv2
  * license terms, and distributes only under these terms.
+=======
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,7 +28,10 @@
 #ifndef __UBI_UBI_H__
 #define __UBI_UBI_H__
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/types.h>
 #include <linux/list.h>
 #include <linux/rbtree.h>
@@ -54,6 +60,7 @@
 #define UBI_NAME_STR "ubi"
 
 /* Normal UBI messages */
+<<<<<<< HEAD
 #define ubi_msg(ubi_num, fmt, ...) pr_notice("UBI-%d: %s:" fmt "\n", ubi_num, \
 				__func__, ##__VA_ARGS__)
 /* UBI warning messages */
@@ -62,6 +69,15 @@
 /* UBI error messages */
 #define ubi_err(ubi_num, fmt, ...) pr_err("UBI-%d error: %s: " fmt "\n",      \
 				 ubi_num, __func__, ##__VA_ARGS__)
+=======
+#define ubi_msg(fmt, ...) pr_notice("UBI: " fmt "\n", ##__VA_ARGS__)
+/* UBI warning messages */
+#define ubi_warn(fmt, ...) pr_warn("UBI warning: %s: " fmt "\n",  \
+				   __func__, ##__VA_ARGS__)
+/* UBI error messages */
+#define ubi_err(fmt, ...) pr_err("UBI error: %s: " fmt "\n",      \
+				 __func__, ##__VA_ARGS__)
+>>>>>>> v3.18
 
 /* Background thread name pattern */
 #define UBI_BGT_NAME_PATTERN "ubi_bgt%dd"
@@ -89,6 +105,7 @@
 #define UBI_UNKNOWN -1
 
 /*
+<<<<<<< HEAD
  * This parameter defines the maximum read counter of eraseblocks
  * of UBI devices. When this threshold is exceeded, UBI starts performing
  * wear leveling by means of moving data from eraseblock with low erase
@@ -118,6 +135,8 @@
 #define NUM_SEC_IN_DAY (60*60*24)
 
 /*
+=======
+>>>>>>> v3.18
  * The UBI debugfs directory name pattern and maximum name length (3 for "ubi"
  * + 2 for the number plus 1 for the trailing zero byte.
  */
@@ -189,8 +208,11 @@ enum {
  * @u.rb: link in the corresponding (free/used) RB-tree
  * @u.list: link in the protection queue
  * @ec: erase counter
+<<<<<<< HEAD
  * @last_erase_time: time stamp of the last erase opp
  * @rc: read counter
+=======
+>>>>>>> v3.18
  * @pnum: physical eraseblock number
  *
  * This data structure is used in the WL sub-system. Each physical eraseblock
@@ -203,8 +225,11 @@ struct ubi_wl_entry {
 		struct list_head list;
 	} u;
 	int ec;
+<<<<<<< HEAD
 	long last_erase_time;
 	int rc;
+=======
+>>>>>>> v3.18
 	int pnum;
 };
 
@@ -477,7 +502,12 @@ struct ubi_debug_info {
  *	     @move_to, @move_to_put @erase_pending, @wl_scheduled, @works,
  *	     @erroneous, and @erroneous_peb_count fields
  * @move_mutex: serializes eraseblock moves
+<<<<<<< HEAD
  * @work_sem: synchronizes the WL worker with use tasks
+=======
+ * @work_sem: used to wait for all the scheduled works to finish and prevent
+ * new works from being submitted
+>>>>>>> v3.18
  * @wl_scheduled: non-zero if the wear-leveling was scheduled
  * @lookuptbl: a table to quickly find a &struct ubi_wl_entry object for any
  *             physical eraseblock
@@ -489,11 +519,14 @@ struct ubi_debug_info {
  * @bgt_thread: background thread description object
  * @thread_enabled: if the background thread is enabled
  * @bgt_name: background thread name
+<<<<<<< HEAD
  * @rd_threshold: read counter threshold See UBI_RD_THRESHOLD
  *				for more info
  * @dt_threshold: data retention threshold. See UBI_DT_THRESHOLD
  *				for more info
  * @scan_in_progress: true if scanning of device PEBs is in progress
+=======
+>>>>>>> v3.18
  *
  * @flash_size: underlying MTD device size (in bytes)
  * @peb_count: count of physical eraseblocks on the MTD device
@@ -596,10 +629,13 @@ struct ubi_device {
 	struct task_struct *bgt_thread;
 	int thread_enabled;
 	char bgt_name[sizeof(UBI_BGT_NAME_PATTERN)+2];
+<<<<<<< HEAD
 	int rd_threshold;
 	int dt_threshold;
 	bool scan_in_progress;
 
+=======
+>>>>>>> v3.18
 
 	/* I/O sub-system's stuff */
 	long long flash_size;
@@ -635,8 +671,11 @@ struct ubi_device {
 /**
  * struct ubi_ainf_peb - attach information about a physical eraseblock.
  * @ec: erase counter (%UBI_UNKNOWN if it is unknown)
+<<<<<<< HEAD
  * @rc: read counter (%UBI_UNKNOWN if it is unknown)
  * @last_erase_time: last erase time stamp (%UBI_UNKNOWN if it is unknown)
+=======
+>>>>>>> v3.18
  * @pnum: physical eraseblock number
  * @vol_id: ID of the volume this LEB belongs to
  * @lnum: logical eraseblock number
@@ -653,8 +692,11 @@ struct ubi_device {
  */
 struct ubi_ainf_peb {
 	int ec;
+<<<<<<< HEAD
 	int rc;
 	long last_erase_time;
+=======
+>>>>>>> v3.18
 	int pnum;
 	int vol_id;
 	int lnum;
@@ -725,6 +767,7 @@ struct ubi_ainf_volume {
  * @mean_ec: mean erase counter value
  * @ec_sum: a temporary variable used when calculating @mean_ec
  * @ec_count: a temporary variable used when calculating @mean_ec
+<<<<<<< HEAD
  * @failed_fm: set to true if fm faound invalid during attach
  * @aeb_slab_cache: slab cache for &struct ubi_ainf_peb objects
  * @mean_last_erase_time: mean late erase timestamp value
@@ -732,6 +775,9 @@ struct ubi_ainf_volume {
  *				@mean_last_erase_time
  * @last_erase_time_count: temporary variable, used to calculate
  *				@mean_last_erase_time
+=======
+ * @aeb_slab_cache: slab cache for &struct ubi_ainf_peb objects
+>>>>>>> v3.18
  *
  * This data structure contains the result of attaching an MTD device and may
  * be used by other UBI sub-systems to build final UBI data structures, further
@@ -757,11 +803,15 @@ struct ubi_attach_info {
 	int mean_ec;
 	uint64_t ec_sum;
 	int ec_count;
+<<<<<<< HEAD
 	int failed_fm;
 	struct kmem_cache *aeb_slab_cache;
 	long long  mean_last_erase_time;
 	long long last_erase_time_sum;
 	int last_erase_time_count;
+=======
+	struct kmem_cache *aeb_slab_cache;
+>>>>>>> v3.18
 };
 
 /**
@@ -774,14 +824,25 @@ struct ubi_attach_info {
  * @torture: if the physical eraseblock has to be tortured
  * @anchor: produce a anchor PEB to by used by fastmap
  *
+<<<<<<< HEAD
  * The @func pointer points to the worker function. If the @cancel argument is
  * not zero, the worker has to free the resources and exit immediately. The
  * worker has to return zero in case of success and a negative error code in
+=======
+ * The @func pointer points to the worker function. If the @shutdown argument is
+ * not zero, the worker has to free the resources and exit immediately as the
+ * WL sub-system is shutting down.
+ * The worker has to return zero in case of success and a negative error code in
+>>>>>>> v3.18
  * case of failure.
  */
 struct ubi_work {
 	struct list_head list;
+<<<<<<< HEAD
 	int (*func)(struct ubi_device *ubi, struct ubi_work *wrk, int cancel);
+=======
+	int (*func)(struct ubi_device *ubi, struct ubi_work *wrk, int shutdown);
+>>>>>>> v3.18
 	/* The below fields are only relevant to erasure works */
 	struct ubi_wl_entry *e;
 	int vol_id;
@@ -802,8 +863,12 @@ extern struct blocking_notifier_head ubi_notifiers;
 
 /* attach.c */
 int ubi_add_to_av(struct ubi_device *ubi, struct ubi_attach_info *ai, int pnum,
+<<<<<<< HEAD
 		  int ec, long last_erase_time, long rc,
 		  const struct ubi_vid_hdr *vid_hdr, int bitflips);
+=======
+		  int ec, const struct ubi_vid_hdr *vid_hdr, int bitflips);
+>>>>>>> v3.18
 struct ubi_ainf_volume *ubi_find_av(const struct ubi_attach_info *ai,
 				    int vol_id);
 void ubi_remove_av(struct ubi_attach_info *ai, struct ubi_ainf_volume *av);
@@ -878,8 +943,11 @@ int ubi_wl_put_fm_peb(struct ubi_device *ubi, struct ubi_wl_entry *used_e,
 int ubi_is_erase_work(struct ubi_work *wrk);
 void ubi_refill_pools(struct ubi_device *ubi);
 int ubi_ensure_anchor_pebs(struct ubi_device *ubi);
+<<<<<<< HEAD
 int ubi_in_wl_tree(struct ubi_wl_entry *e, struct rb_root *root);
 int ubi_wl_scan_all(struct ubi_device *ubi);
+=======
+>>>>>>> v3.18
 
 /* io.c */
 int ubi_io_read(const struct ubi_device *ubi, void *buf, int pnum, int offset,
@@ -927,6 +995,29 @@ int ubi_update_fastmap(struct ubi_device *ubi);
 int ubi_scan_fastmap(struct ubi_device *ubi, struct ubi_attach_info *ai,
 		     int fm_anchor);
 
+<<<<<<< HEAD
+=======
+/* block.c */
+#ifdef CONFIG_MTD_UBI_BLOCK
+int ubiblock_init(void);
+void ubiblock_exit(void);
+int ubiblock_create(struct ubi_volume_info *vi);
+int ubiblock_remove(struct ubi_volume_info *vi);
+#else
+static inline int ubiblock_init(void) { return 0; }
+static inline void ubiblock_exit(void) {}
+static inline int ubiblock_create(struct ubi_volume_info *vi)
+{
+	return -ENOSYS;
+}
+static inline int ubiblock_remove(struct ubi_volume_info *vi)
+{
+	return -ENOSYS;
+}
+#endif
+
+
+>>>>>>> v3.18
 /*
  * ubi_rb_for_each_entry - walk an RB-tree.
  * @rb: a pointer to type 'struct rb_node' to use as a loop counter
@@ -1029,7 +1120,11 @@ static inline void ubi_ro_mode(struct ubi_device *ubi)
 {
 	if (!ubi->ro_mode) {
 		ubi->ro_mode = 1;
+<<<<<<< HEAD
 		ubi_warn(ubi->ubi_num, "switch to read-only mode");
+=======
+		ubi_warn("switch to read-only mode");
+>>>>>>> v3.18
 		dump_stack();
 	}
 }

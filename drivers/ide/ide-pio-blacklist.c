@@ -7,6 +7,10 @@
  */
 
 #include <linux/string.h>
+<<<<<<< HEAD
+=======
+#include <linux/ide.h>
+>>>>>>> v3.18
 
 static struct ide_pio_info {
 	const char	*name;

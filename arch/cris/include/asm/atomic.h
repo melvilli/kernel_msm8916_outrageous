@@ -7,6 +7,11 @@
 #include <linux/types.h>
 #include <asm/cmpxchg.h>
 #include <arch/atomic.h>
+<<<<<<< HEAD
+=======
+#include <arch/system.h>
+#include <asm/barrier.h>
+>>>>>>> v3.18
 
 /*
  * Atomic operations that C can't guarantee us.  Useful for
@@ -15,11 +20,16 @@
 
 #define ATOMIC_INIT(i)  { (i) }
 
+<<<<<<< HEAD
 #define atomic_read(v) (*(volatile int *)&(v)->counter)
+=======
+#define atomic_read(v) ACCESS_ONCE((v)->counter)
+>>>>>>> v3.18
 #define atomic_set(v,i) (((v)->counter) = (i))
 
 /* These should be written in asm but we do it in C for now. */
 
+<<<<<<< HEAD
 static inline void atomic_add(int i, volatile atomic_t *v)
 {
 	unsigned long flags;
@@ -57,6 +67,38 @@ static inline int atomic_sub_return(int i, volatile atomic_t *v)
 	cris_atomic_restore(v, flags);
 	return retval;
 }
+=======
+#define ATOMIC_OP(op, c_op)						\
+static inline void atomic_##op(int i, volatile atomic_t *v)		\
+{									\
+	unsigned long flags;						\
+	cris_atomic_save(v, flags);					\
+	v->counter c_op i;						\
+	cris_atomic_restore(v, flags);					\
+}									\
+
+#define ATOMIC_OP_RETURN(op, c_op)					\
+static inline int atomic_##op##_return(int i, volatile atomic_t *v)	\
+{									\
+	unsigned long flags;						\
+	int retval;							\
+	cris_atomic_save(v, flags);					\
+	retval = (v->counter c_op i);					\
+	cris_atomic_restore(v, flags);					\
+	return retval;							\
+}
+
+#define ATOMIC_OPS(op, c_op) ATOMIC_OP(op, c_op) ATOMIC_OP_RETURN(op, c_op)
+
+ATOMIC_OPS(add, +=)
+ATOMIC_OPS(sub, -=)
+
+#undef ATOMIC_OPS
+#undef ATOMIC_OP_RETURN
+#undef ATOMIC_OP
+
+#define atomic_add_negative(a, v)	(atomic_add_return((a), (v)) < 0)
+>>>>>>> v3.18
 
 static inline int atomic_sub_and_test(int i, volatile atomic_t *v)
 {
@@ -151,10 +193,13 @@ static inline int __atomic_add_unless(atomic_t *v, int a, int u)
 	return ret;
 }
 
+<<<<<<< HEAD
 /* Atomic operations are already serializing */
 #define smp_mb__before_atomic_dec()    barrier()
 #define smp_mb__after_atomic_dec()     barrier()
 #define smp_mb__before_atomic_inc()    barrier()
 #define smp_mb__after_atomic_inc()     barrier()
 
+=======
+>>>>>>> v3.18
 #endif

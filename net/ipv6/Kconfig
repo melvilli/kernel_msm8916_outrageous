@@ -21,6 +21,7 @@ menuconfig IPV6
 
 if IPV6
 
+<<<<<<< HEAD
 config IPV6_PRIVACY
 	bool "IPv6: Privacy Extensions (RFC 3041) support"
 	---help---
@@ -39,6 +40,8 @@ config IPV6_PRIVACY
 
 	  See <file:Documentation/networking/ip-sysctl.txt> for details.
 
+=======
+>>>>>>> v3.18
 config IPV6_ROUTER_PREF
 	bool "IPv6: Router Preference (RFC 4191) support"
 	---help---
@@ -153,6 +156,21 @@ config INET6_XFRM_MODE_ROUTEOPTIMIZATION
 	---help---
 	  Support for MIPv6 route optimization mode.
 
+<<<<<<< HEAD
+=======
+config IPV6_VTI
+tristate "Virtual (secure) IPv6: tunneling"
+	select IPV6_TUNNEL
+	select NET_IP_TUNNEL
+	depends on INET6_XFRM_MODE_TUNNEL
+	---help---
+	Tunneling means encapsulating data of one protocol type within
+	another protocol and sending it over a channel that understands the
+	encapsulating protocol. This can be used with xfrm mode tunnel to give
+	the notion of a secure tunnel for IPSEC and then use routing protocol
+	on top.
+
+>>>>>>> v3.18
 config IPV6_SIT
 	tristate "IPv6: IPv6-in-IPv4 tunnel (SIT driver)"
 	select INET_TUNNEL

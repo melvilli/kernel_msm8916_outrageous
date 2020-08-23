@@ -2,7 +2,11 @@
  * Copyright(c) 2008 - 2010 Realtek Corporation. All rights reserved.
  *
  * Based on the r8180 driver, which is:
+<<<<<<< HEAD
  * Copyright 2004-2005 Andrea Merello <andreamrl@tiscali.it>, et al.
+=======
+ * Copyright 2004-2005 Andrea Merello <andrea.merello@gmail.com>, et al.
+>>>>>>> v3.18
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
  * published by the Free Software Foundation.
@@ -28,6 +32,7 @@
 #include <linux/types.h>
 #include <linux/pci.h>
 
+<<<<<<< HEAD
 static inline void NdisRawWritePortUlong(u32 port,  u32 val)
 {
 	outl(val, port);
@@ -53,6 +58,8 @@ static inline void NdisRawReadPortUlong(u32 port, u32 *pval)
 	*pval = inl(port);
 }
 
+=======
+>>>>>>> v3.18
 struct mp_adapter {
 	u8		LinkCtrlReg;
 
@@ -70,6 +77,7 @@ struct mp_adapter {
 	u8		PciBridgeLinkCtrlReg;
 };
 
+<<<<<<< HEAD
 struct rt_pci_capab_header {
 	unsigned char   CapabilityID;
 	unsigned char   Next;
@@ -97,6 +105,8 @@ struct rt_pci_capab_header {
 
 #define PCI_CAPABILITY_ID_PCI_EXPRESS		0x10
 
+=======
+>>>>>>> v3.18
 struct net_device;
 bool rtl8192_pci_findadapter(struct pci_dev *pdev, struct net_device *dev);
 

@@ -15,6 +15,11 @@
  */
 #define __PAGE_OFFSET		_AC(CONFIG_PAGE_OFFSET, UL)
 
+<<<<<<< HEAD
+=======
+#define __START_KERNEL_map	__PAGE_OFFSET
+
+>>>>>>> v3.18
 #define THREAD_SIZE_ORDER	1
 #define THREAD_SIZE		(PAGE_SIZE << THREAD_SIZE_ORDER)
 

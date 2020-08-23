@@ -17,6 +17,10 @@
 #ifndef ATH_H
 #define ATH_H
 
+<<<<<<< HEAD
+=======
+#include <linux/etherdevice.h>
+>>>>>>> v3.18
 #include <linux/skbuff.h>
 #include <linux/if_ether.h>
 #include <linux/spinlock.h>
@@ -55,6 +59,19 @@ enum ath_device_state {
 	ATH_HW_INITIALIZED,
 };
 
+<<<<<<< HEAD
+=======
+enum ath_op_flags {
+	ATH_OP_INVALID,
+	ATH_OP_BEACONS,
+	ATH_OP_ANI_RUN,
+	ATH_OP_PRIM_STA_VIF,
+	ATH_OP_HW_RESET,
+	ATH_OP_SCANNING,
+	ATH_OP_MULTI_CHANNEL,
+};
+
+>>>>>>> v3.18
 enum ath_bus_type {
 	ATH_PCI,
 	ATH_AHB,
@@ -62,13 +79,21 @@ enum ath_bus_type {
 };
 
 struct reg_dmn_pair_mapping {
+<<<<<<< HEAD
 	u16 regDmnEnum;
+=======
+	u16 reg_domain;
+>>>>>>> v3.18
 	u16 reg_5ghz_ctl;
 	u16 reg_2ghz_ctl;
 };
 
 struct ath_regulatory {
 	char alpha2[2];
+<<<<<<< HEAD
+=======
+	enum nl80211_dfs_regions region;
+>>>>>>> v3.18
 	u16 country_code;
 	u16 max_power_level;
 	u16 current_rd;
@@ -129,6 +154,10 @@ struct ath_common {
 	struct ieee80211_hw *hw;
 	int debug_mask;
 	enum ath_device_state state;
+<<<<<<< HEAD
+=======
+	unsigned long op_flags;
+>>>>>>> v3.18
 
 	struct ath_ani ani;
 
@@ -159,12 +188,23 @@ struct ath_common {
 
 	bool btcoex_enabled;
 	bool disable_ani;
+<<<<<<< HEAD
 	bool antenna_diversity;
+=======
+	bool bt_ant_diversity;
+
+	int last_rssi;
+	struct ieee80211_supported_band sbands[IEEE80211_NUM_BANDS];
+>>>>>>> v3.18
 };
 
 struct sk_buff *ath_rxbuf_alloc(struct ath_common *common,
 				u32 len,
 				gfp_t gfp_mask);
+<<<<<<< HEAD
+=======
+bool ath_is_mybeacon(struct ath_common *common, struct ieee80211_hdr *hdr);
+>>>>>>> v3.18
 
 void ath_hw_setbssidmask(struct ath_common *common);
 void ath_key_delete(struct ath_common *common, struct ieee80211_key_conf *key);
@@ -218,6 +258,10 @@ void ath_printk(const char *level, const struct ath_common *common,
  *	AR9462.
  * @ATH_DBG_DFS: radar datection
  * @ATH_DBG_WOW: Wake on Wireless
+<<<<<<< HEAD
+=======
+ * @ATH_DBG_DYNACK: dynack handling
+>>>>>>> v3.18
  * @ATH_DBG_ANY: enable all debugging
  *
  * The debug level is used to control the amount and type of debugging output
@@ -239,6 +283,7 @@ enum ATH_DEBUG {
 	ATH_DBG_CONFIG		= 0x00000200,
 	ATH_DBG_FATAL		= 0x00000400,
 	ATH_DBG_PS		= 0x00000800,
+<<<<<<< HEAD
 	ATH_DBG_HWTIMER		= 0x00001000,
 	ATH_DBG_BTCOEX		= 0x00002000,
 	ATH_DBG_WMI		= 0x00004000,
@@ -246,10 +291,24 @@ enum ATH_DEBUG {
 	ATH_DBG_MCI		= 0x00010000,
 	ATH_DBG_DFS		= 0x00020000,
 	ATH_DBG_WOW		= 0x00040000,
+=======
+	ATH_DBG_BTCOEX		= 0x00001000,
+	ATH_DBG_WMI		= 0x00002000,
+	ATH_DBG_BSTUCK		= 0x00004000,
+	ATH_DBG_MCI		= 0x00008000,
+	ATH_DBG_DFS		= 0x00010000,
+	ATH_DBG_WOW		= 0x00020000,
+	ATH_DBG_CHAN_CTX	= 0x00040000,
+	ATH_DBG_DYNACK		= 0x00080000,
+>>>>>>> v3.18
 	ATH_DBG_ANY		= 0xffffffff
 };
 
 #define ATH_DBG_DEFAULT (ATH_DBG_FATAL)
+<<<<<<< HEAD
+=======
+#define ATH_DBG_MAX_LEN 512
+>>>>>>> v3.18
 
 #ifdef CONFIG_ATH_DEBUG
 

@@ -110,7 +110,11 @@ ENTRY(memset)
 	strneb	r1, [ip], #1
 	tst	r2, #1
 	strneb	r1, [ip], #1
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 
 6:	subs	r2, r2, #4		@ 1 do we have enough
 	blt	5b			@ 1 bytes to align with?

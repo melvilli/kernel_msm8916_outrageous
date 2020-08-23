@@ -26,10 +26,13 @@
 
 #include "priv.h"
 
+<<<<<<< HEAD
 struct nv10_gpio_priv {
 	struct nouveau_gpio base;
 };
 
+=======
+>>>>>>> v3.18
 static int
 nv10_gpio_sense(struct nouveau_gpio *gpio, int line)
 {
@@ -83,6 +86,7 @@ nv10_gpio_drive(struct nouveau_gpio *gpio, int line, int dir, int out)
 }
 
 static void
+<<<<<<< HEAD
 nv10_gpio_intr(struct nouveau_subdev *subdev)
 {
 	struct nv10_gpio_priv *priv = (void *)subdev;
@@ -175,3 +179,40 @@ nv10_gpio_oclass = {
 		.fini = nv10_gpio_fini,
 	},
 };
+=======
+nv10_gpio_intr_stat(struct nouveau_gpio *gpio, u32 *hi, u32 *lo)
+{
+	u32 intr = nv_rd32(gpio, 0x001104);
+	u32 stat = nv_rd32(gpio, 0x001144) & intr;
+	*lo = (stat & 0xffff0000) >> 16;
+	*hi = (stat & 0x0000ffff);
+	nv_wr32(gpio, 0x001104, intr);
+}
+
+static void
+nv10_gpio_intr_mask(struct nouveau_gpio *gpio, u32 type, u32 mask, u32 data)
+{
+	u32 inte = nv_rd32(gpio, 0x001144);
+	if (type & NVKM_GPIO_LO)
+		inte = (inte & ~(mask << 16)) | (data << 16);
+	if (type & NVKM_GPIO_HI)
+		inte = (inte & ~mask) | data;
+	nv_wr32(gpio, 0x001144, inte);
+}
+
+struct nouveau_oclass *
+nv10_gpio_oclass = &(struct nouveau_gpio_impl) {
+	.base.handle = NV_SUBDEV(GPIO, 0x10),
+	.base.ofuncs = &(struct nouveau_ofuncs) {
+		.ctor = _nouveau_gpio_ctor,
+		.dtor = _nouveau_gpio_dtor,
+		.init = _nouveau_gpio_init,
+		.fini = _nouveau_gpio_fini,
+	},
+	.lines = 16,
+	.intr_stat = nv10_gpio_intr_stat,
+	.intr_mask = nv10_gpio_intr_mask,
+	.drive = nv10_gpio_drive,
+	.sense = nv10_gpio_sense,
+}.base;
+>>>>>>> v3.18

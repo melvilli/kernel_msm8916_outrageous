@@ -46,5 +46,8 @@ struct termio {
 
 /* ioctl (fd, TIOCSERGETLSR, &result) where result may be as below */
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 #endif /* _UAPI__ASM_AVR32_TERMIOS_H */

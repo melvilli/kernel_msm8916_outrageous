@@ -33,6 +33,20 @@
 #define XY_RATIO_5_4	0b10
 #define XY_RATIO_16_9	0b11
 
+<<<<<<< HEAD
+=======
+/* Provide defaults for the timing bits */
+#ifndef ESTABLISHED_TIMING1_BITS
+#define ESTABLISHED_TIMING1_BITS 0x00
+#endif
+#ifndef ESTABLISHED_TIMING2_BITS
+#define ESTABLISHED_TIMING2_BITS 0x00
+#endif
+#ifndef ESTABLISHED_TIMING3_BITS
+#define ESTABLISHED_TIMING3_BITS 0x00
+#endif
+
+>>>>>>> v3.18
 #define mfgname2id(v1,v2,v3) \
 	((((v1-'@')&0x1f)<<10)+(((v2-'@')&0x1f)<<5)+((v3-'@')&0x1f))
 #define swap16(v1) ((v1>>8)+((v1&0xff)<<8))
@@ -139,7 +153,11 @@ white_x_y_msb:	.byte	0x50,0x54
    Bit 2	640x480 @ 75 Hz
    Bit 1	800x600 @ 56 Hz
    Bit 0	800x600 @ 60 Hz */
+<<<<<<< HEAD
 estbl_timing1:	.byte	0x00
+=======
+estbl_timing1:	.byte	ESTABLISHED_TIMING1_BITS
+>>>>>>> v3.18
 
 /* Bit 7	800x600 @ 72 Hz
    Bit 6	800x600 @ 75 Hz
@@ -149,11 +167,19 @@ estbl_timing1:	.byte	0x00
    Bit 2	1024x768 @ 72 Hz
    Bit 1	1024x768 @ 75 Hz
    Bit 0	1280x1024 @ 75 Hz */
+<<<<<<< HEAD
 estbl_timing2:	.byte	ESTABLISHED_TIMINGS_BITS
 
 /* Bit 7	1152x870 @ 75 Hz (Apple Macintosh II)
    Bits 6-0 	Other manufacturer-specific display mod */
 estbl_timing3:	.byte	0x00
+=======
+estbl_timing2:	.byte	ESTABLISHED_TIMING2_BITS
+
+/* Bit 7	1152x870 @ 75 Hz (Apple Macintosh II)
+   Bits 6-0 	Other manufacturer-specific display mod */
+estbl_timing3:	.byte	ESTABLISHED_TIMING3_BITS
+>>>>>>> v3.18
 
 /* Standard timing */
 /* X resolution, less 31, divided by 8 (256-2288 pixels) */

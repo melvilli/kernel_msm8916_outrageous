@@ -24,7 +24,11 @@
 
 _GLOBAL(__arch_hweight8)
 BEGIN_FTR_SECTION
+<<<<<<< HEAD
 	b .__sw_hweight8
+=======
+	b __sw_hweight8
+>>>>>>> v3.18
 	nop
 	nop
 FTR_SECTION_ELSE
@@ -35,7 +39,11 @@ ALT_FTR_SECTION_END_IFCLR(CPU_FTR_POPCNTB)
 
 _GLOBAL(__arch_hweight16)
 BEGIN_FTR_SECTION
+<<<<<<< HEAD
 	b .__sw_hweight16
+=======
+	b __sw_hweight16
+>>>>>>> v3.18
 	nop
 	nop
 	nop
@@ -57,7 +65,11 @@ ALT_FTR_SECTION_END_IFCLR(CPU_FTR_POPCNTB)
 
 _GLOBAL(__arch_hweight32)
 BEGIN_FTR_SECTION
+<<<<<<< HEAD
 	b .__sw_hweight32
+=======
+	b __sw_hweight32
+>>>>>>> v3.18
 	nop
 	nop
 	nop
@@ -82,7 +94,11 @@ ALT_FTR_SECTION_END_IFCLR(CPU_FTR_POPCNTB)
 
 _GLOBAL(__arch_hweight64)
 BEGIN_FTR_SECTION
+<<<<<<< HEAD
 	b .__sw_hweight64
+=======
+	b __sw_hweight64
+>>>>>>> v3.18
 	nop
 	nop
 	nop

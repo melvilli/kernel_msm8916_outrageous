@@ -9,7 +9,11 @@
 
 #include <linux/compiler.h>
 #include <linux/list.h>
+<<<<<<< HEAD
 #include "types.h"
+=======
+#include <linux/types.h>
+>>>>>>> v3.18
 #include "util.h"
 #include "parse-events.h"
 #include "parse-events-bison.h"
@@ -22,6 +26,16 @@ do { \
 		YYABORT; \
 } while (0)
 
+<<<<<<< HEAD
+=======
+#define ALLOC_LIST(list) \
+do { \
+	list = malloc(sizeof(*list)); \
+	ABORT_ON(!list);              \
+	INIT_LIST_HEAD(list);         \
+} while (0)
+
+>>>>>>> v3.18
 static inc_group_count(struct list_head *list,
 		       struct parse_events_evlist *data)
 {
@@ -34,19 +48,29 @@ static inc_group_count(struct list_head *list,
 
 %token PE_START_EVENTS PE_START_TERMS
 %token PE_VALUE PE_VALUE_SYM_HW PE_VALUE_SYM_SW PE_RAW PE_TERM
+<<<<<<< HEAD
 %token PE_SH_RAW PE_FAB_RAW
+=======
+>>>>>>> v3.18
 %token PE_EVENT_NAME
 %token PE_NAME
 %token PE_MODIFIER_EVENT PE_MODIFIER_BP
 %token PE_NAME_CACHE_TYPE PE_NAME_CACHE_OP_RESULT
 %token PE_PREFIX_MEM PE_PREFIX_RAW PE_PREFIX_GROUP
 %token PE_ERROR
+<<<<<<< HEAD
+=======
+%token PE_PMU_EVENT_PRE PE_PMU_EVENT_SUF PE_KERNEL_PMU_EVENT
+>>>>>>> v3.18
 %type <num> PE_VALUE
 %type <num> PE_VALUE_SYM_HW
 %type <num> PE_VALUE_SYM_SW
 %type <num> PE_RAW
+<<<<<<< HEAD
 %type <num> PE_SH_RAW
 %type <num> PE_FAB_RAW
+=======
+>>>>>>> v3.18
 %type <num> PE_TERM
 %type <str> PE_NAME
 %type <str> PE_NAME_CACHE_TYPE
@@ -54,6 +78,10 @@ static inc_group_count(struct list_head *list,
 %type <str> PE_MODIFIER_EVENT
 %type <str> PE_MODIFIER_BP
 %type <str> PE_EVENT_NAME
+<<<<<<< HEAD
+=======
+%type <str> PE_PMU_EVENT_PRE PE_PMU_EVENT_SUF PE_KERNEL_PMU_EVENT
+>>>>>>> v3.18
 %type <num> value_sym
 %type <head> event_config
 %type <term> event_term
@@ -64,8 +92,11 @@ static inc_group_count(struct list_head *list,
 %type <head> event_legacy_tracepoint
 %type <head> event_legacy_numeric
 %type <head> event_legacy_raw
+<<<<<<< HEAD
 %type <head> event_legacy_shared_raw
 %type <head> event_legacy_fabric_raw
+=======
+>>>>>>> v3.18
 %type <head> event_def
 %type <head> event_mod
 %type <head> event_name
@@ -195,20 +226,82 @@ event_def: event_pmu |
 	   event_legacy_mem |
 	   event_legacy_tracepoint sep_dc |
 	   event_legacy_numeric sep_dc |
+<<<<<<< HEAD
 	   event_legacy_raw sep_dc |
 	   event_legacy_shared_raw sep_dc |
 	   event_legacy_fabric_raw sep_dc
+=======
+	   event_legacy_raw sep_dc
+>>>>>>> v3.18
 
 event_pmu:
 PE_NAME '/' event_config '/'
 {
 	struct parse_events_evlist *data = _data;
+<<<<<<< HEAD
 	struct list_head *list = NULL;
 
 	ABORT_ON(parse_events_add_pmu(&list, &data->idx, $1, $3));
 	parse_events__free_terms($3);
 	$$ = list;
 }
+=======
+	struct list_head *list;
+
+	ALLOC_LIST(list);
+	ABORT_ON(parse_events_add_pmu(list, &data->idx, $1, $3));
+	parse_events__free_terms($3);
+	$$ = list;
+}
+|
+PE_NAME '/' '/'
+{
+	struct parse_events_evlist *data = _data;
+	struct list_head *list;
+
+	ALLOC_LIST(list);
+	ABORT_ON(parse_events_add_pmu(list, &data->idx, $1, NULL));
+	$$ = list;
+}
+|
+PE_KERNEL_PMU_EVENT sep_dc
+{
+	struct parse_events_evlist *data = _data;
+	struct list_head *head;
+	struct parse_events_term *term;
+	struct list_head *list;
+
+	ALLOC_LIST(head);
+	ABORT_ON(parse_events_term__num(&term, PARSE_EVENTS__TERM_TYPE_USER,
+					$1, 1));
+	list_add_tail(&term->list, head);
+
+	ALLOC_LIST(list);
+	ABORT_ON(parse_events_add_pmu(list, &data->idx, "cpu", head));
+	parse_events__free_terms(head);
+	$$ = list;
+}
+|
+PE_PMU_EVENT_PRE '-' PE_PMU_EVENT_SUF sep_dc
+{
+	struct parse_events_evlist *data = _data;
+	struct list_head *head;
+	struct parse_events_term *term;
+	struct list_head *list;
+	char pmu_name[128];
+	snprintf(&pmu_name, 128, "%s-%s", $1, $3);
+
+	ALLOC_LIST(head);
+	ABORT_ON(parse_events_term__num(&term, PARSE_EVENTS__TERM_TYPE_USER,
+					&pmu_name, 1));
+	list_add_tail(&term->list, head);
+
+	ALLOC_LIST(list);
+	ABORT_ON(parse_events_add_pmu(list, &data->idx, "cpu", head));
+	parse_events__free_terms(head);
+	$$ = list;
+}
+>>>>>>> v3.18
 
 value_sym:
 PE_VALUE_SYM_HW
@@ -219,11 +312,20 @@ event_legacy_symbol:
 value_sym '/' event_config '/'
 {
 	struct parse_events_evlist *data = _data;
+<<<<<<< HEAD
 	struct list_head *list = NULL;
 	int type = $1 >> 16;
 	int config = $1 & 255;
 
 	ABORT_ON(parse_events_add_numeric(&list, &data->idx,
+=======
+	struct list_head *list;
+	int type = $1 >> 16;
+	int config = $1 & 255;
+
+	ALLOC_LIST(list);
+	ABORT_ON(parse_events_add_numeric(list, &data->idx,
+>>>>>>> v3.18
 					  type, config, $3));
 	parse_events__free_terms($3);
 	$$ = list;
@@ -232,11 +334,20 @@ value_sym '/' event_config '/'
 value_sym sep_slash_dc
 {
 	struct parse_events_evlist *data = _data;
+<<<<<<< HEAD
 	struct list_head *list = NULL;
 	int type = $1 >> 16;
 	int config = $1 & 255;
 
 	ABORT_ON(parse_events_add_numeric(&list, &data->idx,
+=======
+	struct list_head *list;
+	int type = $1 >> 16;
+	int config = $1 & 255;
+
+	ALLOC_LIST(list);
+	ABORT_ON(parse_events_add_numeric(list, &data->idx,
+>>>>>>> v3.18
 					  type, config, NULL));
 	$$ = list;
 }
@@ -245,27 +356,48 @@ event_legacy_cache:
 PE_NAME_CACHE_TYPE '-' PE_NAME_CACHE_OP_RESULT '-' PE_NAME_CACHE_OP_RESULT
 {
 	struct parse_events_evlist *data = _data;
+<<<<<<< HEAD
 	struct list_head *list = NULL;
 
 	ABORT_ON(parse_events_add_cache(&list, &data->idx, $1, $3, $5));
+=======
+	struct list_head *list;
+
+	ALLOC_LIST(list);
+	ABORT_ON(parse_events_add_cache(list, &data->idx, $1, $3, $5));
+>>>>>>> v3.18
 	$$ = list;
 }
 |
 PE_NAME_CACHE_TYPE '-' PE_NAME_CACHE_OP_RESULT
 {
 	struct parse_events_evlist *data = _data;
+<<<<<<< HEAD
 	struct list_head *list = NULL;
 
 	ABORT_ON(parse_events_add_cache(&list, &data->idx, $1, $3, NULL));
+=======
+	struct list_head *list;
+
+	ALLOC_LIST(list);
+	ABORT_ON(parse_events_add_cache(list, &data->idx, $1, $3, NULL));
+>>>>>>> v3.18
 	$$ = list;
 }
 |
 PE_NAME_CACHE_TYPE
 {
 	struct parse_events_evlist *data = _data;
+<<<<<<< HEAD
 	struct list_head *list = NULL;
 
 	ABORT_ON(parse_events_add_cache(&list, &data->idx, $1, NULL, NULL));
+=======
+	struct list_head *list;
+
+	ALLOC_LIST(list);
+	ABORT_ON(parse_events_add_cache(list, &data->idx, $1, NULL, NULL));
+>>>>>>> v3.18
 	$$ = list;
 }
 
@@ -273,9 +405,16 @@ event_legacy_mem:
 PE_PREFIX_MEM PE_VALUE ':' PE_MODIFIER_BP sep_dc
 {
 	struct parse_events_evlist *data = _data;
+<<<<<<< HEAD
 	struct list_head *list = NULL;
 
 	ABORT_ON(parse_events_add_breakpoint(&list, &data->idx,
+=======
+	struct list_head *list;
+
+	ALLOC_LIST(list);
+	ABORT_ON(parse_events_add_breakpoint(list, &data->idx,
+>>>>>>> v3.18
 					     (void *) $2, $4));
 	$$ = list;
 }
@@ -283,20 +422,49 @@ PE_PREFIX_MEM PE_VALUE ':' PE_MODIFIER_BP sep_dc
 PE_PREFIX_MEM PE_VALUE sep_dc
 {
 	struct parse_events_evlist *data = _data;
+<<<<<<< HEAD
 	struct list_head *list = NULL;
 
 	ABORT_ON(parse_events_add_breakpoint(&list, &data->idx,
+=======
+	struct list_head *list;
+
+	ALLOC_LIST(list);
+	ABORT_ON(parse_events_add_breakpoint(list, &data->idx,
+>>>>>>> v3.18
 					     (void *) $2, NULL));
 	$$ = list;
 }
 
 event_legacy_tracepoint:
+<<<<<<< HEAD
 PE_NAME ':' PE_NAME
 {
 	struct parse_events_evlist *data = _data;
 	struct list_head *list = NULL;
 
 	ABORT_ON(parse_events_add_tracepoint(&list, &data->idx, $1, $3));
+=======
+PE_NAME '-' PE_NAME ':' PE_NAME
+{
+	struct parse_events_evlist *data = _data;
+	struct list_head *list;
+	char sys_name[128];
+	snprintf(&sys_name, 128, "%s-%s", $1, $3);
+
+	ALLOC_LIST(list);
+	ABORT_ON(parse_events_add_tracepoint(list, &data->idx, &sys_name, $5));
+	$$ = list;
+}
+|
+PE_NAME ':' PE_NAME
+{
+	struct parse_events_evlist *data = _data;
+	struct list_head *list;
+
+	ALLOC_LIST(list);
+	ABORT_ON(parse_events_add_tracepoint(list, &data->idx, $1, $3));
+>>>>>>> v3.18
 	$$ = list;
 }
 
@@ -304,9 +472,16 @@ event_legacy_numeric:
 PE_VALUE ':' PE_VALUE
 {
 	struct parse_events_evlist *data = _data;
+<<<<<<< HEAD
 	struct list_head *list = NULL;
 
 	ABORT_ON(parse_events_add_numeric(&list, &data->idx, (u32)$1, $3, NULL));
+=======
+	struct list_head *list;
+
+	ALLOC_LIST(list);
+	ABORT_ON(parse_events_add_numeric(list, &data->idx, (u32)$1, $3, NULL));
+>>>>>>> v3.18
 	$$ = list;
 }
 
@@ -314,13 +489,21 @@ event_legacy_raw:
 PE_RAW
 {
 	struct parse_events_evlist *data = _data;
+<<<<<<< HEAD
 	struct list_head *list = NULL;
 
 	ABORT_ON(parse_events_add_numeric(&list, &data->idx,
+=======
+	struct list_head *list;
+
+	ALLOC_LIST(list);
+	ABORT_ON(parse_events_add_numeric(list, &data->idx,
+>>>>>>> v3.18
 					  PERF_TYPE_RAW, $1, NULL));
 	$$ = list;
 }
 
+<<<<<<< HEAD
 event_legacy_shared_raw:
 PE_SH_RAW
 {
@@ -343,6 +526,8 @@ PE_FAB_RAW
 	$$ = list;
 }
 
+=======
+>>>>>>> v3.18
 start_terms: event_config
 {
 	struct parse_events_terms *data = _data;

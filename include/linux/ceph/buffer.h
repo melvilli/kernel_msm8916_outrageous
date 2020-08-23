@@ -17,7 +17,10 @@ struct ceph_buffer {
 	struct kref kref;
 	struct kvec vec;
 	size_t alloc_len;
+<<<<<<< HEAD
 	bool is_vmalloc;
+=======
+>>>>>>> v3.18
 };
 
 extern struct ceph_buffer *ceph_buffer_new(size_t len, gfp_t gfp);

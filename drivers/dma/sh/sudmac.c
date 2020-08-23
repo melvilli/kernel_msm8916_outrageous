@@ -14,12 +14,22 @@
  * published by the Free Software Foundation.
  */
 
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/slab.h>
 #include <linux/interrupt.h>
 #include <linux/dmaengine.h>
 #include <linux/platform_device.h>
+=======
+#include <linux/dmaengine.h>
+#include <linux/err.h>
+#include <linux/init.h>
+#include <linux/interrupt.h>
+#include <linux/module.h>
+#include <linux/platform_device.h>
+#include <linux/slab.h>
+>>>>>>> v3.18
 #include <linux/sudmac.h>
 
 struct sudmac_chan {
@@ -150,7 +160,12 @@ static const struct sudmac_slave_config *sudmac_find_slave(
 	return NULL;
 }
 
+<<<<<<< HEAD
 static int sudmac_set_slave(struct shdma_chan *schan, int slave_id, bool try)
+=======
+static int sudmac_set_slave(struct shdma_chan *schan, int slave_id,
+			    dma_addr_t slave_addr, bool try)
+>>>>>>> v3.18
 {
 	struct sudmac_chan *sc = to_chan(schan);
 	const struct sudmac_slave_config *cfg = sudmac_find_slave(sc, slave_id);
@@ -177,8 +192,13 @@ static int sudmac_desc_setup(struct shdma_chan *schan,
 	struct sudmac_chan *sc = to_chan(schan);
 	struct sudmac_desc *sd = to_desc(sdesc);
 
+<<<<<<< HEAD
 	dev_dbg(sc->shdma_chan.dev, "%s: src=%x, dst=%x, len=%d\n",
 		__func__, src, dst, *len);
+=======
+	dev_dbg(sc->shdma_chan.dev, "%s: src=%pad, dst=%pad, len=%zu\n",
+		__func__, &src, &dst, *len);
+>>>>>>> v3.18
 
 	if (*len > schan->max_xfer_len)
 		*len = schan->max_xfer_len;
@@ -298,11 +318,16 @@ static void sudmac_chan_remove(struct sudmac_device *su_dev)
 	int i;
 
 	shdma_for_each_chan(schan, &su_dev->shdma_dev, i) {
+<<<<<<< HEAD
 		struct sudmac_chan *sc = to_chan(schan);
 
 		BUG_ON(!schan);
 
 		shdma_free_irq(&sc->shdma_chan);
+=======
+		BUG_ON(!schan);
+
+>>>>>>> v3.18
 		shdma_chan_remove(schan);
 	}
 	dma_dev->chancnt = 0;
@@ -335,7 +360,11 @@ static const struct shdma_ops sudmac_shdma_ops = {
 
 static int sudmac_probe(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct sudmac_pdata *pdata = pdev->dev.platform_data;
+=======
+	struct sudmac_pdata *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	int err, i;
 	struct sudmac_device *su_dev;
 	struct dma_device *dma_dev;
@@ -345,9 +374,14 @@ static int sudmac_probe(struct platform_device *pdev)
 	if (!pdata)
 		return -ENODEV;
 
+<<<<<<< HEAD
 	chan = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	irq_res = platform_get_resource(pdev, IORESOURCE_IRQ, 0);
 	if (!chan || !irq_res)
+=======
+	irq_res = platform_get_resource(pdev, IORESOURCE_IRQ, 0);
+	if (!irq_res)
+>>>>>>> v3.18
 		return -ENODEV;
 
 	err = -ENOMEM;
@@ -360,9 +394,16 @@ static int sudmac_probe(struct platform_device *pdev)
 
 	dma_dev = &su_dev->shdma_dev.dma_dev;
 
+<<<<<<< HEAD
 	su_dev->chan_reg = devm_request_and_ioremap(&pdev->dev, chan);
 	if (!su_dev->chan_reg)
 		return err;
+=======
+	chan = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+	su_dev->chan_reg = devm_ioremap_resource(&pdev->dev, chan);
+	if (IS_ERR(su_dev->chan_reg))
+		return PTR_ERR(su_dev->chan_reg);
+>>>>>>> v3.18
 
 	dma_cap_set(DMA_SLAVE, dma_dev->cap_mask);
 
@@ -373,7 +414,11 @@ static int sudmac_probe(struct platform_device *pdev)
 		return err;
 
 	/* platform data */
+<<<<<<< HEAD
 	su_dev->pdata = pdev->dev.platform_data;
+=======
+	su_dev->pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 
 	platform_set_drvdata(pdev, su_dev);
 
@@ -393,7 +438,10 @@ static int sudmac_probe(struct platform_device *pdev)
 chan_probe_err:
 	sudmac_chan_remove(su_dev);
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	shdma_cleanup(&su_dev->shdma_dev);
 
 	return err;
@@ -407,7 +455,10 @@ static int sudmac_remove(struct platform_device *pdev)
 	dma_async_device_unregister(dma_dev);
 	sudmac_chan_remove(su_dev);
 	shdma_cleanup(&su_dev->shdma_dev);
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 
 	return 0;
 }

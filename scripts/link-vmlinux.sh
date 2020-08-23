@@ -82,7 +82,17 @@ kallsyms()
 		kallsymopt="${kallsymopt} --all-symbols"
 	fi
 
+<<<<<<< HEAD
 	kallsymopt="${kallsymopt} --page-offset=$CONFIG_PAGE_OFFSET"
+=======
+	if [ -n "${CONFIG_ARM}" ] && [ -n "${CONFIG_PAGE_OFFSET}" ]; then
+		kallsymopt="${kallsymopt} --page-offset=$CONFIG_PAGE_OFFSET"
+	fi
+
+	if [ -n "${CONFIG_X86_64}" ]; then
+		kallsymopt="${kallsymopt} --absolute-percpu"
+	fi
+>>>>>>> v3.18
 
 	local aflags="${KBUILD_AFLAGS} ${KBUILD_AFLAGS_KERNEL}               \
 		      ${NOSTDINC_FLAGS} ${LINUXINCLUDE} ${KBUILD_CPPFLAGS}"

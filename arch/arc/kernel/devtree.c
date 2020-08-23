@@ -14,10 +14,29 @@
 #include <linux/memblock.h>
 #include <linux/of.h>
 #include <linux/of_fdt.h>
+<<<<<<< HEAD
 #include <asm/prom.h>
 #include <asm/clk.h>
 #include <asm/mach_desc.h>
 
+=======
+#include <asm/clk.h>
+#include <asm/mach_desc.h>
+
+static const void * __init arch_get_next_mach(const char *const **match)
+{
+	static const struct machine_desc *mdesc = __arch_info_begin;
+	const struct machine_desc *m = mdesc;
+
+	if (m >= __arch_info_end)
+		return NULL;
+
+	mdesc++;
+	*match = m->dt_compat;
+	return m;
+}
+
+>>>>>>> v3.18
 /**
  * setup_machine_fdt - Machine setup when an dtb was passed to the kernel
  * @dt:		virtual address pointer to dt blob
@@ -25,6 +44,7 @@
  * If a dtb was passed to the kernel, then use it to choose the correct
  * machine_desc and to setup the system.
  */
+<<<<<<< HEAD
 struct machine_desc * __init setup_machine_fdt(void *dt)
 {
 	struct boot_param_header *devtree = dt;
@@ -94,10 +114,28 @@ struct machine_desc * __init setup_machine_fdt(void *dt)
 	/* Setup memory, calling early_init_dt_add_memory_arch */
 	of_scan_flat_dt(early_init_dt_scan_memory, NULL);
 
+=======
+const struct machine_desc * __init setup_machine_fdt(void *dt)
+{
+	const struct machine_desc *mdesc;
+	unsigned long dt_root;
+	const void *clk;
+	int len;
+
+	if (!early_init_dt_scan(dt))
+		return NULL;
+
+	mdesc = of_flat_dt_match_machine(NULL, arch_get_next_mach);
+	if (!mdesc)
+		machine_halt();
+
+	dt_root = of_get_flat_dt_root();
+>>>>>>> v3.18
 	clk = of_get_flat_dt_prop(dt_root, "clock-frequency", &len);
 	if (clk)
 		arc_set_core_freq(of_read_ulong(clk, len/4));
 
+<<<<<<< HEAD
 	return mdesc_best;
 }
 
@@ -114,4 +152,7 @@ void __init copy_devtree(void)
 				be32_to_cpu(initial_boot_params->totalsize));
 		initial_boot_params = alloc;
 	}
+=======
+	return mdesc;
+>>>>>>> v3.18
 }

@@ -69,7 +69,10 @@ static int pcm030_fabric_probe(struct platform_device *op)
 		return -ENOMEM;
 
 	card->dev = &op->dev;
+<<<<<<< HEAD
 	platform_set_drvdata(op, pdata);
+=======
+>>>>>>> v3.18
 
 	pdata->card = card;
 
@@ -98,6 +101,11 @@ static int pcm030_fabric_probe(struct platform_device *op)
 	if (ret)
 		dev_err(&op->dev, "snd_soc_register_card() failed: %d\n", ret);
 
+<<<<<<< HEAD
+=======
+	platform_set_drvdata(op, pdata);
+
+>>>>>>> v3.18
 	return ret;
 }
 

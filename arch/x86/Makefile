@@ -11,11 +11,40 @@ else
         KBUILD_DEFCONFIG := $(ARCH)_defconfig
 endif
 
+<<<<<<< HEAD
+=======
+# How to compile the 16-bit code.  Note we always compile for -march=i386;
+# that way we can complain to the user if the CPU is insufficient.
+#
+# The -m16 option is supported by GCC >= 4.9 and clang >= 3.5. For
+# older versions of GCC, include an *assembly* header to make sure that
+# gcc doesn't play any games behind our back.
+CODE16GCC_CFLAGS := -m32 -Wa,$(srctree)/arch/x86/boot/code16gcc.h
+M16_CFLAGS	 := $(call cc-option, -m16, $(CODE16GCC_CFLAGS))
+
+REALMODE_CFLAGS	:= $(M16_CFLAGS) -g -Os -D__KERNEL__ \
+		   -DDISABLE_BRANCH_PROFILING \
+		   -Wall -Wstrict-prototypes -march=i386 -mregparm=3 \
+		   -fno-strict-aliasing -fomit-frame-pointer -fno-pic \
+		   -mno-mmx -mno-sse \
+		   $(call cc-option, -ffreestanding) \
+		   $(call cc-option, -fno-stack-protector) \
+		   $(call cc-option, -mpreferred-stack-boundary=2)
+export REALMODE_CFLAGS
+
+>>>>>>> v3.18
 # BITS is used as extension for files which are available in a 32 bit
 # and a 64 bit version to simplify shared Makefiles.
 # e.g.: obj-y += foo_$(BITS).o
 export BITS
 
+<<<<<<< HEAD
+=======
+ifdef CONFIG_X86_NEED_RELOCS
+        LDFLAGS_vmlinux := --emit-relocs
+endif
+
+>>>>>>> v3.18
 ifeq ($(CONFIG_X86_32),y)
         BITS := 32
         UTS_MACHINE := i386
@@ -25,6 +54,7 @@ ifeq ($(CONFIG_X86_32),y)
         KBUILD_AFLAGS += $(biarch)
         KBUILD_CFLAGS += $(biarch)
 
+<<<<<<< HEAD
         ifdef CONFIG_RELOCATABLE
                 LDFLAGS_vmlinux := --emit-relocs
         endif
@@ -34,6 +64,10 @@ ifeq ($(CONFIG_X86_32),y)
         # Don't autogenerate MMX or SSE instructions
         KBUILD_CFLAGS += -mno-mmx -mno-sse
 
+=======
+        KBUILD_CFLAGS += -msoft-float -mregparm=3 -freg-struct-return
+
+>>>>>>> v3.18
         # Never want PIC in a 32-bit kernel, prevent breakage with GCC built
         # with nonstandard options
         KBUILD_CFLAGS += -fno-pic
@@ -57,11 +91,21 @@ else
         UTS_MACHINE := x86_64
         CHECKFLAGS += -D__x86_64__ -m64
 
+<<<<<<< HEAD
         KBUILD_AFLAGS += -m64
         KBUILD_CFLAGS += -m64
 
         # Don't autogenerate MMX or SSE instructions
         KBUILD_CFLAGS += -mno-mmx -mno-sse
+=======
+        biarch := -m64
+        KBUILD_AFLAGS += -m64
+        KBUILD_CFLAGS += -m64
+
+        # Don't autogenerate traditional x87 instructions
+        KBUILD_CFLAGS += $(call cc-option,-mno-80387)
+        KBUILD_CFLAGS += $(call cc-option,-mno-fp-ret-in-387)
+>>>>>>> v3.18
 
 	# Use -mpreferred-stack-boundary=3 if supported.
 	KBUILD_CFLAGS += $(call cc-option,-mpreferred-stack-boundary=3)
@@ -86,7 +130,11 @@ else
 
         # this works around some issues with generating unwind tables in older gccs
         # newer gccs do it by default
+<<<<<<< HEAD
         KBUILD_CFLAGS += -maccumulate-outgoing-args
+=======
+        KBUILD_CFLAGS += $(call cc-option,-maccumulate-outgoing-args)
+>>>>>>> v3.18
 endif
 
 # Make sure compiler does not have buggy stack-protector support.
@@ -130,6 +178,10 @@ cfi-sections := $(call as-instr,.cfi_sections .debug_frame,-DCONFIG_AS_CFI_SECTI
 
 # does binutils support specific instructions?
 asinstr := $(call as-instr,fxsaveq (%rax),-DCONFIG_AS_FXSAVEQ=1)
+<<<<<<< HEAD
+=======
+asinstr += $(call as-instr,crc32l %eax$(comma)%eax,-DCONFIG_AS_CRC32=1)
+>>>>>>> v3.18
 avx_instr := $(call as-instr,vxorps %ymm0$(comma)%ymm1$(comma)%ymm2,-DCONFIG_AS_AVX=1)
 avx2_instr :=$(call as-instr,vpbroadcastb %xmm0$(comma)%ymm1,-DCONFIG_AS_AVX2=1)
 
@@ -145,7 +197,11 @@ KBUILD_CFLAGS += -Wno-sign-compare
 #
 KBUILD_CFLAGS += -fno-asynchronous-unwind-tables
 # prevent gcc from generating any FP code by mistake
+<<<<<<< HEAD
 KBUILD_CFLAGS += $(call cc-option,-mno-sse -mno-mmx -mno-sse2 -mno-3dnow,)
+=======
+KBUILD_CFLAGS += -mno-sse -mno-mmx -mno-sse2 -mno-3dnow
+>>>>>>> v3.18
 KBUILD_CFLAGS += $(call cc-option,-mno-avx,)
 
 KBUILD_CFLAGS += $(mflags-y)
@@ -160,6 +216,14 @@ archscripts: scripts_basic
 archheaders:
 	$(Q)$(MAKE) $(build)=arch/x86/syscalls all
 
+<<<<<<< HEAD
+=======
+archprepare:
+ifeq ($(CONFIG_KEXEC_FILE),y)
+	$(Q)$(MAKE) $(build)=arch/x86/purgatory arch/x86/purgatory/kexec-purgatory.c
+endif
+
+>>>>>>> v3.18
 ###
 # Kernel objects
 
@@ -223,6 +287,10 @@ archclean:
 	$(Q)rm -rf $(objtree)/arch/x86_64
 	$(Q)$(MAKE) $(clean)=$(boot)
 	$(Q)$(MAKE) $(clean)=arch/x86/tools
+<<<<<<< HEAD
+=======
+	$(Q)$(MAKE) $(clean)=arch/x86/purgatory
+>>>>>>> v3.18
 
 define archhelp
   echo  '* bzImage      - Compressed kernel image (arch/x86/boot/bzImage)'

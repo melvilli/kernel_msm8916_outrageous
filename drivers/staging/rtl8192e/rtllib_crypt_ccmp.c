@@ -69,7 +69,11 @@ static void *rtllib_ccmp_init(int key_idx)
 
 	priv->tfm = (void *)crypto_alloc_cipher("aes", 0, CRYPTO_ALG_ASYNC);
 	if (IS_ERR(priv->tfm)) {
+<<<<<<< HEAD
 		printk(KERN_DEBUG "rtllib_crypt_ccmp: could not allocate "
+=======
+		pr_debug("rtllib_crypt_ccmp: could not allocate "
+>>>>>>> v3.18
 		       "crypto API aes\n");
 		priv->tfm = NULL;
 		goto fail;
@@ -90,6 +94,10 @@ fail:
 static void rtllib_ccmp_deinit(void *priv)
 {
 	struct rtllib_ccmp_data *_priv = priv;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	if (_priv && _priv->tfm)
 		crypto_free_cipher((void *)_priv->tfm);
 	kfree(priv);
@@ -99,6 +107,10 @@ static void rtllib_ccmp_deinit(void *priv)
 static inline void xor_block(u8 *b, u8 *a, size_t len)
 {
 	int i;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	for (i = 0; i < len; i++)
 		b[i] ^= a[i];
 }
@@ -276,7 +288,11 @@ static int rtllib_ccmp_decrypt(struct sk_buff *skb, int hdr_len, void *priv)
 	keyidx = pos[3];
 	if (!(keyidx & (1 << 5))) {
 		if (net_ratelimit()) {
+<<<<<<< HEAD
 			printk(KERN_DEBUG "CCMP: received packet without ExtIV"
+=======
+			pr_debug("CCMP: received packet without ExtIV"
+>>>>>>> v3.18
 			       " flag from %pM\n", hdr->addr2);
 		}
 		key->dot11RSNAStatsCCMPFormatErrors++;
@@ -284,13 +300,21 @@ static int rtllib_ccmp_decrypt(struct sk_buff *skb, int hdr_len, void *priv)
 	}
 	keyidx >>= 6;
 	if (key->key_idx != keyidx) {
+<<<<<<< HEAD
 		printk(KERN_DEBUG "CCMP: RX tkey->key_idx=%d frame "
+=======
+		pr_debug("CCMP: RX tkey->key_idx=%d frame "
+>>>>>>> v3.18
 		       "keyidx=%d priv=%p\n", key->key_idx, keyidx, priv);
 		return -6;
 	}
 	if (!key->key_set) {
 		if (net_ratelimit()) {
+<<<<<<< HEAD
 			printk(KERN_DEBUG "CCMP: received packet from %pM"
+=======
+			pr_debug("CCMP: received packet from %pM"
+>>>>>>> v3.18
 			       " with keyid=%d that does not have a configured"
 			       " key\n", hdr->addr2, keyidx);
 		}
@@ -339,7 +363,11 @@ static int rtllib_ccmp_decrypt(struct sk_buff *skb, int hdr_len, void *priv)
 
 		if (memcmp(mic, a, CCMP_MIC_LEN) != 0) {
 			if (net_ratelimit()) {
+<<<<<<< HEAD
 				printk(KERN_DEBUG "CCMP: decrypt failed: STA="
+=======
+				pr_debug("CCMP: decrypt failed: STA="
+>>>>>>> v3.18
 				" %pM\n", hdr->addr2);
 			}
 			key->dot11RSNAStatsCCMPDecryptErrors++;
@@ -415,6 +443,10 @@ static int rtllib_ccmp_get_key(void *key, int len, u8 *seq, void *priv)
 static void rtllib_ccmp_print_stats(struct seq_file *m, void *priv)
 {
 	struct rtllib_ccmp_data *ccmp = priv;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	seq_printf(m,
 		   "key[%d] alg=CCMP key_set=%d "
 		   "tx_pn=%pM rx_pn=%pM "
@@ -443,13 +475,21 @@ static struct lib80211_crypto_ops rtllib_crypt_ccmp = {
 };
 
 
+<<<<<<< HEAD
 int __init rtllib_crypto_ccmp_init(void)
+=======
+static int __init rtllib_crypto_ccmp_init(void)
+>>>>>>> v3.18
 {
 	return lib80211_register_crypto_ops(&rtllib_crypt_ccmp);
 }
 
 
+<<<<<<< HEAD
 void __exit rtllib_crypto_ccmp_exit(void)
+=======
+static void __exit rtllib_crypto_ccmp_exit(void)
+>>>>>>> v3.18
 {
 	lib80211_unregister_crypto_ops(&rtllib_crypt_ccmp);
 }

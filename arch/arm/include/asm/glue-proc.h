@@ -221,12 +221,20 @@
 # endif
 #endif
 
+<<<<<<< HEAD
 #ifdef CONFIG_CPU_V7
+=======
+#ifdef CONFIG_CPU_V7M
+>>>>>>> v3.18
 # ifdef CPU_NAME
 #  undef  MULTI_CPU
 #  define MULTI_CPU
 # else
+<<<<<<< HEAD
 #  define CPU_NAME cpu_v7
+=======
+#  define CPU_NAME cpu_v7m
+>>>>>>> v3.18
 # endif
 #endif
 
@@ -239,6 +247,18 @@
 # endif
 #endif
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_CPU_V7
+/*
+ * Cortex-A9 needs a different suspend/resume function, so we need
+ * multiple CPU support for ARMv7 anyway.
+ */
+#  undef  MULTI_CPU
+#  define MULTI_CPU
+#endif
+
+>>>>>>> v3.18
 #ifndef MULTI_CPU
 #define cpu_proc_init			__glue(CPU_NAME,_proc_init)
 #define cpu_proc_fin			__glue(CPU_NAME,_proc_fin)

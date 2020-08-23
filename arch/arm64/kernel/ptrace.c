@@ -19,6 +19,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+<<<<<<< HEAD
+=======
+#include <linux/audit.h>
+>>>>>>> v3.18
 #include <linux/compat.h>
 #include <linux/kernel.h>
 #include <linux/sched.h>
@@ -26,7 +30,10 @@
 #include <linux/smp.h>
 #include <linux/ptrace.h>
 #include <linux/user.h>
+<<<<<<< HEAD
 #include <linux/seccomp.h>
+=======
+>>>>>>> v3.18
 #include <linux/security.h>
 #include <linux/init.h>
 #include <linux/signal.h>
@@ -40,6 +47,10 @@
 #include <asm/compat.h>
 #include <asm/debug-monitors.h>
 #include <asm/pgtable.h>
+<<<<<<< HEAD
+=======
+#include <asm/syscall.h>
+>>>>>>> v3.18
 #include <asm/traps.h>
 #include <asm/system_misc.h>
 
@@ -56,12 +67,15 @@
  */
 void ptrace_disable(struct task_struct *child)
 {
+<<<<<<< HEAD
 	/*
 	 * This would be better off in core code, but PTRACE_DETACH has
 	 * grown its fair share of arch-specific worts and changing it
 	 * is likely to cause regressions on obscure architectures.
 	 */
 	user_disable_single_step(child);
+=======
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_HAVE_HW_BREAKPOINT
@@ -447,8 +461,11 @@ static int hw_break_set(struct task_struct *target,
 	/* (address, ctrl) registers */
 	limit = regset->n * regset->size;
 	while (count && offset < limit) {
+<<<<<<< HEAD
 		if (count < PTRACE_HBP_ADDR_SZ)
 			return -EINVAL;
+=======
+>>>>>>> v3.18
 		ret = user_regset_copyin(&pos, &count, &kbuf, &ubuf, &addr,
 					 offset, offset + PTRACE_HBP_ADDR_SZ);
 		if (ret)
@@ -458,8 +475,11 @@ static int hw_break_set(struct task_struct *target,
 			return ret;
 		offset += PTRACE_HBP_ADDR_SZ;
 
+<<<<<<< HEAD
 		if (!count)
 			break;
+=======
+>>>>>>> v3.18
 		ret = user_regset_copyin(&pos, &count, &kbuf, &ubuf, &ctrl,
 					 offset, offset + PTRACE_HBP_CTRL_SZ);
 		if (ret)
@@ -496,7 +516,11 @@ static int gpr_set(struct task_struct *target, const struct user_regset *regset,
 		   const void *kbuf, const void __user *ubuf)
 {
 	int ret;
+<<<<<<< HEAD
 	struct user_pt_regs newregs = task_pt_regs(target)->user_regs;
+=======
+	struct user_pt_regs newregs;
+>>>>>>> v3.18
 
 	ret = user_regset_copyin(&pos, &count, &kbuf, &ubuf, &newregs, 0, -1);
 	if (ret)
@@ -526,14 +550,22 @@ static int fpr_set(struct task_struct *target, const struct user_regset *regset,
 		   const void *kbuf, const void __user *ubuf)
 {
 	int ret;
+<<<<<<< HEAD
 	struct user_fpsimd_state newstate =
 		target->thread.fpsimd_state.user_fpsimd;
+=======
+	struct user_fpsimd_state newstate;
+>>>>>>> v3.18
 
 	ret = user_regset_copyin(&pos, &count, &kbuf, &ubuf, &newstate, 0, -1);
 	if (ret)
 		return ret;
 
 	target->thread.fpsimd_state.user_fpsimd = newstate;
+<<<<<<< HEAD
+=======
+	fpsimd_flush_task_state(target);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -550,7 +582,11 @@ static int tls_set(struct task_struct *target, const struct user_regset *regset,
 		   const void *kbuf, const void __user *ubuf)
 {
 	int ret;
+<<<<<<< HEAD
 	unsigned long tls = target->thread.tp_value;
+=======
+	unsigned long tls;
+>>>>>>> v3.18
 
 	ret = user_regset_copyin(&pos, &count, &kbuf, &ubuf, &tls, 0, -1);
 	if (ret)
@@ -560,6 +596,7 @@ static int tls_set(struct task_struct *target, const struct user_regset *regset,
 	return ret;
 }
 
+<<<<<<< HEAD
 static int system_call_get(struct task_struct *target,
 			   const struct user_regset *regset,
 			   unsigned int pos, unsigned int count,
@@ -586,6 +623,8 @@ static int system_call_set(struct task_struct *target,
 	return ret;
 }
 
+=======
+>>>>>>> v3.18
 enum aarch64_regset {
 	REGSET_GPR,
 	REGSET_FPR,
@@ -594,7 +633,10 @@ enum aarch64_regset {
 	REGSET_HW_BREAK,
 	REGSET_HW_WATCH,
 #endif
+<<<<<<< HEAD
 	REGSET_SYSTEM_CALL,
+=======
+>>>>>>> v3.18
 };
 
 static const struct user_regset aarch64_regsets[] = {
@@ -644,6 +686,7 @@ static const struct user_regset aarch64_regsets[] = {
 		.set = hw_break_set,
 	},
 #endif
+<<<<<<< HEAD
 	[REGSET_SYSTEM_CALL] = {
 		.core_note_type = NT_ARM_SYSTEM_CALL,
 		.n = 1,
@@ -652,6 +695,8 @@ static const struct user_regset aarch64_regsets[] = {
 		.get = system_call_get,
 		.set = system_call_set,
 	},
+=======
+>>>>>>> v3.18
 };
 
 static const struct user_regset_view user_aarch64_view = {
@@ -707,8 +752,15 @@ static int compat_gpr_get(struct task_struct *target,
 			kbuf += sizeof(reg);
 		} else {
 			ret = copy_to_user(ubuf, &reg, sizeof(reg));
+<<<<<<< HEAD
 			if (ret)
 				break;
+=======
+			if (ret) {
+				ret = -EFAULT;
+				break;
+			}
+>>>>>>> v3.18
 
 			ubuf += sizeof(reg);
 		}
@@ -746,8 +798,15 @@ static int compat_gpr_set(struct task_struct *target,
 			kbuf += sizeof(reg);
 		} else {
 			ret = copy_from_user(&reg, ubuf, sizeof(reg));
+<<<<<<< HEAD
 			if (ret)
 				return ret;
+=======
+			if (ret) {
+				ret = -EFAULT;
+				break;
+			}
+>>>>>>> v3.18
 
 			ubuf += sizeof(reg);
 		}
@@ -826,6 +885,10 @@ static int compat_vfp_set(struct task_struct *target,
 		uregs->fpcr = fpscr & VFP_FPSCR_CTRL_MASK;
 	}
 
+<<<<<<< HEAD
+=======
+	fpsimd_flush_task_state(target);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -1153,18 +1216,22 @@ static void tracehook_report_syscall(struct pt_regs *regs,
 
 asmlinkage int syscall_trace_enter(struct pt_regs *regs)
 {
+<<<<<<< HEAD
 	unsigned int saved_syscallno = regs->syscallno;
 
 	/* Do the secure computing check first; failures should be fast. */
 	if (secure_computing(regs->syscallno) == -1)
 		return RET_SKIP_SYSCALL_TRACE;
 
+=======
+>>>>>>> v3.18
 	if (test_thread_flag(TIF_SYSCALL_TRACE))
 		tracehook_report_syscall(regs, PTRACE_SYSCALL_ENTER);
 
 	if (test_thread_flag(TIF_SYSCALL_TRACEPOINT))
 		trace_sys_enter(regs, regs->syscallno);
 
+<<<<<<< HEAD
 	if (IS_SKIP_SYSCALL(regs->syscallno)) {
 		/*
 		 * RESTRICTION: we can't modify a return value of user
@@ -1182,12 +1249,21 @@ asmlinkage int syscall_trace_enter(struct pt_regs *regs)
 				(IS_SKIP_SYSCALL(saved_syscallno)))
 			regs->regs[0] = -ENOSYS;
 	}
+=======
+	audit_syscall_entry(regs->syscallno, regs->orig_x0, regs->regs[1],
+			    regs->regs[2], regs->regs[3]);
+>>>>>>> v3.18
 
 	return regs->syscallno;
 }
 
 asmlinkage void syscall_trace_exit(struct pt_regs *regs)
 {
+<<<<<<< HEAD
+=======
+	audit_syscall_exit(regs);
+
+>>>>>>> v3.18
 	if (test_thread_flag(TIF_SYSCALL_TRACEPOINT))
 		trace_sys_exit(regs, regs_return_value(regs));
 

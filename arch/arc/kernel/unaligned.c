@@ -16,6 +16,19 @@
 #include <linux/uaccess.h>
 #include <asm/disasm.h>
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_CPU_BIG_ENDIAN
+#define BE		1
+#define FIRST_BYTE_16	"swap %1, %1\n swape %1, %1\n"
+#define FIRST_BYTE_32	"swape %1, %1\n"
+#else
+#define BE		0
+#define FIRST_BYTE_16
+#define FIRST_BYTE_32
+#endif
+
+>>>>>>> v3.18
 #define __get8_unaligned_check(val, addr, err)		\
 	__asm__(					\
 	"1:	ldb.ab	%1, [%2, 1]\n"			\
@@ -36,9 +49,15 @@
 	do {						\
 		unsigned int err = 0, v, a = addr;	\
 		__get8_unaligned_check(v, a, err);	\
+<<<<<<< HEAD
 		val =  v ;				\
 		__get8_unaligned_check(v, a, err);	\
 		val |= v << 8;				\
+=======
+		val =  v << ((BE) ? 8 : 0);		\
+		__get8_unaligned_check(v, a, err);	\
+		val |= v << ((BE) ? 0 : 8);		\
+>>>>>>> v3.18
 		if (err)				\
 			goto fault;			\
 	} while (0)
@@ -47,6 +66,7 @@
 	do {						\
 		unsigned int err = 0, v, a = addr;	\
 		__get8_unaligned_check(v, a, err);	\
+<<<<<<< HEAD
 		val =  v << 0;				\
 		__get8_unaligned_check(v, a, err);	\
 		val |= v << 8;				\
@@ -54,6 +74,15 @@
 		val |= v << 16;				\
 		__get8_unaligned_check(v, a, err);	\
 		val |= v << 24;				\
+=======
+		val =  v << ((BE) ? 24 : 0);		\
+		__get8_unaligned_check(v, a, err);	\
+		val |= v << ((BE) ? 16 : 8);		\
+		__get8_unaligned_check(v, a, err);	\
+		val |= v << ((BE) ? 8 : 16);		\
+		__get8_unaligned_check(v, a, err);	\
+		val |= v << ((BE) ? 0 : 24);		\
+>>>>>>> v3.18
 		if (err)				\
 			goto fault;			\
 	} while (0)
@@ -63,6 +92,10 @@
 		unsigned int err = 0, v = val, a = addr;\
 							\
 		__asm__(				\
+<<<<<<< HEAD
+=======
+		FIRST_BYTE_16				\
+>>>>>>> v3.18
 		"1:	stb.ab	%1, [%2, 1]\n"		\
 		"	lsr %1, %1, 8\n"		\
 		"2:	stb	%1, [%2]\n"		\
@@ -87,8 +120,14 @@
 #define put32_unaligned_check(val, addr)		\
 	do {						\
 		unsigned int err = 0, v = val, a = addr;\
+<<<<<<< HEAD
 		__asm__(				\
 							\
+=======
+							\
+		__asm__(				\
+		FIRST_BYTE_32				\
+>>>>>>> v3.18
 		"1:	stb.ab	%1, [%2, 1]\n"		\
 		"	lsr %1, %1, 8\n"		\
 		"2:	stb.ab	%1, [%2, 1]\n"		\
@@ -187,7 +226,11 @@ fault:	state->fault = 1;
  * Returns 0 if successfully handled, 1 if some error happened
  */
 int misaligned_fixup(unsigned long address, struct pt_regs *regs,
+<<<<<<< HEAD
 		     unsigned long cause, struct callee_regs *cregs)
+=======
+		     struct callee_regs *cregs)
+>>>>>>> v3.18
 {
 	struct disasm_state state;
 	char buf[TASK_COMM_LEN];
@@ -228,9 +271,14 @@ int misaligned_fixup(unsigned long address, struct pt_regs *regs,
 	if (state.fault)
 		goto fault;
 
+<<<<<<< HEAD
 	/* clear any remanants of delay slot */
 	if (delay_mode(regs)) {
 		regs->ret = regs->bta & ~1U;
+=======
+	if (delay_mode(regs)) {
+		regs->ret = regs->bta;
+>>>>>>> v3.18
 		regs->status32 &= ~STATUS_DE_MASK;
 	} else {
 		regs->ret += state.instr_len;

@@ -28,8 +28,12 @@ static unsigned char ext3_filetype_table[] = {
 	DT_UNKNOWN, DT_REG, DT_DIR, DT_CHR, DT_BLK, DT_FIFO, DT_SOCK, DT_LNK
 };
 
+<<<<<<< HEAD
 static int ext3_dx_readdir(struct file * filp,
 			   void * dirent, filldir_t filldir);
+=======
+static int ext3_dx_readdir(struct file *, struct dir_context *);
+>>>>>>> v3.18
 
 static unsigned char get_dtype(struct super_block *sb, int filetype)
 {
@@ -42,7 +46,11 @@ static unsigned char get_dtype(struct super_block *sb, int filetype)
 
 /**
  * Check if the given dir-inode refers to an htree-indexed directory
+<<<<<<< HEAD
  * (or a directory which chould potentially get coverted to use htree
+=======
+ * (or a directory which could potentially get converted to use htree
+>>>>>>> v3.18
  * indexing).
  *
  * Return 1 if it is a dx dir, 0 if not
@@ -91,6 +99,7 @@ int ext3_check_dir_entry (const char * function, struct inode * dir,
 	return error_msg == NULL ? 1 : 0;
 }
 
+<<<<<<< HEAD
 static int ext3_readdir(struct file * filp,
 			 void * dirent, filldir_t filldir)
 {
@@ -110,10 +119,27 @@ static int ext3_readdir(struct file * filp,
 			ret = err;
 			goto out;
 		}
+=======
+static int ext3_readdir(struct file *file, struct dir_context *ctx)
+{
+	unsigned long offset;
+	int i;
+	struct ext3_dir_entry_2 *de;
+	int err;
+	struct inode *inode = file_inode(file);
+	struct super_block *sb = inode->i_sb;
+	int dir_has_error = 0;
+
+	if (is_dx_dir(inode)) {
+		err = ext3_dx_readdir(file, ctx);
+		if (err != ERR_BAD_DX_DIR)
+			return err;
+>>>>>>> v3.18
 		/*
 		 * We don't set the inode dirty flag since it's not
 		 * critical that it get flushed back to the disk.
 		 */
+<<<<<<< HEAD
 		EXT3_I(file_inode(filp))->i_flags &= ~EXT3_INDEX_FL;
 	}
 	stored = 0;
@@ -121,6 +147,14 @@ static int ext3_readdir(struct file * filp,
 
 	while (!error && !stored && filp->f_pos < inode->i_size) {
 		unsigned long blk = filp->f_pos >> EXT3_BLOCK_SIZE_BITS(sb);
+=======
+		EXT3_I(inode)->i_flags &= ~EXT3_INDEX_FL;
+	}
+	offset = ctx->pos & (sb->s_blocksize - 1);
+
+	while (ctx->pos < inode->i_size) {
+		unsigned long blk = ctx->pos >> EXT3_BLOCK_SIZE_BITS(sb);
+>>>>>>> v3.18
 		struct buffer_head map_bh;
 		struct buffer_head *bh = NULL;
 
@@ -129,12 +163,21 @@ static int ext3_readdir(struct file * filp,
 		if (err > 0) {
 			pgoff_t index = map_bh.b_blocknr >>
 					(PAGE_CACHE_SHIFT - inode->i_blkbits);
+<<<<<<< HEAD
 			if (!ra_has_index(&filp->f_ra, index))
 				page_cache_sync_readahead(
 					sb->s_bdev->bd_inode->i_mapping,
 					&filp->f_ra, filp,
 					index, 1);
 			filp->f_ra.prev_pos = (loff_t)index << PAGE_CACHE_SHIFT;
+=======
+			if (!ra_has_index(&file->f_ra, index))
+				page_cache_sync_readahead(
+					sb->s_bdev->bd_inode->i_mapping,
+					&file->f_ra, file,
+					index, 1);
+			file->f_ra.prev_pos = (loff_t)index << PAGE_CACHE_SHIFT;
+>>>>>>> v3.18
 			bh = ext3_bread(NULL, inode, blk, 0, &err);
 		}
 
@@ -146,6 +189,7 @@ static int ext3_readdir(struct file * filp,
 			if (!dir_has_error) {
 				ext3_error(sb, __func__, "directory #%lu "
 					"contains a hole at offset %lld",
+<<<<<<< HEAD
 					inode->i_ino, filp->f_pos);
 				dir_has_error = 1;
 			}
@@ -157,11 +201,27 @@ static int ext3_readdir(struct file * filp,
 		}
 
 revalidate:
+=======
+					inode->i_ino, ctx->pos);
+				dir_has_error = 1;
+			}
+			/* corrupt size?  Maybe no more blocks to read */
+			if (ctx->pos > inode->i_blocks << 9)
+				break;
+			ctx->pos += sb->s_blocksize - offset;
+			continue;
+		}
+
+>>>>>>> v3.18
 		/* If the dir block has changed since the last call to
 		 * readdir(2), then we might be pointing to an invalid
 		 * dirent right now.  Scan from the start of the block
 		 * to make sure. */
+<<<<<<< HEAD
 		if (filp->f_version != inode->i_version) {
+=======
+		if (offset && file->f_version != inode->i_version) {
+>>>>>>> v3.18
 			for (i = 0; i < sb->s_blocksize && i < offset; ) {
 				de = (struct ext3_dir_entry_2 *)
 					(bh->b_data + i);
@@ -177,16 +237,26 @@ revalidate:
 				i += ext3_rec_len_from_disk(de->rec_len);
 			}
 			offset = i;
+<<<<<<< HEAD
 			filp->f_pos = (filp->f_pos & ~(sb->s_blocksize - 1))
 				| offset;
 			filp->f_version = inode->i_version;
 		}
 
 		while (!error && filp->f_pos < inode->i_size
+=======
+			ctx->pos = (ctx->pos & ~(sb->s_blocksize - 1))
+				| offset;
+			file->f_version = inode->i_version;
+		}
+
+		while (ctx->pos < inode->i_size
+>>>>>>> v3.18
 		       && offset < sb->s_blocksize) {
 			de = (struct ext3_dir_entry_2 *) (bh->b_data + offset);
 			if (!ext3_check_dir_entry ("ext3_readdir", inode, de,
 						   bh, offset)) {
+<<<<<<< HEAD
 				/* On error, skip the f_pos to the
                                    next block. */
 				filp->f_pos = (filp->f_pos |
@@ -224,6 +294,32 @@ revalidate:
 	}
 out:
 	return ret;
+=======
+				/* On error, skip the to the
+                                   next block. */
+				ctx->pos = (ctx->pos |
+						(sb->s_blocksize - 1)) + 1;
+				break;
+			}
+			offset += ext3_rec_len_from_disk(de->rec_len);
+			if (le32_to_cpu(de->inode)) {
+				if (!dir_emit(ctx, de->name, de->name_len,
+					      le32_to_cpu(de->inode),
+					      get_dtype(sb, de->file_type))) {
+					brelse(bh);
+					return 0;
+				}
+			}
+			ctx->pos += ext3_rec_len_from_disk(de->rec_len);
+		}
+		offset = 0;
+		brelse (bh);
+		if (ctx->pos < inode->i_size)
+			if (!dir_relax(inode))
+				return 0;
+	}
+	return 0;
+>>>>>>> v3.18
 }
 
 static inline int is_32bit_api(void)
@@ -296,7 +392,11 @@ static inline loff_t ext3_get_htree_eof(struct file *filp)
  * NOTE: offsets obtained *before* ext3_set_inode_flag(dir, EXT3_INODE_INDEX)
  *       will be invalid once the directory was converted into a dx directory
  */
+<<<<<<< HEAD
 loff_t ext3_dir_llseek(struct file *file, loff_t offset, int whence)
+=======
+static loff_t ext3_dir_llseek(struct file *file, loff_t offset, int whence)
+>>>>>>> v3.18
 {
 	struct inode *inode = file->f_mapping->host;
 	int dx_dir = is_dx_dir(inode);
@@ -330,6 +430,7 @@ struct fname {
  */
 static void free_rb_tree_fname(struct rb_root *root)
 {
+<<<<<<< HEAD
 	struct rb_node	*n = root->rb_node;
 	struct rb_node	*parent;
 	struct fname	*fname;
@@ -367,6 +468,19 @@ static void free_rb_tree_fname(struct rb_root *root)
 	}
 }
 
+=======
+	struct fname *fname, *next;
+
+	rbtree_postorder_for_each_entry_safe(fname, next, root, rb_hash)
+		do {
+			struct fname *old = fname;
+			fname = fname->next;
+			kfree(old);
+		} while (fname);
+
+	*root = RB_ROOT;
+}
+>>>>>>> v3.18
 
 static struct dir_private_info *ext3_htree_create_dir_info(struct file *filp,
 							   loff_t pos)
@@ -452,6 +566,7 @@ int ext3_htree_store_dirent(struct file *dir_file, __u32 hash,
  * for all entres on the fname linked list.  (Normally there is only
  * one entry on the linked list, unless there are 62 bit hash collisions.)
  */
+<<<<<<< HEAD
 static int call_filldir(struct file * filp, void * dirent,
 			filldir_t filldir, struct fname *fname)
 {
@@ -488,10 +603,41 @@ static int ext3_dx_readdir(struct file * filp,
 {
 	struct dir_private_info *info = filp->private_data;
 	struct inode *inode = file_inode(filp);
+=======
+static bool call_filldir(struct file *file, struct dir_context *ctx,
+			struct fname *fname)
+{
+	struct dir_private_info *info = file->private_data;
+	struct inode *inode = file_inode(file);
+	struct super_block *sb = inode->i_sb;
+
+	if (!fname) {
+		printk("call_filldir: called with null fname?!?\n");
+		return true;
+	}
+	ctx->pos = hash2pos(file, fname->hash, fname->minor_hash);
+	while (fname) {
+		if (!dir_emit(ctx, fname->name, fname->name_len,
+				fname->inode,
+				get_dtype(sb, fname->file_type))) {
+			info->extra_fname = fname;
+			return false;
+		}
+		fname = fname->next;
+	}
+	return true;
+}
+
+static int ext3_dx_readdir(struct file *file, struct dir_context *ctx)
+{
+	struct dir_private_info *info = file->private_data;
+	struct inode *inode = file_inode(file);
+>>>>>>> v3.18
 	struct fname *fname;
 	int	ret;
 
 	if (!info) {
+<<<<<<< HEAD
 		info = ext3_htree_create_dir_info(filp, filp->f_pos);
 		if (!info)
 			return -ENOMEM;
@@ -508,6 +654,24 @@ static int ext3_dx_readdir(struct file * filp,
 		info->extra_fname = NULL;
 		info->curr_hash = pos2maj_hash(filp, filp->f_pos);
 		info->curr_minor_hash = pos2min_hash(filp, filp->f_pos);
+=======
+		info = ext3_htree_create_dir_info(file, ctx->pos);
+		if (!info)
+			return -ENOMEM;
+		file->private_data = info;
+	}
+
+	if (ctx->pos == ext3_get_htree_eof(file))
+		return 0;	/* EOF */
+
+	/* Some one has messed with f_pos; reset the world */
+	if (info->last_pos != ctx->pos) {
+		free_rb_tree_fname(&info->root);
+		info->curr_node = NULL;
+		info->extra_fname = NULL;
+		info->curr_hash = pos2maj_hash(file, ctx->pos);
+		info->curr_minor_hash = pos2min_hash(file, ctx->pos);
+>>>>>>> v3.18
 	}
 
 	/*
@@ -515,7 +679,11 @@ static int ext3_dx_readdir(struct file * filp,
 	 * chain, return them first.
 	 */
 	if (info->extra_fname) {
+<<<<<<< HEAD
 		if (call_filldir(filp, dirent, filldir, info->extra_fname))
+=======
+		if (!call_filldir(file, ctx, info->extra_fname))
+>>>>>>> v3.18
 			goto finished;
 		info->extra_fname = NULL;
 		goto next_node;
@@ -529,17 +697,29 @@ static int ext3_dx_readdir(struct file * filp,
 		 * cached entries.
 		 */
 		if ((!info->curr_node) ||
+<<<<<<< HEAD
 		    (filp->f_version != inode->i_version)) {
 			info->curr_node = NULL;
 			free_rb_tree_fname(&info->root);
 			filp->f_version = inode->i_version;
 			ret = ext3_htree_fill_tree(filp, info->curr_hash,
+=======
+		    (file->f_version != inode->i_version)) {
+			info->curr_node = NULL;
+			free_rb_tree_fname(&info->root);
+			file->f_version = inode->i_version;
+			ret = ext3_htree_fill_tree(file, info->curr_hash,
+>>>>>>> v3.18
 						   info->curr_minor_hash,
 						   &info->next_hash);
 			if (ret < 0)
 				return ret;
 			if (ret == 0) {
+<<<<<<< HEAD
 				filp->f_pos = ext3_get_htree_eof(filp);
+=======
+				ctx->pos = ext3_get_htree_eof(file);
+>>>>>>> v3.18
 				break;
 			}
 			info->curr_node = rb_first(&info->root);
@@ -548,7 +728,11 @@ static int ext3_dx_readdir(struct file * filp,
 		fname = rb_entry(info->curr_node, struct fname, rb_hash);
 		info->curr_hash = fname->hash;
 		info->curr_minor_hash = fname->minor_hash;
+<<<<<<< HEAD
 		if (call_filldir(filp, dirent, filldir, fname))
+=======
+		if (!call_filldir(file, ctx, fname))
+>>>>>>> v3.18
 			break;
 	next_node:
 		info->curr_node = rb_next(info->curr_node);
@@ -559,7 +743,11 @@ static int ext3_dx_readdir(struct file * filp,
 			info->curr_minor_hash = fname->minor_hash;
 		} else {
 			if (info->next_hash == ~0) {
+<<<<<<< HEAD
 				filp->f_pos = ext3_get_htree_eof(filp);
+=======
+				ctx->pos = ext3_get_htree_eof(file);
+>>>>>>> v3.18
 				break;
 			}
 			info->curr_hash = info->next_hash;
@@ -567,7 +755,11 @@ static int ext3_dx_readdir(struct file * filp,
 		}
 	}
 finished:
+<<<<<<< HEAD
 	info->last_pos = filp->f_pos;
+=======
+	info->last_pos = ctx->pos;
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -582,7 +774,11 @@ static int ext3_release_dir (struct inode * inode, struct file * filp)
 const struct file_operations ext3_dir_operations = {
 	.llseek		= ext3_dir_llseek,
 	.read		= generic_read_dir,
+<<<<<<< HEAD
 	.readdir	= ext3_readdir,
+=======
+	.iterate	= ext3_readdir,
+>>>>>>> v3.18
 	.unlocked_ioctl = ext3_ioctl,
 #ifdef CONFIG_COMPAT
 	.compat_ioctl	= ext3_compat_ioctl,

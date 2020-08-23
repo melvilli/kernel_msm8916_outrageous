@@ -21,6 +21,11 @@
 
 #include <linux/list.h>
 #include <linux/io.h>
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+
+>>>>>>> v3.18
 
 /*
  * SSP Serial Port Registers
@@ -190,6 +195,11 @@ struct ssp_device {
 	int		irq;
 	int		drcmr_rx;
 	int		drcmr_tx;
+<<<<<<< HEAD
+=======
+
+	struct device_node	*of_node;
+>>>>>>> v3.18
 };
 
 /**
@@ -215,14 +225,30 @@ static inline u32 pxa_ssp_read_reg(struct ssp_device *dev, u32 reg)
 	return __raw_readl(dev->mmio_base + reg);
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_ARCH_PXA
 struct ssp_device *pxa_ssp_request(int port, const char *label);
 void pxa_ssp_free(struct ssp_device *);
+=======
+#if IS_ENABLED(CONFIG_PXA_SSP)
+struct ssp_device *pxa_ssp_request(int port, const char *label);
+void pxa_ssp_free(struct ssp_device *);
+struct ssp_device *pxa_ssp_request_of(const struct device_node *of_node,
+				      const char *label);
+>>>>>>> v3.18
 #else
 static inline struct ssp_device *pxa_ssp_request(int port, const char *label)
 {
 	return NULL;
 }
+<<<<<<< HEAD
+=======
+static inline struct ssp_device *pxa_ssp_request_of(const struct device_node *n,
+						    const char *name)
+{
+	return NULL;
+}
+>>>>>>> v3.18
 static inline void pxa_ssp_free(struct ssp_device *ssp) {}
 #endif
 

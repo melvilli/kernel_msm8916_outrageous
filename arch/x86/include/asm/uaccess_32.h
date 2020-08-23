@@ -184,6 +184,7 @@ __copy_from_user_inatomic_nocache(void *to, const void __user *from,
        return __copy_from_user_ll_nocache_nozero(to, from, n);
 }
 
+<<<<<<< HEAD
 unsigned long __must_check copy_to_user(void __user *to,
 					const void *from, unsigned long n);
 unsigned long __must_check _copy_from_user(void *to,
@@ -213,4 +214,6 @@ static inline unsigned long __must_check copy_from_user(void *to,
 	return n;
 }
 
+=======
+>>>>>>> v3.18
 #endif /* _ASM_X86_UACCESS_32_H */

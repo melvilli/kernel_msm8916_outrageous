@@ -134,6 +134,7 @@ static int snd_smdk_probe(struct platform_device *pdev)
 	int ret = 0;
 
 	smdk_pcm.dev = &pdev->dev;
+<<<<<<< HEAD
 	ret = snd_soc_register_card(&smdk_pcm);
 	if (ret) {
 		dev_err(&pdev->dev, "snd_soc_register_card failed %d\n", ret);
@@ -148,6 +149,13 @@ static int snd_smdk_remove(struct platform_device *pdev)
 	snd_soc_unregister_card(&smdk_pcm);
 	platform_set_drvdata(pdev, NULL);
 	return 0;
+=======
+	ret = devm_snd_soc_register_card(&pdev->dev, &smdk_pcm);
+	if (ret)
+		dev_err(&pdev->dev, "snd_soc_register_card failed %d\n", ret);
+
+	return ret;
+>>>>>>> v3.18
 }
 
 static struct platform_driver snd_smdk_driver = {
@@ -156,7 +164,10 @@ static struct platform_driver snd_smdk_driver = {
 		.name = "samsung-smdk-pcm",
 	},
 	.probe = snd_smdk_probe,
+<<<<<<< HEAD
 	.remove = snd_smdk_remove,
+=======
+>>>>>>> v3.18
 };
 
 module_platform_driver(snd_smdk_driver);

@@ -130,7 +130,11 @@ usb@22000 {
 
 /include/ "pq3-esdhc-0.dtsi"
 	sdhc@2e000 {
+<<<<<<< HEAD
 		fsl,sdhci-auto-cmd12;
+=======
+		sdhci,auto-cmd12;
+>>>>>>> v3.18
 		interrupts = <41 0x2 0 0>;
 	};
 

@@ -26,11 +26,38 @@
 #include <core/object.h>
 #include <core/handle.h>
 #include <core/event.h>
+<<<<<<< HEAD
 #include <core/class.h>
+=======
+#include <nvif/unpack.h>
+#include <nvif/class.h>
+#include <nvif/event.h>
+>>>>>>> v3.18
 
 #include <engine/dmaobj.h>
 #include <engine/fifo.h>
 
+<<<<<<< HEAD
+=======
+static int
+nouveau_fifo_event_ctor(struct nouveau_object *object, void *data, u32 size,
+			struct nvkm_notify *notify)
+{
+	if (size == 0) {
+		notify->size  = 0;
+		notify->types = 1;
+		notify->index = 0;
+		return 0;
+	}
+	return -ENOSYS;
+}
+
+static const struct nvkm_event_func
+nouveau_fifo_event_func = {
+	.ctor = nouveau_fifo_event_ctor,
+};
+
+>>>>>>> v3.18
 int
 nouveau_fifo_channel_create_(struct nouveau_object *parent,
 			     struct nouveau_object *engine,
@@ -59,14 +86,23 @@ nouveau_fifo_channel_create_(struct nouveau_object *parent,
 
 	dmaeng = (void *)chan->pushdma->base.engine;
 	switch (chan->pushdma->base.oclass->handle) {
+<<<<<<< HEAD
 	case NV_DMA_FROM_MEMORY_CLASS:
 	case NV_DMA_IN_MEMORY_CLASS:
+=======
+	case NV_DMA_FROM_MEMORY:
+	case NV_DMA_IN_MEMORY:
+>>>>>>> v3.18
 		break;
 	default:
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 	ret = dmaeng->bind(dmaeng, parent, chan->pushdma, &chan->pushgpu);
+=======
+	ret = dmaeng->bind(chan->pushdma, parent, &chan->pushgpu);
+>>>>>>> v3.18
 	if (ret)
 		return ret;
 
@@ -85,6 +121,7 @@ nouveau_fifo_channel_create_(struct nouveau_object *parent,
 		return -ENOSPC;
 	}
 
+<<<<<<< HEAD
 	/* map fifo control registers */
 	chan->user = ioremap(pci_resource_start(device->pdev, bar) + addr +
 			     (chan->chid * size), size);
@@ -94,6 +131,12 @@ nouveau_fifo_channel_create_(struct nouveau_object *parent,
 	nouveau_event_trigger(priv->cevent, 0);
 
 	chan->size = size;
+=======
+	chan->addr = nv_device_resource_start(device, bar) +
+		     addr + size * chan->chid;
+	chan->size = size;
+	nvkm_event_send(&priv->cevent, 1, 0, NULL, 0);
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -103,7 +146,12 @@ nouveau_fifo_channel_destroy(struct nouveau_fifo_chan *chan)
 	struct nouveau_fifo *priv = (void *)nv_object(chan)->engine;
 	unsigned long flags;
 
+<<<<<<< HEAD
 	iounmap(chan->user);
+=======
+	if (chan->user)
+		iounmap(chan->user);
+>>>>>>> v3.18
 
 	spin_lock_irqsave(&priv->lock, flags);
 	priv->channel[chan->chid] = NULL;
@@ -121,10 +169,30 @@ _nouveau_fifo_channel_dtor(struct nouveau_object *object)
 	nouveau_fifo_channel_destroy(chan);
 }
 
+<<<<<<< HEAD
+=======
+int
+_nouveau_fifo_channel_map(struct nouveau_object *object, u64 *addr, u32 *size)
+{
+	struct nouveau_fifo_chan *chan = (void *)object;
+	*addr = chan->addr;
+	*size = chan->size;
+	return 0;
+}
+
+>>>>>>> v3.18
 u32
 _nouveau_fifo_channel_rd32(struct nouveau_object *object, u64 addr)
 {
 	struct nouveau_fifo_chan *chan = (void *)object;
+<<<<<<< HEAD
+=======
+	if (unlikely(!chan->user)) {
+		chan->user = ioremap(chan->addr, chan->size);
+		if (WARN_ON_ONCE(chan->user == NULL))
+			return 0;
+	}
+>>>>>>> v3.18
 	return ioread32_native(chan->user + addr);
 }
 
@@ -132,9 +200,64 @@ void
 _nouveau_fifo_channel_wr32(struct nouveau_object *object, u64 addr, u32 data)
 {
 	struct nouveau_fifo_chan *chan = (void *)object;
+<<<<<<< HEAD
 	iowrite32_native(data, chan->user + addr);
 }
 
+=======
+	if (unlikely(!chan->user)) {
+		chan->user = ioremap(chan->addr, chan->size);
+		if (WARN_ON_ONCE(chan->user == NULL))
+			return;
+	}
+	iowrite32_native(data, chan->user + addr);
+}
+
+int
+nouveau_fifo_uevent_ctor(struct nouveau_object *object, void *data, u32 size,
+			 struct nvkm_notify *notify)
+{
+	union {
+		struct nvif_notify_uevent_req none;
+	} *req = data;
+	int ret;
+
+	if (nvif_unvers(req->none)) {
+		notify->size  = sizeof(struct nvif_notify_uevent_rep);
+		notify->types = 1;
+		notify->index = 0;
+	}
+
+	return ret;
+}
+
+void
+nouveau_fifo_uevent(struct nouveau_fifo *fifo)
+{
+	struct nvif_notify_uevent_rep rep = {
+	};
+	nvkm_event_send(&fifo->uevent, 1, 0, &rep, sizeof(rep));
+}
+
+int
+_nouveau_fifo_channel_ntfy(struct nouveau_object *object, u32 type,
+			   struct nvkm_event **event)
+{
+	struct nouveau_fifo *fifo = (void *)object->engine;
+	switch (type) {
+	case G82_CHANNEL_DMA_V0_NTFY_UEVENT:
+		if (nv_mclass(object) >= G82_CHANNEL_DMA) {
+			*event = &fifo->uevent;
+			return 0;
+		}
+		break;
+	default:
+		break;
+	}
+	return -EINVAL;
+}
+
+>>>>>>> v3.18
 static int
 nouveau_fifo_chid(struct nouveau_fifo *priv, struct nouveau_object *object)
 {
@@ -168,8 +291,13 @@ void
 nouveau_fifo_destroy(struct nouveau_fifo *priv)
 {
 	kfree(priv->channel);
+<<<<<<< HEAD
 	nouveau_event_destroy(&priv->uevent);
 	nouveau_event_destroy(&priv->cevent);
+=======
+	nvkm_event_fini(&priv->uevent);
+	nvkm_event_fini(&priv->cevent);
+>>>>>>> v3.18
 	nouveau_engine_destroy(&priv->base);
 }
 
@@ -194,11 +322,15 @@ nouveau_fifo_create_(struct nouveau_object *parent,
 	if (!priv->channel)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 	ret = nouveau_event_create(1, &priv->cevent);
 	if (ret)
 		return ret;
 
 	ret = nouveau_event_create(1, &priv->uevent);
+=======
+	ret = nvkm_event_init(&nouveau_fifo_event_func, 1, 1, &priv->cevent);
+>>>>>>> v3.18
 	if (ret)
 		return ret;
 

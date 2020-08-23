@@ -265,6 +265,12 @@ static int crypto_update_alg(struct sk_buff *skb, struct nlmsghdr *nlh,
 	struct nlattr *priority = attrs[CRYPTOCFGA_PRIORITY_VAL];
 	LIST_HEAD(list);
 
+<<<<<<< HEAD
+=======
+	if (!netlink_capable(skb, CAP_NET_ADMIN))
+		return -EPERM;
+
+>>>>>>> v3.18
 	if (!null_terminated(p->cru_name) || !null_terminated(p->cru_driver_name))
 		return -EINVAL;
 
@@ -295,6 +301,12 @@ static int crypto_del_alg(struct sk_buff *skb, struct nlmsghdr *nlh,
 	struct crypto_alg *alg;
 	struct crypto_user_alg *p = nlmsg_data(nlh);
 
+<<<<<<< HEAD
+=======
+	if (!netlink_capable(skb, CAP_NET_ADMIN))
+		return -EPERM;
+
+>>>>>>> v3.18
 	if (!null_terminated(p->cru_name) || !null_terminated(p->cru_driver_name))
 		return -EINVAL;
 
@@ -361,7 +373,11 @@ static struct crypto_alg *crypto_user_aead_alg(const char *name, u32 type,
 		err = PTR_ERR(alg);
 		if (err != -EAGAIN)
 			break;
+<<<<<<< HEAD
 		if (fatal_signal_pending(current)) {
+=======
+		if (signal_pending(current)) {
+>>>>>>> v3.18
 			err = -EINTR;
 			break;
 		}
@@ -379,6 +395,12 @@ static int crypto_add_alg(struct sk_buff *skb, struct nlmsghdr *nlh,
 	struct crypto_user_alg *p = nlmsg_data(nlh);
 	struct nlattr *priority = attrs[CRYPTOCFGA_PRIORITY_VAL];
 
+<<<<<<< HEAD
+=======
+	if (!netlink_capable(skb, CAP_NET_ADMIN))
+		return -EPERM;
+
+>>>>>>> v3.18
 	if (!null_terminated(p->cru_name) || !null_terminated(p->cru_driver_name))
 		return -EINVAL;
 
@@ -466,9 +488,12 @@ static int crypto_user_rcv_msg(struct sk_buff *skb, struct nlmsghdr *nlh)
 	type -= CRYPTO_MSG_BASE;
 	link = &crypto_dispatch[type];
 
+<<<<<<< HEAD
 	if (!netlink_capable(skb, CAP_NET_ADMIN))
 		return -EPERM;
 
+=======
+>>>>>>> v3.18
 	if ((type == (CRYPTO_MSG_GETALG - CRYPTO_MSG_BASE) &&
 	    (nlh->nlmsg_flags & NLM_F_DUMP))) {
 		struct crypto_alg *alg;
@@ -477,7 +502,10 @@ static int crypto_user_rcv_msg(struct sk_buff *skb, struct nlmsghdr *nlh)
 		if (link->dump == NULL)
 			return -EINVAL;
 
+<<<<<<< HEAD
 		down_read(&crypto_alg_sem);
+=======
+>>>>>>> v3.18
 		list_for_each_entry(alg, &crypto_alg_list, cra_list)
 			dump_alloc += CRYPTO_REPORT_MAXSIZE;
 
@@ -487,11 +515,16 @@ static int crypto_user_rcv_msg(struct sk_buff *skb, struct nlmsghdr *nlh)
 				.done = link->done,
 				.min_dump_alloc = dump_alloc,
 			};
+<<<<<<< HEAD
 			err = netlink_dump_start(crypto_nlsk, skb, nlh, &c);
 		}
 		up_read(&crypto_alg_sem);
 
 		return err;
+=======
+			return netlink_dump_start(crypto_nlsk, skb, nlh, &c);
+		}
+>>>>>>> v3.18
 	}
 
 	err = nlmsg_parse(nlh, crypto_msg_min[type], attrs, CRYPTOCFGA_MAX,

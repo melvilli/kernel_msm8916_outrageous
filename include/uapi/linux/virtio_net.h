@@ -60,7 +60,11 @@
 
 struct virtio_net_config {
 	/* The config defining mac address (if VIRTIO_NET_F_MAC) */
+<<<<<<< HEAD
 	__u8 mac[6];
+=======
+	__u8 mac[ETH_ALEN];
+>>>>>>> v3.18
 	/* See VIRTIO_NET_F_STATUS and VIRTIO_NET_S_* above */
 	__u16 status;
 	/* Maximum number of each of transmit and receive queues;
@@ -70,7 +74,13 @@ struct virtio_net_config {
 	__u16 max_virtqueue_pairs;
 } __attribute__((packed));
 
+<<<<<<< HEAD
 /* This is the first element of the scatter-gather list.  If you don't
+=======
+/* This header comes first in the scatter-gather list.
+ * If VIRTIO_F_ANY_LAYOUT is not negotiated, it must
+ * be the first element of the scatter-gather list.  If you don't
+>>>>>>> v3.18
  * specify GSO or CSUM features, you can simply ignore the header. */
 struct virtio_net_hdr {
 #define VIRTIO_NET_HDR_F_NEEDS_CSUM	1	// Use csum_start, csum_offset

@@ -34,7 +34,10 @@
 #include <asm/uaccess.h>
 
 #include "signal32.h"
+<<<<<<< HEAD
 #include "sys32.h"
+=======
+>>>>>>> v3.18
 
 #define DEBUG_COMPAT_SIG 0 
 #define DEBUG_COMPAT_SIG_LEVEL 2

@@ -570,7 +570,10 @@ int radio_tea5777_init(struct radio_tea5777 *tea, struct module *owner)
 	tea->fops = tea575x_fops;
 	tea->fops.owner = owner;
 	tea->vd.fops = &tea->fops;
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &tea->vd.flags);
+=======
+>>>>>>> v3.18
 
 	tea->vd.ctrl_handler = &tea->ctrl_handler;
 	v4l2_ctrl_handler_init(&tea->ctrl_handler, 1);

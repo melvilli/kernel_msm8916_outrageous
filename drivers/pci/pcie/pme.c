@@ -41,11 +41,24 @@ static int __init pcie_pme_setup(char *str)
 }
 __setup("pcie_pme=", pcie_pme_setup);
 
+<<<<<<< HEAD
+=======
+enum pme_suspend_level {
+	PME_SUSPEND_NONE = 0,
+	PME_SUSPEND_WAKEUP,
+	PME_SUSPEND_NOIRQ,
+};
+
+>>>>>>> v3.18
 struct pcie_pme_service_data {
 	spinlock_t lock;
 	struct pcie_device *srv;
 	struct work_struct work;
+<<<<<<< HEAD
 	bool noirq; /* Don't enable the PME interrupt used by this service. */
+=======
+	enum pme_suspend_level suspend_level;
+>>>>>>> v3.18
 };
 
 /**
@@ -199,8 +212,12 @@ static void pcie_pme_handle_request(struct pci_dev *port, u16 req_id)
 		 * assuming that the PME was reported by a PCIe-PCI bridge that
 		 * used devfn different from zero.
 		 */
+<<<<<<< HEAD
 		dev_dbg(&port->dev, "PME interrupt generated for "
 			"non-existent device %02x:%02x.%d\n",
+=======
+		dev_dbg(&port->dev, "PME interrupt generated for non-existent device %02x:%02x.%d\n",
+>>>>>>> v3.18
 			busnr, PCI_SLOT(devfn), PCI_FUNC(devfn));
 		found = pcie_pme_from_pci_bridge(bus, 0);
 	}
@@ -224,7 +241,11 @@ static void pcie_pme_work_fn(struct work_struct *work)
 	spin_lock_irq(&data->lock);
 
 	for (;;) {
+<<<<<<< HEAD
 		if (data->noirq)
+=======
+		if (data->suspend_level != PME_SUSPEND_NONE)
+>>>>>>> v3.18
 			break;
 
 		pcie_capability_read_dword(port, PCI_EXP_RTSTA, &rtsta);
@@ -251,7 +272,11 @@ static void pcie_pme_work_fn(struct work_struct *work)
 		spin_lock_irq(&data->lock);
 	}
 
+<<<<<<< HEAD
 	if (!data->noirq)
+=======
+	if (data->suspend_level == PME_SUSPEND_NONE)
+>>>>>>> v3.18
 		pcie_pme_interrupt_enable(port, true);
 
 	spin_unlock_irq(&data->lock);
@@ -368,6 +393,24 @@ static int pcie_pme_probe(struct pcie_device *srv)
 	return ret;
 }
 
+<<<<<<< HEAD
+=======
+static bool pcie_pme_check_wakeup(struct pci_bus *bus)
+{
+	struct pci_dev *dev;
+
+	if (!bus)
+		return false;
+
+	list_for_each_entry(dev, &bus->devices, bus_list)
+		if (device_may_wakeup(&dev->dev)
+		    || pcie_pme_check_wakeup(dev->subordinate))
+			return true;
+
+	return false;
+}
+
+>>>>>>> v3.18
 /**
  * pcie_pme_suspend - Suspend PCIe PME service device.
  * @srv: PCIe service device to suspend.
@@ -376,11 +419,36 @@ static int pcie_pme_suspend(struct pcie_device *srv)
 {
 	struct pcie_pme_service_data *data = get_service_data(srv);
 	struct pci_dev *port = srv->port;
+<<<<<<< HEAD
 
 	spin_lock_irq(&data->lock);
 	pcie_pme_interrupt_enable(port, false);
 	pcie_clear_root_pme_status(port);
 	data->noirq = true;
+=======
+	bool wakeup;
+	int ret;
+
+	if (device_may_wakeup(&port->dev)) {
+		wakeup = true;
+	} else {
+		down_read(&pci_bus_sem);
+		wakeup = pcie_pme_check_wakeup(port->subordinate);
+		up_read(&pci_bus_sem);
+	}
+	spin_lock_irq(&data->lock);
+	if (wakeup) {
+		ret = enable_irq_wake(srv->irq);
+		data->suspend_level = PME_SUSPEND_WAKEUP;
+	}
+	if (!wakeup || ret) {
+		struct pci_dev *port = srv->port;
+
+		pcie_pme_interrupt_enable(port, false);
+		pcie_clear_root_pme_status(port);
+		data->suspend_level = PME_SUSPEND_NOIRQ;
+	}
+>>>>>>> v3.18
 	spin_unlock_irq(&data->lock);
 
 	synchronize_irq(srv->irq);
@@ -395,12 +463,26 @@ static int pcie_pme_suspend(struct pcie_device *srv)
 static int pcie_pme_resume(struct pcie_device *srv)
 {
 	struct pcie_pme_service_data *data = get_service_data(srv);
+<<<<<<< HEAD
 	struct pci_dev *port = srv->port;
 
 	spin_lock_irq(&data->lock);
 	data->noirq = false;
 	pcie_clear_root_pme_status(port);
 	pcie_pme_interrupt_enable(port, true);
+=======
+
+	spin_lock_irq(&data->lock);
+	if (data->suspend_level == PME_SUSPEND_NOIRQ) {
+		struct pci_dev *port = srv->port;
+
+		pcie_clear_root_pme_status(port);
+		pcie_pme_interrupt_enable(port, true);
+	} else {
+		disable_irq_wake(srv->irq);
+	}
+	data->suspend_level = PME_SUSPEND_NONE;
+>>>>>>> v3.18
 	spin_unlock_irq(&data->lock);
 
 	return 0;
@@ -408,7 +490,11 @@ static int pcie_pme_resume(struct pcie_device *srv)
 
 /**
  * pcie_pme_remove - Prepare PCIe PME service device for removal.
+<<<<<<< HEAD
  * @srv - PCIe service device to resume.
+=======
+ * @srv - PCIe service device to remove.
+>>>>>>> v3.18
  */
 static void pcie_pme_remove(struct pcie_device *srv)
 {
@@ -419,8 +505,13 @@ static void pcie_pme_remove(struct pcie_device *srv)
 
 static struct pcie_port_service_driver pcie_pme_driver = {
 	.name		= "pcie_pme",
+<<<<<<< HEAD
 	.port_type 	= PCI_EXP_TYPE_ROOT_PORT,
 	.service 	= PCIE_PORT_SERVICE_PME,
+=======
+	.port_type	= PCI_EXP_TYPE_ROOT_PORT,
+	.service	= PCIE_PORT_SERVICE_PME,
+>>>>>>> v3.18
 
 	.probe		= pcie_pme_probe,
 	.suspend	= pcie_pme_suspend,

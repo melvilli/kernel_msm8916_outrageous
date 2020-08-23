@@ -245,7 +245,11 @@ static int m920x_rc_core_query(struct dvb_usb_device *d)
 	else if (state == REMOTE_KEY_REPEAT)
 		rc_repeat(d->rc_dev);
 	else
+<<<<<<< HEAD
 		rc_keydown(d->rc_dev, rc_state[1], 0);
+=======
+		rc_keydown(d->rc_dev, RC_TYPE_UNKNOWN, rc_state[1], 0);
+>>>>>>> v3.18
 
 out:
 	kfree(rc_state);
@@ -1212,7 +1216,11 @@ static struct dvb_usb_device_properties vp7049_properties = {
 		.rc_interval    = 150,
 		.rc_codes       = RC_MAP_TWINHAN_VP1027_DVBS,
 		.rc_query       = m920x_rc_core_query,
+<<<<<<< HEAD
 		.allowed_protos = RC_TYPE_UNKNOWN,
+=======
+		.allowed_protos = RC_BIT_UNKNOWN,
+>>>>>>> v3.18
 	},
 
 	.size_of_priv     = sizeof(struct m920x_state),

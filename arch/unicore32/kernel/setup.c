@@ -53,6 +53,13 @@ struct stack {
 
 static struct stack stacks[NR_CPUS];
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_VGA_CONSOLE
+struct screen_info screen_info;
+#endif
+
+>>>>>>> v3.18
 char elf_platform[ELF_PLATFORM_SIZE];
 EXPORT_SYMBOL(elf_platform);
 

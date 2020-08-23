@@ -5,6 +5,10 @@
 config PCIEAER
 	boolean "Root Port Advanced Error Reporting support"
 	depends on PCIEPORTBUS
+<<<<<<< HEAD
+=======
+	select RAS
+>>>>>>> v3.18
 	default y
 	help
 	  This enables PCI Express Root Port Advanced Error Reporting

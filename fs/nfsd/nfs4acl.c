@@ -36,9 +36,20 @@
 
 #include <linux/slab.h>
 #include <linux/nfs_fs.h>
+<<<<<<< HEAD
 #include <linux/export.h>
 #include "acl.h"
 
+=======
+#include "nfsfh.h"
+#include "nfsd.h"
+#include "acl.h"
+#include "vfs.h"
+
+#define NFS4_ACL_TYPE_DEFAULT	0x01
+#define NFS4_ACL_DIR		0x02
+#define NFS4_ACL_OWNER		0x04
+>>>>>>> v3.18
 
 /* mode bit translations: */
 #define NFS4_READ_MODE (NFS4_ACE_READ_DATA)
@@ -130,6 +141,7 @@ static short ace2type(struct nfs4_ace *);
 static void _posix_to_nfsv4_one(struct posix_acl *, struct nfs4_acl *,
 				unsigned int);
 
+<<<<<<< HEAD
 struct nfs4_acl *
 nfs4_acl_posix_to_nfsv4(struct posix_acl *pacl, struct posix_acl *dpacl,
 			unsigned int flags)
@@ -160,6 +172,57 @@ nfs4_acl_posix_to_nfsv4(struct posix_acl *pacl, struct posix_acl *dpacl,
 		_posix_to_nfsv4_one(dpacl, acl, flags | NFS4_ACL_TYPE_DEFAULT);
 
 	return acl;
+=======
+int
+nfsd4_get_nfs4_acl(struct svc_rqst *rqstp, struct dentry *dentry,
+		struct nfs4_acl **acl)
+{
+	struct inode *inode = dentry->d_inode;
+	int error = 0;
+	struct posix_acl *pacl = NULL, *dpacl = NULL;
+	unsigned int flags = 0;
+	int size = 0;
+
+	pacl = get_acl(inode, ACL_TYPE_ACCESS);
+	if (!pacl)
+		pacl = posix_acl_from_mode(inode->i_mode, GFP_KERNEL);
+
+	if (IS_ERR(pacl))
+		return PTR_ERR(pacl);
+
+	/* allocate for worst case: one (deny, allow) pair each: */
+	size += 2 * pacl->a_count;
+
+	if (S_ISDIR(inode->i_mode)) {
+		flags = NFS4_ACL_DIR;
+		dpacl = get_acl(inode, ACL_TYPE_DEFAULT);
+		if (IS_ERR(dpacl)) {
+			error = PTR_ERR(dpacl);
+			goto rel_pacl;
+		}
+
+		if (dpacl)
+			size += 2 * dpacl->a_count;
+	}
+
+	*acl = kmalloc(nfs4_acl_bytes(size), GFP_KERNEL);
+	if (*acl == NULL) {
+		error = -ENOMEM;
+		goto out;
+	}
+	(*acl)->naces = 0;
+
+	_posix_to_nfsv4_one(pacl, *acl, flags & ~NFS4_ACL_TYPE_DEFAULT);
+
+	if (dpacl)
+		_posix_to_nfsv4_one(dpacl, *acl, flags | NFS4_ACL_TYPE_DEFAULT);
+
+out:
+	posix_acl_release(dpacl);
+rel_pacl:
+	posix_acl_release(pacl);
+	return error;
+>>>>>>> v3.18
 }
 
 struct posix_acl_summary {
@@ -526,7 +589,14 @@ posix_state_to_acl(struct posix_acl_state *state, unsigned int flags)
 	 * up setting a 3-element effective posix ACL with all
 	 * permissions zero.
 	 */
+<<<<<<< HEAD
 	nace = 4 + state->users->n + state->groups->n;
+=======
+	if (!state->users->n && !state->groups->n)
+		nace = 3;
+	else /* Note we also include a MASK ACE in this case: */
+		nace = 4 + state->users->n + state->groups->n;
+>>>>>>> v3.18
 	pacl = posix_acl_alloc(nace, GFP_KERNEL);
 	if (!pacl)
 		return ERR_PTR(-ENOMEM);
@@ -570,9 +640,17 @@ posix_state_to_acl(struct posix_acl_state *state, unsigned int flags)
 		add_to_mask(state, &state->groups->aces[i].perms);
 	}
 
+<<<<<<< HEAD
 	pace++;
 	pace->e_tag = ACL_MASK;
 	low_mode_from_nfs4(state->mask.allow, &pace->e_perm, flags);
+=======
+	if (state->users->n || state->groups->n) {
+		pace++;
+		pace->e_tag = ACL_MASK;
+		low_mode_from_nfs4(state->mask.allow, &pace->e_perm, flags);
+	}
+>>>>>>> v3.18
 
 	pace++;
 	pace->e_tag = ACL_OTHER;
@@ -720,8 +798,14 @@ static void process_one_v4_ace(struct posix_acl_state *state,
 	}
 }
 
+<<<<<<< HEAD
 int nfs4_acl_nfsv4_to_posix(struct nfs4_acl *acl, struct posix_acl **pacl,
 			    struct posix_acl **dpacl, unsigned int flags)
+=======
+static int nfs4_acl_nfsv4_to_posix(struct nfs4_acl *acl,
+		struct posix_acl **pacl, struct posix_acl **dpacl,
+		unsigned int flags)
+>>>>>>> v3.18
 {
 	struct posix_acl_state effective_acl_state, default_acl_state;
 	struct nfs4_ace *ace;
@@ -781,6 +865,60 @@ out_estate:
 	return ret;
 }
 
+<<<<<<< HEAD
+=======
+__be32
+nfsd4_set_nfs4_acl(struct svc_rqst *rqstp, struct svc_fh *fhp,
+		struct nfs4_acl *acl)
+{
+	__be32 error;
+	int host_error;
+	struct dentry *dentry;
+	struct inode *inode;
+	struct posix_acl *pacl = NULL, *dpacl = NULL;
+	unsigned int flags = 0;
+
+	/* Get inode */
+	error = fh_verify(rqstp, fhp, 0, NFSD_MAY_SATTR);
+	if (error)
+		return error;
+
+	dentry = fhp->fh_dentry;
+	inode = dentry->d_inode;
+
+	if (!inode->i_op->set_acl || !IS_POSIXACL(inode))
+		return nfserr_attrnotsupp;
+
+	if (S_ISDIR(inode->i_mode))
+		flags = NFS4_ACL_DIR;
+
+	host_error = nfs4_acl_nfsv4_to_posix(acl, &pacl, &dpacl, flags);
+	if (host_error == -EINVAL)
+		return nfserr_attrnotsupp;
+	if (host_error < 0)
+		goto out_nfserr;
+
+	host_error = inode->i_op->set_acl(inode, pacl, ACL_TYPE_ACCESS);
+	if (host_error < 0)
+		goto out_release;
+
+	if (S_ISDIR(inode->i_mode)) {
+		host_error = inode->i_op->set_acl(inode, dpacl,
+						  ACL_TYPE_DEFAULT);
+	}
+
+out_release:
+	posix_acl_release(pacl);
+	posix_acl_release(dpacl);
+out_nfserr:
+	if (host_error == -EOPNOTSUPP)
+		return nfserr_attrnotsupp;
+	else
+		return nfserrno(host_error);
+}
+
+
+>>>>>>> v3.18
 static short
 ace2type(struct nfs4_ace *ace)
 {
@@ -799,6 +937,7 @@ ace2type(struct nfs4_ace *ace)
 	return -1;
 }
 
+<<<<<<< HEAD
 EXPORT_SYMBOL(nfs4_acl_posix_to_nfsv4);
 EXPORT_SYMBOL(nfs4_acl_nfsv4_to_posix);
 
@@ -812,6 +951,15 @@ nfs4_acl_new(int n)
 		return NULL;
 	acl->naces = 0;
 	return acl;
+=======
+/*
+ * return the size of the struct nfs4_acl required to represent an acl
+ * with @entries entries.
+ */
+int nfs4_acl_bytes(int entries)
+{
+	return sizeof(struct nfs4_acl) + entries * sizeof(struct nfs4_ace);
+>>>>>>> v3.18
 }
 
 static struct {
@@ -849,6 +997,7 @@ nfs4_acl_get_whotype(char *p, u32 len)
 	return NFS4_ACL_WHO_NAMED;
 }
 
+<<<<<<< HEAD
 int
 nfs4_acl_write_who(int who, char *p)
 {
@@ -867,3 +1016,23 @@ nfs4_acl_write_who(int who, char *p)
 EXPORT_SYMBOL(nfs4_acl_new);
 EXPORT_SYMBOL(nfs4_acl_get_whotype);
 EXPORT_SYMBOL(nfs4_acl_write_who);
+=======
+__be32 nfs4_acl_write_who(struct xdr_stream *xdr, int who)
+{
+	__be32 *p;
+	int i;
+
+	for (i = 0; i < ARRAY_SIZE(s2t_map); i++) {
+		if (s2t_map[i].type != who)
+			continue;
+		p = xdr_reserve_space(xdr, s2t_map[i].stringlen + 4);
+		if (!p)
+			return nfserr_resource;
+		p = xdr_encode_opaque(p, s2t_map[i].string,
+					s2t_map[i].stringlen);
+		return 0;
+	}
+	WARN_ON_ONCE(1);
+	return nfserr_serverfault;
+}
+>>>>>>> v3.18

@@ -99,7 +99,11 @@ static void ccid_kmem_cache_destroy(struct kmem_cache *slab)
 		kmem_cache_destroy(slab);
 }
 
+<<<<<<< HEAD
 static int ccid_activate(struct ccid_operations *ccid_ops)
+=======
+static int __init ccid_activate(struct ccid_operations *ccid_ops)
+>>>>>>> v3.18
 {
 	int err = -ENOBUFS;
 

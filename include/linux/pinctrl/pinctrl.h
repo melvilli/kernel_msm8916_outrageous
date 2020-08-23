@@ -32,10 +32,18 @@ struct device_node;
  * pins, pads or other muxable units in this struct
  * @number: unique pin number from the global pin number space
  * @name: a name for this pin
+<<<<<<< HEAD
+=======
+ * @drv_data: driver-defined per-pin data. pinctrl core does not touch this
+>>>>>>> v3.18
  */
 struct pinctrl_pin_desc {
 	unsigned number;
 	const char *name;
+<<<<<<< HEAD
+=======
+	void *drv_data;
+>>>>>>> v3.18
 };
 
 /* Convenience macro to define a single named or anonymous pin descriptor */
@@ -49,7 +57,12 @@ struct pinctrl_pin_desc {
  * @name: a name for the chip in this range
  * @id: an ID number for the chip in this range
  * @base: base offset of the GPIO range
+<<<<<<< HEAD
  * @pin_base: base pin number of the GPIO range
+=======
+ * @pin_base: base pin number of the GPIO range if pins == NULL
+ * @pins: enumeration of pins in GPIO range or NULL
+>>>>>>> v3.18
  * @npins: number of pins in the GPIO range, including the base number
  * @gc: an optional pointer to a gpio_chip
  */
@@ -59,6 +72,10 @@ struct pinctrl_gpio_range {
 	unsigned int id;
 	unsigned int base;
 	unsigned int pin_base;
+<<<<<<< HEAD
+=======
+	unsigned const *pins;
+>>>>>>> v3.18
 	unsigned int npins;
 	struct gpio_chip *gc;
 };
@@ -142,6 +159,12 @@ extern struct pinctrl_dev *pinctrl_find_and_add_gpio_range(const char *devname,
 extern struct pinctrl_gpio_range *
 pinctrl_find_gpio_range_from_pin(struct pinctrl_dev *pctldev,
 				 unsigned int pin);
+<<<<<<< HEAD
+=======
+extern int pinctrl_get_group_pins(struct pinctrl_dev *pctldev,
+				const char *pin_group, const unsigned **pins,
+				unsigned *num_pins);
+>>>>>>> v3.18
 
 #ifdef CONFIG_OF
 extern struct pinctrl_dev *of_pinctrl_get(struct device_node *np);

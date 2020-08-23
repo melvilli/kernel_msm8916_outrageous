@@ -16,7 +16,11 @@ static const int nfs_set_port_min = 0;
 static const int nfs_set_port_max = 65535;
 static struct ctl_table_header *nfs4_callback_sysctl_table;
 
+<<<<<<< HEAD
 static ctl_table nfs4_cb_sysctls[] = {
+=======
+static struct ctl_table nfs4_cb_sysctls[] = {
+>>>>>>> v3.18
 	{
 		.procname = "nfs_callback_tcpport",
 		.data = &nfs_callback_set_tcpport,
@@ -36,7 +40,11 @@ static ctl_table nfs4_cb_sysctls[] = {
 	{ }
 };
 
+<<<<<<< HEAD
 static ctl_table nfs4_cb_sysctl_dir[] = {
+=======
+static struct ctl_table nfs4_cb_sysctl_dir[] = {
+>>>>>>> v3.18
 	{
 		.procname = "nfs",
 		.mode = 0555,
@@ -45,7 +53,11 @@ static ctl_table nfs4_cb_sysctl_dir[] = {
 	{ }
 };
 
+<<<<<<< HEAD
 static ctl_table nfs4_cb_sysctl_root[] = {
+=======
+static struct ctl_table nfs4_cb_sysctl_root[] = {
+>>>>>>> v3.18
 	{
 		.procname = "fs",
 		.mode = 0555,

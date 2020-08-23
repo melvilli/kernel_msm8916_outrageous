@@ -215,7 +215,11 @@ void iic_request_IPIs(void)
 {
 	iic_request_ipi(PPC_MSG_CALL_FUNCTION);
 	iic_request_ipi(PPC_MSG_RESCHEDULE);
+<<<<<<< HEAD
 	iic_request_ipi(PPC_MSG_CALL_FUNC_SINGLE);
+=======
+	iic_request_ipi(PPC_MSG_TICK_BROADCAST);
+>>>>>>> v3.18
 	iic_request_ipi(PPC_MSG_DEBUGGER_BREAK);
 }
 

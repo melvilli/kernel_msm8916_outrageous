@@ -1,6 +1,10 @@
 Interaction of Suspend code (S3) with the CPU hotplug infrastructure
 
+<<<<<<< HEAD
      (C) 2011 Srivatsa S. Bhat <srivatsa.bhat@linux.vnet.ibm.com>
+=======
+     (C) 2011 - 2014 Srivatsa S. Bhat <srivatsa.bhat@linux.vnet.ibm.com>
+>>>>>>> v3.18
 
 
 I. How does the regular CPU hotplug code differ from how the Suspend-to-RAM

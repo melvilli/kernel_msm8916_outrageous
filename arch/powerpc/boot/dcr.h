@@ -15,6 +15,13 @@
 		asm volatile("mfdcrx %0,%1" : "=r"(rval) : "r"(rn)); \
 		rval; \
 	})
+<<<<<<< HEAD
+=======
+#define mtdcrx(rn, val) \
+	({	\
+		asm volatile("mtdcrx %0,%1" : : "r"(rn), "r" (val)); \
+	})
+>>>>>>> v3.18
 
 /* 440GP/440GX SDRAM controller DCRs */
 #define DCRN_SDRAM0_CFGADDR				0x010

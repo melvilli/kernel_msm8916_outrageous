@@ -185,6 +185,7 @@ err:
 	return ret;
 }
 
+<<<<<<< HEAD
 static int ls1x_rtc_remove(struct platform_device *pdev)
 {
 	platform_set_drvdata(pdev, NULL);
@@ -192,12 +193,17 @@ static int ls1x_rtc_remove(struct platform_device *pdev)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 static struct platform_driver  ls1x_rtc_driver = {
 	.driver		= {
 		.name	= "ls1x-rtc",
 		.owner	= THIS_MODULE,
 	},
+<<<<<<< HEAD
 	.remove		= ls1x_rtc_remove,
+=======
+>>>>>>> v3.18
 	.probe		= ls1x_rtc_probe,
 };
 

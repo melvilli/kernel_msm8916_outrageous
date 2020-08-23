@@ -42,11 +42,19 @@ static int madvise_need_mmap_write(int behavior)
  * We can potentially split a vm area into separate
  * areas, each area with its own behavior.
  */
+<<<<<<< HEAD
 static long madvise_behavior(struct vm_area_struct * vma,
 		     struct vm_area_struct **prev,
 		     unsigned long start, unsigned long end, int behavior)
 {
 	struct mm_struct * mm = vma->vm_mm;
+=======
+static long madvise_behavior(struct vm_area_struct *vma,
+		     struct vm_area_struct **prev,
+		     unsigned long start, unsigned long end, int behavior)
+{
+	struct mm_struct *mm = vma->vm_mm;
+>>>>>>> v3.18
 	int error = 0;
 	pgoff_t pgoff;
 	unsigned long new_flags = vma->vm_flags;
@@ -102,8 +110,12 @@ static long madvise_behavior(struct vm_area_struct * vma,
 
 	pgoff = vma->vm_pgoff + ((start - vma->vm_start) >> PAGE_SHIFT);
 	*prev = vma_merge(mm, *prev, start, end, new_flags, vma->anon_vma,
+<<<<<<< HEAD
 				vma->vm_file, pgoff, vma_policy(vma),
 				vma_get_anon_name(vma));
+=======
+				vma->vm_file, pgoff, vma_policy(vma));
+>>>>>>> v3.18
 	if (*prev) {
 		vma = *prev;
 		goto success;
@@ -196,7 +208,11 @@ static void force_shm_swapin_readahead(struct vm_area_struct *vma,
 	for (; start < end; start += PAGE_SIZE) {
 		index = ((start - vma->vm_start) >> PAGE_SHIFT) + vma->vm_pgoff;
 
+<<<<<<< HEAD
 		page = find_get_page(mapping, index);
+=======
+		page = find_get_entry(mapping, index);
+>>>>>>> v3.18
 		if (!radix_tree_exceptional_entry(page)) {
 			if (page)
 				page_cache_release(page);
@@ -216,8 +232,13 @@ static void force_shm_swapin_readahead(struct vm_area_struct *vma,
 /*
  * Schedule all required I/O operations.  Do not wait for completion.
  */
+<<<<<<< HEAD
 static long madvise_willneed(struct vm_area_struct * vma,
 			     struct vm_area_struct ** prev,
+=======
+static long madvise_willneed(struct vm_area_struct *vma,
+			     struct vm_area_struct **prev,
+>>>>>>> v3.18
 			     unsigned long start, unsigned long end)
 {
 	struct file *file = vma->vm_file;
@@ -271,8 +292,13 @@ static long madvise_willneed(struct vm_area_struct * vma,
  * An interface that causes the system to free clean pages and flush
  * dirty pages is already available as msync(MS_INVALIDATE).
  */
+<<<<<<< HEAD
 static long madvise_dontneed(struct vm_area_struct * vma,
 			     struct vm_area_struct ** prev,
+=======
+static long madvise_dontneed(struct vm_area_struct *vma,
+			     struct vm_area_struct **prev,
+>>>>>>> v3.18
 			     unsigned long start, unsigned long end)
 {
 	*prev = vma;
@@ -293,9 +319,12 @@ static long madvise_dontneed(struct vm_area_struct * vma,
 /*
  * Application wants to free up the pages and associated backing store.
  * This is effectively punching a hole into the middle of a file.
+<<<<<<< HEAD
  *
  * NOTE: Currently, only shmfs/tmpfs is supported for this operation.
  * Other filesystems return -ENOSYS.
+=======
+>>>>>>> v3.18
  */
 static long madvise_remove(struct vm_area_struct *vma,
 				struct vm_area_struct **prev,
@@ -344,6 +373,7 @@ static long madvise_remove(struct vm_area_struct *vma,
  */
 static int madvise_hwpoison(int bhv, unsigned long start, unsigned long end)
 {
+<<<<<<< HEAD
 	int ret = 0;
 
 	if (!capable(CAP_SYS_ADMIN))
@@ -362,11 +392,41 @@ static int madvise_hwpoison(int bhv, unsigned long start, unsigned long end)
 			continue;
 		}
 		printk(KERN_INFO "Injecting memory failure for page %lx at %lx\n",
+=======
+	struct page *p;
+	if (!capable(CAP_SYS_ADMIN))
+		return -EPERM;
+	for (; start < end; start += PAGE_SIZE <<
+				compound_order(compound_head(p))) {
+		int ret;
+
+		ret = get_user_pages_fast(start, 1, 0, &p);
+		if (ret != 1)
+			return ret;
+
+		if (PageHWPoison(p)) {
+			put_page(p);
+			continue;
+		}
+		if (bhv == MADV_SOFT_OFFLINE) {
+			pr_info("Soft offlining page %#lx at %#lx\n",
+				page_to_pfn(p), start);
+			ret = soft_offline_page(p, MF_COUNT_INCREASED);
+			if (ret)
+				return ret;
+			continue;
+		}
+		pr_info("Injecting memory failure for page %#lx at %#lx\n",
+>>>>>>> v3.18
 		       page_to_pfn(p), start);
 		/* Ignore return value for now */
 		memory_failure(page_to_pfn(p), 0, MF_COUNT_INCREASED);
 	}
+<<<<<<< HEAD
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 }
 #endif
 
@@ -460,7 +520,11 @@ madvise_behavior_valid(int behavior)
 SYSCALL_DEFINE3(madvise, unsigned long, start, size_t, len_in, int, behavior)
 {
 	unsigned long end, tmp;
+<<<<<<< HEAD
 	struct vm_area_struct * vma, *prev;
+=======
+	struct vm_area_struct *vma, *prev;
+>>>>>>> v3.18
 	int unmapped_error = 0;
 	int error = -EINVAL;
 	int write;

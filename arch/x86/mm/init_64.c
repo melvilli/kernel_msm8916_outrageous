@@ -151,7 +151,11 @@ early_param("gbpages", parse_direct_gbpages_on);
  * around without checking the pgd every time.
  */
 
+<<<<<<< HEAD
 pteval_t __supported_pte_mask __read_mostly = ~_PAGE_IOMAP;
+=======
+pteval_t __supported_pte_mask __read_mostly = ~0;
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(__supported_pte_mask);
 
 int force_personality32;
@@ -178,7 +182,11 @@ __setup("noexec32=", nonx32_setup);
  * When memory was added/removed make sure all the processes MM have
  * suitable PGD entries in the local PGD level page.
  */
+<<<<<<< HEAD
 void sync_global_pgds(unsigned long start, unsigned long end)
+=======
+void sync_global_pgds(unsigned long start, unsigned long end, int removed)
+>>>>>>> v3.18
 {
 	unsigned long address;
 
@@ -186,7 +194,16 @@ void sync_global_pgds(unsigned long start, unsigned long end)
 		const pgd_t *pgd_ref = pgd_offset_k(address);
 		struct page *page;
 
+<<<<<<< HEAD
 		if (pgd_none(*pgd_ref))
+=======
+		/*
+		 * When it is called after memory hot remove, pgd_none()
+		 * returns true. In this case (removed == 1), we must clear
+		 * the PGD entries in the local PGD level page.
+		 */
+		if (pgd_none(*pgd_ref) && !removed)
+>>>>>>> v3.18
 			continue;
 
 		spin_lock(&pgd_lock);
@@ -199,12 +216,27 @@ void sync_global_pgds(unsigned long start, unsigned long end)
 			pgt_lock = &pgd_page_get_mm(page)->page_table_lock;
 			spin_lock(pgt_lock);
 
+<<<<<<< HEAD
 			if (pgd_none(*pgd))
 				set_pgd(pgd, *pgd_ref);
 			else
 				BUG_ON(pgd_page_vaddr(*pgd)
 				       != pgd_page_vaddr(*pgd_ref));
 
+=======
+			if (!pgd_none(*pgd_ref) && !pgd_none(*pgd))
+				BUG_ON(pgd_page_vaddr(*pgd)
+				       != pgd_page_vaddr(*pgd_ref));
+
+			if (removed) {
+				if (pgd_none(*pgd_ref) && !pgd_none(*pgd))
+					pgd_clear(pgd);
+			} else {
+				if (pgd_none(*pgd))
+					set_pgd(pgd, *pgd_ref);
+			}
+
+>>>>>>> v3.18
 			spin_unlock(pgt_lock);
 		}
 		spin_unlock(&pgd_lock);
@@ -368,7 +400,11 @@ void __init init_extra_mapping_uc(unsigned long phys, unsigned long size)
  *
  *   from __START_KERNEL_map to __START_KERNEL_map + size (== _end-_text)
  *
+<<<<<<< HEAD
  * phys_addr holds the negative offset to the kernel, which is added
+=======
+ * phys_base holds the negative offset to the kernel, which is added
+>>>>>>> v3.18
  * to the compile time generated pmds. This results in invalid pmds up
  * to the point where we hit the physaddr 0 mapping.
  *
@@ -633,7 +669,11 @@ kernel_physical_mapping_init(unsigned long start,
 	}
 
 	if (pgd_changed)
+<<<<<<< HEAD
 		sync_global_pgds(addr, end - 1);
+=======
+		sync_global_pgds(addr, end - 1, 0);
+>>>>>>> v3.18
 
 	__flush_tlb_all();
 
@@ -643,7 +683,11 @@ kernel_physical_mapping_init(unsigned long start,
 #ifndef CONFIG_NUMA
 void __init initmem_init(void)
 {
+<<<<<<< HEAD
 	memblock_set_node(0, (phys_addr_t)ULLONG_MAX, 0);
+=======
+	memblock_set_node(0, (phys_addr_t)ULLONG_MAX, &memblock.memory, 0);
+>>>>>>> v3.18
 }
 #endif
 
@@ -691,7 +735,12 @@ static void  update_end_of_memory_vars(u64 start, u64 size)
 int arch_add_memory(int nid, u64 start, u64 size)
 {
 	struct pglist_data *pgdat = NODE_DATA(nid);
+<<<<<<< HEAD
 	struct zone *zone = pgdat->node_zones + ZONE_NORMAL;
+=======
+	struct zone *zone = pgdat->node_zones +
+		zone_for_memory(nid, start, size, ZONE_NORMAL);
+>>>>>>> v3.18
 	unsigned long start_pfn = start >> PAGE_SHIFT;
 	unsigned long nr_pages = size >> PAGE_SHIFT;
 	int ret;
@@ -712,21 +761,28 @@ EXPORT_SYMBOL_GPL(arch_add_memory);
 
 static void __meminit free_pagetable(struct page *page, int order)
 {
+<<<<<<< HEAD
 	struct zone *zone;
 	bool bootmem = false;
+=======
+>>>>>>> v3.18
 	unsigned long magic;
 	unsigned int nr_pages = 1 << order;
 
 	/* bootmem page has reserved flag */
 	if (PageReserved(page)) {
 		__ClearPageReserved(page);
+<<<<<<< HEAD
 		bootmem = true;
+=======
+>>>>>>> v3.18
 
 		magic = (unsigned long)page->lru.next;
 		if (magic == SECTION_INFO || magic == MIX_SECTION_INFO) {
 			while (nr_pages--)
 				put_page_bootmem(page++);
 		} else
+<<<<<<< HEAD
 			__free_pages_bootmem(page, order);
 	} else
 		free_pages((unsigned long)page_address(page), order);
@@ -742,6 +798,12 @@ static void __meminit free_pagetable(struct page *page, int order)
 		zone_span_writeunlock(zone);
 		totalram_pages += nr_pages;
 	}
+=======
+			while (nr_pages--)
+				free_reserved_page(page++);
+	} else
+		free_pages((unsigned long)page_address(page), order);
+>>>>>>> v3.18
 }
 
 static void __meminit free_pte_table(pte_t *pte_start, pmd_t *pmd)
@@ -989,25 +1051,44 @@ static void __meminit
 remove_pagetable(unsigned long start, unsigned long end, bool direct)
 {
 	unsigned long next;
+<<<<<<< HEAD
+=======
+	unsigned long addr;
+>>>>>>> v3.18
 	pgd_t *pgd;
 	pud_t *pud;
 	bool pgd_changed = false;
 
+<<<<<<< HEAD
 	for (; start < end; start = next) {
 		next = pgd_addr_end(start, end);
 
 		pgd = pgd_offset_k(start);
+=======
+	for (addr = start; addr < end; addr = next) {
+		next = pgd_addr_end(addr, end);
+
+		pgd = pgd_offset_k(addr);
+>>>>>>> v3.18
 		if (!pgd_present(*pgd))
 			continue;
 
 		pud = (pud_t *)pgd_page_vaddr(*pgd);
+<<<<<<< HEAD
 		remove_pud_table(pud, start, next, direct);
+=======
+		remove_pud_table(pud, addr, next, direct);
+>>>>>>> v3.18
 		if (free_pud_table(pud, pgd))
 			pgd_changed = true;
 	}
 
 	if (pgd_changed)
+<<<<<<< HEAD
 		sync_global_pgds(start, end - 1);
+=======
+		sync_global_pgds(start, end - 1, 1);
+>>>>>>> v3.18
 
 	flush_tlb_all();
 }
@@ -1058,9 +1139,12 @@ static void __init register_page_bootmem_info(void)
 
 void __init mem_init(void)
 {
+<<<<<<< HEAD
 	long codesize, reservedpages, datasize, initsize;
 	unsigned long absent_pages;
 
+=======
+>>>>>>> v3.18
 	pci_iommu_alloc();
 
 	/* clear_bss() already clear the empty_zero_page */
@@ -1069,6 +1153,7 @@ void __init mem_init(void)
 
 	/* this will put all memory onto the freelists */
 	free_all_bootmem();
+<<<<<<< HEAD
 
 	absent_pages = absent_pages_in_range(0, max_pfn);
 	reservedpages = max_pfn - totalram_pages - absent_pages;
@@ -1091,6 +1176,15 @@ void __init mem_init(void)
 		reservedpages << (PAGE_SHIFT-10),
 		datasize >> 10,
 		initsize >> 10);
+=======
+	after_bootmem = 1;
+
+	/* Register memory areas for /proc/kcore */
+	kclist_add(&kcore_vsyscall, (void *)VSYSCALL_ADDR,
+			 PAGE_SIZE, KCORE_OTHER);
+
+	mem_init_print_info(NULL);
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_DEBUG_RODATA
@@ -1163,7 +1257,11 @@ void mark_rodata_ro(void)
 	 * has been zapped already via cleanup_highmem().
 	 */
 	all_end = roundup((unsigned long)_brk_end, PMD_SIZE);
+<<<<<<< HEAD
 	set_memory_nx(text_end, (all_end - text_end) >> PAGE_SHIFT);
+=======
+	set_memory_nx(rodata_start, (all_end - rodata_start) >> PAGE_SHIFT);
+>>>>>>> v3.18
 
 	rodata_test();
 
@@ -1175,11 +1273,18 @@ void mark_rodata_ro(void)
 	set_memory_ro(start, (end-start) >> PAGE_SHIFT);
 #endif
 
+<<<<<<< HEAD
 	free_init_pages("unused kernel memory",
 			(unsigned long) __va(__pa_symbol(text_end)),
 			(unsigned long) __va(__pa_symbol(rodata_start)));
 
 	free_init_pages("unused kernel memory",
+=======
+	free_init_pages("unused kernel",
+			(unsigned long) __va(__pa_symbol(text_end)),
+			(unsigned long) __va(__pa_symbol(rodata_start)));
+	free_init_pages("unused kernel",
+>>>>>>> v3.18
 			(unsigned long) __va(__pa_symbol(rodata_end)),
 			(unsigned long) __va(__pa_symbol(_sdata)));
 }
@@ -1227,11 +1332,27 @@ int kern_addr_valid(unsigned long addr)
  * covers the 64bit vsyscall page now. 32bit has a real VMA now and does
  * not need special handling anymore:
  */
+<<<<<<< HEAD
 static struct vm_area_struct gate_vma = {
 	.vm_start	= VSYSCALL_START,
 	.vm_end		= VSYSCALL_START + (VSYSCALL_MAPPED_PAGES * PAGE_SIZE),
 	.vm_page_prot	= PAGE_READONLY_EXEC,
 	.vm_flags	= VM_READ | VM_EXEC
+=======
+static const char *gate_vma_name(struct vm_area_struct *vma)
+{
+	return "[vsyscall]";
+}
+static struct vm_operations_struct gate_vma_ops = {
+	.name = gate_vma_name,
+};
+static struct vm_area_struct gate_vma = {
+	.vm_start	= VSYSCALL_ADDR,
+	.vm_end		= VSYSCALL_ADDR + PAGE_SIZE,
+	.vm_page_prot	= PAGE_READONLY_EXEC,
+	.vm_flags	= VM_READ | VM_EXEC,
+	.vm_ops		= &gate_vma_ops,
+>>>>>>> v3.18
 };
 
 struct vm_area_struct *get_gate_vma(struct mm_struct *mm)
@@ -1260,6 +1381,7 @@ int in_gate_area(struct mm_struct *mm, unsigned long addr)
  */
 int in_gate_area_no_mm(unsigned long addr)
 {
+<<<<<<< HEAD
 	return (addr >= VSYSCALL_START) && (addr < VSYSCALL_END);
 }
 
@@ -1275,14 +1397,55 @@ const char *arch_vma_name(struct vm_area_struct *vma)
 #ifdef CONFIG_X86_UV
 unsigned long memory_block_size_bytes(void)
 {
+=======
+	return (addr & PAGE_MASK) == VSYSCALL_ADDR;
+}
+
+static unsigned long probe_memory_block_size(void)
+{
+	/* start from 2g */
+	unsigned long bz = 1UL<<31;
+
+#ifdef CONFIG_X86_UV
+>>>>>>> v3.18
 	if (is_uv_system()) {
 		printk(KERN_INFO "UV: memory block size 2GB\n");
 		return 2UL * 1024 * 1024 * 1024;
 	}
+<<<<<<< HEAD
 	return MIN_MEMORY_BLOCK_SIZE;
 }
 #endif
 
+=======
+#endif
+
+	/* less than 64g installed */
+	if ((max_pfn << PAGE_SHIFT) < (16UL << 32))
+		return MIN_MEMORY_BLOCK_SIZE;
+
+	/* get the tail size */
+	while (bz > MIN_MEMORY_BLOCK_SIZE) {
+		if (!((max_pfn << PAGE_SHIFT) & (bz - 1)))
+			break;
+		bz >>= 1;
+	}
+
+	printk(KERN_DEBUG "memory block size : %ldMB\n", bz >> 20);
+
+	return bz;
+}
+
+static unsigned long memory_block_size_probed;
+unsigned long memory_block_size_bytes(void)
+{
+	if (!memory_block_size_probed)
+		memory_block_size_probed = probe_memory_block_size();
+
+	return memory_block_size_probed;
+}
+
+>>>>>>> v3.18
 #ifdef CONFIG_SPARSEMEM_VMEMMAP
 /*
  * Initialise the sparsemem vmemmap using huge-pages at the PMD level.
@@ -1357,7 +1520,11 @@ int __meminit vmemmap_populate(unsigned long start, unsigned long end, int node)
 	else
 		err = vmemmap_populate_basepages(start, end, node);
 	if (!err)
+<<<<<<< HEAD
 		sync_global_pgds(start, end - 1);
+=======
+		sync_global_pgds(start, end - 1, 0);
+>>>>>>> v3.18
 	return err;
 }
 

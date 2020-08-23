@@ -139,6 +139,25 @@ struct cs4270_private {
 	struct regulator_bulk_data supplies[ARRAY_SIZE(supply_names)];
 };
 
+<<<<<<< HEAD
+=======
+static const struct snd_soc_dapm_widget cs4270_dapm_widgets[] = {
+SND_SOC_DAPM_INPUT("AINL"),
+SND_SOC_DAPM_INPUT("AINR"),
+
+SND_SOC_DAPM_OUTPUT("AOUTL"),
+SND_SOC_DAPM_OUTPUT("AOUTR"),
+};
+
+static const struct snd_soc_dapm_route cs4270_dapm_routes[] = {
+	{ "Capture", NULL, "AINA" },
+	{ "Capture", NULL, "AINB" },
+
+	{ "AOUTA", NULL, "Playback" },
+	{ "AOUTB", NULL, "Playback" },
+};
+
+>>>>>>> v3.18
 /**
  * struct cs4270_mode_ratios - clock ratio tables
  * @ratio: the ratio of MCLK to the sample rate
@@ -422,7 +441,11 @@ static int cs4270_dai_mute(struct snd_soc_dai *dai, int mute)
 static int cs4270_soc_put_mute(struct snd_kcontrol *kcontrol,
 				struct snd_ctl_elem_value *ucontrol)
 {
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 	struct cs4270_private *cs4270 = snd_soc_codec_get_drvdata(codec);
 	int left = !ucontrol->value.integer.value[0];
 	int right = !ucontrol->value.integer.value[1];
@@ -490,6 +513,7 @@ static int cs4270_probe(struct snd_soc_codec *codec)
 	struct cs4270_private *cs4270 = snd_soc_codec_get_drvdata(codec);
 	int ret;
 
+<<<<<<< HEAD
 	/* Tell ASoC what kind of I/O to use to read the registers.  ASoC will
 	 * then do the I2C transactions itself.
 	 */
@@ -499,6 +523,8 @@ static int cs4270_probe(struct snd_soc_codec *codec)
 		return ret;
 	}
 
+=======
+>>>>>>> v3.18
 	/* Disable auto-mute.  This feature appears to be buggy.  In some
 	 * situations, auto-mute will not deactivate when it should, so we want
 	 * this feature disabled by default.  An application (e.g. alsactl) can
@@ -612,6 +638,13 @@ static const struct snd_soc_codec_driver soc_codec_device_cs4270 = {
 
 	.controls =		cs4270_snd_controls,
 	.num_controls =		ARRAY_SIZE(cs4270_snd_controls),
+<<<<<<< HEAD
+=======
+	.dapm_widgets =		cs4270_dapm_widgets,
+	.num_dapm_widgets =	ARRAY_SIZE(cs4270_dapm_widgets),
+	.dapm_routes =		cs4270_dapm_routes,
+	.num_dapm_routes =	ARRAY_SIZE(cs4270_dapm_routes),
+>>>>>>> v3.18
 };
 
 /*
@@ -653,10 +686,15 @@ static int cs4270_i2c_probe(struct i2c_client *i2c_client,
 
 	cs4270 = devm_kzalloc(&i2c_client->dev, sizeof(struct cs4270_private),
 			      GFP_KERNEL);
+<<<<<<< HEAD
 	if (!cs4270) {
 		dev_err(&i2c_client->dev, "could not allocate codec\n");
 		return -ENOMEM;
 	}
+=======
+	if (!cs4270)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	/* get the power supply regulators */
 	for (i = 0; i < ARRAY_SIZE(supply_names); i++)

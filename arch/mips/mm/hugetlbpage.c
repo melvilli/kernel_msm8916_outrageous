@@ -11,7 +11,10 @@
  * Copyright (C) 2008, 2009 Cavium Networks, Inc.
  */
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/fs.h>
 #include <linux/mm.h>
 #include <linux/hugetlb.h>
@@ -85,11 +88,14 @@ int pud_huge(pud_t pud)
 	return (pud_val(pud) & _PAGE_HUGE) != 0;
 }
 
+<<<<<<< HEAD
 int pmd_huge_support(void)
 {
 	return 1;
 }
 
+=======
+>>>>>>> v3.18
 struct page *
 follow_huge_pmd(struct mm_struct *mm, unsigned long address,
 		pmd_t *pmd, int write)

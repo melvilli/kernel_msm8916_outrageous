@@ -37,11 +37,18 @@
 #include <linux/kernel.h>
 #include <linux/fs.h>
 #include <linux/sched.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/miscdevice.h>
 #include <linux/kthread.h>
 #include <linux/delay.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
+=======
+#include <linux/random.h>
+>>>>>>> v3.18
 #include <asm/uaccess.h>
 
 
@@ -56,19 +63,37 @@ static LIST_HEAD(rng_list);
 static DEFINE_MUTEX(rng_mutex);
 static int data_avail;
 static u8 *rng_buffer, *rng_fillbuf;
+<<<<<<< HEAD
 static unsigned short current_quality = 700; /* an arbitrary 70% */
+=======
+static unsigned short current_quality;
+static unsigned short default_quality; /* = 0; default to "off" */
+>>>>>>> v3.18
 
 module_param(current_quality, ushort, 0644);
 MODULE_PARM_DESC(current_quality,
 		 "current hwrng entropy estimation per mill");
+<<<<<<< HEAD
 
 static void start_khwrngd(void);
 
+=======
+module_param(default_quality, ushort, 0644);
+MODULE_PARM_DESC(default_quality,
+		 "default entropy content of hwrng per mill");
+
+static void start_khwrngd(void);
+
+static inline int rng_get_data(struct hwrng *rng, u8 *buffer, size_t size,
+			       int wait);
+
+>>>>>>> v3.18
 static size_t rng_buffer_size(void)
 {
 	return SMP_CACHE_BYTES < 32 ? 32 : SMP_CACHE_BYTES;
 }
 
+<<<<<<< HEAD
 static inline int hwrng_init(struct hwrng *rng)
 {
 	int err;
@@ -79,6 +104,34 @@ static inline int hwrng_init(struct hwrng *rng)
 			return err;
 	}
 
+=======
+static void add_early_randomness(struct hwrng *rng)
+{
+	unsigned char bytes[16];
+	int bytes_read;
+
+	bytes_read = rng_get_data(rng, bytes, sizeof(bytes), 1);
+	if (bytes_read > 0)
+		add_device_randomness(bytes, bytes_read);
+}
+
+static inline int hwrng_init(struct hwrng *rng)
+{
+	if (rng->init) {
+		int ret;
+
+		ret =  rng->init(rng);
+		if (ret)
+			return ret;
+	}
+	add_early_randomness(rng);
+
+	current_quality = rng->quality ? : default_quality;
+	current_quality &= 1023;
+
+	if (current_quality == 0 && hwrng_fill)
+		kthread_stop(hwrng_fill);
+>>>>>>> v3.18
 	if (current_quality > 0 && !hwrng_fill)
 		start_khwrngd();
 
@@ -335,7 +388,11 @@ static int hwrng_fillfn(void *unused)
 		add_hwgenerator_randomness((void *)rng_fillbuf, rc,
 					   rc * current_quality * 8 >> 10);
 	}
+<<<<<<< HEAD
 	hwrng_fill = 0;
+=======
+	hwrng_fill = NULL;
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -350,7 +407,10 @@ static void start_khwrngd(void)
 
 int hwrng_register(struct hwrng *rng)
 {
+<<<<<<< HEAD
 	int must_register_misc;
+=======
+>>>>>>> v3.18
 	int err = -EINVAL;
 	struct hwrng *old_rng, *tmp;
 
@@ -382,7 +442,10 @@ int hwrng_register(struct hwrng *rng)
 			goto out_unlock;
 	}
 
+<<<<<<< HEAD
 	must_register_misc = (current_rng == NULL);
+=======
+>>>>>>> v3.18
 	old_rng = current_rng;
 	if (!old_rng) {
 		err = hwrng_init(rng);
@@ -391,6 +454,7 @@ int hwrng_register(struct hwrng *rng)
 		current_rng = rng;
 	}
 	err = 0;
+<<<<<<< HEAD
 	if (must_register_misc) {
 		err = register_miscdev();
 		if (err) {
@@ -398,11 +462,33 @@ int hwrng_register(struct hwrng *rng)
 				hwrng_cleanup(rng);
 				current_rng = NULL;
 			}
+=======
+	if (!old_rng) {
+		err = register_miscdev();
+		if (err) {
+			hwrng_cleanup(rng);
+			current_rng = NULL;
+>>>>>>> v3.18
 			goto out_unlock;
 		}
 	}
 	INIT_LIST_HEAD(&rng->list);
 	list_add_tail(&rng->list, &rng_list);
+<<<<<<< HEAD
+=======
+
+	if (old_rng && !rng->init) {
+		/*
+		 * Use a new device's input to add some randomness to
+		 * the system.  If this rng device isn't going to be
+		 * used right away, its init function hasn't been
+		 * called yet; so only use the randomness from devices
+		 * that don't need an init callback.
+		 */
+		add_early_randomness(rng);
+	}
+
+>>>>>>> v3.18
 out_unlock:
 	mutex_unlock(&rng_mutex);
 out:

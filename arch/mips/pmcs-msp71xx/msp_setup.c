@@ -27,7 +27,10 @@
 #endif
 
 extern void msp_serial_setup(void);
+<<<<<<< HEAD
 extern void pmctwiled_setup(void);
+=======
+>>>>>>> v3.18
 
 #if defined(CONFIG_PMC_MSP7120_EVAL) || \
     defined(CONFIG_PMC_MSP7120_GW) || \
@@ -49,7 +52,11 @@ void msp7120_reset(void)
 	/* Cache the reset code of this function */
 	__asm__ __volatile__ (
 		"	.set	push				\n"
+<<<<<<< HEAD
 		"	.set	mips3				\n"
+=======
+		"	.set	arch=r4000			\n"
+>>>>>>> v3.18
 		"	la	%0,startpoint			\n"
 		"	la	%1,endpoint			\n"
 		"	.set	pop				\n"
@@ -148,8 +155,11 @@ void __init plat_mem_setup(void)
 	pm_power_off = msp_power_off;
 }
 
+<<<<<<< HEAD
 extern struct plat_smp_ops msp_smtc_smp_ops;
 
+=======
+>>>>>>> v3.18
 void __init prom_init(void)
 {
 	unsigned long family;
@@ -230,6 +240,7 @@ void __init prom_init(void)
 	 */
 	msp_serial_setup();
 
+<<<<<<< HEAD
 	if (register_vsmp_smp_ops()) {
 #ifdef CONFIG_MIPS_MT_SMTC
 		register_smp_ops(&msp_smtc_smp_ops);
@@ -243,4 +254,7 @@ void __init prom_init(void)
 	 */
 	pmctwiled_setup();
 #endif
+=======
+	register_vsmp_smp_ops();
+>>>>>>> v3.18
 }

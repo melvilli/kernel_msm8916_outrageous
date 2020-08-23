@@ -20,6 +20,10 @@
 #include <asm/cputime.h>
 #include <asm/nmi.h>
 #include <asm/crw.h>
+<<<<<<< HEAD
+=======
+#include <asm/switch_to.h>
+>>>>>>> v3.18
 
 struct mcck_struct {
 	int kill_task;
@@ -53,9 +57,15 @@ void s390_handle_mcck(void)
 	 */
 	local_irq_save(flags);
 	local_mcck_disable();
+<<<<<<< HEAD
 	mcck = __get_cpu_var(cpu_mcck);
 	memset(&__get_cpu_var(cpu_mcck), 0, sizeof(struct mcck_struct));
 	clear_thread_flag(TIF_MCCK_PENDING);
+=======
+	mcck = *this_cpu_ptr(&cpu_mcck);
+	memset(this_cpu_ptr(&cpu_mcck), 0, sizeof(mcck));
+	clear_cpu_flag(CIF_MCCK_PENDING);
+>>>>>>> v3.18
 	local_mcck_enable();
 	local_irq_restore(flags);
 
@@ -163,6 +173,24 @@ static int notrace s390_revalidate_registers(struct mci *mci)
 			"	ld	15,120(%0)\n"
 			: : "a" (fpt_save_area));
 	}
+<<<<<<< HEAD
+=======
+
+#ifdef CONFIG_64BIT
+	/* Revalidate vector registers */
+	if (MACHINE_HAS_VX && current->thread.vxrs) {
+		if (!mci->vr) {
+			/*
+			 * Vector registers can't be restored and therefore
+			 * the process needs to be terminated.
+			 */
+			kill_task = 1;
+		}
+		restore_vx_regs((__vector128 *)
+				S390_lowcore.vector_save_area_addr);
+	}
+#endif
+>>>>>>> v3.18
 	/* Revalidate access registers */
 	asm volatile(
 		"	lam	0,15,0(%0)"
@@ -214,10 +242,14 @@ static int notrace s390_revalidate_registers(struct mci *mci)
 			: "0", "cc");
 #endif
 	/* Revalidate clock comparator register */
+<<<<<<< HEAD
 	if (S390_lowcore.clock_comparator == -1)
 		set_clock_comparator(S390_lowcore.mcck_clock);
 	else
 		set_clock_comparator(S390_lowcore.clock_comparator);
+=======
+	set_clock_comparator(S390_lowcore.clock_comparator);
+>>>>>>> v3.18
 	/* Check if old PSW is valid */
 	if (!mci->wp)
 		/*
@@ -256,7 +288,11 @@ void notrace s390_do_machine_check(struct pt_regs *regs)
 	nmi_enter();
 	inc_irq_stat(NMI_NMI);
 	mci = (struct mci *) &S390_lowcore.mcck_interruption_code;
+<<<<<<< HEAD
 	mcck = &__get_cpu_var(cpu_mcck);
+=======
+	mcck = this_cpu_ptr(&cpu_mcck);
+>>>>>>> v3.18
 	umode = user_mode(regs);
 
 	if (mci->sd) {
@@ -316,7 +352,11 @@ void notrace s390_do_machine_check(struct pt_regs *regs)
 			 */
 			mcck->kill_task = 1;
 			mcck->mcck_code = *(unsigned long long *) mci;
+<<<<<<< HEAD
 			set_thread_flag(TIF_MCCK_PENDING);
+=======
+			set_cpu_flag(CIF_MCCK_PENDING);
+>>>>>>> v3.18
 		} else {
 			/*
 			 * Couldn't restore all register contents while in
@@ -355,12 +395,20 @@ void notrace s390_do_machine_check(struct pt_regs *regs)
 	if (mci->cp) {
 		/* Channel report word pending */
 		mcck->channel_report = 1;
+<<<<<<< HEAD
 		set_thread_flag(TIF_MCCK_PENDING);
+=======
+		set_cpu_flag(CIF_MCCK_PENDING);
+>>>>>>> v3.18
 	}
 	if (mci->w) {
 		/* Warning pending */
 		mcck->warning = 1;
+<<<<<<< HEAD
 		set_thread_flag(TIF_MCCK_PENDING);
+=======
+		set_cpu_flag(CIF_MCCK_PENDING);
+>>>>>>> v3.18
 	}
 	nmi_exit();
 }

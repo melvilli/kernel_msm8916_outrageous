@@ -317,15 +317,25 @@ static const char *adc_hpf_text[] = {
 	"Hi-fi", "Voice 1", "Voice 2", "Voice 3",
 };
 
+<<<<<<< HEAD
 static const struct soc_enum adc_hpf =
 	SOC_ENUM_SINGLE(WM8961_ADC_DAC_CONTROL_2, 7, 4, adc_hpf_text);
+=======
+static SOC_ENUM_SINGLE_DECL(adc_hpf,
+			    WM8961_ADC_DAC_CONTROL_2, 7, adc_hpf_text);
+>>>>>>> v3.18
 
 static const char *dac_deemph_text[] = {
 	"None", "32kHz", "44.1kHz", "48kHz",
 };
 
+<<<<<<< HEAD
 static const struct soc_enum dac_deemph =
 	SOC_ENUM_SINGLE(WM8961_ADC_DAC_CONTROL_1, 1, 4, dac_deemph_text);
+=======
+static SOC_ENUM_SINGLE_DECL(dac_deemph,
+			    WM8961_ADC_DAC_CONTROL_1, 1, dac_deemph_text);
+>>>>>>> v3.18
 
 static const DECLARE_TLV_DB_SCALE(out_tlv, -12100, 100, 1);
 static const DECLARE_TLV_DB_SCALE(hp_sec_tlv, -700, 100, 0);
@@ -385,11 +395,19 @@ static const char *sidetone_text[] = {
 	"None", "Left", "Right"
 };
 
+<<<<<<< HEAD
 static const struct soc_enum dacl_sidetone =
 	SOC_ENUM_SINGLE(WM8961_DSP_SIDETONE_0, 2, 3, sidetone_text);
 
 static const struct soc_enum dacr_sidetone =
 	SOC_ENUM_SINGLE(WM8961_DSP_SIDETONE_1, 2, 3, sidetone_text);
+=======
+static SOC_ENUM_SINGLE_DECL(dacl_sidetone,
+			    WM8961_DSP_SIDETONE_0, 2, sidetone_text);
+
+static SOC_ENUM_SINGLE_DECL(dacr_sidetone,
+			    WM8961_DSP_SIDETONE_1, 2, sidetone_text);
+>>>>>>> v3.18
 
 static const struct snd_kcontrol_new dacl_mux =
 	SOC_DAPM_ENUM("DACL Sidetone", dacl_sidetone);
@@ -565,6 +583,7 @@ static int wm8961_hw_params(struct snd_pcm_substream *substream,
 
 	reg = snd_soc_read(codec, WM8961_AUDIO_INTERFACE_0);
 	reg &= ~WM8961_WL_MASK;
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		break;
@@ -575,6 +594,18 @@ static int wm8961_hw_params(struct snd_pcm_substream *substream,
 		reg |= 2 << WM8961_WL_SHIFT;
 		break;
 	case SNDRV_PCM_FORMAT_S32_LE:
+=======
+	switch (params_width(params)) {
+	case 16:
+		break;
+	case 20:
+		reg |= 1 << WM8961_WL_SHIFT;
+		break;
+	case 24:
+		reg |= 2 << WM8961_WL_SHIFT;
+		break;
+	case 32:
+>>>>>>> v3.18
 		reg |= 3 << WM8961_WL_SHIFT;
 		break;
 	default:
@@ -836,6 +867,7 @@ static struct snd_soc_dai_driver wm8961_dai = {
 static int wm8961_probe(struct snd_soc_codec *codec)
 {
 	struct snd_soc_dapm_context *dapm = &codec->dapm;
+<<<<<<< HEAD
 	int ret = 0;
 	u16 reg;
 
@@ -845,6 +877,10 @@ static int wm8961_probe(struct snd_soc_codec *codec)
 		return ret;
 	}
 
+=======
+	u16 reg;
+
+>>>>>>> v3.18
 	/* Enable class W */
 	reg = snd_soc_read(codec, WM8961_CHARGE_PUMP_B);
 	reg |= WM8961_CP_DYN_PWR_MASK;

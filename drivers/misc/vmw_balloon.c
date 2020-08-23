@@ -17,7 +17,12 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
  *
+<<<<<<< HEAD
  * Maintained by: Dmitry Torokhov <dtor@vmware.com>
+=======
+ * Maintained by:	Xavier Deguillard <xdeguillard@vmware.com>
+ *			Philip Moltmann <moltmann@vmware.com>
+>>>>>>> v3.18
  */
 
 /*
@@ -133,7 +138,11 @@ MODULE_LICENSE("GPL");
 #define VMWARE_BALLOON_CMD(cmd, data, result)		\
 ({							\
 	unsigned long __stat, __dummy1, __dummy2;	\
+<<<<<<< HEAD
 	__asm__ __volatile__ ("inl (%%dx)" :		\
+=======
+	__asm__ __volatile__ ("inl %%dx" :		\
+>>>>>>> v3.18
 		"=a"(__stat),				\
 		"=c"(__dummy1),				\
 		"=d"(__dummy2),				\

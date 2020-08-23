@@ -82,6 +82,11 @@ struct nilfs_inode {
 	__le32	i_pad;
 };
 
+<<<<<<< HEAD
+=======
+#define NILFS_MIN_INODE_SIZE		128
+
+>>>>>>> v3.18
 /**
  * struct nilfs_super_root - structure of super root
  * @sr_sum: check sum
@@ -458,7 +463,11 @@ struct nilfs_btree_node {
 /* level */
 #define NILFS_BTREE_LEVEL_DATA          0
 #define NILFS_BTREE_LEVEL_NODE_MIN      (NILFS_BTREE_LEVEL_DATA + 1)
+<<<<<<< HEAD
 #define NILFS_BTREE_LEVEL_MAX           14	/* Max level (exclusive) */
+=======
+#define NILFS_BTREE_LEVEL_MAX           14
+>>>>>>> v3.18
 
 /**
  * struct nilfs_palloc_group_desc - block group descriptor
@@ -482,6 +491,11 @@ struct nilfs_dat_entry {
 	__le64 de_rsv;
 };
 
+<<<<<<< HEAD
+=======
+#define NILFS_MIN_DAT_ENTRY_SIZE	32
+
+>>>>>>> v3.18
 /**
  * struct nilfs_snapshot_list - snapshot list
  * @ssl_next: next checkpoint number on snapshot list
@@ -520,6 +534,11 @@ struct nilfs_checkpoint {
 	struct nilfs_inode cp_ifile_inode;
 };
 
+<<<<<<< HEAD
+=======
+#define NILFS_MIN_CHECKPOINT_SIZE	(64 + NILFS_MIN_INODE_SIZE)
+
+>>>>>>> v3.18
 /* checkpoint flags */
 enum {
 	NILFS_CHECKPOINT_SNAPSHOT,
@@ -615,6 +634,11 @@ struct nilfs_segment_usage {
 	__le32 su_flags;
 };
 
+<<<<<<< HEAD
+=======
+#define NILFS_MIN_SEGMENT_USAGE_SIZE	16
+
+>>>>>>> v3.18
 /* segment usage flag */
 enum {
 	NILFS_SEGMENT_USAGE_ACTIVE,
@@ -710,6 +734,51 @@ static inline int nilfs_suinfo_clean(const struct nilfs_suinfo *si)
 }
 
 /* ioctl */
+<<<<<<< HEAD
+=======
+/**
+ * nilfs_suinfo_update - segment usage information update
+ * @sup_segnum: segment number
+ * @sup_flags: flags for which fields are active in sup_sui
+ * @sup_reserved: reserved necessary for alignment
+ * @sup_sui: segment usage information
+ */
+struct nilfs_suinfo_update {
+	__u64 sup_segnum;
+	__u32 sup_flags;
+	__u32 sup_reserved;
+	struct nilfs_suinfo sup_sui;
+};
+
+enum {
+	NILFS_SUINFO_UPDATE_LASTMOD,
+	NILFS_SUINFO_UPDATE_NBLOCKS,
+	NILFS_SUINFO_UPDATE_FLAGS,
+	__NR_NILFS_SUINFO_UPDATE_FIELDS,
+};
+
+#define NILFS_SUINFO_UPDATE_FNS(flag, name)				\
+static inline void							\
+nilfs_suinfo_update_set_##name(struct nilfs_suinfo_update *sup)		\
+{									\
+	sup->sup_flags |= 1UL << NILFS_SUINFO_UPDATE_##flag;		\
+}									\
+static inline void							\
+nilfs_suinfo_update_clear_##name(struct nilfs_suinfo_update *sup)	\
+{									\
+	sup->sup_flags &= ~(1UL << NILFS_SUINFO_UPDATE_##flag);		\
+}									\
+static inline int							\
+nilfs_suinfo_update_##name(const struct nilfs_suinfo_update *sup)	\
+{									\
+	return !!(sup->sup_flags & (1UL << NILFS_SUINFO_UPDATE_##flag));\
+}
+
+NILFS_SUINFO_UPDATE_FNS(LASTMOD, lastmod)
+NILFS_SUINFO_UPDATE_FNS(NBLOCKS, nblocks)
+NILFS_SUINFO_UPDATE_FNS(FLAGS, flags)
+
+>>>>>>> v3.18
 enum {
 	NILFS_CHECKPOINT,
 	NILFS_SNAPSHOT,
@@ -863,5 +932,10 @@ struct nilfs_bdesc {
 	_IOW(NILFS_IOCTL_IDENT, 0x8B, __u64)
 #define NILFS_IOCTL_SET_ALLOC_RANGE  \
 	_IOW(NILFS_IOCTL_IDENT, 0x8C, __u64[2])
+<<<<<<< HEAD
+=======
+#define NILFS_IOCTL_SET_SUINFO  \
+	_IOW(NILFS_IOCTL_IDENT, 0x8D, struct nilfs_argv)
+>>>>>>> v3.18
 
 #endif	/* _LINUX_NILFS_FS_H */

@@ -30,9 +30,15 @@
 
 #include <asm/irq.h>
 
+<<<<<<< HEAD
 #include <mach/hardware.h>
 #include <mach/map.h>
 #include <mach/regs-gpio.h>
+=======
+#include <mach/map.h>
+#include <mach/regs-gpio.h>
+#include <mach/gpio-samsung.h>
+>>>>>>> v3.18
 
 #include <plat/cpu.h>
 #include <plat/gpio-core.h>
@@ -161,6 +167,7 @@ int s3c24xx_gpio_setpull_1down(struct samsung_gpio_chip *chip,
 	return s3c24xx_gpio_setpull_1(chip, off, pull, S3C_GPIO_PULL_DOWN);
 }
 
+<<<<<<< HEAD
 static int exynos_gpio_setpull(struct samsung_gpio_chip *chip,
 				unsigned int off, samsung_gpio_pull_t pull)
 {
@@ -183,6 +190,8 @@ static samsung_gpio_pull_t exynos_gpio_getpull(struct samsung_gpio_chip *chip,
 	return pull;
 }
 
+=======
+>>>>>>> v3.18
 /*
  * samsung_gpio_setcfg_2bit - Samsung 2bit style GPIO configuration.
  * @chip: The gpio chip that is being configured.
@@ -377,6 +386,7 @@ static unsigned s3c24xx_gpio_getcfg_abank(struct samsung_gpio_chip *chip,
 }
 #endif
 
+<<<<<<< HEAD
 #if defined(CONFIG_CPU_S5P6440) || defined(CONFIG_CPU_S5P6450)
 static int s5p64x0_gpio_setcfg_rbank(struct samsung_gpio_chip *chip,
 				     unsigned int off, unsigned int cfg)
@@ -417,6 +427,8 @@ static int s5p64x0_gpio_setcfg_rbank(struct samsung_gpio_chip *chip,
 }
 #endif
 
+=======
+>>>>>>> v3.18
 static void __init samsung_gpiolib_set_cfg(struct samsung_gpio_cfg *chipcfg,
 					   int nr_chips)
 {
@@ -444,6 +456,7 @@ static struct samsung_gpio_cfg s3c24xx_gpiocfg_banka = {
 };
 #endif
 
+<<<<<<< HEAD
 #if defined(CONFIG_ARCH_EXYNOS4) || defined(CONFIG_SOC_EXYNOS5250)
 static struct samsung_gpio_cfg exynos_gpio_cfg = {
 	.set_pull	= exynos_gpio_setpull,
@@ -463,6 +476,8 @@ static struct samsung_gpio_cfg s5p64x0_gpio_cfg_rbank = {
 };
 #endif
 
+=======
+>>>>>>> v3.18
 static struct samsung_gpio_cfg samsung_gpio_cfgs[] = {
 	[0] = {
 		.cfg_eint	= 0x0,
@@ -495,6 +510,7 @@ static struct samsung_gpio_cfg samsung_gpio_cfgs[] = {
 		.set_config	= samsung_gpio_setcfg_2bit,
 		.get_config	= samsung_gpio_getcfg_2bit,
 	},
+<<<<<<< HEAD
 	[8] = {
 		.set_pull	= exynos_gpio_setpull,
 		.get_pull	= exynos_gpio_getpull,
@@ -504,6 +520,8 @@ static struct samsung_gpio_cfg samsung_gpio_cfgs[] = {
 		.set_pull	= exynos_gpio_setpull,
 		.get_pull	= exynos_gpio_getpull,
 	}
+=======
+>>>>>>> v3.18
 };
 
 /*
@@ -744,6 +762,7 @@ static int s3c24xx_gpiolib_banka_output(struct gpio_chip *chip,
 }
 #endif
 
+<<<<<<< HEAD
 /* The next set of routines are for the case of s5p64x0 bank r */
 
 static int s5p64x0_gpiolib_rbank_input(struct gpio_chip *chip,
@@ -829,6 +848,8 @@ static int s5p64x0_gpiolib_rbank_output(struct gpio_chip *chip,
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 static void samsung_gpiolib_set(struct gpio_chip *chip,
 				unsigned offset, int value)
 {
@@ -933,6 +954,7 @@ static void __init samsung_gpiolib_add(struct samsung_gpio_chip *chip)
 		s3c_gpiolib_track(chip);
 }
 
+<<<<<<< HEAD
 #if defined(CONFIG_PLAT_S3C24XX) && defined(CONFIG_OF)
 static int s3c24xx_gpio_xlate(struct gpio_chip *gc,
 			const struct of_phandle_args *gpiospec, u32 *flags)
@@ -994,6 +1016,8 @@ static __init void s3c24xx_gpiolib_attach_ofnode(struct samsung_gpio_chip *chip,
 }
 #endif /* defined(CONFIG_PLAT_S3C24XX) && defined(CONFIG_OF) */
 
+=======
+>>>>>>> v3.18
 static void __init s3c24xx_gpiolib_add_chips(struct samsung_gpio_chip *chip,
 					     int nr_chips, void __iomem *base)
 {
@@ -1018,8 +1042,11 @@ static void __init s3c24xx_gpiolib_add_chips(struct samsung_gpio_chip *chip,
 			gc->direction_output = samsung_gpiolib_2bit_output;
 
 		samsung_gpiolib_add(chip);
+<<<<<<< HEAD
 
 		s3c24xx_gpiolib_attach_ofnode(chip, S3C24XX_PA_GPIO, i * 0x10);
+=======
+>>>>>>> v3.18
 	}
 }
 
@@ -1098,6 +1125,7 @@ static void __init samsung_gpiolib_add_4bit2_chips(struct samsung_gpio_chip *chi
 	}
 }
 
+<<<<<<< HEAD
 static void __init s5p64x0_gpiolib_add_rbank(struct samsung_gpio_chip *chip,
 					     int nr_chips)
 {
@@ -1112,6 +1140,8 @@ static void __init s5p64x0_gpiolib_add_rbank(struct samsung_gpio_chip *chip,
 	}
 }
 
+=======
+>>>>>>> v3.18
 int samsung_gpiolib_to_irq(struct gpio_chip *chip, unsigned int offset)
 {
 	struct samsung_gpio_chip *samsung_chip = container_of(chip, struct samsung_gpio_chip, chip);
@@ -1136,7 +1166,11 @@ static int s3c24xx_gpiolib_fbank_to_irq(struct gpio_chip *chip, unsigned offset)
 }
 #endif
 
+<<<<<<< HEAD
 #ifdef CONFIG_PLAT_S3C64XX
+=======
+#ifdef CONFIG_ARCH_S3C64XX
+>>>>>>> v3.18
 static int s3c64xx_gpiolib_mbank_to_irq(struct gpio_chip *chip, unsigned pin)
 {
 	return pin < 5 ? IRQ_EINT(23) + pin : -ENXIO;
@@ -1156,7 +1190,11 @@ struct samsung_gpio_chip s3c24xx_gpios[] = {
 			.base			= S3C2410_GPA(0),
 			.owner			= THIS_MODULE,
 			.label			= "GPIOA",
+<<<<<<< HEAD
 			.ngpio			= 24,
+=======
+			.ngpio			= 27,
+>>>>>>> v3.18
 			.direction_input	= s3c24xx_gpiolib_banka_input,
 			.direction_output	= s3c24xx_gpiolib_banka_output,
 		},
@@ -1165,7 +1203,11 @@ struct samsung_gpio_chip s3c24xx_gpios[] = {
 			.base	= S3C2410_GPB(0),
 			.owner	= THIS_MODULE,
 			.label	= "GPIOB",
+<<<<<<< HEAD
 			.ngpio	= 16,
+=======
+			.ngpio	= 11,
+>>>>>>> v3.18
 		},
 	}, {
 		.chip	= {
@@ -1210,7 +1252,11 @@ struct samsung_gpio_chip s3c24xx_gpios[] = {
 			.base	= S3C2410_GPH(0),
 			.owner	= THIS_MODULE,
 			.label	= "GPIOH",
+<<<<<<< HEAD
 			.ngpio	= 11,
+=======
+			.ngpio	= 15,
+>>>>>>> v3.18
 		},
 	},
 		/* GPIOS for the S3C2443 and later devices. */
@@ -1277,7 +1323,11 @@ struct samsung_gpio_chip s3c24xx_gpios[] = {
  */
 
 static struct samsung_gpio_chip s3c64xx_gpios_4bit[] = {
+<<<<<<< HEAD
 #ifdef CONFIG_PLAT_S3C64XX
+=======
+#ifdef CONFIG_ARCH_S3C64XX
+>>>>>>> v3.18
 	{
 		.chip	= {
 			.base	= S3C64XX_GPA(0),
@@ -1330,7 +1380,11 @@ static struct samsung_gpio_chip s3c64xx_gpios_4bit[] = {
 };
 
 static struct samsung_gpio_chip s3c64xx_gpios_4bit2[] = {
+<<<<<<< HEAD
 #ifdef CONFIG_PLAT_S3C64XX
+=======
+#ifdef CONFIG_ARCH_S3C64XX
+>>>>>>> v3.18
 	{
 		.base	= S3C64XX_GPH_BASE + 0x4,
 		.chip	= {
@@ -1360,7 +1414,11 @@ static struct samsung_gpio_chip s3c64xx_gpios_4bit2[] = {
 };
 
 static struct samsung_gpio_chip s3c64xx_gpios_2bit[] = {
+<<<<<<< HEAD
 #ifdef CONFIG_PLAT_S3C64XX
+=======
+#ifdef CONFIG_ARCH_S3C64XX
+>>>>>>> v3.18
 	{
 		.base	= S3C64XX_GPF_BASE,
 		.config	= &samsung_gpio_cfgs[6],
@@ -1418,6 +1476,7 @@ static struct samsung_gpio_chip s3c64xx_gpios_2bit[] = {
 #endif
 };
 
+<<<<<<< HEAD
 /*
  * S5P6440 GPIO bank summary:
  *
@@ -3118,6 +3177,49 @@ int s3c_gpio_cfgpin(unsigned int pin, unsigned int config)
 	unsigned long flags;
 	int offset;
 	int ret;
+=======
+/* TODO: cleanup soc_is_* */
+static __init int samsung_gpiolib_init(void)
+{
+	/*
+	 * Currently there are two drivers that can provide GPIO support for
+	 * Samsung SoCs. For device tree enabled platforms, the new
+	 * pinctrl-samsung driver is used, providing both GPIO and pin control
+	 * interfaces. For legacy (non-DT) platforms this driver is used.
+	 */
+	if (of_have_populated_dt())
+		return -ENODEV;
+
+	samsung_gpiolib_set_cfg(samsung_gpio_cfgs, ARRAY_SIZE(samsung_gpio_cfgs));
+
+	if (soc_is_s3c24xx()) {
+		s3c24xx_gpiolib_add_chips(s3c24xx_gpios,
+				ARRAY_SIZE(s3c24xx_gpios), S3C24XX_VA_GPIO);
+	} else if (soc_is_s3c64xx()) {
+		samsung_gpiolib_add_2bit_chips(s3c64xx_gpios_2bit,
+				ARRAY_SIZE(s3c64xx_gpios_2bit),
+				S3C64XX_VA_GPIO + 0xE0, 0x20);
+		samsung_gpiolib_add_4bit_chips(s3c64xx_gpios_4bit,
+				ARRAY_SIZE(s3c64xx_gpios_4bit),
+				S3C64XX_VA_GPIO);
+		samsung_gpiolib_add_4bit2_chips(s3c64xx_gpios_4bit2,
+				ARRAY_SIZE(s3c64xx_gpios_4bit2));
+	} else {
+		WARN(1, "Unknown SoC in gpio-samsung, no GPIOs added\n");
+		return -ENODEV;
+	}
+
+	return 0;
+}
+core_initcall(samsung_gpiolib_init);
+
+int s3c_gpio_cfgpin(unsigned int pin, unsigned int config)
+{
+	struct samsung_gpio_chip *chip = samsung_gpiolib_getchip(pin);
+	unsigned long flags;
+	int offset;
+	int ret;
+>>>>>>> v3.18
 
 	if (!chip)
 		return -EINVAL;
@@ -3220,6 +3322,7 @@ samsung_gpio_pull_t s3c_gpio_getpull(unsigned int pin)
 }
 EXPORT_SYMBOL(s3c_gpio_getpull);
 
+<<<<<<< HEAD
 #ifdef CONFIG_S5P_GPIO_DRVSTR
 s5p_gpio_drvstr_t s5p_gpio_get_drvstr(unsigned int pin)
 {
@@ -3270,6 +3373,8 @@ int s5p_gpio_set_drvstr(unsigned int pin, s5p_gpio_drvstr_t drvstr)
 EXPORT_SYMBOL(s5p_gpio_set_drvstr);
 #endif	/* CONFIG_S5P_GPIO_DRVSTR */
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PLAT_S3C24XX
 unsigned int s3c2410_modify_misccr(unsigned int clear, unsigned int change)
 {

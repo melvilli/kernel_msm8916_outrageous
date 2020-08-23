@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -114,7 +118,11 @@ acpi_ns_load_table(u32 table_index, struct acpi_namespace_node *node)
 		(void)acpi_tb_release_owner_id(table_index);
 	}
 
+<<<<<<< HEAD
       unlock:
+=======
+unlock:
+>>>>>>> v3.18
 	(void)acpi_ut_release_mutex(ACPI_MTX_NAMESPACE);
 
 	if (ACPI_FAILURE(status)) {
@@ -128,12 +136,20 @@ acpi_ns_load_table(u32 table_index, struct acpi_namespace_node *node)
 	 * parse trees.
 	 */
 	ACPI_DEBUG_PRINT((ACPI_DB_INFO,
+<<<<<<< HEAD
 			  "**** Begin Table Method Parsing and Object Initialization\n"));
+=======
+			  "**** Begin Table Object Initialization\n"));
+>>>>>>> v3.18
 
 	status = acpi_ds_initialize_objects(table_index, node);
 
 	ACPI_DEBUG_PRINT((ACPI_DB_INFO,
+<<<<<<< HEAD
 			  "**** Completed Table Method Parsing and Object Initialization\n"));
+=======
+			  "**** Completed Table Object Initialization\n"));
+>>>>>>> v3.18
 
 	return_ACPI_STATUS(status);
 }

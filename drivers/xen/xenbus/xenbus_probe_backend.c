@@ -31,9 +31,17 @@
  * IN THE SOFTWARE.
  */
 
+<<<<<<< HEAD
 #define DPRINTK(fmt, args...)				\
 	pr_debug("xenbus_probe (%s:%d) " fmt ".\n",	\
 		 __func__, __LINE__, ##args)
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+#define DPRINTK(fmt, ...)				\
+	pr_debug("(%s:%d) " fmt "\n",			\
+		 __func__, __LINE__, ##__VA_ARGS__)
+>>>>>>> v3.18
 
 #include <linux/kernel.h>
 #include <linux/err.h>
@@ -198,7 +206,11 @@ static struct xen_bus_type xenbus_backend = {
 		.probe		= xenbus_dev_probe,
 		.remove		= xenbus_dev_remove,
 		.shutdown	= xenbus_dev_shutdown,
+<<<<<<< HEAD
 		.dev_attrs	= xenbus_dev_attrs,
+=======
+		.dev_groups	= xenbus_dev_groups,
+>>>>>>> v3.18
 	},
 };
 
@@ -232,6 +244,7 @@ int xenbus_dev_is_online(struct xenbus_device *dev)
 }
 EXPORT_SYMBOL_GPL(xenbus_dev_is_online);
 
+<<<<<<< HEAD
 int xenbus_register_backend(struct xenbus_driver *drv)
 {
 	drv->read_otherend_details = read_frontend_details;
@@ -239,6 +252,17 @@ int xenbus_register_backend(struct xenbus_driver *drv)
 	return xenbus_register_driver_common(drv, &xenbus_backend);
 }
 EXPORT_SYMBOL_GPL(xenbus_register_backend);
+=======
+int __xenbus_register_backend(struct xenbus_driver *drv, struct module *owner,
+			      const char *mod_name)
+{
+	drv->read_otherend_details = read_frontend_details;
+
+	return xenbus_register_driver_common(drv, &xenbus_backend,
+					     owner, mod_name);
+}
+EXPORT_SYMBOL_GPL(__xenbus_register_backend);
+>>>>>>> v3.18
 
 static int backend_probe_and_watch(struct notifier_block *notifier,
 				   unsigned long event,

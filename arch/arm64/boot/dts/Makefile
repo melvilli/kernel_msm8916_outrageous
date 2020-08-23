@@ -1,7 +1,12 @@
+<<<<<<< HEAD
+=======
+dtb-$(CONFIG_ARCH_THUNDER) += thunder-88xx.dtb
+>>>>>>> v3.18
 dtb-$(CONFIG_ARCH_VEXPRESS) += rtsm_ve-aemv8a.dtb foundation-v8.dtb
 dtb-$(CONFIG_ARCH_XGENE) += apm-mustang.dtb
 
 targets += dtbs
+<<<<<<< HEAD
 
 #used for cleaning - not building
 subdir- := qcom
@@ -10,3 +15,10 @@ subdir- := qcom
 dtbs: $(addprefix $(obj)/, $(DTB_LIST))
 
 clean-files := dts/*.dtb *.dtb
+=======
+targets += $(dtb-y)
+
+dtbs: $(addprefix $(obj)/, $(dtb-y))
+
+clean-files := *.dtb
+>>>>>>> v3.18

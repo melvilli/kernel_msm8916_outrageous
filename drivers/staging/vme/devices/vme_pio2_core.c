@@ -182,30 +182,50 @@ static int pio2_match(struct vme_dev *vdev)
 
 	if (vdev->num >= bus_num) {
 		dev_err(&vdev->dev,
+<<<<<<< HEAD
 			"The enumeration of the VMEbus to which the board is connected must be specified");
+=======
+			"The enumeration of the VMEbus to which the board is connected must be specified\n");
+>>>>>>> v3.18
 		return 0;
 	}
 
 	if (vdev->num >= base_num) {
 		dev_err(&vdev->dev,
+<<<<<<< HEAD
 			"The VME address for the cards registers must be specified");
+=======
+			"The VME address for the cards registers must be specified\n");
+>>>>>>> v3.18
 		return 0;
 	}
 
 	if (vdev->num >= vector_num) {
 		dev_err(&vdev->dev,
+<<<<<<< HEAD
 			"The IRQ vector used by the card must be specified");
+=======
+			"The IRQ vector used by the card must be specified\n");
+>>>>>>> v3.18
 		return 0;
 	}
 
 	if (vdev->num >= level_num) {
 		dev_err(&vdev->dev,
+<<<<<<< HEAD
 			"The IRQ level used by the card must be specified");
+=======
+			"The IRQ level used by the card must be specified\n");
+>>>>>>> v3.18
 		return 0;
 	}
 
 	if (vdev->num >= variant_num) {
+<<<<<<< HEAD
 		dev_err(&vdev->dev, "The variant of the card must be specified");
+=======
+		dev_err(&vdev->dev, "The variant of the card must be specified\n");
+>>>>>>> v3.18
 		return 0;
 	}
 
@@ -324,7 +344,11 @@ static int pio2_probe(struct vme_dev *vdev)
 	retval = pio2_reset_card(card);
 	if (retval) {
 		dev_err(&card->vdev->dev,
+<<<<<<< HEAD
 			"Failed to reset card, is location valid?");
+=======
+			"Failed to reset card, is location valid?\n");
+>>>>>>> v3.18
 		retval = -ENODEV;
 		goto err_reset;
 	}

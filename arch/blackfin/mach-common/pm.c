@@ -27,7 +27,11 @@ struct bfin_cpu_pm_fns *bfin_cpu_pm;
 
 void bfin_pm_suspend_standby_enter(void)
 {
+<<<<<<< HEAD
 #ifndef CONFIG_BF60x
+=======
+#if !BFIN_GPIO_PINT
+>>>>>>> v3.18
 	bfin_pm_standby_setup();
 #endif
 
@@ -41,7 +45,11 @@ void bfin_pm_suspend_standby_enter(void)
 # endif
 #endif
 
+<<<<<<< HEAD
 #ifndef CONFIG_BF60x
+=======
+#if !BFIN_GPIO_PINT
+>>>>>>> v3.18
 	bfin_pm_standby_restore();
 #endif
 
@@ -128,6 +136,10 @@ static void flushinv_all_dcache(void)
 					if ((status & 0x3) != 0x3)
 						continue;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 					/* construct the address using the tag */
 					addr = (status & 0xFFFFC800) | (subbank << 12) | (set << 5);
 
@@ -140,11 +152,22 @@ static void flushinv_all_dcache(void)
 
 int bfin_pm_suspend_mem_enter(void)
 {
+<<<<<<< HEAD
 	int wakeup, ret;
 
 	unsigned char *memptr = kmalloc(L1_CODE_LENGTH + L1_DATA_A_LENGTH
 					 + L1_DATA_B_LENGTH + L1_SCRATCH_LENGTH,
 					  GFP_KERNEL);
+=======
+	int ret;
+#ifndef CONFIG_BF60x
+	int wakeup;
+#endif
+
+	unsigned char *memptr = kmalloc(L1_CODE_LENGTH + L1_DATA_A_LENGTH
+					 + L1_DATA_B_LENGTH + L1_SCRATCH_LENGTH,
+					  GFP_ATOMIC);
+>>>>>>> v3.18
 
 	if (memptr == NULL) {
 		panic("bf53x_suspend_l1_mem malloc failed");
@@ -170,10 +193,15 @@ int bfin_pm_suspend_mem_enter(void)
 		return ret;
 	}
 
+<<<<<<< HEAD
 	bfin_gpio_pm_hibernate_suspend();
 
 #if BFIN_GPIO_PINT
 	bfin_pint_suspend();
+=======
+#ifdef CONFIG_GPIO_ADI
+	bfin_gpio_pm_hibernate_suspend();
+>>>>>>> v3.18
 #endif
 
 #if defined(CONFIG_BFIN_EXTMEM_WRITEBACK) || defined(CONFIG_BFIN_L2_WRITEBACK)
@@ -194,11 +222,17 @@ int bfin_pm_suspend_mem_enter(void)
 	_enable_icplb();
 	_enable_dcplb();
 
+<<<<<<< HEAD
 #if BFIN_GPIO_PINT
 	bfin_pint_resume();
 #endif
 
 	bfin_gpio_pm_hibernate_restore();
+=======
+#ifdef CONFIG_GPIO_ADI
+	bfin_gpio_pm_hibernate_restore();
+#endif
+>>>>>>> v3.18
 	blackfin_dma_resume();
 
 	kfree(memptr);

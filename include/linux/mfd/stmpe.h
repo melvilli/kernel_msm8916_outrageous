@@ -11,6 +11,10 @@
 #include <linux/mutex.h>
 
 struct device;
+<<<<<<< HEAD
+=======
+struct regulator;
+>>>>>>> v3.18
 
 enum stmpe_block {
 	STMPE_BLOCK_GPIO	= 1 << 0,
@@ -62,6 +66,11 @@ struct stmpe_client_info;
 
 /**
  * struct stmpe - STMPE MFD structure
+<<<<<<< HEAD
+=======
+ * @vcc: optional VCC regulator
+ * @vio: optional VIO regulator
+>>>>>>> v3.18
  * @lock: lock protecting I/O operations
  * @irq_lock: IRQ bus lock
  * @dev: device, mostly for dev_dbg()
@@ -73,13 +82,21 @@ struct stmpe_client_info;
  * @regs: list of addresses of registers which are at different addresses on
  *	  different variants.  Indexed by one of STMPE_IDX_*.
  * @irq: irq number for stmpe
+<<<<<<< HEAD
  * @irq_base: starting IRQ number for internal IRQs
+=======
+>>>>>>> v3.18
  * @num_gpios: number of gpios, differs for variants
  * @ier: cache of IER registers for bus_lock
  * @oldier: cache of IER registers for bus_lock
  * @pdata: platform data
  */
 struct stmpe {
+<<<<<<< HEAD
+=======
+	struct regulator *vcc;
+	struct regulator *vio;
+>>>>>>> v3.18
 	struct mutex lock;
 	struct mutex irq_lock;
 	struct device *dev;
@@ -91,7 +108,10 @@ struct stmpe {
 	const u8 *regs;
 
 	int irq;
+<<<<<<< HEAD
 	int irq_base;
+=======
+>>>>>>> v3.18
 	int num_gpios;
 	u8 ier[2];
 	u8 oldier[2];
@@ -132,8 +152,11 @@ struct stmpe_keypad_platform_data {
 
 /**
  * struct stmpe_gpio_platform_data - STMPE GPIO platform data
+<<<<<<< HEAD
  * @gpio_base: first gpio number assigned.  A maximum of
  *	       %STMPE_NR_GPIOS GPIOs will be allocated.
+=======
+>>>>>>> v3.18
  * @norequest_mask: bitmask specifying which GPIOs should _not_ be
  *		    requestable due to different usage (e.g. touch, keypad)
  *		    STMPE_GPIO_NOREQ_* macros can be used here.
@@ -141,7 +164,10 @@ struct stmpe_keypad_platform_data {
  * @remove: board specific remove callback
  */
 struct stmpe_gpio_platform_data {
+<<<<<<< HEAD
 	int gpio_base;
+=======
+>>>>>>> v3.18
 	unsigned norequest_mask;
 	void (*setup)(struct stmpe *stmpe, unsigned gpio_base);
 	void (*remove)(struct stmpe *stmpe, unsigned gpio_base);
@@ -195,8 +221,11 @@ struct stmpe_ts_platform_data {
  * @irq_trigger: IRQ trigger to use for the interrupt to the host
  * @autosleep: bool to enable/disable stmpe autosleep
  * @autosleep_timeout: inactivity timeout in milliseconds for autosleep
+<<<<<<< HEAD
  * @irq_base: base IRQ number.  %STMPE_NR_IRQS irqs will be used, or
  *	      %STMPE_NR_INTERNAL_IRQS if the GPIO driver is not used.
+=======
+>>>>>>> v3.18
  * @irq_over_gpio: true if gpio is used to get irq
  * @irq_gpio: gpio number over which irq will be requested (significant only if
  *	      irq_over_gpio is true)
@@ -207,7 +236,10 @@ struct stmpe_ts_platform_data {
 struct stmpe_platform_data {
 	int id;
 	unsigned int blocks;
+<<<<<<< HEAD
 	int irq_base;
+=======
+>>>>>>> v3.18
 	unsigned int irq_trigger;
 	bool autosleep;
 	bool irq_over_gpio;
@@ -219,10 +251,13 @@ struct stmpe_platform_data {
 	struct stmpe_ts_platform_data *ts;
 };
 
+<<<<<<< HEAD
 #define STMPE_NR_INTERNAL_IRQS	9
 #define STMPE_INT_GPIO(x)	(STMPE_NR_INTERNAL_IRQS + (x))
 
 #define STMPE_NR_GPIOS		24
 #define STMPE_NR_IRQS		STMPE_INT_GPIO(STMPE_NR_GPIOS)
 
+=======
+>>>>>>> v3.18
 #endif

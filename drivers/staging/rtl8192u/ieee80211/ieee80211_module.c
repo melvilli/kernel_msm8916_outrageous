@@ -99,7 +99,11 @@ struct net_device *alloc_ieee80211(int sizeof_priv)
 {
 	struct ieee80211_device *ieee;
 	struct net_device *dev;
+<<<<<<< HEAD
 	int i,err;
+=======
+	int i, err;
+>>>>>>> v3.18
 
 	IEEE80211_DEBUG_INFO("Initializing...\n");
 
@@ -241,7 +245,11 @@ static int debug = \
 			    //IEEE80211_DL_DATA	|
 			    IEEE80211_DL_ERR	  //awayls open this flags to show error out
 			    ;
+<<<<<<< HEAD
 struct proc_dir_entry *ieee80211_proc;
+=======
+static struct proc_dir_entry *ieee80211_proc;
+>>>>>>> v3.18
 
 static int show_debug_level(struct seq_file *m, void *v)
 {
@@ -268,7 +276,12 @@ static const struct file_operations fops = {
 	.open = open_debug_level,
 	.read = seq_read,
 	.llseek = seq_lseek,
+<<<<<<< HEAD
 	.write = write_debug_level
+=======
+	.write = write_debug_level,
+	.release = single_release,
+>>>>>>> v3.18
 };
 
 int __init ieee80211_debug_init(void)

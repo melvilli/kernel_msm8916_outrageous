@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -139,20 +143,34 @@ acpi_ds_init_field_objects(union acpi_parse_object *op,
 			   struct acpi_walk_state *walk_state);
 
 /*
+<<<<<<< HEAD
  * dsload - Parser/Interpreter interface, pass 1 namespace load callbacks
+=======
+ * dsload - Parser/Interpreter interface
+>>>>>>> v3.18
  */
 acpi_status
 acpi_ds_init_callbacks(struct acpi_walk_state *walk_state, u32 pass_number);
 
+<<<<<<< HEAD
+=======
+/* dsload - pass 1 namespace load callbacks */
+
+>>>>>>> v3.18
 acpi_status
 acpi_ds_load1_begin_op(struct acpi_walk_state *walk_state,
 		       union acpi_parse_object **out_op);
 
 acpi_status acpi_ds_load1_end_op(struct acpi_walk_state *walk_state);
 
+<<<<<<< HEAD
 /*
  * dsload - Parser/Interpreter interface, pass 2 namespace load callbacks
  */
+=======
+/* dsload - pass 2 namespace load callbacks */
+
+>>>>>>> v3.18
 acpi_status
 acpi_ds_load2_begin_op(struct acpi_walk_state *walk_state,
 		       union acpi_parse_object **out_op);
@@ -200,7 +218,13 @@ void acpi_ds_method_data_init(struct acpi_walk_state *walk_state);
 /*
  * dsmethod - Parser/Interpreter interface - control method parsing
  */
+<<<<<<< HEAD
 acpi_status acpi_ds_parse_method(struct acpi_namespace_node *node);
+=======
+acpi_status
+acpi_ds_auto_serialize_method(struct acpi_namespace_node *node,
+			      union acpi_operand_object *obj_desc);
+>>>>>>> v3.18
 
 acpi_status
 acpi_ds_call_control_method(struct acpi_thread_state *thread,

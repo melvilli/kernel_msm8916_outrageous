@@ -77,7 +77,11 @@ const struct nf_nat_l4proto nf_nat_l4proto_icmp = {
 	.manip_pkt		= icmp_manip_pkt,
 	.in_range		= icmp_in_range,
 	.unique_tuple		= icmp_unique_tuple,
+<<<<<<< HEAD
 #if defined(CONFIG_NF_CT_NETLINK) || defined(CONFIG_NF_CT_NETLINK_MODULE)
+=======
+#if IS_ENABLED(CONFIG_NF_CT_NETLINK)
+>>>>>>> v3.18
 	.nlattr_to_range	= nf_nat_l4proto_nlattr_to_range,
 #endif
 };

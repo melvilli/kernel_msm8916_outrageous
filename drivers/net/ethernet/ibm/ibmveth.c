@@ -12,8 +12,12 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
  *
  * Copyright (C) IBM Corporation, 2003, 2010
  *
@@ -106,7 +110,11 @@ struct ibmveth_stat ibmveth_stats[] = {
 /* simple methods of getting data from the current rxq entry */
 static inline u32 ibmveth_rxq_flags(struct ibmveth_adapter *adapter)
 {
+<<<<<<< HEAD
 	return adapter->rx_queue.queue_addr[adapter->rx_queue.index].flags_off;
+=======
+	return be32_to_cpu(adapter->rx_queue.queue_addr[adapter->rx_queue.index].flags_off);
+>>>>>>> v3.18
 }
 
 static inline int ibmveth_rxq_toggle(struct ibmveth_adapter *adapter)
@@ -132,7 +140,11 @@ static inline int ibmveth_rxq_frame_offset(struct ibmveth_adapter *adapter)
 
 static inline int ibmveth_rxq_frame_length(struct ibmveth_adapter *adapter)
 {
+<<<<<<< HEAD
 	return adapter->rx_queue.queue_addr[adapter->rx_queue.index].length;
+=======
+	return be32_to_cpu(adapter->rx_queue.queue_addr[adapter->rx_queue.index].length);
+>>>>>>> v3.18
 }
 
 static inline int ibmveth_rxq_csum_good(struct ibmveth_adapter *adapter)
@@ -534,10 +546,28 @@ retry:
 	return rc;
 }
 
+<<<<<<< HEAD
 static int ibmveth_open(struct net_device *netdev)
 {
 	struct ibmveth_adapter *adapter = netdev_priv(netdev);
 	u64 mac_address = 0;
+=======
+static u64 ibmveth_encode_mac_addr(u8 *mac)
+{
+	int i;
+	u64 encoded = 0;
+
+	for (i = 0; i < ETH_ALEN; i++)
+		encoded = (encoded << 8) | mac[i];
+
+	return encoded;
+}
+
+static int ibmveth_open(struct net_device *netdev)
+{
+	struct ibmveth_adapter *adapter = netdev_priv(netdev);
+	u64 mac_address;
+>>>>>>> v3.18
 	int rxq_entries = 1;
 	unsigned long lpar_rc;
 	int rc;
@@ -591,8 +621,12 @@ static int ibmveth_open(struct net_device *netdev)
 	adapter->rx_queue.num_slots = rxq_entries;
 	adapter->rx_queue.toggle = 1;
 
+<<<<<<< HEAD
 	memcpy(&mac_address, netdev->dev_addr, netdev->addr_len);
 	mac_address = mac_address >> 16;
+=======
+	mac_address = ibmveth_encode_mac_addr(netdev->dev_addr);
+>>>>>>> v3.18
 
 	rxq_desc.fields.flags_len = IBMVETH_BUF_VALID |
 					adapter->rx_queue.queue_len;
@@ -1045,7 +1079,11 @@ retry_bounce:
 			       DMA_TO_DEVICE);
 
 out:
+<<<<<<< HEAD
 	dev_kfree_skb(skb);
+=======
+	dev_consume_skb_any(skb);
+>>>>>>> v3.18
 	return NETDEV_TX_OK;
 
 map_failed_frags:
@@ -1073,7 +1111,11 @@ static int ibmveth_poll(struct napi_struct *napi, int budget)
 	unsigned long lpar_rc;
 
 restart_poll:
+<<<<<<< HEAD
 	do {
+=======
+	while (frames_processed < budget) {
+>>>>>>> v3.18
 		if (!ibmveth_rxq_pending_buffer(adapter))
 			break;
 
@@ -1122,7 +1164,11 @@ restart_poll:
 			netdev->stats.rx_bytes += length;
 			frames_processed++;
 		}
+<<<<<<< HEAD
 	} while (frames_processed < budget);
+=======
+	}
+>>>>>>> v3.18
 
 	ibmveth_replenish_task(adapter);
 
@@ -1194,8 +1240,13 @@ static void ibmveth_set_multicast_list(struct net_device *netdev)
 		/* add the addresses to the filter table */
 		netdev_for_each_mc_addr(ha, netdev) {
 			/* add the multicast address to the filter table */
+<<<<<<< HEAD
 			unsigned long mcast_addr = 0;
 			memcpy(((char *)&mcast_addr)+2, ha->addr, 6);
+=======
+			u64 mcast_addr;
+			mcast_addr = ibmveth_encode_mac_addr(ha->addr);
+>>>>>>> v3.18
 			lpar_rc = h_multicast_ctrl(adapter->vdev->unit_address,
 						   IbmVethMcastAddFilter,
 						   mcast_addr);
@@ -1286,18 +1337,34 @@ static unsigned long ibmveth_get_desired_dma(struct vio_dev *vdev)
 {
 	struct net_device *netdev = dev_get_drvdata(&vdev->dev);
 	struct ibmveth_adapter *adapter;
+<<<<<<< HEAD
+=======
+	struct iommu_table *tbl;
+>>>>>>> v3.18
 	unsigned long ret;
 	int i;
 	int rxqentries = 1;
 
+<<<<<<< HEAD
 	/* netdev inits at probe time along with the structures we need below*/
 	if (netdev == NULL)
 		return IOMMU_PAGE_ALIGN(IBMVETH_IO_ENTITLEMENT_DEFAULT);
+=======
+	tbl = get_iommu_table_base(&vdev->dev);
+
+	/* netdev inits at probe time along with the structures we need below*/
+	if (netdev == NULL)
+		return IOMMU_PAGE_ALIGN(IBMVETH_IO_ENTITLEMENT_DEFAULT, tbl);
+>>>>>>> v3.18
 
 	adapter = netdev_priv(netdev);
 
 	ret = IBMVETH_BUFF_LIST_SIZE + IBMVETH_FILT_LIST_SIZE;
+<<<<<<< HEAD
 	ret += IOMMU_PAGE_ALIGN(netdev->mtu);
+=======
+	ret += IOMMU_PAGE_ALIGN(netdev->mtu, tbl);
+>>>>>>> v3.18
 
 	for (i = 0; i < IBMVETH_NUM_BUFF_POOLS; i++) {
 		/* add the size of the active receive buffers */
@@ -1305,11 +1372,20 @@ static unsigned long ibmveth_get_desired_dma(struct vio_dev *vdev)
 			ret +=
 			    adapter->rx_buff_pool[i].size *
 			    IOMMU_PAGE_ALIGN(adapter->rx_buff_pool[i].
+<<<<<<< HEAD
 			            buff_size);
 		rxqentries += adapter->rx_buff_pool[i].size;
 	}
 	/* add the size of the receive queue entries */
 	ret += IOMMU_PAGE_ALIGN(rxqentries * sizeof(struct ibmveth_rx_q_entry));
+=======
+					     buff_size, tbl);
+		rxqentries += adapter->rx_buff_pool[i].size;
+	}
+	/* add the size of the receive queue entries */
+	ret += IOMMU_PAGE_ALIGN(
+		rxqentries * sizeof(struct ibmveth_rx_q_entry), tbl);
+>>>>>>> v3.18
 
 	return ret;
 }
@@ -1379,9 +1455,12 @@ static int ibmveth_probe(struct vio_dev *dev, const struct vio_device_id *id)
 
 	netif_napi_add(netdev, &adapter->napi, ibmveth_poll, 16);
 
+<<<<<<< HEAD
 	adapter->mac_addr = 0;
 	memcpy(&adapter->mac_addr, mac_addr_p, 6);
 
+=======
+>>>>>>> v3.18
 	netdev->irq = dev->irq;
 	netdev->netdev_ops = &ibmveth_netdev_ops;
 	netdev->ethtool_ops = &netdev_ethtool_ops;
@@ -1390,7 +1469,11 @@ static int ibmveth_probe(struct vio_dev *dev, const struct vio_device_id *id)
 		NETIF_F_IP_CSUM | NETIF_F_IPV6_CSUM;
 	netdev->features |= netdev->hw_features;
 
+<<<<<<< HEAD
 	memcpy(netdev->dev_addr, &adapter->mac_addr, netdev->addr_len);
+=======
+	memcpy(netdev->dev_addr, mac_addr_p, ETH_ALEN);
+>>>>>>> v3.18
 
 	for (i = 0; i < IBMVETH_NUM_BUFF_POOLS; i++) {
 		struct kobject *kobj = &adapter->rx_buff_pool[i].kobj;

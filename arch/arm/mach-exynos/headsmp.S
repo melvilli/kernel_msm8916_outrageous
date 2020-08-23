@@ -1,5 +1,8 @@
 /*
+<<<<<<< HEAD
  *  linux/arch/arm/mach-exynos4/headsmp.S
+=======
+>>>>>>> v3.18
  *
  *  Cloned from linux/arch/arm/mach-realview/headsmp.S
  *
@@ -13,8 +16,11 @@
 #include <linux/linkage.h>
 #include <linux/init.h>
 
+<<<<<<< HEAD
 	__CPUINIT
 
+=======
+>>>>>>> v3.18
 /*
  * exynos4 specific entry point for secondary CPUs.  This provides
  * a "holding pen" into which all secondary cores are held until we're

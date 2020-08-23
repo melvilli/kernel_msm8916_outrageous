@@ -46,7 +46,11 @@
 
 #include <asm/io.h>
 
+<<<<<<< HEAD
 #include "../sticore.h"
+=======
+#include "../fbdev/sticore.h"
+>>>>>>> v3.18
 
 /* switching to graphics mode */
 #define BLANK 0
@@ -372,6 +376,10 @@ static const struct consw sti_con = {
 
 static int __init sticonsole_init(void)
 {
+<<<<<<< HEAD
+=======
+    int err;
+>>>>>>> v3.18
     /* already initialized ? */
     if (sticon_sti)
 	 return 0;
@@ -382,7 +390,14 @@ static int __init sticonsole_init(void)
 
     if (conswitchp == &dummy_con) {
 	printk(KERN_INFO "sticon: Initializing STI text console.\n");
+<<<<<<< HEAD
 	return take_over_console(&sti_con, 0, MAX_NR_CONSOLES - 1, 1);
+=======
+	console_lock();
+	err = do_take_over_console(&sti_con, 0, MAX_NR_CONSOLES - 1, 1);
+	console_unlock();
+	return err;
+>>>>>>> v3.18
     }
     return 0;
 }

@@ -24,6 +24,7 @@
  *
  */
 
+<<<<<<< HEAD
 #include <subdev/devinit.h>
 #include <subdev/vga.h>
 
@@ -38,13 +39,26 @@ static void
 nv20_devinit_meminit(struct nouveau_devinit *devinit)
 {
 	struct nv20_devinit_priv *priv = (void *)devinit;
+=======
+#include "nv04.h"
+#include "fbmem.h"
+
+static void
+nv20_devinit_meminit(struct nouveau_devinit *devinit)
+{
+	struct nv04_devinit_priv *priv = (void *)devinit;
+>>>>>>> v3.18
 	struct nouveau_device *device = nv_device(priv);
 	uint32_t mask = (device->chipset >= 0x25 ? 0x300 : 0x900);
 	uint32_t amount, off;
 	struct io_mapping *fb;
 
 	/* Map the framebuffer aperture */
+<<<<<<< HEAD
 	fb = fbmem_init(nv_device(priv)->pdev);
+=======
+	fb = fbmem_init(nv_device(priv));
+>>>>>>> v3.18
 	if (!fb) {
 		nv_error(priv, "failed to map fb\n");
 		return;
@@ -67,6 +81,7 @@ nv20_devinit_meminit(struct nouveau_devinit *devinit)
 	fbmem_fini(fb);
 }
 
+<<<<<<< HEAD
 static int
 nv20_devinit_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		  struct nouveau_oclass *oclass, void *data, u32 size,
@@ -89,8 +104,21 @@ nv20_devinit_oclass = {
 	.handle = NV_SUBDEV(DEVINIT, 0x20),
 	.ofuncs = &(struct nouveau_ofuncs) {
 		.ctor = nv20_devinit_ctor,
+=======
+struct nouveau_oclass *
+nv20_devinit_oclass = &(struct nouveau_devinit_impl) {
+	.base.handle = NV_SUBDEV(DEVINIT, 0x20),
+	.base.ofuncs = &(struct nouveau_ofuncs) {
+		.ctor = nv04_devinit_ctor,
+>>>>>>> v3.18
 		.dtor = nv04_devinit_dtor,
 		.init = nv04_devinit_init,
 		.fini = nv04_devinit_fini,
 	},
+<<<<<<< HEAD
 };
+=======
+	.meminit = nv20_devinit_meminit,
+	.pll_set = nv04_devinit_pll_set,
+}.base;
+>>>>>>> v3.18

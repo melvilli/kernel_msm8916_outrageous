@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* Copyright (C) 2006-2013 B.A.T.M.A.N. contributors:
+=======
+/* Copyright (C) 2006-2014 B.A.T.M.A.N. contributors:
+>>>>>>> v3.18
  *
  * Simon Wunderlich, Marek Lindner
  *
@@ -12,9 +16,13 @@
  * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
  */
 
 #include "main.h"
@@ -48,12 +56,21 @@ struct batadv_hashtable *batadv_hash_new(uint32_t size)
 	if (!hash)
 		return NULL;
 
+<<<<<<< HEAD
 	hash->table = kmalloc(sizeof(*hash->table) * size, GFP_ATOMIC);
 	if (!hash->table)
 		goto free_hash;
 
 	hash->list_locks = kmalloc(sizeof(*hash->list_locks) * size,
 				   GFP_ATOMIC);
+=======
+	hash->table = kmalloc_array(size, sizeof(*hash->table), GFP_ATOMIC);
+	if (!hash->table)
+		goto free_hash;
+
+	hash->list_locks = kmalloc_array(size, sizeof(*hash->list_locks),
+					 GFP_ATOMIC);
+>>>>>>> v3.18
 	if (!hash->list_locks)
 		goto free_table;
 

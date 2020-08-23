@@ -26,6 +26,7 @@ struct iio_event_data {
 
 #define IIO_GET_EVENT_FD_IOCTL _IOR('i', 0x90, int)
 
+<<<<<<< HEAD
 enum iio_event_type {
 	IIO_EV_TYPE_THRESH,
 	IIO_EV_TYPE_MAG,
@@ -40,6 +41,8 @@ enum iio_event_direction {
 	IIO_EV_DIR_FALLING,
 };
 
+=======
+>>>>>>> v3.18
 /**
  * IIO_EVENT_CODE() - create event identifier
  * @chan_type:	Type of the channel. Should be one of enum iio_chan_type.
@@ -60,10 +63,13 @@ enum iio_event_direction {
 	 ((u16)chan))
 
 
+<<<<<<< HEAD
 #define IIO_EV_DIR_MAX 4
 #define IIO_EV_BIT(type, direction)			\
 	(1 << (type*IIO_EV_DIR_MAX + direction))
 
+=======
+>>>>>>> v3.18
 /**
  * IIO_MOD_EVENT_CODE() - create event identifier for modified channels
  * @chan_type:	Type of the channel. Should be one of enum iio_chan_type.

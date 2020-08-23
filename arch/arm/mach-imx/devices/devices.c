@@ -24,12 +24,18 @@
 
 struct device mxc_aips_bus = {
 	.init_name	= "mxc_aips",
+<<<<<<< HEAD
 	.parent		= &platform_bus,
+=======
+>>>>>>> v3.18
 };
 
 struct device mxc_ahb_bus = {
 	.init_name	= "mxc_ahb",
+<<<<<<< HEAD
 	.parent		= &platform_bus,
+=======
+>>>>>>> v3.18
 };
 
 int __init mxc_device_init(void)

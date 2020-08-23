@@ -22,22 +22,38 @@ static inline struct clocksource_mmio *to_mmio_clksrc(struct clocksource *c)
 
 cycle_t clocksource_mmio_readl_up(struct clocksource *c)
 {
+<<<<<<< HEAD
 	return readl_relaxed(to_mmio_clksrc(c)->reg);
+=======
+	return (cycle_t)readl_relaxed(to_mmio_clksrc(c)->reg);
+>>>>>>> v3.18
 }
 
 cycle_t clocksource_mmio_readl_down(struct clocksource *c)
 {
+<<<<<<< HEAD
 	return ~readl_relaxed(to_mmio_clksrc(c)->reg);
+=======
+	return ~(cycle_t)readl_relaxed(to_mmio_clksrc(c)->reg) & c->mask;
+>>>>>>> v3.18
 }
 
 cycle_t clocksource_mmio_readw_up(struct clocksource *c)
 {
+<<<<<<< HEAD
 	return readw_relaxed(to_mmio_clksrc(c)->reg);
+=======
+	return (cycle_t)readw_relaxed(to_mmio_clksrc(c)->reg);
+>>>>>>> v3.18
 }
 
 cycle_t clocksource_mmio_readw_down(struct clocksource *c)
 {
+<<<<<<< HEAD
 	return ~(unsigned)readw_relaxed(to_mmio_clksrc(c)->reg);
+=======
+	return ~(cycle_t)readw_relaxed(to_mmio_clksrc(c)->reg) & c->mask;
+>>>>>>> v3.18
 }
 
 /**

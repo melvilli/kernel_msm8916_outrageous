@@ -101,7 +101,11 @@ static void gpio_vbus_work(struct work_struct *work)
 {
 	struct gpio_vbus_data *gpio_vbus =
 		container_of(work, struct gpio_vbus_data, work.work);
+<<<<<<< HEAD
 	struct gpio_vbus_mach_info *pdata = gpio_vbus->dev->platform_data;
+=======
+	struct gpio_vbus_mach_info *pdata = dev_get_platdata(gpio_vbus->dev);
+>>>>>>> v3.18
 	int gpio, status, vbus;
 
 	if (!gpio_vbus->phy.otg->gadget)
@@ -155,7 +159,11 @@ static void gpio_vbus_work(struct work_struct *work)
 static irqreturn_t gpio_vbus_irq(int irq, void *data)
 {
 	struct platform_device *pdev = data;
+<<<<<<< HEAD
 	struct gpio_vbus_mach_info *pdata = pdev->dev.platform_data;
+=======
+	struct gpio_vbus_mach_info *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	struct gpio_vbus_data *gpio_vbus = platform_get_drvdata(pdev);
 	struct usb_otg *otg = gpio_vbus->phy.otg;
 
@@ -182,7 +190,11 @@ static int gpio_vbus_set_peripheral(struct usb_otg *otg,
 
 	gpio_vbus = container_of(otg->phy, struct gpio_vbus_data, phy);
 	pdev = to_platform_device(gpio_vbus->dev);
+<<<<<<< HEAD
 	pdata = gpio_vbus->dev->platform_data;
+=======
+	pdata = dev_get_platdata(gpio_vbus->dev);
+>>>>>>> v3.18
 	gpio = pdata->gpio_pullup;
 
 	if (!gadget) {
@@ -241,9 +253,15 @@ static int gpio_vbus_set_suspend(struct usb_phy *phy, int suspend)
 
 /* platform driver interface */
 
+<<<<<<< HEAD
 static int __init gpio_vbus_probe(struct platform_device *pdev)
 {
 	struct gpio_vbus_mach_info *pdata = pdev->dev.platform_data;
+=======
+static int gpio_vbus_probe(struct platform_device *pdev)
+{
+	struct gpio_vbus_mach_info *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	struct gpio_vbus_data *gpio_vbus;
 	struct resource *res;
 	int err, gpio, irq;
@@ -253,6 +271,7 @@ static int __init gpio_vbus_probe(struct platform_device *pdev)
 		return -EINVAL;
 	gpio = pdata->gpio_vbus;
 
+<<<<<<< HEAD
 	gpio_vbus = kzalloc(sizeof(struct gpio_vbus_data), GFP_KERNEL);
 	if (!gpio_vbus)
 		return -ENOMEM;
@@ -262,6 +281,17 @@ static int __init gpio_vbus_probe(struct platform_device *pdev)
 		kfree(gpio_vbus);
 		return -ENOMEM;
 	}
+=======
+	gpio_vbus = devm_kzalloc(&pdev->dev, sizeof(struct gpio_vbus_data),
+				 GFP_KERNEL);
+	if (!gpio_vbus)
+		return -ENOMEM;
+
+	gpio_vbus->phy.otg = devm_kzalloc(&pdev->dev, sizeof(struct usb_otg),
+					  GFP_KERNEL);
+	if (!gpio_vbus->phy.otg)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	platform_set_drvdata(pdev, gpio_vbus);
 	gpio_vbus->dev = &pdev->dev;
@@ -274,11 +304,19 @@ static int __init gpio_vbus_probe(struct platform_device *pdev)
 	gpio_vbus->phy.otg->phy = &gpio_vbus->phy;
 	gpio_vbus->phy.otg->set_peripheral = gpio_vbus_set_peripheral;
 
+<<<<<<< HEAD
 	err = gpio_request(gpio, "vbus_detect");
 	if (err) {
 		dev_err(&pdev->dev, "can't request vbus gpio %d, err: %d\n",
 			gpio, err);
 		goto err_gpio;
+=======
+	err = devm_gpio_request(&pdev->dev, gpio, "vbus_detect");
+	if (err) {
+		dev_err(&pdev->dev, "can't request vbus gpio %d, err: %d\n",
+			gpio, err);
+		return err;
+>>>>>>> v3.18
 	}
 	gpio_direction_input(gpio);
 
@@ -296,27 +334,48 @@ static int __init gpio_vbus_probe(struct platform_device *pdev)
 	/* if data line pullup is in use, initialize it to "not pulling up" */
 	gpio = pdata->gpio_pullup;
 	if (gpio_is_valid(gpio)) {
+<<<<<<< HEAD
 		err = gpio_request(gpio, "udc_pullup");
+=======
+		err = devm_gpio_request(&pdev->dev, gpio, "udc_pullup");
+>>>>>>> v3.18
 		if (err) {
 			dev_err(&pdev->dev,
 				"can't request pullup gpio %d, err: %d\n",
 				gpio, err);
+<<<<<<< HEAD
 			gpio_free(pdata->gpio_vbus);
 			goto err_gpio;
+=======
+			return err;
+>>>>>>> v3.18
 		}
 		gpio_direction_output(gpio, pdata->gpio_pullup_inverted);
 	}
 
+<<<<<<< HEAD
 	err = request_irq(irq, gpio_vbus_irq, irqflags, "vbus_detect", pdev);
 	if (err) {
 		dev_err(&pdev->dev, "can't request irq %i, err: %d\n",
 			irq, err);
 		goto err_irq;
+=======
+	err = devm_request_irq(&pdev->dev, irq, gpio_vbus_irq, irqflags,
+			       "vbus_detect", pdev);
+	if (err) {
+		dev_err(&pdev->dev, "can't request irq %i, err: %d\n",
+			irq, err);
+		return err;
+>>>>>>> v3.18
 	}
 
 	INIT_DELAYED_WORK(&gpio_vbus->work, gpio_vbus_work);
 
+<<<<<<< HEAD
 	gpio_vbus->vbus_draw = regulator_get(&pdev->dev, "vbus_draw");
+=======
+	gpio_vbus->vbus_draw = devm_regulator_get(&pdev->dev, "vbus_draw");
+>>>>>>> v3.18
 	if (IS_ERR(gpio_vbus->vbus_draw)) {
 		dev_dbg(&pdev->dev, "can't get vbus_draw regulator, err: %ld\n",
 			PTR_ERR(gpio_vbus->vbus_draw));
@@ -328,12 +387,17 @@ static int __init gpio_vbus_probe(struct platform_device *pdev)
 	if (err) {
 		dev_err(&pdev->dev, "can't register transceiver, err: %d\n",
 			err);
+<<<<<<< HEAD
 		goto err_otg;
+=======
+		return err;
+>>>>>>> v3.18
 	}
 
 	device_init_wakeup(&pdev->dev, pdata->wakeup);
 
 	return 0;
+<<<<<<< HEAD
 err_otg:
 	regulator_put(gpio_vbus->vbus_draw);
 	free_irq(irq, pdev);
@@ -366,6 +430,19 @@ static int __exit gpio_vbus_remove(struct platform_device *pdev)
 	kfree(gpio_vbus->phy.otg);
 	kfree(gpio_vbus);
 
+=======
+}
+
+static int gpio_vbus_remove(struct platform_device *pdev)
+{
+	struct gpio_vbus_data *gpio_vbus = platform_get_drvdata(pdev);
+
+	device_init_wakeup(&pdev->dev, 0);
+	cancel_delayed_work_sync(&gpio_vbus->work);
+
+	usb_remove_phy(&gpio_vbus->phy);
+
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -396,8 +473,11 @@ static const struct dev_pm_ops gpio_vbus_dev_pm_ops = {
 };
 #endif
 
+<<<<<<< HEAD
 /* NOTE:  the gpio-vbus device may *NOT* be hotplugged */
 
+=======
+>>>>>>> v3.18
 MODULE_ALIAS("platform:gpio-vbus");
 
 static struct platform_driver gpio_vbus_driver = {
@@ -408,10 +488,18 @@ static struct platform_driver gpio_vbus_driver = {
 		.pm = &gpio_vbus_dev_pm_ops,
 #endif
 	},
+<<<<<<< HEAD
 	.remove  = __exit_p(gpio_vbus_remove),
 };
 
 module_platform_driver_probe(gpio_vbus_driver, gpio_vbus_probe);
+=======
+	.probe		= gpio_vbus_probe,
+	.remove		= gpio_vbus_remove,
+};
+
+module_platform_driver(gpio_vbus_driver);
+>>>>>>> v3.18
 
 MODULE_DESCRIPTION("simple GPIO controlled OTG transceiver driver");
 MODULE_AUTHOR("Philipp Zabel");

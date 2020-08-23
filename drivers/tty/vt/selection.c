@@ -24,6 +24,10 @@
 #include <linux/selection.h>
 #include <linux/tiocl.h>
 #include <linux/console.h>
+<<<<<<< HEAD
+=======
+#include <linux/tty_flip.h>
+>>>>>>> v3.18
 
 /* Don't take this from <ctype.h>: 011-015 on the screen aren't spaces */
 #define isspace(c)	((c) == ' ')
@@ -346,8 +350,13 @@ int paste_selection(struct tty_struct *tty)
 	console_unlock();
 
 	ld = tty_ldisc_ref_wait(tty);
+<<<<<<< HEAD
 
 	/* FIXME: this is completely unsafe */
+=======
+	tty_buffer_lock_exclusive(&vc->port);
+
+>>>>>>> v3.18
 	add_wait_queue(&vc->paste_wait, &wait);
 	while (sel_buffer && sel_buffer_lth > pasted) {
 		set_current_state(TASK_INTERRUPTIBLE);
@@ -356,13 +365,22 @@ int paste_selection(struct tty_struct *tty)
 			continue;
 		}
 		count = sel_buffer_lth - pasted;
+<<<<<<< HEAD
 		count = min(count, tty->receive_room);
 		ld->ops->receive_buf(tty, sel_buffer + pasted, NULL, count);
+=======
+		count = tty_ldisc_receive_buf(ld, sel_buffer + pasted, NULL,
+					      count);
+>>>>>>> v3.18
 		pasted += count;
 	}
 	remove_wait_queue(&vc->paste_wait, &wait);
 	__set_current_state(TASK_RUNNING);
 
+<<<<<<< HEAD
+=======
+	tty_buffer_unlock_exclusive(&vc->port);
+>>>>>>> v3.18
 	tty_ldisc_deref(ld);
 	return 0;
 }

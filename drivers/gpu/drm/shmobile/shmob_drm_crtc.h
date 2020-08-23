@@ -1,7 +1,11 @@
 /*
  * shmob_drm_crtc.h  --  SH Mobile DRM CRTCs
  *
+<<<<<<< HEAD
  * Copyright (C) 2012 Renesas Corporation
+=======
+ * Copyright (C) 2012 Renesas Electronics Corporation
+>>>>>>> v3.18
  *
  * Laurent Pinchart (laurent.pinchart@ideasonboard.com)
  *

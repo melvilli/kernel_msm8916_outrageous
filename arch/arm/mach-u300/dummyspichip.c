@@ -263,15 +263,28 @@ static int pl022_dummy_remove(struct spi_device *spi)
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+static const struct of_device_id pl022_dummy_dt_match[] = {
+	{ .compatible = "arm,pl022-dummy" },
+	{},
+};
+
+>>>>>>> v3.18
 static struct spi_driver pl022_dummy_driver = {
 	.driver = {
 		.name	= "spi-dummy",
 		.owner	= THIS_MODULE,
+<<<<<<< HEAD
+=======
+		.of_match_table = pl022_dummy_dt_match,
+>>>>>>> v3.18
 	},
 	.probe	= pl022_dummy_probe,
 	.remove	= pl022_dummy_remove,
 };
 
+<<<<<<< HEAD
 static int __init pl022_init_dummy(void)
 {
 	return spi_register_driver(&pl022_dummy_driver);
@@ -285,6 +298,9 @@ static void __exit pl022_exit_dummy(void)
 module_init(pl022_init_dummy);
 module_exit(pl022_exit_dummy);
 
+=======
+module_spi_driver(pl022_dummy_driver);
+>>>>>>> v3.18
 MODULE_AUTHOR("Linus Walleij <linus.walleij@stericsson.com>");
 MODULE_DESCRIPTION("PL022 SSP/SPI DUMMY Linux driver");
 MODULE_LICENSE("GPL");

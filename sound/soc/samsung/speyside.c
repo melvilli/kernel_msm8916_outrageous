@@ -228,10 +228,19 @@ static struct snd_soc_dai_link speyside_dai[] = {
 	},
 };
 
+<<<<<<< HEAD
 static int speyside_wm9081_init(struct snd_soc_dapm_context *dapm)
 {
 	/* At any time the WM9081 is active it will have this clock */
 	return snd_soc_codec_set_sysclk(dapm->codec, WM9081_SYSCLK_MCLK, 0,
+=======
+static int speyside_wm9081_init(struct snd_soc_component *component)
+{
+	struct snd_soc_codec *codec = snd_soc_component_to_codec(component);
+
+	/* At any time the WM9081 is active it will have this clock */
+	return snd_soc_codec_set_sysclk(codec, WM9081_SYSCLK_MCLK, 0,
+>>>>>>> v3.18
 					MCLK_AUDIO_RATE, 0);
 }
 
@@ -327,6 +336,7 @@ static int speyside_probe(struct platform_device *pdev)
 
 	card->dev = &pdev->dev;
 
+<<<<<<< HEAD
 	ret = snd_soc_register_card(card);
 	if (ret) {
 		dev_err(&pdev->dev, "snd_soc_register_card() failed: %d\n",
@@ -344,6 +354,14 @@ static int speyside_remove(struct platform_device *pdev)
 	snd_soc_unregister_card(card);
 
 	return 0;
+=======
+	ret = devm_snd_soc_register_card(&pdev->dev, card);
+	if (ret)
+		dev_err(&pdev->dev, "snd_soc_register_card() failed: %d\n",
+			ret);
+
+	return ret;
+>>>>>>> v3.18
 }
 
 static struct platform_driver speyside_driver = {
@@ -353,7 +371,10 @@ static struct platform_driver speyside_driver = {
 		.pm = &snd_soc_pm_ops,
 	},
 	.probe = speyside_probe,
+<<<<<<< HEAD
 	.remove = speyside_remove,
+=======
+>>>>>>> v3.18
 };
 
 module_platform_driver(speyside_driver);

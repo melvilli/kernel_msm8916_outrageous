@@ -33,11 +33,14 @@
 #include <linux/mtd/nand.h>
 #include <linux/mtd/partitions.h>
 
+<<<<<<< HEAD
 #ifdef CONFIG_I2C_PNX0105
 /* Until i2c driver available in kernel.*/
 #include <linux/i2c-pnx0105.h>
 #endif
 
+=======
+>>>>>>> v3.18
 #include <irq.h>
 #include <irq-mapping.h>
 #include <pnx833x.h>
@@ -134,6 +137,7 @@ static struct platform_device pnx833x_usb_ehci_device = {
 	.resource	= pnx833x_usb_ehci_resources,
 };
 
+<<<<<<< HEAD
 #ifdef CONFIG_I2C_PNX0105
 static struct resource pnx833x_i2c0_resources[] = {
 	{
@@ -198,6 +202,8 @@ static struct platform_device pnx833x_i2c1_device = {
 };
 #endif
 
+=======
+>>>>>>> v3.18
 static u64 ethernet_dmamask = DMA_BIT_MASK(32);
 
 static struct resource pnx833x_ethernet_resources[] = {
@@ -206,11 +212,19 @@ static struct resource pnx833x_ethernet_resources[] = {
 		.end   = PNX8335_IP3902_PORTS_END,
 		.flags = IORESOURCE_MEM,
 	},
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_SOC_PNX8335
+>>>>>>> v3.18
 	[1] = {
 		.start = PNX8335_PIC_ETHERNET_INT,
 		.end   = PNX8335_PIC_ETHERNET_INT,
 		.flags = IORESOURCE_IRQ,
 	},
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 };
 
 static struct platform_device pnx833x_ethernet_device = {
@@ -292,10 +306,13 @@ static struct platform_device pnx833x_flash_nand = {
 static struct platform_device *pnx833x_platform_devices[] __initdata = {
 	&pnx833x_uart_device,
 	&pnx833x_usb_ehci_device,
+<<<<<<< HEAD
 #ifdef CONFIG_I2C_PNX0105
 	&pnx833x_i2c0_device,
 	&pnx833x_i2c1_device,
 #endif
+=======
+>>>>>>> v3.18
 	&pnx833x_ethernet_device,
 	&pnx833x_sata_device,
 	&pnx833x_flash_nand,

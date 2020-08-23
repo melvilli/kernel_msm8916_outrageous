@@ -377,31 +377,51 @@ static int mxc_rtc_probe(struct platform_device *pdev)
 	unsigned long rate;
 	int ret;
 
+<<<<<<< HEAD
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!res)
 		return -ENODEV;
 
+=======
+>>>>>>> v3.18
 	pdata = devm_kzalloc(&pdev->dev, sizeof(*pdata), GFP_KERNEL);
 	if (!pdata)
 		return -ENOMEM;
 
 	pdata->devtype = pdev->id_entry->driver_data;
 
+<<<<<<< HEAD
 	if (!devm_request_mem_region(&pdev->dev, res->start,
 				     resource_size(res), pdev->name))
 		return -EBUSY;
 
 	pdata->ioaddr = devm_ioremap(&pdev->dev, res->start,
 				     resource_size(res));
+=======
+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+	pdata->ioaddr = devm_ioremap_resource(&pdev->dev, res);
+	if (IS_ERR(pdata->ioaddr))
+		return PTR_ERR(pdata->ioaddr);
+>>>>>>> v3.18
 
 	pdata->clk = devm_clk_get(&pdev->dev, NULL);
 	if (IS_ERR(pdata->clk)) {
 		dev_err(&pdev->dev, "unable to get clock!\n");
+<<<<<<< HEAD
 		ret = PTR_ERR(pdata->clk);
 		goto exit_free_pdata;
 	}
 
 	clk_prepare_enable(pdata->clk);
+=======
+		return PTR_ERR(pdata->clk);
+	}
+
+	ret = clk_prepare_enable(pdata->clk);
+	if (ret)
+		return ret;
+
+>>>>>>> v3.18
 	rate = clk_get_rate(pdata->clk);
 
 	if (rate == 32768)
@@ -436,20 +456,29 @@ static int mxc_rtc_probe(struct platform_device *pdev)
 		pdata->irq = -1;
 	}
 
+<<<<<<< HEAD
 	if (pdata->irq >=0)
+=======
+	if (pdata->irq >= 0)
+>>>>>>> v3.18
 		device_init_wakeup(&pdev->dev, 1);
 
 	rtc = devm_rtc_device_register(&pdev->dev, pdev->name, &mxc_rtc_ops,
 				  THIS_MODULE);
 	if (IS_ERR(rtc)) {
 		ret = PTR_ERR(rtc);
+<<<<<<< HEAD
 		goto exit_clr_drvdata;
+=======
+		goto exit_put_clk;
+>>>>>>> v3.18
 	}
 
 	pdata->rtc = rtc;
 
 	return 0;
 
+<<<<<<< HEAD
 exit_clr_drvdata:
 	platform_set_drvdata(pdev, NULL);
 exit_put_clk:
@@ -457,6 +486,11 @@ exit_put_clk:
 
 exit_free_pdata:
 
+=======
+exit_put_clk:
+	clk_disable_unprepare(pdata->clk);
+
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -465,7 +499,10 @@ static int mxc_rtc_remove(struct platform_device *pdev)
 	struct rtc_plat_data *pdata = platform_get_drvdata(pdev);
 
 	clk_disable_unprepare(pdata->clk);
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 
 	return 0;
 }

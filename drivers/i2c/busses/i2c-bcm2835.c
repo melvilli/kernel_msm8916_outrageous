@@ -151,7 +151,11 @@ static int bcm2835_i2c_xfer_msg(struct bcm2835_i2c_dev *i2c_dev,
 
 	i2c_dev->msg_buf = msg->buf;
 	i2c_dev->msg_buf_remaining = msg->len;
+<<<<<<< HEAD
 	INIT_COMPLETION(i2c_dev->completion);
+=======
+	reinit_completion(&i2c_dev->completion);
+>>>>>>> v3.18
 
 	bcm2835_i2c_writel(i2c_dev, BCM2835_I2C_C, BCM2835_I2C_C_CLEAR);
 
@@ -219,21 +223,31 @@ static const struct i2c_algorithm bcm2835_i2c_algo = {
 static int bcm2835_i2c_probe(struct platform_device *pdev)
 {
 	struct bcm2835_i2c_dev *i2c_dev;
+<<<<<<< HEAD
 	struct resource *mem, *requested, *irq;
+=======
+	struct resource *mem, *irq;
+>>>>>>> v3.18
 	u32 bus_clk_rate, divider;
 	int ret;
 	struct i2c_adapter *adap;
 
 	i2c_dev = devm_kzalloc(&pdev->dev, sizeof(*i2c_dev), GFP_KERNEL);
+<<<<<<< HEAD
 	if (!i2c_dev) {
 		dev_err(&pdev->dev, "Cannot allocate i2c_dev\n");
 		return -ENOMEM;
 	}
+=======
+	if (!i2c_dev)
+		return -ENOMEM;
+>>>>>>> v3.18
 	platform_set_drvdata(pdev, i2c_dev);
 	i2c_dev->dev = &pdev->dev;
 	init_completion(&i2c_dev->completion);
 
 	mem = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
 	if (!mem) {
 		dev_err(&pdev->dev, "No mem resource\n");
 		return -ENODEV;
@@ -253,6 +267,11 @@ static int bcm2835_i2c_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "Could not map registers\n");
 		return -ENOMEM;
 	}
+=======
+	i2c_dev->regs = devm_ioremap_resource(&pdev->dev, mem);
+	if (IS_ERR(i2c_dev->regs))
+		return PTR_ERR(i2c_dev->regs);
+>>>>>>> v3.18
 
 	i2c_dev->clk = devm_clk_get(&pdev->dev, NULL);
 	if (IS_ERR(i2c_dev->clk)) {
@@ -295,10 +314,18 @@ static int bcm2835_i2c_probe(struct platform_device *pdev)
 	adap = &i2c_dev->adapter;
 	i2c_set_adapdata(adap, i2c_dev);
 	adap->owner = THIS_MODULE;
+<<<<<<< HEAD
 	adap->class = I2C_CLASS_HWMON;
 	strlcpy(adap->name, "bcm2835 I2C adapter", sizeof(adap->name));
 	adap->algo = &bcm2835_i2c_algo;
 	adap->dev.parent = &pdev->dev;
+=======
+	adap->class = I2C_CLASS_DEPRECATED;
+	strlcpy(adap->name, "bcm2835 I2C adapter", sizeof(adap->name));
+	adap->algo = &bcm2835_i2c_algo;
+	adap->dev.parent = &pdev->dev;
+	adap->dev.of_node = pdev->dev.of_node;
+>>>>>>> v3.18
 
 	bcm2835_i2c_writel(i2c_dev, BCM2835_I2C_C, 0);
 

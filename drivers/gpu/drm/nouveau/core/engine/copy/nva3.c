@@ -22,16 +22,28 @@
  * Authors: Ben Skeggs
  */
 
+<<<<<<< HEAD
 #include <core/client.h>
 #include <core/falcon.h>
 #include <core/class.h>
 #include <core/enum.h>
+=======
+#include <engine/falcon.h>
+#include <engine/fifo.h>
+#include <engine/copy.h>
+>>>>>>> v3.18
 
 #include <subdev/fb.h>
 #include <subdev/vm.h>
 
+<<<<<<< HEAD
 #include <engine/fifo.h>
 #include <engine/copy.h>
+=======
+#include <core/client.h>
+#include <core/enum.h>
+
+>>>>>>> v3.18
 
 #include "fuc/nva3.fuc.h"
 
@@ -117,6 +129,7 @@ nva3_copy_intr(struct nouveau_subdev *subdev)
 }
 
 static int
+<<<<<<< HEAD
 nva3_copy_tlb_flush(struct nouveau_engine *engine)
 {
 	nv50_vm_flush_engine(&engine->base, 0x0d);
@@ -124,6 +137,8 @@ nva3_copy_tlb_flush(struct nouveau_engine *engine)
 }
 
 static int
+=======
+>>>>>>> v3.18
 nva3_copy_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	       struct nouveau_oclass *oclass, void *data, u32 size,
 	       struct nouveau_object **pobject)
@@ -142,7 +157,10 @@ nva3_copy_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	nv_subdev(priv)->intr = nva3_copy_intr;
 	nv_engine(priv)->cclass = &nva3_copy_cclass;
 	nv_engine(priv)->sclass = nva3_copy_sclass;
+<<<<<<< HEAD
 	nv_engine(priv)->tlb_flush = nva3_copy_tlb_flush;
+=======
+>>>>>>> v3.18
 	nv_falcon(priv)->code.data = nva3_pcopy_code;
 	nv_falcon(priv)->code.size = sizeof(nva3_pcopy_code);
 	nv_falcon(priv)->data.data = nva3_pcopy_data;

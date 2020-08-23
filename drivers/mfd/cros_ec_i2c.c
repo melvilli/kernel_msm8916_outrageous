@@ -29,12 +29,21 @@ static inline struct cros_ec_device *to_ec_dev(struct device *dev)
 	return i2c_get_clientdata(client);
 }
 
+<<<<<<< HEAD
 static int cros_ec_command_xfer(struct cros_ec_device *ec_dev,
 				struct cros_ec_msg *msg)
+=======
+static int cros_ec_cmd_xfer_i2c(struct cros_ec_device *ec_dev,
+				struct cros_ec_command *msg)
+>>>>>>> v3.18
 {
 	struct i2c_client *client = ec_dev->priv;
 	int ret = -ENOMEM;
 	int i;
+<<<<<<< HEAD
+=======
+	int len;
+>>>>>>> v3.18
 	int packet_len;
 	u8 *out_buf = NULL;
 	u8 *in_buf = NULL;
@@ -50,7 +59,11 @@ static int cros_ec_command_xfer(struct cros_ec_device *ec_dev,
 	 * allocate larger packet (one byte for checksum, one byte for
 	 * length, and one for result code)
 	 */
+<<<<<<< HEAD
 	packet_len = msg->in_len + 3;
+=======
+	packet_len = msg->insize + 3;
+>>>>>>> v3.18
 	in_buf = kzalloc(packet_len, GFP_KERNEL);
 	if (!in_buf)
 		goto done;
@@ -61,7 +74,11 @@ static int cros_ec_command_xfer(struct cros_ec_device *ec_dev,
 	 * allocate larger packet (one byte for checksum, one for
 	 * command code, one for length, and one for command version)
 	 */
+<<<<<<< HEAD
 	packet_len = msg->out_len + 4;
+=======
+	packet_len = msg->outsize + 4;
+>>>>>>> v3.18
 	out_buf = kzalloc(packet_len, GFP_KERNEL);
 	if (!out_buf)
 		goto done;
@@ -69,6 +86,7 @@ static int cros_ec_command_xfer(struct cros_ec_device *ec_dev,
 	i2c_msg[0].buf = (char *)out_buf;
 
 	out_buf[0] = EC_CMD_VERSION0 + msg->version;
+<<<<<<< HEAD
 	out_buf[1] = msg->cmd;
 	out_buf[2] = msg->out_len;
 
@@ -79,6 +97,18 @@ static int cros_ec_command_xfer(struct cros_ec_device *ec_dev,
 		sum += out_buf[3 + i];
 	}
 	out_buf[3 + msg->out_len] = sum;
+=======
+	out_buf[1] = msg->command;
+	out_buf[2] = msg->outsize;
+
+	/* copy message payload and compute checksum */
+	sum = out_buf[0] + out_buf[1] + out_buf[2];
+	for (i = 0; i < msg->outsize; i++) {
+		out_buf[3 + i] = msg->outdata[i];
+		sum += out_buf[3 + i];
+	}
+	out_buf[3 + msg->outsize] = sum;
+>>>>>>> v3.18
 
 	/* send command to EC and read answer */
 	ret = i2c_transfer(client->adapter, i2c_msg, 2);
@@ -92,35 +122,65 @@ static int cros_ec_command_xfer(struct cros_ec_device *ec_dev,
 	}
 
 	/* check response error code */
+<<<<<<< HEAD
 	if (i2c_msg[1].buf[0]) {
 		dev_warn(ec_dev->dev, "command 0x%02x returned an error %d\n",
 			 msg->cmd, i2c_msg[1].buf[0]);
 		ret = -EINVAL;
+=======
+	msg->result = i2c_msg[1].buf[0];
+	ret = cros_ec_check_result(ec_dev, msg);
+	if (ret)
+		goto done;
+
+	len = in_buf[1];
+	if (len > msg->insize) {
+		dev_err(ec_dev->dev, "packet too long (%d bytes, expected %d)",
+			len, msg->insize);
+		ret = -ENOSPC;
+>>>>>>> v3.18
 		goto done;
 	}
 
 	/* copy response packet payload and compute checksum */
 	sum = in_buf[0] + in_buf[1];
+<<<<<<< HEAD
 	for (i = 0; i < msg->in_len; i++) {
 		msg->in_buf[i] = in_buf[2 + i];
+=======
+	for (i = 0; i < len; i++) {
+		msg->indata[i] = in_buf[2 + i];
+>>>>>>> v3.18
 		sum += in_buf[2 + i];
 	}
 	dev_dbg(ec_dev->dev, "packet: %*ph, sum = %02x\n",
 		i2c_msg[1].len, in_buf, sum);
+<<<<<<< HEAD
 	if (sum != in_buf[2 + msg->in_len]) {
+=======
+	if (sum != in_buf[2 + len]) {
+>>>>>>> v3.18
 		dev_err(ec_dev->dev, "bad packet checksum\n");
 		ret = -EBADMSG;
 		goto done;
 	}
 
+<<<<<<< HEAD
 	ret = 0;
+=======
+	ret = len;
+>>>>>>> v3.18
  done:
 	kfree(in_buf);
 	kfree(out_buf);
 	return ret;
 }
 
+<<<<<<< HEAD
 static int cros_ec_probe_i2c(struct i2c_client *client,
+=======
+static int cros_ec_i2c_probe(struct i2c_client *client,
+>>>>>>> v3.18
 			     const struct i2c_device_id *dev_id)
 {
 	struct device *dev = &client->dev;
@@ -132,11 +192,18 @@ static int cros_ec_probe_i2c(struct i2c_client *client,
 		return -ENOMEM;
 
 	i2c_set_clientdata(client, ec_dev);
+<<<<<<< HEAD
 	ec_dev->name = "I2C";
 	ec_dev->dev = dev;
 	ec_dev->priv = client;
 	ec_dev->irq = client->irq;
 	ec_dev->command_xfer = cros_ec_command_xfer;
+=======
+	ec_dev->dev = dev;
+	ec_dev->priv = client;
+	ec_dev->irq = client->irq;
+	ec_dev->cmd_xfer = cros_ec_cmd_xfer_i2c;
+>>>>>>> v3.18
 	ec_dev->ec_name = client->name;
 	ec_dev->phys_name = client->adapter->name;
 	ec_dev->parent = &client->dev;
@@ -150,7 +217,11 @@ static int cros_ec_probe_i2c(struct i2c_client *client,
 	return 0;
 }
 
+<<<<<<< HEAD
 static int cros_ec_remove_i2c(struct i2c_client *client)
+=======
+static int cros_ec_i2c_remove(struct i2c_client *client)
+>>>>>>> v3.18
 {
 	struct cros_ec_device *ec_dev = i2c_get_clientdata(client);
 
@@ -190,8 +261,13 @@ static struct i2c_driver cros_ec_driver = {
 		.owner	= THIS_MODULE,
 		.pm	= &cros_ec_i2c_pm_ops,
 	},
+<<<<<<< HEAD
 	.probe		= cros_ec_probe_i2c,
 	.remove		= cros_ec_remove_i2c,
+=======
+	.probe		= cros_ec_i2c_probe,
+	.remove		= cros_ec_i2c_remove,
+>>>>>>> v3.18
 	.id_table	= cros_ec_i2c_id,
 };
 

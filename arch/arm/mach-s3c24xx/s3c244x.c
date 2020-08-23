@@ -17,6 +17,10 @@
 #include <linux/timer.h>
 #include <linux/init.h>
 #include <linux/serial_core.h>
+<<<<<<< HEAD
+=======
+#include <linux/serial_s3c.h>
+>>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <linux/reboot.h>
 #include <linux/device.h>
@@ -35,6 +39,7 @@
 #include <plat/cpu-freq.h>
 
 #include <mach/regs-clock.h>
+<<<<<<< HEAD
 #include <plat/regs-serial.h>
 #include <mach/regs-gpio.h>
 
@@ -46,6 +51,16 @@
 #include <plat/nand-core.h>
 #include <plat/watchdog-reset.h>
 
+=======
+#include <mach/regs-gpio.h>
+
+#include <plat/devs.h>
+#include <plat/cpu.h>
+#include <plat/pm.h>
+#include <plat/nand-core.h>
+
+#include "common.h"
+>>>>>>> v3.18
 #include "regs-dsc.h"
 
 static struct map_desc s3c244x_iodesc[] __initdata = {
@@ -74,6 +89,7 @@ void __init s3c244x_map_io(void)
 	s3c_nand_setname("s3c2440-nand");
 	s3c_device_ts.name = "s3c2440-ts";
 	s3c_device_usbgadget.name = "s3c2440-usbgadget";
+<<<<<<< HEAD
 }
 
 void __init_or_cpufreq s3c244x_setup_clocks(void)
@@ -134,6 +150,9 @@ void __init s3c244x_init_clocks(int xtal)
 	s3c24xx_register_baseclocks(xtal);
 	s3c244x_setup_clocks();
 	s3c2410_baseclk_add();
+=======
+	s3c2410_device_dclk.name = "s3c2440-dclk";
+>>>>>>> v3.18
 }
 
 /* Since the S3C2442 and S3C2440 share items, put both subsystems here */
@@ -197,6 +216,7 @@ struct syscore_ops s3c244x_pm_syscore_ops = {
 	.suspend	= s3c244x_suspend,
 	.resume		= s3c244x_resume,
 };
+<<<<<<< HEAD
 
 void s3c244x_restart(enum reboot_mode mode, const char *cmd)
 {
@@ -208,3 +228,5 @@ void s3c244x_restart(enum reboot_mode mode, const char *cmd)
 	/* we'll take a jump through zero as a poor second */
 	soft_restart(0);
 }
+=======
+>>>>>>> v3.18

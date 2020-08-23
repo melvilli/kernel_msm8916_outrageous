@@ -24,7 +24,11 @@
 #include <linux/threads.h>
 #include <asm/kmap_types.h>
 #else
+<<<<<<< HEAD
 #include <asm/vsyscall.h>
+=======
+#include <uapi/asm/vsyscall.h>
+>>>>>>> v3.18
 #endif
 
 /*
@@ -40,6 +44,7 @@
  */
 extern unsigned long __FIXADDR_TOP;
 #define FIXADDR_TOP	((unsigned long)__FIXADDR_TOP)
+<<<<<<< HEAD
 
 #define FIXADDR_USER_START     __fix_to_virt(FIX_VDSO)
 #define FIXADDR_USER_END       __fix_to_virt(FIX_VDSO - 1)
@@ -49,6 +54,11 @@ extern unsigned long __FIXADDR_TOP;
 /* Only covers 32bit vsyscalls currently. Need another set for 64bit. */
 #define FIXADDR_USER_START	((unsigned long)VSYSCALL32_VSYSCALL)
 #define FIXADDR_USER_END	(FIXADDR_USER_START + PAGE_SIZE)
+=======
+#else
+#define FIXADDR_TOP	(round_up(VSYSCALL_ADDR + PAGE_SIZE, 1<<PMD_SHIFT) - \
+			 PAGE_SIZE)
+>>>>>>> v3.18
 #endif
 
 
@@ -74,6 +84,7 @@ extern unsigned long __FIXADDR_TOP;
 enum fixed_addresses {
 #ifdef CONFIG_X86_32
 	FIX_HOLE,
+<<<<<<< HEAD
 	FIX_VDSO,
 #else
 	VSYSCALL_LAST_PAGE,
@@ -82,10 +93,18 @@ enum fixed_addresses {
 	VVAR_PAGE,
 	VSYSCALL_HPET,
 #endif
+=======
+#else
+	VSYSCALL_PAGE = (FIXADDR_TOP - VSYSCALL_ADDR) >> PAGE_SHIFT,
+>>>>>>> v3.18
 #ifdef CONFIG_PARAVIRT_CLOCK
 	PVCLOCK_FIXMAP_BEGIN,
 	PVCLOCK_FIXMAP_END = PVCLOCK_FIXMAP_BEGIN+PVCLOCK_VSYSCALL_NR_PAGES-1,
 #endif
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 	FIX_DBGP_BASE,
 	FIX_EARLYCON_MEM_BASE,
 #ifdef CONFIG_PROVIDE_OHCI1394_DMA_INIT
@@ -98,12 +117,15 @@ enum fixed_addresses {
 	FIX_IO_APIC_BASE_0,
 	FIX_IO_APIC_BASE_END = FIX_IO_APIC_BASE_0 + MAX_IO_APICS - 1,
 #endif
+<<<<<<< HEAD
 #ifdef CONFIG_X86_VISWS_APIC
 	FIX_CO_CPU,	/* Cobalt timer */
 	FIX_CO_APIC,	/* Cobalt APIC Redirection Table */
 	FIX_LI_PCIA,	/* Lithium PCI Bridge A */
 	FIX_LI_PCIB,	/* Lithium PCI Bridge B */
 #endif
+=======
+>>>>>>> v3.18
 	FIX_RO_IDT,	/* Virtual mapping for read-only IDT */
 #ifdef CONFIG_X86_32
 	FIX_KMAP_BEGIN,	/* reserved pte's for temporary kernel mappings */
@@ -175,6 +197,7 @@ static inline void __set_fixmap(enum fixed_addresses idx,
 }
 #endif
 
+<<<<<<< HEAD
 #define set_fixmap(idx, phys)				\
 	__set_fixmap(idx, phys, PAGE_KERNEL)
 
@@ -233,6 +256,15 @@ __set_fixmap_offset(enum fixed_addresses idx, phys_addr_t phys, pgprot_t flags)
 
 #define set_fixmap_offset_nocache(idx, phys)			\
 	__set_fixmap_offset(idx, phys, PAGE_KERNEL_NOCACHE)
+=======
+#include <asm-generic/fixmap.h>
+
+#define __late_set_fixmap(idx, phys, flags) __set_fixmap(idx, phys, flags)
+#define __late_clear_fixmap(idx) __set_fixmap(idx, 0, __pgprot(0))
+
+void __early_set_fixmap(enum fixed_addresses idx,
+			phys_addr_t phys, pgprot_t flags);
+>>>>>>> v3.18
 
 #endif /* !__ASSEMBLY__ */
 #endif /* _ASM_X86_FIXMAP_H */

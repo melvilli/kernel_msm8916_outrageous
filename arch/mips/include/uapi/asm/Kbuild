@@ -1,7 +1,14 @@
 # UAPI Header export list
 include include/uapi/asm-generic/Kbuild.asm
 
+<<<<<<< HEAD
 header-y += auxvec.h
+=======
+generic-y += auxvec.h
+generic-y += ipcbuf.h
+
+header-y += bitfield.h
+>>>>>>> v3.18
 header-y += bitsperlong.h
 header-y += break.h
 header-y += byteorder.h
@@ -11,7 +18,10 @@ header-y += fcntl.h
 header-y += inst.h
 header-y += ioctl.h
 header-y += ioctls.h
+<<<<<<< HEAD
 header-y += ipcbuf.h
+=======
+>>>>>>> v3.18
 header-y += kvm_para.h
 header-y += mman.h
 header-y += msgbuf.h

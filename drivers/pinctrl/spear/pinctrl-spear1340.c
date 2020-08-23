@@ -2008,7 +2008,11 @@ static struct spear_pinctrl_machdata spear1340_machdata = {
 	.modes_supported = false,
 };
 
+<<<<<<< HEAD
 static struct of_device_id spear1340_pinctrl_of_match[] = {
+=======
+static const struct of_device_id spear1340_pinctrl_of_match[] = {
+>>>>>>> v3.18
 	{
 		.compatible = "st,spear1340-pinmux",
 	},

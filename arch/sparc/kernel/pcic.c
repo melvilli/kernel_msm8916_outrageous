@@ -36,6 +36,10 @@
 #include <asm/uaccess.h>
 #include <asm/irq_regs.h>
 
+<<<<<<< HEAD
+=======
+#include "kernel.h"
+>>>>>>> v3.18
 #include "irq.h"
 
 /*
@@ -162,8 +166,13 @@ static int pcic0_up;
 static struct linux_pcic pcic0;
 
 void __iomem *pcic_regs;
+<<<<<<< HEAD
 volatile int pcic_speculative;
 volatile int pcic_trapped;
+=======
+static volatile int pcic_speculative;
+static volatile int pcic_trapped;
+>>>>>>> v3.18
 
 /* forward */
 unsigned int pcic_build_device_irq(struct platform_device *op,
@@ -329,7 +338,11 @@ int __init pcic_probe(void)
 
 	pcic->pcic_res_cfg_addr.name = "pcic_cfg_addr";
 	if ((pcic->pcic_config_space_addr =
+<<<<<<< HEAD
 	    ioremap(regs[2].phys_addr, regs[2].reg_size * 2)) == 0) {
+=======
+	    ioremap(regs[2].phys_addr, regs[2].reg_size * 2)) == NULL) {
+>>>>>>> v3.18
 		prom_printf("PCIC: Error, cannot map "
 			    "PCI Configuration Space Address.\n");
 		prom_halt();
@@ -341,7 +354,11 @@ int __init pcic_probe(void)
 	 */
 	pcic->pcic_res_cfg_data.name = "pcic_cfg_data";
 	if ((pcic->pcic_config_space_data =
+<<<<<<< HEAD
 	    ioremap(regs[3].phys_addr, regs[3].reg_size * 2)) == 0) {
+=======
+	    ioremap(regs[3].phys_addr, regs[3].reg_size * 2)) == NULL) {
+>>>>>>> v3.18
 		prom_printf("PCIC: Error, cannot map "
 			    "PCI Configuration Space Data.\n");
 		prom_halt();
@@ -353,7 +370,10 @@ int __init pcic_probe(void)
 	strcpy(pbm->prom_name, namebuf);
 
 	{
+<<<<<<< HEAD
 		extern volatile int t_nmi[4];
+=======
+>>>>>>> v3.18
 		extern int pcic_nmi_trap_patch[4];
 
 		t_nmi[0] = pcic_nmi_trap_patch[0];
@@ -536,7 +556,11 @@ pcic_fill_irq(struct linux_pcic *pcic, struct pci_dev *dev, int node)
 		prom_getstring(node, "name", namebuf, sizeof(namebuf));
 	}
 
+<<<<<<< HEAD
 	if ((p = pcic->pcic_imap) == 0) {
+=======
+	if ((p = pcic->pcic_imap) == NULL) {
+>>>>>>> v3.18
 		dev->irq = 0;
 		return;
 	}
@@ -670,6 +694,7 @@ void pcibios_fixup_bus(struct pci_bus *bus)
 	}
 }
 
+<<<<<<< HEAD
 /*
  * pcic_pin_to_irq() is exported to bus probing code
  */
@@ -694,6 +719,8 @@ pcic_pin_to_irq(unsigned int pin, const char *name)
 	return irq;
 }
 
+=======
+>>>>>>> v3.18
 /* Makes compiler happy */
 static volatile int pcic_timer_dummy;
 
@@ -783,7 +810,11 @@ int pcibios_enable_device(struct pci_dev *pdev, int mask)
 void pcic_nmi(unsigned int pend, struct pt_regs *regs)
 {
 
+<<<<<<< HEAD
 	pend = flip_dword(pend);
+=======
+	pend = swab32(pend);
+>>>>>>> v3.18
 
 	if (!pcic_speculative || (pend & PCI_SYS_INT_PENDING_PIO) == 0) {
 		/*
@@ -875,6 +906,7 @@ void __init sun4m_pci_init_IRQ(void)
 	sparc_config.load_profile_irq = pcic_load_profile_irq;
 }
 
+<<<<<<< HEAD
 /*
  * This probably belongs here rather than ioport.c because
  * we do not want this crud linked into SBus kernels.
@@ -953,4 +985,6 @@ void insl(unsigned long addr, void *dst, unsigned long count)
 }
 EXPORT_SYMBOL(insl);
 
+=======
+>>>>>>> v3.18
 subsys_initcall(pcic_init);

@@ -314,8 +314,11 @@ static int __exit psif_remove(struct platform_device *pdev)
 	clk_put(psif->pclk);
 	kfree(psif);
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

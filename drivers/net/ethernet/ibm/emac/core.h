@@ -26,7 +26,10 @@
 #define __IBM_NEWEMAC_CORE_H
 
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/list.h>
 #include <linux/kernel.h>
 #include <linux/interrupt.h>

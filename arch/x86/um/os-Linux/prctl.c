@@ -4,7 +4,11 @@
  */
 
 #include <sys/ptrace.h>
+<<<<<<< HEAD
 #include <linux/ptrace.h>
+=======
+#include <asm/ptrace.h>
+>>>>>>> v3.18
 
 int os_arch_prctl(int pid, int code, unsigned long *addr)
 {

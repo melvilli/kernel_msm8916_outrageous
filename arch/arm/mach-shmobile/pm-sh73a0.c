@@ -9,7 +9,11 @@
  */
 
 #include <linux/suspend.h>
+<<<<<<< HEAD
 #include <mach/common.h>
+=======
+#include "common.h"
+>>>>>>> v3.18
 
 #ifdef CONFIG_SUSPEND
 static int sh73a0_enter_suspend(suspend_state_t suspend_state)

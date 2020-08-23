@@ -164,13 +164,18 @@ static unsigned int sn95031_get_mic_bias(struct snd_soc_codec *codec)
 }
 /*end - adc helper functions */
 
+<<<<<<< HEAD
 static inline unsigned int sn95031_read(struct snd_soc_codec *codec,
 			unsigned int reg)
+=======
+static int sn95031_read(void *ctx, unsigned int reg, unsigned int *val)
+>>>>>>> v3.18
 {
 	u8 value = 0;
 	int ret;
 
 	ret = intel_scu_ipc_ioread8(reg, &value);
+<<<<<<< HEAD
 	if (ret)
 		pr_err("read of %x failed, err %d\n", reg, ret);
 	return value;
@@ -188,6 +193,24 @@ static inline int sn95031_write(struct snd_soc_codec *codec,
 	return ret;
 }
 
+=======
+	if (ret == 0)
+		*val = value;
+
+	return ret;
+}
+
+static int sn95031_write(void *ctx, unsigned int reg, unsigned int value)
+{
+	return intel_scu_ipc_iowrite8(reg, value);
+}
+
+static const struct regmap_config sn95031_regmap = {
+	.reg_read = sn95031_read,
+	.reg_write = sn95031_write,
+};
+
+>>>>>>> v3.18
 static int sn95031_set_vaud_bias(struct snd_soc_codec *codec,
 		enum snd_soc_bias_level level)
 {
@@ -314,14 +337,24 @@ static int sn95031_dmic56_event(struct snd_soc_dapm_widget *w,
 /* mux controls */
 static const char *sn95031_mic_texts[] = { "AMIC", "LineIn" };
 
+<<<<<<< HEAD
 static const struct soc_enum sn95031_micl_enum =
 	SOC_ENUM_SINGLE(SN95031_ADCCONFIG, 1, 2, sn95031_mic_texts);
+=======
+static SOC_ENUM_SINGLE_DECL(sn95031_micl_enum,
+			    SN95031_ADCCONFIG, 1, sn95031_mic_texts);
+>>>>>>> v3.18
 
 static const struct snd_kcontrol_new sn95031_micl_mux_control =
 	SOC_DAPM_ENUM("Route", sn95031_micl_enum);
 
+<<<<<<< HEAD
 static const struct soc_enum sn95031_micr_enum =
 	SOC_ENUM_SINGLE(SN95031_ADCCONFIG, 3, 2, sn95031_mic_texts);
+=======
+static SOC_ENUM_SINGLE_DECL(sn95031_micr_enum,
+			    SN95031_ADCCONFIG, 3, sn95031_mic_texts);
+>>>>>>> v3.18
 
 static const struct snd_kcontrol_new sn95031_micr_mux_control =
 	SOC_DAPM_ENUM("Route", sn95031_micr_enum);
@@ -330,26 +363,46 @@ static const char *sn95031_input_texts[] = {	"DMIC1", "DMIC2", "DMIC3",
 						"DMIC4", "DMIC5", "DMIC6",
 						"ADC Left", "ADC Right" };
 
+<<<<<<< HEAD
 static const struct soc_enum sn95031_input1_enum =
 	SOC_ENUM_SINGLE(SN95031_AUDIOMUX12, 0, 8, sn95031_input_texts);
+=======
+static SOC_ENUM_SINGLE_DECL(sn95031_input1_enum,
+			    SN95031_AUDIOMUX12, 0, sn95031_input_texts);
+>>>>>>> v3.18
 
 static const struct snd_kcontrol_new sn95031_input1_mux_control =
 	SOC_DAPM_ENUM("Route", sn95031_input1_enum);
 
+<<<<<<< HEAD
 static const struct soc_enum sn95031_input2_enum =
 	SOC_ENUM_SINGLE(SN95031_AUDIOMUX12, 4, 8, sn95031_input_texts);
+=======
+static SOC_ENUM_SINGLE_DECL(sn95031_input2_enum,
+			    SN95031_AUDIOMUX12, 4, sn95031_input_texts);
+>>>>>>> v3.18
 
 static const struct snd_kcontrol_new sn95031_input2_mux_control =
 	SOC_DAPM_ENUM("Route", sn95031_input2_enum);
 
+<<<<<<< HEAD
 static const struct soc_enum sn95031_input3_enum =
 	SOC_ENUM_SINGLE(SN95031_AUDIOMUX34, 0, 8, sn95031_input_texts);
+=======
+static SOC_ENUM_SINGLE_DECL(sn95031_input3_enum,
+			    SN95031_AUDIOMUX34, 0, sn95031_input_texts);
+>>>>>>> v3.18
 
 static const struct snd_kcontrol_new sn95031_input3_mux_control =
 	SOC_DAPM_ENUM("Route", sn95031_input3_enum);
 
+<<<<<<< HEAD
 static const struct soc_enum sn95031_input4_enum =
 	SOC_ENUM_SINGLE(SN95031_AUDIOMUX34, 4, 8, sn95031_input_texts);
+=======
+static SOC_ENUM_SINGLE_DECL(sn95031_input4_enum,
+			    SN95031_AUDIOMUX34, 4, sn95031_input_texts);
+>>>>>>> v3.18
 
 static const struct snd_kcontrol_new sn95031_input4_mux_control =
 	SOC_DAPM_ENUM("Route", sn95031_input4_enum);
@@ -361,6 +414,7 @@ static const char *sn95031_micmode_text[] = {"Single Ended", "Differential"};
 /* 0dB to 30dB in 10dB steps */
 static const DECLARE_TLV_DB_SCALE(mic_tlv, 0, 10, 0);
 
+<<<<<<< HEAD
 static const struct soc_enum sn95031_micmode1_enum =
 	SOC_ENUM_SINGLE(SN95031_MICAMP1, 1, 2, sn95031_micmode_text);
 static const struct soc_enum sn95031_micmode2_enum =
@@ -374,6 +428,21 @@ static const struct soc_enum sn95031_dmic34_cfg_enum =
 	SOC_ENUM_SINGLE(SN95031_DMICMUX, 1, 2, sn95031_dmic_cfg_text);
 static const struct soc_enum sn95031_dmic56_cfg_enum =
 	SOC_ENUM_SINGLE(SN95031_DMICMUX, 2, 2, sn95031_dmic_cfg_text);
+=======
+static SOC_ENUM_SINGLE_DECL(sn95031_micmode1_enum,
+			    SN95031_MICAMP1, 1, sn95031_micmode_text);
+static SOC_ENUM_SINGLE_DECL(sn95031_micmode2_enum,
+			    SN95031_MICAMP2, 1, sn95031_micmode_text);
+
+static const char *sn95031_dmic_cfg_text[] = {"GPO", "DMIC"};
+
+static SOC_ENUM_SINGLE_DECL(sn95031_dmic12_cfg_enum,
+			    SN95031_DMICMUX, 0, sn95031_dmic_cfg_text);
+static SOC_ENUM_SINGLE_DECL(sn95031_dmic34_cfg_enum,
+			    SN95031_DMICMUX, 1, sn95031_dmic_cfg_text);
+static SOC_ENUM_SINGLE_DECL(sn95031_dmic56_cfg_enum,
+			    SN95031_DMICMUX, 2, sn95031_dmic_cfg_text);
+>>>>>>> v3.18
 
 static const struct snd_kcontrol_new sn95031_snd_controls[] = {
 	SOC_ENUM("Mic1Mode Capture Route", sn95031_micmode1_enum),
@@ -663,12 +732,21 @@ static int sn95031_pcm_hw_params(struct snd_pcm_substream *substream,
 {
 	unsigned int format, rate;
 
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		format = BIT(4)|BIT(5);
 		break;
 
 	case SNDRV_PCM_FORMAT_S24_LE:
+=======
+	switch (params_width(params)) {
+	case 16:
+		format = BIT(4)|BIT(5);
+		break;
+
+	case 24:
+>>>>>>> v3.18
 		format = 0;
 		break;
 	default:
@@ -883,11 +961,17 @@ static int sn95031_codec_remove(struct snd_soc_codec *codec)
 	return 0;
 }
 
+<<<<<<< HEAD
 struct snd_soc_codec_driver sn95031_codec = {
 	.probe		= sn95031_codec_probe,
 	.remove		= sn95031_codec_remove,
 	.read		= sn95031_read,
 	.write		= sn95031_write,
+=======
+static struct snd_soc_codec_driver sn95031_codec = {
+	.probe		= sn95031_codec_probe,
+	.remove		= sn95031_codec_remove,
+>>>>>>> v3.18
 	.set_bias_level	= sn95031_set_vaud_bias,
 	.idle_bias_off	= true,
 	.dapm_widgets	= sn95031_dapm_widgets,
@@ -898,7 +982,18 @@ struct snd_soc_codec_driver sn95031_codec = {
 
 static int sn95031_device_probe(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	pr_debug("codec device probe called for %s\n", dev_name(&pdev->dev));
+=======
+	struct regmap *regmap;
+
+	pr_debug("codec device probe called for %s\n", dev_name(&pdev->dev));
+
+	regmap = devm_regmap_init(&pdev->dev, NULL, NULL, &sn95031_regmap);
+	if (IS_ERR(regmap))
+		return PTR_ERR(regmap);
+
+>>>>>>> v3.18
 	return snd_soc_register_codec(&pdev->dev, &sn95031_codec,
 			sn95031_dais, ARRAY_SIZE(sn95031_dais));
 }

@@ -12,6 +12,7 @@ Required properties :
 - clocks : Should contain phandle and clock specifiers for two clocks:
   the 32 KHz "32k_in", and the board-specific oscillator "osc".
 - #clock-cells : Should be 1.
+<<<<<<< HEAD
   In clock consumers, this cell represents the clock ID exposed by the CAR.
 
   The first 96 clocks are numbered to match the bits in the CAR's CLK_OUT_ENB
@@ -161,6 +162,14 @@ Required properties :
   130	audio		a/k/a audio_sync_clk
   131	pll_ref
   132	twd
+=======
+  In clock consumers, this cell represents the clock ID exposed by the
+  CAR. The assignments may be found in header file
+  <dt-bindings/clock/tegra20-car.h>.
+- #reset-cells : Should be 1.
+  In clock consumers, this cell represents the bit number in the CAR's
+  array of CLK_RST_CONTROLLER_RST_DEVICES_* registers.
+>>>>>>> v3.18
 
 Example SoC include file:
 
@@ -169,10 +178,18 @@ Example SoC include file:
 		compatible = "nvidia,tegra20-car";
 		reg = <0x60006000 0x1000>;
 		#clock-cells = <1>;
+<<<<<<< HEAD
 	};
 
 	usb@c5004000 {
 		clocks = <&tegra_car 58>; /* usb2 */
+=======
+		#reset-cells = <1>;
+	};
+
+	usb@c5004000 {
+		clocks = <&tegra_car TEGRA20_CLK_USB2>;
+>>>>>>> v3.18
 	};
 };
 

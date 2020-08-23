@@ -10,6 +10,10 @@
 #include "../util/util.h"
 #include "../util/parse-options.h"
 #include "../util/header.h"
+<<<<<<< HEAD
+=======
+#include "../util/cloexec.h"
+>>>>>>> v3.18
 #include "bench.h"
 #include "mem-memset-arch.h"
 
@@ -58,7 +62,11 @@ static const struct routine routines[] = {
 	{ "default",
 	  "Default memset() provided by glibc",
 	  memset },
+<<<<<<< HEAD
 #ifdef ARCH_X86_64
+=======
+#ifdef HAVE_ARCH_X86_64_SUPPORT
+>>>>>>> v3.18
 
 #define MEMSET_FN(fn, name, desc) { name, desc, fn },
 #include "mem-memset-x86-64-asm-def.h"
@@ -83,7 +91,12 @@ static struct perf_event_attr cycle_attr = {
 
 static void init_cycle(void)
 {
+<<<<<<< HEAD
 	cycle_fd = sys_perf_event_open(&cycle_attr, getpid(), -1, -1, 0);
+=======
+	cycle_fd = sys_perf_event_open(&cycle_attr, getpid(), -1, -1,
+				       perf_event_open_cloexec_flag());
+>>>>>>> v3.18
 
 	if (cycle_fd < 0 && errno == ENOSYS)
 		die("No CONFIG_PERF_EVENTS=y kernel support configured?\n");
@@ -111,7 +124,11 @@ static double timeval2double(struct timeval *ts)
 static void alloc_mem(void **dst, size_t length)
 {
 	*dst = zalloc(length);
+<<<<<<< HEAD
 	if (!dst)
+=======
+	if (!*dst)
+>>>>>>> v3.18
 		die("memory allocation failed - maybe length is too large?\n");
 }
 
@@ -181,6 +198,14 @@ int bench_mem_memset(int argc, const char **argv,
 	argc = parse_options(argc, argv, options,
 			     bench_mem_memset_usage, 0);
 
+<<<<<<< HEAD
+=======
+	if (no_prefault && only_prefault) {
+		fprintf(stderr, "Invalid options: -o and -n are mutually exclusive\n");
+		return 1;
+	}
+
+>>>>>>> v3.18
 	if (use_cycle)
 		init_cycle();
 

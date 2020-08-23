@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /include/ "versatile-ab.dts"
+=======
+#include <versatile-ab.dts>
+>>>>>>> v3.18
 
 / {
 	model = "ARM Versatile PB";
@@ -13,6 +17,11 @@
 			#gpio-cells = <2>;
 			interrupt-controller;
 			#interrupt-cells = <2>;
+<<<<<<< HEAD
+=======
+			clocks = <&pclk>;
+			clock-names = "apb_pclk";
+>>>>>>> v3.18
 		};
 
 		gpio3: gpio@101e7000 {
@@ -23,6 +32,11 @@
 			#gpio-cells = <2>;
 			interrupt-controller;
 			#interrupt-cells = <2>;
+<<<<<<< HEAD
+=======
+			clocks = <&pclk>;
+			clock-names = "apb_pclk";
+>>>>>>> v3.18
 		};
 
 		fpga {
@@ -31,20 +45,40 @@
 				reg = <0x9000 0x1000>;
 				interrupt-parent = <&sic>;
 				interrupts = <6>;
+<<<<<<< HEAD
+=======
+				clocks = <&xtal24mhz>, <&pclk>;
+				clock-names = "uartclk", "apb_pclk";
+>>>>>>> v3.18
 			};
 			sci@a000 {
 				compatible = "arm,primecell";
 				reg = <0xa000 0x1000>;
 				interrupt-parent = <&sic>;
 				interrupts = <5>;
+<<<<<<< HEAD
 			};
 			mmc@b000 {
 				compatible = "arm,primecell";
 				reg = <0xb000 0x1000>;
 				interrupts = <23 34>;
+=======
+				clocks = <&xtal24mhz>;
+				clock-names = "apb_pclk";
+			};
+			mmc@b000 {
+				compatible = "arm,pl180", "arm,primecell";
+				reg = <0xb000 0x1000>;
+				interrupts-extended = <&vic 23 &sic 2>;
+				clocks = <&xtal24mhz>, <&pclk>;
+				clock-names = "mclk", "apb_pclk";
+>>>>>>> v3.18
 			};
 		};
 	};
 };
+<<<<<<< HEAD
 
 /include/ "testcases/tests.dtsi"
+=======
+>>>>>>> v3.18

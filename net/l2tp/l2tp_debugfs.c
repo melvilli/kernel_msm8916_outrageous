@@ -53,7 +53,11 @@ static void l2tp_dfs_next_tunnel(struct l2tp_dfs_seq_data *pd)
 
 static void l2tp_dfs_next_session(struct l2tp_dfs_seq_data *pd)
 {
+<<<<<<< HEAD
 	pd->session = l2tp_session_get_nth(pd->tunnel, pd->session_idx, true);
+=======
+	pd->session = l2tp_session_find_nth(pd->tunnel, pd->session_idx);
+>>>>>>> v3.18
 	pd->session_idx++;
 
 	if (pd->session == NULL) {
@@ -127,9 +131,16 @@ static void l2tp_dfs_seq_tunnel_show(struct seq_file *m, void *v)
 
 #if IS_ENABLED(CONFIG_IPV6)
 		if (tunnel->sock->sk_family == AF_INET6) {
+<<<<<<< HEAD
 			struct ipv6_pinfo *np = inet6_sk(tunnel->sock);
 			seq_printf(m, " from %pI6c to %pI6c\n",
 				&np->saddr, &np->daddr);
+=======
+			const struct ipv6_pinfo *np = inet6_sk(tunnel->sock);
+
+			seq_printf(m, " from %pI6c to %pI6c\n",
+				&np->saddr, &tunnel->sock->sk_v6_daddr);
+>>>>>>> v3.18
 		} else
 #endif
 		seq_printf(m, " from %pI4 to %pI4\n",
@@ -237,6 +248,7 @@ static int l2tp_dfs_seq_show(struct seq_file *m, void *v)
 	}
 
 	/* Show the tunnel or session context */
+<<<<<<< HEAD
 	if (!pd->session) {
 		l2tp_dfs_seq_tunnel_show(m, pd->tunnel);
 	} else {
@@ -245,6 +257,12 @@ static int l2tp_dfs_seq_show(struct seq_file *m, void *v)
 			pd->session->deref(pd->session);
 		l2tp_session_dec_refcount(pd->session);
 	}
+=======
+	if (pd->session == NULL)
+		l2tp_dfs_seq_tunnel_show(m, pd->tunnel);
+	else
+		l2tp_dfs_seq_session_show(m, pd->session);
+>>>>>>> v3.18
 
 out:
 	return 0;

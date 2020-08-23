@@ -14,8 +14,12 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
  */
 #include "pch_gbe.h"
 #include "pch_gbe_api.h"
@@ -92,7 +96,11 @@ static int pch_gbe_get_settings(struct net_device *netdev,
 	ecmd->advertising &= ~(ADVERTISED_TP | ADVERTISED_1000baseT_Half);
 
 	if (!netif_carrier_ok(adapter->netdev))
+<<<<<<< HEAD
 		ethtool_cmd_speed_set(ecmd, -1);
+=======
+		ethtool_cmd_speed_set(ecmd, SPEED_UNKNOWN);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -118,11 +126,19 @@ static int pch_gbe_set_settings(struct net_device *netdev,
 	 * filled by get_settings() on a down link, speed is -1: */
 	if (speed == UINT_MAX) {
 		speed = SPEED_1000;
+<<<<<<< HEAD
+=======
+		ethtool_cmd_speed_set(ecmd, speed);
+>>>>>>> v3.18
 		ecmd->duplex = DUPLEX_FULL;
 	}
 	ret = mii_ethtool_sset(&adapter->mii, ecmd);
 	if (ret) {
+<<<<<<< HEAD
 		pr_err("Error: mii_ethtool_sset\n");
+=======
+		netdev_err(netdev, "Error: mii_ethtool_sset\n");
+>>>>>>> v3.18
 		return ret;
 	}
 	hw->mac.link_speed = speed;
@@ -508,5 +524,9 @@ static const struct ethtool_ops pch_gbe_ethtool_ops = {
 
 void pch_gbe_set_ethtool_ops(struct net_device *netdev)
 {
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(netdev, &pch_gbe_ethtool_ops);
+=======
+	netdev->ethtool_ops = &pch_gbe_ethtool_ops;
+>>>>>>> v3.18
 }

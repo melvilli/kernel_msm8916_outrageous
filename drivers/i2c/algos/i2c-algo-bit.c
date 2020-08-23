@@ -12,6 +12,7 @@
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
@@ -21,11 +22,20 @@
 
 /* With some changes from Frodo Looijaard <frodol@dds.nl>, Kyösti Mälkki
    <kmalkki@cc.hut.fi> and Jean Delvare <khali@linux-fr.org> */
+=======
+ * ------------------------------------------------------------------------- */
+
+/* With some changes from Frodo Looijaard <frodol@dds.nl>, Kyösti Mälkki
+   <kmalkki@cc.hut.fi> and Jean Delvare <jdelvare@suse.de> */
+>>>>>>> v3.18
 
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/delay.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/errno.h>
 #include <linux/sched.h>
 #include <linux/i2c.h>

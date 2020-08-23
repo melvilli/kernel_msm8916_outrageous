@@ -10,7 +10,10 @@
  */
 
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <linux/device.h>
 #include <linux/hw_random.h>
@@ -96,7 +99,11 @@ static int octeon_rng_probe(struct platform_device *pdev)
 
 	rng->ops = ops;
 
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, &rng->ops);
+=======
+	platform_set_drvdata(pdev, &rng->ops);
+>>>>>>> v3.18
 	ret = hwrng_register(&rng->ops);
 	if (ret)
 		return -ENOENT;
@@ -108,7 +115,11 @@ static int octeon_rng_probe(struct platform_device *pdev)
 
 static int __exit octeon_rng_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct hwrng *rng = dev_get_drvdata(&pdev->dev);
+=======
+	struct hwrng *rng = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 
 	hwrng_unregister(rng);
 

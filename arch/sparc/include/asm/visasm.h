@@ -28,10 +28,23 @@
  * Must preserve %o5 between VISEntryHalf and VISExitHalf */
 
 #define VISEntryHalf					\
+<<<<<<< HEAD
 	VISEntry
 
 #define VISExitHalf					\
 	VISExit
+=======
+	rd		%fprs, %o5;			\
+	andcc		%o5, FPRS_FEF, %g0;		\
+	be,pt		%icc, 297f;			\
+	 sethi		%hi(298f), %g7;			\
+	sethi		%hi(VISenterhalf), %g1;		\
+	jmpl		%g1 + %lo(VISenterhalf), %g0;	\
+	 or		%g7, %lo(298f), %g7;		\
+	clr		%o5;				\
+297:	wr		%o5, FPRS_FEF, %fprs;		\
+298:
+>>>>>>> v3.18
 
 #define VISEntryHalfFast(fail_label)			\
 	rd		%fprs, %o5;			\
@@ -41,7 +54,11 @@
 	ba,a,pt		%xcc, fail_label;		\
 297:	wr		%o5, FPRS_FEF, %fprs;
 
+<<<<<<< HEAD
 #define VISExitHalfFast					\
+=======
+#define VISExitHalf					\
+>>>>>>> v3.18
 	wr		%o5, 0, %fprs;
 
 #ifndef __ASSEMBLY__
@@ -59,7 +76,12 @@ static inline void save_and_clear_fpu(void) {
 "		" : : "i" (FPRS_FEF|FPRS_DU) :
 		"o5", "g1", "g2", "g3", "g7", "cc");
 }
+<<<<<<< HEAD
 extern int vis_emul(struct pt_regs *, unsigned int);
+=======
+
+int vis_emul(struct pt_regs *, unsigned int);
+>>>>>>> v3.18
 #endif
 
 #endif /* _SPARC64_ASI_H */

@@ -134,8 +134,11 @@ void __init plat_mem_setup(void)
 #error invalid SiByte board configuration
 #endif
 
+<<<<<<< HEAD
 	panic_timeout = 5;  /* For debug.  */
 
+=======
+>>>>>>> v3.18
 	board_be_handler = swarm_be_handler;
 
 	if (xicor_probe())

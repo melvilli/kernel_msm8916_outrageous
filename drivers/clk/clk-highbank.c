@@ -20,8 +20,12 @@
 #include <linux/clk-provider.h>
 #include <linux/io.h>
 #include <linux/of.h>
+<<<<<<< HEAD
 
 extern void __iomem *sregs_base;
+=======
+#include <linux/of_address.h>
+>>>>>>> v3.18
 
 #define HB_PLL_LOCK_500		0x20000000
 #define HB_PLL_LOCK		0x10000000
@@ -280,6 +284,10 @@ static __init struct clk *hb_clk_init(struct device_node *node, const struct clk
 	const char *clk_name = node->name;
 	const char *parent_name;
 	struct clk_init_data init;
+<<<<<<< HEAD
+=======
+	struct device_node *srnp;
+>>>>>>> v3.18
 	int rc;
 
 	rc = of_property_read_u32(node, "reg", &reg);
@@ -290,7 +298,15 @@ static __init struct clk *hb_clk_init(struct device_node *node, const struct clk
 	if (WARN_ON(!hb_clk))
 		return NULL;
 
+<<<<<<< HEAD
 	hb_clk->reg = sregs_base + reg;
+=======
+	/* Map system registers */
+	srnp = of_find_compatible_node(NULL, NULL, "calxeda,hb-sregs");
+	hb_clk->reg = of_iomap(srnp, 0);
+	BUG_ON(!hb_clk->reg);
+	hb_clk->reg += reg;
+>>>>>>> v3.18
 
 	of_property_read_string(node, "clock-output-names", &clk_name);
 

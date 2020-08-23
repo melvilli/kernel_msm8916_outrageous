@@ -48,7 +48,10 @@
 #include <linux/fddidevice.h>
 #include <linux/skbuff.h>
 #include <linux/pci.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 
 // is redefined by linux, but we need our definition
 #undef ADDR

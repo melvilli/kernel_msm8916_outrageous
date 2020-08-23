@@ -25,8 +25,15 @@
 #include <asm/cp15.h>
 #include <asm/system_info.h>
 #include <asm/unaligned.h>
+<<<<<<< HEAD
 
 #include "fault.h"
+=======
+#include <asm/opcodes.h>
+
+#include "fault.h"
+#include "mm.h"
+>>>>>>> v3.18
 
 /*
  * 32-bit misaligned trap handler (c) 1998 San Mehat (CCC) -July 1998
@@ -75,12 +82,20 @@
 
 static unsigned long ai_user;
 static unsigned long ai_sys;
+<<<<<<< HEAD
+=======
+static void *ai_sys_last_pc;
+>>>>>>> v3.18
 static unsigned long ai_skipped;
 static unsigned long ai_half;
 static unsigned long ai_word;
 static unsigned long ai_dword;
 static unsigned long ai_multi;
 static int ai_usermode;
+<<<<<<< HEAD
+=======
+static unsigned long cr_no_alignment;
+>>>>>>> v3.18
 
 core_param(alignment, ai_usermode, int, 0600);
 
@@ -91,7 +106,11 @@ core_param(alignment, ai_usermode, int, 0600);
 /* Return true if and only if the ARMv6 unaligned access model is in use. */
 static bool cpu_is_v6_unaligned(void)
 {
+<<<<<<< HEAD
 	return cpu_architecture() >= CPU_ARCH_ARMv6 && (cr_alignment & CR_U);
+=======
+	return cpu_architecture() >= CPU_ARCH_ARMv6 && get_cr() & CR_U;
+>>>>>>> v3.18
 }
 
 static int safe_usermode(int new_usermode, bool warn)
@@ -128,7 +147,11 @@ static const char *usermode_action[] = {
 static int alignment_proc_show(struct seq_file *m, void *v)
 {
 	seq_printf(m, "User:\t\t%lu\n", ai_user);
+<<<<<<< HEAD
 	seq_printf(m, "System:\t\t%lu\n", ai_sys);
+=======
+	seq_printf(m, "System:\t\t%lu (%pF)\n", ai_sys, ai_sys_last_pc);
+>>>>>>> v3.18
 	seq_printf(m, "Skipped:\t%lu\n", ai_skipped);
 	seq_printf(m, "Half:\t\t%lu\n", ai_half);
 	seq_printf(m, "Word:\t\t%lu\n", ai_word);
@@ -743,6 +766,7 @@ do_alignment_t32_to_handler(unsigned long *pinstr, struct pt_regs *regs,
 	return NULL;
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_FORCE_INSTRUCTION_ALIGNMENT
 static int
 do_ialignment(unsigned long addr, unsigned int fsr, struct pt_regs *regs)
@@ -773,6 +797,8 @@ do_ialignment(unsigned long addr, unsigned int fsr, struct pt_regs *regs)
 }
 #endif
 
+=======
+>>>>>>> v3.18
 static int
 do_alignment(unsigned long addr, unsigned int fsr, struct pt_regs *regs)
 {
@@ -793,21 +819,37 @@ do_alignment(unsigned long addr, unsigned int fsr, struct pt_regs *regs)
 	if (thumb_mode(regs)) {
 		u16 *ptr = (u16 *)(instrptr & ~1);
 		fault = probe_kernel_address(ptr, tinstr);
+<<<<<<< HEAD
+=======
+		tinstr = __mem_to_opcode_thumb16(tinstr);
+>>>>>>> v3.18
 		if (!fault) {
 			if (cpu_architecture() >= CPU_ARCH_ARMv7 &&
 			    IS_T32(tinstr)) {
 				/* Thumb-2 32-bit */
 				u16 tinst2 = 0;
 				fault = probe_kernel_address(ptr + 1, tinst2);
+<<<<<<< HEAD
 				instr = (tinstr << 16) | tinst2;
+=======
+				tinst2 = __mem_to_opcode_thumb16(tinst2);
+				instr = __opcode_thumb32_compose(tinstr, tinst2);
+>>>>>>> v3.18
 				thumb2_32b = 1;
 			} else {
 				isize = 2;
 				instr = thumb2arm(tinstr);
 			}
 		}
+<<<<<<< HEAD
 	} else
 		fault = probe_kernel_address(instrptr, instr);
+=======
+	} else {
+		fault = probe_kernel_address(instrptr, instr);
+		instr = __mem_to_opcode_arm(instr);
+	}
+>>>>>>> v3.18
 
 	if (fault) {
 		type = TYPE_FAULT;
@@ -818,6 +860,10 @@ do_alignment(unsigned long addr, unsigned int fsr, struct pt_regs *regs)
 		goto user;
 
 	ai_sys += 1;
+<<<<<<< HEAD
+=======
+	ai_sys_last_pc = (void *)instruction_pointer(regs);
+>>>>>>> v3.18
 
  fixup:
 
@@ -977,6 +1023,16 @@ do_alignment(unsigned long addr, unsigned int fsr, struct pt_regs *regs)
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+static int __init noalign_setup(char *__unused)
+{
+	set_cr(__clear_cr(CR_A));
+	return 1;
+}
+__setup("noalign", noalign_setup);
+
+>>>>>>> v3.18
 /*
  * This needs to be done after sysctl_init, otherwise sys/ will be
  * overwritten.  Actually, this shouldn't be in sys/ at all since
@@ -994,6 +1050,7 @@ static int __init alignment_init(void)
 		return -ENOMEM;
 #endif
 
+<<<<<<< HEAD
 #ifdef CONFIG_CPU_CP15
 	if (cpu_is_v6_unaligned()) {
 		cr_alignment &= ~CR_A;
@@ -1002,15 +1059,26 @@ static int __init alignment_init(void)
 		ai_usermode = safe_usermode(ai_usermode, false);
 	}
 #endif
+=======
+	if (cpu_is_v6_unaligned()) {
+		set_cr(__clear_cr(CR_A));
+		ai_usermode = safe_usermode(ai_usermode, false);
+	}
+
+	cr_no_alignment = get_cr() & ~CR_A;
+>>>>>>> v3.18
 
 	hook_fault_code(FAULT_CODE_ALIGNMENT, do_alignment, SIGBUS, BUS_ADRALN,
 			"alignment exception");
 
+<<<<<<< HEAD
 #ifdef CONFIG_FORCE_INSTRUCTION_ALIGNMENT
 	hook_ifault_code(FAULT_CODE_ALIGNMENT, do_ialignment, SIGBUS,
 			BUS_ADRALN, "alignment exception");
 #endif
 
+=======
+>>>>>>> v3.18
 	/*
 	 * ARMv6K and ARMv7 use fault status 3 (0b00011) as Access Flag section
 	 * fault, not as alignment error.

@@ -624,7 +624,12 @@ static int pcmidi_snd_initialise(struct pcmidi_snd *pm)
 
 	/* Setup sound card */
 
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE, 0, &card);
+=======
+	err = snd_card_new(&pm->pk->hdev->dev, index[dev], id[dev],
+			   THIS_MODULE, 0, &card);
+>>>>>>> v3.18
 	if (err < 0) {
 		pk_error("failed to create pc-midi sound card\n");
 		err = -ENOMEM;
@@ -660,8 +665,11 @@ static int pcmidi_snd_initialise(struct pcmidi_snd *pm)
 	snd_rawmidi_set_ops(rwmidi, SNDRV_RAWMIDI_STREAM_INPUT,
 		&pcmidi_in_ops);
 
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pm->pk->hdev->dev);
 
+=======
+>>>>>>> v3.18
 	/* create sysfs variables */
 	err = device_create_file(&pm->pk->hdev->dev,
 				 sysfs_device_attr_channel);

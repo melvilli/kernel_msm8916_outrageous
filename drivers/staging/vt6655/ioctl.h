@@ -31,6 +31,7 @@
 
 #include "device.h"
 
+<<<<<<< HEAD
 /*---------------------  Export Definitions -------------------------*/
 
 /*---------------------  Export Classes  ----------------------------*/
@@ -49,5 +50,8 @@ int private_ioctl(PSDevice pDevice, struct ifreq *rq);
   unsigned long uKeyLength
 );
 */
+=======
+int private_ioctl(struct vnt_private *, struct ifreq *rq);
+>>>>>>> v3.18
 
 #endif // __IOCTL_H__

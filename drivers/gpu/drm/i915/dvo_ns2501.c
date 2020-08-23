@@ -60,6 +60,7 @@
 
 #define NS2501_REGC 0x0c
 
+<<<<<<< HEAD
 struct ns2501_priv {
 	//I2CDevRec d;
 	bool quiet;
@@ -70,6 +71,299 @@ struct ns2501_priv {
 	int pll_a;
 	int srcdim;
 	int fw_blc;
+=======
+enum {
+	MODE_640x480,
+	MODE_800x600,
+	MODE_1024x768,
+};
+
+struct ns2501_reg {
+	 uint8_t offset;
+	 uint8_t value;
+};
+
+/*
+ * Magic values based on what the BIOS on
+ * Fujitsu-Siemens Lifebook S6010 programs (1024x768 panel).
+ */
+static const struct ns2501_reg regs_1024x768[][86] = {
+	[MODE_640x480] = {
+		[0] = { .offset = 0x0a, .value = 0x81, },
+		[1] = { .offset = 0x18, .value = 0x07, },
+		[2] = { .offset = 0x19, .value = 0x00, },
+		[3] = { .offset = 0x1a, .value = 0x00, },
+		[4] = { .offset = 0x1b, .value = 0x11, },
+		[5] = { .offset = 0x1c, .value = 0x54, },
+		[6] = { .offset = 0x1d, .value = 0x03, },
+		[7] = { .offset = 0x1e, .value = 0x02, },
+		[8] = { .offset = 0xf3, .value = 0x90, },
+		[9] = { .offset = 0xf9, .value = 0x00, },
+		[10] = { .offset = 0xc1, .value = 0x90, },
+		[11] = { .offset = 0xc2, .value = 0x00, },
+		[12] = { .offset = 0xc3, .value = 0x0f, },
+		[13] = { .offset = 0xc4, .value = 0x03, },
+		[14] = { .offset = 0xc5, .value = 0x16, },
+		[15] = { .offset = 0xc6, .value = 0x00, },
+		[16] = { .offset = 0xc7, .value = 0x02, },
+		[17] = { .offset = 0xc8, .value = 0x02, },
+		[18] = { .offset = 0xf4, .value = 0x00, },
+		[19] = { .offset = 0x80, .value = 0xff, },
+		[20] = { .offset = 0x81, .value = 0x07, },
+		[21] = { .offset = 0x82, .value = 0x3d, },
+		[22] = { .offset = 0x83, .value = 0x05, },
+		[23] = { .offset = 0x94, .value = 0x00, },
+		[24] = { .offset = 0x95, .value = 0x00, },
+		[25] = { .offset = 0x96, .value = 0x05, },
+		[26] = { .offset = 0x97, .value = 0x00, },
+		[27] = { .offset = 0x9a, .value = 0x88, },
+		[28] = { .offset = 0x9b, .value = 0x00, },
+		[29] = { .offset = 0x98, .value = 0x00, },
+		[30] = { .offset = 0x99, .value = 0x00, },
+		[31] = { .offset = 0xf7, .value = 0x88, },
+		[32] = { .offset = 0xf8, .value = 0x0a, },
+		[33] = { .offset = 0x9c, .value = 0x24, },
+		[34] = { .offset = 0x9d, .value = 0x00, },
+		[35] = { .offset = 0x9e, .value = 0x25, },
+		[36] = { .offset = 0x9f, .value = 0x03, },
+		[37] = { .offset = 0xa0, .value = 0x28, },
+		[38] = { .offset = 0xa1, .value = 0x01, },
+		[39] = { .offset = 0xa2, .value = 0x28, },
+		[40] = { .offset = 0xa3, .value = 0x05, },
+		[41] = { .offset = 0xb6, .value = 0x09, },
+		[42] = { .offset = 0xb8, .value = 0x00, },
+		[43] = { .offset = 0xb9, .value = 0xa0, },
+		[44] = { .offset = 0xba, .value = 0x00, },
+		[45] = { .offset = 0xbb, .value = 0x20, },
+		[46] = { .offset = 0x10, .value = 0x00, },
+		[47] = { .offset = 0x11, .value = 0xa0, },
+		[48] = { .offset = 0x12, .value = 0x02, },
+		[49] = { .offset = 0x20, .value = 0x00, },
+		[50] = { .offset = 0x22, .value = 0x00, },
+		[51] = { .offset = 0x23, .value = 0x00, },
+		[52] = { .offset = 0x24, .value = 0x00, },
+		[53] = { .offset = 0x25, .value = 0x00, },
+		[54] = { .offset = 0x8c, .value = 0x10, },
+		[55] = { .offset = 0x8d, .value = 0x02, },
+		[56] = { .offset = 0x8e, .value = 0x10, },
+		[57] = { .offset = 0x8f, .value = 0x00, },
+		[58] = { .offset = 0x90, .value = 0xff, },
+		[59] = { .offset = 0x91, .value = 0x07, },
+		[60] = { .offset = 0x92, .value = 0xa0, },
+		[61] = { .offset = 0x93, .value = 0x02, },
+		[62] = { .offset = 0xa5, .value = 0x00, },
+		[63] = { .offset = 0xa6, .value = 0x00, },
+		[64] = { .offset = 0xa7, .value = 0x00, },
+		[65] = { .offset = 0xa8, .value = 0x00, },
+		[66] = { .offset = 0xa9, .value = 0x04, },
+		[67] = { .offset = 0xaa, .value = 0x70, },
+		[68] = { .offset = 0xab, .value = 0x4f, },
+		[69] = { .offset = 0xac, .value = 0x00, },
+		[70] = { .offset = 0xa4, .value = 0x84, },
+		[71] = { .offset = 0x7e, .value = 0x18, },
+		[72] = { .offset = 0x84, .value = 0x00, },
+		[73] = { .offset = 0x85, .value = 0x00, },
+		[74] = { .offset = 0x86, .value = 0x00, },
+		[75] = { .offset = 0x87, .value = 0x00, },
+		[76] = { .offset = 0x88, .value = 0x00, },
+		[77] = { .offset = 0x89, .value = 0x00, },
+		[78] = { .offset = 0x8a, .value = 0x00, },
+		[79] = { .offset = 0x8b, .value = 0x00, },
+		[80] = { .offset = 0x26, .value = 0x00, },
+		[81] = { .offset = 0x27, .value = 0x00, },
+		[82] = { .offset = 0xad, .value = 0x00, },
+		[83] = { .offset = 0x08, .value = 0x30, }, /* 0x31 */
+		[84] = { .offset = 0x41, .value = 0x00, },
+		[85] = { .offset = 0xc0, .value = 0x05, },
+	},
+	[MODE_800x600] = {
+		[0] = { .offset = 0x0a, .value = 0x81, },
+		[1] = { .offset = 0x18, .value = 0x07, },
+		[2] = { .offset = 0x19, .value = 0x00, },
+		[3] = { .offset = 0x1a, .value = 0x00, },
+		[4] = { .offset = 0x1b, .value = 0x19, },
+		[5] = { .offset = 0x1c, .value = 0x64, },
+		[6] = { .offset = 0x1d, .value = 0x02, },
+		[7] = { .offset = 0x1e, .value = 0x02, },
+		[8] = { .offset = 0xf3, .value = 0x90, },
+		[9] = { .offset = 0xf9, .value = 0x00, },
+		[10] = { .offset = 0xc1, .value = 0xd7, },
+		[11] = { .offset = 0xc2, .value = 0x00, },
+		[12] = { .offset = 0xc3, .value = 0xf8, },
+		[13] = { .offset = 0xc4, .value = 0x03, },
+		[14] = { .offset = 0xc5, .value = 0x1a, },
+		[15] = { .offset = 0xc6, .value = 0x00, },
+		[16] = { .offset = 0xc7, .value = 0x73, },
+		[17] = { .offset = 0xc8, .value = 0x02, },
+		[18] = { .offset = 0xf4, .value = 0x00, },
+		[19] = { .offset = 0x80, .value = 0x27, },
+		[20] = { .offset = 0x81, .value = 0x03, },
+		[21] = { .offset = 0x82, .value = 0x41, },
+		[22] = { .offset = 0x83, .value = 0x05, },
+		[23] = { .offset = 0x94, .value = 0x00, },
+		[24] = { .offset = 0x95, .value = 0x00, },
+		[25] = { .offset = 0x96, .value = 0x05, },
+		[26] = { .offset = 0x97, .value = 0x00, },
+		[27] = { .offset = 0x9a, .value = 0x88, },
+		[28] = { .offset = 0x9b, .value = 0x00, },
+		[29] = { .offset = 0x98, .value = 0x00, },
+		[30] = { .offset = 0x99, .value = 0x00, },
+		[31] = { .offset = 0xf7, .value = 0x88, },
+		[32] = { .offset = 0xf8, .value = 0x06, },
+		[33] = { .offset = 0x9c, .value = 0x23, },
+		[34] = { .offset = 0x9d, .value = 0x00, },
+		[35] = { .offset = 0x9e, .value = 0x25, },
+		[36] = { .offset = 0x9f, .value = 0x03, },
+		[37] = { .offset = 0xa0, .value = 0x28, },
+		[38] = { .offset = 0xa1, .value = 0x01, },
+		[39] = { .offset = 0xa2, .value = 0x28, },
+		[40] = { .offset = 0xa3, .value = 0x05, },
+		[41] = { .offset = 0xb6, .value = 0x09, },
+		[42] = { .offset = 0xb8, .value = 0x30, },
+		[43] = { .offset = 0xb9, .value = 0xc8, },
+		[44] = { .offset = 0xba, .value = 0x00, },
+		[45] = { .offset = 0xbb, .value = 0x20, },
+		[46] = { .offset = 0x10, .value = 0x20, },
+		[47] = { .offset = 0x11, .value = 0xc8, },
+		[48] = { .offset = 0x12, .value = 0x02, },
+		[49] = { .offset = 0x20, .value = 0x00, },
+		[50] = { .offset = 0x22, .value = 0x00, },
+		[51] = { .offset = 0x23, .value = 0x00, },
+		[52] = { .offset = 0x24, .value = 0x00, },
+		[53] = { .offset = 0x25, .value = 0x00, },
+		[54] = { .offset = 0x8c, .value = 0x10, },
+		[55] = { .offset = 0x8d, .value = 0x02, },
+		[56] = { .offset = 0x8e, .value = 0x04, },
+		[57] = { .offset = 0x8f, .value = 0x00, },
+		[58] = { .offset = 0x90, .value = 0xff, },
+		[59] = { .offset = 0x91, .value = 0x07, },
+		[60] = { .offset = 0x92, .value = 0xa0, },
+		[61] = { .offset = 0x93, .value = 0x02, },
+		[62] = { .offset = 0xa5, .value = 0x00, },
+		[63] = { .offset = 0xa6, .value = 0x00, },
+		[64] = { .offset = 0xa7, .value = 0x00, },
+		[65] = { .offset = 0xa8, .value = 0x00, },
+		[66] = { .offset = 0xa9, .value = 0x83, },
+		[67] = { .offset = 0xaa, .value = 0x40, },
+		[68] = { .offset = 0xab, .value = 0x32, },
+		[69] = { .offset = 0xac, .value = 0x00, },
+		[70] = { .offset = 0xa4, .value = 0x80, },
+		[71] = { .offset = 0x7e, .value = 0x18, },
+		[72] = { .offset = 0x84, .value = 0x00, },
+		[73] = { .offset = 0x85, .value = 0x00, },
+		[74] = { .offset = 0x86, .value = 0x00, },
+		[75] = { .offset = 0x87, .value = 0x00, },
+		[76] = { .offset = 0x88, .value = 0x00, },
+		[77] = { .offset = 0x89, .value = 0x00, },
+		[78] = { .offset = 0x8a, .value = 0x00, },
+		[79] = { .offset = 0x8b, .value = 0x00, },
+		[80] = { .offset = 0x26, .value = 0x00, },
+		[81] = { .offset = 0x27, .value = 0x00, },
+		[82] = { .offset = 0xad, .value = 0x00, },
+		[83] = { .offset = 0x08, .value = 0x30, }, /* 0x31 */
+		[84] = { .offset = 0x41, .value = 0x00, },
+		[85] = { .offset = 0xc0, .value = 0x07, },
+	},
+	[MODE_1024x768] = {
+		[0] = { .offset = 0x0a, .value = 0x81, },
+		[1] = { .offset = 0x18, .value = 0x07, },
+		[2] = { .offset = 0x19, .value = 0x00, },
+		[3] = { .offset = 0x1a, .value = 0x00, },
+		[4] = { .offset = 0x1b, .value = 0x11, },
+		[5] = { .offset = 0x1c, .value = 0x54, },
+		[6] = { .offset = 0x1d, .value = 0x03, },
+		[7] = { .offset = 0x1e, .value = 0x02, },
+		[8] = { .offset = 0xf3, .value = 0x90, },
+		[9] = { .offset = 0xf9, .value = 0x00, },
+		[10] = { .offset = 0xc1, .value = 0x90, },
+		[11] = { .offset = 0xc2, .value = 0x00, },
+		[12] = { .offset = 0xc3, .value = 0x0f, },
+		[13] = { .offset = 0xc4, .value = 0x03, },
+		[14] = { .offset = 0xc5, .value = 0x16, },
+		[15] = { .offset = 0xc6, .value = 0x00, },
+		[16] = { .offset = 0xc7, .value = 0x02, },
+		[17] = { .offset = 0xc8, .value = 0x02, },
+		[18] = { .offset = 0xf4, .value = 0x00, },
+		[19] = { .offset = 0x80, .value = 0xff, },
+		[20] = { .offset = 0x81, .value = 0x07, },
+		[21] = { .offset = 0x82, .value = 0x3d, },
+		[22] = { .offset = 0x83, .value = 0x05, },
+		[23] = { .offset = 0x94, .value = 0x00, },
+		[24] = { .offset = 0x95, .value = 0x00, },
+		[25] = { .offset = 0x96, .value = 0x05, },
+		[26] = { .offset = 0x97, .value = 0x00, },
+		[27] = { .offset = 0x9a, .value = 0x88, },
+		[28] = { .offset = 0x9b, .value = 0x00, },
+		[29] = { .offset = 0x98, .value = 0x00, },
+		[30] = { .offset = 0x99, .value = 0x00, },
+		[31] = { .offset = 0xf7, .value = 0x88, },
+		[32] = { .offset = 0xf8, .value = 0x0a, },
+		[33] = { .offset = 0x9c, .value = 0x24, },
+		[34] = { .offset = 0x9d, .value = 0x00, },
+		[35] = { .offset = 0x9e, .value = 0x25, },
+		[36] = { .offset = 0x9f, .value = 0x03, },
+		[37] = { .offset = 0xa0, .value = 0x28, },
+		[38] = { .offset = 0xa1, .value = 0x01, },
+		[39] = { .offset = 0xa2, .value = 0x28, },
+		[40] = { .offset = 0xa3, .value = 0x05, },
+		[41] = { .offset = 0xb6, .value = 0x09, },
+		[42] = { .offset = 0xb8, .value = 0x00, },
+		[43] = { .offset = 0xb9, .value = 0xa0, },
+		[44] = { .offset = 0xba, .value = 0x00, },
+		[45] = { .offset = 0xbb, .value = 0x20, },
+		[46] = { .offset = 0x10, .value = 0x00, },
+		[47] = { .offset = 0x11, .value = 0xa0, },
+		[48] = { .offset = 0x12, .value = 0x02, },
+		[49] = { .offset = 0x20, .value = 0x00, },
+		[50] = { .offset = 0x22, .value = 0x00, },
+		[51] = { .offset = 0x23, .value = 0x00, },
+		[52] = { .offset = 0x24, .value = 0x00, },
+		[53] = { .offset = 0x25, .value = 0x00, },
+		[54] = { .offset = 0x8c, .value = 0x10, },
+		[55] = { .offset = 0x8d, .value = 0x02, },
+		[56] = { .offset = 0x8e, .value = 0x10, },
+		[57] = { .offset = 0x8f, .value = 0x00, },
+		[58] = { .offset = 0x90, .value = 0xff, },
+		[59] = { .offset = 0x91, .value = 0x07, },
+		[60] = { .offset = 0x92, .value = 0xa0, },
+		[61] = { .offset = 0x93, .value = 0x02, },
+		[62] = { .offset = 0xa5, .value = 0x00, },
+		[63] = { .offset = 0xa6, .value = 0x00, },
+		[64] = { .offset = 0xa7, .value = 0x00, },
+		[65] = { .offset = 0xa8, .value = 0x00, },
+		[66] = { .offset = 0xa9, .value = 0x04, },
+		[67] = { .offset = 0xaa, .value = 0x70, },
+		[68] = { .offset = 0xab, .value = 0x4f, },
+		[69] = { .offset = 0xac, .value = 0x00, },
+		[70] = { .offset = 0xa4, .value = 0x84, },
+		[71] = { .offset = 0x7e, .value = 0x18, },
+		[72] = { .offset = 0x84, .value = 0x00, },
+		[73] = { .offset = 0x85, .value = 0x00, },
+		[74] = { .offset = 0x86, .value = 0x00, },
+		[75] = { .offset = 0x87, .value = 0x00, },
+		[76] = { .offset = 0x88, .value = 0x00, },
+		[77] = { .offset = 0x89, .value = 0x00, },
+		[78] = { .offset = 0x8a, .value = 0x00, },
+		[79] = { .offset = 0x8b, .value = 0x00, },
+		[80] = { .offset = 0x26, .value = 0x00, },
+		[81] = { .offset = 0x27, .value = 0x00, },
+		[82] = { .offset = 0xad, .value = 0x00, },
+		[83] = { .offset = 0x08, .value = 0x34, }, /* 0x35 */
+		[84] = { .offset = 0x41, .value = 0x00, },
+		[85] = { .offset = 0xc0, .value = 0x01, },
+	},
+};
+
+static const struct ns2501_reg regs_init[] = {
+	[0] = { .offset = 0x35, .value = 0xff, },
+	[1] = { .offset = 0x34, .value = 0x00, },
+	[2] = { .offset = 0x08, .value = 0x30, },
+};
+
+struct ns2501_priv {
+	bool quiet;
+	const struct ns2501_reg *regs;
+>>>>>>> v3.18
 };
 
 #define NSPTR(d) ((NS2501Ptr)(d->DriverPrivate.ptr))
@@ -87,6 +381,7 @@ struct ns2501_priv {
  * when switching the resolution.
  */
 
+<<<<<<< HEAD
 static void enable_dvo(struct intel_dvo_device *dvo)
 {
 	struct ns2501_priv *ns = (struct ns2501_priv *)(dvo->dev_priv);
@@ -130,6 +425,8 @@ static void restore_dvo(struct intel_dvo_device *dvo)
 	I915_WRITE(FW_BLC, ns->fw_blc);
 }
 
+=======
+>>>>>>> v3.18
 /*
 ** Read a register from the ns2501.
 ** Returns true if successful, false otherwise.
@@ -164,7 +461,11 @@ static bool ns2501_readb(struct intel_dvo_device *dvo, int addr, uint8_t * ch)
 	if (i2c_transfer(adapter, msgs, 2) == 2) {
 		*ch = in_buf[0];
 		return true;
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 
 	if (!ns->quiet) {
 		DRM_DEBUG_KMS
@@ -248,11 +549,17 @@ static bool ns2501_init(struct intel_dvo_device *dvo,
 		goto out;
 	}
 	ns->quiet = false;
+<<<<<<< HEAD
 	ns->reg_8_set = 0;
 	ns->reg_8_shadow =
 	    NS2501_8_PD | NS2501_8_BPAS | NS2501_8_VEN | NS2501_8_HEN;
 
 	DRM_DEBUG_KMS("init ns2501 dvo controller successfully!\n");
+=======
+
+	DRM_DEBUG_KMS("init ns2501 dvo controller successfully!\n");
+
+>>>>>>> v3.18
 	return true;
 
 out:
@@ -276,9 +583,14 @@ static enum drm_mode_status ns2501_mode_valid(struct intel_dvo_device *dvo,
 					      struct drm_display_mode *mode)
 {
 	DRM_DEBUG_KMS
+<<<<<<< HEAD
 	    ("%s: is mode valid (hdisplay=%d,htotal=%d,vdisplay=%d,vtotal=%d)\n",
 	     __FUNCTION__, mode->hdisplay, mode->htotal, mode->vdisplay,
 	     mode->vtotal);
+=======
+	    ("is mode valid (hdisplay=%d,htotal=%d,vdisplay=%d,vtotal=%d)\n",
+	     mode->hdisplay, mode->htotal, mode->vdisplay, mode->vtotal);
+>>>>>>> v3.18
 
 	/*
 	 * Currently, these are all the modes I have data from.
@@ -286,9 +598,15 @@ static enum drm_mode_status ns2501_mode_valid(struct intel_dvo_device *dvo,
 	 * of the panel in here so we could always accept it
 	 * by disabling the scaler.
 	 */
+<<<<<<< HEAD
 	if ((mode->hdisplay == 800 && mode->vdisplay == 600) ||
 	    (mode->hdisplay == 640 && mode->vdisplay == 480) ||
 	    (mode->hdisplay == 1024 && mode->vdisplay == 768)) {
+=======
+	if ((mode->hdisplay == 640 && mode->vdisplay == 480 && mode->clock == 25175) ||
+	    (mode->hdisplay == 800 && mode->vdisplay == 600 && mode->clock == 40000) ||
+	    (mode->hdisplay == 1024 && mode->vdisplay == 768 && mode->clock == 65000)) {
+>>>>>>> v3.18
 		return MODE_OK;
 	} else {
 		return MODE_ONE_SIZE;	/* Is this a reasonable error? */
@@ -299,6 +617,7 @@ static void ns2501_mode_set(struct intel_dvo_device *dvo,
 			    struct drm_display_mode *mode,
 			    struct drm_display_mode *adjusted_mode)
 {
+<<<<<<< HEAD
 	bool ok;
 	bool restore = false;
 	struct ns2501_priv *ns = (struct ns2501_priv *)(dvo->dev_priv);
@@ -490,6 +809,32 @@ static void ns2501_mode_set(struct intel_dvo_device *dvo,
 	 */
 	if (restore)
 		restore_dvo(dvo);
+=======
+	struct ns2501_priv *ns = (struct ns2501_priv *)(dvo->dev_priv);
+	int mode_idx, i;
+
+	DRM_DEBUG_KMS
+	    ("set mode (hdisplay=%d,htotal=%d,vdisplay=%d,vtotal=%d).\n",
+	     mode->hdisplay, mode->htotal, mode->vdisplay, mode->vtotal);
+
+	if (mode->hdisplay == 640 && mode->vdisplay == 480)
+		mode_idx = MODE_640x480;
+	else if (mode->hdisplay == 800 && mode->vdisplay == 600)
+		mode_idx = MODE_800x600;
+	else if (mode->hdisplay == 1024 && mode->vdisplay == 768)
+		mode_idx = MODE_1024x768;
+	else
+		return;
+
+	/* Hopefully doing it every time won't hurt... */
+	for (i = 0; i < ARRAY_SIZE(regs_init); i++)
+		ns2501_writeb(dvo, regs_init[i].offset, regs_init[i].value);
+
+	ns->regs = regs_1024x768[mode_idx];
+
+	for (i = 0; i < 84; i++)
+		ns2501_writeb(dvo, ns->regs[i].offset, ns->regs[i].value);
+>>>>>>> v3.18
 }
 
 /* set the NS2501 power state */
@@ -500,15 +845,20 @@ static bool ns2501_get_hw_state(struct intel_dvo_device *dvo)
 	if (!ns2501_readb(dvo, NS2501_REG8, &ch))
 		return false;
 
+<<<<<<< HEAD
 	if (ch & NS2501_8_PD)
 		return true;
 	else
 		return false;
+=======
+	return ch & NS2501_8_PD;
+>>>>>>> v3.18
 }
 
 /* set the NS2501 power state */
 static void ns2501_dpms(struct intel_dvo_device *dvo, bool enable)
 {
+<<<<<<< HEAD
 	bool ok;
 	bool restore = false;
 	struct ns2501_priv *ns = (struct ns2501_priv *)(dvo->dev_priv);
@@ -564,6 +914,42 @@ static void ns2501_dump_regs(struct intel_dvo_device *dvo)
 	DRM_LOG_KMS("NS2501_REG9: 0x%02x\n", val);
 	ns2501_readb(dvo, NS2501_REGC, &val);
 	DRM_LOG_KMS("NS2501_REGC: 0x%02x\n", val);
+=======
+	struct ns2501_priv *ns = (struct ns2501_priv *)(dvo->dev_priv);
+
+	DRM_DEBUG_KMS("Trying set the dpms of the DVO to %i\n", enable);
+
+	if (enable) {
+		if (WARN_ON(ns->regs[83].offset != 0x08 ||
+			    ns->regs[84].offset != 0x41 ||
+			    ns->regs[85].offset != 0xc0))
+			return;
+
+		ns2501_writeb(dvo, 0xc0, ns->regs[85].value | 0x08);
+
+		ns2501_writeb(dvo, 0x41, ns->regs[84].value);
+
+		ns2501_writeb(dvo, 0x34, 0x01);
+		msleep(15);
+
+		ns2501_writeb(dvo, 0x08, 0x35);
+		if (!(ns->regs[83].value & NS2501_8_BPAS))
+			ns2501_writeb(dvo, 0x08, 0x31);
+		msleep(200);
+
+		ns2501_writeb(dvo, 0x34, 0x03);
+
+		ns2501_writeb(dvo, 0xc0, ns->regs[85].value);
+	} else {
+		ns2501_writeb(dvo, 0x34, 0x01);
+		msleep(200);
+
+		ns2501_writeb(dvo, 0x08, 0x34);
+		msleep(15);
+
+		ns2501_writeb(dvo, 0x34, 0x00);
+	}
+>>>>>>> v3.18
 }
 
 static void ns2501_destroy(struct intel_dvo_device *dvo)
@@ -583,6 +969,9 @@ struct intel_dvo_dev_ops ns2501_ops = {
 	.mode_set = ns2501_mode_set,
 	.dpms = ns2501_dpms,
 	.get_hw_state = ns2501_get_hw_state,
+<<<<<<< HEAD
 	.dump_regs = ns2501_dump_regs,
+=======
+>>>>>>> v3.18
 	.destroy = ns2501_destroy,
 };

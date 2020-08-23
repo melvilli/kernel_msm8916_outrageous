@@ -30,6 +30,7 @@
 #include "qxl_object.h"
 
 static int
+<<<<<<< HEAD
 qxl_image_create_helper(struct qxl_device *qdev,
 			struct qxl_release *release,
 			struct qxl_bo **image_bo,
@@ -38,23 +39,116 @@ qxl_image_create_helper(struct qxl_device *qdev,
 			int depth, unsigned int hash,
 			int stride)
 {
+=======
+qxl_allocate_chunk(struct qxl_device *qdev,
+		   struct qxl_release *release,
+		   struct qxl_drm_image *image,
+		   unsigned int chunk_size)
+{
+	struct qxl_drm_chunk *chunk;
+	int ret;
+
+	chunk = kmalloc(sizeof(struct qxl_drm_chunk), GFP_KERNEL);
+	if (!chunk)
+		return -ENOMEM;
+
+	ret = qxl_alloc_bo_reserved(qdev, release, chunk_size, &chunk->bo);
+	if (ret) {
+		kfree(chunk);
+		return ret;
+	}
+
+	list_add_tail(&chunk->head, &image->chunk_list);
+	return 0;
+}
+
+int
+qxl_image_alloc_objects(struct qxl_device *qdev,
+			struct qxl_release *release,
+			struct qxl_drm_image **image_ptr,
+			int height, int stride)
+{
+	struct qxl_drm_image *image;
+	int ret;
+
+	image = kmalloc(sizeof(struct qxl_drm_image), GFP_KERNEL);
+	if (!image)
+		return -ENOMEM;
+
+	INIT_LIST_HEAD(&image->chunk_list);
+
+	ret = qxl_alloc_bo_reserved(qdev, release, sizeof(struct qxl_image), &image->bo);
+	if (ret) {
+		kfree(image);
+		return ret;
+	}
+
+	ret = qxl_allocate_chunk(qdev, release, image, sizeof(struct qxl_data_chunk) + stride * height);
+	if (ret) {
+		qxl_bo_unref(&image->bo);
+		kfree(image);
+		return ret;
+	}
+	*image_ptr = image;
+	return 0;
+}
+
+void qxl_image_free_objects(struct qxl_device *qdev, struct qxl_drm_image *dimage)
+{
+	struct qxl_drm_chunk *chunk, *tmp;
+
+	list_for_each_entry_safe(chunk, tmp, &dimage->chunk_list, head) {
+		qxl_bo_unref(&chunk->bo);
+		kfree(chunk);
+	}
+
+	qxl_bo_unref(&dimage->bo);
+	kfree(dimage);
+}
+
+static int
+qxl_image_init_helper(struct qxl_device *qdev,
+		      struct qxl_release *release,
+		      struct qxl_drm_image *dimage,
+		      const uint8_t *data,
+		      int width, int height,
+		      int depth, unsigned int hash,
+		      int stride)
+{
+	struct qxl_drm_chunk *drv_chunk;
+>>>>>>> v3.18
 	struct qxl_image *image;
 	struct qxl_data_chunk *chunk;
 	int i;
 	int chunk_stride;
 	int linesize = width * depth / 8;
+<<<<<<< HEAD
 	struct qxl_bo *chunk_bo;
 	int ret;
+=======
+	struct qxl_bo *chunk_bo, *image_bo;
+>>>>>>> v3.18
 	void *ptr;
 	/* Chunk */
 	/* FIXME: Check integer overflow */
 	/* TODO: variable number of chunks */
+<<<<<<< HEAD
 	chunk_stride = stride; /* TODO: should use linesize, but it renders
 				  wrong (check the bitmaps are sent correctly
 				  first) */
 	ret = qxl_alloc_bo_reserved(qdev, sizeof(*chunk) + height * chunk_stride,
 				    &chunk_bo);
 	
+=======
+
+	drv_chunk = list_first_entry(&dimage->chunk_list, struct qxl_drm_chunk, head);
+
+	chunk_bo = drv_chunk->bo;
+	chunk_stride = stride; /* TODO: should use linesize, but it renders
+				  wrong (check the bitmaps are sent correctly
+				  first) */
+
+>>>>>>> v3.18
 	ptr = qxl_bo_kmap_atomic_page(qdev, chunk_bo, 0);
 	chunk = ptr;
 	chunk->data_size = height * chunk_stride;
@@ -102,7 +196,10 @@ qxl_image_create_helper(struct qxl_device *qdev,
 				while (remain > 0) {
 					page_base = out_offset & PAGE_MASK;
 					page_offset = offset_in_page(out_offset);
+<<<<<<< HEAD
 					
+=======
+>>>>>>> v3.18
 					size = min((int)(PAGE_SIZE - page_offset), remain);
 
 					ptr = qxl_bo_kmap_atomic_page(qdev, chunk_bo, page_base);
@@ -116,6 +213,7 @@ qxl_image_create_helper(struct qxl_device *qdev,
 			}
 		}
 	}
+<<<<<<< HEAD
 
 
 	qxl_bo_kunmap(chunk_bo);
@@ -124,6 +222,12 @@ qxl_image_create_helper(struct qxl_device *qdev,
 	ret = qxl_alloc_bo_reserved(qdev, sizeof(*image), image_bo);
 
 	ptr = qxl_bo_kmap_atomic_page(qdev, *image_bo, 0);
+=======
+	qxl_bo_kunmap(chunk_bo);
+
+	image_bo = dimage->bo;
+	ptr = qxl_bo_kmap_atomic_page(qdev, image_bo, 0);
+>>>>>>> v3.18
 	image = ptr;
 
 	image->descriptor.id = 0;
@@ -154,23 +258,38 @@ qxl_image_create_helper(struct qxl_device *qdev,
 	image->u.bitmap.stride = chunk_stride;
 	image->u.bitmap.palette = 0;
 	image->u.bitmap.data = qxl_bo_physical_address(qdev, chunk_bo, 0);
+<<<<<<< HEAD
 	qxl_release_add_res(qdev, release, chunk_bo);
 	qxl_bo_unreserve(chunk_bo);
 	qxl_bo_unref(&chunk_bo);
 
 	qxl_bo_kunmap_atomic_page(qdev, *image_bo, ptr);
+=======
+
+	qxl_bo_kunmap_atomic_page(qdev, image_bo, ptr);
+>>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 int qxl_image_create(struct qxl_device *qdev,
 		     struct qxl_release *release,
 		     struct qxl_bo **image_bo,
+=======
+int qxl_image_init(struct qxl_device *qdev,
+		     struct qxl_release *release,
+		     struct qxl_drm_image *dimage,
+>>>>>>> v3.18
 		     const uint8_t *data,
 		     int x, int y, int width, int height,
 		     int depth, int stride)
 {
 	data += y * stride + x * (depth / 8);
+<<<<<<< HEAD
 	return qxl_image_create_helper(qdev, release, image_bo, data,
+=======
+	return qxl_image_init_helper(qdev, release, dimage, data,
+>>>>>>> v3.18
 				       width, height, depth, 0, stride);
 }

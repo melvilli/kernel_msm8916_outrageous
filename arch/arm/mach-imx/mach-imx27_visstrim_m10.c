@@ -26,7 +26,11 @@
 #include <linux/platform_device.h>
 #include <linux/mtd/physmap.h>
 #include <linux/i2c.h>
+<<<<<<< HEAD
 #include <linux/i2c/pca953x.h>
+=======
+#include <linux/platform_data/pca953x.h>
+>>>>>>> v3.18
 #include <linux/input.h>
 #include <linux/gpio.h>
 #include <linux/delay.h>
@@ -43,6 +47,10 @@
 
 #include "common.h"
 #include "devices-imx27.h"
+<<<<<<< HEAD
+=======
+#include "ehci.h"
+>>>>>>> v3.18
 #include "hardware.h"
 #include "iomux-mx27.h"
 
@@ -604,7 +612,10 @@ MACHINE_START(IMX27_VISSTRIM_M10, "Vista Silicon Visstrim_M10")
 	.map_io = mx27_map_io,
 	.init_early = imx27_init_early,
 	.init_irq = mx27_init_irq,
+<<<<<<< HEAD
 	.handle_irq = imx27_handle_irq,
+=======
+>>>>>>> v3.18
 	.init_time	= visstrim_m10_timer_init,
 	.init_machine = visstrim_m10_board_init,
 	.restart	= mxc_restart,

@@ -17,7 +17,10 @@
 
 #include <linux/err.h>
 #include <linux/davinci_emac.h>
+<<<<<<< HEAD
 #include <asm/system.h>
+=======
+>>>>>>> v3.18
 #include "omap_device.h"
 #include "am35xx.h"
 #include "control.h"

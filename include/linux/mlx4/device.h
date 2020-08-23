@@ -33,10 +33,18 @@
 #ifndef MLX4_DEVICE_H
 #define MLX4_DEVICE_H
 
+<<<<<<< HEAD
+=======
+#include <linux/if_ether.h>
+>>>>>>> v3.18
 #include <linux/pci.h>
 #include <linux/completion.h>
 #include <linux/radix-tree.h>
 #include <linux/cpu_rmap.h>
+<<<<<<< HEAD
+=======
+#include <linux/crash_dump.h>
+>>>>>>> v3.18
 
 #include <linux/atomic.h>
 
@@ -47,12 +55,33 @@
 #define MSIX_LEGACY_SZ		4
 #define MIN_MSIX_P_PORT		5
 
+<<<<<<< HEAD
+=======
+#define MLX4_NUM_UP			8
+#define MLX4_NUM_TC			8
+#define MLX4_MAX_100M_UNITS_VAL		255	/*
+						 * work around: can't set values
+						 * greater then this value when
+						 * using 100 Mbps units.
+						 */
+#define MLX4_RATELIMIT_100M_UNITS	3	/* 100 Mbps */
+#define MLX4_RATELIMIT_1G_UNITS		4	/* 1 Gbps */
+#define MLX4_RATELIMIT_DEFAULT		0x00ff
+
+#define MLX4_ROCE_MAX_GIDS	128
+#define MLX4_ROCE_PF_GIDS	16
+
+>>>>>>> v3.18
 enum {
 	MLX4_FLAG_MSI_X		= 1 << 0,
 	MLX4_FLAG_OLD_PORT_CMDS	= 1 << 1,
 	MLX4_FLAG_MASTER	= 1 << 2,
 	MLX4_FLAG_SLAVE		= 1 << 3,
 	MLX4_FLAG_SRIOV		= 1 << 4,
+<<<<<<< HEAD
+=======
+	MLX4_FLAG_OLD_REG_MAC	= 1 << 6,
+>>>>>>> v3.18
 };
 
 enum {
@@ -79,6 +108,10 @@ enum {
 enum {
 	MLX4_MAX_NUM_PF		= 16,
 	MLX4_MAX_NUM_VF		= 64,
+<<<<<<< HEAD
+=======
+	MLX4_MAX_NUM_VF_P_PORT  = 64,
+>>>>>>> v3.18
 	MLX4_MFUNC_MAX		= 80,
 	MLX4_MAX_EQ_NUM		= 1024,
 	MLX4_MFUNC_EQ_NUM	= 4,
@@ -117,6 +150,14 @@ static inline const char *mlx4_steering_mode_str(int steering_mode)
 }
 
 enum {
+<<<<<<< HEAD
+=======
+	MLX4_TUNNEL_OFFLOAD_MODE_NONE,
+	MLX4_TUNNEL_OFFLOAD_MODE_VXLAN
+};
+
+enum {
+>>>>>>> v3.18
 	MLX4_DEV_CAP_FLAG_RC		= 1LL <<  0,
 	MLX4_DEV_CAP_FLAG_UC		= 1LL <<  1,
 	MLX4_DEV_CAP_FLAG_UD		= 1LL <<  2,
@@ -154,14 +195,28 @@ enum {
 	MLX4_DEV_CAP_FLAG2_RSS_TOP		= 1LL <<  1,
 	MLX4_DEV_CAP_FLAG2_RSS_XOR		= 1LL <<  2,
 	MLX4_DEV_CAP_FLAG2_FS_EN		= 1LL <<  3,
+<<<<<<< HEAD
 	MLX4_DEV_CAP_FLAGS2_REASSIGN_MAC_EN	= 1LL <<  4,
 	MLX4_DEV_CAP_FLAG2_TS			= 1LL <<  5,
 	MLX4_DEV_CAP_FLAG2_VLAN_CONTROL		= 1LL <<  6,
 	MLX4_DEV_CAP_FLAG2_FSM			= 1LL <<  7
+=======
+	MLX4_DEV_CAP_FLAG2_REASSIGN_MAC_EN	= 1LL <<  4,
+	MLX4_DEV_CAP_FLAG2_TS			= 1LL <<  5,
+	MLX4_DEV_CAP_FLAG2_VLAN_CONTROL		= 1LL <<  6,
+	MLX4_DEV_CAP_FLAG2_FSM			= 1LL <<  7,
+	MLX4_DEV_CAP_FLAG2_UPDATE_QP		= 1LL <<  8,
+	MLX4_DEV_CAP_FLAG2_DMFS_IPOIB		= 1LL <<  9,
+	MLX4_DEV_CAP_FLAG2_VXLAN_OFFLOADS	= 1LL <<  10,
+	MLX4_DEV_CAP_FLAG2_MAD_DEMUX		= 1LL <<  11,
+	MLX4_DEV_CAP_FLAG2_CQE_STRIDE		= 1LL <<  12,
+	MLX4_DEV_CAP_FLAG2_EQE_STRIDE		= 1LL <<  13
+>>>>>>> v3.18
 };
 
 enum {
 	MLX4_DEV_CAP_64B_EQE_ENABLED	= 1LL << 0,
+<<<<<<< HEAD
 	MLX4_DEV_CAP_64B_CQE_ENABLED	= 1LL << 1
 };
 
@@ -171,6 +226,20 @@ enum {
 
 enum {
 	MLX4_FUNC_CAP_64B_EQE_CQE	= 1L << 0
+=======
+	MLX4_DEV_CAP_64B_CQE_ENABLED	= 1LL << 1,
+	MLX4_DEV_CAP_CQE_STRIDE_ENABLED	= 1LL << 2,
+	MLX4_DEV_CAP_EQE_STRIDE_ENABLED	= 1LL << 3
+};
+
+enum {
+	MLX4_USER_DEV_CAP_LARGE_CQE	= 1L << 0
+};
+
+enum {
+	MLX4_FUNC_CAP_64B_EQE_CQE	= 1L << 0,
+	MLX4_FUNC_CAP_EQE_CQE_STRIDE	= 1L << 1
+>>>>>>> v3.18
 };
 
 
@@ -183,6 +252,10 @@ enum {
 	MLX4_BMME_FLAG_TYPE_2_WIN	= 1 <<  9,
 	MLX4_BMME_FLAG_RESERVED_LKEY	= 1 << 10,
 	MLX4_BMME_FLAG_FAST_REG_WR	= 1 << 11,
+<<<<<<< HEAD
+=======
+	MLX4_BMME_FLAG_VSD_INIT2RTR	= 1 << 28,
+>>>>>>> v3.18
 };
 
 enum mlx4_event {
@@ -206,6 +279,10 @@ enum mlx4_event {
 	MLX4_EVENT_TYPE_CMD		   = 0x0a,
 	MLX4_EVENT_TYPE_VEP_UPDATE	   = 0x19,
 	MLX4_EVENT_TYPE_COMM_CHANNEL	   = 0x18,
+<<<<<<< HEAD
+=======
+	MLX4_EVENT_TYPE_OP_REQUIRED	   = 0x1a,
+>>>>>>> v3.18
 	MLX4_EVENT_TYPE_FATAL_WARNING	   = 0x1b,
 	MLX4_EVENT_TYPE_FLR_EVENT	   = 0x1c,
 	MLX4_EVENT_TYPE_PORT_MNG_CHG_EVENT = 0x1d,
@@ -247,6 +324,10 @@ enum {
 	MLX4_PERM_REMOTE_WRITE	= 1 << 13,
 	MLX4_PERM_ATOMIC	= 1 << 14,
 	MLX4_PERM_BIND_MW	= 1 << 15,
+<<<<<<< HEAD
+=======
+	MLX4_PERM_MASK		= 0xFC00
+>>>>>>> v3.18
 };
 
 enum {
@@ -386,6 +467,10 @@ struct mlx4_caps {
 	int			max_rq_desc_sz;
 	int			max_qp_init_rdma;
 	int			max_qp_dest_rdma;
+<<<<<<< HEAD
+=======
+	u32			*qp0_qkey;
+>>>>>>> v3.18
 	u32			*qp0_proxy;
 	u32			*qp1_proxy;
 	u32			*qp0_tunnel;
@@ -434,7 +519,10 @@ struct mlx4_caps {
 	int                     reserved_qps_base[MLX4_NUM_QP_REGION];
 	int                     log_num_macs;
 	int                     log_num_vlans;
+<<<<<<< HEAD
 	int                     log_num_prios;
+=======
+>>>>>>> v3.18
 	enum mlx4_port_type	port_type[MLX4_MAX_PORTS + 1];
 	u8			supported_type[MLX4_MAX_PORTS + 1];
 	u8                      suggested_type[MLX4_MAX_PORTS + 1];
@@ -450,6 +538,11 @@ struct mlx4_caps {
 	u32			userspace_caps; /* userspace must be aware of these */
 	u32			function_caps;  /* VFs must be aware of these */
 	u16			hca_core_clock;
+<<<<<<< HEAD
+=======
+	u64			phys_port_id[MLX4_MAX_PORTS + 1];
+	int			tunnel_offload_mode;
+>>>>>>> v3.18
 };
 
 struct mlx4_buf_list {
@@ -546,7 +639,11 @@ struct mlx4_uar {
 };
 
 struct mlx4_bf {
+<<<<<<< HEAD
 	unsigned long		offset;
+=======
+	unsigned int		offset;
+>>>>>>> v3.18
 	int			buf_size;
 	struct mlx4_uar	       *uar;
 	void __iomem	       *reg;
@@ -560,6 +657,10 @@ struct mlx4_cq {
 
 	u32			cons_index;
 
+<<<<<<< HEAD
+=======
+	u16                     irq;
+>>>>>>> v3.18
 	__be32		       *set_ci_db;
 	__be32		       *arm_db;
 	int			arm_sn;
@@ -616,9 +717,16 @@ struct mlx4_eth_av {
 	u8		hop_limit;
 	__be32		sl_tclass_flowlabel;
 	u8		dgid[16];
+<<<<<<< HEAD
 	u32		reserved4[2];
 	__be16		vlan;
 	u8		mac[6];
+=======
+	u8		s_mac[6];
+	u8		reserved4[2];
+	__be16		vlan;
+	u8		mac[ETH_ALEN];
+>>>>>>> v3.18
 };
 
 union mlx4_ext_av {
@@ -637,19 +745,50 @@ struct mlx4_counter {
 	__be64	tx_bytes;
 };
 
+<<<<<<< HEAD
+=======
+struct mlx4_quotas {
+	int qp;
+	int cq;
+	int srq;
+	int mpt;
+	int mtt;
+	int counter;
+	int xrcd;
+};
+
+struct mlx4_vf_dev {
+	u8			min_port;
+	u8			n_ports;
+};
+
+>>>>>>> v3.18
 struct mlx4_dev {
 	struct pci_dev	       *pdev;
 	unsigned long		flags;
 	unsigned long		num_slaves;
 	struct mlx4_caps	caps;
 	struct mlx4_phys_caps	phys_caps;
+<<<<<<< HEAD
+=======
+	struct mlx4_quotas	quotas;
+>>>>>>> v3.18
 	struct radix_tree_root	qp_table_tree;
 	u8			rev_id;
 	char			board_id[MLX4_BOARD_ID_LEN];
 	int			num_vfs;
+<<<<<<< HEAD
 	int			oper_log_mgm_entry_size;
 	u64			regid_promisc_array[MLX4_MAX_PORTS + 1];
 	u64			regid_allmulti_array[MLX4_MAX_PORTS + 1];
+=======
+	int			numa_node;
+	int			oper_log_mgm_entry_size;
+	u64			regid_promisc_array[MLX4_MAX_PORTS + 1];
+	u64			regid_allmulti_array[MLX4_MAX_PORTS + 1];
+	struct mlx4_vf_dev     *dev_vfs;
+	int                     nvfs[MLX4_MAX_PORTS + 1];
+>>>>>>> v3.18
 };
 
 struct mlx4_eqe {
@@ -768,6 +907,15 @@ static inline int mlx4_is_master(struct mlx4_dev *dev)
 	return dev->flags & MLX4_FLAG_MASTER;
 }
 
+<<<<<<< HEAD
+=======
+static inline int mlx4_num_reserved_sqps(struct mlx4_dev *dev)
+{
+	return dev->phys_caps.base_sqpn + 8 +
+		16 * MLX4_MFUNC_MAX * !!mlx4_is_master(dev);
+}
+
+>>>>>>> v3.18
 static inline int mlx4_is_qp_reserved(struct mlx4_dev *dev, u32 qpn)
 {
 	return (qpn < dev->phys_caps.base_sqpn + 8 +
@@ -795,7 +943,11 @@ static inline int mlx4_is_slave(struct mlx4_dev *dev)
 }
 
 int mlx4_buf_alloc(struct mlx4_dev *dev, int size, int max_direct,
+<<<<<<< HEAD
 		   struct mlx4_buf *buf);
+=======
+		   struct mlx4_buf *buf, gfp_t gfp);
+>>>>>>> v3.18
 void mlx4_buf_free(struct mlx4_dev *dev, int size, struct mlx4_buf *buf);
 static inline void *mlx4_buf_offset(struct mlx4_buf *buf, int offset)
 {
@@ -813,7 +965,11 @@ void mlx4_xrcd_free(struct mlx4_dev *dev, u32 xrcdn);
 
 int mlx4_uar_alloc(struct mlx4_dev *dev, struct mlx4_uar *uar);
 void mlx4_uar_free(struct mlx4_dev *dev, struct mlx4_uar *uar);
+<<<<<<< HEAD
 int mlx4_bf_alloc(struct mlx4_dev *dev, struct mlx4_bf *bf);
+=======
+int mlx4_bf_alloc(struct mlx4_dev *dev, struct mlx4_bf *bf, int node);
+>>>>>>> v3.18
 void mlx4_bf_free(struct mlx4_dev *dev, struct mlx4_bf *bf);
 
 int mlx4_mtt_init(struct mlx4_dev *dev, int npages, int page_shift,
@@ -832,9 +988,16 @@ int mlx4_mw_enable(struct mlx4_dev *dev, struct mlx4_mw *mw);
 int mlx4_write_mtt(struct mlx4_dev *dev, struct mlx4_mtt *mtt,
 		   int start_index, int npages, u64 *page_list);
 int mlx4_buf_write_mtt(struct mlx4_dev *dev, struct mlx4_mtt *mtt,
+<<<<<<< HEAD
 		       struct mlx4_buf *buf);
 
 int mlx4_db_alloc(struct mlx4_dev *dev, struct mlx4_db *db, int order);
+=======
+		       struct mlx4_buf *buf, gfp_t gfp);
+
+int mlx4_db_alloc(struct mlx4_dev *dev, struct mlx4_db *db, int order,
+		  gfp_t gfp);
+>>>>>>> v3.18
 void mlx4_db_free(struct mlx4_dev *dev, struct mlx4_db *db);
 
 int mlx4_alloc_hwq_res(struct mlx4_dev *dev, struct mlx4_hwq_resources *wqres,
@@ -850,7 +1013,12 @@ void mlx4_cq_free(struct mlx4_dev *dev, struct mlx4_cq *cq);
 int mlx4_qp_reserve_range(struct mlx4_dev *dev, int cnt, int align, int *base);
 void mlx4_qp_release_range(struct mlx4_dev *dev, int base_qpn, int cnt);
 
+<<<<<<< HEAD
 int mlx4_qp_alloc(struct mlx4_dev *dev, int qpn, struct mlx4_qp *qp);
+=======
+int mlx4_qp_alloc(struct mlx4_dev *dev, int qpn, struct mlx4_qp *qp,
+		  gfp_t gfp);
+>>>>>>> v3.18
 void mlx4_qp_free(struct mlx4_dev *dev, struct mlx4_qp *qp);
 
 int mlx4_srq_alloc(struct mlx4_dev *dev, u32 pdn, u32 cqn, u16 xrcdn,
@@ -886,6 +1054,10 @@ enum mlx4_net_trans_rule_id {
 	MLX4_NET_TRANS_RULE_ID_IPV4,
 	MLX4_NET_TRANS_RULE_ID_TCP,
 	MLX4_NET_TRANS_RULE_ID_UDP,
+<<<<<<< HEAD
+=======
+	MLX4_NET_TRANS_RULE_ID_VXLAN,
+>>>>>>> v3.18
 	MLX4_NET_TRANS_RULE_NUM, /* should be last */
 };
 
@@ -912,10 +1084,17 @@ enum mlx4_net_trans_promisc_mode {
 };
 
 struct mlx4_spec_eth {
+<<<<<<< HEAD
 	u8	dst_mac[6];
 	u8	dst_mac_msk[6];
 	u8	src_mac[6];
 	u8	src_mac_msk[6];
+=======
+	u8	dst_mac[ETH_ALEN];
+	u8	dst_mac_msk[ETH_ALEN];
+	u8	src_mac[ETH_ALEN];
+	u8	src_mac_msk[ETH_ALEN];
+>>>>>>> v3.18
 	u8	ether_type_enable;
 	__be16	ether_type;
 	__be16	vlan_id_msk;
@@ -943,6 +1122,15 @@ struct mlx4_spec_ib {
 	u8	dst_gid_msk[16];
 };
 
+<<<<<<< HEAD
+=======
+struct mlx4_spec_vxlan {
+	__be32 vni;
+	__be32 vni_mask;
+
+};
+
+>>>>>>> v3.18
 struct mlx4_spec_list {
 	struct	list_head list;
 	enum	mlx4_net_trans_rule_id id;
@@ -951,6 +1139,10 @@ struct mlx4_spec_list {
 		struct mlx4_spec_ib ib;
 		struct mlx4_spec_ipv4 ipv4;
 		struct mlx4_spec_tcp_udp tcp_udp;
+<<<<<<< HEAD
+=======
+		struct mlx4_spec_vxlan vxlan;
+>>>>>>> v3.18
 	};
 };
 
@@ -1037,6 +1229,18 @@ struct mlx4_net_trans_rule_hw_ipv4 {
 	__be32	src_ip_msk;
 } __packed;
 
+<<<<<<< HEAD
+=======
+struct mlx4_net_trans_rule_hw_vxlan {
+	u8	size;
+	u8	rsvd;
+	__be16	id;
+	__be32	rsvd1;
+	__be32	vni;
+	__be32	vni_mask;
+} __packed;
+
+>>>>>>> v3.18
 struct _rule_hw {
 	union {
 		struct {
@@ -1048,6 +1252,7 @@ struct _rule_hw {
 		struct mlx4_net_trans_rule_hw_ib ib;
 		struct mlx4_net_trans_rule_hw_ipv4 ipv4;
 		struct mlx4_net_trans_rule_hw_tcp_udp tcp_udp;
+<<<<<<< HEAD
 	};
 };
 
@@ -1056,6 +1261,21 @@ struct mlx4_flow_handle {
 	u64 reg_id[2];
 };
 
+=======
+		struct mlx4_net_trans_rule_hw_vxlan vxlan;
+	};
+};
+
+enum {
+	VXLAN_STEER_BY_OUTER_MAC	= 1 << 0,
+	VXLAN_STEER_BY_OUTER_VLAN	= 1 << 1,
+	VXLAN_STEER_BY_VSID_VNI		= 1 << 2,
+	VXLAN_STEER_BY_INNER_MAC	= 1 << 3,
+	VXLAN_STEER_BY_INNER_VLAN	= 1 << 4,
+};
+
+
+>>>>>>> v3.18
 int mlx4_flow_steer_promisc_add(struct mlx4_dev *dev, u8 port, u32 qpn,
 				enum mlx4_net_trans_promisc_mode mode);
 int mlx4_flow_steer_promisc_remove(struct mlx4_dev *dev, u8 port,
@@ -1078,9 +1298,17 @@ int mlx4_SET_PORT_qpn_calc(struct mlx4_dev *dev, u8 port, u32 base_qpn,
 int mlx4_SET_PORT_PRIO2TC(struct mlx4_dev *dev, u8 port, u8 *prio2tc);
 int mlx4_SET_PORT_SCHEDULER(struct mlx4_dev *dev, u8 port, u8 *tc_tx_bw,
 		u8 *pg, u16 *ratelimit);
+<<<<<<< HEAD
 int mlx4_find_cached_vlan(struct mlx4_dev *dev, u8 port, u16 vid, int *idx);
 int mlx4_register_vlan(struct mlx4_dev *dev, u8 port, u16 vlan, int *index);
 void mlx4_unregister_vlan(struct mlx4_dev *dev, u8 port, int index);
+=======
+int mlx4_SET_PORT_VXLAN(struct mlx4_dev *dev, u8 port, u8 steering, int enable);
+int mlx4_find_cached_mac(struct mlx4_dev *dev, u8 port, u64 mac, int *idx);
+int mlx4_find_cached_vlan(struct mlx4_dev *dev, u8 port, u16 vid, int *idx);
+int mlx4_register_vlan(struct mlx4_dev *dev, u8 port, u16 vlan, int *index);
+void mlx4_unregister_vlan(struct mlx4_dev *dev, u8 port, u16 vlan);
+>>>>>>> v3.18
 
 int mlx4_map_phys_fmr(struct mlx4_dev *dev, struct mlx4_fmr *fmr, u64 *page_list,
 		      int npages, u64 iova, u32 *lkey, u32 *rkey);
@@ -1096,6 +1324,12 @@ int mlx4_assign_eq(struct mlx4_dev *dev, char *name, struct cpu_rmap *rmap,
 		   int *vector);
 void mlx4_release_eq(struct mlx4_dev *dev, int vec);
 
+<<<<<<< HEAD
+=======
+int mlx4_eq_get_irq(struct mlx4_dev *dev, int vec);
+
+int mlx4_get_phys_port_id(struct mlx4_dev *dev);
+>>>>>>> v3.18
 int mlx4_wol_read(struct mlx4_dev *dev, u64 *config, int port);
 int mlx4_wol_write(struct mlx4_dev *dev, u64 config, int port);
 
@@ -1111,6 +1345,12 @@ int mlx4_map_sw_to_hw_steering_id(struct mlx4_dev *dev,
 				  enum mlx4_net_trans_rule_id id);
 int mlx4_hw_rule_sz(struct mlx4_dev *dev, enum mlx4_net_trans_rule_id id);
 
+<<<<<<< HEAD
+=======
+int mlx4_tunnel_steer_add(struct mlx4_dev *dev, unsigned char *addr,
+			  int port, int qpn, u16 prio, u64 *reg_id);
+
+>>>>>>> v3.18
 void mlx4_sync_pkey_table(struct mlx4_dev *dev, int slave, int port,
 			  int i, int val);
 
@@ -1127,6 +1367,75 @@ int set_and_calc_slave_port_state(struct mlx4_dev *dev, int slave, u8 port, int 
 void mlx4_put_slave_node_guid(struct mlx4_dev *dev, int slave, __be64 guid);
 __be64 mlx4_get_slave_node_guid(struct mlx4_dev *dev, int slave);
 
+<<<<<<< HEAD
 cycle_t mlx4_read_clock(struct mlx4_dev *dev);
 
+=======
+int mlx4_get_slave_from_roce_gid(struct mlx4_dev *dev, int port, u8 *gid,
+				 int *slave_id);
+int mlx4_get_roce_gid_from_slave(struct mlx4_dev *dev, int port, int slave_id,
+				 u8 *gid);
+
+int mlx4_FLOW_STEERING_IB_UC_QP_RANGE(struct mlx4_dev *dev, u32 min_range_qpn,
+				      u32 max_range_qpn);
+
+cycle_t mlx4_read_clock(struct mlx4_dev *dev);
+
+struct mlx4_active_ports {
+	DECLARE_BITMAP(ports, MLX4_MAX_PORTS);
+};
+/* Returns a bitmap of the physical ports which are assigned to slave */
+struct mlx4_active_ports mlx4_get_active_ports(struct mlx4_dev *dev, int slave);
+
+/* Returns the physical port that represents the virtual port of the slave, */
+/* or a value < 0 in case of an error. If a slave has 2 ports, the identity */
+/* mapping is returned.							    */
+int mlx4_slave_convert_port(struct mlx4_dev *dev, int slave, int port);
+
+struct mlx4_slaves_pport {
+	DECLARE_BITMAP(slaves, MLX4_MFUNC_MAX);
+};
+/* Returns a bitmap of all slaves that are assigned to port. */
+struct mlx4_slaves_pport mlx4_phys_to_slaves_pport(struct mlx4_dev *dev,
+						   int port);
+
+/* Returns a bitmap of all slaves that are assigned exactly to all the */
+/* the ports that are set in crit_ports.			       */
+struct mlx4_slaves_pport mlx4_phys_to_slaves_pport_actv(
+		struct mlx4_dev *dev,
+		const struct mlx4_active_ports *crit_ports);
+
+/* Returns the slave's virtual port that represents the physical port. */
+int mlx4_phys_to_slave_port(struct mlx4_dev *dev, int slave, int port);
+
+int mlx4_get_base_gid_ix(struct mlx4_dev *dev, int slave, int port);
+
+int mlx4_config_vxlan_port(struct mlx4_dev *dev, __be16 udp_port);
+int mlx4_vf_smi_enabled(struct mlx4_dev *dev, int slave, int port);
+int mlx4_vf_get_enable_smi_admin(struct mlx4_dev *dev, int slave, int port);
+int mlx4_vf_set_enable_smi_admin(struct mlx4_dev *dev, int slave, int port,
+				 int enable);
+int mlx4_mr_hw_get_mpt(struct mlx4_dev *dev, struct mlx4_mr *mmr,
+		       struct mlx4_mpt_entry ***mpt_entry);
+int mlx4_mr_hw_write_mpt(struct mlx4_dev *dev, struct mlx4_mr *mmr,
+			 struct mlx4_mpt_entry **mpt_entry);
+int mlx4_mr_hw_change_pd(struct mlx4_dev *dev, struct mlx4_mpt_entry *mpt_entry,
+			 u32 pdn);
+int mlx4_mr_hw_change_access(struct mlx4_dev *dev,
+			     struct mlx4_mpt_entry *mpt_entry,
+			     u32 access);
+void mlx4_mr_hw_put_mpt(struct mlx4_dev *dev,
+			struct mlx4_mpt_entry **mpt_entry);
+void mlx4_mr_rereg_mem_cleanup(struct mlx4_dev *dev, struct mlx4_mr *mr);
+int mlx4_mr_rereg_mem_write(struct mlx4_dev *dev, struct mlx4_mr *mr,
+			    u64 iova, u64 size, int npages,
+			    int page_shift, struct mlx4_mpt_entry *mpt_entry);
+
+/* Returns true if running in low memory profile (kdump kernel) */
+static inline bool mlx4_low_memory_profile(void)
+{
+	return is_kdump_kernel();
+}
+
+>>>>>>> v3.18
 #endif /* MLX4_DEVICE_H */

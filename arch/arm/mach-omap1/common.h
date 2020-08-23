@@ -46,6 +46,12 @@ static inline void omap7xx_map_io(void)
 void omap1510_fpga_init_irq(void);
 void omap15xx_map_io(void);
 #else
+<<<<<<< HEAD
+=======
+static inline void omap1510_fpga_init_irq(void)
+{
+}
+>>>>>>> v3.18
 static inline void omap15xx_map_io(void)
 {
 }

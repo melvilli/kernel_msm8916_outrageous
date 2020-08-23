@@ -34,17 +34,31 @@ config KVM_BOOK3S_64_HANDLER
 	bool
 	select KVM_BOOK3S_HANDLER
 
+<<<<<<< HEAD
 config KVM_BOOK3S_PR
+=======
+config KVM_BOOK3S_PR_POSSIBLE
+>>>>>>> v3.18
 	bool
 	select KVM_MMIO
 	select MMU_NOTIFIER
 
+<<<<<<< HEAD
+=======
+config KVM_BOOK3S_HV_POSSIBLE
+	bool
+
+>>>>>>> v3.18
 config KVM_BOOK3S_32
 	tristate "KVM support for PowerPC book3s_32 processors"
 	depends on PPC_BOOK3S_32 && !SMP && !PTE_64BIT
 	select KVM
 	select KVM_BOOK3S_32_HANDLER
+<<<<<<< HEAD
 	select KVM_BOOK3S_PR
+=======
+	select KVM_BOOK3S_PR_POSSIBLE
+>>>>>>> v3.18
 	---help---
 	  Support running unmodified book3s_32 guest kernels
 	  in virtual machines on book3s_32 host processors.
@@ -59,6 +73,10 @@ config KVM_BOOK3S_64
 	depends on PPC_BOOK3S_64
 	select KVM_BOOK3S_64_HANDLER
 	select KVM
+<<<<<<< HEAD
+=======
+	select KVM_BOOK3S_PR_POSSIBLE if !KVM_BOOK3S_HV_POSSIBLE
+>>>>>>> v3.18
 	---help---
 	  Support running unmodified book3s_64 and book3s_32 guest kernels
 	  in virtual machines on book3s_64 host processors.
@@ -69,9 +87,17 @@ config KVM_BOOK3S_64
 	  If unsure, say N.
 
 config KVM_BOOK3S_64_HV
+<<<<<<< HEAD
 	bool "KVM support for POWER7 and PPC970 using hypervisor mode in host"
 	depends on KVM_BOOK3S_64
 	select MMU_NOTIFIER
+=======
+	tristate "KVM support for POWER7 and PPC970 using hypervisor mode in host"
+	depends on KVM_BOOK3S_64
+	select KVM_BOOK3S_HV_POSSIBLE
+	select MMU_NOTIFIER
+	select CMA
+>>>>>>> v3.18
 	---help---
 	  Support running unmodified book3s_64 guest kernels in
 	  virtual machines on POWER7 and PPC970 processors that have
@@ -88,6 +114,7 @@ config KVM_BOOK3S_64_HV
 	  If unsure, say N.
 
 config KVM_BOOK3S_64_PR
+<<<<<<< HEAD
 	def_bool y
 	depends on KVM_BOOK3S_64 && !KVM_BOOK3S_64_HV
 	select KVM_BOOK3S_PR
@@ -112,6 +139,29 @@ config KVM_440
 config KVM_EXIT_TIMING
 	bool "Detailed exit timing"
 	depends on KVM_440 || KVM_E500V2 || KVM_E500MC
+=======
+	tristate "KVM support without using hypervisor mode in host"
+	depends on KVM_BOOK3S_64
+	select KVM_BOOK3S_PR_POSSIBLE
+	---help---
+	  Support running guest kernels in virtual machines on processors
+	  without using hypervisor mode in the host, by running the
+	  guest in user mode (problem state) and emulating all
+	  privileged instructions and registers.
+
+	  This is not as fast as using hypervisor mode, but works on
+	  machines where hypervisor mode is not available or not usable,
+	  and can emulate processors that are different from the host
+	  processor, including emulating 32-bit processors on a 64-bit
+	  host.
+
+config KVM_BOOKE_HV
+	bool
+
+config KVM_EXIT_TIMING
+	bool "Detailed exit timing"
+	depends on KVM_E500V2 || KVM_E500MC
+>>>>>>> v3.18
 	---help---
 	  Calculate elapsed time for every exit/enter cycle. A per-vcpu
 	  report is available in debugfs kvm/vm#_vcpu#_timing.
@@ -155,6 +205,10 @@ config KVM_MPIC
 	bool "KVM in-kernel MPIC emulation"
 	depends on KVM && E500
 	select HAVE_KVM_IRQCHIP
+<<<<<<< HEAD
+=======
+	select HAVE_KVM_IRQFD
+>>>>>>> v3.18
 	select HAVE_KVM_IRQ_ROUTING
 	select HAVE_KVM_MSI
 	help
@@ -166,6 +220,11 @@ config KVM_MPIC
 config KVM_XICS
 	bool "KVM in-kernel XICS emulation"
 	depends on KVM_BOOK3S_64 && !KVM_MPIC
+<<<<<<< HEAD
+=======
+	select HAVE_KVM_IRQCHIP
+	select HAVE_KVM_IRQFD
+>>>>>>> v3.18
 	---help---
 	  Include support for the XICS (eXternal Interrupt Controller
 	  Specification) interrupt controller architecture used on

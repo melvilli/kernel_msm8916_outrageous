@@ -1,7 +1,11 @@
 /*******************************************************************
  * This file is part of the Emulex Linux Device Driver for         *
  * Fibre Channel Host Bus Adapters.                                *
+<<<<<<< HEAD
  * Copyright (C) 2004-2008 Emulex.  All rights reserved.           *
+=======
+ * Copyright (C) 2004-2013 Emulex.  All rights reserved.           *
+>>>>>>> v3.18
  * EMULEX and SLI are trademarks of Emulex.                        *
  * www.emulex.com                                                  *
  *                                                                 *
@@ -78,7 +82,12 @@ struct lpfc_nodelist {
 	struct list_head nlp_listp;
 	struct lpfc_name nlp_portname;
 	struct lpfc_name nlp_nodename;
+<<<<<<< HEAD
 	uint32_t         nlp_flag;		/* entry  flags */
+=======
+	uint32_t         nlp_flag;		/* entry flags */
+	uint32_t         nlp_add_flag;		/* additional flags */
+>>>>>>> v3.18
 	uint32_t         nlp_DID;		/* FC D_ID of entry */
 	uint32_t         nlp_last_elscmd;	/* Last ELS cmd sent */
 	uint16_t         nlp_type;
@@ -116,7 +125,11 @@ struct lpfc_nodelist {
 	atomic_t cmd_pending;
 	uint32_t cmd_qdepth;
 	unsigned long last_change_time;
+<<<<<<< HEAD
 	struct lpfc_node_rrqs active_rrqs;
+=======
+	unsigned long *active_rrqs_xri_bitmap;
+>>>>>>> v3.18
 	struct lpfc_scsicmd_bkt *lat_data;	/* Latency data */
 };
 struct lpfc_node_rrq {
@@ -154,8 +167,17 @@ struct lpfc_node_rrq {
 #define NLP_NODEV_REMOVE   0x08000000	/* Defer removal till discovery ends */
 #define NLP_TARGET_REMOVE  0x10000000   /* Target remove in process */
 #define NLP_SC_REQ         0x20000000	/* Target requires authentication */
+<<<<<<< HEAD
 #define NLP_RPI_REGISTERED 0x80000000	/* nlp_rpi is valid */
 
+=======
+#define NLP_FIRSTBURST     0x40000000	/* Target supports FirstBurst */
+#define NLP_RPI_REGISTERED 0x80000000	/* nlp_rpi is valid */
+
+/* Defines for nlp_add_flag (uint32) */
+#define NLP_IN_DEV_LOSS  0x00000001	/* Dev Loss processing in progress */
+
+>>>>>>> v3.18
 /* ndlp usage management macros */
 #define NLP_CHK_NODE_ACT(ndlp)		(((ndlp)->nlp_usg_map \
 						& NLP_USG_NODE_ACT_BIT) \

@@ -56,6 +56,7 @@ framebuffer device.</para>
 unsigned int i;
 int fb_fd;
 
+<<<<<<< HEAD
 if (-1 == ioctl (fd, VIDIOC_G_FBUF, &amp;fbuf)) {
 	perror ("VIDIOC_G_FBUF");
 	exit (EXIT_FAILURE);
@@ -68,6 +69,20 @@ for (i = 0; i &gt; 30; ++i) {
 	snprintf (dev_name, sizeof (dev_name), "/dev/fb%u", i);
 
 	fb_fd = open (dev_name, O_RDWR);
+=======
+if (-1 == ioctl(fd, VIDIOC_G_FBUF, &amp;fbuf)) {
+	perror("VIDIOC_G_FBUF");
+	exit(EXIT_FAILURE);
+}
+
+for (i = 0; i &lt; 30; i++) {
+	char dev_name[16];
+	struct fb_fix_screeninfo si;
+
+	snprintf(dev_name, sizeof(dev_name), "/dev/fb%u", i);
+
+	fb_fd = open(dev_name, O_RDWR);
+>>>>>>> v3.18
 	if (-1 == fb_fd) {
 		switch (errno) {
 		case ENOENT: /* no such file */
@@ -75,6 +90,7 @@ for (i = 0; i &gt; 30; ++i) {
 			continue;
 
 		default:
+<<<<<<< HEAD
 			perror ("open");
 			exit (EXIT_FAILURE);
 		}
@@ -82,12 +98,25 @@ for (i = 0; i &gt; 30; ++i) {
 
 	if (0 == ioctl (fb_fd, FBIOGET_FSCREENINFO, &amp;si)) {
 		if (si.smem_start == (unsigned long) fbuf.base)
+=======
+			perror("open");
+			exit(EXIT_FAILURE);
+		}
+	}
+
+	if (0 == ioctl(fb_fd, FBIOGET_FSCREENINFO, &amp;si)) {
+		if (si.smem_start == (unsigned long)fbuf.base)
+>>>>>>> v3.18
 			break;
 	} else {
 		/* Apparently not a framebuffer device. */
 	}
 
+<<<<<<< HEAD
 	close (fb_fd);
+=======
+	close(fb_fd);
+>>>>>>> v3.18
 	fb_fd = -1;
 }
 

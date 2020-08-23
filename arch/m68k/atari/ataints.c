@@ -41,6 +41,10 @@
 #include <linux/init.h>
 #include <linux/seq_file.h>
 #include <linux/module.h>
+<<<<<<< HEAD
+=======
+#include <linux/irq.h>
+>>>>>>> v3.18
 
 #include <asm/traps.h>
 
@@ -333,6 +337,12 @@ void __init atari_init_IRQ(void)
 	m68k_setup_irq_controller(&atari_mfptimer_chip, handle_simple_irq,
 				  IRQ_MFP_TIMER1, 8);
 
+<<<<<<< HEAD
+=======
+	irq_set_status_flags(IRQ_MFP_TIMER1, IRQ_IS_POLLED);
+	irq_set_status_flags(IRQ_MFP_TIMER2, IRQ_IS_POLLED);
+
+>>>>>>> v3.18
 	/* prepare timer D data for use as poll interrupt */
 	/* set Timer D data Register - needs to be > 0 */
 	st_mfp.tim_dt_d = 254;	/* < 100 Hz */

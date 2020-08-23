@@ -21,6 +21,10 @@
 /* clocksource cycle base type */
 typedef u64 cycle_t;
 struct clocksource;
+<<<<<<< HEAD
+=======
+struct module;
+>>>>>>> v3.18
 
 #ifdef CONFIG_ARCH_CLOCKSOURCE_DATA
 #include <asm/clocksource.h>
@@ -161,7 +165,11 @@ extern u64 timecounter_cyc2time(struct timecounter *tc,
  * @archdata:		arch-specific data
  * @suspend:		suspend function for the clocksource, if necessary
  * @resume:		resume function for the clocksource, if necessary
+<<<<<<< HEAD
  * @cycle_last:		most recent cycle counter value seen by ::read()
+=======
+ * @owner:		module reference, must be set by clocksource in modules
+>>>>>>> v3.18
  */
 struct clocksource {
 	/*
@@ -169,7 +177,10 @@ struct clocksource {
 	 * clocksource itself is cacheline aligned.
 	 */
 	cycle_t (*read)(struct clocksource *cs);
+<<<<<<< HEAD
 	cycle_t cycle_last;
+=======
+>>>>>>> v3.18
 	cycle_t mask;
 	u32 mult;
 	u32 shift;
@@ -195,6 +206,10 @@ struct clocksource {
 	cycle_t cs_last;
 	cycle_t wd_last;
 #endif
+<<<<<<< HEAD
+=======
+	struct module *owner;
+>>>>>>> v3.18
 } ____cacheline_aligned;
 
 /*
@@ -207,6 +222,10 @@ struct clocksource {
 #define CLOCK_SOURCE_VALID_FOR_HRES		0x20
 #define CLOCK_SOURCE_UNSTABLE			0x40
 #define CLOCK_SOURCE_SUSPEND_NONSTOP		0x80
+<<<<<<< HEAD
+=======
+#define CLOCK_SOURCE_RESELECT			0x100
+>>>>>>> v3.18
 
 /* simplify initialization of mask field */
 #define CLOCKSOURCE_MASK(bits) (cycle_t)((bits) < 64 ? ((1ULL<<(bits))-1) : -1)
@@ -279,7 +298,11 @@ static inline s64 clocksource_cyc2ns(cycle_t cycles, u32 mult, u32 shift)
 
 
 extern int clocksource_register(struct clocksource*);
+<<<<<<< HEAD
 extern void clocksource_unregister(struct clocksource*);
+=======
+extern int clocksource_unregister(struct clocksource*);
+>>>>>>> v3.18
 extern void clocksource_touch_watchdog(void);
 extern struct clocksource* clocksource_get_next(void);
 extern void clocksource_change_rating(struct clocksource *cs, int rating);
@@ -323,7 +346,11 @@ static inline void __clocksource_updatefreq_khz(struct clocksource *cs, u32 khz)
 }
 
 
+<<<<<<< HEAD
 extern void timekeeping_notify(struct clocksource *clock);
+=======
+extern int timekeeping_notify(struct clocksource *clock);
+>>>>>>> v3.18
 
 extern cycle_t clocksource_mmio_readl_up(struct clocksource *);
 extern cycle_t clocksource_mmio_readl_down(struct clocksource *);
@@ -335,6 +362,7 @@ extern int clocksource_mmio_init(void __iomem *, const char *,
 
 extern int clocksource_i8253_init(void);
 
+<<<<<<< HEAD
 struct device_node;
 typedef void(*clocksource_of_init_fn)(struct device_node *);
 #ifdef CONFIG_CLKSRC_OF
@@ -352,6 +380,15 @@ static inline void clocksource_of_init(void) {}
 		__attribute__((unused))					\
 		 = { .compatible = compat,				\
 		     .data = (fn == (clocksource_of_init_fn)NULL) ? fn : fn }
+=======
+#define CLOCKSOURCE_OF_DECLARE(name, compat, fn) \
+	OF_DECLARE_1(clksrc, name, compat, fn)
+
+#ifdef CONFIG_CLKSRC_OF
+extern void clocksource_of_init(void);
+#else
+static inline void clocksource_of_init(void) {}
+>>>>>>> v3.18
 #endif
 
 #endif /* _LINUX_CLOCKSOURCE_H */

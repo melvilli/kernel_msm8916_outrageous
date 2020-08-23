@@ -1,4 +1,5 @@
 vdso.lds
+<<<<<<< HEAD
 vdso-syms.lds
 vdsox32.lds
 vdsox32-syms.lds
@@ -6,3 +7,11 @@ vdso32-syms.lds
 vdso32-syscall-syms.lds
 vdso32-sysenter-syms.lds
 vdso32-int80-syms.lds
+=======
+vdsox32.lds
+vdso32-syscall-syms.lds
+vdso32-sysenter-syms.lds
+vdso32-int80-syms.lds
+vdso-image-*.c
+vdso2c
+>>>>>>> v3.18

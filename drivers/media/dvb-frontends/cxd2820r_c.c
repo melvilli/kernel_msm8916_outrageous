@@ -45,6 +45,10 @@ int cxd2820r_set_frontend_c(struct dvb_frontend *fe)
 		{ 0x1008b, 0x07, 0xff },
 		{ 0x1001f, priv->cfg.if_agc_polarity << 7, 0x80 },
 		{ 0x10070, priv->cfg.ts_mode, 0xff },
+<<<<<<< HEAD
+=======
+		{ 0x10071, !priv->cfg.ts_clock_inv << 4, 0x10 },
+>>>>>>> v3.18
 	};
 
 	dev_dbg(&priv->i2c->dev, "%s: frequency=%d symbol_rate=%d\n", __func__,
@@ -64,7 +68,11 @@ int cxd2820r_set_frontend_c(struct dvb_frontend *fe)
 	}
 
 	priv->delivery_system = SYS_DVBC_ANNEX_A;
+<<<<<<< HEAD
 	priv->ber_running = 0; /* tune stops BER counter */
+=======
+	priv->ber_running = false; /* tune stops BER counter */
+>>>>>>> v3.18
 
 	/* program IF frequency */
 	if (fe->ops.tuner_ops.get_if_frequency) {
@@ -78,7 +86,11 @@ int cxd2820r_set_frontend_c(struct dvb_frontend *fe)
 
 	num = if_freq / 1000; /* Hz => kHz */
 	num *= 0x4000;
+<<<<<<< HEAD
 	if_ctl = cxd2820r_div_u64_round_closest(num, 41000);
+=======
+	if_ctl = 0x4000 - cxd2820r_div_u64_round_closest(num, 41000);
+>>>>>>> v3.18
 	buf[0] = (if_ctl >> 8) & 0x3f;
 	buf[1] = (if_ctl >> 0) & 0xff;
 
@@ -167,7 +179,11 @@ int cxd2820r_read_ber_c(struct dvb_frontend *fe, u32 *ber)
 			start_ber = 1;
 		}
 	} else {
+<<<<<<< HEAD
 		priv->ber_running = 1;
+=======
+		priv->ber_running = true;
+>>>>>>> v3.18
 		start_ber = 1;
 	}
 

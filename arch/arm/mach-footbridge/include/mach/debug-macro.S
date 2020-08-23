@@ -13,6 +13,7 @@
 
 #include <asm/hardware/dec21285.h>
 
+<<<<<<< HEAD
 #ifndef CONFIG_DEBUG_DC21285_PORT
 	/* For NetWinder debugging */
 		.macro	addruart, rp, rv, tmp
@@ -27,6 +28,8 @@
 #include <asm/hardware/debug-8250.S>
 
 #else
+=======
+>>>>>>> v3.18
 #include <mach/hardware.h>
 	/* For EBSA285 debugging */
 		.equ	dc21285_high, ARMCSR_BASE & 0xff000000
@@ -54,4 +57,7 @@
 
 		.macro	waituart,rd,rx
 		.endm
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18

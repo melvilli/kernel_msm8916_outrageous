@@ -62,7 +62,11 @@ struct ceph_mdsmap *ceph_mdsmap_decode(void **p, void *end)
 
 	ceph_decode_16_safe(p, end, version, bad);
 	if (version > 3) {
+<<<<<<< HEAD
 		pr_warning("got mdsmap version %d > 3, failing", version);
+=======
+		pr_warn("got mdsmap version %d > 3, failing", version);
+>>>>>>> v3.18
 		goto bad;
 	}
 
@@ -92,6 +96,10 @@ struct ceph_mdsmap *ceph_mdsmap_decode(void **p, void *end)
 		u32 num_export_targets;
 		void *pexport_targets = NULL;
 		struct ceph_timespec laggy_since;
+<<<<<<< HEAD
+=======
+		struct ceph_mds_info *info;
+>>>>>>> v3.18
 
 		ceph_decode_need(p, end, sizeof(u64)*2 + 1 + sizeof(u32), bad);
 		global_id = ceph_decode_64(p);
@@ -126,6 +134,7 @@ struct ceph_mdsmap *ceph_mdsmap_decode(void **p, void *end)
 		     i+1, n, global_id, mds, inc,
 		     ceph_pr_addr(&addr.in_addr),
 		     ceph_mds_state_name(state));
+<<<<<<< HEAD
 		if (mds >= 0 && mds < m->m_max_mds && state > 0) {
 			m->m_info[mds].global_id = global_id;
 			m->m_info[mds].state = state;
@@ -146,6 +155,29 @@ struct ceph_mdsmap *ceph_mdsmap_decode(void **p, void *end)
 			} else {
 				m->m_info[mds].export_targets = NULL;
 			}
+=======
+
+		if (mds < 0 || mds >= m->m_max_mds || state <= 0)
+			continue;
+
+		info = &m->m_info[mds];
+		info->global_id = global_id;
+		info->state = state;
+		info->addr = addr;
+		info->laggy = (laggy_since.tv_sec != 0 ||
+			       laggy_since.tv_nsec != 0);
+		info->num_export_targets = num_export_targets;
+		if (num_export_targets) {
+			info->export_targets = kcalloc(num_export_targets,
+						       sizeof(u32), GFP_NOFS);
+			if (info->export_targets == NULL)
+				goto badmem;
+			for (j = 0; j < num_export_targets; j++)
+				info->export_targets[j] =
+				       ceph_decode_32(&pexport_targets);
+		} else {
+			info->export_targets = NULL;
+>>>>>>> v3.18
 		}
 	}
 

@@ -10,6 +10,7 @@
 #include <linux/pm_runtime.h>
 #include <linux/export.h>
 
+<<<<<<< HEAD
 #ifdef CONFIG_PM_RUNTIME
 /**
  * pm_generic_runtime_idle - Generic runtime idle callback for subsystems.
@@ -34,6 +35,9 @@ int pm_generic_runtime_idle(struct device *dev)
 }
 EXPORT_SYMBOL_GPL(pm_generic_runtime_idle);
 
+=======
+#ifdef CONFIG_PM
+>>>>>>> v3.18
 /**
  * pm_generic_runtime_suspend - Generic runtime suspend callback for subsystems.
  * @dev: Device to suspend.
@@ -71,7 +75,11 @@ int pm_generic_runtime_resume(struct device *dev)
 	return ret;
 }
 EXPORT_SYMBOL_GPL(pm_generic_runtime_resume);
+<<<<<<< HEAD
 #endif /* CONFIG_PM_RUNTIME */
+=======
+#endif /* CONFIG_PM */
+>>>>>>> v3.18
 
 #ifdef CONFIG_PM_SLEEP
 /**
@@ -308,7 +316,11 @@ int pm_generic_restore(struct device *dev)
 EXPORT_SYMBOL_GPL(pm_generic_restore);
 
 /**
+<<<<<<< HEAD
  * pm_generic_complete - Generic routine competing a device power transition.
+=======
+ * pm_generic_complete - Generic routine completing a device power transition.
+>>>>>>> v3.18
  * @dev: Device to handle.
  *
  * Complete a device power transition during a system-wide power transition.

@@ -981,7 +981,11 @@ struct lbs_private *lbs_add_card(void *card, struct device *dmdev)
 		goto err_wdev;
 	}
 
+<<<<<<< HEAD
 	dev = alloc_netdev(0, "wlan%d", ether_setup);
+=======
+	dev = alloc_netdev(0, "wlan%d", NET_NAME_UNKNOWN, ether_setup);
+>>>>>>> v3.18
 	if (!dev) {
 		dev_err(dmdev, "no memory for network device instance\n");
 		goto err_adapter;

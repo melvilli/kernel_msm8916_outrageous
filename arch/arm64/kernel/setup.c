@@ -40,6 +40,7 @@
 #include <linux/fs.h>
 #include <linux/proc_fs.h>
 #include <linux/memblock.h>
+<<<<<<< HEAD
 #include <linux/of_address.h>
 #include <linux/of_fdt.h>
 #include <linux/of_platform.h>
@@ -48,6 +49,14 @@
 #include <linux/personality.h>
 
 #include <asm/fixmap.h>
+=======
+#include <linux/of_fdt.h>
+#include <linux/of_platform.h>
+#include <linux/efi.h>
+
+#include <asm/fixmap.h>
+#include <asm/cpu.h>
+>>>>>>> v3.18
 #include <asm/cputype.h>
 #include <asm/elf.h>
 #include <asm/cputable.h>
@@ -68,6 +77,7 @@ EXPORT_SYMBOL(processor_id);
 unsigned long elf_hwcap __read_mostly;
 EXPORT_SYMBOL_GPL(elf_hwcap);
 
+<<<<<<< HEAD
 unsigned int boot_reason;
 EXPORT_SYMBOL(boot_reason);
 
@@ -77,6 +87,8 @@ EXPORT_SYMBOL(cold_boot);
 char* (*arch_read_hardware_id)(void);
 EXPORT_SYMBOL(arch_read_hardware_id);
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_COMPAT
 #define COMPAT_ELF_HWCAP_DEFAULT	\
 				(COMPAT_HWCAP_HALF|COMPAT_HWCAP_THUMB|\
@@ -125,6 +137,7 @@ void __init early_print(const char *str, ...)
 	printk("%s", buf);
 }
 
+<<<<<<< HEAD
 struct cpuinfo_arm64 {
 	struct cpu	cpu;
 	u32		reg_midr;
@@ -138,6 +151,8 @@ void cpuinfo_store_cpu(void)
 	info->reg_midr = read_cpuid_id();
 }
 
+=======
+>>>>>>> v3.18
 void __init smp_setup_processor_id(void)
 {
 	/*
@@ -244,6 +259,11 @@ static void __init setup_processor(void)
 	sprintf(init_utsname()->machine, ELF_PLATFORM);
 	elf_hwcap = 0;
 
+<<<<<<< HEAD
+=======
+	cpuinfo_store_boot_cpu();
+
+>>>>>>> v3.18
 	/*
 	 * Check for sane CTR_EL0.CWG value.
 	 */
@@ -322,8 +342,11 @@ static void __init setup_processor(void)
 
 static void __init setup_machine_fdt(phys_addr_t dt_phys)
 {
+<<<<<<< HEAD
 	cpuinfo_store_cpu();
 
+=======
+>>>>>>> v3.18
 	if (!dt_phys || !early_init_dt_scan(phys_to_virt(dt_phys))) {
 		early_print("\n"
 			"Error: invalid device tree blob at physical address 0x%p (virtual address 0x%p)\n"
@@ -336,8 +359,11 @@ static void __init setup_machine_fdt(phys_addr_t dt_phys)
 	}
 
 	machine_name = of_flat_dt_get_machine_name();
+<<<<<<< HEAD
 	if (machine_name)
 		pr_info("Machine: %s\n", machine_name);
+=======
+>>>>>>> v3.18
 }
 
 /*
@@ -389,6 +415,7 @@ static void __init request_standard_resources(void)
 
 u64 __cpu_logical_map[NR_CPUS] = { [0 ... NR_CPUS-1] = INVALID_HWID };
 
+<<<<<<< HEAD
 void __init __weak init_random_pool(void) { }
 
 void __init setup_arch(char **cmdline_p)
@@ -398,6 +425,10 @@ void __init setup_arch(char **cmdline_p)
 	 */
 	local_async_enable();
 
+=======
+void __init setup_arch(char **cmdline_p)
+{
+>>>>>>> v3.18
 	setup_processor();
 
 	setup_machine_fdt(__fdt_pointer);
@@ -409,11 +440,23 @@ void __init setup_arch(char **cmdline_p)
 
 	*cmdline_p = boot_command_line;
 
+<<<<<<< HEAD
 	init_mem_pgprot();
+=======
+>>>>>>> v3.18
 	early_ioremap_init();
 
 	parse_early_param();
 
+<<<<<<< HEAD
+=======
+	/*
+	 *  Unmask asynchronous aborts after bringing up possible earlycon.
+	 * (Report possible System Errors once we can report this occurred)
+	 */
+	local_async_enable();
+
+>>>>>>> v3.18
 	efi_init();
 	arm64_memblock_init();
 
@@ -440,7 +483,10 @@ void __init setup_arch(char **cmdline_p)
 	conswitchp = &dummy_con;
 #endif
 #endif
+<<<<<<< HEAD
 	init_random_pool();
+=======
+>>>>>>> v3.18
 }
 
 static int __init arm64_device_init(void)
@@ -448,7 +494,11 @@ static int __init arm64_device_init(void)
 	of_platform_populate(NULL, of_default_bus_match_table, NULL, NULL);
 	return 0;
 }
+<<<<<<< HEAD
 arch_initcall(arm64_device_init);
+=======
+arch_initcall_sync(arm64_device_init);
+>>>>>>> v3.18
 
 static int __init topology_init(void)
 {
@@ -476,6 +526,7 @@ static const char *hwcap_str[] = {
 	NULL
 };
 
+<<<<<<< HEAD
 #ifdef CONFIG_COMPAT
 static const char *compat_hwcap_str[] = {
 	"swp",
@@ -512,6 +563,16 @@ static int c_show(struct seq_file *m, void *v)
 		struct cpuinfo_arm64 *cpuinfo = &per_cpu(cpu_data, i);
 		u32 midr = cpuinfo->reg_midr;
 
+=======
+static int c_show(struct seq_file *m, void *v)
+{
+	int i;
+
+	seq_printf(m, "Processor\t: %s rev %d (%s)\n",
+		   cpu_name, read_cpuid_id() & 15, ELF_PLATFORM);
+
+	for_each_online_cpu(i) {
+>>>>>>> v3.18
 		/*
 		 * glibc reads /proc/cpuinfo to determine the number of
 		 * online processors, looking for lines beginning with
@@ -520,6 +581,7 @@ static int c_show(struct seq_file *m, void *v)
 #ifdef CONFIG_SMP
 		seq_printf(m, "processor\t: %d\n", i);
 #endif
+<<<<<<< HEAD
 
 		/*
 		 * Dump out the common processor features in a single line.
@@ -554,6 +616,26 @@ static int c_show(struct seq_file *m, void *v)
 		seq_printf(m, "vfpv4 idiva idivt ");
 	}
 #endif
+=======
+	}
+
+	/* dump out the processor features */
+	seq_puts(m, "Features\t: ");
+
+	for (i = 0; hwcap_str[i]; i++)
+		if (elf_hwcap & (1 << i))
+			seq_printf(m, "%s ", hwcap_str[i]);
+
+	seq_printf(m, "\nCPU implementer\t: 0x%02x\n", read_cpuid_id() >> 24);
+	seq_printf(m, "CPU architecture: AArch64\n");
+	seq_printf(m, "CPU variant\t: 0x%x\n", (read_cpuid_id() >> 20) & 15);
+	seq_printf(m, "CPU part\t: 0x%03x\n", (read_cpuid_id() >> 4) & 0xfff);
+	seq_printf(m, "CPU revision\t: %d\n", read_cpuid_id() & 15);
+
+	seq_puts(m, "\n");
+
+	seq_printf(m, "Hardware\t: %s\n", machine_name);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -579,6 +661,7 @@ const struct seq_operations cpuinfo_op = {
 	.stop	= c_stop,
 	.show	= c_show
 };
+<<<<<<< HEAD
 
 void arch_setup_pdev_archdata(struct platform_device *pdev)
 {
@@ -610,3 +693,5 @@ static int __init msm8994_check_tlbi_workaround(void)
 	return 0;
 }
 arch_initcall_sync(msm8994_check_tlbi_workaround);
+=======
+>>>>>>> v3.18

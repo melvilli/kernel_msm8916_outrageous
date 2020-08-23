@@ -2,7 +2,10 @@
 # Makefile for the Linux Bluetooth HCI device drivers.
 #
 
+<<<<<<< HEAD
 obj-$(CONFIG_BT_HCISMD)		+= hci_smd.o
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_BT_HCIVHCI)	+= hci_vhci.o
 obj-$(CONFIG_BT_HCIUART)	+= hci_uart.o
 obj-$(CONFIG_BT_HCIBCM203X)	+= bcm203x.o
@@ -20,7 +23,10 @@ obj-$(CONFIG_BT_ATH3K)		+= ath3k.o
 obj-$(CONFIG_BT_MRVL)		+= btmrvl.o
 obj-$(CONFIG_BT_MRVL_SDIO)	+= btmrvl_sdio.o
 obj-$(CONFIG_BT_WILINK)		+= btwilink.o
+<<<<<<< HEAD
 obj-$(CONFIG_MSM_BT_POWER)	+= bluetooth-power.o
+=======
+>>>>>>> v3.18
 
 btmrvl-y			:= btmrvl_main.o
 btmrvl-$(CONFIG_DEBUG_FS)	+= btmrvl_debugfs.o
@@ -31,5 +37,11 @@ hci_uart-$(CONFIG_BT_HCIUART_BCSP)	+= hci_bcsp.o
 hci_uart-$(CONFIG_BT_HCIUART_LL)	+= hci_ll.o
 hci_uart-$(CONFIG_BT_HCIUART_ATH3K)	+= hci_ath.o
 hci_uart-$(CONFIG_BT_HCIUART_3WIRE)	+= hci_h5.o
+<<<<<<< HEAD
 hci_uart-$(CONFIG_BT_HCIUART_IBS)	+= hci_ibs.o
 hci_uart-objs				:= $(hci_uart-y)
+=======
+hci_uart-objs				:= $(hci_uart-y)
+
+ccflags-y += -D__CHECK_ENDIAN__
+>>>>>>> v3.18

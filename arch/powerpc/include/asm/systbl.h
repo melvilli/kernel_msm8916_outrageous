@@ -62,7 +62,11 @@ COMPAT_SYS_SPU(fcntl)
 SYSCALL(ni_syscall)
 SYSCALL_SPU(setpgid)
 SYSCALL(ni_syscall)
+<<<<<<< HEAD
 SYSX(sys_ni_syscall,sys_olduname, sys_olduname)
+=======
+SYSX(sys_ni_syscall,sys_olduname,sys_olduname)
+>>>>>>> v3.18
 SYSCALL_SPU(umask)
 SYSCALL_SPU(chroot)
 COMPAT_SYS(ustat)
@@ -77,10 +81,17 @@ SYSCALL_SPU(setreuid)
 SYSCALL_SPU(setregid)
 #define compat_sys_sigsuspend sys_sigsuspend
 SYS32ONLY(sigsuspend)
+<<<<<<< HEAD
 COMPAT_SYS(sigpending)
 SYSCALL_SPU(sethostname)
 COMPAT_SYS_SPU(setrlimit)
 COMPAT_SYS(old_getrlimit)
+=======
+SYSX(sys_ni_syscall,compat_sys_sigpending,sys_sigpending)
+SYSCALL_SPU(sethostname)
+COMPAT_SYS_SPU(setrlimit)
+SYSX(sys_ni_syscall,compat_sys_old_getrlimit,sys_old_getrlimit)
+>>>>>>> v3.18
 COMPAT_SYS_SPU(getrusage)
 COMPAT_SYS_SPU(gettimeofday)
 COMPAT_SYS_SPU(settimeofday)
@@ -258,7 +269,11 @@ SYSCALL_SPU(tgkill)
 COMPAT_SYS_SPU(utimes)
 COMPAT_SYS_SPU(statfs64)
 COMPAT_SYS_SPU(fstatfs64)
+<<<<<<< HEAD
 SYSX(sys_ni_syscall, ppc_fadvise64_64, ppc_fadvise64_64)
+=======
+SYSX(sys_ni_syscall,ppc_fadvise64_64,ppc_fadvise64_64)
+>>>>>>> v3.18
 PPC_SYS_SPU(rtas)
 OLDSYS(debug_setcontext)
 SYSCALL(ni_syscall)
@@ -295,7 +310,11 @@ SYSCALL_SPU(mkdirat)
 SYSCALL_SPU(mknodat)
 SYSCALL_SPU(fchownat)
 COMPAT_SYS_SPU(futimesat)
+<<<<<<< HEAD
 SYSX_SPU(sys_newfstatat, sys_fstatat64, sys_fstatat64)
+=======
+SYSX_SPU(sys_newfstatat,sys_fstatat64,sys_fstatat64)
+>>>>>>> v3.18
 SYSCALL_SPU(unlinkat)
 SYSCALL_SPU(renameat)
 SYSCALL_SPU(linkat)
@@ -359,3 +378,13 @@ COMPAT_SYS(process_vm_readv)
 COMPAT_SYS(process_vm_writev)
 SYSCALL(finit_module)
 SYSCALL(ni_syscall) /* sys_kcmp */
+<<<<<<< HEAD
+=======
+SYSCALL_SPU(sched_setattr)
+SYSCALL_SPU(sched_getattr)
+SYSCALL_SPU(renameat2)
+SYSCALL_SPU(seccomp)
+SYSCALL_SPU(getrandom)
+SYSCALL_SPU(memfd_create)
+SYSCALL_SPU(bpf)
+>>>>>>> v3.18

@@ -23,6 +23,10 @@
 #include <video/samsung_fimd.h>
 #include <mach/map.h>
 #include <mach/regs-gpio.h>
+<<<<<<< HEAD
+=======
+#include <mach/gpio-samsung.h>
+>>>>>>> v3.18
 
 #include <plat/cpu.h>
 #include <plat/devs.h>
@@ -155,7 +159,10 @@ MACHINE_START(SMARTQ5, "SmartQ 5")
 	.init_irq	= s3c6410_init_irq,
 	.map_io		= smartq_map_io,
 	.init_machine	= smartq5_machine_init,
+<<<<<<< HEAD
 	.init_late	= s3c64xx_init_late,
+=======
+>>>>>>> v3.18
 	.init_time	= samsung_timer_init,
 	.restart	= s3c64xx_restart,
 MACHINE_END

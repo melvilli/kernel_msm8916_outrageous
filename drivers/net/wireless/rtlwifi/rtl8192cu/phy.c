@@ -30,11 +30,23 @@
 #include "../wifi.h"
 #include "../pci.h"
 #include "../ps.h"
+<<<<<<< HEAD
 #include "reg.h"
 #include "def.h"
 #include "phy.h"
 #include "rf.h"
 #include "dm.h"
+=======
+#include "../core.h"
+#include "reg.h"
+#include "def.h"
+#include "phy.h"
+#include "../rtl8192c/phy_common.h"
+#include "rf.h"
+#include "dm.h"
+#include "../rtl8192c/dm_common.h"
+#include "../rtl8192c/fw_common.h"
+>>>>>>> v3.18
 #include "table.h"
 
 u32 rtl92cu_phy_query_rf_reg(struct ieee80211_hw *hw,
@@ -120,6 +132,10 @@ bool rtl92cu_phy_bb_config(struct ieee80211_hw *hw)
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	struct rtl_hal *rtlhal = rtl_hal(rtl_priv(hw));
 	u16 regval;
+<<<<<<< HEAD
+=======
+	u32 regval32;
+>>>>>>> v3.18
 	u8 b_reg_hwparafile = 1;
 
 	_rtl92c_phy_init_bb_rf_register_definition(hw);
@@ -135,8 +151,16 @@ bool rtl92cu_phy_bb_config(struct ieee80211_hw *hw)
 	} else if (IS_HARDWARE_TYPE_8192CU(rtlhal)) {
 		rtl_write_byte(rtlpriv, REG_SYS_FUNC_EN, FEN_USBA | FEN_USBD |
 			       FEN_BB_GLB_RSTn | FEN_BBRSTB);
+<<<<<<< HEAD
 		rtl_write_byte(rtlpriv, REG_LDOHCI12_CTRL, 0x0f);
 	}
+=======
+	}
+	regval32 = rtl_read_dword(rtlpriv, 0x87c);
+	rtl_write_dword(rtlpriv, 0x87c, regval32 & (~BIT(31)));
+	if (IS_HARDWARE_TYPE_8192CU(rtlhal))
+		rtl_write_byte(rtlpriv, REG_LDOHCI12_CTRL, 0x0f);
+>>>>>>> v3.18
 	rtl_write_byte(rtlpriv, REG_AFE_XTAL_CTRL + 1, 0x80);
 	if (b_reg_hwparafile == 1)
 		rtstatus = _rtl92c_phy_bb8192c_config_parafile(hw);
@@ -184,6 +208,7 @@ bool _rtl92cu_phy_config_bb_with_headerfile(struct ieee80211_hw *hw,
 	}
 	if (configtype == BASEBAND_CONFIG_PHY_REG) {
 		for (i = 0; i < phy_reg_arraylen; i = i + 2) {
+<<<<<<< HEAD
 			if (phy_regarray_table[i] == 0xfe)
 				mdelay(50);
 			else if (phy_regarray_table[i] == 0xfd)
@@ -196,6 +221,9 @@ bool _rtl92cu_phy_config_bb_with_headerfile(struct ieee80211_hw *hw,
 				udelay(5);
 			else if (phy_regarray_table[i] == 0xf9)
 				udelay(1);
+=======
+			rtl_addr_delay(phy_regarray_table[i]);
+>>>>>>> v3.18
 			rtl_set_bbreg(hw, phy_regarray_table[i], MASKDWORD,
 				      phy_regarray_table[i + 1]);
 			udelay(1);
@@ -232,6 +260,7 @@ bool _rtl92cu_phy_config_bb_with_pgheaderfile(struct ieee80211_hw *hw,
 	phy_regarray_table_pg = rtlphy->hwparam_tables[PHY_REG_PG].pdata;
 	if (configtype == BASEBAND_CONFIG_PHY_REG) {
 		for (i = 0; i < phy_regarray_pg_len; i = i + 3) {
+<<<<<<< HEAD
 			if (phy_regarray_table_pg[i] == 0xfe)
 				mdelay(50);
 			else if (phy_regarray_table_pg[i] == 0xfd)
@@ -244,6 +273,9 @@ bool _rtl92cu_phy_config_bb_with_pgheaderfile(struct ieee80211_hw *hw,
 				udelay(5);
 			else if (phy_regarray_table_pg[i] == 0xf9)
 				udelay(1);
+=======
+			rtl_addr_delay(phy_regarray_table_pg[i]);
+>>>>>>> v3.18
 			_rtl92c_store_pwrIndex_diffrate_offset(hw,
 						  phy_regarray_table_pg[i],
 						  phy_regarray_table_pg[i + 1],
@@ -290,6 +322,7 @@ bool rtl92cu_phy_config_rf_with_headerfile(struct ieee80211_hw *hw,
 	switch (rfpath) {
 	case RF90_PATH_A:
 		for (i = 0; i < radioa_arraylen; i = i + 2) {
+<<<<<<< HEAD
 			if (radioa_array_table[i] == 0xfe)
 				mdelay(50);
 			else if (radioa_array_table[i] == 0xfd)
@@ -308,10 +341,16 @@ bool rtl92cu_phy_config_rf_with_headerfile(struct ieee80211_hw *hw,
 					      radioa_array_table[i + 1]);
 				udelay(1);
 			}
+=======
+			rtl_rfreg_delay(hw, rfpath, radioa_array_table[i],
+					RFREG_OFFSET_MASK,
+					radioa_array_table[i + 1]);
+>>>>>>> v3.18
 		}
 		break;
 	case RF90_PATH_B:
 		for (i = 0; i < radiob_arraylen; i = i + 2) {
+<<<<<<< HEAD
 			if (radiob_array_table[i] == 0xfe) {
 				mdelay(50);
 			} else if (radiob_array_table[i] == 0xfd)
@@ -330,6 +369,11 @@ bool rtl92cu_phy_config_rf_with_headerfile(struct ieee80211_hw *hw,
 					      radiob_array_table[i + 1]);
 				udelay(1);
 			}
+=======
+			rtl_rfreg_delay(hw, rfpath, radiob_array_table[i],
+					RFREG_OFFSET_MASK,
+					radiob_array_table[i + 1]);
+>>>>>>> v3.18
 		}
 		break;
 	case RF90_PATH_C:
@@ -340,6 +384,11 @@ bool rtl92cu_phy_config_rf_with_headerfile(struct ieee80211_hw *hw,
 		RT_TRACE(rtlpriv, COMP_ERR, DBG_EMERG,
 			 "switch case not processed\n");
 		break;
+<<<<<<< HEAD
+=======
+	default:
+		break;
+>>>>>>> v3.18
 	}
 	return true;
 }

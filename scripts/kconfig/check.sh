@@ -11,4 +11,7 @@ EOF
 if [ ! "$?" -eq "0"  ]; then
 	echo -DKBUILD_NO_NLS;
 fi
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18

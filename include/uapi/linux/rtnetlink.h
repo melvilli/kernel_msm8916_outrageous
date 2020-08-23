@@ -296,7 +296,10 @@ enum rtattr_type_t {
 	RTA_MP_ALGO, /* no longer used */
 	RTA_TABLE,
 	RTA_MARK,
+<<<<<<< HEAD
 	RTA_UID,
+=======
+>>>>>>> v3.18
 	RTA_MFC_STATS,
 	__RTA_MAX
 };
@@ -387,6 +390,11 @@ enum {
 #define RTAX_RTO_MIN RTAX_RTO_MIN
 	RTAX_INITRWND,
 #define RTAX_INITRWND RTAX_INITRWND
+<<<<<<< HEAD
+=======
+	RTAX_QUICKACK,
+#define RTAX_QUICKACK RTAX_QUICKACK
+>>>>>>> v3.18
 	__RTAX_MAX
 };
 

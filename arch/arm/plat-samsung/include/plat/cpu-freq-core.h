@@ -119,6 +119,10 @@ struct s3c_plltab {
 struct s3c_cpufreq_config {
 	struct s3c_freq		freq;
 	struct s3c_freq		max;
+<<<<<<< HEAD
+=======
+	struct clk		*mpll;
+>>>>>>> v3.18
 	struct cpufreq_frequency_table pll;
 	struct s3c_clkdivs	divs;
 	struct s3c_cpufreq_info *info;	/* for core, not drivers */
@@ -139,7 +143,10 @@ struct s3c_cpufreq_config {
  *	any frequency changes. This is really only need by devices like the
  *	S3C2410 where there is no or limited divider between the PLL and the
  *	ARMCLK.
+<<<<<<< HEAD
  * @resume_clocks: Update the clocks on resume.
+=======
+>>>>>>> v3.18
  * @get_iotiming: Get the current IO timing data, mainly for use at start.
  * @set_iotiming: Update the IO timings from the cached copies calculated
  *	from the @calc_iotiming entry when changing the frequency.
@@ -168,8 +175,11 @@ struct s3c_cpufreq_info {
 
 	/* driver routines */
 
+<<<<<<< HEAD
 	void		(*resume_clocks)(void);
 
+=======
+>>>>>>> v3.18
 	int		(*get_iotiming)(struct s3c_cpufreq_config *cfg,
 					struct s3c_iotimings *timings);
 
@@ -202,7 +212,11 @@ extern int s3c_plltab_register(struct cpufreq_frequency_table *plls,
 extern struct s3c_cpufreq_config *s3c_cpufreq_getconfig(void);
 extern struct s3c_iotimings *s3c_cpufreq_getiotimings(void);
 
+<<<<<<< HEAD
 #ifdef CONFIG_CPU_FREQ_S3C24XX_DEBUGFS
+=======
+#ifdef CONFIG_ARM_S3C24XX_CPUFREQ_DEBUGFS
+>>>>>>> v3.18
 #define s3c_cpufreq_debugfs_call(x) x
 #else
 #define s3c_cpufreq_debugfs_call(x) NULL
@@ -259,6 +273,7 @@ extern void s3c2412_iotiming_set(struct s3c_cpufreq_config *cfg,
 #define s3c2412_iotiming_set NULL
 #endif /* CONFIG_S3C2412_IOTIMING */
 
+<<<<<<< HEAD
 #ifdef CONFIG_CPU_FREQ_S3C24XX_DEBUG
 #define s3c_freq_dbg(x...) printk(KERN_INFO x)
 #else
@@ -270,6 +285,19 @@ extern void s3c2412_iotiming_set(struct s3c_cpufreq_config *cfg,
 #else
 #define s3c_freq_iodbg(x...) do { if (0) printk(x); } while (0)
 #endif /* CONFIG_CPU_FREQ_S3C24XX_IODEBUG */
+=======
+#ifdef CONFIG_ARM_S3C24XX_CPUFREQ_DEBUG
+#define s3c_freq_dbg(x...) printk(KERN_INFO x)
+#else
+#define s3c_freq_dbg(x...) do { if (0) printk(x); } while (0)
+#endif /* CONFIG_ARM_S3C24XX_CPUFREQ_DEBUG */
+
+#ifdef CONFIG_ARM_S3C24XX_CPUFREQ_IODEBUG
+#define s3c_freq_iodbg(x...) printk(KERN_INFO x)
+#else
+#define s3c_freq_iodbg(x...) do { if (0) printk(x); } while (0)
+#endif /* CONFIG_ARM_S3C24XX_CPUFREQ_IODEBUG */
+>>>>>>> v3.18
 
 static inline int s3c_cpufreq_addfreq(struct cpufreq_frequency_table *table,
 				      int index, size_t table_size,

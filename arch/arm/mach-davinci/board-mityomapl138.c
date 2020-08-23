@@ -15,7 +15,11 @@
 #include <linux/mtd/partitions.h>
 #include <linux/regulator/machine.h>
 #include <linux/i2c.h>
+<<<<<<< HEAD
 #include <linux/i2c/at24.h>
+=======
+#include <linux/platform_data/at24.h>
+>>>>>>> v3.18
 #include <linux/etherdevice.h>
 #include <linux/spi/spi.h>
 #include <linux/spi/flash.h>
@@ -27,6 +31,10 @@
 #include <mach/cp_intc.h>
 #include <mach/da8xx.h>
 #include <linux/platform_data/mtd-davinci.h>
+<<<<<<< HEAD
+=======
+#include <linux/platform_data/mtd-davinci-aemif.h>
+>>>>>>> v3.18
 #include <mach/mux.h>
 #include <linux/platform_data/spi-davinci.h>
 
@@ -432,11 +440,18 @@ static void __init mityomapl138_setup_nand(void)
 {
 	platform_add_devices(mityomapl138_devices,
 				 ARRAY_SIZE(mityomapl138_devices));
+<<<<<<< HEAD
 }
 
 static struct davinci_uart_config mityomapl138_uart_config __initdata = {
 	.enabled_uarts = 0x7,
 };
+=======
+
+	if (davinci_aemif_setup(&mityomapl138_nandflash_device))
+		pr_warn("%s: Cannot configure AEMIF.\n", __func__);
+}
+>>>>>>> v3.18
 
 static const short mityomap_mii_pins[] = {
 	DA850_MII_TXEN, DA850_MII_TXCLK, DA850_MII_COL, DA850_MII_TXD_3,
@@ -517,7 +532,11 @@ static void __init mityomapl138_init(void)
 	if (ret)
 		pr_warning("watchdog registration failed: %d\n", ret);
 
+<<<<<<< HEAD
 	davinci_serial_init(&mityomapl138_uart_config);
+=======
+	davinci_serial_init(da8xx_serial_device);
+>>>>>>> v3.18
 
 	ret = da8xx_register_i2c(0, &mityomap_i2c_0_pdata);
 	if (ret)

@@ -126,6 +126,11 @@ static int openpic_cpu_write_internal(void *opaque, gpa_t addr,
 				      u32 val, int idx);
 static int openpic_cpu_read_internal(void *opaque, gpa_t addr,
 				     u32 *ptr, int idx);
+<<<<<<< HEAD
+=======
+static inline void write_IRQreg_idr(struct openpic *opp, int n_IRQ,
+				    uint32_t val);
+>>>>>>> v3.18
 
 enum irq_type {
 	IRQ_TYPE_NORMAL = 0,
@@ -528,7 +533,10 @@ static void openpic_reset(struct openpic *opp)
 	/* Initialise IRQ sources */
 	for (i = 0; i < opp->max_irq; i++) {
 		opp->src[i].ivpr = opp->ivpr_reset;
+<<<<<<< HEAD
 		opp->src[i].idr = opp->idr_reset;
+=======
+>>>>>>> v3.18
 
 		switch (opp->src[i].type) {
 		case IRQ_TYPE_NORMAL:
@@ -543,6 +551,11 @@ static void openpic_reset(struct openpic *opp)
 		case IRQ_TYPE_FSLSPECIAL:
 			break;
 		}
+<<<<<<< HEAD
+=======
+
+		write_IRQreg_idr(opp, i, opp->idr_reset);
+>>>>>>> v3.18
 	}
 	/* Initialise IRQ destinations */
 	for (i = 0; i < MAX_CPU; i++) {
@@ -1635,6 +1648,10 @@ static void mpic_destroy(struct kvm_device *dev)
 
 	dev->kvm->arch.mpic = NULL;
 	kfree(opp);
+<<<<<<< HEAD
+=======
+	kfree(dev);
+>>>>>>> v3.18
 }
 
 static int mpic_set_default_irq_routing(struct openpic *opp)
@@ -1822,8 +1839,12 @@ int kvm_set_msi(struct kvm_kernel_irq_routing_entry *e,
 	return 0;
 }
 
+<<<<<<< HEAD
 int kvm_set_routing_entry(struct kvm_irq_routing_table *rt,
 			  struct kvm_kernel_irq_routing_entry *e,
+=======
+int kvm_set_routing_entry(struct kvm_kernel_irq_routing_entry *e,
+>>>>>>> v3.18
 			  const struct kvm_irq_routing_entry *ue)
 {
 	int r = -EINVAL;
@@ -1835,7 +1856,10 @@ int kvm_set_routing_entry(struct kvm_irq_routing_table *rt,
 		e->irqchip.pin = ue->u.irqchip.pin;
 		if (e->irqchip.pin >= KVM_IRQCHIP_NUM_PINS)
 			goto out;
+<<<<<<< HEAD
 		rt->chip[ue->u.irqchip.irqchip][e->irqchip.pin] = ue->gsi;
+=======
+>>>>>>> v3.18
 		break;
 	case KVM_IRQ_ROUTING_MSI:
 		e->set = kvm_set_msi;

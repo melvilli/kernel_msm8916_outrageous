@@ -52,7 +52,11 @@ struct voice_info
 	int             panning;	/* 0xffff means not set */
 };
 
+<<<<<<< HEAD
 typedef struct opl_devinfo
+=======
+struct opl_devinfo
+>>>>>>> v3.18
 {
 	int             base;
 	int             left_io, right_io;
@@ -73,7 +77,11 @@ typedef struct opl_devinfo
 	unsigned char   cmask;
 
 	int             is_opl4;
+<<<<<<< HEAD
 } opl_devinfo;
+=======
+};
+>>>>>>> v3.18
 
 static struct opl_devinfo *devc = NULL;
 
@@ -275,7 +283,10 @@ static int opl3_kill_note  (int devno, int voice, int note, int velocity)
 	 devc->v_alloc->map[voice] = 0;
 
 	 map = &pv_map[devc->lv_map[voice]];
+<<<<<<< HEAD
 	 DEB(printk("Kill note %d\n", voice));
+=======
+>>>>>>> v3.18
 
 	 if (map->voice_mode == 0)
 		 return 0;
@@ -873,8 +884,11 @@ static void opl3_aftertouch(int dev, int voice, int pressure)
 
 	map = &pv_map[devc->lv_map[voice]];
 
+<<<<<<< HEAD
 	DEB(printk("Aftertouch %d\n", voice));
 
+=======
+>>>>>>> v3.18
 	if (map->voice_mode == 0)
 		return;
 

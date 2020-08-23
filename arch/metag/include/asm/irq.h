@@ -17,6 +17,10 @@ struct pt_regs;
 
 int tbisig_map(unsigned int hw);
 extern void do_IRQ(int irq, struct pt_regs *regs);
+<<<<<<< HEAD
+=======
+extern void init_IRQ(void);
+>>>>>>> v3.18
 
 #ifdef CONFIG_METAG_SUSPEND_MEM
 int traps_save_context(void);

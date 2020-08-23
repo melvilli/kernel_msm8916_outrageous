@@ -5,7 +5,11 @@
  ******************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -186,10 +190,20 @@ acpi_status acpi_ut_strtoul64(char *string, u32 base, u64 *ret_integer)
 	switch (base) {
 	case ACPI_ANY_BASE:
 	case 16:
+<<<<<<< HEAD
 		break;
 
 	default:
 		/* Invalid Base */
+=======
+
+		break;
+
+	default:
+
+		/* Invalid Base */
+
+>>>>>>> v3.18
 		return_ACPI_STATUS(AE_BAD_PARAMETER);
 	}
 
@@ -307,7 +321,11 @@ acpi_status acpi_ut_strtoul64(char *string, u32 base, u64 *ret_integer)
 
 	/* All done, normal exit */
 
+<<<<<<< HEAD
       all_done:
+=======
+all_done:
+>>>>>>> v3.18
 
 	ACPI_DEBUG_PRINT((ACPI_DB_EXEC, "Converted value: %8.8X%8.8X\n",
 			  ACPI_FORMAT_UINT64(return_value)));
@@ -315,7 +333,11 @@ acpi_status acpi_ut_strtoul64(char *string, u32 base, u64 *ret_integer)
 	*ret_integer = return_value;
 	return_ACPI_STATUS(AE_OK);
 
+<<<<<<< HEAD
       error_exit:
+=======
+error_exit:
+>>>>>>> v3.18
 	/* Base was set/validated above */
 
 	if (base == 10) {
@@ -330,7 +352,12 @@ acpi_status acpi_ut_strtoul64(char *string, u32 base, u64 *ret_integer)
  * FUNCTION:    acpi_ut_print_string
  *
  * PARAMETERS:  string          - Null terminated ASCII string
+<<<<<<< HEAD
  *              max_length      - Maximum output length
+=======
+ *              max_length      - Maximum output length. Used to constrain the
+ *                                length of strings during debug output only.
+>>>>>>> v3.18
  *
  * RETURN:      None
  *
@@ -339,7 +366,11 @@ acpi_status acpi_ut_strtoul64(char *string, u32 base, u64 *ret_integer)
  *
  ******************************************************************************/
 
+<<<<<<< HEAD
 void acpi_ut_print_string(char *string, u8 max_length)
+=======
+void acpi_ut_print_string(char *string, u16 max_length)
+>>>>>>> v3.18
 {
 	u32 i;
 
@@ -355,36 +386,68 @@ void acpi_ut_print_string(char *string, u8 max_length)
 
 		switch (string[i]) {
 		case 0x07:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 			acpi_os_printf("\\a");	/* BELL */
 			break;
 
 		case 0x08:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 			acpi_os_printf("\\b");	/* BACKSPACE */
 			break;
 
 		case 0x0C:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 			acpi_os_printf("\\f");	/* FORMFEED */
 			break;
 
 		case 0x0A:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 			acpi_os_printf("\\n");	/* LINEFEED */
 			break;
 
 		case 0x0D:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 			acpi_os_printf("\\r");	/* CARRIAGE RETURN */
 			break;
 
 		case 0x09:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 			acpi_os_printf("\\t");	/* HORIZONTAL TAB */
 			break;
 
 		case 0x0B:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 			acpi_os_printf("\\v");	/* VERTICAL TAB */
 			break;
 
 		case '\'':	/* Single Quote */
 		case '\"':	/* Double Quote */
 		case '\\':	/* Backslash */
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 			acpi_os_printf("\\%c", (int)string[i]);
 			break;
 
@@ -451,7 +514,12 @@ u8 acpi_ut_valid_acpi_char(char character, u32 position)
  *
  * FUNCTION:    acpi_ut_valid_acpi_name
  *
+<<<<<<< HEAD
  * PARAMETERS:  name            - The name to be examined
+=======
+ * PARAMETERS:  name            - The name to be examined. Does not have to
+ *                                be NULL terminated string.
+>>>>>>> v3.18
  *
  * RETURN:      TRUE if the name is valid, FALSE otherwise
  *
@@ -462,15 +530,23 @@ u8 acpi_ut_valid_acpi_char(char character, u32 position)
  *
  ******************************************************************************/
 
+<<<<<<< HEAD
 u8 acpi_ut_valid_acpi_name(u32 name)
+=======
+u8 acpi_ut_valid_acpi_name(char *name)
+>>>>>>> v3.18
 {
 	u32 i;
 
 	ACPI_FUNCTION_ENTRY();
 
 	for (i = 0; i < ACPI_NAME_SIZE; i++) {
+<<<<<<< HEAD
 		if (!acpi_ut_valid_acpi_char
 		    ((ACPI_CAST_PTR(char, &name))[i], i)) {
+=======
+		if (!acpi_ut_valid_acpi_char(name[i], i)) {
+>>>>>>> v3.18
 			return (FALSE);
 		}
 	}
@@ -572,3 +648,68 @@ void ut_convert_backslashes(char *pathname)
 	}
 }
 #endif
+<<<<<<< HEAD
+=======
+
+#if defined (ACPI_DEBUGGER) || defined (ACPI_APPLICATION)
+/*******************************************************************************
+ *
+ * FUNCTION:    acpi_ut_safe_strcpy, acpi_ut_safe_strcat, acpi_ut_safe_strncat
+ *
+ * PARAMETERS:  Adds a "DestSize" parameter to each of the standard string
+ *              functions. This is the size of the Destination buffer.
+ *
+ * RETURN:      TRUE if the operation would overflow the destination buffer.
+ *
+ * DESCRIPTION: Safe versions of standard Clib string functions. Ensure that
+ *              the result of the operation will not overflow the output string
+ *              buffer.
+ *
+ * NOTE:        These functions are typically only helpful for processing
+ *              user input and command lines. For most ACPICA code, the
+ *              required buffer length is precisely calculated before buffer
+ *              allocation, so the use of these functions is unnecessary.
+ *
+ ******************************************************************************/
+
+u8 acpi_ut_safe_strcpy(char *dest, acpi_size dest_size, char *source)
+{
+
+	if (ACPI_STRLEN(source) >= dest_size) {
+		return (TRUE);
+	}
+
+	ACPI_STRCPY(dest, source);
+	return (FALSE);
+}
+
+u8 acpi_ut_safe_strcat(char *dest, acpi_size dest_size, char *source)
+{
+
+	if ((ACPI_STRLEN(dest) + ACPI_STRLEN(source)) >= dest_size) {
+		return (TRUE);
+	}
+
+	ACPI_STRCAT(dest, source);
+	return (FALSE);
+}
+
+u8
+acpi_ut_safe_strncat(char *dest,
+		     acpi_size dest_size,
+		     char *source, acpi_size max_transfer_length)
+{
+	acpi_size actual_transfer_length;
+
+	actual_transfer_length =
+	    ACPI_MIN(max_transfer_length, ACPI_STRLEN(source));
+
+	if ((ACPI_STRLEN(dest) + actual_transfer_length) >= dest_size) {
+		return (TRUE);
+	}
+
+	ACPI_STRNCAT(dest, source, max_transfer_length);
+	return (FALSE);
+}
+#endif
+>>>>>>> v3.18

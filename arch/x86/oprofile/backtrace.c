@@ -47,7 +47,11 @@ dump_user_backtrace_32(struct stack_frame_ia32 *head)
 	unsigned long bytes;
 
 	bytes = copy_from_user_nmi(bufhead, head, sizeof(bufhead));
+<<<<<<< HEAD
 	if (bytes != sizeof(bufhead))
+=======
+	if (bytes != 0)
+>>>>>>> v3.18
 		return NULL;
 
 	fp = (struct stack_frame_ia32 *) compat_ptr(bufhead[0].next_frame);
@@ -93,7 +97,11 @@ static struct stack_frame *dump_user_backtrace(struct stack_frame *head)
 	unsigned long bytes;
 
 	bytes = copy_from_user_nmi(bufhead, head, sizeof(bufhead));
+<<<<<<< HEAD
 	if (bytes != sizeof(bufhead))
+=======
+	if (bytes != 0)
+>>>>>>> v3.18
 		return NULL;
 
 	oprofile_add_trace(bufhead[0].return_address);

@@ -24,7 +24,10 @@
 #include <linux/fcntl.h>
 #include <linux/gfp.h>
 #include <linux/interrupt.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/ioport.h>
 #include <linux/in.h>
 #include <linux/string.h>
@@ -83,8 +86,12 @@ static int jazzsonic_open(struct net_device* dev)
 {
 	int retval;
 
+<<<<<<< HEAD
 	retval = request_irq(dev->irq, sonic_interrupt, IRQF_DISABLED,
 				"sonic", dev);
+=======
+	retval = request_irq(dev->irq, sonic_interrupt, 0, "sonic", dev);
+>>>>>>> v3.18
 	if (retval) {
 		printk(KERN_ERR "%s: unable to get IRQ %d.\n",
 				dev->name, dev->irq);

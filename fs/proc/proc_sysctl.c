@@ -11,7 +11,10 @@
 #include <linux/namei.h>
 #include <linux/mm.h>
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/kmemleak.h>
+=======
+>>>>>>> v3.18
 #include "internal.h"
 
 static const struct dentry_operations proc_sys_dentry_operations;
@@ -574,12 +577,21 @@ out:
 	return ret;
 }
 
+<<<<<<< HEAD
 static int proc_sys_fill_cache(struct file *filp, void *dirent,
 				filldir_t filldir,
 				struct ctl_table_header *head,
 				struct ctl_table *table)
 {
 	struct dentry *child, *dir = filp->f_path.dentry;
+=======
+static bool proc_sys_fill_cache(struct file *file,
+				struct dir_context *ctx,
+				struct ctl_table_header *head,
+				struct ctl_table *table)
+{
+	struct dentry *child, *dir = file->f_path.dentry;
+>>>>>>> v3.18
 	struct inode *inode;
 	struct qstr qname;
 	ino_t ino = 0;
@@ -596,19 +608,28 @@ static int proc_sys_fill_cache(struct file *filp, void *dirent,
 			inode = proc_sys_make_inode(dir->d_sb, head, table);
 			if (!inode) {
 				dput(child);
+<<<<<<< HEAD
 				return -ENOMEM;
+=======
+				return false;
+>>>>>>> v3.18
 			} else {
 				d_set_d_op(child, &proc_sys_dentry_operations);
 				d_add(child, inode);
 			}
 		} else {
+<<<<<<< HEAD
 			return -ENOMEM;
+=======
+			return false;
+>>>>>>> v3.18
 		}
 	}
 	inode = child->d_inode;
 	ino  = inode->i_ino;
 	type = inode->i_mode >> 12;
 	dput(child);
+<<<<<<< HEAD
 	return !!filldir(dirent, qname.name, qname.len, filp->f_pos, ino, type);
 }
 
@@ -618,21 +639,41 @@ static int proc_sys_link_fill_cache(struct file *filp, void *dirent,
 				    struct ctl_table *table)
 {
 	int err, ret = 0;
+=======
+	return dir_emit(ctx, qname.name, qname.len, ino, type);
+}
+
+static bool proc_sys_link_fill_cache(struct file *file,
+				    struct dir_context *ctx,
+				    struct ctl_table_header *head,
+				    struct ctl_table *table)
+{
+	bool ret = true;
+>>>>>>> v3.18
 	head = sysctl_head_grab(head);
 
 	if (S_ISLNK(table->mode)) {
 		/* It is not an error if we can not follow the link ignore it */
+<<<<<<< HEAD
 		err = sysctl_follow_link(&head, &table, current->nsproxy);
+=======
+		int err = sysctl_follow_link(&head, &table, current->nsproxy);
+>>>>>>> v3.18
 		if (err)
 			goto out;
 	}
 
+<<<<<<< HEAD
 	ret = proc_sys_fill_cache(filp, dirent, filldir, head, table);
+=======
+	ret = proc_sys_fill_cache(file, ctx, head, table);
+>>>>>>> v3.18
 out:
 	sysctl_head_finish(head);
 	return ret;
 }
 
+<<<<<<< HEAD
 static int scan(struct ctl_table_header *head, ctl_table *table,
 		unsigned long *pos, struct file *file,
 		void *dirent, filldir_t filldir)
@@ -649,26 +690,54 @@ static int scan(struct ctl_table_header *head, ctl_table *table,
 
 	if (res == 0)
 		file->f_pos = *pos;
+=======
+static int scan(struct ctl_table_header *head, struct ctl_table *table,
+		unsigned long *pos, struct file *file,
+		struct dir_context *ctx)
+{
+	bool res;
+
+	if ((*pos)++ < ctx->pos)
+		return true;
+
+	if (unlikely(S_ISLNK(table->mode)))
+		res = proc_sys_link_fill_cache(file, ctx, head, table);
+	else
+		res = proc_sys_fill_cache(file, ctx, head, table);
+
+	if (res)
+		ctx->pos = *pos;
+>>>>>>> v3.18
 
 	return res;
 }
 
+<<<<<<< HEAD
 static int proc_sys_readdir(struct file *filp, void *dirent, filldir_t filldir)
 {
 	struct dentry *dentry = filp->f_path.dentry;
 	struct inode *inode = dentry->d_inode;
 	struct ctl_table_header *head = grab_header(inode);
+=======
+static int proc_sys_readdir(struct file *file, struct dir_context *ctx)
+{
+	struct ctl_table_header *head = grab_header(file_inode(file));
+>>>>>>> v3.18
 	struct ctl_table_header *h = NULL;
 	struct ctl_table *entry;
 	struct ctl_dir *ctl_dir;
 	unsigned long pos;
+<<<<<<< HEAD
 	int ret = -EINVAL;
+=======
+>>>>>>> v3.18
 
 	if (IS_ERR(head))
 		return PTR_ERR(head);
 
 	ctl_dir = container_of(head, struct ctl_dir, header);
 
+<<<<<<< HEAD
 	ret = 0;
 	/* Avoid a switch here: arm builds fail with missing __cmpdi2 */
 	if (filp->f_pos == 0) {
@@ -688,14 +757,28 @@ static int proc_sys_readdir(struct file *filp, void *dirent, filldir_t filldir)
 	for (first_entry(ctl_dir, &h, &entry); h; next_entry(&h, &entry)) {
 		ret = scan(h, entry, &pos, filp, dirent, filldir);
 		if (ret) {
+=======
+	if (!dir_emit_dots(file, ctx))
+		return 0;
+
+	pos = 2;
+
+	for (first_entry(ctl_dir, &h, &entry); h; next_entry(&h, &entry)) {
+		if (!scan(h, entry, &pos, file, ctx)) {
+>>>>>>> v3.18
 			sysctl_head_finish(h);
 			break;
 		}
 	}
+<<<<<<< HEAD
 	ret = 1;
 out:
 	sysctl_head_finish(head);
 	return ret;
+=======
+	sysctl_head_finish(head);
+	return 0;
+>>>>>>> v3.18
 }
 
 static int proc_sys_permission(struct inode *inode, int mask)
@@ -770,7 +853,11 @@ static const struct file_operations proc_sys_file_operations = {
 
 static const struct file_operations proc_sys_dir_file_operations = {
 	.read		= generic_read_dir,
+<<<<<<< HEAD
 	.readdir	= proc_sys_readdir,
+=======
+	.iterate	= proc_sys_readdir,
+>>>>>>> v3.18
 	.llseek		= generic_file_llseek,
 };
 
@@ -814,6 +901,7 @@ static int sysctl_is_seen(struct ctl_table_header *p)
 	return res;
 }
 
+<<<<<<< HEAD
 static int proc_sys_compare(const struct dentry *parent,
 		const struct inode *pinode,
 		const struct dentry *dentry, const struct inode *inode,
@@ -823,6 +911,18 @@ static int proc_sys_compare(const struct dentry *parent,
 	/* Although proc doesn't have negative dentries, rcu-walk means
 	 * that inode here can be NULL */
 	/* AV: can it, indeed? */
+=======
+static int proc_sys_compare(const struct dentry *parent, const struct dentry *dentry,
+		unsigned int len, const char *str, const struct qstr *name)
+{
+	struct ctl_table_header *head;
+	struct inode *inode;
+
+	/* Although proc doesn't have negative dentries, rcu-walk means
+	 * that inode here can be NULL */
+	/* AV: can it, indeed? */
+	inode = ACCESS_ONCE(dentry->d_inode);
+>>>>>>> v3.18
 	if (!inode)
 		return 1;
 	if (name->len != len)
@@ -1208,8 +1308,11 @@ struct ctl_table_header *__register_sysctl_table(
 	if (!header)
 		return NULL;
 
+<<<<<<< HEAD
 	kmemleak_not_leak(header);
 
+=======
+>>>>>>> v3.18
 	node = (struct ctl_node *)(header + 1);
 	init_header(header, root, set, node, table);
 	if (sysctl_check_table(path, table))

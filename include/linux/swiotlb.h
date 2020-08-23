@@ -116,4 +116,9 @@ static inline void swiotlb_free(void) { }
 #endif
 
 extern void swiotlb_print_info(void);
+<<<<<<< HEAD
+=======
+extern int is_swiotlb_buffer(phys_addr_t paddr);
+
+>>>>>>> v3.18
 #endif /* __LINUX_SWIOTLB_H */

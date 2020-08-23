@@ -12,7 +12,10 @@
  * published by the Free Software Foundation.
  */
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/usb.h>
 #include <linux/pci.h>
 #include <linux/slab.h>
@@ -514,7 +517,11 @@ static int p54u_upload_firmware_3887(struct ieee80211_hw *dev)
 	if (!buf)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 	left = block_size = min((size_t)P54U_FW_BLOCK, priv->fw->size);
+=======
+	left = block_size = min_t(size_t, P54U_FW_BLOCK, priv->fw->size);
+>>>>>>> v3.18
 	strcpy(buf, p54u_firmware_upload_3887);
 	left -= strlen(p54u_firmware_upload_3887);
 	tmp += strlen(p54u_firmware_upload_3887);
@@ -980,6 +987,10 @@ static int p54u_load_firmware(struct ieee80211_hw *dev,
 	if (err) {
 		dev_err(&priv->udev->dev, "(p54usb) cannot load firmware %s "
 					  "(%d)!\n", p54u_fwlist[i].fw, err);
+<<<<<<< HEAD
+=======
+		usb_put_dev(udev);
+>>>>>>> v3.18
 	}
 
 	return err;
@@ -1053,6 +1064,13 @@ static int p54u_probe(struct usb_interface *intf,
 		priv->upload_fw = p54u_upload_firmware_net2280;
 	}
 	err = p54u_load_firmware(dev, intf);
+<<<<<<< HEAD
+=======
+	if (err) {
+		usb_put_dev(udev);
+		p54_free_common(dev);
+	}
+>>>>>>> v3.18
 	return err;
 }
 

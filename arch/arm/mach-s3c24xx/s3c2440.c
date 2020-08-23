@@ -29,6 +29,10 @@
 #include <asm/mach/irq.h>
 
 #include <mach/hardware.h>
+<<<<<<< HEAD
+=======
+#include <mach/gpio-samsung.h>
+>>>>>>> v3.18
 #include <asm/irq.h>
 
 #include <plat/devs.h>

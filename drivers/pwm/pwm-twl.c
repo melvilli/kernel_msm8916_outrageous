@@ -18,6 +18,10 @@
  */
 
 #include <linux/module.h>
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <linux/pwm.h>
 #include <linux/i2c/twl.h>
@@ -264,6 +268,7 @@ static void twl6030_pwm_disable(struct pwm_chip *chip, struct pwm_device *pwm)
 
 	ret = twl_i2c_write_u8(TWL6030_MODULE_ID1, val, TWL6030_TOGGLE3_REG);
 	if (ret < 0) {
+<<<<<<< HEAD
 		dev_err(chip->dev, "%s: Failed to read TOGGLE3\n", pwm->label);
 		goto out;
 	}
@@ -272,6 +277,8 @@ static void twl6030_pwm_disable(struct pwm_chip *chip, struct pwm_device *pwm)
 
 	ret = twl_i2c_write_u8(TWL6030_MODULE_ID1, val, TWL6030_TOGGLE3_REG);
 	if (ret < 0) {
+=======
+>>>>>>> v3.18
 		dev_err(chip->dev, "%s: Failed to disable PWM\n", pwm->label);
 		goto out;
 	}

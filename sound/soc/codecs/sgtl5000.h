@@ -12,7 +12,11 @@
 #define _SGTL5000_H
 
 /*
+<<<<<<< HEAD
  * Register values.
+=======
+ * Registers addresses
+>>>>>>> v3.18
  */
 #define SGTL5000_CHIP_ID			0x0000
 #define SGTL5000_CHIP_DIG_POWER			0x0002

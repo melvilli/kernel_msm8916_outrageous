@@ -12,6 +12,7 @@
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
+<<<<<<< HEAD
  *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -22,6 +23,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA
+=======
+>>>>>>> v3.18
  */
 
 #include <linux/delay.h>
@@ -158,6 +161,7 @@ static void ccp2_pwr_cfg(struct isp_ccp2_device *ccp2)
  * @ccp2: pointer to ISP CCP2 device
  * @enable: enable/disable flag
  */
+<<<<<<< HEAD
 static void ccp2_if_enable(struct isp_ccp2_device *ccp2, u8 enable)
 {
 	struct isp_device *isp = to_isp_device(ccp2);
@@ -165,6 +169,19 @@ static void ccp2_if_enable(struct isp_ccp2_device *ccp2, u8 enable)
 
 	if (enable && ccp2->vdds_csib)
 		regulator_enable(ccp2->vdds_csib);
+=======
+static int ccp2_if_enable(struct isp_ccp2_device *ccp2, u8 enable)
+{
+	struct isp_device *isp = to_isp_device(ccp2);
+	int ret;
+	int i;
+
+	if (enable && ccp2->vdds_csib) {
+		ret = regulator_enable(ccp2->vdds_csib);
+		if (ret < 0)
+			return ret;
+	}
+>>>>>>> v3.18
 
 	/* Enable/Disable all the LCx channels */
 	for (i = 0; i < CCP2_LCx_CHANS_NUM; i++)
@@ -179,6 +196,11 @@ static void ccp2_if_enable(struct isp_ccp2_device *ccp2, u8 enable)
 
 	if (!enable && ccp2->vdds_csib)
 		regulator_disable(ccp2->vdds_csib);
+<<<<<<< HEAD
+=======
+
+	return 0;
+>>>>>>> v3.18
 }
 
 /*
@@ -205,7 +227,11 @@ static void ccp2_mem_enable(struct isp_ccp2_device *ccp2, u8 enable)
 /*
  * ccp2_phyif_config - Initialize CCP2 phy interface config
  * @ccp2: Pointer to ISP CCP2 device
+<<<<<<< HEAD
  * @config: CCP2 platform data
+=======
+ * @pdata: CCP2 platform data
+>>>>>>> v3.18
  *
  * Configure the CCP2 physical interface module from platform data.
  *
@@ -360,7 +386,11 @@ static int ccp2_if_configure(struct isp_ccp2_device *ccp2)
 
 	ccp2_pwr_cfg(ccp2);
 
+<<<<<<< HEAD
 	pad = media_entity_remote_source(&ccp2->pads[CCP2_PAD_SINK]);
+=======
+	pad = media_entity_remote_pad(&ccp2->pads[CCP2_PAD_SINK]);
+>>>>>>> v3.18
 	sensor = media_entity_to_v4l2_subdev(pad->entity);
 	pdata = sensor->host_priv;
 
@@ -512,7 +542,11 @@ static void ccp2_mem_configure(struct isp_ccp2_device *ccp2,
 		       ISPCCP2_LCM_IRQSTATUS_EOF_IRQ,
 		       OMAP3_ISP_IOMEM_CCP2, ISPCCP2_LCM_IRQSTATUS);
 
+<<<<<<< HEAD
 	/* Enable LCM interupts */
+=======
+	/* Enable LCM interrupts */
+>>>>>>> v3.18
 	isp_reg_set(isp, OMAP3_ISP_IOMEM_CCP2, ISPCCP2_LCM_IRQENABLE,
 		    ISPCCP2_LCM_IRQSTATUS_EOF_IRQ |
 		    ISPCCP2_LCM_IRQSTATUS_OCPERROR_IRQ);
@@ -543,7 +577,11 @@ static void ccp2_isr_buffer(struct isp_ccp2_device *ccp2)
 
 	buffer = omap3isp_video_buffer_next(&ccp2->video_in);
 	if (buffer != NULL)
+<<<<<<< HEAD
 		ccp2_set_inaddr(ccp2, buffer->isp_addr);
+=======
+		ccp2_set_inaddr(ccp2, buffer->dma);
+>>>>>>> v3.18
 
 	pipe->state |= ISP_PIPELINE_IDLE_INPUT;
 
@@ -851,7 +889,16 @@ static int ccp2_s_stream(struct v4l2_subdev *sd, int enable)
 		ccp2_print_status(ccp2);
 
 		/* Enable CSI1/CCP2 interface */
+<<<<<<< HEAD
 		ccp2_if_enable(ccp2, 1);
+=======
+		ret = ccp2_if_enable(ccp2, 1);
+		if (ret < 0) {
+			if (ccp2->phy)
+				omap3isp_csiphy_release(ccp2->phy);
+			return ret;
+		}
+>>>>>>> v3.18
 		break;
 
 	case ISP_PIPELINE_STREAM_SINGLESHOT:
@@ -929,7 +976,11 @@ static int ccp2_video_queue(struct isp_video *video, struct isp_buffer *buffer)
 {
 	struct isp_ccp2_device *ccp2 = &video->isp->isp_ccp2;
 
+<<<<<<< HEAD
 	ccp2_set_inaddr(ccp2, buffer->isp_addr);
+=======
+	ccp2_set_inaddr(ccp2, buffer->dma);
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -1065,7 +1116,12 @@ static int ccp2_init_entities(struct isp_ccp2_device *ccp2)
 	v4l2_set_subdevdata(sd, ccp2);
 	sd->flags |= V4L2_SUBDEV_FL_HAS_DEVNODE;
 
+<<<<<<< HEAD
 	pads[CCP2_PAD_SINK].flags = MEDIA_PAD_FL_SINK;
+=======
+	pads[CCP2_PAD_SINK].flags = MEDIA_PAD_FL_SINK
+				    | MEDIA_PAD_FL_MUST_CONNECT;
+>>>>>>> v3.18
 	pads[CCP2_PAD_SOURCE].flags = MEDIA_PAD_FL_SOURCE;
 
 	me->ops = &ccp2_media_ops;
@@ -1084,7 +1140,11 @@ static int ccp2_init_entities(struct isp_ccp2_device *ccp2)
 	 * implementation we use a fixed 32 bytes alignment regardless of the
 	 * input format and width. If strict 128 bits alignment support is
 	 * required ispvideo will need to be made aware of this special dual
+<<<<<<< HEAD
 	 * alignement requirements.
+=======
+	 * alignment requirements.
+>>>>>>> v3.18
 	 */
 	ccp2->video_in.type = V4L2_BUF_TYPE_VIDEO_OUTPUT;
 	ccp2->video_in.bpl_alignment = 32;

@@ -33,7 +33,10 @@
 #include <linux/mtd/nand.h>
 #include <linux/mmc/host.h>
 #include <linux/usb/phy.h>
+<<<<<<< HEAD
 #include <linux/usb/nop-usb-xceiv.h>
+=======
+>>>>>>> v3.18
 
 #include <linux/regulator/machine.h>
 #include <linux/i2c/twl.h>
@@ -61,7 +64,12 @@
 
 static struct pwm_lookup pwm_lookup[] = {
 	/* LEDB -> PMU_STAT */
+<<<<<<< HEAD
 	PWM_LOOKUP("twl-pwmled", 1, "leds_pwm", "beagleboard::pmu_stat"),
+=======
+	PWM_LOOKUP("twl-pwmled", 1, "leds_pwm", "beagleboard::pmu_stat",
+		   7812500, PWM_POLARITY_NORMAL),
+>>>>>>> v3.18
 };
 
 static struct led_pwm pwm_leds[] = {
@@ -225,6 +233,7 @@ static struct mtd_partition omap3beagle_nand_partitions[] = {
 
 /* DSS */
 
+<<<<<<< HEAD
 static struct tfp410_platform_data dvi_panel = {
 	.i2c_bus_num = 3,
 	.power_down_gpio = -1,
@@ -254,6 +263,48 @@ static struct omap_dss_board_info beagle_dss_data = {
 	.num_devices = ARRAY_SIZE(beagle_dss_devices),
 	.devices = beagle_dss_devices,
 	.default_device = &beagle_dvi_device,
+=======
+static struct connector_dvi_platform_data beagle_dvi_connector_pdata = {
+	.name                   = "dvi",
+	.source                 = "tfp410.0",
+	.i2c_bus_num            = 3,
+};
+
+static struct platform_device beagle_dvi_connector_device = {
+	.name                   = "connector-dvi",
+	.id                     = 0,
+	.dev.platform_data      = &beagle_dvi_connector_pdata,
+};
+
+static struct encoder_tfp410_platform_data beagle_tfp410_pdata = {
+	.name                   = "tfp410.0",
+	.source                 = "dpi.0",
+	.data_lines             = 24,
+	.power_down_gpio        = -1,
+};
+
+static struct platform_device beagle_tfp410_device = {
+	.name                   = "tfp410",
+	.id                     = 0,
+	.dev.platform_data      = &beagle_tfp410_pdata,
+};
+
+static struct connector_atv_platform_data beagle_tv_pdata = {
+	.name = "tv",
+	.source = "venc.0",
+	.connector_type = OMAP_DSS_VENC_TYPE_SVIDEO,
+	.invert_polarity = false,
+};
+
+static struct platform_device beagle_tv_connector_device = {
+	.name                   = "connector-analog-tv",
+	.id                     = 0,
+	.dev.platform_data      = &beagle_tv_pdata,
+};
+
+static struct omap_dss_board_info beagle_dss_data = {
+	.default_display_name = "dvi",
+>>>>>>> v3.18
 };
 
 #include "sdram-micron-mt46h32m32lf-6.h"
@@ -278,18 +329,24 @@ static struct regulator_consumer_supply beagle_vsim_supply[] = {
 
 static struct gpio_led gpio_leds[];
 
+<<<<<<< HEAD
 /* PHY's VCC regulator might be added later, so flag that we need it */
 static struct nop_usb_xceiv_platform_data hsusb2_phy_data = {
 	.needs_vcc = true,
 };
 
+=======
+>>>>>>> v3.18
 static struct usbhs_phy_data phy_data[] = {
 	{
 		.port = 2,
 		.reset_gpio = 147,
 		.vcc_gpio = -1,		/* updated in beagle_twl_gpio_setup */
 		.vcc_polarity = 1,	/* updated in beagle_twl_gpio_setup */
+<<<<<<< HEAD
 		.platform_data = &hsusb2_phy_data,
+=======
+>>>>>>> v3.18
 	},
 };
 
@@ -332,7 +389,15 @@ static int beagle_twl_gpio_setup(struct device *dev,
 		if (gpio_request_one(gpio + 1, GPIOF_IN, "EHCI_nOC"))
 			pr_err("%s: unable to configure EHCI_nOC\n", __func__);
 	}
+<<<<<<< HEAD
 	dvi_panel.power_down_gpio = beagle_config.dvi_pd_gpio;
+=======
+	beagle_tfp410_pdata.power_down_gpio = beagle_config.dvi_pd_gpio;
+
+	platform_device_register(&beagle_tfp410_device);
+	platform_device_register(&beagle_dvi_connector_device);
+	platform_device_register(&beagle_tv_connector_device);
+>>>>>>> v3.18
 
 	/* TWL4030_GPIO_MAX i.e. LED_GPO controls HS USB Port 2 power */
 	phy_data[0].vcc_gpio = gpio + TWL4030_GPIO_MAX;
@@ -501,7 +566,11 @@ static int __init beagle_opp_init(void)
 		mpu_dev = get_cpu_device(0);
 		iva_dev = omap_device_get_by_hwmod_name("iva");
 
+<<<<<<< HEAD
 		if (IS_ERR(mpu_dev) || IS_ERR(iva_dev)) {
+=======
+		if (!mpu_dev || IS_ERR(iva_dev)) {
+>>>>>>> v3.18
 			pr_err("%s: Aiee.. no mpu/dsp devices? %p %p\n",
 				__func__, mpu_dev, iva_dev);
 			return -ENODEV;
@@ -547,6 +616,10 @@ static void __init omap3_beagle_init(void)
 	if (gpio_is_valid(beagle_config.dvi_pd_gpio))
 		omap_mux_init_gpio(beagle_config.dvi_pd_gpio, OMAP_PIN_OUTPUT);
 	omap_display_init(&beagle_dss_data);
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	omap_serial_init();
 	omap_sdrc_init(mt46h32m32lf6_sdrc_params,
 				  mt46h32m32lf6_sdrc_params);
@@ -578,7 +651,10 @@ MACHINE_START(OMAP3_BEAGLE, "OMAP3 Beagle Board")
 	.map_io		= omap3_map_io,
 	.init_early	= omap3_init_early,
 	.init_irq	= omap3_init_irq,
+<<<<<<< HEAD
 	.handle_irq	= omap3_intc_handle_irq,
+=======
+>>>>>>> v3.18
 	.init_machine	= omap3_beagle_init,
 	.init_late	= omap3_init_late,
 	.init_time	= omap3_secure_sync32k_timer_init,

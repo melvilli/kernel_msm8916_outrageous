@@ -38,14 +38,20 @@
 #include <mach/mux.h>
 #include <linux/omap-dma.h>
 #include <mach/tc.h>
+<<<<<<< HEAD
 #include <mach/irda.h>
+=======
+>>>>>>> v3.18
 #include <linux/platform_data/keypad-omap.h>
 
 #include <mach/hardware.h>
 #include <mach/usb.h>
 
 #include "common.h"
+<<<<<<< HEAD
 #include "dma.h"
+=======
+>>>>>>> v3.18
 
 #define PALMTT_USBDETECT_GPIO	0
 #define PALMTT_CABLE_GPIO	1
@@ -163,6 +169,7 @@ static struct platform_device palmtt_lcd_device = {
 	.name		= "lcd_palmtt",
 	.id		= -1,
 };
+<<<<<<< HEAD
 static struct omap_irda_config palmtt_irda_config = {
 	.transceiver_cap	= IR_SIRMODE,
 	.rx_channel		= OMAP_DMA_UART3_RX,
@@ -190,6 +197,8 @@ static struct platform_device palmtt_irda_device = {
 	.num_resources	= ARRAY_SIZE(palmtt_irda_resources),
 	.resource	= palmtt_irda_resources,
 };
+=======
+>>>>>>> v3.18
 
 static struct platform_device palmtt_spi_device = {
 	.name		= "spi_palmtt",
@@ -234,7 +243,10 @@ static struct platform_device *palmtt_devices[] __initdata = {
 	&palmtt_flash_device,
 	&palmtt_kp_device,
 	&palmtt_lcd_device,
+<<<<<<< HEAD
 	&palmtt_irda_device,
+=======
+>>>>>>> v3.18
 	&palmtt_spi_device,
 	&palmtt_backlight_device,
 	&palmtt_led_device,

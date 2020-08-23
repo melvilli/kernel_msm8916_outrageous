@@ -49,7 +49,10 @@
 #include <linux/slab.h>
 #include <linux/input.h>
 #include <linux/serio.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 
 #define DRIVER_DESC	"RC transmitter with 5-byte Zhen Hua protocol joystick driver"
 

@@ -7,6 +7,11 @@
  * of the GNU General Public License version 2.
  */
 
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 #include <linux/fs.h>
 #include <linux/dlm.h>
 #include <linux/slab.h>
@@ -176,7 +181,11 @@ static void gdlm_bast(void *arg, int mode)
 		gfs2_glock_cb(gl, LM_ST_SHARED);
 		break;
 	default:
+<<<<<<< HEAD
 		printk(KERN_ERR "unknown bast mode %d", mode);
+=======
+		pr_err("unknown bast mode %d\n", mode);
+>>>>>>> v3.18
 		BUG();
 	}
 }
@@ -195,7 +204,11 @@ static int make_mode(const unsigned int lmstate)
 	case LM_ST_SHARED:
 		return DLM_LOCK_PR;
 	}
+<<<<<<< HEAD
 	printk(KERN_ERR "unknown LM state %d", lmstate);
+=======
+	pr_err("unknown LM state %d\n", lmstate);
+>>>>>>> v3.18
 	BUG();
 	return -1;
 }
@@ -308,7 +321,11 @@ static void gdlm_put_lock(struct gfs2_glock *gl)
 	error = dlm_unlock(ls->ls_dlm, gl->gl_lksb.sb_lkid, DLM_LKF_VALBLK,
 			   NULL, gl);
 	if (error) {
+<<<<<<< HEAD
 		printk(KERN_ERR "gdlm_unlock %x,%llx err=%d\n",
+=======
+		pr_err("gdlm_unlock %x,%llx err=%d\n",
+>>>>>>> v3.18
 		       gl->gl_name.ln_type,
 		       (unsigned long long)gl->gl_name.ln_number, error);
 		return;
@@ -466,19 +483,32 @@ static void gdlm_cancel(struct gfs2_glock *gl)
 static void control_lvb_read(struct lm_lockstruct *ls, uint32_t *lvb_gen,
 			     char *lvb_bits)
 {
+<<<<<<< HEAD
 	uint32_t gen;
 	memcpy(lvb_bits, ls->ls_control_lvb, GDLM_LVB_SIZE);
 	memcpy(&gen, lvb_bits, sizeof(uint32_t));
+=======
+	__le32 gen;
+	memcpy(lvb_bits, ls->ls_control_lvb, GDLM_LVB_SIZE);
+	memcpy(&gen, lvb_bits, sizeof(__le32));
+>>>>>>> v3.18
 	*lvb_gen = le32_to_cpu(gen);
 }
 
 static void control_lvb_write(struct lm_lockstruct *ls, uint32_t lvb_gen,
 			      char *lvb_bits)
 {
+<<<<<<< HEAD
 	uint32_t gen;
 	memcpy(ls->ls_control_lvb, lvb_bits, GDLM_LVB_SIZE);
 	gen = cpu_to_le32(lvb_gen);
 	memcpy(ls->ls_control_lvb, &gen, sizeof(uint32_t));
+=======
+	__le32 gen;
+	memcpy(ls->ls_control_lvb, lvb_bits, GDLM_LVB_SIZE);
+	gen = cpu_to_le32(lvb_gen);
+	memcpy(ls->ls_control_lvb, &gen, sizeof(__le32));
+>>>>>>> v3.18
 }
 
 static int all_jid_bits_clear(char *lvb)
@@ -934,12 +964,15 @@ fail:
 	return error;
 }
 
+<<<<<<< HEAD
 static int dlm_recovery_wait(void *word)
 {
 	schedule();
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 static int control_first_done(struct gfs2_sbd *sdp)
 {
 	struct lm_lockstruct *ls = &sdp->sd_lockstruct;
@@ -974,7 +1007,11 @@ restart:
 		fs_info(sdp, "control_first_done wait gen %u\n", start_gen);
 
 		wait_on_bit(&ls->ls_recover_flags, DFL_DLM_RECOVERY,
+<<<<<<< HEAD
 			    dlm_recovery_wait, TASK_UNINTERRUPTIBLE);
+=======
+			    TASK_UNINTERRUPTIBLE);
+>>>>>>> v3.18
 		goto restart;
 	}
 
@@ -1034,8 +1071,13 @@ static int set_recover_size(struct gfs2_sbd *sdp, struct dlm_slot *slots,
 
 	new_size = old_size + RECOVER_SIZE_INC;
 
+<<<<<<< HEAD
 	submit = kzalloc(new_size * sizeof(uint32_t), GFP_NOFS);
 	result = kzalloc(new_size * sizeof(uint32_t), GFP_NOFS);
+=======
+	submit = kcalloc(new_size, sizeof(uint32_t), GFP_NOFS);
+	result = kcalloc(new_size, sizeof(uint32_t), GFP_NOFS);
+>>>>>>> v3.18
 	if (!submit || !result) {
 		kfree(submit);
 		kfree(result);
@@ -1102,7 +1144,11 @@ static void gdlm_recover_slot(void *arg, struct dlm_slot *slot)
 	}
 
 	if (ls->ls_recover_submit[jid]) {
+<<<<<<< HEAD
 		fs_info(sdp, "recover_slot jid %d gen %u prev %u",
+=======
+		fs_info(sdp, "recover_slot jid %d gen %u prev %u\n",
+>>>>>>> v3.18
 			jid, ls->ls_recover_block, ls->ls_recover_submit[jid]);
 	}
 	ls->ls_recover_submit[jid] = ls->ls_recover_block;

@@ -65,7 +65,11 @@ void arch_task_cache_init(void)
 # define HAVE_SOFTFP	0
 #endif
 
+<<<<<<< HEAD
 void __cpuinit init_thread_xstate(void)
+=======
+void init_thread_xstate(void)
+>>>>>>> v3.18
 {
 	if (boot_cpu_data.flags & CPU_HAS_FPU)
 		xstate_size = sizeof(struct sh_fpu_hard_struct);

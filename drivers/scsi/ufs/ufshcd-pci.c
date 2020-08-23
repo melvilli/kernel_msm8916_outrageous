@@ -33,7 +33,11 @@
  * this program.
  */
 
+<<<<<<< HEAD
 #include <linux/scsi/ufs/ufshcd.h>
+=======
+#include "ufshcd.h"
+>>>>>>> v3.18
 #include <linux/pci.h>
 #include <linux/pm_runtime.h>
 
@@ -107,8 +111,11 @@ static void ufshcd_pci_remove(struct pci_dev *pdev)
 	pm_runtime_forbid(&pdev->dev);
 	pm_runtime_get_noresume(&pdev->dev);
 	ufshcd_remove(hba);
+<<<<<<< HEAD
 	ufshcd_dealloc_host(hba);
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 }
 
 /**
@@ -152,7 +159,10 @@ ufshcd_pci_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 	err = ufshcd_init(hba, mmio_base, pdev->irq);
 	if (err) {
 		dev_err(&pdev->dev, "Initialization failed\n");
+<<<<<<< HEAD
 		ufshcd_dealloc_host(hba);
+=======
+>>>>>>> v3.18
 		return err;
 	}
 
@@ -171,7 +181,11 @@ static const struct dev_pm_ops ufshcd_pci_pm_ops = {
 	.runtime_idle    = ufshcd_pci_runtime_idle,
 };
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(ufshcd_pci_tbl) = {
+=======
+static const struct pci_device_id ufshcd_pci_tbl[] = {
+>>>>>>> v3.18
 	{ PCI_VENDOR_ID_SAMSUNG, 0xC00C, PCI_ANY_ID, PCI_ANY_ID, 0, 0, 0 },
 	{ }	/* terminate list */
 };

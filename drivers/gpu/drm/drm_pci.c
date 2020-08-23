@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* drm_pci.h -- PCI DMA memory management wrappers for DRM -*- linux-c -*- */
 /**
  * \file drm_pci.c
@@ -12,6 +13,8 @@
  * \author Leif Delgass <ldelgass@retinalburn.net>
  */
 
+=======
+>>>>>>> v3.18
 /*
  * Copyright 2003 José Fonseca.
  * Copyright 2003 Leif Delgass.
@@ -41,6 +44,7 @@
 #include <linux/dma-mapping.h>
 #include <linux/export.h>
 #include <drm/drmP.h>
+<<<<<<< HEAD
 
 /**********************************************************************/
 /** \name PCI memory */
@@ -48,14 +52,31 @@
 
 /**
  * \brief Allocate a PCI consistent memory block, for DMA.
+=======
+#include "drm_legacy.h"
+
+/**
+ * drm_pci_alloc - Allocate a PCI consistent memory block, for DMA.
+ * @dev: DRM device
+ * @size: size of block to allocate
+ * @align: alignment of block
+ *
+ * Return: A handle to the allocated memory block on success or NULL on
+ * failure.
+>>>>>>> v3.18
  */
 drm_dma_handle_t *drm_pci_alloc(struct drm_device * dev, size_t size, size_t align)
 {
 	drm_dma_handle_t *dmah;
+<<<<<<< HEAD
 #if 1
 	unsigned long addr;
 	size_t sz;
 #endif
+=======
+	unsigned long addr;
+	size_t sz;
+>>>>>>> v3.18
 
 	/* pci_alloc_consistent only guarantees alignment to the smallest
 	 * PAGE_SIZE order which is greater than or equal to the requested size.
@@ -82,7 +103,11 @@ drm_dma_handle_t *drm_pci_alloc(struct drm_device * dev, size_t size, size_t ali
 	/* Reserve */
 	for (addr = (unsigned long)dmah->vaddr, sz = size;
 	     sz > 0; addr += PAGE_SIZE, sz -= PAGE_SIZE) {
+<<<<<<< HEAD
 		SetPageReserved(virt_to_page(addr));
+=======
+		SetPageReserved(virt_to_page((void *)addr));
+>>>>>>> v3.18
 	}
 
 	return dmah;
@@ -90,6 +115,7 @@ drm_dma_handle_t *drm_pci_alloc(struct drm_device * dev, size_t size, size_t ali
 
 EXPORT_SYMBOL(drm_pci_alloc);
 
+<<<<<<< HEAD
 /**
  * \brief Free a PCI consistent memory block without freeing its descriptor.
  *
@@ -101,13 +127,28 @@ void __drm_pci_free(struct drm_device * dev, drm_dma_handle_t * dmah)
 	unsigned long addr;
 	size_t sz;
 #endif
+=======
+/*
+ * Free a PCI consistent memory block without freeing its descriptor.
+ *
+ * This function is for internal use in the Linux-specific DRM core code.
+ */
+void __drm_legacy_pci_free(struct drm_device * dev, drm_dma_handle_t * dmah)
+{
+	unsigned long addr;
+	size_t sz;
+>>>>>>> v3.18
 
 	if (dmah->vaddr) {
 		/* XXX - Is virt_to_page() legal for consistent mem? */
 		/* Unreserve */
 		for (addr = (unsigned long)dmah->vaddr, sz = dmah->size;
 		     sz > 0; addr += PAGE_SIZE, sz -= PAGE_SIZE) {
+<<<<<<< HEAD
 			ClearPageReserved(virt_to_page(addr));
+=======
+			ClearPageReserved(virt_to_page((void *)addr));
+>>>>>>> v3.18
 		}
 		dma_free_coherent(&dev->pdev->dev, dmah->size, dmah->vaddr,
 				  dmah->busaddr);
@@ -115,11 +156,21 @@ void __drm_pci_free(struct drm_device * dev, drm_dma_handle_t * dmah)
 }
 
 /**
+<<<<<<< HEAD
  * \brief Free a PCI consistent memory block
  */
 void drm_pci_free(struct drm_device * dev, drm_dma_handle_t * dmah)
 {
 	__drm_pci_free(dev, dmah);
+=======
+ * drm_pci_free - Free a PCI consistent memory block
+ * @dev: DRM device
+ * @dmah: handle to memory block
+ */
+void drm_pci_free(struct drm_device * dev, drm_dma_handle_t * dmah)
+{
+	__drm_legacy_pci_free(dev, dmah);
+>>>>>>> v3.18
 	kfree(dmah);
 }
 
@@ -141,6 +192,7 @@ static int drm_get_pci_domain(struct drm_device *dev)
 	return pci_domain_nr(dev->pdev->bus);
 }
 
+<<<<<<< HEAD
 static int drm_pci_get_irq(struct drm_device *dev)
 {
 	return dev->pdev->irq;
@@ -204,6 +256,31 @@ static int drm_pci_set_unique(struct drm_device *dev,
 	master->unique_len = u->unique_len;
 	master->unique_size = u->unique_len + 1;
 	master->unique = kmalloc(master->unique_size, GFP_KERNEL);
+=======
+int drm_pci_set_busid(struct drm_device *dev, struct drm_master *master)
+{
+	master->unique = kasprintf(GFP_KERNEL, "pci:%04x:%02x:%02x.%d",
+					drm_get_pci_domain(dev),
+					dev->pdev->bus->number,
+					PCI_SLOT(dev->pdev->devfn),
+					PCI_FUNC(dev->pdev->devfn));
+	if (!master->unique)
+		return -ENOMEM;
+
+	master->unique_len = strlen(master->unique);
+	return 0;
+}
+EXPORT_SYMBOL(drm_pci_set_busid);
+
+int drm_pci_set_unique(struct drm_device *dev,
+		       struct drm_master *master,
+		       struct drm_unique *u)
+{
+	int domain, bus, slot, func, ret;
+
+	master->unique_len = u->unique_len;
+	master->unique = kmalloc(master->unique_len + 1, GFP_KERNEL);
+>>>>>>> v3.18
 	if (!master->unique) {
 		ret = -ENOMEM;
 		goto err;
@@ -216,6 +293,7 @@ static int drm_pci_set_unique(struct drm_device *dev,
 
 	master->unique[master->unique_len] = '\0';
 
+<<<<<<< HEAD
 	bus_name = dev->driver->bus->get_name(dev);
 	dev->devname = kmalloc(strlen(bus_name) +
 			       strlen(master->unique) + 2, GFP_KERNEL);
@@ -227,6 +305,8 @@ static int drm_pci_set_unique(struct drm_device *dev,
 	sprintf(dev->devname, "%s@%s", bus_name,
 		master->unique);
 
+=======
+>>>>>>> v3.18
 	/* Return error if the busid submitted doesn't match the device's actual
 	 * busid.
 	 */
@@ -251,7 +331,10 @@ err:
 	return ret;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 static int drm_pci_irq_by_busid(struct drm_device *dev, struct drm_irq_busid *p)
 {
 	if ((p->busnum >> 8) != drm_get_pci_domain(dev) ||
@@ -266,6 +349,7 @@ static int drm_pci_irq_by_busid(struct drm_device *dev, struct drm_irq_busid *p)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int drm_pci_agp_init(struct drm_device *dev)
 {
 	if (drm_core_has_AGP(dev)) {
@@ -303,10 +387,76 @@ static struct drm_bus drm_pci_bus = {
  * \param pdev - PCI device structure
  * \param ent entry from the PCI ID table with device type flags
  * \return zero on success or a negative number on failure.
+=======
+/**
+ * drm_irq_by_busid - Get interrupt from bus ID
+ * @dev: DRM device
+ * @data: IOCTL parameter pointing to a drm_irq_busid structure
+ * @file_priv: DRM file private.
+ *
+ * Finds the PCI device with the specified bus id and gets its IRQ number.
+ * This IOCTL is deprecated, and will now return EINVAL for any busid not equal
+ * to that of the device that this DRM instance attached to.
+ *
+ * Return: 0 on success or a negative error code on failure.
+ */
+int drm_irq_by_busid(struct drm_device *dev, void *data,
+		     struct drm_file *file_priv)
+{
+	struct drm_irq_busid *p = data;
+
+	if (drm_core_check_feature(dev, DRIVER_MODESET))
+		return -EINVAL;
+
+	/* UMS was only ever support on PCI devices. */
+	if (WARN_ON(!dev->pdev))
+		return -EINVAL;
+
+	if (!drm_core_check_feature(dev, DRIVER_HAVE_IRQ))
+		return -EINVAL;
+
+	return drm_pci_irq_by_busid(dev, p);
+}
+
+static void drm_pci_agp_init(struct drm_device *dev)
+{
+	if (drm_core_check_feature(dev, DRIVER_USE_AGP)) {
+		if (drm_pci_device_is_agp(dev))
+			dev->agp = drm_agp_init(dev);
+		if (dev->agp) {
+			dev->agp->agp_mtrr = arch_phys_wc_add(
+				dev->agp->agp_info.aper_base,
+				dev->agp->agp_info.aper_size *
+				1024 * 1024);
+		}
+	}
+}
+
+void drm_pci_agp_destroy(struct drm_device *dev)
+{
+	if (dev->agp) {
+		arch_phys_wc_del(dev->agp->agp_mtrr);
+		drm_agp_clear(dev);
+		kfree(dev->agp);
+		dev->agp = NULL;
+	}
+}
+
+/**
+ * drm_get_pci_dev - Register a PCI device with the DRM subsystem
+ * @pdev: PCI device
+ * @ent: entry from the PCI ID table that matches @pdev
+ * @driver: DRM device driver
+>>>>>>> v3.18
  *
  * Attempt to gets inter module "drm" information. If we are first
  * then register the character device and inter module information.
  * Try and register, if we fail to register, backout previous work.
+<<<<<<< HEAD
+=======
+ *
+ * Return: 0 on success or a negative error code on failure.
+>>>>>>> v3.18
  */
 int drm_get_pci_dev(struct pci_dev *pdev, const struct pci_device_id *ent,
 		    struct drm_driver *driver)
@@ -316,12 +466,17 @@ int drm_get_pci_dev(struct pci_dev *pdev, const struct pci_device_id *ent,
 
 	DRM_DEBUG("\n");
 
+<<<<<<< HEAD
 	dev = kzalloc(sizeof(*dev), GFP_KERNEL);
+=======
+	dev = drm_dev_alloc(driver, &pdev->dev);
+>>>>>>> v3.18
 	if (!dev)
 		return -ENOMEM;
 
 	ret = pci_enable_device(pdev);
 	if (ret)
+<<<<<<< HEAD
 		goto err_g1;
 
 	dev->pdev = pdev;
@@ -330,10 +485,16 @@ int drm_get_pci_dev(struct pci_dev *pdev, const struct pci_device_id *ent,
 	dev->pci_device = pdev->device;
 	dev->pci_vendor = pdev->vendor;
 
+=======
+		goto err_free;
+
+	dev->pdev = pdev;
+>>>>>>> v3.18
 #ifdef __alpha__
 	dev->hose = pdev->sysdata;
 #endif
 
+<<<<<<< HEAD
 	mutex_lock(&drm_global_mutex);
 
 	if ((ret = drm_fill_in_dev(dev, ent, driver))) {
@@ -366,11 +527,22 @@ int drm_get_pci_dev(struct pci_dev *pdev, const struct pci_device_id *ent,
 	}
 
 	list_add_tail(&dev->driver_item, &driver->device_list);
+=======
+	if (drm_core_check_feature(dev, DRIVER_MODESET))
+		pci_set_drvdata(pdev, dev);
+
+	drm_pci_agp_init(dev);
+
+	ret = drm_dev_register(dev, ent->driver_data);
+	if (ret)
+		goto err_agp;
+>>>>>>> v3.18
 
 	DRM_INFO("Initialized %s %d.%d.%d %s for %s on minor %d\n",
 		 driver->name, driver->major, driver->minor, driver->patchlevel,
 		 driver->date, pci_name(pdev), dev->primary->index);
 
+<<<<<<< HEAD
 	mutex_unlock(&drm_global_mutex);
 	return 0;
 
@@ -384,11 +556,26 @@ err_g2:
 err_g1:
 	kfree(dev);
 	mutex_unlock(&drm_global_mutex);
+=======
+	/* No locking needed since shadow-attach is single-threaded since it may
+	 * only be called from the per-driver module init hook. */
+	if (!drm_core_check_feature(dev, DRIVER_MODESET))
+		list_add_tail(&dev->legacy_dev_list, &driver->legacy_dev_list);
+
+	return 0;
+
+err_agp:
+	drm_pci_agp_destroy(dev);
+	pci_disable_device(pdev);
+err_free:
+	drm_dev_unref(dev);
+>>>>>>> v3.18
 	return ret;
 }
 EXPORT_SYMBOL(drm_get_pci_dev);
 
 /**
+<<<<<<< HEAD
  * PCI device initialization. Called direct from modules at load time.
  *
  * \return zero on success or a negative number on failure.
@@ -398,6 +585,16 @@ EXPORT_SYMBOL(drm_get_pci_dev);
  *
  * Expands the \c DRIVER_PREINIT and \c DRIVER_POST_INIT macros before and
  * after the initialization for driver customization.
+=======
+ * drm_pci_init - Register matching PCI devices with the DRM subsystem
+ * @driver: DRM device driver
+ * @pdriver: PCI device driver
+ *
+ * Initializes a drm_device structures, registering the stubs and initializing
+ * the AGP device.
+ *
+ * Return: 0 on success or a negative error code on failure.
+>>>>>>> v3.18
  */
 int drm_pci_init(struct drm_driver *driver, struct pci_driver *pdriver)
 {
@@ -407,14 +604,21 @@ int drm_pci_init(struct drm_driver *driver, struct pci_driver *pdriver)
 
 	DRM_DEBUG("\n");
 
+<<<<<<< HEAD
 	INIT_LIST_HEAD(&driver->device_list);
 	driver->kdriver.pci = pdriver;
 	driver->bus = &drm_pci_bus;
 
+=======
+>>>>>>> v3.18
 	if (driver->driver_features & DRIVER_MODESET)
 		return pci_register_driver(pdriver);
 
 	/* If not using KMS, fall back to stealth mode manual scanning. */
+<<<<<<< HEAD
+=======
+	INIT_LIST_HEAD(&driver->legacy_dev_list);
+>>>>>>> v3.18
 	for (i = 0; pdriver->id_table[i].vendor != 0; i++) {
 		pid = &pdriver->id_table[i];
 
@@ -484,11 +688,39 @@ int drm_pci_init(struct drm_driver *driver, struct pci_driver *pdriver)
 	return -1;
 }
 
+<<<<<<< HEAD
+=======
+void drm_pci_agp_destroy(struct drm_device *dev) {}
+
+int drm_irq_by_busid(struct drm_device *dev, void *data,
+		     struct drm_file *file_priv)
+{
+	return -EINVAL;
+}
+
+int drm_pci_set_unique(struct drm_device *dev,
+		       struct drm_master *master,
+		       struct drm_unique *u)
+{
+	return -EINVAL;
+}
+>>>>>>> v3.18
 #endif
 
 EXPORT_SYMBOL(drm_pci_init);
 
+<<<<<<< HEAD
 /*@}*/
+=======
+/**
+ * drm_pci_exit - Unregister matching PCI devices from the DRM subsystem
+ * @driver: DRM device driver
+ * @pdriver: PCI device driver
+ *
+ * Unregisters one or more devices matched by a PCI driver from the DRM
+ * subsystem.
+ */
+>>>>>>> v3.18
 void drm_pci_exit(struct drm_driver *driver, struct pci_driver *pdriver)
 {
 	struct drm_device *dev, *tmp;
@@ -497,8 +729,16 @@ void drm_pci_exit(struct drm_driver *driver, struct pci_driver *pdriver)
 	if (driver->driver_features & DRIVER_MODESET) {
 		pci_unregister_driver(pdriver);
 	} else {
+<<<<<<< HEAD
 		list_for_each_entry_safe(dev, tmp, &driver->device_list, driver_item)
 			drm_put_dev(dev);
+=======
+		list_for_each_entry_safe(dev, tmp, &driver->legacy_dev_list,
+					 legacy_dev_list) {
+			list_del(&dev->legacy_dev_list);
+			drm_put_dev(dev);
+		}
+>>>>>>> v3.18
 	}
 	DRM_INFO("Module unloaded\n");
 }

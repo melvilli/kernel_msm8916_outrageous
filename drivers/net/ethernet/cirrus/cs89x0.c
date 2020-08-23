@@ -145,7 +145,10 @@ struct net_local {
 	int force;		/* force various values; see FORCE* above. */
 	spinlock_t lock;
 	void __iomem *virt_addr;/* CS89x0 virtual address. */
+<<<<<<< HEAD
 	unsigned long size;	/* Length of CS89x0 memory region. */
+=======
+>>>>>>> v3.18
 #if ALLOW_DMA
 	int use_dma;		/* Flag: we're using dma */
 	int dma;		/* DMA channel */
@@ -1174,7 +1177,11 @@ static netdev_tx_t net_send_packet(struct sk_buff *skb, struct net_device *dev)
 	writewords(lp, TX_FRAME_PORT, skb->data, (skb->len + 1) >> 1);
 	spin_unlock_irqrestore(&lp->lock, flags);
 	dev->stats.tx_bytes += skb->len;
+<<<<<<< HEAD
 	dev_kfree_skb(skb);
+=======
+	dev_consume_skb_any(skb);
+>>>>>>> v3.18
 
 	/* We DO NOT call netif_wake_queue() here.
 	 * We also DO NOT call netif_start_queue().
@@ -1854,14 +1861,21 @@ static int __init cs89x0_platform_probe(struct platform_device *pdev)
 
 	lp = netdev_priv(dev);
 
+<<<<<<< HEAD
 	mem_res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	dev->irq = platform_get_irq(pdev, 0);
 	if (mem_res == NULL || dev->irq <= 0) {
 		dev_warn(&dev->dev, "memory/interrupt resource missing\n");
+=======
+	dev->irq = platform_get_irq(pdev, 0);
+	if (dev->irq <= 0) {
+		dev_warn(&dev->dev, "interrupt resource missing\n");
+>>>>>>> v3.18
 		err = -ENXIO;
 		goto free;
 	}
 
+<<<<<<< HEAD
 	lp->size = resource_size(mem_res);
 	if (!request_mem_region(mem_res->start, lp->size, DRV_NAME)) {
 		dev_warn(&dev->dev, "request_mem_region() failed\n");
@@ -1880,15 +1894,31 @@ static int __init cs89x0_platform_probe(struct platform_device *pdev)
 	if (err) {
 		dev_warn(&dev->dev, "no cs8900 or cs8920 detected\n");
 		goto unmap;
+=======
+	mem_res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+	virt_addr = devm_ioremap_resource(&pdev->dev, mem_res);
+	if (IS_ERR(virt_addr)) {
+		err = PTR_ERR(virt_addr);
+		goto free;
+	}
+
+	err = cs89x0_probe1(dev, virt_addr, 0);
+	if (err) {
+		dev_warn(&dev->dev, "no cs8900 or cs8920 detected\n");
+		goto free;
+>>>>>>> v3.18
 	}
 
 	platform_set_drvdata(pdev, dev);
 	return 0;
 
+<<<<<<< HEAD
 unmap:
 	iounmap(virt_addr);
 release:
 	release_mem_region(mem_res->start, lp->size);
+=======
+>>>>>>> v3.18
 free:
 	free_netdev(dev);
 	return err;
@@ -1897,17 +1927,24 @@ free:
 static int cs89x0_platform_remove(struct platform_device *pdev)
 {
 	struct net_device *dev = platform_get_drvdata(pdev);
+<<<<<<< HEAD
 	struct net_local *lp = netdev_priv(dev);
 	struct resource *mem_res;
+=======
+>>>>>>> v3.18
 
 	/* This platform_get_resource() call will not return NULL, because
 	 * the same call in cs89x0_platform_probe() has returned a non NULL
 	 * value.
 	 */
+<<<<<<< HEAD
 	mem_res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	unregister_netdev(dev);
 	iounmap(lp->virt_addr);
 	release_mem_region(mem_res->start, lp->size);
+=======
+	unregister_netdev(dev);
+>>>>>>> v3.18
 	free_netdev(dev);
 	return 0;
 }

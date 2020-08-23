@@ -125,8 +125,13 @@ static u32 ath9k_hw_ar9287_dump_eeprom(struct ath_hw *ah, bool dump_base_hdr,
 	struct base_eep_ar9287_header *pBase = &eep->baseEepHeader;
 
 	if (!dump_base_hdr) {
+<<<<<<< HEAD
 		len += snprintf(buf + len, size - len,
 				"%20s :\n", "2GHz modal Header");
+=======
+		len += scnprintf(buf + len, size - len,
+				 "%20s :\n", "2GHz modal Header");
+>>>>>>> v3.18
 		len = ar9287_dump_modal_eeprom(buf, len, size,
 						&eep->modalHeader);
 		goto out;
@@ -157,8 +162,13 @@ static u32 ath9k_hw_ar9287_dump_eeprom(struct ath_hw *ah, bool dump_base_hdr,
 	PR_EEP("Power Table Offset", pBase->pwrTableOffset);
 	PR_EEP("OpenLoop Power Ctrl", pBase->openLoopPwrCntl);
 
+<<<<<<< HEAD
 	len += snprintf(buf + len, size - len, "%20s : %pM\n", "MacAddress",
 			pBase->macAddr);
+=======
+	len += scnprintf(buf + len, size - len, "%20s : %pM\n", "MacAddress",
+			 pBase->macAddr);
+>>>>>>> v3.18
 
 out:
 	if (len > size)
@@ -1004,6 +1014,7 @@ static void ath9k_hw_ar9287_set_board_values(struct ath_hw *ah,
 static u16 ath9k_hw_ar9287_get_spur_channel(struct ath_hw *ah,
 					    u16 i, bool is2GHz)
 {
+<<<<<<< HEAD
 #define EEP_MAP9287_SPURCHAN \
 	(ah->eeprom.map9287.modalHeader.spurChans[i].spurChan)
 
@@ -1029,6 +1040,9 @@ static u16 ath9k_hw_ar9287_get_spur_channel(struct ath_hw *ah,
 	return spur_val;
 
 #undef EEP_MAP9287_SPURCHAN
+=======
+	return ah->eeprom.map9287.modalHeader.spurChans[i].spurChan;
+>>>>>>> v3.18
 }
 
 const struct eeprom_ops eep_ar9287_ops = {

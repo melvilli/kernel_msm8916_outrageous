@@ -188,6 +188,7 @@ static loff_t vcs_lseek(struct file *file, loff_t offset, int orig)
 	console_unlock();
 	if (size < 0)
 		return size;
+<<<<<<< HEAD
 	switch (orig) {
 		default:
 			return -EINVAL;
@@ -204,6 +205,9 @@ static loff_t vcs_lseek(struct file *file, loff_t offset, int orig)
 	}
 	file->f_pos = offset;
 	return file->f_pos;
+=======
+	return fixed_size_llseek(file, offset, orig, size);
+>>>>>>> v3.18
 }
 
 

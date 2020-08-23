@@ -7,6 +7,7 @@
 #include <linux/nfsacl.h>
 
 #include "internal.h"
+<<<<<<< HEAD
 
 #define NFSDBG_FACILITY	NFSDBG_PROC
 
@@ -183,6 +184,13 @@ static void nfs3_cache_acls(struct inode *inode, struct posix_acl *acl,
 }
 
 struct posix_acl *nfs3_proc_getacl(struct inode *inode, int type)
+=======
+#include "nfs3_fs.h"
+
+#define NFSDBG_FACILITY	NFSDBG_PROC
+
+struct posix_acl *nfs3_get_acl(struct inode *inode, int type)
+>>>>>>> v3.18
 {
 	struct nfs_server *server = NFS_SERVER(inode);
 	struct page *pages[NFSACL_MAXPAGES] = { };
@@ -198,7 +206,10 @@ struct posix_acl *nfs3_proc_getacl(struct inode *inode, int type)
 		.rpc_argp	= &args,
 		.rpc_resp	= &res,
 	};
+<<<<<<< HEAD
 	struct posix_acl *acl;
+=======
+>>>>>>> v3.18
 	int status, count;
 
 	if (!nfs_server_capable(inode, NFS_CAP_ACLS))
@@ -207,10 +218,13 @@ struct posix_acl *nfs3_proc_getacl(struct inode *inode, int type)
 	status = nfs_revalidate_inode(server, inode);
 	if (status < 0)
 		return ERR_PTR(status);
+<<<<<<< HEAD
 	acl = nfs3_get_cached_acl(inode, type);
 	if (acl != ERR_PTR(-EAGAIN))
 		return acl;
 	acl = NULL;
+=======
+>>>>>>> v3.18
 
 	/*
 	 * Only get the access acl when explicitly requested: We don't
@@ -257,11 +271,17 @@ struct posix_acl *nfs3_proc_getacl(struct inode *inode, int type)
 	}
 
 	if (res.acl_access != NULL) {
+<<<<<<< HEAD
 		if (posix_acl_equiv_mode(res.acl_access, NULL) == 0) {
+=======
+		if ((posix_acl_equiv_mode(res.acl_access, NULL) == 0) ||
+		    res.acl_access->a_count == 0) {
+>>>>>>> v3.18
 			posix_acl_release(res.acl_access);
 			res.acl_access = NULL;
 		}
 	}
+<<<<<<< HEAD
 	nfs3_cache_acls(inode,
 		(res.mask & NFS_ACL)   ? res.acl_access  : ERR_PTR(-EINVAL),
 		(res.mask & NFS_DFACL) ? res.acl_default : ERR_PTR(-EINVAL));
@@ -275,12 +295,33 @@ struct posix_acl *nfs3_proc_getacl(struct inode *inode, int type)
 		case ACL_TYPE_DEFAULT:
 			acl = res.acl_default;
 			res.acl_default = NULL;
+=======
+
+	if (res.mask & NFS_ACL)
+		set_cached_acl(inode, ACL_TYPE_ACCESS, res.acl_access);
+	else
+		forget_cached_acl(inode, ACL_TYPE_ACCESS);
+
+	if (res.mask & NFS_DFACL)
+		set_cached_acl(inode, ACL_TYPE_DEFAULT, res.acl_default);
+	else
+		forget_cached_acl(inode, ACL_TYPE_DEFAULT);
+
+	nfs_free_fattr(res.fattr);
+	if (type == ACL_TYPE_ACCESS) {
+		posix_acl_release(res.acl_default);
+		return res.acl_access;
+	} else {
+		posix_acl_release(res.acl_access);
+		return res.acl_default;
+>>>>>>> v3.18
 	}
 
 getout:
 	posix_acl_release(res.acl_access);
 	posix_acl_release(res.acl_default);
 	nfs_free_fattr(res.fattr);
+<<<<<<< HEAD
 
 	if (status != 0) {
 		posix_acl_release(acl);
@@ -291,6 +332,13 @@ getout:
 
 static int nfs3_proc_setacls(struct inode *inode, struct posix_acl *acl,
 		  struct posix_acl *dfacl)
+=======
+	return ERR_PTR(status);
+}
+
+static int __nfs3_proc_setacls(struct inode *inode, struct posix_acl *acl,
+		struct posix_acl *dfacl)
+>>>>>>> v3.18
 {
 	struct nfs_server *server = NFS_SERVER(inode);
 	struct nfs_fattr *fattr;
@@ -356,7 +404,12 @@ static int nfs3_proc_setacls(struct inode *inode, struct posix_acl *acl,
 	switch (status) {
 		case 0:
 			status = nfs_refresh_inode(inode, fattr);
+<<<<<<< HEAD
 			nfs3_cache_acls(inode, acl, dfacl);
+=======
+			set_cached_acl(inode, ACL_TYPE_ACCESS, acl);
+			set_cached_acl(inode, ACL_TYPE_DEFAULT, dfacl);
+>>>>>>> v3.18
 			break;
 		case -EPFNOSUPPORT:
 		case -EPROTONOSUPPORT:
@@ -376,13 +429,27 @@ out:
 	return status;
 }
 
+<<<<<<< HEAD
 int nfs3_proc_setacl(struct inode *inode, int type, struct posix_acl *acl)
+=======
+int nfs3_proc_setacls(struct inode *inode, struct posix_acl *acl,
+		struct posix_acl *dfacl)
+{
+	int ret;
+	ret = __nfs3_proc_setacls(inode, acl, dfacl);
+	return (ret == -EOPNOTSUPP) ? 0 : ret;
+
+}
+
+int nfs3_set_acl(struct inode *inode, struct posix_acl *acl, int type)
+>>>>>>> v3.18
 {
 	struct posix_acl *alloc = NULL, *dfacl = NULL;
 	int status;
 
 	if (S_ISDIR(inode->i_mode)) {
 		switch(type) {
+<<<<<<< HEAD
 			case ACL_TYPE_ACCESS:
 				alloc = dfacl = nfs3_proc_getacl(inode,
 						ACL_TYPE_DEFAULT);
@@ -403,13 +470,33 @@ int nfs3_proc_setacl(struct inode *inode, int type, struct posix_acl *acl)
 		}
 	} else if (type != ACL_TYPE_ACCESS)
 			return -EINVAL;
+=======
+		case ACL_TYPE_ACCESS:
+			alloc = dfacl = get_acl(inode, ACL_TYPE_DEFAULT);
+			if (IS_ERR(alloc))
+				goto fail;
+			break;
+
+		case ACL_TYPE_DEFAULT:
+			dfacl = acl;
+			alloc = acl = get_acl(inode, ACL_TYPE_ACCESS);
+			if (IS_ERR(alloc))
+				goto fail;
+			break;
+		}
+	}
+>>>>>>> v3.18
 
 	if (acl == NULL) {
 		alloc = acl = posix_acl_from_mode(inode->i_mode, GFP_KERNEL);
 		if (IS_ERR(alloc))
 			goto fail;
 	}
+<<<<<<< HEAD
 	status = nfs3_proc_setacls(inode, acl, dfacl);
+=======
+	status = __nfs3_proc_setacls(inode, acl, dfacl);
+>>>>>>> v3.18
 	posix_acl_release(alloc);
 	return status;
 
@@ -417,6 +504,7 @@ fail:
 	return PTR_ERR(alloc);
 }
 
+<<<<<<< HEAD
 int nfs3_proc_set_default_acl(struct inode *dir, struct inode *inode,
 		umode_t mode)
 {
@@ -440,4 +528,53 @@ int nfs3_proc_set_default_acl(struct inode *dir, struct inode *inode,
 out_release_dfacl:
 	posix_acl_release(dfacl);
 	return error;
+=======
+const struct xattr_handler *nfs3_xattr_handlers[] = {
+	&posix_acl_access_xattr_handler,
+	&posix_acl_default_xattr_handler,
+	NULL,
+};
+
+static int
+nfs3_list_one_acl(struct inode *inode, int type, const char *name, void *data,
+		size_t size, ssize_t *result)
+{
+	struct posix_acl *acl;
+	char *p = data + *result;
+
+	acl = get_acl(inode, type);
+	if (IS_ERR_OR_NULL(acl))
+		return 0;
+
+	posix_acl_release(acl);
+
+	*result += strlen(name);
+	*result += 1;
+	if (!size)
+		return 0;
+	if (*result > size)
+		return -ERANGE;
+
+	strcpy(p, name);
+	return 0;
+}
+
+ssize_t
+nfs3_listxattr(struct dentry *dentry, char *data, size_t size)
+{
+	struct inode *inode = dentry->d_inode;
+	ssize_t result = 0;
+	int error;
+
+	error = nfs3_list_one_acl(inode, ACL_TYPE_ACCESS,
+			POSIX_ACL_XATTR_ACCESS, data, size, &result);
+	if (error)
+		return error;
+
+	error = nfs3_list_one_acl(inode, ACL_TYPE_DEFAULT,
+			POSIX_ACL_XATTR_DEFAULT, data, size, &result);
+	if (error)
+		return error;
+	return result;
+>>>>>>> v3.18
 }

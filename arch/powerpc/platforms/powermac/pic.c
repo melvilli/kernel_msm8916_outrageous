@@ -393,8 +393,13 @@ static void __init pmac_pic_probe_oldstyle(void)
 #endif
 }
 
+<<<<<<< HEAD
 int of_irq_map_oldworld(struct device_node *device, int index,
 			struct of_irq *out_irq)
+=======
+int of_irq_parse_oldworld(struct device_node *device, int index,
+			struct of_phandle_args *out_irq)
+>>>>>>> v3.18
 {
 	const u32 *ints = NULL;
 	int intlen;
@@ -422,9 +427,15 @@ int of_irq_map_oldworld(struct device_node *device, int index,
 	if (index >= intlen)
 		return -EINVAL;
 
+<<<<<<< HEAD
 	out_irq->controller = NULL;
 	out_irq->specifier[0] = ints[index];
 	out_irq->size = 1;
+=======
+	out_irq->np = NULL;
+	out_irq->args[0] = ints[index];
+	out_irq->args_count = 1;
+>>>>>>> v3.18
 
 	return 0;
 }

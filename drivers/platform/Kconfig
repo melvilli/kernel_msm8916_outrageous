@@ -5,7 +5,11 @@ if GOLDFISH
 source "drivers/platform/goldfish/Kconfig"
 endif
 
+<<<<<<< HEAD
 if ARCH_MSM
 source "drivers/platform/msm/Kconfig"
 source "drivers/platform/oppo/Kconfig"
 endif
+=======
+source "drivers/platform/chrome/Kconfig"
+>>>>>>> v3.18

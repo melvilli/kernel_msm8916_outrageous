@@ -26,6 +26,11 @@
 #include <asm/uaccess.h>
 #include <asm/cacheflush.h>
 
+<<<<<<< HEAD
+=======
+#include "kernel.h"
+
+>>>>>>> v3.18
 /* #define ALLOW_INIT_TRACING */
 
 /*

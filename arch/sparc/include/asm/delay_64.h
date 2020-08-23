@@ -8,8 +8,13 @@
 
 #ifndef __ASSEMBLY__
 
+<<<<<<< HEAD
 extern void __delay(unsigned long loops);
 extern void udelay(unsigned long usecs);
+=======
+void __delay(unsigned long loops);
+void udelay(unsigned long usecs);
+>>>>>>> v3.18
 #define mdelay(n)	udelay((n) * 1000)
 
 #endif /* !__ASSEMBLY__ */

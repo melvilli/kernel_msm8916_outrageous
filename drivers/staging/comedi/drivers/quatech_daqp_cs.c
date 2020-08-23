@@ -47,6 +47,10 @@ Status: works
 Devices: [Quatech] DAQP-208 (daqp), DAQP-308
 */
 
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 #include "../comedidev.h"
 #include <linux/semaphore.h>
 
@@ -207,14 +211,21 @@ static enum irqreturn daqp_interrupt(int irq, void *dev_id)
 	case buffer:
 		while (!((status = inb(dev->iobase + DAQP_STATUS))
 			 & DAQP_STATUS_FIFO_EMPTY)) {
+<<<<<<< HEAD
 
 			short data;
+=======
+			unsigned short data;
+>>>>>>> v3.18
 
 			if (status & DAQP_STATUS_DATA_LOST) {
 				s->async->events |=
 				    COMEDI_CB_EOA | COMEDI_CB_OVERFLOW;
 				dev_warn(dev->class_dev, "data lost\n");
+<<<<<<< HEAD
 				daqp_ai_cancel(dev, s);
+=======
+>>>>>>> v3.18
 				break;
 			}
 
@@ -222,7 +233,11 @@ static enum irqreturn daqp_interrupt(int irq, void *dev_id)
 			data |= inb(dev->iobase + DAQP_FIFO) << 8;
 			data ^= 0x8000;
 
+<<<<<<< HEAD
 			comedi_buf_put(s->async, data);
+=======
+			comedi_buf_put(s, data);
+>>>>>>> v3.18
 
 			/* If there's a limit, decrement it
 			 * and stop conversion if zero
@@ -231,7 +246,10 @@ static enum irqreturn daqp_interrupt(int irq, void *dev_id)
 			if (devpriv->count > 0) {
 				devpriv->count--;
 				if (devpriv->count == 0) {
+<<<<<<< HEAD
 					daqp_ai_cancel(dev, s);
+=======
+>>>>>>> v3.18
 					s->async->events |= COMEDI_CB_EOA;
 					break;
 				}
@@ -244,13 +262,20 @@ static enum irqreturn daqp_interrupt(int irq, void *dev_id)
 		if (loop_limit <= 0) {
 			dev_warn(dev->class_dev,
 				 "loop_limit reached in daqp_interrupt()\n");
+<<<<<<< HEAD
 			daqp_ai_cancel(dev, s);
+=======
+>>>>>>> v3.18
 			s->async->events |= COMEDI_CB_EOA | COMEDI_CB_ERROR;
 		}
 
 		s->async->events |= COMEDI_CB_BLOCK;
 
+<<<<<<< HEAD
 		comedi_event(dev, s);
+=======
+		cfc_handle_events(dev, s);
+>>>>>>> v3.18
 	}
 	return IRQ_HANDLED;
 }
@@ -354,7 +379,11 @@ static int daqp_ai_insn_read(struct comedi_device *dev,
  * time that the device will use.
  */
 
+<<<<<<< HEAD
 static int daqp_ns_to_timer(unsigned int *ns, int round)
+=======
+static int daqp_ns_to_timer(unsigned int *ns, unsigned int flags)
+>>>>>>> v3.18
 {
 	int timer;
 
@@ -376,7 +405,11 @@ static int daqp_ai_cmdtest(struct comedi_device *dev,
 			   struct comedi_subdevice *s, struct comedi_cmd *cmd)
 {
 	int err = 0;
+<<<<<<< HEAD
 	int tmp;
+=======
+	unsigned int arg;
+>>>>>>> v3.18
 
 	/* Step 1 : check if triggers are trivially valid */
 
@@ -438,6 +471,7 @@ static int daqp_ai_cmdtest(struct comedi_device *dev,
 	/* step 4: fix up any arguments */
 
 	if (cmd->scan_begin_src == TRIG_TIMER) {
+<<<<<<< HEAD
 		tmp = cmd->scan_begin_arg;
 		daqp_ns_to_timer(&cmd->scan_begin_arg,
 				 cmd->flags & TRIG_ROUND_MASK);
@@ -451,6 +485,17 @@ static int daqp_ai_cmdtest(struct comedi_device *dev,
 				 cmd->flags & TRIG_ROUND_MASK);
 		if (tmp != cmd->convert_arg)
 			err++;
+=======
+		arg = cmd->scan_begin_arg;
+		daqp_ns_to_timer(&arg, cmd->flags);
+		err |= cfc_check_trigger_arg_is(&cmd->scan_begin_arg, arg);
+	}
+
+	if (cmd->convert_src == TRIG_TIMER) {
+		arg = cmd->convert_arg;
+		daqp_ns_to_timer(&arg, cmd->flags);
+		err |= cfc_check_trigger_arg_is(&cmd->convert_arg, arg);
+>>>>>>> v3.18
 	}
 
 	if (err)
@@ -495,15 +540,23 @@ static int daqp_ai_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 	 */
 
 	if (cmd->convert_src == TRIG_TIMER) {
+<<<<<<< HEAD
 		counter = daqp_ns_to_timer(&cmd->convert_arg,
 					       cmd->flags & TRIG_ROUND_MASK);
+=======
+		counter = daqp_ns_to_timer(&cmd->convert_arg, cmd->flags);
+>>>>>>> v3.18
 		outb(counter & 0xff, dev->iobase + DAQP_PACER_LOW);
 		outb((counter >> 8) & 0xff, dev->iobase + DAQP_PACER_MID);
 		outb((counter >> 16) & 0xff, dev->iobase + DAQP_PACER_HIGH);
 		scanlist_start_on_every_entry = 1;
 	} else {
+<<<<<<< HEAD
 		counter = daqp_ns_to_timer(&cmd->scan_begin_arg,
 					       cmd->flags & TRIG_ROUND_MASK);
+=======
+		counter = daqp_ns_to_timer(&cmd->scan_begin_arg, cmd->flags);
+>>>>>>> v3.18
 		outb(counter & 0xff, dev->iobase + DAQP_PACER_LOW);
 		outb((counter >> 8) & 0xff, dev->iobase + DAQP_PACER_MID);
 		outb((counter >> 16) & 0xff, dev->iobase + DAQP_PACER_HIGH);
@@ -647,7 +700,10 @@ static int daqp_ao_insn_write(struct comedi_device *dev,
 {
 	struct daqp_private *devpriv = dev->private;
 	unsigned int chan = CR_CHAN(insn->chanspec);
+<<<<<<< HEAD
 	unsigned int val;
+=======
+>>>>>>> v3.18
 	int i;
 
 	if (devpriv->stop)
@@ -657,7 +713,14 @@ static int daqp_ao_insn_write(struct comedi_device *dev,
 	outb(0, dev->iobase + DAQP_AUX);
 
 	for (i = 0; i > insn->n; i++) {
+<<<<<<< HEAD
 		val = data[0];
+=======
+		unsigned val = data[i];
+
+		s->readback[chan] = val;
+
+>>>>>>> v3.18
 		val &= 0x0fff;
 		val ^= 0x0800;		/* Flip the sign */
 		val |= (chan << 12);
@@ -689,18 +752,26 @@ static int daqp_do_insn_bits(struct comedi_device *dev,
 			     unsigned int *data)
 {
 	struct daqp_private *devpriv = dev->private;
+<<<<<<< HEAD
 	unsigned int mask = data[0];
 	unsigned int bits = data[1];
+=======
+>>>>>>> v3.18
 
 	if (devpriv->stop)
 		return -EIO;
 
+<<<<<<< HEAD
 	if (mask) {
 		s->state &= ~mask;
 		s->state |= (bits & mask);
 
 		outb(s->state, dev->iobase + DAQP_DIGITAL_IO);
 	}
+=======
+	if (comedi_dio_update_state(s, data))
+		outb(s->state, dev->iobase + DAQP_DIGITAL_IO);
+>>>>>>> v3.18
 
 	data[1] = s->state;
 
@@ -715,10 +786,16 @@ static int daqp_auto_attach(struct comedi_device *dev,
 	struct comedi_subdevice *s;
 	int ret;
 
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
+=======
+	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
+	if (!devpriv)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	link->config_flags |= CONF_AUTO_SET_IO | CONF_ENABLE_IRQ;
 	ret = comedi_pcmcia_enable(dev, NULL);
@@ -755,6 +832,14 @@ static int daqp_auto_attach(struct comedi_device *dev,
 	s->maxdata	= 0x0fff;
 	s->range_table	= &range_bipolar5;
 	s->insn_write	= daqp_ao_insn_write;
+<<<<<<< HEAD
+=======
+	s->insn_read	= comedi_readback_insn_read;
+
+	ret = comedi_alloc_subdev_readback(s);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 
 	s = &dev->subdevices[2];
 	s->type		= COMEDI_SUBD_DI;

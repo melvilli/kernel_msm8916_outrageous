@@ -40,6 +40,10 @@
 #include "3ds_debugboard.h"
 #include "common.h"
 #include "devices-imx31.h"
+<<<<<<< HEAD
+=======
+#include "ehci.h"
+>>>>>>> v3.18
 #include "hardware.h"
 #include "iomux-mx3.h"
 #include "ulpi.h"
@@ -306,16 +310,28 @@ static int mx31_3ds_sdhc1_init(struct device *dev,
 	ret = gpio_request_array(mx31_3ds_sdhc1_gpios,
 				 ARRAY_SIZE(mx31_3ds_sdhc1_gpios));
 	if (ret) {
+<<<<<<< HEAD
 		pr_warning("Unable to request the SD/MMC GPIOs.\n");
+=======
+		pr_warn("Unable to request the SD/MMC GPIOs.\n");
+>>>>>>> v3.18
 		return ret;
 	}
 
 	ret = request_irq(gpio_to_irq(IOMUX_TO_GPIO(MX31_PIN_GPIO3_1)),
+<<<<<<< HEAD
 			  detect_irq, IRQF_DISABLED |
 			  IRQF_TRIGGER_FALLING | IRQF_TRIGGER_RISING,
 			  "sdhc1-detect", data);
 	if (ret) {
 		pr_warning("Unable to request the SD/MMC card-detect IRQ.\n");
+=======
+			  detect_irq,
+			  IRQF_TRIGGER_FALLING | IRQF_TRIGGER_RISING,
+			  "sdhc1-detect", data);
+	if (ret) {
+		pr_warn("Unable to request the SD/MMC card-detect IRQ.\n");
+>>>>>>> v3.18
 		goto gpio_free;
 	}
 
@@ -775,7 +791,10 @@ MACHINE_START(MX31_3DS, "Freescale MX31PDK (3DS)")
 	.map_io = mx31_map_io,
 	.init_early = imx31_init_early,
 	.init_irq = mx31_init_irq,
+<<<<<<< HEAD
 	.handle_irq = imx31_handle_irq,
+=======
+>>>>>>> v3.18
 	.init_time	= mx31_3ds_timer_init,
 	.init_machine = mx31_3ds_init,
 	.reserve = mx31_3ds_reserve,

@@ -10,7 +10,11 @@ __clean:
 # Shorthand for $(Q)$(MAKE) scripts/Makefile.clean obj=dir
 # Usage:
 # $(Q)$(MAKE) $(clean)=dir
+<<<<<<< HEAD
 clean := -f $(if $(KBUILD_SRC),$(srctree)/)scripts/Makefile.clean obj
+=======
+clean := -f $(srctree)/scripts/Makefile.clean obj
+>>>>>>> v3.18
 
 # The filename Kbuild has precedence over Makefile
 kbuild-dir := $(if $(filter /%,$(src)),$(src),$(srctree)/$(src))
@@ -23,15 +27,22 @@ __subdir-y	:= $(patsubst %/,%,$(filter %/, $(obj-y)))
 subdir-y	+= $(__subdir-y)
 __subdir-m	:= $(patsubst %/,%,$(filter %/, $(obj-m)))
 subdir-m	+= $(__subdir-m)
+<<<<<<< HEAD
 __subdir-n	:= $(patsubst %/,%,$(filter %/, $(obj-n)))
 subdir-n	+= $(__subdir-n)
+=======
+>>>>>>> v3.18
 __subdir-	:= $(patsubst %/,%,$(filter %/, $(obj-)))
 subdir-		+= $(__subdir-)
 
 # Subdirectories we need to descend into
 
 subdir-ym	:= $(sort $(subdir-y) $(subdir-m))
+<<<<<<< HEAD
 subdir-ymn      := $(sort $(subdir-ym) $(subdir-n) $(subdir-))
+=======
+subdir-ymn      := $(sort $(subdir-ym) $(subdir-))
+>>>>>>> v3.18
 
 # Add subdir path
 
@@ -40,8 +51,13 @@ subdir-ymn	:= $(addprefix $(obj)/,$(subdir-ymn))
 # build a list of files to remove, usually relative to the current
 # directory
 
+<<<<<<< HEAD
 __clean-files	:= $(extra-y) $(always)                  \
 		   $(targets) $(clean-files)             \
+=======
+__clean-files	:= $(extra-y) $(extra-m) $(extra-)       \
+		   $(always) $(targets) $(clean-files)   \
+>>>>>>> v3.18
 		   $(host-progs)                         \
 		   $(hostprogs-y) $(hostprogs-m) $(hostprogs-)
 

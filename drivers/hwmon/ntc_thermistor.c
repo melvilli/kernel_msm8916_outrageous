@@ -38,6 +38,10 @@
 
 #include <linux/hwmon.h>
 #include <linux/hwmon-sysfs.h>
+<<<<<<< HEAD
+=======
+#include <linux/thermal.h>
+>>>>>>> v3.18
 
 struct ntc_compensation {
 	int		temp_c;
@@ -51,6 +55,10 @@ static const struct platform_device_id ntc_thermistor_id[] = {
 	{ "ncp21wb473", TYPE_NCPXXWB473 },
 	{ "ncp03wb473", TYPE_NCPXXWB473 },
 	{ "ncp15wl333", TYPE_NCPXXWL333 },
+<<<<<<< HEAD
+=======
+	{ "b57330v2103", TYPE_B57330V2103},
+>>>>>>> v3.18
 	{ },
 };
 
@@ -133,6 +141,50 @@ static const struct ntc_compensation ncpXXwl333[] = {
 	{ .temp_c	= 125, .ohm	= 707 },
 };
 
+<<<<<<< HEAD
+=======
+/*
+ * The following compensation table is from the specification of EPCOS NTC
+ * Thermistors Datasheet
+ */
+static const struct ntc_compensation b57330v2103[] = {
+	{ .temp_c	= -40, .ohm	= 190030 },
+	{ .temp_c	= -35, .ohm	= 145360 },
+	{ .temp_c	= -30, .ohm	= 112060 },
+	{ .temp_c	= -25, .ohm	= 87041 },
+	{ .temp_c	= -20, .ohm	= 68104 },
+	{ .temp_c	= -15, .ohm	= 53665 },
+	{ .temp_c	= -10, .ohm	= 42576 },
+	{ .temp_c	= -5, .ohm	= 34001 },
+	{ .temp_c	= 0, .ohm	= 27326 },
+	{ .temp_c	= 5, .ohm	= 22096 },
+	{ .temp_c	= 10, .ohm	= 17973 },
+	{ .temp_c	= 15, .ohm	= 14703 },
+	{ .temp_c	= 20, .ohm	= 12090 },
+	{ .temp_c	= 25, .ohm	= 10000 },
+	{ .temp_c	= 30, .ohm	= 8311 },
+	{ .temp_c	= 35, .ohm	= 6941 },
+	{ .temp_c	= 40, .ohm	= 5825 },
+	{ .temp_c	= 45, .ohm	= 4911 },
+	{ .temp_c	= 50, .ohm	= 4158 },
+	{ .temp_c	= 55, .ohm	= 3536 },
+	{ .temp_c	= 60, .ohm	= 3019 },
+	{ .temp_c	= 65, .ohm	= 2588 },
+	{ .temp_c	= 70, .ohm	= 2227 },
+	{ .temp_c	= 75, .ohm	= 1924 },
+	{ .temp_c	= 80, .ohm	= 1668 },
+	{ .temp_c	= 85, .ohm	= 1451 },
+	{ .temp_c	= 90, .ohm	= 1266 },
+	{ .temp_c	= 95, .ohm	= 1108 },
+	{ .temp_c	= 100, .ohm	= 973 },
+	{ .temp_c	= 105, .ohm	= 857 },
+	{ .temp_c	= 110, .ohm	= 757 },
+	{ .temp_c	= 115, .ohm	= 671 },
+	{ .temp_c	= 120, .ohm	= 596 },
+	{ .temp_c	= 125, .ohm	= 531 },
+};
+
+>>>>>>> v3.18
 struct ntc_data {
 	struct device *hwmon_dev;
 	struct ntc_thermistor_platform_data *pdata;
@@ -140,6 +192,10 @@ struct ntc_data {
 	struct device *dev;
 	int n_comp;
 	char name[PLATFORM_NAME_SIZE];
+<<<<<<< HEAD
+=======
+	struct thermal_zone_device *tz;
+>>>>>>> v3.18
 };
 
 #if defined(CONFIG_OF) && IS_ENABLED(CONFIG_IIO)
@@ -163,6 +219,23 @@ static int ntc_adc_iio_read(struct ntc_thermistor_platform_data *pdata)
 }
 
 static const struct of_device_id ntc_match[] = {
+<<<<<<< HEAD
+=======
+	{ .compatible = "murata,ncp15wb473",
+		.data = &ntc_thermistor_id[0] },
+	{ .compatible = "murata,ncp18wb473",
+		.data = &ntc_thermistor_id[1] },
+	{ .compatible = "murata,ncp21wb473",
+		.data = &ntc_thermistor_id[2] },
+	{ .compatible = "murata,ncp03wb473",
+		.data = &ntc_thermistor_id[3] },
+	{ .compatible = "murata,ncp15wl333",
+		.data = &ntc_thermistor_id[4] },
+	{ .compatible = "epcos,b57330v2103",
+		.data = &ntc_thermistor_id[5]},
+
+	/* Usage of vendor name "ntc" is deprecated */
+>>>>>>> v3.18
 	{ .compatible = "ntc,ncp15wb473",
 		.data = &ntc_thermistor_id[0] },
 	{ .compatible = "ntc,ncp18wb473",
@@ -181,10 +254,15 @@ static struct ntc_thermistor_platform_data *
 ntc_thermistor_parse_dt(struct platform_device *pdev)
 {
 	struct iio_channel *chan;
+<<<<<<< HEAD
 	enum iio_chan_type type;
 	struct device_node *np = pdev->dev.of_node;
 	struct ntc_thermistor_platform_data *pdata;
 	int ret;
+=======
+	struct device_node *np = pdev->dev.of_node;
+	struct ntc_thermistor_platform_data *pdata;
+>>>>>>> v3.18
 
 	if (!np)
 		return NULL;
@@ -197,6 +275,7 @@ ntc_thermistor_parse_dt(struct platform_device *pdev)
 	if (IS_ERR(chan))
 		return ERR_CAST(chan);
 
+<<<<<<< HEAD
 	ret = iio_get_channel_type(chan, &type);
 	if (ret < 0)
 		return ERR_PTR(ret);
@@ -204,6 +283,8 @@ ntc_thermistor_parse_dt(struct platform_device *pdev)
 	if (type != IIO_VOLTAGE)
 		return ERR_PTR(-EINVAL);
 
+=======
+>>>>>>> v3.18
 	if (of_property_read_u32(np, "pullup-uv", &pdata->pullup_uv))
 		return ERR_PTR(-ENODEV);
 	if (of_property_read_u32(np, "pullup-ohm", &pdata->pullup_ohm))
@@ -381,6 +462,23 @@ static int ntc_thermistor_get_ohm(struct ntc_data *data)
 	return -EINVAL;
 }
 
+<<<<<<< HEAD
+=======
+static int ntc_read_temp(void *dev, long *temp)
+{
+	struct ntc_data *data = dev_get_drvdata(dev);
+	int ohm;
+
+	ohm = ntc_thermistor_get_ohm(data);
+	if (ohm < 0)
+		return ohm;
+
+	*temp = get_temp_mc(data, ohm);
+
+	return 0;
+}
+
+>>>>>>> v3.18
 static ssize_t ntc_show_name(struct device *dev,
 		struct device_attribute *attr, char *buf)
 {
@@ -436,7 +534,11 @@ static int ntc_thermistor_probe(struct platform_device *pdev)
 	if (IS_ERR(pdata))
 		return PTR_ERR(pdata);
 	else if (pdata == NULL)
+<<<<<<< HEAD
 		pdata = pdev->dev.platform_data;
+=======
+		pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 
 	if (!pdata) {
 		dev_err(&pdev->dev, "No platform init data supplied.\n");
@@ -487,6 +589,13 @@ static int ntc_thermistor_probe(struct platform_device *pdev)
 		data->comp = ncpXXwl333;
 		data->n_comp = ARRAY_SIZE(ncpXXwl333);
 		break;
+<<<<<<< HEAD
+=======
+	case TYPE_B57330V2103:
+		data->comp = b57330v2103;
+		data->n_comp = ARRAY_SIZE(b57330v2103);
+		break;
+>>>>>>> v3.18
 	default:
 		dev_err(&pdev->dev, "Unknown device type: %lu(%s)\n",
 				pdev_id->driver_data, pdev_id->name);
@@ -509,7 +618,18 @@ static int ntc_thermistor_probe(struct platform_device *pdev)
 	}
 
 	dev_info(&pdev->dev, "Thermistor type: %s successfully probed.\n",
+<<<<<<< HEAD
 								pdev->name);
+=======
+								pdev_id->name);
+
+	data->tz = thermal_zone_of_sensor_register(data->dev, 0, data->dev,
+						ntc_read_temp, NULL);
+	if (IS_ERR(data->tz)) {
+		dev_dbg(&pdev->dev, "Failed to register to thermal fw.\n");
+		data->tz = NULL;
+	}
+>>>>>>> v3.18
 
 	return 0;
 err_after_sysfs:
@@ -526,7 +646,12 @@ static int ntc_thermistor_remove(struct platform_device *pdev)
 	hwmon_device_unregister(data->hwmon_dev);
 	sysfs_remove_group(&data->dev->kobj, &ntc_attr_group);
 	ntc_iio_channel_release(pdata);
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+
+	thermal_zone_of_sensor_unregister(data->dev, data->tz);
+>>>>>>> v3.18
 
 	return 0;
 }

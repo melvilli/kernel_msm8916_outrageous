@@ -106,11 +106,21 @@ int rds_tcp_conn_connect(struct rds_connection *conn)
 	rds_tcp_set_callbacks(sock, conn);
 	ret = sock->ops->connect(sock, (struct sockaddr *)&dest, sizeof(dest),
 				 O_NONBLOCK);
+<<<<<<< HEAD
 	sock = NULL;
+=======
+>>>>>>> v3.18
 
 	rdsdebug("connect to address %pI4 returned %d\n", &conn->c_faddr, ret);
 	if (ret == -EINPROGRESS)
 		ret = 0;
+<<<<<<< HEAD
+=======
+	if (ret == 0)
+		sock = NULL;
+	else
+		rds_tcp_restore_callbacks(sock, conn->c_transport_data);
+>>>>>>> v3.18
 
 out:
 	if (sock)

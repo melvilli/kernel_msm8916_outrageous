@@ -181,7 +181,11 @@ static struct timer_s timers[] = {
 		.name      = "clockevent",
 		.opts      = TIMER_OPTS_DISABLED,
 		.irqaction = {
+<<<<<<< HEAD
 			.flags   = IRQF_DISABLED | IRQF_TIMER,
+=======
+			.flags   = IRQF_TIMER,
+>>>>>>> v3.18
 			.handler = timer_interrupt,
 		}
 	},
@@ -190,7 +194,11 @@ static struct timer_s timers[] = {
 		.period     = ~0,
 		.opts       = TIMER_OPTS_PERIODIC,
 		.irqaction = {
+<<<<<<< HEAD
 			.flags   = IRQF_DISABLED | IRQF_TIMER,
+=======
+			.flags   = IRQF_TIMER,
+>>>>>>> v3.18
 			.handler = freerun_interrupt,
 		}
 	},
@@ -285,7 +293,11 @@ static struct clocksource clocksource_davinci = {
 /*
  * Overwrite weak default sched_clock with something more precise
  */
+<<<<<<< HEAD
 static u32 notrace davinci_read_sched_clock(void)
+=======
+static u64 notrace davinci_read_sched_clock(void)
+>>>>>>> v3.18
 {
 	return timer32_read(&timers[TID_CLOCKSOURCE]);
 }
@@ -331,7 +343,10 @@ static void davinci_set_mode(enum clock_event_mode mode,
 
 static struct clock_event_device clockevent_davinci = {
 	.features       = CLOCK_EVT_FEAT_PERIODIC | CLOCK_EVT_FEAT_ONESHOT,
+<<<<<<< HEAD
 	.shift		= 32,
+=======
+>>>>>>> v3.18
 	.set_next_event	= davinci_set_next_event,
 	.set_mode	= davinci_set_mode,
 };
@@ -392,11 +407,16 @@ void __init davinci_timer_init(void)
 				    davinci_clock_tick_rate))
 		printk(err, clocksource_davinci.name);
 
+<<<<<<< HEAD
 	setup_sched_clock(davinci_read_sched_clock, 32,
+=======
+	sched_clock_register(davinci_read_sched_clock, 32,
+>>>>>>> v3.18
 			  davinci_clock_tick_rate);
 
 	/* setup clockevent */
 	clockevent_davinci.name = id_to_name[timers[TID_CLOCKEVENT].id];
+<<<<<<< HEAD
 	clockevent_davinci.mult = div_sc(davinci_clock_tick_rate, NSEC_PER_SEC,
 					 clockevent_davinci.shift);
 	clockevent_davinci.max_delta_ns =
@@ -405,6 +425,12 @@ void __init davinci_timer_init(void)
 
 	clockevent_davinci.cpumask = cpumask_of(0);
 	clockevents_register_device(&clockevent_davinci);
+=======
+
+	clockevent_davinci.cpumask = cpumask_of(0);
+	clockevents_config_and_register(&clockevent_davinci,
+					davinci_clock_tick_rate, 1, 0xfffffffe);
+>>>>>>> v3.18
 
 	for (i=0; i< ARRAY_SIZE(timers); i++)
 		timer32_config(&timers[i]);

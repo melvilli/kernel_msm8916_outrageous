@@ -55,6 +55,10 @@ static const char atl2_driver_name[] = "atl2";
 static const char atl2_driver_string[] = "Atheros(R) L2 Ethernet Driver";
 static const char atl2_copyright[] = "Copyright (c) 2007 Atheros Corporation.";
 static const char atl2_driver_version[] = ATL2_DRV_VERSION;
+<<<<<<< HEAD
+=======
+static const struct ethtool_ops atl2_ethtool_ops;
+>>>>>>> v3.18
 
 MODULE_AUTHOR("Atheros Corporation <xiong.huang@atheros.com>, Chris Snook <csnook@redhat.com>");
 MODULE_DESCRIPTION("Atheros Fast Ethernet Network Driver");
@@ -64,15 +68,22 @@ MODULE_VERSION(ATL2_DRV_VERSION);
 /*
  * atl2_pci_tbl - PCI Device ID Table
  */
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(atl2_pci_tbl) = {
+=======
+static const struct pci_device_id atl2_pci_tbl[] = {
+>>>>>>> v3.18
 	{PCI_DEVICE(PCI_VENDOR_ID_ATTANSIC, PCI_DEVICE_ID_ATTANSIC_L2)},
 	/* required last entry */
 	{0,}
 };
 MODULE_DEVICE_TABLE(pci, atl2_pci_tbl);
 
+<<<<<<< HEAD
 static void atl2_set_ethtool_ops(struct net_device *netdev);
 
+=======
+>>>>>>> v3.18
 static void atl2_check_options(struct atl2_adapter *adapter);
 
 /**
@@ -1397,7 +1408,11 @@ static int atl2_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 	atl2_setup_pcicmd(pdev);
 
 	netdev->netdev_ops = &atl2_netdev_ops;
+<<<<<<< HEAD
 	atl2_set_ethtool_ops(netdev);
+=======
+	netdev->ethtool_ops = &atl2_ethtool_ops;
+>>>>>>> v3.18
 	netdev->watchdog_timeo = 5 * HZ;
 	strncpy(netdev->name, pci_name(pdev), sizeof(netdev->name) - 1);
 
@@ -1413,7 +1428,11 @@ static int atl2_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 
 	err = -EIO;
 
+<<<<<<< HEAD
 	netdev->hw_features = NETIF_F_HW_VLAN_CTAG_RX;
+=======
+	netdev->hw_features = NETIF_F_SG | NETIF_F_HW_VLAN_CTAG_RX;
+>>>>>>> v3.18
 	netdev->features |= (NETIF_F_HW_VLAN_CTAG_TX | NETIF_F_HW_VLAN_CTAG_RX);
 
 	/* Init PHY as early as possible due to power saving issue  */
@@ -1770,8 +1789,13 @@ static int atl2_get_settings(struct net_device *netdev,
 		else
 			ecmd->duplex = DUPLEX_HALF;
 	} else {
+<<<<<<< HEAD
 		ethtool_cmd_speed_set(ecmd, -1);
 		ecmd->duplex = -1;
+=======
+		ethtool_cmd_speed_set(ecmd, SPEED_UNKNOWN);
+		ecmd->duplex = DUPLEX_UNKNOWN;
+>>>>>>> v3.18
 	}
 
 	ecmd->autoneg = AUTONEG_ENABLE;
@@ -2105,11 +2129,14 @@ static const struct ethtool_ops atl2_ethtool_ops = {
 	.set_eeprom		= atl2_set_eeprom,
 };
 
+<<<<<<< HEAD
 static void atl2_set_ethtool_ops(struct net_device *netdev)
 {
 	SET_ETHTOOL_OPS(netdev, &atl2_ethtool_ops);
 }
 
+=======
+>>>>>>> v3.18
 #define LBYTESWAP(a)  ((((a) & 0x00ff00ff) << 8) | \
 	(((a) & 0xff00ff00) >> 8))
 #define LONGSWAP(a)   ((LBYTESWAP(a) << 16) | (LBYTESWAP(a) >> 16))
@@ -2499,7 +2526,10 @@ static s32 atl2_get_speed_and_duplex(struct atl2_hw *hw, u16 *speed,
 		break;
 	default:
 		return ATLX_ERR_PHY_SPEED;
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 	}
 
 	if (phy_data & MII_ATLX_PSSR_DPLX)
@@ -2939,11 +2969,17 @@ static int atl2_validate_option(int *value, struct atl2_option *opt)
 		case OPTION_ENABLED:
 			printk(KERN_INFO "%s Enabled\n", opt->name);
 			return 0;
+<<<<<<< HEAD
 			break;
 		case OPTION_DISABLED:
 			printk(KERN_INFO "%s Disabled\n", opt->name);
 			return 0;
 			break;
+=======
+		case OPTION_DISABLED:
+			printk(KERN_INFO "%s Disabled\n", opt->name);
+			return 0;
+>>>>>>> v3.18
 		}
 		break;
 	case range_option:

@@ -16,6 +16,10 @@
 #include <linux/platform_device.h>
 
 #include "board.h"
+<<<<<<< HEAD
+=======
+#include "gpio.h"
+>>>>>>> v3.18
 
 
 /* ------------------------------------------------------------------------- */
@@ -53,6 +57,7 @@ void __init at91_gpio_leds(struct gpio_led *leds, int nr)
 void __init at91_gpio_leds(struct gpio_led *leds, int nr) {}
 #endif
 
+<<<<<<< HEAD
 
 /* ------------------------------------------------------------------------- */
 
@@ -90,3 +95,5 @@ void __init at91_pwm_leds(struct gpio_led *leds, int nr)
 #else
 void __init at91_pwm_leds(struct gpio_led *leds, int nr){}
 #endif
+=======
+>>>>>>> v3.18

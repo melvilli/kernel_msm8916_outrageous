@@ -34,6 +34,10 @@
 #include "efi.h"
 #include "karma.h"
 #include "sysv68.h"
+<<<<<<< HEAD
+=======
+#include "cmdline.h"
+>>>>>>> v3.18
 
 int warn_no_part = 1; /*This is ugly: should make genhd removable media aware*/
 
@@ -65,6 +69,12 @@ static int (*check_part[])(struct parsed_partitions *) = {
 	adfspart_check_ADFS,
 #endif
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_CMDLINE_PARTITION
+	cmdline_partition,
+#endif
+>>>>>>> v3.18
 #ifdef CONFIG_EFI_PARTITION
 	efi_partition,		/* this must come before msdos */
 #endif

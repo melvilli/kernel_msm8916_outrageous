@@ -32,6 +32,11 @@
  * IN THE SOFTWARE.
  */
 
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) "xen_mcelog: " fmt
+
+>>>>>>> v3.18
 #include <linux/init.h>
 #include <linux/types.h>
 #include <linux/kernel.h>
@@ -51,8 +56,11 @@
 #include <asm/xen/hypercall.h>
 #include <asm/xen/hypervisor.h>
 
+<<<<<<< HEAD
 #define XEN_MCELOG "xen_mcelog: "
 
+=======
+>>>>>>> v3.18
 static struct mc_info g_mi;
 static struct mcinfo_logical_cpu *g_physinfo;
 static uint32_t ncpus;
@@ -227,7 +235,11 @@ static int convert_log(struct mc_info *mi)
 	mic = NULL;
 	x86_mcinfo_lookup(&mic, mi, MC_TYPE_GLOBAL);
 	if (unlikely(!mic)) {
+<<<<<<< HEAD
 		pr_warning(XEN_MCELOG "Failed to find global error info\n");
+=======
+		pr_warn("Failed to find global error info\n");
+>>>>>>> v3.18
 		return -ENODEV;
 	}
 
@@ -241,8 +253,12 @@ static int convert_log(struct mc_info *mi)
 		if (g_physinfo[i].mc_apicid == m.apicid)
 			break;
 	if (unlikely(i == ncpus)) {
+<<<<<<< HEAD
 		pr_warning(XEN_MCELOG "Failed to match cpu with apicid %d\n",
 			   m.apicid);
+=======
+		pr_warn("Failed to match cpu with apicid %d\n", m.apicid);
+>>>>>>> v3.18
 		return -ENODEV;
 	}
 
@@ -254,7 +270,11 @@ static int convert_log(struct mc_info *mi)
 	mic = NULL;
 	x86_mcinfo_lookup(&mic, mi, MC_TYPE_BANK);
 	if (unlikely(!mic)) {
+<<<<<<< HEAD
 		pr_warning(XEN_MCELOG "Fail to find bank error info\n");
+=======
+		pr_warn("Fail to find bank error info\n");
+>>>>>>> v3.18
 		return -ENODEV;
 	}
 
@@ -295,9 +315,14 @@ static int mc_queue_handle(uint32_t flags)
 		mc_op.u.mc_fetch.flags = flags;
 		ret = HYPERVISOR_mca(&mc_op);
 		if (ret) {
+<<<<<<< HEAD
 			pr_err(XEN_MCELOG "Failed to fetch %s error log\n",
 			       (flags == XEN_MC_URGENT) ?
 			       "urgnet" : "nonurgent");
+=======
+			pr_err("Failed to fetch %surgent error log\n",
+			       flags == XEN_MC_URGENT ? "" : "non");
+>>>>>>> v3.18
 			break;
 		}
 
@@ -307,15 +332,23 @@ static int mc_queue_handle(uint32_t flags)
 		else {
 			ret = convert_log(&g_mi);
 			if (ret)
+<<<<<<< HEAD
 				pr_warning(XEN_MCELOG
 					   "Failed to convert this error log, "
 					   "continue acking it anyway\n");
+=======
+				pr_warn("Failed to convert this error log, continue acking it anyway\n");
+>>>>>>> v3.18
 
 			mc_op.u.mc_fetch.flags = flags | XEN_MC_ACK;
 			ret = HYPERVISOR_mca(&mc_op);
 			if (ret) {
+<<<<<<< HEAD
 				pr_err(XEN_MCELOG
 				       "Failed to ack previous error log\n");
+=======
+				pr_err("Failed to ack previous error log\n");
+>>>>>>> v3.18
 				break;
 			}
 		}
@@ -334,15 +367,23 @@ static void xen_mce_work_fn(struct work_struct *work)
 	/* urgent mc_info */
 	err = mc_queue_handle(XEN_MC_URGENT);
 	if (err)
+<<<<<<< HEAD
 		pr_err(XEN_MCELOG
 		       "Failed to handle urgent mc_info queue, "
 		       "continue handling nonurgent mc_info queue anyway.\n");
+=======
+		pr_err("Failed to handle urgent mc_info queue, continue handling nonurgent mc_info queue anyway\n");
+>>>>>>> v3.18
 
 	/* nonurgent mc_info */
 	err = mc_queue_handle(XEN_MC_NONURGENT);
 	if (err)
+<<<<<<< HEAD
 		pr_err(XEN_MCELOG
 		       "Failed to handle nonurgent mc_info queue.\n");
+=======
+		pr_err("Failed to handle nonurgent mc_info queue\n");
+>>>>>>> v3.18
 
 	/* wake processes polling /dev/mcelog */
 	wake_up_interruptible(&xen_mce_chrdev_wait);
@@ -370,7 +411,11 @@ static int bind_virq_for_mce(void)
 	set_xen_guest_handle(mc_op.u.mc_physcpuinfo.info, g_physinfo);
 	ret = HYPERVISOR_mca(&mc_op);
 	if (ret) {
+<<<<<<< HEAD
 		pr_err(XEN_MCELOG "Failed to get CPU numbers\n");
+=======
+		pr_err("Failed to get CPU numbers\n");
+>>>>>>> v3.18
 		return ret;
 	}
 
@@ -383,7 +428,11 @@ static int bind_virq_for_mce(void)
 	set_xen_guest_handle(mc_op.u.mc_physcpuinfo.info, g_physinfo);
 	ret = HYPERVISOR_mca(&mc_op);
 	if (ret) {
+<<<<<<< HEAD
 		pr_err(XEN_MCELOG "Failed to get CPU info\n");
+=======
+		pr_err("Failed to get CPU info\n");
+>>>>>>> v3.18
 		kfree(g_physinfo);
 		return ret;
 	}
@@ -391,7 +440,11 @@ static int bind_virq_for_mce(void)
 	ret  = bind_virq_to_irqhandler(VIRQ_MCA, 0,
 				       xen_mce_interrupt, 0, "mce", NULL);
 	if (ret < 0) {
+<<<<<<< HEAD
 		pr_err(XEN_MCELOG "Failed to bind virq\n");
+=======
+		pr_err("Failed to bind virq\n");
+>>>>>>> v3.18
 		kfree(g_physinfo);
 		return ret;
 	}

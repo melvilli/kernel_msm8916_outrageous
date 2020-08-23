@@ -18,9 +18,13 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+<<<<<<< HEAD
 #include <linux/clocksource.h>
 #include <linux/io.h>
 #include <linux/irqchip.h>
+=======
+#include <linux/io.h>
+>>>>>>> v3.18
 #include <linux/pm.h>
 #include <linux/reboot.h>
 
@@ -34,8 +38,11 @@
 #include <linux/of_irq.h>
 #include <linux/of_platform.h>
 
+<<<<<<< HEAD
 #include "common.h"
 
+=======
+>>>>>>> v3.18
 #define LEGACY_GPIO_BASE	0xD8110000
 #define LEGACY_PMC_BASE		0xD8130000
 
@@ -48,7 +55,11 @@
 
 static void __iomem *pmc_base;
 
+<<<<<<< HEAD
 void vt8500_restart(enum reboot_mode mode, const char *cmd)
+=======
+static void vt8500_restart(enum reboot_mode mode, const char *cmd)
+>>>>>>> v3.18
 {
 	if (pmc_base)
 		writel(1, pmc_base + VT8500_PMSR_REG);
@@ -64,7 +75,11 @@ static struct map_desc vt8500_io_desc[] __initdata = {
 	},
 };
 
+<<<<<<< HEAD
 void __init vt8500_map_io(void)
+=======
+static void __init vt8500_map_io(void)
+>>>>>>> v3.18
 {
 	iotable_init(vt8500_io_desc, ARRAY_SIZE(vt8500_io_desc));
 }
@@ -73,10 +88,17 @@ static void vt8500_power_off(void)
 {
 	local_irq_disable();
 	writew(5, pmc_base + VT8500_HCR_REG);
+<<<<<<< HEAD
 	asm("mcr%? p15, 0, %0, c7, c0, 4" : : "r" (0));
 }
 
 void __init vt8500_init(void)
+=======
+	asm("mcr p15, 0, %0, c7, c0, 4" : : "r" (0));
+}
+
+static void __init vt8500_init(void)
+>>>>>>> v3.18
 {
 	struct device_node *np;
 #if defined(CONFIG_FB_VT8500) || defined(CONFIG_FB_WM8505)
@@ -163,8 +185,11 @@ void __init vt8500_init(void)
 	else
 		pr_err("%s: PMC Hibernation register could not be remapped, not enabling power off!\n", __func__);
 
+<<<<<<< HEAD
 	vtwm_clk_init(pmc_base);
 
+=======
+>>>>>>> v3.18
 	of_platform_populate(NULL, of_default_bus_match_table, NULL, NULL);
 }
 
@@ -180,9 +205,13 @@ static const char * const vt8500_dt_compat[] = {
 DT_MACHINE_START(WMT_DT, "VIA/Wondermedia SoC (Device Tree Support)")
 	.dt_compat	= vt8500_dt_compat,
 	.map_io		= vt8500_map_io,
+<<<<<<< HEAD
 	.init_irq	= irqchip_init,
 	.init_machine	= vt8500_init,
 	.init_time	= clocksource_of_init,
+=======
+	.init_machine	= vt8500_init,
+>>>>>>> v3.18
 	.restart	= vt8500_restart,
 MACHINE_END
 

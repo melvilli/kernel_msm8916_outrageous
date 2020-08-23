@@ -7,11 +7,26 @@
 
 #define DMA_ERROR_CODE	(~(dma_addr_t)0x0)
 
+<<<<<<< HEAD
 extern int dma_supported(struct device *dev, u64 mask);
+=======
+int dma_supported(struct device *dev, u64 mask);
+>>>>>>> v3.18
 
 #define dma_alloc_noncoherent(d, s, h, f) dma_alloc_coherent(d, s, h, f)
 #define dma_free_noncoherent(d, s, v, h) dma_free_coherent(d, s, v, h)
 
+<<<<<<< HEAD
+=======
+static inline void dma_cache_sync(struct device *dev, void *vaddr, size_t size,
+				  enum dma_data_direction dir)
+{
+	/* Since dma_{alloc,free}_noncoherent() allocated coherent memory, this
+	 * routine can be a nop.
+	 */
+}
+
+>>>>>>> v3.18
 extern struct dma_map_ops *dma_ops;
 extern struct dma_map_ops *leon_dma_ops;
 extern struct dma_map_ops pci32_dma_ops;
@@ -20,10 +35,19 @@ extern struct bus_type pci_bus_type;
 
 static inline struct dma_map_ops *get_dma_ops(struct device *dev)
 {
+<<<<<<< HEAD
 #if defined(CONFIG_SPARC32) && defined(CONFIG_PCI)
 	if (sparc_cpu_model == sparc_leon)
 		return leon_dma_ops;
 	else if (dev->bus == &pci_bus_type)
+=======
+#ifdef CONFIG_SPARC_LEON
+	if (sparc_cpu_model == sparc_leon)
+		return leon_dma_ops;
+#endif
+#if defined(CONFIG_SPARC32) && defined(CONFIG_PCI)
+	if (dev->bus == &pci_bus_type)
+>>>>>>> v3.18
 		return &pci32_dma_ops;
 #endif
 	return dma_ops;

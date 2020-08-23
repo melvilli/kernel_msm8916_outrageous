@@ -13,7 +13,10 @@
 
 #include <linux/module.h>
 #include <linux/kernel.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/list.h>
 #include <linux/spinlock.h>
 #include <linux/device.h>
@@ -220,9 +223,18 @@ void led_trigger_unregister(struct led_trigger *trig)
 {
 	struct led_classdev *led_cdev;
 
+<<<<<<< HEAD
 	/* Remove from the list of led triggers */
 	down_write(&triggers_list_lock);
 	list_del(&trig->next_trig);
+=======
+	if (list_empty_careful(&trig->next_trig))
+		return;
+
+	/* Remove from the list of led triggers */
+	down_write(&triggers_list_lock);
+	list_del_init(&trig->next_trig);
+>>>>>>> v3.18
 	up_write(&triggers_list_lock);
 
 	/* Remove anyone actively using this trigger */
@@ -242,18 +254,27 @@ EXPORT_SYMBOL_GPL(led_trigger_unregister);
 void led_trigger_event(struct led_trigger *trig,
 			enum led_brightness brightness)
 {
+<<<<<<< HEAD
 	struct list_head *entry;
+=======
+	struct led_classdev *led_cdev;
+>>>>>>> v3.18
 
 	if (!trig)
 		return;
 
 	read_lock(&trig->leddev_list_lock);
+<<<<<<< HEAD
 	list_for_each(entry, &trig->led_cdevs) {
 		struct led_classdev *led_cdev;
 
 		led_cdev = list_entry(entry, struct led_classdev, trig_list);
 		led_set_brightness(led_cdev, brightness);
 	}
+=======
+	list_for_each_entry(led_cdev, &trig->led_cdevs, trig_list)
+		led_set_brightness(led_cdev, brightness);
+>>>>>>> v3.18
 	read_unlock(&trig->leddev_list_lock);
 }
 EXPORT_SYMBOL_GPL(led_trigger_event);
@@ -264,16 +285,24 @@ static void led_trigger_blink_setup(struct led_trigger *trig,
 			     int oneshot,
 			     int invert)
 {
+<<<<<<< HEAD
 	struct list_head *entry;
+=======
+	struct led_classdev *led_cdev;
+>>>>>>> v3.18
 
 	if (!trig)
 		return;
 
 	read_lock(&trig->leddev_list_lock);
+<<<<<<< HEAD
 	list_for_each(entry, &trig->led_cdevs) {
 		struct led_classdev *led_cdev;
 
 		led_cdev = list_entry(entry, struct led_classdev, trig_list);
+=======
+	list_for_each_entry(led_cdev, &trig->led_cdevs, trig_list) {
+>>>>>>> v3.18
 		if (oneshot)
 			led_blink_set_oneshot(led_cdev, delay_on, delay_off,
 					      invert);

@@ -30,6 +30,11 @@
 #include <linux/list.h>
 #include <linux/dma-mapping.h>
 #include <linux/fs.h>
+<<<<<<< HEAD
+=======
+#include <linux/fence.h>
+#include <linux/wait.h>
+>>>>>>> v3.18
 
 struct device;
 struct dma_buf;
@@ -115,6 +120,10 @@ struct dma_buf_ops {
  * @exp_name: name of the exporter; useful for debugging.
  * @list_node: node for dma_buf accounting and debugging.
  * @priv: exporter specific private data for this buffer object.
+<<<<<<< HEAD
+=======
+ * @resv: reservation object linked to this dma-buf
+>>>>>>> v3.18
  */
 struct dma_buf {
 	size_t size;
@@ -128,6 +137,20 @@ struct dma_buf {
 	const char *exp_name;
 	struct list_head list_node;
 	void *priv;
+<<<<<<< HEAD
+=======
+	struct reservation_object *resv;
+
+	/* poll support */
+	wait_queue_head_t poll;
+
+	struct dma_buf_poll_cb_t {
+		struct fence_cb cb;
+		wait_queue_head_t *poll;
+
+		unsigned long active;
+	} cb_excl, cb_shared;
+>>>>>>> v3.18
 };
 
 /**
@@ -168,10 +191,18 @@ void dma_buf_detach(struct dma_buf *dmabuf,
 				struct dma_buf_attachment *dmabuf_attach);
 
 struct dma_buf *dma_buf_export_named(void *priv, const struct dma_buf_ops *ops,
+<<<<<<< HEAD
 			       size_t size, int flags, const char *);
 
 #define dma_buf_export(priv, ops, size, flags)	\
 	dma_buf_export_named(priv, ops, size, flags, __FILE__)
+=======
+			       size_t size, int flags, const char *,
+			       struct reservation_object *);
+
+#define dma_buf_export(priv, ops, size, flags, resv)	\
+	dma_buf_export_named(priv, ops, size, flags, KBUILD_MODNAME, resv)
+>>>>>>> v3.18
 
 int dma_buf_fd(struct dma_buf *dmabuf, int flags);
 struct dma_buf *dma_buf_get(int fd);

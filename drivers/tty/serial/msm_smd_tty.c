@@ -1,7 +1,13 @@
+<<<<<<< HEAD
 /* arch/arm/mach-msm/smd_tty.c
  *
  * Copyright (C) 2007 Google, Inc.
  * Copyright (c) 2009-2014, The Linux Foundation. All rights reserved.
+=======
+/*
+ * Copyright (C) 2007 Google, Inc.
+ * Copyright (c) 2011, Code Aurora Forum. All rights reserved.
+>>>>>>> v3.18
  * Author: Brian Swetland <swetland@google.com>
  *
  * This software is licensed under the terms of the GNU General Public
@@ -19,6 +25,7 @@
 #include <linux/fs.h>
 #include <linux/cdev.h>
 #include <linux/device.h>
+<<<<<<< HEAD
 #include <linux/interrupt.h>
 #include <linux/delay.h>
 #include <linux/pm.h>
@@ -28,11 +35,15 @@
 #include <linux/ipc_logging.h>
 #include <linux/of.h>
 #include <linux/suspend.h>
+=======
+#include <linux/wait.h>
+>>>>>>> v3.18
 
 #include <linux/tty.h>
 #include <linux/tty_driver.h>
 #include <linux/tty_flip.h>
 
+<<<<<<< HEAD
 #include <soc/qcom/smd.h>
 #include <soc/qcom/smsm.h>
 #include <soc/qcom/subsystem_restart.h>
@@ -268,10 +279,49 @@ static void smd_tty_read(unsigned long param)
 	struct tty_struct *tty = tty_port_tty_get(&info->port);
 	unsigned long flags;
 
+=======
+#include <mach/msm_smd.h>
+
+#define MAX_SMD_TTYS 32
+
+struct smd_tty_info {
+	struct tty_port port;
+	smd_channel_t *ch;
+};
+
+struct smd_tty_channel_desc {
+	int id;
+	const char *name;
+};
+
+static struct smd_tty_info smd_tty[MAX_SMD_TTYS];
+
+static const struct smd_tty_channel_desc smd_default_tty_channels[] = {
+	{ .id = 0, .name = "SMD_DS" },
+	{ .id = 27, .name = "SMD_GPSNMEA" },
+};
+
+static const struct smd_tty_channel_desc *smd_tty_channels =
+		smd_default_tty_channels;
+static int smd_tty_channels_len = ARRAY_SIZE(smd_default_tty_channels);
+
+static void smd_tty_notify(void *priv, unsigned event)
+{
+	unsigned char *ptr;
+	int avail;
+	struct smd_tty_info *info = priv;
+	struct tty_struct *tty;
+
+	if (event != SMD_EVENT_DATA)
+		return;
+
+	tty = tty_port_tty_get(&info->port);
+>>>>>>> v3.18
 	if (!tty)
 		return;
 
 	for (;;) {
+<<<<<<< HEAD
 		if (is_in_reset(info)) {
 			/* signal TTY clients using TTY_BREAK */
 			tty_insert_flip_char(tty->port, 0x00, TTY_BREAK);
@@ -300,12 +350,22 @@ static void smd_tty_read(unsigned long param)
 			tty_kref_put(tty);
 			return;
 		}
+=======
+		if (test_bit(TTY_THROTTLED, &tty->flags))
+			break;
+		avail = smd_read_avail(info->ch);
+		if (avail == 0)
+			break;
+
+		avail = tty_prepare_flip_string(&info->port, &ptr, avail);
+>>>>>>> v3.18
 
 		if (smd_read(info->ch, ptr, avail) != avail) {
 			/* shouldn't be possible since we're in interrupt
 			** context here and nobody else could 'steal' our
 			** characters.
 			*/
+<<<<<<< HEAD
 			SMD_TTY_ERR(
 				"%s - Possible smd_tty_buffer mismatch for %s",
 				__func__, info->ch_name);
@@ -322,6 +382,12 @@ static void smd_tty_read(unsigned long param)
 			smd_tty_read_in_suspend = true;
 
 		tty_flip_buffer_push(tty->port);
+=======
+			pr_err("OOPS - smd_tty_buffer mismatch?!");
+		}
+
+		tty_flip_buffer_push(&info->port);
+>>>>>>> v3.18
 	}
 
 	/* XXX only when writable and necessary */
@@ -329,6 +395,7 @@ static void smd_tty_read(unsigned long param)
 	tty_kref_put(tty);
 }
 
+<<<<<<< HEAD
 static void smd_tty_notify(void *priv, unsigned event)
 {
 	struct smd_tty_info *info = priv;
@@ -667,12 +734,38 @@ platform_unregister:
 
 out:
 	mutex_unlock(&info->open_lock_lha1);
+=======
+static int smd_tty_port_activate(struct tty_port *tport, struct tty_struct *tty)
+{
+	struct smd_tty_info *info = container_of(tport, struct smd_tty_info,
+			port);
+	int i, res = 0;
+	const char *name = NULL;
+
+	for (i = 0; i < smd_tty_channels_len; i++) {
+		if (smd_tty_channels[i].id == tty->index) {
+			name = smd_tty_channels[i].name;
+			break;
+		}
+	}
+	if (!name)
+		return -ENODEV;
+
+	if (info->ch)
+		smd_kick(info->ch);
+	else
+		res = smd_open(name, &info->ch, info, smd_tty_notify);
+
+	if (!res)
+		tty->driver_data = info;
+>>>>>>> v3.18
 
 	return res;
 }
 
 static void smd_tty_port_shutdown(struct tty_port *tport)
 {
+<<<<<<< HEAD
 	struct smd_tty_info *info;
 	struct tty_struct *tty = tty_port_tty_get(tport);
 	unsigned long flags;
@@ -706,6 +799,15 @@ static void smd_tty_port_shutdown(struct tty_port *tport)
 
 	mutex_unlock(&info->open_lock_lha1);
 	tty_kref_put(tty);
+=======
+	struct smd_tty_info *info = container_of(tport, struct smd_tty_info,
+			port);
+
+	if (info->ch) {
+		smd_close(info->ch);
+		info->ch = 0;
+	}
+>>>>>>> v3.18
 }
 
 static int smd_tty_open(struct tty_struct *tty, struct file *f)
@@ -717,13 +819,22 @@ static int smd_tty_open(struct tty_struct *tty, struct file *f)
 
 static void smd_tty_close(struct tty_struct *tty, struct file *f)
 {
+<<<<<<< HEAD
 	struct smd_tty_info *info = smd_tty + tty->index;
+=======
+	struct smd_tty_info *info = tty->driver_data;
+>>>>>>> v3.18
 
 	tty_port_close(&info->port, tty, f);
 }
 
+<<<<<<< HEAD
 static int smd_tty_write(struct tty_struct *tty, const unsigned char *buf,
 									int len)
+=======
+static int smd_tty_write(struct tty_struct *tty,
+			 const unsigned char *buf, int len)
+>>>>>>> v3.18
 {
 	struct smd_tty_info *info = tty->driver_data;
 	int avail;
@@ -732,6 +843,7 @@ static int smd_tty_write(struct tty_struct *tty, const unsigned char *buf,
 	** never be able to write more data than there
 	** is currently space for
 	*/
+<<<<<<< HEAD
 	if (is_in_reset(info))
 		return -ENETRESET;
 
@@ -747,6 +859,11 @@ static int smd_tty_write(struct tty_struct *tty, const unsigned char *buf,
 		len = avail;
 	SMD_TTY_INFO("[WRITE]: PID %u -> port %s %x bytes",
 			current->pid, info->ch_name, len);
+=======
+	avail = smd_write_avail(info->ch);
+	if (len > avail)
+		len = avail;
+>>>>>>> v3.18
 
 	return smd_write(info->ch, buf, len);
 }
@@ -766,6 +883,7 @@ static int smd_tty_chars_in_buffer(struct tty_struct *tty)
 static void smd_tty_unthrottle(struct tty_struct *tty)
 {
 	struct smd_tty_info *info = tty->driver_data;
+<<<<<<< HEAD
 	unsigned long flags;
 
 	spin_lock_irqsave(&info->reset_lock_lha2, flags);
@@ -825,6 +943,9 @@ static void loopback_probe_worker(struct work_struct *work)
 	else
 		smsm_change_state(SMSM_APPS_STATE,
 			  0, SMSM_SMD_LOOPBACK);
+=======
+	smd_kick(info->ch);
+>>>>>>> v3.18
 }
 
 static const struct tty_port_operations smd_tty_port_ops = {
@@ -839,6 +960,7 @@ static const struct tty_operations smd_tty_ops = {
 	.write_room = smd_tty_write_room,
 	.chars_in_buffer = smd_tty_chars_in_buffer,
 	.unthrottle = smd_tty_unthrottle,
+<<<<<<< HEAD
 	.tiocmget = smd_tty_tiocmget,
 	.tiocmset = smd_tty_tiocmset,
 };
@@ -896,6 +1018,20 @@ static int smd_tty_register_driver(void)
 	}
 
 	smd_tty_driver->owner = THIS_MODULE;
+=======
+};
+
+static struct tty_driver *smd_tty_driver;
+
+static int __init smd_tty_init(void)
+{
+	int ret, i;
+
+	smd_tty_driver = alloc_tty_driver(MAX_SMD_TTYS);
+	if (smd_tty_driver == 0)
+		return -ENOMEM;
+
+>>>>>>> v3.18
 	smd_tty_driver->driver_name = "smd_tty_driver";
 	smd_tty_driver->name = "smd";
 	smd_tty_driver->major = 0;
@@ -912,6 +1048,7 @@ static int smd_tty_register_driver(void)
 	tty_set_operations(smd_tty_driver, &smd_tty_ops);
 
 	ret = tty_register_driver(smd_tty_driver);
+<<<<<<< HEAD
 	if (ret) {
 		put_tty_driver(smd_tty_driver);
 		SMD_TTY_ERR("%s: driver registration failed %d", __func__, ret);
@@ -1130,6 +1267,19 @@ static int __init smd_tty_init(void)
 				msecs_to_jiffies(SMD_TTY_PROBE_WAIT_TIMEOUT));
 
 	wakeup_source_init(&read_in_suspend_ws, "SMDTTY_READ_IN_SUSPEND");
+=======
+	if (ret)
+		return ret;
+
+	for (i = 0; i < smd_tty_channels_len; i++) {
+		struct tty_port *port = &smd_tty[smd_tty_channels[i].id].port;
+		tty_port_init(port);
+		port->ops = &smd_tty_port_ops;
+		tty_port_register_device(port, smd_tty_driver,
+				smd_tty_channels[i].id, NULL);
+	}
+
+>>>>>>> v3.18
 	return 0;
 }
 

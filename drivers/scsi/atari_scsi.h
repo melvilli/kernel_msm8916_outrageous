@@ -54,6 +54,7 @@
 #define	NCR5380_dma_xfer_len(i,cmd,phase) \
 	atari_dma_xfer_len(cmd->SCp.this_residual,cmd,((phase) & SR_IO) ? 0 : 1)
 
+<<<<<<< HEAD
 /* former generic SCSI error handling stuff */
 
 #define SCSI_ABORT_SNOOZE 0
@@ -173,6 +174,8 @@
 	((NDEBUG & (mask)) ? NCR5380_print_status(instance) : (void)0)
 
 
+=======
+>>>>>>> v3.18
 #endif /* ndef ASM */
 #endif /* ATARI_SCSI_H */
 

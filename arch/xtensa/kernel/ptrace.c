@@ -342,7 +342,11 @@ void do_syscall_trace_enter(struct pt_regs *regs)
 		do_syscall_trace();
 
 #if 0
+<<<<<<< HEAD
 	audit_syscall_entry(current, AUDIT_ARCH_XTENSA..);
+=======
+	audit_syscall_entry(...);
+>>>>>>> v3.18
 #endif
 }
 

@@ -81,11 +81,20 @@ static void __iomem *detect_HRT_floating_pointer(void __iomem *begin, void __iom
 }
 
 
+<<<<<<< HEAD
 int cpqhp_configure_device (struct controller* ctrl, struct pci_func* func)
+=======
+int cpqhp_configure_device (struct controller *ctrl, struct pci_func *func)
+>>>>>>> v3.18
 {
 	struct pci_bus *child;
 	int num;
 
+<<<<<<< HEAD
+=======
+	pci_lock_rescan_remove();
+
+>>>>>>> v3.18
 	if (func->pci_dev == NULL)
 		func->pci_dev = pci_get_bus_and_slot(func->bus,PCI_DEVFN(func->device, func->function));
 
@@ -100,7 +109,11 @@ int cpqhp_configure_device (struct controller* ctrl, struct pci_func* func)
 		func->pci_dev = pci_get_bus_and_slot(func->bus, PCI_DEVFN(func->device, func->function));
 		if (func->pci_dev == NULL) {
 			dbg("ERROR: pci_dev still null\n");
+<<<<<<< HEAD
 			return 0;
+=======
+			goto out;
+>>>>>>> v3.18
 		}
 	}
 
@@ -113,23 +126,42 @@ int cpqhp_configure_device (struct controller* ctrl, struct pci_func* func)
 
 	pci_dev_put(func->pci_dev);
 
+<<<<<<< HEAD
+=======
+ out:
+	pci_unlock_rescan_remove();
+>>>>>>> v3.18
 	return 0;
 }
 
 
+<<<<<<< HEAD
 int cpqhp_unconfigure_device(struct pci_func* func)
+=======
+int cpqhp_unconfigure_device(struct pci_func *func)
+>>>>>>> v3.18
 {
 	int j;
 
 	dbg("%s: bus/dev/func = %x/%x/%x\n", __func__, func->bus, func->device, func->function);
 
+<<<<<<< HEAD
 	for (j=0; j<8 ; j++) {
 		struct pci_dev* temp = pci_get_bus_and_slot(func->bus, PCI_DEVFN(func->device, j));
+=======
+	pci_lock_rescan_remove();
+	for (j=0; j<8 ; j++) {
+		struct pci_dev *temp = pci_get_bus_and_slot(func->bus, PCI_DEVFN(func->device, j));
+>>>>>>> v3.18
 		if (temp) {
 			pci_dev_put(temp);
 			pci_stop_and_remove_bus_device(temp);
 		}
 	}
+<<<<<<< HEAD
+=======
+	pci_unlock_rescan_remove();
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -197,7 +229,11 @@ int cpqhp_set_irq (u8 bus_num, u8 dev_num, u8 int_pin, u8 irq_num)
 }
 
 
+<<<<<<< HEAD
 static int PCI_ScanBusForNonBridge(struct controller *ctrl, u8 bus_num, u8 * dev_num)
+=======
+static int PCI_ScanBusForNonBridge(struct controller *ctrl, u8 bus_num, u8 *dev_num)
+>>>>>>> v3.18
 {
 	u16 tdevice;
 	u32 work;
@@ -274,7 +310,11 @@ static int PCI_GetBusDevHelper(struct controller *ctrl, u8 *bus_num, u8 *dev_num
 }
 
 
+<<<<<<< HEAD
 int cpqhp_get_bus_dev (struct controller *ctrl, u8 * bus_num, u8 * dev_num, u8 slot)
+=======
+int cpqhp_get_bus_dev (struct controller *ctrl, u8 *bus_num, u8 *dev_num, u8 slot)
+>>>>>>> v3.18
 {
 	/* plain (bridges allowed) */
 	return PCI_GetBusDevHelper(ctrl, bus_num, dev_num, slot, 0);
@@ -291,7 +331,11 @@ int cpqhp_get_bus_dev (struct controller *ctrl, u8 * bus_num, u8 * dev_num, u8 s
  *
  * Reads configuration for all slots in a PCI bus and saves info.
  *
+<<<<<<< HEAD
  * Note:  For non-hot plug busses, the slot # saved is the device #
+=======
+ * Note:  For non-hot plug buses, the slot # saved is the device #
+>>>>>>> v3.18
  *
  * returns 0 if success
  */
@@ -455,11 +499,19 @@ int cpqhp_save_config(struct controller *ctrl, int busnumber, int is_hot_plug)
  * cpqhp_save_slot_config
  *
  * Saves configuration info for all PCI devices in a given slot
+<<<<<<< HEAD
  * including subordinate busses.
  *
  * returns 0 if success
  */
 int cpqhp_save_slot_config (struct controller *ctrl, struct pci_func * new_slot)
+=======
+ * including subordinate buses.
+ *
+ * returns 0 if success
+ */
+int cpqhp_save_slot_config (struct controller *ctrl, struct pci_func *new_slot)
+>>>>>>> v3.18
 {
 	long rc;
 	u8 class_code;
@@ -543,7 +595,11 @@ int cpqhp_save_slot_config (struct controller *ctrl, struct pci_func * new_slot)
  *
  * returns 0 if success
  */
+<<<<<<< HEAD
 int cpqhp_save_base_addr_length(struct controller *ctrl, struct pci_func * func)
+=======
+int cpqhp_save_base_addr_length(struct controller *ctrl, struct pci_func *func)
+>>>>>>> v3.18
 {
 	u8 cloop;
 	u8 header_type;
@@ -680,7 +736,11 @@ int cpqhp_save_base_addr_length(struct controller *ctrl, struct pci_func * func)
  *
  * returns 0 if success
  */
+<<<<<<< HEAD
 int cpqhp_save_used_resources (struct controller *ctrl, struct pci_func * func)
+=======
+int cpqhp_save_used_resources (struct controller *ctrl, struct pci_func *func)
+>>>>>>> v3.18
 {
 	u8 cloop;
 	u8 header_type;
@@ -943,7 +1003,11 @@ int cpqhp_save_used_resources (struct controller *ctrl, struct pci_func * func)
  *
  * returns 0 if success
  */
+<<<<<<< HEAD
 int cpqhp_configure_board(struct controller *ctrl, struct pci_func * func)
+=======
+int cpqhp_configure_board(struct controller *ctrl, struct pci_func *func)
+>>>>>>> v3.18
 {
 	int cloop;
 	u8 header_type;
@@ -1021,7 +1085,11 @@ int cpqhp_configure_board(struct controller *ctrl, struct pci_func * func)
  *
  * returns 0 if the board is the same nonzero otherwise
  */
+<<<<<<< HEAD
 int cpqhp_valid_replace(struct controller *ctrl, struct pci_func * func)
+=======
+int cpqhp_valid_replace(struct controller *ctrl, struct pci_func *func)
+>>>>>>> v3.18
 {
 	u8 cloop;
 	u8 header_type;
@@ -1413,7 +1481,11 @@ int cpqhp_find_available_resources(struct controller *ctrl, void __iomem *rom_st
  *
  * returns 0 if success
  */
+<<<<<<< HEAD
 int cpqhp_return_board_resources(struct pci_func * func, struct resource_lists * resources)
+=======
+int cpqhp_return_board_resources(struct pci_func *func, struct resource_lists *resources)
+>>>>>>> v3.18
 {
 	int rc = 0;
 	struct pci_resource *node;
@@ -1469,7 +1541,11 @@ int cpqhp_return_board_resources(struct pci_func * func, struct resource_lists *
  *
  * Puts node back in the resource list pointed to by head
  */
+<<<<<<< HEAD
 void cpqhp_destroy_resource_list (struct resource_lists * resources)
+=======
+void cpqhp_destroy_resource_list (struct resource_lists *resources)
+>>>>>>> v3.18
 {
 	struct pci_resource *res, *tres;
 
@@ -1516,7 +1592,11 @@ void cpqhp_destroy_resource_list (struct resource_lists * resources)
  *
  * Puts node back in the resource list pointed to by head
  */
+<<<<<<< HEAD
 void cpqhp_destroy_board_resources (struct pci_func * func)
+=======
+void cpqhp_destroy_board_resources (struct pci_func *func)
+>>>>>>> v3.18
 {
 	struct pci_resource *res, *tres;
 
@@ -1556,4 +1636,7 @@ void cpqhp_destroy_board_resources (struct pci_func * func)
 		kfree(tres);
 	}
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18

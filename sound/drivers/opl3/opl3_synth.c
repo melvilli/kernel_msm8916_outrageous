@@ -24,7 +24,11 @@
 #include <sound/opl3.h>
 #include <sound/asound_fm.h>
 
+<<<<<<< HEAD
 #if defined(CONFIG_SND_SEQUENCER) || defined(CONFIG_SND_SEQUENCER_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SND_SEQUENCER)
+>>>>>>> v3.18
 #define OPL3_SUPPORT_SYNTH
 #endif
 

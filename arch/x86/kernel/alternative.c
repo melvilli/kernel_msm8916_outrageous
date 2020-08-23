@@ -5,12 +5,19 @@
 #include <linux/mutex.h>
 #include <linux/list.h>
 #include <linux/stringify.h>
+<<<<<<< HEAD
 #include <linux/kprobes.h>
+=======
+>>>>>>> v3.18
 #include <linux/mm.h>
 #include <linux/vmalloc.h>
 #include <linux/memory.h>
 #include <linux/stop_machine.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
+=======
+#include <linux/kdebug.h>
+>>>>>>> v3.18
 #include <asm/alternative.h>
 #include <asm/sections.h>
 #include <asm/pgtable.h>
@@ -401,6 +408,7 @@ void alternatives_enable_smp(void)
 {
 	struct smp_alt_module *mod;
 
+<<<<<<< HEAD
 #ifdef CONFIG_LOCKDEP
 	/*
 	 * Older binutils section handling bug prevented
@@ -412,6 +420,8 @@ void alternatives_enable_smp(void)
 	pr_info("lockdep: fixing up alternatives\n");
 #endif
 
+=======
+>>>>>>> v3.18
 	/* Why bother if there are no other CPUs? */
 	BUG_ON(num_possible_cpus() == 1);
 
@@ -561,7 +571,11 @@ void *__init_or_module text_poke_early(void *addr, const void *opcode,
  *
  * Note: Must be called under text_mutex.
  */
+<<<<<<< HEAD
 void *__kprobes text_poke(void *addr, const void *opcode, size_t len)
+=======
+void *text_poke(void *addr, const void *opcode, size_t len)
+>>>>>>> v3.18
 {
 	unsigned long flags;
 	char *vaddr;
@@ -596,6 +610,7 @@ void *__kprobes text_poke(void *addr, const void *opcode, size_t len)
 	return addr;
 }
 
+<<<<<<< HEAD
 /*
  * Cross-modifying kernel text with stop_machine().
  * This code originally comes from immediate value.
@@ -690,3 +705,95 @@ void __kprobes text_poke_smp_batch(struct text_poke_param *params, int n)
 	wrote_text = 0;
 	__stop_machine(stop_machine_text_poke, (void *)&tpp, cpu_online_mask);
 }
+=======
+static void do_sync_core(void *info)
+{
+	sync_core();
+}
+
+static bool bp_patching_in_progress;
+static void *bp_int3_handler, *bp_int3_addr;
+
+int poke_int3_handler(struct pt_regs *regs)
+{
+	/* bp_patching_in_progress */
+	smp_rmb();
+
+	if (likely(!bp_patching_in_progress))
+		return 0;
+
+	if (user_mode_vm(regs) || regs->ip != (unsigned long)bp_int3_addr)
+		return 0;
+
+	/* set up the specified breakpoint handler */
+	regs->ip = (unsigned long) bp_int3_handler;
+
+	return 1;
+
+}
+
+/**
+ * text_poke_bp() -- update instructions on live kernel on SMP
+ * @addr:	address to patch
+ * @opcode:	opcode of new instruction
+ * @len:	length to copy
+ * @handler:	address to jump to when the temporary breakpoint is hit
+ *
+ * Modify multi-byte instruction by using int3 breakpoint on SMP.
+ * We completely avoid stop_machine() here, and achieve the
+ * synchronization using int3 breakpoint.
+ *
+ * The way it is done:
+ *	- add a int3 trap to the address that will be patched
+ *	- sync cores
+ *	- update all but the first byte of the patched range
+ *	- sync cores
+ *	- replace the first byte (int3) by the first byte of
+ *	  replacing opcode
+ *	- sync cores
+ *
+ * Note: must be called under text_mutex.
+ */
+void *text_poke_bp(void *addr, const void *opcode, size_t len, void *handler)
+{
+	unsigned char int3 = 0xcc;
+
+	bp_int3_handler = handler;
+	bp_int3_addr = (u8 *)addr + sizeof(int3);
+	bp_patching_in_progress = true;
+	/*
+	 * Corresponding read barrier in int3 notifier for
+	 * making sure the in_progress flags is correctly ordered wrt.
+	 * patching
+	 */
+	smp_wmb();
+
+	text_poke(addr, &int3, sizeof(int3));
+
+	on_each_cpu(do_sync_core, NULL, 1);
+
+	if (len - sizeof(int3) > 0) {
+		/* patch all but the first byte */
+		text_poke((char *)addr + sizeof(int3),
+			  (const char *) opcode + sizeof(int3),
+			  len - sizeof(int3));
+		/*
+		 * According to Intel, this core syncing is very likely
+		 * not necessary and we'd be safe even without it. But
+		 * better safe than sorry (plus there's not only Intel).
+		 */
+		on_each_cpu(do_sync_core, NULL, 1);
+	}
+
+	/* patch the first byte */
+	text_poke(addr, opcode, sizeof(int3));
+
+	on_each_cpu(do_sync_core, NULL, 1);
+
+	bp_patching_in_progress = false;
+	smp_wmb();
+
+	return addr;
+}
+
+>>>>>>> v3.18

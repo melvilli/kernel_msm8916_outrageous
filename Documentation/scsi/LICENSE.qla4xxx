@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Copyright (c) 2003-2012 QLogic Corporation
+=======
+Copyright (c) 2003-2013 QLogic Corporation
+>>>>>>> v3.18
 QLogic Linux iSCSI Driver
 
 This program includes a device driver for Linux 3.x.

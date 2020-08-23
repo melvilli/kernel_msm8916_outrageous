@@ -88,6 +88,14 @@ static const unsigned int VMMC_VSEL_table[] = {
 	1800000, 2800000, 3000000, 3300000,
 };
 
+<<<<<<< HEAD
+=======
+/* supported BBCH voltages in microvolts */
+static const unsigned int VBB_VSEL_table[] = {
+	3000000, 2520000, 3150000, 5000000,
+};
+
+>>>>>>> v3.18
 struct tps_info {
 	const char *name;
 	const char *vin_name;
@@ -183,6 +191,15 @@ static struct tps_info tps65910_regs[] = {
 		.voltage_table = VMMC_VSEL_table,
 		.enable_time_us = 100,
 	},
+<<<<<<< HEAD
+=======
+	{
+		.name = "vbb",
+		.vin_name = "vcc7",
+		.n_voltages = ARRAY_SIZE(VBB_VSEL_table),
+		.voltage_table = VBB_VSEL_table,
+	},
+>>>>>>> v3.18
 };
 
 static struct tps_info tps65911_regs[] = {
@@ -339,6 +356,11 @@ static int tps65910_get_ctrl_register(int id)
 		return TPS65910_VAUX33;
 	case TPS65910_REG_VMMC:
 		return TPS65910_VMMC;
+<<<<<<< HEAD
+=======
+	case TPS65910_REG_VBB:
+		return TPS65910_BBCH;
+>>>>>>> v3.18
 	default:
 		return -EINVAL;
 	}
@@ -481,7 +503,11 @@ static int tps65910_get_voltage_dcdc_sel(struct regulator_dev *dev)
 
 	/* multiplier 0 == 1 but 2,3 normal */
 	if (!mult)
+<<<<<<< HEAD
 		mult=1;
+=======
+		mult = 1;
+>>>>>>> v3.18
 
 	if (sr) {
 		/* normalise to valid range */
@@ -528,6 +554,13 @@ static int tps65910_get_voltage_sel(struct regulator_dev *dev)
 		value &= LDO_SEL_MASK;
 		value >>= LDO_SEL_SHIFT;
 		break;
+<<<<<<< HEAD
+=======
+	case TPS65910_REG_VBB:
+		value &= BBCH_BBSEL_MASK;
+		value >>= BBCH_BBSEL_SHIFT;
+		break;
+>>>>>>> v3.18
 	default:
 		return -EINVAL;
 	}
@@ -638,6 +671,12 @@ static int tps65910_set_voltage_sel(struct regulator_dev *dev,
 	case TPS65910_REG_VMMC:
 		return tps65910_reg_update_bits(pmic->mfd, reg, LDO_SEL_MASK,
 						selector << LDO_SEL_SHIFT);
+<<<<<<< HEAD
+=======
+	case TPS65910_REG_VBB:
+		return tps65910_reg_update_bits(pmic->mfd, reg, BBCH_BBSEL_MASK,
+						selector << BBCH_BBSEL_SHIFT);
+>>>>>>> v3.18
 	}
 
 	return -EINVAL;
@@ -669,6 +708,12 @@ static int tps65911_set_voltage_sel(struct regulator_dev *dev,
 	case TPS65910_REG_VIO:
 		return tps65910_reg_update_bits(pmic->mfd, reg, LDO_SEL_MASK,
 						selector << LDO_SEL_SHIFT);
+<<<<<<< HEAD
+=======
+	case TPS65910_REG_VBB:
+		return tps65910_reg_update_bits(pmic->mfd, reg, BBCH_BBSEL_MASK,
+						selector << BBCH_BBSEL_SHIFT);
+>>>>>>> v3.18
 	}
 
 	return -EINVAL;
@@ -685,7 +730,11 @@ static int tps65910_list_voltage_dcdc(struct regulator_dev *dev,
 	case TPS65910_REG_VDD2:
 		mult = (selector / VDD1_2_NUM_VOLT_FINE) + 1;
 		volt = VDD1_2_MIN_VOLT +
+<<<<<<< HEAD
 				(selector % VDD1_2_NUM_VOLT_FINE) * VDD1_2_OFFSET;
+=======
+			(selector % VDD1_2_NUM_VOLT_FINE) * VDD1_2_OFFSET;
+>>>>>>> v3.18
 		break;
 	case TPS65911_REG_VDDCTRL:
 		volt = VDDCTRL_MIN_VOLT + (selector * VDDCTRL_OFFSET);
@@ -703,7 +752,11 @@ static int tps65911_list_voltage(struct regulator_dev *dev, unsigned selector)
 	struct tps65910_reg *pmic = rdev_get_drvdata(dev);
 	int step_mv = 0, id = rdev_get_id(dev);
 
+<<<<<<< HEAD
 	switch(id) {
+=======
+	switch (id) {
+>>>>>>> v3.18
 	case TPS65911_REG_LDO1:
 	case TPS65911_REG_LDO2:
 	case TPS65911_REG_LDO4:
@@ -762,6 +815,21 @@ static struct regulator_ops tps65910_ops_vdd3 = {
 	.map_voltage		= regulator_map_voltage_ascend,
 };
 
+<<<<<<< HEAD
+=======
+static struct regulator_ops tps65910_ops_vbb = {
+	.is_enabled		= regulator_is_enabled_regmap,
+	.enable			= regulator_enable_regmap,
+	.disable		= regulator_disable_regmap,
+	.set_mode		= tps65910_set_mode,
+	.get_mode		= tps65910_get_mode,
+	.get_voltage_sel	= tps65910_get_voltage_sel,
+	.set_voltage_sel	= tps65910_set_voltage_sel,
+	.list_voltage		= regulator_list_voltage_table,
+	.map_voltage		= regulator_map_voltage_iterate,
+};
+
+>>>>>>> v3.18
 static struct regulator_ops tps65910_ops = {
 	.is_enabled		= regulator_is_enabled_regmap,
 	.enable			= regulator_enable_regmap,
@@ -906,7 +974,11 @@ static int tps65910_set_ext_sleep_config(struct tps65910_reg *pmic,
 		}
 		ret = tps65910_reg_write(pmic->mfd, sr_reg_add, 0);
 		if (ret < 0) {
+<<<<<<< HEAD
 			dev_err(mfd->dev, "Error in settting sr register\n");
+=======
+			dev_err(mfd->dev, "Error in setting sr register\n");
+>>>>>>> v3.18
 			return ret;
 		}
 	}
@@ -944,6 +1016,10 @@ static struct of_regulator_match tps65910_matches[] = {
 	{ .name = "vaux2",	.driver_data = (void *) &tps65910_regs[10] },
 	{ .name = "vaux33",	.driver_data = (void *) &tps65910_regs[11] },
 	{ .name = "vmmc",	.driver_data = (void *) &tps65910_regs[12] },
+<<<<<<< HEAD
+=======
+	{ .name = "vbb",	.driver_data = (void *) &tps65910_regs[13] },
+>>>>>>> v3.18
 };
 
 static struct of_regulator_match tps65911_matches[] = {
@@ -975,6 +1051,7 @@ static struct tps65910_board *tps65910_parse_dt_reg_data(
 
 	pmic_plat_data = devm_kzalloc(&pdev->dev, sizeof(*pmic_plat_data),
 					GFP_KERNEL);
+<<<<<<< HEAD
 
 	if (!pmic_plat_data) {
 		dev_err(&pdev->dev, "Failure to alloc pdata for regulators.\n");
@@ -983,6 +1060,13 @@ static struct tps65910_board *tps65910_parse_dt_reg_data(
 
 	np = of_node_get(pdev->dev.parent->of_node);
 	regulators = of_find_node_by_name(np, "regulators");
+=======
+	if (!pmic_plat_data)
+		return NULL;
+
+	np = pdev->dev.parent->of_node;
+	regulators = of_get_child_by_name(np, "regulators");
+>>>>>>> v3.18
 	if (!regulators) {
 		dev_err(&pdev->dev, "regulator node not found\n");
 		return NULL;
@@ -1014,7 +1098,11 @@ static struct tps65910_board *tps65910_parse_dt_reg_data(
 	*tps65910_reg_matches = matches;
 
 	for (idx = 0; idx < count; idx++) {
+<<<<<<< HEAD
 		if (!matches[idx].init_data || !matches[idx].of_node)
+=======
+		if (!matches[idx].of_node)
+>>>>>>> v3.18
 			continue;
 
 		pmic_plat_data->tps65910_pmic_init_data[idx] =
@@ -1044,7 +1132,10 @@ static int tps65910_probe(struct platform_device *pdev)
 	struct tps65910 *tps65910 = dev_get_drvdata(pdev->dev.parent);
 	struct regulator_config config = { };
 	struct tps_info *info;
+<<<<<<< HEAD
 	struct regulator_init_data *reg_data;
+=======
+>>>>>>> v3.18
 	struct regulator_dev *rdev;
 	struct tps65910_reg *pmic;
 	struct tps65910_board *pmic_plat_data;
@@ -1062,10 +1153,15 @@ static int tps65910_probe(struct platform_device *pdev)
 	}
 
 	pmic = devm_kzalloc(&pdev->dev, sizeof(*pmic), GFP_KERNEL);
+<<<<<<< HEAD
 	if (!pmic) {
 		dev_err(&pdev->dev, "Memory allocation failed for pmic\n");
 		return -ENOMEM;
 	}
+=======
+	if (!pmic)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	pmic->mfd = tps65910;
 	platform_set_drvdata(pdev, pmic);
@@ -1074,18 +1170,25 @@ static int tps65910_probe(struct platform_device *pdev)
 	tps65910_reg_set_bits(pmic->mfd, TPS65910_DEVCTRL,
 				DEVCTRL_SR_CTL_I2C_SEL_MASK);
 
+<<<<<<< HEAD
 	switch(tps65910_chip_id(tps65910)) {
+=======
+	switch (tps65910_chip_id(tps65910)) {
+>>>>>>> v3.18
 	case TPS65910:
 		pmic->get_ctrl_reg = &tps65910_get_ctrl_register;
 		pmic->num_regulators = ARRAY_SIZE(tps65910_regs);
 		pmic->ext_sleep_control = tps65910_ext_sleep_control;
 		info = tps65910_regs;
+<<<<<<< HEAD
 		/* Work around silicon erratum SWCZ010: output programmed
 		 * voltage level can go higher than expected or crash
 		 * Workaround: use no synchronization of DCDC clocks
 		 */
 		tps65910_reg_clear_bits(pmic->mfd, TPS65910_DCDCCTRL,
 					DCDCCTRL_DCDCCKSYNC_MASK);
+=======
+>>>>>>> v3.18
 		break;
 	case TPS65911:
 		pmic->get_ctrl_reg = &tps65911_get_ctrl_register;
@@ -1100,6 +1203,7 @@ static int tps65910_probe(struct platform_device *pdev)
 
 	pmic->desc = devm_kzalloc(&pdev->dev, pmic->num_regulators *
 			sizeof(struct regulator_desc), GFP_KERNEL);
+<<<<<<< HEAD
 	if (!pmic->desc) {
 		dev_err(&pdev->dev, "Memory alloc fails for desc\n");
 		return -ENOMEM;
@@ -1129,6 +1233,23 @@ static int tps65910_probe(struct platform_device *pdev)
 		if (!reg_data)
 			continue;
 
+=======
+	if (!pmic->desc)
+		return -ENOMEM;
+
+	pmic->info = devm_kzalloc(&pdev->dev, pmic->num_regulators *
+			sizeof(struct tps_info *), GFP_KERNEL);
+	if (!pmic->info)
+		return -ENOMEM;
+
+	pmic->rdev = devm_kzalloc(&pdev->dev, pmic->num_regulators *
+			sizeof(struct regulator_dev *), GFP_KERNEL);
+	if (!pmic->rdev)
+		return -ENOMEM;
+
+	for (i = 0; i < pmic->num_regulators && i < TPS65910_NUM_REGS;
+			i++, info++) {
+>>>>>>> v3.18
 		/* Register the regulators */
 		pmic->info[i] = info;
 
@@ -1151,6 +1272,13 @@ static int tps65910_probe(struct platform_device *pdev)
 				pmic->desc[i].ops = &tps65910_ops_dcdc;
 				pmic->desc[i].ramp_delay = 5000;
 			}
+<<<<<<< HEAD
+=======
+		} else if (i == TPS65910_REG_VBB &&
+				tps65910_chip_id(tps65910) == TPS65910) {
+			pmic->desc[i].ops = &tps65910_ops_vbb;
+			pmic->desc[i].volt_table = info->voltage_table;
+>>>>>>> v3.18
 		} else {
 			if (tps65910_chip_id(tps65910) == TPS65910) {
 				pmic->desc[i].ops = &tps65910_ops;
@@ -1176,26 +1304,40 @@ static int tps65910_probe(struct platform_device *pdev)
 		pmic->desc[i].enable_mask = TPS65910_SUPPLY_STATE_ENABLED;
 
 		config.dev = tps65910->dev;
+<<<<<<< HEAD
 		config.init_data = reg_data;
+=======
+		config.init_data = pmic_plat_data->tps65910_pmic_init_data[i];
+>>>>>>> v3.18
 		config.driver_data = pmic;
 		config.regmap = tps65910->regmap;
 
 		if (tps65910_reg_matches)
 			config.of_node = tps65910_reg_matches[i].of_node;
 
+<<<<<<< HEAD
 		rdev = regulator_register(&pmic->desc[i], &config);
+=======
+		rdev = devm_regulator_register(&pdev->dev, &pmic->desc[i],
+					       &config);
+>>>>>>> v3.18
 		if (IS_ERR(rdev)) {
 			dev_err(tps65910->dev,
 				"failed to register %s regulator\n",
 				pdev->name);
+<<<<<<< HEAD
 			err = PTR_ERR(rdev);
 			goto err_unregister_regulator;
+=======
+			return PTR_ERR(rdev);
+>>>>>>> v3.18
 		}
 
 		/* Save regulator for cleanup */
 		pmic->rdev[i] = rdev;
 	}
 	return 0;
+<<<<<<< HEAD
 
 err_unregister_regulator:
 	while (--i >= 0)
@@ -1212,6 +1354,8 @@ static int tps65910_remove(struct platform_device *pdev)
 		regulator_unregister(pmic->rdev[i]);
 
 	return 0;
+=======
+>>>>>>> v3.18
 }
 
 static void tps65910_shutdown(struct platform_device *pdev)
@@ -1250,7 +1394,10 @@ static struct platform_driver tps65910_driver = {
 		.owner = THIS_MODULE,
 	},
 	.probe = tps65910_probe,
+<<<<<<< HEAD
 	.remove = tps65910_remove,
+=======
+>>>>>>> v3.18
 	.shutdown = tps65910_shutdown,
 };
 

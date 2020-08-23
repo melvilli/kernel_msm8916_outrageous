@@ -1,5 +1,9 @@
 config SUPERH
 	def_bool y
+<<<<<<< HEAD
+=======
+	select ARCH_MIGHT_HAVE_PC_PARPORT
+>>>>>>> v3.18
 	select EXPERT
 	select CLKDEV_LOOKUP
 	select HAVE_IDE if HAS_IOPORT_MAP
@@ -41,6 +45,10 @@ config SUPERH
 	select MODULES_USE_ELF_RELA
 	select OLD_SIGSUSPEND
 	select OLD_SIGACTION
+<<<<<<< HEAD
+=======
+	select HAVE_ARCH_AUDITSYSCALL
+>>>>>>> v3.18
 	help
 	  The SuperH is a RISC processor targeted for use in embedded systems
 	  and consumer electronics; it was also used in the Sega Dreamcast
@@ -55,7 +63,10 @@ config SUPERH32
 	select HAVE_FUNCTION_TRACER
 	select HAVE_FTRACE_MCOUNT_RECORD
 	select HAVE_DYNAMIC_FTRACE
+<<<<<<< HEAD
 	select HAVE_FUNCTION_TRACE_MCOUNT_TEST
+=======
+>>>>>>> v3.18
 	select HAVE_FTRACE_NMI_ENTER if DYNAMIC_FTRACE
 	select ARCH_WANT_IPC_PARSE_VERSION
 	select HAVE_FUNCTION_GRAPH_TRACER
@@ -122,6 +133,7 @@ config SYS_SUPPORTS_NUMA
 config SYS_SUPPORTS_PCI
 	bool
 
+<<<<<<< HEAD
 config SYS_SUPPORTS_CMT
 	bool
 
@@ -131,6 +143,8 @@ config SYS_SUPPORTS_MTU2
 config SYS_SUPPORTS_TMU
 	bool
 
+=======
+>>>>>>> v3.18
 config STACKTRACE_SUPPORT
 	def_bool y
 
@@ -180,6 +194,10 @@ menu "System type"
 #
 config CPU_SH2
 	bool
+<<<<<<< HEAD
+=======
+	select SH_INTC
+>>>>>>> v3.18
 
 config CPU_SH2A
 	bool
@@ -190,14 +208,24 @@ config CPU_SH3
 	bool
 	select CPU_HAS_INTEVT
 	select CPU_HAS_SR_RB
+<<<<<<< HEAD
 	select SYS_SUPPORTS_TMU
+=======
+	select SH_INTC
+	select SYS_SUPPORTS_SH_TMU
+>>>>>>> v3.18
 
 config CPU_SH4
 	bool
 	select CPU_HAS_INTEVT
 	select CPU_HAS_SR_RB
 	select CPU_HAS_FPU if !CPU_SH4AL_DSP
+<<<<<<< HEAD
 	select SYS_SUPPORTS_TMU
+=======
+	select SH_INTC
+	select SYS_SUPPORTS_SH_TMU
+>>>>>>> v3.18
 	select SYS_SUPPORTS_HUGETLBFS if MMU
 
 config CPU_SH4A
@@ -212,7 +240,11 @@ config CPU_SH4AL_DSP
 config CPU_SH5
 	bool
 	select CPU_HAS_FPU
+<<<<<<< HEAD
 	select SYS_SUPPORTS_TMU
+=======
+	select SYS_SUPPORTS_SH_TMU
+>>>>>>> v3.18
 	select SYS_SUPPORTS_HUGETLBFS if MMU
 
 config CPU_SHX2
@@ -249,7 +281,11 @@ choice
 config CPU_SUBTYPE_SH7619
 	bool "Support SH7619 processor"
 	select CPU_SH2
+<<<<<<< HEAD
 	select SYS_SUPPORTS_CMT
+=======
+	select SYS_SUPPORTS_SH_CMT
+>>>>>>> v3.18
 
 # SH-2A Processor Support
 
@@ -257,50 +293,83 @@ config CPU_SUBTYPE_SH7201
 	bool "Support SH7201 processor"
 	select CPU_SH2A
 	select CPU_HAS_FPU
+<<<<<<< HEAD
 	select SYS_SUPPORTS_MTU2
+=======
+	select SYS_SUPPORTS_SH_MTU2
+>>>>>>> v3.18
  
 config CPU_SUBTYPE_SH7203
 	bool "Support SH7203 processor"
 	select CPU_SH2A
 	select CPU_HAS_FPU
+<<<<<<< HEAD
 	select SYS_SUPPORTS_CMT
 	select SYS_SUPPORTS_MTU2
+=======
+	select SYS_SUPPORTS_SH_CMT
+	select SYS_SUPPORTS_SH_MTU2
+>>>>>>> v3.18
 	select ARCH_WANT_OPTIONAL_GPIOLIB
 	select PINCTRL
 
 config CPU_SUBTYPE_SH7206
 	bool "Support SH7206 processor"
 	select CPU_SH2A
+<<<<<<< HEAD
 	select SYS_SUPPORTS_CMT
 	select SYS_SUPPORTS_MTU2
+=======
+	select SYS_SUPPORTS_SH_CMT
+	select SYS_SUPPORTS_SH_MTU2
+>>>>>>> v3.18
 
 config CPU_SUBTYPE_SH7263
 	bool "Support SH7263 processor"
 	select CPU_SH2A
 	select CPU_HAS_FPU
+<<<<<<< HEAD
 	select SYS_SUPPORTS_CMT
 	select SYS_SUPPORTS_MTU2
+=======
+	select SYS_SUPPORTS_SH_CMT
+	select SYS_SUPPORTS_SH_MTU2
+>>>>>>> v3.18
 
 config CPU_SUBTYPE_SH7264
 	bool "Support SH7264 processor"
 	select CPU_SH2A
 	select CPU_HAS_FPU
+<<<<<<< HEAD
 	select SYS_SUPPORTS_CMT
 	select SYS_SUPPORTS_MTU2
+=======
+	select SYS_SUPPORTS_SH_CMT
+	select SYS_SUPPORTS_SH_MTU2
+>>>>>>> v3.18
 	select PINCTRL
 
 config CPU_SUBTYPE_SH7269
 	bool "Support SH7269 processor"
 	select CPU_SH2A
 	select CPU_HAS_FPU
+<<<<<<< HEAD
 	select SYS_SUPPORTS_CMT
 	select SYS_SUPPORTS_MTU2
+=======
+	select SYS_SUPPORTS_SH_CMT
+	select SYS_SUPPORTS_SH_MTU2
+>>>>>>> v3.18
 	select PINCTRL
 
 config CPU_SUBTYPE_MXG
 	bool "Support MX-G processor"
 	select CPU_SH2A
+<<<<<<< HEAD
 	select SYS_SUPPORTS_MTU2
+=======
+	select SYS_SUPPORTS_SH_MTU2
+>>>>>>> v3.18
 	help
 	  Select MX-G if running on an R8A03022BG part.
 
@@ -353,9 +422,14 @@ config CPU_SUBTYPE_SH7720
 	bool "Support SH7720 processor"
 	select CPU_SH3
 	select CPU_HAS_DSP
+<<<<<<< HEAD
 	select SYS_SUPPORTS_CMT
 	select ARCH_WANT_OPTIONAL_GPIOLIB
 	select USB_ARCH_HAS_OHCI
+=======
+	select SYS_SUPPORTS_SH_CMT
+	select ARCH_WANT_OPTIONAL_GPIOLIB
+>>>>>>> v3.18
 	select USB_OHCI_SH if USB_OHCI_HCD
 	select PINCTRL
 	help
@@ -365,8 +439,12 @@ config CPU_SUBTYPE_SH7721
 	bool "Support SH7721 processor"
 	select CPU_SH3
 	select CPU_HAS_DSP
+<<<<<<< HEAD
 	select SYS_SUPPORTS_CMT
 	select USB_ARCH_HAS_OHCI
+=======
+	select SYS_SUPPORTS_SH_CMT
+>>>>>>> v3.18
 	select USB_OHCI_SH if USB_OHCI_HCD
 	help
 	  Select SH7721 if you have a SH3-DSP SH7721 CPU.
@@ -421,7 +499,11 @@ config CPU_SUBTYPE_SH7723
 	select CPU_SHX2
 	select ARCH_SHMOBILE
 	select ARCH_SPARSEMEM_ENABLE
+<<<<<<< HEAD
 	select SYS_SUPPORTS_CMT
+=======
+	select SYS_SUPPORTS_SH_CMT
+>>>>>>> v3.18
 	select ARCH_WANT_OPTIONAL_GPIOLIB
 	select PINCTRL
 	help
@@ -433,7 +515,11 @@ config CPU_SUBTYPE_SH7724
 	select CPU_SHX2
 	select ARCH_SHMOBILE
 	select ARCH_SPARSEMEM_ENABLE
+<<<<<<< HEAD
 	select SYS_SUPPORTS_CMT
+=======
+	select SYS_SUPPORTS_SH_CMT
+>>>>>>> v3.18
 	select ARCH_WANT_OPTIONAL_GPIOLIB
 	select PINCTRL
 	help
@@ -444,8 +530,11 @@ config CPU_SUBTYPE_SH7734
 	select CPU_SH4A
 	select CPU_SHX2
 	select ARCH_WANT_OPTIONAL_GPIOLIB
+<<<<<<< HEAD
 	select USB_ARCH_HAS_OHCI
 	select USB_ARCH_HAS_EHCI
+=======
+>>>>>>> v3.18
 	select PINCTRL
 	help
 	  Select SH7734 if you have a SH4A SH7734 CPU.
@@ -455,8 +544,11 @@ config CPU_SUBTYPE_SH7757
 	select CPU_SH4A
 	select CPU_SHX2
 	select ARCH_WANT_OPTIONAL_GPIOLIB
+<<<<<<< HEAD
 	select USB_ARCH_HAS_OHCI
 	select USB_ARCH_HAS_EHCI
+=======
+>>>>>>> v3.18
 	select PINCTRL
 	help
 	  Select SH7757 if you have a SH4A SH7757 CPU.
@@ -464,7 +556,10 @@ config CPU_SUBTYPE_SH7757
 config CPU_SUBTYPE_SH7763
 	bool "Support SH7763 processor"
 	select CPU_SH4A
+<<<<<<< HEAD
 	select USB_ARCH_HAS_OHCI
+=======
+>>>>>>> v3.18
 	select USB_OHCI_SH if USB_OHCI_HCD
 	help
 	  Select SH7763 if you have a SH4A SH7763(R5S77631) CPU.
@@ -493,9 +588,13 @@ config CPU_SUBTYPE_SH7786
 	select CPU_HAS_PTEAEX
 	select GENERIC_CLOCKEVENTS_BROADCAST if SMP
 	select ARCH_WANT_OPTIONAL_GPIOLIB
+<<<<<<< HEAD
 	select USB_ARCH_HAS_OHCI
 	select USB_OHCI_SH if USB_OHCI_HCD
 	select USB_ARCH_HAS_EHCI
+=======
+	select USB_OHCI_SH if USB_OHCI_HCD
+>>>>>>> v3.18
 	select USB_EHCI_SH if USB_EHCI_HCD
 	select PINCTRL
 
@@ -513,7 +612,11 @@ config CPU_SUBTYPE_SH7343
 	bool "Support SH7343 processor"
 	select CPU_SH4AL_DSP
 	select ARCH_SHMOBILE
+<<<<<<< HEAD
 	select SYS_SUPPORTS_CMT
+=======
+	select SYS_SUPPORTS_SH_CMT
+>>>>>>> v3.18
 
 config CPU_SUBTYPE_SH7722
 	bool "Support SH7722 processor"
@@ -522,7 +625,11 @@ config CPU_SUBTYPE_SH7722
 	select ARCH_SHMOBILE
 	select ARCH_SPARSEMEM_ENABLE
 	select SYS_SUPPORTS_NUMA
+<<<<<<< HEAD
 	select SYS_SUPPORTS_CMT
+=======
+	select SYS_SUPPORTS_SH_CMT
+>>>>>>> v3.18
 	select ARCH_WANT_OPTIONAL_GPIOLIB
 	select PINCTRL
 
@@ -533,7 +640,11 @@ config CPU_SUBTYPE_SH7366
 	select ARCH_SHMOBILE
 	select ARCH_SPARSEMEM_ENABLE
 	select SYS_SUPPORTS_NUMA
+<<<<<<< HEAD
 	select SYS_SUPPORTS_CMT
+=======
+	select SYS_SUPPORTS_SH_CMT
+>>>>>>> v3.18
 
 endchoice
 
@@ -566,6 +677,7 @@ source "arch/sh/boards/Kconfig"
 
 menu "Timer and clock configuration"
 
+<<<<<<< HEAD
 config SH_TIMER_TMU
 	bool "TMU timer driver"
 	depends on SYS_SUPPORTS_TMU
@@ -587,6 +699,8 @@ config SH_TIMER_MTU2
 	help
 	  This enables build of the MTU2 timer driver.
 
+=======
+>>>>>>> v3.18
 config SH_PCLK_FREQ
 	int "Peripheral clock frequency (in Hz)"
 	depends on SH_CLK_CPG_LEGACY
@@ -643,9 +757,15 @@ config KEXEC
 
 	  It is an ongoing process to be certain the hardware in a machine
 	  is properly shutdown, so do not be surprised if this code does not
+<<<<<<< HEAD
 	  initially work for you.  It may help to enable device hotplugging
 	  support.  As of this writing the exact hardware interface is
 	  strongly in flux, so no good recommendation can be made.
+=======
+	  initially work for you.  As of this writing the exact hardware
+	  interface is strongly in flux, so no good recommendation can be
+	  made.
+>>>>>>> v3.18
 
 config CRASH_DUMP
 	bool "kernel crash dumps (EXPERIMENTAL)"
@@ -700,6 +820,7 @@ config SMP
 	depends on SYS_SUPPORTS_SMP
 	---help---
 	  This enables support for systems with more than one CPU. If you have
+<<<<<<< HEAD
 	  a system with only one CPU, like most personal computers, say N. If
 	  you have a system with more than one CPU, say Y.
 
@@ -707,6 +828,15 @@ config SMP
 	  machines, but will use only one CPU of a multiprocessor machine. If
 	  you say Y here, the kernel will run on many, but not all,
 	  singleprocessor machines. On a singleprocessor machine, the kernel
+=======
+	  a system with only one CPU, say N. If you have a system with more
+	  than one CPU, say Y.
+
+	  If you say N here, the kernel will run on uni- and multiprocessor
+	  machines, but will use only one CPU of a multiprocessor machine. If
+	  you say Y here, the kernel will run on many, but not all,
+	  uniprocessor machines. On a uniprocessor machine, the kernel
+>>>>>>> v3.18
 	  will run faster if you say N here.
 
 	  People using multiprocessor machines who say Y here should also say
@@ -733,7 +863,11 @@ config NR_CPUS
 
 config HOTPLUG_CPU
 	bool "Support for hot-pluggable CPUs (EXPERIMENTAL)"
+<<<<<<< HEAD
 	depends on SMP && HOTPLUG
+=======
+	depends on SMP
+>>>>>>> v3.18
 	help
 	  Say Y here to experiment with turning CPUs off and on.  CPUs
 	  can be controlled through /sys/devices/system/cpu.

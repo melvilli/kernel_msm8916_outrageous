@@ -12,7 +12,11 @@
  *----------------------------------------------------------------------------*/
 
 #ifndef AAC_DRIVER_BUILD
+<<<<<<< HEAD
 # define AAC_DRIVER_BUILD 30200
+=======
+# define AAC_DRIVER_BUILD 30300
+>>>>>>> v3.18
 # define AAC_DRIVER_BRANCH "-ms"
 #endif
 #define MAXIMUM_NUM_CONTAINERS	32

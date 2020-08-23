@@ -22,11 +22,18 @@
 #include <linux/module.h>
 #include <linux/irq.h>
 #include <linux/io.h>
+<<<<<<< HEAD
 #include <linux/sh_intc.h>
 #include <mach/intc.h>
 #include <mach/irqs.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
+=======
+#include <asm/mach-types.h>
+#include <asm/mach/arch.h>
+#include "intc.h"
+#include "irqs.h"
+>>>>>>> v3.18
 
 enum {
 	UNUSED_INTCA = 0,

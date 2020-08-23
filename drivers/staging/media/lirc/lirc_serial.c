@@ -67,15 +67,22 @@
 #include <linux/delay.h>
 #include <linux/poll.h>
 #include <linux/platform_device.h>
+<<<<<<< HEAD
 
+=======
+#include <linux/gpio.h>
+>>>>>>> v3.18
 #include <linux/io.h>
 #include <linux/irq.h>
 #include <linux/fcntl.h>
 #include <linux/spinlock.h>
 
+<<<<<<< HEAD
 #ifdef CONFIG_LIRC_SERIAL_NSLU2
 #include <asm/hardware.h>
 #endif
+=======
+>>>>>>> v3.18
 /* From Intel IXP42X Developer's Manual (#252480-005): */
 /* ftp://download.intel.com/design/network/manuals/25248005.pdf */
 #define UART_IE_IXP42X_UUE   0x40 /* IXP42X UART Unit enable */
@@ -198,6 +205,7 @@ static struct lirc_serial hardware[] = {
 		.features    = LIRC_CAN_REC_MODE2
 #endif
 	},
+<<<<<<< HEAD
 
 #ifdef CONFIG_LIRC_SERIAL_NSLU2
 	/*
@@ -225,6 +233,8 @@ static struct lirc_serial hardware[] = {
 	},
 #endif
 
+=======
+>>>>>>> v3.18
 };
 
 #define RS_ISR_PASS_LIMIT 256
@@ -315,6 +325,7 @@ static void soutp(int offset, u8 value)
 
 static void on(void)
 {
+<<<<<<< HEAD
 #ifdef CONFIG_LIRC_SERIAL_NSLU2
 	/*
 	 * On NSLU2, we put the transmit diode between the output of the green
@@ -325,6 +336,8 @@ static void on(void)
 		return;
 	}
 #endif
+=======
+>>>>>>> v3.18
 	if (txsense)
 		soutp(UART_MCR, hardware[type].off);
 	else
@@ -333,12 +346,15 @@ static void on(void)
 
 static void off(void)
 {
+<<<<<<< HEAD
 #ifdef CONFIG_LIRC_SERIAL_NSLU2
 	if (type == LIRC_NSLU2) {
 		gpio_line_set(NSLU2_LED_GRN, IXP4XX_GPIO_HIGH);
 		return;
 	}
 #endif
+=======
+>>>>>>> v3.18
 	if (txsense)
 		soutp(UART_MCR, hardware[type].on);
 	else
@@ -428,8 +444,13 @@ static int init_timing_params(unsigned int new_duty_cycle,
 	period = 256 * 1000000L / freq;
 	pulse_width = period * duty_cycle / 100;
 	space_width = period - pulse_width;
+<<<<<<< HEAD
 	dprintk("in init_timing_params, freq=%d pulse=%ld, "
 		"space=%ld\n", freq, pulse_width, space_width);
+=======
+	dprintk("in init_timing_params, freq=%d pulse=%ld, space=%ld\n",
+		freq, pulse_width, space_width);
+>>>>>>> v3.18
 	return 0;
 }
 #endif /* USE_RDTSC */
@@ -542,6 +563,10 @@ static long send_pulse_homebrew_softcarrier(unsigned long length)
 {
 	int flag;
 	unsigned long actual, target, d;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	length <<= 8;
 
 	actual = 0; target = 0; flag = 0;
@@ -574,11 +599,18 @@ static long send_pulse_homebrew(unsigned long length)
 
 	if (softcarrier)
 		return send_pulse_homebrew_softcarrier(length);
+<<<<<<< HEAD
 	else {
 		on();
 		safe_udelay(length);
 		return 0;
 	}
+=======
+
+	on();
+	safe_udelay(length);
+	return 0;
+>>>>>>> v3.18
 }
 
 static void send_space_irdeo(long length)
@@ -650,7 +682,11 @@ static void frbwrite(int l)
 	rbwrite(l);
 }
 
+<<<<<<< HEAD
 static irqreturn_t irq_handler(int i, void *blah)
+=======
+static irqreturn_t lirc_irq_handler(int i, void *blah)
+>>>>>>> v3.18
 {
 	struct timeval tv;
 	int counter, dcd;
@@ -707,7 +743,12 @@ static irqreturn_t irq_handler(int i, void *blah)
 				pr_warn("ignoring spike: %d %d %lx %lx %lx %lx\n",
 					dcd, sense,
 					tv.tv_sec, lasttv.tv_sec,
+<<<<<<< HEAD
 					tv.tv_usec, lasttv.tv_usec);
+=======
+					(unsigned long)tv.tv_usec,
+					(unsigned long)lasttv.tv_usec);
+>>>>>>> v3.18
 				continue;
 			}
 
@@ -719,7 +760,12 @@ static irqreturn_t irq_handler(int i, void *blah)
 				pr_warn("%d %d %lx %lx %lx %lx\n",
 					dcd, sense,
 					tv.tv_sec, lasttv.tv_sec,
+<<<<<<< HEAD
 					tv.tv_usec, lasttv.tv_usec);
+=======
+					(unsigned long)tv.tv_usec,
+					(unsigned long)lasttv.tv_usec);
+>>>>>>> v3.18
 				data = PULSE_MASK;
 			} else if (deltv > 15) {
 				data = PULSE_MASK; /* really long time */
@@ -728,7 +774,12 @@ static irqreturn_t irq_handler(int i, void *blah)
 					pr_warn("AIEEEE: %d %d %lx %lx %lx %lx\n",
 						dcd, sense,
 						tv.tv_sec, lasttv.tv_sec,
+<<<<<<< HEAD
 						tv.tv_usec, lasttv.tv_usec);
+=======
+						(unsigned long)tv.tv_usec,
+						(unsigned long)lasttv.tv_usec);
+>>>>>>> v3.18
 					/*
 					 * detecting pulse while this
 					 * MUST be a space!
@@ -790,6 +841,7 @@ static int hardware_init_port(void)
 	sinp(UART_IIR);
 	sinp(UART_MSR);
 
+<<<<<<< HEAD
 #ifdef CONFIG_LIRC_SERIAL_NSLU2
 	if (type == LIRC_NSLU2) {
 		/* Setup NSLU2 UART */
@@ -804,6 +856,8 @@ static int hardware_init_port(void)
 	}
 #endif
 
+=======
+>>>>>>> v3.18
 	/* Set line for power source */
 	off();
 
@@ -839,7 +893,11 @@ static int lirc_serial_probe(struct platform_device *dev)
 {
 	int i, nlow, nhigh, result;
 
+<<<<<<< HEAD
 	result = request_irq(irq, irq_handler,
+=======
+	result = devm_request_irq(&dev->dev, irq, lirc_irq_handler,
+>>>>>>> v3.18
 			     (share_irq ? IRQF_SHARED : 0),
 			     LIRC_DRIVER_NAME, (void *)&hardware);
 	if (result < 0) {
@@ -857,22 +915,38 @@ static int lirc_serial_probe(struct platform_device *dev)
 	 * for the NSLU2 it's done in boot code.
 	 */
 	if (((iommap != 0)
+<<<<<<< HEAD
 	     && (request_mem_region(iommap, 8 << ioshift,
 				    LIRC_DRIVER_NAME) == NULL))
 	   || ((iommap == 0)
 	       && (request_region(io, 8, LIRC_DRIVER_NAME) == NULL))) {
+=======
+	     && (devm_request_mem_region(&dev->dev, iommap, 8 << ioshift,
+					 LIRC_DRIVER_NAME) == NULL))
+	   || ((iommap == 0)
+	       && (devm_request_region(&dev->dev, io, 8,
+				       LIRC_DRIVER_NAME) == NULL))) {
+>>>>>>> v3.18
 		dev_err(&dev->dev, "port %04x already in use\n", io);
 		dev_warn(&dev->dev, "use 'setserial /dev/ttySX uart none'\n");
 		dev_warn(&dev->dev,
 			 "or compile the serial port driver as module and\n");
 		dev_warn(&dev->dev, "make sure this module is loaded first\n");
+<<<<<<< HEAD
 		result = -EBUSY;
 		goto exit_free_irq;
+=======
+		return -EBUSY;
+>>>>>>> v3.18
 	}
 
 	result = hardware_init_port();
 	if (result < 0)
+<<<<<<< HEAD
 		goto exit_release_region;
+=======
+		return result;
+>>>>>>> v3.18
 
 	/* Initialize pulse/space widths */
 	init_timing_params(duty_cycle, freq);
@@ -904,6 +978,7 @@ static int lirc_serial_probe(struct platform_device *dev)
 
 	dprintk("Interrupt %d, port %04x obtained\n", irq, io);
 	return 0;
+<<<<<<< HEAD
 
 exit_release_region:
 	if (iommap != 0)
@@ -926,6 +1001,8 @@ static int lirc_serial_remove(struct platform_device *dev)
 		release_region(io, 8);
 
 	return 0;
+=======
+>>>>>>> v3.18
 }
 
 static int set_use_inc(void *data)
@@ -961,7 +1038,11 @@ static void set_use_dec(void *data)
 	spin_unlock_irqrestore(&hardware[type].lock, flags);
 }
 
+<<<<<<< HEAD
 static ssize_t lirc_write(struct file *file, const char *buf,
+=======
+static ssize_t lirc_write(struct file *file, const char __user *buf,
+>>>>>>> v3.18
 			 size_t n, loff_t *ppos)
 {
 	int i, count;
@@ -998,7 +1079,12 @@ static ssize_t lirc_write(struct file *file, const char *buf,
 static long lirc_ioctl(struct file *filep, unsigned int cmd, unsigned long arg)
 {
 	int result;
+<<<<<<< HEAD
 	__u32 value;
+=======
+	u32 __user *uptr = (u32 __user *)arg;
+	u32 value;
+>>>>>>> v3.18
 
 	switch (cmd) {
 	case LIRC_GET_SEND_MODE:
@@ -1007,7 +1093,11 @@ static long lirc_ioctl(struct file *filep, unsigned int cmd, unsigned long arg)
 
 		result = put_user(LIRC_SEND2MODE
 				  (hardware[type].features&LIRC_CAN_SEND_MASK),
+<<<<<<< HEAD
 				  (__u32 *) arg);
+=======
+				  uptr);
+>>>>>>> v3.18
 		if (result)
 			return result;
 		break;
@@ -1016,7 +1106,11 @@ static long lirc_ioctl(struct file *filep, unsigned int cmd, unsigned long arg)
 		if (!(hardware[type].features&LIRC_CAN_SEND_MASK))
 			return -ENOIOCTLCMD;
 
+<<<<<<< HEAD
 		result = get_user(value, (__u32 *) arg);
+=======
+		result = get_user(value, uptr);
+>>>>>>> v3.18
 		if (result)
 			return result;
 		/* only LIRC_MODE_PULSE supported */
@@ -1026,33 +1120,50 @@ static long lirc_ioctl(struct file *filep, unsigned int cmd, unsigned long arg)
 
 	case LIRC_GET_LENGTH:
 		return -ENOIOCTLCMD;
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 
 	case LIRC_SET_SEND_DUTY_CYCLE:
 		dprintk("SET_SEND_DUTY_CYCLE\n");
 		if (!(hardware[type].features&LIRC_CAN_SET_SEND_DUTY_CYCLE))
 			return -ENOIOCTLCMD;
 
+<<<<<<< HEAD
 		result = get_user(value, (__u32 *) arg);
+=======
+		result = get_user(value, uptr);
+>>>>>>> v3.18
 		if (result)
 			return result;
 		if (value <= 0 || value > 100)
 			return -EINVAL;
 		return init_timing_params(value, freq);
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 
 	case LIRC_SET_SEND_CARRIER:
 		dprintk("SET_SEND_CARRIER\n");
 		if (!(hardware[type].features&LIRC_CAN_SET_SEND_CARRIER))
 			return -ENOIOCTLCMD;
 
+<<<<<<< HEAD
 		result = get_user(value, (__u32 *) arg);
+=======
+		result = get_user(value, uptr);
+>>>>>>> v3.18
 		if (result)
 			return result;
 		if (value > 500000 || value < 20000)
 			return -EINVAL;
 		return init_timing_params(duty_cycle, value);
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 
 	default:
 		return lirc_dev_fop_ioctl(filep, cmd, arg);
@@ -1137,7 +1248,10 @@ static int lirc_serial_resume(struct platform_device *dev)
 
 static struct platform_driver lirc_serial_driver = {
 	.probe		= lirc_serial_probe,
+<<<<<<< HEAD
 	.remove		= lirc_serial_remove,
+=======
+>>>>>>> v3.18
 	.suspend	= lirc_serial_suspend,
 	.resume		= lirc_serial_resume,
 	.driver		= {
@@ -1203,6 +1317,7 @@ static int __init lirc_serial_init_module(void)
 		io = io ? io : 0x3f8;
 		irq = irq ? irq : 4;
 		break;
+<<<<<<< HEAD
 #ifdef CONFIG_LIRC_SERIAL_NSLU2
 	case LIRC_NSLU2:
 		io = io ? io : IRQ_IXP4XX_UART2;
@@ -1211,6 +1326,8 @@ static int __init lirc_serial_init_module(void)
 		ioshift = ioshift ? ioshift : 2;
 		break;
 #endif
+=======
+>>>>>>> v3.18
 	default:
 		return -EINVAL;
 	}
@@ -1218,9 +1335,12 @@ static int __init lirc_serial_init_module(void)
 		switch (type) {
 		case LIRC_HOMEBREW:
 		case LIRC_IGOR:
+<<<<<<< HEAD
 #ifdef CONFIG_LIRC_SERIAL_NSLU2
 		case LIRC_NSLU2:
 #endif
+=======
+>>>>>>> v3.18
 			hardware[type].features &=
 				~(LIRC_CAN_SET_SEND_DUTY_CYCLE|
 				  LIRC_CAN_SET_SEND_CARRIER);

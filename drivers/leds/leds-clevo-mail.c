@@ -19,7 +19,11 @@ MODULE_AUTHOR("Márton Németh <nm127@freemail.hu>");
 MODULE_DESCRIPTION("Clevo mail LED driver");
 MODULE_LICENSE("GPL");
 
+<<<<<<< HEAD
 static bool __initdata nodetect;
+=======
+static bool nodetect;
+>>>>>>> v3.18
 module_param_named(nodetect, nodetect, bool, 0);
 MODULE_PARM_DESC(nodetect, "Skip DMI hardware detection");
 
@@ -40,7 +44,11 @@ static int __init clevo_mail_led_dmi_callback(const struct dmi_system_id *id)
  * detected as working, but in reality it is not) as low as
  * possible.
  */
+<<<<<<< HEAD
 static struct dmi_system_id __initdata clevo_mail_led_dmi_table[] = {
+=======
+static struct dmi_system_id clevo_mail_led_dmi_table[] __initdata = {
+>>>>>>> v3.18
 	{
 		.callback = clevo_mail_led_dmi_callback,
 		.ident = "Clevo D410J",
@@ -153,7 +161,11 @@ static struct led_classdev clevo_mail_led = {
 	.flags			= LED_CORE_SUSPENDRESUME,
 };
 
+<<<<<<< HEAD
 static int clevo_mail_led_probe(struct platform_device *pdev)
+=======
+static int __init clevo_mail_led_probe(struct platform_device *pdev)
+>>>>>>> v3.18
 {
 	return led_classdev_register(&pdev->dev, &clevo_mail_led);
 }
@@ -165,7 +177,10 @@ static int clevo_mail_led_remove(struct platform_device *pdev)
 }
 
 static struct platform_driver clevo_mail_led_driver = {
+<<<<<<< HEAD
 	.probe		= clevo_mail_led_probe,
+=======
+>>>>>>> v3.18
 	.remove		= clevo_mail_led_remove,
 	.driver		= {
 		.name		= KBUILD_MODNAME,

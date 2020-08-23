@@ -78,10 +78,23 @@ early_initcall(kmemcheck_init);
  */
 static int __init param_kmemcheck(char *str)
 {
+<<<<<<< HEAD
 	if (!str)
 		return -EINVAL;
 
 	sscanf(str, "%d", &kmemcheck_enabled);
+=======
+	int val;
+	int ret;
+
+	if (!str)
+		return -EINVAL;
+
+	ret = kstrtoint(str, 0, &val);
+	if (ret)
+		return ret;
+	kmemcheck_enabled = val;
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -134,7 +147,11 @@ static DEFINE_PER_CPU(struct kmemcheck_context, kmemcheck_context);
 
 bool kmemcheck_active(struct pt_regs *regs)
 {
+<<<<<<< HEAD
 	struct kmemcheck_context *data = &__get_cpu_var(kmemcheck_context);
+=======
+	struct kmemcheck_context *data = this_cpu_ptr(&kmemcheck_context);
+>>>>>>> v3.18
 
 	return data->balance > 0;
 }
@@ -142,7 +159,11 @@ bool kmemcheck_active(struct pt_regs *regs)
 /* Save an address that needs to be shown/hidden */
 static void kmemcheck_save_addr(unsigned long addr)
 {
+<<<<<<< HEAD
 	struct kmemcheck_context *data = &__get_cpu_var(kmemcheck_context);
+=======
+	struct kmemcheck_context *data = this_cpu_ptr(&kmemcheck_context);
+>>>>>>> v3.18
 
 	BUG_ON(data->n_addrs >= ARRAY_SIZE(data->addr));
 	data->addr[data->n_addrs++] = addr;
@@ -150,7 +171,11 @@ static void kmemcheck_save_addr(unsigned long addr)
 
 static unsigned int kmemcheck_show_all(void)
 {
+<<<<<<< HEAD
 	struct kmemcheck_context *data = &__get_cpu_var(kmemcheck_context);
+=======
+	struct kmemcheck_context *data = this_cpu_ptr(&kmemcheck_context);
+>>>>>>> v3.18
 	unsigned int i;
 	unsigned int n;
 
@@ -163,7 +188,11 @@ static unsigned int kmemcheck_show_all(void)
 
 static unsigned int kmemcheck_hide_all(void)
 {
+<<<<<<< HEAD
 	struct kmemcheck_context *data = &__get_cpu_var(kmemcheck_context);
+=======
+	struct kmemcheck_context *data = this_cpu_ptr(&kmemcheck_context);
+>>>>>>> v3.18
 	unsigned int i;
 	unsigned int n;
 
@@ -179,7 +208,11 @@ static unsigned int kmemcheck_hide_all(void)
  */
 void kmemcheck_show(struct pt_regs *regs)
 {
+<<<<<<< HEAD
 	struct kmemcheck_context *data = &__get_cpu_var(kmemcheck_context);
+=======
+	struct kmemcheck_context *data = this_cpu_ptr(&kmemcheck_context);
+>>>>>>> v3.18
 
 	BUG_ON(!irqs_disabled());
 
@@ -220,7 +253,11 @@ void kmemcheck_show(struct pt_regs *regs)
  */
 void kmemcheck_hide(struct pt_regs *regs)
 {
+<<<<<<< HEAD
 	struct kmemcheck_context *data = &__get_cpu_var(kmemcheck_context);
+=======
+	struct kmemcheck_context *data = this_cpu_ptr(&kmemcheck_context);
+>>>>>>> v3.18
 	int n;
 
 	BUG_ON(!irqs_disabled());
@@ -522,7 +559,11 @@ static void kmemcheck_access(struct pt_regs *regs,
 	const uint8_t *insn_primary;
 	unsigned int size;
 
+<<<<<<< HEAD
 	struct kmemcheck_context *data = &__get_cpu_var(kmemcheck_context);
+=======
+	struct kmemcheck_context *data = this_cpu_ptr(&kmemcheck_context);
+>>>>>>> v3.18
 
 	/* Recursive fault -- ouch. */
 	if (data->busy) {

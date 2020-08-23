@@ -34,7 +34,11 @@ void vma_interval_tree_insert_after(struct vm_area_struct *node,
 	struct vm_area_struct *parent;
 	unsigned long last = vma_last_pgoff(node);
 
+<<<<<<< HEAD
 	VM_BUG_ON(vma_start_pgoff(node) != vma_start_pgoff(prev));
+=======
+	VM_BUG_ON_VMA(vma_start_pgoff(node) != vma_start_pgoff(prev), node);
+>>>>>>> v3.18
 
 	if (!prev->shared.linear.rb.rb_right) {
 		parent = prev;

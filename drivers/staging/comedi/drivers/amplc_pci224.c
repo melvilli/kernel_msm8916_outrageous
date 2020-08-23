@@ -1,4 +1,5 @@
 /*
+<<<<<<< HEAD
     comedi/drivers/amplc_pci224.c
     Driver for Amplicon PCI224 and PCI234 AO boards.
 
@@ -103,6 +104,112 @@ Caveats:
      correctly.
 */
 
+=======
+ * comedi/drivers/amplc_pci224.c
+ * Driver for Amplicon PCI224 and PCI234 AO boards.
+ *
+ * Copyright (C) 2005 MEV Ltd. <http://www.mev.co.uk/>
+ *
+ * COMEDI - Linux Control and Measurement Device Interface
+ * Copyright (C) 1998,2000 David A. Schleef <ds@schleef.org>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+/*
+ * Driver: amplc_pci224
+ * Description: Amplicon PCI224, PCI234
+ * Author: Ian Abbott <abbotti@mev.co.uk>
+ * Devices: [Amplicon] PCI224 (amplc_pci224), PCI234
+ * Updated: Thu, 31 Jul 2014 11:08:03 +0000
+ * Status: works, but see caveats
+ *
+ * Supports:
+ *
+ *   - ao_insn read/write
+ *   - ao_do_cmd mode with the following sources:
+ *
+ *     - start_src         TRIG_INT        TRIG_EXT
+ *     - scan_begin_src    TRIG_TIMER      TRIG_EXT
+ *     - convert_src       TRIG_NOW
+ *     - scan_end_src      TRIG_COUNT
+ *     - stop_src          TRIG_COUNT      TRIG_EXT        TRIG_NONE
+ *
+ *     The channel list must contain at least one channel with no repeated
+ *     channels.  The scan end count must equal the number of channels in
+ *     the channel list.
+ *
+ *     There is only one external trigger source so only one of start_src,
+ *     scan_begin_src or stop_src may use TRIG_EXT.
+ *
+ * Configuration options:
+ *   none
+ *
+ * Manual configuration of PCI cards is not supported; they are configured
+ * automatically.
+ *
+ * Output range selection - PCI224:
+ *
+ *   Output ranges on PCI224 are partly software-selectable and partly
+ *   hardware-selectable according to jumper LK1.  All channels are set
+ *   to the same range:
+ *
+ *   - LK1 position 1-2 (factory default) corresponds to the following
+ *     comedi ranges:
+ *
+ *       0: [-10V,+10V]; 1: [-5V,+5V]; 2: [-2.5V,+2.5V], 3: [-1.25V,+1.25V],
+ *       4: [0,+10V],    5: [0,+5V],   6: [0,+2.5V],     7: [0,+1.25V]
+ *
+ *   - LK1 position 2-3 corresponds to the following Comedi ranges, using
+ *     an external voltage reference:
+ *
+ *       0: [-Vext,+Vext],
+ *       1: [0,+Vext]
+ *
+ * Output range selection - PCI234:
+ *
+ *   Output ranges on PCI234 are hardware-selectable according to jumper
+ *   LK1 which affects all channels, and jumpers LK2, LK3, LK4 and LK5
+ *   which affect channels 0, 1, 2 and 3 individually.  LK1 chooses between
+ *   an internal 5V reference and an external voltage reference (Vext).
+ *   LK2/3/4/5 choose (per channel) to double the reference or not according
+ *   to the following table:
+ *
+ *     LK1 position   LK2/3/4/5 pos  Comedi range
+ *     -------------  -------------  --------------
+ *     2-3 (factory)  1-2 (factory)  0: [-10V,+10V]
+ *     2-3 (factory)  2-3            1: [-5V,+5V]
+ *     1-2            1-2 (factory)  2: [-2*Vext,+2*Vext]
+ *     1-2            2-3            3: [-Vext,+Vext]
+ *
+ * Caveats:
+ *
+ *   1) All channels on the PCI224 share the same range.  Any change to the
+ *      range as a result of insn_write or a streaming command will affect
+ *      the output voltages of all channels, including those not specified
+ *      by the instruction or command.
+ *
+ *   2) For the analog output command,  the first scan may be triggered
+ *      falsely at the start of acquisition.  This occurs when the DAC scan
+ *      trigger source is switched from 'none' to 'timer' (scan_begin_src =
+ *      TRIG_TIMER) or 'external' (scan_begin_src == TRIG_EXT) at the start
+ *      of acquisition and the trigger source is at logic level 1 at the
+ *      time of the switch.  This is very likely for TRIG_TIMER.  For
+ *      TRIG_EXT, it depends on the state of the external line and whether
+ *      the CR_INVERT flag has been set.  The remaining scans are triggered
+ *      correctly.
+ */
+
+#include <linux/module.h>
+>>>>>>> v3.18
 #include <linux/pci.h>
 #include <linux/interrupt.h>
 #include <linux/slab.h>
@@ -112,6 +219,7 @@ Caveats:
 #include "comedi_fc.h"
 #include "8253.h"
 
+<<<<<<< HEAD
 #define DRIVER_NAME	"amplc_pci224"
 
 /*
@@ -125,6 +233,11 @@ Caveats:
  * PCI224/234 i/o space 1 (PCIBAR2) registers.
  */
 #define PCI224_IO1_SIZE	0x20	/* Size of i/o space 1 (8-bit registers) */
+=======
+/*
+ * PCI224/234 i/o space 1 (PCIBAR2) registers.
+ */
+>>>>>>> v3.18
 #define PCI224_Z2_CT0	0x14	/* 82C54 counter/timer 0 */
 #define PCI224_Z2_CT1	0x15	/* 82C54 counter/timer 1 */
 #define PCI224_Z2_CT2	0x16	/* 82C54 counter/timer 2 */
@@ -137,7 +250,10 @@ Caveats:
 /*
  * PCI224/234 i/o space 2 (PCIBAR3) 16-bit registers.
  */
+<<<<<<< HEAD
 #define PCI224_IO2_SIZE	0x10	/* Size of i/o space 2 (16-bit registers). */
+=======
+>>>>>>> v3.18
 #define PCI224_DACDATA	0x00	/* (w-o) DAC FIFO data. */
 #define PCI224_SOFTTRIG	0x00	/* (r-o) DAC software scan trigger. */
 #define PCI224_DACCON	0x02	/* (r/w) DAC status/configuration. */
@@ -219,12 +335,15 @@ Caveats:
 #define CLK_EXT		7	/* external clock */
 /* Macro to construct clock input configuration register value. */
 #define CLK_CONFIG(chan, src)	((((chan) & 3) << 3) | ((src) & 7))
+<<<<<<< HEAD
 /* Timebases in ns. */
 #define TIMEBASE_10MHZ		100
 #define TIMEBASE_1MHZ		1000
 #define TIMEBASE_100KHZ		10000
 #define TIMEBASE_10KHZ		100000
 #define TIMEBASE_1KHZ		1000000
+=======
+>>>>>>> v3.18
 
 /*
  * Counter/timer gate input configuration sources.
@@ -275,6 +394,7 @@ Caveats:
  * Range tables.
  */
 
+<<<<<<< HEAD
 /* The software selectable internal ranges for PCI224 (option[2] == 0). */
 static const struct comedi_lrange range_pci224_internal = {
 	8,
@@ -291,6 +411,35 @@ static const struct comedi_lrange range_pci224_internal = {
 };
 
 static const unsigned short hwrange_pci224_internal[8] = {
+=======
+/*
+ * The ranges for PCI224.
+ *
+ * These are partly hardware-selectable by jumper LK1 and partly
+ * software-selectable.
+ *
+ * All channels share the same hardware range.
+ */
+static const struct comedi_lrange range_pci224 = {
+	10, {
+		/* jumper LK1 in position 1-2 (factory default) */
+		BIP_RANGE(10),
+		BIP_RANGE(5),
+		BIP_RANGE(2.5),
+		BIP_RANGE(1.25),
+		UNI_RANGE(10),
+		UNI_RANGE(5),
+		UNI_RANGE(2.5),
+		UNI_RANGE(1.25),
+		/* jumper LK1 in position 2-3 */
+		RANGE_ext(-1, 1),	/* bipolar [-Vext,+Vext] */
+		RANGE_ext(0, 1),	/* unipolar [0,+Vext] */
+	}
+};
+
+static const unsigned short hwrange_pci224[10] = {
+	/* jumper LK1 in position 1-2 (factory default) */
+>>>>>>> v3.18
 	PCI224_DACCON_POLAR_BI | PCI224_DACCON_VREF_10,
 	PCI224_DACCON_POLAR_BI | PCI224_DACCON_VREF_5,
 	PCI224_DACCON_POLAR_BI | PCI224_DACCON_VREF_2_5,
@@ -299,6 +448,7 @@ static const unsigned short hwrange_pci224_internal[8] = {
 	PCI224_DACCON_POLAR_UNI | PCI224_DACCON_VREF_5,
 	PCI224_DACCON_POLAR_UNI | PCI224_DACCON_VREF_2_5,
 	PCI224_DACCON_POLAR_UNI | PCI224_DACCON_VREF_1_25,
+<<<<<<< HEAD
 };
 
 /* The software selectable external ranges for PCI224 (option[2] == 1). */
@@ -311,10 +461,14 @@ static const struct comedi_lrange range_pci224_external = {
 };
 
 static const unsigned short hwrange_pci224_external[2] = {
+=======
+	/* jumper LK1 in position 2-3 */
+>>>>>>> v3.18
 	PCI224_DACCON_POLAR_BI,
 	PCI224_DACCON_POLAR_UNI,
 };
 
+<<<<<<< HEAD
 /* The hardware selectable Vref*2 external range for PCI234
  * (option[2] == 1, option[3+n] == 0). */
 static const struct comedi_lrange range_pci234_ext2 = {
@@ -336,12 +490,51 @@ static const struct comedi_lrange range_pci234_ext = {
 /* This serves for all the PCI234 ranges. */
 static const unsigned short hwrange_pci234[1] = {
 	PCI224_DACCON_POLAR_BI,	/* bipolar - hardware ignores it! */
+=======
+/* Used to check all channels set to the same range on PCI224. */
+static const unsigned char range_check_pci224[10] = {
+	0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+};
+
+/*
+ * The ranges for PCI234.
+ *
+ * These are all hardware-selectable by jumper LK1 affecting all channels,
+ * and jumpers LK2, LK3, LK4 and LK5 affecting channels 0, 1, 2 and 3
+ * individually.
+ */
+static const struct comedi_lrange range_pci234 = {
+	4, {
+		/* LK1: 1-2 (fact def), LK2/3/4/5: 2-3 (fac def) */
+		BIP_RANGE(10),
+		/* LK1: 1-2 (fact def), LK2/3/4/5: 1-2 */
+		BIP_RANGE(5),
+		/* LK1: 2-3, LK2/3/4/5: 2-3 (fac def) */
+		RANGE_ext(-2, 2),	/* bipolar [-2*Vext,+2*Vext] */
+		/* LK1: 2-3, LK2/3/4/5: 1-2 */
+		RANGE_ext(-1, 1),	/* bipolar [-Vext,+Vext] */
+	}
+};
+
+/* N.B. PCI234 ignores the polarity bit, but software uses it. */
+static const unsigned short hwrange_pci234[4] = {
+	PCI224_DACCON_POLAR_BI,
+	PCI224_DACCON_POLAR_BI,
+	PCI224_DACCON_POLAR_BI,
+	PCI224_DACCON_POLAR_BI,
+};
+
+/* Used to check all channels use same LK1 setting on PCI234. */
+static const unsigned char range_check_pci234[4] = {
+	0, 0, 1, 1,
+>>>>>>> v3.18
 };
 
 /*
  * Board descriptions.
  */
 
+<<<<<<< HEAD
 enum pci224_model { any_model, pci224_model, pci234_model };
 
 struct pci224_board {
@@ -384,6 +577,43 @@ struct pci224_private {
 	spinlock_t ao_spinlock;
 	unsigned int *ao_readback;
 	short *ao_scan_vals;
+=======
+enum pci224_model { pci224_model, pci234_model };
+
+struct pci224_board {
+	const char *name;
+	unsigned int ao_chans;
+	unsigned int ao_bits;
+	const struct comedi_lrange *ao_range;
+	const unsigned short *ao_hwrange;
+	const unsigned char *ao_range_check;
+};
+
+static const struct pci224_board pci224_boards[] = {
+	[pci224_model] = {
+		.name		= "pci224",
+		.ao_chans	= 16,
+		.ao_bits	= 12,
+		.ao_range	= &range_pci224,
+		.ao_hwrange	= &hwrange_pci224[0],
+		.ao_range_check	= &range_check_pci224[0],
+	},
+	[pci234_model] = {
+		.name		= "pci234",
+		.ao_chans	= 4,
+		.ao_bits	= 16,
+		.ao_range	= &range_pci234,
+		.ao_hwrange	= &hwrange_pci234[0],
+		.ao_range_check	= &range_check_pci234[0],
+	},
+};
+
+struct pci224_private {
+	unsigned long iobase1;
+	unsigned long state;
+	spinlock_t ao_spinlock;	/* spinlock for AO command handling */
+	unsigned short *ao_scan_vals;
+>>>>>>> v3.18
 	unsigned char *ao_scan_order;
 	int intr_cpuid;
 	short intr_running;
@@ -391,7 +621,10 @@ struct pci224_private {
 	unsigned int cached_div1;
 	unsigned int cached_div2;
 	unsigned int ao_stop_count;
+<<<<<<< HEAD
 	short ao_stop_continuous;
+=======
+>>>>>>> v3.18
 	unsigned short ao_enab;	/* max 16 channels so 'short' will do */
 	unsigned char intsce;
 };
@@ -403,6 +636,7 @@ static void
 pci224_ao_set_data(struct comedi_device *dev, int chan, int range,
 		   unsigned int data)
 {
+<<<<<<< HEAD
 	const struct pci224_board *thisboard = comedi_board(dev);
 	struct pci224_private *devpriv = dev->private;
 	unsigned short mangled;
@@ -415,6 +649,18 @@ pci224_ao_set_data(struct comedi_device *dev, int chan, int range,
 	devpriv->daccon = COMBINE(devpriv->daccon, devpriv->hwrange[range],
 				  (PCI224_DACCON_POLAR_MASK |
 				   PCI224_DACCON_VREF_MASK));
+=======
+	const struct pci224_board *thisboard = dev->board_ptr;
+	struct pci224_private *devpriv = dev->private;
+	unsigned short mangled;
+
+	/* Enable the channel. */
+	outw(1 << chan, dev->iobase + PCI224_DACCEN);
+	/* Set range and reset FIFO. */
+	devpriv->daccon = COMBINE(devpriv->daccon, thisboard->ao_hwrange[range],
+				  PCI224_DACCON_POLAR_MASK |
+				  PCI224_DACCON_VREF_MASK);
+>>>>>>> v3.18
 	outw(devpriv->daccon | PCI224_DACCON_FIFORESET,
 	     dev->iobase + PCI224_DACCON);
 	/*
@@ -433,6 +679,7 @@ pci224_ao_set_data(struct comedi_device *dev, int chan, int range,
 	inw(dev->iobase + PCI224_SOFTTRIG);
 }
 
+<<<<<<< HEAD
 /*
  * 'insn_write' function for AO subdevice.
  */
@@ -488,6 +735,25 @@ pci224_cascade_ns_to_timer(int osc_base, unsigned int *d1, unsigned int *d2,
 			   unsigned int *nanosec, int round_mode)
 {
 	i8253_cascade_ns_to_timer(osc_base, d1, d2, nanosec, round_mode);
+=======
+static int pci224_ao_insn_write(struct comedi_device *dev,
+				struct comedi_subdevice *s,
+				struct comedi_insn *insn,
+				unsigned int *data)
+{
+	unsigned int chan = CR_CHAN(insn->chanspec);
+	unsigned int range = CR_RANGE(insn->chanspec);
+	unsigned int val = s->readback[chan];
+	int i;
+
+	for (i = 0; i < insn->n; i++) {
+		val = data[i];
+		pci224_ao_set_data(dev, chan, range, val);
+	}
+	s->readback[chan] = val;
+
+	return insn->n;
+>>>>>>> v3.18
 }
 
 /*
@@ -525,11 +791,18 @@ static void pci224_ao_stop(struct comedi_device *dev,
 	spin_unlock_irqrestore(&devpriv->ao_spinlock, flags);
 	/* Reconfigure DAC for insn_write usage. */
 	outw(0, dev->iobase + PCI224_DACCEN);	/* Disable channels. */
+<<<<<<< HEAD
 	devpriv->daccon = COMBINE(devpriv->daccon,
 				  PCI224_DACCON_TRIG_SW |
 				  PCI224_DACCON_FIFOINTR_EMPTY,
 				  PCI224_DACCON_TRIG_MASK |
 				  PCI224_DACCON_FIFOINTR_MASK);
+=======
+	devpriv->daccon =
+	     COMBINE(devpriv->daccon,
+		     PCI224_DACCON_TRIG_SW | PCI224_DACCON_FIFOINTR_EMPTY,
+		     PCI224_DACCON_TRIG_MASK | PCI224_DACCON_FIFOINTR_MASK);
+>>>>>>> v3.18
 	outw(devpriv->daccon | PCI224_DACCON_FIFORESET,
 	     dev->iobase + PCI224_DACCON);
 }
@@ -545,6 +818,7 @@ static void pci224_ao_start(struct comedi_device *dev,
 	unsigned long flags;
 
 	set_bit(AO_CMD_STARTED, &devpriv->state);
+<<<<<<< HEAD
 	if (!devpriv->ao_stop_continuous && devpriv->ao_stop_count == 0) {
 		/* An empty acquisition! */
 		pci224_ao_stop(dev, s);
@@ -561,6 +835,18 @@ static void pci224_ao_start(struct comedi_device *dev,
 		outb(devpriv->intsce, devpriv->iobase1 + PCI224_INT_SCE);
 		spin_unlock_irqrestore(&devpriv->ao_spinlock, flags);
 	}
+=======
+
+	/* Enable interrupts. */
+	spin_lock_irqsave(&devpriv->ao_spinlock, flags);
+	if (cmd->stop_src == TRIG_EXT)
+		devpriv->intsce = PCI224_INTR_EXT | PCI224_INTR_DAC;
+	else
+		devpriv->intsce = PCI224_INTR_DAC;
+
+	outb(devpriv->intsce, devpriv->iobase1 + PCI224_INT_SCE);
+	spin_unlock_irqrestore(&devpriv->ao_spinlock, flags);
+>>>>>>> v3.18
 }
 
 /*
@@ -571,10 +857,15 @@ static void pci224_ao_handle_fifo(struct comedi_device *dev,
 {
 	struct pci224_private *devpriv = dev->private;
 	struct comedi_cmd *cmd = &s->async->cmd;
+<<<<<<< HEAD
+=======
+	unsigned int bytes_per_scan = cfc_bytes_per_scan(s);
+>>>>>>> v3.18
 	unsigned int num_scans;
 	unsigned int room;
 	unsigned short dacstat;
 	unsigned int i, n;
+<<<<<<< HEAD
 	unsigned int bytes_per_scan;
 
 	if (cmd->chanlist_len) {
@@ -590,6 +881,15 @@ static void pci224_ao_handle_fifo(struct comedi_device *dev,
 		if (num_scans > devpriv->ao_stop_count)
 			num_scans = devpriv->ao_stop_count;
 
+=======
+
+	/* Determine number of scans available in buffer. */
+	num_scans = comedi_buf_read_n_available(s) / bytes_per_scan;
+	if (cmd->stop_src == TRIG_COUNT) {
+		/* Fixed number of scans. */
+		if (num_scans > devpriv->ao_stop_count)
+			num_scans = devpriv->ao_stop_count;
+>>>>>>> v3.18
 	}
 
 	/* Determine how much room is in the FIFO (in samples). */
@@ -597,11 +897,19 @@ static void pci224_ao_handle_fifo(struct comedi_device *dev,
 	switch (dacstat & PCI224_DACCON_FIFOFL_MASK) {
 	case PCI224_DACCON_FIFOFL_EMPTY:
 		room = PCI224_FIFO_ROOM_EMPTY;
+<<<<<<< HEAD
 		if (!devpriv->ao_stop_continuous && devpriv->ao_stop_count == 0) {
 			/* FIFO empty at end of counted acquisition. */
 			pci224_ao_stop(dev, s);
 			s->async->events |= COMEDI_CB_EOA;
 			comedi_event(dev, s);
+=======
+		if (cmd->stop_src == TRIG_COUNT &&
+		    devpriv->ao_stop_count == 0) {
+			/* FIFO empty at end of counted acquisition. */
+			s->async->events |= COMEDI_CB_EOA;
+			cfc_handle_events(dev, s);
+>>>>>>> v3.18
 			return;
 		}
 		break;
@@ -619,6 +927,7 @@ static void pci224_ao_handle_fifo(struct comedi_device *dev,
 		/* FIFO is less than half-full. */
 		if (num_scans == 0) {
 			/* Nothing left to put in the FIFO. */
+<<<<<<< HEAD
 			pci224_ao_stop(dev, s);
 			s->async->events |= COMEDI_CB_OVERFLOW;
 			dev_err(dev->class_dev, "AO buffer underrun\n");
@@ -627,6 +936,14 @@ static void pci224_ao_handle_fifo(struct comedi_device *dev,
 	/* Determine how many new scans can be put in the FIFO. */
 	if (cmd->chanlist_len)
 		room /= cmd->chanlist_len;
+=======
+			dev_err(dev->class_dev, "AO buffer underrun\n");
+			s->async->events |= COMEDI_CB_OVERFLOW;
+		}
+	}
+	/* Determine how many new scans can be put in the FIFO. */
+	room /= cmd->chanlist_len;
+>>>>>>> v3.18
 
 	/* Determine how many scans to process. */
 	if (num_scans > room)
@@ -641,7 +958,11 @@ static void pci224_ao_handle_fifo(struct comedi_device *dev,
 			     dev->iobase + PCI224_DACDATA);
 		}
 	}
+<<<<<<< HEAD
 	if (!devpriv->ao_stop_continuous) {
+=======
+	if (cmd->stop_src == TRIG_COUNT) {
+>>>>>>> v3.18
 		devpriv->ao_stop_count -= num_scans;
 		if (devpriv->ao_stop_count == 0) {
 			/*
@@ -678,6 +999,7 @@ static void pci224_ao_handle_fifo(struct comedi_device *dev,
 				trig = PCI224_DACCON_TRIG_EXTN;
 			else
 				trig = PCI224_DACCON_TRIG_EXTP;
+<<<<<<< HEAD
 
 		}
 		devpriv->daccon = COMBINE(devpriv->daccon, trig,
@@ -697,6 +1019,24 @@ pci224_ao_inttrig_start(struct comedi_device *dev, struct comedi_subdevice *s,
 			unsigned int trignum)
 {
 	if (trignum != 0)
+=======
+		}
+		devpriv->daccon =
+		    COMBINE(devpriv->daccon, trig, PCI224_DACCON_TRIG_MASK);
+		outw(devpriv->daccon, dev->iobase + PCI224_DACCON);
+	}
+
+	cfc_handle_events(dev, s);
+}
+
+static int pci224_ao_inttrig_start(struct comedi_device *dev,
+				   struct comedi_subdevice *s,
+				   unsigned int trig_num)
+{
+	struct comedi_cmd *cmd = &s->async->cmd;
+
+	if (trig_num != cmd->start_arg)
+>>>>>>> v3.18
 		return -EINVAL;
 
 	s->async->inttrig = NULL;
@@ -705,6 +1045,42 @@ pci224_ao_inttrig_start(struct comedi_device *dev, struct comedi_subdevice *s,
 	return 1;
 }
 
+<<<<<<< HEAD
+=======
+static int pci224_ao_check_chanlist(struct comedi_device *dev,
+				    struct comedi_subdevice *s,
+				    struct comedi_cmd *cmd)
+{
+	const struct pci224_board *thisboard = dev->board_ptr;
+	unsigned int range_check_0;
+	unsigned int chan_mask = 0;
+	int i;
+
+	range_check_0 = thisboard->ao_range_check[CR_RANGE(cmd->chanlist[0])];
+	for (i = 0; i < cmd->chanlist_len; i++) {
+		unsigned int chan = CR_CHAN(cmd->chanlist[i]);
+
+		if (chan_mask & (1 << chan)) {
+			dev_dbg(dev->class_dev,
+				"%s: entries in chanlist must contain no duplicate channels\n",
+				__func__);
+			return -EINVAL;
+		}
+		chan_mask |= 1 << chan;
+
+		if (thisboard->ao_range_check[CR_RANGE(cmd->chanlist[i])] !=
+		    range_check_0) {
+			dev_dbg(dev->class_dev,
+				"%s: entries in chanlist have incompatible ranges\n",
+				__func__);
+			return -EINVAL;
+		}
+	}
+
+	return 0;
+}
+
+>>>>>>> v3.18
 #define MAX_SCAN_PERIOD		0xFFFFFFFFU
 #define MIN_SCAN_PERIOD		2500
 #define CONVERT_PERIOD		625
@@ -718,17 +1094,29 @@ pci224_ao_cmdtest(struct comedi_device *dev, struct comedi_subdevice *s,
 {
 	struct pci224_private *devpriv = dev->private;
 	int err = 0;
+<<<<<<< HEAD
 	unsigned int tmp;
+=======
+	unsigned int arg;
+>>>>>>> v3.18
 
 	/* Step 1 : check if triggers are trivially valid */
 
 	err |= cfc_check_trigger_src(&cmd->start_src, TRIG_INT | TRIG_EXT);
 	err |= cfc_check_trigger_src(&cmd->scan_begin_src,
+<<<<<<< HEAD
 					TRIG_EXT | TRIG_TIMER);
 	err |= cfc_check_trigger_src(&cmd->convert_src, TRIG_NOW);
 	err |= cfc_check_trigger_src(&cmd->scan_end_src, TRIG_COUNT);
 	err |= cfc_check_trigger_src(&cmd->stop_src,
 					TRIG_COUNT | TRIG_EXT | TRIG_NONE);
+=======
+				     TRIG_EXT | TRIG_TIMER);
+	err |= cfc_check_trigger_src(&cmd->convert_src, TRIG_NOW);
+	err |= cfc_check_trigger_src(&cmd->scan_end_src, TRIG_COUNT);
+	err |= cfc_check_trigger_src(&cmd->stop_src,
+				     TRIG_COUNT | TRIG_EXT | TRIG_NONE);
+>>>>>>> v3.18
 
 	if (err)
 		return 1;
@@ -745,6 +1133,7 @@ pci224_ao_cmdtest(struct comedi_device *dev, struct comedi_subdevice *s,
 	 * There's only one external trigger signal (which makes these
 	 * tests easier).  Only one thing can use it.
 	 */
+<<<<<<< HEAD
 	tmp = 0;
 	if (cmd->start_src & TRIG_EXT)
 		tmp++;
@@ -753,6 +1142,16 @@ pci224_ao_cmdtest(struct comedi_device *dev, struct comedi_subdevice *s,
 	if (cmd->stop_src & TRIG_EXT)
 		tmp++;
 	if (tmp > 1)
+=======
+	arg = 0;
+	if (cmd->start_src & TRIG_EXT)
+		arg++;
+	if (cmd->scan_begin_src & TRIG_EXT)
+		arg++;
+	if (cmd->stop_src & TRIG_EXT)
+		arg++;
+	if (arg > 1)
+>>>>>>> v3.18
 		err |= -EINVAL;
 
 	if (err)
@@ -766,6 +1165,7 @@ pci224_ao_cmdtest(struct comedi_device *dev, struct comedi_subdevice *s,
 		break;
 	case TRIG_EXT:
 		/* Force to external trigger 0. */
+<<<<<<< HEAD
 		if ((cmd->start_arg & ~CR_FLAGS_MASK) != 0) {
 			cmd->start_arg = COMBINE(cmd->start_arg, 0,
 						 ~CR_FLAGS_MASK);
@@ -773,6 +1173,15 @@ pci224_ao_cmdtest(struct comedi_device *dev, struct comedi_subdevice *s,
 		}
 		/* The only flag allowed is CR_EDGE, which is ignored. */
 		if ((cmd->start_arg & CR_FLAGS_MASK & ~CR_EDGE) != 0) {
+=======
+		if (cmd->start_arg & ~CR_FLAGS_MASK) {
+			cmd->start_arg =
+			    COMBINE(cmd->start_arg, 0, ~CR_FLAGS_MASK);
+			err |= -EINVAL;
+		}
+		/* The only flag allowed is CR_EDGE, which is ignored. */
+		if (cmd->start_arg & CR_FLAGS_MASK & ~CR_EDGE) {
+>>>>>>> v3.18
 			cmd->start_arg = COMBINE(cmd->start_arg, 0,
 						 CR_FLAGS_MASK & ~CR_EDGE);
 			err |= -EINVAL;
@@ -785,6 +1194,7 @@ pci224_ao_cmdtest(struct comedi_device *dev, struct comedi_subdevice *s,
 		err |= cfc_check_trigger_arg_max(&cmd->scan_begin_arg,
 						 MAX_SCAN_PERIOD);
 
+<<<<<<< HEAD
 		tmp = cmd->chanlist_len * CONVERT_PERIOD;
 		if (tmp < MIN_SCAN_PERIOD)
 			tmp = MIN_SCAN_PERIOD;
@@ -803,6 +1213,26 @@ pci224_ao_cmdtest(struct comedi_device *dev, struct comedi_subdevice *s,
 			cmd->scan_begin_arg = COMBINE(cmd->scan_begin_arg, 0,
 						      CR_FLAGS_MASK &
 						      ~(CR_EDGE | CR_INVERT));
+=======
+		arg = cmd->chanlist_len * CONVERT_PERIOD;
+		if (arg < MIN_SCAN_PERIOD)
+			arg = MIN_SCAN_PERIOD;
+		err |= cfc_check_trigger_arg_min(&cmd->scan_begin_arg, arg);
+		break;
+	case TRIG_EXT:
+		/* Force to external trigger 0. */
+		if (cmd->scan_begin_arg & ~CR_FLAGS_MASK) {
+			cmd->scan_begin_arg =
+			    COMBINE(cmd->scan_begin_arg, 0, ~CR_FLAGS_MASK);
+			err |= -EINVAL;
+		}
+		/* Only allow flags CR_EDGE and CR_INVERT.  Ignore CR_EDGE. */
+		if (cmd->scan_begin_arg & CR_FLAGS_MASK &
+		    ~(CR_EDGE | CR_INVERT)) {
+			cmd->scan_begin_arg =
+			    COMBINE(cmd->scan_begin_arg, 0,
+				    CR_FLAGS_MASK & ~(CR_EDGE | CR_INVERT));
+>>>>>>> v3.18
 			err |= -EINVAL;
 		}
 		break;
@@ -813,6 +1243,7 @@ pci224_ao_cmdtest(struct comedi_device *dev, struct comedi_subdevice *s,
 
 	switch (cmd->stop_src) {
 	case TRIG_COUNT:
+<<<<<<< HEAD
 		/* Any count allowed. */
 		break;
 	case TRIG_EXT:
@@ -826,6 +1257,21 @@ pci224_ao_cmdtest(struct comedi_device *dev, struct comedi_subdevice *s,
 		if ((cmd->stop_arg & CR_FLAGS_MASK & ~CR_EDGE) != 0) {
 			cmd->stop_arg = COMBINE(cmd->stop_arg, 0,
 						CR_FLAGS_MASK & ~CR_EDGE);
+=======
+		err |= cfc_check_trigger_arg_min(&cmd->stop_arg, 1);
+		break;
+	case TRIG_EXT:
+		/* Force to external trigger 0. */
+		if (cmd->stop_arg & ~CR_FLAGS_MASK) {
+			cmd->stop_arg =
+			    COMBINE(cmd->stop_arg, 0, ~CR_FLAGS_MASK);
+			err |= -EINVAL;
+		}
+		/* The only flag allowed is CR_EDGE, which is ignored. */
+		if (cmd->stop_arg & CR_FLAGS_MASK & ~CR_EDGE) {
+			cmd->stop_arg =
+			    COMBINE(cmd->stop_arg, 0, CR_FLAGS_MASK & ~CR_EDGE);
+>>>>>>> v3.18
 		}
 		break;
 	case TRIG_NONE:
@@ -839,6 +1285,7 @@ pci224_ao_cmdtest(struct comedi_device *dev, struct comedi_subdevice *s,
 	/* Step 4: fix up any arguments. */
 
 	if (cmd->scan_begin_src == TRIG_TIMER) {
+<<<<<<< HEAD
 		unsigned int div1, div2, round;
 		int round_mode = cmd->flags & TRIG_ROUND_MASK;
 
@@ -883,11 +1330,21 @@ pci224_ao_cmdtest(struct comedi_device *dev, struct comedi_subdevice *s,
 		if (tmp != cmd->scan_begin_arg)
 			err++;
 
+=======
+		arg = cmd->scan_begin_arg;
+		/* Use two timers. */
+		i8253_cascade_ns_to_timer(I8254_OSC_BASE_10MHZ,
+					  &devpriv->cached_div1,
+					  &devpriv->cached_div2,
+					  &arg, cmd->flags);
+		err |= cfc_check_trigger_arg_is(&cmd->scan_begin_arg, arg);
+>>>>>>> v3.18
 	}
 
 	if (err)
 		return 4;
 
+<<<<<<< HEAD
 	/* Step 5: check channel list. */
 
 	if (cmd->chanlist && (cmd->chanlist_len > 0)) {
@@ -932,6 +1389,11 @@ pci224_ao_cmdtest(struct comedi_device *dev, struct comedi_subdevice *s,
 			err++;
 		}
 	}
+=======
+	/* Step 5: check channel list if it exists */
+	if (cmd->chanlist && cmd->chanlist_len > 0)
+		err |= pci224_ao_check_chanlist(dev, s, cmd);
+>>>>>>> v3.18
 
 	if (err)
 		return 5;
@@ -939,11 +1401,44 @@ pci224_ao_cmdtest(struct comedi_device *dev, struct comedi_subdevice *s,
 	return 0;
 }
 
+<<<<<<< HEAD
 /*
  * 'do_cmd' function for AO subdevice.
  */
 static int pci224_ao_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 {
+=======
+static void pci224_ao_start_pacer(struct comedi_device *dev,
+				  struct comedi_subdevice *s)
+{
+	struct pci224_private *devpriv = dev->private;
+	unsigned long timer_base = devpriv->iobase1 + PCI224_Z2_CT0;
+
+	/*
+	 * The output of timer Z2-0 will be used as the scan trigger
+	 * source.
+	 */
+	/* Make sure Z2-0 is gated on.  */
+	outb(GAT_CONFIG(0, GAT_VCC), devpriv->iobase1 + PCI224_ZGAT_SCE);
+	/* Cascading with Z2-2. */
+	/* Make sure Z2-2 is gated on.  */
+	outb(GAT_CONFIG(2, GAT_VCC), devpriv->iobase1 + PCI224_ZGAT_SCE);
+	/* Z2-2 needs 10 MHz clock. */
+	outb(CLK_CONFIG(2, CLK_10MHZ), devpriv->iobase1 + PCI224_ZCLK_SCE);
+	/* Load Z2-2 mode (2) and counter (div1). */
+	i8254_set_mode(timer_base, 0, 2, I8254_MODE2 | I8254_BINARY);
+	i8254_write(timer_base, 0, 2, devpriv->cached_div1);
+	/* Z2-0 is clocked from Z2-2's output. */
+	outb(CLK_CONFIG(0, CLK_OUTNM1), devpriv->iobase1 + PCI224_ZCLK_SCE);
+	/* Load Z2-0 mode (2) and counter (div2). */
+	i8254_set_mode(timer_base, 0, 0, I8254_MODE2 | I8254_BINARY);
+	i8254_write(timer_base, 0, 0, devpriv->cached_div2);
+}
+
+static int pci224_ao_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
+{
+	const struct pci224_board *thisboard = dev->board_ptr;
+>>>>>>> v3.18
 	struct pci224_private *devpriv = dev->private;
 	struct comedi_cmd *cmd = &s->async->cmd;
 	int range;
@@ -967,7 +1462,10 @@ static int pci224_ao_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 		for (j = 0; j < cmd->chanlist_len; j++) {
 			if (CR_CHAN(cmd->chanlist[j]) < ch)
 				rank++;
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 		}
 		devpriv->ao_scan_order[rank] = i;
 	}
@@ -986,6 +1484,7 @@ static int pci224_ao_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 	 *
 	 * N.B. DAC FIFO interrupts are currently disabled.
 	 */
+<<<<<<< HEAD
 	devpriv->daccon = COMBINE(devpriv->daccon,
 				  (devpriv->
 				   hwrange[range] | PCI224_DACCON_TRIG_NONE |
@@ -1062,10 +1561,24 @@ static int pci224_ao_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 		/* Load Z2-0 mode (2) and counter (div2). */
 		i8254_load(devpriv->iobase1 + PCI224_Z2_CT0, 0, 0, div2, 2);
 	}
+=======
+	devpriv->daccon =
+	    COMBINE(devpriv->daccon,
+		    thisboard->ao_hwrange[range] | PCI224_DACCON_TRIG_NONE |
+		    PCI224_DACCON_FIFOINTR_NHALF,
+		    PCI224_DACCON_POLAR_MASK | PCI224_DACCON_VREF_MASK |
+		    PCI224_DACCON_TRIG_MASK | PCI224_DACCON_FIFOINTR_MASK);
+	outw(devpriv->daccon | PCI224_DACCON_FIFORESET,
+	     dev->iobase + PCI224_DACCON);
+
+	if (cmd->scan_begin_src == TRIG_TIMER)
+		pci224_ao_start_pacer(dev, s);
+>>>>>>> v3.18
 
 	/*
 	 * Sort out end of acquisition.
 	 */
+<<<<<<< HEAD
 	switch (cmd->stop_src) {
 	case TRIG_COUNT:
 		/* Fixed number of scans.  */
@@ -1096,6 +1609,22 @@ static int pci224_ao_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 		spin_unlock_irqrestore(&devpriv->ao_spinlock, flags);
 		break;
 	}
+=======
+	if (cmd->stop_src == TRIG_COUNT)
+		devpriv->ao_stop_count = cmd->stop_arg;
+	else	/* TRIG_EXT | TRIG_NONE */
+		devpriv->ao_stop_count = 0;
+
+	spin_lock_irqsave(&devpriv->ao_spinlock, flags);
+	if (cmd->start_src == TRIG_INT) {
+		s->async->inttrig = pci224_ao_inttrig_start;
+	} else {	/* TRIG_EXT */
+		/* Enable external interrupt trigger to start acquisition. */
+		devpriv->intsce |= PCI224_INTR_EXT;
+		outb(devpriv->intsce, devpriv->iobase1 + PCI224_INT_SCE);
+	}
+	spin_unlock_irqrestore(&devpriv->ao_spinlock, flags);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -1117,10 +1646,16 @@ static void
 pci224_ao_munge(struct comedi_device *dev, struct comedi_subdevice *s,
 		void *data, unsigned int num_bytes, unsigned int chan_index)
 {
+<<<<<<< HEAD
 	const struct pci224_board *thisboard = comedi_board(dev);
 	struct pci224_private *devpriv = dev->private;
 	struct comedi_async *async = s->async;
 	short *array = data;
+=======
+	const struct pci224_board *thisboard = dev->board_ptr;
+	struct comedi_cmd *cmd = &s->async->cmd;
+	unsigned short *array = data;
+>>>>>>> v3.18
 	unsigned int length = num_bytes / sizeof(*array);
 	unsigned int offset;
 	unsigned int shift;
@@ -1129,7 +1664,11 @@ pci224_ao_munge(struct comedi_device *dev, struct comedi_subdevice *s,
 	/* The hardware expects 16-bit numbers. */
 	shift = 16 - thisboard->ao_bits;
 	/* Channels will be all bipolar or all unipolar. */
+<<<<<<< HEAD
 	if ((devpriv->hwrange[CR_RANGE(async->cmd.chanlist[0])] &
+=======
+	if ((thisboard->ao_hwrange[CR_RANGE(cmd->chanlist[0])] &
+>>>>>>> v3.18
 	     PCI224_DACCON_POLAR_MASK) == PCI224_DACCON_POLAR_UNI) {
 		/* Unipolar */
 		offset = 0;
@@ -1140,7 +1679,10 @@ pci224_ao_munge(struct comedi_device *dev, struct comedi_subdevice *s,
 	/* Munge the data. */
 	for (i = 0; i < length; i++)
 		array[i] = (array[i] << shift) - offset;
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 }
 
 /*
@@ -1150,7 +1692,11 @@ static irqreturn_t pci224_interrupt(int irq, void *d)
 {
 	struct comedi_device *dev = d;
 	struct pci224_private *devpriv = dev->private;
+<<<<<<< HEAD
 	struct comedi_subdevice *s = &dev->subdevices[0];
+=======
+	struct comedi_subdevice *s = dev->write_subdev;
+>>>>>>> v3.18
 	struct comedi_cmd *cmd;
 	unsigned char intstat, valid_intstat;
 	unsigned char curenab;
@@ -1168,7 +1714,11 @@ static irqreturn_t pci224_interrupt(int irq, void *d)
 		devpriv->intr_running = 1;
 		devpriv->intr_cpuid = THISCPU;
 		spin_unlock_irqrestore(&devpriv->ao_spinlock, flags);
+<<<<<<< HEAD
 		if (valid_intstat != 0) {
+=======
+		if (valid_intstat) {
+>>>>>>> v3.18
 			cmd = &s->async->cmd;
 			if (valid_intstat & PCI224_INTR_EXT) {
 				devpriv->intsce &= ~PCI224_INTR_EXT;
@@ -1176,11 +1726,17 @@ static irqreturn_t pci224_interrupt(int irq, void *d)
 					pci224_ao_start(dev, s);
 				else if (cmd->stop_src == TRIG_EXT)
 					pci224_ao_stop(dev, s);
+<<<<<<< HEAD
 
 			}
 			if (valid_intstat & PCI224_INTR_DAC)
 				pci224_ao_handle_fifo(dev, s);
 
+=======
+			}
+			if (valid_intstat & PCI224_INTR_DAC)
+				pci224_ao_handle_fifo(dev, s);
+>>>>>>> v3.18
 		}
 		/* Reenable interrupt sources. */
 		spin_lock_irqsave(&devpriv->ao_spinlock, flags);
@@ -1194,6 +1750,7 @@ static irqreturn_t pci224_interrupt(int irq, void *d)
 	return IRQ_RETVAL(retval);
 }
 
+<<<<<<< HEAD
 /*
  * This function looks for a board matching the supplied PCI device.
  */
@@ -1279,6 +1836,34 @@ static int pci224_attach_common(struct comedi_device *dev,
 	int ret;
 
 	comedi_set_hw_dev(dev, &pci_dev->dev);
+=======
+static int
+pci224_auto_attach(struct comedi_device *dev, unsigned long context_model)
+{
+	struct pci_dev *pci_dev = comedi_to_pci_dev(dev);
+	const struct pci224_board *thisboard = NULL;
+	struct pci224_private *devpriv;
+	struct comedi_subdevice *s;
+	unsigned int irq;
+	int ret;
+
+	if (context_model < ARRAY_SIZE(pci224_boards))
+		thisboard = &pci224_boards[context_model];
+	if (!thisboard || !thisboard->name) {
+		dev_err(dev->class_dev,
+			"amplc_pci224: BUG! cannot determine board type!\n");
+		return -EINVAL;
+	}
+	dev->board_ptr = thisboard;
+	dev->board_name = thisboard->name;
+
+	dev_info(dev->class_dev, "amplc_pci224: attach pci %s - %s\n",
+		 pci_name(pci_dev), dev->board_name);
+
+	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
+	if (!devpriv)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	ret = comedi_pci_enable(dev);
 	if (ret)
@@ -1290,6 +1875,7 @@ static int pci224_attach_common(struct comedi_device *dev,
 	dev->iobase = pci_resource_start(pci_dev, 3);
 	irq = pci_dev->irq;
 
+<<<<<<< HEAD
 	/* Allocate readback buffer for AO channels. */
 	devpriv->ao_readback = kmalloc(sizeof(devpriv->ao_readback[0]) *
 				       thisboard->ao_chans, GFP_KERNEL);
@@ -1297,6 +1883,8 @@ static int pci224_attach_common(struct comedi_device *dev,
 		return -ENOMEM;
 
 
+=======
+>>>>>>> v3.18
 	/* Allocate buffer to hold values for AO channel scan. */
 	devpriv->ao_scan_vals = kmalloc(sizeof(devpriv->ao_scan_vals[0]) *
 					thisboard->ao_chans, GFP_KERNEL);
@@ -1319,9 +1907,14 @@ static int pci224_attach_common(struct comedi_device *dev,
 	outw(PCI224_DACCON_GLOBALRESET, dev->iobase + PCI224_DACCON);
 	outw(0, dev->iobase + PCI224_DACCEN);
 	outw(0, dev->iobase + PCI224_FIFOSIZ);
+<<<<<<< HEAD
 	devpriv->daccon = (PCI224_DACCON_TRIG_SW | PCI224_DACCON_POLAR_BI |
 			   PCI224_DACCON_FIFOENAB |
 			   PCI224_DACCON_FIFOINTR_EMPTY);
+=======
+	devpriv->daccon = PCI224_DACCON_TRIG_SW | PCI224_DACCON_POLAR_BI |
+			  PCI224_DACCON_FIFOENAB | PCI224_DACCON_FIFOINTR_EMPTY;
+>>>>>>> v3.18
 	outw(devpriv->daccon | PCI224_DACCON_FIFORESET,
 	     dev->iobase + PCI224_DACCON);
 
@@ -1335,6 +1928,7 @@ static int pci224_attach_common(struct comedi_device *dev,
 	s->subdev_flags = SDF_WRITABLE | SDF_GROUND | SDF_CMD_WRITE;
 	s->n_chan = thisboard->ao_chans;
 	s->maxdata = (1 << thisboard->ao_bits) - 1;
+<<<<<<< HEAD
 	s->insn_write = &pci224_ao_insn_write;
 	s->insn_read = &pci224_ao_insn_read;
 	s->len_chanlist = s->n_chan;
@@ -1404,10 +1998,30 @@ static int pci224_attach_common(struct comedi_device *dev,
 	if (irq) {
 		ret = request_irq(irq, pci224_interrupt, IRQF_SHARED,
 				  DRIVER_NAME, dev);
+=======
+	s->range_table = thisboard->ao_range;
+	s->insn_write = pci224_ao_insn_write;
+	s->insn_read = comedi_readback_insn_read;
+	s->len_chanlist = s->n_chan;
+	dev->write_subdev = s;
+	s->do_cmd = pci224_ao_cmd;
+	s->do_cmdtest = pci224_ao_cmdtest;
+	s->cancel = pci224_ao_cancel;
+	s->munge = pci224_ao_munge;
+
+	ret = comedi_alloc_subdev_readback(s);
+	if (ret)
+		return ret;
+
+	if (irq) {
+		ret = request_irq(irq, pci224_interrupt, IRQF_SHARED,
+				  dev->board_name, dev);
+>>>>>>> v3.18
 		if (ret < 0) {
 			dev_err(dev->class_dev,
 				"error! unable to allocate irq %u\n", irq);
 			return ret;
+<<<<<<< HEAD
 		} else {
 			dev->irq = irq;
 		}
@@ -1464,11 +2078,19 @@ pci224_auto_attach(struct comedi_device *dev, unsigned long context_unused)
 	 */
 	pci_dev_get(pci_dev);
 	return pci224_attach_common(dev, pci_dev, NULL);
+=======
+		}
+		dev->irq = irq;
+	}
+
+	return 0;
+>>>>>>> v3.18
 }
 
 static void pci224_detach(struct comedi_device *dev)
 {
 	struct pci224_private *devpriv = dev->private;
+<<<<<<< HEAD
 	struct pci_dev *pcidev = comedi_to_pci_dev(dev);
 
 	if (dev->irq)
@@ -1488,12 +2110,23 @@ static void pci224_detach(struct comedi_device *dev)
 	comedi_pci_disable(dev);
 	if (pcidev)
 		pci_dev_put(pcidev);
+=======
+
+	comedi_pci_detach(dev);
+	if (devpriv) {
+		kfree(devpriv->ao_scan_vals);
+		kfree(devpriv->ao_scan_order);
+	}
+>>>>>>> v3.18
 }
 
 static struct comedi_driver amplc_pci224_driver = {
 	.driver_name	= "amplc_pci224",
 	.module		= THIS_MODULE,
+<<<<<<< HEAD
 	.attach		= pci224_attach,
+=======
+>>>>>>> v3.18
 	.detach		= pci224_detach,
 	.auto_attach	= pci224_auto_attach,
 	.board_name	= &pci224_boards[0].name,
@@ -1508,9 +2141,15 @@ static int amplc_pci224_pci_probe(struct pci_dev *dev,
 				      id->driver_data);
 }
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(amplc_pci224_pci_table) = {
 	{ PCI_DEVICE(PCI_VENDOR_ID_AMPLICON, PCI_DEVICE_ID_AMPLICON_PCI224) },
 	{ PCI_DEVICE(PCI_VENDOR_ID_AMPLICON, PCI_DEVICE_ID_AMPLICON_PCI234) },
+=======
+static const struct pci_device_id amplc_pci224_pci_table[] = {
+	{ PCI_VDEVICE(AMPLICON, 0x0007), pci224_model },
+	{ PCI_VDEVICE(AMPLICON, 0x0008), pci234_model },
+>>>>>>> v3.18
 	{ 0 }
 };
 MODULE_DEVICE_TABLE(pci, amplc_pci224_pci_table);
@@ -1524,5 +2163,9 @@ static struct pci_driver amplc_pci224_pci_driver = {
 module_comedi_pci_driver(amplc_pci224_driver, amplc_pci224_pci_driver);
 
 MODULE_AUTHOR("Comedi http://www.comedi.org");
+<<<<<<< HEAD
 MODULE_DESCRIPTION("Comedi low-level driver");
+=======
+MODULE_DESCRIPTION("Comedi driver for Amplicon PCI224 and PCI234 AO boards");
+>>>>>>> v3.18
 MODULE_LICENSE("GPL");

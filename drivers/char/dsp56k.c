@@ -383,7 +383,11 @@ static long dsp56k_ioctl(struct file *file, unsigned int cmd,
 			return put_user(status, &hf->status);
 		}
 		case DSP56K_HOST_CMD:
+<<<<<<< HEAD
 			if (arg > 31 || arg < 0)
+=======
+			if (arg > 31)
+>>>>>>> v3.18
 				return -EINVAL;
 			mutex_lock(&dsp56k_mutex);
 			dsp56k_host_interface.cvr = (u_char)((arg & DSP56K_CVR_HV_MASK) |

@@ -24,6 +24,10 @@
 #include <linux/types.h>
 #include <crypto/sha.h>
 #include <asm/byteorder.h>
+<<<<<<< HEAD
+=======
+#include <asm/unaligned.h>
+>>>>>>> v3.18
 
 static inline u32 Ch(u32 x, u32 y, u32 z)
 {
@@ -42,7 +46,11 @@ static inline u32 Maj(u32 x, u32 y, u32 z)
 
 static inline void LOAD_OP(int I, u32 *W, const u8 *input)
 {
+<<<<<<< HEAD
 	W[I] = __be32_to_cpu( ((__be32*)(input))[I] );
+=======
+	W[I] = get_unaligned_be32((__u32 *)input + I);
+>>>>>>> v3.18
 }
 
 static inline void BLEND_OP(int I, u32 *W)
@@ -210,10 +218,16 @@ static void sha256_transform(u32 *state, const u8 *input)
 
 	/* clear any sensitive info... */
 	a = b = c = d = e = f = g = h = t1 = t2 = 0;
+<<<<<<< HEAD
 	memset(W, 0, 64 * sizeof(u32));
 }
 
 
+=======
+	memzero_explicit(W, 64 * sizeof(u32));
+}
+
+>>>>>>> v3.18
 static int sha224_init(struct shash_desc *desc)
 {
 	struct sha256_state *sctx = shash_desc_ctx(desc);
@@ -316,7 +330,11 @@ static int sha224_final(struct shash_desc *desc, u8 *hash)
 	sha256_final(desc, D);
 
 	memcpy(hash, D, SHA224_DIGEST_SIZE);
+<<<<<<< HEAD
 	memset(D, 0, SHA256_DIGEST_SIZE);
+=======
+	memzero_explicit(D, SHA256_DIGEST_SIZE);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -384,7 +402,12 @@ module_exit(sha256_generic_mod_fini);
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("SHA-224 and SHA-256 Secure Hash Algorithm");
 
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("sha224");
 MODULE_ALIAS_CRYPTO("sha224-generic");
 MODULE_ALIAS_CRYPTO("sha256");
 MODULE_ALIAS_CRYPTO("sha256-generic");
+=======
+MODULE_ALIAS("sha224");
+MODULE_ALIAS("sha256");
+>>>>>>> v3.18

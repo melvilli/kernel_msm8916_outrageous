@@ -18,6 +18,10 @@
 #define __ASM_ASM_H
 
 #include <asm/sgidefs.h>
+<<<<<<< HEAD
+=======
+#include <asm/asm-eva.h>
+>>>>>>> v3.18
 
 #ifndef CAT
 #ifdef __STDC__
@@ -145,6 +149,7 @@ symbol		=	value
 
 #define PREF(hint,addr)					\
 		.set	push;				\
+<<<<<<< HEAD
 		.set	mips4;				\
 		pref	hint, addr;			\
 		.set	pop
@@ -152,12 +157,32 @@ symbol		=	value
 #define PREFX(hint,addr)				\
 		.set	push;				\
 		.set	mips4;				\
+=======
+		.set	arch=r5000;			\
+		pref	hint, addr;			\
+		.set	pop
+
+#define PREFE(hint, addr)				\
+		.set	push;				\
+		.set	mips0;				\
+		.set	eva;				\
+		prefe	hint, addr;			\
+		.set	pop
+
+#define PREFX(hint,addr)				\
+		.set	push;				\
+		.set	arch=r5000;			\
+>>>>>>> v3.18
 		prefx	hint, addr;			\
 		.set	pop
 
 #else /* !CONFIG_CPU_HAS_PREFETCH */
 
 #define PREF(hint, addr)
+<<<<<<< HEAD
+=======
+#define PREFE(hint, addr)
+>>>>>>> v3.18
 #define PREFX(hint, addr)
 
 #endif /* !CONFIG_CPU_HAS_PREFETCH */

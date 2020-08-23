@@ -26,6 +26,7 @@ static inline void s3c_fb_setname(char *name)
 #endif
 }
 
+<<<<<<< HEAD
 /* Re-define device name depending on support. */
 static inline void s5p_fb_setname(int id, char *name)
 {
@@ -41,4 +42,6 @@ static inline void s5p_fb_setname(int id, char *name)
 	}
 }
 
+=======
+>>>>>>> v3.18
 #endif /* __ASM_PLAT_FB_CORE_H */

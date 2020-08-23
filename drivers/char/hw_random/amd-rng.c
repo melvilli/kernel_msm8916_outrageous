@@ -142,10 +142,17 @@ found:
 	amd_rng.priv = (unsigned long)pmbase;
 	amd_pdev = pdev;
 
+<<<<<<< HEAD
 	printk(KERN_INFO "AMD768 RNG detected\n");
 	err = hwrng_register(&amd_rng);
 	if (err) {
 		printk(KERN_ERR PFX "RNG registering failed (%d)\n",
+=======
+	pr_info("AMD768 RNG detected\n");
+	err = hwrng_register(&amd_rng);
+	if (err) {
+		pr_err(PFX "RNG registering failed (%d)\n",
+>>>>>>> v3.18
 		       err);
 		release_region(pmbase + 0xF0, 8);
 		goto out;

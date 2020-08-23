@@ -28,6 +28,10 @@ OUTPUT_ARCH(aarch64)
 
 SECTIONS
 {
+<<<<<<< HEAD
+=======
+	PROVIDE(_vdso_data = . - PAGE_SIZE);
+>>>>>>> v3.18
 	. = VDSO_LBASE + SIZEOF_HEADERS;
 
 	.hash		: { *(.hash) }			:text
@@ -57,9 +61,12 @@ SECTIONS
 	_end = .;
 	PROVIDE(end = .);
 
+<<<<<<< HEAD
 	. = ALIGN(PAGE_SIZE);
 	PROVIDE(_vdso_data = .);
 
+=======
+>>>>>>> v3.18
 	/DISCARD/	: {
 		*(.note.GNU-stack)
 		*(.data .data.* .gnu.linkonce.d.* .sdata*)

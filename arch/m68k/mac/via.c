@@ -30,7 +30,10 @@
 #include <linux/module.h>
 #include <linux/irq.h>
 
+<<<<<<< HEAD
 #include <asm/bootinfo.h>
+=======
+>>>>>>> v3.18
 #include <asm/macintosh.h>
 #include <asm/macints.h>
 #include <asm/mac_via.h>

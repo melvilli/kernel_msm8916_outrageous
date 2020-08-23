@@ -2,7 +2,11 @@
  *  sata_promise.c - Promise SATA
  *
  *  Maintained by:  Tejun Heo <tj@kernel.org>
+<<<<<<< HEAD
  *		    Mikael Pettersson <mikpe@it.uu.se>
+=======
+ *		    Mikael Pettersson
+>>>>>>> v3.18
  *  		    Please ALWAYS copy linux-ide@vger.kernel.org
  *		    on emails.
  *
@@ -35,7 +39,10 @@
 #include <linux/module.h>
 #include <linux/gfp.h>
 #include <linux/pci.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/blkdev.h>
 #include <linux/delay.h>
 #include <linux/interrupt.h>

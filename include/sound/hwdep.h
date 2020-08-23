@@ -60,7 +60,10 @@ struct snd_hwdep {
 	int iface;
 
 #ifdef CONFIG_SND_OSSEMUL
+<<<<<<< HEAD
 	char oss_dev[32];
+=======
+>>>>>>> v3.18
 	int oss_type;
 	int ossreg;
 #endif
@@ -69,6 +72,11 @@ struct snd_hwdep {
 	wait_queue_head_t open_wait;
 	void *private_data;
 	void (*private_free) (struct snd_hwdep *hwdep);
+<<<<<<< HEAD
+=======
+	struct device *dev;
+	const struct attribute_group **groups;
+>>>>>>> v3.18
 
 	struct mutex open_mutex;
 	int used;			/* reference counter */

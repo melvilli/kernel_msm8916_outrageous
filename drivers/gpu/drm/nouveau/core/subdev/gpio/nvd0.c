@@ -24,15 +24,21 @@
 
 #include "priv.h"
 
+<<<<<<< HEAD
 struct nvd0_gpio_priv {
 	struct nouveau_gpio base;
 };
 
+=======
+>>>>>>> v3.18
 void
 nvd0_gpio_reset(struct nouveau_gpio *gpio, u8 match)
 {
 	struct nouveau_bios *bios = nouveau_bios(gpio);
+<<<<<<< HEAD
 	struct nvd0_gpio_priv *priv = (void *)gpio;
+=======
+>>>>>>> v3.18
 	u8 ver, len;
 	u16 entry;
 	int ent = -1;
@@ -51,9 +57,15 @@ nvd0_gpio_reset(struct nouveau_gpio *gpio, u8 match)
 
 		gpio->set(gpio, 0, func, line, defs);
 
+<<<<<<< HEAD
 		nv_mask(priv, 0x00d610 + (line * 4), 0xff, unk0);
 		if (unk1--)
 			nv_mask(priv, 0x00d740 + (unk1 * 4), 0xff, line);
+=======
+		nv_mask(gpio, 0x00d610 + (line * 4), 0xff, unk0);
+		if (unk1--)
+			nv_mask(gpio, 0x00d740 + (unk1 * 4), 0xff, line);
+>>>>>>> v3.18
 	}
 }
 
@@ -72,6 +84,7 @@ nvd0_gpio_sense(struct nouveau_gpio *gpio, int line)
 	return !!(nv_rd32(gpio, 0x00d610 + (line * 4)) & 0x00004000);
 }
 
+<<<<<<< HEAD
 static int
 nvd0_gpio_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	       struct nouveau_oclass *oclass, void *data, u32 size,
@@ -105,3 +118,21 @@ nvd0_gpio_oclass = {
 		.fini = nv50_gpio_fini,
 	},
 };
+=======
+struct nouveau_oclass *
+nvd0_gpio_oclass = &(struct nouveau_gpio_impl) {
+	.base.handle = NV_SUBDEV(GPIO, 0xd0),
+	.base.ofuncs = &(struct nouveau_ofuncs) {
+		.ctor = _nouveau_gpio_ctor,
+		.dtor = _nouveau_gpio_dtor,
+		.init = _nouveau_gpio_init,
+		.fini = _nouveau_gpio_fini,
+	},
+	.lines = 32,
+	.intr_stat = nv94_gpio_intr_stat,
+	.intr_mask = nv94_gpio_intr_mask,
+	.drive = nvd0_gpio_drive,
+	.sense = nvd0_gpio_sense,
+	.reset = nvd0_gpio_reset,
+}.base;
+>>>>>>> v3.18

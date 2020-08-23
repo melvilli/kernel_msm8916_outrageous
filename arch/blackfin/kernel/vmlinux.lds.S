@@ -145,7 +145,11 @@ SECTIONS
 
 	.text_l1 L1_CODE_START : AT(LOADADDR(.exit.data) + SIZEOF(.exit.data))
 #else
+<<<<<<< HEAD
 	.init.data : AT(__data_lma + __data_len)
+=======
+	.init.data : AT(__data_lma + __data_len + 32)
+>>>>>>> v3.18
 	{
 		__sinitdata = .;
 		INIT_DATA

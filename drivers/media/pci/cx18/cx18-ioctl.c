@@ -39,7 +39,10 @@
 #include "cx18-cards.h"
 #include "cx18-av-core.h"
 #include <media/tveeprom.h>
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 
 u16 cx18_service2vbi(int type)
 {
@@ -157,7 +160,10 @@ static int cx18_g_fmt_vid_cap(struct file *file, void *fh,
 	pixfmt->height = cx->cxhdl.height;
 	pixfmt->colorspace = V4L2_COLORSPACE_SMPTE170M;
 	pixfmt->field = V4L2_FIELD_INTERLACED;
+<<<<<<< HEAD
 	pixfmt->priv = 0;
+=======
+>>>>>>> v3.18
 	if (id->type == CX18_ENC_STREAM_TYPE_YUV) {
 		pixfmt->pixelformat = s->pixelformat;
 		pixfmt->sizeimage = s->vb_bytes_per_frame;
@@ -362,6 +368,7 @@ static int cx18_s_fmt_sliced_vbi_cap(struct file *file, void *fh,
 	return 0;
 }
 
+<<<<<<< HEAD
 static int cx18_g_chip_ident(struct file *file, void *fh,
 				struct v4l2_dbg_chip_ident *chip)
 {
@@ -414,12 +421,15 @@ static int cx18_g_chip_ident(struct file *file, void *fh,
 	return err;
 }
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 static int cx18_g_register(struct file *file, void *fh,
 				struct v4l2_dbg_register *reg)
 {
 	struct cx18 *cx = fh2id(fh)->cx;
 
+<<<<<<< HEAD
 	if (v4l2_chip_match_host(&reg->match)) {
 		if (reg->reg >= CX18_MEM_OFFSET + CX18_MEM_SIZE)
 			return -EINVAL;
@@ -429,6 +439,14 @@ static int cx18_g_register(struct file *file, void *fh,
 	}
 	/* FIXME - errors shouldn't be ignored */
 	cx18_call_all(cx, core, g_register, reg);
+=======
+	if (reg->reg & 0x3)
+		return -EINVAL;
+	if (reg->reg >= CX18_MEM_OFFSET + CX18_MEM_SIZE)
+		return -EINVAL;
+	reg->size = 4;
+	reg->val = cx18_read_enc(cx, reg->reg);
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -437,6 +455,7 @@ static int cx18_s_register(struct file *file, void *fh,
 {
 	struct cx18 *cx = fh2id(fh)->cx;
 
+<<<<<<< HEAD
 	if (v4l2_chip_match_host(&reg->match)) {
 		if (reg->reg >= CX18_MEM_OFFSET + CX18_MEM_SIZE)
 			return -EINVAL;
@@ -445,6 +464,13 @@ static int cx18_s_register(struct file *file, void *fh,
 	}
 	/* FIXME - errors shouldn't be ignored */
 	cx18_call_all(cx, core, s_register, reg);
+=======
+	if (reg->reg & 0x3)
+		return -EINVAL;
+	if (reg->reg >= CX18_MEM_OFFSET + CX18_MEM_SIZE)
+		return -EINVAL;
+	cx18_write_enc(cx, reg->val, reg->reg);
+>>>>>>> v3.18
 	return 0;
 }
 #endif
@@ -661,7 +687,11 @@ int cx18_s_std(struct file *file, void *fh, v4l2_std_id std)
 			(unsigned long long) cx->std);
 
 	/* Tuner */
+<<<<<<< HEAD
 	cx18_call_all(cx, core, s_std, cx->std);
+=======
+	cx18_call_all(cx, video, s_std, cx->std);
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -1162,7 +1192,10 @@ static const struct v4l2_ioctl_ops cx18_ioctl_ops = {
 	.vidioc_try_fmt_vbi_cap         = cx18_try_fmt_vbi_cap,
 	.vidioc_try_fmt_sliced_vbi_cap  = cx18_try_fmt_sliced_vbi_cap,
 	.vidioc_g_sliced_vbi_cap        = cx18_g_sliced_vbi_cap,
+<<<<<<< HEAD
 	.vidioc_g_chip_ident            = cx18_g_chip_ident,
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 	.vidioc_g_register              = cx18_g_register,
 	.vidioc_s_register              = cx18_s_register,

@@ -41,7 +41,11 @@ void __init smp_prepare_boot_cpu(void)
 	int cpu = smp_processor_id();
 	set_cpu_online(cpu, 1);
 	set_cpu_present(cpu, 1);
+<<<<<<< HEAD
 	__get_cpu_var(cpu_state) = CPU_ONLINE;
+=======
+	__this_cpu_write(cpu_state, CPU_ONLINE);
+>>>>>>> v3.18
 
 	init_messaging();
 }
@@ -133,22 +137,39 @@ static __init int reset_init_affinity(void)
 }
 late_initcall(reset_init_affinity);
 
+<<<<<<< HEAD
 static struct cpumask cpu_started __cpuinitdata;
+=======
+static struct cpumask cpu_started;
+>>>>>>> v3.18
 
 /*
  * Activate a secondary processor.  Very minimal; don't add anything
  * to this path without knowing what you're doing, since SMP booting
  * is pretty fragile.
  */
+<<<<<<< HEAD
 static void __cpuinit start_secondary(void)
 {
 	int cpuid = smp_processor_id();
+=======
+static void start_secondary(void)
+{
+	int cpuid;
+
+	preempt_disable();
+
+	cpuid = smp_processor_id();
+>>>>>>> v3.18
 
 	/* Set our thread pointer appropriately. */
 	set_my_cpu_offset(__per_cpu_offset[cpuid]);
 
+<<<<<<< HEAD
 	preempt_disable();
 
+=======
+>>>>>>> v3.18
 	/*
 	 * In large machines even this will slow us down, since we
 	 * will be contending for for the printk spinlock.
@@ -156,7 +177,11 @@ static void __cpuinit start_secondary(void)
 	/* printk(KERN_DEBUG "Initializing CPU#%d\n", cpuid); */
 
 	/* Initialize the current asid for our first page table. */
+<<<<<<< HEAD
 	__get_cpu_var(current_asid) = min_asid;
+=======
+	__this_cpu_write(current_asid, min_asid);
+>>>>>>> v3.18
 
 	/* Set up this thread as another owner of the init_mm */
 	atomic_inc(&init_mm.mm_count);
@@ -183,7 +208,11 @@ static void __cpuinit start_secondary(void)
 /*
  * Bring a secondary processor online.
  */
+<<<<<<< HEAD
 void __cpuinit online_secondary(void)
+=======
+void online_secondary(void)
+>>>>>>> v3.18
 {
 	/*
 	 * low-memory mappings have been cleared, flush them from
@@ -199,7 +228,11 @@ void __cpuinit online_secondary(void)
 	notify_cpu_starting(smp_processor_id());
 
 	set_cpu_online(smp_processor_id(), 1);
+<<<<<<< HEAD
 	__get_cpu_var(cpu_state) = CPU_ONLINE;
+=======
+	__this_cpu_write(cpu_state, CPU_ONLINE);
+>>>>>>> v3.18
 
 	/* Set up tile-specific state for this cpu. */
 	setup_cpu(0);
@@ -210,7 +243,11 @@ void __cpuinit online_secondary(void)
 	cpu_startup_entry(CPUHP_ONLINE);
 }
 
+<<<<<<< HEAD
 int __cpuinit __cpu_up(unsigned int cpu, struct task_struct *tidle)
+=======
+int __cpu_up(unsigned int cpu, struct task_struct *tidle)
+>>>>>>> v3.18
 {
 	/* Wait 5s total for all CPUs for them to come online */
 	static int timeout;

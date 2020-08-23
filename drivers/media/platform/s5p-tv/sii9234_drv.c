@@ -249,7 +249,13 @@ static int sii9234_runtime_resume(struct device *dev)
 	int ret;
 
 	dev_info(dev, "resume start\n");
+<<<<<<< HEAD
 	regulator_enable(ctx->power);
+=======
+	ret = regulator_enable(ctx->power);
+	if (ret < 0)
+		return ret;
+>>>>>>> v3.18
 
 	ret = sii9234_reset(ctx);
 	if (ret)
@@ -287,7 +293,11 @@ static int sii9234_s_power(struct v4l2_subdev *sd, int on)
 	else
 		ret = pm_runtime_put(&ctx->client->dev);
 	/* only values < 0 indicate errors */
+<<<<<<< HEAD
 	return IS_ERR_VALUE(ret) ? ret : 0;
+=======
+	return ret < 0 ? ret : 0;
+>>>>>>> v3.18
 }
 
 static int sii9234_s_stream(struct v4l2_subdev *sd, int enable)

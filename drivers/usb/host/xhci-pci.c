@@ -25,6 +25,10 @@
 #include <linux/module.h>
 
 #include "xhci.h"
+<<<<<<< HEAD
+=======
+#include "xhci-trace.h"
+>>>>>>> v3.18
 
 /* Device for a quirk */
 #define PCI_VENDOR_ID_FRESCO_LOGIC	0x1b73
@@ -32,10 +36,22 @@
 #define PCI_DEVICE_ID_FRESCO_LOGIC_FL1400	0x1400
 
 #define PCI_VENDOR_ID_ETRON		0x1b6f
+<<<<<<< HEAD
 #define PCI_DEVICE_ID_ASROCK_P67	0x7023
 
 static const char hcd_name[] = "xhci_hcd";
 
+=======
+#define PCI_DEVICE_ID_EJ168		0x7023
+
+#define PCI_DEVICE_ID_INTEL_LYNXPOINT_XHCI	0x8c31
+#define PCI_DEVICE_ID_INTEL_LYNXPOINT_LP_XHCI	0x9c31
+
+static const char hcd_name[] = "xhci_hcd";
+
+static struct hc_driver __read_mostly xhci_pci_hc_driver;
+
+>>>>>>> v3.18
 /* called after powerup, by probe or system-pm "wakeup" */
 static int xhci_pci_reinit(struct xhci_hcd *xhci, struct pci_dev *pdev)
 {
@@ -64,16 +80,36 @@ static void xhci_pci_quirks(struct device *dev, struct xhci_hcd *xhci)
 		if (pdev->device == PCI_DEVICE_ID_FRESCO_LOGIC_PDK &&
 				pdev->revision == 0x0) {
 			xhci->quirks |= XHCI_RESET_EP_QUIRK;
+<<<<<<< HEAD
 			xhci_dbg(xhci, "QUIRK: Fresco Logic xHC needs configure"
 					" endpoint cmd after reset endpoint\n");
+=======
+			xhci_dbg_trace(xhci, trace_xhci_dbg_quirks,
+				"QUIRK: Fresco Logic xHC needs configure"
+				" endpoint cmd after reset endpoint");
+		}
+		if (pdev->device == PCI_DEVICE_ID_FRESCO_LOGIC_PDK &&
+				pdev->revision == 0x4) {
+			xhci->quirks |= XHCI_SLOW_SUSPEND;
+			xhci_dbg_trace(xhci, trace_xhci_dbg_quirks,
+				"QUIRK: Fresco Logic xHC revision %u"
+				"must be suspended extra slowly",
+				pdev->revision);
+>>>>>>> v3.18
 		}
 		/* Fresco Logic confirms: all revisions of this chip do not
 		 * support MSI, even though some of them claim to in their PCI
 		 * capabilities.
 		 */
 		xhci->quirks |= XHCI_BROKEN_MSI;
+<<<<<<< HEAD
 		xhci_dbg(xhci, "QUIRK: Fresco Logic revision %u "
 				"has broken MSI implementation\n",
+=======
+		xhci_dbg_trace(xhci, trace_xhci_dbg_quirks,
+				"QUIRK: Fresco Logic revision %u "
+				"has broken MSI implementation",
+>>>>>>> v3.18
 				pdev->revision);
 		xhci->quirks |= XHCI_TRUST_TX_LENGTH;
 	}
@@ -94,7 +130,10 @@ static void xhci_pci_quirks(struct device *dev, struct xhci_hcd *xhci)
 	if (pdev->vendor == PCI_VENDOR_ID_INTEL) {
 		xhci->quirks |= XHCI_LPM_SUPPORT;
 		xhci->quirks |= XHCI_INTEL_HOST;
+<<<<<<< HEAD
 		xhci->quirks |= XHCI_AVOID_BEI;
+=======
+>>>>>>> v3.18
 	}
 	if (pdev->vendor == PCI_VENDOR_ID_INTEL &&
 			pdev->device == PCI_DEVICE_ID_INTEL_PANTHERPOINT_XHCI) {
@@ -110,18 +149,48 @@ static void xhci_pci_quirks(struct device *dev, struct xhci_hcd *xhci)
 		 * PPT chipsets.
 		 */
 		xhci->quirks |= XHCI_SPURIOUS_REBOOT;
+<<<<<<< HEAD
 	}
 	if (pdev->vendor == PCI_VENDOR_ID_ETRON &&
 			pdev->device == PCI_DEVICE_ID_ASROCK_P67) {
 		xhci->quirks |= XHCI_RESET_ON_RESUME;
 		xhci_dbg(xhci, "QUIRK: Resetting on resume\n");
 		xhci->quirks |= XHCI_TRUST_TX_LENGTH;
+=======
+		xhci->quirks |= XHCI_AVOID_BEI;
+	}
+	if (pdev->vendor == PCI_VENDOR_ID_INTEL &&
+		pdev->device == PCI_DEVICE_ID_INTEL_LYNXPOINT_LP_XHCI) {
+		xhci->quirks |= XHCI_SPURIOUS_REBOOT;
+	}
+	if (pdev->vendor == PCI_VENDOR_ID_ETRON &&
+			pdev->device == PCI_DEVICE_ID_EJ168) {
+		xhci->quirks |= XHCI_RESET_ON_RESUME;
+		xhci->quirks |= XHCI_TRUST_TX_LENGTH;
+		xhci->quirks |= XHCI_BROKEN_STREAMS;
+>>>>>>> v3.18
 	}
 	if (pdev->vendor == PCI_VENDOR_ID_RENESAS &&
 			pdev->device == 0x0015)
 		xhci->quirks |= XHCI_RESET_ON_RESUME;
 	if (pdev->vendor == PCI_VENDOR_ID_VIA)
 		xhci->quirks |= XHCI_RESET_ON_RESUME;
+<<<<<<< HEAD
+=======
+
+	/* See https://bugzilla.kernel.org/show_bug.cgi?id=79511 */
+	if (pdev->vendor == PCI_VENDOR_ID_VIA &&
+			pdev->device == 0x3432)
+		xhci->quirks |= XHCI_BROKEN_STREAMS;
+
+	if (pdev->vendor == PCI_VENDOR_ID_ASMEDIA &&
+			pdev->device == 0x1042)
+		xhci->quirks |= XHCI_BROKEN_STREAMS;
+
+	if (xhci->quirks & XHCI_RESET_ON_RESUME)
+		xhci_dbg_trace(xhci, trace_xhci_dbg_quirks,
+				"QUIRK: Resetting on resume");
+>>>>>>> v3.18
 }
 
 /* called during probe() after chip reset completes */
@@ -199,11 +268,17 @@ static int xhci_pci_probe(struct pci_dev *dev, const struct pci_device_id *id)
 		goto put_usb3_hcd;
 	/* Roothub already marked as USB 3.0 speed */
 
+<<<<<<< HEAD
 	/* We know the LPM timeout algorithms for this host, let the USB core
 	 * enable and disable LPM for devices under the USB 3.0 roothub.
 	 */
 	if (xhci->quirks & XHCI_LPM_SUPPORT)
 		hcd_to_bus(xhci->shared_hcd)->root_hub->lpm_capable = 1;
+=======
+	if (!(xhci->quirks & XHCI_BROKEN_STREAMS) &&
+			HCC_MAX_PSA(xhci->hcc_params) >= 4)
+		xhci->shared_hcd->can_do_streams = 1;
+>>>>>>> v3.18
 
 	/* USB-2 and USB-3 roothubs initialized, allow runtime pm suspend */
 	pm_runtime_put_noidle(&dev->dev);
@@ -224,12 +299,23 @@ static void xhci_pci_remove(struct pci_dev *dev)
 	struct xhci_hcd *xhci;
 
 	xhci = hcd_to_xhci(pci_get_drvdata(dev));
+<<<<<<< HEAD
 	xhci->xhc_state |= XHCI_STATE_REMOVING;
+=======
+>>>>>>> v3.18
 	if (xhci->shared_hcd) {
 		usb_remove_hcd(xhci->shared_hcd);
 		usb_put_hcd(xhci->shared_hcd);
 	}
 	usb_hcd_pci_remove(dev);
+<<<<<<< HEAD
+=======
+
+	/* Workaround for spurious wakeups at shutdown with HSW */
+	if (xhci->quirks & XHCI_SPURIOUS_WAKEUP)
+		pci_set_power_state(dev, PCI_D3hot);
+
+>>>>>>> v3.18
 	kfree(xhci);
 }
 
@@ -243,10 +329,17 @@ static int xhci_pci_suspend(struct usb_hcd *hcd, bool do_wakeup)
 	 * Systems with the TI redriver that loses port status change events
 	 * need to have the registers polled during D3, so avoid D3cold.
 	 */
+<<<<<<< HEAD
 	if (xhci_compliance_mode_recovery_timer_quirk_check())
 		pdev->no_d3cold = true;
 
 	return xhci_suspend(xhci);
+=======
+	if (xhci->quirks & XHCI_COMP_MODE_QUIRK)
+		pdev->no_d3cold = true;
+
+	return xhci_suspend(xhci, do_wakeup);
+>>>>>>> v3.18
 }
 
 static int xhci_pci_resume(struct usb_hcd *hcd, bool hibernated)
@@ -266,6 +359,7 @@ static int xhci_pci_resume(struct usb_hcd *hcd, bool hibernated)
 	 * writers.
 	 *
 	 * Unconditionally switch the ports back to xHCI after a system resume.
+<<<<<<< HEAD
 	 * We can't tell whether the EHCI or xHCI controller will be resumed
 	 * first, so we have to do the port switchover in both drivers.  Writing
 	 * a '1' to the port switchover registers should have no effect if the
@@ -273,12 +367,24 @@ static int xhci_pci_resume(struct usb_hcd *hcd, bool hibernated)
 	 */
 	if (usb_is_intel_switchable_xhci(pdev))
 		usb_enable_xhci_ports(pdev);
+=======
+	 * It should not matter whether the EHCI or xHCI controller is
+	 * resumed first. It's enough to do the switchover in xHCI because
+	 * USB core won't notice anything as the hub driver doesn't start
+	 * running again until after all the devices (including both EHCI and
+	 * xHCI host controllers) have been resumed.
+	 */
+
+	if (pdev->vendor == PCI_VENDOR_ID_INTEL)
+		usb_enable_intel_xhci_ports(pdev);
+>>>>>>> v3.18
 
 	retval = xhci_resume(xhci, hibernated);
 	return retval;
 }
 #endif /* CONFIG_PM */
 
+<<<<<<< HEAD
 static const struct hc_driver xhci_pci_hc_driver = {
 	.description =		hcd_name,
 	.product_desc =		"xHCI Host Controller",
@@ -340,6 +446,8 @@ static const struct hc_driver xhci_pci_hc_driver = {
 	.find_raw_port_number =	xhci_find_raw_port_number,
 };
 
+=======
+>>>>>>> v3.18
 /*-------------------------------------------------------------------------*/
 
 /* PCI driver selection metadata; PCI hotplugging uses this */
@@ -369,6 +477,7 @@ static struct pci_driver xhci_pci_driver = {
 #endif
 };
 
+<<<<<<< HEAD
 int __init xhci_register_pci(void)
 {
 	return pci_register_driver(&xhci_pci_driver);
@@ -378,3 +487,24 @@ void xhci_unregister_pci(void)
 {
 	pci_unregister_driver(&xhci_pci_driver);
 }
+=======
+static int __init xhci_pci_init(void)
+{
+	xhci_init_driver(&xhci_pci_hc_driver, xhci_pci_setup);
+#ifdef CONFIG_PM
+	xhci_pci_hc_driver.pci_suspend = xhci_pci_suspend;
+	xhci_pci_hc_driver.pci_resume = xhci_pci_resume;
+#endif
+	return pci_register_driver(&xhci_pci_driver);
+}
+module_init(xhci_pci_init);
+
+static void __exit xhci_pci_exit(void)
+{
+	pci_unregister_driver(&xhci_pci_driver);
+}
+module_exit(xhci_pci_exit);
+
+MODULE_DESCRIPTION("xHCI PCI Host Controller Driver");
+MODULE_LICENSE("GPL");
+>>>>>>> v3.18

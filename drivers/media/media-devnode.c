@@ -192,7 +192,10 @@ static int media_open(struct inode *inode, struct file *filp)
 static int media_release(struct inode *inode, struct file *filp)
 {
 	struct media_devnode *mdev = media_devnode_data(filp);
+<<<<<<< HEAD
 	int ret = 0;
+=======
+>>>>>>> v3.18
 
 	if (mdev->fops->release)
 		mdev->fops->release(filp);
@@ -201,7 +204,11 @@ static int media_release(struct inode *inode, struct file *filp)
 	   return value is ignored. */
 	put_device(&mdev->dev);
 	filp->private_data = NULL;
+<<<<<<< HEAD
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 }
 
 static const struct file_operations media_devnode_fops = {
@@ -232,7 +239,12 @@ static const struct file_operations media_devnode_fops = {
  * the media_devnode structure is *not* called, so the caller is responsible for
  * freeing any data.
  */
+<<<<<<< HEAD
 int __must_check media_devnode_register(struct media_devnode *mdev)
+=======
+int __must_check media_devnode_register(struct media_devnode *mdev,
+					struct module *owner)
+>>>>>>> v3.18
 {
 	int minor;
 	int ret;
@@ -253,7 +265,11 @@ int __must_check media_devnode_register(struct media_devnode *mdev)
 
 	/* Part 2: Initialize and register the character device */
 	cdev_init(&mdev->cdev, &media_devnode_fops);
+<<<<<<< HEAD
 	mdev->cdev.owner = mdev->fops->owner;
+=======
+	mdev->cdev.owner = owner;
+>>>>>>> v3.18
 
 	ret = cdev_add(&mdev->cdev, MKDEV(MAJOR(media_dev_t), mdev->minor), 1);
 	if (ret < 0) {

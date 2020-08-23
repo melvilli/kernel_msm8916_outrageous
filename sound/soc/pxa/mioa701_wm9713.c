@@ -56,8 +56,11 @@
 #include "pxa2xx-ac97.h"
 #include "../codecs/wm9713.h"
 
+<<<<<<< HEAD
 #define ARRAY_AND_SIZE(x)	(x), ARRAY_SIZE(x)
 
+=======
+>>>>>>> v3.18
 #define AC97_GPIO_PULL		0x58
 
 /* Use GPIO8 for rear speaker amplifier */
@@ -129,6 +132,7 @@ static const struct snd_soc_dapm_route audio_map[] = {
 static int mioa701_wm9713_init(struct snd_soc_pcm_runtime *rtd)
 {
 	struct snd_soc_codec *codec = rtd->codec;
+<<<<<<< HEAD
 	struct snd_soc_dapm_context *dapm = &codec->dapm;
 	unsigned short reg;
 
@@ -138,6 +142,10 @@ static int mioa701_wm9713_init(struct snd_soc_pcm_runtime *rtd)
 	/* Set up mioa701 specific audio path audio_mapnects */
 	snd_soc_dapm_add_routes(dapm, ARRAY_AND_SIZE(audio_map));
 
+=======
+	unsigned short reg;
+
+>>>>>>> v3.18
 	/* Prepare GPIO8 for rear speaker amplifier */
 	reg = codec->driver->read(codec, AC97_GPIO_CFG);
 	codec->driver->write(codec, AC97_GPIO_CFG, reg | 0x0100);
@@ -146,12 +154,15 @@ static int mioa701_wm9713_init(struct snd_soc_pcm_runtime *rtd)
 	reg = codec->driver->read(codec, AC97_3D_CONTROL);
 	codec->driver->write(codec, AC97_3D_CONTROL, reg | 0xc000);
 
+<<<<<<< HEAD
 	snd_soc_dapm_enable_pin(dapm, "Front Speaker");
 	snd_soc_dapm_enable_pin(dapm, "Rear Speaker");
 	snd_soc_dapm_enable_pin(dapm, "Front Mic");
 	snd_soc_dapm_enable_pin(dapm, "GSM Line In");
 	snd_soc_dapm_enable_pin(dapm, "GSM Line Out");
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -184,6 +195,14 @@ static struct snd_soc_card mioa701 = {
 	.owner = THIS_MODULE,
 	.dai_link = mioa701_dai,
 	.num_links = ARRAY_SIZE(mioa701_dai),
+<<<<<<< HEAD
+=======
+
+	.dapm_widgets = mioa701_dapm_widgets,
+	.num_dapm_widgets = ARRAY_SIZE(mioa701_dapm_widgets),
+	.dapm_routes = audio_map,
+	.num_dapm_routes = ARRAY_SIZE(audio_map),
+>>>>>>> v3.18
 };
 
 static int mioa701_wm9713_probe(struct platform_device *pdev)
@@ -216,6 +235,10 @@ static struct platform_driver mioa701_wm9713_driver = {
 	.driver		= {
 		.name		= "mioa701-wm9713",
 		.owner		= THIS_MODULE,
+<<<<<<< HEAD
+=======
+		.pm     = &snd_soc_pm_ops,
+>>>>>>> v3.18
 	},
 };
 

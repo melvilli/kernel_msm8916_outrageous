@@ -15,7 +15,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/i8253.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/input.h>
 #include <linux/platform_device.h>
 #include <linux/timex.h>
@@ -100,7 +103,10 @@ static int pcspkr_remove(struct platform_device *dev)
 	struct input_dev *pcspkr_dev = platform_get_drvdata(dev);
 
 	input_unregister_device(pcspkr_dev);
+<<<<<<< HEAD
 	platform_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 	/* turn off the speaker */
 	pcspkr_event(NULL, EV_SND, SND_BELL, 0);
 

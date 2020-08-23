@@ -1,5 +1,9 @@
 config USB_VIDEO_CLASS
 	tristate "USB Video Class (UVC)"
+<<<<<<< HEAD
+=======
+	depends on VIDEO_V4L2
+>>>>>>> v3.18
 	select VIDEOBUF2_VMALLOC
 	---help---
 	  Support for the USB Video Class (UVC).  Currently only video

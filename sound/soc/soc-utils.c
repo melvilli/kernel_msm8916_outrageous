@@ -59,10 +59,13 @@ int snd_soc_params_to_bclk(struct snd_pcm_hw_params *params)
 EXPORT_SYMBOL_GPL(snd_soc_params_to_bclk);
 
 static const struct snd_pcm_hardware dummy_dma_hardware = {
+<<<<<<< HEAD
 	.formats		= 0xffffffff,
 	.channels_min		= 1,
 	.channels_max		= UINT_MAX,
 
+=======
+>>>>>>> v3.18
 	/* Random values to keep userspace happy when checking constraints */
 	.info			= SNDRV_PCM_INFO_INTERLEAVED |
 				  SNDRV_PCM_INFO_BLOCK_TRANSFER,
@@ -75,7 +78,15 @@ static const struct snd_pcm_hardware dummy_dma_hardware = {
 
 static int dummy_dma_open(struct snd_pcm_substream *substream)
 {
+<<<<<<< HEAD
 	snd_soc_set_runtime_hwparams(substream, &dummy_dma_hardware);
+=======
+	struct snd_soc_pcm_runtime *rtd = substream->private_data;
+
+	/* BE's dont need dummy params */
+	if (!rtd->dai_link->no_pcm)
+		snd_soc_set_runtime_hwparams(substream, &dummy_dma_hardware);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -119,13 +130,26 @@ static struct snd_soc_dai_driver dummy_dai = {
 	 },
 };
 
+<<<<<<< HEAD
+=======
+int snd_soc_dai_is_dummy(struct snd_soc_dai *dai)
+{
+	if (dai->driver == &dummy_dai)
+		return 1;
+	return 0;
+}
+
+>>>>>>> v3.18
 static int snd_soc_dummy_probe(struct platform_device *pdev)
 {
 	int ret;
 
+<<<<<<< HEAD
 	memset(&dummy_codec, 0,
 		sizeof(struct snd_soc_codec_driver));
 
+=======
+>>>>>>> v3.18
 	ret = snd_soc_register_codec(&pdev->dev, &dummy_codec, &dummy_dai, 1);
 	if (ret < 0)
 		return ret;
@@ -162,6 +186,7 @@ int __init snd_soc_util_init(void)
 {
 	int ret;
 
+<<<<<<< HEAD
 	soc_dummy_dev = platform_device_alloc("snd-soc-dummy", -1);
 	if (!soc_dummy_dev)
 		return -ENOMEM;
@@ -171,6 +196,12 @@ int __init snd_soc_util_init(void)
 		platform_device_put(soc_dummy_dev);
 		return ret;
 	}
+=======
+	soc_dummy_dev =
+		platform_device_register_simple("snd-soc-dummy", -1, NULL, 0);
+	if (IS_ERR(soc_dummy_dev))
+		return PTR_ERR(soc_dummy_dev);
+>>>>>>> v3.18
 
 	ret = platform_driver_register(&soc_dummy_driver);
 	if (ret != 0)

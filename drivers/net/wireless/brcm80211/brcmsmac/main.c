@@ -882,8 +882,13 @@ brcms_c_dotxstatus(struct brcms_c_info *wlc, struct tx_status *txs)
 	mcl = le16_to_cpu(txh->MacTxControlLow);
 
 	if (txs->phyerr)
+<<<<<<< HEAD
 		brcms_err(wlc->hw->d11core, "phyerr 0x%x, rate 0x%x\n",
 			  txs->phyerr, txh->MainRates);
+=======
+		brcms_dbg_tx(wlc->hw->d11core, "phyerr 0x%x, rate 0x%x\n",
+			     txs->phyerr, txh->MainRates);
+>>>>>>> v3.18
 
 	if (txs->frameid != le16_to_cpu(txh->TxFrameID)) {
 		brcms_err(wlc->hw->d11core, "frameid != txh->TxFrameID\n");
@@ -1906,14 +1911,24 @@ static void brcms_c_get_macaddr(struct brcms_hardware *wlc_hw, u8 etheraddr[ETH_
 
 	/* If macaddr exists, use it (Sromrev4, CIS, ...). */
 	if (!is_zero_ether_addr(sprom->il0mac)) {
+<<<<<<< HEAD
 		memcpy(etheraddr, sprom->il0mac, 6);
+=======
+		memcpy(etheraddr, sprom->il0mac, ETH_ALEN);
+>>>>>>> v3.18
 		return;
 	}
 
 	if (wlc_hw->_nbands > 1)
+<<<<<<< HEAD
 		memcpy(etheraddr, sprom->et1mac, 6);
 	else
 		memcpy(etheraddr, sprom->il0mac, 6);
+=======
+		memcpy(etheraddr, sprom->et1mac, ETH_ALEN);
+	else
+		memcpy(etheraddr, sprom->il0mac, ETH_ALEN);
+>>>>>>> v3.18
 }
 
 /* power both the pll and external oscillator on/off */
@@ -4652,7 +4667,13 @@ static int brcms_b_attach(struct brcms_c_info *wlc, struct bcma_device *core,
 		wlc->band->phyrev = wlc_hw->band->phyrev;
 		wlc->band->radioid = wlc_hw->band->radioid;
 		wlc->band->radiorev = wlc_hw->band->radiorev;
+<<<<<<< HEAD
 
+=======
+		brcms_dbg_info(core, "wl%d: phy %u/%u radio %x/%u\n", unit,
+			       wlc->band->phytype, wlc->band->phyrev,
+			       wlc->band->radioid, wlc->band->radiorev);
+>>>>>>> v3.18
 		/* default contention windows size limits */
 		wlc_hw->band->CWmin = APHY_CWMIN;
 		wlc_hw->band->CWmax = PHY_CWMAX;
@@ -4667,7 +4688,11 @@ static int brcms_b_attach(struct brcms_c_info *wlc, struct bcma_device *core,
 	brcms_c_coredisable(wlc_hw);
 
 	/* Match driver "down" state */
+<<<<<<< HEAD
 	ai_pci_down(wlc_hw->sih);
+=======
+	bcma_core_pci_down(wlc_hw->d11core->bus);
+>>>>>>> v3.18
 
 	/* turn off pll and xtal to match driver "down" state */
 	brcms_b_xtal(wlc_hw, OFF);
@@ -4705,6 +4730,7 @@ static int brcms_b_attach(struct brcms_c_info *wlc, struct bcma_device *core,
 	return err;
 }
 
+<<<<<<< HEAD
 static void brcms_c_attach_antgain_init(struct brcms_c_info *wlc)
 {
 	uint unit;
@@ -4740,6 +4766,8 @@ static void brcms_c_attach_antgain_init(struct brcms_c_info *wlc)
 	}
 }
 
+=======
+>>>>>>> v3.18
 static bool brcms_c_attach_stf_ant_init(struct brcms_c_info *wlc)
 {
 	int aa;
@@ -4778,8 +4806,11 @@ static bool brcms_c_attach_stf_ant_init(struct brcms_c_info *wlc)
 	else
 		wlc->band->antgain = sprom->antenna_gain.a0;
 
+<<<<<<< HEAD
 	brcms_c_attach_antgain_init(wlc);
 
+=======
+>>>>>>> v3.18
 	return true;
 }
 
@@ -4868,14 +4899,21 @@ static void brcms_c_detach_module(struct brcms_c_info *wlc)
 /*
  * low level detach
  */
+<<<<<<< HEAD
 static int brcms_b_detach(struct brcms_c_info *wlc)
+=======
+static void brcms_b_detach(struct brcms_c_info *wlc)
+>>>>>>> v3.18
 {
 	uint i;
 	struct brcms_hw_band *band;
 	struct brcms_hardware *wlc_hw = wlc->hw;
+<<<<<<< HEAD
 	int callbacks;
 
 	callbacks = 0;
+=======
+>>>>>>> v3.18
 
 	brcms_b_detach_dmapio(wlc_hw);
 
@@ -4898,9 +4936,12 @@ static int brcms_b_detach(struct brcms_c_info *wlc)
 		ai_detach(wlc_hw->sih);
 		wlc_hw->sih = NULL;
 	}
+<<<<<<< HEAD
 
 	return callbacks;
 
+=======
+>>>>>>> v3.18
 }
 
 /*
@@ -4915,14 +4956,25 @@ static int brcms_b_detach(struct brcms_c_info *wlc)
  */
 uint brcms_c_detach(struct brcms_c_info *wlc)
 {
+<<<<<<< HEAD
 	uint callbacks = 0;
+=======
+	uint callbacks;
+>>>>>>> v3.18
 
 	if (wlc == NULL)
 		return 0;
 
+<<<<<<< HEAD
 	callbacks += brcms_b_detach(wlc);
 
 	/* delete software timers */
+=======
+	brcms_b_detach(wlc);
+
+	/* delete software timers */
+	callbacks = 0;
+>>>>>>> v3.18
 	if (!brcms_c_radio_monitor_stop(wlc))
 		callbacks++;
 
@@ -5010,12 +5062,20 @@ static int brcms_b_up_prep(struct brcms_hardware *wlc_hw)
 	 */
 	if (brcms_b_radio_read_hwdisabled(wlc_hw)) {
 		/* put SB PCI in down state again */
+<<<<<<< HEAD
 		ai_pci_down(wlc_hw->sih);
+=======
+		bcma_core_pci_down(wlc_hw->d11core->bus);
+>>>>>>> v3.18
 		brcms_b_xtal(wlc_hw, OFF);
 		return -ENOMEDIUM;
 	}
 
+<<<<<<< HEAD
 	ai_pci_up(wlc_hw->sih);
+=======
+	bcma_core_pci_up(wlc_hw->d11core->bus);
+>>>>>>> v3.18
 
 	/* reset the d11 core */
 	brcms_b_corereset(wlc_hw, BRCMS_USE_COREFLAGS);
@@ -5212,7 +5272,11 @@ static int brcms_b_down_finish(struct brcms_hardware *wlc_hw)
 
 		/* turn off primary xtal and pll */
 		if (!wlc_hw->noreset) {
+<<<<<<< HEAD
 			ai_pci_down(wlc_hw->sih);
+=======
+			bcma_core_pci_down(wlc_hw->d11core->bus);
+>>>>>>> v3.18
 			brcms_b_xtal(wlc_hw, OFF);
 		}
 	}
@@ -5693,7 +5757,11 @@ static bool brcms_c_chipmatch_pci(struct bcma_device *core)
 		return true;
 	if ((device == BCM43224_D11N_ID) || (device == BCM43225_D11N2G_ID))
 		return true;
+<<<<<<< HEAD
 	if (device == BCM4313_D11N2G_ID)
+=======
+	if (device == BCM4313_D11N2G_ID || device == BCM4313_CHIP_ID)
+>>>>>>> v3.18
 		return true;
 	if ((device == BCM43236_D11N_ID) || (device == BCM43236_D11N2G_ID))
 		return true;
@@ -7106,7 +7174,10 @@ prep_mac80211_status(struct brcms_c_info *wlc, struct d11rxhdr *rxh,
 		     struct sk_buff *p,
 		     struct ieee80211_rx_status *rx_status)
 {
+<<<<<<< HEAD
 	int preamble;
+=======
+>>>>>>> v3.18
 	int channel;
 	u32 rspec;
 	unsigned char *plcp;
@@ -7189,7 +7260,10 @@ prep_mac80211_status(struct brcms_c_info *wlc, struct d11rxhdr *rxh,
 			rx_status->rate_idx -= BRCMS_LEGACY_5G_RATE_OFFSET;
 
 		/* Determine short preamble and rate_idx */
+<<<<<<< HEAD
 		preamble = 0;
+=======
+>>>>>>> v3.18
 		if (is_cck_rate(rspec)) {
 			if (rxh->PhyRxStatus_0 & PRXS0_SHORTH)
 				rx_status->flag |= RX_FLAG_SHORTPRE;

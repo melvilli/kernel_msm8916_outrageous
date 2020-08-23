@@ -1,6 +1,9 @@
 #
+<<<<<<< HEAD
 # arch/microblaze/boot/Makefile
 #
+=======
+>>>>>>> v3.18
 
 obj-y += linked_dtb.o
 

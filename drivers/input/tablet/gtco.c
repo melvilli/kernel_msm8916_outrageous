@@ -53,7 +53,10 @@ Scott Hill shill@gtcocalcomp.com
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/errno.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/input.h>
 #include <linux/usb.h>
@@ -849,7 +852,11 @@ static int gtco_probe(struct usb_interface *usbinterface,
 	gtco->inputdevice = input_dev;
 
 	/* Save interface information */
+<<<<<<< HEAD
 	gtco->usbdev = usb_get_dev(interface_to_usbdev(usbinterface));
+=======
+	gtco->usbdev = interface_to_usbdev(usbinterface);
+>>>>>>> v3.18
 	gtco->intf = usbinterface;
 
 	/* Allocate some data for incoming reports */
@@ -869,6 +876,7 @@ static int gtco_probe(struct usb_interface *usbinterface,
 		goto err_free_buf;
 	}
 
+<<<<<<< HEAD
 	/* Sanity check that a device has an endpoint */
 	if (usbinterface->altsetting[0].desc.bNumEndpoints < 1) {
 		dev_err(&usbinterface->dev,
@@ -877,6 +885,8 @@ static int gtco_probe(struct usb_interface *usbinterface,
 		goto err_free_urb;
 	}
 
+=======
+>>>>>>> v3.18
 	/*
 	 * The endpoint is always altsetting 0, we know this since we know
 	 * this device only has one interrupt endpoint
@@ -898,7 +908,11 @@ static int gtco_probe(struct usb_interface *usbinterface,
 	 * HID report descriptor
 	 */
 	if (usb_get_extra_descriptor(usbinterface->cur_altsetting,
+<<<<<<< HEAD
 				     HID_DEVICE_TYPE, &hid_desc) != 0) {
+=======
+				     HID_DEVICE_TYPE, &hid_desc) != 0){
+>>>>>>> v3.18
 		dev_err(&usbinterface->dev,
 			"Can't retrieve exta USB descriptor to get hid report descriptor length\n");
 		error = -EIO;

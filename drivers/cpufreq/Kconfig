@@ -20,6 +20,7 @@ if CPU_FREQ
 config CPU_FREQ_GOV_COMMON
 	bool
 
+<<<<<<< HEAD
 config SCHED_FREQ_INPUT
 	bool "Scheduler inputs to cpufreq governor"
 	depends on SCHED_HMP
@@ -29,6 +30,11 @@ config SCHED_FREQ_INPUT
 	  scheduler keeps track of "recent" cpu demand of tasks, which can
 	  help determine need for changing frequency well in advance of what
 	  a governor would have been able to detect on its own.
+=======
+config CPU_FREQ_BOOST_SW
+	bool
+	depends on THERMAL
+>>>>>>> v3.18
 
 config CPU_FREQ_STAT
 	tristate "CPU frequency translation statistics"
@@ -108,6 +114,7 @@ config CPU_FREQ_DEFAULT_GOV_CONSERVATIVE
 	  Be aware that not all cpufreq drivers support the conservative
 	  governor. If unsure have a look at the help section of the
 	  driver. Fallback governor will be the performance governor.
+<<<<<<< HEAD
 
 config CPU_FREQ_DEFAULT_GOV_INTERACTIVE
 	bool "interactive"
@@ -151,6 +158,8 @@ config CPU_FREQ_DEFAULT_GOV_LIONFISH
 	help
 	  Use the CPUFreq governor 'lionfish' as default.
 
+=======
+>>>>>>> v3.18
 endchoice
 
 config CPU_FREQ_GOV_PERFORMANCE
@@ -208,6 +217,7 @@ config CPU_FREQ_GOV_ONDEMAND
 
 	  If in doubt, say N.
 
+<<<<<<< HEAD
 config CPU_FREQ_GOV_INTERACTIVE
 	tristate "'interactive' cpufreq policy governor"
 	help
@@ -225,6 +235,8 @@ config CPU_FREQ_GOV_INTERACTIVE
 
 	  If in doubt, say N.
 
+=======
+>>>>>>> v3.18
 config CPU_FREQ_GOV_CONSERVATIVE
 	tristate "'conservative' cpufreq governor"
 	depends on CPU_FREQ
@@ -249,6 +261,7 @@ config CPU_FREQ_GOV_CONSERVATIVE
 
 	  If in doubt, say N.
 
+<<<<<<< HEAD
 config CPU_FREQ_GOV_RELAXED
 	tristate "'relaxed' cpufreq governor"
 	depends on CPU_FREQ
@@ -317,6 +330,16 @@ config GENERIC_CPUFREQ_CPU0
 	depends on HAVE_CLK && REGULATOR && PM_OPP && OF
 	help
 	  This adds a generic cpufreq driver for CPU0 frequency management.
+=======
+config CPUFREQ_DT
+	tristate "Generic DT based cpufreq driver"
+	depends on HAVE_CLK && OF
+	# if CPU_THERMAL is on and THERMAL=m, CPUFREQ_DT cannot be =y:
+	depends on !CPU_THERMAL || THERMAL
+	select PM_OPP
+	help
+	  This adds a generic DT based cpufreq driver for frequency management.
+>>>>>>> v3.18
 	  It supports both uniprocessor (UP) and symmetric multiprocessor (SMP)
 	  systems which share clock and voltage across all CPUs.
 

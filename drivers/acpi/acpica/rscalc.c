@@ -5,7 +5,11 @@
  ******************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -174,6 +178,10 @@ acpi_rs_stream_option_length(u32 resource_length,
  * FUNCTION:    acpi_rs_get_aml_length
  *
  * PARAMETERS:  resource            - Pointer to the resource linked list
+<<<<<<< HEAD
+=======
+ *              resource_list_size  - Size of the resource linked list
+>>>>>>> v3.18
  *              size_needed         - Where the required size is returned
  *
  * RETURN:      Status
@@ -185,16 +193,30 @@ acpi_rs_stream_option_length(u32 resource_length,
  ******************************************************************************/
 
 acpi_status
+<<<<<<< HEAD
 acpi_rs_get_aml_length(struct acpi_resource * resource, acpi_size * size_needed)
 {
 	acpi_size aml_size_needed = 0;
+=======
+acpi_rs_get_aml_length(struct acpi_resource *resource,
+		       acpi_size resource_list_size, acpi_size * size_needed)
+{
+	acpi_size aml_size_needed = 0;
+	struct acpi_resource *resource_end;
+>>>>>>> v3.18
 	acpi_rs_length total_size;
 
 	ACPI_FUNCTION_TRACE(rs_get_aml_length);
 
 	/* Traverse entire list of internal resource descriptors */
 
+<<<<<<< HEAD
 	while (resource) {
+=======
+	resource_end =
+	    ACPI_ADD_PTR(struct acpi_resource, resource, resource_list_size);
+	while (resource < resource_end) {
+>>>>>>> v3.18
 
 		/* Validate the descriptor type */
 
@@ -352,6 +374,10 @@ acpi_rs_get_aml_length(struct acpi_resource * resource, acpi_size * size_needed)
 			break;
 
 		default:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 			break;
 		}
 
@@ -539,6 +565,10 @@ acpi_rs_get_list_length(u8 * aml_buffer,
 			break;
 
 		default:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 			break;
 		}
 
@@ -629,7 +659,11 @@ acpi_rs_get_pci_routing_table_length(union acpi_operand_object *package_object,
 
 	for (index = 0; index < number_of_elements; index++) {
 
+<<<<<<< HEAD
 		/* Dereference the sub-package */
+=======
+		/* Dereference the subpackage */
+>>>>>>> v3.18
 
 		package_element = *top_object_list;
 
@@ -650,8 +684,14 @@ acpi_rs_get_pci_routing_table_length(union acpi_operand_object *package_object,
 
 		name_found = FALSE;
 
+<<<<<<< HEAD
 		for (table_index = 0; table_index < 4 && !name_found;
 		     table_index++) {
+=======
+		for (table_index = 0;
+		     table_index < package_element->package.count
+		     && !name_found; table_index++) {
+>>>>>>> v3.18
 			if (*sub_object_list &&	/* Null object allowed */
 			    ((ACPI_TYPE_STRING ==
 			      (*sub_object_list)->common.type) ||

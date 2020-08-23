@@ -54,7 +54,11 @@ static int soc_camera_platform_s_power(struct v4l2_subdev *sd, int on)
 {
 	struct soc_camera_platform_info *p = v4l2_get_subdevdata(sd);
 
+<<<<<<< HEAD
 	return soc_camera_set_power(p->icd->control, &p->icd->sdesc->subdev_desc, on);
+=======
+	return soc_camera_set_power(p->icd->control, &p->icd->sdesc->subdev_desc, NULL, on);
+>>>>>>> v3.18
 }
 
 static struct v4l2_subdev_core_ops platform_subdev_core_ops = {
@@ -137,7 +141,10 @@ static int soc_camera_platform_probe(struct platform_device *pdev)
 	struct soc_camera_platform_priv *priv;
 	struct soc_camera_platform_info *p = pdev->dev.platform_data;
 	struct soc_camera_device *icd;
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 
 	if (!p)
 		return -EINVAL;
@@ -165,6 +172,7 @@ static int soc_camera_platform_probe(struct platform_device *pdev)
 	v4l2_set_subdevdata(&priv->subdev, p);
 	strncpy(priv->subdev.name, dev_name(&pdev->dev), V4L2_SUBDEV_NAME_SIZE);
 
+<<<<<<< HEAD
 	ret = v4l2_device_register_subdev(&ici->v4l2_dev, &priv->subdev);
 	if (ret)
 		goto evdrs;
@@ -174,6 +182,9 @@ static int soc_camera_platform_probe(struct platform_device *pdev)
 evdrs:
 	platform_set_drvdata(pdev, NULL);
 	return ret;
+=======
+	return v4l2_device_register_subdev(&ici->v4l2_dev, &priv->subdev);
+>>>>>>> v3.18
 }
 
 static int soc_camera_platform_remove(struct platform_device *pdev)
@@ -183,7 +194,10 @@ static int soc_camera_platform_remove(struct platform_device *pdev)
 
 	p->icd->control = NULL;
 	v4l2_device_unregister_subdev(&priv->subdev);
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

@@ -164,6 +164,10 @@ STD_ENTRY_SECTION(__atomic\name, .text.atomic)
 	STD_ENDPROC(__atomic\name)
 	.ifc \bitwidth,32
 	.pushsection __ex_table,"a"
+<<<<<<< HEAD
+=======
+	.align  4
+>>>>>>> v3.18
 	.word   1b, __atomic\name
 	.word   2b, __atomic\name
 	.word   __atomic\name, __atomic_bad_address

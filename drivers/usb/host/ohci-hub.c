@@ -39,8 +39,13 @@
 #define OHCI_SCHED_ENABLES \
 	(OHCI_CTRL_CLE|OHCI_CTRL_BLE|OHCI_CTRL_PLE|OHCI_CTRL_IE)
 
+<<<<<<< HEAD
 static void dl_done_list (struct ohci_hcd *);
 static void finish_unlinks (struct ohci_hcd *, u16);
+=======
+static void update_done_list(struct ohci_hcd *);
+static void ohci_work(struct ohci_hcd *);
+>>>>>>> v3.18
 
 #ifdef	CONFIG_PM
 static int ohci_rh_suspend (struct ohci_hcd *ohci, int autostop)
@@ -87,8 +92,13 @@ __acquires(ohci->lock)
 		msleep (8);
 		spin_lock_irq (&ohci->lock);
 	}
+<<<<<<< HEAD
 	dl_done_list (ohci);
 	finish_unlinks (ohci, ohci_frame_no(ohci));
+=======
+	update_done_list(ohci);
+	ohci_work(ohci);
+>>>>>>> v3.18
 
 	/*
 	 * Some controllers don't handle "global" suspend properly if
@@ -194,7 +204,10 @@ __acquires(ohci->lock)
 	if (status == -EBUSY) {
 		if (!autostopped) {
 			spin_unlock_irq (&ohci->lock);
+<<<<<<< HEAD
 			(void) ohci_init (ohci);
+=======
+>>>>>>> v3.18
 			status = ohci_restart (ohci);
 
 			usb_root_hub_lost_power(hcd->self.root_hub);
@@ -231,10 +244,18 @@ __acquires(ohci->lock)
 	/* Sometimes PCI D3 suspend trashes frame timings ... */
 	periodic_reinit (ohci);
 
+<<<<<<< HEAD
 	/* the following code is executed with ohci->lock held and
 	 * irqs disabled if and only if autostopped is true
 	 */
 
+=======
+	/*
+	 * The following code is executed with ohci->lock held and
+	 * irqs disabled if and only if autostopped is true.  This
+	 * will cause sparse to warn about a "context imbalance".
+	 */
+>>>>>>> v3.18
 skip_resume:
 	/* interrupts might have been disabled */
 	ohci_writel (ohci, OHCI_INTR_INIT, &ohci->regs->intrenable);
@@ -309,6 +330,12 @@ static int ohci_bus_suspend (struct usb_hcd *hcd)
 	else
 		rc = ohci_rh_suspend (ohci, 0);
 	spin_unlock_irq (&ohci->lock);
+<<<<<<< HEAD
+=======
+
+	if (rc == 0)
+		del_timer_sync(&ohci->io_watchdog);
+>>>>>>> v3.18
 	return rc;
 }
 
@@ -456,8 +483,12 @@ static int ohci_root_hub_state_changes(struct ohci_hcd *ohci, int changed,
 
 /* build "status change" packet (one or two bytes) from HC registers */
 
+<<<<<<< HEAD
 static int
 ohci_hub_status_data (struct usb_hcd *hcd, char *buf)
+=======
+int ohci_hub_status_data(struct usb_hcd *hcd, char *buf)
+>>>>>>> v3.18
 {
 	struct ohci_hcd	*ohci = hcd_to_ohci (hcd);
 	int		i, changed = 0, length = 1;
@@ -522,6 +553,10 @@ done:
 
 	return changed ? length : 0;
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(ohci_hub_status_data);
+>>>>>>> v3.18
 
 /*-------------------------------------------------------------------------*/
 
@@ -550,7 +585,11 @@ ohci_hub_descriptor (
 	    temp |= 0x0010;
 	else if (rh & RH_A_OCPM)	/* per-port overcurrent reporting? */
 	    temp |= 0x0008;
+<<<<<<< HEAD
 	desc->wHubCharacteristics = (__force __u16)cpu_to_hc16(ohci, temp);
+=======
+	desc->wHubCharacteristics = cpu_to_le16(temp);
+>>>>>>> v3.18
 
 	/* ports removable, and usb 1.0 legacy PortPwrCtrlMask */
 	rh = roothub_b (ohci);
@@ -582,7 +621,11 @@ static int ohci_start_port_reset (struct usb_hcd *hcd, unsigned port)
 	if (!(status & RH_PS_CCS))
 		return -ENODEV;
 
+<<<<<<< HEAD
 	/* khubd will finish the reset later */
+=======
+	/* hub_wq will finish the reset later */
+>>>>>>> v3.18
 	ohci_writel(ohci, RH_PS_PRS, &ohci->regs->roothub.portstatus [port]);
 	return 0;
 }
@@ -607,7 +650,11 @@ static int ohci_start_port_reset (struct usb_hcd *hcd, unsigned port)
 /* wrap-aware logic morphed from <linux/jiffies.h> */
 #define tick_before(t1,t2) ((s16)(((s16)(t1))-((s16)(t2))) < 0)
 
+<<<<<<< HEAD
 /* called from some task, normally khubd */
+=======
+/* called from some task, normally hub_wq */
+>>>>>>> v3.18
 static inline int root_port_reset (struct ohci_hcd *ohci, unsigned port)
 {
 	__hc32 __iomem *portstat = &ohci->regs->roothub.portstatus [port];
@@ -664,7 +711,11 @@ static inline int root_port_reset (struct ohci_hcd *ohci, unsigned port)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int ohci_hub_control (
+=======
+int ohci_hub_control(
+>>>>>>> v3.18
 	struct usb_hcd	*hcd,
 	u16		typeReq,
 	u16		wValue,
@@ -743,10 +794,15 @@ static int ohci_hub_control (
 		temp = roothub_portstatus (ohci, wIndex);
 		put_unaligned_le32(temp, buf);
 
+<<<<<<< HEAD
 #ifndef	OHCI_VERBOSE_DEBUG
 	if (*(u16*)(buf+2))	/* only if wPortChange is interesting */
 #endif
 		dbg_port (ohci, "GetStatus", wIndex, temp);
+=======
+		if (*(u16*)(buf+2))	/* only if wPortChange is interesting */
+			dbg_port(ohci, "GetStatus", wIndex, temp);
+>>>>>>> v3.18
 		break;
 	case SetHubFeature:
 		switch (wValue) {
@@ -792,4 +848,8 @@ error:
 	}
 	return retval;
 }
+<<<<<<< HEAD
 
+=======
+EXPORT_SYMBOL_GPL(ohci_hub_control);
+>>>>>>> v3.18

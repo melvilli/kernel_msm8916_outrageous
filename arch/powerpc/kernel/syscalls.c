@@ -34,7 +34,10 @@
 #include <linux/ipc.h>
 #include <linux/utsname.h>
 #include <linux/file.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/personality.h>
 
 #include <asm/uaccess.h>

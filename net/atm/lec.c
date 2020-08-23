@@ -152,7 +152,11 @@ static void lec_handle_bridge(struct sk_buff *skb, struct net_device *dev)
 		atm_force_charge(priv->lecd, skb2->truesize);
 		sk = sk_atm(priv->lecd);
 		skb_queue_tail(&sk->sk_receive_queue, skb2);
+<<<<<<< HEAD
 		sk->sk_data_ready(sk, skb2->len);
+=======
+		sk->sk_data_ready(sk);
+>>>>>>> v3.18
 	}
 }
 #endif /* defined(CONFIG_BRIDGE) || defined(CONFIG_BRIDGE_MODULE) */
@@ -410,9 +414,17 @@ static int lec_atm_send(struct atm_vcc *vcc, struct sk_buff *skb)
 		priv->lane2_ops = NULL;
 		if (priv->lane_version > 1)
 			priv->lane2_ops = &lane2_ops;
+<<<<<<< HEAD
 		if (dev_set_mtu(dev, mesg->content.config.mtu))
 			pr_info("%s: change_mtu to %d failed\n",
 				dev->name, mesg->content.config.mtu);
+=======
+		rtnl_lock();
+		if (dev_set_mtu(dev, mesg->content.config.mtu))
+			pr_info("%s: change_mtu to %d failed\n",
+				dev->name, mesg->content.config.mtu);
+		rtnl_unlock();
+>>>>>>> v3.18
 		priv->is_proxy = mesg->content.config.is_proxy;
 		break;
 	case l_flush_tran_id:
@@ -447,7 +459,11 @@ static int lec_atm_send(struct atm_vcc *vcc, struct sk_buff *skb)
 			atm_force_charge(priv->lecd, skb2->truesize);
 			sk = sk_atm(priv->lecd);
 			skb_queue_tail(&sk->sk_receive_queue, skb2);
+<<<<<<< HEAD
 			sk->sk_data_ready(sk, skb2->len);
+=======
+			sk->sk_data_ready(sk);
+>>>>>>> v3.18
 		}
 	}
 #endif /* defined(CONFIG_BRIDGE) || defined(CONFIG_BRIDGE_MODULE) */
@@ -521,7 +537,11 @@ send_to_lecd(struct lec_priv *priv, atmlec_msg_type type,
 	if (data != NULL)
 		mesg->sizeoftlvs = data->len;
 	if (mac_addr)
+<<<<<<< HEAD
 		memcpy(&mesg->content.normal.mac_addr, mac_addr, ETH_ALEN);
+=======
+		ether_addr_copy(mesg->content.normal.mac_addr, mac_addr);
+>>>>>>> v3.18
 	else
 		mesg->content.normal.targetless_le_arp = 1;
 	if (atm_addr)
@@ -530,13 +550,21 @@ send_to_lecd(struct lec_priv *priv, atmlec_msg_type type,
 	atm_force_charge(priv->lecd, skb->truesize);
 	sk = sk_atm(priv->lecd);
 	skb_queue_tail(&sk->sk_receive_queue, skb);
+<<<<<<< HEAD
 	sk->sk_data_ready(sk, skb->len);
+=======
+	sk->sk_data_ready(sk);
+>>>>>>> v3.18
 
 	if (data != NULL) {
 		pr_debug("about to send %d bytes of data\n", data->len);
 		atm_force_charge(priv->lecd, data->truesize);
 		skb_queue_tail(&sk->sk_receive_queue, data);
+<<<<<<< HEAD
 		sk->sk_data_ready(sk, skb->len);
+=======
+		sk->sk_data_ready(sk);
+>>>>>>> v3.18
 	}
 
 	return 0;
@@ -616,7 +644,11 @@ static void lec_push(struct atm_vcc *vcc, struct sk_buff *skb)
 
 		pr_debug("%s: To daemon\n", dev->name);
 		skb_queue_tail(&sk->sk_receive_queue, skb);
+<<<<<<< HEAD
 		sk->sk_data_ready(sk, skb->len);
+=======
+		sk->sk_data_ready(sk);
+>>>>>>> v3.18
 	} else {		/* Data frame, queue to protocol handlers */
 		struct lec_arp_table *entry;
 		unsigned char *src, *dst;
@@ -833,7 +865,10 @@ static void *lec_tbl_walk(struct lec_state *state, struct hlist_head *tbl,
 			  loff_t *l)
 {
 	struct hlist_node *e = state->node;
+<<<<<<< HEAD
 	struct lec_arp_table *tmp;
+=======
+>>>>>>> v3.18
 
 	if (!e)
 		e = tbl->first;
@@ -842,9 +877,13 @@ static void *lec_tbl_walk(struct lec_state *state, struct hlist_head *tbl,
 		--*l;
 	}
 
+<<<<<<< HEAD
 	tmp = container_of(e, struct lec_arp_table, next);
 
 	hlist_for_each_entry_from(tmp, next) {
+=======
+	for (; e; e = e->next) {
+>>>>>>> v3.18
 		if (--*l < 0)
 			break;
 	}
@@ -1565,7 +1604,11 @@ static struct lec_arp_table *make_entry(struct lec_priv *priv,
 		pr_info("LEC: Arp entry kmalloc failed\n");
 		return NULL;
 	}
+<<<<<<< HEAD
 	memcpy(to_return->mac_addr, mac_addr, ETH_ALEN);
+=======
+	ether_addr_copy(to_return->mac_addr, mac_addr);
+>>>>>>> v3.18
 	INIT_HLIST_NODE(&to_return->next);
 	setup_timer(&to_return->timer, lec_arp_expire_arp,
 			(unsigned long)to_return);
@@ -1887,7 +1930,12 @@ lec_arp_update(struct lec_priv *priv, const unsigned char *mac_addr,
 					entry = tmp;
 				} else {
 					entry->status = ESI_FORWARD_DIRECT;
+<<<<<<< HEAD
 					memcpy(entry->mac_addr, mac_addr, ETH_ALEN);
+=======
+					ether_addr_copy(entry->mac_addr,
+							mac_addr);
+>>>>>>> v3.18
 					entry->last_used = jiffies;
 					lec_arp_add(priv, entry);
 				}
@@ -2263,7 +2311,11 @@ lec_arp_check_empties(struct lec_priv *priv,
 				  &priv->lec_arp_empty_ones, next) {
 		if (vcc == entry->vcc) {
 			del_timer(&entry->timer);
+<<<<<<< HEAD
 			memcpy(entry->mac_addr, src, ETH_ALEN);
+=======
+			ether_addr_copy(entry->mac_addr, src);
+>>>>>>> v3.18
 			entry->status = ESI_FORWARD_DIRECT;
 			entry->last_used = jiffies;
 			/* We might have got an entry */

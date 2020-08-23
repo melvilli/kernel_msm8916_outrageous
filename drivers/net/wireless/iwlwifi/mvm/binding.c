@@ -5,7 +5,11 @@
  *
  * GPL LICENSE SUMMARY
  *
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of version 2 of the GNU General Public License as
@@ -30,7 +34,11 @@
  *
  * BSD LICENSE
  *
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -183,15 +191,39 @@ int iwl_mvm_binding_add_vif(struct iwl_mvm *mvm, struct ieee80211_vif *vif)
 	if (WARN_ON_ONCE(!mvmvif->phy_ctxt))
 		return -EINVAL;
 
+<<<<<<< HEAD
+=======
+	/*
+	 * Update SF - Disable if needed. if this fails, SF might still be on
+	 * while many macs are bound, which is forbidden - so fail the binding.
+	 */
+	if (iwl_mvm_sf_update(mvm, vif, false))
+		return -EINVAL;
+
+>>>>>>> v3.18
 	return iwl_mvm_binding_update(mvm, vif, mvmvif->phy_ctxt, true);
 }
 
 int iwl_mvm_binding_remove_vif(struct iwl_mvm *mvm, struct ieee80211_vif *vif)
 {
 	struct iwl_mvm_vif *mvmvif = iwl_mvm_vif_from_mac80211(vif);
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 
 	if (WARN_ON_ONCE(!mvmvif->phy_ctxt))
 		return -EINVAL;
 
+<<<<<<< HEAD
 	return iwl_mvm_binding_update(mvm, vif, mvmvif->phy_ctxt, false);
+=======
+	ret = iwl_mvm_binding_update(mvm, vif, mvmvif->phy_ctxt, false);
+
+	if (!ret)
+		if (iwl_mvm_sf_update(mvm, vif, true))
+			IWL_ERR(mvm, "Failed to update SF state\n");
+
+	return ret;
+>>>>>>> v3.18
 }

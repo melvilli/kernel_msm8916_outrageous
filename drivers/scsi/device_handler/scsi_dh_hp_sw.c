@@ -117,7 +117,11 @@ static int hp_sw_tur(struct scsi_device *sdev, struct hp_sw_dh_data *h)
 
 retry:
 	req = blk_get_request(sdev->request_queue, WRITE, GFP_NOIO);
+<<<<<<< HEAD
 	if (!req)
+=======
+	if (IS_ERR(req))
+>>>>>>> v3.18
 		return SCSI_DH_RES_TEMP_UNAVAIL;
 
 	blk_rq_set_block_pc(req);
@@ -247,7 +251,11 @@ static int hp_sw_start_stop(struct hp_sw_dh_data *h)
 	struct request *req;
 
 	req = blk_get_request(h->sdev->request_queue, WRITE, GFP_ATOMIC);
+<<<<<<< HEAD
 	if (!req)
+=======
+	if (IS_ERR(req))
+>>>>>>> v3.18
 		return SCSI_DH_RES_TEMP_UNAVAIL;
 
 	blk_rq_set_block_pc(req);

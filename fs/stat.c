@@ -37,6 +37,7 @@ void generic_fillattr(struct inode *inode, struct kstat *stat)
 
 EXPORT_SYMBOL(generic_fillattr);
 
+<<<<<<< HEAD
 int vfs_getattr(struct path *path, struct kstat *stat)
 {
 	struct inode *inode = path->dentry->d_inode;
@@ -45,6 +46,23 @@ int vfs_getattr(struct path *path, struct kstat *stat)
 	retval = security_inode_getattr(path->mnt, path->dentry);
 	if (retval)
 		return retval;
+=======
+/**
+ * vfs_getattr_nosec - getattr without security checks
+ * @path: file to get attributes from
+ * @stat: structure to return attributes in
+ *
+ * Get attributes without calling security_inode_getattr.
+ *
+ * Currently the only caller other than vfs_getattr is internal to the
+ * filehandle lookup code, which uses only the inode number and returns
+ * no attributes to any user.  Any other code probably wants
+ * vfs_getattr.
+ */
+int vfs_getattr_nosec(struct path *path, struct kstat *stat)
+{
+	struct inode *inode = path->dentry->d_inode;
+>>>>>>> v3.18
 
 	if (inode->i_op->getattr)
 		return inode->i_op->getattr(path->mnt, path->dentry, stat);
@@ -53,6 +71,21 @@ int vfs_getattr(struct path *path, struct kstat *stat)
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(vfs_getattr_nosec);
+
+int vfs_getattr(struct path *path, struct kstat *stat)
+{
+	int retval;
+
+	retval = security_inode_getattr(path->mnt, path->dentry);
+	if (retval)
+		return retval;
+	return vfs_getattr_nosec(path, stat);
+}
+
+>>>>>>> v3.18
 EXPORT_SYMBOL(vfs_getattr);
 
 int vfs_fstat(unsigned int fd, struct kstat *stat)

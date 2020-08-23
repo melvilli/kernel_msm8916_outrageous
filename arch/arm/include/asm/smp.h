@@ -49,12 +49,15 @@ extern void smp_init_cpus(void);
 extern void set_smp_cross_call(void (*)(const struct cpumask *, unsigned int));
 
 /*
+<<<<<<< HEAD
  * Boot a secondary CPU, and assign it the specified idle task.
  * This also gives us the initial stack to use for this CPU.
  */
 extern int boot_secondary(unsigned int cpu, struct task_struct *);
 
 /*
+=======
+>>>>>>> v3.18
  * Called from platform specific assembly code, this is the
  * secondary CPU entry point.
  */
@@ -65,12 +68,23 @@ asmlinkage void secondary_start_kernel(void);
  * Initial data for bringing up a secondary CPU.
  */
 struct secondary_data {
+<<<<<<< HEAD
 	unsigned long pgdir;
+=======
+	union {
+		unsigned long mpu_rgn_szr;
+		unsigned long pgdir;
+	};
+>>>>>>> v3.18
 	unsigned long swapper_pg_dir;
 	void *stack;
 };
 extern struct secondary_data secondary_data;
 extern volatile int pen_release;
+<<<<<<< HEAD
+=======
+extern void secondary_startup(void);
+>>>>>>> v3.18
 
 extern int __cpu_disable(void);
 
@@ -81,7 +95,11 @@ extern void arch_send_call_function_single_ipi(int cpu);
 extern void arch_send_call_function_ipi_mask(const struct cpumask *mask);
 extern void arch_send_wakeup_ipi_mask(const struct cpumask *mask);
 
+<<<<<<< HEAD
 extern void smp_send_all_cpu_backtrace(void);
+=======
+extern int register_ipi_completion(struct completion *completion, int cpu);
+>>>>>>> v3.18
 
 struct smp_operations {
 #ifdef CONFIG_SMP
@@ -111,6 +129,18 @@ struct smp_operations {
 #endif
 };
 
+<<<<<<< HEAD
+=======
+struct of_cpu_method {
+	const char *method;
+	struct smp_operations *ops;
+};
+
+#define CPU_METHOD_OF_DECLARE(name, _method, _ops)			\
+	static const struct of_cpu_method __cpu_method_of_table_##name	\
+		__used __section(__cpu_method_of_table)			\
+		= { .method = _method, .ops = _ops }
+>>>>>>> v3.18
 /*
  * set platform specific SMP operations
  */

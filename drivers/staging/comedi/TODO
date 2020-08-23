@@ -3,10 +3,17 @@ TODO:
 	- Lindent
 	- remove all wrappers
 	- audit userspace interface
+<<<<<<< HEAD
 	- reserve major number
+=======
+>>>>>>> v3.18
 	- cleanup the individual comedi drivers as well
 
 Please send patches to Greg Kroah-Hartman <greg@kroah.com> and
 copy:
 	Ian Abbott <abbotti@mev.co.uk>
+<<<<<<< HEAD
 	Frank Mori Hess <fmhess@users.sourceforge.net>
+=======
+	H Hartley Sweeten <hsweeten@visionengravers.com>
+>>>>>>> v3.18

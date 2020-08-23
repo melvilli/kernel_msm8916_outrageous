@@ -22,6 +22,11 @@
 #ifndef __ARM64_KVM_HOST_H__
 #define __ARM64_KVM_HOST_H__
 
+<<<<<<< HEAD
+=======
+#include <linux/types.h>
+#include <linux/kvm_types.h>
+>>>>>>> v3.18
 #include <asm/kvm.h>
 #include <asm/kvm_asm.h>
 #include <asm/kvm_mmio.h>
@@ -41,8 +46,12 @@
 
 #define KVM_VCPU_MAX_FEATURES 3
 
+<<<<<<< HEAD
 struct kvm_vcpu;
 int kvm_target_cpu(void);
+=======
+int __attribute_const__ kvm_target_cpu(void);
+>>>>>>> v3.18
 int kvm_reset_vcpu(struct kvm_vcpu *vcpu);
 int kvm_arch_dev_ioctl_check_extension(long ext);
 
@@ -86,7 +95,11 @@ struct kvm_cpu_context {
 	struct kvm_regs	gp_regs;
 	union {
 		u64 sys_regs[NR_SYS_REGS];
+<<<<<<< HEAD
 		u32 cp15[NR_CP15_REGS];
+=======
+		u32 copro[NR_COPRO_REGS];
+>>>>>>> v3.18
 	};
 };
 
@@ -101,6 +114,12 @@ struct kvm_vcpu_arch {
 	/* Exception Information */
 	struct kvm_vcpu_fault_info fault;
 
+<<<<<<< HEAD
+=======
+	/* Debug state */
+	u64 debug_flags;
+
+>>>>>>> v3.18
 	/* Pointer to host CPU context */
 	kvm_cpu_context_t *host_cpu_context;
 
@@ -138,7 +157,24 @@ struct kvm_vcpu_arch {
 
 #define vcpu_gp_regs(v)		(&(v)->arch.ctxt.gp_regs)
 #define vcpu_sys_reg(v,r)	((v)->arch.ctxt.sys_regs[(r)])
+<<<<<<< HEAD
 #define vcpu_cp15(v,r)		((v)->arch.ctxt.cp15[(r)])
+=======
+/*
+ * CP14 and CP15 live in the same array, as they are backed by the
+ * same system registers.
+ */
+#define vcpu_cp14(v,r)		((v)->arch.ctxt.copro[(r)])
+#define vcpu_cp15(v,r)		((v)->arch.ctxt.copro[(r)])
+
+#ifdef CONFIG_CPU_BIG_ENDIAN
+#define vcpu_cp15_64_high(v,r)	vcpu_cp15((v),(r))
+#define vcpu_cp15_64_low(v,r)	vcpu_cp15((v),(r) + 1)
+#else
+#define vcpu_cp15_64_high(v,r)	vcpu_cp15((v),(r) + 1)
+#define vcpu_cp15_64_low(v,r)	vcpu_cp15((v),(r))
+#endif
+>>>>>>> v3.18
 
 struct kvm_vm_stat {
 	u32 remote_tlb_flush;
@@ -148,25 +184,39 @@ struct kvm_vcpu_stat {
 	u32 halt_wakeup;
 };
 
+<<<<<<< HEAD
 struct kvm_vcpu_init;
+=======
+>>>>>>> v3.18
 int kvm_vcpu_set_target(struct kvm_vcpu *vcpu,
 			const struct kvm_vcpu_init *init);
 int kvm_vcpu_preferred_target(struct kvm_vcpu_init *init);
 unsigned long kvm_arm_num_regs(struct kvm_vcpu *vcpu);
 int kvm_arm_copy_reg_indices(struct kvm_vcpu *vcpu, u64 __user *indices);
+<<<<<<< HEAD
 struct kvm_one_reg;
+=======
+>>>>>>> v3.18
 int kvm_arm_get_reg(struct kvm_vcpu *vcpu, const struct kvm_one_reg *reg);
 int kvm_arm_set_reg(struct kvm_vcpu *vcpu, const struct kvm_one_reg *reg);
 
 #define KVM_ARCH_WANT_MMU_NOTIFIER
+<<<<<<< HEAD
 struct kvm;
+=======
+>>>>>>> v3.18
 int kvm_unmap_hva(struct kvm *kvm, unsigned long hva);
 int kvm_unmap_hva_range(struct kvm *kvm,
 			unsigned long start, unsigned long end);
 void kvm_set_spte_hva(struct kvm *kvm, unsigned long hva, pte_t pte);
 
 /* We do not have shadow page tables, hence the empty hooks */
+<<<<<<< HEAD
 static inline int kvm_age_hva(struct kvm *kvm, unsigned long hva)
+=======
+static inline int kvm_age_hva(struct kvm *kvm, unsigned long start,
+			      unsigned long end)
+>>>>>>> v3.18
 {
 	return 0;
 }
@@ -176,8 +226,18 @@ static inline int kvm_test_age_hva(struct kvm *kvm, unsigned long hva)
 	return 0;
 }
 
+<<<<<<< HEAD
 struct kvm_vcpu *kvm_arm_get_running_vcpu(void);
 struct kvm_vcpu __percpu **kvm_get_running_vcpus(void);
+=======
+static inline void kvm_arch_mmu_notifier_invalidate_page(struct kvm *kvm,
+							 unsigned long address)
+{
+}
+
+struct kvm_vcpu *kvm_arm_get_running_vcpu(void);
+struct kvm_vcpu * __percpu *kvm_get_running_vcpus(void);
+>>>>>>> v3.18
 
 u64 kvm_call_hyp(void *hypfn, ...);
 
@@ -200,4 +260,41 @@ static inline void __cpu_init_hyp_mode(phys_addr_t boot_pgd_ptr,
 		     hyp_stack_ptr, vector_ptr);
 }
 
+<<<<<<< HEAD
+=======
+struct vgic_sr_vectors {
+	void	*save_vgic;
+	void	*restore_vgic;
+};
+
+static inline void vgic_arch_setup(const struct vgic_params *vgic)
+{
+	extern struct vgic_sr_vectors __vgic_sr_vectors;
+
+	switch(vgic->type)
+	{
+	case VGIC_V2:
+		__vgic_sr_vectors.save_vgic	= __save_vgic_v2_state;
+		__vgic_sr_vectors.restore_vgic	= __restore_vgic_v2_state;
+		break;
+
+#ifdef CONFIG_ARM_GIC_V3
+	case VGIC_V3:
+		__vgic_sr_vectors.save_vgic	= __save_vgic_v3_state;
+		__vgic_sr_vectors.restore_vgic	= __restore_vgic_v3_state;
+		break;
+#endif
+
+	default:
+		BUG();
+	}
+}
+
+static inline void kvm_arch_hardware_disable(void) {}
+static inline void kvm_arch_hardware_unsetup(void) {}
+static inline void kvm_arch_sync_events(struct kvm *kvm) {}
+static inline void kvm_arch_vcpu_uninit(struct kvm_vcpu *vcpu) {}
+static inline void kvm_arch_sched_in(struct kvm_vcpu *vcpu, int cpu) {}
+
+>>>>>>> v3.18
 #endif /* __ARM64_KVM_HOST_H__ */

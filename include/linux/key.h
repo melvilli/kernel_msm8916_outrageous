@@ -22,6 +22,10 @@
 #include <linux/sysctl.h>
 #include <linux/rwsem.h>
 #include <linux/atomic.h>
+<<<<<<< HEAD
+=======
+#include <linux/assoc_array.h>
+>>>>>>> v3.18
 
 #ifdef __KERNEL__
 #include <linux/uidgid.h>
@@ -82,6 +86,15 @@ struct key_owner;
 struct keyring_list;
 struct keyring_name;
 
+<<<<<<< HEAD
+=======
+struct keyring_index_key {
+	struct key_type		*type;
+	const char		*description;
+	size_t			desc_len;
+};
+
+>>>>>>> v3.18
 /*****************************************************************************/
 /*
  * key reference with possession attribute handling
@@ -99,7 +112,11 @@ struct keyring_name;
 typedef struct __key_reference_with_attributes *key_ref_t;
 
 static inline key_ref_t make_key_ref(const struct key *key,
+<<<<<<< HEAD
 				     unsigned long possession)
+=======
+				     bool possession)
+>>>>>>> v3.18
 {
 	return (key_ref_t) ((unsigned long) key | possession);
 }
@@ -109,7 +126,11 @@ static inline struct key *key_ref_to_ptr(const key_ref_t key_ref)
 	return (struct key *) ((unsigned long) key_ref & ~1UL);
 }
 
+<<<<<<< HEAD
 static inline unsigned long is_key_possessed(const key_ref_t key_ref)
+=======
+static inline bool is_key_possessed(const key_ref_t key_ref)
+>>>>>>> v3.18
 {
 	return (unsigned long) key_ref & 1UL;
 }
@@ -129,7 +150,10 @@ struct key {
 		struct list_head graveyard_link;
 		struct rb_node	serial_node;
 	};
+<<<<<<< HEAD
 	struct key_type		*type;		/* type of key */
+=======
+>>>>>>> v3.18
 	struct rw_semaphore	sem;		/* change vs change sem */
 	struct key_user		*user;		/* owner of this key */
 	void			*security;	/* security data for this key */
@@ -162,6 +186,7 @@ struct key {
 #define KEY_FLAG_NEGATIVE	5	/* set if key is negative */
 #define KEY_FLAG_ROOT_CAN_CLEAR	6	/* set if key can be cleared by root without permission */
 #define KEY_FLAG_INVALIDATED	7	/* set if key has been invalidated */
+<<<<<<< HEAD
 #define KEY_FLAG_UID_KEYRING	11	/* set if key is a user or user session keyring */
 
 	/* the description string
@@ -170,6 +195,25 @@ struct key {
 	 * - eg: for krb5 AFS, this might be "afs@REDHAT.COM"
 	 */
 	char			*description;
+=======
+#define KEY_FLAG_TRUSTED	8	/* set if key is trusted */
+#define KEY_FLAG_TRUSTED_ONLY	9	/* set if keyring only accepts links to trusted keys */
+#define KEY_FLAG_BUILTIN	10	/* set if key is builtin */
+#define KEY_FLAG_ROOT_CAN_INVAL	11	/* set if key can be invalidated by root without permission */
+
+	/* the key type and key description string
+	 * - the desc is used to match a key against search criteria
+	 * - it should be a printable string
+	 * - eg: for krb5 AFS, this might be "afs@REDHAT.COM"
+	 */
+	union {
+		struct keyring_index_key index_key;
+		struct {
+			struct key_type	*type;		/* type of key */
+			char		*description;
+		};
+	};
+>>>>>>> v3.18
 
 	/* type specific data
 	 * - this is used by the keyring type to index the name
@@ -186,11 +230,22 @@ struct key {
 	 *   whatever
 	 */
 	union {
+<<<<<<< HEAD
 		unsigned long		value;
 		void __rcu		*rcudata;
 		void			*data;
 		struct keyring_list __rcu *subscriptions;
 	} payload;
+=======
+		union {
+			unsigned long		value;
+			void __rcu		*rcudata;
+			void			*data;
+			void			*data2[2];
+		} payload;
+		struct assoc_array keys;
+	};
+>>>>>>> v3.18
 };
 
 extern struct key *key_alloc(struct key_type *type,
@@ -204,12 +259,17 @@ extern struct key *key_alloc(struct key_type *type,
 #define KEY_ALLOC_IN_QUOTA	0x0000	/* add to quota, reject if would overrun */
 #define KEY_ALLOC_QUOTA_OVERRUN	0x0001	/* add to quota, permit even if overrun */
 #define KEY_ALLOC_NOT_IN_QUOTA	0x0002	/* not in quota */
+<<<<<<< HEAD
 #define KEY_ALLOC_UID_KEYRING	0x0010	/* allocating a user or user session keyring */
+=======
+#define KEY_ALLOC_TRUSTED	0x0004	/* Key should be flagged as trusted */
+>>>>>>> v3.18
 
 extern void key_revoke(struct key *key);
 extern void key_invalidate(struct key *key);
 extern void key_put(struct key *key);
 
+<<<<<<< HEAD
 static inline struct key *key_get(struct key *key)
 {
 	if (key)
@@ -217,6 +277,19 @@ static inline struct key *key_get(struct key *key)
 	return key;
 }
 
+=======
+static inline struct key *__key_get(struct key *key)
+{
+	atomic_inc(&key->usage);
+	return key;
+}
+
+static inline struct key *key_get(struct key *key)
+{
+	return key ? __key_get(key) : key;
+}
+
+>>>>>>> v3.18
 static inline void key_ref_put(key_ref_t key_ref)
 {
 	key_put(key_ref_to_ptr(key_ref));
@@ -289,6 +362,20 @@ static inline key_serial_t key_serial(const struct key *key)
 
 extern void key_set_timeout(struct key *, unsigned);
 
+<<<<<<< HEAD
+=======
+/*
+ * The permissions required on a key that we're looking up.
+ */
+#define	KEY_NEED_VIEW	0x01	/* Require permission to view attributes */
+#define	KEY_NEED_READ	0x02	/* Require permission to read content */
+#define	KEY_NEED_WRITE	0x04	/* Require permission to update / modify */
+#define	KEY_NEED_SEARCH	0x08	/* Require permission to search (keyring) or find (key) */
+#define	KEY_NEED_LINK	0x10	/* Require permission to link */
+#define	KEY_NEED_SETATTR 0x20	/* Require permission to change attributes */
+#define	KEY_NEED_ALL	0x3f	/* All the above permissions */
+
+>>>>>>> v3.18
 /**
  * key_is_instantiated - Determine if a key has been positively instantiated
  * @key: The key to check.
@@ -312,7 +399,11 @@ do {									\
 } while (0)
 
 #ifdef CONFIG_SYSCTL
+<<<<<<< HEAD
 extern ctl_table key_sysctls[];
+=======
+extern struct ctl_table key_sysctls[];
+>>>>>>> v3.18
 #endif
 /*
  * the userspace interface

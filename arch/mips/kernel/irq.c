@@ -62,9 +62,15 @@ void __init alloc_legacy_irqno(void)
 
 void free_irqno(unsigned int irq)
 {
+<<<<<<< HEAD
 	smp_mb__before_clear_bit();
 	clear_bit(irq, irq_map);
 	smp_mb__after_clear_bit();
+=======
+	smp_mb__before_atomic();
+	clear_bit(irq, irq_map);
+	smp_mb__after_atomic();
+>>>>>>> v3.18
 }
 
 /*
@@ -73,7 +79,10 @@ void free_irqno(unsigned int irq)
  */
 void ack_bad_irq(unsigned int irq)
 {
+<<<<<<< HEAD
 	smtc_im_ack_irq(irq);
+=======
+>>>>>>> v3.18
 	printk("unexpected IRQ # %d\n", irq);
 }
 
@@ -110,7 +119,11 @@ void __init init_IRQ(void)
 #endif
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_DEBUG_STACKOVERFLOW
+=======
+#ifdef DEBUG_STACKOVERFLOW
+>>>>>>> v3.18
 static inline void check_stack_overflow(void)
 {
 	unsigned long sp;
@@ -142,6 +155,7 @@ void __irq_entry do_IRQ(unsigned int irq)
 {
 	irq_enter();
 	check_stack_overflow();
+<<<<<<< HEAD
 	if (!smtc_handle_on_other_cpu(irq))
 		generic_handle_irq(irq);
 	irq_exit();
@@ -157,8 +171,13 @@ void __irq_entry do_IRQ_no_affinity(unsigned int irq)
 {
 	irq_enter();
 	smtc_im_backstop(irq);
+=======
+>>>>>>> v3.18
 	generic_handle_irq(irq);
 	irq_exit();
 }
 
+<<<<<<< HEAD
 #endif /* CONFIG_MIPS_MT_SMTC_IRQAFF */
+=======
+>>>>>>> v3.18

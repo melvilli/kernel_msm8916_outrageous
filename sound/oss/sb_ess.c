@@ -865,8 +865,11 @@ printk(KERN_INFO "FKS: ess_dsp_reset 1\n");
 ess_show_mixerregs (devc);
 #endif
 
+<<<<<<< HEAD
 	DEB(printk("Entered ess_dsp_reset()\n"));
 
+=======
+>>>>>>> v3.18
 	outb(3, DSP_RESET); /* Reset FIFO too */
 
 	udelay(10);
@@ -881,8 +884,11 @@ ess_show_mixerregs (devc);
 	}
 	ess_extended (devc);
 
+<<<<<<< HEAD
 	DEB(printk("sb_dsp_reset() OK\n"));
 
+=======
+>>>>>>> v3.18
 #ifdef FKS_LOGGING
 printk(KERN_INFO "FKS: dsp_reset 2\n");
 ess_show_mixerregs (devc);
@@ -1544,7 +1550,11 @@ static int ess_has_rec_mixer (int submodel)
 		return 1;
 	default:
 		return 0;
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 };
 
 #ifdef FKS_LOGGING

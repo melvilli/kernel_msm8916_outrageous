@@ -24,6 +24,10 @@
 #include <linux/platform_device.h>
 #include <linux/hw_random.h>
 #include <linux/delay.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+>>>>>>> v3.18
 #include <linux/of_platform.h>
 #include <asm/io.h>
 
@@ -112,7 +116,11 @@ static int rng_probe(struct platform_device *ofdev)
 
 	pasemi_rng.priv = (unsigned long)rng_regs;
 
+<<<<<<< HEAD
 	printk(KERN_INFO "Registering PA Semi RNG\n");
+=======
+	pr_info("Registering PA Semi RNG\n");
+>>>>>>> v3.18
 
 	err = hwrng_register(&pasemi_rng);
 

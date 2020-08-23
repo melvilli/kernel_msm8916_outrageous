@@ -37,6 +37,7 @@
 #include <net/tc_act/tc_csum.h>
 
 #define CSUM_TAB_MASK 15
+<<<<<<< HEAD
 static struct tcf_common *tcf_csum_ht[CSUM_TAB_MASK + 1];
 static u32 csum_idx_gen;
 static DEFINE_RWLOCK(csum_lock);
@@ -46,6 +47,8 @@ static struct tcf_hashinfo csum_hash_info = {
 	.hmask	= CSUM_TAB_MASK,
 	.lock	= &csum_lock,
 };
+=======
+>>>>>>> v3.18
 
 static const struct nla_policy csum_policy[TCA_CSUM_MAX + 1] = {
 	[TCA_CSUM_PARMS] = { .len = sizeof(struct tc_csum), },
@@ -56,7 +59,10 @@ static int tcf_csum_init(struct net *n, struct nlattr *nla, struct nlattr *est,
 {
 	struct nlattr *tb[TCA_CSUM_MAX + 1];
 	struct tc_csum *parm;
+<<<<<<< HEAD
 	struct tcf_common *pc;
+=======
+>>>>>>> v3.18
 	struct tcf_csum *p;
 	int ret = 0, err;
 
@@ -71,6 +77,7 @@ static int tcf_csum_init(struct net *n, struct nlattr *nla, struct nlattr *est,
 		return -EINVAL;
 	parm = nla_data(tb[TCA_CSUM_PARMS]);
 
+<<<<<<< HEAD
 	pc = tcf_hash_check(parm->index, a, bind, &csum_hash_info);
 	if (!pc) {
 		pc = tcf_hash_create(parm->index, est, a, sizeof(*p), bind,
@@ -87,23 +94,46 @@ static int tcf_csum_init(struct net *n, struct nlattr *nla, struct nlattr *est,
 		}
 	}
 
+=======
+	if (!tcf_hash_check(parm->index, a, bind)) {
+		ret = tcf_hash_create(parm->index, est, a, sizeof(*p), bind);
+		if (ret)
+			return ret;
+		ret = ACT_P_CREATED;
+	} else {
+		if (bind)/* dont override defaults */
+			return 0;
+		tcf_hash_release(a, bind);
+		if (!ovr)
+			return -EEXIST;
+	}
+
+	p = to_tcf_csum(a);
+>>>>>>> v3.18
 	spin_lock_bh(&p->tcf_lock);
 	p->tcf_action = parm->action;
 	p->update_flags = parm->update_flags;
 	spin_unlock_bh(&p->tcf_lock);
 
 	if (ret == ACT_P_CREATED)
+<<<<<<< HEAD
 		tcf_hash_insert(pc, &csum_hash_info);
+=======
+		tcf_hash_insert(a);
+>>>>>>> v3.18
 
 	return ret;
 }
 
+<<<<<<< HEAD
 static int tcf_csum_cleanup(struct tc_action *a, int bind)
 {
 	struct tcf_csum *p = a->priv;
 	return tcf_hash_release(&p->common, bind, &csum_hash_info);
 }
 
+=======
+>>>>>>> v3.18
 /**
  * tcf_csum_skb_nextlayer - Get next layer pointer
  * @skb: sk_buff to use
@@ -578,6 +608,7 @@ nla_put_failure:
 
 static struct tc_action_ops act_csum_ops = {
 	.kind		= "csum",
+<<<<<<< HEAD
 	.hinfo		= &csum_hash_info,
 	.type		= TCA_ACT_CSUM,
 	.capab		= TCA_CAP_NONE,
@@ -588,6 +619,13 @@ static struct tc_action_ops act_csum_ops = {
 	.lookup		= tcf_hash_search,
 	.init		= tcf_csum_init,
 	.walk		= tcf_generic_walker
+=======
+	.type		= TCA_ACT_CSUM,
+	.owner		= THIS_MODULE,
+	.act		= tcf_csum,
+	.dump		= tcf_csum_dump,
+	.init		= tcf_csum_init,
+>>>>>>> v3.18
 };
 
 MODULE_DESCRIPTION("Checksum updating actions");
@@ -595,7 +633,11 @@ MODULE_LICENSE("GPL");
 
 static int __init csum_init_module(void)
 {
+<<<<<<< HEAD
 	return tcf_register_action(&act_csum_ops);
+=======
+	return tcf_register_action(&act_csum_ops, CSUM_TAB_MASK);
+>>>>>>> v3.18
 }
 
 static void __exit csum_cleanup_module(void)

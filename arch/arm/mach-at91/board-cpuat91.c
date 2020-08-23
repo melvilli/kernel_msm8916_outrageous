@@ -43,6 +43,11 @@
 #include "at91_aic.h"
 #include "board.h"
 #include "generic.h"
+<<<<<<< HEAD
+=======
+#include "gpio.h"
+
+>>>>>>> v3.18
 
 static struct gpio_led cpuat91_leds[] = {
 	{

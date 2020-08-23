@@ -7,7 +7,11 @@
  * Licensed under GPLv2 or later.
  */
 /dts-v1/;
+<<<<<<< HEAD
 /include/ "at91sam9g25.dtsi"
+=======
+#include "at91sam9g25.dtsi"
+>>>>>>> v3.18
 
 / {
 	model = "Acme Systems Aria G25";
@@ -21,6 +25,10 @@
 		serial3 = &usart2;
 		serial4 = &usart3;
 		serial5 = &uart0;
+<<<<<<< HEAD
+=======
+		serial6 = &uart1;
+>>>>>>> v3.18
 	};
 
 	chosen {
@@ -41,6 +49,17 @@
 			compatible = "atmel,osc", "fixed-clock";
 			clock-frequency = <12000000>;
 		};
+<<<<<<< HEAD
+=======
+
+		slow_xtal {
+			clock-frequency = <32768>;
+		};
+
+		main_xtal {
+			clock-frequency = <12000000>;
+		};
+>>>>>>> v3.18
 	};
 
 	ahb {
@@ -112,6 +131,7 @@
 				status = "okay";
 			};
 
+<<<<<<< HEAD
 			uart0: serial@f8040000 {
 				compatible = "atmel,at91sam9260-usart";
 				reg = <0xf8040000 0x200>;
@@ -119,12 +139,28 @@
 				pinctrl-names = "default";
 				pinctrl-0 = <&pinctrl_uart0>;
 				status = "okay";
+=======
+			/*
+			 * UART0/1 pins are marked as GPIO on
+			 * Aria documentation.
+			 * Change to "okay" if you need additional serial ports
+			 */
+			uart0: serial@f8040000 {
+				status = "disabled";
+			};
+
+			uart1: serial@f8044000 {
+				status = "disabled";
+>>>>>>> v3.18
 			};
 
 			adc0: adc@f804c000 {
 				status = "okay";
 				atmel,adc-channels-used = <0xf>;
+<<<<<<< HEAD
 				atmel,adc-num-channels = <4>;
+=======
+>>>>>>> v3.18
 			};
 
 			dbgu: serial@fffff200 {
@@ -138,6 +174,13 @@
 					};
 				};
 			};
+<<<<<<< HEAD
+=======
+
+			rtc@fffffeb0 {
+				status = "okay";
+			};
+>>>>>>> v3.18
 		};
 
 		usb0: ohci@00600000 {
@@ -156,7 +199,11 @@
 		/* little green LED in middle of Aria G25 module */
 		aria_led {
 			label = "aria_led";
+<<<<<<< HEAD
 			gpios = <&pioB 8 0>; /* PB8 */
+=======
+			gpios = <&pioB 8 GPIO_ACTIVE_HIGH>; /* PB8 */
+>>>>>>> v3.18
 			linux,default-trigger = "heartbeat";
 		};
 
@@ -164,7 +211,11 @@
 
 	onewire@0 {
 		compatible = "w1-gpio";
+<<<<<<< HEAD
 		gpios = <&pioA 21 1>;
+=======
+		gpios = <&pioA 21 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_w1_0>;
 	};

@@ -211,6 +211,18 @@ fail:
 	return ret;
 }
 
+<<<<<<< HEAD
+=======
+static void mxr_resource_clear_clocks(struct mxr_resources *res)
+{
+	res->mixer	= ERR_PTR(-EINVAL);
+	res->vp		= ERR_PTR(-EINVAL);
+	res->sclk_mixer	= ERR_PTR(-EINVAL);
+	res->sclk_hdmi	= ERR_PTR(-EINVAL);
+	res->sclk_dac	= ERR_PTR(-EINVAL);
+}
+
+>>>>>>> v3.18
 static void mxr_release_plat_resources(struct mxr_device *mdev)
 {
 	free_irq(mdev->res.irq, mdev);
@@ -222,6 +234,7 @@ static void mxr_release_clocks(struct mxr_device *mdev)
 {
 	struct mxr_resources *res = &mdev->res;
 
+<<<<<<< HEAD
 	if (!IS_ERR_OR_NULL(res->sclk_dac))
 		clk_put(res->sclk_dac);
 	if (!IS_ERR_OR_NULL(res->sclk_hdmi))
@@ -231,6 +244,17 @@ static void mxr_release_clocks(struct mxr_device *mdev)
 	if (!IS_ERR_OR_NULL(res->vp))
 		clk_put(res->vp);
 	if (!IS_ERR_OR_NULL(res->mixer))
+=======
+	if (!IS_ERR(res->sclk_dac))
+		clk_put(res->sclk_dac);
+	if (!IS_ERR(res->sclk_hdmi))
+		clk_put(res->sclk_hdmi);
+	if (!IS_ERR(res->sclk_mixer))
+		clk_put(res->sclk_mixer);
+	if (!IS_ERR(res->vp))
+		clk_put(res->vp);
+	if (!IS_ERR(res->mixer))
+>>>>>>> v3.18
 		clk_put(res->mixer);
 }
 
@@ -239,6 +263,11 @@ static int mxr_acquire_clocks(struct mxr_device *mdev)
 	struct mxr_resources *res = &mdev->res;
 	struct device *dev = mdev->dev;
 
+<<<<<<< HEAD
+=======
+	mxr_resource_clear_clocks(res);
+
+>>>>>>> v3.18
 	res->mixer = clk_get(dev, "mixer");
 	if (IS_ERR(res->mixer)) {
 		mxr_err(mdev, "failed to get clock 'mixer'\n");
@@ -299,6 +328,10 @@ static void mxr_release_resources(struct mxr_device *mdev)
 	mxr_release_clocks(mdev);
 	mxr_release_plat_resources(mdev);
 	memset(&mdev->res, 0, sizeof(mdev->res));
+<<<<<<< HEAD
+=======
+	mxr_resource_clear_clocks(&mdev->res);
+>>>>>>> v3.18
 }
 
 static void mxr_release_layers(struct mxr_device *mdev)
@@ -335,19 +368,53 @@ static int mxr_runtime_resume(struct device *dev)
 {
 	struct mxr_device *mdev = to_mdev(dev);
 	struct mxr_resources *res = &mdev->res;
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 
 	mxr_dbg(mdev, "resume - start\n");
 	mutex_lock(&mdev->mutex);
 	/* turn clocks on */
+<<<<<<< HEAD
 	clk_enable(res->mixer);
 	clk_enable(res->vp);
 	clk_enable(res->sclk_mixer);
+=======
+	ret = clk_prepare_enable(res->mixer);
+	if (ret < 0) {
+		dev_err(mdev->dev, "clk_prepare_enable(mixer) failed\n");
+		goto fail;
+	}
+	ret = clk_prepare_enable(res->vp);
+	if (ret < 0) {
+		dev_err(mdev->dev, "clk_prepare_enable(vp) failed\n");
+		goto fail_mixer;
+	}
+	ret = clk_prepare_enable(res->sclk_mixer);
+	if (ret < 0) {
+		dev_err(mdev->dev, "clk_prepare_enable(sclk_mixer) failed\n");
+		goto fail_vp;
+	}
+>>>>>>> v3.18
 	/* apply default configuration */
 	mxr_reg_reset(mdev);
 	mxr_dbg(mdev, "resume - finished\n");
 
 	mutex_unlock(&mdev->mutex);
 	return 0;
+<<<<<<< HEAD
+=======
+
+fail_vp:
+	clk_disable_unprepare(res->vp);
+fail_mixer:
+	clk_disable_unprepare(res->mixer);
+fail:
+	mutex_unlock(&mdev->mutex);
+	dev_err(mdev->dev, "resume failed\n");
+	return ret;
+>>>>>>> v3.18
 }
 
 static int mxr_runtime_suspend(struct device *dev)
@@ -357,9 +424,15 @@ static int mxr_runtime_suspend(struct device *dev)
 	mxr_dbg(mdev, "suspend - start\n");
 	mutex_lock(&mdev->mutex);
 	/* turn clocks off */
+<<<<<<< HEAD
 	clk_disable(res->sclk_mixer);
 	clk_disable(res->vp);
 	clk_disable(res->mixer);
+=======
+	clk_disable_unprepare(res->sclk_mixer);
+	clk_disable_unprepare(res->vp);
+	clk_disable_unprepare(res->mixer);
+>>>>>>> v3.18
 	mutex_unlock(&mdev->mutex);
 	mxr_dbg(mdev, "suspend - finished\n");
 	return 0;

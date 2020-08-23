@@ -20,6 +20,7 @@
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
@@ -29,6 +30,11 @@
  * this source code.
  */
 
+=======
+ */
+
+#include <linux/module.h>
+>>>>>>> v3.18
 #include <linux/pci.h>
 
 #include "../comedidev.h"
@@ -56,6 +62,7 @@ static int apci2200_do_insn_bits(struct comedi_device *dev,
 				 struct comedi_insn *insn,
 				 unsigned int *data)
 {
+<<<<<<< HEAD
 	unsigned int mask = data[0];
 	unsigned int bits = data[1];
 
@@ -66,6 +73,12 @@ static int apci2200_do_insn_bits(struct comedi_device *dev,
 
 		outw(s->state, dev->iobase + APCI2200_DO_REG);
 	}
+=======
+	s->state = inw(dev->iobase + APCI2200_DO_REG);
+
+	if (comedi_dio_update_state(s, data))
+		outw(s->state, dev->iobase + APCI2200_DO_REG);
+>>>>>>> v3.18
 
 	data[1] = s->state;
 
@@ -130,8 +143,12 @@ static void apci2200_detach(struct comedi_device *dev)
 {
 	if (dev->iobase)
 		apci2200_reset(dev);
+<<<<<<< HEAD
 	comedi_spriv_free(dev, 2);
 	comedi_pci_disable(dev);
+=======
+	comedi_pci_detach(dev);
+>>>>>>> v3.18
 }
 
 static struct comedi_driver apci2200_driver = {
@@ -147,7 +164,11 @@ static int apci2200_pci_probe(struct pci_dev *dev,
 	return comedi_pci_auto_config(dev, &apci2200_driver, id->driver_data);
 }
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(apci2200_pci_table) = {
+=======
+static const struct pci_device_id apci2200_pci_table[] = {
+>>>>>>> v3.18
 	{ PCI_DEVICE(PCI_VENDOR_ID_ADDIDATA, 0x1005) },
 	{ 0 }
 };

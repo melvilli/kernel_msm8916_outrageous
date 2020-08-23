@@ -35,6 +35,13 @@
 #define SEEK_HOLE	4	/* seek to the next hole */
 #define SEEK_MAX	SEEK_HOLE
 
+<<<<<<< HEAD
+=======
+#define RENAME_NOREPLACE	(1 << 0)	/* Don't overwrite target */
+#define RENAME_EXCHANGE		(1 << 1)	/* Exchange source and dest */
+#define RENAME_WHITEOUT		(1 << 2)	/* Whiteout source */
+
+>>>>>>> v3.18
 struct fstrim_range {
 	__u64 start;
 	__u64 len;
@@ -49,9 +56,15 @@ struct files_stat_struct {
 };
 
 struct inodes_stat_t {
+<<<<<<< HEAD
 	int nr_inodes;
 	int nr_unused;
 	int dummy[5];		/* padding for sysctl ABI compatibility */
+=======
+	long nr_inodes;
+	long nr_unused;
+	long dummy[5];		/* padding for sysctl ABI compatibility */
+>>>>>>> v3.18
 };
 
 
@@ -165,6 +178,7 @@ struct inodes_stat_t {
 #define FS_IOC32_SETVERSION		_IOW('v', 2, int)
 
 /*
+<<<<<<< HEAD
  * File system encryption support
  */
 /* Policy provided via an ioctl on the topmost directory */
@@ -213,6 +227,8 @@ struct fscrypt_key {
 };
 
 /*
+=======
+>>>>>>> v3.18
  * Inode flags (FS_IOC_GETFLAGS / FS_IOC_SETFLAGS)
  */
 #define	FS_SECRM_FL			0x00000001 /* Secure deletion */

@@ -157,6 +157,7 @@ void wil_unmask_irq(struct wil6210_priv *wil)
 		  offsetof(struct RGF_ICR, ICC));
 
 	/* interrupt moderation parameters */
+<<<<<<< HEAD
 	if (wil->wdev->iftype == NL80211_IFTYPE_MONITOR) {
 		/* disable interrupt moderation for monitor
 		 * to get better timestamp precision
@@ -168,6 +169,9 @@ void wil_unmask_irq(struct wil6210_priv *wil)
 		iowrite32(BIT_DMA_ITR_CNT_CRL_EN,
 			  wil->csr + HOSTADDR(RGF_DMA_ITR_CNT_CRL));
 	}
+=======
+	wil_set_itr_trsh(wil);
+>>>>>>> v3.18
 
 	wil6210_unmask_irq_pseudo(wil);
 	wil6210_unmask_irq_tx(wil);

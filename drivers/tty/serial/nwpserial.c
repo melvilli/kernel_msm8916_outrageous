@@ -22,6 +22,10 @@
 #include <linux/of_platform.h>
 #include <linux/of_device.h>
 #include <linux/nwpserial.h>
+<<<<<<< HEAD
+=======
+#include <linux/delay.h>
+>>>>>>> v3.18
 #include <asm/prom.h>
 #include <asm/dcr.h>
 
@@ -149,7 +153,14 @@ static irqreturn_t nwpserial_interrupt(int irq, void *dev_id)
 			tty_insert_flip_char(port, ch, TTY_NORMAL);
 	} while (dcr_read(up->dcr_host, UART_LSR) & UART_LSR_DR);
 
+<<<<<<< HEAD
 	tty_flip_buffer_push(port);
+=======
+	spin_unlock(&up->port.lock);
+	tty_flip_buffer_push(port);
+	spin_lock(&up->port.lock);
+
+>>>>>>> v3.18
 	ret = IRQ_HANDLED;
 
 	/* clear interrupt */
@@ -237,11 +248,14 @@ static void nwpserial_break_ctl(struct uart_port *port, int ctl)
 	/* N/A */
 }
 
+<<<<<<< HEAD
 static void nwpserial_enable_ms(struct uart_port *port)
 {
 	/* N/A */
 }
 
+=======
+>>>>>>> v3.18
 static void nwpserial_stop_rx(struct uart_port *port)
 {
 	struct nwpserial_port *up;
@@ -312,7 +326,10 @@ static struct uart_ops nwpserial_pops = {
 	.stop_tx      = nwpserial_stop_tx,
 	.start_tx     = nwpserial_start_tx,
 	.stop_rx      = nwpserial_stop_rx,
+<<<<<<< HEAD
 	.enable_ms    = nwpserial_enable_ms,
+=======
+>>>>>>> v3.18
 	.break_ctl    = nwpserial_break_ctl,
 	.startup      = nwpserial_startup,
 	.shutdown     = nwpserial_shutdown,

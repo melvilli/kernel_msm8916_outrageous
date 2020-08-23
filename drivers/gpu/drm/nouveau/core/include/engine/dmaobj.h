@@ -12,13 +12,17 @@ struct nouveau_dmaobj {
 	u32 access;
 	u64 start;
 	u64 limit;
+<<<<<<< HEAD
 	u32 conf0;
+=======
+>>>>>>> v3.18
 };
 
 struct nouveau_dmaeng {
 	struct nouveau_engine base;
 
 	/* creates a "physical" dma object from a struct nouveau_dmaobj */
+<<<<<<< HEAD
 	int (*bind)(struct nouveau_dmaeng *dmaeng,
 		    struct nouveau_object *parent,
 		    struct nouveau_dmaobj *dmaobj,
@@ -44,5 +48,16 @@ extern struct nouveau_oclass nvc0_dmaeng_oclass;
 extern struct nouveau_oclass nvd0_dmaeng_oclass;
 
 extern struct nouveau_oclass nouveau_dmaobj_sclass[];
+=======
+	int (*bind)(struct nouveau_dmaobj *dmaobj,
+		    struct nouveau_object *parent,
+		    struct nouveau_gpuobj **);
+};
+
+extern struct nouveau_oclass *nv04_dmaeng_oclass;
+extern struct nouveau_oclass *nv50_dmaeng_oclass;
+extern struct nouveau_oclass *nvc0_dmaeng_oclass;
+extern struct nouveau_oclass *nvd0_dmaeng_oclass;
+>>>>>>> v3.18
 
 #endif

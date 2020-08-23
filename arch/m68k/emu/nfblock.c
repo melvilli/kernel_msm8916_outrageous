@@ -41,8 +41,13 @@ static inline s32 nfhd_read_write(u32 major, u32 minor, u32 rwflag, u32 recno,
 static inline s32 nfhd_get_capacity(u32 major, u32 minor, u32 *blocks,
 				    u32 *blocksize)
 {
+<<<<<<< HEAD
 	return nf_call(nfhd_id + NFHD_GET_CAPACITY, major, minor, blocks,
 		       blocksize);
+=======
+	return nf_call(nfhd_id + NFHD_GET_CAPACITY, major, minor,
+		       virt_to_phys(blocks), virt_to_phys(blocksize));
+>>>>>>> v3.18
 }
 
 static LIST_HEAD(nfhd_list);
@@ -62,6 +67,7 @@ struct nfhd_device {
 static void nfhd_make_request(struct request_queue *queue, struct bio *bio)
 {
 	struct nfhd_device *dev = queue->queuedata;
+<<<<<<< HEAD
 	struct bio_vec *bvec;
 	int i, dir, len, shift;
 	sector_t sec = bio->bi_sector;
@@ -73,6 +79,20 @@ static void nfhd_make_request(struct request_queue *queue, struct bio *bio)
 		len >>= 9;
 		nfhd_read_write(dev->id, 0, dir, sec >> shift, len >> shift,
 				bvec_to_phys(bvec));
+=======
+	struct bio_vec bvec;
+	struct bvec_iter iter;
+	int dir, len, shift;
+	sector_t sec = bio->bi_iter.bi_sector;
+
+	dir = bio_data_dir(bio);
+	shift = dev->bshift;
+	bio_for_each_segment(bvec, bio, iter) {
+		len = bvec.bv_len;
+		len >>= 9;
+		nfhd_read_write(dev->id, 0, dir, sec >> shift, len >> shift,
+				bvec_to_phys(&bvec));
+>>>>>>> v3.18
 		sec += len;
 	}
 	bio_endio(bio, 0);

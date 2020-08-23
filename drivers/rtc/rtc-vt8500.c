@@ -79,7 +79,10 @@
 
 struct vt8500_rtc {
 	void __iomem		*regbase;
+<<<<<<< HEAD
 	struct resource		*res;
+=======
+>>>>>>> v3.18
 	int			irq_alarm;
 	struct rtc_device	*rtc;
 	spinlock_t		lock;		/* Protects this structure */
@@ -209,6 +212,10 @@ static const struct rtc_class_ops vt8500_rtc_ops = {
 static int vt8500_rtc_probe(struct platform_device *pdev)
 {
 	struct vt8500_rtc *vt8500_rtc;
+<<<<<<< HEAD
+=======
+	struct resource	*res;
+>>>>>>> v3.18
 	int ret;
 
 	vt8500_rtc = devm_kzalloc(&pdev->dev,
@@ -219,6 +226,7 @@ static int vt8500_rtc_probe(struct platform_device *pdev)
 	spin_lock_init(&vt8500_rtc->lock);
 	platform_set_drvdata(pdev, vt8500_rtc);
 
+<<<<<<< HEAD
 	vt8500_rtc->res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!vt8500_rtc->res) {
 		dev_err(&pdev->dev, "No I/O memory resource defined\n");
@@ -247,6 +255,18 @@ static int vt8500_rtc_probe(struct platform_device *pdev)
 		ret = -EBUSY;
 		goto err_return;
 	}
+=======
+	vt8500_rtc->irq_alarm = platform_get_irq(pdev, 0);
+	if (vt8500_rtc->irq_alarm < 0) {
+		dev_err(&pdev->dev, "No alarm IRQ resource defined\n");
+		return vt8500_rtc->irq_alarm;
+	}
+
+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+	vt8500_rtc->regbase = devm_ioremap_resource(&pdev->dev, res);
+	if (IS_ERR(vt8500_rtc->regbase))
+		return PTR_ERR(vt8500_rtc->regbase);
+>>>>>>> v3.18
 
 	/* Enable RTC and set it to 24-hour mode */
 	writel(VT8500_RTC_CR_ENABLE,
@@ -282,8 +302,11 @@ static int vt8500_rtc_remove(struct platform_device *pdev)
 	/* Disable alarm matching */
 	writel(0, vt8500_rtc->regbase + VT8500_RTC_IS);
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -298,7 +321,11 @@ static struct platform_driver vt8500_rtc_driver = {
 	.driver		= {
 		.name	= "vt8500-rtc",
 		.owner	= THIS_MODULE,
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(wmt_dt_ids),
+=======
+		.of_match_table = wmt_dt_ids,
+>>>>>>> v3.18
 	},
 };
 

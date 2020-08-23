@@ -3,6 +3,11 @@
 #include <linux/audit.h>
 #include <asm/unistd.h>
 
+<<<<<<< HEAD
+=======
+#include "kernel.h"
+
+>>>>>>> v3.18
 static unsigned dir_class[] = {
 #include <asm-generic/audit_dir_write.h>
 ~0U
@@ -40,7 +45,10 @@ int audit_classify_arch(int arch)
 int audit_classify_syscall(int abi, unsigned syscall)
 {
 #ifdef CONFIG_COMPAT
+<<<<<<< HEAD
 	extern int sparc32_classify_syscall(unsigned);
+=======
+>>>>>>> v3.18
 	if (abi == AUDIT_ARCH_SPARC)
 		return sparc32_classify_syscall(syscall);
 #endif
@@ -61,11 +69,14 @@ int audit_classify_syscall(int abi, unsigned syscall)
 static int __init audit_classes_init(void)
 {
 #ifdef CONFIG_COMPAT
+<<<<<<< HEAD
 	extern __u32 sparc32_dir_class[];
 	extern __u32 sparc32_write_class[];
 	extern __u32 sparc32_read_class[];
 	extern __u32 sparc32_chattr_class[];
 	extern __u32 sparc32_signal_class[];
+=======
+>>>>>>> v3.18
 	audit_register_class(AUDIT_CLASS_WRITE_32, sparc32_write_class);
 	audit_register_class(AUDIT_CLASS_READ_32, sparc32_read_class);
 	audit_register_class(AUDIT_CLASS_DIR_WRITE_32, sparc32_dir_class);

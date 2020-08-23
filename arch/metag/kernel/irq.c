@@ -25,7 +25,11 @@ static union irq_ctx *hardirq_ctx[NR_CPUS] __read_mostly;
 static union irq_ctx *softirq_ctx[NR_CPUS] __read_mostly;
 #endif
 
+<<<<<<< HEAD
 struct irq_domain *root_domain;
+=======
+static struct irq_domain *root_domain;
+>>>>>>> v3.18
 
 static unsigned int startup_meta_irq(struct irq_data *data)
 {
@@ -159,13 +163,19 @@ void irq_ctx_exit(int cpu)
 
 extern asmlinkage void __do_softirq(void);
 
+<<<<<<< HEAD
 asmlinkage void do_softirq(void)
 {
 	unsigned long flags;
+=======
+void do_softirq_own_stack(void)
+{
+>>>>>>> v3.18
 	struct thread_info *curctx;
 	union irq_ctx *irqctx;
 	u32 *isp;
 
+<<<<<<< HEAD
 	if (in_interrupt())
 		return;
 
@@ -197,6 +207,26 @@ asmlinkage void do_softirq(void)
 	}
 
 	local_irq_restore(flags);
+=======
+	curctx = current_thread_info();
+	irqctx = softirq_ctx[smp_processor_id()];
+	irqctx->tinfo.task = curctx->task;
+
+	/* build the stack frame on the softirq stack */
+	isp = (u32 *) ((char *)irqctx + sizeof(struct thread_info));
+
+	asm volatile (
+		"MOV   D0.5,%0\n"
+		"SWAP  A0StP,D0.5\n"
+		"CALLR D1RtP,___do_softirq\n"
+		"MOV   A0StP,D0.5\n"
+		:
+		: "r" (isp)
+		: "memory", "cc", "D1Ar1", "D0Ar2", "D1Ar3", "D0Ar4",
+		  "D1Ar5", "D0Ar6", "D0Re0", "D1Re0", "D0.4", "D1RtP",
+		  "D0.5"
+		);
+>>>>>>> v3.18
 }
 #endif
 
@@ -275,6 +305,7 @@ int __init arch_probe_nr_irqs(void)
 }
 
 #ifdef CONFIG_HOTPLUG_CPU
+<<<<<<< HEAD
 static void route_irq(struct irq_data *data, unsigned int irq, unsigned int cpu)
 {
 	struct irq_desc *desc = irq_to_desc(irq);
@@ -286,6 +317,8 @@ static void route_irq(struct irq_data *data, unsigned int irq, unsigned int cpu)
 	raw_spin_unlock_irq(&desc->lock);
 }
 
+=======
+>>>>>>> v3.18
 /*
  * The CPU has been marked offline.  Migrate IRQs off this CPU.  If
  * the affinity settings do not allow other CPUs, force them onto any
@@ -294,10 +327,16 @@ static void route_irq(struct irq_data *data, unsigned int irq, unsigned int cpu)
 void migrate_irqs(void)
 {
 	unsigned int i, cpu = smp_processor_id();
+<<<<<<< HEAD
 	struct irq_desc *desc;
 
 	for_each_irq_desc(i, desc) {
 		struct irq_data *data = irq_desc_get_irq_data(desc);
+=======
+
+	for_each_active_irq(i) {
+		struct irq_data *data = irq_get_irq_data(i);
+>>>>>>> v3.18
 		unsigned int newcpu;
 
 		if (irqd_is_per_cpu(data))
@@ -313,11 +352,16 @@ void migrate_irqs(void)
 					    i, cpu);
 
 			cpumask_setall(data->affinity);
+<<<<<<< HEAD
 			newcpu = cpumask_any_and(data->affinity,
 						 cpu_online_mask);
 		}
 
 		route_irq(data, i, newcpu);
+=======
+		}
+		irq_set_affinity(i, data->affinity);
+>>>>>>> v3.18
 	}
 }
 #endif /* CONFIG_HOTPLUG_CPU */

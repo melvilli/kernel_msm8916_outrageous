@@ -185,7 +185,10 @@ static int da9052_wdt_probe(struct platform_device *pdev)
 	driver_data = devm_kzalloc(&pdev->dev, sizeof(*driver_data),
 				   GFP_KERNEL);
 	if (!driver_data) {
+<<<<<<< HEAD
 		dev_err(da9052->dev, "Unable to alloacate watchdog device\n");
+=======
+>>>>>>> v3.18
 		ret = -ENOMEM;
 		goto err;
 	}
@@ -215,14 +218,22 @@ static int da9052_wdt_probe(struct platform_device *pdev)
 		goto err;
 	}
 
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, driver_data);
+=======
+	platform_set_drvdata(pdev, driver_data);
+>>>>>>> v3.18
 err:
 	return ret;
 }
 
 static int da9052_wdt_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct da9052_wdt_data *driver_data = dev_get_drvdata(&pdev->dev);
+=======
+	struct da9052_wdt_data *driver_data = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 
 	watchdog_unregister_device(&driver_data->wdt);
 	kref_put(&driver_data->kref, da9052_wdt_release_resources);

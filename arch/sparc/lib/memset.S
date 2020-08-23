@@ -3,8 +3,14 @@
  * Copyright (C) 1996,1997 Jakub Jelinek (jj@sunsite.mff.cuni.cz)
  * Copyright (C) 1996 David S. Miller (davem@caip.rutgers.edu)
  *
+<<<<<<< HEAD
  * Returns 0, if ok, and number of bytes not yet set if exception
  * occurs and we were called as clear_user.
+=======
+ * Calls to memset returns initial %o0. Calls to bzero returns 0, if ok, and
+ * number of bytes not yet set if exception occurs and we were called as
+ * clear_user.
+>>>>>>> v3.18
  */
 
 #include <asm/ptrace.h>
@@ -65,6 +71,11 @@ __bzero_begin:
 	.globl	__memset_start, __memset_end
 __memset_start:
 memset:
+<<<<<<< HEAD
+=======
+	mov	%o0, %g1
+	mov	1, %g4
+>>>>>>> v3.18
 	and	%o1, 0xff, %g3
 	sll	%g3, 8, %g2
 	or	%g3, %g2, %g3
@@ -89,6 +100,10 @@ memset:
 	 sub	%o0, %o2, %o0
 
 __bzero:
+<<<<<<< HEAD
+=======
+	clr	%g4
+>>>>>>> v3.18
 	mov	%g0, %g3
 1:
 	cmp	%o1, 7
@@ -151,8 +166,13 @@ __bzero:
 	bne,a	8f
 	 EX(stb	%g3, [%o0], and %o1, 1)
 8:
+<<<<<<< HEAD
 	retl
 	 clr	%o0
+=======
+	b	0f
+	 nop
+>>>>>>> v3.18
 7:
 	be	13b
 	 orcc	%o1, 0, %g0
@@ -164,6 +184,15 @@ __bzero:
 	bne	8b
 	 EX(stb	%g3, [%o0 - 1], add %o1, 1)
 0:
+<<<<<<< HEAD
+=======
+	andcc	%g4, 1, %g0
+	be	5f
+	 nop
+	retl
+	 mov	%g1, %o0
+5:
+>>>>>>> v3.18
 	retl
 	 clr	%o0
 __memset_end:

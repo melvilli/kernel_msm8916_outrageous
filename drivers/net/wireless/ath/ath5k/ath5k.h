@@ -29,6 +29,10 @@
 #include <linux/average.h>
 #include <linux/leds.h>
 #include <net/mac80211.h>
+<<<<<<< HEAD
+=======
+#include <net/cfg80211.h>
+>>>>>>> v3.18
 
 /* RX/TX descriptor hw structs
  * TODO: Driver part should only see sw structs */
@@ -1284,6 +1288,10 @@ struct ath5k_hw {
 #define ATH_STAT_STARTED	3		/* opened & irqs enabled */
 
 	unsigned int		filter_flags;	/* HW flags, AR5K_RX_FILTER_* */
+<<<<<<< HEAD
+=======
+	unsigned int		fif_filter_flags; /* Current FIF_* filter flags */
+>>>>>>> v3.18
 	struct ieee80211_channel *curchan;	/* current h/w channel */
 
 	u16			nvifs;
@@ -1645,6 +1653,7 @@ static inline struct ath_regulatory *ath5k_hw_regulatory(struct ath5k_hw *ah)
 	return &(ath5k_hw_common(ah)->regulatory);
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_ATHEROS_AR231X
 #define AR5K_AR2315_PCI_BASE	((void __iomem *)0xb0100000)
 
@@ -1671,6 +1680,8 @@ static inline void ath5k_hw_reg_write(struct ath5k_hw *ah, u32 val, u16 reg)
 
 #else
 
+=======
+>>>>>>> v3.18
 static inline u32 ath5k_hw_reg_read(struct ath5k_hw *ah, u16 reg)
 {
 	return ioread32(ah->iobase + reg);
@@ -1681,8 +1692,11 @@ static inline void ath5k_hw_reg_write(struct ath5k_hw *ah, u32 val, u16 reg)
 	iowrite32(val, ah->iobase + reg);
 }
 
+<<<<<<< HEAD
 #endif
 
+=======
+>>>>>>> v3.18
 static inline enum ath_bus_type ath5k_get_bus_type(struct ath5k_hw *ah)
 {
 	return ath5k_hw_common(ah)->bus_ops->ath_bus_type;

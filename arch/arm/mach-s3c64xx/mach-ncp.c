@@ -16,6 +16,10 @@
 #include <linux/timer.h>
 #include <linux/init.h>
 #include <linux/serial_core.h>
+<<<<<<< HEAD
+=======
+#include <linux/serial_s3c.h>
+>>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <linux/io.h>
 #include <linux/i2c.h>
@@ -36,11 +40,17 @@
 #include <asm/irq.h>
 #include <asm/mach-types.h>
 
+<<<<<<< HEAD
 #include <plat/regs-serial.h>
 #include <linux/platform_data/i2c-s3c2410.h>
 #include <plat/fb.h>
 
 #include <plat/clock.h>
+=======
+#include <linux/platform_data/i2c-s3c2410.h>
+#include <plat/fb.h>
+
+>>>>>>> v3.18
 #include <plat/devs.h>
 #include <plat/cpu.h>
 #include <plat/samsung-time.h>
@@ -86,7 +96,11 @@ static struct map_desc ncp_iodesc[] __initdata = {};
 static void __init ncp_map_io(void)
 {
 	s3c64xx_init_io(ncp_iodesc, ARRAY_SIZE(ncp_iodesc));
+<<<<<<< HEAD
 	s3c24xx_init_clocks(12000000);
+=======
+	s3c64xx_set_xtal_freq(12000000);
+>>>>>>> v3.18
 	s3c24xx_init_uarts(ncp_uartcfgs, ARRAY_SIZE(ncp_uartcfgs));
 	samsung_set_timer_source(SAMSUNG_PWM3, SAMSUNG_PWM4);
 }
@@ -104,7 +118,10 @@ MACHINE_START(NCP, "NCP")
 	.init_irq	= s3c6410_init_irq,
 	.map_io		= ncp_map_io,
 	.init_machine	= ncp_machine_init,
+<<<<<<< HEAD
 	.init_late	= s3c64xx_init_late,
+=======
+>>>>>>> v3.18
 	.init_time	= samsung_timer_init,
 	.restart	= s3c64xx_restart,
 MACHINE_END

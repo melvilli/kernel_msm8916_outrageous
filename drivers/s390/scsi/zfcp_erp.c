@@ -3,7 +3,11 @@
  *
  * Error Recovery Procedures (ERP).
  *
+<<<<<<< HEAD
  * Copyright IBM Corp. 2002, 2016
+=======
+ * Copyright IBM Corp. 2002, 2010
+>>>>>>> v3.18
  */
 
 #define KMSG_COMPONENT "zfcp"
@@ -955,8 +959,12 @@ static void zfcp_erp_lun_strategy_clearstati(struct scsi_device *sdev)
 {
 	struct zfcp_scsi_dev *zfcp_sdev = sdev_to_zfcp(sdev);
 
+<<<<<<< HEAD
 	atomic_clear_mask(ZFCP_STATUS_COMMON_ACCESS_DENIED |
 			  ZFCP_STATUS_LUN_SHARED | ZFCP_STATUS_LUN_READONLY,
+=======
+	atomic_clear_mask(ZFCP_STATUS_COMMON_ACCESS_DENIED,
+>>>>>>> v3.18
 			  &zfcp_sdev->status);
 }
 
@@ -1212,6 +1220,7 @@ static void zfcp_erp_action_dequeue(struct zfcp_erp_action *erp_action)
 	}
 }
 
+<<<<<<< HEAD
 /**
  * zfcp_erp_try_rport_unblock - unblock rport if no more/new recovery
  * @port: zfcp_port whose fc_rport we should try to unblock
@@ -1268,6 +1277,8 @@ static void zfcp_erp_try_rport_unblock(struct zfcp_port *port)
 	write_unlock_irqrestore(&adapter->erp_lock, flags);
 }
 
+=======
+>>>>>>> v3.18
 static void zfcp_erp_action_cleanup(struct zfcp_erp_action *act, int result)
 {
 	struct zfcp_adapter *adapter = act->adapter;
@@ -1278,6 +1289,7 @@ static void zfcp_erp_action_cleanup(struct zfcp_erp_action *act, int result)
 	case ZFCP_ERP_ACTION_REOPEN_LUN:
 		if (!(act->status & ZFCP_STATUS_ERP_NO_REF))
 			scsi_device_put(sdev);
+<<<<<<< HEAD
 		zfcp_erp_try_rport_unblock(port);
 		break;
 
@@ -1290,6 +1302,13 @@ static void zfcp_erp_action_cleanup(struct zfcp_erp_action *act, int result)
 		if (act->step != ZFCP_ERP_STEP_UNINITIALIZED)
 			if (result == ZFCP_ERP_SUCCEEDED)
 				zfcp_erp_try_rport_unblock(port);
+=======
+		break;
+
+	case ZFCP_ERP_ACTION_REOPEN_PORT:
+		if (result == ZFCP_ERP_SUCCEEDED)
+			zfcp_scsi_schedule_rport_register(port);
+>>>>>>> v3.18
 		/* fall through */
 	case ZFCP_ERP_ACTION_REOPEN_PORT_FORCED:
 		put_device(&port->dev);

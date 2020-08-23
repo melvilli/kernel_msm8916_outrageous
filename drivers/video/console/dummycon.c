@@ -77,3 +77,7 @@ const struct consw dummy_con = {
     .con_set_palette =	DUMMY,
     .con_scrolldelta =	DUMMY,
 };
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(dummy_con);
+>>>>>>> v3.18

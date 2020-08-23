@@ -11,8 +11,13 @@
  * GNU General Public License for more details.
  */
 
+<<<<<<< HEAD
 #ifndef __GDM_WIMAX_H__
 #define __GDM_WIMAX_H__
+=======
+#ifndef __GDM72XX_GDM_WIMAX_H__
+#define __GDM72XX_GDM_WIMAX_H__
+>>>>>>> v3.18
 
 #include <linux/netdevice.h>
 #include <linux/types.h>
@@ -23,6 +28,7 @@
 
 #define DRIVER_VERSION		"3.2.3"
 
+<<<<<<< HEAD
 /*#define ETH_P_IP	0x0800 */
 /*#define ETH_P_ARP	0x0806 */
 /*#define ETH_P_IPV6	0x86DD */
@@ -44,6 +50,14 @@ struct phy_dev {
 	int	(*send_func)(void *priv_dev, void *data, int len,
 			void (*cb)(void *cb_data), void *cb_data);
 	int	(*rcv_func)(void *priv_dev,
+=======
+struct phy_dev {
+	void			*priv_dev;
+	struct net_device	*netdev;
+	int (*send_func)(void *priv_dev, void *data, int len,
+			 void (*cb)(void *cb_data), void *cb_data);
+	int (*rcv_func)(void *priv_dev,
+>>>>>>> v3.18
 			void (*cb)(void *cb_data, void *data, int len),
 			void *cb_data);
 };
@@ -51,6 +65,7 @@ struct phy_dev {
 struct nic {
 	struct net_device	*netdev;
 	struct phy_dev		*phy_dev;
+<<<<<<< HEAD
 
 	struct net_device_stats	stats;
 
@@ -89,3 +104,16 @@ extern int gdm_wimax_send_tx(struct sk_buff *skb, struct net_device *dev);
 extern void unregister_wimax_device(struct phy_dev *phy_dev);
 
 #endif
+=======
+	struct data_s		sdk_data[SIOC_DATA_MAX];
+#if defined(CONFIG_WIMAX_GDM72XX_QOS)
+	struct qos_cb_s		qos;
+#endif
+};
+
+int register_wimax_device(struct phy_dev *phy_dev, struct device *pdev);
+int gdm_wimax_send_tx(struct sk_buff *skb, struct net_device *dev);
+void unregister_wimax_device(struct phy_dev *phy_dev);
+
+#endif /* __GDM72XX_GDM_WIMAX_H__ */
+>>>>>>> v3.18

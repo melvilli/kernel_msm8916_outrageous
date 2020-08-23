@@ -52,7 +52,10 @@ struct pci_controller {
 /*
  * Used by boards to register their PCI busses before the actual scanning.
  */
+<<<<<<< HEAD
 extern struct pci_controller * alloc_pci_controller(void);
+=======
+>>>>>>> v3.18
 extern void register_pci_controller(struct pci_controller *hose);
 
 /*
@@ -74,16 +77,34 @@ extern unsigned long PCIBIOS_MIN_MEM;
 
 extern void pcibios_set_master(struct pci_dev *dev);
 
+<<<<<<< HEAD
 static inline void pcibios_penalize_isa_irq(int irq, int active)
 {
 	/* We don't do dynamic PCI IRQ allocation */
 }
 
+=======
+>>>>>>> v3.18
 #define HAVE_PCI_MMAP
 
 extern int pci_mmap_page_range(struct pci_dev *dev, struct vm_area_struct *vma,
 	enum pci_mmap_state mmap_state, int write_combine);
 
+<<<<<<< HEAD
+=======
+#define HAVE_ARCH_PCI_RESOURCE_TO_USER
+
+static inline void pci_resource_to_user(const struct pci_dev *dev, int bar,
+		const struct resource *rsrc, resource_size_t *start,
+		resource_size_t *end)
+{
+	phys_t size = resource_size(rsrc);
+
+	*start = fixup_bigphys_addr(rsrc->start, size);
+	*end = rsrc->start + size;
+}
+
+>>>>>>> v3.18
 /*
  * Dynamic DMA mapping stuff.
  * MIPS has everything mapped statically.
@@ -137,11 +158,14 @@ static inline int pci_get_legacy_ide_irq(struct pci_dev *dev, int channel)
 	return channel ? 15 : 14;
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_CPU_CAVIUM_OCTEON
 /* MSI arch hook for OCTEON */
 #define arch_setup_msi_irqs arch_setup_msi_irqs
 #endif
 
+=======
+>>>>>>> v3.18
 extern char * (*pcibios_plat_setup)(char *str);
 
 #ifdef CONFIG_OF

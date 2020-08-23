@@ -6,8 +6,14 @@
 #
 menuconfig DRM
 	tristate "Direct Rendering Manager (XFree86 4.1.0 and higher DRI support)"
+<<<<<<< HEAD
 	depends on (AGP || AGP=n) && !EMULATED_CMPXCHG && MMU
 	select HDMI
+=======
+	depends on (AGP || AGP=n) && !EMULATED_CMPXCHG && MMU && HAS_DMA
+	select HDMI
+	select FB_CMDLINE
+>>>>>>> v3.18
 	select I2C
 	select I2C_ALGOBIT
 	select DMA_SHARED_BUFFER
@@ -20,20 +26,39 @@ menuconfig DRM
 	  details.  You should also select and configure AGP
 	  (/dev/agpgart) support if it is available for your platform.
 
+<<<<<<< HEAD
 config DRM_USB
 	tristate
 	depends on DRM
 	depends on USB_SUPPORT && USB_ARCH_HAS_HCD
 	select USB
+=======
+config DRM_MIPI_DSI
+	bool
+	depends on DRM
+>>>>>>> v3.18
 
 config DRM_KMS_HELPER
 	tristate
 	depends on DRM
+<<<<<<< HEAD
+=======
+	help
+	  CRTC helpers for KMS drivers.
+
+config DRM_KMS_FB_HELPER
+	bool
+	depends on DRM_KMS_HELPER
+>>>>>>> v3.18
 	select FB
 	select FRAMEBUFFER_CONSOLE if !EXPERT
 	select FRAMEBUFFER_CONSOLE_DETECT_PRIMARY if FRAMEBUFFER_CONSOLE
 	help
+<<<<<<< HEAD
 	  FB and CRTC helpers for KMS drivers.
+=======
+	  FBDEV helpers for KMS drivers.
+>>>>>>> v3.18
 
 config DRM_LOAD_EDID_FIRMWARE
 	bool "Allow to specify an EDID data set instead of probing for it"
@@ -64,6 +89,10 @@ config DRM_GEM_CMA_HELPER
 config DRM_KMS_CMA_HELPER
 	bool
 	select DRM_GEM_CMA_HELPER
+<<<<<<< HEAD
+=======
+	select DRM_KMS_FB_HELPER
+>>>>>>> v3.18
 	select FB_SYS_FILLRECT
 	select FB_SYS_COPYAREA
 	select FB_SYS_IMAGEBLIT
@@ -72,6 +101,11 @@ config DRM_KMS_CMA_HELPER
 
 source "drivers/gpu/drm/i2c/Kconfig"
 
+<<<<<<< HEAD
+=======
+source "drivers/gpu/drm/bridge/Kconfig"
+
+>>>>>>> v3.18
 config DRM_TDFX
 	tristate "3dfx Banshee/Voodoo3+"
 	depends on DRM && PCI
@@ -96,10 +130,19 @@ config DRM_RADEON
 	select FB_CFB_IMAGEBLIT
 	select FW_LOADER
         select DRM_KMS_HELPER
+<<<<<<< HEAD
+=======
+	select DRM_KMS_FB_HELPER
+>>>>>>> v3.18
         select DRM_TTM
 	select POWER_SUPPLY
 	select HWMON
 	select BACKLIGHT_CLASS_DEVICE
+<<<<<<< HEAD
+=======
+	select INTERVAL_TREE
+	select MMU_NOTIFIER
+>>>>>>> v3.18
 	help
 	  Choose this option if you have an ATI Radeon graphics card.  There
 	  are both PCI and AGP versions.  You don't need to choose this to
@@ -120,6 +163,7 @@ config DRM_I810
 	  selected, the module will be called i810.  AGP support is required
 	  for this driver to work.
 
+<<<<<<< HEAD
 config DRM_I915
 	tristate "Intel 8xx/9xx/G3x/G4x/HD Graphics"
 	depends on DRM
@@ -166,6 +210,9 @@ config DRM_I915_KMS
 	  userspaces with this enabled will cause pain.  Note that this causes
 	  the driver to bind to PCI devices, which precludes loading things
 	  like intelfb.
+=======
+source "drivers/gpu/drm/i915/Kconfig"
+>>>>>>> v3.18
 
 config DRM_MGA
 	tristate "Matrox g200/g400"
@@ -213,6 +260,13 @@ source "drivers/gpu/drm/mgag200/Kconfig"
 
 source "drivers/gpu/drm/cirrus/Kconfig"
 
+<<<<<<< HEAD
+=======
+source "drivers/gpu/drm/armada/Kconfig"
+
+source "drivers/gpu/drm/rcar-du/Kconfig"
+
+>>>>>>> v3.18
 source "drivers/gpu/drm/shmobile/Kconfig"
 
 source "drivers/gpu/drm/omapdrm/Kconfig"
@@ -220,3 +274,16 @@ source "drivers/gpu/drm/omapdrm/Kconfig"
 source "drivers/gpu/drm/tilcdc/Kconfig"
 
 source "drivers/gpu/drm/qxl/Kconfig"
+<<<<<<< HEAD
+=======
+
+source "drivers/gpu/drm/bochs/Kconfig"
+
+source "drivers/gpu/drm/msm/Kconfig"
+
+source "drivers/gpu/drm/tegra/Kconfig"
+
+source "drivers/gpu/drm/panel/Kconfig"
+
+source "drivers/gpu/drm/sti/Kconfig"
+>>>>>>> v3.18

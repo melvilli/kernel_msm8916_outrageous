@@ -26,11 +26,16 @@
 #include <acpi/pdc_intel.h>
 
 #include <asm/numa.h>
+<<<<<<< HEAD
+=======
+#include <asm/fixmap.h>
+>>>>>>> v3.18
 #include <asm/processor.h>
 #include <asm/mmu.h>
 #include <asm/mpspec.h>
 #include <asm/realmode.h>
 
+<<<<<<< HEAD
 #define COMPILER_DEPENDENT_INT64   long long
 #define COMPILER_DEPENDENT_UINT64  unsigned long long
 
@@ -76,6 +81,8 @@ int __acpi_release_global_lock(unsigned int *lock);
 	    : "=r"(n_hi), "=r"(n_lo)	\
 	    : "0"(n_hi), "1"(n_lo))
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_ACPI
 extern int acpi_lapic;
 extern int acpi_ioapic;
@@ -86,6 +93,10 @@ extern int acpi_pci_disabled;
 extern int acpi_skip_timer_override;
 extern int acpi_use_timer_override;
 extern int acpi_fix_pin2_polarity;
+<<<<<<< HEAD
+=======
+extern int acpi_disable_cmcff;
+>>>>>>> v3.18
 
 extern u8 acpi_sci_flags;
 extern int acpi_sci_override_gsi;
@@ -111,7 +122,11 @@ static inline void acpi_disable_pci(void)
 }
 
 /* Low-level suspend routine. */
+<<<<<<< HEAD
 extern int acpi_suspend_lowlevel(void);
+=======
+extern int (*acpi_suspend_lowlevel)(void);
+>>>>>>> v3.18
 
 /* Physical address to resume after wakeup */
 #define acpi_wakeup_address ((unsigned long)(real_mode_header->wakeup_start))
@@ -164,10 +179,22 @@ static inline void arch_acpi_set_pdc_bits(u32 *buf)
 		buf[2] &= ~(ACPI_PDC_C_C2C3_FFH);
 }
 
+<<<<<<< HEAD
+=======
+static inline bool acpi_has_cpu_in_madt(void)
+{
+	return !!acpi_lapic;
+}
+
+>>>>>>> v3.18
 #else /* !CONFIG_ACPI */
 
 #define acpi_lapic 0
 #define acpi_ioapic 0
+<<<<<<< HEAD
+=======
+#define acpi_disable_cmcff 0
+>>>>>>> v3.18
 static inline void acpi_noirq_set(void) { }
 static inline void acpi_disable_pci(void) { }
 static inline void disable_acpi(void) { }

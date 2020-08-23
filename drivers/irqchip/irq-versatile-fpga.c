@@ -9,10 +9,19 @@
 #include <linux/module.h>
 #include <linux/of.h>
 #include <linux/of_address.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 
 #include <asm/exception.h>
 #include <asm/mach/irq.h>
 
+<<<<<<< HEAD
+=======
+#include "irqchip.h"
+
+>>>>>>> v3.18
 #define IRQ_STATUS		0x00
 #define IRQ_RAW_STATUS		0x04
 #define IRQ_ENABLE_SET		0x08
@@ -25,6 +34,11 @@
 #define FIQ_ENABLE_SET		0x28
 #define FIQ_ENABLE_CLEAR	0x2C
 
+<<<<<<< HEAD
+=======
+#define PIC_ENABLES             0x20	/* set interrupt pass through bits */
+
+>>>>>>> v3.18
 /**
  * struct fpga_irq_data - irq data container for the FPGA IRQ controller
  * @base: memory offset in virtual memory
@@ -91,7 +105,11 @@ static int handle_one_fpga(struct fpga_irq_data *f, struct pt_regs *regs)
 
 	while ((status  = readl(f->base + IRQ_STATUS))) {
 		irq = ffs(status) - 1;
+<<<<<<< HEAD
 		handle_IRQ(irq_find_mapping(f->domain, irq), regs);
+=======
+		handle_domain_irq(f->domain, irq, regs);
+>>>>>>> v3.18
 		handled = 1;
 	}
 
@@ -167,8 +185,17 @@ void __init fpga_irq_init(void __iomem *base, const char *name, int irq_start,
 			f->used_irqs++;
 		}
 
+<<<<<<< HEAD
 	pr_info("FPGA IRQ chip %d \"%s\" @ %p, %u irqs\n",
 		fpga_irq_id, name, base, f->used_irqs);
+=======
+	pr_info("FPGA IRQ chip %d \"%s\" @ %p, %u irqs",
+		fpga_irq_id, name, base, f->used_irqs);
+	if (parent_irq != -1)
+		pr_cont(", parent IRQ: %d\n", parent_irq);
+	else
+		pr_cont("\n");
+>>>>>>> v3.18
 
 	fpga_irq_id++;
 }
@@ -180,6 +207,10 @@ int __init fpga_irq_of_init(struct device_node *node,
 	void __iomem *base;
 	u32 clear_mask;
 	u32 valid_mask;
+<<<<<<< HEAD
+=======
+	int parent_irq;
+>>>>>>> v3.18
 
 	if (WARN_ON(!node))
 		return -ENODEV;
@@ -193,11 +224,37 @@ int __init fpga_irq_of_init(struct device_node *node,
 	if (of_property_read_u32(node, "valid-mask", &valid_mask))
 		valid_mask = 0;
 
+<<<<<<< HEAD
 	fpga_irq_init(base, node->name, 0, -1, valid_mask, node);
+=======
+	/* Some chips are cascaded from a parent IRQ */
+	parent_irq = irq_of_parse_and_map(node, 0);
+	if (!parent_irq) {
+		set_handle_irq(fpga_handle_irq);
+		parent_irq = -1;
+	}
+
+	fpga_irq_init(base, node->name, 0, parent_irq, valid_mask, node);
+>>>>>>> v3.18
 
 	writel(clear_mask, base + IRQ_ENABLE_CLEAR);
 	writel(clear_mask, base + FIQ_ENABLE_CLEAR);
 
+<<<<<<< HEAD
 	return 0;
 }
+=======
+	/*
+	 * On Versatile AB/PB, some secondary interrupts have a direct
+	 * pass-thru to the primary controller for IRQs 20 and 22-31 which need
+	 * to be enabled. See section 3.10 of the Versatile AB user guide.
+	 */
+	if (of_device_is_compatible(node, "arm,versatile-sic"))
+		writel(0xffd00000, base + PIC_ENABLES);
+
+	return 0;
+}
+IRQCHIP_DECLARE(arm_fpga, "arm,versatile-fpga-irq", fpga_irq_of_init);
+IRQCHIP_DECLARE(arm_fpga_sic, "arm,versatile-sic", fpga_irq_of_init);
+>>>>>>> v3.18
 #endif

@@ -83,6 +83,10 @@ enum da9052_chip_id {
 	DA9053_AA,
 	DA9053_BA,
 	DA9053_BB,
+<<<<<<< HEAD
+=======
+	DA9053_BC,
+>>>>>>> v3.18
 };
 
 struct da9052_pdata;
@@ -148,10 +152,22 @@ static inline int da9052_group_read(struct da9052 *da9052, unsigned char reg,
 				     unsigned reg_cnt, unsigned char *val)
 {
 	int ret;
+<<<<<<< HEAD
 
 	ret = regmap_bulk_read(da9052->regmap, reg, val, reg_cnt);
 	if (ret < 0)
 		return ret;
+=======
+	unsigned int tmp;
+	int i;
+
+	for (i = 0; i < reg_cnt; i++) {
+		ret = regmap_read(da9052->regmap, reg + i, &tmp);
+		val[i] = (unsigned char)tmp;
+		if (ret < 0)
+			return ret;
+	}
+>>>>>>> v3.18
 
 	if (da9052->fix_io) {
 		ret = da9052->fix_io(da9052, reg);
@@ -166,10 +182,20 @@ static inline int da9052_group_write(struct da9052 *da9052, unsigned char reg,
 				      unsigned reg_cnt, unsigned char *val)
 {
 	int ret;
+<<<<<<< HEAD
 
 	ret = regmap_raw_write(da9052->regmap, reg, val, reg_cnt);
 	if (ret < 0)
 		return ret;
+=======
+	int i;
+
+	for (i = 0; i < reg_cnt; i++) {
+		ret = regmap_write(da9052->regmap, reg + i, val[i]);
+		if (ret < 0)
+			return ret;
+	}
+>>>>>>> v3.18
 
 	if (da9052->fix_io) {
 		ret = da9052->fix_io(da9052, reg);
@@ -202,7 +228,11 @@ static inline int da9052_reg_update(struct da9052 *da9052, unsigned char reg,
 int da9052_device_init(struct da9052 *da9052, u8 chip_id);
 void da9052_device_exit(struct da9052 *da9052);
 
+<<<<<<< HEAD
 extern struct regmap_config da9052_regmap_config;
+=======
+extern const struct regmap_config da9052_regmap_config;
+>>>>>>> v3.18
 
 int da9052_irq_init(struct da9052 *da9052);
 int da9052_irq_exit(struct da9052 *da9052);

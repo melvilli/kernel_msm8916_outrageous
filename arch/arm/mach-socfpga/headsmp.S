@@ -9,6 +9,7 @@
  */
 #include <linux/linkage.h>
 #include <linux/init.h>
+<<<<<<< HEAD
 
 	__CPUINIT
 	.arch	armv7-a
@@ -26,6 +27,28 @@ ENTRY(secondary_trampoline)
 	ldr	r1, [r0]
 	bx	r1
 
+=======
+#include <asm/memory.h>
+
+	.arch	armv7-a
+
+ENTRY(secondary_trampoline)
+	/* CPU1 will always fetch from 0x0 when it is brought out of reset.
+	 * Thus, we can just subtract the PAGE_OFFSET to get the physical
+	 * address of &cpu1start_addr. This would not work for platforms
+	 * where the physical memory does not start at 0x0.
+	 */
+	adr	r0, 1f
+	ldmia	r0, {r1, r2}
+	sub	r2, r2, #PAGE_OFFSET
+	ldr	r3, [r2]
+	ldr	r4, [r3]
+	bx	r4
+
+	.align
+1:	.long	.
+	.long	socfpga_cpu1start_addr
+>>>>>>> v3.18
 ENTRY(secondary_trampoline_end)
 
 ENTRY(socfpga_secondary_startup)

@@ -74,8 +74,13 @@ static void faulty_fail(struct bio *bio, int error)
 {
 	struct bio *b = bio->bi_private;
 
+<<<<<<< HEAD
 	b->bi_size = bio->bi_size;
 	b->bi_sector = bio->bi_sector;
+=======
+	b->bi_iter.bi_size = bio->bi_iter.bi_size;
+	b->bi_iter.bi_sector = bio->bi_iter.bi_sector;
+>>>>>>> v3.18
 
 	bio_put(bio);
 
@@ -185,26 +190,50 @@ static void make_request(struct mddev *mddev, struct bio *bio)
 			return;
 		}
 
+<<<<<<< HEAD
 		if (check_sector(conf, bio->bi_sector, bio_end_sector(bio), WRITE))
 			failit = 1;
 		if (check_mode(conf, WritePersistent)) {
 			add_sector(conf, bio->bi_sector, WritePersistent);
+=======
+		if (check_sector(conf, bio->bi_iter.bi_sector,
+				 bio_end_sector(bio), WRITE))
+			failit = 1;
+		if (check_mode(conf, WritePersistent)) {
+			add_sector(conf, bio->bi_iter.bi_sector,
+				   WritePersistent);
+>>>>>>> v3.18
 			failit = 1;
 		}
 		if (check_mode(conf, WriteTransient))
 			failit = 1;
 	} else {
 		/* read request */
+<<<<<<< HEAD
 		if (check_sector(conf, bio->bi_sector, bio_end_sector(bio), READ))
+=======
+		if (check_sector(conf, bio->bi_iter.bi_sector,
+				 bio_end_sector(bio), READ))
+>>>>>>> v3.18
 			failit = 1;
 		if (check_mode(conf, ReadTransient))
 			failit = 1;
 		if (check_mode(conf, ReadPersistent)) {
+<<<<<<< HEAD
 			add_sector(conf, bio->bi_sector, ReadPersistent);
 			failit = 1;
 		}
 		if (check_mode(conf, ReadFixable)) {
 			add_sector(conf, bio->bi_sector, ReadFixable);
+=======
+			add_sector(conf, bio->bi_iter.bi_sector,
+				   ReadPersistent);
+			failit = 1;
+		}
+		if (check_mode(conf, ReadFixable)) {
+			add_sector(conf, bio->bi_iter.bi_sector,
+				   ReadFixable);
+>>>>>>> v3.18
 			failit = 1;
 		}
 	}

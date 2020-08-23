@@ -58,21 +58,32 @@
 
 /*---------------------  Static Classes  ----------------------------*/
 
+<<<<<<< HEAD
 /*---------------------  Static Variables  --------------------------*/
 static int msglevel = MSG_LEVEL_INFO;
 //static int          msglevel                =MSG_LEVEL_DEBUG;
+=======
+>>>>>>> v3.18
 /*---------------------  Static Functions  --------------------------*/
 
 static
 void
 s_vProbeChannel(
+<<<<<<< HEAD
 	PSDevice pDevice
+=======
+	struct vnt_private *pDevice
+>>>>>>> v3.18
 );
 
 static
 PSTxMgmtPacket
 s_MgrMakeProbeRequest(
+<<<<<<< HEAD
 	PSDevice pDevice,
+=======
+	struct vnt_private *pDevice,
+>>>>>>> v3.18
 	PSMgmtObject pMgmt,
 	unsigned char *pScanBSSID,
 	PWLAN_IE_SSID pSSID,
@@ -83,7 +94,11 @@ s_MgrMakeProbeRequest(
 static
 bool
 s_bCommandComplete(
+<<<<<<< HEAD
 	PSDevice pDevice
+=======
+	struct vnt_private *pDevice
+>>>>>>> v3.18
 );
 
 /*---------------------  Export Variables  --------------------------*/
@@ -105,7 +120,11 @@ s_bCommandComplete(
  */
 static
 void
+<<<<<<< HEAD
 vAdHocBeaconStop(PSDevice  pDevice)
+=======
+vAdHocBeaconStop(struct vnt_private *pDevice)
+>>>>>>> v3.18
 {
 	PSMgmtObject    pMgmt = &(pDevice->sMgmtObj);
 	bool bStop;
@@ -128,6 +147,7 @@ vAdHocBeaconStop(PSDevice  pDevice)
 		    (pMgmt->uScanChannel > CB_MAX_CHANNEL_24G)) {
 			bStop = true;
 		}
+<<<<<<< HEAD
 		if (pMgmt->uIBSSChannel >  CB_MAX_CHANNEL_24G) {
 			bStop = true;
 		}
@@ -136,6 +156,15 @@ vAdHocBeaconStop(PSDevice  pDevice)
 	if (bStop) {
 		MACvRegBitsOff(pDevice->PortOffset, MAC_REG_TCR, TCR_AUTOBCNTX);
 	}
+=======
+		if (pMgmt->uIBSSChannel >  CB_MAX_CHANNEL_24G)
+			bStop = true;
+
+	}
+
+	if (bStop)
+		MACvRegBitsOff(pDevice->PortOffset, MAC_REG_TCR, TCR_AUTOBCNTX);
+>>>>>>> v3.18
 } /* vAdHocBeaconStop */
 
 /*
@@ -153,7 +182,11 @@ vAdHocBeaconStop(PSDevice  pDevice)
  */
 static
 void
+<<<<<<< HEAD
 vAdHocBeaconRestart(PSDevice pDevice)
+=======
+vAdHocBeaconRestart(struct vnt_private *pDevice)
+>>>>>>> v3.18
 {
 	PSMgmtObject    pMgmt = &(pDevice->sMgmtObj);
 
@@ -183,7 +216,11 @@ vAdHocBeaconRestart(PSDevice pDevice)
 static
 void
 s_vProbeChannel(
+<<<<<<< HEAD
 	PSDevice pDevice
+=======
+	struct vnt_private *pDevice
+>>>>>>> v3.18
 )
 {
 	//1M,   2M,   5M,   11M,  18M,  24M,  36M,  54M
@@ -197,6 +234,7 @@ s_vProbeChannel(
 	PSMgmtObject    pMgmt = pDevice->pMgmt;
 	unsigned int ii;
 
+<<<<<<< HEAD
 	if (pDevice->eCurrentPHYType == PHY_TYPE_11A) {
 		pbyRate = &abyCurrSuppRatesA[0];
 	} else if (pDevice->eCurrentPHYType == PHY_TYPE_11B) {
@@ -204,6 +242,15 @@ s_vProbeChannel(
 	} else {
 		pbyRate = &abyCurrSuppRatesG[0];
 	}
+=======
+	if (pDevice->eCurrentPHYType == PHY_TYPE_11A)
+		pbyRate = &abyCurrSuppRatesA[0];
+	else if (pDevice->eCurrentPHYType == PHY_TYPE_11B)
+		pbyRate = &abyCurrSuppRatesB[0];
+	else
+		pbyRate = &abyCurrSuppRatesG[0];
+
+>>>>>>> v3.18
 	// build an assocreq frame and send it
 	pTxPacket = s_MgrMakeProbeRequest
 		(
@@ -217,11 +264,18 @@ s_vProbeChannel(
 
 	if (pTxPacket != NULL) {
 		for (ii = 0; ii < 2; ii++) {
+<<<<<<< HEAD
 			if (csMgmt_xmit(pDevice, pTxPacket) != CMD_STATUS_PENDING) {
 				DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Probe request sending fail.. \n");
 			} else {
 				DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Probe request is sending.. \n");
 			}
+=======
+			if (csMgmt_xmit(pDevice, pTxPacket) != CMD_STATUS_PENDING)
+				pr_debug("Probe request sending fail..\n");
+			else
+				pr_debug("Probe request is sending..\n");
+>>>>>>> v3.18
 		}
 	}
 }
@@ -233,6 +287,7 @@ s_vProbeChannel(
  *
  *
  * Return Value:
+<<<<<<< HEAD
  *    A ptr to Tx frame or NULL on allocation failue
  *
  -*/
@@ -240,6 +295,15 @@ s_vProbeChannel(
 PSTxMgmtPacket
 s_MgrMakeProbeRequest(
 	PSDevice pDevice,
+=======
+ *    A ptr to Tx frame or NULL on allocation failure
+ *
+ -*/
+
+static PSTxMgmtPacket
+s_MgrMakeProbeRequest(
+	struct vnt_private *pDevice,
+>>>>>>> v3.18
 	PSMgmtObject pMgmt,
 	unsigned char *pScanBSSID,
 	PWLAN_IE_SSID pSSID,
@@ -290,7 +354,11 @@ vCommandTimerWait(
 	unsigned int MSecond
 )
 {
+<<<<<<< HEAD
 	PSDevice        pDevice = (PSDevice)hDeviceContext;
+=======
+	struct vnt_private *pDevice = hDeviceContext;
+>>>>>>> v3.18
 
 	init_timer(&pDevice->sTimerCommand);
 	pDevice->sTimerCommand.data = (unsigned long) pDevice;
@@ -298,7 +366,10 @@ vCommandTimerWait(
 	// RUN_AT :1 msec ~= (HZ/1024)
 	pDevice->sTimerCommand.expires = (unsigned int)RUN_AT((MSecond * HZ) >> 10);
 	add_timer(&pDevice->sTimerCommand);
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 }
 
 void
@@ -306,7 +377,11 @@ vCommandTimer(
 	void *hDeviceContext
 )
 {
+<<<<<<< HEAD
 	PSDevice        pDevice = (PSDevice)hDeviceContext;
+=======
+	struct vnt_private *pDevice = hDeviceContext;
+>>>>>>> v3.18
 	PSMgmtObject    pMgmt = pDevice->pMgmt;
 	PWLAN_IE_SSID   pItemSSID;
 	PWLAN_IE_SSID   pItemSSIDCurr;
@@ -317,7 +392,11 @@ vCommandTimer(
 
 	if (pDevice->dwDiagRefCount != 0)
 		return;
+<<<<<<< HEAD
 	if (pDevice->bCmdRunning != true)
+=======
+	if (!pDevice->bCmdRunning)
+>>>>>>> v3.18
 		return;
 
 	spin_lock_irq(&pDevice->lock);
@@ -326,7 +405,11 @@ vCommandTimer(
 	case WLAN_CMD_SCAN_START:
 
 		pDevice->byReAssocCount = 0;
+<<<<<<< HEAD
 		if (pDevice->bRadioOff == true) {
+=======
+		if (pDevice->bRadioOff) {
+>>>>>>> v3.18
 			s_bCommandComplete(pDevice);
 			spin_unlock_irq(&pDevice->lock);
 			return;
@@ -334,12 +417,20 @@ vCommandTimer(
 
 		if (pMgmt->eCurrMode == WMAC_MODE_ESS_AP) {
 			s_bCommandComplete(pDevice);
+<<<<<<< HEAD
 			CARDbSetBSSID(pMgmt->pAdapter, pMgmt->abyCurrBSSID, OP_MODE_AP);
+=======
+			CARDbSetBSSID(pMgmt->pAdapter, pMgmt->abyCurrBSSID, NL80211_IFTYPE_AP);
+>>>>>>> v3.18
 			spin_unlock_irq(&pDevice->lock);
 			return;
 		}
 
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "eCommandState= WLAN_CMD_SCAN_START\n");
+=======
+		pr_debug("eCommandState= WLAN_CMD_SCAN_START\n");
+>>>>>>> v3.18
 		pItemSSID = (PWLAN_IE_SSID)pMgmt->abyScanSSID;
 		// wait all Data TD complete
 		if (pDevice->iTDUsed[TYPE_AC0DMA] != 0) {
@@ -359,25 +450,43 @@ vCommandTimer(
 			// Set Baseband's sensitivity back.
 			// Set channel back
 			set_channel(pMgmt->pAdapter, pMgmt->uCurrChannel);
+<<<<<<< HEAD
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Scanning, set back to channel: [%d]\n", pMgmt->uCurrChannel);
 			if (pMgmt->eCurrMode == WMAC_MODE_IBSS_STA) {
 				CARDbSetBSSID(pMgmt->pAdapter, pMgmt->abyCurrBSSID, OP_MODE_ADHOC);
 			} else {
 				CARDbSetBSSID(pMgmt->pAdapter, pMgmt->abyCurrBSSID, OP_MODE_INFRASTRUCTURE);
 			}
+=======
+			pr_debug("Scanning, set back to channel: [%d]\n",
+				 pMgmt->uCurrChannel);
+			if (pMgmt->eCurrMode == WMAC_MODE_IBSS_STA)
+				CARDbSetBSSID(pMgmt->pAdapter, pMgmt->abyCurrBSSID, NL80211_IFTYPE_ADHOC);
+			else
+				CARDbSetBSSID(pMgmt->pAdapter, pMgmt->abyCurrBSSID, NL80211_IFTYPE_STATION);
+
+>>>>>>> v3.18
 			vAdHocBeaconRestart(pDevice);
 			s_bCommandComplete(pDevice);
 
 		} else {
 //2008-8-4 <add> by chester
 			if (!is_channel_valid(pMgmt->uScanChannel)) {
+<<<<<<< HEAD
 				DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Invalid channel pMgmt->uScanChannel = %d \n", pMgmt->uScanChannel);
+=======
+				pr_debug("Invalid channel pMgmt->uScanChannel = %d\n",
+					 pMgmt->uScanChannel);
+>>>>>>> v3.18
 				s_bCommandComplete(pDevice);
 				spin_unlock_irq(&pDevice->lock);
 				return;
 			}
 			if (pMgmt->uScanChannel == pDevice->byMinChannel) {
+<<<<<<< HEAD
 				//pMgmt->eScanType = WMAC_SCAN_ACTIVE;
+=======
+>>>>>>> v3.18
 				pMgmt->abyScanBSSID[0] = 0xFF;
 				pMgmt->abyScanBSSID[1] = 0xFF;
 				pMgmt->abyScanBSSID[2] = 0xFF;
@@ -385,20 +494,34 @@ vCommandTimer(
 				pMgmt->abyScanBSSID[4] = 0xFF;
 				pMgmt->abyScanBSSID[5] = 0xFF;
 				pItemSSID->byElementID = WLAN_EID_SSID;
+<<<<<<< HEAD
 				// clear bssid list
 				// BSSvClearBSSList((void *)pDevice, pDevice->bLinkPass);
+=======
+>>>>>>> v3.18
 				pMgmt->eScanState = WMAC_IS_SCANNING;
 
 			}
 
 			vAdHocBeaconStop(pDevice);
 
+<<<<<<< HEAD
 			if (set_channel(pMgmt->pAdapter, pMgmt->uScanChannel) == true) {
 				DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "SCAN Channel: %d\n", pMgmt->uScanChannel);
 			} else {
 				DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "SET SCAN Channel Fail: %d\n", pMgmt->uScanChannel);
 			}
 			CARDbSetBSSID(pMgmt->pAdapter, pMgmt->abyCurrBSSID, OP_MODE_UNKNOWN);
+=======
+			if (set_channel(pMgmt->pAdapter, pMgmt->uScanChannel))
+				pr_debug("SCAN Channel: %d\n",
+					 pMgmt->uScanChannel);
+			else
+				pr_debug("SET SCAN Channel Fail: %d\n",
+					 pMgmt->uScanChannel);
+
+			CARDbSetBSSID(pMgmt->pAdapter, pMgmt->abyCurrBSSID, NL80211_IFTYPE_UNSPECIFIED);
+>>>>>>> v3.18
 			pMgmt->uScanChannel++;
 //2008-8-4 <modify> by chester
 			if (!is_channel_valid(pMgmt->uScanChannel) &&
@@ -408,7 +531,11 @@ vCommandTimer(
 
 			}
 
+<<<<<<< HEAD
 			if ((pMgmt->b11hEnable == false) ||
+=======
+			if (!pMgmt->b11hEnable ||
+>>>>>>> v3.18
 			    (pMgmt->uScanChannel < CB_MAX_CHANNEL_24G)) {
 				s_vProbeChannel(pDevice);
 				spin_unlock_irq(&pDevice->lock);
@@ -429,20 +556,36 @@ vCommandTimer(
 		// Set Baseband's sensitivity back.
 		// Set channel back
 		set_channel(pMgmt->pAdapter, pMgmt->uCurrChannel);
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Scanning, set back to channel: [%d]\n", pMgmt->uCurrChannel);
 		if (pMgmt->eCurrMode == WMAC_MODE_IBSS_STA) {
 			CARDbSetBSSID(pMgmt->pAdapter, pMgmt->abyCurrBSSID, OP_MODE_ADHOC);
 		} else {
 			CARDbSetBSSID(pMgmt->pAdapter, pMgmt->abyCurrBSSID, OP_MODE_INFRASTRUCTURE);
 		}
+=======
+		pr_debug("Scanning, set back to channel: [%d]\n",
+			 pMgmt->uCurrChannel);
+		if (pMgmt->eCurrMode == WMAC_MODE_IBSS_STA)
+			CARDbSetBSSID(pMgmt->pAdapter, pMgmt->abyCurrBSSID, NL80211_IFTYPE_ADHOC);
+		else
+			CARDbSetBSSID(pMgmt->pAdapter, pMgmt->abyCurrBSSID, NL80211_IFTYPE_STATION);
+>>>>>>> v3.18
 
 		pMgmt->eScanState = WMAC_NO_SCANNING;
 		vAdHocBeaconRestart(pDevice);
 //2008-0409-07, <Add> by Einsn Liu
 #ifdef WPA_SUPPLICANT_DRIVER_WEXT_SUPPORT
+<<<<<<< HEAD
 		if (pMgmt->eScanType == WMAC_SCAN_PASSIVE)
 		{//send scan event to wpa_Supplicant
 			union iwreq_data wrqu;
+=======
+		if (pMgmt->eScanType == WMAC_SCAN_PASSIVE) {
+			//send scan event to wpa_Supplicant
+			union iwreq_data wrqu;
+
+>>>>>>> v3.18
 			memset(&wrqu, 0, sizeof(wrqu));
 			wireless_send_event(pDevice->dev, SIOCGIWSCAN, &wrqu, NULL);
 		}
@@ -458,7 +601,11 @@ vCommandTimer(
 			spin_unlock_irq(&pDevice->lock);
 			return;
 		} else {
+<<<<<<< HEAD
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Send Disassociation Packet..\n");
+=======
+			pr_debug("Send Disassociation Packet..\n");
+>>>>>>> v3.18
 			// reason = 8 : disassoc because sta has left
 			vMgrDisassocBeginSta((void *)pDevice, pMgmt, pMgmt->abyCurrBSSID, (8), &Status);
 			pDevice->bLinkPass = false;
@@ -468,7 +615,10 @@ vCommandTimer(
 			memset(pItemSSID->abySSID, 0, WLAN_SSID_MAXLEN);
 			pMgmt->eCurrState = WMAC_STATE_IDLE;
 			pMgmt->sNodeDBTable[0].bActive = false;
+<<<<<<< HEAD
 //                pDevice->bBeaconBufReady = false;
+=======
+>>>>>>> v3.18
 		}
 		netif_stop_queue(pDevice->dev);
 		pDevice->eCommandState = WLAN_DISASSOCIATE_WAIT;
@@ -478,9 +628,14 @@ vCommandTimer(
 			spin_unlock_irq(&pDevice->lock);
 			return;
 		}
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " CARDbRadioPowerOff\n");
 		//2008-09-02  <mark>	by chester
 		// CARDbRadioPowerOff(pDevice);
+=======
+		pr_debug(" CARDbRadioPowerOff\n");
+		//2008-09-02  <mark>	by chester
+>>>>>>> v3.18
 		s_bCommandComplete(pDevice);
 		break;
 
@@ -492,17 +647,25 @@ vCommandTimer(
 			return;
 		}
 //2008-09-02  <mark> by chester
+<<<<<<< HEAD
 		// CARDbRadioPowerOff(pDevice);
+=======
+>>>>>>> v3.18
 		s_bCommandComplete(pDevice);
 		break;
 
 	case WLAN_CMD_SSID_START:
 		pDevice->byReAssocCount = 0;
+<<<<<<< HEAD
 		if (pDevice->bRadioOff == true) {
+=======
+		if (pDevice->bRadioOff) {
+>>>>>>> v3.18
 			s_bCommandComplete(pDevice);
 			spin_unlock_irq(&pDevice->lock);
 			return;
 		}
+<<<<<<< HEAD
 		printk("chester-abyDesireSSID=%s\n", ((PWLAN_IE_SSID)pMgmt->abyDesireSSID)->abySSID);
 		//memcpy(pMgmt->abyAdHocSSID,pMgmt->abyDesireSSID,
 		//((PWLAN_IE_SSID)pMgmt->abyDesireSSID)->len + WLAN_IEHDR_LEN);
@@ -517,6 +680,21 @@ vCommandTimer(
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " pItemSSIDCurr->len = %d\n", pItemSSIDCurr->len);
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " desire ssid = %s\n", pItemSSID->abySSID);
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " curr ssid = %s\n", pItemSSIDCurr->abySSID);
+=======
+		pr_debug("chester-abyDesireSSID=%s\n", ((PWLAN_IE_SSID)pMgmt->abyDesireSSID)->abySSID);
+		pItemSSID = (PWLAN_IE_SSID)pMgmt->abyDesireSSID;
+		pItemSSIDCurr = (PWLAN_IE_SSID)pMgmt->abyCurrSSID;
+		pr_debug(" cmd: desire ssid = %s\n", pItemSSID->abySSID);
+		pr_debug(" cmd: curr ssid = %s\n", pItemSSIDCurr->abySSID);
+
+		if (pMgmt->eCurrState == WMAC_STATE_ASSOC) {
+			pr_debug(" Cmd pMgmt->eCurrState == WMAC_STATE_ASSOC\n");
+			pr_debug(" pItemSSID->len =%d\n", pItemSSID->len);
+			pr_debug(" pItemSSIDCurr->len = %d\n",
+				 pItemSSIDCurr->len);
+			pr_debug(" desire ssid = %s\n", pItemSSID->abySSID);
+			pr_debug(" curr ssid = %s\n", pItemSSIDCurr->abySSID);
+>>>>>>> v3.18
 		}
 
 		if ((pMgmt->eCurrState == WMAC_STATE_ASSOC) ||
@@ -543,9 +721,15 @@ vCommandTimer(
 		if ((pMgmt->eCurrMode == WMAC_MODE_ESS_STA) && (pMgmt->eCurrState == WMAC_STATE_JOINTED)) {
 			// Call mgr to begin the deauthentication
 			// reason = (3) because sta has left ESS
+<<<<<<< HEAD
 			if (pMgmt->eCurrState >= WMAC_STATE_AUTH) {
 				vMgrDeAuthenBeginSta((void *)pDevice, pMgmt, pMgmt->abyCurrBSSID, (3), &Status);
 			}
+=======
+			if (pMgmt->eCurrState >= WMAC_STATE_AUTH)
+				vMgrDeAuthenBeginSta((void *)pDevice, pMgmt, pMgmt->abyCurrBSSID, (3), &Status);
+
+>>>>>>> v3.18
 			// Call mgr to begin the authentication
 			vMgrAuthenBeginSta((void *)pDevice, pMgmt, &Status);
 			if (Status == CMD_STATUS_SUCCESS) {
@@ -553,16 +737,26 @@ vCommandTimer(
 				pDevice->eCommandState = WLAN_AUTHENTICATE_WAIT;
 				vCommandTimerWait((void *)pDevice, AUTHENTICATE_TIMEOUT);
 				spin_unlock_irq(&pDevice->lock);
+<<<<<<< HEAD
 				DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " Set eCommandState = WLAN_AUTHENTICATE_WAIT\n");
+=======
+				pr_debug(" Set eCommandState = WLAN_AUTHENTICATE_WAIT\n");
+>>>>>>> v3.18
 				return;
 			}
 		}
 		// if Adhoc mode
 		else if (pMgmt->eCurrMode == WMAC_MODE_IBSS_STA) {
 			if (pMgmt->eCurrState == WMAC_STATE_JOINTED) {
+<<<<<<< HEAD
 				if (netif_queue_stopped(pDevice->dev)) {
 					netif_wake_queue(pDevice->dev);
 				}
+=======
+				if (netif_queue_stopped(pDevice->dev))
+					netif_wake_queue(pDevice->dev);
+
+>>>>>>> v3.18
 				pDevice->bLinkPass = true;
 
 				pMgmt->sNodeDBTable[0].bActive = true;
@@ -571,9 +765,15 @@ vCommandTimer(
 			} else {
 				// start own IBSS
 				vMgrCreateOwnIBSS((void *)pDevice, &Status);
+<<<<<<< HEAD
 				if (Status != CMD_STATUS_SUCCESS) {
 					DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " WLAN_CMD_IBSS_CREATE fail ! \n");
 				}
+=======
+				if (Status != CMD_STATUS_SUCCESS)
+					pr_debug(" WLAN_CMD_IBSS_CREATE fail !\n");
+
+>>>>>>> v3.18
 				BSSvAddMulticastNode(pDevice);
 			}
 		}
@@ -583,6 +783,7 @@ vCommandTimer(
 			    pMgmt->eConfigMode == WMAC_CONFIG_AUTO) {
 				// start own IBSS
 				vMgrCreateOwnIBSS((void *)pDevice, &Status);
+<<<<<<< HEAD
 				if (Status != CMD_STATUS_SUCCESS) {
 					DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " WLAN_CMD_IBSS_CREATE fail ! \n");
 				}
@@ -599,6 +800,25 @@ vCommandTimer(
 					memset(&wrqu, 0, sizeof(wrqu));
 					wrqu.ap_addr.sa_family = ARPHRD_ETHER;
 					printk("wireless_send_event--->SIOCGIWAP(disassociated:vMgrJoinBSSBegin Fail !!)\n");
+=======
+				if (Status != CMD_STATUS_SUCCESS)
+					pr_debug(" WLAN_CMD_IBSS_CREATE fail !\n");
+
+				BSSvAddMulticastNode(pDevice);
+				if (netif_queue_stopped(pDevice->dev))
+					netif_wake_queue(pDevice->dev);
+
+				pDevice->bLinkPass = true;
+			} else {
+				pr_debug("Disconnect SSID none\n");
+#ifdef WPA_SUPPLICANT_DRIVER_WEXT_SUPPORT
+				{
+					union iwreq_data  wrqu;
+
+					memset(&wrqu, 0, sizeof(wrqu));
+					wrqu.ap_addr.sa_family = ARPHRD_ETHER;
+					pr_debug("wireless_send_event--->SIOCGIWAP(disassociated:vMgrJoinBSSBegin Fail !!)\n");
+>>>>>>> v3.18
 					wireless_send_event(pDevice->dev, SIOCGIWAP, &wrqu, NULL);
 				}
 #endif
@@ -609,6 +829,7 @@ vCommandTimer(
 		break;
 
 	case WLAN_AUTHENTICATE_WAIT:
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "eCommandState == WLAN_AUTHENTICATE_WAIT\n");
 		if (pMgmt->eCurrState == WMAC_STATE_AUTH) {
 			// Call mgr to begin the association
@@ -618,6 +839,17 @@ vCommandTimer(
 			if (Status == CMD_STATUS_SUCCESS) {
 				pDevice->byLinkWaitCount = 0;
 				DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "eCommandState = WLAN_ASSOCIATE_WAIT\n");
+=======
+		pr_debug("eCommandState == WLAN_AUTHENTICATE_WAIT\n");
+		if (pMgmt->eCurrState == WMAC_STATE_AUTH) {
+			// Call mgr to begin the association
+			pDevice->byLinkWaitCount = 0;
+			pr_debug("eCurrState == WMAC_STATE_AUTH\n");
+			vMgrAssocBeginSta((void *)pDevice, pMgmt, &Status);
+			if (Status == CMD_STATUS_SUCCESS) {
+				pDevice->byLinkWaitCount = 0;
+				pr_debug("eCommandState = WLAN_ASSOCIATE_WAIT\n");
+>>>>>>> v3.18
 				pDevice->eCommandState = WLAN_ASSOCIATE_WAIT;
 				vCommandTimerWait((void *)pDevice, ASSOCIATE_TIMEOUT);
 				spin_unlock_irq(&pDevice->lock);
@@ -626,10 +858,17 @@ vCommandTimer(
 		}
 
 		else if (pMgmt->eCurrState < WMAC_STATE_AUTHPENDING) {
+<<<<<<< HEAD
 			printk("WLAN_AUTHENTICATE_WAIT:Authen Fail???\n");
 		} else if (pDevice->byLinkWaitCount <= 4) {    //mike add:wait another 2 sec if authenticated_frame delay!
 			pDevice->byLinkWaitCount++;
 			printk("WLAN_AUTHENTICATE_WAIT:wait %d times!!\n", pDevice->byLinkWaitCount);
+=======
+			pr_debug("WLAN_AUTHENTICATE_WAIT:Authen Fail???\n");
+		} else if (pDevice->byLinkWaitCount <= 4) {    //mike add:wait another 2 sec if authenticated_frame delay!
+			pDevice->byLinkWaitCount++;
+			pr_debug("WLAN_AUTHENTICATE_WAIT:wait %d times!!\n", pDevice->byLinkWaitCount);
+>>>>>>> v3.18
 			spin_unlock_irq(&pDevice->lock);
 			vCommandTimerWait((void *)pDevice, AUTHENTICATE_TIMEOUT/2);
 			return;
@@ -640,6 +879,7 @@ vCommandTimer(
 
 	case WLAN_ASSOCIATE_WAIT:
 		if (pMgmt->eCurrState == WMAC_STATE_ASSOC) {
+<<<<<<< HEAD
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "eCurrState == WMAC_STATE_ASSOC\n");
 			if (pDevice->ePSMode != WMAC_POWER_CAM) {
 				PSvEnablePowerSaving((void *)pDevice, pMgmt->wListenInterval);
@@ -647,6 +887,15 @@ vCommandTimer(
 			if (pMgmt->eAuthenMode >= WMAC_AUTH_WPA) {
 				KeybRemoveAllKey(&(pDevice->sKey), pDevice->abyBSSID, pDevice->PortOffset);
 			}
+=======
+			pr_debug("eCurrState == WMAC_STATE_ASSOC\n");
+			if (pDevice->ePSMode != WMAC_POWER_CAM)
+				PSvEnablePowerSaving((void *)pDevice, pMgmt->wListenInterval);
+
+			if (pMgmt->eAuthenMode >= WMAC_AUTH_WPA)
+				KeybRemoveAllKey(&(pDevice->sKey), pDevice->abyBSSID, pDevice->PortOffset);
+
+>>>>>>> v3.18
 			pDevice->bLinkPass = true;
 			pDevice->byLinkWaitCount = 0;
 			pDevice->byReAssocCount = 0;
@@ -655,11 +904,18 @@ vCommandTimer(
 				BBvSetFOE(pDevice->PortOffset);
 				PSbSendNullPacket(pDevice);
 			}
+<<<<<<< HEAD
 			if (netif_queue_stopped(pDevice->dev)) {
 				netif_wake_queue(pDevice->dev);
 			}
 #ifdef TxInSleep
 			if (pDevice->IsTxDataTrigger != false)   {    //TxDataTimer is not triggered at the first time
+=======
+			if (netif_queue_stopped(pDevice->dev))
+				netif_wake_queue(pDevice->dev);
+
+			if (pDevice->IsTxDataTrigger) {    //TxDataTimer is not triggered at the first time
+>>>>>>> v3.18
 				del_timer(&pDevice->sTimerTxData);
 				init_timer(&pDevice->sTimerTxData);
 				pDevice->sTimerTxData.data = (unsigned long) pDevice;
@@ -667,16 +923,28 @@ vCommandTimer(
 				pDevice->sTimerTxData.expires = RUN_AT(10*HZ);      //10s callback
 				pDevice->fTxDataInSleep = false;
 				pDevice->nTxDataTimeCout = 0;
+<<<<<<< HEAD
 			} else {
 			}
 			pDevice->IsTxDataTrigger = true;
 			add_timer(&pDevice->sTimerTxData);
 #endif
+=======
+			}
+
+			pDevice->IsTxDataTrigger = true;
+			add_timer(&pDevice->sTimerTxData);
+
+>>>>>>> v3.18
 		} else if (pMgmt->eCurrState < WMAC_STATE_ASSOCPENDING) {
 			printk("WLAN_ASSOCIATE_WAIT:Association Fail???\n");
 		} else if (pDevice->byLinkWaitCount <= 4) {    //mike add:wait another 2 sec if associated_frame delay!
 			pDevice->byLinkWaitCount++;
+<<<<<<< HEAD
 			printk("WLAN_ASSOCIATE_WAIT:wait %d times!!\n", pDevice->byLinkWaitCount);
+=======
+			pr_debug("WLAN_ASSOCIATE_WAIT:wait %d times!!\n", pDevice->byLinkWaitCount);
+>>>>>>> v3.18
 			spin_unlock_irq(&pDevice->lock);
 			vCommandTimerWait((void *)pDevice, ASSOCIATE_TIMEOUT/2);
 			return;
@@ -687,14 +955,22 @@ vCommandTimer(
 		break;
 
 	case WLAN_CMD_AP_MODE_START:
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "eCommandState == WLAN_CMD_AP_MODE_START\n");
+=======
+		pr_debug("eCommandState == WLAN_CMD_AP_MODE_START\n");
+>>>>>>> v3.18
 
 		if (pMgmt->eConfigMode == WMAC_CONFIG_AP) {
 			del_timer(&pMgmt->sTimerSecondCallback);
 			pMgmt->eCurrState = WMAC_STATE_IDLE;
 			pMgmt->eCurrMode = WMAC_MODE_STANDBY;
 			pDevice->bLinkPass = false;
+<<<<<<< HEAD
 			if (pDevice->bEnableHostWEP == true)
+=======
+			if (pDevice->bEnableHostWEP)
+>>>>>>> v3.18
 				BSSvClearNodeDBTable(pDevice, 1);
 			else
 				BSSvClearNodeDBTable(pDevice, 0);
@@ -703,6 +979,7 @@ vCommandTimer(
 			pDevice->bFixRate = false;
 
 			vMgrCreateOwnIBSS((void *)pDevice, &Status);
+<<<<<<< HEAD
 			if (Status != CMD_STATUS_SUCCESS) {
 				DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " vMgrCreateOwnIBSS fail ! \n");
 			}
@@ -714,6 +991,19 @@ vCommandTimer(
 			if (netif_queue_stopped(pDevice->dev)) {
 				netif_wake_queue(pDevice->dev);
 			}
+=======
+			if (Status != CMD_STATUS_SUCCESS)
+				pr_debug(" vMgrCreateOwnIBSS fail !\n");
+
+			// alway turn off unicast bit
+			MACvRegBitsOff(pDevice->PortOffset, MAC_REG_RCR, RCR_UNICAST);
+			pDevice->byRxMode &= ~RCR_UNICAST;
+			pr_debug("wcmd: rx_mode = %x\n", pDevice->byRxMode);
+			BSSvAddMulticastNode(pDevice);
+			if (netif_queue_stopped(pDevice->dev))
+				netif_wake_queue(pDevice->dev);
+
+>>>>>>> v3.18
 			pDevice->bLinkPass = true;
 			add_timer(&pMgmt->sTimerSecondCallback);
 		}
@@ -730,9 +1020,15 @@ vCommandTimer(
 				} else {
 					pDevice->bMoreData = true;
 				}
+<<<<<<< HEAD
 				if (!device_dma0_xmit(pDevice, skb, 0)) {
 					DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Multicast ps tx fail \n");
 				}
+=======
+				if (!device_dma0_xmit(pDevice, skb, 0))
+					pr_debug("Multicast ps tx fail\n");
+
+>>>>>>> v3.18
 				pMgmt->sNodeDBTable[0].wEnQueueCnt--;
 			}
 		}
@@ -741,8 +1037,14 @@ vCommandTimer(
 		for (ii = 1; ii < (MAX_NODE_NUM + 1); ii++) {
 			if (pMgmt->sNodeDBTable[ii].bActive &&
 			    pMgmt->sNodeDBTable[ii].bRxPSPoll) {
+<<<<<<< HEAD
 				DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Index=%d Enqueu Cnt= %d\n",
 					ii, pMgmt->sNodeDBTable[ii].wEnQueueCnt);
+=======
+				pr_debug("Index=%d Enqueu Cnt= %d\n",
+					 ii,
+					 pMgmt->sNodeDBTable[ii].wEnQueueCnt);
+>>>>>>> v3.18
 				while ((skb = skb_dequeue(&pMgmt->sNodeDBTable[ii].sTxPSQueue)) != NULL) {
 					if (skb_queue_empty(&pMgmt->sNodeDBTable[ii].sTxPSQueue)) {
 						// clear tx map
@@ -752,9 +1054,15 @@ vCommandTimer(
 					} else {
 						pDevice->bMoreData = true;
 					}
+<<<<<<< HEAD
 					if (!device_dma0_xmit(pDevice, skb, ii)) {
 						DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "sta ps tx fail \n");
 					}
+=======
+					if (!device_dma0_xmit(pDevice, skb, ii))
+						pr_debug("sta ps tx fail\n");
+
+>>>>>>> v3.18
 					pMgmt->sNodeDBTable[ii].wEnQueueCnt--;
 					// check if sta ps enabled, and wait next pspoll.
 					// if sta ps disable, then send all pending buffers.
@@ -765,7 +1073,12 @@ vCommandTimer(
 					// clear tx map
 					pMgmt->abyPSTxMap[pMgmt->sNodeDBTable[ii].wAID >> 3] &=
 						~byMask[pMgmt->sNodeDBTable[ii].wAID & 7];
+<<<<<<< HEAD
 					DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Index=%d PS queue clear \n", ii);
+=======
+					pr_debug("Index=%d PS queue clear\n",
+						 ii);
+>>>>>>> v3.18
 				}
 				pMgmt->sNodeDBTable[ii].bRxPSPoll = false;
 			}
@@ -775,8 +1088,13 @@ vCommandTimer(
 		break;
 
 	case WLAN_CMD_RADIO_START:
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "eCommandState == WLAN_CMD_RADIO_START\n");
 		if (pDevice->bRadioCmd == true)
+=======
+		pr_debug("eCommandState == WLAN_CMD_RADIO_START\n");
+		if (pDevice->bRadioCmd)
+>>>>>>> v3.18
 			CARDbRadioPowerOn(pDevice);
 		else
 			CARDbRadioPowerOff(pDevice);
@@ -785,7 +1103,10 @@ vCommandTimer(
 		break;
 
 	case WLAN_CMD_CHECK_BBSENSITIVITY_CHANGE:
+<<<<<<< HEAD
 		//DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "eCommandState == WLAN_CMD_CHECK_BBSENSITIVITY_START\n");
+=======
+>>>>>>> v3.18
 		// wait all TD complete
 		if (pDevice->iTDUsed[TYPE_AC0DMA] != 0) {
 			vCommandTimerWait((void *)pDevice, 10);
@@ -799,7 +1120,11 @@ vCommandTimer(
 		}
 		pDevice->byBBVGACurrent = pDevice->byBBVGANew;
 		BBvSetVGAGainOffset(pDevice, pDevice->byBBVGACurrent);
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "SetVGAGainOffset %02X\n", pDevice->byBBVGACurrent);
+=======
+		pr_debug("SetVGAGainOffset %02X\n", pDevice->byBBVGACurrent);
+>>>>>>> v3.18
 		s_bCommandComplete(pDevice);
 		break;
 
@@ -809,18 +1134,28 @@ vCommandTimer(
 
 	} //switch
 	spin_unlock_irq(&pDevice->lock);
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 }
 
 static
 bool
 s_bCommandComplete(
+<<<<<<< HEAD
 	PSDevice pDevice
+=======
+	struct vnt_private *pDevice
+>>>>>>> v3.18
 )
 {
 	PWLAN_IE_SSID pSSID;
 	bool bRadioCmd = false;
+<<<<<<< HEAD
 	//unsigned short wDeAuthenReason = 0;
+=======
+>>>>>>> v3.18
 	bool bForceSCAN = true;
 	PSMgmtObject  pMgmt = pDevice->pMgmt;
 
@@ -839,6 +1174,7 @@ s_bCommandComplete(
 		pDevice->bCmdRunning = true;
 		switch (pDevice->eCommand) {
 		case WLAN_CMD_BSSID_SCAN:
+<<<<<<< HEAD
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "eCommandState= WLAN_CMD_BSSID_SCAN\n");
 			pDevice->eCommandState = WLAN_CMD_SCAN_START;
 			pMgmt->uScanChannel = 0;
@@ -855,6 +1191,16 @@ s_bCommandComplete(
   }
   }
 */
+=======
+			pr_debug("eCommandState= WLAN_CMD_BSSID_SCAN\n");
+			pDevice->eCommandState = WLAN_CMD_SCAN_START;
+			pMgmt->uScanChannel = 0;
+			if (pSSID->len != 0)
+				memcpy(pMgmt->abyScanSSID, pSSID, WLAN_IEHDR_LEN + WLAN_SSID_MAXLEN + 1);
+			else
+				memset(pMgmt->abyScanSSID, 0, WLAN_IEHDR_LEN + WLAN_SSID_MAXLEN + 1);
+
+>>>>>>> v3.18
 			break;
 		case WLAN_CMD_SSID:
 			pDevice->eCommandState = WLAN_CMD_SSID_START;
@@ -862,7 +1208,11 @@ s_bCommandComplete(
 				pSSID->len = WLAN_SSID_MAXLEN;
 			if (pSSID->len != 0)
 				memcpy(pDevice->pMgmt->abyDesireSSID, pSSID, WLAN_IEHDR_LEN + WLAN_SSID_MAXLEN + 1);
+<<<<<<< HEAD
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "eCommandState= WLAN_CMD_SSID_START\n");
+=======
+			pr_debug("eCommandState= WLAN_CMD_SSID_START\n");
+>>>>>>> v3.18
 			break;
 		case WLAN_CMD_DISASSOCIATE:
 			pDevice->eCommandState = WLAN_CMD_DISASSOCIATE_START;
@@ -898,11 +1248,19 @@ bool bScheduleCommand(
 	unsigned char *pbyItem0
 )
 {
+<<<<<<< HEAD
 	PSDevice        pDevice = (PSDevice)hDeviceContext;
 
 	if (pDevice->cbFreeCmdQueue == 0) {
 		return false;
 	}
+=======
+	struct vnt_private *pDevice = hDeviceContext;
+
+	if (pDevice->cbFreeCmdQueue == 0)
+		return false;
+
+>>>>>>> v3.18
 	pDevice->eCmdQueue[pDevice->uCmdEnqueueIdx].eCmd = eCommand;
 	pDevice->eCmdQueue[pDevice->uCmdEnqueueIdx].bForceSCAN = true;
 	memset(pDevice->eCmdQueue[pDevice->uCmdEnqueueIdx].abyCmdDesireSSID, 0 , WLAN_IEHDR_LEN + WLAN_SSID_MAXLEN + 1);
@@ -923,11 +1281,14 @@ bool bScheduleCommand(
 		case WLAN_CMD_DISASSOCIATE:
 			pDevice->eCmdQueue[pDevice->uCmdEnqueueIdx].bNeedRadioOFF = *((int *)pbyItem0);
 			break;
+<<<<<<< HEAD
 /*
   case WLAN_CMD_DEAUTH:
   pDevice->eCmdQueue[pDevice->uCmdEnqueueIdx].wDeAuthenReason = *((unsigned short *)pbyItem0);
   break;
 */
+=======
+>>>>>>> v3.18
 
 		case WLAN_CMD_RX_PSPOLL:
 			break;
@@ -948,10 +1309,16 @@ bool bScheduleCommand(
 	ADD_ONE_WITH_WRAP_AROUND(pDevice->uCmdEnqueueIdx, CMD_Q_SIZE);
 	pDevice->cbFreeCmdQueue--;
 
+<<<<<<< HEAD
 	if (pDevice->bCmdRunning == false) {
 		s_bCommandComplete(pDevice);
 	} else {
 	}
+=======
+	if (!pDevice->bCmdRunning)
+		s_bCommandComplete(pDevice);
+
+>>>>>>> v3.18
 	return true;
 }
 
@@ -973,7 +1340,11 @@ bool bClearBSSID_SCAN(
 	void *hDeviceContext
 )
 {
+<<<<<<< HEAD
 	PSDevice        pDevice = (PSDevice)hDeviceContext;
+=======
+	struct vnt_private *pDevice = hDeviceContext;
+>>>>>>> v3.18
 	unsigned int uCmdDequeueIdx = pDevice->uCmdDequeueIdx;
 	unsigned int ii;
 
@@ -995,7 +1366,11 @@ vResetCommandTimer(
 	void *hDeviceContext
 )
 {
+<<<<<<< HEAD
 	PSDevice        pDevice = (PSDevice)hDeviceContext;
+=======
+	struct vnt_private *pDevice = hDeviceContext;
+>>>>>>> v3.18
 
 	//delete timer
 	del_timer(&pDevice->sTimerCommand);
@@ -1012,14 +1387,23 @@ vResetCommandTimer(
 	pDevice->bCmdClear = false;
 }
 
+<<<<<<< HEAD
 #ifdef TxInSleep
+=======
+>>>>>>> v3.18
 void
 BSSvSecondTxData(
 	void *hDeviceContext
 )
 {
+<<<<<<< HEAD
 	PSDevice        pDevice = (PSDevice)hDeviceContext;
 	PSMgmtObject  pMgmt = &(pDevice->sMgmtObj);
+=======
+	struct vnt_private *pDevice = hDeviceContext;
+	PSMgmtObject  pMgmt = &(pDevice->sMgmtObj);
+
+>>>>>>> v3.18
 	pDevice->nTxDataTimeCout++;
 
 	if (pDevice->nTxDataTimeCout < 4)     //don't tx data if timer less than 40s
@@ -1030,6 +1414,7 @@ BSSvSecondTxData(
 	}
 
 	spin_lock_irq(&pDevice->lock);
+<<<<<<< HEAD
 #if 1
 	if (((pDevice->bLinkPass == true) && (pMgmt->eAuthenMode < WMAC_AUTH_WPA)) ||  //open && sharekey linking
 	   (pDevice->fWPA_Authened == true)) {   //wpa linking
@@ -1047,3 +1432,19 @@ BSSvSecondTxData(
 		return;
 	}
 #endif
+=======
+
+	/* open && sharekey linking */
+	if ((pDevice->bLinkPass && (pMgmt->eAuthenMode < WMAC_AUTH_WPA)) ||
+	    pDevice->fWPA_Authened) {   /* wpa linking */
+		pDevice->fTxDataInSleep = true;
+		PSbSendNullPacket(pDevice);	/* send null packet */
+		pDevice->fTxDataInSleep = false;
+	}
+
+	spin_unlock_irq(&pDevice->lock);
+
+	pDevice->sTimerTxData.expires = RUN_AT(10*HZ); /* 10s callback */
+	add_timer(&pDevice->sTimerTxData);
+}
+>>>>>>> v3.18

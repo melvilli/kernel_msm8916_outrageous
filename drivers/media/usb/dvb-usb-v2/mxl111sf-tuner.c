@@ -1,7 +1,11 @@
 /*
  *  mxl111sf-tuner.c - driver for the MaxLinear MXL111SF CMOS tuner
  *
+<<<<<<< HEAD
  *  Copyright (C) 2010 Michael Krufky <mkrufky@kernellabs.com>
+=======
+ *  Copyright (C) 2010-2014 Michael Krufky <mkrufky@linuxtv.org>
+>>>>>>> v3.18
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -31,8 +35,11 @@ MODULE_PARM_DESC(debug, "set debugging level (1=info (or-able)).");
 	if (mxl111sf_tuner_debug) \
 		mxl_printk(KERN_DEBUG, fmt, ##arg)
 
+<<<<<<< HEAD
 #define err pr_err
 
+=======
+>>>>>>> v3.18
 /* ------------------------------------------------------------------------ */
 
 struct mxl111sf_tuner_state {
@@ -113,7 +120,11 @@ static struct mxl111sf_reg_ctrl_info *mxl111sf_calc_phy_tune_regs(u32 freq,
 		filt_bw = 63;
 		break;
 	default:
+<<<<<<< HEAD
 		err("%s: invalid bandwidth setting!", __func__);
+=======
+		pr_err("%s: invalid bandwidth setting!", __func__);
+>>>>>>> v3.18
 		return NULL;
 	}
 
@@ -304,12 +315,20 @@ static int mxl111sf_tuner_set_params(struct dvb_frontend *fe)
 			bw = 8;
 			break;
 		default:
+<<<<<<< HEAD
 			err("%s: bandwidth not set!", __func__);
+=======
+			pr_err("%s: bandwidth not set!", __func__);
+>>>>>>> v3.18
 			return -EINVAL;
 		}
 		break;
 	default:
+<<<<<<< HEAD
 		err("%s: modulation type not supported!", __func__);
+=======
+		pr_err("%s: modulation type not supported!", __func__);
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 	ret = mxl1x1sf_tune_rf(fe, c->frequency, bw);
@@ -514,7 +533,11 @@ struct dvb_frontend *mxl111sf_tuner_attach(struct dvb_frontend *fe,
 EXPORT_SYMBOL_GPL(mxl111sf_tuner_attach);
 
 MODULE_DESCRIPTION("MaxLinear MxL111SF CMOS tuner driver");
+<<<<<<< HEAD
 MODULE_AUTHOR("Michael Krufky <mkrufky@kernellabs.com>");
+=======
+MODULE_AUTHOR("Michael Krufky <mkrufky@linuxtv.org>");
+>>>>>>> v3.18
 MODULE_LICENSE("GPL");
 MODULE_VERSION("0.1");
 

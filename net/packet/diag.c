@@ -3,6 +3,10 @@
 #include <linux/net.h>
 #include <linux/netdevice.h>
 #include <linux/packet_diag.h>
+<<<<<<< HEAD
+=======
+#include <linux/percpu.h>
+>>>>>>> v3.18
 #include <net/net_namespace.h>
 #include <net/sock.h>
 

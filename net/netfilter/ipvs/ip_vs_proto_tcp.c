@@ -39,6 +39,10 @@ tcp_conn_schedule(int af, struct sk_buff *skb, struct ip_vs_proto_data *pd,
 	struct net *net;
 	struct ip_vs_service *svc;
 	struct tcphdr _tcph, *th;
+<<<<<<< HEAD
+=======
+	struct netns_ipvs *ipvs;
+>>>>>>> v3.18
 
 	th = skb_header_pointer(skb, iph->len, sizeof(_tcph), &_tcph);
 	if (th == NULL) {
@@ -46,14 +50,25 @@ tcp_conn_schedule(int af, struct sk_buff *skb, struct ip_vs_proto_data *pd,
 		return 0;
 	}
 	net = skb_net(skb);
+<<<<<<< HEAD
 	/* No !th->ack check to allow scheduling on SYN+ACK for Active FTP */
 	rcu_read_lock();
 	if (th->syn &&
+=======
+	ipvs = net_ipvs(net);
+	/* No !th->ack check to allow scheduling on SYN+ACK for Active FTP */
+	rcu_read_lock();
+	if ((th->syn || sysctl_sloppy_tcp(ipvs)) && !th->rst &&
+>>>>>>> v3.18
 	    (svc = ip_vs_service_find(net, af, skb->mark, iph->protocol,
 				      &iph->daddr, th->dest))) {
 		int ignored;
 
+<<<<<<< HEAD
 		if (ip_vs_todrop(net_ipvs(net))) {
+=======
+		if (ip_vs_todrop(ipvs)) {
+>>>>>>> v3.18
 			/*
 			 * It seems that we are very loaded.
 			 * We have to drop this packet :(
@@ -373,6 +388,7 @@ static const char *const tcp_state_name_table[IP_VS_TCP_S_LAST+1] = {
 	[IP_VS_TCP_S_LAST]		=	"BUG!",
 };
 
+<<<<<<< HEAD
 static const bool tcp_state_active_table[IP_VS_TCP_S_LAST] = {
 	[IP_VS_TCP_S_NONE]		=	false,
 	[IP_VS_TCP_S_ESTABLISHED]	=	true,
@@ -387,6 +403,8 @@ static const bool tcp_state_active_table[IP_VS_TCP_S_LAST] = {
 	[IP_VS_TCP_S_SYNACK]		=	true,
 };
 
+=======
+>>>>>>> v3.18
 #define sNO IP_VS_TCP_S_NONE
 #define sES IP_VS_TCP_S_ESTABLISHED
 #define sSS IP_VS_TCP_S_SYN_SENT
@@ -410,6 +428,7 @@ static const char * tcp_state_name(int state)
 	return tcp_state_name_table[state] ? tcp_state_name_table[state] : "?";
 }
 
+<<<<<<< HEAD
 static bool tcp_state_active(int state)
 {
 	if (state >= IP_VS_TCP_S_LAST)
@@ -417,12 +436,18 @@ static bool tcp_state_active(int state)
 	return tcp_state_active_table[state];
 }
 
+=======
+>>>>>>> v3.18
 static struct tcp_states_t tcp_states [] = {
 /*	INPUT */
 /*        sNO, sES, sSS, sSR, sFW, sTW, sCL, sCW, sLA, sLI, sSA	*/
 /*syn*/ {{sSR, sES, sES, sSR, sSR, sSR, sSR, sSR, sSR, sSR, sSR }},
 /*fin*/ {{sCL, sCW, sSS, sTW, sTW, sTW, sCL, sCW, sLA, sLI, sTW }},
+<<<<<<< HEAD
 /*ack*/ {{sCL, sES, sSS, sES, sFW, sTW, sCL, sCW, sCL, sLI, sES }},
+=======
+/*ack*/ {{sES, sES, sSS, sES, sFW, sTW, sCL, sCW, sCL, sLI, sES }},
+>>>>>>> v3.18
 /*rst*/ {{sCL, sCL, sCL, sSR, sCL, sCL, sCL, sCL, sLA, sLI, sSR }},
 
 /*	OUTPUT */
@@ -436,7 +461,11 @@ static struct tcp_states_t tcp_states [] = {
 /*        sNO, sES, sSS, sSR, sFW, sTW, sCL, sCW, sLA, sLI, sSA	*/
 /*syn*/ {{sSR, sES, sES, sSR, sSR, sSR, sSR, sSR, sSR, sSR, sSR }},
 /*fin*/ {{sCL, sFW, sSS, sTW, sFW, sTW, sCL, sCW, sLA, sLI, sTW }},
+<<<<<<< HEAD
 /*ack*/ {{sCL, sES, sSS, sES, sFW, sTW, sCL, sCW, sCL, sLI, sES }},
+=======
+/*ack*/ {{sES, sES, sSS, sES, sFW, sTW, sCL, sCW, sCL, sLI, sES }},
+>>>>>>> v3.18
 /*rst*/ {{sCL, sCL, sCL, sSR, sCL, sCL, sCL, sCL, sLA, sLI, sCL }},
 };
 
@@ -445,7 +474,11 @@ static struct tcp_states_t tcp_states_dos [] = {
 /*        sNO, sES, sSS, sSR, sFW, sTW, sCL, sCW, sLA, sLI, sSA	*/
 /*syn*/ {{sSR, sES, sES, sSR, sSR, sSR, sSR, sSR, sSR, sSR, sSA }},
 /*fin*/ {{sCL, sCW, sSS, sTW, sTW, sTW, sCL, sCW, sLA, sLI, sSA }},
+<<<<<<< HEAD
 /*ack*/ {{sCL, sES, sSS, sSR, sFW, sTW, sCL, sCW, sCL, sLI, sSA }},
+=======
+/*ack*/ {{sES, sES, sSS, sSR, sFW, sTW, sCL, sCW, sCL, sLI, sSA }},
+>>>>>>> v3.18
 /*rst*/ {{sCL, sCL, sCL, sSR, sCL, sCL, sCL, sCL, sLA, sLI, sCL }},
 
 /*	OUTPUT */
@@ -459,7 +492,11 @@ static struct tcp_states_t tcp_states_dos [] = {
 /*        sNO, sES, sSS, sSR, sFW, sTW, sCL, sCW, sLA, sLI, sSA	*/
 /*syn*/ {{sSA, sES, sES, sSR, sSA, sSA, sSA, sSA, sSA, sSA, sSA }},
 /*fin*/ {{sCL, sFW, sSS, sTW, sFW, sTW, sCL, sCW, sLA, sLI, sTW }},
+<<<<<<< HEAD
 /*ack*/ {{sCL, sES, sSS, sES, sFW, sTW, sCL, sCW, sCL, sLI, sES }},
+=======
+/*ack*/ {{sES, sES, sSS, sES, sFW, sTW, sCL, sCW, sCL, sLI, sES }},
+>>>>>>> v3.18
 /*rst*/ {{sCL, sCL, sCL, sSR, sCL, sCL, sCL, sCL, sLA, sLI, sCL }},
 };
 
@@ -529,7 +566,11 @@ set_tcp_state(struct ip_vs_proto_data *pd, struct ip_vs_conn *cp,
 			      th->fin ? 'F' : '.',
 			      th->ack ? 'A' : '.',
 			      th->rst ? 'R' : '.',
+<<<<<<< HEAD
 			      IP_VS_DBG_ADDR(cp->af, &cp->daddr),
+=======
+			      IP_VS_DBG_ADDR(cp->daf, &cp->daddr),
+>>>>>>> v3.18
 			      ntohs(cp->dport),
 			      IP_VS_DBG_ADDR(cp->af, &cp->caddr),
 			      ntohs(cp->cport),
@@ -539,12 +580,20 @@ set_tcp_state(struct ip_vs_proto_data *pd, struct ip_vs_conn *cp,
 
 		if (dest) {
 			if (!(cp->flags & IP_VS_CONN_F_INACTIVE) &&
+<<<<<<< HEAD
 			    !tcp_state_active(new_state)) {
+=======
+			    (new_state != IP_VS_TCP_S_ESTABLISHED)) {
+>>>>>>> v3.18
 				atomic_dec(&dest->activeconns);
 				atomic_inc(&dest->inactconns);
 				cp->flags |= IP_VS_CONN_F_INACTIVE;
 			} else if ((cp->flags & IP_VS_CONN_F_INACTIVE) &&
+<<<<<<< HEAD
 				   tcp_state_active(new_state)) {
+=======
+				   (new_state == IP_VS_TCP_S_ESTABLISHED)) {
+>>>>>>> v3.18
 				atomic_inc(&dest->activeconns);
 				atomic_dec(&dest->inactconns);
 				cp->flags &= ~IP_VS_CONN_F_INACTIVE;

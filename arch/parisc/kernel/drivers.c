@@ -282,6 +282,7 @@ find_pa_parent_type(const struct parisc_device *padev, int type)
 	return NULL;
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_PCI
 static inline int is_pci_dev(struct device *dev)
 {
@@ -294,6 +295,8 @@ static inline int is_pci_dev(struct device *dev)
 }
 #endif
 
+=======
+>>>>>>> v3.18
 /*
  * get_node_path fills in @path with the firmware path to the device.
  * Note that if @node is a parisc device, we don't fill in the 'mod' field.
@@ -306,7 +309,11 @@ static void get_node_path(struct device *dev, struct hardware_path *path)
 	int i = 5;
 	memset(&path->bc, -1, 6);
 
+<<<<<<< HEAD
 	if (is_pci_dev(dev)) {
+=======
+	if (dev_is_pci(dev)) {
+>>>>>>> v3.18
 		unsigned int devfn = to_pci_dev(dev)->devfn;
 		path->mod = PCI_FUNC(devfn);
 		path->bc[i--] = PCI_SLOT(devfn);
@@ -314,7 +321,11 @@ static void get_node_path(struct device *dev, struct hardware_path *path)
 	}
 
 	while (dev != &root) {
+<<<<<<< HEAD
 		if (is_pci_dev(dev)) {
+=======
+		if (dev_is_pci(dev)) {
+>>>>>>> v3.18
 			unsigned int devfn = to_pci_dev(dev)->devfn;
 			path->bc[i--] = PCI_SLOT(devfn) | (PCI_FUNC(devfn)<< 5);
 		} else if (dev->bus == &parisc_bus_type) {
@@ -695,7 +706,11 @@ static int check_parent(struct device * dev, void * data)
 		if (dev->bus == &parisc_bus_type) {
 			if (match_parisc_device(dev, d->index, d->modpath))
 				d->dev = dev;
+<<<<<<< HEAD
 		} else if (is_pci_dev(dev)) {
+=======
+		} else if (dev_is_pci(dev)) {
+>>>>>>> v3.18
 			if (match_pci_device(dev, d->index, d->modpath))
 				d->dev = dev;
 		} else if (dev->bus == NULL) {
@@ -753,7 +768,11 @@ struct device *hwpath_to_device(struct hardware_path *modpath)
 		if (!parent)
 			return NULL;
 	}
+<<<<<<< HEAD
 	if (is_pci_dev(parent)) /* pci devices already parse MOD */
+=======
+	if (dev_is_pci(parent)) /* pci devices already parse MOD */
+>>>>>>> v3.18
 		return parent;
 	else
 		return parse_tree_node(parent, 6, modpath);
@@ -772,7 +791,11 @@ void device_to_hwpath(struct device *dev, struct hardware_path *path)
 		padev = to_parisc_device(dev);
 		get_node_path(dev->parent, path);
 		path->mod = padev->hw_path;
+<<<<<<< HEAD
 	} else if (is_pci_dev(dev)) {
+=======
+	} else if (dev_is_pci(dev)) {
+>>>>>>> v3.18
 		get_node_path(dev, path);
 	}
 }

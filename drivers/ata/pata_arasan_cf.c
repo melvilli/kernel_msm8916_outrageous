@@ -319,6 +319,10 @@ static int cf_init(struct arasan_cf_dev *acdev)
 	ret = clk_set_rate(acdev->clk, 166000000);
 	if (ret) {
 		dev_warn(acdev->host->dev, "clock set rate failed");
+<<<<<<< HEAD
+=======
+		clk_disable_unprepare(acdev->clk);
+>>>>>>> v3.18
 		return ret;
 	}
 
@@ -355,7 +359,11 @@ static void cf_exit(struct arasan_cf_dev *acdev)
 
 static void dma_callback(void *dev)
 {
+<<<<<<< HEAD
 	struct arasan_cf_dev *acdev = (struct arasan_cf_dev *) dev;
+=======
+	struct arasan_cf_dev *acdev = dev;
+>>>>>>> v3.18
 
 	complete(&acdev->dma_completion);
 }
@@ -396,8 +404,12 @@ dma_xfer(struct arasan_cf_dev *acdev, dma_addr_t src, dma_addr_t dest, u32 len)
 	struct dma_async_tx_descriptor *tx;
 	struct dma_chan *chan = acdev->dma_chan;
 	dma_cookie_t cookie;
+<<<<<<< HEAD
 	unsigned long flags = DMA_PREP_INTERRUPT | DMA_COMPL_SKIP_SRC_UNMAP |
 		DMA_COMPL_SKIP_DEST_UNMAP;
+=======
+	unsigned long flags = DMA_PREP_INTERRUPT;
+>>>>>>> v3.18
 	int ret = 0;
 
 	tx = chan->device->device_prep_dma_memcpy(chan, dest, src, len, flags);
@@ -420,7 +432,11 @@ dma_xfer(struct arasan_cf_dev *acdev, dma_addr_t src, dma_addr_t dest, u32 len)
 
 	/* Wait for DMA to complete */
 	if (!wait_for_completion_timeout(&acdev->dma_completion, TIMEOUT)) {
+<<<<<<< HEAD
 		chan->device->device_control(chan, DMA_TERMINATE_ALL, 0);
+=======
+		dmaengine_terminate_all(chan);
+>>>>>>> v3.18
 		dev_err(acdev->host->dev, "wait_for_completion_timeout\n");
 		return -ETIMEDOUT;
 	}
@@ -654,7 +670,11 @@ static void arasan_cf_freeze(struct ata_port *ap)
 	ata_sff_freeze(ap);
 }
 
+<<<<<<< HEAD
 void arasan_cf_error_handler(struct ata_port *ap)
+=======
+static void arasan_cf_error_handler(struct ata_port *ap)
+>>>>>>> v3.18
 {
 	struct arasan_cf_dev *acdev = ap->host->private_data;
 
@@ -683,7 +703,11 @@ static void arasan_cf_dma_start(struct arasan_cf_dev *acdev)
 	ata_sff_queue_work(&acdev->work);
 }
 
+<<<<<<< HEAD
 unsigned int arasan_cf_qc_issue(struct ata_queued_cmd *qc)
+=======
+static unsigned int arasan_cf_qc_issue(struct ata_queued_cmd *qc)
+>>>>>>> v3.18
 {
 	struct ata_port *ap = qc->ap;
 	struct arasan_cf_dev *acdev = ap->host->private_data;
@@ -898,9 +922,18 @@ static int arasan_cf_probe(struct platform_device *pdev)
 
 	cf_card_detect(acdev, 0);
 
+<<<<<<< HEAD
 	return ata_host_activate(host, acdev->irq, irq_handler, 0,
 			&arasan_cf_sht);
 
+=======
+	ret = ata_host_activate(host, acdev->irq, irq_handler, 0,
+				&arasan_cf_sht);
+	if (!ret)
+		return 0;
+
+	cf_exit(acdev);
+>>>>>>> v3.18
 free_clk:
 	clk_put(acdev->clk);
 	return ret;
@@ -908,7 +941,11 @@ free_clk:
 
 static int arasan_cf_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct ata_host *host = dev_get_drvdata(&pdev->dev);
+=======
+	struct ata_host *host = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 	struct arasan_cf_dev *acdev = host->ports[0]->private_data;
 
 	ata_host_detach(host);
@@ -925,8 +962,12 @@ static int arasan_cf_suspend(struct device *dev)
 	struct arasan_cf_dev *acdev = host->ports[0]->private_data;
 
 	if (acdev->dma_chan)
+<<<<<<< HEAD
 		acdev->dma_chan->device->device_control(acdev->dma_chan,
 				DMA_TERMINATE_ALL, 0);
+=======
+		dmaengine_terminate_all(acdev->dma_chan);
+>>>>>>> v3.18
 
 	cf_exit(acdev);
 	return ata_host_suspend(host, PMSG_SUSPEND);

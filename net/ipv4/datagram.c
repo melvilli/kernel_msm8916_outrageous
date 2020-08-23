@@ -20,7 +20,11 @@
 #include <net/route.h>
 #include <net/tcp_states.h>
 
+<<<<<<< HEAD
 int __ip4_datagram_connect(struct sock *sk, struct sockaddr *uaddr, int addr_len)
+=======
+int ip4_datagram_connect(struct sock *sk, struct sockaddr *uaddr, int addr_len)
+>>>>>>> v3.18
 {
 	struct inet_sock *inet = inet_sk(sk);
 	struct sockaddr_in *usin = (struct sockaddr_in *) uaddr;
@@ -39,6 +43,11 @@ int __ip4_datagram_connect(struct sock *sk, struct sockaddr *uaddr, int addr_len
 
 	sk_dst_reset(sk);
 
+<<<<<<< HEAD
+=======
+	lock_sock(sk);
+
+>>>>>>> v3.18
 	oif = sk->sk_bound_dev_if;
 	saddr = inet->inet_saddr;
 	if (ipv4_is_multicast(usin->sin_addr.s_addr)) {
@@ -51,7 +60,11 @@ int __ip4_datagram_connect(struct sock *sk, struct sockaddr *uaddr, int addr_len
 	rt = ip_route_connect(fl4, usin->sin_addr.s_addr, saddr,
 			      RT_CONN_FLAGS(sk), oif,
 			      sk->sk_protocol,
+<<<<<<< HEAD
 			      inet->inet_sport, usin->sin_port, sk, true);
+=======
+			      inet->inet_sport, usin->sin_port, sk);
+>>>>>>> v3.18
 	if (IS_ERR(rt)) {
 		err = PTR_ERR(rt);
 		if (err == -ENETUNREACH)
@@ -74,11 +87,16 @@ int __ip4_datagram_connect(struct sock *sk, struct sockaddr *uaddr, int addr_len
 	inet->inet_daddr = fl4->daddr;
 	inet->inet_dport = usin->sin_port;
 	sk->sk_state = TCP_ESTABLISHED;
+<<<<<<< HEAD
+=======
+	inet_set_txhash(sk);
+>>>>>>> v3.18
 	inet->inet_id = jiffies;
 
 	sk_dst_set(sk, &rt->dst);
 	err = 0;
 out:
+<<<<<<< HEAD
 	return err;
 }
 EXPORT_SYMBOL(__ip4_datagram_connect);
@@ -91,6 +109,10 @@ int ip4_datagram_connect(struct sock *sk, struct sockaddr *uaddr, int addr_len)
 	res = __ip4_datagram_connect(sk, uaddr, addr_len);
 	release_sock(sk);
 	return res;
+=======
+	release_sock(sk);
+	return err;
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(ip4_datagram_connect);
 

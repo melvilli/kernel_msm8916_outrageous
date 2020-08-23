@@ -34,6 +34,7 @@
 #include <linux/numa.h>
 #include <asm/numa.h>
 
+<<<<<<< HEAD
 #define COMPILER_DEPENDENT_INT64	long
 #define COMPILER_DEPENDENT_UINT64	unsigned long
 
@@ -85,14 +86,29 @@ ia64_acpi_release_global_lock (unsigned int *lock)
 	((Acq) = ia64_acpi_release_global_lock(&facs->global_lock))
 
 #ifdef	CONFIG_ACPI
+=======
+#ifdef	CONFIG_ACPI
+extern int acpi_lapic;
+>>>>>>> v3.18
 #define acpi_disabled 0	/* ACPI always enabled on IA64 */
 #define acpi_noirq 0	/* ACPI always enabled on IA64 */
 #define acpi_pci_disabled 0 /* ACPI PCI always enabled on IA64 */
 #define acpi_strict 1	/* no ACPI spec workarounds on IA64 */
+<<<<<<< HEAD
 #endif
 #define acpi_processor_cstate_check(x) (x) /* no idle limits on IA64 :) */
 static inline void disable_acpi(void) { }
 static inline void pci_acpi_crs_quirks(void) { }
+=======
+
+static inline bool acpi_has_cpu_in_madt(void)
+{
+	return !!acpi_lapic;
+}
+#endif
+#define acpi_processor_cstate_check(x) (x) /* no idle limits on IA64 :) */
+static inline void disable_acpi(void) { }
+>>>>>>> v3.18
 
 #ifdef CONFIG_IA64_GENERIC
 const char *acpi_get_sysname (void);
@@ -111,8 +127,11 @@ static inline const char *acpi_get_sysname (void)
 	return "uv";
 # elif defined (CONFIG_IA64_DIG)
 	return "dig";
+<<<<<<< HEAD
 # elif defined (CONFIG_IA64_XEN_GUEST)
 	return "xen";
+=======
+>>>>>>> v3.18
 # elif defined(CONFIG_IA64_DIG_VTD)
 	return "dig_vtd";
 # else

@@ -33,6 +33,10 @@
 #include <asm/syscalls.h>
 #include <asm/traps.h>
 #include <asm/setup.h>
+<<<<<<< HEAD
+=======
+#include <asm/uaccess.h>
+>>>>>>> v3.18
 #ifdef CONFIG_HARDWALL
 #include <asm/hardwall.h>
 #endif
@@ -63,7 +67,11 @@ early_param("idle", idle_setup);
 
 void arch_cpu_idle(void)
 {
+<<<<<<< HEAD
 	__get_cpu_var(irq_stat).idle_timestamp = jiffies;
+=======
+	__this_cpu_write(irq_stat.idle_timestamp, jiffies);
+>>>>>>> v3.18
 	_cpu_idle();
 }
 
@@ -74,6 +82,7 @@ void arch_release_thread_info(struct thread_info *info)
 {
 	struct single_step_state *step_state = info->step_state;
 
+<<<<<<< HEAD
 #ifdef CONFIG_HARDWALL
 	/*
 	 * We free a thread_info from the context of the task that has
@@ -87,6 +96,8 @@ void arch_release_thread_info(struct thread_info *info)
 	hardwall_deactivate_all(info->task);
 #endif
 
+=======
+>>>>>>> v3.18
 	if (step_state) {
 
 		/*
@@ -160,6 +171,17 @@ int copy_thread(unsigned long clone_flags, unsigned long sp,
 	 */
 	task_thread_info(p)->step_state = NULL;
 
+<<<<<<< HEAD
+=======
+#ifdef __tilegx__
+	/*
+	 * Do not clone unalign jit fixup from the parent; each thread
+	 * must allocate its own on demand.
+	 */
+	task_thread_info(p)->unalign_jit_base = NULL;
+#endif
+
+>>>>>>> v3.18
 	/*
 	 * Copy the registers onto the kernel stack so the
 	 * return-from-interrupt code will reload it into registers.
@@ -191,6 +213,7 @@ int copy_thread(unsigned long clone_flags, unsigned long sp,
 	memset(&p->thread.dma_async_tlb, 0, sizeof(struct async_tlb));
 #endif
 
+<<<<<<< HEAD
 #if CHIP_HAS_SN_PROC()
 	/* Likewise, the new thread is not running static processor code. */
 	p->thread.sn_proc_running = 0;
@@ -201,6 +224,10 @@ int copy_thread(unsigned long clone_flags, unsigned long sp,
 	/* New thread has its miscellaneous processor state bits clear. */
 	p->thread.proc_status = 0;
 #endif
+=======
+	/* New thread has its miscellaneous processor state bits clear. */
+	p->thread.proc_status = 0;
+>>>>>>> v3.18
 
 #ifdef CONFIG_HARDWALL
 	/* New thread does not own any networks. */
@@ -218,19 +245,43 @@ int copy_thread(unsigned long clone_flags, unsigned long sp,
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+int set_unalign_ctl(struct task_struct *tsk, unsigned int val)
+{
+	task_thread_info(tsk)->align_ctl = val;
+	return 0;
+}
+
+int get_unalign_ctl(struct task_struct *tsk, unsigned long adr)
+{
+	return put_user(task_thread_info(tsk)->align_ctl,
+			(unsigned int __user *)adr);
+}
+
+static struct task_struct corrupt_current = { .comm = "<corrupt>" };
+
+>>>>>>> v3.18
 /*
  * Return "current" if it looks plausible, or else a pointer to a dummy.
  * This can be helpful if we are just trying to emit a clean panic.
  */
 struct task_struct *validate_current(void)
 {
+<<<<<<< HEAD
 	static struct task_struct corrupt = { .comm = "<corrupt>" };
+=======
+>>>>>>> v3.18
 	struct task_struct *tsk = current;
 	if (unlikely((unsigned long)tsk < PAGE_OFFSET ||
 		     (high_memory && (void *)tsk > high_memory) ||
 		     ((unsigned long)tsk & (__alignof__(*tsk) - 1)) != 0)) {
 		pr_err("Corrupt 'current' %p (sp %#lx)\n", tsk, stack_pointer);
+<<<<<<< HEAD
 		tsk = &corrupt;
+=======
+		tsk = &corrupt_current;
+>>>>>>> v3.18
 	}
 	return tsk;
 }
@@ -369,6 +420,7 @@ static void save_arch_state(struct thread_struct *t)
 	t->system_save[2] = __insn_mfspr(SPR_SYSTEM_SAVE_0_2);
 	t->system_save[3] = __insn_mfspr(SPR_SYSTEM_SAVE_0_3);
 	t->intctrl_0 = __insn_mfspr(SPR_INTCTRL_0_STATUS);
+<<<<<<< HEAD
 #if CHIP_HAS_PROC_STATUS_SPR()
 	t->proc_status = __insn_mfspr(SPR_PROC_STATUS);
 #endif
@@ -378,6 +430,13 @@ static void save_arch_state(struct thread_struct *t)
 #if CHIP_HAS_TILE_RTF_HWM()
 	t->tile_rtf_hwm = __insn_mfspr(SPR_TILE_RTF_HWM);
 #endif
+=======
+	t->proc_status = __insn_mfspr(SPR_PROC_STATUS);
+#if !CHIP_HAS_FIXED_INTVEC_BASE()
+	t->interrupt_vector_base = __insn_mfspr(SPR_INTERRUPT_VECTOR_BASE_0);
+#endif
+	t->tile_rtf_hwm = __insn_mfspr(SPR_TILE_RTF_HWM);
+>>>>>>> v3.18
 #if CHIP_HAS_DSTREAM_PF()
 	t->dstream_pf = __insn_mfspr(SPR_DSTREAM_PF);
 #endif
@@ -398,6 +457,7 @@ static void restore_arch_state(const struct thread_struct *t)
 	__insn_mtspr(SPR_SYSTEM_SAVE_0_2, t->system_save[2]);
 	__insn_mtspr(SPR_SYSTEM_SAVE_0_3, t->system_save[3]);
 	__insn_mtspr(SPR_INTCTRL_0_STATUS, t->intctrl_0);
+<<<<<<< HEAD
 #if CHIP_HAS_PROC_STATUS_SPR()
 	__insn_mtspr(SPR_PROC_STATUS, t->proc_status);
 #endif
@@ -407,6 +467,13 @@ static void restore_arch_state(const struct thread_struct *t)
 #if CHIP_HAS_TILE_RTF_HWM()
 	__insn_mtspr(SPR_TILE_RTF_HWM, t->tile_rtf_hwm);
 #endif
+=======
+	__insn_mtspr(SPR_PROC_STATUS, t->proc_status);
+#if !CHIP_HAS_FIXED_INTVEC_BASE()
+	__insn_mtspr(SPR_INTERRUPT_VECTOR_BASE_0, t->interrupt_vector_base);
+#endif
+	__insn_mtspr(SPR_TILE_RTF_HWM, t->tile_rtf_hwm);
+>>>>>>> v3.18
 #if CHIP_HAS_DSTREAM_PF()
 	__insn_mtspr(SPR_DSTREAM_PF, t->dstream_pf);
 #endif
@@ -415,14 +482,18 @@ static void restore_arch_state(const struct thread_struct *t)
 
 void _prepare_arch_switch(struct task_struct *next)
 {
+<<<<<<< HEAD
 #if CHIP_HAS_SN_PROC()
 	int snctl;
 #endif
+=======
+>>>>>>> v3.18
 #if CHIP_HAS_TILE_DMA()
 	struct tile_dma_state *dma = &current->thread.tile_dma_state;
 	if (dma->enabled)
 		save_tile_dma_state(dma);
 #endif
+<<<<<<< HEAD
 #if CHIP_HAS_SN_PROC()
 	/*
 	 * Suspend the static network processor if it was running.
@@ -435,6 +506,8 @@ void _prepare_arch_switch(struct task_struct *next)
 	if (current->thread.sn_proc_running)
 		__insn_mtspr(SPR_SNCTL, snctl | SPR_SNCTL__FRZPROC_MASK);
 #endif
+=======
+>>>>>>> v3.18
 }
 
 
@@ -462,6 +535,7 @@ struct task_struct *__sched _switch_to(struct task_struct *prev,
 	/* Restore other arch state. */
 	restore_arch_state(&next->thread);
 
+<<<<<<< HEAD
 #if CHIP_HAS_SN_PROC()
 	/*
 	 * Restart static network processor in the new process
@@ -473,6 +547,8 @@ struct task_struct *__sched _switch_to(struct task_struct *prev,
 	}
 #endif
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_HARDWALL
 	/* Enable or disable access to the network registers appropriately. */
 	hardwall_switch_tasks(prev, next);
@@ -514,7 +590,11 @@ int do_work_pending(struct pt_regs *regs, u32 thread_info_flags)
 		schedule();
 		return 1;
 	}
+<<<<<<< HEAD
 #if CHIP_HAS_TILE_DMA() || CHIP_HAS_SN_PROC()
+=======
+#if CHIP_HAS_TILE_DMA()
+>>>>>>> v3.18
 	if (thread_info_flags & _TIF_ASYNC_TLB) {
 		do_async_page_fault(regs);
 		return 1;
@@ -564,7 +644,19 @@ void flush_thread(void)
  */
 void exit_thread(void)
 {
+<<<<<<< HEAD
 	/* Nothing */
+=======
+#ifdef CONFIG_HARDWALL
+	/*
+	 * Remove the task from the list of tasks that are associated
+	 * with any live hardwalls.  (If the task that is exiting held
+	 * the last reference to a hardwall fd, it would already have
+	 * been released and deactivated at this point.)
+	 */
+	hardwall_deactivate_all(current);
+#endif
+>>>>>>> v3.18
 }
 
 void show_regs(struct pt_regs *regs)
@@ -573,6 +665,7 @@ void show_regs(struct pt_regs *regs)
 	int i;
 
 	pr_err("\n");
+<<<<<<< HEAD
 	show_regs_print_info(KERN_ERR);
 #ifdef __tilegx__
 	for (i = 0; i < 51; i += 3)
@@ -590,6 +683,26 @@ void show_regs(struct pt_regs *regs)
 		       i+2, regs->regs[i+2], i+3, regs->regs[i+3]);
 	pr_err(" r52: "REGFMT" tp : "REGFMT" sp : "REGFMT" lr : "REGFMT"\n",
 	       regs->regs[52], regs->tp, regs->sp, regs->lr);
+=======
+	if (tsk != &corrupt_current)
+		show_regs_print_info(KERN_ERR);
+#ifdef __tilegx__
+	for (i = 0; i < 17; i++)
+		pr_err(" r%-2d: "REGFMT" r%-2d: "REGFMT" r%-2d: "REGFMT"\n",
+		       i, regs->regs[i], i+18, regs->regs[i+18],
+		       i+36, regs->regs[i+36]);
+	pr_err(" r17: "REGFMT" r35: "REGFMT" tp : "REGFMT"\n",
+	       regs->regs[17], regs->regs[35], regs->tp);
+	pr_err(" sp : "REGFMT" lr : "REGFMT"\n", regs->sp, regs->lr);
+#else
+	for (i = 0; i < 13; i++)
+		pr_err(" r%-2d: "REGFMT" r%-2d: "REGFMT
+		       " r%-2d: "REGFMT" r%-2d: "REGFMT"\n",
+		       i, regs->regs[i], i+14, regs->regs[i+14],
+		       i+27, regs->regs[i+27], i+40, regs->regs[i+40]);
+	pr_err(" r13: "REGFMT" tp : "REGFMT" sp : "REGFMT" lr : "REGFMT"\n",
+	       regs->regs[13], regs->tp, regs->sp, regs->lr);
+>>>>>>> v3.18
 #endif
 	pr_err(" pc : "REGFMT" ex1: %ld     faultnum: %ld\n",
 	       regs->pc, regs->ex1, regs->faultnum);

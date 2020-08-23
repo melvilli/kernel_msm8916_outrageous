@@ -46,7 +46,11 @@ static int m48t86_rtc_read_time(struct device *dev, struct rtc_time *tm)
 {
 	unsigned char reg;
 	struct platform_device *pdev = to_platform_device(dev);
+<<<<<<< HEAD
 	struct m48t86_ops *ops = pdev->dev.platform_data;
+=======
+	struct m48t86_ops *ops = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 
 	reg = ops->readbyte(M48T86_REG_B);
 
@@ -84,7 +88,11 @@ static int m48t86_rtc_set_time(struct device *dev, struct rtc_time *tm)
 {
 	unsigned char reg;
 	struct platform_device *pdev = to_platform_device(dev);
+<<<<<<< HEAD
 	struct m48t86_ops *ops = pdev->dev.platform_data;
+=======
+	struct m48t86_ops *ops = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 
 	reg = ops->readbyte(M48T86_REG_B);
 
@@ -123,7 +131,11 @@ static int m48t86_rtc_proc(struct device *dev, struct seq_file *seq)
 {
 	unsigned char reg;
 	struct platform_device *pdev = to_platform_device(dev);
+<<<<<<< HEAD
 	struct m48t86_ops *ops = pdev->dev.platform_data;
+=======
+	struct m48t86_ops *ops = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 
 	reg = ops->readbyte(M48T86_REG_B);
 
@@ -147,7 +159,11 @@ static const struct rtc_class_ops m48t86_rtc_ops = {
 static int m48t86_rtc_probe(struct platform_device *dev)
 {
 	unsigned char reg;
+<<<<<<< HEAD
 	struct m48t86_ops *ops = dev->dev.platform_data;
+=======
+	struct m48t86_ops *ops = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 	struct rtc_device *rtc;
 
 	rtc = devm_rtc_device_register(&dev->dev, "m48t86",
@@ -166,6 +182,7 @@ static int m48t86_rtc_probe(struct platform_device *dev)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int m48t86_rtc_remove(struct platform_device *dev)
 {
 	platform_set_drvdata(dev, NULL);
@@ -173,13 +190,18 @@ static int m48t86_rtc_remove(struct platform_device *dev)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 static struct platform_driver m48t86_rtc_platform_driver = {
 	.driver		= {
 		.name	= "rtc-m48t86",
 		.owner	= THIS_MODULE,
 	},
 	.probe		= m48t86_rtc_probe,
+<<<<<<< HEAD
 	.remove		= m48t86_rtc_remove,
+=======
+>>>>>>> v3.18
 };
 
 module_platform_driver(m48t86_rtc_platform_driver);

@@ -73,6 +73,7 @@ struct rfc2734_header {
 
 #define fwnet_get_hdr_lf(h)		(((h)->w0 & 0xc0000000) >> 30)
 #define fwnet_get_hdr_ether_type(h)	(((h)->w0 & 0x0000ffff))
+<<<<<<< HEAD
 #define fwnet_get_hdr_dg_size(h)	((((h)->w0 & 0x0fff0000) >> 16) + 1)
 #define fwnet_get_hdr_fg_off(h)		(((h)->w0 & 0x00000fff))
 #define fwnet_get_hdr_dgl(h)		(((h)->w1 & 0xffff0000) >> 16)
@@ -80,6 +81,15 @@ struct rfc2734_header {
 #define fwnet_set_hdr_lf(lf)		((lf) << 30)
 #define fwnet_set_hdr_ether_type(et)	(et)
 #define fwnet_set_hdr_dg_size(dgs)	(((dgs) - 1) << 16)
+=======
+#define fwnet_get_hdr_dg_size(h)	(((h)->w0 & 0x0fff0000) >> 16)
+#define fwnet_get_hdr_fg_off(h)		(((h)->w0 & 0x00000fff))
+#define fwnet_get_hdr_dgl(h)		(((h)->w1 & 0xffff0000) >> 16)
+
+#define fwnet_set_hdr_lf(lf)		((lf)  << 30)
+#define fwnet_set_hdr_ether_type(et)	(et)
+#define fwnet_set_hdr_dg_size(dgs)	((dgs) << 16)
+>>>>>>> v3.18
 #define fwnet_set_hdr_fg_off(fgo)	(fgo)
 
 #define fwnet_set_hdr_dgl(dgl)		((dgl) << 16)
@@ -591,9 +601,12 @@ static int fwnet_incoming_packet(struct fwnet_device *dev, __be32 *buf, int len,
 	int retval;
 	u16 ether_type;
 
+<<<<<<< HEAD
 	if (len <= RFC2374_UNFRAG_HDR_SIZE)
 		return 0;
 
+=======
+>>>>>>> v3.18
 	hdr.w0 = be32_to_cpu(buf[0]);
 	lf = fwnet_get_hdr_lf(&hdr);
 	if (lf == RFC2374_HDR_UNFRAG) {
@@ -618,12 +631,16 @@ static int fwnet_incoming_packet(struct fwnet_device *dev, __be32 *buf, int len,
 		return fwnet_finish_incoming_packet(net, skb, source_node_id,
 						    is_broadcast, ether_type);
 	}
+<<<<<<< HEAD
 
 	/* A datagram fragment has been received, now the fun begins. */
 
 	if (len <= RFC2374_FRAG_HDR_SIZE)
 		return 0;
 
+=======
+	/* A datagram fragment has been received, now the fun begins. */
+>>>>>>> v3.18
 	hdr.w1 = ntohl(buf[1]);
 	buf += 2;
 	len -= RFC2374_FRAG_HDR_SIZE;
@@ -635,10 +652,14 @@ static int fwnet_incoming_packet(struct fwnet_device *dev, __be32 *buf, int len,
 		fg_off = fwnet_get_hdr_fg_off(&hdr);
 	}
 	datagram_label = fwnet_get_hdr_dgl(&hdr);
+<<<<<<< HEAD
 	dg_size = fwnet_get_hdr_dg_size(&hdr);
 
 	if (fg_off + len > dg_size)
 		return 0;
+=======
+	dg_size = fwnet_get_hdr_dg_size(&hdr); /* ??? + 1 */
+>>>>>>> v3.18
 
 	spin_lock_irqsave(&dev->lock, flags);
 
@@ -746,6 +767,7 @@ static void fwnet_receive_packet(struct fw_card *card, struct fw_request *r,
 	fw_send_response(card, r, rcode);
 }
 
+<<<<<<< HEAD
 static int gasp_source_id(__be32 *p)
 {
 	return be32_to_cpu(p[0]) >> 16;
@@ -762,6 +784,8 @@ static u32 gasp_version(__be32 *p)
 	return be32_to_cpu(p[1]) & 0xffffff;
 }
 
+=======
+>>>>>>> v3.18
 static void fwnet_receive_broadcast(struct fw_iso_context *context,
 		u32 cycle, size_t header_length, void *header, void *data)
 {
@@ -771,6 +795,12 @@ static void fwnet_receive_broadcast(struct fw_iso_context *context,
 	__be32 *buf_ptr;
 	int retval;
 	u32 length;
+<<<<<<< HEAD
+=======
+	u16 source_node_id;
+	u32 specifier_id;
+	u32 ver;
+>>>>>>> v3.18
 	unsigned long offset;
 	unsigned long flags;
 
@@ -787,6 +817,7 @@ static void fwnet_receive_broadcast(struct fw_iso_context *context,
 
 	spin_unlock_irqrestore(&dev->lock, flags);
 
+<<<<<<< HEAD
 	if (length > IEEE1394_GASP_HDR_SIZE &&
 	    gasp_specifier_id(buf_ptr) == IANA_SPECIFIER_ID &&
 	    (gasp_version(buf_ptr) == RFC2734_SW_VERSION
@@ -798,6 +829,24 @@ static void fwnet_receive_broadcast(struct fw_iso_context *context,
 				      length - IEEE1394_GASP_HDR_SIZE,
 				      gasp_source_id(buf_ptr),
 				      context->card->generation, true);
+=======
+	specifier_id =    (be32_to_cpu(buf_ptr[0]) & 0xffff) << 8
+			| (be32_to_cpu(buf_ptr[1]) & 0xff000000) >> 24;
+	ver = be32_to_cpu(buf_ptr[1]) & 0xffffff;
+	source_node_id = be32_to_cpu(buf_ptr[0]) >> 16;
+
+	if (specifier_id == IANA_SPECIFIER_ID &&
+	    (ver == RFC2734_SW_VERSION
+#if IS_ENABLED(CONFIG_IPV6)
+	     || ver == RFC3146_SW_VERSION
+#endif
+	    )) {
+		buf_ptr += 2;
+		length -= IEEE1394_GASP_HDR_SIZE;
+		fwnet_incoming_packet(dev, buf_ptr, length, source_node_id,
+				      context->card->generation, true);
+	}
+>>>>>>> v3.18
 
 	packet.payload_length = dev->rcv_buffer_size;
 	packet.interrupt = 1;
@@ -1459,9 +1508,15 @@ static int fwnet_add_peer(struct fwnet_device *dev,
 	return 0;
 }
 
+<<<<<<< HEAD
 static int fwnet_probe(struct device *_dev)
 {
 	struct fw_unit *unit = fw_unit(_dev);
+=======
+static int fwnet_probe(struct fw_unit *unit,
+		       const struct ieee1394_device_id *id)
+{
+>>>>>>> v3.18
 	struct fw_device *device = fw_parent_device(unit);
 	struct fw_card *card = device->card;
 	struct net_device *net;
@@ -1479,10 +1534,18 @@ static int fwnet_probe(struct device *_dev)
 		goto have_dev;
 	}
 
+<<<<<<< HEAD
 	net = alloc_netdev(sizeof(*dev), "firewire%d", fwnet_init_dev);
 	if (net == NULL) {
 		ret = -ENOMEM;
 		goto out;
+=======
+	net = alloc_netdev(sizeof(*dev), "firewire%d", NET_NAME_UNKNOWN,
+			   fwnet_init_dev);
+	if (net == NULL) {
+		mutex_unlock(&fwnet_device_mutex);
+		return -ENOMEM;
+>>>>>>> v3.18
 	}
 
 	allocated_netdev = true;
@@ -1545,6 +1608,27 @@ static int fwnet_probe(struct device *_dev)
 	return ret;
 }
 
+<<<<<<< HEAD
+=======
+/*
+ * FIXME abort partially sent fragmented datagrams,
+ * discard partially received fragmented datagrams
+ */
+static void fwnet_update(struct fw_unit *unit)
+{
+	struct fw_device *device = fw_parent_device(unit);
+	struct fwnet_peer *peer = dev_get_drvdata(&unit->device);
+	int generation;
+
+	generation = device->generation;
+
+	spin_lock_irq(&peer->dev->lock);
+	peer->node_id    = device->node_id;
+	peer->generation = generation;
+	spin_unlock_irq(&peer->dev->lock);
+}
+
+>>>>>>> v3.18
 static void fwnet_remove_peer(struct fwnet_peer *peer, struct fwnet_device *dev)
 {
 	struct fwnet_partial_datagram *pd, *pd_next;
@@ -1561,9 +1645,15 @@ static void fwnet_remove_peer(struct fwnet_peer *peer, struct fwnet_device *dev)
 	kfree(peer);
 }
 
+<<<<<<< HEAD
 static int fwnet_remove(struct device *_dev)
 {
 	struct fwnet_peer *peer = dev_get_drvdata(_dev);
+=======
+static void fwnet_remove(struct fw_unit *unit)
+{
+	struct fwnet_peer *peer = dev_get_drvdata(&unit->device);
+>>>>>>> v3.18
 	struct fwnet_device *dev = peer->dev;
 	struct net_device *net;
 	int i;
@@ -1588,6 +1678,7 @@ static int fwnet_remove(struct device *_dev)
 	}
 
 	mutex_unlock(&fwnet_device_mutex);
+<<<<<<< HEAD
 
 	return 0;
 }
@@ -1608,6 +1699,8 @@ static void fwnet_update(struct fw_unit *unit)
 	peer->node_id    = device->node_id;
 	peer->generation = generation;
 	spin_unlock_irq(&peer->dev->lock);
+=======
+>>>>>>> v3.18
 }
 
 static const struct ieee1394_device_id fwnet_id_table[] = {
@@ -1633,10 +1726,17 @@ static struct fw_driver fwnet_driver = {
 		.owner  = THIS_MODULE,
 		.name   = KBUILD_MODNAME,
 		.bus    = &fw_bus_type,
+<<<<<<< HEAD
 		.probe  = fwnet_probe,
 		.remove = fwnet_remove,
 	},
 	.update   = fwnet_update,
+=======
+	},
+	.probe    = fwnet_probe,
+	.update   = fwnet_update,
+	.remove   = fwnet_remove,
+>>>>>>> v3.18
 	.id_table = fwnet_id_table,
 };
 

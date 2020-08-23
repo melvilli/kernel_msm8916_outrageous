@@ -51,6 +51,12 @@
 #define wait_for(COND, MS) _wait_for(COND, MS, 1)
 #define wait_for_atomic(COND, MS) _wait_for(COND, MS, 0)
 
+<<<<<<< HEAD
+=======
+#define GMBUS_REG_READ(reg) ioread32(dev_priv->gmbus_reg + (reg))
+#define GMBUS_REG_WRITE(reg, val) iowrite32((val), dev_priv->gmbus_reg + (reg))
+
+>>>>>>> v3.18
 /* Intel GPIO access functions */
 
 #define I2C_RISEFALL_TIME 20
@@ -71,7 +77,12 @@ struct intel_gpio {
 void
 gma_intel_i2c_reset(struct drm_device *dev)
 {
+<<<<<<< HEAD
 	REG_WRITE(GMBUS0, 0);
+=======
+	struct drm_psb_private *dev_priv = dev->dev_private;
+	GMBUS_REG_WRITE(GMBUS0, 0);
+>>>>>>> v3.18
 }
 
 static void intel_i2c_quirk_set(struct drm_psb_private *dev_priv, bool enable)
@@ -98,11 +109,18 @@ static void intel_i2c_quirk_set(struct drm_psb_private *dev_priv, bool enable)
 static u32 get_reserved(struct intel_gpio *gpio)
 {
 	struct drm_psb_private *dev_priv = gpio->dev_priv;
+<<<<<<< HEAD
 	struct drm_device *dev = dev_priv->dev;
 	u32 reserved = 0;
 
 	/* On most chips, these bits must be preserved in software. */
 	reserved = REG_READ(gpio->reg) &
+=======
+	u32 reserved = 0;
+
+	/* On most chips, these bits must be preserved in software. */
+	reserved = GMBUS_REG_READ(gpio->reg) &
+>>>>>>> v3.18
 				     (GPIO_DATA_PULLUP_DISABLE |
 				      GPIO_CLOCK_PULLUP_DISABLE);
 
@@ -113,29 +131,46 @@ static int get_clock(void *data)
 {
 	struct intel_gpio *gpio = data;
 	struct drm_psb_private *dev_priv = gpio->dev_priv;
+<<<<<<< HEAD
 	struct drm_device *dev = dev_priv->dev;
 	u32 reserved = get_reserved(gpio);
 	REG_WRITE(gpio->reg, reserved | GPIO_CLOCK_DIR_MASK);
 	REG_WRITE(gpio->reg, reserved);
 	return (REG_READ(gpio->reg) & GPIO_CLOCK_VAL_IN) != 0;
+=======
+	u32 reserved = get_reserved(gpio);
+	GMBUS_REG_WRITE(gpio->reg, reserved | GPIO_CLOCK_DIR_MASK);
+	GMBUS_REG_WRITE(gpio->reg, reserved);
+	return (GMBUS_REG_READ(gpio->reg) & GPIO_CLOCK_VAL_IN) != 0;
+>>>>>>> v3.18
 }
 
 static int get_data(void *data)
 {
 	struct intel_gpio *gpio = data;
 	struct drm_psb_private *dev_priv = gpio->dev_priv;
+<<<<<<< HEAD
 	struct drm_device *dev = dev_priv->dev;
 	u32 reserved = get_reserved(gpio);
 	REG_WRITE(gpio->reg, reserved | GPIO_DATA_DIR_MASK);
 	REG_WRITE(gpio->reg, reserved);
 	return (REG_READ(gpio->reg) & GPIO_DATA_VAL_IN) != 0;
+=======
+	u32 reserved = get_reserved(gpio);
+	GMBUS_REG_WRITE(gpio->reg, reserved | GPIO_DATA_DIR_MASK);
+	GMBUS_REG_WRITE(gpio->reg, reserved);
+	return (GMBUS_REG_READ(gpio->reg) & GPIO_DATA_VAL_IN) != 0;
+>>>>>>> v3.18
 }
 
 static void set_clock(void *data, int state_high)
 {
 	struct intel_gpio *gpio = data;
 	struct drm_psb_private *dev_priv = gpio->dev_priv;
+<<<<<<< HEAD
 	struct drm_device *dev = dev_priv->dev;
+=======
+>>>>>>> v3.18
 	u32 reserved = get_reserved(gpio);
 	u32 clock_bits;
 
@@ -145,15 +180,23 @@ static void set_clock(void *data, int state_high)
 		clock_bits = GPIO_CLOCK_DIR_OUT | GPIO_CLOCK_DIR_MASK |
 			GPIO_CLOCK_VAL_MASK;
 
+<<<<<<< HEAD
 	REG_WRITE(gpio->reg, reserved | clock_bits);
 	REG_READ(gpio->reg); /* Posting */
+=======
+	GMBUS_REG_WRITE(gpio->reg, reserved | clock_bits);
+	GMBUS_REG_READ(gpio->reg); /* Posting */
+>>>>>>> v3.18
 }
 
 static void set_data(void *data, int state_high)
 {
 	struct intel_gpio *gpio = data;
 	struct drm_psb_private *dev_priv = gpio->dev_priv;
+<<<<<<< HEAD
 	struct drm_device *dev = dev_priv->dev;
+=======
+>>>>>>> v3.18
 	u32 reserved = get_reserved(gpio);
 	u32 data_bits;
 
@@ -163,8 +206,13 @@ static void set_data(void *data, int state_high)
 		data_bits = GPIO_DATA_DIR_OUT | GPIO_DATA_DIR_MASK |
 			GPIO_DATA_VAL_MASK;
 
+<<<<<<< HEAD
 	REG_WRITE(gpio->reg, reserved | data_bits);
 	REG_READ(gpio->reg);
+=======
+	GMBUS_REG_WRITE(gpio->reg, reserved | data_bits);
+	GMBUS_REG_READ(gpio->reg);
+>>>>>>> v3.18
 }
 
 static struct i2c_adapter *
@@ -251,7 +299,10 @@ gmbus_xfer(struct i2c_adapter *adapter,
 					       struct intel_gmbus,
 					       adapter);
 	struct drm_psb_private *dev_priv = adapter->algo_data;
+<<<<<<< HEAD
 	struct drm_device *dev = dev_priv->dev;
+=======
+>>>>>>> v3.18
 	int i, reg_offset;
 
 	if (bus->force_bit)
@@ -260,13 +311,18 @@ gmbus_xfer(struct i2c_adapter *adapter,
 
 	reg_offset = 0;
 
+<<<<<<< HEAD
 	REG_WRITE(GMBUS0 + reg_offset, bus->reg0);
+=======
+	GMBUS_REG_WRITE(GMBUS0 + reg_offset, bus->reg0);
+>>>>>>> v3.18
 
 	for (i = 0; i < num; i++) {
 		u16 len = msgs[i].len;
 		u8 *buf = msgs[i].buf;
 
 		if (msgs[i].flags & I2C_M_RD) {
+<<<<<<< HEAD
 			REG_WRITE(GMBUS1 + reg_offset,
 				   GMBUS_CYCLE_WAIT | (i + 1 == num ? GMBUS_CYCLE_STOP : 0) |
 				   (len << GMBUS_BYTE_COUNT_SHIFT) |
@@ -282,6 +338,25 @@ gmbus_xfer(struct i2c_adapter *adapter,
 					goto clear_err;
 
 				val = REG_READ(GMBUS3 + reg_offset);
+=======
+			GMBUS_REG_WRITE(GMBUS1 + reg_offset,
+					GMBUS_CYCLE_WAIT |
+					(i + 1 == num ? GMBUS_CYCLE_STOP : 0) |
+					(len << GMBUS_BYTE_COUNT_SHIFT) |
+					(msgs[i].addr << GMBUS_SLAVE_ADDR_SHIFT) |
+					GMBUS_SLAVE_READ | GMBUS_SW_RDY);
+			GMBUS_REG_READ(GMBUS2+reg_offset);
+			do {
+				u32 val, loop = 0;
+
+				if (wait_for(GMBUS_REG_READ(GMBUS2 + reg_offset) &
+					     (GMBUS_SATOER | GMBUS_HW_RDY), 50))
+					goto timeout;
+				if (GMBUS_REG_READ(GMBUS2 + reg_offset) & GMBUS_SATOER)
+					goto clear_err;
+
+				val = GMBUS_REG_READ(GMBUS3 + reg_offset);
+>>>>>>> v3.18
 				do {
 					*buf++ = val & 0xff;
 					val >>= 8;
@@ -295,18 +370,34 @@ gmbus_xfer(struct i2c_adapter *adapter,
 				val |= *buf++ << (8 * loop);
 			} while (--len && ++loop < 4);
 
+<<<<<<< HEAD
 			REG_WRITE(GMBUS3 + reg_offset, val);
 			REG_WRITE(GMBUS1 + reg_offset,
+=======
+			GMBUS_REG_WRITE(GMBUS3 + reg_offset, val);
+			GMBUS_REG_WRITE(GMBUS1 + reg_offset,
+>>>>>>> v3.18
 				   (i + 1 == num ? GMBUS_CYCLE_STOP : GMBUS_CYCLE_WAIT) |
 				   (msgs[i].len << GMBUS_BYTE_COUNT_SHIFT) |
 				   (msgs[i].addr << GMBUS_SLAVE_ADDR_SHIFT) |
 				   GMBUS_SLAVE_WRITE | GMBUS_SW_RDY);
+<<<<<<< HEAD
 			REG_READ(GMBUS2+reg_offset);
 
 			while (len) {
 				if (wait_for(REG_READ(GMBUS2 + reg_offset) & (GMBUS_SATOER | GMBUS_HW_RDY), 50))
 					goto timeout;
 				if (REG_READ(GMBUS2 + reg_offset) & GMBUS_SATOER)
+=======
+			GMBUS_REG_READ(GMBUS2+reg_offset);
+
+			while (len) {
+				if (wait_for(GMBUS_REG_READ(GMBUS2 + reg_offset) &
+					     (GMBUS_SATOER | GMBUS_HW_RDY), 50))
+					goto timeout;
+				if (GMBUS_REG_READ(GMBUS2 + reg_offset) &
+				    GMBUS_SATOER)
+>>>>>>> v3.18
 					goto clear_err;
 
 				val = loop = 0;
@@ -314,6 +405,7 @@ gmbus_xfer(struct i2c_adapter *adapter,
 					val |= *buf++ << (8 * loop);
 				} while (--len && ++loop < 4);
 
+<<<<<<< HEAD
 				REG_WRITE(GMBUS3 + reg_offset, val);
 				REG_READ(GMBUS2+reg_offset);
 			}
@@ -322,6 +414,16 @@ gmbus_xfer(struct i2c_adapter *adapter,
 		if (i + 1 < num && wait_for(REG_READ(GMBUS2 + reg_offset) & (GMBUS_SATOER | GMBUS_HW_WAIT_PHASE), 50))
 			goto timeout;
 		if (REG_READ(GMBUS2 + reg_offset) & GMBUS_SATOER)
+=======
+				GMBUS_REG_WRITE(GMBUS3 + reg_offset, val);
+				GMBUS_REG_READ(GMBUS2+reg_offset);
+			}
+		}
+
+		if (i + 1 < num && wait_for(GMBUS_REG_READ(GMBUS2 + reg_offset) & (GMBUS_SATOER | GMBUS_HW_WAIT_PHASE), 50))
+			goto timeout;
+		if (GMBUS_REG_READ(GMBUS2 + reg_offset) & GMBUS_SATOER)
+>>>>>>> v3.18
 			goto clear_err;
 	}
 
@@ -332,20 +434,33 @@ clear_err:
 	 * of resetting the GMBUS controller and so clearing the
 	 * BUS_ERROR raised by the slave's NAK.
 	 */
+<<<<<<< HEAD
 	REG_WRITE(GMBUS1 + reg_offset, GMBUS_SW_CLR_INT);
 	REG_WRITE(GMBUS1 + reg_offset, 0);
+=======
+	GMBUS_REG_WRITE(GMBUS1 + reg_offset, GMBUS_SW_CLR_INT);
+	GMBUS_REG_WRITE(GMBUS1 + reg_offset, 0);
+>>>>>>> v3.18
 
 done:
 	/* Mark the GMBUS interface as disabled. We will re-enable it at the
 	 * start of the next xfer, till then let it sleep.
 	 */
+<<<<<<< HEAD
 	REG_WRITE(GMBUS0 + reg_offset, 0);
+=======
+	GMBUS_REG_WRITE(GMBUS0 + reg_offset, 0);
+>>>>>>> v3.18
 	return i;
 
 timeout:
 	DRM_INFO("GMBUS timed out, falling back to bit banging on pin %d [%s]\n",
 		 bus->reg0 & 0xff, bus->adapter.name);
+<<<<<<< HEAD
 	REG_WRITE(GMBUS0 + reg_offset, 0);
+=======
+	GMBUS_REG_WRITE(GMBUS0 + reg_offset, 0);
+>>>>>>> v3.18
 
 	/* Hardware may not support GMBUS over these pins? Try GPIO bitbanging instead. */
 	bus->force_bit = intel_gpio_create(dev_priv, bus->reg0 & 0xff);
@@ -399,6 +514,14 @@ int gma_intel_setup_gmbus(struct drm_device *dev)
 	if (dev_priv->gmbus == NULL)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+=======
+	if (IS_MRST(dev))
+		dev_priv->gmbus_reg = dev_priv->aux_reg;
+	else
+		dev_priv->gmbus_reg = dev_priv->vdc_reg;
+
+>>>>>>> v3.18
 	for (i = 0; i < GMBUS_NUM_PORTS; i++) {
 		struct intel_gmbus *bus = &dev_priv->gmbus[i];
 
@@ -487,6 +610,10 @@ void gma_intel_teardown_gmbus(struct drm_device *dev)
 		i2c_del_adapter(&bus->adapter);
 	}
 
+<<<<<<< HEAD
+=======
+	dev_priv->gmbus_reg = NULL; /* iounmap is done in driver_unload */
+>>>>>>> v3.18
 	kfree(dev_priv->gmbus);
 	dev_priv->gmbus = NULL;
 }

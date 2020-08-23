@@ -14,11 +14,14 @@
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
+<<<<<<< HEAD
 
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
  */
 /*
 Driver: dt2815
@@ -56,6 +59,7 @@ Configuration options:
   [12] - Analog output 7 range configuration (same options)
 */
 
+<<<<<<< HEAD
 #include "../comedidev.h"
 
 #include <linux/ioport.h>
@@ -63,6 +67,13 @@ Configuration options:
 
 #define DT2815_SIZE 2
 
+=======
+#include <linux/module.h>
+#include "../comedidev.h"
+
+#include <linux/delay.h>
+
+>>>>>>> v3.18
 #define DT2815_DATA 0
 #define DT2815_STATUS 1
 
@@ -72,6 +83,7 @@ struct dt2815_private {
 	unsigned int ao_readback[8];
 };
 
+<<<<<<< HEAD
 static int dt2815_wait_for_status(struct comedi_device *dev, int status)
 {
 	int i;
@@ -81,6 +93,19 @@ static int dt2815_wait_for_status(struct comedi_device *dev, int status)
 			break;
 	}
 	return status;
+=======
+static int dt2815_ao_status(struct comedi_device *dev,
+			    struct comedi_subdevice *s,
+			    struct comedi_insn *insn,
+			    unsigned long context)
+{
+	unsigned int status;
+
+	status = inb(dev->iobase + DT2815_STATUS);
+	if (status == context)
+		return 0;
+	return -EBUSY;
+>>>>>>> v3.18
 }
 
 static int dt2815_ao_insn_read(struct comedi_device *dev,
@@ -103,13 +128,19 @@ static int dt2815_ao_insn(struct comedi_device *dev, struct comedi_subdevice *s,
 	struct dt2815_private *devpriv = dev->private;
 	int i;
 	int chan = CR_CHAN(insn->chanspec);
+<<<<<<< HEAD
 	unsigned int status;
 	unsigned int lo, hi;
+=======
+	unsigned int lo, hi;
+	int ret;
+>>>>>>> v3.18
 
 	for (i = 0; i < insn->n; i++) {
 		lo = ((data[i] & 0x0f) << 4) | (chan << 1) | 0x01;
 		hi = (data[i] & 0xff0) >> 4;
 
+<<<<<<< HEAD
 		status = dt2815_wait_for_status(dev, 0x00);
 		if (status != 0) {
 			printk(KERN_WARNING "dt2815: failed to write low byte "
@@ -125,6 +156,18 @@ static int dt2815_ao_insn(struct comedi_device *dev, struct comedi_subdevice *s,
 			       "on %d reason %x\n", chan, status);
 			return -EBUSY;
 		}
+=======
+		ret = comedi_timeout(dev, s, insn, dt2815_ao_status, 0x00);
+		if (ret)
+			return ret;
+
+		outb(lo, dev->iobase + DT2815_DATA);
+
+		ret = comedi_timeout(dev, s, insn, dt2815_ao_status, 0x10);
+		if (ret)
+			return ret;
+
+>>>>>>> v3.18
 		devpriv->ao_readback[chan] = data[i];
 	}
 	return i;
@@ -162,7 +205,11 @@ static int dt2815_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	const struct comedi_lrange *current_range_type, *voltage_range_type;
 	int ret;
 
+<<<<<<< HEAD
 	ret = comedi_request_region(dev, it->options[0], DT2815_SIZE);
+=======
+	ret = comedi_request_region(dev, it->options[0], 0x2);
+>>>>>>> v3.18
 	if (ret)
 		return ret;
 
@@ -170,10 +217,16 @@ static int dt2815_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
+=======
+	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
+	if (!devpriv)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	s = &dev->subdevices[0];
 	/* ao subdevice */
@@ -204,6 +257,7 @@ static int dt2815_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 		status = inb(dev->iobase + DT2815_STATUS);
 		if (status == 4) {
 			unsigned int program;
+<<<<<<< HEAD
 			program = (it->options[4] & 0x3) << 3 | 0x7;
 			outb(program, dev->iobase + DT2815_DATA);
 			printk(KERN_INFO ", program: 0x%x (@t=%d)\n",
@@ -212,6 +266,18 @@ static int dt2815_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 		} else if (status != 0x00) {
 			printk(KERN_WARNING "dt2815: unexpected status 0x%x "
 			       "(@t=%d)\n", status, i);
+=======
+
+			program = (it->options[4] & 0x3) << 3 | 0x7;
+			outb(program, dev->iobase + DT2815_DATA);
+			dev_dbg(dev->class_dev, "program: 0x%x (@t=%d)\n",
+				program, i);
+			break;
+		} else if (status != 0x00) {
+			dev_dbg(dev->class_dev,
+				"unexpected status 0x%x (@t=%d)\n",
+				status, i);
+>>>>>>> v3.18
 			if (status & 0x60)
 				outb(0x00, dev->iobase + DT2815_STATUS);
 		}

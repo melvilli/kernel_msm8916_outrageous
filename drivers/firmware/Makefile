@@ -14,4 +14,8 @@ obj-$(CONFIG_FIRMWARE_MEMMAP)	+= memmap.o
 
 obj-$(CONFIG_GOOGLE_FIRMWARE)	+= google/
 obj-$(CONFIG_EFI)		+= efi/
+<<<<<<< HEAD
 obj-$(CONFIG_MSM_TZ_LOG)	+= qcom/
+=======
+obj-$(CONFIG_UEFI_CPER)		+= efi/
+>>>>>>> v3.18

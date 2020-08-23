@@ -29,7 +29,10 @@
 #include <linux/fcntl.h>
 #include <linux/hdlc.h>
 #include <linux/in.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/interrupt.h>
 #include <linux/ioport.h>
 #include <linux/jiffies.h>

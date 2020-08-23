@@ -51,7 +51,11 @@ int cachefiles_check_object_type(struct cachefiles_object *object)
 	}
 
 	if (ret != -EEXIST) {
+<<<<<<< HEAD
 		kerror("Can't set xattr on %*.*s [%lu] (err %d)",
+=======
+		pr_err("Can't set xattr on %*.*s [%lu] (err %d)\n",
+>>>>>>> v3.18
 		       dentry->d_name.len, dentry->d_name.len,
 		       dentry->d_name.name, dentry->d_inode->i_ino,
 		       -ret);
@@ -64,7 +68,11 @@ int cachefiles_check_object_type(struct cachefiles_object *object)
 		if (ret == -ERANGE)
 			goto bad_type_length;
 
+<<<<<<< HEAD
 		kerror("Can't read xattr on %*.*s [%lu] (err %d)",
+=======
+		pr_err("Can't read xattr on %*.*s [%lu] (err %d)\n",
+>>>>>>> v3.18
 		       dentry->d_name.len, dentry->d_name.len,
 		       dentry->d_name.name, dentry->d_inode->i_ino,
 		       -ret);
@@ -85,14 +93,22 @@ error:
 	return ret;
 
 bad_type_length:
+<<<<<<< HEAD
 	kerror("Cache object %lu type xattr length incorrect",
+=======
+	pr_err("Cache object %lu type xattr length incorrect\n",
+>>>>>>> v3.18
 	       dentry->d_inode->i_ino);
 	ret = -EIO;
 	goto error;
 
 bad_type:
 	xtype[2] = 0;
+<<<<<<< HEAD
 	kerror("Cache object %*.*s [%lu] type %s not %s",
+=======
+	pr_err("Cache object %*.*s [%lu] type %s not %s\n",
+>>>>>>> v3.18
 	       dentry->d_name.len, dentry->d_name.len,
 	       dentry->d_name.name, dentry->d_inode->i_ino,
 	       xtype, type);
@@ -109,13 +125,20 @@ int cachefiles_set_object_xattr(struct cachefiles_object *object,
 	struct dentry *dentry = object->dentry;
 	int ret;
 
+<<<<<<< HEAD
 	ASSERT(object->fscache.cookie);
+=======
+>>>>>>> v3.18
 	ASSERT(dentry);
 
 	_enter("%p,#%d", object, auxdata->len);
 
 	/* attempt to install the cache metadata directly */
+<<<<<<< HEAD
 	_debug("SET %s #%u", object->fscache.cookie->def->name, auxdata->len);
+=======
+	_debug("SET #%u", auxdata->len);
+>>>>>>> v3.18
 
 	ret = vfs_setxattr(dentry, cachefiles_xattr_cache,
 			   &auxdata->type, auxdata->len,
@@ -138,13 +161,20 @@ int cachefiles_update_object_xattr(struct cachefiles_object *object,
 	struct dentry *dentry = object->dentry;
 	int ret;
 
+<<<<<<< HEAD
 	ASSERT(object->fscache.cookie);
+=======
+>>>>>>> v3.18
 	ASSERT(dentry);
 
 	_enter("%p,#%d", object, auxdata->len);
 
 	/* attempt to install the cache metadata directly */
+<<<<<<< HEAD
 	_debug("SET %s #%u", object->fscache.cookie->def->name, auxdata->len);
+=======
+	_debug("SET #%u", auxdata->len);
+>>>>>>> v3.18
 
 	ret = vfs_setxattr(dentry, cachefiles_xattr_cache,
 			   &auxdata->type, auxdata->len,
@@ -159,6 +189,46 @@ int cachefiles_update_object_xattr(struct cachefiles_object *object,
 }
 
 /*
+<<<<<<< HEAD
+=======
+ * check the consistency between the backing cache and the FS-Cache cookie
+ */
+int cachefiles_check_auxdata(struct cachefiles_object *object)
+{
+	struct cachefiles_xattr *auxbuf;
+	enum fscache_checkaux validity;
+	struct dentry *dentry = object->dentry;
+	ssize_t xlen;
+	int ret;
+
+	ASSERT(dentry);
+	ASSERT(dentry->d_inode);
+	ASSERT(object->fscache.cookie->def->check_aux);
+
+	auxbuf = kmalloc(sizeof(struct cachefiles_xattr) + 512, GFP_KERNEL);
+	if (!auxbuf)
+		return -ENOMEM;
+
+	xlen = vfs_getxattr(dentry, cachefiles_xattr_cache,
+			    &auxbuf->type, 512 + 1);
+	ret = -ESTALE;
+	if (xlen < 1 ||
+	    auxbuf->type != object->fscache.cookie->def->type)
+		goto error;
+
+	xlen--;
+	validity = fscache_check_aux(&object->fscache, &auxbuf->data, xlen);
+	if (validity != FSCACHE_CHECKAUX_OKAY)
+		goto error;
+
+	ret = 0;
+error:
+	kfree(auxbuf);
+	return ret;
+}
+
+/*
+>>>>>>> v3.18
  * check the state xattr on a cache file
  * - return -ESTALE if the object should be deleted
  */
@@ -258,7 +328,11 @@ error:
 	return ret;
 
 bad_type_length:
+<<<<<<< HEAD
 	kerror("Cache object %lu xattr length incorrect",
+=======
+	pr_err("Cache object %lu xattr length incorrect\n",
+>>>>>>> v3.18
 	       dentry->d_inode->i_ino);
 	ret = -EIO;
 	goto error;

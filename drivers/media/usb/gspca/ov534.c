@@ -1305,8 +1305,12 @@ static int sd_init(struct gspca_dev *gspca_dev)
 	ov534_set_led(gspca_dev, 1);
 	sccb_w_array(gspca_dev, sensor_init[sd->sensor].val,
 			sensor_init[sd->sensor].len);
+<<<<<<< HEAD
 	if (sd->sensor == SENSOR_OV767x)
 		sd_start(gspca_dev);
+=======
+
+>>>>>>> v3.18
 	sd_stopN(gspca_dev);
 /*	set_frame_rate(gspca_dev);	*/
 
@@ -1441,9 +1445,16 @@ static void sd_pkt_scan(struct gspca_dev *gspca_dev,
 		/* If this packet is marked as EOF, end the frame */
 		} else if (data[1] & UVC_STREAM_EOF) {
 			sd->last_pts = 0;
+<<<<<<< HEAD
 			if (gspca_dev->pixfmt == V4L2_PIX_FMT_YUYV
 			 && gspca_dev->image_len + len - 12 !=
 				   gspca_dev->width * gspca_dev->height * 2) {
+=======
+			if (gspca_dev->pixfmt.pixelformat == V4L2_PIX_FMT_YUYV
+			 && gspca_dev->image_len + len - 12 !=
+				   gspca_dev->pixfmt.width *
+					gspca_dev->pixfmt.height * 2) {
+>>>>>>> v3.18
 				PDEBUG(D_PACK, "wrong sized frame");
 				goto discard;
 			}
@@ -1490,6 +1501,7 @@ static void sd_set_streamparm(struct gspca_dev *gspca_dev,
 	struct v4l2_fract *tpf = &cp->timeperframe;
 	struct sd *sd = (struct sd *) gspca_dev;
 
+<<<<<<< HEAD
 	if (tpf->numerator == 0 || tpf->denominator == 0)
 		/* Set default framerate */
 		sd->frame_rate = 30;
@@ -1497,6 +1509,10 @@ static void sd_set_streamparm(struct gspca_dev *gspca_dev,
 		/* Set requested framerate */
 		sd->frame_rate = tpf->denominator / tpf->numerator;
 
+=======
+	/* Set requested framerate */
+	sd->frame_rate = tpf->denominator / tpf->numerator;
+>>>>>>> v3.18
 	if (gspca_dev->streaming)
 		set_frame_rate(gspca_dev);
 

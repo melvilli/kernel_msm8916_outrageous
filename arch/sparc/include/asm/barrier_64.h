@@ -68,4 +68,10 @@ do {									\
 	___p1;								\
 })
 
+<<<<<<< HEAD
+=======
+#define smp_mb__before_atomic()	barrier()
+#define smp_mb__after_atomic()	barrier()
+
+>>>>>>> v3.18
 #endif /* !(__SPARC64_BARRIER_H) */

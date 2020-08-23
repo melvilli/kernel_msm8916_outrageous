@@ -369,6 +369,10 @@
 #define	MSR_ADHOC			0x01
 #define	MSR_INFRA			0x02
 #define	MSR_AP				0x03
+<<<<<<< HEAD
+=======
+#define	MSR_MASK			0x03
+>>>>>>> v3.18
 
 /* 6. Adaptive Control Registers  (Offset: 0x0160 - 0x01CF) */
 /* ----------------------------------------------------- */
@@ -1295,6 +1299,7 @@
 #define	BWORD1					0xc
 #define	BDWORD					0xf
 
+<<<<<<< HEAD
 #define	BMASKBYTE0				0xff
 #define	BMASKBYTE1				0xff00
 #define	BMASKBYTE2				0xff0000
@@ -1309,4 +1314,6 @@
 
 #define BRFREGOFFSETMASK			0xfffff
 
+=======
+>>>>>>> v3.18
 #endif

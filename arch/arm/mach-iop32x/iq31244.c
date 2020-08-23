@@ -37,6 +37,10 @@
 #include <asm/page.h>
 #include <asm/pgtable.h>
 #include <mach/time.h>
+<<<<<<< HEAD
+=======
+#include "gpio-iop32x.h"
+>>>>>>> v3.18
 
 /*
  * Until March of 2007 iq31244 platforms and ep80219 platforms shared the
@@ -283,6 +287,10 @@ void ep80219_power_off(void)
 
 static void __init iq31244_init_machine(void)
 {
+<<<<<<< HEAD
+=======
+	register_iop32x_gpio();
+>>>>>>> v3.18
 	platform_device_register(&iop3xx_i2c0_device);
 	platform_device_register(&iop3xx_i2c1_device);
 	platform_device_register(&iq31244_flash_device);

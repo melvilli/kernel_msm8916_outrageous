@@ -60,7 +60,13 @@ static inline int __must_check wlcore_raw_write(struct wl1271 *wl, int addr,
 {
 	int ret;
 
+<<<<<<< HEAD
 	if (test_bit(WL1271_FLAG_IO_FAILED, &wl->flags))
+=======
+	if (test_bit(WL1271_FLAG_IO_FAILED, &wl->flags) ||
+	    WARN_ON((test_bit(WL1271_FLAG_IN_ELP, &wl->flags) &&
+		     addr != HW_ACCESS_ELP_CTRL_REG)))
+>>>>>>> v3.18
 		return -EIO;
 
 	ret = wl->if_ops->write(wl->dev, addr, buf, len, fixed);
@@ -76,7 +82,13 @@ static inline int __must_check wlcore_raw_read(struct wl1271 *wl, int addr,
 {
 	int ret;
 
+<<<<<<< HEAD
 	if (test_bit(WL1271_FLAG_IO_FAILED, &wl->flags))
+=======
+	if (test_bit(WL1271_FLAG_IO_FAILED, &wl->flags) ||
+	    WARN_ON((test_bit(WL1271_FLAG_IN_ELP, &wl->flags) &&
+		     addr != HW_ACCESS_ELP_CTRL_REG)))
+>>>>>>> v3.18
 		return -EIO;
 
 	ret = wl->if_ops->read(wl->dev, addr, buf, len, fixed);
@@ -165,8 +177,13 @@ static inline int __must_check wlcore_read_hwaddr(struct wl1271 *wl, int hwaddr,
 	int physical;
 	int addr;
 
+<<<<<<< HEAD
 	/* Addresses are stored internally as addresses to 32 bytes blocks */
 	addr = hwaddr << 5;
+=======
+	/* Convert from FW internal address which is chip arch dependent */
+	addr = wl->ops->convert_hwaddr(wl, hwaddr);
+>>>>>>> v3.18
 
 	physical = wlcore_translate_addr(wl, addr);
 
@@ -203,23 +220,35 @@ static inline int __must_check wlcore_write_reg(struct wl1271 *wl, int reg,
 
 static inline void wl1271_power_off(struct wl1271 *wl)
 {
+<<<<<<< HEAD
 	int ret = 0;
+=======
+	int ret;
+>>>>>>> v3.18
 
 	if (!test_bit(WL1271_FLAG_GPIO_POWER, &wl->flags))
 		return;
 
+<<<<<<< HEAD
 	if (wl->if_ops->power)
 		ret = wl->if_ops->power(wl->dev, false);
+=======
+	ret = wl->if_ops->power(wl->dev, false);
+>>>>>>> v3.18
 	if (!ret)
 		clear_bit(WL1271_FLAG_GPIO_POWER, &wl->flags);
 }
 
 static inline int wl1271_power_on(struct wl1271 *wl)
 {
+<<<<<<< HEAD
 	int ret = 0;
 
 	if (wl->if_ops->power)
 		ret = wl->if_ops->power(wl->dev, true);
+=======
+	int ret = wl->if_ops->power(wl->dev, true);
+>>>>>>> v3.18
 	if (ret == 0)
 		set_bit(WL1271_FLAG_GPIO_POWER, &wl->flags);
 

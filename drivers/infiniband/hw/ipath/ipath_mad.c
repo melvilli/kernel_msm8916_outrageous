@@ -726,7 +726,11 @@ bail:
  * @dd: the infinipath device
  * @pkeys: the PKEY table
  */
+<<<<<<< HEAD
 static int set_pkeys(struct ipath_devdata *dd, u16 *pkeys)
+=======
+static int set_pkeys(struct ipath_devdata *dd, u16 *pkeys, u8 port)
+>>>>>>> v3.18
 {
 	struct ipath_portdata *pd;
 	int i;
@@ -759,6 +763,10 @@ static int set_pkeys(struct ipath_devdata *dd, u16 *pkeys)
 	}
 	if (changed) {
 		u64 pkey;
+<<<<<<< HEAD
+=======
+		struct ib_event event;
+>>>>>>> v3.18
 
 		pkey = (u64) dd->ipath_pkeys[0] |
 			((u64) dd->ipath_pkeys[1] << 16) |
@@ -768,12 +776,24 @@ static int set_pkeys(struct ipath_devdata *dd, u16 *pkeys)
 			   (unsigned long long) pkey);
 		ipath_write_kreg(dd, dd->ipath_kregs->kr_partitionkey,
 				 pkey);
+<<<<<<< HEAD
+=======
+
+		event.event = IB_EVENT_PKEY_CHANGE;
+		event.device = &dd->verbs_dev->ibdev;
+		event.element.port_num = port;
+		ib_dispatch_event(&event);
+>>>>>>> v3.18
 	}
 	return 0;
 }
 
 static int recv_subn_set_pkeytable(struct ib_smp *smp,
+<<<<<<< HEAD
 				   struct ib_device *ibdev)
+=======
+				   struct ib_device *ibdev, u8 port)
+>>>>>>> v3.18
 {
 	u32 startpx = 32 * (be32_to_cpu(smp->attr_mod) & 0xffff);
 	__be16 *p = (__be16 *) smp->data;
@@ -784,7 +804,11 @@ static int recv_subn_set_pkeytable(struct ib_smp *smp,
 	for (i = 0; i < n; i++)
 		q[i] = be16_to_cpu(p[i]);
 
+<<<<<<< HEAD
 	if (startpx != 0 || set_pkeys(dev->dd, q) != 0)
+=======
+	if (startpx != 0 || set_pkeys(dev->dd, q, port) != 0)
+>>>>>>> v3.18
 		smp->status |= IB_SMP_INVALID_FIELD;
 
 	return recv_subn_get_pkeytable(smp, ibdev);
@@ -1342,7 +1366,11 @@ static int process_subn(struct ib_device *ibdev, int mad_flags,
 			ret = recv_subn_set_portinfo(smp, ibdev, port_num);
 			goto bail;
 		case IB_SMP_ATTR_PKEY_TABLE:
+<<<<<<< HEAD
 			ret = recv_subn_set_pkeytable(smp, ibdev);
+=======
+			ret = recv_subn_set_pkeytable(smp, ibdev, port_num);
+>>>>>>> v3.18
 			goto bail;
 		case IB_SMP_ATTR_SM_INFO:
 			if (dev->port_cap_flags & IB_PORT_SM_DISABLED) {

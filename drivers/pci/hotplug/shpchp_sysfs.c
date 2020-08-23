@@ -38,7 +38,11 @@
 static ssize_t show_ctrl (struct device *dev, struct device_attribute *attr, char *buf)
 {
 	struct pci_dev *pdev;
+<<<<<<< HEAD
 	char * out = buf;
+=======
+	char *out = buf;
+>>>>>>> v3.18
 	int index, busnr;
 	struct resource *res;
 	struct pci_bus *bus;

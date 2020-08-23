@@ -26,7 +26,10 @@
 #include <linux/clk.h>
 #include <linux/pm_runtime.h>
 #include <linux/of_device.h>
+<<<<<<< HEAD
 #include <linux/pinctrl/consumer.h>
+=======
+>>>>>>> v3.18
 
 #include "pwm-tipwmss.h"
 
@@ -139,17 +142,29 @@ static inline struct ehrpwm_pwm_chip *to_ehrpwm_pwm_chip(struct pwm_chip *chip)
 	return container_of(chip, struct ehrpwm_pwm_chip, chip);
 }
 
+<<<<<<< HEAD
 static u16 ehrpwm_read(void *base, int offset)
+=======
+static inline u16 ehrpwm_read(void __iomem *base, int offset)
+>>>>>>> v3.18
 {
 	return readw(base + offset);
 }
 
+<<<<<<< HEAD
 static void ehrpwm_write(void *base, int offset, unsigned int val)
+=======
+static inline void ehrpwm_write(void __iomem *base, int offset, unsigned int val)
+>>>>>>> v3.18
 {
 	writew(val & 0xFFFF, base + offset);
 }
 
+<<<<<<< HEAD
 static void ehrpwm_modify(void *base, int offset,
+=======
+static void ehrpwm_modify(void __iomem *base, int offset,
+>>>>>>> v3.18
 		unsigned short mask, unsigned short val)
 {
 	unsigned short regval;
@@ -359,10 +374,17 @@ static int ehrpwm_pwm_enable(struct pwm_chip *chip, struct pwm_device *pwm)
 	configure_polarity(pc, pwm->hwpwm);
 
 	/* Enable TBCLK before enabling PWM device */
+<<<<<<< HEAD
 	ret = clk_prepare_enable(pc->tbclk);
 	if (ret) {
 		pr_err("Failed to enable TBCLK for %s\n",
 				dev_name(pc->chip.dev));
+=======
+	ret = clk_enable(pc->tbclk);
+	if (ret) {
+		dev_err(chip->dev, "Failed to enable TBCLK for %s\n",
+			dev_name(pc->chip.dev));
+>>>>>>> v3.18
 		return ret;
 	}
 
@@ -395,7 +417,11 @@ static void ehrpwm_pwm_disable(struct pwm_chip *chip, struct pwm_device *pwm)
 	ehrpwm_modify(pc->mmio_base, AQCSFRC, aqcsfrc_mask, aqcsfrc_val);
 
 	/* Disabling TBCLK on PWM disable */
+<<<<<<< HEAD
 	clk_disable_unprepare(pc->tbclk);
+=======
+	clk_disable(pc->tbclk);
+>>>>>>> v3.18
 
 	/* Stop Time base counter */
 	ehrpwm_modify(pc->mmio_base, TBCTL, TBCTL_RUN_MASK, TBCTL_STOP_NEXT);
@@ -439,6 +465,7 @@ static int ehrpwm_pwm_probe(struct platform_device *pdev)
 	struct clk *clk;
 	struct ehrpwm_pwm_chip *pc;
 	u16 status;
+<<<<<<< HEAD
 	struct pinctrl *pinctrl;
 
 	pinctrl = devm_pinctrl_get_select_default(&pdev->dev);
@@ -450,6 +477,12 @@ static int ehrpwm_pwm_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "failed to allocate memory\n");
 		return -ENOMEM;
 	}
+=======
+
+	pc = devm_kzalloc(&pdev->dev, sizeof(*pc), GFP_KERNEL);
+	if (!pc)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	clk = devm_clk_get(&pdev->dev, "fck");
 	if (IS_ERR(clk)) {
@@ -482,6 +515,15 @@ static int ehrpwm_pwm_probe(struct platform_device *pdev)
 		return PTR_ERR(pc->tbclk);
 	}
 
+<<<<<<< HEAD
+=======
+	ret = clk_prepare(pc->tbclk);
+	if (ret < 0) {
+		dev_err(&pdev->dev, "clk_prepare() failed: %d\n", ret);
+		return ret;
+	}
+
+>>>>>>> v3.18
 	ret = pwmchip_add(&pc->chip);
 	if (ret < 0) {
 		dev_err(&pdev->dev, "pwmchip_add() failed: %d\n", ret);
@@ -508,6 +550,10 @@ pwmss_clk_failure:
 	pm_runtime_put_sync(&pdev->dev);
 	pm_runtime_disable(&pdev->dev);
 	pwmchip_remove(&pc->chip);
+<<<<<<< HEAD
+=======
+	clk_unprepare(pc->tbclk);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -515,6 +561,11 @@ static int ehrpwm_pwm_remove(struct platform_device *pdev)
 {
 	struct ehrpwm_pwm_chip *pc = platform_get_drvdata(pdev);
 
+<<<<<<< HEAD
+=======
+	clk_unprepare(pc->tbclk);
+
+>>>>>>> v3.18
 	pm_runtime_get_sync(&pdev->dev);
 	/*
 	 * Due to hardware misbehaviour, acknowledge of the stop_req
@@ -528,6 +579,10 @@ static int ehrpwm_pwm_remove(struct platform_device *pdev)
 	return pwmchip_remove(&pc->chip);
 }
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 static void ehrpwm_pwm_save_context(struct ehrpwm_pwm_chip *pc)
 {
 	pm_runtime_get_sync(pc->chip.dev);
@@ -554,7 +609,10 @@ static void ehrpwm_pwm_restore_context(struct ehrpwm_pwm_chip *pc)
 	ehrpwm_write(pc->mmio_base, TBCTL, pc->ctx.tbctl);
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_PM_SLEEP
+=======
+>>>>>>> v3.18
 static int ehrpwm_pwm_suspend(struct device *dev)
 {
 	struct ehrpwm_pwm_chip *pc = dev_get_drvdata(dev);

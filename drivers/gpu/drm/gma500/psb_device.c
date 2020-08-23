@@ -25,7 +25,12 @@
 #include "psb_reg.h"
 #include "psb_intel_reg.h"
 #include "intel_bios.h"
+<<<<<<< HEAD
 
+=======
+#include "psb_device.h"
+#include "gma_device.h"
+>>>>>>> v3.18
 
 static int psb_output_init(struct drm_device *dev)
 {
@@ -257,6 +262,7 @@ static int psb_power_up(struct drm_device *dev)
 	return 0;
 }
 
+<<<<<<< HEAD
 static void psb_get_core_freq(struct drm_device *dev)
 {
 	uint32_t clock;
@@ -296,6 +302,8 @@ static void psb_get_core_freq(struct drm_device *dev)
 	}
 }
 
+=======
+>>>>>>> v3.18
 /* Poulsbo */
 static const struct psb_offset psb_regmap[2] = {
 	{
@@ -352,7 +360,11 @@ static int psb_chip_setup(struct drm_device *dev)
 {
 	struct drm_psb_private *dev_priv = dev->dev_private;
 	dev_priv->regmap = psb_regmap;
+<<<<<<< HEAD
 	psb_get_core_freq(dev);
+=======
+	gma_get_core_freq(dev);
+>>>>>>> v3.18
 	gma_intel_setup_gmbus(dev);
 	psb_intel_opregion_init(dev);
 	psb_intel_init_bios(dev);
@@ -373,6 +385,10 @@ const struct psb_ops psb_chip_ops = {
 	.crtcs = 2,
 	.hdmi_mask = (1 << 0),
 	.lvds_mask = (1 << 1),
+<<<<<<< HEAD
+=======
+	.sdvo_mask = (1 << 0),
+>>>>>>> v3.18
 	.cursor_needs_phys = 1,
 	.sgx_offset = PSB_SGX_OFFSET,
 	.chip_setup = psb_chip_setup,
@@ -380,6 +396,10 @@ const struct psb_ops psb_chip_ops = {
 
 	.crtc_helper = &psb_intel_helper_funcs,
 	.crtc_funcs = &psb_intel_crtc_funcs,
+<<<<<<< HEAD
+=======
+	.clock_funcs = &psb_clock_funcs,
+>>>>>>> v3.18
 
 	.output_init = psb_output_init,
 

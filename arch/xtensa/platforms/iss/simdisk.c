@@ -103,6 +103,7 @@ static void simdisk_transfer(struct simdisk *dev, unsigned long sector,
 
 static int simdisk_xfer_bio(struct simdisk *dev, struct bio *bio)
 {
+<<<<<<< HEAD
 	int i;
 	struct bio_vec *bvec;
 	sector_t sector = bio->bi_sector;
@@ -110,11 +111,24 @@ static int simdisk_xfer_bio(struct simdisk *dev, struct bio *bio)
 	bio_for_each_segment(bvec, bio, i) {
 		char *buffer = __bio_kmap_atomic(bio, i, KM_USER0);
 		unsigned len = bvec->bv_len >> SECTOR_SHIFT;
+=======
+	struct bio_vec bvec;
+	struct bvec_iter iter;
+	sector_t sector = bio->bi_iter.bi_sector;
+
+	bio_for_each_segment(bvec, bio, iter) {
+		char *buffer = __bio_kmap_atomic(bio, iter);
+		unsigned len = bvec.bv_len >> SECTOR_SHIFT;
+>>>>>>> v3.18
 
 		simdisk_transfer(dev, sector, len, buffer,
 				bio_data_dir(bio) == WRITE);
 		sector += len;
+<<<<<<< HEAD
 		__bio_kunmap_atomic(bio, KM_USER0);
+=======
+		__bio_kunmap_atomic(buffer);
+>>>>>>> v3.18
 	}
 	return 0;
 }

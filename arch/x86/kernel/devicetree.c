@@ -20,12 +20,18 @@
 #include <asm/hpet.h>
 #include <asm/apic.h>
 #include <asm/pci_x86.h>
+<<<<<<< HEAD
+=======
+#include <asm/setup.h>
+#include <asm/i8259.h>
+>>>>>>> v3.18
 
 __initdata u64 initial_dtb;
 char __initdata cmd_line[COMMAND_LINE_SIZE];
 
 int __initdata of_ioapic;
 
+<<<<<<< HEAD
 unsigned long pci_address_to_pio(phys_addr_t address)
 {
 	/*
@@ -36,6 +42,8 @@ unsigned long pci_address_to_pio(phys_addr_t address)
 }
 EXPORT_SYMBOL_GPL(pci_address_to_pio);
 
+=======
+>>>>>>> v3.18
 void __init early_init_dt_scan_chosen_arch(unsigned long node)
 {
 	BUG();
@@ -51,6 +59,7 @@ void * __init early_init_dt_alloc_memory_arch(u64 size, u64 align)
 	return __alloc_bootmem(size, align, __pa(MAX_DMA_ADDRESS));
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_BLK_DEV_INITRD
 void __init early_init_dt_setup_initrd_arch(u64 start, u64 end)
 {
@@ -60,6 +69,8 @@ void __init early_init_dt_setup_initrd_arch(u64 start, u64 end)
 }
 #endif
 
+=======
+>>>>>>> v3.18
 void __init add_dtb(u64 data)
 {
 	initial_dtb = data + offsetof(struct setup_data, data);
@@ -105,7 +116,10 @@ struct device_node *pcibios_get_phb_of_node(struct pci_bus *bus)
 
 static int x86_of_pci_irq_enable(struct pci_dev *dev)
 {
+<<<<<<< HEAD
 	struct of_irq oirq;
+=======
+>>>>>>> v3.18
 	u32 virq;
 	int ret;
 	u8 pin;
@@ -116,12 +130,16 @@ static int x86_of_pci_irq_enable(struct pci_dev *dev)
 	if (!pin)
 		return 0;
 
+<<<<<<< HEAD
 	ret = of_irq_map_pci(dev, &oirq);
 	if (ret)
 		return ret;
 
 	virq = irq_create_of_mapping(oirq.controller, oirq.specifier,
 			oirq.size);
+=======
+	virq = of_irq_parse_and_map_pci(dev, 0, 0);
+>>>>>>> v3.18
 	if (virq == 0)
 		return -EINVAL;
 	dev->irq = virq;
@@ -132,7 +150,11 @@ static void x86_of_pci_irq_disable(struct pci_dev *dev)
 {
 }
 
+<<<<<<< HEAD
 void __cpuinit x86_of_pci_init(void)
+=======
+void x86_of_pci_init(void)
+>>>>>>> v3.18
 {
 	pcibios_enable_irq = x86_of_pci_irq_enable;
 	pcibios_disable_irq = x86_of_pci_irq_disable;
@@ -189,6 +211,7 @@ static void __init dtb_lapic_setup(void)
 #ifdef CONFIG_X86_IO_APIC
 static unsigned int ioapic_id;
 
+<<<<<<< HEAD
 static void __init dtb_add_ioapic(struct device_node *dn)
 {
 	struct resource r;
@@ -274,6 +297,8 @@ void __init x86_dtb_init(void)
 
 #ifdef CONFIG_X86_IO_APIC
 
+=======
+>>>>>>> v3.18
 struct of_ioapic_type {
 	u32 out_type;
 	u32 trigger;
@@ -309,10 +334,15 @@ static int ioapic_xlate(struct irq_domain *domain,
 			const u32 *intspec, u32 intsize,
 			irq_hw_number_t *out_hwirq, u32 *out_type)
 {
+<<<<<<< HEAD
 	struct io_apic_irq_attr attr;
 	struct of_ioapic_type *it;
 	u32 line, idx;
 	int rc;
+=======
+	struct of_ioapic_type *it;
+	u32 line, idx, gsi;
+>>>>>>> v3.18
 
 	if (WARN_ON(intsize < 2))
 		return -EINVAL;
@@ -324,6 +354,7 @@ static int ioapic_xlate(struct irq_domain *domain,
 
 	it = &of_ioapic_type[intspec[1]];
 
+<<<<<<< HEAD
 	idx = (u32) domain->host_data;
 	set_io_apic_irq_attr(&attr, idx, line, it->trigger, it->polarity);
 
@@ -331,6 +362,12 @@ static int ioapic_xlate(struct irq_domain *domain,
 					cpu_to_node(0), &attr);
 	if (rc)
 		return rc;
+=======
+	idx = (u32)(long)domain->host_data;
+	gsi = mp_pin_to_gsi(idx, line);
+	if (mp_set_gsi_attr(gsi, it->trigger, it->polarity, cpu_to_node(0)))
+		return -EBUSY;
+>>>>>>> v3.18
 
 	*out_hwirq = line;
 	*out_type = it->out_type;
@@ -338,6 +375,7 @@ static int ioapic_xlate(struct irq_domain *domain,
 }
 
 const struct irq_domain_ops ioapic_irq_domain_ops = {
+<<<<<<< HEAD
 	.xlate = ioapic_xlate,
 };
 
@@ -418,3 +456,88 @@ void __init x86_add_irq_domains(void)
 #else
 void __init x86_add_irq_domains(void) { }
 #endif
+=======
+	.map = mp_irqdomain_map,
+	.unmap = mp_irqdomain_unmap,
+	.xlate = ioapic_xlate,
+};
+
+static void __init dtb_add_ioapic(struct device_node *dn)
+{
+	struct resource r;
+	int ret;
+	struct ioapic_domain_cfg cfg = {
+		.type = IOAPIC_DOMAIN_DYNAMIC,
+		.ops = &ioapic_irq_domain_ops,
+		.dev = dn,
+	};
+
+	ret = of_address_to_resource(dn, 0, &r);
+	if (ret) {
+		printk(KERN_ERR "Can't obtain address from node %s.\n",
+				dn->full_name);
+		return;
+	}
+	mp_register_ioapic(++ioapic_id, r.start, gsi_top, &cfg);
+}
+
+static void __init dtb_ioapic_setup(void)
+{
+	struct device_node *dn;
+
+	for_each_compatible_node(dn, NULL, "intel,ce4100-ioapic")
+		dtb_add_ioapic(dn);
+
+	if (nr_ioapics) {
+		of_ioapic = 1;
+		return;
+	}
+	printk(KERN_ERR "Error: No information about IO-APIC in OF.\n");
+}
+#else
+static void __init dtb_ioapic_setup(void) {}
+#endif
+
+static void __init dtb_apic_setup(void)
+{
+	dtb_lapic_setup();
+	dtb_ioapic_setup();
+}
+
+#ifdef CONFIG_OF_FLATTREE
+static void __init x86_flattree_get_config(void)
+{
+	u32 size, map_len;
+	void *dt;
+
+	if (!initial_dtb)
+		return;
+
+	map_len = max(PAGE_SIZE - (initial_dtb & ~PAGE_MASK), (u64)128);
+
+	initial_boot_params = dt = early_memremap(initial_dtb, map_len);
+	size = of_get_flat_dt_size();
+	if (map_len < size) {
+		early_iounmap(dt, map_len);
+		initial_boot_params = dt = early_memremap(initial_dtb, size);
+		map_len = size;
+	}
+
+	unflatten_and_copy_device_tree();
+	early_iounmap(dt, map_len);
+}
+#else
+static inline void x86_flattree_get_config(void) { }
+#endif
+
+void __init x86_dtb_init(void)
+{
+	x86_flattree_get_config();
+
+	if (!of_have_populated_dt())
+		return;
+
+	dtb_setup_hpet();
+	dtb_apic_setup();
+}
+>>>>>>> v3.18

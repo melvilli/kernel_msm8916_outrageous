@@ -289,6 +289,10 @@ static void __init realview_pba8_init(void)
 	realview_eth_register(NULL, realview_pba8_smsc911x_resources);
 	platform_device_register(&realview_i2c_device);
 	platform_device_register(&realview_cf_device);
+<<<<<<< HEAD
+=======
+	platform_device_register(&realview_leds_device);
+>>>>>>> v3.18
 	realview_usb_register(realview_pba8_isp1761_resources);
 	platform_device_register(&pmu_device);
 

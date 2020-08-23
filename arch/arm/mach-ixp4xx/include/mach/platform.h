@@ -131,6 +131,7 @@ struct pci_sys_data;
 extern int ixp4xx_setup(int nr, struct pci_sys_data *sys);
 extern struct pci_ops ixp4xx_ops;
 
+<<<<<<< HEAD
 /*
  * GPIO-functions
  */
@@ -170,5 +171,7 @@ static inline void gpio_line_set(u8 line, int value)
 	    *IXP4XX_GPIO_GPOUTR &= ~(1 << line);
 }
 
+=======
+>>>>>>> v3.18
 #endif // __ASSEMBLY__
 

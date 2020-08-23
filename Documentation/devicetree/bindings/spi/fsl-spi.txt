@@ -42,6 +42,13 @@ Required properties:
 - interrupts : should contain eSPI interrupt, the device has one interrupt.
 - fsl,espi-num-chipselects : the number of the chipselect signals.
 
+<<<<<<< HEAD
+=======
+Optional properties:
+- fsl,csbef: chip select assertion time in bits before frame starts
+- fsl,csaft: chip select negation time in bits after frame ends
+
+>>>>>>> v3.18
 Example:
 	spi@110000 {
 		#address-cells = <1>;
@@ -51,4 +58,9 @@ Example:
 		interrupts = <53 0x2>;
 		interrupt-parent = <&mpic>;
 		fsl,espi-num-chipselects = <4>;
+<<<<<<< HEAD
+=======
+		fsl,csbef = <1>;
+		fsl,csaft = <1>;
+>>>>>>> v3.18
 	};

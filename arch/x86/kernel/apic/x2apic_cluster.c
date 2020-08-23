@@ -3,7 +3,10 @@
 #include <linux/string.h>
 #include <linux/kernel.h>
 #include <linux/ctype.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/dmar.h>
 #include <linux/cpu.h>
 
@@ -43,7 +46,11 @@ __x2apic_send_IPI_mask(const struct cpumask *mask, int vector, int apic_dest)
 	 * We are to modify mask, so we need an own copy
 	 * and be sure it's manipulated with irq off.
 	 */
+<<<<<<< HEAD
 	ipi_mask_ptr = __raw_get_cpu_var(ipi_mask);
+=======
+	ipi_mask_ptr = this_cpu_cpumask_var_ptr(ipi_mask);
+>>>>>>> v3.18
 	cpumask_copy(ipi_mask_ptr, mask);
 
 	/*
@@ -148,7 +155,11 @@ static void init_x2apic_ldr(void)
  /*
   * At CPU state changes, update the x2apic cluster sibling info.
   */
+<<<<<<< HEAD
 static int __cpuinit
+=======
+static int
+>>>>>>> v3.18
 update_clusterinfo(struct notifier_block *nfb, unsigned long action, void *hcpu)
 {
 	unsigned int this_cpu = (unsigned long)hcpu;
@@ -250,13 +261,17 @@ static struct apic apic_x2apic_cluster = {
 	.disable_esr			= 0,
 	.dest_logical			= APIC_DEST_LOGICAL,
 	.check_apicid_used		= NULL,
+<<<<<<< HEAD
 	.check_apicid_present		= NULL,
+=======
+>>>>>>> v3.18
 
 	.vector_allocation_domain	= cluster_vector_allocation_domain,
 	.init_apic_ldr			= init_x2apic_ldr,
 
 	.ioapic_phys_id_map		= NULL,
 	.setup_apic_routing		= NULL,
+<<<<<<< HEAD
 	.multi_timer_check		= NULL,
 	.cpu_present_to_apicid		= default_cpu_present_to_apicid,
 	.apicid_to_cpu_present		= NULL,
@@ -265,6 +280,12 @@ static struct apic apic_x2apic_cluster = {
 	.enable_apic_mode		= NULL,
 	.phys_pkg_id			= x2apic_phys_pkg_id,
 	.mps_oem_check			= NULL,
+=======
+	.cpu_present_to_apicid		= default_cpu_present_to_apicid,
+	.apicid_to_cpu_present		= NULL,
+	.check_phys_apicid_present	= default_check_phys_apicid_present,
+	.phys_pkg_id			= x2apic_phys_pkg_id,
+>>>>>>> v3.18
 
 	.get_apic_id			= x2apic_get_apic_id,
 	.set_apic_id			= x2apic_set_apic_id,
@@ -278,10 +299,14 @@ static struct apic apic_x2apic_cluster = {
 	.send_IPI_all			= x2apic_send_IPI_all,
 	.send_IPI_self			= x2apic_send_IPI_self,
 
+<<<<<<< HEAD
 	.trampoline_phys_low		= DEFAULT_TRAMPOLINE_PHYS_LOW,
 	.trampoline_phys_high		= DEFAULT_TRAMPOLINE_PHYS_HIGH,
 	.wait_for_init_deassert		= NULL,
 	.smp_callin_clear_local_apic	= NULL,
+=======
+	.wait_for_init_deassert		= false,
+>>>>>>> v3.18
 	.inquire_remote_apic		= NULL,
 
 	.read				= native_apic_msr_read,

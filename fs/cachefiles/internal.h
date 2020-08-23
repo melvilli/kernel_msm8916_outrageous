@@ -9,6 +9,16 @@
  * 2 of the Licence, or (at your option) any later version.
  */
 
+<<<<<<< HEAD
+=======
+#ifdef pr_fmt
+#undef pr_fmt
+#endif
+
+#define pr_fmt(fmt) "CacheFiles: " fmt
+
+
+>>>>>>> v3.18
 #include <linux/fscache-cache.h>
 #include <linux/timer.h>
 #include <linux/wait.h>
@@ -235,6 +245,10 @@ extern int cachefiles_set_object_xattr(struct cachefiles_object *object,
 				       struct cachefiles_xattr *auxdata);
 extern int cachefiles_update_object_xattr(struct cachefiles_object *object,
 					  struct cachefiles_xattr *auxdata);
+<<<<<<< HEAD
+=======
+extern int cachefiles_check_auxdata(struct cachefiles_object *object);
+>>>>>>> v3.18
 extern int cachefiles_check_object_xattr(struct cachefiles_object *object,
 					 struct cachefiles_xattr *auxdata);
 extern int cachefiles_remove_object_xattr(struct cachefiles_cache *cache,
@@ -244,11 +258,18 @@ extern int cachefiles_remove_object_xattr(struct cachefiles_cache *cache,
 /*
  * error handling
  */
+<<<<<<< HEAD
 #define kerror(FMT, ...) printk(KERN_ERR "CacheFiles: "FMT"\n", ##__VA_ARGS__)
 
 #define cachefiles_io_error(___cache, FMT, ...)		\
 do {							\
 	kerror("I/O Error: " FMT, ##__VA_ARGS__);	\
+=======
+
+#define cachefiles_io_error(___cache, FMT, ...)		\
+do {							\
+	pr_err("I/O Error: " FMT"\n", ##__VA_ARGS__);	\
+>>>>>>> v3.18
 	fscache_io_error(&(___cache)->cache);		\
 	set_bit(CACHEFILES_DEAD, &(___cache)->flags);	\
 } while (0)
@@ -309,8 +330,13 @@ do {							\
 #define ASSERT(X)							\
 do {									\
 	if (unlikely(!(X))) {						\
+<<<<<<< HEAD
 		printk(KERN_ERR "\n");					\
 		printk(KERN_ERR "CacheFiles: Assertion failed\n");	\
+=======
+		pr_err("\n");						\
+		pr_err("Assertion failed\n");		\
+>>>>>>> v3.18
 		BUG();							\
 	}								\
 } while (0)
@@ -318,9 +344,15 @@ do {									\
 #define ASSERTCMP(X, OP, Y)						\
 do {									\
 	if (unlikely(!((X) OP (Y)))) {					\
+<<<<<<< HEAD
 		printk(KERN_ERR "\n");					\
 		printk(KERN_ERR "CacheFiles: Assertion failed\n");	\
 		printk(KERN_ERR "%lx " #OP " %lx is false\n",		\
+=======
+		pr_err("\n");						\
+		pr_err("Assertion failed\n");		\
+		pr_err("%lx " #OP " %lx is false\n",			\
+>>>>>>> v3.18
 		       (unsigned long)(X), (unsigned long)(Y));		\
 		BUG();							\
 	}								\
@@ -329,8 +361,13 @@ do {									\
 #define ASSERTIF(C, X)							\
 do {									\
 	if (unlikely((C) && !(X))) {					\
+<<<<<<< HEAD
 		printk(KERN_ERR "\n");					\
 		printk(KERN_ERR "CacheFiles: Assertion failed\n");	\
+=======
+		pr_err("\n");						\
+		pr_err("Assertion failed\n");		\
+>>>>>>> v3.18
 		BUG();							\
 	}								\
 } while (0)
@@ -338,9 +375,15 @@ do {									\
 #define ASSERTIFCMP(C, X, OP, Y)					\
 do {									\
 	if (unlikely((C) && !((X) OP (Y)))) {				\
+<<<<<<< HEAD
 		printk(KERN_ERR "\n");					\
 		printk(KERN_ERR "CacheFiles: Assertion failed\n");	\
 		printk(KERN_ERR "%lx " #OP " %lx is false\n",		\
+=======
+		pr_err("\n");						\
+		pr_err("Assertion failed\n");		\
+		pr_err("%lx " #OP " %lx is false\n",			\
+>>>>>>> v3.18
 		       (unsigned long)(X), (unsigned long)(Y));		\
 		BUG();							\
 	}								\

@@ -110,7 +110,11 @@ ath5k_hw_radio_revision(struct ath5k_hw *ah, enum ieee80211_band band)
 		ath5k_hw_reg_write(ah, 0x00010000, AR5K_PHY(0x20));
 
 	if (ah->ah_version == AR5K_AR5210) {
+<<<<<<< HEAD
 		srev = ath5k_hw_reg_read(ah, AR5K_PHY(256) >> 28) & 0xf;
+=======
+		srev = (ath5k_hw_reg_read(ah, AR5K_PHY(256)) >> 28) & 0xf;
+>>>>>>> v3.18
 		ret = (u16)ath5k_hw_bitswap(srev, 4) + 1;
 	} else {
 		srev = (ath5k_hw_reg_read(ah, AR5K_PHY(0x100)) >> 24) & 0xff;
@@ -3709,8 +3713,13 @@ ath5k_hw_txpower(struct ath5k_hw *ah, struct ieee80211_channel *channel,
 			AR5K_REG_MS(AR5K_TUNE_MAX_TXPOWER, AR5K_TPC_CHIRP),
 			AR5K_TPC);
 	} else {
+<<<<<<< HEAD
 		ath5k_hw_reg_write(ah, AR5K_PHY_TXPOWER_RATE_MAX |
 			AR5K_TUNE_MAX_TXPOWER, AR5K_PHY_TXPOWER_RATE_MAX);
+=======
+		ath5k_hw_reg_write(ah, AR5K_TUNE_MAX_TXPOWER,
+			AR5K_PHY_TXPOWER_RATE_MAX);
+>>>>>>> v3.18
 	}
 
 	return 0;

@@ -26,7 +26,10 @@
 #include <linux/list.h>
 #include <linux/module.h>
 #include <linux/debugfs.h>
+<<<<<<< HEAD
 #include <linux/bitops.h>
+=======
+>>>>>>> v3.18
 
 #include <linux/iio/iio.h>
 #include <linux/iio/sysfs.h>
@@ -215,6 +218,7 @@ static int adis16400_set_freq(struct adis16400_state *st, unsigned int freq)
 	return adis_write_reg_8(&st->adis, ADIS16400_SMPL_PRD, val);
 }
 
+<<<<<<< HEAD
 static ssize_t adis16400_read_frequency(struct device *dev,
 		struct device_attribute *attr,
 		char *buf)
@@ -230,6 +234,8 @@ static ssize_t adis16400_read_frequency(struct device *dev,
 	return sprintf(buf, "%d.%.3d\n", ret / 1000, ret % 1000);
 }
 
+=======
+>>>>>>> v3.18
 static const unsigned adis16400_3db_divisors[] = {
 	[0] = 2, /* Special case */
 	[1] = 6,
@@ -261,6 +267,7 @@ static int adis16400_set_filter(struct iio_dev *indio_dev, int sps, int val)
 	return ret;
 }
 
+<<<<<<< HEAD
 static ssize_t adis16400_write_frequency(struct device *dev,
 	struct device_attribute *attr, const char *buf, size_t len)
 {
@@ -285,6 +292,8 @@ static ssize_t adis16400_write_frequency(struct device *dev,
 	return ret ? ret : len;
 }
 
+=======
+>>>>>>> v3.18
 /* Power down the device */
 static int adis16400_stop_device(struct iio_dev *indio_dev)
 {
@@ -351,10 +360,13 @@ err_ret:
 	return ret;
 }
 
+<<<<<<< HEAD
 static IIO_DEV_ATTR_SAMP_FREQ(S_IWUSR | S_IRUGO,
 			      adis16400_read_frequency,
 			      adis16400_write_frequency);
 
+=======
+>>>>>>> v3.18
 static const uint8_t adis16400_addresses[] = {
 	[ADIS16400_SCAN_GYRO_X] = ADIS16400_XGYRO_OFF,
 	[ADIS16400_SCAN_GYRO_Y] = ADIS16400_YGYRO_OFF,
@@ -395,6 +407,19 @@ static int adis16400_write_raw(struct iio_dev *indio_dev,
 			val * 1000 + val2 / 1000);
 		mutex_unlock(&indio_dev->mlock);
 		return ret;
+<<<<<<< HEAD
+=======
+	case IIO_CHAN_INFO_SAMP_FREQ:
+		sps = val * 1000 + val2 / 1000;
+
+		if (sps <= 0)
+			return -EINVAL;
+
+		mutex_lock(&indio_dev->mlock);
+		ret = st->variant->set_freq(st, sps);
+		mutex_unlock(&indio_dev->mlock);
+		return ret;
+>>>>>>> v3.18
 	default:
 		return -EINVAL;
 	}
@@ -438,11 +463,14 @@ static int adis16400_read_raw(struct iio_dev *indio_dev,
 			*val = st->variant->temp_scale_nano / 1000000;
 			*val2 = (st->variant->temp_scale_nano % 1000000);
 			return IIO_VAL_INT_PLUS_MICRO;
+<<<<<<< HEAD
 		case IIO_PRESSURE:
 			/* 20 uBar = 0.002kPascal */
 			*val = 0;
 			*val2 = 2000;
 			return IIO_VAL_INT_PLUS_MICRO;
+=======
+>>>>>>> v3.18
 		default:
 			return -EINVAL;
 		}
@@ -453,7 +481,11 @@ static int adis16400_read_raw(struct iio_dev *indio_dev,
 		mutex_unlock(&indio_dev->mlock);
 		if (ret)
 			return ret;
+<<<<<<< HEAD
 		val16 = sign_extend32(val16, 11);
+=======
+		val16 = ((val16 & 0xFFF) << 4) >> 4;
+>>>>>>> v3.18
 		*val = val16;
 		return IIO_VAL_INT;
 	case IIO_CHAN_INFO_OFFSET:
@@ -480,11 +512,22 @@ static int adis16400_read_raw(struct iio_dev *indio_dev,
 		if (ret < 0)
 			return ret;
 		return IIO_VAL_INT_PLUS_MICRO;
+<<<<<<< HEAD
+=======
+	case IIO_CHAN_INFO_SAMP_FREQ:
+		ret = st->variant->get_freq(st);
+		if (ret < 0)
+			return ret;
+		*val = ret / 1000;
+		*val2 = (ret % 1000) * 1000;
+		return IIO_VAL_INT_PLUS_MICRO;
+>>>>>>> v3.18
 	default:
 		return -EINVAL;
 	}
 }
 
+<<<<<<< HEAD
 #define ADIS16400_VOLTAGE_CHAN(addr, bits, name, si, chn) { \
 	.type = IIO_VOLTAGE, \
 	.indexed = 1, \
@@ -492,6 +535,16 @@ static int adis16400_read_raw(struct iio_dev *indio_dev,
 	.extend_name = name, \
 	.info_mask_separate = BIT(IIO_CHAN_INFO_RAW) | \
 		BIT(IIO_CHAN_INFO_SCALE), \
+=======
+#define ADIS16400_VOLTAGE_CHAN(addr, bits, name, si) { \
+	.type = IIO_VOLTAGE, \
+	.indexed = 1, \
+	.channel = 0, \
+	.extend_name = name, \
+	.info_mask_separate = BIT(IIO_CHAN_INFO_RAW) | \
+		BIT(IIO_CHAN_INFO_SCALE), \
+	.info_mask_shared_by_all = BIT(IIO_CHAN_INFO_SAMP_FREQ), \
+>>>>>>> v3.18
 	.address = (addr), \
 	.scan_index = (si), \
 	.scan_type = { \
@@ -504,10 +557,17 @@ static int adis16400_read_raw(struct iio_dev *indio_dev,
 }
 
 #define ADIS16400_SUPPLY_CHAN(addr, bits) \
+<<<<<<< HEAD
 	ADIS16400_VOLTAGE_CHAN(addr, bits, "supply", ADIS16400_SCAN_SUPPLY, 0)
 
 #define ADIS16400_AUX_ADC_CHAN(addr, bits) \
 	ADIS16400_VOLTAGE_CHAN(addr, bits, NULL, ADIS16400_SCAN_ADC, 1)
+=======
+	ADIS16400_VOLTAGE_CHAN(addr, bits, "supply", ADIS16400_SCAN_SUPPLY)
+
+#define ADIS16400_AUX_ADC_CHAN(addr, bits) \
+	ADIS16400_VOLTAGE_CHAN(addr, bits, NULL, ADIS16400_SCAN_ADC)
+>>>>>>> v3.18
 
 #define ADIS16400_GYRO_CHAN(mod, addr, bits) { \
 	.type = IIO_ANGL_VEL, \
@@ -517,6 +577,10 @@ static int adis16400_read_raw(struct iio_dev *indio_dev,
 		BIT(IIO_CHAN_INFO_CALIBBIAS),		  \
 	.info_mask_shared_by_type = BIT(IIO_CHAN_INFO_SCALE) | \
 		BIT(IIO_CHAN_INFO_LOW_PASS_FILTER_3DB_FREQUENCY), \
+<<<<<<< HEAD
+=======
+	.info_mask_shared_by_all = BIT(IIO_CHAN_INFO_SAMP_FREQ), \
+>>>>>>> v3.18
 	.address = addr, \
 	.scan_index = ADIS16400_SCAN_GYRO_ ## mod, \
 	.scan_type = { \
@@ -536,6 +600,10 @@ static int adis16400_read_raw(struct iio_dev *indio_dev,
 		BIT(IIO_CHAN_INFO_CALIBBIAS), \
 	.info_mask_shared_by_type = BIT(IIO_CHAN_INFO_SCALE) | \
 		BIT(IIO_CHAN_INFO_LOW_PASS_FILTER_3DB_FREQUENCY), \
+<<<<<<< HEAD
+=======
+	.info_mask_shared_by_all = BIT(IIO_CHAN_INFO_SAMP_FREQ), \
+>>>>>>> v3.18
 	.address = (addr), \
 	.scan_index = ADIS16400_SCAN_ACC_ ## mod, \
 	.scan_type = { \
@@ -554,6 +622,10 @@ static int adis16400_read_raw(struct iio_dev *indio_dev,
 	.info_mask_separate = BIT(IIO_CHAN_INFO_RAW), \
 	.info_mask_shared_by_type = BIT(IIO_CHAN_INFO_SCALE) | \
 		BIT(IIO_CHAN_INFO_LOW_PASS_FILTER_3DB_FREQUENCY), \
+<<<<<<< HEAD
+=======
+	.info_mask_shared_by_all = BIT(IIO_CHAN_INFO_SAMP_FREQ), \
+>>>>>>> v3.18
 	.address = (addr), \
 	.scan_index = ADIS16400_SCAN_MAGN_ ## mod, \
 	.scan_type = { \
@@ -579,6 +651,10 @@ static int adis16400_read_raw(struct iio_dev *indio_dev,
 		BIT(IIO_CHAN_INFO_SCALE), \
 	.info_mask_shared_by_type = \
 		BIT(IIO_CHAN_INFO_LOW_PASS_FILTER_3DB_FREQUENCY), \
+<<<<<<< HEAD
+=======
+	.info_mask_shared_by_all = BIT(IIO_CHAN_INFO_SAMP_FREQ), \
+>>>>>>> v3.18
 	.address = (addr), \
 	.scan_index = ADIS16350_SCAN_TEMP_ ## mod, \
 	.scan_type = { \
@@ -597,6 +673,10 @@ static int adis16400_read_raw(struct iio_dev *indio_dev,
 	.info_mask_separate = BIT(IIO_CHAN_INFO_RAW) | \
 		BIT(IIO_CHAN_INFO_OFFSET) | \
 		BIT(IIO_CHAN_INFO_SCALE), \
+<<<<<<< HEAD
+=======
+	.info_mask_shared_by_all = BIT(IIO_CHAN_INFO_SAMP_FREQ), \
+>>>>>>> v3.18
 	.address = (addr), \
 	.scan_index = ADIS16350_SCAN_TEMP_X, \
 	.scan_type = { \
@@ -614,6 +694,10 @@ static int adis16400_read_raw(struct iio_dev *indio_dev,
 	.channel2 = IIO_MOD_ ## mod, \
 	.info_mask_separate = BIT(IIO_CHAN_INFO_RAW), \
 	.info_mask_shared_by_type = BIT(IIO_CHAN_INFO_SCALE), \
+<<<<<<< HEAD
+=======
+	.info_mask_shared_by_all = BIT(IIO_CHAN_INFO_SAMP_FREQ), \
+>>>>>>> v3.18
 	.address = (addr), \
 	.scan_index = ADIS16300_SCAN_INCLI_ ## mod, \
 	.scan_type = { \
@@ -655,6 +739,10 @@ static const struct iio_chan_spec adis16448_channels[] = {
 		.type = IIO_PRESSURE,
 		.info_mask_separate = BIT(IIO_CHAN_INFO_RAW),
 		.info_mask_shared_by_type = BIT(IIO_CHAN_INFO_SCALE),
+<<<<<<< HEAD
+=======
+		.info_mask_shared_by_all = BIT(IIO_CHAN_INFO_SAMP_FREQ),
+>>>>>>> v3.18
 		.address = ADIS16448_BARO_OUT,
 		.scan_index = ADIS16400_SCAN_BARO,
 		.scan_type = {
@@ -710,6 +798,7 @@ static const struct iio_chan_spec adis16334_channels[] = {
 	IIO_CHAN_SOFT_TIMESTAMP(ADIS16400_SCAN_TIMESTAMP),
 };
 
+<<<<<<< HEAD
 static struct attribute *adis16400_attributes[] = {
 	&iio_dev_attr_sampling_frequency.dev_attr.attr,
 	NULL
@@ -719,6 +808,8 @@ static const struct attribute_group adis16400_attribute_group = {
 	.attrs = adis16400_attributes,
 };
 
+=======
+>>>>>>> v3.18
 static struct adis16400_chip_info adis16400_chips[] = {
 	[ADIS16300] = {
 		.channels = adis16300_channels,
@@ -819,11 +910,22 @@ static const struct iio_info adis16400_info = {
 	.driver_module = THIS_MODULE,
 	.read_raw = &adis16400_read_raw,
 	.write_raw = &adis16400_write_raw,
+<<<<<<< HEAD
 	.attrs = &adis16400_attribute_group,
+=======
+>>>>>>> v3.18
 	.update_scan_mode = adis16400_update_scan_mode,
 	.debugfs_reg_access = adis_debugfs_reg_access,
 };
 
+<<<<<<< HEAD
+=======
+static const unsigned long adis16400_burst_scan_mask[] = {
+	~0UL,
+	0,
+};
+
+>>>>>>> v3.18
 static const char * const adis16400_status_error_msgs[] = {
 	[ADIS16400_DIAG_STAT_ZACCL_FAIL] = "Z-axis accelerometer self-test failure",
 	[ADIS16400_DIAG_STAT_YACCL_FAIL] = "Y-axis accelerometer self-test failure",
@@ -871,6 +973,7 @@ static const struct adis_data adis16400_data = {
 		BIT(ADIS16400_DIAG_STAT_POWER_LOW),
 };
 
+<<<<<<< HEAD
 static void adis16400_setup_chan_mask(struct adis16400_state *st)
 {
 	const struct adis16400_chip_info *chip_info = st->variant;
@@ -885,13 +988,19 @@ static void adis16400_setup_chan_mask(struct adis16400_state *st)
 	}
 }
 
+=======
+>>>>>>> v3.18
 static int adis16400_probe(struct spi_device *spi)
 {
 	struct adis16400_state *st;
 	struct iio_dev *indio_dev;
 	int ret;
 
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*st));
+=======
+	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
+>>>>>>> v3.18
 	if (indio_dev == NULL)
 		return -ENOMEM;
 
@@ -908,6 +1017,7 @@ static int adis16400_probe(struct spi_device *spi)
 	indio_dev->info = &adis16400_info;
 	indio_dev->modes = INDIO_DIRECT_MODE;
 
+<<<<<<< HEAD
 	if (!(st->variant->flags & ADIS16400_NO_BURST)) {
 		adis16400_setup_chan_mask(st);
 		indio_dev->available_scan_masks = st->avail_scan_mask;
@@ -916,11 +1026,23 @@ static int adis16400_probe(struct spi_device *spi)
 	ret = adis_init(&st->adis, indio_dev, spi, &adis16400_data);
 	if (ret)
 		goto error_free_dev;
+=======
+	if (!(st->variant->flags & ADIS16400_NO_BURST))
+		indio_dev->available_scan_masks = adis16400_burst_scan_mask;
+
+	ret = adis_init(&st->adis, indio_dev, spi, &adis16400_data);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 
 	ret = adis_setup_buffer_and_trigger(&st->adis, indio_dev,
 			adis16400_trigger_handler);
 	if (ret)
+<<<<<<< HEAD
 		goto error_free_dev;
+=======
+		return ret;
+>>>>>>> v3.18
 
 	/* Get the device into a sane initial state */
 	ret = adis16400_initial_setup(indio_dev);
@@ -935,8 +1057,11 @@ static int adis16400_probe(struct spi_device *spi)
 
 error_cleanup_buffer:
 	adis_cleanup_buffer_and_trigger(&st->adis, indio_dev);
+<<<<<<< HEAD
 error_free_dev:
 	iio_device_free(indio_dev);
+=======
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -950,8 +1075,11 @@ static int adis16400_remove(struct spi_device *spi)
 
 	adis_cleanup_buffer_and_trigger(&st->adis, indio_dev);
 
+<<<<<<< HEAD
 	iio_device_free(indio_dev);
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

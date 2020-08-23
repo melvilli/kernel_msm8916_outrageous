@@ -44,8 +44,16 @@
 
 #include <rdma/ib_verbs.h>
 #include <rdma/ib_cache.h>
+<<<<<<< HEAD
 
 int ib_rate_to_mult(enum ib_rate rate)
+=======
+#include <rdma/ib_addr.h>
+
+#include "core_priv.h"
+
+__attribute_const__ int ib_rate_to_mult(enum ib_rate rate)
+>>>>>>> v3.18
 {
 	switch (rate) {
 	case IB_RATE_2_5_GBPS: return  1;
@@ -62,7 +70,11 @@ int ib_rate_to_mult(enum ib_rate rate)
 }
 EXPORT_SYMBOL(ib_rate_to_mult);
 
+<<<<<<< HEAD
 enum ib_rate mult_to_ib_rate(int mult)
+=======
+__attribute_const__ enum ib_rate mult_to_ib_rate(int mult)
+>>>>>>> v3.18
 {
 	switch (mult) {
 	case 1:  return IB_RATE_2_5_GBPS;
@@ -79,7 +91,11 @@ enum ib_rate mult_to_ib_rate(int mult)
 }
 EXPORT_SYMBOL(mult_to_ib_rate);
 
+<<<<<<< HEAD
 int ib_rate_to_mbps(enum ib_rate rate)
+=======
+__attribute_const__ int ib_rate_to_mbps(enum ib_rate rate)
+>>>>>>> v3.18
 {
 	switch (rate) {
 	case IB_RATE_2_5_GBPS: return 2500;
@@ -104,7 +120,11 @@ int ib_rate_to_mbps(enum ib_rate rate)
 }
 EXPORT_SYMBOL(ib_rate_to_mbps);
 
+<<<<<<< HEAD
 enum rdma_transport_type
+=======
+__attribute_const__ enum rdma_transport_type
+>>>>>>> v3.18
 rdma_node_get_transport(enum rdma_node_type node_type)
 {
 	switch (node_type) {
@@ -114,6 +134,13 @@ rdma_node_get_transport(enum rdma_node_type node_type)
 		return RDMA_TRANSPORT_IB;
 	case RDMA_NODE_RNIC:
 		return RDMA_TRANSPORT_IWARP;
+<<<<<<< HEAD
+=======
+	case RDMA_NODE_USNIC:
+		return RDMA_TRANSPORT_USNIC;
+	case RDMA_NODE_USNIC_UDP:
+		return RDMA_TRANSPORT_USNIC_UDP;
+>>>>>>> v3.18
 	default:
 		BUG();
 		return 0;
@@ -130,6 +157,11 @@ enum rdma_link_layer rdma_port_get_link_layer(struct ib_device *device, u8 port_
 	case RDMA_TRANSPORT_IB:
 		return IB_LINK_LAYER_INFINIBAND;
 	case RDMA_TRANSPORT_IWARP:
+<<<<<<< HEAD
+=======
+	case RDMA_TRANSPORT_USNIC:
+	case RDMA_TRANSPORT_USNIC_UDP:
+>>>>>>> v3.18
 		return IB_LINK_LAYER_ETHERNET;
 	default:
 		return IB_LINK_LAYER_UNSPECIFIED;
@@ -189,8 +221,33 @@ int ib_init_ah_from_wc(struct ib_device *device, u8 port_num, struct ib_wc *wc,
 	u32 flow_class;
 	u16 gid_index;
 	int ret;
+<<<<<<< HEAD
 
 	memset(ah_attr, 0, sizeof *ah_attr);
+=======
+	int is_eth = (rdma_port_get_link_layer(device, port_num) ==
+			IB_LINK_LAYER_ETHERNET);
+
+	memset(ah_attr, 0, sizeof *ah_attr);
+	if (is_eth) {
+		if (!(wc->wc_flags & IB_WC_GRH))
+			return -EPROTOTYPE;
+
+		if (wc->wc_flags & IB_WC_WITH_SMAC &&
+		    wc->wc_flags & IB_WC_WITH_VLAN) {
+			memcpy(ah_attr->dmac, wc->smac, ETH_ALEN);
+			ah_attr->vlan_id = wc->vlan_id;
+		} else {
+			ret = rdma_addr_find_dmac_by_grh(&grh->dgid, &grh->sgid,
+					ah_attr->dmac, &ah_attr->vlan_id);
+			if (ret)
+				return ret;
+		}
+	} else {
+		ah_attr->vlan_id = 0xffff;
+	}
+
+>>>>>>> v3.18
 	ah_attr->dlid = wc->slid;
 	ah_attr->sl = wc->sl;
 	ah_attr->src_path_bits = wc->dlid_path_bits;
@@ -346,10 +403,20 @@ EXPORT_SYMBOL(ib_destroy_srq);
 static void __ib_shared_qp_event_handler(struct ib_event *event, void *context)
 {
 	struct ib_qp *qp = context;
+<<<<<<< HEAD
 
 	list_for_each_entry(event->element.qp, &qp->open_list, open_list)
 		if (event->element.qp->event_handler)
 			event->element.qp->event_handler(event, event->element.qp->qp_context);
+=======
+	unsigned long flags;
+
+	spin_lock_irqsave(&qp->device->event_handler_lock, flags);
+	list_for_each_entry(event->element.qp, &qp->open_list, open_list)
+		if (event->element.qp->event_handler)
+			event->element.qp->event_handler(event, event->element.qp->qp_context);
+	spin_unlock_irqrestore(&qp->device->event_handler_lock, flags);
+>>>>>>> v3.18
 }
 
 static void __ib_insert_xrcd_qp(struct ib_xrcd *xrcd, struct ib_qp *qp)
@@ -470,7 +537,13 @@ EXPORT_SYMBOL(ib_create_qp);
 static const struct {
 	int			valid;
 	enum ib_qp_attr_mask	req_param[IB_QPT_MAX];
+<<<<<<< HEAD
 	enum ib_qp_attr_mask	opt_param[IB_QPT_MAX];
+=======
+	enum ib_qp_attr_mask	req_param_add_eth[IB_QPT_MAX];
+	enum ib_qp_attr_mask	opt_param[IB_QPT_MAX];
+	enum ib_qp_attr_mask	opt_param_add_eth[IB_QPT_MAX];
+>>>>>>> v3.18
 } qp_state_table[IB_QPS_ERR + 1][IB_QPS_ERR + 1] = {
 	[IB_QPS_RESET] = {
 		[IB_QPS_RESET] = { .valid = 1 },
@@ -551,6 +624,15 @@ static const struct {
 						IB_QP_MAX_DEST_RD_ATOMIC	|
 						IB_QP_MIN_RNR_TIMER),
 			},
+<<<<<<< HEAD
+=======
+			.req_param_add_eth = {
+				[IB_QPT_RC]  = (IB_QP_SMAC),
+				[IB_QPT_UC]  = (IB_QP_SMAC),
+				[IB_QPT_XRC_INI]  = (IB_QP_SMAC),
+				[IB_QPT_XRC_TGT]  = (IB_QP_SMAC)
+			},
+>>>>>>> v3.18
 			.opt_param = {
 				 [IB_QPT_UD]  = (IB_QP_PKEY_INDEX		|
 						 IB_QP_QKEY),
@@ -570,7 +652,25 @@ static const struct {
 						 IB_QP_QKEY),
 				 [IB_QPT_GSI] = (IB_QP_PKEY_INDEX		|
 						 IB_QP_QKEY),
+<<<<<<< HEAD
 			 }
+=======
+			 },
+			.opt_param_add_eth = {
+				[IB_QPT_RC]  = (IB_QP_ALT_SMAC			|
+						IB_QP_VID			|
+						IB_QP_ALT_VID),
+				[IB_QPT_UC]  = (IB_QP_ALT_SMAC			|
+						IB_QP_VID			|
+						IB_QP_ALT_VID),
+				[IB_QPT_XRC_INI]  = (IB_QP_ALT_SMAC			|
+						IB_QP_VID			|
+						IB_QP_ALT_VID),
+				[IB_QPT_XRC_TGT]  = (IB_QP_ALT_SMAC			|
+						IB_QP_VID			|
+						IB_QP_ALT_VID)
+			}
+>>>>>>> v3.18
 		}
 	},
 	[IB_QPS_RTR]   = {
@@ -773,7 +873,12 @@ static const struct {
 };
 
 int ib_modify_qp_is_ok(enum ib_qp_state cur_state, enum ib_qp_state next_state,
+<<<<<<< HEAD
 		       enum ib_qp_type type, enum ib_qp_attr_mask mask)
+=======
+		       enum ib_qp_type type, enum ib_qp_attr_mask mask,
+		       enum rdma_link_layer ll)
+>>>>>>> v3.18
 {
 	enum ib_qp_attr_mask req_param, opt_param;
 
@@ -792,6 +897,16 @@ int ib_modify_qp_is_ok(enum ib_qp_state cur_state, enum ib_qp_state next_state,
 	req_param = qp_state_table[cur_state][next_state].req_param[type];
 	opt_param = qp_state_table[cur_state][next_state].opt_param[type];
 
+<<<<<<< HEAD
+=======
+	if (ll == IB_LINK_LAYER_ETHERNET) {
+		req_param |= qp_state_table[cur_state][next_state].
+			req_param_add_eth[type];
+		opt_param |= qp_state_table[cur_state][next_state].
+			opt_param_add_eth[type];
+	}
+
+>>>>>>> v3.18
 	if ((mask & req_param) != req_param)
 		return 0;
 
@@ -802,10 +917,57 @@ int ib_modify_qp_is_ok(enum ib_qp_state cur_state, enum ib_qp_state next_state,
 }
 EXPORT_SYMBOL(ib_modify_qp_is_ok);
 
+<<<<<<< HEAD
+=======
+int ib_resolve_eth_l2_attrs(struct ib_qp *qp,
+			    struct ib_qp_attr *qp_attr, int *qp_attr_mask)
+{
+	int           ret = 0;
+	union ib_gid  sgid;
+
+	if ((*qp_attr_mask & IB_QP_AV)  &&
+	    (rdma_port_get_link_layer(qp->device, qp_attr->ah_attr.port_num) == IB_LINK_LAYER_ETHERNET)) {
+		ret = ib_query_gid(qp->device, qp_attr->ah_attr.port_num,
+				   qp_attr->ah_attr.grh.sgid_index, &sgid);
+		if (ret)
+			goto out;
+		if (rdma_link_local_addr((struct in6_addr *)qp_attr->ah_attr.grh.dgid.raw)) {
+			rdma_get_ll_mac((struct in6_addr *)qp_attr->ah_attr.grh.dgid.raw, qp_attr->ah_attr.dmac);
+			rdma_get_ll_mac((struct in6_addr *)sgid.raw, qp_attr->smac);
+			qp_attr->vlan_id = rdma_get_vlan_id(&sgid);
+		} else {
+			ret = rdma_addr_find_dmac_by_grh(&sgid, &qp_attr->ah_attr.grh.dgid,
+					qp_attr->ah_attr.dmac, &qp_attr->vlan_id);
+			if (ret)
+				goto out;
+			ret = rdma_addr_find_smac_by_sgid(&sgid, qp_attr->smac, NULL);
+			if (ret)
+				goto out;
+		}
+		*qp_attr_mask |= IB_QP_SMAC;
+		if (qp_attr->vlan_id < 0xFFFF)
+			*qp_attr_mask |= IB_QP_VID;
+	}
+out:
+	return ret;
+}
+EXPORT_SYMBOL(ib_resolve_eth_l2_attrs);
+
+
+>>>>>>> v3.18
 int ib_modify_qp(struct ib_qp *qp,
 		 struct ib_qp_attr *qp_attr,
 		 int qp_attr_mask)
 {
+<<<<<<< HEAD
+=======
+	int ret;
+
+	ret = ib_resolve_eth_l2_attrs(qp, qp_attr, &qp_attr_mask);
+	if (ret)
+		return ret;
+
+>>>>>>> v3.18
 	return qp->device->modify_qp(qp->real_qp, qp_attr, qp_attr_mask, NULL);
 }
 EXPORT_SYMBOL(ib_modify_qp);
@@ -955,6 +1117,14 @@ EXPORT_SYMBOL(ib_resize_cq);
 struct ib_mr *ib_get_dma_mr(struct ib_pd *pd, int mr_access_flags)
 {
 	struct ib_mr *mr;
+<<<<<<< HEAD
+=======
+	int err;
+
+	err = ib_check_mr_access(mr_access_flags);
+	if (err)
+		return ERR_PTR(err);
+>>>>>>> v3.18
 
 	mr = pd->device->get_dma_mr(pd, mr_access_flags);
 
@@ -977,6 +1147,14 @@ struct ib_mr *ib_reg_phys_mr(struct ib_pd *pd,
 			     u64 *iova_start)
 {
 	struct ib_mr *mr;
+<<<<<<< HEAD
+=======
+	int err;
+
+	err = ib_check_mr_access(mr_access_flags);
+	if (err)
+		return ERR_PTR(err);
+>>>>>>> v3.18
 
 	if (!pd->device->reg_phys_mr)
 		return ERR_PTR(-ENOSYS);
@@ -1007,6 +1185,13 @@ int ib_rereg_phys_mr(struct ib_mr *mr,
 	struct ib_pd *old_pd;
 	int ret;
 
+<<<<<<< HEAD
+=======
+	ret = ib_check_mr_access(mr_access_flags);
+	if (ret)
+		return ret;
+
+>>>>>>> v3.18
 	if (!mr->device->rereg_phys_mr)
 		return -ENOSYS;
 
@@ -1052,6 +1237,48 @@ int ib_dereg_mr(struct ib_mr *mr)
 }
 EXPORT_SYMBOL(ib_dereg_mr);
 
+<<<<<<< HEAD
+=======
+struct ib_mr *ib_create_mr(struct ib_pd *pd,
+			   struct ib_mr_init_attr *mr_init_attr)
+{
+	struct ib_mr *mr;
+
+	if (!pd->device->create_mr)
+		return ERR_PTR(-ENOSYS);
+
+	mr = pd->device->create_mr(pd, mr_init_attr);
+
+	if (!IS_ERR(mr)) {
+		mr->device  = pd->device;
+		mr->pd      = pd;
+		mr->uobject = NULL;
+		atomic_inc(&pd->usecnt);
+		atomic_set(&mr->usecnt, 0);
+	}
+
+	return mr;
+}
+EXPORT_SYMBOL(ib_create_mr);
+
+int ib_destroy_mr(struct ib_mr *mr)
+{
+	struct ib_pd *pd;
+	int ret;
+
+	if (atomic_read(&mr->usecnt))
+		return -EBUSY;
+
+	pd = mr->pd;
+	ret = mr->device->destroy_mr(mr);
+	if (!ret)
+		atomic_dec(&pd->usecnt);
+
+	return ret;
+}
+EXPORT_SYMBOL(ib_destroy_mr);
+
+>>>>>>> v3.18
 struct ib_mr *ib_alloc_fast_reg_mr(struct ib_pd *pd, int max_page_list_len)
 {
 	struct ib_mr *mr;
@@ -1254,3 +1481,41 @@ int ib_dealloc_xrcd(struct ib_xrcd *xrcd)
 	return xrcd->device->dealloc_xrcd(xrcd);
 }
 EXPORT_SYMBOL(ib_dealloc_xrcd);
+<<<<<<< HEAD
+=======
+
+struct ib_flow *ib_create_flow(struct ib_qp *qp,
+			       struct ib_flow_attr *flow_attr,
+			       int domain)
+{
+	struct ib_flow *flow_id;
+	if (!qp->device->create_flow)
+		return ERR_PTR(-ENOSYS);
+
+	flow_id = qp->device->create_flow(qp, flow_attr, domain);
+	if (!IS_ERR(flow_id))
+		atomic_inc(&qp->usecnt);
+	return flow_id;
+}
+EXPORT_SYMBOL(ib_create_flow);
+
+int ib_destroy_flow(struct ib_flow *flow_id)
+{
+	int err;
+	struct ib_qp *qp = flow_id->qp;
+
+	err = qp->device->destroy_flow(flow_id);
+	if (!err)
+		atomic_dec(&qp->usecnt);
+	return err;
+}
+EXPORT_SYMBOL(ib_destroy_flow);
+
+int ib_check_mr_status(struct ib_mr *mr, u32 check_mask,
+		       struct ib_mr_status *mr_status)
+{
+	return mr->device->check_mr_status ?
+		mr->device->check_mr_status(mr, check_mask, mr_status) : -ENOSYS;
+}
+EXPORT_SYMBOL(ib_check_mr_status);
+>>>>>>> v3.18

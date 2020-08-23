@@ -27,7 +27,11 @@ int btrfs_insert_orphan_item(struct btrfs_trans_handle *trans,
 	int ret = 0;
 
 	key.objectid = BTRFS_ORPHAN_OBJECTID;
+<<<<<<< HEAD
 	btrfs_set_key_type(&key, BTRFS_ORPHAN_ITEM_KEY);
+=======
+	key.type = BTRFS_ORPHAN_ITEM_KEY;
+>>>>>>> v3.18
 	key.offset = offset;
 
 	path = btrfs_alloc_path();
@@ -48,7 +52,11 @@ int btrfs_del_orphan_item(struct btrfs_trans_handle *trans,
 	int ret = 0;
 
 	key.objectid = BTRFS_ORPHAN_OBJECTID;
+<<<<<<< HEAD
 	btrfs_set_key_type(&key, BTRFS_ORPHAN_ITEM_KEY);
+=======
+	key.type = BTRFS_ORPHAN_ITEM_KEY;
+>>>>>>> v3.18
 	key.offset = offset;
 
 	path = btrfs_alloc_path();
@@ -69,6 +77,7 @@ out:
 	btrfs_free_path(path);
 	return ret;
 }
+<<<<<<< HEAD
 
 int btrfs_find_orphan_item(struct btrfs_root *root, u64 offset)
 {
@@ -89,3 +98,5 @@ int btrfs_find_orphan_item(struct btrfs_root *root, u64 offset)
 	btrfs_free_path(path);
 	return ret;
 }
+=======
+>>>>>>> v3.18

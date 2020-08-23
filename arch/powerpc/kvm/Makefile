@@ -5,6 +5,7 @@
 subdir-ccflags-$(CONFIG_PPC_WERROR) := -Werror
 
 ccflags-y := -Ivirt/kvm -Iarch/powerpc/kvm
+<<<<<<< HEAD
 
 common-objs-y = $(addprefix ../../../virt/kvm/, kvm_main.o coalesced_mmio.o \
 						eventfd.o)
@@ -15,11 +16,25 @@ CFLAGS_e500_mmu_host.o := -I.
 CFLAGS_emulate.o  := -I.
 
 common-objs-y += powerpc.o emulate.o
+=======
+KVM := ../../../virt/kvm
+
+common-objs-y = $(KVM)/kvm_main.o $(KVM)/coalesced_mmio.o \
+		$(KVM)/eventfd.o
+
+CFLAGS_e500_mmu.o := -I.
+CFLAGS_e500_mmu_host.o := -I.
+CFLAGS_emulate.o  := -I.
+CFLAGS_emulate_loadstore.o  := -I.
+
+common-objs-y += powerpc.o emulate.o emulate_loadstore.o
+>>>>>>> v3.18
 obj-$(CONFIG_KVM_EXIT_TIMING) += timing.o
 obj-$(CONFIG_KVM_BOOK3S_HANDLER) += book3s_exports.o
 
 AFLAGS_booke_interrupts.o := -I$(obj)
 
+<<<<<<< HEAD
 kvm-440-objs := \
 	$(common-objs-y) \
 	booke.o \
@@ -30,6 +45,8 @@ kvm-440-objs := \
 	44x_emulate.o
 kvm-objs-$(CONFIG_KVM_440) := $(kvm-440-objs)
 
+=======
+>>>>>>> v3.18
 kvm-e500-objs := \
 	$(common-objs-y) \
 	booke.o \
@@ -52,6 +69,7 @@ kvm-e500mc-objs := \
 	e500_emulate.o
 kvm-objs-$(CONFIG_KVM_E500MC) := $(kvm-e500mc-objs)
 
+<<<<<<< HEAD
 kvm-book3s_64-objs-$(CONFIG_KVM_BOOK3S_64_PR) := \
 	../../../virt/kvm/coalesced_mmio.o \
 	fpu.o \
@@ -59,12 +77,24 @@ kvm-book3s_64-objs-$(CONFIG_KVM_BOOK3S_64_PR) := \
 	book3s_pr.o \
 	book3s_pr_papr.o \
 	book3s_64_vio_hv.o \
+=======
+kvm-book3s_64-builtin-objs-$(CONFIG_KVM_BOOK3S_64_HANDLER) := \
+	book3s_64_vio_hv.o
+
+kvm-pr-y := \
+	fpu.o \
+	emulate.o \
+	book3s_paired_singles.o \
+	book3s_pr.o \
+	book3s_pr_papr.o \
+>>>>>>> v3.18
 	book3s_emulate.o \
 	book3s_interrupts.o \
 	book3s_mmu_hpte.o \
 	book3s_64_mmu_host.o \
 	book3s_64_mmu.o \
 	book3s_32_mmu.o
+<<<<<<< HEAD
 kvm-book3s_64-builtin-objs-$(CONFIG_KVM_BOOK3S_64_PR) := \
 	book3s_rmhandlers.o
 
@@ -81,15 +111,50 @@ kvm-book3s_64-builtin-objs-$(CONFIG_KVM_BOOK3S_64_HV) := \
 	book3s_hv_ras.o \
 	book3s_hv_builtin.o \
 	$(kvm-book3s_64-builtin-xics-objs-y)
+=======
+
+ifdef CONFIG_KVM_BOOK3S_PR_POSSIBLE
+kvm-book3s_64-module-objs := \
+	$(KVM)/coalesced_mmio.o
+
+kvm-book3s_64-builtin-objs-$(CONFIG_KVM_BOOK3S_64_HANDLER) += \
+	book3s_rmhandlers.o
+endif
+
+kvm-hv-y += \
+	book3s_hv.o \
+	book3s_hv_interrupts.o \
+	book3s_64_mmu_hv.o
+
+kvm-book3s_64-builtin-xics-objs-$(CONFIG_KVM_XICS) := \
+	book3s_hv_rm_xics.o
+
+ifdef CONFIG_KVM_BOOK3S_HV_POSSIBLE
+kvm-book3s_64-builtin-objs-$(CONFIG_KVM_BOOK3S_64_HANDLER) += \
+	book3s_hv_rmhandlers.o \
+	book3s_hv_rm_mmu.o \
+	book3s_hv_ras.o \
+	book3s_hv_builtin.o \
+	$(kvm-book3s_64-builtin-xics-objs-y)
+endif
+>>>>>>> v3.18
 
 kvm-book3s_64-objs-$(CONFIG_KVM_XICS) += \
 	book3s_xics.o
 
+<<<<<<< HEAD
 kvm-book3s_64-module-objs := \
 	../../../virt/kvm/kvm_main.o \
 	../../../virt/kvm/eventfd.o \
 	powerpc.o \
 	emulate.o \
+=======
+kvm-book3s_64-module-objs += \
+	$(KVM)/kvm_main.o \
+	$(KVM)/eventfd.o \
+	powerpc.o \
+	emulate_loadstore.o \
+>>>>>>> v3.18
 	book3s.o \
 	book3s_64_vio.o \
 	book3s_rtas.o \
@@ -111,14 +176,27 @@ kvm-book3s_32-objs := \
 kvm-objs-$(CONFIG_KVM_BOOK3S_32) := $(kvm-book3s_32-objs)
 
 kvm-objs-$(CONFIG_KVM_MPIC) += mpic.o
+<<<<<<< HEAD
 kvm-objs-$(CONFIG_HAVE_KVM_IRQ_ROUTING) += $(addprefix ../../../virt/kvm/, irqchip.o)
 
 kvm-objs := $(kvm-objs-m) $(kvm-objs-y)
 
 obj-$(CONFIG_KVM_440) += kvm.o
+=======
+kvm-objs-$(CONFIG_HAVE_KVM_IRQ_ROUTING) += $(KVM)/irqchip.o
+
+kvm-objs := $(kvm-objs-m) $(kvm-objs-y)
+
+>>>>>>> v3.18
 obj-$(CONFIG_KVM_E500V2) += kvm.o
 obj-$(CONFIG_KVM_E500MC) += kvm.o
 obj-$(CONFIG_KVM_BOOK3S_64) += kvm.o
 obj-$(CONFIG_KVM_BOOK3S_32) += kvm.o
 
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_KVM_BOOK3S_64_PR) += kvm-pr.o
+obj-$(CONFIG_KVM_BOOK3S_64_HV) += kvm-hv.o
+
+>>>>>>> v3.18
 obj-y += $(kvm-book3s_64-builtin-objs-y)

@@ -26,8 +26,12 @@
  * ALSA that we support all rates and let the codec driver decide what rates
  * are really supported.
  */
+<<<<<<< HEAD
 #define PSC_I2S_RATES (SNDRV_PCM_RATE_5512 | SNDRV_PCM_RATE_8000_192000 | \
 			SNDRV_PCM_RATE_CONTINUOUS)
+=======
+#define PSC_I2S_RATES SNDRV_PCM_RATE_CONTINUOUS
+>>>>>>> v3.18
 
 /**
  * PSC_I2S_FORMATS: audio formats supported by the PSC I2S mode

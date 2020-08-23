@@ -13,7 +13,10 @@
  */
 #include <linux/kernel.h>
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/blkdev.h>
 #include <scsi/scsi_host.h>
 #include <linux/ata.h>
@@ -119,7 +122,11 @@ int __pata_platform_probe(struct device *dev, struct resource *io_res,
 	 */
 	if (irq_res && irq_res->start > 0) {
 		irq = irq_res->start;
+<<<<<<< HEAD
 		irq_flags = irq_res->flags;
+=======
+		irq_flags = irq_res->flags & IRQF_TRIGGER_MASK;
+>>>>>>> v3.18
 	}
 
 	/*
@@ -180,7 +187,11 @@ static int pata_platform_probe(struct platform_device *pdev)
 	struct resource *io_res;
 	struct resource *ctl_res;
 	struct resource *irq_res;
+<<<<<<< HEAD
 	struct pata_platform_info *pp_info = pdev->dev.platform_data;
+=======
+	struct pata_platform_info *pp_info = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 
 	/*
 	 * Simple resource validation ..
@@ -214,8 +225,11 @@ static int pata_platform_probe(struct platform_device *pdev)
 	 * And the IRQ
 	 */
 	irq_res = platform_get_resource(pdev, IORESOURCE_IRQ, 0);
+<<<<<<< HEAD
 	if (irq_res)
 		irq_res->flags = pp_info ? pp_info->irq_flags : 0;
+=======
+>>>>>>> v3.18
 
 	return __pata_platform_probe(&pdev->dev, io_res, ctl_res, irq_res,
 				     pp_info ? pp_info->ioport_shift : 0,

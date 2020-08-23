@@ -34,12 +34,18 @@ static inline u32 mpidr_hash_size(void)
 	return 1 << mpidr_hash.bits;
 }
 
+<<<<<<< HEAD
 extern void secondary_holding_pen(void);
+=======
+>>>>>>> v3.18
 /*
  * Logical CPU mapping.
  */
 extern u64 __cpu_logical_map[NR_CPUS];
 #define cpu_logical_map(cpu)    __cpu_logical_map[cpu]
+<<<<<<< HEAD
 extern volatile unsigned long secondary_holding_pen_release;
+=======
+>>>>>>> v3.18
 
 #endif /* __ASM_SMP_PLAT_H */

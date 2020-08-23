@@ -40,6 +40,7 @@
 #define COUNTER_COUNT 4
 #define READ_BYTE_COUNT 42
 
+<<<<<<< HEAD
 static ssize_t w1_counter_read(struct device *device,
 	struct device_attribute *attr, char *buf);
 
@@ -48,6 +49,10 @@ static struct device_attribute w1_counter_attr =
 
 static ssize_t w1_counter_read(struct device *device,
 	struct device_attribute *attr, char *out_buf)
+=======
+static ssize_t w1_slave_show(struct device *device,
+			     struct device_attribute *attr, char *out_buf)
+>>>>>>> v3.18
 {
 	struct w1_slave *sl = dev_to_w1_slave(device);
 	struct w1_master *dev = sl->master;
@@ -128,6 +133,7 @@ static ssize_t w1_counter_read(struct device *device,
 	return PAGE_SIZE - c;
 }
 
+<<<<<<< HEAD
 static int w1_f1d_add_slave(struct w1_slave *sl)
 {
 	return device_create_file(&sl->dev, &w1_counter_attr);
@@ -141,6 +147,18 @@ static void w1_f1d_remove_slave(struct w1_slave *sl)
 static struct w1_family_ops w1_f1d_fops = {
 	.add_slave      = w1_f1d_add_slave,
 	.remove_slave   = w1_f1d_remove_slave,
+=======
+static DEVICE_ATTR_RO(w1_slave);
+
+static struct attribute *w1_f1d_attrs[] = {
+	&dev_attr_w1_slave.attr,
+	NULL,
+};
+ATTRIBUTE_GROUPS(w1_f1d);
+
+static struct w1_family_ops w1_f1d_fops = {
+	.groups		= w1_f1d_groups,
+>>>>>>> v3.18
 };
 
 static struct w1_family w1_family_1d = {
@@ -164,3 +182,7 @@ module_exit(w1_f1d_exit);
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Mika Laitio <lamikr@pilppa.org>");
 MODULE_DESCRIPTION("w1 family 1d driver for DS2423, 4 counters and 4kb ram");
+<<<<<<< HEAD
+=======
+MODULE_ALIAS("w1-family-" __stringify(W1_COUNTER_DS2423));
+>>>>>>> v3.18

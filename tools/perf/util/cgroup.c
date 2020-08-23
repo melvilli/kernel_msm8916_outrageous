@@ -81,7 +81,11 @@ static int add_cgroup(struct perf_evlist *evlist, char *str)
 	/*
 	 * check if cgrp is already defined, if so we reuse it
 	 */
+<<<<<<< HEAD
 	list_for_each_entry(counter, &evlist->entries, node) {
+=======
+	evlist__for_each(evlist, counter) {
+>>>>>>> v3.18
 		cgrp = counter->cgrp;
 		if (!cgrp)
 			continue;
@@ -110,7 +114,11 @@ static int add_cgroup(struct perf_evlist *evlist, char *str)
 	 * if add cgroup N, then need to find event N
 	 */
 	n = 0;
+<<<<<<< HEAD
 	list_for_each_entry(counter, &evlist->entries, node) {
+=======
+	evlist__for_each(evlist, counter) {
+>>>>>>> v3.18
 		if (n == nr_cgroups)
 			goto found;
 		n++;
@@ -133,7 +141,11 @@ void close_cgroup(struct cgroup_sel *cgrp)
 	/* XXX: not reentrant */
 	if (--cgrp->refcnt == 0) {
 		close(cgrp->fd);
+<<<<<<< HEAD
 		free(cgrp->name);
+=======
+		zfree(&cgrp->name);
+>>>>>>> v3.18
 		free(cgrp);
 	}
 }

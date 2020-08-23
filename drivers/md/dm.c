@@ -49,6 +49,16 @@ static unsigned int _major = 0;
 static DEFINE_IDR(_minor_idr);
 
 static DEFINE_SPINLOCK(_minor_lock);
+<<<<<<< HEAD
+=======
+
+static void do_deferred_remove(struct work_struct *w);
+
+static DECLARE_WORK(deferred_remove_work, do_deferred_remove);
+
+static struct workqueue_struct *deferred_remove_workqueue;
+
+>>>>>>> v3.18
 /*
  * For bio-based dm.
  * One of these is allocated per bio.
@@ -60,6 +70,10 @@ struct dm_io {
 	struct bio *bio;
 	unsigned long start_time;
 	spinlock_t endio_lock;
+<<<<<<< HEAD
+=======
+	struct dm_stats_aux stats_aux;
+>>>>>>> v3.18
 };
 
 /*
@@ -88,6 +102,7 @@ struct dm_rq_clone_bio_info {
 	struct bio clone;
 };
 
+<<<<<<< HEAD
 union map_info *dm_get_mapinfo(struct bio *bio)
 {
 	if (bio && bio->bi_private)
@@ -95,6 +110,8 @@ union map_info *dm_get_mapinfo(struct bio *bio)
 	return NULL;
 }
 
+=======
+>>>>>>> v3.18
 union map_info *dm_get_rq_mapinfo(struct request *rq)
 {
 	if (rq && rq->end_io_data)
@@ -115,17 +132,47 @@ EXPORT_SYMBOL_GPL(dm_get_rq_mapinfo);
 #define DMF_DELETING 4
 #define DMF_NOFLUSH_SUSPENDING 5
 #define DMF_MERGE_IS_OPTIONAL 6
+<<<<<<< HEAD
+=======
+#define DMF_DEFERRED_REMOVE 7
+
+/*
+ * A dummy definition to make RCU happy.
+ * struct dm_table should never be dereferenced in this file.
+ */
+struct dm_table {
+	int undefined__;
+};
+>>>>>>> v3.18
 
 /*
  * Work processed by per-device workqueue.
  */
 struct mapped_device {
+<<<<<<< HEAD
 	struct rw_semaphore io_lock;
 	struct mutex suspend_lock;
 	rwlock_t map_lock;
 	atomic_t holders;
 	atomic_t open_count;
 
+=======
+	struct srcu_struct io_barrier;
+	struct mutex suspend_lock;
+	atomic_t holders;
+	atomic_t open_count;
+
+	/*
+	 * The current mapping.
+	 * Use dm_get_live_table{_fast} or take suspend_lock for
+	 * dereference.
+	 */
+	struct dm_table *map;
+
+	struct list_head table_devices;
+	struct mutex table_devices_lock;
+
+>>>>>>> v3.18
 	unsigned long flags;
 
 	struct request_queue *queue;
@@ -155,11 +202,14 @@ struct mapped_device {
 	struct workqueue_struct *wq;
 
 	/*
+<<<<<<< HEAD
 	 * The current mapping.
 	 */
 	struct dm_table *map;
 
 	/*
+=======
+>>>>>>> v3.18
 	 * io objects are allocated from here.
 	 */
 	mempool_t *io_pool;
@@ -189,6 +239,11 @@ struct mapped_device {
 
 	/* zero-length flush that will be cloned and submitted to targets */
 	struct bio flush_bio;
+<<<<<<< HEAD
+=======
+
+	struct dm_stats stats;
+>>>>>>> v3.18
 };
 
 /*
@@ -199,10 +254,68 @@ struct dm_md_mempools {
 	struct bio_set *bs;
 };
 
+<<<<<<< HEAD
 #define MIN_IOS 256
 static struct kmem_cache *_io_cache;
 static struct kmem_cache *_rq_tio_cache;
 
+=======
+struct table_device {
+	struct list_head list;
+	atomic_t count;
+	struct dm_dev dm_dev;
+};
+
+#define RESERVED_BIO_BASED_IOS		16
+#define RESERVED_REQUEST_BASED_IOS	256
+#define RESERVED_MAX_IOS		1024
+static struct kmem_cache *_io_cache;
+static struct kmem_cache *_rq_tio_cache;
+
+/*
+ * Bio-based DM's mempools' reserved IOs set by the user.
+ */
+static unsigned reserved_bio_based_ios = RESERVED_BIO_BASED_IOS;
+
+/*
+ * Request-based DM's mempools' reserved IOs set by the user.
+ */
+static unsigned reserved_rq_based_ios = RESERVED_REQUEST_BASED_IOS;
+
+static unsigned __dm_get_reserved_ios(unsigned *reserved_ios,
+				      unsigned def, unsigned max)
+{
+	unsigned ios = ACCESS_ONCE(*reserved_ios);
+	unsigned modified_ios = 0;
+
+	if (!ios)
+		modified_ios = def;
+	else if (ios > max)
+		modified_ios = max;
+
+	if (modified_ios) {
+		(void)cmpxchg(reserved_ios, ios, modified_ios);
+		ios = modified_ios;
+	}
+
+	return ios;
+}
+
+unsigned dm_get_reserved_bio_based_ios(void)
+{
+	return __dm_get_reserved_ios(&reserved_bio_based_ios,
+				     RESERVED_BIO_BASED_IOS, RESERVED_MAX_IOS);
+}
+EXPORT_SYMBOL_GPL(dm_get_reserved_bio_based_ios);
+
+unsigned dm_get_reserved_rq_based_ios(void)
+{
+	return __dm_get_reserved_ios(&reserved_rq_based_ios,
+				     RESERVED_REQUEST_BASED_IOS, RESERVED_MAX_IOS);
+}
+EXPORT_SYMBOL_GPL(dm_get_reserved_rq_based_ios);
+
+>>>>>>> v3.18
 static int __init local_init(void)
 {
 	int r = -ENOMEM;
@@ -220,16 +333,34 @@ static int __init local_init(void)
 	if (r)
 		goto out_free_rq_tio_cache;
 
+<<<<<<< HEAD
 	_major = major;
 	r = register_blkdev(_major, _name);
 	if (r < 0)
 		goto out_uevent_exit;
+=======
+	deferred_remove_workqueue = alloc_workqueue("kdmremove", WQ_UNBOUND, 1);
+	if (!deferred_remove_workqueue) {
+		r = -ENOMEM;
+		goto out_uevent_exit;
+	}
+
+	_major = major;
+	r = register_blkdev(_major, _name);
+	if (r < 0)
+		goto out_free_workqueue;
+>>>>>>> v3.18
 
 	if (!_major)
 		_major = r;
 
 	return 0;
 
+<<<<<<< HEAD
+=======
+out_free_workqueue:
+	destroy_workqueue(deferred_remove_workqueue);
+>>>>>>> v3.18
 out_uevent_exit:
 	dm_uevent_exit();
 out_free_rq_tio_cache:
@@ -242,6 +373,12 @@ out_free_io_cache:
 
 static void local_exit(void)
 {
+<<<<<<< HEAD
+=======
+	flush_scheduled_work();
+	destroy_workqueue(deferred_remove_workqueue);
+
+>>>>>>> v3.18
 	kmem_cache_destroy(_rq_tio_cache);
 	kmem_cache_destroy(_io_cache);
 	unregister_blkdev(_major, _name);
@@ -260,6 +397,10 @@ static int (*_inits[])(void) __initdata = {
 	dm_io_init,
 	dm_kcopyd_init,
 	dm_interface_init,
+<<<<<<< HEAD
+=======
+	dm_statistics_init,
+>>>>>>> v3.18
 };
 
 static void (*_exits[])(void) = {
@@ -270,6 +411,10 @@ static void (*_exits[])(void) = {
 	dm_io_exit,
 	dm_kcopyd_exit,
 	dm_interface_exit,
+<<<<<<< HEAD
+=======
+	dm_statistics_exit,
+>>>>>>> v3.18
 };
 
 static int __init dm_init(void)
@@ -345,7 +490,14 @@ static void dm_blk_close(struct gendisk *disk, fmode_t mode)
 
 	spin_lock(&_minor_lock);
 
+<<<<<<< HEAD
 	atomic_dec(&md->open_count);
+=======
+	if (atomic_dec_and_test(&md->open_count) &&
+	    (test_bit(DMF_DEFERRED_REMOVE, &md->flags)))
+		queue_work(deferred_remove_workqueue, &deferred_remove_work);
+
+>>>>>>> v3.18
 	dm_put(md);
 
 	spin_unlock(&_minor_lock);
@@ -359,14 +511,27 @@ int dm_open_count(struct mapped_device *md)
 /*
  * Guarantees nothing is using the device before it's deleted.
  */
+<<<<<<< HEAD
 int dm_lock_for_deletion(struct mapped_device *md)
+=======
+int dm_lock_for_deletion(struct mapped_device *md, bool mark_deferred, bool only_deferred)
+>>>>>>> v3.18
 {
 	int r = 0;
 
 	spin_lock(&_minor_lock);
 
+<<<<<<< HEAD
 	if (dm_open_count(md))
 		r = -EBUSY;
+=======
+	if (dm_open_count(md)) {
+		r = -EBUSY;
+		if (mark_deferred)
+			set_bit(DMF_DEFERRED_REMOVE, &md->flags);
+	} else if (only_deferred && !test_bit(DMF_DEFERRED_REMOVE, &md->flags))
+		r = -EEXIST;
+>>>>>>> v3.18
 	else
 		set_bit(DMF_DELETING, &md->flags);
 
@@ -375,6 +540,45 @@ int dm_lock_for_deletion(struct mapped_device *md)
 	return r;
 }
 
+<<<<<<< HEAD
+=======
+int dm_cancel_deferred_remove(struct mapped_device *md)
+{
+	int r = 0;
+
+	spin_lock(&_minor_lock);
+
+	if (test_bit(DMF_DELETING, &md->flags))
+		r = -EBUSY;
+	else
+		clear_bit(DMF_DEFERRED_REMOVE, &md->flags);
+
+	spin_unlock(&_minor_lock);
+
+	return r;
+}
+
+static void do_deferred_remove(struct work_struct *w)
+{
+	dm_deferred_remove();
+}
+
+sector_t dm_get_size(struct mapped_device *md)
+{
+	return get_capacity(md->disk);
+}
+
+struct request_queue *dm_get_md_queue(struct mapped_device *md)
+{
+	return md->queue;
+}
+
+struct dm_stats *dm_get_stats(struct mapped_device *md)
+{
+	return &md->stats;
+}
+
+>>>>>>> v3.18
 static int dm_blk_getgeo(struct block_device *bdev, struct hd_geometry *geo)
 {
 	struct mapped_device *md = bdev->bd_disk->private_data;
@@ -386,12 +590,21 @@ static int dm_blk_ioctl(struct block_device *bdev, fmode_t mode,
 			unsigned int cmd, unsigned long arg)
 {
 	struct mapped_device *md = bdev->bd_disk->private_data;
+<<<<<<< HEAD
+=======
+	int srcu_idx;
+>>>>>>> v3.18
 	struct dm_table *map;
 	struct dm_target *tgt;
 	int r = -ENOTTY;
 
 retry:
+<<<<<<< HEAD
 	map = dm_get_live_table(md);
+=======
+	map = dm_get_live_table(md, &srcu_idx);
+
+>>>>>>> v3.18
 	if (!map || !dm_table_get_size(map))
 		goto out;
 
@@ -410,7 +623,11 @@ retry:
 		r = tgt->type->ioctl(tgt, cmd, arg);
 
 out:
+<<<<<<< HEAD
 	dm_table_put(map);
+=======
+	dm_put_live_table(md, srcu_idx);
+>>>>>>> v3.18
 
 	if (r == -ENOTCONN) {
 		msleep(10);
@@ -455,8 +672,14 @@ static int md_in_flight(struct mapped_device *md)
 static void start_io_acct(struct dm_io *io)
 {
 	struct mapped_device *md = io->md;
+<<<<<<< HEAD
 	int cpu;
 	int rw = bio_data_dir(io->bio);
+=======
+	struct bio *bio = io->bio;
+	int cpu;
+	int rw = bio_data_dir(bio);
+>>>>>>> v3.18
 
 	io->start_time = jiffies;
 
@@ -465,6 +688,13 @@ static void start_io_acct(struct dm_io *io)
 	part_stat_unlock();
 	atomic_set(&dm_disk(md)->part0.in_flight[rw],
 		atomic_inc_return(&md->pending[rw]));
+<<<<<<< HEAD
+=======
+
+	if (unlikely(dm_stats_used(&md->stats)))
+		dm_stats_account_io(&md->stats, bio->bi_rw, bio->bi_iter.bi_sector,
+				    bio_sectors(bio), false, 0, &io->stats_aux);
+>>>>>>> v3.18
 }
 
 static void end_io_acct(struct dm_io *io)
@@ -480,6 +710,13 @@ static void end_io_acct(struct dm_io *io)
 	part_stat_add(cpu, &dm_disk(md)->part0, ticks[rw], duration);
 	part_stat_unlock();
 
+<<<<<<< HEAD
+=======
+	if (unlikely(dm_stats_used(&md->stats)))
+		dm_stats_account_io(&md->stats, bio->bi_rw, bio->bi_iter.bi_sector,
+				    bio_sectors(bio), true, duration, &io->stats_aux);
+
+>>>>>>> v3.18
 	/*
 	 * After this is decremented the bio must not be touched if it is
 	 * a flush.
@@ -509,6 +746,7 @@ static void queue_io(struct mapped_device *md, struct bio *bio)
 /*
  * Everyone (including functions in this file), should use this
  * function to access the md->map field, and make sure they call
+<<<<<<< HEAD
  * dm_table_put() when finished.
  */
 struct dm_table *dm_get_live_table(struct mapped_device *md)
@@ -523,6 +761,155 @@ struct dm_table *dm_get_live_table(struct mapped_device *md)
 	read_unlock_irqrestore(&md->map_lock, flags);
 
 	return t;
+=======
+ * dm_put_live_table() when finished.
+ */
+struct dm_table *dm_get_live_table(struct mapped_device *md, int *srcu_idx) __acquires(md->io_barrier)
+{
+	*srcu_idx = srcu_read_lock(&md->io_barrier);
+
+	return srcu_dereference(md->map, &md->io_barrier);
+}
+
+void dm_put_live_table(struct mapped_device *md, int srcu_idx) __releases(md->io_barrier)
+{
+	srcu_read_unlock(&md->io_barrier, srcu_idx);
+}
+
+void dm_sync_table(struct mapped_device *md)
+{
+	synchronize_srcu(&md->io_barrier);
+	synchronize_rcu_expedited();
+}
+
+/*
+ * A fast alternative to dm_get_live_table/dm_put_live_table.
+ * The caller must not block between these two functions.
+ */
+static struct dm_table *dm_get_live_table_fast(struct mapped_device *md) __acquires(RCU)
+{
+	rcu_read_lock();
+	return rcu_dereference(md->map);
+}
+
+static void dm_put_live_table_fast(struct mapped_device *md) __releases(RCU)
+{
+	rcu_read_unlock();
+}
+
+/*
+ * Open a table device so we can use it as a map destination.
+ */
+static int open_table_device(struct table_device *td, dev_t dev,
+			     struct mapped_device *md)
+{
+	static char *_claim_ptr = "I belong to device-mapper";
+	struct block_device *bdev;
+
+	int r;
+
+	BUG_ON(td->dm_dev.bdev);
+
+	bdev = blkdev_get_by_dev(dev, td->dm_dev.mode | FMODE_EXCL, _claim_ptr);
+	if (IS_ERR(bdev))
+		return PTR_ERR(bdev);
+
+	r = bd_link_disk_holder(bdev, dm_disk(md));
+	if (r) {
+		blkdev_put(bdev, td->dm_dev.mode | FMODE_EXCL);
+		return r;
+	}
+
+	td->dm_dev.bdev = bdev;
+	return 0;
+}
+
+/*
+ * Close a table device that we've been using.
+ */
+static void close_table_device(struct table_device *td, struct mapped_device *md)
+{
+	if (!td->dm_dev.bdev)
+		return;
+
+	bd_unlink_disk_holder(td->dm_dev.bdev, dm_disk(md));
+	blkdev_put(td->dm_dev.bdev, td->dm_dev.mode | FMODE_EXCL);
+	td->dm_dev.bdev = NULL;
+}
+
+static struct table_device *find_table_device(struct list_head *l, dev_t dev,
+					      fmode_t mode) {
+	struct table_device *td;
+
+	list_for_each_entry(td, l, list)
+		if (td->dm_dev.bdev->bd_dev == dev && td->dm_dev.mode == mode)
+			return td;
+
+	return NULL;
+}
+
+int dm_get_table_device(struct mapped_device *md, dev_t dev, fmode_t mode,
+			struct dm_dev **result) {
+	int r;
+	struct table_device *td;
+
+	mutex_lock(&md->table_devices_lock);
+	td = find_table_device(&md->table_devices, dev, mode);
+	if (!td) {
+		td = kmalloc(sizeof(*td), GFP_KERNEL);
+		if (!td) {
+			mutex_unlock(&md->table_devices_lock);
+			return -ENOMEM;
+		}
+
+		td->dm_dev.mode = mode;
+		td->dm_dev.bdev = NULL;
+
+		if ((r = open_table_device(td, dev, md))) {
+			mutex_unlock(&md->table_devices_lock);
+			kfree(td);
+			return r;
+		}
+
+		format_dev_t(td->dm_dev.name, dev);
+
+		atomic_set(&td->count, 0);
+		list_add(&td->list, &md->table_devices);
+	}
+	atomic_inc(&td->count);
+	mutex_unlock(&md->table_devices_lock);
+
+	*result = &td->dm_dev;
+	return 0;
+}
+EXPORT_SYMBOL_GPL(dm_get_table_device);
+
+void dm_put_table_device(struct mapped_device *md, struct dm_dev *d)
+{
+	struct table_device *td = container_of(d, struct table_device, dm_dev);
+
+	mutex_lock(&md->table_devices_lock);
+	if (atomic_dec_and_test(&td->count)) {
+		close_table_device(td, md);
+		list_del(&td->list);
+		kfree(td);
+	}
+	mutex_unlock(&md->table_devices_lock);
+}
+EXPORT_SYMBOL(dm_put_table_device);
+
+static void free_table_devices(struct list_head *devices)
+{
+	struct list_head *tmp, *next;
+
+	list_for_each_safe(tmp, next, devices) {
+		struct table_device *td = list_entry(tmp, struct table_device, list);
+
+		DMWARN("dm_destroy: %s still exists with %d references",
+		       td->dm_dev.name, atomic_read(&td->count));
+		kfree(td);
+	}
+>>>>>>> v3.18
 }
 
 /*
@@ -607,7 +994,11 @@ static void dec_pending(struct dm_io *io, int error)
 		if (io_error == DM_ENDIO_REQUEUE)
 			return;
 
+<<<<<<< HEAD
 		if ((bio->bi_rw & REQ_FLUSH) && bio->bi_size) {
+=======
+		if ((bio->bi_rw & REQ_FLUSH) && bio->bi_iter.bi_size) {
+>>>>>>> v3.18
 			/*
 			 * Preflush done for flush with data, reissue
 			 * without REQ_FLUSH.
@@ -622,10 +1013,25 @@ static void dec_pending(struct dm_io *io, int error)
 	}
 }
 
+<<<<<<< HEAD
 static void clone_endio(struct bio *bio, int error)
 {
 	int r = 0;
 	struct dm_target_io *tio = bio->bi_private;
+=======
+static void disable_write_same(struct mapped_device *md)
+{
+	struct queue_limits *limits = dm_get_queue_limits(md);
+
+	/* device doesn't really support WRITE SAME, disable it */
+	limits->max_write_same_sectors = 0;
+}
+
+static void clone_endio(struct bio *bio, int error)
+{
+	int r = 0;
+	struct dm_target_io *tio = container_of(bio, struct dm_target_io, clone);
+>>>>>>> v3.18
 	struct dm_io *io = tio->io;
 	struct mapped_device *md = tio->io->md;
 	dm_endio_fn endio = tio->ti->type->end_io;
@@ -650,6 +1056,13 @@ static void clone_endio(struct bio *bio, int error)
 		}
 	}
 
+<<<<<<< HEAD
+=======
+	if (unlikely(r == -EREMOTEIO && (bio->bi_rw & REQ_WRITE_SAME) &&
+		     !bdev_get_queue(bio->bi_bdev)->limits.max_write_same_sectors))
+		disable_write_same(md);
+
+>>>>>>> v3.18
 	free_tio(md, tio);
 	dec_pending(io, error);
 }
@@ -659,10 +1072,18 @@ static void clone_endio(struct bio *bio, int error)
  */
 static void end_clone_bio(struct bio *clone, int error)
 {
+<<<<<<< HEAD
 	struct dm_rq_clone_bio_info *info = clone->bi_private;
 	struct dm_rq_target_io *tio = info->tio;
 	struct bio *bio = info->orig;
 	unsigned int nr_bytes = info->orig->bi_size;
+=======
+	struct dm_rq_clone_bio_info *info =
+		container_of(clone, struct dm_rq_clone_bio_info, clone);
+	struct dm_rq_target_io *tio = info->tio;
+	struct bio *bio = info->orig;
+	unsigned int nr_bytes = info->orig->bi_iter.bi_size;
+>>>>>>> v3.18
 
 	bio_put(clone);
 
@@ -744,7 +1165,11 @@ static void free_rq_clone(struct request *clone)
  * Complete the clone and the original request.
  * Must be called without queue lock.
  */
+<<<<<<< HEAD
 void dm_end_request(struct request *clone, int error)
+=======
+static void dm_end_request(struct request *clone, int error)
+>>>>>>> v3.18
 {
 	int rw = rq_data_dir(clone);
 	struct dm_rq_target_io *tio = clone->end_io_data;
@@ -843,6 +1268,13 @@ static void dm_done(struct request *clone, int error, bool mapped)
 			r = rq_end_io(tio->ti, clone, error, &tio->info);
 	}
 
+<<<<<<< HEAD
+=======
+	if (unlikely(r == -EREMOTEIO && (clone->cmd_flags & REQ_WRITE_SAME) &&
+		     !clone->q->limits.max_write_same_sectors))
+		disable_write_same(tio->md);
+
+>>>>>>> v3.18
 	if (r <= 0)
 		/* The target wants to complete the I/O */
 		dm_end_request(clone, r);
@@ -977,6 +1409,7 @@ int dm_set_target_max_io_len(struct dm_target *ti, sector_t len)
 EXPORT_SYMBOL_GPL(dm_set_target_max_io_len);
 
 /*
+<<<<<<< HEAD
  * Flush current->bio_list when the target map method blocks.
  * This fixes deadlocks in snapshot and possibly in other targets.
  */
@@ -1025,18 +1458,64 @@ static void dm_offload_end(struct dm_offload *o)
 	list_del(&o->cb.list);
 	blk_finish_plug(&o->plug);
 }
+=======
+ * A target may call dm_accept_partial_bio only from the map routine.  It is
+ * allowed for all bio types except REQ_FLUSH.
+ *
+ * dm_accept_partial_bio informs the dm that the target only wants to process
+ * additional n_sectors sectors of the bio and the rest of the data should be
+ * sent in a next bio.
+ *
+ * A diagram that explains the arithmetics:
+ * +--------------------+---------------+-------+
+ * |         1          |       2       |   3   |
+ * +--------------------+---------------+-------+
+ *
+ * <-------------- *tio->len_ptr --------------->
+ *                      <------- bi_size ------->
+ *                      <-- n_sectors -->
+ *
+ * Region 1 was already iterated over with bio_advance or similar function.
+ *	(it may be empty if the target doesn't use bio_advance)
+ * Region 2 is the remaining bio size that the target wants to process.
+ *	(it may be empty if region 1 is non-empty, although there is no reason
+ *	 to make it empty)
+ * The target requires that region 3 is to be sent in the next bio.
+ *
+ * If the target wants to receive multiple copies of the bio (via num_*bios, etc),
+ * the partially processed part (the sum of regions 1+2) must be the same for all
+ * copies of the bio.
+ */
+void dm_accept_partial_bio(struct bio *bio, unsigned n_sectors)
+{
+	struct dm_target_io *tio = container_of(bio, struct dm_target_io, clone);
+	unsigned bi_size = bio->bi_iter.bi_size >> SECTOR_SHIFT;
+	BUG_ON(bio->bi_rw & REQ_FLUSH);
+	BUG_ON(bi_size > *tio->len_ptr);
+	BUG_ON(n_sectors > bi_size);
+	*tio->len_ptr -= bi_size - n_sectors;
+	bio->bi_iter.bi_size = n_sectors << SECTOR_SHIFT;
+}
+EXPORT_SYMBOL_GPL(dm_accept_partial_bio);
+>>>>>>> v3.18
 
 static void __map_bio(struct dm_target_io *tio)
 {
 	int r;
 	sector_t sector;
 	struct mapped_device *md;
+<<<<<<< HEAD
 	struct dm_offload o;
+=======
+>>>>>>> v3.18
 	struct bio *clone = &tio->clone;
 	struct dm_target *ti = tio->ti;
 
 	clone->bi_end_io = clone_endio;
+<<<<<<< HEAD
 	clone->bi_private = tio;
+=======
+>>>>>>> v3.18
 
 	/*
 	 * Map the clone.  If r == 0 we don't need to do
@@ -1044,12 +1523,17 @@ static void __map_bio(struct dm_target_io *tio)
 	 * this io.
 	 */
 	atomic_inc(&tio->io->io_count);
+<<<<<<< HEAD
 	sector = clone->bi_sector;
 
 	dm_offload_start(&o);
 	r = ti->type->map(ti, clone);
 	dm_offload_end(&o);
 
+=======
+	sector = clone->bi_iter.bi_sector;
+	r = ti->type->map(ti, clone);
+>>>>>>> v3.18
 	if (r == DM_MAPIO_REMAPPED) {
 		/* the bio has been remapped so dispatch it */
 
@@ -1074,6 +1558,7 @@ struct clone_info {
 	struct bio *bio;
 	struct dm_io *io;
 	sector_t sector;
+<<<<<<< HEAD
 	sector_t sector_count;
 	unsigned short idx;
 };
@@ -1126,12 +1611,22 @@ static void clone_split_bio(struct dm_target_io *tio, struct bio *bio,
 	clone->bi_flags |= 1 << BIO_CLONED;
 
 	clone_bio_integrity(bio, clone, idx, len, offset, 1);
+=======
+	unsigned sector_count;
+};
+
+static void bio_setup_sector(struct bio *bio, sector_t sector, unsigned len)
+{
+	bio->bi_iter.bi_sector = sector;
+	bio->bi_iter.bi_size = to_bytes(len);
+>>>>>>> v3.18
 }
 
 /*
  * Creates a bio that consists of range of complete bvecs.
  */
 static void clone_bio(struct dm_target_io *tio, struct bio *bio,
+<<<<<<< HEAD
 		      sector_t sector, unsigned short idx,
 		      unsigned short bv_count, unsigned len)
 {
@@ -1149,17 +1644,44 @@ static void clone_bio(struct dm_target_io *tio, struct bio *bio,
 
 static struct dm_target_io *alloc_tio(struct clone_info *ci,
 				      struct dm_target *ti, int nr_iovecs,
+=======
+		      sector_t sector, unsigned len)
+{
+	struct bio *clone = &tio->clone;
+
+	__bio_clone_fast(clone, bio);
+
+	if (bio_integrity(bio))
+		bio_integrity_clone(clone, bio, GFP_NOIO);
+
+	bio_advance(clone, to_bytes(sector - clone->bi_iter.bi_sector));
+	clone->bi_iter.bi_size = to_bytes(len);
+
+	if (bio_integrity(bio))
+		bio_integrity_trim(clone, 0, len);
+}
+
+static struct dm_target_io *alloc_tio(struct clone_info *ci,
+				      struct dm_target *ti,
+>>>>>>> v3.18
 				      unsigned target_bio_nr)
 {
 	struct dm_target_io *tio;
 	struct bio *clone;
 
+<<<<<<< HEAD
 	clone = bio_alloc_bioset(GFP_NOIO, nr_iovecs, ci->md->bs);
+=======
+	clone = bio_alloc_bioset(GFP_NOIO, 0, ci->md->bs);
+>>>>>>> v3.18
 	tio = container_of(clone, struct dm_target_io, clone);
 
 	tio->io = ci->io;
 	tio->ti = ti;
+<<<<<<< HEAD
 	memset(&tio->info, 0, sizeof(tio->info));
+=======
+>>>>>>> v3.18
 	tio->target_bio_nr = target_bio_nr;
 
 	return tio;
@@ -1167,6 +1689,7 @@ static struct dm_target_io *alloc_tio(struct clone_info *ci,
 
 static void __clone_and_map_simple_bio(struct clone_info *ci,
 				       struct dm_target *ti,
+<<<<<<< HEAD
 				       unsigned target_bio_nr, sector_t len)
 {
 	struct dm_target_io *tio = alloc_tio(ci, ti, ci->bio->bi_max_vecs, target_bio_nr);
@@ -1180,12 +1703,28 @@ static void __clone_and_map_simple_bio(struct clone_info *ci,
 	 __bio_clone(clone, ci->bio);
 	if (len)
 		bio_setup_sector(clone, ci->sector, len);
+=======
+				       unsigned target_bio_nr, unsigned *len)
+{
+	struct dm_target_io *tio = alloc_tio(ci, ti, target_bio_nr);
+	struct bio *clone = &tio->clone;
+
+	tio->len_ptr = len;
+
+	__bio_clone_fast(clone, ci->bio);
+	if (len)
+		bio_setup_sector(clone, ci->sector, *len);
+>>>>>>> v3.18
 
 	__map_bio(tio);
 }
 
 static void __send_duplicate_bios(struct clone_info *ci, struct dm_target *ti,
+<<<<<<< HEAD
 				  unsigned num_bios, sector_t len)
+=======
+				  unsigned num_bios, unsigned *len)
+>>>>>>> v3.18
 {
 	unsigned target_bio_nr;
 
@@ -1200,16 +1739,24 @@ static int __send_empty_flush(struct clone_info *ci)
 
 	BUG_ON(bio_has_data(ci->bio));
 	while ((ti = dm_table_get_target(ci->map, target_nr++)))
+<<<<<<< HEAD
 		__send_duplicate_bios(ci, ti, ti->num_flush_bios, 0);
+=======
+		__send_duplicate_bios(ci, ti, ti->num_flush_bios, NULL);
+>>>>>>> v3.18
 
 	return 0;
 }
 
 static void __clone_and_map_data_bio(struct clone_info *ci, struct dm_target *ti,
+<<<<<<< HEAD
 				     sector_t sector, int nr_iovecs,
 				     unsigned short idx, unsigned short bv_count,
 				     unsigned offset, unsigned len,
 				     unsigned split_bvec)
+=======
+				     sector_t sector, unsigned *len)
+>>>>>>> v3.18
 {
 	struct bio *bio = ci->bio;
 	struct dm_target_io *tio;
@@ -1223,11 +1770,17 @@ static void __clone_and_map_data_bio(struct clone_info *ci, struct dm_target *ti
 		num_target_bios = ti->num_write_bios(ti, bio);
 
 	for (target_bio_nr = 0; target_bio_nr < num_target_bios; target_bio_nr++) {
+<<<<<<< HEAD
 		tio = alloc_tio(ci, ti, nr_iovecs, target_bio_nr);
 		if (split_bvec)
 			clone_split_bio(tio, bio, sector, idx, offset, len);
 		else
 			clone_bio(tio, bio, sector, idx, bv_count, len);
+=======
+		tio = alloc_tio(ci, ti, target_bio_nr);
+		tio->len_ptr = len;
+		clone_bio(tio, bio, sector, *len);
+>>>>>>> v3.18
 		__map_bio(tio);
 	}
 }
@@ -1256,7 +1809,11 @@ static int __send_changing_extent_only(struct clone_info *ci,
 				       is_split_required_fn is_split_required)
 {
 	struct dm_target *ti;
+<<<<<<< HEAD
 	sector_t len;
+=======
+	unsigned len;
+>>>>>>> v3.18
 	unsigned num_bios;
 
 	do {
@@ -1275,11 +1832,19 @@ static int __send_changing_extent_only(struct clone_info *ci,
 			return -EOPNOTSUPP;
 
 		if (is_split_required && !is_split_required(ti))
+<<<<<<< HEAD
 			len = min(ci->sector_count, max_io_len_target_boundary(ci->sector, ti));
 		else
 			len = min(ci->sector_count, max_io_len(ci->sector, ti));
 
 		__send_duplicate_bios(ci, ti, num_bios, len);
+=======
+			len = min((sector_t)ci->sector_count, max_io_len_target_boundary(ci->sector, ti));
+		else
+			len = min((sector_t)ci->sector_count, max_io_len(ci->sector, ti));
+
+		__send_duplicate_bios(ci, ti, num_bios, &len);
+>>>>>>> v3.18
 
 		ci->sector += len;
 	} while (ci->sector_count -= len);
@@ -1299,6 +1864,7 @@ static int __send_write_same(struct clone_info *ci)
 }
 
 /*
+<<<<<<< HEAD
  * Find maximum number of sectors / bvecs we can process with a single bio.
  */
 static sector_t __len_within_target(struct clone_info *ci, sector_t max, int *idx)
@@ -1353,14 +1919,20 @@ static int __split_bvec_across_targets(struct clone_info *ci,
 }
 
 /*
+=======
+>>>>>>> v3.18
  * Select the correct strategy for processing a non-flush bio.
  */
 static int __split_and_process_non_flush(struct clone_info *ci)
 {
 	struct bio *bio = ci->bio;
 	struct dm_target *ti;
+<<<<<<< HEAD
 	sector_t len, max;
 	int idx;
+=======
+	unsigned len;
+>>>>>>> v3.18
 
 	if (unlikely(bio->bi_rw & REQ_DISCARD))
 		return __send_discard(ci);
@@ -1371,6 +1943,7 @@ static int __split_and_process_non_flush(struct clone_info *ci)
 	if (!dm_target_is_valid(ti))
 		return -EIO;
 
+<<<<<<< HEAD
 	max = max_io_len(ci->sector, ti);
 
 	/*
@@ -1406,22 +1979,45 @@ static int __split_and_process_non_flush(struct clone_info *ci)
 	 * Handle a bvec that must be split between two or more targets.
 	 */
 	return __split_bvec_across_targets(ci, ti, max);
+=======
+	len = min_t(sector_t, max_io_len(ci->sector, ti), ci->sector_count);
+
+	__clone_and_map_data_bio(ci, ti, ci->sector, &len);
+
+	ci->sector += len;
+	ci->sector_count -= len;
+
+	return 0;
+>>>>>>> v3.18
 }
 
 /*
  * Entry point to split a bio into clones and submit them to the targets.
  */
+<<<<<<< HEAD
 static void __split_and_process_bio(struct mapped_device *md, struct bio *bio)
+=======
+static void __split_and_process_bio(struct mapped_device *md,
+				    struct dm_table *map, struct bio *bio)
+>>>>>>> v3.18
 {
 	struct clone_info ci;
 	int error = 0;
 
+<<<<<<< HEAD
 	ci.map = dm_get_live_table(md);
 	if (unlikely(!ci.map)) {
+=======
+	if (unlikely(!map)) {
+>>>>>>> v3.18
 		bio_io_error(bio);
 		return;
 	}
 
+<<<<<<< HEAD
+=======
+	ci.map = map;
+>>>>>>> v3.18
 	ci.md = md;
 	ci.io = alloc_io(md);
 	ci.io->error = 0;
@@ -1429,8 +2025,12 @@ static void __split_and_process_bio(struct mapped_device *md, struct bio *bio)
 	ci.io->bio = bio;
 	ci.io->md = md;
 	spin_lock_init(&ci.io->endio_lock);
+<<<<<<< HEAD
 	ci.sector = bio->bi_sector;
 	ci.idx = bio->bi_idx;
+=======
+	ci.sector = bio->bi_iter.bi_sector;
+>>>>>>> v3.18
 
 	start_io_acct(ci.io);
 
@@ -1448,7 +2048,10 @@ static void __split_and_process_bio(struct mapped_device *md, struct bio *bio)
 
 	/* drop the extra reference count */
 	dec_pending(ci.io, error);
+<<<<<<< HEAD
 	dm_table_put(ci.map);
+=======
+>>>>>>> v3.18
 }
 /*-----------------------------------------------------------------
  * CRUD END
@@ -1459,7 +2062,11 @@ static int dm_merge_bvec(struct request_queue *q,
 			 struct bio_vec *biovec)
 {
 	struct mapped_device *md = q->queuedata;
+<<<<<<< HEAD
 	struct dm_table *map = dm_get_live_table(md);
+=======
+	struct dm_table *map = dm_get_live_table_fast(md);
+>>>>>>> v3.18
 	struct dm_target *ti;
 	sector_t max_sectors;
 	int max_size = 0;
@@ -1469,7 +2076,11 @@ static int dm_merge_bvec(struct request_queue *q,
 
 	ti = dm_table_find_target(map, bvm->bi_sector);
 	if (!dm_target_is_valid(ti))
+<<<<<<< HEAD
 		goto out_table;
+=======
+		goto out;
+>>>>>>> v3.18
 
 	/*
 	 * Find maximum amount of I/O that won't need splitting
@@ -1495,6 +2106,7 @@ static int dm_merge_bvec(struct request_queue *q,
 	 * just one page.
 	 */
 	else if (queue_max_hw_sectors(q) <= PAGE_SIZE >> 9)
+<<<<<<< HEAD
 
 		max_size = 0;
 
@@ -1502,6 +2114,12 @@ out_table:
 	dm_table_put(map);
 
 out:
+=======
+		max_size = 0;
+
+out:
+	dm_put_live_table_fast(md);
+>>>>>>> v3.18
 	/*
 	 * Always allow an entire first page
 	 */
@@ -1520,8 +2138,15 @@ static void _dm_request(struct request_queue *q, struct bio *bio)
 	int rw = bio_data_dir(bio);
 	struct mapped_device *md = q->queuedata;
 	int cpu;
+<<<<<<< HEAD
 
 	down_read(&md->io_lock);
+=======
+	int srcu_idx;
+	struct dm_table *map;
+
+	map = dm_get_live_table(md, &srcu_idx);
+>>>>>>> v3.18
 
 	cpu = part_stat_lock();
 	part_stat_inc(cpu, &dm_disk(md)->part0, ios[rw]);
@@ -1530,7 +2155,11 @@ static void _dm_request(struct request_queue *q, struct bio *bio)
 
 	/* if we're suspended, we have to queue this io for later */
 	if (unlikely(test_bit(DMF_BLOCK_IO_FOR_SUSPEND, &md->flags))) {
+<<<<<<< HEAD
 		up_read(&md->io_lock);
+=======
+		dm_put_live_table(md, srcu_idx);
+>>>>>>> v3.18
 
 		if (bio_rw(bio) != READA)
 			queue_io(md, bio);
@@ -1539,12 +2168,21 @@ static void _dm_request(struct request_queue *q, struct bio *bio)
 		return;
 	}
 
+<<<<<<< HEAD
 	__split_and_process_bio(md, bio);
 	up_read(&md->io_lock);
 	return;
 }
 
 static int dm_request_based(struct mapped_device *md)
+=======
+	__split_and_process_bio(md, map, bio);
+	dm_put_live_table(md, srcu_idx);
+	return;
+}
+
+int dm_request_based(struct mapped_device *md)
+>>>>>>> v3.18
 {
 	return blk_queue_stackable(md->queue);
 }
@@ -1583,7 +2221,10 @@ static int dm_rq_bio_constructor(struct bio *bio, struct bio *bio_orig,
 	info->orig = bio_orig;
 	info->tio = tio;
 	bio->bi_end_io = end_clone_bio;
+<<<<<<< HEAD
 	bio->bi_private = info;
+=======
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -1601,7 +2242,10 @@ static int setup_clone(struct request *clone, struct request *rq,
 	clone->cmd = rq->cmd;
 	clone->cmd_len = rq->cmd_len;
 	clone->sense = rq->sense;
+<<<<<<< HEAD
 	clone->buffer = rq->buffer;
+=======
+>>>>>>> v3.18
 	clone->end_io = end_clone_request;
 	clone->end_io_data = tio;
 
@@ -1726,7 +2370,12 @@ static struct request *dm_start_request(struct mapped_device *md, struct request
 static void dm_request_fn(struct request_queue *q)
 {
 	struct mapped_device *md = q->queuedata;
+<<<<<<< HEAD
 	struct dm_table *map = dm_get_live_table(md);
+=======
+	int srcu_idx;
+	struct dm_table *map = dm_get_live_table(md, &srcu_idx);
+>>>>>>> v3.18
 	struct dm_target *ti;
 	struct request *rq, *clone;
 	sector_t pos;
@@ -1740,7 +2389,11 @@ static void dm_request_fn(struct request_queue *q)
 	while (!blk_queue_stopped(q)) {
 		rq = blk_peek_request(q);
 		if (!rq)
+<<<<<<< HEAD
 			goto out;
+=======
+			goto delay_and_out;
+>>>>>>> v3.18
 
 		/* always use block 0 to find the target for flushes for now */
 		pos = 0;
@@ -1781,7 +2434,11 @@ requeued:
 delay_and_out:
 	blk_delay_queue(q, HZ / 10);
 out:
+<<<<<<< HEAD
 	dm_table_put(map);
+=======
+	dm_put_live_table(md, srcu_idx);
+>>>>>>> v3.18
 }
 
 int dm_underlying_device_busy(struct request_queue *q)
@@ -1794,14 +2451,22 @@ static int dm_lld_busy(struct request_queue *q)
 {
 	int r;
 	struct mapped_device *md = q->queuedata;
+<<<<<<< HEAD
 	struct dm_table *map = dm_get_live_table(md);
+=======
+	struct dm_table *map = dm_get_live_table_fast(md);
+>>>>>>> v3.18
 
 	if (!map || test_bit(DMF_BLOCK_IO_FOR_SUSPEND, &md->flags))
 		r = 1;
 	else
 		r = dm_table_any_busy_target(map);
 
+<<<<<<< HEAD
 	dm_table_put(map);
+=======
+	dm_put_live_table_fast(md);
+>>>>>>> v3.18
 
 	return r;
 }
@@ -1813,7 +2478,11 @@ static int dm_any_congested(void *congested_data, int bdi_bits)
 	struct dm_table *map;
 
 	if (!test_bit(DMF_BLOCK_IO_FOR_SUSPEND, &md->flags)) {
+<<<<<<< HEAD
 		map = dm_get_live_table(md);
+=======
+		map = dm_get_live_table_fast(md);
+>>>>>>> v3.18
 		if (map) {
 			/*
 			 * Request-based dm cares about only own queue for
@@ -1824,9 +2493,14 @@ static int dm_any_congested(void *congested_data, int bdi_bits)
 				    bdi_bits;
 			else
 				r = dm_table_any_congested(map, bdi_bits);
+<<<<<<< HEAD
 
 			dm_table_put(map);
 		}
+=======
+		}
+		dm_put_live_table_fast(md);
+>>>>>>> v3.18
 	}
 
 	return r;
@@ -1931,17 +2605,33 @@ static struct mapped_device *alloc_dev(int minor)
 	if (r < 0)
 		goto bad_minor;
 
+<<<<<<< HEAD
 	md->type = DM_TYPE_NONE;
 	init_rwsem(&md->io_lock);
 	mutex_init(&md->suspend_lock);
 	mutex_init(&md->type_lock);
 	spin_lock_init(&md->deferred_lock);
 	rwlock_init(&md->map_lock);
+=======
+	r = init_srcu_struct(&md->io_barrier);
+	if (r < 0)
+		goto bad_io_barrier;
+
+	md->type = DM_TYPE_NONE;
+	mutex_init(&md->suspend_lock);
+	mutex_init(&md->type_lock);
+	mutex_init(&md->table_devices_lock);
+	spin_lock_init(&md->deferred_lock);
+>>>>>>> v3.18
 	atomic_set(&md->holders, 1);
 	atomic_set(&md->open_count, 0);
 	atomic_set(&md->event_nr, 0);
 	atomic_set(&md->uevent_seq, 0);
 	INIT_LIST_HEAD(&md->uevent_list);
+<<<<<<< HEAD
+=======
+	INIT_LIST_HEAD(&md->table_devices);
+>>>>>>> v3.18
 	spin_lock_init(&md->uevent_lock);
 
 	md->queue = blk_alloc_queue(GFP_KERNEL);
@@ -1970,8 +2660,12 @@ static struct mapped_device *alloc_dev(int minor)
 	add_disk(md->disk);
 	format_dev_t(md->name, MKDEV(_major, minor));
 
+<<<<<<< HEAD
 	md->wq = alloc_workqueue("kdmflush",
 				 WQ_NON_REENTRANT | WQ_MEM_RECLAIM, 0);
+=======
+	md->wq = alloc_workqueue("kdmflush", WQ_MEM_RECLAIM, 0);
+>>>>>>> v3.18
 	if (!md->wq)
 		goto bad_thread;
 
@@ -1983,6 +2677,11 @@ static struct mapped_device *alloc_dev(int minor)
 	md->flush_bio.bi_bdev = md->bdev;
 	md->flush_bio.bi_rw = WRITE_FLUSH;
 
+<<<<<<< HEAD
+=======
+	dm_stats_init(&md->stats);
+
+>>>>>>> v3.18
 	/* Populate the mapping, nobody knows we exist yet */
 	spin_lock(&_minor_lock);
 	old_md = idr_replace(&_minor_idr, md, minor);
@@ -2000,6 +2699,11 @@ bad_thread:
 bad_disk:
 	blk_cleanup_queue(md->queue);
 bad_queue:
+<<<<<<< HEAD
+=======
+	cleanup_srcu_struct(&md->io_barrier);
+bad_io_barrier:
+>>>>>>> v3.18
 	free_minor(minor);
 bad_minor:
 	module_put(THIS_MODULE);
@@ -2023,6 +2727,11 @@ static void free_dev(struct mapped_device *md)
 		bioset_free(md->bs);
 	blk_integrity_unregister(md->disk);
 	del_gendisk(md->disk);
+<<<<<<< HEAD
+=======
+	cleanup_srcu_struct(&md->io_barrier);
+	free_table_devices(&md->table_devices);
+>>>>>>> v3.18
 	free_minor(minor);
 
 	spin_lock(&_minor_lock);
@@ -2031,6 +2740,10 @@ static void free_dev(struct mapped_device *md)
 
 	put_disk(md->disk);
 	blk_cleanup_queue(md->queue);
+<<<<<<< HEAD
+=======
+	dm_stats_cleanup(&md->stats);
+>>>>>>> v3.18
 	module_put(THIS_MODULE);
 	kfree(md);
 }
@@ -2165,7 +2878,10 @@ static struct dm_table *__bind(struct mapped_device *md, struct dm_table *t,
 	struct dm_table *old_map;
 	struct request_queue *q = md->queue;
 	sector_t size;
+<<<<<<< HEAD
 	unsigned long flags;
+=======
+>>>>>>> v3.18
 	int merge_is_optional;
 
 	size = dm_table_get_size(t);
@@ -2173,7 +2889,11 @@ static struct dm_table *__bind(struct mapped_device *md, struct dm_table *t,
 	/*
 	 * Wipe any geometry if the size of the table changed.
 	 */
+<<<<<<< HEAD
 	if (size != get_capacity(md->disk))
+=======
+	if (size != dm_get_size(md))
+>>>>>>> v3.18
 		memset(&md->geometry, 0, sizeof(md->geometry));
 
 	__set_size(md, size);
@@ -2194,9 +2914,14 @@ static struct dm_table *__bind(struct mapped_device *md, struct dm_table *t,
 
 	merge_is_optional = dm_table_merge_is_optional(t);
 
+<<<<<<< HEAD
 	write_lock_irqsave(&md->map_lock, flags);
 	old_map = md->map;
 	md->map = t;
+=======
+	old_map = md->map;
+	rcu_assign_pointer(md->map, t);
+>>>>>>> v3.18
 	md->immutable_target_type = dm_table_get_immutable_target_type(t);
 
 	dm_table_set_restrictions(t, q, limits);
@@ -2204,7 +2929,11 @@ static struct dm_table *__bind(struct mapped_device *md, struct dm_table *t,
 		set_bit(DMF_MERGE_IS_OPTIONAL, &md->flags);
 	else
 		clear_bit(DMF_MERGE_IS_OPTIONAL, &md->flags);
+<<<<<<< HEAD
 	write_unlock_irqrestore(&md->map_lock, flags);
+=======
+	dm_sync_table(md);
+>>>>>>> v3.18
 
 	return old_map;
 }
@@ -2215,15 +2944,23 @@ static struct dm_table *__bind(struct mapped_device *md, struct dm_table *t,
 static struct dm_table *__unbind(struct mapped_device *md)
 {
 	struct dm_table *map = md->map;
+<<<<<<< HEAD
 	unsigned long flags;
+=======
+>>>>>>> v3.18
 
 	if (!map)
 		return NULL;
 
 	dm_table_event_callback(map, NULL, NULL);
+<<<<<<< HEAD
 	write_lock_irqsave(&md->map_lock, flags);
 	md->map = NULL;
 	write_unlock_irqrestore(&md->map_lock, flags);
+=======
+	RCU_INIT_POINTER(md->map, NULL);
+	dm_sync_table(md);
+>>>>>>> v3.18
 
 	return map;
 }
@@ -2261,11 +2998,19 @@ void dm_unlock_md_type(struct mapped_device *md)
 
 void dm_set_md_type(struct mapped_device *md, unsigned type)
 {
+<<<<<<< HEAD
+=======
+	BUG_ON(!mutex_is_locked(&md->type_lock));
+>>>>>>> v3.18
 	md->type = type;
 }
 
 unsigned dm_get_md_type(struct mapped_device *md)
 {
+<<<<<<< HEAD
+=======
+	BUG_ON(!mutex_is_locked(&md->type_lock));
+>>>>>>> v3.18
 	return md->type;
 }
 
@@ -2325,7 +3070,11 @@ int dm_setup_md_queue(struct mapped_device *md)
 	return 0;
 }
 
+<<<<<<< HEAD
 struct mapped_device *dm_get_md(dev_t dev)
+=======
+static struct mapped_device *dm_find_md(dev_t dev)
+>>>>>>> v3.18
 {
 	struct mapped_device *md;
 	unsigned minor = MINOR(dev);
@@ -2336,6 +3085,7 @@ struct mapped_device *dm_get_md(dev_t dev)
 	spin_lock(&_minor_lock);
 
 	md = idr_find(&_minor_idr, minor);
+<<<<<<< HEAD
 	if (md) {
 		if ((md == MINOR_ALLOCED ||
 		     (MINOR(disk_devt(dm_disk(md))) != minor) ||
@@ -2345,6 +3095,14 @@ struct mapped_device *dm_get_md(dev_t dev)
 			goto out;
 		}
 		dm_get(md);
+=======
+	if (md && (md == MINOR_ALLOCED ||
+		   (MINOR(disk_devt(dm_disk(md))) != minor) ||
+		   dm_deleting_md(md) ||
+		   test_bit(DMF_FREEING, &md->flags))) {
+		md = NULL;
+		goto out;
+>>>>>>> v3.18
 	}
 
 out:
@@ -2352,6 +3110,19 @@ out:
 
 	return md;
 }
+<<<<<<< HEAD
+=======
+
+struct mapped_device *dm_get_md(dev_t dev)
+{
+	struct mapped_device *md = dm_find_md(dev);
+
+	if (md)
+		dm_get(md);
+
+	return md;
+}
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(dm_get_md);
 
 void *dm_get_mdptr(struct mapped_device *md)
@@ -2378,17 +3149,27 @@ EXPORT_SYMBOL_GPL(dm_device_name);
 
 static void __dm_destroy(struct mapped_device *md, bool wait)
 {
+<<<<<<< HEAD
 	struct request_queue *q = md->queue;
 	struct dm_table *map;
+=======
+	struct dm_table *map;
+	int srcu_idx;
+>>>>>>> v3.18
 
 	might_sleep();
 
 	spin_lock(&_minor_lock);
+<<<<<<< HEAD
 	map = dm_get_live_table(md);
+=======
+	map = dm_get_live_table(md, &srcu_idx);
+>>>>>>> v3.18
 	idr_replace(&_minor_idr, MINOR_ALLOCED, MINOR(disk_devt(dm_disk(md))));
 	set_bit(DMF_FREEING, &md->flags);
 	spin_unlock(&_minor_lock);
 
+<<<<<<< HEAD
 	spin_lock_irq(q->queue_lock);
 	queue_flag_set(QUEUE_FLAG_DYING, q);
 	spin_unlock_irq(q->queue_lock);
@@ -2398,11 +3179,19 @@ static void __dm_destroy(struct mapped_device *md, bool wait)
 	 * do not race with internal suspend.
 	 */
 	mutex_lock(&md->suspend_lock);
+=======
+>>>>>>> v3.18
 	if (!dm_suspended_md(md)) {
 		dm_table_presuspend_targets(map);
 		dm_table_postsuspend_targets(map);
 	}
+<<<<<<< HEAD
 	mutex_unlock(&md->suspend_lock);
+=======
+
+	/* dm_put_live_table must be before msleep, otherwise deadlock is possible */
+	dm_put_live_table(md, srcu_idx);
+>>>>>>> v3.18
 
 	/*
 	 * Rare, but there may be I/O requests still going to complete,
@@ -2418,7 +3207,10 @@ static void __dm_destroy(struct mapped_device *md, bool wait)
 		       dm_device_name(md), atomic_read(&md->holders));
 
 	dm_sysfs_exit(md);
+<<<<<<< HEAD
 	dm_table_put(map);
+=======
+>>>>>>> v3.18
 	dm_table_destroy(__unbind(md));
 	free_dev(md);
 }
@@ -2475,8 +3267,15 @@ static void dm_wq_work(struct work_struct *work)
 	struct mapped_device *md = container_of(work, struct mapped_device,
 						work);
 	struct bio *c;
+<<<<<<< HEAD
 
 	down_read(&md->io_lock);
+=======
+	int srcu_idx;
+	struct dm_table *map;
+
+	map = dm_get_live_table(md, &srcu_idx);
+>>>>>>> v3.18
 
 	while (!test_bit(DMF_BLOCK_IO_FOR_SUSPEND, &md->flags)) {
 		spin_lock_irq(&md->deferred_lock);
@@ -2486,6 +3285,7 @@ static void dm_wq_work(struct work_struct *work)
 		if (!c)
 			break;
 
+<<<<<<< HEAD
 		up_read(&md->io_lock);
 
 		if (dm_request_based(md))
@@ -2497,6 +3297,15 @@ static void dm_wq_work(struct work_struct *work)
 	}
 
 	up_read(&md->io_lock);
+=======
+		if (dm_request_based(md))
+			generic_make_request(c);
+		else
+			__split_and_process_bio(md, map, c);
+	}
+
+	dm_put_live_table(md, srcu_idx);
+>>>>>>> v3.18
 }
 
 static void dm_queue_flush(struct mapped_device *md)
@@ -2528,10 +3337,17 @@ struct dm_table *dm_swap_table(struct mapped_device *md, struct dm_table *table)
 	 * reappear.
 	 */
 	if (dm_table_has_no_data_devices(table)) {
+<<<<<<< HEAD
 		live_map = dm_get_live_table(md);
 		if (live_map)
 			limits = md->queue->limits;
 		dm_table_put(live_map);
+=======
+		live_map = dm_get_live_table_fast(md);
+		if (live_map)
+			limits = md->queue->limits;
+		dm_put_live_table_fast(md);
+>>>>>>> v3.18
 	}
 
 	if (!live_map) {
@@ -2611,7 +3427,11 @@ int dm_suspend(struct mapped_device *md, unsigned suspend_flags)
 		goto out_unlock;
 	}
 
+<<<<<<< HEAD
 	map = dm_get_live_table(md);
+=======
+	map = md->map;
+>>>>>>> v3.18
 
 	/*
 	 * DMF_NOFLUSH_SUSPENDING must be set before presuspend.
@@ -2632,7 +3452,11 @@ int dm_suspend(struct mapped_device *md, unsigned suspend_flags)
 	if (!noflush && do_lockfs) {
 		r = lock_fs(md);
 		if (r)
+<<<<<<< HEAD
 			goto out;
+=======
+			goto out_unlock;
+>>>>>>> v3.18
 	}
 
 	/*
@@ -2647,9 +3471,14 @@ int dm_suspend(struct mapped_device *md, unsigned suspend_flags)
 	 * (dm_wq_work), we set BMF_BLOCK_IO_FOR_SUSPEND and call
 	 * flush_workqueue(md->wq).
 	 */
+<<<<<<< HEAD
 	down_write(&md->io_lock);
 	set_bit(DMF_BLOCK_IO_FOR_SUSPEND, &md->flags);
 	up_write(&md->io_lock);
+=======
+	set_bit(DMF_BLOCK_IO_FOR_SUSPEND, &md->flags);
+	synchronize_srcu(&md->io_barrier);
+>>>>>>> v3.18
 
 	/*
 	 * Stop md->queue before flushing md->wq in case request-based
@@ -2667,10 +3496,16 @@ int dm_suspend(struct mapped_device *md, unsigned suspend_flags)
 	 */
 	r = dm_wait_for_completion(md, TASK_INTERRUPTIBLE);
 
+<<<<<<< HEAD
 	down_write(&md->io_lock);
 	if (noflush)
 		clear_bit(DMF_NOFLUSH_SUSPENDING, &md->flags);
 	up_write(&md->io_lock);
+=======
+	if (noflush)
+		clear_bit(DMF_NOFLUSH_SUSPENDING, &md->flags);
+	synchronize_srcu(&md->io_barrier);
+>>>>>>> v3.18
 
 	/* were we interrupted ? */
 	if (r < 0) {
@@ -2680,7 +3515,11 @@ int dm_suspend(struct mapped_device *md, unsigned suspend_flags)
 			start_queue(md->queue);
 
 		unlock_fs(md);
+<<<<<<< HEAD
 		goto out; /* pushback list is already flushed, so skip flush */
+=======
+		goto out_unlock; /* pushback list is already flushed, so skip flush */
+>>>>>>> v3.18
 	}
 
 	/*
@@ -2693,9 +3532,12 @@ int dm_suspend(struct mapped_device *md, unsigned suspend_flags)
 
 	dm_table_postsuspend_targets(map);
 
+<<<<<<< HEAD
 out:
 	dm_table_put(map);
 
+=======
+>>>>>>> v3.18
 out_unlock:
 	mutex_unlock(&md->suspend_lock);
 	return r;
@@ -2710,7 +3552,11 @@ int dm_resume(struct mapped_device *md)
 	if (!dm_suspended_md(md))
 		goto out;
 
+<<<<<<< HEAD
 	map = dm_get_live_table(md);
+=======
+	map = md->map;
+>>>>>>> v3.18
 	if (!map || !dm_table_get_size(map))
 		goto out;
 
@@ -2734,12 +3580,50 @@ int dm_resume(struct mapped_device *md)
 
 	r = 0;
 out:
+<<<<<<< HEAD
 	dm_table_put(map);
+=======
+>>>>>>> v3.18
 	mutex_unlock(&md->suspend_lock);
 
 	return r;
 }
 
+<<<<<<< HEAD
+=======
+/*
+ * Internal suspend/resume works like userspace-driven suspend. It waits
+ * until all bios finish and prevents issuing new bios to the target drivers.
+ * It may be used only from the kernel.
+ *
+ * Internal suspend holds md->suspend_lock, which prevents interaction with
+ * userspace-driven suspend.
+ */
+
+void dm_internal_suspend(struct mapped_device *md)
+{
+	mutex_lock(&md->suspend_lock);
+	if (dm_suspended_md(md))
+		return;
+
+	set_bit(DMF_BLOCK_IO_FOR_SUSPEND, &md->flags);
+	synchronize_srcu(&md->io_barrier);
+	flush_workqueue(md->wq);
+	dm_wait_for_completion(md, TASK_UNINTERRUPTIBLE);
+}
+
+void dm_internal_resume(struct mapped_device *md)
+{
+	if (dm_suspended_md(md))
+		goto done;
+
+	dm_queue_flush(md);
+
+done:
+	mutex_unlock(&md->suspend_lock);
+}
+
+>>>>>>> v3.18
 /*-----------------------------------------------------------------
  * Event notification.
  *---------------------------------------------------------------*/
@@ -2817,6 +3701,14 @@ int dm_suspended_md(struct mapped_device *md)
 	return test_bit(DMF_SUSPENDED, &md->flags);
 }
 
+<<<<<<< HEAD
+=======
+int dm_test_deferred_remove_flag(struct mapped_device *md)
+{
+	return test_bit(DMF_DEFERRED_REMOVE, &md->flags);
+}
+
+>>>>>>> v3.18
 int dm_suspended(struct dm_target *ti)
 {
 	return dm_suspended_md(dm_table_get_md(ti->table));
@@ -2841,22 +3733,38 @@ struct dm_md_mempools *dm_alloc_md_mempools(unsigned type, unsigned integrity, u
 
 	if (type == DM_TYPE_BIO_BASED) {
 		cachep = _io_cache;
+<<<<<<< HEAD
 		pool_size = 16;
 		front_pad = roundup(per_bio_data_size, __alignof__(struct dm_target_io)) + offsetof(struct dm_target_io, clone);
 	} else if (type == DM_TYPE_REQUEST_BASED) {
 		cachep = _rq_tio_cache;
 		pool_size = MIN_IOS;
+=======
+		pool_size = dm_get_reserved_bio_based_ios();
+		front_pad = roundup(per_bio_data_size, __alignof__(struct dm_target_io)) + offsetof(struct dm_target_io, clone);
+	} else if (type == DM_TYPE_REQUEST_BASED) {
+		cachep = _rq_tio_cache;
+		pool_size = dm_get_reserved_rq_based_ios();
+>>>>>>> v3.18
 		front_pad = offsetof(struct dm_rq_clone_bio_info, clone);
 		/* per_bio_data_size is not used. See __bind_mempools(). */
 		WARN_ON(per_bio_data_size != 0);
 	} else
 		goto out;
 
+<<<<<<< HEAD
 	pools->io_pool = mempool_create_slab_pool(MIN_IOS, cachep);
 	if (!pools->io_pool)
 		goto out;
 
 	pools->bs = bioset_create(pool_size, front_pad);
+=======
+	pools->io_pool = mempool_create_slab_pool(pool_size, cachep);
+	if (!pools->io_pool)
+		goto out;
+
+	pools->bs = bioset_create_nobvec(pool_size, front_pad);
+>>>>>>> v3.18
 	if (!pools->bs)
 		goto out;
 
@@ -2893,8 +3801,11 @@ static const struct block_device_operations dm_blk_dops = {
 	.owner = THIS_MODULE
 };
 
+<<<<<<< HEAD
 EXPORT_SYMBOL(dm_get_mapinfo);
 
+=======
+>>>>>>> v3.18
 /*
  * module hooks
  */
@@ -2903,6 +3814,16 @@ module_exit(dm_exit);
 
 module_param(major, uint, 0);
 MODULE_PARM_DESC(major, "The major number of the device mapper");
+<<<<<<< HEAD
+=======
+
+module_param(reserved_bio_based_ios, uint, S_IRUGO | S_IWUSR);
+MODULE_PARM_DESC(reserved_bio_based_ios, "Reserved IOs in bio-based mempools");
+
+module_param(reserved_rq_based_ios, uint, S_IRUGO | S_IWUSR);
+MODULE_PARM_DESC(reserved_rq_based_ios, "Reserved IOs in request-based mempools");
+
+>>>>>>> v3.18
 MODULE_DESCRIPTION(DM_NAME " driver");
 MODULE_AUTHOR("Joe Thornber <dm-devel@redhat.com>");
 MODULE_LICENSE("GPL");

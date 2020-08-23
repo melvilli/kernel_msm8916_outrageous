@@ -382,6 +382,7 @@ static int cp_get_eeprom(struct net_device *dev,
 static int cp_set_eeprom(struct net_device *dev,
 			 struct ethtool_eeprom *eeprom, u8 *data);
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(cp_pci_tbl) = {
 	{ PCI_DEVICE(PCI_VENDOR_ID_REALTEK,	PCI_DEVICE_ID_REALTEK_8139), },
 	{ PCI_DEVICE(PCI_VENDOR_ID_TTTECH,	PCI_DEVICE_ID_TTTECH_MC322), },
@@ -389,6 +390,8 @@ static DEFINE_PCI_DEVICE_TABLE(cp_pci_tbl) = {
 };
 MODULE_DEVICE_TABLE(pci, cp_pci_tbl);
 
+=======
+>>>>>>> v3.18
 static struct {
 	const char str[ETH_GSTRING_LEN];
 } ethtool_stats_keys[] = {
@@ -476,7 +479,11 @@ rx_status_loop:
 	rx = 0;
 	cpw16(IntrStatus, cp_rx_intr_mask);
 
+<<<<<<< HEAD
 	while (1) {
+=======
+	while (rx < budget) {
+>>>>>>> v3.18
 		u32 status, len;
 		dma_addr_t mapping, new_mapping;
 		struct sk_buff *skb, *new_skb;
@@ -554,9 +561,12 @@ rx_next:
 		else
 			desc->opts1 = cpu_to_le32(DescOwn | cp->rx_buf_sz);
 		rx_tail = NEXT_RX(rx_tail);
+<<<<<<< HEAD
 
 		if (rx >= budget)
 			break;
+=======
+>>>>>>> v3.18
 	}
 
 	cp->rx_tail = rx_tail;
@@ -1859,7 +1869,11 @@ static int cp_set_eeprom(struct net_device *dev,
 /* Put the board into D3cold state and wait for WakeUp signal */
 static void cp_set_d3_state (struct cp_private *cp)
 {
+<<<<<<< HEAD
 	pci_enable_wake (cp->pdev, 0, 1); /* Enable PME# generation */
+=======
+	pci_enable_wake(cp->pdev, PCI_D0, 1); /* Enable PME# generation */
+>>>>>>> v3.18
 	pci_set_power_state (cp->pdev, PCI_D3hot);
 }
 
@@ -1890,11 +1904,15 @@ static int cp_init_one (struct pci_dev *pdev, const struct pci_device_id *ent)
 	resource_size_t pciaddr;
 	unsigned int addr_len, i, pci_using_dac;
 
+<<<<<<< HEAD
 #ifndef MODULE
 	static int version_printed;
 	if (version_printed++ == 0)
 		pr_info("%s", version);
 #endif
+=======
+	pr_info_once("%s", version);
+>>>>>>> v3.18
 
 	if (pdev->vendor == PCI_VENDOR_ID_REALTEK &&
 	    pdev->device == PCI_DEVICE_ID_REALTEK_8139 && pdev->revision < 0x20) {
@@ -2051,7 +2069,10 @@ static void cp_remove_one (struct pci_dev *pdev)
 	pci_release_regions(pdev);
 	pci_clear_mwi(pdev);
 	pci_disable_device(pdev);
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	free_netdev(dev);
 }
 
@@ -2114,6 +2135,16 @@ static int cp_resume (struct pci_dev *pdev)
 }
 #endif /* CONFIG_PM */
 
+<<<<<<< HEAD
+=======
+static const struct pci_device_id cp_pci_tbl[] = {
+        { PCI_DEVICE(PCI_VENDOR_ID_REALTEK,     PCI_DEVICE_ID_REALTEK_8139), },
+        { PCI_DEVICE(PCI_VENDOR_ID_TTTECH,      PCI_DEVICE_ID_TTTECH_MC322), },
+        { },
+};
+MODULE_DEVICE_TABLE(pci, cp_pci_tbl);
+
+>>>>>>> v3.18
 static struct pci_driver cp_driver = {
 	.name         = DRV_NAME,
 	.id_table     = cp_pci_tbl,
@@ -2125,6 +2156,7 @@ static struct pci_driver cp_driver = {
 #endif
 };
 
+<<<<<<< HEAD
 static int __init cp_init (void)
 {
 #ifdef MODULE
@@ -2140,3 +2172,6 @@ static void __exit cp_exit (void)
 
 module_init(cp_init);
 module_exit(cp_exit);
+=======
+module_pci_driver(cp_driver);
+>>>>>>> v3.18

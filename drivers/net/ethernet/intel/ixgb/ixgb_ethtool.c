@@ -107,8 +107,13 @@ ixgb_get_settings(struct net_device *netdev, struct ethtool_cmd *ecmd)
 		ethtool_cmd_speed_set(ecmd, SPEED_10000);
 		ecmd->duplex = DUPLEX_FULL;
 	} else {
+<<<<<<< HEAD
 		ethtool_cmd_speed_set(ecmd, -1);
 		ecmd->duplex = -1;
+=======
+		ethtool_cmd_speed_set(ecmd, SPEED_UNKNOWN);
+		ecmd->duplex = DUPLEX_UNKNOWN;
+>>>>>>> v3.18
 	}
 
 	ecmd->autoneg = AUTONEG_DISABLE;
@@ -656,5 +661,9 @@ static const struct ethtool_ops ixgb_ethtool_ops = {
 
 void ixgb_set_ethtool_ops(struct net_device *netdev)
 {
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(netdev, &ixgb_ethtool_ops);
+=======
+	netdev->ethtool_ops = &ixgb_ethtool_ops;
+>>>>>>> v3.18
 }

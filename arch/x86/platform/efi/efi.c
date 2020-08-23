@@ -12,6 +12,11 @@
  *	Bibo Mao <bibo.mao@intel.com>
  *	Chandramouli Narayanan <mouli@linux.intel.com>
  *	Huang Ying <ying.huang@intel.com>
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2013 SuSE Labs
+ *	Borislav Petkov <bp@suse.de> - runtime services VA mapping
+>>>>>>> v3.18
  *
  * Copied from efi_32.c to eliminate the duplicated code between EFI
  * 32/64 support code. --ying 2007-10-26
@@ -50,6 +55,7 @@
 #include <asm/tlbflush.h>
 #include <asm/x86_init.h>
 #include <asm/rtc.h>
+<<<<<<< HEAD
 
 #define EFI_DEBUG	1
 
@@ -59,12 +65,18 @@
 	EFI_GUID(0x4424ac57, 0xbe4b, 0x47dd, 0x9e, 0x97, 0xed, 0x50, 0xf0, 0x9f, 0x92, 0xa9)
 
 static efi_char16_t efi_dummy_name[6] = { 'D', 'U', 'M', 'M', 'Y', 0 };
+=======
+#include <asm/uv/uv.h>
+
+#define EFI_DEBUG
+>>>>>>> v3.18
 
 struct efi_memory_map memmap;
 
 static struct efi efi_phys __initdata;
 static efi_system_table_t efi_systab __initdata;
 
+<<<<<<< HEAD
 static __initdata efi_config_table_type_t arch_tables[] = {
 #ifdef CONFIG_X86_UV
 	{UV_SYSTEM_TABLE_GUID, "UVsystab", &efi.uv_systab},
@@ -92,6 +104,18 @@ early_param("noefi", setup_noefi);
 int add_efi_memmap;
 EXPORT_SYMBOL(add_efi_memmap);
 
+=======
+static efi_config_table_type_t arch_tables[] __initdata = {
+#ifdef CONFIG_X86_UV
+	{UV_SYSTEM_TABLE_GUID, "UVsystab", &efi.uv_systab},
+#endif
+	{NULL_GUID, NULL, NULL},
+};
+
+u64 efi_setup;		/* efi setup_data physical address */
+
+static int add_efi_memmap __initdata;
+>>>>>>> v3.18
 static int __init setup_add_efi_memmap(char *arg)
 {
 	add_efi_memmap = 1;
@@ -99,6 +123,7 @@ static int __init setup_add_efi_memmap(char *arg)
 }
 early_param("add_efi_memmap", setup_add_efi_memmap);
 
+<<<<<<< HEAD
 static bool efi_no_storage_paranoia;
 
 static int __init setup_storage_paranoia(char *arg)
@@ -235,6 +260,8 @@ static efi_status_t virt_efi_query_capsule_caps(efi_capsule_header_t **capsules,
 			      reset_type);
 }
 
+=======
+>>>>>>> v3.18
 static efi_status_t __init phys_efi_set_virtual_address_map(
 	unsigned long memory_map_size,
 	unsigned long descriptor_size,
@@ -242,6 +269,7 @@ static efi_status_t __init phys_efi_set_virtual_address_map(
 	efi_memory_desc_t *virtual_map)
 {
 	efi_status_t status;
+<<<<<<< HEAD
 	unsigned long flags;
 
 	efi_call_phys_prelog();
@@ -310,6 +338,18 @@ int efi_set_rtc_mmss(unsigned long nowtime)
 }
 
 unsigned long efi_get_time(void)
+=======
+
+	efi_call_phys_prolog();
+	status = efi_call_phys(efi_phys.set_virtual_address_map,
+			       memory_map_size, descriptor_size,
+			       descriptor_version, virtual_map);
+	efi_call_phys_epilog();
+	return status;
+}
+
+void efi_get_time(struct timespec *now)
+>>>>>>> v3.18
 {
 	efi_status_t status;
 	efi_time_t eft;
@@ -319,8 +359,14 @@ unsigned long efi_get_time(void)
 	if (status != EFI_SUCCESS)
 		pr_err("Oops: efitime: can't read time!\n");
 
+<<<<<<< HEAD
 	return mktime(eft.year, eft.month, eft.day, eft.hour,
 		      eft.minute, eft.second);
+=======
+	now->tv_sec = mktime(eft.year, eft.month, eft.day, eft.hour,
+			     eft.minute, eft.second);
+	now->tv_nsec = 0;
+>>>>>>> v3.18
 }
 
 /*
@@ -378,6 +424,12 @@ int __init efi_memblock_x86_reserve_range(void)
 	struct efi_info *e = &boot_params.efi_info;
 	unsigned long pmap;
 
+<<<<<<< HEAD
+=======
+	if (efi_enabled(EFI_PARAVIRT))
+		return 0;
+
+>>>>>>> v3.18
 #ifdef CONFIG_X86_32
 	/* Can't handle data above 4GB at this time */
 	if (e->efi_memmap_hi) {
@@ -401,9 +453,15 @@ int __init efi_memblock_x86_reserve_range(void)
 	return 0;
 }
 
+<<<<<<< HEAD
 #if EFI_DEBUG
 static void __init print_efi_memmap(void)
 {
+=======
+static void __init print_efi_memmap(void)
+{
+#ifdef EFI_DEBUG
+>>>>>>> v3.18
 	efi_memory_desc_t *md;
 	void *p;
 	int i;
@@ -411,6 +469,7 @@ static void __init print_efi_memmap(void)
 	for (p = memmap.map, i = 0;
 	     p < memmap.map_end;
 	     p += memmap.desc_size, i++) {
+<<<<<<< HEAD
 		md = p;
 		pr_info("mem%02u: type=%u, attr=0x%llx, "
 			"range=[0x%016llx-0x%016llx) (%lluMB)\n",
@@ -451,17 +510,34 @@ void __init efi_reserve_boot_services(void)
 		} else
 			memblock_reserve(start, size);
 	}
+=======
+		char buf[64];
+
+		md = p;
+		pr_info("mem%02u: %s range=[0x%016llx-0x%016llx) (%lluMB)\n",
+			i, efi_md_typeattr_format(buf, sizeof(buf), md),
+			md->phys_addr,
+			md->phys_addr + (md->num_pages << EFI_PAGE_SHIFT),
+			(md->num_pages >> (20 - EFI_PAGE_SHIFT)));
+	}
+#endif  /*  EFI_DEBUG  */
+>>>>>>> v3.18
 }
 
 void __init efi_unmap_memmap(void)
 {
 	clear_bit(EFI_MEMMAP, &efi.flags);
 	if (memmap.map) {
+<<<<<<< HEAD
 		early_iounmap(memmap.map, memmap.nr_map * memmap.desc_size);
+=======
+		early_memunmap(memmap.map, memmap.nr_map * memmap.desc_size);
+>>>>>>> v3.18
 		memmap.map = NULL;
 	}
 }
 
+<<<<<<< HEAD
 void __init efi_free_boot_services(void)
 {
 	void *p;
@@ -488,22 +564,47 @@ void __init efi_free_boot_services(void)
 	efi_unmap_memmap();
 }
 
+=======
+>>>>>>> v3.18
 static int __init efi_systab_init(void *phys)
 {
 	if (efi_enabled(EFI_64BIT)) {
 		efi_system_table_64_t *systab64;
+<<<<<<< HEAD
 		u64 tmp = 0;
 
 		systab64 = early_ioremap((unsigned long)phys,
 					 sizeof(*systab64));
 		if (systab64 == NULL) {
 			pr_err("Couldn't map the system table!\n");
+=======
+		struct efi_setup_data *data = NULL;
+		u64 tmp = 0;
+
+		if (efi_setup) {
+			data = early_memremap(efi_setup, sizeof(*data));
+			if (!data)
+				return -ENOMEM;
+		}
+		systab64 = early_memremap((unsigned long)phys,
+					 sizeof(*systab64));
+		if (systab64 == NULL) {
+			pr_err("Couldn't map the system table!\n");
+			if (data)
+				early_memunmap(data, sizeof(*data));
+>>>>>>> v3.18
 			return -ENOMEM;
 		}
 
 		efi_systab.hdr = systab64->hdr;
+<<<<<<< HEAD
 		efi_systab.fw_vendor = systab64->fw_vendor;
 		tmp |= systab64->fw_vendor;
+=======
+		efi_systab.fw_vendor = data ? (unsigned long)data->fw_vendor :
+					      systab64->fw_vendor;
+		tmp |= data ? data->fw_vendor : systab64->fw_vendor;
+>>>>>>> v3.18
 		efi_systab.fw_revision = systab64->fw_revision;
 		efi_systab.con_in_handle = systab64->con_in_handle;
 		tmp |= systab64->con_in_handle;
@@ -517,6 +618,7 @@ static int __init efi_systab_init(void *phys)
 		tmp |= systab64->stderr_handle;
 		efi_systab.stderr = systab64->stderr;
 		tmp |= systab64->stderr;
+<<<<<<< HEAD
 		efi_systab.runtime = (void *)(unsigned long)systab64->runtime;
 		tmp |= systab64->runtime;
 		efi_systab.boottime = (void *)(unsigned long)systab64->boottime;
@@ -526,6 +628,22 @@ static int __init efi_systab_init(void *phys)
 		tmp |= systab64->tables;
 
 		early_iounmap(systab64, sizeof(*systab64));
+=======
+		efi_systab.runtime = data ?
+				     (void *)(unsigned long)data->runtime :
+				     (void *)(unsigned long)systab64->runtime;
+		tmp |= data ? data->runtime : systab64->runtime;
+		efi_systab.boottime = (void *)(unsigned long)systab64->boottime;
+		tmp |= systab64->boottime;
+		efi_systab.nr_tables = systab64->nr_tables;
+		efi_systab.tables = data ? (unsigned long)data->tables :
+					   systab64->tables;
+		tmp |= data ? data->tables : systab64->tables;
+
+		early_memunmap(systab64, sizeof(*systab64));
+		if (data)
+			early_memunmap(data, sizeof(*data));
+>>>>>>> v3.18
 #ifdef CONFIG_X86_32
 		if (tmp >> 32) {
 			pr_err("EFI data located above 4GB, disabling EFI.\n");
@@ -535,7 +653,11 @@ static int __init efi_systab_init(void *phys)
 	} else {
 		efi_system_table_32_t *systab32;
 
+<<<<<<< HEAD
 		systab32 = early_ioremap((unsigned long)phys,
+=======
+		systab32 = early_memremap((unsigned long)phys,
+>>>>>>> v3.18
 					 sizeof(*systab32));
 		if (systab32 == NULL) {
 			pr_err("Couldn't map the system table!\n");
@@ -556,7 +678,11 @@ static int __init efi_systab_init(void *phys)
 		efi_systab.nr_tables = systab32->nr_tables;
 		efi_systab.tables = systab32->tables;
 
+<<<<<<< HEAD
 		early_iounmap(systab32, sizeof(*systab32));
+=======
+		early_memunmap(systab32, sizeof(*systab32));
+>>>>>>> v3.18
 	}
 
 	efi.systab = &efi_systab;
@@ -569,6 +695,7 @@ static int __init efi_systab_init(void *phys)
 		return -EINVAL;
 	}
 	if ((efi.systab->hdr.revision >> 16) == 0)
+<<<<<<< HEAD
 		pr_err("Warning: System table version "
 		       "%d.%02d, expected 1.00 or greater!\n",
 		       efi.systab->hdr.revision >> 16,
@@ -589,10 +716,52 @@ static int __init efi_runtime_init(void)
 	 */
 	runtime = early_ioremap((unsigned long)efi.systab->runtime,
 				sizeof(efi_runtime_services_t));
+=======
+		pr_err("Warning: System table version %d.%02d, expected 1.00 or greater!\n",
+		       efi.systab->hdr.revision >> 16,
+		       efi.systab->hdr.revision & 0xffff);
+
+	set_bit(EFI_SYSTEM_TABLES, &efi.flags);
+
+	return 0;
+}
+
+static int __init efi_runtime_init32(void)
+{
+	efi_runtime_services_32_t *runtime;
+
+	runtime = early_memremap((unsigned long)efi.systab->runtime,
+			sizeof(efi_runtime_services_32_t));
 	if (!runtime) {
 		pr_err("Could not map the runtime service table!\n");
 		return -ENOMEM;
 	}
+
+	/*
+	 * We will only need *early* access to the SetVirtualAddressMap
+	 * EFI runtime service. All other runtime services will be called
+	 * via the virtual mapping.
+	 */
+	efi_phys.set_virtual_address_map =
+			(efi_set_virtual_address_map_t *)
+			(unsigned long)runtime->set_virtual_address_map;
+	early_memunmap(runtime, sizeof(efi_runtime_services_32_t));
+
+	return 0;
+}
+
+static int __init efi_runtime_init64(void)
+{
+	efi_runtime_services_64_t *runtime;
+
+	runtime = early_memremap((unsigned long)efi.systab->runtime,
+			sizeof(efi_runtime_services_64_t));
+>>>>>>> v3.18
+	if (!runtime) {
+		pr_err("Could not map the runtime service table!\n");
+		return -ENOMEM;
+	}
+<<<<<<< HEAD
 	/*
 	 * We will only need *early* access to the following
 	 * two EFI runtime services before set_virtual_address_map
@@ -608,14 +777,67 @@ static int __init efi_runtime_init(void)
 	 */
 	efi.get_time = phys_efi_get_time;
 	early_iounmap(runtime, sizeof(efi_runtime_services_t));
+=======
+
+	/*
+	 * We will only need *early* access to the SetVirtualAddressMap
+	 * EFI runtime service. All other runtime services will be called
+	 * via the virtual mapping.
+	 */
+	efi_phys.set_virtual_address_map =
+			(efi_set_virtual_address_map_t *)
+			(unsigned long)runtime->set_virtual_address_map;
+	early_memunmap(runtime, sizeof(efi_runtime_services_64_t));
+
+	return 0;
+}
+
+static int __init efi_runtime_init(void)
+{
+	int rv;
+
+	/*
+	 * Check out the runtime services table. We need to map
+	 * the runtime services table so that we can grab the physical
+	 * address of several of the EFI runtime functions, needed to
+	 * set the firmware into virtual mode.
+	 *
+	 * When EFI_PARAVIRT is in force then we could not map runtime
+	 * service memory region because we do not have direct access to it.
+	 * However, runtime services are available through proxy functions
+	 * (e.g. in case of Xen dom0 EFI implementation they call special
+	 * hypercall which executes relevant EFI functions) and that is why
+	 * they are always enabled.
+	 */
+
+	if (!efi_enabled(EFI_PARAVIRT)) {
+		if (efi_enabled(EFI_64BIT))
+			rv = efi_runtime_init64();
+		else
+			rv = efi_runtime_init32();
+
+		if (rv)
+			return rv;
+	}
+
+	set_bit(EFI_RUNTIME_SERVICES, &efi.flags);
+>>>>>>> v3.18
 
 	return 0;
 }
 
 static int __init efi_memmap_init(void)
 {
+<<<<<<< HEAD
 	/* Map the EFI memory map */
 	memmap.map = early_ioremap((unsigned long)memmap.phys_map,
+=======
+	if (efi_enabled(EFI_PARAVIRT))
+		return 0;
+
+	/* Map the EFI memory map */
+	memmap.map = early_memremap((unsigned long)memmap.phys_map,
+>>>>>>> v3.18
 				   memmap.nr_map * memmap.desc_size);
 	if (memmap.map == NULL) {
 		pr_err("Could not map the memory map!\n");
@@ -626,6 +848,11 @@ static int __init efi_memmap_init(void)
 	if (add_efi_memmap)
 		do_add_efi_memmap();
 
+<<<<<<< HEAD
+=======
+	set_bit(EFI_MEMMAP, &efi.flags);
+
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -652,34 +879,57 @@ void __init efi_init(void)
 	if (efi_systab_init(efi_phys.systab))
 		return;
 
+<<<<<<< HEAD
 	set_bit(EFI_SYSTEM_TABLES, &efi.flags);
+=======
+	efi.config_table = (unsigned long)efi.systab->tables;
+	efi.fw_vendor	 = (unsigned long)efi.systab->fw_vendor;
+	efi.runtime	 = (unsigned long)efi.systab->runtime;
+>>>>>>> v3.18
 
 	/*
 	 * Show what we know for posterity
 	 */
+<<<<<<< HEAD
 	c16 = tmp = early_ioremap(efi.systab->fw_vendor, 2);
+=======
+	c16 = tmp = early_memremap(efi.systab->fw_vendor, 2);
+>>>>>>> v3.18
 	if (c16) {
 		for (i = 0; i < sizeof(vendor) - 1 && *c16; ++i)
 			vendor[i] = *c16++;
 		vendor[i] = '\0';
 	} else
 		pr_err("Could not map the firmware vendor!\n");
+<<<<<<< HEAD
 	early_iounmap(tmp, 2);
+=======
+	early_memunmap(tmp, 2);
+>>>>>>> v3.18
 
 	pr_info("EFI v%u.%.02u by %s\n",
 		efi.systab->hdr.revision >> 16,
 		efi.systab->hdr.revision & 0xffff, vendor);
 
+<<<<<<< HEAD
 	if (efi_config_init(arch_tables))
 		return;
 
 	set_bit(EFI_CONFIG_TABLES, &efi.flags);
+=======
+	if (efi_reuse_config(efi.systab->tables, efi.systab->nr_tables))
+		return;
+
+	if (efi_config_init(arch_tables))
+		return;
+>>>>>>> v3.18
 
 	/*
 	 * Note: We currently don't support runtime services on an EFI
 	 * that doesn't match the kernel 32/64-bit mode.
 	 */
 
+<<<<<<< HEAD
 	if (!efi_is_native())
 		pr_info("No EFI runtime due to 32/64-bit mismatch with kernel\n");
 	else {
@@ -696,6 +946,18 @@ void __init efi_init(void)
 #if EFI_DEBUG
 	print_efi_memmap();
 #endif
+=======
+	if (!efi_runtime_supported())
+		pr_info("No EFI runtime due to 32/64-bit mismatch with kernel\n");
+	else {
+		if (efi_runtime_disabled() || efi_runtime_init())
+			return;
+	}
+	if (efi_memmap_init())
+		return;
+
+	print_efi_memmap();
+>>>>>>> v3.18
 }
 
 void __init efi_late_init(void)
@@ -718,7 +980,11 @@ void __init efi_set_executable(efi_memory_desc_t *md, bool executable)
 		set_memory_nx(addr, npages);
 }
 
+<<<<<<< HEAD
 static void __init runtime_code_page_mkexec(void)
+=======
+void __init runtime_code_page_mkexec(void)
+>>>>>>> v3.18
 {
 	efi_memory_desc_t *md;
 	void *p;
@@ -734,7 +1000,11 @@ static void __init runtime_code_page_mkexec(void)
 	}
 }
 
+<<<<<<< HEAD
 void efi_memory_uc(u64 addr, unsigned long size)
+=======
+void __init efi_memory_uc(u64 addr, unsigned long size)
+>>>>>>> v3.18
 {
 	unsigned long page_shift = 1UL << EFI_PAGE_SHIFT;
 	u64 npages;
@@ -744,6 +1014,7 @@ void efi_memory_uc(u64 addr, unsigned long size)
 	set_memory_uc(addr, npages);
 }
 
+<<<<<<< HEAD
 /*
  * This function will switch the EFI runtime services to virtual mode.
  * Essentially, look through the EFI memmap and map every region that
@@ -774,6 +1045,40 @@ void __init efi_enter_virtual_mode(void)
 	}
 
 	/* Merge contiguous regions of the same type and attribute */
+=======
+void __init old_map_region(efi_memory_desc_t *md)
+{
+	u64 start_pfn, end_pfn, end;
+	unsigned long size;
+	void *va;
+
+	start_pfn = PFN_DOWN(md->phys_addr);
+	size	  = md->num_pages << PAGE_SHIFT;
+	end	  = md->phys_addr + size;
+	end_pfn   = PFN_UP(end);
+
+	if (pfn_range_is_mapped(start_pfn, end_pfn)) {
+		va = __va(md->phys_addr);
+
+		if (!(md->attribute & EFI_MEMORY_WB))
+			efi_memory_uc((u64)(unsigned long)va, size);
+	} else
+		va = efi_ioremap(md->phys_addr, size,
+				 md->type, md->attribute);
+
+	md->virt_addr = (u64) (unsigned long) va;
+	if (!va)
+		pr_err("ioremap of 0x%llX failed!\n",
+		       (unsigned long long)md->phys_addr);
+}
+
+/* Merge contiguous regions of the same type and attribute */
+static void __init efi_merge_regions(void)
+{
+	void *p;
+	efi_memory_desc_t *md, *prev_md = NULL;
+
+>>>>>>> v3.18
 	for (p = memmap.map; p < memmap.map_end; p += memmap.desc_size) {
 		u64 prev_size;
 		md = p;
@@ -799,6 +1104,90 @@ void __init efi_enter_virtual_mode(void)
 		}
 		prev_md = md;
 	}
+<<<<<<< HEAD
+=======
+}
+
+static void __init get_systab_virt_addr(efi_memory_desc_t *md)
+{
+	unsigned long size;
+	u64 end, systab;
+
+	size = md->num_pages << EFI_PAGE_SHIFT;
+	end = md->phys_addr + size;
+	systab = (u64)(unsigned long)efi_phys.systab;
+	if (md->phys_addr <= systab && systab < end) {
+		systab += md->virt_addr - md->phys_addr;
+		efi.systab = (efi_system_table_t *)(unsigned long)systab;
+	}
+}
+
+static void __init save_runtime_map(void)
+{
+#ifdef CONFIG_KEXEC
+	efi_memory_desc_t *md;
+	void *tmp, *p, *q = NULL;
+	int count = 0;
+
+	if (efi_enabled(EFI_OLD_MEMMAP))
+		return;
+
+	for (p = memmap.map; p < memmap.map_end; p += memmap.desc_size) {
+		md = p;
+
+		if (!(md->attribute & EFI_MEMORY_RUNTIME) ||
+		    (md->type == EFI_BOOT_SERVICES_CODE) ||
+		    (md->type == EFI_BOOT_SERVICES_DATA))
+			continue;
+		tmp = krealloc(q, (count + 1) * memmap.desc_size, GFP_KERNEL);
+		if (!tmp)
+			goto out;
+		q = tmp;
+
+		memcpy(q + count * memmap.desc_size, md, memmap.desc_size);
+		count++;
+	}
+
+	efi_runtime_map_setup(q, count, memmap.desc_size);
+	return;
+
+out:
+	kfree(q);
+	pr_err("Error saving runtime map, efi runtime on kexec non-functional!!\n");
+#endif
+}
+
+static void *realloc_pages(void *old_memmap, int old_shift)
+{
+	void *ret;
+
+	ret = (void *)__get_free_pages(GFP_KERNEL, old_shift + 1);
+	if (!ret)
+		goto out;
+
+	/*
+	 * A first-time allocation doesn't have anything to copy.
+	 */
+	if (!old_memmap)
+		return ret;
+
+	memcpy(ret, old_memmap, PAGE_SIZE << old_shift);
+
+out:
+	free_pages((unsigned long)old_memmap, old_shift);
+	return ret;
+}
+
+/*
+ * Map the efi memory ranges of the runtime services and update new_mmap with
+ * virtual addresses.
+ */
+static void * __init efi_map_regions(int *count, int *pg_shift)
+{
+	void *p, *new_memmap = NULL;
+	unsigned long left = 0;
+	efi_memory_desc_t *md;
+>>>>>>> v3.18
 
 	for (p = memmap.map; p < memmap.map_end; p += memmap.desc_size) {
 		md = p;
@@ -810,6 +1199,7 @@ void __init efi_enter_virtual_mode(void)
 				continue;
 		}
 
+<<<<<<< HEAD
 		size = md->num_pages << EFI_PAGE_SHIFT;
 		end = md->phys_addr + size;
 
@@ -856,6 +1246,152 @@ void __init efi_enter_virtual_mode(void)
 	if (status != EFI_SUCCESS) {
 		pr_alert("Unable to switch EFI into virtual mode "
 			 "(status=%lx)!\n", status);
+=======
+		efi_map_region(md);
+		get_systab_virt_addr(md);
+
+		if (left < memmap.desc_size) {
+			new_memmap = realloc_pages(new_memmap, *pg_shift);
+			if (!new_memmap)
+				return NULL;
+
+			left += PAGE_SIZE << *pg_shift;
+			(*pg_shift)++;
+		}
+
+		memcpy(new_memmap + (*count * memmap.desc_size), md,
+		       memmap.desc_size);
+
+		left -= memmap.desc_size;
+		(*count)++;
+	}
+
+	return new_memmap;
+}
+
+static void __init kexec_enter_virtual_mode(void)
+{
+#ifdef CONFIG_KEXEC
+	efi_memory_desc_t *md;
+	void *p;
+
+	efi.systab = NULL;
+
+	/*
+	 * We don't do virtual mode, since we don't do runtime services, on
+	 * non-native EFI
+	 */
+	if (!efi_is_native()) {
+		efi_unmap_memmap();
+		clear_bit(EFI_RUNTIME_SERVICES, &efi.flags);
+		return;
+	}
+
+	/*
+	* Map efi regions which were passed via setup_data. The virt_addr is a
+	* fixed addr which was used in first kernel of a kexec boot.
+	*/
+	for (p = memmap.map; p < memmap.map_end; p += memmap.desc_size) {
+		md = p;
+		efi_map_region_fixed(md); /* FIXME: add error handling */
+		get_systab_virt_addr(md);
+	}
+
+	save_runtime_map();
+
+	BUG_ON(!efi.systab);
+
+	efi_sync_low_kernel_mappings();
+
+	/*
+	 * Now that EFI is in virtual mode, update the function
+	 * pointers in the runtime service table to the new virtual addresses.
+	 *
+	 * Call EFI services through wrapper functions.
+	 */
+	efi.runtime_version = efi_systab.hdr.revision;
+
+	efi_native_runtime_setup();
+
+	efi.set_virtual_address_map = NULL;
+
+	if (efi_enabled(EFI_OLD_MEMMAP) && (__supported_pte_mask & _PAGE_NX))
+		runtime_code_page_mkexec();
+
+	/* clean DUMMY object */
+	efi_delete_dummy_variable();
+#endif
+}
+
+/*
+ * This function will switch the EFI runtime services to virtual mode.
+ * Essentially, we look through the EFI memmap and map every region that
+ * has the runtime attribute bit set in its memory descriptor into the
+ * ->trampoline_pgd page table using a top-down VA allocation scheme.
+ *
+ * The old method which used to update that memory descriptor with the
+ * virtual address obtained from ioremap() is still supported when the
+ * kernel is booted with efi=old_map on its command line. Same old
+ * method enabled the runtime services to be called without having to
+ * thunk back into physical mode for every invocation.
+ *
+ * The new method does a pagetable switch in a preemption-safe manner
+ * so that we're in a different address space when calling a runtime
+ * function. For function arguments passing we do copy the PGDs of the
+ * kernel page table into ->trampoline_pgd prior to each call.
+ *
+ * Specially for kexec boot, efi runtime maps in previous kernel should
+ * be passed in via setup_data. In that case runtime ranges will be mapped
+ * to the same virtual addresses as the first kernel, see
+ * kexec_enter_virtual_mode().
+ */
+static void __init __efi_enter_virtual_mode(void)
+{
+	int count = 0, pg_shift = 0;
+	void *new_memmap = NULL;
+	efi_status_t status;
+
+	efi.systab = NULL;
+
+	efi_merge_regions();
+	new_memmap = efi_map_regions(&count, &pg_shift);
+	if (!new_memmap) {
+		pr_err("Error reallocating memory, EFI runtime non-functional!\n");
+		clear_bit(EFI_RUNTIME_SERVICES, &efi.flags);
+		return;
+	}
+
+	save_runtime_map();
+
+	BUG_ON(!efi.systab);
+
+	if (efi_setup_page_tables(__pa(new_memmap), 1 << pg_shift)) {
+		clear_bit(EFI_RUNTIME_SERVICES, &efi.flags);
+		return;
+	}
+
+	efi_sync_low_kernel_mappings();
+	efi_dump_pagetable();
+
+	if (efi_is_native()) {
+		status = phys_efi_set_virtual_address_map(
+				memmap.desc_size * count,
+				memmap.desc_size,
+				memmap.desc_version,
+				(efi_memory_desc_t *)__pa(new_memmap));
+	} else {
+		status = efi_thunk_set_virtual_address_map(
+				efi_phys.set_virtual_address_map,
+				memmap.desc_size * count,
+				memmap.desc_size,
+				memmap.desc_version,
+				(efi_memory_desc_t *)__pa(new_memmap));
+	}
+
+	if (status != EFI_SUCCESS) {
+		pr_alert("Unable to switch EFI into virtual mode (status=%lx)!\n",
+			 status);
+>>>>>>> v3.18
 		panic("EFI call to SetVirtualAddressMap() failed!");
 	}
 
@@ -866,6 +1402,7 @@ void __init efi_enter_virtual_mode(void)
 	 * Call EFI services through wrapper functions.
 	 */
 	efi.runtime_version = efi_systab.hdr.revision;
+<<<<<<< HEAD
 	efi.get_time = virt_efi_get_time;
 	efi.set_time = virt_efi_set_time;
 	efi.get_wakeup_time = virt_efi_get_wakeup_time;
@@ -890,6 +1427,59 @@ void __init efi_enter_virtual_mode(void)
 			 EFI_VARIABLE_BOOTSERVICE_ACCESS |
 			 EFI_VARIABLE_RUNTIME_ACCESS,
 			 0, NULL);
+=======
+
+	if (efi_is_native())
+		efi_native_runtime_setup();
+	else
+		efi_thunk_runtime_setup();
+
+	efi.set_virtual_address_map = NULL;
+
+	efi_runtime_mkexec();
+
+	/*
+	 * We mapped the descriptor array into the EFI pagetable above but we're
+	 * not unmapping it here. Here's why:
+	 *
+	 * We're copying select PGDs from the kernel page table to the EFI page
+	 * table and when we do so and make changes to those PGDs like unmapping
+	 * stuff from them, those changes appear in the kernel page table and we
+	 * go boom.
+	 *
+	 * From setup_real_mode():
+	 *
+	 * ...
+	 * trampoline_pgd[0] = init_level4_pgt[pgd_index(__PAGE_OFFSET)].pgd;
+	 *
+	 * In this particular case, our allocation is in PGD 0 of the EFI page
+	 * table but we've copied that PGD from PGD[272] of the EFI page table:
+	 *
+	 *	pgd_index(__PAGE_OFFSET = 0xffff880000000000) = 272
+	 *
+	 * where the direct memory mapping in kernel space is.
+	 *
+	 * new_memmap's VA comes from that direct mapping and thus clearing it,
+	 * it would get cleared in the kernel page table too.
+	 *
+	 * efi_cleanup_page_tables(__pa(new_memmap), 1 << pg_shift);
+	 */
+	free_pages((unsigned long)new_memmap, pg_shift);
+
+	/* clean DUMMY object */
+	efi_delete_dummy_variable();
+}
+
+void __init efi_enter_virtual_mode(void)
+{
+	if (efi_enabled(EFI_PARAVIRT))
+		return;
+
+	if (efi_setup)
+		kexec_enter_virtual_mode();
+	else
+		__efi_enter_virtual_mode();
+>>>>>>> v3.18
 }
 
 /*
@@ -918,6 +1508,12 @@ u64 efi_mem_attributes(unsigned long phys_addr)
 	efi_memory_desc_t *md;
 	void *p;
 
+<<<<<<< HEAD
+=======
+	if (!efi_enabled(EFI_MEMMAP))
+		return 0;
+
+>>>>>>> v3.18
 	for (p = memmap.map; p < memmap.map_end; p += memmap.desc_size) {
 		md = p;
 		if ((md->phys_addr <= phys_addr) &&
@@ -928,6 +1524,7 @@ u64 efi_mem_attributes(unsigned long phys_addr)
 	return 0;
 }
 
+<<<<<<< HEAD
 /*
  * Some firmware has serious problems when using more than 50% of the EFI
  * variable store, i.e. it triggers bugs that can brick machines. Ensure that
@@ -1009,3 +1606,13 @@ efi_status_t efi_query_variable_store(u32 attributes, unsigned long size)
 	return EFI_SUCCESS;
 }
 EXPORT_SYMBOL_GPL(efi_query_variable_store);
+=======
+static int __init arch_parse_efi_cmdline(char *str)
+{
+	if (parse_option_str(str, "old_map"))
+		set_bit(EFI_OLD_MEMMAP, &efi.flags);
+
+	return 0;
+}
+early_param("efi", arch_parse_efi_cmdline);
+>>>>>>> v3.18

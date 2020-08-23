@@ -123,6 +123,10 @@ find_ext4_extent_tail(struct ext4_extent_header *eh)
 struct ext4_ext_path {
 	ext4_fsblk_t			p_block;
 	__u16				p_depth;
+<<<<<<< HEAD
+=======
+	__u16				p_maxdepth;
+>>>>>>> v3.18
 	struct ext4_extent		*p_ext;
 	struct ext4_extent_idx		*p_idx;
 	struct ext4_extent_header	*p_hdr;
@@ -134,6 +138,7 @@ struct ext4_ext_path {
  */
 
 /*
+<<<<<<< HEAD
  * Maximum number of logical blocks in a file; ext4_extent's ee_block is
  * __le32.
  */
@@ -158,6 +163,26 @@ struct ext4_ext_path {
  */
 #define EXT_INIT_MAX_LEN	(1UL << 15)
 #define EXT_UNINIT_MAX_LEN	(EXT_INIT_MAX_LEN - 1)
+=======
+ * EXT_INIT_MAX_LEN is the maximum number of blocks we can have in an
+ * initialized extent. This is 2^15 and not (2^16 - 1), since we use the
+ * MSB of ee_len field in the extent datastructure to signify if this
+ * particular extent is an initialized extent or an unwritten (i.e.
+ * preallocated).
+ * EXT_UNWRITTEN_MAX_LEN is the maximum number of blocks we can have in an
+ * unwritten extent.
+ * If ee_len is <= 0x8000, it is an initialized extent. Otherwise, it is an
+ * unwritten one. In other words, if MSB of ee_len is set, it is an
+ * unwritten extent with only one special scenario when ee_len = 0x8000.
+ * In this case we can not have an unwritten extent of zero length and
+ * thus we make it as a special case of initialized extent with 0x8000 length.
+ * This way we get better extent-to-group alignment for initialized extents.
+ * Hence, the maximum number of blocks we can have in an *initialized*
+ * extent is 2^15 (32768) and in an *unwritten* extent is 2^15-1 (32767).
+ */
+#define EXT_INIT_MAX_LEN	(1UL << 15)
+#define EXT_UNWRITTEN_MAX_LEN	(EXT_INIT_MAX_LEN - 1)
+>>>>>>> v3.18
 
 
 #define EXT_FIRST_EXTENT(__hdr__) \
@@ -193,14 +218,24 @@ static inline unsigned short ext_depth(struct inode *inode)
 	return le16_to_cpu(ext_inode_hdr(inode)->eh_depth);
 }
 
+<<<<<<< HEAD
 static inline void ext4_ext_mark_uninitialized(struct ext4_extent *ext)
 {
 	/* We can not have an uninitialized extent of zero length! */
+=======
+static inline void ext4_ext_mark_unwritten(struct ext4_extent *ext)
+{
+	/* We can not have an unwritten extent of zero length! */
+>>>>>>> v3.18
 	BUG_ON((le16_to_cpu(ext->ee_len) & ~EXT_INIT_MAX_LEN) == 0);
 	ext->ee_len |= cpu_to_le16(EXT_INIT_MAX_LEN);
 }
 
+<<<<<<< HEAD
 static inline int ext4_ext_is_uninitialized(struct ext4_extent *ext)
+=======
+static inline int ext4_ext_is_unwritten(struct ext4_extent *ext)
+>>>>>>> v3.18
 {
 	/* Extent with ee_len of 0x8000 is treated as an initialized extent */
 	return (le16_to_cpu(ext->ee_len) > EXT_INIT_MAX_LEN);

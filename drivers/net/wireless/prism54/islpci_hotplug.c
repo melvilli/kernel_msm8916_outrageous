@@ -12,8 +12,12 @@
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+ *  along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
  *
  */
 
@@ -40,7 +44,11 @@ module_param(init_pcitm, int, 0);
  * driver_data
  * If you have an update for this please contact prism54-devel@prism54.org
  * The latest list can be found at http://wireless.kernel.org/en/users/Drivers/p54 */
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(prism54_id_tbl) = {
+=======
+static const struct pci_device_id prism54_id_tbl[] = {
+>>>>>>> v3.18
 	/* Intersil PRISM Duette/Prism GT Wireless LAN adapter */
 	{
 	 0x1260, 0x3890,
@@ -199,7 +207,10 @@ prism54_probe(struct pci_dev *pdev, const struct pci_device_id *id)
       do_unregister_netdev:
 	unregister_netdev(ndev);
 	islpci_free_memory(priv);
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	free_netdev(ndev);
 	priv = NULL;
       do_pci_clear_mwi:
@@ -247,7 +258,10 @@ prism54_remove(struct pci_dev *pdev)
 	/* free the PCI memory and unmap the remapped page */
 	islpci_free_memory(priv);
 
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	free_netdev(ndev);
 	priv = NULL;
 

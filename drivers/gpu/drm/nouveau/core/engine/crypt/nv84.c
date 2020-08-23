@@ -25,7 +25,10 @@
 #include <core/client.h>
 #include <core/os.h>
 #include <core/enum.h>
+<<<<<<< HEAD
 #include <core/class.h>
+=======
+>>>>>>> v3.18
 #include <core/engctx.h>
 #include <core/gpuobj.h>
 
@@ -141,6 +144,7 @@ nv84_crypt_intr(struct nouveau_subdev *subdev)
 }
 
 static int
+<<<<<<< HEAD
 nv84_crypt_tlb_flush(struct nouveau_engine *engine)
 {
 	nv50_vm_flush_engine(&engine->base, 0x0a);
@@ -148,6 +152,8 @@ nv84_crypt_tlb_flush(struct nouveau_engine *engine)
 }
 
 static int
+=======
+>>>>>>> v3.18
 nv84_crypt_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	       struct nouveau_oclass *oclass, void *data, u32 size,
 	       struct nouveau_object **pobject)
@@ -165,7 +171,10 @@ nv84_crypt_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	nv_subdev(priv)->intr = nv84_crypt_intr;
 	nv_engine(priv)->cclass = &nv84_crypt_cclass;
 	nv_engine(priv)->sclass = nv84_crypt_sclass;
+<<<<<<< HEAD
 	nv_engine(priv)->tlb_flush = nv84_crypt_tlb_flush;
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

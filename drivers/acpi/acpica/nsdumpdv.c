@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -69,6 +73,10 @@ static acpi_status
 acpi_ns_dump_one_device(acpi_handle obj_handle,
 			u32 level, void *context, void **return_value)
 {
+<<<<<<< HEAD
+=======
+	struct acpi_buffer buffer;
+>>>>>>> v3.18
 	struct acpi_device_info *info;
 	acpi_status status;
 	u32 i;
@@ -78,15 +86,26 @@ acpi_ns_dump_one_device(acpi_handle obj_handle,
 	status =
 	    acpi_ns_dump_one_object(obj_handle, level, context, return_value);
 
+<<<<<<< HEAD
 	status = acpi_get_object_info(obj_handle, &info);
 	if (ACPI_SUCCESS(status)) {
+=======
+	buffer.length = ACPI_ALLOCATE_LOCAL_BUFFER;
+	status = acpi_get_object_info(obj_handle, &buffer);
+	if (ACPI_SUCCESS(status)) {
+		info = buffer.pointer;
+>>>>>>> v3.18
 		for (i = 0; i < level; i++) {
 			ACPI_DEBUG_PRINT_RAW((ACPI_DB_TABLES, " "));
 		}
 
 		ACPI_DEBUG_PRINT_RAW((ACPI_DB_TABLES,
 				      "    HID: %s, ADR: %8.8X%8.8X, Status: %X\n",
+<<<<<<< HEAD
 				      info->hardware_id.string,
+=======
+				      info->hardware_id.value,
+>>>>>>> v3.18
 				      ACPI_FORMAT_UINT64(info->address),
 				      info->current_status));
 		ACPI_FREE(info);

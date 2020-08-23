@@ -1,5 +1,6 @@
 config MICROBLAZE
 	def_bool y
+<<<<<<< HEAD
 	select HAVE_MEMBLOCK
 	select HAVE_MEMBLOCK_NODE_MAP
 	select HAVE_FUNCTION_TRACER
@@ -28,6 +29,40 @@ config MICROBLAZE
 	select GENERIC_IDLE_POLL_SETUP
 	select MODULES_USE_ELF_RELA
 	select CLONE_BACKWARDS3
+=======
+	select ARCH_MIGHT_HAVE_PC_PARPORT
+	select ARCH_WANT_IPC_PARSE_VERSION
+	select ARCH_WANT_OPTIONAL_GPIOLIB
+	select BUILDTIME_EXTABLE_SORT
+	select CLKSRC_OF
+	select CLONE_BACKWARDS3
+	select COMMON_CLK
+	select GENERIC_ATOMIC64
+	select GENERIC_CLOCKEVENTS
+	select GENERIC_CPU_DEVICES
+	select GENERIC_IDLE_POLL_SETUP
+	select GENERIC_IRQ_PROBE
+	select GENERIC_IRQ_SHOW
+	select GENERIC_PCI_IOMAP
+	select GENERIC_SCHED_CLOCK
+	select HAVE_ARCH_KGDB
+	select HAVE_DEBUG_KMEMLEAK
+	select HAVE_DMA_API_DEBUG
+	select HAVE_DMA_ATTRS
+	select HAVE_DYNAMIC_FTRACE
+	select HAVE_FTRACE_MCOUNT_RECORD
+	select HAVE_FUNCTION_GRAPH_TRACER
+	select HAVE_FUNCTION_TRACER
+	select HAVE_MEMBLOCK
+	select HAVE_MEMBLOCK_NODE_MAP
+	select HAVE_OPROFILE
+	select IRQ_DOMAIN
+	select MODULES_USE_ELF_RELA
+	select OF
+	select OF_EARLY_FLATTREE
+	select TRACING_SUPPORT
+	select VIRT_TO_BUS
+>>>>>>> v3.18
 
 config SWAP
 	def_bool n
@@ -69,7 +104,11 @@ source "init/Kconfig"
 
 source "kernel/Kconfig.freezer"
 
+<<<<<<< HEAD
 source "arch/microblaze/platform/Kconfig.platform"
+=======
+source "arch/microblaze/Kconfig.platform"
+>>>>>>> v3.18
 
 menu "Processor type and features"
 
@@ -81,11 +120,14 @@ config MMU
 	bool "MMU support"
 	default n
 
+<<<<<<< HEAD
 config NO_MMU
 	bool
 	depends on !MMU
 	default y
 
+=======
+>>>>>>> v3.18
 comment "Boot options"
 
 config CMDLINE_BOOL
@@ -128,7 +170,15 @@ config SECCOMP
 
 endmenu
 
+<<<<<<< HEAD
 menu "Advanced setup"
+=======
+menu "Kernel features"
+
+config NR_CPUS
+	int
+	default "1"
+>>>>>>> v3.18
 
 config ADVANCED_OPTIONS
 	bool "Prompt for advanced kernel configuration options"
@@ -249,6 +299,7 @@ config MICROBLAZE_64K_PAGES
 
 endchoice
 
+<<<<<<< HEAD
 config KERNEL_PAD
 	hex "Kernel PAD for unpacking" if ADVANCED_OPTIONS
 	default "0x80000" if MMU
@@ -257,6 +308,12 @@ endmenu
 
 source "mm/Kconfig"
 
+=======
+source "mm/Kconfig"
+
+endmenu
+
+>>>>>>> v3.18
 menu "Executable file formats"
 
 source "fs/Kconfig.binfmt"

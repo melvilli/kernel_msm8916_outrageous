@@ -83,7 +83,16 @@ enum ad5764_type {
 		BIT(IIO_CHAN_INFO_CALIBSCALE) |			\
 		BIT(IIO_CHAN_INFO_CALIBBIAS),			\
 	.info_mask_shared_by_type = BIT(IIO_CHAN_INFO_OFFSET),	\
+<<<<<<< HEAD
 	.scan_type = IIO_ST('u', (_bits), 16, 16 - (_bits))	\
+=======
+	.scan_type = {						\
+		.sign = 'u',					\
+		.realbits = (_bits),				\
+		.storagebits = 16,				\
+		.shift = 16 - (_bits),				\
+	},							\
+>>>>>>> v3.18
 }
 
 #define DECLARE_AD5764_CHANNELS(_name, _bits) \
@@ -217,7 +226,10 @@ static int ad5764_read_raw(struct iio_dev *indio_dev,
 	struct iio_chan_spec const *chan, int *val, int *val2, long info)
 {
 	struct ad5764_state *st = iio_priv(indio_dev);
+<<<<<<< HEAD
 	unsigned long scale_uv;
+=======
+>>>>>>> v3.18
 	unsigned int reg;
 	int vref;
 	int ret;
@@ -245,15 +257,25 @@ static int ad5764_read_raw(struct iio_dev *indio_dev,
 		*val = sign_extend32(*val, 5);
 		return IIO_VAL_INT;
 	case IIO_CHAN_INFO_SCALE:
+<<<<<<< HEAD
 		/* vout = 4 * vref + ((dac_code / 65535) - 0.5) */
+=======
+		/* vout = 4 * vref + ((dac_code / 65536) - 0.5) */
+>>>>>>> v3.18
 		vref = ad5764_get_channel_vref(st, chan->channel);
 		if (vref < 0)
 			return vref;
 
+<<<<<<< HEAD
 		scale_uv = (vref * 4 * 100) >> chan->scan_type.realbits;
 		*val = scale_uv / 100000;
 		*val2 = (scale_uv % 100000) * 10;
 		return IIO_VAL_INT_PLUS_MICRO;
+=======
+		*val = vref * 4 / 1000;
+		*val2 = chan->scan_type.realbits;
+		return IIO_VAL_FRACTIONAL_LOG2;
+>>>>>>> v3.18
 	case IIO_CHAN_INFO_OFFSET:
 		*val = -(1 << chan->scan_type.realbits) / 2;
 		return IIO_VAL_INT;
@@ -275,7 +297,11 @@ static int ad5764_probe(struct spi_device *spi)
 	struct ad5764_state *st;
 	int ret;
 
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*st));
+=======
+	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
+>>>>>>> v3.18
 	if (indio_dev == NULL) {
 		dev_err(&spi->dev, "Failed to allocate iio device\n");
 		return -ENOMEM;
@@ -298,12 +324,20 @@ static int ad5764_probe(struct spi_device *spi)
 		st->vref_reg[0].supply = "vrefAB";
 		st->vref_reg[1].supply = "vrefCD";
 
+<<<<<<< HEAD
 		ret = regulator_bulk_get(&st->spi->dev,
+=======
+		ret = devm_regulator_bulk_get(&st->spi->dev,
+>>>>>>> v3.18
 			ARRAY_SIZE(st->vref_reg), st->vref_reg);
 		if (ret) {
 			dev_err(&spi->dev, "Failed to request vref regulators: %d\n",
 				ret);
+<<<<<<< HEAD
 			goto error_free;
+=======
+			return ret;
+>>>>>>> v3.18
 		}
 
 		ret = regulator_bulk_enable(ARRAY_SIZE(st->vref_reg),
@@ -311,7 +345,11 @@ static int ad5764_probe(struct spi_device *spi)
 		if (ret) {
 			dev_err(&spi->dev, "Failed to enable vref regulators: %d\n",
 				ret);
+<<<<<<< HEAD
 			goto error_free_reg;
+=======
+			return ret;
+>>>>>>> v3.18
 		}
 	}
 
@@ -326,12 +364,15 @@ static int ad5764_probe(struct spi_device *spi)
 error_disable_reg:
 	if (st->chip_info->int_vref == 0)
 		regulator_bulk_disable(ARRAY_SIZE(st->vref_reg), st->vref_reg);
+<<<<<<< HEAD
 error_free_reg:
 	if (st->chip_info->int_vref == 0)
 		regulator_bulk_free(ARRAY_SIZE(st->vref_reg), st->vref_reg);
 error_free:
 	iio_device_free(indio_dev);
 
+=======
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -342,12 +383,17 @@ static int ad5764_remove(struct spi_device *spi)
 
 	iio_device_unregister(indio_dev);
 
+<<<<<<< HEAD
 	if (st->chip_info->int_vref == 0) {
 		regulator_bulk_disable(ARRAY_SIZE(st->vref_reg), st->vref_reg);
 		regulator_bulk_free(ARRAY_SIZE(st->vref_reg), st->vref_reg);
 	}
 
 	iio_device_free(indio_dev);
+=======
+	if (st->chip_info->int_vref == 0)
+		regulator_bulk_disable(ARRAY_SIZE(st->vref_reg), st->vref_reg);
+>>>>>>> v3.18
 
 	return 0;
 }

@@ -17,6 +17,12 @@
 
 #include "ocfs2.h"
 
+<<<<<<< HEAD
+=======
+/* Number of quota types we support */
+#define OCFS2_MAXQUOTAS 2
+
+>>>>>>> v3.18
 /*
  * In-memory structures
  */
@@ -28,6 +34,10 @@ struct ocfs2_dquot {
 	unsigned int dq_use_count;	/* Number of nodes having reference to this entry in global quota file */
 	s64 dq_origspace;	/* Last globally synced space usage */
 	s64 dq_originodes;	/* Last globally synced inode usage */
+<<<<<<< HEAD
+=======
+	struct llist_node list;	/* Member of list of dquots to drop */
+>>>>>>> v3.18
 };
 
 /* Description of one chunk to recover in memory */
@@ -38,7 +48,11 @@ struct ocfs2_recovery_chunk {
 };
 
 struct ocfs2_quota_recovery {
+<<<<<<< HEAD
 	struct list_head r_list[MAXQUOTAS];	/* List of chunks to recover */
+=======
+	struct list_head r_list[OCFS2_MAXQUOTAS];	/* List of chunks to recover */
+>>>>>>> v3.18
 };
 
 /* In-memory structure with quota header information */
@@ -110,6 +124,10 @@ int ocfs2_read_quota_phys_block(struct inode *inode, u64 p_block,
 int ocfs2_create_local_dquot(struct dquot *dquot);
 int ocfs2_local_release_dquot(handle_t *handle, struct dquot *dquot);
 int ocfs2_local_write_dquot(struct dquot *dquot);
+<<<<<<< HEAD
+=======
+void ocfs2_drop_dquot_refs(struct work_struct *work);
+>>>>>>> v3.18
 
 extern const struct dquot_operations ocfs2_quota_operations;
 extern struct quota_format_type ocfs2_quota_format;

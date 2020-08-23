@@ -572,7 +572,12 @@ static int tpci200_pci_probe(struct pci_dev *pdev,
 	/* Register the carrier in the industry pack bus driver */
 	tpci200->info->ipack_bus = ipack_bus_register(&pdev->dev,
 						      TPCI200_NB_SLOT,
+<<<<<<< HEAD
 						      &tpci200_bus_ops);
+=======
+						      &tpci200_bus_ops,
+						      THIS_MODULE);
+>>>>>>> v3.18
 	if (!tpci200->info->ipack_bus) {
 		dev_err(&pdev->dev,
 			"error registering the carrier on ipack driver\n");
@@ -618,7 +623,11 @@ static void tpci200_pci_remove(struct pci_dev *dev)
 	__tpci200_pci_remove(tpci200);
 }
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(tpci200_idtable) = {
+=======
+static const struct pci_device_id tpci200_idtable[] = {
+>>>>>>> v3.18
 	{ TPCI200_VENDOR_ID, TPCI200_DEVICE_ID, TPCI200_SUBVENDOR_ID,
 	  TPCI200_SUBDEVICE_ID },
 	{ 0, },

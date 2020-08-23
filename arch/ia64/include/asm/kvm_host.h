@@ -234,6 +234,7 @@ struct kvm_vm_data {
 #define KVM_REQ_PTC_G		32
 #define KVM_REQ_RESUME		33
 
+<<<<<<< HEAD
 #define KVM_HPAGE_GFN_SHIFT(x)	0
 #define KVM_NR_PAGE_SIZES	1
 #define KVM_PAGES_PER_HPAGE(x)	1
@@ -241,6 +242,8 @@ struct kvm_vm_data {
 struct kvm;
 struct kvm_vcpu;
 
+=======
+>>>>>>> v3.18
 struct kvm_mmio_req {
 	uint64_t addr;          /*  physical address		*/
 	uint64_t size;          /*  size in bytes		*/
@@ -480,7 +483,11 @@ struct kvm_arch {
 
 	struct list_head assigned_dev_head;
 	struct iommu_domain *iommu_domain;
+<<<<<<< HEAD
 	int iommu_flags;
+=======
+	bool iommu_noncoherent;
+>>>>>>> v3.18
 
 	unsigned long irq_sources_bitmap;
 	unsigned long irq_states[KVM_IOAPIC_NUM_PINS];
@@ -599,6 +606,21 @@ void kvm_sal_emul(struct kvm_vcpu *vcpu);
 struct kvm *kvm_arch_alloc_vm(void);
 void kvm_arch_free_vm(struct kvm *kvm);
 
+<<<<<<< HEAD
+=======
+static inline void kvm_arch_sync_events(struct kvm *kvm) {}
+static inline void kvm_arch_vcpu_put(struct kvm_vcpu *vcpu) {}
+static inline void kvm_arch_sched_in(struct kvm_vcpu *vcpu) {}
+static inline void kvm_arch_free_memslot(struct kvm *kvm,
+		struct kvm_memory_slot *free, struct kvm_memory_slot *dont) {}
+static inline void kvm_arch_memslots_updated(struct kvm *kvm) {}
+static inline void kvm_arch_commit_memory_region(struct kvm *kvm,
+		struct kvm_userspace_memory_region *mem,
+		const struct kvm_memory_slot *old,
+		enum kvm_mr_change change) {}
+static inline void kvm_arch_hardware_unsetup(void) {}
+
+>>>>>>> v3.18
 #endif /* __ASSEMBLY__*/
 
 #endif

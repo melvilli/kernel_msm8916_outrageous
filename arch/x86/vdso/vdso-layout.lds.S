@@ -1,12 +1,52 @@
+<<<<<<< HEAD
+=======
+#include <asm/vdso.h>
+
+>>>>>>> v3.18
 /*
  * Linker script for vDSO.  This is an ELF shared object prelinked to
  * its virtual address, and with only one read-only segment.
  * This script controls its layout.
  */
 
+<<<<<<< HEAD
 SECTIONS
 {
 	. = VDSO_PRELINK + SIZEOF_HEADERS;
+=======
+#if defined(BUILD_VDSO64)
+# define SHDR_SIZE 64
+#elif defined(BUILD_VDSO32) || defined(BUILD_VDSOX32)
+# define SHDR_SIZE 40
+#else
+# error unknown VDSO target
+#endif
+
+#define NUM_FAKE_SHDRS 13
+
+SECTIONS
+{
+	/*
+	 * User/kernel shared data is before the vDSO.  This may be a little
+	 * uglier than putting it after the vDSO, but it avoids issues with
+	 * non-allocatable things that dangle past the end of the PT_LOAD
+	 * segment.
+	 */
+
+	vvar_start = . - 2 * PAGE_SIZE;
+	vvar_page = vvar_start;
+
+	/* Place all vvars at the offsets in asm/vvar.h. */
+#define EMIT_VVAR(name, offset) vvar_ ## name = vvar_page + offset;
+#define __VVAR_KERNEL_LDS
+#include <asm/vvar.h>
+#undef __VVAR_KERNEL_LDS
+#undef EMIT_VVAR
+
+	hpet_page = vvar_start + PAGE_SIZE;
+
+	. = SIZEOF_HEADERS;
+>>>>>>> v3.18
 
 	.hash		: { *(.hash) }			:text
 	.gnu.hash	: { *(.gnu.hash) }
@@ -16,11 +56,40 @@ SECTIONS
 	.gnu.version_d	: { *(.gnu.version_d) }
 	.gnu.version_r	: { *(.gnu.version_r) }
 
+<<<<<<< HEAD
+=======
+	.dynamic	: { *(.dynamic) }		:text	:dynamic
+
+	.rodata		: {
+		*(.rodata*)
+		*(.data*)
+		*(.sdata*)
+		*(.got.plt) *(.got)
+		*(.gnu.linkonce.d.*)
+		*(.bss*)
+		*(.dynbss*)
+		*(.gnu.linkonce.b.*)
+
+		/*
+		 * Ideally this would live in a C file, but that won't
+		 * work cleanly for x32 until we start building the x32
+		 * C code using an x32 toolchain.
+		 */
+		VDSO_FAKE_SECTION_TABLE_START = .;
+		. = . + NUM_FAKE_SHDRS * SHDR_SIZE;
+		VDSO_FAKE_SECTION_TABLE_END = .;
+	}						:text
+
+	.fake_shstrtab	: { *(.fake_shstrtab) }		:text
+
+
+>>>>>>> v3.18
 	.note		: { *(.note.*) }		:text	:note
 
 	.eh_frame_hdr	: { *(.eh_frame_hdr) }		:text	:eh_frame_hdr
 	.eh_frame	: { KEEP (*(.eh_frame)) }	:text
 
+<<<<<<< HEAD
 	.dynamic	: { *(.dynamic) }		:text	:dynamic
 
 	.rodata		: { *(.rodata*) }		:text
@@ -44,6 +113,29 @@ SECTIONS
 	. = ALIGN(0x100);
 
 	.text		: { *(.text*) }			:text	=0x90909090
+=======
+
+	/*
+	 * Text is well-separated from actual data: there's plenty of
+	 * stuff that isn't used at runtime in between.
+	 */
+
+	.text		: { *(.text*) }			:text	=0x90909090,
+
+	/*
+	 * At the end so that eu-elflint stays happy when vdso2c strips
+	 * these.  A better implementation would avoid allocating space
+	 * for these.
+	 */
+	.altinstructions	: { *(.altinstructions) }	:text
+	.altinstr_replacement	: { *(.altinstr_replacement) }	:text
+
+	/DISCARD/ : {
+		*(.discard)
+		*(.discard.*)
+		*(__bug_table)
+	}
+>>>>>>> v3.18
 }
 
 /*

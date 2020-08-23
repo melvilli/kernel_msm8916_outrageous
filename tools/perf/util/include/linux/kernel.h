@@ -94,6 +94,7 @@ static inline int scnprintf(char * buf, size_t size, const char * fmt, ...)
 	return (i >= ssize) ? (ssize - 1) : i;
 }
 
+<<<<<<< HEAD
 static inline unsigned long
 simple_strtoul(const char *nptr, char **endptr, int base)
 {
@@ -121,6 +122,8 @@ int eprintf(int level,
 #define pr_debug3(fmt, ...) pr_debugN(3, pr_fmt(fmt), ##__VA_ARGS__)
 #define pr_debug4(fmt, ...) pr_debugN(4, pr_fmt(fmt), ##__VA_ARGS__)
 
+=======
+>>>>>>> v3.18
 /*
  * This looks more complex than it should be. But we need to
  * get the type for the ~ right in round_down (it needs to be

@@ -4,6 +4,15 @@
  * (git://github.com/deater/perf_event_tests)
  */
 
+<<<<<<< HEAD
+=======
+/*
+ * Powerpc needs __SANE_USERSPACE_TYPES__ before <linux/types.h> to select
+ * 'int-ll64.h' and avoid compile warnings when printing __u64 with %llu.
+ */
+#define __SANE_USERSPACE_TYPES__
+
+>>>>>>> v3.18
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -19,6 +28,10 @@
 #include "tests.h"
 #include "debug.h"
 #include "perf.h"
+<<<<<<< HEAD
+=======
+#include "cloexec.h"
+>>>>>>> v3.18
 
 static int fd1;
 static int fd2;
@@ -72,7 +85,12 @@ static int bp_event(void *fn, int setup_signal)
 	pe.exclude_kernel = 1;
 	pe.exclude_hv = 1;
 
+<<<<<<< HEAD
 	fd = sys_perf_event_open(&pe, 0, -1, -1, 0);
+=======
+	fd = sys_perf_event_open(&pe, 0, -1, -1,
+				 perf_event_open_cloexec_flag());
+>>>>>>> v3.18
 	if (fd < 0) {
 		pr_debug("failed opening event %llx\n", pe.config);
 		return TEST_FAIL;

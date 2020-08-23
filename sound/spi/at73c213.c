@@ -174,7 +174,11 @@ static int snd_at73c213_set_bitrate(struct snd_at73c213 *chip)
 		dac_rate_new = 8 * (ssc_rate / ssc_div);
 
 		status = clk_round_rate(chip->board->dac_clk, dac_rate_new);
+<<<<<<< HEAD
 		if (status < 0)
+=======
+		if (status <= 0)
+>>>>>>> v3.18
 			return status;
 
 		/* Ignore difference smaller than 256 Hz. */
@@ -927,8 +931,11 @@ static int snd_at73c213_dev_init(struct snd_card *card,
 	if (retval)
 		goto out_snd_dev;
 
+<<<<<<< HEAD
 	snd_card_set_dev(card, &spi->dev);
 
+=======
+>>>>>>> v3.18
 	goto out;
 
 out_snd_dev:
@@ -966,8 +973,13 @@ static int snd_at73c213_probe(struct spi_device *spi)
 
 	/* Allocate "card" using some unused identifiers. */
 	snprintf(id, sizeof id, "at73c213_%d", board->ssc_id);
+<<<<<<< HEAD
 	retval = snd_card_create(-1, id, THIS_MODULE,
 				 sizeof(struct snd_at73c213), &card);
+=======
+	retval = snd_card_new(&spi->dev, -1, id, THIS_MODULE,
+			      sizeof(struct snd_at73c213), &card);
+>>>>>>> v3.18
 	if (retval < 0)
 		goto out;
 
@@ -1070,7 +1082,10 @@ out:
 
 	ssc_free(chip->ssc);
 	snd_card_free(card);
+<<<<<<< HEAD
 	dev_set_drvdata(&spi->dev, NULL);
+=======
+>>>>>>> v3.18
 
 	return 0;
 }

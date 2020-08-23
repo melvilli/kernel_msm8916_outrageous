@@ -8,20 +8,34 @@
 
 #include <linux/module.h>
 #include <linux/dma-mapping.h>
+<<<<<<< HEAD
+=======
+#include <linux/clk/at91_pmc.h>
+>>>>>>> v3.18
 
 #include <asm/irq.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 #include <mach/at91sam9n12.h>
+<<<<<<< HEAD
 #include <mach/at91_pmc.h>
+=======
+>>>>>>> v3.18
 #include <mach/cpu.h>
 
 #include "board.h"
 #include "soc.h"
 #include "generic.h"
+<<<<<<< HEAD
 #include "clock.h"
 #include "sam9_smc.h"
 
+=======
+#include "sam9_smc.h"
+
+#if defined(CONFIG_OLD_CLK_AT91)
+#include "clock.h"
+>>>>>>> v3.18
 /* --------------------------------------------------------------------
  *  Clocks
  * -------------------------------------------------------------------- */
@@ -169,6 +183,10 @@ static struct clk_lookup periph_clocks_lookups[] = {
 	CLKDEV_CON_DEV_ID("t0_clk", "f8008000.timer", &tcb_clk),
 	CLKDEV_CON_DEV_ID("t0_clk", "f800c000.timer", &tcb_clk),
 	CLKDEV_CON_DEV_ID("mci_clk", "f0008000.mmc", &mmc_clk),
+<<<<<<< HEAD
+=======
+	CLKDEV_CON_DEV_ID(NULL, "f0010000.ssc", &ssc_clk),
+>>>>>>> v3.18
 	CLKDEV_CON_DEV_ID("dma_clk", "ffffec00.dma-controller", &dma_clk),
 	CLKDEV_CON_DEV_ID(NULL, "f8010000.i2c", &twi0_clk),
 	CLKDEV_CON_DEV_ID(NULL, "f8014000.i2c", &twi1_clk),
@@ -181,6 +199,10 @@ static struct clk_lookup periph_clocks_lookups[] = {
 	/* additional fake clock for macb_hclk */
 	CLKDEV_CON_DEV_ID("hclk", "500000.ohci", &uhp_clk),
 	CLKDEV_CON_DEV_ID("ohci_clk", "500000.ohci", &uhp_clk),
+<<<<<<< HEAD
+=======
+	CLKDEV_CON_DEV_ID(NULL, "f8034000.pwm", &pwm_clk),
+>>>>>>> v3.18
 };
 
 /*
@@ -213,6 +235,12 @@ static void __init at91sam9n12_register_clocks(void)
 			 ARRAY_SIZE(periph_clocks_lookups));
 
 }
+<<<<<<< HEAD
+=======
+#else
+#define at91sam9n12_register_clocks NULL
+#endif
+>>>>>>> v3.18
 
 /* --------------------------------------------------------------------
  *  AT91SAM9N12 processor initialization

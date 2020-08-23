@@ -8,12 +8,22 @@
  * published by the Free Software Foundation.
  */
 
+<<<<<<< HEAD
+=======
+#ifndef _AT91_GENERIC_H
+#define _AT91_GENERIC_H
+
+>>>>>>> v3.18
 #include <linux/clkdev.h>
 #include <linux/of.h>
 #include <linux/reboot.h>
 
  /* Map io */
 extern void __init at91_map_io(void);
+<<<<<<< HEAD
+=======
+extern void __init at91_alt_map_io(void);
+>>>>>>> v3.18
 extern void __init at91_init_sram(int bank, unsigned long base,
 				  unsigned int length);
 
@@ -37,6 +47,7 @@ extern int  __init at91_aic5_of_init(struct device_node *node,
 extern void __init at91_sysirq_mask_rtc(u32 rtc_base);
 extern void __init at91_sysirq_mask_rtt(u32 rtt_base);
 
+<<<<<<< HEAD
 
  /* Timer */
 extern void at91rm9200_ioremap_st(u32 addr);
@@ -47,10 +58,29 @@ extern void at91x40_timer_init(void);
 
  /* Clocks */
 #ifdef CONFIG_AT91_PMC_UNIT
+=======
+ /* Devices */
+extern void __init at91_register_devices(void);
+
+ /* Timer */
+extern void __init at91_init_time(void);
+extern void at91rm9200_ioremap_st(u32 addr);
+extern void at91rm9200_timer_init(void);
+extern void at91sam926x_ioremap_pit(u32 addr);
+extern void at91sam926x_pit_init(int irq);
+extern void at91x40_timer_init(void);
+
+ /* Clocks */
+#ifdef CONFIG_OLD_CLK_AT91
+>>>>>>> v3.18
 extern int __init at91_clock_init(unsigned long main_clock);
 extern int __init at91_dt_clock_init(void);
 #else
 static int inline at91_clock_init(unsigned long main_clock) { return 0; }
+<<<<<<< HEAD
+=======
+static int inline at91_dt_clock_init(void) { return 0; }
+>>>>>>> v3.18
 #endif
 struct device;
 
@@ -61,6 +91,7 @@ extern void at91_irq_resume(void);
 /* idle */
 extern void at91sam9_idle(void);
 
+<<<<<<< HEAD
 /* reset */
 extern void at91_ioremap_rstc(u32 base_addr);
 extern void at91sam9_alt_restart(enum reboot_mode, const char *);
@@ -69,6 +100,8 @@ extern void at91sam9g45_restart(enum reboot_mode, const char *);
 /* shutdown */
 extern void at91_ioremap_shdwc(u32 base_addr);
 
+=======
+>>>>>>> v3.18
 /* Matrix */
 extern void at91_ioremap_matrix(u32 base_addr);
 
@@ -88,4 +121,10 @@ extern void __init at91_gpio_irq_setup(void);
 extern int  __init at91_gpio_of_irq_setup(struct device_node *node,
 					  struct device_node *parent);
 
+<<<<<<< HEAD
 extern int at91_extern_irq;
+=======
+extern u32 at91_get_extern_irq(void);
+
+#endif /* _AT91_GENERIC_H */
+>>>>>>> v3.18

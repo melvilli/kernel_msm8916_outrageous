@@ -3,7 +3,11 @@
 
 #ifndef __ASSEMBLY__
 
+<<<<<<< HEAD
 #include <linux/reboot.h>
+=======
+enum reboot_mode;
+>>>>>>> v3.18
 
 /* The ATU offsets can change based on the strapping */
 extern u32 iop13xx_atux_pmmr_offset;

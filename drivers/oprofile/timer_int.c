@@ -32,7 +32,11 @@ static enum hrtimer_restart oprofile_hrtimer_notify(struct hrtimer *hrtimer)
 
 static void __oprofile_hrtimer_start(void *unused)
 {
+<<<<<<< HEAD
 	struct hrtimer *hrtimer = &__get_cpu_var(oprofile_hrtimer);
+=======
+	struct hrtimer *hrtimer = this_cpu_ptr(&oprofile_hrtimer);
+>>>>>>> v3.18
 
 	if (!ctr_running)
 		return;
@@ -74,8 +78,13 @@ static void oprofile_hrtimer_stop(void)
 	put_online_cpus();
 }
 
+<<<<<<< HEAD
 static int __cpuinit oprofile_cpu_notify(struct notifier_block *self,
 					 unsigned long action, void *hcpu)
+=======
+static int oprofile_cpu_notify(struct notifier_block *self,
+			       unsigned long action, void *hcpu)
+>>>>>>> v3.18
 {
 	long cpu = (long) hcpu;
 

@@ -463,7 +463,11 @@ static int peak_usb_start(struct peak_usb_device *dev)
 	if (i < PCAN_USB_MAX_TX_URBS) {
 		if (i == 0) {
 			netdev_err(netdev, "couldn't setup any tx URB\n");
+<<<<<<< HEAD
 			return err;
+=======
+			goto err_tx;
+>>>>>>> v3.18
 		}
 
 		netdev_warn(netdev, "tx performance may be slow\n");
@@ -472,7 +476,11 @@ static int peak_usb_start(struct peak_usb_device *dev)
 	if (dev->adapter->dev_start) {
 		err = dev->adapter->dev_start(dev);
 		if (err)
+<<<<<<< HEAD
 			goto failed;
+=======
+			goto err_adapter;
+>>>>>>> v3.18
 	}
 
 	dev->state |= PCAN_USB_STATE_STARTED;
@@ -481,19 +489,37 @@ static int peak_usb_start(struct peak_usb_device *dev)
 	if (dev->adapter->dev_set_bus) {
 		err = dev->adapter->dev_set_bus(dev, 1);
 		if (err)
+<<<<<<< HEAD
 			goto failed;
+=======
+			goto err_adapter;
+>>>>>>> v3.18
 	}
 
 	dev->can.state = CAN_STATE_ERROR_ACTIVE;
 
 	return 0;
 
+<<<<<<< HEAD
 failed:
+=======
+err_adapter:
+>>>>>>> v3.18
 	if (err == -ENODEV)
 		netif_device_detach(dev->netdev);
 
 	netdev_warn(netdev, "couldn't submit control: %d\n", err);
 
+<<<<<<< HEAD
+=======
+	for (i = 0; i < PCAN_USB_MAX_TX_URBS; i++) {
+		usb_free_urb(dev->tx_contexts[i].urb);
+		dev->tx_contexts[i].urb = NULL;
+	}
+err_tx:
+	usb_kill_anchored_urbs(&dev->rx_submitted);
+
+>>>>>>> v3.18
 	return err;
 }
 
@@ -695,6 +721,10 @@ static const struct net_device_ops peak_usb_netdev_ops = {
 	.ndo_open = peak_usb_ndo_open,
 	.ndo_stop = peak_usb_ndo_stop,
 	.ndo_start_xmit = peak_usb_ndo_start_xmit,
+<<<<<<< HEAD
+=======
+	.ndo_change_mtu = can_change_mtu,
+>>>>>>> v3.18
 };
 
 /*
@@ -727,7 +757,11 @@ static int peak_usb_create_dev(struct peak_usb_adapter *peak_usb_adapter,
 	dev->cmd_buf = kmalloc(PCAN_USB_MAX_CMD_LEN, GFP_KERNEL);
 	if (!dev->cmd_buf) {
 		err = -ENOMEM;
+<<<<<<< HEAD
 		goto lbl_free_candev;
+=======
+		goto lbl_set_intf_data;
+>>>>>>> v3.18
 	}
 
 	dev->udev = usb_dev;
@@ -762,11 +796,19 @@ static int peak_usb_create_dev(struct peak_usb_adapter *peak_usb_adapter,
 	usb_set_intfdata(intf, dev);
 
 	SET_NETDEV_DEV(netdev, &intf->dev);
+<<<<<<< HEAD
+=======
+	netdev->dev_id = ctrl_idx;
+>>>>>>> v3.18
 
 	err = register_candev(netdev);
 	if (err) {
 		dev_err(&intf->dev, "couldn't register CAN device: %d\n", err);
+<<<<<<< HEAD
 		goto lbl_restore_intf_data;
+=======
+		goto lbl_free_cmd_buf;
+>>>>>>> v3.18
 	}
 
 	if (dev->prev_siblings)
@@ -779,14 +821,22 @@ static int peak_usb_create_dev(struct peak_usb_adapter *peak_usb_adapter,
 	if (dev->adapter->dev_init) {
 		err = dev->adapter->dev_init(dev);
 		if (err)
+<<<<<<< HEAD
 			goto lbl_unregister_candev;
+=======
+			goto lbl_free_cmd_buf;
+>>>>>>> v3.18
 	}
 
 	/* set bus off */
 	if (dev->adapter->dev_set_bus) {
 		err = dev->adapter->dev_set_bus(dev, 0);
 		if (err)
+<<<<<<< HEAD
 			goto lbl_unregister_candev;
+=======
+			goto lbl_free_cmd_buf;
+>>>>>>> v3.18
 	}
 
 	/* get device number early */
@@ -798,6 +848,7 @@ static int peak_usb_create_dev(struct peak_usb_adapter *peak_usb_adapter,
 
 	return 0;
 
+<<<<<<< HEAD
 lbl_unregister_candev:
 	unregister_candev(netdev);
 
@@ -806,6 +857,13 @@ lbl_restore_intf_data:
 	kfree(dev->cmd_buf);
 
 lbl_free_candev:
+=======
+lbl_free_cmd_buf:
+	kfree(dev->cmd_buf);
+
+lbl_set_intf_data:
+	usb_set_intfdata(intf, dev->prev_siblings);
+>>>>>>> v3.18
 	free_candev(netdev);
 
 	return err;
@@ -817,6 +875,7 @@ lbl_free_candev:
 static void peak_usb_disconnect(struct usb_interface *intf)
 {
 	struct peak_usb_device *dev;
+<<<<<<< HEAD
 	struct peak_usb_device *dev_prev_siblings;
 
 	/* unregister as many netdev devices as siblings */
@@ -825,17 +884,32 @@ static void peak_usb_disconnect(struct usb_interface *intf)
 		char name[IFNAMSIZ];
 
 		dev_prev_siblings = dev->prev_siblings;
+=======
+
+	/* unregister as many netdev devices as siblings */
+	for (dev = usb_get_intfdata(intf); dev; dev = dev->prev_siblings) {
+		struct net_device *netdev = dev->netdev;
+		char name[IFNAMSIZ];
+
+>>>>>>> v3.18
 		dev->state &= ~PCAN_USB_STATE_CONNECTED;
 		strncpy(name, netdev->name, IFNAMSIZ);
 
 		unregister_netdev(netdev);
+<<<<<<< HEAD
+=======
+		free_candev(netdev);
+>>>>>>> v3.18
 
 		kfree(dev->cmd_buf);
 		dev->next_siblings = NULL;
 		if (dev->adapter->dev_free)
 			dev->adapter->dev_free(dev);
 
+<<<<<<< HEAD
 		free_candev(netdev);
+=======
+>>>>>>> v3.18
 		dev_info(&intf->dev, "%s removed\n", name);
 	}
 

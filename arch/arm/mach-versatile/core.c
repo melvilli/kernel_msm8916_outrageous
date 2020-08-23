@@ -28,6 +28,10 @@
 #include <linux/of_platform.h>
 #include <linux/amba/bus.h>
 #include <linux/amba/clcd.h>
+<<<<<<< HEAD
+=======
+#include <linux/platform_data/video-clcd-versatile.h>
+>>>>>>> v3.18
 #include <linux/amba/pl061.h>
 #include <linux/amba/mmci.h>
 #include <linux/amba/pl022.h>
@@ -53,7 +57,10 @@
 #include <mach/platform.h>
 #include <asm/hardware/timer-sp.h>
 
+<<<<<<< HEAD
 #include <plat/clcd.h>
+=======
+>>>>>>> v3.18
 #include <plat/sched_clock.h>
 
 #include "core.h"
@@ -108,7 +115,11 @@ void __init versatile_init_irq(void)
 
 	np = of_find_matching_node_by_address(NULL, vic_of_match,
 					      VERSATILE_VIC_BASE);
+<<<<<<< HEAD
 	__vic_init(VA_VIC_BASE, IRQ_VIC_START, ~0, 0, np);
+=======
+	__vic_init(VA_VIC_BASE, 0, IRQ_VIC_START, ~0, 0, np);
+>>>>>>> v3.18
 
 	writel(~0, VA_SIC_BASE + SIC_IRQ_ENABLE_CLEAR);
 
@@ -310,6 +321,24 @@ static struct platform_device char_lcd_device = {
 	.resource       =       char_lcd_resources,
 };
 
+<<<<<<< HEAD
+=======
+static struct resource leds_resources[] = {
+	{
+		.start	= VERSATILE_SYS_BASE + VERSATILE_SYS_LED_OFFSET,
+		.end	= VERSATILE_SYS_BASE + VERSATILE_SYS_LED_OFFSET + 4,
+		.flags	= IORESOURCE_MEM,
+	},
+};
+
+static struct platform_device leds_device = {
+	.name		= "versatile-leds",
+	.id		= -1,
+	.num_resources	= ARRAY_SIZE(leds_resources),
+	.resource	= leds_resources,
+};
+
+>>>>>>> v3.18
 /*
  * Clock handling
  */
@@ -570,6 +599,19 @@ static struct pl061_platform_data gpio1_plat_data = {
 	.irq_base	= IRQ_GPIO1_START,
 };
 
+<<<<<<< HEAD
+=======
+static struct pl061_platform_data gpio2_plat_data = {
+	.gpio_base	= 16,
+	.irq_base	= IRQ_GPIO2_START,
+};
+
+static struct pl061_platform_data gpio3_plat_data = {
+	.gpio_base	= 24,
+	.irq_base	= IRQ_GPIO3_START,
+};
+
+>>>>>>> v3.18
 static struct pl022_ssp_controller ssp0_plat_data = {
 	.bus_id = 0,
 	.enable_dma = 0,
@@ -596,6 +638,11 @@ static struct pl022_ssp_controller ssp0_plat_data = {
 #define WATCHDOG_IRQ	{ IRQ_WDOGINT }
 #define GPIO0_IRQ	{ IRQ_GPIOINT0 }
 #define GPIO1_IRQ	{ IRQ_GPIOINT1 }
+<<<<<<< HEAD
+=======
+#define GPIO2_IRQ	{ IRQ_GPIOINT2 }
+#define GPIO3_IRQ	{ IRQ_GPIOINT3 }
+>>>>>>> v3.18
 #define RTC_IRQ		{ IRQ_RTCINT }
 
 /*
@@ -622,6 +669,11 @@ APB_DEVICE(sctl,  "dev:e0",  SCTL,     NULL);
 APB_DEVICE(wdog,  "dev:e1",  WATCHDOG, NULL);
 APB_DEVICE(gpio0, "dev:e4",  GPIO0,    &gpio0_plat_data);
 APB_DEVICE(gpio1, "dev:e5",  GPIO1,    &gpio1_plat_data);
+<<<<<<< HEAD
+=======
+APB_DEVICE(gpio2, "dev:e6",  GPIO2,    &gpio2_plat_data);
+APB_DEVICE(gpio3, "dev:e7",  GPIO3,    &gpio3_plat_data);
+>>>>>>> v3.18
 APB_DEVICE(rtc,   "dev:e8",  RTC,      NULL);
 APB_DEVICE(sci0,  "dev:f0",  SCI,      NULL);
 APB_DEVICE(uart0, "dev:f1",  UART0,    NULL);
@@ -641,6 +693,11 @@ static struct amba_device *amba_devs[] __initdata = {
 	&wdog_device,
 	&gpio0_device,
 	&gpio1_device,
+<<<<<<< HEAD
+=======
+	&gpio2_device,
+	&gpio3_device,
+>>>>>>> v3.18
 	&rtc_device,
 	&sci0_device,
 	&ssp0_device,
@@ -779,6 +836,10 @@ void __init versatile_init(void)
 	platform_device_register(&versatile_i2c_device);
 	platform_device_register(&smc91x_device);
 	platform_device_register(&char_lcd_device);
+<<<<<<< HEAD
+=======
+	platform_device_register(&leds_device);
+>>>>>>> v3.18
 
 	for (i = 0; i < ARRAY_SIZE(amba_devs); i++) {
 		struct amba_device *d = amba_devs[i];

@@ -11,10 +11,18 @@
 #include <linux/decompress/unxz.h>
 #include <linux/decompress/inflate.h>
 #include <linux/decompress/unlzo.h>
+<<<<<<< HEAD
+=======
+#include <linux/decompress/unlz4.h>
+>>>>>>> v3.18
 
 #include <linux/types.h>
 #include <linux/string.h>
 #include <linux/init.h>
+<<<<<<< HEAD
+=======
+#include <linux/printk.h>
+>>>>>>> v3.18
 
 #ifndef CONFIG_DECOMPRESS_GZIP
 # define gunzip NULL
@@ -31,6 +39,12 @@
 #ifndef CONFIG_DECOMPRESS_LZO
 # define unlzo NULL
 #endif
+<<<<<<< HEAD
+=======
+#ifndef CONFIG_DECOMPRESS_LZ4
+# define unlz4 NULL
+#endif
+>>>>>>> v3.18
 
 struct compress_format {
 	unsigned char magic[2];
@@ -45,10 +59,18 @@ static const struct compress_format compressed_formats[] __initconst = {
 	{ {0x5d, 0x00}, "lzma", unlzma },
 	{ {0xfd, 0x37}, "xz", unxz },
 	{ {0x89, 0x4c}, "lzo", unlzo },
+<<<<<<< HEAD
 	{ {0, 0}, NULL, NULL }
 };
 
 decompress_fn __init decompress_method(const unsigned char *inbuf, int len,
+=======
+	{ {0x02, 0x21}, "lz4", unlz4 },
+	{ {0, 0}, NULL, NULL }
+};
+
+decompress_fn __init decompress_method(const unsigned char *inbuf, long len,
+>>>>>>> v3.18
 				const char **name)
 {
 	const struct compress_format *cf;
@@ -56,6 +78,11 @@ decompress_fn __init decompress_method(const unsigned char *inbuf, int len,
 	if (len < 2)
 		return NULL;	/* Need at least this much... */
 
+<<<<<<< HEAD
+=======
+	pr_debug("Compressed data magic: %#.2x %#.2x\n", inbuf[0], inbuf[1]);
+
+>>>>>>> v3.18
 	for (cf = compressed_formats; cf->name; cf++) {
 		if (!memcmp(inbuf, cf->magic, 2))
 			break;

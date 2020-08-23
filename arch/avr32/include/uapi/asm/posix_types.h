@@ -5,8 +5,13 @@
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
  */
+<<<<<<< HEAD
 #ifndef __ASM_AVR32_POSIX_TYPES_H
 #define __ASM_AVR32_POSIX_TYPES_H
+=======
+#ifndef _UAPI__ASM_AVR32_POSIX_TYPES_H
+#define _UAPI__ASM_AVR32_POSIX_TYPES_H
+>>>>>>> v3.18
 
 /*
  * This file is generally used by user-level software, so you need to
@@ -34,4 +39,8 @@ typedef unsigned short  __kernel_old_dev_t;
 
 #include <asm-generic/posix_types.h>
 
+<<<<<<< HEAD
 #endif /* __ASM_AVR32_POSIX_TYPES_H */
+=======
+#endif /* _UAPI__ASM_AVR32_POSIX_TYPES_H */
+>>>>>>> v3.18

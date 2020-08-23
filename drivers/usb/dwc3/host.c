@@ -5,6 +5,7 @@
  *
  * Authors: Felipe Balbi <balbi@ti.com>,
  *
+<<<<<<< HEAD
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -39,12 +40,33 @@
 
 #include "core.h"
 #include "xhci.h"
+=======
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2  of
+ * the License as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+#include <linux/platform_device.h>
+#include <linux/usb/xhci_pdriver.h>
+
+#include "core.h"
+>>>>>>> v3.18
 
 int dwc3_host_init(struct dwc3 *dwc)
 {
 	struct platform_device	*xhci;
+<<<<<<< HEAD
 	int			ret;
 	struct xhci_plat_data	pdata;
+=======
+	struct usb_xhci_pdata	pdata;
+	int			ret;
+>>>>>>> v3.18
 
 	xhci = platform_device_alloc("xhci-hcd", PLATFORM_DEVID_AUTO);
 	if (!xhci) {
@@ -60,6 +82,7 @@ int dwc3_host_init(struct dwc3 *dwc)
 	xhci->dev.dma_parms	= dwc->dev->dma_parms;
 
 	dwc->xhci = xhci;
+<<<<<<< HEAD
 	pdata.vendor = ((dwc->revision & DWC3_GSNPSID_MASK) >>
 			__ffs(DWC3_GSNPSID_MASK) & DWC3_GSNPSREV_MASK);
 	pdata.revision = dwc->revision & DWC3_GSNPSREV_MASK;
@@ -85,6 +108,32 @@ int dwc3_host_init(struct dwc3 *dwc)
 			dev_err(dwc->dev, "failed to register xHCI device\n");
 			goto err1;
 		}
+=======
+
+	ret = platform_device_add_resources(xhci, dwc->xhci_resources,
+						DWC3_XHCI_RESOURCES_NUM);
+	if (ret) {
+		dev_err(dwc->dev, "couldn't add resources to xHCI device\n");
+		goto err1;
+	}
+
+	memset(&pdata, 0, sizeof(pdata));
+
+#ifdef CONFIG_DWC3_HOST_USB3_LPM_ENABLE
+	pdata.usb3_lpm_capable = 1;
+#endif
+
+	ret = platform_device_add_data(xhci, &pdata, sizeof(pdata));
+	if (ret) {
+		dev_err(dwc->dev, "couldn't add platform data to xHCI device\n");
+		goto err1;
+	}
+
+	ret = platform_device_add(xhci);
+	if (ret) {
+		dev_err(dwc->dev, "failed to register xHCI device\n");
+		goto err1;
+>>>>>>> v3.18
 	}
 
 	return 0;
@@ -98,6 +147,10 @@ err0:
 
 void dwc3_host_exit(struct dwc3 *dwc)
 {
+<<<<<<< HEAD
 	if (!dwc->dotg)
 		platform_device_unregister(dwc->xhci);
+=======
+	platform_device_unregister(dwc->xhci);
+>>>>>>> v3.18
 }

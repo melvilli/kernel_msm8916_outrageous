@@ -3,7 +3,11 @@
  *
  * This file contains the TCM HBA Transport related functions.
  *
+<<<<<<< HEAD
  * (c) Copyright 2003-2012 RisingTide Systems LLC.
+=======
+ * (c) Copyright 2003-2013 Datera, Inc.
+>>>>>>> v3.18
  *
  * Nicholas A. Bellinger <nab@kernel.org>
  *

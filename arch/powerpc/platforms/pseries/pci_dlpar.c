@@ -37,15 +37,24 @@ find_bus_among_children(struct pci_bus *bus,
                         struct device_node *dn)
 {
 	struct pci_bus *child = NULL;
+<<<<<<< HEAD
 	struct list_head *tmp;
+=======
+	struct pci_bus *tmp;
+>>>>>>> v3.18
 	struct device_node *busdn;
 
 	busdn = pci_bus_to_OF_node(bus);
 	if (busdn == dn)
 		return bus;
 
+<<<<<<< HEAD
 	list_for_each(tmp, &bus->children) {
 		child = find_bus_among_children(pci_bus_b(tmp), dn);
+=======
+	list_for_each_entry(tmp, &bus->children, node) {
+		child = find_bus_among_children(tmp, dn);
+>>>>>>> v3.18
 		if (child)
 			break;
 	};
@@ -64,6 +73,7 @@ pcibios_find_pci_bus(struct device_node *dn)
 }
 EXPORT_SYMBOL_GPL(pcibios_find_pci_bus);
 
+<<<<<<< HEAD
 /**
  * __pcibios_remove_pci_devices - remove all devices under this bus
  * @bus: the indicated PCI bus
@@ -149,6 +159,8 @@ void pcibios_add_pci_devices(struct pci_bus * bus)
 }
 EXPORT_SYMBOL_GPL(pcibios_add_pci_devices);
 
+=======
+>>>>>>> v3.18
 struct pci_controller *init_phb_dynamic(struct device_node *dn)
 {
 	struct pci_controller *phb;
@@ -203,10 +215,17 @@ int remove_phb_dynamic(struct pci_controller *phb)
 		}
 	}
 
+<<<<<<< HEAD
 	/* Unregister the bridge device from sysfs and remove the PCI bus */
 	device_unregister(b->bridge);
 	phb->bus = NULL;
 	pci_remove_bus(b);
+=======
+	/* Remove the PCI bus and unregister the bridge device from sysfs */
+	phb->bus = NULL;
+	pci_remove_bus(b);
+	device_unregister(b->bridge);
+>>>>>>> v3.18
 
 	/* Now release the IO resource */
 	if (res->flags & IORESOURCE_IO)

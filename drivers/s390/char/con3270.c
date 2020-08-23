@@ -7,6 +7,10 @@
  *     Copyright IBM Corp. 2003, 2009
  */
 
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 #include <linux/console.h>
 #include <linux/init.h>
 #include <linux/interrupt.h>
@@ -30,6 +34,12 @@
 
 static struct raw3270_fn con3270_fn;
 
+<<<<<<< HEAD
+=======
+static bool auto_update = 1;
+module_param(auto_update, bool, 0);
+
+>>>>>>> v3.18
 /*
  * Main 3270 console view data structure.
  */
@@ -204,6 +214,11 @@ con3270_update(struct con3270 *cp)
 	struct string *s, *n;
 	int rc;
 
+<<<<<<< HEAD
+=======
+	if (!auto_update && !raw3270_view_active(&cp->view))
+		return;
+>>>>>>> v3.18
 	if (cp->view.dev)
 		raw3270_activate_view(&cp->view);
 
@@ -529,6 +544,10 @@ con3270_flush(void)
 	if (!cp->view.dev)
 		return;
 	raw3270_pm_unfreeze(&cp->view);
+<<<<<<< HEAD
+=======
+	raw3270_activate_view(&cp->view);
+>>>>>>> v3.18
 	spin_lock_irqsave(&cp->view.lock, flags);
 	con3270_wait_write(cp);
 	cp->nr_up = 0;

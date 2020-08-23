@@ -6,14 +6,20 @@
 #include <linux/pci.h>
 #include <linux/acpi.h>
 #include <linux/vga_switcheroo.h>
+<<<<<<< HEAD
 #include <acpi/acpi_drivers.h>
 
+=======
+>>>>>>> v3.18
 #include <drm/drmP.h>
 #include "i915_drv.h"
 
 #define INTEL_DSM_REVISION_ID 1 /* For Calpella anyway... */
+<<<<<<< HEAD
 
 #define INTEL_DSM_FN_SUPPORTED_FUNCTIONS 0 /* No args */
+=======
+>>>>>>> v3.18
 #define INTEL_DSM_FN_PLATFORM_MUX_INFO 1 /* No args */
 
 static struct intel_dsm_priv {
@@ -28,6 +34,7 @@ static const u8 intel_dsm_guid[] = {
 	0x0f, 0x13, 0x17, 0xb0, 0x1c, 0x2c
 };
 
+<<<<<<< HEAD
 static int intel_dsm(acpi_handle handle, int func, int arg)
 {
 	struct acpi_buffer output = { ACPI_ALLOCATE_BUFFER, NULL };
@@ -82,6 +89,8 @@ static int intel_dsm(acpi_handle handle, int func, int arg)
 	return ret;
 }
 
+=======
+>>>>>>> v3.18
 static char *intel_dsm_port_name(u8 id)
 {
 	switch (id) {
@@ -136,6 +145,7 @@ static char *intel_dsm_mux_type(u8 type)
 
 static void intel_dsm_platform_mux_info(void)
 {
+<<<<<<< HEAD
 	struct acpi_buffer output = { ACPI_ALLOCATE_BUFFER, NULL };
 	struct acpi_object_list input;
 	union acpi_object params[4];
@@ -187,10 +197,44 @@ static void intel_dsm_platform_mux_info(void)
 
 out:
 	kfree(output.pointer);
+=======
+	int i;
+	union acpi_object *pkg, *connector_count;
+
+	pkg = acpi_evaluate_dsm_typed(intel_dsm_priv.dhandle, intel_dsm_guid,
+			INTEL_DSM_REVISION_ID, INTEL_DSM_FN_PLATFORM_MUX_INFO,
+			NULL, ACPI_TYPE_PACKAGE);
+	if (!pkg) {
+		DRM_DEBUG_DRIVER("failed to evaluate _DSM\n");
+		return;
+	}
+
+	connector_count = &pkg->package.elements[0];
+	DRM_DEBUG_DRIVER("MUX info connectors: %lld\n",
+		  (unsigned long long)connector_count->integer.value);
+	for (i = 1; i < pkg->package.count; i++) {
+		union acpi_object *obj = &pkg->package.elements[i];
+		union acpi_object *connector_id = &obj->package.elements[0];
+		union acpi_object *info = &obj->package.elements[1];
+		DRM_DEBUG_DRIVER("Connector id: 0x%016llx\n",
+			  (unsigned long long)connector_id->integer.value);
+		DRM_DEBUG_DRIVER("  port id: %s\n",
+		       intel_dsm_port_name(info->buffer.pointer[0]));
+		DRM_DEBUG_DRIVER("  display mux info: %s\n",
+		       intel_dsm_mux_type(info->buffer.pointer[1]));
+		DRM_DEBUG_DRIVER("  aux/dc mux info: %s\n",
+		       intel_dsm_mux_type(info->buffer.pointer[2]));
+		DRM_DEBUG_DRIVER("  hpd mux info: %s\n",
+		       intel_dsm_mux_type(info->buffer.pointer[3]));
+	}
+
+	ACPI_FREE(pkg);
+>>>>>>> v3.18
 }
 
 static bool intel_dsm_pci_probe(struct pci_dev *pdev)
 {
+<<<<<<< HEAD
 	acpi_handle dhandle, intel_handle;
 	acpi_status status;
 	int ret;
@@ -201,10 +245,21 @@ static bool intel_dsm_pci_probe(struct pci_dev *pdev)
 
 	status = acpi_get_handle(dhandle, "_DSM", &intel_handle);
 	if (ACPI_FAILURE(status)) {
+=======
+	acpi_handle dhandle;
+
+	dhandle = ACPI_HANDLE(&pdev->dev);
+	if (!dhandle)
+		return false;
+
+	if (!acpi_check_dsm(dhandle, intel_dsm_guid, INTEL_DSM_REVISION_ID,
+			    1 << INTEL_DSM_FN_PLATFORM_MUX_INFO)) {
+>>>>>>> v3.18
 		DRM_DEBUG_KMS("no _DSM method for intel device\n");
 		return false;
 	}
 
+<<<<<<< HEAD
 	ret = intel_dsm(dhandle, INTEL_DSM_FN_SUPPORTED_FUNCTIONS, 0);
 	if (ret < 0) {
 		DRM_DEBUG_KMS("failed to get supported _DSM functions\n");
@@ -214,6 +269,11 @@ static bool intel_dsm_pci_probe(struct pci_dev *pdev)
 	intel_dsm_priv.dhandle = dhandle;
 
 	intel_dsm_platform_mux_info();
+=======
+	intel_dsm_priv.dhandle = dhandle;
+	intel_dsm_platform_mux_info();
+
+>>>>>>> v3.18
 	return true;
 }
 

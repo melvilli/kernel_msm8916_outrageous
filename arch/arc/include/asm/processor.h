@@ -14,11 +14,26 @@
 #ifndef __ASM_ARC_PROCESSOR_H
 #define __ASM_ARC_PROCESSOR_H
 
+<<<<<<< HEAD
 #ifdef __KERNEL__
 
 #ifndef __ASSEMBLY__
 
 #include <asm/arcregs.h>	/* for STATUS_E1_MASK et all */
+=======
+#ifndef __ASSEMBLY__
+
+#include <asm/ptrace.h>
+
+#ifdef CONFIG_ARC_FPU_SAVE_RESTORE
+/* These DPFP regs need to be saved/restored across ctx-sw */
+struct arc_fpu {
+	struct {
+		unsigned int l, h;
+	} aux_dpfp[2];
+};
+#endif
+>>>>>>> v3.18
 
 /* Arch specific stuff which needs to be saved per task.
  * However these items are not so important so as to earn a place in
@@ -28,10 +43,13 @@ struct thread_struct {
 	unsigned long ksp;	/* kernel mode stack pointer */
 	unsigned long callee_reg;	/* pointer to callee regs */
 	unsigned long fault_address;	/* dbls as brkpt holder as well */
+<<<<<<< HEAD
 	unsigned long cause_code;	/* Exception Cause Code (ECR) */
 #ifdef CONFIG_ARC_CURR_IN_REG
 	unsigned long user_r25;
 #endif
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_ARC_FPU_SAVE_RESTORE
 	struct arc_fpu fpu;
 #endif
@@ -44,6 +62,7 @@ struct thread_struct {
 /* Forward declaration, a strange C thing */
 struct task_struct;
 
+<<<<<<< HEAD
 /*
  * Return saved PC of a blocked thread.
  */
@@ -53,6 +72,15 @@ unsigned long thread_saved_pc(struct task_struct *t);
 	((struct pt_regs *)(THREAD_SIZE - 4 + (void *)task_stack_page(p)) - 1)
 
 /* Free all resources held by a thread. */
+=======
+/* Return saved PC of a blocked thread  */
+unsigned long thread_saved_pc(struct task_struct *t);
+
+#define task_pt_regs(p) \
+	((struct pt_regs *)(THREAD_SIZE + (void *)task_stack_page(p)) - 1)
+
+/* Free all resources held by a thread */
+>>>>>>> v3.18
 #define release_thread(thread) do { } while (0)
 
 /* Prepare to copy thread state - unlazy all lazy status */
@@ -68,6 +96,11 @@ unsigned long thread_saved_pc(struct task_struct *t);
 #define cpu_relax()	do { } while (0)
 #endif
 
+<<<<<<< HEAD
+=======
+#define cpu_relax_lowlatency() cpu_relax()
+
+>>>>>>> v3.18
 #define copy_segments(tsk, mm)      do { } while (0)
 #define release_segments(mm)        do { } while (0)
 
@@ -75,6 +108,7 @@ unsigned long thread_saved_pc(struct task_struct *t);
 
 /*
  * Where abouts of Task's sp, fp, blink when it was last seen in kernel mode.
+<<<<<<< HEAD
  * These can't be derived from pt_regs as that would give correp user-mode val
  */
 #define KSTK_ESP(tsk)   (tsk->thread.ksp)
@@ -101,6 +135,20 @@ do {								\
 	(_regs)->lp_start = 0x10;				\
 	(_regs)->lp_end = 0x80;					\
 } while (0)
+=======
+ * Look in process.c for details of kernel stack layout
+ */
+#define KSTK_ESP(tsk)   (tsk->thread.ksp)
+
+#define KSTK_REG(tsk, off)	(*((unsigned int *)(KSTK_ESP(tsk) + \
+					sizeof(struct callee_regs) + off)))
+
+#define KSTK_BLINK(tsk) KSTK_REG(tsk, 4)
+#define KSTK_FP(tsk)    KSTK_REG(tsk, 0)
+
+extern void start_thread(struct pt_regs * regs, unsigned long pc,
+			 unsigned long usp);
+>>>>>>> v3.18
 
 extern unsigned int get_wchan(struct task_struct *p);
 
@@ -146,6 +194,9 @@ extern unsigned int get_wchan(struct task_struct *p);
  */
 #define TASK_UNMAPPED_BASE      (TASK_SIZE / 3)
 
+<<<<<<< HEAD
 #endif /* __KERNEL__ */
 
+=======
+>>>>>>> v3.18
 #endif /* __ASM_ARC_PROCESSOR_H */

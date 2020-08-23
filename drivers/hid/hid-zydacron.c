@@ -169,7 +169,11 @@ static int zc_probe(struct hid_device *hdev, const struct hid_device_id *id)
 	int ret;
 	struct zc_device *zc;
 
+<<<<<<< HEAD
 	zc = kzalloc(sizeof(*zc), GFP_KERNEL);
+=======
+	zc = devm_kzalloc(&hdev->dev, sizeof(*zc), GFP_KERNEL);
+>>>>>>> v3.18
 	if (zc == NULL) {
 		hid_err(hdev, "can't alloc descriptor\n");
 		return -ENOMEM;
@@ -180,12 +184,17 @@ static int zc_probe(struct hid_device *hdev, const struct hid_device_id *id)
 	ret = hid_parse(hdev);
 	if (ret) {
 		hid_err(hdev, "parse failed\n");
+<<<<<<< HEAD
 		goto err_free;
+=======
+		return ret;
+>>>>>>> v3.18
 	}
 
 	ret = hid_hw_start(hdev, HID_CONNECT_DEFAULT);
 	if (ret) {
 		hid_err(hdev, "hw start failed\n");
+<<<<<<< HEAD
 		goto err_free;
 	}
 
@@ -202,6 +211,12 @@ static void zc_remove(struct hid_device *hdev)
 
 	hid_hw_stop(hdev);
 	kfree(zc);
+=======
+		return ret;
+	}
+
+	return 0;
+>>>>>>> v3.18
 }
 
 static const struct hid_device_id zc_devices[] = {
@@ -217,7 +232,10 @@ static struct hid_driver zc_driver = {
 	.input_mapping = zc_input_mapping,
 	.raw_event = zc_raw_event,
 	.probe = zc_probe,
+<<<<<<< HEAD
 	.remove = zc_remove,
+=======
+>>>>>>> v3.18
 };
 module_hid_driver(zc_driver);
 

@@ -11,6 +11,11 @@
  * by Guenther Kelleter (guenther@pool.informatik.rwth-aachen.de)
  */
 
+<<<<<<< HEAD
+=======
+#include <linux/compiler.h>
+
+>>>>>>> v3.18
 struct partition_info
 {
   u8 flg;			/* bit 0: active; bit 7: bootable */
@@ -29,6 +34,10 @@ struct rootsector
   u32 bsl_st;			/* start of bad sector list */
   u32 bsl_cnt;			/* length of bad sector list */
   u16 checksum;			/* checksum for bootable disks */
+<<<<<<< HEAD
 } __attribute__((__packed__));
+=======
+} __packed;
+>>>>>>> v3.18
 
 int atari_partition(struct parsed_partitions *state);

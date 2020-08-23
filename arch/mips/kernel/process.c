@@ -21,7 +21,10 @@
 #include <linux/mman.h>
 #include <linux/personality.h>
 #include <linux/sys.h>
+<<<<<<< HEAD
 #include <linux/user.h>
+=======
+>>>>>>> v3.18
 #include <linux/init.h>
 #include <linux/completion.h>
 #include <linux/kallsyms.h>
@@ -32,9 +35,17 @@
 #include <asm/cpu.h>
 #include <asm/dsp.h>
 #include <asm/fpu.h>
+<<<<<<< HEAD
 #include <asm/pgtable.h>
 #include <asm/mipsregs.h>
 #include <asm/processor.h>
+=======
+#include <asm/msa.h>
+#include <asm/pgtable.h>
+#include <asm/mipsregs.h>
+#include <asm/processor.h>
+#include <asm/reg.h>
+>>>>>>> v3.18
 #include <asm/uaccess.h>
 #include <asm/io.h>
 #include <asm/elf.h>
@@ -60,15 +71,25 @@ void start_thread(struct pt_regs * regs, unsigned long pc, unsigned long sp)
 
 	/* New thread loses kernel privileges. */
 	status = regs->cp0_status & ~(ST0_CU0|ST0_CU1|ST0_FR|KU_MASK);
+<<<<<<< HEAD
 #ifdef CONFIG_64BIT
 	status |= test_thread_flag(TIF_32BIT_REGS) ? 0 : ST0_FR;
 #endif
+=======
+>>>>>>> v3.18
 	status |= KU_USER;
 	regs->cp0_status = status;
 	clear_used_math();
 	clear_fpu_owner();
+<<<<<<< HEAD
 	if (cpu_has_dsp)
 		__init_dsp();
+=======
+	init_dsp();
+	clear_thread_flag(TIF_USEDMSA);
+	clear_thread_flag(TIF_MSA_CTX_LIVE);
+	disable_msa();
+>>>>>>> v3.18
 	regs->cp0_epc = pc;
 	regs->regs[29] = sp;
 }
@@ -93,7 +114,13 @@ int copy_thread(unsigned long clone_flags, unsigned long usp,
 
 	preempt_disable();
 
+<<<<<<< HEAD
 	if (is_fpu_owner())
+=======
+	if (is_msa_enabled())
+		save_msa(p);
+	else if (is_fpu_owner())
+>>>>>>> v3.18
 		save_fp(p);
 
 	if (cpu_has_dsp)
@@ -139,6 +166,7 @@ int copy_thread(unsigned long clone_flags, unsigned long usp,
 	 */
 	childregs->cp0_status &= ~(ST0_CU2|ST0_CU1);
 
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	/*
 	 * SMTC restores TCStatus after Status, and the CU bits
@@ -147,6 +175,11 @@ int copy_thread(unsigned long clone_flags, unsigned long usp,
 	childregs->cp0_tcstatus &= ~(ST0_CU2|ST0_CU1);
 #endif
 	clear_tsk_thread_flag(p, TIF_USEDFPU);
+=======
+	clear_tsk_thread_flag(p, TIF_USEDFPU);
+	clear_tsk_thread_flag(p, TIF_USEDMSA);
+	clear_tsk_thread_flag(p, TIF_MSA_CTX_LIVE);
+>>>>>>> v3.18
 
 #ifdef CONFIG_MIPS_MT_FPAFF
 	clear_tsk_thread_flag(p, TIF_FPUBOUND);
@@ -158,6 +191,7 @@ int copy_thread(unsigned long clone_flags, unsigned long usp,
 	return 0;
 }
 
+<<<<<<< HEAD
 /* Fill in the fpu structure for a core dump.. */
 int dump_fpu(struct pt_regs *regs, elf_fpregset_t *r)
 {
@@ -204,6 +238,14 @@ int dump_task_fpu(struct task_struct *t, elf_fpregset_t *fpr)
 /*
  *
  */
+=======
+#ifdef CONFIG_CC_STACKPROTECTOR
+#include <linux/stackprotector.h>
+unsigned long __stack_chk_guard __read_mostly;
+EXPORT_SYMBOL(__stack_chk_guard);
+#endif
+
+>>>>>>> v3.18
 struct mips_frame_info {
 	void		*func;
 	unsigned long	func_size;
@@ -214,9 +256,17 @@ struct mips_frame_info {
 #define J_TARGET(pc,target)	\
 		(((unsigned long)(pc) & 0xf0000000) | ((target) << 2))
 
+<<<<<<< HEAD
 static inline int is_ra_save_ins(union mips_instruction *ip, int *poff)
 {
 #ifdef CONFIG_CPU_MICROMIPS
+=======
+static inline int is_ra_save_ins(union mips_instruction *ip)
+{
+#ifdef CONFIG_CPU_MICROMIPS
+	union mips_instruction mmi;
+
+>>>>>>> v3.18
 	/*
 	 * swsp ra,offset
 	 * swm16 reglist,offset(sp)
@@ -226,6 +276,7 @@ static inline int is_ra_save_ins(union mips_instruction *ip, int *poff)
 	 *
 	 * microMIPS is way more fun...
 	 */
+<<<<<<< HEAD
 	if (mm_insn_16bit(ip->halfword[1])) {
 		switch (ip->mm16_r5_format.opcode) {
 		case mm_swsp16_op:
@@ -291,6 +342,31 @@ static inline int is_ra_save_ins(union mips_instruction *ip, int *poff)
 	}
 
 	return 0;
+=======
+	if (mm_insn_16bit(ip->halfword[0])) {
+		mmi.word = (ip->halfword[0] << 16);
+		return ((mmi.mm16_r5_format.opcode == mm_swsp16_op &&
+			 mmi.mm16_r5_format.rt == 31) ||
+			(mmi.mm16_m_format.opcode == mm_pool16c_op &&
+			 mmi.mm16_m_format.func == mm_swm16_op));
+	}
+	else {
+		mmi.halfword[0] = ip->halfword[1];
+		mmi.halfword[1] = ip->halfword[0];
+		return ((mmi.mm_m_format.opcode == mm_pool32b_op &&
+			 mmi.mm_m_format.rd > 9 &&
+			 mmi.mm_m_format.base == 29 &&
+			 mmi.mm_m_format.func == mm_swm32_func) ||
+			(mmi.i_format.opcode == mm_sw32_op &&
+			 mmi.i_format.rs == 29 &&
+			 mmi.i_format.rt == 31));
+	}
+#else
+	/* sw / sd $ra, offset($sp) */
+	return (ip->i_format.opcode == sw_op || ip->i_format.opcode == sd_op) &&
+		ip->i_format.rs == 29 &&
+		ip->i_format.rt == 31;
+>>>>>>> v3.18
 #endif
 }
 
@@ -305,6 +381,7 @@ static inline int is_jump_ins(union mips_instruction *ip)
 	 *
 	 * microMIPS is kind of more fun...
 	 */
+<<<<<<< HEAD
 	if (mm_insn_16bit(ip->halfword[1])) {
 		if ((ip->mm16_r5_format.opcode == mm_pool16c_op &&
 		    (ip->mm16_r5_format.rt & mm_jr16_op) == mm_jr16_op))
@@ -315,6 +392,15 @@ static inline int is_jump_ins(union mips_instruction *ip)
 	if (ip->j_format.opcode == mm_j32_op)
 		return 1;
 	if (ip->j_format.opcode == mm_jal32_op)
+=======
+	union mips_instruction mmi;
+
+	mmi.word = (ip->halfword[0] << 16);
+
+	if ((mmi.mm16_r5_format.opcode == mm_pool16c_op &&
+	    (mmi.mm16_r5_format.rt & mm_jr16_op) == mm_jr16_op) ||
+	    ip->j_format.opcode == mm_jal32_op)
+>>>>>>> v3.18
 		return 1;
 	if (ip->r_format.opcode != mm_pool32a_op ||
 			ip->r_format.func != mm_pool32axf_op)
@@ -342,6 +428,7 @@ static inline int is_sp_move_ins(union mips_instruction *ip)
 	 *
 	 * microMIPS is not more fun...
 	 */
+<<<<<<< HEAD
 	if (mm_insn_16bit(ip->halfword[1])) {
 		return (ip->mm16_r3_format.opcode == mm_pool16d_op &&
 			ip->mm16_r3_format.simmediate && mm_addiusp_func) ||
@@ -349,6 +436,17 @@ static inline int is_sp_move_ins(union mips_instruction *ip)
 			ip->mm16_r5_format.rt == 29);
 	}
 
+=======
+	if (mm_insn_16bit(ip->halfword[0])) {
+		union mips_instruction mmi;
+
+		mmi.word = (ip->halfword[0] << 16);
+		return ((mmi.mm16_r3_format.opcode == mm_pool16d_op &&
+			 mmi.mm16_r3_format.simmediate && mm_addiusp_func) ||
+			(mmi.mm16_r5_format.opcode == mm_pool16d_op &&
+			 mmi.mm16_r5_format.rt == 29));
+	}
+>>>>>>> v3.18
 	return (ip->mm_i_format.opcode == mm_addiu32_op &&
 		 ip->mm_i_format.rt == 29 && ip->mm_i_format.rs == 29);
 #else
@@ -363,14 +461,25 @@ static inline int is_sp_move_ins(union mips_instruction *ip)
 
 static int get_frame_info(struct mips_frame_info *info)
 {
+<<<<<<< HEAD
 	bool is_mmips = IS_ENABLED(CONFIG_CPU_MICROMIPS);
 	union mips_instruction insn, *ip, *ip_end;
 	const unsigned int max_insns = 128;
 	unsigned int i;
+=======
+#ifdef CONFIG_CPU_MICROMIPS
+	union mips_instruction *ip = (void *) (((char *) info->func) - 1);
+#else
+	union mips_instruction *ip = info->func;
+#endif
+	unsigned max_insns = info->func_size / sizeof(union mips_instruction);
+	unsigned i;
+>>>>>>> v3.18
 
 	info->pc_offset = -1;
 	info->frame_size = 0;
 
+<<<<<<< HEAD
 	ip = (void *)msk_isa16_mode((ulong)info->func);
 	if (!ip)
 		goto err;
@@ -393,6 +502,21 @@ static int get_frame_info(struct mips_frame_info *info)
 
 		if (!info->frame_size) {
 			if (is_sp_move_ins(&insn))
+=======
+	if (!ip)
+		goto err;
+
+	if (max_insns == 0)
+		max_insns = 128U;	/* unknown function size */
+	max_insns = min(128U, max_insns);
+
+	for (i = 0; i < max_insns; i++, ip++) {
+
+		if (is_jump_ins(ip))
+			break;
+		if (!info->frame_size) {
+			if (is_sp_move_ins(ip))
+>>>>>>> v3.18
 			{
 #ifdef CONFIG_CPU_MICROMIPS
 				if (mm_insn_16bit(ip->halfword[0]))
@@ -415,9 +539,17 @@ static int get_frame_info(struct mips_frame_info *info)
 			}
 			continue;
 		}
+<<<<<<< HEAD
 		if (info->pc_offset == -1 &&
 		    is_ra_save_ins(&insn, &info->pc_offset))
 			break;
+=======
+		if (info->pc_offset == -1 && is_ra_save_ins(ip)) {
+			info->pc_offset =
+				ip->i_format.simmediate / sizeof(long);
+			break;
+		}
+>>>>>>> v3.18
 	}
 	if (info->frame_size && info->pc_offset >= 0) /* nested */
 		return 0;

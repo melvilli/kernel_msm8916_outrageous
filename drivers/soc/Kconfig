@@ -1,2 +1,12 @@
+<<<<<<< HEAD
 source "drivers/soc/qcom/Kconfig"
 source "drivers/soc/oppo/Kconfig"
+=======
+menu "SOC (System On Chip) specific Drivers"
+
+source "drivers/soc/qcom/Kconfig"
+source "drivers/soc/ti/Kconfig"
+source "drivers/soc/versatile/Kconfig"
+
+endmenu
+>>>>>>> v3.18

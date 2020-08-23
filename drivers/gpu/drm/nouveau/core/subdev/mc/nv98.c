@@ -22,6 +22,7 @@
  * Authors: Ben Skeggs
  */
 
+<<<<<<< HEAD
 #include <subdev/mc.h>
 
 struct nv98_mc_priv {
@@ -30,11 +31,19 @@ struct nv98_mc_priv {
 
 static const struct nouveau_mc_intr
 nv98_mc_intr[] = {
+=======
+#include "nv04.h"
+
+static const struct nouveau_mc_intr
+nv98_mc_intr[] = {
+	{ 0x04000000, NVDEV_ENGINE_DISP },  /* DISP first, so pageflip timestamps work */
+>>>>>>> v3.18
 	{ 0x00000001, NVDEV_ENGINE_PPP },
 	{ 0x00000100, NVDEV_ENGINE_FIFO },
 	{ 0x00001000, NVDEV_ENGINE_GR },
 	{ 0x00004000, NVDEV_ENGINE_CRYPT },	/* NV84:NVA3 */
 	{ 0x00008000, NVDEV_ENGINE_BSP },
+<<<<<<< HEAD
 	{ 0x00080000, NVDEV_SUBDEV_THERM },	/* NVA3:NVC0 */
 	{ 0x00100000, NVDEV_SUBDEV_TIMER },
 	{ 0x00200000, NVDEV_SUBDEV_GPIO },
@@ -67,8 +76,34 @@ nv98_mc_oclass = {
 	.handle = NV_SUBDEV(MC, 0x98),
 	.ofuncs = &(struct nouveau_ofuncs) {
 		.ctor = nv98_mc_ctor,
+=======
+	{ 0x00020000, NVDEV_ENGINE_VP },
+	{ 0x00040000, NVDEV_SUBDEV_PWR },	/* NVA3:NVC0 */
+	{ 0x00080000, NVDEV_SUBDEV_THERM },	/* NVA3:NVC0 */
+	{ 0x00100000, NVDEV_SUBDEV_TIMER },
+	{ 0x00200000, NVDEV_SUBDEV_GPIO },	/* PMGR->GPIO */
+	{ 0x00200000, NVDEV_SUBDEV_I2C }, 	/* PMGR->I2C/AUX */
+	{ 0x00400000, NVDEV_ENGINE_COPY0 },	/* NVA3-     */
+	{ 0x10000000, NVDEV_SUBDEV_BUS },
+	{ 0x80000000, NVDEV_ENGINE_SW },
+	{ 0x0042d101, NVDEV_SUBDEV_FB },
+	{},
+};
+
+struct nouveau_oclass *
+nv98_mc_oclass = &(struct nouveau_mc_oclass) {
+	.base.handle = NV_SUBDEV(MC, 0x98),
+	.base.ofuncs = &(struct nouveau_ofuncs) {
+		.ctor = nv04_mc_ctor,
+>>>>>>> v3.18
 		.dtor = _nouveau_mc_dtor,
 		.init = nv50_mc_init,
 		.fini = _nouveau_mc_fini,
 	},
+<<<<<<< HEAD
 };
+=======
+	.intr = nv98_mc_intr,
+	.msi_rearm = nv40_mc_msi_rearm,
+}.base;
+>>>>>>> v3.18

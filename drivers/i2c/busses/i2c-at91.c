@@ -28,12 +28,19 @@
 #include <linux/module.h>
 #include <linux/of.h>
 #include <linux/of_device.h>
+<<<<<<< HEAD
 #include <linux/of_i2c.h>
+=======
+>>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <linux/slab.h>
 #include <linux/platform_data/dma-atmel.h>
 
+<<<<<<< HEAD
 #define TWI_CLK_HZ		100000			/* max 400 Kbits/s */
+=======
+#define DEFAULT_TWI_CLK_HZ		100000		/* max 400 Kbits/s */
+>>>>>>> v3.18
 #define AT91_I2C_TIMEOUT	msecs_to_jiffies(100)	/* transfer timeout */
 #define AT91_I2C_DMA_THRESHOLD	8			/* enable DMA if transfer size is bigger than this threshold */
 
@@ -63,9 +70,12 @@
 #define	AT91_TWI_UNRE		0x0080	/* Underrun Error */
 #define	AT91_TWI_NACK		0x0100	/* Not Acknowledged */
 
+<<<<<<< HEAD
 #define	AT91_TWI_INT_MASK \
 	(AT91_TWI_TXCOMP | AT91_TWI_RXRDY | AT91_TWI_TXRDY | AT91_TWI_NACK)
 
+=======
+>>>>>>> v3.18
 #define	AT91_TWI_IER		0x0024	/* Interrupt Enable Register */
 #define	AT91_TWI_IDR		0x0028	/* Interrupt Disable Register */
 #define	AT91_TWI_IMR		0x002c	/* Interrupt Mask Register */
@@ -121,12 +131,21 @@ static void at91_twi_write(struct at91_twi_dev *dev, unsigned reg, unsigned val)
 
 static void at91_disable_twi_interrupts(struct at91_twi_dev *dev)
 {
+<<<<<<< HEAD
 	at91_twi_write(dev, AT91_TWI_IDR, AT91_TWI_INT_MASK);
+=======
+	at91_twi_write(dev, AT91_TWI_IDR,
+		       AT91_TWI_TXCOMP | AT91_TWI_RXRDY | AT91_TWI_TXRDY);
+>>>>>>> v3.18
 }
 
 static void at91_twi_irq_save(struct at91_twi_dev *dev)
 {
+<<<<<<< HEAD
 	dev->imr = at91_twi_read(dev, AT91_TWI_IMR) & AT91_TWI_INT_MASK;
+=======
+	dev->imr = at91_twi_read(dev, AT91_TWI_IMR) & 0x7;
+>>>>>>> v3.18
 	at91_disable_twi_interrupts(dev);
 }
 
@@ -216,6 +235,7 @@ static void at91_twi_write_data_dma_callback(void *data)
 	dma_unmap_single(dev->dev, sg_dma_address(&dev->dma.sg),
 			 dev->buf_len, DMA_TO_DEVICE);
 
+<<<<<<< HEAD
 	/*
 	 * When this callback is called, THR/TX FIFO is likely not to be empty
 	 * yet. So we have to wait for TXCOMP or NACK bits to be set into the
@@ -224,6 +244,8 @@ static void at91_twi_write_data_dma_callback(void *data)
 	 * we just have to enable TXCOMP one.
 	 */
 	at91_twi_write(dev, AT91_TWI_IER, AT91_TWI_TXCOMP);
+=======
+>>>>>>> v3.18
 	at91_twi_write(dev, AT91_TWI_CR, AT91_TWI_STOP);
 }
 
@@ -273,6 +295,7 @@ error:
 
 static void at91_twi_read_next_byte(struct at91_twi_dev *dev)
 {
+<<<<<<< HEAD
 	/*
 	 * If we are in this case, it means there is garbage data in RHR, so
 	 * delete them.
@@ -281,6 +304,10 @@ static void at91_twi_read_next_byte(struct at91_twi_dev *dev)
 		at91_twi_read(dev, AT91_TWI_RHR);
 		return;
 	}
+=======
+	if (dev->buf_len <= 0)
+		return;
+>>>>>>> v3.18
 
 	*dev->buf = at91_twi_read(dev, AT91_TWI_RHR) & 0xff;
 	--dev->buf_len;
@@ -324,7 +351,11 @@ static void at91_twi_read_data_dma_callback(void *data)
 	/* The last two bytes have to be read without using dma */
 	dev->buf += dev->buf_len - 2;
 	dev->buf_len = 2;
+<<<<<<< HEAD
 	at91_twi_write(dev, AT91_TWI_IER, AT91_TWI_RXRDY | AT91_TWI_TXCOMP);
+=======
+	at91_twi_write(dev, AT91_TWI_IER, AT91_TWI_RXRDY);
+>>>>>>> v3.18
 }
 
 static void at91_twi_read_data_dma(struct at91_twi_dev *dev)
@@ -377,6 +408,7 @@ static irqreturn_t atmel_twi_interrupt(int irq, void *dev_id)
 
 	if (!irqstatus)
 		return IRQ_NONE;
+<<<<<<< HEAD
 	/*
 	 * In reception, the behavior of the twi device (before sama5d2) is
 	 * weird. There is some magic about RXRDY flag! When a data has been
@@ -440,10 +472,24 @@ static irqreturn_t atmel_twi_interrupt(int irq, void *dev_id)
 	} else if (irqstatus & AT91_TWI_TXRDY) {
 		at91_twi_write_next_byte(dev);
 	}
+=======
+	else if (irqstatus & AT91_TWI_RXRDY)
+		at91_twi_read_next_byte(dev);
+	else if (irqstatus & AT91_TWI_TXRDY)
+		at91_twi_write_next_byte(dev);
+>>>>>>> v3.18
 
 	/* catch error flags */
 	dev->transfer_status |= status;
 
+<<<<<<< HEAD
+=======
+	if (irqstatus & AT91_TWI_TXCOMP) {
+		at91_disable_twi_interrupts(dev);
+		complete(&dev->cmd_complete);
+	}
+
+>>>>>>> v3.18
 	return IRQ_HANDLED;
 }
 
@@ -452,6 +498,7 @@ static int at91_do_twi_transfer(struct at91_twi_dev *dev)
 	int ret;
 	bool has_unre_flag = dev->pdata->has_unre_flag;
 
+<<<<<<< HEAD
 	/*
 	 * WARNING: the TXCOMP bit in the Status Register is NOT a clear on
 	 * read flag but shows the state of the transmission at the time the
@@ -489,12 +536,28 @@ static int at91_do_twi_transfer(struct at91_twi_dev *dev)
 	/* Clear pending interrupts, such as NACK. */
 	at91_twi_read(dev, AT91_TWI_SR);
 
+=======
+	dev_dbg(dev->dev, "transfer: %s %d bytes.\n",
+		(dev->msg->flags & I2C_M_RD) ? "read" : "write", dev->buf_len);
+
+	reinit_completion(&dev->cmd_complete);
+	dev->transfer_status = 0;
+
+>>>>>>> v3.18
 	if (!dev->buf_len) {
 		at91_twi_write(dev, AT91_TWI_CR, AT91_TWI_QUICK);
 		at91_twi_write(dev, AT91_TWI_IER, AT91_TWI_TXCOMP);
 	} else if (dev->msg->flags & I2C_M_RD) {
 		unsigned start_flags = AT91_TWI_START;
 
+<<<<<<< HEAD
+=======
+		if (at91_twi_read(dev, AT91_TWI_SR) & AT91_TWI_RXRDY) {
+			dev_err(dev->dev, "RXRDY still set!");
+			at91_twi_read(dev, AT91_TWI_RHR);
+		}
+
+>>>>>>> v3.18
 		/* if only one byte is to be read, immediately stop transfer */
 		if (dev->buf_len <= 1 && !(dev->msg->flags & I2C_M_RECV_LEN))
 			start_flags |= AT91_TWI_STOP;
@@ -508,6 +571,7 @@ static int at91_do_twi_transfer(struct at91_twi_dev *dev)
 		 * seems to be the best solution.
 		 */
 		if (dev->use_dma && (dev->buf_len > AT91_I2C_DMA_THRESHOLD)) {
+<<<<<<< HEAD
 			at91_twi_write(dev, AT91_TWI_IER, AT91_TWI_NACK);
 			at91_twi_read_data_dma(dev);
 		} else {
@@ -526,6 +590,28 @@ static int at91_do_twi_transfer(struct at91_twi_dev *dev)
 				       AT91_TWI_TXCOMP |
 				       AT91_TWI_NACK |
 				       AT91_TWI_TXRDY);
+=======
+			at91_twi_read_data_dma(dev);
+			/*
+			 * It is important to enable TXCOMP irq here because
+			 * doing it only when transferring the last two bytes
+			 * will mask NACK errors since TXCOMP is set when a
+			 * NACK occurs.
+			 */
+			at91_twi_write(dev, AT91_TWI_IER,
+			       AT91_TWI_TXCOMP);
+		} else
+			at91_twi_write(dev, AT91_TWI_IER,
+			       AT91_TWI_TXCOMP | AT91_TWI_RXRDY);
+	} else {
+		if (dev->use_dma && (dev->buf_len > AT91_I2C_DMA_THRESHOLD)) {
+			at91_twi_write_data_dma(dev);
+			at91_twi_write(dev, AT91_TWI_IER, AT91_TWI_TXCOMP);
+		} else {
+			at91_twi_write_next_byte(dev);
+			at91_twi_write(dev, AT91_TWI_IER,
+				AT91_TWI_TXCOMP | AT91_TWI_TXRDY);
+>>>>>>> v3.18
 		}
 	}
 
@@ -704,6 +790,12 @@ static const struct of_device_id atmel_twi_dt_ids[] = {
 		.compatible = "atmel,at91sam9260-i2c",
 		.data = &at91sam9260_config,
 	} , {
+<<<<<<< HEAD
+=======
+		.compatible = "atmel,at91sam9261-i2c",
+		.data = &at91sam9261_config,
+	} , {
+>>>>>>> v3.18
 		.compatible = "atmel,at91sam9g20-i2c",
 		.data = &at91sam9g20_config,
 	} , {
@@ -823,6 +915,10 @@ static int at91_twi_probe(struct platform_device *pdev)
 	struct resource *mem;
 	int rc;
 	u32 phy_addr;
+<<<<<<< HEAD
+=======
+	u32 bus_clk_rate;
+>>>>>>> v3.18
 
 	dev = devm_kzalloc(&pdev->dev, sizeof(*dev), GFP_KERNEL);
 	if (!dev)
@@ -868,13 +964,26 @@ static int at91_twi_probe(struct platform_device *pdev)
 			dev->use_dma = true;
 	}
 
+<<<<<<< HEAD
 	at91_calc_twi_clock(dev, TWI_CLK_HZ);
+=======
+	rc = of_property_read_u32(dev->dev->of_node, "clock-frequency",
+			&bus_clk_rate);
+	if (rc)
+		bus_clk_rate = DEFAULT_TWI_CLK_HZ;
+
+	at91_calc_twi_clock(dev, bus_clk_rate);
+>>>>>>> v3.18
 	at91_init_twi_bus(dev);
 
 	snprintf(dev->adapter.name, sizeof(dev->adapter.name), "AT91");
 	i2c_set_adapdata(&dev->adapter, dev);
 	dev->adapter.owner = THIS_MODULE;
+<<<<<<< HEAD
 	dev->adapter.class = I2C_CLASS_HWMON;
+=======
+	dev->adapter.class = I2C_CLASS_DEPRECATED;
+>>>>>>> v3.18
 	dev->adapter.algo = &at91_twi_algorithm;
 	dev->adapter.dev.parent = dev->dev;
 	dev->adapter.nr = pdev->id;
@@ -889,8 +998,11 @@ static int at91_twi_probe(struct platform_device *pdev)
 		return rc;
 	}
 
+<<<<<<< HEAD
 	of_i2c_register_devices(&dev->adapter);
 
+=======
+>>>>>>> v3.18
 	dev_info(dev->dev, "AT91 i2c bus driver.\n");
 	return 0;
 }

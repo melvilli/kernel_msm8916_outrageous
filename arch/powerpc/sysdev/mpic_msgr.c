@@ -184,7 +184,11 @@ static int mpic_msgr_probe(struct platform_device *dev)
 		dev_info(&dev->dev, "Found %d message registers\n",
 				mpic_msgr_count);
 
+<<<<<<< HEAD
 		mpic_msgrs = kzalloc(sizeof(struct mpic_msgr) * mpic_msgr_count,
+=======
+		mpic_msgrs = kcalloc(mpic_msgr_count, sizeof(*mpic_msgrs),
+>>>>>>> v3.18
 							 GFP_KERNEL);
 		if (!mpic_msgrs) {
 			dev_err(&dev->dev,
@@ -237,15 +241,23 @@ static int mpic_msgr_probe(struct platform_device *dev)
 		raw_spin_lock_init(&msgr->lock);
 
 		if (receive_mask & (1 << i)) {
+<<<<<<< HEAD
 			struct resource irq;
 
 			if (of_irq_to_resource(np, irq_index, &irq) == NO_IRQ) {
+=======
+			msgr->irq = irq_of_parse_and_map(np, irq_index);
+			if (msgr->irq == NO_IRQ) {
+>>>>>>> v3.18
 				dev_err(&dev->dev,
 						"Missing interrupt specifier");
 				kfree(msgr);
 				return -EFAULT;
 			}
+<<<<<<< HEAD
 			msgr->irq = irq.start;
+=======
+>>>>>>> v3.18
 			irq_index += 1;
 		} else {
 			msgr->irq = NO_IRQ;

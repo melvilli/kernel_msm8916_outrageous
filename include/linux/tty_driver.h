@@ -35,14 +35,23 @@
  * 	This routine is mandatory; if this routine is not filled in,
  * 	the attempted open will fail with ENODEV.
  *
+<<<<<<< HEAD
  *	Required method.
  *     
+=======
+ *	Required method. Called with tty lock held.
+ *
+>>>>>>> v3.18
  * void (*close)(struct tty_struct * tty, struct file * filp);
  *
  * 	This routine is called when a particular tty device is closed.
  *	Note: called even if the corresponding open() failed.
  *
+<<<<<<< HEAD
  *	Required method.
+=======
+ *	Required method. Called with tty lock held.
+>>>>>>> v3.18
  *
  * void (*shutdown)(struct tty_struct * tty);
  *
@@ -152,6 +161,11 @@
  * 	This routine notifies the tty driver that it should stop
  * 	outputting characters to the tty device.  
  *
+<<<<<<< HEAD
+=======
+ *	Called with ->flow_lock held. Serialized with start() method.
+ *
+>>>>>>> v3.18
  *	Optional:
  *
  *	Note: Call stop_tty not this method.
@@ -161,6 +175,11 @@
  * 	This routine notifies the tty driver that it resume sending
  *	characters to the tty device.
  *
+<<<<<<< HEAD
+=======
+ *	Called with ->flow_lock held. Serialized with stop() method.
+ *
+>>>>>>> v3.18
  *	Optional:
  *
  *	Note: Call start_tty not this method.
@@ -172,6 +191,11 @@
  *
  *	Optional:
  *
+<<<<<<< HEAD
+=======
+ *	Called with tty lock held.
+ *
+>>>>>>> v3.18
  * int (*break_ctl)(struct tty_struct *tty, int state);
  *
  * 	This optional routine requests the tty driver to turn on or

@@ -19,7 +19,11 @@
  * or detected.
  */
 
+<<<<<<< HEAD
 #if defined(CONFIG_MTD_NAND) || defined(CONFIG_MTD_NAND_MODULE)
+=======
+#if IS_ENABLED(CONFIG_MTD_NAND)
+>>>>>>> v3.18
 
 struct nand_ecc_test {
 	const char *name;

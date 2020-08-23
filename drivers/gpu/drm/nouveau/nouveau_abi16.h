@@ -28,8 +28,12 @@ struct nouveau_abi16_chan {
 };
 
 struct nouveau_abi16 {
+<<<<<<< HEAD
 	struct nouveau_object *client;
 	struct nouveau_object *device;
+=======
+	struct nvif_device device;
+>>>>>>> v3.18
 	struct list_head channels;
 	u64 handles;
 };

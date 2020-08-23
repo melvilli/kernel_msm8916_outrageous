@@ -15,7 +15,10 @@
 #include <linux/err.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/errno.h>
 #include <linux/platform_device.h>
 #include <linux/i2c.h>
@@ -24,7 +27,10 @@
 #include <linux/i2c-ocores.h>
 #include <linux/slab.h>
 #include <linux/io.h>
+<<<<<<< HEAD
 #include <linux/of_i2c.h>
+=======
+>>>>>>> v3.18
 #include <linux/log2.h>
 
 struct ocores_i2c {
@@ -241,6 +247,7 @@ static u32 ocores_func(struct i2c_adapter *adap)
 }
 
 static const struct i2c_algorithm ocores_algorithm = {
+<<<<<<< HEAD
 	.master_xfer	= ocores_xfer,
 	.functionality	= ocores_func,
 };
@@ -253,6 +260,20 @@ static struct i2c_adapter ocores_adapter = {
 };
 
 static struct of_device_id ocores_i2c_match[] = {
+=======
+	.master_xfer = ocores_xfer,
+	.functionality = ocores_func,
+};
+
+static struct i2c_adapter ocores_adapter = {
+	.owner = THIS_MODULE,
+	.name = "i2c-ocores",
+	.class = I2C_CLASS_DEPRECATED,
+	.algo = &ocores_algorithm,
+};
+
+static const struct of_device_id ocores_i2c_match[] = {
+>>>>>>> v3.18
 	{
 		.compatible = "opencores,i2c-ocores",
 		.data = (void *)TYPE_OCORES,
@@ -353,10 +374,13 @@ static int ocores_i2c_probe(struct platform_device *pdev)
 	int ret;
 	int i;
 
+<<<<<<< HEAD
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!res)
 		return -ENODEV;
 
+=======
+>>>>>>> v3.18
 	irq = platform_get_irq(pdev, 0);
 	if (irq < 0)
 		return irq;
@@ -365,11 +389,19 @@ static int ocores_i2c_probe(struct platform_device *pdev)
 	if (!i2c)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+=======
+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+>>>>>>> v3.18
 	i2c->base = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(i2c->base))
 		return PTR_ERR(i2c->base);
 
+<<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	if (pdata) {
 		i2c->reg_shift = pdata->reg_shift;
 		i2c->reg_io_width = pdata->reg_io_width;
@@ -435,8 +467,11 @@ static int ocores_i2c_probe(struct platform_device *pdev)
 	if (pdata) {
 		for (i = 0; i < pdata->num_devices; i++)
 			i2c_new_device(&i2c->adap, pdata->devices + i);
+<<<<<<< HEAD
 	} else {
 		of_i2c_register_devices(&i2c->adap);
+=======
+>>>>>>> v3.18
 	}
 
 	return 0;
@@ -456,7 +491,11 @@ static int ocores_i2c_remove(struct platform_device *pdev)
 	return 0;
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 static int ocores_i2c_suspend(struct device *dev)
 {
 	struct ocores_i2c *i2c = dev_get_drvdata(dev);

@@ -20,6 +20,10 @@
 #include <linux/dma-mapping.h>
 #include <linux/serial_8250.h>
 #include <linux/io.h>
+<<<<<<< HEAD
+=======
+#include <linux/reboot.h>
+>>>>>>> v3.18
 #ifdef CONFIG_MTD_PHYSMAP
 #include <linux/mtd/physmap.h>
 #endif
@@ -27,6 +31,10 @@
 #include <mach/hardware.h>
 #include <asm/irq.h>
 #include <asm/hardware/iop_adma.h>
+<<<<<<< HEAD
+=======
+#include <mach/irqs.h>
+>>>>>>> v3.18
 
 #define IOP13XX_UART_XTAL 33334000
 #define IOP13XX_SETUP_DEBUG 0
@@ -469,7 +477,10 @@ void __init iop13xx_platform_init(void)
 			dma_cap_set(DMA_MEMCPY, plat_data->cap_mask);
 			dma_cap_set(DMA_XOR, plat_data->cap_mask);
 			dma_cap_set(DMA_XOR_VAL, plat_data->cap_mask);
+<<<<<<< HEAD
 			dma_cap_set(DMA_MEMSET, plat_data->cap_mask);
+=======
+>>>>>>> v3.18
 			dma_cap_set(DMA_INTERRUPT, plat_data->cap_mask);
 			break;
 		case IOP13XX_INIT_ADMA_1:
@@ -479,7 +490,10 @@ void __init iop13xx_platform_init(void)
 			dma_cap_set(DMA_MEMCPY, plat_data->cap_mask);
 			dma_cap_set(DMA_XOR, plat_data->cap_mask);
 			dma_cap_set(DMA_XOR_VAL, plat_data->cap_mask);
+<<<<<<< HEAD
 			dma_cap_set(DMA_MEMSET, plat_data->cap_mask);
+=======
+>>>>>>> v3.18
 			dma_cap_set(DMA_INTERRUPT, plat_data->cap_mask);
 			break;
 		case IOP13XX_INIT_ADMA_2:
@@ -489,7 +503,10 @@ void __init iop13xx_platform_init(void)
 			dma_cap_set(DMA_MEMCPY, plat_data->cap_mask);
 			dma_cap_set(DMA_XOR, plat_data->cap_mask);
 			dma_cap_set(DMA_XOR_VAL, plat_data->cap_mask);
+<<<<<<< HEAD
 			dma_cap_set(DMA_MEMSET, plat_data->cap_mask);
+=======
+>>>>>>> v3.18
 			dma_cap_set(DMA_INTERRUPT, plat_data->cap_mask);
 			dma_cap_set(DMA_PQ, plat_data->cap_mask);
 			dma_cap_set(DMA_PQ_VAL, plat_data->cap_mask);

@@ -54,7 +54,11 @@ static inline pgoff_t swp_offset(swp_entry_t entry)
 /* check whether a pte points to a swap entry */
 static inline int is_swap_pte(pte_t pte)
 {
+<<<<<<< HEAD
 	return !pte_none(pte) && !pte_present(pte) && !pte_file(pte);
+=======
+	return !pte_none(pte) && !pte_present_nonuma(pte) && !pte_file(pte);
+>>>>>>> v3.18
 }
 #endif
 
@@ -67,6 +71,11 @@ static inline swp_entry_t pte_to_swp_entry(pte_t pte)
 	swp_entry_t arch_entry;
 
 	BUG_ON(pte_file(pte));
+<<<<<<< HEAD
+=======
+	if (pte_swp_soft_dirty(pte))
+		pte = pte_swp_clear_soft_dirty(pte);
+>>>>>>> v3.18
 	arch_entry = __pte_to_swp_entry(pte);
 	return swp_entry(__swp_type(arch_entry), __swp_offset(arch_entry));
 }
@@ -137,7 +146,12 @@ static inline void make_migration_entry_read(swp_entry_t *entry)
 
 extern void migration_entry_wait(struct mm_struct *mm, pmd_t *pmd,
 					unsigned long address);
+<<<<<<< HEAD
 extern void migration_entry_wait_huge(struct mm_struct *mm, pte_t *pte);
+=======
+extern void migration_entry_wait_huge(struct vm_area_struct *vma,
+		struct mm_struct *mm, pte_t *pte);
+>>>>>>> v3.18
 #else
 
 #define make_migration_entry(page, write) swp_entry(0, 0)
@@ -149,8 +163,13 @@ static inline int is_migration_entry(swp_entry_t swp)
 static inline void make_migration_entry_read(swp_entry_t *entryp) { }
 static inline void migration_entry_wait(struct mm_struct *mm, pmd_t *pmd,
 					 unsigned long address) { }
+<<<<<<< HEAD
 static inline void migration_entry_wait_huge(struct mm_struct *mm,
 					pte_t *pte) { }
+=======
+static inline void migration_entry_wait_huge(struct vm_area_struct *vma,
+		struct mm_struct *mm, pte_t *pte) { }
+>>>>>>> v3.18
 static inline int is_write_migration_entry(swp_entry_t entry)
 {
 	return 0;

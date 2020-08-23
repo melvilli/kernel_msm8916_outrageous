@@ -80,8 +80,11 @@ struct vx_pipe {
 
 	unsigned int references;     /* an output pipe may be used for monitoring and/or playback */
 	struct vx_pipe *monitoring_pipe;  /* pointer to the monitoring pipe (capture pipe only)*/
+<<<<<<< HEAD
 
 	struct tasklet_struct start_tq;
+=======
+>>>>>>> v3.18
 };
 
 struct vx_core;
@@ -165,9 +168,13 @@ struct vx_core {
 	struct snd_vx_hardware *hw;
 	struct snd_vx_ops *ops;
 
+<<<<<<< HEAD
 	spinlock_t lock;
 	spinlock_t irq_lock;
 	struct tasklet_struct tq;
+=======
+	struct mutex lock;
+>>>>>>> v3.18
 
 	unsigned int chip_status;
 	unsigned int pcm_running;
@@ -223,6 +230,10 @@ void snd_vx_free_firmware(struct vx_core *chip);
  * interrupt handler; exported for pcmcia
  */
 irqreturn_t snd_vx_irq_handler(int irq, void *dev);
+<<<<<<< HEAD
+=======
+irqreturn_t snd_vx_threaded_irq_handler(int irq, void *dev);
+>>>>>>> v3.18
 
 /*
  * lowlevel functions

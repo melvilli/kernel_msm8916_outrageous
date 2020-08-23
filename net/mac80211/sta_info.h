@@ -1,5 +1,9 @@
 /*
  * Copyright 2002-2005, Devicescape Software, Inc.
+<<<<<<< HEAD
+=======
+ * Copyright 2013-2014  Intel Mobile Communications GmbH
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -31,7 +35,10 @@
  *	when virtual port control is not in use.
  * @WLAN_STA_SHORT_PREAMBLE: Station is capable of receiving short-preamble
  *	frames.
+<<<<<<< HEAD
  * @WLAN_STA_WME: Station is a QoS-STA.
+=======
+>>>>>>> v3.18
  * @WLAN_STA_WDS: Station is one of our WDS peers.
  * @WLAN_STA_CLEAR_PS_FILT: Clear PS filter in hardware (using the
  *	IEEE80211_TX_CTL_CLEAR_PS_FILT control flag) when the next
@@ -47,6 +54,11 @@
  * @WLAN_STA_TDLS_PEER: Station is a TDLS peer.
  * @WLAN_STA_TDLS_PEER_AUTH: This TDLS peer is authorized to send direct
  *	packets. This means the link is enabled.
+<<<<<<< HEAD
+=======
+ * @WLAN_STA_TDLS_INITIATOR: We are the initiator of the TDLS link with this
+ *	station.
+>>>>>>> v3.18
  * @WLAN_STA_UAPSD: Station requested unscheduled SP while driver was
  *	keeping station in power-save mode, reply when the driver
  *	unblocks the station.
@@ -58,6 +70,11 @@
  * @WLAN_STA_TOFFSET_KNOWN: toffset calculated for this station is valid.
  * @WLAN_STA_MPSP_OWNER: local STA is owner of a mesh Peer Service Period.
  * @WLAN_STA_MPSP_RECIPIENT: local STA is recipient of a MPSP.
+<<<<<<< HEAD
+=======
+ * @WLAN_STA_PS_DELIVER: station woke up, but we're still blocking TX
+ *	until pending frames are delivered
+>>>>>>> v3.18
  */
 enum ieee80211_sta_info_flags {
 	WLAN_STA_AUTH,
@@ -65,7 +82,10 @@ enum ieee80211_sta_info_flags {
 	WLAN_STA_PS_STA,
 	WLAN_STA_AUTHORIZED,
 	WLAN_STA_SHORT_PREAMBLE,
+<<<<<<< HEAD
 	WLAN_STA_WME,
+=======
+>>>>>>> v3.18
 	WLAN_STA_WDS,
 	WLAN_STA_CLEAR_PS_FILT,
 	WLAN_STA_MFP,
@@ -74,6 +94,10 @@ enum ieee80211_sta_info_flags {
 	WLAN_STA_PSPOLL,
 	WLAN_STA_TDLS_PEER,
 	WLAN_STA_TDLS_PEER_AUTH,
+<<<<<<< HEAD
+=======
+	WLAN_STA_TDLS_INITIATOR,
+>>>>>>> v3.18
 	WLAN_STA_UAPSD,
 	WLAN_STA_SP,
 	WLAN_STA_4ADDR_EVENT,
@@ -82,6 +106,10 @@ enum ieee80211_sta_info_flags {
 	WLAN_STA_TOFFSET_KNOWN,
 	WLAN_STA_MPSP_OWNER,
 	WLAN_STA_MPSP_RECIPIENT,
+<<<<<<< HEAD
+=======
+	WLAN_STA_PS_DELIVER,
+>>>>>>> v3.18
 };
 
 #define ADDBA_RESP_INTERVAL HZ
@@ -149,7 +177,12 @@ struct tid_ampdu_tx {
 /**
  * struct tid_ampdu_rx - TID aggregation information (Rx).
  *
+<<<<<<< HEAD
  * @reorder_buf: buffer to reorder incoming aggregated MPDUs
+=======
+ * @reorder_buf: buffer to reorder incoming aggregated MPDUs. An MPDU may be an
+ *	A-MSDU with individually reported subframes.
+>>>>>>> v3.18
  * @reorder_time: jiffies when skb was added
  * @session_timer: check if peer keeps Tx-ing on the TID (by timeout value)
  * @reorder_timer: releases expired frames from the reorder buffer.
@@ -162,6 +195,11 @@ struct tid_ampdu_tx {
  * @dialog_token: dialog token for aggregation session
  * @rcu_head: RCU head used for freeing this struct
  * @reorder_lock: serializes access to reorder buffer, see below.
+<<<<<<< HEAD
+=======
+ * @auto_seq: used for offloaded BA sessions to automatically pick head_seq_and
+ *	and ssn.
+>>>>>>> v3.18
  *
  * This structure's lifetime is managed by RCU, assignments to
  * the array holding it must hold the aggregation mutex.
@@ -174,7 +212,11 @@ struct tid_ampdu_tx {
 struct tid_ampdu_rx {
 	struct rcu_head rcu_head;
 	spinlock_t reorder_lock;
+<<<<<<< HEAD
 	struct sk_buff **reorder_buf;
+=======
+	struct sk_buff_head *reorder_buf;
+>>>>>>> v3.18
 	unsigned long *reorder_time;
 	struct timer_list session_timer;
 	struct timer_list reorder_timer;
@@ -185,6 +227,10 @@ struct tid_ampdu_rx {
 	u16 buf_size;
 	u16 timeout;
 	u8 dialog_token;
+<<<<<<< HEAD
+=======
+	bool auto_seq;
+>>>>>>> v3.18
 };
 
 /**
@@ -203,6 +249,10 @@ struct tid_ampdu_rx {
  *	driver requested to close until the work for it runs
  * @mtx: mutex to protect all TX data (except non-NULL assignments
  *	to tid_tx[idx], which are protected by the sta spinlock)
+<<<<<<< HEAD
+=======
+ *	tid_start_tx is also protected by sta->lock.
+>>>>>>> v3.18
  */
 struct sta_ampdu_mlme {
 	struct mutex mtx;
@@ -219,6 +269,28 @@ struct sta_ampdu_mlme {
 	u8 dialog_token_allocator;
 };
 
+<<<<<<< HEAD
+=======
+/*
+ * struct ieee80211_tx_latency_stat - Tx latency statistics
+ *
+ * Measures TX latency and jitter for a station per TID.
+ *
+ * @max: worst case latency
+ * @sum: sum of all latencies
+ * @counter: amount of Tx frames sent from interface
+ * @bins: each bin counts how many frames transmitted within a certain
+ * latency range. when disabled it is NULL.
+ * @bin_count: amount of bins.
+ */
+struct ieee80211_tx_latency_stat {
+	u32 max;
+	u32 sum;
+	u32 counter;
+	u32 *bins;
+	u32 bin_count;
+};
+>>>>>>> v3.18
 
 /**
  * struct sta_info - STA information
@@ -227,21 +299,40 @@ struct sta_ampdu_mlme {
  * mac80211 is communicating with.
  *
  * @list: global linked list entry
+<<<<<<< HEAD
  * @hnext: hash table linked list pointer
  * @local: pointer to the global information
  * @sdata: virtual interface this station belongs to
  * @ptk: peer key negotiated with this station, if any
  * @gtk: group keys negotiated with this station, if any
+=======
+ * @free_list: list entry for keeping track of stations to free
+ * @hnext: hash table linked list pointer
+ * @local: pointer to the global information
+ * @sdata: virtual interface this station belongs to
+ * @ptk: peer keys negotiated with this station, if any
+ * @ptk_idx: last installed peer key index
+ * @gtk: group keys negotiated with this station, if any
+ * @gtk_idx: last installed group key index
+>>>>>>> v3.18
  * @rate_ctrl: rate control algorithm reference
  * @rate_ctrl_priv: rate control private per-STA pointer
  * @last_tx_rate: rate used for last transmit, to report to userspace as
  *	"the" transmit rate
  * @last_rx_rate_idx: rx status rate index of the last data packet
  * @last_rx_rate_flag: rx status flag of the last data packet
+<<<<<<< HEAD
  * @last_rx_rate_vht_nss: rx status nss of last data packet
  * @lock: used for locking all fields that require locking, see comments
  *	in the header file.
  * @drv_unblock_wk: used for driver PS unblocking
+=======
+ * @last_rx_rate_vht_flag: rx status vht flag of the last data packet
+ * @last_rx_rate_vht_nss: rx status nss of last data packet
+ * @lock: used for locking all fields that require locking, see comments
+ *	in the header file.
+ * @drv_deliver_wk: used for delivering frames after driver PS unblocking
+>>>>>>> v3.18
  * @listen_interval: listen interval of this station, when we're acting as AP
  * @_flags: STA flags, see &enum ieee80211_sta_info_flags, do not use directly
  * @ps_lock: used for powersave (when mac80211 is the AP) related locking
@@ -254,7 +345,10 @@ struct sta_ampdu_mlme {
  * @driver_buffered_tids: bitmap of TIDs the driver has data buffered on
  * @rx_packets: Number of MSDUs received from this STA
  * @rx_bytes: Number of bytes received from this STA
+<<<<<<< HEAD
  * @wep_weak_iv_count: number of weak WEP IVs received from this station
+=======
+>>>>>>> v3.18
  * @last_rx: time (in jiffies) when last frame was received from this STA
  * @last_connected: time (in seconds) when a station got connected
  * @num_duplicates: number of duplicate frames received from this STA
@@ -274,11 +368,18 @@ struct sta_ampdu_mlme {
  * @tid_seq: per-TID sequence numbers for sending to this STA
  * @ampdu_mlme: A-MPDU state machine state
  * @timer_to_tid: identity mapping to ID timers
+<<<<<<< HEAD
+=======
+ * @tx_lat: Tx latency statistics
+>>>>>>> v3.18
  * @llid: Local link ID
  * @plid: Peer link ID
  * @reason: Cancel reason on PLINK_HOLDING state
  * @plink_retries: Retries in establishment
+<<<<<<< HEAD
  * @ignore_plink_timer: ignore the peer-link timer (used internally)
+=======
+>>>>>>> v3.18
  * @plink_state: peer link state
  * @plink_timeout: timeout of peer link
  * @plink_timer: peer link watch timer
@@ -298,21 +399,45 @@ struct sta_ampdu_mlme {
  * @rcu_head: RCU head used for freeing this station struct
  * @cur_max_bandwidth: maximum bandwidth to use for TX to the station,
  *	taken from HT/VHT capabilities or VHT operating mode notification
+<<<<<<< HEAD
  */
 struct sta_info {
 	/* General information, mostly static */
 	struct list_head list;
+=======
+ * @chains: chains ever used for RX from this station
+ * @chain_signal_last: last signal (per chain)
+ * @chain_signal_avg: signal average (per chain)
+ * @known_smps_mode: the smps_mode the client thinks we are in. Relevant for
+ *	AP only.
+ * @cipher_scheme: optional cipher scheme for this station
+ * @last_tdls_pkt_time: holds the time in jiffies of last TDLS pkt ACKed
+ */
+struct sta_info {
+	/* General information, mostly static */
+	struct list_head list, free_list;
+>>>>>>> v3.18
 	struct rcu_head rcu_head;
 	struct sta_info __rcu *hnext;
 	struct ieee80211_local *local;
 	struct ieee80211_sub_if_data *sdata;
 	struct ieee80211_key __rcu *gtk[NUM_DEFAULT_KEYS + NUM_DEFAULT_MGMT_KEYS];
+<<<<<<< HEAD
 	struct ieee80211_key __rcu *ptk;
+=======
+	struct ieee80211_key __rcu *ptk[NUM_DEFAULT_KEYS];
+	u8 gtk_idx;
+	u8 ptk_idx;
+>>>>>>> v3.18
 	struct rate_control_ref *rate_ctrl;
 	void *rate_ctrl_priv;
 	spinlock_t lock;
 
+<<<<<<< HEAD
 	struct work_struct drv_unblock_wk;
+=======
+	struct work_struct drv_deliver_wk;
+>>>>>>> v3.18
 
 	u16 listen_interval;
 
@@ -334,7 +459,10 @@ struct sta_info {
 	/* Updated from RX path only, no locking requirements */
 	unsigned long rx_packets;
 	u64 rx_bytes;
+<<<<<<< HEAD
 	unsigned long wep_weak_iv_count;
+=======
+>>>>>>> v3.18
 	unsigned long last_rx;
 	long last_connected;
 	unsigned long num_duplicates;
@@ -343,6 +471,14 @@ struct sta_info {
 	int last_signal;
 	struct ewma avg_signal;
 	int last_ack_signal;
+<<<<<<< HEAD
+=======
+
+	u8 chains;
+	s8 chain_signal_last[IEEE80211_MAX_CHAINS];
+	struct ewma chain_signal_avg[IEEE80211_MAX_CHAINS];
+
+>>>>>>> v3.18
 	/* Plus 1 for non-QoS frames */
 	__le16 last_seq_ctrl[IEEE80211_NUM_TIDS + 1];
 
@@ -359,6 +495,10 @@ struct sta_info {
 	struct ieee80211_tx_rate last_tx_rate;
 	int last_rx_rate_idx;
 	u32 last_rx_rate_flag;
+<<<<<<< HEAD
+=======
+	u32 last_rx_rate_vht_flag;
+>>>>>>> v3.18
 	u8 last_rx_rate_vht_nss;
 	u16 tid_seq[IEEE80211_QOS_CTL_TID_MASK + 1];
 
@@ -368,16 +508,28 @@ struct sta_info {
 	struct sta_ampdu_mlme ampdu_mlme;
 	u8 timer_to_tid[IEEE80211_NUM_TIDS];
 
+<<<<<<< HEAD
+=======
+	struct ieee80211_tx_latency_stat *tx_lat;
+
+>>>>>>> v3.18
 #ifdef CONFIG_MAC80211_MESH
 	/*
 	 * Mesh peer link attributes
 	 * TODO: move to a sub-structure that is referenced with pointer?
 	 */
+<<<<<<< HEAD
 	__le16 llid;
 	__le16 plid;
 	__le16 reason;
 	u8 plink_retries;
 	bool ignore_plink_timer;
+=======
+	u16 llid;
+	u16 plid;
+	u16 reason;
+	u8 plink_retries;
+>>>>>>> v3.18
 	enum nl80211_plink_state plink_state;
 	u32 plink_timeout;
 	struct timer_list plink_timer;
@@ -401,6 +553,15 @@ struct sta_info {
 	unsigned int lost_packets;
 	unsigned int beacon_loss_count;
 
+<<<<<<< HEAD
+=======
+	enum ieee80211_smps_mode known_smps_mode;
+	const struct ieee80211_cipher_scheme *cipher_scheme;
+
+	/* TDLS timeout data */
+	unsigned long last_tdls_pkt_time;
+
+>>>>>>> v3.18
 	/* keep last! */
 	struct ieee80211_sta sta;
 };
@@ -563,6 +724,7 @@ void sta_info_recalc_tim(struct sta_info *sta);
 
 void sta_info_init(struct ieee80211_local *local);
 void sta_info_stop(struct ieee80211_local *local);
+<<<<<<< HEAD
 int sta_info_flush_defer(struct ieee80211_sub_if_data *sdata);
 
 /**
@@ -578,6 +740,8 @@ int sta_info_flush_defer(struct ieee80211_sub_if_data *sdata);
  * calls that add stations to the cleanup queue have completed.
  */
 void sta_info_flush_cleanup(struct ieee80211_sub_if_data *sdata);
+=======
+>>>>>>> v3.18
 
 /**
  * sta_info_flush - flush matching STA entries from the STA table
@@ -585,6 +749,7 @@ void sta_info_flush_cleanup(struct ieee80211_sub_if_data *sdata);
  * Returns the number of removed STA entries.
  *
  * @sdata: sdata to remove all stations from
+<<<<<<< HEAD
  */
 static inline int sta_info_flush(struct ieee80211_sub_if_data *sdata)
 {
@@ -594,6 +759,15 @@ static inline int sta_info_flush(struct ieee80211_sub_if_data *sdata)
 	sta_info_flush_cleanup(sdata);
 
 	return ret;
+=======
+ * @vlans: if the given interface is an AP interface, also flush VLANs
+ */
+int __sta_info_flush(struct ieee80211_sub_if_data *sdata, bool vlans);
+
+static inline int sta_info_flush(struct ieee80211_sub_if_data *sdata)
+{
+	return __sta_info_flush(sdata, false);
+>>>>>>> v3.18
 }
 
 void sta_set_rate_info_tx(struct sta_info *sta,
@@ -601,13 +775,24 @@ void sta_set_rate_info_tx(struct sta_info *sta,
 			  struct rate_info *rinfo);
 void sta_set_rate_info_rx(struct sta_info *sta,
 			  struct rate_info *rinfo);
+<<<<<<< HEAD
 void ieee80211_sta_expire(struct ieee80211_sub_if_data *sdata,
 			  unsigned long exp_time);
+=======
+void sta_set_sinfo(struct sta_info *sta, struct station_info *sinfo);
+
+void ieee80211_sta_expire(struct ieee80211_sub_if_data *sdata,
+			  unsigned long exp_time);
+u8 sta_info_tx_streams(struct sta_info *sta);
+>>>>>>> v3.18
 
 void ieee80211_sta_ps_deliver_wakeup(struct sta_info *sta);
 void ieee80211_sta_ps_deliver_poll_response(struct sta_info *sta);
 void ieee80211_sta_ps_deliver_uapsd(struct sta_info *sta);
 
+<<<<<<< HEAD
 void ieee80211_cleanup_sdata_stas(struct ieee80211_sub_if_data *sdata);
 
+=======
+>>>>>>> v3.18
 #endif /* STA_INFO_H */

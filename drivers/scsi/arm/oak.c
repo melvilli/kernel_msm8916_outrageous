@@ -37,9 +37,12 @@
 #define NCR5380_implementation_fields	\
 	void __iomem *base
 
+<<<<<<< HEAD
 #define BOARD_NORMAL	0
 #define BOARD_NCR53C400	1
 
+=======
+>>>>>>> v3.18
 #include "../NCR5380.h"
 
 #undef START_DMA_INITIATOR_RECEIVE_REG

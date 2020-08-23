@@ -120,10 +120,14 @@ decode_sattr3(__be32 *p, struct iattr *iap)
 
 		iap->ia_valid |= ATTR_SIZE;
 		p = xdr_decode_hyper(p, &newsize);
+<<<<<<< HEAD
 		if (newsize <= NFS_OFFSET_MAX)
 			iap->ia_size = newsize;
 		else
 			iap->ia_size = NFS_OFFSET_MAX;
+=======
+		iap->ia_size = min_t(u64, newsize, NFS_OFFSET_MAX);
+>>>>>>> v3.18
 	}
 	if ((tmp = ntohl(*p++)) == 1) {	/* set to server time */
 		iap->ia_valid |= ATTR_ATIME;
@@ -168,7 +172,11 @@ encode_fattr3(struct svc_rqst *rqstp, __be32 *p, struct svc_fh *fhp,
 	      struct kstat *stat)
 {
 	*p++ = htonl(nfs3_ftypes[(stat->mode & S_IFMT) >> 12]);
+<<<<<<< HEAD
 	*p++ = htonl((u32) stat->mode);
+=======
+	*p++ = htonl((u32) (stat->mode & S_IALLUGO));
+>>>>>>> v3.18
 	*p++ = htonl((u32) stat->nlink);
 	*p++ = htonl((u32) from_kuid(&init_user_ns, stat->uid));
 	*p++ = htonl((u32) from_kgid(&init_user_ns, stat->gid));
@@ -278,7 +286,12 @@ void fill_post_wcc(struct svc_fh *fhp)
 int
 nfs3svc_decode_fhandle(struct svc_rqst *rqstp, __be32 *p, struct nfsd_fhandle *args)
 {
+<<<<<<< HEAD
 	if (!(p = decode_fh(p, &args->fh)))
+=======
+	p = decode_fh(p, &args->fh);
+	if (!p)
+>>>>>>> v3.18
 		return 0;
 	return xdr_argsize_check(rqstp, p);
 }
@@ -287,7 +300,12 @@ int
 nfs3svc_decode_sattrargs(struct svc_rqst *rqstp, __be32 *p,
 					struct nfsd3_sattrargs *args)
 {
+<<<<<<< HEAD
 	if (!(p = decode_fh(p, &args->fh)))
+=======
+	p = decode_fh(p, &args->fh);
+	if (!p)
+>>>>>>> v3.18
 		return 0;
 	p = decode_sattr3(p, &args->attrs);
 
@@ -315,7 +333,12 @@ int
 nfs3svc_decode_accessargs(struct svc_rqst *rqstp, __be32 *p,
 					struct nfsd3_accessargs *args)
 {
+<<<<<<< HEAD
 	if (!(p = decode_fh(p, &args->fh)))
+=======
+	p = decode_fh(p, &args->fh);
+	if (!p)
+>>>>>>> v3.18
 		return 0;
 	args->access = ntohl(*p++);
 
@@ -330,6 +353,7 @@ nfs3svc_decode_readargs(struct svc_rqst *rqstp, __be32 *p,
 	int v;
 	u32 max_blocksize = svc_max_payload(rqstp);
 
+<<<<<<< HEAD
 	if (!(p = decode_fh(p, &args->fh)))
 		return 0;
 	p = xdr_decode_hyper(p, &args->offset);
@@ -338,6 +362,15 @@ nfs3svc_decode_readargs(struct svc_rqst *rqstp, __be32 *p,
 
 	if (len > max_blocksize)
 		len = max_blocksize;
+=======
+	p = decode_fh(p, &args->fh);
+	if (!p)
+		return 0;
+	p = xdr_decode_hyper(p, &args->offset);
+
+	args->count = ntohl(*p++);
+	len = min(args->count, max_blocksize);
+>>>>>>> v3.18
 
 	/* set up the kvec */
 	v=0;
@@ -345,7 +378,11 @@ nfs3svc_decode_readargs(struct svc_rqst *rqstp, __be32 *p,
 		struct page *p = *(rqstp->rq_next_page++);
 
 		rqstp->rq_vec[v].iov_base = page_address(p);
+<<<<<<< HEAD
 		rqstp->rq_vec[v].iov_len = len < PAGE_SIZE? len : PAGE_SIZE;
+=======
+		rqstp->rq_vec[v].iov_len = min_t(unsigned int, len, PAGE_SIZE);
+>>>>>>> v3.18
 		len -= rqstp->rq_vec[v].iov_len;
 		v++;
 	}
@@ -360,7 +397,12 @@ nfs3svc_decode_writeargs(struct svc_rqst *rqstp, __be32 *p,
 	unsigned int len, v, hdr, dlen;
 	u32 max_blocksize = svc_max_payload(rqstp);
 
+<<<<<<< HEAD
 	if (!(p = decode_fh(p, &args->fh)))
+=======
+	p = decode_fh(p, &args->fh);
+	if (!p)
+>>>>>>> v3.18
 		return 0;
 	p = xdr_decode_hyper(p, &args->offset);
 
@@ -479,9 +521,13 @@ nfs3svc_decode_symlinkargs(struct svc_rqst *rqstp, __be32 *p,
 	}
 	/* now copy next page if there is one */
 	if (len && !avail && rqstp->rq_arg.page_len) {
+<<<<<<< HEAD
 		avail = rqstp->rq_arg.page_len;
 		if (avail > PAGE_SIZE)
 			avail = PAGE_SIZE;
+=======
+		avail = min_t(unsigned int, rqstp->rq_arg.page_len, PAGE_SIZE);
+>>>>>>> v3.18
 		old = page_address(rqstp->rq_arg.pages[0]);
 	}
 	while (len && avail && *old) {
@@ -535,7 +581,12 @@ int
 nfs3svc_decode_readlinkargs(struct svc_rqst *rqstp, __be32 *p,
 					struct nfsd3_readlinkargs *args)
 {
+<<<<<<< HEAD
 	if (!(p = decode_fh(p, &args->fh)))
+=======
+	p = decode_fh(p, &args->fh);
+	if (!p)
+>>>>>>> v3.18
 		return 0;
 	args->buffer = page_address(*(rqstp->rq_next_page++));
 
@@ -558,16 +609,25 @@ int
 nfs3svc_decode_readdirargs(struct svc_rqst *rqstp, __be32 *p,
 					struct nfsd3_readdirargs *args)
 {
+<<<<<<< HEAD
 	if (!(p = decode_fh(p, &args->fh)))
+=======
+	p = decode_fh(p, &args->fh);
+	if (!p)
+>>>>>>> v3.18
 		return 0;
 	p = xdr_decode_hyper(p, &args->cookie);
 	args->verf   = p; p += 2;
 	args->dircount = ~0;
 	args->count  = ntohl(*p++);
+<<<<<<< HEAD
 
 	if (args->count > PAGE_SIZE)
 		args->count = PAGE_SIZE;
 
+=======
+	args->count  = min_t(u32, args->count, PAGE_SIZE);
+>>>>>>> v3.18
 	args->buffer = page_address(*(rqstp->rq_next_page++));
 
 	return xdr_argsize_check(rqstp, p);
@@ -580,17 +640,26 @@ nfs3svc_decode_readdirplusargs(struct svc_rqst *rqstp, __be32 *p,
 	int len;
 	u32 max_blocksize = svc_max_payload(rqstp);
 
+<<<<<<< HEAD
 	if (!(p = decode_fh(p, &args->fh)))
+=======
+	p = decode_fh(p, &args->fh);
+	if (!p)
+>>>>>>> v3.18
 		return 0;
 	p = xdr_decode_hyper(p, &args->cookie);
 	args->verf     = p; p += 2;
 	args->dircount = ntohl(*p++);
 	args->count    = ntohl(*p++);
 
+<<<<<<< HEAD
 	len = (args->count > max_blocksize) ? max_blocksize :
 						  args->count;
 	args->count = len;
 
+=======
+	len = args->count = min(args->count, max_blocksize);
+>>>>>>> v3.18
 	while (len > 0) {
 		struct page *p = *(rqstp->rq_next_page++);
 		if (!args->buffer)
@@ -605,7 +674,12 @@ int
 nfs3svc_decode_commitargs(struct svc_rqst *rqstp, __be32 *p,
 					struct nfsd3_commitargs *args)
 {
+<<<<<<< HEAD
 	if (!(p = decode_fh(p, &args->fh)))
+=======
+	p = decode_fh(p, &args->fh);
+	if (!p)
+>>>>>>> v3.18
 		return 0;
 	p = xdr_decode_hyper(p, &args->offset);
 	args->count = ntohl(*p++);
@@ -842,21 +916,37 @@ out:
 
 static __be32 *encode_entryplus_baggage(struct nfsd3_readdirres *cd, __be32 *p, const char *name, int namlen)
 {
+<<<<<<< HEAD
 	struct svc_fh	fh;
 	__be32 err;
 
 	fh_init(&fh, NFS3_FHSIZE);
 	err = compose_entry_fh(cd, &fh, name, namlen);
+=======
+	struct svc_fh	*fh = &cd->scratch;
+	__be32 err;
+
+	fh_init(fh, NFS3_FHSIZE);
+	err = compose_entry_fh(cd, fh, name, namlen);
+>>>>>>> v3.18
 	if (err) {
 		*p++ = 0;
 		*p++ = 0;
 		goto out;
 	}
+<<<<<<< HEAD
 	p = encode_post_op_attr(cd->rqstp, p, &fh);
 	*p++ = xdr_one;			/* yes, a file handle follows */
 	p = encode_fh(p, &fh);
 out:
 	fh_put(&fh);
+=======
+	p = encode_post_op_attr(cd->rqstp, p, fh);
+	*p++ = xdr_one;			/* yes, a file handle follows */
+	p = encode_fh(p, fh);
+out:
+	fh_put(fh);
+>>>>>>> v3.18
 	return p;
 }
 
@@ -904,8 +994,12 @@ encode_entry(struct readdir_cd *ccd, const char *name, int namlen,
 	 */
 
 	/* truncate filename if too long */
+<<<<<<< HEAD
 	if (namlen > NFS3_MAXNAMLEN)
 		namlen = NFS3_MAXNAMLEN;
+=======
+	namlen = min(namlen, NFS3_MAXNAMLEN);
+>>>>>>> v3.18
 
 	slen = XDR_QUADLEN(namlen);
 	elen = slen + NFS3_ENTRY_BAGGAGE

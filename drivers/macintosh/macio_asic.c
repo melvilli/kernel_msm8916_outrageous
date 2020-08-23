@@ -24,6 +24,11 @@
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 
 #include <asm/machdep.h>
 #include <asm/macio.h>

@@ -11,10 +11,18 @@ have PPIs or SGIs.
 Main node required properties:
 
 - compatible : should be one of:
+<<<<<<< HEAD
+=======
+	"arm,gic-400"
+>>>>>>> v3.18
 	"arm,cortex-a15-gic"
 	"arm,cortex-a9-gic"
 	"arm,cortex-a7-gic"
 	"arm,arm11mp-gic"
+<<<<<<< HEAD
+=======
+	"brcm,brahma-b15-gic"
+>>>>>>> v3.18
 - interrupt-controller : Identifies the node as an interrupt controller
 - #interrupt-cells : Specifies the number of cells needed to encode an
   interrupt source.  The type shall be a <u32> and the value shall be 3.
@@ -49,6 +57,14 @@ Optional
   regions, used when the GIC doesn't have banked registers. The offset is
   cpu-offset * cpu-nr.
 
+<<<<<<< HEAD
+=======
+- arm,routable-irqs : Total number of gic irq inputs which are not directly
+		  connected from the peripherals, but are routed dynamically
+		  by a crossbar/multiplexer preceding the GIC. The GIC irq
+		  input line is assigned dynamically when the corresponding
+		  peripheral's crossbar line is mapped.
+>>>>>>> v3.18
 Example:
 
 	intc: interrupt-controller@fff11000 {
@@ -56,6 +72,10 @@ Example:
 		#interrupt-cells = <3>;
 		#address-cells = <1>;
 		interrupt-controller;
+<<<<<<< HEAD
+=======
+		arm,routable-irqs = <160>;
+>>>>>>> v3.18
 		reg = <0xfff11000 0x1000>,
 		      <0xfff10100 0x100>;
 	};

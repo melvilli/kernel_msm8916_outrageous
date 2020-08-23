@@ -66,7 +66,11 @@
 
 #include "tehuti.h"
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(bdx_pci_tbl) = {
+=======
+static const struct pci_device_id bdx_pci_tbl[] = {
+>>>>>>> v3.18
 	{ PCI_VDEVICE(TEHUTI, 0x3009), },
 	{ PCI_VDEVICE(TEHUTI, 0x3010), },
 	{ PCI_VDEVICE(TEHUTI, 0x3014), },
@@ -1764,7 +1768,11 @@ static void bdx_tx_cleanup(struct bdx_priv *priv)
 	WRITE_REG(priv, f->m.reg_RPTR, f->m.rptr & TXF_WPTR_WR_PTR);
 
 	/* We reclaimed resources, so in case the Q is stopped by xmit callback,
+<<<<<<< HEAD
 	 * we resume the transmition and use tx_lock to synchronize with xmit.*/
+=======
+	 * we resume the transmission and use tx_lock to synchronize with xmit.*/
+>>>>>>> v3.18
 	spin_lock(&priv->tx_lock);
 	priv->tx_level += tx_level;
 	BDX_ASSERT(priv->tx_level <= 0 || priv->tx_level > BDX_MAX_TX_LEVEL);
@@ -2413,7 +2421,11 @@ static void bdx_set_ethtool_ops(struct net_device *netdev)
 		.get_ethtool_stats = bdx_get_ethtool_stats,
 	};
 
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(netdev, &bdx_ethtool_ops);
+=======
+	netdev->ethtool_ops = &bdx_ethtool_ops;
+>>>>>>> v3.18
 }
 
 /**
@@ -2446,7 +2458,10 @@ static void bdx_remove(struct pci_dev *pdev)
 	iounmap(nic->regs);
 	pci_release_regions(pdev);
 	pci_disable_device(pdev);
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	vfree(nic);
 
 	RET();

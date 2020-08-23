@@ -2,7 +2,11 @@
  * SAS Transport Layer for MPT (Message Passing Technology) based controllers
  *
  * This code is based on drivers/scsi/mpt3sas/mpt3sas_transport.c
+<<<<<<< HEAD
  * Copyright (C) 2012  LSI Corporation
+=======
+ * Copyright (C) 2012-2014  LSI Corporation
+>>>>>>> v3.18
  *  (mailto:DL-MPTFusionLinux@lsi.com)
  *
  * This program is free software; you can redistribute it and/or
@@ -1003,9 +1007,18 @@ mpt3sas_transport_update_links(struct MPT3SAS_ADAPTER *ioc,
 		    &mpt3sas_phy->remote_identify);
 		_transport_add_phy_to_an_existing_port(ioc, sas_node,
 		    mpt3sas_phy, mpt3sas_phy->remote_identify.sas_address);
+<<<<<<< HEAD
 	} else
 		memset(&mpt3sas_phy->remote_identify, 0 , sizeof(struct
 		    sas_identify));
+=======
+	} else {
+		memset(&mpt3sas_phy->remote_identify, 0 , sizeof(struct
+		    sas_identify));
+		_transport_del_phy_from_an_existing_port(ioc, sas_node,
+		    mpt3sas_phy);
+	}
+>>>>>>> v3.18
 
 	if (mpt3sas_phy->phy)
 		mpt3sas_phy->phy->negotiated_linkrate =
@@ -1881,7 +1894,11 @@ _transport_smp_handler(struct Scsi_Host *shost, struct sas_rphy *rphy,
 	struct MPT3SAS_ADAPTER *ioc = shost_priv(shost);
 	Mpi2SmpPassthroughRequest_t *mpi_request;
 	Mpi2SmpPassthroughReply_t *mpi_reply;
+<<<<<<< HEAD
 	int rc, i;
+=======
+	int rc;
+>>>>>>> v3.18
 	u16 smid;
 	u32 ioc_state;
 	unsigned long timeleft;
@@ -1895,7 +1912,12 @@ _transport_smp_handler(struct Scsi_Host *shost, struct sas_rphy *rphy,
 	void *pci_addr_out = NULL;
 	u16 wait_state_count;
 	struct request *rsp = req->next_rq;
+<<<<<<< HEAD
 	struct bio_vec *bvec = NULL;
+=======
+	struct bio_vec bvec;
+	struct bvec_iter iter;
+>>>>>>> v3.18
 
 	if (!rsp) {
 		pr_err(MPT3SAS_FMT "%s: the smp response space is missing\n",
@@ -1922,7 +1944,11 @@ _transport_smp_handler(struct Scsi_Host *shost, struct sas_rphy *rphy,
 	ioc->transport_cmds.status = MPT3_CMD_PENDING;
 
 	/* Check if the request is split across multiple segments */
+<<<<<<< HEAD
 	if (req->bio->bi_vcnt > 1) {
+=======
+	if (bio_multiple_segments(req->bio)) {
+>>>>>>> v3.18
 		u32 offset = 0;
 
 		/* Allocate memory and copy the request */
@@ -1935,11 +1961,19 @@ _transport_smp_handler(struct Scsi_Host *shost, struct sas_rphy *rphy,
 			goto out;
 		}
 
+<<<<<<< HEAD
 		bio_for_each_segment(bvec, req->bio, i) {
 			memcpy(pci_addr_out + offset,
 			    page_address(bvec->bv_page) + bvec->bv_offset,
 			    bvec->bv_len);
 			offset += bvec->bv_len;
+=======
+		bio_for_each_segment(bvec, req->bio, iter) {
+			memcpy(pci_addr_out + offset,
+			    page_address(bvec.bv_page) + bvec.bv_offset,
+			    bvec.bv_len);
+			offset += bvec.bv_len;
+>>>>>>> v3.18
 		}
 	} else {
 		dma_addr_out = pci_map_single(ioc->pdev, bio_data(req->bio),
@@ -1954,7 +1988,11 @@ _transport_smp_handler(struct Scsi_Host *shost, struct sas_rphy *rphy,
 
 	/* Check if the response needs to be populated across
 	 * multiple segments */
+<<<<<<< HEAD
 	if (rsp->bio->bi_vcnt > 1) {
+=======
+	if (bio_multiple_segments(rsp->bio)) {
+>>>>>>> v3.18
 		pci_addr_in = pci_alloc_consistent(ioc->pdev, blk_rq_bytes(rsp),
 		    &pci_dma_in);
 		if (!pci_addr_in) {
@@ -2015,7 +2053,11 @@ _transport_smp_handler(struct Scsi_Host *shost, struct sas_rphy *rphy,
 	mpi_request->RequestDataLength = cpu_to_le16(blk_rq_bytes(req) - 4);
 	psge = &mpi_request->SGL;
 
+<<<<<<< HEAD
 	if (req->bio->bi_vcnt > 1)
+=======
+	if (bio_multiple_segments(req->bio))
+>>>>>>> v3.18
 		ioc->build_sg(ioc, psge, pci_dma_out, (blk_rq_bytes(req) - 4),
 		    pci_dma_in, (blk_rq_bytes(rsp) + 4));
 	else
@@ -2060,6 +2102,7 @@ _transport_smp_handler(struct Scsi_Host *shost, struct sas_rphy *rphy,
 
 		/* check if the resp needs to be copied from the allocated
 		 * pci mem */
+<<<<<<< HEAD
 		if (rsp->bio->bi_vcnt > 1) {
 			u32 offset = 0;
 			u32 bytes_to_copy =
@@ -2077,6 +2120,25 @@ _transport_smp_handler(struct Scsi_Host *shost, struct sas_rphy *rphy,
 					bytes_to_copy -= bvec->bv_len;
 				}
 				offset += bvec->bv_len;
+=======
+		if (bio_multiple_segments(rsp->bio)) {
+			u32 offset = 0;
+			u32 bytes_to_copy =
+			    le16_to_cpu(mpi_reply->ResponseDataLength);
+			bio_for_each_segment(bvec, rsp->bio, iter) {
+				if (bytes_to_copy <= bvec.bv_len) {
+					memcpy(page_address(bvec.bv_page) +
+					    bvec.bv_offset, pci_addr_in +
+					    offset, bytes_to_copy);
+					break;
+				} else {
+					memcpy(page_address(bvec.bv_page) +
+					    bvec.bv_offset, pci_addr_in +
+					    offset, bvec.bv_len);
+					bytes_to_copy -= bvec.bv_len;
+				}
+				offset += bvec.bv_len;
+>>>>>>> v3.18
 			}
 		}
 	} else {

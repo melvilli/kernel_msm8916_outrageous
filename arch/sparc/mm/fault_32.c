@@ -26,14 +26,24 @@
 #include <asm/pgtable.h>
 #include <asm/openprom.h>
 #include <asm/oplib.h>
+<<<<<<< HEAD
+=======
+#include <asm/setup.h>
+>>>>>>> v3.18
 #include <asm/smp.h>
 #include <asm/traps.h>
 #include <asm/uaccess.h>
 
+<<<<<<< HEAD
 int show_unhandled_signals = 1;
 
 static void unhandled_fault(unsigned long, struct task_struct *,
 		struct pt_regs *) __attribute__ ((noreturn));
+=======
+#include "mm_32.h"
+
+int show_unhandled_signals = 1;
+>>>>>>> v3.18
 
 static void __noreturn unhandled_fault(unsigned long address,
 				       struct task_struct *tsk,
@@ -141,9 +151,12 @@ static void __do_fault_siginfo(int code, int sig, struct pt_regs *regs,
 	force_sig_info (sig, &info, current);
 }
 
+<<<<<<< HEAD
 extern unsigned long safe_compute_effective_address(struct pt_regs *,
 						    unsigned int);
 
+=======
+>>>>>>> v3.18
 static unsigned long compute_si_addr(struct pt_regs *regs, int text_fault)
 {
 	unsigned int insn;
@@ -252,8 +265,11 @@ good_area:
 	if (unlikely(fault & VM_FAULT_ERROR)) {
 		if (fault & VM_FAULT_OOM)
 			goto out_of_memory;
+<<<<<<< HEAD
 		else if (fault & VM_FAULT_SIGSEGV)
 			goto bad_area;
+=======
+>>>>>>> v3.18
 		else if (fault & VM_FAULT_SIGBUS)
 			goto do_sigbus;
 		BUG();

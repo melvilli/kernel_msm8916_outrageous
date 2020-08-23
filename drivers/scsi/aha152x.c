@@ -321,7 +321,11 @@ static LIST_HEAD(aha152x_host_list);
 #define CMDINFO(cmd) \
 			(cmd) ? ((cmd)->device->host->host_no) : -1, \
                         (cmd) ? ((cmd)->device->id & 0x0f) : -1, \
+<<<<<<< HEAD
 			(cmd) ? ((cmd)->device->lun & 0x07) : -1
+=======
+			(cmd) ? ((u8)(cmd)->device->lun & 0x07) : -1
+>>>>>>> v3.18
 
 static inline void
 CMD_INC_RESID(struct scsi_cmnd *cmd, int inc)
@@ -857,7 +861,11 @@ struct Scsi_Host *aha152x_probe_one(struct aha152x_setup *setup)
 	SETPORT(SIMODE0, 0);
 	SETPORT(SIMODE1, 0);
 
+<<<<<<< HEAD
 	if( request_irq(shpnt->irq, swintr, IRQF_DISABLED|IRQF_SHARED, "aha152x", shpnt) ) {
+=======
+	if (request_irq(shpnt->irq, swintr, IRQF_SHARED, "aha152x", shpnt)) {
+>>>>>>> v3.18
 		printk(KERN_ERR "aha152x%d: irq %d busy.\n", shpnt->host_no, shpnt->irq);
 		goto out_host_put;
 	}
@@ -891,7 +899,11 @@ struct Scsi_Host *aha152x_probe_one(struct aha152x_setup *setup)
 	SETPORT(SSTAT0, 0x7f);
 	SETPORT(SSTAT1, 0xef);
 
+<<<<<<< HEAD
 	if ( request_irq(shpnt->irq, intr, IRQF_DISABLED|IRQF_SHARED, "aha152x", shpnt) ) {
+=======
+	if (request_irq(shpnt->irq, intr, IRQF_SHARED, "aha152x", shpnt)) {
+>>>>>>> v3.18
 		printk(KERN_ERR "aha152x%d: failed to reassign irq %d.\n", shpnt->host_no, shpnt->irq);
 		goto out_host_put;
 	}
@@ -1602,7 +1614,11 @@ static void busfree_run(struct Scsi_Host *shpnt)
 #if defined(AHA152X_DEBUG)
 			int hostno=DONE_SC->device->host->host_no;
 			int id=DONE_SC->device->id & 0xf;
+<<<<<<< HEAD
 			int lun=DONE_SC->device->lun & 0x7;
+=======
+			int lun=((u8)DONE_SC->device->lun) & 0x7;
+>>>>>>> v3.18
 #endif
 			Scsi_Cmnd *ptr = DONE_SC;
 			DONE_SC=NULL;
@@ -2984,7 +3000,11 @@ static void get_command(struct seq_file *m, Scsi_Cmnd * ptr)
 	int i;
 
 	SPRINTF("%p: target=%d; lun=%d; cmnd=( ",
+<<<<<<< HEAD
 		ptr, ptr->device->id, ptr->device->lun);
+=======
+		ptr, ptr->device->id, (u8)ptr->device->lun);
+>>>>>>> v3.18
 
 	for (i = 0; i < COMMAND_SIZE(ptr->cmnd[0]); i++)
 		SPRINTF("0x%02x ", ptr->cmnd[i]);

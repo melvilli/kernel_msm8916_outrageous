@@ -12,8 +12,13 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+ * along with this program; if not, you can access it online at
+ * http://www.gnu.org/licenses/gpl-2.0.html.
+>>>>>>> v3.18
  *
  * Copyright (C) IBM Corporation, 2006
  * Copyright (C) Fujitsu, 2012
@@ -238,6 +243,7 @@ static inline void srcu_read_unlock(struct srcu_struct *sp, int idx)
 }
 
 /**
+<<<<<<< HEAD
  * srcu_read_lock_raw - register a new reader for an SRCU-protected structure.
  * @sp: srcu_struct in which to register the new reader.
  *
@@ -278,6 +284,19 @@ static inline void srcu_read_unlock_raw(struct srcu_struct *sp, int idx)
 	local_irq_save(flags);
 	__srcu_read_unlock(sp, idx);
 	local_irq_restore(flags);
+=======
+ * smp_mb__after_srcu_read_unlock - ensure full ordering after srcu_read_unlock
+ *
+ * Converts the preceding srcu_read_unlock into a two-way memory barrier.
+ *
+ * Call this after srcu_read_unlock, to guarantee that all memory operations
+ * that occur after smp_mb__after_srcu_read_unlock will appear to happen after
+ * the preceding srcu_read_unlock.
+ */
+static inline void smp_mb__after_srcu_read_unlock(void)
+{
+	/* __srcu_read_unlock has smp_mb() internally so nothing to do here. */
+>>>>>>> v3.18
 }
 
 #endif

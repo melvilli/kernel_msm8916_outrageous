@@ -28,7 +28,11 @@
 #include <linux/magic.h>
 #include <linux/slab.h>
 
+<<<<<<< HEAD
 #define DEBUGFS_DEFAULT_MODE	0755
+=======
+#define DEBUGFS_DEFAULT_MODE	0700
+>>>>>>> v3.18
 
 static struct vfsmount *debugfs_mount;
 static int debugfs_mount_count;
@@ -66,7 +70,11 @@ static struct inode *debugfs_get_inode(struct super_block *sb, umode_t mode, dev
 			break;
 		}
 	}
+<<<<<<< HEAD
 	return inode; 
+=======
+	return inode;
+>>>>>>> v3.18
 }
 
 /* SMP-safe */
@@ -218,6 +226,10 @@ static int debugfs_remount(struct super_block *sb, int *flags, char *data)
 	int err;
 	struct debugfs_fs_info *fsi = sb->s_fs_info;
 
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+>>>>>>> v3.18
 	err = debugfs_parse_options(data, &fsi->mount_opts);
 	if (err)
 		goto fail;
@@ -245,6 +257,7 @@ static int debugfs_show_options(struct seq_file *m, struct dentry *root)
 	return 0;
 }
 
+<<<<<<< HEAD
 static void debugfs_evict_inode(struct inode *inode)
 {
 	truncate_inode_pages(&inode->i_data, 0);
@@ -253,11 +266,16 @@ static void debugfs_evict_inode(struct inode *inode)
 		kfree(inode->i_private);
 }
 
+=======
+>>>>>>> v3.18
 static const struct super_operations debugfs_super_operations = {
 	.statfs		= simple_statfs,
 	.remount_fs	= debugfs_remount,
 	.show_options	= debugfs_show_options,
+<<<<<<< HEAD
 	.evict_inode	= debugfs_evict_inode,
+=======
+>>>>>>> v3.18
 };
 
 static int debug_fill_super(struct super_block *sb, void *data, int silent)
@@ -325,7 +343,11 @@ static struct dentry *__create_file(const char *name, umode_t mode,
 		goto exit;
 
 	/* If the parent is not specified, we create it in the root.
+<<<<<<< HEAD
 	 * We need the root dentry to do this, which is in the super 
+=======
+	 * We need the root dentry to do this, which is in the super
+>>>>>>> v3.18
 	 * block. A pointer to that is in the struct vfsmount that we
 	 * have around.
 	 */
@@ -338,7 +360,11 @@ static struct dentry *__create_file(const char *name, umode_t mode,
 		switch (mode & S_IFMT) {
 		case S_IFDIR:
 			error = debugfs_mkdir(parent->d_inode, dentry, mode);
+<<<<<<< HEAD
 					      
+=======
+
+>>>>>>> v3.18
 			break;
 		case S_IFLNK:
 			error = debugfs_link(parent->d_inode, dentry, mode,
@@ -367,7 +393,11 @@ exit:
  * @name: a pointer to a string containing the name of the file to create.
  * @mode: the permission that the file should have.
  * @parent: a pointer to the parent dentry for this file.  This should be a
+<<<<<<< HEAD
  *          directory dentry if set.  If this paramater is NULL, then the
+=======
+ *          directory dentry if set.  If this parameter is NULL, then the
+>>>>>>> v3.18
  *          file will be created in the root of the debugfs filesystem.
  * @data: a pointer to something that the caller will want to get to later
  *        on.  The inode.i_private pointer will point to this value on
@@ -409,7 +439,11 @@ EXPORT_SYMBOL_GPL(debugfs_create_file);
  * @name: a pointer to a string containing the name of the directory to
  *        create.
  * @parent: a pointer to the parent dentry for this file.  This should be a
+<<<<<<< HEAD
  *          directory dentry if set.  If this paramater is NULL, then the
+=======
+ *          directory dentry if set.  If this parameter is NULL, then the
+>>>>>>> v3.18
  *          directory will be created in the root of the debugfs filesystem.
  *
  * This function creates a directory in debugfs with the given name.
@@ -434,7 +468,11 @@ EXPORT_SYMBOL_GPL(debugfs_create_dir);
  * @name: a pointer to a string containing the name of the symbolic link to
  *        create.
  * @parent: a pointer to the parent dentry for this symbolic link.  This
+<<<<<<< HEAD
  *          should be a directory dentry if set.  If this paramater is NULL,
+=======
+ *          should be a directory dentry if set.  If this parameter is NULL,
+>>>>>>> v3.18
  *          then the symbolic link will be created in the root of the debugfs
  *          filesystem.
  * @target: a pointer to a string containing the path to the target of the
@@ -474,6 +512,7 @@ static int __debugfs_remove(struct dentry *dentry, struct dentry *parent)
 	int ret = 0;
 
 	if (debugfs_positive(dentry)) {
+<<<<<<< HEAD
 		dget(dentry);
 		if (S_ISDIR(dentry->d_inode->i_mode))
 			ret = simple_rmdir(parent->d_inode, dentry);
@@ -482,6 +521,25 @@ static int __debugfs_remove(struct dentry *dentry, struct dentry *parent)
 		if (!ret)
 			d_delete(dentry);
 		dput(dentry);
+=======
+		if (dentry->d_inode) {
+			dget(dentry);
+			switch (dentry->d_inode->i_mode & S_IFMT) {
+			case S_IFDIR:
+				ret = simple_rmdir(parent->d_inode, dentry);
+				break;
+			case S_IFLNK:
+				kfree(dentry->d_inode->i_private);
+				/* fall through */
+			default:
+				simple_unlink(parent->d_inode, dentry);
+				break;
+			}
+			if (!ret)
+				d_delete(dentry);
+			dput(dentry);
+		}
+>>>>>>> v3.18
 	}
 	return ret;
 }
@@ -533,7 +591,11 @@ EXPORT_SYMBOL_GPL(debugfs_remove);
  */
 void debugfs_remove_recursive(struct dentry *dentry)
 {
+<<<<<<< HEAD
 	struct dentry *child, *next, *parent;
+=======
+	struct dentry *child, *parent;
+>>>>>>> v3.18
 
 	if (IS_ERR_OR_NULL(dentry))
 		return;
@@ -545,31 +607,71 @@ void debugfs_remove_recursive(struct dentry *dentry)
 	parent = dentry;
  down:
 	mutex_lock(&parent->d_inode->i_mutex);
+<<<<<<< HEAD
 	list_for_each_entry_safe(child, next, &parent->d_subdirs, d_child) {
+=======
+ loop:
+	/*
+	 * The parent->d_subdirs is protected by the d_lock. Outside that
+	 * lock, the child can be unlinked and set to be freed which can
+	 * use the d_u.d_child as the rcu head and corrupt this list.
+	 */
+	spin_lock(&parent->d_lock);
+	list_for_each_entry(child, &parent->d_subdirs, d_u.d_child) {
+>>>>>>> v3.18
 		if (!debugfs_positive(child))
 			continue;
 
 		/* perhaps simple_empty(child) makes more sense */
 		if (!list_empty(&child->d_subdirs)) {
+<<<<<<< HEAD
+=======
+			spin_unlock(&parent->d_lock);
+>>>>>>> v3.18
 			mutex_unlock(&parent->d_inode->i_mutex);
 			parent = child;
 			goto down;
 		}
+<<<<<<< HEAD
  up:
 		if (!__debugfs_remove(child, parent))
 			simple_release_fs(&debugfs_mount, &debugfs_mount_count);
 	}
+=======
+
+		spin_unlock(&parent->d_lock);
+
+		if (!__debugfs_remove(child, parent))
+			simple_release_fs(&debugfs_mount, &debugfs_mount_count);
+
+		/*
+		 * The parent->d_lock protects agaist child from unlinking
+		 * from d_subdirs. When releasing the parent->d_lock we can
+		 * no longer trust that the next pointer is valid.
+		 * Restart the loop. We'll skip this one with the
+		 * debugfs_positive() check.
+		 */
+		goto loop;
+	}
+	spin_unlock(&parent->d_lock);
+>>>>>>> v3.18
 
 	mutex_unlock(&parent->d_inode->i_mutex);
 	child = parent;
 	parent = parent->d_parent;
 	mutex_lock(&parent->d_inode->i_mutex);
 
+<<<<<<< HEAD
 	if (child != dentry) {
 		next = list_entry(child->d_child.next, struct dentry,
 					d_child);
 		goto up;
 	}
+=======
+	if (child != dentry)
+		/* go up */
+		goto loop;
+>>>>>>> v3.18
 
 	if (!__debugfs_remove(child, parent))
 		simple_release_fs(&debugfs_mount, &debugfs_mount_count);
@@ -601,7 +703,11 @@ struct dentry *debugfs_rename(struct dentry *old_dir, struct dentry *old_dentry,
 {
 	int error;
 	struct dentry *dentry = NULL, *trap;
+<<<<<<< HEAD
 	struct name_snapshot old_name;
+=======
+	const char *old_name;
+>>>>>>> v3.18
 
 	trap = lock_rename(new_dir, old_dir);
 	/* Source or destination directories don't exist? */
@@ -616,11 +722,16 @@ struct dentry *debugfs_rename(struct dentry *old_dir, struct dentry *old_dentry,
 	if (IS_ERR(dentry) || dentry == trap || dentry->d_inode)
 		goto exit;
 
+<<<<<<< HEAD
 	take_dentry_name_snapshot(&old_name, old_dentry);
+=======
+	old_name = fsnotify_oldname_init(old_dentry->d_name.name);
+>>>>>>> v3.18
 
 	error = simple_rename(old_dir->d_inode, old_dentry, new_dir->d_inode,
 		dentry);
 	if (error) {
+<<<<<<< HEAD
 		release_dentry_name_snapshot(&old_name);
 		goto exit;
 	}
@@ -629,6 +740,16 @@ struct dentry *debugfs_rename(struct dentry *old_dir, struct dentry *old_dentry,
 		S_ISDIR(old_dentry->d_inode->i_mode),
 		NULL, old_dentry);
 	release_dentry_name_snapshot(&old_name);
+=======
+		fsnotify_oldname_free(old_name);
+		goto exit;
+	}
+	d_move(old_dentry, dentry);
+	fsnotify_move(old_dir->d_inode, new_dir->d_inode, old_name,
+		S_ISDIR(old_dentry->d_inode->i_mode),
+		NULL, old_dentry);
+	fsnotify_oldname_free(old_name);
+>>>>>>> v3.18
 	unlock_rename(new_dir, old_dir);
 	dput(dentry);
 	return old_dentry;

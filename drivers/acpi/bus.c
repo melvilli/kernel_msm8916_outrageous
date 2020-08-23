@@ -38,8 +38,11 @@
 #include <asm/mpspec.h>
 #endif
 #include <linux/pci.h>
+<<<<<<< HEAD
 #include <acpi/acpi_bus.h>
 #include <acpi/acpi_drivers.h>
+=======
+>>>>>>> v3.18
 #include <acpi/apei.h>
 #include <linux/dmi.h>
 #include <linux/suspend.h>
@@ -53,9 +56,12 @@ struct acpi_device *acpi_root;
 struct proc_dir_entry *acpi_root_dir;
 EXPORT_SYMBOL(acpi_root_dir);
 
+<<<<<<< HEAD
 #define STRUCT_TO_INT(s)	(*((int*)&s))
 
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_X86
 #ifdef CONFIG_ACPI_CUSTOM_DSDT
 static inline int set_copy_dsdt(const struct dmi_system_id *id)
@@ -97,6 +103,7 @@ static struct dmi_system_id dsdt_dmi_table[] __initdata = {
                                 Device Management
    -------------------------------------------------------------------------- */
 
+<<<<<<< HEAD
 int acpi_bus_get_device(acpi_handle handle, struct acpi_device **device)
 {
 	acpi_status status = AE_OK;
@@ -119,6 +126,8 @@ int acpi_bus_get_device(acpi_handle handle, struct acpi_device **device)
 
 EXPORT_SYMBOL(acpi_bus_get_device);
 
+=======
+>>>>>>> v3.18
 acpi_status acpi_bus_get_status_handle(acpi_handle handle,
 				       unsigned long long *sta)
 {
@@ -145,11 +154,16 @@ int acpi_bus_get_status(struct acpi_device *device)
 	if (ACPI_FAILURE(status))
 		return -ENODEV;
 
+<<<<<<< HEAD
 	STRUCT_TO_INT(device->status) = (int) sta;
+=======
+	acpi_set_device_status(device, sta);
+>>>>>>> v3.18
 
 	if (device->status.functional && !device->status.present) {
 		ACPI_DEBUG_PRINT((ACPI_DB_INFO, "Device [%s] status [%08x]: "
 		       "functional but not present;\n",
+<<<<<<< HEAD
 			device->pnp.bus_id,
 			(u32) STRUCT_TO_INT(device->status)));
 	}
@@ -157,6 +171,13 @@ int acpi_bus_get_status(struct acpi_device *device)
 	ACPI_DEBUG_PRINT((ACPI_DB_INFO, "Device [%s] status [%08x]\n",
 			  device->pnp.bus_id,
 			  (u32) STRUCT_TO_INT(device->status)));
+=======
+			device->pnp.bus_id, (u32)sta));
+	}
+
+	ACPI_DEBUG_PRINT((ACPI_DB_INFO, "Device [%s] status [%08x]\n",
+			  device->pnp.bus_id, (u32)sta));
+>>>>>>> v3.18
 	return 0;
 }
 EXPORT_SYMBOL(acpi_bus_get_status);
@@ -168,23 +189,59 @@ void acpi_bus_private_data_handler(acpi_handle handle,
 }
 EXPORT_SYMBOL(acpi_bus_private_data_handler);
 
+<<<<<<< HEAD
 int acpi_bus_get_private_data(acpi_handle handle, void **data)
 {
 	acpi_status status = AE_OK;
+=======
+int acpi_bus_attach_private_data(acpi_handle handle, void *data)
+{
+	acpi_status status;
 
-	if (!*data)
-		return -EINVAL;
-
-	status = acpi_get_data(handle, acpi_bus_private_data_handler, data);
-	if (ACPI_FAILURE(status) || !*data) {
-		ACPI_DEBUG_PRINT((ACPI_DB_INFO, "No context for object [%p]\n",
-				handle));
+	status = acpi_attach_data(handle,
+			acpi_bus_private_data_handler, data);
+	if (ACPI_FAILURE(status)) {
+		acpi_handle_debug(handle, "Error attaching device data\n");
 		return -ENODEV;
 	}
 
 	return 0;
 }
+EXPORT_SYMBOL_GPL(acpi_bus_attach_private_data);
+
+int acpi_bus_get_private_data(acpi_handle handle, void **data)
+{
+	acpi_status status;
+>>>>>>> v3.18
+
+	if (!*data)
+		return -EINVAL;
+
+	status = acpi_get_data(handle, acpi_bus_private_data_handler, data);
+<<<<<<< HEAD
+	if (ACPI_FAILURE(status) || !*data) {
+		ACPI_DEBUG_PRINT((ACPI_DB_INFO, "No context for object [%p]\n",
+				handle));
+=======
+	if (ACPI_FAILURE(status)) {
+		acpi_handle_debug(handle, "No context for object\n");
+>>>>>>> v3.18
+		return -ENODEV;
+	}
+
+	return 0;
+}
+<<<<<<< HEAD
 EXPORT_SYMBOL(acpi_bus_get_private_data);
+=======
+EXPORT_SYMBOL_GPL(acpi_bus_get_private_data);
+
+void acpi_bus_detach_private_data(acpi_handle handle)
+{
+	acpi_detach_data(handle, acpi_bus_private_data_handler);
+}
+EXPORT_SYMBOL_GPL(acpi_bus_detach_private_data);
+>>>>>>> v3.18
 
 static void acpi_print_osc_error(acpi_handle handle,
 	struct acpi_osc_context *context, char *error)
@@ -204,7 +261,11 @@ static void acpi_print_osc_error(acpi_handle handle,
 	printk("\n");
 }
 
+<<<<<<< HEAD
 static acpi_status acpi_str_to_uuid(char *str, u8 *uuid)
+=======
+acpi_status acpi_str_to_uuid(char *str, u8 *uuid)
+>>>>>>> v3.18
 {
 	int i;
 	static int opc_map_to_uuid[16] = {6, 4, 2, 0, 11, 9, 16, 14, 19, 21,
@@ -225,6 +286,10 @@ static acpi_status acpi_str_to_uuid(char *str, u8 *uuid)
 	}
 	return AE_OK;
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(acpi_str_to_uuid);
+>>>>>>> v3.18
 
 acpi_status acpi_run_osc(acpi_handle handle, struct acpi_osc_context *context)
 {
@@ -285,7 +350,11 @@ acpi_status acpi_run_osc(acpi_handle handle, struct acpi_osc_context *context)
 			acpi_print_osc_error(handle, context,
 				"_OSC invalid revision");
 		if (errors & OSC_CAPABILITIES_MASK_ERROR) {
+<<<<<<< HEAD
 			if (((u32 *)context->cap.pointer)[OSC_QUERY_TYPE]
+=======
+			if (((u32 *)context->cap.pointer)[OSC_QUERY_DWORD]
+>>>>>>> v3.18
 			    & OSC_QUERY_ENABLE)
 				goto out_success;
 			status = AE_SUPPORT;
@@ -325,6 +394,7 @@ static void acpi_bus_osc_support(void)
 	};
 	acpi_handle handle;
 
+<<<<<<< HEAD
 	capbuf[OSC_QUERY_TYPE] = OSC_QUERY_ENABLE;
 	capbuf[OSC_SUPPORT_TYPE] = OSC_SB_PR3_SUPPORT; /* _PR3 is in use */
 #if defined(CONFIG_ACPI_PROCESSOR_AGGREGATOR) ||\
@@ -342,19 +412,43 @@ static void acpi_bus_osc_support(void)
 
 	if (!ghes_disable)
 		capbuf[OSC_SUPPORT_TYPE] |= OSC_SB_APEI_SUPPORT;
+=======
+	capbuf[OSC_QUERY_DWORD] = OSC_QUERY_ENABLE;
+	capbuf[OSC_SUPPORT_DWORD] = OSC_SB_PR3_SUPPORT; /* _PR3 is in use */
+#if defined(CONFIG_ACPI_PROCESSOR_AGGREGATOR) ||\
+			defined(CONFIG_ACPI_PROCESSOR_AGGREGATOR_MODULE)
+	capbuf[OSC_SUPPORT_DWORD] |= OSC_SB_PAD_SUPPORT;
+#endif
+
+#if defined(CONFIG_ACPI_PROCESSOR) || defined(CONFIG_ACPI_PROCESSOR_MODULE)
+	capbuf[OSC_SUPPORT_DWORD] |= OSC_SB_PPC_OST_SUPPORT;
+#endif
+
+	capbuf[OSC_SUPPORT_DWORD] |= OSC_SB_HOTPLUG_OST_SUPPORT;
+
+	if (!ghes_disable)
+		capbuf[OSC_SUPPORT_DWORD] |= OSC_SB_APEI_SUPPORT;
+>>>>>>> v3.18
 	if (ACPI_FAILURE(acpi_get_handle(NULL, "\\_SB", &handle)))
 		return;
 	if (ACPI_SUCCESS(acpi_run_osc(handle, &context))) {
 		u32 *capbuf_ret = context.ret.pointer;
+<<<<<<< HEAD
 		if (context.ret.length > OSC_SUPPORT_TYPE)
 			osc_sb_apei_support_acked =
 				capbuf_ret[OSC_SUPPORT_TYPE] & OSC_SB_APEI_SUPPORT;
+=======
+		if (context.ret.length > OSC_SUPPORT_DWORD)
+			osc_sb_apei_support_acked =
+				capbuf_ret[OSC_SUPPORT_DWORD] & OSC_SB_APEI_SUPPORT;
+>>>>>>> v3.18
 		kfree(context.ret.pointer);
 	}
 	/* do we need to check other returned cap? Sounds no */
 }
 
 /* --------------------------------------------------------------------------
+<<<<<<< HEAD
                                 Event Management
    -------------------------------------------------------------------------- */
 
@@ -521,6 +615,11 @@ void unregister_acpi_bus_notifier(struct notifier_block *nb)
 }
 EXPORT_SYMBOL_GPL(unregister_acpi_bus_notifier);
 
+=======
+                             Notification Handling
+   -------------------------------------------------------------------------- */
+
+>>>>>>> v3.18
 /**
  * acpi_bus_notify
  * ---------------
@@ -528,6 +627,7 @@ EXPORT_SYMBOL_GPL(unregister_acpi_bus_notifier);
  */
 static void acpi_bus_notify(acpi_handle handle, u32 type, void *data)
 {
+<<<<<<< HEAD
 	struct acpi_device *device = NULL;
 	struct acpi_driver *driver;
 
@@ -564,10 +664,40 @@ static void acpi_bus_notify(acpi_handle handle, u32 type, void *data)
 		break;
 
 	case ACPI_NOTIFY_DEVICE_CHECK_LIGHT:
+=======
+	struct acpi_device *adev;
+	struct acpi_driver *driver;
+	u32 ost_code = ACPI_OST_SC_NON_SPECIFIC_FAILURE;
+	bool hotplug_event = false;
+
+	switch (type) {
+	case ACPI_NOTIFY_BUS_CHECK:
+		acpi_handle_debug(handle, "ACPI_NOTIFY_BUS_CHECK event\n");
+		hotplug_event = true;
+		break;
+
+	case ACPI_NOTIFY_DEVICE_CHECK:
+		acpi_handle_debug(handle, "ACPI_NOTIFY_DEVICE_CHECK event\n");
+		hotplug_event = true;
+		break;
+
+	case ACPI_NOTIFY_DEVICE_WAKE:
+		acpi_handle_debug(handle, "ACPI_NOTIFY_DEVICE_WAKE event\n");
+		break;
+
+	case ACPI_NOTIFY_EJECT_REQUEST:
+		acpi_handle_debug(handle, "ACPI_NOTIFY_EJECT_REQUEST event\n");
+		hotplug_event = true;
+		break;
+
+	case ACPI_NOTIFY_DEVICE_CHECK_LIGHT:
+		acpi_handle_debug(handle, "ACPI_NOTIFY_DEVICE_CHECK_LIGHT event\n");
+>>>>>>> v3.18
 		/* TBD: Exactly what does 'light' mean? */
 		break;
 
 	case ACPI_NOTIFY_FREQUENCY_MISMATCH:
+<<<<<<< HEAD
 		/* TBD */
 		break;
 
@@ -593,6 +723,43 @@ static void acpi_bus_notify(acpi_handle handle, u32 type, void *data)
 		    (driver->flags & ACPI_DRIVER_ALL_NOTIFY_EVENTS))
 			driver->ops.notify(device, type);
 	}
+=======
+		acpi_handle_err(handle, "Device cannot be configured due "
+				"to a frequency mismatch\n");
+		break;
+
+	case ACPI_NOTIFY_BUS_MODE_MISMATCH:
+		acpi_handle_err(handle, "Device cannot be configured due "
+				"to a bus mode mismatch\n");
+		break;
+
+	case ACPI_NOTIFY_POWER_FAULT:
+		acpi_handle_err(handle, "Device has suffered a power fault\n");
+		break;
+
+	default:
+		acpi_handle_debug(handle, "Unknown event type 0x%x\n", type);
+		break;
+	}
+
+	adev = acpi_bus_get_acpi_device(handle);
+	if (!adev)
+		goto err;
+
+	driver = adev->driver;
+	if (driver && driver->ops.notify &&
+	    (driver->flags & ACPI_DRIVER_ALL_NOTIFY_EVENTS))
+		driver->ops.notify(adev, type);
+
+	if (hotplug_event && ACPI_SUCCESS(acpi_hotplug_schedule(adev, type)))
+		return;
+
+	acpi_bus_put_acpi_device(adev);
+	return;
+
+ err:
+	acpi_evaluate_ost(handle, type, ost_code, NULL);
+>>>>>>> v3.18
 }
 
 /* --------------------------------------------------------------------------
@@ -601,9 +768,13 @@ static void acpi_bus_notify(acpi_handle handle, u32 type, void *data)
 
 static int __init acpi_bus_init_irq(void)
 {
+<<<<<<< HEAD
 	acpi_status status = AE_OK;
 	union acpi_object arg = { ACPI_TYPE_INTEGER };
 	struct acpi_object_list arg_list = { 1, &arg };
+=======
+	acpi_status status;
+>>>>>>> v3.18
 	char *message = NULL;
 
 
@@ -632,9 +803,13 @@ static int __init acpi_bus_init_irq(void)
 
 	printk(KERN_INFO PREFIX "Using %s for interrupt routing\n", message);
 
+<<<<<<< HEAD
 	arg.integer.value = acpi_irq_model;
 
 	status = acpi_evaluate_object(NULL, "\\_PIC", &arg_list, NULL);
+=======
+	status = acpi_execute_simple_method(NULL, "\\_PIC", acpi_irq_model);
+>>>>>>> v3.18
 	if (ACPI_FAILURE(status) && (status != AE_NOT_FOUND)) {
 		ACPI_EXCEPTION((AE_INFO, status, "Evaluating _PIC"));
 		return -ENODEV;
@@ -643,18 +818,30 @@ static int __init acpi_bus_init_irq(void)
 	return 0;
 }
 
+<<<<<<< HEAD
 u8 acpi_gbl_permanent_mmap;
 
 
 void __init acpi_early_init(void)
 {
 	acpi_status status = AE_OK;
+=======
+void __init acpi_early_init(void)
+{
+	acpi_status status;
+>>>>>>> v3.18
 
 	if (acpi_disabled)
 		return;
 
 	printk(KERN_INFO PREFIX "Core revision %08x\n", ACPI_CA_VERSION);
 
+<<<<<<< HEAD
+=======
+	/* It's safe to verify table checksums during late stage */
+	acpi_gbl_verify_table_checksum = TRUE;
+
+>>>>>>> v3.18
 	/* enable workarounds, unless strict ACPI spec. compliance */
 	if (!acpi_strict)
 		acpi_gbl_enable_interpreter_slack = TRUE;
@@ -730,9 +917,14 @@ void __init acpi_early_init(void)
 
 static int __init acpi_bus_init(void)
 {
+<<<<<<< HEAD
 	int result = 0;
 	acpi_status status = AE_OK;
 	extern acpi_status acpi_os_initialize1(void);
+=======
+	int result;
+	acpi_status status;
+>>>>>>> v3.18
 
 	acpi_os_initialize1();
 

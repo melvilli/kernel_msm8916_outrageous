@@ -20,6 +20,7 @@
 #include <linux/kernel.h>
 #include <linux/init.h>
 #include <linux/smp.h>
+<<<<<<< HEAD
 #include <linux/spinlock.h>
 #include <linux/io.h>
 #include <linux/delay.h>
@@ -30,14 +31,28 @@
 #include <asm/smp_scu.h>
 #include <asm/smp_twd.h>
 
+=======
+#include <linux/io.h>
+#include <linux/delay.h>
+
+#include <asm/smp_plat.h>
+#include <asm/smp_twd.h>
+
+#include "common.h"
+#include "sh73a0.h"
+
+>>>>>>> v3.18
 #define WUPCR		IOMEM(0xe6151010)
 #define SRESCR		IOMEM(0xe6151018)
 #define PSTR		IOMEM(0xe6151040)
 #define SBAR		IOMEM(0xe6180020)
 #define APARMBAREA	IOMEM(0xe6f10020)
 
+<<<<<<< HEAD
 #define PSTR_SHUTDOWN_MODE	3
 
+=======
+>>>>>>> v3.18
 #define SH73A0_SCU_BASE 0xf0000000
 
 #ifdef CONFIG_HAVE_ARM_TWD
@@ -48,6 +63,7 @@ void __init sh73a0_register_twd(void)
 }
 #endif
 
+<<<<<<< HEAD
 static int __cpuinit sh73a0_boot_secondary(unsigned int cpu, struct task_struct *idle)
 {
 	cpu = cpu_logical_map(cpu);
@@ -56,12 +72,23 @@ static int __cpuinit sh73a0_boot_secondary(unsigned int cpu, struct task_struct 
 		__raw_writel(1 << cpu, WUPCR);	/* wake up */
 	else
 		__raw_writel(1 << cpu, SRESCR);	/* reset */
+=======
+static int sh73a0_boot_secondary(unsigned int cpu, struct task_struct *idle)
+{
+	unsigned int lcpu = cpu_logical_map(cpu);
+
+	if (((__raw_readl(PSTR) >> (4 * lcpu)) & 3) == 3)
+		__raw_writel(1 << lcpu, WUPCR);	/* wake up */
+	else
+		__raw_writel(1 << lcpu, SRESCR);	/* reset */
+>>>>>>> v3.18
 
 	return 0;
 }
 
 static void __init sh73a0_smp_prepare_cpus(unsigned int max_cpus)
 {
+<<<<<<< HEAD
 	scu_enable(shmobile_scu_base);
 
 	/* Map the reset vector (in headsmp-scu.S) */
@@ -125,5 +152,23 @@ struct smp_operations sh73a0_smp_ops __initdata = {
 	.cpu_kill		= sh73a0_cpu_kill,
 	.cpu_die		= sh73a0_cpu_die,
 	.cpu_disable		= sh73a0_cpu_disable,
+=======
+	/* Map the reset vector (in headsmp.S) */
+	__raw_writel(0, APARMBAREA);      /* 4k */
+	__raw_writel(__pa(shmobile_boot_vector), SBAR);
+
+	/* setup sh73a0 specific SCU bits */
+	shmobile_scu_base = IOMEM(SH73A0_SCU_BASE);
+	shmobile_smp_scu_prepare_cpus(max_cpus);
+}
+
+struct smp_operations sh73a0_smp_ops __initdata = {
+	.smp_prepare_cpus	= sh73a0_smp_prepare_cpus,
+	.smp_boot_secondary	= sh73a0_boot_secondary,
+#ifdef CONFIG_HOTPLUG_CPU
+	.cpu_disable		= shmobile_smp_cpu_disable,
+	.cpu_die		= shmobile_smp_scu_cpu_die,
+	.cpu_kill		= shmobile_smp_scu_cpu_kill,
+>>>>>>> v3.18
 #endif
 };

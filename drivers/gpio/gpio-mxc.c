@@ -19,6 +19,10 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+<<<<<<< HEAD
+=======
+#include <linux/err.h>
+>>>>>>> v3.18
 #include <linux/init.h>
 #include <linux/interrupt.h>
 #include <linux/io.h>
@@ -291,6 +295,12 @@ static void mx2_gpio_irq_handler(u32 irq, struct irq_desc *desc)
 {
 	u32 irq_msk, irq_stat;
 	struct mxc_gpio_port *port;
+<<<<<<< HEAD
+=======
+	struct irq_chip *chip = irq_get_chip(irq);
+
+	chained_irq_enter(chip, desc);
+>>>>>>> v3.18
 
 	/* walk through all interrupt status registers */
 	list_for_each_entry(port, &mxc_gpio_ports, node) {
@@ -302,6 +312,10 @@ static void mx2_gpio_irq_handler(u32 irq, struct irq_desc *desc)
 		if (irq_stat)
 			mxc_gpio_irq_handler(port, irq_stat);
 	}
+<<<<<<< HEAD
+=======
+	chained_irq_exit(chip, desc);
+>>>>>>> v3.18
 }
 
 /*
@@ -405,11 +419,16 @@ static int mxc_gpio_probe(struct platform_device *pdev)
 
 	mxc_gpio_get_hw(pdev);
 
+<<<<<<< HEAD
 	port = kzalloc(sizeof(struct mxc_gpio_port), GFP_KERNEL);
+=======
+	port = devm_kzalloc(&pdev->dev, sizeof(*port), GFP_KERNEL);
+>>>>>>> v3.18
 	if (!port)
 		return -ENOMEM;
 
 	iores = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
 	if (!iores) {
 		err = -ENODEV;
 		goto out_kfree;
@@ -433,6 +452,16 @@ static int mxc_gpio_probe(struct platform_device *pdev)
 		err = -EINVAL;
 		goto out_iounmap;
 	}
+=======
+	port->base = devm_ioremap_resource(&pdev->dev, iores);
+	if (IS_ERR(port->base))
+		return PTR_ERR(port->base);
+
+	port->irq_high = platform_get_irq(pdev, 1);
+	port->irq = platform_get_irq(pdev, 0);
+	if (port->irq < 0)
+		return port->irq;
+>>>>>>> v3.18
 
 	/* disable the interrupt and clear the status */
 	writel(0, port->base + GPIO_IMR);
@@ -462,7 +491,11 @@ static int mxc_gpio_probe(struct platform_device *pdev)
 			 port->base + GPIO_DR, NULL,
 			 port->base + GPIO_GDIR, NULL, 0);
 	if (err)
+<<<<<<< HEAD
 		goto out_iounmap;
+=======
+		goto out_bgio;
+>>>>>>> v3.18
 
 	port->bgc.gc.to_irq = mxc_gpio_to_irq;
 	port->bgc.gc.base = (pdev->id < 0) ? of_alias_get_id(np, "gpio") * 32 :
@@ -495,6 +528,7 @@ static int mxc_gpio_probe(struct platform_device *pdev)
 out_irqdesc_free:
 	irq_free_descs(irq_base, 32);
 out_gpiochip_remove:
+<<<<<<< HEAD
 	WARN_ON(gpiochip_remove(&port->bgc.gc) < 0);
 out_bgpio_remove:
 	bgpio_remove(&port->bgc);
@@ -504,6 +538,12 @@ out_release_mem:
 	release_mem_region(iores->start, resource_size(iores));
 out_kfree:
 	kfree(port);
+=======
+	gpiochip_remove(&port->bgc.gc);
+out_bgpio_remove:
+	bgpio_remove(&port->bgc);
+out_bgio:
+>>>>>>> v3.18
 	dev_info(&pdev->dev, "%s failed with errno %d\n", __func__, err);
 	return err;
 }

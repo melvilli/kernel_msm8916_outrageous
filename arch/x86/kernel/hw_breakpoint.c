@@ -32,13 +32,19 @@
 #include <linux/irqflags.h>
 #include <linux/notifier.h>
 #include <linux/kallsyms.h>
+<<<<<<< HEAD
 #include <linux/kprobes.h>
+=======
+>>>>>>> v3.18
 #include <linux/percpu.h>
 #include <linux/kdebug.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/sched.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/smp.h>
 
 #include <asm/hw_breakpoint.h>
@@ -110,7 +116,11 @@ int arch_install_hw_breakpoint(struct perf_event *bp)
 	int i;
 
 	for (i = 0; i < HBP_NUM; i++) {
+<<<<<<< HEAD
 		struct perf_event **slot = &__get_cpu_var(bp_per_reg[i]);
+=======
+		struct perf_event **slot = this_cpu_ptr(&bp_per_reg[i]);
+>>>>>>> v3.18
 
 		if (!*slot) {
 			*slot = bp;
@@ -124,7 +134,11 @@ int arch_install_hw_breakpoint(struct perf_event *bp)
 	set_debugreg(info->address, i);
 	__this_cpu_write(cpu_debugreg[i], info->address);
 
+<<<<<<< HEAD
 	dr7 = &__get_cpu_var(cpu_dr7);
+=======
+	dr7 = this_cpu_ptr(&cpu_dr7);
+>>>>>>> v3.18
 	*dr7 |= encode_dr7(i, info->len, info->type);
 
 	set_debugreg(*dr7, 7);
@@ -148,7 +162,11 @@ void arch_uninstall_hw_breakpoint(struct perf_event *bp)
 	int i;
 
 	for (i = 0; i < HBP_NUM; i++) {
+<<<<<<< HEAD
 		struct perf_event **slot = &__get_cpu_var(bp_per_reg[i]);
+=======
+		struct perf_event **slot = this_cpu_ptr(&bp_per_reg[i]);
+>>>>>>> v3.18
 
 		if (*slot == bp) {
 			*slot = NULL;
@@ -159,7 +177,11 @@ void arch_uninstall_hw_breakpoint(struct perf_event *bp)
 	if (WARN_ONCE(i == HBP_NUM, "Can't find any breakpoint slot"))
 		return;
 
+<<<<<<< HEAD
 	dr7 = &__get_cpu_var(cpu_dr7);
+=======
+	dr7 = this_cpu_ptr(&cpu_dr7);
+>>>>>>> v3.18
 	*dr7 &= ~__encode_dr7(i, info->len, info->type);
 
 	set_debugreg(*dr7, 7);
@@ -393,6 +415,12 @@ void flush_ptrace_hw_breakpoint(struct task_struct *tsk)
 		unregister_hw_breakpoint(t->ptrace_bps[i]);
 		t->ptrace_bps[i] = NULL;
 	}
+<<<<<<< HEAD
+=======
+
+	t->debugreg6 = 0;
+	t->ptrace_dr7 = 0;
+>>>>>>> v3.18
 }
 
 void hw_breakpoint_restore(void)
@@ -422,7 +450,11 @@ EXPORT_SYMBOL_GPL(hw_breakpoint_restore);
  * NOTIFY_STOP returned for all other cases
  *
  */
+<<<<<<< HEAD
 static int __kprobes hw_breakpoint_handler(struct die_args *args)
+=======
+static int hw_breakpoint_handler(struct die_args *args)
+>>>>>>> v3.18
 {
 	int i, cpu, rc = NOTIFY_STOP;
 	struct perf_event *bp;
@@ -509,7 +541,11 @@ static int __kprobes hw_breakpoint_handler(struct die_args *args)
 /*
  * Handle debug exception notifications.
  */
+<<<<<<< HEAD
 int __kprobes hw_breakpoint_exceptions_notify(
+=======
+int hw_breakpoint_exceptions_notify(
+>>>>>>> v3.18
 		struct notifier_block *unused, unsigned long val, void *data)
 {
 	if (val != DIE_DEBUG)

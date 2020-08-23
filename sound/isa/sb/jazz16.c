@@ -229,8 +229,13 @@ static int snd_jazz16_probe(struct device *devptr, unsigned int dev)
 	static int possible_dmas16[] = {5, 7, -1};
 	int err, xirq, xdma8, xdma16, xmpu_port, xmpu_irq;
 
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE,
 			      sizeof(struct snd_card_jazz16), &card);
+=======
+	err = snd_card_new(devptr, index[dev], id[dev], THIS_MODULE,
+			   sizeof(struct snd_card_jazz16), &card);
+>>>>>>> v3.18
 	if (err < 0)
 		return err;
 
@@ -327,8 +332,11 @@ static int snd_jazz16_probe(struct device *devptr, unsigned int dev)
 					mpu_port[dev]);
 	}
 
+<<<<<<< HEAD
 	snd_card_set_dev(card, devptr);
 
+=======
+>>>>>>> v3.18
 	err = snd_card_register(card);
 	if (err < 0)
 		goto err_free;
@@ -345,7 +353,10 @@ static int snd_jazz16_remove(struct device *devptr, unsigned int dev)
 {
 	struct snd_card *card = dev_get_drvdata(devptr);
 
+<<<<<<< HEAD
 	dev_set_drvdata(devptr, NULL);
+=======
+>>>>>>> v3.18
 	snd_card_free(card);
 	return 0;
 }

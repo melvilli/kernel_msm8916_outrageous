@@ -8,6 +8,10 @@
 #ifndef _SELINUX_SECURITY_H_
 #define _SELINUX_SECURITY_H_
 
+<<<<<<< HEAD
+=======
+#include <linux/compiler.h>
+>>>>>>> v3.18
 #include <linux/dcache.h>
 #include <linux/magic.h>
 #include <linux/types.h>
@@ -34,28 +38,46 @@
 #define POLICYDB_VERSION_NEW_OBJECT_DEFAULTS	27
 #define POLICYDB_VERSION_DEFAULT_TYPE	28
 #define POLICYDB_VERSION_CONSTRAINT_NAMES	29
+<<<<<<< HEAD
 #define POLICYDB_VERSION_XPERMS_IOCTL	30
+=======
+>>>>>>> v3.18
 
 /* Range of policy versions we understand*/
 #define POLICYDB_VERSION_MIN   POLICYDB_VERSION_BASE
 #ifdef CONFIG_SECURITY_SELINUX_POLICYDB_VERSION_MAX
 #define POLICYDB_VERSION_MAX	CONFIG_SECURITY_SELINUX_POLICYDB_VERSION_MAX_VALUE
 #else
+<<<<<<< HEAD
 #define POLICYDB_VERSION_MAX	POLICYDB_VERSION_XPERMS_IOCTL
+=======
+#define POLICYDB_VERSION_MAX	POLICYDB_VERSION_CONSTRAINT_NAMES
+>>>>>>> v3.18
 #endif
 
 /* Mask for just the mount related flags */
 #define SE_MNTMASK	0x0f
 /* Super block security struct flags for mount options */
+<<<<<<< HEAD
+=======
+/* BE CAREFUL, these need to be the low order bits for selinux_get_mnt_opts */
+>>>>>>> v3.18
 #define CONTEXT_MNT	0x01
 #define FSCONTEXT_MNT	0x02
 #define ROOTCONTEXT_MNT	0x04
 #define DEFCONTEXT_MNT	0x08
+<<<<<<< HEAD
 /* Non-mount related flags */
 #define SE_SBINITIALIZED	0x10
 #define SE_SBPROC		0x20
 #define SE_SBLABELSUPP	0x40
 #define SE_SBGENFS	0x80
+=======
+#define SBLABEL_MNT	0x10
+/* Non-mount related flags */
+#define SE_SBINITIALIZED	0x0100
+#define SE_SBPROC		0x0200
+>>>>>>> v3.18
 
 #define CONTEXT_STR	"context="
 #define FSCONTEXT_STR	"fscontext="
@@ -71,12 +93,21 @@ extern int selinux_enabled;
 enum {
 	POLICYDB_CAPABILITY_NETPEER,
 	POLICYDB_CAPABILITY_OPENPERM,
+<<<<<<< HEAD
+=======
+	POLICYDB_CAPABILITY_REDHAT1,
+	POLICYDB_CAPABILITY_ALWAYSNETWORK,
+>>>>>>> v3.18
 	__POLICYDB_CAPABILITY_MAX
 };
 #define POLICYDB_CAPABILITY_MAX (__POLICYDB_CAPABILITY_MAX - 1)
 
 extern int selinux_policycap_netpeer;
 extern int selinux_policycap_openperm;
+<<<<<<< HEAD
+=======
+extern int selinux_policycap_alwaysnetwork;
+>>>>>>> v3.18
 
 /*
  * type_datum properties
@@ -105,6 +136,7 @@ struct av_decision {
 	u32 flags;
 };
 
+<<<<<<< HEAD
 #define XPERMS_ALLOWED 1
 #define XPERMS_AUDITALLOW 2
 #define XPERMS_DONTAUDIT 4
@@ -128,15 +160,21 @@ struct extended_perms {
 	struct extended_perms_data drivers; /* flag drivers that are used */
 };
 
+=======
+>>>>>>> v3.18
 /* definitions of av_decision.flags */
 #define AVD_FLAGS_PERMISSIVE	0x0001
 
 void security_compute_av(u32 ssid, u32 tsid,
+<<<<<<< HEAD
 			 u16 tclass, struct av_decision *avd,
 			 struct extended_perms *xperms);
 
 void security_compute_xperms_decision(u32 ssid, u32 tsid, u16 tclass,
 			 u8 driver, struct extended_perms_decision *xpermd);
+=======
+			 u16 tclass, struct av_decision *avd);
+>>>>>>> v3.18
 
 void security_compute_av_user(u32 ssid, u32 tsid,
 			     u16 tclass, struct av_decision *avd);
@@ -159,7 +197,11 @@ int security_sid_to_context(u32 sid, char **scontext,
 int security_sid_to_context_force(u32 sid, char **scontext, u32 *scontext_len);
 
 int security_context_to_sid(const char *scontext, u32 scontext_len,
+<<<<<<< HEAD
 	u32 *out_sid);
+=======
+			    u32 *out_sid, gfp_t gfp);
+>>>>>>> v3.18
 
 int security_context_to_sid_default(const char *scontext, u32 scontext_len,
 				    u32 *out_sid, u32 def_sid, gfp_t gfp_flags);
@@ -199,9 +241,16 @@ int security_get_allow_unknown(void);
 #define SECURITY_FS_USE_GENFS		4 /* use the genfs support */
 #define SECURITY_FS_USE_NONE		5 /* no labeling support */
 #define SECURITY_FS_USE_MNTPOINT	6 /* use mountpoint labeling */
+<<<<<<< HEAD
 
 int security_fs_use(const char *fstype, unsigned int *behavior,
 	u32 *sid);
+=======
+#define SECURITY_FS_USE_NATIVE		7 /* use native label support */
+#define SECURITY_FS_USE_MAX		7 /* Highest SECURITY_FS_USE_XXX */
+
+int security_fs_use(struct super_block *sb);
+>>>>>>> v3.18
 
 int security_genfs_sid(const char *fstype, char *name, u16 sclass,
 	u32 *sid);
@@ -244,7 +293,11 @@ struct selinux_kernel_status {
 	/*
 	 * The version > 0 supports above members.
 	 */
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 
 extern void selinux_status_update_setenforce(int enforcing);
 extern void selinux_status_update_policyload(int seqno);

@@ -9,6 +9,10 @@
 #include <linux/device.h>
 #include <linux/errno.h>
 #include <linux/init.h>
+<<<<<<< HEAD
+=======
+#include <linux/io.h>
+>>>>>>> v3.18
 
 #include <mach/hardware.h>
 #include <asm/hardware/sa1111.h>
@@ -94,6 +98,10 @@ static struct pcmcia_low_level jornada720_pcmcia_ops = {
 int pcmcia_jornada720_init(struct device *dev)
 {
 	int ret = -ENODEV;
+<<<<<<< HEAD
+=======
+	struct sa1111_dev *sadev = SA1111_DEV(dev);
+>>>>>>> v3.18
 
 	if (machine_is_jornada720()) {
 		unsigned int pin = GPIO_A0 | GPIO_A1 | GPIO_A2 | GPIO_A3;
@@ -101,12 +109,21 @@ int pcmcia_jornada720_init(struct device *dev)
 		GRER |= 0x00000002;
 
 		/* Set GPIO_A<3:1> to be outputs for PCMCIA/CF power controller: */
+<<<<<<< HEAD
 		sa1111_set_io_dir(dev, pin, 0, 0);
 		sa1111_set_io(dev, pin, 0);
 		sa1111_set_sleep_io(dev, pin, 0);
 
 		sa11xx_drv_pcmcia_ops(&jornada720_pcmcia_ops);
 		ret = sa1111_pcmcia_add(dev, &jornada720_pcmcia_ops,
+=======
+		sa1111_set_io_dir(sadev, pin, 0, 0);
+		sa1111_set_io(sadev, pin, 0);
+		sa1111_set_sleep_io(sadev, pin, 0);
+
+		sa11xx_drv_pcmcia_ops(&jornada720_pcmcia_ops);
+		ret = sa1111_pcmcia_add(sadev, &jornada720_pcmcia_ops,
+>>>>>>> v3.18
 				sa11xx_drv_pcmcia_add_one);
 	}
 

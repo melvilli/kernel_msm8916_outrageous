@@ -48,6 +48,10 @@
 #include <linux/highmem.h>
 #include <linux/spinlock.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
+=======
+#include <linux/pagemap.h>
+>>>>>>> v3.18
 
 #include <net/protocol.h>
 #include <linux/skbuff.h>
@@ -56,6 +60,10 @@
 #include <net/sock.h>
 #include <net/tcp_states.h>
 #include <trace/events/skb.h>
+<<<<<<< HEAD
+=======
+#include <net/busy_poll.h>
+>>>>>>> v3.18
 
 /*
  *	Is a socket 'connection oriented' ?
@@ -128,6 +136,7 @@ out_noerr:
 	goto out;
 }
 
+<<<<<<< HEAD
 static struct sk_buff *skb_set_peeked(struct sk_buff *skb)
 {
 	struct sk_buff *nskb;
@@ -157,6 +166,8 @@ done:
 	return skb;
 }
 
+=======
+>>>>>>> v3.18
 /**
  *	__skb_recv_datagram - Receive a datagram skbuff
  *	@sk: socket
@@ -191,9 +202,13 @@ done:
 struct sk_buff *__skb_recv_datagram(struct sock *sk, unsigned int flags,
 				    int *peeked, int *off, int *err)
 {
+<<<<<<< HEAD
 	struct sk_buff_head *queue = &sk->sk_receive_queue;
 	struct sk_buff *skb, *last;
 	unsigned long cpu_flags;
+=======
+	struct sk_buff *skb, *last;
+>>>>>>> v3.18
 	long timeo;
 	/*
 	 * Caller is allowed not to check sk->sk_err before skb_recv_datagram()
@@ -212,6 +227,11 @@ struct sk_buff *__skb_recv_datagram(struct sock *sk, unsigned int flags,
 		 * Look at current nfs client by the way...
 		 * However, this function was correct in any case. 8)
 		 */
+<<<<<<< HEAD
+=======
+		unsigned long cpu_flags;
+		struct sk_buff_head *queue = &sk->sk_receive_queue;
+>>>>>>> v3.18
 		int _off = *off;
 
 		last = (struct sk_buff *)queue;
@@ -225,12 +245,16 @@ struct sk_buff *__skb_recv_datagram(struct sock *sk, unsigned int flags,
 					_off -= skb->len;
 					continue;
 				}
+<<<<<<< HEAD
 
 				skb = skb_set_peeked(skb);
 				error = PTR_ERR(skb);
 				if (IS_ERR(skb))
 					goto unlock_err;
 
+=======
+				skb->peeked = 1;
+>>>>>>> v3.18
 				atomic_inc(&skb->users);
 			} else
 				__skb_unlink(skb, queue);
@@ -241,6 +265,13 @@ struct sk_buff *__skb_recv_datagram(struct sock *sk, unsigned int flags,
 		}
 		spin_unlock_irqrestore(&queue->lock, cpu_flags);
 
+<<<<<<< HEAD
+=======
+		if (sk_can_busy_loop(sk) &&
+		    sk_busy_loop(sk, flags & MSG_DONTWAIT))
+			continue;
+
+>>>>>>> v3.18
 		/* User doesn't want to wait */
 		error = -EAGAIN;
 		if (!timeo)
@@ -250,8 +281,11 @@ struct sk_buff *__skb_recv_datagram(struct sock *sk, unsigned int flags,
 
 	return NULL;
 
+<<<<<<< HEAD
 unlock_err:
 	spin_unlock_irqrestore(&queue->lock, cpu_flags);
+=======
+>>>>>>> v3.18
 no_packet:
 	*err = error;
 	return NULL;
@@ -604,6 +638,80 @@ fault:
 }
 EXPORT_SYMBOL(skb_copy_datagram_from_iovec);
 
+<<<<<<< HEAD
+=======
+/**
+ *	zerocopy_sg_from_iovec - Build a zerocopy datagram from an iovec
+ *	@skb: buffer to copy
+ *	@from: io vector to copy from
+ *	@offset: offset in the io vector to start copying from
+ *	@count: amount of vectors to copy to buffer from
+ *
+ *	The function will first copy up to headlen, and then pin the userspace
+ *	pages and build frags through them.
+ *
+ *	Returns 0, -EFAULT or -EMSGSIZE.
+ *	Note: the iovec is not modified during the copy
+ */
+int zerocopy_sg_from_iovec(struct sk_buff *skb, const struct iovec *from,
+				  int offset, size_t count)
+{
+	int len = iov_length(from, count) - offset;
+	int copy = min_t(int, skb_headlen(skb), len);
+	int size;
+	int i = 0;
+
+	/* copy up to skb headlen */
+	if (skb_copy_datagram_from_iovec(skb, 0, from, offset, copy))
+		return -EFAULT;
+
+	if (len == copy)
+		return 0;
+
+	offset += copy;
+	while (count--) {
+		struct page *page[MAX_SKB_FRAGS];
+		int num_pages;
+		unsigned long base;
+		unsigned long truesize;
+
+		/* Skip over from offset and copied */
+		if (offset >= from->iov_len) {
+			offset -= from->iov_len;
+			++from;
+			continue;
+		}
+		len = from->iov_len - offset;
+		base = (unsigned long)from->iov_base + offset;
+		size = ((base & ~PAGE_MASK) + len + ~PAGE_MASK) >> PAGE_SHIFT;
+		if (i + size > MAX_SKB_FRAGS)
+			return -EMSGSIZE;
+		num_pages = get_user_pages_fast(base, size, 0, &page[i]);
+		if (num_pages != size) {
+			release_pages(&page[i], num_pages, 0);
+			return -EFAULT;
+		}
+		truesize = size * PAGE_SIZE;
+		skb->data_len += len;
+		skb->len += len;
+		skb->truesize += truesize;
+		atomic_add(truesize, &skb->sk->sk_wmem_alloc);
+		while (len) {
+			int off = base & ~PAGE_MASK;
+			int size = min_t(int, len, PAGE_SIZE - off);
+			skb_fill_page_desc(skb, i, page[i], off, size);
+			base += size;
+			len -= size;
+			i++;
+		}
+		offset = 0;
+		++from;
+	}
+	return 0;
+}
+EXPORT_SYMBOL(zerocopy_sg_from_iovec);
+
+>>>>>>> v3.18
 static int skb_copy_and_csum_datagram(const struct sk_buff *skb, int offset,
 				      u8 __user *to, int len,
 				      __wsum *csump)
@@ -699,27 +807,65 @@ __sum16 __skb_checksum_complete_head(struct sk_buff *skb, int len)
 
 	sum = csum_fold(skb_checksum(skb, 0, len, skb->csum));
 	if (likely(!sum)) {
+<<<<<<< HEAD
 		if (unlikely(skb->ip_summed == CHECKSUM_COMPLETE))
 			netdev_rx_csum_fault(skb->dev);
 		if (!skb_shared(skb))
 			skb->ip_summed = CHECKSUM_UNNECESSARY;
 	}
+=======
+		if (unlikely(skb->ip_summed == CHECKSUM_COMPLETE) &&
+		    !skb->csum_complete_sw)
+			netdev_rx_csum_fault(skb->dev);
+	}
+	skb->csum_valid = !sum;
+>>>>>>> v3.18
 	return sum;
 }
 EXPORT_SYMBOL(__skb_checksum_complete_head);
 
 __sum16 __skb_checksum_complete(struct sk_buff *skb)
 {
+<<<<<<< HEAD
 	return __skb_checksum_complete_head(skb, skb->len);
+=======
+	__wsum csum;
+	__sum16 sum;
+
+	csum = skb_checksum(skb, 0, skb->len, 0);
+
+	/* skb->csum holds pseudo checksum */
+	sum = csum_fold(csum_add(skb->csum, csum));
+	if (likely(!sum)) {
+		if (unlikely(skb->ip_summed == CHECKSUM_COMPLETE) &&
+		    !skb->csum_complete_sw)
+			netdev_rx_csum_fault(skb->dev);
+	}
+
+	/* Save full packet checksum */
+	skb->csum = csum;
+	skb->ip_summed = CHECKSUM_COMPLETE;
+	skb->csum_complete_sw = 1;
+	skb->csum_valid = !sum;
+
+	return sum;
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(__skb_checksum_complete);
 
 /**
+<<<<<<< HEAD
  *	skb_copy_and_csum_datagram_iovec - Copy and checkum skb to user iovec.
  *	@skb: skbuff
  *	@hlen: hardware length
  *	@iov: io vector
  *	@len: amount of data to copy from skb to iov
+=======
+ *	skb_copy_and_csum_datagram_iovec - Copy and checksum skb to user iovec.
+ *	@skb: skbuff
+ *	@hlen: hardware length
+ *	@iov: io vector
+>>>>>>> v3.18
  *
  *	Caller _must_ check that skb will fit to this iovec.
  *
@@ -729,14 +875,21 @@ EXPORT_SYMBOL(__skb_checksum_complete);
  *			   can be modified!
  */
 int skb_copy_and_csum_datagram_iovec(struct sk_buff *skb,
+<<<<<<< HEAD
 				     int hlen, struct iovec *iov, int len)
+=======
+				     int hlen, struct iovec *iov)
+>>>>>>> v3.18
 {
 	__wsum csum;
 	int chunk = skb->len - hlen;
 
+<<<<<<< HEAD
 	if (chunk > len)
 		chunk = len;
 
+=======
+>>>>>>> v3.18
 	if (!chunk)
 		return 0;
 

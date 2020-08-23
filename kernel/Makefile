@@ -2,6 +2,7 @@
 # Makefile for the linux kernel.
 #
 
+<<<<<<< HEAD
 obj-y     = fork.o exec_domain.o panic.o printk.o \
 	    cpu.o exit.o itimer.o time.o softirq.o resource.o \
 	    sysctl.o sysctl_binary.o capability.o ptrace.o timer.o user.o \
@@ -18,13 +19,36 @@ CFLAGS_REMOVE_lockdep.o = -pg
 CFLAGS_REMOVE_lockdep_proc.o = -pg
 CFLAGS_REMOVE_mutex-debug.o = -pg
 CFLAGS_REMOVE_rtmutex-debug.o = -pg
+=======
+obj-y     = fork.o exec_domain.o panic.o \
+	    cpu.o exit.o softirq.o resource.o \
+	    sysctl.o sysctl_binary.o capability.o ptrace.o user.o \
+	    signal.o sys.o kmod.o workqueue.o pid.o task_work.o \
+	    extable.o params.o \
+	    kthread.o sys_ni.o nsproxy.o \
+	    notifier.o ksysfs.o cred.o reboot.o \
+	    async.o range.o groups.o smpboot.o
+
+ifdef CONFIG_FUNCTION_TRACER
+# Do not trace debug files and internal ftrace files
+>>>>>>> v3.18
 CFLAGS_REMOVE_cgroup-debug.o = -pg
 CFLAGS_REMOVE_irq_work.o = -pg
 endif
 
+<<<<<<< HEAD
 obj-y += sched/
 obj-y += power/
 obj-y += cpu/
+=======
+# cond_syscall is currently not LTO compatible
+CFLAGS_sys_ni.o = $(DISABLE_LTO)
+
+obj-y += sched/
+obj-y += locking/
+obj-y += power/
+obj-y += printk/
+>>>>>>> v3.18
 obj-y += irq/
 obj-y += rcu/
 
@@ -33,29 +57,42 @@ obj-$(CONFIG_FREEZER) += freezer.o
 obj-$(CONFIG_PROFILING) += profile.o
 obj-$(CONFIG_STACKTRACE) += stacktrace.o
 obj-y += time/
+<<<<<<< HEAD
 obj-$(CONFIG_DEBUG_MUTEXES) += mutex-debug.o
 obj-$(CONFIG_LOCKDEP) += lockdep.o
 ifeq ($(CONFIG_PROC_FS),y)
 obj-$(CONFIG_LOCKDEP) += lockdep_proc.o
 endif
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_FUTEX) += futex.o
 ifeq ($(CONFIG_COMPAT),y)
 obj-$(CONFIG_FUTEX) += futex_compat.o
 endif
+<<<<<<< HEAD
 obj-$(CONFIG_RT_MUTEXES) += rtmutex.o
 obj-$(CONFIG_DEBUG_RT_MUTEXES) += rtmutex-debug.o
 obj-$(CONFIG_RT_MUTEX_TESTER) += rtmutex-tester.o
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_GENERIC_ISA_DMA) += dma.o
 obj-$(CONFIG_SMP) += smp.o
 ifneq ($(CONFIG_SMP),y)
 obj-y += up.o
 endif
+<<<<<<< HEAD
 obj-$(CONFIG_SMP) += spinlock.o
 obj-$(CONFIG_DEBUG_SPINLOCK) += spinlock.o
 obj-$(CONFIG_PROVE_LOCKING) += spinlock.o
 obj-$(CONFIG_UID16) += uid16.o
 obj-$(CONFIG_MODULES) += module.o
 obj-$(CONFIG_MODULE_SIG) += module_signing.o modsign_pubkey.o modsign_certificate.o
+=======
+obj-$(CONFIG_UID16) += uid16.o
+obj-$(CONFIG_SYSTEM_TRUSTED_KEYRING) += system_keyring.o system_certificates.o
+obj-$(CONFIG_MODULES) += module.o
+obj-$(CONFIG_MODULE_SIG) += module_signing.o
+>>>>>>> v3.18
 obj-$(CONFIG_KALLSYMS) += kallsyms.o
 obj-$(CONFIG_BSD_PROCESS_ACCT) += acct.o
 obj-$(CONFIG_KEXEC) += kexec.o
@@ -97,6 +134,10 @@ obj-$(CONFIG_RING_BUFFER) += trace/
 obj-$(CONFIG_TRACEPOINTS) += trace/
 obj-$(CONFIG_IRQ_WORK) += irq_work.o
 obj-$(CONFIG_CPU_PM) += cpu_pm.o
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_BPF) += bpf/
+>>>>>>> v3.18
 
 obj-$(CONFIG_PERF_EVENTS) += events/
 
@@ -105,6 +146,10 @@ obj-$(CONFIG_PADATA) += padata.o
 obj-$(CONFIG_CRASH_DUMP) += crash_dump.o
 obj-$(CONFIG_JUMP_LABEL) += jump_label.o
 obj-$(CONFIG_CONTEXT_TRACKING) += context_tracking.o
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_TORTURE_TEST) += torture.o
+>>>>>>> v3.18
 
 $(obj)/configs.o: $(obj)/config_data.h
 
@@ -114,11 +159,16 @@ targets += config_data.gz
 $(obj)/config_data.gz: $(KCONFIG_CONFIG) FORCE
 	$(call if_changed,gzip)
 
+<<<<<<< HEAD
       filechk_ikconfiggz = (echo "static const char kernel_config_data[] __used = MAGIC_START"; cat $< | scripts/bin2c; echo "MAGIC_END;")
+=======
+      filechk_ikconfiggz = (echo "static const char kernel_config_data[] __used = MAGIC_START"; cat $< | scripts/basic/bin2c; echo "MAGIC_END;")
+>>>>>>> v3.18
 targets += config_data.h
 $(obj)/config_data.h: $(obj)/config_data.gz FORCE
 	$(call filechk,ikconfiggz)
 
+<<<<<<< HEAD
 $(obj)/time.o: $(obj)/timeconst.h
 
 quiet_cmd_hzfile = HZFILE  $@
@@ -148,6 +198,55 @@ extra_certificates:
 
 kernel/modsign_certificate.o: signing_key.x509 extra_certificates
 
+=======
+###############################################################################
+#
+# Roll all the X.509 certificates that we can find together and pull them into
+# the kernel so that they get loaded into the system trusted keyring during
+# boot.
+#
+# We look in the source root and the build root for all files whose name ends
+# in ".x509".  Unfortunately, this will generate duplicate filenames, so we
+# have make canonicalise the pathnames and then sort them to discard the
+# duplicates.
+#
+###############################################################################
+ifeq ($(CONFIG_SYSTEM_TRUSTED_KEYRING),y)
+X509_CERTIFICATES-y := $(wildcard *.x509) $(wildcard $(srctree)/*.x509)
+X509_CERTIFICATES-$(CONFIG_MODULE_SIG) += $(objtree)/signing_key.x509
+X509_CERTIFICATES-raw := $(sort $(foreach CERT,$(X509_CERTIFICATES-y), \
+				$(or $(realpath $(CERT)),$(CERT))))
+X509_CERTIFICATES := $(subst $(realpath $(objtree))/,,$(X509_CERTIFICATES-raw))
+
+ifeq ($(X509_CERTIFICATES),)
+$(warning *** No X.509 certificates found ***)
+endif
+
+ifneq ($(wildcard $(obj)/.x509.list),)
+ifneq ($(shell cat $(obj)/.x509.list),$(X509_CERTIFICATES))
+$(info X.509 certificate list changed)
+$(shell rm $(obj)/.x509.list)
+endif
+endif
+
+kernel/system_certificates.o: $(obj)/x509_certificate_list
+
+quiet_cmd_x509certs  = CERTS   $@
+      cmd_x509certs  = cat $(X509_CERTIFICATES) /dev/null >$@ $(foreach X509,$(X509_CERTIFICATES),; echo "  - Including cert $(X509)")
+
+targets += $(obj)/x509_certificate_list
+$(obj)/x509_certificate_list: $(X509_CERTIFICATES) $(obj)/.x509.list
+	$(call if_changed,x509certs)
+
+targets += $(obj)/.x509.list
+$(obj)/.x509.list:
+	@echo $(X509_CERTIFICATES) >$@
+endif
+
+clean-files := x509_certificate_list .x509.list
+
+ifeq ($(CONFIG_MODULE_SIG),y)
+>>>>>>> v3.18
 ###############################################################################
 #
 # If module signing is requested, say by allyesconfig, but a key has not been

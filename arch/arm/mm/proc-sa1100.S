@@ -43,7 +43,11 @@ ENTRY(cpu_sa1100_proc_init)
 	mov	r0, #0
 	mcr	p15, 0, r0, c15, c1, 2		@ Enable clock switching
 	mcr	p15, 0, r0, c9, c0, 5		@ Allow read-buffer operations from userland
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 
 /*
  * cpu_sa1100_proc_fin()
@@ -58,7 +62,11 @@ ENTRY(cpu_sa1100_proc_fin)
 	bic	r0, r0, #0x1000			@ ...i............
 	bic	r0, r0, #0x000e			@ ............wca.
 	mcr	p15, 0, r0, c1, c0, 0		@ disable caches
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 
 /*
  * cpu_sa1100_reset(loc)
@@ -82,7 +90,11 @@ ENTRY(cpu_sa1100_reset)
 	bic	ip, ip, #0x000f			@ ............wcam
 	bic	ip, ip, #0x1100			@ ...i...s........
 	mcr	p15, 0, ip, c1, c0, 0		@ ctrl register
+<<<<<<< HEAD
 	mov	pc, r0
+=======
+	ret	r0
+>>>>>>> v3.18
 ENDPROC(cpu_sa1100_reset)
 	.popsection
 
@@ -113,7 +125,11 @@ ENTRY(cpu_sa1100_do_idle)
 	mcr	p15, 0, r0, c15, c8, 2		@ wait for interrupt
 	mov	r0, r0				@ safety
 	mcr	p15, 0, r0, c15, c1, 2		@ enable clock switching
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 
 /* ================================= CACHE ================================ */
 
@@ -131,7 +147,11 @@ ENTRY(cpu_sa1100_dcache_clean_area)
 	add	r0, r0, #DCACHELINESIZE
 	subs	r1, r1, #DCACHELINESIZE
 	bhi	1b
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 
 /* =============================== PageTable ============================== */
 
@@ -152,7 +172,11 @@ ENTRY(cpu_sa1100_switch_mm)
 	mcr	p15, 0, ip, c8, c7, 0		@ invalidate I & D TLBs
 	ldr	pc, [sp], #4
 #else
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 #endif
 
 /*
@@ -168,7 +192,11 @@ ENTRY(cpu_sa1100_set_pte_ext)
 	mcr	p15, 0, r0, c7, c10, 1		@ clean D entry
 	mcr	p15, 0, r0, c7, c10, 4		@ drain WB
 #endif
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 
 .globl	cpu_sa1100_suspend_size
 .equ	cpu_sa1100_suspend_size, 4 * 3
@@ -198,8 +226,11 @@ ENTRY(cpu_sa1100_do_resume)
 ENDPROC(cpu_sa1100_do_resume)
 #endif
 
+<<<<<<< HEAD
 	__CPUINIT
 
+=======
+>>>>>>> v3.18
 	.type	__sa1100_setup, #function
 __sa1100_setup:
 	mov	r0, #0
@@ -213,7 +244,11 @@ __sa1100_setup:
 	mrc	p15, 0, r0, c1, c0		@ get control register v4
 	bic	r0, r0, r5
 	orr	r0, r0, r6
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 	.size	__sa1100_setup, . - __sa1100_setup
 
 	/*

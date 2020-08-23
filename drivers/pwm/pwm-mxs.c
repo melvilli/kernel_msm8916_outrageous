@@ -16,7 +16,10 @@
 #include <linux/module.h>
 #include <linux/of.h>
 #include <linux/of_address.h>
+<<<<<<< HEAD
 #include <linux/pinctrl/consumer.h>
+=======
+>>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <linux/pwm.h>
 #include <linux/slab.h>
@@ -130,7 +133,10 @@ static int mxs_pwm_probe(struct platform_device *pdev)
 	struct device_node *np = pdev->dev.of_node;
 	struct mxs_pwm_chip *mxs;
 	struct resource *res;
+<<<<<<< HEAD
 	struct pinctrl *pinctrl;
+=======
+>>>>>>> v3.18
 	int ret;
 
 	mxs = devm_kzalloc(&pdev->dev, sizeof(*mxs), GFP_KERNEL);
@@ -142,10 +148,13 @@ static int mxs_pwm_probe(struct platform_device *pdev)
 	if (IS_ERR(mxs->base))
 		return PTR_ERR(mxs->base);
 
+<<<<<<< HEAD
 	pinctrl = devm_pinctrl_get_select_default(&pdev->dev);
 	if (IS_ERR(pinctrl))
 		return PTR_ERR(pinctrl);
 
+=======
+>>>>>>> v3.18
 	mxs->clk = devm_clk_get(&pdev->dev, NULL);
 	if (IS_ERR(mxs->clk))
 		return PTR_ERR(mxs->clk);
@@ -153,6 +162,10 @@ static int mxs_pwm_probe(struct platform_device *pdev)
 	mxs->chip.dev = &pdev->dev;
 	mxs->chip.ops = &mxs_pwm_ops;
 	mxs->chip.base = -1;
+<<<<<<< HEAD
+=======
+	mxs->chip.can_sleep = true;
+>>>>>>> v3.18
 	ret = of_property_read_u32(np, "fsl,pwm-number", &mxs->chip.npwm);
 	if (ret < 0) {
 		dev_err(&pdev->dev, "failed to get pwm number: %d\n", ret);
@@ -167,9 +180,21 @@ static int mxs_pwm_probe(struct platform_device *pdev)
 
 	platform_set_drvdata(pdev, mxs);
 
+<<<<<<< HEAD
 	stmp_reset_block(mxs->base);
 
 	return 0;
+=======
+	ret = stmp_reset_block(mxs->base);
+	if (ret)
+		goto pwm_remove;
+
+	return 0;
+
+pwm_remove:
+	pwmchip_remove(&mxs->chip);
+	return ret;
+>>>>>>> v3.18
 }
 
 static int mxs_pwm_remove(struct platform_device *pdev)
@@ -188,7 +213,12 @@ MODULE_DEVICE_TABLE(of, mxs_pwm_dt_ids);
 static struct platform_driver mxs_pwm_driver = {
 	.driver = {
 		.name = "mxs-pwm",
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(mxs_pwm_dt_ids),
+=======
+		.owner = THIS_MODULE,
+		.of_match_table = mxs_pwm_dt_ids,
+>>>>>>> v3.18
 	},
 	.probe = mxs_pwm_probe,
 	.remove = mxs_pwm_remove,

@@ -3,7 +3,10 @@
  * Copyright (C) 2007, 2008 David S. Miller <davem@davemloft.net>
  */
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 
 #include <asm/thread_info.h>
 #include <asm/hypervisor.h>
@@ -16,7 +19,10 @@
 #include <asm/asi.h>
 #include <asm/pil.h>
 
+<<<<<<< HEAD
 	__CPUINIT
+=======
+>>>>>>> v3.18
 	.align		8
 	.globl		hv_cpu_startup, hv_cpu_startup_end
 
@@ -111,7 +117,10 @@ hv_cpu_startup:
 	sllx		%g5, THREAD_SHIFT, %g5
 	sub		%g5, (STACKFRAME_SZ + STACK_BIAS), %g5
 	add		%g6, %g5, %sp
+<<<<<<< HEAD
 	mov		0, %fp
+=======
+>>>>>>> v3.18
 
 	call		init_irqwork_curcpu
 	 nop

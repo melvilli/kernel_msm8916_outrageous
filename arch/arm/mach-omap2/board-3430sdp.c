@@ -126,6 +126,7 @@ static void __init sdp3430_display_init(void)
 
 }
 
+<<<<<<< HEAD
 static struct panel_sharp_ls037v7dw01_data sdp3430_lcd_data = {
 	.resb_gpio = SDP3430_LCD_PANEL_ENABLE_GPIO,
 	.ini_gpio = -1,
@@ -173,6 +174,67 @@ static struct omap_dss_board_info sdp3430_dss_data = {
 	.num_devices	= ARRAY_SIZE(sdp3430_dss_devices),
 	.devices	= sdp3430_dss_devices,
 	.default_device	= &sdp3430_lcd_device,
+=======
+static struct panel_sharp_ls037v7dw01_platform_data sdp3430_lcd_pdata = {
+	.name                   = "lcd",
+	.source                 = "dpi.0",
+
+	.data_lines		= 16,
+
+	.resb_gpio		= SDP3430_LCD_PANEL_ENABLE_GPIO,
+	.ini_gpio		= -1,
+	.mo_gpio		= -1,
+	.lr_gpio		= -1,
+	.ud_gpio		= -1,
+};
+
+static struct platform_device sdp3430_lcd_device = {
+	.name                   = "panel-sharp-ls037v7dw01",
+	.id                     = 0,
+	.dev.platform_data      = &sdp3430_lcd_pdata,
+};
+
+static struct connector_dvi_platform_data sdp3430_dvi_connector_pdata = {
+	.name                   = "dvi",
+	.source                 = "tfp410.0",
+	.i2c_bus_num            = -1,
+};
+
+static struct platform_device sdp3430_dvi_connector_device = {
+	.name                   = "connector-dvi",
+	.id                     = 0,
+	.dev.platform_data      = &sdp3430_dvi_connector_pdata,
+};
+
+static struct encoder_tfp410_platform_data sdp3430_tfp410_pdata = {
+	.name                   = "tfp410.0",
+	.source                 = "dpi.0",
+	.data_lines             = 24,
+	.power_down_gpio        = -1,
+};
+
+static struct platform_device sdp3430_tfp410_device = {
+	.name                   = "tfp410",
+	.id                     = 0,
+	.dev.platform_data      = &sdp3430_tfp410_pdata,
+};
+
+static struct connector_atv_platform_data sdp3430_tv_pdata = {
+	.name = "tv",
+	.source = "venc.0",
+	.connector_type = OMAP_DSS_VENC_TYPE_SVIDEO,
+	.invert_polarity = false,
+};
+
+static struct platform_device sdp3430_tv_connector_device = {
+	.name                   = "connector-analog-tv",
+	.id                     = 0,
+	.dev.platform_data      = &sdp3430_tv_pdata,
+};
+
+static struct omap_dss_board_info sdp3430_dss_data = {
+	.default_display_name = "lcd",
+>>>>>>> v3.18
 };
 
 static struct omap2_hsmmc_info mmc[] = {
@@ -583,6 +645,14 @@ static void __init omap_3430sdp_init(void)
 	omap_hsmmc_init(mmc);
 	omap3430_i2c_init();
 	omap_display_init(&sdp3430_dss_data);
+<<<<<<< HEAD
+=======
+	platform_device_register(&sdp3430_lcd_device);
+	platform_device_register(&sdp3430_tfp410_device);
+	platform_device_register(&sdp3430_dvi_connector_device);
+	platform_device_register(&sdp3430_tv_connector_device);
+
+>>>>>>> v3.18
 	if (omap_rev() > OMAP3430_REV_ES1_0)
 		gpio_pendown = SDP3430_TS_GPIO_IRQ_SDPV2;
 	else
@@ -608,7 +678,10 @@ MACHINE_START(OMAP_3430SDP, "OMAP3430 3430SDP board")
 	.map_io		= omap3_map_io,
 	.init_early	= omap3430_init_early,
 	.init_irq	= omap3_init_irq,
+<<<<<<< HEAD
 	.handle_irq	= omap3_intc_handle_irq,
+=======
+>>>>>>> v3.18
 	.init_machine	= omap_3430sdp_init,
 	.init_late	= omap3430_init_late,
 	.init_time	= omap3_sync32k_timer_init,

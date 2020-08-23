@@ -27,12 +27,19 @@
 
 #include <linux/kernel.h>
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/interrupt.h>
 #include <linux/input.h>
 #include <linux/platform_device.h>
 #include <linux/i2c/twl.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 
 /*
  * The TWL4030 family chips include a keypad controller that supports
@@ -60,6 +67,10 @@
 struct twl4030_keypad {
 	unsigned short	keymap[TWL4030_KEYMAP_SIZE];
 	u16		kp_state[TWL4030_MAX_ROWS];
+<<<<<<< HEAD
+=======
+	bool		autorepeat;
+>>>>>>> v3.18
 	unsigned	n_rows;
 	unsigned	n_cols;
 	unsigned	irq;
@@ -330,13 +341,19 @@ static int twl4030_kp_program(struct twl4030_keypad *kp)
  */
 static int twl4030_kp_probe(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct twl4030_keypad_data *pdata = pdev->dev.platform_data;
 	const struct matrix_keymap_data *keymap_data;
+=======
+	struct twl4030_keypad_data *pdata = dev_get_platdata(&pdev->dev);
+	const struct matrix_keymap_data *keymap_data = NULL;
+>>>>>>> v3.18
 	struct twl4030_keypad *kp;
 	struct input_dev *input;
 	u8 reg;
 	int error;
 
+<<<<<<< HEAD
 	if (!pdata || !pdata->rows || !pdata->cols || !pdata->keymap_data ||
 	    pdata->rows > TWL4030_MAX_ROWS || pdata->cols > TWL4030_MAX_COLS) {
 		dev_err(&pdev->dev, "Invalid platform_data\n");
@@ -359,41 +376,107 @@ static int twl4030_kp_probe(struct platform_device *pdev)
 	kp->n_rows = pdata->rows;
 	kp->n_cols = pdata->cols;
 	kp->irq = platform_get_irq(pdev, 0);
+=======
+	kp = devm_kzalloc(&pdev->dev, sizeof(*kp), GFP_KERNEL);
+	if (!kp)
+		return -ENOMEM;
+
+	input = devm_input_allocate_device(&pdev->dev);
+	if (!input)
+		return -ENOMEM;
+
+	/* get the debug device */
+	kp->dbg_dev		= &pdev->dev;
+	kp->input		= input;
+>>>>>>> v3.18
 
 	/* setup input device */
 	input->name		= "TWL4030 Keypad";
 	input->phys		= "twl4030_keypad/input0";
+<<<<<<< HEAD
 	input->dev.parent	= &pdev->dev;
+=======
+>>>>>>> v3.18
 
 	input->id.bustype	= BUS_HOST;
 	input->id.vendor	= 0x0001;
 	input->id.product	= 0x0001;
 	input->id.version	= 0x0003;
 
+<<<<<<< HEAD
+=======
+	if (pdata) {
+		if (!pdata->rows || !pdata->cols || !pdata->keymap_data) {
+			dev_err(&pdev->dev, "Missing platform_data\n");
+			return -EINVAL;
+		}
+
+		kp->n_rows = pdata->rows;
+		kp->n_cols = pdata->cols;
+		kp->autorepeat = pdata->rep;
+		keymap_data = pdata->keymap_data;
+	} else {
+		error = matrix_keypad_parse_of_params(&pdev->dev, &kp->n_rows,
+						      &kp->n_cols);
+		if (error)
+			return error;
+
+		kp->autorepeat = true;
+	}
+
+	if (kp->n_rows > TWL4030_MAX_ROWS || kp->n_cols > TWL4030_MAX_COLS) {
+		dev_err(&pdev->dev,
+			"Invalid rows/cols amount specified in platform/devicetree data\n");
+		return -EINVAL;
+	}
+
+	kp->irq = platform_get_irq(pdev, 0);
+	if (!kp->irq) {
+		dev_err(&pdev->dev, "no keyboard irq assigned\n");
+		return -EINVAL;
+	}
+
+>>>>>>> v3.18
 	error = matrix_keypad_build_keymap(keymap_data, NULL,
 					   TWL4030_MAX_ROWS,
 					   1 << TWL4030_ROW_SHIFT,
 					   kp->keymap, input);
 	if (error) {
 		dev_err(kp->dbg_dev, "Failed to build keymap\n");
+<<<<<<< HEAD
 		goto err1;
+=======
+		return error;
+>>>>>>> v3.18
 	}
 
 	input_set_capability(input, EV_MSC, MSC_SCAN);
 	/* Enable auto repeat feature of Linux input subsystem */
+<<<<<<< HEAD
 	if (pdata->rep)
+=======
+	if (kp->autorepeat)
+>>>>>>> v3.18
 		__set_bit(EV_REP, input->evbit);
 
 	error = input_register_device(input);
 	if (error) {
 		dev_err(kp->dbg_dev,
 			"Unable to register twl4030 keypad device\n");
+<<<<<<< HEAD
 		goto err1;
+=======
+		return error;
+>>>>>>> v3.18
 	}
 
 	error = twl4030_kp_program(kp);
 	if (error)
+<<<<<<< HEAD
 		goto err2;
+=======
+		return error;
+>>>>>>> v3.18
 
 	/*
 	 * This ISR will always execute in kernel thread context because of
@@ -401,23 +484,39 @@ static int twl4030_kp_probe(struct platform_device *pdev)
 	 *
 	 * NOTE:  we assume this host is wired to TWL4040 INT1, not INT2 ...
 	 */
+<<<<<<< HEAD
 	error = request_threaded_irq(kp->irq, NULL, do_kp_irq,
 			0, pdev->name, kp);
 	if (error) {
 		dev_info(kp->dbg_dev, "request_irq failed for irq no=%d\n",
 			kp->irq);
 		goto err2;
+=======
+	error = devm_request_threaded_irq(&pdev->dev, kp->irq, NULL, do_kp_irq,
+					  0, pdev->name, kp);
+	if (error) {
+		dev_info(kp->dbg_dev, "request_irq failed for irq no=%d: %d\n",
+			kp->irq, error);
+		return error;
+>>>>>>> v3.18
 	}
 
 	/* Enable KP and TO interrupts now. */
 	reg = (u8) ~(KEYP_IMR1_KP | KEYP_IMR1_TO);
 	if (twl4030_kpwrite_u8(kp, reg, KEYP_IMR1)) {
+<<<<<<< HEAD
 		error = -EIO;
 		goto err3;
+=======
+		/* mask all events - we don't care about the result */
+		(void) twl4030_kpwrite_u8(kp, 0xff, KEYP_IMR1);
+		return -EIO;
+>>>>>>> v3.18
 	}
 
 	platform_set_drvdata(pdev, kp);
 	return 0;
+<<<<<<< HEAD
 
 err3:
 	/* mask all events - we don't care about the result */
@@ -443,6 +542,17 @@ static int twl4030_kp_remove(struct platform_device *pdev)
 
 	return 0;
 }
+=======
+}
+
+#ifdef CONFIG_OF
+static const struct of_device_id twl4030_keypad_dt_match_table[] = {
+	{ .compatible = "ti,twl4030-keypad" },
+	{},
+};
+MODULE_DEVICE_TABLE(of, twl4030_keypad_dt_match_table);
+#endif
+>>>>>>> v3.18
 
 /*
  * NOTE: twl4030 are multi-function devices connected via I2C.
@@ -452,10 +562,17 @@ static int twl4030_kp_remove(struct platform_device *pdev)
 
 static struct platform_driver twl4030_kp_driver = {
 	.probe		= twl4030_kp_probe,
+<<<<<<< HEAD
 	.remove		= twl4030_kp_remove,
 	.driver		= {
 		.name	= "twl4030_keypad",
 		.owner	= THIS_MODULE,
+=======
+	.driver		= {
+		.name	= "twl4030_keypad",
+		.owner	= THIS_MODULE,
+		.of_match_table = of_match_ptr(twl4030_keypad_dt_match_table),
+>>>>>>> v3.18
 	},
 };
 module_platform_driver(twl4030_kp_driver);

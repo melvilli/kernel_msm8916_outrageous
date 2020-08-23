@@ -2,13 +2,21 @@
  *
  * Copyright (C) 2008 Red Hat, Inc.
  * Author:
+<<<<<<< HEAD
  * 	Chris Wright
+=======
+ *	Chris Wright
+>>>>>>> v3.18
  *
  * This work is licensed under the terms of the GNU GPL, version 2.
  *
  * Usage is simple, allocate a new id to the stub driver and bind the
  * device to it.  For example:
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> v3.18
  * # echo "8086 10f5" > /sys/bus/pci/drivers/pci-stub/new_id
  * # echo -n 0000:00:19.0 > /sys/bus/pci/drivers/e1000e/unbind
  * # echo -n 0000:00:19.0 > /sys/bus/pci/drivers/pci-stub/bind
@@ -55,7 +63,11 @@ static int __init pci_stub_init(void)
 	p = ids;
 	while ((id = strsep(&p, ","))) {
 		unsigned int vendor, device, subvendor = PCI_ANY_ID,
+<<<<<<< HEAD
 			subdevice = PCI_ANY_ID, class=0, class_mask=0;
+=======
+			subdevice = PCI_ANY_ID, class = 0, class_mask = 0;
+>>>>>>> v3.18
 		int fields;
 
 		if (!strlen(id))

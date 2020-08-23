@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (C) 2003 Christophe Saout <christophe@saout.de>
+=======
+ * Copyright (C) 2003 Jana Saout <jana@saout.de>
+>>>>>>> v3.18
  *
  * This file is released under the GPL.
  */
@@ -79,6 +83,10 @@ static void __exit dm_zero_exit(void)
 module_init(dm_zero_init)
 module_exit(dm_zero_exit)
 
+<<<<<<< HEAD
 MODULE_AUTHOR("Christophe Saout <christophe@saout.de>");
+=======
+MODULE_AUTHOR("Jana Saout <jana@saout.de>");
+>>>>>>> v3.18
 MODULE_DESCRIPTION(DM_NAME " dummy target returning zeros");
 MODULE_LICENSE("GPL");

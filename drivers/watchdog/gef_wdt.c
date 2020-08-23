@@ -34,6 +34,10 @@
 #include <linux/watchdog.h>
 #include <linux/fs.h>
 #include <linux/of.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+>>>>>>> v3.18
 #include <linux/of_platform.h>
 #include <linux/io.h>
 #include <linux/uaccess.h>
@@ -330,5 +334,8 @@ module_exit(gef_wdt_exit);
 MODULE_AUTHOR("Martyn Welch <martyn.welch@ge.com>");
 MODULE_DESCRIPTION("GE watchdog driver");
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 MODULE_ALIAS("platform:gef_wdt");

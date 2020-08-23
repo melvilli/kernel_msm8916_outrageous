@@ -192,13 +192,21 @@ typedef struct {
 	/* Number of packets processed by PIP */
 	uint32_t packets;
 	/*
+<<<<<<< HEAD
 	 * Number of indentified L2 multicast packets.	Does not
+=======
+	 * Number of identified L2 multicast packets.	Does not
+>>>>>>> v3.18
 	 * include broadcast packets.  Only includes packets whose
 	 * parse mode is SKIP_TO_L2
 	 */
 	uint32_t multicast_packets;
 	/*
+<<<<<<< HEAD
 	 * Number of indentified L2 broadcast packets.	Does not
+=======
+	 * Number of identified L2 broadcast packets.	Does not
+>>>>>>> v3.18
 	 * include multicast packets.  Only includes packets whose
 	 * parse mode is SKIP_TO_L2
 	 */

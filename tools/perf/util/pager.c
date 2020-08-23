@@ -57,6 +57,7 @@ void setup_pager(void)
 	}
 	if (!pager)
 		pager = getenv("PAGER");
+<<<<<<< HEAD
 	if (!pager) {
 		if (!access("/usr/bin/pager", X_OK))
 			pager = "/usr/bin/pager";
@@ -64,6 +65,15 @@ void setup_pager(void)
 	if (!pager)
 		pager = "less";
 	else if (!*pager || !strcmp(pager, "cat"))
+=======
+	if (!(pager || access("/usr/bin/pager", X_OK)))
+		pager = "/usr/bin/pager";
+	if (!(pager || access("/usr/bin/less", X_OK)))
+		pager = "/usr/bin/less";
+	if (!pager)
+		pager = "cat";
+	if (!*pager || !strcmp(pager, "cat"))
+>>>>>>> v3.18
 		return;
 
 	spawned_pager = 1; /* means we are emitting to terminal */

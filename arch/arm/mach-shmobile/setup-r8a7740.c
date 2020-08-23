@@ -22,6 +22,11 @@
 #include <linux/kernel.h>
 #include <linux/init.h>
 #include <linux/io.h>
+<<<<<<< HEAD
+=======
+#include <linux/irqchip.h>
+#include <linux/irqchip/arm-gic.h>
+>>>>>>> v3.18
 #include <linux/platform_data/irq-renesas-intc-irqpin.h>
 #include <linux/platform_device.h>
 #include <linux/of_platform.h>
@@ -29,15 +34,29 @@
 #include <linux/sh_dma.h>
 #include <linux/sh_timer.h>
 #include <linux/platform_data/sh_ipmmu.h>
+<<<<<<< HEAD
 #include <mach/dma-register.h>
 #include <mach/r8a7740.h>
 #include <mach/pm-rmobile.h>
 #include <mach/common.h>
 #include <mach/irqs.h>
+=======
+
+>>>>>>> v3.18
 #include <asm/mach-types.h>
 #include <asm/mach/map.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/time.h>
+<<<<<<< HEAD
+=======
+#include <asm/hardware/cache-l2x0.h>
+
+#include "common.h"
+#include "dma-register.h"
+#include "irqs.h"
+#include "pm-rmobile.h"
+#include "r8a7740.h"
+>>>>>>> v3.18
 
 static struct map_desc r8a7740_io_desc[] __initdata = {
 	 /*
@@ -70,6 +89,7 @@ void __init r8a7740_map_io(void)
 }
 
 /* PFC */
+<<<<<<< HEAD
 static struct resource r8a7740_pfc_resources[] = {
 	[0] = {
 		.start	= 0xe6050000,
@@ -88,11 +108,21 @@ static struct platform_device r8a7740_pfc_device = {
 	.id		= -1,
 	.resource	= r8a7740_pfc_resources,
 	.num_resources	= ARRAY_SIZE(r8a7740_pfc_resources),
+=======
+static const struct resource pfc_resources[] = {
+	DEFINE_RES_MEM(0xe6050000, 0x8000),
+	DEFINE_RES_MEM(0xe605800c, 0x0020),
+>>>>>>> v3.18
 };
 
 void __init r8a7740_pinmux_init(void)
 {
+<<<<<<< HEAD
 	platform_device_register(&r8a7740_pfc_device);
+=======
+	platform_device_register_simple("pfc-r8a7740", -1, pfc_resources,
+					ARRAY_SIZE(pfc_resources));
+>>>>>>> v3.18
 }
 
 static struct renesas_intc_irqpin_config irqpin0_platform_data = {
@@ -215,6 +245,7 @@ static struct platform_device irqpin3_device = {
 	},
 };
 
+<<<<<<< HEAD
 /* SCIFA0 */
 static struct plat_sci_port scif0_platform_data = {
 	.mapbase	= 0xe6c40000,
@@ -498,6 +529,81 @@ static struct platform_device tmu02_device = {
 	},
 	.resource	= tmu02_resources,
 	.num_resources	= ARRAY_SIZE(tmu02_resources),
+=======
+/* SCIF */
+#define R8A7740_SCIF(scif_type, index, baseaddr, irq)		\
+static struct plat_sci_port scif##index##_platform_data = {	\
+	.type		= scif_type,				\
+	.flags		= UPF_BOOT_AUTOCONF,			\
+	.scscr		= SCSCR_RE | SCSCR_TE,			\
+};								\
+								\
+static struct resource scif##index##_resources[] = {		\
+	DEFINE_RES_MEM(baseaddr, 0x100),			\
+	DEFINE_RES_IRQ(irq),					\
+};								\
+								\
+static struct platform_device scif##index##_device = {		\
+	.name		= "sh-sci",				\
+	.id		= index,				\
+	.resource	= scif##index##_resources,		\
+	.num_resources	= ARRAY_SIZE(scif##index##_resources),	\
+	.dev		= {					\
+		.platform_data	= &scif##index##_platform_data,	\
+	},							\
+}
+
+R8A7740_SCIF(PORT_SCIFA, 0, 0xe6c40000, gic_spi(100));
+R8A7740_SCIF(PORT_SCIFA, 1, 0xe6c50000, gic_spi(101));
+R8A7740_SCIF(PORT_SCIFA, 2, 0xe6c60000, gic_spi(102));
+R8A7740_SCIF(PORT_SCIFA, 3, 0xe6c70000, gic_spi(103));
+R8A7740_SCIF(PORT_SCIFA, 4, 0xe6c80000, gic_spi(104));
+R8A7740_SCIF(PORT_SCIFA, 5, 0xe6cb0000, gic_spi(105));
+R8A7740_SCIF(PORT_SCIFA, 6, 0xe6cc0000, gic_spi(106));
+R8A7740_SCIF(PORT_SCIFA, 7, 0xe6cd0000, gic_spi(107));
+R8A7740_SCIF(PORT_SCIFB, 8, 0xe6c30000, gic_spi(108));
+
+/* CMT */
+static struct sh_timer_config cmt1_platform_data = {
+	.channels_mask = 0x3f,
+};
+
+static struct resource cmt1_resources[] = {
+	DEFINE_RES_MEM(0xe6138000, 0x170),
+	DEFINE_RES_IRQ(gic_spi(58)),
+};
+
+static struct platform_device cmt1_device = {
+	.name		= "sh-cmt-48",
+	.id		= 1,
+	.dev = {
+		.platform_data	= &cmt1_platform_data,
+	},
+	.resource	= cmt1_resources,
+	.num_resources	= ARRAY_SIZE(cmt1_resources),
+};
+
+/* TMU */
+static struct sh_timer_config tmu0_platform_data = {
+	.channels_mask = 7,
+};
+
+static struct resource tmu0_resources[] = {
+	DEFINE_RES_MEM(0xfff80000, 0x2c),
+	DEFINE_RES_IRQ(gic_spi(198)),
+	DEFINE_RES_IRQ(gic_spi(199)),
+	DEFINE_RES_IRQ(gic_spi(200)),
+};
+
+static struct platform_device tmu0_device = {
+	.name		= "sh-tmu",
+	.id		= 0,
+	.dev = {
+		.platform_data	= &tmu0_platform_data,
+	},
+	.resource	= tmu0_resources,
+	.num_resources	= ARRAY_SIZE(tmu0_resources),
+>>>>>>> v3.18
 };
 
 /* IPMMUI (an IPMMU module for ICB/LMB) */
@@ -532,10 +638,13 @@ static struct platform_device ipmmu_device = {
 };
 
 static struct platform_device *r8a7740_early_devices[] __initdata = {
+<<<<<<< HEAD
 	&irqpin0_device,
 	&irqpin1_device,
 	&irqpin2_device,
 	&irqpin3_device,
+=======
+>>>>>>> v3.18
 	&scif0_device,
 	&scif1_device,
 	&scif2_device,
@@ -544,12 +653,23 @@ static struct platform_device *r8a7740_early_devices[] __initdata = {
 	&scif5_device,
 	&scif6_device,
 	&scif7_device,
+<<<<<<< HEAD
 	&scifb_device,
 	&cmt10_device,
 	&tmu00_device,
 	&tmu01_device,
 	&tmu02_device,
 	&ipmmu_device,
+=======
+	&scif8_device,
+	&irqpin0_device,
+	&irqpin1_device,
+	&irqpin2_device,
+	&irqpin3_device,
+	&tmu0_device,
+	&ipmmu_device,
+	&cmt1_device,
+>>>>>>> v3.18
 };
 
 /* DMA */
@@ -599,6 +719,19 @@ static const struct sh_dmae_slave_config r8a7740_dmae_slaves[] = {
 		.addr		= 0xfe1f0064,
 		.chcr		= CHCR_TX(XMIT_SZ_32BIT),
 		.mid_rid	= 0xb5,
+<<<<<<< HEAD
+=======
+	}, {
+		.slave_id	= SHDMA_SLAVE_MMCIF_TX,
+		.addr		= 0xe6bd0034,
+		.chcr		= CHCR_TX(XMIT_SZ_32BIT),
+		.mid_rid	= 0xd1,
+	}, {
+		.slave_id	= SHDMA_SLAVE_MMCIF_RX,
+		.addr		= 0xe6bd0034,
+		.chcr		= CHCR_RX(XMIT_SZ_32BIT),
+		.mid_rid	= 0xd2,
+>>>>>>> v3.18
 	},
 };
 
@@ -893,7 +1026,11 @@ static struct platform_device *r8a7740_late_devices[] __initdata = {
  *	"Media RAM (MERAM)" on r8a7740 documentation
  */
 #define MEBUFCNTR	0xFE950098
+<<<<<<< HEAD
 void r8a7740_meram_workaround(void)
+=======
+void __init r8a7740_meram_workaround(void)
+>>>>>>> v3.18
 {
 	void __iomem *reg;
 
@@ -956,6 +1093,22 @@ static void r8a7740_i2c_workaround(struct platform_device *pdev)
 
 void __init r8a7740_add_standard_devices(void)
 {
+<<<<<<< HEAD
+=======
+	static struct pm_domain_device domain_devices[] __initdata = {
+		{ "A3SP", &scif0_device },
+		{ "A3SP", &scif1_device },
+		{ "A3SP", &scif2_device },
+		{ "A3SP", &scif3_device },
+		{ "A3SP", &scif4_device },
+		{ "A3SP", &scif5_device },
+		{ "A3SP", &scif6_device },
+		{ "A3SP", &scif7_device },
+		{ "A3SP", &scif8_device },
+		{ "A3SP", &i2c1_device },
+	};
+
+>>>>>>> v3.18
 	/* I2C work-around */
 	r8a7740_i2c_workaround(&i2c0_device);
 	r8a7740_i2c_workaround(&i2c1_device);
@@ -969,6 +1122,7 @@ void __init r8a7740_add_standard_devices(void)
 			     ARRAY_SIZE(r8a7740_late_devices));
 
 	/* add devices to PM domain  */
+<<<<<<< HEAD
 
 	rmobile_add_device_to_domain("A3SP",	&scif0_device);
 	rmobile_add_device_to_domain("A3SP",	&scif1_device);
@@ -980,6 +1134,10 @@ void __init r8a7740_add_standard_devices(void)
 	rmobile_add_device_to_domain("A3SP",	&scif7_device);
 	rmobile_add_device_to_domain("A3SP",	&scifb_device);
 	rmobile_add_device_to_domain("A3SP",	&i2c1_device);
+=======
+	rmobile_add_devices_to_domains(domain_devices,
+				       ARRAY_SIZE(domain_devices));
+>>>>>>> v3.18
 }
 
 void __init r8a7740_add_early_devices(void)
@@ -993,6 +1151,7 @@ void __init r8a7740_add_early_devices(void)
 
 #ifdef CONFIG_USE_OF
 
+<<<<<<< HEAD
 void __init r8a7740_add_early_devices_dt(void)
 {
 	shmobile_setup_delay(800, 1, 3); /* Cortex-A9 @ 800MHz */
@@ -1018,6 +1177,54 @@ void __init r8a7740_add_standard_devices_dt(void)
 
 	of_platform_populate(NULL, of_default_bus_match_table,
 			     r8a7740_auxdata_lookup, NULL);
+=======
+void __init r8a7740_init_irq_of(void)
+{
+	void __iomem *intc_prio_base = ioremap_nocache(0xe6900010, 0x10);
+	void __iomem *intc_msk_base = ioremap_nocache(0xe6900040, 0x10);
+	void __iomem *pfc_inta_ctrl = ioremap_nocache(0xe605807c, 0x4);
+
+	irqchip_init();
+
+	/* route signals to GIC */
+	iowrite32(0x0, pfc_inta_ctrl);
+
+	/*
+	 * To mask the shared interrupt to SPI 149 we must ensure to set
+	 * PRIO *and* MASK. Else we run into IRQ floods when registering
+	 * the intc_irqpin devices
+	 */
+	iowrite32(0x0, intc_prio_base + 0x0);
+	iowrite32(0x0, intc_prio_base + 0x4);
+	iowrite32(0x0, intc_prio_base + 0x8);
+	iowrite32(0x0, intc_prio_base + 0xc);
+	iowrite8(0xff, intc_msk_base + 0x0);
+	iowrite8(0xff, intc_msk_base + 0x4);
+	iowrite8(0xff, intc_msk_base + 0x8);
+	iowrite8(0xff, intc_msk_base + 0xc);
+
+	iounmap(intc_prio_base);
+	iounmap(intc_msk_base);
+	iounmap(pfc_inta_ctrl);
+}
+
+static void __init r8a7740_generic_init(void)
+{
+	r8a7740_meram_workaround();
+
+#ifdef CONFIG_CACHE_L2X0
+	/* Shared attribute override enable, 32K*8way */
+	l2x0_init(IOMEM(0xf0002000), 0x00400000, 0xc20f0fff);
+#endif
+	of_platform_populate(NULL, of_default_bus_match_table, NULL, NULL);
+}
+
+#define RESCNT2 IOMEM(0xe6188020)
+static void r8a7740_restart(enum reboot_mode mode, const char *cmd)
+{
+	/* Do soft power on reset */
+	writel(1 << 31, RESCNT2);
+>>>>>>> v3.18
 }
 
 static const char *r8a7740_boards_compat_dt[] __initdata = {
@@ -1027,10 +1234,19 @@ static const char *r8a7740_boards_compat_dt[] __initdata = {
 
 DT_MACHINE_START(R8A7740_DT, "Generic R8A7740 (Flattened Device Tree)")
 	.map_io		= r8a7740_map_io,
+<<<<<<< HEAD
 	.init_early	= r8a7740_add_early_devices_dt,
 	.init_irq	= r8a7740_init_irq,
 	.init_machine	= r8a7740_add_standard_devices_dt,
 	.dt_compat	= r8a7740_boards_compat_dt,
+=======
+	.init_early	= shmobile_init_delay,
+	.init_irq	= r8a7740_init_irq_of,
+	.init_machine	= r8a7740_generic_init,
+	.init_late	= shmobile_init_late,
+	.dt_compat	= r8a7740_boards_compat_dt,
+	.restart	= r8a7740_restart,
+>>>>>>> v3.18
 MACHINE_END
 
 #endif /* CONFIG_USE_OF */

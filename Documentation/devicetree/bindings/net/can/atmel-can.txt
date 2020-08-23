@@ -8,7 +8,11 @@ Required properties:
 Example:
 
 	can0: can@f000c000 {
+<<<<<<< HEAD
 		compatbile = "atmel,at91sam9x5-can";
+=======
+		compatible = "atmel,at91sam9x5-can";
+>>>>>>> v3.18
 		reg = <0xf000c000 0x300>;
 		interrupts = <40 4 5>
 	};

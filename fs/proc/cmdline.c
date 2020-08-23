@@ -26,4 +26,8 @@ static int __init proc_cmdline_init(void)
 	proc_create("cmdline", 0, NULL, &cmdline_proc_fops);
 	return 0;
 }
+<<<<<<< HEAD
 module_init(proc_cmdline_init);
+=======
+fs_initcall(proc_cmdline_init);
+>>>>>>> v3.18

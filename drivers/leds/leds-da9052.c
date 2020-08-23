@@ -14,7 +14,10 @@
 
 #include <linux/module.h>
 #include <linux/kernel.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <linux/leds.h>
 #include <linux/workqueue.h>
@@ -112,7 +115,11 @@ static int da9052_led_probe(struct platform_device *pdev)
 	int i;
 
 	da9052 = dev_get_drvdata(pdev->dev.parent);
+<<<<<<< HEAD
 	pdata = da9052->dev->platform_data;
+=======
+	pdata = dev_get_platdata(da9052->dev);
+>>>>>>> v3.18
 	if (pdata == NULL) {
 		dev_err(&pdev->dev, "No platform data\n");
 		goto err;
@@ -127,8 +134,12 @@ static int da9052_led_probe(struct platform_device *pdev)
 	led = devm_kzalloc(&pdev->dev,
 			   sizeof(struct da9052_led) * pled->num_leds,
 			   GFP_KERNEL);
+<<<<<<< HEAD
 	if (led == NULL) {
 		dev_err(&pdev->dev, "Failed to alloc memory\n");
+=======
+	if (!led) {
+>>>>>>> v3.18
 		error = -ENOMEM;
 		goto err;
 	}
@@ -185,7 +196,11 @@ static int da9052_led_remove(struct platform_device *pdev)
 	int i;
 
 	da9052 = dev_get_drvdata(pdev->dev.parent);
+<<<<<<< HEAD
 	pdata = da9052->dev->platform_data;
+=======
+	pdata = dev_get_platdata(da9052->dev);
+>>>>>>> v3.18
 	pled = pdata->pled;
 
 	for (i = 0; i < pled->num_leds; i++) {

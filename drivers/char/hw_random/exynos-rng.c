@@ -22,7 +22,10 @@
 #include <linux/hw_random.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/io.h>
 #include <linux/platform_device.h>
 #include <linux/clk.h>
@@ -105,7 +108,10 @@ static int exynos_rng_probe(struct platform_device *pdev)
 {
 	struct exynos_rng *exynos_rng;
 	struct resource *res;
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 
 	exynos_rng = devm_kzalloc(&pdev->dev, sizeof(struct exynos_rng),
 					GFP_KERNEL);
@@ -133,6 +139,7 @@ static int exynos_rng_probe(struct platform_device *pdev)
 	pm_runtime_use_autosuspend(&pdev->dev);
 	pm_runtime_enable(&pdev->dev);
 
+<<<<<<< HEAD
 	ret = hwrng_register(&exynos_rng->rng);
 	if (ret) {
 		pm_runtime_dont_use_autosuspend(&pdev->dev);
@@ -140,6 +147,9 @@ static int exynos_rng_probe(struct platform_device *pdev)
 	}
 
 	return ret;
+=======
+	return hwrng_register(&exynos_rng->rng);
+>>>>>>> v3.18
 }
 
 static int exynos_rng_remove(struct platform_device *pdev)

@@ -88,13 +88,17 @@ static struct apic apic_default = {
 	.disable_esr			= 0,
 	.dest_logical			= APIC_DEST_LOGICAL,
 	.check_apicid_used		= default_check_apicid_used,
+<<<<<<< HEAD
 	.check_apicid_present		= default_check_apicid_present,
+=======
+>>>>>>> v3.18
 
 	.vector_allocation_domain	= flat_vector_allocation_domain,
 	.init_apic_ldr			= default_init_apic_ldr,
 
 	.ioapic_phys_id_map		= default_ioapic_phys_id_map,
 	.setup_apic_routing		= setup_apic_flat_routing,
+<<<<<<< HEAD
 	.multi_timer_check		= NULL,
 	.cpu_present_to_apicid		= default_cpu_present_to_apicid,
 	.apicid_to_cpu_present		= physid_set_mask_of_physid,
@@ -103,6 +107,12 @@ static struct apic apic_default = {
 	.enable_apic_mode		= NULL,
 	.phys_pkg_id			= default_phys_pkg_id,
 	.mps_oem_check			= NULL,
+=======
+	.cpu_present_to_apicid		= default_cpu_present_to_apicid,
+	.apicid_to_cpu_present		= physid_set_mask_of_physid,
+	.check_phys_apicid_present	= default_check_phys_apicid_present,
+	.phys_pkg_id			= default_phys_pkg_id,
+>>>>>>> v3.18
 
 	.get_apic_id			= default_get_apic_id,
 	.set_apic_id			= NULL,
@@ -116,12 +126,16 @@ static struct apic apic_default = {
 	.send_IPI_all			= default_send_IPI_all,
 	.send_IPI_self			= default_send_IPI_self,
 
+<<<<<<< HEAD
 	.trampoline_phys_low		= DEFAULT_TRAMPOLINE_PHYS_LOW,
 	.trampoline_phys_high		= DEFAULT_TRAMPOLINE_PHYS_HIGH,
 
 	.wait_for_init_deassert		= default_wait_for_init_deassert,
 
 	.smp_callin_clear_local_apic	= NULL,
+=======
+	.wait_for_init_deassert		= true,
+>>>>>>> v3.18
 	.inquire_remote_apic		= default_inquire_remote_apic,
 
 	.read				= native_apic_mem_read,
@@ -215,6 +229,7 @@ void __init generic_apic_probe(void)
 	printk(KERN_INFO "Using APIC driver %s\n", apic->name);
 }
 
+<<<<<<< HEAD
 /* These functions can switch the APIC even after the initial ->probe() */
 
 int __init
@@ -238,6 +253,9 @@ generic_mps_oem_check(struct mpc_table *mpc, char *oem, char *productid)
 	return 0;
 }
 
+=======
+/* This function can switch the APIC even after the initial ->probe() */
+>>>>>>> v3.18
 int __init default_acpi_madt_oem_check(char *oem_id, char *oem_table_id)
 {
 	struct apic **drv;

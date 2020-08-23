@@ -107,12 +107,20 @@ def taskState(state):
 
 class EventHeaders:
 	def __init__(self, common_cpu, common_secs, common_nsecs,
+<<<<<<< HEAD
 		     common_pid, common_comm):
+=======
+		     common_pid, common_comm, common_callchain):
+>>>>>>> v3.18
 		self.cpu = common_cpu
 		self.secs = common_secs
 		self.nsecs = common_nsecs
 		self.pid = common_pid
 		self.comm = common_comm
+<<<<<<< HEAD
+=======
+		self.callchain = common_callchain
+>>>>>>> v3.18
 
 	def ts(self):
 		return (self.secs * (10 ** 9)) + self.nsecs

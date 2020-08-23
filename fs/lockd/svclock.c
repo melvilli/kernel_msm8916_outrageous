@@ -245,7 +245,10 @@ nlmsvc_create_block(struct svc_rqst *rqstp, struct nlm_host *host,
 	block->b_daemon = rqstp->rq_server;
 	block->b_host   = host;
 	block->b_file   = file;
+<<<<<<< HEAD
 	block->b_fl = NULL;
+=======
+>>>>>>> v3.18
 	file->f_count++;
 
 	/* Add to file's list of blocks */
@@ -276,7 +279,11 @@ static int nlmsvc_unlink_block(struct nlm_block *block)
 	dprintk("lockd: unlinking block %p...\n", block);
 
 	/* Remove block from list */
+<<<<<<< HEAD
 	status = posix_unblock_lock(block->b_file->f_file, &block->b_call->a_args.lock.fl);
+=======
+	status = posix_unblock_lock(&block->b_call->a_args.lock.fl);
+>>>>>>> v3.18
 	nlmsvc_remove_block(block);
 	return status;
 }
@@ -295,7 +302,10 @@ static void nlmsvc_free_block(struct kref *kref)
 	nlmsvc_freegrantargs(block->b_call);
 	nlmsvc_release_call(block->b_call);
 	nlm_release_file(block->b_file);
+<<<<<<< HEAD
 	kfree(block->b_fl);
+=======
+>>>>>>> v3.18
 	kfree(block);
 }
 
@@ -508,7 +518,10 @@ nlmsvc_testlock(struct svc_rqst *rqstp, struct nlm_file *file,
 		struct nlm_host *host, struct nlm_lock *lock,
 		struct nlm_lock *conflock, struct nlm_cookie *cookie)
 {
+<<<<<<< HEAD
 	struct nlm_block 	*block = NULL;
+=======
+>>>>>>> v3.18
 	int			error;
 	__be32			ret;
 
@@ -519,6 +532,7 @@ nlmsvc_testlock(struct svc_rqst *rqstp, struct nlm_file *file,
 				(long long)lock->fl.fl_start,
 				(long long)lock->fl.fl_end);
 
+<<<<<<< HEAD
 	/* Get existing block (in case client is busy-waiting) */
 	block = nlmsvc_lookup_block(file, lock);
 
@@ -557,10 +571,13 @@ nlmsvc_testlock(struct svc_rqst *rqstp, struct nlm_file *file,
 		goto out;
 	}
 
+=======
+>>>>>>> v3.18
 	if (locks_in_grace(SVC_NET(rqstp))) {
 		ret = nlm_lck_denied_grace_period;
 		goto out;
 	}
+<<<<<<< HEAD
 	error = vfs_test_lock(file->f_file, &lock->fl);
 	if (error == FILE_LOCK_DEFERRED) {
 		ret = nlmsvc_defer_lock_rqst(rqstp, block);
@@ -570,12 +587,28 @@ nlmsvc_testlock(struct svc_rqst *rqstp, struct nlm_file *file,
 		ret = nlm_lck_denied_nolocks;
 		goto out;
 	}
+=======
+
+	error = vfs_test_lock(file->f_file, &lock->fl);
+	if (error) {
+		/* We can't currently deal with deferred test requests */
+		if (error == FILE_LOCK_DEFERRED)
+			WARN_ON_ONCE(1);
+
+		ret = nlm_lck_denied_nolocks;
+		goto out;
+	}
+
+>>>>>>> v3.18
 	if (lock->fl.fl_type == F_UNLCK) {
 		ret = nlm_granted;
 		goto out;
 	}
 
+<<<<<<< HEAD
 conf_lock:
+=======
+>>>>>>> v3.18
 	dprintk("lockd: conflicting lock(ty=%d, %Ld-%Ld)\n",
 		lock->fl.fl_type, (long long)lock->fl.fl_start,
 		(long long)lock->fl.fl_end);
@@ -586,10 +619,16 @@ conf_lock:
 	conflock->fl.fl_type = lock->fl.fl_type;
 	conflock->fl.fl_start = lock->fl.fl_start;
 	conflock->fl.fl_end = lock->fl.fl_end;
+<<<<<<< HEAD
 	ret = nlm_lck_denied;
 out:
 	if (block)
 		nlmsvc_release_block(block);
+=======
+	locks_release_private(&lock->fl);
+	ret = nlm_lck_denied;
+out:
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -660,21 +699,29 @@ nlmsvc_cancel_blocked(struct net *net, struct nlm_file *file, struct nlm_lock *l
  * This is a callback from the filesystem for VFS file lock requests.
  * It will be used if lm_grant is defined and the filesystem can not
  * respond to the request immediately.
+<<<<<<< HEAD
  * For GETLK request it will copy the reply to the nlm_block.
+=======
+>>>>>>> v3.18
  * For SETLK or SETLKW request it will get the local posix lock.
  * In all cases it will move the block to the head of nlm_blocked q where
  * nlmsvc_retry_blocked() can send back a reply for SETLKW or revisit the
  * deferred rpc for GETLK and SETLK.
  */
 static void
+<<<<<<< HEAD
 nlmsvc_update_deferred_block(struct nlm_block *block, struct file_lock *conf,
 			     int result)
+=======
+nlmsvc_update_deferred_block(struct nlm_block *block, int result)
+>>>>>>> v3.18
 {
 	block->b_flags |= B_GOT_CALLBACK;
 	if (result == 0)
 		block->b_granted = 1;
 	else
 		block->b_flags |= B_TIMED_OUT;
+<<<<<<< HEAD
 	if (conf) {
 		if (block->b_fl)
 			__locks_copy_lock(block->b_fl, conf);
@@ -683,6 +730,11 @@ nlmsvc_update_deferred_block(struct nlm_block *block, struct file_lock *conf,
 
 static int nlmsvc_grant_deferred(struct file_lock *fl, struct file_lock *conf,
 					int result)
+=======
+}
+
+static int nlmsvc_grant_deferred(struct file_lock *fl, int result)
+>>>>>>> v3.18
 {
 	struct nlm_block *block;
 	int rc = -ENOENT;
@@ -697,7 +749,11 @@ static int nlmsvc_grant_deferred(struct file_lock *fl, struct file_lock *conf,
 					rc = -ENOLCK;
 					break;
 				}
+<<<<<<< HEAD
 				nlmsvc_update_deferred_block(block, conf, result);
+=======
+				nlmsvc_update_deferred_block(block, result);
+>>>>>>> v3.18
 			} else if (result == 0)
 				block->b_granted = 1;
 
@@ -744,8 +800,25 @@ static int nlmsvc_same_owner(struct file_lock *fl1, struct file_lock *fl2)
 	return fl1->fl_owner == fl2->fl_owner && fl1->fl_pid == fl2->fl_pid;
 }
 
+<<<<<<< HEAD
 const struct lock_manager_operations nlmsvc_lock_operations = {
 	.lm_compare_owner = nlmsvc_same_owner,
+=======
+/*
+ * Since NLM uses two "keys" for tracking locks, we need to hash them down
+ * to one for the blocked_hash. Here, we're just xor'ing the host address
+ * with the pid in order to create a key value for picking a hash bucket.
+ */
+static unsigned long
+nlmsvc_owner_key(struct file_lock *fl)
+{
+	return (unsigned long)fl->fl_owner ^ (unsigned long)fl->fl_pid;
+}
+
+const struct lock_manager_operations nlmsvc_lock_operations = {
+	.lm_compare_owner = nlmsvc_same_owner,
+	.lm_owner_key = nlmsvc_owner_key,
+>>>>>>> v3.18
 	.lm_notify = nlmsvc_notify_blocked,
 	.lm_grant = nlmsvc_grant_deferred,
 };

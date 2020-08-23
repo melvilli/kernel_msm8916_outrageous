@@ -80,6 +80,7 @@ static const struct snd_soc_dapm_route afeb9260_audio_map[] = {
 	{"MICIN", NULL, "Mic Jack"},
 };
 
+<<<<<<< HEAD
 static int afeb9260_tlv320aic23_init(struct snd_soc_pcm_runtime *rtd)
 {
 	struct snd_soc_codec *codec = rtd->codec;
@@ -91,6 +92,8 @@ static int afeb9260_tlv320aic23_init(struct snd_soc_pcm_runtime *rtd)
 
 	return 0;
 }
+=======
+>>>>>>> v3.18
 
 /* Digital audio interface glue - connects codec <--> CPU */
 static struct snd_soc_dai_link afeb9260_dai = {
@@ -100,7 +103,10 @@ static struct snd_soc_dai_link afeb9260_dai = {
 	.codec_dai_name = "tlv320aic23-hifi",
 	.platform_name = "atmel_pcm-audio",
 	.codec_name = "tlv320aic23-codec.0-001a",
+<<<<<<< HEAD
 	.init = afeb9260_tlv320aic23_init,
+=======
+>>>>>>> v3.18
 	.dai_fmt = SND_SOC_DAIFMT_I2S | SND_SOC_DAIFMT_NB_IF |
 		   SND_SOC_DAIFMT_CBM_CFM,
 	.ops = &afeb9260_ops,

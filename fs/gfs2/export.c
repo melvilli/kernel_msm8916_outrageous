@@ -64,6 +64,10 @@ static int gfs2_encode_fh(struct inode *inode, __u32 *p, int *len,
 }
 
 struct get_name_filldir {
+<<<<<<< HEAD
+=======
+	struct dir_context ctx;
+>>>>>>> v3.18
 	struct gfs2_inum_host inum;
 	char *name;
 };
@@ -93,7 +97,10 @@ static int gfs2_get_name(struct dentry *parent, char *name,
 		.name = name
 	};
 	struct gfs2_holder gh;
+<<<<<<< HEAD
 	u64 offset = 0;
+=======
+>>>>>>> v3.18
 	int error;
 	struct file_ra_state f_ra = { .start = 0 };
 
@@ -114,7 +121,11 @@ static int gfs2_get_name(struct dentry *parent, char *name,
 	if (error)
 		return error;
 
+<<<<<<< HEAD
 	error = gfs2_dir_read(dir, &offset, &gnfd, get_name_filldir, &f_ra);
+=======
+	error = gfs2_dir_read(dir, &gnfd.ctx, &f_ra);
+>>>>>>> v3.18
 
 	gfs2_glock_dq_uninit(&gh);
 

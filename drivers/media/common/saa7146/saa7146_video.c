@@ -1,7 +1,10 @@
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
 #include <media/saa7146_vv.h>
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 #include <media/v4l2-event.h>
 #include <media/v4l2-ctrls.h>
 #include <linux/module.h>
@@ -988,6 +991,7 @@ static int vidioc_streamoff(struct file *file, void *__fh, enum v4l2_buf_type ty
 	return err;
 }
 
+<<<<<<< HEAD
 static int vidioc_g_chip_ident(struct file *file, void *__fh,
 		struct v4l2_dbg_chip_ident *chip)
 {
@@ -1008,6 +1012,8 @@ static int vidioc_g_chip_ident(struct file *file, void *__fh,
 			core, g_chip_ident, chip);
 }
 
+=======
+>>>>>>> v3.18
 const struct v4l2_ioctl_ops saa7146_video_ioctl_ops = {
 	.vidioc_querycap             = vidioc_querycap,
 	.vidioc_enum_fmt_vid_cap     = vidioc_enum_fmt_vid_cap,
@@ -1018,7 +1024,10 @@ const struct v4l2_ioctl_ops saa7146_video_ioctl_ops = {
 	.vidioc_g_fmt_vid_overlay    = vidioc_g_fmt_vid_overlay,
 	.vidioc_try_fmt_vid_overlay  = vidioc_try_fmt_vid_overlay,
 	.vidioc_s_fmt_vid_overlay    = vidioc_s_fmt_vid_overlay,
+<<<<<<< HEAD
 	.vidioc_g_chip_ident         = vidioc_g_chip_ident,
+=======
+>>>>>>> v3.18
 
 	.vidioc_overlay 	     = vidioc_overlay,
 	.vidioc_g_fbuf  	     = vidioc_g_fbuf,
@@ -1039,7 +1048,10 @@ const struct v4l2_ioctl_ops saa7146_video_ioctl_ops = {
 const struct v4l2_ioctl_ops saa7146_vbi_ioctl_ops = {
 	.vidioc_querycap             = vidioc_querycap,
 	.vidioc_g_fmt_vbi_cap        = vidioc_g_fmt_vbi_cap,
+<<<<<<< HEAD
 	.vidioc_g_chip_ident         = vidioc_g_chip_ident,
+=======
+>>>>>>> v3.18
 
 	.vidioc_reqbufs              = vidioc_reqbufs,
 	.vidioc_querybuf             = vidioc_querybuf,

@@ -27,6 +27,10 @@
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
 #include <linux/sched_clock.h>
+<<<<<<< HEAD
+=======
+#include <linux/delay.h>
+>>>>>>> v3.18
 
 #include <asm/mach/time.h>
 #include <asm/smp_twd.h>
@@ -53,6 +57,11 @@ static void __iomem *rtc_base;
 static struct timespec persistent_ts;
 static u64 persistent_ms, last_persistent_ms;
 
+<<<<<<< HEAD
+=======
+static struct delay_timer tegra_delay_timer;
+
+>>>>>>> v3.18
 #define timer_writel(value, reg) \
 	__raw_writel(value, timer_reg_base + (reg))
 #define timer_readl(reg) \
@@ -98,7 +107,11 @@ static struct clock_event_device tegra_clockevent = {
 	.set_mode	= tegra_timer_set_mode,
 };
 
+<<<<<<< HEAD
 static u32 notrace tegra_read_sched_clock(void)
+=======
+static u64 notrace tegra_read_sched_clock(void)
+>>>>>>> v3.18
 {
 	return timer_readl(TIMERUS_CNTR_1US);
 }
@@ -139,6 +152,14 @@ static void tegra_read_persistent_clock(struct timespec *ts)
 	*ts = *tsp;
 }
 
+<<<<<<< HEAD
+=======
+static unsigned long tegra_delay_timer_read_counter_long(void)
+{
+	return readl(timer_reg_base + TIMERUS_CNTR_1US);
+}
+
+>>>>>>> v3.18
 static irqreturn_t tegra_timer_interrupt(int irq, void *dev_id)
 {
 	struct clock_event_device *evt = (struct clock_event_device *)dev_id;
@@ -149,7 +170,11 @@ static irqreturn_t tegra_timer_interrupt(int irq, void *dev_id)
 
 static struct irqaction tegra_timer_irq = {
 	.name		= "timer0",
+<<<<<<< HEAD
 	.flags		= IRQF_DISABLED | IRQF_TIMER | IRQF_TRIGGER_HIGH,
+=======
+	.flags		= IRQF_TIMER | IRQF_TRIGGER_HIGH,
+>>>>>>> v3.18
 	.handler	= tegra_timer_interrupt,
 	.dev_id		= &tegra_clockevent,
 };
@@ -181,8 +206,11 @@ static void __init tegra20_init_timer(struct device_node *np)
 		rate = clk_get_rate(clk);
 	}
 
+<<<<<<< HEAD
 	of_node_put(np);
 
+=======
+>>>>>>> v3.18
 	switch (rate) {
 	case 12000000:
 		timer_writel(0x000b, TIMERUS_USEC_CFG);
@@ -200,7 +228,11 @@ static void __init tegra20_init_timer(struct device_node *np)
 		WARN(1, "Unknown clock rate");
 	}
 
+<<<<<<< HEAD
 	setup_sched_clock(tegra_read_sched_clock, 32, 1000000);
+=======
+	sched_clock_register(tegra_read_sched_clock, 32, 1000000);
+>>>>>>> v3.18
 
 	if (clocksource_mmio_init(timer_reg_base + TIMERUS_CNTR_1US,
 		"timer_us", 1000000, 300, 32, clocksource_mmio_readl_up)) {
@@ -208,6 +240,14 @@ static void __init tegra20_init_timer(struct device_node *np)
 		BUG();
 	}
 
+<<<<<<< HEAD
+=======
+	tegra_delay_timer.read_current_timer =
+			tegra_delay_timer_read_counter_long;
+	tegra_delay_timer.freq = 1000000;
+	register_current_timer_delay(&tegra_delay_timer);
+
+>>>>>>> v3.18
 	ret = setup_irq(tegra_timer_irq.irq, &tegra_timer_irq);
 	if (ret) {
 		pr_err("Failed to register timer IRQ: %d\n", ret);
@@ -241,8 +281,11 @@ static void __init tegra20_init_rtc(struct device_node *np)
 	else
 		clk_prepare_enable(clk);
 
+<<<<<<< HEAD
 	of_node_put(np);
 
+=======
+>>>>>>> v3.18
 	register_persistent_clock(NULL, tegra_read_persistent_clock);
 }
 CLOCKSOURCE_OF_DECLARE(tegra20_rtc, "nvidia,tegra20-rtc", tegra20_init_rtc);

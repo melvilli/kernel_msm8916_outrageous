@@ -5,7 +5,11 @@
 #include <linux/seq_file.h>
 #include <linux/time.h>
 #include <linux/kernel_stat.h>
+<<<<<<< HEAD
 #include <asm/cputime.h>
+=======
+#include <linux/cputime.h>
+>>>>>>> v3.18
 
 static int uptime_proc_show(struct seq_file *m, void *v)
 {
@@ -20,8 +24,12 @@ static int uptime_proc_show(struct seq_file *m, void *v)
 	for_each_possible_cpu(i)
 		idletime += (__force u64) kcpustat_cpu(i).cpustat[CPUTIME_IDLE];
 
+<<<<<<< HEAD
 	do_posix_clock_monotonic_gettime(&uptime);
 	monotonic_to_bootbased(&uptime);
+=======
+	get_monotonic_boottime(&uptime);
+>>>>>>> v3.18
 	nsec = cputime64_to_jiffies64(idletime) * TICK_NSEC;
 	idle.tv_sec = div_u64_rem(nsec, NSEC_PER_SEC, &rem);
 	idle.tv_nsec = rem;
@@ -50,4 +58,8 @@ static int __init proc_uptime_init(void)
 	proc_create("uptime", 0, NULL, &uptime_proc_fops);
 	return 0;
 }
+<<<<<<< HEAD
 module_init(proc_uptime_init);
+=======
+fs_initcall(proc_uptime_init);
+>>>>>>> v3.18

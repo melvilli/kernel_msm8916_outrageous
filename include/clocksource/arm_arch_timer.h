@@ -23,8 +23,15 @@
 #define ARCH_TIMER_CTRL_IT_MASK		(1 << 1)
 #define ARCH_TIMER_CTRL_IT_STAT		(1 << 2)
 
+<<<<<<< HEAD
 #define ARCH_TIMER_REG_CTRL		0
 #define ARCH_TIMER_REG_TVAL		1
+=======
+enum arch_timer_reg {
+	ARCH_TIMER_REG_CTRL,
+	ARCH_TIMER_REG_TVAL,
+};
+>>>>>>> v3.18
 
 #define ARCH_TIMER_PHYS_ACCESS		0
 #define ARCH_TIMER_VIRT_ACCESS		1
@@ -46,8 +53,11 @@
 extern u32 arch_timer_get_rate(void);
 extern u64 (*arch_timer_read_counter)(void);
 extern struct timecounter *arch_timer_get_timecounter(void);
+<<<<<<< HEAD
 extern u64 arch_counter_get_cntpct(void);
 extern u64 arch_counter_get_cntvct(void);
+=======
+>>>>>>> v3.18
 
 #else
 
@@ -66,10 +76,13 @@ static inline struct timecounter *arch_timer_get_timecounter(void)
 	return NULL;
 }
 
+<<<<<<< HEAD
 static inline u64 arch_counter_get_cntpct(void) { return 0; }
 
 static inline u64 arch_counter_get_cntvct(void) { return 0; }
 
+=======
+>>>>>>> v3.18
 #endif
 
 #endif

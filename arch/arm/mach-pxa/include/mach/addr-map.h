@@ -39,6 +39,14 @@
 #define DMEMC_SIZE		0x00100000
 
 /*
+<<<<<<< HEAD
+=======
+ * Reserved space for low level debug virtual addresses within
+ * 0xf6200000..0xf6201000
+ */
+
+/*
+>>>>>>> v3.18
  * Internal Memory Controller (PXA27x and later)
  */
 #define IMEMC_PHYS		0x58000000

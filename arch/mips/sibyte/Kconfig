@@ -147,7 +147,12 @@ config SIBYTE_CFE_CONSOLE
 
 config SIBYTE_BUS_WATCHER
 	bool "Support for Bus Watcher statistics"
+<<<<<<< HEAD
 	depends on SIBYTE_SB1xxx_SOC
+=======
+	depends on SIBYTE_SB1xxx_SOC && \
+		(SIBYTE_BCM112X || SIBYTE_SB1250)
+>>>>>>> v3.18
 	help
 	  Handle and keep statistics on the bus error interrupts (COR_ECC,
 	  BAD_ECC, IO_BUS).

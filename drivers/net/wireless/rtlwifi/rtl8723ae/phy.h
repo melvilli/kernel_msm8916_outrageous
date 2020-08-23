@@ -11,10 +11,13 @@
  * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
  * more details.
  *
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
+=======
+>>>>>>> v3.18
  * The full GNU General Public License is included in this distribution in the
  * file called LICENSE.
  *
@@ -39,6 +42,10 @@
 #define RT_CANNOT_IO(hw)			false
 #define HIGHPOWER_RADIOA_ARRAYLEN		22
 
+<<<<<<< HEAD
+=======
+#define IQK_ADDA_REG_NUM			16
+>>>>>>> v3.18
 #define MAX_TOLERANCE				5
 #define	IQK_DELAY_TIME				1
 
@@ -49,12 +56,24 @@
 
 #define LOOP_LIMIT				5
 #define MAX_STALL_TIME				50
+<<<<<<< HEAD
 #define AntennaDiversityValue			0x80
 #define MAX_TXPWR_IDX_NMODE_92S			63
 #define Reset_Cnt_Limit				3
 
 #define IQK_MAC_REG_NUM				4
 
+=======
+#define ANTENNADIVERSITYVALUE			0x80
+#define MAX_TXPWR_IDX_NMODE_92S			63
+#define Reset_Cnt_Limit				3
+
+#define IQK_ADDA_REG_NUM			16
+#define IQK_MAC_REG_NUM				4
+
+#define IQK_DELAY_TIME				1
+
+>>>>>>> v3.18
 #define RF6052_MAX_PATH				2
 
 #define CT_OFFSET_MAC_ADDR			0X16
@@ -76,6 +95,7 @@
 
 #define RTL92C_MAX_PATH_NUM			2
 
+<<<<<<< HEAD
 enum swchnlcmd_id {
 	CMDID_END,
 	CMDID_SET_TXPOWEROWER_LEVEL,
@@ -93,6 +113,8 @@ struct swchnlcmd {
 	u32 msdelay;
 };
 
+=======
+>>>>>>> v3.18
 enum hw90_block_e {
 	HW90_BLOCK_MAC = 0,
 	HW90_BLOCK_PHY0 = 1,
@@ -183,6 +205,7 @@ struct tx_power_struct {
 	u32 mcs_original_offset[4][16];
 };
 
+<<<<<<< HEAD
 extern u32 rtl8723ae_phy_query_bb_reg(struct ieee80211_hw *hw,
 				      u32 regaddr, u32 bitmask);
 extern void rtl8723ae_phy_set_bb_reg(struct ieee80211_hw *hw,
@@ -220,5 +243,39 @@ bool rtl8723ae_phy_config_rf_with_headerfile(struct ieee80211_hw *hw,
 bool rtl8723ae_phy_set_io_cmd(struct ieee80211_hw *hw, enum io_type iotype);
 extern bool rtl8723ae_phy_set_rf_power_state(struct ieee80211_hw *hw,
 					     enum rf_pwrstate rfpwr_state);
+=======
+u32 rtl8723e_phy_query_rf_reg(struct ieee80211_hw *hw,
+			      enum radio_path rfpath, u32 regaddr,
+			      u32 bitmask);
+void rtl8723e_phy_set_rf_reg(struct ieee80211_hw *hw,
+			     enum radio_path rfpath, u32 regaddr,
+			     u32 bitmask, u32 data);
+bool rtl8723e_phy_mac_config(struct ieee80211_hw *hw);
+bool rtl8723e_phy_bb_config(struct ieee80211_hw *hw);
+bool rtl8723e_phy_rf_config(struct ieee80211_hw *hw);
+bool rtl92c_phy_config_rf_with_feaderfile(struct ieee80211_hw *hw,
+					  enum radio_path rfpath);
+void rtl8723e_phy_get_hw_reg_originalvalue(struct ieee80211_hw *hw);
+void rtl8723e_phy_get_txpower_level(struct ieee80211_hw *hw,
+				    long *powerlevel);
+void rtl8723e_phy_set_txpower_level(struct ieee80211_hw *hw, u8 channel);
+bool rtl8723e_phy_update_txpower_dbm(struct ieee80211_hw *hw,
+				     long power_indbm);
+void rtl8723e_phy_scan_operation_backup(struct ieee80211_hw *hw,
+					u8 operation);
+void rtl8723e_phy_set_bw_mode_callback(struct ieee80211_hw *hw);
+void rtl8723e_phy_set_bw_mode(struct ieee80211_hw *hw,
+			      enum nl80211_channel_type ch_type);
+void rtl8723e_phy_sw_chnl_callback(struct ieee80211_hw *hw);
+u8 rtl8723e_phy_sw_chnl(struct ieee80211_hw *hw);
+void rtl8723e_phy_iq_calibrate(struct ieee80211_hw *hw, bool b_recovery);
+void rtl8723e_phy_lc_calibrate(struct ieee80211_hw *hw);
+void rtl8723e_phy_set_rfpath_switch(struct ieee80211_hw *hw, bool bmain);
+bool rtl8723e_phy_config_rf_with_headerfile(struct ieee80211_hw *hw,
+					    enum radio_path rfpath);
+bool rtl8723e_phy_set_io_cmd(struct ieee80211_hw *hw, enum io_type iotype);
+bool rtl8723e_phy_set_rf_power_state(struct ieee80211_hw *hw,
+				     enum rf_pwrstate rfpwr_state);
+>>>>>>> v3.18
 
 #endif

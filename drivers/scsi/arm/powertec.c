@@ -358,7 +358,11 @@ static int powertecscsi_probe(struct expansion_card *ec,
 		goto out_free;
 
 	ret = request_irq(ec->irq, powertecscsi_intr,
+<<<<<<< HEAD
 			  IRQF_DISABLED, "powertec", info);
+=======
+			  0, "powertec", info);
+>>>>>>> v3.18
 	if (ret) {
 		printk("scsi%d: IRQ%d not free: %d\n",
 		       host->host_no, ec->irq, ret);

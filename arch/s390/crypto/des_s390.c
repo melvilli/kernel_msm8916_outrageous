@@ -242,9 +242,15 @@ static int des3_setkey(struct crypto_tfm *tfm, const u8 *key,
 	struct s390_des_ctx *ctx = crypto_tfm_ctx(tfm);
 	u32 *flags = &tfm->crt_flags;
 
+<<<<<<< HEAD
 	if (!(memcmp(key, &key[DES_KEY_SIZE], DES_KEY_SIZE) &&
 	    memcmp(&key[DES_KEY_SIZE], &key[DES_KEY_SIZE * 2],
 		   DES_KEY_SIZE)) &&
+=======
+	if (!(crypto_memneq(key, &key[DES_KEY_SIZE], DES_KEY_SIZE) &&
+	    crypto_memneq(&key[DES_KEY_SIZE], &key[DES_KEY_SIZE * 2],
+			  DES_KEY_SIZE)) &&
+>>>>>>> v3.18
 	    (*flags & CRYPTO_TFM_REQ_WEAK_KEY)) {
 		*flags |= CRYPTO_TFM_RES_WEAK_KEY;
 		return -EINVAL;
@@ -619,8 +625,13 @@ static void __exit des_s390_exit(void)
 module_init(des_s390_init);
 module_exit(des_s390_exit);
 
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("des");
 MODULE_ALIAS_CRYPTO("des3_ede");
+=======
+MODULE_ALIAS("des");
+MODULE_ALIAS("des3_ede");
+>>>>>>> v3.18
 
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("DES & Triple DES EDE Cipher Algorithms");

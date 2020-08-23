@@ -33,7 +33,10 @@
 #include <linux/slab.h>
 #include <linux/input.h>
 #include <linux/gameport.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/jiffies.h>
 
 #define DRIVER_DESC	"Logitech ADI joystick family driver"

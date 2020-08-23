@@ -18,7 +18,10 @@
 #include <linux/slab.h>
 #include <linux/input/mt.h>
 #include <linux/serio.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/ctype.h>
 #include <linux/delay.h>
 
@@ -28,7 +31,11 @@ MODULE_AUTHOR("Jaya Kumar <jayakumar.lkml@gmail.com>");
 MODULE_DESCRIPTION(DRIVER_DESC);
 MODULE_LICENSE("GPL");
 
+<<<<<<< HEAD
 #define W8001_MAX_LENGTH	13
+=======
+#define W8001_MAX_LENGTH	11
+>>>>>>> v3.18
 #define W8001_LEAD_MASK		0x80
 #define W8001_LEAD_BYTE		0x80
 #define W8001_TAB_MASK		0x40

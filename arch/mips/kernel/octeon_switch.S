@@ -10,6 +10,7 @@
  * Copyright (C) 2000 MIPS Technologies, Inc.
  *    written by Carsten Langgaard, carstenl@mips.com
  */
+<<<<<<< HEAD
 #include <asm/asm.h>
 #include <asm/cachectl.h>
 #include <asm/fpregdef.h>
@@ -28,6 +29,14 @@
  */
 #define ST_OFF (_THREAD_SIZE - 32 - PT_SIZE + PT_STATUS)
 
+=======
+
+#define USE_ALTERNATE_RESUME_IMPL 1
+	.set push
+	.set arch=mips64r2
+#include "r4k_switch.S"
+	.set pop
+>>>>>>> v3.18
 /*
  * task_struct *resume(task_struct *prev, task_struct *next,
  *		       struct thread_info *next_ti, int usedfpu)
@@ -40,6 +49,37 @@
 	cpu_save_nonscratch a0
 	LONG_S	ra, THREAD_REG31(a0)
 
+<<<<<<< HEAD
+=======
+	/*
+	 * check if we need to save FPU registers
+	 */
+	PTR_L	t3, TASK_THREAD_INFO(a0)
+	LONG_L	t0, TI_FLAGS(t3)
+	li	t1, _TIF_USEDFPU
+	and	t2, t0, t1
+	beqz	t2, 1f
+	nor	t1, zero, t1
+
+	and	t0, t0, t1
+	LONG_S	t0, TI_FLAGS(t3)
+
+	/*
+	 * clear saved user stack CU1 bit
+	 */
+	LONG_L	t0, ST_OFF(t3)
+	li	t1, ~ST0_CU1
+	and	t0, t0, t1
+	LONG_S	t0, ST_OFF(t3)
+
+	.set push
+	.set arch=mips64r2
+	fpu_save_double a0 t0 t1		# c0_status passed in t0
+						# clobbers t1
+	.set pop
+1:
+
+>>>>>>> v3.18
 	/* check if we need to save COP2 registers */
 	PTR_L	t2, TASK_THREAD_INFO(a0)
 	LONG_L	t0, ST_OFF(t2)
@@ -98,6 +138,16 @@
 	mtc0	t0, $11,7	/* CvmMemCtl */
 #endif
 3:
+<<<<<<< HEAD
+=======
+
+#if defined(CONFIG_CC_STACKPROTECTOR) && !defined(CONFIG_SMP)
+	PTR_LA	t8, __stack_chk_guard
+	LONG_L	t9, TASK_STACK_CANARY(a1)
+	LONG_S	t9, 0(t8)
+#endif
+
+>>>>>>> v3.18
 	/*
 	 * The order of restoring the registers takes care of the race
 	 * updating $28, $29 and kernelsp without disabling ints.
@@ -105,12 +155,16 @@
 	move	$28, a2
 	cpu_restore_nonscratch a1
 
+<<<<<<< HEAD
 #if (_THREAD_SIZE - 32) < 0x8000
 	PTR_ADDIU	t0, $28, _THREAD_SIZE - 32
 #else
 	PTR_LI		t0, _THREAD_SIZE - 32
 	PTR_ADDU	t0, $28
 #endif
+=======
+	PTR_ADDU	t0, $28, _THREAD_SIZE - 32
+>>>>>>> v3.18
 	set_saved_sp	t0, t1, t2
 
 	mfc0	t1, CP0_STATUS		/* Do we really need this? */

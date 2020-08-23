@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*******************************************************************************
 
   Intel PRO/1000 Linux driver
@@ -25,6 +26,28 @@
   Intel Corporation, 5200 N.E. Elam Young Parkway, Hillsboro, OR 97124-6497
 
 *******************************************************************************/
+=======
+/* Intel PRO/1000 Linux driver
+ * Copyright(c) 1999 - 2014 Intel Corporation.
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms and conditions of the GNU General Public License,
+ * version 2, as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ * more details.
+ *
+ * The full GNU General Public License is included in this distribution in
+ * the file called "COPYING".
+ *
+ * Contact Information:
+ * Linux NICS <linux.nics@intel.com>
+ * e1000-devel Mailing List <e1000-devel@lists.sourceforge.net>
+ * Intel Corporation, 5200 N.E. Elam Young Parkway, Hillsboro, OR 97124-6497
+ */
+>>>>>>> v3.18
 
 /* Linux PRO/1000 Ethernet Driver main header file */
 
@@ -90,9 +113,12 @@ struct e1000_info;
 
 #define E1000_MNG_VLAN_NONE		(-1)
 
+<<<<<<< HEAD
 /* Number of packet split data buffers (not including the header buffer) */
 #define PS_PAGE_BUFFERS			(MAX_PS_BUFFERS - 1)
 
+=======
+>>>>>>> v3.18
 #define DEFAULT_JUMBO			9234
 
 /* Time to wait before putting the device into D3 if there's no link (in ms). */
@@ -272,12 +298,22 @@ struct e1000_adapter {
 	u32 tx_head_addr;
 	u32 tx_fifo_size;
 	u32 tx_dma_failed;
+<<<<<<< HEAD
 
 	/* Rx */
 	bool (*clean_rx) (struct e1000_ring *ring, int *work_done,
 			  int work_to_do) ____cacheline_aligned_in_smp;
 	void (*alloc_rx_buf) (struct e1000_ring *ring, int cleaned_count,
 			      gfp_t gfp);
+=======
+	u32 tx_hwtstamp_timeouts;
+
+	/* Rx */
+	bool (*clean_rx)(struct e1000_ring *ring, int *work_done,
+			 int work_to_do) ____cacheline_aligned_in_smp;
+	void (*alloc_rx_buf)(struct e1000_ring *ring, int cleaned_count,
+			     gfp_t gfp);
+>>>>>>> v3.18
 	struct e1000_ring *rx_ring;
 
 	u32 rx_int_delay;
@@ -336,7 +372,10 @@ struct e1000_adapter {
 	struct work_struct update_phy_task;
 	struct work_struct print_hang_task;
 
+<<<<<<< HEAD
 	bool idle_check;
+=======
+>>>>>>> v3.18
 	int phy_hang_count;
 
 	u16 tx_ring_count;
@@ -345,6 +384,10 @@ struct e1000_adapter {
 	struct hwtstamp_config hwtstamp_config;
 	struct delayed_work systim_overflow_work;
 	struct sk_buff *tx_hwtstamp_skb;
+<<<<<<< HEAD
+=======
+	unsigned long tx_hwtstamp_start;
+>>>>>>> v3.18
 	struct work_struct tx_hwtstamp_work;
 	spinlock_t systim_lock;	/* protects SYSTIML/H regsters */
 	struct cyclecounter cc;
@@ -400,6 +443,11 @@ s32 e1000e_get_base_timinca(struct e1000_adapter *adapter, u32 *timinca);
  * 25MHz	46-bit	2^46 / 10^9 / 3600 = 19.55 hours
  */
 #define E1000_SYSTIM_OVERFLOW_PERIOD	(HZ * 60 * 60 * 4)
+<<<<<<< HEAD
+=======
+#define E1000_MAX_82574_SYSTIM_REREADS	50
+#define E1000_82574_SYSTIM_EPSILON	(1ULL << 35ULL)
+>>>>>>> v3.18
 
 /* hardware capability, feature, and workaround flags */
 #define FLAG_HAS_AMT                      (1 << 0)
@@ -475,6 +523,7 @@ enum latency_range {
 extern char e1000e_driver_name[];
 extern const char e1000e_driver_version[];
 
+<<<<<<< HEAD
 extern void e1000e_check_options(struct e1000_adapter *adapter);
 extern void e1000e_set_ethtool_ops(struct net_device *netdev);
 
@@ -495,6 +544,27 @@ extern void e1000e_reset_interrupt_capability(struct e1000_adapter *adapter);
 extern void e1000e_get_hw_control(struct e1000_adapter *adapter);
 extern void e1000e_release_hw_control(struct e1000_adapter *adapter);
 extern void e1000e_write_itr(struct e1000_adapter *adapter, u32 itr);
+=======
+void e1000e_check_options(struct e1000_adapter *adapter);
+void e1000e_set_ethtool_ops(struct net_device *netdev);
+
+int e1000e_up(struct e1000_adapter *adapter);
+void e1000e_down(struct e1000_adapter *adapter, bool reset);
+void e1000e_reinit_locked(struct e1000_adapter *adapter);
+void e1000e_reset(struct e1000_adapter *adapter);
+void e1000e_power_up_phy(struct e1000_adapter *adapter);
+int e1000e_setup_rx_resources(struct e1000_ring *ring);
+int e1000e_setup_tx_resources(struct e1000_ring *ring);
+void e1000e_free_rx_resources(struct e1000_ring *ring);
+void e1000e_free_tx_resources(struct e1000_ring *ring);
+struct rtnl_link_stats64 *e1000e_get_stats64(struct net_device *netdev,
+					     struct rtnl_link_stats64 *stats);
+void e1000e_set_interrupt_capability(struct e1000_adapter *adapter);
+void e1000e_reset_interrupt_capability(struct e1000_adapter *adapter);
+void e1000e_get_hw_control(struct e1000_adapter *adapter);
+void e1000e_release_hw_control(struct e1000_adapter *adapter);
+void e1000e_write_itr(struct e1000_adapter *adapter, u32 itr);
+>>>>>>> v3.18
 
 extern unsigned int copybreak;
 
@@ -511,8 +581,13 @@ extern const struct e1000_info e1000_pch2_info;
 extern const struct e1000_info e1000_pch_lpt_info;
 extern const struct e1000_info e1000_es2_info;
 
+<<<<<<< HEAD
 extern void e1000e_ptp_init(struct e1000_adapter *adapter);
 extern void e1000e_ptp_remove(struct e1000_adapter *adapter);
+=======
+void e1000e_ptp_init(struct e1000_adapter *adapter);
+void e1000e_ptp_remove(struct e1000_adapter *adapter);
+>>>>>>> v3.18
 
 static inline s32 e1000_phy_hw_reset(struct e1000_hw *hw)
 {
@@ -539,7 +614,11 @@ static inline s32 e1e_wphy_locked(struct e1000_hw *hw, u32 offset, u16 data)
 	return hw->phy.ops.write_reg_locked(hw, offset, data);
 }
 
+<<<<<<< HEAD
 extern void e1000e_reload_nvm_generic(struct e1000_hw *hw);
+=======
+void e1000e_reload_nvm_generic(struct e1000_hw *hw);
+>>>>>>> v3.18
 
 static inline s32 e1000e_read_mac_addr(struct e1000_hw *hw)
 {
@@ -583,6 +662,7 @@ static inline u32 __er32(struct e1000_hw *hw, unsigned long reg)
 
 #define er32(reg)	__er32(hw, E1000_##reg)
 
+<<<<<<< HEAD
 /**
  * __ew32_prepare - prepare to write to MAC CSR register on certain parts
  * @hw: pointer to the HW structure
@@ -612,6 +692,10 @@ static inline void __ew32(struct e1000_hw *hw, unsigned long reg, u32 val)
 
 	writel(val, hw->hw_addr + reg);
 }
+=======
+s32 __ew32_prepare(struct e1000_hw *hw);
+void __ew32(struct e1000_hw *hw, unsigned long reg, u32 val);
+>>>>>>> v3.18
 
 #define ew32(reg, val)	__ew32(hw, E1000_##reg, (val))
 

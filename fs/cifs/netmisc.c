@@ -51,7 +51,11 @@ static const struct smb_to_posix_error mapping_table_ERRDOS[] = {
 	{ERRnoaccess, -EACCES},
 	{ERRbadfid, -EBADF},
 	{ERRbadmcb, -EIO},
+<<<<<<< HEAD
 	{ERRnomem, -ENOMEM},
+=======
+	{ERRnomem, -EREMOTEIO},
+>>>>>>> v3.18
 	{ERRbadmem, -EFAULT},
 	{ERRbadenv, -EFAULT},
 	{ERRbadformat, -EINVAL},
@@ -780,7 +784,13 @@ static const struct {
 	ERRDOS, ERRnoaccess, 0xc0000290}, {
 	ERRDOS, ERRbadfunc, 0xc000029c}, {
 	ERRDOS, ERRsymlink, NT_STATUS_STOPPED_ON_SYMLINK}, {
+<<<<<<< HEAD
 	ERRDOS, ERRinvlevel, 0x007c0001}, };
+=======
+	ERRDOS, ERRinvlevel, 0x007c0001}, {
+	0, 0, 0 }
+};
+>>>>>>> v3.18
 
 /*****************************************************************************
  Print an error message from the status code
@@ -793,8 +803,13 @@ cifs_print_status(__u32 status_code)
 	while (nt_errs[idx].nt_errstr != NULL) {
 		if (((nt_errs[idx].nt_errcode) & 0xFFFFFF) ==
 		    (status_code & 0xFFFFFF)) {
+<<<<<<< HEAD
 			printk(KERN_NOTICE "Status code returned 0x%08x %s\n",
 				   status_code, nt_errs[idx].nt_errstr);
+=======
+			pr_notice("Status code returned 0x%08x %s\n",
+				  status_code, nt_errs[idx].nt_errstr);
+>>>>>>> v3.18
 		}
 		idx++;
 	}
@@ -923,11 +938,31 @@ cifs_NTtimeToUnix(__le64 ntutc)
 	/* BB what about the timezone? BB */
 
 	/* Subtract the NTFS time offset, then convert to 1s intervals. */
+<<<<<<< HEAD
 	u64 t;
 
 	t = le64_to_cpu(ntutc) - NTFS_TIME_OFFSET;
 	ts.tv_nsec = do_div(t, 10000000) * 100;
 	ts.tv_sec = t;
+=======
+	s64 t = le64_to_cpu(ntutc) - NTFS_TIME_OFFSET;
+
+	/*
+	 * Unfortunately can not use normal 64 bit division on 32 bit arch, but
+	 * the alternative, do_div, does not work with negative numbers so have
+	 * to special case them
+	 */
+	if (t < 0) {
+		t = -t;
+		ts.tv_nsec = (long)(do_div(t, 10000000) * 100);
+		ts.tv_nsec = -ts.tv_nsec;
+		ts.tv_sec = -t;
+	} else {
+		ts.tv_nsec = (long)do_div(t, 10000000) * 100;
+		ts.tv_sec = t;
+	}
+
+>>>>>>> v3.18
 	return ts;
 }
 
@@ -939,8 +974,14 @@ cifs_UnixTimeToNT(struct timespec t)
 	return (u64) t.tv_sec * 10000000 + t.tv_nsec/100 + NTFS_TIME_OFFSET;
 }
 
+<<<<<<< HEAD
 static int total_days_of_prev_months[] =
 {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
+=======
+static const int total_days_of_prev_months[] = {
+	0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334
+};
+>>>>>>> v3.18
 
 struct timespec cnvrtDosUnixTm(__le16 le_date, __le16 le_time, int offset)
 {

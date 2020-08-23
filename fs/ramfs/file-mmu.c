@@ -30,6 +30,7 @@
 
 #include "internal.h"
 
+<<<<<<< HEAD
 const struct address_space_operations ramfs_aops = {
 	.readpage	= simple_readpage,
 	.write_begin	= simple_write_begin,
@@ -46,6 +47,17 @@ const struct file_operations ramfs_file_operations = {
 	.fsync		= noop_fsync,
 	.splice_read	= generic_file_splice_read,
 	.splice_write	= generic_file_splice_write,
+=======
+const struct file_operations ramfs_file_operations = {
+	.read		= new_sync_read,
+	.read_iter	= generic_file_read_iter,
+	.write		= new_sync_write,
+	.write_iter	= generic_file_write_iter,
+	.mmap		= generic_file_mmap,
+	.fsync		= noop_fsync,
+	.splice_read	= generic_file_splice_read,
+	.splice_write	= iter_file_splice_write,
+>>>>>>> v3.18
 	.llseek		= generic_file_llseek,
 };
 

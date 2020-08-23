@@ -273,6 +273,7 @@ Converted from Intel HEX files, used in our binary representation of ihex.
 
 --------------------------------------------------------------------------
 
+<<<<<<< HEAD
 Driver: ip2 -- Computone IntelliPort Plus serial device
 
 File: intelliport2.bin
@@ -283,6 +284,8 @@ Found in hex form in kernel source.
 
 --------------------------------------------------------------------------
 
+=======
+>>>>>>> v3.18
 Driver: CPiA2 -- cameras based on Vision's CPiA2
 
 File: cpia2/stv0672_vp4.bin

@@ -13,7 +13,10 @@
 #include <linux/in.h>
 #include <linux/string.h>
 #include <linux/delay.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/crc32.h>
 #include <linux/errno.h>
 #include <linux/ethtool.h>
@@ -995,7 +998,10 @@ static void bigmac_set_multicast(struct net_device *dev)
 	struct bigmac *bp = netdev_priv(dev);
 	void __iomem *bregs = bp->bregs;
 	struct netdev_hw_addr *ha;
+<<<<<<< HEAD
 	int i;
+=======
+>>>>>>> v3.18
 	u32 tmp, crc;
 
 	/* Disable the receiver.  The bit self-clears when
@@ -1017,10 +1023,14 @@ static void bigmac_set_multicast(struct net_device *dev)
 		tmp |= BIGMAC_RXCFG_PMISC;
 		sbus_writel(tmp, bregs + BMAC_RXCFG);
 	} else {
+<<<<<<< HEAD
 		u16 hash_table[4];
 
 		for (i = 0; i < 4; i++)
 			hash_table[i] = 0;
+=======
+		u16 hash_table[4] = { 0 };
+>>>>>>> v3.18
 
 		netdev_for_each_mc_addr(ha, dev) {
 			crc = ether_crc_le(6, ha->addr);
@@ -1243,7 +1253,11 @@ static int bigmac_sbus_probe(struct platform_device *op)
 
 static int bigmac_sbus_remove(struct platform_device *op)
 {
+<<<<<<< HEAD
 	struct bigmac *bp = dev_get_drvdata(&op->dev);
+=======
+	struct bigmac *bp = platform_get_drvdata(op);
+>>>>>>> v3.18
 	struct device *parent = op->dev.parent;
 	struct net_device *net_dev = bp->dev;
 	struct platform_device *qec_op;
@@ -1263,8 +1277,11 @@ static int bigmac_sbus_remove(struct platform_device *op)
 
 	free_netdev(net_dev);
 
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, NULL);
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

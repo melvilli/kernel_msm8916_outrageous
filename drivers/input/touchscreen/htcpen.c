@@ -186,8 +186,11 @@ static int htcpen_isa_remove(struct device *dev, unsigned int id)
 	release_region(HTCPEN_PORT_INIT, 1);
 	release_region(HTCPEN_PORT_IRQ_CLEAR, 1);
 
+<<<<<<< HEAD
 	dev_set_drvdata(dev, NULL);
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -221,7 +224,11 @@ static struct isa_driver htcpen_isa_driver = {
 	}
 };
 
+<<<<<<< HEAD
 static struct dmi_system_id __initdata htcshift_dmi_table[] = {
+=======
+static struct dmi_system_id htcshift_dmi_table[] __initdata = {
+>>>>>>> v3.18
 	{
 		.ident = "Shift",
 		.matches = {

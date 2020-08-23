@@ -34,8 +34,13 @@ struct msqid_ds {
 
 /* message buffer for msgsnd and msgrcv calls */
 struct msgbuf {
+<<<<<<< HEAD
 	long mtype;         /* type of message */
 	char mtext[1];      /* message text */
+=======
+	__kernel_long_t mtype;          /* type of message */
+	char mtext[1];                  /* message text */
+>>>>>>> v3.18
 };
 
 /* buffer for msgctl calls IPC_INFO, MSG_INFO */

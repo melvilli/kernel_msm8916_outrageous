@@ -288,7 +288,11 @@ static void i82860_remove_one(struct pci_dev *pdev)
 	edac_mc_free(mci);
 }
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(i82860_pci_tbl) = {
+=======
+static const struct pci_device_id i82860_pci_tbl[] = {
+>>>>>>> v3.18
 	{
 	 PCI_VEND_DEV(INTEL, 82860_0), PCI_ANY_ID, PCI_ANY_ID, 0, 0,
 	 I82860},

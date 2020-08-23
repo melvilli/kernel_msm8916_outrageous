@@ -13,6 +13,11 @@
 #include <linux/kernel.h>
 #include <linux/init.h>
 #include <linux/io.h>
+<<<<<<< HEAD
+=======
+#include <linux/irq.h>
+#include <linux/irqchip/mmp.h>
+>>>>>>> v3.18
 #include <linux/platform_device.h>
 
 #include <asm/hardware/cache-tauros2.h>
@@ -26,6 +31,10 @@
 #include <mach/mfp.h>
 #include <mach/devices.h>
 #include <mach/mmp2.h>
+<<<<<<< HEAD
+=======
+#include <mach/pm-mmp2.h>
+>>>>>>> v3.18
 
 #include "common.h"
 
@@ -94,6 +103,12 @@ void mmp2_clear_pmic_int(void)
 void __init mmp2_init_irq(void)
 {
 	mmp2_init_icu();
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PM
+	icu_irq_chip.irq_set_wake = mmp2_set_wake;
+#endif
+>>>>>>> v3.18
 }
 
 static int __init mmp2_init(void)

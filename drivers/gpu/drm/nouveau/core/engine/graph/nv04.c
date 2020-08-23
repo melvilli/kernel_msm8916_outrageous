@@ -24,7 +24,10 @@
 
 #include <core/client.h>
 #include <core/os.h>
+<<<<<<< HEAD
 #include <core/class.h>
+=======
+>>>>>>> v3.18
 #include <core/handle.h>
 #include <core/namedb.h>
 

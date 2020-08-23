@@ -6,7 +6,11 @@
  * Licensed under GPLv2.
  */
 /dts-v1/;
+<<<<<<< HEAD
 /include/ "at91sam9g20.dtsi"
+=======
+#include "at91sam9g20.dtsi"
+>>>>>>> v3.18
 
 / {
 
@@ -30,6 +34,13 @@
 			compatible = "atmel,osc", "fixed-clock";
 			clock-frequency = <18432000>;
 		};
+<<<<<<< HEAD
+=======
+
+		main_xtal {
+			clock-frequency = <18432000>;
+		};
+>>>>>>> v3.18
 	};
 
 	ahb {
@@ -53,6 +64,15 @@
 				status = "okay";
 			};
 
+<<<<<<< HEAD
+=======
+			watchdog@fffffd40 {
+				timeout-sec = <15>;
+				atmel,max-heartbeat-sec = <16>;
+				atmel,min-heartbeat-sec = <0>;
+				status = "okay";
+			};
+>>>>>>> v3.18
 		};
 
 		nand0: nand@40000000 {
@@ -94,26 +114,42 @@
 
 		led1g {
 			label = "led1:green";
+<<<<<<< HEAD
 			gpios = <&pioB 0 1>;
+=======
+			gpios = <&pioB 0 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 			linux,default-trigger = "none";
 		};
 
 		led1r {
 			label = "led1:red";
+<<<<<<< HEAD
 			gpios = <&pioB 1 1>;
+=======
+			gpios = <&pioB 1 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 			linux,default-trigger = "none";
 		};
 
 		led2g {
 			label = "led2:green";
+<<<<<<< HEAD
 			gpios = <&pioB 2 1>;
+=======
+			gpios = <&pioB 2 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 			linux,default-trigger = "none";
 			default-state = "on";
 		};
 
 		led2r {
 			label = "led2:red";
+<<<<<<< HEAD
 			gpios = <&pioB 3 1>;
+=======
+			gpios = <&pioB 3 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 			linux,default-trigger = "none";
 		};
 	};
@@ -125,16 +161,28 @@
 
 		reset {
 			label = "reset";
+<<<<<<< HEAD
 			gpios = <&pioB 30 1>;
+=======
+			gpios = <&pioB 30 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 			linux,code = <0x100>;
 			gpio-key,wakeup;
 		};
 
 		mode {
 			label = "mode";
+<<<<<<< HEAD
 			gpios = <&pioB 31 1>;
+=======
+			gpios = <&pioB 31 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 			linux,code = <0x101>;
 			gpio-key,wakeup;
 		};
 	};
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> v3.18

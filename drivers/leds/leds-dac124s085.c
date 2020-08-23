@@ -101,7 +101,10 @@ eledcr:
 	while (i--)
 		led_classdev_unregister(&dac->leds[i].ldev);
 
+<<<<<<< HEAD
 	spi_set_drvdata(spi, NULL);
+=======
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -115,8 +118,11 @@ static int dac124s085_remove(struct spi_device *spi)
 		cancel_work_sync(&dac->leds[i].work);
 	}
 
+<<<<<<< HEAD
 	spi_set_drvdata(spi, NULL);
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

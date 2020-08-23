@@ -1,8 +1,11 @@
 #ifndef _ASM_ARCH_CRIS_IO_H
 #define _ASM_ARCH_CRIS_IO_H
 
+<<<<<<< HEAD
 #include <arch/svinto.h>
 
+=======
+>>>>>>> v3.18
 /* Etrax shadow registers - which live in arch/cris/kernel/shadows.c */
 
 extern unsigned long gen_config_ii_shadow;
@@ -34,7 +37,11 @@ extern volatile unsigned long *port_csp4_addr;
 
 /* The LED's on various Etrax-based products are set differently. */
 
+<<<<<<< HEAD
 #if defined(CONFIG_ETRAX_NO_LEDS) || defined(CONFIG_SVINTO_SIM)
+=======
+#if defined(CONFIG_ETRAX_NO_LEDS)
+>>>>>>> v3.18
 #undef CONFIG_ETRAX_PA_LEDS
 #undef CONFIG_ETRAX_PB_LEDS
 #undef CONFIG_ETRAX_CSP0_LEDS
@@ -171,6 +178,7 @@ extern volatile unsigned long *port_csp4_addr;
 #define SOFT_SHUTDOWN()
 #endif
 
+<<<<<<< HEAD
 /* Console I/O for simulated etrax100.  Use #ifdef so erroneous
    use will be evident. */
 #ifdef CONFIG_SVINTO_SIM
@@ -196,4 +204,6 @@ extern volatile unsigned long *port_csp4_addr;
  ({ unsigned long c; asm ("bmod [%1],%0" : "=r" (c) : "r" (27)); c;})
 #endif /* ! defined CONFIG_SVINTO_SIM */
 
+=======
+>>>>>>> v3.18
 #endif

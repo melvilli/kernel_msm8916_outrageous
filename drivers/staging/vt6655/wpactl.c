@@ -50,10 +50,13 @@ static const int frequency_list[] = {
 };
 /*---------------------  Static Classes  ----------------------------*/
 
+<<<<<<< HEAD
 /*---------------------  Static Variables  --------------------------*/
 //static int          msglevel                =MSG_LEVEL_DEBUG;
 static int msglevel = MSG_LEVEL_INFO;
 
+=======
+>>>>>>> v3.18
 /*---------------------  Static Functions  --------------------------*/
 
 /*---------------------  Export Variables  --------------------------*/
@@ -84,6 +87,7 @@ static void wpadev_setup(struct net_device *dev)
  *
  */
 
+<<<<<<< HEAD
 static int wpa_init_wpadev(PSDevice pDevice)
 {
 	PSDevice wpadev_priv;
@@ -91,20 +95,38 @@ static int wpa_init_wpadev(PSDevice pDevice)
 	int ret = 0;
 
 	pDevice->wpadev = alloc_netdev(sizeof(PSDevice), "vntwpa", wpadev_setup);
+=======
+static int wpa_init_wpadev(struct vnt_private *pDevice)
+{
+	struct vnt_private *wpadev_priv;
+	struct net_device *dev = pDevice->dev;
+	int ret = 0;
+
+	pDevice->wpadev = alloc_netdev(sizeof(*wpadev_priv), "vntwpa",
+				       NET_NAME_UNKNOWN, wpadev_setup);
+>>>>>>> v3.18
 	if (pDevice->wpadev == NULL)
 		return -ENOMEM;
 
 	wpadev_priv = netdev_priv(pDevice->wpadev);
 	*wpadev_priv = *pDevice;
+<<<<<<< HEAD
 	memcpy(pDevice->wpadev->dev_addr, dev->dev_addr, ETH_ALEN);
+=======
+	eth_hw_addr_inherit(pDevice->wpadev, dev);
+>>>>>>> v3.18
 	pDevice->wpadev->base_addr = dev->base_addr;
 	pDevice->wpadev->irq = dev->irq;
 	pDevice->wpadev->mem_start = dev->mem_start;
 	pDevice->wpadev->mem_end = dev->mem_end;
 	ret = register_netdev(pDevice->wpadev);
 	if (ret) {
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "%s: register_netdev(WPA) failed!\n",
 			dev->name);
+=======
+		pr_debug("%s: register_netdev(WPA) failed!\n", dev->name);
+>>>>>>> v3.18
 		free_netdev(pDevice->wpadev);
 		return -1;
 	}
@@ -115,8 +137,13 @@ static int wpa_init_wpadev(PSDevice pDevice)
 			return -ENOMEM;
 	}
 
+<<<<<<< HEAD
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "%s: Registered netdev %s for WPA management\n",
 		dev->name, pDevice->wpadev->name);
+=======
+	pr_debug("%s: Registered netdev %s for WPA management\n",
+		 dev->name, pDevice->wpadev->name);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -134,7 +161,11 @@ static int wpa_init_wpadev(PSDevice pDevice)
  *
  */
 
+<<<<<<< HEAD
 static int wpa_release_wpadev(PSDevice pDevice)
+=======
+static int wpa_release_wpadev(struct vnt_private *pDevice)
+>>>>>>> v3.18
 {
 	if (pDevice->skb) {
 		dev_kfree_skb(pDevice->skb);
@@ -142,8 +173,13 @@ static int wpa_release_wpadev(PSDevice pDevice)
 	}
 
 	if (pDevice->wpadev) {
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "%s: Netdevice %s unregistered\n",
 			pDevice->dev->name, pDevice->wpadev->name);
+=======
+		pr_debug("%s: Netdevice %s unregistered\n",
+			 pDevice->dev->name, pDevice->wpadev->name);
+>>>>>>> v3.18
 		unregister_netdev(pDevice->wpadev);
 		free_netdev(pDevice->wpadev);
 		pDevice->wpadev = NULL;
@@ -166,7 +202,11 @@ static int wpa_release_wpadev(PSDevice pDevice)
  *
  */
 
+<<<<<<< HEAD
 int wpa_set_wpadev(PSDevice pDevice, int val)
+=======
+int wpa_set_wpadev(struct vnt_private *pDevice, int val)
+>>>>>>> v3.18
 {
 	if (val)
 		return wpa_init_wpadev(pDevice);
@@ -188,31 +228,49 @@ int wpa_set_wpadev(PSDevice pDevice, int val)
  *
  */
 
+<<<<<<< HEAD
 int wpa_set_keys(PSDevice pDevice, void *ctx, bool fcpfkernel)
+=======
+int wpa_set_keys(struct vnt_private *pDevice, void *ctx,
+		 bool fcpfkernel) __must_hold(&pDevice->lock)
+>>>>>>> v3.18
 {
 	struct viawget_wpa_param *param = ctx;
 	PSMgmtObject pMgmt = pDevice->pMgmt;
 	unsigned long dwKeyIndex = 0;
 	unsigned char abyKey[MAX_KEY_LEN];
 	unsigned char abySeq[MAX_KEY_LEN];
+<<<<<<< HEAD
 	QWORD   KeyRSC;
 //    NDIS_802_11_KEY_RSC KeyRSC;
+=======
+	u64 KeyRSC;
+>>>>>>> v3.18
 	unsigned char byKeyDecMode = KEY_CTL_WEP;
 	int ret = 0;
 	int uu, ii;
 
 	if (param->u.wpa_key.alg_name > WPA_ALG_CCMP ||
+<<<<<<< HEAD
 	    param->u.wpa_key.key_len >= MAX_KEY_LEN ||
 	    param->u.wpa_key.seq_len >= MAX_KEY_LEN)
 		return -EINVAL;
 
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "param->u.wpa_key.alg_name = %d \n", param->u.wpa_key.alg_name);
+=======
+	    param->u.wpa_key.key_len > MAX_KEY_LEN ||
+	    param->u.wpa_key.seq_len > MAX_KEY_LEN)
+		return -EINVAL;
+
+	pr_debug("param->u.wpa_key.alg_name = %d\n", param->u.wpa_key.alg_name);
+>>>>>>> v3.18
 	if (param->u.wpa_key.alg_name == WPA_ALG_NONE) {
 		pDevice->eEncryptionStatus = Ndis802_11EncryptionDisabled;
 		pDevice->bEncryptionEnable = false;
 		pDevice->byKeyIndex = 0;
 		pDevice->bTransmitKey = false;
 		KeyvRemoveAllWEPKey(&(pDevice->sKey), pDevice->PortOffset);
+<<<<<<< HEAD
 		for (uu = 0; uu < MAX_KEY_TABLE; uu++) {
 			MACvDisableKeyEntry(pDevice->PortOffset, uu);
 		}
@@ -220,12 +278,26 @@ int wpa_set_keys(PSDevice pDevice, void *ctx, bool fcpfkernel)
 	}
 
 	//spin_unlock_irq(&pDevice->lock);
+=======
+		for (uu = 0; uu < MAX_KEY_TABLE; uu++)
+			MACvDisableKeyEntry(pDevice->PortOffset, uu);
+
+		return ret;
+	}
+
+>>>>>>> v3.18
 	if (param->u.wpa_key.key && fcpfkernel) {
 		memcpy(&abyKey[0], param->u.wpa_key.key, param->u.wpa_key.key_len);
 	} else {
 		spin_unlock_irq(&pDevice->lock);
 		if (param->u.wpa_key.key &&
+<<<<<<< HEAD
 		    copy_from_user(&abyKey[0], param->u.wpa_key.key, param->u.wpa_key.key_len)) {
+=======
+		    copy_from_user(&abyKey[0],
+				   (void __user *)param->u.wpa_key.key,
+				   param->u.wpa_key.key_len)) {
+>>>>>>> v3.18
 			spin_lock_irq(&pDevice->lock);
 			return -EINVAL;
 		}
@@ -258,13 +330,22 @@ int wpa_set_keys(PSDevice pDevice, void *ctx, bool fcpfkernel)
 		return ret;
 	}
 
+<<<<<<< HEAD
 	//spin_unlock_irq(&pDevice->lock);
+=======
+>>>>>>> v3.18
 	if (param->u.wpa_key.seq && fcpfkernel) {
 		memcpy(&abySeq[0], param->u.wpa_key.seq, param->u.wpa_key.seq_len);
 	} else {
 		spin_unlock_irq(&pDevice->lock);
 		if (param->u.wpa_key.seq &&
+<<<<<<< HEAD
 		    copy_from_user(&abySeq[0], param->u.wpa_key.seq, param->u.wpa_key.seq_len)) {
+=======
+		    copy_from_user(&abySeq[0],
+				   (void __user *)param->u.wpa_key.seq,
+				   param->u.wpa_key.seq_len)) {
+>>>>>>> v3.18
 			spin_lock_irq(&pDevice->lock);
 			return -EINVAL;
 		}
@@ -274,15 +355,22 @@ int wpa_set_keys(PSDevice pDevice, void *ctx, bool fcpfkernel)
 	if (param->u.wpa_key.seq_len > 0) {
 		for (ii = 0; ii < param->u.wpa_key.seq_len; ii++) {
 			if (ii < 4)
+<<<<<<< HEAD
 				LODWORD(KeyRSC) |= (abySeq[ii] << (ii * 8));
 			else
 				HIDWORD(KeyRSC) |= (abySeq[ii] << ((ii-4) * 8));
 			//KeyRSC |= (abySeq[ii] << (ii * 8));
+=======
+				KeyRSC |= (u64)(abySeq[ii] << (ii * 8));
+			else
+				KeyRSC |= (u64)(abySeq[ii] << ((ii-4) * 8));
+>>>>>>> v3.18
 		}
 		dwKeyIndex |= 1 << 29;
 	}
 
 	if (param->u.wpa_key.key_index >= MAX_GROUP_KEY) {
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "return  dwKeyIndex > 3\n");
 		return -EINVAL;
 	}
@@ -294,6 +382,17 @@ int wpa_set_keys(PSDevice pDevice, void *ctx, bool fcpfkernel)
 	if (param->u.wpa_key.alg_name == WPA_ALG_CCMP) {
 		pDevice->eEncryptionStatus = Ndis802_11Encryption3Enabled;
 	}
+=======
+		pr_debug("return  dwKeyIndex > 3\n");
+		return -EINVAL;
+	}
+
+	if (param->u.wpa_key.alg_name == WPA_ALG_TKIP)
+		pDevice->eEncryptionStatus = Ndis802_11Encryption2Enabled;
+
+	if (param->u.wpa_key.alg_name == WPA_ALG_CCMP)
+		pDevice->eEncryptionStatus = Ndis802_11Encryption3Enabled;
+>>>>>>> v3.18
 
 	if (param->u.wpa_key.set_tx)
 		dwKeyIndex |= (1 << 31);
@@ -305,7 +404,11 @@ int wpa_set_keys(PSDevice pDevice, void *ctx, bool fcpfkernel)
 	else
 		byKeyDecMode = KEY_CTL_WEP;
 
+<<<<<<< HEAD
 	// Fix HCT test that set 256 bits KEY and Ndis802_11Encryption3Enabled
+=======
+	/* Fix HCT test that set 256 bits KEY and Ndis802_11Encryption3Enabled */
+>>>>>>> v3.18
 	if (pDevice->eEncryptionStatus == Ndis802_11Encryption3Enabled) {
 		if (param->u.wpa_key.key_len == MAX_KEY_LEN)
 			byKeyDecMode = KEY_CTL_TKIP;
@@ -320,6 +423,7 @@ int wpa_set_keys(PSDevice pDevice, void *ctx, bool fcpfkernel)
 			byKeyDecMode = KEY_CTL_WEP;
 	}
 
+<<<<<<< HEAD
 	// Check TKIP key length
 	if ((byKeyDecMode == KEY_CTL_TKIP) &&
 	    (param->u.wpa_key.key_len != MAX_KEY_LEN)) {
@@ -362,10 +466,51 @@ int wpa_set_keys(PSDevice pDevice, void *ctx, bool fcpfkernel)
 		} else {
 			//DBG_PRN_WLAN03(("return NDIS_STATUS_INVALID_DATA -KeybSetDefaultKey Fail.0\n"));
 			// spin_unlock_irq(&pDevice->lock);
+=======
+	/* Check TKIP key length */
+	if ((byKeyDecMode == KEY_CTL_TKIP) &&
+	    (param->u.wpa_key.key_len != MAX_KEY_LEN)) {
+		/* TKIP Key must be 256 bits */
+		pr_debug("return- TKIP Key must be 256 bits!\n");
+		return -EINVAL;
+	}
+	/* Check AES key length */
+	if ((byKeyDecMode == KEY_CTL_CCMP) &&
+	    (param->u.wpa_key.key_len != AES_KEY_LEN)) {
+		/* AES Key must be 128 bits */
+		return -EINVAL;
+	}
+
+	/* spin_lock_irq(&pDevice->lock); */
+	if (is_broadcast_ether_addr(&param->addr[0]) || (param->addr == NULL)) {
+		/* If is_broadcast_ether_addr, set the key as every key entry's group key. */
+		pr_debug("Groupe Key Assign\n");
+
+		if (KeybSetAllGroupKey(&(pDevice->sKey),
+					dwKeyIndex,
+					param->u.wpa_key.key_len,
+					(u64 *) &KeyRSC,
+					(unsigned char *)abyKey,
+					byKeyDecMode,
+					pDevice->PortOffset,
+					pDevice->byLocalID) &&
+		    KeybSetDefaultKey(&(pDevice->sKey),
+				       dwKeyIndex,
+				       param->u.wpa_key.key_len,
+				       (u64 *) &KeyRSC,
+				       (unsigned char *)abyKey,
+				       byKeyDecMode,
+				       pDevice->PortOffset,
+				       pDevice->byLocalID)) {
+			pr_debug("GROUP Key Assign\n");
+
+		} else {
+>>>>>>> v3.18
 			return -EINVAL;
 		}
 
 	} else {
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Pairwise Key Assign.\n");
 		// BSSID not 0xffffffffffff
 		// Pairwise Key can't be WEP
@@ -381,10 +526,25 @@ int wpa_set_keys(PSDevice pDevice, void *ctx, bool fcpfkernel)
 			//spin_unlock_irq(&pDevice->lock);
 			return -EINVAL;
 		}
+=======
+		pr_debug("Pairwise Key Assign\n");
+		/* BSSID not 0xffffffffffff */
+		/* Pairwise Key can't be WEP */
+		if (byKeyDecMode == KEY_CTL_WEP) {
+			pr_debug("Pairwise Key can't be WEP\n");
+			return -EINVAL;
+		}
+
+		dwKeyIndex |= (1 << 30); /* set pairwise key */
+		if (pMgmt->eConfigMode == WMAC_CONFIG_IBSS_STA)
+			return -EINVAL;
+
+>>>>>>> v3.18
 		if (KeybSetKey(&(pDevice->sKey),
 			       &param->addr[0],
 			       dwKeyIndex,
 			       param->u.wpa_key.key_len,
+<<<<<<< HEAD
 			       (PQWORD) &(KeyRSC),
 			       (unsigned char *)abyKey,
 			       byKeyDecMode,
@@ -407,11 +567,26 @@ int wpa_set_keys(PSDevice pDevice, void *ctx, bool fcpfkernel)
 			}
 		}
 	} // BSSID not 0xffffffffffff
+=======
+			       (u64 *) &KeyRSC,
+			       (unsigned char *)abyKey,
+			       byKeyDecMode,
+			       pDevice->PortOffset,
+			       pDevice->byLocalID)) {
+			pr_debug("Pairwise Key Set\n");
+
+		} else {
+			/* Key Table Full */
+			return -EINVAL;
+		}
+	} /* BSSID not 0xffffffffffff */
+>>>>>>> v3.18
 	if ((ret == 0) && ((param->u.wpa_key.set_tx) != 0)) {
 		pDevice->byKeyIndex = (unsigned char)param->u.wpa_key.key_index;
 		pDevice->bTransmitKey = true;
 	}
 	pDevice->bEncryptionEnable = true;
+<<<<<<< HEAD
 	//spin_unlock_irq(&pDevice->lock);
 
 /*
@@ -423,6 +598,8 @@ int wpa_set_keys(PSDevice pDevice, void *ctx, bool fcpfkernel)
   pMgmt->sNodeDBTable[iNodeIndex].abyWepKey[byKeyIndex][4]
 );
 */
+=======
+>>>>>>> v3.18
 
 	return ret;
 }
@@ -441,16 +618,27 @@ int wpa_set_keys(PSDevice pDevice, void *ctx, bool fcpfkernel)
  *
  */
 
+<<<<<<< HEAD
 static int wpa_set_wpa(PSDevice pDevice,
 		       struct viawget_wpa_param *param)
 {
 	PSMgmtObject    pMgmt = pDevice->pMgmt;
 	int ret = 0;
+=======
+static int wpa_set_wpa(struct vnt_private *pDevice,
+		       struct viawget_wpa_param *param)
+{
+	PSMgmtObject    pMgmt = pDevice->pMgmt;
+>>>>>>> v3.18
 
 	pMgmt->eAuthenMode = WMAC_AUTH_OPEN;
 	pMgmt->bShareKeyAlgorithm = false;
 
+<<<<<<< HEAD
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 }
 
 /*
@@ -467,11 +655,18 @@ static int wpa_set_wpa(PSDevice pDevice,
  *
  */
 
+<<<<<<< HEAD
 static int wpa_set_disassociate(PSDevice pDevice,
 				struct viawget_wpa_param *param)
 {
 	PSMgmtObject    pMgmt = pDevice->pMgmt;
 	int ret = 0;
+=======
+static int wpa_set_disassociate(struct vnt_private *pDevice,
+				struct viawget_wpa_param *param)
+{
+	PSMgmtObject    pMgmt = pDevice->pMgmt;
+>>>>>>> v3.18
 
 	spin_lock_irq(&pDevice->lock);
 	if (pDevice->bLinkPass) {
@@ -480,7 +675,11 @@ static int wpa_set_disassociate(PSDevice pDevice,
 	}
 	spin_unlock_irq(&pDevice->lock);
 
+<<<<<<< HEAD
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 }
 
 /*
@@ -497,17 +696,27 @@ static int wpa_set_disassociate(PSDevice pDevice,
  *
  */
 
+<<<<<<< HEAD
 static int wpa_set_scan(PSDevice pDevice,
 			struct viawget_wpa_param *param)
 {
 	int ret = 0;
 
+=======
+static int wpa_set_scan(struct vnt_private *pDevice,
+			struct viawget_wpa_param *param)
+{
+>>>>>>> v3.18
 	spin_lock_irq(&pDevice->lock);
 	BSSvClearBSSList((void *)pDevice, pDevice->bLinkPass);
 	bScheduleCommand((void *)pDevice, WLAN_CMD_BSSID_SCAN, NULL);
 	spin_unlock_irq(&pDevice->lock);
 
+<<<<<<< HEAD
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 }
 
 /*
@@ -524,6 +733,7 @@ static int wpa_set_scan(PSDevice pDevice,
  *
  */
 
+<<<<<<< HEAD
 static int wpa_get_bssid(PSDevice pDevice,
 			 struct viawget_wpa_param *param)
 {
@@ -533,6 +743,16 @@ static int wpa_get_bssid(PSDevice pDevice,
 	memcpy(param->u.wpa_associate.bssid, pMgmt->abyCurrBSSID , 6);
 
 	return ret;
+=======
+static int wpa_get_bssid(struct vnt_private *pDevice,
+			 struct viawget_wpa_param *param)
+{
+	PSMgmtObject        pMgmt = pDevice->pMgmt;
+
+	memcpy(param->u.wpa_associate.bssid, pMgmt->abyCurrBSSID , 6);
+
+	return 0;
+>>>>>>> v3.18
 }
 
 /*
@@ -549,19 +769,30 @@ static int wpa_get_bssid(PSDevice pDevice,
  *
  */
 
+<<<<<<< HEAD
 static int wpa_get_ssid(PSDevice pDevice,
+=======
+static int wpa_get_ssid(struct vnt_private *pDevice,
+>>>>>>> v3.18
 			struct viawget_wpa_param *param)
 {
 	PSMgmtObject        pMgmt = pDevice->pMgmt;
 	PWLAN_IE_SSID       pItemSSID;
+<<<<<<< HEAD
 	int ret = 0;
+=======
+>>>>>>> v3.18
 
 	pItemSSID = (PWLAN_IE_SSID)pMgmt->abyCurrSSID;
 
 	memcpy(param->u.wpa_associate.ssid, pItemSSID->abySSID , pItemSSID->len);
 	param->u.wpa_associate.ssid_len = pItemSSID->len;
 
+<<<<<<< HEAD
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 }
 
 /*
@@ -578,7 +809,11 @@ static int wpa_get_ssid(PSDevice pDevice,
  *
  */
 
+<<<<<<< HEAD
 static int wpa_get_scan(PSDevice pDevice,
+=======
+static int wpa_get_scan(struct vnt_private *pDevice,
+>>>>>>> v3.18
 			struct viawget_wpa_param *param)
 {
 	struct viawget_scan_result *scan_buf;
@@ -593,10 +828,17 @@ static int wpa_get_scan(PSDevice pDevice,
 
 	unsigned char *ptempBSS;
 
+<<<<<<< HEAD
 	ptempBSS = kmalloc(sizeof(KnownBSS), (int)GFP_ATOMIC);
 
 	if (ptempBSS == NULL) {
 		printk("bubble sort kmalloc memory fail@@@\n");
+=======
+	ptempBSS = kmalloc(sizeof(KnownBSS), GFP_ATOMIC);
+
+	if (ptempBSS == NULL) {
+		pr_err("bubble sort kmalloc memory fail@@@\n");
+>>>>>>> v3.18
 
 		ret = -ENOMEM;
 
@@ -635,7 +877,11 @@ static int wpa_get_scan(PSDevice pDevice,
 		count++;
 	}
 
+<<<<<<< HEAD
 	pBuf = kcalloc(count, sizeof(struct viawget_scan_result), (int)GFP_ATOMIC);
+=======
+	pBuf = kcalloc(count, sizeof(struct viawget_scan_result), GFP_ATOMIC);
+>>>>>>> v3.18
 
 	if (pBuf == NULL) {
 		ret = -ENOMEM;
@@ -654,11 +900,15 @@ static int wpa_get_scan(PSDevice pDevice,
 			scan_buf->ssid_len = pItemSSID->len;
 			scan_buf->freq = frequency_list[pBSS->uChannel-1];
 			scan_buf->caps = pBSS->wCapInfo;
+<<<<<<< HEAD
 			//scan_buf->caps = pBSS->wCapInfo;
 			//scan_buf->qual =
 			//scan_buf->noise =
 			//scan_buf->level =
 			//scan_buf->maxrate =
+=======
+
+>>>>>>> v3.18
 			if (pBSS->wWPALen != 0) {
 				scan_buf->wpa_ie_len = pBSS->wWPALen;
 				memcpy(scan_buf->wpa_ie, pBSS->byWPAIE, pBSS->wWPALen);
@@ -675,11 +925,19 @@ static int wpa_get_scan(PSDevice pDevice,
 	if (jj < count)
 		count = jj;
 
+<<<<<<< HEAD
 	if (copy_to_user(param->u.scan_results.buf, pBuf, sizeof(struct viawget_scan_result) * count)) {
 		ret = -EFAULT;
 	}
 	param->u.scan_results.scan_count = count;
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " param->u.scan_results.scan_count = %d\n", count)
+=======
+	if (copy_to_user(param->u.scan_results.buf, pBuf, sizeof(struct viawget_scan_result) * count))
+		ret = -EFAULT;
+
+	param->u.scan_results.scan_count = count;
+	pr_debug(" param->u.scan_results.scan_count = %d\n", count);
+>>>>>>> v3.18
 
 		kfree(pBuf);
 	return ret;
@@ -699,13 +957,18 @@ static int wpa_get_scan(PSDevice pDevice,
  *
  */
 
+<<<<<<< HEAD
 static int wpa_set_associate(PSDevice pDevice,
+=======
+static int wpa_set_associate(struct vnt_private *pDevice,
+>>>>>>> v3.18
 			     struct viawget_wpa_param *param)
 {
 	PSMgmtObject    pMgmt = pDevice->pMgmt;
 	PWLAN_IE_SSID   pItemSSID;
 	unsigned char abyNullAddr[] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 	unsigned char abyWPAIE[64];
+<<<<<<< HEAD
 	int ret = 0;
 	bool bWepEnabled = false;
 
@@ -716,6 +979,19 @@ static int wpa_set_associate(PSDevice pDevice,
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "auth_alg = %d\n", param->u.wpa_associate.auth_alg);
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "mode = %d\n", param->u.wpa_associate.mode);
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "wpa_ie_len = %d\n", param->u.wpa_associate.wpa_ie_len);
+=======
+	bool bWepEnabled = false;
+
+	/* set key type & algorithm */
+	pr_debug("pairwise_suite = %d\n",
+		 param->u.wpa_associate.pairwise_suite);
+	pr_debug("group_suite = %d\n", param->u.wpa_associate.group_suite);
+	pr_debug("key_mgmt_suite = %d\n",
+		 param->u.wpa_associate.key_mgmt_suite);
+	pr_debug("auth_alg = %d\n", param->u.wpa_associate.auth_alg);
+	pr_debug("mode = %d\n", param->u.wpa_associate.mode);
+	pr_debug("wpa_ie_len = %d\n", param->u.wpa_associate.wpa_ie_len);
+>>>>>>> v3.18
 
 	if (param->u.wpa_associate.wpa_ie_len) {
 		if (!param->u.wpa_associate.wpa_ie)
@@ -730,18 +1006,30 @@ static int wpa_set_associate(PSDevice pDevice,
 		pMgmt->eConfigMode = WMAC_CONFIG_IBSS_STA;
 	else
 		pMgmt->eConfigMode = WMAC_CONFIG_ESS_STA;
+<<<<<<< HEAD
 	// set ssid
+=======
+	/* set ssid */
+>>>>>>> v3.18
 	memset(pMgmt->abyDesireSSID, 0, WLAN_IEHDR_LEN + WLAN_SSID_MAXLEN + 1);
 	pItemSSID = (PWLAN_IE_SSID)pMgmt->abyDesireSSID;
 	pItemSSID->byElementID = WLAN_EID_SSID;
 	pItemSSID->len = param->u.wpa_associate.ssid_len;
 	memcpy(pItemSSID->abySSID, param->u.wpa_associate.ssid, pItemSSID->len);
+<<<<<<< HEAD
 	// set bssid
 	if (memcmp(param->u.wpa_associate.bssid, &abyNullAddr[0], 6) != 0)
 		memcpy(pMgmt->abyDesireBSSID, param->u.wpa_associate.bssid, 6);
 	else {
 		bScheduleCommand((void *)pDevice, WLAN_CMD_BSSID_SCAN, pItemSSID->abySSID);
 	}
+=======
+	/* set bssid */
+	if (memcmp(param->u.wpa_associate.bssid, &abyNullAddr[0], 6) != 0)
+		memcpy(pMgmt->abyDesireBSSID, param->u.wpa_associate.bssid, 6);
+	else
+		bScheduleCommand((void *)pDevice, WLAN_CMD_BSSID_SCAN, pItemSSID->abySSID);
+>>>>>>> v3.18
 
 	if (param->u.wpa_associate.wpa_ie_len == 0) {
 		if (param->u.wpa_associate.auth_alg & AUTH_ALG_SHARED_KEY)
@@ -788,13 +1076,19 @@ static int wpa_set_associate(PSDevice pDevice,
 
 	if (pMgmt->eAuthenMode == WMAC_AUTH_SHAREKEY) {
 		pDevice->eEncryptionStatus = Ndis802_11Encryption1Enabled;
+<<<<<<< HEAD
 		//pMgmt->eAuthenMode = WMAC_AUTH_SHAREKEY;
+=======
+>>>>>>> v3.18
 		pMgmt->bShareKeyAlgorithm = true;
 	} else if (pMgmt->eAuthenMode == WMAC_AUTH_OPEN) {
 		if (!bWepEnabled)  pDevice->eEncryptionStatus = Ndis802_11EncryptionDisabled;
 		else pDevice->eEncryptionStatus = Ndis802_11Encryption1Enabled;
+<<<<<<< HEAD
 		//pMgmt->eAuthenMode = WMAC_AUTH_OPEN;
 		//pMgmt->bShareKeyAlgorithm = false; //20080717-06,<Modify> by chester//Fix Open mode, WEP encryption
+=======
+>>>>>>> v3.18
 	}
 //mike save old encryption status
 	pDevice->eOldEncryptionStatus = pDevice->eEncryptionStatus;
@@ -804,7 +1098,11 @@ static int wpa_set_associate(PSDevice pDevice,
 	else
 		pDevice->bEncryptionEnable = false;
 	if (!((pMgmt->eAuthenMode == WMAC_AUTH_SHAREKEY) ||
+<<<<<<< HEAD
 	      ((pMgmt->eAuthenMode == WMAC_AUTH_OPEN) && (bWepEnabled == true))))  //DavidWang  //20080717-06,<Modify> by chester//Not to initial WEP
+=======
+	      ((pMgmt->eAuthenMode == WMAC_AUTH_OPEN) && bWepEnabled)))  //DavidWang  //20080717-06,<Modify> by chester//Not to initial WEP
+>>>>>>> v3.18
 		KeyvInitTable(&pDevice->sKey, pDevice->PortOffset);
 	spin_lock_irq(&pDevice->lock);
 	pDevice->bLinkPass = false;
@@ -815,6 +1113,10 @@ static int wpa_set_associate(PSDevice pDevice,
 /*******search if ap_scan=2 ,which is associating request in hidden ssid mode ****/
 	{
 		PKnownBSS       pCurr = NULL;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		pCurr = BSSpSearchBSSList(pDevice,
 					  pMgmt->abyDesireBSSID,
 					  pMgmt->abyDesireSSID,
@@ -822,7 +1124,11 @@ static int wpa_set_associate(PSDevice pDevice,
 );
 
 		if (pCurr == NULL) {
+<<<<<<< HEAD
 			printk("wpa_set_associate---->hidden mode site survey before associate.......\n");
+=======
+			pr_debug("wpa_set_associate---->hidden mode site survey before associate.......\n");
+>>>>>>> v3.18
 			bScheduleCommand((void *)pDevice, WLAN_CMD_BSSID_SCAN, pMgmt->abyDesireSSID);
 		}
 	}
@@ -830,7 +1136,11 @@ static int wpa_set_associate(PSDevice pDevice,
 	bScheduleCommand((void *)pDevice, WLAN_CMD_SSID, NULL);
 	spin_unlock_irq(&pDevice->lock);
 
+<<<<<<< HEAD
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 }
 
 /*
@@ -847,7 +1157,11 @@ static int wpa_set_associate(PSDevice pDevice,
  *
  */
 
+<<<<<<< HEAD
 int wpa_ioctl(PSDevice pDevice, struct iw_point *p)
+=======
+int wpa_ioctl(struct vnt_private *pDevice, struct iw_point *p)
+>>>>>>> v3.18
 {
 	struct viawget_wpa_param *param;
 	int ret = 0;
@@ -857,7 +1171,11 @@ int wpa_ioctl(PSDevice pDevice, struct iw_point *p)
 	    p->length > VIAWGET_WPA_MAX_BUF_SIZE || !p->pointer)
 		return -EINVAL;
 
+<<<<<<< HEAD
 	param = kmalloc((int)p->length, (int)GFP_KERNEL);
+=======
+	param = kmalloc((int)p->length, GFP_KERNEL);
+>>>>>>> v3.18
 	if (param == NULL)
 		return -ENOMEM;
 
@@ -869,50 +1187,83 @@ int wpa_ioctl(PSDevice pDevice, struct iw_point *p)
 	switch (param->cmd) {
 	case VIAWGET_SET_WPA:
 		ret = wpa_set_wpa(pDevice, param);
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "VIAWGET_SET_WPA \n");
 		break;
 
 	case VIAWGET_SET_KEY:
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "VIAWGET_SET_KEY \n");
+=======
+		pr_debug("VIAWGET_SET_WPA\n");
+		break;
+
+	case VIAWGET_SET_KEY:
+		pr_debug("VIAWGET_SET_KEY\n");
+>>>>>>> v3.18
 		spin_lock_irq(&pDevice->lock);
 		ret = wpa_set_keys(pDevice, param, false);
 		spin_unlock_irq(&pDevice->lock);
 		break;
 
 	case VIAWGET_SET_SCAN:
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "VIAWGET_SET_SCAN \n");
+=======
+		pr_debug("VIAWGET_SET_SCAN\n");
+>>>>>>> v3.18
 		ret = wpa_set_scan(pDevice, param);
 		break;
 
 	case VIAWGET_GET_SCAN:
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "VIAWGET_GET_SCAN\n");
+=======
+		pr_debug("VIAWGET_GET_SCAN\n");
+>>>>>>> v3.18
 		ret = wpa_get_scan(pDevice, param);
 		wpa_ioctl = 1;
 		break;
 
 	case VIAWGET_GET_SSID:
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "VIAWGET_GET_SSID \n");
+=======
+		pr_debug("VIAWGET_GET_SSID\n");
+>>>>>>> v3.18
 		ret = wpa_get_ssid(pDevice, param);
 		wpa_ioctl = 1;
 		break;
 
 	case VIAWGET_GET_BSSID:
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "VIAWGET_GET_BSSID \n");
+=======
+		pr_debug("VIAWGET_GET_BSSID\n");
+>>>>>>> v3.18
 		ret = wpa_get_bssid(pDevice, param);
 		wpa_ioctl = 1;
 		break;
 
 	case VIAWGET_SET_ASSOCIATE:
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "VIAWGET_SET_ASSOCIATE \n");
+=======
+		pr_debug("VIAWGET_SET_ASSOCIATE\n");
+>>>>>>> v3.18
 		ret = wpa_set_associate(pDevice, param);
 		break;
 
 	case VIAWGET_SET_DISASSOCIATE:
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "VIAWGET_SET_DISASSOCIATE \n");
+=======
+		pr_debug("VIAWGET_SET_DISASSOCIATE\n");
+>>>>>>> v3.18
 		ret = wpa_set_disassociate(pDevice, param);
 		break;
 
 	case VIAWGET_SET_DROP_UNENCRYPT:
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "VIAWGET_SET_DROP_UNENCRYPT \n");
 		break;
 
@@ -925,6 +1276,20 @@ int wpa_ioctl(PSDevice pDevice, struct iw_point *p)
 			param->cmd);
 		return -EOPNOTSUPP;
 		break;
+=======
+		pr_debug("VIAWGET_SET_DROP_UNENCRYPT\n");
+		break;
+
+	case VIAWGET_SET_DEAUTHENTICATE:
+		pr_debug("VIAWGET_SET_DEAUTHENTICATE\n");
+		break;
+
+	default:
+		pr_debug("wpa_ioctl: unknown cmd=%d\n",
+			 param->cmd);
+		ret = -EOPNOTSUPP;
+		goto out;
+>>>>>>> v3.18
 	}
 
 	if ((ret == 0) && wpa_ioctl) {

@@ -51,7 +51,10 @@ static struct clk_onecell_data clk_data;
 int __init mx31_clocks_init(unsigned long fref)
 {
 	void __iomem *base = MX31_IO_ADDRESS(MX31_CCM_BASE_ADDR);
+<<<<<<< HEAD
 	int i;
+=======
+>>>>>>> v3.18
 	struct device_node *np;
 
 	clk[dummy] = imx_clk_fixed("dummy", 0);
@@ -114,10 +117,14 @@ int __init mx31_clocks_init(unsigned long fref)
 	clk[rtic_gate] = imx_clk_gate2("rtic_gate", "ahb", base + MXC_CCM_CGR2, 10);
 	clk[firi_gate] = imx_clk_gate2("firi_gate", "upll", base+MXC_CCM_CGR2, 12);
 
+<<<<<<< HEAD
 	for (i = 0; i < ARRAY_SIZE(clk); i++)
 		if (IS_ERR(clk[i]))
 			pr_err("imx31 clk %d: register failed with %ld\n",
 				i, PTR_ERR(clk[i]));
+=======
+	imx_check_clocks(clk, ARRAY_SIZE(clk));
+>>>>>>> v3.18
 
 	np = of_find_compatible_node(NULL, NULL, "fsl,imx31-ccm");
 
@@ -191,7 +198,10 @@ int __init mx31_clocks_init(unsigned long fref)
 	return 0;
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_OF
+=======
+>>>>>>> v3.18
 int __init mx31_clocks_init_dt(void)
 {
 	struct device_node *np;
@@ -207,4 +217,7 @@ int __init mx31_clocks_init_dt(void)
 
 	return mx31_clocks_init(fref);
 }
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18

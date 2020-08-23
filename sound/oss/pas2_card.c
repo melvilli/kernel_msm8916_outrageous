@@ -74,8 +74,11 @@ static char    *pas_model_names[] = {
  * to support other than the default base address
  */
 
+<<<<<<< HEAD
 extern void     mix_write(unsigned char data, int ioaddr);
 
+=======
+>>>>>>> v3.18
 unsigned char pas_read(int ioaddr)
 {
 	return inb(ioaddr + pas_translate_code);

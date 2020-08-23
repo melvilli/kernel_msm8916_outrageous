@@ -45,6 +45,12 @@
 #define WL1271_TX_SECURITY_LO16(s) ((u16)((s) & 0xffff))
 #define WL1271_TX_SECURITY_HI32(s) ((u32)(((s) >> 16) & 0xffffffff))
 #define WL1271_TX_SQN_POST_RECOVERY_PADDING 0xff
+<<<<<<< HEAD
+=======
+/* Use smaller padding for GEM, as some  APs have issues when it's too big */
+#define WL1271_TX_SQN_POST_RECOVERY_PADDING_GEM 0x20
+
+>>>>>>> v3.18
 
 #define WL1271_CIPHER_SUITE_GEM 0x00147201
 
@@ -58,10 +64,22 @@
 #define WL1271_DEFAULT_DTIM_PERIOD 1
 
 #define WL12XX_MAX_ROLES           4
+<<<<<<< HEAD
 #define WL12XX_MAX_LINKS           12
 #define WL12XX_INVALID_ROLE_ID     0xff
 #define WL12XX_INVALID_LINK_ID     0xff
 
+=======
+#define WL12XX_INVALID_ROLE_ID     0xff
+#define WL12XX_INVALID_LINK_ID     0xff
+
+/*
+ * max number of links allowed by all HWs.
+ * this is NOT the actual max links supported by the current hw.
+ */
+#define WLCORE_MAX_LINKS 16
+
+>>>>>>> v3.18
 /* the driver supports the 2.4Ghz and 5Ghz bands */
 #define WLCORE_NUM_BANDS           2
 
@@ -118,6 +136,7 @@ struct wl1271_chip {
 
 #define NUM_TX_QUEUES              4
 
+<<<<<<< HEAD
 #define AP_MAX_STATIONS            8
 
 struct wl_fw_packet_counters {
@@ -158,17 +177,32 @@ struct wl_fw_status_1 {
 
 struct wl_fw_status_2 {
 	__le32 fw_localtime;
+=======
+struct wl_fw_status {
+	u32 intr;
+	u8  fw_rx_counter;
+	u8  drv_rx_counter;
+	u8  tx_results_counter;
+	__le32 *rx_pkt_descs;
+
+	u32 fw_localtime;
+>>>>>>> v3.18
 
 	/*
 	 * A bitmap (where each bit represents a single HLID)
 	 * to indicate if the station is in PS mode.
 	 */
+<<<<<<< HEAD
 	__le32 link_ps_bitmap;
+=======
+	u32 link_ps_bitmap;
+>>>>>>> v3.18
 
 	/*
 	 * A bitmap (where each bit represents a single HLID) to indicate
 	 * if the station is in Fast mode
 	 */
+<<<<<<< HEAD
 	__le32 link_fast_bitmap;
 
 	/* Cumulative counter of total released mem blocks since FW-reset */
@@ -184,6 +218,41 @@ struct wl_fw_status_2 {
 	/* Private status to be used by the lower drivers */
 	u8 priv[0];
 } __packed;
+=======
+	u32 link_fast_bitmap;
+
+	/* Cumulative counter of total released mem blocks since FW-reset */
+	u32 total_released_blks;
+
+	/* Size (in Memory Blocks) of TX pool */
+	u32 tx_total;
+
+	struct {
+		/*
+		 * Cumulative counter of released packets per AC
+		 * (length of the array is NUM_TX_QUEUES)
+		 */
+		u8 *tx_released_pkts;
+
+		/*
+		 * Cumulative counter of freed packets per HLID
+		 * (length of the array is wl->num_links)
+		 */
+		u8 *tx_lnk_free_pkts;
+
+		/* Cumulative counter of released Voice memory blocks */
+		u8 tx_voice_released_blks;
+
+		/* Tx rate of the last transmitted packet */
+		u8 tx_last_rate;
+	} counters;
+
+	u32 log_start_addr;
+
+	/* Private status to be used by the lower drivers */
+	void *priv;
+};
+>>>>>>> v3.18
 
 #define WL1271_MAX_CHANNELS 64
 struct wl1271_scan {
@@ -240,6 +309,10 @@ enum wl12xx_flags {
 	WL1271_FLAG_VIF_CHANGE_IN_PROGRESS,
 	WL1271_FLAG_INTENDED_FW_RECOVERY,
 	WL1271_FLAG_IO_FAILED,
+<<<<<<< HEAD
+=======
+	WL1271_FLAG_REINIT_TX_WDOG,
+>>>>>>> v3.18
 };
 
 enum wl12xx_vif_flags {
@@ -255,6 +328,10 @@ enum wl12xx_vif_flags {
 	WLVIF_FLAG_CS_PROGRESS,
 	WLVIF_FLAG_AP_PROBE_RESP_SET,
 	WLVIF_FLAG_IN_USE,
+<<<<<<< HEAD
+=======
+	WLVIF_FLAG_ACTIVE,
+>>>>>>> v3.18
 };
 
 struct wl12xx_vif;
@@ -307,6 +384,10 @@ enum plt_mode {
 	PLT_OFF = 0,
 	PLT_ON = 1,
 	PLT_FEM_DETECT = 2,
+<<<<<<< HEAD
+=======
+	PLT_CHIP_AWAKE = 3
+>>>>>>> v3.18
 };
 
 struct wl12xx_rx_filter_field {
@@ -330,6 +411,10 @@ struct wl1271_station {
 	 * total freed FW packets on the link to the STA - used for tracking the
 	 * AES/TKIP PN across recoveries. Re-initialized each time from the
 	 * wl1271_station structure.
+<<<<<<< HEAD
+=======
+	 * Used in both AP and STA mode.
+>>>>>>> v3.18
 	 */
 	u64 total_freed_pkts;
 };
@@ -366,7 +451,11 @@ struct wl12xx_vif {
 
 			/* HLIDs bitmap of associated stations */
 			unsigned long sta_hlid_map[BITS_TO_LONGS(
+<<<<<<< HEAD
 							WL12XX_MAX_LINKS)];
+=======
+							WLCORE_MAX_LINKS)];
+>>>>>>> v3.18
 
 			/* recoreded keys - set here before AP startup */
 			struct wl1271_ap_key *recorded_keys[MAX_NUM_KEYS];
@@ -383,7 +472,11 @@ struct wl12xx_vif {
 	/* counters of packets per AC, across all links in the vif */
 	int tx_queue_count[NUM_TX_QUEUES];
 
+<<<<<<< HEAD
 	unsigned long links_map[BITS_TO_LONGS(WL12XX_MAX_LINKS)];
+=======
+	unsigned long links_map[BITS_TO_LONGS(WLCORE_MAX_LINKS)];
+>>>>>>> v3.18
 
 	u8 ssid[IEEE80211_MAX_SSID_LEN + 1];
 	u8 ssid_len;
@@ -456,6 +549,25 @@ struct wl12xx_vif {
 	 */
 	int hw_queue_base;
 
+<<<<<<< HEAD
+=======
+	/* do we have a pending auth reply? (and ROC) */
+	bool ap_pending_auth_reply;
+
+	/* time when we sent the pending auth reply */
+	unsigned long pending_auth_reply_time;
+
+	/* work for canceling ROC after pending auth reply */
+	struct delayed_work pending_auth_complete_work;
+
+	/*
+	 * total freed FW packets on the link.
+	 * For STA this holds the PN of the link to the AP.
+	 * For AP this holds the PN of the broadcast link.
+	 */
+	u64 total_freed_pkts;
+
+>>>>>>> v3.18
 	/*
 	 * This struct must be last!
 	 * data that has to be saved acrossed reconfigs (e.g. recovery)
@@ -463,6 +575,7 @@ struct wl12xx_vif {
 	 */
 	struct {
 		u8 persistent[0];
+<<<<<<< HEAD
 
 		/*
 		 * total freed FW packets on the link - used for
@@ -472,6 +585,8 @@ struct wl12xx_vif {
 		 * For AP this holds the PN of the broadcast link.
 		 */
 		u64 total_freed_pkts;
+=======
+>>>>>>> v3.18
 	};
 };
 
@@ -509,8 +624,13 @@ int wl1271_recalc_rx_streaming(struct wl1271 *wl, struct wl12xx_vif *wlvif);
 void wl12xx_queue_recovery_work(struct wl1271 *wl);
 size_t wl12xx_copy_fwlog(struct wl1271 *wl, u8 *memblock, size_t maxlen);
 int wl1271_rx_filter_alloc_field(struct wl12xx_rx_filter *filter,
+<<<<<<< HEAD
 					u16 offset, u8 flags,
 					u8 *pattern, u8 len);
+=======
+				 u16 offset, u8 flags,
+				 const u8 *pattern, u8 len);
+>>>>>>> v3.18
 void wl1271_rx_filter_free(struct wl12xx_rx_filter *filter);
 struct wl12xx_rx_filter *wl1271_rx_filter_alloc(void);
 int wl1271_rx_filter_get_fields_size(struct wl12xx_rx_filter *filter);
@@ -539,6 +659,9 @@ void wl1271_rx_filter_flatten_fields(struct wl12xx_rx_filter *filter,
 #define HW_HT_RATES_OFFSET	16
 #define HW_MIMO_RATES_OFFSET	24
 
+<<<<<<< HEAD
 #define WL12XX_HW_BLOCK_SIZE	256
 
+=======
+>>>>>>> v3.18
 #endif /* __WLCORE_I_H__ */

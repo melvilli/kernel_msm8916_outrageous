@@ -11,6 +11,10 @@
 #include <linux/bitops.h>
 
 #define HASH_BLOCK_SIZE			64
+<<<<<<< HEAD
+=======
+#define HASH_DMA_FIFO			4
+>>>>>>> v3.18
 #define HASH_DMA_ALIGN_SIZE		4
 #define HASH_DMA_PERFORMANCE_MIN_SIZE	1024
 #define HASH_BYTES_PER_WORD		4
@@ -347,7 +351,12 @@ struct hash_req_ctx {
 
 /**
  * struct hash_device_data - structure for a hash device.
+<<<<<<< HEAD
  * @base:		Pointer to the hardware base address.
+=======
+ * @base:		Pointer to virtual base address of the hash device.
+ * @phybase:		Pointer to physical memory location of the hash device.
+>>>>>>> v3.18
  * @list_node:		For inclusion in klist.
  * @dev:		Pointer to the device dev structure.
  * @ctx_lock:		Spinlock for current_ctx.
@@ -361,6 +370,10 @@ struct hash_req_ctx {
  */
 struct hash_device_data {
 	struct hash_register __iomem	*base;
+<<<<<<< HEAD
+=======
+	phys_addr_t             phybase;
+>>>>>>> v3.18
 	struct klist_node	list_node;
 	struct device		*dev;
 	struct spinlock		ctx_lock;

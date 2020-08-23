@@ -38,8 +38,12 @@ const struct imx_flexcan_data imx35_flexcan_data[] __initconst = {
 #endif /* ifdef CONFIG_SOC_IMX35 */
 
 struct platform_device *__init imx_add_flexcan(
+<<<<<<< HEAD
 		const struct imx_flexcan_data *data,
 		const struct flexcan_platform_data *pdata)
+=======
+		const struct imx_flexcan_data *data)
+>>>>>>> v3.18
 {
 	struct resource res[] = {
 		{
@@ -54,5 +58,9 @@ struct platform_device *__init imx_add_flexcan(
 	};
 
 	return imx_add_platform_device("flexcan", data->id,
+<<<<<<< HEAD
 			res, ARRAY_SIZE(res), pdata, sizeof(*pdata));
+=======
+			res, ARRAY_SIZE(res), NULL, 0);
+>>>>>>> v3.18
 }

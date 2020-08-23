@@ -39,6 +39,7 @@ struct modes_unit {
 	char *mode_string;
 	int mode_size;
 };
+<<<<<<< HEAD
 struct modes_unit ieee80211_modes[] = {
 	{"a",1},
 	{"b",1},
@@ -46,6 +47,15 @@ struct modes_unit ieee80211_modes[] = {
 	{"?",1},
 	{"N-24G",5},
 	{"N-5G",4},
+=======
+static struct modes_unit ieee80211_modes[] = {
+	{"a", 1},
+	{"b", 1},
+	{"g", 1},
+	{"?", 1},
+	{"N-24G", 5},
+	{"N-5G", 4},
+>>>>>>> v3.18
 };
 
 #define iwe_stream_add_event_rsl iwe_stream_add_event
@@ -194,7 +204,11 @@ static inline char *rtl819x_translate_scan(struct ieee80211_device *ieee,
 	iwe.u.data.length = p - custom;
 	if (iwe.u.data.length)
 	    start = iwe_stream_add_point(info, start, stop, &iwe, custom);
+<<<<<<< HEAD
 #if (WIRELESS_EXT < 18)
+=======
+
+>>>>>>> v3.18
 	if (ieee->wpa_enabled && network->wpa_ie_len){
 		char buf[MAX_WPA_IE_LEN * 2 + 30];
 	//	printk("WPA IE\n");
@@ -224,6 +238,7 @@ static inline char *rtl819x_translate_scan(struct ieee80211_device *ieee,
 		iwe.u.data.length = strlen(buf);
 		start = iwe_stream_add_point(info, start, stop, &iwe, buf);
 	}
+<<<<<<< HEAD
 #else
 	memset(&iwe, 0, sizeof(iwe));
 	if (network->wpa_ie_len)
@@ -244,6 +259,8 @@ static inline char *rtl819x_translate_scan(struct ieee80211_device *ieee,
 		start = iwe_stream_add_point(info, start, stop, &iwe, buf);
 	}
 #endif
+=======
+>>>>>>> v3.18
 
 
 	/* Add EXTRA: Age to display seconds since last beacon/probe response
@@ -305,6 +322,10 @@ int ieee80211_wx_get_scan(struct ieee80211_device *ieee,
 
 	return err;
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(ieee80211_wx_get_scan);
+>>>>>>> v3.18
 
 int ieee80211_wx_set_encode(struct ieee80211_device *ieee,
 			    struct iw_request_info *info,
@@ -479,6 +500,10 @@ int ieee80211_wx_set_encode(struct ieee80211_device *ieee,
 	}
 	return 0;
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(ieee80211_wx_set_encode);
+>>>>>>> v3.18
 
 int ieee80211_wx_get_encode(struct ieee80211_device *ieee,
 			    struct iw_request_info *info,
@@ -521,7 +546,12 @@ int ieee80211_wx_get_encode(struct ieee80211_device *ieee,
 
 	return 0;
 }
+<<<<<<< HEAD
 #if (WIRELESS_EXT >= 18)
+=======
+EXPORT_SYMBOL(ieee80211_wx_get_encode);
+
+>>>>>>> v3.18
 int ieee80211_wx_set_encode_ext(struct ieee80211_device *ieee,
 			       struct iw_request_info *info,
 			       union iwreq_data *wrqu, char *extra)
@@ -695,6 +725,10 @@ done:
 	}
 	return ret;
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(ieee80211_wx_set_encode_ext);
+>>>>>>> v3.18
 
 int ieee80211_wx_get_encode_ext(struct ieee80211_device *ieee,
 			       struct iw_request_info *info,
@@ -750,6 +784,10 @@ int ieee80211_wx_get_encode_ext(struct ieee80211_device *ieee,
 
 	return 0;
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(ieee80211_wx_get_encode_ext);
+>>>>>>> v3.18
 
 int ieee80211_wx_set_mlme(struct ieee80211_device *ieee,
 			       struct iw_request_info *info,
@@ -766,6 +804,10 @@ int ieee80211_wx_set_mlme(struct ieee80211_device *ieee,
 	}
 	return 0;
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(ieee80211_wx_set_mlme);
+>>>>>>> v3.18
 
 int ieee80211_wx_set_auth(struct ieee80211_device *ieee,
 			       struct iw_request_info *info,
@@ -792,7 +834,11 @@ int ieee80211_wx_set_auth(struct ieee80211_device *ieee,
 		break;
 
 	case IW_AUTH_80211_AUTH_ALG:
+<<<<<<< HEAD
 		//printk("======>%s():data->value is %d\n",__FUNCTION__,data->value);
+=======
+		//printk("======>%s():data->value is %d\n",__func__,data->value);
+>>>>>>> v3.18
 	//	ieee->open_wep = (data->value&IW_AUTH_ALG_OPEN_SYSTEM)?1:0;
 		if(data->value & IW_AUTH_ALG_SHARED_KEY){
 			ieee->open_wep = 0;
@@ -828,7 +874,12 @@ int ieee80211_wx_set_auth(struct ieee80211_device *ieee,
 	}
 	return 0;
 }
+<<<<<<< HEAD
 #endif
+=======
+EXPORT_SYMBOL(ieee80211_wx_set_auth);
+
+>>>>>>> v3.18
 int ieee80211_wx_set_gen_ie(struct ieee80211_device *ieee, u8 *ie, size_t len)
 {
 	u8 *buf;
@@ -862,6 +913,7 @@ int ieee80211_wx_set_gen_ie(struct ieee80211_device *ieee, u8 *ie, size_t len)
 	return 0;
 
 }
+<<<<<<< HEAD
 
 EXPORT_SYMBOL(ieee80211_wx_set_gen_ie);
 #if (WIRELESS_EXT >= 18)
@@ -873,3 +925,6 @@ EXPORT_SYMBOL(ieee80211_wx_get_encode_ext);
 EXPORT_SYMBOL(ieee80211_wx_get_scan);
 EXPORT_SYMBOL(ieee80211_wx_set_encode);
 EXPORT_SYMBOL(ieee80211_wx_get_encode);
+=======
+EXPORT_SYMBOL(ieee80211_wx_set_gen_ie);
+>>>>>>> v3.18

@@ -57,7 +57,11 @@ struct snd_seq_timer *snd_seq_timer_new(void)
 	
 	tmr = kzalloc(sizeof(*tmr), GFP_KERNEL);
 	if (tmr == NULL) {
+<<<<<<< HEAD
 		snd_printd("malloc failed for snd_seq_timer_new() \n");
+=======
+		pr_debug("ALSA: seq: malloc failed for snd_seq_timer_new() \n");
+>>>>>>> v3.18
 		return NULL;
 	}
 	spin_lock_init(&tmr->lock);
@@ -78,7 +82,11 @@ void snd_seq_timer_delete(struct snd_seq_timer **tmr)
 	*tmr = NULL;
 
 	if (t == NULL) {
+<<<<<<< HEAD
 		snd_printd("oops: snd_seq_timer_delete() called with NULL timer\n");
+=======
+		pr_debug("ALSA: seq: snd_seq_timer_delete() called with NULL timer\n");
+>>>>>>> v3.18
 		return;
 	}
 	t->running = 0;
@@ -92,9 +100,12 @@ void snd_seq_timer_delete(struct snd_seq_timer **tmr)
 
 void snd_seq_timer_defaults(struct snd_seq_timer * tmr)
 {
+<<<<<<< HEAD
 	unsigned long flags;
 
 	spin_lock_irqsave(&tmr->lock, flags);
+=======
+>>>>>>> v3.18
 	/* setup defaults */
 	tmr->ppq = 96;		/* 96 PPQ */
 	tmr->tempo = 500000;	/* 120 BPM */
@@ -110,17 +121,29 @@ void snd_seq_timer_defaults(struct snd_seq_timer * tmr)
 	tmr->preferred_resolution = seq_default_timer_resolution;
 
 	tmr->skew = tmr->skew_base = SKEW_BASE;
+<<<<<<< HEAD
 	spin_unlock_irqrestore(&tmr->lock, flags);
 }
 
 static void seq_timer_reset(struct snd_seq_timer *tmr)
 {
+=======
+}
+
+void snd_seq_timer_reset(struct snd_seq_timer * tmr)
+{
+	unsigned long flags;
+
+	spin_lock_irqsave(&tmr->lock, flags);
+
+>>>>>>> v3.18
 	/* reset time & songposition */
 	tmr->cur_time.tv_sec = 0;
 	tmr->cur_time.tv_nsec = 0;
 
 	tmr->tick.cur_tick = 0;
 	tmr->tick.fraction = 0;
+<<<<<<< HEAD
 }
 
 void snd_seq_timer_reset(struct snd_seq_timer *tmr)
@@ -129,6 +152,9 @@ void snd_seq_timer_reset(struct snd_seq_timer *tmr)
 
 	spin_lock_irqsave(&tmr->lock, flags);
 	seq_timer_reset(tmr);
+=======
+
+>>>>>>> v3.18
 	spin_unlock_irqrestore(&tmr->lock, flags);
 }
 
@@ -147,11 +173,16 @@ static void snd_seq_timer_interrupt(struct snd_timer_instance *timeri,
 	tmr = q->timer;
 	if (tmr == NULL)
 		return;
+<<<<<<< HEAD
 	spin_lock_irqsave(&tmr->lock, flags);
 	if (!tmr->running) {
 		spin_unlock_irqrestore(&tmr->lock, flags);
 		return;
 	}
+=======
+	if (!tmr->running)
+		return;
+>>>>>>> v3.18
 
 	resolution *= ticks;
 	if (tmr->skew != tmr->skew_base) {
@@ -160,6 +191,11 @@ static void snd_seq_timer_interrupt(struct snd_timer_instance *timeri,
 			(((resolution & 0xffff) * tmr->skew) >> 16);
 	}
 
+<<<<<<< HEAD
+=======
+	spin_lock_irqsave(&tmr->lock, flags);
+
+>>>>>>> v3.18
 	/* update timer */
 	snd_seq_inc_time_nsec(&tmr->cur_time, resolution);
 
@@ -207,7 +243,11 @@ int snd_seq_timer_set_ppq(struct snd_seq_timer * tmr, int ppq)
 		/* refuse to change ppq on running timers */
 		/* because it will upset the song position (ticks) */
 		spin_unlock_irqrestore(&tmr->lock, flags);
+<<<<<<< HEAD
 		snd_printd("seq: cannot change ppq of a running timer\n");
+=======
+		pr_debug("ALSA: seq: cannot change ppq of a running timer\n");
+>>>>>>> v3.18
 		return -EBUSY;
 	}
 
@@ -260,7 +300,11 @@ int snd_seq_timer_set_skew(struct snd_seq_timer *tmr, unsigned int skew,
 
 	/* FIXME */
 	if (base != SKEW_BASE) {
+<<<<<<< HEAD
 		snd_printd("invalid skew base 0x%x\n", base);
+=======
+		pr_debug("ALSA: seq: invalid skew base 0x%x\n", base);
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 	spin_lock_irqsave(&tmr->lock, flags);
@@ -300,26 +344,38 @@ int snd_seq_timer_open(struct snd_seq_queue *q)
 		}
 	}
 	if (err < 0) {
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "seq fatal error: cannot create timer (%i)\n", err);
+=======
+		pr_err("ALSA: seq fatal error: cannot create timer (%i)\n", err);
+>>>>>>> v3.18
 		return err;
 	}
 	t->callback = snd_seq_timer_interrupt;
 	t->callback_data = q;
 	t->flags |= SNDRV_TIMER_IFLG_AUTO;
+<<<<<<< HEAD
 	spin_lock_irq(&tmr->lock);
 	tmr->timeri = t;
 	spin_unlock_irq(&tmr->lock);
+=======
+	tmr->timeri = t;
+>>>>>>> v3.18
 	return 0;
 }
 
 int snd_seq_timer_close(struct snd_seq_queue *q)
 {
 	struct snd_seq_timer *tmr;
+<<<<<<< HEAD
 	struct snd_timer_instance *t;
+=======
+>>>>>>> v3.18
 	
 	tmr = q->timer;
 	if (snd_BUG_ON(!tmr))
 		return -EINVAL;
+<<<<<<< HEAD
 	spin_lock_irq(&tmr->lock);
 	t = tmr->timeri;
 	tmr->timeri = NULL;
@@ -330,6 +386,17 @@ int snd_seq_timer_close(struct snd_seq_queue *q)
 }
 
 static int seq_timer_stop(struct snd_seq_timer *tmr)
+=======
+	if (tmr->timeri) {
+		snd_timer_stop(tmr->timeri);
+		snd_timer_close(tmr->timeri);
+		tmr->timeri = NULL;
+	}
+	return 0;
+}
+
+int snd_seq_timer_stop(struct snd_seq_timer * tmr)
+>>>>>>> v3.18
 {
 	if (! tmr->timeri)
 		return -EINVAL;
@@ -340,6 +407,7 @@ static int seq_timer_stop(struct snd_seq_timer *tmr)
 	return 0;
 }
 
+<<<<<<< HEAD
 int snd_seq_timer_stop(struct snd_seq_timer *tmr)
 {
 	unsigned long flags;
@@ -351,6 +419,8 @@ int snd_seq_timer_stop(struct snd_seq_timer *tmr)
 	return err;
 }
 
+=======
+>>>>>>> v3.18
 static int initialize_timer(struct snd_seq_timer *tmr)
 {
 	struct snd_timer *t;
@@ -383,13 +453,22 @@ static int initialize_timer(struct snd_seq_timer *tmr)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int seq_timer_start(struct snd_seq_timer *tmr)
+=======
+int snd_seq_timer_start(struct snd_seq_timer * tmr)
+>>>>>>> v3.18
 {
 	if (! tmr->timeri)
 		return -EINVAL;
 	if (tmr->running)
+<<<<<<< HEAD
 		seq_timer_stop(tmr);
 	seq_timer_reset(tmr);
+=======
+		snd_seq_timer_stop(tmr);
+	snd_seq_timer_reset(tmr);
+>>>>>>> v3.18
 	if (initialize_timer(tmr) < 0)
 		return -EINVAL;
 	snd_timer_start(tmr->timeri, tmr->ticks);
@@ -398,6 +477,7 @@ static int seq_timer_start(struct snd_seq_timer *tmr)
 	return 0;
 }
 
+<<<<<<< HEAD
 int snd_seq_timer_start(struct snd_seq_timer *tmr)
 {
 	unsigned long flags;
@@ -410,13 +490,20 @@ int snd_seq_timer_start(struct snd_seq_timer *tmr)
 }
 
 static int seq_timer_continue(struct snd_seq_timer *tmr)
+=======
+int snd_seq_timer_continue(struct snd_seq_timer * tmr)
+>>>>>>> v3.18
 {
 	if (! tmr->timeri)
 		return -EINVAL;
 	if (tmr->running)
 		return -EBUSY;
 	if (! tmr->initialized) {
+<<<<<<< HEAD
 		seq_timer_reset(tmr);
+=======
+		snd_seq_timer_reset(tmr);
+>>>>>>> v3.18
 		if (initialize_timer(tmr) < 0)
 			return -EINVAL;
 	}
@@ -426,6 +513,7 @@ static int seq_timer_continue(struct snd_seq_timer *tmr)
 	return 0;
 }
 
+<<<<<<< HEAD
 int snd_seq_timer_continue(struct snd_seq_timer *tmr)
 {
 	unsigned long flags;
@@ -437,13 +525,19 @@ int snd_seq_timer_continue(struct snd_seq_timer *tmr)
 	return err;
 }
 
+=======
+>>>>>>> v3.18
 /* return current 'real' time. use timeofday() to get better granularity. */
 snd_seq_real_time_t snd_seq_timer_get_cur_time(struct snd_seq_timer *tmr)
 {
 	snd_seq_real_time_t cur_time;
+<<<<<<< HEAD
 	unsigned long flags;
 
 	spin_lock_irqsave(&tmr->lock, flags);
+=======
+
+>>>>>>> v3.18
 	cur_time = tmr->cur_time;
 	if (tmr->running) { 
 		struct timeval tm;
@@ -459,7 +553,11 @@ snd_seq_real_time_t snd_seq_timer_get_cur_time(struct snd_seq_timer *tmr)
 		}
 		snd_seq_sanity_real_time(&cur_time);
 	}
+<<<<<<< HEAD
 	spin_unlock_irqrestore(&tmr->lock, flags);
+=======
+                
+>>>>>>> v3.18
 	return cur_time;	
 }
 

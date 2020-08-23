@@ -16,7 +16,13 @@
 #include <net/addrconf.h>
 #include <net/inet_frag.h>
 
+<<<<<<< HEAD
 static ctl_table ipv6_table_template[] = {
+=======
+static int one = 1;
+
+static struct ctl_table ipv6_table_template[] = {
+>>>>>>> v3.18
 	{
 		.procname	= "bindv6only",
 		.data		= &init_net.ipv6.sysctl.bindv6only,
@@ -25,6 +31,30 @@ static ctl_table ipv6_table_template[] = {
 		.proc_handler	= proc_dointvec
 	},
 	{
+<<<<<<< HEAD
+=======
+		.procname	= "anycast_src_echo_reply",
+		.data		= &init_net.ipv6.sysctl.anycast_src_echo_reply,
+		.maxlen		= sizeof(int),
+		.mode		= 0644,
+		.proc_handler	= proc_dointvec
+	},
+	{
+		.procname	= "flowlabel_consistency",
+		.data		= &init_net.ipv6.sysctl.flowlabel_consistency,
+		.maxlen		= sizeof(int),
+		.mode		= 0644,
+		.proc_handler	= proc_dointvec
+	},
+	{
+		.procname	= "auto_flowlabels",
+		.data		= &init_net.ipv6.sysctl.auto_flowlabels,
+		.maxlen		= sizeof(int),
+		.mode		= 0644,
+		.proc_handler	= proc_dointvec
+	},
+	{
+>>>>>>> v3.18
 		.procname	= "fwmark_reflect",
 		.data		= &init_net.ipv6.sysctl.fwmark_reflect,
 		.maxlen		= sizeof(int),
@@ -34,7 +64,11 @@ static ctl_table ipv6_table_template[] = {
 	{ }
 };
 
+<<<<<<< HEAD
 static ctl_table ipv6_rotable[] = {
+=======
+static struct ctl_table ipv6_rotable[] = {
+>>>>>>> v3.18
 	{
 		.procname	= "mld_max_msf",
 		.data		= &sysctl_mld_max_msf,
@@ -42,6 +76,17 @@ static ctl_table ipv6_rotable[] = {
 		.mode		= 0644,
 		.proc_handler	= proc_dointvec
 	},
+<<<<<<< HEAD
+=======
+	{
+		.procname	= "mld_qrv",
+		.data		= &sysctl_mld_qrv,
+		.maxlen		= sizeof(int),
+		.mode		= 0644,
+		.proc_handler	= proc_dointvec_minmax,
+		.extra1		= &one
+	},
+>>>>>>> v3.18
 	{ }
 };
 
@@ -58,6 +103,13 @@ static int __net_init ipv6_sysctl_net_init(struct net *net)
 	if (!ipv6_table)
 		goto out;
 	ipv6_table[0].data = &net->ipv6.sysctl.bindv6only;
+<<<<<<< HEAD
+=======
+	ipv6_table[1].data = &net->ipv6.sysctl.anycast_src_echo_reply;
+	ipv6_table[2].data = &net->ipv6.sysctl.flowlabel_consistency;
+	ipv6_table[3].data = &net->ipv6.sysctl.auto_flowlabels;
+	ipv6_table[4].data = &net->ipv6.sysctl.fwmark_reflect;
+>>>>>>> v3.18
 
 	ipv6_route_table = ipv6_route_sysctl_init(net);
 	if (!ipv6_route_table)

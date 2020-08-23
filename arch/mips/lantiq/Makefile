@@ -6,8 +6,11 @@
 
 obj-y := irq.o clk.o prom.o
 
+<<<<<<< HEAD
 obj-y += dts/
 
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_EARLY_PRINTK) += early_printk.o
 
 obj-$(CONFIG_SOC_TYPE_XWAY) += xway/

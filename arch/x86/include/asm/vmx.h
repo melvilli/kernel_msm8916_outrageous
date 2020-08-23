@@ -51,6 +51,12 @@
 #define CPU_BASED_MONITOR_EXITING               0x20000000
 #define CPU_BASED_PAUSE_EXITING                 0x40000000
 #define CPU_BASED_ACTIVATE_SECONDARY_CONTROLS   0x80000000
+<<<<<<< HEAD
+=======
+
+#define CPU_BASED_ALWAYSON_WITHOUT_TRUE_MSR	0x0401e172
+
+>>>>>>> v3.18
 /*
  * Definitions of Secondary Processor-Based VM-Execution Controls.
  */
@@ -76,7 +82,11 @@
 
 #define PIN_BASED_ALWAYSON_WITHOUT_TRUE_MSR	0x00000016
 
+<<<<<<< HEAD
 #define VM_EXIT_SAVE_DEBUG_CONTROLS             0x00000002
+=======
+#define VM_EXIT_SAVE_DEBUG_CONTROLS             0x00000004
+>>>>>>> v3.18
 #define VM_EXIT_HOST_ADDR_SPACE_SIZE            0x00000200
 #define VM_EXIT_LOAD_IA32_PERF_GLOBAL_CTRL      0x00001000
 #define VM_EXIT_ACK_INTR_ON_EXIT                0x00008000
@@ -85,21 +95,37 @@
 #define VM_EXIT_SAVE_IA32_EFER                  0x00100000
 #define VM_EXIT_LOAD_IA32_EFER                  0x00200000
 #define VM_EXIT_SAVE_VMX_PREEMPTION_TIMER       0x00400000
+<<<<<<< HEAD
 
 #define VM_EXIT_ALWAYSON_WITHOUT_TRUE_MSR	0x00036dff
 
 #define VM_ENTRY_LOAD_DEBUG_CONTROLS            0x00000002
+=======
+#define VM_EXIT_CLEAR_BNDCFGS                   0x00800000
+
+#define VM_EXIT_ALWAYSON_WITHOUT_TRUE_MSR	0x00036dff
+
+#define VM_ENTRY_LOAD_DEBUG_CONTROLS            0x00000004
+>>>>>>> v3.18
 #define VM_ENTRY_IA32E_MODE                     0x00000200
 #define VM_ENTRY_SMM                            0x00000400
 #define VM_ENTRY_DEACT_DUAL_MONITOR             0x00000800
 #define VM_ENTRY_LOAD_IA32_PERF_GLOBAL_CTRL     0x00002000
 #define VM_ENTRY_LOAD_IA32_PAT			0x00004000
 #define VM_ENTRY_LOAD_IA32_EFER                 0x00008000
+<<<<<<< HEAD
+=======
+#define VM_ENTRY_LOAD_BNDCFGS                   0x00010000
+>>>>>>> v3.18
 
 #define VM_ENTRY_ALWAYSON_WITHOUT_TRUE_MSR	0x000011ff
 
 #define VMX_MISC_PREEMPTION_TIMER_RATE_MASK	0x0000001f
 #define VMX_MISC_SAVE_EFER_LMA			0x00000020
+<<<<<<< HEAD
+=======
+#define VMX_MISC_ACTIVITY_HLT			0x00000040
+>>>>>>> v3.18
 
 /* VMCS Encodings */
 enum vmcs_field {
@@ -173,6 +199,11 @@ enum vmcs_field {
 	GUEST_PDPTR2_HIGH               = 0x0000280f,
 	GUEST_PDPTR3                    = 0x00002810,
 	GUEST_PDPTR3_HIGH               = 0x00002811,
+<<<<<<< HEAD
+=======
+	GUEST_BNDCFGS                   = 0x00002812,
+	GUEST_BNDCFGS_HIGH              = 0x00002813,
+>>>>>>> v3.18
 	HOST_IA32_PAT			= 0x00002c00,
 	HOST_IA32_PAT_HIGH		= 0x00002c01,
 	HOST_IA32_EFER			= 0x00002c02,
@@ -387,6 +418,10 @@ enum vmcs_field {
 #define VMX_EPT_EXTENT_INDIVIDUAL_ADDR		0
 #define VMX_EPT_EXTENT_CONTEXT			1
 #define VMX_EPT_EXTENT_GLOBAL			2
+<<<<<<< HEAD
+=======
+#define VMX_EPT_EXTENT_SHIFT			24
+>>>>>>> v3.18
 
 #define VMX_EPT_EXECUTE_ONLY_BIT		(1ull)
 #define VMX_EPT_PAGE_WALK_4_BIT			(1ull << 6)
@@ -394,6 +429,10 @@ enum vmcs_field {
 #define VMX_EPTP_WB_BIT				(1ull << 14)
 #define VMX_EPT_2MB_PAGE_BIT			(1ull << 16)
 #define VMX_EPT_1GB_PAGE_BIT			(1ull << 17)
+<<<<<<< HEAD
+=======
+#define VMX_EPT_INVEPT_BIT			(1ull << 20)
+>>>>>>> v3.18
 #define VMX_EPT_AD_BIT				    (1ull << 21)
 #define VMX_EPT_EXTENT_CONTEXT_BIT		(1ull << 25)
 #define VMX_EPT_EXTENT_GLOBAL_BIT		(1ull << 26)

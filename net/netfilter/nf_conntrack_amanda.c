@@ -54,7 +54,10 @@ enum amanda_strings {
 	SEARCH_DATA,
 	SEARCH_MESG,
 	SEARCH_INDEX,
+<<<<<<< HEAD
 	SEARCH_CTL,
+=======
+>>>>>>> v3.18
 };
 
 static struct {
@@ -82,10 +85,13 @@ static struct {
 		.string = "INDEX ",
 		.len	= 6,
 	},
+<<<<<<< HEAD
 	[SEARCH_CTL] = {
 		.string = "CTL ",
 		.len	= 4,
 	},
+=======
+>>>>>>> v3.18
 };
 
 static int amanda_help(struct sk_buff *skb,
@@ -132,7 +138,11 @@ static int amanda_help(struct sk_buff *skb,
 		goto out;
 	stop += start;
 
+<<<<<<< HEAD
 	for (i = SEARCH_DATA; i <= SEARCH_CTL; i++) {
+=======
+	for (i = SEARCH_DATA; i <= SEARCH_INDEX; i++) {
+>>>>>>> v3.18
 		memset(&ts, 0, sizeof(ts));
 		off = skb_find_text(skb, start, stop, search[i].ts, &ts);
 		if (off == UINT_MAX)

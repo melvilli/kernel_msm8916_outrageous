@@ -267,7 +267,10 @@ static struct nls_table table = {
 	.char2uni	= char2uni,
 	.charset2lower	= charset2lower,
 	.charset2upper	= charset2upper,
+<<<<<<< HEAD
 	.owner		= THIS_MODULE,
+=======
+>>>>>>> v3.18
 };
 
 static int __init init_nls_iso8859_13(void)

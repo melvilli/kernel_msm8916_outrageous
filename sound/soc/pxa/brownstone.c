@@ -50,11 +50,14 @@ static int brownstone_wm8994_init(struct snd_soc_pcm_runtime *rtd)
 	struct snd_soc_codec *codec = rtd->codec;
 	struct snd_soc_dapm_context *dapm = &codec->dapm;
 
+<<<<<<< HEAD
 	snd_soc_dapm_enable_pin(dapm, "Ext Spk");
 	snd_soc_dapm_enable_pin(dapm, "Headset Stereophone");
 	snd_soc_dapm_enable_pin(dapm, "Headset Mic");
 	snd_soc_dapm_enable_pin(dapm, "Main Mic");
 
+=======
+>>>>>>> v3.18
 	/* set endpoints to not connected */
 	snd_soc_dapm_nc_pin(dapm, "HPOUT2P");
 	snd_soc_dapm_nc_pin(dapm, "HPOUT2N");
@@ -70,8 +73,11 @@ static int brownstone_wm8994_init(struct snd_soc_pcm_runtime *rtd)
 	snd_soc_dapm_nc_pin(dapm, "IN2RP:VXRP");
 	snd_soc_dapm_nc_pin(dapm, "IN2LN");
 
+<<<<<<< HEAD
 	snd_soc_dapm_sync(dapm);
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -129,6 +135,10 @@ static struct snd_soc_dai_link brownstone_wm8994_dai[] = {
 /* audio machine driver */
 static struct snd_soc_card brownstone = {
 	.name         = "brownstone",
+<<<<<<< HEAD
+=======
+	.owner        = THIS_MODULE,
+>>>>>>> v3.18
 	.dai_link     = brownstone_wm8994_dai,
 	.num_links    = ARRAY_SIZE(brownstone_wm8994_dai),
 
@@ -162,6 +172,10 @@ static struct platform_driver mmp_driver = {
 	.driver		= {
 		.name	= "brownstone-audio",
 		.owner	= THIS_MODULE,
+<<<<<<< HEAD
+=======
+		.pm     = &snd_soc_pm_ops,
+>>>>>>> v3.18
 	},
 	.probe		= brownstone_probe,
 	.remove		= brownstone_remove,

@@ -10,10 +10,13 @@
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 */
 
 /*
@@ -45,7 +48,10 @@
 #include <linux/delay.h>
 #include <linux/pci.h>
 #include <linux/ioport.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/i2c.h>
 #include <linux/acpi.h>
 #include <linux/io.h>
@@ -511,7 +517,11 @@ static struct i2c_adapter sis630_adapter = {
 	.retries	= 3
 };
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(sis630_ids) = {
+=======
+static const struct pci_device_id sis630_ids[] = {
+>>>>>>> v3.18
 	{ PCI_DEVICE(PCI_VENDOR_ID_SI, PCI_DEVICE_ID_SI_503) },
 	{ PCI_DEVICE(PCI_VENDOR_ID_SI, PCI_DEVICE_ID_SI_LPC) },
 	{ PCI_DEVICE(PCI_VENDOR_ID_SI, PCI_DEVICE_ID_SI_964) },

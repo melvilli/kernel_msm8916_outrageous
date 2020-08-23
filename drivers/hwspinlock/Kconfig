@@ -10,7 +10,11 @@ menu "Hardware Spinlock drivers"
 
 config HWSPINLOCK_OMAP
 	tristate "OMAP Hardware Spinlock device"
+<<<<<<< HEAD
 	depends on ARCH_OMAP4 || SOC_OMAP5
+=======
+	depends on ARCH_OMAP4 || SOC_OMAP5 || SOC_DRA7XX || SOC_AM33XX || SOC_AM43XX
+>>>>>>> v3.18
 	select HWSPINLOCK
 	help
 	  Say y here to support the OMAP Hardware Spinlock device (firstly
@@ -29,6 +33,7 @@ config HSEM_U8500
 
 	  If unsure, say N.
 
+<<<<<<< HEAD
 config REMOTE_SPINLOCK_MSM
 	bool "MSM Remote Spinlock Functionality"
 	depends on ARCH_MSM
@@ -40,4 +45,6 @@ config REMOTE_SPINLOCK_MSM
 
 	  If unsure, say N.
 
+=======
+>>>>>>> v3.18
 endmenu

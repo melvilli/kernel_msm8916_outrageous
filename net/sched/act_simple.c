@@ -25,6 +25,7 @@
 #include <net/tc_act/tc_defact.h>
 
 #define SIMP_TAB_MASK     7
+<<<<<<< HEAD
 static struct tcf_common *tcf_simp_ht[SIMP_TAB_MASK + 1];
 static u32 simp_idx_gen;
 static DEFINE_RWLOCK(simp_lock);
@@ -34,6 +35,8 @@ static struct tcf_hashinfo simp_hash_info = {
 	.hmask	=	SIMP_TAB_MASK,
 	.lock	=	&simp_lock,
 };
+=======
+>>>>>>> v3.18
 
 #define SIMP_MAX_DATA	32
 static int tcf_simp(struct sk_buff *skb, const struct tc_action *a,
@@ -55,6 +58,7 @@ static int tcf_simp(struct sk_buff *skb, const struct tc_action *a,
 	return d->tcf_action;
 }
 
+<<<<<<< HEAD
 static int tcf_simp_release(struct tcf_defact *d, int bind)
 {
 	int ret = 0;
@@ -69,6 +73,12 @@ static int tcf_simp_release(struct tcf_defact *d, int bind)
 		}
 	}
 	return ret;
+=======
+static void tcf_simp_release(struct tc_action *a, int bind)
+{
+	struct tcf_defact *d = to_defact(a);
+	kfree(d->tcfd_defdata);
+>>>>>>> v3.18
 }
 
 static int alloc_defdata(struct tcf_defact *d, char *defdata)
@@ -102,7 +112,10 @@ static int tcf_simp_init(struct net *net, struct nlattr *nla,
 	struct nlattr *tb[TCA_DEF_MAX + 1];
 	struct tc_defact *parm;
 	struct tcf_defact *d;
+<<<<<<< HEAD
 	struct tcf_common *pc;
+=======
+>>>>>>> v3.18
 	char *defdata;
 	int ret = 0, err;
 
@@ -122,6 +135,7 @@ static int tcf_simp_init(struct net *net, struct nlattr *nla,
 	parm = nla_data(tb[TCA_DEF_PARMS]);
 	defdata = nla_data(tb[TCA_DEF_DATA]);
 
+<<<<<<< HEAD
 	pc = tcf_hash_check(parm->index, a, bind, &simp_hash_info);
 	if (!pc) {
 		pc = tcf_hash_create(parm->index, est, a, sizeof(*d), bind,
@@ -136,20 +150,43 @@ static int tcf_simp_init(struct net *net, struct nlattr *nla,
 				gen_kill_estimator(&pc->tcfc_bstats,
 						   &pc->tcfc_rate_est);
 			kfree_rcu(pc, tcfc_rcu);
+=======
+	if (!tcf_hash_check(parm->index, a, bind)) {
+		ret = tcf_hash_create(parm->index, est, a, sizeof(*d), bind);
+		if (ret)
+			return ret;
+
+		d = to_defact(a);
+		ret = alloc_defdata(d, defdata);
+		if (ret < 0) {
+			tcf_hash_cleanup(a, est);
+>>>>>>> v3.18
 			return ret;
 		}
 		d->tcf_action = parm->action;
 		ret = ACT_P_CREATED;
 	} else {
+<<<<<<< HEAD
 		d = to_defact(pc);
 		if (!ovr) {
 			tcf_simp_release(d, bind);
 			return -EEXIST;
 		}
+=======
+		d = to_defact(a);
+
+		if (bind)
+			return 0;
+		tcf_hash_release(a, bind);
+		if (!ovr)
+			return -EEXIST;
+
+>>>>>>> v3.18
 		reset_policy(d, defdata, parm);
 	}
 
 	if (ret == ACT_P_CREATED)
+<<<<<<< HEAD
 		tcf_hash_insert(pc, &simp_hash_info);
 	return ret;
 }
@@ -163,6 +200,12 @@ static int tcf_simp_cleanup(struct tc_action *a, int bind)
 	return 0;
 }
 
+=======
+		tcf_hash_insert(a);
+	return ret;
+}
+
+>>>>>>> v3.18
 static int tcf_simp_dump(struct sk_buff *skb, struct tc_action *a,
 			 int bind, int ref)
 {
@@ -193,6 +236,7 @@ nla_put_failure:
 
 static struct tc_action_ops act_simp_ops = {
 	.kind		=	"simple",
+<<<<<<< HEAD
 	.hinfo		=	&simp_hash_info,
 	.type		=	TCA_ACT_SIMP,
 	.capab		=	TCA_CAP_NONE,
@@ -202,6 +246,14 @@ static struct tc_action_ops act_simp_ops = {
 	.cleanup	=	tcf_simp_cleanup,
 	.init		=	tcf_simp_init,
 	.walk		=	tcf_generic_walker,
+=======
+	.type		=	TCA_ACT_SIMP,
+	.owner		=	THIS_MODULE,
+	.act		=	tcf_simp,
+	.dump		=	tcf_simp_dump,
+	.cleanup	=	tcf_simp_release,
+	.init		=	tcf_simp_init,
+>>>>>>> v3.18
 };
 
 MODULE_AUTHOR("Jamal Hadi Salim(2005)");
@@ -210,7 +262,12 @@ MODULE_LICENSE("GPL");
 
 static int __init simp_init_module(void)
 {
+<<<<<<< HEAD
 	int ret = tcf_register_action(&act_simp_ops);
+=======
+	int ret;
+	ret = tcf_register_action(&act_simp_ops, SIMP_TAB_MASK);
+>>>>>>> v3.18
 	if (!ret)
 		pr_info("Simple TC action Loaded\n");
 	return ret;

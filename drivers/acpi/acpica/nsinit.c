@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -111,9 +115,14 @@ acpi_status acpi_ns_initialize_objects(void)
 			      info.object_count));
 
 	ACPI_DEBUG_PRINT((ACPI_DB_DISPATCH,
+<<<<<<< HEAD
 			  "%u Control Methods found\n", info.method_count));
 	ACPI_DEBUG_PRINT((ACPI_DB_DISPATCH,
 			  "%u Op Regions found\n", info.op_region_count));
+=======
+			  "%u Control Methods found\n%u Op Regions found\n",
+			  info.method_count, info.op_region_count));
+>>>>>>> v3.18
 
 	return_ACPI_STATUS(AE_OK);
 }
@@ -176,7 +185,11 @@ acpi_status acpi_ns_initialize_devices(void)
 	 * part of the ACPI specification.
 	 */
 	info.evaluate_info->prefix_node = acpi_gbl_root_node;
+<<<<<<< HEAD
 	info.evaluate_info->pathname = METHOD_NAME__INI;
+=======
+	info.evaluate_info->relative_pathname = METHOD_NAME__INI;
+>>>>>>> v3.18
 	info.evaluate_info->parameters = NULL;
 	info.evaluate_info->flags = ACPI_IGNORE_RETURN_VALUE;
 
@@ -213,7 +226,11 @@ acpi_status acpi_ns_initialize_devices(void)
 
 	return_ACPI_STATUS(status);
 
+<<<<<<< HEAD
       error_exit:
+=======
+error_exit:
+>>>>>>> v3.18
 	ACPI_EXCEPTION((AE_INFO, status, "During device initialization"));
 	return_ACPI_STATUS(status);
 }
@@ -266,28 +283,52 @@ acpi_ns_init_one_object(acpi_handle obj_handle,
 
 	switch (type) {
 	case ACPI_TYPE_REGION:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		info->op_region_count++;
 		break;
 
 	case ACPI_TYPE_BUFFER_FIELD:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		info->field_count++;
 		break;
 
 	case ACPI_TYPE_LOCAL_BANK_FIELD:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		info->field_count++;
 		break;
 
 	case ACPI_TYPE_BUFFER:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		info->buffer_count++;
 		break;
 
 	case ACPI_TYPE_PACKAGE:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		info->package_count++;
 		break;
 
 	default:
 
 		/* No init required, just exit now */
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		return (AE_OK);
 	}
 
@@ -337,7 +378,13 @@ acpi_ns_init_one_object(acpi_handle obj_handle,
 		break;
 
 	default:
+<<<<<<< HEAD
 		/* No other types can get here */
+=======
+
+		/* No other types can get here */
+
+>>>>>>> v3.18
 		break;
 	}
 
@@ -416,6 +463,10 @@ acpi_ns_find_ini_methods(acpi_handle obj_handle,
 		break;
 
 	default:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		break;
 	}
 
@@ -560,7 +611,11 @@ acpi_ns_init_one_device(acpi_handle obj_handle,
 
 	ACPI_MEMSET(info, 0, sizeof(struct acpi_evaluate_info));
 	info->prefix_node = device_node;
+<<<<<<< HEAD
 	info->pathname = METHOD_NAME__INI;
+=======
+	info->relative_pathname = METHOD_NAME__INI;
+>>>>>>> v3.18
 	info->parameters = NULL;
 	info->flags = ACPI_IGNORE_RETURN_VALUE;
 
@@ -574,8 +629,12 @@ acpi_ns_init_one_device(acpi_handle obj_handle,
 
 		/* Ignore error and move on to next device */
 
+<<<<<<< HEAD
 		char *scope_name =
 		    acpi_ns_get_external_pathname(info->resolved_node);
+=======
+		char *scope_name = acpi_ns_get_external_pathname(info->node);
+>>>>>>> v3.18
 
 		ACPI_EXCEPTION((AE_INFO, status, "during %s._INI execution",
 				scope_name));

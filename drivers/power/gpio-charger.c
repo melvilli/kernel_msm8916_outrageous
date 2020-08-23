@@ -28,6 +28,10 @@
 struct gpio_charger {
 	const struct gpio_charger_platform_data *pdata;
 	unsigned int irq;
+<<<<<<< HEAD
+=======
+	bool wakeup_enabled;
+>>>>>>> v3.18
 
 	struct power_supply charger;
 };
@@ -54,7 +58,11 @@ static int gpio_charger_get_property(struct power_supply *psy,
 
 	switch (psp) {
 	case POWER_SUPPLY_PROP_ONLINE:
+<<<<<<< HEAD
 		val->intval = gpio_get_value_cansleep(pdata->gpio);
+=======
+		val->intval = !!gpio_get_value_cansleep(pdata->gpio);
+>>>>>>> v3.18
 		val->intval ^= pdata->gpio_active_low;
 		break;
 	default:
@@ -136,6 +144,11 @@ static int gpio_charger_probe(struct platform_device *pdev)
 
 	platform_set_drvdata(pdev, gpio_charger);
 
+<<<<<<< HEAD
+=======
+	device_init_wakeup(&pdev->dev, 1);
+
+>>>>>>> v3.18
 	return 0;
 
 err_gpio_free:
@@ -155,24 +168,51 @@ static int gpio_charger_remove(struct platform_device *pdev)
 
 	gpio_free(gpio_charger->pdata->gpio);
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
 #ifdef CONFIG_PM_SLEEP
+<<<<<<< HEAD
+=======
+static int gpio_charger_suspend(struct device *dev)
+{
+	struct gpio_charger *gpio_charger = dev_get_drvdata(dev);
+
+	if (device_may_wakeup(dev))
+		gpio_charger->wakeup_enabled =
+			enable_irq_wake(gpio_charger->irq);
+
+	return 0;
+}
+
+>>>>>>> v3.18
 static int gpio_charger_resume(struct device *dev)
 {
 	struct platform_device *pdev = to_platform_device(dev);
 	struct gpio_charger *gpio_charger = platform_get_drvdata(pdev);
 
+<<<<<<< HEAD
+=======
+	if (gpio_charger->wakeup_enabled)
+		disable_irq_wake(gpio_charger->irq);
+>>>>>>> v3.18
 	power_supply_changed(&gpio_charger->charger);
 
 	return 0;
 }
 #endif
 
+<<<<<<< HEAD
 static SIMPLE_DEV_PM_OPS(gpio_charger_pm_ops, NULL, gpio_charger_resume);
+=======
+static SIMPLE_DEV_PM_OPS(gpio_charger_pm_ops,
+		gpio_charger_suspend, gpio_charger_resume);
+>>>>>>> v3.18
 
 static struct platform_driver gpio_charger_driver = {
 	.probe = gpio_charger_probe,

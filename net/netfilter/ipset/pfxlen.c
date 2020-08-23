@@ -7,8 +7,13 @@
 
 #define E(a, b, c, d) \
 	{.ip6 = { \
+<<<<<<< HEAD
 		__constant_htonl(a), __constant_htonl(b), \
 		__constant_htonl(c), __constant_htonl(d), \
+=======
+		htonl(a), htonl(b), \
+		htonl(c), htonl(d), \
+>>>>>>> v3.18
 	} }
 
 /*

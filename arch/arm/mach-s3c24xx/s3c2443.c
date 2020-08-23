@@ -29,10 +29,18 @@
 #include <asm/mach/irq.h>
 
 #include <mach/hardware.h>
+<<<<<<< HEAD
+=======
+#include <mach/gpio-samsung.h>
+>>>>>>> v3.18
 #include <asm/irq.h>
 #include <asm/system_misc.h>
 
 #include <mach/regs-s3c2443-clock.h>
+<<<<<<< HEAD
+=======
+#include <mach/rtc-core.h>
+>>>>>>> v3.18
 
 #include <plat/gpio-core.h>
 #include <plat/gpio-cfg.h>
@@ -42,7 +50,10 @@
 #include <plat/fb-core.h>
 #include <plat/nand-core.h>
 #include <plat/adc-core.h>
+<<<<<<< HEAD
 #include <plat/rtc-core.h>
+=======
+>>>>>>> v3.18
 #include <plat/spi-core.h>
 
 static struct map_desc s3c2443_iodesc[] __initdata = {
@@ -60,6 +71,7 @@ static struct device s3c2443_dev = {
 	.bus		= &s3c2443_subsys,
 };
 
+<<<<<<< HEAD
 void s3c2443_restart(enum reboot_mode mode, const char *cmd)
 {
 	if (mode == REBOOT_SOFT)
@@ -68,6 +80,8 @@ void s3c2443_restart(enum reboot_mode mode, const char *cmd)
 	__raw_writel(S3C2443_SWRST_RESET, S3C2443_SWRST);
 }
 
+=======
+>>>>>>> v3.18
 int __init s3c2443_init(void)
 {
 	printk("S3C2443: Initialising architecture\n");

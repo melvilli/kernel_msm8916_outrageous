@@ -86,7 +86,11 @@
 #define	EHOSTUNREACH	113	/* No route to host */
 #define	EALREADY	114	/* Operation already in progress */
 #define	EINPROGRESS	115	/* Operation now in progress */
+<<<<<<< HEAD
 #define	ESTALE		116	/* Stale NFS file handle */
+=======
+#define	ESTALE		116	/* Stale file handle */
+>>>>>>> v3.18
 #define	EUCLEAN		117	/* Structure needs cleaning */
 #define	ENOTNAM		118	/* Not a XENIX named type file */
 #define	ENAVAIL		119	/* No XENIX semaphores available */

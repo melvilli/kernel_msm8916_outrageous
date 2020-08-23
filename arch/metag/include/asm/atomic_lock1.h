@@ -37,6 +37,7 @@ static inline int atomic_set(atomic_t *v, int i)
 	return i;
 }
 
+<<<<<<< HEAD
 static inline void atomic_add(int i, atomic_t *v)
 {
 	unsigned long flags;
@@ -86,6 +87,43 @@ static inline int atomic_sub_return(int i, atomic_t *v)
 
 	return result;
 }
+=======
+#define ATOMIC_OP(op, c_op)						\
+static inline void atomic_##op(int i, atomic_t *v)			\
+{									\
+	unsigned long flags;						\
+									\
+	__global_lock1(flags);						\
+	fence();							\
+	v->counter c_op i;						\
+	__global_unlock1(flags);					\
+}									\
+
+#define ATOMIC_OP_RETURN(op, c_op)					\
+static inline int atomic_##op##_return(int i, atomic_t *v)		\
+{									\
+	unsigned long result;						\
+	unsigned long flags;						\
+									\
+	__global_lock1(flags);						\
+	result = v->counter;						\
+	result c_op i;							\
+	fence();							\
+	v->counter = result;						\
+	__global_unlock1(flags);					\
+									\
+	return result;							\
+}
+
+#define ATOMIC_OPS(op, c_op) ATOMIC_OP(op, c_op) ATOMIC_OP_RETURN(op, c_op)
+
+ATOMIC_OPS(add, +=)
+ATOMIC_OPS(sub, -=)
+
+#undef ATOMIC_OPS
+#undef ATOMIC_OP_RETURN
+#undef ATOMIC_OP
+>>>>>>> v3.18
 
 static inline void atomic_clear_mask(unsigned int mask, atomic_t *v)
 {

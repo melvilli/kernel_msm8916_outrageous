@@ -50,6 +50,14 @@ struct vnic_cq_ctrl {
 	u32 pad10;
 };
 
+<<<<<<< HEAD
+=======
+struct vnic_rx_bytes_counter {
+	unsigned int small_pkt_bytes_cnt;
+	unsigned int large_pkt_bytes_cnt;
+};
+
+>>>>>>> v3.18
 struct vnic_cq {
 	unsigned int index;
 	struct vnic_dev *vdev;
@@ -58,6 +66,13 @@ struct vnic_cq {
 	unsigned int to_clean;
 	unsigned int last_color;
 	unsigned int interrupt_offset;
+<<<<<<< HEAD
+=======
+	struct vnic_rx_bytes_counter pkt_size_counter;
+	unsigned int cur_rx_coal_timeval;
+	unsigned int tobe_rx_coal_timeval;
+	ktime_t prev_ts;
+>>>>>>> v3.18
 };
 
 static inline unsigned int vnic_cq_service(struct vnic_cq *cq,

@@ -158,7 +158,11 @@ void comet_timer(unsigned long data)
 {
 	struct net_device *dev = (struct net_device *)data;
 	struct tulip_private *tp = netdev_priv(dev);
+<<<<<<< HEAD
 	int next_tick = 60*HZ;
+=======
+	int next_tick = 2*HZ;
+>>>>>>> v3.18
 
 	if (tulip_debug > 1)
 		netdev_dbg(dev, "Comet link status %04x partner capability %04x\n",

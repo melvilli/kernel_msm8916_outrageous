@@ -1,6 +1,10 @@
 #ifndef _VB_DEF_
 #define _VB_DEF_
+<<<<<<< HEAD
 #include "../../video/sis/initdef.h"
+=======
+#include "../../video/fbdev/sis/initdef.h"
+>>>>>>> v3.18
 
 #define VB_XGI301C      0x0020 /* for 301C */
 
@@ -30,11 +34,14 @@
 #define SetCRT2ToDualEdge   0x8000
 
 #define ReserveTVOption     0x0008
+<<<<<<< HEAD
 #define GatingCRT           0x0800
 #define DisableChB          0x1000
 #define EnableChB           0x2000
 #define DisableChA          0x4000
 #define EnableChA           0x8000
+=======
+>>>>>>> v3.18
 
 #define SetTVLowResolution   0x0400
 #define TVSimuMode           0x0800
@@ -49,12 +56,18 @@
 #define SetLCDtoNonExpanding 0x0010
 #define SetLCDDualLink       0x0100
 #define SetLCDLowResolution  0x0200
+<<<<<<< HEAD
 #define SetLCDStdMode        0x0400
+=======
+>>>>>>> v3.18
 
 /* LCD Capability shampoo */
 #define DefaultLCDCap        0x80ea
 #define EnableLCD24bpp       0x0004 /* default */
+<<<<<<< HEAD
 #define DisableLCD24bpp      0x0000
+=======
+>>>>>>> v3.18
 #define LCDPolarity          0x00c0 /* default: SyncNN */
 #define XGI_LCDDualLink      0x0100
 #define EnableSpectrum       0x0200

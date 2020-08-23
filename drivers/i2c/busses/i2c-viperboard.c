@@ -118,8 +118,12 @@ static int vprbrd_i2c_addr(struct usb_device *usb_dev,
 static int vprbrd_i2c_read(struct vprbrd *vb, struct i2c_msg *msg)
 {
 	int ret;
+<<<<<<< HEAD
 	u16 remain_len, bytes_xfer, len1, len2,
 		start = 0x0000;
+=======
+	u16 remain_len, len1, len2, start = 0x0000;
+>>>>>>> v3.18
 	struct vprbrd_i2c_read_msg *rmsg =
 		(struct vprbrd_i2c_read_msg *)vb->buf;
 
@@ -166,7 +170,10 @@ static int vprbrd_i2c_read(struct vprbrd *vb, struct i2c_msg *msg)
 			rmsg->header.len3 = remain_len - 512;
 			rmsg->header.len4 = 0x00;
 			rmsg->header.len5 = 0x00;
+<<<<<<< HEAD
 			bytes_xfer = remain_len;
+=======
+>>>>>>> v3.18
 			remain_len = 0;
 		} else if (remain_len <= 1022) {
 			len1 = 512;
@@ -367,7 +374,11 @@ static int vprbrd_i2c_probe(struct platform_device *pdev)
 	int ret;
 	int pipe;
 
+<<<<<<< HEAD
 	vb_i2c = kzalloc(sizeof(*vb_i2c), GFP_KERNEL);
+=======
+	vb_i2c = devm_kzalloc(&pdev->dev, sizeof(*vb_i2c), GFP_KERNEL);
+>>>>>>> v3.18
 	if (vb_i2c == NULL)
 		return -ENOMEM;
 
@@ -394,14 +405,22 @@ static int vprbrd_i2c_probe(struct platform_device *pdev)
 	    if (ret != 1) {
 		dev_err(&pdev->dev,
 			"failure setting i2c_bus_freq to %d\n", i2c_bus_freq);
+<<<<<<< HEAD
 		ret = -EIO;
 		goto error;
+=======
+		return -EIO;
+>>>>>>> v3.18
 	    }
 	} else {
 		dev_err(&pdev->dev,
 			"invalid i2c_bus_freq setting:%d\n", i2c_bus_freq);
+<<<<<<< HEAD
 		ret = -EIO;
 		goto error;
+=======
+		return -EIO;
+>>>>>>> v3.18
 	}
 
 	vb_i2c->i2c.dev.parent = &pdev->dev;
@@ -412,10 +431,13 @@ static int vprbrd_i2c_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, vb_i2c);
 
 	return 0;
+<<<<<<< HEAD
 
 error:
 	kfree(vb_i2c);
 	return ret;
+=======
+>>>>>>> v3.18
 }
 
 static int vprbrd_i2c_remove(struct platform_device *pdev)

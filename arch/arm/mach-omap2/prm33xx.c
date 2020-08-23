@@ -19,7 +19,10 @@
 #include <linux/err.h>
 #include <linux/io.h>
 
+<<<<<<< HEAD
 #include "common.h"
+=======
+>>>>>>> v3.18
 #include "powerdomain.h"
 #include "prm33xx.h"
 #include "prm-regbits-33xx.h"
@@ -27,13 +30,21 @@
 /* Read a register in a PRM instance */
 u32 am33xx_prm_read_reg(s16 inst, u16 idx)
 {
+<<<<<<< HEAD
 	return __raw_readl(prm_base + inst + idx);
+=======
+	return readl_relaxed(prm_base + inst + idx);
+>>>>>>> v3.18
 }
 
 /* Write into a register in a PRM instance */
 void am33xx_prm_write_reg(u32 val, s16 inst, u16 idx)
 {
+<<<<<<< HEAD
 	__raw_writel(val, prm_base + inst + idx);
+=======
+	writel_relaxed(val, prm_base + inst + idx);
+>>>>>>> v3.18
 }
 
 /* Read-modify-write a register in PRM. Caller must lock */
@@ -320,6 +331,15 @@ static int am33xx_pwrdm_wait_transition(struct powerdomain *pwrdm)
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+static int am33xx_check_vcvp(void)
+{
+	/* No VC/VP on am33xx devices */
+	return 0;
+}
+
+>>>>>>> v3.18
 struct pwrdm_ops am33xx_pwrdm_operations = {
 	.pwrdm_set_next_pwrst		= am33xx_pwrdm_set_next_pwrst,
 	.pwrdm_read_next_pwrst		= am33xx_pwrdm_read_next_pwrst,
@@ -335,4 +355,8 @@ struct pwrdm_ops am33xx_pwrdm_operations = {
 	.pwrdm_set_mem_onst		= am33xx_pwrdm_set_mem_onst,
 	.pwrdm_set_mem_retst		= am33xx_pwrdm_set_mem_retst,
 	.pwrdm_wait_transition		= am33xx_pwrdm_wait_transition,
+<<<<<<< HEAD
+=======
+	.pwrdm_has_voltdm		= am33xx_check_vcvp,
+>>>>>>> v3.18
 };

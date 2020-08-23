@@ -61,6 +61,10 @@ static struct hvc_opal_priv *hvc_opal_privs[MAX_NR_HVC_CONSOLES];
 /* For early boot console */
 static struct hvc_opal_priv hvc_opal_boot_priv;
 static u32 hvc_opal_boot_termno;
+<<<<<<< HEAD
+=======
+static bool hvc_opal_event_registered;
+>>>>>>> v3.18
 
 static const struct hv_ops hvc_opal_raw_ops = {
 	.get_chars = opal_get_chars,
@@ -161,6 +165,21 @@ static const struct hv_ops hvc_opal_hvsi_ops = {
 	.tiocmset = hvc_opal_hvsi_tiocmset,
 };
 
+<<<<<<< HEAD
+=======
+static int hvc_opal_console_event(struct notifier_block *nb,
+				  unsigned long events, void *change)
+{
+	if (events & OPAL_EVENT_CONSOLE_INPUT)
+		hvc_kick();
+	return 0;
+}
+
+static struct notifier_block hvc_opal_console_nb = {
+	.notifier_call	= hvc_opal_console_event,
+};
+
+>>>>>>> v3.18
 static int hvc_opal_probe(struct platform_device *dev)
 {
 	const struct hv_ops *ops;
@@ -170,6 +189,10 @@ static int hvc_opal_probe(struct platform_device *dev)
 	unsigned int termno, boot = 0;
 	const __be32 *reg;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	if (of_device_is_compatible(dev->dev.of_node, "ibm,opal-console-raw")) {
 		proto = HV_PROTOCOL_RAW;
 		ops = &hvc_opal_raw_ops;
@@ -213,12 +236,25 @@ static int hvc_opal_probe(struct platform_device *dev)
 		dev->dev.of_node->full_name,
 		boot ? " (boot console)" : "");
 
+<<<<<<< HEAD
 	/* We don't do IRQ yet */
+=======
+	/* We don't do IRQ ... */
+>>>>>>> v3.18
 	hp = hvc_alloc(termno, 0, ops, MAX_VIO_PUT_CHARS);
 	if (IS_ERR(hp))
 		return PTR_ERR(hp);
 	dev_set_drvdata(&dev->dev, hp);
 
+<<<<<<< HEAD
+=======
+	/* ...  but we use OPAL event to kick the console */
+	if (!hvc_opal_event_registered) {
+		opal_notifier_register(&hvc_opal_console_nb);
+		hvc_opal_event_registered = true;
+	}
+
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -255,6 +291,7 @@ static int __init hvc_opal_init(void)
 	/* Register as a vio device to receive callbacks */
 	return platform_driver_register(&hvc_opal_driver);
 }
+<<<<<<< HEAD
 module_init(hvc_opal_init);
 
 static void __exit hvc_opal_exit(void)
@@ -262,6 +299,9 @@ static void __exit hvc_opal_exit(void)
 	platform_driver_unregister(&hvc_opal_driver);
 }
 module_exit(hvc_opal_exit);
+=======
+device_initcall(hvc_opal_init);
+>>>>>>> v3.18
 
 static void udbg_opal_putc(char c)
 {
@@ -328,6 +368,7 @@ static void udbg_init_opal_common(void)
 
 void __init hvc_opal_init_early(void)
 {
+<<<<<<< HEAD
 	struct device_node *stdout_node = NULL;
 	const u32 *termno;
 	const char *name = NULL;
@@ -344,6 +385,15 @@ void __init hvc_opal_init_early(void)
 			return;
 		}
 	} else {
+=======
+	struct device_node *stdout_node = of_node_get(of_stdout);
+	const __be32 *termno;
+	const struct hv_ops *ops;
+	u32 index;
+
+	/* If the console wasn't in /chosen, try /ibm,opal */
+	if (!stdout_node) {
+>>>>>>> v3.18
 		struct device_node *opal, *np;
 
 		/* Current OPAL takeover doesn't provide the stdout
@@ -371,7 +421,11 @@ void __init hvc_opal_init_early(void)
 	if (!stdout_node)
 		return;
 	termno = of_get_property(stdout_node, "reg", NULL);
+<<<<<<< HEAD
 	index = termno ? *termno : 0;
+=======
+	index = termno ? be32_to_cpup(termno) : 0;
+>>>>>>> v3.18
 	if (index >= MAX_NR_HVC_CONSOLES)
 		return;
 	hvc_opal_privs[index] = &hvc_opal_boot_priv;

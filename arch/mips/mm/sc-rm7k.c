@@ -6,7 +6,10 @@
 
 #undef DEBUG
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/mm.h>
 #include <linux/bitops.h>
@@ -104,7 +107,11 @@ static void blast_rm7k_tcache(void)
 /*
  * This function is executed in uncached address space.
  */
+<<<<<<< HEAD
 static __cpuinit void __rm7k_tc_enable(void)
+=======
+static void __rm7k_tc_enable(void)
+>>>>>>> v3.18
 {
 	int i;
 
@@ -117,7 +124,11 @@ static __cpuinit void __rm7k_tc_enable(void)
 		cache_op(Index_Store_Tag_T, CKSEG0ADDR(i));
 }
 
+<<<<<<< HEAD
 static __cpuinit void rm7k_tc_enable(void)
+=======
+static void rm7k_tc_enable(void)
+>>>>>>> v3.18
 {
 	if (read_c0_config() & RM7K_CONF_TE)
 		return;
@@ -130,7 +141,11 @@ static __cpuinit void rm7k_tc_enable(void)
 /*
  * This function is executed in uncached address space.
  */
+<<<<<<< HEAD
 static __cpuinit void __rm7k_sc_enable(void)
+=======
+static void __rm7k_sc_enable(void)
+>>>>>>> v3.18
 {
 	int i;
 
@@ -143,7 +158,11 @@ static __cpuinit void __rm7k_sc_enable(void)
 		cache_op(Index_Store_Tag_SD, CKSEG0ADDR(i));
 }
 
+<<<<<<< HEAD
 static __cpuinit void rm7k_sc_enable(void)
+=======
+static void rm7k_sc_enable(void)
+>>>>>>> v3.18
 {
 	if (read_c0_config() & RM7K_CONF_SE)
 		return;
@@ -184,7 +203,11 @@ static struct bcache_ops rm7k_sc_ops = {
  * This is a probing function like the one found in c-r4k.c, we look for the
  * wrap around point with different addresses.
  */
+<<<<<<< HEAD
 static __cpuinit void __probe_tcache(void)
+=======
+static void __probe_tcache(void)
+>>>>>>> v3.18
 {
 	unsigned long flags, addr, begin, end, pow2;
 
@@ -226,7 +249,11 @@ static __cpuinit void __probe_tcache(void)
 	local_irq_restore(flags);
 }
 
+<<<<<<< HEAD
 void __cpuinit rm7k_sc_init(void)
+=======
+void rm7k_sc_init(void)
+>>>>>>> v3.18
 {
 	struct cpuinfo_mips *c = &current_cpu_data;
 	unsigned int config = read_c0_config();

@@ -72,12 +72,17 @@ enum tegra_pinconf_tristate {
  */
 struct tegra_function {
 	const char *name;
+<<<<<<< HEAD
 	const char * const *groups;
+=======
+	const char **groups;
+>>>>>>> v3.18
 	unsigned ngroups;
 };
 
 /**
  * struct tegra_pingroup - Tegra pin group
+<<<<<<< HEAD
  * @mux_reg:		Mux register offset. -1 if unsupported.
  * @mux_bank:		Mux register bank. 0 if unsupported.
  * @mux_bit:		Mux register bit. 0 if unsupported.
@@ -120,17 +125,64 @@ struct tegra_function {
  * @drvtype_reg:	Drive type fields register offset. -1 if unsupported.
  * @drvtype_bank:	Drive type fields register bank. 0 if unsupported.
  * @drvtype_bit:	Drive type register bit. 0 if unsupported.
+=======
+ * @name		The name of the pin group.
+ * @pins		An array of pin IDs included in this pin group.
+ * @npins		The number of entries in @pins.
+ * @funcs		The mux functions which can be muxed onto this group.
+ * @mux_reg:		Mux register offset.
+ *			This register contains the mux, einput, odrain, lock,
+ *			ioreset, rcv_sel parameters.
+ * @mux_bank:		Mux register bank.
+ * @mux_bit:		Mux register bit.
+ * @pupd_reg:		Pull-up/down register offset.
+ * @pupd_bank:		Pull-up/down register bank.
+ * @pupd_bit:		Pull-up/down register bit.
+ * @tri_reg:		Tri-state register offset.
+ * @tri_bank:		Tri-state register bank.
+ * @tri_bit:		Tri-state register bit.
+ * @einput_bit:		Enable-input register bit.
+ * @odrain_bit:		Open-drain register bit.
+ * @lock_bit:		Lock register bit.
+ * @ioreset_bit:	IO reset register bit.
+ * @rcv_sel_bit:	Receiver select bit.
+ * @drv_reg:		Drive fields register offset.
+ *			This register contains hsm, schmitt, lpmd, drvdn,
+ *			drvup, slwr, slwf, and drvtype parameters.
+ * @drv_bank:		Drive fields register bank.
+ * @hsm_bit:		High Speed Mode register bit.
+ * @schmitt_bit:	Scmitt register bit.
+ * @lpmd_bit:		Low Power Mode register bit.
+ * @drvdn_bit:		Drive Down register bit.
+ * @drvdn_width:	Drive Down field width.
+ * @drvup_bit:		Drive Up register bit.
+ * @drvup_width:	Drive Up field width.
+ * @slwr_bit:		Slew Rising register bit.
+ * @slwr_width:		Slew Rising field width.
+ * @slwf_bit:		Slew Falling register bit.
+ * @slwf_width:		Slew Falling field width.
+ * @drvtype_bit:	Drive type register bit.
+ *
+ * -1 in a *_reg field means that feature is unsupported for this group.
+ * *_bank and *_reg values are irrelevant when *_reg is -1.
+ * When *_reg is valid, *_bit may be -1 to indicate an unsupported feature.
+>>>>>>> v3.18
  *
  * A representation of a group of pins (possibly just one pin) in the Tegra
  * pin controller. Each group allows some parameter or parameters to be
  * configured. The most common is mux function selection. Many others exist
  * such as pull-up/down, tri-state, etc. Tegra's pin controller is complex;
  * certain groups may only support configuring certain parameters, hence
+<<<<<<< HEAD
  * each parameter is optional, represented by a -1 "reg" value.
+=======
+ * each parameter is optional.
+>>>>>>> v3.18
  */
 struct tegra_pingroup {
 	const char *name;
 	const unsigned *pins;
+<<<<<<< HEAD
 	unsigned npins;
 	unsigned funcs[4];
 	unsigned func_safe;
@@ -170,6 +222,34 @@ struct tegra_pingroup {
 	u32 slwr_bit:5;
 	u32 slwf_bit:5;
 	u32 drvtype_bit:5;
+=======
+	u8 npins;
+	u8 funcs[4];
+	s16 mux_reg;
+	s16 pupd_reg;
+	s16 tri_reg;
+	s16 drv_reg;
+	u32 mux_bank:2;
+	u32 pupd_bank:2;
+	u32 tri_bank:2;
+	u32 drv_bank:2;
+	u32 mux_bit:6;
+	u32 pupd_bit:6;
+	u32 tri_bit:6;
+	u32 einput_bit:6;
+	u32 odrain_bit:6;
+	u32 lock_bit:6;
+	u32 ioreset_bit:6;
+	u32 rcv_sel_bit:6;
+	u32 hsm_bit:6;
+	u32 schmitt_bit:6;
+	u32 lpmd_bit:6;
+	u32 drvdn_bit:6;
+	u32 drvup_bit:6;
+	u32 slwr_bit:6;
+	u32 slwf_bit:6;
+	u32 drvtype_bit:6;
+>>>>>>> v3.18
 	u32 drvdn_width:6;
 	u32 drvup_width:6;
 	u32 slwr_width:6;
@@ -193,7 +273,11 @@ struct tegra_pinctrl_soc_data {
 	unsigned ngpios;
 	const struct pinctrl_pin_desc *pins;
 	unsigned npins;
+<<<<<<< HEAD
 	const struct tegra_function *functions;
+=======
+	struct tegra_function *functions;
+>>>>>>> v3.18
 	unsigned nfunctions;
 	const struct tegra_pingroup *groups;
 	unsigned ngroups;

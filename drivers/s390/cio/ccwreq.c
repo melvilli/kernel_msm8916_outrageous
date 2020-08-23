@@ -46,7 +46,11 @@ static u16 ccwreq_next_path(struct ccw_device *cdev)
 		goto out;
 	}
 	req->retries	= req->maxretries;
+<<<<<<< HEAD
 	req->mask	= lpm_adjust(req->mask >>= 1, req->lpm);
+=======
+	req->mask	= lpm_adjust(req->mask >> 1, req->lpm);
+>>>>>>> v3.18
 out:
 	return req->mask;
 }
@@ -252,7 +256,11 @@ static void ccwreq_log_status(struct ccw_device *cdev, enum io_status status)
  */
 void ccw_request_handler(struct ccw_device *cdev)
 {
+<<<<<<< HEAD
 	struct irb *irb = (struct irb *)&S390_lowcore.irb;
+=======
+	struct irb *irb = this_cpu_ptr(&cio_irb);
+>>>>>>> v3.18
 	struct ccw_request *req = &cdev->private->req;
 	enum io_status status;
 	int rc = -EOPNOTSUPP;

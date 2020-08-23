@@ -176,7 +176,10 @@
 					interrupt-parent = <&ipic>;
 					interrupts = <18 0x8>;
 					reg = <0x1c>;
+<<<<<<< HEAD
 					device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 				};
 
 				tbi0: tbi-phy@11 {

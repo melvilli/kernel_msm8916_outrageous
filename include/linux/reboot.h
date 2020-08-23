@@ -17,15 +17,45 @@ enum reboot_mode {
 	REBOOT_SOFT,
 	REBOOT_GPIO,
 };
+<<<<<<< HEAD
+=======
+extern enum reboot_mode reboot_mode;
+
+enum reboot_type {
+	BOOT_TRIPLE	= 't',
+	BOOT_KBD	= 'k',
+	BOOT_BIOS	= 'b',
+	BOOT_ACPI	= 'a',
+	BOOT_EFI	= 'e',
+	BOOT_CF9_FORCE	= 'p',
+	BOOT_CF9_SAFE	= 'q',
+};
+extern enum reboot_type reboot_type;
+
+extern int reboot_default;
+extern int reboot_cpu;
+extern int reboot_force;
+
+>>>>>>> v3.18
 
 extern int register_reboot_notifier(struct notifier_block *);
 extern int unregister_reboot_notifier(struct notifier_block *);
 
+<<<<<<< HEAD
+=======
+extern int register_restart_handler(struct notifier_block *);
+extern int unregister_restart_handler(struct notifier_block *);
+extern void do_kernel_restart(char *cmd);
+>>>>>>> v3.18
 
 /*
  * Architecture-specific implementations of sys_reboot commands.
  */
 
+<<<<<<< HEAD
+=======
+extern void migrate_to_reboot_cpu(void);
+>>>>>>> v3.18
 extern void machine_restart(char *cmd);
 extern void machine_halt(void);
 extern void machine_power_off(void);
@@ -34,7 +64,11 @@ extern void machine_shutdown(void);
 struct pt_regs;
 extern void machine_crash_shutdown(struct pt_regs *);
 
+<<<<<<< HEAD
 /* 
+=======
+/*
+>>>>>>> v3.18
  * Architecture independent implemenations of sys_reboot commands.
  */
 

@@ -66,3 +66,13 @@ EXPORT_SYMBOL(empty_zero_page);
 #ifndef CONFIG_PARAVIRT
 EXPORT_SYMBOL(native_load_gs_index);
 #endif
+<<<<<<< HEAD
+=======
+
+#ifdef CONFIG_PREEMPT
+EXPORT_SYMBOL(___preempt_schedule);
+#ifdef CONFIG_CONTEXT_TRACKING
+EXPORT_SYMBOL(___preempt_schedule_context);
+#endif
+#endif
+>>>>>>> v3.18

@@ -47,7 +47,11 @@ static void line6_midi_transmit(struct snd_rawmidi_substream *substream)
 	struct snd_line6_midi *line6midi = line6->line6midi;
 	struct midi_buffer *mb = &line6midi->midibuf_out;
 	unsigned long flags;
+<<<<<<< HEAD
 	unsigned char chunk[line6->max_packet_size];
+=======
+	unsigned char chunk[LINE6_FALLBACK_MAXPACKETSIZE];
+>>>>>>> v3.18
 	int req, done;
 
 	spin_lock_irqsave(&line6->line6midi->midi_transmit_lock, flags);
@@ -64,7 +68,12 @@ static void line6_midi_transmit(struct snd_rawmidi_substream *substream)
 	}
 
 	for (;;) {
+<<<<<<< HEAD
 		done = line6_midibuf_read(mb, chunk, line6->max_packet_size);
+=======
+		done = line6_midibuf_read(mb, chunk,
+					  LINE6_FALLBACK_MAXPACKETSIZE);
+>>>>>>> v3.18
 
 		if (done == 0)
 			break;
@@ -144,7 +153,11 @@ static int send_midi_async(struct usb_line6 *line6, unsigned char *data,
 	if (retval < 0) {
 		dev_err(line6->ifcdev, "usb_submit_urb failed\n");
 		usb_free_urb(urb);
+<<<<<<< HEAD
 		return -EINVAL;
+=======
+		return retval;
+>>>>>>> v3.18
 	}
 
 	++line6->line6midi->num_active_send_urbs;
@@ -182,6 +195,10 @@ static void line6_midi_output_drain(struct snd_rawmidi_substream *substream)
 	struct usb_line6 *line6 =
 	    line6_rawmidi_substream_midi(substream)->line6;
 	struct snd_line6_midi *midi = line6->line6midi;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	wait_event_interruptible(midi->send_wait,
 				 midi->num_active_send_urbs == 0);
 }
@@ -205,7 +222,11 @@ static void line6_midi_input_trigger(struct snd_rawmidi_substream *substream,
 	if (up)
 		line6->line6midi->substream_receive = substream;
 	else
+<<<<<<< HEAD
 		line6->line6midi->substream_receive = 0;
+=======
+		line6->line6midi->substream_receive = NULL;
+>>>>>>> v3.18
 }
 
 static struct snd_rawmidi_ops line6_midi_output_ops = {
@@ -259,6 +280,10 @@ static int snd_line6_new_midi(struct snd_line6_midi *line6midi)
 static int snd_line6_midi_free(struct snd_device *device)
 {
 	struct snd_line6_midi *line6midi = device->device_data;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	line6_midibuf_destroy(&line6midi->midibuf_in);
 	line6_midibuf_destroy(&line6midi->midibuf_out);
 	return 0;
@@ -307,8 +332,11 @@ int line6_init_midi(struct usb_line6 *line6)
 	if (err < 0)
 		return err;
 
+<<<<<<< HEAD
 	snd_card_set_dev(line6->card, line6->ifcdev);
 
+=======
+>>>>>>> v3.18
 	err = snd_line6_new_midi(line6midi);
 	if (err < 0)
 		return err;

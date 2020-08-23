@@ -115,8 +115,11 @@ static bool mei_init(struct mei *me, const uuid_le *guid,
 	struct mei_client *cl;
 	struct mei_connect_client_data data;
 
+<<<<<<< HEAD
 	mei_deinit(me);
 
+=======
+>>>>>>> v3.18
 	me->verbose = verbose;
 
 	me->fd = open("/dev/mei", O_RDWR);

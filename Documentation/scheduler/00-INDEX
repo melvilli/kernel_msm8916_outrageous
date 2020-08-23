@@ -2,6 +2,11 @@
 	- this file.
 sched-arch.txt
 	- CPU Scheduler implementation hints for architecture specific code.
+<<<<<<< HEAD
+=======
+sched-bwc.txt
+	- CFS bandwidth control overview.
+>>>>>>> v3.18
 sched-design-CFS.txt
 	- goals, design and implementation of the Completely Fair Scheduler.
 sched-domains.txt
@@ -10,5 +15,10 @@ sched-nice-design.txt
 	- How and why the scheduler's nice levels are implemented.
 sched-rt-group.txt
 	- real-time group scheduling.
+<<<<<<< HEAD
+=======
+sched-deadline.txt
+	- deadline scheduling.
+>>>>>>> v3.18
 sched-stats.txt
 	- information on schedstats (Linux Scheduler Statistics).

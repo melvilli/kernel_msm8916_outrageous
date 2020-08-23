@@ -16,6 +16,10 @@
 #include <linux/init.h>
 #include <linux/device.h>
 #include <linux/serial_core.h>
+<<<<<<< HEAD
+=======
+#include <linux/serial_s3c.h>
+>>>>>>> v3.18
 
 #include <mach/map.h>
 #include <mach/dma.h>
@@ -23,7 +27,10 @@
 #include <plat/dma-s3c24xx.h>
 #include <plat/cpu.h>
 
+<<<<<<< HEAD
 #include <plat/regs-serial.h>
+=======
+>>>>>>> v3.18
 #include <mach/regs-gpio.h>
 #include <plat/regs-dma.h>
 #include <mach/regs-lcd.h>

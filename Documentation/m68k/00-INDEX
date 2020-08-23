@@ -1,5 +1,10 @@
 00-INDEX
 	- this file
+<<<<<<< HEAD
+=======
+README.buddha
+	- Amiga Buddha and Catweasel IDE Driver
+>>>>>>> v3.18
 kernel-options.txt
 	- command line options for Linux/m68k
 

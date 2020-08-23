@@ -5,11 +5,16 @@
 #include <linux/sh_dma.h>
 
 /*
+<<<<<<< HEAD
  * Generic header for SuperH SCI(F) (used by sh/sh64/h8300 and related parts)
+=======
+ * Generic header for SuperH (H)SCI(F) (used by sh/sh64 and related parts)
+>>>>>>> v3.18
  */
 
 #define SCIx_NOT_SUPPORTED	(-1)
 
+<<<<<<< HEAD
 enum {
 	SCBRR_ALGO_1,		/* ((clk + 16 * bps) / (16 * bps) - 1) */
 	SCBRR_ALGO_2,		/* ((clk + 16 * bps) / (32 * bps) - 1) */
@@ -76,6 +81,61 @@ enum {
 
 	SCIx_NR_FNS,
 };
+=======
+/* SCSMR (Serial Mode Register) */
+#define SCSMR_CHR	(1 << 6)	/* 7-bit Character Length */
+#define SCSMR_PE	(1 << 5)	/* Parity Enable */
+#define SCSMR_ODD	(1 << 4)	/* Odd Parity */
+#define SCSMR_STOP	(1 << 3)	/* Stop Bit Length */
+#define SCSMR_CKS	0x0003		/* Clock Select */
+
+/* Serial Control Register (@ = not supported by all parts) */
+#define SCSCR_TIE	(1 << 7)	/* Transmit Interrupt Enable */
+#define SCSCR_RIE	(1 << 6)	/* Receive Interrupt Enable */
+#define SCSCR_TE	(1 << 5)	/* Transmit Enable */
+#define SCSCR_RE	(1 << 4)	/* Receive Enable */
+#define SCSCR_REIE	(1 << 3)	/* Receive Error Interrupt Enable @ */
+#define SCSCR_TOIE	(1 << 2)	/* Timeout Interrupt Enable @ */
+#define SCSCR_CKE1	(1 << 1)	/* Clock Enable 1 */
+#define SCSCR_CKE0	(1 << 0)	/* Clock Enable 0 */
+/* SCIFA/SCIFB only */
+#define SCSCR_TDRQE	(1 << 15)	/* Tx Data Transfer Request Enable */
+#define SCSCR_RDRQE	(1 << 14)	/* Rx Data Transfer Request Enable */
+
+/* SCxSR (Serial Status Register) on SCI */
+#define SCI_TDRE  0x80			/* Transmit Data Register Empty */
+#define SCI_RDRF  0x40			/* Receive Data Register Full */
+#define SCI_ORER  0x20			/* Overrun Error */
+#define SCI_FER   0x10			/* Framing Error */
+#define SCI_PER   0x08			/* Parity Error */
+#define SCI_TEND  0x04			/* Transmit End */
+
+#define SCI_DEFAULT_ERROR_MASK (SCI_PER | SCI_FER)
+
+/* SCxSR (Serial Status Register) on SCIF, HSCIF */
+#define SCIF_ER    0x0080		/* Receive Error */
+#define SCIF_TEND  0x0040		/* Transmission End */
+#define SCIF_TDFE  0x0020		/* Transmit FIFO Data Empty */
+#define SCIF_BRK   0x0010		/* Break Detect */
+#define SCIF_FER   0x0008		/* Framing Error */
+#define SCIF_PER   0x0004		/* Parity Error */
+#define SCIF_RDF   0x0002		/* Receive FIFO Data Full */
+#define SCIF_DR    0x0001		/* Receive Data Ready */
+
+#define SCIF_DEFAULT_ERROR_MASK (SCIF_PER | SCIF_FER | SCIF_ER | SCIF_BRK)
+
+/* SCFCR (FIFO Control Register) */
+#define SCFCR_LOOP	(1 << 0)	/* Loopback Test */
+
+/* SCSPTR (Serial Port Register), optional */
+#define SCSPTR_RTSIO	(1 << 7)	/* Serial Port RTS Pin Input/Output */
+#define SCSPTR_CTSIO	(1 << 5)	/* Serial Port CTS Pin Input/Output */
+#define SCSPTR_SPB2IO	(1 << 1)	/* Serial Port Break Input/Output */
+#define SCSPTR_SPB2DT	(1 << 0)	/* Serial Port Break Data */
+
+/* HSSRR HSCIF */
+#define HSCIF_SRE	0x8000		/* Sampling Rate Register Enable */
+>>>>>>> v3.18
 
 enum {
 	SCIx_PROBE_REGTYPE,
@@ -90,10 +150,15 @@ enum {
 	SCIx_SH4_SCIF_NO_SCSPTR_REGTYPE,
 	SCIx_SH4_SCIF_FIFODATA_REGTYPE,
 	SCIx_SH7705_SCIF_REGTYPE,
+<<<<<<< HEAD
+=======
+	SCIx_HSCIF_REGTYPE,
+>>>>>>> v3.18
 
 	SCIx_NR_REGTYPES,
 };
 
+<<<<<<< HEAD
 #define SCIx_IRQ_MUXED(irq)		\
 {					\
 	[SCIx_ERI_IRQ]	= (irq),	\
@@ -107,14 +172,32 @@ enum {
 	 (port)->cfg->irqs[SCIx_RXI_IRQ]) ||	\
 	((port)->cfg->irqs[SCIx_ERI_IRQ] &&	\
 	 !(port)->cfg->irqs[SCIx_RXI_IRQ])
+=======
+>>>>>>> v3.18
 /*
  * SCI register subset common for all port types.
  * Not all registers will exist on all parts.
  */
 enum {
+<<<<<<< HEAD
 	SCSMR, SCBRR, SCSCR, SCxSR,
 	SCFCR, SCFDR, SCxTDR, SCxRDR,
 	SCLSR, SCTFDR, SCRFDR, SCSPTR,
+=======
+	SCSMR,				/* Serial Mode Register */
+	SCBRR,				/* Bit Rate Register */
+	SCSCR,				/* Serial Control Register */
+	SCxSR,				/* Serial Status Register */
+	SCFCR,				/* FIFO Control Register */
+	SCFDR,				/* FIFO Data Count Register */
+	SCxTDR,				/* Transmit (FIFO) Data Register */
+	SCxRDR,				/* Receive (FIFO) Data Register */
+	SCLSR,				/* Line Status Register */
+	SCTFDR,				/* Transmit FIFO Data Count Register */
+	SCRFDR,				/* Receive FIFO Data Count Register */
+	SCSPTR,				/* Serial Port Register */
+	HSSRR,				/* Sampling Rate Register */
+>>>>>>> v3.18
 
 	SCIx_NR_REGS,
 };
@@ -134,6 +217,7 @@ struct plat_sci_port_ops {
  * Platform device specific platform_data struct
  */
 struct plat_sci_port {
+<<<<<<< HEAD
 	unsigned long	mapbase;		/* resource base */
 	unsigned int	irqs[SCIx_NR_IRQS];	/* ERI, RXI, TXI, BRI */
 	unsigned int	gpios[SCIx_NR_FNS];	/* SCK, RXD, TXD, CTS, RTS */
@@ -142,14 +226,24 @@ struct plat_sci_port {
 	unsigned long	capabilities;		/* Port features/capabilities */
 
 	unsigned int	scbrr_algo_id;		/* SCBRR calculation algo */
+=======
+	unsigned int	type;			/* SCI / SCIF / IRDA / HSCIF */
+	upf_t		flags;			/* UPF_* flags */
+	unsigned long	capabilities;		/* Port features/capabilities */
+
+	unsigned int	sampling_rate;
+>>>>>>> v3.18
 	unsigned int	scscr;			/* SCSCR initialization */
 
 	/*
 	 * Platform overrides if necessary, defaults otherwise.
 	 */
+<<<<<<< HEAD
 	int		overrun_bit;
 	unsigned int	error_mask;
 
+=======
+>>>>>>> v3.18
 	int		port_reg;
 	unsigned char	regshift;
 	unsigned char	regtype;

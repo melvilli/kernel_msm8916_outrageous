@@ -143,23 +143,35 @@ static int max6902_probe(struct spi_device *spi)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int max6902_remove(struct spi_device *spi)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 static struct spi_driver max6902_driver = {
 	.driver = {
 		.name	= "rtc-max6902",
 		.owner	= THIS_MODULE,
 	},
 	.probe	= max6902_probe,
+<<<<<<< HEAD
 	.remove = max6902_remove,
+=======
+>>>>>>> v3.18
 };
 
 module_spi_driver(max6902_driver);
 
+<<<<<<< HEAD
 MODULE_DESCRIPTION ("max6902 spi RTC driver");
 MODULE_AUTHOR ("Raphael Assenat");
 MODULE_LICENSE ("GPL");
+=======
+MODULE_DESCRIPTION("max6902 spi RTC driver");
+MODULE_AUTHOR("Raphael Assenat");
+MODULE_LICENSE("GPL");
+>>>>>>> v3.18
 MODULE_ALIAS("spi:rtc-max6902");

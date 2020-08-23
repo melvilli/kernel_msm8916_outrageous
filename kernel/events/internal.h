@@ -82,16 +82,28 @@ static inline unsigned long perf_data_size(struct ring_buffer *rb)
 }
 
 #define DEFINE_OUTPUT_COPY(func_name, memcpy_func)			\
+<<<<<<< HEAD
 static inline unsigned int						\
 func_name(struct perf_output_handle *handle,				\
 	  const void *buf, unsigned int len)				\
+=======
+static inline unsigned long						\
+func_name(struct perf_output_handle *handle,				\
+	  const void *buf, unsigned long len)				\
+>>>>>>> v3.18
 {									\
 	unsigned long size, written;					\
 									\
 	do {								\
+<<<<<<< HEAD
 		size = min_t(unsigned long, handle->size, len);		\
 									\
 		written = memcpy_func(handle->addr, buf, size);		\
+=======
+		size    = min(handle->size, len);			\
+		written = memcpy_func(handle->addr, buf, size);		\
+		written = size - written;				\
+>>>>>>> v3.18
 									\
 		len -= written;						\
 		handle->addr += written;				\
@@ -110,20 +122,53 @@ func_name(struct perf_output_handle *handle,				\
 	return len;							\
 }
 
+<<<<<<< HEAD
 static inline int memcpy_common(void *dst, const void *src, size_t n)
 {
 	memcpy(dst, src, n);
 	return n;
+=======
+static inline unsigned long
+memcpy_common(void *dst, const void *src, unsigned long n)
+{
+	memcpy(dst, src, n);
+	return 0;
+>>>>>>> v3.18
 }
 
 DEFINE_OUTPUT_COPY(__output_copy, memcpy_common)
 
+<<<<<<< HEAD
 #define MEMCPY_SKIP(dst, src, n) (n)
 
 DEFINE_OUTPUT_COPY(__output_skip, MEMCPY_SKIP)
 
 #ifndef arch_perf_out_copy_user
 #define arch_perf_out_copy_user __copy_from_user_inatomic
+=======
+static inline unsigned long
+memcpy_skip(void *dst, const void *src, unsigned long n)
+{
+	return 0;
+}
+
+DEFINE_OUTPUT_COPY(__output_skip, memcpy_skip)
+
+#ifndef arch_perf_out_copy_user
+#define arch_perf_out_copy_user arch_perf_out_copy_user
+
+static inline unsigned long
+arch_perf_out_copy_user(void *dst, const void *src, unsigned long n)
+{
+	unsigned long ret;
+
+	pagefault_disable();
+	ret = __copy_from_user_inatomic(dst, src, n);
+	pagefault_enable();
+
+	return ret;
+}
+>>>>>>> v3.18
 #endif
 
 DEFINE_OUTPUT_COPY(__output_copy_user, arch_perf_out_copy_user)

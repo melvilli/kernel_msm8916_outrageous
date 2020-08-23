@@ -48,7 +48,15 @@ int notrace unwind_frame(struct stackframe *frame)
 
 	frame->sp = fp + 0x10;
 	frame->fp = *(unsigned long *)(fp);
+<<<<<<< HEAD
 	frame->pc = *(unsigned long *)(fp + 8);
+=======
+	/*
+	 * -4 here because we care about the PC at time of bl,
+	 * not where the return will go.
+	 */
+	frame->pc = *(unsigned long *)(fp + 8) - 4;
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -107,10 +115,16 @@ void save_stack_trace_tsk(struct task_struct *tsk, struct stack_trace *trace)
 		frame.sp = thread_saved_sp(tsk);
 		frame.pc = thread_saved_pc(tsk);
 	} else {
+<<<<<<< HEAD
 		register unsigned long current_sp asm("sp");
 		data.no_sched_functions = 0;
 		frame.fp = (unsigned long)__builtin_frame_address(0);
 		frame.sp = current_sp;
+=======
+		data.no_sched_functions = 0;
+		frame.fp = (unsigned long)__builtin_frame_address(0);
+		frame.sp = current_stack_pointer;
+>>>>>>> v3.18
 		frame.pc = (unsigned long)save_stack_trace_tsk;
 	}
 

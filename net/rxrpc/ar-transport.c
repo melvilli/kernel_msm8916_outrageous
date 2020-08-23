@@ -17,11 +17,22 @@
 #include <net/af_rxrpc.h>
 #include "ar-internal.h"
 
+<<<<<<< HEAD
+=======
+/*
+ * Time after last use at which transport record is cleaned up.
+ */
+unsigned rxrpc_transport_expiry = 3600 * 24;
+
+>>>>>>> v3.18
 static void rxrpc_transport_reaper(struct work_struct *work);
 
 static LIST_HEAD(rxrpc_transports);
 static DEFINE_RWLOCK(rxrpc_transport_lock);
+<<<<<<< HEAD
 static unsigned long rxrpc_transport_timeout = 3600 * 24;
+=======
+>>>>>>> v3.18
 static DECLARE_DELAYED_WORK(rxrpc_transport_reap, rxrpc_transport_reaper);
 
 /*
@@ -235,7 +246,11 @@ static void rxrpc_transport_reaper(struct work_struct *work)
 		if (likely(atomic_read(&trans->usage) > 0))
 			continue;
 
+<<<<<<< HEAD
 		reap_time = trans->put_time + rxrpc_transport_timeout;
+=======
+		reap_time = trans->put_time + rxrpc_transport_expiry;
+>>>>>>> v3.18
 		if (reap_time <= now)
 			list_move_tail(&trans->link, &graveyard);
 		else if (reap_time < earliest)
@@ -271,7 +286,11 @@ void __exit rxrpc_destroy_all_transports(void)
 {
 	_enter("");
 
+<<<<<<< HEAD
 	rxrpc_transport_timeout = 0;
+=======
+	rxrpc_transport_expiry = 0;
+>>>>>>> v3.18
 	cancel_delayed_work(&rxrpc_transport_reap);
 	rxrpc_queue_delayed_work(&rxrpc_transport_reap, 0);
 

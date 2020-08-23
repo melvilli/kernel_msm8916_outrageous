@@ -171,7 +171,10 @@ static int spi_sh_send(struct spi_sh_data *ss, struct spi_message *mesg,
 	int remain = t->len;
 	int cur_len;
 	unsigned char *data;
+<<<<<<< HEAD
 	unsigned long tmp;
+=======
+>>>>>>> v3.18
 	long ret;
 
 	if (t->len)
@@ -213,9 +216,13 @@ static int spi_sh_send(struct spi_sh_data *ss, struct spi_message *mesg,
 	}
 
 	if (list_is_last(&t->transfer_list, &mesg->transfers)) {
+<<<<<<< HEAD
 		tmp = spi_sh_read(ss, SPI_SH_CR1);
 		tmp = tmp & ~(SPI_SH_SSD | SPI_SH_SSDB);
 		spi_sh_write(ss, tmp, SPI_SH_CR1);
+=======
+		spi_sh_clear_bit(ss, SPI_SH_SSD | SPI_SH_SSDB, SPI_SH_CR1);
+>>>>>>> v3.18
 		spi_sh_set_bit(ss, SPI_SH_SSA, SPI_SH_CR1);
 
 		ss->cr1 &= ~SPI_SH_TBE;
@@ -239,7 +246,10 @@ static int spi_sh_receive(struct spi_sh_data *ss, struct spi_message *mesg,
 	int remain = t->len;
 	int cur_len;
 	unsigned char *data;
+<<<<<<< HEAD
 	unsigned long tmp;
+=======
+>>>>>>> v3.18
 	long ret;
 
 	if (t->len > SPI_SH_MAX_BYTE)
@@ -247,9 +257,13 @@ static int spi_sh_receive(struct spi_sh_data *ss, struct spi_message *mesg,
 	else
 		spi_sh_write(ss, t->len, SPI_SH_CR3);
 
+<<<<<<< HEAD
 	tmp = spi_sh_read(ss, SPI_SH_CR1);
 	tmp = tmp & ~(SPI_SH_SSD | SPI_SH_SSDB);
 	spi_sh_write(ss, tmp, SPI_SH_CR1);
+=======
+	spi_sh_clear_bit(ss, SPI_SH_SSD | SPI_SH_SSDB, SPI_SH_CR1);
+>>>>>>> v3.18
 	spi_sh_set_bit(ss, SPI_SH_SSA, SPI_SH_CR1);
 
 	spi_sh_wait_write_buffer_empty(ss);
@@ -328,7 +342,12 @@ static void spi_sh_work(struct work_struct *work)
 		spin_lock_irqsave(&ss->lock, flags);
 
 		mesg->status = 0;
+<<<<<<< HEAD
 		mesg->complete(mesg->context);
+=======
+		if (mesg->complete)
+			mesg->complete(mesg->context);
+>>>>>>> v3.18
 	}
 
 	clear_fifo(ss);
@@ -346,7 +365,12 @@ static void spi_sh_work(struct work_struct *work)
 
  error:
 	mesg->status = ret;
+<<<<<<< HEAD
 	mesg->complete(mesg->context);
+=======
+	if (mesg->complete)
+		mesg->complete(mesg->context);
+>>>>>>> v3.18
 
 	spi_sh_clear_bit(ss, SPI_SH_SSA | SPI_SH_SSDB | SPI_SH_SSD,
 			 SPI_SH_CR1);
@@ -358,9 +382,12 @@ static int spi_sh_setup(struct spi_device *spi)
 {
 	struct spi_sh_data *ss = spi_master_get_devdata(spi->master);
 
+<<<<<<< HEAD
 	if (!spi->bits_per_word)
 		spi->bits_per_word = 8;
 
+=======
+>>>>>>> v3.18
 	pr_debug("%s: enter\n", __func__);
 
 	spi_sh_write(ss, 0xfe, SPI_SH_CR1);	/* SPI sycle stop */
@@ -434,12 +461,19 @@ static irqreturn_t spi_sh_irq(int irq, void *_ss)
 
 static int spi_sh_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct spi_sh_data *ss = dev_get_drvdata(&pdev->dev);
+=======
+	struct spi_sh_data *ss = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 
 	spi_unregister_master(ss->master);
 	destroy_workqueue(ss->workqueue);
 	free_irq(ss->irq, ss);
+<<<<<<< HEAD
 	iounmap(ss->addr);
+=======
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -471,7 +505,11 @@ static int spi_sh_probe(struct platform_device *pdev)
 	}
 
 	ss = spi_master_get_devdata(master);
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, ss);
+=======
+	platform_set_drvdata(pdev, ss);
+>>>>>>> v3.18
 
 	switch (res->flags & IORESOURCE_MEM_TYPE_MASK) {
 	case IORESOURCE_MEM_8BIT:
@@ -487,7 +525,11 @@ static int spi_sh_probe(struct platform_device *pdev)
 	}
 	ss->irq = irq;
 	ss->master = master;
+<<<<<<< HEAD
 	ss->addr = ioremap(res->start, resource_size(res));
+=======
+	ss->addr = devm_ioremap(&pdev->dev, res->start, resource_size(res));
+>>>>>>> v3.18
 	if (ss->addr == NULL) {
 		dev_err(&pdev->dev, "ioremap error.\n");
 		ret = -ENOMEM;
@@ -502,13 +544,21 @@ static int spi_sh_probe(struct platform_device *pdev)
 	if (ss->workqueue == NULL) {
 		dev_err(&pdev->dev, "create workqueue error\n");
 		ret = -EBUSY;
+<<<<<<< HEAD
 		goto error2;
+=======
+		goto error1;
+>>>>>>> v3.18
 	}
 
 	ret = request_irq(irq, spi_sh_irq, 0, "spi_sh", ss);
 	if (ret < 0) {
 		dev_err(&pdev->dev, "request_irq error\n");
+<<<<<<< HEAD
 		goto error3;
+=======
+		goto error2;
+>>>>>>> v3.18
 	}
 
 	master->num_chipselect = 2;
@@ -520,17 +570,28 @@ static int spi_sh_probe(struct platform_device *pdev)
 	ret = spi_register_master(master);
 	if (ret < 0) {
 		printk(KERN_ERR "spi_register_master error.\n");
+<<<<<<< HEAD
 		goto error4;
+=======
+		goto error3;
+>>>>>>> v3.18
 	}
 
 	return 0;
 
+<<<<<<< HEAD
  error4:
 	free_irq(irq, ss);
  error3:
 	destroy_workqueue(ss->workqueue);
  error2:
 	iounmap(ss->addr);
+=======
+ error3:
+	free_irq(irq, ss);
+ error2:
+	destroy_workqueue(ss->workqueue);
+>>>>>>> v3.18
  error1:
 	spi_master_put(master);
 

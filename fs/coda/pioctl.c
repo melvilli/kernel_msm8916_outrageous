@@ -16,7 +16,11 @@
 #include <linux/string.h>
 #include <linux/namei.h>
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <asm/uaccess.h>
+=======
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 
 #include <linux/coda.h>
 #include <linux/coda_psdev.h>

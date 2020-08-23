@@ -56,6 +56,10 @@
 #include "squashfs_fs.h"
 #include "squashfs_fs_sb.h"
 #include "squashfs.h"
+<<<<<<< HEAD
+=======
+#include "page_actor.h"
+>>>>>>> v3.18
 
 /*
  * Look-up block in cache, and increment usage count.  If not in cache, read
@@ -119,9 +123,14 @@ struct squashfs_cache_entry *squashfs_cache_get(struct super_block *sb,
 			entry->error = 0;
 			spin_unlock(&cache->lock);
 
+<<<<<<< HEAD
 			entry->length = squashfs_read_data(sb, entry->data,
 				block, length, &entry->next_index,
 				cache->block_size, cache->pages);
+=======
+			entry->length = squashfs_read_data(sb, block, length,
+				&entry->next_index, entry->actor);
+>>>>>>> v3.18
 
 			spin_lock(&cache->lock);
 
@@ -220,6 +229,10 @@ void squashfs_cache_delete(struct squashfs_cache *cache)
 				kfree(cache->entry[i].data[j]);
 			kfree(cache->entry[i].data);
 		}
+<<<<<<< HEAD
+=======
+		kfree(cache->entry[i].actor);
+>>>>>>> v3.18
 	}
 
 	kfree(cache->entry);
@@ -280,6 +293,16 @@ struct squashfs_cache *squashfs_cache_init(char *name, int entries,
 				goto cleanup;
 			}
 		}
+<<<<<<< HEAD
+=======
+
+		entry->actor = squashfs_page_actor_init(entry->data,
+						cache->pages, 0);
+		if (entry->actor == NULL) {
+			ERROR("Failed to allocate %s cache entry\n", name);
+			goto cleanup;
+		}
+>>>>>>> v3.18
 	}
 
 	return cache;
@@ -410,6 +433,10 @@ void *squashfs_read_table(struct super_block *sb, u64 block, int length)
 	int pages = (length + PAGE_CACHE_SIZE - 1) >> PAGE_CACHE_SHIFT;
 	int i, res;
 	void *table, *buffer, **data;
+<<<<<<< HEAD
+=======
+	struct squashfs_page_actor *actor;
+>>>>>>> v3.18
 
 	table = buffer = kmalloc(length, GFP_KERNEL);
 	if (table == NULL)
@@ -421,6 +448,7 @@ void *squashfs_read_table(struct super_block *sb, u64 block, int length)
 		goto failed;
 	}
 
+<<<<<<< HEAD
 	for (i = 0; i < pages; i++, buffer += PAGE_CACHE_SIZE)
 		data[i] = buffer;
 
@@ -428,12 +456,33 @@ void *squashfs_read_table(struct super_block *sb, u64 block, int length)
 		SQUASHFS_COMPRESSED_BIT_BLOCK, NULL, length, pages);
 
 	kfree(data);
+=======
+	actor = squashfs_page_actor_init(data, pages, length);
+	if (actor == NULL) {
+		res = -ENOMEM;
+		goto failed2;
+	}
+
+	for (i = 0; i < pages; i++, buffer += PAGE_CACHE_SIZE)
+		data[i] = buffer;
+
+	res = squashfs_read_data(sb, block, length |
+		SQUASHFS_COMPRESSED_BIT_BLOCK, NULL, actor);
+
+	kfree(data);
+	kfree(actor);
+>>>>>>> v3.18
 
 	if (res < 0)
 		goto failed;
 
 	return table;
 
+<<<<<<< HEAD
+=======
+failed2:
+	kfree(data);
+>>>>>>> v3.18
 failed:
 	kfree(table);
 	return ERR_PTR(res);

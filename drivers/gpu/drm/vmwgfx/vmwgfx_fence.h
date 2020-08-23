@@ -27,6 +27,11 @@
 
 #ifndef _VMWGFX_FENCE_H_
 
+<<<<<<< HEAD
+=======
+#include <linux/fence.h>
+
+>>>>>>> v3.18
 #define VMW_FENCE_WAIT_TIMEOUT (5*HZ)
 
 struct vmw_private;
@@ -50,6 +55,7 @@ struct vmw_fence_action {
 };
 
 struct vmw_fence_obj {
+<<<<<<< HEAD
 	struct kref kref;
 	u32 seqno;
 
@@ -60,6 +66,13 @@ struct vmw_fence_obj {
 	struct list_head seq_passed_actions;
 	void (*destroy)(struct vmw_fence_obj *fence);
 	wait_queue_head_t queue;
+=======
+	struct fence base;
+
+	struct list_head head;
+	struct list_head seq_passed_actions;
+	void (*destroy)(struct vmw_fence_obj *fence);
+>>>>>>> v3.18
 };
 
 extern struct vmw_fence_manager *
@@ -67,6 +80,7 @@ vmw_fence_manager_init(struct vmw_private *dev_priv);
 
 extern void vmw_fence_manager_takedown(struct vmw_fence_manager *fman);
 
+<<<<<<< HEAD
 extern void vmw_fence_obj_unreference(struct vmw_fence_obj **fence_p);
 
 extern struct vmw_fence_obj *
@@ -78,6 +92,31 @@ extern bool vmw_fence_obj_signaled(struct vmw_fence_obj *fence,
 				   uint32_t flags);
 
 extern int vmw_fence_obj_wait(struct vmw_fence_obj *fence, uint32_t flags,
+=======
+static inline void
+vmw_fence_obj_unreference(struct vmw_fence_obj **fence_p)
+{
+	struct vmw_fence_obj *fence = *fence_p;
+
+	*fence_p = NULL;
+	if (fence)
+		fence_put(&fence->base);
+}
+
+static inline struct vmw_fence_obj *
+vmw_fence_obj_reference(struct vmw_fence_obj *fence)
+{
+	if (fence)
+		fence_get(&fence->base);
+	return fence;
+}
+
+extern void vmw_fences_update(struct vmw_fence_manager *fman);
+
+extern bool vmw_fence_obj_signaled(struct vmw_fence_obj *fence);
+
+extern int vmw_fence_obj_wait(struct vmw_fence_obj *fence,
+>>>>>>> v3.18
 			      bool lazy,
 			      bool interruptible, unsigned long timeout);
 
@@ -85,13 +124,19 @@ extern void vmw_fence_obj_flush(struct vmw_fence_obj *fence);
 
 extern int vmw_fence_create(struct vmw_fence_manager *fman,
 			    uint32_t seqno,
+<<<<<<< HEAD
 			    uint32_t mask,
+=======
+>>>>>>> v3.18
 			    struct vmw_fence_obj **p_fence);
 
 extern int vmw_user_fence_create(struct drm_file *file_priv,
 				 struct vmw_fence_manager *fman,
 				 uint32_t sequence,
+<<<<<<< HEAD
 				 uint32_t mask,
+=======
+>>>>>>> v3.18
 				 struct vmw_fence_obj **p_fence,
 				 uint32_t *p_handle);
 

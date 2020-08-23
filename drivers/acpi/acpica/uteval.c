@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -68,7 +72,11 @@ ACPI_MODULE_NAME("uteval")
  ******************************************************************************/
 
 acpi_status
+<<<<<<< HEAD
 acpi_ut_evaluate_object(struct acpi_namespace_node * prefix_node,
+=======
+acpi_ut_evaluate_object(struct acpi_namespace_node *prefix_node,
+>>>>>>> v3.18
 			char *path,
 			u32 expected_return_btypes,
 			union acpi_operand_object **return_desc)
@@ -87,7 +95,11 @@ acpi_ut_evaluate_object(struct acpi_namespace_node * prefix_node,
 	}
 
 	info->prefix_node = prefix_node;
+<<<<<<< HEAD
 	info->pathname = path;
+=======
+	info->relative_pathname = path;
+>>>>>>> v3.18
 
 	/* Evaluate the object/method */
 
@@ -123,22 +135,42 @@ acpi_ut_evaluate_object(struct acpi_namespace_node * prefix_node,
 
 	switch ((info->return_object)->common.type) {
 	case ACPI_TYPE_INTEGER:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		return_btype = ACPI_BTYPE_INTEGER;
 		break;
 
 	case ACPI_TYPE_BUFFER:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		return_btype = ACPI_BTYPE_BUFFER;
 		break;
 
 	case ACPI_TYPE_STRING:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		return_btype = ACPI_BTYPE_STRING;
 		break;
 
 	case ACPI_TYPE_PACKAGE:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		return_btype = ACPI_BTYPE_PACKAGE;
 		break;
 
 	default:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 		return_btype = 0;
 		break;
 	}
@@ -176,7 +208,11 @@ acpi_ut_evaluate_object(struct acpi_namespace_node * prefix_node,
 
 	*return_desc = info->return_object;
 
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 	ACPI_FREE(info);
 	return_ACPI_STATUS(status);
 }
@@ -234,7 +270,12 @@ acpi_ut_evaluate_numeric_object(char *object_name,
  * RETURN:      Status
  *
  * DESCRIPTION: Executes _STA for selected device and stores results in
+<<<<<<< HEAD
  *              *Flags.
+=======
+ *              *Flags. If _STA does not exist, then the device is assumed
+ *              to be present/functional/enabled (as per the ACPI spec).
+>>>>>>> v3.18
  *
  *              NOTE: Internal function, no parameter validation
  *
@@ -252,6 +293,14 @@ acpi_ut_execute_STA(struct acpi_namespace_node *device_node, u32 * flags)
 					 ACPI_BTYPE_INTEGER, &obj_desc);
 	if (ACPI_FAILURE(status)) {
 		if (AE_NOT_FOUND == status) {
+<<<<<<< HEAD
+=======
+			/*
+			 * if _STA does not exist, then (as per the ACPI specification),
+			 * the returned flags will indicate that the device is present,
+			 * functional, and enabled.
+			 */
+>>>>>>> v3.18
 			ACPI_DEBUG_PRINT((ACPI_DB_EXEC,
 					  "_STA on %4.4s was not found, assuming device is present\n",
 					  acpi_ut_get_node_name(device_node)));

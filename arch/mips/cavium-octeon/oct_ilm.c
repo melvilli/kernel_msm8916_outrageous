@@ -194,8 +194,12 @@ err_irq:
 static __exit void oct_ilm_module_exit(void)
 {
 	disable_timer(TIMER_NUM);
+<<<<<<< HEAD
 	if (dir)
 		debugfs_remove_recursive(dir);
+=======
+	debugfs_remove_recursive(dir);
+>>>>>>> v3.18
 	free_irq(OCTEON_IRQ_TIMER0 + TIMER_NUM, 0);
 }
 

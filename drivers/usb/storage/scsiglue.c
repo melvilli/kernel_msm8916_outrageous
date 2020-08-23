@@ -241,7 +241,11 @@ static int slave_configure(struct scsi_device *sdev)
 
 		/* Some USB cardreaders have trouble reading an sdcard's last
 		 * sector in a larger then 1 sector read, since the performance
+<<<<<<< HEAD
 		 * impact is negible we set this flag for all USB disks */
+=======
+		 * impact is negligible we set this flag for all USB disks */
+>>>>>>> v3.18
 		sdev->last_sector_bug = 1;
 
 		/* Enable last-sector hacks for single-target devices using
@@ -256,10 +260,16 @@ static int slave_configure(struct scsi_device *sdev)
 		if (us->fflags & US_FL_WRITE_CACHE)
 			sdev->wce_default_on = 1;
 
+<<<<<<< HEAD
 		if (us->sdev_autosuspend_delay >= 0) {
 			sdev->use_rpm_auto = 1;
 			sdev->autosuspend_delay = us->sdev_autosuspend_delay;
 		}
+=======
+		/* A few buggy USB-ATA bridges don't understand FUA */
+		if (us->fflags & US_FL_BROKEN_FUA)
+			sdev->broken_fua = 1;
+>>>>>>> v3.18
 
 	} else {
 
@@ -329,7 +339,11 @@ static int queuecommand_lck(struct scsi_cmnd *srb,
 
 	/* check for state-transition errors */
 	if (us->srb != NULL) {
+<<<<<<< HEAD
 		printk(KERN_ERR USB_STORAGE "Error in %s: us->srb = %pK\n",
+=======
+		printk(KERN_ERR USB_STORAGE "Error in %s: us->srb = %p\n",
+>>>>>>> v3.18
 			__func__, us->srb);
 		return SCSI_MLQUEUE_HOST_BUSY;
 	}
@@ -510,7 +524,11 @@ US_DO_ALL_FLAGS
  ***********************************************************************/
 
 /* Output routine for the sysfs max_sectors file */
+<<<<<<< HEAD
 static ssize_t show_max_sectors(struct device *dev, struct device_attribute *attr, char *buf)
+=======
+static ssize_t max_sectors_show(struct device *dev, struct device_attribute *attr, char *buf)
+>>>>>>> v3.18
 {
 	struct scsi_device *sdev = to_scsi_device(dev);
 
@@ -518,7 +536,11 @@ static ssize_t show_max_sectors(struct device *dev, struct device_attribute *att
 }
 
 /* Input routine for the sysfs max_sectors file */
+<<<<<<< HEAD
 static ssize_t store_max_sectors(struct device *dev, struct device_attribute *attr, const char *buf,
+=======
+static ssize_t max_sectors_store(struct device *dev, struct device_attribute *attr, const char *buf,
+>>>>>>> v3.18
 		size_t count)
 {
 	struct scsi_device *sdev = to_scsi_device(dev);
@@ -528,6 +550,7 @@ static ssize_t store_max_sectors(struct device *dev, struct device_attribute *at
 		blk_queue_max_hw_sectors(sdev->request_queue, ms);
 		return count;
 	}
+<<<<<<< HEAD
 	return -EINVAL;	
 }
 
@@ -538,6 +561,16 @@ static struct device_attribute *sysfs_device_attr_list[] = {
 		&dev_attr_max_sectors,
 		NULL,
 		};
+=======
+	return -EINVAL;
+}
+static DEVICE_ATTR_RW(max_sectors);
+
+static struct device_attribute *sysfs_device_attr_list[] = {
+	&dev_attr_max_sectors,
+	NULL,
+};
+>>>>>>> v3.18
 
 /*
  * this defines our host template, with which we'll allocate hosts

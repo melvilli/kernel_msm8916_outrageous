@@ -18,6 +18,10 @@
 #include <linux/init.h>
 #include <linux/irq.h>
 #include <linux/of.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+>>>>>>> v3.18
 #include <asm/io.h>
 
 #include "flipper-pic.h"

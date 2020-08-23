@@ -49,6 +49,7 @@ static ssize_t mlog_mask_show(u64 mask, char *buf)
 
 static ssize_t mlog_mask_store(u64 mask, const char *buf, size_t count)
 {
+<<<<<<< HEAD
 	if (!strnicmp(buf, "allow", 5)) {
 		__mlog_set_u64(mask, mlog_and_bits);
 		__mlog_clear_u64(mask, mlog_not_bits);
@@ -56,6 +57,15 @@ static ssize_t mlog_mask_store(u64 mask, const char *buf, size_t count)
 		__mlog_set_u64(mask, mlog_not_bits);
 		__mlog_clear_u64(mask, mlog_and_bits);
 	} else if (!strnicmp(buf, "off", 3)) {
+=======
+	if (!strncasecmp(buf, "allow", 5)) {
+		__mlog_set_u64(mask, mlog_and_bits);
+		__mlog_clear_u64(mask, mlog_not_bits);
+	} else if (!strncasecmp(buf, "deny", 4)) {
+		__mlog_set_u64(mask, mlog_not_bits);
+		__mlog_clear_u64(mask, mlog_and_bits);
+	} else if (!strncasecmp(buf, "off", 3)) {
+>>>>>>> v3.18
 		__mlog_clear_u64(mask, mlog_not_bits);
 		__mlog_clear_u64(mask, mlog_and_bits);
 	} else

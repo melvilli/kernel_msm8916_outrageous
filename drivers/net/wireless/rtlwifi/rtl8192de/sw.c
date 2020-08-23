@@ -30,6 +30,10 @@
 #include "../wifi.h"
 #include "../core.h"
 #include "../pci.h"
+<<<<<<< HEAD
+=======
+#include "../base.h"
+>>>>>>> v3.18
 #include "reg.h"
 #include "def.h"
 #include "phy.h"
@@ -236,7 +240,11 @@ static struct rtl_hal_ops rtl8192de_hal_ops = {
 	.set_bw_mode = rtl92d_phy_set_bw_mode,
 	.switch_channel = rtl92d_phy_sw_chnl,
 	.dm_watchdog = rtl92d_dm_watchdog,
+<<<<<<< HEAD
 	.scan_operation_backup = rtl92d_phy_scan_operation_backup,
+=======
+	.scan_operation_backup = rtl_phy_scan_operation_backup,
+>>>>>>> v3.18
 	.set_rf_power_state = rtl92d_phy_set_rf_power_state,
 	.led_control = rtl92de_led_control,
 	.set_desc = rtl92de_set_desc,
@@ -250,6 +258,10 @@ static struct rtl_hal_ops rtl8192de_hal_ops = {
 	.get_rfreg = rtl92d_phy_query_rf_reg,
 	.set_rfreg = rtl92d_phy_set_rf_reg,
 	.linked_set_reg = rtl92d_linked_set_reg,
+<<<<<<< HEAD
+=======
+	.get_btc_status = rtl_btc_status_false,
+>>>>>>> v3.18
 };
 
 static struct rtl_mod_params rtl92de_mod_params = {

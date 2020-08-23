@@ -8,7 +8,10 @@
  * Copyright (C) 2008  Thiemo Seufer
  * Copyright (C) 2012  MIPS Technologies, Inc.
  */
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/sched.h>
 #include <linux/smp.h>
@@ -18,6 +21,10 @@
 
 #include <asm/bugs.h>
 #include <asm/cacheops.h>
+<<<<<<< HEAD
+=======
+#include <asm/cpu-type.h>
+>>>>>>> v3.18
 #include <asm/inst.h>
 #include <asm/io.h>
 #include <asm/page.h>
@@ -66,12 +73,18 @@ UASM_L_LA(_copy_pref_both)
 UASM_L_LA(_copy_pref_store)
 
 /* We need one branch and therefore one relocation per target label. */
+<<<<<<< HEAD
 static struct uasm_label __cpuinitdata labels[5];
 static struct uasm_reloc __cpuinitdata relocs[5];
+=======
+static struct uasm_label labels[5];
+static struct uasm_reloc relocs[5];
+>>>>>>> v3.18
 
 #define cpu_is_r4600_v1_x()	((read_c0_prid() & 0xfffffff0) == 0x00002010)
 #define cpu_is_r4600_v2_x()	((read_c0_prid() & 0xfffffff0) == 0x00002020)
 
+<<<<<<< HEAD
 static int pref_bias_clear_store __cpuinitdata;
 static int pref_bias_copy_load __cpuinitdata;
 static int pref_bias_copy_store __cpuinitdata;
@@ -89,6 +102,25 @@ static int cache_line_size __cpuinitdata;
 #define cache_line_mask() (cache_line_size - 1)
 
 static inline void __cpuinit
+=======
+static int pref_bias_clear_store;
+static int pref_bias_copy_load;
+static int pref_bias_copy_store;
+
+static u32 pref_src_mode;
+static u32 pref_dst_mode;
+
+static int clear_word_size;
+static int copy_word_size;
+
+static int half_clear_loop_size;
+static int half_copy_loop_size;
+
+static int cache_line_size;
+#define cache_line_mask() (cache_line_size - 1)
+
+static inline void
+>>>>>>> v3.18
 pg_addiu(u32 **buf, unsigned int reg1, unsigned int reg2, unsigned int off)
 {
 	if (cpu_has_64bit_gp_regs && DADDI_WAR && r4k_daddiu_bug()) {
@@ -108,7 +140,11 @@ pg_addiu(u32 **buf, unsigned int reg1, unsigned int reg2, unsigned int off)
 	}
 }
 
+<<<<<<< HEAD
 static void __cpuinit set_prefetch_parameters(void)
+=======
+static void set_prefetch_parameters(void)
+>>>>>>> v3.18
 {
 	if (cpu_has_64bit_gp_regs || cpu_has_64bit_zero_reg)
 		clear_word_size = 8;
@@ -199,7 +235,11 @@ static void __cpuinit set_prefetch_parameters(void)
 				      4 * copy_word_size));
 }
 
+<<<<<<< HEAD
 static void __cpuinit build_clear_store(u32 **buf, int off)
+=======
+static void build_clear_store(u32 **buf, int off)
+>>>>>>> v3.18
 {
 	if (cpu_has_64bit_gp_regs || cpu_has_64bit_zero_reg) {
 		uasm_i_sd(buf, ZERO, off, A0);
@@ -208,7 +248,11 @@ static void __cpuinit build_clear_store(u32 **buf, int off)
 	}
 }
 
+<<<<<<< HEAD
 static inline void __cpuinit build_clear_pref(u32 **buf, int off)
+=======
+static inline void build_clear_pref(u32 **buf, int off)
+>>>>>>> v3.18
 {
 	if (off & cache_line_mask())
 		return;
@@ -232,7 +276,11 @@ static inline void __cpuinit build_clear_pref(u32 **buf, int off)
 
 			uasm_i_cache(buf, Create_Dirty_Excl_D, off, A0);
 		}
+<<<<<<< HEAD
 		}
+=======
+	}
+>>>>>>> v3.18
 }
 
 extern u32 __clear_page_start;
@@ -240,7 +288,11 @@ extern u32 __clear_page_end;
 extern u32 __copy_page_start;
 extern u32 __copy_page_end;
 
+<<<<<<< HEAD
 void __cpuinit build_clear_page(void)
+=======
+void build_clear_page(void)
+>>>>>>> v3.18
 {
 	int off;
 	u32 *buf = &__clear_page_start;
@@ -273,7 +325,11 @@ void __cpuinit build_clear_page(void)
 		uasm_i_ori(&buf, A2, A0, off);
 
 	if (R4600_V2_HIT_CACHEOP_WAR && cpu_is_r4600_v2_x())
+<<<<<<< HEAD
 		uasm_i_lui(&buf, AT, 0xa000);
+=======
+		uasm_i_lui(&buf, AT, uasm_rel_hi(0xa0000000));
+>>>>>>> v3.18
 
 	off = cache_line_size ? min(8, pref_bias_clear_store / cache_line_size)
 				* cache_line_size : 0;
@@ -333,7 +389,11 @@ void __cpuinit build_clear_page(void)
 	pr_debug("\t.set pop\n");
 }
 
+<<<<<<< HEAD
 static void __cpuinit build_copy_load(u32 **buf, int reg, int off)
+=======
+static void build_copy_load(u32 **buf, int reg, int off)
+>>>>>>> v3.18
 {
 	if (cpu_has_64bit_gp_regs) {
 		uasm_i_ld(buf, reg, off, A1);
@@ -342,7 +402,11 @@ static void __cpuinit build_copy_load(u32 **buf, int reg, int off)
 	}
 }
 
+<<<<<<< HEAD
 static void __cpuinit build_copy_store(u32 **buf, int reg, int off)
+=======
+static void build_copy_store(u32 **buf, int reg, int off)
+>>>>>>> v3.18
 {
 	if (cpu_has_64bit_gp_regs) {
 		uasm_i_sd(buf, reg, off, A0);
@@ -387,7 +451,11 @@ static inline void build_copy_store_pref(u32 **buf, int off)
 	}
 }
 
+<<<<<<< HEAD
 void __cpuinit build_copy_page(void)
+=======
+void build_copy_page(void)
+>>>>>>> v3.18
 {
 	int off;
 	u32 *buf = &__copy_page_start;
@@ -424,7 +492,11 @@ void __cpuinit build_copy_page(void)
 		uasm_i_ori(&buf, A2, A0, off);
 
 	if (R4600_V2_HIT_CACHEOP_WAR && cpu_is_r4600_v2_x())
+<<<<<<< HEAD
 		uasm_i_lui(&buf, AT, 0xa000);
+=======
+		uasm_i_lui(&buf, AT, uasm_rel_hi(0xa0000000));
+>>>>>>> v3.18
 
 	off = cache_line_size ? min(8, pref_bias_copy_load / cache_line_size) *
 				cache_line_size : 0;

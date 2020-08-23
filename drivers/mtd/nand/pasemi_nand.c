@@ -23,11 +23,19 @@
 #undef DEBUG
 
 #include <linux/slab.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/mtd/mtd.h>
 #include <linux/mtd/nand.h>
 #include <linux/mtd/nand_ecc.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 #include <linux/of_platform.h>
 #include <linux/platform_device.h>
 #include <linux/pci.h>
@@ -221,7 +229,11 @@ MODULE_DEVICE_TABLE(of, pasemi_nand_match);
 static struct platform_driver pasemi_nand_driver =
 {
 	.driver = {
+<<<<<<< HEAD
 		.name = (char*)driver_name,
+=======
+		.name = driver_name,
+>>>>>>> v3.18
 		.owner = THIS_MODULE,
 		.of_match_table = pasemi_nand_match,
 	},

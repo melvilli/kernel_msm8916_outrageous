@@ -204,7 +204,11 @@ mptfc_block_error_handler(struct scsi_cmnd *SCpnt,
 	 || (loops > 0 && ioc->active == 0)) {
 		spin_unlock_irqrestore(shost->host_lock, flags);
 		dfcprintk (ioc, printk(MYIOC_s_DEBUG_FMT
+<<<<<<< HEAD
 			"mptfc_block_error_handler.%d: %d:%d, port status is "
+=======
+			"mptfc_block_error_handler.%d: %d:%llu, port status is "
+>>>>>>> v3.18
 			"%x, active flag %d, deferring %s recovery.\n",
 			ioc->name, ioc->sh->host_no,
 			SCpnt->device->id, SCpnt->device->lun,
@@ -218,7 +222,11 @@ mptfc_block_error_handler(struct scsi_cmnd *SCpnt,
 	if (ready == DID_NO_CONNECT || !SCpnt->device->hostdata
 	 || ioc->active == 0) {
 		dfcprintk (ioc, printk(MYIOC_s_DEBUG_FMT
+<<<<<<< HEAD
 			"%s.%d: %d:%d, failing recovery, "
+=======
+			"%s.%d: %d:%llu, failing recovery, "
+>>>>>>> v3.18
 			"port state %x, active %d, vdevice %p.\n", caller,
 			ioc->name, ioc->sh->host_no,
 			SCpnt->device->id, SCpnt->device->lun, ready,
@@ -226,7 +234,11 @@ mptfc_block_error_handler(struct scsi_cmnd *SCpnt,
 		return FAILED;
 	}
 	dfcprintk (ioc, printk(MYIOC_s_DEBUG_FMT
+<<<<<<< HEAD
 		"%s.%d: %d:%d, executing recovery.\n", caller,
+=======
+		"%s.%d: %d:%llu, executing recovery.\n", caller,
+>>>>>>> v3.18
 		ioc->name, ioc->sh->host_no,
 		SCpnt->device->id, SCpnt->device->lun));
 	return (*func)(SCpnt);
@@ -525,8 +537,12 @@ mptfc_target_destroy(struct scsi_target *starget)
 		if (ri)	/* better be! */
 			ri->starget = NULL;
 	}
+<<<<<<< HEAD
 	if (starget->hostdata)
 		kfree(starget->hostdata);
+=======
+	kfree(starget->hostdata);
+>>>>>>> v3.18
 	starget->hostdata = NULL;
 }
 
@@ -649,7 +665,11 @@ mptfc_slave_alloc(struct scsi_device *sdev)
 }
 
 static int
+<<<<<<< HEAD
 mptfc_qcmd_lck(struct scsi_cmnd *SCpnt, void (*done)(struct scsi_cmnd *))
+=======
+mptfc_qcmd(struct Scsi_Host *shost, struct scsi_cmnd *SCpnt)
+>>>>>>> v3.18
 {
 	struct mptfc_rport_info	*ri;
 	struct fc_rport	*rport = starget_to_rport(scsi_target(SCpnt->device));
@@ -658,14 +678,22 @@ mptfc_qcmd_lck(struct scsi_cmnd *SCpnt, void (*done)(struct scsi_cmnd *))
 
 	if (!vdevice || !vdevice->vtarget) {
 		SCpnt->result = DID_NO_CONNECT << 16;
+<<<<<<< HEAD
 		done(SCpnt);
+=======
+		SCpnt->scsi_done(SCpnt);
+>>>>>>> v3.18
 		return 0;
 	}
 
 	err = fc_remote_port_chkready(rport);
 	if (unlikely(err)) {
 		SCpnt->result = err;
+<<<<<<< HEAD
 		done(SCpnt);
+=======
+		SCpnt->scsi_done(SCpnt);
+>>>>>>> v3.18
 		return 0;
 	}
 
@@ -673,6 +701,7 @@ mptfc_qcmd_lck(struct scsi_cmnd *SCpnt, void (*done)(struct scsi_cmnd *))
 	ri = *((struct mptfc_rport_info **)rport->dd_data);
 	if (unlikely(!ri)) {
 		SCpnt->result = DID_IMM_RETRY << 16;
+<<<<<<< HEAD
 		done(SCpnt);
 		return 0;
 	}
@@ -682,6 +711,15 @@ mptfc_qcmd_lck(struct scsi_cmnd *SCpnt, void (*done)(struct scsi_cmnd *))
 
 static DEF_SCSI_QCMD(mptfc_qcmd)
 
+=======
+		SCpnt->scsi_done(SCpnt);
+		return 0;
+	}
+
+	return mptscsih_qcmd(SCpnt);
+}
+
+>>>>>>> v3.18
 /*
  *	mptfc_display_port_link_speed - displaying link speed
  *	@ioc: Pointer to MPT_ADAPTER structure

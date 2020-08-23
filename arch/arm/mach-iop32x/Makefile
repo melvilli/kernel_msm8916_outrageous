@@ -3,9 +3,12 @@
 #
 
 obj-y			:= irq.o
+<<<<<<< HEAD
 obj-m			:=
 obj-n			:=
 obj-			:=
+=======
+>>>>>>> v3.18
 
 obj-$(CONFIG_MACH_GLANTANK) += glantank.o
 obj-$(CONFIG_ARCH_IQ80321) += iq80321.o

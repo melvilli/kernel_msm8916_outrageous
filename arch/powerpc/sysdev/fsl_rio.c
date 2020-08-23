@@ -28,6 +28,11 @@
 #include <linux/dma-mapping.h>
 #include <linux/interrupt.h>
 #include <linux/device.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 #include <linux/of_platform.h>
 #include <linux/delay.h>
 #include <linux/slab.h>
@@ -389,8 +394,15 @@ int fsl_rio_setup(struct platform_device *dev)
 	ops->get_inb_message = fsl_get_inb_message;
 
 	rmu_node = of_parse_phandle(dev->dev.of_node, "fsl,srio-rmu-handle", 0);
+<<<<<<< HEAD
 	if (!rmu_node)
 		goto err_rmu;
+=======
+	if (!rmu_node) {
+		dev_err(&dev->dev, "No valid fsl,srio-rmu-handle property\n");
+		goto err_rmu;
+	}
+>>>>>>> v3.18
 	rc = of_address_to_resource(rmu_node, 0, &rmu_regs);
 	if (rc) {
 		dev_err(&dev->dev, "Can't get %s property 'reg'\n",
@@ -411,6 +423,10 @@ int fsl_rio_setup(struct platform_device *dev)
 	/*set up doobell node*/
 	np = of_find_compatible_node(NULL, NULL, "fsl,srio-dbell-unit");
 	if (!np) {
+<<<<<<< HEAD
+=======
+		dev_err(&dev->dev, "No fsl,srio-dbell-unit node\n");
+>>>>>>> v3.18
 		rc = -ENODEV;
 		goto err_dbell;
 	}
@@ -439,6 +455,10 @@ int fsl_rio_setup(struct platform_device *dev)
 	/*set up port write node*/
 	np = of_find_compatible_node(NULL, NULL, "fsl,srio-port-write-unit");
 	if (!np) {
+<<<<<<< HEAD
+=======
+		dev_err(&dev->dev, "No fsl,srio-port-write-unit node\n");
+>>>>>>> v3.18
 		rc = -ENODEV;
 		goto err_pw;
 	}
@@ -529,6 +549,10 @@ int fsl_rio_setup(struct platform_device *dev)
 		sprintf(port->name, "RIO mport %d", i);
 
 		priv->dev = &dev->dev;
+<<<<<<< HEAD
+=======
+		port->dev.parent = &dev->dev;
+>>>>>>> v3.18
 		port->ops = ops;
 		port->priv = priv;
 		port->phys_efptr = 0x100;
@@ -630,14 +654,28 @@ int fsl_rio_setup(struct platform_device *dev)
 	return 0;
 err:
 	kfree(pw);
+<<<<<<< HEAD
 err_pw:
 	kfree(dbell);
 err_dbell:
 	iounmap(rmu_regs_win);
+=======
+	pw = NULL;
+err_pw:
+	kfree(dbell);
+	dbell = NULL;
+err_dbell:
+	iounmap(rmu_regs_win);
+	rmu_regs_win = NULL;
+>>>>>>> v3.18
 err_rmu:
 	kfree(ops);
 err_ops:
 	iounmap(rio_regs_win);
+<<<<<<< HEAD
+=======
+	rio_regs_win = NULL;
+>>>>>>> v3.18
 err_rio_regs:
 	return rc;
 }

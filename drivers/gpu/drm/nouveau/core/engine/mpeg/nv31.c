@@ -24,7 +24,10 @@
 
 #include <core/client.h>
 #include <core/os.h>
+<<<<<<< HEAD
 #include <core/class.h>
+=======
+>>>>>>> v3.18
 #include <core/engctx.h>
 #include <core/handle.h>
 
@@ -34,6 +37,7 @@
 
 #include <engine/fifo.h>
 #include <engine/mpeg.h>
+<<<<<<< HEAD
 #include <engine/graph/nv40.h>
 
 struct nv31_mpeg_priv {
@@ -44,6 +48,9 @@ struct nv31_mpeg_priv {
 struct nv31_mpeg_chan {
 	struct nouveau_object base;
 };
+=======
+#include <engine/mpeg/nv31.h>
+>>>>>>> v3.18
 
 /*******************************************************************************
  * MPEG object classes
@@ -89,18 +96,30 @@ nv31_mpeg_mthd_dma(struct nouveau_object *object, u32 mthd, void *arg, u32 len)
 
 	if (mthd == 0x0190) {
 		/* DMA_CMD */
+<<<<<<< HEAD
 		nv_mask(priv, 0x00b300, 0x00030000, (dma0 & 0x00030000));
+=======
+		nv_mask(priv, 0x00b300, 0x00010000, (dma0 & 0x00030000) ? 0x00010000 : 0);
+>>>>>>> v3.18
 		nv_wr32(priv, 0x00b334, base);
 		nv_wr32(priv, 0x00b324, size);
 	} else
 	if (mthd == 0x01a0) {
 		/* DMA_DATA */
+<<<<<<< HEAD
 		nv_mask(priv, 0x00b300, 0x000c0000, (dma0 & 0x00030000) << 2);
+=======
+		nv_mask(priv, 0x00b300, 0x00020000, (dma0 & 0x00030000) ? 0x00020000 : 0);
+>>>>>>> v3.18
 		nv_wr32(priv, 0x00b360, base);
 		nv_wr32(priv, 0x00b364, size);
 	} else {
 		/* DMA_IMAGE, VRAM only */
+<<<<<<< HEAD
 		if (dma0 & 0x000c0000)
+=======
+		if (dma0 & 0x00030000)
+>>>>>>> v3.18
 			return -EINVAL;
 
 		nv_wr32(priv, 0x00b370, base);
@@ -110,7 +129,11 @@ nv31_mpeg_mthd_dma(struct nouveau_object *object, u32 mthd, void *arg, u32 len)
 	return 0;
 }
 
+<<<<<<< HEAD
 static struct nouveau_ofuncs
+=======
+struct nouveau_ofuncs
+>>>>>>> v3.18
 nv31_mpeg_ofuncs = {
 	.ctor = nv31_mpeg_object_ctor,
 	.dtor = _nouveau_gpuobj_dtor,
@@ -146,16 +169,34 @@ nv31_mpeg_context_ctor(struct nouveau_object *parent,
 {
 	struct nv31_mpeg_priv *priv = (void *)engine;
 	struct nv31_mpeg_chan *chan;
+<<<<<<< HEAD
 	int ret;
 
 	if (!atomic_add_unless(&priv->refcount, 1, 1))
 		return -EBUSY;
 
+=======
+	unsigned long flags;
+	int ret;
+
+>>>>>>> v3.18
 	ret = nouveau_object_create(parent, engine, oclass, 0, &chan);
 	*pobject = nv_object(chan);
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
+=======
+	spin_lock_irqsave(&nv_engine(priv)->lock, flags);
+	if (priv->chan) {
+		spin_unlock_irqrestore(&nv_engine(priv)->lock, flags);
+		nouveau_object_destroy(&chan->base);
+		*pobject = NULL;
+		return -EBUSY;
+	}
+	priv->chan = chan;
+	spin_unlock_irqrestore(&nv_engine(priv)->lock, flags);
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -164,11 +205,23 @@ nv31_mpeg_context_dtor(struct nouveau_object *object)
 {
 	struct nv31_mpeg_priv *priv = (void *)object->engine;
 	struct nv31_mpeg_chan *chan = (void *)object;
+<<<<<<< HEAD
 	atomic_dec(&priv->refcount);
 	nouveau_object_destroy(&chan->base);
 }
 
 static struct nouveau_oclass
+=======
+	unsigned long flags;
+
+	spin_lock_irqsave(&nv_engine(priv)->lock, flags);
+	priv->chan = NULL;
+	spin_unlock_irqrestore(&nv_engine(priv)->lock, flags);
+	nouveau_object_destroy(&chan->base);
+}
+
+struct nouveau_oclass
+>>>>>>> v3.18
 nv31_mpeg_cclass = {
 	.handle = NV_ENGCTX(MPEG, 0x31),
 	.ofuncs = &(struct nouveau_ofuncs) {
@@ -197,21 +250,35 @@ nv31_mpeg_tile_prog(struct nouveau_engine *engine, int i)
 void
 nv31_mpeg_intr(struct nouveau_subdev *subdev)
 {
+<<<<<<< HEAD
 	struct nouveau_fifo *pfifo = nouveau_fifo(subdev);
 	struct nouveau_engine *engine = nv_engine(subdev);
 	struct nouveau_object *engctx;
 	struct nouveau_handle *handle;
 	struct nv31_mpeg_priv *priv = (void *)subdev;
 	u32 inst = nv_rd32(priv, 0x00b318) & 0x000fffff;
+=======
+	struct nv31_mpeg_priv *priv = (void *)subdev;
+	struct nouveau_fifo *pfifo = nouveau_fifo(subdev);
+	struct nouveau_handle *handle;
+	struct nouveau_object *engctx;
+>>>>>>> v3.18
 	u32 stat = nv_rd32(priv, 0x00b100);
 	u32 type = nv_rd32(priv, 0x00b230);
 	u32 mthd = nv_rd32(priv, 0x00b234);
 	u32 data = nv_rd32(priv, 0x00b238);
 	u32 show = stat;
+<<<<<<< HEAD
 	int chid;
 
 	engctx = nouveau_engctx_get(engine, inst);
 	chid   = pfifo->chid(pfifo, engctx);
+=======
+	unsigned long flags;
+
+	spin_lock_irqsave(&nv_engine(priv)->lock, flags);
+	engctx = nv_object(priv->chan);
+>>>>>>> v3.18
 
 	if (stat & 0x01000000) {
 		/* happens on initial binding of the object */
@@ -220,7 +287,11 @@ nv31_mpeg_intr(struct nouveau_subdev *subdev)
 			show &= ~0x01000000;
 		}
 
+<<<<<<< HEAD
 		if (type == 0x00000010) {
+=======
+		if (type == 0x00000010 && engctx) {
+>>>>>>> v3.18
 			handle = nouveau_handle_get_class(engctx, 0x3174);
 			if (handle && !nv_call(handle->object, mthd, data))
 				show &= ~0x01000000;
@@ -232,6 +303,7 @@ nv31_mpeg_intr(struct nouveau_subdev *subdev)
 	nv_wr32(priv, 0x00b230, 0x00000001);
 
 	if (show) {
+<<<<<<< HEAD
 		nv_error(priv,
 			 "ch %d [0x%08x %s] 0x%08x 0x%08x 0x%08x 0x%08x\n",
 			 chid, inst << 4, nouveau_client_name(engctx), stat,
@@ -239,6 +311,14 @@ nv31_mpeg_intr(struct nouveau_subdev *subdev)
 	}
 
 	nouveau_engctx_put(engctx);
+=======
+		nv_error(priv, "ch %d [%s] 0x%08x 0x%08x 0x%08x 0x%08x\n",
+			 pfifo->chid(pfifo, engctx),
+			 nouveau_client_name(engctx), stat, type, mthd, data);
+	}
+
+	spin_unlock_irqrestore(&nv_engine(priv)->lock, flags);
+>>>>>>> v3.18
 }
 
 static int
@@ -265,8 +345,13 @@ nv31_mpeg_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 int
 nv31_mpeg_init(struct nouveau_object *object)
 {
+<<<<<<< HEAD
 	struct nouveau_engine *engine = nv_engine(object->engine);
 	struct nv31_mpeg_priv *priv = (void *)engine;
+=======
+	struct nouveau_engine *engine = nv_engine(object);
+	struct nv31_mpeg_priv *priv = (void *)object;
+>>>>>>> v3.18
 	struct nouveau_fb *pfb = nouveau_fb(object);
 	int ret, i;
 
@@ -284,7 +369,11 @@ nv31_mpeg_init(struct nouveau_object *object)
 	/* PMPEG init */
 	nv_wr32(priv, 0x00b32c, 0x00000000);
 	nv_wr32(priv, 0x00b314, 0x00000100);
+<<<<<<< HEAD
 	nv_wr32(priv, 0x00b220, nv44_graph_class(priv) ? 0x00000044 : 0x00000031);
+=======
+	nv_wr32(priv, 0x00b220, 0x00000031);
+>>>>>>> v3.18
 	nv_wr32(priv, 0x00b300, 0x02001ec1);
 	nv_mask(priv, 0x00b32c, 0x00000001, 0x00000001);
 

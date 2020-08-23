@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -128,6 +132,10 @@ acpi_status acpi_ev_remove_global_lock_handler(void)
 	status = acpi_remove_fixed_event_handler(ACPI_EVENT_GLOBAL,
 						 acpi_ev_global_lock_handler);
 
+<<<<<<< HEAD
+=======
+	acpi_os_delete_lock(acpi_gbl_global_lock_pending_lock);
+>>>>>>> v3.18
 	return_ACPI_STATUS(status);
 }
 
@@ -172,7 +180,11 @@ static u32 acpi_ev_global_lock_handler(void *context)
 
 	acpi_gbl_global_lock_pending = FALSE;
 
+<<<<<<< HEAD
       cleanup_and_exit:
+=======
+cleanup_and_exit:
+>>>>>>> v3.18
 
 	acpi_os_release_lock(acpi_gbl_global_lock_pending_lock, flags);
 	return (ACPI_INTERRUPT_HANDLED);

@@ -14,7 +14,11 @@ static DEFINE_PER_CPU(struct hlist_head, return_notifier_list);
 void user_return_notifier_register(struct user_return_notifier *urn)
 {
 	set_tsk_thread_flag(current, TIF_USER_RETURN_NOTIFY);
+<<<<<<< HEAD
 	hlist_add_head(&urn->link, &__get_cpu_var(return_notifier_list));
+=======
+	hlist_add_head(&urn->link, this_cpu_ptr(&return_notifier_list));
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(user_return_notifier_register);
 
@@ -25,7 +29,11 @@ EXPORT_SYMBOL_GPL(user_return_notifier_register);
 void user_return_notifier_unregister(struct user_return_notifier *urn)
 {
 	hlist_del(&urn->link);
+<<<<<<< HEAD
 	if (hlist_empty(&__get_cpu_var(return_notifier_list)))
+=======
+	if (hlist_empty(this_cpu_ptr(&return_notifier_list)))
+>>>>>>> v3.18
 		clear_tsk_thread_flag(current, TIF_USER_RETURN_NOTIFY);
 }
 EXPORT_SYMBOL_GPL(user_return_notifier_unregister);

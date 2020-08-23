@@ -21,7 +21,10 @@
 #include <linux/irq.h>
 
 #include <asm/traps.h>
+<<<<<<< HEAD
 #include <asm/bootinfo.h>
+=======
+>>>>>>> v3.18
 #include <asm/macintosh.h>
 #include <asm/macints.h>
 #include <asm/mac_psc.h>
@@ -54,7 +57,11 @@ static void psc_debug_dump(void)
  * expanded to cover what I think are the other 7 channels.
  */
 
+<<<<<<< HEAD
 static void psc_dma_die_die_die(void)
+=======
+static __init void psc_dma_die_die_die(void)
+>>>>>>> v3.18
 {
 	int i;
 

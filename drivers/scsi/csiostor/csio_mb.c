@@ -326,6 +326,7 @@ csio_mb_caps_config(struct csio_hw *hw, struct csio_mb *mbp, uint32_t tmo,
 		cmdp->fcoecaps |= htons(FW_CAPS_CONFIG_FCOE_TARGET);
 }
 
+<<<<<<< HEAD
 void
 csio_rss_glb_config(struct csio_hw *hw, struct csio_mb *mbp,
 		    uint32_t tmo, uint8_t mode, unsigned int flags,
@@ -403,6 +404,8 @@ csio_mb_pfvf(struct csio_hw *hw, struct csio_mb *mbp, uint32_t tmo,
 					 FW_PFVF_CMD_NETHCTRL(txq_eth_ctrl));
 }
 
+=======
+>>>>>>> v3.18
 #define CSIO_ADVERT_MASK     (FW_PORT_CAP_SPEED_100M | FW_PORT_CAP_SPEED_1G |\
 			      FW_PORT_CAP_SPEED_10G | FW_PORT_CAP_ANEG)
 

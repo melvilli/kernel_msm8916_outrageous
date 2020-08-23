@@ -60,7 +60,11 @@ struct snd_seq_prioq *snd_seq_prioq_new(void)
 
 	f = kzalloc(sizeof(*f), GFP_KERNEL);
 	if (f == NULL) {
+<<<<<<< HEAD
 		snd_printd("oops: malloc failed for snd_seq_prioq_new()\n");
+=======
+		pr_debug("ALSA: seq: malloc failed for snd_seq_prioq_new()\n");
+>>>>>>> v3.18
 		return NULL;
 	}
 	
@@ -79,7 +83,11 @@ void snd_seq_prioq_delete(struct snd_seq_prioq **fifo)
 	*fifo = NULL;
 
 	if (f == NULL) {
+<<<<<<< HEAD
 		snd_printd("oops: snd_seq_prioq_delete() called with NULL prioq\n");
+=======
+		pr_debug("ALSA: seq: snd_seq_prioq_delete() called with NULL prioq\n");
+>>>>>>> v3.18
 		return;
 	}
 
@@ -197,7 +205,11 @@ int snd_seq_prioq_cell_in(struct snd_seq_prioq * f,
 		cur = cur->next;
 		if (! --count) {
 			spin_unlock_irqrestore(&f->lock, flags);
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "cannot find a pointer.. infinite loop?\n");
+=======
+			pr_err("ALSA: seq: cannot find a pointer.. infinite loop?\n");
+>>>>>>> v3.18
 			return -EINVAL;
 		}
 	}
@@ -223,7 +235,11 @@ struct snd_seq_event_cell *snd_seq_prioq_cell_out(struct snd_seq_prioq *f)
 	unsigned long flags;
 
 	if (f == NULL) {
+<<<<<<< HEAD
 		snd_printd("oops: snd_seq_prioq_cell_in() called with NULL prioq\n");
+=======
+		pr_debug("ALSA: seq: snd_seq_prioq_cell_in() called with NULL prioq\n");
+>>>>>>> v3.18
 		return NULL;
 	}
 	spin_lock_irqsave(&f->lock, flags);
@@ -248,7 +264,11 @@ struct snd_seq_event_cell *snd_seq_prioq_cell_out(struct snd_seq_prioq *f)
 int snd_seq_prioq_avail(struct snd_seq_prioq * f)
 {
 	if (f == NULL) {
+<<<<<<< HEAD
 		snd_printd("oops: snd_seq_prioq_cell_in() called with NULL prioq\n");
+=======
+		pr_debug("ALSA: seq: snd_seq_prioq_cell_in() called with NULL prioq\n");
+>>>>>>> v3.18
 		return 0;
 	}
 	return f->cells;
@@ -259,7 +279,11 @@ int snd_seq_prioq_avail(struct snd_seq_prioq * f)
 struct snd_seq_event_cell *snd_seq_prioq_cell_peek(struct snd_seq_prioq * f)
 {
 	if (f == NULL) {
+<<<<<<< HEAD
 		snd_printd("oops: snd_seq_prioq_cell_in() called with NULL prioq\n");
+=======
+		pr_debug("ALSA: seq: snd_seq_prioq_cell_in() called with NULL prioq\n");
+>>>>>>> v3.18
 		return NULL;
 	}
 	return f->head;
@@ -321,7 +345,11 @@ void snd_seq_prioq_leave(struct snd_seq_prioq * f, int client, int timestamp)
 			freeprev = cell;
 		} else {
 #if 0
+<<<<<<< HEAD
 			printk(KERN_DEBUG "type = %i, source = %i, dest = %i, "
+=======
+			pr_debug("ALSA: seq: type = %i, source = %i, dest = %i, "
+>>>>>>> v3.18
 			       "client = %i\n",
 				cell->event.type,
 				cell->event.source.client,

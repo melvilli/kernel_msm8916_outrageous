@@ -32,6 +32,10 @@
 #include <linux/poll.h>
 #include <asm/epapr_hcalls.h>
 #include <linux/of.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <linux/cdev.h>
 #include <linux/console.h>
@@ -107,6 +111,7 @@ static void disable_tx_interrupt(struct ehv_bc_data *bc)
  *
  * The byte channel to be used for the console is specified via a "stdout"
  * property in the /chosen node.
+<<<<<<< HEAD
  *
  * For compatible with legacy device trees, we also look for a "stdout" alias.
  */
@@ -156,6 +161,25 @@ static int find_console_handle(void)
 	if (stdout_irq == NO_IRQ) {
 		pr_err("ehv-bc: no 'interrupts' property in %s node\n", sprop);
 		of_node_put(np);
+=======
+ */
+static int find_console_handle(void)
+{
+	struct device_node *np = of_stdout;
+	const char *sprop = NULL;
+	const uint32_t *iprop;
+
+	/* We don't care what the aliased node is actually called.  We only
+	 * care if it's compatible with "epapr,hv-byte-channel", because that
+	 * indicates that it's a byte channel node.
+	 */
+	if (!np || !of_device_is_compatible(np, "epapr,hv-byte-channel"))
+		return 0;
+
+	stdout_irq = irq_of_parse_and_map(np, 0);
+	if (stdout_irq == NO_IRQ) {
+		pr_err("ehv-bc: no 'interrupts' property in %s node\n", np->full_name);
+>>>>>>> v3.18
 		return 0;
 	}
 
@@ -166,12 +190,18 @@ static int find_console_handle(void)
 	if (!iprop) {
 		pr_err("ehv-bc: no 'hv-handle' property in %s node\n",
 		       np->name);
+<<<<<<< HEAD
 		of_node_put(np);
 		return 0;
 	}
 	stdout_bc = be32_to_cpu(*iprop);
 
 	of_node_put(np);
+=======
+		return 0;
+	}
+	stdout_bc = be32_to_cpu(*iprop);
+>>>>>>> v3.18
 	return 1;
 }
 

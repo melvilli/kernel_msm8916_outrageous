@@ -16,9 +16,17 @@
 #include <linux/kernel.h>
 #include <linux/err.h>
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/platform_device.h>
 #include <linux/regulator/driver.h>
 #include <linux/regulator/machine.h>
+=======
+#include <linux/of.h>
+#include <linux/platform_device.h>
+#include <linux/regulator/driver.h>
+#include <linux/regulator/machine.h>
+#include <linux/regulator/of_regulator.h>
+>>>>>>> v3.18
 #include <linux/mfd/abx500.h>
 #include <linux/mfd/abx500/ab8500.h>
 #include <linux/regulator/ab8500.h>
@@ -229,6 +237,31 @@ static unsigned int ab8500_ext_regulator_get_mode(struct regulator_dev *rdev)
 	return ret;
 }
 
+<<<<<<< HEAD
+=======
+static int ab8500_ext_set_voltage(struct regulator_dev *rdev, int min_uV,
+				  int max_uV, unsigned *selector)
+{
+	struct regulation_constraints *regu_constraints = rdev->constraints;
+
+	if (!regu_constraints) {
+		dev_err(rdev_get_dev(rdev), "No regulator constraints\n");
+		return -EINVAL;
+	}
+
+	if (regu_constraints->min_uV == min_uV &&
+	    regu_constraints->max_uV == max_uV)
+		return 0;
+
+	dev_err(rdev_get_dev(rdev),
+		"Requested min %duV max %duV != constrained min %duV max %duV\n",
+		min_uV, max_uV,
+		regu_constraints->min_uV, regu_constraints->max_uV);
+
+	return -EINVAL;
+}
+
+>>>>>>> v3.18
 static int ab8500_ext_list_voltage(struct regulator_dev *rdev,
 				   unsigned selector)
 {
@@ -252,6 +285,10 @@ static struct regulator_ops ab8500_ext_regulator_ops = {
 	.is_enabled		= ab8500_ext_regulator_is_enabled,
 	.set_mode		= ab8500_ext_regulator_set_mode,
 	.get_mode		= ab8500_ext_regulator_get_mode,
+<<<<<<< HEAD
+=======
+	.set_voltage		= ab8500_ext_set_voltage,
+>>>>>>> v3.18
 	.list_voltage		= ab8500_ext_list_voltage,
 };
 
@@ -310,18 +347,50 @@ static struct ab8500_ext_regulator_info
 	},
 };
 
+<<<<<<< HEAD
 int ab8500_ext_regulator_init(struct platform_device *pdev)
+=======
+static struct of_regulator_match ab8500_ext_regulator_match[] = {
+	{ .name = "ab8500_ext1", .driver_data = (void *) AB8500_EXT_SUPPLY1, },
+	{ .name = "ab8500_ext2", .driver_data = (void *) AB8500_EXT_SUPPLY2, },
+	{ .name = "ab8500_ext3", .driver_data = (void *) AB8500_EXT_SUPPLY3, },
+};
+
+static int ab8500_ext_regulator_probe(struct platform_device *pdev)
+>>>>>>> v3.18
 {
 	struct ab8500 *ab8500 = dev_get_drvdata(pdev->dev.parent);
 	struct ab8500_platform_data *ppdata;
 	struct ab8500_regulator_platform_data *pdata;
+<<<<<<< HEAD
 	struct regulator_config config = { };
 	int i, err;
 
+=======
+	struct device_node *np = pdev->dev.of_node;
+	struct regulator_config config = { };
+	int i, err;
+
+	if (np) {
+		err = of_regulator_match(&pdev->dev, np,
+					 ab8500_ext_regulator_match,
+					 ARRAY_SIZE(ab8500_ext_regulator_match));
+		if (err < 0) {
+			dev_err(&pdev->dev,
+				"Error parsing regulator init data: %d\n", err);
+			return err;
+		}
+	}
+
+>>>>>>> v3.18
 	if (!ab8500) {
 		dev_err(&pdev->dev, "null mfd parent\n");
 		return -EINVAL;
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	ppdata = dev_get_platdata(ab8500->dev);
 	if (!ppdata) {
 		dev_err(&pdev->dev, "null parent pdata\n");
@@ -362,20 +431,35 @@ int ab8500_ext_regulator_init(struct platform_device *pdev)
 			pdata->ext_regulator[i].driver_data;
 
 		config.dev = &pdev->dev;
+<<<<<<< HEAD
 		config.init_data = &pdata->ext_regulator[i];
 		config.driver_data = info;
 
 		/* register regulator with framework */
 		info->rdev = regulator_register(&info->desc, &config);
+=======
+		config.driver_data = info;
+		config.of_node = ab8500_ext_regulator_match[i].of_node;
+		config.init_data = (np) ?
+			ab8500_ext_regulator_match[i].init_data :
+			&pdata->ext_regulator[i];
+
+		/* register regulator with framework */
+		info->rdev = devm_regulator_register(&pdev->dev, &info->desc,
+						     &config);
+>>>>>>> v3.18
 		if (IS_ERR(info->rdev)) {
 			err = PTR_ERR(info->rdev);
 			dev_err(&pdev->dev, "failed to register regulator %s\n",
 					info->desc.name);
+<<<<<<< HEAD
 			/* when we fail, un-register all earlier regulators */
 			while (--i >= 0) {
 				info = &ab8500_ext_regulator_info[i];
 				regulator_unregister(info->rdev);
 			}
+=======
+>>>>>>> v3.18
 			return err;
 		}
 
@@ -386,6 +470,7 @@ int ab8500_ext_regulator_init(struct platform_device *pdev)
 	return 0;
 }
 
+<<<<<<< HEAD
 void ab8500_ext_regulator_exit(struct platform_device *pdev)
 {
 	int i;
@@ -400,6 +485,33 @@ void ab8500_ext_regulator_exit(struct platform_device *pdev)
 		regulator_unregister(info->rdev);
 	}
 }
+=======
+static struct platform_driver ab8500_ext_regulator_driver = {
+	.probe = ab8500_ext_regulator_probe,
+	.driver         = {
+		.name   = "ab8500-ext-regulator",
+		.owner  = THIS_MODULE,
+	},
+};
+
+static int __init ab8500_ext_regulator_init(void)
+{
+	int ret;
+
+	ret = platform_driver_register(&ab8500_ext_regulator_driver);
+	if (ret)
+		pr_err("Failed to register ab8500 ext regulator: %d\n", ret);
+
+	return ret;
+}
+subsys_initcall(ab8500_ext_regulator_init);
+
+static void __exit ab8500_ext_regulator_exit(void)
+{
+	platform_driver_unregister(&ab8500_ext_regulator_driver);
+}
+module_exit(ab8500_ext_regulator_exit);
+>>>>>>> v3.18
 
 MODULE_LICENSE("GPL v2");
 MODULE_AUTHOR("Bengt Jonsson <bengt.g.jonsson@stericsson.com>");

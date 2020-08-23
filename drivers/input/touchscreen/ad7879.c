@@ -22,7 +22,10 @@
  */
 
 #include <linux/device.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/delay.h>
 #include <linux/input.h>
 #include <linux/interrupt.h>
@@ -470,6 +473,7 @@ static int ad7879_gpio_add(struct ad7879 *ts,
 
 static void ad7879_gpio_remove(struct ad7879 *ts)
 {
+<<<<<<< HEAD
 	const struct ad7879_platform_data *pdata = ts->dev->platform_data;
 	int ret;
 
@@ -479,6 +483,13 @@ static void ad7879_gpio_remove(struct ad7879 *ts)
 			dev_err(ts->dev, "failed to remove gpio %d\n",
 				ts->gc.base);
 	}
+=======
+	const struct ad7879_platform_data *pdata = dev_get_platdata(ts->dev);
+
+	if (pdata->gpio_export)
+		gpiochip_remove(&ts->gc);
+
+>>>>>>> v3.18
 }
 #else
 static inline int ad7879_gpio_add(struct ad7879 *ts,
@@ -495,7 +506,11 @@ static inline void ad7879_gpio_remove(struct ad7879 *ts)
 struct ad7879 *ad7879_probe(struct device *dev, u8 devid, unsigned int irq,
 			    const struct ad7879_bus_ops *bops)
 {
+<<<<<<< HEAD
 	struct ad7879_platform_data *pdata = dev->platform_data;
+=======
+	struct ad7879_platform_data *pdata = dev_get_platdata(dev);
+>>>>>>> v3.18
 	struct ad7879 *ts;
 	struct input_dev *input_dev;
 	int err;

@@ -30,6 +30,7 @@
 #include <linux/mutex.h>
 #include <linux/clkdev.h>
 
+<<<<<<< HEAD
 enum {
 	MAX77686_CLK_AP = 0,
 	MAX77686_CLK_CP,
@@ -86,25 +87,42 @@ static struct clk_ops max77686_clk_ops = {
 	.unprepare	= max77686_clk_unprepare,
 	.is_enabled	= max77686_clk_is_enabled,
 };
+=======
+#include <dt-bindings/clock/maxim,max77686.h>
+#include "clk-max-gen.h"
+>>>>>>> v3.18
 
 static struct clk_init_data max77686_clks_init[MAX77686_CLKS_NUM] = {
 	[MAX77686_CLK_AP] = {
 		.name = "32khz_ap",
+<<<<<<< HEAD
 		.ops = &max77686_clk_ops,
+=======
+		.ops = &max_gen_clk_ops,
+>>>>>>> v3.18
 		.flags = CLK_IS_ROOT,
 	},
 	[MAX77686_CLK_CP] = {
 		.name = "32khz_cp",
+<<<<<<< HEAD
 		.ops = &max77686_clk_ops,
+=======
+		.ops = &max_gen_clk_ops,
+>>>>>>> v3.18
 		.flags = CLK_IS_ROOT,
 	},
 	[MAX77686_CLK_PMIC] = {
 		.name = "32khz_pmic",
+<<<<<<< HEAD
 		.ops = &max77686_clk_ops,
+=======
+		.ops = &max_gen_clk_ops,
+>>>>>>> v3.18
 		.flags = CLK_IS_ROOT,
 	},
 };
 
+<<<<<<< HEAD
 static int max77686_clk_register(struct device *dev,
 				struct max77686_clk *max77686)
 {
@@ -182,10 +200,19 @@ err_clk_cp:
 err_clk_ap:
 out:
 	return ret;
+=======
+static int max77686_clk_probe(struct platform_device *pdev)
+{
+	struct max77686_dev *iodev = dev_get_drvdata(pdev->dev.parent);
+
+	return max_gen_clk_probe(pdev, iodev->regmap, MAX77686_REG_32KHZ,
+				 max77686_clks_init, MAX77686_CLKS_NUM);
+>>>>>>> v3.18
 }
 
 static int max77686_clk_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct max77686_clk **max77686_clks = platform_get_drvdata(pdev);
 	int i;
 
@@ -194,6 +221,9 @@ static int max77686_clk_remove(struct platform_device *pdev)
 		kfree(max77686_clks[i]->hw.clk);
 	}
 	return 0;
+=======
+	return max_gen_clk_remove(pdev, MAX77686_CLKS_NUM);
+>>>>>>> v3.18
 }
 
 static const struct platform_device_id max77686_clk_id[] = {
@@ -205,13 +235,17 @@ MODULE_DEVICE_TABLE(platform, max77686_clk_id);
 static struct platform_driver max77686_clk_driver = {
 	.driver = {
 		.name  = "max77686-clk",
+<<<<<<< HEAD
 		.owner = THIS_MODULE,
+=======
+>>>>>>> v3.18
 	},
 	.probe = max77686_clk_probe,
 	.remove = max77686_clk_remove,
 	.id_table = max77686_clk_id,
 };
 
+<<<<<<< HEAD
 static int __init max77686_clk_init(void)
 {
 	return platform_driver_register(&max77686_clk_driver);
@@ -223,6 +257,9 @@ static void __init max77686_clk_cleanup(void)
 	platform_driver_unregister(&max77686_clk_driver);
 }
 module_exit(max77686_clk_cleanup);
+=======
+module_platform_driver(max77686_clk_driver);
+>>>>>>> v3.18
 
 MODULE_DESCRIPTION("MAXIM 77686 Clock Driver");
 MODULE_AUTHOR("Jonghwa Lee <jonghwa3.lee@samsung.com>");

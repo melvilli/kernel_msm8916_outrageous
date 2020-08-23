@@ -153,6 +153,7 @@
 struct ade7854_state {
 	struct spi_device	*spi;
 	struct i2c_client	*i2c;
+<<<<<<< HEAD
 	int			(*read_reg_8) (struct device *, u16, u8 *);
 	int			(*read_reg_16) (struct device *, u16, u16 *);
 	int			(*read_reg_24) (struct device *, u16, u32 *);
@@ -161,6 +162,16 @@ struct ade7854_state {
 	int			(*write_reg_16) (struct device *, u16, u16);
 	int			(*write_reg_24) (struct device *, u16, u32);
 	int			(*write_reg_32) (struct device *, u16, u32);
+=======
+	int			(*read_reg_8)(struct device *, u16, u8 *);
+	int			(*read_reg_16)(struct device *, u16, u16 *);
+	int			(*read_reg_24)(struct device *, u16, u32 *);
+	int			(*read_reg_32)(struct device *, u16, u32 *);
+	int			(*write_reg_8)(struct device *, u16, u8);
+	int			(*write_reg_16)(struct device *, u16, u16);
+	int			(*write_reg_24)(struct device *, u16, u32);
+	int			(*write_reg_32)(struct device *, u16, u32);
+>>>>>>> v3.18
 	int			irq;
 	struct mutex		buf_lock;
 	u8			tx[ADE7854_MAX_TX] ____cacheline_aligned;

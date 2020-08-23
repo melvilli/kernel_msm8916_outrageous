@@ -40,7 +40,11 @@ struct iscsi_sw_tcp_conn {
 
 	struct iscsi_sw_tcp_send out;
 	/* old values for socket callbacks */
+<<<<<<< HEAD
 	void			(*old_data_ready)(struct sock *, int);
+=======
+	void			(*old_data_ready)(struct sock *);
+>>>>>>> v3.18
 	void			(*old_state_change)(struct sock *);
 	void			(*old_write_space)(struct sock *);
 

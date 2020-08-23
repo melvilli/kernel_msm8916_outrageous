@@ -17,13 +17,20 @@ extern spinlock_t ctx_alloc_lock;
 extern unsigned long tlb_context_cache;
 extern unsigned long mmu_context_bmap[];
 
+<<<<<<< HEAD
 extern void get_new_mmu_context(struct mm_struct *mm);
 #ifdef CONFIG_SMP
 extern void smp_new_mmu_context_version(void);
+=======
+void get_new_mmu_context(struct mm_struct *mm);
+#ifdef CONFIG_SMP
+void smp_new_mmu_context_version(void);
+>>>>>>> v3.18
 #else
 #define smp_new_mmu_context_version() do { } while (0)
 #endif
 
+<<<<<<< HEAD
 extern int init_new_context(struct task_struct *tsk, struct mm_struct *mm);
 extern void destroy_context(struct mm_struct *mm);
 
@@ -31,6 +38,15 @@ extern void __tsb_context_switch(unsigned long pgd_pa,
 				 struct tsb_config *tsb_base,
 				 struct tsb_config *tsb_huge,
 				 unsigned long tsb_descr_pa);
+=======
+int init_new_context(struct task_struct *tsk, struct mm_struct *mm);
+void destroy_context(struct mm_struct *mm);
+
+void __tsb_context_switch(unsigned long pgd_pa,
+			  struct tsb_config *tsb_base,
+			  struct tsb_config *tsb_huge,
+			  unsigned long tsb_descr_pa);
+>>>>>>> v3.18
 
 static inline void tsb_context_switch(struct mm_struct *mm)
 {
@@ -46,9 +62,17 @@ static inline void tsb_context_switch(struct mm_struct *mm)
 			     , __pa(&mm->context.tsb_descr[0]));
 }
 
+<<<<<<< HEAD
 extern void tsb_grow(struct mm_struct *mm, unsigned long tsb_index, unsigned long mm_rss);
 #ifdef CONFIG_SMP
 extern void smp_tsb_sync(struct mm_struct *mm);
+=======
+void tsb_grow(struct mm_struct *mm,
+	      unsigned long tsb_index,
+	      unsigned long mm_rss);
+#ifdef CONFIG_SMP
+void smp_tsb_sync(struct mm_struct *mm);
+>>>>>>> v3.18
 #else
 #define smp_tsb_sync(__mm) do { } while (0)
 #endif
@@ -66,7 +90,11 @@ extern void smp_tsb_sync(struct mm_struct *mm);
 	: "r" (CTX_HWBITS((__mm)->context)), \
 	  "r" (SECONDARY_CONTEXT), "i" (ASI_DMMU), "i" (ASI_MMU))
 
+<<<<<<< HEAD
 extern void __flush_tlb_mm(unsigned long, unsigned long);
+=======
+void __flush_tlb_mm(unsigned long, unsigned long);
+>>>>>>> v3.18
 
 /* Switch the current MM context. */
 static inline void switch_mm(struct mm_struct *old_mm, struct mm_struct *mm, struct task_struct *tsk)

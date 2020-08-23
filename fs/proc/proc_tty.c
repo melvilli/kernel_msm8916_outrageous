@@ -18,7 +18,11 @@
 /*
  * The /proc/tty directory inodes...
  */
+<<<<<<< HEAD
 static struct proc_dir_entry *proc_tty_ldisc, *proc_tty_driver;
+=======
+static struct proc_dir_entry *proc_tty_driver;
+>>>>>>> v3.18
 
 /*
  * This is the handler for /proc/tty/drivers
@@ -176,7 +180,11 @@ void __init proc_tty_init(void)
 {
 	if (!proc_mkdir("tty", NULL))
 		return;
+<<<<<<< HEAD
 	proc_tty_ldisc = proc_mkdir("tty/ldisc", NULL);
+=======
+	proc_mkdir("tty/ldisc", NULL);	/* Preserved: it's userspace visible */
+>>>>>>> v3.18
 	/*
 	 * /proc/tty/driver/serial reveals the exact character counts for
 	 * serial links which is just too easy to abuse for inferring

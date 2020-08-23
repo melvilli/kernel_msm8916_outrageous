@@ -6,6 +6,10 @@
  * as published by the Free Software Foundation; either version
  * 2 of the License, or (at your option) any later version.
  */
+<<<<<<< HEAD
+=======
+#include <linux/context_tracking.h>
+>>>>>>> v3.18
 #include <linux/init.h>
 #include <linux/kernel.h>
 #include <linux/ptrace.h>
@@ -167,12 +171,25 @@ static inline void check_mult_sh(void)
 	panic(bug64hit, !R4000_WAR ? r4kwar : nowar);
 }
 
+<<<<<<< HEAD
 static volatile int daddi_ov __cpuinitdata;
 
 asmlinkage void __init do_daddi_ov(struct pt_regs *regs)
 {
 	daddi_ov = 1;
 	regs->cp0_epc += 4;
+=======
+static volatile int daddi_ov;
+
+asmlinkage void __init do_daddi_ov(struct pt_regs *regs)
+{
+	enum ctx_state prev_state;
+
+	prev_state = exception_enter();
+	daddi_ov = 1;
+	regs->cp0_epc += 4;
+	exception_exit(prev_state);
+>>>>>>> v3.18
 }
 
 static inline void check_daddi(void)

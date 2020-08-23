@@ -43,8 +43,16 @@ sk_load_word_positive_offset:
 	cmpd	r_scratch1, r_addr
 	blt	bpf_slow_path_word
 	/* Nope, just hitting the header.  cr0 here is eq or gt! */
+<<<<<<< HEAD
 	lwzx	r_A, r_D, r_addr
 	/* When big endian we don't need to byteswap. */
+=======
+#ifdef __LITTLE_ENDIAN__
+	lwbrx	r_A, r_D, r_addr
+#else
+	lwzx	r_A, r_D, r_addr
+#endif
+>>>>>>> v3.18
 	blr	/* Return success, cr0 != LT */
 
 	.globl	sk_load_half
@@ -56,7 +64,15 @@ sk_load_half_positive_offset:
 	subi	r_scratch1, r_HL, 2
 	cmpd	r_scratch1, r_addr
 	blt	bpf_slow_path_half
+<<<<<<< HEAD
 	lhzx	r_A, r_D, r_addr
+=======
+#ifdef __LITTLE_ENDIAN__
+	lhbrx	r_A, r_D, r_addr
+#else
+	lhzx	r_A, r_D, r_addr
+#endif
+>>>>>>> v3.18
 	blr
 
 	.globl	sk_load_byte
@@ -71,7 +87,11 @@ sk_load_byte_positive_offset:
 	blr
 
 /*
+<<<<<<< HEAD
  * BPF_S_LDX_B_MSH: ldxb  4*([offset]&0xf)
+=======
+ * BPF_LDX | BPF_B | BPF_MSH: ldxb  4*([offset]&0xf)
+>>>>>>> v3.18
  * r_addr is the offset value
  */
 	.globl sk_load_byte_msh

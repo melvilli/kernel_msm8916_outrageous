@@ -162,7 +162,11 @@ static inline struct udf_sb_info *UDF_SB(struct super_block *sb)
 	return sb->s_fs_info;
 }
 
+<<<<<<< HEAD
 struct logicalVolIntegrityDescImpUse *udf_sb_lvidiu(struct udf_sb_info *sbi);
+=======
+struct logicalVolIntegrityDescImpUse *udf_sb_lvidiu(struct super_block *sb);
+>>>>>>> v3.18
 
 int udf_compute_nr_groups(struct super_block *sb, u32 partition);
 

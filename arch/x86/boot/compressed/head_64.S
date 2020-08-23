@@ -27,13 +27,17 @@
 #include <linux/init.h>
 #include <linux/linkage.h>
 #include <asm/segment.h>
+<<<<<<< HEAD
 #include <asm/pgtable_types.h>
 #include <asm/page_types.h>
+=======
+>>>>>>> v3.18
 #include <asm/boot.h>
 #include <asm/msr.h>
 #include <asm/processor-flags.h>
 #include <asm/asm-offsets.h>
 
+<<<<<<< HEAD
 /*
  * Locally defined symbols should be marked hidden:
  */
@@ -42,6 +46,8 @@
 	.hidden _got
 	.hidden _egot
 
+=======
+>>>>>>> v3.18
 	__HEAD
 	.code32
 ENTRY(startup_32)
@@ -104,9 +110,17 @@ ENTRY(startup_32)
 	addl	%eax, %ebx
 	notl	%eax
 	andl	%eax, %ebx
+<<<<<<< HEAD
 #else
 	movl	$LOAD_PHYSICAL_ADDR, %ebx
 #endif
+=======
+	cmpl	$LOAD_PHYSICAL_ADDR, %ebx
+	jge	1f
+#endif
+	movl	$LOAD_PHYSICAL_ADDR, %ebx
+1:
+>>>>>>> v3.18
 
 	/* Target address to relocate to for decompression */
 	addl	$z_extract_offset, %ebx
@@ -121,7 +135,12 @@ ENTRY(startup_32)
 	lgdt	gdt(%ebp)
 
 	/* Enable PAE mode */
+<<<<<<< HEAD
 	movl	$(X86_CR4_PAE), %eax
+=======
+	movl	%cr4, %eax
+	orl	$X86_CR4_PAE, %eax
+>>>>>>> v3.18
 	movl	%eax, %cr4
 
  /*
@@ -186,6 +205,16 @@ ENTRY(startup_32)
 	 */
 	pushl	$__KERNEL_CS
 	leal	startup_64(%ebp), %eax
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_EFI_MIXED
+	movl	efi32_config(%ebp), %ebx
+	cmp	$0, %ebx
+	jz	1f
+	leal	handover_entry(%ebp), %eax
+1:
+#endif
+>>>>>>> v3.18
 	pushl	%eax
 
 	/* Enter paged protected Mode, activating Long Mode */
@@ -196,6 +225,33 @@ ENTRY(startup_32)
 	lret
 ENDPROC(startup_32)
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_EFI_MIXED
+	.org 0x190
+ENTRY(efi32_stub_entry)
+	add	$0x4, %esp		/* Discard return address */
+	popl	%ecx
+	popl	%edx
+	popl	%esi
+
+	leal	(BP_scratch+4)(%esi), %esp
+	call	1f
+1:	pop	%ebp
+	subl	$1b, %ebp
+
+	movl	%ecx, efi32_config(%ebp)
+	movl	%edx, efi32_config+8(%ebp)
+	sgdtl	efi32_boot_gdt(%ebp)
+
+	leal	efi32_config(%ebp), %eax
+	movl	%eax, efi_config(%ebp)
+
+	jmp	startup_32
+ENDPROC(efi32_stub_entry)
+#endif
+
+>>>>>>> v3.18
 	.code64
 	.org 0x200
 ENTRY(startup_64)
@@ -217,6 +273,7 @@ ENTRY(startup_64)
 	jmp	preferred_addr
 
 ENTRY(efi_pe_entry)
+<<<<<<< HEAD
 	mov	%rcx, %rdi
 	mov	%rdx, %rsi
 	pushq	%rdi
@@ -231,14 +288,59 @@ ENTRY(efi_pe_entry)
 	popq	%rdi
 
 ENTRY(efi_stub_entry)
+=======
+	movq	%rcx, efi64_config(%rip)	/* Handle */
+	movq	%rdx, efi64_config+8(%rip) /* EFI System table pointer */
+
+	leaq	efi64_config(%rip), %rax
+	movq	%rax, efi_config(%rip)
+
+	call	1f
+1:	popq	%rbp
+	subq	$1b, %rbp
+
+	/*
+	 * Relocate efi_config->call().
+	 */
+	addq	%rbp, efi64_config+88(%rip)
+
+	movq	%rax, %rdi
+	call	make_boot_params
+	cmpq	$0,%rax
+	je	fail
+	mov	%rax, %rsi
+	leaq	startup_32(%rip), %rax
+	movl	%eax, BP_code32_start(%rsi)
+	jmp	2f		/* Skip the relocation */
+
+handover_entry:
+	call	1f
+1:	popq	%rbp
+	subq	$1b, %rbp
+
+	/*
+	 * Relocate efi_config->call().
+	 */
+	movq	efi_config(%rip), %rax
+	addq	%rbp, 88(%rax)
+2:
+	movq	efi_config(%rip), %rdi
+>>>>>>> v3.18
 	call	efi_main
 	movq	%rax,%rsi
 	cmpq	$0,%rax
 	jne	2f
+<<<<<<< HEAD
 1:
 	/* EFI init failed, so hang. */
 	hlt
 	jmp	1b
+=======
+fail:
+	/* EFI init failed, so hang. */
+	hlt
+	jmp	fail
+>>>>>>> v3.18
 2:
 	movl	BP_code32_start(%esi), %eax
 	leaq	preferred_addr(%rax), %rax
@@ -276,9 +378,17 @@ preferred_addr:
 	addq	%rax, %rbp
 	notq	%rax
 	andq	%rax, %rbp
+<<<<<<< HEAD
 #else
 	movq	$LOAD_PHYSICAL_ADDR, %rbp
 #endif
+=======
+	cmpq	$LOAD_PHYSICAL_ADDR, %rbp
+	jge	1f
+#endif
+	movq	$LOAD_PHYSICAL_ADDR, %rbp
+1:
+>>>>>>> v3.18
 
 	/* Target address to relocate to for decompression */
 	leaq	z_extract_offset(%rbp), %rbx
@@ -310,6 +420,23 @@ preferred_addr:
 	leaq	relocated(%rbx), %rax
 	jmp	*%rax
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_EFI_STUB
+	.org 0x390
+ENTRY(efi64_stub_entry)
+	movq	%rdi, efi64_config(%rip)	/* Handle */
+	movq	%rsi, efi64_config+8(%rip) /* EFI System table pointer */
+
+	leaq	efi64_config(%rip), %rax
+	movq	%rax, efi_config(%rip)
+
+	movq	%rdx, %rsi
+	jmp	handover_entry
+ENDPROC(efi64_stub_entry)
+#endif
+
+>>>>>>> v3.18
 	.text
 relocated:
 
@@ -340,18 +467,33 @@ relocated:
  * Do the decompression, and jump to the new kernel..
  */
 	pushq	%rsi			/* Save the real mode argument */
+<<<<<<< HEAD
+=======
+	movq	$z_run_size, %r9	/* size of kernel with .bss and .brk */
+	pushq	%r9
+>>>>>>> v3.18
 	movq	%rsi, %rdi		/* real mode address */
 	leaq	boot_heap(%rip), %rsi	/* malloc area for uncompression */
 	leaq	input_data(%rip), %rdx  /* input_data */
 	movl	$z_input_len, %ecx	/* input_len */
 	movq	%rbp, %r8		/* output target address */
+<<<<<<< HEAD
 	call	decompress_kernel
+=======
+	movq	$z_output_len, %r9	/* decompressed length, end of relocs */
+	call	decompress_kernel	/* returns kernel location in %rax */
+	popq	%r9
+>>>>>>> v3.18
 	popq	%rsi
 
 /*
  * Jump to the decompressed kernel.
  */
+<<<<<<< HEAD
 	jmp	*%rbp
+=======
+	jmp	*%rax
+>>>>>>> v3.18
 
 	.code32
 no_longmode:
@@ -374,6 +516,28 @@ gdt:
 	.quad   0x0000000000000000	/* TS continued */
 gdt_end:
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_EFI_STUB
+efi_config:
+	.quad	0
+
+#ifdef CONFIG_EFI_MIXED
+	.global efi32_config
+efi32_config:
+	.fill	11,8,0
+	.quad	efi64_thunk
+	.byte	0
+#endif
+
+	.global efi64_config
+efi64_config:
+	.fill	11,8,0
+	.quad	efi_call
+	.byte	1
+#endif /* CONFIG_EFI_STUB */
+
+>>>>>>> v3.18
 /*
  * Stack and heap for uncompression
  */

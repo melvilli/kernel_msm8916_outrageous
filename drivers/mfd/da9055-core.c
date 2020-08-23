@@ -294,6 +294,7 @@ static struct resource da9055_ld05_6_resource = {
 	.flags = IORESOURCE_IRQ,
 };
 
+<<<<<<< HEAD
 static struct mfd_cell da9055_devs[] = {
 	{
 		.of_compatible = "dialog,da9055-gpio",
@@ -301,68 +302,121 @@ static struct mfd_cell da9055_devs[] = {
 	},
 	{
 		.of_compatible = "dialog,da9055-regulator",
+=======
+static const struct mfd_cell da9055_devs[] = {
+	{
+		.of_compatible = "dlg,da9055-gpio",
+		.name = "da9055-gpio",
+	},
+	{
+		.of_compatible = "dlg,da9055-regulator",
+>>>>>>> v3.18
 		.name = "da9055-regulator",
 		.id = 1,
 	},
 	{
+<<<<<<< HEAD
 		.of_compatible = "dialog,da9055-regulator",
+=======
+		.of_compatible = "dlg,da9055-regulator",
+>>>>>>> v3.18
 		.name = "da9055-regulator",
 		.id = 2,
 	},
 	{
+<<<<<<< HEAD
 		.of_compatible = "dialog,da9055-regulator",
+=======
+		.of_compatible = "dlg,da9055-regulator",
+>>>>>>> v3.18
 		.name = "da9055-regulator",
 		.id = 3,
 	},
 	{
+<<<<<<< HEAD
 		.of_compatible = "dialog,da9055-regulator",
+=======
+		.of_compatible = "dlg,da9055-regulator",
+>>>>>>> v3.18
 		.name = "da9055-regulator",
 		.id = 4,
 	},
 	{
+<<<<<<< HEAD
 		.of_compatible = "dialog,da9055-regulator",
+=======
+		.of_compatible = "dlg,da9055-regulator",
+>>>>>>> v3.18
 		.name = "da9055-regulator",
 		.id = 5,
 	},
 	{
+<<<<<<< HEAD
 		.of_compatible = "dialog,da9055-regulator",
+=======
+		.of_compatible = "dlg,da9055-regulator",
+>>>>>>> v3.18
 		.name = "da9055-regulator",
 		.id = 6,
 	},
 	{
+<<<<<<< HEAD
 		.of_compatible = "dialog,da9055-regulator",
+=======
+		.of_compatible = "dlg,da9055-regulator",
+>>>>>>> v3.18
 		.name = "da9055-regulator",
 		.id = 7,
 		.resources = &da9055_ld05_6_resource,
 		.num_resources = 1,
 	},
 	{
+<<<<<<< HEAD
 		.of_compatible = "dialog,da9055-regulator",
+=======
+		.of_compatible = "dlg,da9055-regulator",
+>>>>>>> v3.18
 		.name = "da9055-regulator",
 		.resources = &da9055_ld05_6_resource,
 		.num_resources = 1,
 		.id = 8,
 	},
 	{
+<<<<<<< HEAD
 		.of_compatible = "dialog,da9055-onkey",
+=======
+		.of_compatible = "dlg,da9055-onkey",
+>>>>>>> v3.18
 		.name = "da9055-onkey",
 		.resources = &da9055_onkey_resource,
 		.num_resources = 1,
 	},
 	{
+<<<<<<< HEAD
 		.of_compatible = "dialog,da9055-rtc",
+=======
+		.of_compatible = "dlg,da9055-rtc",
+>>>>>>> v3.18
 		.name = "da9055-rtc",
 		.resources = da9055_rtc_resource,
 		.num_resources = ARRAY_SIZE(da9055_rtc_resource),
 	},
 	{
+<<<<<<< HEAD
 		.of_compatible = "dialog,da9055-hwmon",
+=======
+		.of_compatible = "dlg,da9055-hwmon",
+>>>>>>> v3.18
 		.name = "da9055-hwmon",
 		.resources = &da9055_hwmon_resource,
 		.num_resources = 1,
 	},
 	{
+<<<<<<< HEAD
 		.of_compatible = "dialog,da9055-watchdog",
+=======
+		.of_compatible = "dlg,da9055-watchdog",
+>>>>>>> v3.18
 		.name = "da9055-watchdog",
 	},
 };
@@ -379,8 +433,14 @@ static struct regmap_irq_chip da9055_regmap_irq_chip = {
 
 int da9055_device_init(struct da9055 *da9055)
 {
+<<<<<<< HEAD
 	struct da9055_pdata *pdata = da9055->dev->platform_data;
 	int ret;
+=======
+	struct da9055_pdata *pdata = dev_get_platdata(da9055->dev);
+	int ret;
+	uint8_t clear_events[3] = {0xFF, 0xFF, 0xFF};
+>>>>>>> v3.18
 
 	if (pdata && pdata->init != NULL)
 		pdata->init(da9055);
@@ -390,6 +450,13 @@ int da9055_device_init(struct da9055 *da9055)
 	else
 		da9055->irq_base = pdata->irq_base;
 
+<<<<<<< HEAD
+=======
+	ret = da9055_group_write(da9055, DA9055_REG_EVENT_A, 3, clear_events);
+	if (ret < 0)
+		return ret;
+
+>>>>>>> v3.18
 	ret = regmap_add_irq_chip(da9055->regmap, da9055->chip_irq,
 				  IRQF_TRIGGER_LOW | IRQF_ONESHOT,
 				  da9055->irq_base, &da9055_regmap_irq_chip,

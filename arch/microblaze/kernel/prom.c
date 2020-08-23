@@ -30,6 +30,10 @@
 #include <linux/debugfs.h>
 #include <linux/irq.h>
 #include <linux/memblock.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_fdt.h>
+>>>>>>> v3.18
 
 #include <asm/prom.h>
 #include <asm/page.h>
@@ -101,6 +105,7 @@ void __init early_init_devtree(void *params)
 {
 	pr_debug(" -> early_init_devtree(%p)\n", params);
 
+<<<<<<< HEAD
 	/* Setup flat device-tree pointer */
 	initial_boot_params = params;
 
@@ -116,6 +121,12 @@ void __init early_init_devtree(void *params)
 
 	/* Save command line for /proc/cmdline and then parse parameters */
 	strlcpy(boot_command_line, cmd_line, COMMAND_LINE_SIZE);
+=======
+	early_init_dt_scan(params);
+	if (!strlen(boot_command_line))
+		strlcpy(boot_command_line, cmd_line, COMMAND_LINE_SIZE);
+
+>>>>>>> v3.18
 	parse_early_param();
 
 	memblock_allow_resize();
@@ -124,6 +135,7 @@ void __init early_init_devtree(void *params)
 
 	pr_debug(" <- early_init_devtree()\n");
 }
+<<<<<<< HEAD
 
 #ifdef CONFIG_BLK_DEV_INITRD
 void __init early_init_dt_setup_initrd_arch(u64 start, u64 end)
@@ -163,3 +175,5 @@ static int __init export_flat_device_tree(void)
 	return 0;
 }
 device_initcall(export_flat_device_tree);
+=======
+>>>>>>> v3.18

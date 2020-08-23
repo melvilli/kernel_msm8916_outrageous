@@ -20,8 +20,13 @@
 #include <linux/in.h>
 #include <linux/if_ether.h>	/* For the statistics structure. */
 #include <linux/slab.h>
+<<<<<<< HEAD
 
 #include <asm/uaccess.h>
+=======
+#include <linux/uaccess.h>
+
+>>>>>>> v3.18
 #include <asm/io.h>
 
 #include <linux/inet.h>

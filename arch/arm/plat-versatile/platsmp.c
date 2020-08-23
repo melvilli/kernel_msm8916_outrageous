@@ -23,17 +23,29 @@
  * observers, irrespective of whether they're taking part in coherency
  * or not.  This is necessary for the hotplug code to work reliably.
  */
+<<<<<<< HEAD
 static void __cpuinit write_pen_release(int val)
 {
 	pen_release = val;
 	smp_wmb();
 	__cpuc_flush_dcache_area((void *)&pen_release, sizeof(pen_release));
 	outer_clean_range(__pa(&pen_release), __pa(&pen_release + 1));
+=======
+static void write_pen_release(int val)
+{
+	pen_release = val;
+	smp_wmb();
+	sync_cache_w(&pen_release);
+>>>>>>> v3.18
 }
 
 static DEFINE_SPINLOCK(boot_lock);
 
+<<<<<<< HEAD
 void __cpuinit versatile_secondary_init(unsigned int cpu)
+=======
+void versatile_secondary_init(unsigned int cpu)
+>>>>>>> v3.18
 {
 	/*
 	 * let the primary processor know we're out of the
@@ -48,7 +60,11 @@ void __cpuinit versatile_secondary_init(unsigned int cpu)
 	spin_unlock(&boot_lock);
 }
 
+<<<<<<< HEAD
 int __cpuinit versatile_boot_secondary(unsigned int cpu, struct task_struct *idle)
+=======
+int versatile_boot_secondary(unsigned int cpu, struct task_struct *idle)
+>>>>>>> v3.18
 {
 	unsigned long timeout;
 

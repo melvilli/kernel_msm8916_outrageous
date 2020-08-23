@@ -34,12 +34,21 @@ struct usbnet {
 	struct mutex		phy_mutex;
 	unsigned char		suspend_count;
 	unsigned char		pkt_cnt, pkt_err;
+<<<<<<< HEAD
+=======
+	unsigned short		rx_qlen, tx_qlen;
+	unsigned		can_dma_sg:1;
+>>>>>>> v3.18
 
 	/* i/o info: pipes etc */
 	unsigned		in, out;
 	struct usb_host_endpoint *status;
 	unsigned		maxpacket;
 	struct timer_list	delay;
+<<<<<<< HEAD
+=======
+	const char		*padding_pkt;
+>>>>>>> v3.18
 
 	/* protocol/interface state */
 	struct net_device	*net;
@@ -59,7 +68,11 @@ struct usbnet {
 	unsigned		interrupt_count;
 	struct mutex		interrupt_mutex;
 	struct usb_anchor	deferred;
+<<<<<<< HEAD
 	struct work_struct	bh_w;
+=======
+	struct tasklet_struct	bh;
+>>>>>>> v3.18
 
 	struct work_struct	kevent;
 	unsigned long		flags;
@@ -75,6 +88,10 @@ struct usbnet {
 #		define EVENT_NO_RUNTIME_PM	9
 #		define EVENT_RX_KILL	10
 #		define EVENT_LINK_CHANGE	11
+<<<<<<< HEAD
+=======
+#		define EVENT_SET_RX_MODE	12
+>>>>>>> v3.18
 };
 
 static inline struct usb_driver *driver_of(struct usb_interface *intf)
@@ -145,6 +162,12 @@ struct driver_info {
 	struct sk_buff	*(*tx_fixup)(struct usbnet *dev,
 				struct sk_buff *skb, gfp_t flags);
 
+<<<<<<< HEAD
+=======
+	/* recover from timeout */
+	void	(*recover)(struct usbnet *dev);
+
+>>>>>>> v3.18
 	/* early initialization code, can sleep. This is for minidrivers
 	 * having 'subminidrivers' that need to do extra initialization
 	 * right after minidriver have initialized hardware. */
@@ -153,6 +176,12 @@ struct driver_info {
 	/* called by minidriver when receiving indication */
 	void	(*indication)(struct usbnet *dev, void *ind, int indlen);
 
+<<<<<<< HEAD
+=======
+	/* rx mode change (device changes address list filtering) */
+	void	(*set_rx_mode)(struct usbnet *dev);
+
+>>>>>>> v3.18
 	/* for new devices, use the descriptor-reading code instead */
 	int		in;		/* rx endpoint */
 	int		out;		/* tx endpoint */
@@ -246,7 +275,10 @@ extern u32 usbnet_get_msglevel(struct net_device *);
 extern void usbnet_set_msglevel(struct net_device *, u32);
 extern void usbnet_get_drvinfo(struct net_device *, struct ethtool_drvinfo *);
 extern int usbnet_nway_reset(struct net_device *net);
+<<<<<<< HEAD
 extern void usbnet_terminate_urbs(struct usbnet *dev);
+=======
+>>>>>>> v3.18
 
 extern int usbnet_manage_power(struct usbnet *, int);
 extern void usbnet_link_change(struct usbnet *, bool, bool);
@@ -254,4 +286,9 @@ extern void usbnet_link_change(struct usbnet *, bool, bool);
 extern int usbnet_status_start(struct usbnet *dev, gfp_t mem_flags);
 extern void usbnet_status_stop(struct usbnet *dev);
 
+<<<<<<< HEAD
+=======
+extern void usbnet_update_max_qlen(struct usbnet *dev);
+
+>>>>>>> v3.18
 #endif /* __LINUX_USB_USBNET_H */

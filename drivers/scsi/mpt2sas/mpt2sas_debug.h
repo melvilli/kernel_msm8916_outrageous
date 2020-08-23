@@ -2,7 +2,11 @@
  * Logging Support for MPT (Message Passing Technology) based controllers
  *
  * This code is based on drivers/scsi/mpt2sas/mpt2_debug.c
+<<<<<<< HEAD
  * Copyright (C) 2007-2012  LSI Corporation
+=======
+ * Copyright (C) 2007-2014  LSI Corporation
+>>>>>>> v3.18
  *  (mailto:DL-MPTFusionLinux@lsi.com)
  *
  * This program is free software; you can redistribute it and/or

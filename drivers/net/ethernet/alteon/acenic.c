@@ -61,7 +61,10 @@
 #include <linux/netdevice.h>
 #include <linux/etherdevice.h>
 #include <linux/skbuff.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/delay.h>
 #include <linux/mm.h>
 #include <linux/highmem.h>
@@ -132,7 +135,11 @@
 #define PCI_DEVICE_ID_SGI_ACENIC	0x0009
 #endif
 
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(acenic_pci_tbl) = {
+=======
+static const struct pci_device_id acenic_pci_tbl[] = {
+>>>>>>> v3.18
 	{ PCI_VENDOR_ID_ALTEON, PCI_DEVICE_ID_ALTEON_ACENIC_FIBRE,
 	  PCI_ANY_ID, PCI_ANY_ID, PCI_CLASS_NETWORK_ETHERNET << 8, 0xffff00, },
 	{ PCI_VENDOR_ID_ALTEON, PCI_DEVICE_ID_ALTEON_ACENIC_COPPER,
@@ -477,7 +484,11 @@ static int acenic_probe_one(struct pci_dev *pdev,
 	dev->watchdog_timeo = 5*HZ;
 
 	dev->netdev_ops = &ace_netdev_ops;
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(dev, &ace_ethtool_ops);
+=======
+	dev->ethtool_ops = &ace_ethtool_ops;
+>>>>>>> v3.18
 
 	/* we only display this string ONCE */
 	if (!boards_found)
@@ -702,6 +713,7 @@ static struct pci_driver acenic_pci_driver = {
 	.remove		= acenic_remove_one,
 };
 
+<<<<<<< HEAD
 static int __init acenic_init(void)
 {
 	return pci_register_driver(&acenic_pci_driver);
@@ -715,6 +727,8 @@ static void __exit acenic_exit(void)
 module_init(acenic_init);
 module_exit(acenic_exit);
 
+=======
+>>>>>>> v3.18
 static void ace_free_descriptors(struct net_device *dev)
 {
 	struct ace_private *ap = netdev_priv(dev);
@@ -3199,3 +3213,8 @@ static int read_eeprom_byte(struct net_device *dev, unsigned long offset)
 	       ap->name, offset);
 	goto out;
 }
+<<<<<<< HEAD
+=======
+
+module_pci_driver(acenic_pci_driver);
+>>>>>>> v3.18

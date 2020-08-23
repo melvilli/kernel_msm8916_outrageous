@@ -7,7 +7,11 @@
 # as published by the Free Software Foundation; either version
 # 2 of the License, or (at your option) any later version.
 
+<<<<<<< HEAD
 # This script checks the relcoations of a vmlinux for "suspicious"
+=======
+# This script checks the relocations of a vmlinux for "suspicious"
+>>>>>>> v3.18
 # relocations.
 
 use strict;
@@ -28,7 +32,11 @@ open(FD, "$objdump -R $vmlinux|") or die;
 while (<FD>) {
 	study $_;
 
+<<<<<<< HEAD
 	# Only look at relcoation lines.
+=======
+	# Only look at relocation lines.
+>>>>>>> v3.18
 	next if (!/\s+R_/);
 
 	# These relocations are okay
@@ -45,7 +53,11 @@ while (<FD>) {
 		 /\bR_PPC_ADDR16_HA\b/ or /\bR_PPC_RELATIVE\b/ or
 		 /\bR_PPC_NONE\b/);
 
+<<<<<<< HEAD
 	# If we see this type of relcoation it's an idication that
+=======
+	# If we see this type of relocation it's an idication that
+>>>>>>> v3.18
 	# we /may/ be using an old version of binutils.
 	if (/R_PPC64_UADDR64/) {
 		$old_binutils++;
@@ -61,6 +73,11 @@ if ($bad_relocs_count) {
 }
 
 if ($old_binutils) {
+<<<<<<< HEAD
 	print "WARNING: You need at binutils >= 2.19 to build a ".
 	      "CONFIG_RELCOATABLE kernel\n";
+=======
+	print "WARNING: You need at least binutils >= 2.19 to build a ".
+	      "CONFIG_RELOCATABLE kernel\n";
+>>>>>>> v3.18
 }

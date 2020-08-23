@@ -117,7 +117,11 @@ static int sca3000_read_first_n_hw_rb(struct iio_buffer *r,
 		goto error_ret;
 
 	for (i = 0; i < num_read; i++)
+<<<<<<< HEAD
 		*(((u16 *)rx) + i) = be16_to_cpup((u16 *)rx + i);
+=======
+		*(((u16 *)rx) + i) = be16_to_cpup((__be16 *)rx + i);
+>>>>>>> v3.18
 
 	if (copy_to_user(buf, rx, num_read))
 		ret = -EFAULT;
@@ -141,6 +145,14 @@ static int sca3000_ring_get_bytes_per_datum(struct iio_buffer *r)
 	return 6;
 }
 
+<<<<<<< HEAD
+=======
+static bool sca3000_ring_buf_data_available(struct iio_buffer *r)
+{
+	return r->stufftoread;
+}
+
+>>>>>>> v3.18
 static IIO_BUFFER_ENABLE_ATTR;
 static IIO_BUFFER_LENGTH_ATTR;
 
@@ -177,11 +189,19 @@ static ssize_t sca3000_set_ring_int(struct device *dev,
 	struct iio_dev *indio_dev = dev_to_iio_dev(dev);
 	struct sca3000_state *st = iio_priv(indio_dev);
 	struct iio_dev_attr *this_attr = to_iio_dev_attr(attr);
+<<<<<<< HEAD
 	long val;
 	int ret;
 
 	mutex_lock(&st->lock);
 	ret = strict_strtol(buf, 10, &val);
+=======
+	u8 val;
+	int ret;
+
+	mutex_lock(&st->lock);
+	ret = kstrtou8(buf, 10, &val);
+>>>>>>> v3.18
 	if (ret)
 		goto error_ret;
 	ret = sca3000_read_data_short(st, SCA3000_REG_ADDR_INT_MASK, 1);
@@ -252,7 +272,11 @@ static struct iio_buffer *sca3000_rb_allocate(struct iio_dev *indio_dev)
 	struct iio_buffer *buf;
 	struct iio_hw_buffer *ring;
 
+<<<<<<< HEAD
 	ring = kzalloc(sizeof *ring, GFP_KERNEL);
+=======
+	ring = kzalloc(sizeof(*ring), GFP_KERNEL);
+>>>>>>> v3.18
 	if (!ring)
 		return NULL;
 
@@ -265,7 +289,11 @@ static struct iio_buffer *sca3000_rb_allocate(struct iio_dev *indio_dev)
 	return buf;
 }
 
+<<<<<<< HEAD
 static inline void sca3000_rb_free(struct iio_buffer *r)
+=======
+static void sca3000_ring_release(struct iio_buffer *r)
+>>>>>>> v3.18
 {
 	kfree(iio_to_hw_buf(r));
 }
@@ -274,23 +302,44 @@ static const struct iio_buffer_access_funcs sca3000_ring_access_funcs = {
 	.read_first_n = &sca3000_read_first_n_hw_rb,
 	.get_length = &sca3000_ring_get_length,
 	.get_bytes_per_datum = &sca3000_ring_get_bytes_per_datum,
+<<<<<<< HEAD
+=======
+	.data_available = sca3000_ring_buf_data_available,
+	.release = sca3000_ring_release,
+>>>>>>> v3.18
 };
 
 int sca3000_configure_ring(struct iio_dev *indio_dev)
 {
+<<<<<<< HEAD
 	indio_dev->buffer = sca3000_rb_allocate(indio_dev);
 	if (indio_dev->buffer == NULL)
+=======
+	struct iio_buffer *buffer;
+
+	buffer = sca3000_rb_allocate(indio_dev);
+	if (buffer == NULL)
+>>>>>>> v3.18
 		return -ENOMEM;
 	indio_dev->modes |= INDIO_BUFFER_HARDWARE;
 
 	indio_dev->buffer->access = &sca3000_ring_access_funcs;
 
+<<<<<<< HEAD
+=======
+	iio_device_attach_buffer(indio_dev, buffer);
+
+>>>>>>> v3.18
 	return 0;
 }
 
 void sca3000_unconfigure_ring(struct iio_dev *indio_dev)
 {
+<<<<<<< HEAD
 	sca3000_rb_free(indio_dev->buffer);
+=======
+	iio_buffer_put(indio_dev->buffer);
+>>>>>>> v3.18
 }
 
 static inline
@@ -304,7 +353,11 @@ int __sca3000_hw_ring_state_set(struct iio_dev *indio_dev, bool state)
 	if (ret)
 		goto error_ret;
 	if (state) {
+<<<<<<< HEAD
 		printk(KERN_INFO "supposedly enabling ring buffer\n");
+=======
+		dev_info(&indio_dev->dev, "supposedly enabling ring buffer\n");
+>>>>>>> v3.18
 		ret = sca3000_write_reg(st,
 					SCA3000_REG_ADDR_MODE,
 					(st->rx[0] | SCA3000_RING_BUF_ENABLE));

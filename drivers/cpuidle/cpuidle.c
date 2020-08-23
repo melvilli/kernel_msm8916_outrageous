@@ -19,6 +19,10 @@
 #include <linux/ktime.h>
 #include <linux/hrtimer.h>
 #include <linux/module.h>
+<<<<<<< HEAD
+=======
+#include <trace/events/power.h>
+>>>>>>> v3.18
 
 #include "cpuidle.h"
 
@@ -31,6 +35,10 @@ LIST_HEAD(cpuidle_detected_devices);
 static int enabled_devices;
 static int off __read_mostly;
 static int initialized __read_mostly;
+<<<<<<< HEAD
+=======
+static bool use_deepest_state __read_mostly;
+>>>>>>> v3.18
 
 int cpuidle_disabled(void)
 {
@@ -41,8 +49,11 @@ void disable_cpuidle(void)
 	off = 1;
 }
 
+<<<<<<< HEAD
 static int __cpuidle_register_device(struct cpuidle_device *dev);
 
+=======
+>>>>>>> v3.18
 /**
  * cpuidle_play_dead - cpu off-lining
  *
@@ -66,6 +77,48 @@ int cpuidle_play_dead(void)
 }
 
 /**
+<<<<<<< HEAD
+=======
+ * cpuidle_use_deepest_state - Enable/disable the "deepest idle" mode.
+ * @enable: Whether enable or disable the feature.
+ *
+ * If the "deepest idle" mode is enabled, cpuidle will ignore the governor and
+ * always use the state with the greatest exit latency (out of the states that
+ * are not disabled).
+ *
+ * This function can only be called after cpuidle_pause() to avoid races.
+ */
+void cpuidle_use_deepest_state(bool enable)
+{
+	use_deepest_state = enable;
+}
+
+/**
+ * cpuidle_find_deepest_state - Find the state of the greatest exit latency.
+ * @drv: cpuidle driver for a given CPU.
+ * @dev: cpuidle device for a given CPU.
+ */
+static int cpuidle_find_deepest_state(struct cpuidle_driver *drv,
+				      struct cpuidle_device *dev)
+{
+	unsigned int latency_req = 0;
+	int i, ret = CPUIDLE_DRIVER_STATE_START - 1;
+
+	for (i = CPUIDLE_DRIVER_STATE_START; i < drv->state_count; i++) {
+		struct cpuidle_state *s = &drv->states[i];
+		struct cpuidle_state_usage *su = &dev->states_usage[i];
+
+		if (s->disabled || su->disable || s->exit_latency <= latency_req)
+			continue;
+
+		latency_req = s->exit_latency;
+		ret = i;
+	}
+	return ret;
+}
+
+/**
+>>>>>>> v3.18
  * cpuidle_enter_state - enter the state and update stats
  * @dev: cpuidle device for this cpu
  * @drv: cpuidle driver for this cpu
@@ -80,13 +133,24 @@ int cpuidle_enter_state(struct cpuidle_device *dev, struct cpuidle_driver *drv,
 	ktime_t time_start, time_end;
 	s64 diff;
 
+<<<<<<< HEAD
+=======
+	trace_cpu_idle_rcuidle(index, dev->cpu);
+>>>>>>> v3.18
 	time_start = ktime_get();
 
 	entered_state = target_state->enter(dev, drv, index);
 
 	time_end = ktime_get();
+<<<<<<< HEAD
 
 	local_irq_enable();
+=======
+	trace_cpu_idle_rcuidle(PWR_EVENT_EXIT, dev->cpu);
+
+	if (!cpuidle_state_is_coupled(dev, drv, entered_state))
+		local_irq_enable();
+>>>>>>> v3.18
 
 	diff = ktime_to_us(ktime_sub(time_end, time_start));
 	if (diff > INT_MAX)
@@ -109,6 +173,7 @@ int cpuidle_enter_state(struct cpuidle_device *dev, struct cpuidle_driver *drv,
 }
 
 /**
+<<<<<<< HEAD
  * cpuidle_idle_call - the main idle loop
  *
  * NOTE: no locks or semaphores should be used here
@@ -165,6 +230,59 @@ int cpuidle_idle_call(void)
 		cpuidle_curr_governor->reflect(dev, entered_state);
 
 	return 0;
+=======
+ * cpuidle_select - ask the cpuidle framework to choose an idle state
+ *
+ * @drv: the cpuidle driver
+ * @dev: the cpuidle device
+ *
+ * Returns the index of the idle state.
+ */
+int cpuidle_select(struct cpuidle_driver *drv, struct cpuidle_device *dev)
+{
+	if (off || !initialized)
+		return -ENODEV;
+
+	if (!drv || !dev || !dev->enabled)
+		return -EBUSY;
+
+	if (unlikely(use_deepest_state))
+		return cpuidle_find_deepest_state(drv, dev);
+
+	return cpuidle_curr_governor->select(drv, dev);
+}
+
+/**
+ * cpuidle_enter - enter into the specified idle state
+ *
+ * @drv:   the cpuidle driver tied with the cpu
+ * @dev:   the cpuidle device
+ * @index: the index in the idle state table
+ *
+ * Returns the index in the idle state, < 0 in case of error.
+ * The error code depends on the backend driver
+ */
+int cpuidle_enter(struct cpuidle_driver *drv, struct cpuidle_device *dev,
+		  int index)
+{
+	if (cpuidle_state_is_coupled(dev, drv, index))
+		return cpuidle_enter_state_coupled(dev, drv, index);
+	return cpuidle_enter_state(dev, drv, index);
+}
+
+/**
+ * cpuidle_reflect - tell the underlying governor what was the state
+ * we were in
+ *
+ * @dev  : the cpuidle device
+ * @index: the index in the idle state table
+ *
+ */
+void cpuidle_reflect(struct cpuidle_device *dev, int index)
+{
+	if (cpuidle_curr_governor->reflect && !unlikely(use_deepest_state))
+		cpuidle_curr_governor->reflect(dev, index);
+>>>>>>> v3.18
 }
 
 /**
@@ -186,8 +304,19 @@ void cpuidle_uninstall_idle_handler(void)
 {
 	if (enabled_devices) {
 		initialized = 0;
+<<<<<<< HEAD
 		kick_all_cpus_sync();
 	}
+=======
+		wake_up_all_idle_cpus();
+	}
+
+	/*
+	 * Make sure external observers (such as the scheduler)
+	 * are done looking at pointed idle states.
+	 */
+	synchronize_rcu();
+>>>>>>> v3.18
 }
 
 /**
@@ -228,6 +357,7 @@ void cpuidle_resume(void)
 	mutex_unlock(&cpuidle_lock);
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_ARCH_HAS_CPU_RELAX
 static int poll_idle(struct cpuidle_device *dev,
 		struct cpuidle_driver *drv, int index)
@@ -267,6 +397,8 @@ static void poll_idle_init(struct cpuidle_driver *drv)
 static void poll_idle_init(struct cpuidle_driver *drv) {}
 #endif /* CONFIG_ARCH_HAS_CPU_RELAX */
 
+=======
+>>>>>>> v3.18
 /**
  * cpuidle_enable_device - enables idle PM for a CPU
  * @dev: the CPU
@@ -276,7 +408,11 @@ static void poll_idle_init(struct cpuidle_driver *drv) {}
  */
 int cpuidle_enable_device(struct cpuidle_device *dev)
 {
+<<<<<<< HEAD
 	int ret, i;
+=======
+	int ret;
+>>>>>>> v3.18
 	struct cpuidle_driver *drv;
 
 	if (!dev)
@@ -290,6 +426,7 @@ int cpuidle_enable_device(struct cpuidle_device *dev)
 	if (!drv || !cpuidle_curr_governor)
 		return -EIO;
 
+<<<<<<< HEAD
 	if (!dev->state_count)
 		dev->state_count = drv->state_count;
 
@@ -301,6 +438,14 @@ int cpuidle_enable_device(struct cpuidle_device *dev)
 
 	poll_idle_init(drv);
 
+=======
+	if (!dev->registered)
+		return -EINVAL;
+
+	if (!dev->state_count)
+		dev->state_count = drv->state_count;
+
+>>>>>>> v3.18
 	ret = cpuidle_add_device_sysfs(dev);
 	if (ret)
 		return ret;
@@ -309,12 +454,15 @@ int cpuidle_enable_device(struct cpuidle_device *dev)
 	    (ret = cpuidle_curr_governor->enable(drv, dev)))
 		goto fail_sysfs;
 
+<<<<<<< HEAD
 	for (i = 0; i < dev->state_count; i++) {
 		dev->states_usage[i].usage = 0;
 		dev->states_usage[i].time = 0;
 	}
 	dev->last_residency = 0;
 
+=======
+>>>>>>> v3.18
 	smp_wmb();
 
 	dev->enabled = 1;
@@ -358,6 +506,24 @@ void cpuidle_disable_device(struct cpuidle_device *dev)
 
 EXPORT_SYMBOL_GPL(cpuidle_disable_device);
 
+<<<<<<< HEAD
+=======
+static void __cpuidle_unregister_device(struct cpuidle_device *dev)
+{
+	struct cpuidle_driver *drv = cpuidle_get_cpu_driver(dev);
+
+	list_del(&dev->device_list);
+	per_cpu(cpuidle_devices, dev->cpu) = NULL;
+	module_put(drv->owner);
+}
+
+static void __cpuidle_device_init(struct cpuidle_device *dev)
+{
+	memset(dev->states_usage, 0, sizeof(dev->states_usage));
+	dev->last_residency = 0;
+}
+
+>>>>>>> v3.18
 /**
  * __cpuidle_register_device - internal register function called before register
  * and enable routines
@@ -375,6 +541,7 @@ static int __cpuidle_register_device(struct cpuidle_device *dev)
 
 	per_cpu(cpuidle_devices, dev->cpu) = dev;
 	list_add(&dev->device_list, &cpuidle_detected_devices);
+<<<<<<< HEAD
 	ret = cpuidle_add_sysfs(dev);
 	if (ret)
 		goto err_sysfs;
@@ -392,6 +559,15 @@ err_sysfs:
 	list_del(&dev->device_list);
 	per_cpu(cpuidle_devices, dev->cpu) = NULL;
 	module_put(drv->owner);
+=======
+
+	ret = cpuidle_coupled_register_device(dev);
+	if (ret)
+		__cpuidle_unregister_device(dev);
+	else
+		dev->registered = 1;
+
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -401,13 +577,18 @@ err_sysfs:
  */
 int cpuidle_register_device(struct cpuidle_device *dev)
 {
+<<<<<<< HEAD
 	int ret;
+=======
+	int ret = -EBUSY;
+>>>>>>> v3.18
 
 	if (!dev)
 		return -EINVAL;
 
 	mutex_lock(&cpuidle_lock);
 
+<<<<<<< HEAD
 	if ((ret = __cpuidle_register_device(dev))) {
 		mutex_unlock(&cpuidle_lock);
 		return ret;
@@ -420,6 +601,37 @@ int cpuidle_register_device(struct cpuidle_device *dev)
 
 	return 0;
 
+=======
+	if (dev->registered)
+		goto out_unlock;
+
+	__cpuidle_device_init(dev);
+
+	ret = __cpuidle_register_device(dev);
+	if (ret)
+		goto out_unlock;
+
+	ret = cpuidle_add_sysfs(dev);
+	if (ret)
+		goto out_unregister;
+
+	ret = cpuidle_enable_device(dev);
+	if (ret)
+		goto out_sysfs;
+
+	cpuidle_install_idle_handler();
+
+out_unlock:
+	mutex_unlock(&cpuidle_lock);
+
+	return ret;
+
+out_sysfs:
+	cpuidle_remove_sysfs(dev);
+out_unregister:
+	__cpuidle_unregister_device(dev);
+	goto out_unlock;
+>>>>>>> v3.18
 }
 
 EXPORT_SYMBOL_GPL(cpuidle_register_device);
@@ -430,9 +642,13 @@ EXPORT_SYMBOL_GPL(cpuidle_register_device);
  */
 void cpuidle_unregister_device(struct cpuidle_device *dev)
 {
+<<<<<<< HEAD
 	struct cpuidle_driver *drv = cpuidle_get_cpu_driver(dev);
 
 	if (dev->registered == 0)
+=======
+	if (!dev || dev->registered == 0)
+>>>>>>> v3.18
 		return;
 
 	cpuidle_pause_and_lock();
@@ -440,14 +656,22 @@ void cpuidle_unregister_device(struct cpuidle_device *dev)
 	cpuidle_disable_device(dev);
 
 	cpuidle_remove_sysfs(dev);
+<<<<<<< HEAD
 	list_del(&dev->device_list);
 	per_cpu(cpuidle_devices, dev->cpu) = NULL;
+=======
+
+	__cpuidle_unregister_device(dev);
+>>>>>>> v3.18
 
 	cpuidle_coupled_unregister_device(dev);
 
 	cpuidle_resume_and_unlock();
+<<<<<<< HEAD
 
 	module_put(drv->owner);
+=======
+>>>>>>> v3.18
 }
 
 EXPORT_SYMBOL_GPL(cpuidle_unregister_device);
@@ -464,7 +688,11 @@ void cpuidle_unregister(struct cpuidle_driver *drv)
 	int cpu;
 	struct cpuidle_device *device;
 
+<<<<<<< HEAD
 	for_each_possible_cpu(cpu) {
+=======
+	for_each_cpu(cpu, drv->cpumask) {
+>>>>>>> v3.18
 		device = &per_cpu(cpuidle_dev, cpu);
 		cpuidle_unregister_device(device);
 	}
@@ -496,13 +724,21 @@ int cpuidle_register(struct cpuidle_driver *drv,
 		return ret;
 	}
 
+<<<<<<< HEAD
 	for_each_possible_cpu(cpu) {
+=======
+	for_each_cpu(cpu, drv->cpumask) {
+>>>>>>> v3.18
 		device = &per_cpu(cpuidle_dev, cpu);
 		device->cpu = cpu;
 
 #ifdef CONFIG_ARCH_NEEDS_CPU_IDLE_COUPLED
 		/*
+<<<<<<< HEAD
 		 * On multiplatform for ARM, the coupled idle states could
+=======
+		 * On multiplatform for ARM, the coupled idle states could be
+>>>>>>> v3.18
 		 * enabled in the kernel even if the cpuidle driver does not
 		 * use it. Note, coupled_cpus is a struct copy.
 		 */
@@ -525,11 +761,14 @@ EXPORT_SYMBOL_GPL(cpuidle_register);
 
 #ifdef CONFIG_SMP
 
+<<<<<<< HEAD
 static void smp_callback(void *v)
 {
 	/* we already woke the CPU up, nothing more to do */
 }
 
+=======
+>>>>>>> v3.18
 /*
  * This function gets called when a part of the kernel has a new latency
  * requirement.  This means we need to get all processors out of their C-state,
@@ -539,6 +778,7 @@ static void smp_callback(void *v)
 static int cpuidle_latency_notify(struct notifier_block *b,
 		unsigned long l, void *v)
 {
+<<<<<<< HEAD
 	const struct cpumask *cpus;
 
 	cpus = v ?: cpu_online_mask;
@@ -547,6 +787,9 @@ static int cpuidle_latency_notify(struct notifier_block *b,
 	smp_call_function_many(cpus, smp_callback, NULL, 1);
 	preempt_enable();
 
+=======
+	wake_up_all_idle_cpus();
+>>>>>>> v3.18
 	return NOTIFY_OK;
 }
 

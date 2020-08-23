@@ -3,9 +3,18 @@
 
 #include <linux/clk-provider.h>
 #include <linux/clkdev.h>
+<<<<<<< HEAD
 
 #define SUNXI_FACTORS_NOT_APPLICABLE	(0)
 
+=======
+#include <linux/spinlock.h>
+
+#define SUNXI_FACTORS_NOT_APPLICABLE	(0)
+
+#define SUNXI_FACTORS_MUX_MASK 0x3
+
+>>>>>>> v3.18
 struct clk_factors_config {
 	u8 nshift;
 	u8 nwidth;
@@ -18,6 +27,7 @@ struct clk_factors_config {
 	u8 n_start;
 };
 
+<<<<<<< HEAD
 struct clk *clk_register_factors(struct device *dev, const char *name,
 				 const char *parent_name,
 				 unsigned long flags, void __iomem *reg,
@@ -25,4 +35,26 @@ struct clk *clk_register_factors(struct device *dev, const char *name,
 				 void (*get_factors) (u32 *rate, u32 parent_rate,
 						      u8 *n, u8 *k, u8 *m, u8 *p),
 				 spinlock_t *lock);
+=======
+struct factors_data {
+	int enable;
+	int mux;
+	struct clk_factors_config *table;
+	void (*getter) (u32 *rate, u32 parent_rate, u8 *n, u8 *k, u8 *m, u8 *p);
+	const char *name;
+};
+
+struct clk_factors {
+	struct clk_hw hw;
+	void __iomem *reg;
+	struct clk_factors_config *config;
+	void (*get_factors) (u32 *rate, u32 parent, u8 *n, u8 *k, u8 *m, u8 *p);
+	spinlock_t *lock;
+};
+
+struct clk * __init sunxi_factors_register(struct device_node *node,
+					   const struct factors_data *data,
+					   spinlock_t *lock);
+
+>>>>>>> v3.18
 #endif

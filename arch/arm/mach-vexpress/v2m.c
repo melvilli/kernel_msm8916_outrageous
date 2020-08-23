@@ -1,15 +1,23 @@
 /*
  * Versatile Express V2M Motherboard Support
  */
+<<<<<<< HEAD
 #include <linux/clocksource.h>
+=======
+>>>>>>> v3.18
 #include <linux/device.h>
 #include <linux/amba/bus.h>
 #include <linux/amba/mmci.h>
 #include <linux/io.h>
+<<<<<<< HEAD
 #include <linux/clocksource.h>
 #include <linux/smp.h>
 #include <linux/init.h>
 #include <linux/irqchip.h>
+=======
+#include <linux/smp.h>
+#include <linux/init.h>
+>>>>>>> v3.18
 #include <linux/of_address.h>
 #include <linux/of_fdt.h>
 #include <linux/of_irq.h>
@@ -23,7 +31,10 @@
 #include <linux/regulator/fixed.h>
 #include <linux/regulator/machine.h>
 #include <linux/vexpress.h>
+<<<<<<< HEAD
 #include <linux/clk-provider.h>
+=======
+>>>>>>> v3.18
 #include <linux/clkdev.h>
 
 #include <asm/mach-types.h>
@@ -205,8 +216,14 @@ static struct platform_device v2m_cf_device = {
 
 static struct mmci_platform_data v2m_mmci_data = {
 	.ocr_mask	= MMC_VDD_32_33|MMC_VDD_33_34,
+<<<<<<< HEAD
 	.gpio_wp	= VEXPRESS_GPIO_MMC_WPROT,
 	.gpio_cd	= VEXPRESS_GPIO_MMC_CARDIN,
+=======
+	.status		= vexpress_get_mci_cardin,
+	.gpio_cd	= -1,
+	.gpio_wp	= -1,
+>>>>>>> v3.18
 };
 
 static struct resource v2m_sysreg_resources[] = {
@@ -344,11 +361,14 @@ static void __init v2m_init(void)
 	regulator_register_fixed(0, v2m_eth_supplies,
 			ARRAY_SIZE(v2m_eth_supplies));
 
+<<<<<<< HEAD
 	platform_device_register(&v2m_muxfpga_device);
 	platform_device_register(&v2m_shutdown_device);
 	platform_device_register(&v2m_reboot_device);
 	platform_device_register(&v2m_dvimode_device);
 
+=======
+>>>>>>> v3.18
 	platform_device_register(&v2m_sysreg_device);
 	platform_device_register(&v2m_pcie_i2c_device);
 	platform_device_register(&v2m_ddc_i2c_device);
@@ -360,6 +380,14 @@ static void __init v2m_init(void)
 	for (i = 0; i < ARRAY_SIZE(v2m_amba_devs); i++)
 		amba_device_register(v2m_amba_devs[i], &iomem_resource);
 
+<<<<<<< HEAD
+=======
+	vexpress_syscfg_device_register(&v2m_muxfpga_device);
+	vexpress_syscfg_device_register(&v2m_shutdown_device);
+	vexpress_syscfg_device_register(&v2m_reboot_device);
+	vexpress_syscfg_device_register(&v2m_dvimode_device);
+
+>>>>>>> v3.18
 	ct_desc->init_tile();
 }
 
@@ -373,6 +401,7 @@ MACHINE_START(VEXPRESS, "ARM-Versatile Express")
 	.init_machine	= v2m_init,
 MACHINE_END
 
+<<<<<<< HEAD
 static struct map_desc v2m_rs1_io_desc __initdata = {
 	.virtual	= V2M_PERIPH,
 	.pfn		= __phys_to_pfn(0x1c000000),
@@ -446,6 +475,11 @@ static void __init v2m_dt_init(void)
 {
 	l2x0_of_init(0x00400000, 0xfe0fffff);
 	of_platform_populate(NULL, v2m_dt_bus_match, NULL, NULL);
+=======
+static void __init v2m_dt_init(void)
+{
+	of_platform_populate(NULL, of_default_bus_match_table, NULL, NULL);
+>>>>>>> v3.18
 }
 
 static const char * const v2m_dt_match[] __initconst = {
@@ -455,10 +489,17 @@ static const char * const v2m_dt_match[] __initconst = {
 
 DT_MACHINE_START(VEXPRESS_DT, "ARM-Versatile Express")
 	.dt_compat	= v2m_dt_match,
+<<<<<<< HEAD
 	.smp		= smp_ops(vexpress_smp_ops),
 	.map_io		= v2m_dt_map_io,
 	.init_early	= v2m_dt_init_early,
 	.init_irq	= irqchip_init,
 	.init_time	= v2m_dt_timer_init,
+=======
+	.l2c_aux_val	= 0x00400000,
+	.l2c_aux_mask	= 0xfe0fffff,
+	.smp		= smp_ops(vexpress_smp_dt_ops),
+	.smp_init	= smp_init_ops(vexpress_smp_init_ops),
+>>>>>>> v3.18
 	.init_machine	= v2m_dt_init,
 MACHINE_END

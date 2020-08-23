@@ -13,11 +13,19 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
  * along with this program; if not, write to the
  * Free Software Foundation, Inc.,
  * 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+ */
+
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/mod_devicetable.h>
 #include <linux/nfc.h>
@@ -59,8 +67,11 @@ static int microread_mei_remove(struct mei_cl_device *device)
 {
 	struct nfc_mei_phy *phy = mei_cl_get_drvdata(device);
 
+<<<<<<< HEAD
 	pr_info("Removing microread\n");
 
+=======
+>>>>>>> v3.18
 	microread_remove(phy->hdev);
 
 	nfc_mei_phy_free(phy);

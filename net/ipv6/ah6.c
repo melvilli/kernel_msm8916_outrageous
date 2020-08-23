@@ -12,16 +12,27 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
  *
  * Authors
  *
  *	Mitsuru KANDA @USAGI       : IPv6 Support
+<<<<<<< HEAD
  * 	Kazunori MIYAZAWA @USAGI   :
  * 	Kunihiro Ishiguro <kunihiro@ipinfusion.com>
  *
  * 	This file is derived from net/ipv4/ah.c.
+=======
+ *	Kazunori MIYAZAWA @USAGI   :
+ *	Kunihiro Ishiguro <kunihiro@ipinfusion.com>
+ *
+ *	This file is derived from net/ipv4/ah.c.
+>>>>>>> v3.18
  */
 
 #define pr_fmt(fmt) "IPv6: " fmt
@@ -285,7 +296,11 @@ static int ipv6_clear_mutable_options(struct ipv6hdr *iph, int len, int dir)
 			ipv6_rearrange_rthdr(iph, exthdr.rth);
 			break;
 
+<<<<<<< HEAD
 		default :
+=======
+		default:
+>>>>>>> v3.18
 			return 0;
 		}
 
@@ -347,6 +362,13 @@ static int ah6_output(struct xfrm_state *x, struct sk_buff *skb)
 	struct ip_auth_hdr *ah;
 	struct ah_data *ahp;
 	struct tmp_ext *iph_ext;
+<<<<<<< HEAD
+=======
+	int seqhi_len = 0;
+	__be32 *seqhi;
+	int sglists = 0;
+	struct scatterlist *seqhisg;
+>>>>>>> v3.18
 
 	ahp = x->data;
 	ahash = ahp->ahash;
@@ -360,15 +382,33 @@ static int ah6_output(struct xfrm_state *x, struct sk_buff *skb)
 	if (extlen)
 		extlen += sizeof(*iph_ext);
 
+<<<<<<< HEAD
 	err = -ENOMEM;
 	iph_base = ah_alloc_tmp(ahash, nfrags, IPV6HDR_BASELEN + extlen);
+=======
+	if (x->props.flags & XFRM_STATE_ESN) {
+		sglists = 1;
+		seqhi_len = sizeof(*seqhi);
+	}
+	err = -ENOMEM;
+	iph_base = ah_alloc_tmp(ahash, nfrags + sglists, IPV6HDR_BASELEN +
+				extlen + seqhi_len);
+>>>>>>> v3.18
 	if (!iph_base)
 		goto out;
 
 	iph_ext = ah_tmp_ext(iph_base);
+<<<<<<< HEAD
 	icv = ah_tmp_icv(ahash, iph_ext, extlen);
 	req = ah_tmp_req(ahash, icv);
 	sg = ah_req_sg(ahash, req);
+=======
+	seqhi = (__be32 *)((char *)iph_ext + extlen);
+	icv = ah_tmp_icv(ahash, seqhi, seqhi_len);
+	req = ah_tmp_req(ahash, icv);
+	sg = ah_req_sg(ahash, req);
+	seqhisg = sg + nfrags;
+>>>>>>> v3.18
 
 	ah = ip_auth_hdr(skb);
 	memset(ah->auth_data, 0, ahp->icv_trunc_len);
@@ -412,10 +452,22 @@ static int ah6_output(struct xfrm_state *x, struct sk_buff *skb)
 	ah->spi = x->id.spi;
 	ah->seq_no = htonl(XFRM_SKB_CB(skb)->seq.output.low);
 
+<<<<<<< HEAD
 	sg_init_table(sg, nfrags);
 	skb_to_sgvec(skb, sg, 0, skb->len);
 
 	ahash_request_set_crypt(req, sg, icv, skb->len);
+=======
+	sg_init_table(sg, nfrags + sglists);
+	skb_to_sgvec_nomark(skb, sg, 0, skb->len);
+
+	if (x->props.flags & XFRM_STATE_ESN) {
+		/* Attach seqhi sg right after packet payload */
+		*seqhi = htonl(XFRM_SKB_CB(skb)->seq.output.hi);
+		sg_set_buf(seqhisg, seqhi, seqhi_len);
+	}
+	ahash_request_set_crypt(req, sg, icv, skb->len + seqhi_len);
+>>>>>>> v3.18
 	ahash_request_set_callback(req, 0, ah6_output_done, skb);
 
 	AH_SKB_CB(skb)->tmp = iph_base;
@@ -463,7 +515,11 @@ static void ah6_input_done(struct crypto_async_request *base, int err)
 	auth_data = ah_tmp_auth(work_iph, hdr_len);
 	icv = ah_tmp_icv(ahp->ahash, auth_data, ahp->icv_trunc_len);
 
+<<<<<<< HEAD
 	err = memcmp(icv, auth_data, ahp->icv_trunc_len) ? -EBADMSG: 0;
+=======
+	err = memcmp(icv, auth_data, ahp->icv_trunc_len) ? -EBADMSG : 0;
+>>>>>>> v3.18
 	if (err)
 		goto out;
 
@@ -515,6 +571,13 @@ static int ah6_input(struct xfrm_state *x, struct sk_buff *skb)
 	int nexthdr;
 	int nfrags;
 	int err = -ENOMEM;
+<<<<<<< HEAD
+=======
+	int seqhi_len = 0;
+	__be32 *seqhi;
+	int sglists = 0;
+	struct scatterlist *seqhisg;
+>>>>>>> v3.18
 
 	if (!pskb_may_pull(skb, sizeof(struct ip_auth_hdr)))
 		goto out;
@@ -551,6 +614,7 @@ static int ah6_input(struct xfrm_state *x, struct sk_buff *skb)
 
 	skb_push(skb, hdr_len);
 
+<<<<<<< HEAD
 	work_iph = ah_alloc_tmp(ahash, nfrags, hdr_len + ahp->icv_trunc_len);
 	if (!work_iph)
 		goto out;
@@ -559,6 +623,24 @@ static int ah6_input(struct xfrm_state *x, struct sk_buff *skb)
 	icv = ah_tmp_icv(ahash, auth_data, ahp->icv_trunc_len);
 	req = ah_tmp_req(ahash, icv);
 	sg = ah_req_sg(ahash, req);
+=======
+	if (x->props.flags & XFRM_STATE_ESN) {
+		sglists = 1;
+		seqhi_len = sizeof(*seqhi);
+	}
+
+	work_iph = ah_alloc_tmp(ahash, nfrags + sglists, hdr_len +
+				ahp->icv_trunc_len + seqhi_len);
+	if (!work_iph)
+		goto out;
+
+	auth_data = ah_tmp_auth((u8 *)work_iph, hdr_len);
+	seqhi = (__be32 *)(auth_data + ahp->icv_trunc_len);
+	icv = ah_tmp_icv(ahash, seqhi, seqhi_len);
+	req = ah_tmp_req(ahash, icv);
+	sg = ah_req_sg(ahash, req);
+	seqhisg = sg + nfrags;
+>>>>>>> v3.18
 
 	memcpy(work_iph, ip6h, hdr_len);
 	memcpy(auth_data, ah->auth_data, ahp->icv_trunc_len);
@@ -573,10 +655,23 @@ static int ah6_input(struct xfrm_state *x, struct sk_buff *skb)
 	ip6h->flow_lbl[2] = 0;
 	ip6h->hop_limit   = 0;
 
+<<<<<<< HEAD
 	sg_init_table(sg, nfrags);
 	skb_to_sgvec(skb, sg, 0, skb->len);
 
 	ahash_request_set_crypt(req, sg, icv, skb->len);
+=======
+	sg_init_table(sg, nfrags + sglists);
+	skb_to_sgvec_nomark(skb, sg, 0, skb->len);
+
+	if (x->props.flags & XFRM_STATE_ESN) {
+		/* Attach seqhi sg right after packet payload */
+		*seqhi = XFRM_SKB_CB(skb)->seq.input.hi;
+		sg_set_buf(seqhisg, seqhi, seqhi_len);
+	}
+
+	ahash_request_set_crypt(req, sg, icv, skb->len + seqhi_len);
+>>>>>>> v3.18
 	ahash_request_set_callback(req, 0, ah6_input_done, skb);
 
 	AH_SKB_CB(skb)->tmp = work_iph;
@@ -589,7 +684,11 @@ static int ah6_input(struct xfrm_state *x, struct sk_buff *skb)
 		goto out_free;
 	}
 
+<<<<<<< HEAD
 	err = memcmp(icv, auth_data, ahp->icv_trunc_len) ? -EBADMSG: 0;
+=======
+	err = memcmp(icv, auth_data, ahp->icv_trunc_len) ? -EBADMSG : 0;
+>>>>>>> v3.18
 	if (err)
 		goto out_free;
 
@@ -610,6 +709,7 @@ out:
 	return err;
 }
 
+<<<<<<< HEAD
 static void ah6_err(struct sk_buff *skb, struct inet6_skb_parm *opt,
 		    u8 type, u8 code, int offset, __be32 info)
 {
@@ -632,6 +732,31 @@ static void ah6_err(struct sk_buff *skb, struct inet6_skb_parm *opt,
 	else
 		ip6_update_pmtu(skb, net, info, 0, 0);
 	xfrm_state_put(x);
+=======
+static int ah6_err(struct sk_buff *skb, struct inet6_skb_parm *opt,
+		   u8 type, u8 code, int offset, __be32 info)
+{
+	struct net *net = dev_net(skb->dev);
+	struct ipv6hdr *iph = (struct ipv6hdr *)skb->data;
+	struct ip_auth_hdr *ah = (struct ip_auth_hdr *)(skb->data+offset);
+	struct xfrm_state *x;
+
+	if (type != ICMPV6_PKT_TOOBIG &&
+	    type != NDISC_REDIRECT)
+		return 0;
+
+	x = xfrm_state_lookup(net, skb->mark, (xfrm_address_t *)&iph->daddr, ah->spi, IPPROTO_AH, AF_INET6);
+	if (!x)
+		return 0;
+
+	if (type == NDISC_REDIRECT)
+		ip6_redirect(skb, net, skb->dev->ifindex, 0);
+	else
+		ip6_update_pmtu(skb, net, info, 0, 0);
+	xfrm_state_put(x);
+
+	return 0;
+>>>>>>> v3.18
 }
 
 static int ah6_init_state(struct xfrm_state *x)
@@ -679,8 +804,11 @@ static int ah6_init_state(struct xfrm_state *x)
 	ahp->icv_full_len = aalg_desc->uinfo.auth.icv_fullbits/8;
 	ahp->icv_trunc_len = x->aalg->alg_trunc_len/8;
 
+<<<<<<< HEAD
 	BUG_ON(ahp->icv_trunc_len > MAX_AH_AUTH_LEN);
 
+=======
+>>>>>>> v3.18
 	x->props.header_len = XFRM_ALIGN8(sizeof(struct ip_auth_hdr) +
 					  ahp->icv_trunc_len);
 	switch (x->props.mode) {
@@ -716,11 +844,23 @@ static void ah6_destroy(struct xfrm_state *x)
 	kfree(ahp);
 }
 
+<<<<<<< HEAD
 static const struct xfrm_type ah6_type =
 {
 	.description	= "AH6",
 	.owner		= THIS_MODULE,
 	.proto	     	= IPPROTO_AH,
+=======
+static int ah6_rcv_cb(struct sk_buff *skb, int err)
+{
+	return 0;
+}
+
+static const struct xfrm_type ah6_type = {
+	.description	= "AH6",
+	.owner		= THIS_MODULE,
+	.proto		= IPPROTO_AH,
+>>>>>>> v3.18
 	.flags		= XFRM_TYPE_REPLAY_PROT,
 	.init_state	= ah6_init_state,
 	.destructor	= ah6_destroy,
@@ -729,10 +869,18 @@ static const struct xfrm_type ah6_type =
 	.hdr_offset	= xfrm6_find_1stfragopt,
 };
 
+<<<<<<< HEAD
 static const struct inet6_protocol ah6_protocol = {
 	.handler	=	xfrm6_rcv,
 	.err_handler	=	ah6_err,
 	.flags		=	INET6_PROTO_NOPOLICY,
+=======
+static struct xfrm6_protocol ah6_protocol = {
+	.handler	=	xfrm6_rcv,
+	.cb_handler	=	ah6_rcv_cb,
+	.err_handler	=	ah6_err,
+	.priority	=	0,
+>>>>>>> v3.18
 };
 
 static int __init ah6_init(void)
@@ -742,7 +890,11 @@ static int __init ah6_init(void)
 		return -EAGAIN;
 	}
 
+<<<<<<< HEAD
 	if (inet6_add_protocol(&ah6_protocol, IPPROTO_AH) < 0) {
+=======
+	if (xfrm6_protocol_register(&ah6_protocol, IPPROTO_AH) < 0) {
+>>>>>>> v3.18
 		pr_info("%s: can't add protocol\n", __func__);
 		xfrm_unregister_type(&ah6_type, AF_INET6);
 		return -EAGAIN;
@@ -753,7 +905,11 @@ static int __init ah6_init(void)
 
 static void __exit ah6_fini(void)
 {
+<<<<<<< HEAD
 	if (inet6_del_protocol(&ah6_protocol, IPPROTO_AH) < 0)
+=======
+	if (xfrm6_protocol_deregister(&ah6_protocol, IPPROTO_AH) < 0)
+>>>>>>> v3.18
 		pr_info("%s: can't remove protocol\n", __func__);
 
 	if (xfrm_unregister_type(&ah6_type, AF_INET6) < 0)

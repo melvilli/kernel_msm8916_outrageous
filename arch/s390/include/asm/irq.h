@@ -1,17 +1,54 @@
 #ifndef _ASM_IRQ_H
 #define _ASM_IRQ_H
 
+<<<<<<< HEAD
+=======
+#define EXT_INTERRUPT	1
+#define IO_INTERRUPT	2
+#define THIN_INTERRUPT	3
+
+#define NR_IRQS_BASE	4
+
+#ifdef CONFIG_PCI_NR_MSI
+# define NR_IRQS	(NR_IRQS_BASE + CONFIG_PCI_NR_MSI)
+#else
+# define NR_IRQS	NR_IRQS_BASE
+#endif
+
+/* This number is used when no interrupt has been assigned */
+#define NO_IRQ		0
+
+/* External interruption codes */
+#define EXT_IRQ_INTERRUPT_KEY	0x0040
+#define EXT_IRQ_CLK_COMP	0x1004
+#define EXT_IRQ_CPU_TIMER	0x1005
+#define EXT_IRQ_WARNING_TRACK	0x1007
+#define EXT_IRQ_MALFUNC_ALERT	0x1200
+#define EXT_IRQ_EMERGENCY_SIG	0x1201
+#define EXT_IRQ_EXTERNAL_CALL	0x1202
+#define EXT_IRQ_TIMING_ALERT	0x1406
+#define EXT_IRQ_MEASURE_ALERT	0x1407
+#define EXT_IRQ_SERVICE_SIG	0x2401
+#define EXT_IRQ_CP_SERVICE	0x2603
+#define EXT_IRQ_IUCV		0x4000
+
+#ifndef __ASSEMBLY__
+
+>>>>>>> v3.18
 #include <linux/hardirq.h>
 #include <linux/percpu.h>
 #include <linux/cache.h>
 #include <linux/types.h>
 
+<<<<<<< HEAD
 enum interruption_main_class {
 	EXTERNAL_INTERRUPT,
 	IO_INTERRUPT,
 	NR_IRQS
 };
 
+=======
+>>>>>>> v3.18
 enum interruption_class {
 	IRQEXT_CLK,
 	IRQEXT_EXC,
@@ -26,6 +63,10 @@ enum interruption_class {
 	IRQEXT_CMS,
 	IRQEXT_CMC,
 	IRQEXT_CMR,
+<<<<<<< HEAD
+=======
+	IRQEXT_FTP,
+>>>>>>> v3.18
 	IRQIO_CIO,
 	IRQIO_QAI,
 	IRQIO_DAS,
@@ -42,6 +83,10 @@ enum interruption_class {
 	IRQIO_PCI,
 	IRQIO_MSI,
 	IRQIO_VIR,
+<<<<<<< HEAD
+=======
+	IRQIO_VAI,
+>>>>>>> v3.18
 	NMI_NMI,
 	CPU_RST,
 	NR_ARCH_IRQS
@@ -55,7 +100,11 @@ DECLARE_PER_CPU_SHARED_ALIGNED(struct irq_stat, irq_stat);
 
 static __always_inline void inc_irq_stat(enum interruption_class irq)
 {
+<<<<<<< HEAD
 	__get_cpu_var(irq_stat).irqs[irq]++;
+=======
+	__this_cpu_inc(irq_stat.irqs[irq]);
+>>>>>>> v3.18
 }
 
 struct ext_code {
@@ -65,6 +114,7 @@ struct ext_code {
 
 typedef void (*ext_int_handler_t)(struct ext_code, unsigned int, unsigned long);
 
+<<<<<<< HEAD
 int register_external_interrupt(u16 code, ext_int_handler_t handler);
 int unregister_external_interrupt(u16 code, ext_int_handler_t handler);
 void service_subclass_irq_register(void);
@@ -81,5 +131,21 @@ void measurement_alert_subclass_unregister(void);
 #  define enable_irq_lockdep_irqrestore(irq, flags) \
 						enable_irq(irq)
 #endif
+=======
+int register_external_irq(u16 code, ext_int_handler_t handler);
+int unregister_external_irq(u16 code, ext_int_handler_t handler);
+
+enum irq_subclass {
+	IRQ_SUBCLASS_MEASUREMENT_ALERT = 5,
+	IRQ_SUBCLASS_SERVICE_SIGNAL = 9,
+};
+
+void irq_subclass_register(enum irq_subclass subclass);
+void irq_subclass_unregister(enum irq_subclass subclass);
+
+#define irq_canonicalize(irq)  (irq)
+
+#endif /* __ASSEMBLY__ */
+>>>>>>> v3.18
 
 #endif /* _ASM_IRQ_H */

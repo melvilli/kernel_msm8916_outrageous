@@ -65,6 +65,7 @@
 #define COMPAT_PT_TEXT_ADDR		0x10000
 #define COMPAT_PT_DATA_ADDR		0x10004
 #define COMPAT_PT_TEXT_END_ADDR		0x10008
+<<<<<<< HEAD
 
 /*
  * used to skip a system call when tracer changes its number to -1
@@ -74,6 +75,8 @@
 #define RET_SKIP_SYSCALL_TRACE	-2
 #define IS_SKIP_SYSCALL(no)	((int)(no & 0xffffffff) == -1)
 
+=======
+>>>>>>> v3.18
 #ifndef __ASSEMBLY__
 
 /* sizeof(struct user) for AArch32 */
@@ -85,6 +88,7 @@
 #define compat_sp	regs[13]
 #define compat_lr	regs[14]
 #define compat_sp_hyp	regs[15]
+<<<<<<< HEAD
 #define compat_lr_irq	regs[16]
 #define compat_sp_irq	regs[17]
 #define compat_lr_svc	regs[18]
@@ -93,6 +97,16 @@
 #define compat_sp_abt	regs[21]
 #define compat_lr_und	regs[22]
 #define compat_sp_und	regs[23]
+=======
+#define compat_sp_irq	regs[16]
+#define compat_lr_irq	regs[17]
+#define compat_sp_svc	regs[18]
+#define compat_lr_svc	regs[19]
+#define compat_sp_abt	regs[20]
+#define compat_lr_abt	regs[21]
+#define compat_sp_und	regs[22]
+#define compat_lr_und	regs[23]
+>>>>>>> v3.18
 #define compat_r8_fiq	regs[24]
 #define compat_r9_fiq	regs[25]
 #define compat_r10_fiq	regs[26]
@@ -146,7 +160,11 @@ struct pt_regs {
 	(!((regs)->pstate & PSR_F_BIT))
 
 #define user_stack_pointer(regs) \
+<<<<<<< HEAD
 	(!compat_user_mode(regs)) ? ((regs)->sp) : ((regs)->compat_sp)
+=======
+	(!compat_user_mode(regs) ? (regs)->sp : (regs)->compat_sp)
+>>>>>>> v3.18
 
 static inline unsigned long regs_return_value(struct pt_regs *regs)
 {
@@ -191,6 +209,7 @@ extern unsigned long profile_pc(struct pt_regs *regs);
 #define profile_pc(regs) instruction_pointer(regs)
 #endif
 
+<<<<<<< HEAD
 /*
  * True if instr is a 32-bit thumb instruction. This works if instr
  * is the first or only half-word of a thumb instruction. It also works
@@ -199,5 +218,7 @@ extern unsigned long profile_pc(struct pt_regs *regs);
  */
 #define is_wide_instruction(instr)	((unsigned)(instr) >= 0xe800)
 
+=======
+>>>>>>> v3.18
 #endif /* __ASSEMBLY__ */
 #endif

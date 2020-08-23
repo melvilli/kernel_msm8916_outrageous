@@ -1,5 +1,17 @@
 /*
+<<<<<<< HEAD
  * MCP23S08 SPI/GPIO gpio expander driver
+=======
+ * MCP23S08 SPI/I2C GPIO gpio expander driver
+ *
+ * The inputs and outputs of the mcp23s08, mcp23s17, mcp23008 and mcp23017 are
+ * supported.
+ * For the I2C versions of the chips (mcp23008 and mcp23017) generation of
+ * interrupts is also supported.
+ * The hardware of the SPI versions of the chips (mcp23s08 and mcp23s17) is
+ * also capable of generating interrupts, but the linux driver does not
+ * support that yet.
+>>>>>>> v3.18
  */
 
 #include <linux/kernel.h>
@@ -12,7 +24,12 @@
 #include <linux/spi/mcp23s08.h>
 #include <linux/slab.h>
 #include <asm/byteorder.h>
+<<<<<<< HEAD
 #include <linux/of.h>
+=======
+#include <linux/interrupt.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 #include <linux/of_device.h>
 
 /**
@@ -34,6 +51,10 @@
 #define MCP_DEFVAL	0x03
 #define MCP_INTCON	0x04
 #define MCP_IOCON	0x05
+<<<<<<< HEAD
+=======
+#	define IOCON_MIRROR	(1 << 6)
+>>>>>>> v3.18
 #	define IOCON_SEQOP	(1 << 5)
 #	define IOCON_HAEN	(1 << 3)
 #	define IOCON_ODR	(1 << 2)
@@ -57,8 +78,19 @@ struct mcp23s08 {
 	u8			addr;
 
 	u16			cache[11];
+<<<<<<< HEAD
 	/* lock protects the cached values */
 	struct mutex		lock;
+=======
+	u16			irq_rise;
+	u16			irq_fall;
+	int			irq;
+	bool			irq_controller;
+	/* lock protects the cached values */
+	struct mutex		lock;
+	struct mutex		irq_lock;
+	struct irq_domain	*irq_domain;
+>>>>>>> v3.18
 
 	struct gpio_chip	chip;
 
@@ -77,6 +109,14 @@ struct mcp23s08_driver_data {
 	struct mcp23s08		chip[];
 };
 
+<<<<<<< HEAD
+=======
+/* This lock class tells lockdep that GPIO irqs are in a different
+ * category than their parents, so it won't report false recursion.
+ */
+static struct lock_class_key gpio_lock_class;
+
+>>>>>>> v3.18
 /*----------------------------------------------------------------------*/
 
 #if IS_ENABLED(CONFIG_I2C)
@@ -152,7 +192,11 @@ static int mcp23s08_read(struct mcp23s08 *mcp, unsigned reg)
 
 	tx[0] = mcp->addr | 0x01;
 	tx[1] = reg;
+<<<<<<< HEAD
 	status = spi_write_then_read(mcp->data, tx, sizeof tx, rx, sizeof rx);
+=======
+	status = spi_write_then_read(mcp->data, tx, sizeof(tx), rx, sizeof(rx));
+>>>>>>> v3.18
 	return (status < 0) ? status : rx[0];
 }
 
@@ -163,7 +207,11 @@ static int mcp23s08_write(struct mcp23s08 *mcp, unsigned reg, unsigned val)
 	tx[0] = mcp->addr;
 	tx[1] = reg;
 	tx[2] = val;
+<<<<<<< HEAD
 	return spi_write_then_read(mcp->data, tx, sizeof tx, NULL, 0);
+=======
+	return spi_write_then_read(mcp->data, tx, sizeof(tx), NULL, 0);
+>>>>>>> v3.18
 }
 
 static int
@@ -172,13 +220,21 @@ mcp23s08_read_regs(struct mcp23s08 *mcp, unsigned reg, u16 *vals, unsigned n)
 	u8	tx[2], *tmp;
 	int	status;
 
+<<<<<<< HEAD
 	if ((n + reg) > sizeof mcp->cache)
+=======
+	if ((n + reg) > sizeof(mcp->cache))
+>>>>>>> v3.18
 		return -EINVAL;
 	tx[0] = mcp->addr | 0x01;
 	tx[1] = reg;
 
 	tmp = (u8 *)vals;
+<<<<<<< HEAD
 	status = spi_write_then_read(mcp->data, tx, sizeof tx, tmp, n);
+=======
+	status = spi_write_then_read(mcp->data, tx, sizeof(tx), tmp, n);
+>>>>>>> v3.18
 	if (status >= 0) {
 		while (n--)
 			vals[n] = tmp[n]; /* expand to 16bit */
@@ -193,7 +249,11 @@ static int mcp23s17_read(struct mcp23s08 *mcp, unsigned reg)
 
 	tx[0] = mcp->addr | 0x01;
 	tx[1] = reg << 1;
+<<<<<<< HEAD
 	status = spi_write_then_read(mcp->data, tx, sizeof tx, rx, sizeof rx);
+=======
+	status = spi_write_then_read(mcp->data, tx, sizeof(tx), rx, sizeof(rx));
+>>>>>>> v3.18
 	return (status < 0) ? status : (rx[0] | (rx[1] << 8));
 }
 
@@ -205,7 +265,11 @@ static int mcp23s17_write(struct mcp23s08 *mcp, unsigned reg, unsigned val)
 	tx[1] = reg << 1;
 	tx[2] = val;
 	tx[3] = val >> 8;
+<<<<<<< HEAD
 	return spi_write_then_read(mcp->data, tx, sizeof tx, NULL, 0);
+=======
+	return spi_write_then_read(mcp->data, tx, sizeof(tx), NULL, 0);
+>>>>>>> v3.18
 }
 
 static int
@@ -214,12 +278,20 @@ mcp23s17_read_regs(struct mcp23s08 *mcp, unsigned reg, u16 *vals, unsigned n)
 	u8	tx[2];
 	int	status;
 
+<<<<<<< HEAD
 	if ((n + reg) > sizeof mcp->cache)
+=======
+	if ((n + reg) > sizeof(mcp->cache))
+>>>>>>> v3.18
 		return -EINVAL;
 	tx[0] = mcp->addr | 0x01;
 	tx[1] = reg << 1;
 
+<<<<<<< HEAD
 	status = spi_write_then_read(mcp->data, tx, sizeof tx,
+=======
+	status = spi_write_then_read(mcp->data, tx, sizeof(tx),
+>>>>>>> v3.18
 				     (u8 *)vals, n * 2);
 	if (status >= 0) {
 		while (n--)
@@ -316,6 +388,198 @@ mcp23s08_direction_output(struct gpio_chip *chip, unsigned offset, int value)
 }
 
 /*----------------------------------------------------------------------*/
+<<<<<<< HEAD
+=======
+static irqreturn_t mcp23s08_irq(int irq, void *data)
+{
+	struct mcp23s08 *mcp = data;
+	int intcap, intf, i;
+	unsigned int child_irq;
+
+	mutex_lock(&mcp->lock);
+	intf = mcp->ops->read(mcp, MCP_INTF);
+	if (intf < 0) {
+		mutex_unlock(&mcp->lock);
+		return IRQ_HANDLED;
+	}
+
+	mcp->cache[MCP_INTF] = intf;
+
+	intcap = mcp->ops->read(mcp, MCP_INTCAP);
+	if (intcap < 0) {
+		mutex_unlock(&mcp->lock);
+		return IRQ_HANDLED;
+	}
+
+	mcp->cache[MCP_INTCAP] = intcap;
+	mutex_unlock(&mcp->lock);
+
+
+	for (i = 0; i < mcp->chip.ngpio; i++) {
+		if ((BIT(i) & mcp->cache[MCP_INTF]) &&
+		    ((BIT(i) & intcap & mcp->irq_rise) ||
+		     (mcp->irq_fall & ~intcap & BIT(i)))) {
+			child_irq = irq_find_mapping(mcp->irq_domain, i);
+			handle_nested_irq(child_irq);
+		}
+	}
+
+	return IRQ_HANDLED;
+}
+
+static int mcp23s08_gpio_to_irq(struct gpio_chip *chip, unsigned offset)
+{
+	struct mcp23s08 *mcp = container_of(chip, struct mcp23s08, chip);
+
+	return irq_find_mapping(mcp->irq_domain, offset);
+}
+
+static void mcp23s08_irq_mask(struct irq_data *data)
+{
+	struct mcp23s08 *mcp = irq_data_get_irq_chip_data(data);
+	unsigned int pos = data->hwirq;
+
+	mcp->cache[MCP_GPINTEN] &= ~BIT(pos);
+}
+
+static void mcp23s08_irq_unmask(struct irq_data *data)
+{
+	struct mcp23s08 *mcp = irq_data_get_irq_chip_data(data);
+	unsigned int pos = data->hwirq;
+
+	mcp->cache[MCP_GPINTEN] |= BIT(pos);
+}
+
+static int mcp23s08_irq_set_type(struct irq_data *data, unsigned int type)
+{
+	struct mcp23s08 *mcp = irq_data_get_irq_chip_data(data);
+	unsigned int pos = data->hwirq;
+	int status = 0;
+
+	if ((type & IRQ_TYPE_EDGE_BOTH) == IRQ_TYPE_EDGE_BOTH) {
+		mcp->cache[MCP_INTCON] &= ~BIT(pos);
+		mcp->irq_rise |= BIT(pos);
+		mcp->irq_fall |= BIT(pos);
+	} else if (type & IRQ_TYPE_EDGE_RISING) {
+		mcp->cache[MCP_INTCON] &= ~BIT(pos);
+		mcp->irq_rise |= BIT(pos);
+		mcp->irq_fall &= ~BIT(pos);
+	} else if (type & IRQ_TYPE_EDGE_FALLING) {
+		mcp->cache[MCP_INTCON] &= ~BIT(pos);
+		mcp->irq_rise &= ~BIT(pos);
+		mcp->irq_fall |= BIT(pos);
+	} else
+		return -EINVAL;
+
+	return status;
+}
+
+static void mcp23s08_irq_bus_lock(struct irq_data *data)
+{
+	struct mcp23s08 *mcp = irq_data_get_irq_chip_data(data);
+
+	mutex_lock(&mcp->irq_lock);
+}
+
+static void mcp23s08_irq_bus_unlock(struct irq_data *data)
+{
+	struct mcp23s08 *mcp = irq_data_get_irq_chip_data(data);
+
+	mutex_lock(&mcp->lock);
+	mcp->ops->write(mcp, MCP_GPINTEN, mcp->cache[MCP_GPINTEN]);
+	mcp->ops->write(mcp, MCP_DEFVAL, mcp->cache[MCP_DEFVAL]);
+	mcp->ops->write(mcp, MCP_INTCON, mcp->cache[MCP_INTCON]);
+	mutex_unlock(&mcp->lock);
+	mutex_unlock(&mcp->irq_lock);
+}
+
+static int mcp23s08_irq_reqres(struct irq_data *data)
+{
+	struct mcp23s08 *mcp = irq_data_get_irq_chip_data(data);
+
+	if (gpio_lock_as_irq(&mcp->chip, data->hwirq)) {
+		dev_err(mcp->chip.dev,
+			"unable to lock HW IRQ %lu for IRQ usage\n",
+			data->hwirq);
+		return -EINVAL;
+	}
+
+	return 0;
+}
+
+static void mcp23s08_irq_relres(struct irq_data *data)
+{
+	struct mcp23s08 *mcp = irq_data_get_irq_chip_data(data);
+
+	gpio_unlock_as_irq(&mcp->chip, data->hwirq);
+}
+
+static struct irq_chip mcp23s08_irq_chip = {
+	.name = "gpio-mcp23xxx",
+	.irq_mask = mcp23s08_irq_mask,
+	.irq_unmask = mcp23s08_irq_unmask,
+	.irq_set_type = mcp23s08_irq_set_type,
+	.irq_bus_lock = mcp23s08_irq_bus_lock,
+	.irq_bus_sync_unlock = mcp23s08_irq_bus_unlock,
+	.irq_request_resources = mcp23s08_irq_reqres,
+	.irq_release_resources = mcp23s08_irq_relres,
+};
+
+static int mcp23s08_irq_setup(struct mcp23s08 *mcp)
+{
+	struct gpio_chip *chip = &mcp->chip;
+	int err, irq, j;
+
+	mutex_init(&mcp->irq_lock);
+
+	mcp->irq_domain = irq_domain_add_linear(chip->dev->of_node, chip->ngpio,
+						&irq_domain_simple_ops, mcp);
+	if (!mcp->irq_domain)
+		return -ENODEV;
+
+	err = devm_request_threaded_irq(chip->dev, mcp->irq, NULL, mcp23s08_irq,
+					IRQF_TRIGGER_LOW | IRQF_ONESHOT,
+					dev_name(chip->dev), mcp);
+	if (err != 0) {
+		dev_err(chip->dev, "unable to request IRQ#%d: %d\n",
+			mcp->irq, err);
+		return err;
+	}
+
+	chip->to_irq = mcp23s08_gpio_to_irq;
+
+	for (j = 0; j < mcp->chip.ngpio; j++) {
+		irq = irq_create_mapping(mcp->irq_domain, j);
+		irq_set_lockdep_class(irq, &gpio_lock_class);
+		irq_set_chip_data(irq, mcp);
+		irq_set_chip(irq, &mcp23s08_irq_chip);
+		irq_set_nested_thread(irq, true);
+#ifdef CONFIG_ARM
+		set_irq_flags(irq, IRQF_VALID);
+#else
+		irq_set_noprobe(irq);
+#endif
+	}
+	return 0;
+}
+
+static void mcp23s08_irq_teardown(struct mcp23s08 *mcp)
+{
+	unsigned int irq, i;
+
+	free_irq(mcp->irq, mcp);
+
+	for (i = 0; i < mcp->chip.ngpio; i++) {
+		irq = irq_find_mapping(mcp->irq_domain, i);
+		if (irq > 0)
+			irq_dispose_mapping(irq);
+	}
+
+	irq_domain_remove(mcp->irq_domain);
+}
+
+/*----------------------------------------------------------------------*/
+>>>>>>> v3.18
 
 #ifdef CONFIG_DEBUG_FS
 
@@ -357,7 +621,11 @@ static void mcp23s08_dbg_show(struct seq_file *s, struct gpio_chip *chip)
 			(mcp->cache[MCP_GPIO] & mask) ? "hi" : "lo",
 			(mcp->cache[MCP_GPPU] & mask) ? "up" : "  ");
 		/* NOTE:  ignoring the irq-related registers */
+<<<<<<< HEAD
 		seq_printf(s, "\n");
+=======
+		seq_puts(s, "\n");
+>>>>>>> v3.18
 	}
 done:
 	mutex_unlock(&mcp->lock);
@@ -370,10 +638,18 @@ done:
 /*----------------------------------------------------------------------*/
 
 static int mcp23s08_probe_one(struct mcp23s08 *mcp, struct device *dev,
+<<<<<<< HEAD
 			      void *data, unsigned addr,
 			      unsigned type, unsigned base, unsigned pullups)
 {
 	int status;
+=======
+			      void *data, unsigned addr, unsigned type,
+			      struct mcp23s08_platform_data *pdata, int cs)
+{
+	int status;
+	bool mirror = false;
+>>>>>>> v3.18
 
 	mutex_init(&mcp->lock);
 
@@ -424,14 +700,20 @@ static int mcp23s08_probe_one(struct mcp23s08 *mcp, struct device *dev,
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 	mcp->chip.base = base;
 	mcp->chip.can_sleep = 1;
+=======
+	mcp->chip.base = pdata->base;
+	mcp->chip.can_sleep = true;
+>>>>>>> v3.18
 	mcp->chip.dev = dev;
 	mcp->chip.owner = THIS_MODULE;
 
 	/* verify MCP_IOCON.SEQOP = 0, so sequential reads work,
 	 * and MCP_IOCON.HAEN = 1, so we work with all chips.
 	 */
+<<<<<<< HEAD
 	status = mcp->ops->read(mcp, MCP_IOCON);
 	if (status < 0)
 		goto fail;
@@ -439,13 +721,36 @@ static int mcp23s08_probe_one(struct mcp23s08 *mcp, struct device *dev,
 		/* mcp23s17 has IOCON twice, make sure they are in sync */
 		status &= ~(IOCON_SEQOP | (IOCON_SEQOP << 8));
 		status |= IOCON_HAEN | (IOCON_HAEN << 8);
+=======
+
+	status = mcp->ops->read(mcp, MCP_IOCON);
+	if (status < 0)
+		goto fail;
+
+	mcp->irq_controller = pdata->irq_controller;
+	if (mcp->irq && mcp->irq_controller && (type == MCP_TYPE_017))
+		mirror = pdata->mirror;
+
+	if ((status & IOCON_SEQOP) || !(status & IOCON_HAEN) || mirror) {
+		/* mcp23s17 has IOCON twice, make sure they are in sync */
+		status &= ~(IOCON_SEQOP | (IOCON_SEQOP << 8));
+		status |= IOCON_HAEN | (IOCON_HAEN << 8);
+		status &= ~(IOCON_INTPOL | (IOCON_INTPOL << 8));
+		if (mirror)
+			status |= IOCON_MIRROR | (IOCON_MIRROR << 8);
+
+>>>>>>> v3.18
 		status = mcp->ops->write(mcp, MCP_IOCON, status);
 		if (status < 0)
 			goto fail;
 	}
 
 	/* configure ~100K pullups */
+<<<<<<< HEAD
 	status = mcp->ops->write(mcp, MCP_GPPU, pullups);
+=======
+	status = mcp->ops->write(mcp, MCP_GPPU, pdata->chip[cs].pullups);
+>>>>>>> v3.18
 	if (status < 0)
 		goto fail;
 
@@ -470,6 +775,19 @@ static int mcp23s08_probe_one(struct mcp23s08 *mcp, struct device *dev,
 	}
 
 	status = gpiochip_add(&mcp->chip);
+<<<<<<< HEAD
+=======
+	if (status < 0)
+		goto fail;
+
+	if (mcp->irq && mcp->irq_controller) {
+		status = mcp23s08_irq_setup(mcp);
+		if (status) {
+			mcp23s08_irq_teardown(mcp);
+			goto fail;
+		}
+	}
+>>>>>>> v3.18
 fail:
 	if (status < 0)
 		dev_dbg(dev, "can't setup chip %d, --> %d\n",
@@ -481,12 +799,32 @@ fail:
 
 #ifdef CONFIG_OF
 #ifdef CONFIG_SPI_MASTER
+<<<<<<< HEAD
 static struct of_device_id mcp23s08_spi_of_match[] = {
 	{
 		.compatible = "mcp,mcp23s08", .data = (void *) MCP_TYPE_S08,
 	},
 	{
 		.compatible = "mcp,mcp23s17", .data = (void *) MCP_TYPE_S17,
+=======
+static const struct of_device_id mcp23s08_spi_of_match[] = {
+	{
+		.compatible = "microchip,mcp23s08",
+		.data = (void *) MCP_TYPE_S08,
+	},
+	{
+		.compatible = "microchip,mcp23s17",
+		.data = (void *) MCP_TYPE_S17,
+	},
+/* NOTE: The use of the mcp prefix is deprecated and will be removed. */
+	{
+		.compatible = "mcp,mcp23s08",
+		.data = (void *) MCP_TYPE_S08,
+	},
+	{
+		.compatible = "mcp,mcp23s17",
+		.data = (void *) MCP_TYPE_S17,
+>>>>>>> v3.18
 	},
 	{ },
 };
@@ -494,12 +832,32 @@ MODULE_DEVICE_TABLE(of, mcp23s08_spi_of_match);
 #endif
 
 #if IS_ENABLED(CONFIG_I2C)
+<<<<<<< HEAD
 static struct of_device_id mcp23s08_i2c_of_match[] = {
 	{
 		.compatible = "mcp,mcp23008", .data = (void *) MCP_TYPE_008,
 	},
 	{
 		.compatible = "mcp,mcp23017", .data = (void *) MCP_TYPE_017,
+=======
+static const struct of_device_id mcp23s08_i2c_of_match[] = {
+	{
+		.compatible = "microchip,mcp23008",
+		.data = (void *) MCP_TYPE_008,
+	},
+	{
+		.compatible = "microchip,mcp23017",
+		.data = (void *) MCP_TYPE_017,
+	},
+/* NOTE: The use of the mcp prefix is deprecated and will be removed. */
+	{
+		.compatible = "mcp,mcp23008",
+		.data = (void *) MCP_TYPE_008,
+	},
+	{
+		.compatible = "mcp,mcp23017",
+		.data = (void *) MCP_TYPE_017,
+>>>>>>> v3.18
 	},
 	{ },
 };
@@ -513,14 +871,21 @@ MODULE_DEVICE_TABLE(of, mcp23s08_i2c_of_match);
 static int mcp230xx_probe(struct i2c_client *client,
 				    const struct i2c_device_id *id)
 {
+<<<<<<< HEAD
 	struct mcp23s08_platform_data *pdata;
 	struct mcp23s08 *mcp;
 	int status, base, pullups;
+=======
+	struct mcp23s08_platform_data *pdata, local_pdata;
+	struct mcp23s08 *mcp;
+	int status;
+>>>>>>> v3.18
 	const struct of_device_id *match;
 
 	match = of_match_device(of_match_ptr(mcp23s08_i2c_of_match),
 					&client->dev);
 	if (match) {
+<<<<<<< HEAD
 		base = -1;
 		pullups = 0;
 	} else {
@@ -540,6 +905,32 @@ static int mcp230xx_probe(struct i2c_client *client,
 
 	status = mcp23s08_probe_one(mcp, &client->dev, client, client->addr,
 				    id->driver_data, base, pullups);
+=======
+		pdata = &local_pdata;
+		pdata->base = -1;
+		pdata->chip[0].pullups = 0;
+		pdata->irq_controller =	of_property_read_bool(
+					client->dev.of_node,
+					"interrupt-controller");
+		pdata->mirror = of_property_read_bool(client->dev.of_node,
+						      "microchip,irq-mirror");
+		client->irq = irq_of_parse_and_map(client->dev.of_node, 0);
+	} else {
+		pdata = dev_get_platdata(&client->dev);
+		if (!pdata || !gpio_is_valid(pdata->base)) {
+			dev_dbg(&client->dev, "invalid platform data\n");
+			return -EINVAL;
+		}
+	}
+
+	mcp = kzalloc(sizeof(*mcp), GFP_KERNEL);
+	if (!mcp)
+		return -ENOMEM;
+
+	mcp->irq = client->irq;
+	status = mcp23s08_probe_one(mcp, &client->dev, client, client->addr,
+				    id->driver_data, pdata, 0);
+>>>>>>> v3.18
 	if (status)
 		goto fail;
 
@@ -556,6 +947,7 @@ fail:
 static int mcp230xx_remove(struct i2c_client *client)
 {
 	struct mcp23s08 *mcp = i2c_get_clientdata(client);
+<<<<<<< HEAD
 	int status;
 
 	status = gpiochip_remove(&mcp->chip);
@@ -563,6 +955,16 @@ static int mcp230xx_remove(struct i2c_client *client)
 		kfree(mcp);
 
 	return status;
+=======
+
+	if (client->irq && mcp->irq_controller)
+		mcp23s08_irq_teardown(mcp);
+
+	gpiochip_remove(&mcp->chip);
+	kfree(mcp);
+
+	return 0;
+>>>>>>> v3.18
 }
 
 static const struct i2c_device_id mcp230xx_id[] = {
@@ -606,6 +1008,7 @@ static void mcp23s08_i2c_exit(void) { }
 
 static int mcp23s08_probe(struct spi_device *spi)
 {
+<<<<<<< HEAD
 	struct mcp23s08_platform_data	*pdata;
 	unsigned			addr;
 	unsigned			chips = 0;
@@ -614,28 +1017,68 @@ static int mcp23s08_probe(struct spi_device *spi)
 	unsigned			base = -1,
 					ngpio = 0,
 					pullups[ARRAY_SIZE(pdata->chip)];
+=======
+	struct mcp23s08_platform_data	*pdata, local_pdata;
+	unsigned			addr;
+	int				chips = 0;
+	struct mcp23s08_driver_data	*data;
+	int				status, type;
+	unsigned			ngpio = 0;
+>>>>>>> v3.18
 	const struct			of_device_id *match;
 	u32				spi_present_mask = 0;
 
 	match = of_match_device(of_match_ptr(mcp23s08_spi_of_match), &spi->dev);
 	if (match) {
+<<<<<<< HEAD
 		type = (int)match->data;
 		status = of_property_read_u32(spi->dev.of_node,
 				"mcp,spi-present-mask", &spi_present_mask);
 		if (status) {
 			dev_err(&spi->dev, "DT has no spi-present-mask\n");
 			return -ENODEV;
+=======
+		type = (int)(uintptr_t)match->data;
+		status = of_property_read_u32(spi->dev.of_node,
+			    "microchip,spi-present-mask", &spi_present_mask);
+		if (status) {
+			status = of_property_read_u32(spi->dev.of_node,
+				    "mcp,spi-present-mask", &spi_present_mask);
+			if (status) {
+				dev_err(&spi->dev,
+					"DT has no spi-present-mask\n");
+				return -ENODEV;
+			}
+>>>>>>> v3.18
 		}
 		if ((spi_present_mask <= 0) || (spi_present_mask >= 256)) {
 			dev_err(&spi->dev, "invalid spi-present-mask\n");
 			return -ENODEV;
 		}
 
+<<<<<<< HEAD
 		for (addr = 0; addr < ARRAY_SIZE(pdata->chip); addr++)
 			pullups[addr] = 0;
 	} else {
 		type = spi_get_device_id(spi)->driver_data;
 		pdata = spi->dev.platform_data;
+=======
+		pdata = &local_pdata;
+		pdata->base = -1;
+		for (addr = 0; addr < ARRAY_SIZE(pdata->chip); addr++) {
+			pdata->chip[addr].pullups = 0;
+			if (spi_present_mask & (1 << addr))
+				chips++;
+		}
+		pdata->irq_controller =	of_property_read_bool(
+					spi->dev.of_node,
+					"interrupt-controller");
+		pdata->mirror = of_property_read_bool(spi->dev.of_node,
+						      "microchip,irq-mirror");
+	} else {
+		type = spi_get_device_id(spi)->driver_data;
+		pdata = dev_get_platdata(&spi->dev);
+>>>>>>> v3.18
 		if (!pdata || !gpio_is_valid(pdata->base)) {
 			dev_dbg(&spi->dev,
 					"invalid or missing platform data\n");
@@ -652,6 +1095,7 @@ static int mcp23s08_probe(struct spi_device *spi)
 				return -EINVAL;
 			}
 			spi_present_mask |= 1 << addr;
+<<<<<<< HEAD
 			pullups[addr] = pdata->chip[addr].pullups;
 		}
 
@@ -662,6 +1106,15 @@ static int mcp23s08_probe(struct spi_device *spi)
 	}
 
 	data = kzalloc(sizeof *data + chips * sizeof(struct mcp23s08),
+=======
+		}
+	}
+
+	if (!chips)
+		return -ENODEV;
+
+	data = kzalloc(sizeof(*data) + chips * sizeof(struct mcp23s08),
+>>>>>>> v3.18
 			GFP_KERNEL);
 	if (!data)
 		return -ENOMEM;
@@ -673,6 +1126,7 @@ static int mcp23s08_probe(struct spi_device *spi)
 		chips--;
 		data->mcp[addr] = &data->chip[chips];
 		status = mcp23s08_probe_one(data->mcp[addr], &spi->dev, spi,
+<<<<<<< HEAD
 					    0x40 | (addr << 1), type, base,
 					    pullups[addr]);
 		if (status < 0)
@@ -680,6 +1134,15 @@ static int mcp23s08_probe(struct spi_device *spi)
 
 		if (base != -1)
 			base += (type == MCP_TYPE_S17) ? 16 : 8;
+=======
+					    0x40 | (addr << 1), type, pdata,
+					    addr);
+		if (status < 0)
+			goto fail;
+
+		if (pdata->base != -1)
+			pdata->base += (type == MCP_TYPE_S17) ? 16 : 8;
+>>>>>>> v3.18
 		ngpio += (type == MCP_TYPE_S17) ? 16 : 8;
 	}
 	data->ngpio = ngpio;
@@ -693,6 +1156,7 @@ static int mcp23s08_probe(struct spi_device *spi)
 
 fail:
 	for (addr = 0; addr < ARRAY_SIZE(data->mcp); addr++) {
+<<<<<<< HEAD
 		int tmp;
 
 		if (!data->mcp[addr])
@@ -700,6 +1164,12 @@ fail:
 		tmp = gpiochip_remove(&data->mcp[addr]->chip);
 		if (tmp < 0)
 			dev_err(&spi->dev, "%s --> %d\n", "remove", tmp);
+=======
+
+		if (!data->mcp[addr])
+			continue;
+		gpiochip_remove(&data->mcp[addr]->chip);
+>>>>>>> v3.18
 	}
 	kfree(data);
 	return status;
@@ -709,14 +1179,20 @@ static int mcp23s08_remove(struct spi_device *spi)
 {
 	struct mcp23s08_driver_data	*data = spi_get_drvdata(spi);
 	unsigned			addr;
+<<<<<<< HEAD
 	int				status = 0;
 
 	for (addr = 0; addr < ARRAY_SIZE(data->mcp); addr++) {
 		int tmp;
+=======
+
+	for (addr = 0; addr < ARRAY_SIZE(data->mcp); addr++) {
+>>>>>>> v3.18
 
 		if (!data->mcp[addr])
 			continue;
 
+<<<<<<< HEAD
 		tmp = gpiochip_remove(&data->mcp[addr]->chip);
 		if (tmp < 0) {
 			dev_err(&spi->dev, "%s --> %d\n", "remove", tmp);
@@ -726,6 +1202,12 @@ static int mcp23s08_remove(struct spi_device *spi)
 	if (status == 0)
 		kfree(data);
 	return status;
+=======
+		gpiochip_remove(&data->mcp[addr]->chip);
+	}
+	kfree(data);
+	return 0;
+>>>>>>> v3.18
 }
 
 static const struct spi_device_id mcp23s08_ids[] = {

@@ -901,7 +901,11 @@ Begin:
 					ptr--;
 					*ptr++ = '\n';
 					*ptr = 0;
+<<<<<<< HEAD
 					HiSax_putstatus(cs, NULL, cs->dlog);
+=======
+					HiSax_putstatus(cs, NULL, "%s", cs->dlog);
+>>>>>>> v3.18
 				} else
 					HiSax_putstatus(cs, "LogEcho: ", "warning Frame too big (%d)", total - 3);
 			}
@@ -1643,10 +1647,13 @@ setup_hfcpci(struct IsdnCard *card)
 	int i;
 	struct pci_dev *tmp_hfcpci = NULL;
 
+<<<<<<< HEAD
 #ifdef __BIG_ENDIAN
 #error "not running on big endian machines now"
 #endif
 
+=======
+>>>>>>> v3.18
 	strcpy(tmp, hfcpci_revision);
 	printk(KERN_INFO "HiSax: HFC-PCI driver Rev. %s\n", HiSax_getrev(tmp));
 

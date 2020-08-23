@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  *  Copyright (c) 2000-2010 LSI Corporation.
+=======
+ *  Copyright (c) 2000-2014 LSI Corporation.
+>>>>>>> v3.18
  *
  *
  *           Name:  mpi2_sas.h

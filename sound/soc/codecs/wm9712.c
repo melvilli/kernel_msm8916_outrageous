@@ -455,7 +455,11 @@ static unsigned int ac97_read(struct snd_soc_codec *codec,
 	if (reg == AC97_RESET || reg == AC97_GPIO_STATUS ||
 		reg == AC97_VENDOR_ID1 || reg == AC97_VENDOR_ID2 ||
 		reg == AC97_REC_GAIN)
+<<<<<<< HEAD
 		return soc_ac97_ops.read(codec->ac97, reg);
+=======
+		return soc_ac97_ops->read(codec->ac97, reg);
+>>>>>>> v3.18
 	else {
 		reg = reg >> 1;
 
@@ -472,7 +476,11 @@ static int ac97_write(struct snd_soc_codec *codec, unsigned int reg,
 	u16 *cache = codec->reg_cache;
 
 	if (reg < 0x7c)
+<<<<<<< HEAD
 		soc_ac97_ops.write(codec->ac97, reg, val);
+=======
+		soc_ac97_ops->write(codec->ac97, reg, val);
+>>>>>>> v3.18
 	reg = reg >> 1;
 	if (reg < (ARRAY_SIZE(wm9712_reg)))
 		cache[reg] = val;
@@ -581,15 +589,26 @@ static int wm9712_set_bias_level(struct snd_soc_codec *codec,
 
 static int wm9712_reset(struct snd_soc_codec *codec, int try_warm)
 {
+<<<<<<< HEAD
 	if (try_warm && soc_ac97_ops.warm_reset) {
 		soc_ac97_ops.warm_reset(codec->ac97);
+=======
+	if (try_warm && soc_ac97_ops->warm_reset) {
+		soc_ac97_ops->warm_reset(codec->ac97);
+>>>>>>> v3.18
 		if (ac97_read(codec, 0) == wm9712_reg[0])
 			return 1;
 	}
 
+<<<<<<< HEAD
 	soc_ac97_ops.reset(codec->ac97);
 	if (soc_ac97_ops.warm_reset)
 		soc_ac97_ops.warm_reset(codec->ac97);
+=======
+	soc_ac97_ops->reset(codec->ac97);
+	if (soc_ac97_ops->warm_reset)
+		soc_ac97_ops->warm_reset(codec->ac97);
+>>>>>>> v3.18
 	if (ac97_read(codec, 0) != wm9712_reg[0])
 		goto err;
 	return 0;
@@ -624,7 +643,11 @@ static int wm9712_soc_resume(struct snd_soc_codec *codec)
 			if (i == AC97_INT_PAGING || i == AC97_POWERDOWN ||
 			    (i > 0x58 && i != 0x5c))
 				continue;
+<<<<<<< HEAD
 			soc_ac97_ops.write(codec->ac97, i, cache[i>>1]);
+=======
+			soc_ac97_ops->write(codec->ac97, i, cache[i>>1]);
+>>>>>>> v3.18
 		}
 	}
 
@@ -635,7 +658,11 @@ static int wm9712_soc_probe(struct snd_soc_codec *codec)
 {
 	int ret = 0;
 
+<<<<<<< HEAD
 	ret = snd_soc_new_ac97_codec(codec, &soc_ac97_ops, 0);
+=======
+	ret = snd_soc_new_ac97_codec(codec, soc_ac97_ops, 0);
+>>>>>>> v3.18
 	if (ret < 0) {
 		printk(KERN_ERR "wm9712: failed to register AC97 codec\n");
 		return ret;

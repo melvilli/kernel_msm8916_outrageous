@@ -29,7 +29,10 @@
 
 #include <linux/module.h>
 #include <linux/interrupt.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/serio.h>
 #include <linux/err.h>
 #include <linux/platform_device.h>

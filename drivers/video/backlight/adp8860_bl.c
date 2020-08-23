@@ -181,6 +181,10 @@ static int adp8860_clr_bits(struct i2c_client *client, int reg, uint8_t bit_mask
 static void adp8860_led_work(struct work_struct *work)
 {
 	struct adp8860_led *led = container_of(work, struct adp8860_led, work);
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	adp8860_write(led->client, ADP8860_ISC1 - led->id + 1,
 			 led->new_brightness >> 1);
 }
@@ -216,7 +220,11 @@ static int adp8860_led_setup(struct adp8860_led *led)
 static int adp8860_led_probe(struct i2c_client *client)
 {
 	struct adp8860_backlight_platform_data *pdata =
+<<<<<<< HEAD
 		client->dev.platform_data;
+=======
+		dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 	struct adp8860_bl *data = i2c_get_clientdata(client);
 	struct adp8860_led *led, *led_dat;
 	struct led_info *cur_led;
@@ -224,10 +232,15 @@ static int adp8860_led_probe(struct i2c_client *client)
 
 	led = devm_kzalloc(&client->dev, sizeof(*led) * pdata->num_leds,
 				GFP_KERNEL);
+<<<<<<< HEAD
 	if (led == NULL) {
 		dev_err(&client->dev, "failed to alloc memory\n");
 		return -ENOMEM;
 	}
+=======
+	if (led == NULL)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	ret = adp8860_write(client, ADP8860_ISCFR, pdata->led_fade_law);
 	ret = adp8860_write(client, ADP8860_ISCT1,
@@ -300,7 +313,11 @@ static int adp8860_led_probe(struct i2c_client *client)
 static int adp8860_led_remove(struct i2c_client *client)
 {
 	struct adp8860_backlight_platform_data *pdata =
+<<<<<<< HEAD
 		client->dev.platform_data;
+=======
+		dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 	struct adp8860_bl *data = i2c_get_clientdata(client);
 	int i;
 
@@ -364,6 +381,10 @@ static int adp8860_bl_set(struct backlight_device *bl, int brightness)
 static int adp8860_bl_update_status(struct backlight_device *bl)
 {
 	int brightness = bl->props.brightness;
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	if (bl->props.power != FB_BLANK_UNBLANK)
 		brightness = 0;
 
@@ -501,6 +522,10 @@ static ssize_t adp8860_bl_l1_daylight_max_store(struct device *dev,
 {
 	struct adp8860_bl *data = dev_get_drvdata(dev);
 	int ret = kstrtoul(buf, 10, &data->cached_daylight_max);
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 	if (ret)
 		return ret;
 
@@ -658,7 +683,11 @@ static int adp8860_probe(struct i2c_client *client,
 	struct backlight_device *bl;
 	struct adp8860_bl *data;
 	struct adp8860_backlight_platform_data *pdata =
+<<<<<<< HEAD
 		client->dev.platform_data;
+=======
+		dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 	struct backlight_properties props;
 	uint8_t reg_val;
 	int ret;
@@ -711,8 +740,14 @@ static int adp8860_probe(struct i2c_client *client,
 
 	mutex_init(&data->lock);
 
+<<<<<<< HEAD
 	bl = backlight_device_register(dev_driver_string(&client->dev),
 			&client->dev, data, &adp8860_bl_ops, &props);
+=======
+	bl = devm_backlight_device_register(&client->dev,
+				dev_driver_string(&client->dev),
+				&client->dev, data, &adp8860_bl_ops, &props);
+>>>>>>> v3.18
 	if (IS_ERR(bl)) {
 		dev_err(&client->dev, "failed to register backlight\n");
 		return PTR_ERR(bl);
@@ -728,7 +763,11 @@ static int adp8860_probe(struct i2c_client *client,
 
 	if (ret) {
 		dev_err(&client->dev, "failed to register sysfs\n");
+<<<<<<< HEAD
 		goto out1;
+=======
+		return ret;
+>>>>>>> v3.18
 	}
 
 	ret = adp8860_bl_setup(bl);
@@ -751,8 +790,11 @@ out:
 	if (data->en_ambl_sens)
 		sysfs_remove_group(&data->bl->dev.kobj,
 			&adp8860_bl_attr_group);
+<<<<<<< HEAD
 out1:
 	backlight_device_unregister(bl);
+=======
+>>>>>>> v3.18
 
 	return ret;
 }
@@ -770,8 +812,11 @@ static int adp8860_remove(struct i2c_client *client)
 		sysfs_remove_group(&data->bl->dev.kobj,
 			&adp8860_bl_attr_group);
 
+<<<<<<< HEAD
 	backlight_device_unregister(data->bl);
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

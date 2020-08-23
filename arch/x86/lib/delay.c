@@ -16,7 +16,10 @@
 #include <linux/timex.h>
 #include <linux/preempt.h>
 #include <linux/delay.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 
 #include <asm/processor.h>
 #include <asm/delay.h>

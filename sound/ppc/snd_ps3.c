@@ -933,8 +933,15 @@ static int snd_ps3_driver_probe(struct ps3_system_bus_device *dev)
 	int i, ret;
 	u64 lpar_addr, lpar_size;
 
+<<<<<<< HEAD
 	BUG_ON(!firmware_has_feature(FW_FEATURE_PS3_LV1));
 	BUG_ON(dev->match_id != PS3_MATCH_ID_SOUND);
+=======
+	if (WARN_ON(!firmware_has_feature(FW_FEATURE_PS3_LV1)))
+		return -ENODEV;
+	if (WARN_ON(dev->match_id != PS3_MATCH_ID_SOUND))
+		return -ENODEV;
+>>>>>>> v3.18
 
 	the_card.ps3_dev = dev;
 
@@ -982,7 +989,12 @@ static int snd_ps3_driver_probe(struct ps3_system_bus_device *dev)
 	}
 
 	/* create card instance */
+<<<<<<< HEAD
 	ret = snd_card_create(index, id, THIS_MODULE, 0, &the_card.card);
+=======
+	ret = snd_card_new(&dev->core, index, id, THIS_MODULE,
+			   0, &the_card.card);
+>>>>>>> v3.18
 	if (ret < 0)
 		goto clean_irq;
 
@@ -1050,7 +1062,10 @@ static int snd_ps3_driver_probe(struct ps3_system_bus_device *dev)
 	snd_ps3_init_avsetting(&the_card);
 
 	/* register the card */
+<<<<<<< HEAD
 	snd_card_set_dev(the_card.card, &dev->core);
+=======
+>>>>>>> v3.18
 	ret = snd_card_register(the_card.card);
 	if (ret < 0)
 		goto clean_dma_map;

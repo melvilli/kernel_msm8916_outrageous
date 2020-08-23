@@ -21,8 +21,13 @@
 #include <linux/videodev2.h>
 
 #include <mach/serial.h>
+<<<<<<< HEAD
 #include <mach/edma.h>
 #include <mach/pm.h>
+=======
+#include <mach/pm.h>
+#include <linux/platform_data/edma.h>
+>>>>>>> v3.18
 #include <linux/platform_data/i2c-davinci.h>
 #include <linux/platform_data/mmc-davinci.h>
 #include <linux/platform_data/usb-davinci.h>
@@ -80,8 +85,13 @@ extern unsigned int da850_max_speed;
 #define DA8XX_SHARED_RAM_BASE	0x80000000
 #define DA8XX_ARM_RAM_BASE	0xffff0000
 
+<<<<<<< HEAD
 void __init da830_init(void);
 void __init da850_init(void);
+=======
+void da830_init(void);
+void da850_init(void);
+>>>>>>> v3.18
 
 int da830_register_edma(struct edma_rsv_info *rsv);
 int da850_register_edma(struct edma_rsv_info *rsv[2]);
@@ -95,6 +105,7 @@ int da8xx_register_uio_pruss(void);
 int da8xx_register_lcdc(struct da8xx_lcdc_platform_data *pdata);
 int da8xx_register_mmcsd0(struct davinci_mmc_config *config);
 int da850_register_mmcsd1(struct davinci_mmc_config *config);
+<<<<<<< HEAD
 void __init da8xx_register_mcasp(int id, struct snd_platform_data *pdata);
 int da8xx_register_rtc(void);
 int da850_register_cpufreq(char *async_clk);
@@ -106,12 +117,33 @@ int __init da850_register_vpif(void);
 int __init da850_register_vpif_display
 			(struct vpif_display_config *display_config);
 int __init da850_register_vpif_capture
+=======
+void da8xx_register_mcasp(int id, struct snd_platform_data *pdata);
+int da8xx_register_rtc(void);
+int da8xx_register_gpio(void *pdata);
+int da850_register_cpufreq(char *async_clk);
+int da8xx_register_cpuidle(void);
+void __iomem *da8xx_get_mem_ctlr(void);
+int da850_register_pm(struct platform_device *pdev);
+int da850_register_sata(unsigned long refclkpn);
+int da850_register_vpif(void);
+int da850_register_vpif_display
+			(struct vpif_display_config *display_config);
+int da850_register_vpif_capture
+>>>>>>> v3.18
 			(struct vpif_capture_config *capture_config);
 void da8xx_restart(enum reboot_mode mode, const char *cmd);
 void da8xx_rproc_reserve_cma(void);
 int da8xx_register_rproc(void);
+<<<<<<< HEAD
 
 extern struct platform_device da8xx_serial_device;
+=======
+int da850_register_gpio(void);
+int da830_register_gpio(void);
+
+extern struct platform_device da8xx_serial_device[];
+>>>>>>> v3.18
 extern struct emac_platform_data da8xx_emac_pdata;
 extern struct da8xx_lcdc_platform_data sharp_lcd035q3dg01_pdata;
 extern struct da8xx_lcdc_platform_data sharp_lk043t1dg01_pdata;

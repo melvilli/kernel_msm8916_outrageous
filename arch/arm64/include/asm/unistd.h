@@ -31,9 +31,12 @@
  * Compat syscall numbers used by the AArch64 kernel.
  */
 #define __NR_compat_restart_syscall	0
+<<<<<<< HEAD
 #define __NR_compat_exit		1
 #define __NR_compat_read		3
 #define __NR_compat_write		4
+=======
+>>>>>>> v3.18
 #define __NR_compat_sigreturn		119
 #define __NR_compat_rt_sigreturn	173
 

@@ -33,15 +33,23 @@ static bool ar9002_hw_is_cal_supported(struct ath_hw *ah,
 	bool supported = false;
 	switch (ah->supp_cals & cal_type) {
 	case IQ_MISMATCH_CAL:
+<<<<<<< HEAD
 		/* Run IQ Mismatch for non-CCK only */
 		if (!IS_CHAN_B(chan))
 			supported = true;
+=======
+		supported = true;
+>>>>>>> v3.18
 		break;
 	case ADC_GAIN_CAL:
 	case ADC_DC_CAL:
 		/* Run ADC Gain Cal for non-CCK & non 2GHz-HT20 only */
+<<<<<<< HEAD
 		if (!IS_CHAN_B(chan) &&
 		    !((IS_CHAN_2GHZ(chan) || IS_CHAN_A_FAST_CLOCK(ah, chan)) &&
+=======
+		if (!((IS_CHAN_2GHZ(chan) || IS_CHAN_A_FAST_CLOCK(ah, chan)) &&
+>>>>>>> v3.18
 		      IS_CHAN_HT20(chan)))
 			supported = true;
 		break;
@@ -671,7 +679,11 @@ static bool ar9002_hw_calibrate(struct ath_hw *ah,
 
 	nfcal = !!(REG_READ(ah, AR_PHY_AGC_CONTROL) & AR_PHY_AGC_CONTROL_NF);
 	if (ah->caldata)
+<<<<<<< HEAD
 		nfcal_pending = ah->caldata->nfcal_pending;
+=======
+		nfcal_pending = test_bit(NFCAL_PENDING, &ah->caldata->cal_flags);
+>>>>>>> v3.18
 
 	if (currCal && !nfcal &&
 	    (currCal->calState == CAL_RUNNING ||
@@ -861,7 +873,11 @@ static bool ar9002_hw_init_cal(struct ath_hw *ah, struct ath9k_channel *chan)
 	ar9002_hw_pa_cal(ah, true);
 
 	if (ah->caldata)
+<<<<<<< HEAD
 		ah->caldata->nfcal_pending = true;
+=======
+		set_bit(NFCAL_PENDING, &ah->caldata->cal_flags);
+>>>>>>> v3.18
 
 	ah->cal_list = ah->cal_list_last = ah->cal_list_curr = NULL;
 

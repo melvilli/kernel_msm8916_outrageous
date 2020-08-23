@@ -127,8 +127,13 @@ struct cpts {
 };
 
 #ifdef CONFIG_TI_CPTS
+<<<<<<< HEAD
 extern void cpts_rx_timestamp(struct cpts *cpts, struct sk_buff *skb);
 extern void cpts_tx_timestamp(struct cpts *cpts, struct sk_buff *skb);
+=======
+void cpts_rx_timestamp(struct cpts *cpts, struct sk_buff *skb);
+void cpts_tx_timestamp(struct cpts *cpts, struct sk_buff *skb);
+>>>>>>> v3.18
 #else
 static inline void cpts_rx_timestamp(struct cpts *cpts, struct sk_buff *skb)
 {
@@ -138,8 +143,13 @@ static inline void cpts_tx_timestamp(struct cpts *cpts, struct sk_buff *skb)
 }
 #endif
 
+<<<<<<< HEAD
 extern int cpts_register(struct device *dev, struct cpts *cpts,
 			 u32 mult, u32 shift);
 extern void cpts_unregister(struct cpts *cpts);
+=======
+int cpts_register(struct device *dev, struct cpts *cpts, u32 mult, u32 shift);
+void cpts_unregister(struct cpts *cpts);
+>>>>>>> v3.18
 
 #endif

@@ -2,7 +2,11 @@
  * This module provides common API for accessing firmware configuration pages
  *
  * This code is based on drivers/scsi/mpt3sas/mpt3sas_base.c
+<<<<<<< HEAD
  * Copyright (C) 2012  LSI Corporation
+=======
+ * Copyright (C) 2012-2014  LSI Corporation
+>>>>>>> v3.18
  *  (mailto:DL-MPTFusionLinux@lsi.com)
  *
  * This program is free software; you can redistribute it and/or

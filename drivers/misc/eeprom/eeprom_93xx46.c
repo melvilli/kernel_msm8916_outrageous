@@ -11,7 +11,10 @@
 #include <linux/delay.h>
 #include <linux/device.h>
 #include <linux/kernel.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/mutex.h>
 #include <linux/slab.h>
@@ -202,7 +205,11 @@ eeprom_93xx46_bin_write(struct file *filp, struct kobject *kobj,
 	edev = dev_get_drvdata(dev);
 
 	if (unlikely(off >= edev->bin.size))
+<<<<<<< HEAD
 		return 0;
+=======
+		return -EFBIG;
+>>>>>>> v3.18
 	if ((off + count) > edev->bin.size)
 		count = edev->bin.size - off;
 	if (unlikely(!count))
@@ -378,7 +385,10 @@ static int eeprom_93xx46_remove(struct spi_device *spi)
 		device_remove_file(&spi->dev, &dev_attr_erase);
 
 	sysfs_remove_bin_file(&spi->dev.kobj, &edev->bin);
+<<<<<<< HEAD
 	spi_set_drvdata(spi, NULL);
+=======
+>>>>>>> v3.18
 	kfree(edev);
 	return 0;
 }

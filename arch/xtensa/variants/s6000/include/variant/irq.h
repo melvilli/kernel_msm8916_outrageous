@@ -1,7 +1,10 @@
 #ifndef _XTENSA_S6000_IRQ_H
 #define _XTENSA_S6000_IRQ_H
 
+<<<<<<< HEAD
 #define NO_IRQ		(-1)
+=======
+>>>>>>> v3.18
 #define VARIANT_NR_IRQS 8 /* GPIO interrupts */
 
 extern void variant_irq_enable(unsigned int irq);

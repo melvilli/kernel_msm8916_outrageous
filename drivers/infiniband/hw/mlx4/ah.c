@@ -39,6 +39,7 @@
 
 #include "mlx4_ib.h"
 
+<<<<<<< HEAD
 int mlx4_ib_resolve_grh(struct mlx4_ib_dev *dev, const struct ib_ah_attr *ah_attr,
 			u8 *mac, int *is_mcast, u8 port)
 {
@@ -58,6 +59,8 @@ int mlx4_ib_resolve_grh(struct mlx4_ib_dev *dev, const struct ib_ah_attr *ah_att
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 static struct ib_ah *create_ib_ah(struct ib_pd *pd, struct ib_ah_attr *ah_attr,
 				  struct mlx4_ib_ah *ah)
 {
@@ -65,7 +68,10 @@ static struct ib_ah *create_ib_ah(struct ib_pd *pd, struct ib_ah_attr *ah_attr,
 
 	ah->av.ib.port_pd = cpu_to_be32(to_mpd(pd)->pdn | (ah_attr->port_num << 24));
 	ah->av.ib.g_slid  = ah_attr->src_path_bits;
+<<<<<<< HEAD
 	ah->av.ib.sl_tclass_flowlabel = cpu_to_be32(ah_attr->sl << 28);
+=======
+>>>>>>> v3.18
 	if (ah_attr->ah_flags & IB_AH_GRH) {
 		ah->av.ib.g_slid   |= 0x80;
 		ah->av.ib.gid_index = ah_attr->grh.sgid_index;
@@ -83,6 +89,10 @@ static struct ib_ah *create_ib_ah(struct ib_pd *pd, struct ib_ah_attr *ah_attr,
 		       !(1 << ah->av.ib.stat_rate & dev->caps.stat_rate_support))
 			--ah->av.ib.stat_rate;
 	}
+<<<<<<< HEAD
+=======
+	ah->av.ib.sl_tclass_flowlabel = cpu_to_be32(ah_attr->sl << 28);
+>>>>>>> v3.18
 
 	return &ah->ibah;
 }
@@ -92,6 +102,7 @@ static struct ib_ah *create_iboe_ah(struct ib_pd *pd, struct ib_ah_attr *ah_attr
 {
 	struct mlx4_ib_dev *ibdev = to_mdev(pd->device);
 	struct mlx4_dev *dev = ibdev->dev;
+<<<<<<< HEAD
 	union ib_gid sgid;
 	u8 mac[6];
 	int err;
@@ -107,6 +118,20 @@ static struct ib_ah *create_iboe_ah(struct ib_pd *pd, struct ib_ah_attr *ah_attr
 	if (err)
 		return ERR_PTR(err);
 	vlan_tag = rdma_get_vlan_id(&sgid);
+=======
+	int is_mcast = 0;
+	struct in6_addr in6;
+	u16 vlan_tag;
+
+	memcpy(&in6, ah_attr->grh.dgid.raw, sizeof(in6));
+	if (rdma_is_multicast_addr(&in6)) {
+		is_mcast = 1;
+		rdma_get_mcast_mac(&in6, ah->av.eth.mac);
+	} else {
+		memcpy(ah->av.eth.mac, ah_attr->dmac, ETH_ALEN);
+	}
+	vlan_tag = ah_attr->vlan_id;
+>>>>>>> v3.18
 	if (vlan_tag < 0x1000)
 		vlan_tag |= (ah_attr->sl & 7) << 13;
 	ah->av.eth.port_pd = cpu_to_be32(to_mpd(pd)->pdn | (ah_attr->port_num << 24));
@@ -118,9 +143,13 @@ static struct ib_ah *create_iboe_ah(struct ib_pd *pd, struct ib_ah_attr *ah_attr
 		       !(1 << ah->av.eth.stat_rate & dev->caps.stat_rate_support))
 			--ah->av.eth.stat_rate;
 	}
+<<<<<<< HEAD
 	ah->av.eth.sl_tclass_flowlabel |=
 			cpu_to_be32((ah_attr->grh.traffic_class << 20) |
 				    ah_attr->grh.flow_label);
+=======
+
+>>>>>>> v3.18
 	/*
 	 * HW requires multicast LID so we just choose one.
 	 */
@@ -128,7 +157,11 @@ static struct ib_ah *create_iboe_ah(struct ib_pd *pd, struct ib_ah_attr *ah_attr
 		ah->av.ib.dlid = cpu_to_be16(0xc000);
 
 	memcpy(ah->av.eth.dgid, ah_attr->grh.dgid.raw, 16);
+<<<<<<< HEAD
 	ah->av.eth.sl_tclass_flowlabel |= cpu_to_be32(ah_attr->sl << 29);
+=======
+	ah->av.eth.sl_tclass_flowlabel = cpu_to_be32(ah_attr->sl << 29);
+>>>>>>> v3.18
 
 	return &ah->ibah;
 }
@@ -171,6 +204,7 @@ int mlx4_ib_query_ah(struct ib_ah *ibah, struct ib_ah_attr *ah_attr)
 	enum rdma_link_layer ll;
 
 	memset(ah_attr, 0, sizeof *ah_attr);
+<<<<<<< HEAD
 	ah_attr->port_num = be32_to_cpu(ah->av.ib.port_pd) >> 24;
 	ll = rdma_port_get_link_layer(ibah->device, ah_attr->port_num);
 	if (ll == IB_LINK_LAYER_ETHERNET)
@@ -178,6 +212,11 @@ int mlx4_ib_query_ah(struct ib_ah *ibah, struct ib_ah_attr *ah_attr)
 	else
 		ah_attr->sl = be32_to_cpu(ah->av.ib.sl_tclass_flowlabel) >> 28;
 
+=======
+	ah_attr->sl = be32_to_cpu(ah->av.ib.sl_tclass_flowlabel) >> 28;
+	ah_attr->port_num = be32_to_cpu(ah->av.ib.port_pd) >> 24;
+	ll = rdma_port_get_link_layer(ibah->device, ah_attr->port_num);
+>>>>>>> v3.18
 	ah_attr->dlid = ll == IB_LINK_LAYER_INFINIBAND ? be16_to_cpu(ah->av.ib.dlid) : 0;
 	if (ah->av.ib.stat_rate)
 		ah_attr->static_rate = ah->av.ib.stat_rate - MLX4_STAT_RATE_OFFSET;

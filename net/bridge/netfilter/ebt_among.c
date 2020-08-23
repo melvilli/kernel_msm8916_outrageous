@@ -28,7 +28,11 @@ static bool ebt_mac_wormhash_contains(const struct ebt_mac_wormhash *wh,
 	uint32_t cmp[2] = { 0, 0 };
 	int key = ((const unsigned char *)mac)[5];
 
+<<<<<<< HEAD
 	memcpy(((char *) cmp) + 2, mac, 6);
+=======
+	ether_addr_copy(((char *) cmp) + 2, mac);
+>>>>>>> v3.18
 	start = wh->table[key];
 	limit = wh->table[key + 1];
 	if (ip) {

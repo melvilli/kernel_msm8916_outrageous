@@ -17,8 +17,13 @@ int arch_timer_arch_init(void);
  * nicely work out which register we want, and chuck away the rest of
  * the code. At least it does so with a recent GCC (4.6.3).
  */
+<<<<<<< HEAD
 static inline void arch_timer_reg_write_cp15(const int access, const int reg,
 					  u32 val)
+=======
+static __always_inline
+void arch_timer_reg_write_cp15(int access, enum arch_timer_reg reg, u32 val)
+>>>>>>> v3.18
 {
 	if (access == ARCH_TIMER_PHYS_ACCESS) {
 		switch (reg) {
@@ -29,9 +34,13 @@ static inline void arch_timer_reg_write_cp15(const int access, const int reg,
 			asm volatile("mcr p15, 0, %0, c14, c2, 0" : : "r" (val));
 			break;
 		}
+<<<<<<< HEAD
 	}
 
 	if (access == ARCH_TIMER_VIRT_ACCESS) {
+=======
+	} else if (access == ARCH_TIMER_VIRT_ACCESS) {
+>>>>>>> v3.18
 		switch (reg) {
 		case ARCH_TIMER_REG_CTRL:
 			asm volatile("mcr p15, 0, %0, c14, c3, 1" : : "r" (val));
@@ -45,7 +54,12 @@ static inline void arch_timer_reg_write_cp15(const int access, const int reg,
 	isb();
 }
 
+<<<<<<< HEAD
 static inline u32 arch_timer_reg_read_cp15(const int access, const int reg)
+=======
+static __always_inline
+u32 arch_timer_reg_read_cp15(int access, enum arch_timer_reg reg)
+>>>>>>> v3.18
 {
 	u32 val = 0;
 
@@ -58,9 +72,13 @@ static inline u32 arch_timer_reg_read_cp15(const int access, const int reg)
 			asm volatile("mrc p15, 0, %0, c14, c2, 0" : "=r" (val));
 			break;
 		}
+<<<<<<< HEAD
 	}
 
 	if (access == ARCH_TIMER_VIRT_ACCESS) {
+=======
+	} else if (access == ARCH_TIMER_VIRT_ACCESS) {
+>>>>>>> v3.18
 		switch (reg) {
 		case ARCH_TIMER_REG_CTRL:
 			asm volatile("mrc p15, 0, %0, c14, c3, 1" : "=r" (val));
@@ -81,6 +99,7 @@ static inline u32 arch_timer_get_cntfrq(void)
 	return val;
 }
 
+<<<<<<< HEAD
 static inline u64 arch_counter_get_cntpct_cp15(void)
 {
 	u64 cval;
@@ -91,6 +110,9 @@ static inline u64 arch_counter_get_cntpct_cp15(void)
 }
 
 static notrace inline u64 arch_counter_get_cntvct_cp15(void)
+=======
+static inline u64 arch_counter_get_cntvct(void)
+>>>>>>> v3.18
 {
 	u64 cval;
 
@@ -111,6 +133,7 @@ static inline void arch_timer_set_cntkctl(u32 cntkctl)
 	asm volatile("mcr p15, 0, %0, c14, c1, 0" : : "r" (cntkctl));
 }
 
+<<<<<<< HEAD
 static inline void arch_timer_evtstrm_enable(int divider)
 {
 	u32 cntkctl = arch_timer_get_cntkctl();
@@ -122,6 +145,8 @@ static inline void arch_timer_evtstrm_enable(int divider)
 	elf_hwcap |= HWCAP_EVTSTRM;
 }
 
+=======
+>>>>>>> v3.18
 #endif
 
 #endif

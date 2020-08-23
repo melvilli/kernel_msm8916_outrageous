@@ -98,6 +98,7 @@ static int ps3flash_fetch(struct ps3_storage_device *dev, u64 start_sector)
 static loff_t ps3flash_llseek(struct file *file, loff_t offset, int origin)
 {
 	struct ps3_storage_device *dev = ps3flash_dev;
+<<<<<<< HEAD
 	loff_t res;
 
 	mutex_lock(&file->f_mapping->host->i_mutex);
@@ -124,6 +125,10 @@ static loff_t ps3flash_llseek(struct file *file, loff_t offset, int origin)
 out:
 	mutex_unlock(&file->f_mapping->host->i_mutex);
 	return res;
+=======
+	return generic_file_llseek_size(file, offset, origin, MAX_LFS_FILESIZE,
+			dev->regions[dev->region_idx].size*dev->blk_size);
+>>>>>>> v3.18
 }
 
 static ssize_t ps3flash_read(char __user *userbuf, void *kernelbuf,

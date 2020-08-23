@@ -905,12 +905,20 @@ static int snd_msnd_isa_probe(struct device *pdev, unsigned int idx)
 		return -ENODEV;
 	}
 
+<<<<<<< HEAD
 	err = snd_card_create(index[idx], id[idx], THIS_MODULE,
 			      sizeof(struct snd_msnd), &card);
 	if (err < 0)
 		return err;
 
 	snd_card_set_dev(card, pdev);
+=======
+	err = snd_card_new(pdev, index[idx], id[idx], THIS_MODULE,
+			   sizeof(struct snd_msnd), &card);
+	if (err < 0)
+		return err;
+
+>>>>>>> v3.18
 	chip = card->private_data;
 	chip->card = card;
 
@@ -1066,7 +1074,10 @@ cfg_error:
 static int snd_msnd_isa_remove(struct device *pdev, unsigned int dev)
 {
 	snd_msnd_unload(dev_get_drvdata(pdev));
+<<<<<<< HEAD
 	dev_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -1123,14 +1134,23 @@ static int snd_msnd_pnp_detect(struct pnp_card_link *pcard,
 	 * Create a new ALSA sound card entry, in anticipation
 	 * of detecting our hardware ...
 	 */
+<<<<<<< HEAD
 	ret = snd_card_create(index[idx], id[idx], THIS_MODULE,
 			      sizeof(struct snd_msnd), &card);
+=======
+	ret = snd_card_new(&pcard->card->dev,
+			   index[idx], id[idx], THIS_MODULE,
+			   sizeof(struct snd_msnd), &card);
+>>>>>>> v3.18
 	if (ret < 0)
 		return ret;
 
 	chip = card->private_data;
 	chip->card = card;
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pcard->card->dev);
+=======
+>>>>>>> v3.18
 
 	/*
 	 * Read the correct parameters off the ISA PnP bus ...

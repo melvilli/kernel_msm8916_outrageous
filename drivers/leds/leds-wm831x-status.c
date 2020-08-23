@@ -10,7 +10,10 @@
  */
 
 #include <linux/kernel.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <linux/slab.h>
 #include <linux/leds.h>
@@ -220,6 +223,15 @@ static ssize_t wm831x_status_src_store(struct device *dev,
 
 static DEVICE_ATTR(src, 0644, wm831x_status_src_show, wm831x_status_src_store);
 
+<<<<<<< HEAD
+=======
+static struct attribute *wm831x_status_attrs[] = {
+	&dev_attr_src.attr,
+	NULL
+};
+ATTRIBUTE_GROUPS(wm831x_status);
+
+>>>>>>> v3.18
 static int wm831x_status_probe(struct platform_device *pdev)
 {
 	struct wm831x *wm831x = dev_get_drvdata(pdev->dev.parent);
@@ -233,21 +245,34 @@ static int wm831x_status_probe(struct platform_device *pdev)
 	res = platform_get_resource(pdev, IORESOURCE_REG, 0);
 	if (res == NULL) {
 		dev_err(&pdev->dev, "No register resource\n");
+<<<<<<< HEAD
 		ret = -EINVAL;
 		goto err;
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 	}
 
 	drvdata = devm_kzalloc(&pdev->dev, sizeof(struct wm831x_status),
 			       GFP_KERNEL);
 	if (!drvdata)
 		return -ENOMEM;
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, drvdata);
+=======
+	platform_set_drvdata(pdev, drvdata);
+>>>>>>> v3.18
 
 	drvdata->wm831x = wm831x;
 	drvdata->reg = res->start;
 
+<<<<<<< HEAD
 	if (wm831x->dev->platform_data)
 		chip_pdata = wm831x->dev->platform_data;
+=======
+	if (dev_get_platdata(wm831x->dev))
+		chip_pdata = dev_get_platdata(wm831x->dev);
+>>>>>>> v3.18
 	else
 		chip_pdata = NULL;
 
@@ -285,10 +310,15 @@ static int wm831x_status_probe(struct platform_device *pdev)
 	drvdata->cdev.default_trigger = pdata.default_trigger;
 	drvdata->cdev.brightness_set = wm831x_status_set;
 	drvdata->cdev.blink_set = wm831x_status_blink_set;
+<<<<<<< HEAD
+=======
+	drvdata->cdev.groups = wm831x_status_groups;
+>>>>>>> v3.18
 
 	ret = led_classdev_register(wm831x->dev, &drvdata->cdev);
 	if (ret < 0) {
 		dev_err(&pdev->dev, "Failed to register LED: %d\n", ret);
+<<<<<<< HEAD
 		goto err_led;
 	}
 
@@ -303,13 +333,22 @@ err_led:
 	led_classdev_unregister(&drvdata->cdev);
 err:
 	return ret;
+=======
+		return ret;
+	}
+
+	return 0;
+>>>>>>> v3.18
 }
 
 static int wm831x_status_remove(struct platform_device *pdev)
 {
 	struct wm831x_status *drvdata = platform_get_drvdata(pdev);
 
+<<<<<<< HEAD
 	device_remove_file(drvdata->cdev.dev, &dev_attr_src);
+=======
+>>>>>>> v3.18
 	led_classdev_unregister(&drvdata->cdev);
 
 	return 0;

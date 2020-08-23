@@ -543,6 +543,7 @@ static int jffs2_build_inode_fragtree(struct jffs2_sb_info *c,
 
 static void jffs2_free_tmp_dnode_info_list(struct rb_root *list)
 {
+<<<<<<< HEAD
 	struct rb_node *this;
 	struct jffs2_tmp_dnode_info *tn;
 
@@ -570,6 +571,15 @@ static void jffs2_free_tmp_dnode_info_list(struct rb_root *list)
 			else BUG();
 		}
 	}
+=======
+	struct jffs2_tmp_dnode_info *tn, *next;
+
+	rbtree_postorder_for_each_entry_safe(tn, next, list, rb) {
+			jffs2_free_full_dnode(tn->fn);
+			jffs2_free_tmp_dnode_info(tn);
+	}
+
+>>>>>>> v3.18
 	*list = RB_ROOT;
 }
 

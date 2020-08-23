@@ -14,8 +14,12 @@
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+ *  along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
  *
  */
 
@@ -25,6 +29,10 @@
 #include <linux/if_arp.h>
 #include <linux/slab.h>
 #include <linux/pci.h>
+<<<<<<< HEAD
+=======
+#include <linux/etherdevice.h>
+>>>>>>> v3.18
 
 #include <asm/uaccess.h>
 
@@ -183,7 +191,11 @@ prism54_update_stats(struct work_struct *work)
 	data = r.ptr;
 
 	/* copy this MAC to the bss */
+<<<<<<< HEAD
 	memcpy(bss.address, data, 6);
+=======
+	memcpy(bss.address, data, ETH_ALEN);
+>>>>>>> v3.18
 	kfree(data);
 
 	/* now ask for the corresponding bss */
@@ -531,7 +543,11 @@ prism54_set_wap(struct net_device *ndev, struct iw_request_info *info,
 		return -EINVAL;
 
 	/* prepare the structure for the set object */
+<<<<<<< HEAD
 	memcpy(&bssid[0], awrq->sa_data, 6);
+=======
+	memcpy(&bssid[0], awrq->sa_data, ETH_ALEN);
+>>>>>>> v3.18
 
 	/* set the bssid -- does this make sense when in AP mode? */
 	rvalue = mgt_set_request(priv, DOT11_OID_BSSID, 0, &bssid);
@@ -550,7 +566,11 @@ prism54_get_wap(struct net_device *ndev, struct iw_request_info *info,
 	int rvalue;
 
 	rvalue = mgt_get_request(priv, DOT11_OID_BSSID, 0, NULL, &r);
+<<<<<<< HEAD
 	memcpy(awrq->sa_data, r.ptr, 6);
+=======
+	memcpy(awrq->sa_data, r.ptr, ETH_ALEN);
+>>>>>>> v3.18
 	awrq->sa_family = ARPHRD_ETHER;
 	kfree(r.ptr);
 
@@ -582,7 +602,11 @@ prism54_translate_bss(struct net_device *ndev, struct iw_request_info *info,
 	size_t wpa_ie_len;
 
 	/* The first entry must be the MAC address */
+<<<<<<< HEAD
 	memcpy(iwe.u.ap_addr.sa_data, bss->address, 6);
+=======
+	memcpy(iwe.u.ap_addr.sa_data, bss->address, ETH_ALEN);
+>>>>>>> v3.18
 	iwe.u.ap_addr.sa_family = ARPHRD_ETHER;
 	iwe.cmd = SIOCGIWAP;
 	current_ev = iwe_stream_add_event(info, current_ev, end_buf,
@@ -644,7 +668,11 @@ prism54_translate_bss(struct net_device *ndev, struct iw_request_info *info,
 	wpa_ie_len = prism54_wpa_bss_ie_get(priv, bss->address, wpa_ie);
 	if (wpa_ie_len > 0) {
 		iwe.cmd = IWEVGENIE;
+<<<<<<< HEAD
 		iwe.u.data.length = min(wpa_ie_len, (size_t)MAX_WPA_IE_LEN);
+=======
+		iwe.u.data.length = min_t(size_t, wpa_ie_len, MAX_WPA_IE_LEN);
+>>>>>>> v3.18
 		current_ev = iwe_stream_add_point(info, current_ev, end_buf,
 						  &iwe, wpa_ie);
 	}
@@ -1861,7 +1889,11 @@ prism54_del_mac(struct net_device *ndev, struct iw_request_info *info,
 	if (mutex_lock_interruptible(&acl->lock))
 		return -ERESTARTSYS;
 	list_for_each_entry(entry, &acl->mac_list, _list) {
+<<<<<<< HEAD
 		if (memcmp(entry->addr, addr->sa_data, ETH_ALEN) == 0) {
+=======
+		if (ether_addr_equal(entry->addr, addr->sa_data)) {
+>>>>>>> v3.18
 			list_del(&entry->_list);
 			acl->size--;
 			kfree(entry);
@@ -2489,7 +2521,11 @@ prism54_set_mac_address(struct net_device *ndev, void *addr)
 			      &((struct sockaddr *) addr)->sa_data);
 	if (!ret)
 		memcpy(priv->ndev->dev_addr,
+<<<<<<< HEAD
 		       &((struct sockaddr *) addr)->sa_data, 6);
+=======
+		       &((struct sockaddr *) addr)->sa_data, ETH_ALEN);
+>>>>>>> v3.18
 
 	return ret;
 }

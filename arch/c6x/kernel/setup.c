@@ -68,6 +68,7 @@ unsigned long ram_end;
 static unsigned long dma_start __initdata;
 static unsigned long dma_size __initdata;
 
+<<<<<<< HEAD
 char c6x_command_line[COMMAND_LINE_SIZE];
 
 #if defined(CONFIG_CMDLINE_BOOL)
@@ -75,6 +76,8 @@ static const char default_command_line[COMMAND_LINE_SIZE] __section(.cmdline) =
 	CONFIG_CMDLINE;
 #endif
 
+=======
+>>>>>>> v3.18
 struct cpuinfo_c6x {
 	const char *cpu_name;
 	const char *cpu_voltage;
@@ -272,8 +275,13 @@ int __init c6x_add_memory(phys_addr_t start, unsigned long size)
  */
 notrace void __init machine_init(unsigned long dt_ptr)
 {
+<<<<<<< HEAD
 	struct boot_param_header *dtb = __va(dt_ptr);
 	struct boot_param_header *fdt = (struct boot_param_header *)_fdt_start;
+=======
+	const void *dtb = __va(dt_ptr);
+	const void *fdt = _fdt_start;
+>>>>>>> v3.18
 
 	/* interrupts must be masked */
 	set_creg(IER, 2);
@@ -294,10 +302,15 @@ notrace void __init machine_init(unsigned long dt_ptr)
 		fdt = dtb;
 
 	/* Do some early initialization based on the flat device tree */
+<<<<<<< HEAD
 	early_init_devtree(fdt);
 
 	/* parse_early_param needs a boot_command_line */
 	strlcpy(boot_command_line, c6x_command_line, COMMAND_LINE_SIZE);
+=======
+	early_init_dt_scan(fdt);
+
+>>>>>>> v3.18
 	parse_early_param();
 }
 
@@ -309,7 +322,11 @@ void __init setup_arch(char **cmdline_p)
 	printk(KERN_INFO "Initializing kernel\n");
 
 	/* Initialize command line */
+<<<<<<< HEAD
 	*cmdline_p = c6x_command_line;
+=======
+	*cmdline_p = boot_command_line;
+>>>>>>> v3.18
 
 	memory_end = ram_end;
 	memory_end &= ~(PAGE_SIZE - 1);

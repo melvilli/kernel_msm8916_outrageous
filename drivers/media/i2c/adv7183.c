@@ -28,7 +28,10 @@
 #include <linux/videodev2.h>
 
 #include <media/adv7183.h>
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 #include <media/v4l2-ctrls.h>
 #include <media/v4l2-device.h>
 
@@ -179,7 +182,11 @@ static int adv7183_log_status(struct v4l2_subdev *sd)
 			adv7183_read(sd, ADV7183_VS_FIELD_CTRL_1),
 			adv7183_read(sd, ADV7183_VS_FIELD_CTRL_2),
 			adv7183_read(sd, ADV7183_VS_FIELD_CTRL_3));
+<<<<<<< HEAD
 	v4l2_info(sd, "adv7183: Hsync positon control 1 2 and 3 = 0x%02x 0x%02x 0x%02x\n",
+=======
+	v4l2_info(sd, "adv7183: Hsync position control 1 2 and 3 = 0x%02x 0x%02x 0x%02x\n",
+>>>>>>> v3.18
 			adv7183_read(sd, ADV7183_HS_POS_CTRL_1),
 			adv7183_read(sd, ADV7183_HS_POS_CTRL_2),
 			adv7183_read(sd, ADV7183_HS_POS_CTRL_3));
@@ -375,6 +382,7 @@ static int adv7183_querystd(struct v4l2_subdev *sd, v4l2_std_id *std)
 	reg = adv7183_read(sd, ADV7183_STATUS_1);
 	switch ((reg >> 0x4) & 0x7) {
 	case 0:
+<<<<<<< HEAD
 		*std = V4L2_STD_NTSC;
 		break;
 	case 1:
@@ -397,6 +405,30 @@ static int adv7183_querystd(struct v4l2_subdev *sd, v4l2_std_id *std)
 		break;
 	case 7:
 		*std = V4L2_STD_SECAM;
+=======
+		*std &= V4L2_STD_NTSC;
+		break;
+	case 1:
+		*std &= V4L2_STD_NTSC_443;
+		break;
+	case 2:
+		*std &= V4L2_STD_PAL_M;
+		break;
+	case 3:
+		*std &= V4L2_STD_PAL_60;
+		break;
+	case 4:
+		*std &= V4L2_STD_PAL;
+		break;
+	case 5:
+		*std &= V4L2_STD_SECAM;
+		break;
+	case 6:
+		*std &= V4L2_STD_PAL_Nc;
+		break;
+	case 7:
+		*std &= V4L2_STD_SECAM;
+>>>>>>> v3.18
 		break;
 	default:
 		*std = V4L2_STD_UNKNOWN;
@@ -474,13 +506,20 @@ static int adv7183_s_stream(struct v4l2_subdev *sd, int enable)
 	struct adv7183 *decoder = to_adv7183(sd);
 
 	if (enable)
+<<<<<<< HEAD
 		gpio_direction_output(decoder->oe_pin, 0);
 	else
 		gpio_direction_output(decoder->oe_pin, 1);
+=======
+		gpio_set_value(decoder->oe_pin, 0);
+	else
+		gpio_set_value(decoder->oe_pin, 1);
+>>>>>>> v3.18
 	udelay(1);
 	return 0;
 }
 
+<<<<<<< HEAD
 static int adv7183_g_chip_ident(struct v4l2_subdev *sd,
 		struct v4l2_dbg_chip_ident *chip)
 {
@@ -502,6 +541,11 @@ static int adv7183_g_register(struct v4l2_subdev *sd, struct v4l2_dbg_register *
 		return -EINVAL;
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
+=======
+#ifdef CONFIG_VIDEO_ADV_DEBUG
+static int adv7183_g_register(struct v4l2_subdev *sd, struct v4l2_dbg_register *reg)
+{
+>>>>>>> v3.18
 	reg->val = adv7183_read(sd, reg->reg & 0xff);
 	reg->size = 1;
 	return 0;
@@ -509,12 +553,15 @@ static int adv7183_g_register(struct v4l2_subdev *sd, struct v4l2_dbg_register *
 
 static int adv7183_s_register(struct v4l2_subdev *sd, const struct v4l2_dbg_register *reg)
 {
+<<<<<<< HEAD
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 
 	if (!v4l2_chip_match_i2c_client(client, &reg->match))
 		return -EINVAL;
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
+=======
+>>>>>>> v3.18
 	adv7183_write(sd, reg->reg & 0xff, reg->val & 0xff);
 	return 0;
 }
@@ -526,10 +573,14 @@ static const struct v4l2_ctrl_ops adv7183_ctrl_ops = {
 
 static const struct v4l2_subdev_core_ops adv7183_core_ops = {
 	.log_status = adv7183_log_status,
+<<<<<<< HEAD
 	.g_std = adv7183_g_std,
 	.s_std = adv7183_s_std,
 	.reset = adv7183_reset,
 	.g_chip_ident = adv7183_g_chip_ident,
+=======
+	.reset = adv7183_reset,
+>>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 	.g_register = adv7183_g_register,
 	.s_register = adv7183_s_register,
@@ -537,6 +588,11 @@ static const struct v4l2_subdev_core_ops adv7183_core_ops = {
 };
 
 static const struct v4l2_subdev_video_ops adv7183_video_ops = {
+<<<<<<< HEAD
+=======
+	.g_std = adv7183_g_std,
+	.s_std = adv7183_s_std,
+>>>>>>> v3.18
 	.s_routing = adv7183_s_routing,
 	.querystd = adv7183_querystd,
 	.g_input_status = adv7183_g_input_status,
@@ -573,13 +629,18 @@ static int adv7183_probe(struct i2c_client *client,
 	if (pin_array == NULL)
 		return -EINVAL;
 
+<<<<<<< HEAD
 	decoder = kzalloc(sizeof(struct adv7183), GFP_KERNEL);
+=======
+	decoder = devm_kzalloc(&client->dev, sizeof(*decoder), GFP_KERNEL);
+>>>>>>> v3.18
 	if (decoder == NULL)
 		return -ENOMEM;
 
 	decoder->reset_pin = pin_array[0];
 	decoder->oe_pin = pin_array[1];
 
+<<<<<<< HEAD
 	if (gpio_request(decoder->reset_pin, "ADV7183 Reset")) {
 		v4l_err(client, "failed to request GPIO %d\n", decoder->reset_pin);
 		ret = -EBUSY;
@@ -590,6 +651,19 @@ static int adv7183_probe(struct i2c_client *client,
 		v4l_err(client, "failed to request GPIO %d\n", decoder->oe_pin);
 		ret = -EBUSY;
 		goto err_free_reset;
+=======
+	if (devm_gpio_request_one(&client->dev, decoder->reset_pin,
+				  GPIOF_OUT_INIT_LOW, "ADV7183 Reset")) {
+		v4l_err(client, "failed to request GPIO %d\n", decoder->reset_pin);
+		return -EBUSY;
+	}
+
+	if (devm_gpio_request_one(&client->dev, decoder->oe_pin,
+				  GPIOF_OUT_INIT_HIGH,
+				  "ADV7183 Output Enable")) {
+		v4l_err(client, "failed to request GPIO %d\n", decoder->oe_pin);
+		return -EBUSY;
+>>>>>>> v3.18
 	}
 
 	sd = &decoder->sd;
@@ -611,7 +685,11 @@ static int adv7183_probe(struct i2c_client *client,
 		ret = hdl->error;
 
 		v4l2_ctrl_handler_free(hdl);
+<<<<<<< HEAD
 		goto err_free_oe;
+=======
+		return ret;
+>>>>>>> v3.18
 	}
 
 	/* v4l2 doesn't support an autodetect standard, pick PAL as default */
@@ -619,12 +697,19 @@ static int adv7183_probe(struct i2c_client *client,
 	decoder->input = ADV7183_COMPOSITE4;
 	decoder->output = ADV7183_8BIT_OUT;
 
+<<<<<<< HEAD
 	gpio_direction_output(decoder->oe_pin, 1);
 	/* reset chip */
 	gpio_direction_output(decoder->reset_pin, 0);
 	/* reset pulse width at least 5ms */
 	mdelay(10);
 	gpio_direction_output(decoder->reset_pin, 1);
+=======
+	/* reset chip */
+	/* reset pulse width at least 5ms */
+	mdelay(10);
+	gpio_set_value(decoder->reset_pin, 1);
+>>>>>>> v3.18
 	/* wait 5ms before any further i2c writes are performed */
 	mdelay(5);
 
@@ -638,6 +723,7 @@ static int adv7183_probe(struct i2c_client *client,
 	ret = v4l2_ctrl_handler_setup(hdl);
 	if (ret) {
 		v4l2_ctrl_handler_free(hdl);
+<<<<<<< HEAD
 		goto err_free_oe;
 	}
 
@@ -649,11 +735,18 @@ err_free_reset:
 err_free_decoder:
 	kfree(decoder);
 	return ret;
+=======
+		return ret;
+	}
+
+	return 0;
+>>>>>>> v3.18
 }
 
 static int adv7183_remove(struct i2c_client *client)
 {
 	struct v4l2_subdev *sd = i2c_get_clientdata(client);
+<<<<<<< HEAD
 	struct adv7183 *decoder = to_adv7183(sd);
 
 	v4l2_device_unregister_subdev(sd);
@@ -661,6 +754,11 @@ static int adv7183_remove(struct i2c_client *client)
 	gpio_free(decoder->oe_pin);
 	gpio_free(decoder->reset_pin);
 	kfree(decoder);
+=======
+
+	v4l2_device_unregister_subdev(sd);
+	v4l2_ctrl_handler_free(sd->ctrl_handler);
+>>>>>>> v3.18
 	return 0;
 }
 

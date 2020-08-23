@@ -7,6 +7,11 @@
 #ifndef __ASM_SMP_H
 #define __ASM_SMP_H
 
+<<<<<<< HEAD
+=======
+#include <asm/sigp.h>
+
+>>>>>>> v3.18
 #ifdef CONFIG_SMP
 
 #include <asm/lowcore.h>
@@ -14,7 +19,10 @@
 #define raw_smp_processor_id()	(S390_lowcore.cpu_nr)
 
 extern struct mutex smp_cpu_state_mutex;
+<<<<<<< HEAD
 extern struct save_area *zfcpdump_save_areas[NR_CPUS + 1];
+=======
+>>>>>>> v3.18
 
 extern int __cpu_up(unsigned int cpu, struct task_struct *tidle);
 
@@ -28,10 +36,16 @@ extern int smp_find_processor_id(u16 address);
 extern int smp_store_status(int cpu);
 extern int smp_vcpu_scheduled(int cpu);
 extern void smp_yield_cpu(int cpu);
+<<<<<<< HEAD
 extern void smp_yield(void);
 extern void smp_stop_cpu(void);
 extern void smp_cpu_set_polarization(int cpu, int val);
 extern int smp_cpu_get_polarization(int cpu);
+=======
+extern void smp_cpu_set_polarization(int cpu, int val);
+extern int smp_cpu_get_polarization(int cpu);
+extern void smp_fill_possible_mask(void);
+>>>>>>> v3.18
 
 #else /* CONFIG_SMP */
 
@@ -49,11 +63,28 @@ static inline int smp_find_processor_id(u16 address) { return 0; }
 static inline int smp_store_status(int cpu) { return 0; }
 static inline int smp_vcpu_scheduled(int cpu) { return 1; }
 static inline void smp_yield_cpu(int cpu) { }
+<<<<<<< HEAD
 static inline void smp_yield(void) { }
 static inline void smp_stop_cpu(void) { }
 
 #endif /* CONFIG_SMP */
 
+=======
+static inline void smp_fill_possible_mask(void) { }
+
+#endif /* CONFIG_SMP */
+
+static inline void smp_stop_cpu(void)
+{
+	u16 pcpu = stap();
+
+	for (;;) {
+		__pcpu_sigp(pcpu, SIGP_STOP, 0, NULL);
+		cpu_relax();
+	}
+}
+
+>>>>>>> v3.18
 #ifdef CONFIG_HOTPLUG_CPU
 extern int smp_rescan_cpus(void);
 extern void __noreturn cpu_die(void);

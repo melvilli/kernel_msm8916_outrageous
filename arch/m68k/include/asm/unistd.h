@@ -4,7 +4,11 @@
 #include <uapi/asm/unistd.h>
 
 
+<<<<<<< HEAD
 #define NR_syscalls		349
+=======
+#define NR_syscalls		355
+>>>>>>> v3.18
 
 #define __ARCH_WANT_OLD_READDIR
 #define __ARCH_WANT_OLD_STAT
@@ -13,7 +17,10 @@
 #define __ARCH_WANT_SYS_GETHOSTNAME
 #define __ARCH_WANT_SYS_IPC
 #define __ARCH_WANT_SYS_PAUSE
+<<<<<<< HEAD
 #define __ARCH_WANT_SYS_SGETMASK
+=======
+>>>>>>> v3.18
 #define __ARCH_WANT_SYS_SIGNAL
 #define __ARCH_WANT_SYS_TIME
 #define __ARCH_WANT_SYS_UTIME

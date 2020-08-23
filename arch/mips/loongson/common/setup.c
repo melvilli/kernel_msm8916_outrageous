@@ -18,9 +18,12 @@
 #include <linux/screen_info.h>
 #endif
 
+<<<<<<< HEAD
 void (*__wbflush)(void);
 EXPORT_SYMBOL(__wbflush);
 
+=======
+>>>>>>> v3.18
 static void wbflush_loongson(void)
 {
 	asm(".set\tpush\n\t"
@@ -32,10 +35,18 @@ static void wbflush_loongson(void)
 	    ".set mips0\n\t");
 }
 
+<<<<<<< HEAD
 void __init plat_mem_setup(void)
 {
 	__wbflush = wbflush_loongson;
 
+=======
+void (*__wbflush)(void) = wbflush_loongson;
+EXPORT_SYMBOL(__wbflush);
+
+void __init plat_mem_setup(void)
+{
+>>>>>>> v3.18
 #ifdef CONFIG_VT
 #if defined(CONFIG_VGA_CONSOLE)
 	conswitchp = &vga_con;

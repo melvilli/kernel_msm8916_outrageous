@@ -5,8 +5,13 @@
  *    Jan Glauber <jang@linux.vnet.ibm.com>
  */
 
+<<<<<<< HEAD
 #define COMPONENT "zPCI"
 #define pr_fmt(fmt) COMPONENT ": " fmt
+=======
+#define KMSG_COMPONENT "zpci"
+#define pr_fmt(fmt) KMSG_COMPONENT ": " fmt
+>>>>>>> v3.18
 
 #include <linux/kernel.h>
 #include <linux/seq_file.h>
@@ -115,6 +120,7 @@ static const struct file_operations debugfs_pci_perf_fops = {
 	.release = single_release,
 };
 
+<<<<<<< HEAD
 static int pci_debug_show(struct seq_file *m, void *v)
 {
 	struct zpci_dev *zdev = m->private;
@@ -136,6 +142,8 @@ static const struct file_operations debugfs_pci_debug_fops = {
 	.release = single_release,
 };
 
+=======
+>>>>>>> v3.18
 void zpci_debug_init_device(struct zpci_dev *zdev)
 {
 	zdev->debugfs_dev = debugfs_create_dir(dev_name(&zdev->pdev->dev),
@@ -149,6 +157,7 @@ void zpci_debug_init_device(struct zpci_dev *zdev)
 				&debugfs_pci_perf_fops);
 	if (IS_ERR(zdev->debugfs_perf))
 		zdev->debugfs_perf = NULL;
+<<<<<<< HEAD
 
 	zdev->debugfs_debug = debugfs_create_file("debug",
 				S_IFREG | S_IRUGO | S_IWUSR,
@@ -156,19 +165,28 @@ void zpci_debug_init_device(struct zpci_dev *zdev)
 				&debugfs_pci_debug_fops);
 	if (IS_ERR(zdev->debugfs_debug))
 		zdev->debugfs_debug = NULL;
+=======
+>>>>>>> v3.18
 }
 
 void zpci_debug_exit_device(struct zpci_dev *zdev)
 {
 	debugfs_remove(zdev->debugfs_perf);
+<<<<<<< HEAD
 	debugfs_remove(zdev->debugfs_debug);
+=======
+>>>>>>> v3.18
 	debugfs_remove(zdev->debugfs_dev);
 }
 
 int __init zpci_debug_init(void)
 {
 	/* event trace buffer */
+<<<<<<< HEAD
 	pci_debug_msg_id = debug_register("pci_msg", 16, 1, 16 * sizeof(long));
+=======
+	pci_debug_msg_id = debug_register("pci_msg", 8, 1, 8 * sizeof(long));
+>>>>>>> v3.18
 	if (!pci_debug_msg_id)
 		return -EINVAL;
 	debug_register_view(pci_debug_msg_id, &debug_sprintf_view);

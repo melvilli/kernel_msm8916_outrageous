@@ -175,7 +175,11 @@ static int_handler_prototype int_handler_table[] = {
 	fm_irq_handle_intmsk_cmd_resp
 };
 
+<<<<<<< HEAD
 long (*g_st_write) (struct sk_buff *skb);
+=======
+static long (*g_st_write) (struct sk_buff *skb);
+>>>>>>> v3.18
 static struct completion wait_for_fmdrv_reg_comp;
 
 static inline void fm_irq_call(struct fmdev *fmdev)
@@ -440,7 +444,11 @@ static int fm_send_cmd(struct fmdev *fmdev, u8 fm_op, u16 type,	void *payload,
 		 * command with u16 payload - convert to be16
 		 */
 		if (payload != NULL)
+<<<<<<< HEAD
 			*(u16 *)payload = cpu_to_be16(*(u16 *)payload);
+=======
+			*(__be16 *)payload = cpu_to_be16(*(u16 *)payload);
+>>>>>>> v3.18
 
 	} else if (payload != NULL) {
 		fm_cb(skb)->fm_op = *((u8 *)payload + 2);
@@ -595,7 +603,11 @@ static void fm_irq_handle_flag_getcmd_resp(struct fmdev *fmdev)
 	skb_pull(skb, sizeof(struct fm_event_msg_hdr));
 	memcpy(&fmdev->irq_info.flag, skb->data, fm_evt_hdr->dlen);
 
+<<<<<<< HEAD
 	fmdev->irq_info.flag = be16_to_cpu(fmdev->irq_info.flag);
+=======
+	fmdev->irq_info.flag = be16_to_cpu((__force __be16)fmdev->irq_info.flag);
+>>>>>>> v3.18
 	fmdbg("irq: flag register(0x%x)\n", fmdev->irq_info.flag);
 
 	/* Continue next function in interrupt handler table */
@@ -715,7 +727,11 @@ static void fm_irq_handle_rdsdata_getcmd_resp(struct fmdev *fmdev)
 	struct fm_rdsdata_format rds_fmt;
 	struct fm_rds *rds = &fmdev->rx.rds;
 	unsigned long group_idx, flags;
+<<<<<<< HEAD
 	u8 *rds_data, meta_data, tmpbuf[3];
+=======
+	u8 *rds_data, meta_data, tmpbuf[FM_RDS_BLK_SIZE];
+>>>>>>> v3.18
 	u8 type, blk_idx;
 	u16 cur_picode;
 	u32 rds_len;
@@ -764,7 +780,11 @@ static void fm_irq_handle_rdsdata_getcmd_resp(struct fmdev *fmdev)
 			 * Extract PI code and store in local cache.
 			 * We need this during AF switch processing.
 			 */
+<<<<<<< HEAD
 			cur_picode = be16_to_cpu(rds_fmt.data.groupgeneral.pidata);
+=======
+			cur_picode = be16_to_cpu((__force __be16)rds_fmt.data.groupgeneral.pidata);
+>>>>>>> v3.18
 			if (fmdev->rx.stat_info.picode != cur_picode)
 				fmdev->rx.stat_info.picode = cur_picode;
 
@@ -989,7 +1009,11 @@ static void fm_irq_afjump_rd_freq_resp(struct fmdev *fmdev)
 	/* Skip header info and copy only response data */
 	skb_pull(skb, sizeof(struct fm_event_msg_hdr));
 	memcpy(&read_freq, skb->data, sizeof(read_freq));
+<<<<<<< HEAD
 	read_freq = be16_to_cpu(read_freq);
+=======
+	read_freq = be16_to_cpu((__force __be16)read_freq);
+>>>>>>> v3.18
 	curr_freq = fmdev->rx.region.bot_freq + ((u32)read_freq * FM_FREQ_MUL);
 
 	jumped_freq = fmdev->rx.stat_info.af_cache[fmdev->rx.afjump_idx];
@@ -1073,6 +1097,10 @@ int fmc_transfer_rds_from_internal_buff(struct fmdev *fmdev, struct file *file,
 		u8 __user *buf, size_t count)
 {
 	u32 block_count;
+<<<<<<< HEAD
+=======
+	u8 tmpbuf[FM_RDS_BLK_SIZE];
+>>>>>>> v3.18
 	unsigned long flags;
 	int ret;
 
@@ -1087,6 +1115,7 @@ int fmc_transfer_rds_from_internal_buff(struct fmdev *fmdev, struct file *file,
 	}
 
 	/* Calculate block count from byte count */
+<<<<<<< HEAD
 	count /= 3;
 	block_count = 0;
 	ret = 0;
@@ -1101,15 +1130,41 @@ int fmc_transfer_rds_from_internal_buff(struct fmdev *fmdev, struct file *file,
 					FM_RDS_BLK_SIZE))
 			break;
 
+=======
+	count /= FM_RDS_BLK_SIZE;
+	block_count = 0;
+	ret = 0;
+
+	while (block_count < count) {
+		spin_lock_irqsave(&fmdev->rds_buff_lock, flags);
+
+		if (fmdev->rx.rds.wr_idx == fmdev->rx.rds.rd_idx) {
+			spin_unlock_irqrestore(&fmdev->rds_buff_lock, flags);
+			break;
+		}
+		memcpy(tmpbuf, &fmdev->rx.rds.buff[fmdev->rx.rds.rd_idx],
+					FM_RDS_BLK_SIZE);
+>>>>>>> v3.18
 		fmdev->rx.rds.rd_idx += FM_RDS_BLK_SIZE;
 		if (fmdev->rx.rds.rd_idx >= fmdev->rx.rds.buf_size)
 			fmdev->rx.rds.rd_idx = 0;
 
+<<<<<<< HEAD
+=======
+		spin_unlock_irqrestore(&fmdev->rds_buff_lock, flags);
+
+		if (copy_to_user(buf, tmpbuf, FM_RDS_BLK_SIZE))
+			break;
+
+>>>>>>> v3.18
 		block_count++;
 		buf += FM_RDS_BLK_SIZE;
 		ret += FM_RDS_BLK_SIZE;
 	}
+<<<<<<< HEAD
 	spin_unlock_irqrestore(&fmdev->rds_buff_lock, flags);
+=======
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -1252,7 +1307,11 @@ static int fm_download_firmware(struct fmdev *fmdev, const u8 *fw_name)
 		fmerr("Unable to read firmware(%s) content\n", fw_name);
 		return ret;
 	}
+<<<<<<< HEAD
 	fmdbg("Firmware(%s) length : %d bytes\n", fw_name, fw_entry->size);
+=======
+	fmdbg("Firmware(%s) length : %zu bytes\n", fw_name, fw_entry->size);
+>>>>>>> v3.18
 
 	fw_data = (void *)fw_entry->data;
 	fw_len = fw_entry->size;
@@ -1313,7 +1372,12 @@ static int load_default_rx_configuration(struct fmdev *fmdev)
 /* Does FM power on sequence */
 static int fm_power_up(struct fmdev *fmdev, u8 mode)
 {
+<<<<<<< HEAD
 	u16 payload, asic_id, asic_ver;
+=======
+	u16 payload;
+	__be16 asic_id, asic_ver;
+>>>>>>> v3.18
 	int resp_len, ret;
 	u8 fw_name[50];
 

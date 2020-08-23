@@ -8,8 +8,13 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation.
  *
+<<<<<<< HEAD
  * Maintained by: Eilon Greenstein <eilong@broadcom.com>
  * Written by: Vladislav Zolotarov <vladz@broadcom.com>
+=======
+ * Maintained by: Ariel Elior <ariel.elior@qlogic.com>
+ * Written by: Vladislav Zolotarov
+>>>>>>> v3.18
  */
 
 #ifndef BNX2X_INIT_OPS_H

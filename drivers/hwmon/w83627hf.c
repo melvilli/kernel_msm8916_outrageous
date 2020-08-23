@@ -5,7 +5,11 @@
  *			      Philip Edelbrock <phil@netroedge.com>,
  *			      and Mark Studebaker <mdsxyz123@yahoo.com>
  * Ported to 2.6 by Bernhard C. Schrenk <clemy@clemy.org>
+<<<<<<< HEAD
  * Copyright (c) 2007 - 1012  Jean Delvare <khali@linux-fr.org>
+=======
+ * Copyright (c) 2007 - 1012  Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -820,6 +824,12 @@ store_vrm_reg(struct device *dev, struct device_attribute *attr, const char *buf
 	err = kstrtoul(buf, 10, &val);
 	if (err)
 		return err;
+<<<<<<< HEAD
+=======
+
+	if (val > 255)
+		return -EINVAL;
+>>>>>>> v3.18
 	data->vrm = val;
 
 	return count;
@@ -1415,7 +1425,11 @@ static const struct attribute_group w83627hf_group_opt = {
 static int w83627hf_probe(struct platform_device *pdev)
 {
 	struct device *dev = &pdev->dev;
+<<<<<<< HEAD
 	struct w83627hf_sio_data *sio_data = dev->platform_data;
+=======
+	struct w83627hf_sio_data *sio_data = dev_get_platdata(dev);
+>>>>>>> v3.18
 	struct w83627hf_data *data;
 	struct resource *res;
 	int err, i;
@@ -1636,7 +1650,11 @@ static int w83627hf_read_value(struct w83627hf_data *data, u16 reg)
 
 static int w83627thf_read_gpio5(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct w83627hf_sio_data *sio_data = pdev->dev.platform_data;
+=======
+	struct w83627hf_sio_data *sio_data = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	int res = 0xff, sel;
 
 	superio_enter(sio_data);
@@ -1669,7 +1687,11 @@ exit:
 
 static int w83687thf_read_vid(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct w83627hf_sio_data *sio_data = pdev->dev.platform_data;
+=======
+	struct w83627hf_sio_data *sio_data = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	int res = 0xff;
 
 	superio_enter(sio_data);

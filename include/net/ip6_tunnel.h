@@ -36,6 +36,10 @@ struct __ip6_tnl_parm {
 struct ip6_tnl {
 	struct ip6_tnl __rcu *next;	/* next tunnel in list */
 	struct net_device *dev;	/* virtual device associated with tunnel */
+<<<<<<< HEAD
+=======
+	struct net *net;	/* netns for packet i/o */
+>>>>>>> v3.18
 	struct __ip6_tnl_parm parms;	/* tunnel configuration parameters */
 	struct flowi fl;	/* flowi template for xmit */
 	struct dst_entry *dst_cache;    /* cached dst */
@@ -74,13 +78,20 @@ static inline void ip6tunnel_xmit(struct sk_buff *skb, struct net_device *dev)
 	struct net_device_stats *stats = &dev->stats;
 	int pkt_len, err;
 
+<<<<<<< HEAD
 	nf_reset(skb);
 	memset(skb->cb, 0, sizeof(struct inet6_skb_parm));
+=======
+>>>>>>> v3.18
 	pkt_len = skb->len;
 	err = ip6_local_out(skb);
 
 	if (net_xmit_eval(err) == 0) {
+<<<<<<< HEAD
 		struct pcpu_tstats *tstats = this_cpu_ptr(dev->tstats);
+=======
+		struct pcpu_sw_netstats *tstats = this_cpu_ptr(dev->tstats);
+>>>>>>> v3.18
 		u64_stats_update_begin(&tstats->syncp);
 		tstats->tx_bytes += pkt_len;
 		tstats->tx_packets++;

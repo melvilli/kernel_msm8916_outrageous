@@ -54,7 +54,11 @@ static void __ipath_release_user_pages(struct page **p, size_t num_pages,
 
 /* call with current->mm->mmap_sem held */
 static int __ipath_get_user_pages(unsigned long start_page, size_t num_pages,
+<<<<<<< HEAD
 				  struct page **p, struct vm_area_struct **vma)
+=======
+				  struct page **p)
+>>>>>>> v3.18
 {
 	unsigned long lock_limit;
 	size_t got;
@@ -74,7 +78,11 @@ static int __ipath_get_user_pages(unsigned long start_page, size_t num_pages,
 		ret = get_user_pages(current, current->mm,
 				     start_page + got * PAGE_SIZE,
 				     num_pages - got, 1, 1,
+<<<<<<< HEAD
 				     p + got, vma);
+=======
+				     p + got, NULL);
+>>>>>>> v3.18
 		if (ret < 0)
 			goto bail_release;
 	}
@@ -165,7 +173,11 @@ int ipath_get_user_pages(unsigned long start_page, size_t num_pages,
 
 	down_write(&current->mm->mmap_sem);
 
+<<<<<<< HEAD
 	ret = __ipath_get_user_pages(start_page, num_pages, p, NULL);
+=======
+	ret = __ipath_get_user_pages(start_page, num_pages, p);
+>>>>>>> v3.18
 
 	up_write(&current->mm->mmap_sem);
 

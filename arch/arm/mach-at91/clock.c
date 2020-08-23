@@ -24,9 +24,15 @@
 #include <linux/clk.h>
 #include <linux/io.h>
 #include <linux/of_address.h>
+<<<<<<< HEAD
 
 #include <mach/hardware.h>
 #include <mach/at91_pmc.h>
+=======
+#include <linux/clk/at91_pmc.h>
+
+#include <mach/hardware.h>
+>>>>>>> v3.18
 #include <mach/cpu.h>
 
 #include <asm/proc-fns.h>
@@ -75,7 +81,11 @@ EXPORT_SYMBOL_GPL(at91_pmc_base);
 #define cpu_has_pllb()		(!(cpu_is_at91sam9rl() \
 				|| cpu_is_at91sam9g45() \
 				|| cpu_is_at91sam9x5() \
+<<<<<<< HEAD
 				|| cpu_is_at91sam9n12()))
+=======
+				|| cpu_is_sama5d3()))
+>>>>>>> v3.18
 
 #define cpu_has_upll()		(cpu_is_at91sam9g45() \
 				|| cpu_is_at91sam9x5() \
@@ -330,8 +340,11 @@ EXPORT_SYMBOL(clk_get_rate);
 
 /*------------------------------------------------------------------------*/
 
+<<<<<<< HEAD
 #ifdef CONFIG_AT91_PROGRAMMABLE_CLOCKS
 
+=======
+>>>>>>> v3.18
 /*
  * For now, only the programmable clocks support reparenting (MCK could
  * do this too, with care) or rate changing (the PLLs could do this too,
@@ -459,8 +472,11 @@ static void __init init_programmable_clock(struct clk *clk)
 	clk->rate_hz = parent->rate_hz / pmc_prescaler_divider(pckr);
 }
 
+<<<<<<< HEAD
 #endif	/* CONFIG_AT91_PROGRAMMABLE_CLOCKS */
 
+=======
+>>>>>>> v3.18
 /*------------------------------------------------------------------------*/
 
 #ifdef CONFIG_DEBUG_FS
@@ -489,7 +505,11 @@ static int at91_clk_show(struct seq_file *s, void *unused)
 		seq_printf(s, "UCKR = %8x\n", uckr);
 	}
 	seq_printf(s, "MCKR = %8x\n", at91_pmc_read(AT91_PMC_MCKR));
+<<<<<<< HEAD
 	if (cpu_has_upll())
+=======
+	if (cpu_has_upll() || cpu_is_at91sam9n12())
+>>>>>>> v3.18
 		seq_printf(s, "USB  = %8x\n", at91_pmc_read(AT91_PMC_USB));
 	seq_printf(s, "SR   = %8x\n", sr);
 
@@ -577,12 +597,18 @@ int __init clk_register(struct clk *clk)
 		clk->parent = &mck;
 		clk->mode = pmc_sys_mode;
 	}
+<<<<<<< HEAD
 #ifdef CONFIG_AT91_PROGRAMMABLE_CLOCKS
+=======
+>>>>>>> v3.18
 	else if (clk_is_programmable(clk)) {
 		clk->mode = pmc_sys_mode;
 		init_programmable_clock(clk);
 	}
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 
 	at91_clk_add(clk);
 
@@ -614,6 +640,11 @@ static u32 __init at91_usb_rate(struct clk *pll, u32 freq, u32 reg)
 {
 	if (pll == &pllb && (reg & AT91_PMC_USB96M))
 		return freq / 2;
+<<<<<<< HEAD
+=======
+	else if (pll == &utmi_clk || cpu_is_at91sam9n12())
+		return freq / (1 + ((reg & AT91_PMC_OHCIUSBDIV) >> 8));
+>>>>>>> v3.18
 	else
 		return freq;
 }
@@ -683,6 +714,11 @@ static struct clk *const standard_pmc_clocks[] __initconst = {
 /* PLLB generated USB full speed clock init */
 static void __init at91_pllb_usbfs_clock_init(unsigned long main_clock)
 {
+<<<<<<< HEAD
+=======
+	unsigned int reg;
+
+>>>>>>> v3.18
 	/*
 	 * USB clock init:  choose 48 MHz PLLB value,
 	 * disable 48MHz clock during usb peripheral suspend.
@@ -691,22 +727,49 @@ static void __init at91_pllb_usbfs_clock_init(unsigned long main_clock)
 	 */
 	uhpck.parent = &pllb;
 
+<<<<<<< HEAD
 	at91_pllb_usb_init = at91_pll_calc(main_clock, 48000000 * 2) | AT91_PMC_USB96M;
 	pllb.rate_hz = at91_pll_rate(&pllb, main_clock, at91_pllb_usb_init);
 	if (cpu_is_at91rm9200()) {
+=======
+	reg = at91_pllb_usb_init = at91_pll_calc(main_clock, 48000000 * 2);
+	pllb.rate_hz = at91_pll_rate(&pllb, main_clock, at91_pllb_usb_init);
+	if (cpu_is_at91rm9200()) {
+		reg = at91_pllb_usb_init |= AT91_PMC_USB96M;
+>>>>>>> v3.18
 		uhpck.pmc_mask = AT91RM9200_PMC_UHP;
 		udpck.pmc_mask = AT91RM9200_PMC_UDP;
 		at91_pmc_write(AT91_PMC_SCER, AT91RM9200_PMC_MCKUDP);
 	} else if (cpu_is_at91sam9260() || cpu_is_at91sam9261() ||
 		   cpu_is_at91sam9263() || cpu_is_at91sam9g20() ||
 		   cpu_is_at91sam9g10()) {
+<<<<<<< HEAD
+=======
+		reg = at91_pllb_usb_init |= AT91_PMC_USB96M;
+		uhpck.pmc_mask = AT91SAM926x_PMC_UHP;
+		udpck.pmc_mask = AT91SAM926x_PMC_UDP;
+	} else if (cpu_is_at91sam9n12()) {
+		/* Divider for USB clock is in USB clock register for 9n12 */
+		reg = AT91_PMC_USBS_PLLB;
+
+		/* For PLLB output 96M, set usb divider 2 (USBDIV + 1) */
+		reg |= AT91_PMC_OHCIUSBDIV_2;
+		at91_pmc_write(AT91_PMC_USB, reg);
+
+		/* Still setup masks */
+>>>>>>> v3.18
 		uhpck.pmc_mask = AT91SAM926x_PMC_UHP;
 		udpck.pmc_mask = AT91SAM926x_PMC_UDP;
 	}
 	at91_pmc_write(AT91_CKGR_PLLBR, 0);
 
+<<<<<<< HEAD
 	udpck.rate_hz = at91_usb_rate(&pllb, pllb.rate_hz, at91_pllb_usb_init);
 	uhpck.rate_hz = at91_usb_rate(&pllb, pllb.rate_hz, at91_pllb_usb_init);
+=======
+	udpck.rate_hz = at91_usb_rate(&pllb, pllb.rate_hz, reg);
+	uhpck.rate_hz = at91_usb_rate(&pllb, pllb.rate_hz, reg);
+>>>>>>> v3.18
 }
 
 /* UPLL generated USB full speed clock init */
@@ -725,8 +788,12 @@ static void __init at91_upll_usbfs_clock_init(unsigned long main_clock)
 	/* Now set uhpck values */
 	uhpck.parent = &utmi_clk;
 	uhpck.pmc_mask = AT91SAM926x_PMC_UHP;
+<<<<<<< HEAD
 	uhpck.rate_hz = utmi_clk.rate_hz;
 	uhpck.rate_hz /= 1 + ((at91_pmc_read(AT91_PMC_USB) & AT91_PMC_OHCIUSBDIV) >> 8);
+=======
+	uhpck.rate_hz = at91_usb_rate(&utmi_clk, utmi_clk.rate_hz, usbr);
+>>>>>>> v3.18
 }
 
 static int __init at91_pmc_init(unsigned long main_clock)
@@ -868,6 +935,14 @@ static int __init at91_pmc_init(unsigned long main_clock)
 #if defined(CONFIG_OF)
 static struct of_device_id pmc_ids[] = {
 	{ .compatible = "atmel,at91rm9200-pmc" },
+<<<<<<< HEAD
+=======
+	{ .compatible = "atmel,at91sam9260-pmc" },
+	{ .compatible = "atmel,at91sam9g45-pmc" },
+	{ .compatible = "atmel,at91sam9n12-pmc" },
+	{ .compatible = "atmel,at91sam9x5-pmc" },
+	{ .compatible = "atmel,sama5d3-pmc" },
+>>>>>>> v3.18
 	{ /*sentinel*/ }
 };
 

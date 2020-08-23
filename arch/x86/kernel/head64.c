@@ -137,7 +137,11 @@ static void __init copy_bootdata(char *real_mode_data)
 	}
 }
 
+<<<<<<< HEAD
 void __init x86_64_start_kernel(char * real_mode_data)
+=======
+asmlinkage __visible void __init x86_64_start_kernel(char * real_mode_data)
+>>>>>>> v3.18
 {
 	int i;
 
@@ -162,7 +166,11 @@ void __init x86_64_start_kernel(char * real_mode_data)
 	clear_bss();
 
 	for (i = 0; i < NUM_EXCEPTION_VECTORS; i++)
+<<<<<<< HEAD
 		set_intr_gate(i, &early_idt_handler_array[i]);
+=======
+		set_intr_gate(i, early_idt_handlers[i]);
+>>>>>>> v3.18
 	load_idt((const struct desc_ptr *)&idt_descr);
 
 	copy_bootdata(__va(real_mode_data));
@@ -172,7 +180,11 @@ void __init x86_64_start_kernel(char * real_mode_data)
 	 */
 	load_ucode_bsp();
 
+<<<<<<< HEAD
 	if (console_loglevel == 10)
+=======
+	if (console_loglevel >= CONSOLE_LOGLEVEL_DEBUG)
+>>>>>>> v3.18
 		early_printk("Kernel alive\n");
 
 	clear_page(init_level4_pgt);

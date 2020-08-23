@@ -18,7 +18,10 @@
  */
 
 #include <linux/device.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/io.h>
 #include <linux/module.h>
 #include <linux/serial_8250.h>
@@ -95,6 +98,7 @@ static int serial8250_em_probe(struct platform_device *pdev)
 	struct resource *irq = platform_get_resource(pdev, IORESOURCE_IRQ, 0);
 	struct serial8250_em_priv *priv;
 	struct uart_8250_port up;
+<<<<<<< HEAD
 	int ret = -EINVAL;
 
 	if (!regs || !irq) {
@@ -114,6 +118,25 @@ static int serial8250_em_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "unable to get clock\n");
 		ret = PTR_ERR(priv->sclk);
 		goto err1;
+=======
+	int ret;
+
+	if (!regs || !irq) {
+		dev_err(&pdev->dev, "missing registers or irq\n");
+		return -EINVAL;
+	}
+
+	priv = devm_kzalloc(&pdev->dev, sizeof(*priv), GFP_KERNEL);
+	if (!priv) {
+		dev_err(&pdev->dev, "unable to allocate private data\n");
+		return -ENOMEM;
+	}
+
+	priv->sclk = devm_clk_get(&pdev->dev, "sclk");
+	if (IS_ERR(priv->sclk)) {
+		dev_err(&pdev->dev, "unable to get clock\n");
+		return PTR_ERR(priv->sclk);
+>>>>>>> v3.18
 	}
 
 	memset(&up, 0, sizeof(up));
@@ -124,7 +147,11 @@ static int serial8250_em_probe(struct platform_device *pdev)
 	up.port.dev = &pdev->dev;
 	up.port.private_data = priv;
 
+<<<<<<< HEAD
 	clk_enable(priv->sclk);
+=======
+	clk_prepare_enable(priv->sclk);
+>>>>>>> v3.18
 	up.port.uartclk = clk_get_rate(priv->sclk);
 
 	up.port.iotype = UPIO_MEM32;
@@ -136,12 +163,18 @@ static int serial8250_em_probe(struct platform_device *pdev)
 	ret = serial8250_register_8250_port(&up);
 	if (ret < 0) {
 		dev_err(&pdev->dev, "unable to register 8250 port\n");
+<<<<<<< HEAD
 		goto err2;
+=======
+		clk_disable_unprepare(priv->sclk);
+		return ret;
+>>>>>>> v3.18
 	}
 
 	priv->line = ret;
 	platform_set_drvdata(pdev, priv);
 	return 0;
+<<<<<<< HEAD
 
  err2:
 	clk_disable(priv->sclk);
@@ -150,6 +183,8 @@ static int serial8250_em_probe(struct platform_device *pdev)
 	kfree(priv);
  err0:
 	return ret;
+=======
+>>>>>>> v3.18
 }
 
 static int serial8250_em_remove(struct platform_device *pdev)
@@ -157,9 +192,13 @@ static int serial8250_em_remove(struct platform_device *pdev)
 	struct serial8250_em_priv *priv = platform_get_drvdata(pdev);
 
 	serial8250_unregister_port(priv->line);
+<<<<<<< HEAD
 	clk_disable(priv->sclk);
 	clk_put(priv->sclk);
 	kfree(priv);
+=======
+	clk_disable_unprepare(priv->sclk);
+>>>>>>> v3.18
 	return 0;
 }
 

@@ -522,7 +522,11 @@ static void receive_kbd_ms_chars(struct uart_sunsu_port *up, int is_break)
 				serio_interrupt(&up->serio, ch, 0);
 #endif
 				break;
+<<<<<<< HEAD
 			};
+=======
+			}
+>>>>>>> v3.18
 		}
 	} while (serial_in(up, UART_LSR) & UART_LSR_DR);
 }
@@ -834,7 +838,11 @@ sunsu_change_speed(struct uart_port *port, unsigned int cflag,
 	up->port.read_status_mask = UART_LSR_OE | UART_LSR_THRE | UART_LSR_DR;
 	if (iflag & INPCK)
 		up->port.read_status_mask |= UART_LSR_FE | UART_LSR_PE;
+<<<<<<< HEAD
 	if (iflag & (BRKINT | PARMRK))
+=======
+	if (iflag & (IGNBRK | BRKINT | PARMRK))
+>>>>>>> v3.18
 		up->port.read_status_mask |= UART_LSR_BI;
 
 	/*
@@ -1295,6 +1303,7 @@ static void sunsu_console_write(struct console *co, const char *s,
 	unsigned int ier;
 	int locked = 1;
 
+<<<<<<< HEAD
 	local_irq_save(flags);
 	if (up->port.sysrq) {
 		locked = 0;
@@ -1302,6 +1311,12 @@ static void sunsu_console_write(struct console *co, const char *s,
 		locked = spin_trylock(&up->port.lock);
 	} else
 		spin_lock(&up->port.lock);
+=======
+	if (up->port.sysrq || oops_in_progress)
+		locked = spin_trylock_irqsave(&up->port.lock, flags);
+	else
+		spin_lock_irqsave(&up->port.lock, flags);
+>>>>>>> v3.18
 
 	/*
 	 *	First save the UER then disable the interrupts
@@ -1319,8 +1334,12 @@ static void sunsu_console_write(struct console *co, const char *s,
 	serial_out(up, UART_IER, ier);
 
 	if (locked)
+<<<<<<< HEAD
 		spin_unlock(&up->port.lock);
 	local_irq_restore(flags);
+=======
+		spin_unlock_irqrestore(&up->port.lock, flags);
+>>>>>>> v3.18
 }
 
 /*
@@ -1454,7 +1473,11 @@ static int su_probe(struct platform_device *op)
 			kfree(up);
 			return err;
 		}
+<<<<<<< HEAD
 		dev_set_drvdata(&op->dev, up);
+=======
+		platform_set_drvdata(op, up);
+>>>>>>> v3.18
 
 		nr_inst++;
 
@@ -1483,7 +1506,11 @@ static int su_probe(struct platform_device *op)
 	if (err)
 		goto out_unmap;
 
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, up);
+=======
+	platform_set_drvdata(op, up);
+>>>>>>> v3.18
 
 	nr_inst++;
 
@@ -1496,7 +1523,11 @@ out_unmap:
 
 static int su_remove(struct platform_device *op)
 {
+<<<<<<< HEAD
 	struct uart_sunsu_port *up = dev_get_drvdata(&op->dev);
+=======
+	struct uart_sunsu_port *up = platform_get_drvdata(op);
+>>>>>>> v3.18
 	bool kbdms = false;
 
 	if (up->su_type == SU_PORT_MS ||
@@ -1516,8 +1547,11 @@ static int su_remove(struct platform_device *op)
 	if (kbdms)
 		kfree(up);
 
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, NULL);
 
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

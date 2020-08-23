@@ -35,6 +35,7 @@
  *
  * - Provides an API for platform code or device drivers to
  *   dynamically add or remove address decoding windows for the CPU ->
+<<<<<<< HEAD
  *   device accesses. This API is mvebu_mbus_add_window(),
  *   mvebu_mbus_add_window_remap_flags() and
  *   mvebu_mbus_del_window(). Since the (target, attribute) values
@@ -42,6 +43,11 @@
  *   *' string to identify devices, and this driver is responsible for
  *   knowing the mapping between the name of a device and its
  *   corresponding (target, attribute) in the current SoC family.
+=======
+ *   device accesses. This API is mvebu_mbus_add_window_by_id(),
+ *   mvebu_mbus_add_window_remap_by_id() and
+ *   mvebu_mbus_del_window().
+>>>>>>> v3.18
  *
  * - Provides a debugfs interface in /sys/kernel/debug/mvebu-mbus/ to
  *   see the list of CPU -> SDRAM windows and their configuration
@@ -49,6 +55,11 @@
  *   configuration (file 'devices').
  */
 
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/init.h>
@@ -58,6 +69,10 @@
 #include <linux/of.h>
 #include <linux/of_address.h>
 #include <linux/debugfs.h>
+<<<<<<< HEAD
+=======
+#include <linux/log2.h>
+>>>>>>> v3.18
 
 /*
  * DDR target is the same on all platforms.
@@ -95,6 +110,7 @@
 
 #define DOVE_DDR_BASE_CS_OFF(n) ((n) << 4)
 
+<<<<<<< HEAD
 struct mvebu_mbus_mapping {
 	const char *name;
 	u8 target;
@@ -122,6 +138,8 @@ struct mvebu_mbus_mapping {
 #define MAPDEF(__n, __t, __a, __m) \
 	{ .name = __n, .target = __t, .attr = __a, .attrmask = __m }
 
+=======
+>>>>>>> v3.18
 struct mvebu_mbus_state;
 
 struct mvebu_mbus_soc_data {
@@ -131,7 +149,10 @@ struct mvebu_mbus_soc_data {
 	void (*setup_cpu_target)(struct mvebu_mbus_state *s);
 	int (*show_cpu_target)(struct mvebu_mbus_state *s,
 			       struct seq_file *seq, void *v);
+<<<<<<< HEAD
 	const struct mvebu_mbus_mapping *map;
+=======
+>>>>>>> v3.18
 };
 
 struct mvebu_mbus_state {
@@ -140,6 +161,11 @@ struct mvebu_mbus_state {
 	struct dentry *debugfs_root;
 	struct dentry *debugfs_sdram;
 	struct dentry *debugfs_devs;
+<<<<<<< HEAD
+=======
+	struct resource pcie_mem_aperture;
+	struct resource pcie_io_aperture;
+>>>>>>> v3.18
 	const struct mvebu_mbus_soc_data *soc;
 	int hw_io_coherency;
 };
@@ -209,6 +235,7 @@ static void mvebu_mbus_disable_window(struct mvebu_mbus_state *mbus,
 }
 
 /* Checks whether the given window number is available */
+<<<<<<< HEAD
 
 /* On Armada XP, 375 and 38x the MBus window 13 has the remap
  * capability, like windows 0 to 7. However, the mvebu-mbus driver
@@ -218,16 +245,21 @@ static void mvebu_mbus_disable_window(struct mvebu_mbus_state *mbus,
  * quick fix for stable is to not use window 13. A follow up patch
  * will correctly handle this window.
 */
+=======
+>>>>>>> v3.18
 static int mvebu_mbus_window_is_free(struct mvebu_mbus_state *mbus,
 				     const int win)
 {
 	void __iomem *addr = mbus->mbuswins_base +
 		mbus->soc->win_cfg_offset(win);
 	u32 ctrl = readl(addr + WIN_CTRL_OFF);
+<<<<<<< HEAD
 
 	if (win == 13)
 		return false;
 
+=======
+>>>>>>> v3.18
 	return !(ctrl & WIN_CTRL_ENABLE);
 }
 
@@ -301,6 +333,20 @@ static int mvebu_mbus_setup_window(struct mvebu_mbus_state *mbus,
 		mbus->soc->win_cfg_offset(win);
 	u32 ctrl, remap_addr;
 
+<<<<<<< HEAD
+=======
+	if (!is_power_of_2(size)) {
+		WARN(true, "Invalid MBus window size: 0x%zx\n", size);
+		return -EINVAL;
+	}
+
+	if ((base & (phys_addr_t)(size - 1)) != 0) {
+		WARN(true, "Invalid MBus base/size: %pa len 0x%zx\n", &base,
+		     size);
+		return -EINVAL;
+	}
+
+>>>>>>> v3.18
 	ctrl = ((size - 1) & WIN_CTRL_SIZE_MASK) |
 		(attr << WIN_CTRL_ATTR_SHIFT)    |
 		(target << WIN_CTRL_TGT_SHIFT)   |
@@ -433,8 +479,12 @@ static int mvebu_devs_debug_show(struct seq_file *seq, void *v)
 		u64 wbase, wremap;
 		u32 wsize;
 		u8 wtarget, wattr;
+<<<<<<< HEAD
 		int enabled, i;
 		const char *name;
+=======
+		int enabled;
+>>>>>>> v3.18
 
 		mvebu_mbus_read_window(mbus, win,
 				       &enabled, &wbase, &wsize,
@@ -445,6 +495,7 @@ static int mvebu_devs_debug_show(struct seq_file *seq, void *v)
 			continue;
 		}
 
+<<<<<<< HEAD
 
 		for (i = 0; mbus->soc->map[i].name; i++)
 			if (mbus->soc->map[i].target == wtarget &&
@@ -457,6 +508,15 @@ static int mvebu_devs_debug_show(struct seq_file *seq, void *v)
 		seq_printf(seq, "[%02d] %016llx - %016llx : %s",
 			   win, (unsigned long long)wbase,
 			   (unsigned long long)(wbase + wsize), name);
+=======
+		seq_printf(seq, "[%02d] %016llx - %016llx : %04x:%04x",
+			   win, (unsigned long long)wbase,
+			   (unsigned long long)(wbase + wsize), wtarget, wattr);
+
+		if (!is_power_of_2(wsize) ||
+		    ((wbase & (u64)(wsize - 1)) != 0))
+			seq_puts(seq, " (Invalid base/size!!)");
+>>>>>>> v3.18
 
 		if (win < mbus->soc->num_remappable_wins) {
 			seq_printf(seq, " (remap %016llx)\n",
@@ -581,6 +641,7 @@ mvebu_mbus_dove_setup_cpu_target(struct mvebu_mbus_state *mbus)
 	mvebu_mbus_dram_info.num_cs = cs;
 }
 
+<<<<<<< HEAD
 static const struct mvebu_mbus_mapping armada_370_map[] = {
 	MAPDEF("bootrom",     1, 0xe0, MAPDEF_NOMASK),
 	MAPDEF("devbus-boot", 1, 0x2f, MAPDEF_NOMASK),
@@ -594,11 +655,15 @@ static const struct mvebu_mbus_mapping armada_370_map[] = {
 };
 
 static const struct mvebu_mbus_soc_data armada_370_mbus_data = {
+=======
+static const struct mvebu_mbus_soc_data armada_370_xp_mbus_data = {
+>>>>>>> v3.18
 	.num_wins            = 20,
 	.num_remappable_wins = 8,
 	.win_cfg_offset      = armada_370_xp_mbus_win_offset,
 	.setup_cpu_target    = mvebu_mbus_default_setup_cpu_target,
 	.show_cpu_target     = mvebu_sdram_debug_show_orion,
+<<<<<<< HEAD
 	.map                 = armada_370_map,
 };
 
@@ -637,6 +702,8 @@ static const struct mvebu_mbus_mapping kirkwood_map[] = {
 	MAPDEF("sram",    3, 0x01, MAPDEF_NOMASK),
 	MAPDEF("nand",    1, 0x2f, MAPDEF_NOMASK),
 	{},
+=======
+>>>>>>> v3.18
 };
 
 static const struct mvebu_mbus_soc_data kirkwood_mbus_data = {
@@ -645,6 +712,7 @@ static const struct mvebu_mbus_soc_data kirkwood_mbus_data = {
 	.win_cfg_offset      = orion_mbus_win_offset,
 	.setup_cpu_target    = mvebu_mbus_default_setup_cpu_target,
 	.show_cpu_target     = mvebu_sdram_debug_show_orion,
+<<<<<<< HEAD
 	.map                 = kirkwood_map,
 };
 
@@ -655,6 +723,8 @@ static const struct mvebu_mbus_mapping dove_map[] = {
 	MAPDEF("bootrom",    0x1, 0xfd, MAPDEF_NOMASK),
 	MAPDEF("scratchpad", 0xd, 0x0, MAPDEF_NOMASK),
 	{},
+=======
+>>>>>>> v3.18
 };
 
 static const struct mvebu_mbus_soc_data dove_mbus_data = {
@@ -663,6 +733,7 @@ static const struct mvebu_mbus_soc_data dove_mbus_data = {
 	.win_cfg_offset      = orion_mbus_win_offset,
 	.setup_cpu_target    = mvebu_mbus_dove_setup_cpu_target,
 	.show_cpu_target     = mvebu_sdram_debug_show_dove,
+<<<<<<< HEAD
 	.map                 = dove_map,
 };
 
@@ -675,6 +746,8 @@ static const struct mvebu_mbus_mapping orion5x_map[] = {
 	MAPDEF("devbus-cs2",  1, 0x1b, MAPDEF_NOMASK),
 	MAPDEF("sram",        0, 0x00, MAPDEF_NOMASK),
 	{},
+=======
+>>>>>>> v3.18
 };
 
 /*
@@ -687,7 +760,10 @@ static const struct mvebu_mbus_soc_data orion5x_4win_mbus_data = {
 	.win_cfg_offset      = orion_mbus_win_offset,
 	.setup_cpu_target    = mvebu_mbus_default_setup_cpu_target,
 	.show_cpu_target     = mvebu_sdram_debug_show_orion,
+<<<<<<< HEAD
 	.map                 = orion5x_map,
+=======
+>>>>>>> v3.18
 };
 
 static const struct mvebu_mbus_soc_data orion5x_2win_mbus_data = {
@@ -696,6 +772,7 @@ static const struct mvebu_mbus_soc_data orion5x_2win_mbus_data = {
 	.win_cfg_offset      = orion_mbus_win_offset,
 	.setup_cpu_target    = mvebu_mbus_default_setup_cpu_target,
 	.show_cpu_target     = mvebu_sdram_debug_show_orion,
+<<<<<<< HEAD
 	.map                 = orion5x_map,
 };
 
@@ -711,6 +788,8 @@ static const struct mvebu_mbus_mapping mv78xx0_map[] = {
 	MAPDEF("pcie2.0", 4, 0xf0, MAPDEF_PCIMASK),
 	MAPDEF("pcie3.0", 8, 0xf0, MAPDEF_PCIMASK),
 	{},
+=======
+>>>>>>> v3.18
 };
 
 static const struct mvebu_mbus_soc_data mv78xx0_mbus_data = {
@@ -719,6 +798,7 @@ static const struct mvebu_mbus_soc_data mv78xx0_mbus_data = {
 	.win_cfg_offset      = mv78xx0_mbus_win_offset,
 	.setup_cpu_target    = mvebu_mbus_default_setup_cpu_target,
 	.show_cpu_target     = mvebu_sdram_debug_show_orion,
+<<<<<<< HEAD
 	.map                 = mv78xx0_map,
 };
 
@@ -733,6 +813,15 @@ static const struct of_device_id of_mvebu_mbus_ids[] = {
 	  .data = &armada_370_mbus_data, },
 	{ .compatible = "marvell,armadaxp-mbus",
 	  .data = &armada_xp_mbus_data, },
+=======
+};
+
+static const struct of_device_id of_mvebu_mbus_ids[] = {
+	{ .compatible = "marvell,armada370-mbus",
+	  .data = &armada_370_xp_mbus_data, },
+	{ .compatible = "marvell,armadaxp-mbus",
+	  .data = &armada_370_xp_mbus_data, },
+>>>>>>> v3.18
 	{ .compatible = "marvell,kirkwood-mbus",
 	  .data = &kirkwood_mbus_data, },
 	{ .compatible = "marvell,dove-mbus",
@@ -753,6 +842,7 @@ static const struct of_device_id of_mvebu_mbus_ids[] = {
 /*
  * Public API of the driver
  */
+<<<<<<< HEAD
 int mvebu_mbus_add_window_remap_flags(const char *devname, phys_addr_t base,
 				      size_t size, phys_addr_t remap,
 				      unsigned int flags)
@@ -795,6 +885,29 @@ int mvebu_mbus_add_window(const char *devname, phys_addr_t base, size_t size)
 {
 	return mvebu_mbus_add_window_remap_flags(devname, base, size,
 						 MVEBU_MBUS_NO_REMAP, 0);
+=======
+int mvebu_mbus_add_window_remap_by_id(unsigned int target,
+				      unsigned int attribute,
+				      phys_addr_t base, size_t size,
+				      phys_addr_t remap)
+{
+	struct mvebu_mbus_state *s = &mbus_state;
+
+	if (!mvebu_mbus_window_conflicts(s, base, size, target, attribute)) {
+		pr_err("cannot add window '%x:%x', conflicts with another window\n",
+		       target, attribute);
+		return -EINVAL;
+	}
+
+	return mvebu_mbus_alloc_window(s, base, size, remap, target, attribute);
+}
+
+int mvebu_mbus_add_window_by_id(unsigned int target, unsigned int attribute,
+				phys_addr_t base, size_t size)
+{
+	return mvebu_mbus_add_window_remap_by_id(target, attribute, base,
+						 size, MVEBU_MBUS_NO_REMAP);
+>>>>>>> v3.18
 }
 
 int mvebu_mbus_del_window(phys_addr_t base, size_t size)
@@ -809,6 +922,23 @@ int mvebu_mbus_del_window(phys_addr_t base, size_t size)
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+void mvebu_mbus_get_pcie_mem_aperture(struct resource *res)
+{
+	if (!res)
+		return;
+	*res = mbus_state.pcie_mem_aperture;
+}
+
+void mvebu_mbus_get_pcie_io_aperture(struct resource *res)
+{
+	if (!res)
+		return;
+	*res = mbus_state.pcie_io_aperture;
+}
+
+>>>>>>> v3.18
 static __init int mvebu_mbus_debugfs_init(void)
 {
 	struct mvebu_mbus_state *s = &mbus_state;
@@ -835,6 +965,7 @@ static __init int mvebu_mbus_debugfs_init(void)
 }
 fs_initcall(mvebu_mbus_debugfs_init);
 
+<<<<<<< HEAD
 int __init mvebu_mbus_init(const char *soc, phys_addr_t mbuswins_phys_base,
 			   size_t mbuswins_size,
 			   phys_addr_t sdramwins_phys_base,
@@ -874,3 +1005,248 @@ int __init mvebu_mbus_init(const char *soc, phys_addr_t mbuswins_phys_base,
 
 	return 0;
 }
+=======
+static int __init mvebu_mbus_common_init(struct mvebu_mbus_state *mbus,
+					 phys_addr_t mbuswins_phys_base,
+					 size_t mbuswins_size,
+					 phys_addr_t sdramwins_phys_base,
+					 size_t sdramwins_size)
+{
+	int win;
+
+	mbus->mbuswins_base = ioremap(mbuswins_phys_base, mbuswins_size);
+	if (!mbus->mbuswins_base)
+		return -ENOMEM;
+
+	mbus->sdramwins_base = ioremap(sdramwins_phys_base, sdramwins_size);
+	if (!mbus->sdramwins_base) {
+		iounmap(mbus_state.mbuswins_base);
+		return -ENOMEM;
+	}
+
+	for (win = 0; win < mbus->soc->num_wins; win++)
+		mvebu_mbus_disable_window(mbus, win);
+
+	mbus->soc->setup_cpu_target(mbus);
+
+	return 0;
+}
+
+int __init mvebu_mbus_init(const char *soc, phys_addr_t mbuswins_phys_base,
+			   size_t mbuswins_size,
+			   phys_addr_t sdramwins_phys_base,
+			   size_t sdramwins_size)
+{
+	const struct of_device_id *of_id;
+
+	for (of_id = of_mvebu_mbus_ids; of_id->compatible[0]; of_id++)
+		if (!strcmp(of_id->compatible, soc))
+			break;
+
+	if (!of_id->compatible[0]) {
+		pr_err("could not find a matching SoC family\n");
+		return -ENODEV;
+	}
+
+	mbus_state.soc = of_id->data;
+
+	return mvebu_mbus_common_init(&mbus_state,
+			mbuswins_phys_base,
+			mbuswins_size,
+			sdramwins_phys_base,
+			sdramwins_size);
+}
+
+#ifdef CONFIG_OF
+/*
+ * The window IDs in the ranges DT property have the following format:
+ *  - bits 28 to 31: MBus custom field
+ *  - bits 24 to 27: window target ID
+ *  - bits 16 to 23: window attribute ID
+ *  - bits  0 to 15: unused
+ */
+#define CUSTOM(id) (((id) & 0xF0000000) >> 24)
+#define TARGET(id) (((id) & 0x0F000000) >> 24)
+#define ATTR(id)   (((id) & 0x00FF0000) >> 16)
+
+static int __init mbus_dt_setup_win(struct mvebu_mbus_state *mbus,
+				    u32 base, u32 size,
+				    u8 target, u8 attr)
+{
+	if (!mvebu_mbus_window_conflicts(mbus, base, size, target, attr)) {
+		pr_err("cannot add window '%04x:%04x', conflicts with another window\n",
+		       target, attr);
+		return -EBUSY;
+	}
+
+	if (mvebu_mbus_alloc_window(mbus, base, size, MVEBU_MBUS_NO_REMAP,
+				    target, attr)) {
+		pr_err("cannot add window '%04x:%04x', too many windows\n",
+		       target, attr);
+		return -ENOMEM;
+	}
+	return 0;
+}
+
+static int __init
+mbus_parse_ranges(struct device_node *node,
+		  int *addr_cells, int *c_addr_cells, int *c_size_cells,
+		  int *cell_count, const __be32 **ranges_start,
+		  const __be32 **ranges_end)
+{
+	const __be32 *prop;
+	int ranges_len, tuple_len;
+
+	/* Allow a node with no 'ranges' property */
+	*ranges_start = of_get_property(node, "ranges", &ranges_len);
+	if (*ranges_start == NULL) {
+		*addr_cells = *c_addr_cells = *c_size_cells = *cell_count = 0;
+		*ranges_start = *ranges_end = NULL;
+		return 0;
+	}
+	*ranges_end = *ranges_start + ranges_len / sizeof(__be32);
+
+	*addr_cells = of_n_addr_cells(node);
+
+	prop = of_get_property(node, "#address-cells", NULL);
+	*c_addr_cells = be32_to_cpup(prop);
+
+	prop = of_get_property(node, "#size-cells", NULL);
+	*c_size_cells = be32_to_cpup(prop);
+
+	*cell_count = *addr_cells + *c_addr_cells + *c_size_cells;
+	tuple_len = (*cell_count) * sizeof(__be32);
+
+	if (ranges_len % tuple_len) {
+		pr_warn("malformed ranges entry '%s'\n", node->name);
+		return -EINVAL;
+	}
+	return 0;
+}
+
+static int __init mbus_dt_setup(struct mvebu_mbus_state *mbus,
+				struct device_node *np)
+{
+	int addr_cells, c_addr_cells, c_size_cells;
+	int i, ret, cell_count;
+	const __be32 *r, *ranges_start, *ranges_end;
+
+	ret = mbus_parse_ranges(np, &addr_cells, &c_addr_cells,
+				&c_size_cells, &cell_count,
+				&ranges_start, &ranges_end);
+	if (ret < 0)
+		return ret;
+
+	for (i = 0, r = ranges_start; r < ranges_end; r += cell_count, i++) {
+		u32 windowid, base, size;
+		u8 target, attr;
+
+		/*
+		 * An entry with a non-zero custom field do not
+		 * correspond to a static window, so skip it.
+		 */
+		windowid = of_read_number(r, 1);
+		if (CUSTOM(windowid))
+			continue;
+
+		target = TARGET(windowid);
+		attr = ATTR(windowid);
+
+		base = of_read_number(r + c_addr_cells, addr_cells);
+		size = of_read_number(r + c_addr_cells + addr_cells,
+				      c_size_cells);
+		ret = mbus_dt_setup_win(mbus, base, size, target, attr);
+		if (ret < 0)
+			return ret;
+	}
+	return 0;
+}
+
+static void __init mvebu_mbus_get_pcie_resources(struct device_node *np,
+						 struct resource *mem,
+						 struct resource *io)
+{
+	u32 reg[2];
+	int ret;
+
+	/*
+	 * These are optional, so we make sure that resource_size(x) will
+	 * return 0.
+	 */
+	memset(mem, 0, sizeof(struct resource));
+	mem->end = -1;
+	memset(io, 0, sizeof(struct resource));
+	io->end = -1;
+
+	ret = of_property_read_u32_array(np, "pcie-mem-aperture", reg, ARRAY_SIZE(reg));
+	if (!ret) {
+		mem->start = reg[0];
+		mem->end = mem->start + reg[1] - 1;
+		mem->flags = IORESOURCE_MEM;
+	}
+
+	ret = of_property_read_u32_array(np, "pcie-io-aperture", reg, ARRAY_SIZE(reg));
+	if (!ret) {
+		io->start = reg[0];
+		io->end = io->start + reg[1] - 1;
+		io->flags = IORESOURCE_IO;
+	}
+}
+
+int __init mvebu_mbus_dt_init(bool is_coherent)
+{
+	struct resource mbuswins_res, sdramwins_res;
+	struct device_node *np, *controller;
+	const struct of_device_id *of_id;
+	const __be32 *prop;
+	int ret;
+
+	np = of_find_matching_node_and_match(NULL, of_mvebu_mbus_ids, &of_id);
+	if (!np) {
+		pr_err("could not find a matching SoC family\n");
+		return -ENODEV;
+	}
+
+	mbus_state.soc = of_id->data;
+
+	prop = of_get_property(np, "controller", NULL);
+	if (!prop) {
+		pr_err("required 'controller' property missing\n");
+		return -EINVAL;
+	}
+
+	controller = of_find_node_by_phandle(be32_to_cpup(prop));
+	if (!controller) {
+		pr_err("could not find an 'mbus-controller' node\n");
+		return -ENODEV;
+	}
+
+	if (of_address_to_resource(controller, 0, &mbuswins_res)) {
+		pr_err("cannot get MBUS register address\n");
+		return -EINVAL;
+	}
+
+	if (of_address_to_resource(controller, 1, &sdramwins_res)) {
+		pr_err("cannot get SDRAM register address\n");
+		return -EINVAL;
+	}
+
+	mbus_state.hw_io_coherency = is_coherent;
+
+	/* Get optional pcie-{mem,io}-aperture properties */
+	mvebu_mbus_get_pcie_resources(np, &mbus_state.pcie_mem_aperture,
+					  &mbus_state.pcie_io_aperture);
+
+	ret = mvebu_mbus_common_init(&mbus_state,
+				     mbuswins_res.start,
+				     resource_size(&mbuswins_res),
+				     sdramwins_res.start,
+				     resource_size(&sdramwins_res));
+	if (ret)
+		return ret;
+
+	/* Setup statically declared windows in the DT */
+	return mbus_dt_setup(&mbus_state, np);
+}
+#endif
+>>>>>>> v3.18

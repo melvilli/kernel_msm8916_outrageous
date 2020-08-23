@@ -26,14 +26,21 @@
  *
  */
 
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/clk.h>
 #include <linux/err.h>
 #include <linux/io.h>
 #include <linux/platform_device.h>
 #include <linux/dma-mapping.h>
+<<<<<<< HEAD
 #include <linux/usb/nop-usb-xceiv.h>
+=======
+#include <linux/usb/usb_phy_generic.h>
+>>>>>>> v3.18
 
 #include <mach/da8xx.h>
 #include <linux/platform_data/usb-davinci.h>
@@ -86,6 +93,10 @@
 struct da8xx_glue {
 	struct device		*dev;
 	struct platform_device	*musb;
+<<<<<<< HEAD
+=======
+	struct platform_device	*phy;
+>>>>>>> v3.18
 	struct clk		*clk;
 };
 
@@ -419,7 +430,10 @@ static int da8xx_musb_init(struct musb *musb)
 	if (!rev)
 		goto fail;
 
+<<<<<<< HEAD
 	usb_nop_xceiv_register();
+=======
+>>>>>>> v3.18
 	musb->xceiv = usb_get_phy(USB_PHY_TYPE_USB2);
 	if (IS_ERR_OR_NULL(musb->xceiv)) {
 		ret = -EPROBE_DEFER;
@@ -454,7 +468,10 @@ static int da8xx_musb_exit(struct musb *musb)
 	phy_off();
 
 	usb_put_phy(musb->xceiv);
+<<<<<<< HEAD
 	usb_nop_xceiv_unregister();
+=======
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -472,6 +489,7 @@ static const struct musb_platform_ops da8xx_ops = {
 	.set_vbus	= da8xx_musb_set_vbus,
 };
 
+<<<<<<< HEAD
 static u64 da8xx_dmamask = DMA_BIT_MASK(32);
 
 static int da8xx_probe(struct platform_device *pdev)
@@ -480,6 +498,21 @@ static int da8xx_probe(struct platform_device *pdev)
 	struct platform_device		*musb;
 	struct da8xx_glue		*glue;
 
+=======
+static const struct platform_device_info da8xx_dev_info = {
+	.name		= "musb-hdrc",
+	.id		= PLATFORM_DEVID_AUTO,
+	.dma_mask	= DMA_BIT_MASK(32),
+};
+
+static int da8xx_probe(struct platform_device *pdev)
+{
+	struct resource musb_resources[2];
+	struct musb_hdrc_platform_data	*pdata = dev_get_platdata(&pdev->dev);
+	struct platform_device		*musb;
+	struct da8xx_glue		*glue;
+	struct platform_device_info	pinfo;
+>>>>>>> v3.18
 	struct clk			*clk;
 
 	int				ret = -ENOMEM;
@@ -490,12 +523,15 @@ static int da8xx_probe(struct platform_device *pdev)
 		goto err0;
 	}
 
+<<<<<<< HEAD
 	musb = platform_device_alloc("musb-hdrc", PLATFORM_DEVID_AUTO);
 	if (!musb) {
 		dev_err(&pdev->dev, "failed to allocate musb device\n");
 		goto err1;
 	}
 
+=======
+>>>>>>> v3.18
 	clk = clk_get(&pdev->dev, "usb20");
 	if (IS_ERR(clk)) {
 		dev_err(&pdev->dev, "failed to get clock\n");
@@ -509,16 +545,21 @@ static int da8xx_probe(struct platform_device *pdev)
 		goto err4;
 	}
 
+<<<<<<< HEAD
 	musb->dev.parent		= &pdev->dev;
 	musb->dev.dma_mask		= &da8xx_dmamask;
 	musb->dev.coherent_dma_mask	= da8xx_dmamask;
 
 	glue->dev			= &pdev->dev;
 	glue->musb			= musb;
+=======
+	glue->dev			= &pdev->dev;
+>>>>>>> v3.18
 	glue->clk			= clk;
 
 	pdata->platform_ops		= &da8xx_ops;
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, glue);
 
 	ret = platform_device_add_resources(musb, pdev->resource,
@@ -538,10 +579,50 @@ static int da8xx_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(&pdev->dev, "failed to register musb device\n");
 		goto err5;
+=======
+	glue->phy = usb_phy_generic_register();
+	if (IS_ERR(glue->phy)) {
+		ret = PTR_ERR(glue->phy);
+		goto err5;
+	}
+	platform_set_drvdata(pdev, glue);
+
+	memset(musb_resources, 0x00, sizeof(*musb_resources) *
+			ARRAY_SIZE(musb_resources));
+
+	musb_resources[0].name = pdev->resource[0].name;
+	musb_resources[0].start = pdev->resource[0].start;
+	musb_resources[0].end = pdev->resource[0].end;
+	musb_resources[0].flags = pdev->resource[0].flags;
+
+	musb_resources[1].name = pdev->resource[1].name;
+	musb_resources[1].start = pdev->resource[1].start;
+	musb_resources[1].end = pdev->resource[1].end;
+	musb_resources[1].flags = pdev->resource[1].flags;
+
+	pinfo = da8xx_dev_info;
+	pinfo.parent = &pdev->dev;
+	pinfo.res = musb_resources;
+	pinfo.num_res = ARRAY_SIZE(musb_resources);
+	pinfo.data = pdata;
+	pinfo.size_data = sizeof(*pdata);
+
+	glue->musb = musb = platform_device_register_full(&pinfo);
+	if (IS_ERR(musb)) {
+		ret = PTR_ERR(musb);
+		dev_err(&pdev->dev, "failed to register musb device: %d\n", ret);
+		goto err6;
+>>>>>>> v3.18
 	}
 
 	return 0;
 
+<<<<<<< HEAD
+=======
+err6:
+	usb_phy_generic_unregister(glue->phy);
+
+>>>>>>> v3.18
 err5:
 	clk_disable(clk);
 
@@ -549,9 +630,12 @@ err4:
 	clk_put(clk);
 
 err3:
+<<<<<<< HEAD
 	platform_device_put(musb);
 
 err1:
+=======
+>>>>>>> v3.18
 	kfree(glue);
 
 err0:
@@ -563,6 +647,10 @@ static int da8xx_remove(struct platform_device *pdev)
 	struct da8xx_glue		*glue = platform_get_drvdata(pdev);
 
 	platform_device_unregister(glue->musb);
+<<<<<<< HEAD
+=======
+	usb_phy_generic_unregister(glue->phy);
+>>>>>>> v3.18
 	clk_disable(glue->clk);
 	clk_put(glue->clk);
 	kfree(glue);

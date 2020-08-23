@@ -43,6 +43,7 @@ static const char *bi_unsupported_name = "unsupported";
  */
 int blk_rq_count_integrity_sg(struct request_queue *q, struct bio *bio)
 {
+<<<<<<< HEAD
 	struct bio_vec *iv, *ivprv = NULL;
 	unsigned int segments = 0;
 	unsigned int seg_size = 0;
@@ -67,6 +68,34 @@ new_segment:
 			seg_size = iv->bv_len;
 		}
 
+=======
+	struct bio_vec iv, ivprv = { NULL };
+	unsigned int segments = 0;
+	unsigned int seg_size = 0;
+	struct bvec_iter iter;
+	int prev = 0;
+
+	bio_for_each_integrity_vec(iv, bio, iter) {
+
+		if (prev) {
+			if (!BIOVEC_PHYS_MERGEABLE(&ivprv, &iv))
+				goto new_segment;
+
+			if (!BIOVEC_SEG_BOUNDARY(q, &ivprv, &iv))
+				goto new_segment;
+
+			if (seg_size + iv.bv_len > queue_max_segment_size(q))
+				goto new_segment;
+
+			seg_size += iv.bv_len;
+		} else {
+new_segment:
+			segments++;
+			seg_size = iv.bv_len;
+		}
+
+		prev = 1;
+>>>>>>> v3.18
 		ivprv = iv;
 	}
 
@@ -87,6 +116,7 @@ EXPORT_SYMBOL(blk_rq_count_integrity_sg);
 int blk_rq_map_integrity_sg(struct request_queue *q, struct bio *bio,
 			    struct scatterlist *sglist)
 {
+<<<<<<< HEAD
 	struct bio_vec *iv, *ivprv = NULL;
 	struct scatterlist *sg = NULL;
 	unsigned int segments = 0;
@@ -105,6 +135,27 @@ int blk_rq_map_integrity_sg(struct request_queue *q, struct bio *bio,
 				goto new_segment;
 
 			sg->length += iv->bv_len;
+=======
+	struct bio_vec iv, ivprv = { NULL };
+	struct scatterlist *sg = NULL;
+	unsigned int segments = 0;
+	struct bvec_iter iter;
+	int prev = 0;
+
+	bio_for_each_integrity_vec(iv, bio, iter) {
+
+		if (prev) {
+			if (!BIOVEC_PHYS_MERGEABLE(&ivprv, &iv))
+				goto new_segment;
+
+			if (!BIOVEC_SEG_BOUNDARY(q, &ivprv, &iv))
+				goto new_segment;
+
+			if (sg->length + iv.bv_len > queue_max_segment_size(q))
+				goto new_segment;
+
+			sg->length += iv.bv_len;
+>>>>>>> v3.18
 		} else {
 new_segment:
 			if (!sg)
@@ -114,10 +165,18 @@ new_segment:
 				sg = sg_next(sg);
 			}
 
+<<<<<<< HEAD
 			sg_set_page(sg, iv->bv_page, iv->bv_len, iv->bv_offset);
 			segments++;
 		}
 
+=======
+			sg_set_page(sg, iv.bv_page, iv.bv_len, iv.bv_offset);
+			segments++;
+		}
+
+		prev = 1;
+>>>>>>> v3.18
 		ivprv = iv;
 	}
 
@@ -150,10 +209,17 @@ int blk_integrity_compare(struct gendisk *gd1, struct gendisk *gd2)
 	if (!b1 || !b2)
 		return -1;
 
+<<<<<<< HEAD
 	if (b1->sector_size != b2->sector_size) {
 		printk(KERN_ERR "%s: %s/%s sector sz %u != %u\n", __func__,
 		       gd1->disk_name, gd2->disk_name,
 		       b1->sector_size, b2->sector_size);
+=======
+	if (b1->interval != b2->interval) {
+		pr_err("%s: %s/%s protection interval %u != %u\n",
+		       __func__, gd1->disk_name, gd2->disk_name,
+		       b1->interval, b2->interval);
+>>>>>>> v3.18
 		return -1;
 	}
 
@@ -182,6 +248,7 @@ int blk_integrity_compare(struct gendisk *gd1, struct gendisk *gd2)
 }
 EXPORT_SYMBOL(blk_integrity_compare);
 
+<<<<<<< HEAD
 int blk_integrity_merge_rq(struct request_queue *q, struct request *req,
 			   struct request *next)
 {
@@ -198,21 +265,66 @@ EXPORT_SYMBOL(blk_integrity_merge_rq);
 
 int blk_integrity_merge_bio(struct request_queue *q, struct request *req,
 			    struct bio *bio)
+=======
+bool blk_integrity_merge_rq(struct request_queue *q, struct request *req,
+			    struct request *next)
+{
+	if (blk_integrity_rq(req) == 0 && blk_integrity_rq(next) == 0)
+		return true;
+
+	if (blk_integrity_rq(req) == 0 || blk_integrity_rq(next) == 0)
+		return false;
+
+	if (bio_integrity(req->bio)->bip_flags !=
+	    bio_integrity(next->bio)->bip_flags)
+		return false;
+
+	if (req->nr_integrity_segments + next->nr_integrity_segments >
+	    q->limits.max_integrity_segments)
+		return false;
+
+	return true;
+}
+EXPORT_SYMBOL(blk_integrity_merge_rq);
+
+bool blk_integrity_merge_bio(struct request_queue *q, struct request *req,
+			     struct bio *bio)
+>>>>>>> v3.18
 {
 	int nr_integrity_segs;
 	struct bio *next = bio->bi_next;
 
+<<<<<<< HEAD
+=======
+	if (blk_integrity_rq(req) == 0 && bio_integrity(bio) == NULL)
+		return true;
+
+	if (blk_integrity_rq(req) == 0 || bio_integrity(bio) == NULL)
+		return false;
+
+	if (bio_integrity(req->bio)->bip_flags != bio_integrity(bio)->bip_flags)
+		return false;
+
+>>>>>>> v3.18
 	bio->bi_next = NULL;
 	nr_integrity_segs = blk_rq_count_integrity_sg(q, bio);
 	bio->bi_next = next;
 
 	if (req->nr_integrity_segments + nr_integrity_segs >
 	    q->limits.max_integrity_segments)
+<<<<<<< HEAD
 		return -1;
 
 	req->nr_integrity_segments += nr_integrity_segs;
 
 	return 0;
+=======
+		return false;
+
+	req->nr_integrity_segments += nr_integrity_segs;
+
+	return true;
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(blk_integrity_merge_bio);
 
@@ -265,20 +377,32 @@ static ssize_t integrity_tag_size_show(struct blk_integrity *bi, char *page)
 		return sprintf(page, "0\n");
 }
 
+<<<<<<< HEAD
 static ssize_t integrity_read_store(struct blk_integrity *bi,
 				    const char *page, size_t count)
+=======
+static ssize_t integrity_verify_store(struct blk_integrity *bi,
+				      const char *page, size_t count)
+>>>>>>> v3.18
 {
 	char *p = (char *) page;
 	unsigned long val = simple_strtoul(p, &p, 10);
 
 	if (val)
+<<<<<<< HEAD
 		bi->flags |= INTEGRITY_FLAG_READ;
 	else
 		bi->flags &= ~INTEGRITY_FLAG_READ;
+=======
+		bi->flags |= BLK_INTEGRITY_VERIFY;
+	else
+		bi->flags &= ~BLK_INTEGRITY_VERIFY;
+>>>>>>> v3.18
 
 	return count;
 }
 
+<<<<<<< HEAD
 static ssize_t integrity_read_show(struct blk_integrity *bi, char *page)
 {
 	return sprintf(page, "%d\n", (bi->flags & INTEGRITY_FLAG_READ) != 0);
@@ -286,21 +410,48 @@ static ssize_t integrity_read_show(struct blk_integrity *bi, char *page)
 
 static ssize_t integrity_write_store(struct blk_integrity *bi,
 				     const char *page, size_t count)
+=======
+static ssize_t integrity_verify_show(struct blk_integrity *bi, char *page)
+{
+	return sprintf(page, "%d\n", (bi->flags & BLK_INTEGRITY_VERIFY) != 0);
+}
+
+static ssize_t integrity_generate_store(struct blk_integrity *bi,
+					const char *page, size_t count)
+>>>>>>> v3.18
 {
 	char *p = (char *) page;
 	unsigned long val = simple_strtoul(p, &p, 10);
 
 	if (val)
+<<<<<<< HEAD
 		bi->flags |= INTEGRITY_FLAG_WRITE;
 	else
 		bi->flags &= ~INTEGRITY_FLAG_WRITE;
+=======
+		bi->flags |= BLK_INTEGRITY_GENERATE;
+	else
+		bi->flags &= ~BLK_INTEGRITY_GENERATE;
+>>>>>>> v3.18
 
 	return count;
 }
 
+<<<<<<< HEAD
 static ssize_t integrity_write_show(struct blk_integrity *bi, char *page)
 {
 	return sprintf(page, "%d\n", (bi->flags & INTEGRITY_FLAG_WRITE) != 0);
+=======
+static ssize_t integrity_generate_show(struct blk_integrity *bi, char *page)
+{
+	return sprintf(page, "%d\n", (bi->flags & BLK_INTEGRITY_GENERATE) != 0);
+}
+
+static ssize_t integrity_device_show(struct blk_integrity *bi, char *page)
+{
+	return sprintf(page, "%u\n",
+		       (bi->flags & BLK_INTEGRITY_DEVICE_CAPABLE) != 0);
+>>>>>>> v3.18
 }
 
 static struct integrity_sysfs_entry integrity_format_entry = {
@@ -313,6 +464,7 @@ static struct integrity_sysfs_entry integrity_tag_size_entry = {
 	.show = integrity_tag_size_show,
 };
 
+<<<<<<< HEAD
 static struct integrity_sysfs_entry integrity_read_entry = {
 	.attr = { .name = "read_verify", .mode = S_IRUGO | S_IWUSR },
 	.show = integrity_read_show,
@@ -323,13 +475,36 @@ static struct integrity_sysfs_entry integrity_write_entry = {
 	.attr = { .name = "write_generate", .mode = S_IRUGO | S_IWUSR },
 	.show = integrity_write_show,
 	.store = integrity_write_store,
+=======
+static struct integrity_sysfs_entry integrity_verify_entry = {
+	.attr = { .name = "read_verify", .mode = S_IRUGO | S_IWUSR },
+	.show = integrity_verify_show,
+	.store = integrity_verify_store,
+};
+
+static struct integrity_sysfs_entry integrity_generate_entry = {
+	.attr = { .name = "write_generate", .mode = S_IRUGO | S_IWUSR },
+	.show = integrity_generate_show,
+	.store = integrity_generate_store,
+};
+
+static struct integrity_sysfs_entry integrity_device_entry = {
+	.attr = { .name = "device_is_integrity_capable", .mode = S_IRUGO },
+	.show = integrity_device_show,
+>>>>>>> v3.18
 };
 
 static struct attribute *integrity_attrs[] = {
 	&integrity_format_entry.attr,
 	&integrity_tag_size_entry.attr,
+<<<<<<< HEAD
 	&integrity_read_entry.attr,
 	&integrity_write_entry.attr,
+=======
+	&integrity_verify_entry.attr,
+	&integrity_generate_entry.attr,
+	&integrity_device_entry.attr,
+>>>>>>> v3.18
 	NULL,
 };
 
@@ -402,8 +577,13 @@ int blk_integrity_register(struct gendisk *disk, struct blk_integrity *template)
 
 		kobject_uevent(&bi->kobj, KOBJ_ADD);
 
+<<<<<<< HEAD
 		bi->flags |= INTEGRITY_FLAG_READ | INTEGRITY_FLAG_WRITE;
 		bi->sector_size = queue_logical_block_size(disk->queue);
+=======
+		bi->flags |= BLK_INTEGRITY_VERIFY | BLK_INTEGRITY_GENERATE;
+		bi->interval = queue_logical_block_size(disk->queue);
+>>>>>>> v3.18
 		disk->integrity = bi;
 	} else
 		bi = disk->integrity;
@@ -414,9 +594,14 @@ int blk_integrity_register(struct gendisk *disk, struct blk_integrity *template)
 		bi->generate_fn = template->generate_fn;
 		bi->verify_fn = template->verify_fn;
 		bi->tuple_size = template->tuple_size;
+<<<<<<< HEAD
 		bi->set_tag_fn = template->set_tag_fn;
 		bi->get_tag_fn = template->get_tag_fn;
 		bi->tag_size = template->tag_size;
+=======
+		bi->tag_size = template->tag_size;
+		bi->flags |= template->flags;
+>>>>>>> v3.18
 	} else
 		bi->name = bi_unsupported_name;
 

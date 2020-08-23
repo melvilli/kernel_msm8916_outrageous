@@ -8,7 +8,10 @@
  * Carsten Langgaard, carstenl@mips.com
  * Copyright (C) 2002 MIPS Technologies, Inc.  All rights reserved.
  */
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/sched.h>
 #include <linux/smp.h>
 #include <linux/mm.h>
@@ -213,14 +216,22 @@ void __update_tlb(struct vm_area_struct * vma, unsigned long address, pte_t pte)
 	local_irq_restore(flags);
 }
 
+<<<<<<< HEAD
 static void __cpuinit probe_tlb(unsigned long config)
+=======
+static void probe_tlb(unsigned long config)
+>>>>>>> v3.18
 {
 	struct cpuinfo_mips *c = &current_cpu_data;
 
 	c->tlbsize = 3 * 128;		/* 3 sets each 128 entries */
 }
 
+<<<<<<< HEAD
 void __cpuinit tlb_init(void)
+=======
+void tlb_init(void)
+>>>>>>> v3.18
 {
 	unsigned int config = read_c0_config();
 	unsigned long status;

@@ -12,6 +12,10 @@
 #include <linux/smp.h>
 
 #include <asm/cpu-info.h>
+<<<<<<< HEAD
+=======
+#include <asm/cpu-type.h>
+>>>>>>> v3.18
 #include <asm/time.h>
 
 #include <asm/octeon/octeon.h>

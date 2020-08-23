@@ -23,6 +23,10 @@
  * IDP hardware.
  */
 
+<<<<<<< HEAD
+=======
+#include "irqs.h" /* PXA_GPIO_TO_IRQ */
+>>>>>>> v3.18
 
 #define IDP_FLASH_PHYS		(PXA_CS0_PHYS)
 #define IDP_ALT_FLASH_PHYS	(PXA_CS1_PHYS)

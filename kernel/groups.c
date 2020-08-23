@@ -6,7 +6,10 @@
 #include <linux/slab.h>
 #include <linux/security.h>
 #include <linux/syscalls.h>
+<<<<<<< HEAD
 #include <linux/user_namespace.h>
+=======
+>>>>>>> v3.18
 #include <asm/uaccess.h>
 
 /* init to 2 - one for init_task, one to ensure it is never freed */
@@ -158,17 +161,25 @@ int groups_search(const struct group_info *group_info, kgid_t grp)
  * set_groups - Change a group subscription in a set of credentials
  * @new: The newly prepared set of credentials to alter
  * @group_info: The group list to install
+<<<<<<< HEAD
  *
  * Validate a group subscription and, if valid, insert it into a set
  * of credentials.
  */
 int set_groups(struct cred *new, struct group_info *group_info)
+=======
+ */
+void set_groups(struct cred *new, struct group_info *group_info)
+>>>>>>> v3.18
 {
 	put_group_info(new->group_info);
 	groups_sort(group_info);
 	get_group_info(group_info);
 	new->group_info = group_info;
+<<<<<<< HEAD
 	return 0;
+=======
+>>>>>>> v3.18
 }
 
 EXPORT_SYMBOL(set_groups);
@@ -183,18 +194,25 @@ EXPORT_SYMBOL(set_groups);
 int set_current_groups(struct group_info *group_info)
 {
 	struct cred *new;
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 
 	new = prepare_creds();
 	if (!new)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 	ret = set_groups(new, group_info);
 	if (ret < 0) {
 		abort_creds(new);
 		return ret;
 	}
 
+=======
+	set_groups(new, group_info);
+>>>>>>> v3.18
 	return commit_creds(new);
 }
 
@@ -224,6 +242,7 @@ out:
 	return i;
 }
 
+<<<<<<< HEAD
 bool may_setgroups(void)
 {
 	struct user_namespace *user_ns = current_user_ns();
@@ -232,6 +251,8 @@ bool may_setgroups(void)
 		userns_may_setgroups(user_ns);
 }
 
+=======
+>>>>>>> v3.18
 /*
  *	SMP: Our groups are copy-on-write. We can set them safely
  *	without another task interfering.
@@ -242,7 +263,11 @@ SYSCALL_DEFINE2(setgroups, int, gidsetsize, gid_t __user *, grouplist)
 	struct group_info *group_info;
 	int retval;
 
+<<<<<<< HEAD
 	if (!may_setgroups())
+=======
+	if (!ns_capable(current_user_ns(), CAP_SETGID))
+>>>>>>> v3.18
 		return -EPERM;
 	if ((unsigned)gidsetsize > NGROUPS_MAX)
 		return -EINVAL;

@@ -38,7 +38,10 @@
 #include <linux/miscdevice.h>
 #include <linux/kernel.h>
 #include <linux/delay.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/wait.h>
 #include <linux/string.h>
 #include <linux/interrupt.h>
@@ -488,7 +491,11 @@ static int tpm_stm_i2c_send(struct tpm_chip *chip, unsigned char *buf,
 		if (burstcnt < 0)
 			return burstcnt;
 		size = min_t(int, len - i - 1, burstcnt);
+<<<<<<< HEAD
 		ret = I2C_WRITE_DATA(client, TPM_DATA_FIFO, buf + i, size);
+=======
+		ret = I2C_WRITE_DATA(client, TPM_DATA_FIFO, buf, size);
+>>>>>>> v3.18
 		if (ret < 0)
 			goto out_err;
 
@@ -564,7 +571,11 @@ static int tpm_stm_i2c_recv(struct tpm_chip *chip, unsigned char *buf,
 	}
 
 out:
+<<<<<<< HEAD
 	chip->vendor.cancel(chip);
+=======
+	chip->ops->cancel(chip);
+>>>>>>> v3.18
 	release_locality(chip);
 	return size;
 }
@@ -574,6 +585,7 @@ static bool tpm_st33_i2c_req_canceled(struct tpm_chip *chip, u8 status)
 	return (status == TPM_STS_COMMAND_READY);
 }
 
+<<<<<<< HEAD
 static const struct file_operations tpm_st33_i2c_fops = {
 	.owner = THIS_MODULE,
 	.llseek = no_llseek,
@@ -608,6 +620,9 @@ static struct attribute_group stm_tpm_attr_grp = {
 };
 
 static struct tpm_vendor_specific st_i2c_tpm = {
+=======
+static const struct tpm_class_ops st_i2c_tpm = {
+>>>>>>> v3.18
 	.send = tpm_stm_i2c_send,
 	.recv = tpm_stm_i2c_recv,
 	.cancel = tpm_stm_i2c_cancel,
@@ -615,8 +630,11 @@ static struct tpm_vendor_specific st_i2c_tpm = {
 	.req_complete_mask = TPM_STS_DATA_AVAIL | TPM_STS_VALID,
 	.req_complete_val = TPM_STS_DATA_AVAIL | TPM_STS_VALID,
 	.req_canceled = tpm_st33_i2c_req_canceled,
+<<<<<<< HEAD
 	.attr_group = &stm_tpm_attr_grp,
 	.miscdev = {.fops = &tpm_st33_i2c_fops,},
+=======
+>>>>>>> v3.18
 };
 
 static int interrupts;
@@ -750,8 +768,12 @@ tpm_st33_i2c_probe(struct i2c_client *client, const struct i2c_device_id *id)
 	}
 
 	tpm_get_timeouts(chip);
+<<<<<<< HEAD
 
 	i2c_set_clientdata(client, chip);
+=======
+	tpm_do_selftest(chip);
+>>>>>>> v3.18
 
 	dev_info(chip->dev, "TPM I2C Initialized\n");
 	return 0;
@@ -812,24 +834,33 @@ static int tpm_st33_i2c_remove(struct i2c_client *client)
 #ifdef CONFIG_PM_SLEEP
 /*
  * tpm_st33_i2c_pm_suspend suspend the TPM device
+<<<<<<< HEAD
  * Added: Work around when suspend and no tpm application is running, suspend
  * may fail because chip->data_buffer is not set (only set in tpm_open in Linux
  * TPM core)
+=======
+>>>>>>> v3.18
  * @param: client, the i2c_client drescription (TPM I2C description).
  * @param: mesg, the power management message.
  * @return: 0 in case of success.
  */
 static int tpm_st33_i2c_pm_suspend(struct device *dev)
 {
+<<<<<<< HEAD
 	struct tpm_chip *chip = dev_get_drvdata(dev);
+=======
+>>>>>>> v3.18
 	struct st33zp24_platform_data *pin_infos = dev->platform_data;
 	int ret = 0;
 
 	if (power_mgt) {
 		gpio_set_value(pin_infos->io_lpcpd, 0);
 	} else {
+<<<<<<< HEAD
 		if (chip->data_buffer == NULL)
 			chip->data_buffer = pin_infos->tpm_i2c_buffer[0];
+=======
+>>>>>>> v3.18
 		ret = tpm_pm_suspend(dev);
 	}
 	return ret;
@@ -850,12 +881,19 @@ static int tpm_st33_i2c_pm_resume(struct device *dev)
 	if (power_mgt) {
 		gpio_set_value(pin_infos->io_lpcpd, 1);
 		ret = wait_for_serirq_timeout(chip,
+<<<<<<< HEAD
 					  (chip->vendor.status(chip) &
 					  TPM_STS_VALID) == TPM_STS_VALID,
 					  chip->vendor.timeout_b);
 	} else {
 		if (chip->data_buffer == NULL)
 			chip->data_buffer = pin_infos->tpm_i2c_buffer[0];
+=======
+					  (chip->ops->status(chip) &
+					  TPM_STS_VALID) == TPM_STS_VALID,
+					  chip->vendor.timeout_b);
+	} else {
+>>>>>>> v3.18
 		ret = tpm_pm_resume(dev);
 		if (!ret)
 			tpm_do_selftest(chip);

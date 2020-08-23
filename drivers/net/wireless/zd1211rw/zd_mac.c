@@ -16,8 +16,12 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
  */
 
 #include <linux/netdevice.h>
@@ -533,9 +537,14 @@ void zd_mac_tx_failed(struct urb *urb)
 		tx_hdr = (struct ieee80211_hdr *)skb->data;
 
 		/* we skip all frames not matching the reported destination */
+<<<<<<< HEAD
 		if (unlikely(memcmp(tx_hdr->addr1, tx_status->mac, ETH_ALEN))) {
 			continue;
 		}
+=======
+		if (unlikely(!ether_addr_equal(tx_hdr->addr1, tx_status->mac)))
+			continue;
+>>>>>>> v3.18
 
 		/* we skip all frames not matching the reported final rate */
 
@@ -998,7 +1007,11 @@ static int filter_ack(struct ieee80211_hw *hw, struct ieee80211_hdr *rx_hdr,
 		    continue;
 
 		tx_hdr = (struct ieee80211_hdr *)skb->data;
+<<<<<<< HEAD
 		if (likely(!memcmp(tx_hdr->addr2, rx_hdr->addr1, ETH_ALEN)))
+=======
+		if (likely(ether_addr_equal(tx_hdr->addr2, rx_hdr->addr1)))
+>>>>>>> v3.18
 		{
 			found = 1;
 			break;

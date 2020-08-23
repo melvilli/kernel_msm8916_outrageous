@@ -571,7 +571,11 @@ static int ak4xxx_capture_source_info(struct snd_kcontrol *kcontrol,
 	struct snd_akm4xxx *ak = snd_kcontrol_chip(kcontrol);
 	int mixer_ch = AK_GET_SHIFT(kcontrol->private_value);
 	const char **input_names;
+<<<<<<< HEAD
 	int  num_names, idx;
+=======
+	unsigned int num_names, idx;
+>>>>>>> v3.18
 
 	num_names = ak4xxx_capture_num_inputs(ak, mixer_ch);
 	if (!num_names)
@@ -583,7 +587,11 @@ static int ak4xxx_capture_source_info(struct snd_kcontrol *kcontrol,
 	if (idx >= num_names)
 		return -EINVAL;
 	input_names = ak->adc_info[mixer_ch].input_names;
+<<<<<<< HEAD
 	strncpy(uinfo->value.enumerated.name, input_names[idx],
+=======
+	strlcpy(uinfo->value.enumerated.name, input_names[idx],
+>>>>>>> v3.18
 		sizeof(uinfo->value.enumerated.name));
 	return 0;
 }

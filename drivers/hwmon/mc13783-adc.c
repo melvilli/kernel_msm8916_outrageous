@@ -37,7 +37,11 @@
 struct mc13783_adc_priv {
 	struct mc13xxx *mc13xxx;
 	struct device *hwmon_dev;
+<<<<<<< HEAD
 	char name[10];
+=======
+	char name[PLATFORM_NAME_SIZE];
+>>>>>>> v3.18
 };
 
 static ssize_t mc13783_adc_show_name(struct device *dev, struct device_attribute

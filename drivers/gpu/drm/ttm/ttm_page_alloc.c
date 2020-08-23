@@ -297,8 +297,15 @@ static void ttm_pool_update_free_locked(struct ttm_page_pool *pool,
  *
  * @pool: to free the pages from
  * @free_all: If set to true will free all pages in pool
+<<<<<<< HEAD
  **/
 static int ttm_page_pool_free(struct ttm_page_pool *pool, unsigned nr_free)
+=======
+ * @gfp: GFP flags.
+ **/
+static int ttm_page_pool_free(struct ttm_page_pool *pool, unsigned nr_free,
+			      gfp_t gfp)
+>>>>>>> v3.18
 {
 	unsigned long irq_flags;
 	struct page *p;
@@ -309,8 +316,12 @@ static int ttm_page_pool_free(struct ttm_page_pool *pool, unsigned nr_free)
 	if (NUM_PAGES_TO_ALLOC < nr_free)
 		npages_to_free = NUM_PAGES_TO_ALLOC;
 
+<<<<<<< HEAD
 	pages_to_free = kmalloc(npages_to_free * sizeof(struct page *),
 			GFP_KERNEL);
+=======
+	pages_to_free = kmalloc(npages_to_free * sizeof(struct page *), gfp);
+>>>>>>> v3.18
 	if (!pages_to_free) {
 		pr_err("Failed to allocate memory for pool free operation\n");
 		return 0;
@@ -377,6 +388,7 @@ out:
 	return nr_free;
 }
 
+<<<<<<< HEAD
 /* Get good estimation how many pages are free in pools */
 static int ttm_pool_get_num_unused_pages(void)
 {
@@ -401,21 +413,73 @@ static int ttm_pool_mm_shrink(struct shrinker *shrink,
 	int shrink_pages = sc->nr_to_scan;
 
 	pool_offset = pool_offset % NUM_POOLS;
+=======
+/**
+ * Callback for mm to request pool to reduce number of page held.
+ *
+ * XXX: (dchinner) Deadlock warning!
+ *
+ * We need to pass sc->gfp_mask to ttm_page_pool_free().
+ *
+ * This code is crying out for a shrinker per pool....
+ */
+static unsigned long
+ttm_pool_shrink_scan(struct shrinker *shrink, struct shrink_control *sc)
+{
+	static DEFINE_MUTEX(lock);
+	static unsigned start_pool;
+	unsigned i;
+	unsigned pool_offset;
+	struct ttm_page_pool *pool;
+	int shrink_pages = sc->nr_to_scan;
+	unsigned long freed = 0;
+
+	if (!mutex_trylock(&lock))
+		return SHRINK_STOP;
+	pool_offset = ++start_pool % NUM_POOLS;
+>>>>>>> v3.18
 	/* select start pool in round robin fashion */
 	for (i = 0; i < NUM_POOLS; ++i) {
 		unsigned nr_free = shrink_pages;
 		if (shrink_pages == 0)
 			break;
 		pool = &_manager->pools[(i + pool_offset)%NUM_POOLS];
+<<<<<<< HEAD
 		shrink_pages = ttm_page_pool_free(pool, nr_free);
 	}
 	/* return estimated number of unused pages in pool */
 	return ttm_pool_get_num_unused_pages();
+=======
+		shrink_pages = ttm_page_pool_free(pool, nr_free,
+						  sc->gfp_mask);
+		freed += nr_free - shrink_pages;
+	}
+	mutex_unlock(&lock);
+	return freed;
+}
+
+
+static unsigned long
+ttm_pool_shrink_count(struct shrinker *shrink, struct shrink_control *sc)
+{
+	unsigned i;
+	unsigned long count = 0;
+
+	for (i = 0; i < NUM_POOLS; ++i)
+		count += _manager->pools[i].npages;
+
+	return count;
+>>>>>>> v3.18
 }
 
 static void ttm_pool_mm_shrink_init(struct ttm_pool_manager *manager)
 {
+<<<<<<< HEAD
 	manager->mm_shrink.shrink = &ttm_pool_mm_shrink;
+=======
+	manager->mm_shrink.count_objects = ttm_pool_shrink_count;
+	manager->mm_shrink.scan_objects = ttm_pool_shrink_scan;
+>>>>>>> v3.18
 	manager->mm_shrink.seeks = 1;
 	register_shrinker(&manager->mm_shrink);
 }
@@ -694,7 +758,11 @@ static void ttm_put_pages(struct page **pages, unsigned npages, int flags,
 	}
 	spin_unlock_irqrestore(&pool->lock, irq_flags);
 	if (npages)
+<<<<<<< HEAD
 		ttm_page_pool_free(pool, npages);
+=======
+		ttm_page_pool_free(pool, npages, GFP_KERNEL);
+>>>>>>> v3.18
 }
 
 /*
@@ -778,7 +846,11 @@ static int ttm_get_pages(struct page **pages, unsigned npages, int flags,
 	return 0;
 }
 
+<<<<<<< HEAD
 static void ttm_page_pool_init_locked(struct ttm_page_pool *pool, int flags,
+=======
+static void ttm_page_pool_init_locked(struct ttm_page_pool *pool, gfp_t flags,
+>>>>>>> v3.18
 		char *name)
 {
 	spin_lock_init(&pool->lock);
@@ -834,7 +906,12 @@ void ttm_page_alloc_fini(void)
 	ttm_pool_mm_shrink_fini(_manager);
 
 	for (i = 0; i < NUM_POOLS; ++i)
+<<<<<<< HEAD
 		ttm_page_pool_free(&_manager->pools[i], FREE_ALL_PAGES);
+=======
+		ttm_page_pool_free(&_manager->pools[i], FREE_ALL_PAGES,
+				   GFP_KERNEL);
+>>>>>>> v3.18
 
 	kobject_put(&_manager->kobj);
 	_manager = NULL;

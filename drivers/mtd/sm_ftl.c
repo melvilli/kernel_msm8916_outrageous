@@ -22,7 +22,11 @@
 
 
 
+<<<<<<< HEAD
 struct workqueue_struct *cache_flush_workqueue;
+=======
+static struct workqueue_struct *cache_flush_workqueue;
+>>>>>>> v3.18
 
 static int cache_timeout = 1000;
 module_param(cache_timeout, int, S_IRUGO);
@@ -41,7 +45,11 @@ struct sm_sysfs_attribute {
 	int len;
 };
 
+<<<<<<< HEAD
 ssize_t sm_attr_show(struct device *dev, struct device_attribute *attr,
+=======
+static ssize_t sm_attr_show(struct device *dev, struct device_attribute *attr,
+>>>>>>> v3.18
 		     char *buf)
 {
 	struct sm_sysfs_attribute *sm_attr =
@@ -54,7 +62,11 @@ ssize_t sm_attr_show(struct device *dev, struct device_attribute *attr,
 
 #define NUM_ATTRIBUTES 1
 #define SM_CIS_VENDOR_OFFSET 0x59
+<<<<<<< HEAD
 struct attribute_group *sm_create_sysfs_attributes(struct sm_ftl *ftl)
+=======
+static struct attribute_group *sm_create_sysfs_attributes(struct sm_ftl *ftl)
+>>>>>>> v3.18
 {
 	struct attribute_group *attr_group;
 	struct attribute **attributes;
@@ -104,7 +116,11 @@ error1:
 	return NULL;
 }
 
+<<<<<<< HEAD
 void sm_delete_sysfs_attributes(struct sm_ftl *ftl)
+=======
+static void sm_delete_sysfs_attributes(struct sm_ftl *ftl)
+>>>>>>> v3.18
 {
 	struct attribute **attributes = ftl->disk_attributes->attrs;
 	int i;
@@ -568,7 +584,11 @@ static const uint8_t cis_signature[] = {
 };
 /* Find out media parameters.
  * This ideally has to be based on nand id, but for now device size is enough */
+<<<<<<< HEAD
 int sm_get_media_info(struct sm_ftl *ftl, struct mtd_info *mtd)
+=======
+static int sm_get_media_info(struct sm_ftl *ftl, struct mtd_info *mtd)
+>>>>>>> v3.18
 {
 	int i;
 	int size_in_megs = mtd->size / (1024 * 1024);
@@ -875,7 +895,11 @@ static int sm_init_zone(struct sm_ftl *ftl, int zone_num)
 }
 
 /* Get and automatically initialize an FTL mapping for one zone */
+<<<<<<< HEAD
 struct ftl_zone *sm_get_zone(struct sm_ftl *ftl, int zone_num)
+=======
+static struct ftl_zone *sm_get_zone(struct sm_ftl *ftl, int zone_num)
+>>>>>>> v3.18
 {
 	struct ftl_zone *zone;
 	int error;
@@ -896,7 +920,11 @@ struct ftl_zone *sm_get_zone(struct sm_ftl *ftl, int zone_num)
 /* ----------------- cache handling ------------------------------------------*/
 
 /* Initialize the one block cache */
+<<<<<<< HEAD
 void sm_cache_init(struct sm_ftl *ftl)
+=======
+static void sm_cache_init(struct sm_ftl *ftl)
+>>>>>>> v3.18
 {
 	ftl->cache_data_invalid_bitmap = 0xFFFFFFFF;
 	ftl->cache_clean = 1;
@@ -906,7 +934,11 @@ void sm_cache_init(struct sm_ftl *ftl)
 }
 
 /* Put sector in one block cache */
+<<<<<<< HEAD
 void sm_cache_put(struct sm_ftl *ftl, char *buffer, int boffset)
+=======
+static void sm_cache_put(struct sm_ftl *ftl, char *buffer, int boffset)
+>>>>>>> v3.18
 {
 	memcpy(ftl->cache_data + boffset, buffer, SM_SECTOR_SIZE);
 	clear_bit(boffset / SM_SECTOR_SIZE, &ftl->cache_data_invalid_bitmap);
@@ -914,7 +946,11 @@ void sm_cache_put(struct sm_ftl *ftl, char *buffer, int boffset)
 }
 
 /* Read a sector from the cache */
+<<<<<<< HEAD
 int sm_cache_get(struct sm_ftl *ftl, char *buffer, int boffset)
+=======
+static int sm_cache_get(struct sm_ftl *ftl, char *buffer, int boffset)
+>>>>>>> v3.18
 {
 	if (test_bit(boffset / SM_SECTOR_SIZE,
 		&ftl->cache_data_invalid_bitmap))
@@ -925,7 +961,11 @@ int sm_cache_get(struct sm_ftl *ftl, char *buffer, int boffset)
 }
 
 /* Write the cache to hardware */
+<<<<<<< HEAD
 int sm_cache_flush(struct sm_ftl *ftl)
+=======
+static int sm_cache_flush(struct sm_ftl *ftl)
+>>>>>>> v3.18
 {
 	struct ftl_zone *zone;
 
@@ -1058,7 +1098,11 @@ static int sm_write(struct mtd_blktrans_dev *dev,
 {
 	struct sm_ftl *ftl = dev->priv;
 	struct ftl_zone *zone;
+<<<<<<< HEAD
 	int error, zone_num, block, boffset;
+=======
+	int error = 0, zone_num, block, boffset;
+>>>>>>> v3.18
 
 	BUG_ON(ftl->readonly);
 	sm_break_offset(ftl, sec_no << 9, &zone_num, &block, &boffset);
@@ -1271,10 +1315,17 @@ static struct mtd_blktrans_ops sm_ftl_ops = {
 static __init int sm_module_init(void)
 {
 	int error = 0;
+<<<<<<< HEAD
 	cache_flush_workqueue = create_freezable_workqueue("smflush");
 
 	if (IS_ERR(cache_flush_workqueue))
 		return PTR_ERR(cache_flush_workqueue);
+=======
+
+	cache_flush_workqueue = create_freezable_workqueue("smflush");
+	if (!cache_flush_workqueue)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	error = register_mtd_blktrans(&sm_ftl_ops);
 	if (error)

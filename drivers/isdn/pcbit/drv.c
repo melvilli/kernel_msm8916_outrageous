@@ -796,6 +796,10 @@ static void set_running_timeout(unsigned long ptr)
 #endif
 	dev = (struct pcbit_dev *) ptr;
 
+<<<<<<< HEAD
+=======
+	dev->l2_state = L2_DOWN;
+>>>>>>> v3.18
 	wake_up_interruptible(&dev->set_running_wq);
 }
 
@@ -818,7 +822,12 @@ static int set_protocol_running(struct pcbit_dev *dev)
 
 	add_timer(&dev->set_running_timer);
 
+<<<<<<< HEAD
 	interruptible_sleep_on(&dev->set_running_wq);
+=======
+	wait_event(dev->set_running_wq, dev->l2_state == L2_RUNNING ||
+					dev->l2_state == L2_DOWN);
+>>>>>>> v3.18
 
 	del_timer(&dev->set_running_timer);
 
@@ -842,8 +851,11 @@ static int set_protocol_running(struct pcbit_dev *dev)
 		printk(KERN_DEBUG "pcbit: initialization failed\n");
 		printk(KERN_DEBUG "pcbit: firmware not loaded\n");
 
+<<<<<<< HEAD
 		dev->l2_state = L2_DOWN;
 
+=======
+>>>>>>> v3.18
 #ifdef DEBUG
 		printk(KERN_DEBUG "Bank3 = %02x\n",
 		       readb(dev->sh_mem + BANK3));
@@ -1035,14 +1047,22 @@ static void pcbit_set_msn(struct pcbit_dev *dev, char *list)
 		}
 		ptr->next = NULL;
 
+<<<<<<< HEAD
 		ptr->msn = kmalloc(len, GFP_ATOMIC);
+=======
+		ptr->msn = kmalloc(len + 1, GFP_ATOMIC);
+>>>>>>> v3.18
 		if (!ptr->msn) {
 			printk(KERN_WARNING "kmalloc failed\n");
 			kfree(ptr);
 			return;
 		}
 
+<<<<<<< HEAD
 		memcpy(ptr->msn, sp, len - 1);
+=======
+		memcpy(ptr->msn, sp, len);
+>>>>>>> v3.18
 		ptr->msn[len] = 0;
 
 #ifdef DEBUG

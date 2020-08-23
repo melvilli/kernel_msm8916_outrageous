@@ -19,6 +19,10 @@
 
 #include <linux/init.h>
 #include <linux/linkage.h>
+<<<<<<< HEAD
+=======
+#include <linux/irqchip/arm-gic-v3.h>
+>>>>>>> v3.18
 
 #include <asm/assembler.h>
 #include <asm/ptrace.h>

@@ -17,6 +17,7 @@
  */
 
 /* include hw specification */
+<<<<<<< HEAD
 #include "hw/host1x01.h"
 #include "hw/host1x01_hardware.h"
 
@@ -28,6 +29,19 @@
 #include "hw/syncpt_hw.c"
 
 #include "dev.h"
+=======
+#include "host1x01.h"
+#include "host1x01_hardware.h"
+
+/* include code */
+#include "cdma_hw.c"
+#include "channel_hw.c"
+#include "debug_hw.c"
+#include "intr_hw.c"
+#include "syncpt_hw.c"
+
+#include "../dev.h"
+>>>>>>> v3.18
 
 int host1x01_init(struct host1x *host)
 {

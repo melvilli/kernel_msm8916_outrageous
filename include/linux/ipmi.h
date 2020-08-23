@@ -237,7 +237,11 @@ int ipmi_set_maintenance_mode(ipmi_user_t user, int mode);
  * The first user that sets this to TRUE will receive all events that
  * have been queued while no one was waiting for events.
  */
+<<<<<<< HEAD
 int ipmi_set_gets_events(ipmi_user_t user, int val);
+=======
+int ipmi_set_gets_events(ipmi_user_t user, bool val);
+>>>>>>> v3.18
 
 /*
  * Called when a new SMI is registered.  This will also be called on

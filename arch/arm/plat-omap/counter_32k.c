@@ -38,9 +38,15 @@
  */
 static void __iomem *sync32k_cnt_reg;
 
+<<<<<<< HEAD
 static u32 notrace omap_32k_read_sched_clock(void)
 {
 	return sync32k_cnt_reg ? __raw_readl(sync32k_cnt_reg) : 0;
+=======
+static u64 notrace omap_32k_read_sched_clock(void)
+{
+	return sync32k_cnt_reg ? readl_relaxed(sync32k_cnt_reg) : 0;
+>>>>>>> v3.18
 }
 
 /**
@@ -64,7 +70,11 @@ static void omap_read_persistent_clock(struct timespec *ts)
 	spin_lock_irqsave(&read_persistent_clock_lock, flags);
 
 	last_cycles = cycles;
+<<<<<<< HEAD
 	cycles = sync32k_cnt_reg ? __raw_readl(sync32k_cnt_reg) : 0;
+=======
+	cycles = sync32k_cnt_reg ? readl_relaxed(sync32k_cnt_reg) : 0;
+>>>>>>> v3.18
 
 	nsecs = clocksource_cyc2ns(cycles - last_cycles,
 					persistent_mult, persistent_shift);
@@ -95,7 +105,11 @@ int __init omap_init_clocksource_32k(void __iomem *vbase)
 	 * The 'SCHEME' bits(30-31) of the revision register is used
 	 * to identify the version.
 	 */
+<<<<<<< HEAD
 	if (__raw_readl(vbase + OMAP2_32KSYNCNT_REV_OFF) &
+=======
+	if (readl_relaxed(vbase + OMAP2_32KSYNCNT_REV_OFF) &
+>>>>>>> v3.18
 						OMAP2_32KSYNCNT_REV_SCHEME)
 		sync32k_cnt_reg = vbase + OMAP2_32KSYNCNT_CR_OFF_HIGH;
 	else
@@ -115,7 +129,11 @@ int __init omap_init_clocksource_32k(void __iomem *vbase)
 		return ret;
 	}
 
+<<<<<<< HEAD
 	setup_sched_clock(omap_32k_read_sched_clock, 32, 32768);
+=======
+	sched_clock_register(omap_32k_read_sched_clock, 32, 32768);
+>>>>>>> v3.18
 	register_persistent_clock(NULL, omap_read_persistent_clock);
 	pr_info("OMAP clocksource: 32k_counter at 32768 Hz\n");
 

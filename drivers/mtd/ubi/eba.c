@@ -1,8 +1,11 @@
 /*
  * Copyright (c) International Business Machines Corp., 2006
+<<<<<<< HEAD
  * Copyright (c) 2014, Linux Foundation. All rights reserved.
  * Linux Foundation chooses to take subject only to the GPLv2
  * license terms, and distributes only under these terms.
+=======
+>>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -425,7 +428,11 @@ retry:
 				 */
 				if (err == UBI_IO_BAD_HDR_EBADMSG ||
 				    err == UBI_IO_BAD_HDR) {
+<<<<<<< HEAD
 					ubi_warn(ubi->ubi_num, "corrupted VID header at PEB %d, LEB %d:%d",
+=======
+					ubi_warn("corrupted VID header at PEB %d, LEB %d:%d",
+>>>>>>> v3.18
 						 pnum, vol_id, lnum);
 					err = -EBADMSG;
 				} else
@@ -444,15 +451,25 @@ retry:
 
 	err = ubi_io_read_data(ubi, buf, pnum, offset, len);
 	if (err) {
+<<<<<<< HEAD
 		if (err == UBI_IO_BITFLIPS) {
 			scrub = 1;
 			err = 0;
 		} else if (mtd_is_eccerr(err)) {
+=======
+		if (err == UBI_IO_BITFLIPS)
+			scrub = 1;
+		else if (mtd_is_eccerr(err)) {
+>>>>>>> v3.18
 			if (vol->vol_type == UBI_DYNAMIC_VOLUME)
 				goto out_unlock;
 			scrub = 1;
 			if (!check) {
+<<<<<<< HEAD
 				ubi_msg(ubi->ubi_num, "force data checking");
+=======
+				ubi_msg("force data checking");
+>>>>>>> v3.18
 				check = 1;
 				goto retry;
 			}
@@ -463,16 +480,25 @@ retry:
 	if (check) {
 		uint32_t crc1 = crc32(UBI_CRC32_INIT, buf, len);
 		if (crc1 != crc) {
+<<<<<<< HEAD
 			ubi_warn(ubi->ubi_num, "CRC error: calculated %#08x, must be %#08x",
+=======
+			ubi_warn("CRC error: calculated %#08x, must be %#08x",
+>>>>>>> v3.18
 				 crc1, crc);
 			err = -EBADMSG;
 			goto out_unlock;
 		}
 	}
+<<<<<<< HEAD
 	if (ubi->lookuptbl[pnum]->rc >= ubi->rd_threshold)
 		scrub = 1;
 
 	if (scrub && !ubi_in_wl_tree(ubi->lookuptbl[pnum], &ubi->scrub))
+=======
+
+	if (scrub)
+>>>>>>> v3.18
 		err = ubi_wl_scrub_peb(ubi, pnum);
 
 	leb_read_unlock(ubi, vol_id, lnum);
@@ -519,8 +545,12 @@ retry:
 		return new_pnum;
 	}
 
+<<<<<<< HEAD
 	ubi_msg(ubi->ubi_num, "recover PEB %d, move data to PEB %d",
 		pnum, new_pnum);
+=======
+	ubi_msg("recover PEB %d, move data to PEB %d", pnum, new_pnum);
+>>>>>>> v3.18
 
 	err = ubi_io_read_vid_hdr(ubi, pnum, vid_hdr, 1);
 	if (err && err != UBI_IO_BITFLIPS) {
@@ -561,7 +591,11 @@ retry:
 	up_read(&ubi->fm_sem);
 	ubi_wl_put_peb(ubi, vol_id, lnum, pnum, 1);
 
+<<<<<<< HEAD
 	ubi_msg(ubi->ubi_num, "data was successfully recovered");
+=======
+	ubi_msg("data was successfully recovered");
+>>>>>>> v3.18
 	return 0;
 
 out_unlock:
@@ -576,13 +610,21 @@ write_error:
 	 * Bad luck? This physical eraseblock is bad too? Crud. Let's try to
 	 * get another one.
 	 */
+<<<<<<< HEAD
 	ubi_warn(ubi->ubi_num, "failed to write to PEB %d", new_pnum);
+=======
+	ubi_warn("failed to write to PEB %d", new_pnum);
+>>>>>>> v3.18
 	ubi_wl_put_peb(ubi, vol_id, lnum, new_pnum, 1);
 	if (++tries > UBI_IO_RETRIES) {
 		ubi_free_vid_hdr(ubi, vid_hdr);
 		return err;
 	}
+<<<<<<< HEAD
 	ubi_msg(ubi->ubi_num, "try again");
+=======
+	ubi_msg("try again");
+>>>>>>> v3.18
 	goto retry;
 }
 
@@ -620,8 +662,12 @@ int ubi_eba_write_leb(struct ubi_device *ubi, struct ubi_volume *vol, int lnum,
 
 		err = ubi_io_write_data(ubi, buf, pnum, offset, len);
 		if (err) {
+<<<<<<< HEAD
 			ubi_warn(ubi->ubi_num,
 				 "failed to write data to PEB %d", pnum);
+=======
+			ubi_warn("failed to write data to PEB %d", pnum);
+>>>>>>> v3.18
 			if (err == -EIO && ubi->bad_allowed)
 				err = recover_peb(ubi, pnum, vol_id, lnum, buf,
 						  offset, len);
@@ -662,7 +708,11 @@ retry:
 
 	err = ubi_io_write_vid_hdr(ubi, pnum, vid_hdr);
 	if (err) {
+<<<<<<< HEAD
 		ubi_warn(ubi->ubi_num, "failed to write VID header to LEB %d:%d, PEB %d",
+=======
+		ubi_warn("failed to write VID header to LEB %d:%d, PEB %d",
+>>>>>>> v3.18
 			 vol_id, lnum, pnum);
 		goto write_error;
 	}
@@ -670,7 +720,11 @@ retry:
 	if (len) {
 		err = ubi_io_write_data(ubi, buf, pnum, offset, len);
 		if (err) {
+<<<<<<< HEAD
 			ubi_warn(ubi->ubi_num, "failed to write %d bytes at offset %d of LEB %d:%d, PEB %d",
+=======
+			ubi_warn("failed to write %d bytes at offset %d of LEB %d:%d, PEB %d",
+>>>>>>> v3.18
 				 len, offset, vol_id, lnum, pnum);
 			goto write_error;
 		}
@@ -706,7 +760,11 @@ write_error:
 	}
 
 	vid_hdr->sqnum = cpu_to_be64(ubi_next_sqnum(ubi));
+<<<<<<< HEAD
 	ubi_msg(ubi->ubi_num, "try another PEB");
+=======
+	ubi_msg("try another PEB");
+>>>>>>> v3.18
 	goto retry;
 }
 
@@ -783,14 +841,22 @@ retry:
 
 	err = ubi_io_write_vid_hdr(ubi, pnum, vid_hdr);
 	if (err) {
+<<<<<<< HEAD
 		ubi_warn(ubi->ubi_num, "failed to write VID header to LEB %d:%d, PEB %d",
+=======
+		ubi_warn("failed to write VID header to LEB %d:%d, PEB %d",
+>>>>>>> v3.18
 			 vol_id, lnum, pnum);
 		goto write_error;
 	}
 
 	err = ubi_io_write_data(ubi, buf, pnum, 0, len);
 	if (err) {
+<<<<<<< HEAD
 		ubi_warn(ubi->ubi_num, "failed to write %d bytes of data to PEB %d",
+=======
+		ubi_warn("failed to write %d bytes of data to PEB %d",
+>>>>>>> v3.18
 			 len, pnum);
 		goto write_error;
 	}
@@ -826,7 +892,11 @@ write_error:
 	}
 
 	vid_hdr->sqnum = cpu_to_be64(ubi_next_sqnum(ubi));
+<<<<<<< HEAD
 	ubi_msg(ubi->ubi_num, "try another PEB");
+=======
+	ubi_msg("try another PEB");
+>>>>>>> v3.18
 	goto retry;
 }
 
@@ -901,14 +971,22 @@ retry:
 
 	err = ubi_io_write_vid_hdr(ubi, pnum, vid_hdr);
 	if (err) {
+<<<<<<< HEAD
 		ubi_warn(ubi->ubi_num, "failed to write VID header to LEB %d:%d, PEB %d",
+=======
+		ubi_warn("failed to write VID header to LEB %d:%d, PEB %d",
+>>>>>>> v3.18
 			 vol_id, lnum, pnum);
 		goto write_error;
 	}
 
 	err = ubi_io_write_data(ubi, buf, pnum, 0, len);
 	if (err) {
+<<<<<<< HEAD
 		ubi_warn(ubi->ubi_num, "failed to write %d bytes of data to PEB %d",
+=======
+		ubi_warn("failed to write %d bytes of data to PEB %d",
+>>>>>>> v3.18
 			 len, pnum);
 		goto write_error;
 	}
@@ -948,7 +1026,11 @@ write_error:
 	}
 
 	vid_hdr->sqnum = cpu_to_be64(ubi_next_sqnum(ubi));
+<<<<<<< HEAD
 	ubi_msg(ubi->ubi_num, "try another PEB");
+=======
+	ubi_msg("try another PEB");
+>>>>>>> v3.18
 	goto retry;
 }
 
@@ -1071,7 +1153,11 @@ int ubi_eba_copy_leb(struct ubi_device *ubi, int from, int to,
 	dbg_wl("read %d bytes of data", aldata_size);
 	err = ubi_io_read_data(ubi, ubi->peb_buf, from, 0, aldata_size);
 	if (err && err != UBI_IO_BITFLIPS) {
+<<<<<<< HEAD
 		ubi_warn(ubi->ubi_num, "error %d while reading data from PEB %d",
+=======
+		ubi_warn("error %d while reading data from PEB %d",
+>>>>>>> v3.18
 			 err, from);
 		err = MOVE_SOURCE_RD_ERR;
 		goto out_unlock_buf;
@@ -1121,7 +1207,11 @@ int ubi_eba_copy_leb(struct ubi_device *ubi, int from, int to,
 	err = ubi_io_read_vid_hdr(ubi, to, vid_hdr, 1);
 	if (err) {
 		if (err != UBI_IO_BITFLIPS) {
+<<<<<<< HEAD
 			ubi_warn(ubi->ubi_num, "error %d while reading VID header back from PEB %d",
+=======
+			ubi_warn("error %d while reading VID header back from PEB %d",
+>>>>>>> v3.18
 				 err, to);
 			if (is_error_sane(err))
 				err = MOVE_TARGET_RD_ERR;
@@ -1148,7 +1238,11 @@ int ubi_eba_copy_leb(struct ubi_device *ubi, int from, int to,
 		err = ubi_io_read_data(ubi, ubi->peb_buf, to, 0, aldata_size);
 		if (err) {
 			if (err != UBI_IO_BITFLIPS) {
+<<<<<<< HEAD
 				ubi_warn(ubi->ubi_num, "error %d while reading data back from PEB %d",
+=======
+				ubi_warn("error %d while reading data back from PEB %d",
+>>>>>>> v3.18
 					 err, to);
 				if (is_error_sane(err))
 					err = MOVE_TARGET_RD_ERR;
@@ -1160,7 +1254,11 @@ int ubi_eba_copy_leb(struct ubi_device *ubi, int from, int to,
 		cond_resched();
 
 		if (crc != crc32(UBI_CRC32_INIT, ubi->peb_buf, data_size)) {
+<<<<<<< HEAD
 			ubi_warn(ubi->ubi_num, "read data back from PEB %d and it is different",
+=======
+			ubi_warn("read data back from PEB %d and it is different",
+>>>>>>> v3.18
 				 to);
 			err = -EINVAL;
 			goto out_unlock_buf;
@@ -1213,10 +1311,17 @@ static void print_rsvd_warning(struct ubi_device *ubi,
 			return;
 	}
 
+<<<<<<< HEAD
 	ubi_warn(ubi->ubi_num, "cannot reserve enough PEBs for bad PEB handling, reserved %d, need %d",
 		 ubi->beb_rsvd_pebs, ubi->beb_rsvd_level);
 	if (ubi->corr_peb_count)
 		ubi_warn(ubi->ubi_num, "%d PEBs are corrupted and not used",
+=======
+	ubi_warn("cannot reserve enough PEBs for bad PEB handling, reserved %d, need %d",
+		 ubi->beb_rsvd_pebs, ubi->beb_rsvd_level);
+	if (ubi->corr_peb_count)
+		ubi_warn("%d PEBs are corrupted and not used",
+>>>>>>> v3.18
 			 ubi->corr_peb_count);
 }
 
@@ -1294,7 +1399,11 @@ int self_check_eba(struct ubi_device *ubi, struct ubi_attach_info *ai_fastmap,
 					fm_eba[i][j] == UBI_LEB_UNMAPPED)
 					continue;
 
+<<<<<<< HEAD
 				ubi_err(ubi->ubi_num, "LEB:%i:%i is PEB:%i instead of %i!",
+=======
+				ubi_err("LEB:%i:%i is PEB:%i instead of %i!",
+>>>>>>> v3.18
 					vol->vol_id, i, fm_eba[i][j],
 					scan_eba[i][j]);
 				ubi_assert(0);
@@ -1369,16 +1478,27 @@ int ubi_eba_init(struct ubi_device *ubi, struct ubi_attach_info *ai)
 				 * during re-size.
 				 */
 				ubi_move_aeb_to_list(av, aeb, &ai->erase);
+<<<<<<< HEAD
 			else
 				vol->eba_tbl[aeb->lnum] = aeb->pnum;
+=======
+			vol->eba_tbl[aeb->lnum] = aeb->pnum;
+>>>>>>> v3.18
 		}
 	}
 
 	if (ubi->avail_pebs < EBA_RESERVED_PEBS) {
+<<<<<<< HEAD
 		ubi_err(ubi->ubi_num, "no enough physical eraseblocks (%d, need %d)",
 			ubi->avail_pebs, EBA_RESERVED_PEBS);
 		if (ubi->corr_peb_count)
 			ubi_err(ubi->ubi_num, "%d PEBs are corrupted and not used",
+=======
+		ubi_err("no enough physical eraseblocks (%d, need %d)",
+			ubi->avail_pebs, EBA_RESERVED_PEBS);
+		if (ubi->corr_peb_count)
+			ubi_err("%d PEBs are corrupted and not used",
+>>>>>>> v3.18
 				ubi->corr_peb_count);
 		err = -ENOSPC;
 		goto out_free;

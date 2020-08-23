@@ -123,7 +123,11 @@ static inline int snd_seq_write_pool_allocated(struct snd_seq_client *client)
 static struct snd_seq_client *clientptr(int clientid)
 {
 	if (clientid < 0 || clientid >= SNDRV_SEQ_MAX_CLIENTS) {
+<<<<<<< HEAD
 		snd_printd("Seq: oops. Trying to get pointer to client %d\n",
+=======
+		pr_debug("ALSA: seq: oops. Trying to get pointer to client %d\n",
+>>>>>>> v3.18
 			   clientid);
 		return NULL;
 	}
@@ -136,7 +140,11 @@ struct snd_seq_client *snd_seq_client_use_ptr(int clientid)
 	struct snd_seq_client *client;
 
 	if (clientid < 0 || clientid >= SNDRV_SEQ_MAX_CLIENTS) {
+<<<<<<< HEAD
 		snd_printd("Seq: oops. Trying to get pointer to client %d\n",
+=======
+		pr_debug("ALSA: seq: oops. Trying to get pointer to client %d\n",
+>>>>>>> v3.18
 			   clientid);
 		return NULL;
 	}
@@ -291,8 +299,13 @@ static void seq_free_client(struct snd_seq_client * client)
 	mutex_lock(&register_mutex);
 	switch (client->type) {
 	case NO_CLIENT:
+<<<<<<< HEAD
 		snd_printk(KERN_WARNING "Seq: Trying to free unused client %d\n",
 			   client->number);
+=======
+		pr_warn("ALSA: seq: Trying to free unused client %d\n",
+			client->number);
+>>>>>>> v3.18
 		break;
 	case USER_CLIENT:
 	case KERNEL_CLIENT:
@@ -301,7 +314,11 @@ static void seq_free_client(struct snd_seq_client * client)
 		break;
 
 	default:
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "Seq: Trying to free client %d with undefined type = %d\n",
+=======
+		pr_err("ALSA: seq: Trying to free client %d with undefined type = %d\n",
+>>>>>>> v3.18
 			   client->number, client->type);
 	}
 	mutex_unlock(&register_mutex);
@@ -660,7 +677,11 @@ static int deliver_to_subscribers(struct snd_seq_client *client,
 				  int atomic, int hop)
 {
 	struct snd_seq_subscribers *subs;
+<<<<<<< HEAD
 	int err = 0, num_ev = 0;
+=======
+	int err, result = 0, num_ev = 0;
+>>>>>>> v3.18
 	struct snd_seq_event event_saved;
 	struct snd_seq_client_port *src_port;
 	struct snd_seq_port_subs_info *grp;
@@ -678,9 +699,12 @@ static int deliver_to_subscribers(struct snd_seq_client *client,
 	else
 		down_read(&grp->list_mutex);
 	list_for_each_entry(subs, &grp->list_head, src_list) {
+<<<<<<< HEAD
 		/* both ports ready? */
 		if (atomic_read(&subs->ref_count) != 2)
 			continue;
+=======
+>>>>>>> v3.18
 		event->dest = subs->info.dest;
 		if (subs->info.flags & SNDRV_SEQ_PORT_SUBS_TIMESTAMP)
 			/* convert time according to flag with subscription */
@@ -688,8 +712,17 @@ static int deliver_to_subscribers(struct snd_seq_client *client,
 						  subs->info.flags & SNDRV_SEQ_PORT_SUBS_TIME_REAL);
 		err = snd_seq_deliver_single_event(client, event,
 						   0, atomic, hop);
+<<<<<<< HEAD
 		if (err < 0)
 			break;
+=======
+		if (err < 0) {
+			/* save first error that occurs and continue */
+			if (!result)
+				result = err;
+			continue;
+		}
+>>>>>>> v3.18
 		num_ev++;
 		/* restore original event record */
 		*event = event_saved;
@@ -700,7 +733,11 @@ static int deliver_to_subscribers(struct snd_seq_client *client,
 		up_read(&grp->list_mutex);
 	*event = event_saved; /* restore */
 	snd_seq_port_unlock(src_port);
+<<<<<<< HEAD
 	return (err < 0) ? err : num_ev;
+=======
+	return (result < 0) ? result : num_ev;
+>>>>>>> v3.18
 }
 
 
@@ -712,7 +749,11 @@ static int port_broadcast_event(struct snd_seq_client *client,
 				struct snd_seq_event *event,
 				int atomic, int hop)
 {
+<<<<<<< HEAD
 	int num_ev = 0, err = 0;
+=======
+	int num_ev = 0, err, result = 0;
+>>>>>>> v3.18
 	struct snd_seq_client *dest_client;
 	struct snd_seq_client_port *port;
 
@@ -727,14 +768,27 @@ static int port_broadcast_event(struct snd_seq_client *client,
 		err = snd_seq_deliver_single_event(NULL, event,
 						   SNDRV_SEQ_FILTER_BROADCAST,
 						   atomic, hop);
+<<<<<<< HEAD
 		if (err < 0)
 			break;
+=======
+		if (err < 0) {
+			/* save first error that occurs and continue */
+			if (!result)
+				result = err;
+			continue;
+		}
+>>>>>>> v3.18
 		num_ev++;
 	}
 	read_unlock(&dest_client->ports_lock);
 	snd_seq_client_unlock(dest_client);
 	event->dest.port = SNDRV_SEQ_ADDRESS_BROADCAST; /* restore */
+<<<<<<< HEAD
 	return (err < 0) ? err : num_ev;
+=======
+	return (result < 0) ? result : num_ev;
+>>>>>>> v3.18
 }
 
 /*
@@ -744,7 +798,11 @@ static int port_broadcast_event(struct snd_seq_client *client,
 static int broadcast_event(struct snd_seq_client *client,
 			   struct snd_seq_event *event, int atomic, int hop)
 {
+<<<<<<< HEAD
 	int err = 0, num_ev = 0;
+=======
+	int err, result = 0, num_ev = 0;
+>>>>>>> v3.18
 	int dest;
 	struct snd_seq_addr addr;
 
@@ -763,12 +821,25 @@ static int broadcast_event(struct snd_seq_client *client,
 			err = snd_seq_deliver_single_event(NULL, event,
 							   SNDRV_SEQ_FILTER_BROADCAST,
 							   atomic, hop);
+<<<<<<< HEAD
 		if (err < 0)
 			break;
 		num_ev += err;
 	}
 	event->dest = addr; /* restore */
 	return (err < 0) ? err : num_ev;
+=======
+		if (err < 0) {
+			/* save first error that occurs and continue */
+			if (!result)
+				result = err;
+			continue;
+		}
+		num_ev += err;
+	}
+	event->dest = addr; /* restore */
+	return (result < 0) ? result : num_ev;
+>>>>>>> v3.18
 }
 
 
@@ -776,7 +847,11 @@ static int broadcast_event(struct snd_seq_client *client,
 static int multicast_event(struct snd_seq_client *client, struct snd_seq_event *event,
 			   int atomic, int hop)
 {
+<<<<<<< HEAD
 	snd_printd("seq: multicast not supported yet.\n");
+=======
+	pr_debug("ALSA: seq: multicast not supported yet.\n");
+>>>>>>> v3.18
 	return 0; /* ignored */
 }
 #endif /* SUPPORT_BROADCAST */
@@ -797,7 +872,11 @@ static int snd_seq_deliver_event(struct snd_seq_client *client, struct snd_seq_e
 
 	hop++;
 	if (hop >= SNDRV_SEQ_MAX_HOPS) {
+<<<<<<< HEAD
 		snd_printd("too long delivery path (%d:%d->%d:%d)\n",
+=======
+		pr_debug("ALSA: seq: too long delivery path (%d:%d->%d:%d)\n",
+>>>>>>> v3.18
 			   event->source.client, event->source.port,
 			   event->dest.client, event->dest.port);
 		return -EMLINK;
@@ -1248,7 +1327,10 @@ static int snd_seq_ioctl_create_port(struct snd_seq_client *client,
 	struct snd_seq_client_port *port;
 	struct snd_seq_port_info info;
 	struct snd_seq_port_callback *callback;
+<<<<<<< HEAD
 	int port_idx;
+=======
+>>>>>>> v3.18
 
 	if (copy_from_user(&info, arg, sizeof(info)))
 		return -EFAULT;
@@ -1262,9 +1344,13 @@ static int snd_seq_ioctl_create_port(struct snd_seq_client *client,
 		return -ENOMEM;
 
 	if (client->type == USER_CLIENT && info.kernel) {
+<<<<<<< HEAD
 		port_idx = port->addr.port;
 		snd_seq_port_unlock(port);
 		snd_seq_delete_port(client, port_idx);
+=======
+		snd_seq_delete_port(client, port->addr.port);
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 	if (client->type == KERNEL_CLIENT) {
@@ -1286,7 +1372,10 @@ static int snd_seq_ioctl_create_port(struct snd_seq_client *client,
 
 	snd_seq_set_port_info(port, &info);
 	snd_seq_system_client_ev_port_start(port->addr.client, port->addr.port);
+<<<<<<< HEAD
 	snd_seq_port_unlock(port);
+=======
+>>>>>>> v3.18
 
 	if (copy_to_user(arg, &info, sizeof(info)))
 		return -EFAULT;
@@ -1913,7 +2002,10 @@ static int snd_seq_ioctl_set_client_pool(struct snd_seq_client *client,
 	     info.output_pool != client->pool->size)) {
 		if (snd_seq_write_pool_allocated(client)) {
 			/* remove all existing cells */
+<<<<<<< HEAD
 			snd_seq_pool_mark_closing(client->pool);
+=======
+>>>>>>> v3.18
 			snd_seq_queue_client_leave_cells(client->number);
 			snd_seq_pool_done(client->pool);
 		}
@@ -1958,7 +2050,11 @@ static int snd_seq_ioctl_remove_events(struct snd_seq_client *client,
 		 * No restrictions so for a user client we can clear
 		 * the whole fifo
 		 */
+<<<<<<< HEAD
 		if (client->type == USER_CLIENT && client->data.user.fifo)
+=======
+		if (client->type == USER_CLIENT)
+>>>>>>> v3.18
 			snd_seq_fifo_clear(client->data.user.fifo);
 	}
 
@@ -2204,7 +2300,11 @@ static int snd_seq_do_ioctl(struct snd_seq_client *client, unsigned int cmd,
 		if (p->cmd == cmd)
 			return p->func(client, arg);
 	}
+<<<<<<< HEAD
 	snd_printd("seq unknown ioctl() 0x%x (type='%c', number=0x%02x)\n",
+=======
+	pr_debug("ALSA: seq unknown ioctl() 0x%x (type='%c', number=0x%02x)\n",
+>>>>>>> v3.18
 		   cmd, _IOC_TYPE(cmd), _IOC_NR(cmd));
 	return -ENOTTY;
 }

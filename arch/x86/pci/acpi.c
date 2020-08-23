@@ -84,6 +84,7 @@ static const struct dmi_system_id pci_crs_quirks[] __initconst = {
 			DMI_MATCH(DMI_BIOS_VENDOR, "Phoenix Technologies, LTD"),
 		},
 	},
+<<<<<<< HEAD
 	/* https://bugs.launchpad.net/ubuntu/+source/alsa-driver/+bug/931368 */
 	/* https://bugs.launchpad.net/ubuntu/+source/alsa-driver/+bug/1033299 */
 	{
@@ -95,6 +96,8 @@ static const struct dmi_system_id pci_crs_quirks[] __initconst = {
 			DMI_MATCH(DMI_BIOS_VENDOR, "Phoenix Technologies, LTD"),
 		},
 	},
+=======
+>>>>>>> v3.18
 
 	/* Now for the blacklist.. */
 
@@ -118,6 +121,7 @@ static const struct dmi_system_id pci_crs_quirks[] __initconst = {
 			DMI_MATCH(DMI_BIOS_VERSION, "6JET85WW (1.43 )"),
 		},
 	},
+<<<<<<< HEAD
 	/* https://bugzilla.kernel.org/show_bug.cgi?id=42606 */
 	{
 		.callback = set_nouse_crs,
@@ -128,6 +132,8 @@ static const struct dmi_system_id pci_crs_quirks[] __initconst = {
 			DMI_MATCH(DMI_BIOS_VERSION, "2.0a"),
 		},
 	},
+=======
+>>>>>>> v3.18
 
 	/* https://bugzilla.kernel.org/show_bug.cgi?id=15362 */
 	{
@@ -239,9 +245,14 @@ static void teardown_mcfg_map(struct pci_root_info *info)
 }
 #endif
 
+<<<<<<< HEAD
 static acpi_status
 resource_to_addr(struct acpi_resource *resource,
 			struct acpi_resource_address64 *addr)
+=======
+static acpi_status resource_to_addr(struct acpi_resource *resource,
+				    struct acpi_resource_address64 *addr)
+>>>>>>> v3.18
 {
 	acpi_status status;
 	struct acpi_resource_memory24 *memory24;
@@ -286,8 +297,12 @@ resource_to_addr(struct acpi_resource *resource,
 	return AE_ERROR;
 }
 
+<<<<<<< HEAD
 static acpi_status
 count_resource(struct acpi_resource *acpi_res, void *data)
+=======
+static acpi_status count_resource(struct acpi_resource *acpi_res, void *data)
+>>>>>>> v3.18
 {
 	struct pci_root_info *info = data;
 	struct acpi_resource_address64 addr;
@@ -299,8 +314,12 @@ count_resource(struct acpi_resource *acpi_res, void *data)
 	return AE_OK;
 }
 
+<<<<<<< HEAD
 static acpi_status
 setup_resource(struct acpi_resource *acpi_res, void *data)
+=======
+static acpi_status setup_resource(struct acpi_resource *acpi_res, void *data)
+>>>>>>> v3.18
 {
 	struct pci_root_info *info = data;
 	struct resource *res;
@@ -345,6 +364,7 @@ setup_resource(struct acpi_resource *acpi_res, void *data)
 	res->start = start;
 	res->end = end;
 	info->res_offset[info->res_num] = addr.translation_offset;
+<<<<<<< HEAD
 
 	if (!pci_use_crs) {
 		dev_printk(KERN_DEBUG, &info->bridge->dev,
@@ -353,6 +373,13 @@ setup_resource(struct acpi_resource *acpi_res, void *data)
 	}
 
 	info->res_num++;
+=======
+	info->res_num++;
+
+	if (!pci_use_crs)
+		dev_printk(KERN_DEBUG, &info->bridge->dev,
+			   "host bridge window %pR (ignored)\n", res);
+>>>>>>> v3.18
 
 	return AE_OK;
 }
@@ -378,12 +405,21 @@ static void coalesce_windows(struct pci_root_info *info, unsigned long type)
 			 * the kernel resource tree doesn't allow overlaps.
 			 */
 			if (resource_overlaps(res1, res2)) {
+<<<<<<< HEAD
 				res1->start = min(res1->start, res2->start);
 				res1->end = max(res1->end, res2->end);
 				dev_info(&info->bridge->dev,
 					 "host bridge window expanded to %pR; %pR ignored\n",
 					 res1, res2);
 				res2->flags = 0;
+=======
+				res2->start = min(res1->start, res2->start);
+				res2->end = max(res1->end, res2->end);
+				dev_info(&info->bridge->dev,
+					 "host bridge window expanded to %pR; %pR ignored\n",
+					 res2, res1);
+				res1->flags = 0;
+>>>>>>> v3.18
 			}
 		}
 	}
@@ -459,9 +495,15 @@ static void release_pci_root_info(struct pci_host_bridge *bridge)
 	__release_pci_root_info(info);
 }
 
+<<<<<<< HEAD
 static void
 probe_pci_root_info(struct pci_root_info *info, struct acpi_device *device,
 		    int busnum, int domain)
+=======
+static void probe_pci_root_info(struct pci_root_info *info,
+				struct acpi_device *device,
+				int busnum, int domain)
+>>>>>>> v3.18
 {
 	size_t size;
 
@@ -475,7 +517,11 @@ probe_pci_root_info(struct pci_root_info *info, struct acpi_device *device,
 		return;
 
 	size = sizeof(*info->res) * info->res_num;
+<<<<<<< HEAD
 	info->res = kzalloc(size, GFP_KERNEL);
+=======
+	info->res = kzalloc_node(size, GFP_KERNEL, info->sd.node);
+>>>>>>> v3.18
 	if (!info->res) {
 		info->res_num = 0;
 		return;
@@ -483,7 +529,11 @@ probe_pci_root_info(struct pci_root_info *info, struct acpi_device *device,
 
 	size = sizeof(*info->res_offset) * info->res_num;
 	info->res_num = 0;
+<<<<<<< HEAD
 	info->res_offset = kzalloc(size, GFP_KERNEL);
+=======
+	info->res_offset = kzalloc_node(size, GFP_KERNEL, info->sd.node);
+>>>>>>> v3.18
 	if (!info->res_offset) {
 		kfree(info->res);
 		info->res = NULL;
@@ -497,6 +547,7 @@ probe_pci_root_info(struct pci_root_info *info, struct acpi_device *device,
 struct pci_bus *pci_acpi_scan_root(struct acpi_pci_root *root)
 {
 	struct acpi_device *device = root->device;
+<<<<<<< HEAD
 	struct pci_root_info *info = NULL;
 	int domain = root->segment;
 	int busnum = root->secondary.start;
@@ -507,6 +558,15 @@ struct pci_bus *pci_acpi_scan_root(struct acpi_pci_root *root)
 #ifdef CONFIG_ACPI_NUMA
 	int pxm;
 #endif
+=======
+	struct pci_root_info *info;
+	int domain = root->segment;
+	int busnum = root->secondary.start;
+	LIST_HEAD(resources);
+	struct pci_bus *bus;
+	struct pci_sysdata *sd;
+	int node;
+>>>>>>> v3.18
 
 	if (pci_ignore_seg)
 		domain = 0;
@@ -518,6 +578,7 @@ struct pci_bus *pci_acpi_scan_root(struct acpi_pci_root *root)
 		return NULL;
 	}
 
+<<<<<<< HEAD
 	node = -1;
 #ifdef CONFIG_ACPI_NUMA
 	pxm = acpi_get_pxm(device->handle);
@@ -533,6 +594,20 @@ struct pci_bus *pci_acpi_scan_root(struct acpi_pci_root *root)
 		node = -1;
 
 	info = kzalloc(sizeof(*info), GFP_KERNEL);
+=======
+	node = acpi_get_node(device->handle);
+	if (node == NUMA_NO_NODE) {
+		node = x86_pci_root_bus_node(busnum);
+		if (node != 0 && node != NUMA_NO_NODE)
+			dev_info(&device->dev, FW_BUG "no _PXM; falling back to node %d from hardware (may be inconsistent with ACPI node numbers)\n",
+				node);
+	}
+
+	if (node != NUMA_NO_NODE && !node_online(node))
+		node = NUMA_NO_NODE;
+
+	info = kzalloc_node(sizeof(*info), GFP_KERNEL, node);
+>>>>>>> v3.18
 	if (!info) {
 		printk(KERN_WARNING "pci_bus %04x:%02x: "
 		       "ignored (out of memory)\n", domain, busnum);
@@ -542,6 +617,7 @@ struct pci_bus *pci_acpi_scan_root(struct acpi_pci_root *root)
 	sd = &info->sd;
 	sd->domain = domain;
 	sd->node = node;
+<<<<<<< HEAD
 	sd->acpi = device->handle;
 	/*
 	 * Maybe the desired pci bus has been already scanned. In such case
@@ -552,6 +628,15 @@ struct pci_bus *pci_acpi_scan_root(struct acpi_pci_root *root)
 		/*
 		 * If the desired bus exits, the content of bus->sysdata will
 		 * be replaced by sd.
+=======
+	sd->companion = device;
+
+	bus = pci_find_bus(domain, busnum);
+	if (bus) {
+		/*
+		 * If the desired bus has been scanned already, replace
+		 * its bus->sysdata.
+>>>>>>> v3.18
 		 */
 		memcpy(bus->sysdata, sd, sizeof(*sd));
 		kfree(info);
@@ -592,6 +677,7 @@ struct pci_bus *pci_acpi_scan_root(struct acpi_pci_root *root)
 	 */
 	if (bus) {
 		struct pci_bus *child;
+<<<<<<< HEAD
 		list_for_each_entry(child, &bus->children, node) {
 			struct pci_dev *self = child->self;
 			if (!self)
@@ -610,6 +696,14 @@ struct pci_bus *pci_acpi_scan_root(struct acpi_pci_root *root)
 		dev_printk(KERN_DEBUG, &bus->dev, "on NUMA node %d\n", node);
 #endif
 	}
+=======
+		list_for_each_entry(child, &bus->children, node)
+			pcie_bus_configure_settings(child);
+	}
+
+	if (bus && node != NUMA_NO_NODE)
+		dev_printk(KERN_DEBUG, &bus->dev, "on NUMA node %d\n", node);
+>>>>>>> v3.18
 
 	return bus;
 }
@@ -618,7 +712,11 @@ int pcibios_root_bridge_prepare(struct pci_host_bridge *bridge)
 {
 	struct pci_sysdata *sd = bridge->bus->sysdata;
 
+<<<<<<< HEAD
 	ACPI_HANDLE_SET(&bridge->dev, sd->acpi);
+=======
+	ACPI_COMPANION_SET(&bridge->dev, sd->companion);
+>>>>>>> v3.18
 	return 0;
 }
 

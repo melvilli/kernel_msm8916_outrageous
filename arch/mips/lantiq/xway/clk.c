@@ -8,7 +8,10 @@
 
 #include <linux/io.h>
 #include <linux/export.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/clk.h>
 
 #include <asm/time.h>

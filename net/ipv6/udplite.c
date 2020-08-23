@@ -64,7 +64,10 @@ static struct inet_protosw udplite6_protosw = {
 	.protocol	= IPPROTO_UDPLITE,
 	.prot		= &udplitev6_prot,
 	.ops		= &inet6_dgram_ops,
+<<<<<<< HEAD
 	.no_check	= 0,
+=======
+>>>>>>> v3.18
 	.flags		= INET_PROTOSW_PERMANENT,
 };
 

@@ -10,6 +10,7 @@
  *
  */
 #include <linux/init.h>
+<<<<<<< HEAD
 #include <linux/of.h>
 #include <linux/of_fdt.h>
 #include <linux/initrd.h>
@@ -41,6 +42,10 @@ void __init early_init_dt_setup_initrd_arch(u64 start, u64 end)
 }
 #endif
 
+=======
+#include <linux/memblock.h>
+
+>>>>>>> v3.18
 void __init early_init_dt_add_memory_arch(u64 base, u64 size)
 {
 	c6x_add_memory(base, size);

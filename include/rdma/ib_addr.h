@@ -38,10 +38,22 @@
 #include <linux/in6.h>
 #include <linux/if_arp.h>
 #include <linux/netdevice.h>
+<<<<<<< HEAD
 #include <linux/socket.h>
 #include <linux/if_vlan.h>
 #include <rdma/ib_verbs.h>
 #include <rdma/ib_pack.h>
+=======
+#include <linux/inetdevice.h>
+#include <linux/socket.h>
+#include <linux/if_vlan.h>
+#include <net/ipv6.h>
+#include <net/if_inet6.h>
+#include <net/ip.h>
+#include <rdma/ib_verbs.h>
+#include <rdma/ib_pack.h>
+#include <net/ipv6.h>
+>>>>>>> v3.18
 
 struct rdma_addr_client {
 	atomic_t refcount;
@@ -72,7 +84,12 @@ struct rdma_dev_addr {
  * rdma_translate_ip - Translate a local IP address to an RDMA hardware
  *   address.
  */
+<<<<<<< HEAD
 int rdma_translate_ip(struct sockaddr *addr, struct rdma_dev_addr *dev_addr);
+=======
+int rdma_translate_ip(struct sockaddr *addr, struct rdma_dev_addr *dev_addr,
+		      u16 *vlan_id);
+>>>>>>> v3.18
 
 /**
  * rdma_resolve_ip - Resolve source and destination IP addresses to
@@ -102,11 +119,19 @@ void rdma_addr_cancel(struct rdma_dev_addr *addr);
 int rdma_copy_addr(struct rdma_dev_addr *dev_addr, struct net_device *dev,
 	      const unsigned char *dst_dev_addr);
 
+<<<<<<< HEAD
 static inline int ip_addr_size(struct sockaddr *addr)
 {
 	return addr->sa_family == AF_INET6 ?
 	       sizeof(struct sockaddr_in6) : sizeof(struct sockaddr_in);
 }
+=======
+int rdma_addr_size(struct sockaddr *addr);
+
+int rdma_addr_find_smac_by_sgid(union ib_gid *sgid, u8 *smac, u16 *vlan_id);
+int rdma_addr_find_dmac_by_grh(union ib_gid *sgid, union ib_gid *dgid, u8 *smac,
+			       u16 *vlan_id);
+>>>>>>> v3.18
 
 static inline u16 ib_addr_get_pkey(struct rdma_dev_addr *dev_addr)
 {
@@ -130,6 +155,7 @@ static inline int rdma_addr_gid_offset(struct rdma_dev_addr *dev_addr)
 	return dev_addr->dev_type == ARPHRD_INFINIBAND ? 4 : 0;
 }
 
+<<<<<<< HEAD
 static inline void iboe_mac_vlan_to_ll(union ib_gid *gid, u8 *mac, u16 vid)
 {
 	memset(gid->raw, 0, 16);
@@ -150,12 +176,53 @@ static inline u16 rdma_vlan_dev_vlan_id(const struct net_device *dev)
 {
 	return dev->priv_flags & IFF_802_1Q_VLAN ?
 		vlan_dev_vlan_id(dev) : 0xffff;
+=======
+static inline u16 rdma_vlan_dev_vlan_id(const struct net_device *dev)
+{
+	return dev->priv_flags & IFF_802_1Q_VLAN ?
+		vlan_dev_vlan_id(dev) : 0xffff;
+}
+
+static inline int rdma_ip2gid(struct sockaddr *addr, union ib_gid *gid)
+{
+	switch (addr->sa_family) {
+	case AF_INET:
+		ipv6_addr_set_v4mapped(((struct sockaddr_in *)
+					addr)->sin_addr.s_addr,
+				       (struct in6_addr *)gid);
+		break;
+	case AF_INET6:
+		memcpy(gid->raw, &((struct sockaddr_in6 *)addr)->sin6_addr, 16);
+		break;
+	default:
+		return -EINVAL;
+	}
+	return 0;
+}
+
+/* Important - sockaddr should be a union of sockaddr_in and sockaddr_in6 */
+static inline int rdma_gid2ip(struct sockaddr *out, union ib_gid *gid)
+{
+	if (ipv6_addr_v4mapped((struct in6_addr *)gid)) {
+		struct sockaddr_in *out_in = (struct sockaddr_in *)out;
+		memset(out_in, 0, sizeof(*out_in));
+		out_in->sin_family = AF_INET;
+		memcpy(&out_in->sin_addr.s_addr, gid->raw + 12, 4);
+	} else {
+		struct sockaddr_in6 *out_in = (struct sockaddr_in6 *)out;
+		memset(out_in, 0, sizeof(*out_in));
+		out_in->sin6_family = AF_INET6;
+		memcpy(&out_in->sin6_addr.s6_addr, gid->raw, 16);
+	}
+	return 0;
+>>>>>>> v3.18
 }
 
 static inline void iboe_addr_get_sgid(struct rdma_dev_addr *dev_addr,
 				      union ib_gid *gid)
 {
 	struct net_device *dev;
+<<<<<<< HEAD
 	u16 vid = 0xffff;
 
 	dev = dev_get_by_index(&init_net, dev_addr->bound_dev_if);
@@ -165,6 +232,18 @@ static inline void iboe_addr_get_sgid(struct rdma_dev_addr *dev_addr,
 	}
 
 	iboe_mac_vlan_to_ll(gid, dev_addr->src_dev_addr, vid);
+=======
+	struct in_device *ip4;
+
+	dev = dev_get_by_index(&init_net, dev_addr->bound_dev_if);
+	if (dev) {
+		ip4 = (struct in_device *)dev->ip_ptr;
+		if (ip4 && ip4->ifa_list && ip4->ifa_list->ifa_address)
+			ipv6_addr_set_v4mapped(ip4->ifa_list->ifa_address,
+					       (struct in6_addr *)gid);
+		dev_put(dev);
+	}
+>>>>>>> v3.18
 }
 
 static inline void rdma_addr_get_sgid(struct rdma_dev_addr *dev_addr, union ib_gid *gid)

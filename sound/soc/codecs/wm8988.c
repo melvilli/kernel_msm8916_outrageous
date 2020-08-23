@@ -116,7 +116,11 @@ static bool wm8988_writeable(struct device *dev, unsigned int reg)
 struct wm8988_priv {
 	struct regmap *regmap;
 	unsigned int sysclk;
+<<<<<<< HEAD
 	struct snd_pcm_hw_constraint_list *sysclk_constraints;
+=======
+	const struct snd_pcm_hw_constraint_list *sysclk_constraints;
+>>>>>>> v3.18
 };
 
 #define wm8988_reset(c)	snd_soc_write(c, WM8988_RESET, 0)
@@ -126,6 +130,7 @@ struct wm8988_priv {
  */
 
 static const char *bass_boost_txt[] = {"Linear Control", "Adaptive Boost"};
+<<<<<<< HEAD
 static const struct soc_enum bass_boost =
 	SOC_ENUM_SINGLE(WM8988_BASS, 7, 2, bass_boost_txt);
 
@@ -166,6 +171,48 @@ static const char *adcpol_txt[] = {"Normal", "L Invert", "R Invert",
 				   "L + R Invert"};
 static const struct soc_enum adcpol =
 	SOC_ENUM_SINGLE(WM8988_ADCDAC, 5, 4, adcpol_txt);
+=======
+static SOC_ENUM_SINGLE_DECL(bass_boost,
+			    WM8988_BASS, 7, bass_boost_txt);
+
+static const char *bass_filter_txt[] = { "130Hz @ 48kHz", "200Hz @ 48kHz" };
+static SOC_ENUM_SINGLE_DECL(bass_filter,
+			    WM8988_BASS, 6, bass_filter_txt);
+
+static const char *treble_txt[] = {"8kHz", "4kHz"};
+static SOC_ENUM_SINGLE_DECL(treble,
+			    WM8988_TREBLE, 6, treble_txt);
+
+static const char *stereo_3d_lc_txt[] = {"200Hz", "500Hz"};
+static SOC_ENUM_SINGLE_DECL(stereo_3d_lc,
+			    WM8988_3D, 5, stereo_3d_lc_txt);
+
+static const char *stereo_3d_uc_txt[] = {"2.2kHz", "1.5kHz"};
+static SOC_ENUM_SINGLE_DECL(stereo_3d_uc,
+			    WM8988_3D, 6, stereo_3d_uc_txt);
+
+static const char *stereo_3d_func_txt[] = {"Capture", "Playback"};
+static SOC_ENUM_SINGLE_DECL(stereo_3d_func,
+			    WM8988_3D, 7, stereo_3d_func_txt);
+
+static const char *alc_func_txt[] = {"Off", "Right", "Left", "Stereo"};
+static SOC_ENUM_SINGLE_DECL(alc_func,
+			    WM8988_ALC1, 7, alc_func_txt);
+
+static const char *ng_type_txt[] = {"Constant PGA Gain",
+				    "Mute ADC Output"};
+static SOC_ENUM_SINGLE_DECL(ng_type,
+			    WM8988_NGATE, 1, ng_type_txt);
+
+static const char *deemph_txt[] = {"None", "32Khz", "44.1Khz", "48Khz"};
+static SOC_ENUM_SINGLE_DECL(deemph,
+			    WM8988_ADCDAC, 1, deemph_txt);
+
+static const char *adcpol_txt[] = {"Normal", "L Invert", "R Invert",
+				   "L + R Invert"};
+static SOC_ENUM_SINGLE_DECL(adcpol,
+			    WM8988_ADCDAC, 5, adcpol_txt);
+>>>>>>> v3.18
 
 static const DECLARE_TLV_DB_SCALE(pga_tlv, -1725, 75, 0);
 static const DECLARE_TLV_DB_SCALE(adc_tlv, -9750, 50, 1);
@@ -268,7 +315,11 @@ static const struct soc_enum wm8988_lline_enum =
 			      wm8988_line_texts,
 			      wm8988_line_values);
 static const struct snd_kcontrol_new wm8988_left_line_controls =
+<<<<<<< HEAD
 	SOC_DAPM_VALUE_ENUM("Route", wm8988_lline_enum);
+=======
+	SOC_DAPM_ENUM("Route", wm8988_lline_enum);
+>>>>>>> v3.18
 
 static const struct soc_enum wm8988_rline_enum =
 	SOC_VALUE_ENUM_SINGLE(WM8988_ROUTM1, 0, 7,
@@ -276,7 +327,11 @@ static const struct soc_enum wm8988_rline_enum =
 			      wm8988_line_texts,
 			      wm8988_line_values);
 static const struct snd_kcontrol_new wm8988_right_line_controls =
+<<<<<<< HEAD
 	SOC_DAPM_VALUE_ENUM("Route", wm8988_lline_enum);
+=======
+	SOC_DAPM_ENUM("Route", wm8988_lline_enum);
+>>>>>>> v3.18
 
 /* Left Mixer */
 static const struct snd_kcontrol_new wm8988_left_mixer_controls[] = {
@@ -304,7 +359,11 @@ static const struct soc_enum wm8988_lpga_enum =
 			      wm8988_pga_sel,
 			      wm8988_pga_val);
 static const struct snd_kcontrol_new wm8988_left_pga_controls =
+<<<<<<< HEAD
 	SOC_DAPM_VALUE_ENUM("Route", wm8988_lpga_enum);
+=======
+	SOC_DAPM_ENUM("Route", wm8988_lpga_enum);
+>>>>>>> v3.18
 
 /* Right PGA Mux */
 static const struct soc_enum wm8988_rpga_enum =
@@ -313,20 +372,34 @@ static const struct soc_enum wm8988_rpga_enum =
 			      wm8988_pga_sel,
 			      wm8988_pga_val);
 static const struct snd_kcontrol_new wm8988_right_pga_controls =
+<<<<<<< HEAD
 	SOC_DAPM_VALUE_ENUM("Route", wm8988_rpga_enum);
 
 /* Differential Mux */
 static const char *wm8988_diff_sel[] = {"Line 1", "Line 2"};
 static const struct soc_enum diffmux =
 	SOC_ENUM_SINGLE(WM8988_ADCIN, 8, 2, wm8988_diff_sel);
+=======
+	SOC_DAPM_ENUM("Route", wm8988_rpga_enum);
+
+/* Differential Mux */
+static const char *wm8988_diff_sel[] = {"Line 1", "Line 2"};
+static SOC_ENUM_SINGLE_DECL(diffmux,
+			    WM8988_ADCIN, 8, wm8988_diff_sel);
+>>>>>>> v3.18
 static const struct snd_kcontrol_new wm8988_diffmux_controls =
 	SOC_DAPM_ENUM("Route", diffmux);
 
 /* Mono ADC Mux */
 static const char *wm8988_mono_mux[] = {"Stereo", "Mono (Left)",
 	"Mono (Right)", "Digital Mono"};
+<<<<<<< HEAD
 static const struct soc_enum monomux =
 	SOC_ENUM_SINGLE(WM8988_ADCIN, 6, 4, wm8988_mono_mux);
+=======
+static SOC_ENUM_SINGLE_DECL(monomux,
+			    WM8988_ADCIN, 6, wm8988_mono_mux);
+>>>>>>> v3.18
 static const struct snd_kcontrol_new wm8988_monomux_controls =
 	SOC_DAPM_ENUM("Route", monomux);
 
@@ -521,30 +594,54 @@ static inline int get_coeff(int mclk, int rate)
 
 /* The set of rates we can generate from the above for each SYSCLK */
 
+<<<<<<< HEAD
 static unsigned int rates_12288[] = {
 	8000, 12000, 16000, 24000, 24000, 32000, 48000, 96000,
 };
 
 static struct snd_pcm_hw_constraint_list constraints_12288 = {
+=======
+static const unsigned int rates_12288[] = {
+	8000, 12000, 16000, 24000, 24000, 32000, 48000, 96000,
+};
+
+static const struct snd_pcm_hw_constraint_list constraints_12288 = {
+>>>>>>> v3.18
 	.count	= ARRAY_SIZE(rates_12288),
 	.list	= rates_12288,
 };
 
+<<<<<<< HEAD
 static unsigned int rates_112896[] = {
 	8000, 11025, 22050, 44100,
 };
 
 static struct snd_pcm_hw_constraint_list constraints_112896 = {
+=======
+static const unsigned int rates_112896[] = {
+	8000, 11025, 22050, 44100,
+};
+
+static const struct snd_pcm_hw_constraint_list constraints_112896 = {
+>>>>>>> v3.18
 	.count	= ARRAY_SIZE(rates_112896),
 	.list	= rates_112896,
 };
 
+<<<<<<< HEAD
 static unsigned int rates_12[] = {
+=======
+static const unsigned int rates_12[] = {
+>>>>>>> v3.18
 	8000, 11025, 12000, 16000, 22050, 2400, 32000, 41100, 48000,
 	48000, 88235, 96000,
 };
 
+<<<<<<< HEAD
 static struct snd_pcm_hw_constraint_list constraints_12 = {
+=======
+static const struct snd_pcm_hw_constraint_list constraints_12 = {
+>>>>>>> v3.18
 	.count	= ARRAY_SIZE(rates_12),
 	.list	= rates_12,
 };
@@ -687,6 +784,7 @@ static int wm8988_pcm_hw_params(struct snd_pcm_substream *substream,
 	}
 
 	/* bit size */
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		break;
@@ -697,6 +795,18 @@ static int wm8988_pcm_hw_params(struct snd_pcm_substream *substream,
 		iface |= 0x0008;
 		break;
 	case SNDRV_PCM_FORMAT_S32_LE:
+=======
+	switch (params_width(params)) {
+	case 16:
+		break;
+	case 20:
+		iface |= 0x0004;
+		break;
+	case 24:
+		iface |= 0x0008;
+		break;
+	case 32:
+>>>>>>> v3.18
 		iface |= 0x000c;
 		break;
 	}
@@ -810,6 +920,7 @@ static int wm8988_resume(struct snd_soc_codec *codec)
 
 static int wm8988_probe(struct snd_soc_codec *codec)
 {
+<<<<<<< HEAD
 	struct wm8988_priv *wm8988 = snd_soc_codec_get_drvdata(codec);
 	int ret = 0;
 
@@ -820,6 +931,10 @@ static int wm8988_probe(struct snd_soc_codec *codec)
 		return ret;
 	}
 
+=======
+	int ret = 0;
+
+>>>>>>> v3.18
 	ret = wm8988_reset(codec);
 	if (ret < 0) {
 		dev_err(codec->dev, "Failed to issue reset\n");
@@ -912,7 +1027,11 @@ static struct spi_driver wm8988_spi_driver = {
 };
 #endif /* CONFIG_SPI_MASTER */
 
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 static int wm8988_i2c_probe(struct i2c_client *i2c,
 			    const struct i2c_device_id *id)
 {
@@ -964,7 +1083,11 @@ static struct i2c_driver wm8988_i2c_driver = {
 static int __init wm8988_modinit(void)
 {
 	int ret = 0;
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 	ret = i2c_add_driver(&wm8988_i2c_driver);
 	if (ret != 0) {
 		printk(KERN_ERR "Failed to register WM8988 I2C driver: %d\n",
@@ -984,7 +1107,11 @@ module_init(wm8988_modinit);
 
 static void __exit wm8988_exit(void)
 {
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 	i2c_del_driver(&wm8988_i2c_driver);
 #endif
 #if defined(CONFIG_SPI_MASTER)

@@ -21,10 +21,17 @@
 
 #define VIF_ENTRY	__field(enum nl80211_iftype, vif_type) __field(void *, sdata)	\
 			__field(bool, p2p)						\
+<<<<<<< HEAD
 			__string(vif_name, sdata->dev ? sdata->dev->name : "<nodev>")
 #define VIF_ASSIGN	__entry->vif_type = sdata->vif.type; __entry->sdata = sdata;	\
 			__entry->p2p = sdata->vif.p2p;					\
 			__assign_str(vif_name, sdata->dev ? sdata->dev->name : sdata->name)
+=======
+			__string(vif_name, sdata->name)
+#define VIF_ASSIGN	__entry->vif_type = sdata->vif.type; __entry->sdata = sdata;	\
+			__entry->p2p = sdata->vif.p2p;					\
+			__assign_str(vif_name, sdata->name)
+>>>>>>> v3.18
 #define VIF_PR_FMT	" vif:%s(%d%s)"
 #define VIF_PR_ARG	__get_str(vif_name), __entry->vif_type, __entry->p2p ? "/p2p" : ""
 
@@ -41,6 +48,7 @@
 #define CHANDEF_PR_ARG	__entry->control_freq, __entry->chan_width,			\
 			__entry->center_freq1, __entry->center_freq2
 
+<<<<<<< HEAD
 #define CHANCTX_ENTRY	CHANDEF_ENTRY							\
 			__field(u8, rx_chains_static)					\
 			__field(u8, rx_chains_dynamic)
@@ -49,6 +57,33 @@
 			__entry->rx_chains_dynamic = ctx->conf.rx_chains_dynamic
 #define CHANCTX_PR_FMT	CHANDEF_PR_FMT " chains:%d/%d"
 #define CHANCTX_PR_ARG	CHANDEF_PR_ARG,							\
+=======
+#define MIN_CHANDEF_ENTRY								\
+			__field(u32, min_control_freq)					\
+			__field(u32, min_chan_width)					\
+			__field(u32, min_center_freq1)					\
+			__field(u32, min_center_freq2)
+
+#define MIN_CHANDEF_ASSIGN(c)								\
+			__entry->min_control_freq = (c)->chan ? (c)->chan->center_freq : 0;	\
+			__entry->min_chan_width = (c)->width;				\
+			__entry->min_center_freq1 = (c)->center_freq1;			\
+			__entry->min_center_freq2 = (c)->center_freq2;
+#define MIN_CHANDEF_PR_FMT	" min_control:%d MHz min_width:%d min_center: %d/%d MHz"
+#define MIN_CHANDEF_PR_ARG	__entry->min_control_freq, __entry->min_chan_width,	\
+			__entry->min_center_freq1, __entry->min_center_freq2
+
+#define CHANCTX_ENTRY	CHANDEF_ENTRY							\
+			MIN_CHANDEF_ENTRY						\
+			__field(u8, rx_chains_static)					\
+			__field(u8, rx_chains_dynamic)
+#define CHANCTX_ASSIGN	CHANDEF_ASSIGN(&ctx->conf.def)					\
+			MIN_CHANDEF_ASSIGN(&ctx->conf.min_def)				\
+			__entry->rx_chains_static = ctx->conf.rx_chains_static;		\
+			__entry->rx_chains_dynamic = ctx->conf.rx_chains_dynamic
+#define CHANCTX_PR_FMT	CHANDEF_PR_FMT MIN_CHANDEF_PR_FMT " chains:%d/%d"
+#define CHANCTX_PR_ARG	CHANDEF_PR_ARG,	MIN_CHANDEF_PR_ARG,				\
+>>>>>>> v3.18
 			__entry->rx_chains_static, __entry->rx_chains_dynamic
 
 
@@ -77,13 +112,21 @@ DECLARE_EVENT_CLASS(local_sdata_addr_evt,
 	TP_STRUCT__entry(
 		LOCAL_ENTRY
 		VIF_ENTRY
+<<<<<<< HEAD
 		__array(char, addr, 6)
+=======
+		__array(char, addr, ETH_ALEN)
+>>>>>>> v3.18
 	),
 
 	TP_fast_assign(
 		LOCAL_ASSIGN;
 		VIF_ASSIGN;
+<<<<<<< HEAD
 		memcpy(__entry->addr, sdata->vif.addr, 6);
+=======
+		memcpy(__entry->addr, sdata->vif.addr, ETH_ALEN);
+>>>>>>> v3.18
 	),
 
 	TP_printk(
@@ -167,6 +210,23 @@ TRACE_EVENT(drv_return_bool,
 		  "true" : "false")
 );
 
+<<<<<<< HEAD
+=======
+TRACE_EVENT(drv_return_u32,
+	TP_PROTO(struct ieee80211_local *local, u32 ret),
+	TP_ARGS(local, ret),
+	TP_STRUCT__entry(
+		LOCAL_ENTRY
+		__field(u32, ret)
+	),
+	TP_fast_assign(
+		LOCAL_ASSIGN;
+		__entry->ret = ret;
+	),
+	TP_printk(LOCAL_PR_FMT " - %u", LOCAL_PR_ARG, __entry->ret)
+);
+
+>>>>>>> v3.18
 TRACE_EVENT(drv_return_u64,
 	TP_PROTO(struct ieee80211_local *local, u64 ret),
 	TP_ARGS(local, ret),
@@ -426,6 +486,7 @@ TRACE_EVENT(drv_prepare_multicast,
 	)
 );
 
+<<<<<<< HEAD
 TRACE_EVENT(drv_set_multicast_list,
 	TP_PROTO(struct ieee80211_local *local,
 		 struct ieee80211_sub_if_data *sdata, int mc_count),
@@ -450,6 +511,8 @@ TRACE_EVENT(drv_set_multicast_list,
 	)
 );
 
+=======
+>>>>>>> v3.18
 TRACE_EVENT(drv_configure_filter,
 	TP_PROTO(struct ieee80211_local *local,
 		 unsigned int changed_flags,
@@ -560,7 +623,11 @@ TRACE_EVENT(drv_update_tkip_key,
 
 	TP_printk(
 		LOCAL_PR_FMT VIF_PR_FMT STA_PR_FMT " iv32:%#x",
+<<<<<<< HEAD
 		LOCAL_PR_ARG,VIF_PR_ARG,STA_PR_ARG, __entry->iv32
+=======
+		LOCAL_PR_ARG, VIF_PR_ARG, STA_PR_ARG, __entry->iv32
+>>>>>>> v3.18
 	)
 );
 
@@ -665,13 +732,21 @@ DEFINE_EVENT(local_u32_evt, drv_set_rts_threshold,
 );
 
 TRACE_EVENT(drv_set_coverage_class,
+<<<<<<< HEAD
 	TP_PROTO(struct ieee80211_local *local, u8 value),
+=======
+	TP_PROTO(struct ieee80211_local *local, s16 value),
+>>>>>>> v3.18
 
 	TP_ARGS(local, value),
 
 	TP_STRUCT__entry(
 		LOCAL_ENTRY
+<<<<<<< HEAD
 		__field(u8, value)
+=======
+		__field(s16, value)
+>>>>>>> v3.18
 	),
 
 	TP_fast_assign(
@@ -773,7 +848,11 @@ TRACE_EVENT(drv_sta_rc_update,
 	)
 );
 
+<<<<<<< HEAD
 TRACE_EVENT(drv_sta_add,
+=======
+DECLARE_EVENT_CLASS(sta_event,
+>>>>>>> v3.18
 	TP_PROTO(struct ieee80211_local *local,
 		 struct ieee80211_sub_if_data *sdata,
 		 struct ieee80211_sta *sta),
@@ -798,6 +877,7 @@ TRACE_EVENT(drv_sta_add,
 	)
 );
 
+<<<<<<< HEAD
 TRACE_EVENT(drv_sta_remove,
 	TP_PROTO(struct ieee80211_local *local,
 		 struct ieee80211_sub_if_data *sdata,
@@ -821,6 +901,27 @@ TRACE_EVENT(drv_sta_remove,
 		LOCAL_PR_FMT  VIF_PR_FMT  STA_PR_FMT,
 		LOCAL_PR_ARG, VIF_PR_ARG, STA_PR_ARG
 	)
+=======
+DEFINE_EVENT(sta_event, drv_sta_add,
+	TP_PROTO(struct ieee80211_local *local,
+		 struct ieee80211_sub_if_data *sdata,
+		 struct ieee80211_sta *sta),
+	TP_ARGS(local, sdata, sta)
+);
+
+DEFINE_EVENT(sta_event, drv_sta_remove,
+	TP_PROTO(struct ieee80211_local *local,
+		 struct ieee80211_sub_if_data *sdata,
+		 struct ieee80211_sta *sta),
+	TP_ARGS(local, sdata, sta)
+);
+
+DEFINE_EVENT(sta_event, drv_sta_pre_rcu_remove,
+	TP_PROTO(struct ieee80211_local *local,
+		 struct ieee80211_sub_if_data *sdata,
+		 struct ieee80211_sta *sta),
+	TP_ARGS(local, sdata, sta)
+>>>>>>> v3.18
 );
 
 TRACE_EVENT(drv_conf_tx,
@@ -1327,6 +1428,16 @@ DEFINE_EVENT(local_sdata_evt, drv_mgd_prepare_tx,
 	TP_ARGS(local, sdata)
 );
 
+<<<<<<< HEAD
+=======
+DEFINE_EVENT(local_sdata_evt, drv_mgd_protect_tdls_discover,
+	TP_PROTO(struct ieee80211_local *local,
+		 struct ieee80211_sub_if_data *sdata),
+
+	TP_ARGS(local, sdata)
+);
+
+>>>>>>> v3.18
 DECLARE_EVENT_CLASS(local_chanctx,
 	TP_PROTO(struct ieee80211_local *local,
 		 struct ieee80211_chanctx *ctx),
@@ -1386,6 +1497,94 @@ TRACE_EVENT(drv_change_chanctx,
 	)
 );
 
+<<<<<<< HEAD
+=======
+#if !defined(__TRACE_VIF_ENTRY)
+#define __TRACE_VIF_ENTRY
+struct trace_vif_entry {
+	enum nl80211_iftype vif_type;
+	bool p2p;
+	char vif_name[IFNAMSIZ];
+} __packed;
+
+struct trace_chandef_entry {
+	u32 control_freq;
+	u32 chan_width;
+	u32 center_freq1;
+	u32 center_freq2;
+} __packed;
+
+struct trace_switch_entry {
+	struct trace_vif_entry vif;
+	struct trace_chandef_entry old_chandef;
+	struct trace_chandef_entry new_chandef;
+} __packed;
+
+#define SWITCH_ENTRY_ASSIGN(to, from) local_vifs[i].to = vifs[i].from
+#endif
+
+TRACE_EVENT(drv_switch_vif_chanctx,
+	TP_PROTO(struct ieee80211_local *local,
+		 struct ieee80211_vif_chanctx_switch *vifs,
+		 int n_vifs, enum ieee80211_chanctx_switch_mode mode),
+	    TP_ARGS(local, vifs, n_vifs, mode),
+
+	TP_STRUCT__entry(
+		LOCAL_ENTRY
+		__field(int, n_vifs)
+		__field(u32, mode)
+		__dynamic_array(u8, vifs,
+				sizeof(struct trace_switch_entry) * n_vifs)
+	),
+
+	TP_fast_assign(
+		LOCAL_ASSIGN;
+		__entry->n_vifs = n_vifs;
+		__entry->mode = mode;
+		{
+			struct trace_switch_entry *local_vifs =
+				__get_dynamic_array(vifs);
+			int i;
+
+			for (i = 0; i < n_vifs; i++) {
+				struct ieee80211_sub_if_data *sdata;
+
+				sdata = container_of(vifs[i].vif,
+						struct ieee80211_sub_if_data,
+						vif);
+
+				SWITCH_ENTRY_ASSIGN(vif.vif_type, vif->type);
+				SWITCH_ENTRY_ASSIGN(vif.p2p, vif->p2p);
+				strncpy(local_vifs[i].vif.vif_name,
+					sdata->name,
+					sizeof(local_vifs[i].vif.vif_name));
+				SWITCH_ENTRY_ASSIGN(old_chandef.control_freq,
+						old_ctx->def.chan->center_freq);
+				SWITCH_ENTRY_ASSIGN(old_chandef.chan_width,
+						    old_ctx->def.width);
+				SWITCH_ENTRY_ASSIGN(old_chandef.center_freq1,
+						    old_ctx->def.center_freq1);
+				SWITCH_ENTRY_ASSIGN(old_chandef.center_freq2,
+						    old_ctx->def.center_freq2);
+				SWITCH_ENTRY_ASSIGN(new_chandef.control_freq,
+						new_ctx->def.chan->center_freq);
+				SWITCH_ENTRY_ASSIGN(new_chandef.chan_width,
+						    new_ctx->def.width);
+				SWITCH_ENTRY_ASSIGN(new_chandef.center_freq1,
+						    new_ctx->def.center_freq1);
+				SWITCH_ENTRY_ASSIGN(new_chandef.center_freq2,
+						    new_ctx->def.center_freq2);
+			}
+		}
+	),
+
+	TP_printk(
+		LOCAL_PR_FMT " n_vifs:%d mode:%d",
+		LOCAL_PR_ARG, __entry->n_vifs, __entry->mode
+	)
+);
+
+>>>>>>> v3.18
 DECLARE_EVENT_CLASS(local_sdata_chanctx,
 	TP_PROTO(struct ieee80211_local *local,
 		 struct ieee80211_sub_if_data *sdata,
@@ -1475,6 +1674,62 @@ DEFINE_EVENT(local_sdata_evt, drv_ipv6_addr_change,
 );
 #endif
 
+<<<<<<< HEAD
+=======
+TRACE_EVENT(drv_join_ibss,
+	TP_PROTO(struct ieee80211_local *local,
+		 struct ieee80211_sub_if_data *sdata,
+		 struct ieee80211_bss_conf *info),
+
+	TP_ARGS(local, sdata, info),
+
+	TP_STRUCT__entry(
+		LOCAL_ENTRY
+		VIF_ENTRY
+		__field(u8, dtimper)
+		__field(u16, bcnint)
+		__dynamic_array(u8, ssid, info->ssid_len);
+	),
+
+	TP_fast_assign(
+		LOCAL_ASSIGN;
+		VIF_ASSIGN;
+		__entry->dtimper = info->dtim_period;
+		__entry->bcnint = info->beacon_int;
+		memcpy(__get_dynamic_array(ssid), info->ssid, info->ssid_len);
+	),
+
+	TP_printk(
+		LOCAL_PR_FMT  VIF_PR_FMT,
+		LOCAL_PR_ARG, VIF_PR_ARG
+	)
+);
+
+DEFINE_EVENT(local_sdata_evt, drv_leave_ibss,
+	TP_PROTO(struct ieee80211_local *local,
+		 struct ieee80211_sub_if_data *sdata),
+	TP_ARGS(local, sdata)
+);
+
+TRACE_EVENT(drv_get_expected_throughput,
+	TP_PROTO(struct ieee80211_sta *sta),
+
+	TP_ARGS(sta),
+
+	TP_STRUCT__entry(
+		STA_ENTRY
+	),
+
+	TP_fast_assign(
+		STA_ASSIGN;
+	),
+
+	TP_printk(
+		STA_PR_FMT, STA_PR_ARG
+	)
+);
+
+>>>>>>> v3.18
 /*
  * Tracing for API calls that drivers call.
  */
@@ -1811,6 +2066,36 @@ TRACE_EVENT(api_eosp,
 	)
 );
 
+<<<<<<< HEAD
+=======
+TRACE_EVENT(api_sta_set_buffered,
+	TP_PROTO(struct ieee80211_local *local,
+		 struct ieee80211_sta *sta,
+		 u8 tid, bool buffered),
+
+	TP_ARGS(local, sta, tid, buffered),
+
+	TP_STRUCT__entry(
+		LOCAL_ENTRY
+		STA_ENTRY
+		__field(u8, tid)
+		__field(bool, buffered)
+	),
+
+	TP_fast_assign(
+		LOCAL_ASSIGN;
+		STA_ASSIGN;
+		__entry->tid = tid;
+		__entry->buffered = buffered;
+	),
+
+	TP_printk(
+		LOCAL_PR_FMT STA_PR_FMT " tid:%d buffered:%d",
+		LOCAL_PR_ARG, STA_PR_ARG, __entry->tid, __entry->buffered
+	)
+);
+
+>>>>>>> v3.18
 /*
  * Tracing for internal functions
  * (which may also be called in response to driver calls)
@@ -1906,6 +2191,35 @@ TRACE_EVENT(api_radar_detected,
 	)
 );
 
+<<<<<<< HEAD
+=======
+TRACE_EVENT(drv_channel_switch_beacon,
+	TP_PROTO(struct ieee80211_local *local,
+		 struct ieee80211_sub_if_data *sdata,
+		 struct cfg80211_chan_def *chandef),
+
+	TP_ARGS(local, sdata, chandef),
+
+	TP_STRUCT__entry(
+		LOCAL_ENTRY
+		VIF_ENTRY
+		CHANDEF_ENTRY
+	),
+
+	TP_fast_assign(
+		LOCAL_ASSIGN;
+		VIF_ASSIGN;
+		CHANDEF_ASSIGN(chandef);
+	),
+
+	TP_printk(
+		LOCAL_PR_FMT VIF_PR_FMT " channel switch to " CHANDEF_PR_FMT,
+		LOCAL_PR_ARG, VIF_PR_ARG, CHANDEF_PR_ARG
+	)
+);
+
+
+>>>>>>> v3.18
 #ifdef CONFIG_MAC80211_MESSAGE_TRACING
 #undef TRACE_SYSTEM
 #define TRACE_SYSTEM mac80211_msg

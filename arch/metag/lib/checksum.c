@@ -124,7 +124,10 @@ __wsum csum_partial(const void *buff, int len, __wsum wsum)
 		result += 1;
 	return (__force __wsum)result;
 }
+<<<<<<< HEAD
 EXPORT_SYMBOL(csum_partial);
+=======
+>>>>>>> v3.18
 
 /*
  * this routine is used for miscellaneous IP-like checksums, mainly

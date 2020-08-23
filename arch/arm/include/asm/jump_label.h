@@ -4,7 +4,10 @@
 #ifdef __KERNEL__
 
 #include <linux/types.h>
+<<<<<<< HEAD
 #include <asm/system.h>
+=======
+>>>>>>> v3.18
 
 #define JUMP_LABEL_NOP_SIZE 4
 

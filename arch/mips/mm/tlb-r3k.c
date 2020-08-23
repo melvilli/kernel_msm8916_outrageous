@@ -10,7 +10,10 @@
  * Copyright (C) 2002  Ralf Baechle
  * Copyright (C) 2002  Maciej W. Rozycki
  */
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/sched.h>
 #include <linux/smp.h>
@@ -159,7 +162,11 @@ void local_flush_tlb_page(struct vm_area_struct *vma, unsigned long page)
 {
 	int cpu = smp_processor_id();
 
+<<<<<<< HEAD
 	if (!vma || cpu_context(cpu, vma->vm_mm) != 0) {
+=======
+	if (cpu_context(cpu, vma->vm_mm) != 0) {
+>>>>>>> v3.18
 		unsigned long flags;
 		int oldpid, newpid, idx;
 
@@ -276,7 +283,11 @@ void add_wired_entry(unsigned long entrylo0, unsigned long entrylo1,
 	}
 }
 
+<<<<<<< HEAD
 void __cpuinit tlb_init(void)
+=======
+void tlb_init(void)
+>>>>>>> v3.18
 {
 	local_flush_tlb_all();
 

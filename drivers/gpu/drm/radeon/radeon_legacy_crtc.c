@@ -331,8 +331,11 @@ static void radeon_crtc_dpms(struct drm_crtc *crtc, int mode)
 			WREG32_P(RADEON_CRTC_EXT_CNTL, crtc_ext_cntl, ~(mask | crtc_ext_cntl));
 		}
 		drm_vblank_post_modeset(dev, radeon_crtc->crtc_id);
+<<<<<<< HEAD
 		/* Make sure vblank interrupt is still enabled if needed */
 		radeon_irq_set(rdev);
+=======
+>>>>>>> v3.18
 		radeon_crtc_load_lut(crtc);
 		break;
 	case DRM_MODE_DPMS_STANDBY:
@@ -387,7 +390,11 @@ int radeon_crtc_do_set_base(struct drm_crtc *crtc,
 
 	DRM_DEBUG_KMS("\n");
 	/* no fb bound */
+<<<<<<< HEAD
 	if (!atomic && !crtc->fb) {
+=======
+	if (!atomic && !crtc->primary->fb) {
+>>>>>>> v3.18
 		DRM_DEBUG_KMS("No FB bound\n");
 		return 0;
 	}
@@ -397,8 +404,13 @@ int radeon_crtc_do_set_base(struct drm_crtc *crtc,
 		target_fb = fb;
 	}
 	else {
+<<<<<<< HEAD
 		radeon_fb = to_radeon_framebuffer(crtc->fb);
 		target_fb = crtc->fb;
+=======
+		radeon_fb = to_radeon_framebuffer(crtc->primary->fb);
+		target_fb = crtc->primary->fb;
+>>>>>>> v3.18
 	}
 
 	switch (target_fb->bits_per_pixel) {
@@ -446,7 +458,11 @@ retry:
 		 * We don't shutdown the display controller because new buffer
 		 * will end up in same spot.
 		 */
+<<<<<<< HEAD
 		if (!atomic && fb && fb != crtc->fb) {
+=======
+		if (!atomic && fb && fb != crtc->primary->fb) {
+>>>>>>> v3.18
 			struct radeon_bo *old_rbo;
 			unsigned long nsize, osize;
 
@@ -557,7 +573,11 @@ retry:
 	WREG32(RADEON_CRTC_OFFSET + radeon_crtc->crtc_offset, crtc_offset);
 	WREG32(RADEON_CRTC_PITCH + radeon_crtc->crtc_offset, crtc_pitch);
 
+<<<<<<< HEAD
 	if (!atomic && fb && fb != crtc->fb) {
+=======
+	if (!atomic && fb && fb != crtc->primary->fb) {
+>>>>>>> v3.18
 		radeon_fb = to_radeon_framebuffer(fb);
 		rbo = gem_to_radeon_bo(radeon_fb->obj);
 		r = radeon_bo_reserve(rbo, false);
@@ -601,7 +621,11 @@ static bool radeon_set_crtc_timing(struct drm_crtc *crtc, struct drm_display_mod
 		}
 	}
 
+<<<<<<< HEAD
 	switch (crtc->fb->bits_per_pixel) {
+=======
+	switch (crtc->primary->fb->bits_per_pixel) {
+>>>>>>> v3.18
 	case 8:
 		format = 2;
 		break;
@@ -1086,6 +1110,29 @@ static void radeon_crtc_commit(struct drm_crtc *crtc)
 	}
 }
 
+<<<<<<< HEAD
+=======
+static void radeon_crtc_disable(struct drm_crtc *crtc)
+{
+	radeon_crtc_dpms(crtc, DRM_MODE_DPMS_OFF);
+	if (crtc->primary->fb) {
+		int r;
+		struct radeon_framebuffer *radeon_fb;
+		struct radeon_bo *rbo;
+
+		radeon_fb = to_radeon_framebuffer(crtc->primary->fb);
+		rbo = gem_to_radeon_bo(radeon_fb->obj);
+		r = radeon_bo_reserve(rbo, false);
+		if (unlikely(r))
+			DRM_ERROR("failed to reserve rbo before unpin\n");
+		else {
+			radeon_bo_unpin(rbo);
+			radeon_bo_unreserve(rbo);
+		}
+	}
+}
+
+>>>>>>> v3.18
 static const struct drm_crtc_helper_funcs legacy_helper_funcs = {
 	.dpms = radeon_crtc_dpms,
 	.mode_fixup = radeon_crtc_mode_fixup,
@@ -1095,6 +1142,10 @@ static const struct drm_crtc_helper_funcs legacy_helper_funcs = {
 	.prepare = radeon_crtc_prepare,
 	.commit = radeon_crtc_commit,
 	.load_lut = radeon_crtc_load_lut,
+<<<<<<< HEAD
+=======
+	.disable = radeon_crtc_disable
+>>>>>>> v3.18
 };
 
 

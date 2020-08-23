@@ -9,7 +9,11 @@
 #define SCxSR_PER(port)		(((port)->type == PORT_SCI) ? SCI_PER    : SCIF_PER)
 #define SCxSR_BRK(port)		(((port)->type == PORT_SCI) ? 0x00       : SCIF_BRK)
 
+<<<<<<< HEAD
 #define SCxSR_ERRORS(port)	(to_sci_port(port)->cfg->error_mask)
+=======
+#define SCxSR_ERRORS(port)	(to_sci_port(port)->error_mask)
+>>>>>>> v3.18
 
 #if defined(CONFIG_CPU_SUBTYPE_SH7705) || \
     defined(CONFIG_CPU_SUBTYPE_SH7720) || \

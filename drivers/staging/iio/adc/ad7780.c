@@ -90,17 +90,26 @@ static int ad7780_read_raw(struct iio_dev *indio_dev,
 			   long m)
 {
 	struct ad7780_state *st = iio_priv(indio_dev);
+<<<<<<< HEAD
 	unsigned long scale_uv;
+=======
+>>>>>>> v3.18
 
 	switch (m) {
 	case IIO_CHAN_INFO_RAW:
 		return ad_sigma_delta_single_conversion(indio_dev, chan, val);
 	case IIO_CHAN_INFO_SCALE:
+<<<<<<< HEAD
 		scale_uv = (st->int_vref_mv * 100000 * st->gain)
 			>> (chan->scan_type.realbits - 1);
 		*val =  scale_uv / 100000;
 		*val2 = (scale_uv % 100000) * 10;
 		return IIO_VAL_INT_PLUS_MICRO;
+=======
+		*val = st->int_vref_mv * st->gain;
+		*val2 = chan->scan_type.realbits - 1;
+		return IIO_VAL_FRACTIONAL_LOG2;
+>>>>>>> v3.18
 	case IIO_CHAN_INFO_OFFSET:
 		*val -= (1 << (chan->scan_type.realbits - 1));
 		return IIO_VAL_INT;
@@ -171,7 +180,11 @@ static int ad7780_probe(struct spi_device *spi)
 	struct iio_dev *indio_dev;
 	int ret, voltage_uv = 0;
 
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*st));
+=======
+	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
+>>>>>>> v3.18
 	if (indio_dev == NULL)
 		return -ENOMEM;
 
@@ -180,11 +193,19 @@ static int ad7780_probe(struct spi_device *spi)
 
 	ad_sd_init(&st->sd, indio_dev, spi, &ad7780_sigma_delta_info);
 
+<<<<<<< HEAD
 	st->reg = regulator_get(&spi->dev, "vcc");
 	if (!IS_ERR(st->reg)) {
 		ret = regulator_enable(st->reg);
 		if (ret)
 			goto error_put_reg;
+=======
+	st->reg = devm_regulator_get(&spi->dev, "vcc");
+	if (!IS_ERR(st->reg)) {
+		ret = regulator_enable(st->reg);
+		if (ret)
+			return ret;
+>>>>>>> v3.18
 
 		voltage_uv = regulator_get_voltage(st->reg);
 	}
@@ -210,8 +231,13 @@ static int ad7780_probe(struct spi_device *spi)
 
 	if (pdata && gpio_is_valid(pdata->gpio_pdrst)) {
 
+<<<<<<< HEAD
 		ret = gpio_request_one(pdata->gpio_pdrst, GPIOF_OUT_INIT_LOW,
 			       "AD7780 /PDRST");
+=======
+		ret = devm_gpio_request_one(&spi->dev, pdata->gpio_pdrst,
+					GPIOF_OUT_INIT_LOW, "AD7780 /PDRST");
+>>>>>>> v3.18
 		if (ret) {
 			dev_err(&spi->dev, "failed to request GPIO PDRST\n");
 			goto error_disable_reg;
@@ -223,7 +249,11 @@ static int ad7780_probe(struct spi_device *spi)
 
 	ret = ad_sd_setup_buffer_and_trigger(indio_dev);
 	if (ret)
+<<<<<<< HEAD
 		goto error_free_gpio;
+=======
+		goto error_disable_reg;
+>>>>>>> v3.18
 
 	ret = iio_device_register(indio_dev);
 	if (ret)
@@ -233,6 +263,7 @@ static int ad7780_probe(struct spi_device *spi)
 
 error_cleanup_buffer_and_trigger:
 	ad_sd_cleanup_buffer_and_trigger(indio_dev);
+<<<<<<< HEAD
 error_free_gpio:
 	if (pdata && gpio_is_valid(pdata->gpio_pdrst))
 		gpio_free(pdata->gpio_pdrst);
@@ -244,6 +275,11 @@ error_put_reg:
 		regulator_put(st->reg);
 
 	iio_device_free(indio_dev);
+=======
+error_disable_reg:
+	if (!IS_ERR(st->reg))
+		regulator_disable(st->reg);
+>>>>>>> v3.18
 
 	return ret;
 }
@@ -256,6 +292,7 @@ static int ad7780_remove(struct spi_device *spi)
 	iio_device_unregister(indio_dev);
 	ad_sd_cleanup_buffer_and_trigger(indio_dev);
 
+<<<<<<< HEAD
 	if (gpio_is_valid(st->powerdown_gpio))
 		gpio_free(st->powerdown_gpio);
 
@@ -264,6 +301,10 @@ static int ad7780_remove(struct spi_device *spi)
 		regulator_put(st->reg);
 	}
 	iio_device_free(indio_dev);
+=======
+	if (!IS_ERR(st->reg))
+		regulator_disable(st->reg);
+>>>>>>> v3.18
 
 	return 0;
 }

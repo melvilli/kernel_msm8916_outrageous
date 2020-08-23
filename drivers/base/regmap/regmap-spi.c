@@ -12,7 +12,10 @@
 
 #include <linux/regmap.h>
 #include <linux/spi/spi.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/module.h>
 
 #include "internal.h"
@@ -73,7 +76,12 @@ static int regmap_spi_async_write(void *context,
 
 	spi_message_init(&async->m);
 	spi_message_add_tail(&async->t[0], &async->m);
+<<<<<<< HEAD
 	spi_message_add_tail(&async->t[1], &async->m);
+=======
+	if (val)
+		spi_message_add_tail(&async->t[1], &async->m);
+>>>>>>> v3.18
 
 	async->m.complete = regmap_spi_complete;
 	async->m.context = async;
@@ -109,6 +117,11 @@ static struct regmap_bus regmap_spi = {
 	.async_alloc = regmap_spi_async_alloc,
 	.read = regmap_spi_read,
 	.read_flag_mask = 0x80,
+<<<<<<< HEAD
+=======
+	.reg_format_endian_default = REGMAP_ENDIAN_BIG,
+	.val_format_endian_default = REGMAP_ENDIAN_BIG,
+>>>>>>> v3.18
 };
 
 /**

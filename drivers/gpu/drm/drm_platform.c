@@ -3,7 +3,11 @@
  *
  * Copyright 2003 José Fonseca.
  * Copyright 2003 Leif Delgass.
+<<<<<<< HEAD
  * Copyright (c) 2009, The Linux Foundation.
+=======
+ * Copyright (c) 2009, Code Aurora Forum.
+>>>>>>> v3.18
  * All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -28,7 +32,11 @@
 #include <linux/export.h>
 #include <drm/drmP.h>
 
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> v3.18
  * Register.
  *
  * \param platdev - Platform device struture
@@ -39,19 +47,29 @@
  * Try and register, if we fail to register, backout previous work.
  */
 
+<<<<<<< HEAD
 int drm_get_platform_dev(struct platform_device *platdev,
 			 struct drm_driver *driver)
+=======
+static int drm_get_platform_dev(struct platform_device *platdev,
+				struct drm_driver *driver)
+>>>>>>> v3.18
 {
 	struct drm_device *dev;
 	int ret;
 
 	DRM_DEBUG("\n");
 
+<<<<<<< HEAD
 	dev = kzalloc(sizeof(*dev), GFP_KERNEL);
+=======
+	dev = drm_dev_alloc(driver, &platdev->dev);
+>>>>>>> v3.18
 	if (!dev)
 		return -ENOMEM;
 
 	dev->platformdev = platdev;
+<<<<<<< HEAD
 	dev->dev = &platdev->dev;
 
 	mutex_lock(&drm_global_mutex);
@@ -90,6 +108,12 @@ int drm_get_platform_dev(struct platform_device *platdev,
 	list_add_tail(&dev->driver_item, &driver->device_list);
 
 	mutex_unlock(&drm_global_mutex);
+=======
+
+	ret = drm_dev_register(dev, 0);
+	if (ret)
+		goto err_free;
+>>>>>>> v3.18
 
 	DRM_INFO("Initialized %s %d.%d.%d %s on minor %d\n",
 		 driver->name, driver->major, driver->minor, driver->patchlevel,
@@ -97,6 +121,7 @@ int drm_get_platform_dev(struct platform_device *platdev,
 
 	return 0;
 
+<<<<<<< HEAD
 err_g3:
 	drm_put_minor(&dev->primary);
 err_g2:
@@ -182,10 +207,47 @@ static struct drm_bus drm_platform_bus = {
  * after the initialization for driver customization.
  */
 
+=======
+err_free:
+	drm_dev_unref(dev);
+	return ret;
+}
+
+int drm_platform_set_busid(struct drm_device *dev, struct drm_master *master)
+{
+	int id;
+
+	id = dev->platformdev->id;
+	if (id < 0)
+		id = 0;
+
+	master->unique = kasprintf(GFP_KERNEL, "platform:%s:%02d",
+						dev->platformdev->name, id);
+	if (!master->unique)
+		return -ENOMEM;
+
+	master->unique_len = strlen(master->unique);
+	return 0;
+}
+EXPORT_SYMBOL(drm_platform_set_busid);
+
+/**
+ * drm_platform_init - Register a platform device with the DRM subsystem
+ * @driver: DRM device driver
+ * @platform_device: platform device to register
+ *
+ * Registers the specified DRM device driver and platform device with the DRM
+ * subsystem, initializing a drm_device structure and calling the driver's
+ * .load() function.
+ *
+ * Return: 0 on success or a negative error code on failure.
+ */
+>>>>>>> v3.18
 int drm_platform_init(struct drm_driver *driver, struct platform_device *platform_device)
 {
 	DRM_DEBUG("\n");
 
+<<<<<<< HEAD
 	driver->kdriver.platform_device = platform_device;
 	driver->bus = &drm_platform_bus;
 	INIT_LIST_HEAD(&driver->device_list);
@@ -203,3 +265,8 @@ void drm_platform_exit(struct drm_driver *driver, struct platform_device *platfo
 	DRM_INFO("Module unloaded\n");
 }
 EXPORT_SYMBOL(drm_platform_exit);
+=======
+	return drm_get_platform_dev(platform_device, driver);
+}
+EXPORT_SYMBOL(drm_platform_init);
+>>>>>>> v3.18

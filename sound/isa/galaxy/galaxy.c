@@ -506,6 +506,7 @@ static int snd_galaxy_probe(struct device *dev, unsigned int n)
 	u8 type;
 	int err;
 
+<<<<<<< HEAD
 	err = snd_card_create(index[n], id[n], THIS_MODULE, sizeof *galaxy,
 			      &card);
 	if (err < 0)
@@ -513,6 +514,13 @@ static int snd_galaxy_probe(struct device *dev, unsigned int n)
 
 	snd_card_set_dev(card, dev);
 
+=======
+	err = snd_card_new(dev, index[n], id[n], THIS_MODULE,
+			   sizeof(*galaxy), &card);
+	if (err < 0)
+		return err;
+
+>>>>>>> v3.18
 	card->private_free = snd_galaxy_free;
 	galaxy = card->private_data;
 
@@ -623,7 +631,10 @@ error:
 static int snd_galaxy_remove(struct device *dev, unsigned int n)
 {
 	snd_card_free(dev_get_drvdata(dev));
+<<<<<<< HEAD
 	dev_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 	return 0;
 }
 

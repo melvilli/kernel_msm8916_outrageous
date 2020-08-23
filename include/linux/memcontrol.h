@@ -30,9 +30,27 @@ struct page;
 struct mm_struct;
 struct kmem_cache;
 
+<<<<<<< HEAD
 /* Stats that can be updated by kernel. */
 enum mem_cgroup_page_stat_item {
 	MEMCG_NR_FILE_MAPPED, /* # of pages charged as file rss */
+=======
+/*
+ * The corresponding mem_cgroup_stat_names is defined in mm/memcontrol.c,
+ * These two lists should keep in accord with each other.
+ */
+enum mem_cgroup_stat_index {
+	/*
+	 * For MEM_CONTAINER_TYPE_ALL, usage = pagecache + rss.
+	 */
+	MEM_CGROUP_STAT_CACHE,		/* # of pages charged as cache */
+	MEM_CGROUP_STAT_RSS,		/* # of pages charged as anon rss */
+	MEM_CGROUP_STAT_RSS_HUGE,	/* # of pages charged as anon huge */
+	MEM_CGROUP_STAT_FILE_MAPPED,	/* # of pages charged as file rss */
+	MEM_CGROUP_STAT_WRITEBACK,	/* # of pages under writeback */
+	MEM_CGROUP_STAT_SWAP,		/* # of pages, swapped out */
+	MEM_CGROUP_STAT_NSTATS,
+>>>>>>> v3.18
 };
 
 struct mem_cgroup_reclaim_cookie {
@@ -42,6 +60,7 @@ struct mem_cgroup_reclaim_cookie {
 };
 
 #ifdef CONFIG_MEMCG
+<<<<<<< HEAD
 /*
  * All "charge" functions with gfp_mask should use GFP_KERNEL or
  * (gfp_mask & GFP_RECLAIM_MASK). In current implementatin, memcg doesn't
@@ -64,10 +83,23 @@ extern void mem_cgroup_cancel_charge_swapin(struct mem_cgroup *memcg);
 
 extern int mem_cgroup_cache_charge(struct page *page, struct mm_struct *mm,
 					gfp_t gfp_mask);
+=======
+int mem_cgroup_try_charge(struct page *page, struct mm_struct *mm,
+			  gfp_t gfp_mask, struct mem_cgroup **memcgp);
+void mem_cgroup_commit_charge(struct page *page, struct mem_cgroup *memcg,
+			      bool lrucare);
+void mem_cgroup_cancel_charge(struct page *page, struct mem_cgroup *memcg);
+void mem_cgroup_uncharge(struct page *page);
+void mem_cgroup_uncharge_list(struct list_head *page_list);
+
+void mem_cgroup_migrate(struct page *oldpage, struct page *newpage,
+			bool lrucare);
+>>>>>>> v3.18
 
 struct lruvec *mem_cgroup_zone_lruvec(struct zone *, struct mem_cgroup *);
 struct lruvec *mem_cgroup_page_lruvec(struct page *, struct zone *);
 
+<<<<<<< HEAD
 /* For coalescing uncharge for reducing memcg' overhead*/
 extern void mem_cgroup_uncharge_start(void);
 extern void mem_cgroup_uncharge_end(void);
@@ -85,6 +117,18 @@ extern struct mem_cgroup *try_get_mem_cgroup_from_mm(struct mm_struct *mm);
 
 extern struct mem_cgroup *parent_mem_cgroup(struct mem_cgroup *memcg);
 extern struct mem_cgroup *mem_cgroup_from_cont(struct cgroup *cont);
+=======
+bool __mem_cgroup_same_or_subtree(const struct mem_cgroup *root_memcg,
+				  struct mem_cgroup *memcg);
+bool task_in_mem_cgroup(struct task_struct *task,
+			const struct mem_cgroup *memcg);
+
+extern struct mem_cgroup *try_get_mem_cgroup_from_page(struct page *page);
+extern struct mem_cgroup *mem_cgroup_from_task(struct task_struct *p);
+
+extern struct mem_cgroup *parent_mem_cgroup(struct mem_cgroup *memcg);
+extern struct mem_cgroup *mem_cgroup_from_css(struct cgroup_subsys_state *css);
+>>>>>>> v3.18
 
 static inline
 bool mm_match_cgroup(const struct mm_struct *mm, const struct mem_cgroup *memcg)
@@ -101,12 +145,15 @@ bool mm_match_cgroup(const struct mm_struct *mm, const struct mem_cgroup *memcg)
 
 extern struct cgroup_subsys_state *mem_cgroup_css(struct mem_cgroup *memcg);
 
+<<<<<<< HEAD
 extern void
 mem_cgroup_prepare_migration(struct page *page, struct page *newpage,
 			     struct mem_cgroup **memcgp);
 extern void mem_cgroup_end_migration(struct mem_cgroup *memcg,
 	struct page *oldpage, struct page *newpage, bool migration_ok);
 
+=======
+>>>>>>> v3.18
 struct mem_cgroup *mem_cgroup_iter(struct mem_cgroup *,
 				   struct mem_cgroup *,
 				   struct mem_cgroup_reclaim_cookie *);
@@ -121,8 +168,11 @@ unsigned long mem_cgroup_get_lru_size(struct lruvec *lruvec, enum lru_list);
 void mem_cgroup_update_lru_size(struct lruvec *, enum lru_list, int);
 extern void mem_cgroup_print_oom_info(struct mem_cgroup *memcg,
 					struct task_struct *p);
+<<<<<<< HEAD
 extern void mem_cgroup_replace_page_cache(struct page *oldpage,
 					struct page *newpage);
+=======
+>>>>>>> v3.18
 
 static inline void mem_cgroup_oom_enable(void)
 {
@@ -149,11 +199,16 @@ extern int do_swap_account;
 
 static inline bool mem_cgroup_disabled(void)
 {
+<<<<<<< HEAD
 	if (mem_cgroup_subsys.disabled)
+=======
+	if (memory_cgrp_subsys.disabled)
+>>>>>>> v3.18
 		return true;
 	return false;
 }
 
+<<<<<<< HEAD
 void __mem_cgroup_begin_update_page_stat(struct page *page, bool *locked,
 					 unsigned long *flags);
 
@@ -196,6 +251,25 @@ static inline void mem_cgroup_dec_page_stat(struct page *page,
 					    enum mem_cgroup_page_stat_item idx)
 {
 	mem_cgroup_update_page_stat(page, idx, -1);
+=======
+struct mem_cgroup *mem_cgroup_begin_page_stat(struct page *page, bool *locked,
+					      unsigned long *flags);
+void mem_cgroup_end_page_stat(struct mem_cgroup *memcg, bool locked,
+			      unsigned long flags);
+void mem_cgroup_update_page_stat(struct mem_cgroup *memcg,
+				 enum mem_cgroup_stat_index idx, int val);
+
+static inline void mem_cgroup_inc_page_stat(struct mem_cgroup *memcg,
+					    enum mem_cgroup_stat_index idx)
+{
+	mem_cgroup_update_page_stat(memcg, idx, 1);
+}
+
+static inline void mem_cgroup_dec_page_stat(struct mem_cgroup *memcg,
+					    enum mem_cgroup_stat_index idx)
+{
+	mem_cgroup_update_page_stat(memcg, idx, -1);
+>>>>>>> v3.18
 }
 
 unsigned long mem_cgroup_soft_limit_reclaim(struct zone *zone, int order,
@@ -221,6 +295,7 @@ void mem_cgroup_print_bad_page(struct page *page);
 #else /* CONFIG_MEMCG */
 struct mem_cgroup;
 
+<<<<<<< HEAD
 static inline int mem_cgroup_newpage_charge(struct page *page,
 					struct mm_struct *mm, gfp_t gfp_mask)
 {
@@ -261,6 +336,38 @@ static inline void mem_cgroup_uncharge_page(struct page *page)
 }
 
 static inline void mem_cgroup_uncharge_cache_page(struct page *page)
+=======
+static inline int mem_cgroup_try_charge(struct page *page, struct mm_struct *mm,
+					gfp_t gfp_mask,
+					struct mem_cgroup **memcgp)
+{
+	*memcgp = NULL;
+	return 0;
+}
+
+static inline void mem_cgroup_commit_charge(struct page *page,
+					    struct mem_cgroup *memcg,
+					    bool lrucare)
+{
+}
+
+static inline void mem_cgroup_cancel_charge(struct page *page,
+					    struct mem_cgroup *memcg)
+{
+}
+
+static inline void mem_cgroup_uncharge(struct page *page)
+{
+}
+
+static inline void mem_cgroup_uncharge_list(struct list_head *page_list)
+{
+}
+
+static inline void mem_cgroup_migrate(struct page *oldpage,
+				      struct page *newpage,
+				      bool lrucare)
+>>>>>>> v3.18
 {
 }
 
@@ -281,21 +388,31 @@ static inline struct mem_cgroup *try_get_mem_cgroup_from_page(struct page *page)
 	return NULL;
 }
 
+<<<<<<< HEAD
 static inline struct mem_cgroup *try_get_mem_cgroup_from_mm(struct mm_struct *mm)
 {
 	return NULL;
 }
 
+=======
+>>>>>>> v3.18
 static inline bool mm_match_cgroup(struct mm_struct *mm,
 		struct mem_cgroup *memcg)
 {
 	return true;
 }
 
+<<<<<<< HEAD
 static inline int task_in_mem_cgroup(struct task_struct *task,
 				     const struct mem_cgroup *memcg)
 {
 	return 1;
+=======
+static inline bool task_in_mem_cgroup(struct task_struct *task,
+				      const struct mem_cgroup *memcg)
+{
+	return true;
+>>>>>>> v3.18
 }
 
 static inline struct cgroup_subsys_state
@@ -304,6 +421,7 @@ static inline struct cgroup_subsys_state
 	return NULL;
 }
 
+<<<<<<< HEAD
 static inline void
 mem_cgroup_prepare_migration(struct page *page, struct page *newpage,
 			     struct mem_cgroup **memcgp)
@@ -315,6 +433,8 @@ static inline void mem_cgroup_end_migration(struct mem_cgroup *memcg,
 {
 }
 
+=======
+>>>>>>> v3.18
 static inline struct mem_cgroup *
 mem_cgroup_iter(struct mem_cgroup *root,
 		struct mem_cgroup *prev,
@@ -356,6 +476,7 @@ mem_cgroup_print_oom_info(struct mem_cgroup *memcg, struct task_struct *p)
 {
 }
 
+<<<<<<< HEAD
 static inline void mem_cgroup_begin_update_page_stat(struct page *page,
 					bool *locked, unsigned long *flags)
 {
@@ -363,6 +484,16 @@ static inline void mem_cgroup_begin_update_page_stat(struct page *page,
 
 static inline void mem_cgroup_end_update_page_stat(struct page *page,
 					bool *locked, unsigned long *flags)
+=======
+static inline struct mem_cgroup *mem_cgroup_begin_page_stat(struct page *page,
+					bool *locked, unsigned long *flags)
+{
+	return NULL;
+}
+
+static inline void mem_cgroup_end_page_stat(struct mem_cgroup *memcg,
+					bool locked, unsigned long flags)
+>>>>>>> v3.18
 {
 }
 
@@ -384,6 +515,7 @@ static inline bool mem_cgroup_oom_synchronize(bool wait)
 	return false;
 }
 
+<<<<<<< HEAD
 static inline void mem_cgroup_inc_page_stat(struct page *page,
 					    enum mem_cgroup_page_stat_item idx)
 {
@@ -391,6 +523,15 @@ static inline void mem_cgroup_inc_page_stat(struct page *page,
 
 static inline void mem_cgroup_dec_page_stat(struct page *page,
 					    enum mem_cgroup_page_stat_item idx)
+=======
+static inline void mem_cgroup_inc_page_stat(struct mem_cgroup *memcg,
+					    enum mem_cgroup_stat_index idx)
+{
+}
+
+static inline void mem_cgroup_dec_page_stat(struct mem_cgroup *memcg,
+					    enum mem_cgroup_stat_index idx)
+>>>>>>> v3.18
 {
 }
 
@@ -410,10 +551,13 @@ static inline
 void mem_cgroup_count_vm_event(struct mm_struct *mm, enum vm_event_item idx)
 {
 }
+<<<<<<< HEAD
 static inline void mem_cgroup_replace_page_cache(struct page *oldpage,
 				struct page *newpage)
 {
 }
+=======
+>>>>>>> v3.18
 #endif /* CONFIG_MEMCG */
 
 #if !defined(CONFIG_MEMCG) || !defined(CONFIG_DEBUG_VM)
@@ -484,19 +628,30 @@ void __memcg_kmem_commit_charge(struct page *page,
 void __memcg_kmem_uncharge_pages(struct page *page, int order);
 
 int memcg_cache_id(struct mem_cgroup *memcg);
+<<<<<<< HEAD
 int memcg_register_cache(struct mem_cgroup *memcg, struct kmem_cache *s,
 			 struct kmem_cache *root_cache);
 void memcg_release_cache(struct kmem_cache *cachep);
 void memcg_cache_list_add(struct mem_cgroup *memcg, struct kmem_cache *cachep);
 
 int memcg_update_cache_size(struct kmem_cache *s, int num_groups);
+=======
+
+>>>>>>> v3.18
 void memcg_update_array_size(int num_groups);
 
 struct kmem_cache *
 __memcg_kmem_get_cache(struct kmem_cache *cachep, gfp_t gfp);
 
+<<<<<<< HEAD
 void mem_cgroup_destroy_cache(struct kmem_cache *cachep);
 void kmem_cache_destroy_memcg_children(struct kmem_cache *s);
+=======
+int __memcg_charge_slab(struct kmem_cache *cachep, gfp_t gfp, int order);
+void __memcg_uncharge_slab(struct kmem_cache *cachep, int order);
+
+int __memcg_cleanup_cache_params(struct kmem_cache *s);
+>>>>>>> v3.18
 
 /**
  * memcg_kmem_newpage_charge: verify if a new kmem allocation is allowed.
@@ -523,7 +678,11 @@ memcg_kmem_newpage_charge(gfp_t gfp, struct mem_cgroup **memcg, int order)
 	 * res_counter_charge_nofail, but we hope those allocations are rare,
 	 * and won't be worth the trouble.
 	 */
+<<<<<<< HEAD
 	if (!(gfp & __GFP_KMEMCG) || (gfp & __GFP_NOFAIL))
+=======
+	if (gfp & __GFP_NOFAIL)
+>>>>>>> v3.18
 		return true;
 	if (in_interrupt() || (!current->mm) || (current->flags & PF_KTHREAD))
 		return true;
@@ -572,6 +731,7 @@ memcg_kmem_commit_charge(struct page *page, struct mem_cgroup *memcg, int order)
  * @cachep: the original global kmem cache
  * @gfp: allocation flags.
  *
+<<<<<<< HEAD
  * This function assumes that the task allocating, which determines the memcg
  * in the page allocator, belongs to the same cgroup throughout the whole
  * process.  Misacounting can happen if the task calls memcg_kmem_get_cache()
@@ -583,6 +743,9 @@ memcg_kmem_commit_charge(struct page *page, struct mem_cgroup *memcg, int order)
  * is the global cache, since the child cache is not yet guaranteed to be
  * ready. This case is also fine, since in this case the GFP_KMEMCG will not be
  * passed and the page allocator will not attempt any cgroup accounting.
+=======
+ * All memory allocated from a per-memcg cache is charged to the owner memcg.
+>>>>>>> v3.18
  */
 static __always_inline struct kmem_cache *
 memcg_kmem_get_cache(struct kmem_cache *cachep, gfp_t gfp)
@@ -627,6 +790,7 @@ static inline int memcg_cache_id(struct mem_cgroup *memcg)
 	return -1;
 }
 
+<<<<<<< HEAD
 static inline int
 memcg_register_cache(struct mem_cgroup *memcg, struct kmem_cache *s,
 		     struct kmem_cache *root_cache)
@@ -643,15 +807,20 @@ static inline void memcg_cache_list_add(struct mem_cgroup *memcg,
 {
 }
 
+=======
+>>>>>>> v3.18
 static inline struct kmem_cache *
 memcg_kmem_get_cache(struct kmem_cache *cachep, gfp_t gfp)
 {
 	return cachep;
 }
+<<<<<<< HEAD
 
 static inline void kmem_cache_destroy_memcg_children(struct kmem_cache *s)
 {
 }
+=======
+>>>>>>> v3.18
 #endif /* CONFIG_MEMCG_KMEM */
 #endif /* _LINUX_MEMCONTROL_H */
 

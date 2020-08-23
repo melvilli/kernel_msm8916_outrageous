@@ -105,5 +105,9 @@ static const struct ethtool_ops ipoib_ethtool_ops = {
 
 void ipoib_set_ethtool_ops(struct net_device *dev)
 {
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(dev, &ipoib_ethtool_ops);
+=======
+	dev->ethtool_ops = &ipoib_ethtool_ops;
+>>>>>>> v3.18
 }

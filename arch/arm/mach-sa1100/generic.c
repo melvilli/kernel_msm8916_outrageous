@@ -31,7 +31,10 @@
 
 #include <mach/hardware.h>
 #include <mach/irqs.h>
+<<<<<<< HEAD
 #include <mach/reset.h>
+=======
+>>>>>>> v3.18
 
 #include "generic.h"
 
@@ -43,6 +46,7 @@ EXPORT_SYMBOL(reset_status);
 /*
  * This table is setup for a 3.6864MHz Crystal.
  */
+<<<<<<< HEAD
 static const unsigned short cclk_frequency_100khz[NR_FREQS] = {
 	 590,	/*  59.0 MHz */
 	 737,	/*  73.7 MHz */
@@ -106,11 +110,37 @@ int sa11x0_verify_speed(struct cpufreq_policy *policy)
 	return 0;
 }
 
+=======
+struct cpufreq_frequency_table sa11x0_freq_table[NR_FREQS+1] = {
+	{ .frequency = 59000,	/*  59.0 MHz */},
+	{ .frequency = 73700,	/*  73.7 MHz */},
+	{ .frequency = 88500,	/*  88.5 MHz */},
+	{ .frequency = 103200,	/* 103.2 MHz */},
+	{ .frequency = 118000,	/* 118.0 MHz */},
+	{ .frequency = 132700,	/* 132.7 MHz */},
+	{ .frequency = 147500,	/* 147.5 MHz */},
+	{ .frequency = 162200,	/* 162.2 MHz */},
+	{ .frequency = 176900,	/* 176.9 MHz */},
+	{ .frequency = 191700,	/* 191.7 MHz */},
+	{ .frequency = 206400,	/* 206.4 MHz */},
+	{ .frequency = 221200,	/* 221.2 MHz */},
+	{ .frequency = 235900,	/* 235.9 MHz */},
+	{ .frequency = 250700,	/* 250.7 MHz */},
+	{ .frequency = 265400,	/* 265.4 MHz */},
+	{ .frequency = 280200,	/* 280.2 MHz */},
+	{ .frequency = CPUFREQ_TABLE_END, },
+};
+
+>>>>>>> v3.18
 unsigned int sa11x0_getspeed(unsigned int cpu)
 {
 	if (cpu)
 		return 0;
+<<<<<<< HEAD
 	return cclk_frequency_100khz[PPCR & 0xf] * 100;
+=======
+	return sa11x0_freq_table[PPCR & 0xf].frequency;
+>>>>>>> v3.18
 }
 
 /*
@@ -135,7 +165,10 @@ static void sa1100_power_off(void)
 
 void sa11x0_restart(enum reboot_mode mode, const char *cmd)
 {
+<<<<<<< HEAD
 	clear_reset_status(RESET_STATUS_ALL);
+=======
+>>>>>>> v3.18
 	if (mode == REBOOT_SOFT) {
 		/* Jump into ROM at address 0 */
 		soft_restart(0);

@@ -5,7 +5,11 @@
  *****************************************************************************/
 
 /*
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -130,10 +134,30 @@ void *acpi_ut_allocate_and_track(acpi_size size,
 	struct acpi_debug_mem_block *allocation;
 	acpi_status status;
 
+<<<<<<< HEAD
 	allocation =
 	    acpi_ut_allocate(size + sizeof(struct acpi_debug_mem_header),
 			     component, module, line);
 	if (!allocation) {
+=======
+	/* Check for an inadvertent size of zero bytes */
+
+	if (!size) {
+		ACPI_WARNING((module, line,
+			      "Attempt to allocate zero bytes, allocating 1 byte"));
+		size = 1;
+	}
+
+	allocation =
+	    acpi_os_allocate(size + sizeof(struct acpi_debug_mem_header));
+	if (!allocation) {
+
+		/* Report allocation error */
+
+		ACPI_WARNING((module, line,
+			      "Could not allocate size %u", (u32)size));
+
+>>>>>>> v3.18
 		return (NULL);
 	}
 
@@ -179,9 +203,23 @@ void *acpi_ut_allocate_zeroed_and_track(acpi_size size,
 	struct acpi_debug_mem_block *allocation;
 	acpi_status status;
 
+<<<<<<< HEAD
 	allocation =
 	    acpi_ut_allocate_zeroed(size + sizeof(struct acpi_debug_mem_header),
 				    component, module, line);
+=======
+	/* Check for an inadvertent size of zero bytes */
+
+	if (!size) {
+		ACPI_WARNING((module, line,
+			      "Attempt to allocate zero bytes, allocating 1 byte"));
+		size = 1;
+	}
+
+	allocation =
+	    acpi_os_allocate_zeroed(size +
+				    sizeof(struct acpi_debug_mem_header));
+>>>>>>> v3.18
 	if (!allocation) {
 
 		/* Report allocation error */
@@ -255,7 +293,12 @@ acpi_ut_free_and_track(void *allocation,
 	}
 
 	acpi_os_free(debug_block);
+<<<<<<< HEAD
 	ACPI_DEBUG_PRINT((ACPI_DB_ALLOCATIONS, "%p freed\n", allocation));
+=======
+	ACPI_DEBUG_PRINT((ACPI_DB_ALLOCATIONS, "%p freed (block %p)\n",
+			  allocation, debug_block));
+>>>>>>> v3.18
 	return_VOID;
 }
 
@@ -409,7 +452,11 @@ acpi_ut_track_allocation(struct acpi_debug_mem_block *allocation,
 		element->next = allocation;
 	}
 
+<<<<<<< HEAD
       unlock_and_exit:
+=======
+unlock_and_exit:
+>>>>>>> v3.18
 	status = acpi_ut_release_mutex(ACPI_MTX_MEMORY);
 	return_ACPI_STATUS(status);
 }
@@ -603,6 +650,10 @@ void acpi_ut_dump_allocations(u32 component, const char *module)
 					switch (ACPI_GET_DESCRIPTOR_TYPE
 						(descriptor)) {
 					case ACPI_DESC_TYPE_OPERAND:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 						if (element->size ==
 						    sizeof(union
 							   acpi_operand_object))
@@ -613,6 +664,10 @@ void acpi_ut_dump_allocations(u32 component, const char *module)
 						break;
 
 					case ACPI_DESC_TYPE_PARSER:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 						if (element->size ==
 						    sizeof(union
 							   acpi_parse_object)) {
@@ -622,6 +677,10 @@ void acpi_ut_dump_allocations(u32 component, const char *module)
 						break;
 
 					case ACPI_DESC_TYPE_NAMED:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 						if (element->size ==
 						    sizeof(struct
 							   acpi_namespace_node))
@@ -632,6 +691,10 @@ void acpi_ut_dump_allocations(u32 component, const char *module)
 						break;
 
 					default:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 						break;
 					}
 
@@ -639,6 +702,10 @@ void acpi_ut_dump_allocations(u32 component, const char *module)
 
 					switch (descriptor_type) {
 					case ACPI_DESC_TYPE_OPERAND:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 						acpi_os_printf
 						    ("%12.12s RefCount 0x%04X\n",
 						     acpi_ut_get_type_name
@@ -649,6 +716,10 @@ void acpi_ut_dump_allocations(u32 component, const char *module)
 						break;
 
 					case ACPI_DESC_TYPE_PARSER:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 						acpi_os_printf
 						    ("AmlOpcode 0x%04hX\n",
 						     descriptor->op.asl.
@@ -656,6 +727,10 @@ void acpi_ut_dump_allocations(u32 component, const char *module)
 						break;
 
 					case ACPI_DESC_TYPE_NAMED:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 						acpi_os_printf("%4.4s\n",
 							       acpi_ut_get_node_name
 							       (&descriptor->
@@ -663,6 +738,10 @@ void acpi_ut_dump_allocations(u32 component, const char *module)
 						break;
 
 					default:
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 						acpi_os_printf("\n");
 						break;
 					}

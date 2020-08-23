@@ -73,6 +73,7 @@ static const u8 GL520_REG_TEMP_MAX_HYST[]	= { 0x06, 0x18 };
 #define GL520_REG_BEEP_MASK		0x10
 #define GL520_REG_BEEP_ENABLE		GL520_REG_CONF
 
+<<<<<<< HEAD
 /*
  * Function declarations
  */
@@ -108,6 +109,12 @@ static struct i2c_driver gl520_driver = {
 /* Client data */
 struct gl520_data {
 	struct device *hwmon_dev;
+=======
+/* Client data */
+struct gl520_data {
+	struct i2c_client *client;
+	const struct attribute_group *groups[3];
+>>>>>>> v3.18
 	struct mutex update_lock;
 	char valid;		/* zero until the following fields are valid */
 	unsigned long last_updated;	/* in jiffies */
@@ -132,6 +139,105 @@ struct gl520_data {
 };
 
 /*
+<<<<<<< HEAD
+=======
+ * Registers 0x07 to 0x0c are word-sized, others are byte-sized
+ * GL520 uses a high-byte first convention
+ */
+static int gl520_read_value(struct i2c_client *client, u8 reg)
+{
+	if ((reg >= 0x07) && (reg <= 0x0c))
+		return i2c_smbus_read_word_swapped(client, reg);
+	else
+		return i2c_smbus_read_byte_data(client, reg);
+}
+
+static int gl520_write_value(struct i2c_client *client, u8 reg, u16 value)
+{
+	if ((reg >= 0x07) && (reg <= 0x0c))
+		return i2c_smbus_write_word_swapped(client, reg, value);
+	else
+		return i2c_smbus_write_byte_data(client, reg, value);
+}
+
+static struct gl520_data *gl520_update_device(struct device *dev)
+{
+	struct gl520_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+	int val, i;
+
+	mutex_lock(&data->update_lock);
+
+	if (time_after(jiffies, data->last_updated + 2 * HZ) || !data->valid) {
+
+		dev_dbg(&client->dev, "Starting gl520sm update\n");
+
+		data->alarms = gl520_read_value(client, GL520_REG_ALARMS);
+		data->beep_mask = gl520_read_value(client, GL520_REG_BEEP_MASK);
+		data->vid = gl520_read_value(client,
+					     GL520_REG_VID_INPUT) & 0x1f;
+
+		for (i = 0; i < 4; i++) {
+			data->in_input[i] = gl520_read_value(client,
+							GL520_REG_IN_INPUT[i]);
+			val = gl520_read_value(client, GL520_REG_IN_LIMIT[i]);
+			data->in_min[i] = val & 0xff;
+			data->in_max[i] = (val >> 8) & 0xff;
+		}
+
+		val = gl520_read_value(client, GL520_REG_FAN_INPUT);
+		data->fan_input[0] = (val >> 8) & 0xff;
+		data->fan_input[1] = val & 0xff;
+
+		val = gl520_read_value(client, GL520_REG_FAN_MIN);
+		data->fan_min[0] = (val >> 8) & 0xff;
+		data->fan_min[1] = val & 0xff;
+
+		data->temp_input[0] = gl520_read_value(client,
+						GL520_REG_TEMP_INPUT[0]);
+		data->temp_max[0] = gl520_read_value(client,
+						GL520_REG_TEMP_MAX[0]);
+		data->temp_max_hyst[0] = gl520_read_value(client,
+						GL520_REG_TEMP_MAX_HYST[0]);
+
+		val = gl520_read_value(client, GL520_REG_FAN_DIV);
+		data->fan_div[0] = (val >> 6) & 0x03;
+		data->fan_div[1] = (val >> 4) & 0x03;
+		data->fan_off = (val >> 2) & 0x01;
+
+		data->alarms &= data->alarm_mask;
+
+		val = gl520_read_value(client, GL520_REG_CONF);
+		data->beep_enable = !((val >> 2) & 1);
+
+		/* Temp1 and Vin4 are the same input */
+		if (data->two_temps) {
+			data->temp_input[1] = gl520_read_value(client,
+						GL520_REG_TEMP_INPUT[1]);
+			data->temp_max[1] = gl520_read_value(client,
+						GL520_REG_TEMP_MAX[1]);
+			data->temp_max_hyst[1] = gl520_read_value(client,
+						GL520_REG_TEMP_MAX_HYST[1]);
+		} else {
+			data->in_input[4] = gl520_read_value(client,
+						GL520_REG_IN_INPUT[4]);
+			data->in_min[4] = gl520_read_value(client,
+						GL520_REG_IN_MIN[4]);
+			data->in_max[4] = gl520_read_value(client,
+						GL520_REG_IN_MAX[4]);
+		}
+
+		data->last_updated = jiffies;
+		data->valid = 1;
+	}
+
+	mutex_unlock(&data->update_lock);
+
+	return data;
+}
+
+/*
+>>>>>>> v3.18
  * Sysfs stuff
  */
 
@@ -191,8 +297,13 @@ static ssize_t get_in_max(struct device *dev, struct device_attribute *attr,
 static ssize_t set_in_min(struct device *dev, struct device_attribute *attr,
 			  const char *buf, size_t count)
 {
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct gl520_data *data = i2c_get_clientdata(client);
+=======
+	struct gl520_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 	int n = to_sensor_dev_attr(attr)->index;
 	u8 r;
 	long v;
@@ -225,8 +336,13 @@ static ssize_t set_in_min(struct device *dev, struct device_attribute *attr,
 static ssize_t set_in_max(struct device *dev, struct device_attribute *attr,
 			  const char *buf, size_t count)
 {
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct gl520_data *data = i2c_get_clientdata(client);
+=======
+	struct gl520_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 	int n = to_sensor_dev_attr(attr)->index;
 	u8 r;
 	long v;
@@ -326,8 +442,13 @@ static ssize_t get_fan_off(struct device *dev, struct device_attribute *attr,
 static ssize_t set_fan_min(struct device *dev, struct device_attribute *attr,
 			   const char *buf, size_t count)
 {
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct gl520_data *data = i2c_get_clientdata(client);
+=======
+	struct gl520_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 	int n = to_sensor_dev_attr(attr)->index;
 	u8 r;
 	unsigned long v;
@@ -365,8 +486,13 @@ static ssize_t set_fan_min(struct device *dev, struct device_attribute *attr,
 static ssize_t set_fan_div(struct device *dev, struct device_attribute *attr,
 			   const char *buf, size_t count)
 {
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct gl520_data *data = i2c_get_clientdata(client);
+=======
+	struct gl520_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 	int n = to_sensor_dev_attr(attr)->index;
 	u8 r;
 	unsigned long v;
@@ -414,8 +540,13 @@ static ssize_t set_fan_div(struct device *dev, struct device_attribute *attr,
 static ssize_t set_fan_off(struct device *dev, struct device_attribute *attr,
 			   const char *buf, size_t count)
 {
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct gl520_data *data = i2c_get_clientdata(client);
+=======
+	struct gl520_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 	u8 r;
 	unsigned long v;
 	int err;
@@ -482,8 +613,13 @@ static ssize_t get_temp_max_hyst(struct device *dev,
 static ssize_t set_temp_max(struct device *dev, struct device_attribute *attr,
 			    const char *buf, size_t count)
 {
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct gl520_data *data = i2c_get_clientdata(client);
+=======
+	struct gl520_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 	int n = to_sensor_dev_attr(attr)->index;
 	long v;
 	int err;
@@ -502,8 +638,13 @@ static ssize_t set_temp_max(struct device *dev, struct device_attribute *attr,
 static ssize_t set_temp_max_hyst(struct device *dev, struct device_attribute
 				 *attr, const char *buf, size_t count)
 {
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct gl520_data *data = i2c_get_clientdata(client);
+=======
+	struct gl520_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 	int n = to_sensor_dev_attr(attr)->index;
 	long v;
 	int err;
@@ -555,8 +696,13 @@ static ssize_t get_beep_mask(struct device *dev, struct device_attribute *attr,
 static ssize_t set_beep_enable(struct device *dev, struct device_attribute
 			       *attr, const char *buf, size_t count)
 {
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct gl520_data *data = i2c_get_clientdata(client);
+=======
+	struct gl520_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 	u8 r;
 	unsigned long v;
 	int err;
@@ -579,8 +725,13 @@ static ssize_t set_beep_enable(struct device *dev, struct device_attribute
 static ssize_t set_beep_mask(struct device *dev, struct device_attribute *attr,
 			     const char *buf, size_t count)
 {
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct gl520_data *data = i2c_get_clientdata(client);
+=======
+	struct gl520_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 	unsigned long r;
 	int err;
 
@@ -633,8 +784,13 @@ static ssize_t get_beep(struct device *dev, struct device_attribute *attr,
 static ssize_t set_beep(struct device *dev, struct device_attribute *attr,
 			const char *buf, size_t count)
 {
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct gl520_data *data = i2c_get_clientdata(client);
+=======
+	struct gl520_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 	int bitnr = to_sensor_dev_attr(attr)->index;
 	unsigned long bit;
 
@@ -772,6 +928,7 @@ static int gl520_detect(struct i2c_client *client, struct i2c_board_info *info)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int gl520_probe(struct i2c_client *client,
 		       const struct i2c_device_id *id)
 {
@@ -818,6 +975,8 @@ exit_remove_files:
 }
 
 
+=======
+>>>>>>> v3.18
 /* Called when we have found a new GL520SM. */
 static void gl520_init_client(struct i2c_client *client)
 {
@@ -856,6 +1015,7 @@ static void gl520_init_client(struct i2c_client *client)
 	gl520_write_value(client, GL520_REG_BEEP_MASK, data->beep_mask);
 }
 
+<<<<<<< HEAD
 static int gl520_remove(struct i2c_client *client)
 {
 	struct gl520_data *data = i2c_get_clientdata(client);
@@ -965,6 +1125,55 @@ static struct gl520_data *gl520_update_device(struct device *dev)
 
 	return data;
 }
+=======
+static int gl520_probe(struct i2c_client *client,
+		       const struct i2c_device_id *id)
+{
+	struct device *dev = &client->dev;
+	struct device *hwmon_dev;
+	struct gl520_data *data;
+
+	data = devm_kzalloc(dev, sizeof(struct gl520_data), GFP_KERNEL);
+	if (!data)
+		return -ENOMEM;
+
+	i2c_set_clientdata(client, data);
+	mutex_init(&data->update_lock);
+	data->client = client;
+
+	/* Initialize the GL520SM chip */
+	gl520_init_client(client);
+
+	/* sysfs hooks */
+	data->groups[0] = &gl520_group;
+
+	if (data->two_temps)
+		data->groups[1] = &gl520_group_temp2;
+	else
+		data->groups[1] = &gl520_group_in4;
+
+	hwmon_dev = devm_hwmon_device_register_with_groups(dev, client->name,
+							   data, data->groups);
+	return PTR_ERR_OR_ZERO(hwmon_dev);
+}
+
+static const struct i2c_device_id gl520_id[] = {
+	{ "gl520sm", 0 },
+	{ }
+};
+MODULE_DEVICE_TABLE(i2c, gl520_id);
+
+static struct i2c_driver gl520_driver = {
+	.class		= I2C_CLASS_HWMON,
+	.driver = {
+		.name	= "gl520sm",
+	},
+	.probe		= gl520_probe,
+	.id_table	= gl520_id,
+	.detect		= gl520_detect,
+	.address_list	= normal_i2c,
+};
+>>>>>>> v3.18
 
 module_i2c_driver(gl520_driver);
 

@@ -21,7 +21,10 @@
 #include <linux/ioport.h>
 #include <linux/netdevice.h>
 #include <linux/etherdevice.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/interrupt.h>
 #include <linux/skbuff.h>
 #include <linux/spinlock.h>
@@ -1505,6 +1508,7 @@ ks8695_probe(struct platform_device *pdev)
 	if (ksp->phyiface_regs && ksp->link_irq == -1) {
 		ks8695_init_switch(ksp);
 		ksp->dtype = KS8695_DTYPE_LAN;
+<<<<<<< HEAD
 		SET_ETHTOOL_OPS(ndev, &ks8695_ethtool_ops);
 	} else if (ksp->phyiface_regs && ksp->link_irq != -1) {
 		ks8695_init_wan_phy(ksp);
@@ -1514,6 +1518,17 @@ ks8695_probe(struct platform_device *pdev)
 		/* No initialisation since HPNA does not have a PHY */
 		ksp->dtype = KS8695_DTYPE_HPNA;
 		SET_ETHTOOL_OPS(ndev, &ks8695_ethtool_ops);
+=======
+		ndev->ethtool_ops = &ks8695_ethtool_ops;
+	} else if (ksp->phyiface_regs && ksp->link_irq != -1) {
+		ks8695_init_wan_phy(ksp);
+		ksp->dtype = KS8695_DTYPE_WAN;
+		ndev->ethtool_ops = &ks8695_wan_ethtool_ops;
+	} else {
+		/* No initialisation since HPNA does not have a PHY */
+		ksp->dtype = KS8695_DTYPE_HPNA;
+		ndev->ethtool_ops = &ks8695_ethtool_ops;
+>>>>>>> v3.18
 	}
 
 	/* And bring up the net_device with the net core */
@@ -1600,7 +1615,10 @@ ks8695_drv_remove(struct platform_device *pdev)
 	struct net_device *ndev = platform_get_drvdata(pdev);
 	struct ks8695_priv *ksp = netdev_priv(ndev);
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 	netif_napi_del(&ksp->napi);
 
 	unregister_netdev(ndev);

@@ -8,6 +8,10 @@
 #include <linux/linkage.h>
 #include <asm/dwarf2.h>
 #include <asm/calling.h>
+<<<<<<< HEAD
+=======
+#include <asm/asm.h>
+>>>>>>> v3.18
 
 	/* rdi:	arg1 ... normal C conventions. rax is saved/restored. */
 	.macro THUNK name, func, put_ret_addr_in_rdi=0
@@ -25,6 +29,10 @@
 	call \func
 	jmp  restore
 	CFI_ENDPROC
+<<<<<<< HEAD
+=======
+	_ASM_NOKPROBE(\name)
+>>>>>>> v3.18
 	.endm
 
 #ifdef CONFIG_TRACE_IRQFLAGS
@@ -36,6 +44,16 @@
 	THUNK lockdep_sys_exit_thunk,lockdep_sys_exit
 #endif
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PREEMPT
+	THUNK ___preempt_schedule, preempt_schedule
+#ifdef CONFIG_CONTEXT_TRACKING
+	THUNK ___preempt_schedule_context, preempt_schedule_context
+#endif
+#endif
+
+>>>>>>> v3.18
 	/* SAVE_ARGS below is used only for the .cfi directives it contains. */
 	CFI_STARTPROC
 	SAVE_ARGS
@@ -43,3 +61,7 @@ restore:
 	RESTORE_ARGS
 	ret
 	CFI_ENDPROC
+<<<<<<< HEAD
+=======
+	_ASM_NOKPROBE(restore)
+>>>>>>> v3.18

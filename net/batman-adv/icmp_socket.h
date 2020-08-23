@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* Copyright (C) 2007-2013 B.A.T.M.A.N. contributors:
+=======
+/* Copyright (C) 2007-2014 B.A.T.M.A.N. contributors:
+>>>>>>> v3.18
  *
  * Marek Lindner
  *
@@ -12,9 +16,13 @@
  * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
  */
 
 #ifndef _NET_BATMAN_ADV_ICMP_SOCKET_H_
@@ -24,7 +32,11 @@
 
 void batadv_socket_init(void);
 int batadv_socket_setup(struct batadv_priv *bat_priv);
+<<<<<<< HEAD
 void batadv_socket_receive_packet(struct batadv_icmp_packet_rr *icmp_packet,
+=======
+void batadv_socket_receive_packet(struct batadv_icmp_header *icmph,
+>>>>>>> v3.18
 				  size_t icmp_len);
 
 #endif /* _NET_BATMAN_ADV_ICMP_SOCKET_H_ */

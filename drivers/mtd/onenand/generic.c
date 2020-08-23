@@ -13,7 +13,10 @@
  */
 
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/platform_device.h>
 #include <linux/mtd/mtd.h>
@@ -38,7 +41,11 @@ struct onenand_info {
 static int generic_onenand_probe(struct platform_device *pdev)
 {
 	struct onenand_info *info;
+<<<<<<< HEAD
 	struct onenand_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct onenand_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 	struct resource *res = pdev->resource;
 	unsigned long size = resource_size(res);
 	int err;
@@ -58,7 +65,11 @@ static int generic_onenand_probe(struct platform_device *pdev)
 		goto out_release_mem_region;
 	}
 
+<<<<<<< HEAD
 	info->onenand.mmcontrol = pdata ? pdata->mmcontrol : 0;
+=======
+	info->onenand.mmcontrol = pdata ? pdata->mmcontrol : NULL;
+>>>>>>> v3.18
 	info->onenand.irq = platform_get_irq(pdev, 0);
 
 	info->mtd.name = dev_name(&pdev->dev);
@@ -94,8 +105,11 @@ static int generic_onenand_remove(struct platform_device *pdev)
 	struct resource *res = pdev->resource;
 	unsigned long size = resource_size(res);
 
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 	if (info) {
 		onenand_release(&info->mtd);
 		release_mem_region(res->start, size);

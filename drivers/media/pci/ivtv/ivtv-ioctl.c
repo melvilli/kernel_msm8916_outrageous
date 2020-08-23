@@ -34,7 +34,10 @@
 #include "ivtv-cards.h"
 #include <media/saa7127.h>
 #include <media/tveeprom.h>
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 #include <media/v4l2-event.h>
 #include <linux/dvb/audio.h>
 
@@ -352,7 +355,10 @@ static int ivtv_g_fmt_vid_cap(struct file *file, void *fh, struct v4l2_format *f
 	pixfmt->height = itv->cxhdl.height;
 	pixfmt->colorspace = V4L2_COLORSPACE_SMPTE170M;
 	pixfmt->field = V4L2_FIELD_INTERLACED;
+<<<<<<< HEAD
 	pixfmt->priv = 0;
+=======
+>>>>>>> v3.18
 	if (id->type == IVTV_ENC_STREAM_TYPE_YUV) {
 		pixfmt->pixelformat = V4L2_PIX_FMT_HM12;
 		/* YUV size is (Y=(h*720) + UV=(h*(720/2))) */
@@ -419,7 +425,10 @@ static int ivtv_g_fmt_vid_out(struct file *file, void *fh, struct v4l2_format *f
 	pixfmt->height = itv->main_rect.height;
 	pixfmt->colorspace = V4L2_COLORSPACE_SMPTE170M;
 	pixfmt->field = V4L2_FIELD_INTERLACED;
+<<<<<<< HEAD
 	pixfmt->priv = 0;
+=======
+>>>>>>> v3.18
 	if (id->type == IVTV_DEC_STREAM_TYPE_YUV) {
 		switch (itv->yuv_info.lace_mode & IVTV_YUV_MODE_MASK) {
 		case IVTV_YUV_MODE_INTERLACED:
@@ -692,6 +701,7 @@ static int ivtv_s_fmt_vid_out_overlay(struct file *file, void *fh, struct v4l2_f
 	return ret;
 }
 
+<<<<<<< HEAD
 static int ivtv_g_chip_ident(struct file *file, void *fh, struct v4l2_dbg_chip_ident *chip)
 {
 	struct ivtv *itv = fh2id(fh)->itv;
@@ -710,13 +720,20 @@ static int ivtv_g_chip_ident(struct file *file, void *fh, struct v4l2_dbg_chip_i
 	return ivtv_call_all_err(itv, core, g_chip_ident, chip);
 }
 
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 static int ivtv_itvc(struct ivtv *itv, bool get, u64 reg, u64 *val)
 {
 	volatile u8 __iomem *reg_start;
 
+<<<<<<< HEAD
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
+=======
+	if (reg & 0x3)
+		return -EINVAL;
+>>>>>>> v3.18
 	if (reg >= IVTV_REG_OFFSET && reg < IVTV_REG_OFFSET + IVTV_REG_SIZE)
 		reg_start = itv->reg_mem - IVTV_REG_OFFSET;
 	else if (itv->has_cx23415 && reg >= IVTV_DECODER_OFFSET &&
@@ -738,6 +755,7 @@ static int ivtv_g_register(struct file *file, void *fh, struct v4l2_dbg_register
 {
 	struct ivtv *itv = fh2id(fh)->itv;
 
+<<<<<<< HEAD
 	if (v4l2_chip_match_host(&reg->match)) {
 		reg->size = 4;
 		return ivtv_itvc(itv, true, reg->reg, &reg->val);
@@ -746,11 +764,16 @@ static int ivtv_g_register(struct file *file, void *fh, struct v4l2_dbg_register
 	   subdev helper function. */
 	ivtv_call_all(itv, core, g_register, reg);
 	return 0;
+=======
+	reg->size = 4;
+	return ivtv_itvc(itv, true, reg->reg, &reg->val);
+>>>>>>> v3.18
 }
 
 static int ivtv_s_register(struct file *file, void *fh, const struct v4l2_dbg_register *reg)
 {
 	struct ivtv *itv = fh2id(fh)->itv;
+<<<<<<< HEAD
 
 	if (v4l2_chip_match_host(&reg->match)) {
 		u64 val = reg->val;
@@ -761,6 +784,11 @@ static int ivtv_s_register(struct file *file, void *fh, const struct v4l2_dbg_re
 	   subdev helper function. */
 	ivtv_call_all(itv, core, s_register, reg);
 	return 0;
+=======
+	u64 val = reg->val;
+
+	return ivtv_itvc(itv, false, reg->reg, &val);
+>>>>>>> v3.18
 }
 #endif
 
@@ -1122,7 +1150,11 @@ void ivtv_s_std_enc(struct ivtv *itv, v4l2_std_id std)
 		itv->vbi.sliced_decoder_line_size = itv->is_60hz ? 272 : 284;
 
 	/* Tuner */
+<<<<<<< HEAD
 	ivtv_call_all(itv, core, s_std, itv->std);
+=======
+	ivtv_call_all(itv, video, s_std, itv->std);
+>>>>>>> v3.18
 }
 
 void ivtv_s_std_dec(struct ivtv *itv, v4l2_std_id std)
@@ -1416,7 +1448,10 @@ static int ivtv_g_fbuf(struct file *file, void *fh, struct v4l2_framebuffer *fb)
 	fb->fmt.bytesperline = fb->fmt.width;
 	fb->fmt.colorspace = V4L2_COLORSPACE_SMPTE170M;
 	fb->fmt.field = V4L2_FIELD_INTERLACED;
+<<<<<<< HEAD
 	fb->fmt.priv = 0;
+=======
+>>>>>>> v3.18
 	if (fb->fmt.pixelformat != V4L2_PIX_FMT_PAL8)
 		fb->fmt.bytesperline *= 2;
 	if (fb->fmt.pixelformat == V4L2_PIX_FMT_RGB32 ||
@@ -1914,7 +1949,10 @@ static const struct v4l2_ioctl_ops ivtv_ioctl_ops = {
 	.vidioc_try_fmt_vid_out_overlay     = ivtv_try_fmt_vid_out_overlay,
 	.vidioc_try_fmt_sliced_vbi_out 	    = ivtv_try_fmt_sliced_vbi_out,
 	.vidioc_g_sliced_vbi_cap 	    = ivtv_g_sliced_vbi_cap,
+<<<<<<< HEAD
 	.vidioc_g_chip_ident 		    = ivtv_g_chip_ident,
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 	.vidioc_g_register 		    = ivtv_g_register,
 	.vidioc_s_register 		    = ivtv_s_register,

@@ -221,6 +221,7 @@ static int __init mv_rtc_probe(struct platform_device *pdev)
 {
 	struct resource *res;
 	struct rtc_plat_data *pdata;
+<<<<<<< HEAD
 	resource_size_t size;
 	u32 rtc_time;
 	int ret = 0;
@@ -229,10 +230,17 @@ static int __init mv_rtc_probe(struct platform_device *pdev)
 	if (!res)
 		return -ENODEV;
 
+=======
+	u32 rtc_time;
+	u32 rtc_date;
+	int ret = 0;
+
+>>>>>>> v3.18
 	pdata = devm_kzalloc(&pdev->dev, sizeof(*pdata), GFP_KERNEL);
 	if (!pdata)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 	size = resource_size(res);
 	if (!devm_request_mem_region(&pdev->dev, res->start, size,
 				     pdev->name))
@@ -241,6 +249,12 @@ static int __init mv_rtc_probe(struct platform_device *pdev)
 	pdata->ioaddr = devm_ioremap(&pdev->dev, res->start, size);
 	if (!pdata->ioaddr)
 		return -ENOMEM;
+=======
+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+	pdata->ioaddr = devm_ioremap_resource(&pdev->dev, res);
+	if (IS_ERR(pdata->ioaddr))
+		return PTR_ERR(pdata->ioaddr);
+>>>>>>> v3.18
 
 	pdata->clk = devm_clk_get(&pdev->dev, NULL);
 	/* Not all SoCs require a clock.*/
@@ -266,6 +280,20 @@ static int __init mv_rtc_probe(struct platform_device *pdev)
 		}
 	}
 
+<<<<<<< HEAD
+=======
+	/*
+	 * A date after January 19th, 2038 does not fit on 32 bits and
+	 * will confuse the kernel and userspace. Reset to a sane date
+	 * (January 1st, 2013) if we're after 2038.
+	 */
+	rtc_date = readl(pdata->ioaddr + RTC_DATE_REG_OFFS);
+	if (bcd2bin((rtc_date >> RTC_YEAR_OFFS) & 0xff) >= 38) {
+		dev_info(&pdev->dev, "invalid RTC date, resetting to January 1st, 2013\n");
+		writel(0x130101, pdata->ioaddr + RTC_DATE_REG_OFFS);
+	}
+
+>>>>>>> v3.18
 	pdata->irq = platform_get_irq(pdev, 0);
 
 	platform_set_drvdata(pdev, pdata);
@@ -316,7 +344,11 @@ static int __exit mv_rtc_remove(struct platform_device *pdev)
 }
 
 #ifdef CONFIG_OF
+<<<<<<< HEAD
 static struct of_device_id rtc_mv_of_match_table[] = {
+=======
+static const struct of_device_id rtc_mv_of_match_table[] = {
+>>>>>>> v3.18
 	{ .compatible = "marvell,orion-rtc", },
 	{}
 };

@@ -29,6 +29,11 @@ DMA-ISA-LPC.txt
 	- How to do DMA with ISA (and LPC) devices.
 DMA-attributes.txt
 	- listing of the various possible attributes a DMA region can have
+<<<<<<< HEAD
+=======
+dmatest.txt
+	- how to compile, configure and use the dmatest system.
+>>>>>>> v3.18
 DocBook/
 	- directory with DocBook templates etc. for kernel documentation.
 EDID/
@@ -40,7 +45,11 @@ IPMI.txt
 IRQ-affinity.txt
 	- how to select which CPU(s) handle which interrupt events on SMP.
 IRQ-domain.txt
+<<<<<<< HEAD
 	- info on inerrupt numbering and setting up IRQ domains.
+=======
+	- info on interrupt numbering and setting up IRQ domains.
+>>>>>>> v3.18
 IRQ.txt
 	- description of what an IRQ is.
 Intel-IOMMU.txt
@@ -77,6 +86,11 @@ arm/
 	- directory with info about Linux on the ARM architecture.
 arm64/
 	- directory with info about Linux on the 64 bit ARM architecture.
+<<<<<<< HEAD
+=======
+assoc_array.txt
+	- generic associative array intro.
+>>>>>>> v3.18
 atomic_ops.txt
 	- semantics and behavior of atomic and bitmask operations.
 auxdisplay/
@@ -87,8 +101,13 @@ bad_memory.txt
 	- how to use kernel parameters to exclude bad RAM regions.
 basic_profiling.txt
 	- basic instructions for those who wants to profile Linux kernel.
+<<<<<<< HEAD
 bif-framework.txt
 	- information about MIPI-BIF support in the Linux kernel.
+=======
+bcache.txt
+	- Block-layer cache on fast SSDs to improve slow (raid) I/O performance.
+>>>>>>> v3.18
 binfmt_misc.txt
 	- info on the kernel support for extra binary formats.
 blackfin/
@@ -173,6 +192,11 @@ early-userspace/
 	- info about initramfs, klibc, and userspace early during boot.
 edac.txt
 	- information on EDAC - Error Detection And Correction
+<<<<<<< HEAD
+=======
+efi-stub.txt
+	- How to use the EFI boot stub to bypass GRUB or elilo on EFI systems.
+>>>>>>> v3.18
 eisa.txt
 	- info on EISA bus support.
 email-clients.txt
@@ -189,14 +213,24 @@ firmware_class/
 	- request_firmware() hotplug interface info.
 flexible-arrays.txt
 	- how to make use of flexible sized arrays in linux
+<<<<<<< HEAD
+=======
+fmc/
+	- information about the FMC bus abstraction
+>>>>>>> v3.18
 frv/
 	- Fujitsu FR-V Linux documentation.
 futex-requeue-pi.txt
 	- info on requeueing of tasks from a non-PI futex to a PI futex
 gcov.txt
 	- use of GCC's coverage testing tool "gcov" with the Linux kernel
+<<<<<<< HEAD
 gpio.txt
 	- overview of GPIO (General Purpose Input/Output) access conventions.
+=======
+gpio/
+	- gpio related documentation
+>>>>>>> v3.18
 hid/
 	- directory with information on human interface devices
 highuid.txt
@@ -255,6 +289,11 @@ kernel-docs.txt
 	- listing of various WWW + books that document kernel internals.
 kernel-parameters.txt
 	- summary listing of command line / boot prompt args for the kernel.
+<<<<<<< HEAD
+=======
+kernel-per-CPU-kthreads.txt
+	- List of all per-CPU kthreads and how they introduce jitter.
+>>>>>>> v3.18
 kmemcheck.txt
 	- info on dynamic checker that detects uses of uninitialized memory.
 kmemleak.txt
@@ -277,6 +316,11 @@ local_ops.txt
 	- semantics and behavior of local atomic operations.
 lockdep-design.txt
 	- documentation on the runtime locking correctness validator.
+<<<<<<< HEAD
+=======
+locking/
+	- directory with info about kernel locking primitives
+>>>>>>> v3.18
 lockstat.txt
 	- info on collecting statistics on locks (and contention).
 lockup-watchdogs.txt
@@ -299,8 +343,11 @@ memory-devices/
 	- directory with info on parts like the Texas Instruments EMIF driver
 memory-hotplug.txt
 	- Hotpluggable memory support, how to use and current status.
+<<<<<<< HEAD
 memory.txt
 	- info on typical Linux memory problems.
+=======
+>>>>>>> v3.18
 metag/
 	- directory with info about Linux on Meta architecture.
 mips/
@@ -311,6 +358,11 @@ mmc/
 	- directory with info about the MMC subsystem
 mn10300/
 	- directory with info about the mn10300 architecture port
+<<<<<<< HEAD
+=======
+module-signing.txt
+	- Kernel module signing for increased security when loading modules.
+>>>>>>> v3.18
 mtd/
 	- directory with info about memory technology devices (flash)
 mono.txt
@@ -343,6 +395,11 @@ pcmcia/
 	- info on the Linux PCMCIA driver.
 percpu-rw-semaphore.txt
 	- RCU based read-write semaphore optimized for locking for reading
+<<<<<<< HEAD
+=======
+phy.txt
+	- Description of the generic PHY framework.
+>>>>>>> v3.18
 pi-futex.txt
 	- documentation on lightweight priority inheritance futexes.
 pinctrl.txt
@@ -401,8 +458,11 @@ serial-console.txt
 	- how to set up Linux with a serial line console as the default.
 sgi-ioc4.txt
 	- description of the SGI IOC4 PCI (multi function) device.
+<<<<<<< HEAD
 sgi-visws.txt
 	- short blurb on the SGI Visual Workstations.
+=======
+>>>>>>> v3.18
 sh/
 	- directory with info on porting Linux to a new architecture.
 smsc_ece1099.txt
@@ -431,6 +491,11 @@ sysrq.txt
 	- info on the magic SysRq key.
 target/
 	- directory with info on generating TCM v4 fabric .ko modules
+<<<<<<< HEAD
+=======
+this_cpu_ops.txt
+	- List rationale behind and the way to use this_cpu operations.
+>>>>>>> v3.18
 thermal/
 	- directory with information on managing thermal issues (CPU/temp)
 trace/
@@ -469,6 +534,11 @@ wimax/
 	- directory with info about Intel Wireless Wimax Connections
 workqueue.txt
 	- information on the Concurrency Managed Workqueue implementation
+<<<<<<< HEAD
+=======
+ww-mutex-design.txt
+	- Intro to Mutex wait/would deadlock handling.s
+>>>>>>> v3.18
 x86/x86_64/
 	- directory with info on Linux support for AMD x86-64 (Hammer) machines.
 xtensa/

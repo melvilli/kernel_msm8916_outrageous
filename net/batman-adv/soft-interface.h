@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* Copyright (C) 2007-2013 B.A.T.M.A.N. contributors:
+=======
+/* Copyright (C) 2007-2014 B.A.T.M.A.N. contributors:
+>>>>>>> v3.18
  *
  * Marek Lindner
  *
@@ -12,9 +16,13 @@
  * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
  */
 
 #ifndef _NET_BATMAN_ADV_SOFT_INTERFACE_H_
@@ -28,5 +36,12 @@ struct net_device *batadv_softif_create(const char *name);
 void batadv_softif_destroy_sysfs(struct net_device *soft_iface);
 int batadv_softif_is_valid(const struct net_device *net_dev);
 extern struct rtnl_link_ops batadv_link_ops;
+<<<<<<< HEAD
+=======
+int batadv_softif_create_vlan(struct batadv_priv *bat_priv, unsigned short vid);
+void batadv_softif_vlan_free_ref(struct batadv_softif_vlan *softif_vlan);
+struct batadv_softif_vlan *batadv_softif_vlan_get(struct batadv_priv *bat_priv,
+						  unsigned short vid);
+>>>>>>> v3.18
 
 #endif /* _NET_BATMAN_ADV_SOFT_INTERFACE_H_ */

@@ -10,10 +10,18 @@
 #include <linux/compiler.h>
 #include <linux/types.h>
 #include <asm/cmpxchg.h>
+<<<<<<< HEAD
 
 #define ATOMIC_INIT(i)	{ (i) }
 
 #define atomic_read(v)		(*(volatile int *)&(v)->counter)
+=======
+#include <asm/barrier.h>
+
+#define ATOMIC_INIT(i)	{ (i) }
+
+#define atomic_read(v)		ACCESS_ONCE((v)->counter)
+>>>>>>> v3.18
 #define atomic_set(v,i)		((v)->counter = (i))
 
 #if defined(CONFIG_GUSA_RB)
@@ -62,9 +70,12 @@ static inline int __atomic_add_unless(atomic_t *v, int a, int u)
 	return c;
 }
 
+<<<<<<< HEAD
 #define smp_mb__before_atomic_dec()	smp_mb()
 #define smp_mb__after_atomic_dec()	smp_mb()
 #define smp_mb__before_atomic_inc()	smp_mb()
 #define smp_mb__after_atomic_inc()	smp_mb()
 
+=======
+>>>>>>> v3.18
 #endif /* __ASM_SH_ATOMIC_H */

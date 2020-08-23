@@ -1621,8 +1621,11 @@ void sas_rphy_free(struct sas_rphy *rphy)
 	list_del(&rphy->list);
 	mutex_unlock(&sas_host->lock);
 
+<<<<<<< HEAD
 	sas_bsg_remove(shost, rphy);
 
+=======
+>>>>>>> v3.18
 	transport_destroy_device(dev);
 
 	put_device(dev);
@@ -1681,6 +1684,10 @@ sas_rphy_remove(struct sas_rphy *rphy)
 	}
 
 	sas_rphy_unlink(rphy);
+<<<<<<< HEAD
+=======
+	sas_bsg_remove(NULL, rphy);
+>>>>>>> v3.18
 	transport_remove_device(dev);
 	device_del(dev);
 }
@@ -1706,7 +1713,11 @@ EXPORT_SYMBOL(scsi_is_sas_rphy);
  */
 
 static int sas_user_scan(struct Scsi_Host *shost, uint channel,
+<<<<<<< HEAD
 		uint id, uint lun)
+=======
+		uint id, u64 lun)
+>>>>>>> v3.18
 {
 	struct sas_host_attrs *sas_host = to_sas_host_attrs(shost);
 	struct sas_rphy *rphy;

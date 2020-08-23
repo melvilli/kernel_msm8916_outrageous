@@ -34,7 +34,10 @@
 #include <linux/mm.h>
 #include <linux/watchdog.h>
 #include <linux/reboot.h>
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 #include <linux/err.h>
 #include <linux/platform_device.h>
 #include <linux/moduleparam.h>
@@ -58,7 +61,10 @@ struct omap_wdt_dev {
 	void __iomem    *base;          /* physical */
 	struct device   *dev;
 	bool		omap_wdt_users;
+<<<<<<< HEAD
 	struct resource *mem;
+=======
+>>>>>>> v3.18
 	int		wdt_trgr_pattern;
 	struct mutex	lock;		/* to avoid races with PM */
 };
@@ -68,6 +74,7 @@ static void omap_wdt_reload(struct omap_wdt_dev *wdev)
 	void __iomem    *base = wdev->base;
 
 	/* wait for posted write to complete */
+<<<<<<< HEAD
 	while ((__raw_readl(base + OMAP_WATCHDOG_WPS)) & 0x08)
 		cpu_relax();
 
@@ -76,6 +83,16 @@ static void omap_wdt_reload(struct omap_wdt_dev *wdev)
 
 	/* wait for posted write to complete */
 	while ((__raw_readl(base + OMAP_WATCHDOG_WPS)) & 0x08)
+=======
+	while ((readl_relaxed(base + OMAP_WATCHDOG_WPS)) & 0x08)
+		cpu_relax();
+
+	wdev->wdt_trgr_pattern = ~wdev->wdt_trgr_pattern;
+	writel_relaxed(wdev->wdt_trgr_pattern, (base + OMAP_WATCHDOG_TGR));
+
+	/* wait for posted write to complete */
+	while ((readl_relaxed(base + OMAP_WATCHDOG_WPS)) & 0x08)
+>>>>>>> v3.18
 		cpu_relax();
 	/* reloaded WCRR from WLDR */
 }
@@ -85,12 +102,21 @@ static void omap_wdt_enable(struct omap_wdt_dev *wdev)
 	void __iomem *base = wdev->base;
 
 	/* Sequence to enable the watchdog */
+<<<<<<< HEAD
 	__raw_writel(0xBBBB, base + OMAP_WATCHDOG_SPR);
 	while ((__raw_readl(base + OMAP_WATCHDOG_WPS)) & 0x10)
 		cpu_relax();
 
 	__raw_writel(0x4444, base + OMAP_WATCHDOG_SPR);
 	while ((__raw_readl(base + OMAP_WATCHDOG_WPS)) & 0x10)
+=======
+	writel_relaxed(0xBBBB, base + OMAP_WATCHDOG_SPR);
+	while ((readl_relaxed(base + OMAP_WATCHDOG_WPS)) & 0x10)
+		cpu_relax();
+
+	writel_relaxed(0x4444, base + OMAP_WATCHDOG_SPR);
+	while ((readl_relaxed(base + OMAP_WATCHDOG_WPS)) & 0x10)
+>>>>>>> v3.18
 		cpu_relax();
 }
 
@@ -99,12 +125,21 @@ static void omap_wdt_disable(struct omap_wdt_dev *wdev)
 	void __iomem *base = wdev->base;
 
 	/* sequence required to disable watchdog */
+<<<<<<< HEAD
 	__raw_writel(0xAAAA, base + OMAP_WATCHDOG_SPR);	/* TIMER_MODE */
 	while (__raw_readl(base + OMAP_WATCHDOG_WPS) & 0x10)
 		cpu_relax();
 
 	__raw_writel(0x5555, base + OMAP_WATCHDOG_SPR);	/* TIMER_MODE */
 	while (__raw_readl(base + OMAP_WATCHDOG_WPS) & 0x10)
+=======
+	writel_relaxed(0xAAAA, base + OMAP_WATCHDOG_SPR);	/* TIMER_MODE */
+	while (readl_relaxed(base + OMAP_WATCHDOG_WPS) & 0x10)
+		cpu_relax();
+
+	writel_relaxed(0x5555, base + OMAP_WATCHDOG_SPR);	/* TIMER_MODE */
+	while (readl_relaxed(base + OMAP_WATCHDOG_WPS) & 0x10)
+>>>>>>> v3.18
 		cpu_relax();
 }
 
@@ -115,11 +150,19 @@ static void omap_wdt_set_timer(struct omap_wdt_dev *wdev,
 	void __iomem *base = wdev->base;
 
 	/* just count up at 32 KHz */
+<<<<<<< HEAD
 	while (__raw_readl(base + OMAP_WATCHDOG_WPS) & 0x04)
 		cpu_relax();
 
 	__raw_writel(pre_margin, base + OMAP_WATCHDOG_LDR);
 	while (__raw_readl(base + OMAP_WATCHDOG_WPS) & 0x04)
+=======
+	while (readl_relaxed(base + OMAP_WATCHDOG_WPS) & 0x04)
+		cpu_relax();
+
+	writel_relaxed(pre_margin, base + OMAP_WATCHDOG_LDR);
+	while (readl_relaxed(base + OMAP_WATCHDOG_WPS) & 0x04)
+>>>>>>> v3.18
 		cpu_relax();
 }
 
@@ -134,6 +177,7 @@ static int omap_wdt_start(struct watchdog_device *wdog)
 
 	pm_runtime_get_sync(wdev->dev);
 
+<<<<<<< HEAD
 	/*
 	 * Make sure the watchdog is disabled. This is unfortunately required
 	 * because writing to various registers with the watchdog running has no
@@ -147,6 +191,14 @@ static int omap_wdt_start(struct watchdog_device *wdog)
 
 	__raw_writel((1 << 5) | (PTV << 2), base + OMAP_WATCHDOG_CNTRL);
 	while (__raw_readl(base + OMAP_WATCHDOG_WPS) & 0x01)
+=======
+	/* initialize prescaler */
+	while (readl_relaxed(base + OMAP_WATCHDOG_WPS) & 0x01)
+		cpu_relax();
+
+	writel_relaxed((1 << 5) | (PTV << 2), base + OMAP_WATCHDOG_CNTRL);
+	while (readl_relaxed(base + OMAP_WATCHDOG_WPS) & 0x01)
+>>>>>>> v3.18
 		cpu_relax();
 
 	omap_wdt_set_timer(wdev, wdog->timeout);
@@ -212,9 +264,15 @@ static const struct watchdog_ops omap_wdt_ops = {
 
 static int omap_wdt_probe(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 	struct omap_wd_timer_platform_data *pdata = pdev->dev.platform_data;
 	struct watchdog_device *omap_wdt;
 	struct resource *res, *mem;
+=======
+	struct omap_wd_timer_platform_data *pdata = dev_get_platdata(&pdev->dev);
+	struct watchdog_device *omap_wdt;
+	struct resource *res;
+>>>>>>> v3.18
 	struct omap_wdt_dev *wdev;
 	u32 rs;
 	int ret;
@@ -223,6 +281,7 @@ static int omap_wdt_probe(struct platform_device *pdev)
 	if (!omap_wdt)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 	/* reserve static register mappings */
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!res)
@@ -233,19 +292,32 @@ static int omap_wdt_probe(struct platform_device *pdev)
 	if (!mem)
 		return -EBUSY;
 
+=======
+>>>>>>> v3.18
 	wdev = devm_kzalloc(&pdev->dev, sizeof(*wdev), GFP_KERNEL);
 	if (!wdev)
 		return -ENOMEM;
 
 	wdev->omap_wdt_users	= false;
+<<<<<<< HEAD
 	wdev->mem		= mem;
+=======
+>>>>>>> v3.18
 	wdev->dev		= &pdev->dev;
 	wdev->wdt_trgr_pattern	= 0x1234;
 	mutex_init(&wdev->lock);
 
+<<<<<<< HEAD
 	wdev->base = devm_ioremap(&pdev->dev, res->start, resource_size(res));
 	if (!wdev->base)
 		return -ENOMEM;
+=======
+	/* reserve static register mappings */
+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+	wdev->base = devm_ioremap_resource(&pdev->dev, res);
+	if (IS_ERR(wdev->base))
+		return PTR_ERR(wdev->base);
+>>>>>>> v3.18
 
 	omap_wdt->info	      = &omap_wdt_info;
 	omap_wdt->ops	      = &omap_wdt_ops;
@@ -282,7 +354,11 @@ static int omap_wdt_probe(struct platform_device *pdev)
 	}
 
 	pr_info("OMAP Watchdog Timer Rev 0x%02x: initial timeout %d sec\n",
+<<<<<<< HEAD
 		__raw_readl(wdev->base + OMAP_WATCHDOG_REV) & 0xFF,
+=======
+		readl_relaxed(wdev->base + OMAP_WATCHDOG_REV) & 0xFF,
+>>>>>>> v3.18
 		omap_wdt->timeout);
 
 	pm_runtime_put_sync(wdev->dev);

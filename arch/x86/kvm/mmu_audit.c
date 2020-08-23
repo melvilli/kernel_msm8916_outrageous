@@ -273,7 +273,11 @@ static int mmu_audit_set(const char *val, const struct kernel_param *kp)
 	int ret;
 	unsigned long enable;
 
+<<<<<<< HEAD
 	ret = strict_strtoul(val, 10, &enable);
+=======
+	ret = kstrtoul(val, 10, &enable);
+>>>>>>> v3.18
 	if (ret < 0)
 		return -EINVAL;
 
@@ -296,4 +300,8 @@ static struct kernel_param_ops audit_param_ops = {
 	.get = param_get_bool,
 };
 
+<<<<<<< HEAD
 module_param_cb(mmu_audit, &audit_param_ops, &mmu_audit, 0644);
+=======
+arch_param_cb(mmu_audit, &audit_param_ops, &mmu_audit, 0644);
+>>>>>>> v3.18

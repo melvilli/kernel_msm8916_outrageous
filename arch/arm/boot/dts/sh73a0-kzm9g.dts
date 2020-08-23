@@ -9,14 +9,22 @@
  */
 
 /dts-v1/;
+<<<<<<< HEAD
 /include/ "sh73a0.dtsi"
+=======
+#include "sh73a0.dtsi"
+>>>>>>> v3.18
 
 / {
 	model = "KZM-A9-GT";
 	compatible = "renesas,kzm9g", "renesas,sh73a0";
 
 	chosen {
+<<<<<<< HEAD
 		bootargs = "console=tty0 console=ttySC4,115200 root=/dev/nfs ip=dhcp ignore_loglevel earlyprintk=sh-sci.4,115200";
+=======
+		bootargs = "console=tty0 console=ttySC4,115200 root=/dev/nfs ip=dhcp ignore_loglevel earlyprintk=sh-sci.4,115200 rw";
+>>>>>>> v3.18
 	};
 
 	memory {

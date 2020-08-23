@@ -8,10 +8,14 @@
 #include <asm/thread_info.h>
 #include <asm/memory.h>
 #include <asm/page.h>
+<<<<<<< HEAD
 #ifdef CONFIG_STRICT_MEMORY_RWX
 #include <asm/pgtable.h>
 #endif
 
+=======
+	
+>>>>>>> v3.18
 #define PROC_INFO							\
 	. = ALIGN(4);							\
 	VMLINUX_SYMBOL(__proc_info_begin) = .;				\
@@ -73,10 +77,13 @@ SECTIONS
 		ARM_EXIT_DISCARD(EXIT_TEXT)
 		ARM_EXIT_DISCARD(EXIT_DATA)
 		EXIT_CALL
+<<<<<<< HEAD
 #ifndef CONFIG_HOTPLUG
 		*(.ARM.exidx.devexit.text)
 		*(.ARM.extab.devexit.text)
 #endif
+=======
+>>>>>>> v3.18
 #ifndef CONFIG_MMU
 		*(.fixup)
 		*(__ex_table)
@@ -97,10 +104,13 @@ SECTIONS
 		_text = .;
 		HEAD_TEXT
 	}
+<<<<<<< HEAD
 #ifdef CONFIG_STRICT_MEMORY_RWX
 	. = ALIGN(1<<SECTION_SHIFT);
 #endif
 
+=======
+>>>>>>> v3.18
 	.text : {			/* Real text segment		*/
 		_stext = .;		/* Text and read-only data	*/
 			__exception_text_start = .;
@@ -123,9 +133,12 @@ SECTIONS
 			ARM_CPU_KEEP(PROC_INFO)
 	}
 
+<<<<<<< HEAD
 #ifdef CONFIG_STRICT_MEMORY_RWX
 	. = ALIGN(1<<SECTION_SHIFT);
 #endif
+=======
+>>>>>>> v3.18
 	RO_DATA(PAGE_SIZE)
 
 	. = ALIGN(4);
@@ -159,11 +172,15 @@ SECTIONS
 	_etext = .;			/* End of text and rodata section */
 
 #ifndef CONFIG_XIP_KERNEL
+<<<<<<< HEAD
 #ifdef CONFIG_STRICT_MEMORY_RWX
 	. = ALIGN(1<<SECTION_SHIFT);
 #else
 	. = ALIGN(PAGE_SIZE);
 #endif
+=======
+	. = ALIGN(PAGE_SIZE);
+>>>>>>> v3.18
 	__init_begin = .;
 #endif
 	/*
@@ -191,9 +208,12 @@ SECTIONS
 	.init.proc.info : {
 		ARM_CPU_DISCARD(PROC_INFO)
 	}
+<<<<<<< HEAD
 #ifdef CONFIG_STRICT_MEMORY_RWX
 	. = ALIGN(1<<SECTION_SHIFT);
 #endif
+=======
+>>>>>>> v3.18
 	.init.arch.info : {
 		__arch_info_begin = .;
 		*(.arch.info.init)
@@ -223,7 +243,10 @@ SECTIONS
 		INIT_SETUP(16)
 		INIT_CALLS
 		CON_INITCALL
+<<<<<<< HEAD
 		COMPAT_EXPORTS
+=======
+>>>>>>> v3.18
 		SECURITY_INITCALL
 		INIT_RAM_FS
 	}
@@ -241,8 +264,13 @@ SECTIONS
 	__data_loc = ALIGN(4);		/* location in binary */
 	. = PAGE_OFFSET + TEXT_OFFSET;
 #else
+<<<<<<< HEAD
 	__init_end = .;
 	. = ALIGN(THREAD_SIZE);
+=======
+	. = ALIGN(THREAD_SIZE);
+	__init_end = .;
+>>>>>>> v3.18
 	__data_loc = .;
 #endif
 
@@ -340,7 +368,10 @@ SECTIONS
 	_end = .;
 
 	STABS_DEBUG
+<<<<<<< HEAD
 	.comment 0 : { *(.comment) }
+=======
+>>>>>>> v3.18
 }
 
 /*

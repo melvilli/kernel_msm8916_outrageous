@@ -145,13 +145,20 @@ static void __init octeon_wdt_build_stage1(void)
 
 	uasm_i_mfc0(&p, K0, C0_STATUS);
 #ifdef CONFIG_HOTPLUG_CPU
+<<<<<<< HEAD
 	uasm_il_bbit0(&p, &r, K0, ilog2(ST0_NMI), label_enter_bootloader);
+=======
+	if (octeon_bootloader_entry_addr)
+		uasm_il_bbit0(&p, &r, K0, ilog2(ST0_NMI),
+			      label_enter_bootloader);
+>>>>>>> v3.18
 #endif
 	/* Force 64-bit addressing enabled */
 	uasm_i_ori(&p, K0, K0, ST0_UX | ST0_SX | ST0_KX);
 	uasm_i_mtc0(&p, K0, C0_STATUS);
 
 #ifdef CONFIG_HOTPLUG_CPU
+<<<<<<< HEAD
 	uasm_i_mfc0(&p, K0, C0_EBASE);
 	/* Coreid number in K0 */
 	uasm_i_andi(&p, K0, K0, 0xf);
@@ -174,6 +181,32 @@ static void __init octeon_wdt_build_stage1(void)
 	 */
 	uasm_il_bbit0(&p, &r, K0, 1, label_enter_bootloader);
 	uasm_i_nop(&p);
+=======
+	if (octeon_bootloader_entry_addr) {
+		uasm_i_mfc0(&p, K0, C0_EBASE);
+		/* Coreid number in K0 */
+		uasm_i_andi(&p, K0, K0, 0xf);
+		/* 8 * coreid in bits 16-31 */
+		uasm_i_dsll_safe(&p, K0, K0, 3 + 16);
+		uasm_i_ori(&p, K0, K0, 0x8001);
+		uasm_i_dsll_safe(&p, K0, K0, 16);
+		uasm_i_ori(&p, K0, K0, 0x0700);
+		uasm_i_drotr_safe(&p, K0, K0, 32);
+		/*
+		 * Should result in: 0x8001,0700,0000,8*coreid which is
+		 * CVMX_CIU_WDOGX(coreid) - 0x0500
+		 *
+		 * Now ld K0, CVMX_CIU_WDOGX(coreid)
+		 */
+		uasm_i_ld(&p, K0, 0x500, K0);
+		/*
+		 * If bit one set handle the NMI as a watchdog event.
+		 * otherwise transfer control to bootloader.
+		 */
+		uasm_il_bbit0(&p, &r, K0, 1, label_enter_bootloader);
+		uasm_i_nop(&p);
+	}
+>>>>>>> v3.18
 #endif
 
 	/* Clear Dcache so cvmseg works right. */
@@ -194,11 +227,21 @@ static void __init octeon_wdt_build_stage1(void)
 	uasm_i_dmfc0(&p, K0, C0_DESAVE);
 
 #ifdef CONFIG_HOTPLUG_CPU
+<<<<<<< HEAD
 	uasm_build_label(&l, p, label_enter_bootloader);
 	/* Jump to the bootloader and restore K0 */
 	UASM_i_LA(&p, K0, (long)octeon_bootloader_entry_addr);
 	uasm_i_jr(&p, K0);
 	uasm_i_dmfc0(&p, K0, C0_DESAVE);
+=======
+	if (octeon_bootloader_entry_addr) {
+		uasm_build_label(&l, p, label_enter_bootloader);
+		/* Jump to the bootloader and restore K0 */
+		UASM_i_LA(&p, K0, (long)octeon_bootloader_entry_addr);
+		uasm_i_jr(&p, K0);
+		uasm_i_dmfc0(&p, K0, C0_DESAVE);
+	}
+>>>>>>> v3.18
 #endif
 	uasm_resolve_relocs(relocs, labels);
 
@@ -708,10 +751,20 @@ static int __init octeon_wdt_init(void)
 
 	cpumask_clear(&irq_enabled_cpus);
 
+<<<<<<< HEAD
 	for_each_online_cpu(cpu)
 		octeon_wdt_setup_interrupt(cpu);
 
 	register_hotcpu_notifier(&octeon_wdt_cpu_notifier);
+=======
+	cpu_notifier_register_begin();
+	for_each_online_cpu(cpu)
+		octeon_wdt_setup_interrupt(cpu);
+
+	__register_hotcpu_notifier(&octeon_wdt_cpu_notifier);
+	cpu_notifier_register_done();
+
+>>>>>>> v3.18
 out:
 	return ret;
 }
@@ -725,7 +778,12 @@ static void __exit octeon_wdt_cleanup(void)
 
 	misc_deregister(&octeon_wdt_miscdev);
 
+<<<<<<< HEAD
 	unregister_hotcpu_notifier(&octeon_wdt_cpu_notifier);
+=======
+	cpu_notifier_register_begin();
+	__unregister_hotcpu_notifier(&octeon_wdt_cpu_notifier);
+>>>>>>> v3.18
 
 	for_each_online_cpu(cpu) {
 		int core = cpu2core(cpu);
@@ -734,6 +792,12 @@ static void __exit octeon_wdt_cleanup(void)
 		/* Free the interrupt handler */
 		free_irq(OCTEON_IRQ_WDOG0 + core, octeon_wdt_poke_irq);
 	}
+<<<<<<< HEAD
+=======
+
+	cpu_notifier_register_done();
+
+>>>>>>> v3.18
 	/*
 	 * Disable the boot-bus memory, the code it points to is soon
 	 * to go missing.
